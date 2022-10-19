@@ -1,0 +1,40 @@
+{
+  "name": "tenyun",
+  "version": "0.3.0",
+  "description": "Promise based and Chainable Tencent Cloud OpenAPI client for NodeJS",
+  "main": "index.js",
+  "types": "types/index.d.ts",
+  "type": "module",
+  "author": "James ZHANG",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheNorthMemory/tenyun/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheNorthMemory/tenyun.git"
+  },
+  "files": [
+    "index.js",
+    "types/",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "axios": "0.21 - 1.x"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.19.1",
+    "@types/node": "^18.8.3",
+    "eslint": "^8.25.0",
+    "eslint-config-airbnb-base": "^15.0.0"
+  },
+  "keywords": [
+    "tencentcloud",
+    "axios-ecosystem",
+    "腾讯云"
+  ],
+  "engines": {
+    "node": ">=14.5"
+  }
+}
