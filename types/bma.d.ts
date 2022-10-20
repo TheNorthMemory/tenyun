@@ -348,6 +348,18 @@ declare interface CreateCRCompanyVerifyResponse {
   RequestId?: string;
 }
 
+declare interface CreateCRDesktopCodeRequest {
+  /** xxx */
+  TortId: number;
+  /** xxx */
+  DesktopCode: string;
+}
+
+declare interface CreateCRDesktopCodeResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateCRObtainRequest {
   /** 已存证的作品ID */
   WorkId: number;
@@ -913,6 +925,8 @@ declare interface Bma {
   CreateCRBlock(data: CreateCRBlockRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRBlockResponse>;
   /** 企业认证 */
   CreateCRCompanyVerify(data: CreateCRCompanyVerifyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRCompanyVerifyResponse>;
+  /** 新建过程取证码 */
+  CreateCRDesktopCode(data: CreateCRDesktopCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRDesktopCodeResponse>;
   /** 新建取证 */
   CreateCRObtain(data: CreateCRObtainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRObtainResponse>;
   /** 新建发函 */

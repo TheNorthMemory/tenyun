@@ -446,6 +446,42 @@ declare interface RecordField {
   Value: string;
 }
 
+/** 资源管理目录树节点 */
+declare interface ResourcePathTree {
+  /** 资源名字 */
+  Name: string | null;
+  /** 是否为叶子节点 */
+  IsLeaf: boolean | null;
+  /** 资源ID */
+  ResourceId: string | null;
+  /** 本地路径 */
+  LocalPath: string | null;
+  /** 远程路径 */
+  RemotePath: string | null;
+  /** 文件类型 */
+  FileExtensionType: string | null;
+  /** 文件大小 */
+  Size: number | null;
+  /** 文件MD5值 */
+  Md5Value: string | null;
+  /** 文件拥有者名字 */
+  OwnerName: string | null;
+  /** 更新人 */
+  UpdateUser: string | null;
+  /** 文件更新人uin */
+  UpdateUserId: string | null;
+  /** 创建时间 */
+  CreateTime: number | null;
+  /** 更新时间 */
+  UpdateTime: number | null;
+  /** Cos存储桶名 */
+  CosBucket: string | null;
+  /** Cos地域 */
+  CosRegion: string | null;
+  /** 额外信息 */
+  ExtraInfo: string | null;
+}
+
 /** 简单Task信息 */
 declare interface SimpleTaskInfo {
   /** 任务ID */
@@ -734,6 +770,48 @@ declare interface TaskScriptContent {
   ScriptContent: string | null;
 }
 
+/** 用户文件信息 */
+declare interface UserFileDTO {
+  /** 资源ID */
+  ResourceId: string | null;
+  /** 文件名 */
+  FileName: string | null;
+  /** 文件类型，如 jar zip 等 */
+  FileExtensionType: string | null;
+  /** 文件上传类型，资源管理为 resource */
+  FileUploadType: string | null;
+  /** 文件MD5值 */
+  Md5Value: string | null;
+  /** 创建时间，秒级别的时间戳 */
+  CreateTime: number | null;
+  /** 更新时间，秒级别的时间戳 */
+  UpdateTime: number | null;
+  /** 文件大小，单位为字节 */
+  Size: number | null;
+  /** 本地路径 */
+  LocalPath: string | null;
+  /** 本地临时路径 */
+  LocalTmpPath: string | null;
+  /** 远程路径 */
+  RemotePath: string | null;
+  /** 文件拥有者名字 */
+  OwnerName: string | null;
+  /** 文件拥有者uin */
+  Owner: string | null;
+  /** 文件深度 */
+  PathDepth: string | null;
+  /** 项目ID */
+  ProjectId: string | null;
+  /** 附加信息 */
+  ExtraInfo: string | null;
+  /** 本地临时压缩文件绝对路径 */
+  ZipPath: string | null;
+  /** 文件所属存储桶 */
+  Bucket: string | null;
+  /** 文件所属存储桶的地域 */
+  Region: string | null;
+}
+
 /** 工作流信息 */
 declare interface Workflow {
   /** 工作流id */
@@ -892,6 +970,30 @@ declare interface CreateFolderResponse {
   RequestId?: string;
 }
 
+declare interface CreateOrUpdateResourceRequest {
+  /** 项目ID */
+  ProjectId?: string;
+  /** 文件名 */
+  Files?: string[];
+  /** 文件所属路径，资源管理根路径为 /datastudio/resouce */
+  FilePath?: string;
+  /** cos存储桶名字 */
+  CosBucketName?: string;
+  /** cos所属地域 */
+  CosRegion?: string;
+  /** 是否为新文件，新增为 true，更新为 false */
+  NewFile?: boolean;
+  /** 文件大小 */
+  FilesSize?: string[];
+}
+
+declare interface CreateOrUpdateResourceResponse {
+  /** 响应数据 */
+  Data: UserFileDTO[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateTaskRequest {
   /** 项目Id */
   ProjectId: string;
@@ -966,6 +1068,20 @@ declare interface DeleteFolderRequest {
 declare interface DeleteFolderResponse {
   /** true代表删除成功，false代表删除失败 */
   Data: boolean;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteResourceRequest {
+  /** 项目ID */
+  ProjectId?: string;
+  /** 资源ID */
+  ResourceId?: string;
+}
+
+declare interface DeleteResourceResponse {
+  /** 是否成功 */
+  Data: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1192,6 +1308,26 @@ declare interface DescribeRelatedInstancesRequest {
 declare interface DescribeRelatedInstancesResponse {
   /** 无 */
   Data: DescribeTaskInstancesData;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceManagePathTreesRequest {
+  /** 项目ID */
+  ProjectId?: string;
+  /** 名字，供搜索 */
+  Name?: string;
+  /** 文件类型 */
+  FileType?: string;
+  /** 文件路径 */
+  FilePath?: string;
+  /** 文件夹类型 */
+  DirType?: string;
+}
+
+declare interface DescribeResourceManagePathTreesResponse {
+  /** 响应数据 */
+  Data: ResourcePathTree[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1841,6 +1977,8 @@ declare interface Wedata {
   CreateDataSource(data: CreateDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataSourceResponse>;
   /** 创建文件夹【Beta版本】 */
   CreateFolder(data: CreateFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFolderResponse>;
+  /** 资源管理将cos资源绑定到wedata */
+  CreateOrUpdateResource(data: CreateOrUpdateResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrUpdateResourceResponse>;
   /** 创建任务【Beta版本】 */
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
   /** 创建工作流【Beta版本】 */
@@ -1851,6 +1989,8 @@ declare interface Wedata {
   DeleteDataSources(data: DeleteDataSourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataSourcesResponse>;
   /** 删除文件夹【Beta版本】 */
   DeleteFolder(data: DeleteFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFolderResponse>;
+  /** 删除资源 */
+  DeleteResource(data: DeleteResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceResponse>;
   /** 删除工作流【Beta版本】 */
   DeleteWorkflowNew(data: DeleteWorkflowNewRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkflowNewResponse>;
   /** 数据源管理-查询数据源分页列表【Beta版本】 */
@@ -1877,6 +2017,8 @@ declare interface Wedata {
   DescribeProject(data: DescribeProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectResponse>;
   /** 查询任务实例的关联实例列表 */
   DescribeRelatedInstances(data: DescribeRelatedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelatedInstancesResponse>;
+  /** 获取资源管理目录树 */
+  DescribeResourceManagePathTrees(data: DescribeResourceManagePathTreesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceManagePathTreesResponse>;
   /** 查询任务具体详情【Beta版本】 */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
   /** 查询任务实例列表 */

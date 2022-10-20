@@ -42,7 +42,7 @@ declare interface CcInfo {
   Mobile?: string;
 }
 
-/** 此结构体 (Component) 用于描述控件属性。 */
+/** 此结构体 (Component) 用于描述控件属性。在通过文件发起合同时，对应的component有三种定位方式1. 绝对定位方式2. 表单域(FIELD)定位方式3. 关键字(KEYWORD)定位方式可以参考官网说明https://cloud.tencent.com/document/product/1323/78346 */
 declare interface Component {
   /** 控件编号注：当GenerateMode=3时，通过"^"来决定是否使用关键字整词匹配能力。例：当GenerateMode=3时，如果传入关键字"^甲方签署^"，则会在PDF文件中有且仅有"甲方签署"关键字的地方进行对应操作。如传入的关键字为"甲方签署"，则PDF文件中每个出现关键字的位置都会执行相应操作。创建控件时，此值为空查询时返回完整结构 */
   ComponentId?: string;
@@ -68,7 +68,7 @@ declare interface Component {
   ComponentPosX?: number;
   /** 参数控件Y位置，单位px */
   ComponentPosY?: number;
-  /** 参数控件样式，json格式表述不同类型的控件会有部分非通用参数TEXT控件可以指定字体例如：{"FontSize":12} */
+  /** 参数控件样式，json格式表述不同类型的控件会有部分非通用参数TEXT/MULTI_LINE_TEXT控件可以指定1 Font：目前只支持黑体、宋体2 FontSize： 范围12-723 FontAlign： Left/Right/Center，左对齐/居中/右对齐例如：{"FontSize":12} */
   ComponentExtra?: string;
   /** 控件填充vaule，ComponentType和传入值类型对应关系：TEXT - 文本内容MULTI_LINE_TEXT - 文本内容CHECK_BOX - true/falseFILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取SELECTOR - 选项值DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525 */
   ComponentValue?: string;
@@ -134,7 +134,7 @@ declare interface FlowApproverDetail {
   ApproveType: string | null;
 }
 
-/** 创建签署流程签署人入参 */
+/** 创建签署流程签署人入参。其中签署方FlowApproverInfo需要传递的参数非单C、单B、B2C合同，ApproverType、RecipientId（模版发起合同时）必传，建议都传。其他身份标识1-个人：Name、Mobile必传2-渠道子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；3-渠道合作企业不指定经办人：（暂不支持）4-非渠道合作企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。RecipientId参数：从DescribeTemplates接口中，可以得到模版下的签署方Recipient列表，根据模版自定义的Rolename在此结构体中确定其RecipientId */
 declare interface FlowApproverInfo {
   /** 签署人姓名，最大长度50个字符 */
   Name?: string;
@@ -673,12 +673,14 @@ declare interface ChannelCreateMultiFlowSignQRCodeRequest {
   FlowEffectiveDay?: number;
   /** 二维码有效天数 默认7天 最高设置不超过90天 */
   QrEffectiveDay?: number;
+  /** 限制二维码用户条件 */
+  Restrictions?: ApproverRestriction[];
   /** 回调地址，最大长度1000个字符不传默认使用渠道应用号配置的回调地址回调时机:用户通过签署二维码发起合同时，企业额度不足导致失败 */
   CallbackUrl?: string;
-  /** 限制二维码用户条件 */
-  ApproverRestrictions?: ApproverRestriction;
   /** 用户信息 */
   Operator?: UserInfo;
+  /** 限制二维码用户条件（已弃用） */
+  ApproverRestrictions?: ApproverRestriction;
 }
 
 declare interface ChannelCreateMultiFlowSignQRCodeResponse {
@@ -780,9 +782,9 @@ declare interface CreateConsoleLoginUrlRequest {
 }
 
 declare interface CreateConsoleLoginUrlResponse {
-  /** 子客Web控制台url，此链接5分钟内有效，且只能访问一次 */
+  /** 子客Web控制台url，此链接5分钟内有效，且只能访问一次。同时需要注意：1. 此链接仅单次有效，使用后需要再次创建新的链接（部分聊天软件，如企业微信默认会对链接进行解析，此时需要使用类似“代码片段”的方式或者放到txt文件里发送链接）；2. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义 */
   ConsoleUrl: string;
-  /** 渠道子客企业是否已开通腾讯电子签。 */
+  /** 渠道子客企业是否已开通腾讯电子签 */
   IsActivated: boolean;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
@@ -793,7 +795,7 @@ declare interface CreateFlowsByTemplatesRequest {
   Agent: Agent;
   /** 多个合同（签署流程）信息，最多支持20个 */
   FlowInfos: FlowInfo[];
-  /** 是否为预览模式；默认为false，即非预览模式，此时发起合同并返回FlowIds；若为预览模式，则返回PreviewUrls；预览链接有效期300秒； */
+  /** 是否为预览模式；默认为false，即非预览模式，此时发起合同并返回FlowIds；若为预览模式，不会发起合同，会返回PreviewUrls（此Url返回的是PDF文件流 ）；预览链接有效期300秒； */
   NeedPreview?: boolean;
   /** 操作者的信息 */
   Operator?: UserInfo;
@@ -841,7 +843,7 @@ declare interface CreateSignUrlsRequest {
   FlowGroupId?: string;
   /** 签署链接类型：“WEIXINAPP”-短链直接跳小程序；“CHANNEL”-跳转H5页面；“APP”-第三方APP或小程序跳转电子签小程序；"LONGURL2WEIXINAPP"-长链接跳转小程序；默认“WEIXINAPP”类型，即跳转至小程序； */
   Endpoint?: string;
-  /** 签署链接生成类型，默认是 "ALL"；"ALL"：全部签署方签署链接；"CHANNEL"：渠道合作企业；"NOT_CHANNEL"：非渠道合作企业；"PERSON"：个人；"FOLLOWER"：关注方，目前是合同抄送方； */
+  /** 签署链接生成类型，默认是 "ALL"；"ALL"：全部签署方签署链接，此时不会给自动签署的签署方创建签署链接；"CHANNEL"：渠道合作企业；"NOT_CHANNEL"：非渠道合作企业；"PERSON"：个人；"FOLLOWER"：关注方，目前是合同抄送方； */
   GenerateType?: string;
   /** 非渠道合作企业参与方的企业名称，GenerateType为"NOT_CHANNEL"时必填 */
   OrganizationName?: string;
@@ -899,7 +901,7 @@ declare interface DescribeFlowDetailInfoResponse {
 declare interface DescribeResourceUrlsByFlowsRequest {
   /** 渠道应用相关信息。此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
-  /** 查询资源所对应的签署流程Id，最多支持50个。 */
+  /** 查询资源所对应的签署流程Id，最多支持50个 */
   FlowIds?: string[];
   /** 操作者的信息 */
   Operator?: UserInfo;

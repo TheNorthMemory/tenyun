@@ -266,11 +266,11 @@ declare interface TraceData {
   Code: string | null;
   /** 排序，在Phase相同情况下，值越小排名靠前 */
   Rank: number | null;
-  /** 溯源阶段 0:商品 1:通用 2:物流 */
+  /** 溯源阶段 0:商品 1:通用 2:生产溯源 3:销售溯源 */
   Phase: number | null;
-  /** 环节名称 */
+  /** 溯源环节名称 */
   PhaseName: string | null;
-  /** 时间 */
+  /** 溯源时间 */
   TraceTime: string | null;
   /** 无 */
   TraceItems: TraceItem[] | null;
@@ -509,7 +509,7 @@ declare interface CreateTraceDataRequest {
   BatchId?: string;
   /** 任务ID */
   TaskId?: string;
-  /** 溯源阶段 0:商品 1:通用 2:内部溯源 3:外部溯源 */
+  /** 溯源阶段 0:商品 1:通用 2:生产溯源 3:销售溯源 */
   Phase?: number;
   /** 溯源阶段名称 */
   PhaseName?: string;
@@ -1047,7 +1047,7 @@ declare interface ModifyTraceDataRequest {
   Code?: string;
   /** [无效] 排序 */
   Rank?: number;
-  /** [无效] 溯源阶段 0:商品 1:通用 2:物流 */
+  /** [无效] 溯源阶段 0:商品 1:通用 2:生产溯源 3:销售溯源 */
   Phase?: number;
   /** [无效] 溯源时间 */
   TraceTime?: string;

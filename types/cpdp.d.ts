@@ -5521,6 +5521,8 @@ declare interface CreateOpenBankGlobalPaymentOrderRequest {
   ShippingInfo?: OpenBankShippingInfo;
   /** 账单信息 */
   BillingInfo?: OpenBankBillingInfo;
+  /** 环境类型__release__:生产环境__sandbox__:沙箱环境缺省默认为生产环境 */
+  Environment?: string;
 }
 
 declare interface CreateOpenBankGlobalPaymentOrderResponse {

@@ -580,6 +580,18 @@ declare interface DescribeMeshResponse {
   RequestId?: string;
 }
 
+declare interface LinkClusterListRequest {
+  /** 网格Id */
+  MeshId: string;
+  /** 关联集群 */
+  ClusterList: Cluster[];
+}
+
+declare interface LinkClusterListResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyMeshRequest {
   /** 需要修改的网格Id */
   MeshId: string;
@@ -596,6 +608,18 @@ declare interface ModifyMeshResponse {
   RequestId?: string;
 }
 
+declare interface UnlinkClusterRequest {
+  /** 网格Id */
+  MeshId: string;
+  /** 取消关联的集群Id */
+  ClusterId?: string;
+}
+
+declare interface UnlinkClusterResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 /** 服务网格 */
 declare interface Tcm {
   (): Versions;
@@ -607,8 +631,12 @@ declare interface Tcm {
   DescribeMesh(data: DescribeMeshRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMeshResponse>;
   /** 查询网格列表 */
   DescribeMeshList(data: DescribeMeshListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMeshListResponse>;
+  /** 关联集群 */
+  LinkClusterList(data: LinkClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<LinkClusterListResponse>;
   /** 修改网格 */
   ModifyMesh(data: ModifyMeshRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMeshResponse>;
+  /** 解关联集群 */
+  UnlinkCluster(data: UnlinkClusterRequest, config?: AxiosRequestConfig): AxiosPromise<UnlinkClusterResponse>;
 }
 
 export declare type Versions = ["2021-04-13"];

@@ -749,16 +749,12 @@ declare interface CreateIntegrationEmployeesResponse {
 }
 
 declare interface CreateMultiFlowSignQRCodeRequest {
+  /** 用户信息 */
+  Operator: UserInfo;
   /** 模板ID */
   TemplateId: string;
   /** 签署流程名称，最大长度不超过200字符 */
   FlowName: string;
-  /** 用户信息 */
-  Operator: UserInfo;
-  /** 应用信息 */
-  Agent?: Agent;
-  /** 回调地址,最大长度1000字符串回调时机：用户通过签署二维码发起签署流程时，企业额度不足导致失败 */
-  CallbackUrl?: string;
   /** 最大可发起签署流程份数，默认5份 发起流程数量超过此上限后二维码自动失效 */
   MaxFlowNum?: number;
   /** 签署流程有效天数 默认7天 最高设置不超过30天 */
@@ -766,6 +762,12 @@ declare interface CreateMultiFlowSignQRCodeRequest {
   /** 二维码有效天数 默认7天 最高设置不超过90天 */
   QrEffectiveDay?: number;
   /** 限制二维码用户条件 */
+  Restrictions?: ApproverRestriction[];
+  /** 回调地址,最大长度1000字符串回调时机：用户通过签署二维码发起签署流程时，企业额度不足导致失败 */
+  CallbackUrl?: string;
+  /** 应用信息 */
+  Agent?: Agent;
+  /** 限制二维码用户条件（已弃用） */
   ApproverRestrictions?: ApproverRestriction;
 }
 

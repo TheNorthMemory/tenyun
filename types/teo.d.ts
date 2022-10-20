@@ -60,7 +60,7 @@ declare interface AclUserRule {
 
 /** 规则引擎功能项操作，对于一种功能只对应下面三种类型的其中一种，RuleAction 数组中的每一项只能是其中一个类型，更多功能项的填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。 */
 declare interface Action {
-  /** 常规功能操作，选择该类型的功能项有： 访问URL 重写（AccessUrlRedirect）； 回源 URL 重写 （UpstreamUrlRedirect）； QUIC（QUIC）； WebSocket （WebSocket）； 视频拖拽（VideoSeek）； Token 鉴权（Authentication）； 自定义CacheKey（CacheKey）； 节点缓存 TTL （Cache）； 浏览器缓存 TTL（MaxAge）； 离线缓存（OfflineCache）； 智能加速（SmartRouting）； 分片回源（RangeOriginPull）； HTTP/2 回源（UpstreamHttp2）； Host Header 重写（HostHeader）； 强制 HTTPS（ForceRedirect）； 回源 HTTPS（OriginPullProtocol）； 缓存预刷新（CachePrefresh）； 智能压缩（Compression）； Hsts； ClientIpHeader； TlsVersion； OcspStapling。 HTTP/2 访问（Http2）。 */
+  /** 常规功能操作，选择该类型的功能项有： 访问URL 重写（AccessUrlRedirect）； 回源 URL 重写 （UpstreamUrlRedirect）； QUIC（QUIC）； WebSocket （WebSocket）； 视频拖拽（VideoSeek）； Token 鉴权（Authentication）； 自定义CacheKey（CacheKey）； 节点缓存 TTL （Cache）； 浏览器缓存 TTL（MaxAge）； 离线缓存（OfflineCache）； 智能加速（SmartRouting）； 分片回源（RangeOriginPull）； HTTP/2 回源（UpstreamHttp2）； Host Header 重写（HostHeader）； 强制 HTTPS（ForceRedirect）； 回源 HTTPS（OriginPullProtocol）； 缓存预刷新（CachePrefresh）； 智能压缩（Compression）； Hsts； ClientIpHeader； TlsVersion； OcspStapling； HTTP/2 访问（Http2）； 回源跟随重定向(UpstreamFollowRedirect)。 */
   NormalAction?: NormalAction | null;
   /** 带有请求头/响应头的功能操作，选择该类型的功能项有： 修改 HTTP 请求头（RequestHeader）； 修改HTTP响应头（ResponseHeader）。 */
   RewriteAction?: RewriteAction | null;
@@ -936,6 +936,10 @@ declare interface Filter {
 declare interface FollowOrigin {
   /** 遵循源站配置开关，取值有：on：开启；off：关闭。 */
   Switch: string;
+  /** 源站未返回 Cache-Control 头时, 设置默认的缓存时间 */
+  DefaultCacheTime?: number | null;
+  /** 源站未返回 Cache-Control 头时, 设置缓存/不缓存 */
+  DefaultCache?: string | null;
 }
 
 /** 访问协议强制https跳转配置 */
@@ -1480,10 +1484,12 @@ declare interface RewriteAction {
 
 /** 规则引擎规则项，Conditions 数组内多个项的关系为 或，内层 Conditions 列表内多个项的关系为 且。 */
 declare interface Rule {
-  /** 执行功能判断条件。注意：满足该数组内任意一项条件，功能即可执行。 */
-  Conditions: RuleAndConditions[];
   /** 执行的功能。 */
   Actions: Action[];
+  /** 执行功能判断条件。注意：满足该数组内任意一项条件，功能即可执行。 */
+  Conditions: RuleAndConditions[];
+  /** 嵌套规则。 */
+  SubRules?: SubRuleItem[];
 }
 
 /** 规则引擎条件且关系条件列表 */
@@ -1558,6 +1564,8 @@ declare interface RuleItem {
   Rules: Rule[];
   /** 规则优先级, 值越大优先级越高，最小为 1。 */
   RulePriority: number;
+  /** 规则标签。 */
+  Tags: string[];
 }
 
 /** 规则引擎条件常规动作参数 */
@@ -1886,6 +1894,22 @@ declare interface SpeedTestingStatus {
   Reachable: boolean | null;
   /** 是否超时，取值： true：超时； false：不超时。 */
   TimedOut: boolean | null;
+}
+
+/** 嵌套规则信息。 */
+declare interface SubRule {
+  /** 执行功能判断条件。注意：满足该数组内任意一项条件，功能即可执行。 */
+  Conditions: RuleAndConditions[];
+  /** 执行的功能。 */
+  Actions: Action[];
+}
+
+/** 规则引擎嵌套规则 */
+declare interface SubRuleItem {
+  /** 嵌套规则信息。 */
+  Rules: SubRule[];
+  /** 规则标签。 */
+  Tags?: string[];
 }
 
 /** 询价参数 */
@@ -2535,6 +2559,8 @@ declare interface CreateRuleRequest {
   Status: string;
   /** 规则内容。 */
   Rules: Rule[];
+  /** 规则标签。 */
+  Tags?: string[];
 }
 
 declare interface CreateRuleResponse {
@@ -4511,6 +4537,8 @@ declare interface ModifyRuleRequest {
   RuleId: string;
   /** 规则状态，取值有： enable: 启用； disable: 未启用。 */
   Status: string;
+  /** 规则标签。 */
+  Tags?: string[];
 }
 
 declare interface ModifyRuleResponse {

@@ -1354,6 +1354,8 @@ declare interface MySQLParam {
   IncludeQuery?: boolean;
   /** 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带 */
   RecordWithSchema?: boolean;
+  /** 存放信令表的数据库名称 */
+  SignalDatabase?: string;
 }
 
 /** 操作类型返回的Data结构 */

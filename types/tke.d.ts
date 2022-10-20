@@ -3755,9 +3755,17 @@ declare interface DescribePrometheusGlobalNotificationResponse {
 }
 
 declare interface DescribePrometheusInstanceInitStatusRequest {
+  /** 实例ID */
+  InstanceId: string;
 }
 
 declare interface DescribePrometheusInstanceInitStatusResponse {
+  /** 实例初始化状态，取值：uninitialized 未初始化 initializing 初始化中running 初始化完成，运行中 */
+  Status: string | null;
+  /** 初始化任务步骤 */
+  Steps: TaskStepInfo[] | null;
+  /** 实例eks集群ID */
+  EksClusterId: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -4613,6 +4621,10 @@ declare interface RestartEKSContainerInstancesResponse {
 }
 
 declare interface RunPrometheusInstanceRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 子网ID，默认使用实例所用子网初始化，也可通过该参数传递新的子网ID初始化 */
+  SubnetId?: string;
 }
 
 declare interface RunPrometheusInstanceResponse {
@@ -5084,7 +5096,7 @@ declare interface Tke {
   /** 获取实例详细信息 */
   DescribePrometheusInstance(data: DescribePrometheusInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstanceResponse>;
   /** 获取2.0实例初始化任务状态 */
-  DescribePrometheusInstanceInitStatus(data?: DescribePrometheusInstanceInitStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstanceInitStatusResponse>;
+  DescribePrometheusInstanceInitStatus(data: DescribePrometheusInstanceInitStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstanceInitStatusResponse>;
   /** 获取2.0实例列表 */
   DescribePrometheusInstancesOverview(data: DescribePrometheusInstancesOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstancesOverviewResponse>;
   /** 获取实例列表 */
@@ -5189,8 +5201,8 @@ declare interface Tke {
   RemoveNodeFromNodePool(data: RemoveNodeFromNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveNodeFromNodePoolResponse>;
   /** 重启容器实例 */
   RestartEKSContainerInstances(data: RestartEKSContainerInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RestartEKSContainerInstancesResponse>;
-  /** 初始化2.0实例 */
-  RunPrometheusInstance(data?: RunPrometheusInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RunPrometheusInstanceResponse>;
+  /** 初始化TMP实例 */
+  RunPrometheusInstance(data: RunPrometheusInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RunPrometheusInstanceResponse>;
   /** 缩容独立集群master节点 */
   ScaleInClusterMaster(data: ScaleInClusterMasterRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleInClusterMasterResponse>;
   /** 扩容独立集群master节点 */

@@ -118,6 +118,8 @@ declare interface Concurrency {
   IterationCount?: number | null;
   /** 最大RPS */
   MaxRequestsPerSecond?: number | null;
+  /** 优雅终止任务的等待时间 */
+  GracefulStopSeconds?: number | null;
 }
 
 /** COS临时凭证 */
@@ -184,6 +186,8 @@ declare interface CustomSample {
   Timestamp: number;
   /** 指标对应的单位，当前单位有：s,bytes,bytes/s,reqs,reqs/s,checks,checks/s,iters,iters/s,VUs, % */
   Unit: string;
+  /** 指标序列名字 */
+  Name: string | null;
 }
 
 /** 指标矩阵，可包含多条指标序列 */
@@ -246,6 +250,12 @@ declare interface File {
   CreatedAt: string | null;
   /** 项目 ID */
   ProjectId: string | null;
+  /** 用户账号的 App ID */
+  AppID: number | null;
+  /** 用户主账号 */
+  Uin: string | null;
+  /** 用户子账号 */
+  SubAccountUin: string | null;
 }
 
 /** 文件基本信息 */
@@ -590,6 +600,8 @@ declare interface RequestsPerSecond {
   StartRequestsPerSecond?: number | null;
   /** 目标RPS，入参无效 */
   TargetRequestsPerSecond?: number | null;
+  /** 优雅关停的等待时间 */
+  GracefulStopSeconds?: number | null;
 }
 
 /** SLA 标签 */
