@@ -2472,7 +2472,7 @@ declare interface UpgradeVersionToMultiAvailabilityZonesResponse {
   RequestId?: string;
 }
 
-/** 云数据库 Redis */
+/** [云数据库 Redis](https://cloud.tencent.com/document/product/239) */
 declare interface Redis {
   (): Versions;
   /** 添加复制组成员 */

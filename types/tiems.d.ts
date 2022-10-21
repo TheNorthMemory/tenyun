@@ -910,7 +910,7 @@ declare interface UpdateServiceResponse {
   RequestId?: string;
 }
 
-/** 腾讯云 TI 平台 TI-EMS */
+/** [腾讯云 TI 平台 TI-EMS](https://cloud.tencent.com/document/product/1120) */
 declare interface Tiems {
   (): Versions;
   /** 创建任务 */

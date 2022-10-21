@@ -422,7 +422,7 @@ declare interface ModifyInstanceNameResponse {
   RequestId?: string;
 }
 
-/** 云数据库独享集群 */
+/** [云数据库独享集群](https://cloud.tencent.com/document/product/1322) */
 declare interface Dbdc {
   (): Versions;
   /** 查询独享集群内的DB实例列表 */

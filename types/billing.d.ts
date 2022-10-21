@@ -1332,7 +1332,7 @@ declare interface PayDealsResponse {
   RequestId?: string;
 }
 
-/** 计费相关 */
+/** [计费相关](https://cloud.tencent.com/document/product/555) */
 declare interface Billing {
   (): Versions;
   /** 获取账户余额 */

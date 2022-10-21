@@ -1126,7 +1126,7 @@ declare interface UpsertIpAccessControlResponse {
   RequestId?: string;
 }
 
-/** Web 应用防火墙 */
+/** [Web 应用防火墙](https://cloud.tencent.com/document/product/627) */
 declare interface Waf {
   (): Versions;
   /** 增加自定义策略 */

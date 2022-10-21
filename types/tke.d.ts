@@ -4884,7 +4884,7 @@ declare interface UpgradeClusterInstancesResponse {
   RequestId?: string;
 }
 
-/** 容器服务 */
+/** [容器服务](https://cloud.tencent.com/document/product/457) */
 declare interface Tke {
   (): Versions;
   /** 获取集群RBAC管理员角色 */

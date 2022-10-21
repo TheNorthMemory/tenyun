@@ -2006,7 +2006,7 @@ declare interface UpgradeInstanceResponse {
   RequestId?: string;
 }
 
-/** 云原生数据库 TDSQL-C */
+/** [云原生数据库 TDSQL-C](https://cloud.tencent.com/document/product/1003) */
 declare interface Cynosdb {
   (): Versions;
   /** 恢复实例访问 */

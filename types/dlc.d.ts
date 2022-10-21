@@ -2044,7 +2044,7 @@ declare interface UnlockMetaDataResponse {
   RequestId?: string;
 }
 
-/** 数据湖计算 */
+/** [数据湖计算](https://cloud.tencent.com/document/product/1342) */
 declare interface Dlc {
   (): Versions;
   /** DMS元数据新增分区 */

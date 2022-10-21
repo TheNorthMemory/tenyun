@@ -1482,7 +1482,7 @@ declare interface UpgradeNatGatewayResponse {
   RequestId?: string;
 }
 
-/** 黑石私有网络 */
+/** [黑石私有网络](https://cloud.tencent.com/document/product/1024) */
 declare interface Bmvpc {
   (): Versions;
   /** 接受黑石对等连接 */

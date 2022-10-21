@@ -30,7 +30,7 @@ declare interface CopyCryptoColumnPolicyResponse {
   RequestId?: string;
 }
 
-/** 云数据加密代理网关 */
+/** [云数据加密代理网关](https://cloud.tencent.com/document/product/1303) */
 declare interface Casb {
   (): Versions;
   /** 复制字段策略 */

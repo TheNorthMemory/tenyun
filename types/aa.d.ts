@@ -88,7 +88,7 @@ declare interface QueryActivityAntiRushResponse {
   RequestId?: string;
 }
 
-/** 活动防刷 */
+/** [活动防刷](https://cloud.tencent.com/document/product/1189) */
 declare interface Aa {
   (): Versions;
   /** 活动防刷 */

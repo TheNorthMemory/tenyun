@@ -140,7 +140,7 @@ declare interface DescribeDataSourceListResponse {
   RequestId?: string;
 }
 
-/** 云开发低码 */
+/** [云开发低码](https://cloud.tencent.com/document/product/1301) */
 declare interface Lowcode {
   (): Versions;
   /** 获取数据源详情列表 */

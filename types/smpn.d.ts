@@ -136,7 +136,7 @@ declare interface MRLResponse {
   CheatLevel: number;
 }
 
-/** 营销号码安全 */
+/** [营销号码安全](https://cloud.tencent.com/document/product/1127) */
 declare interface Smpn {
   (): Versions;
   /** 企业号码认证 */

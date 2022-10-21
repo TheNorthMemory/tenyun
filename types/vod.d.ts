@@ -7328,7 +7328,7 @@ declare interface WeChatMiniProgramPublishResponse {
   RequestId?: string;
 }
 
-/** 云点播 */
+/** [云点播](https://cloud.tencent.com/document/product/266) */
 declare interface Vod {
   (): Versions;
   /** 申请上传 */

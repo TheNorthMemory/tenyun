@@ -250,7 +250,7 @@ declare interface TryLipstickPicResponse {
   RequestId?: string;
 }
 
-/** 人脸试妆 */
+/** [人脸试妆](https://cloud.tencent.com/document/product/1172) */
 declare interface Fmu {
   (): Versions;
   /** 人脸美颜 */

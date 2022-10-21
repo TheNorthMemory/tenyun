@@ -540,7 +540,7 @@ declare interface ModifyTaskRunStatusResponse {
   RequestId?: string;
 }
 
-/** 混沌演练平台 */
+/** [混沌演练平台](https://cloud.tencent.com/document/product/1500) */
 declare interface Cfg {
   (): Versions;
   /** 从经验库创建演练 */

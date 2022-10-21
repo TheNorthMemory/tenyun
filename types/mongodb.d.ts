@@ -1151,7 +1151,7 @@ declare interface TerminateDBInstancesResponse {
 }
 
 declare namespace V20180408 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2018-04-08' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2018-04-08' } }
 
   /** 客户端连接信息，包括客户端IP和连接数 */
   interface ClientConnection {
@@ -1598,7 +1598,7 @@ declare namespace V20180408 {
   }
 }
 
-/** 云数据库 MongoDB */
+/** [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) */
 declare interface Mongodb {
   (): Versions;
   /** 指定云数据库实例的所属项目 */

@@ -1630,7 +1630,7 @@ declare interface UnbindPsaTagResponse {
   RequestId?: string;
 }
 
-/** 黑石物理服务器1.0 */
+/** [黑石物理服务器1.0](https://cloud.tencent.com/document/product/386) */
 declare interface Bm {
   (): Versions;
   /** 服务器绑定CAM角色 */

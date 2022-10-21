@@ -632,7 +632,7 @@ declare interface SearchImageResponse {
   RequestId?: string;
 }
 
-/** 图像分析 */
+/** [图像分析](https://cloud.tencent.com/document/product/865) */
 declare interface Tiia {
   (): Versions;
   /** 图像质量评估 */

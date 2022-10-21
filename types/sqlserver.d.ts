@@ -2956,7 +2956,7 @@ declare interface UpgradeDBInstanceResponse {
   RequestId?: string;
 }
 
-/** 云数据库 SQL Server */
+/** [云数据库 SQL Server](https://cloud.tencent.com/document/product/238) */
 declare interface Sqlserver {
   (): Versions;
   /** 安全组批量绑定云资源 */

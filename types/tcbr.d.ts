@@ -536,7 +536,7 @@ declare interface UpdateCloudRunServerResponse {
   RequestId?: string;
 }
 
-/** 云托管 CloudBase Run */
+/** [云托管 CloudBase Run](https://cloud.tencent.com/document/product/1243) */
 declare interface Tcbr {
   (): Versions;
   /** 创建环境 */

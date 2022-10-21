@@ -1147,7 +1147,7 @@ declare interface VerifyPersonResponse {
 }
 
 declare namespace V20180301 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2018-03-01' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2018-03-01' } }
 
   /** 人脸属性信息 */
   interface AttributeItem {
@@ -2252,7 +2252,7 @@ declare namespace V20180301 {
   }
 }
 
-/** 人脸识别 */
+/** [人脸识别](https://cloud.tencent.com/document/product/867) */
 declare interface Iai {
   (): Versions;
   /** 稠密关键点 */

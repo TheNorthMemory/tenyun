@@ -614,7 +614,7 @@ declare interface UpdateEmailTemplateResponse {
   RequestId?: string;
 }
 
-/** 邮件推送 */
+/** [邮件推送](https://cloud.tencent.com/document/product/1288) */
 declare interface Ses {
   (): Versions;
   /** 批量发送邮件 */

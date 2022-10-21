@@ -254,7 +254,7 @@ declare interface StopExecutionResponse {
   RequestId?: string;
 }
 
-/** 应用与服务编排工作流 */
+/** [应用与服务编排工作流](https://cloud.tencent.com/document/product/1272) */
 declare interface Asw {
   (): Versions;
   /** 创建状态机 */

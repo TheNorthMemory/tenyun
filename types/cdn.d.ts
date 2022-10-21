@@ -4240,7 +4240,7 @@ declare interface VerifyDomainRecordResponse {
   RequestId?: string;
 }
 
-/** 内容分发网络 */
+/** [内容分发网络](https://cloud.tencent.com/document/product/228) */
 declare interface Cdn {
   (): Versions;
   /** 新增日志主题下绑定的域名 */

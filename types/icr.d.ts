@@ -152,7 +152,7 @@ declare interface GetIndustryV1HomeMembersResponse {
   RequestId?: string;
 }
 
-/** 对话机器人 */
+/** [对话机器人](https://cloud.tencent.com/document/product/1268) */
 declare interface Icr {
   (): Versions;
   /** 获取成员列表 */

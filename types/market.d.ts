@@ -44,7 +44,7 @@ declare interface GetUsagePlanUsageAmountResponse {
   RequestId?: string;
 }
 
-/** 云市场 */
+/** [云市场](https://cloud.tencent.com/document/product/306) */
 declare interface Market {
   (): Versions;
   /** 计量商品用量提醒 */

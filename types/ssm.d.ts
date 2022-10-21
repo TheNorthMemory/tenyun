@@ -538,7 +538,7 @@ declare interface UpdateSecretResponse {
   RequestId?: string;
 }
 
-/** 凭据管理系统 */
+/** [凭据管理系统](https://cloud.tencent.com/document/product/1140) */
 declare interface Ssm {
   (): Versions;
   /** 创建云产品凭据 */

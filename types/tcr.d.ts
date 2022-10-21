@@ -2510,7 +2510,7 @@ declare interface ValidateRepositoryExistPersonalResponse {
   RequestId?: string;
 }
 
-/** 容器镜像服务 */
+/** [容器镜像服务](https://cloud.tencent.com/document/product/1141) */
 declare interface Tcr {
   (): Versions;
   /** 个人版镜像仓库批量删除Tag */

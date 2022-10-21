@@ -298,7 +298,7 @@ declare interface UnbindDocumentFromRoomResponse {
   RequestId?: string;
 }
 
-/** 低代码互动课堂 */
+/** [低代码互动课堂](https://cloud.tencent.com/document/product/1639) */
 declare interface Lcic {
   (): Versions;
   /** 绑定文档到房间 */

@@ -1734,7 +1734,7 @@ declare interface UpgradeDCDBInstanceResponse {
   RequestId?: string;
 }
 
-/** 分布式数据库 TDSQL */
+/** [分布式数据库 TDSQL](https://cloud.tencent.com/document/product/557) */
 declare interface Dcdb {
   (): Versions;
   /** 解隔离DCDB后付费实例 */

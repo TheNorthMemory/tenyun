@@ -694,7 +694,7 @@ declare interface UpdateScanUsersResponse {
   RequestId?: string;
 }
 
-/** 游戏多媒体引擎 */
+/** [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) */
 declare interface Gme {
   (): Versions;
   /** 提交年龄语音识别任务 */

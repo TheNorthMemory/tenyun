@@ -1623,7 +1623,7 @@ declare interface UpgradeLifecycleHookResponse {
   RequestId?: string;
 }
 
-/** 弹性伸缩 */
+/** [弹性伸缩](https://cloud.tencent.com/document/product/377) */
 declare interface As {
   (): Versions;
   /** 添加 CVM 实例到伸缩组 */

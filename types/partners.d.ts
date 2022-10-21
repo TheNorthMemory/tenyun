@@ -742,7 +742,7 @@ declare interface RemovePayRelationForClientResponse {
   RequestId?: string;
 }
 
-/** 渠道合作伙伴 */
+/** [渠道合作伙伴](https://cloud.tencent.com/document/product/563) */
 declare interface Partners {
   (): Versions;
   /** 支付订单（合作伙伴使用） */

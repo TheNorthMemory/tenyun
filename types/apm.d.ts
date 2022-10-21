@@ -310,7 +310,7 @@ declare interface DescribeServiceOverviewResponse {
   RequestId?: string;
 }
 
-/** 应用性能观测 */
+/** [应用性能观测](https://cloud.tencent.com/document/product/1463) */
 declare interface Apm {
   (): Versions;
   /** 创建Apm实例 */

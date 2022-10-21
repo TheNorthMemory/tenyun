@@ -193,7 +193,7 @@ declare interface RemoveRoomPlayerResponse {
 }
 
 declare namespace V20190929 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2019-09-29' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2019-09-29' } }
 
   interface DismissRoomRequest {
     /** 表示游戏资源唯一 ID, 由后台自动分配, 无法修改。 */
@@ -208,7 +208,7 @@ declare namespace V20190929 {
   }
 }
 
-/** 游戏联机对战引擎 */
+/** [游戏联机对战引擎](https://cloud.tencent.com/document/product/1038) */
 declare interface Mgobe {
   (): Versions;
   /** 修改房间玩家自定义属性 */

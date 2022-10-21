@@ -558,7 +558,7 @@ declare interface SearchImageResponse {
   RequestId?: string;
 }
 
-/** 客流数字化平台 */
+/** [客流数字化平台](https://cloud.tencent.com/document/product/1320) */
 declare interface Ump {
   (): Versions;
   /** 上报相机告警信息 */

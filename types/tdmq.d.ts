@@ -2820,7 +2820,7 @@ declare interface UnbindCmqDeadLetterResponse {
   RequestId?: string;
 }
 
-/** 分布式消息队列 */
+/** [分布式消息队列](https://cloud.tencent.com/document/product/1179) */
 declare interface Tdmq {
   (): Versions;
   /** 确认消息 */

@@ -88,7 +88,7 @@ declare interface QueryLoginProtectionResponse {
   RequestId?: string;
 }
 
-/** 登录保护 */
+/** [登录保护](https://cloud.tencent.com/document/product/1190) */
 declare interface Lp {
   (): Versions;
   /** 登录保护 */

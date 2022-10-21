@@ -778,7 +778,7 @@ declare interface ReleaseInternetAddressResponse {
   RequestId?: string;
 }
 
-/** 专线接入 */
+/** [专线接入](https://cloud.tencent.com/document/product/216) */
 declare interface Dc {
   (): Versions;
   /** 接受专用通道申请 */

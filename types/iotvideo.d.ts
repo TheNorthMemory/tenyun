@@ -2231,7 +2231,7 @@ declare interface WakeUpDeviceResponse {
 }
 
 declare namespace V20201215 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2020-12-15' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2020-12-15' } }
 
   /** AI模型申请信息 */
   interface AIModelApplication {
@@ -4131,7 +4131,7 @@ declare namespace V20201215 {
 }
 
 declare namespace V20191126 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2019-11-26' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2019-11-26' } }
 
   /** 终端用户绑定的设备 */
   interface BindDevInfo {
@@ -5546,7 +5546,7 @@ declare namespace V20191126 {
   }
 }
 
-/** 物联网智能视频服务 */
+/** [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) */
 declare interface Iotvideo {
   (): Versions;
   /** 申请AI模型 */

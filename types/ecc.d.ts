@@ -206,7 +206,7 @@ declare interface EHOCRResponse {
   RequestId?: string;
 }
 
-/** 英文作文批改 */
+/** [英文作文批改](https://cloud.tencent.com/document/product/1076) */
 declare interface Ecc {
   (): Versions;
   /** 多图像识别批改 */

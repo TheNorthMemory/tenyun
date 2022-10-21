@@ -604,7 +604,7 @@ declare interface UpdateUserStatusResponse {
   RequestId?: string;
 }
 
-/** 账号风控平台 */
+/** [账号风控平台](https://cloud.tencent.com/document/product/1441) */
 declare interface Ciam {
   (): Versions;
   /** 新建接口导入用户任务 */

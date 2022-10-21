@@ -1169,7 +1169,7 @@ declare interface DescribeInstancesListRequest {
   Limit?: number;
   /** 排序字段。取值范围：clusterId：表示按照实例ID排序。addTime：表示按照实例创建时间排序。status：表示按照实例的状态码排序。 */
   OrderField?: string;
-  /** 按照OrderField升序或者降序进行排序。取值范围：0：表示降序。1：表示升序。默认值为0。 */
+  /** 按照OrderField升序或者降序进行排序。取值范围：0：表示降序。1：表示升序。默认值为0。 */
   Asc?: number;
   /** 自定义查询 */
   Filters?: Filters[];
@@ -1197,7 +1197,7 @@ declare interface DescribeInstancesRequest {
   ProjectId?: number;
   /** 排序字段。取值范围：clusterId：表示按照实例ID排序。addTime：表示按照实例创建时间排序。status：表示按照实例的状态码排序。 */
   OrderField?: string;
-  /** 按照OrderField升序或者降序进行排序。取值范围：0：表示降序。1：表示升序。默认值为0。 */
+  /** 按照OrderField升序或者降序进行排序。取值范围：0：表示降序。1：表示升序。默认值为0。 */
   Asc?: number;
 }
 
@@ -1277,7 +1277,7 @@ declare interface InquirePriceRenewEmrRequest {
   PayMode: number;
   /** 实例续费的时间单位。取值范围：m：表示月份。 */
   TimeUnit?: string;
-  /** 货币种类。取值范围：CNY：表示人民币。 */
+  /** 货币种类。取值范围：CNY：表示人民币。 */
   Currency?: string;
 }
 
@@ -1286,7 +1286,7 @@ declare interface InquirePriceRenewEmrResponse {
   OriginalCost: number | null;
   /** 折扣价，单位为元。 */
   DiscountCost: number | null;
-  /** 实例续费的时间单位。取值范围：m：表示月份。 */
+  /** 实例续费的时间单位。取值范围：m：表示月份。 */
   TimeUnit: string | null;
   /** 实例续费的时长。 */
   TimeSpan: number | null;
@@ -1299,11 +1299,11 @@ declare interface InquiryPriceCreateInstanceRequest {
   TimeUnit: string;
   /** 购买实例的时长。结合TimeUnit一起使用。TimeUnit为s时，该参数只能填写3600，表示按量计费实例。TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月 */
   TimeSpan: number;
-  /** 货币种类。取值范围：CNY：表示人民币。 */
+  /** 货币种类。取值范围：CNY：表示人民币。 */
   Currency: string;
   /** 实例计费模式。取值范围：0：表示按量计费。1：表示包年包月。 */
   PayMode: number;
-  /** 是否开启节点高可用。取值范围：0：表示不开启节点高可用。1：表示开启节点高可用。 */
+  /** 是否开启节点高可用。取值范围：0：表示不开启节点高可用。1：表示开启节点高可用。 */
   SupportHA: number;
   /** 部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）需要选择不同的必选组件：ProductId为1的时候，必选组件包括：hadoop-2.7.3、knox-1.2.0、zookeeper-3.4.9ProductId为2的时候，必选组件包括：hadoop-2.7.3、knox-1.2.0、zookeeper-3.4.9ProductId为4的时候，必选组件包括：hadoop-2.8.4、knox-1.2.0、zookeeper-3.4.9ProductId为7的时候，必选组件包括：hadoop-3.1.2、knox-1.2.0、zookeeper-3.4.9 */
   Software: string[];
@@ -1336,7 +1336,7 @@ declare interface InquiryPriceCreateInstanceResponse {
   OriginalCost: number | null;
   /** 折扣价，单位为元。 */
   DiscountCost: number | null;
-  /** 购买实例的时间单位。取值范围：s：表示秒。m：表示月份。 */
+  /** 购买实例的时间单位。取值范围：s：表示秒。m：表示月份。 */
   TimeUnit: string | null;
   /** 购买实例的时长。 */
   TimeSpan: number | null;
@@ -1355,7 +1355,7 @@ declare interface InquiryPriceRenewInstanceRequest {
   PayMode: number;
   /** 实例续费的时间单位。取值范围：m：表示月份。 */
   TimeUnit?: string;
-  /** 货币种类。取值范围：CNY：表示人民币。 */
+  /** 货币种类。取值范围：CNY：表示人民币。 */
   Currency?: string;
   /** 是否按量转包年包月。0：否，1：是。 */
   ModifyPayMode?: number;
@@ -1366,7 +1366,7 @@ declare interface InquiryPriceRenewInstanceResponse {
   OriginalCost: number | null;
   /** 折扣价，单位为元。 */
   DiscountCost: number | null;
-  /** 实例续费的时间单位。取值范围：m：表示月份。 */
+  /** 实例续费的时间单位。取值范围：m：表示月份。 */
   TimeUnit: string | null;
   /** 实例续费的时长。 */
   TimeSpan: number | null;
@@ -1389,7 +1389,7 @@ declare interface InquiryPriceScaleOutInstanceRequest {
   CoreCount: number;
   /** 扩容的Task节点数量。 */
   TaskCount: number;
-  /** 货币种类。取值范围：CNY：表示人民币。 */
+  /** 货币种类。取值范围：CNY：表示人民币。 */
   Currency: string;
   /** 扩容的Router节点数量。 */
   RouterCount?: number;
@@ -1402,7 +1402,7 @@ declare interface InquiryPriceScaleOutInstanceResponse {
   OriginalCost: string | null;
   /** 折扣价，单位为元。 */
   DiscountCost: string | null;
-  /** 扩容的时间单位。取值范围：s：表示秒。m：表示月份。 */
+  /** 扩容的时间单位。取值范围：s：表示秒。m：表示月份。 */
   Unit: string | null;
   /** 询价的节点规格。 */
   PriceSpec: PriceResource | null;
@@ -1626,7 +1626,7 @@ declare interface TerminateTasksResponse {
   RequestId?: string;
 }
 
-/** 弹性 MapReduce */
+/** [弹性 MapReduce](https://cloud.tencent.com/document/product/589) */
 declare interface Emr {
   (): Versions;
   /** 用户管理-新增用户列表 */

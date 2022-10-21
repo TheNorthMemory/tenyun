@@ -692,7 +692,7 @@ declare interface UpdateResourceTagValueResponse {
   RequestId?: string;
 }
 
-/** 标签 */
+/** [标签](https://cloud.tencent.com/document/product/651) */
 declare interface Tag {
   (): Versions;
   /** 标签关联资源 */

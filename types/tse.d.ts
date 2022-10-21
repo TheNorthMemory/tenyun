@@ -482,7 +482,7 @@ declare interface UpdateEngineInternetAccessResponse {
   RequestId?: string;
 }
 
-/** 腾讯云微服务引擎 */
+/** [腾讯云微服务引擎](https://cloud.tencent.com/document/product/1364) */
 declare interface Tse {
   (): Versions;
   /** 创建引擎实例 */

@@ -52,7 +52,7 @@ declare interface SendTtsVoiceResponse {
   RequestId?: string;
 }
 
-/** 语音消息 */
+/** [语音消息](https://cloud.tencent.com/document/product/1128) */
 declare interface Vms {
   (): Versions;
   /** 发送语音验证码 */

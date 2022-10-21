@@ -980,7 +980,7 @@ declare interface UnbindStaffSkillGroupListResponse {
   RequestId?: string;
 }
 
-/** 云呼叫中心 */
+/** [云呼叫中心](https://cloud.tencent.com/document/product/679) */
 declare interface Ccc {
   (): Versions;
   /** 绑定坐席所属技能组 */

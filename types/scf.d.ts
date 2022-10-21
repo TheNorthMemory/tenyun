@@ -1676,7 +1676,7 @@ declare interface UpdateNamespaceResponse {
   RequestId?: string;
 }
 
-/** 云函数 */
+/** [云函数](https://cloud.tencent.com/document/product/583) */
 declare interface Scf {
   (): Versions;
   /** 复制函数 */

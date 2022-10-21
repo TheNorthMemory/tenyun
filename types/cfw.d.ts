@@ -1736,7 +1736,7 @@ declare interface StopSecurityGroupRuleDispatchResponse {
   RequestId?: string;
 }
 
-/** 云防火墙 */
+/** [云防火墙](https://cloud.tencent.com/document/product/1132) */
 declare interface Cfw {
   (): Versions;
   /** 添加互联网边界规则 */

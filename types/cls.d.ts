@@ -1904,7 +1904,7 @@ declare interface UploadLogResponse {
   RequestId?: string;
 }
 
-/** 日志服务 */
+/** [日志服务](https://cloud.tencent.com/document/product/614) */
 declare interface Cls {
   (): Versions;
   /** 应用采集配置到指定机器组 */

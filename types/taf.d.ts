@@ -156,7 +156,7 @@ declare interface RecognizeTargetAudienceResponse {
   RequestId?: string;
 }
 
-/** 流量反欺诈 */
+/** [流量反欺诈](https://cloud.tencent.com/document/product/1031) */
 declare interface Taf {
   (): Versions;
   /** 流量反欺诈-流量验准定制版 */

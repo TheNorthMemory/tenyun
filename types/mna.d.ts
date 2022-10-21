@@ -330,7 +330,7 @@ declare interface UpdateDeviceResponse {
   RequestId?: string;
 }
 
-/** 移动网络加速 */
+/** [移动网络加速](https://cloud.tencent.com/document/product/1385) */
 declare interface Mna {
   (): Versions;
   /** 新建设备 */

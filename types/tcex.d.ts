@@ -46,7 +46,7 @@ declare interface InvokeServiceResponse {
   RequestId?: string;
 }
 
-/** 腾讯云释义 */
+/** [腾讯云释义](https://cloud.tencent.com/document/product/1266) */
 declare interface Tcex {
   (): Versions;
   /** 查询服务调用结果 */

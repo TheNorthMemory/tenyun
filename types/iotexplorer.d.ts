@@ -2130,7 +2130,7 @@ declare interface UploadFirmwareResponse {
   RequestId?: string;
 }
 
-/** 物联网开发平台 */
+/** [物联网开发平台](https://cloud.tencent.com/document/product/1081) */
 declare interface Iotexplorer {
   (): Versions;
   /** 批量绑定子设备 */

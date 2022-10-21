@@ -2928,7 +2928,7 @@ declare interface SetRouteOnOffResponse {
   RequestId?: string;
 }
 
-/** 物联网边缘计算平台 */
+/** [物联网边缘计算平台](https://cloud.tencent.com/document/product/1118) */
 declare interface Iecp {
   (): Versions;
   /** 使用组件市场中的组件 */

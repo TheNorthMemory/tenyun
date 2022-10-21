@@ -1660,7 +1660,7 @@ declare interface TerminateInstancesResponse {
   RequestId?: string;
 }
 
-/** 轻量应用服务器 */
+/** [轻量应用服务器](https://cloud.tencent.com/document/product/1207) */
 declare interface Lighthouse {
   (): Versions;
   /** 回滚实例快照 */

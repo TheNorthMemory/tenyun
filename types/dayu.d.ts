@@ -3190,7 +3190,7 @@ declare interface ModifyResourceRenewFlagResponse {
   RequestId?: string;
 }
 
-/** DDoS 高防包 */
+/** [DDoS 高防包](https://cloud.tencent.com/document/product/1021) */
 declare interface Dayu {
   (): Versions;
   /** 设置基础防护的DDoS告警阈值 */

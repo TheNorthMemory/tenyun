@@ -2060,7 +2060,7 @@ declare interface UpdateRuntimeConfigurationResponse {
   RequestId?: string;
 }
 
-/** 游戏服务器伸缩 */
+/** [游戏服务器伸缩](https://cloud.tencent.com/document/product/1165) */
 declare interface Gse {
   (): Versions;
   /** 关联云联网实例 */

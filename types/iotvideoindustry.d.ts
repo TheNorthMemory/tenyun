@@ -2238,7 +2238,7 @@ declare interface UpdateTimeTemplateResponse {
   RequestId?: string;
 }
 
-/** 物联网智能视频服务（行业版） */
+/** [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) */
 declare interface Iotvideoindustry {
   (): Versions;
   /** 绑定设备到分组 */

@@ -710,7 +710,7 @@ declare interface UpdateTransformationResponse {
   RequestId?: string;
 }
 
-/** 事件总线 */
+/** [事件总线](https://cloud.tencent.com/document/product/1359) */
 declare interface Eb {
   (): Versions;
   /** 检验规则 */

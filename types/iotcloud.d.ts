@@ -1695,7 +1695,7 @@ declare interface UploadFirmwareResponse {
 }
 
 declare namespace V20180614 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2018-06-14' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2018-06-14' } }
 
   /** 设备属性 */
   interface Attribute {
@@ -3414,7 +3414,7 @@ declare namespace V20180614 {
   }
 }
 
-/** 物联网通信 */
+/** [物联网通信](https://cloud.tencent.com/document/product/634) */
 declare interface Iotcloud {
   (): Versions;
   /** 批量更新固件 */

@@ -782,7 +782,7 @@ declare interface StopWhiteboardPushResponse {
   RequestId?: string;
 }
 
-/** 互动白板 */
+/** [互动白板](https://cloud.tencent.com/document/product/1137) */
 declare interface Tiw {
   (): Versions;
   /** 创建白板板书生成任务 */

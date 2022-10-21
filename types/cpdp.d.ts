@@ -6926,7 +6926,7 @@ declare interface QueryAcctInfoResponse {
   SubAppId?: string;
   /** 子商户名称 */
   SubMchName?: string;
-  /** 子商户类型：个人: personal企业：enterprise缺省： enterprise */
+  /** 子商户类型：个人: personal企业：enterprise缺省： enterprise */
   SubMchType?: string;
   /** 不填则默认子商户名称 */
   ShortName?: string;
@@ -10446,7 +10446,7 @@ declare interface WithdrawCashMembershipResponse {
   RequestId?: string;
 }
 
-/** 企业收付平台 */
+/** [企业收付平台](https://cloud.tencent.com/document/product/1122) */
 declare interface Cpdp {
   (): Versions;
   /** 云支付-添加合同接口 */

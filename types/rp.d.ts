@@ -82,7 +82,7 @@ declare interface QueryRegisterProtectionResponse {
   RequestId?: string;
 }
 
-/** 注册保护 */
+/** [注册保护](https://cloud.tencent.com/document/product/1191) */
 declare interface Rp {
   (): Versions;
   /** 注册保护 */

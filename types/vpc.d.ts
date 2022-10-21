@@ -6460,7 +6460,7 @@ declare interface WithdrawNotifyRoutesResponse {
   RequestId?: string;
 }
 
-/** 私有网络 */
+/** [私有网络](https://cloud.tencent.com/document/product/215) */
 declare interface Vpc {
   (): Versions;
   /** 云联网接受关联实例 */

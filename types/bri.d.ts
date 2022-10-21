@@ -54,7 +54,7 @@ declare interface DescribeBRIResponse {
   RequestId?: string;
 }
 
-/** 业务风险情报 */
+/** [业务风险情报](https://cloud.tencent.com/document/product/1064) */
 declare interface Bri {
   (): Versions;
   /** 获取业务风险情报 */

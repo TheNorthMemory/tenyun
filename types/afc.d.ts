@@ -192,7 +192,7 @@ declare interface QueryAntiFraudVipResponse {
   RequestId?: string;
 }
 
-/** 定制建模 */
+/** [定制建模](https://cloud.tencent.com/document/product/1029) */
 declare interface Afc {
   (): Versions;
   /** 反欺诈VIP评分接口 */

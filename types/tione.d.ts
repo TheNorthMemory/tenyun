@@ -1621,7 +1621,7 @@ declare interface StopTrainingTaskResponse {
 }
 
 declare namespace V20191022 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2019-10-22' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2019-10-22' } }
 
   /** 算法配置 */
   interface AlgorithmSpecification {
@@ -2348,7 +2348,7 @@ declare namespace V20191022 {
   }
 }
 
-/** 腾讯云 TI 平台 TI-ONE */
+/** [腾讯云 TI 平台 TI-ONE](https://cloud.tencent.com/document/product/851) */
 declare interface Tione {
   (): Versions;
   /** 创建跑批任务 */

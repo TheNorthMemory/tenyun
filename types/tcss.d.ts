@@ -8712,7 +8712,7 @@ declare interface UpdateNetworkFirewallPolicyYamlDetailResponse {
   RequestId?: string;
 }
 
-/** 容器安全服务 */
+/** [容器安全服务](https://cloud.tencent.com/document/product/1285) */
 declare interface Tcss {
   (): Versions;
   /** 容器网络创建网络策略添加并发布任务 */

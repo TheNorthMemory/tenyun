@@ -1744,7 +1744,7 @@ declare interface UpdateScenarioResponse {
   RequestId?: string;
 }
 
-/** 云压测 */
+/** [云压测](https://cloud.tencent.com/document/product/1484) */
 declare interface Pts {
   (): Versions;
   /** 停止定时任务 */

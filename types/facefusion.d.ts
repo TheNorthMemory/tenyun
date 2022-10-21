@@ -194,7 +194,7 @@ declare interface FuseFaceResponse {
   RequestId?: string;
 }
 
-/** 人脸融合 */
+/** [人脸融合](https://cloud.tencent.com/document/product/670) */
 declare interface Facefusion {
   (): Versions;
   /** 查询素材列表 */

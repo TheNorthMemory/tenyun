@@ -241,7 +241,7 @@ declare interface ImageModerationResponse {
 }
 
 declare namespace V20200713 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2020-07-13' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2020-07-13' } }
 
   /** Device结果 */
   interface Device {
@@ -600,7 +600,7 @@ declare namespace V20200713 {
   }
 }
 
-/** 图片内容安全 */
+/** [图片内容安全](https://cloud.tencent.com/document/product/1125) */
 declare interface Ims {
   (): Versions;
   /** 图片内容检测 */

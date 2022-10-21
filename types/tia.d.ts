@@ -302,7 +302,7 @@ declare interface QueryLogsResponse {
   RequestId?: string;
 }
 
-/** 智能钛机器学习 */
+/** [智能钛机器学习](https://cloud.tencent.com/document/product/851) */
 declare interface Tia {
   (): Versions;
   /** 创建Job */

@@ -96,7 +96,7 @@ declare interface DescribeInstancesResponse {
   RequestId?: string;
 }
 
-/** 云数据库 Memcached */
+/** [云数据库 Memcached](https://cloud.tencent.com/document/product/241) */
 declare interface Memcached {
   (): Versions;
   /** 获取Cmem实例列表 */

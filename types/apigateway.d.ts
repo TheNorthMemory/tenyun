@@ -3338,7 +3338,7 @@ declare interface UpdateServiceResponse {
   RequestId?: string;
 }
 
-/** API网关 */
+/** [API网关](https://cloud.tencent.com/document/product/628) */
 declare interface Apigateway {
   (): Versions;
   /** 插件绑定API */

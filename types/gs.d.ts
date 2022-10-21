@@ -152,7 +152,7 @@ declare interface TrylockWorkerResponse {
   RequestId?: string;
 }
 
-/** 云游戏解决方案 */
+/** [云游戏解决方案](https://cloud.tencent.com/document/product/1162) */
 declare interface Gs {
   (): Versions;
   /** 创建会话 */

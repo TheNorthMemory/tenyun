@@ -698,7 +698,7 @@ declare interface StopMigrateJobResponse {
   RequestId?: string;
 }
 
-/** 数据传输服务 */
+/** [数据传输服务](https://cloud.tencent.com/document/product/571) */
 declare interface Dts {
   (): Versions;
   /** 配置数据订阅通道 */

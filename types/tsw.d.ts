@@ -31,7 +31,7 @@ declare interface DescribeTokenResponse {
 }
 
 declare namespace V20200924 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2020-09-24' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2020-09-24' } }
 
   /** agent安装脚本串 */
   interface AgentShell {
@@ -64,7 +64,7 @@ declare namespace V20200924 {
   }
 }
 
-/** 腾讯微服务观测平台 TSW */
+/** [腾讯微服务观测平台 TSW](https://cloud.tencent.com/document/product/1311) */
 declare interface Tsw {
   (): Versions;
   /** 获取告警对象-组件告警 */

@@ -24,7 +24,7 @@ declare interface SendMessageResponse {
   RequestId?: string;
 }
 
-/** 数据接入平台 */
+/** [数据接入平台](https://cloud.tencent.com/document/product/1591) */
 declare interface Dataintegration {
   (): Versions;
   /** 数据上报 */

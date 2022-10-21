@@ -4422,7 +4422,7 @@ declare interface ResetWorkflowResponse {
   RequestId?: string;
 }
 
-/** 视频处理 */
+/** [视频处理](https://cloud.tencent.com/document/product/862) */
 declare interface Mps {
   (): Versions;
   /** 创建内容分析模板 */

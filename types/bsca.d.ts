@@ -270,7 +270,7 @@ declare interface MatchKBPURLListResponse {
   RequestId?: string;
 }
 
-/** 二进制软件成分分析 */
+/** [二进制软件成分分析](https://cloud.tencent.com/document/product/1483) */
 declare interface Bsca {
   (): Versions;
   /** 查询知识库组件信息 */

@@ -412,7 +412,7 @@ declare interface VideoModerationResponse {
   RequestId?: string;
 }
 
-/** 智能鉴黄 */
+/** [智能鉴黄](https://cloud.tencent.com/document/product/864) */
 declare interface Ticm {
   (): Versions;
   /** 查询视频内容审核的结果 */

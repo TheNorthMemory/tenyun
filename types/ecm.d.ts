@@ -3696,7 +3696,7 @@ declare interface TerminateInstancesResponse {
   RequestId?: string;
 }
 
-/** 边缘计算机器 */
+/** [边缘计算机器](https://cloud.tencent.com/document/product/1108) */
 declare interface Ecm {
   (): Versions;
   /** 创建弹性公网IP */

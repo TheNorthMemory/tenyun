@@ -824,7 +824,7 @@ declare interface UploadFileResponse {
   RequestId?: string;
 }
 
-/** 金融联络机器人 */
+/** [金融联络机器人](https://cloud.tencent.com/document/product/656) */
 declare interface Cr {
   (): Versions;
   /** 提交黑名单申请 */

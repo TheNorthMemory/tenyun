@@ -298,7 +298,7 @@ declare interface QueryAntiFraudResponse {
   RequestId?: string;
 }
 
-/** 借贷反欺诈 */
+/** [借贷反欺诈](https://cloud.tencent.com/document/product/668) */
 declare interface Af {
   (): Versions;
   /** 金融借贷反欺诈 */

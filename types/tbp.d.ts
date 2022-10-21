@@ -99,7 +99,7 @@ declare interface TextResetResponse {
 }
 
 declare namespace V20190311 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2019-03-11' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2019-03-11' } }
 
   /** 槽位信息 */
   interface SlotInfo {
@@ -220,7 +220,7 @@ declare namespace V20190311 {
   }
 }
 
-/** 腾讯智能对话平台 */
+/** [腾讯智能对话平台](https://cloud.tencent.com/document/product/1060) */
 declare interface Tbp {
   (): Versions;
   /** 文本处理 */

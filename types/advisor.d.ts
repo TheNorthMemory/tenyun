@@ -94,7 +94,7 @@ declare interface DescribeTaskStrategyRisksResponse {
   RequestId?: string;
 }
 
-/** 云顾问 */
+/** [云顾问](https://cloud.tencent.com/document/product/1264) */
 declare interface Advisor {
   (): Versions;
   /** 查询评估项信息 */

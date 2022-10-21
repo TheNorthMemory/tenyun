@@ -16,7 +16,7 @@ declare interface CreateBlockNodeRecordsResponse {
   RequestId?: string;
 }
 
-/** 碳引擎 */
+/** [碳引擎](https://cloud.tencent.com/document/product/1498) */
 declare interface Tan {
   (): Versions;
   /** 推送节点数据 */

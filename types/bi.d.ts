@@ -82,7 +82,7 @@ declare interface CreateEmbedTokenResponse {
   RequestId?: string;
 }
 
-/** 商业智能分析 BI */
+/** [商业智能分析 BI](https://cloud.tencent.com/document/product/590) */
 declare interface Bi {
   (): Versions;
   /** 申请延长Token可用时间接口 */

@@ -138,7 +138,7 @@ declare interface QueryDevAndRiskResponse {
   RequestId?: string;
 }
 
-/** 风险探针 */
+/** [风险探针](https://cloud.tencent.com/document/product/1169) */
 declare interface Rkp {
   (): Versions;
   /** RPopenID查询 */

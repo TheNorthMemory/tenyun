@@ -214,7 +214,7 @@ declare interface TextTranslateResponse {
   RequestId?: string;
 }
 
-/** 机器翻译 */
+/** [机器翻译](https://cloud.tencent.com/document/product/551) */
 declare interface Tmt {
   (): Versions;
   /** 文件翻译请求 */

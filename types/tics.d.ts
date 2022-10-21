@@ -166,7 +166,7 @@ declare interface DescribeThreatInfoResponse {
   RequestId?: string;
 }
 
-/** 威胁情报云查服务 */
+/** [威胁情报云查服务](https://cloud.tencent.com/document/product/1013) */
 declare interface Tics {
   (): Versions;
   /** 查询域名信誉 */

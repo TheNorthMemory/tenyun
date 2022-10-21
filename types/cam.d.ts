@@ -1752,7 +1752,7 @@ declare interface UpdateUserSAMLConfigResponse {
   RequestId?: string;
 }
 
-/** 访问管理 */
+/** [访问管理](https://cloud.tencent.com/document/product/598) */
 declare interface Cam {
   (): Versions;
   /** 添加子用户 */

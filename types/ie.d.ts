@@ -1250,7 +1250,7 @@ declare interface StopMediaQualityRestorationTaskResponse {
   RequestId?: string;
 }
 
-/** 智能编辑 */
+/** [智能编辑](https://cloud.tencent.com/document/product/1186) */
 declare interface Ie {
   (): Versions;
   /** 创建编辑理解任务 */

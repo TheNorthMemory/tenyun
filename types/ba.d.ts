@@ -46,7 +46,7 @@ declare interface SyncIcpOrderWebInfoResponse {
   RequestId?: string;
 }
 
-/** 网站备案 */
+/** [网站备案](https://cloud.tencent.com/document/product/243) */
 declare interface Ba {
   (): Versions;
   /** 创建渠道备案小程序二维码 */

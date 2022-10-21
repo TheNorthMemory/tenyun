@@ -296,7 +296,7 @@ declare interface VerifySmsCodeResponse {
   RequestId?: string;
 }
 
-/** 智能媒资托管 */
+/** [智能媒资托管](https://cloud.tencent.com/document/product/1339) */
 declare interface Smh {
   (): Versions;
   /** 创建媒体库 */

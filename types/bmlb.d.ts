@@ -1824,7 +1824,7 @@ declare interface UploadCertResponse {
   RequestId?: string;
 }
 
-/** 黑石负载均衡 */
+/** [黑石负载均衡](https://cloud.tencent.com/document/product/1027) */
 declare interface Bmlb {
   (): Versions;
   /** 绑定黑石服务器到四层监听器 */

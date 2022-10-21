@@ -74,7 +74,7 @@ declare interface DescribeZonesResponse {
   RequestId?: string;
 }
 
-/** 地域管理系统 */
+/** [地域管理系统](https://cloud.tencent.com/document/product/1596) */
 declare interface Region {
   (): Versions;
   /** 查询支持地域列表查询的产品 */

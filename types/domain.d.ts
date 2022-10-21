@@ -664,7 +664,7 @@ declare interface UploadImageResponse {
   RequestId?: string;
 }
 
-/** 域名注册 */
+/** [域名注册](https://cloud.tencent.com/document/product/242) */
 declare interface Domain {
   (): Versions;
   /** 批量域名信息修改 */

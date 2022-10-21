@@ -70,7 +70,7 @@ declare interface DescribeTransactionsResponse {
   RequestId?: string;
 }
 
-/** 分布式事务 */
+/** [分布式事务](https://cloud.tencent.com/document/product/1224) */
 declare interface Dtf {
   (): Versions;
   /** 查询主事务列表 */

@@ -1262,7 +1262,7 @@ declare interface PayOrderWithBalanceResponse {
   RequestId?: string;
 }
 
-/** DNSPod */
+/** [DNSPod](https://cloud.tencent.com/document/product/1427) */
 declare interface Dnspod {
   (): Versions;
   /** 商品下单 */

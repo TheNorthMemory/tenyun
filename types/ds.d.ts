@@ -308,7 +308,7 @@ declare interface SignContractByKeywordResponse {
   RequestId?: string;
 }
 
-/** 电子合同服务 */
+/** [电子合同服务](https://cloud.tencent.com/document/product/869) */
 declare interface Ds {
   (): Versions;
   /** 检测验证码 */

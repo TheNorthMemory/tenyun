@@ -547,7 +547,7 @@ declare interface SmsPackagesStatisticsResponse {
 }
 
 declare namespace V20190711 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2019-07-11' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2019-07-11' } }
 
   /** 添加签名响应 */
   interface AddSignStatus {
@@ -1040,7 +1040,7 @@ declare namespace V20190711 {
   }
 }
 
-/** 短信 */
+/** [短信](https://cloud.tencent.com/document/product/382) */
 declare interface Sms {
   (): Versions;
   /** 添加短信签名 */

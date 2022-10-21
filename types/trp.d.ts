@@ -1074,7 +1074,7 @@ declare interface ModifyTraceDataResponse {
   RequestId?: string;
 }
 
-/** T-Sec-安心平台(RP) */
+/** [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) */
 declare interface Trp {
   (): Versions;
   /** 新增批次 */

@@ -2462,7 +2462,7 @@ declare interface SetSecurityGroupForLoadbalancersResponse {
   RequestId?: string;
 }
 
-/** 负载均衡 */
+/** [负载均衡](https://cloud.tencent.com/document/product/214) */
 declare interface Clb {
   (): Versions;
   /** 规则关联目标组 */

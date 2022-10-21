@@ -3478,7 +3478,7 @@ declare interface UpdateLiveWatermarkResponse {
   RequestId?: string;
 }
 
-/** 云直播 */
+/** [云直播](https://cloud.tencent.com/document/product/267) */
 declare interface Live {
   (): Versions;
   /** 设置延时直播 */

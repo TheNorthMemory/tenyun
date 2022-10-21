@@ -1503,7 +1503,7 @@ declare interface TerminateTaskInstanceResponse {
   RequestId?: string;
 }
 
-/** 批量计算 */
+/** [批量计算](https://cloud.tencent.com/document/product/599) */
 declare interface Batch {
   (): Versions;
   /** 添加实例到计算环境 */

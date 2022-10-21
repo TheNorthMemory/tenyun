@@ -140,7 +140,7 @@ declare interface OutApproveBpaasApplicationResponse {
   RequestId?: string;
 }
 
-/** 商业流程服务 */
+/** [商业流程服务](https://cloud.tencent.com/document/product/1083) */
 declare interface Bpaas {
   (): Versions;
   /** 查看审批详情 */

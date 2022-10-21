@@ -220,7 +220,7 @@ declare interface UploadIdResponse {
   RequestId?: string;
 }
 
-/** 汽车精准获客服务 */
+/** [汽车精准获客服务](https://cloud.tencent.com/document/product/1244) */
 declare interface Apcas {
   (): Versions;
   /** 查询画像洞察任务详情 */

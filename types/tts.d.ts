@@ -116,7 +116,7 @@ declare interface TextToVoiceResponse {
   RequestId?: string;
 }
 
-/** 语音合成 */
+/** [语音合成](https://cloud.tencent.com/document/product/1073) */
 declare interface Tts {
   (): Versions;
   /** 长文本语音合成请求 */

@@ -480,7 +480,7 @@ declare interface SyncKTVRobotCommandResponse {
   RequestId?: string;
 }
 
-/** 音速达直播音乐版权引擎 */
+/** [音速达直播音乐版权引擎](https://cloud.tencent.com/document/product/1592) */
 declare interface Yinsuda {
   (): Versions;
   /** 批量获取歌曲详情 */

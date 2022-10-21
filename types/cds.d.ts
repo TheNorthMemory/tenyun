@@ -152,7 +152,7 @@ declare interface ModifyDbauditInstancesRenewFlagResponse {
   RequestId?: string;
 }
 
-/** 数据安全审计 */
+/** [数据安全审计](https://cloud.tencent.com/document/product/856) */
 declare interface Cds {
   (): Versions;
   /** 数盾-DASB-获取镜像列表 */

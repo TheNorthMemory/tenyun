@@ -1580,7 +1580,7 @@ declare interface UpgradeLicenseResponse {
   RequestId?: string;
 }
 
-/** Elasticsearch Service */
+/** [Elasticsearch Service](https://cloud.tencent.com/document/product/845) */
 declare interface Es {
   (): Versions;
   /** 创建索引 */

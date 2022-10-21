@@ -264,7 +264,7 @@ declare interface DescribeImagesResponse {
   RequestId?: string;
 }
 
-/** 正版图库直通车 */
+/** [正版图库直通车](https://cloud.tencent.com/document/product/1181) */
 declare interface Ape {
   (): Versions;
   /** 批量获取授权书下载地址 */

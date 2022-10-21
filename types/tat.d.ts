@@ -626,7 +626,7 @@ declare interface RunCommandResponse {
   RequestId?: string;
 }
 
-/** 腾讯云自动化助手 */
+/** [腾讯云自动化助手](https://cloud.tencent.com/document/product/1340) */
 declare interface Tat {
   (): Versions;
   /** 取消命令执行 */

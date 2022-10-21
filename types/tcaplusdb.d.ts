@@ -1590,7 +1590,7 @@ declare interface VerifyIdlFilesResponse {
   RequestId?: string;
 }
 
-/** 游戏数据库 TcaplusDB */
+/** [游戏数据库 TcaplusDB](https://cloud.tencent.com/document/product/596) */
 declare interface Tcaplusdb {
   (): Versions;
   /** 清除表数据 */

@@ -1890,7 +1890,7 @@ declare interface UpgradeDBInstanceResponse {
   RequestId?: string;
 }
 
-/** 云数据库 PostgreSQL */
+/** [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) */
 declare interface Postgres {
   (): Versions;
   /** 添加只读实例到只读组 */

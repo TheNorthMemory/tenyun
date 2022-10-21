@@ -1672,7 +1672,7 @@ declare interface UpgradeDBInstanceResponse {
   RequestId?: string;
 }
 
-/** 云数据库 MariaDB */
+/** [云数据库 MariaDB](https://cloud.tencent.com/document/product/237) */
 declare interface Mariadb {
   (): Versions;
   /** 解隔离后付费实例 */

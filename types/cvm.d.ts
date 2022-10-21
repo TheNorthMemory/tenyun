@@ -2593,7 +2593,7 @@ declare interface TerminateInstancesResponse {
   RequestId?: string;
 }
 
-/** 云服务器 */
+/** [云服务器](https://cloud.tencent.com/document/product/213) */
 declare interface Cvm {
   (): Versions;
   /** 创建CDH实例 */

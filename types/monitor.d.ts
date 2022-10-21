@@ -3872,7 +3872,7 @@ declare interface UpgradeGrafanaInstanceResponse {
   RequestId?: string;
 }
 
-/** 云监控 */
+/** [云监控](https://cloud.tencent.com/document/product/248) */
 declare interface Monitor {
   (): Versions;
   /** 绑定 Grafana 可视化服务实例 */

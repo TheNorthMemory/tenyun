@@ -4703,7 +4703,7 @@ declare interface SwitchLogTopicTaskResponse {
 }
 
 declare namespace V20220106 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2022-01-06' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2022-01-06' } }
 
   /** 精准防护条件 */
   interface ACLCondition {
@@ -8878,7 +8878,7 @@ declare namespace V20220106 {
   }
 }
 
-/** 边缘安全加速平台 */
+/** [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) */
 declare interface Teo {
   (): Versions;
   /** 校验证书 */

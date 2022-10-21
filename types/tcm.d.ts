@@ -620,7 +620,7 @@ declare interface UnlinkClusterResponse {
   RequestId?: string;
 }
 
-/** 服务网格 */
+/** [服务网格](https://cloud.tencent.com/document/product/1261) */
 declare interface Tcm {
   (): Versions;
   /** 创建网格 */

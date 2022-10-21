@@ -1106,7 +1106,7 @@ declare interface UpdateRuleResponse {
   RequestId?: string;
 }
 
-/** 加速物联网套件 */
+/** [加速物联网套件](https://cloud.tencent.com/document/product/568) */
 declare interface Iot {
   (): Versions;
   /** 启用规则 */

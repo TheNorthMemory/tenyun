@@ -896,7 +896,7 @@ declare interface QueryVehicleInfoListResponse {
   RequestId?: string;
 }
 
-/** 企业微信汽车行业版 */
+/** [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) */
 declare interface Wav {
   (): Versions;
   /** 新增渠道活码接口 */

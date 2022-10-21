@@ -1962,7 +1962,7 @@ declare interface TriggerEventResponse {
   RequestId?: string;
 }
 
-/** 数据开发治理平台 WeData */
+/** [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) */
 declare interface Wedata {
   (): Versions;
   /** 批量删除任务【Beta版本】 */

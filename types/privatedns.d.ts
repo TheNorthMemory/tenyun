@@ -526,7 +526,7 @@ declare interface SubscribePrivateZoneServiceResponse {
   RequestId?: string;
 }
 
-/** 私有域解析 Private DNS */
+/** [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) */
 declare interface Privatedns {
   (): Versions;
   /** 创建私有域解析账号 */

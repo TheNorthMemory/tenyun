@@ -50,7 +50,7 @@ declare interface DescribeStockEstimationResponse {
   RequestId?: string;
 }
 
-/** 私域安全 */
+/** [私域安全](https://cloud.tencent.com/document/product/1473) */
 declare interface Pds {
   (): Versions;
   /** 拉新判断服务 */

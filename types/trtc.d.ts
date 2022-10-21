@@ -1080,7 +1080,7 @@ declare interface StopMCUMixTranscodeResponse {
   RequestId?: string;
 }
 
-/** 实时音视频 */
+/** [实时音视频](https://cloud.tencent.com/document/product/647) */
 declare interface Trtc {
   (): Versions;
   /** 开始云端录制 */

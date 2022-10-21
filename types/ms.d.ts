@@ -766,7 +766,7 @@ declare interface DescribeUserBaseInfoInstanceResponse {
   RequestId?: string;
 }
 
-/** 移动应用安全 */
+/** [移动应用安全](https://cloud.tencent.com/document/product/283) */
 declare interface Ms {
   (): Versions;
   /** 将应用绑定到资源 */

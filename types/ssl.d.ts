@@ -1062,7 +1062,7 @@ declare interface VerifyManagerResponse {
   RequestId?: string;
 }
 
-/** 证书 */
+/** [证书](https://cloud.tencent.com/document/product/400) */
 declare interface Ssl {
   (): Versions;
   /** 免费证书申请 */

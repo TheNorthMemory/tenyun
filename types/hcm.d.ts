@@ -72,7 +72,7 @@ declare interface EvaluationResponse {
   RequestId?: string;
 }
 
-/** 数学作业批改 */
+/** [数学作业批改](https://cloud.tencent.com/document/product/1004) */
 declare interface Hcm {
   (): Versions;
   /** 速算题目批改接口 */

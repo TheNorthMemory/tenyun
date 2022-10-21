@@ -450,7 +450,7 @@ declare interface UnbindVpcIpResponse {
   RequestId?: string;
 }
 
-/** 黑石弹性公网IP */
+/** [黑石弹性公网IP](https://cloud.tencent.com/document/product/1028) */
 declare interface Bmeip {
   (): Versions;
   /** 绑定弹性公网IP ACL */

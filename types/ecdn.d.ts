@@ -680,7 +680,7 @@ declare interface UpdateDomainConfigResponse {
   RequestId?: string;
 }
 
-/** 全站加速网络 */
+/** [全站加速网络](https://cloud.tencent.com/document/product/570) */
 declare interface Ecdn {
   (): Versions;
   /** 新增加速域名 */

@@ -6876,7 +6876,7 @@ declare interface UpdateMachineTagsResponse {
   RequestId?: string;
 }
 
-/** 主机安全 */
+/** [主机安全](https://cloud.tencent.com/document/product/296) */
 declare interface Cwp {
   (): Versions;
   /** 取消漏洞忽略 */

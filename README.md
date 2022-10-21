@@ -10,7 +10,7 @@ Promise based and Chainable Tencent Cloud OpenAPI client for NodeJS
 
 ## 设计
 
-核心包通过实例化后两次`Proxy`动态代理，第一层代理 `产品标识`，第二层代理`产品服务` 实现了通过一个实例接入腾讯云各产品服务的能力，默认为`最新`版本的接口接入，同时提供`往期`版本(通过第二参数传递`X-Tc-Version`头)的接入能力。
+核心包通过实例化后两次`Proxy`动态代理，第一层代理 `产品标识`，第二层代理`产品服务` 实现了通过一个实例接入腾讯云各产品服务的能力，默认为`最新`版本的接口接入，同时提供`往期`版本(通过第二参数传递`X-TC-Version`头)的接入能力。
 
 ## 使用
 
@@ -25,24 +25,41 @@ const secretKey = 'Gu5t9xGARNpq86cd98joQYCN3*******';
 const tc = new TenYun(secretId, secretKey);
 
 const sampleRequest = {Limit: 1, Filters: [ { Values: [ '未命名' ], Name: 'instance-name' } ]};
+
 tc.cvm.DescribeInstances(sampleRequest)
-.then(({data}) => console.info(data))
-.catch(error) => console.error(error.code));
+.then(({ data }) => console.info(data))
+.catch((error) => console.error(error.code));
 
 (async () => {
   try {
-    const {data} = await tc.cvm.DescribeInstances(sampleRequest);
+    const { data } = await tc.cvm.DescribeInstances(sampleRequest);
     console.info(data);
   } catch(error) {
     console.error(error);
   }
 })();
 
+// provide the second object, AKA AxiosRequestConfig, to request the specific `X-TC-Version` API
+tc.sms.DescribeSmsSignList({ SignIdSet: [123], International: 0 }, { headers: { 'X-TC-Version': '2019-07-11' } })
+.then(({ data }) => console.info(data))
+.catch(error => console.error(error.code));
+
+// none documentation APIs
+tc.tcbr.DescribeArchitectureType()
+.then(({ data }) => console.info(data))
+.catch((error) => console.error(error.code));
+
 console.info(tc);
 
 TenYun {
   cvm: [Function: cvm.tencentcloudapi.com] {
     DescribeInstances: [AsyncFunction: DescribeInstances]
+  },
+  sms: [Function: sms.tencentcloudapi.com] {
+    DescribeSmsSignList: [AsyncFunction: DescribeSmsSignList]
+  },
+  tcbr: [Function: tcbr.tencentcloudapi.com] {
+    DescribeArchitectureType: [AsyncFunction: DescribeArchitectureType]
   },
   [Symbol(SECRET_ID)]: 'AKIDz8krbsJ5yKBZQpn74WFkmLPx3*******',
   [Symbol(SECRET_KEY)]: SecretKeyObject { [Symbol(kKeyType)]: 'secret' }
@@ -51,7 +68,7 @@ TenYun {
 
 ## API
 
-`new TenYun(SecretId: string, SecretKey: BinaryLike, Token?: string, Region?: string)`
+**`new TenYun(SecretId: string, SecretKey: BinaryLike, Token?: string, Region?: string)`**
 
 | 参数 | 类型 | 说明 |
 | --- | --- | --- |
@@ -60,20 +77,22 @@ TenYun {
 | Token | <code>string</code> | 临时安全凭证(可选) |
 | Region | <code>string</code> | 地域参数(可选) |
 
-`TenYun[ServiceShortName]() => string[]`
+**`TenYun[ServiceShortName]() => string[]`**
 
 返回支持的服务版本 `YYYY-MM-DD` 格式字符串数组，`DESC` 排序。
 
-`TenYun[ServiceShortName][ActionName](data?: any, config?: AxiosRequestConfig) => AxiosPromise`
+**`TenYun[ServiceShortName][ActionName](data?: any, config?: AxiosRequestConfig) => AxiosPromise`**
 
 请求对应产品的服务。
 
-`TenYun.client => AxiosInstance`
+**`TenYun.client => AxiosInstance`**
 
 返回 `Axios` 实例。
 
 
 ## 支持的产品及服务
+
+<details><summary>共计 219 产品，8134+ 服务数 (点击查看清单)</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -296,8 +315,15 @@ youmall |  | 2018-02-28(31)
 yunjing | 主机安全 | 2018-02-28(100)
 yunsou | [腾讯云搜](https://cloud.tencent.com/document/product/270) | 2019-11-15(2) 2018-05-04(2)
 zj | 珠玑 | 2019-01-21(21)
---- | --- | ---
---- | 共计 | 8134+
+
+</details>
+
+## 其他
+
+`types` 基于 [tencentcloud-cli:services](https://github.com/TencentCloud/tencentcloud-cli/tree/master/tccli/services) 项目生成, 其中 `vpc.d.ts` 及 `tag.d.ts` 遵循如下生成规则：
+`vpc:$.objects.Vpc` 对象在本项目内别名为 `interface VpcInfo` ,
+`tag:$.objects.Tag` 别名为 `interface TagInfo`，
+以消除与模块`module`重名而产生的歧义。
 
 ## License
 

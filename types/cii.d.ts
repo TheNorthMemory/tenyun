@@ -497,7 +497,7 @@ declare interface UploadMedicalFileResponse {
 }
 
 declare namespace V20201210 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2020-12-10' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2020-12-10' } }
 
   /** 结构化对比指标（准确率/召回率）数据 */
   interface CompareMetricsData {
@@ -594,7 +594,7 @@ declare namespace V20201210 {
   }
 }
 
-/** 智能保险助手 */
+/** [智能保险助手](https://cloud.tencent.com/document/product/1368) */
 declare interface Cii {
   (): Versions;
   /** 结构化增量子任务 */

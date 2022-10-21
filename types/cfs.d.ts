@@ -844,7 +844,7 @@ declare interface UpdateCfsSnapshotAttributeResponse {
   RequestId?: string;
 }
 
-/** 文件存储 */
+/** [文件存储](https://cloud.tencent.com/document/product/582) */
 declare interface Cfs {
   (): Versions;
   /** 文件系统绑定快照策略 */

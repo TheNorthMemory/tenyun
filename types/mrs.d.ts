@@ -1096,7 +1096,7 @@ declare interface TextToObjectResponse {
   RequestId?: string;
 }
 
-/** 医疗报告结构化 */
+/** [医疗报告结构化](https://cloud.tencent.com/document/product/1314) */
 declare interface Mrs {
   (): Versions;
   /** 图片分类接口 */

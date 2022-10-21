@@ -202,7 +202,7 @@ declare interface VerifyCredentialResponse {
   RequestId?: string;
 }
 
-/** 分布式身份 */
+/** [分布式身份](https://cloud.tencent.com/document/product/1439) */
 declare interface Tdid {
   (): Versions;
   /** 创建凭证 */

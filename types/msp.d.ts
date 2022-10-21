@@ -190,7 +190,7 @@ declare interface RegisterMigrationTaskResponse {
   RequestId?: string;
 }
 
-/** 迁移服务平台 */
+/** [迁移服务平台](https://cloud.tencent.com/document/product/659) */
 declare interface Msp {
   (): Versions;
   /** 取消注册迁移任务 */

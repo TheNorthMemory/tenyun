@@ -944,7 +944,7 @@ declare interface TriggerJobSavepointResponse {
   RequestId?: string;
 }
 
-/** 流计算 Oceanus */
+/** [流计算 Oceanus](https://cloud.tencent.com/document/product/849) */
 declare interface Oceanus {
   (): Versions;
   /** 检查快照是否可用 */

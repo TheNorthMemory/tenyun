@@ -1070,7 +1070,7 @@ declare interface TakeMusicOffShelvesResponse {
   RequestId?: string;
 }
 
-/** 正版曲库直通车 */
+/** [正版曲库直通车](https://cloud.tencent.com/document/product/1155) */
 declare interface Ame {
   (): Versions;
   /** 批量获取直播互动曲目详情 */

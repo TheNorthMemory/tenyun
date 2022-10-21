@@ -1324,7 +1324,7 @@ declare interface SaDivulgeDataQueryPubResponse {
   RequestId?: string;
 }
 
-/** 安全运营中心 */
+/** [安全运营中心](https://cloud.tencent.com/document/product/664) */
 declare interface Ssa {
   (): Versions;
   /** 资产安全页资产详情 */

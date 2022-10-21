@@ -286,7 +286,7 @@ declare interface DescribeScanTaskStatusResponse {
   RequestId?: string;
 }
 
-/** 应用合规平台 */
+/** [应用合规平台](https://cloud.tencent.com/document/product/1553) */
 declare interface Acp {
   (): Versions;
   /** 创建应用合规隐私诊断任务 */

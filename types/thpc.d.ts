@@ -349,7 +349,7 @@ declare interface DescribeClustersResponse {
 }
 
 declare namespace V20211109 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2021-11-09' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2021-11-09' } }
 
   /** 描述CFS文件系统版本和挂载信息 */
   interface CFSOption {
@@ -642,7 +642,7 @@ declare namespace V20211109 {
   }
 }
 
-/** 高性能计算平台 */
+/** [高性能计算平台](https://cloud.tencent.com/document/product/1527) */
 declare interface Thpc {
   (): Versions;
   /** 添加节点 */

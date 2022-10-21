@@ -416,7 +416,7 @@ declare interface ModifyVsmAttributesResponse {
   RequestId?: string;
 }
 
-/** 云加密机 */
+/** [云加密机](https://cloud.tencent.com/document/product/639) */
 declare interface Cloudhsm {
   (): Versions;
   /** 通过SubnetId获取Hsm资源数 */

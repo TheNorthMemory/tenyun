@@ -2770,7 +2770,7 @@ declare interface SetAuthenticationResponse {
   RequestId?: string;
 }
 
-/** 全球应用加速 */
+/** [全球应用加速](https://cloud.tencent.com/document/product/608) */
 declare interface Gaap {
   (): Versions;
   /** 添加源站 */

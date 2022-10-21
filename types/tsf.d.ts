@@ -6448,7 +6448,7 @@ declare interface UpdateUnitRuleResponse {
   RequestId?: string;
 }
 
-/** 腾讯微服务平台 TSF */
+/** [腾讯微服务平台 TSF](https://cloud.tencent.com/document/product/649) */
 declare interface Tsf {
   (): Versions;
   /** 集群添加云主机 */

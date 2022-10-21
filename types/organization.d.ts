@@ -185,7 +185,7 @@ declare interface DescribeOrganizationResponse {
 }
 
 declare namespace V20181225 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2018-12-25' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2018-12-25' } }
 
   /** 企业组织邀请 */
   interface OrgInvitation {
@@ -510,7 +510,7 @@ declare namespace V20181225 {
   }
 }
 
-/** 企业组织 */
+/** [企业组织](https://cloud.tencent.com/document/product/850) */
 declare interface Organization {
   (): Versions;
   /** 绑定组织成员和子账号的授权关系 */

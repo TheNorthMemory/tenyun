@@ -160,7 +160,7 @@ declare interface SwapGenderPicResponse {
   RequestId?: string;
 }
 
-/** 人像变换 */
+/** [人像变换](https://cloud.tencent.com/document/product/1202) */
 declare interface Ft {
   (): Versions;
   /** 撤销人像渐变任务 */

@@ -908,7 +908,7 @@ declare interface UpdateCRWorkResponse {
   RequestId?: string;
 }
 
-/** 品牌经营管家 */
+/** [品牌经营管家](https://cloud.tencent.com/document/product/1296) */
 declare interface Bma {
   (): Versions;
   /** 添加仿冒链接（举报） */

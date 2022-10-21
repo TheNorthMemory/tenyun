@@ -480,7 +480,7 @@ declare interface UnbindDeadLetterResponse {
   RequestId?: string;
 }
 
-/** 消息队列 CMQ */
+/** [消息队列 CMQ](https://cloud.tencent.com/document/product/406) */
 declare interface Cmq {
   (): Versions;
   /** 清空消息队列中的消息 */

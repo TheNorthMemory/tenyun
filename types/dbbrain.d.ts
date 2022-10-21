@@ -1513,7 +1513,7 @@ declare interface VerifyUserAccountResponse {
 }
 
 declare namespace V20191016 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2019-10-16' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2019-10-16' } }
 
   /** 联系人contact描述。 */
   interface ContactItem {
@@ -2554,7 +2554,7 @@ declare namespace V20191016 {
   }
 }
 
-/** 数据库智能管家 DBbrain */
+/** [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) */
 declare interface Dbbrain {
   (): Versions;
   /** 添加联系人信息 */

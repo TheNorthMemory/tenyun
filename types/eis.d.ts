@@ -187,7 +187,7 @@ declare interface ListRuntimesMCResponse {
 }
 
 declare namespace V20200715 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2020-07-15' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2020-07-15' } }
 
   /** 连接器操作 */
   interface EisConnectionOperation {
@@ -262,7 +262,7 @@ declare namespace V20200715 {
   }
 }
 
-/** 企业集成服务 */
+/** [企业集成服务](https://cloud.tencent.com/document/product/1270) */
 declare interface Eis {
   (): Versions;
   /** 获取运行时详情 */

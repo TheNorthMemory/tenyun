@@ -574,7 +574,7 @@ declare interface UpdateCaptchaAppIdInfoResponse {
   RequestId?: string;
 }
 
-/** 验证码 */
+/** [验证码](https://cloud.tencent.com/document/product/1110) */
 declare interface Captcha {
   (): Versions;
   /** 查询安全验证码应用APPId信息 */

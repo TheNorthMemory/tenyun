@@ -588,7 +588,7 @@ declare interface TransformClusterPayModeResponse {
   RequestId?: string;
 }
 
-/** TDSQL-C PostgreSQL 版 */
+/** [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) */
 declare interface Tdcpg {
   (): Versions;
   /** 克隆集群 */

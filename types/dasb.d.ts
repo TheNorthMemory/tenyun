@@ -734,7 +734,7 @@ declare interface ModifyUserResponse {
   RequestId?: string;
 }
 
-/** 堡垒机 */
+/** [堡垒机](https://cloud.tencent.com/document/product/1025) */
 declare interface Dasb {
   (): Versions;
   /** 添加资产组成员 */

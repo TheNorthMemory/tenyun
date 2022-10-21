@@ -492,7 +492,7 @@ declare interface DescribeScanTaskStatusResponse {
   RequestId?: string;
 }
 
-/** 小程序安全 */
+/** [小程序安全](https://cloud.tencent.com/document/product/1223) */
 declare interface Mmps {
   (): Versions;
   /** 创建小程序隐私合规诊断任务 */

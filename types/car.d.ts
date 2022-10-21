@@ -46,7 +46,7 @@ declare interface DestroySessionResponse {
   RequestId?: string;
 }
 
-/** 应用云渲染 */
+/** [应用云渲染](https://cloud.tencent.com/document/product/1547) */
 declare interface Car {
   (): Versions;
   /** 申请并发 */

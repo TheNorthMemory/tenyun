@@ -3442,7 +3442,7 @@ declare interface ZoneResponse {
   PublicNetworkLimit: string | null;
 }
 
-/** 消息队列 Ckafka */
+/** [消息队列 Ckafka](https://cloud.tencent.com/document/product/597) */
 declare interface Ckafka {
   (): Versions;
   /** 实例授权token */

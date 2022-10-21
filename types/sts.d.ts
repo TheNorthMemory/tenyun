@@ -156,7 +156,7 @@ declare interface QueryApiKeyResponse {
   RequestId?: string;
 }
 
-/** 安全凭证服务 */
+/** [安全凭证服务](https://cloud.tencent.com/document/product/1312) */
 declare interface Sts {
   (): Versions;
   /** 申请扮演角色 */

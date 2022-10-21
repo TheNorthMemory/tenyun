@@ -410,7 +410,7 @@ declare interface UpdateAuditResponse {
   RequestId?: string;
 }
 
-/** 云审计 */
+/** [云审计](https://cloud.tencent.com/document/product/629) */
 declare interface Cloudaudit {
   (): Versions;
   /** 创建跟踪集 */

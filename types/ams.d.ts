@@ -419,7 +419,7 @@ declare interface DescribeTasksResponse {
 }
 
 declare namespace V20200608 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2020-06-08' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2020-06-08' } }
 
   /** 机器审核详情列表数据项 */
   interface AmsDetailInfo {
@@ -942,7 +942,7 @@ declare namespace V20200608 {
   }
 }
 
-/** 音频内容检测 */
+/** [音频内容检测](https://cloud.tencent.com/document/product/1219) */
 declare interface Ams {
   (): Versions;
   /** 取消任务 */

@@ -74,7 +74,7 @@ declare interface DescribeZonesResponse {
   RequestId?: string;
 }
 
-/** 云 API */
+/** [云 API](https://cloud.tencent.com/document/product/1278) */
 declare interface Api {
   (): Versions;
   /** 查询支持地域列表查询的产品 */

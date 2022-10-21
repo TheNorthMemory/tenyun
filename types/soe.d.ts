@@ -258,7 +258,7 @@ declare interface TransmitOralProcessWithInitResponse {
   RequestId?: string;
 }
 
-/** 智聆口语评测 */
+/** [智聆口语评测](https://cloud.tencent.com/document/product/884) */
 declare interface Soe {
   (): Versions;
   /** 发音评估初始化 */

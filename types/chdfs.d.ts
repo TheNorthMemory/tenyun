@@ -517,7 +517,7 @@ declare interface ModifyResourceTagsResponse {
 }
 
 declare namespace V20190718 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2019-07-18' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2019-07-18' } }
 
   /** 权限组 */
   interface AccessGroup {
@@ -990,7 +990,7 @@ declare namespace V20190718 {
   }
 }
 
-/** 云 HDFS */
+/** [云 HDFS](https://cloud.tencent.com/document/product/1105) */
 declare interface Chdfs {
   (): Versions;
   /** 绑定权限组列表 */

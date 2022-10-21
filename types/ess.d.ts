@@ -1032,7 +1032,7 @@ declare interface VerifyPdfResponse {
   RequestId?: string;
 }
 
-/** 电子签服务 */
+/** [电子签服务](https://cloud.tencent.com/document/product/1323) */
 declare interface Ess {
   (): Versions;
   /** 撤销签署流程 */

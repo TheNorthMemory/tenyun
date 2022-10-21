@@ -264,7 +264,7 @@ declare interface ResolveDomainResponse {
   RequestId?: string;
 }
 
-/** SSL 证书监控 */
+/** [SSL 证书监控](https://cloud.tencent.com/document/product/1084) */
 declare interface Sslpod {
   (): Versions;
   /** 添加域名 */

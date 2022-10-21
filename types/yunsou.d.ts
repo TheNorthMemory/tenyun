@@ -139,7 +139,7 @@ declare interface DataSearchResponse {
 }
 
 declare namespace V20180504 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2018-05-04' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2018-05-04' } }
 
   interface DataManipulationRequest {
     /** 操作类型，add或del */
@@ -216,7 +216,7 @@ declare namespace V20180504 {
   }
 }
 
-/** 腾讯云搜 */
+/** [腾讯云搜](https://cloud.tencent.com/document/product/270) */
 declare interface Yunsou {
   (): Versions;
   /** 云搜数据上传 */

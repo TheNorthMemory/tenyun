@@ -1134,7 +1134,7 @@ declare interface UpdateOrgNodeResponse {
   RequestId?: string;
 }
 
-/** 数字身份管控平台（员工版） */
+/** [数字身份管控平台（员工版）](https://cloud.tencent.com/document/product/1442) */
 declare interface Eiam {
   (): Versions;
   /** 账号组添加账号 */

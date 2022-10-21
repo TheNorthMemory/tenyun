@@ -254,7 +254,7 @@ declare interface StartEncryptionResponse {
   RequestId?: string;
 }
 
-/** 数字版权管理 */
+/** [数字版权管理](https://cloud.tencent.com/document/product/1000) */
 declare interface Drm {
   (): Versions;
   /** 新设置fairplay方案所需私钥 */

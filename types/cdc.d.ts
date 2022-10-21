@@ -722,7 +722,7 @@ declare interface ModifySiteInfoResponse {
   RequestId?: string;
 }
 
-/** 本地专用集群 */
+/** [本地专用集群](https://cloud.tencent.com/document/product/1346) */
 declare interface Cdc {
   (): Versions;
   /** 创建专用集群 */

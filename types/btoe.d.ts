@@ -257,7 +257,7 @@ declare interface VerifyEvidenceHashResponse {
 }
 
 declare namespace V20210303 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2021-03-03' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2021-03-03' } }
 
   interface CreateAudioDepositRequest {
     /** 存证名称(长度最大30) */
@@ -538,7 +538,7 @@ declare namespace V20210303 {
   }
 }
 
-/** 区块链可信取证 */
+/** [区块链可信取证](https://cloud.tencent.com/document/product/1259) */
 declare interface Btoe {
   (): Versions;
   /** 音频文件存证 */

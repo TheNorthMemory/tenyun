@@ -1720,7 +1720,7 @@ declare interface StopInstanceResponse {
   RequestId?: string;
 }
 
-/** 前端性能监控 */
+/** [前端性能监控](https://cloud.tencent.com/document/product/1464) */
 declare interface Rum {
   (): Versions;
   /** 创建日志下载任务 */

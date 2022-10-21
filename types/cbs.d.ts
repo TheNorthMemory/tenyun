@@ -1104,7 +1104,7 @@ declare interface UnbindAutoSnapshotPolicyResponse {
   RequestId?: string;
 }
 
-/** 云硬盘 */
+/** [云硬盘](https://cloud.tencent.com/document/product/362) */
 declare interface Cbs {
   (): Versions;
   /** 回滚备份点 */

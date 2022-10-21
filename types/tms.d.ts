@@ -109,7 +109,7 @@ declare interface TextModerationResponse {
 }
 
 declare namespace V20200713 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2020-07-13' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2020-07-13' } }
 
   /** 文本返回的详细结果 */
   interface DetailResults {
@@ -339,7 +339,7 @@ declare namespace V20200713 {
   }
 }
 
-/** 文本内容安全 */
+/** [文本内容安全](https://cloud.tencent.com/document/product/1124) */
 declare interface Tms {
   (): Versions;
   /** 文本内容安全 */

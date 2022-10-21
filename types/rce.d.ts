@@ -256,7 +256,7 @@ declare interface ManageMarketingRiskResponse {
   RequestId?: string;
 }
 
-/** 全栈式风控引擎 */
+/** [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) */
 declare interface Rce {
   (): Versions;
   /** 查询风险评估结果 */

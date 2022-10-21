@@ -106,7 +106,7 @@ declare interface DescribeTrustedIDResponse {
   RequestId?: string;
 }
 
-/** 设备安全 */
+/** [设备安全](https://cloud.tencent.com/document/product/1628) */
 declare interface Tds {
   (): Versions;
   /** 查询设备风险 */

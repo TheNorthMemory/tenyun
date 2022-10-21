@@ -2220,7 +2220,7 @@ declare interface SearchMaterialResponse {
   RequestId?: string;
 }
 
-/** 多媒体创作引擎 */
+/** [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) */
 declare interface Cme {
   (): Versions;
   /** 添加团队成员 */

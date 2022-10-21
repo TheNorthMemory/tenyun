@@ -1919,7 +1919,7 @@ declare interface StopApplicationResponse {
 }
 
 declare namespace V20201221 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2020-12-21' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2020-12-21' } }
 
   /** Cos token */
   interface CosToken {
@@ -2626,7 +2626,7 @@ declare namespace V20201221 {
   }
 }
 
-/** 弹性微服务 */
+/** [弹性微服务](https://cloud.tencent.com/document/product/1371) */
 declare interface Tem {
   (): Versions;
   /** 创建应用 */

@@ -1014,7 +1014,7 @@ declare interface SrvInvokeResponse {
   RequestId?: string;
 }
 
-/** TBaaS */
+/** [TBaaS](https://cloud.tencent.com/document/product/663) */
 declare interface Tbaas {
   (): Versions;
   /** 申请用户证书 */

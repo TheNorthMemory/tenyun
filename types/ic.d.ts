@@ -292,7 +292,7 @@ declare interface SendSmsResponse {
   RequestId?: string;
 }
 
-/** 物联卡 */
+/** [物联卡](https://cloud.tencent.com/document/product/636) */
 declare interface Ic {
   (): Versions;
   /** 查询应用详情 */

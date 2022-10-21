@@ -624,7 +624,7 @@ declare interface TerminateSegmentationTaskResponse {
   RequestId?: string;
 }
 
-/** 人体分析 */
+/** [人体分析](https://cloud.tencent.com/document/product/1208) */
 declare interface Bda {
   (): Versions;
   /** 创建人体库 */

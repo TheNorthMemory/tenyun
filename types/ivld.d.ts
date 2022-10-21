@@ -860,7 +860,7 @@ declare interface UpdateCustomPersonResponse {
   RequestId?: string;
 }
 
-/** 视频智能标签 */
+/** [视频智能标签](https://cloud.tencent.com/document/product/1509) */
 declare interface Ivld {
   (): Versions;
   /** 增加自定义人脸图片 */

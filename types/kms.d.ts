@@ -846,7 +846,7 @@ declare interface VerifyByAsymmetricKeyResponse {
   RequestId?: string;
 }
 
-/** 密钥管理系统 */
+/** [密钥管理系统](https://cloud.tencent.com/document/product/573) */
 declare interface Kms {
   (): Versions;
   /** 密钥归档 */

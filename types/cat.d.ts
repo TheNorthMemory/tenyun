@@ -388,7 +388,7 @@ declare interface UpdateProbeTaskConfigurationListResponse {
   RequestId?: string;
 }
 
-/** 云拨测 */
+/** [云拨测](https://cloud.tencent.com/document/product/280) */
 declare interface Cat {
   (): Versions;
   /** 批量创建拨测任务 */

@@ -60,7 +60,7 @@ declare interface RecognizeProductResponse {
   RequestId?: string;
 }
 
-/** 智能识图 */
+/** [智能识图](https://cloud.tencent.com/document/product/1217) */
 declare interface Iir {
   (): Versions;
   /** 商品识别 */

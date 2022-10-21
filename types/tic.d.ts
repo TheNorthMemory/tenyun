@@ -274,7 +274,7 @@ declare interface UpdateStackVersionResponse {
   RequestId?: string;
 }
 
-/** 腾讯云IaC平台 */
+/** [腾讯云IaC平台](https://cloud.tencent.com/document/product/1213) */
 declare interface Tic {
   (): Versions;
   /** 执行Apply事件 */

@@ -1101,7 +1101,7 @@ declare interface UploadFilesResponse {
 }
 
 declare namespace V20201222 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2020-12-22' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2020-12-22' } }
 
   /** 此结构体 (Address) 用于描述住址或通讯地址。 */
   interface Address {
@@ -2630,7 +2630,7 @@ declare namespace V20201222 {
   }
 }
 
-/** 腾讯电子签（基础版） */
+/** [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) */
 declare interface Essbasic {
   (): Versions;
   /** 电子签渠道版-根据签署流程id批量撤销合同 */

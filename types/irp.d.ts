@@ -233,7 +233,7 @@ declare interface ReportFeedUserResponse {
 }
 
 declare namespace V20220324 {
-  interface VersionHeader { headers: { 'X-Tc-Version': '2022-03-24' } }
+  interface VersionHeader { headers: { 'X-TC-Version': '2022-03-24' } }
 
   /** 作者信息 */
   interface AuthorInfo {
@@ -532,7 +532,7 @@ declare namespace V20220324 {
   }
 }
 
-/** 智能推荐平台 */
+/** [智能推荐平台](https://cloud.tencent.com/document/product/1541) */
 declare interface Irp {
   (): Versions;
   /** 获取信息流推荐结果 */

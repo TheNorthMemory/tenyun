@@ -2940,7 +2940,7 @@ declare interface WaybillOCRResponse {
   RequestId?: string;
 }
 
-/** 文字识别 */
+/** [文字识别](https://cloud.tencent.com/document/product/866) */
 declare interface Ocr {
   (): Versions;
   /** 广告文字识别 */

@@ -474,7 +474,7 @@ declare interface WordSimilarityResponse {
   RequestId?: string;
 }
 
-/** 自然语言处理 */
+/** [自然语言处理](https://cloud.tencent.com/document/product/271) */
 declare interface Nlp {
   (): Versions;
   /** 自动摘要 */

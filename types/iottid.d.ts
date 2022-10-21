@@ -154,7 +154,7 @@ declare interface VerifyChipBurnInfoResponse {
   RequestId?: string;
 }
 
-/** 物联网设备身份认证 */
+/** [物联网设备身份认证](https://cloud.tencent.com/document/product/1086) */
 declare interface Iottid {
   (): Versions;
   /** 单向认证测试TID */

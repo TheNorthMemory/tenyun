@@ -576,7 +576,7 @@ declare interface StartMatchingResponse {
   RequestId?: string;
 }
 
-/** 游戏玩家匹配 */
+/** [游戏玩家匹配](https://cloud.tencent.com/document/product/1294) */
 declare interface Gpm {
   (): Versions;
   /** 取消匹配 */

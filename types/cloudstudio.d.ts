@@ -598,7 +598,7 @@ declare interface StopWorkspaceResponse {
   RequestId?: string;
 }
 
-/** 云端 IDE */
+/** [云端 IDE](https://cloud.tencent.com/document/product/1039) */
 declare interface Cloudstudio {
   (): Versions;
   /** 添加自定义模板 */

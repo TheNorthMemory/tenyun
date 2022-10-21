@@ -2698,7 +2698,7 @@ declare interface UnfreezeCloudBaseRunServersResponse {
   RequestId?: string;
 }
 
-/** 云开发 CloudBase */
+/** [云开发 CloudBase](https://cloud.tencent.com/document/product/876) */
 declare interface Tcb {
   (): Versions;
   /** 绑定环境网关 */

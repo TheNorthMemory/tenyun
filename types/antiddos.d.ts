@@ -2708,7 +2708,7 @@ declare interface SwitchWaterPrintConfigResponse {
   RequestId?: string;
 }
 
-/** DDoS 防护 */
+/** [DDoS 防护](https://cloud.tencent.com/document/product/1021) */
 declare interface Antiddos {
   (): Versions;
   /** 绑定高防弹性公网IP */

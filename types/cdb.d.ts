@@ -4078,7 +4078,7 @@ declare interface VerifyRootAccountResponse {
   RequestId?: string;
 }
 
-/** 云数据库 MySQL */
+/** [云数据库 MySQL](https://cloud.tencent.com/document/product/236) */
 declare interface Cdb {
   (): Versions;
   /** 添加维护时间窗口 */

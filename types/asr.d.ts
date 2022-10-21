@@ -490,7 +490,7 @@ declare interface UpdateAsrVocabResponse {
   RequestId?: string;
 }
 
-/** 语音识别 */
+/** [语音识别](https://cloud.tencent.com/document/product/1093) */
 declare interface Asr {
   (): Versions;
   /** 语音流异步识别任务关闭 */

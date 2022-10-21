@@ -1346,7 +1346,7 @@ declare interface VideoLivenessCompareResponse {
   RequestId?: string;
 }
 
-/** 人脸核身 */
+/** [人脸核身](https://cloud.tencent.com/document/product/1007) */
 declare interface Faceid {
   (): Versions;
   /** 申请活体检测流程令牌 */
