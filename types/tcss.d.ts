@@ -656,6 +656,14 @@ declare interface ComplianceAssetPolicyItem {
   VerifyInfo: string | null;
 }
 
+/** 资产+检查项ids 集合单元 */
+declare interface ComplianceAssetPolicySetItem {
+  /** 资产ID */
+  CustomerAssetItemId: number;
+  /** 需要忽略指定资产内的检查项ID列表，为空表示所有 */
+  CustomerPolicyItemIdSet?: number[];
+}
+
 /** 表示一类资产的总览信息。 */
 declare interface ComplianceAssetSummary {
   /** 资产类别。 */
@@ -792,6 +800,14 @@ declare interface CompliancePeriodTaskRule {
   ExecutionTime: string;
   /** 是否开启 */
   Enable?: boolean | null;
+}
+
+/** 检查项+资产ids 的集合单元 */
+declare interface CompliancePolicyAssetSetItem {
+  /** 检查项ID */
+  CustomerPolicyItemId: number;
+  /** 需要忽略指定检查项内的资产ID列表，为空表示所有 */
+  CustomerAssetItemIdSet?: number[];
 }
 
 /** 表示一条检测项对应的汇总信息。 */
@@ -2914,6 +2930,28 @@ declare interface AddAssetImageRegistryRegistryDetailResponse {
   RequestId?: string;
 }
 
+declare interface AddComplianceAssetPolicySetToWhitelistRequest {
+  /** 资产ID+检查项IDs. 列表 */
+  AssetPolicySetList: ComplianceAssetPolicySetItem[];
+}
+
+declare interface AddComplianceAssetPolicySetToWhitelistResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface AddCompliancePolicyAssetSetToWhitelistRequest {
+  /** 检查项ID */
+  CustomerPolicyItemId: number;
+  /** 需要忽略指定检查项内的资产ID列表 */
+  CustomerAssetItemIdSet?: number[];
+}
+
+declare interface AddCompliancePolicyAssetSetToWhitelistResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface AddCompliancePolicyItemToWhitelistRequest {
   /** 要忽略的检测项的ID的列表 */
   CustomerPolicyItemIdSet: number[];
@@ -3780,6 +3818,28 @@ declare interface DeleteAccessControlRulesRequest {
 }
 
 declare interface DeleteAccessControlRulesResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteComplianceAssetPolicySetFromWhitelistRequest {
+  /** 资产ID */
+  AssetItemId: number;
+  /** 需要忽略指定资产内的检查项ID列表 */
+  CustomerPolicyItemIdSet?: number[];
+}
+
+declare interface DeleteComplianceAssetPolicySetFromWhitelistResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCompliancePolicyAssetSetFromWhitelistRequest {
+  /** （检查项ID+资产ID列表）的列表 */
+  PolicyAssetSetList: CompliancePolicyAssetSetItem[];
+}
+
+declare interface DeleteCompliancePolicyAssetSetFromWhitelistResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -6008,6 +6068,24 @@ declare interface DescribeImageComponentListResponse {
   TotalCount: number;
   /** 镜像组件列表 */
   List: ImageComponent[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageRegistryNamespaceListRequest {
+  /** 本次查询的起始偏移量，默认为0。 */
+  Offset?: number;
+  /** 本次查询的数据量，默认为10，最大值为100。 */
+  Limit?: number;
+  /** 查询的过滤条件。Name字段可取值"Namespace"。 */
+  Filters?: AssetFilters[];
+}
+
+declare interface DescribeImageRegistryNamespaceListResponse {
+  /** 可返回的项目空间的总量。 */
+  TotalCount: number;
+  /** 返回的项目空间列表 */
+  NamespaceList: string[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -8721,6 +8799,10 @@ declare interface Tcss {
   AddAndPublishNetworkFirewallPolicyYamlDetail(data: AddAndPublishNetworkFirewallPolicyYamlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddAndPublishNetworkFirewallPolicyYamlDetailResponse>;
   /** 新增单个镜像仓库详细信息 */
   AddAssetImageRegistryRegistryDetail(data: AddAssetImageRegistryRegistryDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddAssetImageRegistryRegistryDetailResponse>;
+  /** 安全合规忽略资产+检测项列表 */
+  AddComplianceAssetPolicySetToWhitelist(data: AddComplianceAssetPolicySetToWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<AddComplianceAssetPolicySetToWhitelistResponse>;
+  /** 安全合规忽略检测项+资产列表 */
+  AddCompliancePolicyAssetSetToWhitelist(data: AddCompliancePolicyAssetSetToWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<AddCompliancePolicyAssetSetToWhitelistResponse>;
   /** 安全合规忽略检测项列表 */
   AddCompliancePolicyItemToWhitelist(data: AddCompliancePolicyItemToWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<AddCompliancePolicyItemToWhitelistResponse>;
   /** 添加编辑异常进程策略 */
@@ -8821,6 +8903,10 @@ declare interface Tcss {
   DeleteAbnormalProcessRules(data: DeleteAbnormalProcessRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAbnormalProcessRulesResponse>;
   /** 删除运行时访问控制策略 */
   DeleteAccessControlRules(data: DeleteAccessControlRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessControlRulesResponse>;
+  /** 删除安全合规忽略项， 资产+检测项列表 */
+  DeleteComplianceAssetPolicySetFromWhitelist(data: DeleteComplianceAssetPolicySetFromWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteComplianceAssetPolicySetFromWhitelistResponse>;
+  /** 删除检测项+资产列表的白名单策略 */
+  DeleteCompliancePolicyAssetSetFromWhitelist(data: DeleteCompliancePolicyAssetSetFromWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCompliancePolicyAssetSetFromWhitelistResponse>;
   /** 安全合规取消忽略检测项列表 */
   DeleteCompliancePolicyItemFromWhitelist(data: DeleteCompliancePolicyItemFromWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCompliancePolicyItemFromWhitelistResponse>;
   /** 删除逃逸白名单 */
@@ -9029,6 +9115,8 @@ declare interface Tcss {
   DescribeImageAutoAuthorizedTaskList(data: DescribeImageAutoAuthorizedTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAutoAuthorizedTaskListResponse>;
   /** 查询本地镜像组件列表 */
   DescribeImageComponentList(data: DescribeImageComponentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageComponentListResponse>;
+  /** 查询用户镜像仓库下的项目名称列表 */
+  DescribeImageRegistryNamespaceList(data: DescribeImageRegistryNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryNamespaceListResponse>;
   /** 镜像仓库查看定时任务 */
   DescribeImageRegistryTimingScanTask(data?: DescribeImageRegistryTimingScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryTimingScanTaskResponse>;
   /** 查询本地镜像风险概览 */

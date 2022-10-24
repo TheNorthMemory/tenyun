@@ -378,9 +378,9 @@ declare interface SignUrl {
 
 /** 签署链接内容 */
 declare interface SignUrlInfo {
-  /** 签署链接 */
+  /** 签署链接，过期时间为30天 */
   SignUrl: string | null;
-  /** 链接失效时间,默认30分钟 */
+  /** 合同过期时间 */
   Deadline: number | null;
   /** 当流程为顺序签署此参数有效时，数字越小优先级越高，暂不支持并行签署 可选 */
   SignOrder: number | null;

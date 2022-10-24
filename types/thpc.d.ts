@@ -74,6 +74,20 @@ declare interface DataDisk {
   DiskType?: string;
 }
 
+/** 弹性扩容节点配置信息。 */
+declare interface ExpansionNodeConfig {
+  /** 扩容实例所在的位置。 */
+  Placement: Placement;
+  /** 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费SPOTPAID：竞价付费默认值：POSTPAID_BY_HOUR。 */
+  InstanceChargeType?: string;
+  /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。 */
+  InstanceChargePrepaid?: InstanceChargePrepaid;
+  /** 节点机型。不同实例机型指定了不同的资源规格。具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。 */
+  InstanceType?: string;
+  /** 私有网络相关信息配置。 */
+  VirtualPrivateCloud?: VirtualPrivateCloud;
+}
+
 /** 描述GooseFS挂载信息 */
 declare interface GooseFSOption {
   /** 文件系统本地挂载路径 */
@@ -158,6 +172,30 @@ declare interface ManagerNodeOverview {
 declare interface Placement {
   /** 实例所属的可用区名称。该参数可以通过调用 [DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。 */
   Zone: string;
+}
+
+/** 扩容队列配置。 */
+declare interface QueueConfig {
+  /** 队列名称。 */
+  QueueName: string;
+  /** 队列中弹性节点数量最小值。取值范围0～200。 */
+  MinSize?: number;
+  /** 队列中弹性节点数量最大值。取值范围0～200。 */
+  MaxSize?: number;
+  /** 是否开启自动扩容。 */
+  EnableAutoExpansion?: boolean;
+  /** 是否开启自动缩容。 */
+  EnableAutoShrink?: boolean;
+  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜和特定自定义镜像。 */
+  ImageId?: string;
+  /** 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。 */
+  SystemDisk?: SystemDisk;
+  /** 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。 */
+  DataDisks?: DataDisk[];
+  /** 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。 */
+  InternetAccessible?: InternetAccessible;
+  /** 扩容节点配置信息。 */
+  ExpansionNodeConfigs?: ExpansionNodeConfig[];
 }
 
 /** 描述集群文件系统选项 */
@@ -344,6 +382,24 @@ declare interface DescribeClustersResponse {
   ClusterSet: ClusterOverview[];
   /** 集群数量。 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface SetAutoScalingConfigurationRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+  /** 任务连续等待时间，队列的任务处于连续等待的时间。单位秒。默认值120。 */
+  ExpansionBusyTime?: number;
+  /** 节点连续空闲（未运行作业）时间，一个节点连续处于空闲状态时间。单位秒。默认值300。 */
+  ShrinkIdleTime?: number;
+  /** 扩容队列配置列表。 */
+  QueueConfigs?: QueueConfig[];
+  /** 是否只预检此次请求。true：发送检查请求，不会绑定弹性伸缩组。检查项包括是否填写了必需参数，请求格式，业务限制。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId。false（默认）：发送正常请求，通过检查后直接绑定弹性伸缩组。 */
+  DryRun?: boolean;
+}
+
+declare interface SetAutoScalingConfigurationResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -657,6 +713,8 @@ declare interface Thpc {
   DeleteNodes(data: DeleteNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNodesResponse>;
   /** 查询集群列表 */
   DescribeClusters(data: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
+  /** 设置弹性伸缩配置信息 */
+  SetAutoScalingConfiguration(data: SetAutoScalingConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<SetAutoScalingConfigurationResponse>;
   /** 绑定弹性伸缩组 */
   BindAutoScalingGroup(data: V20211109.BindAutoScalingGroupRequest, config: AxiosRequestConfig & V20211109.VersionHeader): AxiosPromise<V20211109.BindAutoScalingGroupResponse>;
   /** 创建集群 */

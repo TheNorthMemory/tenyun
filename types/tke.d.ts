@@ -632,6 +632,8 @@ declare interface EdgeCluster {
   MaxNodePodNum?: number | null;
   /** 集群高级设置 */
   ClusterAdvancedSettings?: EdgeClusterAdvancedSettings | null;
+  /** 边缘容器集群级别 */
+  Level?: string | null;
 }
 
 /** 边缘容器集群高级配置 */
@@ -1296,6 +1298,12 @@ declare interface PrometheusAgentOverview {
   ClusterName: string;
   /** 额外labels本集群的所有指标都会带上这几个label */
   ExternalLabels: Label[] | null;
+  /** 集群所在地域 */
+  Region: string | null;
+  /** 集群所在VPC ID */
+  VpcId: string | null;
+  /** 记录关联等操作的失败信息 */
+  FailedReason: string | null;
 }
 
 /** prometheus告警历史 */
@@ -5085,7 +5093,7 @@ declare interface Tke {
   DescribePrometheusAlertPolicy(data: DescribePrometheusAlertPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAlertPolicyResponse>;
   /** 获取告警规则列表 */
   DescribePrometheusAlertRule(data: DescribePrometheusAlertRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAlertRuleResponse>;
-  /** 获取2.0实例关联集群列表 */
+  /** 获取TMP实例关联集群列表 */
   DescribePrometheusClusterAgents(data: DescribePrometheusClusterAgentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusClusterAgentsResponse>;
   /** 拉取Prometheus配置 */
   DescribePrometheusConfig(data: DescribePrometheusConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusConfigResponse>;

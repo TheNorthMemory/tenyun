@@ -6,6 +6,8 @@ const HEX = 'hex';
 const SHA256 = 'sha256';
 const CHR_LF = '\n';
 const CLIENT = Symbol('CLIENT');
+const ACTION = Symbol('ACTION');
+const SERVICE = Symbol('SERVICE');
 const SECRET_ID = Symbol('SECRET_ID');
 const SECRET_KEY = Symbol('SECRET_KEY');
 const AUTHORIZATION = 'Authorization';
@@ -257,24 +259,23 @@ class TenYun {
    * @param {string} SecretId
    * @param {import('crypto').BinaryLike} SecretKey
    * @param {?string} Token
-   * @param {?string} Regin
+   * @param {?string} Region
    */
-  constructor(SecretId, SecretKey, Token, Regin) {
+  constructor(SecretId, SecretKey, Token, Region) {
     this[SECRET_ID] = SecretId;
     this[SECRET_KEY] = createSecretKey(Buffer.concat([Buffer.from('TC3'), Buffer.from(SecretKey)]));
     Object.defineProperty(this, CLIENT, {
-      enumerable: false,
       value: axios.create({
-        transformRequest: [...axios.defaults.transformRequest, this.signer],
-        transformResponse: [...axios.defaults.transformResponse, this.verifier],
-        headers: { ...(Token ? { [X_TC_TOKEN]: Token } : 0), ...(Regin ? { [X_TC_REGION]: Regin } : 0) },
+        transformRequest: [].concat(axios.defaults.transformRequest, this.signer),
+        transformResponse: [].concat(axios.defaults.transformResponse, this.verifier),
+        headers: { ...(Token ? { [X_TC_TOKEN]: Token } : 0), ...(Region ? { [X_TC_REGION]: Region } : 0) },
       }),
     });
 
-    return new Proxy(this, { get: this.serviceGetter });
+    return new Proxy(this, { get: this[SERVICE] });
   }
 
-  get serviceGetter() {
+  get [SERVICE]() {
     /**
      * @param {this} instance
      * @param {string} service
@@ -287,14 +288,14 @@ class TenYun {
 
       if (!Object.prototype.hasOwnProperty.call(instance, service)) {
         const name = `${service}${BASE_DOMAIN}`;
-        Reflect.set(instance, service, new Proxy({ [name]: () => SERVICE_VERSIONS[service]?.slice() ?? [] }[name], { get: this.actionGetter }));
+        Reflect.set(instance, service, new Proxy({ [name]: () => SERVICE_VERSIONS[service]?.slice() ?? [] }[name], { get: this[ACTION] }));
       }
 
       return Reflect.get(instance, service);
     };
   }
 
-  get actionGetter() {
+  get [ACTION]() {
     /**
      * @param {() => string[]} endpoint
      * @param {string} action
@@ -313,7 +314,7 @@ class TenYun {
               ...config,
               headers: {
                 [HOST]: endpoint.name,
-                [X_TC_VERSION]: endpoint()?.slice()?.pop(),
+                [X_TC_VERSION]: endpoint().shift(),
                 ...config?.headers,
                 [X_TC_ACTION]: action,
               },

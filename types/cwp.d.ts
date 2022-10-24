@@ -1130,6 +1130,32 @@ declare interface BaselineEventLevelInfo {
   EventCount: number | null;
 }
 
+/** 基线主机检测 */
+declare interface BaselineHostDetect {
+  /** 主机Id */
+  HostId: string;
+  /** 内网Ip */
+  HostIp: string;
+  /** 主机名称 */
+  HostName: string;
+  /** 外网Ip */
+  WanIp: string;
+  /** 0:未通过 1:忽略 3:通过 5:检测中 */
+  DetectStatus: number;
+  /** 检测通过数 */
+  PassedItemCount: number;
+  /** 关联检测项数 */
+  ItemCount: number;
+  /** 检测未通过数 */
+  NotPassedItemCount: number;
+  /** 首次检测时间 */
+  FirstTime: string;
+  /** 最后检测时间 */
+  LastTime: string;
+  /** 主机安全UUID */
+  Uuid: string | null;
+}
+
 /** 基线影响服务器列表数据 */
 declare interface BaselineHostTopList {
   /** 事件等级与次数列表 */
@@ -1232,6 +1258,36 @@ declare interface BaselineItemDetect {
   PassedHostCount: number | null;
   /** 未通过的服务器数 */
   NotPassedHostCount: number | null;
+}
+
+/** 基线策略信息 */
+declare interface BaselinePolicy {
+  /** 策略名称,长度不超过128英文字符 */
+  PolicyName: string;
+  /** 检测间隔[1:1天|3:3天|5:5天|7:7天] */
+  DetectInterval: number;
+  /** 检测时间 */
+  DetectTime: string;
+  /** 是否开启[0:未开启|1:开启] */
+  IsEnabled: number;
+  /** 资产类型[0:所有专业版旗舰版|1:id|2:ip] */
+  AssetType: number;
+  /** 策略Id */
+  PolicyId?: number;
+  /** 关联基线项数目 */
+  RuleCount?: number;
+  /** 关联基线项数目 */
+  ItemCount?: number;
+  /** 关联基线主机数目 */
+  HostCount?: number;
+  /** 规则Id */
+  RuleIds?: number[];
+  /** 主机Id */
+  HostIds?: string[];
+  /** 主机Ip */
+  HostIps?: string[];
+  /** 是否是系统默认 */
+  IsDefault?: number;
 }
 
 /** 基线检测信息 */
@@ -1668,6 +1724,28 @@ declare interface IgnoreRuleEffectHostInfo {
   EventId: number | null;
   /** 主机quuid */
   Quuid: string | null;
+}
+
+/** java内存马事件信息 */
+declare interface JavaMemShellInfo {
+  /** 事件ID */
+  Id: number;
+  /** 服务器名称 */
+  Alias: string | null;
+  /** 服务器IP */
+  HostIp: string | null;
+  /** 内存马类型 0:Filter型 1:Listener型 2:Servlet型 3:Interceptors型 4:Agent型 5:其他 */
+  Type: number;
+  /** 说明 */
+  Description: string;
+  /** 首次发现时间 */
+  CreateTime: string;
+  /** 最近检测时间 */
+  RecentFoundTime: string;
+  /** 处理状态 0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略 4 - 已手动处理 */
+  Status: number;
+  /** 服务器quuid */
+  Quuid: string;
 }
 
 /** 授权绑定详情信息 */
@@ -2954,6 +3032,16 @@ declare interface DeleteAttackLogsResponse {
   RequestId?: string;
 }
 
+declare interface DeleteBaselinePolicyRequest {
+  /** 策略Id */
+  PolicyIds: number[];
+}
+
+declare interface DeleteBaselinePolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DeleteBaselineStrategyRequest {
   /** 基线策略id */
   StrategyId: number;
@@ -3128,6 +3216,20 @@ declare interface DeleteReverseShellRulesRequest {
 }
 
 declare interface DeleteReverseShellRulesResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteScanTaskRequest {
+  /** 任务Id */
+  TaskId: number;
+  /** 模块类型 当前提供 Malware 木马 , Vul 漏洞 , Baseline 基线 */
+  ModuleType: string;
+  /** 自选服务器时生效，主机quuid的string数组 */
+  QuuidList?: string[];
+}
+
+declare interface DeleteScanTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -4034,6 +4136,28 @@ declare interface DescribeBaselineEffectHostListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBaselineHostDetectListRequest {
+  /** PolicyId - int64 - 是否必填：否 - 策略IdHostName - string - 是否必填：否 - 主机名称HostIp - string - 是否必填：否 - 主机IpItemId - int64 - 是否必填：否 - 项IdRuleId - int64 - 是否必填：否 - 规则IdDetectStatus - int - 是否必填：否 - 检测状态Level - int - 是否必填：否 - 风险等级StartTime - string - 是否必填：否 - 开时时间EndTime - string - 是否必填：否 - 结束时间 */
+  Filters?: Filter[];
+  /** 限制条数,默认10,最大100 */
+  Limit?: number;
+  /** 偏移量,默认0 */
+  Offset?: number;
+  /** 排序方式: [ASC:升序|DESC:降序] */
+  Order?: string;
+  /** 可选排序列: [LastTime|ItemCount|PassedItemCount|NotPassedItemCount|FirstTime] */
+  By?: string;
+}
+
+declare interface DescribeBaselineHostDetectListResponse {
+  /** 无 */
+  List: BaselineHostDetect[];
+  /** 总数 */
+  Total: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBaselineHostTopRequest {
   /** 动态top值 */
   Top: number;
@@ -4106,6 +4230,28 @@ declare interface DescribeBaselineListResponse {
   BaselineList: BaselineInfo[] | null;
   /** 分页查询记录总数 */
   TotalCount: number | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBaselinePolicyListRequest {
+  /** PolicyName - String - 是否必填：否 - 策略名称 */
+  Filters?: Filter[];
+  /** 限制条数,默认10,最大100 */
+  Limit?: number;
+  /** 偏移量,默认0 */
+  Offset?: number;
+  /** 排序方式: [ASC:升序|DESC:降序] */
+  Order?: string;
+  /** 可选排序列: [RuleCount|ItemCount|HostCount] */
+  By?: string;
+}
+
+declare interface DescribeBaselinePolicyListResponse {
+  /** 无 */
+  List: BaselinePolicy[];
+  /** 总数 */
+  Total: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -4594,6 +4740,24 @@ declare interface DescribeIndexListRequest {
 declare interface DescribeIndexListResponse {
   /** ES 索引信息 */
   Data: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeJavaMemShellListRequest {
+  /** 过滤条件：Keywords: ip或者主机名模糊查询, Type，Status精确匹配，CreateBeginTime，CreateEndTime时间段 */
+  Filters?: Filters[];
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+}
+
+declare interface DescribeJavaMemShellListResponse {
+  /** 事件列表 */
+  List: JavaMemShellInfo[] | null;
+  /** 总数 */
+  TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -6476,6 +6640,20 @@ declare interface ModifyBanStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBaselinePolicyRequest {
+  /** 无 */
+  Data: BaselinePolicy;
+  /** RuleName - String - 是否必填：否 - 规则名称CategoryId - int64 - 是否必填：否 自定义筛选为-1 - 规则分类RuleType - int - 是否必填：否 0:系统 1:自定义 - 规则类型 */
+  Filters?: Filter[];
+  /** 是否按照过滤的全选 */
+  SelectAll?: number;
+}
+
+declare interface ModifyBaselinePolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyBruteAttackRulesRequest {
   /** 暴力破解判断规则 */
   Rules: BruteAttackRule[];
@@ -6752,6 +6930,16 @@ declare interface StartBaselineDetectResponse {
   RequestId?: string;
 }
 
+declare interface StopBaselineDetectRequest {
+  /** 取消任务ID集合 */
+  TaskIds: number[];
+}
+
+declare interface StopBaselineDetectResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface StopNoticeBanTipsRequest {
 }
 
@@ -6901,6 +7089,8 @@ declare interface Cwp {
   CreateSearchTemplate(data: CreateSearchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSearchTemplateResponse>;
   /** 删除网络攻击日志 */
   DeleteAttackLogs(data: DeleteAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackLogsResponse>;
+  /** 删除基线策略配置 */
+  DeleteBaselinePolicy(data: DeleteBaselinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBaselinePolicyResponse>;
   /** 删除基线策略 */
   DeleteBaselineStrategy(data: DeleteBaselineStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBaselineStrategyResponse>;
   /** 删除高危命令事件 */
@@ -6935,6 +7125,8 @@ declare interface Cwp {
   DeleteReverseShellEvents(data: DeleteReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReverseShellEventsResponse>;
   /** 删除反弹Shell规则 */
   DeleteReverseShellRules(data: DeleteReverseShellRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReverseShellRulesResponse>;
+  /** 停止扫描任务 */
+  DeleteScanTask(data: DeleteScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScanTaskResponse>;
   /** 删除检索模板 */
   DeleteSearchTemplate(data: DeleteSearchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSearchTemplateResponse>;
   /** 删除标签 */
@@ -7023,6 +7215,8 @@ declare interface Cwp {
   DescribeBaselineDetail(data: DescribeBaselineDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineDetailResponse>;
   /** 基线影响主机列表 */
   DescribeBaselineEffectHostList(data: DescribeBaselineEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineEffectHostListResponse>;
+  /** 获取基线检测主机列表 */
+  DescribeBaselineHostDetectList(data: DescribeBaselineHostDetectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineHostDetectListResponse>;
   /** 服务器风险top接口 */
   DescribeBaselineHostTop(data: DescribeBaselineHostTopRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineHostTopResponse>;
   /** 获取基线检测项的列表 */
@@ -7031,6 +7225,8 @@ declare interface Cwp {
   DescribeBaselineItemList(data: DescribeBaselineItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineItemListResponse>;
   /** 查询基线列表 */
   DescribeBaselineList(data: DescribeBaselineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineListResponse>;
+  /** 获取基线策略列表 */
+  DescribeBaselinePolicyList(data: DescribeBaselinePolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselinePolicyListResponse>;
   /** 查询基线检测项信息 */
   DescribeBaselineRule(data: DescribeBaselineRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineRuleResponse>;
   /** 基线检测进度查询 */
@@ -7079,6 +7275,8 @@ declare interface Cwp {
   DescribeImportMachineInfo(data: DescribeImportMachineInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImportMachineInfoResponse>;
   /** 获取索引列表 */
   DescribeIndexList(data?: DescribeIndexListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexListResponse>;
+  /** 查询java内存马事件列表 */
+  DescribeJavaMemShellList(data: DescribeJavaMemShellListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJavaMemShellListResponse>;
   /** 查看授权绑定列表 */
   DescribeLicenseBindList(data: DescribeLicenseBindListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseBindListResponse>;
   /** 查询授权绑定进度 */
@@ -7275,6 +7473,8 @@ declare interface Cwp {
   ModifyBanMode(data: ModifyBanModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBanModeResponse>;
   /** 设置阻断开关状态 */
   ModifyBanStatus(data: ModifyBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBanStatusResponse>;
+  /** 更改基线策略设置 */
+  ModifyBaselinePolicy(data: ModifyBaselinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBaselinePolicyResponse>;
   /** 修改暴力破解规则 */
   ModifyBruteAttackRules(data: ModifyBruteAttackRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBruteAttackRulesResponse>;
   /** 授权批量绑定 */
@@ -7309,6 +7509,8 @@ declare interface Cwp {
   SetBashEventsStatus(data: SetBashEventsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<SetBashEventsStatusResponse>;
   /** 检测基线 */
   StartBaselineDetect(data: StartBaselineDetectRequest, config?: AxiosRequestConfig): AxiosPromise<StartBaselineDetectResponse>;
+  /** 停止基线检测 */
+  StopBaselineDetect(data: StopBaselineDetectRequest, config?: AxiosRequestConfig): AxiosPromise<StopBaselineDetectResponse>;
   /** 不再提醒爆破阻断提示弹窗 */
   StopNoticeBanTips(data?: StopNoticeBanTipsRequest, config?: AxiosRequestConfig): AxiosPromise<StopNoticeBanTipsResponse>;
   /** 切换高危命令规则状态 */

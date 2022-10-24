@@ -12,6 +12,14 @@ declare interface AlarmEvent {
   Namespace: string;
 }
 
+/** 通知模版ID及通知等级列表，["Remind","Serious"]表示该通知模板仅接收提醒和严重类别的告警 */
+declare interface AlarmHierarchicalNotice {
+  /** 通知模板ID */
+  NoticeId?: string | null;
+  /** 通知等级列表，["Remind","Serious"]表示该通知模板仅接收提醒和严重类别的告警 */
+  Classification?: string[] | null;
+}
+
 /** 告警分级阈值配置 */
 declare interface AlarmHierarchicalValue {
   /** 提醒等级阈值 */
@@ -1855,6 +1863,10 @@ declare interface CreateAlarmPolicyRequest {
   Tags?: Tag[];
   /** 日志告警信息 */
   LogAlarmReqInfo?: LogAlarmReq;
+  /** 告警分级通知规则配置 */
+  HierarchicalNotices?: AlarmHierarchicalNotice[];
+  /** 迁移策略专用字段，0-走鉴权逻辑，1-跳过鉴权逻辑 */
+  MigrateFlag?: number;
 }
 
 declare interface CreateAlarmPolicyResponse {

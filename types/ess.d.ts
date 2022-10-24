@@ -260,7 +260,7 @@ declare interface FlowCreateApprover {
   NotifyType?: string;
   /** 签署前置条件：是否需要阅读全文，默认为不需要 */
   IsFullText?: boolean;
-  /** 签署前置条件：阅读时长限制，默认为不需要 */
+  /** 签署前置条件：阅读时长限制，单位秒，默认为不需要 */
   PreReadTime?: number;
   /** 签署方经办人的用户ID,和签署方经办人姓名+手机号+证件必须有一个。非企微场景不使用此字段 */
   UserId?: string;

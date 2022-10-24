@@ -451,19 +451,15 @@ declare interface CloudServiceActions {
 }
 
 declare type CloudServices = {
-  [K in keyof SERVICE_VERSIONS]: CloudServiceActions;
+  [K in keyof SERVICE_VERSIONS as Lowercase<K>]: CloudServiceActions;
 }
 
 declare interface CloudInstance {
-  new (SecretId: string, SecretKey: BinaryLike, Token?: string, Regin?: string): TenYun;
+  new (SecretId: string, SecretKey: BinaryLike, Token?: string, Region?: string): TenYun;
 
   get signer(): <T = BinaryLike>(data: T, headers: AxiosRequestHeaders) => T;
 
   get verifier(): <T = object | Buffer>(data: T, headers: AxiosResponseHeaders) => T;
-
-  get serviceGetter(): () => CloudServices;
-
-  get actionGetter(): () => CloudServiceActions;
 
   get client(): AxiosInstance;
 }
