@@ -344,6 +344,16 @@ declare interface BindOpenBankExternalSubMerchantBankAccountResult {
   BindSerialNo: string | null;
 }
 
+/** 绑定分账收款方响应 */
+declare interface BindOpenBankProfitSharePayeeResult {
+  /** 账户ID。受益人ID */
+  AccountId: string;
+  /** 账户号，通联渠道指客户银行账号 */
+  AccountNo: string;
+  /** 账户货币。参考附录“币种类型”。 */
+  Currency: string;
+}
+
 /** 营业证件信息 */
 declare interface BusinessLicenseInfo {
   /** 营业证件类型 IDCARD：身份证 CREDITCODE：统一社会信用代码 */
@@ -544,6 +554,12 @@ declare interface CloudOrderReturn {
   ExternalReturnPromptGroupList: CloudExternalPromptGroup[] | null;
   /** 场景扩展信息 */
   SceneInfo: string | null;
+  /** 子应用ID */
+  SubAppId: string | null;
+  /** 支付场景 */
+  PayScene: string | null;
+  /** 支付方式 */
+  PaymentMethod: string | null;
 }
 
 /** 结算信息对象 */
@@ -640,6 +656,10 @@ declare interface CloudSubOrderReturn {
   ChannelExternalSubOrderId: string;
   /** 微信子商户号 */
   WxSubMchId: string;
+  /** 米大师侧渠道子订单号 */
+  ChannelSubPayOrderId: string | null;
+  /** 物品ID */
+  ProductId: string | null;
 }
 
 /** 子单退款信息 */
@@ -1460,6 +1480,40 @@ declare interface NaturalPersonInfo {
   EmailAddress?: string;
 }
 
+/** 附加项信息 */
+declare interface OldAttachmentInfo {
+  /** 附加项金额 */
+  AttachmentAmount: number | null;
+  /** 附加项类型 */
+  AttachmentType: string | null;
+  /** 附加项名称 */
+  AttachmentName: string | null;
+  /** 附加项编号 */
+  AttachmentCode: string | null;
+}
+
+/** 渠道方用户信息 */
+declare interface OldChannelExternalUserInfo {
+  /** 渠道方用户类型 */
+  ChannelExternalUserType: string | null;
+  /** 渠道方用户ID */
+  ChannelExternalUserId: string | null;
+}
+
+/** 子单退款信息 */
+declare interface OldSubRefund {
+  /** 支付机构退款流水号 */
+  ChannelExternalRefundId: string | null;
+  /** 支付机构支付订单号 */
+  ChannelExternalOrderId: string | null;
+  /** 渠道退款订单号 */
+  ChannelRefundId: string | null;
+  /** 子订单号 */
+  SubOutTradeNo: string | null;
+  /** 子单退款金额 */
+  RefundAmt: string | null;
+}
+
 /** 银行复核指引。银行侧返回网银授权指引链接，一般PC网银，手机网银链接 */
 declare interface OpenBankApprovalGuideInfo {
   /** PC网银指引 */
@@ -1586,6 +1640,50 @@ declare interface OpenBankProfitShareInfo {
   RecvId?: string;
   /** 分润金额，单位分 */
   ProfitShareFee?: number;
+}
+
+/** 分账收款人信息 */
+declare interface OpenBankProfitSharePayeeInfo {
+  /** 收款人账户名称 */
+  AccountName: string;
+  /** 银行名称可大体识别银行就行 */
+  BankName: string;
+  /** 账户货币 */
+  Currency: string;
+  /** 账户类型。00:借记卡01:存折 02:信用卡 03:准贷记卡 04:预付卡费 05:境外卡 */
+  Nature: string;
+  /** 账户地区/受益人所在国家。参考附录“国家代码”表——“代码”字段 */
+  Country: string;
+  /** 账户开户所在国家参考附录“国家代码”表——“代码”字段 */
+  DepositCountry: string;
+  /** 合作有效期yyyy-MM-dd */
+  ExpireDate: string;
+  /** 0:个人(对私) 1:公司(对公) */
+  Flag: string;
+  /** 开户行地址账户地区非中国必填，【账户名+开户行地址不可超过114个字符（只允许【英文字母数字空格.,/-()'】），否则可能导致境外银行付款失败】 */
+  BankAddress?: string;
+  /** 客户地址非中国内地账户的客户地址不能为空 */
+  Address?: string;
+  /** 账户属性账户开户所在国家为中国则必填。1-离岸账户 0-在岸账户 */
+  IsOSA?: string;
+  /** 账户省份参考附录“地区代码” */
+  Province?: string;
+  /** 账户城市参考附录“地区代码 */
+  City?: string;
+  /** 证件号/统一信用证代码如果country与depositcountry字段都是CHN时，必填对公账户填统一信用证代码，对私账户填身份证号码离岸账户非必填 */
+  LegalIdNo?: string;
+  /** 手机号。账户地区是日本则必填 */
+  Telephone?: string;
+  /** 参考接口说明。 */
+  BicCode?: string;
+  /** 参考接口说明。 */
+  SwiftCode?: string;
+  /** 大额支付行号/支付行号参考接口说明。境外（大额支付行号）参考附录【大额行号】，境内（支付行号）参考附录【支付行号】 */
+  Cnaps?: string;
+  /** 中转行号，参考接口说明。 */
+  TransferBankNo?: string;
+  /** 关联附件。上传的文件ID */
+  Fid?: string;
 }
 
 /** 分账信息结果 */
@@ -2656,6 +2754,26 @@ declare interface QueryOpenBankPaymentOrderResult {
   TimeFinish: string | null;
 }
 
+/** 绑定分账收款方查询响应 */
+declare interface QueryOpenBankProfitSharePayeeResult {
+  /** 账户ID（受益ID） */
+  AccountId: string;
+  /** 账户号。通联国际指客户银行账户号 */
+  AccountNo: string;
+  /** 账户货币。参考附录“币种类型”。 */
+  Currency: string;
+  /** 收款人账户名称 */
+  AccountName: string;
+  /** 银行名称 */
+  BankName: string | null;
+  /** 账户类型。00:借记卡01:存折 02:信用卡 03:准贷记卡 04:预付卡费 05:境外卡 */
+  Nature: string | null;
+  /** 状态0-待审核；1-审核通过；2-审核不通过 3-关联实体未审核 */
+  BindState: string;
+  /** 状态描述 */
+  StateExplain: string;
+}
+
 /** 云企付结算查询结果 */
 declare interface QueryOpenBankSettleOrderResult {
   /** 外部结算流水号 */
@@ -2676,6 +2794,8 @@ declare interface QueryOpenBankSettleOrderResult {
   TimeFinish: string | null;
   /** 结算手续费 */
   SettleFee: string | null;
+  /** 账户货币。参考附录“币种类型”。 */
+  Currency: string | null;
 }
 
 /** 子商户资质文件查询 */
@@ -2780,6 +2900,12 @@ declare interface QueryOrderOutOrderList {
   SubOrderList: QueryOrderOutSubOrderList[];
   /** 支付机构订单号 */
   ChannelExternalOrderId: string;
+  /** 主单核销状态 */
+  SettleCheck: number | null;
+  /** 渠道方用户信息列表 */
+  ChannelExternalUserInfoList: OldChannelExternalUserInfo[] | null;
+  /** 附加项信息列表 */
+  AttachmentInfoList: OldAttachmentInfo[] | null;
 }
 
 /** 子订单列表 */
@@ -4215,6 +4341,12 @@ declare interface ApplyOpenBankSettleOrderRequest {
   SettleDetail?: string;
   /** 结算成功回调地址 */
   NotifyUrl?: string;
+  /** 附言 */
+  Remark?: string;
+  /** 结算第三方渠道扩展信息。通联国际必选 */
+  ExternalSettleData?: string;
+  /** 接入环境。沙箱环境填 sandbox。缺省默认调用生产环境 */
+  Environment?: string;
 }
 
 declare interface ApplyOpenBankSettleOrderResponse {
@@ -4546,6 +4678,36 @@ declare interface BindOpenBankExternalSubMerchantBankAccountResponse {
   ErrMessage: string;
   /** 返回结果。 */
   Result: BindOpenBankExternalSubMerchantBankAccountResult | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface BindOpenBankProfitSharePayeeRequest {
+  /** 渠道商户号。代理商/集团ID */
+  ChannelMerchantId: string;
+  /** 收款人银行账户号。唯一 */
+  AccountNo: string;
+  /** 渠道名称通联国际: CNP */
+  ChannelName: string;
+  /** 渠道子商户号。商户ID */
+  ChannelSubMerchantId?: string;
+  /** 绑定状态通知地址,若为空，即不回调通知。 */
+  NotifyUrl?: string;
+  /** 分账收款人信息。通联国际必选 */
+  ProfitSharePayeeInfo?: OpenBankProfitSharePayeeInfo;
+  /** 第三方拓展信息。若无特殊说明，可为空 */
+  ExternalProfitSharingData?: string;
+  /** 接入环境。沙箱环境填 sandbox。缺省默认调用生产环境 */
+  Environment?: string;
+}
+
+declare interface BindOpenBankProfitSharePayeeResponse {
+  /** 错误码。 */
+  ErrCode: string;
+  /** 错误信息。 */
+  ErrMessage: string;
+  /** 返回结果 */
+  Result: BindOpenBankProfitSharePayeeResult | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -5038,12 +5200,14 @@ declare interface CreateCloudSubMerchantRequest {
 }
 
 declare interface CreateCloudSubMerchantResponse {
-  /** 子应用Id。 */
+  /** 子应用ID */
   SubAppId: string | null;
-  /** 渠道子商户Id。 */
+  /** 渠道子商户ID */
   ChannelSubMerchantId: string | null;
-  /** 层级，从0开始。 */
+  /** 层级，从0开始 */
   Level: number | null;
+  /** 渠道应用ID */
+  ChannelAppId: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -6425,11 +6589,13 @@ declare interface DownloadBillRequest {
 
 declare interface DownloadBillResponse {
   /** 账单文件名 */
-  FileName?: string;
+  FileName: string;
   /** 账单文件的MD5值 */
-  FileMD5?: string;
+  FileMD5: string;
   /** 账单文件的真实下载地址 */
-  DownloadUrl?: string;
+  DownloadUrl: string;
+  /** 账单类型TRADE，对账单FUND，资金账单 */
+  StateType: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -8496,6 +8662,32 @@ declare interface QueryOpenBankPaymentOrderResponse {
   RequestId?: string;
 }
 
+declare interface QueryOpenBankProfitSharePayeeRequest {
+  /** 渠道商户号。代理商/集团ID */
+  ChannelMerchantId: string;
+  /** 渠道子商户号。商户ID */
+  ChannelSubMerchantId?: string;
+  /** 分账方绑定添加返回的AccountId，账户号和账户ID选其一 */
+  AccountId?: string;
+  /** 银行账户号要与绑定收款方时保持一致，账户号AccountNo和账户AccoutId选其一 */
+  AccountNo?: string;
+  /** 使用账户号时必选 */
+  Currency?: string;
+  /** 接入环境。沙箱环境填 sandbox。缺省默认调用生产环境 */
+  Environment?: string;
+}
+
+declare interface QueryOpenBankProfitSharePayeeResponse {
+  /** 错误码。 */
+  ErrCode: string;
+  /** 错误信息。 */
+  ErrMessage: string;
+  /** 返回结果 */
+  Result: QueryOpenBankProfitSharePayeeResult | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface QueryOpenBankRefundOrderRequest {
   /** 渠道商户号。 */
   ChannelMerchantId: string;
@@ -8527,6 +8719,8 @@ declare interface QueryOpenBankSettleOrderRequest {
   OutSettleId?: string;
   /** 渠道结算流水号，与外部结算流水号二选一 */
   ChannelSettleId?: string;
+  /** 接入环境。沙箱环境填 sandbox。缺省默认调用生产环境 */
+  Environment?: string;
 }
 
 declare interface QueryOpenBankSettleOrderResponse {
@@ -8715,9 +8909,9 @@ declare interface QueryOrderRequest {
 
 declare interface QueryOrderResponse {
   /** 返回订单数 */
-  TotalNum?: number;
+  TotalNum: number;
   /** 查询结果的订单列表 */
-  OrderList?: QueryOrderOutOrderList[];
+  OrderList: QueryOrderOutOrderList[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -8839,7 +9033,27 @@ declare interface QueryRefundRequest {
 
 declare interface QueryRefundResponse {
   /** 退款状态码，退款提交成功后返回 1：退款中； 2：退款成功； 3：退款失败。 */
-  State?: string;
+  State: string;
+  /** 支付机构订单号 */
+  ChannelExternalOrderId: string | null;
+  /** 支付机构退款单号 */
+  ChannelExternalRefundId: string | null;
+  /** 渠道订单号 */
+  ChannelOrderId: string | null;
+  /** 退款总金额 */
+  TotalRefundAmt: number | null;
+  /** 货币类型 */
+  CurrencyType: string | null;
+  /** 外部订单号 */
+  OutTradeNo: string | null;
+  /** 退款订单号 */
+  RefundId: string | null;
+  /** 聚鑫分配的支付主MidasAppId */
+  MidasAppId: string;
+  /** 指定退款订单号。与RefundId的区别是，UsedRefundId不会再做修饰，而RefundId则可能在查询退款处理时做了如添加前缀等的修饰 */
+  UsedRefundId: string | null;
+  /** 子单退款信息列表 */
+  SubRefundList: OldSubRefund[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -10489,6 +10703,8 @@ declare interface Cpdp {
   BindAcct(data: BindAcctRequest, config?: AxiosRequestConfig): AxiosPromise<BindAcctResponse>;
   /** 云企付-子商户银行卡绑定 */
   BindOpenBankExternalSubMerchantBankAccount(data: BindOpenBankExternalSubMerchantBankAccountRequest, config?: AxiosRequestConfig): AxiosPromise<BindOpenBankExternalSubMerchantBankAccountResponse>;
+  /** 云企付-绑定分账收款方 */
+  BindOpenBankProfitSharePayee(data: BindOpenBankProfitSharePayeeRequest, config?: AxiosRequestConfig): AxiosPromise<BindOpenBankProfitSharePayeeResponse>;
   /** 云鉴-会员绑定提现账户-回填银联鉴权短信码 */
   BindRelateAccReUnionPay(data: BindRelateAccReUnionPayRequest, config?: AxiosRequestConfig): AxiosPromise<BindRelateAccReUnionPayResponse>;
   /** 云鉴-会员绑定提现账户-小额鉴权 */
@@ -10757,6 +10973,8 @@ declare interface Cpdp {
   QueryOpenBankOrderDetailReceiptInfo(data: QueryOpenBankOrderDetailReceiptInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankOrderDetailReceiptInfoResponse>;
   /** 云企付-查询订单支付结果 */
   QueryOpenBankPaymentOrder(data: QueryOpenBankPaymentOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankPaymentOrderResponse>;
+  /** 云企付-绑定分账收款方查询 */
+  QueryOpenBankProfitSharePayee(data: QueryOpenBankProfitSharePayeeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankProfitSharePayeeResponse>;
   /** 云企付-退款结果查询 */
   QueryOpenBankRefundOrder(data: QueryOpenBankRefundOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankRefundOrderResponse>;
   /** 云企付-结算单查询结果 */

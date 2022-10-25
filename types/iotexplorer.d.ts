@@ -66,6 +66,8 @@ declare interface BindProductInfo {
   NetType: string | null;
   /** 状态 */
   DevStatus: string | null;
+  /** 产品拥有者名称 */
+  ProductOwnerName: string | null;
 }
 
 /** DeviceData */
@@ -1035,6 +1037,8 @@ declare interface DescribeBindedProductsRequest {
   Offset: number;
   /** 分页大小 */
   Limit: number;
+  /** 是否跨账号绑定产品 */
+  ProductSource?: number;
 }
 
 declare interface DescribeBindedProductsResponse {
@@ -1060,6 +1064,10 @@ declare interface DescribeDeviceBindGatewayResponse {
   GatewayDeviceName: string | null;
   /** 网关产品名称 */
   GatewayName: string | null;
+  /** 设备对应产品所属的主账号名称 */
+  GatewayProductOwnerName: string | null;
+  /** 设备对应产品所属的主账号 UIN */
+  GatewayProductOwnerUin: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1273,6 +1281,8 @@ declare interface DescribeGatewaySubProductsRequest {
   Limit?: number;
   /** 项目Id */
   ProjectId?: string;
+  /** 是否跨账号产品 */
+  ProductSource?: number;
 }
 
 declare interface DescribeGatewaySubProductsResponse {

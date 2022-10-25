@@ -1,0 +1,48 @@
+%%{init: {'themeCSS':'.flowchart-link{animation:dash 2s linear infinite;}@keyframes dash{from{stroke-dashoffset:60;}to%{}}'}}%%
+flowchart TD
+  B[["new TenYun(...)"]]-.->S0[[api]]
+  B-.->S1[["..."]]
+  B-.->S2[[tcb]]
+  B-.->S3[[zj]]
+  S0-.->S00[["DescribeProducts()"]]
+  S0-.->S01[["...(...)"]]
+  S1-.->S10[["...(...)"]]
+  S2-.->S20[["BindEnvGateway(...)"]]
+  S2-.->S21[["...(...)"]]
+  S3-.->S30[["...(...)"]]
+  S3-.->S31[["SendSms(...)"]]
+  S00-.->E[["AxiosPromise&lt;Response extends object&gt;"]]
+  S01-.->E
+  S10-.->E
+  S20-.->E
+  S21-.->E
+  S30-.->E
+  S31-.->E
+  E-.->T[["&lt;T extends Response&gt;then({data: T})"]]
+  subgraph G [ ]
+    subgraph api [ ]
+      S0
+      S00
+      S01
+    end
+    subgraph ... [ ]
+      S1
+      S10
+    end
+    subgraph tcb [ ]
+      S2
+      S20
+      S21
+    end
+    subgraph zj [ ]
+      S3
+      S30
+      S31
+    end
+    E
+  end
+  classDef dashed fill:none,stroke-dasharray:5 5
+  class G,api,tcb,...,zj dashed
+
+%% npx -p @mermaid-js/mermaid-cli mmdc -c sdk-flowchart.json -i sdk-flowchart.mmd -o sdk-flowchart.svg
+%% sed -i '' 's/-166[0-9]\{10\}/-div/g;s/max-width: 1324.69px; //' sdk-flowchart.svg

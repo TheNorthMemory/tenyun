@@ -212,7 +212,7 @@ declare interface InstanceInfo {
   VpcUid: string;
   /** 实例所属子网的UID */
   SubnetUid: string;
-  /** 实例状态，0:处理中,1:正常,-1停止,-2:销毁中,-3:已销毁 */
+  /** 实例状态，0:处理中,1:正常,-1停止,-2:销毁中,-3:已销毁, 2:创建集群时初始化中 */
   Status: number;
   /** 自动续费标识。取值范围：RENEW_FLAG_AUTO：自动续费 RENEW_FLAG_MANUAL：不自动续费默认取值：RENEW_FLAG_DEFAULT：不自动续费若该参数指定为 RENEW_FLAG_AUTO，在账户余额充足的情况下，实例到期后将按月自动续费。 */
   RenewFlag: string;
@@ -354,6 +354,10 @@ declare interface InstanceInfo {
   AutoIndexEnabled: boolean | null;
   /** 是否支持存储计算分离 */
   EnableHybridStorage: boolean | null;
+  /** 流程进度 */
+  ProcessPercent: number | null;
+  /** Kibana的altering外网告警策略OPEN：开启CLOSE：关闭 */
+  KibanaAlteringPublicAccess: string | null;
 }
 
 /** ES集群日志详细信息 */
@@ -592,6 +596,8 @@ declare interface NodeInfo {
   CpuNum?: number | null;
   /** 内存大小，单位GB */
   MemSize?: number | null;
+  /** / */
+  DiskEnhance?: number | null;
 }
 
 /** 节点维度视图数据 */
@@ -845,6 +851,8 @@ declare interface CreateInstanceRequest {
   OperationDuration?: OperationDuration;
   /** 是否开启存算分离 */
   EnableHybridStorage?: boolean;
+  /** 是否开启essd 增强型云盘 */
+  DiskEnhance?: number;
 }
 
 declare interface CreateInstanceResponse {

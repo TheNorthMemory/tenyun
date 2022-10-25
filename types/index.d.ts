@@ -447,7 +447,7 @@ export declare type SERVICE_VERSIONS = {
 
 declare interface CloudServiceActions {
   (): string[];
-  [S: string]: (data?: any, config?: AxiosRequestConfig) => AxiosPromise;
+  [S: string]: <T = any, D = AxiosRequestConfig>(data?: T, config?: D) => AxiosPromise;
 }
 
 declare type CloudServices = {
@@ -457,9 +457,9 @@ declare type CloudServices = {
 declare interface CloudInstance {
   new (SecretId: string, SecretKey: BinaryLike, Token?: string, Region?: string): TenYun;
 
-  get signer(): <T = BinaryLike>(data: T, headers: AxiosRequestHeaders) => T;
+  get signer(): <T = BinaryLike, D = AxiosRequestHeaders>(data: T, headers: D) => T;
 
-  get verifier(): <T = object | Buffer>(data: T, headers: AxiosResponseHeaders) => T;
+  get verifier(): <T = object | Buffer, D = AxiosResponseHeaders>(data: T, headers: D) => T;
 
   get client(): AxiosInstance;
 }

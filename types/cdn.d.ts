@@ -320,6 +320,12 @@ declare interface AuthenticationTypeD {
   BackupSecretKey?: string | null;
 }
 
+/** 图片优化-AvifAdapter配置 */
+declare interface AvifAdapter {
+  /** 开关，"on/off" */
+  Switch?: string | null;
+}
+
 /** s3源站回源鉴权。 */
 declare interface AwsPrivateAccess {
   /** 开关，on/off。 */
@@ -1202,6 +1208,8 @@ declare interface ImageOptimization {
   TpgAdapter: TpgAdapter | null;
   /** GuetzliAdapter配置 */
   GuetzliAdapter: GuetzliAdapter | null;
+  /** AvifAdapter配置 */
+  AvifAdapter: AvifAdapter | null;
 }
 
 /** IP 黑白名单配置，默认为关闭状态 */
@@ -1380,6 +1388,16 @@ declare interface MaxAge {
   Switch: string | null;
   /** MaxAge 规则 */
   MaxAgeRules?: MaxAgeRule[] | null;
+  /** MaxAge 状态码相关规则 */
+  MaxAgeCodeRule?: MaxAgeCodeRule | null;
+}
+
+/** MaxAge 状态码相关规则配置 */
+declare interface MaxAgeCodeRule {
+  /** 处理动作clear：清除 cache-control 头部 */
+  Action: string;
+  /** 指定HTTP状态码生效，当前仅支持填写"400-599" */
+  StatusCodes: string[];
 }
 
 /** MagAge 规则配置 */
@@ -2867,12 +2885,12 @@ declare interface DescribeCdnDomainLogsRequest {
   Limit?: number;
   /** 指定区域下载日志mainland：获取境内加速日志包下载链接overseas：获取境外加速日志包下载链接global：同时获取境内、境外加速日志包下载链接（分开打包）不指定时默认为 mainland */
   Area?: string;
-  /** 指定下载日志的类型。access：获取访问日志 */
+  /** 指定下载日志的类型，目前仅支持访问日志（access）。access：访问日志 */
   LogType?: string;
 }
 
 declare interface DescribeCdnDomainLogsResponse {
-  /** 日志包下载链接 */
+  /** 日志包下载链接。下载内容是gz后缀的压缩包，解压后是无扩展名的文本文件。 */
   DomainLogs: DomainLog[];
   /** 查询到的总条数 */
   TotalCount: number;
@@ -3074,6 +3092,8 @@ declare interface DescribeImageConfigResponse {
   TpgAdapter: TpgAdapter | null;
   /** GuetzliAdapter配置 */
   GuetzliAdapter: GuetzliAdapter | null;
+  /** AvifAdapter配置项 */
+  AvifAdapter: AvifAdapter | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -4185,6 +4205,8 @@ declare interface UpdateImageConfigRequest {
   TpgAdapter?: TpgAdapter;
   /** GuetzliAdapter配置项 */
   GuetzliAdapter?: GuetzliAdapter;
+  /** AvifAdapter配置项 */
+  AvifAdapter?: AvifAdapter;
 }
 
 declare interface UpdateImageConfigResponse {

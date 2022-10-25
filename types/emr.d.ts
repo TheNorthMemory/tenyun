@@ -608,7 +608,7 @@ declare interface NodeHardwareInfo {
   Clients: string | null;
   /** 系统当前时间 */
   CurrentTime: string | null;
-  /** 是否用于联邦 */
+  /** 是否用于联邦 ,1是，0否 */
   IsFederation: number | null;
   /** 设备名称 */
   DeviceName: string | null;

@@ -1112,6 +1112,10 @@ declare interface KafkaParam {
   TableMappings?: TableMapping[] | null;
   /** 「分发到多个topic」开关，默认为false */
   UseTableMapping?: boolean | null;
+  /** 使用的Topic是否需要自动创建（目前只支持SOURCE流入任务，如果不使用分发到多个topic，需要在Topic字段填写需要自动创建的topic名） */
+  UseAutoCreateTopic?: boolean | null;
+  /** 写入Topic时是否进行压缩，不开启填"none"，开启的话，可选择"gzip", "snappy", "lz4"中的一个进行填写。 */
+  CompressionType?: string | null;
 }
 
 /** Map参数 */
@@ -1310,7 +1314,7 @@ declare interface MySQLModifyConnectParam {
 declare interface MySQLParam {
   /** MySQL的数据库名称，"*"为全数据库 */
   Database: string;
-  /** MySQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写 */
+  /** MySQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写，需要填入正则表达式时，格式为"数据库名\\.数据表名" */
   Table: string;
   /** 该MySQL在连接管理内的Id */
   Resource: string;
@@ -1356,6 +1360,8 @@ declare interface MySQLParam {
   RecordWithSchema?: boolean;
   /** 存放信令表的数据库名称 */
   SignalDatabase?: string;
+  /** 输入的table是否为正则表达式，如果该选项以及IsTablePrefix同时为true，该选项的判断优先级高于IsTablePrefix */
+  IsTableRegular?: boolean;
 }
 
 /** 操作类型返回的Data结构 */
@@ -1434,7 +1440,7 @@ declare interface PostgreSQLModifyConnectParam {
 declare interface PostgreSQLParam {
   /** PostgreSQL的数据库名称 */
   Database: string;
-  /** PostgreSQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写 */
+  /** PostgreSQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"Schema名.数据表名"的格式进行填写，需要填入正则表达式时，格式为"Schema名\\.数据表名" */
   Table: string;
   /** 该PostgreSQL在连接管理内的Id */
   Resource: string;
@@ -1786,6 +1792,10 @@ declare interface TopicParam {
   StartTime?: number | null;
   /** Topic的TopicId【出参】 */
   TopicId?: string | null;
+  /** 写入Topic时是否进行压缩，不开启填"none"，开启的话，可选择"gzip", "snappy", "lz4"中的一个进行填写。 */
+  CompressionType?: string | null;
+  /** 使用的Topic是否需要自动创建（目前只支持SOURCE流入任务） */
+  UseAutoCreateTopic?: boolean | null;
 }
 
 /** 分区详情 */

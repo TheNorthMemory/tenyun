@@ -118,6 +118,8 @@ declare interface DeployServicePodDetail {
   Zone?: string | null;
   /** webshell地址 */
   Webshell?: string | null;
+  /** 状态 */
+  Status?: string | null;
 }
 
 /** 分批发布策略配置 */
@@ -406,6 +408,8 @@ declare interface NamespaceInfo {
   ApmInstanceId: string | null;
   /** 环境是否上锁，1为上锁，0则未上锁 */
   Locked: number | null;
+  /** 标签 */
+  Tags: Tag[] | null;
 }
 
 /** 命名空间分页 */
@@ -478,6 +482,14 @@ declare interface PortMapping {
   ServiceName?: string;
 }
 
+/** 查询过滤器 */
+declare interface QueryFilter {
+  /** 查询字段名称 */
+  Name?: string;
+  /** 查询字段值 */
+  Value?: string[];
+}
+
 /** 应用实例 */
 declare interface RunVersionPod {
   /** shell地址 */
@@ -500,6 +512,18 @@ declare interface RunVersionPod {
   Ready: boolean | null;
   /** 容器状态 */
   ContainerState: string | null;
+  /** 实例所在节点信息 */
+  NodeInfo: NodeInfo | null;
+  /** 启动时间 */
+  StartTime: string | null;
+  /** 是否健康 */
+  Unhealthy: boolean | null;
+  /** 不健康时的提示信息 */
+  UnhealthyWarningMsg: string | null;
+  /** 版本ID */
+  VersionId: string | null;
+  /** 应用名称 */
+  ApplicationName: string | null;
 }
 
 /** 服务分页 */
@@ -512,6 +536,8 @@ declare interface ServicePage {
   Size: number;
   /** 页数 */
   Pages: number;
+  /** 当前条数 */
+  Current?: number | null;
 }
 
 /** 端口映射详细信息结构体 */
@@ -578,6 +604,18 @@ declare interface ServiceVersionBrief {
   ApplicationName: string | null;
   /** 是否正在发布中 */
   UnderDeploying: boolean | null;
+  /** 分批次部署状态 */
+  BatchDeployStatus: string | null;
+  /** 可用区 */
+  Zones: string[] | null;
+  /** 节点信息 */
+  NodeInfos: NodeInfo[] | null;
+  /** 实例信息 */
+  PodList: DescribeRunPodPage | null;
+  /** 工作负载信息 */
+  WorkloadInfo: WorkloadInfo | null;
+  /** 创建日期 */
+  CreateDate: string | null;
 }
 
 /** 存储卷配置 */
@@ -736,6 +774,8 @@ declare interface TemService {
   ActiveVersions: ServiceVersionBrief[] | null;
   /** 是否启用链路追踪 */
   EnableTracing: number | null;
+  /** 标签 */
+  Tags: Tag[] | null;
 }
 
 /** 版本信息 */
@@ -886,6 +926,32 @@ declare interface TemServiceVersionInfo {
   TcrInstanceId?: string | null;
   /** 1：开始自动metrics采集（open-telemetry）；0：关闭metrics采集； */
   EnableMetrics?: number | null;
+  /** 用户AppId */
+  AppId?: string | null;
+  /** 用户SubAccountUin */
+  SubAccountUin?: string | null;
+  /** 用户Uin */
+  Uin?: string | null;
+  /** 地域 */
+  Region?: string | null;
+  /** 应用分组ID */
+  GroupId?: string | null;
+  /** 是否启用注册中心 */
+  EnableRegistry?: number | null;
+  /** 弹性伸缩数组 */
+  AutoscalerList?: Autoscaler[] | null;
+  /** 修改人 */
+  Modifier?: string | null;
+  /** 创建人 */
+  Creator?: string | null;
+  /** 部署策略 */
+  DeployStrategyConf?: DeployStrategyConf | null;
+  /** 实例列表 */
+  PodList?: DescribeRunPodPage | null;
+  /** 发布时配置是否有修改 */
+  ConfEdited?: boolean | null;
+  /** 标签 */
+  Tags?: Tag[] | null;
 }
 
 /** 创建应用，创建仓库参数 */
@@ -904,6 +970,20 @@ declare interface WorkloadInfo {
   ClusterId: string | null;
   /** 应用名 */
   ApplicationName: string | null;
+  /** 版本名称 */
+  VersionName: string | null;
+  /** Ready实例数 */
+  ReadyReplicas: number | null;
+  /** 实例数 */
+  Replicas: number | null;
+  /** Updated实例数 */
+  UpdatedReplicas: number | null;
+  /** UpdatedReady实例数 */
+  UpdatedReadyReplicas: number | null;
+  /** 更新版本 */
+  UpdateRevision: string | null;
+  /** 当前版本 */
+  CurrentRevision: string | null;
 }
 
 declare interface CreateApplicationAutoscalerRequest {
@@ -951,6 +1031,8 @@ declare interface CreateApplicationRequest {
   EnableTracing?: number;
   /** 使用默认镜像服务额外参数 */
   UseDefaultImageServiceParameters?: UseDefaultRepoParameters;
+  /** 标签 */
+  Tags?: Tag[];
 }
 
 declare interface CreateApplicationResponse {
@@ -1031,6 +1113,8 @@ declare interface CreateEnvironmentRequest {
   SourceChannel?: number;
   /** 是否开启tsw服务 */
   EnableTswTraceService?: boolean;
+  /** 标签 */
+  Tags?: Tag[];
 }
 
 declare interface CreateEnvironmentResponse {
@@ -1349,6 +1433,8 @@ declare interface DescribeApplicationsRequest {
   ApplicationId?: string;
   /** 搜索关键字 */
   Keyword?: string;
+  /** 查询过滤器 */
+  Filters?: QueryFilter[];
 }
 
 declare interface DescribeApplicationsResponse {
@@ -1457,6 +1543,8 @@ declare interface DescribeEnvironmentsRequest {
   Offset?: number;
   /** 来源source */
   SourceChannel?: number;
+  /** 查询过滤器 */
+  Filters?: QueryFilter[];
 }
 
 declare interface DescribeEnvironmentsResponse {
@@ -1708,6 +1796,8 @@ declare interface ModifyApplicationReplicasRequest {
 }
 
 declare interface ModifyApplicationReplicasResponse {
+  /** 是否成功 */
+  Result: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

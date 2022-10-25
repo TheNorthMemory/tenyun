@@ -1157,11 +1157,13 @@ declare interface CreateMediaQualityRestorationTaskRequest {
   SaveInfo: SaveInfo;
   /** 任务结果回调地址信息。 */
   CallbackInfo?: CallbackInfo;
+  /** 极速高清体验馆渠道标志。 */
+  TopSpeedCodecChannel?: number;
 }
 
 declare interface CreateMediaQualityRestorationTaskResponse {
   /** 画质重生任务ID，可以通过该ID查询任务状态。 */
-  TaskId?: string;
+  TaskId: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

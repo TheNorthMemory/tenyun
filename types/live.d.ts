@@ -1531,7 +1531,7 @@ declare interface CreateLiveWatermarkRuleResponse {
 }
 
 declare interface CreatePullStreamConfigRequest {
-  /** 源 Url ，用于拉流的地址。目前可支持直播流及点播文件。注意：1. 多个点播url之间使用空格拼接。2. 目前上限支持10个url。3. 支持拉流文件格式：flv，rtmp，hls，mp4。 */
+  /** 源 Url ，用于拉流的地址。目前可支持直播流及点播文件。注意：1. 多个点播url之间使用空格拼接。2. 目前上限支持10个url。3. 目前不支持https协议。4. 支持拉流文件格式：flv，rtmp，hls，mp4。 */
   FromUrl: string;
   /** 目的 Url ，用于推流的地址，目前限制该目标地址为腾讯域名。仅支持：rtmp 协议。 */
   ToUrl: string;
@@ -1547,7 +1547,7 @@ declare interface CreatePullStreamConfigRequest {
 
 declare interface CreatePullStreamConfigResponse {
   /** 配置成功后的 ID。 */
-  ConfigId?: string;
+  ConfigId: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -3515,7 +3515,7 @@ declare interface Live {
   CreateLiveTranscodeTemplate(data: CreateLiveTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveTranscodeTemplateResponse>;
   /** 创建水印规则 */
   CreateLiveWatermarkRule(data: CreateLiveWatermarkRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveWatermarkRuleResponse>;
-  /** 添加拉流配置(该接口已下线,请联系售后获取新接口) */
+  /** 添加拉流配置(该接口已下线,请使用新接口 CreateLivePullStreamTask) */
   CreatePullStreamConfig(data: CreatePullStreamConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePullStreamConfigResponse>;
   /** 创建录制任务（新） */
   CreateRecordTask(data: CreateRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordTaskResponse>;

@@ -12,53 +12,7 @@ Promise based and Chainable Tencent Cloud OpenAPI client for NodeJS
 
 核心包通过实例化后两次`Proxy`动态代理，第一层代理 `产品标识`，第二层代理`产品服务` 实现了通过一个实例接入腾讯云各产品服务的能力，默认为`最新`版本的接口接入，同时提供`往期`版本(通过第二参数传递`X-TC-Version`头)的接入能力。
 
-```mermaid
-%%{init: {'themeCSS':'.flowchart-link{animation:dash 2s linear infinite;}@keyframes dash{from{stroke-dashoffset:60;}to%{}}'}}%%
-flowchart TD
-  B[["new TenYun(...)"]]-.->S0[[api]]
-  B-.->S1[[tcb]]
-  B-.->S2[["..."]]
-  B-.->S3[[zj]]
-  S0-.->S00[["DescribeProducts()"]]
-  S0-.->S01[["...(...)"]]
-  S1-.->S10[["BindEnvGateway(...)"]]
-  S1-.->S11[["...(...)"]]
-  S2-.->S20[["...(...)"]]
-  S3-.->S30[["...(...)"]]
-  S3-.->S31[["SendSms(...)"]]
-  S00-.->E[["AxiosPromise&lt;Response extends object&gt;"]]
-  S01-.->E
-  S10-.->E
-  S11-.->E
-  S20-.->E
-  S30-.->E
-  S31-.->E
-  E-.->T[["&lt;T extends Response&gt;then({data: T})"]]
-  subgraph G [ ]
-    subgraph api [ ]
-      S0
-      S00
-      S01
-    end
-    subgraph tcb [ ]
-      S1
-      S10
-      S11
-    end
-    subgraph ... [ ]
-      S2
-      S20
-    end
-    subgraph zj [ ]
-      S3
-      S30
-      S31
-    end
-    E
-  end
-  classDef dashed fill:none,stroke-dasharray:5 5
-  class G,api,tcb,...,zj dashed
-```
+[![SDK FlowChart](./.github/sdk-flowchart.svg)](./.github/sdk-flowchart.mmd)
 
 ## 使用
 
@@ -140,7 +94,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 219+ 款产品，8357+ 服务数 (点击查看清单)</summary>
+<details><summary>共计 219+ 款产品，8362+ 服务数 (点击查看清单)</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -204,7 +158,7 @@ cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-1
 cme | [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) | 2019-10-29(49)
 cmq | [消息队列 CMQ](https://cloud.tencent.com/document/product/406) | 2019-03-04(17)
 cms | 内容安全 | 2019-03-21(9)
-cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(212)
+cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(214)
 cr | [金融联络机器人](https://cloud.tencent.com/document/product/656) | 2018-03-21(28)
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(87)
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(230)
@@ -233,7 +187,7 @@ eis | [企业集成服务](https://cloud.tencent.com/document/product/1270) | 20
 emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(24)
 es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2018-04-16(37)
 ess | [电子签服务](https://cloud.tencent.com/document/product/1323) | 2020-11-11(24)
-essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(25)<br/>2020-12-22(53)
+essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(26)<br/>2020-12-22(53)
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2018-12-01(4)
 faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(45)
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(10)
@@ -323,7 +277,7 @@ tcex | [腾讯云释义](https://cloud.tencent.com/document/product/1266) | 2020
 tci | 腾讯智学课堂分析 | 2019-03-18(41)
 tcm | [服务网格](https://cloud.tencent.com/document/product/1261) | 2021-04-13(7)
 tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 2019-09-24(108)
-tcss | [容器安全服务](https://cloud.tencent.com/document/product/1285) | 2020-11-01(310)
+tcss | [容器安全服务](https://cloud.tencent.com/document/product/1285) | 2020-11-01(312)
 tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) | 2021-11-18(25)
 tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(8)
 tdmq | [分布式消息队列](https://cloud.tencent.com/document/product/1179) | 2020-02-17(99)

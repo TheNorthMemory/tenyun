@@ -158,6 +158,12 @@ declare interface NacosServerInterface {
   Interface: string | null;
 }
 
+/** 查询Limiter的接入地址 */
+declare interface PolarisLimiterAddress {
+  /** VPC接入IP列表 */
+  IntranetAddress: string | null;
+}
+
 /** 微服务注册引擎实例 */
 declare interface SREInstance {
   /** 实例ID */
@@ -238,6 +244,8 @@ declare interface ServiceGovernanceInfo {
   MainPassword?: string;
   /** 服务治理pushgateway引擎绑定的网络信息 */
   PgwVpcInfos?: VpcInfo[];
+  /** 服务治理限流server引擎绑定的网络信息 */
+  LimiterVpcInfos?: VpcInfo[];
 }
 
 /** 私有网络信息 */
@@ -385,7 +393,7 @@ declare interface DescribeSREInstanceAccessAddressRequest {
   VpcId?: string;
   /** 子网ID */
   SubnetId?: string;
-  /** 引擎其他组件名称（pushgateway） */
+  /** 引擎其他组件名称（pushgateway、polaris-limiter） */
   Workload?: string;
   /** 部署地域 */
   EngineRegion?: string;
@@ -406,6 +414,8 @@ declare interface DescribeSREInstanceAccessAddressResponse {
   InternetBandWidth: number | null;
   /** 控制台公网带宽 */
   ConsoleInternetBandWidth: number | null;
+  /** 北极星限流server节点接入IP */
+  LimiterAddressInfos: PolarisLimiterAddress[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

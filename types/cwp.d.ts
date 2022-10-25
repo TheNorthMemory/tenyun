@@ -1692,6 +1692,8 @@ declare interface HostLoginList {
   Location: string | null;
   /** 主机quuid */
   Quuid: string | null;
+  /** 高危信息说明：ABROAD - 海外IP；XTI - 威胁情报 */
+  Desc: string | null;
 }
 
 /** 忽略的基线检测项信息 */

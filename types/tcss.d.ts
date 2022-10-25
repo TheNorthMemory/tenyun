@@ -842,6 +842,8 @@ declare interface CompliancePolicyItemSummary {
   FixSuggestion: string;
   /** 所属的合规标准的ID */
   BenchmarkStandardId: number;
+  /** 检测项适用的版本 */
+  ApplicableVersion: string | null;
 }
 
 /** 表示检测失败的资产的信息。 */
@@ -1128,6 +1130,26 @@ declare interface EscapeWhiteListInfo {
   ImageSize: number;
 }
 
+/** 导出任务详情 */
+declare interface ExportJobInfo {
+  /** 任务ID */
+  JobID: string;
+  /** 任务名称 */
+  JobName: string;
+  /** 来源 */
+  Source: string;
+  /** 导出状态 */
+  ExportStatus: string;
+  /** 导出进度 */
+  ExportProgress: number;
+  /** 失败原因 */
+  FailureMsg: string;
+  /** 超时时间 */
+  Timeout: string;
+  /** 插入时间 */
+  InsertTime: string;
+}
+
 /** 容器安全运行时，文件属性信息 */
 declare interface FileAttributeInfo {
   /** 文件名 */
@@ -1142,6 +1164,10 @@ declare interface FileAttributeInfo {
   FileCreateTime: string;
   /** 最近被篡改文件创建时间 */
   LatestTamperedFileMTime: string;
+  /** 新文件内容 */
+  NewFile: string;
+  /** 新旧文件的差异 */
+  FileDiff: string;
 }
 
 /** 容器安全主机列表 */
@@ -3459,8 +3485,6 @@ declare interface CreateHostExportJobResponse {
 }
 
 declare interface CreateImageExportJobRequest {
-  /** 导出字段 */
-  ExportField: string[];
   /** 过滤条件。ImageName- String - 是否必填：否 - 镜像名称筛选，ScanStatus - String - 是否必填：否 - 镜像扫描状态notScan，scanning，scanned，scanErrImageID- String - 是否必填：否 - 镜像ID筛选，SecurityRisk- String - 是否必填：否 - 安全风险，VulCnt 、VirusCnt、RiskCnt、IsTrustImage */
   Filters?: RunTimeFilters[];
   /** 偏移量，默认为0。 */
@@ -3471,6 +3495,8 @@ declare interface CreateImageExportJobRequest {
   By?: string;
   /** 排序方式 asc,desc */
   Order?: string;
+  /** 导出字段 */
+  ExportField?: string[];
 }
 
 declare interface CreateImageExportJobResponse {
@@ -5948,6 +5974,40 @@ declare interface DescribeEscapeWhiteListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeExportJobDownloadURLRequest {
+  /** 任务ID */
+  JobID: string;
+}
+
+declare interface DescribeExportJobDownloadURLResponse {
+  /** 下载链接 */
+  DownloadURL: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeExportJobManageListRequest {
+  /** 过滤条件。ExportStatus- string -是否必填: 否 - 导出状态 RUNNING: 导出中 SUCCESS:导出完成 FAILURE:失败ExportSource- string -是否必填: 否 - 导出来源 LocalImage: 本地镜像 */
+  Filters?: RunTimeFilters[];
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 排序方式 */
+  Order?: string;
+  /** 排序字段InsertTime: 创建时间 */
+  By?: string;
+}
+
+declare interface DescribeExportJobManageListResponse {
+  /** 总数 */
+  TotalCount: number;
+  /** 任务列表 */
+  List: ExportJobInfo[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeExportJobResultRequest {
   /** CreateExportComplianceStatusListJob返回的JobId字段的值 */
   JobId: string;
@@ -6917,11 +6977,15 @@ declare interface DescribeSecLogDeliveryClsSettingResponse {
 }
 
 declare interface DescribeSecLogDeliveryKafkaOptionsRequest {
+  /** 地域，若为空则返回所有可选地域 */
+  RegionID?: string;
 }
 
 declare interface DescribeSecLogDeliveryKafkaOptionsResponse {
   /** 实例列表 */
   InstanceList: CKafkaInstanceInfo[];
+  /** 地域列表 */
+  RegionList: RegionInfo[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -6940,6 +7004,8 @@ declare interface DescribeSecLogDeliveryKafkaSettingResponse {
   LogTypeList: SecLogDeliveryKafkaSettingInfo[] | null;
   /** 用户名 */
   User: string | null;
+  /** 地域ID */
+  RegionID: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -8311,6 +8377,8 @@ declare interface ModifySecLogDeliveryKafkaSettingRequest {
   AccessType?: number;
   /** kafka版本号 */
   KafkaVersion?: string;
+  /** 地域ID */
+  RegionID?: string;
 }
 
 declare interface ModifySecLogDeliveryKafkaSettingResponse {
@@ -9103,6 +9171,10 @@ declare interface Tcss {
   DescribeEscapeSafeState(data?: DescribeEscapeSafeStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeSafeStateResponse>;
   /** 查询逃逸白名单 */
   DescribeEscapeWhiteList(data: DescribeEscapeWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeWhiteListResponse>;
+  /** 查询导出任务下载URL */
+  DescribeExportJobDownloadURL(data: DescribeExportJobDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportJobDownloadURLResponse>;
+  /** 查询导出任务管理列表 */
+  DescribeExportJobManageList(data: DescribeExportJobManageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportJobManageListResponse>;
   /** 查询导出任务的结果 */
   DescribeExportJobResult(data: DescribeExportJobResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportJobResultResponse>;
   /** 查询镜像授权信息 */
@@ -9210,7 +9282,7 @@ declare interface Tcss {
   /** 查询安全日志投递Cls配置 */
   DescribeSecLogDeliveryClsSetting(data?: DescribeSecLogDeliveryClsSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryClsSettingResponse>;
   /** 查询安全日志投递kafka可选项 */
-  DescribeSecLogDeliveryKafkaOptions(data?: DescribeSecLogDeliveryKafkaOptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryKafkaOptionsResponse>;
+  DescribeSecLogDeliveryKafkaOptions(data: DescribeSecLogDeliveryKafkaOptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryKafkaOptionsResponse>;
   /** 查询安全日志投递kafka配置 */
   DescribeSecLogDeliveryKafkaSetting(data?: DescribeSecLogDeliveryKafkaSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryKafkaSettingResponse>;
   /** 查询安全日志接入对象列表 */

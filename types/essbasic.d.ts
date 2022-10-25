@@ -519,6 +519,10 @@ declare interface ChannelBatchCancelFlowsRequest {
   Agent: Agent;
   /** 签署流程Id数组，最多100个，超过100不处理 */
   FlowIds: string[];
+  /** 撤销理由 */
+  CancelMessage?: string;
+  /** 撤销理由自定义格式；选项：0 默认格式1 只保留身份信息：展示为【发起方】2 保留身份信息+企业名称：展示为【发起方xxx公司】3 保留身份信息+企业名称+经办人名称：展示为【发起方xxxx公司-经办人姓名】 */
+  CancelMessageFormat?: number;
   /** 操作人信息 */
   Operator?: UserInfo;
 }
@@ -526,6 +530,24 @@ declare interface ChannelBatchCancelFlowsRequest {
 declare interface ChannelBatchCancelFlowsResponse {
   /** 签署流程批量撤销失败原因，错误信息与流程Id一一对应，如果部分流程不可撤销，不会返回错误信息，只会撤销可撤销流程 */
   FailMessages: string[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ChannelCancelFlowRequest {
+  /** 签署流程编号 */
+  FlowId: string;
+  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  Agent?: Agent;
+  /** 撤回原因，最大不超过200字符 */
+  CancelMessage?: string;
+  /** 操作者的信息 */
+  Operator?: UserInfo;
+  /** 撤销理由自定义格式；选项：0 默认格式1 只保留身份信息：展示为【发起方】2 保留身份信息+企业名称：展示为【发起方xxx公司】3 保留身份信息+企业名称+经办人名称：展示为【发起方xxxx公司-经办人姓名】 */
+  CancelMessageFormat?: number;
+}
+
+declare interface ChannelCancelFlowResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -919,7 +941,7 @@ declare interface DescribeResourceUrlsByFlowsResponse {
 declare interface DescribeTemplatesRequest {
   /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
-  /** 模板唯一标识，查询单个模版时使用 */
+  /** 模板唯一标识，查询单个模板时使用 */
   TemplateId?: string;
   /** 查询内容：0-模板列表及详情（默认），1-仅模板列表 */
   ContentType?: number;
@@ -2635,6 +2657,8 @@ declare interface Essbasic {
   (): Versions;
   /** 电子签渠道版-根据签署流程id批量撤销合同 */
   ChannelBatchCancelFlows(data: ChannelBatchCancelFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelBatchCancelFlowsResponse>;
+  /** 渠道版撤销签署流程 */
+  ChannelCancelFlow(data: ChannelCancelFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelFlowResponse>;
   /** 取消一码多扫二维码 */
   ChannelCancelMultiFlowSignQRCode(data: ChannelCancelMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelMultiFlowSignQRCodeResponse>;
   /** 电子签渠道版-根据签署流程id创建批量撤销url */

@@ -645,9 +645,9 @@ declare interface CreateAcRulesRequest {
 
 declare interface CreateAcRulesResponse {
   /** 状态值，0:操作成功 */
-  Status?: number;
+  Status: number;
   /** 返回多余的信息 */
-  Info?: string | null;
+  Info: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -893,9 +893,9 @@ declare interface DescribeAssociatedInstanceListRequest {
 
 declare interface DescribeAssociatedInstanceListResponse {
   /** 实例数量 */
-  Total?: number | null;
+  Total: number | null;
   /** 实例列表 */
-  Data?: AssociatedInstanceInfo[] | null;
+  Data: AssociatedInstanceInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1165,15 +1165,15 @@ declare interface DescribeRuleOverviewRequest {
 
 declare interface DescribeRuleOverviewResponse {
   /** 规则总数 */
-  AllTotal?: number | null;
+  AllTotal: number | null;
   /** 阻断策略规则数量 */
-  StrategyNum?: number | null;
+  StrategyNum: number | null;
   /** 启用规则数量 */
-  StartRuleNum?: number | null;
+  StartRuleNum: number | null;
   /** 停用规则数量 */
-  StopRuleNum?: number | null;
+  StopRuleNum: number | null;
   /** 剩余配额 */
-  RemainingNum?: number | null;
+  RemainingNum: number | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1255,15 +1255,15 @@ declare interface DescribeSwitchListsRequest {
 
 declare interface DescribeSwitchListsResponse {
   /** 总条数 */
-  Total?: number;
+  Total: number;
   /** 列表数据 */
-  Data?: SwitchListsData[];
+  Data: SwitchListsData[];
   /** 区域列表 */
-  AreaLists?: string[];
+  AreaLists: string[];
   /** 打开个数 */
-  OnNum?: number | null;
+  OnNum: number | null;
   /** 关闭个数 */
-  OffNum?: number | null;
+  OffNum: number | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1319,7 +1319,7 @@ declare interface DescribeTableStatusRequest {
 
 declare interface DescribeTableStatusResponse {
   /** 0：正常，其它：不正常 */
-  Status?: number | null;
+  Status: number | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1371,9 +1371,9 @@ declare interface ModifyAcRuleRequest {
 
 declare interface ModifyAcRuleResponse {
   /** 状态值，0:操作成功，非0：操作失败 */
-  Status?: number;
+  Status: number;
   /** 返回多余的信息 */
-  Info?: string | null;
+  Info: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1635,7 +1635,7 @@ declare interface ModifySequenceRulesRequest {
 
 declare interface ModifySequenceRulesResponse {
   /** 0: 修改成功, 非0: 修改失败 */
-  Status?: number | null;
+  Status: number | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1653,7 +1653,7 @@ declare interface ModifyTableStatusRequest {
 
 declare interface ModifyTableStatusResponse {
   /** 0：正常，-1：不正常 */
-  Status?: number | null;
+  Status: number | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1743,7 +1743,7 @@ declare interface Cfw {
   AddAcRule(data: AddAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddAcRuleResponse>;
   /** 创建新企业安全组规则 */
   AddEnterpriseSecurityGroupRules(data: AddEnterpriseSecurityGroupRulesRequest, config?: AxiosRequestConfig): AxiosPromise<AddEnterpriseSecurityGroupRulesResponse>;
-  /** 创建规则 */
+  /** 创建访问控制规则 */
   CreateAcRules(data: CreateAcRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAcRulesResponse>;
   /** 创建、选择vpc */
   CreateChooseVpcs(data: CreateChooseVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChooseVpcsResponse>;

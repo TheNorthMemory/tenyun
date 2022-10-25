@@ -104,8 +104,12 @@ declare interface AliasDomain {
   ZoneId: string;
   /** 目标域名名称。 */
   TargetName: string;
-  /** 别称域名状态，取值有： active：已生效； pending：未生效； not_filed：未备案； conflict：被找回。 stop：已停用； deleted：已删除。 */
+  /** 别称域名状态，取值有： active：已生效； pending：部署中； conflict：被找回。 stop：已停用； deleted：已删除。 */
   Status: string;
+  /** 封禁模式，取值有： 0：未封禁； 11：合规封禁； 14：未备案封禁。 */
+  ForbidMode: number;
+  /** 目标域名是否被封禁。 */
+  TargetForbid: boolean;
   /** 别称域名创建时间。 */
   CreatedOn: string;
   /** 别称域名修改时间。 */
@@ -994,6 +998,8 @@ declare interface Https {
   Hsts?: Hsts | null;
   /** 证书配置。 */
   CertInfo?: ServerCertInfo[] | null;
+  /** 申请类型，取值有：apply：托管EdgeOne；none：不托管EdgeOne。不填，默认取值为none。 */
+  ApplyType?: string | null;
 }
 
 /** 站点验证信息 */
@@ -1732,6 +1738,8 @@ declare interface ServerCertInfo {
   DeployTime?: string | null;
   /** 签名算法。 */
   SignAlgo?: string | null;
+  /** 证书归属域名名称。 */
+  CommonName?: string | null;
 }
 
 /** DDoS防护分区 */
@@ -2753,9 +2761,9 @@ declare interface DescribeAliasDomainsRequest {
   ZoneId?: string;
   /** 分页查询偏移量。默认值：0。 */
   Offset?: number;
-  /** 分页查询限制数目。默认值：20，最大值：100。 */
+  /** 分页查询限制数目。默认值：20，最大值：1000。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：target-name 按照【目标域名名称】进行过滤。 类型：String 必选：否alias-id 按照【别称域名ID】进行过滤。 类型：String 必选：否alias-name 按照【别称域名名称】进行过滤。 类型：String 必选：否Fuzzy 按照【是否模糊查询】进行过滤。仅支持过滤字段名为alias-name。模糊查询时，Values长度最小为1。 类型：Boolean 必选：否 默认值：false */
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：target-name 按照【目标域名名称】进行过滤。 类型：String 必选：否alias-id 按照【别称域名ID】进行过滤。 类型：String 必选：否alias-name 按照【别称域名名称】进行过滤。 类型：String 必选：否模糊查询时仅支持过滤字段名为alias-name。 */
   Filters?: AdvancedFilter[];
 }
 
@@ -4109,7 +4117,7 @@ declare interface DescribeZonesRequest {
   Offset?: number;
   /** 分页查询限制数目。默认值：20，最大值：1000。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：zone-name 按照【站点名称】进行过滤。 类型：String 必选：否zone-id 按照【站点ID】进行过滤。站点ID形如：zone-xxx。 类型：String 必选：否status 按照【站点状态】进行过滤。 类型：String 必选：否tag-key 按照【标签键】进行过滤。 类型：String 必选：否tag-value 按照【标签值】进行过滤。 类型：String 必选：否Fuzzy 按照【是否模糊查询】进行过滤。仅支持过滤字段名为zone-name。模糊查询时，Values长度最小为1。 类型：Boolean 必选：否 默认值：false */
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：zone-name 按照【站点名称】进行过滤。 类型：String 必选：否zone-id 按照【站点ID】进行过滤。站点ID形如：zone-xxx。 类型：String 必选：否status 按照【站点状态】进行过滤。 类型：String 必选：否tag-key 按照【标签键】进行过滤。 类型：String 必选：否tag-value 按照【标签值】进行过滤。 类型：String 必选：否模糊查询时仅支持过滤字段名为zone-name。 */
   Filters?: AdvancedFilter[];
 }
 
