@@ -198,9 +198,9 @@ declare interface Msp {
   /** 获取指定迁移任务详情 */
   DescribeMigrationTask(data: DescribeMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationTaskResponse>;
   /** 获取迁移项目名称列表 */
-  ListMigrationProject(data: ListMigrationProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ListMigrationProjectResponse>;
+  ListMigrationProject(data?: ListMigrationProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ListMigrationProjectResponse>;
   /** 获取迁移任务列表 */
-  ListMigrationTask(data: ListMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ListMigrationTaskResponse>;
+  ListMigrationTask(data?: ListMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ListMigrationTaskResponse>;
   /** 更改迁移任务所属项目 */
   ModifyMigrationTaskBelongToProject(data: ModifyMigrationTaskBelongToProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrationTaskBelongToProjectResponse>;
   /** 更新迁移任务状态 */

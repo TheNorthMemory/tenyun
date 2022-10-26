@@ -616,7 +616,7 @@ declare interface Tdcpg {
   /** 查询集群可回档时间范围 */
   DescribeClusterRecoveryTimeRange(data: DescribeClusterRecoveryTimeRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterRecoveryTimeRangeResponse>;
   /** 查询集群 */
-  DescribeClusters(data: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
+  DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** 根据订单号获取资源信息 */
   DescribeResourcesByDealName(data: DescribeResourcesByDealNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesByDealNameResponse>;
   /** 隔离集群 */

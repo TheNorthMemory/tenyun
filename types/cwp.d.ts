@@ -5154,6 +5154,8 @@ declare interface DescribeMalwareTimingScanSettingResponse {
   KillProcess: number;
   /** 1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示） */
   EngineType: number;
+  /** 启发引擎 0 关闭 1开启 */
+  EnableInspiredEngine: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -6727,6 +6729,8 @@ declare interface ModifyMalwareTimingScanSettingsRequest {
   KillProcess?: number;
   /** 1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示） */
   EngineType?: number;
+  /** 启发引擎开关 0 关闭 1开启 */
+  EnableInspiredEngine?: number;
 }
 
 declare interface ModifyMalwareTimingScanSettingsResponse {
@@ -7080,7 +7084,7 @@ declare interface Cwp {
   /** 应急漏洞扫描 */
   CreateEmergencyVulScan(data: CreateEmergencyVulScanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmergencyVulScanResponse>;
   /** 创建授权订单 */
-  CreateLicenseOrder(data: CreateLicenseOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLicenseOrderResponse>;
+  CreateLicenseOrder(data?: CreateLicenseOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLicenseOrderResponse>;
   /** 添加网站防护服务器 */
   CreateProtectServer(data: CreateProtectServerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProtectServerResponse>;
   /** 文件查杀检测 */
@@ -7116,7 +7120,7 @@ declare interface Cwp {
   /** 删除木马记录 */
   DeleteMalwares(data: DeleteMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMalwaresResponse>;
   /** 删除异地登录记录 */
-  DeleteNonlocalLoginPlaces(data: DeleteNonlocalLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNonlocalLoginPlacesResponse>;
+  DeleteNonlocalLoginPlaces(data?: DeleteNonlocalLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNonlocalLoginPlacesResponse>;
   /** 删除本地提权事件 */
   DeletePrivilegeEvents(data: DeletePrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivilegeEventsResponse>;
   /** 删除本地提权规则 */
@@ -7136,41 +7140,41 @@ declare interface Cwp {
   /** 删除事件记录 */
   DeleteWebPageEventLog(data?: DeleteWebPageEventLogRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWebPageEventLogResponse>;
   /** 获取帐号统计列表数据 */
-  DescribeAccountStatistics(data: DescribeAccountStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountStatisticsResponse>;
+  DescribeAccountStatistics(data?: DescribeAccountStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountStatisticsResponse>;
   /** 查询应用列表 */
-  DescribeAssetAppList(data: DescribeAssetAppListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetAppListResponse>;
+  DescribeAssetAppList(data?: DescribeAssetAppListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetAppListResponse>;
   /** 获取软件关联进程列表 */
   DescribeAssetAppProcessList(data: DescribeAssetAppProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetAppProcessListResponse>;
   /** 获取内核模块详情 */
   DescribeAssetCoreModuleInfo(data: DescribeAssetCoreModuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetCoreModuleInfoResponse>;
   /** 查询资产管理内核模块列表 */
-  DescribeAssetCoreModuleList(data: DescribeAssetCoreModuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetCoreModuleListResponse>;
+  DescribeAssetCoreModuleList(data?: DescribeAssetCoreModuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetCoreModuleListResponse>;
   /** 获取资产管理数据库详情 */
   DescribeAssetDatabaseInfo(data: DescribeAssetDatabaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDatabaseInfoResponse>;
   /** 查询资产管理数据库列表 */
-  DescribeAssetDatabaseList(data: DescribeAssetDatabaseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDatabaseListResponse>;
+  DescribeAssetDatabaseList(data?: DescribeAssetDatabaseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDatabaseListResponse>;
   /** 查询资产管理环境变量列表 */
-  DescribeAssetEnvList(data: DescribeAssetEnvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetEnvListResponse>;
+  DescribeAssetEnvList(data?: DescribeAssetEnvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetEnvListResponse>;
   /** 获取主机所有资源数量 */
   DescribeAssetHostTotalCount(data: DescribeAssetHostTotalCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetHostTotalCountResponse>;
   /** 获取资产数量概况 */
   DescribeAssetInfo(data?: DescribeAssetInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetInfoResponse>;
   /** 查询资产管理启动服务列表 */
-  DescribeAssetInitServiceList(data: DescribeAssetInitServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetInitServiceListResponse>;
+  DescribeAssetInitServiceList(data?: DescribeAssetInitServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetInitServiceListResponse>;
   /** 获取Jar包详情 */
   DescribeAssetJarInfo(data: DescribeAssetJarInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetJarInfoResponse>;
   /** 查询Jar包列表 */
-  DescribeAssetJarList(data: DescribeAssetJarListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetJarListResponse>;
+  DescribeAssetJarList(data?: DescribeAssetJarListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetJarListResponse>;
   /** 获取资产管理主机资源详细信息 */
   DescribeAssetMachineDetail(data: DescribeAssetMachineDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetMachineDetailResponse>;
   /** 获取资源监控列表 */
-  DescribeAssetMachineList(data: DescribeAssetMachineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetMachineListResponse>;
+  DescribeAssetMachineList(data?: DescribeAssetMachineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetMachineListResponse>;
   /** 查询资产管理计划任务列表 */
-  DescribeAssetPlanTaskList(data: DescribeAssetPlanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetPlanTaskListResponse>;
+  DescribeAssetPlanTaskList(data?: DescribeAssetPlanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetPlanTaskListResponse>;
   /** 获取资产管理端口列表 */
-  DescribeAssetPortInfoList(data: DescribeAssetPortInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetPortInfoListResponse>;
+  DescribeAssetPortInfoList(data?: DescribeAssetPortInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetPortInfoListResponse>;
   /** 获取资产管理进程列表 */
-  DescribeAssetProcessInfoList(data: DescribeAssetProcessInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetProcessInfoListResponse>;
+  DescribeAssetProcessInfoList(data?: DescribeAssetProcessInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetProcessInfoListResponse>;
   /** 获取主机概况趋势 */
   DescribeAssetRecentMachineInfo(data: DescribeAssetRecentMachineInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetRecentMachineInfoResponse>;
   /** 获取资产管理系统安装包列表 */
@@ -7178,25 +7182,25 @@ declare interface Cwp {
   /** 获取主机账号详情 */
   DescribeAssetUserInfo(data: DescribeAssetUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetUserInfoResponse>;
   /** 获取账号列表 */
-  DescribeAssetUserList(data: DescribeAssetUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetUserListResponse>;
+  DescribeAssetUserList(data?: DescribeAssetUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetUserListResponse>;
   /** 获取资产管理Web应用列表 */
-  DescribeAssetWebAppList(data: DescribeAssetWebAppListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebAppListResponse>;
+  DescribeAssetWebAppList(data?: DescribeAssetWebAppListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebAppListResponse>;
   /** 获取资产管理Web应用插件列表 */
   DescribeAssetWebAppPluginList(data: DescribeAssetWebAppPluginListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebAppPluginListResponse>;
   /** 获取资产管理Web框架列表 */
-  DescribeAssetWebFrameList(data: DescribeAssetWebFrameListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebFrameListResponse>;
+  DescribeAssetWebFrameList(data?: DescribeAssetWebFrameListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebFrameListResponse>;
   /** 获取Web站点详情 */
   DescribeAssetWebLocationInfo(data: DescribeAssetWebLocationInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebLocationInfoResponse>;
   /** 获取Web站点列表 */
-  DescribeAssetWebLocationList(data: DescribeAssetWebLocationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebLocationListResponse>;
+  DescribeAssetWebLocationList(data?: DescribeAssetWebLocationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebLocationListResponse>;
   /** 查询资产管理Web服务列表 */
-  DescribeAssetWebServiceInfoList(data: DescribeAssetWebServiceInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebServiceInfoListResponse>;
+  DescribeAssetWebServiceInfoList(data?: DescribeAssetWebServiceInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebServiceInfoListResponse>;
   /** 获取Web服务关联进程列表 */
   DescribeAssetWebServiceProcessList(data: DescribeAssetWebServiceProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebServiceProcessListResponse>;
   /** 网络攻击日志详情 */
   DescribeAttackLogInfo(data: DescribeAttackLogInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogInfoResponse>;
   /** 网络攻击日志列表 */
-  DescribeAttackLogs(data: DescribeAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogsResponse>;
+  DescribeAttackLogs(data?: DescribeAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogsResponse>;
   /** 获取网络攻击威胁类型列表 */
   DescribeAttackVulTypeList(data?: DescribeAttackVulTypeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackVulTypeListResponse>;
   /** 可用订单详情 */
@@ -7208,27 +7212,27 @@ declare interface Cwp {
   /** 获取阻断按钮状态 */
   DescribeBanStatus(data?: DescribeBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBanStatusResponse>;
   /** 获取阻断白名单列表 */
-  DescribeBanWhiteList(data: DescribeBanWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBanWhiteListResponse>;
+  DescribeBanWhiteList(data?: DescribeBanWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBanWhiteListResponse>;
   /** 基线策略概览统计数据查询 */
   DescribeBaselineAnalysisData(data: DescribeBaselineAnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineAnalysisDataResponse>;
   /** 查询基线基础信息 */
-  DescribeBaselineBasicInfo(data: DescribeBaselineBasicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineBasicInfoResponse>;
+  DescribeBaselineBasicInfo(data?: DescribeBaselineBasicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineBasicInfoResponse>;
   /** 查询基线详情 */
   DescribeBaselineDetail(data: DescribeBaselineDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineDetailResponse>;
   /** 基线影响主机列表 */
   DescribeBaselineEffectHostList(data: DescribeBaselineEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineEffectHostListResponse>;
   /** 获取基线检测主机列表 */
-  DescribeBaselineHostDetectList(data: DescribeBaselineHostDetectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineHostDetectListResponse>;
+  DescribeBaselineHostDetectList(data?: DescribeBaselineHostDetectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineHostDetectListResponse>;
   /** 服务器风险top接口 */
   DescribeBaselineHostTop(data: DescribeBaselineHostTopRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineHostTopResponse>;
   /** 获取基线检测项的列表 */
-  DescribeBaselineItemDetectList(data: DescribeBaselineItemDetectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineItemDetectListResponse>;
+  DescribeBaselineItemDetectList(data?: DescribeBaselineItemDetectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineItemDetectListResponse>;
   /** 获取基线项检测结果列表 */
-  DescribeBaselineItemList(data: DescribeBaselineItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineItemListResponse>;
+  DescribeBaselineItemList(data?: DescribeBaselineItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineItemListResponse>;
   /** 查询基线列表 */
   DescribeBaselineList(data: DescribeBaselineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineListResponse>;
   /** 获取基线策略列表 */
-  DescribeBaselinePolicyList(data: DescribeBaselinePolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselinePolicyListResponse>;
+  DescribeBaselinePolicyList(data?: DescribeBaselinePolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselinePolicyListResponse>;
   /** 查询基线检测项信息 */
   DescribeBaselineRule(data: DescribeBaselineRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineRuleResponse>;
   /** 基线检测进度查询 */
@@ -7240,35 +7244,35 @@ declare interface Cwp {
   /** 基线检测项TOP */
   DescribeBaselineTop(data: DescribeBaselineTopRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineTopResponse>;
   /** 获取高危命令列表 */
-  DescribeBashEvents(data: DescribeBashEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashEventsResponse>;
+  DescribeBashEvents(data?: DescribeBashEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashEventsResponse>;
   /** 获取高危命令规则列表 */
   DescribeBashRules(data: DescribeBashRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashRulesResponse>;
   /** 获取密码破解列表 */
-  DescribeBruteAttackList(data: DescribeBruteAttackListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBruteAttackListResponse>;
+  DescribeBruteAttackList(data?: DescribeBruteAttackListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBruteAttackListResponse>;
   /** 获取爆破破解规则 */
   DescribeBruteAttackRules(data?: DescribeBruteAttackRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBruteAttackRulesResponse>;
   /** 获取组件统计列表 */
-  DescribeComponentStatistics(data: DescribeComponentStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComponentStatisticsResponse>;
+  DescribeComponentStatistics(data?: DescribeComponentStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComponentStatisticsResponse>;
   /** 获取ES字段聚合结果 */
   DescribeESAggregations(data: DescribeESAggregationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeESAggregationsResponse>;
   /** 应急响应列表 */
-  DescribeEmergencyResponseList(data: DescribeEmergencyResponseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmergencyResponseListResponse>;
+  DescribeEmergencyResponseList(data?: DescribeEmergencyResponseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmergencyResponseListResponse>;
   /** 应急漏洞列表 */
-  DescribeEmergencyVulList(data: DescribeEmergencyVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmergencyVulListResponse>;
+  DescribeEmergencyVulList(data?: DescribeEmergencyVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmergencyVulListResponse>;
   /** 安全管家列表 */
-  DescribeExpertServiceList(data: DescribeExpertServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExpertServiceListResponse>;
+  DescribeExpertServiceList(data?: DescribeExpertServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExpertServiceListResponse>;
   /** 专家服务订单列表 */
-  DescribeExpertServiceOrderList(data: DescribeExpertServiceOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExpertServiceOrderListResponse>;
+  DescribeExpertServiceOrderList(data?: DescribeExpertServiceOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExpertServiceOrderListResponse>;
   /** 导出区域主机列表 */
   DescribeExportMachines(data: DescribeExportMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportMachinesResponse>;
   /** 获取主机相关统计 */
-  DescribeGeneralStat(data: DescribeGeneralStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralStatResponse>;
+  DescribeGeneralStat(data?: DescribeGeneralStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralStatResponse>;
   /** 获取帐号变更历史列表 */
   DescribeHistoryAccounts(data: DescribeHistoryAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHistoryAccountsResponse>;
   /** 查询日志检索服务信息 */
   DescribeHistoryService(data?: DescribeHistoryServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHistoryServiceResponse>;
   /** 获取登录审计列表 */
-  DescribeHostLoginList(data: DescribeHostLoginListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostLoginListResponse>;
+  DescribeHostLoginList(data?: DescribeHostLoginListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostLoginListResponse>;
   /** 查询忽略检测项信息 */
   DescribeIgnoreBaselineRule(data: DescribeIgnoreBaselineRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIgnoreBaselineRuleResponse>;
   /** 查询忽略检测项影响主机列表 */
@@ -7278,7 +7282,7 @@ declare interface Cwp {
   /** 获取索引列表 */
   DescribeIndexList(data?: DescribeIndexListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexListResponse>;
   /** 查询java内存马事件列表 */
-  DescribeJavaMemShellList(data: DescribeJavaMemShellListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJavaMemShellListResponse>;
+  DescribeJavaMemShellList(data?: DescribeJavaMemShellListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJavaMemShellListResponse>;
   /** 查看授权绑定列表 */
   DescribeLicenseBindList(data: DescribeLicenseBindListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseBindListResponse>;
   /** 查询授权绑定进度 */
@@ -7286,15 +7290,15 @@ declare interface Cwp {
   /** 授权概览信息 */
   DescribeLicenseGeneral(data?: DescribeLicenseGeneralRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseGeneralResponse>;
   /** 获取授权订单列表 */
-  DescribeLicenseList(data: DescribeLicenseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseListResponse>;
+  DescribeLicenseList(data?: DescribeLicenseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseListResponse>;
   /** 获取日志检索容量使用统计 */
   DescribeLogStorageStatistic(data?: DescribeLogStorageStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageStatisticResponse>;
   /** 获取异地登录白名单合并后列表 */
-  DescribeLoginWhiteCombinedList(data: DescribeLoginWhiteCombinedListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginWhiteCombinedListResponse>;
+  DescribeLoginWhiteCombinedList(data?: DescribeLoginWhiteCombinedListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginWhiteCombinedListResponse>;
   /** 获取异地登录白名单列表 */
-  DescribeLoginWhiteList(data: DescribeLoginWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginWhiteListResponse>;
+  DescribeLoginWhiteList(data?: DescribeLoginWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginWhiteListResponse>;
   /** 获取机器详情 */
-  DescribeMachineInfo(data: DescribeMachineInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineInfoResponse>;
+  DescribeMachineInfo(data?: DescribeMachineInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineInfoResponse>;
   /** 网页防篡改获取区域主机列表 */
   DescribeMachineList(data: DescribeMachineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineListResponse>;
   /** 查询机器操作系统列表 */
@@ -7304,7 +7308,7 @@ declare interface Cwp {
   /** 获取区域主机列表 */
   DescribeMachines(data: DescribeMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachinesResponse>;
   /** 获取木马列表 */
-  DescribeMalWareList(data: DescribeMalWareListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalWareListResponse>;
+  DescribeMalWareList(data?: DescribeMalWareListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalWareListResponse>;
   /** 查询恶意请求白名单列表 */
   DescribeMaliciousRequestWhiteList(data: DescribeMaliciousRequestWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaliciousRequestWhiteListResponse>;
   /** 获取木马文件下载地址 */
@@ -7318,33 +7322,33 @@ declare interface Cwp {
   /** 安全管家月巡检报告下载 */
   DescribeMonthInspectionReport(data: DescribeMonthInspectionReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonthInspectionReportResponse>;
   /** 获取端口统计列表 */
-  DescribeOpenPortStatistics(data: DescribeOpenPortStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOpenPortStatisticsResponse>;
+  DescribeOpenPortStatistics(data?: DescribeOpenPortStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOpenPortStatisticsResponse>;
   /** 获取概览统计数据 */
   DescribeOverviewStatistics(data?: DescribeOverviewStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewStatisticsResponse>;
   /** 获取本地提权事件列表 */
-  DescribePrivilegeEvents(data: DescribePrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivilegeEventsResponse>;
+  DescribePrivilegeEvents(data?: DescribePrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivilegeEventsResponse>;
   /** 获取本地提权规则列表 */
-  DescribePrivilegeRules(data: DescribePrivilegeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivilegeRulesResponse>;
+  DescribePrivilegeRules(data?: DescribePrivilegeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivilegeRulesResponse>;
   /** 获取专业版概览信息 */
   DescribeProVersionInfo(data?: DescribeProVersionInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProVersionInfoResponse>;
   /** 获取专业版状态 */
   DescribeProVersionStatus(data: DescribeProVersionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProVersionStatusResponse>;
   /** 获取进程统计列表 */
-  DescribeProcessStatistics(data: DescribeProcessStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcessStatisticsResponse>;
+  DescribeProcessStatistics(data?: DescribeProcessStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcessStatisticsResponse>;
   /** 防护目录列表 */
   DescribeProtectDirList(data: DescribeProtectDirListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectDirListResponse>;
   /** 查询防护目录关联服务器 */
   DescribeProtectDirRelatedServer(data: DescribeProtectDirRelatedServerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectDirRelatedServerResponse>;
   /** 旗舰重保列表 */
-  DescribeProtectNetList(data: DescribeProtectNetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectNetListResponse>;
+  DescribeProtectNetList(data?: DescribeProtectNetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectNetListResponse>;
   /** 获取反弹Shell列表 */
-  DescribeReverseShellEvents(data: DescribeReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsResponse>;
+  DescribeReverseShellEvents(data?: DescribeReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsResponse>;
   /** 获取反弹Shell规则列表 */
-  DescribeReverseShellRules(data: DescribeReverseShellRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellRulesResponse>;
+  DescribeReverseShellRules(data?: DescribeReverseShellRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellRulesResponse>;
   /** 获取恶意请求列表 */
-  DescribeRiskDnsList(data: DescribeRiskDnsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskDnsListResponse>;
+  DescribeRiskDnsList(data?: DescribeRiskDnsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskDnsListResponse>;
   /** 更新用户告警设置 */
-  DescribeSaveOrUpdateWarnings(data: DescribeSaveOrUpdateWarningsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSaveOrUpdateWarningsResponse>;
+  DescribeSaveOrUpdateWarnings(data?: DescribeSaveOrUpdateWarningsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSaveOrUpdateWarningsResponse>;
   /** 查询木马扫描进度 */
   DescribeScanMalwareSchedule(data?: DescribeScanMalwareScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanMalwareScheduleResponse>;
   /** 查询检测进度 */
@@ -7362,11 +7366,11 @@ declare interface Cwp {
   /** 获取历史搜索记录 */
   DescribeSearchLogs(data?: DescribeSearchLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchLogsResponse>;
   /** 获取快速检索列表 */
-  DescribeSearchTemplates(data: DescribeSearchTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchTemplatesResponse>;
+  DescribeSearchTemplates(data?: DescribeSearchTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchTemplatesResponse>;
   /** 获取安全事件动态消息 */
-  DescribeSecurityDynamics(data: DescribeSecurityDynamicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityDynamicsResponse>;
+  DescribeSecurityDynamics(data?: DescribeSecurityDynamicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityDynamicsResponse>;
   /** 获取安全事件统计 */
-  DescribeSecurityEventStat(data: DescribeSecurityEventStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityEventStatResponse>;
+  DescribeSecurityEventStat(data?: DescribeSecurityEventStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityEventStatResponse>;
   /** 获取安全事件数统计数据 */
   DescribeSecurityEventsCnt(data?: DescribeSecurityEventsCntRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityEventsCntResponse>;
   /** 获取安全事件统计数据 */
@@ -7380,15 +7384,15 @@ declare interface Cwp {
   /** 获取指定标签关联的服务器信息 */
   DescribeTagMachines(data: DescribeTagMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagMachinesResponse>;
   /** 获取所有主机标签 */
-  DescribeTags(data: DescribeTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagsResponse>;
+  DescribeTags(data?: DescribeTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagsResponse>;
   /** 获取指定漏洞分类统计数 */
-  DescribeUndoVulCounts(data: DescribeUndoVulCountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUndoVulCountsResponse>;
+  DescribeUndoVulCounts(data?: DescribeUndoVulCountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUndoVulCountsResponse>;
   /** 查询常用登录地 */
   DescribeUsualLoginPlaces(data: DescribeUsualLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsualLoginPlacesResponse>;
   /** 获取专业版和基础版机器数 */
   DescribeVersionStatistics(data?: DescribeVersionStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVersionStatisticsResponse>;
   /** 获取近日指定类型的漏洞数量和主机数量 */
-  DescribeVulCountByDates(data: DescribeVulCountByDatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulCountByDatesResponse>;
+  DescribeVulCountByDates(data?: DescribeVulCountByDatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulCountByDatesResponse>;
   /** 漏洞影响主机列表 */
   DescribeVulEffectHostList(data: DescribeVulEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulEffectHostListResponse>;
   /** 获取待处理漏洞数+影响主机数 */
@@ -7398,15 +7402,15 @@ declare interface Cwp {
   /** 漏洞详情 */
   DescribeVulInfoCvss(data: DescribeVulInfoCvssRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulInfoCvssResponse>;
   /** 查询漏洞数量等级分布统计 */
-  DescribeVulLevelCount(data: DescribeVulLevelCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulLevelCountResponse>;
+  DescribeVulLevelCount(data?: DescribeVulLevelCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulLevelCountResponse>;
   /** 漏洞列表 */
-  DescribeVulList(data: DescribeVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulListResponse>;
+  DescribeVulList(data?: DescribeVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulListResponse>;
   /** 获取漏洞top统计 */
   DescribeVulTop(data: DescribeVulTopRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulTopResponse>;
   /** 获取当前用户告警列表 */
   DescribeWarningList(data?: DescribeWarningListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWarningListResponse>;
   /** 查询篡改事件列表 */
-  DescribeWebPageEventList(data: DescribeWebPageEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebPageEventListResponse>;
+  DescribeWebPageEventList(data?: DescribeWebPageEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebPageEventListResponse>;
   /** 查询网页防篡改概览信息 */
   DescribeWebPageGeneralize(data?: DescribeWebPageGeneralizeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebPageGeneralizeResponse>;
   /** 查询网页防篡改防护统计 */
@@ -7416,41 +7420,41 @@ declare interface Cwp {
   /** 销毁订单 */
   DestroyOrder(data: DestroyOrderRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyOrderResponse>;
   /** 新增或修改高危命令规则（支持多服务器选择） */
-  EditBashRules(data: EditBashRulesRequest, config?: AxiosRequestConfig): AxiosPromise<EditBashRulesResponse>;
+  EditBashRules(data?: EditBashRulesRequest, config?: AxiosRequestConfig): AxiosPromise<EditBashRulesResponse>;
   /** 新增或编辑标签 */
   EditTags(data: EditTagsRequest, config?: AxiosRequestConfig): AxiosPromise<EditTagsResponse>;
   /** 导出资产管理内核模块列表 */
-  ExportAssetCoreModuleList(data: ExportAssetCoreModuleListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAssetCoreModuleListResponse>;
+  ExportAssetCoreModuleList(data?: ExportAssetCoreModuleListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAssetCoreModuleListResponse>;
   /** 导出资产管理Web服务列表 */
-  ExportAssetWebServiceInfoList(data: ExportAssetWebServiceInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAssetWebServiceInfoListResponse>;
+  ExportAssetWebServiceInfoList(data?: ExportAssetWebServiceInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAssetWebServiceInfoListResponse>;
   /** 导出网络攻击日志 */
-  ExportAttackLogs(data: ExportAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAttackLogsResponse>;
+  ExportAttackLogs(data?: ExportAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAttackLogsResponse>;
   /** 基线影响主机列表导出 */
   ExportBaselineEffectHostList(data: ExportBaselineEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBaselineEffectHostListResponse>;
   /** 导出基线列表 */
-  ExportBaselineList(data: ExportBaselineListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBaselineListResponse>;
+  ExportBaselineList(data?: ExportBaselineListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBaselineListResponse>;
   /** 导出高危命令事件 */
-  ExportBashEvents(data: ExportBashEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBashEventsResponse>;
+  ExportBashEvents(data?: ExportBashEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBashEventsResponse>;
   /** 导出密码破解记录 */
-  ExportBruteAttacks(data: ExportBruteAttacksRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBruteAttacksResponse>;
+  ExportBruteAttacks(data?: ExportBruteAttacksRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBruteAttacksResponse>;
   /** 已忽略基线检测项导出 */
-  ExportIgnoreBaselineRule(data: ExportIgnoreBaselineRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ExportIgnoreBaselineRuleResponse>;
+  ExportIgnoreBaselineRule(data?: ExportIgnoreBaselineRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ExportIgnoreBaselineRuleResponse>;
   /** 忽略检测项影响主机列表导出 */
   ExportIgnoreRuleEffectHostList(data: ExportIgnoreRuleEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportIgnoreRuleEffectHostListResponse>;
   /** 导出授权详情 */
-  ExportLicenseDetail(data: ExportLicenseDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ExportLicenseDetailResponse>;
+  ExportLicenseDetail(data?: ExportLicenseDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ExportLicenseDetailResponse>;
   /** 导出下载恶意请求文件 */
-  ExportMaliciousRequests(data: ExportMaliciousRequestsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportMaliciousRequestsResponse>;
+  ExportMaliciousRequests(data?: ExportMaliciousRequestsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportMaliciousRequestsResponse>;
   /** 导出木马记录 */
-  ExportMalwares(data: ExportMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<ExportMalwaresResponse>;
+  ExportMalwares(data?: ExportMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<ExportMalwaresResponse>;
   /** 导出异地登录记录 */
-  ExportNonlocalLoginPlaces(data: ExportNonlocalLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<ExportNonlocalLoginPlacesResponse>;
+  ExportNonlocalLoginPlaces(data?: ExportNonlocalLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<ExportNonlocalLoginPlacesResponse>;
   /** 导出本地提权事件 */
-  ExportPrivilegeEvents(data: ExportPrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportPrivilegeEventsResponse>;
+  ExportPrivilegeEvents(data?: ExportPrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportPrivilegeEventsResponse>;
   /** 导出防护目录列表 */
-  ExportProtectDirList(data: ExportProtectDirListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportProtectDirListResponse>;
+  ExportProtectDirList(data?: ExportProtectDirListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportProtectDirListResponse>;
   /** 导出反弹Shell事件 */
-  ExportReverseShellEvents(data: ExportReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportReverseShellEventsResponse>;
+  ExportReverseShellEvents(data?: ExportReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportReverseShellEventsResponse>;
   /** 导出扫描任务详情 */
   ExportScanTaskDetails(data: ExportScanTaskDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportScanTaskDetailsResponse>;
   /** 导出风险趋势 */
@@ -7464,9 +7468,9 @@ declare interface Cwp {
   /** 导出漏洞影响主机列表 */
   ExportVulEffectHostList(data: ExportVulEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVulEffectHostListResponse>;
   /** 漏洞管理-导出漏洞列表 */
-  ExportVulList(data: ExportVulListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVulListResponse>;
+  ExportVulList(data?: ExportVulListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVulListResponse>;
   /** 导出篡改事件列表 */
-  ExportWebPageEventList(data: ExportWebPageEventListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportWebPageEventListResponse>;
+  ExportWebPageEventList(data?: ExportWebPageEventListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportWebPageEventListResponse>;
   /** 忽略漏洞 */
   IgnoreImpactedHosts(data: IgnoreImpactedHostsRequest, config?: AxiosRequestConfig): AxiosPromise<IgnoreImpactedHostsResponse>;
   /** 设置自动开通配置 */
@@ -7498,7 +7502,7 @@ declare interface Cwp {
   /** 恢复木马文件 */
   RecoverMalwares(data: RecoverMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverMalwaresResponse>;
   /** 资产指纹启动扫描 */
-  ScanAsset(data: ScanAssetRequest, config?: AxiosRequestConfig): AxiosPromise<ScanAssetResponse>;
+  ScanAsset(data?: ScanAssetRequest, config?: AxiosRequestConfig): AxiosPromise<ScanAssetResponse>;
   /** 一键检测 */
   ScanVul(data: ScanVulRequest, config?: AxiosRequestConfig): AxiosPromise<ScanVulResponse>;
   /** 漏洞管理-重新检测接口 */

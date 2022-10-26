@@ -3488,7 +3488,7 @@ declare interface Iotcloud {
   /** 查询产品绑定的CA证书 */
   DescribeProductCA(data: DescribeProductCARequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductCAResponse>;
   /** 查询产品资源详情 */
-  DescribeProductResource(data: DescribeProductResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductResourceResponse>;
+  DescribeProductResource(data?: DescribeProductResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductResourceResponse>;
   /** 获取产品资源列表 */
   DescribeProductResources(data: DescribeProductResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductResourcesResponse>;
   /** 查看产品任务详情 */

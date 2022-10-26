@@ -278,11 +278,11 @@ declare interface Bsca {
   /** 查询知识库组件漏洞 */
   DescribeKBComponentVulnerability(data: DescribeKBComponentVulnerabilityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBComponentVulnerabilityResponse>;
   /** 查询知识库许可证信息 */
-  DescribeKBLicense(data: DescribeKBLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBLicenseResponse>;
+  DescribeKBLicense(data?: DescribeKBLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBLicenseResponse>;
   /** 查询知识库漏洞详情列表 */
-  DescribeKBVulnerability(data: DescribeKBVulnerabilityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBVulnerabilityResponse>;
+  DescribeKBVulnerability(data?: DescribeKBVulnerabilityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBVulnerabilityResponse>;
   /** 匹配知识库组件列表 */
-  MatchKBPURLList(data: MatchKBPURLListRequest, config?: AxiosRequestConfig): AxiosPromise<MatchKBPURLListResponse>;
+  MatchKBPURLList(data?: MatchKBPURLListRequest, config?: AxiosRequestConfig): AxiosPromise<MatchKBPURLListResponse>;
 }
 
 export declare type Versions = ["2021-08-11"];

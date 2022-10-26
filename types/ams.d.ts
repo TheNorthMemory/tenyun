@@ -954,7 +954,7 @@ declare interface Ams {
   /** 查看任务详情 */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
   /** 查看审核任务列表 */
-  DescribeTasks(data: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
+  DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
   /** 取消任务 */
   CancelTask(data: V20200608.CancelTaskRequest, config: AxiosRequestConfig & V20200608.VersionHeader): AxiosPromise<V20200608.CancelTaskResponse>;
   /** 创建音频审核任务 */

@@ -2397,7 +2397,7 @@ declare interface Yunjing {
   /** 增加机器关联标签 */
   AddMachineTag(data: AddMachineTagRequest, config?: AxiosRequestConfig): AxiosPromise<AddMachineTagResponse>;
   /** 关闭专业版 */
-  CloseProVersion(data: CloseProVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CloseProVersionResponse>;
+  CloseProVersion(data?: CloseProVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CloseProVersionResponse>;
   /** 创建基线策略 */
   CreateBaselineStrategy(data: CreateBaselineStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBaselineStrategyResponse>;
   /** 创建实时获取端口任务 */
@@ -2439,9 +2439,9 @@ declare interface Yunjing {
   /** 删除常用登录地 */
   DeleteUsualLoginPlaces(data: DeleteUsualLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsualLoginPlacesResponse>;
   /** 获取帐号统计列表数据 */
-  DescribeAccountStatistics(data: DescribeAccountStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountStatisticsResponse>;
+  DescribeAccountStatistics(data?: DescribeAccountStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountStatisticsResponse>;
   /** 获取帐号列表 */
-  DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
+  DescribeAccounts(data?: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
   /** 获取单台主机的漏洞列表 */
   DescribeAgentVuls(data: DescribeAgentVulsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentVulsResponse>;
   /** 获取告警设置 */
@@ -2449,67 +2449,67 @@ declare interface Yunjing {
   /** 网络攻击日志详情 */
   DescribeAttackLogInfo(data: DescribeAttackLogInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogInfoResponse>;
   /** 网络攻击日志列表 */
-  DescribeAttackLogs(data: DescribeAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogsResponse>;
+  DescribeAttackLogs(data?: DescribeAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogsResponse>;
   /** 获取高危命令列表 */
-  DescribeBashEvents(data: DescribeBashEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashEventsResponse>;
+  DescribeBashEvents(data?: DescribeBashEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashEventsResponse>;
   /** 获取高危命令规则列表 */
   DescribeBashRules(data: DescribeBashRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashRulesResponse>;
   /** 获取云镜破解事件列表 */
-  DescribeBruteAttacks(data: DescribeBruteAttacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBruteAttacksResponse>;
+  DescribeBruteAttacks(data?: DescribeBruteAttacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBruteAttacksResponse>;
   /** 获取组件信息 */
   DescribeComponentInfo(data: DescribeComponentInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComponentInfoResponse>;
   /** 获取组件统计列表 */
-  DescribeComponentStatistics(data: DescribeComponentStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComponentStatisticsResponse>;
+  DescribeComponentStatistics(data?: DescribeComponentStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComponentStatisticsResponse>;
   /** 获取组件列表 */
-  DescribeComponents(data: DescribeComponentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComponentsResponse>;
+  DescribeComponents(data?: DescribeComponentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComponentsResponse>;
   /** 获取帐号变更历史列表 */
   DescribeHistoryAccounts(data: DescribeHistoryAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHistoryAccountsResponse>;
   /** 获取漏洞受影响机器列表 */
   DescribeImpactedHosts(data: DescribeImpactedHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImpactedHostsResponse>;
   /** 获取异地登录白名单列表 */
-  DescribeLoginWhiteList(data: DescribeLoginWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginWhiteListResponse>;
+  DescribeLoginWhiteList(data?: DescribeLoginWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginWhiteListResponse>;
   /** 获取机器详情 */
-  DescribeMachineInfo(data: DescribeMachineInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineInfoResponse>;
+  DescribeMachineInfo(data?: DescribeMachineInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineInfoResponse>;
   /** 获取区域主机列表 */
   DescribeMachines(data: DescribeMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachinesResponse>;
   /** 获取恶意请求数据 */
-  DescribeMaliciousRequests(data: DescribeMaliciousRequestsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaliciousRequestsResponse>;
+  DescribeMaliciousRequests(data?: DescribeMaliciousRequestsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaliciousRequestsResponse>;
   /** 获取木马信息 */
-  DescribeMalwares(data: DescribeMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalwaresResponse>;
+  DescribeMalwares(data?: DescribeMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalwaresResponse>;
   /** 获取异地登录事件 */
-  DescribeNonlocalLoginPlaces(data: DescribeNonlocalLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNonlocalLoginPlacesResponse>;
+  DescribeNonlocalLoginPlaces(data?: DescribeNonlocalLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNonlocalLoginPlacesResponse>;
   /** 获取端口统计列表 */
-  DescribeOpenPortStatistics(data: DescribeOpenPortStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOpenPortStatisticsResponse>;
+  DescribeOpenPortStatistics(data?: DescribeOpenPortStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOpenPortStatisticsResponse>;
   /** 获取实时拉取端口任务状态 */
   DescribeOpenPortTaskStatus(data: DescribeOpenPortTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOpenPortTaskStatusResponse>;
   /** 获取端口列表 */
-  DescribeOpenPorts(data: DescribeOpenPortsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOpenPortsResponse>;
+  DescribeOpenPorts(data?: DescribeOpenPortsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOpenPortsResponse>;
   /** 获取概览统计数据 */
   DescribeOverviewStatistics(data?: DescribeOverviewStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewStatisticsResponse>;
   /** 获取本地提权事件列表 */
-  DescribePrivilegeEvents(data: DescribePrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivilegeEventsResponse>;
+  DescribePrivilegeEvents(data?: DescribePrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivilegeEventsResponse>;
   /** 获取本地提权规则列表 */
-  DescribePrivilegeRules(data: DescribePrivilegeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivilegeRulesResponse>;
+  DescribePrivilegeRules(data?: DescribePrivilegeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivilegeRulesResponse>;
   /** 获取专业版信息 */
   DescribeProVersionInfo(data?: DescribeProVersionInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProVersionInfoResponse>;
   /** 获取进程统计列表 */
-  DescribeProcessStatistics(data: DescribeProcessStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcessStatisticsResponse>;
+  DescribeProcessStatistics(data?: DescribeProcessStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcessStatisticsResponse>;
   /** 获取实时拉取进程任务状态 */
   DescribeProcessTaskStatus(data: DescribeProcessTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcessTaskStatusResponse>;
   /** 获取进程列表 */
-  DescribeProcesses(data: DescribeProcessesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcessesResponse>;
+  DescribeProcesses(data?: DescribeProcessesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcessesResponse>;
   /** 获取反弹Shell列表 */
-  DescribeReverseShellEvents(data: DescribeReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsResponse>;
+  DescribeReverseShellEvents(data?: DescribeReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsResponse>;
   /** 获取反弹Shell规则列表 */
-  DescribeReverseShellRules(data: DescribeReverseShellRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellRulesResponse>;
+  DescribeReverseShellRules(data?: DescribeReverseShellRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellRulesResponse>;
   /** 获取安全事件消息 */
-  DescribeSecurityDynamics(data: DescribeSecurityDynamicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityDynamicsResponse>;
+  DescribeSecurityDynamics(data?: DescribeSecurityDynamicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityDynamicsResponse>;
   /** 获取安全事件统计数据 */
   DescribeSecurityTrends(data: DescribeSecurityTrendsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityTrendsResponse>;
   /** 获取指定标签关联的服务器信息 */
   DescribeTagMachines(data: DescribeTagMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagMachinesResponse>;
   /** 获取所有主机标签 */
-  DescribeTags(data: DescribeTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagsResponse>;
+  DescribeTags(data?: DescribeTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagsResponse>;
   /** 查询常用登录地 */
   DescribeUsualLoginPlaces(data: DescribeUsualLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsualLoginPlacesResponse>;
   /** 获取漏洞详情 */
@@ -2529,13 +2529,13 @@ declare interface Yunjing {
   /** 获取专业版周报漏洞数据 */
   DescribeWeeklyReportVuls(data: DescribeWeeklyReportVulsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWeeklyReportVulsResponse>;
   /** 获取周报列表 */
-  DescribeWeeklyReports(data: DescribeWeeklyReportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWeeklyReportsResponse>;
+  DescribeWeeklyReports(data?: DescribeWeeklyReportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWeeklyReportsResponse>;
   /** 新增或修改高危命令规则 */
   EditBashRule(data: EditBashRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EditBashRuleResponse>;
   /** 新增或修改本地提权规则 */
-  EditPrivilegeRule(data: EditPrivilegeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EditPrivilegeRuleResponse>;
+  EditPrivilegeRule(data?: EditPrivilegeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EditPrivilegeRuleResponse>;
   /** 编辑反弹Shell规则 */
-  EditReverseShellRule(data: EditReverseShellRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EditReverseShellRuleResponse>;
+  EditReverseShellRule(data?: EditReverseShellRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EditReverseShellRuleResponse>;
   /** 新增或编辑标签 */
   EditTags(data: EditTagsRequest, config?: AxiosRequestConfig): AxiosPromise<EditTagsResponse>;
   /** 导出网络攻击日志 */

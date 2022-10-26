@@ -1086,9 +1086,9 @@ declare interface Ssl {
   /** 获取证书详情 */
   DescribeCertificateDetail(data: DescribeCertificateDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateDetailResponse>;
   /** 获取证书操作日志 */
-  DescribeCertificateOperateLogs(data: DescribeCertificateOperateLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateOperateLogsResponse>;
+  DescribeCertificateOperateLogs(data?: DescribeCertificateOperateLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateOperateLogsResponse>;
   /** 获取证书列表 */
-  DescribeCertificates(data: DescribeCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificatesResponse>;
+  DescribeCertificates(data?: DescribeCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificatesResponse>;
   /** 证书查询关联资源 */
   DescribeDeployedResources(data: DescribeDeployedResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployedResourcesResponse>;
   /** 查询管理人详情 */
@@ -1096,7 +1096,7 @@ declare interface Ssl {
   /** 查询管理人列表 */
   DescribeManagers(data: DescribeManagersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeManagersResponse>;
   /** 获得权益包列表 */
-  DescribePackages(data: DescribePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackagesResponse>;
+  DescribePackages(data?: DescribePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackagesResponse>;
   /** 下载证书 */
   DownloadCertificate(data: DownloadCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadCertificateResponse>;
   /** 云资源托管 */

@@ -1626,7 +1626,7 @@ declare interface Mongodb {
   /** 获取数据库实例订单详情 */
   DescribeDBInstanceDeal(data: DescribeDBInstanceDealRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceDealResponse>;
   /** 查询云数据库实例列表 */
-  DescribeDBInstances(data: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
+  DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
   /** 获取当前实例可修改的参数列表 */
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
   /** 查询实例绑定的安全组 */
@@ -1636,7 +1636,7 @@ declare interface Mongodb {
   /** 获取慢日志信息 */
   DescribeSlowLogs(data: DescribeSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogsResponse>;
   /** 查询云数据库的售卖规格 */
-  DescribeSpecInfo(data: DescribeSpecInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecInfoResponse>;
+  DescribeSpecInfo(data?: DescribeSpecInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecInfoResponse>;
   /** 刷新路由配置 */
   FlushInstanceRouterConfig(data: FlushInstanceRouterConfigRequest, config?: AxiosRequestConfig): AxiosPromise<FlushInstanceRouterConfigResponse>;
   /** 创建实例询价 */

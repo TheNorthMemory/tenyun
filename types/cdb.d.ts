@@ -4144,9 +4144,9 @@ declare interface Cdb {
   /** 查询审计日志文件 */
   DescribeAuditLogFiles(data: DescribeAuditLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogFilesResponse>;
   /** 查询审计策略 */
-  DescribeAuditPolicies(data: DescribeAuditPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditPoliciesResponse>;
+  DescribeAuditPolicies(data?: DescribeAuditPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditPoliciesResponse>;
   /** 查询审计规则 */
-  DescribeAuditRules(data: DescribeAuditRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditRulesResponse>;
+  DescribeAuditRules(data?: DescribeAuditRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditRulesResponse>;
   /** 查询云数据库备份配置信息 */
   DescribeBackupConfig(data: DescribeBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupConfigResponse>;
   /** 查询备份数据库列表 */
@@ -4184,7 +4184,7 @@ declare interface Cdb {
   /** 查询云数据库实例的预期重启时间 */
   DescribeDBInstanceRebootTime(data: DescribeDBInstanceRebootTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceRebootTimeResponse>;
   /** 查询实例列表 */
-  DescribeDBInstances(data: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
+  DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
   /** 查询数据库价格 */
   DescribeDBPrice(data: DescribeDBPriceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBPriceResponse>;
   /** 查询实例安全组信息 */
@@ -4198,7 +4198,7 @@ declare interface Cdb {
   /** 查询默认的可设置参数列表 */
   DescribeDefaultParams(data: DescribeDefaultParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultParamsResponse>;
   /** 查询置放群组列表 */
-  DescribeDeployGroupList(data: DescribeDeployGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployGroupListResponse>;
+  DescribeDeployGroupList(data?: DescribeDeployGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployGroupListResponse>;
   /** 物理机监控信息 */
   DescribeDeviceMonitorInfo(data: DescribeDeviceMonitorInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceMonitorInfoResponse>;
   /** 查询实例错误日志详情 */
@@ -4212,9 +4212,9 @@ declare interface Cdb {
   /** 查询参数模板详情 */
   DescribeParamTemplateInfo(data: DescribeParamTemplateInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplateInfoResponse>;
   /** 查询参数模板列表 */
-  DescribeParamTemplates(data: DescribeParamTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplatesResponse>;
+  DescribeParamTemplates(data?: DescribeParamTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplatesResponse>;
   /** 查询项目安全组信息 */
-  DescribeProjectSecurityGroups(data: DescribeProjectSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupsResponse>;
+  DescribeProjectSecurityGroups(data?: DescribeProjectSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupsResponse>;
   /** 查询代理连接池规格配置 */
   DescribeProxyConnectionPoolConf(data: DescribeProxyConnectionPoolConfRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyConnectionPoolConfResponse>;
   /** 查询代理规格配置 */
@@ -4222,7 +4222,7 @@ declare interface Cdb {
   /** 查询云数据库实例的所有RO组的信息 */
   DescribeRoGroups(data: DescribeRoGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoGroupsResponse>;
   /** 获取只读实例购买或升级的最小规格 */
-  DescribeRoMinScale(data: DescribeRoMinScaleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoMinScaleResponse>;
+  DescribeRoMinScale(data?: DescribeRoMinScaleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoMinScaleResponse>;
   /** 查询可回档时间 */
   DescribeRollbackRangeTime(data: DescribeRollbackRangeTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackRangeTimeResponse>;
   /** 查询回档任务详情 */
@@ -4238,7 +4238,7 @@ declare interface Cdb {
   /** 获取实例绑定的标签 */
   DescribeTagsOfInstanceIds(data: DescribeTagsOfInstanceIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagsOfInstanceIdsResponse>;
   /** 查询云数据库实例任务列表 */
-  DescribeTasks(data: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
+  DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
   /** 查询维护时间窗口 */
   DescribeTimeWindow(data: DescribeTimeWindowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimeWindowResponse>;
   /** 查询导入SQL文件列表 （已废弃） */

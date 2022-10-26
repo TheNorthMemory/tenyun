@@ -100,7 +100,7 @@ declare interface DescribeInstancesResponse {
 declare interface Memcached {
   (): Versions;
   /** 获取Cmem实例列表 */
-  DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
 }
 
 export declare type Versions = ["2019-03-18"];

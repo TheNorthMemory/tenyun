@@ -6552,7 +6552,7 @@ declare interface Tsf {
   /** 查询API分组 */
   DescribeApiGroup(data: DescribeApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiGroupResponse>;
   /** 查询API 分组信息列表 */
-  DescribeApiGroups(data: DescribeApiGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiGroupsResponse>;
+  DescribeApiGroups(data?: DescribeApiGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiGroupsResponse>;
   /** 查询API限流规则 */
   DescribeApiRateLimitRules(data: DescribeApiRateLimitRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiRateLimitRulesResponse>;
   /** 查询网关API监控明细数据 */
@@ -6566,25 +6566,25 @@ declare interface Tsf {
   /** 查询应用关联日志配置项信息 */
   DescribeApplicationBusinessLogConfig(data: DescribeApplicationBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationBusinessLogConfigResponse>;
   /** 获取应用列表 */
-  DescribeApplications(data: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
+  DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
   /** TSF基本资源信息概览 */
-  DescribeBasicResourceUsage(data: DescribeBasicResourceUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicResourceUsageResponse>;
+  DescribeBasicResourceUsage(data?: DescribeBasicResourceUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicResourceUsageResponse>;
   /** 查询业务日志配置项信息 */
   DescribeBusinessLogConfig(data: DescribeBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBusinessLogConfigResponse>;
   /** 查询日志配置项列表 */
-  DescribeBusinessLogConfigs(data: DescribeBusinessLogConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBusinessLogConfigsResponse>;
+  DescribeBusinessLogConfigs(data?: DescribeBusinessLogConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBusinessLogConfigsResponse>;
   /** 查询集群实例 */
   DescribeClusterInstances(data: DescribeClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstancesResponse>;
   /** 查询配置 */
   DescribeConfig(data: DescribeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigResponse>;
   /** 查询配置发布历史 */
-  DescribeConfigReleaseLogs(data: DescribeConfigReleaseLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigReleaseLogsResponse>;
+  DescribeConfigReleaseLogs(data?: DescribeConfigReleaseLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigReleaseLogsResponse>;
   /** 查询配置发布信息 */
-  DescribeConfigReleases(data: DescribeConfigReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigReleasesResponse>;
+  DescribeConfigReleases(data?: DescribeConfigReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigReleasesResponse>;
   /** 查询配置汇总列表 */
-  DescribeConfigSummary(data: DescribeConfigSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigSummaryResponse>;
+  DescribeConfigSummary(data?: DescribeConfigSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigSummaryResponse>;
   /** 查询配置项列表 */
-  DescribeConfigs(data: DescribeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigsResponse>;
+  DescribeConfigs(data?: DescribeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigsResponse>;
   /** 获取容器事件列表 */
   DescribeContainerEvents(data: DescribeContainerEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerEventsResponse>;
   /** 获取部署组详情 */
@@ -6592,21 +6592,21 @@ declare interface Tsf {
   /** 查询容器部署组详情 */
   DescribeContainerGroupDetail(data: DescribeContainerGroupDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerGroupDetailResponse>;
   /** 容器部署组列表 */
-  DescribeContainerGroups(data: DescribeContainerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerGroupsResponse>;
+  DescribeContainerGroups(data?: DescribeContainerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerGroupsResponse>;
   /** 查询一键导入API分组任务的状态 */
-  DescribeCreateGatewayApiStatus(data: DescribeCreateGatewayApiStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCreateGatewayApiStatusResponse>;
+  DescribeCreateGatewayApiStatus(data?: DescribeCreateGatewayApiStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCreateGatewayApiStatusResponse>;
   /** 获取单个投递项配置 */
   DescribeDeliveryConfig(data: DescribeDeliveryConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliveryConfigResponse>;
   /** 用部署组id获取绑定信息 */
   DescribeDeliveryConfigByGroupId(data: DescribeDeliveryConfigByGroupIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliveryConfigByGroupIdResponse>;
   /** 获取多个投递项配置 */
-  DescribeDeliveryConfigs(data: DescribeDeliveryConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliveryConfigsResponse>;
+  DescribeDeliveryConfigs(data?: DescribeDeliveryConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliveryConfigsResponse>;
   /** 获取下载程序包信息 */
   DescribeDownloadInfo(data: DescribeDownloadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDownloadInfoResponse>;
   /** 查询生效的单元化规则 */
   DescribeEnabledUnitRule(data: DescribeEnabledUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnabledUnitRuleResponse>;
   /** 查询文件配置项列表 */
-  DescribeFileConfigs(data: DescribeFileConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileConfigsResponse>;
+  DescribeFileConfigs(data?: DescribeFileConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileConfigsResponse>;
   /** 查询工作流最近一个批次的执行状态 */
   DescribeFlowLastBatchState(data: DescribeFlowLastBatchStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowLastBatchStateResponse>;
   /** 查询网关所有分组下Api列表 */
@@ -6632,31 +6632,31 @@ declare interface Tsf {
   /** 查询网关分组监控明细数据 */
   DescribeGroupUseDetail(data: DescribeGroupUseDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupUseDetailResponse>;
   /** 获取虚拟机部署组列表 */
-  DescribeGroups(data: DescribeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsResponse>;
+  DescribeGroups(data?: DescribeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsResponse>;
   /** 查询某个插件下绑定或未绑定的API分组 */
   DescribeGroupsWithPlugin(data: DescribeGroupsWithPluginRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsWithPluginResponse>;
   /** 镜像仓库列表 */
-  DescribeImageRepository(data: DescribeImageRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRepositoryResponse>;
+  DescribeImageRepository(data?: DescribeImageRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRepositoryResponse>;
   /** 镜像版本列表 */
   DescribeImageTags(data: DescribeImageTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageTagsResponse>;
   /** 查询调用监控指标 */
   DescribeInovcationIndicators(data: DescribeInovcationIndicatorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInovcationIndicatorsResponse>;
   /** 查询机器列表 */
-  DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 查询调用指标数据变化曲线 */
-  DescribeInvocationMetricDataCurve(data: DescribeInvocationMetricDataCurveRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationMetricDataCurveResponse>;
+  DescribeInvocationMetricDataCurve(data?: DescribeInvocationMetricDataCurveRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationMetricDataCurveResponse>;
   /** 查询维度 */
   DescribeInvocationMetricDataDimension(data: DescribeInvocationMetricDataDimensionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationMetricDataDimensionResponse>;
   /** 查询单值指标维度 */
   DescribeInvocationMetricDataPoint(data: DescribeInvocationMetricDataPointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationMetricDataPointResponse>;
   /** 查询调用指标数据散点图 */
-  DescribeInvocationMetricScatterPlot(data: DescribeInvocationMetricScatterPlotRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationMetricScatterPlotResponse>;
+  DescribeInvocationMetricScatterPlot(data?: DescribeInvocationMetricScatterPlotRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationMetricScatterPlotResponse>;
   /** 查询java实例jvm监控数据 */
   DescribeJvmMonitor(data: DescribeJvmMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJvmMonitorResponse>;
   /** 查询泳道规则列表 */
   DescribeLaneRules(data: DescribeLaneRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaneRulesResponse>;
   /** 查询泳道列表 */
-  DescribeLanes(data: DescribeLanesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLanesResponse>;
+  DescribeLanes(data?: DescribeLanesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLanesResponse>;
   /** 查询微服务详情 */
   DescribeMicroservice(data: DescribeMicroserviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMicroserviceResponse>;
   /** 获取微服务列表 */
@@ -6664,7 +6664,7 @@ declare interface Tsf {
   /** 查询服务API列表 */
   DescribeMsApiList(data: DescribeMsApiListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMsApiListResponse>;
   /** 服务调用监控统计概览 */
-  DescribeOverviewInvocation(data: DescribeOverviewInvocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewInvocationResponse>;
+  DescribeOverviewInvocation(data?: DescribeOverviewInvocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewInvocationResponse>;
   /** 查询路径重写 */
   DescribePathRewrite(data: DescribePathRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePathRewriteResponse>;
   /** 查询路径重写列表 */
@@ -6676,31 +6676,31 @@ declare interface Tsf {
   /** 获取部署组实例列表 */
   DescribePodInstances(data: DescribePodInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePodInstancesResponse>;
   /** 查询数据集列表 */
-  DescribePrograms(data: DescribeProgramsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProgramsResponse>;
+  DescribePrograms(data?: DescribeProgramsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProgramsResponse>;
   /** 查询公共配置（单条） */
   DescribePublicConfig(data: DescribePublicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigResponse>;
   /** 查询公共配置发布历史 */
-  DescribePublicConfigReleaseLogs(data: DescribePublicConfigReleaseLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigReleaseLogsResponse>;
+  DescribePublicConfigReleaseLogs(data?: DescribePublicConfigReleaseLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigReleaseLogsResponse>;
   /** 查询公共配置发布信息 */
-  DescribePublicConfigReleases(data: DescribePublicConfigReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigReleasesResponse>;
+  DescribePublicConfigReleases(data?: DescribePublicConfigReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigReleasesResponse>;
   /** 查询公共配置汇总列表 */
-  DescribePublicConfigSummary(data: DescribePublicConfigSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigSummaryResponse>;
+  DescribePublicConfigSummary(data?: DescribePublicConfigSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigSummaryResponse>;
   /** 查询公共配置项列表 */
-  DescribePublicConfigs(data: DescribePublicConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigsResponse>;
+  DescribePublicConfigs(data?: DescribePublicConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigsResponse>;
   /** 查询group发布的配置 */
   DescribeReleasedConfig(data: DescribeReleasedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleasedConfigResponse>;
   /** 查询仓库列表 */
-  DescribeRepositories(data: DescribeRepositoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoriesResponse>;
+  DescribeRepositories(data?: DescribeRepositoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoriesResponse>;
   /** 查询仓库信息 */
   DescribeRepository(data: DescribeRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryResponse>;
   /** 查询简单应用列表 */
-  DescribeSimpleApplications(data: DescribeSimpleApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleApplicationsResponse>;
+  DescribeSimpleApplications(data?: DescribeSimpleApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleApplicationsResponse>;
   /** 查询简单集群列表 */
-  DescribeSimpleClusters(data: DescribeSimpleClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleClustersResponse>;
+  DescribeSimpleClusters(data?: DescribeSimpleClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleClustersResponse>;
   /** 查询简单部署组列表 */
-  DescribeSimpleGroups(data: DescribeSimpleGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleGroupsResponse>;
+  DescribeSimpleGroups(data?: DescribeSimpleGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleGroupsResponse>;
   /** 查询简单命名空间列表 */
-  DescribeSimpleNamespaces(data: DescribeSimpleNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleNamespacesResponse>;
+  DescribeSimpleNamespaces(data?: DescribeSimpleNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleNamespacesResponse>;
   /** 服务统计 */
   DescribeStatistics(data: DescribeStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStatisticsResponse>;
   /** 查询任务详情 */
@@ -6708,7 +6708,7 @@ declare interface Tsf {
   /** 查看任务最近执行批次状态 */
   DescribeTaskLastStatus(data: DescribeTaskLastStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLastStatusResponse>;
   /** 查询任务列表 */
-  DescribeTaskRecords(data: DescribeTaskRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskRecordsResponse>;
+  DescribeTaskRecords(data?: DescribeTaskRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskRecordsResponse>;
   /** 查询单元化网关API监控明细数据 */
   DescribeUnitApiUseDetail(data: DescribeUnitApiUseDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnitApiUseDetailResponse>;
   /** 查询单元化命名空间列表 */
@@ -6720,7 +6720,7 @@ declare interface Tsf {
   /** 获取上传程序包信息 */
   DescribeUploadInfo(data: DescribeUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUploadInfoResponse>;
   /** 查询可用于被导入的命名空间列表 */
-  DescribeUsableUnitNamespaces(data: DescribeUsableUnitNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsableUnitNamespacesResponse>;
+  DescribeUsableUnitNamespaces(data?: DescribeUsableUnitNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsableUnitNamespacesResponse>;
   /** 停用任务 */
   DisableTask(data: DisableTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DisableTaskResponse>;
   /** 停用工作流 */
@@ -6746,11 +6746,11 @@ declare interface Tsf {
   /** 手动执行一次任务。 */
   ExecuteTask(data: ExecuteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskResponse>;
   /** 执行一次工作流 */
-  ExecuteTaskFlow(data: ExecuteTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskFlowResponse>;
+  ExecuteTaskFlow(data?: ExecuteTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskFlowResponse>;
   /** 虚拟机部署组添加实例 */
   ExpandGroup(data: ExpandGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ExpandGroupResponse>;
   /** 修改容器部署组 */
-  ModifyContainerGroup(data: ModifyContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContainerGroupResponse>;
+  ModifyContainerGroup(data?: ModifyContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContainerGroupResponse>;
   /** 修改容器部署组实例数 */
   ModifyContainerReplicas(data: ModifyContainerReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContainerReplicasResponse>;
   /** 更新泳道信息 */
@@ -6766,7 +6766,7 @@ declare interface Tsf {
   /** 更新上传程序包信息 */
   ModifyUploadInfo(data: ModifyUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUploadInfoResponse>;
   /** 绑定解绑tcr仓库 */
-  OperateApplicationTcrBinding(data: OperateApplicationTcrBindingRequest, config?: AxiosRequestConfig): AxiosPromise<OperateApplicationTcrBindingResponse>;
+  OperateApplicationTcrBinding(data?: OperateApplicationTcrBindingRequest, config?: AxiosRequestConfig): AxiosPromise<OperateApplicationTcrBindingResponse>;
   /** 重关联业务日志配置 */
   ReassociateBusinessLogConfig(data: ReassociateBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ReassociateBusinessLogConfigResponse>;
   /** 重新执行任务 */
@@ -6796,7 +6796,7 @@ declare interface Tsf {
   /** 业务日志搜索 */
   SearchBusinessLog(data: SearchBusinessLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchBusinessLogResponse>;
   /** 标准输出日志搜索 */
-  SearchStdoutLog(data: SearchStdoutLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchStdoutLogResponse>;
+  SearchStdoutLog(data?: SearchStdoutLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchStdoutLogResponse>;
   /** 缩容虚拟机部署组 */
   ShrinkGroup(data: ShrinkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ShrinkGroupResponse>;
   /** 虚拟机部署组下线实例 */

@@ -64,7 +64,7 @@ declare interface RecognizeProductResponse {
 declare interface Iir {
   (): Versions;
   /** 商品识别 */
-  RecognizeProduct(data: RecognizeProductRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeProductResponse>;
+  RecognizeProduct(data?: RecognizeProductRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeProductResponse>;
 }
 
 export declare type Versions = ["2020-04-17"];

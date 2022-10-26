@@ -604,7 +604,7 @@ declare namespace V20200713 {
 declare interface Ims {
   (): Versions;
   /** 图片内容检测 */
-  ImageModeration(data: ImageModerationRequest, config?: AxiosRequestConfig): AxiosPromise<ImageModerationResponse>;
+  ImageModeration(data?: ImageModerationRequest, config?: AxiosRequestConfig): AxiosPromise<ImageModerationResponse>;
   /** 识别统计 */
   DescribeImageStat(data: V20200713.DescribeImageStatRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.DescribeImageStatResponse>;
   /** 获取图片审核明细数据 */

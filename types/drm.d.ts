@@ -264,11 +264,11 @@ declare interface Drm {
   /** 生成DRM的播放许可证 */
   CreateLicense(data: CreateLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLicenseResponse>;
   /** 删除Fairplay方案的私钥、ask */
-  DeleteFairPlayPem(data: DeleteFairPlayPemRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFairPlayPemResponse>;
+  DeleteFairPlayPem(data?: DeleteFairPlayPemRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFairPlayPemResponse>;
   /** 查询所有加密密钥列表 */
   DescribeAllKeys(data: DescribeAllKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllKeysResponse>;
   /** 查询所设置的FairPlay私钥 */
-  DescribeFairPlayPem(data: DescribeFairPlayPemRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFairPlayPemResponse>;
+  DescribeFairPlayPem(data?: DescribeFairPlayPemRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFairPlayPemResponse>;
   /** 查询加密密钥列表 */
   DescribeKeys(data: DescribeKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeysResponse>;
   /** 设置fairplay方案所需私钥 */

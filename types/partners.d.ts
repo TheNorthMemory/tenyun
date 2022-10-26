@@ -754,13 +754,13 @@ declare interface Partners {
   /** 合作伙伴为客户创建强代付关系 */
   CreatePayRelationForClient(data: CreatePayRelationForClientRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePayRelationForClientResponse>;
   /** 查询已审核客户列表 */
-  DescribeAgentAuditedClients(data: DescribeAgentAuditedClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentAuditedClientsResponse>;
+  DescribeAgentAuditedClients(data?: DescribeAgentAuditedClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentAuditedClientsResponse>;
   /** 查询业务明细 */
   DescribeAgentBills(data: DescribeAgentBillsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentBillsResponse>;
   /** 查询客户级别 */
   DescribeAgentClientGrade(data: DescribeAgentClientGradeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentClientGradeResponse>;
   /** 查询待审核客户列表 */
-  DescribeAgentClients(data: DescribeAgentClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentClientsResponse>;
+  DescribeAgentClients(data?: DescribeAgentClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentClientsResponse>;
   /** 代理商缓存订单查询接口 */
   DescribeAgentDealsByCache(data: DescribeAgentDealsByCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsByCacheResponse>;
   /** 代理商缓存订单查询接口（旧） */
@@ -778,7 +778,7 @@ declare interface Partners {
   /** 查询客户余额（新） */
   DescribeClientBalanceNew(data: DescribeClientBalanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientBalanceNewResponse>;
   /** 查询代理商返佣信息 */
-  DescribeRebateInfos(data: DescribeRebateInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebateInfosResponse>;
+  DescribeRebateInfos(data?: DescribeRebateInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebateInfosResponse>;
   /** 代理商业务员查询接口 */
   DescribeSalesmans(data: DescribeSalesmansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSalesmansResponse>;
   /** 代理商名下客户解绑记录查询接口 */

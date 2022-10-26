@@ -196,9 +196,9 @@ declare interface QueryAntiFraudVipResponse {
 declare interface Afc {
   (): Versions;
   /** 反欺诈VIP评分接口 */
-  GetAntiFraudVip(data: GetAntiFraudVipRequest, config?: AxiosRequestConfig): AxiosPromise<GetAntiFraudVipResponse>;
+  GetAntiFraudVip(data?: GetAntiFraudVipRequest, config?: AxiosRequestConfig): AxiosPromise<GetAntiFraudVipResponse>;
   /** 定制建模 */
-  QueryAntiFraudVip(data: QueryAntiFraudVipRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAntiFraudVipResponse>;
+  QueryAntiFraudVip(data?: QueryAntiFraudVipRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAntiFraudVipResponse>;
 }
 
 export declare type Versions = ["2020-02-26"];

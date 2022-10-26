@@ -1798,7 +1798,7 @@ declare interface Pts {
   /** 查询压测过程日志 */
   DescribeNormalLogs(data: DescribeNormalLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNormalLogsResponse>;
   /** 查询项目列表 */
-  DescribeProjects(data: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
+  DescribeProjects(data?: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
   /** 查询地域列表 */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
   /** 查询请求汇总信息 */
@@ -1814,9 +1814,9 @@ declare interface Pts {
   /** 查询指标 */
   DescribeSampleQuery(data: DescribeSampleQueryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleQueryResponse>;
   /** 查询场景及对应的任务 */
-  DescribeScenarioWithJobs(data: DescribeScenarioWithJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScenarioWithJobsResponse>;
+  DescribeScenarioWithJobs(data?: DescribeScenarioWithJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScenarioWithJobsResponse>;
   /** 查询场景列表 */
-  DescribeScenarios(data: DescribeScenariosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScenariosResponse>;
+  DescribeScenarios(data?: DescribeScenariosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScenariosResponse>;
   /** 生成临时COS凭证 */
   GenerateTmpKey(data: GenerateTmpKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateTmpKeyResponse>;
   /** 重启定时任务 */

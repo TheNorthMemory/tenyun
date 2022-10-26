@@ -2262,7 +2262,7 @@ declare interface Cme {
   /** 获取媒体详情 */
   DescribeMaterials(data: DescribeMaterialsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaterialsResponse>;
   /** 获取平台列表 */
-  DescribePlatforms(data: DescribePlatformsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlatformsResponse>;
+  DescribePlatforms(data?: DescribePlatformsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlatformsResponse>;
   /** 获取项目列表 */
   DescribeProjects(data: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
   /** 获取资源授权列表 */

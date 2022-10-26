@@ -546,7 +546,7 @@ declare interface Solar {
   /** 项目列表展示 */
   DescribeProjects(data: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
   /** 素材查询服务号模板标题的列表 */
-  DescribeResourceTemplateHeaders(data: DescribeResourceTemplateHeadersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTemplateHeadersResponse>;
+  DescribeResourceTemplateHeaders(data?: DescribeResourceTemplateHeadersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTemplateHeadersResponse>;
   /** 子项目详情 */
   DescribeSubProject(data: DescribeSubProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubProjectResponse>;
   /** 工单失效接口 */

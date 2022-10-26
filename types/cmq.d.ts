@@ -502,11 +502,11 @@ declare interface Cmq {
   /** 枚举死信队列源队列 */
   DescribeDeadLetterSourceQueues(data: DescribeDeadLetterSourceQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeadLetterSourceQueuesResponse>;
   /** 枚举队列 */
-  DescribeQueueDetail(data: DescribeQueueDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQueueDetailResponse>;
+  DescribeQueueDetail(data?: DescribeQueueDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQueueDetailResponse>;
   /** 查询订阅详情 */
   DescribeSubscriptionDetail(data: DescribeSubscriptionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscriptionDetailResponse>;
   /** 查询主题详情 */
-  DescribeTopicDetail(data: DescribeTopicDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicDetailResponse>;
+  DescribeTopicDetail(data?: DescribeTopicDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicDetailResponse>;
   /** 修改队列属性 */
   ModifyQueueAttribute(data: ModifyQueueAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQueueAttributeResponse>;
   /** 修改订阅属性 */

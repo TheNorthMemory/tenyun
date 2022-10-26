@@ -882,7 +882,7 @@ declare interface Kms {
   /** 展示白盒密钥的信息 */
   DescribeWhiteBoxKey(data: DescribeWhiteBoxKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteBoxKeyResponse>;
   /** 获取白盒密钥列表 */
-  DescribeWhiteBoxKeyDetails(data: DescribeWhiteBoxKeyDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteBoxKeyDetailsResponse>;
+  DescribeWhiteBoxKeyDetails(data?: DescribeWhiteBoxKeyDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteBoxKeyDetailsResponse>;
   /** 获取白盒密钥服务状态 */
   DescribeWhiteBoxServiceStatus(data?: DescribeWhiteBoxServiceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteBoxServiceStatusResponse>;
   /** 禁用主密钥 */
@@ -928,9 +928,9 @@ declare interface Kms {
   /** 列出当前Region支持的加密方式 */
   ListAlgorithms(data?: ListAlgorithmsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAlgorithmsResponse>;
   /** 获取主密钥列表详情 */
-  ListKeyDetail(data: ListKeyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListKeyDetailResponse>;
+  ListKeyDetail(data?: ListKeyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListKeyDetailResponse>;
   /** 获取主密钥列表 */
-  ListKeys(data: ListKeysRequest, config?: AxiosRequestConfig): AxiosPromise<ListKeysResponse>;
+  ListKeys(data?: ListKeysRequest, config?: AxiosRequestConfig): AxiosPromise<ListKeysResponse>;
   /** 覆盖指定密钥的设备指纹信息 */
   OverwriteWhiteBoxDeviceFingerprints(data: OverwriteWhiteBoxDeviceFingerprintsRequest, config?: AxiosRequestConfig): AxiosPromise<OverwriteWhiteBoxDeviceFingerprintsResponse>;
   /** 密文刷新 */

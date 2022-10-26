@@ -1774,7 +1774,7 @@ declare interface Dcdb {
   /** 获取实例节点信息 */
   DescribeDCDBInstanceNodeInfo(data: DescribeDCDBInstanceNodeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDCDBInstanceNodeInfoResponse>;
   /** 查询实例列表 */
-  DescribeDCDBInstances(data: DescribeDCDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDCDBInstancesResponse>;
+  DescribeDCDBInstances(data?: DescribeDCDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDCDBInstancesResponse>;
   /** 新购分布式数据库实例询价 */
   DescribeDCDBPrice(data: DescribeDCDBPriceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDCDBPriceResponse>;
   /** 续费实例询价 */
@@ -1808,7 +1808,7 @@ declare interface Dcdb {
   /** 获取SQL日志 */
   DescribeSqlLogs(data: DescribeSqlLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSqlLogsResponse>;
   /** 拉取用户任务列表 */
-  DescribeUserTasks(data: DescribeUserTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserTasksResponse>;
+  DescribeUserTasks(data?: DescribeUserTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserTasksResponse>;
   /** 销毁已隔离的包年包月实例 */
   DestroyDCDBInstance(data: DestroyDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyDCDBInstanceResponse>;
   /** 销毁按量计费实例 */

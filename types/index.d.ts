@@ -691,7 +691,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   iotvideoindustry: Iotvideoindustry,
   /** [智能推荐平台](https://cloud.tencent.com/document/product/1541) */
   irp: Irp,
-  /** [视频智能标签](https://cloud.tencent.com/document/product/1509) */
+  /** [媒体智能标签](https://cloud.tencent.com/document/product/1509) */
   ivld: Ivld,
   /** [密钥管理系统](https://cloud.tencent.com/document/product/573) */
   kms: Kms,

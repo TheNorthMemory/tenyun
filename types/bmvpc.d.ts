@@ -1542,15 +1542,15 @@ declare interface Bmvpc {
   /** 注销私有网络IP */
   DeregisterIps(data: DeregisterIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterIpsResponse>;
   /** 查询对端网关 */
-  DescribeCustomerGateways(data: DescribeCustomerGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomerGatewaysResponse>;
+  DescribeCustomerGateways(data?: DescribeCustomerGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomerGatewaysResponse>;
   /** 获取NAT网关列表 */
-  DescribeNatGateways(data: DescribeNatGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewaysResponse>;
+  DescribeNatGateways(data?: DescribeNatGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewaysResponse>;
   /** 获取NAT关联的子网信息 */
   DescribeNatSubnets(data: DescribeNatSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatSubnetsResponse>;
   /** 查询黑石路由表条目 */
   DescribeRoutePolicies(data: DescribeRoutePoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoutePoliciesResponse>;
   /** 查询路由表 */
-  DescribeRouteTables(data: DescribeRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTablesResponse>;
+  DescribeRouteTables(data?: DescribeRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTablesResponse>;
   /** 获取子网内可用IP列表 */
   DescribeSubnetAvailableIps(data: DescribeSubnetAvailableIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetAvailableIpsResponse>;
   /** 查询物理机加入的子网列表 */
@@ -1558,23 +1558,23 @@ declare interface Bmvpc {
   /** 查询托管机器加入的子网列表 */
   DescribeSubnetByHostedDevice(data: DescribeSubnetByHostedDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetByHostedDeviceResponse>;
   /** 查询子网列表 */
-  DescribeSubnets(data: DescribeSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetsResponse>;
+  DescribeSubnets(data?: DescribeSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetsResponse>;
   /** 获取任务状态 */
   DescribeTaskStatus(data: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
   /** 获取对等连接列表 */
-  DescribeVpcPeerConnections(data: DescribeVpcPeerConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcPeerConnectionsResponse>;
+  DescribeVpcPeerConnections(data?: DescribeVpcPeerConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcPeerConnectionsResponse>;
   /** 获取黑石私有网络的配额 */
   DescribeVpcQuota(data: DescribeVpcQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcQuotaResponse>;
   /** 查询黑石私有网络关联资源 */
-  DescribeVpcResource(data: DescribeVpcResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcResourceResponse>;
+  DescribeVpcResource(data?: DescribeVpcResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcResourceResponse>;
   /** 查询黑石VPC视图 */
   DescribeVpcView(data: DescribeVpcViewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcViewResponse>;
   /** 查询VPC列表 */
-  DescribeVpcs(data: DescribeVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcsResponse>;
+  DescribeVpcs(data?: DescribeVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcsResponse>;
   /** 查询VPN通道列表 */
-  DescribeVpnConnections(data: DescribeVpnConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnConnectionsResponse>;
+  DescribeVpnConnections(data?: DescribeVpnConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnConnectionsResponse>;
   /** 查询VPN网关 */
-  DescribeVpnGateways(data: DescribeVpnGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewaysResponse>;
+  DescribeVpnGateways(data?: DescribeVpnGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewaysResponse>;
   /** 下载VPN通道配置 */
   DownloadCustomerGatewayConfiguration(data: DownloadCustomerGatewayConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadCustomerGatewayConfigurationResponse>;
   /** 修改对端网关 */

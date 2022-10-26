@@ -160,7 +160,7 @@ declare interface Cds {
   /** 获取产品规格信息列表 */
   DescribeDbauditInstanceType(data?: DescribeDbauditInstanceTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbauditInstanceTypeResponse>;
   /** 获取数据安全审计实例列表 */
-  DescribeDbauditInstances(data: DescribeDbauditInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbauditInstancesResponse>;
+  DescribeDbauditInstances(data?: DescribeDbauditInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbauditInstancesResponse>;
   /** 查询可售卖地域列表 */
   DescribeDbauditUsedRegions(data?: DescribeDbauditUsedRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbauditUsedRegionsResponse>;
   /** 数据安全审计产品实例询价 */

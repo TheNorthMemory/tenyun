@@ -1880,7 +1880,7 @@ declare interface Bmlb {
   /** 查询负载均衡实例异步任务的执行情况 */
   DescribeLoadBalancerTaskResult(data: DescribeLoadBalancerTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerTaskResultResponse>;
   /** 获取黑石负载均衡实例列表 */
-  DescribeLoadBalancers(data: DescribeLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersResponse>;
+  DescribeLoadBalancers(data?: DescribeLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersResponse>;
   /** 获取流量镜像的监听器列表信息 */
   DescribeTrafficMirrorListeners(data: DescribeTrafficMirrorListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficMirrorListenersResponse>;
   /** 获取流量镜像接收机健康状态 */
@@ -1888,7 +1888,7 @@ declare interface Bmlb {
   /** 获取指定流量镜像实例的接收机信息 */
   DescribeTrafficMirrorReceivers(data: DescribeTrafficMirrorReceiversRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficMirrorReceiversResponse>;
   /** 获取流量镜像实例的列表信息 */
-  DescribeTrafficMirrors(data: DescribeTrafficMirrorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficMirrorsResponse>;
+  DescribeTrafficMirrors(data?: DescribeTrafficMirrorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficMirrorsResponse>;
   /** 修改黑石负载均衡四层监听器后端实例端口 */
   ModifyL4BackendPort(data: ModifyL4BackendPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4BackendPortResponse>;
   /** 修改黑石负载均衡四层监听器后端探测端口 */

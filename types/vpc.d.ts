@@ -6472,9 +6472,9 @@ declare interface Vpc {
   /** 增加模板对象成员 */
   AddTemplateMember(data: AddTemplateMemberRequest, config?: AxiosRequestConfig): AxiosPromise<AddTemplateMemberResponse>;
   /** 更换公网IP */
-  AdjustPublicAddress(data: AdjustPublicAddressRequest, config?: AxiosRequestConfig): AxiosPromise<AdjustPublicAddressResponse>;
+  AdjustPublicAddress(data?: AdjustPublicAddressRequest, config?: AxiosRequestConfig): AxiosPromise<AdjustPublicAddressResponse>;
   /** 创建弹性公网IP */
-  AllocateAddresses(data: AllocateAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateAddressesResponse>;
+  AllocateAddresses(data?: AllocateAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateAddressesResponse>;
   /** IPv6地址分配公网带宽 */
   AllocateIp6AddressesBandwidth(data: AllocateIp6AddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateIp6AddressesBandwidthResponse>;
   /** 分配IPv6地址 */
@@ -6508,7 +6508,7 @@ declare interface Vpc {
   /** 检查辅助CIDR冲突 */
   CheckAssistantCidr(data: CheckAssistantCidrRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAssistantCidrResponse>;
   /** 预判是否可建默认子网 */
-  CheckDefaultSubnet(data: CheckDefaultSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDefaultSubnetResponse>;
+  CheckDefaultSubnet(data?: CheckDefaultSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDefaultSubnetResponse>;
   /** 验证网络探测 */
   CheckNetDetectState(data: CheckNetDetectStateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckNetDetectStateResponse>;
   /** 克隆安全组 */
@@ -6522,15 +6522,15 @@ declare interface Vpc {
   /** 创建辅助CIDR */
   CreateAssistantCidr(data: CreateAssistantCidrRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssistantCidrResponse>;
   /** 创建共享带宽包 */
-  CreateBandwidthPackage(data: CreateBandwidthPackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBandwidthPackageResponse>;
+  CreateBandwidthPackage(data?: CreateBandwidthPackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBandwidthPackageResponse>;
   /** 创建CCN */
   CreateCcn(data: CreateCcnRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCcnResponse>;
   /** 创建对端网关 */
   CreateCustomerGateway(data: CreateCustomerGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomerGatewayResponse>;
   /** 创建默认安全组 */
-  CreateDefaultSecurityGroup(data: CreateDefaultSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDefaultSecurityGroupResponse>;
+  CreateDefaultSecurityGroup(data?: CreateDefaultSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDefaultSecurityGroupResponse>;
   /** 创建默认VPC和默认子网 */
-  CreateDefaultVpc(data: CreateDefaultVpcRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDefaultVpcResponse>;
+  CreateDefaultVpc(data?: CreateDefaultVpcRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDefaultVpcResponse>;
   /** 创建DhcpIp */
   CreateDhcpIp(data: CreateDhcpIpRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDhcpIpResponse>;
   /** 创建专线网关 */
@@ -6542,7 +6542,7 @@ declare interface Vpc {
   /** 创建HAVIP */
   CreateHaVip(data: CreateHaVipRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHaVipResponse>;
   /** 创建IPV6转换IPV4实例 */
-  CreateIp6Translators(data: CreateIp6TranslatorsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIp6TranslatorsResponse>;
+  CreateIp6Translators(data?: CreateIp6TranslatorsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIp6TranslatorsResponse>;
   /** 创建本地网关 */
   CreateLocalGateway(data: CreateLocalGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLocalGatewayResponse>;
   /** 创建NAT网关 */
@@ -6674,13 +6674,13 @@ declare interface Vpc {
   /** 查询弹性公网IP配额 */
   DescribeAddressQuota(data?: DescribeAddressQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressQuotaResponse>;
   /** 查询IP地址模板集合 */
-  DescribeAddressTemplateGroups(data: DescribeAddressTemplateGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressTemplateGroupsResponse>;
+  DescribeAddressTemplateGroups(data?: DescribeAddressTemplateGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressTemplateGroupsResponse>;
   /** 查询IP地址模板 */
-  DescribeAddressTemplates(data: DescribeAddressTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressTemplatesResponse>;
+  DescribeAddressTemplates(data?: DescribeAddressTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressTemplatesResponse>;
   /** 查询弹性公网IP列表 */
-  DescribeAddresses(data: DescribeAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressesResponse>;
+  DescribeAddresses(data?: DescribeAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressesResponse>;
   /** 查询辅助CIDR列表 */
-  DescribeAssistantCidr(data: DescribeAssistantCidrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssistantCidrResponse>;
+  DescribeAssistantCidr(data?: DescribeAssistantCidrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssistantCidrResponse>;
   /** 查询后付费共享带宽包当前的用量 */
   DescribeBandwidthPackageBillUsage(data: DescribeBandwidthPackageBillUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBandwidthPackageBillUsageResponse>;
   /** 查询带宽包配额 */
@@ -6688,81 +6688,81 @@ declare interface Vpc {
   /** 查询共享带宽包内的资源 */
   DescribeBandwidthPackageResources(data: DescribeBandwidthPackageResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBandwidthPackageResourcesResponse>;
   /** 查询带宽包资源 */
-  DescribeBandwidthPackages(data: DescribeBandwidthPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBandwidthPackagesResponse>;
+  DescribeBandwidthPackages(data?: DescribeBandwidthPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBandwidthPackagesResponse>;
   /** 查询云联网关联实例列表 */
-  DescribeCcnAttachedInstances(data: DescribeCcnAttachedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnAttachedInstancesResponse>;
+  DescribeCcnAttachedInstances(data?: DescribeCcnAttachedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnAttachedInstancesResponse>;
   /** 查询云联网各地域出带宽上限 */
   DescribeCcnRegionBandwidthLimits(data: DescribeCcnRegionBandwidthLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnRegionBandwidthLimitsResponse>;
   /** 查询云联网路由策略 */
   DescribeCcnRoutes(data: DescribeCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnRoutesResponse>;
   /** 查询CCN列表 */
-  DescribeCcns(data: DescribeCcnsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnsResponse>;
+  DescribeCcns(data?: DescribeCcnsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnsResponse>;
   /** 查询基础网络互通列表 */
-  DescribeClassicLinkInstances(data: DescribeClassicLinkInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassicLinkInstancesResponse>;
+  DescribeClassicLinkInstances(data?: DescribeClassicLinkInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassicLinkInstancesResponse>;
   /** 查询云联网跨境限速实例 */
   DescribeCrossBorderCcnRegionBandwidthLimits(data?: DescribeCrossBorderCcnRegionBandwidthLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossBorderCcnRegionBandwidthLimitsResponse>;
   /** 查询合规化审批单 */
-  DescribeCrossBorderCompliance(data: DescribeCrossBorderComplianceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossBorderComplianceResponse>;
+  DescribeCrossBorderCompliance(data?: DescribeCrossBorderComplianceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossBorderComplianceResponse>;
   /** 查询跨境带宽监控数据 */
   DescribeCrossBorderFlowMonitor(data: DescribeCrossBorderFlowMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossBorderFlowMonitorResponse>;
   /** 查询可支持的对端网关厂商信息 */
   DescribeCustomerGatewayVendors(data?: DescribeCustomerGatewayVendorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomerGatewayVendorsResponse>;
   /** 查询对端网关 */
-  DescribeCustomerGateways(data: DescribeCustomerGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomerGatewaysResponse>;
+  DescribeCustomerGateways(data?: DescribeCustomerGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomerGatewaysResponse>;
   /** 查询DhcpIp列表 */
-  DescribeDhcpIps(data: DescribeDhcpIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDhcpIpsResponse>;
+  DescribeDhcpIps(data?: DescribeDhcpIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDhcpIpsResponse>;
   /** 查询专线网关云联网路由 */
   DescribeDirectConnectGatewayCcnRoutes(data: DescribeDirectConnectGatewayCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectGatewayCcnRoutesResponse>;
   /** 查询专线网关 */
-  DescribeDirectConnectGateways(data: DescribeDirectConnectGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectGatewaysResponse>;
+  DescribeDirectConnectGateways(data?: DescribeDirectConnectGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectGatewaysResponse>;
   /** 查询流日志实例信息 */
   DescribeFlowLog(data: DescribeFlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowLogResponse>;
   /** 查询流日志集合 */
-  DescribeFlowLogs(data: DescribeFlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowLogsResponse>;
+  DescribeFlowLogs(data?: DescribeFlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowLogsResponse>;
   /** 查询网关流量监控明细 */
   DescribeGatewayFlowMonitorDetail(data: DescribeGatewayFlowMonitorDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayFlowMonitorDetailResponse>;
   /** 查询网关来访IP流控带宽 */
   DescribeGatewayFlowQos(data: DescribeGatewayFlowQosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayFlowQosResponse>;
   /** 查询HAVIP列表 */
-  DescribeHaVips(data: DescribeHaVipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHaVipsResponse>;
+  DescribeHaVips(data?: DescribeHaVipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHaVipsResponse>;
   /** 查询IPV6地址信息 */
-  DescribeIp6Addresses(data: DescribeIp6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIp6AddressesResponse>;
+  DescribeIp6Addresses(data?: DescribeIp6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIp6AddressesResponse>;
   /** 查询账户在指定地域IPV6转换实例和规则的配额 */
-  DescribeIp6TranslatorQuota(data: DescribeIp6TranslatorQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIp6TranslatorQuotaResponse>;
+  DescribeIp6TranslatorQuota(data?: DescribeIp6TranslatorQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIp6TranslatorQuotaResponse>;
   /** 查询IPV6转换实例及其绑定规则信息 */
-  DescribeIp6Translators(data: DescribeIp6TranslatorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIp6TranslatorsResponse>;
+  DescribeIp6Translators(data?: DescribeIp6TranslatorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIp6TranslatorsResponse>;
   /** 获取IP地理位置库下载链接 */
   DescribeIpGeolocationDatabaseUrl(data: DescribeIpGeolocationDatabaseUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpGeolocationDatabaseUrlResponse>;
   /** 查询IP地理位置信息 */
   DescribeIpGeolocationInfos(data: DescribeIpGeolocationInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpGeolocationInfosResponse>;
   /** 查询本地网关 */
-  DescribeLocalGateway(data: DescribeLocalGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLocalGatewayResponse>;
+  DescribeLocalGateway(data?: DescribeLocalGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLocalGatewayResponse>;
   /** 查询NAT网关端口转发规则 */
-  DescribeNatGatewayDestinationIpPortTranslationNatRules(data: DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse>;
+  DescribeNatGatewayDestinationIpPortTranslationNatRules(data?: DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse>;
   /** 查询专线绑定NAT路由 */
   DescribeNatGatewayDirectConnectGatewayRoute(data: DescribeNatGatewayDirectConnectGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewayDirectConnectGatewayRouteResponse>;
   /** 查询NAT网关SNAT转发规则 */
   DescribeNatGatewaySourceIpTranslationNatRules(data: DescribeNatGatewaySourceIpTranslationNatRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewaySourceIpTranslationNatRulesResponse>;
   /** 查询NAT网关 */
-  DescribeNatGateways(data: DescribeNatGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewaysResponse>;
+  DescribeNatGateways(data?: DescribeNatGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewaysResponse>;
   /** 查询网络探测验证结果列表 */
-  DescribeNetDetectStates(data: DescribeNetDetectStatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetDetectStatesResponse>;
+  DescribeNetDetectStates(data?: DescribeNetDetectStatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetDetectStatesResponse>;
   /** 查询网络探测列表 */
-  DescribeNetDetects(data: DescribeNetDetectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetDetectsResponse>;
+  DescribeNetDetects(data?: DescribeNetDetectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetDetectsResponse>;
   /** 分页查询网络ACL五元组条目列表 */
   DescribeNetworkAclQuintupleEntries(data: DescribeNetworkAclQuintupleEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkAclQuintupleEntriesResponse>;
   /** 查询网络ACL列表 */
-  DescribeNetworkAcls(data: DescribeNetworkAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkAclsResponse>;
+  DescribeNetworkAcls(data?: DescribeNetworkAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkAclsResponse>;
   /** 查询弹性网卡配额 */
   DescribeNetworkInterfaceLimit(data: DescribeNetworkInterfaceLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkInterfaceLimitResponse>;
   /** 查询弹性网卡列表 */
-  DescribeNetworkInterfaces(data: DescribeNetworkInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkInterfacesResponse>;
+  DescribeNetworkInterfaces(data?: DescribeNetworkInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkInterfacesResponse>;
   /** 查询网络产品配额信息 */
   DescribeProductQuota(data: DescribeProductQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductQuotaResponse>;
   /** 查询路由策略冲突列表 */
   DescribeRouteConflicts(data: DescribeRouteConflictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteConflictsResponse>;
   /** 查询路由列表 */
-  DescribeRouteTables(data: DescribeRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTablesResponse>;
+  DescribeRouteTables(data?: DescribeRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTablesResponse>;
   /** 查询安全组关联实例统计 */
   DescribeSecurityGroupAssociationStatistics(data: DescribeSecurityGroupAssociationStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupAssociationStatisticsResponse>;
   /** 查询用户安全组配额 */
@@ -6772,27 +6772,27 @@ declare interface Vpc {
   /** 查询安全组被引用信息 */
   DescribeSecurityGroupReferences(data: DescribeSecurityGroupReferencesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupReferencesResponse>;
   /** 查看安全组 */
-  DescribeSecurityGroups(data: DescribeSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupsResponse>;
+  DescribeSecurityGroups(data?: DescribeSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupsResponse>;
   /** 查询协议端口模板集合 */
-  DescribeServiceTemplateGroups(data: DescribeServiceTemplateGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceTemplateGroupsResponse>;
+  DescribeServiceTemplateGroups(data?: DescribeServiceTemplateGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceTemplateGroupsResponse>;
   /** 查询协议端口模板 */
-  DescribeServiceTemplates(data: DescribeServiceTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceTemplatesResponse>;
+  DescribeServiceTemplates(data?: DescribeServiceTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceTemplatesResponse>;
   /** 查询子网列表 */
-  DescribeSubnets(data: DescribeSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetsResponse>;
+  DescribeSubnets(data?: DescribeSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetsResponse>;
   /** 查询异步任务执行结果 */
-  DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
+  DescribeTaskResult(data?: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
   /** 查询参数模板配额列表 */
   DescribeTemplateLimits(data?: DescribeTemplateLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateLimitsResponse>;
   /** 查询租户云联网实例 */
   DescribeTenantCcns(data?: DescribeTenantCcnsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTenantCcnsResponse>;
   /** 查询共享流量包 */
-  DescribeTrafficPackages(data: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;
+  DescribeTrafficPackages(data?: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;
   /** 查询终端节点列表 */
-  DescribeVpcEndPoint(data: DescribeVpcEndPointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcEndPointResponse>;
+  DescribeVpcEndPoint(data?: DescribeVpcEndPointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcEndPointResponse>;
   /** 查询终端节点服务列表 */
-  DescribeVpcEndPointService(data: DescribeVpcEndPointServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcEndPointServiceResponse>;
+  DescribeVpcEndPointService(data?: DescribeVpcEndPointServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcEndPointServiceResponse>;
   /** 查询终端节点服务的服务白名单列表 */
-  DescribeVpcEndPointServiceWhiteList(data: DescribeVpcEndPointServiceWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcEndPointServiceWhiteListResponse>;
+  DescribeVpcEndPointServiceWhiteList(data?: DescribeVpcEndPointServiceWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcEndPointServiceWhiteListResponse>;
   /** 查询VPC下的云主机实例列表 */
   DescribeVpcInstances(data: DescribeVpcInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcInstancesResponse>;
   /** 查询VPC内IPv6列表 */
@@ -6806,19 +6806,19 @@ declare interface Vpc {
   /** 查询VPC异步任务执行结果 */
   DescribeVpcTaskResult(data: DescribeVpcTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcTaskResultResponse>;
   /** 查询VPC列表 */
-  DescribeVpcs(data: DescribeVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcsResponse>;
+  DescribeVpcs(data?: DescribeVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcsResponse>;
   /** 查询VPN通道列表 */
-  DescribeVpnConnections(data: DescribeVpnConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnConnectionsResponse>;
+  DescribeVpnConnections(data?: DescribeVpnConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnConnectionsResponse>;
   /** 查询VPN网关云联网路由 */
   DescribeVpnGatewayCcnRoutes(data: DescribeVpnGatewayCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewayCcnRoutesResponse>;
   /** 查询VPN网关路由 */
   DescribeVpnGatewayRoutes(data: DescribeVpnGatewayRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewayRoutesResponse>;
   /** 查询SSL-VPN-CLIENT 列表 */
-  DescribeVpnGatewaySslClients(data: DescribeVpnGatewaySslClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewaySslClientsResponse>;
+  DescribeVpnGatewaySslClients(data?: DescribeVpnGatewaySslClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewaySslClientsResponse>;
   /** 查询SSL-VPN SERVER 列表 */
-  DescribeVpnGatewaySslServers(data: DescribeVpnGatewaySslServersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewaySslServersResponse>;
+  DescribeVpnGatewaySslServers(data?: DescribeVpnGatewaySslServersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewaySslServersResponse>;
   /** 查询VPN网关 */
-  DescribeVpnGateways(data: DescribeVpnGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewaysResponse>;
+  DescribeVpnGateways(data?: DescribeVpnGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewaysResponse>;
   /** 云联网解关联实例 */
   DetachCcnInstances(data: DetachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachCcnInstancesResponse>;
   /** 删除基础网络互通 */
@@ -6988,9 +6988,9 @@ declare interface Vpc {
   /** 释放弹性公网IP */
   ReleaseAddresses(data: ReleaseAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseAddressesResponse>;
   /** 释放弹性公网IPv6地址带宽 */
-  ReleaseIp6AddressesBandwidth(data: ReleaseIp6AddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseIp6AddressesBandwidthResponse>;
+  ReleaseIp6AddressesBandwidth(data?: ReleaseIp6AddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseIp6AddressesBandwidthResponse>;
   /** 删除带宽包资源 */
-  RemoveBandwidthPackageResources(data: RemoveBandwidthPackageResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveBandwidthPackageResourcesResponse>;
+  RemoveBandwidthPackageResources(data?: RemoveBandwidthPackageResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveBandwidthPackageResourcesResponse>;
   /** 删除IPV6转换规则 */
   RemoveIp6Rules(data: RemoveIp6RulesRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveIp6RulesResponse>;
   /** 续费包月带宽弹性公网IP */

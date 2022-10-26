@@ -2966,7 +2966,7 @@ declare interface Iecp {
   /** 创建或更新边缘单元NodeUnit */
   CreateUpdateNodeUnit(data: CreateUpdateNodeUnitRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUpdateNodeUnitResponse>;
   /** 创建token */
-  CreateUserToken(data: CreateUserTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserTokenResponse>;
+  CreateUserToken(data?: CreateUserTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserTokenResponse>;
   /** 删除应用模板 */
   DeleteApplications(data: DeleteApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationsResponse>;
   /** 删除ConfigMap */
@@ -3006,7 +3006,7 @@ declare interface Iecp {
   /** 检查应用模板的Yaml配置 */
   DescribeApplicationYamlError(data: DescribeApplicationYamlErrorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationYamlErrorResponse>;
   /** 获取应用模板列表 */
-  DescribeApplications(data: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
+  DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
   /** 获取ConfigMap详情 */
   DescribeConfigMap(data: DescribeConfigMapRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigMapResponse>;
   /** 校验ConfigMap的Yaml语法 */
@@ -3074,7 +3074,7 @@ declare interface Iecp {
   /** 查询边缘单元列表 */
   DescribeEdgeUnitsCloud(data: DescribeEdgeUnitsCloudRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitsCloudResponse>;
   /** 获取设备信息 */
-  DescribeIotDevice(data: DescribeIotDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIotDeviceResponse>;
+  DescribeIotDevice(data?: DescribeIotDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIotDeviceResponse>;
   /** 获取设备列表信息 */
   DescribeIotDevices(data: DescribeIotDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIotDevicesResponse>;
   /** 获取消息路由列表 */

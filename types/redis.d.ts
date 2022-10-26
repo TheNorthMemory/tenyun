@@ -2514,7 +2514,7 @@ declare interface Redis {
   /** 查询备份Rdb下载地址 */
   DescribeBackupUrl(data: DescribeBackupUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupUrlResponse>;
   /** 查询Redis实例列表信息 */
-  DescribeCommonDBInstances(data: DescribeCommonDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCommonDBInstancesResponse>;
+  DescribeCommonDBInstances(data?: DescribeCommonDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCommonDBInstancesResponse>;
   /** 查询实例安全组详情 */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
   /** 查看实例子账号信息 */
@@ -2552,19 +2552,19 @@ declare interface Redis {
   /** 获取集群版实例分片信息 */
   DescribeInstanceShards(data: DescribeInstanceShardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceShardsResponse>;
   /** 查询Redis节点详细信息 */
-  DescribeInstanceZoneInfo(data: DescribeInstanceZoneInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceZoneInfoResponse>;
+  DescribeInstanceZoneInfo(data?: DescribeInstanceZoneInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceZoneInfoResponse>;
   /** 查询Redis实例列表 */
-  DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 查询实例维护时间窗 */
   DescribeMaintenanceWindow(data: DescribeMaintenanceWindowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaintenanceWindowResponse>;
   /** 查询参数模板详情 */
   DescribeParamTemplateInfo(data: DescribeParamTemplateInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplateInfoResponse>;
   /** 查询参数模板列表 */
-  DescribeParamTemplates(data: DescribeParamTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplatesResponse>;
+  DescribeParamTemplates(data?: DescribeParamTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplatesResponse>;
   /** 查询产品售卖规格 */
   DescribeProductInfo(data?: DescribeProductInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductInfoResponse>;
   /** 查询项目安全组信息 */
-  DescribeProjectSecurityGroup(data: DescribeProjectSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupResponse>;
+  DescribeProjectSecurityGroup(data?: DescribeProjectSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupResponse>;
   /** 查询项目安全组详情 */
   DescribeProjectSecurityGroups(data: DescribeProjectSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupsResponse>;
   /** 查询代理慢查询 */
@@ -2576,7 +2576,7 @@ declare interface Redis {
   /** Redis查询任务结果 */
   DescribeTaskInfo(data: DescribeTaskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskInfoResponse>;
   /** 查询任务列表信息 */
-  DescribeTaskList(data: DescribeTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskListResponse>;
+  DescribeTaskList(data?: DescribeTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskListResponse>;
   /** 查询Tendis慢查询 */
   DescribeTendisSlowLog(data: DescribeTendisSlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTendisSlowLogResponse>;
   /** 按量计费实例销毁 */

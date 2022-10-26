@@ -1622,15 +1622,15 @@ declare interface Tcaplusdb {
   /** 删除表 */
   DeleteTables(data: DeleteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTablesResponse>;
   /** 获取审批管理的申请单 */
-  DescribeApplications(data: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
+  DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
   /** 获取集群关联的标签列表 */
   DescribeClusterTags(data: DescribeClusterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterTagsResponse>;
   /** 查询集群信息列表 */
-  DescribeClusters(data: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
+  DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** 查询表描述文件详情 */
   DescribeIdlFileInfos(data: DescribeIdlFileInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdlFileInfosResponse>;
   /** 查询独占集群剩余机器 */
-  DescribeMachine(data: DescribeMachineRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineResponse>;
+  DescribeMachine(data?: DescribeMachineRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineResponse>;
   /** 查询地域列表 */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
   /** 查询快照列表 */
@@ -1642,11 +1642,11 @@ declare interface Tcaplusdb {
   /** 获取表格标签 */
   DescribeTableTags(data: DescribeTableTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableTagsResponse>;
   /** 查询表详情 */
-  DescribeTables(data: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
+  DescribeTables(data?: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
   /** 查询回收站中的表详情 */
-  DescribeTablesInRecycle(data: DescribeTablesInRecycleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesInRecycleResponse>;
+  DescribeTablesInRecycle(data?: DescribeTablesInRecycleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesInRecycleResponse>;
   /** 查询任务列表 */
-  DescribeTasks(data: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
+  DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
   /** 查询本用户是否在白名单中 */
   DescribeUinInWhitelist(data?: DescribeUinInWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUinInWhitelistResponse>;
   /** 关闭restful api */

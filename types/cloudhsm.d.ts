@@ -426,7 +426,7 @@ declare interface Cloudhsm {
   /** 查询子网列表 */
   DescribeSubnet(data: DescribeSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetResponse>;
   /** 获取当前地域所支持的设备列表 */
-  DescribeSupportedHsm(data: DescribeSupportedHsmRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportedHsmResponse>;
+  DescribeSupportedHsm(data?: DescribeSupportedHsmRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportedHsmResponse>;
   /** 获取用户安全组列表 */
   DescribeUsg(data: DescribeUsgRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsgResponse>;
   /** 获取安全组详情 */

@@ -170,7 +170,7 @@ declare interface Sts {
   /** 获取联合身份临时访问凭证 */
   GetFederationToken(data: GetFederationTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetFederationTokenResponse>;
   /** 拉取API密钥列表 */
-  QueryApiKey(data: QueryApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<QueryApiKeyResponse>;
+  QueryApiKey(data?: QueryApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<QueryApiKeyResponse>;
 }
 
 export declare type Versions = ["2018-08-13"];

@@ -428,15 +428,15 @@ declare interface Cloudaudit {
   /** 查询云审计日志 */
   DescribeEvents(data: DescribeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsResponse>;
   /** 查询AttributeKey的有效取值范围 */
-  GetAttributeKey(data: GetAttributeKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttributeKeyResponse>;
+  GetAttributeKey(data?: GetAttributeKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttributeKeyResponse>;
   /** 查询用户可创建跟踪集的数量 */
   InquireAuditCredit(data?: InquireAuditCreditRequest, config?: AxiosRequestConfig): AxiosPromise<InquireAuditCreditResponse>;
   /** 查询跟踪集概要 */
   ListAudits(data?: ListAuditsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAuditsResponse>;
   /** 查询云审计支持的cmq的可用区 */
-  ListCmqEnableRegion(data: ListCmqEnableRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ListCmqEnableRegionResponse>;
+  ListCmqEnableRegion(data?: ListCmqEnableRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ListCmqEnableRegionResponse>;
   /** 查询云审计支持的cos可用区 */
-  ListCosEnableRegion(data: ListCosEnableRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ListCosEnableRegionResponse>;
+  ListCosEnableRegion(data?: ListCosEnableRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ListCosEnableRegionResponse>;
   /** 根据地域获取KMS密钥别名 */
   ListKeyAliasByRegion(data: ListKeyAliasByRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ListKeyAliasByRegionResponse>;
   /** 检索日志 */

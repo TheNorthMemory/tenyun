@@ -462,7 +462,7 @@ declare interface Bmeip {
   /** 黑石EIP绑定VPCIP */
   BindVpcIp(data: BindVpcIpRequest, config?: AxiosRequestConfig): AxiosPromise<BindVpcIpResponse>;
   /** 创建黑石EIP */
-  CreateEip(data: CreateEipRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEipResponse>;
+  CreateEip(data?: CreateEipRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEipResponse>;
   /** 创建黑石弹性公网 EIPACL */
   CreateEipAcl(data: CreateEipAclRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEipAclResponse>;
   /** 释放黑石弹性公网IP */
@@ -470,13 +470,13 @@ declare interface Bmeip {
   /** 删除弹性公网IP ACL */
   DeleteEipAcl(data: DeleteEipAclRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEipAclResponse>;
   /** 查询弹性公网IP ACL */
-  DescribeEipAcls(data: DescribeEipAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEipAclsResponse>;
+  DescribeEipAcls(data?: DescribeEipAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEipAclsResponse>;
   /** 查询黑石EIP 限额 */
   DescribeEipQuota(data?: DescribeEipQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEipQuotaResponse>;
   /** 黑石EIP查询任务状态 */
   DescribeEipTask(data: DescribeEipTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEipTaskResponse>;
   /** 黑石EIP查询接口 */
-  DescribeEips(data: DescribeEipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEipsResponse>;
+  DescribeEips(data?: DescribeEipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEipsResponse>;
   /** 修改弹性公网IP ACL */
   ModifyEipAcl(data: ModifyEipAclRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEipAclResponse>;
   /** 黑石EIP修改计费方式 */

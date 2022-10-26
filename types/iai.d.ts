@@ -2256,13 +2256,13 @@ declare namespace V20180301 {
 declare interface Iai {
   (): Versions;
   /** 稠密关键点 */
-  AnalyzeDenseLandmarks(data: AnalyzeDenseLandmarksRequest, config?: AxiosRequestConfig): AxiosPromise<AnalyzeDenseLandmarksResponse>;
+  AnalyzeDenseLandmarks(data?: AnalyzeDenseLandmarksRequest, config?: AxiosRequestConfig): AxiosPromise<AnalyzeDenseLandmarksResponse>;
   /** 五官定位 */
-  AnalyzeFace(data: AnalyzeFaceRequest, config?: AxiosRequestConfig): AxiosPromise<AnalyzeFaceResponse>;
+  AnalyzeFace(data?: AnalyzeFaceRequest, config?: AxiosRequestConfig): AxiosPromise<AnalyzeFaceResponse>;
   /** 人脸比对 */
-  CompareFace(data: CompareFaceRequest, config?: AxiosRequestConfig): AxiosPromise<CompareFaceResponse>;
+  CompareFace(data?: CompareFaceRequest, config?: AxiosRequestConfig): AxiosPromise<CompareFaceResponse>;
   /** 防疫场景人脸比对 */
-  CompareMaskFace(data: CompareMaskFaceRequest, config?: AxiosRequestConfig): AxiosPromise<CompareMaskFaceResponse>;
+  CompareMaskFace(data?: CompareMaskFaceRequest, config?: AxiosRequestConfig): AxiosPromise<CompareMaskFaceResponse>;
   /** 复制人员 */
   CopyPerson(data: CopyPersonRequest, config?: AxiosRequestConfig): AxiosPromise<CopyPersonResponse>;
   /** 增加人脸 */
@@ -2280,17 +2280,17 @@ declare interface Iai {
   /** 人员库删除人员 */
   DeletePersonFromGroup(data: DeletePersonFromGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonFromGroupResponse>;
   /** 人脸检测与分析 */
-  DetectFace(data: DetectFaceRequest, config?: AxiosRequestConfig): AxiosPromise<DetectFaceResponse>;
+  DetectFace(data?: DetectFaceRequest, config?: AxiosRequestConfig): AxiosPromise<DetectFaceResponse>;
   /** 人脸检测与属性分析 */
-  DetectFaceAttributes(data: DetectFaceAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DetectFaceAttributesResponse>;
+  DetectFaceAttributes(data?: DetectFaceAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DetectFaceAttributesResponse>;
   /** 人脸静态活体检测 */
-  DetectLiveFace(data: DetectLiveFaceRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLiveFaceResponse>;
+  DetectLiveFace(data?: DetectLiveFaceRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLiveFaceResponse>;
   /** 人脸静态活体检测（高精度版） */
-  DetectLiveFaceAccurate(data: DetectLiveFaceAccurateRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLiveFaceAccurateResponse>;
+  DetectLiveFaceAccurate(data?: DetectLiveFaceAccurateRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLiveFaceAccurateResponse>;
   /** 获取人员库信息 */
   GetGroupInfo(data: GetGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupInfoResponse>;
   /** 获取人员库列表 */
-  GetGroupList(data: GetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupListResponse>;
+  GetGroupList(data?: GetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupListResponse>;
   /** 获取人员基础信息 */
   GetPersonBaseInfo(data: GetPersonBaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetPersonBaseInfoResponse>;
   /** 获取人员归属信息 */
@@ -2300,7 +2300,7 @@ declare interface Iai {
   /** 获取人员列表长度 */
   GetPersonListNum(data: GetPersonListNumRequest, config?: AxiosRequestConfig): AxiosPromise<GetPersonListNumResponse>;
   /** 获取人员库升级任务列表 */
-  GetUpgradeGroupFaceModelVersionJobList(data: GetUpgradeGroupFaceModelVersionJobListRequest, config?: AxiosRequestConfig): AxiosPromise<GetUpgradeGroupFaceModelVersionJobListResponse>;
+  GetUpgradeGroupFaceModelVersionJobList(data?: GetUpgradeGroupFaceModelVersionJobListRequest, config?: AxiosRequestConfig): AxiosPromise<GetUpgradeGroupFaceModelVersionJobListResponse>;
   /** 人员库升级结果查询 */
   GetUpgradeGroupFaceModelVersionResult(data: GetUpgradeGroupFaceModelVersionResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetUpgradeGroupFaceModelVersionResultResponse>;
   /** 修改人员库 */

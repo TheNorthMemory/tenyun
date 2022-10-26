@@ -640,17 +640,17 @@ declare interface Tat {
   /** 删除执行器 */
   DeleteInvoker(data: DeleteInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInvokerResponse>;
   /** 查询客户端状态 */
-  DescribeAutomationAgentStatus(data: DescribeAutomationAgentStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutomationAgentStatusResponse>;
+  DescribeAutomationAgentStatus(data?: DescribeAutomationAgentStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutomationAgentStatusResponse>;
   /** 查询命令详情 */
-  DescribeCommands(data: DescribeCommandsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCommandsResponse>;
+  DescribeCommands(data?: DescribeCommandsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCommandsResponse>;
   /** 查询执行任务 */
-  DescribeInvocationTasks(data: DescribeInvocationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationTasksResponse>;
+  DescribeInvocationTasks(data?: DescribeInvocationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationTasksResponse>;
   /** 查询执行活动 */
-  DescribeInvocations(data: DescribeInvocationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationsResponse>;
+  DescribeInvocations(data?: DescribeInvocationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationsResponse>;
   /** 查询执行器执行记录 */
-  DescribeInvokerRecords(data: DescribeInvokerRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvokerRecordsResponse>;
+  DescribeInvokerRecords(data?: DescribeInvokerRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvokerRecordsResponse>;
   /** 查询执行器 */
-  DescribeInvokers(data: DescribeInvokersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvokersResponse>;
+  DescribeInvokers(data?: DescribeInvokersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvokersResponse>;
   /** 查询地域列表 */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
   /** 停用执行器 */
@@ -664,7 +664,7 @@ declare interface Tat {
   /** 修改执行器 */
   ModifyInvoker(data: ModifyInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInvokerResponse>;
   /** 命令预览 */
-  PreviewReplacedCommandContent(data: PreviewReplacedCommandContentRequest, config?: AxiosRequestConfig): AxiosPromise<PreviewReplacedCommandContentResponse>;
+  PreviewReplacedCommandContent(data?: PreviewReplacedCommandContentRequest, config?: AxiosRequestConfig): AxiosPromise<PreviewReplacedCommandContentResponse>;
   /** 执行命令 */
   RunCommand(data: RunCommandRequest, config?: AxiosRequestConfig): AxiosPromise<RunCommandResponse>;
 }

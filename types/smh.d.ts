@@ -304,15 +304,15 @@ declare interface Smh {
   /** 删除媒体库 */
   DeleteLibrary(data: DeleteLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLibraryResponse>;
   /** 查询媒体库 */
-  DescribeLibraries(data: DescribeLibrariesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibrariesResponse>;
+  DescribeLibraries(data?: DescribeLibrariesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibrariesResponse>;
   /** 查询媒体库密钥 */
   DescribeLibrarySecret(data: DescribeLibrarySecretRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibrarySecretResponse>;
   /** 查询官方实例 */
-  DescribeOfficialInstances(data: DescribeOfficialInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfficialInstancesResponse>;
+  DescribeOfficialInstances(data?: DescribeOfficialInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfficialInstancesResponse>;
   /** 查询官方实例概览数据 */
   DescribeOfficialOverview(data?: DescribeOfficialOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfficialOverviewResponse>;
   /** 查询流量包 */
-  DescribeTrafficPackages(data: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;
+  DescribeTrafficPackages(data?: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;
   /** 修改媒体库配置项 */
   ModifyLibrary(data: ModifyLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLibraryResponse>;
   /** 发送短信验证码 */

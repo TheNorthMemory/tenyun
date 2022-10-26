@@ -94,7 +94,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 219+ 款产品，8362+ 服务数 (点击查看清单)</summary>
+<details><summary>共计 219+ 款产品，8361+ 服务数 (点击查看清单)</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -213,14 +213,14 @@ iottid | [物联网设备身份认证](https://cloud.tencent.com/document/produc
 iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(94)<br/>2020-12-15(79)<br/>2019-11-26(66)
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104)
 irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 2022-08-05(4)<br/>2022-03-24(4)
-ivld | [视频智能标签](https://cloud.tencent.com/document/product/1509) | 2021-09-03(25)
+ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2021-09-03(25)
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(49)
 lcic | [低代码互动课堂](https://cloud.tencent.com/document/product/1639) | 2022-08-17(14)
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(68)
 live | [云直播](https://cloud.tencent.com/document/product/267) | 2018-08-01(121)
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(1)
 lp | [登录保护](https://cloud.tencent.com/document/product/1190) | 2020-02-24(1)
-mariadb | [云数据库 MariaDB](https://cloud.tencent.com/document/product/237) | 2017-03-12(60)
+mariadb | [云数据库 MariaDB](https://cloud.tencent.com/document/product/237) | 2017-03-12(63)
 market | [云市场](https://cloud.tencent.com/document/product/306) | 2019-10-10(2)
 memcached | [云数据库 Memcached](https://cloud.tencent.com/document/product/241) | 2019-03-18(1)
 mgobe | [游戏联机对战引擎](https://cloud.tencent.com/document/product/1038) | 2020-10-14(7)<br/>2019-09-29(1)
@@ -241,7 +241,7 @@ organization | [企业组织](https://cloud.tencent.com/document/product/850) | 
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(21)
 pds | [私域安全](https://cloud.tencent.com/document/product/1473) | 2021-07-01(2)
 postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(63)
-privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(20)
+privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(21)
 pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(43)
 rce | [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) | 2020-11-03(3)
 redis | [云数据库 Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(86)
@@ -249,7 +249,7 @@ region | [地域管理系统](https://cloud.tencent.com/document/product/1596) |
 rkp | [风险探针](https://cloud.tencent.com/document/product/1169) | 2019-12-09(3)
 rp | [注册保护](https://cloud.tencent.com/document/product/1191) | 2020-02-24(1)
 rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(54)
-scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(44+11)
+scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(44+7)
 ses | [邮件推送](https://cloud.tencent.com/document/product/1288) | 2020-10-02(25)
 smh | [智能媒资托管](https://cloud.tencent.com/document/product/1339) | 2021-07-12(10)
 smpn | [营销号码安全](https://cloud.tencent.com/document/product/1127) | 2019-08-22(5)
@@ -263,7 +263,7 @@ sslpod | [SSL 证书监控](https://cloud.tencent.com/document/product/1084) | 2
 ssm | [凭据管理系统](https://cloud.tencent.com/document/product/1140) | 2019-09-23(24)
 sts | [安全凭证服务](https://cloud.tencent.com/document/product/1312) | 2018-08-13(6)
 taf | [流量反欺诈](https://cloud.tencent.com/document/product/1031) | 2020-02-10(3)
-tag | [标签](https://cloud.tencent.com/document/product/651) | 2018-08-13(29)
+tag | [标签](https://cloud.tencent.com/document/product/651) | 2018-08-13(31)
 tan | [碳引擎](https://cloud.tencent.com/document/product/1498) | 2022-04-20(1)
 tat | [腾讯云自动化助手](https://cloud.tencent.com/document/product/1340) | 2020-10-28(19)
 tav | 文件检测 | 2019-01-18(4)
@@ -271,7 +271,7 @@ tbaas | [TBaaS](https://cloud.tencent.com/document/product/663) | 2018-04-16(33)
 tbm |  | 2018-01-29(9)
 tbp | [腾讯智能对话平台](https://cloud.tencent.com/document/product/1060) | 2019-06-27(2)<br/>2019-03-11(4)
 tcaplusdb | [游戏数据库 TcaplusDB](https://cloud.tencent.com/document/product/596) | 2019-08-23(50)
-tcb | [云开发 CloudBase](https://cloud.tencent.com/document/product/876) | 2018-06-08(80+192)
+tcb | [云开发 CloudBase](https://cloud.tencent.com/document/product/876) | 2018-06-08(80+189)
 tcbr | [云托管 CloudBase Run](https://cloud.tencent.com/document/product/1243) | 2022-02-17(10+4)
 tcex | [腾讯云释义](https://cloud.tencent.com/document/product/1266) | 2020-07-27(2)
 tci | 腾讯智学课堂分析 | 2019-03-18(41)

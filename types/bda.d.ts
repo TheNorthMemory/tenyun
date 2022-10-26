@@ -642,11 +642,11 @@ declare interface Bda {
   /** 查看视频人像分割处理任务信息 */
   DescribeSegmentationTask(data: DescribeSegmentationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSegmentationTaskResponse>;
   /** 人体检测与属性分析 */
-  DetectBody(data: DetectBodyRequest, config?: AxiosRequestConfig): AxiosPromise<DetectBodyResponse>;
+  DetectBody(data?: DetectBodyRequest, config?: AxiosRequestConfig): AxiosPromise<DetectBodyResponse>;
   /** 人体关键点分析 */
-  DetectBodyJoints(data: DetectBodyJointsRequest, config?: AxiosRequestConfig): AxiosPromise<DetectBodyJointsResponse>;
+  DetectBodyJoints(data?: DetectBodyJointsRequest, config?: AxiosRequestConfig): AxiosPromise<DetectBodyJointsResponse>;
   /** 获取人体库列表 */
-  GetGroupList(data: GetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupListResponse>;
+  GetGroupList(data?: GetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupListResponse>;
   /** 获取人员列表 */
   GetPersonList(data: GetPersonListRequest, config?: AxiosRequestConfig): AxiosPromise<GetPersonListResponse>;
   /** 获取人体库汇总信息 */
@@ -660,7 +660,7 @@ declare interface Bda {
   /** 自定义人像分割 */
   SegmentCustomizedPortraitPic(data: SegmentCustomizedPortraitPicRequest, config?: AxiosRequestConfig): AxiosPromise<SegmentCustomizedPortraitPicResponse>;
   /** 人像分割 */
-  SegmentPortraitPic(data: SegmentPortraitPicRequest, config?: AxiosRequestConfig): AxiosPromise<SegmentPortraitPicResponse>;
+  SegmentPortraitPic(data?: SegmentPortraitPicRequest, config?: AxiosRequestConfig): AxiosPromise<SegmentPortraitPicResponse>;
   /** 终止视频人像分割处理任务 */
   TerminateSegmentationTask(data: TerminateSegmentationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateSegmentationTaskResponse>;
 }

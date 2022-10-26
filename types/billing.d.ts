@@ -1374,7 +1374,7 @@ declare interface Billing {
   /** 获取代金券使用记录 */
   DescribeVoucherUsageDetails(data: DescribeVoucherUsageDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVoucherUsageDetailsResponse>;
   /** 支付订单 */
-  PayDeals(data: PayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<PayDealsResponse>;
+  PayDeals(data?: PayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<PayDealsResponse>;
 }
 
 export declare type Versions = ["2018-07-09"];

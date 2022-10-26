@@ -2920,29 +2920,29 @@ declare interface Tdmq {
   /** 获取专享集群列表 */
   DescribeBindClusters(data?: DescribeBindClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindClustersResponse>;
   /** 获取租户VPC绑定关系 */
-  DescribeBindVpcs(data: DescribeBindVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindVpcsResponse>;
+  DescribeBindVpcs(data?: DescribeBindVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindVpcsResponse>;
   /** 获取集群详情 */
   DescribeClusterDetail(data: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
   /** 获取集群列表 */
-  DescribeClusters(data: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
+  DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** 枚举cmq死信队列源队列 */
   DescribeCmqDeadLetterSourceQueues(data: DescribeCmqDeadLetterSourceQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqDeadLetterSourceQueuesResponse>;
   /** 查询cmq队列详情 */
   DescribeCmqQueueDetail(data: DescribeCmqQueueDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqQueueDetailResponse>;
   /** 查询cmq全量队列 */
-  DescribeCmqQueues(data: DescribeCmqQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqQueuesResponse>;
+  DescribeCmqQueues(data?: DescribeCmqQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqQueuesResponse>;
   /** 查询cmq订阅详情 */
   DescribeCmqSubscriptionDetail(data: DescribeCmqSubscriptionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqSubscriptionDetailResponse>;
   /** 查询cmq主题详情 */
-  DescribeCmqTopicDetail(data: DescribeCmqTopicDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqTopicDetailResponse>;
+  DescribeCmqTopicDetail(data?: DescribeCmqTopicDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqTopicDetailResponse>;
   /** 枚举cmq全量主题 */
-  DescribeCmqTopics(data: DescribeCmqTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqTopicsResponse>;
+  DescribeCmqTopics(data?: DescribeCmqTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqTopicsResponse>;
   /** 获取命名空间属性 */
   DescribeEnvironmentAttributes(data: DescribeEnvironmentAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentAttributesResponse>;
   /** 获取命名空间角色列表 */
-  DescribeEnvironmentRoles(data: DescribeEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentRolesResponse>;
+  DescribeEnvironmentRoles(data?: DescribeEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentRolesResponse>;
   /** 获取命名空间列表 */
-  DescribeEnvironments(data: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
+  DescribeEnvironments(data?: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
   /** 运营端获取命名空间bundle列表 */
   DescribeNamespaceBundlesOpt(data: DescribeNamespaceBundlesOptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNamespaceBundlesOptResponse>;
   /** 运营端获节点健康状态 */
@@ -2962,9 +2962,9 @@ declare interface Tdmq {
   /** 获取RocketMQ主题列表 */
   DescribeRocketMQTopics(data: DescribeRocketMQTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopicsResponse>;
   /** 查询RocketMQ专享实例列表 */
-  DescribeRocketMQVipInstances(data: DescribeRocketMQVipInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQVipInstancesResponse>;
+  DescribeRocketMQVipInstances(data?: DescribeRocketMQVipInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQVipInstancesResponse>;
   /** 获取角色列表 */
-  DescribeRoles(data: DescribeRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRolesResponse>;
+  DescribeRoles(data?: DescribeRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRolesResponse>;
   /** 获取消费订阅列表 */
   DescribeSubscriptions(data: DescribeSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscriptionsResponse>;
   /** 查询主题列表 */

@@ -249,7 +249,7 @@ declare interface Cis {
   /** 查询容器实例事件 */
   DescribeContainerInstanceEvents(data: DescribeContainerInstanceEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerInstanceEventsResponse>;
   /** 查询容器实例列表 */
-  DescribeContainerInstances(data: DescribeContainerInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerInstancesResponse>;
+  DescribeContainerInstances(data?: DescribeContainerInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerInstancesResponse>;
   /** 获取容器日志信息 */
   DescribeContainerLog(data: DescribeContainerLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerLogResponse>;
   /** 创建容器实例询价 */

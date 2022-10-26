@@ -322,7 +322,7 @@ declare interface Tia {
   /** 列举Job */
   ListJobs(data: ListJobsRequest, config?: AxiosRequestConfig): AxiosPromise<ListJobsResponse>;
   /** 列举Model */
-  ListModels(data: ListModelsRequest, config?: AxiosRequestConfig): AxiosPromise<ListModelsResponse>;
+  ListModels(data?: ListModelsRequest, config?: AxiosRequestConfig): AxiosPromise<ListModelsResponse>;
   /** 查询日志 */
   QueryLogs(data: QueryLogsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryLogsResponse>;
 }

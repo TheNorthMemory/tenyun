@@ -936,21 +936,21 @@ declare interface Tiems {
   /** 删除服务 */
   DeleteService(data: DeleteServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceResponse>;
   /** 删除服务配置 */
-  DeleteServiceConfig(data: DeleteServiceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceConfigResponse>;
+  DeleteServiceConfig(data?: DeleteServiceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceConfigResponse>;
   /** 获取节点列表 */
-  DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 获取资源组列表 */
-  DescribeResourceGroups(data: DescribeResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGroupsResponse>;
+  DescribeResourceGroups(data?: DescribeResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGroupsResponse>;
   /** 查询伸缩组活动 */
   DescribeRsgAsGroupActivities(data: DescribeRsgAsGroupActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRsgAsGroupActivitiesResponse>;
   /** 查询资源组的伸缩组信息 */
-  DescribeRsgAsGroups(data: DescribeRsgAsGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRsgAsGroupsResponse>;
+  DescribeRsgAsGroups(data?: DescribeRsgAsGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRsgAsGroupsResponse>;
   /** 描述服务运行环境 */
   DescribeRuntimes(data?: DescribeRuntimesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuntimesResponse>;
   /** 描述服务配置 */
-  DescribeServiceConfigs(data: DescribeServiceConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceConfigsResponse>;
+  DescribeServiceConfigs(data?: DescribeServiceConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceConfigsResponse>;
   /** 描述服务 */
-  DescribeServices(data: DescribeServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServicesResponse>;
+  DescribeServices(data?: DescribeServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServicesResponse>;
   /** 停用资源组的伸缩组 */
   DisableRsgAsGroup(data: DisableRsgAsGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DisableRsgAsGroupResponse>;
   /** 启用资源组的伸缩组 */

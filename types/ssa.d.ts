@@ -1342,15 +1342,15 @@ declare interface Ssa {
   /** 合规管理检查项详情 */
   DescribeComplianceDetail(data: DescribeComplianceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceDetailResponse>;
   /** 合规管理总览页检查项列表 */
-  DescribeComplianceList(data: DescribeComplianceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceListResponse>;
+  DescribeComplianceList(data?: DescribeComplianceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceListResponse>;
   /** 云配置检查项总览页检查项列表 */
-  DescribeConfigList(data: DescribeConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigListResponse>;
+  DescribeConfigList(data?: DescribeConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigListResponse>;
   /** 获取安全事件详情 */
-  DescribeEventDetail(data: DescribeEventDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventDetailResponse>;
+  DescribeEventDetail(data?: DescribeEventDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventDetailResponse>;
   /** 获取泄露列表 */
   DescribeLeakDetectionList(data: DescribeLeakDetectionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLeakDetectionListResponse>;
   /** 获取测绘列表 */
-  DescribeMappingResults(data: DescribeMappingResultsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMappingResultsResponse>;
+  DescribeMappingResults(data?: DescribeMappingResultsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMappingResultsResponse>;
   /** 获取安全事件列表 */
   DescribeSafetyEventList(data: DescribeSafetyEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSafetyEventListResponse>;
   /** 告警详情 */
@@ -1358,9 +1358,9 @@ declare interface Ssa {
   /** 告警列表 */
   DescribeSocAlertList(data: DescribeSocAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSocAlertListResponse>;
   /** 云安全配置检查项列表 */
-  DescribeSocCheckItemList(data: DescribeSocCheckItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSocCheckItemListResponse>;
+  DescribeSocCheckItemList(data?: DescribeSocCheckItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSocCheckItemListResponse>;
   /** 云安全配置检查项结果列表 */
-  DescribeSocCheckResultList(data: DescribeSocCheckResultListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSocCheckResultListResponse>;
+  DescribeSocCheckResultList(data?: DescribeSocCheckResultListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSocCheckResultListResponse>;
   /** 合规详情 */
   DescribeSocCspmCompliance(data?: DescribeSocCspmComplianceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSocCspmComplianceResponse>;
   /** 漏洞列表-漏洞详情 */

@@ -1350,7 +1350,7 @@ declare interface VideoLivenessCompareResponse {
 declare interface Faceid {
   (): Versions;
   /** 申请活体检测流程令牌 */
-  ApplyLivenessToken(data: ApplyLivenessTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyLivenessTokenResponse>;
+  ApplyLivenessToken(data?: ApplyLivenessTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyLivenessTokenResponse>;
   /** 申请SDK核验令牌 */
   ApplySdkVerificationToken(data: ApplySdkVerificationTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ApplySdkVerificationTokenResponse>;
   /** 申请Web核验令牌 */
@@ -1366,7 +1366,7 @@ declare interface Faceid {
   /** 获取E证通Token状态 */
   CheckEidTokenStatus(data: CheckEidTokenStatusRequest, config?: AxiosRequestConfig): AxiosPromise<CheckEidTokenStatusResponse>;
   /** 身份证人像照片验真 */
-  CheckIdCardInformation(data: CheckIdCardInformationRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIdCardInformationResponse>;
+  CheckIdCardInformation(data?: CheckIdCardInformationRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIdCardInformationResponse>;
   /** 身份信息及有效期核验 */
   CheckIdNameDate(data: CheckIdNameDateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIdNameDateResponse>;
   /** 手机号二要素核验 */
@@ -1382,7 +1382,7 @@ declare interface Faceid {
   /** 获取光线序列 */
   GenerateReflectSequence(data: GenerateReflectSequenceRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateReflectSequenceResponse>;
   /** 获取动作顺序 */
-  GetActionSequence(data: GetActionSequenceRequest, config?: AxiosRequestConfig): AxiosPromise<GetActionSequenceResponse>;
+  GetActionSequence(data?: GetActionSequenceRequest, config?: AxiosRequestConfig): AxiosPromise<GetActionSequenceResponse>;
   /** 获取实名核身结果信息 */
   GetDetectInfo(data: GetDetectInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetDetectInfoResponse>;
   /** 获取实名核身结果信息增强版 */
@@ -1410,7 +1410,7 @@ declare interface Faceid {
   /** 获取Web核验结果 */
   GetWebVerificationResult(data: GetWebVerificationResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetWebVerificationResultResponse>;
   /** 身份证识别及信息核验 */
-  IdCardOCRVerification(data: IdCardOCRVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<IdCardOCRVerificationResponse>;
+  IdCardOCRVerification(data?: IdCardOCRVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<IdCardOCRVerificationResponse>;
   /** 身份信息认证 */
   IdCardVerification(data: IdCardVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<IdCardVerificationResponse>;
   /** 照片人脸核身 */

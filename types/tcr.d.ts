@@ -2610,9 +2610,9 @@ declare interface Tcr {
   /** 删除触发器 */
   DeleteWebhookTrigger(data: DeleteWebhookTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWebhookTriggerResponse>;
   /** 查询应用更新触发器触发日志 */
-  DescribeApplicationTriggerLogPersonal(data: DescribeApplicationTriggerLogPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationTriggerLogPersonalResponse>;
+  DescribeApplicationTriggerLogPersonal(data?: DescribeApplicationTriggerLogPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationTriggerLogPersonalResponse>;
   /** 查询应用更新触发器 */
-  DescribeApplicationTriggerPersonal(data: DescribeApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationTriggerPersonalResponse>;
+  DescribeApplicationTriggerPersonal(data?: DescribeApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationTriggerPersonalResponse>;
   /** 查询Chart包下载信息 */
   DescribeChartDownloadInfo(data: DescribeChartDownloadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChartDownloadInfoResponse>;
   /** 查询实例公网访问入口状态 */
@@ -2638,7 +2638,7 @@ declare interface Tcr {
   /** 列出镜像不可变规则 */
   DescribeImmutableTagRules(data: DescribeImmutableTagRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImmutableTagRulesResponse>;
   /** 查询全部实例信息 */
-  DescribeInstanceAll(data: DescribeInstanceAllRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAllResponse>;
+  DescribeInstanceAll(data?: DescribeInstanceAllRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAllResponse>;
   /** 查询所有实例命名空间 */
   DescribeInstanceAllNamespaces(data?: DescribeInstanceAllNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAllNamespacesResponse>;
   /** 查询实例自定义域名列表 */
@@ -2648,7 +2648,7 @@ declare interface Tcr {
   /** 查询长期访问凭证信息 */
   DescribeInstanceToken(data: DescribeInstanceTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceTokenResponse>;
   /** 查询实例信息 */
-  DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 查询私有域名解析状态 */
   DescribeInternalEndpointDnsStatus(data: DescribeInternalEndpointDnsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInternalEndpointDnsStatusResponse>;
   /** 查询实例内网访问VPC链接 */
@@ -2668,9 +2668,9 @@ declare interface Tcr {
   /** 查询镜像仓库信息 */
   DescribeRepositories(data: DescribeRepositoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoriesResponse>;
   /** 获取满足输入搜索条件的个人版镜像仓库 */
-  DescribeRepositoryFilterPersonal(data: DescribeRepositoryFilterPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryFilterPersonalResponse>;
+  DescribeRepositoryFilterPersonal(data?: DescribeRepositoryFilterPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryFilterPersonalResponse>;
   /** 查询个人版所有仓库 */
-  DescribeRepositoryOwnerPersonal(data: DescribeRepositoryOwnerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryOwnerPersonalResponse>;
+  DescribeRepositoryOwnerPersonal(data?: DescribeRepositoryOwnerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryOwnerPersonalResponse>;
   /** 查询个人版仓库信息 */
   DescribeRepositoryPersonal(data: DescribeRepositoryPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryPersonalResponse>;
   /** 查询实例公网访问白名单策略 */
@@ -2700,7 +2700,7 @@ declare interface Tcr {
   /** 管理实例同步 */
   ManageReplication(data: ManageReplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ManageReplicationResponse>;
   /** 修改应用更新触发器 */
-  ModifyApplicationTriggerPersonal(data: ModifyApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationTriggerPersonalResponse>;
+  ModifyApplicationTriggerPersonal(data?: ModifyApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationTriggerPersonalResponse>;
   /** 更新镜像不可变规则 */
   ModifyImmutableTagRules(data: ModifyImmutableTagRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImmutableTagRulesResponse>;
   /** 更新实例信息 */

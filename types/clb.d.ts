@@ -1867,9 +1867,9 @@ declare interface DescribeLoadBalancersRequest {
   Domain?: string;
   /** 负载均衡实例的 VIP 地址，支持多个。 */
   LoadBalancerVips?: string[];
-  /** 负载均衡绑定的后端服务的外网 IP。 */
+  /** 负载均衡绑定的后端服务的外网 IP，只支持查询云服务器的公网 IP。 */
   BackendPublicIps?: string[];
-  /** 负载均衡绑定的后端服务的内网 IP。 */
+  /** 负载均衡绑定的后端服务的内网 IP，只支持查询云服务器的内网 IP。 */
   BackendPrivateIps?: string[];
   /** 数据偏移量，默认为0。 */
   Offset?: number;
@@ -2478,7 +2478,7 @@ declare interface Clb {
   /** 克隆负载均衡实例 */
   CloneLoadBalancer(data: CloneLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<CloneLoadBalancerResponse>;
   /** 创建CLB专有日志集 */
-  CreateClsLogSet(data: CreateClsLogSetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClsLogSetResponse>;
+  CreateClsLogSet(data?: CreateClsLogSetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClsLogSetResponse>;
   /** 创建负载均衡监听器 */
   CreateListener(data: CreateListenerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateListenerResponse>;
   /** 购买负载均衡实例 */
@@ -2488,7 +2488,7 @@ declare interface Clb {
   /** 创建负载均衡七层监听器转发规则 */
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
   /** 创建目标组 */
-  CreateTargetGroup(data: CreateTargetGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTargetGroupResponse>;
+  CreateTargetGroup(data?: CreateTargetGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTargetGroupResponse>;
   /** 创建主题 */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
   /** 删除负载均衡监听器 */
@@ -2526,17 +2526,17 @@ declare interface Clb {
   /** 获取用户的CLB专有日志集 */
   DescribeClsLogSet(data?: DescribeClsLogSetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClsLogSetResponse>;
   /** 查询集群中资源列表 */
-  DescribeClusterResources(data: DescribeClusterResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterResourcesResponse>;
+  DescribeClusterResources(data?: DescribeClusterResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterResourcesResponse>;
   /** 查询跨域2.0版本云联网后端子机和网卡信息 */
-  DescribeCrossTargets(data: DescribeCrossTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossTargetsResponse>;
+  DescribeCrossTargets(data?: DescribeCrossTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossTargetsResponse>;
   /** 拉取配置绑定的server或location。 */
-  DescribeCustomizedConfigAssociateList(data: DescribeCustomizedConfigAssociateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomizedConfigAssociateListResponse>;
+  DescribeCustomizedConfigAssociateList(data?: DescribeCustomizedConfigAssociateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomizedConfigAssociateListResponse>;
   /** 拉取配置列表 */
   DescribeCustomizedConfigList(data: DescribeCustomizedConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomizedConfigListResponse>;
   /** 查询集群列表 */
-  DescribeExclusiveClusters(data: DescribeExclusiveClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExclusiveClustersResponse>;
+  DescribeExclusiveClusters(data?: DescribeExclusiveClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExclusiveClustersResponse>;
   /** 查询负载均衡闲置实例 */
-  DescribeIdleLoadBalancers(data: DescribeIdleLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdleLoadBalancersResponse>;
+  DescribeIdleLoadBalancers(data?: DescribeIdleLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdleLoadBalancersResponse>;
   /** 查询后端云主机或弹性网卡绑定的负载均衡 */
   DescribeLBListeners(data: DescribeLBListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLBListenersResponse>;
   /** 查询负载均衡的监听器列表 */
@@ -2546,29 +2546,29 @@ declare interface Clb {
   /** 查询负载均衡状态统计数据 */
   DescribeLoadBalancerOverview(data?: DescribeLoadBalancerOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerOverviewResponse>;
   /** 查询账号下高流量负载均衡 */
-  DescribeLoadBalancerTraffic(data: DescribeLoadBalancerTrafficRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerTrafficResponse>;
+  DescribeLoadBalancerTraffic(data?: DescribeLoadBalancerTrafficRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerTrafficResponse>;
   /** 查询负载均衡实例列表 */
-  DescribeLoadBalancers(data: DescribeLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersResponse>;
+  DescribeLoadBalancers(data?: DescribeLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersResponse>;
   /** 查询负载均衡详细信息 */
-  DescribeLoadBalancersDetail(data: DescribeLoadBalancersDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersDetailResponse>;
+  DescribeLoadBalancersDetail(data?: DescribeLoadBalancersDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersDetailResponse>;
   /** 查询配额 */
   DescribeQuota(data?: DescribeQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuotaResponse>;
   /** 查询用户在当前地域支持可用区列表和资源列表 */
-  DescribeResources(data: DescribeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesResponse>;
+  DescribeResources(data?: DescribeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesResponse>;
   /** 查询负载均衡转发规则的重定向关系 */
   DescribeRewrite(data: DescribeRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRewriteResponse>;
   /** 获取目标组绑定的服务器 */
   DescribeTargetGroupInstances(data: DescribeTargetGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupInstancesResponse>;
   /** 获取目标组列表 */
-  DescribeTargetGroupList(data: DescribeTargetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupListResponse>;
+  DescribeTargetGroupList(data?: DescribeTargetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupListResponse>;
   /** 查询目标组信息 */
-  DescribeTargetGroups(data: DescribeTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupsResponse>;
+  DescribeTargetGroups(data?: DescribeTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupsResponse>;
   /** 获取负载均衡后端服务的健康检查状态 */
   DescribeTargetHealth(data: DescribeTargetHealthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetHealthResponse>;
   /** 查询负载均衡绑定的后端服务列表 */
   DescribeTargets(data: DescribeTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetsResponse>;
   /** 查询异步任务状态 */
-  DescribeTaskStatus(data: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
+  DescribeTaskStatus(data?: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
   /** 解除规则的目标组关联关系 */
   DisassociateTargetGroups(data: DisassociateTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateTargetGroupsResponse>;
   /** 手动添加负载均衡转发规则的重定向关系 */

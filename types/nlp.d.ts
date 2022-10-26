@@ -492,9 +492,9 @@ declare interface Nlp {
   /** 句法依存分析 */
   DependencyParsing(data: DependencyParsingRequest, config?: AxiosRequestConfig): AxiosPromise<DependencyParsingResponse>;
   /** 查询词库信息 */
-  DescribeDict(data: DescribeDictRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDictResponse>;
+  DescribeDict(data?: DescribeDictRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDictResponse>;
   /** 查询词库列表 */
-  DescribeDicts(data: DescribeDictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDictsResponse>;
+  DescribeDicts(data?: DescribeDictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDictsResponse>;
   /** 查询指定词库的词条信息 */
   DescribeWordItems(data: DescribeWordItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWordItemsResponse>;
   /** 关键词提取 */

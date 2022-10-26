@@ -278,7 +278,7 @@ declare interface Ape {
   /** 查询授权人列表 */
   DescribeAuthUsers(data: DescribeAuthUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthUsersResponse>;
   /** 获取图片下载记录 */
-  DescribeDownloadInfos(data: DescribeDownloadInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDownloadInfosResponse>;
+  DescribeDownloadInfos(data?: DescribeDownloadInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDownloadInfosResponse>;
   /** 查询图片详情 */
   DescribeImage(data: DescribeImageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageResponse>;
   /** 查询图片列表 */

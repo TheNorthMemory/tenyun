@@ -381,7 +381,7 @@ declare interface ApplyInternetAddressRequest {
 
 declare interface ApplyInternetAddressResponse {
   /** 互联网公网地址ID */
-  InstanceId?: string | null;
+  InstanceId: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -794,15 +794,15 @@ declare interface Dc {
   /** 删除专用通道 */
   DeleteDirectConnectTunnel(data: DeleteDirectConnectTunnelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDirectConnectTunnelResponse>;
   /** 查询物理专线接入点 */
-  DescribeAccessPoints(data: DescribeAccessPointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessPointsResponse>;
+  DescribeAccessPoints(data?: DescribeAccessPointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessPointsResponse>;
   /** 查询专用通道扩展信息 */
   DescribeDirectConnectTunnelExtra(data: DescribeDirectConnectTunnelExtraRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectTunnelExtraResponse>;
   /** 查询专用通道列表 */
-  DescribeDirectConnectTunnels(data: DescribeDirectConnectTunnelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectTunnelsResponse>;
+  DescribeDirectConnectTunnels(data?: DescribeDirectConnectTunnelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectTunnelsResponse>;
   /** 查询物理专线列表 */
-  DescribeDirectConnects(data: DescribeDirectConnectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectsResponse>;
+  DescribeDirectConnects(data?: DescribeDirectConnectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectsResponse>;
   /** 获取用户互联网公网地址信息 */
-  DescribeInternetAddress(data: DescribeInternetAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInternetAddressResponse>;
+  DescribeInternetAddress(data?: DescribeInternetAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInternetAddressResponse>;
   /** 获取互联网公网地址配额 */
   DescribeInternetAddressQuota(data?: DescribeInternetAddressQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInternetAddressQuotaResponse>;
   /** 获取用户互联网公网地址统计信息 */

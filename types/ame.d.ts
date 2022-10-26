@@ -1078,7 +1078,7 @@ declare interface Ame {
   /** 创建直播互动机器人 */
   CreateKTVRobot(data: CreateKTVRobotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKTVRobotResponse>;
   /** 获取授权项目列表 */
-  DescribeAuthInfo(data: DescribeAuthInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthInfoResponse>;
+  DescribeAuthInfo(data?: DescribeAuthInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthInfoResponse>;
   /** 获取云音乐播放信息 */
   DescribeCloudMusic(data: DescribeCloudMusicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudMusicResponse>;
   /** 获取授权项目已购云音乐列表 */
@@ -1094,19 +1094,19 @@ declare interface Ame {
   /** 获取直播互动曲库推荐歌单详情 */
   DescribeKTVPlaylistDetail(data: DescribeKTVPlaylistDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVPlaylistDetailResponse>;
   /** 获取直播互动曲库推荐歌单列表 */
-  DescribeKTVPlaylists(data: DescribeKTVPlaylistsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVPlaylistsResponse>;
+  DescribeKTVPlaylists(data?: DescribeKTVPlaylistsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVPlaylistsResponse>;
   /** 获取直播互动机器人信息 */
-  DescribeKTVRobots(data: DescribeKTVRobotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVRobotsResponse>;
+  DescribeKTVRobots(data?: DescribeKTVRobotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVRobotsResponse>;
   /** 获取直播互动曲库歌手分类信息 */
   DescribeKTVSingerCategories(data?: DescribeKTVSingerCategoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVSingerCategoriesResponse>;
   /** 获取歌手下歌曲列表 */
   DescribeKTVSingerMusics(data: DescribeKTVSingerMusicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVSingerMusicsResponse>;
   /** 获取直播互动曲库歌手 */
-  DescribeKTVSingers(data: DescribeKTVSingersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVSingersResponse>;
+  DescribeKTVSingers(data?: DescribeKTVSingersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVSingersResponse>;
   /** 获取直播互动曲库联想词 */
   DescribeKTVSuggestions(data: DescribeKTVSuggestionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVSuggestionsResponse>;
   /** 获取直播互动曲库歌曲排行榜 */
-  DescribeKTVTopList(data: DescribeKTVTopListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVTopListResponse>;
+  DescribeKTVTopList(data?: DescribeKTVTopListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVTopListResponse>;
   /** 获取歌词信息 */
   DescribeLyric(data: DescribeLyricRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLyricResponse>;
   /** 获取曲库包歌曲播放信息 */
@@ -1116,7 +1116,7 @@ declare interface Ame {
   /** 获取曲库包已核销歌曲列表 */
   DescribePackageItems(data: DescribePackageItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackageItemsResponse>;
   /** 获取已购曲库包列表 */
-  DescribePackages(data: DescribePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackagesResponse>;
+  DescribePackages(data?: DescribePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackagesResponse>;
   /** 曲库包获取已核销歌曲回退数据 */
   DescribePkgOfflineMusic(data: DescribePkgOfflineMusicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePkgOfflineMusicResponse>;
   /** 获取分类内容（Station）列表 */

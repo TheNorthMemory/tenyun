@@ -3310,7 +3310,7 @@ declare interface Dayu {
   /** 获取独享包或共享包IP对应的云资产信息 */
   DescribeIPProductInfo(data: DescribeIPProductInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPProductInfoResponse>;
   /** 获取保险包套餐列表 */
-  DescribeInsurePacks(data: DescribeInsurePacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInsurePacksResponse>;
+  DescribeInsurePacks(data?: DescribeInsurePacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInsurePacksResponse>;
   /** 获取IP封堵列表 */
   DescribeIpBlockList(data?: DescribeIpBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpBlockListResponse>;
   /** 获取IP解封记录 */

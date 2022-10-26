@@ -744,19 +744,19 @@ declare interface Cdc {
   /** 查询专用集群支持的实例规格列表 */
   DescribeDedicatedClusterInstanceTypes(data: DescribeDedicatedClusterInstanceTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterInstanceTypesResponse>;
   /** 查询专用集群订单列表 */
-  DescribeDedicatedClusterOrders(data: DescribeDedicatedClusterOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterOrdersResponse>;
+  DescribeDedicatedClusterOrders(data?: DescribeDedicatedClusterOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterOrdersResponse>;
   /** 专用集群概览信息 */
   DescribeDedicatedClusterOverview(data: DescribeDedicatedClusterOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterOverviewResponse>;
   /** 查询专有集群配置列表 */
-  DescribeDedicatedClusterTypes(data: DescribeDedicatedClusterTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterTypesResponse>;
+  DescribeDedicatedClusterTypes(data?: DescribeDedicatedClusterTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterTypesResponse>;
   /** 查询专用集群列表 */
-  DescribeDedicatedClusters(data: DescribeDedicatedClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClustersResponse>;
+  DescribeDedicatedClusters(data?: DescribeDedicatedClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClustersResponse>;
   /** 查询专用集群支持的可用区列表 */
-  DescribeDedicatedSupportedZones(data: DescribeDedicatedSupportedZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedSupportedZonesResponse>;
+  DescribeDedicatedSupportedZones(data?: DescribeDedicatedSupportedZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedSupportedZonesResponse>;
   /** 查询站点列表 */
-  DescribeSites(data: DescribeSitesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSitesResponse>;
+  DescribeSites(data?: DescribeSitesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSitesResponse>;
   /** 查询站点详情 */
-  DescribeSitesDetail(data: DescribeSitesDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSitesDetailResponse>;
+  DescribeSitesDetail(data?: DescribeSitesDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSitesDetailResponse>;
   /** 修改本地专用集群信息 */
   ModifyDedicatedClusterInfo(data: ModifyDedicatedClusterInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDedicatedClusterInfoResponse>;
   /** 修改订单状态 */

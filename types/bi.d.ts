@@ -86,9 +86,9 @@ declare interface CreateEmbedTokenResponse {
 declare interface Bi {
   (): Versions;
   /** 申请延长Token可用时间接口 */
-  ApplyEmbedInterval(data: ApplyEmbedIntervalRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyEmbedIntervalResponse>;
+  ApplyEmbedInterval(data?: ApplyEmbedIntervalRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyEmbedIntervalResponse>;
   /** 创建嵌出报表Token */
-  CreateEmbedToken(data: CreateEmbedTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmbedTokenResponse>;
+  CreateEmbedToken(data?: CreateEmbedTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmbedTokenResponse>;
 }
 
 export declare type Versions = ["2022-01-05"];

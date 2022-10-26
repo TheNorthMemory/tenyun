@@ -690,9 +690,9 @@ declare interface Ecdn {
   /** 删除加速域名 */
   DeleteEcdnDomain(data: DeleteEcdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEcdnDomainResponse>;
   /** 查询域名基本信息 */
-  DescribeDomains(data: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
+  DescribeDomains(data?: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
   /** 查询域名详细配置 */
-  DescribeDomainsConfig(data: DescribeDomainsConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsConfigResponse>;
+  DescribeDomainsConfig(data?: DescribeDomainsConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsConfigResponse>;
   /** 查询域名日志下载链接 */
   DescribeEcdnDomainLogs(data: DescribeEcdnDomainLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEcdnDomainLogsResponse>;
   /** 域名统计指标查询 */
@@ -704,7 +704,7 @@ declare interface Ecdn {
   /** 查询刷新用量配额 */
   DescribePurgeQuota(data?: DescribePurgeQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeQuotaResponse>;
   /** 刷新历史查询 */
-  DescribePurgeTasks(data: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;
+  DescribePurgeTasks(data?: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;
   /** 刷新目录 */
   PurgePathCache(data: PurgePathCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PurgePathCacheResponse>;
   /** 刷新 URL */

@@ -254,7 +254,7 @@ declare interface TryLipstickPicResponse {
 declare interface Fmu {
   (): Versions;
   /** 人脸美颜 */
-  BeautifyPic(data: BeautifyPicRequest, config?: AxiosRequestConfig): AxiosPromise<BeautifyPicResponse>;
+  BeautifyPic(data?: BeautifyPicRequest, config?: AxiosRequestConfig): AxiosPromise<BeautifyPicResponse>;
   /** 视频美颜 */
   BeautifyVideo(data: BeautifyVideoRequest, config?: AxiosRequestConfig): AxiosPromise<BeautifyVideoResponse>;
   /** 撤销视频美颜任务 */
@@ -264,7 +264,7 @@ declare interface Fmu {
   /** 删除唇色素材 */
   DeleteModel(data: DeleteModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelResponse>;
   /** 查询唇色素材 */
-  GetModelList(data: GetModelListRequest, config?: AxiosRequestConfig): AxiosPromise<GetModelListResponse>;
+  GetModelList(data?: GetModelListRequest, config?: AxiosRequestConfig): AxiosPromise<GetModelListResponse>;
   /** 查询视频美颜任务 */
   QueryBeautifyVideoJob(data: QueryBeautifyVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBeautifyVideoJobResponse>;
   /** 图片滤镜 */

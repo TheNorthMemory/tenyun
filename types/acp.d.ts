@@ -296,7 +296,7 @@ declare interface Acp {
   /** 获取应用合规文件上传凭证接口 */
   DescribeFileTicket(data: DescribeFileTicketRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileTicketResponse>;
   /** 查询应用合规资源使用情况 */
-  DescribeResourceUsageInfo(data: DescribeResourceUsageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceUsageInfoResponse>;
+  DescribeResourceUsageInfo(data?: DescribeResourceUsageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceUsageInfoResponse>;
   /** 获取应用合规隐私诊断任务列表 */
   DescribeScanTaskList(data: DescribeScanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskListResponse>;
   /** 获取应用合规隐私诊断任务报告url */

@@ -2720,7 +2720,7 @@ declare interface Tcb {
   /** 创建托管域名 */
   CreateHostingDomain(data: CreateHostingDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostingDomainResponse>;
   /** 开通后付费资源 */
-  CreatePostpayPackage(data: CreatePostpayPackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePostpayPackageResponse>;
+  CreatePostpayPackage(data?: CreatePostpayPackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePostpayPackageResponse>;
   /** 创建独立网关 */
   CreateStandaloneGateway(data: CreateStandaloneGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStandaloneGatewayResponse>;
   /** 创建静态托管资源 */
@@ -2738,13 +2738,13 @@ declare interface Tcb {
   /** 删除安全网关路由 */
   DeleteWxGatewayRoute(data: DeleteWxGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWxGatewayRouteResponse>;
   /** 查询活动信息 */
-  DescribeActivityInfo(data: DescribeActivityInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActivityInfoResponse>;
+  DescribeActivityInfo(data?: DescribeActivityInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActivityInfoResponse>;
   /** 查询活动记录信息 */
   DescribeActivityRecord(data: DescribeActivityRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActivityRecordResponse>;
   /** 获取安全域名列表 */
   DescribeAuthDomains(data: DescribeAuthDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthDomainsResponse>;
   /** 获取新套餐 */
-  DescribeBaasPackageList(data: DescribeBaasPackageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaasPackageListResponse>;
+  DescribeBaasPackageList(data?: DescribeBaasPackageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaasPackageListResponse>;
   /** 获取云托管代码上传和下载url */
   DescribeCloudBaseBuildService(data: DescribeCloudBaseBuildServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseBuildServiceResponse>;
   /** 获取云开发项目列表 */
@@ -2798,31 +2798,31 @@ declare interface Tcb {
   /** 查询环境后付费计费详情 */
   DescribeEnvPostpaidDeduct(data: DescribeEnvPostpaidDeductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvPostpaidDeductResponse>;
   /** 获取环境列表 */
-  DescribeEnvs(data: DescribeEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvsResponse>;
+  DescribeEnvs(data?: DescribeEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvsResponse>;
   /** 描述扩展上传文件信息 */
   DescribeExtensionUploadInfo(data: DescribeExtensionUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtensionUploadInfoResponse>;
   /** 获取增值包计费相关信息 */
-  DescribeExtraPkgBillingInfo(data: DescribeExtraPkgBillingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtraPkgBillingInfoResponse>;
+  DescribeExtraPkgBillingInfo(data?: DescribeExtraPkgBillingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtraPkgBillingInfoResponse>;
   /** 查询静态托管域名任务状态 */
   DescribeHostingDomainTask(data: DescribeHostingDomainTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostingDomainTaskResponse>;
   /** 查询后付费资源免费量 */
   DescribePostpayFreeQuotas(data: DescribePostpayFreeQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostpayFreeQuotasResponse>;
   /** 获取后付费免费额度 */
-  DescribePostpayPackageFreeQuotas(data: DescribePostpayPackageFreeQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostpayPackageFreeQuotasResponse>;
+  DescribePostpayPackageFreeQuotas(data?: DescribePostpayPackageFreeQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostpayPackageFreeQuotasResponse>;
   /** 查询环境的配额使用量 */
   DescribeQuotaData(data: DescribeQuotaDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuotaDataResponse>;
   /** 查询后付费短信资源量 */
   DescribeSmsQuotas(data: DescribeSmsQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmsQuotasResponse>;
   /** 查询环境1分钱抵扣信息 */
-  DescribeSpecialCostItems(data: DescribeSpecialCostItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecialCostItemsResponse>;
+  DescribeSpecialCostItems(data?: DescribeSpecialCostItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecialCostItemsResponse>;
   /** 查询小租户网关信息 */
   DescribeStandaloneGateway(data: DescribeStandaloneGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStandaloneGatewayResponse>;
   /** 查询小租户网关套餐信息 */
-  DescribeStandaloneGatewayPackage(data: DescribeStandaloneGatewayPackageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStandaloneGatewayPackageResponse>;
+  DescribeStandaloneGatewayPackage(data?: DescribeStandaloneGatewayPackageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStandaloneGatewayPackageResponse>;
   /** 查询用户活动信息 */
   DescribeUserActivityInfo(data: DescribeUserActivityInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserActivityInfoResponse>;
   /** 查询微信云托管环境信息 */
-  DescribeWxCloudBaseRunEnvs(data: DescribeWxCloudBaseRunEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWxCloudBaseRunEnvsResponse>;
+  DescribeWxCloudBaseRunEnvs(data?: DescribeWxCloudBaseRunEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWxCloudBaseRunEnvsResponse>;
   /** 查询微信云托管子网 */
   DescribeWxCloudBaseRunSubNets(data: DescribeWxCloudBaseRunSubNetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWxCloudBaseRunSubNetsResponse>;
   /** 销毁环境 */
@@ -2889,6 +2889,8 @@ declare interface Tcb {
   CreateCopyRepoTask(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   CreateDeal(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
+  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  CreateEnv(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   CreateEnvAndResource(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
@@ -2960,10 +2962,6 @@ declare interface Tcb {
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeActivityGoods(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  DescribeAllVouchersInfo(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  DescribeAllVouchersInfoByDeal(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeAmountAfterDeduction(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeAuthentification(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
@@ -3022,6 +3020,8 @@ declare interface Tcb {
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeDauData(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  DescribeDbDistribution(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
+  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeDeployOnOneClickTasks(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeEnvAccountCircle(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
@@ -3060,6 +3060,8 @@ declare interface Tcb {
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeMonitorCondition(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  DescribeMonitorData(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
+  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeMonitorPolicy(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeMonitorResource(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
@@ -3084,6 +3086,8 @@ declare interface Tcb {
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeRepos(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  DescribeResourceLimit(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
+  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeResourceRecoverJob(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeRestoreHistory(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
@@ -3106,6 +3110,10 @@ declare interface Tcb {
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeStaticStore(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  DescribeStorageACL(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
+  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  DescribeStorageACLTask(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
+  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeStorageSafeRule(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeTcbBalance(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
@@ -3113,6 +3121,8 @@ declare interface Tcb {
   DescribeTemplateTypes(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeTopology(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
+  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  DescribeUsers(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeVoucherApplication(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
@@ -3144,21 +3154,7 @@ declare interface Tcb {
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   EstablishCloudBaseRunServerWx(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  GetDbDistribution(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  GetEnvironments(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  GetMonitorData(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   GetRecommendedCname(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  GetResourceLimit(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  GetStorageACL(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  GetStorageACLTask(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  GetUsers(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   InqueryPackagePrice(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
@@ -3197,8 +3193,6 @@ declare interface Tcb {
   OperateServerManage(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   QueryActivityPrice(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  QueryAllDeals(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   QueryDeals(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */

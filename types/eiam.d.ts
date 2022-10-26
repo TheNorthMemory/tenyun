@@ -1158,19 +1158,19 @@ declare interface Eiam {
   /** 删除机构节点 */
   DeleteOrgNode(data: DeleteOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrgNodeResponse>;
   /** 删除用户 */
-  DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
+  DeleteUser(data?: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
   /** 删除用户组 */
   DeleteUserGroup(data: DeleteUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserGroupResponse>;
   /** 批量删除用户 */
-  DeleteUsers(data: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
+  DeleteUsers(data?: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
   /** 查询账号组列表 */
   DescribeAccountGroup(data: DescribeAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountGroupResponse>;
   /** 查询应用账号列表 */
   DescribeAppAccount(data: DescribeAppAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppAccountResponse>;
   /** 获取应用信息 */
-  DescribeApplication(data: DescribeApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationResponse>;
+  DescribeApplication(data?: DescribeApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationResponse>;
   /** 读取机构节点信息 */
-  DescribeOrgNode(data: DescribeOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrgNodeResponse>;
+  DescribeOrgNode(data?: DescribeOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrgNodeResponse>;
   /** 查询指定机构下的资源授权列表 */
   DescribeOrgResourcesAuthorization(data: DescribeOrgResourcesAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrgResourcesAuthorizationResponse>;
   /** 获取JWT公钥信息 */
@@ -1180,17 +1180,17 @@ declare interface Eiam {
   /** 查询指定用户组下的资源授权列表 */
   DescribeUserGroupResourcesAuthorization(data: DescribeUserGroupResourcesAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupResourcesAuthorizationResponse>;
   /** 获取用户信息 */
-  DescribeUserInfo(data: DescribeUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInfoResponse>;
+  DescribeUserInfo(data?: DescribeUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInfoResponse>;
   /** 查询指定用户下的资源授权列表 */
   DescribeUserResourcesAuthorization(data: DescribeUserResourcesAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResourcesAuthorizationResponse>;
   /** 获取用户的第三方账号绑定信息 */
-  DescribeUserThirdPartyAccountInfo(data: DescribeUserThirdPartyAccountInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserThirdPartyAccountInfoResponse>;
+  DescribeUserThirdPartyAccountInfo(data?: DescribeUserThirdPartyAccountInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserThirdPartyAccountInfoResponse>;
   /** 获取账号组中的账号列表 */
   ListAccountInAccountGroup(data: ListAccountInAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ListAccountInAccountGroupResponse>;
   /** 应用授权关系列表信息 */
   ListApplicationAuthorizations(data: ListApplicationAuthorizationsRequest, config?: AxiosRequestConfig): AxiosPromise<ListApplicationAuthorizationsResponse>;
   /** 获取应用列表信息 */
-  ListApplications(data: ListApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<ListApplicationsResponse>;
+  ListApplications(data?: ListApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<ListApplicationsResponse>;
   /** 获取机构节点被授权访问的应用列表 */
   ListAuthorizedApplicationsToOrgNode(data: ListAuthorizedApplicationsToOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ListAuthorizedApplicationsToOrgNodeResponse>;
   /** 获取用户被授权访问的应用列表 */
@@ -1198,13 +1198,13 @@ declare interface Eiam {
   /** 获取用户组被授权访问的应用列表 */
   ListAuthorizedApplicationsToUserGroup(data: ListAuthorizedApplicationsToUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ListAuthorizedApplicationsToUserGroupResponse>;
   /** 获取用户组列表信息 */
-  ListUserGroups(data: ListUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListUserGroupsResponse>;
+  ListUserGroups(data?: ListUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListUserGroupsResponse>;
   /** 获取用户所在的用户组列表 */
   ListUserGroupsOfUser(data: ListUserGroupsOfUserRequest, config?: AxiosRequestConfig): AxiosPromise<ListUserGroupsOfUserResponse>;
   /** 获取用户列表信息 */
-  ListUsers(data: ListUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsersResponse>;
+  ListUsers(data?: ListUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsersResponse>;
   /** 读取节点下用户 */
-  ListUsersInOrgNode(data: ListUsersInOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsersInOrgNodeResponse>;
+  ListUsersInOrgNode(data?: ListUsersInOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsersInOrgNodeResponse>;
   /** 获取用户组中的用户列表 */
   ListUsersInUserGroup(data: ListUsersInUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsersInUserGroupResponse>;
   /** 修改账号组 */
@@ -1214,7 +1214,7 @@ declare interface Eiam {
   /** 更新应用 */
   ModifyApplication(data: ModifyApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationResponse>;
   /** 修改用户 */
-  ModifyUserInfo(data: ModifyUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserInfoResponse>;
+  ModifyUserInfo(data?: ModifyUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserInfoResponse>;
   /** 从账号组中移除账号 */
   RemoveAccountFromAccountGroup(data: RemoveAccountFromAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveAccountFromAccountGroupResponse>;
   /** 从用户组中移除用户 */

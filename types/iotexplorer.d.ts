@@ -2160,7 +2160,7 @@ declare interface Iotexplorer {
   /** 创建围栏绑定信息 */
   CreateFenceBind(data: CreateFenceBindRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFenceBindResponse>;
   /** 创建 LoRa 自定义频点 */
-  CreateLoRaFrequency(data: CreateLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoRaFrequencyResponse>;
+  CreateLoRaFrequency(data?: CreateLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoRaFrequencyResponse>;
   /** 新建 LoRa 网关设备 */
   CreateLoRaGateway(data: CreateLoRaGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoRaGatewayResponse>;
   /** 创建围栏 */
@@ -2182,7 +2182,7 @@ declare interface Iotexplorer {
   /** 删除围栏绑定信息 */
   DeleteFenceBind(data: DeleteFenceBindRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFenceBindResponse>;
   /** 删除LoRa自定义频点 */
-  DeleteLoRaFrequency(data: DeleteLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoRaFrequencyResponse>;
+  DeleteLoRaFrequency(data?: DeleteLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoRaFrequencyResponse>;
   /** 删除 LoRa 网关 */
   DeleteLoRaGateway(data: DeleteLoRaGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoRaGatewayResponse>;
   /** 删除围栏 */
@@ -2224,7 +2224,7 @@ declare interface Iotexplorer {
   /** 获取网关可操作的子产品 */
   DescribeGatewaySubProducts(data: DescribeGatewaySubProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewaySubProductsResponse>;
   /** 获取LoRa自定义频点详情 */
-  DescribeLoRaFrequency(data: DescribeLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoRaFrequencyResponse>;
+  DescribeLoRaFrequency(data?: DescribeLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoRaFrequencyResponse>;
   /** 查询产品数据模板 */
   DescribeModelDefinition(data: DescribeModelDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelDefinitionResponse>;
   /** 获取围栏列表 */
@@ -2264,9 +2264,9 @@ declare interface Iotexplorer {
   /** 获取位置空间列表 */
   GetPositionSpaceList(data: GetPositionSpaceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetPositionSpaceListResponse>;
   /** 获取项目列表 */
-  GetProjectList(data: GetProjectListRequest, config?: AxiosRequestConfig): AxiosPromise<GetProjectListResponse>;
+  GetProjectList(data?: GetProjectListRequest, config?: AxiosRequestConfig): AxiosPromise<GetProjectListResponse>;
   /** 获取产品列表 */
-  GetStudioProductList(data: GetStudioProductListRequest, config?: AxiosRequestConfig): AxiosPromise<GetStudioProductListResponse>;
+  GetStudioProductList(data?: GetStudioProductListRequest, config?: AxiosRequestConfig): AxiosPromise<GetStudioProductListResponse>;
   /** 获取规则列表 */
   GetTopicRuleList(data: GetTopicRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicRuleListResponse>;
   /** 获取设备的历史事件 */
@@ -2278,7 +2278,7 @@ declare interface Iotexplorer {
   /** 更新围栏绑定信息 */
   ModifyFenceBind(data: ModifyFenceBindRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFenceBindResponse>;
   /** 修改LoRa自定义频点 */
-  ModifyLoRaFrequency(data: ModifyLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoRaFrequencyResponse>;
+  ModifyLoRaFrequency(data?: ModifyLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoRaFrequencyResponse>;
   /** 修改 LoRa 网关信息 */
   ModifyLoRaGateway(data: ModifyLoRaGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoRaGatewayResponse>;
   /** 修改产品数据模板 */
@@ -2308,7 +2308,7 @@ declare interface Iotexplorer {
   /** 搜索位置空间 */
   SearchPositionSpace(data: SearchPositionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<SearchPositionSpaceResponse>;
   /** 搜索产品 */
-  SearchStudioProduct(data: SearchStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<SearchStudioProductResponse>;
+  SearchStudioProduct(data?: SearchStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<SearchStudioProductResponse>;
   /** 搜索规则 */
   SearchTopicRule(data: SearchTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SearchTopicRuleResponse>;
   /** 批量解绑子设备 */

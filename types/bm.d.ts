@@ -1658,9 +1658,9 @@ declare interface Bm {
   /** 查看自定义镜像列表 */
   DescribeCustomImages(data: DescribeCustomImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomImagesResponse>;
   /** 查询设备型号 */
-  DescribeDeviceClass(data: DescribeDeviceClassRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceClassResponse>;
+  DescribeDeviceClass(data?: DescribeDeviceClassRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceClassResponse>;
   /** 查询机型RAID方式以及系统盘大小 */
-  DescribeDeviceClassPartition(data: DescribeDeviceClassPartitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceClassPartitionResponse>;
+  DescribeDeviceClassPartition(data?: DescribeDeviceClassPartitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceClassPartitionResponse>;
   /** 查询设备硬件配置信息 */
   DescribeDeviceHardwareInfo(data: DescribeDeviceHardwareInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceHardwareInfoResponse>;
   /** 查询设备库存 */
@@ -1670,7 +1670,7 @@ declare interface Bm {
   /** 获取物理机的分区格式 */
   DescribeDevicePartition(data: DescribeDevicePartitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePartitionResponse>;
   /** 查询设备位置信息 */
-  DescribeDevicePosition(data: DescribeDevicePositionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePositionResponse>;
+  DescribeDevicePosition(data?: DescribeDevicePositionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePositionResponse>;
   /** 查询服务器价格信息 */
   DescribeDevicePriceInfo(data: DescribeDevicePriceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePriceInfoResponse>;
   /** 查询物理机信息 */
@@ -1682,11 +1682,11 @@ declare interface Bm {
   /** 查询异步任务状态 */
   DescribeOperationResult(data: DescribeOperationResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOperationResultResponse>;
   /** 查询操作系统信息 */
-  DescribeOsInfo(data: DescribeOsInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOsInfoResponse>;
+  DescribeOsInfo(data?: DescribeOsInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOsInfoResponse>;
   /** 获取预授权规则列表 */
   DescribePsaRegulations(data: DescribePsaRegulationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePsaRegulationsResponse>;
   /** 查询地域以及可用区 */
-  DescribeRegions(data: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
+  DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
   /** 维修任务配置获取 */
   DescribeRepairTaskConstant(data?: DescribeRepairTaskConstantRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepairTaskConstantResponse>;
   /** 维修任务信息获取 */

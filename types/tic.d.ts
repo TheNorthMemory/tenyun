@@ -290,11 +290,11 @@ declare interface Tic {
   /** 获取单个事件详情 */
   DescribeStackEvent(data: DescribeStackEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStackEventResponse>;
   /** 查询事件列表 */
-  DescribeStackEvents(data: DescribeStackEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStackEventsResponse>;
+  DescribeStackEvents(data?: DescribeStackEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStackEventsResponse>;
   /** 查询版本列表 */
-  DescribeStackVersions(data: DescribeStackVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStackVersionsResponse>;
+  DescribeStackVersions(data?: DescribeStackVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStackVersionsResponse>;
   /** 查询资源栈列表 */
-  DescribeStacks(data: DescribeStacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStacksResponse>;
+  DescribeStacks(data?: DescribeStacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStacksResponse>;
   /** 执行Destroy事件 */
   DestroyStack(data: DestroyStackRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyStackResponse>;
   /** 执行Plan事件 */

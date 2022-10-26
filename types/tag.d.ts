@@ -104,6 +104,22 @@ declare interface TagWithDelete {
   CanDelete: number;
 }
 
+declare interface AddProjectRequest {
+  /** 项目名称 */
+  ProjectName: string;
+  /** 项目描述 */
+  Info?: string;
+}
+
+declare interface AddProjectResponse {
+  /** 项目Id */
+  ProjectId?: number;
+  /** 是否为新项目 */
+  IsNew?: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface AddResourceTagRequest {
   /** 标签键 */
   TagKey: string;
@@ -678,6 +694,22 @@ declare interface UnTagResourcesResponse {
   RequestId?: string;
 }
 
+declare interface UpdateProjectRequest {
+  /** 项目ID */
+  ProjectId: number;
+  /** 项目名称 */
+  ProjectName?: string;
+  /** 禁用项目，1，禁用，0，启用 */
+  Disable?: number;
+  /** 备注 */
+  Info?: string;
+}
+
+declare interface UpdateProjectResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface UpdateResourceTagValueRequest {
   /** 资源关联的标签键 */
   TagKey: string;
@@ -695,6 +727,8 @@ declare interface UpdateResourceTagValueResponse {
 /** [标签](https://cloud.tencent.com/document/product/651) */
 declare interface Tag {
   (): Versions;
+  /** 创建项目 */
+  AddProject(data: AddProjectRequest, config?: AxiosRequestConfig): AxiosPromise<AddProjectResponse>;
   /** 标签关联资源 */
   AddResourceTag(data: AddResourceTagRequest, config?: AxiosRequestConfig): AxiosPromise<AddResourceTagResponse>;
   /** 标签关联批量资源 */
@@ -702,7 +736,7 @@ declare interface Tag {
   /** 创建标签 */
   CreateTag(data: CreateTagRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTagResponse>;
   /** 批量创建标签 */
-  CreateTags(data: CreateTagsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTagsResponse>;
+  CreateTags(data?: CreateTagsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTagsResponse>;
   /** 标签解绑资源 */
   DeleteResourceTag(data: DeleteResourceTagRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceTagResponse>;
   /** 删除标签 */
@@ -712,7 +746,7 @@ declare interface Tag {
   /** 获取项目列表 */
   DescribeProjects(data: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
   /** 查询资源关联标签 */
-  DescribeResourceTags(data: DescribeResourceTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTagsResponse>;
+  DescribeResourceTags(data?: DescribeResourceTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTagsResponse>;
   /** 批量查看资源关联的标签 */
   DescribeResourceTagsByResourceIds(data: DescribeResourceTagsByResourceIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTagsByResourceIdsResponse>;
   /** 按顺序查看资源关联的标签 */
@@ -724,25 +758,25 @@ declare interface Tag {
   /** 通过标签查询资源列表并集 */
   DescribeResourcesByTagsUnion(data: DescribeResourcesByTagsUnionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesByTagsUnionResponse>;
   /** 查询标签键 */
-  DescribeTagKeys(data: DescribeTagKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagKeysResponse>;
+  DescribeTagKeys(data?: DescribeTagKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagKeysResponse>;
   /** 查询标签值 */
   DescribeTagValues(data: DescribeTagValuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagValuesResponse>;
   /** 按顺序查询标签值 */
   DescribeTagValuesSeq(data: DescribeTagValuesSeqRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagValuesSeqResponse>;
   /** 查询标签列表 */
-  DescribeTags(data: DescribeTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagsResponse>;
+  DescribeTags(data?: DescribeTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagsResponse>;
   /** 按顺序查询标签列表 */
-  DescribeTagsSeq(data: DescribeTagsSeqRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagsSeqResponse>;
+  DescribeTagsSeq(data?: DescribeTagsSeqRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagsSeqResponse>;
   /** 标签解绑批量资源 */
   DetachResourcesTag(data: DetachResourcesTagRequest, config?: AxiosRequestConfig): AxiosPromise<DetachResourcesTagResponse>;
   /** 查询资源标签列表 */
-  GetResources(data: GetResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<GetResourcesResponse>;
+  GetResources(data?: GetResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<GetResourcesResponse>;
   /** 查询标签键列表 */
-  GetTagKeys(data: GetTagKeysRequest, config?: AxiosRequestConfig): AxiosPromise<GetTagKeysResponse>;
+  GetTagKeys(data?: GetTagKeysRequest, config?: AxiosRequestConfig): AxiosPromise<GetTagKeysResponse>;
   /** 查询标签值列表 */
   GetTagValues(data: GetTagValuesRequest, config?: AxiosRequestConfig): AxiosPromise<GetTagValuesResponse>;
   /** 获取标签列表 */
-  GetTags(data: GetTagsRequest, config?: AxiosRequestConfig): AxiosPromise<GetTagsResponse>;
+  GetTags(data?: GetTagsRequest, config?: AxiosRequestConfig): AxiosPromise<GetTagsResponse>;
   /** 批量修改资源关联的标签 */
   ModifyResourceTags(data: ModifyResourceTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceTagsResponse>;
   /** 修改批量资源关联的标签值 */
@@ -751,6 +785,8 @@ declare interface Tag {
   TagResources(data: TagResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<TagResourcesResponse>;
   /** 为资源解绑标签 */
   UnTagResources(data: UnTagResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<UnTagResourcesResponse>;
+  /** 修改项目 */
+  UpdateProject(data: UpdateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProjectResponse>;
   /** 修改资源标签值 */
   UpdateResourceTagValue(data: UpdateResourceTagValueRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateResourceTagValueResponse>;
 }

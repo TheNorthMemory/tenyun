@@ -2784,11 +2784,11 @@ declare interface Gaap {
   /** 查询通道是否可以创建 */
   CheckProxyCreate(data: CheckProxyCreateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckProxyCreateResponse>;
   /** 关闭通道 */
-  CloseProxies(data: CloseProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<CloseProxiesResponse>;
+  CloseProxies(data?: CloseProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<CloseProxiesResponse>;
   /** 关闭通道组 */
   CloseProxyGroup(data: CloseProxyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CloseProxyGroupResponse>;
   /** 关闭安全策略 */
-  CloseSecurityPolicy(data: CloseSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CloseSecurityPolicyResponse>;
+  CloseSecurityPolicy(data?: CloseSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CloseSecurityPolicyResponse>;
   /** 创建证书 */
   CreateCertificate(data: CreateCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCertificateResponse>;
   /** 创建自定义header */
@@ -2838,7 +2838,7 @@ declare interface Gaap {
   /** 删除通道监听器 */
   DeleteListeners(data: DeleteListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteListenersResponse>;
   /** 删除通道组 */
-  DeleteProxyGroup(data: DeleteProxyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProxyGroupResponse>;
+  DeleteProxyGroup(data?: DeleteProxyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProxyGroupResponse>;
   /** 删除7层监听器转发规则 */
   DeleteRule(data: DeleteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleResponse>;
   /** 删除安全策略 */
@@ -2854,7 +2854,7 @@ declare interface Gaap {
   /** 查询证书详情 */
   DescribeCertificateDetail(data: DescribeCertificateDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateDetailResponse>;
   /** 查询服务器证书列表 */
-  DescribeCertificates(data: DescribeCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificatesResponse>;
+  DescribeCertificates(data?: DescribeCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificatesResponse>;
   /** 获取国家地区编码映射表 */
   DescribeCountryAreaMapping(data?: DescribeCountryAreaMappingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCountryAreaMappingResponse>;
   /** 查询跨境通道实例列表 */
@@ -2878,17 +2878,17 @@ declare interface Gaap {
   /** 获取通道组域名解析配置详情（废弃） */
   DescribeGroupDomainConfig(data: DescribeGroupDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupDomainConfigResponse>;
   /** 查询HTTP监听器信息 */
-  DescribeHTTPListeners(data: DescribeHTTPListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHTTPListenersResponse>;
+  DescribeHTTPListeners(data?: DescribeHTTPListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHTTPListenersResponse>;
   /** 查询HTTPS监听器信息 */
-  DescribeHTTPSListeners(data: DescribeHTTPSListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHTTPSListenersResponse>;
+  DescribeHTTPSListeners(data?: DescribeHTTPSListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHTTPSListenersResponse>;
   /** 查询监听器源站列表 */
   DescribeListenerRealServers(data: DescribeListenerRealServersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenerRealServersResponse>;
   /** 查询监听器统计数据 */
   DescribeListenerStatistics(data: DescribeListenerStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenerStatisticsResponse>;
   /** 查询通道实例列表 */
-  DescribeProxies(data: DescribeProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxiesResponse>;
+  DescribeProxies(data?: DescribeProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxiesResponse>;
   /** 查询通道状态列表 */
-  DescribeProxiesStatus(data: DescribeProxiesStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxiesStatusResponse>;
+  DescribeProxiesStatus(data?: DescribeProxiesStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxiesStatusResponse>;
   /** 查询统计通道和监听器信息 */
   DescribeProxyAndStatisticsListeners(data: DescribeProxyAndStatisticsListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyAndStatisticsListenersResponse>;
   /** 查询通道详情 */
@@ -2908,7 +2908,7 @@ declare interface Gaap {
   /** 查询源站绑定状态 */
   DescribeRealServersStatus(data: DescribeRealServersStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealServersStatusResponse>;
   /** 获取源站区域和带宽梯度价格 */
-  DescribeRegionAndPrice(data: DescribeRegionAndPriceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionAndPriceResponse>;
+  DescribeRegionAndPrice(data?: DescribeRegionAndPriceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionAndPriceResponse>;
   /** 根据标签拉取资源列表 */
   DescribeResourcesByTag(data: DescribeResourcesByTagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesByTagResponse>;
   /** 查询转发规则相关源站信息 */
@@ -2922,9 +2922,9 @@ declare interface Gaap {
   /** 根据安全规则ID查询安全规则详情列表 */
   DescribeSecurityRules(data: DescribeSecurityRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityRulesResponse>;
   /** 查询TCP监听器列表 */
-  DescribeTCPListeners(data: DescribeTCPListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTCPListenersResponse>;
+  DescribeTCPListeners(data?: DescribeTCPListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTCPListenersResponse>;
   /** 查询UDP监听器列表 */
-  DescribeUDPListeners(data: DescribeUDPListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUDPListenersResponse>;
+  DescribeUDPListeners(data?: DescribeUDPListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUDPListenersResponse>;
   /** 销毁通道 */
   DestroyProxies(data: DestroyProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyProxiesResponse>;
   /** 暂停域名解析 */
@@ -2950,11 +2950,11 @@ declare interface Gaap {
   /** 修改HTTPS监听器配置 */
   ModifyHTTPSListenerAttribute(data: ModifyHTTPSListenerAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHTTPSListenerAttributeResponse>;
   /** 修改通道的属性 */
-  ModifyProxiesAttribute(data: ModifyProxiesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProxiesAttributeResponse>;
+  ModifyProxiesAttribute(data?: ModifyProxiesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProxiesAttributeResponse>;
   /** 修改通道所属项目 */
   ModifyProxiesProject(data: ModifyProxiesProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProxiesProjectResponse>;
   /** 修改通道配置 */
-  ModifyProxyConfiguration(data: ModifyProxyConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProxyConfigurationResponse>;
+  ModifyProxyConfiguration(data?: ModifyProxyConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProxyConfigurationResponse>;
   /** 修改通道组属性 */
   ModifyProxyGroupAttribute(data: ModifyProxyGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProxyGroupAttributeResponse>;
   /** 修改源站名称 */
@@ -2968,11 +2968,11 @@ declare interface Gaap {
   /** 修改UDP监听器配置 */
   ModifyUDPListenerAttribute(data: ModifyUDPListenerAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUDPListenerAttributeResponse>;
   /** 开启通道 */
-  OpenProxies(data: OpenProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<OpenProxiesResponse>;
+  OpenProxies(data?: OpenProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<OpenProxiesResponse>;
   /** 开启通道组 */
   OpenProxyGroup(data: OpenProxyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<OpenProxyGroupResponse>;
   /** 开启安全策略 */
-  OpenSecurityPolicy(data: OpenSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<OpenSecurityPolicyResponse>;
+  OpenSecurityPolicy(data?: OpenSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<OpenSecurityPolicyResponse>;
   /** 删除源站 */
   RemoveRealServers(data: RemoveRealServersRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveRealServersResponse>;
   /** 认证高级配置 */

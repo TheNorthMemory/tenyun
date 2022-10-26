@@ -636,7 +636,7 @@ declare interface SearchImageResponse {
 declare interface Tiia {
   (): Versions;
   /** 图像质量评估 */
-  AssessQuality(data: AssessQualityRequest, config?: AxiosRequestConfig): AxiosPromise<AssessQualityResponse>;
+  AssessQuality(data?: AssessQualityRequest, config?: AxiosRequestConfig): AxiosPromise<AssessQualityResponse>;
   /** 创建图片库 */
   CreateGroup(data: CreateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupResponse>;
   /** 创建图片 */
@@ -646,31 +646,31 @@ declare interface Tiia {
   /** 删除图片 */
   DeleteImages(data: DeleteImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImagesResponse>;
   /** 查询图片库 */
-  DescribeGroups(data: DescribeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsResponse>;
+  DescribeGroups(data?: DescribeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsResponse>;
   /** 查询图片信息 */
   DescribeImages(data: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
   /** 恶心检测 */
-  DetectDisgust(data: DetectDisgustRequest, config?: AxiosRequestConfig): AxiosPromise<DetectDisgustResponse>;
+  DetectDisgust(data?: DetectDisgustRequest, config?: AxiosRequestConfig): AxiosPromise<DetectDisgustResponse>;
   /** 文件封识别 */
-  DetectEnvelope(data: DetectEnvelopeRequest, config?: AxiosRequestConfig): AxiosPromise<DetectEnvelopeResponse>;
+  DetectEnvelope(data?: DetectEnvelopeRequest, config?: AxiosRequestConfig): AxiosPromise<DetectEnvelopeResponse>;
   /** 图像标签 */
-  DetectLabel(data: DetectLabelRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLabelResponse>;
+  DetectLabel(data?: DetectLabelRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLabelResponse>;
   /** 图像标签测试接口 */
-  DetectLabelBeta(data: DetectLabelBetaRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLabelBetaResponse>;
+  DetectLabelBeta(data?: DetectLabelBetaRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLabelBetaResponse>;
   /** 通用图像标签 */
-  DetectLabelPro(data: DetectLabelProRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLabelProResponse>;
+  DetectLabelPro(data?: DetectLabelProRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLabelProResponse>;
   /** 不良行为识别 */
-  DetectMisbehavior(data: DetectMisbehaviorRequest, config?: AxiosRequestConfig): AxiosPromise<DetectMisbehaviorResponse>;
+  DetectMisbehavior(data?: DetectMisbehaviorRequest, config?: AxiosRequestConfig): AxiosPromise<DetectMisbehaviorResponse>;
   /** 商品识别 */
-  DetectProduct(data: DetectProductRequest, config?: AxiosRequestConfig): AxiosPromise<DetectProductResponse>;
+  DetectProduct(data?: DetectProductRequest, config?: AxiosRequestConfig): AxiosPromise<DetectProductResponse>;
   /** 商品识别-微信识物版 */
-  DetectProductBeta(data: DetectProductBetaRequest, config?: AxiosRequestConfig): AxiosPromise<DetectProductBetaResponse>;
+  DetectProductBeta(data?: DetectProductBetaRequest, config?: AxiosRequestConfig): AxiosPromise<DetectProductBetaResponse>;
   /** 图像清晰度增强 */
-  EnhanceImage(data: EnhanceImageRequest, config?: AxiosRequestConfig): AxiosPromise<EnhanceImageResponse>;
+  EnhanceImage(data?: EnhanceImageRequest, config?: AxiosRequestConfig): AxiosPromise<EnhanceImageResponse>;
   /** 车辆识别 */
-  RecognizeCar(data: RecognizeCarRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeCarResponse>;
+  RecognizeCar(data?: RecognizeCarRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeCarResponse>;
   /** 车辆识别（增强版） */
-  RecognizeCarPro(data: RecognizeCarProRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeCarProResponse>;
+  RecognizeCarPro(data?: RecognizeCarProRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeCarProResponse>;
   /** 检索图片 */
   SearchImage(data: SearchImageRequest, config?: AxiosRequestConfig): AxiosPromise<SearchImageResponse>;
 }

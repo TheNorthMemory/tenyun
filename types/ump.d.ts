@@ -562,7 +562,7 @@ declare interface SearchImageResponse {
 declare interface Ump {
   (): Versions;
   /** 上报相机告警信息 */
-  CreateCameraAlerts(data: CreateCameraAlertsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCameraAlertsResponse>;
+  CreateCameraAlerts(data?: CreateCameraAlertsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCameraAlertsResponse>;
   /** 相机状态上报接口 */
   CreateCameraState(data: CreateCameraStateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCameraStateResponse>;
   /** 抓拍上报接口 */

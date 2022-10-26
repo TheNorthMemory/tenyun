@@ -168,9 +168,9 @@ declare interface Ft {
   /** 人脸年龄变化 */
   ChangeAgePic(data: ChangeAgePicRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeAgePicResponse>;
   /** 人像动漫化 */
-  FaceCartoonPic(data: FaceCartoonPicRequest, config?: AxiosRequestConfig): AxiosPromise<FaceCartoonPicResponse>;
+  FaceCartoonPic(data?: FaceCartoonPicRequest, config?: AxiosRequestConfig): AxiosPromise<FaceCartoonPicResponse>;
   /** 人像渐变 */
-  MorphFace(data: MorphFaceRequest, config?: AxiosRequestConfig): AxiosPromise<MorphFaceResponse>;
+  MorphFace(data?: MorphFaceRequest, config?: AxiosRequestConfig): AxiosPromise<MorphFaceResponse>;
   /** 查询人像渐变任务 */
   QueryFaceMorphJob(data: QueryFaceMorphJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFaceMorphJobResponse>;
   /** 人脸性别转换 */

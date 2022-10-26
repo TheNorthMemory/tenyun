@@ -3398,7 +3398,7 @@ declare interface Apigateway {
   /** 查询 API 文档详情 */
   DescribeAPIDocDetail(data: DescribeAPIDocDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAPIDocDetailResponse>;
   /** 查询 API 文档列表 */
-  DescribeAPIDocs(data: DescribeAPIDocsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAPIDocsResponse>;
+  DescribeAPIDocs(data?: DescribeAPIDocsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAPIDocsResponse>;
   /** 展示插件相关的API列表 */
   DescribeAllPluginApis(data: DescribeAllPluginApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllPluginApisResponse>;
   /** 查询API详情 */
@@ -3408,7 +3408,7 @@ declare interface Apigateway {
   /** 查询应用绑定的Api列表 */
   DescribeApiAppBindApisStatus(data: DescribeApiAppBindApisStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiAppBindApisStatusResponse>;
   /** 查询应用列表 */
-  DescribeApiAppsStatus(data: DescribeApiAppsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiAppsStatusResponse>;
+  DescribeApiAppsStatus(data?: DescribeApiAppsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiAppsStatusResponse>;
   /** 查询Api绑定的应用列表 */
   DescribeApiBindApiAppsStatus(data: DescribeApiBindApiAppsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiBindApiAppsStatusResponse>;
   /** 展示API绑定的限流策略 */
@@ -3418,7 +3418,7 @@ declare interface Apigateway {
   /** 查询密钥详情 */
   DescribeApiKey(data: DescribeApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiKeyResponse>;
   /** 查询密钥列表 */
-  DescribeApiKeysStatus(data: DescribeApiKeysStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiKeysStatusResponse>;
+  DescribeApiKeysStatus(data?: DescribeApiKeysStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiKeysStatusResponse>;
   /** 查询 API 使用计划详情 */
   DescribeApiUsagePlan(data: DescribeApiUsagePlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiUsagePlanResponse>;
   /** 查询 API 接口列表 */
@@ -3442,7 +3442,7 @@ declare interface Apigateway {
   /** 查询插件绑定的API列表 */
   DescribePluginApis(data: DescribePluginApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginApisResponse>;
   /** 查询插件列表和详情 */
-  DescribePlugins(data: DescribePluginsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginsResponse>;
+  DescribePlugins(data?: DescribePluginsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginsResponse>;
   /** 查询服务详情 */
   DescribeService(data: DescribeServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceResponse>;
   /** 查询服务环境列表 */
@@ -3462,7 +3462,7 @@ declare interface Apigateway {
   /** 查询服务使用计划详情 */
   DescribeServiceUsagePlan(data: DescribeServiceUsagePlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceUsagePlanResponse>;
   /** 查询服务列表状态 */
-  DescribeServicesStatus(data: DescribeServicesStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServicesStatusResponse>;
+  DescribeServicesStatus(data?: DescribeServicesStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServicesStatusResponse>;
   /** 查询后端通道所绑定的API列表 */
   DescribeUpstreamBindApis(data: DescribeUpstreamBindApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUpstreamBindApisResponse>;
   /** 查询后端通道列表详情 */
@@ -3474,7 +3474,7 @@ declare interface Apigateway {
   /** 查询使用计划绑定密钥列表 */
   DescribeUsagePlanSecretIds(data: DescribeUsagePlanSecretIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsagePlanSecretIdsResponse>;
   /** 查询使用计划列表 */
-  DescribeUsagePlansStatus(data: DescribeUsagePlansStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsagePlansStatusResponse>;
+  DescribeUsagePlansStatus(data?: DescribeUsagePlansStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsagePlansStatusResponse>;
   /** 插件解绑API */
   DetachPlugin(data: DetachPluginRequest, config?: AxiosRequestConfig): AxiosPromise<DetachPluginResponse>;
   /** 禁用密钥 */

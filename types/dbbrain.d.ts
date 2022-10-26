@@ -2592,7 +2592,7 @@ declare interface Dbbrain {
   /** 获取实例诊断历史 */
   DescribeDBDiagHistory(data: DescribeDBDiagHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBDiagHistoryResponse>;
   /** 查询健康报告生成任务列表 */
-  DescribeDBDiagReportTasks(data: DescribeDBDiagReportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBDiagReportTasksResponse>;
+  DescribeDBDiagReportTasks(data?: DescribeDBDiagReportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBDiagReportTasksResponse>;
   /** 获取指定时间段内的实例空间使用概览 */
   DescribeDBSpaceStatus(data: DescribeDBSpaceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSpaceStatusResponse>;
   /** 获取实例信息列表 */

@@ -2747,7 +2747,7 @@ declare interface DescribePullStreamConfigsRequest {
 
 declare interface DescribePullStreamConfigsResponse {
   /** 拉流配置。 */
-  PullStreamConfigs?: PullStreamConfig[];
+  PullStreamConfigs: PullStreamConfig[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -3547,7 +3547,7 @@ declare interface Live {
   DeleteLiveWatermark(data: DeleteLiveWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveWatermarkResponse>;
   /** 删除水印规则 */
   DeleteLiveWatermarkRule(data: DeleteLiveWatermarkRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveWatermarkRuleResponse>;
-  /** 删除拉流配置(该接口已下线,请联系售后获取新接口) */
+  /** 删除拉流配置(该接口已下线,请使用新接口 DeleteLivePullStreamTask) */
   DeletePullStreamConfig(data: DeletePullStreamConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePullStreamConfigResponse>;
   /** 删除录制任务（新） */
   DeleteRecordTask(data: DeleteRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordTaskResponse>;
@@ -3586,21 +3586,21 @@ declare interface Live {
   /** 获取域名证书信息 */
   DescribeLiveDomainCert(data: DescribeLiveDomainCertRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainCertResponse>;
   /** 查询绑定证书的域名列表 */
-  DescribeLiveDomainCertBindings(data: DescribeLiveDomainCertBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainCertBindingsResponse>;
+  DescribeLiveDomainCertBindings(data?: DescribeLiveDomainCertBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainCertBindingsResponse>;
   /** 查询实时的域名维度下行播放数据 */
-  DescribeLiveDomainPlayInfoList(data: DescribeLiveDomainPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainPlayInfoListResponse>;
+  DescribeLiveDomainPlayInfoList(data?: DescribeLiveDomainPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainPlayInfoListResponse>;
   /** 查询直播域名 Referer 黑白名单配置 */
   DescribeLiveDomainReferer(data: DescribeLiveDomainRefererRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainRefererResponse>;
   /** 查询域名列表 */
-  DescribeLiveDomains(data: DescribeLiveDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainsResponse>;
+  DescribeLiveDomains(data?: DescribeLiveDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainsResponse>;
   /** 获取禁推流列表 */
-  DescribeLiveForbidStreamList(data: DescribeLiveForbidStreamListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveForbidStreamListResponse>;
+  DescribeLiveForbidStreamList(data?: DescribeLiveForbidStreamListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveForbidStreamListResponse>;
   /** 查询直播套餐包信息 */
   DescribeLivePackageInfo(data: DescribeLivePackageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePackageInfoResponse>;
   /** 查询播放鉴权key */
   DescribeLivePlayAuthKey(data: DescribeLivePlayAuthKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePlayAuthKeyResponse>;
   /** 查询直播拉流任务 */
-  DescribeLivePullStreamTasks(data: DescribeLivePullStreamTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePullStreamTasksResponse>;
+  DescribeLivePullStreamTasks(data?: DescribeLivePullStreamTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePullStreamTasksResponse>;
   /** 查询推流鉴权key */
   DescribeLivePushAuthKey(data: DescribeLivePushAuthKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePushAuthKeyResponse>;
   /** 获取录制规则列表 */
@@ -3608,7 +3608,7 @@ declare interface Live {
   /** 获取单个录制模板 */
   DescribeLiveRecordTemplate(data: DescribeLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordTemplateResponse>;
   /** 获取录制模板列表 */
-  DescribeLiveRecordTemplates(data: DescribeLiveRecordTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordTemplatesResponse>;
+  DescribeLiveRecordTemplates(data?: DescribeLiveRecordTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordTemplatesResponse>;
   /** 获取截图规则列表 */
   DescribeLiveSnapshotRules(data?: DescribeLiveSnapshotRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveSnapshotRulesResponse>;
   /** 获取单个截图模板 */
@@ -3618,19 +3618,19 @@ declare interface Live {
   /** 查询推断流事件 */
   DescribeLiveStreamEventList(data: DescribeLiveStreamEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamEventListResponse>;
   /** 查询直播中的流 */
-  DescribeLiveStreamOnlineList(data: DescribeLiveStreamOnlineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamOnlineListResponse>;
+  DescribeLiveStreamOnlineList(data?: DescribeLiveStreamOnlineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamOnlineListResponse>;
   /** 查询历史流列表 */
   DescribeLiveStreamPublishedList(data: DescribeLiveStreamPublishedListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamPublishedListResponse>;
   /** 获取在线流的推流数据 */
-  DescribeLiveStreamPushInfoList(data: DescribeLiveStreamPushInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamPushInfoListResponse>;
+  DescribeLiveStreamPushInfoList(data?: DescribeLiveStreamPushInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamPushInfoListResponse>;
   /** 查询流状态 */
   DescribeLiveStreamState(data: DescribeLiveStreamStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamStateResponse>;
   /** 直播时移计费信息查询 */
   DescribeLiveTimeShiftBillInfoList(data: DescribeLiveTimeShiftBillInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTimeShiftBillInfoListResponse>;
   /** 查询直播转码统计信息 */
-  DescribeLiveTranscodeDetailInfo(data: DescribeLiveTranscodeDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTranscodeDetailInfoResponse>;
+  DescribeLiveTranscodeDetailInfo(data?: DescribeLiveTranscodeDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTranscodeDetailInfoResponse>;
   /** 获取转码规则列表 */
-  DescribeLiveTranscodeRules(data: DescribeLiveTranscodeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTranscodeRulesResponse>;
+  DescribeLiveTranscodeRules(data?: DescribeLiveTranscodeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTranscodeRulesResponse>;
   /** 获取单个转码模板 */
   DescribeLiveTranscodeTemplate(data: DescribeLiveTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTranscodeTemplateResponse>;
   /** 获取转码模板列表 */
@@ -3653,8 +3653,8 @@ declare interface Live {
   DescribeProIspPlaySumInfoList(data: DescribeProIspPlaySumInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProIspPlaySumInfoListResponse>;
   /** 按省份运营商查询播放信息 */
   DescribeProvinceIspPlayInfoList(data: DescribeProvinceIspPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProvinceIspPlayInfoListResponse>;
-  /** 查询拉流配置(该接口已下线,请联系售后获取新接口) */
-  DescribePullStreamConfigs(data: DescribePullStreamConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePullStreamConfigsResponse>;
+  /** 查询拉流配置(该接口已下线,请使用新接口 DescribeLivePullStreamTasks) */
+  DescribePullStreamConfigs(data?: DescribePullStreamConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePullStreamConfigsResponse>;
   /** 直播推流带宽和流量数据查询 */
   DescribePushBandwidthAndFluxList(data: DescribePushBandwidthAndFluxListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushBandwidthAndFluxListResponse>;
   /** 查询录制任务列表（新） */
@@ -3705,9 +3705,9 @@ declare interface Live {
   ModifyLiveSnapshotTemplate(data: ModifyLiveSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveSnapshotTemplateResponse>;
   /** 修改转码模板配置 */
   ModifyLiveTranscodeTemplate(data: ModifyLiveTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveTranscodeTemplateResponse>;
-  /** 更新拉流配置(该接口已下线,请联系售后获取新接口) */
+  /** 更新拉流配置(该接口已下线,请使用新接口 ModifyLivePullStreamTask) */
   ModifyPullStreamConfig(data: ModifyPullStreamConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPullStreamConfigResponse>;
-  /** 修改拉流配置状态(该接口已下线,请联系售后获取新接口) */
+  /** 修改拉流配置状态(该接口已下线,请使用新接口 ModifyLivePullStreamTask) */
   ModifyPullStreamStatus(data: ModifyPullStreamStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPullStreamStatusResponse>;
   /** 取消直播延时 */
   ResumeDelayLiveStream(data: ResumeDelayLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeDelayLiveStreamResponse>;

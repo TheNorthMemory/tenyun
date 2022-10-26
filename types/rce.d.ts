@@ -264,7 +264,7 @@ declare interface Rce {
   /** 风险趋势统计 */
   DescribeRiskTrends(data: DescribeRiskTrendsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskTrendsResponse>;
   /** 全栈式风控引擎 */
-  ManageMarketingRisk(data: ManageMarketingRiskRequest, config?: AxiosRequestConfig): AxiosPromise<ManageMarketingRiskResponse>;
+  ManageMarketingRisk(data?: ManageMarketingRiskRequest, config?: AxiosRequestConfig): AxiosPromise<ManageMarketingRiskResponse>;
 }
 
 export declare type Versions = ["2020-11-03"];

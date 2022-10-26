@@ -78,7 +78,7 @@ declare interface DescribeZonesResponse {
 declare interface Region {
   (): Versions;
   /** 查询支持地域列表查询的产品 */
-  DescribeProducts(data: DescribeProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductsResponse>;
+  DescribeProducts(data?: DescribeProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductsResponse>;
   /** 查询产品支持的地域列表 */
   DescribeRegions(data: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
   /** 查询产品可用区列表 */

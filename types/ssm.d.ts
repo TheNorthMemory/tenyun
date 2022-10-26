@@ -568,7 +568,7 @@ declare interface Ssm {
   /** 获取控制台展示region列表 */
   GetRegions(data?: GetRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRegionsResponse>;
   /** 获取SSH密钥对凭据明文 */
-  GetSSHKeyPairValue(data: GetSSHKeyPairValueRequest, config?: AxiosRequestConfig): AxiosPromise<GetSSHKeyPairValueResponse>;
+  GetSSHKeyPairValue(data?: GetSSHKeyPairValueRequest, config?: AxiosRequestConfig): AxiosPromise<GetSSHKeyPairValueResponse>;
   /** 获取凭据明文 */
   GetSecretValue(data: GetSecretValueRequest, config?: AxiosRequestConfig): AxiosPromise<GetSecretValueResponse>;
   /** 获取用户服务开通状态 */
@@ -576,7 +576,7 @@ declare interface Ssm {
   /** 获取指定凭据下的版本列表信息。 */
   ListSecretVersionIds(data: ListSecretVersionIdsRequest, config?: AxiosRequestConfig): AxiosPromise<ListSecretVersionIdsResponse>;
   /** 获取凭据的详细信息列表 */
-  ListSecrets(data: ListSecretsRequest, config?: AxiosRequestConfig): AxiosPromise<ListSecretsResponse>;
+  ListSecrets(data?: ListSecretsRequest, config?: AxiosRequestConfig): AxiosPromise<ListSecretsResponse>;
   /** 增加新版本凭据 */
   PutSecretValue(data: PutSecretValueRequest, config?: AxiosRequestConfig): AxiosPromise<PutSecretValueResponse>;
   /** 恢复计划删除中的凭据 */

@@ -1849,6 +1849,8 @@ declare interface SearchLogRequest {
   Sort?: string;
   /** 为true代表使用新的检索结果返回方式，输出参数AnalysisRecords和Columns有效为false时代表使用老的检索结果返回方式, 输出AnalysisResults和ColNames有效两种返回方式在编码格式上有少量区别，建议使用true */
   UseNewAnalysis?: boolean;
+  /** 执行统计分析（Query中包含SQL）时，是否对原始日志先进行采样，再进行统计分析。0：自动采样;0～1：按指定采样率采样，例如0.02;1：不采样，即精确分析默认值为1 */
+  SamplingRate?: number;
 }
 
 declare interface SearchLogResponse {
@@ -1958,15 +1960,15 @@ declare interface Cls {
   /** 删除日志主题 */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
   /** 获取通知渠道组列表 */
-  DescribeAlarmNotices(data: DescribeAlarmNoticesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNoticesResponse>;
+  DescribeAlarmNotices(data?: DescribeAlarmNoticesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNoticesResponse>;
   /** 获取告警策略列表 */
-  DescribeAlarms(data: DescribeAlarmsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmsResponse>;
+  DescribeAlarms(data?: DescribeAlarmsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmsResponse>;
   /** 获取特殊采集配置 */
-  DescribeConfigExtras(data: DescribeConfigExtrasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigExtrasResponse>;
+  DescribeConfigExtras(data?: DescribeConfigExtrasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigExtrasResponse>;
   /** 获取采集规则配置所绑定的机器组 */
   DescribeConfigMachineGroups(data: DescribeConfigMachineGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigMachineGroupsResponse>;
   /** 获取采集规则配置 */
-  DescribeConfigs(data: DescribeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigsResponse>;
+  DescribeConfigs(data?: DescribeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigsResponse>;
   /** 获取投递配置 */
   DescribeConsumer(data: DescribeConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerResponse>;
   /** 获取日志下载任务列表 */
@@ -1978,11 +1980,11 @@ declare interface Cls {
   /** 获取日志数量直方图 */
   DescribeLogHistogram(data: DescribeLogHistogramRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogHistogramResponse>;
   /** 获取日志集列表 */
-  DescribeLogsets(data: DescribeLogsetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsetsResponse>;
+  DescribeLogsets(data?: DescribeLogsetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsetsResponse>;
   /** 获取机器组绑定的采集规则配置 */
   DescribeMachineGroupConfigs(data: DescribeMachineGroupConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineGroupConfigsResponse>;
   /** 获取机器组列表 */
-  DescribeMachineGroups(data: DescribeMachineGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineGroupsResponse>;
+  DescribeMachineGroups(data?: DescribeMachineGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineGroupsResponse>;
   /** 获取机器状态 */
   DescribeMachines(data: DescribeMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachinesResponse>;
   /** 获取分区列表 */
@@ -1990,9 +1992,9 @@ declare interface Cls {
   /** 获取投递任务列表 */
   DescribeShipperTasks(data: DescribeShipperTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShipperTasksResponse>;
   /** 获取投递规则 */
-  DescribeShippers(data: DescribeShippersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShippersResponse>;
+  DescribeShippers(data?: DescribeShippersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShippersResponse>;
   /** 获取日志主题列表 */
-  DescribeTopics(data: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
+  DescribeTopics(data?: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
   /** 获取告警任务历史记录 */
   GetAlarmLog(data: GetAlarmLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetAlarmLogResponse>;
   /** 合并分区 */

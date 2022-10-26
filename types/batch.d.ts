@@ -1521,7 +1521,7 @@ declare interface Batch {
   /** 删除任务模板 */
   DeleteTaskTemplates(data: DeleteTaskTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskTemplatesResponse>;
   /** 获取批量计算可用的CVM机型配置信息 */
-  DescribeAvailableCvmInstanceTypes(data: DescribeAvailableCvmInstanceTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableCvmInstanceTypesResponse>;
+  DescribeAvailableCvmInstanceTypes(data?: DescribeAvailableCvmInstanceTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableCvmInstanceTypesResponse>;
   /** 获取计算环境详情 */
   DescribeComputeEnv(data: DescribeComputeEnvRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvResponse>;
   /** 查看计算环境活动信息 */
@@ -1529,13 +1529,13 @@ declare interface Batch {
   /** 查看计算环境的创建信息 */
   DescribeComputeEnvCreateInfo(data: DescribeComputeEnvCreateInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvCreateInfoResponse>;
   /** 查看计算环境创建信息列表 */
-  DescribeComputeEnvCreateInfos(data: DescribeComputeEnvCreateInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvCreateInfosResponse>;
+  DescribeComputeEnvCreateInfos(data?: DescribeComputeEnvCreateInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvCreateInfosResponse>;
   /** 获取计算环境列表 */
-  DescribeComputeEnvs(data: DescribeComputeEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvsResponse>;
+  DescribeComputeEnvs(data?: DescribeComputeEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvsResponse>;
   /** 查询批量计算黑石操作系统信息 */
-  DescribeCpmOsInfo(data: DescribeCpmOsInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCpmOsInfoResponse>;
+  DescribeCpmOsInfo(data?: DescribeCpmOsInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCpmOsInfoResponse>;
   /** 获取批量计算可用区机型配置信息 */
-  DescribeCvmZoneInstanceConfigInfos(data: DescribeCvmZoneInstanceConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCvmZoneInstanceConfigInfosResponse>;
+  DescribeCvmZoneInstanceConfigInfos(data?: DescribeCvmZoneInstanceConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCvmZoneInstanceConfigInfosResponse>;
   /** 查询实例分类信息 */
   DescribeInstanceCategories(data?: DescribeInstanceCategoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceCategoriesResponse>;
   /** 查看作业详情 */
@@ -1543,13 +1543,13 @@ declare interface Batch {
   /** 获取作业的提交信息 */
   DescribeJobSubmitInfo(data: DescribeJobSubmitInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobSubmitInfoResponse>;
   /** 查看作业列表 */
-  DescribeJobs(data: DescribeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobsResponse>;
+  DescribeJobs(data?: DescribeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobsResponse>;
   /** 查询任务详情 */
   DescribeTask(data: DescribeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResponse>;
   /** 获取任务日志详情 */
   DescribeTaskLogs(data: DescribeTaskLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogsResponse>;
   /** 获取任务模板 */
-  DescribeTaskTemplates(data: DescribeTaskTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskTemplatesResponse>;
+  DescribeTaskTemplates(data?: DescribeTaskTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskTemplatesResponse>;
   /** 从计算环境移出实例 */
   DetachInstances(data: DetachInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachInstancesResponse>;
   /** 修改计算环境 */

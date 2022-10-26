@@ -1130,19 +1130,19 @@ declare interface Cbs {
   /** 删除快照 */
   DeleteSnapshots(data: DeleteSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotsResponse>;
   /** 查询定期快照策略 */
-  DescribeAutoSnapshotPolicies(data: DescribeAutoSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoSnapshotPoliciesResponse>;
+  DescribeAutoSnapshotPolicies(data?: DescribeAutoSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoSnapshotPoliciesResponse>;
   /** 查询云硬盘关联定期快照策略 */
   DescribeDiskAssociatedAutoSnapshotPolicy(data: DescribeDiskAssociatedAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskAssociatedAutoSnapshotPolicyResponse>;
   /** 查询备份点列表 */
-  DescribeDiskBackups(data: DescribeDiskBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskBackupsResponse>;
+  DescribeDiskBackups(data?: DescribeDiskBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskBackupsResponse>;
   /** 查询云硬盘配额 */
   DescribeDiskConfigQuota(data: DescribeDiskConfigQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskConfigQuotaResponse>;
   /** 查询云盘操作日志列表 */
   DescribeDiskOperationLogs(data: DescribeDiskOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskOperationLogsResponse>;
   /** 查询云硬盘独享集群列表 */
-  DescribeDiskStoragePool(data: DescribeDiskStoragePoolRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskStoragePoolResponse>;
+  DescribeDiskStoragePool(data?: DescribeDiskStoragePoolRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskStoragePoolResponse>;
   /** 查询云硬盘列表 */
-  DescribeDisks(data: DescribeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksResponse>;
+  DescribeDisks(data?: DescribeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksResponse>;
   /** 查询实例关联的云硬盘数量 */
   DescribeInstancesDiskNum(data: DescribeInstancesDiskNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDiskNumResponse>;
   /** 查询快照操作日志列表 */
@@ -1150,7 +1150,7 @@ declare interface Cbs {
   /** 查看快照分享信息 */
   DescribeSnapshotSharePermission(data: DescribeSnapshotSharePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotSharePermissionResponse>;
   /** 查询快照列表 */
-  DescribeSnapshots(data: DescribeSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsResponse>;
+  DescribeSnapshots(data?: DescribeSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsResponse>;
   /** 卸载云硬盘 */
   DetachDisks(data: DetachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DetachDisksResponse>;
   /** 获取快照概览信息 */

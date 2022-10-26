@@ -1292,7 +1292,7 @@ declare interface Vm {
   /** 查看任务详情 */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
   /** 查看审核任务列表 */
-  DescribeTasks(data: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
+  DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
   /** 取消任务 */
   CancelTask(data: V20201229.CancelTaskRequest, config: AxiosRequestConfig & V20201229.VersionHeader): AxiosPromise<V20201229.CancelTaskResponse>;
   /** 创建视频审核任务 */

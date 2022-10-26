@@ -518,9 +518,9 @@ declare interface Asr {
   /** 获取热词表 */
   GetAsrVocab(data: GetAsrVocabRequest, config?: AxiosRequestConfig): AxiosPromise<GetAsrVocabResponse>;
   /** 列举热词表 */
-  GetAsrVocabList(data: GetAsrVocabListRequest, config?: AxiosRequestConfig): AxiosPromise<GetAsrVocabListResponse>;
+  GetAsrVocabList(data?: GetAsrVocabListRequest, config?: AxiosRequestConfig): AxiosPromise<GetAsrVocabListResponse>;
   /** 查询自学习模型列表 */
-  GetCustomizationList(data: GetCustomizationListRequest, config?: AxiosRequestConfig): AxiosPromise<GetCustomizationListResponse>;
+  GetCustomizationList(data?: GetCustomizationListRequest, config?: AxiosRequestConfig): AxiosPromise<GetCustomizationListResponse>;
   /** 更新自学习模型 */
   ModifyCustomization(data: ModifyCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizationResponse>;
   /** 修改自学习模型状态 */

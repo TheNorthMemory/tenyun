@@ -4014,7 +4014,7 @@ declare interface Monitor {
   /** 列出 Prometheus CVM Agent */
   DescribePrometheusAgents(data: DescribePrometheusAgentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAgentsResponse>;
   /** 查看 Prometheus 实例列表 */
-  DescribePrometheusInstances(data: DescribePrometheusInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstancesResponse>;
+  DescribePrometheusInstances(data?: DescribePrometheusInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstancesResponse>;
   /** 列出 Prometheus 抓取任务 */
   DescribePrometheusScrapeJobs(data: DescribePrometheusScrapeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusScrapeJobsResponse>;
   /** 查询预聚合规则 */

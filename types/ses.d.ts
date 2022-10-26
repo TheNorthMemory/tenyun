@@ -24,6 +24,8 @@ declare interface CycleEmailParam {
   BeginTime: string;
   /** 任务周期 小时维度 */
   IntervalTime: number;
+  /** 是否终止周期，用于任务更新 0否1是 */
+  TermCycle?: number;
 }
 
 /** 用于描述DNS记录的域名、记录类型、期望得到的值、目前配置的值 */

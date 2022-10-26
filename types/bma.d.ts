@@ -912,15 +912,15 @@ declare interface UpdateCRWorkResponse {
 declare interface Bma {
   (): Versions;
   /** 添加仿冒链接（举报） */
-  CreateBPFakeURL(data: CreateBPFakeURLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPFakeURLResponse>;
+  CreateBPFakeURL(data?: CreateBPFakeURLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPFakeURLResponse>;
   /** 添加误报工单 */
-  CreateBPFalseTicket(data: CreateBPFalseTicketRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPFalseTicketResponse>;
+  CreateBPFalseTicket(data?: CreateBPFalseTicketRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPFalseTicketResponse>;
   /** 添加下线材料 */
-  CreateBPOfflineAttachment(data: CreateBPOfflineAttachmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPOfflineAttachmentResponse>;
+  CreateBPOfflineAttachment(data?: CreateBPOfflineAttachmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPOfflineAttachmentResponse>;
   /** 添加下线工单 */
-  CreateBPOfflineTicket(data: CreateBPOfflineTicketRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPOfflineTicketResponse>;
+  CreateBPOfflineTicket(data?: CreateBPOfflineTicketRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPOfflineTicketResponse>;
   /** 添加保护网站 */
-  CreateBPProtectURLs(data: CreateBPProtectURLsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPProtectURLsResponse>;
+  CreateBPProtectURLs(data?: CreateBPProtectURLsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPProtectURLsResponse>;
   /** 新建协查处置 */
   CreateCRBlock(data: CreateCRBlockRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRBlockResponse>;
   /** 企业认证 */
@@ -942,21 +942,21 @@ declare interface Bma {
   /** 查询企业信息 */
   DescribeBPCompanyInfo(data?: DescribeBPCompanyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPCompanyInfoResponse>;
   /** 查询仿冒链接 */
-  DescribeBPFakeURLs(data: DescribeBPFakeURLsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPFakeURLsResponse>;
+  DescribeBPFakeURLs(data?: DescribeBPFakeURLsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPFakeURLsResponse>;
   /** 查询保护网站 */
-  DescribeBPProtectURLs(data: DescribeBPProtectURLsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPProtectURLsResponse>;
+  DescribeBPProtectURLs(data?: DescribeBPProtectURLsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPProtectURLsResponse>;
   /** 查询举报列表 */
-  DescribeBPReportFakeURLs(data: DescribeBPReportFakeURLsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPReportFakeURLsResponse>;
+  DescribeBPReportFakeURLs(data?: DescribeBPReportFakeURLsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPReportFakeURLsResponse>;
   /** 查询作品监测详情 */
   DescribeCRMonitorDetail(data: DescribeCRMonitorDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCRMonitorDetailResponse>;
   /** 查询监测列表 */
-  DescribeCRMonitors(data: DescribeCRMonitorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCRMonitorsResponse>;
+  DescribeCRMonitors(data?: DescribeCRMonitorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCRMonitorsResponse>;
   /** 查询取证详情 */
   DescribeCRObtainDetail(data: DescribeCRObtainDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCRObtainDetailResponse>;
   /** 查询作品基本信息 */
   DescribeCRWorkInfo(data: DescribeCRWorkInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCRWorkInfoResponse>;
   /** 修改下线材料 */
-  ModifyBPOfflineAttachment(data: ModifyBPOfflineAttachmentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBPOfflineAttachmentResponse>;
+  ModifyBPOfflineAttachment(data?: ModifyBPOfflineAttachmentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBPOfflineAttachmentResponse>;
   /** 协查处置申请 */
   ModifyCRBlockStatus(data: ModifyCRBlockStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCRBlockStatusResponse>;
   /** 开启或关闭监测 */
@@ -966,7 +966,7 @@ declare interface Bma {
   /** 发函申请 */
   ModifyCRRightStatus(data: ModifyCRRightStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCRRightStatusResponse>;
   /** 修改白名单列表 */
-  ModifyCRWhiteList(data: ModifyCRWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCRWhiteListResponse>;
+  ModifyCRWhiteList(data?: ModifyCRWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCRWhiteListResponse>;
   /** 更新作品 */
   UpdateCRWork(data: UpdateCRWorkRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCRWorkResponse>;
 }

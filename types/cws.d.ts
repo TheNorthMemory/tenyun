@@ -578,7 +578,7 @@ declare interface Cws {
   /** 新增漏洞误报信息 */
   CreateVulsMisinformation(data: CreateVulsMisinformationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulsMisinformationResponse>;
   /** 生成漏洞报告 */
-  CreateVulsReport(data: CreateVulsReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulsReportResponse>;
+  CreateVulsReport(data?: CreateVulsReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulsReportResponse>;
   /** 删除监控任务 */
   DeleteMonitors(data: DeleteMonitorsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMonitorsResponse>;
   /** 删除站点 */
@@ -586,21 +586,21 @@ declare interface Cws {
   /** 查看用户配置列表 */
   DescribeConfig(data?: DescribeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigResponse>;
   /** 查看监控任务 */
-  DescribeMonitors(data: DescribeMonitorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorsResponse>;
+  DescribeMonitors(data?: DescribeMonitorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorsResponse>;
   /** 查看站点购买配额 */
   DescribeSiteQuota(data?: DescribeSiteQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSiteQuotaResponse>;
   /** 查看站点列表 */
-  DescribeSites(data: DescribeSitesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSitesResponse>;
+  DescribeSites(data?: DescribeSitesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSitesResponse>;
   /** 查看站点列表的验证信息列表 */
   DescribeSitesVerification(data: DescribeSitesVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSitesVerificationResponse>;
   /** 查看漏洞列表 */
-  DescribeVuls(data: DescribeVulsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulsResponse>;
+  DescribeVuls(data?: DescribeVulsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulsResponse>;
   /** 查看当前漏洞总计数量 */
   DescribeVulsNumber(data?: DescribeVulsNumberRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulsNumberResponse>;
   /** 查看漏洞数随时间变化统计信息 */
   DescribeVulsNumberTimeline(data?: DescribeVulsNumberTimelineRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulsNumberTimelineResponse>;
   /** 修改用户配置的属性 */
-  ModifyConfigAttribute(data: ModifyConfigAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigAttributeResponse>;
+  ModifyConfigAttribute(data?: ModifyConfigAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigAttributeResponse>;
   /** 修改监测任务的属性 */
   ModifyMonitorAttribute(data: ModifyMonitorAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMonitorAttributeResponse>;
   /** 修改站点的属性 */

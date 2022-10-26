@@ -908,25 +908,25 @@ declare interface Wav {
   /** 查询活动参与明细列表接口 */
   QueryActivityJoinList(data: QueryActivityJoinListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryActivityJoinListResponse>;
   /** 查询活动列表接口 */
-  QueryActivityList(data: QueryActivityListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryActivityListResponse>;
+  QueryActivityList(data?: QueryActivityListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryActivityListResponse>;
   /** 查询活动活码列表接口 */
-  QueryActivityLiveCodeList(data: QueryActivityLiveCodeListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryActivityLiveCodeListResponse>;
+  QueryActivityLiveCodeList(data?: QueryActivityLiveCodeListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryActivityLiveCodeListResponse>;
   /** 查询渠道活码列表接口 */
-  QueryChannelCodeList(data: QueryChannelCodeListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChannelCodeListResponse>;
+  QueryChannelCodeList(data?: QueryChannelCodeListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChannelCodeListResponse>;
   /** 查询会话存档列表接口 */
-  QueryChatArchivingList(data: QueryChatArchivingListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChatArchivingListResponse>;
+  QueryChatArchivingList(data?: QueryChatArchivingListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChatArchivingListResponse>;
   /** 查询线索列表接口 */
-  QueryClueInfoList(data: QueryClueInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryClueInfoListResponse>;
+  QueryClueInfoList(data?: QueryClueInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryClueInfoListResponse>;
   /** 查询CRM统计数据接口 */
   QueryCrmStatistics(data: QueryCrmStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCrmStatisticsResponse>;
   /** 查询外部联系人SaaS使用明细数据接口 */
   QueryCustomerEventDetailStatistics(data: QueryCustomerEventDetailStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCustomerEventDetailStatisticsResponse>;
   /** 查询经销商信息列表接口 */
-  QueryDealerInfoList(data: QueryDealerInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryDealerInfoListResponse>;
+  QueryDealerInfoList(data?: QueryDealerInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryDealerInfoListResponse>;
   /** 查询外部联系人详情接口 */
   QueryExternalContactDetail(data: QueryExternalContactDetailRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExternalContactDetailResponse>;
   /** 查询外部联系人列表接口 */
-  QueryExternalContactList(data: QueryExternalContactListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExternalContactListResponse>;
+  QueryExternalContactList(data?: QueryExternalContactListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExternalContactListResponse>;
   /** 查询外部联系人事件明细列表接口 */
   QueryExternalUserEventList(data: QueryExternalUserEventListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExternalUserEventListResponse>;
   /** 外部联系人转换接口 */
@@ -936,13 +936,13 @@ declare interface Wav {
   /** 获取企业素材列表接口 */
   QueryMaterialList(data: QueryMaterialListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMaterialListResponse>;
   /** 查询小程序码列表接口 */
-  QueryMiniAppCodeList(data: QueryMiniAppCodeListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMiniAppCodeListResponse>;
+  QueryMiniAppCodeList(data?: QueryMiniAppCodeListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMiniAppCodeListResponse>;
   /** 企业成员SaaS使用明细数据接口 */
   QueryStaffEventDetailStatistics(data: QueryStaffEventDetailStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryStaffEventDetailStatisticsResponse>;
   /** 查询企业成员信息列表接口 */
-  QueryUserInfoList(data: QueryUserInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryUserInfoListResponse>;
+  QueryUserInfoList(data?: QueryUserInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryUserInfoListResponse>;
   /** 查询车系车型信息列表接口 */
-  QueryVehicleInfoList(data: QueryVehicleInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryVehicleInfoListResponse>;
+  QueryVehicleInfoList(data?: QueryVehicleInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryVehicleInfoListResponse>;
 }
 
 export declare type Versions = ["2021-01-29"];

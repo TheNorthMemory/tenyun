@@ -596,13 +596,13 @@ declare interface Gpm {
   /** 分页查询匹配Code */
   DescribeMatchCodes(data: DescribeMatchCodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMatchCodesResponse>;
   /** 分页查询匹配列表 */
-  DescribeMatches(data: DescribeMatchesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMatchesResponse>;
+  DescribeMatches(data?: DescribeMatchesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMatchesResponse>;
   /** 查询匹配进度 */
   DescribeMatchingProgress(data: DescribeMatchingProgressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMatchingProgressResponse>;
   /** 查询规则详情 */
   DescribeRule(data: DescribeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleResponse>;
   /** 分页查询规则集列表 */
-  DescribeRules(data: DescribeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesResponse>;
+  DescribeRules(data?: DescribeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesResponse>;
   /** 查询匹配Token */
   DescribeToken(data: DescribeTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenResponse>;
   /** 修改匹配 */

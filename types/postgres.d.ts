@@ -1900,7 +1900,7 @@ declare interface Postgres {
   /** 关闭实例外网链接 */
   CloseDBExtranetAccess(data: CloseDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseDBExtranetAccessResponse>;
   /** 关闭serverlessDB实例外网 */
-  CloseServerlessDBExtranetAccess(data: CloseServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseServerlessDBExtranetAccessResponse>;
+  CloseServerlessDBExtranetAccess(data?: CloseServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseServerlessDBExtranetAccessResponse>;
   /** 添加实例网络 */
   CreateDBInstanceNetworkAccess(data: CreateDBInstanceNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceNetworkAccessResponse>;
   /** 创建实例(旧) */
@@ -1922,7 +1922,7 @@ declare interface Postgres {
   /** 删除RO组网络 */
   DeleteReadOnlyGroupNetworkAccess(data: DeleteReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReadOnlyGroupNetworkAccessResponse>;
   /** 删除ServerlessDB实例 */
-  DeleteServerlessDBInstance(data: DeleteServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessDBInstanceResponse>;
+  DeleteServerlessDBInstance(data?: DeleteServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessDBInstanceResponse>;
   /** 获取实例用户列表 */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
   /** 查询实例可恢复的时间范围 */
@@ -1940,7 +1940,7 @@ declare interface Postgres {
   /** 获取实例可修改参数列表 */
   DescribeDBInstanceParameters(data: DescribeDBInstanceParametersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceParametersResponse>;
   /** 查询实例列表 */
-  DescribeDBInstances(data: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
+  DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
   /** 获取慢查询日志 （废弃） */
   DescribeDBSlowlogs(data: DescribeDBSlowlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSlowlogsResponse>;
   /** 获取实例Xlog列表 */
@@ -1954,13 +1954,13 @@ declare interface Postgres {
   /** 获取参数修改事件详情 */
   DescribeParamsEvent(data: DescribeParamsEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamsEventResponse>;
   /** 查询售卖规格配置 */
-  DescribeProductConfig(data: DescribeProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductConfigResponse>;
+  DescribeProductConfig(data?: DescribeProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductConfigResponse>;
   /** 查询只读组信息 */
-  DescribeReadOnlyGroups(data: DescribeReadOnlyGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReadOnlyGroupsResponse>;
+  DescribeReadOnlyGroups(data?: DescribeReadOnlyGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReadOnlyGroupsResponse>;
   /** 查询售卖地域 */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
   /** 查询ServerlessDB实例列表 */
-  DescribeServerlessDBInstances(data: DescribeServerlessDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessDBInstancesResponse>;
+  DescribeServerlessDBInstances(data?: DescribeServerlessDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessDBInstancesResponse>;
   /** 获取慢查询统计分析列表 */
   DescribeSlowQueryAnalysis(data: DescribeSlowQueryAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowQueryAnalysisResponse>;
   /** 获取慢查询列表 */
@@ -2004,7 +2004,7 @@ declare interface Postgres {
   /** 开通外网 */
   OpenDBExtranetAccess(data: OpenDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenDBExtranetAccessResponse>;
   /** 开通serverlessDB实例外网 */
-  OpenServerlessDBExtranetAccess(data: OpenServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenServerlessDBExtranetAccessResponse>;
+  OpenServerlessDBExtranetAccess(data?: OpenServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenServerlessDBExtranetAccessResponse>;
   /** 均衡只读组内实例的负载 */
   RebalanceReadOnlyGroup(data: RebalanceReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RebalanceReadOnlyGroupResponse>;
   /** 将只读实例从只读组中移除 */

@@ -1614,13 +1614,13 @@ declare interface Es {
   /** 查询实例操作记录 */
   DescribeInstanceOperations(data: DescribeInstanceOperationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceOperationsResponse>;
   /** 查询ES集群实例 */
-  DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 查询Logstash实例日志 */
   DescribeLogstashInstanceLogs(data: DescribeLogstashInstanceLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashInstanceLogsResponse>;
   /** 查询Logstash实例操作记录 */
   DescribeLogstashInstanceOperations(data: DescribeLogstashInstanceOperationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashInstanceOperationsResponse>;
   /** 获取Logstash实例列表 */
-  DescribeLogstashInstances(data: DescribeLogstashInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashInstancesResponse>;
+  DescribeLogstashInstances(data?: DescribeLogstashInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashInstancesResponse>;
   /** 获取Logstash实例管道列表 */
   DescribeLogstashPipelines(data: DescribeLogstashPipelinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashPipelinesResponse>;
   /** 查询集群视图 */

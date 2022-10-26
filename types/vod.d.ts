@@ -7342,9 +7342,9 @@ declare interface Vod {
   /** 确认事件通知 */
   ConfirmEvents(data: ConfirmEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmEventsResponse>;
   /** 创建音视频内容分析模板 */
-  CreateAIAnalysisTemplate(data: CreateAIAnalysisTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIAnalysisTemplateResponse>;
+  CreateAIAnalysisTemplate(data?: CreateAIAnalysisTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIAnalysisTemplateResponse>;
   /** 创建音视频内容识别模板 */
-  CreateAIRecognitionTemplate(data: CreateAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIRecognitionTemplateResponse>;
+  CreateAIRecognitionTemplate(data?: CreateAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIRecognitionTemplateResponse>;
   /** 创建转自适应码流模板 */
   CreateAdaptiveDynamicStreamingTemplate(data: CreateAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdaptiveDynamicStreamingTemplateResponse>;
   /** 创建转动图模板 */
@@ -7366,7 +7366,7 @@ declare interface Vod {
   /** 创建采样截图模板 */
   CreateSampleSnapshotTemplate(data: CreateSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSampleSnapshotTemplateResponse>;
   /** 创建指定时间点截图模板 */
-  CreateSnapshotByTimeOffsetTemplate(data: CreateSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotByTimeOffsetTemplateResponse>;
+  CreateSnapshotByTimeOffsetTemplate(data?: CreateSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotByTimeOffsetTemplateResponse>;
   /** 开通某地域的存储 */
   CreateStorageRegion(data: CreateStorageRegionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStorageRegionResponse>;
   /** 创建子应用 */
@@ -7420,15 +7420,15 @@ declare interface Vod {
   /** 删除关键词样本 */
   DeleteWordSamples(data: DeleteWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWordSamplesResponse>;
   /** 获取音视频内容分析模板列表 */
-  DescribeAIAnalysisTemplates(data: DescribeAIAnalysisTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAnalysisTemplatesResponse>;
+  DescribeAIAnalysisTemplates(data?: DescribeAIAnalysisTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAnalysisTemplatesResponse>;
   /** 获取音视频内容识别模板列表 */
-  DescribeAIRecognitionTemplates(data: DescribeAIRecognitionTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIRecognitionTemplatesResponse>;
+  DescribeAIRecognitionTemplates(data?: DescribeAIRecognitionTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIRecognitionTemplatesResponse>;
   /** 获取转自适应码流模板列表 */
-  DescribeAdaptiveDynamicStreamingTemplates(data: DescribeAdaptiveDynamicStreamingTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAdaptiveDynamicStreamingTemplatesResponse>;
+  DescribeAdaptiveDynamicStreamingTemplates(data?: DescribeAdaptiveDynamicStreamingTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAdaptiveDynamicStreamingTemplatesResponse>;
   /** 获取所有分类 */
-  DescribeAllClass(data: DescribeAllClassRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllClassResponse>;
+  DescribeAllClass(data?: DescribeAllClassRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllClassResponse>;
   /** 获取转动图模板列表 */
-  DescribeAnimatedGraphicsTemplates(data: DescribeAnimatedGraphicsTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnimatedGraphicsTemplatesResponse>;
+  DescribeAnimatedGraphicsTemplates(data?: DescribeAnimatedGraphicsTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnimatedGraphicsTemplatesResponse>;
   /** 查询点播域名的 CDN 统计数据 */
   DescribeCDNStatDetails(data: DescribeCDNStatDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCDNStatDetailsResponse>;
   /** 查询点播 CDN 用量数据 */
@@ -7438,7 +7438,7 @@ declare interface Vod {
   /** 查询客户端上传加速统计数据 */
   DescribeClientUploadAccelerationUsageData(data: DescribeClientUploadAccelerationUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientUploadAccelerationUsageDataResponse>;
   /** 获取音视频内容审核模板列表 */
-  DescribeContentReviewTemplates(data: DescribeContentReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentReviewTemplatesResponse>;
+  DescribeContentReviewTemplates(data?: DescribeContentReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentReviewTemplatesResponse>;
   /** 查询媒体文件的播放统计数据 */
   DescribeDailyMediaPlayStat(data: DescribeDailyMediaPlayStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDailyMediaPlayStatResponse>;
   /** 查询每日播放 Top100的媒体文件的播放统计数据 */
@@ -7448,19 +7448,19 @@ declare interface Vod {
   /** 获取视频解密密钥 */
   DescribeDrmDataKey(data: DescribeDrmDataKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDrmDataKeyResponse>;
   /** 查询 DRM 密钥提供商信息 */
-  DescribeDrmKeyProviderInfo(data: DescribeDrmKeyProviderInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDrmKeyProviderInfoResponse>;
+  DescribeDrmKeyProviderInfo(data?: DescribeDrmKeyProviderInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDrmKeyProviderInfoResponse>;
   /** 查询事件通知配置 */
-  DescribeEventConfig(data: DescribeEventConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventConfigResponse>;
+  DescribeEventConfig(data?: DescribeEventConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventConfigResponse>;
   /** 获取事件通知状态 */
-  DescribeEventsState(data: DescribeEventsStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsStateResponse>;
+  DescribeEventsState(data?: DescribeEventsStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsStateResponse>;
   /** 获取片头片尾模板列表 */
-  DescribeHeadTailTemplates(data: DescribeHeadTailTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHeadTailTemplatesResponse>;
+  DescribeHeadTailTemplates(data?: DescribeHeadTailTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHeadTailTemplatesResponse>;
   /** 获取图片即时处理模板列表 */
-  DescribeImageProcessingTemplates(data: DescribeImageProcessingTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageProcessingTemplatesResponse>;
+  DescribeImageProcessingTemplates(data?: DescribeImageProcessingTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageProcessingTemplatesResponse>;
   /** 查询图片审核用量统计数据 */
   DescribeImageReviewUsageData(data: DescribeImageReviewUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageReviewUsageDataResponse>;
   /** 获取雪碧图模板列表 */
-  DescribeImageSpriteTemplates(data: DescribeImageSpriteTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSpriteTemplatesResponse>;
+  DescribeImageSpriteTemplates(data?: DescribeImageSpriteTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSpriteTemplatesResponse>;
   /** 查询 License 请求数统计数据 */
   DescribeLicenseUsageData(data: DescribeLicenseUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseUsageDataResponse>;
   /** 获取媒体详细信息 */
@@ -7470,39 +7470,39 @@ declare interface Vod {
   /** 查询视频处理用量统计数据 */
   DescribeMediaProcessUsageData(data: DescribeMediaProcessUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaProcessUsageDataResponse>;
   /** 获取素材样本列表 */
-  DescribePersonSamples(data: DescribePersonSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonSamplesResponse>;
+  DescribePersonSamples(data?: DescribePersonSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonSamplesResponse>;
   /** 查询购买的预付费商品列表 */
   DescribePrepaidProducts(data?: DescribePrepaidProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrepaidProductsResponse>;
   /** 获取任务流模板列表 */
-  DescribeProcedureTemplates(data: DescribeProcedureTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcedureTemplatesResponse>;
+  DescribeProcedureTemplates(data?: DescribeProcedureTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcedureTemplatesResponse>;
   /** 查询内容智能识别详情 */
   DescribeReviewDetails(data: DescribeReviewDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReviewDetailsResponse>;
   /** 获取采样截图模板列表 */
-  DescribeSampleSnapshotTemplates(data: DescribeSampleSnapshotTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleSnapshotTemplatesResponse>;
+  DescribeSampleSnapshotTemplates(data?: DescribeSampleSnapshotTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleSnapshotTemplatesResponse>;
   /** 获取指定时间点截图模板列表 */
-  DescribeSnapshotByTimeOffsetTemplates(data: DescribeSnapshotByTimeOffsetTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotByTimeOffsetTemplatesResponse>;
+  DescribeSnapshotByTimeOffsetTemplates(data?: DescribeSnapshotByTimeOffsetTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotByTimeOffsetTemplatesResponse>;
   /** 查询当前存储情况 */
-  DescribeStorageData(data: DescribeStorageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageDataResponse>;
+  DescribeStorageData(data?: DescribeStorageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageDataResponse>;
   /** 查询存储空间数据详情 */
   DescribeStorageDetails(data: DescribeStorageDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageDetailsResponse>;
   /** 查询存储地域列表 */
-  DescribeStorageRegions(data: DescribeStorageRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageRegionsResponse>;
+  DescribeStorageRegions(data?: DescribeStorageRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageRegionsResponse>;
   /** 查询子应用列表 */
-  DescribeSubAppIds(data: DescribeSubAppIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubAppIdsResponse>;
+  DescribeSubAppIds(data?: DescribeSubAppIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubAppIdsResponse>;
   /** 获取播放器配置列表 */
-  DescribeSuperPlayerConfigs(data: DescribeSuperPlayerConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSuperPlayerConfigsResponse>;
+  DescribeSuperPlayerConfigs(data?: DescribeSuperPlayerConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSuperPlayerConfigsResponse>;
   /** 查询任务详情 */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
   /** 获取任务列表 */
-  DescribeTasks(data: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
+  DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
   /** 获取转码模板列表 */
-  DescribeTranscodeTemplates(data: DescribeTranscodeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeTemplatesResponse>;
+  DescribeTranscodeTemplates(data?: DescribeTranscodeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeTemplatesResponse>;
   /** 查询点播域名列表 */
-  DescribeVodDomains(data: DescribeVodDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVodDomainsResponse>;
+  DescribeVodDomains(data?: DescribeVodDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVodDomainsResponse>;
   /** 获取水印模板列表 */
-  DescribeWatermarkTemplates(data: DescribeWatermarkTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWatermarkTemplatesResponse>;
+  DescribeWatermarkTemplates(data?: DescribeWatermarkTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWatermarkTemplatesResponse>;
   /** 获取关键词样本列表 */
-  DescribeWordSamples(data: DescribeWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWordSamplesResponse>;
+  DescribeWordSamples(data?: DescribeWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWordSamplesResponse>;
   /** 编辑视频 */
   EditMedia(data: EditMediaRequest, config?: AxiosRequestConfig): AxiosPromise<EditMediaResponse>;
   /** 执行定制 API */
@@ -7530,7 +7530,7 @@ declare interface Vod {
   /** 设置默认的存储地域 */
   ModifyDefaultStorageRegion(data: ModifyDefaultStorageRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDefaultStorageRegionResponse>;
   /** 修改事件通知配置 */
-  ModifyEventConfig(data: ModifyEventConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEventConfigResponse>;
+  ModifyEventConfig(data?: ModifyEventConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEventConfigResponse>;
   /** 修改片头片尾模板 */
   ModifyHeadTailTemplate(data: ModifyHeadTailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHeadTailTemplateResponse>;
   /** 修改雪碧图模板 */
@@ -7570,9 +7570,9 @@ declare interface Vod {
   /** 使用任务流模板进行视频处理 */
   ProcessMediaByProcedure(data: ProcessMediaByProcedureRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessMediaByProcedureResponse>;
   /** 对指定 URL 的视频发起视频处理 */
-  ProcessMediaByUrl(data: ProcessMediaByUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessMediaByUrlResponse>;
+  ProcessMediaByUrl(data?: ProcessMediaByUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessMediaByUrlResponse>;
   /** 拉取事件通知 */
-  PullEvents(data: PullEventsRequest, config?: AxiosRequestConfig): AxiosPromise<PullEventsResponse>;
+  PullEvents(data?: PullEventsRequest, config?: AxiosRequestConfig): AxiosPromise<PullEventsResponse>;
   /** 拉取上传 */
   PullUpload(data: PullUploadRequest, config?: AxiosRequestConfig): AxiosPromise<PullUploadResponse>;
   /** 预热URL */
@@ -7590,9 +7590,9 @@ declare interface Vod {
   /** 图片审核 */
   ReviewImage(data: ReviewImageRequest, config?: AxiosRequestConfig): AxiosPromise<ReviewImageResponse>;
   /** 搜索媒体信息 */
-  SearchMedia(data: SearchMediaRequest, config?: AxiosRequestConfig): AxiosPromise<SearchMediaResponse>;
+  SearchMedia(data?: SearchMediaRequest, config?: AxiosRequestConfig): AxiosPromise<SearchMediaResponse>;
   /** 设置 DRM 密钥提供商信息 */
-  SetDrmKeyProviderInfo(data: SetDrmKeyProviderInfoRequest, config?: AxiosRequestConfig): AxiosPromise<SetDrmKeyProviderInfoResponse>;
+  SetDrmKeyProviderInfo(data?: SetDrmKeyProviderInfoRequest, config?: AxiosRequestConfig): AxiosPromise<SetDrmKeyProviderInfoResponse>;
   /** 简单 HLS 剪辑 */
   SimpleHlsClip(data: SimpleHlsClipRequest, config?: AxiosRequestConfig): AxiosPromise<SimpleHlsClipResponse>;
   /** 视频拆条 */

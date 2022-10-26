@@ -2740,7 +2740,7 @@ declare interface Tem {
   /** 删除应用弹性策略组合 */
   DeleteApplicationAutoscaler(data: DeleteApplicationAutoscalerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationAutoscalerResponse>;
   /** 删除一条访问方式 */
-  DeleteApplicationService(data: DeleteApplicationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationServiceResponse>;
+  DeleteApplicationService(data?: DeleteApplicationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationServiceResponse>;
   /** 删除 Ingress 规则 */
   DeleteIngress(data: DeleteIngressRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIngressResponse>;
   /** 应用部署 */
@@ -2754,31 +2754,31 @@ declare interface Tem {
   /** 查询应用访问方式列表 */
   DescribeApplicationServiceList(data: DescribeApplicationServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationServiceListResponse>;
   /** 获取运行服务列表 */
-  DescribeApplications(data: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
+  DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
   /** 单环境下所有应用状态查看 */
-  DescribeApplicationsStatus(data: DescribeApplicationsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsStatusResponse>;
+  DescribeApplicationsStatus(data?: DescribeApplicationsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsStatusResponse>;
   /** 查询配置详情 */
   DescribeConfigData(data: DescribeConfigDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigDataResponse>;
   /** 查询配置列表 */
   DescribeConfigDataList(data: DescribeConfigDataListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigDataListResponse>;
   /** 获取分批发布详情 */
-  DescribeDeployApplicationDetail(data: DescribeDeployApplicationDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployApplicationDetailResponse>;
+  DescribeDeployApplicationDetail(data?: DescribeDeployApplicationDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployApplicationDetailResponse>;
   /** 获取环境基础信息 */
   DescribeEnvironment(data: DescribeEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentResponse>;
   /** 获取环境状态 */
   DescribeEnvironmentStatus(data: DescribeEnvironmentStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentStatusResponse>;
   /** 获取环境列表 */
-  DescribeEnvironments(data: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
+  DescribeEnvironments(data?: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
   /** 查询 Ingress 规则 */
   DescribeIngress(data: DescribeIngressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIngressResponse>;
   /** 查询 Ingress 规则列表 */
-  DescribeIngresses(data: DescribeIngressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIngressesResponse>;
+  DescribeIngresses(data?: DescribeIngressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIngressesResponse>;
   /** 查询日志收集配置详情 */
   DescribeLogConfig(data: DescribeLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogConfigResponse>;
   /** 查询分页的日志收集配置列表 */
   DescribePagedLogConfigList(data: DescribePagedLogConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePagedLogConfigListResponse>;
   /** 查询应用关联的 Ingress 规则列表 */
-  DescribeRelatedIngresses(data: DescribeRelatedIngressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelatedIngressesResponse>;
+  DescribeRelatedIngresses(data?: DescribeRelatedIngressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelatedIngressesResponse>;
   /** 销毁配置 */
   DestroyConfigData(data: DestroyConfigDataRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyConfigDataResponse>;
   /** 销毁环境 */
@@ -2812,9 +2812,9 @@ declare interface Tem {
   /** 重启应用实例 */
   RestartApplicationPod(data: RestartApplicationPodRequest, config?: AxiosRequestConfig): AxiosPromise<RestartApplicationPodResponse>;
   /** 开始下一批次发布 */
-  ResumeDeployApplication(data: ResumeDeployApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeDeployApplicationResponse>;
+  ResumeDeployApplication(data?: ResumeDeployApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeDeployApplicationResponse>;
   /** 回滚分批发布 */
-  RevertDeployApplication(data: RevertDeployApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<RevertDeployApplicationResponse>;
+  RevertDeployApplication(data?: RevertDeployApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<RevertDeployApplicationResponse>;
   /** 更新应用部署版本 */
   RollingUpdateApplicationByVersion(data: RollingUpdateApplicationByVersionRequest, config?: AxiosRequestConfig): AxiosPromise<RollingUpdateApplicationByVersionResponse>;
   /** 服务停止 */

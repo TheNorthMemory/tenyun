@@ -872,13 +872,13 @@ declare interface Cfs {
   /** 删除挂载点 */
   DeleteMountTarget(data: DeleteMountTargetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMountTargetResponse>;
   /** 查询文件系统快照策略列表信息 */
-  DescribeAutoSnapshotPolicies(data: DescribeAutoSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoSnapshotPoliciesResponse>;
+  DescribeAutoSnapshotPolicies(data?: DescribeAutoSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoSnapshotPoliciesResponse>;
   /** 查询区域可用情况 */
   DescribeAvailableZoneInfo(data?: DescribeAvailableZoneInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableZoneInfoResponse>;
   /** 查询文件系统客户端 */
   DescribeCfsFileSystemClients(data: DescribeCfsFileSystemClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsFileSystemClientsResponse>;
   /** 查询文件系统 */
-  DescribeCfsFileSystems(data: DescribeCfsFileSystemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsFileSystemsResponse>;
+  DescribeCfsFileSystems(data?: DescribeCfsFileSystemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsFileSystemsResponse>;
   /** 查询权限组列表 */
   DescribeCfsPGroups(data?: DescribeCfsPGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsPGroupsResponse>;
   /** 查询权限组规则 */
@@ -888,7 +888,7 @@ declare interface Cfs {
   /** 文件系统快照概览 */
   DescribeCfsSnapshotOverview(data?: DescribeCfsSnapshotOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsSnapshotOverviewResponse>;
   /** 查询快照列表 */
-  DescribeCfsSnapshots(data: DescribeCfsSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsSnapshotsResponse>;
+  DescribeCfsSnapshots(data?: DescribeCfsSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsSnapshotsResponse>;
   /** 查询文件系统挂载点 */
   DescribeMountTargets(data: DescribeMountTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMountTargetsResponse>;
   /** 查询快照操作日志 */

@@ -304,6 +304,8 @@ declare interface PersonInfo {
   FirstAppear: number;
   /** 人物出现信息 */
   AppearInfo: AppearInfo;
+  /** 人脸在图片中的位置，仅在图片标签任务有效 */
+  AppearRect: Rectf | null;
 }
 
 /** 矩形内容框 */
@@ -860,7 +862,7 @@ declare interface UpdateCustomPersonResponse {
   RequestId?: string;
 }
 
-/** [视频智能标签](https://cloud.tencent.com/document/product/1509) */
+/** [媒体智能标签](https://cloud.tencent.com/document/product/1509) */
 declare interface Ivld {
   (): Versions;
   /** 增加自定义人脸图片 */
@@ -902,7 +904,7 @@ declare interface Ivld {
   /** 描述任务与任务结果 */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
   /** 批量描述任务 */
-  DescribeTasks(data: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
+  DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
   /** 导入媒资文件 */
   ImportMedia(data: ImportMediaRequest, config?: AxiosRequestConfig): AxiosPromise<ImportMediaResponse>;
   /** 编辑回调地址 */

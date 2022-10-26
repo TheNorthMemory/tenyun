@@ -612,17 +612,17 @@ declare interface Cii {
   /** 报告自动分类 */
   DescribeReportClassify(data: DescribeReportClassifyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportClassifyResponse>;
   /** 结构化对比查询 */
-  DescribeStructCompareData(data: DescribeStructCompareDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStructCompareDataResponse>;
+  DescribeStructCompareData(data?: DescribeStructCompareDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStructCompareDataResponse>;
   /** 结构化复核差异查询 */
-  DescribeStructureDifference(data: DescribeStructureDifferenceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStructureDifferenceResponse>;
+  DescribeStructureDifference(data?: DescribeStructureDifferenceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStructureDifferenceResponse>;
   /** 查询结构化结果接口 */
   DescribeStructureResult(data: DescribeStructureResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStructureResultResponse>;
   /** 获取结构化结果接口 */
   DescribeStructureTaskResult(data: DescribeStructureTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStructureTaskResultResponse>;
   /** 查询核保任务数据 */
-  DescribeUnderwriteTask(data: DescribeUnderwriteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnderwriteTaskResponse>;
+  DescribeUnderwriteTask(data?: DescribeUnderwriteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnderwriteTaskResponse>;
   /** 上传医疗影像文件 */
-  UploadMedicalFile(data: UploadMedicalFileRequest, config?: AxiosRequestConfig): AxiosPromise<UploadMedicalFileResponse>;
+  UploadMedicalFile(data?: UploadMedicalFileRequest, config?: AxiosRequestConfig): AxiosPromise<UploadMedicalFileResponse>;
   /** 新建结构化任务 */
   CreateStructureTask(data: V20201210.CreateStructureTaskRequest, config: AxiosRequestConfig & V20201210.VersionHeader): AxiosPromise<V20201210.CreateStructureTaskResponse>;
   /** 结构化对比查询 */

@@ -3518,13 +3518,13 @@ declare interface Ckafka {
   /** 枚举ACL */
   DescribeACL(data: DescribeACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeACLResponse>;
   /** 查询用户列表 */
-  DescribeAppInfo(data: DescribeAppInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppInfoResponse>;
+  DescribeAppInfo(data?: DescribeAppInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppInfoResponse>;
   /** 查看可用区列表 */
-  DescribeCkafkaZone(data: DescribeCkafkaZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCkafkaZoneResponse>;
+  DescribeCkafkaZone(data?: DescribeCkafkaZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCkafkaZoneResponse>;
   /** 查询Datahub连接源 */
   DescribeConnectResource(data: DescribeConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConnectResourceResponse>;
   /** 查询Datahub连接源列表 */
-  DescribeConnectResources(data: DescribeConnectResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConnectResourcesResponse>;
+  DescribeConnectResources(data?: DescribeConnectResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConnectResourcesResponse>;
   /** 查询消费分组信息 */
   DescribeConsumerGroup(data: DescribeConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupResponse>;
   /** 获取Datahub消费分组offset */
@@ -3532,7 +3532,7 @@ declare interface Ckafka {
   /** 查询Datahub任务信息 */
   DescribeDatahubTask(data: DescribeDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTaskResponse>;
   /** 查询Datahub任务列表 */
-  DescribeDatahubTasks(data: DescribeDatahubTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTasksResponse>;
+  DescribeDatahubTasks(data?: DescribeDatahubTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTasksResponse>;
   /** 枚举消费分组(精简版) */
   DescribeGroup(data: DescribeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupResponse>;
   /** 获取消费分组信息 */
@@ -3542,11 +3542,11 @@ declare interface Ckafka {
   /** 获取实例属性 */
   DescribeInstanceAttributes(data: DescribeInstanceAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAttributesResponse>;
   /** 获取实例列表信息 */
-  DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 获取实例列表详情 */
-  DescribeInstancesDetail(data: DescribeInstancesDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDetailResponse>;
+  DescribeInstancesDetail(data?: DescribeInstancesDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDetailResponse>;
   /** 枚举地域 */
-  DescribeRegion(data: DescribeRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionResponse>;
+  DescribeRegion(data?: DescribeRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionResponse>;
   /** 查看路由信息 */
   DescribeRoute(data: DescribeRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteResponse>;
   /** 获取主题列表 */

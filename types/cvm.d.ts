@@ -2627,23 +2627,23 @@ declare interface Cvm {
   /** 删除实例启动模板版本 */
   DeleteLaunchTemplateVersions(data: DeleteLaunchTemplateVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLaunchTemplateVersionsResponse>;
   /** 查询用户配额详情 */
-  DescribeAccountQuota(data: DescribeAccountQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountQuotaResponse>;
+  DescribeAccountQuota(data?: DescribeAccountQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountQuotaResponse>;
   /** 查询CHC物理服务器禁止做的操作 */
   DescribeChcDeniedActions(data: DescribeChcDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChcDeniedActionsResponse>;
   /** 查询CHC物理服务器 */
-  DescribeChcHosts(data: DescribeChcHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChcHostsResponse>;
+  DescribeChcHosts(data?: DescribeChcHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChcHostsResponse>;
   /** 查询置放群组配额 */
   DescribeDisasterRecoverGroupQuota(data?: DescribeDisasterRecoverGroupQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisasterRecoverGroupQuotaResponse>;
   /** 查询分散置放群组信息 */
-  DescribeDisasterRecoverGroups(data: DescribeDisasterRecoverGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisasterRecoverGroupsResponse>;
+  DescribeDisasterRecoverGroups(data?: DescribeDisasterRecoverGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisasterRecoverGroupsResponse>;
   /** 查看CDH实例列表 */
-  DescribeHosts(data: DescribeHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostsResponse>;
+  DescribeHosts(data?: DescribeHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostsResponse>;
   /** 查询镜像配额上限 */
   DescribeImageQuota(data?: DescribeImageQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageQuotaResponse>;
   /** 查看镜像分享信息 */
   DescribeImageSharePermission(data: DescribeImageSharePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSharePermissionResponse>;
   /** 查看镜像列表 */
-  DescribeImages(data: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
+  DescribeImages(data?: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
   /** 查询外部导入镜像支持的OS列表 */
   DescribeImportImageOs(data?: DescribeImportImageOsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImportImageOsResponse>;
   /** 查询所支持的实例机型族信息 */
@@ -2651,35 +2651,35 @@ declare interface Cvm {
   /** 查询实例带宽配置 */
   DescribeInstanceInternetBandwidthConfigs(data: DescribeInstanceInternetBandwidthConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceInternetBandwidthConfigsResponse>;
   /** 查询实例机型列表 */
-  DescribeInstanceTypeConfigs(data: DescribeInstanceTypeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceTypeConfigsResponse>;
+  DescribeInstanceTypeConfigs(data?: DescribeInstanceTypeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceTypeConfigsResponse>;
   /** 查询实例管理终端地址 */
   DescribeInstanceVncUrl(data: DescribeInstanceVncUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceVncUrlResponse>;
   /** 查看实例列表 */
-  DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 查询实例可调整配置 */
   DescribeInstancesModification(data: DescribeInstancesModificationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesModificationResponse>;
   /** 查询实例操作限制 */
   DescribeInstancesOperationLimit(data: DescribeInstancesOperationLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesOperationLimitResponse>;
   /** 查看实例状态列表 */
-  DescribeInstancesStatus(data: DescribeInstancesStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesStatusResponse>;
+  DescribeInstancesStatus(data?: DescribeInstancesStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesStatusResponse>;
   /** 查询网络计费类型 */
   DescribeInternetChargeTypeConfigs(data?: DescribeInternetChargeTypeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInternetChargeTypeConfigsResponse>;
   /** 查询密钥对列表 */
-  DescribeKeyPairs(data: DescribeKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeyPairsResponse>;
+  DescribeKeyPairs(data?: DescribeKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeyPairsResponse>;
   /** 查询实例模板版本信息 */
   DescribeLaunchTemplateVersions(data: DescribeLaunchTemplateVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaunchTemplateVersionsResponse>;
   /** 查询实例启动模板 */
-  DescribeLaunchTemplates(data: DescribeLaunchTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaunchTemplatesResponse>;
+  DescribeLaunchTemplates(data?: DescribeLaunchTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaunchTemplatesResponse>;
   /** 查询地域列表 */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
   /** 列出已购买的预留实例 */
-  DescribeReservedInstances(data: DescribeReservedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesResponse>;
+  DescribeReservedInstances(data?: DescribeReservedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesResponse>;
   /** 查询预留实例机型配置 */
-  DescribeReservedInstancesConfigInfos(data: DescribeReservedInstancesConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesConfigInfosResponse>;
+  DescribeReservedInstancesConfigInfos(data?: DescribeReservedInstancesConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesConfigInfosResponse>;
   /** 列出可购买的预留实例配置 */
-  DescribeReservedInstancesOfferings(data: DescribeReservedInstancesOfferingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesOfferingsResponse>;
+  DescribeReservedInstancesOfferings(data?: DescribeReservedInstancesOfferingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesOfferingsResponse>;
   /** 获取可用区机型配置信息 */
-  DescribeZoneInstanceConfigInfos(data: DescribeZoneInstanceConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneInstanceConfigInfosResponse>;
+  DescribeZoneInstanceConfigInfos(data?: DescribeZoneInstanceConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneInstanceConfigInfosResponse>;
   /** 查询可用区列表 */
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
   /** 解绑密钥对 */
@@ -2761,7 +2761,7 @@ declare interface Cvm {
   /** 扩容实例磁盘 */
   ResizeInstanceDisks(data: ResizeInstanceDisksRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeInstanceDisksResponse>;
   /** 创建实例 */
-  RunInstances(data: RunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RunInstancesResponse>;
+  RunInstances(data?: RunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RunInstancesResponse>;
   /** 启动实例 */
   StartInstances(data: StartInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StartInstancesResponse>;
   /** 关闭实例 */

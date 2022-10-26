@@ -38,6 +38,14 @@ declare interface ApproverInfo {
   CustomApproverTag?: string;
 }
 
+/** 签署人个性化能力信息 */
+declare interface ApproverOption {
+  /** 是否可以拒签 false-可以拒签,默认 true-不可以拒签 */
+  NoRefuse?: boolean;
+  /** 是否可以转发 false-可以转发,默认 true-不可以转发 */
+  NoTransfer?: boolean;
+}
+
 /** 指定签署人限制项 */
 declare interface ApproverRestriction {
   /** 指定签署人名字 */
@@ -272,6 +280,8 @@ declare interface FlowCreateApprover {
   CustomApproverTag?: string;
   /** 快速注册相关信息，目前暂未开放！ */
   RegisterInfo?: RegisterInfo;
+  /** 签署人个性化能力值 */
+  ApproverOption?: ApproverOption;
 }
 
 /** 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息 */

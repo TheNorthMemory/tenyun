@@ -686,21 +686,21 @@ declare interface Domain {
   /** 批量操作日志详情 */
   DescribeBatchOperationLogDetails(data: DescribeBatchOperationLogDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOperationLogDetailsResponse>;
   /** 批量操作日志列表 */
-  DescribeBatchOperationLogs(data: DescribeBatchOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOperationLogsResponse>;
+  DescribeBatchOperationLogs(data?: DescribeBatchOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOperationLogsResponse>;
   /** 域名基本信息 */
   DescribeDomainBaseInfo(data: DescribeDomainBaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainBaseInfoResponse>;
   /** 我的域名列表 */
-  DescribeDomainNameList(data: DescribeDomainNameListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainNameListResponse>;
+  DescribeDomainNameList(data?: DescribeDomainNameListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainNameListResponse>;
   /** 域名价格列表 */
-  DescribeDomainPriceList(data: DescribeDomainPriceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainPriceListResponse>;
+  DescribeDomainPriceList(data?: DescribeDomainPriceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainPriceListResponse>;
   /** 获取域名实名信息 */
   DescribeDomainSimpleInfo(data: DescribeDomainSimpleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainSimpleInfoResponse>;
   /** 已验证手机邮箱列表 */
-  DescribePhoneEmailList(data: DescribePhoneEmailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePhoneEmailListResponse>;
+  DescribePhoneEmailList(data?: DescribePhoneEmailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePhoneEmailListResponse>;
   /** 获取模板信息 */
   DescribeTemplate(data: DescribeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateResponse>;
   /** 信息模板列表 */
-  DescribeTemplateList(data: DescribeTemplateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateListResponse>;
+  DescribeTemplateList(data?: DescribeTemplateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateListResponse>;
   /** 批量域名 DNS 修改 */
   ModifyDomainDNSBatch(data: ModifyDomainDNSBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainDNSBatchResponse>;
   /** 批量账号间转移 */

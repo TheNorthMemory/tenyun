@@ -466,6 +466,14 @@ declare interface TelCdrInfo {
   CustomRecordURL: string | null;
 }
 
+/** 变量 */
+declare interface Variable {
+  /** 变量名 */
+  Key: string;
+  /** 变量值 */
+  Value: string;
+}
+
 declare interface BindStaffSkillGroupListRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -499,6 +507,8 @@ declare interface CreateAutoCalloutTaskRequest {
   NotAfter?: number;
   /** 最大尝试次数 */
   Tries?: number;
+  /** 自定义变量（仅高级版支持） */
+  Variables?: Variable[];
 }
 
 declare interface CreateAutoCalloutTaskResponse {
@@ -1004,11 +1014,11 @@ declare interface Ccc {
   /** 批量查询自动任务外呼 */
   DescribeAutoCalloutTasks(data: DescribeAutoCalloutTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoCalloutTasksResponse>;
   /** 获取用户购买信息列表 */
-  DescribeCCCBuyInfoList(data: DescribeCCCBuyInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCCBuyInfoListResponse>;
+  DescribeCCCBuyInfoList(data?: DescribeCCCBuyInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCCBuyInfoListResponse>;
   /** 获取呼入实时数据统计指标 */
   DescribeCallInMetrics(data: DescribeCallInMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallInMetricsResponse>;
   /** 查询服务的聊天记录 */
-  DescribeChatMessages(data: DescribeChatMessagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChatMessagesResponse>;
+  DescribeChatMessages(data?: DescribeChatMessagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChatMessagesResponse>;
   /** 查询在线客服记录 */
   DescribeIMCdrs(data: DescribeIMCdrsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIMCdrsResponse>;
   /** 获取 PSTN 活动会话列表 */

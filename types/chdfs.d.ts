@@ -1020,7 +1020,7 @@ declare interface Chdfs {
   /** 查看权限组详细信息 */
   DescribeAccessGroup(data: DescribeAccessGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessGroupResponse>;
   /** 查看权限组列表 */
-  DescribeAccessGroups(data: DescribeAccessGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessGroupsResponse>;
+  DescribeAccessGroups(data?: DescribeAccessGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessGroupsResponse>;
   /** 查看权限规则列表 */
   DescribeAccessRules(data: DescribeAccessRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessRulesResponse>;
   /** 查看文件系统详细信息 */
@@ -1032,7 +1032,7 @@ declare interface Chdfs {
   /** 查看挂载点详细信息 */
   DescribeMountPoint(data: DescribeMountPointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMountPointResponse>;
   /** 查看挂载点列表 */
-  DescribeMountPoints(data: DescribeMountPointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMountPointsResponse>;
+  DescribeMountPoints(data?: DescribeMountPointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMountPointsResponse>;
   /** 查看资源标签列表 */
   DescribeResourceTags(data: DescribeResourceTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTagsResponse>;
   /** 查看回热任务列表 */

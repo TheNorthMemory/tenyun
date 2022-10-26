@@ -302,11 +302,11 @@ declare interface QueryAntiFraudResponse {
 declare interface Af {
   (): Versions;
   /** 金融借贷反欺诈 */
-  DescribeAntiFraud(data: DescribeAntiFraudRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiFraudResponse>;
+  DescribeAntiFraud(data?: DescribeAntiFraudRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiFraudResponse>;
   /** 反欺诈评分接口 */
-  GetAntiFraud(data: GetAntiFraudRequest, config?: AxiosRequestConfig): AxiosPromise<GetAntiFraudResponse>;
+  GetAntiFraud(data?: GetAntiFraudRequest, config?: AxiosRequestConfig): AxiosPromise<GetAntiFraudResponse>;
   /** 借贷反欺诈 */
-  QueryAntiFraud(data: QueryAntiFraudRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAntiFraudResponse>;
+  QueryAntiFraud(data?: QueryAntiFraudRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAntiFraudResponse>;
 }
 
 export declare type Versions = ["2020-02-26"];

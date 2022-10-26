@@ -8950,9 +8950,9 @@ declare interface Teo {
   /** 查询剩余可添加的日志推送实体列表 */
   DescribeAddableEntityList(data: DescribeAddableEntityListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddableEntityListResponse>;
   /** 查询别称域名信息列表 */
-  DescribeAliasDomains(data: DescribeAliasDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAliasDomainsResponse>;
+  DescribeAliasDomains(data?: DescribeAliasDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAliasDomainsResponse>;
   /** 查询应用代理列表 */
-  DescribeApplicationProxies(data: DescribeApplicationProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationProxiesResponse>;
+  DescribeApplicationProxies(data?: DescribeApplicationProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationProxiesResponse>;
   /** 查询当前账户可购买套餐信息列表 */
   DescribeAvailablePlans(data?: DescribeAvailablePlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailablePlansResponse>;
   /** 获取计费数据 */
@@ -8994,7 +8994,7 @@ declare interface Teo {
   /** 获取DNS请求数统计曲线 */
   DescribeDnsData(data: DescribeDnsDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDnsDataResponse>;
   /** 查询 DNS 记录列表 */
-  DescribeDnsRecords(data: DescribeDnsRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDnsRecordsResponse>;
+  DescribeDnsRecords(data?: DescribeDnsRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDnsRecordsResponse>;
   /** 查询 DNSSEC 信息 */
   DescribeDnssec(data: DescribeDnssecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDnssecResponse>;
   /** 查询域名详细配置 */
@@ -9014,9 +9014,9 @@ declare interface Teo {
   /** 查询七层监控类时序流量数据 */
   DescribeOverviewL7Data(data: DescribeOverviewL7DataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewL7DataResponse>;
   /** 查询预热任务状态 */
-  DescribePrefetchTasks(data: DescribePrefetchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrefetchTasksResponse>;
+  DescribePrefetchTasks(data?: DescribePrefetchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrefetchTasksResponse>;
   /** 查询清除缓存历史记录 */
-  DescribePurgeTasks(data: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;
+  DescribePurgeTasks(data?: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;
   /** 查询速率限制智能客户端过滤规则 */
   DescribeRateLimitIntelligenceRule(data: DescribeRateLimitIntelligenceRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRateLimitIntelligenceRuleResponse>;
   /** 查询规则引擎规则 */
@@ -9030,7 +9030,7 @@ declare interface Teo {
   /** 查询全部安全实例 */
   DescribeSecurityPolicyList(data: DescribeSecurityPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPolicyListResponse>;
   /** 查询所有地域信息 */
-  DescribeSecurityPolicyRegions(data: DescribeSecurityPolicyRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPolicyRegionsResponse>;
+  DescribeSecurityPolicyRegions(data?: DescribeSecurityPolicyRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPolicyRegionsResponse>;
   /** 查询Bot用户画像规则 */
   DescribeSecurityPortraitRules(data: DescribeSecurityPortraitRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPortraitRulesResponse>;
   /** 查询安全规则详情 */
@@ -9038,7 +9038,7 @@ declare interface Teo {
   /** 查询七层数据分析类单值数据 */
   DescribeSingleL7AnalysisData(data: DescribeSingleL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSingleL7AnalysisDataResponse>;
   /** 查询拨测分地区数据 */
-  DescribeSpeedTestingDetails(data: DescribeSpeedTestingDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpeedTestingDetailsResponse>;
+  DescribeSpeedTestingDetails(data?: DescribeSpeedTestingDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpeedTestingDetailsResponse>;
   /** 查询站点拨测结果 */
   DescribeSpeedTestingMetricData(data: DescribeSpeedTestingMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpeedTestingMetricDataResponse>;
   /** 查询站点拨测配额 */
@@ -9070,11 +9070,11 @@ declare interface Teo {
   /** 查询CC防护Top数据 */
   DescribeWebProtectionTopData(data: DescribeWebProtectionTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebProtectionTopDataResponse>;
   /** 查询所有DDoS防护分区 */
-  DescribeZoneDDoSPolicy(data: DescribeZoneDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneDDoSPolicyResponse>;
+  DescribeZoneDDoSPolicy(data?: DescribeZoneDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneDDoSPolicyResponse>;
   /** 查询站点配置 */
   DescribeZoneSetting(data: DescribeZoneSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneSettingResponse>;
   /** 查询用户站点信息列表 */
-  DescribeZones(data: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
+  DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
   /** 下载四层离线日志 */
   DownloadL4Logs(data: DownloadL4LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL4LogsResponse>;
   /** 下载七层离线日志 */
@@ -9134,7 +9134,7 @@ declare interface Teo {
   /** 切换站点状态 */
   ModifyZoneStatus(data: ModifyZoneStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneStatusResponse>;
   /** 取回别称域名 */
-  ReclaimAliasDomain(data: ReclaimAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ReclaimAliasDomainResponse>;
+  ReclaimAliasDomain(data?: ReclaimAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ReclaimAliasDomainResponse>;
   /** 找回站点 */
   ReclaimZone(data: ReclaimZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ReclaimZoneResponse>;
   /** 开启或关闭推送任务 */

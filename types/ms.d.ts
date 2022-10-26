@@ -772,7 +772,7 @@ declare interface Ms {
   /** 将应用绑定到资源 */
   CreateBindInstance(data: CreateBindInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBindInstanceResponse>;
   /** 获取云COS临时密钥 */
-  CreateCosSecKeyInstance(data: CreateCosSecKeyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosSecKeyInstanceResponse>;
+  CreateCosSecKeyInstance(data?: CreateCosSecKeyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosSecKeyInstanceResponse>;
   /** 创建资源 */
   CreateResourceInstances(data: CreateResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceInstancesResponse>;
   /** 批量提交安全扫描 */
@@ -788,13 +788,13 @@ declare interface Ms {
   /** 环境安全检测-apk检测 */
   DescribeApkDetectionResult(data: DescribeApkDetectionResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApkDetectionResultResponse>;
   /** 获取用户的所有资源信息 */
-  DescribeResourceInstances(data: DescribeResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceInstancesResponse>;
+  DescribeResourceInstances(data?: DescribeResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceInstancesResponse>;
   /** 查询扫描列表 */
-  DescribeScanInstances(data: DescribeScanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanInstancesResponse>;
+  DescribeScanInstances(data?: DescribeScanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanInstancesResponse>;
   /** 批量查询扫描结果 */
   DescribeScanResults(data: DescribeScanResultsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanResultsResponse>;
   /** 用户查询提交过的app列表 */
-  DescribeShieldInstances(data: DescribeShieldInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShieldInstancesResponse>;
+  DescribeShieldInstances(data?: DescribeShieldInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShieldInstancesResponse>;
   /** 查询加固策略 */
   DescribeShieldPlanInstance(data: DescribeShieldPlanInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShieldPlanInstanceResponse>;
   /** 查询加固结果 */

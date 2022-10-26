@@ -516,6 +516,26 @@ declare interface ModifyPrivateZoneVpcResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRecordsStatusRequest {
+  /** 私有域ID */
+  ZoneId: string;
+  /** 解析记录ID列表 */
+  RecordIds: number[];
+  /** enabled：生效，disabled：失效 */
+  Status: string;
+}
+
+declare interface ModifyRecordsStatusResponse {
+  /** 私有域ID */
+  ZoneId: string;
+  /** 解析记录ID列表 */
+  RecordIds: number[];
+  /** enabled：生效，disabled：失效 */
+  Status: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface SubscribePrivateZoneServiceRequest {
 }
 
@@ -538,9 +558,9 @@ declare interface Privatedns {
   /** 删除私有域解析账号 */
   DeletePrivateDNSAccount(data: DeletePrivateDNSAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateDNSAccountResponse>;
   /** 删除私有域 */
-  DeletePrivateZone(data: DeletePrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateZoneResponse>;
+  DeletePrivateZone(data?: DeletePrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateZoneResponse>;
   /** 删除私有域解析记录 */
-  DeletePrivateZoneRecord(data: DeletePrivateZoneRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateZoneRecordResponse>;
+  DeletePrivateZoneRecord(data?: DeletePrivateZoneRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateZoneRecordResponse>;
   /** 获取私有域解析账号的VPC列表 */
   DescribeAccountVpcList(data: DescribeAccountVpcListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountVpcListResponse>;
   /** 获取操作日志列表 */
@@ -548,11 +568,11 @@ declare interface Privatedns {
   /** 获取私有域解析概览 */
   DescribeDashboard(data?: DescribeDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDashboardResponse>;
   /** 获取私有域解析账号列表 */
-  DescribePrivateDNSAccountList(data: DescribePrivateDNSAccountListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateDNSAccountListResponse>;
+  DescribePrivateDNSAccountList(data?: DescribePrivateDNSAccountListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateDNSAccountListResponse>;
   /** 获取私有域信息 */
   DescribePrivateZone(data: DescribePrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateZoneResponse>;
   /** 获取私有域列表 */
-  DescribePrivateZoneList(data: DescribePrivateZoneListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateZoneListResponse>;
+  DescribePrivateZoneList(data?: DescribePrivateZoneListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateZoneListResponse>;
   /** 获取私有域记录列表 */
   DescribePrivateZoneRecordList(data: DescribePrivateZoneRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateZoneRecordListResponse>;
   /** 查询私有域解析开通状态 */
@@ -567,6 +587,8 @@ declare interface Privatedns {
   ModifyPrivateZoneRecord(data: ModifyPrivateZoneRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateZoneRecordResponse>;
   /** 修改私有域关联的VPC */
   ModifyPrivateZoneVpc(data: ModifyPrivateZoneVpcRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateZoneVpcResponse>;
+  /** 修改解析记录状态 */
+  ModifyRecordsStatus(data: ModifyRecordsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordsStatusResponse>;
   /** 开通私有域解析 */
   SubscribePrivateZoneService(data?: SubscribePrivateZoneServiceRequest, config?: AxiosRequestConfig): AxiosPromise<SubscribePrivateZoneServiceResponse>;
 }

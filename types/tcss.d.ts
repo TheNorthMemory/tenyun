@@ -7017,7 +7017,7 @@ declare interface DescribeSecLogJoinObjectListRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤条件。Status- String - 是否必填：否 - 主机状态 /li>HostIP- String - 是否必填：否 - 主机内网IP /li>PublicIP- String - 是否必填：否 - 主机外网IP /li>HostName- String - 是否必填：否 - 主机名称 /li> */
+  /** 过滤条件。Status- String - 是否必填：否 - 主机状态 HostIP- String - 是否必填：否 - 主机内网IP PublicIP- String - 是否必填：否 - 主机外网IP HostName- String - 是否必填：否 - 主机名称 */
   Filters?: RunTimeFilters[];
   /** 排序字段 */
   By?: string;
@@ -7295,7 +7295,7 @@ declare interface DescribeVirusAutoIsolateSampleListRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤条件。MD5- String - 是否必填：否 - md5 /li>AutoIsolateSwitch- String - 是否必填：否 - 自动隔离开关 /li>VirusName- String - 是否必填：否 - 病毒名 /li> */
+  /** 过滤条件。MD5- String - 是否必填：否 - md5 AutoIsolateSwitch- String - 是否必填：否 - 自动隔离开关 VirusName- String - 是否必填：否 - 病毒名 */
   Filters?: RunTimeFilters[];
   /** 排序字段 */
   By?: string;
@@ -8882,7 +8882,7 @@ declare interface Tcss {
   /** 添加编辑反弹shell白名单 */
   AddEditReverseShellWhiteList(data: AddEditReverseShellWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<AddEditReverseShellWhiteListResponse>;
   /** 添加编辑高危系统调用白名单 */
-  AddEditRiskSyscallWhiteList(data: AddEditRiskSyscallWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<AddEditRiskSyscallWhiteListResponse>;
+  AddEditRiskSyscallWhiteList(data?: AddEditRiskSyscallWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<AddEditRiskSyscallWhiteListResponse>;
   /** 添加编辑告警策略 */
   AddEditWarningRules(data: AddEditWarningRulesRequest, config?: AxiosRequestConfig): AxiosPromise<AddEditWarningRulesResponse>;
   /** 新增逃逸白名单 */
@@ -8900,13 +8900,13 @@ declare interface Tcss {
   /** 容器网络创建网络策略确认任务 */
   ConfirmNetworkFirewallPolicy(data: ConfirmNetworkFirewallPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmNetworkFirewallPolicyResponse>;
   /** 镜像仓库创建镜像扫描任务 */
-  CreateAssetImageRegistryScanTask(data: CreateAssetImageRegistryScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageRegistryScanTaskResponse>;
+  CreateAssetImageRegistryScanTask(data?: CreateAssetImageRegistryScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageRegistryScanTaskResponse>;
   /** 镜像仓库创建镜像一键扫描任务 */
-  CreateAssetImageRegistryScanTaskOneKey(data: CreateAssetImageRegistryScanTaskOneKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageRegistryScanTaskOneKeyResponse>;
+  CreateAssetImageRegistryScanTaskOneKey(data?: CreateAssetImageRegistryScanTaskOneKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageRegistryScanTaskOneKeyResponse>;
   /** 添加容器安全镜像扫描设置 */
   CreateAssetImageScanSetting(data: CreateAssetImageScanSettingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageScanSettingResponse>;
   /** 创建镜像扫描任务 */
-  CreateAssetImageScanTask(data: CreateAssetImageScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageScanTaskResponse>;
+  CreateAssetImageScanTask(data?: CreateAssetImageScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageScanTaskResponse>;
   /** 创建本地镜像木马列表导出任务 */
   CreateAssetImageVirusExportJob(data: CreateAssetImageVirusExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageVirusExportJobResponse>;
   /** 安装检查组件 */
@@ -8914,23 +8914,23 @@ declare interface Tcss {
   /** 创建集群检查任务 */
   CreateClusterCheckTask(data: CreateClusterCheckTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterCheckTaskResponse>;
   /** 安全合规创建合规检查任务 */
-  CreateComplianceTask(data: CreateComplianceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateComplianceTaskResponse>;
+  CreateComplianceTask(data?: CreateComplianceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateComplianceTaskResponse>;
   /** 查询本地镜像组件列表导出 */
   CreateComponentExportJob(data: CreateComponentExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateComponentExportJobResponse>;
   /** 创建支持防御的漏洞导出任务 */
-  CreateDefenceVulExportJob(data: CreateDefenceVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDefenceVulExportJobResponse>;
+  CreateDefenceVulExportJob(data?: CreateDefenceVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDefenceVulExportJobResponse>;
   /** 创建应急漏洞导出任务 */
-  CreateEmergencyVulExportJob(data: CreateEmergencyVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmergencyVulExportJobResponse>;
+  CreateEmergencyVulExportJob(data?: CreateEmergencyVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmergencyVulExportJobResponse>;
   /** 创建逃逸事件导出异步任务 */
-  CreateEscapeEventsExportJob(data: CreateEscapeEventsExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEscapeEventsExportJobResponse>;
+  CreateEscapeEventsExportJob(data?: CreateEscapeEventsExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEscapeEventsExportJobResponse>;
   /** 创建逃逸白名单导出任务 */
-  CreateEscapeWhiteListExportJob(data: CreateEscapeWhiteListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEscapeWhiteListExportJobResponse>;
+  CreateEscapeWhiteListExportJob(data?: CreateEscapeWhiteListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEscapeWhiteListExportJobResponse>;
   /** 创建一个导出安全合规信息的任务 */
   CreateExportComplianceStatusListJob(data: CreateExportComplianceStatusListJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportComplianceStatusListJobResponse>;
   /** 创建主机列表导出任务 */
   CreateHostExportJob(data: CreateHostExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostExportJobResponse>;
   /** 创建镜像导出任务 */
-  CreateImageExportJob(data: CreateImageExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageExportJobResponse>;
+  CreateImageExportJob(data?: CreateImageExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageExportJobResponse>;
   /** 容器网络集群下发刷新任务 */
   CreateNetworkFirewallClusterRefresh(data?: CreateNetworkFirewallClusterRefreshRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkFirewallClusterRefreshResponse>;
   /** 容器网络集群网络策略创建自动发现任务 */
@@ -8942,13 +8942,13 @@ declare interface Tcss {
   /** 创建或者编辑弹性计费上限 */
   CreateOrModifyPostPayCores(data: CreateOrModifyPostPayCoresRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrModifyPostPayCoresResponse>;
   /** 创建异常进程事件导出异步任务 */
-  CreateProcessEventsExportJob(data: CreateProcessEventsExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProcessEventsExportJobResponse>;
+  CreateProcessEventsExportJob(data?: CreateProcessEventsExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProcessEventsExportJobResponse>;
   /** 下发刷新任务 */
   CreateRefreshTask(data?: CreateRefreshTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRefreshTaskResponse>;
   /** 添加检索模板 */
   CreateSearchTemplate(data: CreateSearchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSearchTemplateResponse>;
   /** 创建系统漏洞导出任务 */
-  CreateSystemVulExportJob(data: CreateSystemVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSystemVulExportJobResponse>;
+  CreateSystemVulExportJob(data?: CreateSystemVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSystemVulExportJobResponse>;
   /** 运行时文件查杀重新检测 */
   CreateVirusScanAgain(data: CreateVirusScanAgainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVirusScanAgainResponse>;
   /** 运行时文件查杀一键扫描 */
@@ -8956,17 +8956,17 @@ declare interface Tcss {
   /** 创建受漏洞影响的容器导出任务 */
   CreateVulContainerExportJob(data: CreateVulContainerExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulContainerExportJobResponse>;
   /** 创建漏洞防御导出任务 */
-  CreateVulDefenceEventExportJob(data: CreateVulDefenceEventExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulDefenceEventExportJobResponse>;
+  CreateVulDefenceEventExportJob(data?: CreateVulDefenceEventExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulDefenceEventExportJobResponse>;
   /** 创建漏洞防御主机导出任务 */
-  CreateVulDefenceHostExportJob(data: CreateVulDefenceHostExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulDefenceHostExportJobResponse>;
+  CreateVulDefenceHostExportJob(data?: CreateVulDefenceHostExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulDefenceHostExportJobResponse>;
   /** 查询本地镜像漏洞列表导出 */
   CreateVulExportJob(data: CreateVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulExportJobResponse>;
   /** 创建导出受漏洞影响的镜像任务 */
   CreateVulImageExportJob(data: CreateVulImageExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulImageExportJobResponse>;
   /** 创建漏洞扫描任务 */
-  CreateVulScanTask(data: CreateVulScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulScanTaskResponse>;
+  CreateVulScanTask(data?: CreateVulScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulScanTaskResponse>;
   /** 创建web漏洞导出任务 */
-  CreateWebVulExportJob(data: CreateWebVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebVulExportJobResponse>;
+  CreateWebVulExportJob(data?: CreateWebVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebVulExportJobResponse>;
   /** 删除运行时异常进程策略 */
   DeleteAbnormalProcessRules(data: DeleteAbnormalProcessRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAbnormalProcessRulesResponse>;
   /** 删除运行时访问控制策略 */
@@ -8996,33 +8996,33 @@ declare interface Tcss {
   /** 删除检索模板 */
   DeleteSearchTemplate(data: DeleteSearchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSearchTemplateResponse>;
   /** 获取用户当前灰度配置 */
-  DescribeABTestConfig(data: DescribeABTestConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeABTestConfigResponse>;
+  DescribeABTestConfig(data?: DescribeABTestConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeABTestConfigResponse>;
   /** 运行时异常进程事件详细信息 */
   DescribeAbnormalProcessDetail(data: DescribeAbnormalProcessDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessDetailResponse>;
   /** 查询待处理异常进程事件趋势 */
   DescribeAbnormalProcessEventTendency(data: DescribeAbnormalProcessEventTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessEventTendencyResponse>;
   /** 运行时异常进程列表 */
-  DescribeAbnormalProcessEvents(data: DescribeAbnormalProcessEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessEventsResponse>;
+  DescribeAbnormalProcessEvents(data?: DescribeAbnormalProcessEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessEventsResponse>;
   /** 运行时异常进程列表导出 */
   DescribeAbnormalProcessEventsExport(data: DescribeAbnormalProcessEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessEventsExportResponse>;
   /** 统计异常进程各威胁等级待处理事件数 */
   DescribeAbnormalProcessLevelSummary(data?: DescribeAbnormalProcessLevelSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessLevelSummaryResponse>;
   /** 查询运行时异常进程策略详细信息 */
-  DescribeAbnormalProcessRuleDetail(data: DescribeAbnormalProcessRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessRuleDetailResponse>;
+  DescribeAbnormalProcessRuleDetail(data?: DescribeAbnormalProcessRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessRuleDetailResponse>;
   /** 运行时异常进程策略列表 */
-  DescribeAbnormalProcessRules(data: DescribeAbnormalProcessRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessRulesResponse>;
+  DescribeAbnormalProcessRules(data?: DescribeAbnormalProcessRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessRulesResponse>;
   /** 运行时异常进程策略列表导出 */
   DescribeAbnormalProcessRulesExport(data: DescribeAbnormalProcessRulesExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessRulesExportResponse>;
   /** 运行时访问控制事件详细信息 */
   DescribeAccessControlDetail(data: DescribeAccessControlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlDetailResponse>;
   /** 运行时访问控制事件列表 */
-  DescribeAccessControlEvents(data: DescribeAccessControlEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlEventsResponse>;
+  DescribeAccessControlEvents(data?: DescribeAccessControlEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlEventsResponse>;
   /** 运行时访问控制事件列表导出 */
-  DescribeAccessControlEventsExport(data: DescribeAccessControlEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlEventsExportResponse>;
+  DescribeAccessControlEventsExport(data?: DescribeAccessControlEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlEventsExportResponse>;
   /** 查询运行时访问控制策略详细信息 */
-  DescribeAccessControlRuleDetail(data: DescribeAccessControlRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlRuleDetailResponse>;
+  DescribeAccessControlRuleDetail(data?: DescribeAccessControlRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlRuleDetailResponse>;
   /** 运行时访问控制策略列表 */
-  DescribeAccessControlRules(data: DescribeAccessControlRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlRulesResponse>;
+  DescribeAccessControlRules(data?: DescribeAccessControlRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlRulesResponse>;
   /** 运行时访问控制策略列表导出 */
   DescribeAccessControlRulesExport(data: DescribeAccessControlRulesExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlRulesExportResponse>;
   /** 获取受影响的集群数量 */
@@ -9036,35 +9036,35 @@ declare interface Tcss {
   /** 查询agent安装命令 */
   DescribeAgentInstallCommand(data: DescribeAgentInstallCommandRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentInstallCommandResponse>;
   /** 查询app服务列表 */
-  DescribeAssetAppServiceList(data: DescribeAssetAppServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetAppServiceListResponse>;
+  DescribeAssetAppServiceList(data?: DescribeAssetAppServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetAppServiceListResponse>;
   /** 查询容器组件列表 */
   DescribeAssetComponentList(data: DescribeAssetComponentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetComponentListResponse>;
   /** 查询容器信息 */
   DescribeAssetContainerDetail(data: DescribeAssetContainerDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetContainerDetailResponse>;
   /** 查询容器列表 */
-  DescribeAssetContainerList(data: DescribeAssetContainerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetContainerListResponse>;
+  DescribeAssetContainerList(data?: DescribeAssetContainerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetContainerListResponse>;
   /** 查询db服务列表 */
-  DescribeAssetDBServiceList(data: DescribeAssetDBServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDBServiceListResponse>;
+  DescribeAssetDBServiceList(data?: DescribeAssetDBServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDBServiceListResponse>;
   /** 查询主机信息 */
   DescribeAssetHostDetail(data: DescribeAssetHostDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetHostDetailResponse>;
   /** 查询主机列表 */
-  DescribeAssetHostList(data: DescribeAssetHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetHostListResponse>;
+  DescribeAssetHostList(data?: DescribeAssetHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetHostListResponse>;
   /** 镜像绑定规则列表 */
-  DescribeAssetImageBindRuleInfo(data: DescribeAssetImageBindRuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageBindRuleInfoResponse>;
+  DescribeAssetImageBindRuleInfo(data?: DescribeAssetImageBindRuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageBindRuleInfoResponse>;
   /** 查询镜像信息 */
   DescribeAssetImageDetail(data: DescribeAssetImageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageDetailResponse>;
   /** 查询镜像关联主机 */
-  DescribeAssetImageHostList(data: DescribeAssetImageHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageHostListResponse>;
+  DescribeAssetImageHostList(data?: DescribeAssetImageHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageHostListResponse>;
   /** 查询镜像列表 */
-  DescribeAssetImageList(data: DescribeAssetImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageListResponse>;
+  DescribeAssetImageList(data?: DescribeAssetImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageListResponse>;
   /** 查询镜像列表导出 */
   DescribeAssetImageListExport(data: DescribeAssetImageListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageListExportResponse>;
   /** 查看镜像仓库资产更新进度状态 */
   DescribeAssetImageRegistryAssetStatus(data?: DescribeAssetImageRegistryAssetStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryAssetStatusResponse>;
   /** 镜像仓库查询镜像仓库详情 */
-  DescribeAssetImageRegistryDetail(data: DescribeAssetImageRegistryDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryDetailResponse>;
+  DescribeAssetImageRegistryDetail(data?: DescribeAssetImageRegistryDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryDetailResponse>;
   /** 镜像仓库查询镜像仓库列表 */
-  DescribeAssetImageRegistryList(data: DescribeAssetImageRegistryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryListResponse>;
+  DescribeAssetImageRegistryList(data?: DescribeAssetImageRegistryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryListResponse>;
   /** 镜像仓库镜像列表导出 */
   DescribeAssetImageRegistryListExport(data: DescribeAssetImageRegistryListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryListExportResponse>;
   /** 查看单个镜像仓库详细信息 */
@@ -9072,19 +9072,19 @@ declare interface Tcss {
   /** 镜像仓库仓库列表 */
   DescribeAssetImageRegistryRegistryList(data?: DescribeAssetImageRegistryRegistryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryRegistryListResponse>;
   /** 镜像仓库查询镜像高危行为列表 */
-  DescribeAssetImageRegistryRiskInfoList(data: DescribeAssetImageRegistryRiskInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryRiskInfoListResponse>;
+  DescribeAssetImageRegistryRiskInfoList(data?: DescribeAssetImageRegistryRiskInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryRiskInfoListResponse>;
   /** 镜像仓库敏感信息列表导出 */
   DescribeAssetImageRegistryRiskListExport(data: DescribeAssetImageRegistryRiskListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryRiskListExportResponse>;
   /** 镜像仓库查询一键镜像扫描状态 */
-  DescribeAssetImageRegistryScanStatusOneKey(data: DescribeAssetImageRegistryScanStatusOneKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryScanStatusOneKeyResponse>;
+  DescribeAssetImageRegistryScanStatusOneKey(data?: DescribeAssetImageRegistryScanStatusOneKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryScanStatusOneKeyResponse>;
   /** 镜像仓库查询镜像统计信息 */
   DescribeAssetImageRegistrySummary(data?: DescribeAssetImageRegistrySummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistrySummaryResponse>;
   /** 镜像仓库查询木马病毒列表 */
-  DescribeAssetImageRegistryVirusList(data: DescribeAssetImageRegistryVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVirusListResponse>;
+  DescribeAssetImageRegistryVirusList(data?: DescribeAssetImageRegistryVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVirusListResponse>;
   /** 镜像仓库木马信息列表导出 */
   DescribeAssetImageRegistryVirusListExport(data: DescribeAssetImageRegistryVirusListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVirusListExportResponse>;
   /** 镜像仓库查询镜像漏洞列表 */
-  DescribeAssetImageRegistryVulList(data: DescribeAssetImageRegistryVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVulListResponse>;
+  DescribeAssetImageRegistryVulList(data?: DescribeAssetImageRegistryVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVulListResponse>;
   /** 镜像仓库漏洞列表导出 */
   DescribeAssetImageRegistryVulListExport(data: DescribeAssetImageRegistryVulListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVulListExportResponse>;
   /** 查询镜像风险列表 */
@@ -9094,11 +9094,11 @@ declare interface Tcss {
   /** 获取镜像扫描设置信息 */
   DescribeAssetImageScanSetting(data?: DescribeAssetImageScanSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageScanSettingResponse>;
   /** 查询镜像扫描状态 */
-  DescribeAssetImageScanStatus(data: DescribeAssetImageScanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageScanStatusResponse>;
+  DescribeAssetImageScanStatus(data?: DescribeAssetImageScanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageScanStatusResponse>;
   /** 查询正在一键扫描的镜像扫描taskid */
   DescribeAssetImageScanTask(data?: DescribeAssetImageScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageScanTaskResponse>;
   /** 查询镜像简略信息列表 */
-  DescribeAssetImageSimpleList(data: DescribeAssetImageSimpleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageSimpleListResponse>;
+  DescribeAssetImageSimpleList(data?: DescribeAssetImageSimpleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageSimpleListResponse>;
   /** 查询镜像病毒列表 */
   DescribeAssetImageVirusList(data: DescribeAssetImageVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageVirusListResponse>;
   /** 镜像木马列表导出 */
@@ -9108,19 +9108,19 @@ declare interface Tcss {
   /** 镜像漏洞列表导出 */
   DescribeAssetImageVulListExport(data: DescribeAssetImageVulListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageVulListExportResponse>;
   /** 查询端口占用列表 */
-  DescribeAssetPortList(data: DescribeAssetPortListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetPortListResponse>;
+  DescribeAssetPortList(data?: DescribeAssetPortListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetPortListResponse>;
   /** 查询进程列表 */
-  DescribeAssetProcessList(data: DescribeAssetProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetProcessListResponse>;
+  DescribeAssetProcessList(data?: DescribeAssetProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetProcessListResponse>;
   /** 查询账户容器、镜像等统计信息 */
   DescribeAssetSummary(data?: DescribeAssetSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSummaryResponse>;
   /** 查询资产同步最近时间 */
   DescribeAssetSyncLastTime(data?: DescribeAssetSyncLastTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSyncLastTimeResponse>;
   /** 查询web服务列表 */
-  DescribeAssetWebServiceList(data: DescribeAssetWebServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebServiceListResponse>;
+  DescribeAssetWebServiceList(data?: DescribeAssetWebServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebServiceListResponse>;
   /** 查询自动授权规则授权范围主机信息 */
   DescribeAutoAuthorizedRuleHost(data: DescribeAutoAuthorizedRuleHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoAuthorizedRuleHostResponse>;
   /** 查询所有检查项接口 */
-  DescribeCheckItemList(data: DescribeCheckItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckItemListResponse>;
+  DescribeCheckItemList(data?: DescribeCheckItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckItemListResponse>;
   /** 查询单个集群的详细信息 */
   DescribeClusterDetail(data: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
   /** 查询用户集群资产总览 */
@@ -9128,23 +9128,23 @@ declare interface Tcss {
   /** 安全合规查询某个资产的详情 */
   DescribeComplianceAssetDetailInfo(data: DescribeComplianceAssetDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceAssetDetailInfoResponse>;
   /** 安全合规查询某类资产的列表 */
-  DescribeComplianceAssetList(data: DescribeComplianceAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceAssetListResponse>;
+  DescribeComplianceAssetList(data?: DescribeComplianceAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceAssetListResponse>;
   /** 安全合规查询某资产下的检测项列表 */
   DescribeComplianceAssetPolicyItemList(data: DescribeComplianceAssetPolicyItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceAssetPolicyItemListResponse>;
   /** 安全合规查询定时任务列表 */
-  DescribeCompliancePeriodTaskList(data: DescribeCompliancePeriodTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompliancePeriodTaskListResponse>;
+  DescribeCompliancePeriodTaskList(data?: DescribeCompliancePeriodTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompliancePeriodTaskListResponse>;
   /** 安全合规查询检测项影响的资产列表 */
   DescribeCompliancePolicyItemAffectedAssetList(data: DescribeCompliancePolicyItemAffectedAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompliancePolicyItemAffectedAssetListResponse>;
   /** 安全合规查询某检测项影响的信息 */
   DescribeCompliancePolicyItemAffectedSummary(data: DescribeCompliancePolicyItemAffectedSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompliancePolicyItemAffectedSummaryResponse>;
   /** 安全合规查询上次检测失败的资产的列表 */
-  DescribeComplianceScanFailedAssetList(data: DescribeComplianceScanFailedAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceScanFailedAssetListResponse>;
+  DescribeComplianceScanFailedAssetList(data?: DescribeComplianceScanFailedAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceScanFailedAssetListResponse>;
   /** 安全合规查询上次任务的资产通过率汇总信息 */
   DescribeComplianceTaskAssetSummary(data: DescribeComplianceTaskAssetSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceTaskAssetSummaryResponse>;
   /** 安全合规查询上次任务的检测项的汇总信息列表 */
-  DescribeComplianceTaskPolicyItemSummaryList(data: DescribeComplianceTaskPolicyItemSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceTaskPolicyItemSummaryListResponse>;
+  DescribeComplianceTaskPolicyItemSummaryList(data?: DescribeComplianceTaskPolicyItemSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceTaskPolicyItemSummaryListResponse>;
   /** 安全合规查询白名单列表 */
-  DescribeComplianceWhitelistItemList(data: DescribeComplianceWhitelistItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceWhitelistItemListResponse>;
+  DescribeComplianceWhitelistItemList(data?: DescribeComplianceWhitelistItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceWhitelistItemListResponse>;
   /** 查询容器安全资产概览 */
   DescribeContainerAssetSummary(data?: DescribeContainerAssetSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerAssetSummaryResponse>;
   /** 查询容器安全未处理事件概览 */
@@ -9154,11 +9154,11 @@ declare interface Tcss {
   /** 获取ES查询文档列表 */
   DescribeESHits(data: DescribeESHitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeESHitsResponse>;
   /** 查询应急漏洞列表 */
-  DescribeEmergencyVulList(data: DescribeEmergencyVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmergencyVulListResponse>;
+  DescribeEmergencyVulList(data?: DescribeEmergencyVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmergencyVulListResponse>;
   /** 查询容器逃逸事件详情 */
   DescribeEscapeEventDetail(data: DescribeEscapeEventDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeEventDetailResponse>;
   /** 查询容器逃逸事件列表 */
-  DescribeEscapeEventInfo(data: DescribeEscapeEventInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeEventInfoResponse>;
+  DescribeEscapeEventInfo(data?: DescribeEscapeEventInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeEventInfoResponse>;
   /** 查询待处理逃逸事件趋势 */
   DescribeEscapeEventTendency(data: DescribeEscapeEventTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeEventTendencyResponse>;
   /** 统计容器逃逸各事件类型和待处理事件数 */
@@ -9170,11 +9170,11 @@ declare interface Tcss {
   /** 查询容器逃逸安全状态 */
   DescribeEscapeSafeState(data?: DescribeEscapeSafeStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeSafeStateResponse>;
   /** 查询逃逸白名单 */
-  DescribeEscapeWhiteList(data: DescribeEscapeWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeWhiteListResponse>;
+  DescribeEscapeWhiteList(data?: DescribeEscapeWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeWhiteListResponse>;
   /** 查询导出任务下载URL */
   DescribeExportJobDownloadURL(data: DescribeExportJobDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportJobDownloadURLResponse>;
   /** 查询导出任务管理列表 */
-  DescribeExportJobManageList(data: DescribeExportJobManageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportJobManageListResponse>;
+  DescribeExportJobManageList(data?: DescribeExportJobManageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportJobManageListResponse>;
   /** 查询导出任务的结果 */
   DescribeExportJobResult(data: DescribeExportJobResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportJobResultResponse>;
   /** 查询镜像授权信息 */
@@ -9188,7 +9188,7 @@ declare interface Tcss {
   /** 查询本地镜像组件列表 */
   DescribeImageComponentList(data: DescribeImageComponentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageComponentListResponse>;
   /** 查询用户镜像仓库下的项目名称列表 */
-  DescribeImageRegistryNamespaceList(data: DescribeImageRegistryNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryNamespaceListResponse>;
+  DescribeImageRegistryNamespaceList(data?: DescribeImageRegistryNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryNamespaceListResponse>;
   /** 镜像仓库查看定时任务 */
   DescribeImageRegistryTimingScanTask(data?: DescribeImageRegistryTimingScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryTimingScanTaskResponse>;
   /** 查询本地镜像风险概览 */
@@ -9196,7 +9196,7 @@ declare interface Tcss {
   /** 查询容器安全本地镜像风险趋势 */
   DescribeImageRiskTendency(data: DescribeImageRiskTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRiskTendencyResponse>;
   /** 查询全部镜像列表 */
-  DescribeImageSimpleList(data: DescribeImageSimpleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSimpleListResponse>;
+  DescribeImageSimpleList(data?: DescribeImageSimpleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSimpleListResponse>;
   /** 获取索引列表 */
   DescribeIndexList(data?: DescribeIndexListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexListResponse>;
   /** 查询检查报告 */
@@ -9204,9 +9204,9 @@ declare interface Tcss {
   /** 获取日志检索容量使用统计 */
   DescribeLogStorageStatistic(data?: DescribeLogStorageStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageStatisticResponse>;
   /** 查询集群策略审计列表 */
-  DescribeNetworkFirewallAuditRecord(data: DescribeNetworkFirewallAuditRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallAuditRecordResponse>;
+  DescribeNetworkFirewallAuditRecord(data?: DescribeNetworkFirewallAuditRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallAuditRecordResponse>;
   /** 查询集群策略列表 */
-  DescribeNetworkFirewallClusterList(data: DescribeNetworkFirewallClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallClusterListResponse>;
+  DescribeNetworkFirewallClusterList(data?: DescribeNetworkFirewallClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallClusterListResponse>;
   /** 容器网络查询资产任务进度 */
   DescribeNetworkFirewallClusterRefreshStatus(data: DescribeNetworkFirewallClusterRefreshStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallClusterRefreshStatusResponse>;
   /** 查询集群网络空间标签列表 */
@@ -9228,7 +9228,7 @@ declare interface Tcss {
   /** 查询最新披露漏洞列表 */
   DescribeNewestVul(data?: DescribeNewestVulRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNewestVulResponse>;
   /** 查询后付费详情 */
-  DescribePostPayDetail(data: DescribePostPayDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostPayDetailResponse>;
+  DescribePostPayDetail(data?: DescribePostPayDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostPayDetailResponse>;
   /** 查询专业版需购买信息 */
   DescribeProVersionInfo(data?: DescribeProVersionInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProVersionInfoResponse>;
   /** 查询促销活动 */
@@ -9242,47 +9242,47 @@ declare interface Tcss {
   /** 运行时反弹shell事件详细信息 */
   DescribeReverseShellDetail(data: DescribeReverseShellDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellDetailResponse>;
   /** 运行时反弹shell列表 */
-  DescribeReverseShellEvents(data: DescribeReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsResponse>;
+  DescribeReverseShellEvents(data?: DescribeReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsResponse>;
   /** 运行时反弹shell列表导出 */
-  DescribeReverseShellEventsExport(data: DescribeReverseShellEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsExportResponse>;
+  DescribeReverseShellEventsExport(data?: DescribeReverseShellEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsExportResponse>;
   /** 运行时反弹shell白名单详细信息 */
   DescribeReverseShellWhiteListDetail(data: DescribeReverseShellWhiteListDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellWhiteListDetailResponse>;
   /** 运行时反弹shell白名单列表 */
-  DescribeReverseShellWhiteLists(data: DescribeReverseShellWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellWhiteListsResponse>;
+  DescribeReverseShellWhiteLists(data?: DescribeReverseShellWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellWhiteListsResponse>;
   /** 查询集群风险项列表 */
-  DescribeRiskList(data: DescribeRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskListResponse>;
+  DescribeRiskList(data?: DescribeRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskListResponse>;
   /** 运行时高危系统调用事件详细信息 */
   DescribeRiskSyscallDetail(data: DescribeRiskSyscallDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallDetailResponse>;
   /** 运行时高危系统调用列表 */
-  DescribeRiskSyscallEvents(data: DescribeRiskSyscallEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallEventsResponse>;
+  DescribeRiskSyscallEvents(data?: DescribeRiskSyscallEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallEventsResponse>;
   /** 运行时高危系统调用列表导出 */
-  DescribeRiskSyscallEventsExport(data: DescribeRiskSyscallEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallEventsExportResponse>;
+  DescribeRiskSyscallEventsExport(data?: DescribeRiskSyscallEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallEventsExportResponse>;
   /** 运行时高危系统调用系统名称列表 */
   DescribeRiskSyscallNames(data?: DescribeRiskSyscallNamesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallNamesResponse>;
   /** 运行时高危系统调用白名单详细信息 */
   DescribeRiskSyscallWhiteListDetail(data: DescribeRiskSyscallWhiteListDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallWhiteListDetailResponse>;
   /** 运行时高危系统调用白名单列表 */
-  DescribeRiskSyscallWhiteLists(data: DescribeRiskSyscallWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallWhiteListsResponse>;
+  DescribeRiskSyscallWhiteLists(data?: DescribeRiskSyscallWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallWhiteListsResponse>;
   /** 查询扫描忽略的漏洞列表 */
-  DescribeScanIgnoreVulList(data: DescribeScanIgnoreVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanIgnoreVulListResponse>;
+  DescribeScanIgnoreVulList(data?: DescribeScanIgnoreVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanIgnoreVulListResponse>;
   /** 导出ES查询文档列表 */
   DescribeSearchExportList(data: DescribeSearchExportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchExportListResponse>;
   /** 获取历史搜索记录 */
   DescribeSearchLogs(data?: DescribeSearchLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchLogsResponse>;
   /** 获取快速检索列表 */
-  DescribeSearchTemplates(data: DescribeSearchTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchTemplatesResponse>;
+  DescribeSearchTemplates(data?: DescribeSearchTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchTemplatesResponse>;
   /** 查询容器运行时安全时间趋势 */
   DescribeSecEventsTendency(data: DescribeSecEventsTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecEventsTendencyResponse>;
   /** 查询安全日志告警信息 */
-  DescribeSecLogAlertMsg(data: DescribeSecLogAlertMsgRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogAlertMsgResponse>;
+  DescribeSecLogAlertMsg(data?: DescribeSecLogAlertMsgRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogAlertMsgResponse>;
   /** 查询安全日志清理设置详情 */
   DescribeSecLogCleanSettingInfo(data?: DescribeSecLogCleanSettingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogCleanSettingInfoResponse>;
   /** 查询安全日志投递cls可选项 */
-  DescribeSecLogDeliveryClsOptions(data: DescribeSecLogDeliveryClsOptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryClsOptionsResponse>;
+  DescribeSecLogDeliveryClsOptions(data?: DescribeSecLogDeliveryClsOptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryClsOptionsResponse>;
   /** 查询安全日志投递Cls配置 */
   DescribeSecLogDeliveryClsSetting(data?: DescribeSecLogDeliveryClsSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryClsSettingResponse>;
   /** 查询安全日志投递kafka可选项 */
-  DescribeSecLogDeliveryKafkaOptions(data: DescribeSecLogDeliveryKafkaOptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryKafkaOptionsResponse>;
+  DescribeSecLogDeliveryKafkaOptions(data?: DescribeSecLogDeliveryKafkaOptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryKafkaOptionsResponse>;
   /** 查询安全日志投递kafka配置 */
   DescribeSecLogDeliveryKafkaSetting(data?: DescribeSecLogDeliveryKafkaSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryKafkaSettingResponse>;
   /** 查询安全日志接入对象列表 */
@@ -9294,9 +9294,9 @@ declare interface Tcss {
   /** 查询安全日志商品信息 */
   DescribeSecLogVasInfo(data?: DescribeSecLogVasInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogVasInfoResponse>;
   /** 查询支持防御的漏洞列表 */
-  DescribeSupportDefenceVul(data: DescribeSupportDefenceVulRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportDefenceVulResponse>;
+  DescribeSupportDefenceVul(data?: DescribeSupportDefenceVulRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportDefenceVulResponse>;
   /** 查询系统漏洞列表 */
-  DescribeSystemVulList(data: DescribeSystemVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSystemVulListResponse>;
+  DescribeSystemVulList(data?: DescribeSystemVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSystemVulListResponse>;
   /** 查询检查结果总览 */
   DescribeTaskResultSummary(data?: DescribeTaskResultSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultSummaryResponse>;
   /** 查询容器安全概览信息 */
@@ -9306,7 +9306,7 @@ declare interface Tcss {
   /** 查询未完成的刷新资产任务信息 */
   DescribeUnfinishRefreshTask(data?: DescribeUnfinishRefreshTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnfinishRefreshTaskResponse>;
   /** 用户集群资产查询 */
-  DescribeUserCluster(data: DescribeUserClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserClusterResponse>;
+  DescribeUserCluster(data?: DescribeUserClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserClusterResponse>;
   /** 查询增值服务需购买信息 */
   DescribeValueAddedSrvInfo(data?: DescribeValueAddedSrvInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeValueAddedSrvInfoResponse>;
   /** 查询木马自动隔离样本详情 */
@@ -9314,7 +9314,7 @@ declare interface Tcss {
   /** 查询木马自动隔离样本下载链接 */
   DescribeVirusAutoIsolateSampleDownloadURL(data: DescribeVirusAutoIsolateSampleDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusAutoIsolateSampleDownloadURLResponse>;
   /** 查询木马自动隔离样本列表 */
-  DescribeVirusAutoIsolateSampleList(data: DescribeVirusAutoIsolateSampleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusAutoIsolateSampleListResponse>;
+  DescribeVirusAutoIsolateSampleList(data?: DescribeVirusAutoIsolateSampleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusAutoIsolateSampleListResponse>;
   /** 查询木马自动隔离设置 */
   DescribeVirusAutoIsolateSetting(data?: DescribeVirusAutoIsolateSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusAutoIsolateSettingResponse>;
   /** 运行时查询木马文件信息 */
@@ -9322,7 +9322,7 @@ declare interface Tcss {
   /** 查询木马事件趋势 */
   DescribeVirusEventTendency(data: DescribeVirusEventTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusEventTendencyResponse>;
   /** 查询运行时文件查杀事件列表 */
-  DescribeVirusList(data: DescribeVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusListResponse>;
+  DescribeVirusList(data?: DescribeVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusListResponse>;
   /** 查询木马一键检测预估超时时间 */
   DescribeVirusManualScanEstimateTimeout(data: DescribeVirusManualScanEstimateTimeoutRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusManualScanEstimateTimeoutResponse>;
   /** 运行时查询文件查杀实时监控设置 */
@@ -9332,7 +9332,7 @@ declare interface Tcss {
   /** 运行时查询文件查杀设置 */
   DescribeVirusScanSetting(data?: DescribeVirusScanSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusScanSettingResponse>;
   /** 运行时查询文件查杀任务状态 */
-  DescribeVirusScanTaskStatus(data: DescribeVirusScanTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusScanTaskStatusResponse>;
+  DescribeVirusScanTaskStatus(data?: DescribeVirusScanTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusScanTaskStatusResponse>;
   /** 运行时文件扫描超时设置查询 */
   DescribeVirusScanTimeoutSetting(data: DescribeVirusScanTimeoutSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusScanTimeoutSettingResponse>;
   /** 运行时查询木马概览信息 */
@@ -9342,15 +9342,15 @@ declare interface Tcss {
   /** 查询受漏洞的容器列表 */
   DescribeVulContainerList(data: DescribeVulContainerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulContainerListResponse>;
   /** 查询漏洞防御事件列表 */
-  DescribeVulDefenceEvent(data: DescribeVulDefenceEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceEventResponse>;
+  DescribeVulDefenceEvent(data?: DescribeVulDefenceEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceEventResponse>;
   /** 查询漏洞防御事件详情 */
   DescribeVulDefenceEventDetail(data: DescribeVulDefenceEventDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceEventDetailResponse>;
   /** 查询漏洞防御攻击事件趋势 */
   DescribeVulDefenceEventTendency(data: DescribeVulDefenceEventTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceEventTendencyResponse>;
   /** 查询漏洞防御的主机列表 */
-  DescribeVulDefenceHost(data: DescribeVulDefenceHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceHostResponse>;
+  DescribeVulDefenceHost(data?: DescribeVulDefenceHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceHostResponse>;
   /** 查询漏洞防御插件列表 */
-  DescribeVulDefencePlugin(data: DescribeVulDefencePluginRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefencePluginResponse>;
+  DescribeVulDefencePlugin(data?: DescribeVulDefencePluginRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefencePluginResponse>;
   /** 查询漏洞防御设置信息 */
   DescribeVulDefenceSetting(data?: DescribeVulDefenceSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceSettingResponse>;
   /** 查询漏洞详情 */
@@ -9370,11 +9370,11 @@ declare interface Tcss {
   /** 统计漏洞扫描页已授权和未扫描镜像数 */
   DescribeVulScanAuthorizedImageSummary(data?: DescribeVulScanAuthorizedImageSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulScanAuthorizedImageSummaryResponse>;
   /** 查询漏洞扫描任务信息 */
-  DescribeVulScanInfo(data: DescribeVulScanInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulScanInfoResponse>;
+  DescribeVulScanInfo(data?: DescribeVulScanInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulScanInfoResponse>;
   /** 查询漏洞扫描任务的本地镜像列表 */
   DescribeVulScanLocalImageList(data: DescribeVulScanLocalImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulScanLocalImageListResponse>;
   /** 查询漏洞风险统计概览 */
-  DescribeVulSummary(data: DescribeVulSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulSummaryResponse>;
+  DescribeVulSummary(data?: DescribeVulSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulSummaryResponse>;
   /** 查询漏洞风险趋势 */
   DescribeVulTendency(data: DescribeVulTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulTendencyResponse>;
   /** 查询漏洞Top排名列表 */
@@ -9382,9 +9382,9 @@ declare interface Tcss {
   /** 获取告警策略列表 */
   DescribeWarningRules(data?: DescribeWarningRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWarningRulesResponse>;
   /** 查询web应用漏洞列表 */
-  DescribeWebVulList(data: DescribeWebVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebVulListResponse>;
+  DescribeWebVulList(data?: DescribeWebVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebVulListResponse>;
   /** 运行时文件查杀事件列表导出 */
-  ExportVirusList(data: ExportVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVirusListResponse>;
+  ExportVirusList(data?: ExportVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVirusListResponse>;
   /** 安全合规初始化用户的合规基线检测环境 */
   InitializeUserComplianceEnvironment(data?: InitializeUserComplianceEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeUserComplianceEnvironmentResponse>;
   /** 修改运行时异常进程策略状态 */
@@ -9396,13 +9396,13 @@ declare interface Tcss {
   /** 修改运行时访问控制事件状态 */
   ModifyAccessControlStatus(data: ModifyAccessControlStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessControlStatusResponse>;
   /** 主机资产刷新 */
-  ModifyAsset(data: ModifyAssetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetResponse>;
+  ModifyAsset(data?: ModifyAssetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetResponse>;
   /** 镜像仓库停止镜像扫描任务 */
-  ModifyAssetImageRegistryScanStop(data: ModifyAssetImageRegistryScanStopRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetImageRegistryScanStopResponse>;
+  ModifyAssetImageRegistryScanStop(data?: ModifyAssetImageRegistryScanStopRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetImageRegistryScanStopResponse>;
   /** 镜像仓库停止镜像一键扫描任务 */
-  ModifyAssetImageRegistryScanStopOneKey(data: ModifyAssetImageRegistryScanStopOneKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetImageRegistryScanStopOneKeyResponse>;
+  ModifyAssetImageRegistryScanStopOneKey(data?: ModifyAssetImageRegistryScanStopOneKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetImageRegistryScanStopOneKeyResponse>;
   /** 停止镜像扫描 */
-  ModifyAssetImageScanStop(data: ModifyAssetImageScanStopRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetImageScanStopResponse>;
+  ModifyAssetImageScanStop(data?: ModifyAssetImageScanStopRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetImageScanStopResponse>;
   /** 安全合规编辑定时任务 */
   ModifyCompliancePeriodTask(data: ModifyCompliancePeriodTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCompliancePeriodTaskResponse>;
   /** 隔离容器网络状态 */
@@ -9424,13 +9424,13 @@ declare interface Tcss {
   /** 更新安全日志-日志投递cls配置 */
   ModifySecLogDeliveryClsSetting(data: ModifySecLogDeliveryClsSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogDeliveryClsSettingResponse>;
   /** 更新安全日志投递kafka设置 */
-  ModifySecLogDeliveryKafkaSetting(data: ModifySecLogDeliveryKafkaSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogDeliveryKafkaSettingResponse>;
+  ModifySecLogDeliveryKafkaSetting(data?: ModifySecLogDeliveryKafkaSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogDeliveryKafkaSettingResponse>;
   /** 修改安全日志接入对象 */
   ModifySecLogJoinObjects(data: ModifySecLogJoinObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogJoinObjectsResponse>;
   /** 修改安全日志接入状态 */
   ModifySecLogJoinState(data: ModifySecLogJoinStateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogJoinStateResponse>;
   /** 修改安全日志kafkaUIN */
-  ModifySecLogKafkaUIN(data: ModifySecLogKafkaUINRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogKafkaUINResponse>;
+  ModifySecLogKafkaUIN(data?: ModifySecLogKafkaUINRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogKafkaUINResponse>;
   /** 修改木马自动隔离样本开关 */
   ModifyVirusAutoIsolateExampleSwitch(data: ModifyVirusAutoIsolateExampleSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirusAutoIsolateExampleSwitchResponse>;
   /** 修改木马自动隔离设置 */
@@ -9468,7 +9468,7 @@ declare interface Tcss {
   /** 运行时停止木马查杀任务 */
   StopVirusScanTask(data: StopVirusScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopVirusScanTaskResponse>;
   /** 停止漏洞扫描任务 */
-  StopVulScanTask(data: StopVulScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopVulScanTaskResponse>;
+  StopVulScanTask(data?: StopVulScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopVulScanTaskResponse>;
   /** 编辑本地镜像自动授权开关 */
   SwitchImageAutoAuthorizedRule(data: SwitchImageAutoAuthorizedRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchImageAutoAuthorizedRuleResponse>;
   /** 镜像仓库资产刷新 */

@@ -970,25 +970,25 @@ declare interface Oceanus {
   /** 删除作业表配置 */
   DeleteTableConfig(data: DeleteTableConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableConfigResponse>;
   /** 查询集群 */
-  DescribeClusters(data: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
+  DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** 查询作业配置 */
   DescribeJobConfigs(data: DescribeJobConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobConfigsResponse>;
   /** 查找Savepoint列表 */
   DescribeJobSavepoint(data: DescribeJobSavepointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobSavepointResponse>;
   /** 查询作业 */
-  DescribeJobs(data: DescribeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobsResponse>;
+  DescribeJobs(data?: DescribeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobsResponse>;
   /** 描述资源配置接口 */
-  DescribeResourceConfigs(data: DescribeResourceConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceConfigsResponse>;
+  DescribeResourceConfigs(data?: DescribeResourceConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceConfigsResponse>;
   /** 获取资源关联作业信息 */
   DescribeResourceRelatedJobs(data: DescribeResourceRelatedJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceRelatedJobsResponse>;
   /** 描述资源接口 */
-  DescribeResources(data: DescribeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesResponse>;
+  DescribeResources(data?: DescribeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesResponse>;
   /** 描述系统资源接口 */
-  DescribeSystemResources(data: DescribeSystemResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSystemResourcesResponse>;
+  DescribeSystemResources(data?: DescribeSystemResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSystemResourcesResponse>;
   /** 自定义树状结构 */
-  DescribeTreeJobs(data: DescribeTreeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTreeJobsResponse>;
+  DescribeTreeJobs(data?: DescribeTreeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTreeJobsResponse>;
   /** 查询树状结构资源列表 */
-  DescribeTreeResources(data: DescribeTreeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTreeResourcesResponse>;
+  DescribeTreeResources(data?: DescribeTreeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTreeResourcesResponse>;
   /** 更新作业 */
   ModifyJob(data: ModifyJobRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyJobResponse>;
   /** 运行作业 */

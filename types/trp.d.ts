@@ -321,9 +321,9 @@ declare interface CreateCodeBatchRequest {
   BatchId?: string;
   /** 备注 */
   Remark?: string;
-  /** 活动ID */
+  /** 模版ID，或者活动ID */
   MpTpl?: string;
-  /** 克隆批次ID */
+  /** 克隆批次ID，同时会复制溯源信息 */
   CloneId?: string;
 }
 
@@ -901,7 +901,7 @@ declare interface ModifyCodeBatchRequest {
   CorpId?: number;
   /** 状态 0: 未激活 1: 已激活 -1: 已冻结 */
   Status?: number;
-  /** 模板ID */
+  /** 模版ID，或者活动ID */
   MpTpl?: string;
   /** 商户ID */
   MerchantId?: string;
@@ -1078,7 +1078,7 @@ declare interface ModifyTraceDataResponse {
 declare interface Trp {
   (): Versions;
   /** 新增批次 */
-  CreateCodeBatch(data: CreateCodeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeBatchResponse>;
+  CreateCodeBatch(data?: CreateCodeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeBatchResponse>;
   /** 生成普通码包 */
   CreateCodePack(data: CreateCodePackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodePackResponse>;
   /** 生成自定义码包 */
@@ -1090,15 +1090,15 @@ declare interface Trp {
   /** 新建商品 */
   CreateProduct(data: CreateProductRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProductResponse>;
   /** 上链溯源信息 */
-  CreateTraceChain(data: CreateTraceChainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTraceChainResponse>;
+  CreateTraceChain(data?: CreateTraceChainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTraceChainResponse>;
   /** 批量导入二维码 */
   CreateTraceCodes(data: CreateTraceCodesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTraceCodesResponse>;
   /** 异步导入激活码包 */
-  CreateTraceCodesAsync(data: CreateTraceCodesAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTraceCodesAsyncResponse>;
+  CreateTraceCodesAsync(data?: CreateTraceCodesAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTraceCodesAsyncResponse>;
   /** 新增溯源信息 */
-  CreateTraceData(data: CreateTraceDataRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTraceDataResponse>;
+  CreateTraceData(data?: CreateTraceDataRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTraceDataResponse>;
   /** 删除批次 */
-  DeleteCodeBatch(data: DeleteCodeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCodeBatchResponse>;
+  DeleteCodeBatch(data?: DeleteCodeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCodeBatchResponse>;
   /** 删除商户 */
   DeleteMerchant(data: DeleteMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMerchantResponse>;
   /** 删除商品 */
@@ -1106,39 +1106,39 @@ declare interface Trp {
   /** 删除溯源信息 */
   DeleteTraceData(data: DeleteTraceDataRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTraceDataResponse>;
   /** 查询批次信息 */
-  DescribeCodeBatchById(data: DescribeCodeBatchByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodeBatchByIdResponse>;
+  DescribeCodeBatchById(data?: DescribeCodeBatchByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodeBatchByIdResponse>;
   /** 查询批次列表 */
-  DescribeCodeBatchs(data: DescribeCodeBatchsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodeBatchsResponse>;
+  DescribeCodeBatchs(data?: DescribeCodeBatchsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodeBatchsResponse>;
   /** 查询码包状态 */
   DescribeCodePackStatus(data: DescribeCodePackStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodePackStatusResponse>;
   /** 查询码包地址 */
   DescribeCodePackUrl(data: DescribeCodePackUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodePackUrlResponse>;
   /** 查询码包列表 */
-  DescribeCodePacks(data: DescribeCodePacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodePacksResponse>;
+  DescribeCodePacks(data?: DescribeCodePacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodePacksResponse>;
   /** 查询码包的二维码列表 */
   DescribeCodesByPack(data: DescribeCodesByPackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodesByPackResponse>;
   /** 查自定义码规则 */
   DescribeCustomRuleById(data: DescribeCustomRuleByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomRuleByIdResponse>;
   /** 查自定义码规则列表 */
-  DescribeCustomRules(data: DescribeCustomRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomRulesResponse>;
+  DescribeCustomRules(data?: DescribeCustomRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomRulesResponse>;
   /** 获取异步任务的输出地址 */
   DescribeJobFileUrl(data: DescribeJobFileUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobFileUrlResponse>;
   /** 查询商户信息 */
   DescribeMerchantById(data: DescribeMerchantByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMerchantByIdResponse>;
   /** 查询商户列表 */
-  DescribeMerchants(data: DescribeMerchantsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMerchantsResponse>;
+  DescribeMerchants(data?: DescribeMerchantsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMerchantsResponse>;
   /** 查询商品信息 */
   DescribeProductById(data: DescribeProductByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductByIdResponse>;
   /** 查询商品列表 */
-  DescribeProducts(data: DescribeProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductsResponse>;
+  DescribeProducts(data?: DescribeProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductsResponse>;
   /** 查询临时Token */
-  DescribeTmpToken(data: DescribeTmpTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTmpTokenResponse>;
+  DescribeTmpToken(data?: DescribeTmpTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTmpTokenResponse>;
   /** 查询二维码信息 */
-  DescribeTraceCodeById(data: DescribeTraceCodeByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceCodeByIdResponse>;
+  DescribeTraceCodeById(data?: DescribeTraceCodeByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceCodeByIdResponse>;
   /** 查询二维码列表 */
-  DescribeTraceCodes(data: DescribeTraceCodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceCodesResponse>;
+  DescribeTraceCodes(data?: DescribeTraceCodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceCodesResponse>;
   /** 查询溯源信息 */
-  DescribeTraceDataList(data: DescribeTraceDataListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceDataListResponse>;
+  DescribeTraceDataList(data?: DescribeTraceDataListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceDataListResponse>;
   /** 修改批次 */
   ModifyCodeBatch(data: ModifyCodeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCodeBatchResponse>;
   /** 修改自定义码规则 */
@@ -1152,9 +1152,9 @@ declare interface Trp {
   /** 修改二维码的状态 */
   ModifyTraceCode(data: ModifyTraceCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceCodeResponse>;
   /** 修改溯源信息 */
-  ModifyTraceData(data: ModifyTraceDataRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceDataResponse>;
+  ModifyTraceData(data?: ModifyTraceDataRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceDataResponse>;
   /** 修改溯源信息的排序 */
-  ModifyTraceDataRanks(data: ModifyTraceDataRanksRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceDataRanksResponse>;
+  ModifyTraceDataRanks(data?: ModifyTraceDataRanksRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceDataRanksResponse>;
 }
 
 export declare type Versions = ["2021-05-15"];

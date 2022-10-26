@@ -1630,7 +1630,7 @@ declare interface Tci {
   /** AI 助教标准接口 */
   AIAssistant(data: AIAssistantRequest, config?: AxiosRequestConfig): AxiosPromise<AIAssistantResponse>;
   /** 取消任务执行 */
-  CancelTask(data: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
+  CancelTask(data?: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
   /** 检查人脸图片 */
   CheckFacePhoto(data: CheckFacePhotoRequest, config?: AxiosRequestConfig): AxiosPromise<CheckFacePhotoResponse>;
   /** 创建人脸 */

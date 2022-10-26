@@ -718,13 +718,13 @@ declare interface Dts {
   /** 获取迁移校验结果 */
   DescribeMigrateCheckJob(data: DescribeMigrateCheckJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrateCheckJobResponse>;
   /** 查询数据迁移任务 */
-  DescribeMigrateJobs(data: DescribeMigrateJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrateJobsResponse>;
+  DescribeMigrateJobs(data?: DescribeMigrateJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrateJobsResponse>;
   /** 查询可售卖订阅地域 */
   DescribeRegionConf(data?: DescribeRegionConfRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionConfResponse>;
   /** 查询订阅实例配置 */
   DescribeSubscribeConf(data: DescribeSubscribeConfRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscribeConfResponse>;
   /** 获取数据订阅实例列表 */
-  DescribeSubscribes(data: DescribeSubscribesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscribesResponse>;
+  DescribeSubscribes(data?: DescribeSubscribesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscribesResponse>;
   /** 隔离订阅实例 */
   IsolateSubscribe(data: IsolateSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateSubscribeResponse>;
   /** 修改数据迁移任务 */

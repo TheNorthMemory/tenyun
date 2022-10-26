@@ -458,6 +458,14 @@ declare interface CloudClientInfo {
   PackageName?: string;
 }
 
+/** 渠道透传字段 */
+declare interface CloudExternalAttachmentData {
+  /** 渠道名 */
+  ChannelName: string;
+  /** 渠道透传字段，由各个渠道自行定义 */
+  AttachmentData: string;
+}
+
 /** 第三方渠道数据信息 */
 declare interface CloudExternalChannelData {
   /** 第三方渠道数据名。PAYMENT_ORDER_EXTERNAL_REQUEST_DATA: 支付下单请求数据PAYMENT_ORDER_EXTERNAL_RETURN_DATA: 支付下单返回数据PAYMENT_ORDER_EXTERNAL_NOTIFY_DATA: 支付通知数据 */
@@ -610,6 +618,8 @@ declare interface CloudSubOrder {
   SettleInfo?: CloudSettleInfo;
   /** 附加项信息列表。例如溢价信息、抵扣信息、积分信息、补贴信息通过该字段可以实现渠道方的优惠抵扣补贴等营销功能。 */
   AttachmentInfoList?: CloudAttachmentInfo[];
+  /** 渠道透传数据列表。 */
+  ExternalAttachmentDataList?: CloudExternalAttachmentData[];
 }
 
 /** 退款子单 */
@@ -10237,6 +10247,8 @@ declare interface UnifiedCloudOrderRequest {
   OrderReceiveMode?: string;
   /** 渠道方用户信息列表 */
   ExternalUserInfoList?: CloudExternalUserInfo[];
+  /** 渠道透传数据列表 */
+  ExternalAttachmentDataList?: CloudExternalAttachmentData[];
 }
 
 declare interface UnifiedCloudOrderResponse {
@@ -10914,15 +10926,15 @@ declare interface Cpdp {
   /** 灵云V2-收款用户账户余额查询 */
   QueryFlexPayeeAccountBalance(data: QueryFlexPayeeAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPayeeAccountBalanceResponse>;
   /** 灵云V2-收款用户账户信息查询 */
-  QueryFlexPayeeAccountInfo(data: QueryFlexPayeeAccountInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPayeeAccountInfoResponse>;
+  QueryFlexPayeeAccountInfo(data?: QueryFlexPayeeAccountInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPayeeAccountInfoResponse>;
   /** 灵云V2-收款用户账户列表查询 */
   QueryFlexPayeeAccountList(data: QueryFlexPayeeAccountListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPayeeAccountListResponse>;
   /** 灵云V2-收款用户信息查询 */
-  QueryFlexPayeeInfo(data: QueryFlexPayeeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPayeeInfoResponse>;
+  QueryFlexPayeeInfo(data?: QueryFlexPayeeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPayeeInfoResponse>;
   /** 灵云V2-查询付款订单列表 */
   QueryFlexPaymentOrderList(data: QueryFlexPaymentOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPaymentOrderListResponse>;
   /** 灵云V2-查询付款订单状态 */
-  QueryFlexPaymentOrderStatus(data: QueryFlexPaymentOrderStatusRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPaymentOrderStatusResponse>;
+  QueryFlexPaymentOrderStatus(data?: QueryFlexPaymentOrderStatusRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPaymentOrderStatusResponse>;
   /** 灵云V2-查询结算订单列表 */
   QueryFlexSettlementOrderList(data: QueryFlexSettlementOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexSettlementOrderListResponse>;
   /** 聚鑫-查询会员资金交易信息列表 */

@@ -1716,7 +1716,7 @@ declare interface Scf {
   /** 获取函数异步重试配置 */
   GetFunctionEventInvokeConfig(data: GetFunctionEventInvokeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<GetFunctionEventInvokeConfigResponse>;
   /** 获取函数运行日志 */
-  GetFunctionLogs(data: GetFunctionLogsRequest, config?: AxiosRequestConfig): AxiosPromise<GetFunctionLogsResponse>;
+  GetFunctionLogs(data?: GetFunctionLogsRequest, config?: AxiosRequestConfig): AxiosPromise<GetFunctionLogsResponse>;
   /** 获取层版本详细信息 */
   GetLayerVersion(data: GetLayerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<GetLayerVersionResponse>;
   /** 获取函数预置并发详情 */
@@ -1734,13 +1734,13 @@ declare interface Scf {
   /** 拉取函数异步事件列表 */
   ListAsyncEvents(data: ListAsyncEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAsyncEventsResponse>;
   /** 获取函数列表 */
-  ListFunctions(data: ListFunctionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListFunctionsResponse>;
+  ListFunctions(data?: ListFunctionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListFunctionsResponse>;
   /** 获取层版本列表 */
   ListLayerVersions(data: ListLayerVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListLayerVersionsResponse>;
   /** 返回层列表 */
-  ListLayers(data: ListLayersRequest, config?: AxiosRequestConfig): AxiosPromise<ListLayersResponse>;
+  ListLayers(data?: ListLayersRequest, config?: AxiosRequestConfig): AxiosPromise<ListLayersResponse>;
   /** 列出命名空间列表 */
-  ListNamespaces(data: ListNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<ListNamespacesResponse>;
+  ListNamespaces(data?: ListNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<ListNamespacesResponse>;
   /** 获取函数触发器列表 */
   ListTriggers(data: ListTriggersRequest, config?: AxiosRequestConfig): AxiosPromise<ListTriggersResponse>;
   /** 查询函数版本 */
@@ -1774,19 +1774,11 @@ declare interface Scf {
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DeleteFunctionTestModel(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  GetFunctionInfo(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   GetFunctionTestModel(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  ListAllFunctions(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   ListFunctionTestModels(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  UpdateFunction(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   UpdateFunctionIncrementalCode(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  UpdateFunctionInfo(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   UpdateFunctionTestModel(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
 }

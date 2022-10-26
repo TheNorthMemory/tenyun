@@ -5006,9 +5006,9 @@ declare interface Tke {
   /** 删除边缘计算集群 */
   DeleteTKEEdgeCluster(data: DeleteTKEEdgeClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTKEEdgeClusterResponse>;
   /** 获取集群可以升级的所有版本 */
-  DescribeAvailableClusterVersion(data: DescribeAvailableClusterVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableClusterVersionResponse>;
+  DescribeAvailableClusterVersion(data?: DescribeAvailableClusterVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableClusterVersionResponse>;
   /** 边缘计算支持的k8s版本 */
-  DescribeAvailableTKEEdgeVersion(data: DescribeAvailableTKEEdgeVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableTKEEdgeVersionResponse>;
+  DescribeAvailableTKEEdgeVersion(data?: DescribeAvailableTKEEdgeVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableTKEEdgeVersionResponse>;
   /** 集群弹性伸缩配置 */
   DescribeClusterAsGroupOption(data: DescribeClusterAsGroupOptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterAsGroupOptionResponse>;
   /** 集群关联的伸缩组列表 */
@@ -5030,7 +5030,7 @@ declare interface Tke {
   /** 获取集群kubeconfig文件 */
   DescribeClusterKubeconfig(data: DescribeClusterKubeconfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterKubeconfigResponse>;
   /** 获取集群规模 */
-  DescribeClusterLevelAttribute(data: DescribeClusterLevelAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterLevelAttributeResponse>;
+  DescribeClusterLevelAttribute(data?: DescribeClusterLevelAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterLevelAttributeResponse>;
   /** 查询集群变配记录 */
   DescribeClusterLevelChangeRecords(data: DescribeClusterLevelChangeRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterLevelChangeRecordsResponse>;
   /** 查询节点池详情 */
@@ -5044,23 +5044,23 @@ declare interface Tke {
   /** 集群的密钥信息 */
   DescribeClusterSecurity(data: DescribeClusterSecurityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterSecurityResponse>;
   /** 查看集群状态列表 */
-  DescribeClusterStatus(data: DescribeClusterStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterStatusResponse>;
+  DescribeClusterStatus(data?: DescribeClusterStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterStatusResponse>;
   /** 查询集群列表 */
-  DescribeClusters(data: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
+  DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** 获取ECM实例相关信息 */
   DescribeECMInstances(data: DescribeECMInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeECMInstancesResponse>;
   /** 获取弹性容器集群的认证信息 */
   DescribeEKSClusterCredential(data: DescribeEKSClusterCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEKSClusterCredentialResponse>;
   /** 查询弹性集群列表 */
-  DescribeEKSClusters(data: DescribeEKSClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEKSClustersResponse>;
+  DescribeEKSClusters(data?: DescribeEKSClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEKSClustersResponse>;
   /** 查询容器实例的事件 */
   DescribeEKSContainerInstanceEvent(data: DescribeEKSContainerInstanceEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEKSContainerInstanceEventResponse>;
   /** 查询容器实例支持的地域 */
   DescribeEKSContainerInstanceRegions(data?: DescribeEKSContainerInstanceRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEKSContainerInstanceRegionsResponse>;
   /** 查询容器实例 */
-  DescribeEKSContainerInstances(data: DescribeEKSContainerInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEKSContainerInstancesResponse>;
+  DescribeEKSContainerInstances(data?: DescribeEKSContainerInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEKSContainerInstancesResponse>;
   /** 查询边缘容器集群可用的自定义参数 */
-  DescribeEdgeAvailableExtraArgs(data: DescribeEdgeAvailableExtraArgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeAvailableExtraArgsResponse>;
+  DescribeEdgeAvailableExtraArgs(data?: DescribeEdgeAvailableExtraArgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeAvailableExtraArgsResponse>;
   /** 获取边缘容器CVM实例相关信息 */
   DescribeEdgeCVMInstances(data: DescribeEdgeCVMInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeCVMInstancesResponse>;
   /** 查询边缘集群自定义参数 */
@@ -5076,11 +5076,11 @@ declare interface Tke {
   /** 查询开启vpc-cni异步任务的进度 */
   DescribeEnableVpcCniProgress(data: DescribeEnableVpcCniProgressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnableVpcCniProgressResponse>;
   /** 查询已经存在的节点 */
-  DescribeExistedInstances(data: DescribeExistedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExistedInstancesResponse>;
+  DescribeExistedInstances(data?: DescribeExistedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExistedInstancesResponse>;
   /** 获取导入第三方集群YAML定义 */
   DescribeExternalClusterSpec(data: DescribeExternalClusterSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExternalClusterSpecResponse>;
   /** 查询镜像缓存信息 */
-  DescribeImageCaches(data: DescribeImageCachesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageCachesResponse>;
+  DescribeImageCaches(data?: DescribeImageCachesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageCachesResponse>;
   /** 获取镜像信息 */
   DescribeImages(data?: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
   /** 获取关联目标集群的实例列表 */
@@ -5106,21 +5106,21 @@ declare interface Tke {
   /** 获取2.0实例初始化任务状态 */
   DescribePrometheusInstanceInitStatus(data: DescribePrometheusInstanceInitStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstanceInitStatusResponse>;
   /** 获取2.0实例列表 */
-  DescribePrometheusInstancesOverview(data: DescribePrometheusInstancesOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstancesOverviewResponse>;
+  DescribePrometheusInstancesOverview(data?: DescribePrometheusInstancesOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstancesOverviewResponse>;
   /** 获取实例列表 */
-  DescribePrometheusOverviews(data: DescribePrometheusOverviewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusOverviewsResponse>;
+  DescribePrometheusOverviews(data?: DescribePrometheusOverviewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusOverviewsResponse>;
   /** 获取聚合规则列表，包含关联集群内的资源 */
   DescribePrometheusRecordRules(data: DescribePrometheusRecordRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusRecordRulesResponse>;
   /** 获取targets信息 */
   DescribePrometheusTargets(data: DescribePrometheusTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTargetsResponse>;
   /** 拉取模板列表 */
-  DescribePrometheusTemp(data: DescribePrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTempResponse>;
+  DescribePrometheusTemp(data?: DescribePrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTempResponse>;
   /** 获取模板关联实例信息 */
   DescribePrometheusTempSync(data: DescribePrometheusTempSyncRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTempSyncResponse>;
   /** 获取模板同步信息 */
   DescribePrometheusTemplateSync(data: DescribePrometheusTemplateSyncRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTemplateSyncResponse>;
   /** 模板列表 */
-  DescribePrometheusTemplates(data: DescribePrometheusTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTemplatesResponse>;
+  DescribePrometheusTemplates(data?: DescribePrometheusTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTemplatesResponse>;
   /** 查询地域列表 */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
   /** 获取集群资源使用量 */
@@ -5132,7 +5132,7 @@ declare interface Tke {
   /** 查询边缘计算集群状态 */
   DescribeTKEEdgeClusterStatus(data: DescribeTKEEdgeClusterStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTKEEdgeClusterStatusResponse>;
   /** 查询边缘集群列表 */
-  DescribeTKEEdgeClusters(data: DescribeTKEEdgeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTKEEdgeClustersResponse>;
+  DescribeTKEEdgeClusters(data?: DescribeTKEEdgeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTKEEdgeClustersResponse>;
   /** 获取边缘计算外部访问的kubeconfig */
   DescribeTKEEdgeExternalKubeconfig(data: DescribeTKEEdgeExternalKubeconfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTKEEdgeExternalKubeconfigResponse>;
   /** 获取边缘脚本链接 */
@@ -5140,7 +5140,7 @@ declare interface Tke {
   /** 集群版本信息 */
   DescribeVersions(data?: DescribeVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVersionsResponse>;
   /** 查询机型可支持的最大VPC-CNI模式Pod数量 */
-  DescribeVpcCniPodLimits(data: DescribeVpcCniPodLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcCniPodLimitsResponse>;
+  DescribeVpcCniPodLimits(data?: DescribeVpcCniPodLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcCniPodLimitsResponse>;
   /** 关闭集群审计 */
   DisableClusterAudit(data: DisableClusterAuditRequest, config?: AxiosRequestConfig): AxiosPromise<DisableClusterAuditResponse>;
   /** 关闭集群删除保护 */
@@ -5166,7 +5166,7 @@ declare interface Tke {
   /** 查询匹配的镜像缓存 */
   GetMostSuitableImageCache(data: GetMostSuitableImageCacheRequest, config?: AxiosRequestConfig): AxiosPromise<GetMostSuitableImageCacheResponse>;
   /** 获取TKE支持的App列表 */
-  GetTkeAppChartList(data: GetTkeAppChartListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTkeAppChartListResponse>;
+  GetTkeAppChartList(data?: GetTkeAppChartListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTkeAppChartListResponse>;
   /** 获得节点升级当前的进度 */
   GetUpgradeInstanceProgress(data: GetUpgradeInstanceProgressRequest, config?: AxiosRequestConfig): AxiosPromise<GetUpgradeInstanceProgressResponse>;
   /** 安装边缘日志采集组件 */

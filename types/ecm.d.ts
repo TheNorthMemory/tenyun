@@ -3754,7 +3754,7 @@ declare interface Ecm {
   /** 删除负载均衡监听器 */
   DeleteListener(data: DeleteListenerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteListenerResponse>;
   /** 删除负载均衡实例 */
-  DeleteLoadBalancer(data: DeleteLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerResponse>;
+  DeleteLoadBalancer(data?: DeleteLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerResponse>;
   /** 删除负载均衡多个监听器 */
   DeleteLoadBalancerListeners(data: DeleteLoadBalancerListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerListenersResponse>;
   /** 删除业务模块 */
@@ -3788,11 +3788,11 @@ declare interface Ecm {
   /** 查询可用区的默认子网 */
   DescribeDefaultSubnet(data: DescribeDefaultSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultSubnetResponse>;
   /** 查询云硬盘列表 */
-  DescribeDisks(data: DescribeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksResponse>;
+  DescribeDisks(data?: DescribeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksResponse>;
   /** 查询HAVIP列表 */
-  DescribeHaVips(data: DescribeHaVipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHaVipsResponse>;
+  DescribeHaVips(data?: DescribeHaVipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHaVipsResponse>;
   /** 展示镜像列表 */
-  DescribeImage(data: DescribeImageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageResponse>;
+  DescribeImage(data?: DescribeImageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageResponse>;
   /** 查询外部导入镜像支持的OS列表 */
   DescribeImportImageOs(data?: DescribeImportImageOsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImportImageOsResponse>;
   /** 获取机型配置列表 */
@@ -3800,7 +3800,7 @@ declare interface Ecm {
   /** 查询实例管理终端地址 */
   DescribeInstanceVncUrl(data: DescribeInstanceVncUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceVncUrlResponse>;
   /** 获取实例相关信息 */
-  DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 获取禁止的操作列表 */
   DescribeInstancesDeniedActions(data: DescribeInstancesDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDeniedActionsResponse>;
   /** 查询负载均衡的监听器列表 */
@@ -3808,29 +3808,29 @@ declare interface Ecm {
   /** 查询负载均衡相关的任务状态 */
   DescribeLoadBalanceTaskStatus(data: DescribeLoadBalanceTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalanceTaskStatusResponse>;
   /** 查询负载均衡实例列表 */
-  DescribeLoadBalancers(data: DescribeLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersResponse>;
+  DescribeLoadBalancers(data?: DescribeLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersResponse>;
   /** 获取模块列表 */
-  DescribeModule(data: DescribeModuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModuleResponse>;
+  DescribeModule(data?: DescribeModuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModuleResponse>;
   /** 展示模块详细信息 */
   DescribeModuleDetail(data: DescribeModuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModuleDetailResponse>;
   /** 获取客户节点上的出入月峰和计费带宽 */
   DescribeMonthPeakNetwork(data: DescribeMonthPeakNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonthPeakNetworkResponse>;
   /** 查询弹性网卡列表 */
-  DescribeNetworkInterfaces(data: DescribeNetworkInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkInterfacesResponse>;
+  DescribeNetworkInterfaces(data?: DescribeNetworkInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkInterfacesResponse>;
   /** 获取节点列表 */
-  DescribeNode(data: DescribeNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeResponse>;
+  DescribeNode(data?: DescribeNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeResponse>;
   /** 获取装箱配额组 */
-  DescribePackingQuotaGroup(data: DescribePackingQuotaGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackingQuotaGroupResponse>;
+  DescribePackingQuotaGroup(data?: DescribePackingQuotaGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackingQuotaGroupResponse>;
   /** 基础信息峰值数据 */
-  DescribePeakBaseOverview(data: DescribePeakBaseOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePeakBaseOverviewResponse>;
+  DescribePeakBaseOverview(data?: DescribePeakBaseOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePeakBaseOverviewResponse>;
   /** 获取网络峰值数据 */
-  DescribePeakNetworkOverview(data: DescribePeakNetworkOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePeakNetworkOverviewResponse>;
+  DescribePeakNetworkOverview(data?: DescribePeakNetworkOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePeakNetworkOverviewResponse>;
   /** 查询实例价格 */
   DescribePriceRunInstance(data: DescribePriceRunInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePriceRunInstanceResponse>;
   /** 查询路由策略冲突列表 */
   DescribeRouteConflicts(data: DescribeRouteConflictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteConflictsResponse>;
   /** 查询路由表对象列表 */
-  DescribeRouteTables(data: DescribeRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTablesResponse>;
+  DescribeRouteTables(data?: DescribeRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTablesResponse>;
   /** 查询安全组关联统计 */
   DescribeSecurityGroupAssociationStatistics(data: DescribeSecurityGroupAssociationStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupAssociationStatisticsResponse>;
   /** 查询用户安全组配额 */
@@ -3838,11 +3838,11 @@ declare interface Ecm {
   /** 查询安全组规则 */
   DescribeSecurityGroupPolicies(data: DescribeSecurityGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupPoliciesResponse>;
   /** 查看安全组 */
-  DescribeSecurityGroups(data: DescribeSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupsResponse>;
+  DescribeSecurityGroups(data?: DescribeSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupsResponse>;
   /** 查询快照列表 */
-  DescribeSnapshots(data: DescribeSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsResponse>;
+  DescribeSnapshots(data?: DescribeSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsResponse>;
   /** 查询子网列表 */
-  DescribeSubnets(data: DescribeSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetsResponse>;
+  DescribeSubnets(data?: DescribeSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetsResponse>;
   /** 获取负载均衡后端服务的健康检查状态 */
   DescribeTargetHealth(data: DescribeTargetHealthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetHealthResponse>;
   /** 查询负载均衡绑定的后端服务列表 */
@@ -3852,7 +3852,7 @@ declare interface Ecm {
   /** 获取任务状态 */
   DescribeTaskStatus(data: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
   /** 查询VPC列表 */
-  DescribeVpcs(data: DescribeVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcsResponse>;
+  DescribeVpcs(data?: DescribeVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcsResponse>;
   /** 卸载云硬盘 */
   DetachDisks(data: DetachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DetachDisksResponse>;
   /** 弹性网卡解绑云主机 */

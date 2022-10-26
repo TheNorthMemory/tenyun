@@ -2037,6 +2037,10 @@ declare interface DescribeListBGPInstancesRequest {
   FilterInstanceIdList?: string[];
   /** 企业版搜索 */
   FilterEnterpriseFlag?: number;
+  /** 轻量版搜索 */
+  FilterLightFlag?: number;
+  /** 定制版搜索 */
+  FilterChannelFlag?: number;
   /** 标签搜索 */
   FilterTag?: TagFilter;
 }
@@ -2754,7 +2758,7 @@ declare interface Antiddos {
   /** 设置DDoS防护的协议封禁配置 */
   CreateProtocolBlockConfig(data: CreateProtocolBlockConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProtocolBlockConfigResponse>;
   /** 创建调度的域名 */
-  CreateSchedulingDomain(data: CreateSchedulingDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchedulingDomainResponse>;
+  CreateSchedulingDomain(data?: CreateSchedulingDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchedulingDomainResponse>;
   /** 添加DDoS防护的水印防护配置 */
   CreateWaterPrintConfig(data: CreateWaterPrintConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWaterPrintConfigResponse>;
   /** 添加DDoS防护的水印防护密钥 */

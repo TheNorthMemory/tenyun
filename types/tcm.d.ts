@@ -650,7 +650,7 @@ declare interface Tcm {
   /** 查询网格详情 */
   DescribeMesh(data: DescribeMeshRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMeshResponse>;
   /** 查询网格列表 */
-  DescribeMeshList(data: DescribeMeshListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMeshListResponse>;
+  DescribeMeshList(data?: DescribeMeshListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMeshListResponse>;
   /** 关联集群 */
   LinkClusterList(data: LinkClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<LinkClusterListResponse>;
   /** 修改网格 */

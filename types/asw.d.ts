@@ -268,7 +268,7 @@ declare interface Asw {
   /** 查询状态机详情 */
   DescribeFlowServiceDetail(data: DescribeFlowServiceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowServiceDetailResponse>;
   /** 查询状态机列表 */
-  DescribeFlowServices(data: DescribeFlowServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowServicesResponse>;
+  DescribeFlowServices(data?: DescribeFlowServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowServicesResponse>;
   /** 修改状态机 */
   ModifyFlowService(data: ModifyFlowServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFlowServiceResponse>;
   /** 启动执行 */

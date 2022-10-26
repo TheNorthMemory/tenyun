@@ -1692,23 +1692,23 @@ declare interface Lighthouse {
   /** 查询镜像实例信息 */
   DescribeBlueprintInstances(data: DescribeBlueprintInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlueprintInstancesResponse>;
   /** 查询镜像信息 */
-  DescribeBlueprints(data: DescribeBlueprintsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlueprintsResponse>;
+  DescribeBlueprints(data?: DescribeBlueprintsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlueprintsResponse>;
   /** 查询套餐折扣 */
   DescribeBundleDiscount(data: DescribeBundleDiscountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBundleDiscountResponse>;
   /** 查询套餐 */
-  DescribeBundles(data: DescribeBundlesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBundlesResponse>;
+  DescribeBundles(data?: DescribeBundlesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBundlesResponse>;
   /** 查询云联网关联的实例信息 */
   DescribeCcnAttachedInstances(data?: DescribeCcnAttachedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnAttachedInstancesResponse>;
   /** 查看云硬盘配置 */
-  DescribeDiskConfigs(data: DescribeDiskConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskConfigsResponse>;
+  DescribeDiskConfigs(data?: DescribeDiskConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskConfigsResponse>;
   /** 查询云硬盘折扣信息 */
   DescribeDiskDiscount(data: DescribeDiskDiscountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskDiscountResponse>;
   /** 查询云硬盘 */
-  DescribeDisks(data: DescribeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksResponse>;
+  DescribeDisks(data?: DescribeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksResponse>;
   /** 查询云硬盘操作限制列表信息 */
   DescribeDisksDeniedActions(data: DescribeDisksDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksDeniedActionsResponse>;
   /** 查看云硬盘是否可退还 */
-  DescribeDisksReturnable(data: DescribeDisksReturnableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksReturnableResponse>;
+  DescribeDisksReturnable(data?: DescribeDisksReturnableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksReturnableResponse>;
   /** 查询防火墙规则 */
   DescribeFirewallRules(data: DescribeFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirewallRulesResponse>;
   /** 查询防火墙规则模板 */
@@ -1720,17 +1720,17 @@ declare interface Lighthouse {
   /** 查询实例管理终端地址 */
   DescribeInstanceVncUrl(data: DescribeInstanceVncUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceVncUrlResponse>;
   /** 查看实例列表 */
-  DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 查看实例操作限制列表 */
   DescribeInstancesDeniedActions(data: DescribeInstancesDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDeniedActionsResponse>;
   /** 查询实例挂载云硬盘数量 */
   DescribeInstancesDiskNum(data: DescribeInstancesDiskNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDiskNumResponse>;
   /** 查询实例是否可退还 */
-  DescribeInstancesReturnable(data: DescribeInstancesReturnableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesReturnableResponse>;
+  DescribeInstancesReturnable(data?: DescribeInstancesReturnableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesReturnableResponse>;
   /** 查看实例流量包详情 */
-  DescribeInstancesTrafficPackages(data: DescribeInstancesTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesTrafficPackagesResponse>;
+  DescribeInstancesTrafficPackages(data?: DescribeInstancesTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesTrafficPackagesResponse>;
   /** 查询用户密钥对列表 */
-  DescribeKeyPairs(data: DescribeKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeyPairsResponse>;
+  DescribeKeyPairs(data?: DescribeKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeyPairsResponse>;
   /** 查询实例可变更套餐列表 */
   DescribeModifyInstanceBundles(data: DescribeModifyInstanceBundlesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModifyInstanceBundlesResponse>;
   /** 查询地域列表 */
@@ -1738,11 +1738,11 @@ declare interface Lighthouse {
   /** 查询重置实例的镜像信息 */
   DescribeResetInstanceBlueprints(data: DescribeResetInstanceBlueprintsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResetInstanceBlueprintsResponse>;
   /** 查看快照列表 */
-  DescribeSnapshots(data: DescribeSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsResponse>;
+  DescribeSnapshots(data?: DescribeSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsResponse>;
   /** 查看快照操作限制列表 */
   DescribeSnapshotsDeniedActions(data: DescribeSnapshotsDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsDeniedActionsResponse>;
   /** 查询可用区列表 */
-  DescribeZones(data: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
+  DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
   /** 解关联云联网 */
   DetachCcn(data: DetachCcnRequest, config?: AxiosRequestConfig): AxiosPromise<DetachCcnResponse>;
   /** 卸载云硬盘 */
@@ -1752,7 +1752,7 @@ declare interface Lighthouse {
   /** 导入密钥对 */
   ImportKeyPair(data: ImportKeyPairRequest, config?: AxiosRequestConfig): AxiosPromise<ImportKeyPairResponse>;
   /** 创建镜像询价 */
-  InquirePriceCreateBlueprint(data: InquirePriceCreateBlueprintRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateBlueprintResponse>;
+  InquirePriceCreateBlueprint(data?: InquirePriceCreateBlueprintRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateBlueprintResponse>;
   /** 新购云硬盘询价 */
   InquirePriceCreateDisks(data: InquirePriceCreateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateDisksResponse>;
   /** 创建实例询价 */

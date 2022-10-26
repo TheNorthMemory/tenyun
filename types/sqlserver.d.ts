@@ -2972,7 +2972,7 @@ declare interface Sqlserver {
   /** 创建实例账号 */
   CreateAccount(data: CreateAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountResponse>;
   /** 创建备份 */
-  CreateBackup(data: CreateBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupResponse>;
+  CreateBackup(data?: CreateBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupResponse>;
   /** 创建备份导入任务 */
   CreateBackupMigration(data: CreateBackupMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupMigrationResponse>;
   /** 创建基础版实例 */
@@ -3032,7 +3032,7 @@ declare interface Sqlserver {
   /** 查询互通实例的信息 */
   DescribeDBInstanceInter(data: DescribeDBInstanceInterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceInterResponse>;
   /** 查询实例列表 */
-  DescribeDBInstances(data: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
+  DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
   /** 查询实例安全组信息 */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
   /** 查询数据库列表 */
@@ -3054,7 +3054,7 @@ declare interface Sqlserver {
   /** 查询迁移任务详情 */
   DescribeMigrationDetail(data: DescribeMigrationDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationDetailResponse>;
   /** 查询迁移任务列表 */
-  DescribeMigrations(data: DescribeMigrationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationsResponse>;
+  DescribeMigrations(data?: DescribeMigrationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationsResponse>;
   /** 查询订单信息 */
   DescribeOrders(data: DescribeOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrdersResponse>;
   /** 查询售卖规格配置 */

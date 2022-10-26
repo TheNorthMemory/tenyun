@@ -398,13 +398,13 @@ declare interface Cat {
   /** 列出单次拨测详情数据 */
   DescribeDetailedSingleProbeData(data: DescribeDetailedSingleProbeDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDetailedSingleProbeDataResponse>;
   /** 获取拨测节点 */
-  DescribeNodes(data: DescribeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodesResponse>;
+  DescribeNodes(data?: DescribeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodesResponse>;
   /** 列出云拨测指标详细数据 */
-  DescribeProbeMetricData(data: DescribeProbeMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProbeMetricDataResponse>;
+  DescribeProbeMetricData(data?: DescribeProbeMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProbeMetricDataResponse>;
   /** 查询拨测节点 */
-  DescribeProbeNodes(data: DescribeProbeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProbeNodesResponse>;
+  DescribeProbeNodes(data?: DescribeProbeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProbeNodesResponse>;
   /** 分页查询拨测任务列表 */
-  DescribeProbeTasks(data: DescribeProbeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProbeTasksResponse>;
+  DescribeProbeTasks(data?: DescribeProbeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProbeTasksResponse>;
   /** 恢复拨测任务 */
   ResumeProbeTask(data: ResumeProbeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeProbeTaskResponse>;
   /** 暂停拨测任务 */

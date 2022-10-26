@@ -2298,15 +2298,15 @@ declare interface Iotvideoindustry {
   /** 删除录像存储列表 */
   DeleteVideoList(data: DeleteVideoListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVideoListResponse>;
   /** 设备告警-删除告警 */
-  DeleteWarning(data: DeleteWarningRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWarningResponse>;
+  DeleteWarning(data?: DeleteWarningRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWarningResponse>;
   /** 获取异常事件统计 */
   DescribeAbnormalEvents(data: DescribeAbnormalEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalEventsResponse>;
   /** 获取设备列表（旧） */
-  DescribeAllDeviceList(data: DescribeAllDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllDeviceListResponse>;
+  DescribeAllDeviceList(data?: DescribeAllDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllDeviceListResponse>;
   /** 获取场景绑定通道列表 */
   DescribeBindSceneChannels(data: DescribeBindSceneChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindSceneChannelsResponse>;
   /** 获取场景绑定设备列表(旧) */
-  DescribeBindSceneDevices(data: DescribeBindSceneDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindSceneDevicesResponse>;
+  DescribeBindSceneDevices(data?: DescribeBindSceneDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindSceneDevicesResponse>;
   /** 获取设备通道实时流地址 */
   DescribeChannelLiveStreamURL(data: DescribeChannelLiveStreamURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelLiveStreamURLResponse>;
   /** 获取通道本地回放流地址 */
@@ -2324,9 +2324,9 @@ declare interface Iotvideoindustry {
   /** 获取设备事件 */
   DescribeDeviceEvent(data: DescribeDeviceEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceEventResponse>;
   /** 查询设备分组信息 */
-  DescribeDeviceGroup(data: DescribeDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceGroupResponse>;
+  DescribeDeviceGroup(data?: DescribeDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceGroupResponse>;
   /** 获取设备列表 */
-  DescribeDeviceList(data: DescribeDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceListResponse>;
+  DescribeDeviceList(data?: DescribeDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceListResponse>;
   /** 查询设备统计monitor信息 */
   DescribeDeviceMonitorData(data: DescribeDeviceMonitorDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceMonitorDataResponse>;
   /** 查询设备密码 */
@@ -2340,9 +2340,9 @@ declare interface Iotvideoindustry {
   /** 查询分组下的设备 */
   DescribeGroupDevices(data: DescribeGroupDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupDevicesResponse>;
   /** 批量查询分组信息 */
-  DescribeGroups(data: DescribeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsResponse>;
+  DescribeGroups(data?: DescribeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsResponse>;
   /** 获取IPC设备下属通道（旧） */
-  DescribeIPCChannels(data: DescribeIPCChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPCChannelsResponse>;
+  DescribeIPCChannels(data?: DescribeIPCChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPCChannelsResponse>;
   /** 直播详情接口 */
   DescribeLiveChannel(data: DescribeLiveChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveChannelResponse>;
   /** 直播列表接口 */
@@ -2350,7 +2350,7 @@ declare interface Iotvideoindustry {
   /** 获取直播录制计划详情 */
   DescribeLiveRecordPlanById(data: DescribeLiveRecordPlanByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordPlanByIdResponse>;
   /** 获取直播录制计划列表 */
-  DescribeLiveRecordPlanIds(data: DescribeLiveRecordPlanIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordPlanIdsResponse>;
+  DescribeLiveRecordPlanIds(data?: DescribeLiveRecordPlanIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordPlanIdsResponse>;
   /** 直播拉流接口 */
   DescribeLiveStream(data: DescribeLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamResponse>;
   /** 直播录像回放列表 */
@@ -2384,7 +2384,7 @@ declare interface Iotvideoindustry {
   /** 查询统计指标概览数据 */
   DescribeStatisticSummary(data: DescribeStatisticSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStatisticSummaryResponse>;
   /** 查询子分组列表 */
-  DescribeSubGroups(data: DescribeSubGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubGroupsResponse>;
+  DescribeSubGroups(data?: DescribeSubGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubGroupsResponse>;
   /** 查询主设备订阅状态 */
   DescribeSubscriptionStatus(data: DescribeSubscriptionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscriptionStatusResponse>;
   /** 获取云端录制文件列表 */
@@ -2440,7 +2440,7 @@ declare interface Iotvideoindustry {
   /** 修改录像存储列表 */
   ModifyVideoInfo(data: ModifyVideoInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVideoInfoResponse>;
   /** 重置设备告警 */
-  ResetWarning(data: ResetWarningRequest, config?: AxiosRequestConfig): AxiosPromise<ResetWarningResponse>;
+  ResetWarning(data?: ResetWarningRequest, config?: AxiosRequestConfig): AxiosPromise<ResetWarningResponse>;
   /** 修改分组信息 */
   UpdateDeviceGroup(data: UpdateDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceGroupResponse>;
   /** 修改设备密码 */

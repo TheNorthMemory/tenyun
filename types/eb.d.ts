@@ -746,7 +746,7 @@ declare interface Eb {
   /** 获取事件连接器列表 */
   ListConnections(data: ListConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListConnectionsResponse>;
   /** 获取事件集列表 */
-  ListEventBuses(data: ListEventBusesRequest, config?: AxiosRequestConfig): AxiosPromise<ListEventBusesResponse>;
+  ListEventBuses(data?: ListEventBusesRequest, config?: AxiosRequestConfig): AxiosPromise<ListEventBusesResponse>;
   /** 获取事件规则列表 */
   ListRules(data: ListRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListRulesResponse>;
   /** 获取事件目标列表 */

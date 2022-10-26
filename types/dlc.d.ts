@@ -2048,11 +2048,11 @@ declare interface UnlockMetaDataResponse {
 declare interface Dlc {
   (): Versions;
   /** DMS元数据新增分区 */
-  AddDMSPartitions(data: AddDMSPartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<AddDMSPartitionsResponse>;
+  AddDMSPartitions(data?: AddDMSPartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<AddDMSPartitionsResponse>;
   /** 添加用户到工作组 */
   AddUsersToWorkGroup(data: AddUsersToWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddUsersToWorkGroupResponse>;
   /** DMS元数据更新库 */
-  AlterDMSDatabase(data: AlterDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<AlterDMSDatabaseResponse>;
+  AlterDMSDatabase(data?: AlterDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<AlterDMSDatabaseResponse>;
   /** DMS元数据更新分区 */
   AlterDMSPartition(data: AlterDMSPartitionRequest, config?: AxiosRequestConfig): AxiosPromise<AlterDMSPartitionResponse>;
   /** DMS元数据更新表 */
@@ -2068,9 +2068,9 @@ declare interface Dlc {
   /** 元数据锁检查 */
   CheckLockMetaData(data: CheckLockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<CheckLockMetaDataResponse>;
   /** DMS元数据创建库 */
-  CreateDMSDatabase(data: CreateDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDMSDatabaseResponse>;
+  CreateDMSDatabase(data?: CreateDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDMSDatabaseResponse>;
   /** DMS元数据创建表 */
-  CreateDMSTable(data: CreateDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDMSTableResponse>;
+  CreateDMSTable(data?: CreateDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDMSTableResponse>;
   /** 生成建库SQL语句 */
   CreateDatabase(data: CreateDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatabaseResponse>;
   /** 创建导出任务 */
@@ -2108,21 +2108,21 @@ declare interface Dlc {
   /** 删除工作组 */
   DeleteWorkGroup(data: DeleteWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkGroupResponse>;
   /** DMS元数据获取库 */
-  DescribeDMSDatabase(data: DescribeDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSDatabaseResponse>;
+  DescribeDMSDatabase(data?: DescribeDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSDatabaseResponse>;
   /** DMS元数据获取分区 */
   DescribeDMSPartitions(data: DescribeDMSPartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSPartitionsResponse>;
   /** DMS元数据获取表 */
-  DescribeDMSTable(data: DescribeDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSTableResponse>;
+  DescribeDMSTable(data?: DescribeDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSTableResponse>;
   /** DMS元数据获取表列表 */
-  DescribeDMSTables(data: DescribeDMSTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSTablesResponse>;
+  DescribeDMSTables(data?: DescribeDMSTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSTablesResponse>;
   /** 查询数据库列表 */
-  DescribeDatabases(data: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
+  DescribeDatabases(data?: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
   /** 查询script列表 */
-  DescribeScripts(data: DescribeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScriptsResponse>;
+  DescribeScripts(data?: DescribeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScriptsResponse>;
   /** 查询具体的spark应用 */
-  DescribeSparkAppJob(data: DescribeSparkAppJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppJobResponse>;
+  DescribeSparkAppJob(data?: DescribeSparkAppJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppJobResponse>;
   /** 获取spark应用列表 */
-  DescribeSparkAppJobs(data: DescribeSparkAppJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppJobsResponse>;
+  DescribeSparkAppJobs(data?: DescribeSparkAppJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppJobsResponse>;
   /** 查询spark应用的运行任务实例列表 */
   DescribeSparkAppTasks(data: DescribeSparkAppTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppTasksResponse>;
   /** 查询结果存储位置 */
@@ -2134,13 +2134,13 @@ declare interface Dlc {
   /** 查询任务结果 */
   DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
   /** 查询任务列表 */
-  DescribeTasks(data: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
+  DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
   /** 获取用户列表信息 */
-  DescribeUsers(data: DescribeUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersResponse>;
+  DescribeUsers(data?: DescribeUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersResponse>;
   /** 查询视图列表 */
   DescribeViews(data: DescribeViewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeViewsResponse>;
   /** 获取工作组列表 */
-  DescribeWorkGroups(data: DescribeWorkGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkGroupsResponse>;
+  DescribeWorkGroups(data?: DescribeWorkGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkGroupsResponse>;
   /** 解绑用户鉴权策略 */
   DetachUserPolicy(data: DetachUserPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DetachUserPolicyResponse>;
   /** 解绑工作组鉴权策略 */
@@ -2148,9 +2148,9 @@ declare interface Dlc {
   /** DMS元数据删除库 */
   DropDMSDatabase(data: DropDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DropDMSDatabaseResponse>;
   /** DMS元数据删除分区 */
-  DropDMSPartitions(data: DropDMSPartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DropDMSPartitionsResponse>;
+  DropDMSPartitions(data?: DropDMSPartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DropDMSPartitionsResponse>;
   /** DMS元数据删除表 */
-  DropDMSTable(data: DropDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<DropDMSTableResponse>;
+  DropDMSTable(data?: DropDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<DropDMSTableResponse>;
   /** 日志列表 */
   ListTaskJobLogDetail(data: ListTaskJobLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskJobLogDetailResponse>;
   /** 元数据锁 */
@@ -2162,7 +2162,7 @@ declare interface Dlc {
   /** 修改工作组信息 */
   ModifyWorkGroup(data: ModifyWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkGroupResponse>;
   /** 上报元数据心跳 */
-  ReportHeartbeatMetaData(data: ReportHeartbeatMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<ReportHeartbeatMetaDataResponse>;
+  ReportHeartbeatMetaData(data?: ReportHeartbeatMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<ReportHeartbeatMetaDataResponse>;
   /** 解绑用户上的用户组 */
   UnbindWorkGroupsFromUser(data: UnbindWorkGroupsFromUserRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindWorkGroupsFromUserResponse>;
   /** 元数据解锁 */

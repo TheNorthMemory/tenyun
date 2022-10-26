@@ -1655,7 +1655,7 @@ declare interface As {
   /** 删除生命周期挂钩 */
   DeleteLifecycleHook(data: DeleteLifecycleHookRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLifecycleHookResponse>;
   /** 删除通知 */
-  DeleteNotificationConfiguration(data: DeleteNotificationConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNotificationConfigurationResponse>;
+  DeleteNotificationConfiguration(data?: DeleteNotificationConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNotificationConfigurationResponse>;
   /** 删除告警触发策略 */
   DeleteScalingPolicy(data: DeleteScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScalingPolicyResponse>;
   /** 删除定时任务 */
@@ -1663,25 +1663,25 @@ declare interface As {
   /** 查询用户账号的资源限制 */
   DescribeAccountLimits(data?: DescribeAccountLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountLimitsResponse>;
   /** 查询伸缩活动 */
-  DescribeAutoScalingActivities(data: DescribeAutoScalingActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingActivitiesResponse>;
+  DescribeAutoScalingActivities(data?: DescribeAutoScalingActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingActivitiesResponse>;
   /** 查询弹性伸缩配置建议 */
   DescribeAutoScalingAdvices(data: DescribeAutoScalingAdvicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingAdvicesResponse>;
   /** 查询伸缩组最新一次伸缩活动 */
   DescribeAutoScalingGroupLastActivities(data: DescribeAutoScalingGroupLastActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingGroupLastActivitiesResponse>;
   /** 查询伸缩组 */
-  DescribeAutoScalingGroups(data: DescribeAutoScalingGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingGroupsResponse>;
+  DescribeAutoScalingGroups(data?: DescribeAutoScalingGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingGroupsResponse>;
   /** 查询实例 */
-  DescribeAutoScalingInstances(data: DescribeAutoScalingInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingInstancesResponse>;
+  DescribeAutoScalingInstances(data?: DescribeAutoScalingInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingInstancesResponse>;
   /** 查询启动配置 */
-  DescribeLaunchConfigurations(data: DescribeLaunchConfigurationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaunchConfigurationsResponse>;
+  DescribeLaunchConfigurations(data?: DescribeLaunchConfigurationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaunchConfigurationsResponse>;
   /** 查询生命周期挂钩 */
-  DescribeLifecycleHooks(data: DescribeLifecycleHooksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLifecycleHooksResponse>;
+  DescribeLifecycleHooks(data?: DescribeLifecycleHooksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLifecycleHooksResponse>;
   /** 查询通知 */
-  DescribeNotificationConfigurations(data: DescribeNotificationConfigurationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotificationConfigurationsResponse>;
+  DescribeNotificationConfigurations(data?: DescribeNotificationConfigurationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotificationConfigurationsResponse>;
   /** 查询告警触发策略 */
-  DescribeScalingPolicies(data: DescribeScalingPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScalingPoliciesResponse>;
+  DescribeScalingPolicies(data?: DescribeScalingPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScalingPoliciesResponse>;
   /** 查询定时任务 */
-  DescribeScheduledActions(data: DescribeScheduledActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledActionsResponse>;
+  DescribeScheduledActions(data?: DescribeScheduledActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledActionsResponse>;
   /** 从伸缩组移出 CVM 实例 */
   DetachInstances(data: DetachInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachInstancesResponse>;
   /** 移出负载均衡器 */

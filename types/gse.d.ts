@@ -2064,7 +2064,7 @@ declare interface UpdateRuntimeConfigurationResponse {
 declare interface Gse {
   (): Versions;
   /** 关联云联网实例 */
-  AttachCcnInstances(data: AttachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachCcnInstancesResponse>;
+  AttachCcnInstances(data?: AttachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachCcnInstancesResponse>;
   /** 复制服务器舰队 */
   CopyFleet(data: CopyFleetRequest, config?: AxiosRequestConfig): AxiosPromise<CopyFleetResponse>;
   /** 创建别名 */
@@ -2074,7 +2074,7 @@ declare interface Gse {
   /** 创建生成包镜像信息 */
   CreateAssetWithImage(data: CreateAssetWithImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetWithImageResponse>;
   /** 创建服务器舰队 */
-  CreateFleet(data: CreateFleetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFleetResponse>;
+  CreateFleet(data?: CreateFleetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFleetResponse>;
   /** 创建游戏服务器会话 */
   CreateGameServerSession(data: CreateGameServerSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGameServerSessionResponse>;
   /** 创建游戏服务器会话队列 */
@@ -2090,19 +2090,19 @@ declare interface Gse {
   /** 删除扩缩容配置 */
   DeleteScalingPolicy(data: DeleteScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScalingPolicyResponse>;
   /** 删除定时器 */
-  DeleteTimerScalingPolicy(data: DeleteTimerScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTimerScalingPolicyResponse>;
+  DeleteTimerScalingPolicy(data?: DeleteTimerScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTimerScalingPolicyResponse>;
   /** 获取别名详情 */
   DescribeAlias(data: DescribeAliasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAliasResponse>;
   /** 获取生成包信息 */
   DescribeAsset(data: DescribeAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetResponse>;
   /** 获取生成包支持的操作系统列表 */
-  DescribeAssetSystems(data: DescribeAssetSystemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSystemsResponse>;
+  DescribeAssetSystems(data?: DescribeAssetSystemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSystemsResponse>;
   /** 拉取生成包列表 */
   DescribeAssets(data: DescribeAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetsResponse>;
   /** 查询云联网实例 */
-  DescribeCcnInstances(data: DescribeCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnInstancesResponse>;
+  DescribeCcnInstances(data?: DescribeCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnInstancesResponse>;
   /** 获取服务器舰队属性 */
-  DescribeFleetAttributes(data: DescribeFleetAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetAttributesResponse>;
+  DescribeFleetAttributes(data?: DescribeFleetAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetAttributesResponse>;
   /** 查询游戏服务器舰队容量配置 */
   DescribeFleetCapacity(data: DescribeFleetCapacityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetCapacityResponse>;
   /** 查询服务器舰队的事件列表 */
@@ -2112,45 +2112,45 @@ declare interface Gse {
   /** 获取与游戏服务器舰队关联的资源信息 */
   DescribeFleetRelatedResources(data: DescribeFleetRelatedResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetRelatedResourcesResponse>;
   /** 查询服务部署统计详情 */
-  DescribeFleetStatisticDetails(data: DescribeFleetStatisticDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetStatisticDetailsResponse>;
+  DescribeFleetStatisticDetails(data?: DescribeFleetStatisticDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetStatisticDetailsResponse>;
   /** 查询服务部署统计用量 */
-  DescribeFleetStatisticFlows(data: DescribeFleetStatisticFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetStatisticFlowsResponse>;
+  DescribeFleetStatisticFlows(data?: DescribeFleetStatisticFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetStatisticFlowsResponse>;
   /** 查询服务部署统计汇总信息 */
-  DescribeFleetStatisticSummary(data: DescribeFleetStatisticSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetStatisticSummaryResponse>;
+  DescribeFleetStatisticSummary(data?: DescribeFleetStatisticSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetStatisticSummaryResponse>;
   /** 查询服务器舰队的利用率信息 */
   DescribeFleetUtilization(data: DescribeFleetUtilizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetUtilizationResponse>;
   /** 查询游戏服务器会话详情列表 */
-  DescribeGameServerSessionDetails(data: DescribeGameServerSessionDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGameServerSessionDetailsResponse>;
+  DescribeGameServerSessionDetails(data?: DescribeGameServerSessionDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGameServerSessionDetailsResponse>;
   /** 查询游戏服务器会话的放置 */
   DescribeGameServerSessionPlacement(data: DescribeGameServerSessionPlacementRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGameServerSessionPlacementResponse>;
   /** 查询游戏服务器会话队列 */
-  DescribeGameServerSessionQueues(data: DescribeGameServerSessionQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGameServerSessionQueuesResponse>;
+  DescribeGameServerSessionQueues(data?: DescribeGameServerSessionQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGameServerSessionQueuesResponse>;
   /** 查询游戏服务器会话列表 */
-  DescribeGameServerSessions(data: DescribeGameServerSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGameServerSessionsResponse>;
+  DescribeGameServerSessions(data?: DescribeGameServerSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGameServerSessionsResponse>;
   /** 查询用户实例数限额 */
   DescribeInstanceLimit(data?: DescribeInstanceLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLimitResponse>;
   /** 获取服务器实例类型列表 */
   DescribeInstanceTypes(data?: DescribeInstanceTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceTypesResponse>;
   /** 查询服务器实例列表 */
-  DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 查询实例扩展信息列表 */
   DescribeInstancesExtend(data: DescribeInstancesExtendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesExtendResponse>;
   /** 查询玩家会话列表 */
-  DescribePlayerSessions(data: DescribePlayerSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlayerSessionsResponse>;
+  DescribePlayerSessions(data?: DescribePlayerSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlayerSessionsResponse>;
   /** 获取服务器舰队运行配置 */
   DescribeRuntimeConfiguration(data: DescribeRuntimeConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuntimeConfigurationResponse>;
   /** 查询扩缩容配置 */
-  DescribeScalingPolicies(data: DescribeScalingPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScalingPoliciesResponse>;
+  DescribeScalingPolicies(data?: DescribeScalingPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScalingPoliciesResponse>;
   /** 查询定时器列表 */
-  DescribeTimerScalingPolicies(data: DescribeTimerScalingPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimerScalingPoliciesResponse>;
+  DescribeTimerScalingPolicies(data?: DescribeTimerScalingPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimerScalingPoliciesResponse>;
   /** 获取用户单个模块配额 */
-  DescribeUserQuota(data: DescribeUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotaResponse>;
+  DescribeUserQuota(data?: DescribeUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotaResponse>;
   /** 获取用户配额 */
   DescribeUserQuotas(data?: DescribeUserQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotasResponse>;
   /** 解关联云联网实例 */
-  DetachCcnInstances(data: DetachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachCcnInstancesResponse>;
+  DetachCcnInstances(data?: DetachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachCcnInstancesResponse>;
   /** 终止游戏服务器会话和对应的进程 */
-  EndGameServerSessionAndProcess(data: EndGameServerSessionAndProcessRequest, config?: AxiosRequestConfig): AxiosPromise<EndGameServerSessionAndProcessResponse>;
+  EndGameServerSessionAndProcess(data?: EndGameServerSessionAndProcessRequest, config?: AxiosRequestConfig): AxiosPromise<EndGameServerSessionAndProcessResponse>;
   /** 获取游戏服务器实例的日志URL */
   GetGameServerInstanceLogUrl(data: GetGameServerInstanceLogUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetGameServerInstanceLogUrlResponse>;
   /** 获取游戏服务器会话的日志URL */
@@ -2166,17 +2166,17 @@ declare interface Gse {
   /** 批量加入游戏服务器会话 */
   JoinGameServerSessionBatch(data: JoinGameServerSessionBatchRequest, config?: AxiosRequestConfig): AxiosPromise<JoinGameServerSessionBatchResponse>;
   /** 检索帐户下的所有别名 */
-  ListAliases(data: ListAliasesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAliasesResponse>;
+  ListAliases(data?: ListAliasesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAliasesResponse>;
   /** 获取服务器舰队列表 */
-  ListFleets(data: ListFleetsRequest, config?: AxiosRequestConfig): AxiosPromise<ListFleetsResponse>;
+  ListFleets(data?: ListFleetsRequest, config?: AxiosRequestConfig): AxiosPromise<ListFleetsResponse>;
   /** 设置扩缩容策略 */
   PutScalingPolicy(data: PutScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<PutScalingPolicyResponse>;
   /** 创建或更新定时器 */
-  PutTimerScalingPolicy(data: PutTimerScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<PutTimerScalingPolicyResponse>;
+  PutTimerScalingPolicy(data?: PutTimerScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<PutTimerScalingPolicyResponse>;
   /** 获取别名当前指向的fleetId */
   ResolveAlias(data: ResolveAliasRequest, config?: AxiosRequestConfig): AxiosPromise<ResolveAliasResponse>;
   /** 搜索游戏服务器会话列表 */
-  SearchGameServerSessions(data: SearchGameServerSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<SearchGameServerSessionsResponse>;
+  SearchGameServerSessions(data?: SearchGameServerSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<SearchGameServerSessionsResponse>;
   /** 设置实例保留 */
   SetServerReserved(data: SetServerReservedRequest, config?: AxiosRequestConfig): AxiosPromise<SetServerReservedResponse>;
   /** 设置服务器权重 */

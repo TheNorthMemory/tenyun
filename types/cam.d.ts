@@ -1762,7 +1762,7 @@ declare interface Cam {
   /** 绑定策略到用户组 */
   AttachGroupPolicy(data: AttachGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachGroupPolicyResponse>;
   /** 绑定权限策略到角色 */
-  AttachRolePolicy(data: AttachRolePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachRolePolicyResponse>;
+  AttachRolePolicy(data?: AttachRolePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachRolePolicyResponse>;
   /** 绑定策略到用户 */
   AttachUserPolicy(data: AttachUserPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachUserPolicyResponse>;
   /** 验证自定义多因子Token */
@@ -1794,9 +1794,9 @@ declare interface Cam {
   /** 删除策略的策略版本 */
   DeletePolicyVersion(data: DeletePolicyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePolicyVersionResponse>;
   /** 删除角色 */
-  DeleteRole(data: DeleteRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleResponse>;
+  DeleteRole(data?: DeleteRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleResponse>;
   /** 删除角色权限边界 */
-  DeleteRolePermissionsBoundary(data: DeleteRolePermissionsBoundaryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRolePermissionsBoundaryResponse>;
+  DeleteRolePermissionsBoundary(data?: DeleteRolePermissionsBoundaryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRolePermissionsBoundaryResponse>;
   /** 删除SAML身份提供商 */
   DeleteSAMLProvider(data: DeleteSAMLProviderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSAMLProviderResponse>;
   /** 删除服务相关角色 */
@@ -1824,7 +1824,7 @@ declare interface Cam {
   /** 解除绑定到用户组的策略 */
   DetachGroupPolicy(data: DetachGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DetachGroupPolicyResponse>;
   /** 解绑角色的策略 */
-  DetachRolePolicy(data: DetachRolePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DetachRolePolicyResponse>;
+  DetachRolePolicy(data?: DetachRolePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DetachRolePolicyResponse>;
   /** 解除绑定到用户的策略 */
   DetachUserPolicy(data: DetachUserPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DetachUserPolicyResponse>;
   /** 禁用用户SSO */
@@ -1840,7 +1840,7 @@ declare interface Cam {
   /** 查询策略版本详情 */
   GetPolicyVersion(data: GetPolicyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<GetPolicyVersionResponse>;
   /** 获取角色详情 */
-  GetRole(data: GetRoleRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoleResponse>;
+  GetRole(data?: GetRoleRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoleResponse>;
   /** 获取角色权限边界 */
   GetRolePermissionBoundary(data: GetRolePermissionBoundaryRequest, config?: AxiosRequestConfig): AxiosPromise<GetRolePermissionBoundaryResponse>;
   /** 查询SAML身份提供商详情 */
@@ -1856,7 +1856,7 @@ declare interface Cam {
   /** 获取用户权限边界 */
   GetUserPermissionBoundary(data: GetUserPermissionBoundaryRequest, config?: AxiosRequestConfig): AxiosPromise<GetUserPermissionBoundaryResponse>;
   /** 列出访问密钥 */
-  ListAccessKeys(data: ListAccessKeysRequest, config?: AxiosRequestConfig): AxiosPromise<ListAccessKeysResponse>;
+  ListAccessKeys(data?: ListAccessKeysRequest, config?: AxiosRequestConfig): AxiosPromise<ListAccessKeysResponse>;
   /** 查询用户组关联的策略列表 */
   ListAttachedGroupPolicies(data: ListAttachedGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAttachedGroupPoliciesResponse>;
   /** 获取角色绑定的策略列表 */
@@ -1866,17 +1866,17 @@ declare interface Cam {
   /** 查询子账号关联的策略列表 */
   ListAttachedUserPolicies(data: ListAttachedUserPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAttachedUserPoliciesResponse>;
   /** 获取协作者列表 */
-  ListCollaborators(data: ListCollaboratorsRequest, config?: AxiosRequestConfig): AxiosPromise<ListCollaboratorsResponse>;
+  ListCollaborators(data?: ListCollaboratorsRequest, config?: AxiosRequestConfig): AxiosPromise<ListCollaboratorsResponse>;
   /** 查询策略关联的实体列表 */
   ListEntitiesForPolicy(data: ListEntitiesForPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ListEntitiesForPolicyResponse>;
   /** 查询用户组列表 */
-  ListGroups(data: ListGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListGroupsResponse>;
+  ListGroups(data?: ListGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListGroupsResponse>;
   /** 列出用户关联的用户组 */
-  ListGroupsForUser(data: ListGroupsForUserRequest, config?: AxiosRequestConfig): AxiosPromise<ListGroupsForUserResponse>;
+  ListGroupsForUser(data?: ListGroupsForUserRequest, config?: AxiosRequestConfig): AxiosPromise<ListGroupsForUserResponse>;
   /** 查询策略列表 */
-  ListPolicies(data: ListPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ListPoliciesResponse>;
+  ListPolicies(data?: ListPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ListPoliciesResponse>;
   /** 获取所有已授权服务 */
-  ListPoliciesGrantingServiceAccess(data: ListPoliciesGrantingServiceAccessRequest, config?: AxiosRequestConfig): AxiosPromise<ListPoliciesGrantingServiceAccessResponse>;
+  ListPoliciesGrantingServiceAccess(data?: ListPoliciesGrantingServiceAccessRequest, config?: AxiosRequestConfig): AxiosPromise<ListPoliciesGrantingServiceAccessResponse>;
   /** 获取策略版本列表 */
   ListPolicyVersions(data: ListPolicyVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListPolicyVersionsResponse>;
   /** 查询SAML身份提供商列表 */
@@ -1896,7 +1896,7 @@ declare interface Cam {
   /** 设置生效的策略版本 */
   SetDefaultPolicyVersion(data: SetDefaultPolicyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<SetDefaultPolicyVersionResponse>;
   /** 设置子用户的登录保护和敏感操作校验方式 */
-  SetMfaFlag(data: SetMfaFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetMfaFlagResponse>;
+  SetMfaFlag(data?: SetMfaFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetMfaFlagResponse>;
   /** 角色绑定标签 */
   TagRole(data: TagRoleRequest, config?: AxiosRequestConfig): AxiosPromise<TagRoleResponse>;
   /** 角色解绑标签 */
@@ -1908,7 +1908,7 @@ declare interface Cam {
   /** 修改角色OIDC配置 */
   UpdateOIDCConfig(data: UpdateOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOIDCConfigResponse>;
   /** 更新策略信息 */
-  UpdatePolicy(data: UpdatePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePolicyResponse>;
+  UpdatePolicy(data?: UpdatePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePolicyResponse>;
   /** 修改角色是否可登录 */
   UpdateRoleConsoleLogin(data: UpdateRoleConsoleLoginRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRoleConsoleLoginResponse>;
   /** 修改角色描述信息 */

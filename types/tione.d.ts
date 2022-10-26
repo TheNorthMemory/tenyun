@@ -2374,7 +2374,7 @@ declare interface Tione {
   /** 跑批实例列表 */
   DescribeBatchTaskInstances(data: DescribeBatchTaskInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskInstancesResponse>;
   /** 跑批任务列表 */
-  DescribeBatchTasks(data: DescribeBatchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTasksResponse>;
+  DescribeBatchTasks(data?: DescribeBatchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTasksResponse>;
   /** 查询资源组详情 */
   DescribeBillingResourceGroups(data: DescribeBillingResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupsResponse>;
   /** 查询计费项列表 */
@@ -2384,9 +2384,9 @@ declare interface Tione {
   /** 查询结构化数据集详情 */
   DescribeDatasetDetailStructured(data: DescribeDatasetDetailStructuredRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetDetailStructuredResponse>;
   /** 查询非结构化数据集详情 */
-  DescribeDatasetDetailUnstructured(data: DescribeDatasetDetailUnstructuredRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetDetailUnstructuredResponse>;
+  DescribeDatasetDetailUnstructured(data?: DescribeDatasetDetailUnstructuredRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetDetailUnstructuredResponse>;
   /** 查询数据集列表 */
-  DescribeDatasets(data: DescribeDatasetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetsResponse>;
+  DescribeDatasets(data?: DescribeDatasetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetsResponse>;
   /** 查询推理镜像模板 */
   DescribeInferTemplates(data?: DescribeInferTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferTemplatesResponse>;
   /** 查询最近上报的训练自定义指标 */
@@ -2402,15 +2402,15 @@ declare interface Tione {
   /** 模型版本列表 */
   DescribeTrainingModelVersions(data: DescribeTrainingModelVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingModelVersionsResponse>;
   /** 模型列表 */
-  DescribeTrainingModels(data: DescribeTrainingModelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingModelsResponse>;
+  DescribeTrainingModels(data?: DescribeTrainingModelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingModelsResponse>;
   /** 训练任务详情 */
   DescribeTrainingTask(data: DescribeTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTaskResponse>;
   /** 训练任务pod列表 */
   DescribeTrainingTaskPods(data: DescribeTrainingTaskPodsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTaskPodsResponse>;
   /** 模型训练任务列表 */
-  DescribeTrainingTasks(data: DescribeTrainingTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTasksResponse>;
+  DescribeTrainingTasks(data?: DescribeTrainingTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTasksResponse>;
   /** 上报训练自定义指标 */
-  PushTrainingMetrics(data: PushTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<PushTrainingMetricsResponse>;
+  PushTrainingMetrics(data?: PushTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<PushTrainingMetricsResponse>;
   /** 启动模型训练任务 */
   StartTrainingTask(data: StartTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StartTrainingTaskResponse>;
   /** 停止跑批任务 */

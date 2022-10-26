@@ -628,11 +628,11 @@ declare interface Cms {
   /** 删除文本样本库 */
   DeleteTextSample(data: DeleteTextSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTextSampleResponse>;
   /** 查询图片样本库 */
-  DescribeFileSample(data: DescribeFileSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileSampleResponse>;
+  DescribeFileSample(data?: DescribeFileSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileSampleResponse>;
   /** 查询文本样本库 */
-  DescribeTextSample(data: DescribeTextSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTextSampleResponse>;
+  DescribeTextSample(data?: DescribeTextSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTextSampleResponse>;
   /** 图片内容检测 */
-  ImageModeration(data: ImageModerationRequest, config?: AxiosRequestConfig): AxiosPromise<ImageModerationResponse>;
+  ImageModeration(data?: ImageModerationRequest, config?: AxiosRequestConfig): AxiosPromise<ImageModerationResponse>;
   /** 人工审核对外接口 */
   ManualReview(data: ManualReviewRequest, config?: AxiosRequestConfig): AxiosPromise<ManualReviewResponse>;
   /** 文本内容检测 */

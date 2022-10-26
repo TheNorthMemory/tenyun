@@ -16,6 +16,12 @@ declare interface Agent {
   ProxyOrganizationId?: string;
 }
 
+/** 签署人个性化能力信息 */
+declare interface ApproverOption {
+  /** 是否隐藏一键签署 false-不隐藏,默认 true-隐藏 */
+  HideOneKeySign?: boolean;
+}
+
 /** 指定签署人限制项 */
 declare interface ApproverRestriction {
   /** 指定签署人名字 */
@@ -134,7 +140,7 @@ declare interface FlowApproverDetail {
   ApproveType: string | null;
 }
 
-/** 创建签署流程签署人入参。其中签署方FlowApproverInfo需要传递的参数非单C、单B、B2C合同，ApproverType、RecipientId（模版发起合同时）必传，建议都传。其他身份标识1-个人：Name、Mobile必传2-渠道子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；3-渠道合作企业不指定经办人：（暂不支持）4-非渠道合作企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。RecipientId参数：从DescribeTemplates接口中，可以得到模版下的签署方Recipient列表，根据模版自定义的Rolename在此结构体中确定其RecipientId */
+/** 创建签署流程签署人入参。其中签署方FlowApproverInfo需要传递的参数非单C、单B、B2C合同，ApproverType、RecipientId（模板发起合同时）必传，建议都传。其他身份标识1-个人：Name、Mobile必传2-渠道子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；3-渠道合作企业不指定经办人：（暂不支持）4-非渠道合作企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。RecipientId参数：从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId */
 declare interface FlowApproverInfo {
   /** 签署人姓名，最大长度50个字符 */
   Name?: string;
@@ -152,7 +158,7 @@ declare interface FlowApproverInfo {
   OpenId?: string;
   /** 企业签署方在同一渠道下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符； */
   OrganizationOpenId?: string;
-  /** 签署人类型，PERSON-个人；PERSON_AUTO_SIGN-个人自动签；ORGANIZATION-企业；ENTERPRISESERVER-企业静默签;注：ENTERPRISESERVER 类型仅用于使用文件创建签署流程（ChannelCreateFlowByFiles）接口；并且仅能指定发起方企业签署方为静默签署； */
+  /** 签署人类型，PERSON-个人；PERSON_AUTO_SIGN-个人自动签；ORGANIZATION-企业；ENTERPRISESERVER-企业静默签;注：ENTERPRISESERVER 类型仅用于使用文件创建签署流程（ChannelCreateFlowByFiles）接口； */
   ApproverType?: string;
   /** 签署流程签署人在模板中对应的签署人Id；在非单方签署、以及非B2C签署的场景下必传，用于指定当前签署方在签署流程中的位置； */
   RecipientId?: string;
@@ -168,6 +174,10 @@ declare interface FlowApproverInfo {
   PreReadTime?: number;
   /** 签署完前端跳转的url，暂未使用 */
   JumpUrl?: string;
+  /** 签署人个性化能力值 */
+  ApproverOption?: ApproverOption;
+  /** 当前签署方进行签署操作是否需要企业内部审批，true 则为需要 */
+  ApproverNeedSignReview?: boolean;
 }
 
 /** 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息 */
@@ -2666,7 +2676,7 @@ declare interface Essbasic {
   /** 渠道创建文件转换任务 */
   ChannelCreateConvertTaskApi(data: ChannelCreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateConvertTaskApiResponse>;
   /** 渠道版通过文件创建签署流程 */
-  ChannelCreateFlowByFiles(data: ChannelCreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowByFilesResponse>;
+  ChannelCreateFlowByFiles(data?: ChannelCreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowByFilesResponse>;
   /** 通过多文件创建合同组签署流程 */
   ChannelCreateFlowGroupByFiles(data: ChannelCreateFlowGroupByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowGroupByFilesResponse>;
   /** 提交企业签署流程审批结果 */

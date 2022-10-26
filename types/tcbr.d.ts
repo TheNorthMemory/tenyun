@@ -544,7 +544,7 @@ declare interface Tcbr {
   /** 创建云托管服务 */
   CreateCloudRunServer(data: CreateCloudRunServerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudRunServerResponse>;
   /** 查询环境列表 */
-  DescribeCloudRunEnvs(data: DescribeCloudRunEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRunEnvsResponse>;
+  DescribeCloudRunEnvs(data?: DescribeCloudRunEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRunEnvsResponse>;
   /** 查询云托管服务详情 */
   DescribeCloudRunServerDetail(data: DescribeCloudRunServerDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRunServerDetailResponse>;
   /** 查询云托管服务列表 */

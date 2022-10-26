@@ -4302,7 +4302,7 @@ declare interface Cdn {
   /** 查询回源节点 */
   DescribeCdnOriginIp(data?: DescribeCdnOriginIpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnOriginIpResponse>;
   /** 获取SSL证书中的可用域名 */
-  DescribeCertDomains(data: DescribeCertDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertDomainsResponse>;
+  DescribeCertDomains(data?: DescribeCertDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertDomainsResponse>;
   /** DDoS统计数据查询 */
   DescribeDDoSData(data: DescribeDDoSDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSDataResponse>;
   /** 获取诊断报告 */
@@ -4310,9 +4310,9 @@ declare interface Cdn {
   /** 地区运营商明细查询 */
   DescribeDistrictIspData(data: DescribeDistrictIspDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDistrictIspDataResponse>;
   /** 查询域名基本信息 */
-  DescribeDomains(data: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
+  DescribeDomains(data?: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
   /** 查询域名详细配置 */
-  DescribeDomainsConfig(data: DescribeDomainsConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsConfigResponse>;
+  DescribeDomainsConfig(data?: DescribeDomainsConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsConfigResponse>;
   /** 查询事件日志统计曲线 */
   DescribeEventLogData(data: DescribeEventLogDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventLogDataResponse>;
   /** 获取图片优化的配置 */
@@ -4326,15 +4326,15 @@ declare interface Cdn {
   /** 回源数据查询 */
   DescribeOriginData(data: DescribeOriginDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginDataResponse>;
   /** 查询计费方式 */
-  DescribePayType(data: DescribePayTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePayTypeResponse>;
+  DescribePayType(data?: DescribePayTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePayTypeResponse>;
   /** 查询刷新用量配额 */
   DescribePurgeQuota(data?: DescribePurgeQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeQuotaResponse>;
   /** 刷新历史查询 */
-  DescribePurgeTasks(data: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;
+  DescribePurgeTasks(data?: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;
   /** 查询预热用量配额 */
   DescribePushQuota(data?: DescribePushQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushQuotaResponse>;
   /** 预热历史查询 */
-  DescribePushTasks(data: DescribePushTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushTasksResponse>;
+  DescribePushTasks(data?: DescribePushTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushTasksResponse>;
   /** 查询报表数据 */
   DescribeReportData(data: DescribeReportDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportDataResponse>;
   /** 获取BOT统计数据列表 */
@@ -4344,15 +4344,15 @@ declare interface Cdn {
   /** SCDN域名配置 */
   DescribeScdnConfig(data: DescribeScdnConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnConfigResponse>;
   /** 查询SCDN安全防护IP白名单 */
-  DescribeScdnIpStrategy(data: DescribeScdnIpStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnIpStrategyResponse>;
+  DescribeScdnIpStrategy(data?: DescribeScdnIpStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnIpStrategyResponse>;
   /** 获取SCDN的Top数据 */
   DescribeScdnTopData(data: DescribeScdnTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnTopDataResponse>;
   /** TOP 新版数据查询（beta版） */
   DescribeTopData(data: DescribeTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopDataResponse>;
   /** 流量包查询 */
-  DescribeTrafficPackages(data: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;
+  DescribeTrafficPackages(data?: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;
   /** 违规历史查询 */
-  DescribeUrlViolations(data: DescribeUrlViolationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUrlViolationsResponse>;
+  DescribeUrlViolations(data?: DescribeUrlViolationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUrlViolationsResponse>;
   /** Waf统计数据查询 */
   DescribeWafData(data: DescribeWafDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafDataResponse>;
   /** 禁用 URL */
@@ -4366,17 +4366,17 @@ declare interface Cdn {
   /** 启动日志主题投递 */
   EnableClsLogTopic(data: EnableClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<EnableClsLogTopicResponse>;
   /** 禁用历史查询 */
-  GetDisableRecords(data: GetDisableRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<GetDisableRecordsResponse>;
+  GetDisableRecords(data?: GetDisableRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<GetDisableRecordsResponse>;
   /** 显示日志主题列表 */
-  ListClsLogTopics(data: ListClsLogTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClsLogTopicsResponse>;
+  ListClsLogTopics(data?: ListClsLogTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClsLogTopicsResponse>;
   /** 获取日志主题下绑定的域名 */
   ListClsTopicDomains(data: ListClsTopicDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClsTopicDomainsResponse>;
   /** 获取诊断任务列表 */
-  ListDiagnoseReport(data: ListDiagnoseReportRequest, config?: AxiosRequestConfig): AxiosPromise<ListDiagnoseReportResponse>;
+  ListDiagnoseReport(data?: ListDiagnoseReportRequest, config?: AxiosRequestConfig): AxiosPromise<ListDiagnoseReportResponse>;
   /** 查询SCDN域名列表 */
-  ListScdnDomains(data: ListScdnDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnDomainsResponse>;
+  ListScdnDomains(data?: ListScdnDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnDomainsResponse>;
   /** 查询SCDN日志下载任务列表 */
-  ListScdnLogTasks(data: ListScdnLogTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnLogTasksResponse>;
+  ListScdnLogTasks(data?: ListScdnLogTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnLogTasksResponse>;
   /** 获取Bot攻击的Top数据列表 */
   ListScdnTopBotData(data: ListScdnTopBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnTopBotDataResponse>;
   /** 获取Bot攻击的Top信息 */

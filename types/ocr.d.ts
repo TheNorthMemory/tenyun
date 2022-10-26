@@ -2944,159 +2944,159 @@ declare interface WaybillOCRResponse {
 declare interface Ocr {
   (): Versions;
   /** 广告文字识别 */
-  AdvertiseOCR(data: AdvertiseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<AdvertiseOCRResponse>;
+  AdvertiseOCR(data?: AdvertiseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<AdvertiseOCRResponse>;
   /** 算式识别 */
-  ArithmeticOCR(data: ArithmeticOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ArithmeticOCRResponse>;
+  ArithmeticOCR(data?: ArithmeticOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ArithmeticOCRResponse>;
   /** 银行卡识别 */
-  BankCardOCR(data: BankCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BankCardOCRResponse>;
+  BankCardOCR(data?: BankCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BankCardOCRResponse>;
   /** 银行回单识别 */
-  BankSlipOCR(data: BankSlipOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BankSlipOCRResponse>;
+  BankSlipOCR(data?: BankSlipOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BankSlipOCRResponse>;
   /** 营业执照识别 */
-  BizLicenseOCR(data: BizLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BizLicenseOCRResponse>;
+  BizLicenseOCR(data?: BizLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BizLicenseOCRResponse>;
   /** 汽车票识别 */
-  BusInvoiceOCR(data: BusInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BusInvoiceOCRResponse>;
+  BusInvoiceOCR(data?: BusInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BusInvoiceOCRResponse>;
   /** 名片识别 */
-  BusinessCardOCR(data: BusinessCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BusinessCardOCRResponse>;
+  BusinessCardOCR(data?: BusinessCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BusinessCardOCRResponse>;
   /** 购车发票识别 */
-  CarInvoiceOCR(data: CarInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<CarInvoiceOCRResponse>;
+  CarInvoiceOCR(data?: CarInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<CarInvoiceOCRResponse>;
   /** 智能卡证分类 */
-  ClassifyDetectOCR(data: ClassifyDetectOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyDetectOCRResponse>;
+  ClassifyDetectOCR(data?: ClassifyDetectOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyDetectOCRResponse>;
   /** 驾驶证识别 */
-  DriverLicenseOCR(data: DriverLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<DriverLicenseOCRResponse>;
+  DriverLicenseOCR(data?: DriverLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<DriverLicenseOCRResponse>;
   /** 完税证明识别 */
-  DutyPaidProofOCR(data: DutyPaidProofOCRRequest, config?: AxiosRequestConfig): AxiosPromise<DutyPaidProofOCRResponse>;
+  DutyPaidProofOCR(data?: DutyPaidProofOCRRequest, config?: AxiosRequestConfig): AxiosPromise<DutyPaidProofOCRResponse>;
   /** 数学试题识别 */
-  EduPaperOCR(data: EduPaperOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EduPaperOCRResponse>;
+  EduPaperOCR(data?: EduPaperOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EduPaperOCRResponse>;
   /** 英文识别 */
-  EnglishOCR(data: EnglishOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EnglishOCRResponse>;
+  EnglishOCR(data?: EnglishOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EnglishOCRResponse>;
   /** 企业证照识别 */
-  EnterpriseLicenseOCR(data: EnterpriseLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EnterpriseLicenseOCRResponse>;
+  EnterpriseLicenseOCR(data?: EnterpriseLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EnterpriseLicenseOCRResponse>;
   /** 不动产权证识别 */
-  EstateCertOCR(data: EstateCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EstateCertOCRResponse>;
+  EstateCertOCR(data?: EstateCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EstateCertOCRResponse>;
   /** 金融票据整单识别 */
-  FinanBillOCR(data: FinanBillOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FinanBillOCRResponse>;
+  FinanBillOCR(data?: FinanBillOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FinanBillOCRResponse>;
   /** 金融票据切片识别 */
-  FinanBillSliceOCR(data: FinanBillSliceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FinanBillSliceOCRResponse>;
+  FinanBillSliceOCR(data?: FinanBillSliceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FinanBillSliceOCRResponse>;
   /** 机票行程单识别 */
-  FlightInvoiceOCR(data: FlightInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FlightInvoiceOCRResponse>;
+  FlightInvoiceOCR(data?: FlightInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FlightInvoiceOCRResponse>;
   /** 数学公式识别 */
-  FormulaOCR(data: FormulaOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FormulaOCRResponse>;
+  FormulaOCR(data?: FormulaOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FormulaOCRResponse>;
   /** 通用印刷体识别（高精度版） */
-  GeneralAccurateOCR(data: GeneralAccurateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralAccurateOCRResponse>;
+  GeneralAccurateOCR(data?: GeneralAccurateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralAccurateOCRResponse>;
   /** 通用印刷体识别 */
-  GeneralBasicOCR(data: GeneralBasicOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralBasicOCRResponse>;
+  GeneralBasicOCR(data?: GeneralBasicOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralBasicOCRResponse>;
   /** 通用印刷体识别（精简版） */
-  GeneralEfficientOCR(data: GeneralEfficientOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralEfficientOCRResponse>;
+  GeneralEfficientOCR(data?: GeneralEfficientOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralEfficientOCRResponse>;
   /** 通用印刷体识别（高速版） */
-  GeneralFastOCR(data: GeneralFastOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralFastOCRResponse>;
+  GeneralFastOCR(data?: GeneralFastOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralFastOCRResponse>;
   /** 通用手写体识别 */
-  GeneralHandwritingOCR(data: GeneralHandwritingOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralHandwritingOCRResponse>;
+  GeneralHandwritingOCR(data?: GeneralHandwritingOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralHandwritingOCRResponse>;
   /** 中国香港身份证识别 */
   HKIDCardOCR(data: HKIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<HKIDCardOCRResponse>;
   /** 港澳台居住证识别 */
-  HmtResidentPermitOCR(data: HmtResidentPermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<HmtResidentPermitOCRResponse>;
+  HmtResidentPermitOCR(data?: HmtResidentPermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<HmtResidentPermitOCRResponse>;
   /** 身份证识别 */
-  IDCardOCR(data: IDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<IDCardOCRResponse>;
+  IDCardOCR(data?: IDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<IDCardOCRResponse>;
   /** 文本图像增强 */
-  ImageEnhancement(data: ImageEnhancementRequest, config?: AxiosRequestConfig): AxiosPromise<ImageEnhancementResponse>;
+  ImageEnhancement(data?: ImageEnhancementRequest, config?: AxiosRequestConfig): AxiosPromise<ImageEnhancementResponse>;
   /** 事业单位法人证书识别 */
-  InstitutionOCR(data: InstitutionOCRRequest, config?: AxiosRequestConfig): AxiosPromise<InstitutionOCRResponse>;
+  InstitutionOCR(data?: InstitutionOCRRequest, config?: AxiosRequestConfig): AxiosPromise<InstitutionOCRResponse>;
   /** 保险单据识别 */
-  InsuranceBillOCR(data: InsuranceBillOCRRequest, config?: AxiosRequestConfig): AxiosPromise<InsuranceBillOCRResponse>;
+  InsuranceBillOCR(data?: InsuranceBillOCRRequest, config?: AxiosRequestConfig): AxiosPromise<InsuranceBillOCRResponse>;
   /** 通用机打发票识别 */
-  InvoiceGeneralOCR(data: InvoiceGeneralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<InvoiceGeneralOCRResponse>;
+  InvoiceGeneralOCR(data?: InvoiceGeneralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<InvoiceGeneralOCRResponse>;
   /** 车牌识别 */
-  LicensePlateOCR(data: LicensePlateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<LicensePlateOCRResponse>;
+  LicensePlateOCR(data?: LicensePlateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<LicensePlateOCRResponse>;
   /** 马来西亚身份证识别 */
-  MLIDCardOCR(data: MLIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MLIDCardOCRResponse>;
+  MLIDCardOCR(data?: MLIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MLIDCardOCRResponse>;
   /** 护照识别（港澳台地区及境外护照） */
   MLIDPassportOCR(data: MLIDPassportOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MLIDPassportOCRResponse>;
   /** 港澳台来往内地通行证识别 */
-  MainlandPermitOCR(data: MainlandPermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MainlandPermitOCRResponse>;
+  MainlandPermitOCR(data?: MainlandPermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MainlandPermitOCRResponse>;
   /** 混贴票据分类 */
   MixedInvoiceDetect(data: MixedInvoiceDetectRequest, config?: AxiosRequestConfig): AxiosPromise<MixedInvoiceDetectResponse>;
   /** 混贴票据识别 */
-  MixedInvoiceOCR(data: MixedInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MixedInvoiceOCRResponse>;
+  MixedInvoiceOCR(data?: MixedInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MixedInvoiceOCRResponse>;
   /** 组织机构代码证识别 */
-  OrgCodeCertOCR(data: OrgCodeCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<OrgCodeCertOCRResponse>;
+  OrgCodeCertOCR(data?: OrgCodeCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<OrgCodeCertOCRResponse>;
   /** 护照识别（中国大陆地区护照） */
-  PassportOCR(data: PassportOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PassportOCRResponse>;
+  PassportOCR(data?: PassportOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PassportOCRResponse>;
   /** 港澳台通行证识别 */
-  PermitOCR(data: PermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PermitOCRResponse>;
+  PermitOCR(data?: PermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PermitOCRResponse>;
   /** 房产证识别 */
-  PropOwnerCertOCR(data: PropOwnerCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PropOwnerCertOCRResponse>;
+  PropOwnerCertOCR(data?: PropOwnerCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PropOwnerCertOCRResponse>;
   /** 二维码和条形码识别 */
-  QrcodeOCR(data: QrcodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QrcodeOCRResponse>;
+  QrcodeOCR(data?: QrcodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QrcodeOCRResponse>;
   /** 条码信息查询 */
   QueryBarCode(data: QueryBarCodeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBarCodeResponse>;
   /** 定额发票识别 */
-  QuotaInvoiceOCR(data: QuotaInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QuotaInvoiceOCRResponse>;
+  QuotaInvoiceOCR(data?: QuotaInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QuotaInvoiceOCRResponse>;
   /** 集装箱识别 */
-  RecognizeContainerOCR(data: RecognizeContainerOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeContainerOCRResponse>;
+  RecognizeContainerOCR(data?: RecognizeContainerOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeContainerOCRResponse>;
   /** 健康码识别 */
-  RecognizeHealthCodeOCR(data: RecognizeHealthCodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeHealthCodeOCRResponse>;
+  RecognizeHealthCodeOCR(data?: RecognizeHealthCodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeHealthCodeOCRResponse>;
   /** 印尼身份证识别 */
-  RecognizeIndonesiaIDCardOCR(data: RecognizeIndonesiaIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeIndonesiaIDCardOCRResponse>;
+  RecognizeIndonesiaIDCardOCR(data?: RecognizeIndonesiaIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeIndonesiaIDCardOCRResponse>;
   /** 医疗票据识别 */
-  RecognizeMedicalInvoiceOCR(data: RecognizeMedicalInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeMedicalInvoiceOCRResponse>;
+  RecognizeMedicalInvoiceOCR(data?: RecognizeMedicalInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeMedicalInvoiceOCRResponse>;
   /** 网约车行程单识别 */
-  RecognizeOnlineTaxiItineraryOCR(data: RecognizeOnlineTaxiItineraryOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeOnlineTaxiItineraryOCRResponse>;
+  RecognizeOnlineTaxiItineraryOCR(data?: RecognizeOnlineTaxiItineraryOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeOnlineTaxiItineraryOCRResponse>;
   /** 菲律宾驾驶证识别 */
-  RecognizePhilippinesDrivingLicenseOCR(data: RecognizePhilippinesDrivingLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesDrivingLicenseOCRResponse>;
+  RecognizePhilippinesDrivingLicenseOCR(data?: RecognizePhilippinesDrivingLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesDrivingLicenseOCRResponse>;
   /** 菲律宾VoteID识别 */
   RecognizePhilippinesVoteIDOCR(data: RecognizePhilippinesVoteIDOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesVoteIDOCRResponse>;
   /** 表格识别（V2) */
-  RecognizeTableOCR(data: RecognizeTableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTableOCRResponse>;
+  RecognizeTableOCR(data?: RecognizeTableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTableOCRResponse>;
   /** 泰国身份证识别 */
-  RecognizeThaiIDCardOCR(data: RecognizeThaiIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeThaiIDCardOCRResponse>;
+  RecognizeThaiIDCardOCR(data?: RecognizeThaiIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeThaiIDCardOCRResponse>;
   /** 通信行程卡识别 */
-  RecognizeTravelCardOCR(data: RecognizeTravelCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTravelCardOCRResponse>;
+  RecognizeTravelCardOCR(data?: RecognizeTravelCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTravelCardOCRResponse>;
   /** 户口本识别 */
-  ResidenceBookletOCR(data: ResidenceBookletOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ResidenceBookletOCRResponse>;
+  ResidenceBookletOCR(data?: ResidenceBookletOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ResidenceBookletOCRResponse>;
   /** 网约车驾驶证识别 */
-  RideHailingDriverLicenseOCR(data: RideHailingDriverLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RideHailingDriverLicenseOCRResponse>;
+  RideHailingDriverLicenseOCR(data?: RideHailingDriverLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RideHailingDriverLicenseOCRResponse>;
   /** 网约车运输证识别 */
-  RideHailingTransportLicenseOCR(data: RideHailingTransportLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RideHailingTransportLicenseOCRResponse>;
+  RideHailingTransportLicenseOCR(data?: RideHailingTransportLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RideHailingTransportLicenseOCRResponse>;
   /** 印章识别 */
-  SealOCR(data: SealOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SealOCRResponse>;
+  SealOCR(data?: SealOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SealOCRResponse>;
   /** 轮船票识别 */
-  ShipInvoiceOCR(data: ShipInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ShipInvoiceOCRResponse>;
+  ShipInvoiceOCR(data?: ShipInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ShipInvoiceOCRResponse>;
   /** 智能结构化识别 */
-  SmartStructuralOCR(data: SmartStructuralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralOCRResponse>;
+  SmartStructuralOCR(data?: SmartStructuralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralOCRResponse>;
   /** 表格识别（V1) */
-  TableOCR(data: TableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TableOCRResponse>;
+  TableOCR(data?: TableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TableOCRResponse>;
   /** 出租车发票识别 */
-  TaxiInvoiceOCR(data: TaxiInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TaxiInvoiceOCRResponse>;
+  TaxiInvoiceOCR(data?: TaxiInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TaxiInvoiceOCRResponse>;
   /** 快速文本检测 */
-  TextDetect(data: TextDetectRequest, config?: AxiosRequestConfig): AxiosPromise<TextDetectResponse>;
+  TextDetect(data?: TextDetectRequest, config?: AxiosRequestConfig): AxiosPromise<TextDetectResponse>;
   /** 过路过桥费发票识别 */
-  TollInvoiceOCR(data: TollInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TollInvoiceOCRResponse>;
+  TollInvoiceOCR(data?: TollInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TollInvoiceOCRResponse>;
   /** 火车票识别 */
-  TrainTicketOCR(data: TrainTicketOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TrainTicketOCRResponse>;
+  TrainTicketOCR(data?: TrainTicketOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TrainTicketOCRResponse>;
   /** 增值税发票识别 */
-  VatInvoiceOCR(data: VatInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceOCRResponse>;
+  VatInvoiceOCR(data?: VatInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceOCRResponse>;
   /** 增值税发票核验 */
   VatInvoiceVerify(data: VatInvoiceVerifyRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceVerifyResponse>;
   /** 增值税发票核验（新版） */
   VatInvoiceVerifyNew(data: VatInvoiceVerifyNewRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceVerifyNewResponse>;
   /** 增值税发票（卷票）识别 */
-  VatRollInvoiceOCR(data: VatRollInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VatRollInvoiceOCRResponse>;
+  VatRollInvoiceOCR(data?: VatRollInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VatRollInvoiceOCRResponse>;
   /** 行驶证识别 */
-  VehicleLicenseOCR(data: VehicleLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VehicleLicenseOCRResponse>;
+  VehicleLicenseOCR(data?: VehicleLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VehicleLicenseOCRResponse>;
   /** 机动车登记证书识别 */
-  VehicleRegCertOCR(data: VehicleRegCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VehicleRegCertOCRResponse>;
+  VehicleRegCertOCR(data?: VehicleRegCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VehicleRegCertOCRResponse>;
   /** 营业执照识别及核验（基础版） */
-  VerifyBasicBizLicense(data: VerifyBasicBizLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyBasicBizLicenseResponse>;
+  VerifyBasicBizLicense(data?: VerifyBasicBizLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyBasicBizLicenseResponse>;
   /** 营业执照识别及核验（详细版） */
-  VerifyBizLicense(data: VerifyBizLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyBizLicenseResponse>;
+  VerifyBizLicense(data?: VerifyBizLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyBizLicenseResponse>;
   /** 企业四要素核验 */
   VerifyEnterpriseFourFactors(data: VerifyEnterpriseFourFactorsRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyEnterpriseFourFactorsResponse>;
   /** OFD发票识别 */
-  VerifyOfdVatInvoiceOCR(data: VerifyOfdVatInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyOfdVatInvoiceOCRResponse>;
+  VerifyOfdVatInvoiceOCR(data?: VerifyOfdVatInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyOfdVatInvoiceOCRResponse>;
   /** 车辆VIN码识别 */
-  VinOCR(data: VinOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VinOCRResponse>;
+  VinOCR(data?: VinOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VinOCRResponse>;
   /** 运单识别 */
-  WaybillOCR(data: WaybillOCRRequest, config?: AxiosRequestConfig): AxiosPromise<WaybillOCRResponse>;
+  WaybillOCR(data?: WaybillOCRRequest, config?: AxiosRequestConfig): AxiosPromise<WaybillOCRResponse>;
 }
 
 export declare type Versions = ["2018-11-19"];

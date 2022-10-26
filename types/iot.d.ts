@@ -1170,7 +1170,7 @@ declare interface Iot {
   /** 获取设备绑定签名 */
   GetDeviceSignatures(data: GetDeviceSignaturesRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceSignaturesResponse>;
   /** 获取设备统计指标 */
-  GetDeviceStatistics(data: GetDeviceStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceStatisticsResponse>;
+  GetDeviceStatistics(data?: GetDeviceStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceStatisticsResponse>;
   /** 批量获取设备状态 */
   GetDeviceStatuses(data: GetDeviceStatusesRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceStatusesResponse>;
   /** 获取设备列表 */
@@ -1178,11 +1178,11 @@ declare interface Iot {
   /** 获取产品信息 */
   GetProduct(data: GetProductRequest, config?: AxiosRequestConfig): AxiosPromise<GetProductResponse>;
   /** 获取产品列表 */
-  GetProducts(data: GetProductsRequest, config?: AxiosRequestConfig): AxiosPromise<GetProductsResponse>;
+  GetProducts(data?: GetProductsRequest, config?: AxiosRequestConfig): AxiosPromise<GetProductsResponse>;
   /** 获取转发规则信息 */
   GetRule(data: GetRuleRequest, config?: AxiosRequestConfig): AxiosPromise<GetRuleResponse>;
   /** 获取转发规则列表 */
-  GetRules(data: GetRulesRequest, config?: AxiosRequestConfig): AxiosPromise<GetRulesResponse>;
+  GetRules(data?: GetRulesRequest, config?: AxiosRequestConfig): AxiosPromise<GetRulesResponse>;
   /** 获取Topic信息 */
   GetTopic(data: GetTopicRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicResponse>;
   /** 获取Topic列表 */
