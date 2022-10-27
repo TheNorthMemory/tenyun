@@ -1,4 +1,4 @@
-%%{init: {'themeCSS':'.flowchart-link{animation:dash 2s linear infinite;}@keyframes dash{from{stroke-dashoffset:60;}to%{}}'}}%%
+%%{init:{'flowchart':{'useMaxWidth':true,'htmlLabels':true}}}%%
 flowchart TD
   B[["new TenYun(...)"]]-.->S0[[api]]
   B-.->S1[["..."]]
@@ -44,5 +44,5 @@ flowchart TD
   classDef dashed fill:none,stroke-dasharray:5 5
   class G,api,tcb,...,zj dashed
 
-%% npx -p @mermaid-js/mermaid-cli mmdc -c sdk-flowchart.json -i sdk-flowchart.mmd -o sdk-flowchart.svg
+%% npx -p @mermaid-js/mermaid-cli mmdc -i sdk-flowchart.mmd -o sdk-flowchart.svg
 %% sed -i '' 's/-166[0-9]\{10\}/-div/g;s/max-width: 1324.69px; //' sdk-flowchart.svg

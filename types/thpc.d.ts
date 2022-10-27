@@ -40,6 +40,8 @@ declare interface ClusterOverview {
   LoginNodeSet: LoginNodeOverview[];
   /** 登录节点数量。 */
   LoginNodeCount: number;
+  /** 集群所属私有网络ID。 */
+  VpcId: string;
 }
 
 /** 计算节点信息。 */

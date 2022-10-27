@@ -432,6 +432,10 @@ declare interface WorkSpaceClusterItem {
   WorkSpaceName: string;
   /** 绑定状态 2 绑定 1 解除绑定 */
   Status: number;
+  /** 项目ID */
+  ProjectId: number;
+  /** 项目ID string类型 */
+  ProjectIdStr: string | null;
 }
 
 declare interface CheckSavepointRequest {

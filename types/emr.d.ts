@@ -316,6 +316,8 @@ declare interface EmrListInstance {
   ClusterClass: string | null;
   /** 是否为跨AZ集群 */
   IsMultiZoneCluster: boolean | null;
+  /** 是否手戳集群 */
+  IsHandsCluster: boolean | null;
 }
 
 /** EMR产品配置 */
@@ -1575,6 +1577,8 @@ declare interface ScaleOutInstanceRequest {
   SubnetId?: string;
   /** 预设配置组 */
   ScaleOutServiceConfAssign?: string;
+  /** 0表示关闭自动续费，1表示开启自动续费 */
+  AutoRenew?: number;
 }
 
 declare interface ScaleOutInstanceResponse {

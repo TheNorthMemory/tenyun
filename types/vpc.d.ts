@@ -1173,25 +1173,25 @@ declare interface NetworkAclQuintupleEntry {
 /** 弹性网卡 */
 declare interface NetworkInterface {
   /** 弹性网卡实例ID，例如：eni-f1xjkw1b。 */
-  NetworkInterfaceId: string;
+  NetworkInterfaceId?: string;
   /** 弹性网卡名称。 */
-  NetworkInterfaceName: string;
+  NetworkInterfaceName?: string;
   /** 弹性网卡描述。 */
   NetworkInterfaceDescription?: string;
   /** 子网实例ID。 */
-  SubnetId: string;
+  SubnetId?: string;
   /** VPC实例ID。 */
-  VpcId: string;
+  VpcId?: string;
   /** 绑定的安全组。 */
   GroupSet?: string[];
   /** 是否是主网卡。 */
   Primary?: boolean;
   /** MAC地址。 */
-  MacAddress: string;
+  MacAddress?: string;
   /** 弹性网卡状态：`PENDING`：创建中`AVAILABLE`：可用的`ATTACHING`：绑定中`DETACHING`：解绑中`DELETING`：删除中 */
-  State: string;
+  State?: string;
   /** 内网IP信息。 */
-  PrivateIpAddressSet: PrivateIpAddressSpecification[];
+  PrivateIpAddressSet?: PrivateIpAddressSpecification[];
   /** 绑定的云服务器对象。 */
   Attachment?: NetworkInterfaceAttachment | null;
   /** 可用区。 */
@@ -1199,17 +1199,19 @@ declare interface NetworkInterface {
   /** 创建时间。 */
   CreatedTime?: string;
   /** `IPv6`地址列表。 */
-  Ipv6AddressSet: Ipv6Address[];
+  Ipv6AddressSet?: Ipv6Address[];
   /** 标签键值对。 */
-  TagSet: Tag[];
+  TagSet?: Tag[];
   /** 网卡类型。0 - 弹性网卡；1 - evm弹性网卡。 */
-  EniType: number;
+  EniType?: number;
   /** 网卡绑定的子机类型：cvm，eks。 */
-  Business: string | null;
+  Business?: string | null;
   /** 网卡所关联的CDC实例ID。 */
-  CdcId: string | null;
+  CdcId?: string | null;
   /** 弹性网卡类型：0:标准型/1:扩展型。默认值为0。 */
-  AttachType: number | null;
+  AttachType?: number | null;
+  /** 用于保留网卡主IP的资源ID用于保留网卡主IP的资源ID。用于删除网卡时作为入参数。 */
+  ResourceId?: string | null;
 }
 
 /** 弹性网卡绑定关系 */

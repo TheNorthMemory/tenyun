@@ -30,7 +30,7 @@ declare interface ApproverInfo {
   VerifyChannel?: string[];
   /** 合同的强制预览时间：3~300s，未指定则按合同页数计算 */
   PreReadTime?: number;
-  /** 签署人userId，非企微场景不使用此字段 */
+  /** 签署人userId，传此字段则不用传姓名、手机号 */
   UserId?: string;
   /** 签署人用户来源,企微侧用户请传入：WEWORKAPP */
   ApproverSource?: string;
@@ -270,7 +270,7 @@ declare interface FlowCreateApprover {
   IsFullText?: boolean;
   /** 签署前置条件：阅读时长限制，单位秒，默认为不需要 */
   PreReadTime?: number;
-  /** 签署方经办人的用户ID,和签署方经办人姓名+手机号+证件必须有一个。非企微场景不使用此字段 */
+  /** 签署方经办人的用户ID,和签署方经办人姓名+手机号+证件必须有一个。 */
   UserId?: string;
   /** 当前只支持true，默认为true */
   Required?: boolean;
@@ -927,7 +927,7 @@ declare interface DescribeIntegrationEmployeesRequest {
   Operator: UserInfo;
   /** 返回最大数量，最大为20 */
   Limit: number;
-  /** 查询过滤实名用户，key为Status，Values为["IsVerified"] */
+  /** 查询过滤实名用户，Key为Status，Values为["IsVerified"]根据第三方系统openId过滤查询员工时,Key为StaffOpenId,Values为["OpenId","OpenId",...] */
   Filters?: Filter[];
   /** 偏移量，默认为0，最大为20000 */
   Offset?: number;

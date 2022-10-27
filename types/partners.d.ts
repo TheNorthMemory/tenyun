@@ -451,11 +451,11 @@ declare interface DescribeAgentClientsResponse {
 declare interface DescribeAgentDealsByCacheRequest {
   /** 偏移量 */
   Offset: number;
-  /** 限制数目 */
+  /** 限制数目 最大200 */
   Limit: number;
-  /** 下单时间范围起始点 */
+  /** 下单时间范围起始点【请保持时间范围最大90天】 */
   CreatTimeRangeStart?: string;
-  /** 下单时间范围终止点 */
+  /** 下单时间范围终止点【请保持时间范围最大90天】 */
   CreatTimeRangeEnd?: string;
   /** 0:下单时间降序；其他：下单时间升序 */
   Order?: number;
@@ -483,11 +483,11 @@ declare interface DescribeAgentDealsByCacheResponse {
 declare interface DescribeAgentDealsCacheRequest {
   /** 偏移量 */
   Offset: number;
-  /** 限制数目 */
+  /** 限制数目 最大200 */
   Limit: number;
-  /** 下单时间范围起始点 */
+  /** 下单时间范围起始点【请保持时间范围最大90天】 */
   CreatTimeRangeStart?: string;
-  /** 下单时间范围终止点 */
+  /** 下单时间范围终止点【请保持时间范围最大90天】 */
   CreatTimeRangeEnd?: string;
   /** 0:下单时间降序；其他：下单时间升序 */
   Order?: number;
@@ -513,7 +513,7 @@ declare interface DescribeAgentDealsCacheResponse {
 declare interface DescribeAgentPayDealsRequest {
   /** 偏移量 */
   Offset: number;
-  /** 限制数目 */
+  /** 限制数目 最大100 */
   Limit: number;
   /** 下单时间范围起始点(不传时会默认查15天内订单，传值时需要传15天内的起始时间) */
   CreatTimeRangeStart?: string;
@@ -541,7 +541,7 @@ declare interface DescribeAgentPayDealsResponse {
 declare interface DescribeAgentPayDealsV2Request {
   /** 偏移量 */
   Offset: number;
-  /** 限制数目 */
+  /** 限制数目 最大100 */
   Limit: number;
   /** 下单时间范围起始点(不传时会默认查15天内订单，传值时需要传15天内的起始时间) */
   CreatTimeRangeStart?: string;
@@ -573,7 +573,7 @@ declare interface DescribeAgentSelfPayDealsRequest {
   OwnerUin: string;
   /** 偏移量 */
   Offset: number;
-  /** 限制数目 */
+  /** 限制数目 最大100 */
   Limit: number;
   /** 下单时间范围起始点(不传时会默认查15天内订单，传值时需要传15天内的起始时间) */
   CreatTimeRangeStart?: string;
@@ -601,7 +601,7 @@ declare interface DescribeAgentSelfPayDealsV2Request {
   OwnerUin: string;
   /** 偏移量 */
   Offset: number;
-  /** 限制数目 */
+  /** 限制数目 最大100 */
   Limit: number;
   /** 下单时间范围起始点(不传时会默认查15天内订单，传值时需要传15天内的起始时间) */
   CreatTimeRangeStart?: string;
@@ -763,21 +763,21 @@ declare interface Partners {
   DescribeAgentClients(data?: DescribeAgentClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentClientsResponse>;
   /** 代理商缓存订单查询接口 */
   DescribeAgentDealsByCache(data: DescribeAgentDealsByCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsByCacheResponse>;
-  /** 代理商缓存订单查询接口（旧） */
+  /** 代理商缓存订单查询接口（禁止接入） */
   DescribeAgentDealsCache(data: DescribeAgentDealsCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsCacheResponse>;
-  /** 代理商代付订单查询接口（旧） */
+  /** 代理商代付订单查询接口（禁止接入） */
   DescribeAgentPayDeals(data: DescribeAgentPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentPayDealsResponse>;
-  /** 代理商代付订单查询接口（新） */
+  /** 代理商代付订单查询接口 */
   DescribeAgentPayDealsV2(data: DescribeAgentPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentPayDealsV2Response>;
-  /** 代理商自付订单查询接口（旧） */
+  /** 代理商自付订单查询接口（禁止接入） */
   DescribeAgentSelfPayDeals(data: DescribeAgentSelfPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsResponse>;
-  /** 代理商自付订单查询接口（新） */
+  /** 代理商自付订单查询接口 */
   DescribeAgentSelfPayDealsV2(data: DescribeAgentSelfPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsV2Response>;
   /** 查询客户余额 */
   DescribeClientBalance(data: DescribeClientBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientBalanceResponse>;
   /** 查询客户余额（新） */
   DescribeClientBalanceNew(data: DescribeClientBalanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientBalanceNewResponse>;
-  /** 查询代理商返佣信息 */
+  /** 查询代理商返佣信息（禁止接入） */
   DescribeRebateInfos(data?: DescribeRebateInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebateInfosResponse>;
   /** 代理商业务员查询接口 */
   DescribeSalesmans(data: DescribeSalesmansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSalesmansResponse>;
