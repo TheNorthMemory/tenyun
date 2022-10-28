@@ -294,6 +294,40 @@ declare interface ModifyNetworkAddress {
   OldIpAddress: string;
 }
 
+/** 节点属性 */
+declare interface NodeProperty {
+  /** 节点所在的可用区。 */
+  Zone: string | null;
+  /** 节点名称。 */
+  NodeName: string | null;
+  /** 节点访问地址。 */
+  Address: string | null;
+  /** 角色。 */
+  Role: string | null;
+  /** 是否为Hidden节点 */
+  Hidden: boolean | null;
+  /** 节点状态，包括：ORMAL/STARTUP/RECOVERING/STARTUP2/UNKNOWN/DOWN/ROLLBACK/REMOVED等。 */
+  Status: string | null;
+  /** 主从延迟，单位秒。 */
+  SlaveDelay: number | null;
+  /** 节点优先级。 */
+  Priority: number | null;
+  /** 节点投票权。 */
+  Votes: number | null;
+  /** 节点标签。 */
+  Tags: NodeTag[] | null;
+  /** 副本集Id。 */
+  ReplicateSetId: string | null;
+}
+
+/** 节点Tag */
+declare interface NodeTag {
+  /** 节点Tag key */
+  TagKey?: string | null;
+  /** 节点Tag Value */
+  TagValue?: string | null;
+}
+
 /** 需要终止的操作 */
 declare interface Operation {
   /** 操作所在的分片名 */
@@ -308,6 +342,12 @@ declare interface Operation {
 declare interface ReplicaSetInfo {
   /** 副本集ID */
   ReplicaSetId: string;
+}
+
+/** 副本集信息 */
+declare interface ReplicateSetInfo {
+  /** 节点属性 */
+  Nodes: NodeProperty[] | null;
 }
 
 /** 安全组信息 */
@@ -766,6 +806,32 @@ declare interface DescribeDBInstanceDealResponse {
   DiscountPrice: number;
   /** 订单行为，purchase：新购，renew：续费，upgrade：升配，downgrade：降配，refund：退货退款。 */
   Action: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBInstanceNodePropertyRequest {
+  /** 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。 */
+  InstanceId: string;
+  /** 节点ID。 */
+  NodeIds?: string[];
+  /** 节点角色。可选值包括：PRIMARY：主节点。SECONDARY：从节点。READONLY：只读节点。ARBITER：仲裁节点。 */
+  Roles?: string[];
+  /** 该参数指定节点是否为Hidden节点，默认为false。 */
+  OnlyHidden?: boolean;
+  /** 该参数指定选举新主节点的优先级。其取值范围为[0,100]，数值越高，优先级越高。 */
+  Priority?: number;
+  /** 该参数指定节点投票权。1：具有投票权。0：无投票权。 */
+  Votes?: number;
+  /** 节点标签。 */
+  Tags?: NodeTag[];
+}
+
+declare interface DescribeDBInstanceNodePropertyResponse {
+  /** Mongos节点属性。 */
+  Mongos: NodeProperty[] | null;
+  /** 副本集节点信息。 */
+  ReplicateSets: ReplicateSetInfo[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1625,6 +1691,8 @@ declare interface Mongodb {
   DescribeDBBackups(data: DescribeDBBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBBackupsResponse>;
   /** 获取数据库实例订单详情 */
   DescribeDBInstanceDeal(data: DescribeDBInstanceDealRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceDealResponse>;
+  /** 查询节点属性 */
+  DescribeDBInstanceNodeProperty(data: DescribeDBInstanceNodePropertyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceNodePropertyResponse>;
   /** 查询云数据库实例列表 */
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
   /** 获取当前实例可修改的参数列表 */

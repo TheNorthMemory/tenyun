@@ -1070,12 +1070,14 @@ declare interface TranscodeDetailInfo {
   ModuleCodec: string;
   /** 码率。 */
   Bitrate: number;
-  /** 类型，包含：转码（Transcode），混流（MixStream），水印（WaterMark）。 */
+  /** 类型，包含：转码（Transcode），混流（MixStream），水印（WaterMark），快直播（Webrtc）。 */
   Type: string;
   /** 推流域名。 */
   PushDomain: string;
   /** 分辨率。 */
   Resolution: string;
+  /** 地域：Mainland：国内。Overseas：海外。 */
+  MainlandOrOversea: string;
 }
 
 /** 转码任务数。 */

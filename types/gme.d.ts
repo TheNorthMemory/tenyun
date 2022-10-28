@@ -32,6 +32,14 @@ declare interface AppStatisticsItem {
   VoiceFilterStatisticsItem: VoiceFilterStatisticsItem | null;
   /** 统计时间 */
   Date: string;
+  /** 录音转文本用量统计数据 */
+  AudioTextStatisticsItem: AudioTextStatisticsItem | null;
+  /** 流式转文本用量数据 */
+  StreamTextStatisticsItem: StreamTextStatisticsItem | null;
+  /** 海外转文本用量数据 */
+  OverseaTextStatisticsItem: OverseaTextStatisticsItem | null;
+  /** 实时语音转文本用量数据 */
+  RealtimeTextStatisticsItem: RealtimeTextStatisticsItem | null;
 }
 
 /** 应用统计数据 */
@@ -62,6 +70,12 @@ declare interface ApplicationDataStatistics {
   PcuDataOversea: StatisticsItem[];
   /** 大陆和海外地区Pcu统计数据汇总，单位人 */
   PcuDataSum: StatisticsItem[];
+}
+
+/** 录音转文本用量统计数据 */
+declare interface AudioTextStatisticsItem {
+  /** 统计值，单位：秒 */
+  Data: number | null;
 }
 
 /** CreateApp的输出参数 */
@@ -154,6 +168,12 @@ declare interface ModifyAppStatusResp {
   Status: string;
 }
 
+/** 海外转文本用量数据 */
+declare interface OverseaTextStatisticsItem {
+  /** 统计值，单位：秒 */
+  Data: number | null;
+}
+
 /** 实时语音用量统计数据 */
 declare interface RealTimeSpeechStatisticsItem {
   /** 大陆地区DAU */
@@ -176,6 +196,12 @@ declare interface RealtimeSpeechConf {
   Status?: string;
   /** 实时语音音质类型，取值：high-高音质 */
   Quality?: string;
+}
+
+/** 实时语音转文本用量数据 */
+declare interface RealtimeTextStatisticsItem {
+  /** 统计值，单位：秒 */
+  Data: number | null;
 }
 
 /** 房间内用户信息 */
@@ -242,6 +268,12 @@ declare interface StatisticsItem {
   Data: number;
 }
 
+/** 流式转文本用量数据 */
+declare interface StreamTextStatisticsItem {
+  /** 统计值，单位：秒 */
+  Data: number | null;
+}
+
 /** 标签列表 */
 declare interface Tag {
   /** 标签键 */
@@ -278,7 +310,7 @@ declare interface VoiceFilterConf {
 
 /** 语音过滤用量统计数据 */
 declare interface VoiceFilterStatisticsItem {
-  /** 语音过滤总时长 */
+  /** 语音过滤总时长，单位为min */
   Duration: number;
 }
 
@@ -435,7 +467,7 @@ declare interface DescribeAppStatisticsRequest {
   StartDate: string;
   /** 数据结束时间，东八区时间，格式: 年-月-日，如: 2018-07-13 */
   EndDate: string;
-  /** 要查询的服务列表，取值：RealTimeSpeech/VoiceMessage/VoiceFilter */
+  /** 要查询的服务列表，取值：RealTimeSpeech/VoiceMessage/VoiceFilter/SpeechToText */
   Services: string[];
 }
 

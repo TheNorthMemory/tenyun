@@ -122,6 +122,8 @@ declare interface AdaptiveDynamicStreamingTemplate {
   CreateTime: string;
   /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   UpdateTime: string;
+  /** 切片类型，仅当 Format 为 HLS 时有效。 */
+  SegmentType: string;
 }
 
 /** 自适应转码流参数模板 */
@@ -3820,7 +3822,7 @@ declare interface SplitMediaTaskSegmentInfo {
 declare interface StatDataItem {
   /** 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。表示小时级别数据时，2019-08-22T00:00:00+08:00表示2019-08-22日0点到1点的统计数据。表示天级别数据时，2019-08-22T00:00:00+08:00表示2019-08-22日的统计数据。 */
   Time: string;
-  /** 数据大小。存储空间的数据，单位是字节。转码时长的数据，单位是秒。流量数据，单位是字节。带宽数据，单位是比特每秒。 */
+  /** 数据大小。存储空间的数据，单位是字节。转码时长的数据，单位是秒。流量数据，单位是字节。带宽数据，单位是比特每秒。直播剪辑数据，单位是秒。 */
   Value: number;
 }
 
@@ -4196,6 +4198,8 @@ declare interface TranscodeTemplate {
   CreateTime: string;
   /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   UpdateTime: string;
+  /** 切片类型，仅当 Container 为 hls 时有效。 */
+  SegmentType: string;
 }
 
 /** 转场操作 */
@@ -4685,6 +4689,8 @@ declare interface CreateAdaptiveDynamicStreamingTemplateRequest {
   DisableHigherVideoResolution?: number;
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
+  /** 切片类型，当 Format 为 HLS 时有效，可选值：ts：ts 切片；fmp4：fmp4 切片。默认值：ts。 */
+  SegmentType?: string;
 }
 
 declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
@@ -5019,6 +5025,8 @@ declare interface CreateTranscodeTemplateRequest {
   AudioTemplate?: AudioTemplateInfo;
   /** 极速高清转码参数。 */
   TEHDConfig?: TEHDConfig;
+  /** 切片类型，当 Container 为 hls 时有效，可选值：ts：ts 切片；fmp4：fmp4 切片。默认值：ts。 */
+  SegmentType?: string;
 }
 
 declare interface CreateTranscodeTemplateResponse {
@@ -6417,6 +6425,8 @@ declare interface ModifyAdaptiveDynamicStreamingTemplateRequest {
   StreamInfos?: AdaptiveStreamTemplate[];
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
+  /** 切片类型，当 Format 为 HLS 时有效，可选值：ts：ts 切片；fmp4：fmp4 切片。 */
+  SegmentType?: string;
 }
 
 declare interface ModifyAdaptiveDynamicStreamingTemplateResponse {
@@ -6801,6 +6811,8 @@ declare interface ModifyTranscodeTemplateRequest {
   AudioTemplate?: AudioTemplateInfoForUpdate;
   /** 极速高清转码参数。 */
   TEHDConfig?: TEHDConfigForUpdate;
+  /** 切片类型，当 Container 为 hls 时有效，可选值：ts：ts 切片；fmp4：fmp4 切片。 */
+  SegmentType?: string;
 }
 
 declare interface ModifyTranscodeTemplateResponse {

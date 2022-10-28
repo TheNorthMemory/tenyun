@@ -1094,6 +1094,22 @@ declare interface CreateImportTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateResultDownloadRequest {
+  /** 查询结果任务Id */
+  TaskId: string;
+  /** 下载格式 */
+  Format: string;
+  /** 是否重新生成下载文件，仅当之前任务为 Timout | Error 时有效 */
+  Force?: boolean;
+}
+
+declare interface CreateResultDownloadResponse {
+  /** 下载任务Id */
+  DownloadId: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateScriptRequest {
   /** 脚本名称，最大不能超过255个字符。 */
   ScriptName: string;
@@ -1522,6 +1538,28 @@ declare interface DescribeDatabasesResponse {
   DatabaseList: DatabaseResponseInfo[];
   /** 实例总数。 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResultDownloadRequest {
+  /** 查询任务Id */
+  DownloadId: string;
+}
+
+declare interface DescribeResultDownloadResponse {
+  /** 下载文件路径 */
+  Path: string | null;
+  /** 任务状态 init | queue | format | compress | success| timeout | error */
+  Status: string;
+  /** 任务异常原因 */
+  Reason: string | null;
+  /** 临时AK */
+  SecretId: string | null;
+  /** 临时SK */
+  SecretKey: string | null;
+  /** 临时Token */
+  Token: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2077,6 +2115,8 @@ declare interface Dlc {
   CreateExportTask(data: CreateExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportTaskResponse>;
   /** 创建导入任务 */
   CreateImportTask(data: CreateImportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImportTaskResponse>;
+  /** 创建查询结果下载任务 */
+  CreateResultDownload(data: CreateResultDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResultDownloadResponse>;
   /** 创建sql脚本 */
   CreateScript(data: CreateScriptRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScriptResponse>;
   /** 创建spark应用 */
@@ -2117,6 +2157,8 @@ declare interface Dlc {
   DescribeDMSTables(data?: DescribeDMSTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSTablesResponse>;
   /** 查询数据库列表 */
   DescribeDatabases(data?: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
+  /** 查询结果下载任务 */
+  DescribeResultDownload(data: DescribeResultDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResultDownloadResponse>;
   /** 查询script列表 */
   DescribeScripts(data?: DescribeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScriptsResponse>;
   /** 查询具体的spark应用 */

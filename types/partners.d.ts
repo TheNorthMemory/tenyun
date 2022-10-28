@@ -266,6 +266,22 @@ declare interface RebateInfoElem {
   ExceptionFlag: string;
 }
 
+/** 返佣信息定义 */
+declare interface RebateInfoElemNew {
+  /** 代理商账号ID */
+  Uin: string;
+  /** 返佣月份，如2018-02 */
+  RebateMonth: string;
+  /** 返佣金额，单位分 */
+  Amt: number;
+  /** 月度业绩，单位分 */
+  MonthSales: number;
+  /** 季度业绩，单位分 */
+  QuarterSales: number;
+  /** NORMAL(正常)/HAS_OVERDUE_BILL(欠费)/NO_CONTRACT(缺合同) */
+  ExceptionFlag: string;
+}
+
 /** 解绑客户信息 */
 declare interface UnbindClientElem {
   /** 解绑账号ID */
@@ -654,6 +670,24 @@ declare interface DescribeClientBalanceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRebateInfosNewRequest {
+  /** 返佣月份，如2018-02 */
+  RebateMonth?: string;
+  /** 偏移量 */
+  Offset?: number;
+  /** 限制数目 */
+  Limit?: number;
+}
+
+declare interface DescribeRebateInfosNewResponse {
+  /** 返佣信息列表 */
+  RebateInfoSet: RebateInfoElemNew[];
+  /** 符合查询条件返佣信息数目 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRebateInfosRequest {
   /** 返佣月份，如2018-02 */
   RebateMonth?: string;
@@ -779,6 +813,8 @@ declare interface Partners {
   DescribeClientBalanceNew(data: DescribeClientBalanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientBalanceNewResponse>;
   /** 查询代理商返佣信息（禁止接入） */
   DescribeRebateInfos(data?: DescribeRebateInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebateInfosResponse>;
+  /** 查询代理商返佣信息V2 */
+  DescribeRebateInfosNew(data?: DescribeRebateInfosNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebateInfosNewResponse>;
   /** 代理商业务员查询接口 */
   DescribeSalesmans(data: DescribeSalesmansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSalesmansResponse>;
   /** 代理商名下客户解绑记录查询接口 */

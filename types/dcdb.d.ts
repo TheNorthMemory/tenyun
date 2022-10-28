@@ -1622,6 +1622,58 @@ declare interface ModifyDBSyncModeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceNetworkRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 希望转到的VPC网络的VpcId */
+  VpcId: string;
+  /** 希望转到的VPC网络的子网ID */
+  SubnetId: string;
+  /** 如果需要指定VIP，填上该字段 */
+  Vip?: string;
+  /** 如果需要指定VIPv6，填上该字段 */
+  Vipv6?: string;
+  /** VIP保留时长，单位小时，取值范围（0~168），0表示立即释放，有一分钟释放延迟。不传此参数，默认24小时释放VIP。 */
+  VipReleaseDelay?: number;
+}
+
+declare interface ModifyInstanceNetworkResponse {
+  /** 异步任务ID，根据此FlowId通过DescribeFlow接口查询任务进行状态 */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyInstanceVipRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 实例VIP */
+  Vip: string;
+  /** IPv6标志 */
+  Ipv6Flag?: number;
+  /** VIP保留时长，单位小时，取值范围（0~168），0表示立即释放，有一分钟释放延迟。不传此参数，默认24小时释放VIP。 */
+  VipReleaseDelay?: number;
+}
+
+declare interface ModifyInstanceVipResponse {
+  /** 异步任务流程ID */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyInstanceVportRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 实例VPORT */
+  Vport: number;
+}
+
+declare interface ModifyInstanceVportResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRealServerAccessStrategyRequest {
   /** 实例 ID，格式如：tdsqlshard-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
@@ -1837,6 +1889,12 @@ declare interface Dcdb {
   ModifyDBParameters(data: ModifyDBParametersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBParametersResponse>;
   /** 修改同步模式 */
   ModifyDBSyncMode(data: ModifyDBSyncModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBSyncModeResponse>;
+  /** 修改实例所属网络 */
+  ModifyInstanceNetwork(data: ModifyInstanceNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNetworkResponse>;
+  /** 修改实例Vip */
+  ModifyInstanceVip(data: ModifyInstanceVipRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceVipResponse>;
+  /** 修改实例VPORT */
+  ModifyInstanceVport(data: ModifyInstanceVportRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceVportResponse>;
   /** 修改RS的访问策略 */
   ModifyRealServerAccessStrategy(data: ModifyRealServerAccessStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRealServerAccessStrategyResponse>;
   /** 开通外网访问 */

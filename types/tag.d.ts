@@ -211,7 +211,7 @@ declare interface DeleteTagsResponse {
 }
 
 declare interface DescribeProjectsRequest {
-  /** 传1拉取所有项目（包括隐藏项目），不传或传0拉取显示项目 */
+  /** 传1拉取所有项目（包括隐藏项目），传0拉取显示项目 */
   AllList: number;
   /** 分页条数，固定值1000。 */
   Limit: number;

@@ -3,8 +3,9 @@
 Promise based and Chainable Tencent Cloud OpenAPI client for NodeJS
 
 [![release](https://img.shields.io/npm/v/tenyun)](https://github.com/TheNorthMemory/tenyun/releases)
+[![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/tenyun?label=snyk.io)](https://snyk.io/advisor/npm-package/tenyun)
 [![types](https://img.shields.io/badge/types-included-blue)](https://www.npmjs.com/package/tenyun)
-[![package](https://img.shields.io/node/v/tenyun)](https://www.npmjs.com/package/tenyun)
+[![requirement](https://img.shields.io/node/v/tenyun)](https://www.npmjs.com/package/tenyun)
 [![downloads](https://img.shields.io/npm/dm/tenyun)](https://www.npmjs.com/package/tenyun)
 [![license](https://img.shields.io/npm/l/tenyun)](https://www.npmjs.com/package/tenyun)
 
@@ -94,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 219+ 款产品，8361+ 服务数 (点击查看清单)</summary>
+<details><summary>共计 219+ 款产品，8368+ 服务数 (点击查看清单)</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -170,8 +171,8 @@ dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-
 dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(43)<br/>2019-10-16(27)
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6)
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(21)
-dcdb | [分布式数据库 TDSQL](https://cloud.tencent.com/document/product/557) | 2018-04-11(57)
-dlc | [数据湖计算](https://cloud.tencent.com/document/product/1342) | 2021-01-25(60)
+dcdb | [分布式数据库 TDSQL](https://cloud.tencent.com/document/product/557) | 2018-04-11(60)
+dlc | [数据湖计算](https://cloud.tencent.com/document/product/1342) | 2021-01-25(62)
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(40)
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(26)
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(9)
@@ -226,7 +227,7 @@ memcached | [云数据库 Memcached](https://cloud.tencent.com/document/product/
 mgobe | [游戏联机对战引擎](https://cloud.tencent.com/document/product/1038) | 2020-10-14(7)<br/>2019-09-29(1)
 mmps | [小程序安全](https://cloud.tencent.com/document/product/1223) | 2020-07-10(15)
 mna | [移动网络加速](https://cloud.tencent.com/document/product/1385) | 2021-01-19(10)
-mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(33)<br/>2018-04-08(13)
+mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(34)<br/>2018-04-08(13)
 monitor | [云监控](https://cloud.tencent.com/document/product/248) | 2018-07-24(112)
 mps | [视频处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(65)
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(4)
@@ -238,7 +239,7 @@ npp | 号码保护 | 2019-08-23(8)
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(25)
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(77)
 organization | [企业组织](https://cloud.tencent.com/document/product/850) | 2021-03-31(5)<br/>2018-12-25(20)
-partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(21)
+partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(22)
 pds | [私域安全](https://cloud.tencent.com/document/product/1473) | 2021-07-01(2)
 postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(63)
 privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(21)

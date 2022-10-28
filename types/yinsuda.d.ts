@@ -359,13 +359,19 @@ declare interface DescribeKTVPlaylistsRequest {
   AppName: string;
   /** 用户标识。 */
   UserId: string;
-  /** 类型列表，取值有：OfficialRec：官方推荐；Customize：自定义。 */
+  /** 类型列表，取值有：OfficialRec：官方推荐；Customize：自定义。默认值为 OfficialRec。 */
   Types?: string[];
+  /** 分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条。 */
+  Offset?: number;
+  /** 分页返回的记录条数，默认值：20，最大值：50。 */
+  Limit?: number;
 }
 
 declare interface DescribeKTVPlaylistsResponse {
   /** 歌单基础信息。 */
   PlaylistBaseInfoSet: KTVPlaylistBaseInfo[];
+  /** 歌单总数。 */
+  TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

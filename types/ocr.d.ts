@@ -1003,6 +1003,10 @@ declare interface BankSlipOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。 */
   ImageUrl?: string;
+  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
 }
 
 declare interface BankSlipOCRResponse {
@@ -1055,6 +1059,10 @@ declare interface BusInvoiceOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
+  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
 }
 
 declare interface BusInvoiceOCRResponse {
@@ -1091,6 +1099,10 @@ declare interface CarInvoiceOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
+  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
 }
 
 declare interface CarInvoiceOCRResponse {
@@ -1169,6 +1181,10 @@ declare interface DutyPaidProofOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
+  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
 }
 
 declare interface DutyPaidProofOCRResponse {
@@ -1307,6 +1323,10 @@ declare interface FlightInvoiceOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
+  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
 }
 
 declare interface FlightInvoiceOCRResponse {
@@ -1619,6 +1639,10 @@ declare interface InvoiceGeneralOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
+  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
 }
 
 declare interface InvoiceGeneralOCRResponse {
@@ -1763,6 +1787,10 @@ declare interface MixedInvoiceDetectRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
+  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
 }
 
 declare interface MixedInvoiceDetectResponse {
@@ -1777,10 +1805,14 @@ declare interface MixedInvoiceOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
-  /** 需要识别的票据类型列表，为空或不填表示识别全部类型。0：出租车发票1：定额发票2：火车票3：增值税发票5：机票行程单8：通用机打发票9：汽车票10：轮船票11：增值税发票（卷票 ）12：购车发票13：过路过桥费发票15：非税发票16：全电发票 */
+  /** 需要识别的票据类型列表，为空或不填表示识别全部类型。0：出租车发票1：定额发票2：火车票3：增值税发票5：机票行程单8：通用机打发票9：汽车票10：轮船票11：增值税发票（卷票 ）12：购车发票13：过路过桥费发票15：非税发票16：全电发票-----------------------1：其他发票,（仅返回，本参数不支持传入-1，请在ReturnOther中控制是否返回） */
   Types?: number[];
   /** 是否识别其他类型发票，默认为YesYes：识别其他类型发票No：不识别其他类型发票 */
   ReturnOther?: string;
+  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
 }
 
 declare interface MixedInvoiceOCRResponse {
@@ -1941,6 +1973,10 @@ declare interface QuotaInvoiceOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
+  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
 }
 
 declare interface QuotaInvoiceOCRResponse {
@@ -2087,6 +2123,10 @@ declare interface RecognizeMedicalInvoiceOCRRequest {
   ReturnVertex?: boolean;
   /** 是否需要返回识别出的文本行在旋转纠正之后的图像中的四点坐标，默认不返回 */
   ReturnCoord?: boolean;
+  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
 }
 
 declare interface RecognizeMedicalInvoiceOCRResponse {
@@ -2401,6 +2441,10 @@ declare interface ShipInvoiceOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
+  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
 }
 
 declare interface ShipInvoiceOCRResponse {
@@ -2457,6 +2501,10 @@ declare interface TaxiInvoiceOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
+  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
 }
 
 declare interface TaxiInvoiceOCRResponse {
@@ -2507,6 +2555,10 @@ declare interface TollInvoiceOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
+  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
 }
 
 declare interface TollInvoiceOCRResponse {
@@ -2523,6 +2575,10 @@ declare interface TrainTicketOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
+  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
 }
 
 declare interface TrainTicketOCRResponse {
@@ -2649,6 +2705,10 @@ declare interface VatRollInvoiceOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
+  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
 }
 
 declare interface VatRollInvoiceOCRResponse {
@@ -2931,6 +2991,10 @@ declare interface WaybillOCRRequest {
   ImageUrl?: string;
   /** 预检测开关，当待识别运单占整个输入图像的比例较小时，建议打开预检测开关。默认值为false。 */
   EnablePreDetect?: boolean;
+  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
 }
 
 declare interface WaybillOCRResponse {
