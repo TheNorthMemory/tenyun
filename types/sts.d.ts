@@ -156,20 +156,20 @@ declare interface QueryApiKeyResponse {
   RequestId?: string;
 }
 
-/** [安全凭证服务](https://cloud.tencent.com/document/product/1312) */
+/** {@link Sts 安全凭证服务} */
 declare interface Sts {
   (): Versions;
-  /** 申请扮演角色 */
+  /** {@link AssumeRole 申请扮演角色}({@link AssumeRoleRequest 请求参数}): {@link AssumeRoleResponse 返回参数} */
   AssumeRole(data: AssumeRoleRequest, config?: AxiosRequestConfig): AxiosPromise<AssumeRoleResponse>;
-  /** 根据 SAML 断言申请角色临时凭证 */
+  /** {@link AssumeRoleWithSAML 根据 SAML 断言申请角色临时凭证}({@link AssumeRoleWithSAMLRequest 请求参数}): {@link AssumeRoleWithSAMLResponse 返回参数} */
   AssumeRoleWithSAML(data: AssumeRoleWithSAMLRequest, config?: AxiosRequestConfig): AxiosPromise<AssumeRoleWithSAMLResponse>;
-  /** 申请OIDC角色临时密钥 */
+  /** {@link AssumeRoleWithWebIdentity 申请OIDC角色临时密钥}({@link AssumeRoleWithWebIdentityRequest 请求参数}): {@link AssumeRoleWithWebIdentityResponse 返回参数} */
   AssumeRoleWithWebIdentity(data: AssumeRoleWithWebIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<AssumeRoleWithWebIdentityResponse>;
-  /** 获取当前调用者的身份信息 */
+  /** {@link GetCallerIdentity 获取当前调用者的身份信息}({@link GetCallerIdentityRequest 请求参数}): {@link GetCallerIdentityResponse 返回参数} */
   GetCallerIdentity(data?: GetCallerIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<GetCallerIdentityResponse>;
-  /** 获取联合身份临时访问凭证 */
+  /** {@link GetFederationToken 获取联合身份临时访问凭证}({@link GetFederationTokenRequest 请求参数}): {@link GetFederationTokenResponse 返回参数} */
   GetFederationToken(data: GetFederationTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetFederationTokenResponse>;
-  /** 拉取API密钥列表 */
+  /** {@link QueryApiKey 拉取API密钥列表}({@link QueryApiKeyRequest 请求参数}): {@link QueryApiKeyResponse 返回参数} */
   QueryApiKey(data?: QueryApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<QueryApiKeyResponse>;
 }
 

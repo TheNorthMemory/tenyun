@@ -604,38 +604,38 @@ declare interface UpdateUserStatusResponse {
   RequestId?: string;
 }
 
-/** [账号风控平台](https://cloud.tencent.com/document/product/1441) */
+/** {@link Ciam 账号风控平台} */
 declare interface Ciam {
   (): Versions;
-  /** 新建接口导入用户任务 */
+  /** {@link CreateApiImportUserJob 新建接口导入用户任务}({@link CreateApiImportUserJobRequest 请求参数}): {@link CreateApiImportUserJobResponse 返回参数} */
   CreateApiImportUserJob(data: CreateApiImportUserJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiImportUserJobResponse>;
-  /** 新建文件导出用户任务 */
+  /** {@link CreateFileExportUserJob 新建文件导出用户任务}({@link CreateFileExportUserJobRequest 请求参数}): {@link CreateFileExportUserJobResponse 返回参数} */
   CreateFileExportUserJob(data: CreateFileExportUserJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileExportUserJobResponse>;
-  /** 创建用户 */
+  /** {@link CreateUser 创建用户}({@link CreateUserRequest 请求参数}): {@link CreateUserResponse 返回参数} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
-  /** 批量删除用户 */
+  /** {@link DeleteUsers 批量删除用户}({@link DeleteUsersRequest 请求参数}): {@link DeleteUsersResponse 返回参数} */
   DeleteUsers(data: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
-  /** 查询用户信息 */
+  /** {@link DescribeUser 查询用户信息}({@link DescribeUserRequest 请求参数}): {@link DescribeUserResponse 返回参数} */
   DescribeUser(data: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
-  /** 根据ID查询用户信息 */
+  /** {@link DescribeUserById 根据ID查询用户信息}({@link DescribeUserByIdRequest 请求参数}): {@link DescribeUserByIdResponse 返回参数} */
   DescribeUserById(data: DescribeUserByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserByIdResponse>;
-  /** 账号融合 */
+  /** {@link LinkAccount 账号融合}({@link LinkAccountRequest 请求参数}): {@link LinkAccountResponse 返回参数} */
   LinkAccount(data: LinkAccountRequest, config?: AxiosRequestConfig): AxiosPromise<LinkAccountResponse>;
-  /** 查询任务详情 */
+  /** {@link ListJobs 查询任务详情}({@link ListJobsRequest 请求参数}): {@link ListJobsResponse 返回参数} */
   ListJobs(data: ListJobsRequest, config?: AxiosRequestConfig): AxiosPromise<ListJobsResponse>;
-  /** 查询日志信息 */
+  /** {@link ListLogMessageByCondition 查询日志信息}({@link ListLogMessageByConditionRequest 请求参数}): {@link ListLogMessageByConditionResponse 返回参数} */
   ListLogMessageByCondition(data: ListLogMessageByConditionRequest, config?: AxiosRequestConfig): AxiosPromise<ListLogMessageByConditionResponse>;
-  /** 查询用户列表 */
+  /** {@link ListUser 查询用户列表}({@link ListUserRequest 请求参数}): {@link ListUserResponse 返回参数} */
   ListUser(data: ListUserRequest, config?: AxiosRequestConfig): AxiosPromise<ListUserResponse>;
-  /** 根据属性查询用户列表 */
+  /** {@link ListUserByProperty 根据属性查询用户列表}({@link ListUserByPropertyRequest 请求参数}): {@link ListUserByPropertyResponse 返回参数} */
   ListUserByProperty(data: ListUserByPropertyRequest, config?: AxiosRequestConfig): AxiosPromise<ListUserByPropertyResponse>;
-  /** 重置用户密码 */
+  /** {@link ResetPassword 重置用户密码}({@link ResetPasswordRequest 请求参数}): {@link ResetPasswordResponse 返回参数} */
   ResetPassword(data: ResetPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetPasswordResponse>;
-  /** 设置用户密码 */
+  /** {@link SetPassword 设置用户密码}({@link SetPasswordRequest 请求参数}): {@link SetPasswordResponse 返回参数} */
   SetPassword(data: SetPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<SetPasswordResponse>;
-  /** 更新用户 */
+  /** {@link UpdateUser 更新用户}({@link UpdateUserRequest 请求参数}): {@link UpdateUserResponse 返回参数} */
   UpdateUser(data: UpdateUserRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserResponse>;
-  /** 更新用户状态 */
+  /** {@link UpdateUserStatus 更新用户状态}({@link UpdateUserStatusRequest 请求参数}): {@link UpdateUserStatusResponse 返回参数} */
   UpdateUserStatus(data: UpdateUserStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserStatusResponse>;
 }
 

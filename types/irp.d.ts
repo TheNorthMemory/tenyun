@@ -532,24 +532,24 @@ declare namespace V20220324 {
   }
 }
 
-/** [智能推荐平台](https://cloud.tencent.com/document/product/1541) */
+/** {@link Irp 智能推荐平台} */
 declare interface Irp {
   (): Versions;
-  /** 获取信息流推荐结果 */
+  /** {@link FeedRecommend 获取信息流推荐结果}({@link FeedRecommendRequest 请求参数}): {@link FeedRecommendResponse 返回参数} */
   FeedRecommend(data: FeedRecommendRequest, config?: AxiosRequestConfig): AxiosPromise<FeedRecommendResponse>;
-  /** 上报信息流行为数据 */
+  /** {@link ReportFeedBehavior 上报信息流行为数据}({@link ReportFeedBehaviorRequest 请求参数}): {@link ReportFeedBehaviorResponse 返回参数} */
   ReportFeedBehavior(data: ReportFeedBehaviorRequest, config?: AxiosRequestConfig): AxiosPromise<ReportFeedBehaviorResponse>;
-  /** 上报信息流内容信息 */
+  /** {@link ReportFeedItem 上报信息流内容信息}({@link ReportFeedItemRequest 请求参数}): {@link ReportFeedItemResponse 返回参数} */
   ReportFeedItem(data: ReportFeedItemRequest, config?: AxiosRequestConfig): AxiosPromise<ReportFeedItemResponse>;
-  /** 上报信息流用户信息 */
+  /** {@link ReportFeedUser 上报信息流用户信息}({@link ReportFeedUserRequest 请求参数}): {@link ReportFeedUserResponse 返回参数} */
   ReportFeedUser(data: ReportFeedUserRequest, config?: AxiosRequestConfig): AxiosPromise<ReportFeedUserResponse>;
-  /** 获取推荐结果 */
+  /** {@link V20220324.RecommendContent 获取推荐结果}({@link V20220324.RecommendContentRequest 请求参数}): {@link V20220324.RecommendContentResponse 返回参数} */
   RecommendContent(data: V20220324.RecommendContentRequest, config: AxiosRequestConfig & V20220324.VersionHeader): AxiosPromise<V20220324.RecommendContentResponse>;
-  /** 上报行为 */
+  /** {@link V20220324.ReportAction 上报行为}({@link V20220324.ReportActionRequest 请求参数}): {@link V20220324.ReportActionResponse 返回参数} */
   ReportAction(data: V20220324.ReportActionRequest, config: AxiosRequestConfig & V20220324.VersionHeader): AxiosPromise<V20220324.ReportActionResponse>;
-  /** 上报物料 */
+  /** {@link V20220324.ReportMaterial 上报物料}({@link V20220324.ReportMaterialRequest 请求参数}): {@link V20220324.ReportMaterialResponse 返回参数} */
   ReportMaterial(data: V20220324.ReportMaterialRequest, config: AxiosRequestConfig & V20220324.VersionHeader): AxiosPromise<V20220324.ReportMaterialResponse>;
-  /** 上报用户画像 */
+  /** {@link V20220324.ReportPortrait 上报用户画像}({@link V20220324.ReportPortraitRequest 请求参数}): {@link V20220324.ReportPortraitResponse 返回参数} */
   ReportPortrait(data: V20220324.ReportPortraitRequest, config: AxiosRequestConfig & V20220324.VersionHeader): AxiosPromise<V20220324.ReportPortraitResponse>;
 }
 

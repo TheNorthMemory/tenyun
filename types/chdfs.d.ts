@@ -990,118 +990,118 @@ declare namespace V20190718 {
   }
 }
 
-/** [云 HDFS](https://cloud.tencent.com/document/product/1105) */
+/** {@link Chdfs 云 HDFS} */
 declare interface Chdfs {
   (): Versions;
-  /** 绑定权限组列表 */
+  /** {@link AssociateAccessGroups 绑定权限组列表}({@link AssociateAccessGroupsRequest 请求参数}): {@link AssociateAccessGroupsResponse 返回参数} */
   AssociateAccessGroups(data: AssociateAccessGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateAccessGroupsResponse>;
-  /** 创建权限组 */
+  /** {@link CreateAccessGroup 创建权限组}({@link CreateAccessGroupRequest 请求参数}): {@link CreateAccessGroupResponse 返回参数} */
   CreateAccessGroup(data: CreateAccessGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessGroupResponse>;
-  /** 批量创建权限规则 */
+  /** {@link CreateAccessRules 批量创建权限规则}({@link CreateAccessRulesRequest 请求参数}): {@link CreateAccessRulesResponse 返回参数} */
   CreateAccessRules(data: CreateAccessRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessRulesResponse>;
-  /** 创建文件系统 */
+  /** {@link CreateFileSystem 创建文件系统}({@link CreateFileSystemRequest 请求参数}): {@link CreateFileSystemResponse 返回参数} */
   CreateFileSystem(data: CreateFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileSystemResponse>;
-  /** 批量创建生命周期规则 */
+  /** {@link CreateLifeCycleRules 批量创建生命周期规则}({@link CreateLifeCycleRulesRequest 请求参数}): {@link CreateLifeCycleRulesResponse 返回参数} */
   CreateLifeCycleRules(data: CreateLifeCycleRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLifeCycleRulesResponse>;
-  /** 创建挂载点 */
+  /** {@link CreateMountPoint 创建挂载点}({@link CreateMountPointRequest 请求参数}): {@link CreateMountPointResponse 返回参数} */
   CreateMountPoint(data: CreateMountPointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMountPointResponse>;
-  /** 批量创建回热任务 */
+  /** {@link CreateRestoreTasks 批量创建回热任务}({@link CreateRestoreTasksRequest 请求参数}): {@link CreateRestoreTasksResponse 返回参数} */
   CreateRestoreTasks(data: CreateRestoreTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRestoreTasksResponse>;
-  /** 删除权限组 */
+  /** {@link DeleteAccessGroup 删除权限组}({@link DeleteAccessGroupRequest 请求参数}): {@link DeleteAccessGroupResponse 返回参数} */
   DeleteAccessGroup(data: DeleteAccessGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessGroupResponse>;
-  /** 批量删除权限规则 */
+  /** {@link DeleteAccessRules 批量删除权限规则}({@link DeleteAccessRulesRequest 请求参数}): {@link DeleteAccessRulesResponse 返回参数} */
   DeleteAccessRules(data: DeleteAccessRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessRulesResponse>;
-  /** 删除文件系统 */
+  /** {@link DeleteFileSystem 删除文件系统}({@link DeleteFileSystemRequest 请求参数}): {@link DeleteFileSystemResponse 返回参数} */
   DeleteFileSystem(data: DeleteFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFileSystemResponse>;
-  /** 批量删除生命周期规则 */
+  /** {@link DeleteLifeCycleRules 批量删除生命周期规则}({@link DeleteLifeCycleRulesRequest 请求参数}): {@link DeleteLifeCycleRulesResponse 返回参数} */
   DeleteLifeCycleRules(data: DeleteLifeCycleRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLifeCycleRulesResponse>;
-  /** 删除挂载点 */
+  /** {@link DeleteMountPoint 删除挂载点}({@link DeleteMountPointRequest 请求参数}): {@link DeleteMountPointResponse 返回参数} */
   DeleteMountPoint(data: DeleteMountPointRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMountPointResponse>;
-  /** 查看权限组详细信息 */
+  /** {@link DescribeAccessGroup 查看权限组详细信息}({@link DescribeAccessGroupRequest 请求参数}): {@link DescribeAccessGroupResponse 返回参数} */
   DescribeAccessGroup(data: DescribeAccessGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessGroupResponse>;
-  /** 查看权限组列表 */
+  /** {@link DescribeAccessGroups 查看权限组列表}({@link DescribeAccessGroupsRequest 请求参数}): {@link DescribeAccessGroupsResponse 返回参数} */
   DescribeAccessGroups(data?: DescribeAccessGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessGroupsResponse>;
-  /** 查看权限规则列表 */
+  /** {@link DescribeAccessRules 查看权限规则列表}({@link DescribeAccessRulesRequest 请求参数}): {@link DescribeAccessRulesResponse 返回参数} */
   DescribeAccessRules(data: DescribeAccessRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessRulesResponse>;
-  /** 查看文件系统详细信息 */
+  /** {@link DescribeFileSystem 查看文件系统详细信息}({@link DescribeFileSystemRequest 请求参数}): {@link DescribeFileSystemResponse 返回参数} */
   DescribeFileSystem(data: DescribeFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileSystemResponse>;
-  /** 查看文件系统列表 */
+  /** {@link DescribeFileSystems 查看文件系统列表}({@link DescribeFileSystemsRequest 请求参数}): {@link DescribeFileSystemsResponse 返回参数} */
   DescribeFileSystems(data?: DescribeFileSystemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileSystemsResponse>;
-  /** 查看生命周期规则列表 */
+  /** {@link DescribeLifeCycleRules 查看生命周期规则列表}({@link DescribeLifeCycleRulesRequest 请求参数}): {@link DescribeLifeCycleRulesResponse 返回参数} */
   DescribeLifeCycleRules(data: DescribeLifeCycleRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLifeCycleRulesResponse>;
-  /** 查看挂载点详细信息 */
+  /** {@link DescribeMountPoint 查看挂载点详细信息}({@link DescribeMountPointRequest 请求参数}): {@link DescribeMountPointResponse 返回参数} */
   DescribeMountPoint(data: DescribeMountPointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMountPointResponse>;
-  /** 查看挂载点列表 */
+  /** {@link DescribeMountPoints 查看挂载点列表}({@link DescribeMountPointsRequest 请求参数}): {@link DescribeMountPointsResponse 返回参数} */
   DescribeMountPoints(data?: DescribeMountPointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMountPointsResponse>;
-  /** 查看资源标签列表 */
+  /** {@link DescribeResourceTags 查看资源标签列表}({@link DescribeResourceTagsRequest 请求参数}): {@link DescribeResourceTagsResponse 返回参数} */
   DescribeResourceTags(data: DescribeResourceTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTagsResponse>;
-  /** 查看回热任务列表 */
+  /** {@link DescribeRestoreTasks 查看回热任务列表}({@link DescribeRestoreTasksRequest 请求参数}): {@link DescribeRestoreTasksResponse 返回参数} */
   DescribeRestoreTasks(data: DescribeRestoreTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRestoreTasksResponse>;
-  /** 解绑权限组列表 */
+  /** {@link DisassociateAccessGroups 解绑权限组列表}({@link DisassociateAccessGroupsRequest 请求参数}): {@link DisassociateAccessGroupsResponse 返回参数} */
   DisassociateAccessGroups(data: DisassociateAccessGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateAccessGroupsResponse>;
-  /** 修改权限组属性 */
+  /** {@link ModifyAccessGroup 修改权限组属性}({@link ModifyAccessGroupRequest 请求参数}): {@link ModifyAccessGroupResponse 返回参数} */
   ModifyAccessGroup(data: ModifyAccessGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessGroupResponse>;
-  /** 批量修改权限规则属性 */
+  /** {@link ModifyAccessRules 批量修改权限规则属性}({@link ModifyAccessRulesRequest 请求参数}): {@link ModifyAccessRulesResponse 返回参数} */
   ModifyAccessRules(data: ModifyAccessRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessRulesResponse>;
-  /** 修改文件系统属性 */
+  /** {@link ModifyFileSystem 修改文件系统属性}({@link ModifyFileSystemRequest 请求参数}): {@link ModifyFileSystemResponse 返回参数} */
   ModifyFileSystem(data: ModifyFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFileSystemResponse>;
-  /** 批量修改生命周期规则属性 */
+  /** {@link ModifyLifeCycleRules 批量修改生命周期规则属性}({@link ModifyLifeCycleRulesRequest 请求参数}): {@link ModifyLifeCycleRulesResponse 返回参数} */
   ModifyLifeCycleRules(data: ModifyLifeCycleRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLifeCycleRulesResponse>;
-  /** 修改挂载点属性 */
+  /** {@link ModifyMountPoint 修改挂载点属性}({@link ModifyMountPointRequest 请求参数}): {@link ModifyMountPointResponse 返回参数} */
   ModifyMountPoint(data: ModifyMountPointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMountPointResponse>;
-  /** 修改资源标签列表 */
+  /** {@link ModifyResourceTags 修改资源标签列表}({@link ModifyResourceTagsRequest 请求参数}): {@link ModifyResourceTagsResponse 返回参数} */
   ModifyResourceTags(data: ModifyResourceTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceTagsResponse>;
-  /** 创建权限组 */
+  /** {@link V20190718.CreateAccessGroup 创建权限组}({@link V20190718.CreateAccessGroupRequest 请求参数}): {@link V20190718.CreateAccessGroupResponse 返回参数} */
   CreateAccessGroup(data: V20190718.CreateAccessGroupRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.CreateAccessGroupResponse>;
-  /** 批量创建权限规则 */
+  /** {@link V20190718.CreateAccessRules 批量创建权限规则}({@link V20190718.CreateAccessRulesRequest 请求参数}): {@link V20190718.CreateAccessRulesResponse 返回参数} */
   CreateAccessRules(data: V20190718.CreateAccessRulesRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.CreateAccessRulesResponse>;
-  /** 创建文件系统 */
+  /** {@link V20190718.CreateFileSystem 创建文件系统}({@link V20190718.CreateFileSystemRequest 请求参数}): {@link V20190718.CreateFileSystemResponse 返回参数} */
   CreateFileSystem(data: V20190718.CreateFileSystemRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.CreateFileSystemResponse>;
-  /** 批量创建生命周期规则 */
+  /** {@link V20190718.CreateLifeCycleRules 批量创建生命周期规则}({@link V20190718.CreateLifeCycleRulesRequest 请求参数}): {@link V20190718.CreateLifeCycleRulesResponse 返回参数} */
   CreateLifeCycleRules(data: V20190718.CreateLifeCycleRulesRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.CreateLifeCycleRulesResponse>;
-  /** 创建挂载点 */
+  /** {@link V20190718.CreateMountPoint 创建挂载点}({@link V20190718.CreateMountPointRequest 请求参数}): {@link V20190718.CreateMountPointResponse 返回参数} */
   CreateMountPoint(data: V20190718.CreateMountPointRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.CreateMountPointResponse>;
-  /** 批量创建回热任务 */
+  /** {@link V20190718.CreateRestoreTasks 批量创建回热任务}({@link V20190718.CreateRestoreTasksRequest 请求参数}): {@link V20190718.CreateRestoreTasksResponse 返回参数} */
   CreateRestoreTasks(data: V20190718.CreateRestoreTasksRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.CreateRestoreTasksResponse>;
-  /** 删除权限组 */
+  /** {@link V20190718.DeleteAccessGroup 删除权限组}({@link V20190718.DeleteAccessGroupRequest 请求参数}): {@link V20190718.DeleteAccessGroupResponse 返回参数} */
   DeleteAccessGroup(data: V20190718.DeleteAccessGroupRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.DeleteAccessGroupResponse>;
-  /** 批量删除权限规则 */
+  /** {@link V20190718.DeleteAccessRules 批量删除权限规则}({@link V20190718.DeleteAccessRulesRequest 请求参数}): {@link V20190718.DeleteAccessRulesResponse 返回参数} */
   DeleteAccessRules(data: V20190718.DeleteAccessRulesRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.DeleteAccessRulesResponse>;
-  /** 删除文件系统 */
+  /** {@link V20190718.DeleteFileSystem 删除文件系统}({@link V20190718.DeleteFileSystemRequest 请求参数}): {@link V20190718.DeleteFileSystemResponse 返回参数} */
   DeleteFileSystem(data: V20190718.DeleteFileSystemRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.DeleteFileSystemResponse>;
-  /** 批量删除生命周期规则 */
+  /** {@link V20190718.DeleteLifeCycleRules 批量删除生命周期规则}({@link V20190718.DeleteLifeCycleRulesRequest 请求参数}): {@link V20190718.DeleteLifeCycleRulesResponse 返回参数} */
   DeleteLifeCycleRules(data: V20190718.DeleteLifeCycleRulesRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.DeleteLifeCycleRulesResponse>;
-  /** 删除挂载点 */
+  /** {@link V20190718.DeleteMountPoint 删除挂载点}({@link V20190718.DeleteMountPointRequest 请求参数}): {@link V20190718.DeleteMountPointResponse 返回参数} */
   DeleteMountPoint(data: V20190718.DeleteMountPointRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.DeleteMountPointResponse>;
-  /** 查看权限组列表 */
+  /** {@link V20190718.DescribeAccessGroups 查看权限组列表}({@link V20190718.DescribeAccessGroupsRequest 请求参数}): {@link V20190718.DescribeAccessGroupsResponse 返回参数} */
   DescribeAccessGroups(data: V20190718.DescribeAccessGroupsRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.DescribeAccessGroupsResponse>;
-  /** 查看权限规则列表 */
+  /** {@link V20190718.DescribeAccessRules 查看权限规则列表}({@link V20190718.DescribeAccessRulesRequest 请求参数}): {@link V20190718.DescribeAccessRulesResponse 返回参数} */
   DescribeAccessRules(data: V20190718.DescribeAccessRulesRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.DescribeAccessRulesResponse>;
-  /** 查看文件系统详细信息 */
+  /** {@link V20190718.DescribeFileSystem 查看文件系统详细信息}({@link V20190718.DescribeFileSystemRequest 请求参数}): {@link V20190718.DescribeFileSystemResponse 返回参数} */
   DescribeFileSystem(data: V20190718.DescribeFileSystemRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.DescribeFileSystemResponse>;
-  /** 查看文件系统列表 */
+  /** {@link V20190718.DescribeFileSystems 查看文件系统列表}({@link V20190718.DescribeFileSystemsRequest 请求参数}): {@link V20190718.DescribeFileSystemsResponse 返回参数} */
   DescribeFileSystems(data: V20190718.DescribeFileSystemsRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.DescribeFileSystemsResponse>;
-  /** 查看生命周期规则列表 */
+  /** {@link V20190718.DescribeLifeCycleRules 查看生命周期规则列表}({@link V20190718.DescribeLifeCycleRulesRequest 请求参数}): {@link V20190718.DescribeLifeCycleRulesResponse 返回参数} */
   DescribeLifeCycleRules(data: V20190718.DescribeLifeCycleRulesRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.DescribeLifeCycleRulesResponse>;
-  /** 查看挂载点详细信息 */
+  /** {@link V20190718.DescribeMountPoint 查看挂载点详细信息}({@link V20190718.DescribeMountPointRequest 请求参数}): {@link V20190718.DescribeMountPointResponse 返回参数} */
   DescribeMountPoint(data: V20190718.DescribeMountPointRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.DescribeMountPointResponse>;
-  /** 查看挂载点列表 */
+  /** {@link V20190718.DescribeMountPoints 查看挂载点列表}({@link V20190718.DescribeMountPointsRequest 请求参数}): {@link V20190718.DescribeMountPointsResponse 返回参数} */
   DescribeMountPoints(data: V20190718.DescribeMountPointsRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.DescribeMountPointsResponse>;
-  /** 查看资源标签列表 */
+  /** {@link V20190718.DescribeResourceTags 查看资源标签列表}({@link V20190718.DescribeResourceTagsRequest 请求参数}): {@link V20190718.DescribeResourceTagsResponse 返回参数} */
   DescribeResourceTags(data: V20190718.DescribeResourceTagsRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.DescribeResourceTagsResponse>;
-  /** 查看回热任务列表 */
+  /** {@link V20190718.DescribeRestoreTasks 查看回热任务列表}({@link V20190718.DescribeRestoreTasksRequest 请求参数}): {@link V20190718.DescribeRestoreTasksResponse 返回参数} */
   DescribeRestoreTasks(data: V20190718.DescribeRestoreTasksRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.DescribeRestoreTasksResponse>;
-  /** 修改权限组属性 */
+  /** {@link V20190718.ModifyAccessGroup 修改权限组属性}({@link V20190718.ModifyAccessGroupRequest 请求参数}): {@link V20190718.ModifyAccessGroupResponse 返回参数} */
   ModifyAccessGroup(data: V20190718.ModifyAccessGroupRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.ModifyAccessGroupResponse>;
-  /** 批量修改权限规则属性 */
+  /** {@link V20190718.ModifyAccessRules 批量修改权限规则属性}({@link V20190718.ModifyAccessRulesRequest 请求参数}): {@link V20190718.ModifyAccessRulesResponse 返回参数} */
   ModifyAccessRules(data: V20190718.ModifyAccessRulesRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.ModifyAccessRulesResponse>;
-  /** 修改文件系统属性 */
+  /** {@link V20190718.ModifyFileSystem 修改文件系统属性}({@link V20190718.ModifyFileSystemRequest 请求参数}): {@link V20190718.ModifyFileSystemResponse 返回参数} */
   ModifyFileSystem(data: V20190718.ModifyFileSystemRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.ModifyFileSystemResponse>;
-  /** 批量修改生命周期规则属性 */
+  /** {@link V20190718.ModifyLifeCycleRules 批量修改生命周期规则属性}({@link V20190718.ModifyLifeCycleRulesRequest 请求参数}): {@link V20190718.ModifyLifeCycleRulesResponse 返回参数} */
   ModifyLifeCycleRules(data: V20190718.ModifyLifeCycleRulesRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.ModifyLifeCycleRulesResponse>;
-  /** 修改挂载点属性 */
+  /** {@link V20190718.ModifyMountPoint 修改挂载点属性}({@link V20190718.ModifyMountPointRequest 请求参数}): {@link V20190718.ModifyMountPointResponse 返回参数} */
   ModifyMountPoint(data: V20190718.ModifyMountPointRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.ModifyMountPointResponse>;
-  /** 修改资源标签列表 */
+  /** {@link V20190718.ModifyResourceTags 修改资源标签列表}({@link V20190718.ModifyResourceTagsRequest 请求参数}): {@link V20190718.ModifyResourceTagsResponse 返回参数} */
   ModifyResourceTags(data: V20190718.ModifyResourceTagsRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.ModifyResourceTagsResponse>;
 }
 

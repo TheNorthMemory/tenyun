@@ -2140,186 +2140,186 @@ declare interface UploadFirmwareResponse {
   RequestId?: string;
 }
 
-/** [物联网开发平台](https://cloud.tencent.com/document/product/1081) */
+/** {@link Iotexplorer 物联网开发平台} */
 declare interface Iotexplorer {
   (): Versions;
-  /** 批量绑定子设备 */
+  /** {@link BindDevices 批量绑定子设备}({@link BindDevicesRequest 请求参数}): {@link BindDevicesResponse 返回参数} */
   BindDevices(data: BindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<BindDevicesResponse>;
-  /** 批量绑定子产品 */
+  /** {@link BindProducts 批量绑定子产品}({@link BindProductsRequest 请求参数}): {@link BindProductsResponse 返回参数} */
   BindProducts(data: BindProductsRequest, config?: AxiosRequestConfig): AxiosPromise<BindProductsResponse>;
-  /** 异步调用设备行为 */
+  /** {@link CallDeviceActionAsync 异步调用设备行为}({@link CallDeviceActionAsyncRequest 请求参数}): {@link CallDeviceActionAsyncResponse 返回参数} */
   CallDeviceActionAsync(data: CallDeviceActionAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionAsyncResponse>;
-  /** 同步调用设备行为 */
+  /** {@link CallDeviceActionSync 同步调用设备行为}({@link CallDeviceActionSyncRequest 请求参数}): {@link CallDeviceActionSyncResponse 返回参数} */
   CallDeviceActionSync(data: CallDeviceActionSyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionSyncResponse>;
-  /** 设备远程控制 */
+  /** {@link ControlDeviceData 设备远程控制}({@link ControlDeviceDataRequest 请求参数}): {@link ControlDeviceDataResponse 返回参数} */
   ControlDeviceData(data: ControlDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDeviceDataResponse>;
-  /** 创建量产任务 */
+  /** {@link CreateBatchProduction 创建量产任务}({@link CreateBatchProductionRequest 请求参数}): {@link CreateBatchProductionResponse 返回参数} */
   CreateBatchProduction(data: CreateBatchProductionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchProductionResponse>;
-  /** 创建设备 */
+  /** {@link CreateDevice 创建设备}({@link CreateDeviceRequest 请求参数}): {@link CreateDeviceResponse 返回参数} */
   CreateDevice(data: CreateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceResponse>;
-  /** 创建围栏绑定信息 */
+  /** {@link CreateFenceBind 创建围栏绑定信息}({@link CreateFenceBindRequest 请求参数}): {@link CreateFenceBindResponse 返回参数} */
   CreateFenceBind(data: CreateFenceBindRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFenceBindResponse>;
-  /** 创建 LoRa 自定义频点 */
+  /** {@link CreateLoRaFrequency 创建 LoRa 自定义频点}({@link CreateLoRaFrequencyRequest 请求参数}): {@link CreateLoRaFrequencyResponse 返回参数} */
   CreateLoRaFrequency(data?: CreateLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoRaFrequencyResponse>;
-  /** 新建 LoRa 网关设备 */
+  /** {@link CreateLoRaGateway 新建 LoRa 网关设备}({@link CreateLoRaGatewayRequest 请求参数}): {@link CreateLoRaGatewayResponse 返回参数} */
   CreateLoRaGateway(data: CreateLoRaGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoRaGatewayResponse>;
-  /** 创建围栏 */
+  /** {@link CreatePositionFence 创建围栏}({@link CreatePositionFenceRequest 请求参数}): {@link CreatePositionFenceResponse 返回参数} */
   CreatePositionFence(data: CreatePositionFenceRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePositionFenceResponse>;
-  /** 创建位置空间 */
+  /** {@link CreatePositionSpace 创建位置空间}({@link CreatePositionSpaceRequest 请求参数}): {@link CreatePositionSpaceResponse 返回参数} */
   CreatePositionSpace(data: CreatePositionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePositionSpaceResponse>;
-  /** 新建项目 */
+  /** {@link CreateProject 新建项目}({@link CreateProjectRequest 请求参数}): {@link CreateProjectResponse 返回参数} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
-  /** 新建产品 */
+  /** {@link CreateStudioProduct 新建产品}({@link CreateStudioProductRequest 请求参数}): {@link CreateStudioProductResponse 返回参数} */
   CreateStudioProduct(data: CreateStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStudioProductResponse>;
-  /** 创建Topic */
+  /** {@link CreateTopicPolicy 创建Topic}({@link CreateTopicPolicyRequest 请求参数}): {@link CreateTopicPolicyResponse 返回参数} */
   CreateTopicPolicy(data: CreateTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicPolicyResponse>;
-  /** 创建规则 */
+  /** {@link CreateTopicRule 创建规则}({@link CreateTopicRuleRequest 请求参数}): {@link CreateTopicRuleResponse 返回参数} */
   CreateTopicRule(data: CreateTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicRuleResponse>;
-  /** 删除设备 */
+  /** {@link DeleteDevice 删除设备}({@link DeleteDeviceRequest 请求参数}): {@link DeleteDeviceResponse 返回参数} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
-  /** 批量删除设备 */
+  /** {@link DeleteDevices 批量删除设备}({@link DeleteDevicesRequest 请求参数}): {@link DeleteDevicesResponse 返回参数} */
   DeleteDevices(data: DeleteDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDevicesResponse>;
-  /** 删除围栏绑定信息 */
+  /** {@link DeleteFenceBind 删除围栏绑定信息}({@link DeleteFenceBindRequest 请求参数}): {@link DeleteFenceBindResponse 返回参数} */
   DeleteFenceBind(data: DeleteFenceBindRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFenceBindResponse>;
-  /** 删除LoRa自定义频点 */
+  /** {@link DeleteLoRaFrequency 删除LoRa自定义频点}({@link DeleteLoRaFrequencyRequest 请求参数}): {@link DeleteLoRaFrequencyResponse 返回参数} */
   DeleteLoRaFrequency(data?: DeleteLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoRaFrequencyResponse>;
-  /** 删除 LoRa 网关 */
+  /** {@link DeleteLoRaGateway 删除 LoRa 网关}({@link DeleteLoRaGatewayRequest 请求参数}): {@link DeleteLoRaGatewayResponse 返回参数} */
   DeleteLoRaGateway(data: DeleteLoRaGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoRaGatewayResponse>;
-  /** 删除围栏 */
+  /** {@link DeletePositionFence 删除围栏}({@link DeletePositionFenceRequest 请求参数}): {@link DeletePositionFenceResponse 返回参数} */
   DeletePositionFence(data: DeletePositionFenceRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePositionFenceResponse>;
-  /** 删除位置空间 */
+  /** {@link DeletePositionSpace 删除位置空间}({@link DeletePositionSpaceRequest 请求参数}): {@link DeletePositionSpaceResponse 返回参数} */
   DeletePositionSpace(data: DeletePositionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePositionSpaceResponse>;
-  /** 删除项目 */
+  /** {@link DeleteProject 删除项目}({@link DeleteProjectRequest 请求参数}): {@link DeleteProjectResponse 返回参数} */
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
-  /** 删除产品 */
+  /** {@link DeleteStudioProduct 删除产品}({@link DeleteStudioProductRequest 请求参数}): {@link DeleteStudioProductResponse 返回参数} */
   DeleteStudioProduct(data: DeleteStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStudioProductResponse>;
-  /** 删除Topic */
+  /** {@link DeleteTopicPolicy 删除Topic}({@link DeleteTopicPolicyRequest 请求参数}): {@link DeleteTopicPolicyResponse 返回参数} */
   DeleteTopicPolicy(data: DeleteTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicPolicyResponse>;
-  /** 删除规则 */
+  /** {@link DeleteTopicRule 删除规则}({@link DeleteTopicRuleRequest 请求参数}): {@link DeleteTopicRuleResponse 返回参数} */
   DeleteTopicRule(data: DeleteTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicRuleResponse>;
-  /** 获取量产详情 */
+  /** {@link DescribeBatchProduction 获取量产详情}({@link DescribeBatchProductionRequest 请求参数}): {@link DescribeBatchProductionResponse 返回参数} */
   DescribeBatchProduction(data: DescribeBatchProductionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchProductionResponse>;
-  /** 获取网关产品已经绑定的子产品 */
+  /** {@link DescribeBindedProducts 获取网关产品已经绑定的子产品}({@link DescribeBindedProductsRequest 请求参数}): {@link DescribeBindedProductsResponse 返回参数} */
   DescribeBindedProducts(data: DescribeBindedProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindedProductsResponse>;
-  /** 查看设备详情 */
+  /** {@link DescribeDevice 查看设备详情}({@link DescribeDeviceRequest 请求参数}): {@link DescribeDeviceResponse 返回参数} */
   DescribeDevice(data: DescribeDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceResponse>;
-  /** 查询设备绑定的网关设备 */
+  /** {@link DescribeDeviceBindGateway 查询设备绑定的网关设备}({@link DescribeDeviceBindGatewayRequest 请求参数}): {@link DescribeDeviceBindGatewayResponse 返回参数} */
   DescribeDeviceBindGateway(data: DescribeDeviceBindGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceBindGatewayResponse>;
-  /** 获取设备属性数据 */
+  /** {@link DescribeDeviceData 获取设备属性数据}({@link DescribeDeviceDataRequest 请求参数}): {@link DescribeDeviceDataResponse 返回参数} */
   DescribeDeviceData(data: DescribeDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDataResponse>;
-  /** 获取设备历史数据 */
+  /** {@link DescribeDeviceDataHistory 获取设备历史数据}({@link DescribeDeviceDataHistoryRequest 请求参数}): {@link DescribeDeviceDataHistoryResponse 返回参数} */
   DescribeDeviceDataHistory(data: DescribeDeviceDataHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDataHistoryResponse>;
-  /** 获取设备位置列表 */
+  /** {@link DescribeDevicePositionList 获取设备位置列表}({@link DescribeDevicePositionListRequest 请求参数}): {@link DescribeDevicePositionListResponse 返回参数} */
   DescribeDevicePositionList(data: DescribeDevicePositionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePositionListResponse>;
-  /** 获取围栏绑定信息列表 */
+  /** {@link DescribeFenceBindList 获取围栏绑定信息列表}({@link DescribeFenceBindListRequest 请求参数}): {@link DescribeFenceBindListResponse 返回参数} */
   DescribeFenceBindList(data: DescribeFenceBindListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFenceBindListResponse>;
-  /** 获取围栏告警事件列表 */
+  /** {@link DescribeFenceEventList 获取围栏告警事件列表}({@link DescribeFenceEventListRequest 请求参数}): {@link DescribeFenceEventListResponse 返回参数} */
   DescribeFenceEventList(data: DescribeFenceEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFenceEventListResponse>;
-  /** 查询固件升级任务列表 */
+  /** {@link DescribeFirmwareTask 查询固件升级任务列表}({@link DescribeFirmwareTaskRequest 请求参数}): {@link DescribeFirmwareTaskResponse 返回参数} */
   DescribeFirmwareTask(data: DescribeFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskResponse>;
-  /** 获取网关绑定的子设备列表 */
+  /** {@link DescribeGatewayBindDevices 获取网关绑定的子设备列表}({@link DescribeGatewayBindDevicesRequest 请求参数}): {@link DescribeGatewayBindDevicesResponse 返回参数} */
   DescribeGatewayBindDevices(data: DescribeGatewayBindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayBindDevicesResponse>;
-  /** 查询绑定到家庭的网关设备的子设备列表 */
+  /** {@link DescribeGatewaySubDeviceList 查询绑定到家庭的网关设备的子设备列表}({@link DescribeGatewaySubDeviceListRequest 请求参数}): {@link DescribeGatewaySubDeviceListResponse 返回参数} */
   DescribeGatewaySubDeviceList(data: DescribeGatewaySubDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewaySubDeviceListResponse>;
-  /** 获取网关可操作的子产品 */
+  /** {@link DescribeGatewaySubProducts 获取网关可操作的子产品}({@link DescribeGatewaySubProductsRequest 请求参数}): {@link DescribeGatewaySubProductsResponse 返回参数} */
   DescribeGatewaySubProducts(data: DescribeGatewaySubProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewaySubProductsResponse>;
-  /** 获取LoRa自定义频点详情 */
+  /** {@link DescribeLoRaFrequency 获取LoRa自定义频点详情}({@link DescribeLoRaFrequencyRequest 请求参数}): {@link DescribeLoRaFrequencyResponse 返回参数} */
   DescribeLoRaFrequency(data?: DescribeLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoRaFrequencyResponse>;
-  /** 查询产品数据模板 */
+  /** {@link DescribeModelDefinition 查询产品数据模板}({@link DescribeModelDefinitionRequest 请求参数}): {@link DescribeModelDefinitionResponse 返回参数} */
   DescribeModelDefinition(data: DescribeModelDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelDefinitionResponse>;
-  /** 获取围栏列表 */
+  /** {@link DescribePositionFenceList 获取围栏列表}({@link DescribePositionFenceListRequest 请求参数}): {@link DescribePositionFenceListResponse 返回参数} */
   DescribePositionFenceList(data: DescribePositionFenceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePositionFenceListResponse>;
-  /** 查询项目详情 */
+  /** {@link DescribeProject 查询项目详情}({@link DescribeProjectRequest 请求参数}): {@link DescribeProjectResponse 返回参数} */
   DescribeProject(data: DescribeProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectResponse>;
-  /** 获取位置空间中围栏告警事件列表 */
+  /** {@link DescribeSpaceFenceEventList 获取位置空间中围栏告警事件列表}({@link DescribeSpaceFenceEventListRequest 请求参数}): {@link DescribeSpaceFenceEventListResponse 返回参数} */
   DescribeSpaceFenceEventList(data: DescribeSpaceFenceEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpaceFenceEventListResponse>;
-  /** 获取产品详情 */
+  /** {@link DescribeStudioProduct 获取产品详情}({@link DescribeStudioProductRequest 请求参数}): {@link DescribeStudioProductResponse 返回参数} */
   DescribeStudioProduct(data: DescribeStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStudioProductResponse>;
-  /** 查看Topic详情 */
+  /** {@link DescribeTopicPolicy 查看Topic详情}({@link DescribeTopicPolicyRequest 请求参数}): {@link DescribeTopicPolicyResponse 返回参数} */
   DescribeTopicPolicy(data: DescribeTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicPolicyResponse>;
-  /** 获取规则信息 */
+  /** {@link DescribeTopicRule 获取规则信息}({@link DescribeTopicRuleRequest 请求参数}): {@link DescribeTopicRuleResponse 返回参数} */
   DescribeTopicRule(data: DescribeTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicRuleResponse>;
-  /** 直接绑定设备和家庭 */
+  /** {@link DirectBindDeviceInFamily 直接绑定设备和家庭}({@link DirectBindDeviceInFamilyRequest 请求参数}): {@link DirectBindDeviceInFamilyResponse 返回参数} */
   DirectBindDeviceInFamily(data: DirectBindDeviceInFamilyRequest, config?: AxiosRequestConfig): AxiosPromise<DirectBindDeviceInFamilyResponse>;
-  /** 禁用规则 */
+  /** {@link DisableTopicRule 禁用规则}({@link DisableTopicRuleRequest 请求参数}): {@link DisableTopicRuleResponse 返回参数} */
   DisableTopicRule(data: DisableTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DisableTopicRuleResponse>;
-  /** 启用规则 */
+  /** {@link EnableTopicRule 启用规则}({@link EnableTopicRuleRequest 请求参数}): {@link EnableTopicRuleResponse 返回参数} */
   EnableTopicRule(data: EnableTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTopicRuleResponse>;
-  /** 生成单个设备绑定的签名 */
+  /** {@link GenSingleDeviceSignatureOfPublic 生成单个设备绑定的签名}({@link GenSingleDeviceSignatureOfPublicRequest 请求参数}): {@link GenSingleDeviceSignatureOfPublicResponse 返回参数} */
   GenSingleDeviceSignatureOfPublic(data: GenSingleDeviceSignatureOfPublicRequest, config?: AxiosRequestConfig): AxiosPromise<GenSingleDeviceSignatureOfPublicResponse>;
-  /** 列出量产数据列表 */
+  /** {@link GetBatchProductionsList 列出量产数据列表}({@link GetBatchProductionsListRequest 请求参数}): {@link GetBatchProductionsListResponse 返回参数} */
   GetBatchProductionsList(data: GetBatchProductionsListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBatchProductionsListResponse>;
-  /** 获取固件存储请求地址 */
+  /** {@link GetCOSURL 获取固件存储请求地址}({@link GetCOSURLRequest 请求参数}): {@link GetCOSURLResponse 返回参数} */
   GetCOSURL(data: GetCOSURLRequest, config?: AxiosRequestConfig): AxiosPromise<GetCOSURLResponse>;
-  /** 获取产品的设备列表 */
+  /** {@link GetDeviceList 获取产品的设备列表}({@link GetDeviceListRequest 请求参数}): {@link GetDeviceListResponse 返回参数} */
   GetDeviceList(data: GetDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceListResponse>;
-  /** 获取设备历史位置 */
+  /** {@link GetDeviceLocationHistory 获取设备历史位置}({@link GetDeviceLocationHistoryRequest 请求参数}): {@link GetDeviceLocationHistoryResponse 返回参数} */
   GetDeviceLocationHistory(data: GetDeviceLocationHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceLocationHistoryResponse>;
-  /** 获取设备绑定的用户列表 */
+  /** {@link GetFamilyDeviceUserList 获取设备绑定的用户列表}({@link GetFamilyDeviceUserListRequest 请求参数}): {@link GetFamilyDeviceUserListResponse 返回参数} */
   GetFamilyDeviceUserList(data: GetFamilyDeviceUserListRequest, config?: AxiosRequestConfig): AxiosPromise<GetFamilyDeviceUserListResponse>;
-  /** 获取指定网关设备的子设备列表 */
+  /** {@link GetGatewaySubDeviceList 获取指定网关设备的子设备列表}({@link GetGatewaySubDeviceListRequest 请求参数}): {@link GetGatewaySubDeviceListResponse 返回参数} */
   GetGatewaySubDeviceList(data: GetGatewaySubDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetGatewaySubDeviceListResponse>;
-  /** 获取 LoRa 网关列表 */
+  /** {@link GetLoRaGatewayList 获取 LoRa 网关列表}({@link GetLoRaGatewayListRequest 请求参数}): {@link GetLoRaGatewayListResponse 返回参数} */
   GetLoRaGatewayList(data: GetLoRaGatewayListRequest, config?: AxiosRequestConfig): AxiosPromise<GetLoRaGatewayListResponse>;
-  /** 获取位置空间列表 */
+  /** {@link GetPositionSpaceList 获取位置空间列表}({@link GetPositionSpaceListRequest 请求参数}): {@link GetPositionSpaceListResponse 返回参数} */
   GetPositionSpaceList(data: GetPositionSpaceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetPositionSpaceListResponse>;
-  /** 获取项目列表 */
+  /** {@link GetProjectList 获取项目列表}({@link GetProjectListRequest 请求参数}): {@link GetProjectListResponse 返回参数} */
   GetProjectList(data?: GetProjectListRequest, config?: AxiosRequestConfig): AxiosPromise<GetProjectListResponse>;
-  /** 获取产品列表 */
+  /** {@link GetStudioProductList 获取产品列表}({@link GetStudioProductListRequest 请求参数}): {@link GetStudioProductListResponse 返回参数} */
   GetStudioProductList(data?: GetStudioProductListRequest, config?: AxiosRequestConfig): AxiosPromise<GetStudioProductListResponse>;
-  /** 获取规则列表 */
+  /** {@link GetTopicRuleList 获取规则列表}({@link GetTopicRuleListRequest 请求参数}): {@link GetTopicRuleListResponse 返回参数} */
   GetTopicRuleList(data: GetTopicRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicRuleListResponse>;
-  /** 获取设备的历史事件 */
+  /** {@link ListEventHistory 获取设备的历史事件}({@link ListEventHistoryRequest 请求参数}): {@link ListEventHistoryResponse 返回参数} */
   ListEventHistory(data: ListEventHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<ListEventHistoryResponse>;
-  /** 获取固件列表 */
+  /** {@link ListFirmwares 获取固件列表}({@link ListFirmwaresRequest 请求参数}): {@link ListFirmwaresResponse 返回参数} */
   ListFirmwares(data: ListFirmwaresRequest, config?: AxiosRequestConfig): AxiosPromise<ListFirmwaresResponse>;
-  /** 获取Topic列表 */
+  /** {@link ListTopicPolicy 获取Topic列表}({@link ListTopicPolicyRequest 请求参数}): {@link ListTopicPolicyResponse 返回参数} */
   ListTopicPolicy(data: ListTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopicPolicyResponse>;
-  /** 更新围栏绑定信息 */
+  /** {@link ModifyFenceBind 更新围栏绑定信息}({@link ModifyFenceBindRequest 请求参数}): {@link ModifyFenceBindResponse 返回参数} */
   ModifyFenceBind(data: ModifyFenceBindRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFenceBindResponse>;
-  /** 修改LoRa自定义频点 */
+  /** {@link ModifyLoRaFrequency 修改LoRa自定义频点}({@link ModifyLoRaFrequencyRequest 请求参数}): {@link ModifyLoRaFrequencyResponse 返回参数} */
   ModifyLoRaFrequency(data?: ModifyLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoRaFrequencyResponse>;
-  /** 修改 LoRa 网关信息 */
+  /** {@link ModifyLoRaGateway 修改 LoRa 网关信息}({@link ModifyLoRaGatewayRequest 请求参数}): {@link ModifyLoRaGatewayResponse 返回参数} */
   ModifyLoRaGateway(data: ModifyLoRaGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoRaGatewayResponse>;
-  /** 修改产品数据模板 */
+  /** {@link ModifyModelDefinition 修改产品数据模板}({@link ModifyModelDefinitionRequest 请求参数}): {@link ModifyModelDefinitionResponse 返回参数} */
   ModifyModelDefinition(data: ModifyModelDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelDefinitionResponse>;
-  /** 更新围栏 */
+  /** {@link ModifyPositionFence 更新围栏}({@link ModifyPositionFenceRequest 请求参数}): {@link ModifyPositionFenceResponse 返回参数} */
   ModifyPositionFence(data?: ModifyPositionFenceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPositionFenceResponse>;
-  /** 更新位置空间 */
+  /** {@link ModifyPositionSpace 更新位置空间}({@link ModifyPositionSpaceRequest 请求参数}): {@link ModifyPositionSpaceResponse 返回参数} */
   ModifyPositionSpace(data: ModifyPositionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPositionSpaceResponse>;
-  /** 修改项目 */
+  /** {@link ModifyProject 修改项目}({@link ModifyProjectRequest 请求参数}): {@link ModifyProjectResponse 返回参数} */
   ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
-  /** 更新位置空间产品属性 */
+  /** {@link ModifySpaceProperty 更新位置空间产品属性}({@link ModifySpacePropertyRequest 请求参数}): {@link ModifySpacePropertyResponse 返回参数} */
   ModifySpaceProperty(data: ModifySpacePropertyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySpacePropertyResponse>;
-  /** 修改产品 */
+  /** {@link ModifyStudioProduct 修改产品}({@link ModifyStudioProductRequest 请求参数}): {@link ModifyStudioProductResponse 返回参数} */
   ModifyStudioProduct(data: ModifyStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStudioProductResponse>;
-  /** 更新Topic */
+  /** {@link ModifyTopicPolicy 更新Topic}({@link ModifyTopicPolicyRequest 请求参数}): {@link ModifyTopicPolicyResponse 返回参数} */
   ModifyTopicPolicy(data: ModifyTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicPolicyResponse>;
-  /** 修改规则 */
+  /** {@link ModifyTopicRule 修改规则}({@link ModifyTopicRuleRequest 请求参数}): {@link ModifyTopicRuleResponse 返回参数} */
   ModifyTopicRule(data: ModifyTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicRuleResponse>;
-  /** 发布广播消息 */
+  /** {@link PublishBroadcastMessage 发布广播消息}({@link PublishBroadcastMessageRequest 请求参数}): {@link PublishBroadcastMessageResponse 返回参数} */
   PublishBroadcastMessage(data: PublishBroadcastMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishBroadcastMessageResponse>;
-  /** 设备透传指令控制 */
+  /** {@link PublishMessage 设备透传指令控制}({@link PublishMessageRequest 请求参数}): {@link PublishMessageResponse 返回参数} */
   PublishMessage(data: PublishMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishMessageResponse>;
-  /** 发布RRPC消息 */
+  /** {@link PublishRRPCMessage 发布RRPC消息}({@link PublishRRPCMessageRequest 请求参数}): {@link PublishRRPCMessageResponse 返回参数} */
   PublishRRPCMessage(data: PublishRRPCMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishRRPCMessageResponse>;
-  /** 发布产品 */
+  /** {@link ReleaseStudioProduct 发布产品}({@link ReleaseStudioProductRequest 请求参数}): {@link ReleaseStudioProductResponse 返回参数} */
   ReleaseStudioProduct(data: ReleaseStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseStudioProductResponse>;
-  /** 搜索位置空间 */
+  /** {@link SearchPositionSpace 搜索位置空间}({@link SearchPositionSpaceRequest 请求参数}): {@link SearchPositionSpaceResponse 返回参数} */
   SearchPositionSpace(data: SearchPositionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<SearchPositionSpaceResponse>;
-  /** 搜索产品 */
+  /** {@link SearchStudioProduct 搜索产品}({@link SearchStudioProductRequest 请求参数}): {@link SearchStudioProductResponse 返回参数} */
   SearchStudioProduct(data?: SearchStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<SearchStudioProductResponse>;
-  /** 搜索规则 */
+  /** {@link SearchTopicRule 搜索规则}({@link SearchTopicRuleRequest 请求参数}): {@link SearchTopicRuleResponse 返回参数} */
   SearchTopicRule(data: SearchTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SearchTopicRuleResponse>;
-  /** 批量解绑子设备 */
+  /** {@link UnbindDevices 批量解绑子设备}({@link UnbindDevicesRequest 请求参数}): {@link UnbindDevicesResponse 返回参数} */
   UnbindDevices(data: UnbindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDevicesResponse>;
-  /** 批量解绑子产品 */
+  /** {@link UnbindProducts 批量解绑子产品}({@link UnbindProductsRequest 请求参数}): {@link UnbindProductsResponse 返回参数} */
   UnbindProducts(data: UnbindProductsRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindProductsResponse>;
-  /** 批量禁用启用设备 */
+  /** {@link UpdateDevicesEnableState 批量禁用启用设备}({@link UpdateDevicesEnableStateRequest 请求参数}): {@link UpdateDevicesEnableStateResponse 返回参数} */
   UpdateDevicesEnableState(data: UpdateDevicesEnableStateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDevicesEnableStateResponse>;
-  /** 更新设备固件 */
+  /** {@link UpdateFirmware 更新设备固件}({@link UpdateFirmwareRequest 请求参数}): {@link UpdateFirmwareResponse 返回参数} */
   UpdateFirmware(data: UpdateFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFirmwareResponse>;
-  /** 创建固件版本信息 */
+  /** {@link UploadFirmware 创建固件版本信息}({@link UploadFirmwareRequest 请求参数}): {@link UploadFirmwareResponse 返回参数} */
   UploadFirmware(data: UploadFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFirmwareResponse>;
 }
 

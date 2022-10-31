@@ -465,437 +465,437 @@ declare interface CloudInstance {
 }
 
 declare type TenYun = CloudInstance & CloudServices & {
-  /** [活动防刷](https://cloud.tencent.com/document/product/1189) */
+  /** {@link Aa 活动防刷} */
   aa: Aa,
   aai: Aai,
-  /** [应用合规平台](https://cloud.tencent.com/document/product/1553) */
+  /** {@link Acp 应用合规平台} */
   acp: Acp,
-  /** [云顾问](https://cloud.tencent.com/document/product/1264) */
+  /** {@link Advisor 云顾问} */
   advisor: Advisor,
-  /** [借贷反欺诈](https://cloud.tencent.com/document/product/668) */
+  /** {@link Af 借贷反欺诈} */
   af: Af,
-  /** [定制建模](https://cloud.tencent.com/document/product/1029) */
+  /** {@link Afc 定制建模} */
   afc: Afc,
-  /** [正版曲库直通车](https://cloud.tencent.com/document/product/1155) */
+  /** {@link Ame 正版曲库直通车} */
   ame: Ame,
-  /** [音频内容检测](https://cloud.tencent.com/document/product/1219) */
+  /** {@link Ams 音频内容安全} */
   ams: Ams,
-  /** [DDoS 防护](https://cloud.tencent.com/document/product/1021) */
+  /** {@link Antiddos T-Sec-DDoS防护(Anti-DDoS)} */
   antiddos: Antiddos,
-  /** [汽车精准获客服务](https://cloud.tencent.com/document/product/1244) */
+  /** {@link Apcas 汽车精准获客服务} */
   apcas: Apcas,
-  /** [正版图库直通车](https://cloud.tencent.com/document/product/1181) */
+  /** {@link Ape 正版图库直通车} */
   ape: Ape,
-  /** [云 API](https://cloud.tencent.com/document/product/1278) */
+  /** {@link Api 云 API} */
   api: Api,
-  /** [API网关](https://cloud.tencent.com/document/product/628) */
+  /** {@link Apigateway API 网关} */
   apigateway: Apigateway,
-  /** [应用性能观测](https://cloud.tencent.com/document/product/1463) */
+  /** {@link Apm 应用性能观测} */
   apm: Apm,
-  /** [语音识别](https://cloud.tencent.com/document/product/1093) */
+  /** {@link Asr 语音识别} */
   asr: Asr,
-  /** [应用与服务编排工作流](https://cloud.tencent.com/document/product/1272) */
+  /** {@link Asw 应用与服务编排工作流} */
   asw: Asw,
-  /** [弹性伸缩](https://cloud.tencent.com/document/product/377) */
+  /** {@link As 弹性伸缩} */
   as: As,
-  /** [网站备案](https://cloud.tencent.com/document/product/243) */
+  /** {@link Ba 网站备案} */
   ba: Ba,
-  /** [批量计算](https://cloud.tencent.com/document/product/599) */
+  /** {@link Batch 批量计算} */
   batch: Batch,
-  /** [人体分析](https://cloud.tencent.com/document/product/1208) */
+  /** {@link Bda 人体分析} */
   bda: Bda,
-  /** [商业智能分析 BI](https://cloud.tencent.com/document/product/590) */
+  /** {@link Bi 商业智能分析 BI} */
   bi: Bi,
-  /** [计费相关](https://cloud.tencent.com/document/product/555) */
+  /** {@link Billing 费用中心} */
   billing: Billing,
-  /** 商业直播 */
+  /** {@link Bizlive 商业直播} */
   bizlive: Bizlive,
-  /** [黑石物理服务器1.0](https://cloud.tencent.com/document/product/386) */
+  /** {@link Bm 黑石物理服务器1.0} */
   bm: Bm,
-  /** [品牌经营管家](https://cloud.tencent.com/document/product/1296) */
+  /** {@link Bma 品牌经营管家} */
   bma: Bma,
-  /** [黑石弹性公网IP](https://cloud.tencent.com/document/product/1028) */
+  /** {@link Bmeip 黑石弹性公网IP} */
   bmeip: Bmeip,
-  /** [黑石负载均衡](https://cloud.tencent.com/document/product/1027) */
+  /** {@link Bmlb 黑石负载均衡} */
   bmlb: Bmlb,
-  /** [黑石私有网络](https://cloud.tencent.com/document/product/1024) */
+  /** {@link Bmvpc 黑石私有网络} */
   bmvpc: Bmvpc,
-  /** [商业流程服务](https://cloud.tencent.com/document/product/1083) */
+  /** {@link Bpaas 商业流程服务} */
   bpaas: Bpaas,
-  /** [业务风险情报](https://cloud.tencent.com/document/product/1064) */
+  /** {@link Bri 业务风险情报} */
   bri: Bri,
-  /** [二进制软件成分分析](https://cloud.tencent.com/document/product/1483) */
+  /** {@link Bsca 二进制软件成分分析} */
   bsca: Bsca,
-  /** [区块链可信取证](https://cloud.tencent.com/document/product/1259) */
+  /** {@link Btoe 区块链可信取证} */
   btoe: Btoe,
-  /** [访问管理](https://cloud.tencent.com/document/product/598) */
+  /** {@link Cam 访问管理} */
   cam: Cam,
-  /** [验证码](https://cloud.tencent.com/document/product/1110) */
+  /** {@link Captcha 验证码} */
   captcha: Captcha,
-  /** [应用云渲染](https://cloud.tencent.com/document/product/1547) */
+  /** {@link Car 应用云渲染} */
   car: Car,
-  /** [云数据加密代理网关](https://cloud.tencent.com/document/product/1303) */
+  /** {@link Casb 云访问安全代理} */
   casb: Casb,
-  /** [云拨测](https://cloud.tencent.com/document/product/280) */
+  /** {@link Cat 云拨测} */
   cat: Cat,
-  /** [云硬盘](https://cloud.tencent.com/document/product/362) */
+  /** {@link Cbs 云硬盘} */
   cbs: Cbs,
-  /** [云呼叫中心](https://cloud.tencent.com/document/product/679) */
+  /** {@link Ccc 云呼叫中心} */
   ccc: Ccc,
-  /** [云数据库 MySQL](https://cloud.tencent.com/document/product/236) */
+  /** {@link Cdb 云数据库 MySQL} */
   cdb: Cdb,
-  /** [本地专用集群](https://cloud.tencent.com/document/product/1346) */
+  /** {@link Cdc 本地专用集群} */
   cdc: Cdc,
-  /** [内容分发网络](https://cloud.tencent.com/document/product/228) */
+  /** {@link Cdn 内容分发网络 CDN} */
   cdn: Cdn,
-  /** [数据安全审计](https://cloud.tencent.com/document/product/856) */
+  /** {@link Cds T-Sec-数据安全审计（DSA）} */
   cds: Cds,
-  /** [混沌演练平台](https://cloud.tencent.com/document/product/1500) */
+  /** {@link Cfg 混沌演练平台} */
   cfg: Cfg,
-  /** [文件存储](https://cloud.tencent.com/document/product/582) */
+  /** {@link Cfs 文件存储} */
   cfs: Cfs,
-  /** [云防火墙](https://cloud.tencent.com/document/product/1132) */
+  /** {@link Cfw 云防火墙} */
   cfw: Cfw,
-  /** [云 HDFS](https://cloud.tencent.com/document/product/1105) */
+  /** {@link Chdfs 云 HDFS} */
   chdfs: Chdfs,
-  /** [账号风控平台](https://cloud.tencent.com/document/product/1441) */
+  /** {@link Ciam 账号风控平台} */
   ciam: Ciam,
-  /** [智能保险助手](https://cloud.tencent.com/document/product/1368) */
+  /** {@link Cii 智能保险助手} */
   cii: Cii,
   cim: Cim,
   cis: Cis,
-  /** [消息队列 Ckafka](https://cloud.tencent.com/document/product/597) */
+  /** {@link Ckafka 消息队列 CKafka} */
   ckafka: Ckafka,
-  /** [负载均衡](https://cloud.tencent.com/document/product/214) */
+  /** {@link Clb 负载均衡} */
   clb: Clb,
-  /** [云审计](https://cloud.tencent.com/document/product/629) */
+  /** {@link Cloudaudit 云审计} */
   cloudaudit: Cloudaudit,
-  /** [云加密机](https://cloud.tencent.com/document/product/639) */
+  /** {@link Cloudhsm 云加密机} */
   cloudhsm: Cloudhsm,
-  /** [云端 IDE](https://cloud.tencent.com/document/product/1039) */
+  /** {@link Cloudstudio Cloud Studio（云端 IDE）} */
   cloudstudio: Cloudstudio,
-  /** [日志服务](https://cloud.tencent.com/document/product/614) */
+  /** {@link Cls 日志服务} */
   cls: Cls,
-  /** [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) */
+  /** {@link Cme 多媒体创作引擎} */
   cme: Cme,
-  /** [消息队列 CMQ](https://cloud.tencent.com/document/product/406) */
+  /** {@link Cmq 消息队列 CMQ} */
   cmq: Cmq,
-  /** 内容安全 */
+  /** {@link Cms 内容安全} */
   cms: Cms,
-  /** [企业收付平台](https://cloud.tencent.com/document/product/1122) */
+  /** {@link Cpdp 企业收付平台} */
   cpdp: Cpdp,
-  /** [金融联络机器人](https://cloud.tencent.com/document/product/656) */
+  /** {@link Cr 金融联络机器人} */
   cr: Cr,
-  /** [云服务器](https://cloud.tencent.com/document/product/213) */
+  /** {@link Cvm 云服务器} */
   cvm: Cvm,
-  /** [主机安全](https://cloud.tencent.com/document/product/296) */
+  /** {@link Cwp 主机安全} */
   cwp: Cwp,
-  /** 漏洞扫描服务 */
+  /** {@link Cws 漏洞扫描服务} */
   cws: Cws,
-  /** [云原生数据库 TDSQL-C](https://cloud.tencent.com/document/product/1003) */
+  /** {@link Cynosdb TDSQL-C MySQL 版} */
   cynosdb: Cynosdb,
-  /** [堡垒机](https://cloud.tencent.com/document/product/1025) */
+  /** {@link Dasb T-Sec-堡垒机（BH）} */
   dasb: Dasb,
-  /** [数据接入平台](https://cloud.tencent.com/document/product/1591) */
+  /** {@link Dataintegration 数据接入平台} */
   dataintegration: Dataintegration,
-  /** [DDoS 高防包](https://cloud.tencent.com/document/product/1021) */
+  /** {@link Dayu DDoS 高防包} */
   dayu: Dayu,
-  /** [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) */
+  /** {@link Dbbrain 数据库智能管家 DBbrain} */
   dbbrain: Dbbrain,
-  /** [云数据库独享集群](https://cloud.tencent.com/document/product/1322) */
+  /** {@link Dbdc 云数据库独享集群} */
   dbdc: Dbdc,
-  /** [专线接入](https://cloud.tencent.com/document/product/216) */
+  /** {@link Dc 专线接入} */
   dc: Dc,
-  /** [分布式数据库 TDSQL](https://cloud.tencent.com/document/product/557) */
+  /** {@link Dcdb TDSQL MySQL 版} */
   dcdb: Dcdb,
-  /** [数据湖计算](https://cloud.tencent.com/document/product/1342) */
+  /** {@link Dlc 数据湖计算 DLC} */
   dlc: Dlc,
-  /** [DNSPod](https://cloud.tencent.com/document/product/1427) */
+  /** {@link Dnspod DNSPod} */
   dnspod: Dnspod,
-  /** [域名注册](https://cloud.tencent.com/document/product/242) */
+  /** {@link Domain 域名注册} */
   domain: Domain,
-  /** [数字版权管理](https://cloud.tencent.com/document/product/1000) */
+  /** {@link Drm 数字版权管理} */
   drm: Drm,
-  /** [电子合同服务](https://cloud.tencent.com/document/product/869) */
+  /** {@link Ds 文档服务} */
   ds: Ds,
-  /** [分布式事务](https://cloud.tencent.com/document/product/1224) */
+  /** {@link Dtf 分布式事务} */
   dtf: Dtf,
-  /** [数据传输服务](https://cloud.tencent.com/document/product/571) */
+  /** {@link Dts 数据传输服务} */
   dts: Dts,
-  /** [事件总线](https://cloud.tencent.com/document/product/1359) */
+  /** {@link Eb 事件总线} */
   eb: Eb,
-  /** [英文作文批改](https://cloud.tencent.com/document/product/1076) */
+  /** {@link Ecc 英文作文批改} */
   ecc: Ecc,
-  /** [全站加速网络](https://cloud.tencent.com/document/product/570) */
+  /** {@link Ecdn 全站加速网络} */
   ecdn: Ecdn,
-  /** [边缘计算机器](https://cloud.tencent.com/document/product/1108) */
+  /** {@link Ecm 边缘计算机器} */
   ecm: Ecm,
-  /** [数字身份管控平台（员工版）](https://cloud.tencent.com/document/product/1442) */
+  /** {@link Eiam 数字身份管控平台（员工版）} */
   eiam: Eiam,
-  /** [企业集成服务](https://cloud.tencent.com/document/product/1270) */
+  /** {@link Eis 数据连接器} */
   eis: Eis,
-  /** [弹性 MapReduce](https://cloud.tencent.com/document/product/589) */
+  /** {@link Emr 弹性 MapReduce} */
   emr: Emr,
-  /** [Elasticsearch Service](https://cloud.tencent.com/document/product/845) */
+  /** {@link Es Elasticsearch Service} */
   es: Es,
-  /** [电子签服务](https://cloud.tencent.com/document/product/1323) */
+  /** {@link Ess 腾讯电子签企业版} */
   ess: Ess,
-  /** [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) */
+  /** {@link Essbasic 腾讯电子签（基础版）} */
   essbasic: Essbasic,
-  /** [人脸融合](https://cloud.tencent.com/document/product/670) */
+  /** {@link Facefusion 人脸融合} */
   facefusion: Facefusion,
-  /** [人脸核身](https://cloud.tencent.com/document/product/1007) */
+  /** {@link Faceid 人脸核身} */
   faceid: Faceid,
-  /** [人脸试妆](https://cloud.tencent.com/document/product/1172) */
+  /** {@link Fmu 人脸试妆} */
   fmu: Fmu,
-  /** [人像变换](https://cloud.tencent.com/document/product/1202) */
+  /** {@link Ft 人像变换} */
   ft: Ft,
-  /** [全球应用加速](https://cloud.tencent.com/document/product/608) */
+  /** {@link Gaap 全球应用加速} */
   gaap: Gaap,
-  /** [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) */
+  /** {@link Gme 游戏多媒体引擎} */
   gme: Gme,
-  /** [游戏玩家匹配](https://cloud.tencent.com/document/product/1294) */
+  /** {@link Gpm 游戏玩家匹配} */
   gpm: Gpm,
-  /** [云游戏解决方案](https://cloud.tencent.com/document/product/1162) */
+  /** {@link Gs 云游戏} */
   gs: Gs,
-  /** [游戏服务器伸缩](https://cloud.tencent.com/document/product/1165) */
+  /** {@link Gse 游戏服务器伸缩} */
   gse: Gse,
   habo: Habo,
-  /** [数学作业批改](https://cloud.tencent.com/document/product/1004) */
+  /** {@link Hcm 数学作业批改} */
   hcm: Hcm,
-  /** [人脸识别](https://cloud.tencent.com/document/product/867) */
+  /** {@link Iai 人脸识别} */
   iai: Iai,
-  /** [物联卡](https://cloud.tencent.com/document/product/636) */
+  /** {@link Ic 图片瘦身} */
   ic: Ic,
-  /** [对话机器人](https://cloud.tencent.com/document/product/1268) */
+  /** {@link Icr 对话机器人} */
   icr: Icr,
-  /** [智能编辑](https://cloud.tencent.com/document/product/1186) */
+  /** {@link Ie 智能编辑} */
   ie: Ie,
-  /** [物联网边缘计算平台](https://cloud.tencent.com/document/product/1118) */
+  /** {@link Iecp 物联网边缘计算平台} */
   iecp: Iecp,
-  /** [智能识图](https://cloud.tencent.com/document/product/1217) */
+  /** {@link Iir 智能识图} */
   iir: Iir,
-  /** [图片内容安全](https://cloud.tencent.com/document/product/1125) */
+  /** {@link Ims 图片内容安全} */
   ims: Ims,
-  /** [加速物联网套件](https://cloud.tencent.com/document/product/568) */
+  /** {@link Iot 加速物联网套件} */
   iot: Iot,
-  /** [物联网通信](https://cloud.tencent.com/document/product/634) */
+  /** {@link Iotcloud 物联网通信} */
   iotcloud: Iotcloud,
-  /** [物联网开发平台](https://cloud.tencent.com/document/product/1081) */
+  /** {@link Iotexplorer 物联网开发平台} */
   iotexplorer: Iotexplorer,
-  /** [物联网设备身份认证](https://cloud.tencent.com/document/product/1086) */
+  /** {@link Iottid 物联网设备身份认证} */
   iottid: Iottid,
-  /** [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) */
+  /** {@link Iotvideo 物联网智能视频服务} */
   iotvideo: Iotvideo,
-  /** [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) */
+  /** {@link Iotvideoindustry 物联网智能视频服务（行业版）} */
   iotvideoindustry: Iotvideoindustry,
-  /** [智能推荐平台](https://cloud.tencent.com/document/product/1541) */
+  /** {@link Irp 智能推荐平台} */
   irp: Irp,
-  /** [媒体智能标签](https://cloud.tencent.com/document/product/1509) */
+  /** {@link Ivld 媒体智能标签} */
   ivld: Ivld,
-  /** [密钥管理系统](https://cloud.tencent.com/document/product/573) */
+  /** {@link Kms 密钥管理系统} */
   kms: Kms,
-  /** [低代码互动课堂](https://cloud.tencent.com/document/product/1639) */
+  /** {@link Lcic 低代码互动课堂} */
   lcic: Lcic,
-  /** [轻量应用服务器](https://cloud.tencent.com/document/product/1207) */
+  /** {@link Lighthouse 轻量应用服务器} */
   lighthouse: Lighthouse,
-  /** [云直播](https://cloud.tencent.com/document/product/267) */
+  /** {@link Live 云直播CSS} */
   live: Live,
-  /** [云开发低码](https://cloud.tencent.com/document/product/1301) */
+  /** {@link Lowcode 云开发低码} */
   lowcode: Lowcode,
-  /** [登录保护](https://cloud.tencent.com/document/product/1190) */
+  /** {@link Lp 登录保护} */
   lp: Lp,
-  /** [云数据库 MariaDB](https://cloud.tencent.com/document/product/237) */
+  /** {@link Mariadb 云数据库 MariaDB} */
   mariadb: Mariadb,
-  /** [云市场](https://cloud.tencent.com/document/product/306) */
+  /** {@link Market 云市场} */
   market: Market,
-  /** [云数据库 Memcached](https://cloud.tencent.com/document/product/241) */
+  /** {@link Memcached 云数据库Memcached} */
   memcached: Memcached,
-  /** [游戏联机对战引擎](https://cloud.tencent.com/document/product/1038) */
+  /** {@link Mgobe 游戏联机对战引擎} */
   mgobe: Mgobe,
-  /** [小程序安全](https://cloud.tencent.com/document/product/1223) */
+  /** {@link Mmps 小程序安全} */
   mmps: Mmps,
-  /** [移动网络加速](https://cloud.tencent.com/document/product/1385) */
+  /** {@link Mna 移动网络加速} */
   mna: Mna,
-  /** [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) */
+  /** {@link Mongodb 云数据库 MongoDB} */
   mongodb: Mongodb,
-  /** [云监控](https://cloud.tencent.com/document/product/248) */
+  /** {@link Monitor 云监控} */
   monitor: Monitor,
-  /** [视频处理](https://cloud.tencent.com/document/product/862) */
+  /** {@link Mps 媒体处理} */
   mps: Mps,
-  /** [医疗报告结构化](https://cloud.tencent.com/document/product/1314) */
+  /** {@link Mrs 医疗报告结构化} */
   mrs: Mrs,
-  /** [移动应用安全](https://cloud.tencent.com/document/product/283) */
+  /** {@link Ms 移动应用安全} */
   ms: Ms,
-  /** [迁移服务平台](https://cloud.tencent.com/document/product/659) */
+  /** {@link Msp 迁移服务平台} */
   msp: Msp,
-  /** 营销价值判断 */
+  /** {@link Mvj 营销价值判断} */
   mvj: Mvj,
-  /** [自然语言处理](https://cloud.tencent.com/document/product/271) */
+  /** {@link Nlp 自然语言处理} */
   nlp: Nlp,
-  /** 号码保护 */
+  /** {@link Npp 号码保护} */
   npp: Npp,
-  /** [流计算 Oceanus](https://cloud.tencent.com/document/product/849) */
+  /** {@link Oceanus 流计算 Oceanus} */
   oceanus: Oceanus,
-  /** [文字识别](https://cloud.tencent.com/document/product/866) */
+  /** {@link Ocr 文字识别} */
   ocr: Ocr,
-  /** [企业组织](https://cloud.tencent.com/document/product/850) */
+  /** {@link Organization 集团账号管理} */
   organization: Organization,
-  /** [渠道合作伙伴](https://cloud.tencent.com/document/product/563) */
+  /** {@link Partners 渠道合作伙伴} */
   partners: Partners,
-  /** [私域安全](https://cloud.tencent.com/document/product/1473) */
+  /** {@link Pds 私域安全} */
   pds: Pds,
-  /** [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) */
+  /** {@link Postgres 云数据库 PostgreSQL} */
   postgres: Postgres,
-  /** [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) */
+  /** {@link Privatedns 私有域解析 Private DNS} */
   privatedns: Privatedns,
-  /** [云压测](https://cloud.tencent.com/document/product/1484) */
+  /** {@link Pts 云压测} */
   pts: Pts,
-  /** [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) */
+  /** {@link Rce 全栈式风控引擎} */
   rce: Rce,
-  /** [云数据库 Redis](https://cloud.tencent.com/document/product/239) */
+  /** {@link Redis 云数据库Redis} */
   redis: Redis,
-  /** [地域管理系统](https://cloud.tencent.com/document/product/1596) */
+  /** {@link Region 地域管理系统} */
   region: Region,
-  /** [风险探针](https://cloud.tencent.com/document/product/1169) */
+  /** {@link Rkp 风险探针} */
   rkp: Rkp,
-  /** [注册保护](https://cloud.tencent.com/document/product/1191) */
+  /** {@link Rp 注册保护} */
   rp: Rp,
-  /** [前端性能监控](https://cloud.tencent.com/document/product/1464) */
+  /** {@link Rum 前端性能监控} */
   rum: Rum,
-  /** [云函数](https://cloud.tencent.com/document/product/583) */
+  /** {@link Scf 云函数} */
   scf: Scf,
-  /** [邮件推送](https://cloud.tencent.com/document/product/1288) */
+  /** {@link Ses 邮件推送} */
   ses: Ses,
-  /** [智能媒资托管](https://cloud.tencent.com/document/product/1339) */
+  /** {@link Smh 智能媒资托管} */
   smh: Smh,
-  /** [营销号码安全](https://cloud.tencent.com/document/product/1127) */
+  /** {@link Smpn 营销号码安全} */
   smpn: Smpn,
-  /** [短信](https://cloud.tencent.com/document/product/382) */
+  /** {@link Sms 短信} */
   sms: Sms,
-  /** [智聆口语评测](https://cloud.tencent.com/document/product/884) */
+  /** {@link Soe 智聆口语评测} */
   soe: Soe,
-  /** 智汇零售 */
+  /** {@link Solar 智汇零售} */
   solar: Solar,
-  /** [云数据库 SQL Server](https://cloud.tencent.com/document/product/238) */
+  /** {@link Sqlserver 云数据库 SQL Server} */
   sqlserver: Sqlserver,
-  /** [安全运营中心](https://cloud.tencent.com/document/product/664) */
+  /** {@link Ssa 安全运营中心} */
   ssa: Ssa,
-  /** [证书](https://cloud.tencent.com/document/product/400) */
+  /** {@link Ssl SSL 证书} */
   ssl: Ssl,
-  /** [SSL 证书监控](https://cloud.tencent.com/document/product/1084) */
+  /** {@link Sslpod SSL证书监控SSLPod} */
   sslpod: Sslpod,
-  /** [凭据管理系统](https://cloud.tencent.com/document/product/1140) */
+  /** {@link Ssm 凭据管理系统} */
   ssm: Ssm,
-  /** [安全凭证服务](https://cloud.tencent.com/document/product/1312) */
+  /** {@link Sts 安全凭证服务} */
   sts: Sts,
-  /** [流量反欺诈](https://cloud.tencent.com/document/product/1031) */
+  /** {@link Taf 流量反欺诈} */
   taf: Taf,
-  /** [标签](https://cloud.tencent.com/document/product/651) */
+  /** {@link Tag 标签} */
   tag: Tag,
-  /** [碳引擎](https://cloud.tencent.com/document/product/1498) */
+  /** {@link Tan 碳引擎} */
   tan: Tan,
-  /** [腾讯云自动化助手](https://cloud.tencent.com/document/product/1340) */
+  /** {@link Tat 自动化助手} */
   tat: Tat,
-  /** 文件检测 */
+  /** {@link Tav 文件检测} */
   tav: Tav,
-  /** [TBaaS](https://cloud.tencent.com/document/product/663) */
+  /** {@link Tbaas 腾讯云区块链服务平台 TBaaS} */
   tbaas: Tbaas,
   tbm: Tbm,
-  /** [腾讯智能对话平台](https://cloud.tencent.com/document/product/1060) */
+  /** {@link Tbp 腾讯智能对话平台} */
   tbp: Tbp,
-  /** [游戏数据库 TcaplusDB](https://cloud.tencent.com/document/product/596) */
+  /** {@link Tcaplusdb 游戏数据库 TcaplusDB} */
   tcaplusdb: Tcaplusdb,
-  /** [云开发 CloudBase](https://cloud.tencent.com/document/product/876) */
+  /** {@link Tcb 云开发 CloudBase} */
   tcb: Tcb,
-  /** [云托管 CloudBase Run](https://cloud.tencent.com/document/product/1243) */
+  /** {@link Tcbr 云托管 CloudBase Run} */
   tcbr: Tcbr,
-  /** [腾讯云释义](https://cloud.tencent.com/document/product/1266) */
+  /** {@link Tcex 腾讯云释义} */
   tcex: Tcex,
-  /** 腾讯智学课堂分析 */
+  /** {@link Tci 腾讯智学课堂分析} */
   tci: Tci,
-  /** [服务网格](https://cloud.tencent.com/document/product/1261) */
+  /** {@link Tcm 服务网格} */
   tcm: Tcm,
-  /** [容器镜像服务](https://cloud.tencent.com/document/product/1141) */
+  /** {@link Tcr 容器镜像服务} */
   tcr: Tcr,
-  /** [容器安全服务](https://cloud.tencent.com/document/product/1285) */
+  /** {@link Tcss 容器安全服务} */
   tcss: Tcss,
-  /** [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) */
+  /** {@link Tdcpg TDSQL-C PostgreSQL 版} */
   tdcpg: Tdcpg,
-  /** [分布式身份](https://cloud.tencent.com/document/product/1439) */
+  /** {@link Tdid 分布式身份} */
   tdid: Tdid,
-  /** [分布式消息队列](https://cloud.tencent.com/document/product/1179) */
+  /** {@link Tdmq 消息队列 TDMQ} */
   tdmq: Tdmq,
-  /** [设备安全](https://cloud.tencent.com/document/product/1628) */
+  /** {@link Tds 设备安全} */
   tds: Tds,
-  /** [弹性微服务](https://cloud.tencent.com/document/product/1371) */
+  /** {@link Tem 弹性微服务 TEM} */
   tem: Tem,
-  /** [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) */
+  /** {@link Teo 边缘安全加速平台} */
   teo: Teo,
-  /** [高性能计算平台](https://cloud.tencent.com/document/product/1527) */
+  /** {@link Thpc 高性能计算平台} */
   thpc: Thpc,
-  /** [智能钛机器学习](https://cloud.tencent.com/document/product/851) */
+  /** {@link Tia 智能钛机器学习} */
   tia: Tia,
-  /** [腾讯云IaC平台](https://cloud.tencent.com/document/product/1213) */
+  /** {@link Tic 资源编排 TIC} */
   tic: Tic,
-  /** [智能鉴黄](https://cloud.tencent.com/document/product/864) */
+  /** {@link Ticm 智能鉴黄} */
   ticm: Ticm,
-  /** [威胁情报云查服务](https://cloud.tencent.com/document/product/1013) */
+  /** {@link Tics 威胁情报云查服务} */
   tics: Tics,
-  /** [腾讯云 TI 平台 TI-EMS](https://cloud.tencent.com/document/product/1120) */
+  /** {@link Tiems 腾讯云 TI 平台 TI-EMS} */
   tiems: Tiems,
-  /** [图像分析](https://cloud.tencent.com/document/product/865) */
+  /** {@link Tiia 图像分析} */
   tiia: Tiia,
-  /** [腾讯云 TI 平台 TI-ONE](https://cloud.tencent.com/document/product/851) */
+  /** {@link Tione 腾讯云 TI 平台 TI-ONE} */
   tione: Tione,
-  /** [互动白板](https://cloud.tencent.com/document/product/1137) */
+  /** {@link Tiw 互动白板} */
   tiw: Tiw,
-  /** [容器服务](https://cloud.tencent.com/document/product/457) */
+  /** {@link Tke 容器服务} */
   tke: Tke,
-  /** 腾讯知识图谱数据查询 */
+  /** {@link Tkgdq 腾讯知识图谱数据查询} */
   tkgdq: Tkgdq,
-  /** [文本内容安全](https://cloud.tencent.com/document/product/1124) */
+  /** {@link Tms 文本内容安全} */
   tms: Tms,
-  /** [机器翻译](https://cloud.tencent.com/document/product/551) */
+  /** {@link Tmt 机器翻译} */
   tmt: Tmt,
-  /** [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) */
+  /** {@link Trp T-Sec-安心平台(RP)} */
   trp: Trp,
-  /** [实时音视频](https://cloud.tencent.com/document/product/647) */
+  /** {@link Trtc 实时音视频} */
   trtc: Trtc,
-  /** [腾讯云微服务引擎](https://cloud.tencent.com/document/product/1364) */
+  /** {@link Tse 微服务引擎 TSE} */
   tse: Tse,
-  /** [腾讯微服务平台 TSF](https://cloud.tencent.com/document/product/649) */
+  /** {@link Tsf 微服务平台 TSF} */
   tsf: Tsf,
-  /** [腾讯微服务观测平台 TSW](https://cloud.tencent.com/document/product/1311) */
+  /** {@link Tsw 微服务观测平台 TSW} */
   tsw: Tsw,
-  /** [语音合成](https://cloud.tencent.com/document/product/1073) */
+  /** {@link Tts 语音合成} */
   tts: Tts,
-  /** [客流数字化平台](https://cloud.tencent.com/document/product/1320) */
+  /** {@link Ump 客流数字化平台} */
   ump: Ump,
-  /** [视频内容安全](https://cloud.tencent.com/document/product/1265) */
+  /** {@link Vm 视频内容安全} */
   vm: Vm,
-  /** [语音消息](https://cloud.tencent.com/document/product/1128) */
+  /** {@link Vms 语音消息} */
   vms: Vms,
-  /** [云点播](https://cloud.tencent.com/document/product/266) */
+  /** {@link Vod 云点播} */
   vod: Vod,
-  /** [私有网络](https://cloud.tencent.com/document/product/215) */
+  /** {@link Vpc 私有网络} */
   vpc: Vpc,
-  /** [Web 应用防火墙](https://cloud.tencent.com/document/product/627) */
+  /** {@link Waf Web 应用防火墙} */
   waf: Waf,
-  /** [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) */
+  /** {@link Wav 企业微信汽车行业版} */
   wav: Wav,
-  /** [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) */
+  /** {@link Wedata 数据开发治理平台 WeData} */
   wedata: Wedata,
-  /** SSL证书管理服务 */
+  /** {@link Wss SSL证书管理服务} */
   wss: Wss,
-  /** [音速达直播音乐版权引擎](https://cloud.tencent.com/document/product/1592) */
+  /** {@link Yinsuda 音速达直播音乐版权引擎} */
   yinsuda: Yinsuda,
   youmall: Youmall,
-  /** 主机安全 */
+  /** {@link Yunjing 主机安全} */
   yunjing: Yunjing,
-  /** [腾讯云搜](https://cloud.tencent.com/document/product/270) */
+  /** {@link Yunsou 腾讯云搜TCS} */
   yunsou: Yunsou,
-  /** 珠玑 */
+  /** {@link Zj 珠玑} */
   zj: Zj,
 };
 

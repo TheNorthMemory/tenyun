@@ -124,20 +124,20 @@ declare interface StopGameResponse {
   RequestId?: string;
 }
 
-/** 商业直播 */
+/** {@link Bizlive 商业直播} */
 declare interface Bizlive {
   (): Versions;
-  /** 创建会话 */
+  /** {@link CreateSession 创建会话}({@link CreateSessionRequest 请求参数}): {@link CreateSessionResponse 返回参数} */
   CreateSession(data: CreateSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSessionResponse>;
-  /** 查询流的播放信息列表 */
+  /** {@link DescribeStreamPlayInfoList 查询流的播放信息列表}({@link DescribeStreamPlayInfoListRequest 请求参数}): {@link DescribeStreamPlayInfoListResponse 返回参数} */
   DescribeStreamPlayInfoList(data: DescribeStreamPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPlayInfoListResponse>;
-  /** 查询空闲机器数量 */
+  /** {@link DescribeWorkers 查询空闲机器数量}({@link DescribeWorkersRequest 请求参数}): {@link DescribeWorkersResponse 返回参数} */
   DescribeWorkers(data?: DescribeWorkersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkersResponse>;
-  /** 禁播直播流 */
+  /** {@link ForbidLiveStream 禁播直播流}({@link ForbidLiveStreamRequest 请求参数}): {@link ForbidLiveStreamResponse 返回参数} */
   ForbidLiveStream(data: ForbidLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidLiveStreamResponse>;
-  /** 注册聊天室 */
+  /** {@link RegisterIM 注册聊天室}({@link RegisterIMRequest 请求参数}): {@link RegisterIMResponse 返回参数} */
   RegisterIM(data: RegisterIMRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterIMResponse>;
-  /** 强制退出游戏 */
+  /** {@link StopGame 强制退出游戏}({@link StopGameRequest 请求参数}): {@link StopGameResponse 返回参数} */
   StopGame(data: StopGameRequest, config?: AxiosRequestConfig): AxiosPromise<StopGameResponse>;
 }
 

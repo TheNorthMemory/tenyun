@@ -1014,74 +1014,74 @@ declare interface SrvInvokeResponse {
   RequestId?: string;
 }
 
-/** [TBaaS](https://cloud.tencent.com/document/product/663) */
+/** {@link Tbaas 腾讯云区块链服务平台 TBaaS} */
 declare interface Tbaas {
   (): Versions;
-  /** 申请用户证书 */
+  /** {@link ApplyUserCert 申请用户证书}({@link ApplyUserCertRequest 请求参数}): {@link ApplyUserCertResponse 返回参数} */
   ApplyUserCert(data: ApplyUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyUserCertResponse>;
-  /** 创建并安装合约 */
+  /** {@link CreateChaincodeAndInstallForUser 创建并安装合约}({@link CreateChaincodeAndInstallForUserRequest 请求参数}): {@link CreateChaincodeAndInstallForUserResponse 返回参数} */
   CreateChaincodeAndInstallForUser(data: CreateChaincodeAndInstallForUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChaincodeAndInstallForUserResponse>;
-  /** 动态部署并发布Bcos合约 */
+  /** {@link DeployDynamicBcosContract 动态部署并发布Bcos合约}({@link DeployDynamicBcosContractRequest 请求参数}): {@link DeployDynamicBcosContractResponse 返回参数} */
   DeployDynamicBcosContract(data: DeployDynamicBcosContractRequest, config?: AxiosRequestConfig): AxiosPromise<DeployDynamicBcosContractResponse>;
-  /** 下载用户证书 */
+  /** {@link DownloadUserCert 下载用户证书}({@link DownloadUserCertRequest 请求参数}): {@link DownloadUserCertResponse 返回参数} */
   DownloadUserCert(data: DownloadUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadUserCertResponse>;
-  /** 使用块高查询区块信息 */
+  /** {@link GetBcosBlockByNumber 使用块高查询区块信息}({@link GetBcosBlockByNumberRequest 请求参数}): {@link GetBcosBlockByNumberResponse 返回参数} */
   GetBcosBlockByNumber(data: GetBcosBlockByNumberRequest, config?: AxiosRequestConfig): AxiosPromise<GetBcosBlockByNumberResponse>;
-  /** 分页查询Bcos区块列表 */
+  /** {@link GetBcosBlockList 分页查询Bcos区块列表}({@link GetBcosBlockListRequest 请求参数}): {@link GetBcosBlockListResponse 返回参数} */
   GetBcosBlockList(data: GetBcosBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBcosBlockListResponse>;
-  /** 使用交易哈希查询Bcos交易信息 */
+  /** {@link GetBcosTransByHash 使用交易哈希查询Bcos交易信息}({@link GetBcosTransByHashRequest 请求参数}): {@link GetBcosTransByHashResponse 返回参数} */
   GetBcosTransByHash(data: GetBcosTransByHashRequest, config?: AxiosRequestConfig): AxiosPromise<GetBcosTransByHashResponse>;
-  /** 分页查询Bcos交易列表 */
+  /** {@link GetBcosTransList 分页查询Bcos交易列表}({@link GetBcosTransListRequest 请求参数}): {@link GetBcosTransListResponse 返回参数} */
   GetBcosTransList(data: GetBcosTransListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBcosTransListResponse>;
-  /** 查询区块列表 */
+  /** {@link GetBlockList 查询区块列表}({@link GetBlockListRequest 请求参数}): {@link GetBlockListResponse 返回参数} */
   GetBlockList(data: GetBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBlockListResponse>;
-  /** 获取区块内的交易列表 */
+  /** {@link GetBlockTransactionListForUser 获取区块内的交易列表}({@link GetBlockTransactionListForUserRequest 请求参数}): {@link GetBlockTransactionListForUserResponse 返回参数} */
   GetBlockTransactionListForUser(data: GetBlockTransactionListForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetBlockTransactionListForUserResponse>;
-  /** 获取合约编译日志 */
+  /** {@link GetChaincodeCompileLogForUser 获取合约编译日志}({@link GetChaincodeCompileLogForUserRequest 请求参数}): {@link GetChaincodeCompileLogForUserResponse 返回参数} */
   GetChaincodeCompileLogForUser(data: GetChaincodeCompileLogForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetChaincodeCompileLogForUserResponse>;
-  /** 实例化结果查询 */
+  /** {@link GetChaincodeInitializeResultForUser 实例化结果查询}({@link GetChaincodeInitializeResultForUserRequest 请求参数}): {@link GetChaincodeInitializeResultForUserResponse 返回参数} */
   GetChaincodeInitializeResultForUser(data: GetChaincodeInitializeResultForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetChaincodeInitializeResultForUserResponse>;
-  /** 获取合约容器日志 */
+  /** {@link GetChaincodeLogForUser 获取合约容器日志}({@link GetChaincodeLogForUserRequest 请求参数}): {@link GetChaincodeLogForUserResponse 返回参数} */
   GetChaincodeLogForUser(data: GetChaincodeLogForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetChaincodeLogForUserResponse>;
-  /** 获取通道列表 */
+  /** {@link GetChannelListForUser 获取通道列表}({@link GetChannelListForUserRequest 请求参数}): {@link GetChannelListForUserResponse 返回参数} */
   GetChannelListForUser(data: GetChannelListForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetChannelListForUserResponse>;
-  /** 获取网络列表 */
+  /** {@link GetClusterListForUser 获取网络列表}({@link GetClusterListForUserRequest 请求参数}): {@link GetClusterListForUserResponse 返回参数} */
   GetClusterListForUser(data: GetClusterListForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetClusterListForUserResponse>;
-  /** 获取区块链网络概要 */
+  /** {@link GetClusterSummary 获取区块链网络概要}({@link GetClusterSummaryRequest 请求参数}): {@link GetClusterSummaryResponse 返回参数} */
   GetClusterSummary(data: GetClusterSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<GetClusterSummaryResponse>;
-  /** Invoke异步调用结果查询 */
+  /** {@link GetInvokeTx Invoke异步调用结果查询}({@link GetInvokeTxRequest 请求参数}): {@link GetInvokeTxResponse 返回参数} */
   GetInvokeTx(data: GetInvokeTxRequest, config?: AxiosRequestConfig): AxiosPromise<GetInvokeTxResponse>;
-  /** 获取最新交易列表 */
+  /** {@link GetLatesdTransactionList 获取最新交易列表}({@link GetLatesdTransactionListRequest 请求参数}): {@link GetLatesdTransactionListResponse 返回参数} */
   GetLatesdTransactionList(data: GetLatesdTransactionListRequest, config?: AxiosRequestConfig): AxiosPromise<GetLatesdTransactionListResponse>;
-  /** 获取节点日志 */
+  /** {@link GetPeerLogForUser 获取节点日志}({@link GetPeerLogForUserRequest 请求参数}): {@link GetPeerLogForUserResponse 返回参数} */
   GetPeerLogForUser(data: GetPeerLogForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetPeerLogForUserResponse>;
-  /** 获取交易详情 */
+  /** {@link GetTransactionDetailForUser 获取交易详情}({@link GetTransactionDetailForUserRequest 请求参数}): {@link GetTransactionDetailForUserResponse 返回参数} */
   GetTransactionDetailForUser(data: GetTransactionDetailForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetTransactionDetailForUserResponse>;
-  /** 实例化合约 */
+  /** {@link InitializeChaincodeForUser 实例化合约}({@link InitializeChaincodeForUserRequest 请求参数}): {@link InitializeChaincodeForUserResponse 返回参数} */
   InitializeChaincodeForUser(data: InitializeChaincodeForUserRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeChaincodeForUserResponse>;
-  /** 新增交易 */
+  /** {@link Invoke 新增交易}({@link InvokeRequest 请求参数}): {@link InvokeResponse 返回参数} */
   Invoke(data: InvokeRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeResponse>;
-  /** 执行Bcos交易 */
+  /** {@link InvokeBcosTrans 执行Bcos交易}({@link InvokeBcosTransRequest 请求参数}): {@link InvokeBcosTransResponse 返回参数} */
   InvokeBcosTrans(data: InvokeBcosTransRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeBcosTransResponse>;
-  /** 调用长安链合约执行交易 */
+  /** {@link InvokeChainMakerContract 调用长安链合约执行交易}({@link InvokeChainMakerContractRequest 请求参数}): {@link InvokeChainMakerContractResponse 返回参数} */
   InvokeChainMakerContract(data: InvokeChainMakerContractRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeChainMakerContractResponse>;
-  /** 调用长安链体验网络合约执行交易 */
+  /** {@link InvokeChainMakerDemoContract 调用长安链体验网络合约执行交易}({@link InvokeChainMakerDemoContractRequest 请求参数}): {@link InvokeChainMakerDemoContractResponse 返回参数} */
   InvokeChainMakerDemoContract(data: InvokeChainMakerDemoContractRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeChainMakerDemoContractResponse>;
-  /** 查询交易 */
+  /** {@link Query 查询交易}({@link QueryRequest 请求参数}): {@link QueryResponse 返回参数} */
   Query(data: QueryRequest, config?: AxiosRequestConfig): AxiosPromise<QueryResponse>;
-  /** 查询长安链指定高度区块的交易 */
+  /** {@link QueryChainMakerBlockTransaction 查询长安链指定高度区块的交易}({@link QueryChainMakerBlockTransactionRequest 请求参数}): {@link QueryChainMakerBlockTransactionResponse 返回参数} */
   QueryChainMakerBlockTransaction(data: QueryChainMakerBlockTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChainMakerBlockTransactionResponse>;
-  /** 调用长安链合约查询 */
+  /** {@link QueryChainMakerContract 调用长安链合约查询}({@link QueryChainMakerContractRequest 请求参数}): {@link QueryChainMakerContractResponse 返回参数} */
   QueryChainMakerContract(data: QueryChainMakerContractRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChainMakerContractResponse>;
-  /** 查询长安链体验网络指定高度区块的交易 */
+  /** {@link QueryChainMakerDemoBlockTransaction 查询长安链体验网络指定高度区块的交易}({@link QueryChainMakerDemoBlockTransactionRequest 请求参数}): {@link QueryChainMakerDemoBlockTransactionResponse 返回参数} */
   QueryChainMakerDemoBlockTransaction(data: QueryChainMakerDemoBlockTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChainMakerDemoBlockTransactionResponse>;
-  /** 调用长安链体验网络合约查询 */
+  /** {@link QueryChainMakerDemoContract 调用长安链体验网络合约查询}({@link QueryChainMakerDemoContractRequest 请求参数}): {@link QueryChainMakerDemoContractResponse 返回参数} */
   QueryChainMakerDemoContract(data: QueryChainMakerDemoContractRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChainMakerDemoContractResponse>;
-  /** 通过交易ID查询长安链体验网络交易 */
+  /** {@link QueryChainMakerDemoTransaction 通过交易ID查询长安链体验网络交易}({@link QueryChainMakerDemoTransactionRequest 请求参数}): {@link QueryChainMakerDemoTransactionResponse 返回参数} */
   QueryChainMakerDemoTransaction(data: QueryChainMakerDemoTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChainMakerDemoTransactionResponse>;
-  /** 通过交易ID查询长安链交易 */
+  /** {@link QueryChainMakerTransaction 通过交易ID查询长安链交易}({@link QueryChainMakerTransactionRequest 请求参数}): {@link QueryChainMakerTransactionResponse 返回参数} */
   QueryChainMakerTransaction(data: QueryChainMakerTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChainMakerTransactionResponse>;
-  /** trustsql服务统一接口 */
+  /** {@link SrvInvoke trustsql服务统一接口}({@link SrvInvokeRequest 请求参数}): {@link SrvInvokeResponse 返回参数} */
   SrvInvoke(data: SrvInvokeRequest, config?: AxiosRequestConfig): AxiosPromise<SrvInvokeResponse>;
 }
 

@@ -68,6 +68,12 @@ declare interface SentenceInfo {
   PronCompletion: number;
   /** 建议评分，取值范围[0,100]，评分方式为建议评分 = 准确度（PronAccuracyfloat）* 完整度（PronCompletionfloat）*（2 - 完整度（PronCompletionfloat）），如若评分策略不符合请参考Words数组中的详细分数自定义评分逻辑。 */
   SuggestedScore: number;
+  /** 匹配候选文本的序号，在句子多分支、情景对 话、段落模式下表示匹配到的文本序号 */
+  RefTextId: number | null;
+  /** 主题词命中标志，0表示没命中，1表示命中 */
+  KeyWordHits: number[] | null;
+  /** 负向主题词命中标志，0表示没命中，1表示命中 */
+  UnKeyWordHits: number[] | null;
 }
 
 /** 单词评分细则 */
@@ -88,6 +94,8 @@ declare interface WordRsp {
   PhoneInfos: PhoneInfo[];
   /** 参考词，目前为保留字段。 */
   ReferenceWord: string;
+  /** 主题词命中标志，0表示没命中，1表示命中 */
+  KeywordTag: number | null;
 }
 
 declare interface InitOralProcessRequest {
@@ -115,6 +123,8 @@ declare interface InitOralProcessRequest {
   IsAsync?: number;
   /** 输入文本模式0: 普通文本1：[音素结构](https://cloud.tencent.com/document/product/884/33698)文本2：音素注册模式（提工单注册需要使用音素的单词）。 */
   TextMode?: number;
+  /** 主题词和关键词 */
+  Keyword?: string;
 }
 
 declare interface InitOralProcessResponse {
@@ -194,6 +204,12 @@ declare interface TransmitOralProcessResponse {
   Status: string;
   /** 建议评分，取值范围[0,100]，评分方式为建议评分 = 准确度（PronAccuracy）× 完整度（PronCompletion）×（2 - 完整度（PronCompletion）），如若评分策略不符合请参考Words数组中的详细分数自定义评分逻辑。 */
   SuggestedScore: number;
+  /** 匹配候选文本的序号，在句子多分支、情景对 话、段落模式下表示匹配到的文本序号 */
+  RefTextId: number | null;
+  /** 主题词命中标志，0表示没命中，1表示命中 */
+  KeyWordHits: number[] | null;
+  /** 负向主题词命中标志，0表示没命中，1表示命中 */
+  UnKeyWordHits: number[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -233,6 +249,8 @@ declare interface TransmitOralProcessWithInitRequest {
   IsQuery?: number;
   /** 输入文本模式0: 普通文本1：[音素结构](https://cloud.tencent.com/document/product/884/33698)文本2：音素注册模式（提工单注册需要使用音素的单词）。 */
   TextMode?: number;
+  /** 主题词和关键词 */
+  Keyword?: string;
 }
 
 declare interface TransmitOralProcessWithInitResponse {
@@ -254,20 +272,26 @@ declare interface TransmitOralProcessWithInitResponse {
   Status: string;
   /** 建议评分，取值范围[0,100]，评分方式为建议评分 = 准确度（PronAccuracy）× 完整度（PronCompletion）×（2 - 完整度（PronCompletion）），如若评分策略不符合请参考Words数组中的详细分数自定义评分逻辑。 */
   SuggestedScore: number;
+  /** 匹配候选文本的序号，在句子多分支、情景对 话、段落模式下表示匹配到的文本序号 */
+  RefTextId: number | null;
+  /** 主题词命中标志，0表示没命中，1表示命中 */
+  KeyWordHits: number[] | null;
+  /** 负向主题词命中标志，0表示没命中，1表示命中 */
+  UnKeyWordHits: number[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
 
-/** [智聆口语评测](https://cloud.tencent.com/document/product/884) */
+/** {@link Soe 智聆口语评测} */
 declare interface Soe {
   (): Versions;
-  /** 发音评估初始化 */
+  /** {@link InitOralProcess 发音评估初始化}({@link InitOralProcessRequest 请求参数}): {@link InitOralProcessResponse 返回参数} */
   InitOralProcess(data: InitOralProcessRequest, config?: AxiosRequestConfig): AxiosPromise<InitOralProcessResponse>;
-  /** 关键词评测 */
+  /** {@link KeywordEvaluate 关键词评测}({@link KeywordEvaluateRequest 请求参数}): {@link KeywordEvaluateResponse 返回参数} */
   KeywordEvaluate(data: KeywordEvaluateRequest, config?: AxiosRequestConfig): AxiosPromise<KeywordEvaluateResponse>;
-  /** 发音数据传输接口 */
+  /** {@link TransmitOralProcess 发音数据传输接口}({@link TransmitOralProcessRequest 请求参数}): {@link TransmitOralProcessResponse 返回参数} */
   TransmitOralProcess(data: TransmitOralProcessRequest, config?: AxiosRequestConfig): AxiosPromise<TransmitOralProcessResponse>;
-  /** 发音数据传输接口附带初始化过程（常用实践） */
+  /** {@link TransmitOralProcessWithInit 发音数据传输接口附带初始化过程（常用实践）}({@link TransmitOralProcessWithInitRequest 请求参数}): {@link TransmitOralProcessWithInitResponse 返回参数} */
   TransmitOralProcessWithInit(data: TransmitOralProcessWithInitRequest, config?: AxiosRequestConfig): AxiosPromise<TransmitOralProcessWithInitResponse>;
 }
 

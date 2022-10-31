@@ -298,14 +298,14 @@ declare interface QueryAntiFraudResponse {
   RequestId?: string;
 }
 
-/** [借贷反欺诈](https://cloud.tencent.com/document/product/668) */
+/** {@link Af 借贷反欺诈} */
 declare interface Af {
   (): Versions;
-  /** 金融借贷反欺诈 */
+  /** {@link DescribeAntiFraud 金融借贷反欺诈}({@link DescribeAntiFraudRequest 请求参数}): {@link DescribeAntiFraudResponse 返回参数} */
   DescribeAntiFraud(data?: DescribeAntiFraudRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiFraudResponse>;
-  /** 反欺诈评分接口 */
+  /** {@link GetAntiFraud 反欺诈评分接口}({@link GetAntiFraudRequest 请求参数}): {@link GetAntiFraudResponse 返回参数} */
   GetAntiFraud(data?: GetAntiFraudRequest, config?: AxiosRequestConfig): AxiosPromise<GetAntiFraudResponse>;
-  /** 借贷反欺诈 */
+  /** {@link QueryAntiFraud 借贷反欺诈}({@link QueryAntiFraudRequest 请求参数}): {@link QueryAntiFraudResponse 返回参数} */
   QueryAntiFraud(data?: QueryAntiFraudRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAntiFraudResponse>;
 }
 

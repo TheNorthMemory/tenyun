@@ -2082,132 +2082,132 @@ declare interface UnlockMetaDataResponse {
   RequestId?: string;
 }
 
-/** [数据湖计算](https://cloud.tencent.com/document/product/1342) */
+/** {@link Dlc 数据湖计算 DLC} */
 declare interface Dlc {
   (): Versions;
-  /** DMS元数据新增分区 */
+  /** {@link AddDMSPartitions DMS元数据新增分区}({@link AddDMSPartitionsRequest 请求参数}): {@link AddDMSPartitionsResponse 返回参数} */
   AddDMSPartitions(data?: AddDMSPartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<AddDMSPartitionsResponse>;
-  /** 添加用户到工作组 */
+  /** {@link AddUsersToWorkGroup 添加用户到工作组}({@link AddUsersToWorkGroupRequest 请求参数}): {@link AddUsersToWorkGroupResponse 返回参数} */
   AddUsersToWorkGroup(data: AddUsersToWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddUsersToWorkGroupResponse>;
-  /** DMS元数据更新库 */
+  /** {@link AlterDMSDatabase DMS元数据更新库}({@link AlterDMSDatabaseRequest 请求参数}): {@link AlterDMSDatabaseResponse 返回参数} */
   AlterDMSDatabase(data?: AlterDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<AlterDMSDatabaseResponse>;
-  /** DMS元数据更新分区 */
+  /** {@link AlterDMSPartition DMS元数据更新分区}({@link AlterDMSPartitionRequest 请求参数}): {@link AlterDMSPartitionResponse 返回参数} */
   AlterDMSPartition(data: AlterDMSPartitionRequest, config?: AxiosRequestConfig): AxiosPromise<AlterDMSPartitionResponse>;
-  /** DMS元数据更新表 */
+  /** {@link AlterDMSTable DMS元数据更新表}({@link AlterDMSTableRequest 请求参数}): {@link AlterDMSTableResponse 返回参数} */
   AlterDMSTable(data: AlterDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<AlterDMSTableResponse>;
-  /** 绑定鉴权策略到用户 */
+  /** {@link AttachUserPolicy 绑定鉴权策略到用户}({@link AttachUserPolicyRequest 请求参数}): {@link AttachUserPolicyResponse 返回参数} */
   AttachUserPolicy(data: AttachUserPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachUserPolicyResponse>;
-  /** 绑定鉴权策略到工作组 */
+  /** {@link AttachWorkGroupPolicy 绑定鉴权策略到工作组}({@link AttachWorkGroupPolicyRequest 请求参数}): {@link AttachWorkGroupPolicyResponse 返回参数} */
   AttachWorkGroupPolicy(data: AttachWorkGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachWorkGroupPolicyResponse>;
-  /** 绑定工作组到用户 */
+  /** {@link BindWorkGroupsToUser 绑定工作组到用户}({@link BindWorkGroupsToUserRequest 请求参数}): {@link BindWorkGroupsToUserResponse 返回参数} */
   BindWorkGroupsToUser(data: BindWorkGroupsToUserRequest, config?: AxiosRequestConfig): AxiosPromise<BindWorkGroupsToUserResponse>;
-  /** 取消任务执行 */
+  /** {@link CancelTask 取消任务执行}({@link CancelTaskRequest 请求参数}): {@link CancelTaskResponse 返回参数} */
   CancelTask(data: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
-  /** 元数据锁检查 */
+  /** {@link CheckLockMetaData 元数据锁检查}({@link CheckLockMetaDataRequest 请求参数}): {@link CheckLockMetaDataResponse 返回参数} */
   CheckLockMetaData(data: CheckLockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<CheckLockMetaDataResponse>;
-  /** DMS元数据创建库 */
+  /** {@link CreateDMSDatabase DMS元数据创建库}({@link CreateDMSDatabaseRequest 请求参数}): {@link CreateDMSDatabaseResponse 返回参数} */
   CreateDMSDatabase(data?: CreateDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDMSDatabaseResponse>;
-  /** DMS元数据创建表 */
+  /** {@link CreateDMSTable DMS元数据创建表}({@link CreateDMSTableRequest 请求参数}): {@link CreateDMSTableResponse 返回参数} */
   CreateDMSTable(data?: CreateDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDMSTableResponse>;
-  /** 生成建库SQL语句 */
+  /** {@link CreateDatabase 生成建库SQL语句}({@link CreateDatabaseRequest 请求参数}): {@link CreateDatabaseResponse 返回参数} */
   CreateDatabase(data: CreateDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatabaseResponse>;
-  /** 创建导出任务 */
+  /** {@link CreateExportTask 创建导出任务}({@link CreateExportTaskRequest 请求参数}): {@link CreateExportTaskResponse 返回参数} */
   CreateExportTask(data: CreateExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportTaskResponse>;
-  /** 创建导入任务 */
+  /** {@link CreateImportTask 创建导入任务}({@link CreateImportTaskRequest 请求参数}): {@link CreateImportTaskResponse 返回参数} */
   CreateImportTask(data: CreateImportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImportTaskResponse>;
-  /** 创建查询结果下载任务 */
+  /** {@link CreateResultDownload 创建查询结果下载任务}({@link CreateResultDownloadRequest 请求参数}): {@link CreateResultDownloadResponse 返回参数} */
   CreateResultDownload(data: CreateResultDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResultDownloadResponse>;
-  /** 创建sql脚本 */
+  /** {@link CreateScript 创建sql脚本}({@link CreateScriptRequest 请求参数}): {@link CreateScriptResponse 返回参数} */
   CreateScript(data: CreateScriptRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScriptResponse>;
-  /** 创建spark应用 */
+  /** {@link CreateSparkApp 创建spark应用}({@link CreateSparkAppRequest 请求参数}): {@link CreateSparkAppResponse 返回参数} */
   CreateSparkApp(data: CreateSparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSparkAppResponse>;
-  /** 创建spark任务 */
+  /** {@link CreateSparkAppTask 创建spark任务}({@link CreateSparkAppTaskRequest 请求参数}): {@link CreateSparkAppTaskResponse 返回参数} */
   CreateSparkAppTask(data: CreateSparkAppTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSparkAppTaskResponse>;
-  /** 修改结果存储位置 */
+  /** {@link CreateStoreLocation 修改结果存储位置}({@link CreateStoreLocationRequest 请求参数}): {@link CreateStoreLocationResponse 返回参数} */
   CreateStoreLocation(data: CreateStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStoreLocationResponse>;
-  /** 生成建表SQL */
+  /** {@link CreateTable 生成建表SQL}({@link CreateTableRequest 请求参数}): {@link CreateTableResponse 返回参数} */
   CreateTable(data: CreateTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTableResponse>;
-  /** 任务创建 */
+  /** {@link CreateTask 任务创建}({@link CreateTaskRequest 请求参数}): {@link CreateTaskResponse 返回参数} */
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
-  /** 批量创建任务 */
+  /** {@link CreateTasks 批量创建任务}({@link CreateTasksRequest 请求参数}): {@link CreateTasksResponse 返回参数} */
   CreateTasks(data: CreateTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTasksResponse>;
-  /** 按顺序创建任务 */
+  /** {@link CreateTasksInOrder 按顺序创建任务}({@link CreateTasksInOrderRequest 请求参数}): {@link CreateTasksInOrderResponse 返回参数} */
   CreateTasksInOrder(data: CreateTasksInOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTasksInOrderResponse>;
-  /** 创建用户 */
+  /** {@link CreateUser 创建用户}({@link CreateUserRequest 请求参数}): {@link CreateUserResponse 返回参数} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
-  /** 创建工作组 */
+  /** {@link CreateWorkGroup 创建工作组}({@link CreateWorkGroupRequest 请求参数}): {@link CreateWorkGroupResponse 返回参数} */
   CreateWorkGroup(data: CreateWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkGroupResponse>;
-  /** 删除sql脚本 */
+  /** {@link DeleteScript 删除sql脚本}({@link DeleteScriptRequest 请求参数}): {@link DeleteScriptResponse 返回参数} */
   DeleteScript(data: DeleteScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScriptResponse>;
-  /** 删除spark应用 */
+  /** {@link DeleteSparkApp 删除spark应用}({@link DeleteSparkAppRequest 请求参数}): {@link DeleteSparkAppResponse 返回参数} */
   DeleteSparkApp(data: DeleteSparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSparkAppResponse>;
-  /** 删除用户 */
+  /** {@link DeleteUser 删除用户}({@link DeleteUserRequest 请求参数}): {@link DeleteUserResponse 返回参数} */
   DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
-  /** 从工作组中删除用户 */
+  /** {@link DeleteUsersFromWorkGroup 从工作组中删除用户}({@link DeleteUsersFromWorkGroupRequest 请求参数}): {@link DeleteUsersFromWorkGroupResponse 返回参数} */
   DeleteUsersFromWorkGroup(data: DeleteUsersFromWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersFromWorkGroupResponse>;
-  /** 删除工作组 */
+  /** {@link DeleteWorkGroup 删除工作组}({@link DeleteWorkGroupRequest 请求参数}): {@link DeleteWorkGroupResponse 返回参数} */
   DeleteWorkGroup(data: DeleteWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkGroupResponse>;
-  /** DMS元数据获取库 */
+  /** {@link DescribeDMSDatabase DMS元数据获取库}({@link DescribeDMSDatabaseRequest 请求参数}): {@link DescribeDMSDatabaseResponse 返回参数} */
   DescribeDMSDatabase(data?: DescribeDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSDatabaseResponse>;
-  /** DMS元数据获取分区 */
+  /** {@link DescribeDMSPartitions DMS元数据获取分区}({@link DescribeDMSPartitionsRequest 请求参数}): {@link DescribeDMSPartitionsResponse 返回参数} */
   DescribeDMSPartitions(data: DescribeDMSPartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSPartitionsResponse>;
-  /** DMS元数据获取表 */
+  /** {@link DescribeDMSTable DMS元数据获取表}({@link DescribeDMSTableRequest 请求参数}): {@link DescribeDMSTableResponse 返回参数} */
   DescribeDMSTable(data?: DescribeDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSTableResponse>;
-  /** DMS元数据获取表列表 */
+  /** {@link DescribeDMSTables DMS元数据获取表列表}({@link DescribeDMSTablesRequest 请求参数}): {@link DescribeDMSTablesResponse 返回参数} */
   DescribeDMSTables(data?: DescribeDMSTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSTablesResponse>;
-  /** 查询数据库列表 */
+  /** {@link DescribeDatabases 查询数据库列表}({@link DescribeDatabasesRequest 请求参数}): {@link DescribeDatabasesResponse 返回参数} */
   DescribeDatabases(data?: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
-  /** 查询结果下载任务 */
+  /** {@link DescribeResultDownload 查询结果下载任务}({@link DescribeResultDownloadRequest 请求参数}): {@link DescribeResultDownloadResponse 返回参数} */
   DescribeResultDownload(data: DescribeResultDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResultDownloadResponse>;
-  /** 查询script列表 */
+  /** {@link DescribeScripts 查询script列表}({@link DescribeScriptsRequest 请求参数}): {@link DescribeScriptsResponse 返回参数} */
   DescribeScripts(data?: DescribeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScriptsResponse>;
-  /** 查询具体的spark应用 */
+  /** {@link DescribeSparkAppJob 查询具体的spark应用}({@link DescribeSparkAppJobRequest 请求参数}): {@link DescribeSparkAppJobResponse 返回参数} */
   DescribeSparkAppJob(data?: DescribeSparkAppJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppJobResponse>;
-  /** 获取spark应用列表 */
+  /** {@link DescribeSparkAppJobs 获取spark应用列表}({@link DescribeSparkAppJobsRequest 请求参数}): {@link DescribeSparkAppJobsResponse 返回参数} */
   DescribeSparkAppJobs(data?: DescribeSparkAppJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppJobsResponse>;
-  /** 查询spark应用的运行任务实例列表 */
+  /** {@link DescribeSparkAppTasks 查询spark应用的运行任务实例列表}({@link DescribeSparkAppTasksRequest 请求参数}): {@link DescribeSparkAppTasksResponse 返回参数} */
   DescribeSparkAppTasks(data: DescribeSparkAppTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppTasksResponse>;
-  /** 查询结果存储位置 */
+  /** {@link DescribeStoreLocation 查询结果存储位置}({@link DescribeStoreLocationRequest 请求参数}): {@link DescribeStoreLocationResponse 返回参数} */
   DescribeStoreLocation(data?: DescribeStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStoreLocationResponse>;
-  /** 查询表详情 */
+  /** {@link DescribeTable 查询表详情}({@link DescribeTableRequest 请求参数}): {@link DescribeTableResponse 返回参数} */
   DescribeTable(data: DescribeTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableResponse>;
-  /** 查询数据表列表 */
+  /** {@link DescribeTables 查询数据表列表}({@link DescribeTablesRequest 请求参数}): {@link DescribeTablesResponse 返回参数} */
   DescribeTables(data: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
-  /** 查询任务结果 */
+  /** {@link DescribeTaskResult 查询任务结果}({@link DescribeTaskResultRequest 请求参数}): {@link DescribeTaskResultResponse 返回参数} */
   DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
-  /** 查询任务列表 */
+  /** {@link DescribeTasks 查询任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** 获取用户列表信息 */
+  /** {@link DescribeUsers 获取用户列表信息}({@link DescribeUsersRequest 请求参数}): {@link DescribeUsersResponse 返回参数} */
   DescribeUsers(data?: DescribeUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersResponse>;
-  /** 查询视图列表 */
+  /** {@link DescribeViews 查询视图列表}({@link DescribeViewsRequest 请求参数}): {@link DescribeViewsResponse 返回参数} */
   DescribeViews(data: DescribeViewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeViewsResponse>;
-  /** 获取工作组列表 */
+  /** {@link DescribeWorkGroups 获取工作组列表}({@link DescribeWorkGroupsRequest 请求参数}): {@link DescribeWorkGroupsResponse 返回参数} */
   DescribeWorkGroups(data?: DescribeWorkGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkGroupsResponse>;
-  /** 解绑用户鉴权策略 */
+  /** {@link DetachUserPolicy 解绑用户鉴权策略}({@link DetachUserPolicyRequest 请求参数}): {@link DetachUserPolicyResponse 返回参数} */
   DetachUserPolicy(data: DetachUserPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DetachUserPolicyResponse>;
-  /** 解绑工作组鉴权策略 */
+  /** {@link DetachWorkGroupPolicy 解绑工作组鉴权策略}({@link DetachWorkGroupPolicyRequest 请求参数}): {@link DetachWorkGroupPolicyResponse 返回参数} */
   DetachWorkGroupPolicy(data: DetachWorkGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DetachWorkGroupPolicyResponse>;
-  /** DMS元数据删除库 */
+  /** {@link DropDMSDatabase DMS元数据删除库}({@link DropDMSDatabaseRequest 请求参数}): {@link DropDMSDatabaseResponse 返回参数} */
   DropDMSDatabase(data: DropDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DropDMSDatabaseResponse>;
-  /** DMS元数据删除分区 */
+  /** {@link DropDMSPartitions DMS元数据删除分区}({@link DropDMSPartitionsRequest 请求参数}): {@link DropDMSPartitionsResponse 返回参数} */
   DropDMSPartitions(data?: DropDMSPartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DropDMSPartitionsResponse>;
-  /** DMS元数据删除表 */
+  /** {@link DropDMSTable DMS元数据删除表}({@link DropDMSTableRequest 请求参数}): {@link DropDMSTableResponse 返回参数} */
   DropDMSTable(data?: DropDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<DropDMSTableResponse>;
-  /** 日志列表 */
+  /** {@link ListTaskJobLogDetail 日志列表}({@link ListTaskJobLogDetailRequest 请求参数}): {@link ListTaskJobLogDetailResponse 返回参数} */
   ListTaskJobLogDetail(data: ListTaskJobLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskJobLogDetailResponse>;
-  /** 元数据锁 */
+  /** {@link LockMetaData 元数据锁}({@link LockMetaDataRequest 请求参数}): {@link LockMetaDataResponse 返回参数} */
   LockMetaData(data: LockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<LockMetaDataResponse>;
-  /** 更新spark应用 */
+  /** {@link ModifySparkApp 更新spark应用}({@link ModifySparkAppRequest 请求参数}): {@link ModifySparkAppResponse 返回参数} */
   ModifySparkApp(data: ModifySparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySparkAppResponse>;
-  /** 修改用户信息 */
+  /** {@link ModifyUser 修改用户信息}({@link ModifyUserRequest 请求参数}): {@link ModifyUserResponse 返回参数} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
-  /** 修改工作组信息 */
+  /** {@link ModifyWorkGroup 修改工作组信息}({@link ModifyWorkGroupRequest 请求参数}): {@link ModifyWorkGroupResponse 返回参数} */
   ModifyWorkGroup(data: ModifyWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkGroupResponse>;
-  /** 上报元数据心跳 */
+  /** {@link ReportHeartbeatMetaData 上报元数据心跳}({@link ReportHeartbeatMetaDataRequest 请求参数}): {@link ReportHeartbeatMetaDataResponse 返回参数} */
   ReportHeartbeatMetaData(data?: ReportHeartbeatMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<ReportHeartbeatMetaDataResponse>;
-  /** 解绑用户上的用户组 */
+  /** {@link UnbindWorkGroupsFromUser 解绑用户上的用户组}({@link UnbindWorkGroupsFromUserRequest 请求参数}): {@link UnbindWorkGroupsFromUserResponse 返回参数} */
   UnbindWorkGroupsFromUser(data: UnbindWorkGroupsFromUserRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindWorkGroupsFromUserResponse>;
-  /** 元数据解锁 */
+  /** {@link UnlockMetaData 元数据解锁}({@link UnlockMetaDataRequest 请求参数}): {@link UnlockMetaDataResponse 返回参数} */
   UnlockMetaData(data: UnlockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockMetaDataResponse>;
 }
 

@@ -486,32 +486,32 @@ declare interface SyncKTVRobotCommandResponse {
   RequestId?: string;
 }
 
-/** [音速达直播音乐版权引擎](https://cloud.tencent.com/document/product/1592) */
+/** {@link Yinsuda 音速达直播音乐版权引擎} */
 declare interface Yinsuda {
   (): Versions;
-  /** 批量获取歌曲详情 */
+  /** {@link BatchDescribeKTVMusicDetails 批量获取歌曲详情}({@link BatchDescribeKTVMusicDetailsRequest 请求参数}): {@link BatchDescribeKTVMusicDetailsResponse 返回参数} */
   BatchDescribeKTVMusicDetails(data: BatchDescribeKTVMusicDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDescribeKTVMusicDetailsResponse>;
-  /** 创建机器人 */
+  /** {@link CreateKTVRobot 创建机器人}({@link CreateKTVRobotRequest 请求参数}): {@link CreateKTVRobotResponse 返回参数} */
   CreateKTVRobot(data: CreateKTVRobotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKTVRobotResponse>;
-  /** 匹配歌曲 */
+  /** {@link DescribeKTVMatchMusics 匹配歌曲}({@link DescribeKTVMatchMusicsRequest 请求参数}): {@link DescribeKTVMatchMusicsResponse 返回参数} */
   DescribeKTVMatchMusics(data: DescribeKTVMatchMusicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVMatchMusicsResponse>;
-  /** 获取标签歌曲 */
+  /** {@link DescribeKTVMusicsByTag 获取标签歌曲}({@link DescribeKTVMusicsByTagRequest 请求参数}): {@link DescribeKTVMusicsByTagResponse 返回参数} */
   DescribeKTVMusicsByTag(data: DescribeKTVMusicsByTagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVMusicsByTagResponse>;
-  /** 获取歌单详情 */
+  /** {@link DescribeKTVPlaylistDetail 获取歌单详情}({@link DescribeKTVPlaylistDetailRequest 请求参数}): {@link DescribeKTVPlaylistDetailResponse 返回参数} */
   DescribeKTVPlaylistDetail(data: DescribeKTVPlaylistDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVPlaylistDetailResponse>;
-  /** 获取推荐歌单列表 */
+  /** {@link DescribeKTVPlaylists 获取推荐歌单列表}({@link DescribeKTVPlaylistsRequest 请求参数}): {@link DescribeKTVPlaylistsResponse 返回参数} */
   DescribeKTVPlaylists(data: DescribeKTVPlaylistsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVPlaylistsResponse>;
-  /** 获取机器人信息 */
+  /** {@link DescribeKTVRobots 获取机器人信息}({@link DescribeKTVRobotsRequest 请求参数}): {@link DescribeKTVRobotsResponse 返回参数} */
   DescribeKTVRobots(data: DescribeKTVRobotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVRobotsResponse>;
-  /** 获取联想词 */
+  /** {@link DescribeKTVSuggestions 获取联想词}({@link DescribeKTVSuggestionsRequest 请求参数}): {@link DescribeKTVSuggestionsResponse 返回参数} */
   DescribeKTVSuggestions(data: DescribeKTVSuggestionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVSuggestionsResponse>;
-  /** 获取标签列表 */
+  /** {@link DescribeKTVTags 获取标签列表}({@link DescribeKTVTagsRequest 请求参数}): {@link DescribeKTVTagsResponse 返回参数} */
   DescribeKTVTags(data: DescribeKTVTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVTagsResponse>;
-  /** 销毁机器人 */
+  /** {@link DestroyKTVRobot 销毁机器人}({@link DestroyKTVRobotRequest 请求参数}): {@link DestroyKTVRobotResponse 返回参数} */
   DestroyKTVRobot(data: DestroyKTVRobotRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyKTVRobotResponse>;
-  /** 搜索歌曲 */
+  /** {@link SearchKTVMusics 搜索歌曲}({@link SearchKTVMusicsRequest 请求参数}): {@link SearchKTVMusicsResponse 返回参数} */
   SearchKTVMusics(data: SearchKTVMusicsRequest, config?: AxiosRequestConfig): AxiosPromise<SearchKTVMusicsResponse>;
-  /** 同步机器人指令 */
+  /** {@link SyncKTVRobotCommand 同步机器人指令}({@link SyncKTVRobotCommandRequest 请求参数}): {@link SyncKTVRobotCommandResponse 返回参数} */
   SyncKTVRobotCommand(data: SyncKTVRobotCommandRequest, config?: AxiosRequestConfig): AxiosPromise<SyncKTVRobotCommandResponse>;
 }
 

@@ -1040,76 +1040,76 @@ declare namespace V20190711 {
   }
 }
 
-/** [短信](https://cloud.tencent.com/document/product/382) */
+/** {@link Sms 短信} */
 declare interface Sms {
   (): Versions;
-  /** 添加短信签名 */
+  /** {@link AddSmsSign 添加短信签名}({@link AddSmsSignRequest 请求参数}): {@link AddSmsSignResponse 返回参数} */
   AddSmsSign(data: AddSmsSignRequest, config?: AxiosRequestConfig): AxiosPromise<AddSmsSignResponse>;
-  /** 添加短信模板 */
+  /** {@link AddSmsTemplate 添加短信模板}({@link AddSmsTemplateRequest 请求参数}): {@link AddSmsTemplateResponse 返回参数} */
   AddSmsTemplate(data: AddSmsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<AddSmsTemplateResponse>;
-  /** 回执数据统计 */
+  /** {@link CallbackStatusStatistics 回执数据统计}({@link CallbackStatusStatisticsRequest 请求参数}): {@link CallbackStatusStatisticsResponse 返回参数} */
   CallbackStatusStatistics(data: CallbackStatusStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<CallbackStatusStatisticsResponse>;
-  /** 删除短信签名 */
+  /** {@link DeleteSmsSign 删除短信签名}({@link DeleteSmsSignRequest 请求参数}): {@link DeleteSmsSignResponse 返回参数} */
   DeleteSmsSign(data: DeleteSmsSignRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSmsSignResponse>;
-  /** 删除短信模板 */
+  /** {@link DeleteSmsTemplate 删除短信模板}({@link DeleteSmsTemplateRequest 请求参数}): {@link DeleteSmsTemplateResponse 返回参数} */
   DeleteSmsTemplate(data: DeleteSmsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSmsTemplateResponse>;
-  /** 号码信息查询 */
+  /** {@link DescribePhoneNumberInfo 号码信息查询}({@link DescribePhoneNumberInfoRequest 请求参数}): {@link DescribePhoneNumberInfoResponse 返回参数} */
   DescribePhoneNumberInfo(data: DescribePhoneNumberInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePhoneNumberInfoResponse>;
-  /** 短信签名状态查询 */
+  /** {@link DescribeSmsSignList 短信签名状态查询}({@link DescribeSmsSignListRequest 请求参数}): {@link DescribeSmsSignListResponse 返回参数} */
   DescribeSmsSignList(data: DescribeSmsSignListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmsSignListResponse>;
-  /** 短信模板状态查询 */
+  /** {@link DescribeSmsTemplateList 短信模板状态查询}({@link DescribeSmsTemplateListRequest 请求参数}): {@link DescribeSmsTemplateListResponse 返回参数} */
   DescribeSmsTemplateList(data: DescribeSmsTemplateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmsTemplateListResponse>;
-  /** 修改短信签名 */
+  /** {@link ModifySmsSign 修改短信签名}({@link ModifySmsSignRequest 请求参数}): {@link ModifySmsSignResponse 返回参数} */
   ModifySmsSign(data: ModifySmsSignRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySmsSignResponse>;
-  /** 修改短信模板 */
+  /** {@link ModifySmsTemplate 修改短信模板}({@link ModifySmsTemplateRequest 请求参数}): {@link ModifySmsTemplateResponse 返回参数} */
   ModifySmsTemplate(data: ModifySmsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySmsTemplateResponse>;
-  /** 拉取短信回复状态 */
+  /** {@link PullSmsReplyStatus 拉取短信回复状态}({@link PullSmsReplyStatusRequest 请求参数}): {@link PullSmsReplyStatusResponse 返回参数} */
   PullSmsReplyStatus(data: PullSmsReplyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<PullSmsReplyStatusResponse>;
-  /** 拉取单个号码短信回复状态 */
+  /** {@link PullSmsReplyStatusByPhoneNumber 拉取单个号码短信回复状态}({@link PullSmsReplyStatusByPhoneNumberRequest 请求参数}): {@link PullSmsReplyStatusByPhoneNumberResponse 返回参数} */
   PullSmsReplyStatusByPhoneNumber(data: PullSmsReplyStatusByPhoneNumberRequest, config?: AxiosRequestConfig): AxiosPromise<PullSmsReplyStatusByPhoneNumberResponse>;
-  /** 拉取短信下发状态 */
+  /** {@link PullSmsSendStatus 拉取短信下发状态}({@link PullSmsSendStatusRequest 请求参数}): {@link PullSmsSendStatusResponse 返回参数} */
   PullSmsSendStatus(data: PullSmsSendStatusRequest, config?: AxiosRequestConfig): AxiosPromise<PullSmsSendStatusResponse>;
-  /** 拉取单个号码短信下发状态 */
+  /** {@link PullSmsSendStatusByPhoneNumber 拉取单个号码短信下发状态}({@link PullSmsSendStatusByPhoneNumberRequest 请求参数}): {@link PullSmsSendStatusByPhoneNumberResponse 返回参数} */
   PullSmsSendStatusByPhoneNumber(data: PullSmsSendStatusByPhoneNumberRequest, config?: AxiosRequestConfig): AxiosPromise<PullSmsSendStatusByPhoneNumberResponse>;
-  /** 上报转换率 */
+  /** {@link ReportConversion 上报转换率}({@link ReportConversionRequest 请求参数}): {@link ReportConversionResponse 返回参数} */
   ReportConversion(data: ReportConversionRequest, config?: AxiosRequestConfig): AxiosPromise<ReportConversionResponse>;
-  /** 发送短信 */
+  /** {@link SendSms 发送短信}({@link SendSmsRequest 请求参数}): {@link SendSmsResponse 返回参数} */
   SendSms(data: SendSmsRequest, config?: AxiosRequestConfig): AxiosPromise<SendSmsResponse>;
-  /** 发送短信数据统计 */
+  /** {@link SendStatusStatistics 发送短信数据统计}({@link SendStatusStatisticsRequest 请求参数}): {@link SendStatusStatisticsResponse 返回参数} */
   SendStatusStatistics(data: SendStatusStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<SendStatusStatisticsResponse>;
-  /** 套餐包信息统计 */
+  /** {@link SmsPackagesStatistics 套餐包信息统计}({@link SmsPackagesStatisticsRequest 请求参数}): {@link SmsPackagesStatisticsResponse 返回参数} */
   SmsPackagesStatistics(data: SmsPackagesStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<SmsPackagesStatisticsResponse>;
-  /** 添加短信签名 */
+  /** {@link V20190711.AddSmsSign 添加短信签名}({@link V20190711.AddSmsSignRequest 请求参数}): {@link V20190711.AddSmsSignResponse 返回参数} */
   AddSmsSign(data: V20190711.AddSmsSignRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.AddSmsSignResponse>;
-  /** 添加短信模板 */
+  /** {@link V20190711.AddSmsTemplate 添加短信模板}({@link V20190711.AddSmsTemplateRequest 请求参数}): {@link V20190711.AddSmsTemplateResponse 返回参数} */
   AddSmsTemplate(data: V20190711.AddSmsTemplateRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.AddSmsTemplateResponse>;
-  /** 回执数据统计 */
+  /** {@link V20190711.CallbackStatusStatistics 回执数据统计}({@link V20190711.CallbackStatusStatisticsRequest 请求参数}): {@link V20190711.CallbackStatusStatisticsResponse 返回参数} */
   CallbackStatusStatistics(data: V20190711.CallbackStatusStatisticsRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.CallbackStatusStatisticsResponse>;
-  /** 删除短信签名 */
+  /** {@link V20190711.DeleteSmsSign 删除短信签名}({@link V20190711.DeleteSmsSignRequest 请求参数}): {@link V20190711.DeleteSmsSignResponse 返回参数} */
   DeleteSmsSign(data: V20190711.DeleteSmsSignRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.DeleteSmsSignResponse>;
-  /** 删除短信模板 */
+  /** {@link V20190711.DeleteSmsTemplate 删除短信模板}({@link V20190711.DeleteSmsTemplateRequest 请求参数}): {@link V20190711.DeleteSmsTemplateResponse 返回参数} */
   DeleteSmsTemplate(data: V20190711.DeleteSmsTemplateRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.DeleteSmsTemplateResponse>;
-  /** 短信签名状态查询 */
+  /** {@link V20190711.DescribeSmsSignList 短信签名状态查询}({@link V20190711.DescribeSmsSignListRequest 请求参数}): {@link V20190711.DescribeSmsSignListResponse 返回参数} */
   DescribeSmsSignList(data: V20190711.DescribeSmsSignListRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.DescribeSmsSignListResponse>;
-  /** 短信模板状态查询 */
+  /** {@link V20190711.DescribeSmsTemplateList 短信模板状态查询}({@link V20190711.DescribeSmsTemplateListRequest 请求参数}): {@link V20190711.DescribeSmsTemplateListResponse 返回参数} */
   DescribeSmsTemplateList(data: V20190711.DescribeSmsTemplateListRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.DescribeSmsTemplateListResponse>;
-  /** 修改短信签名 */
+  /** {@link V20190711.ModifySmsSign 修改短信签名}({@link V20190711.ModifySmsSignRequest 请求参数}): {@link V20190711.ModifySmsSignResponse 返回参数} */
   ModifySmsSign(data: V20190711.ModifySmsSignRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.ModifySmsSignResponse>;
-  /** 修改短信模板 */
+  /** {@link V20190711.ModifySmsTemplate 修改短信模板}({@link V20190711.ModifySmsTemplateRequest 请求参数}): {@link V20190711.ModifySmsTemplateResponse 返回参数} */
   ModifySmsTemplate(data: V20190711.ModifySmsTemplateRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.ModifySmsTemplateResponse>;
-  /** 拉取短信回复状态 */
+  /** {@link V20190711.PullSmsReplyStatus 拉取短信回复状态}({@link V20190711.PullSmsReplyStatusRequest 请求参数}): {@link V20190711.PullSmsReplyStatusResponse 返回参数} */
   PullSmsReplyStatus(data: V20190711.PullSmsReplyStatusRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.PullSmsReplyStatusResponse>;
-  /** 拉取单个号码短信回复状态 */
+  /** {@link V20190711.PullSmsReplyStatusByPhoneNumber 拉取单个号码短信回复状态}({@link V20190711.PullSmsReplyStatusByPhoneNumberRequest 请求参数}): {@link V20190711.PullSmsReplyStatusByPhoneNumberResponse 返回参数} */
   PullSmsReplyStatusByPhoneNumber(data: V20190711.PullSmsReplyStatusByPhoneNumberRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.PullSmsReplyStatusByPhoneNumberResponse>;
-  /** 拉取短信下发状态 */
+  /** {@link V20190711.PullSmsSendStatus 拉取短信下发状态}({@link V20190711.PullSmsSendStatusRequest 请求参数}): {@link V20190711.PullSmsSendStatusResponse 返回参数} */
   PullSmsSendStatus(data: V20190711.PullSmsSendStatusRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.PullSmsSendStatusResponse>;
-  /** 拉取单个号码短信下发状态 */
+  /** {@link V20190711.PullSmsSendStatusByPhoneNumber 拉取单个号码短信下发状态}({@link V20190711.PullSmsSendStatusByPhoneNumberRequest 请求参数}): {@link V20190711.PullSmsSendStatusByPhoneNumberResponse 返回参数} */
   PullSmsSendStatusByPhoneNumber(data: V20190711.PullSmsSendStatusByPhoneNumberRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.PullSmsSendStatusByPhoneNumberResponse>;
-  /** 发送短信 */
+  /** {@link V20190711.SendSms 发送短信}({@link V20190711.SendSmsRequest 请求参数}): {@link V20190711.SendSmsResponse 返回参数} */
   SendSms(data: V20190711.SendSmsRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.SendSmsResponse>;
-  /** 发送短信数据统计 */
+  /** {@link V20190711.SendStatusStatistics 发送短信数据统计}({@link V20190711.SendStatusStatisticsRequest 请求参数}): {@link V20190711.SendStatusStatisticsResponse 返回参数} */
   SendStatusStatistics(data: V20190711.SendStatusStatisticsRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.SendStatusStatisticsResponse>;
-  /** 套餐包信息统计 */
+  /** {@link V20190711.SmsPackagesStatistics 套餐包信息统计}({@link V20190711.SmsPackagesStatisticsRequest 请求参数}): {@link V20190711.SmsPackagesStatisticsResponse 返回参数} */
   SmsPackagesStatistics(data: V20190711.SmsPackagesStatisticsRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.SmsPackagesStatisticsResponse>;
 }
 

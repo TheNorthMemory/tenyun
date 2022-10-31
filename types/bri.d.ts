@@ -54,10 +54,10 @@ declare interface DescribeBRIResponse {
   RequestId?: string;
 }
 
-/** [业务风险情报](https://cloud.tencent.com/document/product/1064) */
+/** {@link Bri 业务风险情报} */
 declare interface Bri {
   (): Versions;
-  /** 获取业务风险情报 */
+  /** {@link DescribeBRI 获取业务风险情报}({@link DescribeBRIRequest 请求参数}): {@link DescribeBRIResponse 返回参数} */
   DescribeBRI(data: DescribeBRIRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBRIResponse>;
 }
 

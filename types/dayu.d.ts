@@ -3190,232 +3190,232 @@ declare interface ModifyResourceRenewFlagResponse {
   RequestId?: string;
 }
 
-/** [DDoS 高防包](https://cloud.tencent.com/document/product/1021) */
+/** {@link Dayu DDoS 高防包} */
 declare interface Dayu {
   (): Versions;
-  /** 设置基础防护的DDoS告警阈值 */
+  /** {@link CreateBasicDDoSAlarmThreshold 设置基础防护的DDoS告警阈值}({@link CreateBasicDDoSAlarmThresholdRequest 请求参数}): {@link CreateBasicDDoSAlarmThresholdResponse 返回参数} */
   CreateBasicDDoSAlarmThreshold(data: CreateBasicDDoSAlarmThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBasicDDoSAlarmThresholdResponse>;
-  /** 绑定IP到高防包实例 */
+  /** {@link CreateBoundIP 绑定IP到高防包实例}({@link CreateBoundIPRequest 请求参数}): {@link CreateBoundIPResponse 返回参数} */
   CreateBoundIP(data: CreateBoundIPRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBoundIPResponse>;
-  /** 添加CC防护的访问频率控制规则 */
+  /** {@link CreateCCFrequencyRules 添加CC防护的访问频率控制规则}({@link CreateCCFrequencyRulesRequest 请求参数}): {@link CreateCCFrequencyRulesResponse 返回参数} */
   CreateCCFrequencyRules(data: CreateCCFrequencyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCCFrequencyRulesResponse>;
-  /** 创建CC自定义策略 */
+  /** {@link CreateCCSelfDefinePolicy 创建CC自定义策略}({@link CreateCCSelfDefinePolicyRequest 请求参数}): {@link CreateCCSelfDefinePolicyResponse 返回参数} */
   CreateCCSelfDefinePolicy(data: CreateCCSelfDefinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCCSelfDefinePolicyResponse>;
-  /** 添加DDoS高级策略 */
+  /** {@link CreateDDoSPolicy 添加DDoS高级策略}({@link CreateDDoSPolicyRequest 请求参数}): {@link CreateDDoSPolicyResponse 返回参数} */
   CreateDDoSPolicy(data: CreateDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDDoSPolicyResponse>;
-  /** 添加策略场景 */
+  /** {@link CreateDDoSPolicyCase 添加策略场景}({@link CreateDDoSPolicyCaseRequest 请求参数}): {@link CreateDDoSPolicyCaseResponse 返回参数} */
   CreateDDoSPolicyCase(data: CreateDDoSPolicyCaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDDoSPolicyCaseResponse>;
-  /** 资源实例重命名 */
+  /** {@link CreateInstanceName 资源实例重命名}({@link CreateInstanceNameRequest 请求参数}): {@link CreateInstanceNameResponse 返回参数} */
   CreateInstanceName(data: CreateInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceNameResponse>;
-  /** 上传四层健康检查配置 */
+  /** {@link CreateL4HealthConfig 上传四层健康检查配置}({@link CreateL4HealthConfigRequest 请求参数}): {@link CreateL4HealthConfigResponse 返回参数} */
   CreateL4HealthConfig(data: CreateL4HealthConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL4HealthConfigResponse>;
-  /** 添加L4转发规则 */
+  /** {@link CreateL4Rules 添加L4转发规则}({@link CreateL4RulesRequest 请求参数}): {@link CreateL4RulesResponse 返回参数} */
   CreateL4Rules(data: CreateL4RulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL4RulesResponse>;
-  /** 创建7层CC自定义规则 */
+  /** {@link CreateL7CCRule 创建7层CC自定义规则}({@link CreateL7CCRuleRequest 请求参数}): {@link CreateL7CCRuleResponse 返回参数} */
   CreateL7CCRule(data: CreateL7CCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL7CCRuleResponse>;
-  /** 上传七层健康检查配置 */
+  /** {@link CreateL7HealthConfig 上传七层健康检查配置}({@link CreateL7HealthConfigRequest 请求参数}): {@link CreateL7HealthConfigResponse 返回参数} */
   CreateL7HealthConfig(data: CreateL7HealthConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL7HealthConfigResponse>;
-  /** 配置L7转发规则的证书 */
+  /** {@link CreateL7RuleCert 配置L7转发规则的证书}({@link CreateL7RuleCertRequest 请求参数}): {@link CreateL7RuleCertResponse 返回参数} */
   CreateL7RuleCert(data: CreateL7RuleCertRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL7RuleCertResponse>;
-  /** 添加L7转发规则 */
+  /** {@link CreateL7Rules 添加L7转发规则}({@link CreateL7RulesRequest 请求参数}): {@link CreateL7RulesResponse 返回参数} */
   CreateL7Rules(data: CreateL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL7RulesResponse>;
-  /** 批量上传L7转发规则 */
+  /** {@link CreateL7RulesUpload 批量上传L7转发规则}({@link CreateL7RulesUploadRequest 请求参数}): {@link CreateL7RulesUploadResponse 返回参数} */
   CreateL7RulesUpload(data: CreateL7RulesUploadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL7RulesUploadResponse>;
-  /** 一键切回 */
+  /** {@link CreateNetReturn 一键切回}({@link CreateNetReturnRequest 请求参数}): {@link CreateNetReturnResponse 返回参数} */
   CreateNetReturn(data: CreateNetReturnRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetReturnResponse>;
-  /** 添加四层转发规则 */
+  /** {@link CreateNewL4Rules 添加四层转发规则}({@link CreateNewL4RulesRequest 请求参数}): {@link CreateNewL4RulesResponse 返回参数} */
   CreateNewL4Rules(data: CreateNewL4RulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNewL4RulesResponse>;
-  /** 添加7层转发规则 */
+  /** {@link CreateNewL7Rules 添加7层转发规则}({@link CreateNewL7RulesRequest 请求参数}): {@link CreateNewL7RulesResponse 返回参数} */
   CreateNewL7Rules(data: CreateNewL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNewL7RulesResponse>;
-  /** 批量上传7层转发规则 */
+  /** {@link CreateNewL7RulesUpload 批量上传7层转发规则}({@link CreateNewL7RulesUploadRequest 请求参数}): {@link CreateNewL7RulesUploadResponse 返回参数} */
   CreateNewL7RulesUpload(data: CreateNewL7RulesUploadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNewL7RulesUploadResponse>;
-  /** IP解封操作 */
+  /** {@link CreateUnblockIp IP解封操作}({@link CreateUnblockIpRequest 请求参数}): {@link CreateUnblockIpResponse 返回参数} */
   CreateUnblockIp(data: CreateUnblockIpRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUnblockIpResponse>;
-  /** 删除CC防护的访问频率控制规则 */
+  /** {@link DeleteCCFrequencyRules 删除CC防护的访问频率控制规则}({@link DeleteCCFrequencyRulesRequest 请求参数}): {@link DeleteCCFrequencyRulesResponse 返回参数} */
   DeleteCCFrequencyRules(data: DeleteCCFrequencyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCCFrequencyRulesResponse>;
-  /** 删除CC自定义策略 */
+  /** {@link DeleteCCSelfDefinePolicy 删除CC自定义策略}({@link DeleteCCSelfDefinePolicyRequest 请求参数}): {@link DeleteCCSelfDefinePolicyResponse 返回参数} */
   DeleteCCSelfDefinePolicy(data: DeleteCCSelfDefinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCCSelfDefinePolicyResponse>;
-  /** 删除DDoS高级策略 */
+  /** {@link DeleteDDoSPolicy 删除DDoS高级策略}({@link DeleteDDoSPolicyRequest 请求参数}): {@link DeleteDDoSPolicyResponse 返回参数} */
   DeleteDDoSPolicy(data: DeleteDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDDoSPolicyResponse>;
-  /** 删除策略场景 */
+  /** {@link DeleteDDoSPolicyCase 删除策略场景}({@link DeleteDDoSPolicyCaseRequest 请求参数}): {@link DeleteDDoSPolicyCaseResponse 返回参数} */
   DeleteDDoSPolicyCase(data: DeleteDDoSPolicyCaseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDDoSPolicyCaseResponse>;
-  /** 删除L4转发规则 */
+  /** {@link DeleteL4Rules 删除L4转发规则}({@link DeleteL4RulesRequest 请求参数}): {@link DeleteL4RulesResponse 返回参数} */
   DeleteL4Rules(data: DeleteL4RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL4RulesResponse>;
-  /** 删除L7转发规则 */
+  /** {@link DeleteL7Rules 删除L7转发规则}({@link DeleteL7RulesRequest 请求参数}): {@link DeleteL7RulesResponse 返回参数} */
   DeleteL7Rules(data: DeleteL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL7RulesResponse>;
-  /** 删除四层转发规则 */
+  /** {@link DeleteNewL4Rules 删除四层转发规则}({@link DeleteNewL4RulesRequest 请求参数}): {@link DeleteNewL4RulesResponse 返回参数} */
   DeleteNewL4Rules(data: DeleteNewL4RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNewL4RulesResponse>;
-  /** 删除七层转发规则 */
+  /** {@link DeleteNewL7Rules 删除七层转发规则}({@link DeleteNewL7RulesRequest 请求参数}): {@link DeleteNewL7RulesResponse 返回参数} */
   DeleteNewL7Rules(data: DeleteNewL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNewL7RulesResponse>;
-  /** 获取操作日志 */
+  /** {@link DescribeActionLog 获取操作日志}({@link DescribeActionLogRequest 请求参数}): {@link DescribeActionLogResponse 返回参数} */
   DescribeActionLog(data: DescribeActionLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActionLogResponse>;
-  /** 获取高防IP可添加的最多7层规则数量 */
+  /** {@link DescribeBGPIPL7RuleMaxCnt 获取高防IP可添加的最多7层规则数量}({@link DescribeBGPIPL7RuleMaxCntRequest 请求参数}): {@link DescribeBGPIPL7RuleMaxCntResponse 返回参数} */
   DescribeBGPIPL7RuleMaxCnt(data: DescribeBGPIPL7RuleMaxCntRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBGPIPL7RuleMaxCntResponse>;
-  /** 获取转发报表数据 */
+  /** {@link DescribeBaradData 获取转发报表数据}({@link DescribeBaradDataRequest 请求参数}): {@link DescribeBaradDataResponse 返回参数} */
   DescribeBaradData(data: DescribeBaradDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaradDataResponse>;
-  /** 获取基础防护CC防护阈值 */
+  /** {@link DescribeBasicCCThreshold 获取基础防护CC防护阈值}({@link DescribeBasicCCThresholdRequest 请求参数}): {@link DescribeBasicCCThresholdResponse 返回参数} */
   DescribeBasicCCThreshold(data: DescribeBasicCCThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicCCThresholdResponse>;
-  /** 获取基础防护黑洞阈值 */
+  /** {@link DescribeBasicDeviceThreshold 获取基础防护黑洞阈值}({@link DescribeBasicDeviceThresholdRequest 请求参数}): {@link DescribeBasicDeviceThresholdResponse 返回参数} */
   DescribeBasicDeviceThreshold(data: DescribeBasicDeviceThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicDeviceThresholdResponse>;
-  /** 获取业务流量状态码统计 */
+  /** {@link DescribeBizHttpStatus 获取业务流量状态码统计}({@link DescribeBizHttpStatusRequest 请求参数}): {@link DescribeBizHttpStatusResponse 返回参数} */
   DescribeBizHttpStatus(data: DescribeBizHttpStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBizHttpStatusResponse>;
-  /** 获取业务流量曲线 */
+  /** {@link DescribeBizTrend 获取业务流量曲线}({@link DescribeBizTrendRequest 请求参数}): {@link DescribeBizTrendResponse 返回参数} */
   DescribeBizTrend(data: DescribeBizTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBizTrendResponse>;
-  /** 获取CC告警通知阈值 */
+  /** {@link DescribeCCAlarmThreshold 获取CC告警通知阈值}({@link DescribeCCAlarmThresholdRequest 请求参数}): {@link DescribeCCAlarmThresholdResponse 返回参数} */
   DescribeCCAlarmThreshold(data: DescribeCCAlarmThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCAlarmThresholdResponse>;
-  /** 获取CC攻击事件列表 */
+  /** {@link DescribeCCEvList 获取CC攻击事件列表}({@link DescribeCCEvListRequest 请求参数}): {@link DescribeCCEvListResponse 返回参数} */
   DescribeCCEvList(data: DescribeCCEvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCEvListResponse>;
-  /** 获取CC防护的访问频率控制规则 */
+  /** {@link DescribeCCFrequencyRules 获取CC防护的访问频率控制规则}({@link DescribeCCFrequencyRulesRequest 请求参数}): {@link DescribeCCFrequencyRulesResponse 返回参数} */
   DescribeCCFrequencyRules(data: DescribeCCFrequencyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCFrequencyRulesResponse>;
-  /** 获取CC的IP黑白名单 */
+  /** {@link DescribeCCIpAllowDeny 获取CC的IP黑白名单}({@link DescribeCCIpAllowDenyRequest 请求参数}): {@link DescribeCCIpAllowDenyResponse 返回参数} */
   DescribeCCIpAllowDeny(data: DescribeCCIpAllowDenyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCIpAllowDenyResponse>;
-  /** 获取CC自定义策略 */
+  /** {@link DescribeCCSelfDefinePolicy 获取CC自定义策略}({@link DescribeCCSelfDefinePolicyRequest 请求参数}): {@link DescribeCCSelfDefinePolicyResponse 返回参数} */
   DescribeCCSelfDefinePolicy(data: DescribeCCSelfDefinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCSelfDefinePolicyResponse>;
-  /** 获取CC攻击指标数据 */
+  /** {@link DescribeCCTrend 获取CC攻击指标数据}({@link DescribeCCTrendRequest 请求参数}): {@link DescribeCCTrendResponse 返回参数} */
   DescribeCCTrend(data: DescribeCCTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCTrendResponse>;
-  /** 获取CC的Url白名单 */
+  /** {@link DescribeCCUrlAllow 获取CC的Url白名单}({@link DescribeCCUrlAllowRequest 请求参数}): {@link DescribeCCUrlAllowResponse 返回参数} */
   DescribeCCUrlAllow(data: DescribeCCUrlAllowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCUrlAllowResponse>;
-  /** 获取DDoS告警通知阈值 */
+  /** {@link DescribeDDoSAlarmThreshold 获取DDoS告警通知阈值}({@link DescribeDDoSAlarmThresholdRequest 请求参数}): {@link DescribeDDoSAlarmThresholdResponse 返回参数} */
   DescribeDDoSAlarmThreshold(data: DescribeDDoSAlarmThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAlarmThresholdResponse>;
-  /** DDoS攻击源IP地域分布图 */
+  /** {@link DescribeDDoSAttackIPRegionMap DDoS攻击源IP地域分布图}({@link DescribeDDoSAttackIPRegionMapRequest 请求参数}): {@link DescribeDDoSAttackIPRegionMapResponse 返回参数} */
   DescribeDDoSAttackIPRegionMap(data: DescribeDDoSAttackIPRegionMapRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackIPRegionMapResponse>;
-  /** 获取DDoS攻击源列表 */
+  /** {@link DescribeDDoSAttackSource 获取DDoS攻击源列表}({@link DescribeDDoSAttackSourceRequest 请求参数}): {@link DescribeDDoSAttackSourceResponse 返回参数} */
   DescribeDDoSAttackSource(data: DescribeDDoSAttackSourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackSourceResponse>;
-  /** 获取DDoS攻击占比分析 */
+  /** {@link DescribeDDoSCount 获取DDoS攻击占比分析}({@link DescribeDDoSCountRequest 请求参数}): {@link DescribeDDoSCountResponse 返回参数} */
   DescribeDDoSCount(data: DescribeDDoSCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSCountResponse>;
-  /** 获取DDoS防护状态 */
+  /** {@link DescribeDDoSDefendStatus 获取DDoS防护状态}({@link DescribeDDoSDefendStatusRequest 请求参数}): {@link DescribeDDoSDefendStatusResponse 返回参数} */
   DescribeDDoSDefendStatus(data: DescribeDDoSDefendStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSDefendStatusResponse>;
-  /** 获取DDoS攻击事件详情 */
+  /** {@link DescribeDDoSEvInfo 获取DDoS攻击事件详情}({@link DescribeDDoSEvInfoRequest 请求参数}): {@link DescribeDDoSEvInfoResponse 返回参数} */
   DescribeDDoSEvInfo(data: DescribeDDoSEvInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSEvInfoResponse>;
-  /** 获取DDoS攻击事件列表 */
+  /** {@link DescribeDDoSEvList 获取DDoS攻击事件列表}({@link DescribeDDoSEvListRequest 请求参数}): {@link DescribeDDoSEvListResponse 返回参数} */
   DescribeDDoSEvList(data: DescribeDDoSEvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSEvListResponse>;
-  /** 获取DDoSIP攻击日志 */
+  /** {@link DescribeDDoSIpLog 获取DDoSIP攻击日志}({@link DescribeDDoSIpLogRequest 请求参数}): {@link DescribeDDoSIpLogResponse 返回参数} */
   DescribeDDoSIpLog(data: DescribeDDoSIpLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSIpLogResponse>;
-  /** 获取高防IP专业版资源的DDoS攻击占比分析 */
+  /** {@link DescribeDDoSNetCount 获取高防IP专业版资源的DDoS攻击占比分析}({@link DescribeDDoSNetCountRequest 请求参数}): {@link DescribeDDoSNetCountResponse 返回参数} */
   DescribeDDoSNetCount(data: DescribeDDoSNetCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSNetCountResponse>;
-  /** 获取高防IP专业版资源的DDoS攻击事件详情 */
+  /** {@link DescribeDDoSNetEvInfo 获取高防IP专业版资源的DDoS攻击事件详情}({@link DescribeDDoSNetEvInfoRequest 请求参数}): {@link DescribeDDoSNetEvInfoResponse 返回参数} */
   DescribeDDoSNetEvInfo(data: DescribeDDoSNetEvInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSNetEvInfoResponse>;
-  /** 获取高防IP专业版资源的DDoS攻击事件列表 */
+  /** {@link DescribeDDoSNetEvList 获取高防IP专业版资源的DDoS攻击事件列表}({@link DescribeDDoSNetEvListRequest 请求参数}): {@link DescribeDDoSNetEvListResponse 返回参数} */
   DescribeDDoSNetEvList(data: DescribeDDoSNetEvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSNetEvListResponse>;
-  /** 获取高防IP专业版资源的DDoSIP攻击日志 */
+  /** {@link DescribeDDoSNetIpLog 获取高防IP专业版资源的DDoSIP攻击日志}({@link DescribeDDoSNetIpLogRequest 请求参数}): {@link DescribeDDoSNetIpLogResponse 返回参数} */
   DescribeDDoSNetIpLog(data: DescribeDDoSNetIpLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSNetIpLogResponse>;
-  /** 获取高防IP专业版资源的DDoS攻击指标数据 */
+  /** {@link DescribeDDoSNetTrend 获取高防IP专业版资源的DDoS攻击指标数据}({@link DescribeDDoSNetTrendRequest 请求参数}): {@link DescribeDDoSNetTrendResponse 返回参数} */
   DescribeDDoSNetTrend(data: DescribeDDoSNetTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSNetTrendResponse>;
-  /** 获取DDoS高级策略 */
+  /** {@link DescribeDDoSPolicy 获取DDoS高级策略}({@link DescribeDDoSPolicyRequest 请求参数}): {@link DescribeDDoSPolicyResponse 返回参数} */
   DescribeDDoSPolicy(data: DescribeDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSPolicyResponse>;
-  /** 获取DDoS攻击指标数据 */
+  /** {@link DescribeDDoSTrend 获取DDoS攻击指标数据}({@link DescribeDDoSTrendRequest 请求参数}): {@link DescribeDDoSTrendResponse 返回参数} */
   DescribeDDoSTrend(data: DescribeDDoSTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSTrendResponse>;
-  /** 获取DDoS防护使用统计 */
+  /** {@link DescribeDDoSUsedStatis 获取DDoS防护使用统计}({@link DescribeDDoSUsedStatisRequest 请求参数}): {@link DescribeDDoSUsedStatisResponse 返回参数} */
   DescribeDDoSUsedStatis(data: DescribeDDoSUsedStatisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSUsedStatisResponse>;
-  /** 获取独享包或共享包IP对应的云资产信息 */
+  /** {@link DescribeIPProductInfo 获取独享包或共享包IP对应的云资产信息}({@link DescribeIPProductInfoRequest 请求参数}): {@link DescribeIPProductInfoResponse 返回参数} */
   DescribeIPProductInfo(data: DescribeIPProductInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPProductInfoResponse>;
-  /** 获取保险包套餐列表 */
+  /** {@link DescribeInsurePacks 获取保险包套餐列表}({@link DescribeInsurePacksRequest 请求参数}): {@link DescribeInsurePacksResponse 返回参数} */
   DescribeInsurePacks(data?: DescribeInsurePacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInsurePacksResponse>;
-  /** 获取IP封堵列表 */
+  /** {@link DescribeIpBlockList 获取IP封堵列表}({@link DescribeIpBlockListRequest 请求参数}): {@link DescribeIpBlockListResponse 返回参数} */
   DescribeIpBlockList(data?: DescribeIpBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpBlockListResponse>;
-  /** 获取IP解封记录 */
+  /** {@link DescribeIpUnBlockList 获取IP解封记录}({@link DescribeIpUnBlockListRequest 请求参数}): {@link DescribeIpUnBlockListResponse 返回参数} */
   DescribeIpUnBlockList(data: DescribeIpUnBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpUnBlockListResponse>;
-  /** 导出四层健康检查配置 */
+  /** {@link DescribeL4HealthConfig 导出四层健康检查配置}({@link DescribeL4HealthConfigRequest 请求参数}): {@link DescribeL4HealthConfigResponse 返回参数} */
   DescribeL4HealthConfig(data: DescribeL4HealthConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL4HealthConfigResponse>;
-  /** 获取L4转发规则健康检查异常结果 */
+  /** {@link DescribeL4RulesErrHealth 获取L4转发规则健康检查异常结果}({@link DescribeL4RulesErrHealthRequest 请求参数}): {@link DescribeL4RulesErrHealthResponse 返回参数} */
   DescribeL4RulesErrHealth(data: DescribeL4RulesErrHealthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL4RulesErrHealthResponse>;
-  /** 导出七层健康检查配置 */
+  /** {@link DescribeL7HealthConfig 导出七层健康检查配置}({@link DescribeL7HealthConfigRequest 请求参数}): {@link DescribeL7HealthConfigResponse 返回参数} */
   DescribeL7HealthConfig(data: DescribeL7HealthConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL7HealthConfigResponse>;
-  /** 获取四层转发规则 */
+  /** {@link DescribeNewL4Rules 获取四层转发规则}({@link DescribeNewL4RulesRequest 请求参数}): {@link DescribeNewL4RulesResponse 返回参数} */
   DescribeNewL4Rules(data: DescribeNewL4RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNewL4RulesResponse>;
-  /** 获取四层转发规则健康检查异常结果 */
+  /** {@link DescribeNewL4RulesErrHealth 获取四层转发规则健康检查异常结果}({@link DescribeNewL4RulesErrHealthRequest 请求参数}): {@link DescribeNewL4RulesErrHealthResponse 返回参数} */
   DescribeNewL4RulesErrHealth(data: DescribeNewL4RulesErrHealthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNewL4RulesErrHealthResponse>;
-  /** 获取L7转发规则健康检查异常结果 */
+  /** {@link DescribeNewL7RulesErrHealth 获取L7转发规则健康检查异常结果}({@link DescribeNewL7RulesErrHealthRequest 请求参数}): {@link DescribeNewL7RulesErrHealthResponse 返回参数} */
   DescribeNewL7RulesErrHealth(data: DescribeNewL7RulesErrHealthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNewL7RulesErrHealthResponse>;
-  /** 获取产品总览 */
+  /** {@link DescribePackIndex 获取产品总览}({@link DescribePackIndexRequest 请求参数}): {@link DescribePackIndexResponse 返回参数} */
   DescribePackIndex(data: DescribePackIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackIndexResponse>;
-  /** 下载攻击事件的pcap包 */
+  /** {@link DescribePcap 下载攻击事件的pcap包}({@link DescribePcapRequest 请求参数}): {@link DescribePcapResponse 返回参数} */
   DescribePcap(data: DescribePcapRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePcapResponse>;
-  /** 获取策略场景 */
+  /** {@link DescribePolicyCase 获取策略场景}({@link DescribePolicyCaseRequest 请求参数}): {@link DescribePolicyCaseResponse 返回参数} */
   DescribePolicyCase(data: DescribePolicyCaseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyCaseResponse>;
-  /** 获取资源的IP列表 */
+  /** {@link DescribeResIpList 获取资源的IP列表}({@link DescribeResIpListRequest 请求参数}): {@link DescribeResIpListResponse 返回参数} */
   DescribeResIpList(data: DescribeResIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResIpListResponse>;
-  /** 获取资源列表 */
+  /** {@link DescribeResourceList 获取资源列表}({@link DescribeResourceListRequest 请求参数}): {@link DescribeResourceListResponse 返回参数} */
   DescribeResourceList(data: DescribeResourceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceListResponse>;
-  /** 获取资源的规则数 */
+  /** {@link DescribeRuleSets 获取资源的规则数}({@link DescribeRuleSetsRequest 请求参数}): {@link DescribeRuleSetsResponse 返回参数} */
   DescribeRuleSets(data: DescribeRuleSetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleSetsResponse>;
-  /** 获取调度域名列表 */
+  /** {@link DescribeSchedulingDomainList 获取调度域名列表}({@link DescribeSchedulingDomainListRequest 请求参数}): {@link DescribeSchedulingDomainListResponse 返回参数} */
   DescribeSchedulingDomainList(data: DescribeSchedulingDomainListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSchedulingDomainListResponse>;
-  /** 获取安全统计 */
+  /** {@link DescribeSecIndex 获取安全统计}({@link DescribeSecIndexRequest 请求参数}): {@link DescribeSecIndexResponse 返回参数} */
   DescribeSecIndex(data?: DescribeSecIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecIndexResponse>;
-  /** 获取回源IP段 */
+  /** {@link DescribeSourceIpSegment 获取回源IP段}({@link DescribeSourceIpSegmentRequest 请求参数}): {@link DescribeSourceIpSegmentResponse 返回参数} */
   DescribeSourceIpSegment(data: DescribeSourceIpSegmentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceIpSegmentResponse>;
-  /** 获取业务转发统计数据 */
+  /** {@link DescribeTransmitStatis 获取业务转发统计数据}({@link DescribeTransmitStatisRequest 请求参数}): {@link DescribeTransmitStatisResponse 返回参数} */
   DescribeTransmitStatis(data: DescribeTransmitStatisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTransmitStatisResponse>;
-  /** 获取黑洞解封次数 */
+  /** {@link DescribeUnBlockStatis 获取黑洞解封次数}({@link DescribeUnBlockStatisRequest 请求参数}): {@link DescribeUnBlockStatisResponse 返回参数} */
   DescribeUnBlockStatis(data?: DescribeUnBlockStatisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnBlockStatisResponse>;
-  /** 获取L4转发规则 */
+  /** {@link DescribleL4Rules 获取L4转发规则}({@link DescribleL4RulesRequest 请求参数}): {@link DescribleL4RulesResponse 返回参数} */
   DescribleL4Rules(data: DescribleL4RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribleL4RulesResponse>;
-  /** 获取L7转发规则 */
+  /** {@link DescribleL7Rules 获取L7转发规则}({@link DescribleL7RulesRequest 请求参数}): {@link DescribleL7RulesResponse 返回参数} */
   DescribleL7Rules(data: DescribleL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribleL7RulesResponse>;
-  /** 获取7层规则 */
+  /** {@link DescribleNewL7Rules 获取7层规则}({@link DescribleNewL7RulesRequest 请求参数}): {@link DescribleNewL7RulesResponse 返回参数} */
   DescribleNewL7Rules(data: DescribleNewL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribleNewL7RulesResponse>;
-  /** 获取地域的资源实例数 */
+  /** {@link DescribleRegionCount 获取地域的资源实例数}({@link DescribleRegionCountRequest 请求参数}): {@link DescribleRegionCountResponse 返回参数} */
   DescribleRegionCount(data: DescribleRegionCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribleRegionCountResponse>;
-  /** 设置CC告警通知阈值 */
+  /** {@link ModifyCCAlarmThreshold 设置CC告警通知阈值}({@link ModifyCCAlarmThresholdRequest 请求参数}): {@link ModifyCCAlarmThresholdResponse 返回参数} */
   ModifyCCAlarmThreshold(data: ModifyCCAlarmThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCAlarmThresholdResponse>;
-  /** 修改CC防护的访问频率控制规则 */
+  /** {@link ModifyCCFrequencyRules 修改CC防护的访问频率控制规则}({@link ModifyCCFrequencyRulesRequest 请求参数}): {@link ModifyCCFrequencyRulesResponse 返回参数} */
   ModifyCCFrequencyRules(data: ModifyCCFrequencyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCFrequencyRulesResponse>;
-  /** 开启或关闭CC防护的访问频率控制规则 */
+  /** {@link ModifyCCFrequencyRulesStatus 开启或关闭CC防护的访问频率控制规则}({@link ModifyCCFrequencyRulesStatusRequest 请求参数}): {@link ModifyCCFrequencyRulesStatusResponse 返回参数} */
   ModifyCCFrequencyRulesStatus(data: ModifyCCFrequencyRulesStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCFrequencyRulesStatusResponse>;
-  /** 开启或关闭CC域名防护 */
+  /** {@link ModifyCCHostProtection 开启或关闭CC域名防护}({@link ModifyCCHostProtectionRequest 请求参数}): {@link ModifyCCHostProtectionResponse 返回参数} */
   ModifyCCHostProtection(data: ModifyCCHostProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCHostProtectionResponse>;
-  /** 添加或删除CC的IP黑白名单 */
+  /** {@link ModifyCCIpAllowDeny 添加或删除CC的IP黑白名单}({@link ModifyCCIpAllowDenyRequest 请求参数}): {@link ModifyCCIpAllowDenyResponse 返回参数} */
   ModifyCCIpAllowDeny(data: ModifyCCIpAllowDenyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCIpAllowDenyResponse>;
-  /** 修改CC防护等级 */
+  /** {@link ModifyCCLevel 修改CC防护等级}({@link ModifyCCLevelRequest 请求参数}): {@link ModifyCCLevelResponse 返回参数} */
   ModifyCCLevel(data: ModifyCCLevelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCLevelResponse>;
-  /** 修改CC自定义策略开关 */
+  /** {@link ModifyCCPolicySwitch 修改CC自定义策略开关}({@link ModifyCCPolicySwitchRequest 请求参数}): {@link ModifyCCPolicySwitchResponse 返回参数} */
   ModifyCCPolicySwitch(data: ModifyCCPolicySwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCPolicySwitchResponse>;
-  /** 修改CC自定义策略 */
+  /** {@link ModifyCCSelfDefinePolicy 修改CC自定义策略}({@link ModifyCCSelfDefinePolicyRequest 请求参数}): {@link ModifyCCSelfDefinePolicyResponse 返回参数} */
   ModifyCCSelfDefinePolicy(data: ModifyCCSelfDefinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCSelfDefinePolicyResponse>;
-  /** 修改CC的防护阈值 */
+  /** {@link ModifyCCThreshold 修改CC的防护阈值}({@link ModifyCCThresholdRequest 请求参数}): {@link ModifyCCThresholdResponse 返回参数} */
   ModifyCCThreshold(data: ModifyCCThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCThresholdResponse>;
-  /** 添加或删除CC的URL白名单 */
+  /** {@link ModifyCCUrlAllow 添加或删除CC的URL白名单}({@link ModifyCCUrlAllowRequest 请求参数}): {@link ModifyCCUrlAllowResponse 返回参数} */
   ModifyCCUrlAllow(data: ModifyCCUrlAllowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCUrlAllowResponse>;
-  /** 修改DDoS的AI防护状态 */
+  /** {@link ModifyDDoSAIStatus 修改DDoS的AI防护状态}({@link ModifyDDoSAIStatusRequest 请求参数}): {@link ModifyDDoSAIStatusResponse 返回参数} */
   ModifyDDoSAIStatus(data: ModifyDDoSAIStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSAIStatusResponse>;
-  /** 设置DDoS告警通知阈值 */
+  /** {@link ModifyDDoSAlarmThreshold 设置DDoS告警通知阈值}({@link ModifyDDoSAlarmThresholdRequest 请求参数}): {@link ModifyDDoSAlarmThresholdResponse 返回参数} */
   ModifyDDoSAlarmThreshold(data: ModifyDDoSAlarmThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSAlarmThresholdResponse>;
-  /** 修改DDoS防护状态 */
+  /** {@link ModifyDDoSDefendStatus 修改DDoS防护状态}({@link ModifyDDoSDefendStatusRequest 请求参数}): {@link ModifyDDoSDefendStatusResponse 返回参数} */
   ModifyDDoSDefendStatus(data: ModifyDDoSDefendStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSDefendStatusResponse>;
-  /** 修改DDoSIP防护等级 */
+  /** {@link ModifyDDoSLevel 修改DDoSIP防护等级}({@link ModifyDDoSLevelRequest 请求参数}): {@link ModifyDDoSLevelResponse 返回参数} */
   ModifyDDoSLevel(data: ModifyDDoSLevelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSLevelResponse>;
-  /** 修改DDoS高级策略 */
+  /** {@link ModifyDDoSPolicy 修改DDoS高级策略}({@link ModifyDDoSPolicyRequest 请求参数}): {@link ModifyDDoSPolicyResponse 返回参数} */
   ModifyDDoSPolicy(data: ModifyDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSPolicyResponse>;
-  /** 修改策略场景 */
+  /** {@link ModifyDDoSPolicyCase 修改策略场景}({@link ModifyDDoSPolicyCaseRequest 请求参数}): {@link ModifyDDoSPolicyCaseResponse 返回参数} */
   ModifyDDoSPolicyCase(data: ModifyDDoSPolicyCaseRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSPolicyCaseResponse>;
-  /** 修改DDoS高级策略名称 */
+  /** {@link ModifyDDoSPolicyName 修改DDoS高级策略名称}({@link ModifyDDoSPolicyNameRequest 请求参数}): {@link ModifyDDoSPolicyNameResponse 返回参数} */
   ModifyDDoSPolicyName(data: ModifyDDoSPolicyNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSPolicyNameResponse>;
-  /** 开启或关闭DDoS防护 */
+  /** {@link ModifyDDoSSwitch 开启或关闭DDoS防护}({@link ModifyDDoSSwitchRequest 请求参数}): {@link ModifyDDoSSwitchResponse 返回参数} */
   ModifyDDoSSwitch(data: ModifyDDoSSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSSwitchResponse>;
-  /** 修改DDoS清洗阈值 */
+  /** {@link ModifyDDoSThreshold 修改DDoS清洗阈值}({@link ModifyDDoSThresholdRequest 请求参数}): {@link ModifyDDoSThresholdResponse 返回参数} */
   ModifyDDoSThreshold(data: ModifyDDoSThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSThresholdResponse>;
-  /** 修改水印密钥 */
+  /** {@link ModifyDDoSWaterKey 修改水印密钥}({@link ModifyDDoSWaterKeyRequest 请求参数}): {@link ModifyDDoSWaterKeyResponse 返回参数} */
   ModifyDDoSWaterKey(data: ModifyDDoSWaterKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSWaterKeyResponse>;
-  /** 修改弹性防护阈值 */
+  /** {@link ModifyElasticLimit 修改弹性防护阈值}({@link ModifyElasticLimitRequest 请求参数}): {@link ModifyElasticLimitResponse 返回参数} */
   ModifyElasticLimit(data: ModifyElasticLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyElasticLimitResponse>;
-  /** 修改L4转发规则健康检查参数 */
+  /** {@link ModifyL4Health 修改L4转发规则健康检查参数}({@link ModifyL4HealthRequest 请求参数}): {@link ModifyL4HealthResponse 返回参数} */
   ModifyL4Health(data: ModifyL4HealthRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4HealthResponse>;
-  /** 修改L4转发规则的会话保持 */
+  /** {@link ModifyL4KeepTime 修改L4转发规则的会话保持}({@link ModifyL4KeepTimeRequest 请求参数}): {@link ModifyL4KeepTimeResponse 返回参数} */
   ModifyL4KeepTime(data: ModifyL4KeepTimeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4KeepTimeResponse>;
-  /** 修改L4转发规则 */
+  /** {@link ModifyL4Rules 修改L4转发规则}({@link ModifyL4RulesRequest 请求参数}): {@link ModifyL4RulesResponse 返回参数} */
   ModifyL4Rules(data: ModifyL4RulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4RulesResponse>;
-  /** 修改L7转发规则 */
+  /** {@link ModifyL7Rules 修改L7转发规则}({@link ModifyL7RulesRequest 请求参数}): {@link ModifyL7RulesResponse 返回参数} */
   ModifyL7Rules(data: ModifyL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL7RulesResponse>;
-  /** 设置自动切回 */
+  /** {@link ModifyNetReturnSwitch 设置自动切回}({@link ModifyNetReturnSwitchRequest 请求参数}): {@link ModifyNetReturnSwitchResponse 返回参数} */
   ModifyNetReturnSwitch(data: ModifyNetReturnSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetReturnSwitchResponse>;
-  /** 修改7层转发规则 */
+  /** {@link ModifyNewDomainRules 修改7层转发规则}({@link ModifyNewDomainRulesRequest 请求参数}): {@link ModifyNewDomainRulesResponse 返回参数} */
   ModifyNewDomainRules(data: ModifyNewDomainRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNewDomainRulesResponse>;
-  /** 修改4层转发规则 */
+  /** {@link ModifyNewL4Rule 修改4层转发规则}({@link ModifyNewL4RuleRequest 请求参数}): {@link ModifyNewL4RuleResponse 返回参数} */
   ModifyNewL4Rule(data: ModifyNewL4RuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNewL4RuleResponse>;
-  /** 资源绑定DDoS高级策略 */
+  /** {@link ModifyResBindDDoSPolicy 资源绑定DDoS高级策略}({@link ModifyResBindDDoSPolicyRequest 请求参数}): {@link ModifyResBindDDoSPolicyResponse 返回参数} */
   ModifyResBindDDoSPolicy(data: ModifyResBindDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResBindDDoSPolicyResponse>;
-  /** 修改资源自动续费标记 */
+  /** {@link ModifyResourceRenewFlag 修改资源自动续费标记}({@link ModifyResourceRenewFlagRequest 请求参数}): {@link ModifyResourceRenewFlagResponse 返回参数} */
   ModifyResourceRenewFlag(data: ModifyResourceRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceRenewFlagResponse>;
 }
 

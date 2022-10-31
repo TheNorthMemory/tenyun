@@ -558,42 +558,42 @@ declare interface SearchImageResponse {
   RequestId?: string;
 }
 
-/** [客流数字化平台](https://cloud.tencent.com/document/product/1320) */
+/** {@link Ump 客流数字化平台} */
 declare interface Ump {
   (): Versions;
-  /** 上报相机告警信息 */
+  /** {@link CreateCameraAlerts 上报相机告警信息}({@link CreateCameraAlertsRequest 请求参数}): {@link CreateCameraAlertsResponse 返回参数} */
   CreateCameraAlerts(data?: CreateCameraAlertsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCameraAlertsResponse>;
-  /** 相机状态上报接口 */
+  /** {@link CreateCameraState 相机状态上报接口}({@link CreateCameraStateRequest 请求参数}): {@link CreateCameraStateResponse 返回参数} */
   CreateCameraState(data: CreateCameraStateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCameraStateResponse>;
-  /** 抓拍上报接口 */
+  /** {@link CreateCapture 抓拍上报接口}({@link CreateCaptureRequest 请求参数}): {@link CreateCaptureResponse 返回参数} */
   CreateCapture(data: CreateCaptureRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCaptureResponse>;
-  /** 多经点位告警 */
+  /** {@link CreateMultiBizAlert 多经点位告警}({@link CreateMultiBizAlertRequest 请求参数}): {@link CreateMultiBizAlertResponse 返回参数} */
   CreateMultiBizAlert(data: CreateMultiBizAlertRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiBizAlertResponse>;
-  /** 进程监控信息上报 */
+  /** {@link CreateProgramState 进程监控信息上报}({@link CreateProgramStateRequest 请求参数}): {@link CreateProgramStateResponse 返回参数} */
   CreateProgramState(data: CreateProgramStateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProgramStateResponse>;
-  /** 服务器监控信息上报 */
+  /** {@link CreateServerState 服务器监控信息上报}({@link CreateServerStateRequest 请求参数}): {@link CreateServerStateResponse 返回参数} */
   CreateServerState(data: CreateServerStateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServerStateResponse>;
-  /** 多经点位消警 */
+  /** {@link DeleteMultiBizAlert 多经点位消警}({@link DeleteMultiBizAlertRequest 请求参数}): {@link DeleteMultiBizAlertResponse 返回参数} */
   DeleteMultiBizAlert(data: DeleteMultiBizAlertRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMultiBizAlertResponse>;
-  /** 删除任务 */
+  /** {@link DeleteTask 删除任务}({@link DeleteTaskRequest 请求参数}): {@link DeleteTaskResponse 返回参数} */
   DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;
-  /** 获取摄像头状态列表 */
+  /** {@link DescribeCameras 获取摄像头状态列表}({@link DescribeCamerasRequest 请求参数}): {@link DescribeCamerasResponse 返回参数} */
   DescribeCameras(data: DescribeCamerasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCamerasResponse>;
-  /** 获取摄像头配置信息 */
+  /** {@link DescribeConfig 获取摄像头配置信息}({@link DescribeConfigRequest 请求参数}): {@link DescribeConfigResponse 返回参数} */
   DescribeConfig(data: DescribeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigResponse>;
-  /** 获取底图 */
+  /** {@link DescribeImage 获取底图}({@link DescribeImageRequest 请求参数}): {@link DescribeImageResponse 返回参数} */
   DescribeImage(data: DescribeImageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageResponse>;
-  /** 获取多经点位底图 */
+  /** {@link DescribeMultiBizBaseImage 获取多经点位底图}({@link DescribeMultiBizBaseImageRequest 请求参数}): {@link DescribeMultiBizBaseImageResponse 返回参数} */
   DescribeMultiBizBaseImage(data: DescribeMultiBizBaseImageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMultiBizBaseImageResponse>;
-  /** 查询任务列表 */
+  /** {@link DescribeTasks 查询任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
   DescribeTasks(data: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** 获取点位列表 */
+  /** {@link DescribeZones 获取点位列表}({@link DescribeZonesRequest 请求参数}): {@link DescribeZonesResponse 返回参数} */
   DescribeZones(data: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
-  /** 多经点位配置更新 */
+  /** {@link ModifyMultiBizConfig 多经点位配置更新}({@link ModifyMultiBizConfigRequest 请求参数}): {@link ModifyMultiBizConfigResponse 返回参数} */
   ModifyMultiBizConfig(data: ModifyMultiBizConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMultiBizConfigResponse>;
-  /** 上报服务注册 */
+  /** {@link ReportServiceRegister 上报服务注册}({@link ReportServiceRegisterRequest 请求参数}): {@link ReportServiceRegisterResponse 返回参数} */
   ReportServiceRegister(data: ReportServiceRegisterRequest, config?: AxiosRequestConfig): AxiosPromise<ReportServiceRegisterResponse>;
-  /** 以图搜图 */
+  /** {@link SearchImage 以图搜图}({@link SearchImageRequest 请求参数}): {@link SearchImageResponse 返回参数} */
   SearchImage(data: SearchImageRequest, config?: AxiosRequestConfig): AxiosPromise<SearchImageResponse>;
 }
 

@@ -1588,82 +1588,82 @@ declare interface UpgradeLicenseResponse {
   RequestId?: string;
 }
 
-/** [Elasticsearch Service](https://cloud.tencent.com/document/product/845) */
+/** {@link Es Elasticsearch Service} */
 declare interface Es {
   (): Versions;
-  /** 创建索引 */
+  /** {@link CreateIndex 创建索引}({@link CreateIndexRequest 请求参数}): {@link CreateIndexResponse 返回参数} */
   CreateIndex(data: CreateIndexRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIndexResponse>;
-  /** 创建ES集群实例 */
+  /** {@link CreateInstance 创建ES集群实例}({@link CreateInstanceRequest 请求参数}): {@link CreateInstanceResponse 返回参数} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
-  /** 创建Logstash实例 */
+  /** {@link CreateLogstashInstance 创建Logstash实例}({@link CreateLogstashInstanceRequest 请求参数}): {@link CreateLogstashInstanceResponse 返回参数} */
   CreateLogstashInstance(data: CreateLogstashInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogstashInstanceResponse>;
-  /** 删除索引 */
+  /** {@link DeleteIndex 删除索引}({@link DeleteIndexRequest 请求参数}): {@link DeleteIndexResponse 返回参数} */
   DeleteIndex(data: DeleteIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIndexResponse>;
-  /** 销毁ES集群实例 */
+  /** {@link DeleteInstance 销毁ES集群实例}({@link DeleteInstanceRequest 请求参数}): {@link DeleteInstanceResponse 返回参数} */
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
-  /** 删除Logstash实例 */
+  /** {@link DeleteLogstashInstance 删除Logstash实例}({@link DeleteLogstashInstanceRequest 请求参数}): {@link DeleteLogstashInstanceResponse 返回参数} */
   DeleteLogstashInstance(data: DeleteLogstashInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogstashInstanceResponse>;
-  /** 删除Logstash管道 */
+  /** {@link DeleteLogstashPipelines 删除Logstash管道}({@link DeleteLogstashPipelinesRequest 请求参数}): {@link DeleteLogstashPipelinesResponse 返回参数} */
   DeleteLogstashPipelines(data: DeleteLogstashPipelinesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogstashPipelinesResponse>;
-  /** 获取索引列表 */
+  /** {@link DescribeIndexList 获取索引列表}({@link DescribeIndexListRequest 请求参数}): {@link DescribeIndexListResponse 返回参数} */
   DescribeIndexList(data: DescribeIndexListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexListResponse>;
-  /** 获取索引元数据 */
+  /** {@link DescribeIndexMeta 获取索引元数据}({@link DescribeIndexMetaRequest 请求参数}): {@link DescribeIndexMetaResponse 返回参数} */
   DescribeIndexMeta(data: DescribeIndexMetaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexMetaResponse>;
-  /** 查询ES集群日志 */
+  /** {@link DescribeInstanceLogs 查询ES集群日志}({@link DescribeInstanceLogsRequest 请求参数}): {@link DescribeInstanceLogsResponse 返回参数} */
   DescribeInstanceLogs(data: DescribeInstanceLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLogsResponse>;
-  /** 查询实例操作记录 */
+  /** {@link DescribeInstanceOperations 查询实例操作记录}({@link DescribeInstanceOperationsRequest 请求参数}): {@link DescribeInstanceOperationsResponse 返回参数} */
   DescribeInstanceOperations(data: DescribeInstanceOperationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceOperationsResponse>;
-  /** 查询ES集群实例 */
+  /** {@link DescribeInstances 查询ES集群实例}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** 查询Logstash实例日志 */
+  /** {@link DescribeLogstashInstanceLogs 查询Logstash实例日志}({@link DescribeLogstashInstanceLogsRequest 请求参数}): {@link DescribeLogstashInstanceLogsResponse 返回参数} */
   DescribeLogstashInstanceLogs(data: DescribeLogstashInstanceLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashInstanceLogsResponse>;
-  /** 查询Logstash实例操作记录 */
+  /** {@link DescribeLogstashInstanceOperations 查询Logstash实例操作记录}({@link DescribeLogstashInstanceOperationsRequest 请求参数}): {@link DescribeLogstashInstanceOperationsResponse 返回参数} */
   DescribeLogstashInstanceOperations(data: DescribeLogstashInstanceOperationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashInstanceOperationsResponse>;
-  /** 获取Logstash实例列表 */
+  /** {@link DescribeLogstashInstances 获取Logstash实例列表}({@link DescribeLogstashInstancesRequest 请求参数}): {@link DescribeLogstashInstancesResponse 返回参数} */
   DescribeLogstashInstances(data?: DescribeLogstashInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashInstancesResponse>;
-  /** 获取Logstash实例管道列表 */
+  /** {@link DescribeLogstashPipelines 获取Logstash实例管道列表}({@link DescribeLogstashPipelinesRequest 请求参数}): {@link DescribeLogstashPipelinesResponse 返回参数} */
   DescribeLogstashPipelines(data: DescribeLogstashPipelinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashPipelinesResponse>;
-  /** 查询集群视图 */
+  /** {@link DescribeViews 查询集群视图}({@link DescribeViewsRequest 请求参数}): {@link DescribeViewsResponse 返回参数} */
   DescribeViews(data: DescribeViewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeViewsResponse>;
-  /** 智能运维诊断集群 */
+  /** {@link DiagnoseInstance 智能运维诊断集群}({@link DiagnoseInstanceRequest 请求参数}): {@link DiagnoseInstanceResponse 返回参数} */
   DiagnoseInstance(data: DiagnoseInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DiagnoseInstanceResponse>;
-  /** 获取接收客户端请求的节点类型 */
+  /** {@link GetRequestTargetNodeTypes 获取接收客户端请求的节点类型}({@link GetRequestTargetNodeTypesRequest 请求参数}): {@link GetRequestTargetNodeTypesResponse 返回参数} */
   GetRequestTargetNodeTypes(data: GetRequestTargetNodeTypesRequest, config?: AxiosRequestConfig): AxiosPromise<GetRequestTargetNodeTypesResponse>;
-  /** 重启ES集群实例 */
+  /** {@link RestartInstance 重启ES集群实例}({@link RestartInstanceRequest 请求参数}): {@link RestartInstanceResponse 返回参数} */
   RestartInstance(data: RestartInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartInstanceResponse>;
-  /** 重启Kibana */
+  /** {@link RestartKibana 重启Kibana}({@link RestartKibanaRequest 请求参数}): {@link RestartKibanaResponse 返回参数} */
   RestartKibana(data: RestartKibanaRequest, config?: AxiosRequestConfig): AxiosPromise<RestartKibanaResponse>;
-  /** 重启Logstash实例 */
+  /** {@link RestartLogstashInstance 重启Logstash实例}({@link RestartLogstashInstanceRequest 请求参数}): {@link RestartLogstashInstanceResponse 返回参数} */
   RestartLogstashInstance(data: RestartLogstashInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartLogstashInstanceResponse>;
-  /** 重启集群节点 */
+  /** {@link RestartNodes 重启集群节点}({@link RestartNodesRequest 请求参数}): {@link RestartNodesResponse 返回参数} */
   RestartNodes(data: RestartNodesRequest, config?: AxiosRequestConfig): AxiosPromise<RestartNodesResponse>;
-  /** 保存并部署管道 */
+  /** {@link SaveAndDeployLogstashPipeline 保存并部署管道}({@link SaveAndDeployLogstashPipelineRequest 请求参数}): {@link SaveAndDeployLogstashPipelineResponse 返回参数} */
   SaveAndDeployLogstashPipeline(data: SaveAndDeployLogstashPipelineRequest, config?: AxiosRequestConfig): AxiosPromise<SaveAndDeployLogstashPipelineResponse>;
-  /** 启动Logstash管道 */
+  /** {@link StartLogstashPipelines 启动Logstash管道}({@link StartLogstashPipelinesRequest 请求参数}): {@link StartLogstashPipelinesResponse 返回参数} */
   StartLogstashPipelines(data: StartLogstashPipelinesRequest, config?: AxiosRequestConfig): AxiosPromise<StartLogstashPipelinesResponse>;
-  /** 停止Logstash管道 */
+  /** {@link StopLogstashPipelines 停止Logstash管道}({@link StopLogstashPipelinesRequest 请求参数}): {@link StopLogstashPipelinesResponse 返回参数} */
   StopLogstashPipelines(data: StopLogstashPipelinesRequest, config?: AxiosRequestConfig): AxiosPromise<StopLogstashPipelinesResponse>;
-  /** 更新智能运维配置 */
+  /** {@link UpdateDiagnoseSettings 更新智能运维配置}({@link UpdateDiagnoseSettingsRequest 请求参数}): {@link UpdateDiagnoseSettingsResponse 返回参数} */
   UpdateDiagnoseSettings(data: UpdateDiagnoseSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDiagnoseSettingsResponse>;
-  /** 更新ES集群词典 */
+  /** {@link UpdateDictionaries 更新ES集群词典}({@link UpdateDictionariesRequest 请求参数}): {@link UpdateDictionariesResponse 返回参数} */
   UpdateDictionaries(data: UpdateDictionariesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDictionariesResponse>;
-  /** 更新索引 */
+  /** {@link UpdateIndex 更新索引}({@link UpdateIndexRequest 请求参数}): {@link UpdateIndexResponse 返回参数} */
   UpdateIndex(data: UpdateIndexRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateIndexResponse>;
-  /** 更新ES集群实例 */
+  /** {@link UpdateInstance 更新ES集群实例}({@link UpdateInstanceRequest 请求参数}): {@link UpdateInstanceResponse 返回参数} */
   UpdateInstance(data: UpdateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateInstanceResponse>;
-  /** 更新实例Jdk配置 */
+  /** {@link UpdateJdk 更新实例Jdk配置}({@link UpdateJdkRequest 请求参数}): {@link UpdateJdkResponse 返回参数} */
   UpdateJdk(data: UpdateJdkRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateJdkResponse>;
-  /** 更新Logstash实例 */
+  /** {@link UpdateLogstashInstance 更新Logstash实例}({@link UpdateLogstashInstanceRequest 请求参数}): {@link UpdateLogstashInstanceResponse 返回参数} */
   UpdateLogstashInstance(data: UpdateLogstashInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateLogstashInstanceResponse>;
-  /** 更新管道描述 */
+  /** {@link UpdateLogstashPipelineDesc 更新管道描述}({@link UpdateLogstashPipelineDescRequest 请求参数}): {@link UpdateLogstashPipelineDescResponse 返回参数} */
   UpdateLogstashPipelineDesc(data: UpdateLogstashPipelineDescRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateLogstashPipelineDescResponse>;
-  /** 变更插件列表 */
+  /** {@link UpdatePlugins 变更插件列表}({@link UpdatePluginsRequest 请求参数}): {@link UpdatePluginsResponse 返回参数} */
   UpdatePlugins(data: UpdatePluginsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePluginsResponse>;
-  /** 更新接收客户端请求的节点类型 */
+  /** {@link UpdateRequestTargetNodeTypes 更新接收客户端请求的节点类型}({@link UpdateRequestTargetNodeTypesRequest 请求参数}): {@link UpdateRequestTargetNodeTypesResponse 返回参数} */
   UpdateRequestTargetNodeTypes(data: UpdateRequestTargetNodeTypesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRequestTargetNodeTypesResponse>;
-  /** 升级ES集群版本 */
+  /** {@link UpgradeInstance 升级ES集群版本}({@link UpgradeInstanceRequest 请求参数}): {@link UpgradeInstanceResponse 返回参数} */
   UpgradeInstance(data: UpgradeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceResponse>;
-  /** 升级ES商业特性 */
+  /** {@link UpgradeLicense 升级ES商业特性}({@link UpgradeLicenseRequest 请求参数}): {@link UpgradeLicenseResponse 返回参数} */
   UpgradeLicense(data: UpgradeLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeLicenseResponse>;
 }
 

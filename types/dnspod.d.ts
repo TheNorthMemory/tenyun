@@ -1262,88 +1262,88 @@ declare interface PayOrderWithBalanceResponse {
   RequestId?: string;
 }
 
-/** [DNSPod](https://cloud.tencent.com/document/product/1427) */
+/** {@link Dnspod DNSPod} */
 declare interface Dnspod {
   (): Versions;
-  /** 商品下单 */
+  /** {@link CreateDeal 商品下单}({@link CreateDealRequest 请求参数}): {@link CreateDealResponse 返回参数} */
   CreateDeal(data: CreateDealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDealResponse>;
-  /** 添加域名 */
+  /** {@link CreateDomain 添加域名}({@link CreateDomainRequest 请求参数}): {@link CreateDomainResponse 返回参数} */
   CreateDomain(data: CreateDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainResponse>;
-  /** 创建域名别名 */
+  /** {@link CreateDomainAlias 创建域名别名}({@link CreateDomainAliasRequest 请求参数}): {@link CreateDomainAliasResponse 返回参数} */
   CreateDomainAlias(data: CreateDomainAliasRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainAliasResponse>;
-  /** 批量添加域名 */
+  /** {@link CreateDomainBatch 批量添加域名}({@link CreateDomainBatchRequest 请求参数}): {@link CreateDomainBatchResponse 返回参数} */
   CreateDomainBatch(data: CreateDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainBatchResponse>;
-  /** 创建域名分组 */
+  /** {@link CreateDomainGroup 创建域名分组}({@link CreateDomainGroupRequest 请求参数}): {@link CreateDomainGroupResponse 返回参数} */
   CreateDomainGroup(data: CreateDomainGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainGroupResponse>;
-  /** 添加记录 */
+  /** {@link CreateRecord 添加记录}({@link CreateRecordRequest 请求参数}): {@link CreateRecordResponse 返回参数} */
   CreateRecord(data: CreateRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordResponse>;
-  /** 批量添加记录 */
+  /** {@link CreateRecordBatch 批量添加记录}({@link CreateRecordBatchRequest 请求参数}): {@link CreateRecordBatchResponse 返回参数} */
   CreateRecordBatch(data: CreateRecordBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordBatchResponse>;
-  /** 删除域名 */
+  /** {@link DeleteDomain 删除域名}({@link DeleteDomainRequest 请求参数}): {@link DeleteDomainResponse 返回参数} */
   DeleteDomain(data: DeleteDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainResponse>;
-  /** 删除域名别名 */
+  /** {@link DeleteDomainAlias 删除域名别名}({@link DeleteDomainAliasRequest 请求参数}): {@link DeleteDomainAliasResponse 返回参数} */
   DeleteDomainAlias(data: DeleteDomainAliasRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainAliasResponse>;
-  /** 删除记录 */
+  /** {@link DeleteRecord 删除记录}({@link DeleteRecordRequest 请求参数}): {@link DeleteRecordResponse 返回参数} */
   DeleteRecord(data: DeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordResponse>;
-  /** 删除域名共享 */
+  /** {@link DeleteShareDomain 删除域名共享}({@link DeleteShareDomainRequest 请求参数}): {@link DeleteShareDomainResponse 返回参数} */
   DeleteShareDomain(data: DeleteShareDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShareDomainResponse>;
-  /** 获取任务详情 */
+  /** {@link DescribeBatchTask 获取任务详情}({@link DescribeBatchTaskRequest 请求参数}): {@link DescribeBatchTaskResponse 返回参数} */
   DescribeBatchTask(data: DescribeBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskResponse>;
-  /** 获取域名信息 */
+  /** {@link DescribeDomain 获取域名信息}({@link DescribeDomainRequest 请求参数}): {@link DescribeDomainResponse 返回参数} */
   DescribeDomain(data: DescribeDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainResponse>;
-  /** 获取域名别名列表 */
+  /** {@link DescribeDomainAliasList 获取域名别名列表}({@link DescribeDomainAliasListRequest 请求参数}): {@link DescribeDomainAliasListResponse 返回参数} */
   DescribeDomainAliasList(data: DescribeDomainAliasListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAliasListResponse>;
-  /** 域名解析量统计 */
+  /** {@link DescribeDomainAnalytics 域名解析量统计}({@link DescribeDomainAnalyticsRequest 请求参数}): {@link DescribeDomainAnalyticsResponse 返回参数} */
   DescribeDomainAnalytics(data: DescribeDomainAnalyticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAnalyticsResponse>;
-  /** 获取域名分组列表 */
+  /** {@link DescribeDomainGroupList 获取域名分组列表}({@link DescribeDomainGroupListRequest 请求参数}): {@link DescribeDomainGroupListResponse 返回参数} */
   DescribeDomainGroupList(data?: DescribeDomainGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainGroupListResponse>;
-  /** 获取域名列表 */
+  /** {@link DescribeDomainList 获取域名列表}({@link DescribeDomainListRequest 请求参数}): {@link DescribeDomainListResponse 返回参数} */
   DescribeDomainList(data?: DescribeDomainListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainListResponse>;
-  /** 获取域名日志 */
+  /** {@link DescribeDomainLogList 获取域名日志}({@link DescribeDomainLogListRequest 请求参数}): {@link DescribeDomainLogListResponse 返回参数} */
   DescribeDomainLogList(data: DescribeDomainLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainLogListResponse>;
-  /** 获取域名权限 */
+  /** {@link DescribeDomainPurview 获取域名权限}({@link DescribeDomainPurviewRequest 请求参数}): {@link DescribeDomainPurviewResponse 返回参数} */
   DescribeDomainPurview(data: DescribeDomainPurviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainPurviewResponse>;
-  /** 获取域名共享信息 */
+  /** {@link DescribeDomainShareInfo 获取域名共享信息}({@link DescribeDomainShareInfoRequest 请求参数}): {@link DescribeDomainShareInfoResponse 返回参数} */
   DescribeDomainShareInfo(data: DescribeDomainShareInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainShareInfoResponse>;
-  /** 获取记录信息 */
+  /** {@link DescribeRecord 获取记录信息}({@link DescribeRecordRequest 请求参数}): {@link DescribeRecordResponse 返回参数} */
   DescribeRecord(data: DescribeRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordResponse>;
-  /** 获取等级允许的线路 */
+  /** {@link DescribeRecordLineList 获取等级允许的线路}({@link DescribeRecordLineListRequest 请求参数}): {@link DescribeRecordLineListResponse 返回参数} */
   DescribeRecordLineList(data: DescribeRecordLineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordLineListResponse>;
-  /** 获取域名的解析记录 */
+  /** {@link DescribeRecordList 获取域名的解析记录}({@link DescribeRecordListRequest 请求参数}): {@link DescribeRecordListResponse 返回参数} */
   DescribeRecordList(data: DescribeRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordListResponse>;
-  /** 获取等级允许的记录类型 */
+  /** {@link DescribeRecordType 获取等级允许的记录类型}({@link DescribeRecordTypeRequest 请求参数}): {@link DescribeRecordTypeResponse 返回参数} */
   DescribeRecordType(data: DescribeRecordTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordTypeResponse>;
-  /** 子域名解析量统计 */
+  /** {@link DescribeSubdomainAnalytics 子域名解析量统计}({@link DescribeSubdomainAnalyticsRequest 请求参数}): {@link DescribeSubdomainAnalyticsResponse 返回参数} */
   DescribeSubdomainAnalytics(data: DescribeSubdomainAnalyticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubdomainAnalyticsResponse>;
-  /** 获取帐户信息 */
+  /** {@link DescribeUserDetail 获取帐户信息}({@link DescribeUserDetailRequest 请求参数}): {@link DescribeUserDetailResponse 返回参数} */
   DescribeUserDetail(data?: DescribeUserDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDetailResponse>;
-  /** 锁定域名 */
+  /** {@link ModifyDomainLock 锁定域名}({@link ModifyDomainLockRequest 请求参数}): {@link ModifyDomainLockResponse 返回参数} */
   ModifyDomainLock(data: ModifyDomainLockRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainLockResponse>;
-  /** 域名过户 */
+  /** {@link ModifyDomainOwner 域名过户}({@link ModifyDomainOwnerRequest 请求参数}): {@link ModifyDomainOwnerResponse 返回参数} */
   ModifyDomainOwner(data: ModifyDomainOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainOwnerResponse>;
-  /** 设置域名备注 */
+  /** {@link ModifyDomainRemark 设置域名备注}({@link ModifyDomainRemarkRequest 请求参数}): {@link ModifyDomainRemarkResponse 返回参数} */
   ModifyDomainRemark(data: ModifyDomainRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainRemarkResponse>;
-  /** 修改域名状态 */
+  /** {@link ModifyDomainStatus 修改域名状态}({@link ModifyDomainStatusRequest 请求参数}): {@link ModifyDomainStatusResponse 返回参数} */
   ModifyDomainStatus(data: ModifyDomainStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainStatusResponse>;
-  /** 域名锁定解锁 */
+  /** {@link ModifyDomainUnlock 域名锁定解锁}({@link ModifyDomainUnlockRequest 请求参数}): {@link ModifyDomainUnlockResponse 返回参数} */
   ModifyDomainUnlock(data: ModifyDomainUnlockRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainUnlockResponse>;
-  /** 更新动态 DNS 记录 */
+  /** {@link ModifyDynamicDNS 更新动态 DNS 记录}({@link ModifyDynamicDNSRequest 请求参数}): {@link ModifyDynamicDNSResponse 返回参数} */
   ModifyDynamicDNS(data: ModifyDynamicDNSRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDynamicDNSResponse>;
-  /** DNS 解析套餐自动续费设置 */
+  /** {@link ModifyPackageAutoRenew DNS 解析套餐自动续费设置}({@link ModifyPackageAutoRenewRequest 请求参数}): {@link ModifyPackageAutoRenewResponse 返回参数} */
   ModifyPackageAutoRenew(data: ModifyPackageAutoRenewRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPackageAutoRenewResponse>;
-  /** 修改记录 */
+  /** {@link ModifyRecord 修改记录}({@link ModifyRecordRequest 请求参数}): {@link ModifyRecordResponse 返回参数} */
   ModifyRecord(data: ModifyRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordResponse>;
-  /** 批量修改记录 */
+  /** {@link ModifyRecordBatch 批量修改记录}({@link ModifyRecordBatchRequest 请求参数}): {@link ModifyRecordBatchResponse 返回参数} */
   ModifyRecordBatch(data: ModifyRecordBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordBatchResponse>;
-  /** 设置记录备注 */
+  /** {@link ModifyRecordRemark 设置记录备注}({@link ModifyRecordRemarkRequest 请求参数}): {@link ModifyRecordRemarkResponse 返回参数} */
   ModifyRecordRemark(data: ModifyRecordRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordRemarkResponse>;
-  /** 设置记录状态 */
+  /** {@link ModifyRecordStatus 设置记录状态}({@link ModifyRecordStatusRequest 请求参数}): {@link ModifyRecordStatusResponse 返回参数} */
   ModifyRecordStatus(data: ModifyRecordStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordStatusResponse>;
-  /** 暂停子域名的解析记录 */
+  /** {@link ModifySubdomainStatus 暂停子域名的解析记录}({@link ModifySubdomainStatusRequest 请求参数}): {@link ModifySubdomainStatusResponse 返回参数} */
   ModifySubdomainStatus(data: ModifySubdomainStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubdomainStatusResponse>;
-  /** 增值服务自动续费设置 */
+  /** {@link ModifyVasAutoRenewStatus 增值服务自动续费设置}({@link ModifyVasAutoRenewStatusRequest 请求参数}): {@link ModifyVasAutoRenewStatusResponse 返回参数} */
   ModifyVasAutoRenewStatus(data: ModifyVasAutoRenewStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVasAutoRenewStatusResponse>;
-  /** DNSPod商品余额支付 */
+  /** {@link PayOrderWithBalance DNSPod商品余额支付}({@link PayOrderWithBalanceRequest 请求参数}): {@link PayOrderWithBalanceResponse 返回参数} */
   PayOrderWithBalance(data: PayOrderWithBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<PayOrderWithBalanceResponse>;
 }
 

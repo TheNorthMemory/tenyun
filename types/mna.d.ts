@@ -330,28 +330,28 @@ declare interface UpdateDeviceResponse {
   RequestId?: string;
 }
 
-/** [移动网络加速](https://cloud.tencent.com/document/product/1385) */
+/** {@link Mna 移动网络加速} */
 declare interface Mna {
   (): Versions;
-  /** 新建设备 */
+  /** {@link AddDevice 新建设备}({@link AddDeviceRequest 请求参数}): {@link AddDeviceResponse 返回参数} */
   AddDevice(data: AddDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AddDeviceResponse>;
-  /** 发起Qos加速过程 */
+  /** {@link CreateQos 发起Qos加速过程}({@link CreateQosRequest 请求参数}): {@link CreateQosResponse 返回参数} */
   CreateQos(data: CreateQosRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQosResponse>;
-  /** 删除设备 */
+  /** {@link DeleteDevice 删除设备}({@link DeleteDeviceRequest 请求参数}): {@link DeleteDeviceResponse 返回参数} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
-  /** 停止Qos加速过程 */
+  /** {@link DeleteQos 停止Qos加速过程}({@link DeleteQosRequest 请求参数}): {@link DeleteQosResponse 返回参数} */
   DeleteQos(data: DeleteQosRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQosResponse>;
-  /** 获取Qos加速状态 */
+  /** {@link DescribeQos 获取Qos加速状态}({@link DescribeQosRequest 请求参数}): {@link DescribeQosResponse 返回参数} */
   DescribeQos(data: DescribeQosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQosResponse>;
-  /** 获取设备详细信息 */
+  /** {@link GetDevice 获取设备详细信息}({@link GetDeviceRequest 请求参数}): {@link GetDeviceResponse 返回参数} */
   GetDevice(data: GetDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceResponse>;
-  /** 设备信息列表 */
+  /** {@link GetDevices 设备信息列表}({@link GetDevicesRequest 请求参数}): {@link GetDevicesResponse 返回参数} */
   GetDevices(data: GetDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<GetDevicesResponse>;
-  /** 获取数据流量统计数据 */
+  /** {@link GetFlowStatistic 获取数据流量统计数据}({@link GetFlowStatisticRequest 请求参数}): {@link GetFlowStatisticResponse 返回参数} */
   GetFlowStatistic(data: GetFlowStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticResponse>;
-  /** 下载用量统计数据 */
+  /** {@link GetStatisticData 下载用量统计数据}({@link GetStatisticDataRequest 请求参数}): {@link GetStatisticDataResponse 返回参数} */
   GetStatisticData(data: GetStatisticDataRequest, config?: AxiosRequestConfig): AxiosPromise<GetStatisticDataResponse>;
-  /** 更新设备 */
+  /** {@link UpdateDevice 更新设备}({@link UpdateDeviceRequest 请求参数}): {@link UpdateDeviceResponse 返回参数} */
   UpdateDevice(data: UpdateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceResponse>;
 }
 

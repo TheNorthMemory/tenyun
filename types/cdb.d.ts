@@ -4078,278 +4078,278 @@ declare interface VerifyRootAccountResponse {
   RequestId?: string;
 }
 
-/** [云数据库 MySQL](https://cloud.tencent.com/document/product/236) */
+/** {@link Cdb 云数据库 MySQL} */
 declare interface Cdb {
   (): Versions;
-  /** 添加维护时间窗口 */
+  /** {@link AddTimeWindow 添加维护时间窗口}({@link AddTimeWindowRequest 请求参数}): {@link AddTimeWindowResponse 返回参数} */
   AddTimeWindow(data: AddTimeWindowRequest, config?: AxiosRequestConfig): AxiosPromise<AddTimeWindowResponse>;
-  /** 申请数据库代理组 */
+  /** {@link ApplyCDBProxy 申请数据库代理组}({@link ApplyCDBProxyRequest 请求参数}): {@link ApplyCDBProxyResponse 返回参数} */
   ApplyCDBProxy(data: ApplyCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyCDBProxyResponse>;
-  /** 安全组批量绑定云资源 */
+  /** {@link AssociateSecurityGroups 安全组批量绑定云资源}({@link AssociateSecurityGroupsRequest 请求参数}): {@link AssociateSecurityGroupsResponse 返回参数} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
-  /** 均衡RO组内实例的负载 */
+  /** {@link BalanceRoGroupLoad 均衡RO组内实例的负载}({@link BalanceRoGroupLoadRequest 请求参数}): {@link BalanceRoGroupLoadResponse 返回参数} */
   BalanceRoGroupLoad(data: BalanceRoGroupLoadRequest, config?: AxiosRequestConfig): AxiosPromise<BalanceRoGroupLoadResponse>;
-  /** 关闭数据库代理 */
+  /** {@link CloseCDBProxy 关闭数据库代理}({@link CloseCDBProxyRequest 请求参数}): {@link CloseCDBProxyResponse 返回参数} */
   CloseCDBProxy(data: CloseCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CloseCDBProxyResponse>;
-  /** 关闭实例外网访问 */
+  /** {@link CloseWanService 关闭实例外网访问}({@link CloseWanServiceRequest 请求参数}): {@link CloseWanServiceResponse 返回参数} */
   CloseWanService(data: CloseWanServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseWanServiceResponse>;
-  /** 创建云数据库的账户 */
+  /** {@link CreateAccounts 创建云数据库的账户}({@link CreateAccountsRequest 请求参数}): {@link CreateAccountsResponse 返回参数} */
   CreateAccounts(data: CreateAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountsResponse>;
-  /** 创建审计日志文件 */
+  /** {@link CreateAuditLogFile 创建审计日志文件}({@link CreateAuditLogFileRequest 请求参数}): {@link CreateAuditLogFileResponse 返回参数} */
   CreateAuditLogFile(data: CreateAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditLogFileResponse>;
-  /** 创建审计策略 */
+  /** {@link CreateAuditPolicy 创建审计策略}({@link CreateAuditPolicyRequest 请求参数}): {@link CreateAuditPolicyResponse 返回参数} */
   CreateAuditPolicy(data: CreateAuditPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditPolicyResponse>;
-  /** 创建审计规则 */
+  /** {@link CreateAuditRule 创建审计规则}({@link CreateAuditRuleRequest 请求参数}): {@link CreateAuditRuleResponse 返回参数} */
   CreateAuditRule(data: CreateAuditRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditRuleResponse>;
-  /** 创建云数据库备份 */
+  /** {@link CreateBackup 创建云数据库备份}({@link CreateBackupRequest 请求参数}): {@link CreateBackupResponse 返回参数} */
   CreateBackup(data: CreateBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupResponse>;
-  /** 创建克隆实例 */
+  /** {@link CreateCloneInstance 创建克隆实例}({@link CreateCloneInstanceRequest 请求参数}): {@link CreateCloneInstanceResponse 返回参数} */
   CreateCloneInstance(data: CreateCloneInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloneInstanceResponse>;
-  /** 创建数据导入任务 */
+  /** {@link CreateDBImportJob 创建数据导入任务}({@link CreateDBImportJobRequest 请求参数}): {@link CreateDBImportJobResponse 返回参数} */
   CreateDBImportJob(data: CreateDBImportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBImportJobResponse>;
-  /** 创建云数据库实例（包年包月） */
+  /** {@link CreateDBInstance 创建云数据库实例（包年包月）}({@link CreateDBInstanceRequest 请求参数}): {@link CreateDBInstanceResponse 返回参数} */
   CreateDBInstance(data: CreateDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceResponse>;
-  /** 创建云数据库实例（按量计费） */
+  /** {@link CreateDBInstanceHour 创建云数据库实例（按量计费）}({@link CreateDBInstanceHourRequest 请求参数}): {@link CreateDBInstanceHourResponse 返回参数} */
   CreateDBInstanceHour(data: CreateDBInstanceHourRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceHourResponse>;
-  /** 创建置放群组 */
+  /** {@link CreateDeployGroup 创建置放群组}({@link CreateDeployGroupRequest 请求参数}): {@link CreateDeployGroupResponse 返回参数} */
   CreateDeployGroup(data: CreateDeployGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeployGroupResponse>;
-  /** 创建参数模板 */
+  /** {@link CreateParamTemplate 创建参数模板}({@link CreateParamTemplateRequest 请求参数}): {@link CreateParamTemplateResponse 返回参数} */
   CreateParamTemplate(data: CreateParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateParamTemplateResponse>;
-  /** 创建云数据库只读实例的独立VIP */
+  /** {@link CreateRoInstanceIp 创建云数据库只读实例的独立VIP}({@link CreateRoInstanceIpRequest 请求参数}): {@link CreateRoInstanceIpResponse 返回参数} */
   CreateRoInstanceIp(data: CreateRoInstanceIpRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoInstanceIpResponse>;
-  /** 删除云数据库的账号 */
+  /** {@link DeleteAccounts 删除云数据库的账号}({@link DeleteAccountsRequest 请求参数}): {@link DeleteAccountsResponse 返回参数} */
   DeleteAccounts(data: DeleteAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountsResponse>;
-  /** 删除审计日志文件 */
+  /** {@link DeleteAuditLogFile 删除审计日志文件}({@link DeleteAuditLogFileRequest 请求参数}): {@link DeleteAuditLogFileResponse 返回参数} */
   DeleteAuditLogFile(data: DeleteAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditLogFileResponse>;
-  /** 删除审计策略 */
+  /** {@link DeleteAuditPolicy 删除审计策略}({@link DeleteAuditPolicyRequest 请求参数}): {@link DeleteAuditPolicyResponse 返回参数} */
   DeleteAuditPolicy(data: DeleteAuditPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditPolicyResponse>;
-  /** 删除审计规则 */
+  /** {@link DeleteAuditRule 删除审计规则}({@link DeleteAuditRuleRequest 请求参数}): {@link DeleteAuditRuleResponse 返回参数} */
   DeleteAuditRule(data: DeleteAuditRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditRuleResponse>;
-  /** 删除云数据库备份 */
+  /** {@link DeleteBackup 删除云数据库备份}({@link DeleteBackupRequest 请求参数}): {@link DeleteBackupResponse 返回参数} */
   DeleteBackup(data: DeleteBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupResponse>;
-  /** 删除置放群组 */
+  /** {@link DeleteDeployGroups 删除置放群组}({@link DeleteDeployGroupsRequest 请求参数}): {@link DeleteDeployGroupsResponse 返回参数} */
   DeleteDeployGroups(data: DeleteDeployGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeployGroupsResponse>;
-  /** 删除参数模板 */
+  /** {@link DeleteParamTemplate 删除参数模板}({@link DeleteParamTemplateRequest 请求参数}): {@link DeleteParamTemplateResponse 返回参数} */
   DeleteParamTemplate(data: DeleteParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteParamTemplateResponse>;
-  /** 删除维护时间窗口 */
+  /** {@link DeleteTimeWindow 删除维护时间窗口}({@link DeleteTimeWindowRequest 请求参数}): {@link DeleteTimeWindowResponse 返回参数} */
   DeleteTimeWindow(data: DeleteTimeWindowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTimeWindowResponse>;
-  /** 查询云数据库账户的权限信息 */
+  /** {@link DescribeAccountPrivileges 查询云数据库账户的权限信息}({@link DescribeAccountPrivilegesRequest 请求参数}): {@link DescribeAccountPrivilegesResponse 返回参数} */
   DescribeAccountPrivileges(data: DescribeAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountPrivilegesResponse>;
-  /** 查询云数据库的所有账号信息 */
+  /** {@link DescribeAccounts 查询云数据库的所有账号信息}({@link DescribeAccountsRequest 请求参数}): {@link DescribeAccountsResponse 返回参数} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
-  /** 查询异步任务的执行结果 */
+  /** {@link DescribeAsyncRequestInfo 查询异步任务的执行结果}({@link DescribeAsyncRequestInfoRequest 请求参数}): {@link DescribeAsyncRequestInfoResponse 返回参数} */
   DescribeAsyncRequestInfo(data: DescribeAsyncRequestInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsyncRequestInfoResponse>;
-  /** 查询审计服务配置 */
+  /** {@link DescribeAuditConfig 查询审计服务配置}({@link DescribeAuditConfigRequest 请求参数}): {@link DescribeAuditConfigResponse 返回参数} */
   DescribeAuditConfig(data: DescribeAuditConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditConfigResponse>;
-  /** 查询审计日志文件 */
+  /** {@link DescribeAuditLogFiles 查询审计日志文件}({@link DescribeAuditLogFilesRequest 请求参数}): {@link DescribeAuditLogFilesResponse 返回参数} */
   DescribeAuditLogFiles(data: DescribeAuditLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogFilesResponse>;
-  /** 查询审计策略 */
+  /** {@link DescribeAuditPolicies 查询审计策略}({@link DescribeAuditPoliciesRequest 请求参数}): {@link DescribeAuditPoliciesResponse 返回参数} */
   DescribeAuditPolicies(data?: DescribeAuditPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditPoliciesResponse>;
-  /** 查询审计规则 */
+  /** {@link DescribeAuditRules 查询审计规则}({@link DescribeAuditRulesRequest 请求参数}): {@link DescribeAuditRulesResponse 返回参数} */
   DescribeAuditRules(data?: DescribeAuditRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditRulesResponse>;
-  /** 查询云数据库备份配置信息 */
+  /** {@link DescribeBackupConfig 查询云数据库备份配置信息}({@link DescribeBackupConfigRequest 请求参数}): {@link DescribeBackupConfigResponse 返回参数} */
   DescribeBackupConfig(data: DescribeBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupConfigResponse>;
-  /** 查询备份数据库列表 */
+  /** {@link DescribeBackupDatabases 查询备份数据库列表}({@link DescribeBackupDatabasesRequest 请求参数}): {@link DescribeBackupDatabasesResponse 返回参数} */
   DescribeBackupDatabases(data: DescribeBackupDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDatabasesResponse>;
-  /** 查询备份文件下载源限制 */
+  /** {@link DescribeBackupDownloadRestriction 查询备份文件下载源限制}({@link DescribeBackupDownloadRestrictionRequest 请求参数}): {@link DescribeBackupDownloadRestrictionResponse 返回参数} */
   DescribeBackupDownloadRestriction(data?: DescribeBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadRestrictionResponse>;
-  /** 查询备份概览 */
+  /** {@link DescribeBackupOverview 查询备份概览}({@link DescribeBackupOverviewRequest 请求参数}): {@link DescribeBackupOverviewResponse 返回参数} */
   DescribeBackupOverview(data: DescribeBackupOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupOverviewResponse>;
-  /** 查询备份实时统计 */
+  /** {@link DescribeBackupSummaries 查询备份实时统计}({@link DescribeBackupSummariesRequest 请求参数}): {@link DescribeBackupSummariesResponse 返回参数} */
   DescribeBackupSummaries(data: DescribeBackupSummariesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupSummariesResponse>;
-  /** 查询指定数据库的备份数据表 */
+  /** {@link DescribeBackupTables 查询指定数据库的备份数据表}({@link DescribeBackupTablesRequest 请求参数}): {@link DescribeBackupTablesResponse 返回参数} */
   DescribeBackupTables(data: DescribeBackupTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupTablesResponse>;
-  /** 查询数据备份文件列表 */
+  /** {@link DescribeBackups 查询数据备份文件列表}({@link DescribeBackupsRequest 请求参数}): {@link DescribeBackupsResponse 返回参数} */
   DescribeBackups(data: DescribeBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupsResponse>;
-  /** 查询日志备份概览 */
+  /** {@link DescribeBinlogBackupOverview 查询日志备份概览}({@link DescribeBinlogBackupOverviewRequest 请求参数}): {@link DescribeBinlogBackupOverviewResponse 返回参数} */
   DescribeBinlogBackupOverview(data: DescribeBinlogBackupOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogBackupOverviewResponse>;
-  /** 查询二进制日志备份文件列表 */
+  /** {@link DescribeBinlogs 查询二进制日志备份文件列表}({@link DescribeBinlogsRequest 请求参数}): {@link DescribeBinlogsResponse 返回参数} */
   DescribeBinlogs(data: DescribeBinlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogsResponse>;
-  /** 查询数据库代理 */
+  /** {@link DescribeCDBProxy 查询数据库代理}({@link DescribeCDBProxyRequest 请求参数}): {@link DescribeCDBProxyResponse 返回参数} */
   DescribeCDBProxy(data: DescribeCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCDBProxyResponse>;
-  /** 查询数据库可用区及售卖规格 */
+  /** {@link DescribeCdbZoneConfig 查询数据库可用区及售卖规格}({@link DescribeCdbZoneConfigRequest 请求参数}): {@link DescribeCdbZoneConfigResponse 返回参数} */
   DescribeCdbZoneConfig(data?: DescribeCdbZoneConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdbZoneConfigResponse>;
-  /** 查询克隆任务列表 */
+  /** {@link DescribeCloneList 查询克隆任务列表}({@link DescribeCloneListRequest 请求参数}): {@link DescribeCloneListResponse 返回参数} */
   DescribeCloneList(data: DescribeCloneListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloneListResponse>;
-  /** 查询数据库导入任务记录 */
+  /** {@link DescribeDBImportRecords 查询数据库导入任务记录}({@link DescribeDBImportRecordsRequest 请求参数}): {@link DescribeDBImportRecordsResponse 返回参数} */
   DescribeDBImportRecords(data: DescribeDBImportRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBImportRecordsResponse>;
-  /** 查询云数据库实例的字符集 */
+  /** {@link DescribeDBInstanceCharset 查询云数据库实例的字符集}({@link DescribeDBInstanceCharsetRequest 请求参数}): {@link DescribeDBInstanceCharsetResponse 返回参数} */
   DescribeDBInstanceCharset(data: DescribeDBInstanceCharsetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceCharsetResponse>;
-  /** 查询云数据库实例的配置信息 */
+  /** {@link DescribeDBInstanceConfig 查询云数据库实例的配置信息}({@link DescribeDBInstanceConfigRequest 请求参数}): {@link DescribeDBInstanceConfigResponse 返回参数} */
   DescribeDBInstanceConfig(data: DescribeDBInstanceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceConfigResponse>;
-  /** 查询云数据实例的GTID是否开通 */
+  /** {@link DescribeDBInstanceGTID 查询云数据实例的GTID是否开通}({@link DescribeDBInstanceGTIDRequest 请求参数}): {@link DescribeDBInstanceGTIDResponse 返回参数} */
   DescribeDBInstanceGTID(data: DescribeDBInstanceGTIDRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceGTIDResponse>;
-  /** 查询实例基本信息 */
+  /** {@link DescribeDBInstanceInfo 查询实例基本信息}({@link DescribeDBInstanceInfoRequest 请求参数}): {@link DescribeDBInstanceInfoResponse 返回参数} */
   DescribeDBInstanceInfo(data: DescribeDBInstanceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceInfoResponse>;
-  /** 查询云数据库实例的预期重启时间 */
+  /** {@link DescribeDBInstanceRebootTime 查询云数据库实例的预期重启时间}({@link DescribeDBInstanceRebootTimeRequest 请求参数}): {@link DescribeDBInstanceRebootTimeResponse 返回参数} */
   DescribeDBInstanceRebootTime(data: DescribeDBInstanceRebootTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceRebootTimeResponse>;
-  /** 查询实例列表 */
+  /** {@link DescribeDBInstances 查询实例列表}({@link DescribeDBInstancesRequest 请求参数}): {@link DescribeDBInstancesResponse 返回参数} */
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
-  /** 查询数据库价格 */
+  /** {@link DescribeDBPrice 查询数据库价格}({@link DescribeDBPriceRequest 请求参数}): {@link DescribeDBPriceResponse 返回参数} */
   DescribeDBPrice(data: DescribeDBPriceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBPriceResponse>;
-  /** 查询实例安全组信息 */
+  /** {@link DescribeDBSecurityGroups 查询实例安全组信息}({@link DescribeDBSecurityGroupsRequest 请求参数}): {@link DescribeDBSecurityGroupsResponse 返回参数} */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
-  /** 查询云数据库切换记录 */
+  /** {@link DescribeDBSwitchRecords 查询云数据库切换记录}({@link DescribeDBSwitchRecordsRequest 请求参数}): {@link DescribeDBSwitchRecordsResponse 返回参数} */
   DescribeDBSwitchRecords(data: DescribeDBSwitchRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSwitchRecordsResponse>;
-  /** 查询数据备份概览 */
+  /** {@link DescribeDataBackupOverview 查询数据备份概览}({@link DescribeDataBackupOverviewRequest 请求参数}): {@link DescribeDataBackupOverviewResponse 返回参数} */
   DescribeDataBackupOverview(data: DescribeDataBackupOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataBackupOverviewResponse>;
-  /** 查询数据库 */
+  /** {@link DescribeDatabases 查询数据库}({@link DescribeDatabasesRequest 请求参数}): {@link DescribeDatabasesResponse 返回参数} */
   DescribeDatabases(data: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
-  /** 查询默认的可设置参数列表 */
+  /** {@link DescribeDefaultParams 查询默认的可设置参数列表}({@link DescribeDefaultParamsRequest 请求参数}): {@link DescribeDefaultParamsResponse 返回参数} */
   DescribeDefaultParams(data: DescribeDefaultParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultParamsResponse>;
-  /** 查询置放群组列表 */
+  /** {@link DescribeDeployGroupList 查询置放群组列表}({@link DescribeDeployGroupListRequest 请求参数}): {@link DescribeDeployGroupListResponse 返回参数} */
   DescribeDeployGroupList(data?: DescribeDeployGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployGroupListResponse>;
-  /** 物理机监控信息 */
+  /** {@link DescribeDeviceMonitorInfo 物理机监控信息}({@link DescribeDeviceMonitorInfoRequest 请求参数}): {@link DescribeDeviceMonitorInfoResponse 返回参数} */
   DescribeDeviceMonitorInfo(data: DescribeDeviceMonitorInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceMonitorInfoResponse>;
-  /** 查询实例错误日志详情 */
+  /** {@link DescribeErrorLogData 查询实例错误日志详情}({@link DescribeErrorLogDataRequest 请求参数}): {@link DescribeErrorLogDataResponse 返回参数} */
   DescribeErrorLogData(data: DescribeErrorLogDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeErrorLogDataResponse>;
-  /** 查询实例参数修改历史 */
+  /** {@link DescribeInstanceParamRecords 查询实例参数修改历史}({@link DescribeInstanceParamRecordsRequest 请求参数}): {@link DescribeInstanceParamRecordsResponse 返回参数} */
   DescribeInstanceParamRecords(data: DescribeInstanceParamRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamRecordsResponse>;
-  /** 查询实例的可设置参数列表 */
+  /** {@link DescribeInstanceParams 查询实例的可设置参数列表}({@link DescribeInstanceParamsRequest 请求参数}): {@link DescribeInstanceParamsResponse 返回参数} */
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
-  /** 查询本地binlog保留策略 */
+  /** {@link DescribeLocalBinlogConfig 查询本地binlog保留策略}({@link DescribeLocalBinlogConfigRequest 请求参数}): {@link DescribeLocalBinlogConfigResponse 返回参数} */
   DescribeLocalBinlogConfig(data: DescribeLocalBinlogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLocalBinlogConfigResponse>;
-  /** 查询参数模板详情 */
+  /** {@link DescribeParamTemplateInfo 查询参数模板详情}({@link DescribeParamTemplateInfoRequest 请求参数}): {@link DescribeParamTemplateInfoResponse 返回参数} */
   DescribeParamTemplateInfo(data: DescribeParamTemplateInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplateInfoResponse>;
-  /** 查询参数模板列表 */
+  /** {@link DescribeParamTemplates 查询参数模板列表}({@link DescribeParamTemplatesRequest 请求参数}): {@link DescribeParamTemplatesResponse 返回参数} */
   DescribeParamTemplates(data?: DescribeParamTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplatesResponse>;
-  /** 查询项目安全组信息 */
+  /** {@link DescribeProjectSecurityGroups 查询项目安全组信息}({@link DescribeProjectSecurityGroupsRequest 请求参数}): {@link DescribeProjectSecurityGroupsResponse 返回参数} */
   DescribeProjectSecurityGroups(data?: DescribeProjectSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupsResponse>;
-  /** 查询代理连接池规格配置 */
+  /** {@link DescribeProxyConnectionPoolConf 查询代理连接池规格配置}({@link DescribeProxyConnectionPoolConfRequest 请求参数}): {@link DescribeProxyConnectionPoolConfResponse 返回参数} */
   DescribeProxyConnectionPoolConf(data: DescribeProxyConnectionPoolConfRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyConnectionPoolConfResponse>;
-  /** 查询代理规格配置 */
+  /** {@link DescribeProxyCustomConf 查询代理规格配置}({@link DescribeProxyCustomConfRequest 请求参数}): {@link DescribeProxyCustomConfResponse 返回参数} */
   DescribeProxyCustomConf(data: DescribeProxyCustomConfRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyCustomConfResponse>;
-  /** 查询云数据库实例的所有RO组的信息 */
+  /** {@link DescribeRoGroups 查询云数据库实例的所有RO组的信息}({@link DescribeRoGroupsRequest 请求参数}): {@link DescribeRoGroupsResponse 返回参数} */
   DescribeRoGroups(data: DescribeRoGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoGroupsResponse>;
-  /** 获取只读实例购买或升级的最小规格 */
+  /** {@link DescribeRoMinScale 获取只读实例购买或升级的最小规格}({@link DescribeRoMinScaleRequest 请求参数}): {@link DescribeRoMinScaleResponse 返回参数} */
   DescribeRoMinScale(data?: DescribeRoMinScaleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoMinScaleResponse>;
-  /** 查询可回档时间 */
+  /** {@link DescribeRollbackRangeTime 查询可回档时间}({@link DescribeRollbackRangeTimeRequest 请求参数}): {@link DescribeRollbackRangeTimeResponse 返回参数} */
   DescribeRollbackRangeTime(data: DescribeRollbackRangeTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackRangeTimeResponse>;
-  /** 查询回档任务详情 */
+  /** {@link DescribeRollbackTaskDetail 查询回档任务详情}({@link DescribeRollbackTaskDetailRequest 请求参数}): {@link DescribeRollbackTaskDetailResponse 返回参数} */
   DescribeRollbackTaskDetail(data: DescribeRollbackTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTaskDetailResponse>;
-  /** 查询实例慢日志 */
+  /** {@link DescribeSlowLogData 查询实例慢日志}({@link DescribeSlowLogDataRequest 请求参数}): {@link DescribeSlowLogDataResponse 返回参数} */
   DescribeSlowLogData(data: DescribeSlowLogDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogDataResponse>;
-  /** 查询慢查询日志 */
+  /** {@link DescribeSlowLogs 查询慢查询日志}({@link DescribeSlowLogsRequest 请求参数}): {@link DescribeSlowLogsResponse 返回参数} */
   DescribeSlowLogs(data: DescribeSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogsResponse>;
-  /** 查询云数据库实例支持的权限信息 */
+  /** {@link DescribeSupportedPrivileges 查询云数据库实例支持的权限信息}({@link DescribeSupportedPrivilegesRequest 请求参数}): {@link DescribeSupportedPrivilegesResponse 返回参数} */
   DescribeSupportedPrivileges(data: DescribeSupportedPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportedPrivilegesResponse>;
-  /** 查询数据库表 */
+  /** {@link DescribeTables 查询数据库表}({@link DescribeTablesRequest 请求参数}): {@link DescribeTablesResponse 返回参数} */
   DescribeTables(data: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
-  /** 获取实例绑定的标签 */
+  /** {@link DescribeTagsOfInstanceIds 获取实例绑定的标签}({@link DescribeTagsOfInstanceIdsRequest 请求参数}): {@link DescribeTagsOfInstanceIdsResponse 返回参数} */
   DescribeTagsOfInstanceIds(data: DescribeTagsOfInstanceIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagsOfInstanceIdsResponse>;
-  /** 查询云数据库实例任务列表 */
+  /** {@link DescribeTasks 查询云数据库实例任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** 查询维护时间窗口 */
+  /** {@link DescribeTimeWindow 查询维护时间窗口}({@link DescribeTimeWindowRequest 请求参数}): {@link DescribeTimeWindowResponse 返回参数} */
   DescribeTimeWindow(data: DescribeTimeWindowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimeWindowResponse>;
-  /** 查询导入SQL文件列表 （已废弃） */
+  /** {@link DescribeUploadedFiles 查询导入SQL文件列表 （已废弃）}({@link DescribeUploadedFilesRequest 请求参数}): {@link DescribeUploadedFilesResponse 返回参数} */
   DescribeUploadedFiles(data: DescribeUploadedFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUploadedFilesResponse>;
-  /** 安全组批量解绑云资源 */
+  /** {@link DisassociateSecurityGroups 安全组批量解绑云资源}({@link DisassociateSecurityGroupsRequest 请求参数}): {@link DisassociateSecurityGroupsResponse 返回参数} */
   DisassociateSecurityGroups(data: DisassociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupsResponse>;
-  /** 初始化新实例 */
+  /** {@link InitDBInstances 初始化新实例}({@link InitDBInstancesRequest 请求参数}): {@link InitDBInstancesResponse 返回参数} */
   InitDBInstances(data: InitDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InitDBInstancesResponse>;
-  /** 查询数据库升级价格 */
+  /** {@link InquiryPriceUpgradeInstances 查询数据库升级价格}({@link InquiryPriceUpgradeInstancesRequest 请求参数}): {@link InquiryPriceUpgradeInstancesResponse 返回参数} */
   InquiryPriceUpgradeInstances(data: InquiryPriceUpgradeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceUpgradeInstancesResponse>;
-  /** 隔离云数据库实例 */
+  /** {@link IsolateDBInstance 隔离云数据库实例}({@link IsolateDBInstanceRequest 请求参数}): {@link IsolateDBInstanceResponse 返回参数} */
   IsolateDBInstance(data: IsolateDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBInstanceResponse>;
-  /** 修改云数据库实例账号的备注信息 */
+  /** {@link ModifyAccountDescription 修改云数据库实例账号的备注信息}({@link ModifyAccountDescriptionRequest 请求参数}): {@link ModifyAccountDescriptionResponse 返回参数} */
   ModifyAccountDescription(data: ModifyAccountDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountDescriptionResponse>;
-  /** 修改云数据库实例账号的主机 */
+  /** {@link ModifyAccountHost 修改云数据库实例账号的主机}({@link ModifyAccountHostRequest 请求参数}): {@link ModifyAccountHostResponse 返回参数} */
   ModifyAccountHost(data: ModifyAccountHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountHostResponse>;
-  /** 修改账户最大可用连接数 */
+  /** {@link ModifyAccountMaxUserConnections 修改账户最大可用连接数}({@link ModifyAccountMaxUserConnectionsRequest 请求参数}): {@link ModifyAccountMaxUserConnectionsResponse 返回参数} */
   ModifyAccountMaxUserConnections(data: ModifyAccountMaxUserConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountMaxUserConnectionsResponse>;
-  /** 修改云数据库实例账号的密码 */
+  /** {@link ModifyAccountPassword 修改云数据库实例账号的密码}({@link ModifyAccountPasswordRequest 请求参数}): {@link ModifyAccountPasswordResponse 返回参数} */
   ModifyAccountPassword(data: ModifyAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountPasswordResponse>;
-  /** 修改云数据库实例账号的权限 */
+  /** {@link ModifyAccountPrivileges 修改云数据库实例账号的权限}({@link ModifyAccountPrivilegesRequest 请求参数}): {@link ModifyAccountPrivilegesResponse 返回参数} */
   ModifyAccountPrivileges(data: ModifyAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountPrivilegesResponse>;
-  /** 更改审计服务配置 */
+  /** {@link ModifyAuditConfig 更改审计服务配置}({@link ModifyAuditConfigRequest 请求参数}): {@link ModifyAuditConfigResponse 返回参数} */
   ModifyAuditConfig(data: ModifyAuditConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditConfigResponse>;
-  /** 修改审计规则 */
+  /** {@link ModifyAuditRule 修改审计规则}({@link ModifyAuditRuleRequest 请求参数}): {@link ModifyAuditRuleResponse 返回参数} */
   ModifyAuditRule(data: ModifyAuditRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditRuleResponse>;
-  /** 修改云数据库实例的自动续费标记 */
+  /** {@link ModifyAutoRenewFlag 修改云数据库实例的自动续费标记}({@link ModifyAutoRenewFlagRequest 请求参数}): {@link ModifyAutoRenewFlagResponse 返回参数} */
   ModifyAutoRenewFlag(data: ModifyAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoRenewFlagResponse>;
-  /** 修改数据库备份配置 */
+  /** {@link ModifyBackupConfig 修改数据库备份配置}({@link ModifyBackupConfigRequest 请求参数}): {@link ModifyBackupConfigResponse 返回参数} */
   ModifyBackupConfig(data: ModifyBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupConfigResponse>;
-  /** 修改备份文件的限制下载来源 */
+  /** {@link ModifyBackupDownloadRestriction 修改备份文件的限制下载来源}({@link ModifyBackupDownloadRestrictionRequest 请求参数}): {@link ModifyBackupDownloadRestrictionResponse 返回参数} */
   ModifyBackupDownloadRestriction(data: ModifyBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupDownloadRestrictionResponse>;
-  /** 配置数据库代理读写分离 */
+  /** {@link ModifyCDBProxy 配置数据库代理读写分离}({@link ModifyCDBProxyRequest 请求参数}): {@link ModifyCDBProxyResponse 返回参数} */
   ModifyCDBProxy(data: ModifyCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCDBProxyResponse>;
-  /** 配置数据库代理连接池 */
+  /** {@link ModifyCDBProxyConnectionPool 配置数据库代理连接池}({@link ModifyCDBProxyConnectionPoolRequest 请求参数}): {@link ModifyCDBProxyConnectionPoolResponse 返回参数} */
   ModifyCDBProxyConnectionPool(data: ModifyCDBProxyConnectionPoolRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCDBProxyConnectionPoolResponse>;
-  /** 修改数据库代理描述 */
+  /** {@link ModifyCDBProxyDesc 修改数据库代理描述}({@link ModifyCDBProxyDescRequest 请求参数}): {@link ModifyCDBProxyDescResponse 返回参数} */
   ModifyCDBProxyDesc(data: ModifyCDBProxyDescRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCDBProxyDescResponse>;
-  /** 修改数据库代理VIP或端口 */
+  /** {@link ModifyCDBProxyVipVPort 修改数据库代理VIP或端口}({@link ModifyCDBProxyVipVPortRequest 请求参数}): {@link ModifyCDBProxyVipVPortResponse 返回参数} */
   ModifyCDBProxyVipVPort(data: ModifyCDBProxyVipVPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCDBProxyVipVPortResponse>;
-  /** 修改云数据库实例名 */
+  /** {@link ModifyDBInstanceName 修改云数据库实例名}({@link ModifyDBInstanceNameRequest 请求参数}): {@link ModifyDBInstanceNameResponse 返回参数} */
   ModifyDBInstanceName(data: ModifyDBInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNameResponse>;
-  /** 修改云数据库实例的所属项目 */
+  /** {@link ModifyDBInstanceProject 修改云数据库实例的所属项目}({@link ModifyDBInstanceProjectRequest 请求参数}): {@link ModifyDBInstanceProjectResponse 返回参数} */
   ModifyDBInstanceProject(data: ModifyDBInstanceProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceProjectResponse>;
-  /** 修改云数据库安全组 */
+  /** {@link ModifyDBInstanceSecurityGroups 修改云数据库安全组}({@link ModifyDBInstanceSecurityGroupsRequest 请求参数}): {@link ModifyDBInstanceSecurityGroupsResponse 返回参数} */
   ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
-  /** 修改云数据库实例的IP和端口号 */
+  /** {@link ModifyDBInstanceVipVport 修改云数据库实例的IP和端口号}({@link ModifyDBInstanceVipVportRequest 请求参数}): {@link ModifyDBInstanceVipVportResponse 返回参数} */
   ModifyDBInstanceVipVport(data: ModifyDBInstanceVipVportRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceVipVportResponse>;
-  /** 修改实例参数 */
+  /** {@link ModifyInstanceParam 修改实例参数}({@link ModifyInstanceParamRequest 请求参数}): {@link ModifyInstanceParamResponse 返回参数} */
   ModifyInstanceParam(data: ModifyInstanceParamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamResponse>;
-  /** 修改实例密码复杂度 */
+  /** {@link ModifyInstancePasswordComplexity 修改实例密码复杂度}({@link ModifyInstancePasswordComplexityRequest 请求参数}): {@link ModifyInstancePasswordComplexityResponse 返回参数} */
   ModifyInstancePasswordComplexity(data: ModifyInstancePasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancePasswordComplexityResponse>;
-  /** 修改实例标签 */
+  /** {@link ModifyInstanceTag 修改实例标签}({@link ModifyInstanceTagRequest 请求参数}): {@link ModifyInstanceTagResponse 返回参数} */
   ModifyInstanceTag(data: ModifyInstanceTagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceTagResponse>;
-  /** 修改本地binlog保留策略 */
+  /** {@link ModifyLocalBinlogConfig 修改本地binlog保留策略}({@link ModifyLocalBinlogConfigRequest 请求参数}): {@link ModifyLocalBinlogConfigResponse 返回参数} */
   ModifyLocalBinlogConfig(data: ModifyLocalBinlogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLocalBinlogConfigResponse>;
-  /** 修改置放群组的名称或者描述 */
+  /** {@link ModifyNameOrDescByDpId 修改置放群组的名称或者描述}({@link ModifyNameOrDescByDpIdRequest 请求参数}): {@link ModifyNameOrDescByDpIdResponse 返回参数} */
   ModifyNameOrDescByDpId(data: ModifyNameOrDescByDpIdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNameOrDescByDpIdResponse>;
-  /** 修改参数模板 */
+  /** {@link ModifyParamTemplate 修改参数模板}({@link ModifyParamTemplateRequest 请求参数}): {@link ModifyParamTemplateResponse 返回参数} */
   ModifyParamTemplate(data: ModifyParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyParamTemplateResponse>;
-  /** 更新实例Ro组的信息 */
+  /** {@link ModifyRoGroupInfo 更新实例Ro组的信息}({@link ModifyRoGroupInfoRequest 请求参数}): {@link ModifyRoGroupInfoResponse 返回参数} */
   ModifyRoGroupInfo(data: ModifyRoGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoGroupInfoResponse>;
-  /** 更新维护时间窗口 */
+  /** {@link ModifyTimeWindow 更新维护时间窗口}({@link ModifyTimeWindowRequest 请求参数}): {@link ModifyTimeWindowResponse 返回参数} */
   ModifyTimeWindow(data: ModifyTimeWindowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTimeWindowResponse>;
-  /** 下线隔离状态的云数据库实例 */
+  /** {@link OfflineIsolatedInstances 下线隔离状态的云数据库实例}({@link OfflineIsolatedInstancesRequest 请求参数}): {@link OfflineIsolatedInstancesResponse 返回参数} */
   OfflineIsolatedInstances(data: OfflineIsolatedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineIsolatedInstancesResponse>;
-  /** 开通审计服务 */
+  /** {@link OpenAuditService 开通审计服务}({@link OpenAuditServiceRequest 请求参数}): {@link OpenAuditServiceResponse 返回参数} */
   OpenAuditService(data: OpenAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAuditServiceResponse>;
-  /** 开启实例的GTID */
+  /** {@link OpenDBInstanceGTID 开启实例的GTID}({@link OpenDBInstanceGTIDRequest 请求参数}): {@link OpenDBInstanceGTIDResponse 返回参数} */
   OpenDBInstanceGTID(data: OpenDBInstanceGTIDRequest, config?: AxiosRequestConfig): AxiosPromise<OpenDBInstanceGTIDResponse>;
-  /** 开通实例外网访问 */
+  /** {@link OpenWanService 开通实例外网访问}({@link OpenWanServiceRequest 请求参数}): {@link OpenWanServiceResponse 返回参数} */
   OpenWanService(data: OpenWanServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenWanServiceResponse>;
-  /** 查询代理详情 */
+  /** {@link QueryCDBProxy 查询代理详情}({@link QueryCDBProxyRequest 请求参数}): {@link QueryCDBProxyResponse 返回参数} */
   QueryCDBProxy(data: QueryCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCDBProxyResponse>;
-  /** 解隔离云数据库实例 */
+  /** {@link ReleaseIsolatedDBInstances 解隔离云数据库实例}({@link ReleaseIsolatedDBInstancesRequest 请求参数}): {@link ReleaseIsolatedDBInstancesResponse 返回参数} */
   ReleaseIsolatedDBInstances(data: ReleaseIsolatedDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseIsolatedDBInstancesResponse>;
-  /** 负载均衡数据库代理 */
+  /** {@link ReloadBalanceProxyNode 负载均衡数据库代理}({@link ReloadBalanceProxyNodeRequest 请求参数}): {@link ReloadBalanceProxyNodeResponse 返回参数} */
   ReloadBalanceProxyNode(data: ReloadBalanceProxyNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ReloadBalanceProxyNodeResponse>;
-  /** 续费云数据库实例 */
+  /** {@link RenewDBInstance 续费云数据库实例}({@link RenewDBInstanceRequest 请求参数}): {@link RenewDBInstanceResponse 返回参数} */
   RenewDBInstance(data: RenewDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDBInstanceResponse>;
-  /** 重置ROOT账号 */
+  /** {@link ResetRootAccount 重置ROOT账号}({@link ResetRootAccountRequest 请求参数}): {@link ResetRootAccountResponse 返回参数} */
   ResetRootAccount(data: ResetRootAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ResetRootAccountResponse>;
-  /** 重启实例 */
+  /** {@link RestartDBInstances 重启实例}({@link RestartDBInstancesRequest 请求参数}): {@link RestartDBInstancesResponse 返回参数} */
   RestartDBInstances(data: RestartDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDBInstancesResponse>;
-  /** 回档数据库表 */
+  /** {@link StartBatchRollback 回档数据库表}({@link StartBatchRollbackRequest 请求参数}): {@link StartBatchRollbackResponse 返回参数} */
   StartBatchRollback(data: StartBatchRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<StartBatchRollbackResponse>;
-  /** 开启复制 */
+  /** {@link StartReplication 开启复制}({@link StartReplicationRequest 请求参数}): {@link StartReplicationResponse 返回参数} */
   StartReplication(data: StartReplicationRequest, config?: AxiosRequestConfig): AxiosPromise<StartReplicationResponse>;
-  /** 终止数据导入任务 */
+  /** {@link StopDBImportJob 终止数据导入任务}({@link StopDBImportJobRequest 请求参数}): {@link StopDBImportJobResponse 返回参数} */
   StopDBImportJob(data: StopDBImportJobRequest, config?: AxiosRequestConfig): AxiosPromise<StopDBImportJobResponse>;
-  /** 停止复制 */
+  /** {@link StopReplication 停止复制}({@link StopReplicationRequest 请求参数}): {@link StopReplicationResponse 返回参数} */
   StopReplication(data: StopReplicationRequest, config?: AxiosRequestConfig): AxiosPromise<StopReplicationResponse>;
-  /** 撤销回档任务 */
+  /** {@link StopRollback 撤销回档任务}({@link StopRollbackRequest 请求参数}): {@link StopRollbackResponse 返回参数} */
   StopRollback(data: StopRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<StopRollbackResponse>;
-  /** 切换数据库代理 */
+  /** {@link SwitchCDBProxy 切换数据库代理}({@link SwitchCDBProxyRequest 请求参数}): {@link SwitchCDBProxyResponse 返回参数} */
   SwitchCDBProxy(data: SwitchCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchCDBProxyResponse>;
-  /** 切换实例主从角色 */
+  /** {@link SwitchDBInstanceMasterSlave 切换实例主从角色}({@link SwitchDBInstanceMasterSlaveRequest 请求参数}): {@link SwitchDBInstanceMasterSlaveResponse 返回参数} */
   SwitchDBInstanceMasterSlave(data: SwitchDBInstanceMasterSlaveRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDBInstanceMasterSlaveResponse>;
-  /** 云数据库灾备实例切换为主实例 */
+  /** {@link SwitchDrInstanceToMaster 云数据库灾备实例切换为主实例}({@link SwitchDrInstanceToMasterRequest 请求参数}): {@link SwitchDrInstanceToMasterResponse 返回参数} */
   SwitchDrInstanceToMaster(data: SwitchDrInstanceToMasterRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDrInstanceToMasterResponse>;
-  /** 切换访问新实例 */
+  /** {@link SwitchForUpgrade 切换访问新实例}({@link SwitchForUpgradeRequest 请求参数}): {@link SwitchForUpgradeResponse 返回参数} */
   SwitchForUpgrade(data: SwitchForUpgradeRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchForUpgradeResponse>;
-  /** 升级数据库代理配置 */
+  /** {@link UpgradeCDBProxy 升级数据库代理配置}({@link UpgradeCDBProxyRequest 请求参数}): {@link UpgradeCDBProxyResponse 返回参数} */
   UpgradeCDBProxy(data: UpgradeCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeCDBProxyResponse>;
-  /** 升级数据库代理版本 */
+  /** {@link UpgradeCDBProxyVersion 升级数据库代理版本}({@link UpgradeCDBProxyVersionRequest 请求参数}): {@link UpgradeCDBProxyVersionResponse 返回参数} */
   UpgradeCDBProxyVersion(data: UpgradeCDBProxyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeCDBProxyVersionResponse>;
-  /** 调整云数据库实例的配置 */
+  /** {@link UpgradeDBInstance 调整云数据库实例的配置}({@link UpgradeDBInstanceRequest 请求参数}): {@link UpgradeDBInstanceResponse 返回参数} */
   UpgradeDBInstance(data: UpgradeDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceResponse>;
-  /** 升级实例版本 */
+  /** {@link UpgradeDBInstanceEngineVersion 升级实例版本}({@link UpgradeDBInstanceEngineVersionRequest 请求参数}): {@link UpgradeDBInstanceEngineVersionResponse 返回参数} */
   UpgradeDBInstanceEngineVersion(data: UpgradeDBInstanceEngineVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceEngineVersionResponse>;
-  /** 验证root账号权限 */
+  /** {@link VerifyRootAccount 验证root账号权限}({@link VerifyRootAccountRequest 请求参数}): {@link VerifyRootAccountResponse 返回参数} */
   VerifyRootAccount(data: VerifyRootAccountRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyRootAccountResponse>;
 }
 

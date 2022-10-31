@@ -194,16 +194,16 @@ declare interface FuseFaceResponse {
   RequestId?: string;
 }
 
-/** [人脸融合](https://cloud.tencent.com/document/product/670) */
+/** {@link Facefusion 人脸融合} */
 declare interface Facefusion {
   (): Versions;
-  /** 查询素材列表 */
+  /** {@link DescribeMaterialList 查询素材列表}({@link DescribeMaterialListRequest 请求参数}): {@link DescribeMaterialListResponse 返回参数} */
   DescribeMaterialList(data: DescribeMaterialListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaterialListResponse>;
-  /** 人脸融合 */
+  /** {@link FaceFusion 人脸融合}({@link FaceFusionRequest 请求参数}): {@link FaceFusionResponse 返回参数} */
   FaceFusion(data: FaceFusionRequest, config?: AxiosRequestConfig): AxiosPromise<FaceFusionResponse>;
-  /** 人脸融合活动专用版 */
+  /** {@link FaceFusionLite 人脸融合活动专用版}({@link FaceFusionLiteRequest 请求参数}): {@link FaceFusionLiteResponse 返回参数} */
   FaceFusionLite(data: FaceFusionLiteRequest, config?: AxiosRequestConfig): AxiosPromise<FaceFusionLiteResponse>;
-  /** 选脸融合 */
+  /** {@link FuseFace 选脸融合}({@link FuseFaceRequest 请求参数}): {@link FuseFaceResponse 返回参数} */
   FuseFace(data: FuseFaceRequest, config?: AxiosRequestConfig): AxiosPromise<FuseFaceResponse>;
 }
 

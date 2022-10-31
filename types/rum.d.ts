@@ -1720,116 +1720,116 @@ declare interface StopInstanceResponse {
   RequestId?: string;
 }
 
-/** [前端性能监控](https://cloud.tencent.com/document/product/1464) */
+/** {@link Rum 前端性能监控} */
 declare interface Rum {
   (): Versions;
-  /** 创建日志下载任务 */
+  /** {@link CreateLogExport 创建日志下载任务}({@link CreateLogExportRequest 请求参数}): {@link CreateLogExportResponse 返回参数} */
   CreateLogExport(data: CreateLogExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogExportResponse>;
-  /** 创建离线日志监听 */
+  /** {@link CreateOfflineLogConfig 创建离线日志监听}({@link CreateOfflineLogConfigRequest 请求参数}): {@link CreateOfflineLogConfigResponse 返回参数} */
   CreateOfflineLogConfig(data: CreateOfflineLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOfflineLogConfigResponse>;
-  /** 创建项目 */
+  /** {@link CreateProject 创建项目}({@link CreateProjectRequest 请求参数}): {@link CreateProjectResponse 返回参数} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
-  /** 创建发布文件记录 */
+  /** {@link CreateReleaseFile 创建发布文件记录}({@link CreateReleaseFileRequest 请求参数}): {@link CreateReleaseFileResponse 返回参数} */
   CreateReleaseFile(data: CreateReleaseFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseFileResponse>;
-  /** 添加星标项目 */
+  /** {@link CreateStarProject 添加星标项目}({@link CreateStarProjectRequest 请求参数}): {@link CreateStarProjectResponse 返回参数} */
   CreateStarProject(data: CreateStarProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStarProjectResponse>;
-  /** 创建Rum实例 */
+  /** {@link CreateTawInstance 创建Rum实例}({@link CreateTawInstanceRequest 请求参数}): {@link CreateTawInstanceResponse 返回参数} */
   CreateTawInstance(data: CreateTawInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTawInstanceResponse>;
-  /** 创建白名单 */
+  /** {@link CreateWhitelist 创建白名单}({@link CreateWhitelistRequest 请求参数}): {@link CreateWhitelistResponse 返回参数} */
   CreateWhitelist(data: CreateWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWhitelistResponse>;
-  /** 删除实例 */
+  /** {@link DeleteInstance 删除实例}({@link DeleteInstanceRequest 请求参数}): {@link DeleteInstanceResponse 返回参数} */
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
-  /** 删除日志下载任务 */
+  /** {@link DeleteLogExport 删除日志下载任务}({@link DeleteLogExportRequest 请求参数}): {@link DeleteLogExportResponse 返回参数} */
   DeleteLogExport(data: DeleteLogExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogExportResponse>;
-  /** 删除 rum 离线日志监听 */
+  /** {@link DeleteOfflineLogConfig 删除 rum 离线日志监听}({@link DeleteOfflineLogConfigRequest 请求参数}): {@link DeleteOfflineLogConfigResponse 返回参数} */
   DeleteOfflineLogConfig(data: DeleteOfflineLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOfflineLogConfigResponse>;
-  /** 删除离线日志记录 */
+  /** {@link DeleteOfflineLogRecord 删除离线日志记录}({@link DeleteOfflineLogRecordRequest 请求参数}): {@link DeleteOfflineLogRecordResponse 返回参数} */
   DeleteOfflineLogRecord(data: DeleteOfflineLogRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOfflineLogRecordResponse>;
-  /** 删除 rum 项目 */
+  /** {@link DeleteProject 删除 rum 项目}({@link DeleteProjectRequest 请求参数}): {@link DeleteProjectResponse 返回参数} */
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
-  /** 删除发布文件 */
+  /** {@link DeleteReleaseFile 删除发布文件}({@link DeleteReleaseFileRequest 请求参数}): {@link DeleteReleaseFileResponse 返回参数} */
   DeleteReleaseFile(data: DeleteReleaseFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReleaseFileResponse>;
-  /** 删除星标项目 */
+  /** {@link DeleteStarProject 删除星标项目}({@link DeleteStarProjectRequest 请求参数}): {@link DeleteStarProjectResponse 返回参数} */
   DeleteStarProject(data: DeleteStarProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStarProjectResponse>;
-  /** 删除白名单 */
+  /** {@link DeleteWhitelist 删除白名单}({@link DeleteWhitelistRequest 请求参数}): {@link DeleteWhitelistResponse 返回参数} */
   DeleteWhitelist(data: DeleteWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWhitelistResponse>;
-  /** 获取QueryData */
+  /** {@link DescribeData 获取QueryData}({@link DescribeDataRequest 请求参数}): {@link DescribeDataResponse 返回参数} */
   DescribeData(data: DescribeDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataResponse>;
-  /** 获取DescribeDataCustomUrl信息 */
+  /** {@link DescribeDataCustomUrl 获取DescribeDataCustomUrl信息}({@link DescribeDataCustomUrlRequest 请求参数}): {@link DescribeDataCustomUrlResponse 返回参数} */
   DescribeDataCustomUrl(data: DescribeDataCustomUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataCustomUrlResponse>;
-  /** 获取DescribeDataEventUrl信息 */
+  /** {@link DescribeDataEventUrl 获取DescribeDataEventUrl信息}({@link DescribeDataEventUrlRequest 请求参数}): {@link DescribeDataEventUrlResponse 返回参数} */
   DescribeDataEventUrl(data: DescribeDataEventUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEventUrlResponse>;
-  /** 获取DescribeDataFetchProject信息（已下线，请使用DescribeDataFetchUrl） */
+  /** {@link DescribeDataFetchProject 获取DescribeDataFetchProject信息（已下线，请使用DescribeDataFetchUrl）}({@link DescribeDataFetchProjectRequest 请求参数}): {@link DescribeDataFetchProjectResponse 返回参数} */
   DescribeDataFetchProject(data: DescribeDataFetchProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataFetchProjectResponse>;
-  /** 获取DescribeDataFetchUrl信息 */
+  /** {@link DescribeDataFetchUrl 获取DescribeDataFetchUrl信息}({@link DescribeDataFetchUrlRequest 请求参数}): {@link DescribeDataFetchUrlResponse 返回参数} */
   DescribeDataFetchUrl(data: DescribeDataFetchUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataFetchUrlResponse>;
-  /** 获取DescribeDataFetchUrlInfo信息 */
+  /** {@link DescribeDataFetchUrlInfo 获取DescribeDataFetchUrlInfo信息}({@link DescribeDataFetchUrlInfoRequest 请求参数}): {@link DescribeDataFetchUrlInfoResponse 返回参数} */
   DescribeDataFetchUrlInfo(data: DescribeDataFetchUrlInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataFetchUrlInfoResponse>;
-  /** 获取dataloginfo信息 */
+  /** {@link DescribeDataLogUrlInfo 获取dataloginfo信息}({@link DescribeDataLogUrlInfoRequest 请求参数}): {@link DescribeDataLogUrlInfoResponse 返回参数} */
   DescribeDataLogUrlInfo(data: DescribeDataLogUrlInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataLogUrlInfoResponse>;
-  /** 获取LogUrlStatistics信息 */
+  /** {@link DescribeDataLogUrlStatistics 获取LogUrlStatistics信息}({@link DescribeDataLogUrlStatisticsRequest 请求参数}): {@link DescribeDataLogUrlStatisticsResponse 返回参数} */
   DescribeDataLogUrlStatistics(data: DescribeDataLogUrlStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataLogUrlStatisticsResponse>;
-  /** 获取PerformancePage信息 */
+  /** {@link DescribeDataPerformancePage 获取PerformancePage信息}({@link DescribeDataPerformancePageRequest 请求参数}): {@link DescribeDataPerformancePageResponse 返回参数} */
   DescribeDataPerformancePage(data: DescribeDataPerformancePageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataPerformancePageResponse>;
-  /** 获取PerformanceProject信息（已停用，请使用DescribeDataPerformancePage） */
+  /** {@link DescribeDataPerformanceProject 获取PerformanceProject信息（已停用，请使用DescribeDataPerformancePage）}({@link DescribeDataPerformanceProjectRequest 请求参数}): {@link DescribeDataPerformanceProjectResponse 返回参数} */
   DescribeDataPerformanceProject(data: DescribeDataPerformanceProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataPerformanceProjectResponse>;
-  /** 获取PvUrlInfo信息 */
+  /** {@link DescribeDataPvUrlInfo 获取PvUrlInfo信息}({@link DescribeDataPvUrlInfoRequest 请求参数}): {@link DescribeDataPvUrlInfoResponse 返回参数} */
   DescribeDataPvUrlInfo(data: DescribeDataPvUrlInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataPvUrlInfoResponse>;
-  /** 获取DescribeDataPvUrlStatistics信息 */
+  /** {@link DescribeDataPvUrlStatistics 获取DescribeDataPvUrlStatistics信息}({@link DescribeDataPvUrlStatisticsRequest 请求参数}): {@link DescribeDataPvUrlStatisticsResponse 返回参数} */
   DescribeDataPvUrlStatistics(data: DescribeDataPvUrlStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataPvUrlStatisticsResponse>;
-  /** 获取上报量 */
+  /** {@link DescribeDataReportCount 获取上报量}({@link DescribeDataReportCountRequest 请求参数}): {@link DescribeDataReportCountResponse 返回参数} */
   DescribeDataReportCount(data: DescribeDataReportCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataReportCountResponse>;
-  /** 获取DescribeDataSetUrlStatistics信息 */
+  /** {@link DescribeDataSetUrlStatistics 获取DescribeDataSetUrlStatistics信息}({@link DescribeDataSetUrlStatisticsRequest 请求参数}): {@link DescribeDataSetUrlStatisticsResponse 返回参数} */
   DescribeDataSetUrlStatistics(data: DescribeDataSetUrlStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSetUrlStatisticsResponse>;
-  /** 获取DescribeDataStaticProject信息 */
+  /** {@link DescribeDataStaticProject 获取DescribeDataStaticProject信息}({@link DescribeDataStaticProjectRequest 请求参数}): {@link DescribeDataStaticProjectResponse 返回参数} */
   DescribeDataStaticProject(data: DescribeDataStaticProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataStaticProjectResponse>;
-  /** 获取DescribeDataStaticResource信息 */
+  /** {@link DescribeDataStaticResource 获取DescribeDataStaticResource信息}({@link DescribeDataStaticResourceRequest 请求参数}): {@link DescribeDataStaticResourceResponse 返回参数} */
   DescribeDataStaticResource(data: DescribeDataStaticResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataStaticResourceResponse>;
-  /** 获取DescribeDataStaticUrl信息 */
+  /** {@link DescribeDataStaticUrl 获取DescribeDataStaticUrl信息}({@link DescribeDataStaticUrlRequest 请求参数}): {@link DescribeDataStaticUrlResponse 返回参数} */
   DescribeDataStaticUrl(data: DescribeDataStaticUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataStaticUrlResponse>;
-  /** 获取DescribeDataWebVitalsPage信息 */
+  /** {@link DescribeDataWebVitalsPage 获取DescribeDataWebVitalsPage信息}({@link DescribeDataWebVitalsPageRequest 请求参数}): {@link DescribeDataWebVitalsPageResponse 返回参数} */
   DescribeDataWebVitalsPage(data: DescribeDataWebVitalsPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataWebVitalsPageResponse>;
-  /** 获取首页错误信息 */
+  /** {@link DescribeError 获取首页错误信息}({@link DescribeErrorRequest 请求参数}): {@link DescribeErrorResponse 返回参数} */
   DescribeError(data: DescribeErrorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeErrorResponse>;
-  /** 获取日志下载任务列表 */
+  /** {@link DescribeLogExports 获取日志下载任务列表}({@link DescribeLogExportsRequest 请求参数}): {@link DescribeLogExportsResponse 返回参数} */
   DescribeLogExports(data: DescribeLogExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogExportsResponse>;
-  /** 获取日志列表 */
+  /** {@link DescribeLogList 获取日志列表}({@link DescribeLogListRequest 请求参数}): {@link DescribeLogListResponse 返回参数} */
   DescribeLogList(data: DescribeLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogListResponse>;
-  /** 获取设置的离线日志监听配置 */
+  /** {@link DescribeOfflineLogConfigs 获取设置的离线日志监听配置}({@link DescribeOfflineLogConfigsRequest 请求参数}): {@link DescribeOfflineLogConfigsResponse 返回参数} */
   DescribeOfflineLogConfigs(data: DescribeOfflineLogConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineLogConfigsResponse>;
-  /** 获取所有离线日志记录(最多100条) */
+  /** {@link DescribeOfflineLogRecords 获取所有离线日志记录(最多100条)}({@link DescribeOfflineLogRecordsRequest 请求参数}): {@link DescribeOfflineLogRecordsResponse 返回参数} */
   DescribeOfflineLogRecords(data: DescribeOfflineLogRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineLogRecordsResponse>;
-  /** 获取对应离线日志 */
+  /** {@link DescribeOfflineLogs 获取对应离线日志}({@link DescribeOfflineLogsRequest 请求参数}): {@link DescribeOfflineLogsResponse 返回参数} */
   DescribeOfflineLogs(data: DescribeOfflineLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineLogsResponse>;
-  /** 获取项目上报率列表 */
+  /** {@link DescribeProjectLimits 获取项目上报率列表}({@link DescribeProjectLimitsRequest 请求参数}): {@link DescribeProjectLimitsResponse 返回参数} */
   DescribeProjectLimits(data: DescribeProjectLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectLimitsResponse>;
-  /** 获取项目列表 */
+  /** {@link DescribeProjects 获取项目列表}({@link DescribeProjectsRequest 请求参数}): {@link DescribeProjectsResponse 返回参数} */
   DescribeProjects(data: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
-  /** 获取PV列表 */
+  /** {@link DescribePvList 获取PV列表}({@link DescribePvListRequest 请求参数}): {@link DescribePvListResponse 返回参数} */
   DescribePvList(data: DescribePvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePvListResponse>;
-  /** 获取存储临时密钥 */
+  /** {@link DescribeReleaseFileSign 获取存储临时密钥}({@link DescribeReleaseFileSignRequest 请求参数}): {@link DescribeReleaseFileSignResponse 返回参数} */
   DescribeReleaseFileSign(data?: DescribeReleaseFileSignRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseFileSignResponse>;
-  /** 获取项目对应sourcemap文件列表 */
+  /** {@link DescribeReleaseFiles 获取项目对应sourcemap文件列表}({@link DescribeReleaseFilesRequest 请求参数}): {@link DescribeReleaseFilesResponse 返回参数} */
   DescribeReleaseFiles(data: DescribeReleaseFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseFilesResponse>;
-  /** 获取首页分数列表 */
+  /** {@link DescribeScores 获取首页分数列表}({@link DescribeScoresRequest 请求参数}): {@link DescribeScoresResponse 返回参数} */
   DescribeScores(data: DescribeScoresRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScoresResponse>;
-  /** 查询片区信息 */
+  /** {@link DescribeTawAreas 查询片区信息}({@link DescribeTawAreasRequest 请求参数}): {@link DescribeTawAreasResponse 返回参数} */
   DescribeTawAreas(data?: DescribeTawAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTawAreasResponse>;
-  /** 查询实例信息 */
+  /** {@link DescribeTawInstances 查询实例信息}({@link DescribeTawInstancesRequest 请求参数}): {@link DescribeTawInstancesResponse 返回参数} */
   DescribeTawInstances(data?: DescribeTawInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTawInstancesResponse>;
-  /** 获取UV列表 */
+  /** {@link DescribeUvList 获取UV列表}({@link DescribeUvListRequest 请求参数}): {@link DescribeUvListResponse 返回参数} */
   DescribeUvList(data: DescribeUvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUvListResponse>;
-  /** 获取白名单列表 */
+  /** {@link DescribeWhitelists 获取白名单列表}({@link DescribeWhitelistsRequest 请求参数}): {@link DescribeWhitelistsResponse 返回参数} */
   DescribeWhitelists(data: DescribeWhitelistsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhitelistsResponse>;
-  /** 修改实例信息 */
+  /** {@link ModifyInstance 修改实例信息}({@link ModifyInstanceRequest 请求参数}): {@link ModifyInstanceResponse 返回参数} */
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
-  /** 修改项目 */
+  /** {@link ModifyProject 修改项目}({@link ModifyProjectRequest 请求参数}): {@link ModifyProjectResponse 返回参数} */
   ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
-  /** 新增修改限流 */
+  /** {@link ModifyProjectLimit 新增修改限流}({@link ModifyProjectLimitRequest 请求参数}): {@link ModifyProjectLimitResponse 返回参数} */
   ModifyProjectLimit(data: ModifyProjectLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectLimitResponse>;
-  /** 恢复实例 */
+  /** {@link ResumeInstance 恢复实例}({@link ResumeInstanceRequest 请求参数}): {@link ResumeInstanceResponse 返回参数} */
   ResumeInstance(data: ResumeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeInstanceResponse>;
-  /** 停止实例 */
+  /** {@link StopInstance 停止实例}({@link StopInstanceRequest 请求参数}): {@link StopInstanceResponse 返回参数} */
   StopInstance(data: StopInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstanceResponse>;
 }
 

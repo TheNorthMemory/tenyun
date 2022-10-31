@@ -422,20 +422,20 @@ declare interface ModifyInstanceNameResponse {
   RequestId?: string;
 }
 
-/** [云数据库独享集群](https://cloud.tencent.com/document/product/1322) */
+/** {@link Dbdc 云数据库独享集群} */
 declare interface Dbdc {
   (): Versions;
-  /** 查询独享集群内的DB实例列表 */
+  /** {@link DescribeDBInstances 查询独享集群内的DB实例列表}({@link DescribeDBInstancesRequest 请求参数}): {@link DescribeDBInstancesResponse 返回参数} */
   DescribeDBInstances(data: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
-  /** 查询主机列表 */
+  /** {@link DescribeHostList 查询主机列表}({@link DescribeHostListRequest 请求参数}): {@link DescribeHostListResponse 返回参数} */
   DescribeHostList(data: DescribeHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostListResponse>;
-  /** 查询独享集群详情 */
+  /** {@link DescribeInstanceDetail 查询独享集群详情}({@link DescribeInstanceDetailRequest 请求参数}): {@link DescribeInstanceDetailResponse 返回参数} */
   DescribeInstanceDetail(data: DescribeInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDetailResponse>;
-  /** 查询独享集群实例列表 */
+  /** {@link DescribeInstanceList 查询独享集群实例列表}({@link DescribeInstanceListRequest 请求参数}): {@link DescribeInstanceListResponse 返回参数} */
   DescribeInstanceList(data?: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
-  /** 查询独享集群列表 */
+  /** {@link DescribeInstances 查询独享集群列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** 修改独享集群名称 */
+  /** {@link ModifyInstanceName 修改独享集群名称}({@link ModifyInstanceNameRequest 请求参数}): {@link ModifyInstanceNameResponse 返回参数} */
   ModifyInstanceName(data: ModifyInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNameResponse>;
 }
 

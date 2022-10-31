@@ -896,52 +896,52 @@ declare interface QueryVehicleInfoListResponse {
   RequestId?: string;
 }
 
-/** [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) */
+/** {@link Wav 企业微信汽车行业版} */
 declare interface Wav {
   (): Versions;
-  /** 新增渠道活码接口 */
+  /** {@link CreateChannelCode 新增渠道活码接口}({@link CreateChannelCodeRequest 请求参数}): {@link CreateChannelCodeResponse 返回参数} */
   CreateChannelCode(data: CreateChannelCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelCodeResponse>;
-  /** 新增标签库接口 */
+  /** {@link CreateCorpTag 新增标签库接口}({@link CreateCorpTagRequest 请求参数}): {@link CreateCorpTagResponse 返回参数} */
   CreateCorpTag(data: CreateCorpTagRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCorpTagResponse>;
-  /** 线索回收接口 */
+  /** {@link CreateLead 线索回收接口}({@link CreateLeadRequest 请求参数}): {@link CreateLeadResponse 返回参数} */
   CreateLead(data: CreateLeadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLeadResponse>;
-  /** 查询活动参与明细列表接口 */
+  /** {@link QueryActivityJoinList 查询活动参与明细列表接口}({@link QueryActivityJoinListRequest 请求参数}): {@link QueryActivityJoinListResponse 返回参数} */
   QueryActivityJoinList(data: QueryActivityJoinListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryActivityJoinListResponse>;
-  /** 查询活动列表接口 */
+  /** {@link QueryActivityList 查询活动列表接口}({@link QueryActivityListRequest 请求参数}): {@link QueryActivityListResponse 返回参数} */
   QueryActivityList(data?: QueryActivityListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryActivityListResponse>;
-  /** 查询活动活码列表接口 */
+  /** {@link QueryActivityLiveCodeList 查询活动活码列表接口}({@link QueryActivityLiveCodeListRequest 请求参数}): {@link QueryActivityLiveCodeListResponse 返回参数} */
   QueryActivityLiveCodeList(data?: QueryActivityLiveCodeListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryActivityLiveCodeListResponse>;
-  /** 查询渠道活码列表接口 */
+  /** {@link QueryChannelCodeList 查询渠道活码列表接口}({@link QueryChannelCodeListRequest 请求参数}): {@link QueryChannelCodeListResponse 返回参数} */
   QueryChannelCodeList(data?: QueryChannelCodeListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChannelCodeListResponse>;
-  /** 查询会话存档列表接口 */
+  /** {@link QueryChatArchivingList 查询会话存档列表接口}({@link QueryChatArchivingListRequest 请求参数}): {@link QueryChatArchivingListResponse 返回参数} */
   QueryChatArchivingList(data?: QueryChatArchivingListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChatArchivingListResponse>;
-  /** 查询线索列表接口 */
+  /** {@link QueryClueInfoList 查询线索列表接口}({@link QueryClueInfoListRequest 请求参数}): {@link QueryClueInfoListResponse 返回参数} */
   QueryClueInfoList(data?: QueryClueInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryClueInfoListResponse>;
-  /** 查询CRM统计数据接口 */
+  /** {@link QueryCrmStatistics 查询CRM统计数据接口}({@link QueryCrmStatisticsRequest 请求参数}): {@link QueryCrmStatisticsResponse 返回参数} */
   QueryCrmStatistics(data: QueryCrmStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCrmStatisticsResponse>;
-  /** 查询外部联系人SaaS使用明细数据接口 */
+  /** {@link QueryCustomerEventDetailStatistics 查询外部联系人SaaS使用明细数据接口}({@link QueryCustomerEventDetailStatisticsRequest 请求参数}): {@link QueryCustomerEventDetailStatisticsResponse 返回参数} */
   QueryCustomerEventDetailStatistics(data: QueryCustomerEventDetailStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCustomerEventDetailStatisticsResponse>;
-  /** 查询经销商信息列表接口 */
+  /** {@link QueryDealerInfoList 查询经销商信息列表接口}({@link QueryDealerInfoListRequest 请求参数}): {@link QueryDealerInfoListResponse 返回参数} */
   QueryDealerInfoList(data?: QueryDealerInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryDealerInfoListResponse>;
-  /** 查询外部联系人详情接口 */
+  /** {@link QueryExternalContactDetail 查询外部联系人详情接口}({@link QueryExternalContactDetailRequest 请求参数}): {@link QueryExternalContactDetailResponse 返回参数} */
   QueryExternalContactDetail(data: QueryExternalContactDetailRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExternalContactDetailResponse>;
-  /** 查询外部联系人列表接口 */
+  /** {@link QueryExternalContactList 查询外部联系人列表接口}({@link QueryExternalContactListRequest 请求参数}): {@link QueryExternalContactListResponse 返回参数} */
   QueryExternalContactList(data?: QueryExternalContactListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExternalContactListResponse>;
-  /** 查询外部联系人事件明细列表接口 */
+  /** {@link QueryExternalUserEventList 查询外部联系人事件明细列表接口}({@link QueryExternalUserEventListRequest 请求参数}): {@link QueryExternalUserEventListResponse 返回参数} */
   QueryExternalUserEventList(data: QueryExternalUserEventListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExternalUserEventListResponse>;
-  /** 外部联系人转换接口 */
+  /** {@link QueryExternalUserMappingInfo 外部联系人转换接口}({@link QueryExternalUserMappingInfoRequest 请求参数}): {@link QueryExternalUserMappingInfoResponse 返回参数} */
   QueryExternalUserMappingInfo(data: QueryExternalUserMappingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExternalUserMappingInfoResponse>;
-  /** 查询license信息接口 */
+  /** {@link QueryLicenseInfo 查询license信息接口}({@link QueryLicenseInfoRequest 请求参数}): {@link QueryLicenseInfoResponse 返回参数} */
   QueryLicenseInfo(data: QueryLicenseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryLicenseInfoResponse>;
-  /** 获取企业素材列表接口 */
+  /** {@link QueryMaterialList 获取企业素材列表接口}({@link QueryMaterialListRequest 请求参数}): {@link QueryMaterialListResponse 返回参数} */
   QueryMaterialList(data: QueryMaterialListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMaterialListResponse>;
-  /** 查询小程序码列表接口 */
+  /** {@link QueryMiniAppCodeList 查询小程序码列表接口}({@link QueryMiniAppCodeListRequest 请求参数}): {@link QueryMiniAppCodeListResponse 返回参数} */
   QueryMiniAppCodeList(data?: QueryMiniAppCodeListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMiniAppCodeListResponse>;
-  /** 企业成员SaaS使用明细数据接口 */
+  /** {@link QueryStaffEventDetailStatistics 企业成员SaaS使用明细数据接口}({@link QueryStaffEventDetailStatisticsRequest 请求参数}): {@link QueryStaffEventDetailStatisticsResponse 返回参数} */
   QueryStaffEventDetailStatistics(data: QueryStaffEventDetailStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryStaffEventDetailStatisticsResponse>;
-  /** 查询企业成员信息列表接口 */
+  /** {@link QueryUserInfoList 查询企业成员信息列表接口}({@link QueryUserInfoListRequest 请求参数}): {@link QueryUserInfoListResponse 返回参数} */
   QueryUserInfoList(data?: QueryUserInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryUserInfoListResponse>;
-  /** 查询车系车型信息列表接口 */
+  /** {@link QueryVehicleInfoList 查询车系车型信息列表接口}({@link QueryVehicleInfoListRequest 请求参数}): {@link QueryVehicleInfoListResponse 返回参数} */
   QueryVehicleInfoList(data?: QueryVehicleInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryVehicleInfoListResponse>;
 }
 

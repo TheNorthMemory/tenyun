@@ -220,22 +220,22 @@ declare interface UploadIdResponse {
   RequestId?: string;
 }
 
-/** [汽车精准获客服务](https://cloud.tencent.com/document/product/1244) */
+/** {@link Apcas 汽车精准获客服务} */
 declare interface Apcas {
   (): Versions;
-  /** 查询画像洞察任务详情 */
+  /** {@link GetTaskDetail 查询画像洞察任务详情}({@link GetTaskDetailRequest 请求参数}): {@link GetTaskDetailResponse 返回参数} */
   GetTaskDetail(data: GetTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskDetailResponse>;
-  /** 查询画像洞察任务列表 */
+  /** {@link GetTaskList 查询画像洞察任务列表}({@link GetTaskListRequest 请求参数}): {@link GetTaskListResponse 返回参数} */
   GetTaskList(data: GetTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskListResponse>;
-  /** 购车意向评级接口 */
+  /** {@link PredictRating 购车意向评级接口}({@link PredictRatingRequest 请求参数}): {@link PredictRatingResponse 返回参数} */
   PredictRating(data: PredictRatingRequest, config?: AxiosRequestConfig): AxiosPromise<PredictRatingResponse>;
-  /** 查询调用明细 */
+  /** {@link QueryCallDetails 查询调用明细}({@link QueryCallDetailsRequest 请求参数}): {@link QueryCallDetailsResponse 返回参数} */
   QueryCallDetails(data: QueryCallDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCallDetailsResponse>;
-  /** 获取调用量统计 */
+  /** {@link QueryCallStat 获取调用量统计}({@link QueryCallStatRequest 请求参数}): {@link QueryCallStatResponse 返回参数} */
   QueryCallStat(data: QueryCallStatRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCallStatResponse>;
-  /** 总统计数据 */
+  /** {@link QueryGeneralStat 总统计数据}({@link QueryGeneralStatRequest 请求参数}): {@link QueryGeneralStatResponse 返回参数} */
   QueryGeneralStat(data: QueryGeneralStatRequest, config?: AxiosRequestConfig): AxiosPromise<QueryGeneralStatResponse>;
-  /** 上传群体画像的ID列表 */
+  /** {@link UploadId 上传群体画像的ID列表}({@link UploadIdRequest 请求参数}): {@link UploadIdResponse 返回参数} */
   UploadId(data: UploadIdRequest, config?: AxiosRequestConfig): AxiosPromise<UploadIdResponse>;
 }
 

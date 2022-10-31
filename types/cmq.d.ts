@@ -480,42 +480,42 @@ declare interface UnbindDeadLetterResponse {
   RequestId?: string;
 }
 
-/** [消息队列 CMQ](https://cloud.tencent.com/document/product/406) */
+/** {@link Cmq 消息队列 CMQ} */
 declare interface Cmq {
   (): Versions;
-  /** 清空消息队列中的消息 */
+  /** {@link ClearQueue 清空消息队列中的消息}({@link ClearQueueRequest 请求参数}): {@link ClearQueueResponse 返回参数} */
   ClearQueue(data: ClearQueueRequest, config?: AxiosRequestConfig): AxiosPromise<ClearQueueResponse>;
-  /** 清空订阅者消息标签 */
+  /** {@link ClearSubscriptionFilterTags 清空订阅者消息标签}({@link ClearSubscriptionFilterTagsRequest 请求参数}): {@link ClearSubscriptionFilterTagsResponse 返回参数} */
   ClearSubscriptionFilterTags(data: ClearSubscriptionFilterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ClearSubscriptionFilterTagsResponse>;
-  /** 创建队列接口 */
+  /** {@link CreateQueue 创建队列接口}({@link CreateQueueRequest 请求参数}): {@link CreateQueueResponse 返回参数} */
   CreateQueue(data: CreateQueueRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQueueResponse>;
-  /** 创建订阅接口 */
+  /** {@link CreateSubscribe 创建订阅接口}({@link CreateSubscribeRequest 请求参数}): {@link CreateSubscribeResponse 返回参数} */
   CreateSubscribe(data: CreateSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubscribeResponse>;
-  /** 创建主题 */
+  /** {@link CreateTopic 创建主题}({@link CreateTopicRequest 请求参数}): {@link CreateTopicResponse 返回参数} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
-  /** 删除队列 */
+  /** {@link DeleteQueue 删除队列}({@link DeleteQueueRequest 请求参数}): {@link DeleteQueueResponse 返回参数} */
   DeleteQueue(data: DeleteQueueRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQueueResponse>;
-  /** 删除订阅 */
+  /** {@link DeleteSubscribe 删除订阅}({@link DeleteSubscribeRequest 请求参数}): {@link DeleteSubscribeResponse 返回参数} */
   DeleteSubscribe(data: DeleteSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubscribeResponse>;
-  /** 删除主题 */
+  /** {@link DeleteTopic 删除主题}({@link DeleteTopicRequest 请求参数}): {@link DeleteTopicResponse 返回参数} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
-  /** 枚举死信队列源队列 */
+  /** {@link DescribeDeadLetterSourceQueues 枚举死信队列源队列}({@link DescribeDeadLetterSourceQueuesRequest 请求参数}): {@link DescribeDeadLetterSourceQueuesResponse 返回参数} */
   DescribeDeadLetterSourceQueues(data: DescribeDeadLetterSourceQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeadLetterSourceQueuesResponse>;
-  /** 枚举队列 */
+  /** {@link DescribeQueueDetail 枚举队列}({@link DescribeQueueDetailRequest 请求参数}): {@link DescribeQueueDetailResponse 返回参数} */
   DescribeQueueDetail(data?: DescribeQueueDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQueueDetailResponse>;
-  /** 查询订阅详情 */
+  /** {@link DescribeSubscriptionDetail 查询订阅详情}({@link DescribeSubscriptionDetailRequest 请求参数}): {@link DescribeSubscriptionDetailResponse 返回参数} */
   DescribeSubscriptionDetail(data: DescribeSubscriptionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscriptionDetailResponse>;
-  /** 查询主题详情 */
+  /** {@link DescribeTopicDetail 查询主题详情}({@link DescribeTopicDetailRequest 请求参数}): {@link DescribeTopicDetailResponse 返回参数} */
   DescribeTopicDetail(data?: DescribeTopicDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicDetailResponse>;
-  /** 修改队列属性 */
+  /** {@link ModifyQueueAttribute 修改队列属性}({@link ModifyQueueAttributeRequest 请求参数}): {@link ModifyQueueAttributeResponse 返回参数} */
   ModifyQueueAttribute(data: ModifyQueueAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQueueAttributeResponse>;
-  /** 修改订阅属性 */
+  /** {@link ModifySubscriptionAttribute 修改订阅属性}({@link ModifySubscriptionAttributeRequest 请求参数}): {@link ModifySubscriptionAttributeResponse 返回参数} */
   ModifySubscriptionAttribute(data: ModifySubscriptionAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubscriptionAttributeResponse>;
-  /** 修改主题属性 */
+  /** {@link ModifyTopicAttribute 修改主题属性}({@link ModifyTopicAttributeRequest 请求参数}): {@link ModifyTopicAttributeResponse 返回参数} */
   ModifyTopicAttribute(data: ModifyTopicAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicAttributeResponse>;
-  /** 回溯队列 */
+  /** {@link RewindQueue 回溯队列}({@link RewindQueueRequest 请求参数}): {@link RewindQueueResponse 返回参数} */
   RewindQueue(data: RewindQueueRequest, config?: AxiosRequestConfig): AxiosPromise<RewindQueueResponse>;
-  /** 解绑死信队列 */
+  /** {@link UnbindDeadLetter 解绑死信队列}({@link UnbindDeadLetterRequest 请求参数}): {@link UnbindDeadLetterResponse 返回参数} */
   UnbindDeadLetter(data: UnbindDeadLetterRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDeadLetterResponse>;
 }
 

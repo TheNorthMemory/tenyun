@@ -1332,48 +1332,48 @@ declare interface PayDealsResponse {
   RequestId?: string;
 }
 
-/** [计费相关](https://cloud.tencent.com/document/product/555) */
+/** {@link Billing 费用中心} */
 declare interface Billing {
   (): Versions;
-  /** 获取账户余额 */
+  /** {@link DescribeAccountBalance 获取账户余额}({@link DescribeAccountBalanceRequest 请求参数}): {@link DescribeAccountBalanceResponse 返回参数} */
   DescribeAccountBalance(data?: DescribeAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountBalanceResponse>;
-  /** 查询账单明细数据 */
+  /** {@link DescribeBillDetail 查询账单明细数据}({@link DescribeBillDetailRequest 请求参数}): {@link DescribeBillDetailResponse 返回参数} */
   DescribeBillDetail(data: DescribeBillDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillDetailResponse>;
-  /** 获取收支明细列表 */
+  /** {@link DescribeBillList 获取收支明细列表}({@link DescribeBillListRequest 请求参数}): {@link DescribeBillListResponse 返回参数} */
   DescribeBillList(data: DescribeBillListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillListResponse>;
-  /** 查询账单资源汇总数据 */
+  /** {@link DescribeBillResourceSummary 查询账单资源汇总数据}({@link DescribeBillResourceSummaryRequest 请求参数}): {@link DescribeBillResourceSummaryResponse 返回参数} */
   DescribeBillResourceSummary(data: DescribeBillResourceSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillResourceSummaryResponse>;
-  /** 获取按付费模式汇总费用分布 */
+  /** {@link DescribeBillSummaryByPayMode 获取按付费模式汇总费用分布}({@link DescribeBillSummaryByPayModeRequest 请求参数}): {@link DescribeBillSummaryByPayModeResponse 返回参数} */
   DescribeBillSummaryByPayMode(data: DescribeBillSummaryByPayModeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillSummaryByPayModeResponse>;
-  /** 获取产品汇总费用分布 */
+  /** {@link DescribeBillSummaryByProduct 获取产品汇总费用分布}({@link DescribeBillSummaryByProductRequest 请求参数}): {@link DescribeBillSummaryByProductResponse 返回参数} */
   DescribeBillSummaryByProduct(data: DescribeBillSummaryByProductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillSummaryByProductResponse>;
-  /** 获取按项目汇总费用分布 */
+  /** {@link DescribeBillSummaryByProject 获取按项目汇总费用分布}({@link DescribeBillSummaryByProjectRequest 请求参数}): {@link DescribeBillSummaryByProjectResponse 返回参数} */
   DescribeBillSummaryByProject(data: DescribeBillSummaryByProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillSummaryByProjectResponse>;
-  /** 获取按地域汇总费用分布 */
+  /** {@link DescribeBillSummaryByRegion 获取按地域汇总费用分布}({@link DescribeBillSummaryByRegionRequest 请求参数}): {@link DescribeBillSummaryByRegionResponse 返回参数} */
   DescribeBillSummaryByRegion(data: DescribeBillSummaryByRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillSummaryByRegionResponse>;
-  /** 获取按标签汇总费用分布 */
+  /** {@link DescribeBillSummaryByTag 获取按标签汇总费用分布}({@link DescribeBillSummaryByTagRequest 请求参数}): {@link DescribeBillSummaryByTagResponse 返回参数} */
   DescribeBillSummaryByTag(data: DescribeBillSummaryByTagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillSummaryByTagResponse>;
-  /** 查询消耗明细 */
+  /** {@link DescribeCostDetail 查询消耗明细}({@link DescribeCostDetailRequest 请求参数}): {@link DescribeCostDetailResponse 返回参数} */
   DescribeCostDetail(data: DescribeCostDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCostDetailResponse>;
-  /** 获取按产品汇总消耗详情 */
+  /** {@link DescribeCostSummaryByProduct 获取按产品汇总消耗详情}({@link DescribeCostSummaryByProductRequest 请求参数}): {@link DescribeCostSummaryByProductResponse 返回参数} */
   DescribeCostSummaryByProduct(data: DescribeCostSummaryByProductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCostSummaryByProductResponse>;
-  /** 获取按项目汇总消耗详情 */
+  /** {@link DescribeCostSummaryByProject 获取按项目汇总消耗详情}({@link DescribeCostSummaryByProjectRequest 请求参数}): {@link DescribeCostSummaryByProjectResponse 返回参数} */
   DescribeCostSummaryByProject(data: DescribeCostSummaryByProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCostSummaryByProjectResponse>;
-  /** 获取按地域汇总消耗详情 */
+  /** {@link DescribeCostSummaryByRegion 获取按地域汇总消耗详情}({@link DescribeCostSummaryByRegionRequest 请求参数}): {@link DescribeCostSummaryByRegionResponse 返回参数} */
   DescribeCostSummaryByRegion(data: DescribeCostSummaryByRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCostSummaryByRegionResponse>;
-  /** 获取按资源汇总消耗详情 */
+  /** {@link DescribeCostSummaryByResource 获取按资源汇总消耗详情}({@link DescribeCostSummaryByResourceRequest 请求参数}): {@link DescribeCostSummaryByResourceResponse 返回参数} */
   DescribeCostSummaryByResource(data: DescribeCostSummaryByResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCostSummaryByResourceResponse>;
-  /** 查询订单数据 */
+  /** {@link DescribeDealsByCond 查询订单数据}({@link DescribeDealsByCondRequest 请求参数}): {@link DescribeDealsByCondResponse 返回参数} */
   DescribeDealsByCond(data: DescribeDealsByCondRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDealsByCondResponse>;
-  /** 获取COS产品用量明细 */
+  /** {@link DescribeDosageCosDetailByDate 获取COS产品用量明细}({@link DescribeDosageCosDetailByDateRequest 请求参数}): {@link DescribeDosageCosDetailByDateResponse 返回参数} */
   DescribeDosageCosDetailByDate(data: DescribeDosageCosDetailByDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDosageCosDetailByDateResponse>;
-  /** 按日期获取产品用量明细 */
+  /** {@link DescribeDosageDetailByDate 按日期获取产品用量明细}({@link DescribeDosageDetailByDateRequest 请求参数}): {@link DescribeDosageDetailByDateResponse 返回参数} */
   DescribeDosageDetailByDate(data: DescribeDosageDetailByDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDosageDetailByDateResponse>;
-  /** 获取代金券相关信息 */
+  /** {@link DescribeVoucherInfo 获取代金券相关信息}({@link DescribeVoucherInfoRequest 请求参数}): {@link DescribeVoucherInfoResponse 返回参数} */
   DescribeVoucherInfo(data: DescribeVoucherInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVoucherInfoResponse>;
-  /** 获取代金券使用记录 */
+  /** {@link DescribeVoucherUsageDetails 获取代金券使用记录}({@link DescribeVoucherUsageDetailsRequest 请求参数}): {@link DescribeVoucherUsageDetailsResponse 返回参数} */
   DescribeVoucherUsageDetails(data: DescribeVoucherUsageDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVoucherUsageDetailsResponse>;
-  /** 支付订单 */
+  /** {@link PayDeals 支付订单}({@link PayDealsRequest 请求参数}): {@link PayDealsResponse 返回参数} */
   PayDeals(data?: PayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<PayDealsResponse>;
 }
 

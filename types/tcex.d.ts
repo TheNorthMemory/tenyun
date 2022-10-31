@@ -46,12 +46,12 @@ declare interface InvokeServiceResponse {
   RequestId?: string;
 }
 
-/** [腾讯云释义](https://cloud.tencent.com/document/product/1266) */
+/** {@link Tcex 腾讯云释义} */
 declare interface Tcex {
   (): Versions;
-  /** 查询服务调用结果 */
+  /** {@link DescribeInvocationResult 查询服务调用结果}({@link DescribeInvocationResultRequest 请求参数}): {@link DescribeInvocationResultResponse 返回参数} */
   DescribeInvocationResult(data: DescribeInvocationResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationResultResponse>;
-  /** 调用服务 */
+  /** {@link InvokeService 调用服务}({@link InvokeServiceRequest 请求参数}): {@link InvokeServiceResponse 返回参数} */
   InvokeService(data: InvokeServiceRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeServiceResponse>;
 }
 

@@ -766,42 +766,42 @@ declare interface DescribeUserBaseInfoInstanceResponse {
   RequestId?: string;
 }
 
-/** [移动应用安全](https://cloud.tencent.com/document/product/283) */
+/** {@link Ms 移动应用安全} */
 declare interface Ms {
   (): Versions;
-  /** 将应用绑定到资源 */
+  /** {@link CreateBindInstance 将应用绑定到资源}({@link CreateBindInstanceRequest 请求参数}): {@link CreateBindInstanceResponse 返回参数} */
   CreateBindInstance(data: CreateBindInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBindInstanceResponse>;
-  /** 获取云COS临时密钥 */
+  /** {@link CreateCosSecKeyInstance 获取云COS临时密钥}({@link CreateCosSecKeyInstanceRequest 请求参数}): {@link CreateCosSecKeyInstanceResponse 返回参数} */
   CreateCosSecKeyInstance(data?: CreateCosSecKeyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosSecKeyInstanceResponse>;
-  /** 创建资源 */
+  /** {@link CreateResourceInstances 创建资源}({@link CreateResourceInstancesRequest 请求参数}): {@link CreateResourceInstancesResponse 返回参数} */
   CreateResourceInstances(data: CreateResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceInstancesResponse>;
-  /** 批量提交安全扫描 */
+  /** {@link CreateScanInstances 批量提交安全扫描}({@link CreateScanInstancesRequest 请求参数}): {@link CreateScanInstancesResponse 返回参数} */
   CreateScanInstances(data: CreateScanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScanInstancesResponse>;
-  /** 提交加固基础数据 */
+  /** {@link CreateShieldInstance 提交加固基础数据}({@link CreateShieldInstanceRequest 请求参数}): {@link CreateShieldInstanceResponse 返回参数} */
   CreateShieldInstance(data: CreateShieldInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShieldInstanceResponse>;
-  /** 新增加固策略 */
+  /** {@link CreateShieldPlanInstance 新增加固策略}({@link CreateShieldPlanInstanceRequest 请求参数}): {@link CreateShieldPlanInstanceResponse 返回参数} */
   CreateShieldPlanInstance(data: CreateShieldPlanInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShieldPlanInstanceResponse>;
-  /** 批量删除提交过的app扫描信息 */
+  /** {@link DeleteScanInstances 批量删除提交过的app扫描信息}({@link DeleteScanInstancesRequest 请求参数}): {@link DeleteScanInstancesResponse 返回参数} */
   DeleteScanInstances(data: DeleteScanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScanInstancesResponse>;
-  /** 批量删除提交过的app信息 */
+  /** {@link DeleteShieldInstances 批量删除提交过的app信息}({@link DeleteShieldInstancesRequest 请求参数}): {@link DeleteShieldInstancesResponse 返回参数} */
   DeleteShieldInstances(data: DeleteShieldInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShieldInstancesResponse>;
-  /** 环境安全检测-apk检测 */
+  /** {@link DescribeApkDetectionResult 环境安全检测-apk检测}({@link DescribeApkDetectionResultRequest 请求参数}): {@link DescribeApkDetectionResultResponse 返回参数} */
   DescribeApkDetectionResult(data: DescribeApkDetectionResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApkDetectionResultResponse>;
-  /** 获取用户的所有资源信息 */
+  /** {@link DescribeResourceInstances 获取用户的所有资源信息}({@link DescribeResourceInstancesRequest 请求参数}): {@link DescribeResourceInstancesResponse 返回参数} */
   DescribeResourceInstances(data?: DescribeResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceInstancesResponse>;
-  /** 查询扫描列表 */
+  /** {@link DescribeScanInstances 查询扫描列表}({@link DescribeScanInstancesRequest 请求参数}): {@link DescribeScanInstancesResponse 返回参数} */
   DescribeScanInstances(data?: DescribeScanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanInstancesResponse>;
-  /** 批量查询扫描结果 */
+  /** {@link DescribeScanResults 批量查询扫描结果}({@link DescribeScanResultsRequest 请求参数}): {@link DescribeScanResultsResponse 返回参数} */
   DescribeScanResults(data: DescribeScanResultsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanResultsResponse>;
-  /** 用户查询提交过的app列表 */
+  /** {@link DescribeShieldInstances 用户查询提交过的app列表}({@link DescribeShieldInstancesRequest 请求参数}): {@link DescribeShieldInstancesResponse 返回参数} */
   DescribeShieldInstances(data?: DescribeShieldInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShieldInstancesResponse>;
-  /** 查询加固策略 */
+  /** {@link DescribeShieldPlanInstance 查询加固策略}({@link DescribeShieldPlanInstanceRequest 请求参数}): {@link DescribeShieldPlanInstanceResponse 返回参数} */
   DescribeShieldPlanInstance(data: DescribeShieldPlanInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShieldPlanInstanceResponse>;
-  /** 查询加固结果 */
+  /** {@link DescribeShieldResult 查询加固结果}({@link DescribeShieldResultRequest 请求参数}): {@link DescribeShieldResultResponse 返回参数} */
   DescribeShieldResult(data: DescribeShieldResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShieldResultResponse>;
-  /** 移动安全-查询网址检测结果服务 */
+  /** {@link DescribeUrlDetectionResult 移动安全-查询网址检测结果服务}({@link DescribeUrlDetectionResultRequest 请求参数}): {@link DescribeUrlDetectionResultResponse 返回参数} */
   DescribeUrlDetectionResult(data: DescribeUrlDetectionResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUrlDetectionResultResponse>;
-  /** 获取用户基础信息 */
+  /** {@link DescribeUserBaseInfoInstance 获取用户基础信息}({@link DescribeUserBaseInfoInstanceRequest 请求参数}): {@link DescribeUserBaseInfoInstanceResponse 返回参数} */
   DescribeUserBaseInfoInstance(data?: DescribeUserBaseInfoInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserBaseInfoInstanceResponse>;
 }
 

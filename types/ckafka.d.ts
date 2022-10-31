@@ -1888,6 +1888,12 @@ declare interface TransformsParam {
   KeepMetadata?: boolean | null;
 }
 
+/** Url解析 */
+declare interface UrlDecodeParam {
+  /** 编码 */
+  CharsetName?: string | null;
+}
+
 /** 用户实体 */
 declare interface User {
   /** 用户id */
@@ -1920,6 +1926,8 @@ declare interface ValueParam {
   Result?: string | null;
   /** JsonPath替换，TYPE=JSON_PATH_REPLACE时必传 */
   JsonPathReplace?: JsonPathReplaceParam | null;
+  /** Url解析 */
+  UrlDecode?: UrlDecodeParam | null;
 }
 
 /** 虚拟IP实体 */
@@ -3452,138 +3460,138 @@ declare interface ZoneResponse {
   PublicNetworkLimit: string | null;
 }
 
-/** [消息队列 Ckafka](https://cloud.tencent.com/document/product/597) */
+/** {@link Ckafka 消息队列 CKafka} */
 declare interface Ckafka {
   (): Versions;
-  /** 实例授权token */
+  /** {@link AuthorizeToken 实例授权token}({@link AuthorizeTokenRequest 请求参数}): {@link AuthorizeTokenResponse 返回参数} */
   AuthorizeToken(data: AuthorizeTokenRequest, config?: AxiosRequestConfig): AxiosPromise<AuthorizeTokenResponse>;
-  /** 批量添加 ACL 策略 */
+  /** {@link BatchCreateAcl 批量添加 ACL 策略}({@link BatchCreateAclRequest 请求参数}): {@link BatchCreateAclResponse 返回参数} */
   BatchCreateAcl(data: BatchCreateAclRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateAclResponse>;
-  /** 批量修改消费组offset */
+  /** {@link BatchModifyGroupOffsets 批量修改消费组offset}({@link BatchModifyGroupOffsetsRequest 请求参数}): {@link BatchModifyGroupOffsetsResponse 返回参数} */
   BatchModifyGroupOffsets(data: BatchModifyGroupOffsetsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyGroupOffsetsResponse>;
-  /** 批量设置主题属性 */
+  /** {@link BatchModifyTopicAttributes 批量设置主题属性}({@link BatchModifyTopicAttributesRequest 请求参数}): {@link BatchModifyTopicAttributesResponse 返回参数} */
   BatchModifyTopicAttributes(data: BatchModifyTopicAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyTopicAttributesResponse>;
-  /** 取消授权token */
+  /** {@link CancelAuthorizationToken 取消授权token}({@link CancelAuthorizationTokenRequest 请求参数}): {@link CancelAuthorizationTokenResponse 返回参数} */
   CancelAuthorizationToken(data: CancelAuthorizationTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAuthorizationTokenResponse>;
-  /** 查询cdc任务接口 */
+  /** {@link CheckCdcCluster 查询cdc任务接口}({@link CheckCdcClusterRequest 请求参数}): {@link CheckCdcClusterResponse 返回参数} */
   CheckCdcCluster(data: CheckCdcClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCdcClusterResponse>;
-  /** 添加 ACL 策略 */
+  /** {@link CreateAcl 添加 ACL 策略}({@link CreateAclRequest 请求参数}): {@link CreateAclResponse 返回参数} */
   CreateAcl(data: CreateAclRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAclResponse>;
-  /** 创建cdc-ckafka集群 */
+  /** {@link CreateCdcCluster 创建cdc-ckafka集群}({@link CreateCdcClusterRequest 请求参数}): {@link CreateCdcClusterResponse 返回参数} */
   CreateCdcCluster(data: CreateCdcClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCdcClusterResponse>;
-  /** 创建Datahub连接源 */
+  /** {@link CreateConnectResource 创建Datahub连接源}({@link CreateConnectResourceRequest 请求参数}): {@link CreateConnectResourceResponse 返回参数} */
   CreateConnectResource(data: CreateConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConnectResourceResponse>;
-  /** 创建消费者组 */
+  /** {@link CreateConsumer 创建消费者组}({@link CreateConsumerRequest 请求参数}): {@link CreateConsumerResponse 返回参数} */
   CreateConsumer(data: CreateConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerResponse>;
-  /** 创建DIP转储任务 */
+  /** {@link CreateDatahubTask 创建DIP转储任务}({@link CreateDatahubTaskRequest 请求参数}): {@link CreateDatahubTaskResponse 返回参数} */
   CreateDatahubTask(data: CreateDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatahubTaskResponse>;
-  /** 创建实例(预付费包年包月) */
+  /** {@link CreateInstancePre 创建实例(预付费包年包月)}({@link CreateInstancePreRequest 请求参数}): {@link CreateInstancePreResponse 返回参数} */
   CreateInstancePre(data: CreateInstancePreRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancePreResponse>;
-  /** 增加主题分区 */
+  /** {@link CreatePartition 增加主题分区}({@link CreatePartitionRequest 请求参数}): {@link CreatePartitionResponse 返回参数} */
   CreatePartition(data: CreatePartitionRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePartitionResponse>;
-  /** 添加实例路由 */
+  /** {@link CreateRoute 添加实例路由}({@link CreateRouteRequest 请求参数}): {@link CreateRouteResponse 返回参数} */
   CreateRoute(data: CreateRouteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRouteResponse>;
-  /** 创建token */
+  /** {@link CreateToken 创建token}({@link CreateTokenRequest 请求参数}): {@link CreateTokenResponse 返回参数} */
   CreateToken(data: CreateTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTokenResponse>;
-  /** 创建主题 */
+  /** {@link CreateTopic 创建主题}({@link CreateTopicRequest 请求参数}): {@link CreateTopicResponse 返回参数} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
-  /** 创建主题IP白名单 */
+  /** {@link CreateTopicIpWhiteList 创建主题IP白名单}({@link CreateTopicIpWhiteListRequest 请求参数}): {@link CreateTopicIpWhiteListResponse 返回参数} */
   CreateTopicIpWhiteList(data: CreateTopicIpWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicIpWhiteListResponse>;
-  /** 添加用户 */
+  /** {@link CreateUser 添加用户}({@link CreateUserRequest 请求参数}): {@link CreateUserResponse 返回参数} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
-  /** 删除ACL */
+  /** {@link DeleteAcl 删除ACL}({@link DeleteAclRequest 请求参数}): {@link DeleteAclResponse 返回参数} */
   DeleteAcl(data: DeleteAclRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAclResponse>;
-  /** 删除ACL规则 */
+  /** {@link DeleteAclRule 删除ACL规则}({@link DeleteAclRuleRequest 请求参数}): {@link DeleteAclRuleResponse 返回参数} */
   DeleteAclRule(data: DeleteAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAclRuleResponse>;
-  /** 删除Datahub连接源 */
+  /** {@link DeleteConnectResource 删除Datahub连接源}({@link DeleteConnectResourceRequest 请求参数}): {@link DeleteConnectResourceResponse 返回参数} */
   DeleteConnectResource(data: DeleteConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConnectResourceResponse>;
-  /** 删除Datahub任务 */
+  /** {@link DeleteDatahubTask 删除Datahub任务}({@link DeleteDatahubTaskRequest 请求参数}): {@link DeleteDatahubTaskResponse 返回参数} */
   DeleteDatahubTask(data: DeleteDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatahubTaskResponse>;
-  /** 删除Datahub主题 */
+  /** {@link DeleteDatahubTopic 删除Datahub主题}({@link DeleteDatahubTopicRequest 请求参数}): {@link DeleteDatahubTopicResponse 返回参数} */
   DeleteDatahubTopic(data: DeleteDatahubTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatahubTopicResponse>;
-  /** 删除消费组 */
+  /** {@link DeleteGroup 删除消费组}({@link DeleteGroupRequest 请求参数}): {@link DeleteGroupResponse 返回参数} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
-  /** 删除预付费实例 */
+  /** {@link DeleteInstancePre 删除预付费实例}({@link DeleteInstancePreRequest 请求参数}): {@link DeleteInstancePreResponse 返回参数} */
   DeleteInstancePre(data: DeleteInstancePreRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstancePreResponse>;
-  /** 删除路由 */
+  /** {@link DeleteRoute 删除路由}({@link DeleteRouteRequest 请求参数}): {@link DeleteRouteResponse 返回参数} */
   DeleteRoute(data: DeleteRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRouteResponse>;
-  /** 修改路由触发时间 */
+  /** {@link DeleteRouteTriggerTime 修改路由触发时间}({@link DeleteRouteTriggerTimeRequest 请求参数}): {@link DeleteRouteTriggerTimeResponse 返回参数} */
   DeleteRouteTriggerTime(data: DeleteRouteTriggerTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRouteTriggerTimeResponse>;
-  /** 删除主题 */
+  /** {@link DeleteTopic 删除主题}({@link DeleteTopicRequest 请求参数}): {@link DeleteTopicResponse 返回参数} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
-  /** 删除主题IP白名单 */
+  /** {@link DeleteTopicIpWhiteList 删除主题IP白名单}({@link DeleteTopicIpWhiteListRequest 请求参数}): {@link DeleteTopicIpWhiteListResponse 返回参数} */
   DeleteTopicIpWhiteList(data: DeleteTopicIpWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicIpWhiteListResponse>;
-  /** 删除用户 */
+  /** {@link DeleteUser 删除用户}({@link DeleteUserRequest 请求参数}): {@link DeleteUserResponse 返回参数} */
   DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
-  /** 枚举ACL */
+  /** {@link DescribeACL 枚举ACL}({@link DescribeACLRequest 请求参数}): {@link DescribeACLResponse 返回参数} */
   DescribeACL(data: DescribeACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeACLResponse>;
-  /** 查询用户列表 */
+  /** {@link DescribeAppInfo 查询用户列表}({@link DescribeAppInfoRequest 请求参数}): {@link DescribeAppInfoResponse 返回参数} */
   DescribeAppInfo(data?: DescribeAppInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppInfoResponse>;
-  /** 查看可用区列表 */
+  /** {@link DescribeCkafkaZone 查看可用区列表}({@link DescribeCkafkaZoneRequest 请求参数}): {@link DescribeCkafkaZoneResponse 返回参数} */
   DescribeCkafkaZone(data?: DescribeCkafkaZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCkafkaZoneResponse>;
-  /** 查询Datahub连接源 */
+  /** {@link DescribeConnectResource 查询Datahub连接源}({@link DescribeConnectResourceRequest 请求参数}): {@link DescribeConnectResourceResponse 返回参数} */
   DescribeConnectResource(data: DescribeConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConnectResourceResponse>;
-  /** 查询Datahub连接源列表 */
+  /** {@link DescribeConnectResources 查询Datahub连接源列表}({@link DescribeConnectResourcesRequest 请求参数}): {@link DescribeConnectResourcesResponse 返回参数} */
   DescribeConnectResources(data?: DescribeConnectResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConnectResourcesResponse>;
-  /** 查询消费分组信息 */
+  /** {@link DescribeConsumerGroup 查询消费分组信息}({@link DescribeConsumerGroupRequest 请求参数}): {@link DescribeConsumerGroupResponse 返回参数} */
   DescribeConsumerGroup(data: DescribeConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupResponse>;
-  /** 获取Datahub消费分组offset */
+  /** {@link DescribeDatahubGroupOffsets 获取Datahub消费分组offset}({@link DescribeDatahubGroupOffsetsRequest 请求参数}): {@link DescribeDatahubGroupOffsetsResponse 返回参数} */
   DescribeDatahubGroupOffsets(data: DescribeDatahubGroupOffsetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubGroupOffsetsResponse>;
-  /** 查询Datahub任务信息 */
+  /** {@link DescribeDatahubTask 查询Datahub任务信息}({@link DescribeDatahubTaskRequest 请求参数}): {@link DescribeDatahubTaskResponse 返回参数} */
   DescribeDatahubTask(data: DescribeDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTaskResponse>;
-  /** 查询Datahub任务列表 */
+  /** {@link DescribeDatahubTasks 查询Datahub任务列表}({@link DescribeDatahubTasksRequest 请求参数}): {@link DescribeDatahubTasksResponse 返回参数} */
   DescribeDatahubTasks(data?: DescribeDatahubTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTasksResponse>;
-  /** 枚举消费分组(精简版) */
+  /** {@link DescribeGroup 枚举消费分组(精简版)}({@link DescribeGroupRequest 请求参数}): {@link DescribeGroupResponse 返回参数} */
   DescribeGroup(data: DescribeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupResponse>;
-  /** 获取消费分组信息 */
+  /** {@link DescribeGroupInfo 获取消费分组信息}({@link DescribeGroupInfoRequest 请求参数}): {@link DescribeGroupInfoResponse 返回参数} */
   DescribeGroupInfo(data: DescribeGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupInfoResponse>;
-  /** 获取消费分组offset */
+  /** {@link DescribeGroupOffsets 获取消费分组offset}({@link DescribeGroupOffsetsRequest 请求参数}): {@link DescribeGroupOffsetsResponse 返回参数} */
   DescribeGroupOffsets(data: DescribeGroupOffsetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupOffsetsResponse>;
-  /** 获取实例属性 */
+  /** {@link DescribeInstanceAttributes 获取实例属性}({@link DescribeInstanceAttributesRequest 请求参数}): {@link DescribeInstanceAttributesResponse 返回参数} */
   DescribeInstanceAttributes(data: DescribeInstanceAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAttributesResponse>;
-  /** 获取实例列表信息 */
+  /** {@link DescribeInstances 获取实例列表信息}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** 获取实例列表详情 */
+  /** {@link DescribeInstancesDetail 获取实例列表详情}({@link DescribeInstancesDetailRequest 请求参数}): {@link DescribeInstancesDetailResponse 返回参数} */
   DescribeInstancesDetail(data?: DescribeInstancesDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDetailResponse>;
-  /** 枚举地域 */
+  /** {@link DescribeRegion 枚举地域}({@link DescribeRegionRequest 请求参数}): {@link DescribeRegionResponse 返回参数} */
   DescribeRegion(data?: DescribeRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionResponse>;
-  /** 查看路由信息 */
+  /** {@link DescribeRoute 查看路由信息}({@link DescribeRouteRequest 请求参数}): {@link DescribeRouteResponse 返回参数} */
   DescribeRoute(data: DescribeRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteResponse>;
-  /** 获取主题列表 */
+  /** {@link DescribeTopic 获取主题列表}({@link DescribeTopicRequest 请求参数}): {@link DescribeTopicResponse 返回参数} */
   DescribeTopic(data: DescribeTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicResponse>;
-  /** 获取主题属性 */
+  /** {@link DescribeTopicAttributes 获取主题属性}({@link DescribeTopicAttributesRequest 请求参数}): {@link DescribeTopicAttributesResponse 返回参数} */
   DescribeTopicAttributes(data: DescribeTopicAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicAttributesResponse>;
-  /** 获取主题列表详情 */
+  /** {@link DescribeTopicDetail 获取主题列表详情}({@link DescribeTopicDetailRequest 请求参数}): {@link DescribeTopicDetailResponse 返回参数} */
   DescribeTopicDetail(data: DescribeTopicDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicDetailResponse>;
-  /** 查询订阅某主题消息分组信息 */
+  /** {@link DescribeTopicSubscribeGroup 查询订阅某主题消息分组信息}({@link DescribeTopicSubscribeGroupRequest 请求参数}): {@link DescribeTopicSubscribeGroupResponse 返回参数} */
   DescribeTopicSubscribeGroup(data: DescribeTopicSubscribeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicSubscribeGroupResponse>;
-  /** 获取Topic 同步副本信息 */
+  /** {@link DescribeTopicSyncReplica 获取Topic 同步副本信息}({@link DescribeTopicSyncReplicaRequest 请求参数}): {@link DescribeTopicSyncReplicaResponse 返回参数} */
   DescribeTopicSyncReplica(data: DescribeTopicSyncReplicaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicSyncReplicaResponse>;
-  /** 查询用户信息 */
+  /** {@link DescribeUser 查询用户信息}({@link DescribeUserRequest 请求参数}): {@link DescribeUserResponse 返回参数} */
   DescribeUser(data: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
-  /** 查询Datahub Topic消息 */
+  /** {@link FetchDatahubMessageByOffset 查询Datahub Topic消息}({@link FetchDatahubMessageByOffsetRequest 请求参数}): {@link FetchDatahubMessageByOffsetResponse 返回参数} */
   FetchDatahubMessageByOffset(data: FetchDatahubMessageByOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<FetchDatahubMessageByOffsetResponse>;
-  /** 查询Datahub Topic最新消息列表 */
+  /** {@link FetchLatestDatahubMessageList 查询Datahub Topic最新消息列表}({@link FetchLatestDatahubMessageListRequest 请求参数}): {@link FetchLatestDatahubMessageListResponse 返回参数} */
   FetchLatestDatahubMessageList(data: FetchLatestDatahubMessageListRequest, config?: AxiosRequestConfig): AxiosPromise<FetchLatestDatahubMessageListResponse>;
-  /** 查询消息 */
+  /** {@link FetchMessageByOffset 查询消息}({@link FetchMessageByOffsetRequest 请求参数}): {@link FetchMessageByOffsetResponse 返回参数} */
   FetchMessageByOffset(data: FetchMessageByOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<FetchMessageByOffsetResponse>;
-  /** 根据位点查询消息列表 */
+  /** {@link FetchMessageListByOffset 根据位点查询消息列表}({@link FetchMessageListByOffsetRequest 请求参数}): {@link FetchMessageListByOffsetResponse 返回参数} */
   FetchMessageListByOffset(data: FetchMessageListByOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<FetchMessageListByOffsetResponse>;
-  /** 编辑Datahub连接源 */
+  /** {@link ModifyConnectResource 编辑Datahub连接源}({@link ModifyConnectResourceRequest 请求参数}): {@link ModifyConnectResourceResponse 返回参数} */
   ModifyConnectResource(data: ModifyConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConnectResourceResponse>;
-  /** 修改Datahub任务 */
+  /** {@link ModifyDatahubTask 修改Datahub任务}({@link ModifyDatahubTaskRequest 请求参数}): {@link ModifyDatahubTaskResponse 返回参数} */
   ModifyDatahubTask(data: ModifyDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatahubTaskResponse>;
-  /** 设置Groups 消费分组offset */
+  /** {@link ModifyGroupOffsets 设置Groups 消费分组offset}({@link ModifyGroupOffsetsRequest 请求参数}): {@link ModifyGroupOffsetsResponse 返回参数} */
   ModifyGroupOffsets(data: ModifyGroupOffsetsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGroupOffsetsResponse>;
-  /** 设置实例属性 */
+  /** {@link ModifyInstanceAttributes 设置实例属性}({@link ModifyInstanceAttributesRequest 请求参数}): {@link ModifyInstanceAttributesResponse 返回参数} */
   ModifyInstanceAttributes(data: ModifyInstanceAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAttributesResponse>;
-  /** 预付费实例变配接口 */
+  /** {@link ModifyInstancePre 预付费实例变配接口}({@link ModifyInstancePreRequest 请求参数}): {@link ModifyInstancePreResponse 返回参数} */
   ModifyInstancePre(data: ModifyInstancePreRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancePreResponse>;
-  /** 修改密码 */
+  /** {@link ModifyPassword 修改密码}({@link ModifyPasswordRequest 请求参数}): {@link ModifyPasswordResponse 返回参数} */
   ModifyPassword(data: ModifyPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPasswordResponse>;
-  /** 设置主题属性 */
+  /** {@link ModifyTopicAttributes 设置主题属性}({@link ModifyTopicAttributesRequest 请求参数}): {@link ModifyTopicAttributesResponse 返回参数} */
   ModifyTopicAttributes(data: ModifyTopicAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicAttributesResponse>;
-  /** HTTP发送消息 */
+  /** {@link SendMessage HTTP发送消息}({@link SendMessageRequest 请求参数}): {@link SendMessageResponse 返回参数} */
   SendMessage(data: SendMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendMessageResponse>;
 }
 

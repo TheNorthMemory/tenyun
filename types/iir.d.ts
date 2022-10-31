@@ -60,10 +60,10 @@ declare interface RecognizeProductResponse {
   RequestId?: string;
 }
 
-/** [智能识图](https://cloud.tencent.com/document/product/1217) */
+/** {@link Iir 智能识图} */
 declare interface Iir {
   (): Versions;
-  /** 商品识别 */
+  /** {@link RecognizeProduct 商品识别}({@link RecognizeProductRequest 请求参数}): {@link RecognizeProductResponse 返回参数} */
   RecognizeProduct(data?: RecognizeProductRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeProductResponse>;
 }
 

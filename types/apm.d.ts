@@ -310,20 +310,20 @@ declare interface DescribeServiceOverviewResponse {
   RequestId?: string;
 }
 
-/** [应用性能观测](https://cloud.tencent.com/document/product/1463) */
+/** {@link Apm 应用性能观测} */
 declare interface Apm {
   (): Versions;
-  /** 创建Apm实例 */
+  /** {@link CreateApmInstance 创建Apm实例}({@link CreateApmInstanceRequest 请求参数}): {@link CreateApmInstanceResponse 返回参数} */
   CreateApmInstance(data: CreateApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApmInstanceResponse>;
-  /** 获取Apm Agent信息 */
+  /** {@link DescribeApmAgent 获取Apm Agent信息}({@link DescribeApmAgentRequest 请求参数}): {@link DescribeApmAgentResponse 返回参数} */
   DescribeApmAgent(data: DescribeApmAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmAgentResponse>;
-  /** 拉取APM实例列表 */
+  /** {@link DescribeApmInstances 拉取APM实例列表}({@link DescribeApmInstancesRequest 请求参数}): {@link DescribeApmInstancesResponse 返回参数} */
   DescribeApmInstances(data?: DescribeApmInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmInstancesResponse>;
-  /** 获取指标数据通用接口 */
+  /** {@link DescribeGeneralMetricData 获取指标数据通用接口}({@link DescribeGeneralMetricDataRequest 请求参数}): {@link DescribeGeneralMetricDataResponse 返回参数} */
   DescribeGeneralMetricData(data: DescribeGeneralMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralMetricDataResponse>;
-  /** 通用指标列表接口 */
+  /** {@link DescribeMetricRecords 通用指标列表接口}({@link DescribeMetricRecordsRequest 请求参数}): {@link DescribeMetricRecordsResponse 返回参数} */
   DescribeMetricRecords(data: DescribeMetricRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricRecordsResponse>;
-  /** 获取服务概览数据 */
+  /** {@link DescribeServiceOverview 获取服务概览数据}({@link DescribeServiceOverviewRequest 请求参数}): {@link DescribeServiceOverviewResponse 返回参数} */
   DescribeServiceOverview(data: DescribeServiceOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceOverviewResponse>;
 }
 

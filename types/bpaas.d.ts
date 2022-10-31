@@ -140,12 +140,12 @@ declare interface OutApproveBpaasApplicationResponse {
   RequestId?: string;
 }
 
-/** [商业流程服务](https://cloud.tencent.com/document/product/1083) */
+/** {@link Bpaas 商业流程服务} */
 declare interface Bpaas {
   (): Versions;
-  /** 查看审批详情 */
+  /** {@link GetBpaasApproveDetail 查看审批详情}({@link GetBpaasApproveDetailRequest 请求参数}): {@link GetBpaasApproveDetailResponse 返回参数} */
   GetBpaasApproveDetail(data: GetBpaasApproveDetailRequest, config?: AxiosRequestConfig): AxiosPromise<GetBpaasApproveDetailResponse>;
-  /** 外部审批申请单 */
+  /** {@link OutApproveBpaasApplication 外部审批申请单}({@link OutApproveBpaasApplicationRequest 请求参数}): {@link OutApproveBpaasApplicationResponse 返回参数} */
   OutApproveBpaasApplication(data: OutApproveBpaasApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<OutApproveBpaasApplicationResponse>;
 }
 

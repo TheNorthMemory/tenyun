@@ -1664,102 +1664,102 @@ declare namespace V20180408 {
   }
 }
 
-/** [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) */
+/** {@link Mongodb 云数据库 MongoDB} */
 declare interface Mongodb {
   (): Versions;
-  /** 指定云数据库实例的所属项目 */
+  /** {@link AssignProject 指定云数据库实例的所属项目}({@link AssignProjectRequest 请求参数}): {@link AssignProjectResponse 返回参数} */
   AssignProject(data: AssignProjectRequest, config?: AxiosRequestConfig): AxiosPromise<AssignProjectResponse>;
-  /** 备份实例接口 */
+  /** {@link CreateBackupDBInstance 备份实例接口}({@link CreateBackupDBInstanceRequest 请求参数}): {@link CreateBackupDBInstanceResponse 返回参数} */
   CreateBackupDBInstance(data: CreateBackupDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupDBInstanceResponse>;
-  /** 创建备份下载任务 */
+  /** {@link CreateBackupDownloadTask 创建备份下载任务}({@link CreateBackupDownloadTaskRequest 请求参数}): {@link CreateBackupDownloadTaskResponse 返回参数} */
   CreateBackupDownloadTask(data: CreateBackupDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupDownloadTaskResponse>;
-  /** 创建云数据库实例（包年包月） */
+  /** {@link CreateDBInstance 创建云数据库实例（包年包月）}({@link CreateDBInstanceRequest 请求参数}): {@link CreateDBInstanceResponse 返回参数} */
   CreateDBInstance(data: CreateDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceResponse>;
-  /** 创建云数据库实例（按量计费） */
+  /** {@link CreateDBInstanceHour 创建云数据库实例（按量计费）}({@link CreateDBInstanceHourRequest 请求参数}): {@link CreateDBInstanceHourResponse 返回参数} */
   CreateDBInstanceHour(data: CreateDBInstanceHourRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceHourResponse>;
-  /** 全部账号列表 */
+  /** {@link DescribeAccountUsers 全部账号列表}({@link DescribeAccountUsersRequest 请求参数}): {@link DescribeAccountUsersResponse 返回参数} */
   DescribeAccountUsers(data: DescribeAccountUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountUsersResponse>;
-  /** 查询异步任务状态接口 */
+  /** {@link DescribeAsyncRequestInfo 查询异步任务状态接口}({@link DescribeAsyncRequestInfoRequest 请求参数}): {@link DescribeAsyncRequestInfoResponse 返回参数} */
   DescribeAsyncRequestInfo(data: DescribeAsyncRequestInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsyncRequestInfoResponse>;
-  /** 查询备份下载任务信息 */
+  /** {@link DescribeBackupDownloadTask 查询备份下载任务信息}({@link DescribeBackupDownloadTaskRequest 请求参数}): {@link DescribeBackupDownloadTaskResponse 返回参数} */
   DescribeBackupDownloadTask(data: DescribeBackupDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadTaskResponse>;
-  /** 查询实例客户端连接信息 */
+  /** {@link DescribeClientConnections 查询实例客户端连接信息}({@link DescribeClientConnectionsRequest 请求参数}): {@link DescribeClientConnectionsResponse 返回参数} */
   DescribeClientConnections(data: DescribeClientConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientConnectionsResponse>;
-  /** 查询数据库实例当前正在执行的操作 */
+  /** {@link DescribeCurrentOp 查询数据库实例当前正在执行的操作}({@link DescribeCurrentOpRequest 请求参数}): {@link DescribeCurrentOpResponse 返回参数} */
   DescribeCurrentOp(data: DescribeCurrentOpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCurrentOpResponse>;
-  /** 查询实例备份列表 */
+  /** {@link DescribeDBBackups 查询实例备份列表}({@link DescribeDBBackupsRequest 请求参数}): {@link DescribeDBBackupsResponse 返回参数} */
   DescribeDBBackups(data: DescribeDBBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBBackupsResponse>;
-  /** 获取数据库实例订单详情 */
+  /** {@link DescribeDBInstanceDeal 获取数据库实例订单详情}({@link DescribeDBInstanceDealRequest 请求参数}): {@link DescribeDBInstanceDealResponse 返回参数} */
   DescribeDBInstanceDeal(data: DescribeDBInstanceDealRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceDealResponse>;
-  /** 查询节点属性 */
+  /** {@link DescribeDBInstanceNodeProperty 查询节点属性}({@link DescribeDBInstanceNodePropertyRequest 请求参数}): {@link DescribeDBInstanceNodePropertyResponse 返回参数} */
   DescribeDBInstanceNodeProperty(data: DescribeDBInstanceNodePropertyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceNodePropertyResponse>;
-  /** 查询云数据库实例列表 */
+  /** {@link DescribeDBInstances 查询云数据库实例列表}({@link DescribeDBInstancesRequest 请求参数}): {@link DescribeDBInstancesResponse 返回参数} */
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
-  /** 获取当前实例可修改的参数列表 */
+  /** {@link DescribeInstanceParams 获取当前实例可修改的参数列表}({@link DescribeInstanceParamsRequest 请求参数}): {@link DescribeInstanceParamsResponse 返回参数} */
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
-  /** 查询实例绑定的安全组 */
+  /** {@link DescribeSecurityGroup 查询实例绑定的安全组}({@link DescribeSecurityGroupRequest 请求参数}): {@link DescribeSecurityGroupResponse 返回参数} */
   DescribeSecurityGroup(data: DescribeSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupResponse>;
-  /** 获取慢日志统计信息 */
+  /** {@link DescribeSlowLogPatterns 获取慢日志统计信息}({@link DescribeSlowLogPatternsRequest 请求参数}): {@link DescribeSlowLogPatternsResponse 返回参数} */
   DescribeSlowLogPatterns(data: DescribeSlowLogPatternsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogPatternsResponse>;
-  /** 获取慢日志信息 */
+  /** {@link DescribeSlowLogs 获取慢日志信息}({@link DescribeSlowLogsRequest 请求参数}): {@link DescribeSlowLogsResponse 返回参数} */
   DescribeSlowLogs(data: DescribeSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogsResponse>;
-  /** 查询云数据库的售卖规格 */
+  /** {@link DescribeSpecInfo 查询云数据库的售卖规格}({@link DescribeSpecInfoRequest 请求参数}): {@link DescribeSpecInfoResponse 返回参数} */
   DescribeSpecInfo(data?: DescribeSpecInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecInfoResponse>;
-  /** 刷新路由配置 */
+  /** {@link FlushInstanceRouterConfig 刷新路由配置}({@link FlushInstanceRouterConfigRequest 请求参数}): {@link FlushInstanceRouterConfigResponse 返回参数} */
   FlushInstanceRouterConfig(data: FlushInstanceRouterConfigRequest, config?: AxiosRequestConfig): AxiosPromise<FlushInstanceRouterConfigResponse>;
-  /** 创建实例询价 */
+  /** {@link InquirePriceCreateDBInstances 创建实例询价}({@link InquirePriceCreateDBInstancesRequest 请求参数}): {@link InquirePriceCreateDBInstancesResponse 返回参数} */
   InquirePriceCreateDBInstances(data: InquirePriceCreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateDBInstancesResponse>;
-  /** 变更配置询价 */
+  /** {@link InquirePriceModifyDBInstanceSpec 变更配置询价}({@link InquirePriceModifyDBInstanceSpecRequest 请求参数}): {@link InquirePriceModifyDBInstanceSpecResponse 返回参数} */
   InquirePriceModifyDBInstanceSpec(data: InquirePriceModifyDBInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceModifyDBInstanceSpecResponse>;
-  /** 续费实例询价 */
+  /** {@link InquirePriceRenewDBInstances 续费实例询价}({@link InquirePriceRenewDBInstancesRequest 请求参数}): {@link InquirePriceRenewDBInstancesResponse 返回参数} */
   InquirePriceRenewDBInstances(data: InquirePriceRenewDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewDBInstancesResponse>;
-  /** 隔离云数据库实例 */
+  /** {@link IsolateDBInstance 隔离云数据库实例}({@link IsolateDBInstanceRequest 请求参数}): {@link IsolateDBInstanceResponse 返回参数} */
   IsolateDBInstance(data: IsolateDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBInstanceResponse>;
-  /** 终止数据库实例特定操作 */
+  /** {@link KillOps 终止数据库实例特定操作}({@link KillOpsRequest 请求参数}): {@link KillOpsResponse 返回参数} */
   KillOps(data: KillOpsRequest, config?: AxiosRequestConfig): AxiosPromise<KillOpsResponse>;
-  /** 修改云数据库实例网络信息 */
+  /** {@link ModifyDBInstanceNetworkAddress 修改云数据库实例网络信息}({@link ModifyDBInstanceNetworkAddressRequest 请求参数}): {@link ModifyDBInstanceNetworkAddressResponse 返回参数} */
   ModifyDBInstanceNetworkAddress(data: ModifyDBInstanceNetworkAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNetworkAddressResponse>;
-  /** 修改实例安全组 */
+  /** {@link ModifyDBInstanceSecurityGroup 修改实例安全组}({@link ModifyDBInstanceSecurityGroupRequest 请求参数}): {@link ModifyDBInstanceSecurityGroupResponse 返回参数} */
   ModifyDBInstanceSecurityGroup(data: ModifyDBInstanceSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupResponse>;
-  /** 调整云数据库实例配置 */
+  /** {@link ModifyDBInstanceSpec 调整云数据库实例配置}({@link ModifyDBInstanceSpecRequest 请求参数}): {@link ModifyDBInstanceSpecResponse 返回参数} */
   ModifyDBInstanceSpec(data: ModifyDBInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSpecResponse>;
-  /** 下线隔离状态的云数据库实例 */
+  /** {@link OfflineIsolatedDBInstance 下线隔离状态的云数据库实例}({@link OfflineIsolatedDBInstanceRequest 请求参数}): {@link OfflineIsolatedDBInstanceResponse 返回参数} */
   OfflineIsolatedDBInstance(data: OfflineIsolatedDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineIsolatedDBInstanceResponse>;
-  /** 修改实例名称 */
+  /** {@link RenameInstance 修改实例名称}({@link RenameInstanceRequest 请求参数}): {@link RenameInstanceResponse 返回参数} */
   RenameInstance(data: RenameInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenameInstanceResponse>;
-  /** 续费云数据库实例 */
+  /** {@link RenewDBInstances 续费云数据库实例}({@link RenewDBInstancesRequest 请求参数}): {@link RenewDBInstancesResponse 返回参数} */
   RenewDBInstances(data: RenewDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDBInstancesResponse>;
-  /** 修改实例用户的密码 */
+  /** {@link ResetDBInstancePassword 修改实例用户的密码}({@link ResetDBInstancePasswordRequest 请求参数}): {@link ResetDBInstancePasswordResponse 返回参数} */
   ResetDBInstancePassword(data: ResetDBInstancePasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDBInstancePasswordResponse>;
-  /** 设置账户权限 */
+  /** {@link SetAccountUserPrivilege 设置账户权限}({@link SetAccountUserPrivilegeRequest 请求参数}): {@link SetAccountUserPrivilegeResponse 返回参数} */
   SetAccountUserPrivilege(data: SetAccountUserPrivilegeRequest, config?: AxiosRequestConfig): AxiosPromise<SetAccountUserPrivilegeResponse>;
-  /** 包年包月隔离接口 */
+  /** {@link TerminateDBInstances 包年包月隔离接口}({@link TerminateDBInstancesRequest 请求参数}): {@link TerminateDBInstancesResponse 返回参数} */
   TerminateDBInstances(data: TerminateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDBInstancesResponse>;
-  /** 指定云数据库实例的所属项目 */
+  /** {@link V20180408.AssignProject 指定云数据库实例的所属项目}({@link V20180408.AssignProjectRequest 请求参数}): {@link V20180408.AssignProjectResponse 返回参数} */
   AssignProject(data: V20180408.AssignProjectRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.AssignProjectResponse>;
-  /** 创建云数据库实例（包年包月） */
+  /** {@link V20180408.CreateDBInstance 创建云数据库实例（包年包月）}({@link V20180408.CreateDBInstanceRequest 请求参数}): {@link V20180408.CreateDBInstanceResponse 返回参数} */
   CreateDBInstance(data: V20180408.CreateDBInstanceRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.CreateDBInstanceResponse>;
-  /** 创建云数据库实例（按量计费） */
+  /** {@link V20180408.CreateDBInstanceHour 创建云数据库实例（按量计费）}({@link V20180408.CreateDBInstanceHourRequest 请求参数}): {@link V20180408.CreateDBInstanceHourResponse 返回参数} */
   CreateDBInstanceHour(data: V20180408.CreateDBInstanceHourRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.CreateDBInstanceHourResponse>;
-  /** 查询实例客户端连接信息 */
+  /** {@link V20180408.DescribeClientConnections 查询实例客户端连接信息}({@link V20180408.DescribeClientConnectionsRequest 请求参数}): {@link V20180408.DescribeClientConnectionsResponse 返回参数} */
   DescribeClientConnections(data: V20180408.DescribeClientConnectionsRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.DescribeClientConnectionsResponse>;
-  /** 查询实例列表 */
+  /** {@link V20180408.DescribeDBInstances 查询实例列表}({@link V20180408.DescribeDBInstancesRequest 请求参数}): {@link V20180408.DescribeDBInstancesResponse 返回参数} */
   DescribeDBInstances(data: V20180408.DescribeDBInstancesRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.DescribeDBInstancesResponse>;
-  /** 查询实例慢日志 */
+  /** {@link V20180408.DescribeSlowLog 查询实例慢日志}({@link V20180408.DescribeSlowLogRequest 请求参数}): {@link V20180408.DescribeSlowLogResponse 返回参数} */
   DescribeSlowLog(data: V20180408.DescribeSlowLogRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.DescribeSlowLogResponse>;
-  /** 查询云数据库的售卖规格 */
+  /** {@link V20180408.DescribeSpecInfo 查询云数据库的售卖规格}({@link V20180408.DescribeSpecInfoRequest 请求参数}): {@link V20180408.DescribeSpecInfoResponse 返回参数} */
   DescribeSpecInfo(data: V20180408.DescribeSpecInfoRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.DescribeSpecInfoResponse>;
-  /** 修改实例名称 */
+  /** {@link V20180408.RenameInstance 修改实例名称}({@link V20180408.RenameInstanceRequest 请求参数}): {@link V20180408.RenameInstanceResponse 返回参数} */
   RenameInstance(data: V20180408.RenameInstanceRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.RenameInstanceResponse>;
-  /** 设置云数据库实例的续费选项 */
+  /** {@link V20180408.SetAutoRenew 设置云数据库实例的续费选项}({@link V20180408.SetAutoRenewRequest 请求参数}): {@link V20180408.SetAutoRenewResponse 返回参数} */
   SetAutoRenew(data: V20180408.SetAutoRenewRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.SetAutoRenewResponse>;
-  /** 修改云数据库实例的账户密码 */
+  /** {@link V20180408.SetPassword 修改云数据库实例的账户密码}({@link V20180408.SetPasswordRequest 请求参数}): {@link V20180408.SetPasswordResponse 返回参数} */
   SetPassword(data: V20180408.SetPasswordRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.SetPasswordResponse>;
-  /** 销毁云数据库实例（按量计费） */
+  /** {@link V20180408.TerminateDBInstance 销毁云数据库实例（按量计费）}({@link V20180408.TerminateDBInstanceRequest 请求参数}): {@link V20180408.TerminateDBInstanceResponse 返回参数} */
   TerminateDBInstance(data: V20180408.TerminateDBInstanceRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.TerminateDBInstanceResponse>;
-  /** 升级云数据库实例（包年包月） */
+  /** {@link V20180408.UpgradeDBInstance 升级云数据库实例（包年包月）}({@link V20180408.UpgradeDBInstanceRequest 请求参数}): {@link V20180408.UpgradeDBInstanceResponse 返回参数} */
   UpgradeDBInstance(data: V20180408.UpgradeDBInstanceRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.UpgradeDBInstanceResponse>;
-  /** 升级云数据库实例（按量计费） */
+  /** {@link V20180408.UpgradeDBInstanceHour 升级云数据库实例（按量计费）}({@link V20180408.UpgradeDBInstanceHourRequest 请求参数}): {@link V20180408.UpgradeDBInstanceHourResponse 返回参数} */
   UpgradeDBInstanceHour(data: V20180408.UpgradeDBInstanceHourRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.UpgradeDBInstanceHourResponse>;
 }
 

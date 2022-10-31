@@ -88,10 +88,10 @@ declare interface QueryLoginProtectionResponse {
   RequestId?: string;
 }
 
-/** [登录保护](https://cloud.tencent.com/document/product/1190) */
+/** {@link Lp 登录保护} */
 declare interface Lp {
   (): Versions;
-  /** 登录保护 */
+  /** {@link QueryLoginProtection 登录保护}({@link QueryLoginProtectionRequest 请求参数}): {@link QueryLoginProtectionResponse 返回参数} */
   QueryLoginProtection(data: QueryLoginProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<QueryLoginProtectionResponse>;
 }
 

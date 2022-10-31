@@ -710,60 +710,60 @@ declare interface UpdateTransformationResponse {
   RequestId?: string;
 }
 
-/** [事件总线](https://cloud.tencent.com/document/product/1359) */
+/** {@link Eb 事件总线} */
 declare interface Eb {
   (): Versions;
-  /** 检验规则 */
+  /** {@link CheckRule 检验规则}({@link CheckRuleRequest 请求参数}): {@link CheckRuleResponse 返回参数} */
   CheckRule(data?: CheckRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CheckRuleResponse>;
-  /** 检查转换器 */
+  /** {@link CheckTransformation 检查转换器}({@link CheckTransformationRequest 请求参数}): {@link CheckTransformationResponse 返回参数} */
   CheckTransformation(data: CheckTransformationRequest, config?: AxiosRequestConfig): AxiosPromise<CheckTransformationResponse>;
-  /** 创建事件连接器 */
+  /** {@link CreateConnection 创建事件连接器}({@link CreateConnectionRequest 请求参数}): {@link CreateConnectionResponse 返回参数} */
   CreateConnection(data: CreateConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConnectionResponse>;
-  /** 创建事件集 */
+  /** {@link CreateEventBus 创建事件集}({@link CreateEventBusRequest 请求参数}): {@link CreateEventBusResponse 返回参数} */
   CreateEventBus(data: CreateEventBusRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEventBusResponse>;
-  /** 创建事件规则 */
+  /** {@link CreateRule 创建事件规则}({@link CreateRuleRequest 请求参数}): {@link CreateRuleResponse 返回参数} */
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
-  /** 创建事件目标 */
+  /** {@link CreateTarget 创建事件目标}({@link CreateTargetRequest 请求参数}): {@link CreateTargetResponse 返回参数} */
   CreateTarget(data: CreateTargetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTargetResponse>;
-  /** 创建转换器 */
+  /** {@link CreateTransformation 创建转换器}({@link CreateTransformationRequest 请求参数}): {@link CreateTransformationResponse 返回参数} */
   CreateTransformation(data: CreateTransformationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTransformationResponse>;
-  /** 删除事件连接器 */
+  /** {@link DeleteConnection 删除事件连接器}({@link DeleteConnectionRequest 请求参数}): {@link DeleteConnectionResponse 返回参数} */
   DeleteConnection(data: DeleteConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConnectionResponse>;
-  /** 删除事件集 */
+  /** {@link DeleteEventBus 删除事件集}({@link DeleteEventBusRequest 请求参数}): {@link DeleteEventBusResponse 返回参数} */
   DeleteEventBus(data: DeleteEventBusRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEventBusResponse>;
-  /** 删除事件规则 */
+  /** {@link DeleteRule 删除事件规则}({@link DeleteRuleRequest 请求参数}): {@link DeleteRuleResponse 返回参数} */
   DeleteRule(data: DeleteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleResponse>;
-  /** 删除事件目标 */
+  /** {@link DeleteTarget 删除事件目标}({@link DeleteTargetRequest 请求参数}): {@link DeleteTargetResponse 返回参数} */
   DeleteTarget(data: DeleteTargetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTargetResponse>;
-  /** 删除转换器 */
+  /** {@link DeleteTransformation 删除转换器}({@link DeleteTransformationRequest 请求参数}): {@link DeleteTransformationResponse 返回参数} */
   DeleteTransformation(data: DeleteTransformationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTransformationResponse>;
-  /** 获取事件集详情 */
+  /** {@link GetEventBus 获取事件集详情}({@link GetEventBusRequest 请求参数}): {@link GetEventBusResponse 返回参数} */
   GetEventBus(data: GetEventBusRequest, config?: AxiosRequestConfig): AxiosPromise<GetEventBusResponse>;
-  /** 获取事件规则详情 */
+  /** {@link GetRule 获取事件规则详情}({@link GetRuleRequest 请求参数}): {@link GetRuleResponse 返回参数} */
   GetRule(data: GetRuleRequest, config?: AxiosRequestConfig): AxiosPromise<GetRuleResponse>;
-  /** 获取转换器详情 */
+  /** {@link GetTransformation 获取转换器详情}({@link GetTransformationRequest 请求参数}): {@link GetTransformationResponse 返回参数} */
   GetTransformation(data: GetTransformationRequest, config?: AxiosRequestConfig): AxiosPromise<GetTransformationResponse>;
-  /** 获取事件连接器列表 */
+  /** {@link ListConnections 获取事件连接器列表}({@link ListConnectionsRequest 请求参数}): {@link ListConnectionsResponse 返回参数} */
   ListConnections(data: ListConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListConnectionsResponse>;
-  /** 获取事件集列表 */
+  /** {@link ListEventBuses 获取事件集列表}({@link ListEventBusesRequest 请求参数}): {@link ListEventBusesResponse 返回参数} */
   ListEventBuses(data?: ListEventBusesRequest, config?: AxiosRequestConfig): AxiosPromise<ListEventBusesResponse>;
-  /** 获取事件规则列表 */
+  /** {@link ListRules 获取事件规则列表}({@link ListRulesRequest 请求参数}): {@link ListRulesResponse 返回参数} */
   ListRules(data: ListRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListRulesResponse>;
-  /** 获取事件目标列表 */
+  /** {@link ListTargets 获取事件目标列表}({@link ListTargetsRequest 请求参数}): {@link ListTargetsResponse 返回参数} */
   ListTargets(data: ListTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<ListTargetsResponse>;
-  /** Event事件投递 */
+  /** {@link PublishEvent Event事件投递}({@link PublishEventRequest 请求参数}): {@link PublishEventResponse 返回参数} */
   PublishEvent(data: PublishEventRequest, config?: AxiosRequestConfig): AxiosPromise<PublishEventResponse>;
-  /** 事件投递 */
+  /** {@link PutEvents 事件投递}({@link PutEventsRequest 请求参数}): {@link PutEventsResponse 返回参数} */
   PutEvents(data: PutEventsRequest, config?: AxiosRequestConfig): AxiosPromise<PutEventsResponse>;
-  /** 更新事件连接器 */
+  /** {@link UpdateConnection 更新事件连接器}({@link UpdateConnectionRequest 请求参数}): {@link UpdateConnectionResponse 返回参数} */
   UpdateConnection(data: UpdateConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateConnectionResponse>;
-  /** 更新事件集 */
+  /** {@link UpdateEventBus 更新事件集}({@link UpdateEventBusRequest 请求参数}): {@link UpdateEventBusResponse 返回参数} */
   UpdateEventBus(data: UpdateEventBusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEventBusResponse>;
-  /** 更新事件规则 */
+  /** {@link UpdateRule 更新事件规则}({@link UpdateRuleRequest 请求参数}): {@link UpdateRuleResponse 返回参数} */
   UpdateRule(data: UpdateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRuleResponse>;
-  /** 更新事件目标 */
+  /** {@link UpdateTarget 更新事件目标}({@link UpdateTargetRequest 请求参数}): {@link UpdateTargetResponse 返回参数} */
   UpdateTarget(data: UpdateTargetRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTargetResponse>;
-  /** 更新转换器 */
+  /** {@link UpdateTransformation 更新转换器}({@link UpdateTransformationRequest 请求参数}): {@link UpdateTransformationResponse 返回参数} */
   UpdateTransformation(data: UpdateTransformationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTransformationResponse>;
 }
 

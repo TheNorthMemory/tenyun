@@ -82,14 +82,14 @@ declare interface DescribeTripleResponse {
   RequestId?: string;
 }
 
-/** 腾讯知识图谱数据查询 */
+/** {@link Tkgdq 腾讯知识图谱数据查询} */
 declare interface Tkgdq {
   (): Versions;
-  /** 实体信息查询 */
+  /** {@link DescribeEntity 实体信息查询}({@link DescribeEntityRequest 请求参数}): {@link DescribeEntityResponse 返回参数} */
   DescribeEntity(data: DescribeEntityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEntityResponse>;
-  /** 实体关系查询 */
+  /** {@link DescribeRelation 实体关系查询}({@link DescribeRelationRequest 请求参数}): {@link DescribeRelationResponse 返回参数} */
   DescribeRelation(data: DescribeRelationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelationResponse>;
-  /** 三元组查询 */
+  /** {@link DescribeTriple 三元组查询}({@link DescribeTripleRequest 请求参数}): {@link DescribeTripleResponse 返回参数} */
   DescribeTriple(data: DescribeTripleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTripleResponse>;
 }
 

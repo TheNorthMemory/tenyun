@@ -1070,70 +1070,70 @@ declare interface TakeMusicOffShelvesResponse {
   RequestId?: string;
 }
 
-/** [正版曲库直通车](https://cloud.tencent.com/document/product/1155) */
+/** {@link Ame 正版曲库直通车} */
 declare interface Ame {
   (): Versions;
-  /** 批量获取直播互动曲目详情 */
+  /** {@link BatchDescribeKTVMusicDetails 批量获取直播互动曲目详情}({@link BatchDescribeKTVMusicDetailsRequest 请求参数}): {@link BatchDescribeKTVMusicDetailsResponse 返回参数} */
   BatchDescribeKTVMusicDetails(data: BatchDescribeKTVMusicDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDescribeKTVMusicDetailsResponse>;
-  /** 创建直播互动机器人 */
+  /** {@link CreateKTVRobot 创建直播互动机器人}({@link CreateKTVRobotRequest 请求参数}): {@link CreateKTVRobotResponse 返回参数} */
   CreateKTVRobot(data: CreateKTVRobotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKTVRobotResponse>;
-  /** 获取授权项目列表 */
+  /** {@link DescribeAuthInfo 获取授权项目列表}({@link DescribeAuthInfoRequest 请求参数}): {@link DescribeAuthInfoResponse 返回参数} */
   DescribeAuthInfo(data?: DescribeAuthInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthInfoResponse>;
-  /** 获取云音乐播放信息 */
+  /** {@link DescribeCloudMusic 获取云音乐播放信息}({@link DescribeCloudMusicRequest 请求参数}): {@link DescribeCloudMusicResponse 返回参数} */
   DescribeCloudMusic(data: DescribeCloudMusicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudMusicResponse>;
-  /** 获取授权项目已购云音乐列表 */
+  /** {@link DescribeCloudMusicPurchased 获取授权项目已购云音乐列表}({@link DescribeCloudMusicPurchasedRequest 请求参数}): {@link DescribeCloudMusicPurchasedResponse 返回参数} */
   DescribeCloudMusicPurchased(data: DescribeCloudMusicPurchasedRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudMusicPurchasedResponse>;
-  /** 根据歌曲ID查询歌曲信息 */
+  /** {@link DescribeItemById 根据歌曲ID查询歌曲信息}({@link DescribeItemByIdRequest 请求参数}): {@link DescribeItemByIdResponse 返回参数} */
   DescribeItemById(data: DescribeItemByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeItemByIdResponse>;
-  /** 获取分类内容下歌曲列表 */
+  /** {@link DescribeItems 获取分类内容下歌曲列表}({@link DescribeItemsRequest 请求参数}): {@link DescribeItemsResponse 返回参数} */
   DescribeItems(data: DescribeItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeItemsResponse>;
-  /** 获取直播互动曲目详情 */
+  /** {@link DescribeKTVMusicDetail 获取直播互动曲目详情}({@link DescribeKTVMusicDetailRequest 请求参数}): {@link DescribeKTVMusicDetailResponse 返回参数} */
   DescribeKTVMusicDetail(data: DescribeKTVMusicDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVMusicDetailResponse>;
-  /** 获取直播互动曲库标签信息 */
+  /** {@link DescribeKTVMusicTags 获取直播互动曲库标签信息}({@link DescribeKTVMusicTagsRequest 请求参数}): {@link DescribeKTVMusicTagsResponse 返回参数} */
   DescribeKTVMusicTags(data?: DescribeKTVMusicTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVMusicTagsResponse>;
-  /** 获取直播互动曲库推荐歌单详情 */
+  /** {@link DescribeKTVPlaylistDetail 获取直播互动曲库推荐歌单详情}({@link DescribeKTVPlaylistDetailRequest 请求参数}): {@link DescribeKTVPlaylistDetailResponse 返回参数} */
   DescribeKTVPlaylistDetail(data: DescribeKTVPlaylistDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVPlaylistDetailResponse>;
-  /** 获取直播互动曲库推荐歌单列表 */
+  /** {@link DescribeKTVPlaylists 获取直播互动曲库推荐歌单列表}({@link DescribeKTVPlaylistsRequest 请求参数}): {@link DescribeKTVPlaylistsResponse 返回参数} */
   DescribeKTVPlaylists(data?: DescribeKTVPlaylistsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVPlaylistsResponse>;
-  /** 获取直播互动机器人信息 */
+  /** {@link DescribeKTVRobots 获取直播互动机器人信息}({@link DescribeKTVRobotsRequest 请求参数}): {@link DescribeKTVRobotsResponse 返回参数} */
   DescribeKTVRobots(data?: DescribeKTVRobotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVRobotsResponse>;
-  /** 获取直播互动曲库歌手分类信息 */
+  /** {@link DescribeKTVSingerCategories 获取直播互动曲库歌手分类信息}({@link DescribeKTVSingerCategoriesRequest 请求参数}): {@link DescribeKTVSingerCategoriesResponse 返回参数} */
   DescribeKTVSingerCategories(data?: DescribeKTVSingerCategoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVSingerCategoriesResponse>;
-  /** 获取歌手下歌曲列表 */
+  /** {@link DescribeKTVSingerMusics 获取歌手下歌曲列表}({@link DescribeKTVSingerMusicsRequest 请求参数}): {@link DescribeKTVSingerMusicsResponse 返回参数} */
   DescribeKTVSingerMusics(data: DescribeKTVSingerMusicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVSingerMusicsResponse>;
-  /** 获取直播互动曲库歌手 */
+  /** {@link DescribeKTVSingers 获取直播互动曲库歌手}({@link DescribeKTVSingersRequest 请求参数}): {@link DescribeKTVSingersResponse 返回参数} */
   DescribeKTVSingers(data?: DescribeKTVSingersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVSingersResponse>;
-  /** 获取直播互动曲库联想词 */
+  /** {@link DescribeKTVSuggestions 获取直播互动曲库联想词}({@link DescribeKTVSuggestionsRequest 请求参数}): {@link DescribeKTVSuggestionsResponse 返回参数} */
   DescribeKTVSuggestions(data: DescribeKTVSuggestionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVSuggestionsResponse>;
-  /** 获取直播互动曲库歌曲排行榜 */
+  /** {@link DescribeKTVTopList 获取直播互动曲库歌曲排行榜}({@link DescribeKTVTopListRequest 请求参数}): {@link DescribeKTVTopListResponse 返回参数} */
   DescribeKTVTopList(data?: DescribeKTVTopListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVTopListResponse>;
-  /** 获取歌词信息 */
+  /** {@link DescribeLyric 获取歌词信息}({@link DescribeLyricRequest 请求参数}): {@link DescribeLyricResponse 返回参数} */
   DescribeLyric(data: DescribeLyricRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLyricResponse>;
-  /** 获取曲库包歌曲播放信息 */
+  /** {@link DescribeMusic 获取曲库包歌曲播放信息}({@link DescribeMusicRequest 请求参数}): {@link DescribeMusicResponse 返回参数} */
   DescribeMusic(data: DescribeMusicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMusicResponse>;
-  /** 查询歌曲在售状态 */
+  /** {@link DescribeMusicSaleStatus 查询歌曲在售状态}({@link DescribeMusicSaleStatusRequest 请求参数}): {@link DescribeMusicSaleStatusResponse 返回参数} */
   DescribeMusicSaleStatus(data: DescribeMusicSaleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMusicSaleStatusResponse>;
-  /** 获取曲库包已核销歌曲列表 */
+  /** {@link DescribePackageItems 获取曲库包已核销歌曲列表}({@link DescribePackageItemsRequest 请求参数}): {@link DescribePackageItemsResponse 返回参数} */
   DescribePackageItems(data: DescribePackageItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackageItemsResponse>;
-  /** 获取已购曲库包列表 */
+  /** {@link DescribePackages 获取已购曲库包列表}({@link DescribePackagesRequest 请求参数}): {@link DescribePackagesResponse 返回参数} */
   DescribePackages(data?: DescribePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackagesResponse>;
-  /** 曲库包获取已核销歌曲回退数据 */
+  /** {@link DescribePkgOfflineMusic 曲库包获取已核销歌曲回退数据}({@link DescribePkgOfflineMusicRequest 请求参数}): {@link DescribePkgOfflineMusicResponse 返回参数} */
   DescribePkgOfflineMusic(data: DescribePkgOfflineMusicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePkgOfflineMusicResponse>;
-  /** 获取分类内容（Station）列表 */
+  /** {@link DescribeStations 获取分类内容（Station）列表}({@link DescribeStationsRequest 请求参数}): {@link DescribeStationsResponse 返回参数} */
   DescribeStations(data: DescribeStationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStationsResponse>;
-  /** 销毁直播互动机器人 */
+  /** {@link DestroyKTVRobot 销毁直播互动机器人}({@link DestroyKTVRobotRequest 请求参数}): {@link DestroyKTVRobotResponse 返回参数} */
   DestroyKTVRobot(data: DestroyKTVRobotRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyKTVRobotResponse>;
-  /** 变更歌曲参数 */
+  /** {@link ModifyMusicOnShelves 变更歌曲参数}({@link ModifyMusicOnShelvesRequest 请求参数}): {@link ModifyMusicOnShelvesResponse 返回参数} */
   ModifyMusicOnShelves(data: ModifyMusicOnShelvesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMusicOnShelvesResponse>;
-  /** 上架歌曲 */
+  /** {@link PutMusicOnTheShelves 上架歌曲}({@link PutMusicOnTheShelvesRequest 请求参数}): {@link PutMusicOnTheShelvesResponse 返回参数} */
   PutMusicOnTheShelves(data: PutMusicOnTheShelvesRequest, config?: AxiosRequestConfig): AxiosPromise<PutMusicOnTheShelvesResponse>;
-  /** 上报歌曲播放数据 */
+  /** {@link ReportData 上报歌曲播放数据}({@link ReportDataRequest 请求参数}): {@link ReportDataResponse 返回参数} */
   ReportData(data: ReportDataRequest, config?: AxiosRequestConfig): AxiosPromise<ReportDataResponse>;
-  /** 搜索直播互动曲库歌曲 */
+  /** {@link SearchKTVMusics 搜索直播互动曲库歌曲}({@link SearchKTVMusicsRequest 请求参数}): {@link SearchKTVMusicsResponse 返回参数} */
   SearchKTVMusics(data: SearchKTVMusicsRequest, config?: AxiosRequestConfig): AxiosPromise<SearchKTVMusicsResponse>;
-  /** 同步直播互动机器人指令 */
+  /** {@link SyncKTVRobotCommand 同步直播互动机器人指令}({@link SyncKTVRobotCommandRequest 请求参数}): {@link SyncKTVRobotCommandResponse 返回参数} */
   SyncKTVRobotCommand(data: SyncKTVRobotCommandRequest, config?: AxiosRequestConfig): AxiosPromise<SyncKTVRobotCommandResponse>;
-  /** 下架歌曲 */
+  /** {@link TakeMusicOffShelves 下架歌曲}({@link TakeMusicOffShelvesRequest 请求参数}): {@link TakeMusicOffShelvesResponse 返回参数} */
   TakeMusicOffShelves(data: TakeMusicOffShelvesRequest, config?: AxiosRequestConfig): AxiosPromise<TakeMusicOffShelvesResponse>;
 }
 

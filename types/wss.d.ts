@@ -136,14 +136,14 @@ declare interface UploadCertResponse {
   RequestId?: string;
 }
 
-/** SSL证书管理服务 */
+/** {@link Wss SSL证书管理服务} */
 declare interface Wss {
   (): Versions;
-  /** 删除证书 */
+  /** {@link DeleteCert 删除证书}({@link DeleteCertRequest 请求参数}): {@link DeleteCertResponse 返回参数} */
   DeleteCert(data: DeleteCertRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCertResponse>;
-  /** 获取证书列表 */
+  /** {@link DescribeCertList 获取证书列表}({@link DescribeCertListRequest 请求参数}): {@link DescribeCertListResponse 返回参数} */
   DescribeCertList(data: DescribeCertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertListResponse>;
-  /** 上传证书 */
+  /** {@link UploadCert 上传证书}({@link UploadCertRequest 请求参数}): {@link UploadCertResponse 返回参数} */
   UploadCert(data: UploadCertRequest, config?: AxiosRequestConfig): AxiosPromise<UploadCertResponse>;
 }
 

@@ -776,52 +776,52 @@ declare interface RemovePayRelationForClientResponse {
   RequestId?: string;
 }
 
-/** [渠道合作伙伴](https://cloud.tencent.com/document/product/563) */
+/** {@link Partners 渠道合作伙伴} */
 declare interface Partners {
   (): Versions;
-  /** 支付订单（合作伙伴使用） */
+  /** {@link AgentPayDeals 支付订单（合作伙伴使用）}({@link AgentPayDealsRequest 请求参数}): {@link AgentPayDealsResponse 返回参数} */
   AgentPayDeals(data: AgentPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<AgentPayDealsResponse>;
-  /** 给客户转账 */
+  /** {@link AgentTransferMoney 给客户转账}({@link AgentTransferMoneyRequest 请求参数}): {@link AgentTransferMoneyResponse 返回参数} */
   AgentTransferMoney(data: AgentTransferMoneyRequest, config?: AxiosRequestConfig): AxiosPromise<AgentTransferMoneyResponse>;
-  /** 审核客户 */
+  /** {@link AuditApplyClient 审核客户}({@link AuditApplyClientRequest 请求参数}): {@link AuditApplyClientResponse 返回参数} */
   AuditApplyClient(data: AuditApplyClientRequest, config?: AxiosRequestConfig): AxiosPromise<AuditApplyClientResponse>;
-  /** 合作伙伴为客户创建强代付关系 */
+  /** {@link CreatePayRelationForClient 合作伙伴为客户创建强代付关系}({@link CreatePayRelationForClientRequest 请求参数}): {@link CreatePayRelationForClientResponse 返回参数} */
   CreatePayRelationForClient(data: CreatePayRelationForClientRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePayRelationForClientResponse>;
-  /** 查询已审核客户列表 */
+  /** {@link DescribeAgentAuditedClients 查询已审核客户列表}({@link DescribeAgentAuditedClientsRequest 请求参数}): {@link DescribeAgentAuditedClientsResponse 返回参数} */
   DescribeAgentAuditedClients(data?: DescribeAgentAuditedClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentAuditedClientsResponse>;
-  /** 查询业务明细 */
+  /** {@link DescribeAgentBills 查询业务明细}({@link DescribeAgentBillsRequest 请求参数}): {@link DescribeAgentBillsResponse 返回参数} */
   DescribeAgentBills(data: DescribeAgentBillsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentBillsResponse>;
-  /** 查询客户级别 */
+  /** {@link DescribeAgentClientGrade 查询客户级别}({@link DescribeAgentClientGradeRequest 请求参数}): {@link DescribeAgentClientGradeResponse 返回参数} */
   DescribeAgentClientGrade(data: DescribeAgentClientGradeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentClientGradeResponse>;
-  /** 查询待审核客户列表 */
+  /** {@link DescribeAgentClients 查询待审核客户列表}({@link DescribeAgentClientsRequest 请求参数}): {@link DescribeAgentClientsResponse 返回参数} */
   DescribeAgentClients(data?: DescribeAgentClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentClientsResponse>;
-  /** 代理商缓存订单查询接口 */
+  /** {@link DescribeAgentDealsByCache 代理商缓存订单查询接口}({@link DescribeAgentDealsByCacheRequest 请求参数}): {@link DescribeAgentDealsByCacheResponse 返回参数} */
   DescribeAgentDealsByCache(data: DescribeAgentDealsByCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsByCacheResponse>;
-  /** 代理商缓存订单查询接口（禁止接入） */
+  /** {@link DescribeAgentDealsCache 代理商缓存订单查询接口（禁止接入）}({@link DescribeAgentDealsCacheRequest 请求参数}): {@link DescribeAgentDealsCacheResponse 返回参数} */
   DescribeAgentDealsCache(data: DescribeAgentDealsCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsCacheResponse>;
-  /** 代理商代付订单查询接口（禁止接入） */
+  /** {@link DescribeAgentPayDeals 代理商代付订单查询接口（禁止接入）}({@link DescribeAgentPayDealsRequest 请求参数}): {@link DescribeAgentPayDealsResponse 返回参数} */
   DescribeAgentPayDeals(data: DescribeAgentPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentPayDealsResponse>;
-  /** 代理商代付订单查询接口 */
+  /** {@link DescribeAgentPayDealsV2 代理商代付订单查询接口}({@link DescribeAgentPayDealsV2Request 请求参数}): {@link DescribeAgentPayDealsV2Response 返回参数} */
   DescribeAgentPayDealsV2(data: DescribeAgentPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentPayDealsV2Response>;
-  /** 代理商自付订单查询接口（禁止接入） */
+  /** {@link DescribeAgentSelfPayDeals 代理商自付订单查询接口（禁止接入）}({@link DescribeAgentSelfPayDealsRequest 请求参数}): {@link DescribeAgentSelfPayDealsResponse 返回参数} */
   DescribeAgentSelfPayDeals(data: DescribeAgentSelfPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsResponse>;
-  /** 代理商自付订单查询接口 */
+  /** {@link DescribeAgentSelfPayDealsV2 代理商自付订单查询接口}({@link DescribeAgentSelfPayDealsV2Request 请求参数}): {@link DescribeAgentSelfPayDealsV2Response 返回参数} */
   DescribeAgentSelfPayDealsV2(data: DescribeAgentSelfPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsV2Response>;
-  /** 查询客户余额 */
+  /** {@link DescribeClientBalance 查询客户余额}({@link DescribeClientBalanceRequest 请求参数}): {@link DescribeClientBalanceResponse 返回参数} */
   DescribeClientBalance(data: DescribeClientBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientBalanceResponse>;
-  /** 查询客户余额（新） */
+  /** {@link DescribeClientBalanceNew 查询客户余额（新）}({@link DescribeClientBalanceNewRequest 请求参数}): {@link DescribeClientBalanceNewResponse 返回参数} */
   DescribeClientBalanceNew(data: DescribeClientBalanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientBalanceNewResponse>;
-  /** 查询代理商返佣信息（禁止接入） */
+  /** {@link DescribeRebateInfos 查询代理商返佣信息（禁止接入）}({@link DescribeRebateInfosRequest 请求参数}): {@link DescribeRebateInfosResponse 返回参数} */
   DescribeRebateInfos(data?: DescribeRebateInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebateInfosResponse>;
-  /** 查询代理商返佣信息V2 */
+  /** {@link DescribeRebateInfosNew 查询代理商返佣信息V2}({@link DescribeRebateInfosNewRequest 请求参数}): {@link DescribeRebateInfosNewResponse 返回参数} */
   DescribeRebateInfosNew(data?: DescribeRebateInfosNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebateInfosNewResponse>;
-  /** 代理商业务员查询接口 */
+  /** {@link DescribeSalesmans 代理商业务员查询接口}({@link DescribeSalesmansRequest 请求参数}): {@link DescribeSalesmansResponse 返回参数} */
   DescribeSalesmans(data: DescribeSalesmansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSalesmansResponse>;
-  /** 代理商名下客户解绑记录查询接口 */
+  /** {@link DescribeUnbindClientList 代理商名下客户解绑记录查询接口}({@link DescribeUnbindClientListRequest 请求参数}): {@link DescribeUnbindClientListResponse 返回参数} */
   DescribeUnbindClientList(data: DescribeUnbindClientListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnbindClientListResponse>;
-  /** 修改客户备注 */
+  /** {@link ModifyClientRemark 修改客户备注}({@link ModifyClientRemarkRequest 请求参数}): {@link ModifyClientRemarkResponse 返回参数} */
   ModifyClientRemark(data: ModifyClientRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClientRemarkResponse>;
-  /** 合作伙伴为客户消除强代付关系 */
+  /** {@link RemovePayRelationForClient 合作伙伴为客户消除强代付关系}({@link RemovePayRelationForClientRequest 请求参数}): {@link RemovePayRelationForClientResponse 返回参数} */
   RemovePayRelationForClient(data: RemovePayRelationForClientRequest, config?: AxiosRequestConfig): AxiosPromise<RemovePayRelationForClientResponse>;
 }
 

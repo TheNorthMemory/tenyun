@@ -106,14 +106,14 @@ declare interface DescribeTrustedIDResponse {
   RequestId?: string;
 }
 
-/** [设备安全](https://cloud.tencent.com/document/product/1628) */
+/** {@link Tds 设备安全} */
 declare interface Tds {
   (): Versions;
-  /** 查询设备风险 */
+  /** {@link DescribeFraudBase 查询设备风险}({@link DescribeFraudBaseRequest 请求参数}): {@link DescribeFraudBaseResponse 返回参数} */
   DescribeFraudBase(data: DescribeFraudBaseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFraudBaseResponse>;
-  /** 查询设备标识及风险 */
+  /** {@link DescribeFraudPremium 查询设备标识及风险}({@link DescribeFraudPremiumRequest 请求参数}): {@link DescribeFraudPremiumResponse 返回参数} */
   DescribeFraudPremium(data: DescribeFraudPremiumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFraudPremiumResponse>;
-  /** 查询设备标识 */
+  /** {@link DescribeTrustedID 查询设备标识}({@link DescribeTrustedIDRequest 请求参数}): {@link DescribeTrustedIDResponse 返回参数} */
   DescribeTrustedID(data: DescribeTrustedIDRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrustedIDResponse>;
 }
 

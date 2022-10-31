@@ -844,72 +844,72 @@ declare interface UpdateCfsSnapshotAttributeResponse {
   RequestId?: string;
 }
 
-/** [文件存储](https://cloud.tencent.com/document/product/582) */
+/** {@link Cfs 文件存储} */
 declare interface Cfs {
   (): Versions;
-  /** 文件系统绑定快照策略 */
+  /** {@link BindAutoSnapshotPolicy 文件系统绑定快照策略}({@link BindAutoSnapshotPolicyRequest 请求参数}): {@link BindAutoSnapshotPolicyResponse 返回参数} */
   BindAutoSnapshotPolicy(data: BindAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<BindAutoSnapshotPolicyResponse>;
-  /** 创建定期快照策略 */
+  /** {@link CreateAutoSnapshotPolicy 创建定期快照策略}({@link CreateAutoSnapshotPolicyRequest 请求参数}): {@link CreateAutoSnapshotPolicyResponse 返回参数} */
   CreateAutoSnapshotPolicy(data: CreateAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoSnapshotPolicyResponse>;
-  /** 创建文件系统 */
+  /** {@link CreateCfsFileSystem 创建文件系统}({@link CreateCfsFileSystemRequest 请求参数}): {@link CreateCfsFileSystemResponse 返回参数} */
   CreateCfsFileSystem(data: CreateCfsFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCfsFileSystemResponse>;
-  /** 创建权限组 */
+  /** {@link CreateCfsPGroup 创建权限组}({@link CreateCfsPGroupRequest 请求参数}): {@link CreateCfsPGroupResponse 返回参数} */
   CreateCfsPGroup(data: CreateCfsPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCfsPGroupResponse>;
-  /** 创建权限组规则 */
+  /** {@link CreateCfsRule 创建权限组规则}({@link CreateCfsRuleRequest 请求参数}): {@link CreateCfsRuleResponse 返回参数} */
   CreateCfsRule(data: CreateCfsRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCfsRuleResponse>;
-  /** 创建文件系统快照 */
+  /** {@link CreateCfsSnapshot 创建文件系统快照}({@link CreateCfsSnapshotRequest 请求参数}): {@link CreateCfsSnapshotResponse 返回参数} */
   CreateCfsSnapshot(data: CreateCfsSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCfsSnapshotResponse>;
-  /** 删除快照策略 */
+  /** {@link DeleteAutoSnapshotPolicy 删除快照策略}({@link DeleteAutoSnapshotPolicyRequest 请求参数}): {@link DeleteAutoSnapshotPolicyResponse 返回参数} */
   DeleteAutoSnapshotPolicy(data: DeleteAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoSnapshotPolicyResponse>;
-  /** 删除文件系统 */
+  /** {@link DeleteCfsFileSystem 删除文件系统}({@link DeleteCfsFileSystemRequest 请求参数}): {@link DeleteCfsFileSystemResponse 返回参数} */
   DeleteCfsFileSystem(data: DeleteCfsFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCfsFileSystemResponse>;
-  /** 删除权限组 */
+  /** {@link DeleteCfsPGroup 删除权限组}({@link DeleteCfsPGroupRequest 请求参数}): {@link DeleteCfsPGroupResponse 返回参数} */
   DeleteCfsPGroup(data: DeleteCfsPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCfsPGroupResponse>;
-  /** 删除权限组规则 */
+  /** {@link DeleteCfsRule 删除权限组规则}({@link DeleteCfsRuleRequest 请求参数}): {@link DeleteCfsRuleResponse 返回参数} */
   DeleteCfsRule(data: DeleteCfsRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCfsRuleResponse>;
-  /** 删除文件系统快照 */
+  /** {@link DeleteCfsSnapshot 删除文件系统快照}({@link DeleteCfsSnapshotRequest 请求参数}): {@link DeleteCfsSnapshotResponse 返回参数} */
   DeleteCfsSnapshot(data: DeleteCfsSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCfsSnapshotResponse>;
-  /** 删除挂载点 */
+  /** {@link DeleteMountTarget 删除挂载点}({@link DeleteMountTargetRequest 请求参数}): {@link DeleteMountTargetResponse 返回参数} */
   DeleteMountTarget(data: DeleteMountTargetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMountTargetResponse>;
-  /** 查询文件系统快照策略列表信息 */
+  /** {@link DescribeAutoSnapshotPolicies 查询文件系统快照策略列表信息}({@link DescribeAutoSnapshotPoliciesRequest 请求参数}): {@link DescribeAutoSnapshotPoliciesResponse 返回参数} */
   DescribeAutoSnapshotPolicies(data?: DescribeAutoSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoSnapshotPoliciesResponse>;
-  /** 查询区域可用情况 */
+  /** {@link DescribeAvailableZoneInfo 查询区域可用情况}({@link DescribeAvailableZoneInfoRequest 请求参数}): {@link DescribeAvailableZoneInfoResponse 返回参数} */
   DescribeAvailableZoneInfo(data?: DescribeAvailableZoneInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableZoneInfoResponse>;
-  /** 查询文件系统客户端 */
+  /** {@link DescribeCfsFileSystemClients 查询文件系统客户端}({@link DescribeCfsFileSystemClientsRequest 请求参数}): {@link DescribeCfsFileSystemClientsResponse 返回参数} */
   DescribeCfsFileSystemClients(data: DescribeCfsFileSystemClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsFileSystemClientsResponse>;
-  /** 查询文件系统 */
+  /** {@link DescribeCfsFileSystems 查询文件系统}({@link DescribeCfsFileSystemsRequest 请求参数}): {@link DescribeCfsFileSystemsResponse 返回参数} */
   DescribeCfsFileSystems(data?: DescribeCfsFileSystemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsFileSystemsResponse>;
-  /** 查询权限组列表 */
+  /** {@link DescribeCfsPGroups 查询权限组列表}({@link DescribeCfsPGroupsRequest 请求参数}): {@link DescribeCfsPGroupsResponse 返回参数} */
   DescribeCfsPGroups(data?: DescribeCfsPGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsPGroupsResponse>;
-  /** 查询权限组规则 */
+  /** {@link DescribeCfsRules 查询权限组规则}({@link DescribeCfsRulesRequest 请求参数}): {@link DescribeCfsRulesResponse 返回参数} */
   DescribeCfsRules(data: DescribeCfsRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsRulesResponse>;
-  /** 查询CFS服务状态 */
+  /** {@link DescribeCfsServiceStatus 查询CFS服务状态}({@link DescribeCfsServiceStatusRequest 请求参数}): {@link DescribeCfsServiceStatusResponse 返回参数} */
   DescribeCfsServiceStatus(data?: DescribeCfsServiceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsServiceStatusResponse>;
-  /** 文件系统快照概览 */
+  /** {@link DescribeCfsSnapshotOverview 文件系统快照概览}({@link DescribeCfsSnapshotOverviewRequest 请求参数}): {@link DescribeCfsSnapshotOverviewResponse 返回参数} */
   DescribeCfsSnapshotOverview(data?: DescribeCfsSnapshotOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsSnapshotOverviewResponse>;
-  /** 查询快照列表 */
+  /** {@link DescribeCfsSnapshots 查询快照列表}({@link DescribeCfsSnapshotsRequest 请求参数}): {@link DescribeCfsSnapshotsResponse 返回参数} */
   DescribeCfsSnapshots(data?: DescribeCfsSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsSnapshotsResponse>;
-  /** 查询文件系统挂载点 */
+  /** {@link DescribeMountTargets 查询文件系统挂载点}({@link DescribeMountTargetsRequest 请求参数}): {@link DescribeMountTargetsResponse 返回参数} */
   DescribeMountTargets(data: DescribeMountTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMountTargetsResponse>;
-  /** 查询快照操作日志 */
+  /** {@link DescribeSnapshotOperationLogs 查询快照操作日志}({@link DescribeSnapshotOperationLogsRequest 请求参数}): {@link DescribeSnapshotOperationLogsResponse 返回参数} */
   DescribeSnapshotOperationLogs(data: DescribeSnapshotOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotOperationLogsResponse>;
-  /** 开通CFS服务 */
+  /** {@link SignUpCfsService 开通CFS服务}({@link SignUpCfsServiceRequest 请求参数}): {@link SignUpCfsServiceResponse 返回参数} */
   SignUpCfsService(data?: SignUpCfsServiceRequest, config?: AxiosRequestConfig): AxiosPromise<SignUpCfsServiceResponse>;
-  /** 解绑快照策略 */
+  /** {@link UnbindAutoSnapshotPolicy 解绑快照策略}({@link UnbindAutoSnapshotPolicyRequest 请求参数}): {@link UnbindAutoSnapshotPolicyResponse 返回参数} */
   UnbindAutoSnapshotPolicy(data: UnbindAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindAutoSnapshotPolicyResponse>;
-  /** 更新定期快照策略 */
+  /** {@link UpdateAutoSnapshotPolicy 更新定期快照策略}({@link UpdateAutoSnapshotPolicyRequest 请求参数}): {@link UpdateAutoSnapshotPolicyResponse 返回参数} */
   UpdateAutoSnapshotPolicy(data: UpdateAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAutoSnapshotPolicyResponse>;
-  /** 更新文件系统名 */
+  /** {@link UpdateCfsFileSystemName 更新文件系统名}({@link UpdateCfsFileSystemNameRequest 请求参数}): {@link UpdateCfsFileSystemNameResponse 返回参数} */
   UpdateCfsFileSystemName(data: UpdateCfsFileSystemNameRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCfsFileSystemNameResponse>;
-  /** 更新文件系统的权限组 */
+  /** {@link UpdateCfsFileSystemPGroup 更新文件系统的权限组}({@link UpdateCfsFileSystemPGroupRequest 请求参数}): {@link UpdateCfsFileSystemPGroupResponse 返回参数} */
   UpdateCfsFileSystemPGroup(data: UpdateCfsFileSystemPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCfsFileSystemPGroupResponse>;
-  /** 更新文件系统存储容量限制 */
+  /** {@link UpdateCfsFileSystemSizeLimit 更新文件系统存储容量限制}({@link UpdateCfsFileSystemSizeLimitRequest 请求参数}): {@link UpdateCfsFileSystemSizeLimitResponse 返回参数} */
   UpdateCfsFileSystemSizeLimit(data: UpdateCfsFileSystemSizeLimitRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCfsFileSystemSizeLimitResponse>;
-  /** 更新权限组信息 */
+  /** {@link UpdateCfsPGroup 更新权限组信息}({@link UpdateCfsPGroupRequest 请求参数}): {@link UpdateCfsPGroupResponse 返回参数} */
   UpdateCfsPGroup(data: UpdateCfsPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCfsPGroupResponse>;
-  /** 更新权限组规则 */
+  /** {@link UpdateCfsRule 更新权限组规则}({@link UpdateCfsRuleRequest 请求参数}): {@link UpdateCfsRuleResponse 返回参数} */
   UpdateCfsRule(data: UpdateCfsRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCfsRuleResponse>;
-  /** 更新文件系统快照信息 */
+  /** {@link UpdateCfsSnapshotAttribute 更新文件系统快照信息}({@link UpdateCfsSnapshotAttributeRequest 请求参数}): {@link UpdateCfsSnapshotAttributeResponse 返回参数} */
   UpdateCfsSnapshotAttribute(data: UpdateCfsSnapshotAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCfsSnapshotAttributeResponse>;
 }
 

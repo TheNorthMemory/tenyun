@@ -388,28 +388,28 @@ declare interface UpdateProbeTaskConfigurationListResponse {
   RequestId?: string;
 }
 
-/** [云拨测](https://cloud.tencent.com/document/product/280) */
+/** {@link Cat 云拨测} */
 declare interface Cat {
   (): Versions;
-  /** 批量创建拨测任务 */
+  /** {@link CreateProbeTasks 批量创建拨测任务}({@link CreateProbeTasksRequest 请求参数}): {@link CreateProbeTasksResponse 返回参数} */
   CreateProbeTasks(data: CreateProbeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProbeTasksResponse>;
-  /** 删除拨测任务 */
+  /** {@link DeleteProbeTask 删除拨测任务}({@link DeleteProbeTaskRequest 请求参数}): {@link DeleteProbeTaskResponse 返回参数} */
   DeleteProbeTask(data: DeleteProbeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProbeTaskResponse>;
-  /** 列出单次拨测详情数据 */
+  /** {@link DescribeDetailedSingleProbeData 列出单次拨测详情数据}({@link DescribeDetailedSingleProbeDataRequest 请求参数}): {@link DescribeDetailedSingleProbeDataResponse 返回参数} */
   DescribeDetailedSingleProbeData(data: DescribeDetailedSingleProbeDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDetailedSingleProbeDataResponse>;
-  /** 获取拨测节点 */
+  /** {@link DescribeNodes 获取拨测节点}({@link DescribeNodesRequest 请求参数}): {@link DescribeNodesResponse 返回参数} */
   DescribeNodes(data?: DescribeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodesResponse>;
-  /** 列出云拨测指标详细数据 */
+  /** {@link DescribeProbeMetricData 列出云拨测指标详细数据}({@link DescribeProbeMetricDataRequest 请求参数}): {@link DescribeProbeMetricDataResponse 返回参数} */
   DescribeProbeMetricData(data?: DescribeProbeMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProbeMetricDataResponse>;
-  /** 查询拨测节点 */
+  /** {@link DescribeProbeNodes 查询拨测节点}({@link DescribeProbeNodesRequest 请求参数}): {@link DescribeProbeNodesResponse 返回参数} */
   DescribeProbeNodes(data?: DescribeProbeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProbeNodesResponse>;
-  /** 分页查询拨测任务列表 */
+  /** {@link DescribeProbeTasks 分页查询拨测任务列表}({@link DescribeProbeTasksRequest 请求参数}): {@link DescribeProbeTasksResponse 返回参数} */
   DescribeProbeTasks(data?: DescribeProbeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProbeTasksResponse>;
-  /** 恢复拨测任务 */
+  /** {@link ResumeProbeTask 恢复拨测任务}({@link ResumeProbeTaskRequest 请求参数}): {@link ResumeProbeTaskResponse 返回参数} */
   ResumeProbeTask(data: ResumeProbeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeProbeTaskResponse>;
-  /** 暂停拨测任务 */
+  /** {@link SuspendProbeTask 暂停拨测任务}({@link SuspendProbeTaskRequest 请求参数}): {@link SuspendProbeTaskResponse 返回参数} */
   SuspendProbeTask(data: SuspendProbeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SuspendProbeTaskResponse>;
-  /** 批量更新拨测任务配置 */
+  /** {@link UpdateProbeTaskConfigurationList 批量更新拨测任务配置}({@link UpdateProbeTaskConfigurationListRequest 请求参数}): {@link UpdateProbeTaskConfigurationListResponse 返回参数} */
   UpdateProbeTaskConfigurationList(data: UpdateProbeTaskConfigurationListRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProbeTaskConfigurationListResponse>;
 }
 

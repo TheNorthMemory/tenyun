@@ -250,28 +250,28 @@ declare interface TryLipstickPicResponse {
   RequestId?: string;
 }
 
-/** [人脸试妆](https://cloud.tencent.com/document/product/1172) */
+/** {@link Fmu 人脸试妆} */
 declare interface Fmu {
   (): Versions;
-  /** 人脸美颜 */
+  /** {@link BeautifyPic 人脸美颜}({@link BeautifyPicRequest 请求参数}): {@link BeautifyPicResponse 返回参数} */
   BeautifyPic(data?: BeautifyPicRequest, config?: AxiosRequestConfig): AxiosPromise<BeautifyPicResponse>;
-  /** 视频美颜 */
+  /** {@link BeautifyVideo 视频美颜}({@link BeautifyVideoRequest 请求参数}): {@link BeautifyVideoResponse 返回参数} */
   BeautifyVideo(data: BeautifyVideoRequest, config?: AxiosRequestConfig): AxiosPromise<BeautifyVideoResponse>;
-  /** 撤销视频美颜任务 */
+  /** {@link CancelBeautifyVideoJob 撤销视频美颜任务}({@link CancelBeautifyVideoJobRequest 请求参数}): {@link CancelBeautifyVideoJobResponse 返回参数} */
   CancelBeautifyVideoJob(data: CancelBeautifyVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<CancelBeautifyVideoJobResponse>;
-  /** 上传唇色素材 */
+  /** {@link CreateModel 上传唇色素材}({@link CreateModelRequest 请求参数}): {@link CreateModelResponse 返回参数} */
   CreateModel(data: CreateModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelResponse>;
-  /** 删除唇色素材 */
+  /** {@link DeleteModel 删除唇色素材}({@link DeleteModelRequest 请求参数}): {@link DeleteModelResponse 返回参数} */
   DeleteModel(data: DeleteModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelResponse>;
-  /** 查询唇色素材 */
+  /** {@link GetModelList 查询唇色素材}({@link GetModelListRequest 请求参数}): {@link GetModelListResponse 返回参数} */
   GetModelList(data?: GetModelListRequest, config?: AxiosRequestConfig): AxiosPromise<GetModelListResponse>;
-  /** 查询视频美颜任务 */
+  /** {@link QueryBeautifyVideoJob 查询视频美颜任务}({@link QueryBeautifyVideoJobRequest 请求参数}): {@link QueryBeautifyVideoJobResponse 返回参数} */
   QueryBeautifyVideoJob(data: QueryBeautifyVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBeautifyVideoJobResponse>;
-  /** 图片滤镜 */
+  /** {@link StyleImage 图片滤镜}({@link StyleImageRequest 请求参数}): {@link StyleImageResponse 返回参数} */
   StyleImage(data: StyleImageRequest, config?: AxiosRequestConfig): AxiosPromise<StyleImageResponse>;
-  /** 图片滤镜（高级版） */
+  /** {@link StyleImagePro 图片滤镜（高级版）}({@link StyleImageProRequest 请求参数}): {@link StyleImageProResponse 返回参数} */
   StyleImagePro(data: StyleImageProRequest, config?: AxiosRequestConfig): AxiosPromise<StyleImageProResponse>;
-  /** 试唇色 */
+  /** {@link TryLipstickPic 试唇色}({@link TryLipstickPicRequest 请求参数}): {@link TryLipstickPicResponse 返回参数} */
   TryLipstickPic(data: TryLipstickPicRequest, config?: AxiosRequestConfig): AxiosPromise<TryLipstickPicResponse>;
 }
 

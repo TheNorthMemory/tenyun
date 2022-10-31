@@ -1346,98 +1346,98 @@ declare interface VideoLivenessCompareResponse {
   RequestId?: string;
 }
 
-/** [人脸核身](https://cloud.tencent.com/document/product/1007) */
+/** {@link Faceid 人脸核身} */
 declare interface Faceid {
   (): Versions;
-  /** 申请活体检测流程令牌 */
+  /** {@link ApplyLivenessToken 申请活体检测流程令牌}({@link ApplyLivenessTokenRequest 请求参数}): {@link ApplyLivenessTokenResponse 返回参数} */
   ApplyLivenessToken(data?: ApplyLivenessTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyLivenessTokenResponse>;
-  /** 申请SDK核验令牌 */
+  /** {@link ApplySdkVerificationToken 申请SDK核验令牌}({@link ApplySdkVerificationTokenRequest 请求参数}): {@link ApplySdkVerificationTokenResponse 返回参数} */
   ApplySdkVerificationToken(data: ApplySdkVerificationTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ApplySdkVerificationTokenResponse>;
-  /** 申请Web核验令牌 */
+  /** {@link ApplyWebVerificationToken 申请Web核验令牌}({@link ApplyWebVerificationTokenRequest 请求参数}): {@link ApplyWebVerificationTokenResponse 返回参数} */
   ApplyWebVerificationToken(data: ApplyWebVerificationTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyWebVerificationTokenResponse>;
-  /** 银行卡二要素核验 */
+  /** {@link BankCard2EVerification 银行卡二要素核验}({@link BankCard2EVerificationRequest 请求参数}): {@link BankCard2EVerificationResponse 返回参数} */
   BankCard2EVerification(data: BankCard2EVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<BankCard2EVerificationResponse>;
-  /** 银行卡四要素核验 */
+  /** {@link BankCard4EVerification 银行卡四要素核验}({@link BankCard4EVerificationRequest 请求参数}): {@link BankCard4EVerificationResponse 返回参数} */
   BankCard4EVerification(data: BankCard4EVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<BankCard4EVerificationResponse>;
-  /** 银行卡三要素核验 */
+  /** {@link BankCardVerification 银行卡三要素核验}({@link BankCardVerificationRequest 请求参数}): {@link BankCardVerificationResponse 返回参数} */
   BankCardVerification(data: BankCardVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<BankCardVerificationResponse>;
-  /** 银行卡基础信息查询 */
+  /** {@link CheckBankCardInformation 银行卡基础信息查询}({@link CheckBankCardInformationRequest 请求参数}): {@link CheckBankCardInformationResponse 返回参数} */
   CheckBankCardInformation(data: CheckBankCardInformationRequest, config?: AxiosRequestConfig): AxiosPromise<CheckBankCardInformationResponse>;
-  /** 获取E证通Token状态 */
+  /** {@link CheckEidTokenStatus 获取E证通Token状态}({@link CheckEidTokenStatusRequest 请求参数}): {@link CheckEidTokenStatusResponse 返回参数} */
   CheckEidTokenStatus(data: CheckEidTokenStatusRequest, config?: AxiosRequestConfig): AxiosPromise<CheckEidTokenStatusResponse>;
-  /** 身份证人像照片验真 */
+  /** {@link CheckIdCardInformation 身份证人像照片验真}({@link CheckIdCardInformationRequest 请求参数}): {@link CheckIdCardInformationResponse 返回参数} */
   CheckIdCardInformation(data?: CheckIdCardInformationRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIdCardInformationResponse>;
-  /** 身份信息及有效期核验 */
+  /** {@link CheckIdNameDate 身份信息及有效期核验}({@link CheckIdNameDateRequest 请求参数}): {@link CheckIdNameDateResponse 返回参数} */
   CheckIdNameDate(data: CheckIdNameDateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIdNameDateResponse>;
-  /** 手机号二要素核验 */
+  /** {@link CheckPhoneAndName 手机号二要素核验}({@link CheckPhoneAndNameRequest 请求参数}): {@link CheckPhoneAndNameResponse 返回参数} */
   CheckPhoneAndName(data: CheckPhoneAndNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckPhoneAndNameResponse>;
-  /** 生成上传链接 */
+  /** {@link CreateUploadUrl 生成上传链接}({@link CreateUploadUrlRequest 请求参数}): {@link CreateUploadUrlResponse 返回参数} */
   CreateUploadUrl(data: CreateUploadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUploadUrlResponse>;
-  /** 实名核身鉴权 */
+  /** {@link DetectAuth 实名核身鉴权}({@link DetectAuthRequest 请求参数}): {@link DetectAuthResponse 返回参数} */
   DetectAuth(data: DetectAuthRequest, config?: AxiosRequestConfig): AxiosPromise<DetectAuthResponse>;
-  /** 光线活体比对 */
+  /** {@link DetectReflectLivenessAndCompare 光线活体比对}({@link DetectReflectLivenessAndCompareRequest 请求参数}): {@link DetectReflectLivenessAndCompareResponse 返回参数} */
   DetectReflectLivenessAndCompare(data: DetectReflectLivenessAndCompareRequest, config?: AxiosRequestConfig): AxiosPromise<DetectReflectLivenessAndCompareResponse>;
-  /** 运营商三要素核验（加密） */
+  /** {@link EncryptedPhoneVerification 运营商三要素核验（加密）}({@link EncryptedPhoneVerificationRequest 请求参数}): {@link EncryptedPhoneVerificationResponse 返回参数} */
   EncryptedPhoneVerification(data: EncryptedPhoneVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<EncryptedPhoneVerificationResponse>;
-  /** 获取光线序列 */
+  /** {@link GenerateReflectSequence 获取光线序列}({@link GenerateReflectSequenceRequest 请求参数}): {@link GenerateReflectSequenceResponse 返回参数} */
   GenerateReflectSequence(data: GenerateReflectSequenceRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateReflectSequenceResponse>;
-  /** 获取动作顺序 */
+  /** {@link GetActionSequence 获取动作顺序}({@link GetActionSequenceRequest 请求参数}): {@link GetActionSequenceResponse 返回参数} */
   GetActionSequence(data?: GetActionSequenceRequest, config?: AxiosRequestConfig): AxiosPromise<GetActionSequenceResponse>;
-  /** 获取实名核身结果信息 */
+  /** {@link GetDetectInfo 获取实名核身结果信息}({@link GetDetectInfoRequest 请求参数}): {@link GetDetectInfoResponse 返回参数} */
   GetDetectInfo(data: GetDetectInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetDetectInfoResponse>;
-  /** 获取实名核身结果信息增强版 */
+  /** {@link GetDetectInfoEnhanced 获取实名核身结果信息增强版}({@link GetDetectInfoEnhancedRequest 请求参数}): {@link GetDetectInfoEnhancedResponse 返回参数} */
   GetDetectInfoEnhanced(data: GetDetectInfoEnhancedRequest, config?: AxiosRequestConfig): AxiosPromise<GetDetectInfoEnhancedResponse>;
-  /** 获取E证通结果信息 */
+  /** {@link GetEidResult 获取E证通结果信息}({@link GetEidResultRequest 请求参数}): {@link GetEidResultResponse 返回参数} */
   GetEidResult(data: GetEidResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetEidResultResponse>;
-  /** 获取E证通Token */
+  /** {@link GetEidToken 获取E证通Token}({@link GetEidTokenRequest 请求参数}): {@link GetEidTokenResponse 返回参数} */
   GetEidToken(data: GetEidTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetEidTokenResponse>;
-  /** 获取SDK核验结果 */
+  /** {@link GetFaceIdResult 获取SDK核验结果}({@link GetFaceIdResultRequest 请求参数}): {@link GetFaceIdResultResponse 返回参数} */
   GetFaceIdResult(data: GetFaceIdResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetFaceIdResultResponse>;
-  /** 获取SDKToken */
+  /** {@link GetFaceIdToken 获取SDKToken}({@link GetFaceIdTokenRequest 请求参数}): {@link GetFaceIdTokenResponse 返回参数} */
   GetFaceIdToken(data: GetFaceIdTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetFaceIdTokenResponse>;
-  /** 获取数字验证码 */
+  /** {@link GetLiveCode 获取数字验证码}({@link GetLiveCodeRequest 请求参数}): {@link GetLiveCodeResponse 返回参数} */
   GetLiveCode(data?: GetLiveCodeRequest, config?: AxiosRequestConfig): AxiosPromise<GetLiveCodeResponse>;
-  /** 获取活体检测结果 */
+  /** {@link GetLivenessResult 获取活体检测结果}({@link GetLivenessResultRequest 请求参数}): {@link GetLivenessResultResponse 返回参数} */
   GetLivenessResult(data: GetLivenessResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetLivenessResultResponse>;
-  /** 获取微信实名认证结果 */
+  /** {@link GetRealNameAuthResult 获取微信实名认证结果}({@link GetRealNameAuthResultRequest 请求参数}): {@link GetRealNameAuthResultResponse 返回参数} */
   GetRealNameAuthResult(data: GetRealNameAuthResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetRealNameAuthResultResponse>;
-  /** 微信实名认证授权 */
+  /** {@link GetRealNameAuthToken 微信实名认证授权}({@link GetRealNameAuthTokenRequest 请求参数}): {@link GetRealNameAuthTokenResponse 返回参数} */
   GetRealNameAuthToken(data: GetRealNameAuthTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetRealNameAuthTokenResponse>;
-  /** 获取SDK验证结果 */
+  /** {@link GetSdkVerificationResult 获取SDK验证结果}({@link GetSdkVerificationResultRequest 请求参数}): {@link GetSdkVerificationResultResponse 返回参数} */
   GetSdkVerificationResult(data: GetSdkVerificationResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetSdkVerificationResultResponse>;
-  /** 查询账单明细（微信渠道） */
+  /** {@link GetWeChatBillDetails 查询账单明细（微信渠道）}({@link GetWeChatBillDetailsRequest 请求参数}): {@link GetWeChatBillDetailsResponse 返回参数} */
   GetWeChatBillDetails(data: GetWeChatBillDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<GetWeChatBillDetailsResponse>;
-  /** 获取Web核验结果 */
+  /** {@link GetWebVerificationResult 获取Web核验结果}({@link GetWebVerificationResultRequest 请求参数}): {@link GetWebVerificationResultResponse 返回参数} */
   GetWebVerificationResult(data: GetWebVerificationResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetWebVerificationResultResponse>;
-  /** 身份证识别及信息核验 */
+  /** {@link IdCardOCRVerification 身份证识别及信息核验}({@link IdCardOCRVerificationRequest 请求参数}): {@link IdCardOCRVerificationResponse 返回参数} */
   IdCardOCRVerification(data?: IdCardOCRVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<IdCardOCRVerificationResponse>;
-  /** 身份信息认证 */
+  /** {@link IdCardVerification 身份信息认证}({@link IdCardVerificationRequest 请求参数}): {@link IdCardVerificationResponse 返回参数} */
   IdCardVerification(data: IdCardVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<IdCardVerificationResponse>;
-  /** 照片人脸核身 */
+  /** {@link ImageRecognition 照片人脸核身}({@link ImageRecognitionRequest 请求参数}): {@link ImageRecognitionResponse 返回参数} */
   ImageRecognition(data: ImageRecognitionRequest, config?: AxiosRequestConfig): AxiosPromise<ImageRecognitionResponse>;
-  /** 活体检测 */
+  /** {@link Liveness 活体检测}({@link LivenessRequest 请求参数}): {@link LivenessResponse 返回参数} */
   Liveness(data: LivenessRequest, config?: AxiosRequestConfig): AxiosPromise<LivenessResponse>;
-  /** 活体人脸比对 */
+  /** {@link LivenessCompare 活体人脸比对}({@link LivenessCompareRequest 请求参数}): {@link LivenessCompareResponse 返回参数} */
   LivenessCompare(data: LivenessCompareRequest, config?: AxiosRequestConfig): AxiosPromise<LivenessCompareResponse>;
-  /** 活体人脸核身 */
+  /** {@link LivenessRecognition 活体人脸核身}({@link LivenessRecognitionRequest 请求参数}): {@link LivenessRecognitionResponse 返回参数} */
   LivenessRecognition(data: LivenessRecognitionRequest, config?: AxiosRequestConfig): AxiosPromise<LivenessRecognitionResponse>;
-  /** 手机号实名查询 */
+  /** {@link MinorsVerification 手机号实名查询}({@link MinorsVerificationRequest 请求参数}): {@link MinorsVerificationResponse 返回参数} */
   MinorsVerification(data: MinorsVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<MinorsVerificationResponse>;
-  /** 手机号在网时长核验 */
+  /** {@link MobileNetworkTimeVerification 手机号在网时长核验}({@link MobileNetworkTimeVerificationRequest 请求参数}): {@link MobileNetworkTimeVerificationResponse 返回参数} */
   MobileNetworkTimeVerification(data: MobileNetworkTimeVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<MobileNetworkTimeVerificationResponse>;
-  /** 手机号状态查询 */
+  /** {@link MobileStatus 手机号状态查询}({@link MobileStatusRequest 请求参数}): {@link MobileStatusResponse 返回参数} */
   MobileStatus(data: MobileStatusRequest, config?: AxiosRequestConfig): AxiosPromise<MobileStatusResponse>;
-  /** 获取证件NFC结果 */
+  /** {@link ParseNfcData 获取证件NFC结果}({@link ParseNfcDataRequest 请求参数}): {@link ParseNfcDataResponse 返回参数} */
   ParseNfcData(data: ParseNfcDataRequest, config?: AxiosRequestConfig): AxiosPromise<ParseNfcDataResponse>;
-  /** 手机号三要素核验 */
+  /** {@link PhoneVerification 手机号三要素核验}({@link PhoneVerificationRequest 请求参数}): {@link PhoneVerificationResponse 返回参数} */
   PhoneVerification(data: PhoneVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<PhoneVerificationResponse>;
-  /** 手机号三要素核验（移动） */
+  /** {@link PhoneVerificationCMCC 手机号三要素核验（移动）}({@link PhoneVerificationCMCCRequest 请求参数}): {@link PhoneVerificationCMCCResponse 返回参数} */
   PhoneVerificationCMCC(data: PhoneVerificationCMCCRequest, config?: AxiosRequestConfig): AxiosPromise<PhoneVerificationCMCCResponse>;
-  /** 手机号三要素核验（电信） */
+  /** {@link PhoneVerificationCTCC 手机号三要素核验（电信）}({@link PhoneVerificationCTCCRequest 请求参数}): {@link PhoneVerificationCTCCResponse 返回参数} */
   PhoneVerificationCTCC(data: PhoneVerificationCTCCRequest, config?: AxiosRequestConfig): AxiosPromise<PhoneVerificationCTCCResponse>;
-  /** 手机号三要素核验（联通） */
+  /** {@link PhoneVerificationCUCC 手机号三要素核验（联通）}({@link PhoneVerificationCUCCRequest 请求参数}): {@link PhoneVerificationCUCCResponse 返回参数} */
   PhoneVerificationCUCC(data: PhoneVerificationCUCCRequest, config?: AxiosRequestConfig): AxiosPromise<PhoneVerificationCUCCResponse>;
-  /** 视频活体人脸比对 */
+  /** {@link VideoLivenessCompare 视频活体人脸比对}({@link VideoLivenessCompareRequest 请求参数}): {@link VideoLivenessCompareResponse 返回参数} */
   VideoLivenessCompare(data: VideoLivenessCompareRequest, config?: AxiosRequestConfig): AxiosPromise<VideoLivenessCompareResponse>;
 }
 

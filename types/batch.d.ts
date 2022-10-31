@@ -1503,70 +1503,70 @@ declare interface TerminateTaskInstanceResponse {
   RequestId?: string;
 }
 
-/** [批量计算](https://cloud.tencent.com/document/product/599) */
+/** {@link Batch 批量计算} */
 declare interface Batch {
   (): Versions;
-  /** 添加实例到计算环境 */
+  /** {@link AttachInstances 添加实例到计算环境}({@link AttachInstancesRequest 请求参数}): {@link AttachInstancesResponse 返回参数} */
   AttachInstances(data: AttachInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachInstancesResponse>;
-  /** 创建计算环境 */
+  /** {@link CreateComputeEnv 创建计算环境}({@link CreateComputeEnvRequest 请求参数}): {@link CreateComputeEnvResponse 返回参数} */
   CreateComputeEnv(data: CreateComputeEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreateComputeEnvResponse>;
-  /** 创建黑石计算环境 */
+  /** {@link CreateCpmComputeEnv 创建黑石计算环境}({@link CreateCpmComputeEnvRequest 请求参数}): {@link CreateCpmComputeEnvResponse 返回参数} */
   CreateCpmComputeEnv(data: CreateCpmComputeEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCpmComputeEnvResponse>;
-  /** 创建任务模板 */
+  /** {@link CreateTaskTemplate 创建任务模板}({@link CreateTaskTemplateRequest 请求参数}): {@link CreateTaskTemplateResponse 返回参数} */
   CreateTaskTemplate(data: CreateTaskTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskTemplateResponse>;
-  /** 删除计算环境 */
+  /** {@link DeleteComputeEnv 删除计算环境}({@link DeleteComputeEnvRequest 请求参数}): {@link DeleteComputeEnvResponse 返回参数} */
   DeleteComputeEnv(data: DeleteComputeEnvRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteComputeEnvResponse>;
-  /** 删除作业 */
+  /** {@link DeleteJob 删除作业}({@link DeleteJobRequest 请求参数}): {@link DeleteJobResponse 返回参数} */
   DeleteJob(data: DeleteJobRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJobResponse>;
-  /** 删除任务模板 */
+  /** {@link DeleteTaskTemplates 删除任务模板}({@link DeleteTaskTemplatesRequest 请求参数}): {@link DeleteTaskTemplatesResponse 返回参数} */
   DeleteTaskTemplates(data: DeleteTaskTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskTemplatesResponse>;
-  /** 获取批量计算可用的CVM机型配置信息 */
+  /** {@link DescribeAvailableCvmInstanceTypes 获取批量计算可用的CVM机型配置信息}({@link DescribeAvailableCvmInstanceTypesRequest 请求参数}): {@link DescribeAvailableCvmInstanceTypesResponse 返回参数} */
   DescribeAvailableCvmInstanceTypes(data?: DescribeAvailableCvmInstanceTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableCvmInstanceTypesResponse>;
-  /** 获取计算环境详情 */
+  /** {@link DescribeComputeEnv 获取计算环境详情}({@link DescribeComputeEnvRequest 请求参数}): {@link DescribeComputeEnvResponse 返回参数} */
   DescribeComputeEnv(data: DescribeComputeEnvRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvResponse>;
-  /** 查看计算环境活动信息 */
+  /** {@link DescribeComputeEnvActivities 查看计算环境活动信息}({@link DescribeComputeEnvActivitiesRequest 请求参数}): {@link DescribeComputeEnvActivitiesResponse 返回参数} */
   DescribeComputeEnvActivities(data: DescribeComputeEnvActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvActivitiesResponse>;
-  /** 查看计算环境的创建信息 */
+  /** {@link DescribeComputeEnvCreateInfo 查看计算环境的创建信息}({@link DescribeComputeEnvCreateInfoRequest 请求参数}): {@link DescribeComputeEnvCreateInfoResponse 返回参数} */
   DescribeComputeEnvCreateInfo(data: DescribeComputeEnvCreateInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvCreateInfoResponse>;
-  /** 查看计算环境创建信息列表 */
+  /** {@link DescribeComputeEnvCreateInfos 查看计算环境创建信息列表}({@link DescribeComputeEnvCreateInfosRequest 请求参数}): {@link DescribeComputeEnvCreateInfosResponse 返回参数} */
   DescribeComputeEnvCreateInfos(data?: DescribeComputeEnvCreateInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvCreateInfosResponse>;
-  /** 获取计算环境列表 */
+  /** {@link DescribeComputeEnvs 获取计算环境列表}({@link DescribeComputeEnvsRequest 请求参数}): {@link DescribeComputeEnvsResponse 返回参数} */
   DescribeComputeEnvs(data?: DescribeComputeEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvsResponse>;
-  /** 查询批量计算黑石操作系统信息 */
+  /** {@link DescribeCpmOsInfo 查询批量计算黑石操作系统信息}({@link DescribeCpmOsInfoRequest 请求参数}): {@link DescribeCpmOsInfoResponse 返回参数} */
   DescribeCpmOsInfo(data?: DescribeCpmOsInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCpmOsInfoResponse>;
-  /** 获取批量计算可用区机型配置信息 */
+  /** {@link DescribeCvmZoneInstanceConfigInfos 获取批量计算可用区机型配置信息}({@link DescribeCvmZoneInstanceConfigInfosRequest 请求参数}): {@link DescribeCvmZoneInstanceConfigInfosResponse 返回参数} */
   DescribeCvmZoneInstanceConfigInfos(data?: DescribeCvmZoneInstanceConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCvmZoneInstanceConfigInfosResponse>;
-  /** 查询实例分类信息 */
+  /** {@link DescribeInstanceCategories 查询实例分类信息}({@link DescribeInstanceCategoriesRequest 请求参数}): {@link DescribeInstanceCategoriesResponse 返回参数} */
   DescribeInstanceCategories(data?: DescribeInstanceCategoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceCategoriesResponse>;
-  /** 查看作业详情 */
+  /** {@link DescribeJob 查看作业详情}({@link DescribeJobRequest 请求参数}): {@link DescribeJobResponse 返回参数} */
   DescribeJob(data: DescribeJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobResponse>;
-  /** 获取作业的提交信息 */
+  /** {@link DescribeJobSubmitInfo 获取作业的提交信息}({@link DescribeJobSubmitInfoRequest 请求参数}): {@link DescribeJobSubmitInfoResponse 返回参数} */
   DescribeJobSubmitInfo(data: DescribeJobSubmitInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobSubmitInfoResponse>;
-  /** 查看作业列表 */
+  /** {@link DescribeJobs 查看作业列表}({@link DescribeJobsRequest 请求参数}): {@link DescribeJobsResponse 返回参数} */
   DescribeJobs(data?: DescribeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobsResponse>;
-  /** 查询任务详情 */
+  /** {@link DescribeTask 查询任务详情}({@link DescribeTaskRequest 请求参数}): {@link DescribeTaskResponse 返回参数} */
   DescribeTask(data: DescribeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResponse>;
-  /** 获取任务日志详情 */
+  /** {@link DescribeTaskLogs 获取任务日志详情}({@link DescribeTaskLogsRequest 请求参数}): {@link DescribeTaskLogsResponse 返回参数} */
   DescribeTaskLogs(data: DescribeTaskLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogsResponse>;
-  /** 获取任务模板 */
+  /** {@link DescribeTaskTemplates 获取任务模板}({@link DescribeTaskTemplatesRequest 请求参数}): {@link DescribeTaskTemplatesResponse 返回参数} */
   DescribeTaskTemplates(data?: DescribeTaskTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskTemplatesResponse>;
-  /** 从计算环境移出实例 */
+  /** {@link DetachInstances 从计算环境移出实例}({@link DetachInstancesRequest 请求参数}): {@link DetachInstancesResponse 返回参数} */
   DetachInstances(data: DetachInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachInstancesResponse>;
-  /** 修改计算环境 */
+  /** {@link ModifyComputeEnv 修改计算环境}({@link ModifyComputeEnvRequest 请求参数}): {@link ModifyComputeEnvResponse 返回参数} */
   ModifyComputeEnv(data: ModifyComputeEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyComputeEnvResponse>;
-  /** 修改任务模板 */
+  /** {@link ModifyTaskTemplate 修改任务模板}({@link ModifyTaskTemplateRequest 请求参数}): {@link ModifyTaskTemplateResponse 返回参数} */
   ModifyTaskTemplate(data: ModifyTaskTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskTemplateResponse>;
-  /** 重试作业 */
+  /** {@link RetryJobs 重试作业}({@link RetryJobsRequest 请求参数}): {@link RetryJobsResponse 返回参数} */
   RetryJobs(data: RetryJobsRequest, config?: AxiosRequestConfig): AxiosPromise<RetryJobsResponse>;
-  /** 提交作业 */
+  /** {@link SubmitJob 提交作业}({@link SubmitJobRequest 请求参数}): {@link SubmitJobResponse 返回参数} */
   SubmitJob(data: SubmitJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitJobResponse>;
-  /** 销毁计算节点 */
+  /** {@link TerminateComputeNode 销毁计算节点}({@link TerminateComputeNodeRequest 请求参数}): {@link TerminateComputeNodeResponse 返回参数} */
   TerminateComputeNode(data: TerminateComputeNodeRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateComputeNodeResponse>;
-  /** 批量销毁计算节点 */
+  /** {@link TerminateComputeNodes 批量销毁计算节点}({@link TerminateComputeNodesRequest 请求参数}): {@link TerminateComputeNodesResponse 返回参数} */
   TerminateComputeNodes(data: TerminateComputeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateComputeNodesResponse>;
-  /** 终止作业 */
+  /** {@link TerminateJob 终止作业}({@link TerminateJobRequest 请求参数}): {@link TerminateJobResponse 返回参数} */
   TerminateJob(data: TerminateJobRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateJobResponse>;
-  /** 终止任务实例 */
+  /** {@link TerminateTaskInstance 终止任务实例}({@link TerminateTaskInstanceRequest 请求参数}): {@link TerminateTaskInstanceResponse 返回参数} */
   TerminateTaskInstance(data: TerminateTaskInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateTaskInstanceResponse>;
 }
 

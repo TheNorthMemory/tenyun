@@ -74,14 +74,14 @@ declare interface DescribeZonesResponse {
   RequestId?: string;
 }
 
-/** [地域管理系统](https://cloud.tencent.com/document/product/1596) */
+/** {@link Region 地域管理系统} */
 declare interface Region {
   (): Versions;
-  /** 查询支持地域列表查询的产品 */
+  /** {@link DescribeProducts 查询支持地域列表查询的产品}({@link DescribeProductsRequest 请求参数}): {@link DescribeProductsResponse 返回参数} */
   DescribeProducts(data?: DescribeProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductsResponse>;
-  /** 查询产品支持的地域列表 */
+  /** {@link DescribeRegions 查询产品支持的地域列表}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
   DescribeRegions(data: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** 查询产品可用区列表 */
+  /** {@link DescribeZones 查询产品可用区列表}({@link DescribeZonesRequest 请求参数}): {@link DescribeZonesResponse 返回参数} */
   DescribeZones(data: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
 }
 

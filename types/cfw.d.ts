@@ -1736,132 +1736,132 @@ declare interface StopSecurityGroupRuleDispatchResponse {
   RequestId?: string;
 }
 
-/** [云防火墙](https://cloud.tencent.com/document/product/1132) */
+/** {@link Cfw 云防火墙} */
 declare interface Cfw {
   (): Versions;
-  /** 添加互联网边界规则 */
+  /** {@link AddAcRule 添加互联网边界规则}({@link AddAcRuleRequest 请求参数}): {@link AddAcRuleResponse 返回参数} */
   AddAcRule(data: AddAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddAcRuleResponse>;
-  /** 创建新企业安全组规则 */
+  /** {@link AddEnterpriseSecurityGroupRules 创建新企业安全组规则}({@link AddEnterpriseSecurityGroupRulesRequest 请求参数}): {@link AddEnterpriseSecurityGroupRulesResponse 返回参数} */
   AddEnterpriseSecurityGroupRules(data: AddEnterpriseSecurityGroupRulesRequest, config?: AxiosRequestConfig): AxiosPromise<AddEnterpriseSecurityGroupRulesResponse>;
-  /** 创建访问控制规则 */
+  /** {@link CreateAcRules 创建访问控制规则}({@link CreateAcRulesRequest 请求参数}): {@link CreateAcRulesResponse 返回参数} */
   CreateAcRules(data: CreateAcRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAcRulesResponse>;
-  /** 创建、选择vpc */
+  /** {@link CreateChooseVpcs 创建、选择vpc}({@link CreateChooseVpcsRequest 请求参数}): {@link CreateChooseVpcsResponse 返回参数} */
   CreateChooseVpcs(data: CreateChooseVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChooseVpcsResponse>;
-  /** 创建暴露数据库白名单规则 */
+  /** {@link CreateDatabaseWhiteListRules 创建暴露数据库白名单规则}({@link CreateDatabaseWhiteListRulesRequest 请求参数}): {@link CreateDatabaseWhiteListRulesResponse 返回参数} */
   CreateDatabaseWhiteListRules(data: CreateDatabaseWhiteListRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatabaseWhiteListRulesResponse>;
-  /** 创建NAT防火墙实例（Region参数必填） */
+  /** {@link CreateNatFwInstance 创建NAT防火墙实例（Region参数必填）}({@link CreateNatFwInstanceRequest 请求参数}): {@link CreateNatFwInstanceResponse 返回参数} */
   CreateNatFwInstance(data: CreateNatFwInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNatFwInstanceResponse>;
-  /** 创建防火墙实例和接入域名（Region参数必填） */
+  /** {@link CreateNatFwInstanceWithDomain 创建防火墙实例和接入域名（Region参数必填）}({@link CreateNatFwInstanceWithDomainRequest 请求参数}): {@link CreateNatFwInstanceWithDomainResponse 返回参数} */
   CreateNatFwInstanceWithDomain(data: CreateNatFwInstanceWithDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNatFwInstanceWithDomainResponse>;
-  /** 创建企业安全组规则 */
+  /** {@link CreateSecurityGroupRules 创建企业安全组规则}({@link CreateSecurityGroupRulesRequest 请求参数}): {@link CreateSecurityGroupRulesResponse 返回参数} */
   CreateSecurityGroupRules(data: CreateSecurityGroupRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityGroupRulesResponse>;
-  /** 删除规则 */
+  /** {@link DeleteAcRule 删除规则}({@link DeleteAcRuleRequest 请求参数}): {@link DeleteAcRuleResponse 返回参数} */
   DeleteAcRule(data: DeleteAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAcRuleResponse>;
-  /** 全部删除规则 */
+  /** {@link DeleteAllAccessControlRule 全部删除规则}({@link DeleteAllAccessControlRuleRequest 请求参数}): {@link DeleteAllAccessControlRuleResponse 返回参数} */
   DeleteAllAccessControlRule(data?: DeleteAllAccessControlRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllAccessControlRuleResponse>;
-  /** 销毁防火墙实例 */
+  /** {@link DeleteNatFwInstance 销毁防火墙实例}({@link DeleteNatFwInstanceRequest 请求参数}): {@link DeleteNatFwInstanceResponse 返回参数} */
   DeleteNatFwInstance(data: DeleteNatFwInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNatFwInstanceResponse>;
-  /** 资产中心资产组删除 */
+  /** {@link DeleteResourceGroup 资产中心资产组删除}({@link DeleteResourceGroupRequest 请求参数}): {@link DeleteResourceGroupResponse 返回参数} */
   DeleteResourceGroup(data: DeleteResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceGroupResponse>;
-  /** 删除安全组规则 */
+  /** {@link DeleteSecurityGroupRule 删除安全组规则}({@link DeleteSecurityGroupRuleRequest 请求参数}): {@link DeleteSecurityGroupRuleResponse 返回参数} */
   DeleteSecurityGroupRule(data: DeleteSecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityGroupRuleResponse>;
-  /** 删除防火墙实例 */
+  /** {@link DeleteVpcInstance 删除防火墙实例}({@link DeleteVpcInstanceRequest 请求参数}): {@link DeleteVpcInstanceResponse 返回参数} */
   DeleteVpcInstance(data?: DeleteVpcInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcInstanceResponse>;
-  /** 访问控制列表 */
+  /** {@link DescribeAcLists 访问控制列表}({@link DescribeAcListsRequest 请求参数}): {@link DescribeAcListsResponse 返回参数} */
   DescribeAcLists(data?: DescribeAcListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAcListsResponse>;
-  /** 获取安全组关联实例列表 */
+  /** {@link DescribeAssociatedInstanceList 获取安全组关联实例列表}({@link DescribeAssociatedInstanceListRequest 请求参数}): {@link DescribeAssociatedInstanceListResponse 返回参数} */
   DescribeAssociatedInstanceList(data: DescribeAssociatedInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssociatedInstanceListResponse>;
-  /** 告警中心阻断IP折线图 */
+  /** {@link DescribeBlockByIpTimesList 告警中心阻断IP折线图}({@link DescribeBlockByIpTimesListRequest 请求参数}): {@link DescribeBlockByIpTimesListResponse 返回参数} */
   DescribeBlockByIpTimesList(data: DescribeBlockByIpTimesListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockByIpTimesListResponse>;
-  /** 告警中心柱形图 */
+  /** {@link DescribeBlockStaticList 告警中心柱形图}({@link DescribeBlockStaticListRequest 请求参数}): {@link DescribeBlockStaticListResponse 返回参数} */
   DescribeBlockStaticList(data: DescribeBlockStaticListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockStaticListResponse>;
-  /** 查询防火墙弹性公网IP */
+  /** {@link DescribeCfwEips 查询防火墙弹性公网IP}({@link DescribeCfwEipsRequest 请求参数}): {@link DescribeCfwEipsResponse 返回参数} */
   DescribeCfwEips(data: DescribeCfwEipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwEipsResponse>;
-  /** 获取入侵防御按钮列表 */
+  /** {@link DescribeDefenseSwitch 获取入侵防御按钮列表}({@link DescribeDefenseSwitchRequest 请求参数}): {@link DescribeDefenseSwitchResponse 返回参数} */
   DescribeDefenseSwitch(data?: DescribeDefenseSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefenseSwitchResponse>;
-  /** 查询新企业安全组规则 */
+  /** {@link DescribeEnterpriseSecurityGroupRule 查询新企业安全组规则}({@link DescribeEnterpriseSecurityGroupRuleRequest 请求参数}): {@link DescribeEnterpriseSecurityGroupRuleResponse 返回参数} */
   DescribeEnterpriseSecurityGroupRule(data: DescribeEnterpriseSecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnterpriseSecurityGroupRuleResponse>;
-  /** 新手引导扫描接口信息 */
+  /** {@link DescribeGuideScanInfo 新手引导扫描接口信息}({@link DescribeGuideScanInfoRequest 请求参数}): {@link DescribeGuideScanInfoResponse 返回参数} */
   DescribeGuideScanInfo(data?: DescribeGuideScanInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGuideScanInfoResponse>;
-  /** ip防护状态查询 */
+  /** {@link DescribeIPStatusList ip防护状态查询}({@link DescribeIPStatusListRequest 请求参数}): {@link DescribeIPStatusListResponse 返回参数} */
   DescribeIPStatusList(data: DescribeIPStatusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStatusListResponse>;
-  /** 获取当前用户接入nat防火墙的所有子网数及natfw实例个数 */
+  /** {@link DescribeNatFwInfoCount 获取当前用户接入nat防火墙的所有子网数及natfw实例个数}({@link DescribeNatFwInfoCountRequest 请求参数}): {@link DescribeNatFwInfoCountResponse 返回参数} */
   DescribeNatFwInfoCount(data?: DescribeNatFwInfoCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwInfoCountResponse>;
-  /** 获取租户所有NAT实例 */
+  /** {@link DescribeNatFwInstance 获取租户所有NAT实例}({@link DescribeNatFwInstanceRequest 请求参数}): {@link DescribeNatFwInstanceResponse 返回参数} */
   DescribeNatFwInstance(data?: DescribeNatFwInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwInstanceResponse>;
-  /** 获取租户可运维NAT实例 */
+  /** {@link DescribeNatFwInstanceWithRegion 获取租户可运维NAT实例}({@link DescribeNatFwInstanceWithRegionRequest 请求参数}): {@link DescribeNatFwInstanceWithRegionResponse 返回参数} */
   DescribeNatFwInstanceWithRegion(data?: DescribeNatFwInstanceWithRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwInstanceWithRegionResponse>;
-  /** 获取租户所有NAT实例卡片信息 */
+  /** {@link DescribeNatFwInstancesInfo 获取租户所有NAT实例卡片信息}({@link DescribeNatFwInstancesInfoRequest 请求参数}): {@link DescribeNatFwInstancesInfoResponse 返回参数} */
   DescribeNatFwInstancesInfo(data?: DescribeNatFwInstancesInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwInstancesInfoResponse>;
-  /** 展示当前natfw 实例对应的vpc dns开关 */
+  /** {@link DescribeNatFwVpcDnsLst 展示当前natfw 实例对应的vpc dns开关}({@link DescribeNatFwVpcDnsLstRequest 请求参数}): {@link DescribeNatFwVpcDnsLstResponse 返回参数} */
   DescribeNatFwVpcDnsLst(data: DescribeNatFwVpcDnsLstRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwVpcDnsLstResponse>;
-  /** 资产中心资产树信息查询 */
+  /** {@link DescribeResourceGroup 资产中心资产树信息查询}({@link DescribeResourceGroupRequest 请求参数}): {@link DescribeResourceGroupResponse 返回参数} */
   DescribeResourceGroup(data: DescribeResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGroupResponse>;
-  /** 资产中心资产树信息查询new */
+  /** {@link DescribeResourceGroupNew 资产中心资产树信息查询new}({@link DescribeResourceGroupNewRequest 请求参数}): {@link DescribeResourceGroupNewResponse 返回参数} */
   DescribeResourceGroupNew(data: DescribeResourceGroupNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGroupNewResponse>;
-  /** 查询规则列表概况 */
+  /** {@link DescribeRuleOverview 查询规则列表概况}({@link DescribeRuleOverviewRequest 请求参数}): {@link DescribeRuleOverviewResponse 返回参数} */
   DescribeRuleOverview(data?: DescribeRuleOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleOverviewResponse>;
-  /** 查询安全组规则列表 */
+  /** {@link DescribeSecurityGroupList 查询安全组规则列表}({@link DescribeSecurityGroupListRequest 请求参数}): {@link DescribeSecurityGroupListResponse 返回参数} */
   DescribeSecurityGroupList(data: DescribeSecurityGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupListResponse>;
-  /** 查询资产组全部资产信息 */
+  /** {@link DescribeSourceAsset 查询资产组全部资产信息}({@link DescribeSourceAssetRequest 请求参数}): {@link DescribeSourceAssetResponse 返回参数} */
   DescribeSourceAsset(data?: DescribeSourceAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceAssetResponse>;
-  /** 防火墙开关列表 */
+  /** {@link DescribeSwitchLists 防火墙开关列表}({@link DescribeSwitchListsRequest 请求参数}): {@link DescribeSwitchListsResponse 返回参数} */
   DescribeSwitchLists(data?: DescribeSwitchListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSwitchListsResponse>;
-  /** 告警中心概况 */
+  /** {@link DescribeTLogInfo 告警中心概况}({@link DescribeTLogInfoRequest 请求参数}): {@link DescribeTLogInfoResponse 返回参数} */
   DescribeTLogInfo(data: DescribeTLogInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTLogInfoResponse>;
-  /** 告警中心IP柱形图 */
+  /** {@link DescribeTLogIpList 告警中心IP柱形图}({@link DescribeTLogIpListRequest 请求参数}): {@link DescribeTLogIpListResponse 返回参数} */
   DescribeTLogIpList(data: DescribeTLogIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTLogIpListResponse>;
-  /** 查询规则表状态 */
+  /** {@link DescribeTableStatus 查询规则表状态}({@link DescribeTableStatusRequest 请求参数}): {@link DescribeTableStatusResponse 返回参数} */
   DescribeTableStatus(data?: DescribeTableStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableStatusResponse>;
-  /** 告警中心伪攻击链事件未处置接口 */
+  /** {@link DescribeUnHandleEventTabList 告警中心伪攻击链事件未处置接口}({@link DescribeUnHandleEventTabListRequest 请求参数}): {@link DescribeUnHandleEventTabListResponse 返回参数} */
   DescribeUnHandleEventTabList(data: DescribeUnHandleEventTabListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnHandleEventTabListResponse>;
-  /** 防火墙垂直扩容 */
+  /** {@link ExpandCfwVertical 防火墙垂直扩容}({@link ExpandCfwVerticalRequest 请求参数}): {@link ExpandCfwVerticalResponse 返回参数} */
   ExpandCfwVertical(data: ExpandCfwVerticalRequest, config?: AxiosRequestConfig): AxiosPromise<ExpandCfwVerticalResponse>;
-  /** 修改规则 */
+  /** {@link ModifyAcRule 修改规则}({@link ModifyAcRuleRequest 请求参数}): {@link ModifyAcRuleResponse 返回参数} */
   ModifyAcRule(data: ModifyAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAcRuleResponse>;
-  /** 互联网边界防火墙一键开关 */
+  /** {@link ModifyAllPublicIPSwitchStatus 互联网边界防火墙一键开关}({@link ModifyAllPublicIPSwitchStatusRequest 请求参数}): {@link ModifyAllPublicIPSwitchStatusResponse 返回参数} */
   ModifyAllPublicIPSwitchStatus(data: ModifyAllPublicIPSwitchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllPublicIPSwitchStatusResponse>;
-  /** 启用停用全部规则 */
+  /** {@link ModifyAllRuleStatus 启用停用全部规则}({@link ModifyAllRuleStatusRequest 请求参数}): {@link ModifyAllRuleStatusResponse 返回参数} */
   ModifyAllRuleStatus(data: ModifyAllRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllRuleStatusResponse>;
-  /** VPC防火墙一键开关 */
+  /** {@link ModifyAllVPCSwitchStatus VPC防火墙一键开关}({@link ModifyAllVPCSwitchStatusRequest 请求参数}): {@link ModifyAllVPCSwitchStatusResponse 返回参数} */
   ModifyAllVPCSwitchStatus(data: ModifyAllVPCSwitchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllVPCSwitchStatusResponse>;
-  /** 资产扫描 */
+  /** {@link ModifyAssetScan 资产扫描}({@link ModifyAssetScanRequest 请求参数}): {@link ModifyAssetScanResponse 返回参数} */
   ModifyAssetScan(data: ModifyAssetScanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetScanResponse>;
-  /** 拦截列表和忽略列表批量操作接口 */
+  /** {@link ModifyBlockIgnoreList 拦截列表和忽略列表批量操作接口}({@link ModifyBlockIgnoreListRequest 请求参数}): {@link ModifyBlockIgnoreListResponse 返回参数} */
   ModifyBlockIgnoreList(data: ModifyBlockIgnoreListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockIgnoreListResponse>;
-  /** 取消阻断记录置顶接口 */
+  /** {@link ModifyBlockTop 取消阻断记录置顶接口}({@link ModifyBlockTopRequest 请求参数}): {@link ModifyBlockTopResponse 返回参数} */
   ModifyBlockTop(data: ModifyBlockTopRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockTopResponse>;
-  /** 防火墙实例重新选择vpc或nat */
+  /** {@link ModifyNatFwReSelect 防火墙实例重新选择vpc或nat}({@link ModifyNatFwReSelectRequest 请求参数}): {@link ModifyNatFwReSelectResponse 返回参数} */
   ModifyNatFwReSelect(data: ModifyNatFwReSelectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatFwReSelectResponse>;
-  /** 修改NAT防火墙开关 */
+  /** {@link ModifyNatFwSwitch 修改NAT防火墙开关}({@link ModifyNatFwSwitchRequest 请求参数}): {@link ModifyNatFwSwitchResponse 返回参数} */
   ModifyNatFwSwitch(data: ModifyNatFwSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatFwSwitchResponse>;
-  /** nat 防火墙VPC DNS 开关切换 */
+  /** {@link ModifyNatFwVpcDnsSwitch nat 防火墙VPC DNS 开关切换}({@link ModifyNatFwVpcDnsSwitchRequest 请求参数}): {@link ModifyNatFwVpcDnsSwitchResponse 返回参数} */
   ModifyNatFwVpcDnsSwitch(data: ModifyNatFwVpcDnsSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatFwVpcDnsSwitchResponse>;
-  /** 单个修改互联网边界防火墙开关 */
+  /** {@link ModifyPublicIPSwitchStatus 单个修改互联网边界防火墙开关}({@link ModifyPublicIPSwitchStatusRequest 请求参数}): {@link ModifyPublicIPSwitchStatusResponse 返回参数} */
   ModifyPublicIPSwitchStatus(data: ModifyPublicIPSwitchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPublicIPSwitchStatusResponse>;
-  /** 资产中心资产组信息修改 */
+  /** {@link ModifyResourceGroup 资产中心资产组信息修改}({@link ModifyResourceGroupRequest 请求参数}): {@link ModifyResourceGroupResponse 返回参数} */
   ModifyResourceGroup(data: ModifyResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceGroupResponse>;
-  /** 同步资产-互联网&VPC（新） */
+  /** {@link ModifyRunSyncAsset 同步资产-互联网&VPC（新）}({@link ModifyRunSyncAssetRequest 请求参数}): {@link ModifyRunSyncAssetResponse 返回参数} */
   ModifyRunSyncAsset(data?: ModifyRunSyncAssetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRunSyncAssetResponse>;
-  /** 启用停用单条企业安全组规则 */
+  /** {@link ModifySecurityGroupItemRuleStatus 启用停用单条企业安全组规则}({@link ModifySecurityGroupItemRuleStatusRequest 请求参数}): {@link ModifySecurityGroupItemRuleStatusResponse 返回参数} */
   ModifySecurityGroupItemRuleStatus(data: ModifySecurityGroupItemRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityGroupItemRuleStatusResponse>;
-  /** 编辑单条安全组规则 */
+  /** {@link ModifySecurityGroupRule 编辑单条安全组规则}({@link ModifySecurityGroupRuleRequest 请求参数}): {@link ModifySecurityGroupRuleResponse 返回参数} */
   ModifySecurityGroupRule(data: ModifySecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityGroupRuleResponse>;
-  /** 企业安全组规则快速排序 */
+  /** {@link ModifySecurityGroupSequenceRules 企业安全组规则快速排序}({@link ModifySecurityGroupSequenceRulesRequest 请求参数}): {@link ModifySecurityGroupSequenceRulesResponse 返回参数} */
   ModifySecurityGroupSequenceRules(data: ModifySecurityGroupSequenceRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityGroupSequenceRulesResponse>;
-  /** 修改规则执行顺序 */
+  /** {@link ModifySequenceRules 修改规则执行顺序}({@link ModifySequenceRulesRequest 请求参数}): {@link ModifySequenceRulesResponse 返回参数} */
   ModifySequenceRules(data?: ModifySequenceRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySequenceRulesResponse>;
-  /** 修改规则表状态 */
+  /** {@link ModifyTableStatus 修改规则表状态}({@link ModifyTableStatusRequest 请求参数}): {@link ModifyTableStatusResponse 返回参数} */
   ModifyTableStatus(data?: ModifyTableStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTableStatusResponse>;
-  /** 删除互联网边界规则 */
+  /** {@link RemoveAcRule 删除互联网边界规则}({@link RemoveAcRuleRequest 请求参数}): {@link RemoveAcRuleResponse 返回参数} */
   RemoveAcRule(data: RemoveAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveAcRuleResponse>;
-  /** 删除新企业安全组规则 */
+  /** {@link RemoveEnterpriseSecurityGroupRule 删除新企业安全组规则}({@link RemoveEnterpriseSecurityGroupRuleRequest 请求参数}): {@link RemoveEnterpriseSecurityGroupRuleResponse 返回参数} */
   RemoveEnterpriseSecurityGroupRule(data: RemoveEnterpriseSecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveEnterpriseSecurityGroupRuleResponse>;
-  /** 配置防火墙Dnat规则 */
+  /** {@link SetNatFwDnatRule 配置防火墙Dnat规则}({@link SetNatFwDnatRuleRequest 请求参数}): {@link SetNatFwDnatRuleResponse 返回参数} */
   SetNatFwDnatRule(data: SetNatFwDnatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SetNatFwDnatRuleResponse>;
-  /** 设置防火墙实例弹性公网ip */
+  /** {@link SetNatFwEip 设置防火墙实例弹性公网ip}({@link SetNatFwEipRequest 请求参数}): {@link SetNatFwEipResponse 返回参数} */
   SetNatFwEip(data: SetNatFwEipRequest, config?: AxiosRequestConfig): AxiosPromise<SetNatFwEipResponse>;
-  /** 中止安全组规则下发 */
+  /** {@link StopSecurityGroupRuleDispatch 中止安全组规则下发}({@link StopSecurityGroupRuleDispatchRequest 请求参数}): {@link StopSecurityGroupRuleDispatchResponse 返回参数} */
   StopSecurityGroupRuleDispatch(data?: StopSecurityGroupRuleDispatchRequest, config?: AxiosRequestConfig): AxiosPromise<StopSecurityGroupRuleDispatchResponse>;
 }
 

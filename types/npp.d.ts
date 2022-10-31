@@ -338,24 +338,24 @@ declare interface GetVirtualNumResponse {
   RequestId?: string;
 }
 
-/** 号码保护 */
+/** {@link Npp 号码保护} */
 declare interface Npp {
   (): Versions;
-  /** 回拨呼叫请求 */
+  /** {@link CreateCallBack 回拨呼叫请求}({@link CreateCallBackRequest 请求参数}): {@link CreateCallBackResponse 返回参数} */
   CreateCallBack(data: CreateCallBackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCallBackResponse>;
-  /** 直拨解绑中间号 */
+  /** {@link DelVirtualNum 直拨解绑中间号}({@link DelVirtualNumRequest 请求参数}): {@link DelVirtualNumResponse 返回参数} */
   DelVirtualNum(data: DelVirtualNumRequest, config?: AxiosRequestConfig): AxiosPromise<DelVirtualNumResponse>;
-  /** 回拨呼叫取消 */
+  /** {@link DeleteCallBack 回拨呼叫取消}({@link DeleteCallBackRequest 请求参数}): {@link DeleteCallBackResponse 返回参数} */
   DeleteCallBack(data: DeleteCallBackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCallBackResponse>;
-  /** 回拨话单获取接口 */
+  /** {@link DescribeCallBackCdr 回拨话单获取接口}({@link DescribeCallBackCdrRequest 请求参数}): {@link DescribeCallBackCdrResponse 返回参数} */
   DescribeCallBackCdr(data: DescribeCallBackCdrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallBackCdrResponse>;
-  /** 回拨通话状态获取 */
+  /** {@link DescribeCallBackStatus 回拨通话状态获取}({@link DescribeCallBackStatusRequest 请求参数}): {@link DescribeCallBackStatusResponse 返回参数} */
   DescribeCallBackStatus(data: DescribeCallBackStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallBackStatusResponse>;
-  /** 回拨拉取主叫显号号码集合 */
+  /** {@link DescribeCallerDisplayList 回拨拉取主叫显号号码集合}({@link DescribeCallerDisplayListRequest 请求参数}): {@link DescribeCallerDisplayListResponse 返回参数} */
   DescribeCallerDisplayList(data: DescribeCallerDisplayListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallerDisplayListResponse>;
-  /** 直拨话单获取接口 */
+  /** {@link Get400Cdr 直拨话单获取接口}({@link Get400CdrRequest 请求参数}): {@link Get400CdrResponse 返回参数} */
   Get400Cdr(data: Get400CdrRequest, config?: AxiosRequestConfig): AxiosPromise<Get400CdrResponse>;
-  /** 直拨获取中间号 */
+  /** {@link GetVirtualNum 直拨获取中间号}({@link GetVirtualNumRequest 请求参数}): {@link GetVirtualNumResponse 返回参数} */
   GetVirtualNum(data: GetVirtualNumRequest, config?: AxiosRequestConfig): AxiosPromise<GetVirtualNumResponse>;
 }
 

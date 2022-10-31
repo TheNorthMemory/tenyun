@@ -42,9 +42,9 @@ declare interface StartAnalyseResponse {
 
 declare interface Habo {
   (): Versions;
-  /** 获取分析结果 */
+  /** {@link DescribeStatus 获取分析结果}({@link DescribeStatusRequest 请求参数}): {@link DescribeStatusResponse 返回参数} */
   DescribeStatus(data: DescribeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStatusResponse>;
-  /** 分析样本 */
+  /** {@link StartAnalyse 分析样本}({@link StartAnalyseRequest 请求参数}): {@link StartAnalyseResponse 返回参数} */
   StartAnalyse(data: StartAnalyseRequest, config?: AxiosRequestConfig): AxiosPromise<StartAnalyseResponse>;
 }
 

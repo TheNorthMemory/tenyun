@@ -262,24 +262,24 @@ declare namespace V20200715 {
   }
 }
 
-/** [企业集成服务](https://cloud.tencent.com/document/product/1270) */
+/** {@link Eis 数据连接器} */
 declare interface Eis {
   (): Versions;
-  /** 获取运行时详情 */
+  /** {@link GetRuntimeMC 获取运行时详情}({@link GetRuntimeMCRequest 请求参数}): {@link GetRuntimeMCResponse 返回参数} */
   GetRuntimeMC(data: GetRuntimeMCRequest, config?: AxiosRequestConfig): AxiosPromise<GetRuntimeMCResponse>;
-  /** 获取运行时资源监控详情 */
+  /** {@link GetRuntimeResourceMonitorMetricMC 获取运行时资源监控详情}({@link GetRuntimeResourceMonitorMetricMCRequest 请求参数}): {@link GetRuntimeResourceMonitorMetricMCResponse 返回参数} */
   GetRuntimeResourceMonitorMetricMC(data: GetRuntimeResourceMonitorMetricMCRequest, config?: AxiosRequestConfig): AxiosPromise<GetRuntimeResourceMonitorMetricMCResponse>;
-  /** 获取可部署运行时列表 */
+  /** {@link ListDeployableRuntimesMC 获取可部署运行时列表}({@link ListDeployableRuntimesMCRequest 请求参数}): {@link ListDeployableRuntimesMCResponse 返回参数} */
   ListDeployableRuntimesMC(data?: ListDeployableRuntimesMCRequest, config?: AxiosRequestConfig): AxiosPromise<ListDeployableRuntimesMCResponse>;
-  /** 获取运行时部署的应用实例列表 */
+  /** {@link ListRuntimeDeployedInstancesMC 获取运行时部署的应用实例列表}({@link ListRuntimeDeployedInstancesMCRequest 请求参数}): {@link ListRuntimeDeployedInstancesMCResponse 返回参数} */
   ListRuntimeDeployedInstancesMC(data: ListRuntimeDeployedInstancesMCRequest, config?: AxiosRequestConfig): AxiosPromise<ListRuntimeDeployedInstancesMCResponse>;
-  /** 获取运行时列表 */
+  /** {@link ListRuntimesMC 获取运行时列表}({@link ListRuntimesMCRequest 请求参数}): {@link ListRuntimesMCResponse 返回参数} */
   ListRuntimesMC(data?: ListRuntimesMCRequest, config?: AxiosRequestConfig): AxiosPromise<ListRuntimesMCResponse>;
-  /** 获取连接器配置参数 */
+  /** {@link V20200715.DescribeEisConnectorConfig 获取连接器配置参数}({@link V20200715.DescribeEisConnectorConfigRequest 请求参数}): {@link V20200715.DescribeEisConnectorConfigResponse 返回参数} */
   DescribeEisConnectorConfig(data: V20200715.DescribeEisConnectorConfigRequest, config: AxiosRequestConfig & V20200715.VersionHeader): AxiosPromise<V20200715.DescribeEisConnectorConfigResponse>;
-  /** 获取连接器操作列表 */
+  /** {@link V20200715.ListEisConnectorOperations 获取连接器操作列表}({@link V20200715.ListEisConnectorOperationsRequest 请求参数}): {@link V20200715.ListEisConnectorOperationsResponse 返回参数} */
   ListEisConnectorOperations(data: V20200715.ListEisConnectorOperationsRequest, config: AxiosRequestConfig & V20200715.VersionHeader): AxiosPromise<V20200715.ListEisConnectorOperationsResponse>;
-  /** 获取连接器列表 */
+  /** {@link V20200715.ListEisConnectors 获取连接器列表}({@link V20200715.ListEisConnectorsRequest 请求参数}): {@link V20200715.ListEisConnectorsResponse 返回参数} */
   ListEisConnectors(data: V20200715.ListEisConnectorsRequest, config: AxiosRequestConfig & V20200715.VersionHeader): AxiosPromise<V20200715.ListEisConnectorsResponse>;
 }
 

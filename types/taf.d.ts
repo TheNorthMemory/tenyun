@@ -156,14 +156,14 @@ declare interface RecognizeTargetAudienceResponse {
   RequestId?: string;
 }
 
-/** [流量反欺诈](https://cloud.tencent.com/document/product/1031) */
+/** {@link Taf 流量反欺诈} */
 declare interface Taf {
   (): Versions;
-  /** 流量反欺诈-流量验准定制版 */
+  /** {@link RecognizeCustomizedAudience 流量反欺诈-流量验准定制版}({@link RecognizeCustomizedAudienceRequest 请求参数}): {@link RecognizeCustomizedAudienceResponse 返回参数} */
   RecognizeCustomizedAudience(data: RecognizeCustomizedAudienceRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeCustomizedAudienceResponse>;
-  /** 流量反欺诈-流量验准高级版 */
+  /** {@link RecognizePreciseTargetAudience 流量反欺诈-流量验准高级版}({@link RecognizePreciseTargetAudienceRequest 请求参数}): {@link RecognizePreciseTargetAudienceResponse 返回参数} */
   RecognizePreciseTargetAudience(data: RecognizePreciseTargetAudienceRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePreciseTargetAudienceResponse>;
-  /** 流量反欺诈-流量验准 */
+  /** {@link RecognizeTargetAudience 流量反欺诈-流量验准}({@link RecognizeTargetAudienceRequest 请求参数}): {@link RecognizeTargetAudienceResponse 返回参数} */
   RecognizeTargetAudience(data: RecognizeTargetAudienceRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTargetAudienceResponse>;
 }
 

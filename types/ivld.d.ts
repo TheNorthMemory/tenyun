@@ -202,7 +202,7 @@ declare interface MediaFilter {
   MediaType?: number | null;
 }
 
-/** 媒资信息结构体媒资状态定义如下：| 状态名 | 状态值 | 状态描述 | |---|---|---|| MEDIA_STATUS_INVALID | 0 | 非法状态|| MEDIA_STATUS_WAITING| 1 | 等待中 || MEDIA_STATUS_DOWNLOADING | 2 | 下载中 || MEDIA_STATUS_DOWNLOADED | 3 | 下载完成 || MEDIA_STATUS_DOWNLOAD_FAILED | 4 | 下载失败 || MEDIA_STATUS_TRANSCODING | 5 | 转码中 || MEDIA_STATUS_TRANSCODED | 6 | 转码完成 | | MEDIA_STATUS_TRANCODE_FAILED | 7 | 转码失败 || MEDIA_STATUS_SUCCESS | 8 | 媒资文件状态就绪，可发起任务 || MEDIA_STATUS_EXPIRED | 9 | 媒资文件已过期 | */
+/** 媒资信息结构体媒资状态定义如下：| 状态名 | 状态值 | 状态描述 | |---|---|---|| MEDIA_STATUS_INVALID | 0 | 非法状态|| MEDIA_STATUS_WAITING| 1 | 等待中 || MEDIA_STATUS_DOWNLOADING | 2 | 下载中 || MEDIA_STATUS_DOWNLOADED | 3 | 下载完成 || MEDIA_STATUS_DOWNLOAD_FAILED | 4 | 下载失败(已废弃) || MEDIA_STATUS_TRANSCODING | 5 | 转码中 || MEDIA_STATUS_TRANSCODED | 6 | 转码完成 | | MEDIA_STATUS_TRANCODE_FAILED | 7 | 转码失败(已废弃) || MEDIA_STATUS_SUCCESS | 8 | 媒资文件状态就绪，可发起任务 || MEDIA_STATUS_EXPIRED | 9 | 媒资文件已过期 || MEDIA_STATUS_FAILED | 10 | 媒资导入失败 | */
 declare interface MediaInfo {
   /** 媒资ID */
   MediaId: string;
@@ -862,58 +862,58 @@ declare interface UpdateCustomPersonResponse {
   RequestId?: string;
 }
 
-/** [媒体智能标签](https://cloud.tencent.com/document/product/1509) */
+/** {@link Ivld 媒体智能标签} */
 declare interface Ivld {
   (): Versions;
-  /** 增加自定义人脸图片 */
+  /** {@link AddCustomPersonImage 增加自定义人脸图片}({@link AddCustomPersonImageRequest 请求参数}): {@link AddCustomPersonImageResponse 返回参数} */
   AddCustomPersonImage(data: AddCustomPersonImageRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomPersonImageResponse>;
-  /** 创建自定义人物分类 */
+  /** {@link CreateCustomCategory 创建自定义人物分类}({@link CreateCustomCategoryRequest 请求参数}): {@link CreateCustomCategoryResponse 返回参数} */
   CreateCustomCategory(data: CreateCustomCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomCategoryResponse>;
-  /** 创建自定义人物库 */
+  /** {@link CreateCustomGroup 创建自定义人物库}({@link CreateCustomGroupRequest 请求参数}): {@link CreateCustomGroupResponse 返回参数} */
   CreateCustomGroup(data: CreateCustomGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomGroupResponse>;
-  /** 创建自定义人物 */
+  /** {@link CreateCustomPerson 创建自定义人物}({@link CreateCustomPersonRequest 请求参数}): {@link CreateCustomPersonResponse 返回参数} */
   CreateCustomPerson(data: CreateCustomPersonRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomPersonResponse>;
-  /** 创建默认自定义人物类型 */
+  /** {@link CreateDefaultCategories 创建默认自定义人物类型}({@link CreateDefaultCategoriesRequest 请求参数}): {@link CreateDefaultCategoriesResponse 返回参数} */
   CreateDefaultCategories(data?: CreateDefaultCategoriesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDefaultCategoriesResponse>;
-  /** 创建任务 */
+  /** {@link CreateTask 创建任务}({@link CreateTaskRequest 请求参数}): {@link CreateTaskResponse 返回参数} */
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
-  /** 删除自定义分类 */
+  /** {@link DeleteCustomCategory 删除自定义分类}({@link DeleteCustomCategoryRequest 请求参数}): {@link DeleteCustomCategoryResponse 返回参数} */
   DeleteCustomCategory(data: DeleteCustomCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomCategoryResponse>;
-  /** 删除自定义人物 */
+  /** {@link DeleteCustomPerson 删除自定义人物}({@link DeleteCustomPersonRequest 请求参数}): {@link DeleteCustomPersonResponse 返回参数} */
   DeleteCustomPerson(data: DeleteCustomPersonRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomPersonResponse>;
-  /** 删除自定义人脸 */
+  /** {@link DeleteCustomPersonImage 删除自定义人脸}({@link DeleteCustomPersonImageRequest 请求参数}): {@link DeleteCustomPersonImageResponse 返回参数} */
   DeleteCustomPersonImage(data: DeleteCustomPersonImageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomPersonImageResponse>;
-  /** 删除媒资文件 */
+  /** {@link DeleteMedia 删除媒资文件}({@link DeleteMediaRequest 请求参数}): {@link DeleteMediaResponse 返回参数} */
   DeleteMedia(data: DeleteMediaRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMediaResponse>;
-  /** 删除任务 */
+  /** {@link DeleteTask 删除任务}({@link DeleteTaskRequest 请求参数}): {@link DeleteTaskResponse 返回参数} */
   DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;
-  /** 批量描述自定义人物分类 */
+  /** {@link DescribeCustomCategories 批量描述自定义人物分类}({@link DescribeCustomCategoriesRequest 请求参数}): {@link DescribeCustomCategoriesResponse 返回参数} */
   DescribeCustomCategories(data?: DescribeCustomCategoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomCategoriesResponse>;
-  /** 描述自定义人物库 */
+  /** {@link DescribeCustomGroup 描述自定义人物库}({@link DescribeCustomGroupRequest 请求参数}): {@link DescribeCustomGroupResponse 返回参数} */
   DescribeCustomGroup(data?: DescribeCustomGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomGroupResponse>;
-  /** 描述自定义人物详细信息 */
+  /** {@link DescribeCustomPersonDetail 描述自定义人物详细信息}({@link DescribeCustomPersonDetailRequest 请求参数}): {@link DescribeCustomPersonDetailResponse 返回参数} */
   DescribeCustomPersonDetail(data: DescribeCustomPersonDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomPersonDetailResponse>;
-  /** 批量描述自定义人物 */
+  /** {@link DescribeCustomPersons 批量描述自定义人物}({@link DescribeCustomPersonsRequest 请求参数}): {@link DescribeCustomPersonsResponse 返回参数} */
   DescribeCustomPersons(data: DescribeCustomPersonsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomPersonsResponse>;
-  /** 描述媒资文件 */
+  /** {@link DescribeMedia 描述媒资文件}({@link DescribeMediaRequest 请求参数}): {@link DescribeMediaResponse 返回参数} */
   DescribeMedia(data: DescribeMediaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaResponse>;
-  /** 批量描述媒资文件 */
+  /** {@link DescribeMedias 批量描述媒资文件}({@link DescribeMediasRequest 请求参数}): {@link DescribeMediasResponse 返回参数} */
   DescribeMedias(data: DescribeMediasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediasResponse>;
-  /** 描述任务 */
+  /** {@link DescribeTask 描述任务}({@link DescribeTaskRequest 请求参数}): {@link DescribeTaskResponse 返回参数} */
   DescribeTask(data: DescribeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResponse>;
-  /** 描述任务与任务结果 */
+  /** {@link DescribeTaskDetail 描述任务与任务结果}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** 批量描述任务 */
+  /** {@link DescribeTasks 批量描述任务}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** 导入媒资文件 */
+  /** {@link ImportMedia 导入媒资文件}({@link ImportMediaRequest 请求参数}): {@link ImportMediaResponse 返回参数} */
   ImportMedia(data: ImportMediaRequest, config?: AxiosRequestConfig): AxiosPromise<ImportMediaResponse>;
-  /** 编辑回调地址 */
+  /** {@link ModifyCallback 编辑回调地址}({@link ModifyCallbackRequest 请求参数}): {@link ModifyCallbackResponse 返回参数} */
   ModifyCallback(data: ModifyCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCallbackResponse>;
-  /** 查询回调设置 */
+  /** {@link QueryCallback 查询回调设置}({@link QueryCallbackRequest 请求参数}): {@link QueryCallbackResponse 返回参数} */
   QueryCallback(data?: QueryCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCallbackResponse>;
-  /** 更新自定义人物分类 */
+  /** {@link UpdateCustomCategory 更新自定义人物分类}({@link UpdateCustomCategoryRequest 请求参数}): {@link UpdateCustomCategoryResponse 返回参数} */
   UpdateCustomCategory(data: UpdateCustomCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCustomCategoryResponse>;
-  /** 更新自定义人物信息 */
+  /** {@link UpdateCustomPerson 更新自定义人物信息}({@link UpdateCustomPersonRequest 请求参数}): {@link UpdateCustomPersonResponse 返回参数} */
   UpdateCustomPerson(data: UpdateCustomPersonRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCustomPersonResponse>;
 }
 

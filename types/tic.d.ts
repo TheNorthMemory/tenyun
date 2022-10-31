@@ -274,34 +274,34 @@ declare interface UpdateStackVersionResponse {
   RequestId?: string;
 }
 
-/** [腾讯云IaC平台](https://cloud.tencent.com/document/product/1213) */
+/** {@link Tic 资源编排 TIC} */
 declare interface Tic {
   (): Versions;
-  /** 执行Apply事件 */
+  /** {@link ApplyStack 执行Apply事件}({@link ApplyStackRequest 请求参数}): {@link ApplyStackResponse 返回参数} */
   ApplyStack(data: ApplyStackRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyStackResponse>;
-  /** 创建资源栈 */
+  /** {@link CreateStack 创建资源栈}({@link CreateStackRequest 请求参数}): {@link CreateStackResponse 返回参数} */
   CreateStack(data: CreateStackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStackResponse>;
-  /** 给资源栈新增一个版本 */
+  /** {@link CreateStackVersion 给资源栈新增一个版本}({@link CreateStackVersionRequest 请求参数}): {@link CreateStackVersionResponse 返回参数} */
   CreateStackVersion(data: CreateStackVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStackVersionResponse>;
-  /** 删除资源栈 */
+  /** {@link DeleteStack 删除资源栈}({@link DeleteStackRequest 请求参数}): {@link DeleteStackResponse 返回参数} */
   DeleteStack(data: DeleteStackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStackResponse>;
-  /** 删除一个版本 */
+  /** {@link DeleteStackVersion 删除一个版本}({@link DeleteStackVersionRequest 请求参数}): {@link DeleteStackVersionResponse 返回参数} */
   DeleteStackVersion(data: DeleteStackVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStackVersionResponse>;
-  /** 获取单个事件详情 */
+  /** {@link DescribeStackEvent 获取单个事件详情}({@link DescribeStackEventRequest 请求参数}): {@link DescribeStackEventResponse 返回参数} */
   DescribeStackEvent(data: DescribeStackEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStackEventResponse>;
-  /** 查询事件列表 */
+  /** {@link DescribeStackEvents 查询事件列表}({@link DescribeStackEventsRequest 请求参数}): {@link DescribeStackEventsResponse 返回参数} */
   DescribeStackEvents(data?: DescribeStackEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStackEventsResponse>;
-  /** 查询版本列表 */
+  /** {@link DescribeStackVersions 查询版本列表}({@link DescribeStackVersionsRequest 请求参数}): {@link DescribeStackVersionsResponse 返回参数} */
   DescribeStackVersions(data?: DescribeStackVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStackVersionsResponse>;
-  /** 查询资源栈列表 */
+  /** {@link DescribeStacks 查询资源栈列表}({@link DescribeStacksRequest 请求参数}): {@link DescribeStacksResponse 返回参数} */
   DescribeStacks(data?: DescribeStacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStacksResponse>;
-  /** 执行Destroy事件 */
+  /** {@link DestroyStack 执行Destroy事件}({@link DestroyStackRequest 请求参数}): {@link DestroyStackResponse 返回参数} */
   DestroyStack(data: DestroyStackRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyStackResponse>;
-  /** 执行Plan事件 */
+  /** {@link PlanStack 执行Plan事件}({@link PlanStackRequest 请求参数}): {@link PlanStackResponse 返回参数} */
   PlanStack(data: PlanStackRequest, config?: AxiosRequestConfig): AxiosPromise<PlanStackResponse>;
-  /** 更新资源栈 */
+  /** {@link UpdateStack 更新资源栈}({@link UpdateStackRequest 请求参数}): {@link UpdateStackResponse 返回参数} */
   UpdateStack(data: UpdateStackRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateStackResponse>;
-  /** 更新资源栈版本的内容 */
+  /** {@link UpdateStackVersion 更新资源栈版本的内容}({@link UpdateStackVersionRequest 请求参数}): {@link UpdateStackVersionResponse 返回参数} */
   UpdateStackVersion(data: UpdateStackVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateStackVersionResponse>;
 }
 

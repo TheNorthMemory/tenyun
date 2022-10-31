@@ -1660,144 +1660,144 @@ declare interface TerminateInstancesResponse {
   RequestId?: string;
 }
 
-/** [轻量应用服务器](https://cloud.tencent.com/document/product/1207) */
+/** {@link Lighthouse 轻量应用服务器} */
 declare interface Lighthouse {
   (): Versions;
-  /** 回滚实例快照 */
+  /** {@link ApplyInstanceSnapshot 回滚实例快照}({@link ApplyInstanceSnapshotRequest 请求参数}): {@link ApplyInstanceSnapshotResponse 返回参数} */
   ApplyInstanceSnapshot(data: ApplyInstanceSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyInstanceSnapshotResponse>;
-  /** 绑定密钥对 */
+  /** {@link AssociateInstancesKeyPairs 绑定密钥对}({@link AssociateInstancesKeyPairsRequest 请求参数}): {@link AssociateInstancesKeyPairsResponse 返回参数} */
   AssociateInstancesKeyPairs(data: AssociateInstancesKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateInstancesKeyPairsResponse>;
-  /** 关联云联网 */
+  /** {@link AttachCcn 关联云联网}({@link AttachCcnRequest 请求参数}): {@link AttachCcnResponse 返回参数} */
   AttachCcn(data: AttachCcnRequest, config?: AxiosRequestConfig): AxiosPromise<AttachCcnResponse>;
-  /** 挂载云硬盘 */
+  /** {@link AttachDisks 挂载云硬盘}({@link AttachDisksRequest 请求参数}): {@link AttachDisksResponse 返回参数} */
   AttachDisks(data: AttachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<AttachDisksResponse>;
-  /** 创建镜像 */
+  /** {@link CreateBlueprint 创建镜像}({@link CreateBlueprintRequest 请求参数}): {@link CreateBlueprintResponse 返回参数} */
   CreateBlueprint(data: CreateBlueprintRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlueprintResponse>;
-  /** 添加防火墙规则 */
+  /** {@link CreateFirewallRules 添加防火墙规则}({@link CreateFirewallRulesRequest 请求参数}): {@link CreateFirewallRulesResponse 返回参数} */
   CreateFirewallRules(data: CreateFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFirewallRulesResponse>;
-  /** 创建实例快照 */
+  /** {@link CreateInstanceSnapshot 创建实例快照}({@link CreateInstanceSnapshotRequest 请求参数}): {@link CreateInstanceSnapshotResponse 返回参数} */
   CreateInstanceSnapshot(data: CreateInstanceSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceSnapshotResponse>;
-  /** 创建实例 */
+  /** {@link CreateInstances 创建实例}({@link CreateInstancesRequest 请求参数}): {@link CreateInstancesResponse 返回参数} */
   CreateInstances(data: CreateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancesResponse>;
-  /** 创建密钥对 */
+  /** {@link CreateKeyPair 创建密钥对}({@link CreateKeyPairRequest 请求参数}): {@link CreateKeyPairResponse 返回参数} */
   CreateKeyPair(data: CreateKeyPairRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKeyPairResponse>;
-  /** 删除镜像 */
+  /** {@link DeleteBlueprints 删除镜像}({@link DeleteBlueprintsRequest 请求参数}): {@link DeleteBlueprintsResponse 返回参数} */
   DeleteBlueprints(data: DeleteBlueprintsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlueprintsResponse>;
-  /** 删除防火墙规则 */
+  /** {@link DeleteFirewallRules 删除防火墙规则}({@link DeleteFirewallRulesRequest 请求参数}): {@link DeleteFirewallRulesResponse 返回参数} */
   DeleteFirewallRules(data: DeleteFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFirewallRulesResponse>;
-  /** 删除密钥对 */
+  /** {@link DeleteKeyPairs 删除密钥对}({@link DeleteKeyPairsRequest 请求参数}): {@link DeleteKeyPairsResponse 返回参数} */
   DeleteKeyPairs(data: DeleteKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKeyPairsResponse>;
-  /** 删除快照 */
+  /** {@link DeleteSnapshots 删除快照}({@link DeleteSnapshotsRequest 请求参数}): {@link DeleteSnapshotsResponse 返回参数} */
   DeleteSnapshots(data: DeleteSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotsResponse>;
-  /** 查询镜像实例信息 */
+  /** {@link DescribeBlueprintInstances 查询镜像实例信息}({@link DescribeBlueprintInstancesRequest 请求参数}): {@link DescribeBlueprintInstancesResponse 返回参数} */
   DescribeBlueprintInstances(data: DescribeBlueprintInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlueprintInstancesResponse>;
-  /** 查询镜像信息 */
+  /** {@link DescribeBlueprints 查询镜像信息}({@link DescribeBlueprintsRequest 请求参数}): {@link DescribeBlueprintsResponse 返回参数} */
   DescribeBlueprints(data?: DescribeBlueprintsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlueprintsResponse>;
-  /** 查询套餐折扣 */
+  /** {@link DescribeBundleDiscount 查询套餐折扣}({@link DescribeBundleDiscountRequest 请求参数}): {@link DescribeBundleDiscountResponse 返回参数} */
   DescribeBundleDiscount(data: DescribeBundleDiscountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBundleDiscountResponse>;
-  /** 查询套餐 */
+  /** {@link DescribeBundles 查询套餐}({@link DescribeBundlesRequest 请求参数}): {@link DescribeBundlesResponse 返回参数} */
   DescribeBundles(data?: DescribeBundlesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBundlesResponse>;
-  /** 查询云联网关联的实例信息 */
+  /** {@link DescribeCcnAttachedInstances 查询云联网关联的实例信息}({@link DescribeCcnAttachedInstancesRequest 请求参数}): {@link DescribeCcnAttachedInstancesResponse 返回参数} */
   DescribeCcnAttachedInstances(data?: DescribeCcnAttachedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnAttachedInstancesResponse>;
-  /** 查看云硬盘配置 */
+  /** {@link DescribeDiskConfigs 查看云硬盘配置}({@link DescribeDiskConfigsRequest 请求参数}): {@link DescribeDiskConfigsResponse 返回参数} */
   DescribeDiskConfigs(data?: DescribeDiskConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskConfigsResponse>;
-  /** 查询云硬盘折扣信息 */
+  /** {@link DescribeDiskDiscount 查询云硬盘折扣信息}({@link DescribeDiskDiscountRequest 请求参数}): {@link DescribeDiskDiscountResponse 返回参数} */
   DescribeDiskDiscount(data: DescribeDiskDiscountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskDiscountResponse>;
-  /** 查询云硬盘 */
+  /** {@link DescribeDisks 查询云硬盘}({@link DescribeDisksRequest 请求参数}): {@link DescribeDisksResponse 返回参数} */
   DescribeDisks(data?: DescribeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksResponse>;
-  /** 查询云硬盘操作限制列表信息 */
+  /** {@link DescribeDisksDeniedActions 查询云硬盘操作限制列表信息}({@link DescribeDisksDeniedActionsRequest 请求参数}): {@link DescribeDisksDeniedActionsResponse 返回参数} */
   DescribeDisksDeniedActions(data: DescribeDisksDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksDeniedActionsResponse>;
-  /** 查看云硬盘是否可退还 */
+  /** {@link DescribeDisksReturnable 查看云硬盘是否可退还}({@link DescribeDisksReturnableRequest 请求参数}): {@link DescribeDisksReturnableResponse 返回参数} */
   DescribeDisksReturnable(data?: DescribeDisksReturnableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksReturnableResponse>;
-  /** 查询防火墙规则 */
+  /** {@link DescribeFirewallRules 查询防火墙规则}({@link DescribeFirewallRulesRequest 请求参数}): {@link DescribeFirewallRulesResponse 返回参数} */
   DescribeFirewallRules(data: DescribeFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirewallRulesResponse>;
-  /** 查询防火墙规则模板 */
+  /** {@link DescribeFirewallRulesTemplate 查询防火墙规则模板}({@link DescribeFirewallRulesTemplateRequest 请求参数}): {@link DescribeFirewallRulesTemplateResponse 返回参数} */
   DescribeFirewallRulesTemplate(data?: DescribeFirewallRulesTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirewallRulesTemplateResponse>;
-  /** 查询通用资源配额信息 */
+  /** {@link DescribeGeneralResourceQuotas 查询通用资源配额信息}({@link DescribeGeneralResourceQuotasRequest 请求参数}): {@link DescribeGeneralResourceQuotasResponse 返回参数} */
   DescribeGeneralResourceQuotas(data: DescribeGeneralResourceQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralResourceQuotasResponse>;
-  /** 查询实例默认登录密钥属性 */
+  /** {@link DescribeInstanceLoginKeyPairAttribute 查询实例默认登录密钥属性}({@link DescribeInstanceLoginKeyPairAttributeRequest 请求参数}): {@link DescribeInstanceLoginKeyPairAttributeResponse 返回参数} */
   DescribeInstanceLoginKeyPairAttribute(data: DescribeInstanceLoginKeyPairAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLoginKeyPairAttributeResponse>;
-  /** 查询实例管理终端地址 */
+  /** {@link DescribeInstanceVncUrl 查询实例管理终端地址}({@link DescribeInstanceVncUrlRequest 请求参数}): {@link DescribeInstanceVncUrlResponse 返回参数} */
   DescribeInstanceVncUrl(data: DescribeInstanceVncUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceVncUrlResponse>;
-  /** 查看实例列表 */
+  /** {@link DescribeInstances 查看实例列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** 查看实例操作限制列表 */
+  /** {@link DescribeInstancesDeniedActions 查看实例操作限制列表}({@link DescribeInstancesDeniedActionsRequest 请求参数}): {@link DescribeInstancesDeniedActionsResponse 返回参数} */
   DescribeInstancesDeniedActions(data: DescribeInstancesDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDeniedActionsResponse>;
-  /** 查询实例挂载云硬盘数量 */
+  /** {@link DescribeInstancesDiskNum 查询实例挂载云硬盘数量}({@link DescribeInstancesDiskNumRequest 请求参数}): {@link DescribeInstancesDiskNumResponse 返回参数} */
   DescribeInstancesDiskNum(data: DescribeInstancesDiskNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDiskNumResponse>;
-  /** 查询实例是否可退还 */
+  /** {@link DescribeInstancesReturnable 查询实例是否可退还}({@link DescribeInstancesReturnableRequest 请求参数}): {@link DescribeInstancesReturnableResponse 返回参数} */
   DescribeInstancesReturnable(data?: DescribeInstancesReturnableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesReturnableResponse>;
-  /** 查看实例流量包详情 */
+  /** {@link DescribeInstancesTrafficPackages 查看实例流量包详情}({@link DescribeInstancesTrafficPackagesRequest 请求参数}): {@link DescribeInstancesTrafficPackagesResponse 返回参数} */
   DescribeInstancesTrafficPackages(data?: DescribeInstancesTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesTrafficPackagesResponse>;
-  /** 查询用户密钥对列表 */
+  /** {@link DescribeKeyPairs 查询用户密钥对列表}({@link DescribeKeyPairsRequest 请求参数}): {@link DescribeKeyPairsResponse 返回参数} */
   DescribeKeyPairs(data?: DescribeKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeyPairsResponse>;
-  /** 查询实例可变更套餐列表 */
+  /** {@link DescribeModifyInstanceBundles 查询实例可变更套餐列表}({@link DescribeModifyInstanceBundlesRequest 请求参数}): {@link DescribeModifyInstanceBundlesResponse 返回参数} */
   DescribeModifyInstanceBundles(data: DescribeModifyInstanceBundlesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModifyInstanceBundlesResponse>;
-  /** 查询地域列表 */
+  /** {@link DescribeRegions 查询地域列表}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** 查询重置实例的镜像信息 */
+  /** {@link DescribeResetInstanceBlueprints 查询重置实例的镜像信息}({@link DescribeResetInstanceBlueprintsRequest 请求参数}): {@link DescribeResetInstanceBlueprintsResponse 返回参数} */
   DescribeResetInstanceBlueprints(data: DescribeResetInstanceBlueprintsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResetInstanceBlueprintsResponse>;
-  /** 查看快照列表 */
+  /** {@link DescribeSnapshots 查看快照列表}({@link DescribeSnapshotsRequest 请求参数}): {@link DescribeSnapshotsResponse 返回参数} */
   DescribeSnapshots(data?: DescribeSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsResponse>;
-  /** 查看快照操作限制列表 */
+  /** {@link DescribeSnapshotsDeniedActions 查看快照操作限制列表}({@link DescribeSnapshotsDeniedActionsRequest 请求参数}): {@link DescribeSnapshotsDeniedActionsResponse 返回参数} */
   DescribeSnapshotsDeniedActions(data: DescribeSnapshotsDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsDeniedActionsResponse>;
-  /** 查询可用区列表 */
+  /** {@link DescribeZones 查询可用区列表}({@link DescribeZonesRequest 请求参数}): {@link DescribeZonesResponse 返回参数} */
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
-  /** 解关联云联网 */
+  /** {@link DetachCcn 解关联云联网}({@link DetachCcnRequest 请求参数}): {@link DetachCcnResponse 返回参数} */
   DetachCcn(data: DetachCcnRequest, config?: AxiosRequestConfig): AxiosPromise<DetachCcnResponse>;
-  /** 卸载云硬盘 */
+  /** {@link DetachDisks 卸载云硬盘}({@link DetachDisksRequest 请求参数}): {@link DetachDisksResponse 返回参数} */
   DetachDisks(data: DetachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DetachDisksResponse>;
-  /** 解绑密钥对 */
+  /** {@link DisassociateInstancesKeyPairs 解绑密钥对}({@link DisassociateInstancesKeyPairsRequest 请求参数}): {@link DisassociateInstancesKeyPairsResponse 返回参数} */
   DisassociateInstancesKeyPairs(data: DisassociateInstancesKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateInstancesKeyPairsResponse>;
-  /** 导入密钥对 */
+  /** {@link ImportKeyPair 导入密钥对}({@link ImportKeyPairRequest 请求参数}): {@link ImportKeyPairResponse 返回参数} */
   ImportKeyPair(data: ImportKeyPairRequest, config?: AxiosRequestConfig): AxiosPromise<ImportKeyPairResponse>;
-  /** 创建镜像询价 */
+  /** {@link InquirePriceCreateBlueprint 创建镜像询价}({@link InquirePriceCreateBlueprintRequest 请求参数}): {@link InquirePriceCreateBlueprintResponse 返回参数} */
   InquirePriceCreateBlueprint(data?: InquirePriceCreateBlueprintRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateBlueprintResponse>;
-  /** 新购云硬盘询价 */
+  /** {@link InquirePriceCreateDisks 新购云硬盘询价}({@link InquirePriceCreateDisksRequest 请求参数}): {@link InquirePriceCreateDisksResponse 返回参数} */
   InquirePriceCreateDisks(data: InquirePriceCreateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateDisksResponse>;
-  /** 创建实例询价 */
+  /** {@link InquirePriceCreateInstances 创建实例询价}({@link InquirePriceCreateInstancesRequest 请求参数}): {@link InquirePriceCreateInstancesResponse 返回参数} */
   InquirePriceCreateInstances(data: InquirePriceCreateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateInstancesResponse>;
-  /** 续费云硬盘询价 */
+  /** {@link InquirePriceRenewDisks 续费云硬盘询价}({@link InquirePriceRenewDisksRequest 请求参数}): {@link InquirePriceRenewDisksResponse 返回参数} */
   InquirePriceRenewDisks(data: InquirePriceRenewDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewDisksResponse>;
-  /** 续费实例询价 */
+  /** {@link InquirePriceRenewInstances 续费实例询价}({@link InquirePriceRenewInstancesRequest 请求参数}): {@link InquirePriceRenewInstancesResponse 返回参数} */
   InquirePriceRenewInstances(data: InquirePriceRenewInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewInstancesResponse>;
-  /** 隔离实例 */
+  /** {@link IsolateInstances 隔离实例}({@link IsolateInstancesRequest 请求参数}): {@link IsolateInstancesResponse 返回参数} */
   IsolateInstances(data: IsolateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateInstancesResponse>;
-  /** 修改镜像属性 */
+  /** {@link ModifyBlueprintAttribute 修改镜像属性}({@link ModifyBlueprintAttributeRequest 请求参数}): {@link ModifyBlueprintAttributeResponse 返回参数} */
   ModifyBlueprintAttribute(data: ModifyBlueprintAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlueprintAttributeResponse>;
-  /** 修改云硬盘属性 */
+  /** {@link ModifyDisksAttribute 修改云硬盘属性}({@link ModifyDisksAttributeRequest 请求参数}): {@link ModifyDisksAttributeResponse 返回参数} */
   ModifyDisksAttribute(data: ModifyDisksAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisksAttributeResponse>;
-  /** 修改云硬盘续费标识 */
+  /** {@link ModifyDisksRenewFlag 修改云硬盘续费标识}({@link ModifyDisksRenewFlagRequest 请求参数}): {@link ModifyDisksRenewFlagResponse 返回参数} */
   ModifyDisksRenewFlag(data: ModifyDisksRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisksRenewFlagResponse>;
-  /** 修改防火墙规则描述 */
+  /** {@link ModifyFirewallRuleDescription 修改防火墙规则描述}({@link ModifyFirewallRuleDescriptionRequest 请求参数}): {@link ModifyFirewallRuleDescriptionResponse 返回参数} */
   ModifyFirewallRuleDescription(data: ModifyFirewallRuleDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFirewallRuleDescriptionResponse>;
-  /** 修改防火墙规则 */
+  /** {@link ModifyFirewallRules 修改防火墙规则}({@link ModifyFirewallRulesRequest 请求参数}): {@link ModifyFirewallRulesResponse 返回参数} */
   ModifyFirewallRules(data: ModifyFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFirewallRulesResponse>;
-  /** 修改实例的属性 */
+  /** {@link ModifyInstancesAttribute 修改实例的属性}({@link ModifyInstancesAttributeRequest 请求参数}): {@link ModifyInstancesAttributeResponse 返回参数} */
   ModifyInstancesAttribute(data: ModifyInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesAttributeResponse>;
-  /** 修改实例默认登录密钥对属性 */
+  /** {@link ModifyInstancesLoginKeyPairAttribute 修改实例默认登录密钥对属性}({@link ModifyInstancesLoginKeyPairAttributeRequest 请求参数}): {@link ModifyInstancesLoginKeyPairAttributeResponse 返回参数} */
   ModifyInstancesLoginKeyPairAttribute(data: ModifyInstancesLoginKeyPairAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesLoginKeyPairAttributeResponse>;
-  /** 修改实例续费标识 */
+  /** {@link ModifyInstancesRenewFlag 修改实例续费标识}({@link ModifyInstancesRenewFlagRequest 请求参数}): {@link ModifyInstancesRenewFlagResponse 返回参数} */
   ModifyInstancesRenewFlag(data: ModifyInstancesRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesRenewFlagResponse>;
-  /** 修改快照信息 */
+  /** {@link ModifySnapshotAttribute 修改快照信息}({@link ModifySnapshotAttributeRequest 请求参数}): {@link ModifySnapshotAttributeResponse 返回参数} */
   ModifySnapshotAttribute(data: ModifySnapshotAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotAttributeResponse>;
-  /** 重启实例 */
+  /** {@link RebootInstances 重启实例}({@link RebootInstancesRequest 请求参数}): {@link RebootInstancesResponse 返回参数} */
   RebootInstances(data: RebootInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootInstancesResponse>;
-  /** 续费实例 */
+  /** {@link RenewInstances 续费实例}({@link RenewInstancesRequest 请求参数}): {@link RenewInstancesResponse 返回参数} */
   RenewInstances(data: RenewInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RenewInstancesResponse>;
-  /** 重新申请关联云联网 */
+  /** {@link ResetAttachCcn 重新申请关联云联网}({@link ResetAttachCcnRequest 请求参数}): {@link ResetAttachCcnResponse 返回参数} */
   ResetAttachCcn(data: ResetAttachCcnRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAttachCcnResponse>;
-  /** 重装系统 */
+  /** {@link ResetInstance 重装系统}({@link ResetInstanceRequest 请求参数}): {@link ResetInstanceResponse 返回参数} */
   ResetInstance(data: ResetInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstanceResponse>;
-  /** 重置实例密码 */
+  /** {@link ResetInstancesPassword 重置实例密码}({@link ResetInstancesPasswordRequest 请求参数}): {@link ResetInstancesPasswordResponse 返回参数} */
   ResetInstancesPassword(data: ResetInstancesPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstancesPasswordResponse>;
-  /** 启动实例 */
+  /** {@link StartInstances 启动实例}({@link StartInstancesRequest 请求参数}): {@link StartInstancesResponse 返回参数} */
   StartInstances(data: StartInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StartInstancesResponse>;
-  /** 关闭实例 */
+  /** {@link StopInstances 关闭实例}({@link StopInstancesRequest 请求参数}): {@link StopInstancesResponse 返回参数} */
   StopInstances(data: StopInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstancesResponse>;
-  /** 销毁云硬盘 */
+  /** {@link TerminateDisks 销毁云硬盘}({@link TerminateDisksRequest 请求参数}): {@link TerminateDisksResponse 返回参数} */
   TerminateDisks(data: TerminateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDisksResponse>;
-  /** 销毁实例 */
+  /** {@link TerminateInstances 销毁实例}({@link TerminateInstancesRequest 请求参数}): {@link TerminateInstancesResponse 返回参数} */
   TerminateInstances(data: TerminateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstancesResponse>;
 }
 

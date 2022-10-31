@@ -598,48 +598,48 @@ declare interface StopWorkspaceResponse {
   RequestId?: string;
 }
 
-/** [云端 IDE](https://cloud.tencent.com/document/product/1039) */
+/** {@link Cloudstudio Cloud Studio（云端 IDE）} */
 declare interface Cloudstudio {
   (): Versions;
-  /** 添加自定义模板 */
+  /** {@link CreateCustomizeTemplates 添加自定义模板}({@link CreateCustomizeTemplatesRequest 请求参数}): {@link CreateCustomizeTemplatesResponse 返回参数} */
   CreateCustomizeTemplates(data: CreateCustomizeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomizeTemplatesResponse>;
-  /** 云服务器方式创建工作空间 */
+  /** {@link CreateWorkspaceByAgent 云服务器方式创建工作空间}({@link CreateWorkspaceByAgentRequest 请求参数}): {@link CreateWorkspaceByAgentResponse 返回参数} */
   CreateWorkspaceByAgent(data: CreateWorkspaceByAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspaceByAgentResponse>;
-  /** 基于模板创建工作空间 */
+  /** {@link CreateWorkspaceByTemplate 基于模板创建工作空间}({@link CreateWorkspaceByTemplateRequest 请求参数}): {@link CreateWorkspaceByTemplateResponse 返回参数} */
   CreateWorkspaceByTemplate(data: CreateWorkspaceByTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspaceByTemplateResponse>;
-  /** 根据模板创建工作空间 */
+  /** {@link CreateWorkspaceByVersionControl 根据模板创建工作空间}({@link CreateWorkspaceByVersionControlRequest 请求参数}): {@link CreateWorkspaceByVersionControlResponse 返回参数} */
   CreateWorkspaceByVersionControl(data: CreateWorkspaceByVersionControlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspaceByVersionControlResponse>;
-  /** 删除自定义模板 */
+  /** {@link DeleteCustomizeTemplatesById 删除自定义模板}({@link DeleteCustomizeTemplatesByIdRequest 请求参数}): {@link DeleteCustomizeTemplatesByIdResponse 返回参数} */
   DeleteCustomizeTemplatesById(data: DeleteCustomizeTemplatesByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomizeTemplatesByIdResponse>;
-  /** 获取所有模板列表 */
+  /** {@link DescribeCustomizeTemplates 获取所有模板列表}({@link DescribeCustomizeTemplatesRequest 请求参数}): {@link DescribeCustomizeTemplatesResponse 返回参数} */
   DescribeCustomizeTemplates(data: DescribeCustomizeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomizeTemplatesResponse>;
-  /** 获取特定模板信息 */
+  /** {@link DescribeCustomizeTemplatesById 获取特定模板信息}({@link DescribeCustomizeTemplatesByIdRequest 请求参数}): {@link DescribeCustomizeTemplatesByIdResponse 返回参数} */
   DescribeCustomizeTemplatesById(data: DescribeCustomizeTemplatesByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomizeTemplatesByIdResponse>;
-  /** 获取创建模板的预置参数 */
+  /** {@link DescribeCustomizeTemplatesPresets 获取创建模板的预置参数}({@link DescribeCustomizeTemplatesPresetsRequest 请求参数}): {@link DescribeCustomizeTemplatesPresetsResponse 返回参数} */
   DescribeCustomizeTemplatesPresets(data: DescribeCustomizeTemplatesPresetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomizeTemplatesPresetsResponse>;
-  /** 环境列表接口 */
+  /** {@link DescribeWorkspaceEnvList 环境列表接口}({@link DescribeWorkspaceEnvListRequest 请求参数}): {@link DescribeWorkspaceEnvListResponse 返回参数} */
   DescribeWorkspaceEnvList(data: DescribeWorkspaceEnvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceEnvListResponse>;
-  /** 检查工作空间是否存在 */
+  /** {@link DescribeWorkspaceNameExist 检查工作空间是否存在}({@link DescribeWorkspaceNameExistRequest 请求参数}): {@link DescribeWorkspaceNameExistResponse 返回参数} */
   DescribeWorkspaceNameExist(data: DescribeWorkspaceNameExistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceNameExistResponse>;
-  /** 获取工作空间元信息 */
+  /** {@link DescribeWorkspaceStatus 获取工作空间元信息}({@link DescribeWorkspaceStatusRequest 请求参数}): {@link DescribeWorkspaceStatusResponse 返回参数} */
   DescribeWorkspaceStatus(data: DescribeWorkspaceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceStatusResponse>;
-  /** 获取用户工作空间列表 */
+  /** {@link DescribeWorkspaceStatusList 获取用户工作空间列表}({@link DescribeWorkspaceStatusListRequest 请求参数}): {@link DescribeWorkspaceStatusListResponse 返回参数} */
   DescribeWorkspaceStatusList(data: DescribeWorkspaceStatusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceStatusListResponse>;
-  /** 修改模板默认代码仓库 */
+  /** {@link ModifyCustomizeTemplateVersionControl 修改模板默认代码仓库}({@link ModifyCustomizeTemplateVersionControlRequest 请求参数}): {@link ModifyCustomizeTemplateVersionControlResponse 返回参数} */
   ModifyCustomizeTemplateVersionControl(data: ModifyCustomizeTemplateVersionControlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizeTemplateVersionControlResponse>;
-  /** 全量修改自定义模板，不忽略空 */
+  /** {@link ModifyCustomizeTemplatesFullById 全量修改自定义模板，不忽略空}({@link ModifyCustomizeTemplatesFullByIdRequest 请求参数}): {@link ModifyCustomizeTemplatesFullByIdResponse 返回参数} */
   ModifyCustomizeTemplatesFullById(data: ModifyCustomizeTemplatesFullByIdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizeTemplatesFullByIdResponse>;
-  /** 全量修改自定义模板，忽略空 */
+  /** {@link ModifyCustomizeTemplatesPartById 全量修改自定义模板，忽略空}({@link ModifyCustomizeTemplatesPartByIdRequest 请求参数}): {@link ModifyCustomizeTemplatesPartByIdResponse 返回参数} */
   ModifyCustomizeTemplatesPartById(data: ModifyCustomizeTemplatesPartByIdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizeTemplatesPartByIdResponse>;
-  /** 修改工作空间的名称和描述 */
+  /** {@link ModifyWorkspaceAttributes 修改工作空间的名称和描述}({@link ModifyWorkspaceAttributesRequest 请求参数}): {@link ModifyWorkspaceAttributesResponse 返回参数} */
   ModifyWorkspaceAttributes(data: ModifyWorkspaceAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkspaceAttributesResponse>;
-  /** 恢复工作空间 */
+  /** {@link RecoverWorkspace 恢复工作空间}({@link RecoverWorkspaceRequest 请求参数}): {@link RecoverWorkspaceResponse 返回参数} */
   RecoverWorkspace(data: RecoverWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverWorkspaceResponse>;
-  /** 删除工作空间 */
+  /** {@link RemoveWorkspace 删除工作空间}({@link RemoveWorkspaceRequest 请求参数}): {@link RemoveWorkspaceResponse 返回参数} */
   RemoveWorkspace(data: RemoveWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveWorkspaceResponse>;
-  /** 运行空间 */
+  /** {@link RunWorkspace 运行空间}({@link RunWorkspaceRequest 请求参数}): {@link RunWorkspaceResponse 返回参数} */
   RunWorkspace(data: RunWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<RunWorkspaceResponse>;
-  /** 停止运行空间 */
+  /** {@link StopWorkspace 停止运行空间}({@link StopWorkspaceRequest 请求参数}): {@link StopWorkspaceResponse 返回参数} */
   StopWorkspace(data: StopWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<StopWorkspaceResponse>;
 }
 

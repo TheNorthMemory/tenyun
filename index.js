@@ -102,7 +102,7 @@ export const SERVICE_VERSIONS = {
   drm: ['2018-11-15'],
   ds: ['2018-05-23'],
   dtf: ['2020-05-06'],
-  dts: ['2018-03-30'],
+  dts: ['2021-12-06', '2018-03-30'],
   eb: ['2021-04-16'],
   ecc: ['2018-12-13'],
   ecdn: ['2019-10-12'],
@@ -244,9 +244,9 @@ export const SERVICE_VERSIONS = {
   zj: ['2019-01-21'],
 };
 
-const hash = { [SHA256](thing) { return createHash(SHA256).update(thing).digest(HEX); } };
+const hash = { [SHA256]: (thing) => createHash(SHA256).update(thing).digest(HEX) };
 
-const hmac = { [SHA256](thing, key) { return createHmac(SHA256, key).update(thing).digest(); } };
+const hmac = { [SHA256]: (thing, key) => createHmac(SHA256, key).update(thing).digest() };
 
 const ksort = (things = {}) => Object.entries(things).map(([k, v]) => [k, v].map((x) => `${x}`.trim().toLowerCase())).sort(([a], [b]) => (a === b ? 0 : (a > b ? 1 : -1)));
 

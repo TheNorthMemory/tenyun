@@ -240,19 +240,19 @@ declare interface InquiryPriceCreateCisResponse {
 
 declare interface Cis {
   (): Versions;
-  /** 创建容器实例 */
+  /** {@link CreateContainerInstance 创建容器实例}({@link CreateContainerInstanceRequest 请求参数}): {@link CreateContainerInstanceResponse 返回参数} */
   CreateContainerInstance(data: CreateContainerInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContainerInstanceResponse>;
-  /** 删除容器实例 */
+  /** {@link DeleteContainerInstance 删除容器实例}({@link DeleteContainerInstanceRequest 请求参数}): {@link DeleteContainerInstanceResponse 返回参数} */
   DeleteContainerInstance(data: DeleteContainerInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteContainerInstanceResponse>;
-  /** 获取容器实例信息 */
+  /** {@link DescribeContainerInstance 获取容器实例信息}({@link DescribeContainerInstanceRequest 请求参数}): {@link DescribeContainerInstanceResponse 返回参数} */
   DescribeContainerInstance(data: DescribeContainerInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerInstanceResponse>;
-  /** 查询容器实例事件 */
+  /** {@link DescribeContainerInstanceEvents 查询容器实例事件}({@link DescribeContainerInstanceEventsRequest 请求参数}): {@link DescribeContainerInstanceEventsResponse 返回参数} */
   DescribeContainerInstanceEvents(data: DescribeContainerInstanceEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerInstanceEventsResponse>;
-  /** 查询容器实例列表 */
+  /** {@link DescribeContainerInstances 查询容器实例列表}({@link DescribeContainerInstancesRequest 请求参数}): {@link DescribeContainerInstancesResponse 返回参数} */
   DescribeContainerInstances(data?: DescribeContainerInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerInstancesResponse>;
-  /** 获取容器日志信息 */
+  /** {@link DescribeContainerLog 获取容器日志信息}({@link DescribeContainerLogRequest 请求参数}): {@link DescribeContainerLogResponse 返回参数} */
   DescribeContainerLog(data: DescribeContainerLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerLogResponse>;
-  /** 创建容器实例询价 */
+  /** {@link InquiryPriceCreateCis 创建容器实例询价}({@link InquiryPriceCreateCisRequest 请求参数}): {@link InquiryPriceCreateCisResponse 返回参数} */
   InquiryPriceCreateCis(data: InquiryPriceCreateCisRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateCisResponse>;
 }
 

@@ -70,10 +70,10 @@ declare interface DescribeTransactionsResponse {
   RequestId?: string;
 }
 
-/** [分布式事务](https://cloud.tencent.com/document/product/1224) */
+/** {@link Dtf 分布式事务} */
 declare interface Dtf {
   (): Versions;
-  /** 查询主事务列表 */
+  /** {@link DescribeTransactions 查询主事务列表}({@link DescribeTransactionsRequest 请求参数}): {@link DescribeTransactionsResponse 返回参数} */
   DescribeTransactions(data: DescribeTransactionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTransactionsResponse>;
 }
 

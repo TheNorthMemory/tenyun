@@ -2220,106 +2220,106 @@ declare interface SearchMaterialResponse {
   RequestId?: string;
 }
 
-/** [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) */
+/** {@link Cme 多媒体创作引擎} */
 declare interface Cme {
   (): Versions;
-  /** 添加团队成员 */
+  /** {@link AddTeamMember 添加团队成员}({@link AddTeamMemberRequest 请求参数}): {@link AddTeamMemberResponse 返回参数} */
   AddTeamMember(data: AddTeamMemberRequest, config?: AxiosRequestConfig): AxiosPromise<AddTeamMemberResponse>;
-  /** 复制项目 */
+  /** {@link CopyProject 复制项目}({@link CopyProjectRequest 请求参数}): {@link CopyProjectResponse 返回参数} */
   CopyProject(data: CopyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CopyProjectResponse>;
-  /** 创建分类 */
+  /** {@link CreateClass 创建分类}({@link CreateClassRequest 请求参数}): {@link CreateClassResponse 返回参数} */
   CreateClass(data: CreateClassRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClassResponse>;
-  /** 创建链接 */
+  /** {@link CreateLink 创建链接}({@link CreateLinkRequest 请求参数}): {@link CreateLinkResponse 返回参数} */
   CreateLink(data: CreateLinkRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLinkResponse>;
-  /** 创建项目 */
+  /** {@link CreateProject 创建项目}({@link CreateProjectRequest 请求参数}): {@link CreateProjectResponse 返回参数} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
-  /** 创建团队 */
+  /** {@link CreateTeam 创建团队}({@link CreateTeamRequest 请求参数}): {@link CreateTeamResponse 返回参数} */
   CreateTeam(data: CreateTeamRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTeamResponse>;
-  /** 创建视频编码配置 */
+  /** {@link CreateVideoEncodingPreset 创建视频编码配置}({@link CreateVideoEncodingPresetRequest 请求参数}): {@link CreateVideoEncodingPresetResponse 返回参数} */
   CreateVideoEncodingPreset(data: CreateVideoEncodingPresetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoEncodingPresetResponse>;
-  /** 删除分类 */
+  /** {@link DeleteClass 删除分类}({@link DeleteClassRequest 请求参数}): {@link DeleteClassResponse 返回参数} */
   DeleteClass(data: DeleteClassRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClassResponse>;
-  /** 删除登录态 */
+  /** {@link DeleteLoginStatus 删除登录态}({@link DeleteLoginStatusRequest 请求参数}): {@link DeleteLoginStatusResponse 返回参数} */
   DeleteLoginStatus(data: DeleteLoginStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoginStatusResponse>;
-  /** 删除媒体 */
+  /** {@link DeleteMaterial 删除媒体}({@link DeleteMaterialRequest 请求参数}): {@link DeleteMaterialResponse 返回参数} */
   DeleteMaterial(data: DeleteMaterialRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMaterialResponse>;
-  /** 删除项目 */
+  /** {@link DeleteProject 删除项目}({@link DeleteProjectRequest 请求参数}): {@link DeleteProjectResponse 返回参数} */
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
-  /** 删除团队 */
+  /** {@link DeleteTeam 删除团队}({@link DeleteTeamRequest 请求参数}): {@link DeleteTeamResponse 返回参数} */
   DeleteTeam(data: DeleteTeamRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTeamResponse>;
-  /** 删除团队成员 */
+  /** {@link DeleteTeamMembers 删除团队成员}({@link DeleteTeamMembersRequest 请求参数}): {@link DeleteTeamMembersResponse 返回参数} */
   DeleteTeamMembers(data: DeleteTeamMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTeamMembersResponse>;
-  /** 删除视频编码配置 */
+  /** {@link DeleteVideoEncodingPreset 删除视频编码配置}({@link DeleteVideoEncodingPresetRequest 请求参数}): {@link DeleteVideoEncodingPresetResponse 返回参数} */
   DeleteVideoEncodingPreset(data: DeleteVideoEncodingPresetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVideoEncodingPresetResponse>;
-  /** 获取账号信息 */
+  /** {@link DescribeAccounts 获取账号信息}({@link DescribeAccountsRequest 请求参数}): {@link DescribeAccountsResponse 返回参数} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
-  /** 获取分类列表 */
+  /** {@link DescribeClass 获取分类列表}({@link DescribeClassRequest 请求参数}): {@link DescribeClassResponse 返回参数} */
   DescribeClass(data: DescribeClassRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassResponse>;
-  /** 获取成员加入的团队列表 */
+  /** {@link DescribeJoinTeams 获取成员加入的团队列表}({@link DescribeJoinTeamsRequest 请求参数}): {@link DescribeJoinTeamsResponse 返回参数} */
   DescribeJoinTeams(data: DescribeJoinTeamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJoinTeamsResponse>;
-  /** 查询登录态 */
+  /** {@link DescribeLoginStatus 查询登录态}({@link DescribeLoginStatusRequest 请求参数}): {@link DescribeLoginStatusResponse 返回参数} */
   DescribeLoginStatus(data: DescribeLoginStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginStatusResponse>;
-  /** 获取媒体详情 */
+  /** {@link DescribeMaterials 获取媒体详情}({@link DescribeMaterialsRequest 请求参数}): {@link DescribeMaterialsResponse 返回参数} */
   DescribeMaterials(data: DescribeMaterialsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaterialsResponse>;
-  /** 获取平台列表 */
+  /** {@link DescribePlatforms 获取平台列表}({@link DescribePlatformsRequest 请求参数}): {@link DescribePlatformsResponse 返回参数} */
   DescribePlatforms(data?: DescribePlatformsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlatformsResponse>;
-  /** 获取项目列表 */
+  /** {@link DescribeProjects 获取项目列表}({@link DescribeProjectsRequest 请求参数}): {@link DescribeProjectsResponse 返回参数} */
   DescribeProjects(data: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
-  /** 获取资源授权列表 */
+  /** {@link DescribeResourceAuthorization 获取资源授权列表}({@link DescribeResourceAuthorizationRequest 请求参数}): {@link DescribeResourceAuthorizationResponse 返回参数} */
   DescribeResourceAuthorization(data: DescribeResourceAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceAuthorizationResponse>;
-  /** 获取共享空间 */
+  /** {@link DescribeSharedSpace 获取共享空间}({@link DescribeSharedSpaceRequest 请求参数}): {@link DescribeSharedSpaceResponse 返回参数} */
   DescribeSharedSpace(data: DescribeSharedSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSharedSpaceResponse>;
-  /** 获取任务详情 */
+  /** {@link DescribeTaskDetail 获取任务详情}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** 获取任务列表 */
+  /** {@link DescribeTasks 获取任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
   DescribeTasks(data: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** 获取团队成员信息 */
+  /** {@link DescribeTeamMembers 获取团队成员信息}({@link DescribeTeamMembersRequest 请求参数}): {@link DescribeTeamMembersResponse 返回参数} */
   DescribeTeamMembers(data: DescribeTeamMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTeamMembersResponse>;
-  /** 获取团队信息 */
+  /** {@link DescribeTeams 获取团队信息}({@link DescribeTeamsRequest 请求参数}): {@link DescribeTeamsResponse 返回参数} */
   DescribeTeams(data: DescribeTeamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTeamsResponse>;
-  /** 查询视频编码配置 */
+  /** {@link DescribeVideoEncodingPresets 查询视频编码配置}({@link DescribeVideoEncodingPresetsRequest 请求参数}): {@link DescribeVideoEncodingPresetsResponse 返回参数} */
   DescribeVideoEncodingPresets(data: DescribeVideoEncodingPresetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoEncodingPresetsResponse>;
-  /** 使用视频合成协议导出视频 */
+  /** {@link ExportVideoByEditorTrackData 使用视频合成协议导出视频}({@link ExportVideoByEditorTrackDataRequest 请求参数}): {@link ExportVideoByEditorTrackDataResponse 返回参数} */
   ExportVideoByEditorTrackData(data: ExportVideoByEditorTrackDataRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVideoByEditorTrackDataResponse>;
-  /** 使用视频剪辑模板导出视频 */
+  /** {@link ExportVideoByTemplate 使用视频剪辑模板导出视频}({@link ExportVideoByTemplateRequest 请求参数}): {@link ExportVideoByTemplateResponse 返回参数} */
   ExportVideoByTemplate(data: ExportVideoByTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVideoByTemplateResponse>;
-  /** 使用视频智能拆条数据导出视频 */
+  /** {@link ExportVideoByVideoSegmentationData 使用视频智能拆条数据导出视频}({@link ExportVideoByVideoSegmentationDataRequest 请求参数}): {@link ExportVideoByVideoSegmentationDataResponse 返回参数} */
   ExportVideoByVideoSegmentationData(data: ExportVideoByVideoSegmentationDataRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVideoByVideoSegmentationDataResponse>;
-  /** 导出视频编辑项目 */
+  /** {@link ExportVideoEditProject 导出视频编辑项目}({@link ExportVideoEditProjectRequest 请求参数}): {@link ExportVideoEditProjectResponse 返回参数} */
   ExportVideoEditProject(data: ExportVideoEditProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVideoEditProjectResponse>;
-  /** 平铺浏览媒体 */
+  /** {@link FlattenListMedia 平铺浏览媒体}({@link FlattenListMediaRequest 请求参数}): {@link FlattenListMediaResponse 返回参数} */
   FlattenListMedia(data: FlattenListMediaRequest, config?: AxiosRequestConfig): AxiosPromise<FlattenListMediaResponse>;
-  /** 视频智能拆条 */
+  /** {@link GenerateVideoSegmentationSchemeByAi 视频智能拆条}({@link GenerateVideoSegmentationSchemeByAiRequest 请求参数}): {@link GenerateVideoSegmentationSchemeByAiResponse 返回参数} */
   GenerateVideoSegmentationSchemeByAi(data: GenerateVideoSegmentationSchemeByAiRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateVideoSegmentationSchemeByAiResponse>;
-  /** 发起媒资授权 */
+  /** {@link GrantResourceAuthorization 发起媒资授权}({@link GrantResourceAuthorizationRequest 请求参数}): {@link GrantResourceAuthorizationResponse 返回参数} */
   GrantResourceAuthorization(data: GrantResourceAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<GrantResourceAuthorizationResponse>;
-  /** 操作云转推项目 */
+  /** {@link HandleStreamConnectProject 操作云转推项目}({@link HandleStreamConnectProjectRequest 请求参数}): {@link HandleStreamConnectProjectResponse 返回参数} */
   HandleStreamConnectProject(data: HandleStreamConnectProjectRequest, config?: AxiosRequestConfig): AxiosPromise<HandleStreamConnectProjectResponse>;
-  /** 导入媒体 */
+  /** {@link ImportMaterial 导入媒体}({@link ImportMaterialRequest 请求参数}): {@link ImportMaterialResponse 返回参数} */
   ImportMaterial(data: ImportMaterialRequest, config?: AxiosRequestConfig): AxiosPromise<ImportMaterialResponse>;
-  /** 在项目中导入媒体 */
+  /** {@link ImportMediaToProject 在项目中导入媒体}({@link ImportMediaToProjectRequest 请求参数}): {@link ImportMediaToProjectResponse 返回参数} */
   ImportMediaToProject(data: ImportMediaToProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ImportMediaToProjectResponse>;
-  /** 浏览媒体 */
+  /** {@link ListMedia 浏览媒体}({@link ListMediaRequest 请求参数}): {@link ListMediaResponse 返回参数} */
   ListMedia(data: ListMediaRequest, config?: AxiosRequestConfig): AxiosPromise<ListMediaResponse>;
-  /** 修改媒体信息 */
+  /** {@link ModifyMaterial 修改媒体信息}({@link ModifyMaterialRequest 请求参数}): {@link ModifyMaterialResponse 返回参数} */
   ModifyMaterial(data: ModifyMaterialRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaterialResponse>;
-  /** 修改项目 */
+  /** {@link ModifyProject 修改项目}({@link ModifyProjectRequest 请求参数}): {@link ModifyProjectResponse 返回参数} */
   ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
-  /** 修改团队信息 */
+  /** {@link ModifyTeam 修改团队信息}({@link ModifyTeamRequest 请求参数}): {@link ModifyTeamResponse 返回参数} */
   ModifyTeam(data: ModifyTeamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTeamResponse>;
-  /** 修改团队成员 */
+  /** {@link ModifyTeamMember 修改团队成员}({@link ModifyTeamMemberRequest 请求参数}): {@link ModifyTeamMemberResponse 返回参数} */
   ModifyTeamMember(data: ModifyTeamMemberRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTeamMemberResponse>;
-  /** 修改视频编码配置 */
+  /** {@link ModifyVideoEncodingPreset 修改视频编码配置}({@link ModifyVideoEncodingPresetRequest 请求参数}): {@link ModifyVideoEncodingPresetResponse 返回参数} */
   ModifyVideoEncodingPreset(data: ModifyVideoEncodingPresetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVideoEncodingPresetResponse>;
-  /** 移动分类 */
+  /** {@link MoveClass 移动分类}({@link MoveClassRequest 请求参数}): {@link MoveClassResponse 返回参数} */
   MoveClass(data: MoveClassRequest, config?: AxiosRequestConfig): AxiosPromise<MoveClassResponse>;
-  /** 移动资源 */
+  /** {@link MoveResource 移动资源}({@link MoveResourceRequest 请求参数}): {@link MoveResourceResponse 返回参数} */
   MoveResource(data: MoveResourceRequest, config?: AxiosRequestConfig): AxiosPromise<MoveResourceResponse>;
-  /** 回调事件内容解析 */
+  /** {@link ParseEvent 回调事件内容解析}({@link ParseEventRequest 请求参数}): {@link ParseEventResponse 返回参数} */
   ParseEvent(data: ParseEventRequest, config?: AxiosRequestConfig): AxiosPromise<ParseEventResponse>;
-  /** 撤销资源授权 */
+  /** {@link RevokeResourceAuthorization 撤销资源授权}({@link RevokeResourceAuthorizationRequest 请求参数}): {@link RevokeResourceAuthorizationResponse 返回参数} */
   RevokeResourceAuthorization(data: RevokeResourceAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeResourceAuthorizationResponse>;
-  /** 搜索媒体 */
+  /** {@link SearchMaterial 搜索媒体}({@link SearchMaterialRequest 请求参数}): {@link SearchMaterialResponse 返回参数} */
   SearchMaterial(data: SearchMaterialRequest, config?: AxiosRequestConfig): AxiosPromise<SearchMaterialResponse>;
 }
 

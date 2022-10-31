@@ -492,28 +492,28 @@ declare interface UpdateEngineInternetAccessResponse {
   RequestId?: string;
 }
 
-/** [腾讯云微服务引擎](https://cloud.tencent.com/document/product/1364) */
+/** {@link Tse 微服务引擎 TSE} */
 declare interface Tse {
   (): Versions;
-  /** 创建引擎实例 */
+  /** {@link CreateEngine 创建引擎实例}({@link CreateEngineRequest 请求参数}): {@link CreateEngineResponse 返回参数} */
   CreateEngine(data: CreateEngineRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEngineResponse>;
-  /** 删除引擎实例 */
+  /** {@link DeleteEngine 删除引擎实例}({@link DeleteEngineRequest 请求参数}): {@link DeleteEngineResponse 返回参数} */
   DeleteEngine(data: DeleteEngineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEngineResponse>;
-  /** 获取云原生网关节点列表 */
+  /** {@link DescribeCloudNativeAPIGatewayNodes 获取云原生网关节点列表}({@link DescribeCloudNativeAPIGatewayNodesRequest 请求参数}): {@link DescribeCloudNativeAPIGatewayNodesResponse 返回参数} */
   DescribeCloudNativeAPIGatewayNodes(data: DescribeCloudNativeAPIGatewayNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayNodesResponse>;
-  /** 查询Nacos类型引擎实例副本信息 */
+  /** {@link DescribeNacosReplicas 查询Nacos类型引擎实例副本信息}({@link DescribeNacosReplicasRequest 请求参数}): {@link DescribeNacosReplicasResponse 返回参数} */
   DescribeNacosReplicas(data: DescribeNacosReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNacosReplicasResponse>;
-  /** 查询nacos服务接口列表 */
+  /** {@link DescribeNacosServerInterfaces 查询nacos服务接口列表}({@link DescribeNacosServerInterfacesRequest 请求参数}): {@link DescribeNacosServerInterfacesResponse 返回参数} */
   DescribeNacosServerInterfaces(data?: DescribeNacosServerInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNacosServerInterfacesResponse>;
-  /** 查询引擎实例访问地址 */
+  /** {@link DescribeSREInstanceAccessAddress 查询引擎实例访问地址}({@link DescribeSREInstanceAccessAddressRequest 请求参数}): {@link DescribeSREInstanceAccessAddressResponse 返回参数} */
   DescribeSREInstanceAccessAddress(data?: DescribeSREInstanceAccessAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSREInstanceAccessAddressResponse>;
-  /** 查询引擎实例列表 */
+  /** {@link DescribeSREInstances 查询引擎实例列表}({@link DescribeSREInstancesRequest 请求参数}): {@link DescribeSREInstancesResponse 返回参数} */
   DescribeSREInstances(data?: DescribeSREInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSREInstancesResponse>;
-  /** 查询Zookeeper类型注册引擎实例副本信息 */
+  /** {@link DescribeZookeeperReplicas 查询Zookeeper类型注册引擎实例副本信息}({@link DescribeZookeeperReplicasRequest 请求参数}): {@link DescribeZookeeperReplicasResponse 返回参数} */
   DescribeZookeeperReplicas(data: DescribeZookeeperReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZookeeperReplicasResponse>;
-  /** 查询zookeeper服务接口列表 */
+  /** {@link DescribeZookeeperServerInterfaces 查询zookeeper服务接口列表}({@link DescribeZookeeperServerInterfacesRequest 请求参数}): {@link DescribeZookeeperServerInterfacesResponse 返回参数} */
   DescribeZookeeperServerInterfaces(data?: DescribeZookeeperServerInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZookeeperServerInterfacesResponse>;
-  /** 修改引擎公网访问配置 */
+  /** {@link UpdateEngineInternetAccess 修改引擎公网访问配置}({@link UpdateEngineInternetAccessRequest 请求参数}): {@link UpdateEngineInternetAccessResponse 返回参数} */
   UpdateEngineInternetAccess(data: UpdateEngineInternetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEngineInternetAccessResponse>;
 }
 

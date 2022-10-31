@@ -2472,180 +2472,180 @@ declare interface UpgradeVersionToMultiAvailabilityZonesResponse {
   RequestId?: string;
 }
 
-/** [云数据库 Redis](https://cloud.tencent.com/document/product/239) */
+/** {@link Redis 云数据库Redis} */
 declare interface Redis {
   (): Versions;
-  /** 添加复制组成员 */
+  /** {@link AddReplicationInstance 添加复制组成员}({@link AddReplicationInstanceRequest 请求参数}): {@link AddReplicationInstanceResponse 返回参数} */
   AddReplicationInstance(data: AddReplicationInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<AddReplicationInstanceResponse>;
-  /** 开通外网接口 */
+  /** {@link AllocateWanAddress 开通外网接口}({@link AllocateWanAddressRequest 请求参数}): {@link AllocateWanAddressResponse 返回参数} */
   AllocateWanAddress(data: AllocateWanAddressRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateWanAddressResponse>;
-  /** 应用参数模板 */
+  /** {@link ApplyParamsTemplate 应用参数模板}({@link ApplyParamsTemplateRequest 请求参数}): {@link ApplyParamsTemplateResponse 返回参数} */
   ApplyParamsTemplate(data: ApplyParamsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyParamsTemplateResponse>;
-  /** 绑定安全组 */
+  /** {@link AssociateSecurityGroups 绑定安全组}({@link AssociateSecurityGroupsRequest 请求参数}): {@link AssociateSecurityGroupsResponse 返回参数} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
-  /** 复制组实例更换角色 */
+  /** {@link ChangeInstanceRole 复制组实例更换角色}({@link ChangeInstanceRoleRequest 请求参数}): {@link ChangeInstanceRoleResponse 返回参数} */
   ChangeInstanceRole(data: ChangeInstanceRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeInstanceRoleResponse>;
-  /** 复制组实例切主 */
+  /** {@link ChangeMasterInstance 复制组实例切主}({@link ChangeMasterInstanceRequest 请求参数}): {@link ChangeMasterInstanceResponse 返回参数} */
   ChangeMasterInstance(data: ChangeMasterInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeMasterInstanceResponse>;
-  /** 副本组提主 */
+  /** {@link ChangeReplicaToMaster 副本组提主}({@link ChangeReplicaToMasterRequest 请求参数}): {@link ChangeReplicaToMasterResponse 返回参数} */
   ChangeReplicaToMaster(data: ChangeReplicaToMasterRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeReplicaToMasterResponse>;
-  /** 回收站实例立即下线 */
+  /** {@link CleanUpInstance 回收站实例立即下线}({@link CleanUpInstanceRequest 请求参数}): {@link CleanUpInstanceResponse 返回参数} */
   CleanUpInstance(data: CleanUpInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CleanUpInstanceResponse>;
-  /** 清空Redis实例 */
+  /** {@link ClearInstance 清空Redis实例}({@link ClearInstanceRequest 请求参数}): {@link ClearInstanceResponse 返回参数} */
   ClearInstance(data: ClearInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ClearInstanceResponse>;
-  /** 关闭SSL */
+  /** {@link CloseSSL 关闭SSL}({@link CloseSSLRequest 请求参数}): {@link CloseSSLResponse 返回参数} */
   CloseSSL(data: CloseSSLRequest, config?: AxiosRequestConfig): AxiosPromise<CloseSSLResponse>;
-  /** 创建实例子账号 */
+  /** {@link CreateInstanceAccount 创建实例子账号}({@link CreateInstanceAccountRequest 请求参数}): {@link CreateInstanceAccountResponse 返回参数} */
   CreateInstanceAccount(data: CreateInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceAccountResponse>;
-  /** 创建Redis实例 */
+  /** {@link CreateInstances 创建Redis实例}({@link CreateInstancesRequest 请求参数}): {@link CreateInstancesResponse 返回参数} */
   CreateInstances(data: CreateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancesResponse>;
-  /** 创建参数模板 */
+  /** {@link CreateParamTemplate 创建参数模板}({@link CreateParamTemplateRequest 请求参数}): {@link CreateParamTemplateResponse 返回参数} */
   CreateParamTemplate(data: CreateParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateParamTemplateResponse>;
-  /** 创建复制组接口 */
+  /** {@link CreateReplicationGroup 创建复制组接口}({@link CreateReplicationGroupRequest 请求参数}): {@link CreateReplicationGroupResponse 返回参数} */
   CreateReplicationGroup(data: CreateReplicationGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReplicationGroupResponse>;
-  /** 删除实例子账号 */
+  /** {@link DeleteInstanceAccount 删除实例子账号}({@link DeleteInstanceAccountRequest 请求参数}): {@link DeleteInstanceAccountResponse 返回参数} */
   DeleteInstanceAccount(data: DeleteInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceAccountResponse>;
-  /** 删除参数模板 */
+  /** {@link DeleteParamTemplate 删除参数模板}({@link DeleteParamTemplateRequest 请求参数}): {@link DeleteParamTemplateResponse 返回参数} */
   DeleteParamTemplate(data: DeleteParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteParamTemplateResponse>;
-  /** 删除复制组成员 */
+  /** {@link DeleteReplicationInstance 删除复制组成员}({@link DeleteReplicationInstanceRequest 请求参数}): {@link DeleteReplicationInstanceResponse 返回参数} */
   DeleteReplicationInstance(data: DeleteReplicationInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReplicationInstanceResponse>;
-  /** 获取自动备份配置 */
+  /** {@link DescribeAutoBackupConfig 获取自动备份配置}({@link DescribeAutoBackupConfigRequest 请求参数}): {@link DescribeAutoBackupConfigResponse 返回参数} */
   DescribeAutoBackupConfig(data: DescribeAutoBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoBackupConfigResponse>;
-  /** 查询备份Rdb下载地址 */
+  /** {@link DescribeBackupUrl 查询备份Rdb下载地址}({@link DescribeBackupUrlRequest 请求参数}): {@link DescribeBackupUrlResponse 返回参数} */
   DescribeBackupUrl(data: DescribeBackupUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupUrlResponse>;
-  /** 查询Redis实例列表信息 */
+  /** {@link DescribeCommonDBInstances 查询Redis实例列表信息}({@link DescribeCommonDBInstancesRequest 请求参数}): {@link DescribeCommonDBInstancesResponse 返回参数} */
   DescribeCommonDBInstances(data?: DescribeCommonDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCommonDBInstancesResponse>;
-  /** 查询实例安全组详情 */
+  /** {@link DescribeDBSecurityGroups 查询实例安全组详情}({@link DescribeDBSecurityGroupsRequest 请求参数}): {@link DescribeDBSecurityGroupsResponse 返回参数} */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
-  /** 查看实例子账号信息 */
+  /** {@link DescribeInstanceAccount 查看实例子账号信息}({@link DescribeInstanceAccountRequest 请求参数}): {@link DescribeInstanceAccountResponse 返回参数} */
   DescribeInstanceAccount(data: DescribeInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAccountResponse>;
-  /** 查询Redis实例备份列表 */
+  /** {@link DescribeInstanceBackups 查询Redis实例备份列表}({@link DescribeInstanceBackupsRequest 请求参数}): {@link DescribeInstanceBackupsResponse 返回参数} */
   DescribeInstanceBackups(data: DescribeInstanceBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceBackupsResponse>;
-  /** 查询实例DTS信息 */
+  /** {@link DescribeInstanceDTSInfo 查询实例DTS信息}({@link DescribeInstanceDTSInfoRequest 请求参数}): {@link DescribeInstanceDTSInfoResponse 返回参数} */
   DescribeInstanceDTSInfo(data: DescribeInstanceDTSInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDTSInfoResponse>;
-  /** 查询订单信息 */
+  /** {@link DescribeInstanceDealDetail 查询订单信息}({@link DescribeInstanceDealDetailRequest 请求参数}): {@link DescribeInstanceDealDetailResponse 返回参数} */
   DescribeInstanceDealDetail(data: DescribeInstanceDealDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDealDetailResponse>;
-  /** 查询实例大Key */
+  /** {@link DescribeInstanceMonitorBigKey 查询实例大Key}({@link DescribeInstanceMonitorBigKeyRequest 请求参数}): {@link DescribeInstanceMonitorBigKeyResponse 返回参数} */
   DescribeInstanceMonitorBigKey(data: DescribeInstanceMonitorBigKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorBigKeyResponse>;
-  /** 查询实例大Key大小分布 */
+  /** {@link DescribeInstanceMonitorBigKeySizeDist 查询实例大Key大小分布}({@link DescribeInstanceMonitorBigKeySizeDistRequest 请求参数}): {@link DescribeInstanceMonitorBigKeySizeDistResponse 返回参数} */
   DescribeInstanceMonitorBigKeySizeDist(data: DescribeInstanceMonitorBigKeySizeDistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorBigKeySizeDistResponse>;
-  /** 查询实例大Key类型分布 */
+  /** {@link DescribeInstanceMonitorBigKeyTypeDist 查询实例大Key类型分布}({@link DescribeInstanceMonitorBigKeyTypeDistRequest 请求参数}): {@link DescribeInstanceMonitorBigKeyTypeDistResponse 返回参数} */
   DescribeInstanceMonitorBigKeyTypeDist(data: DescribeInstanceMonitorBigKeyTypeDistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorBigKeyTypeDistResponse>;
-  /** 查询实例热Key */
+  /** {@link DescribeInstanceMonitorHotKey 查询实例热Key}({@link DescribeInstanceMonitorHotKeyRequest 请求参数}): {@link DescribeInstanceMonitorHotKeyResponse 返回参数} */
   DescribeInstanceMonitorHotKey(data: DescribeInstanceMonitorHotKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorHotKeyResponse>;
-  /** 查询实例访问来源信息 */
+  /** {@link DescribeInstanceMonitorSIP 查询实例访问来源信息}({@link DescribeInstanceMonitorSIPRequest 请求参数}): {@link DescribeInstanceMonitorSIPResponse 返回参数} */
   DescribeInstanceMonitorSIP(data: DescribeInstanceMonitorSIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorSIPResponse>;
-  /** 查询实例访问的耗时分布 */
+  /** {@link DescribeInstanceMonitorTookDist 查询实例访问的耗时分布}({@link DescribeInstanceMonitorTookDistRequest 请求参数}): {@link DescribeInstanceMonitorTookDistResponse 返回参数} */
   DescribeInstanceMonitorTookDist(data: DescribeInstanceMonitorTookDistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorTookDistResponse>;
-  /** 查询实例访问命令 */
+  /** {@link DescribeInstanceMonitorTopNCmd 查询实例访问命令}({@link DescribeInstanceMonitorTopNCmdRequest 请求参数}): {@link DescribeInstanceMonitorTopNCmdResponse 返回参数} */
   DescribeInstanceMonitorTopNCmd(data: DescribeInstanceMonitorTopNCmdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorTopNCmdResponse>;
-  /** 查询实例CPU耗时 */
+  /** {@link DescribeInstanceMonitorTopNCmdTook 查询实例CPU耗时}({@link DescribeInstanceMonitorTopNCmdTookRequest 请求参数}): {@link DescribeInstanceMonitorTopNCmdTookResponse 返回参数} */
   DescribeInstanceMonitorTopNCmdTook(data: DescribeInstanceMonitorTopNCmdTookRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceMonitorTopNCmdTookResponse>;
-  /** 查询实例节点信息 */
+  /** {@link DescribeInstanceNodeInfo 查询实例节点信息}({@link DescribeInstanceNodeInfoRequest 请求参数}): {@link DescribeInstanceNodeInfoResponse 返回参数} */
   DescribeInstanceNodeInfo(data: DescribeInstanceNodeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodeInfoResponse>;
-  /** 查询参数修改历史列表 */
+  /** {@link DescribeInstanceParamRecords 查询参数修改历史列表}({@link DescribeInstanceParamRecordsRequest 请求参数}): {@link DescribeInstanceParamRecordsResponse 返回参数} */
   DescribeInstanceParamRecords(data: DescribeInstanceParamRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamRecordsResponse>;
-  /** 查询实例的参数列表 */
+  /** {@link DescribeInstanceParams 查询实例的参数列表}({@link DescribeInstanceParamsRequest 请求参数}): {@link DescribeInstanceParamsResponse 返回参数} */
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
-  /** 查询实例安全组信息 */
+  /** {@link DescribeInstanceSecurityGroup 查询实例安全组信息}({@link DescribeInstanceSecurityGroupRequest 请求参数}): {@link DescribeInstanceSecurityGroupResponse 返回参数} */
   DescribeInstanceSecurityGroup(data: DescribeInstanceSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSecurityGroupResponse>;
-  /** 获取集群版实例分片信息 */
+  /** {@link DescribeInstanceShards 获取集群版实例分片信息}({@link DescribeInstanceShardsRequest 请求参数}): {@link DescribeInstanceShardsResponse 返回参数} */
   DescribeInstanceShards(data: DescribeInstanceShardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceShardsResponse>;
-  /** 查询Redis节点详细信息 */
+  /** {@link DescribeInstanceZoneInfo 查询Redis节点详细信息}({@link DescribeInstanceZoneInfoRequest 请求参数}): {@link DescribeInstanceZoneInfoResponse 返回参数} */
   DescribeInstanceZoneInfo(data?: DescribeInstanceZoneInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceZoneInfoResponse>;
-  /** 查询Redis实例列表 */
+  /** {@link DescribeInstances 查询Redis实例列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** 查询实例维护时间窗 */
+  /** {@link DescribeMaintenanceWindow 查询实例维护时间窗}({@link DescribeMaintenanceWindowRequest 请求参数}): {@link DescribeMaintenanceWindowResponse 返回参数} */
   DescribeMaintenanceWindow(data: DescribeMaintenanceWindowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaintenanceWindowResponse>;
-  /** 查询参数模板详情 */
+  /** {@link DescribeParamTemplateInfo 查询参数模板详情}({@link DescribeParamTemplateInfoRequest 请求参数}): {@link DescribeParamTemplateInfoResponse 返回参数} */
   DescribeParamTemplateInfo(data: DescribeParamTemplateInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplateInfoResponse>;
-  /** 查询参数模板列表 */
+  /** {@link DescribeParamTemplates 查询参数模板列表}({@link DescribeParamTemplatesRequest 请求参数}): {@link DescribeParamTemplatesResponse 返回参数} */
   DescribeParamTemplates(data?: DescribeParamTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplatesResponse>;
-  /** 查询产品售卖规格 */
+  /** {@link DescribeProductInfo 查询产品售卖规格}({@link DescribeProductInfoRequest 请求参数}): {@link DescribeProductInfoResponse 返回参数} */
   DescribeProductInfo(data?: DescribeProductInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductInfoResponse>;
-  /** 查询项目安全组信息 */
+  /** {@link DescribeProjectSecurityGroup 查询项目安全组信息}({@link DescribeProjectSecurityGroupRequest 请求参数}): {@link DescribeProjectSecurityGroupResponse 返回参数} */
   DescribeProjectSecurityGroup(data?: DescribeProjectSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupResponse>;
-  /** 查询项目安全组详情 */
+  /** {@link DescribeProjectSecurityGroups 查询项目安全组详情}({@link DescribeProjectSecurityGroupsRequest 请求参数}): {@link DescribeProjectSecurityGroupsResponse 返回参数} */
   DescribeProjectSecurityGroups(data: DescribeProjectSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupsResponse>;
-  /** 查询代理慢查询 */
+  /** {@link DescribeProxySlowLog 查询代理慢查询}({@link DescribeProxySlowLogRequest 请求参数}): {@link DescribeProxySlowLogResponse 返回参数} */
   DescribeProxySlowLog(data: DescribeProxySlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxySlowLogResponse>;
-  /** 查询复制组 */
+  /** {@link DescribeReplicationGroup 查询复制组}({@link DescribeReplicationGroupRequest 请求参数}): {@link DescribeReplicationGroupResponse 返回参数} */
   DescribeReplicationGroup(data: DescribeReplicationGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationGroupResponse>;
-  /** 查询实例慢查询记录 */
+  /** {@link DescribeSlowLog 查询实例慢查询记录}({@link DescribeSlowLogRequest 请求参数}): {@link DescribeSlowLogResponse 返回参数} */
   DescribeSlowLog(data: DescribeSlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogResponse>;
-  /** Redis查询任务结果 */
+  /** {@link DescribeTaskInfo Redis查询任务结果}({@link DescribeTaskInfoRequest 请求参数}): {@link DescribeTaskInfoResponse 返回参数} */
   DescribeTaskInfo(data: DescribeTaskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskInfoResponse>;
-  /** 查询任务列表信息 */
+  /** {@link DescribeTaskList 查询任务列表信息}({@link DescribeTaskListRequest 请求参数}): {@link DescribeTaskListResponse 返回参数} */
   DescribeTaskList(data?: DescribeTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskListResponse>;
-  /** 查询Tendis慢查询 */
+  /** {@link DescribeTendisSlowLog 查询Tendis慢查询}({@link DescribeTendisSlowLogRequest 请求参数}): {@link DescribeTendisSlowLogResponse 返回参数} */
   DescribeTendisSlowLog(data: DescribeTendisSlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTendisSlowLogResponse>;
-  /** 按量计费实例销毁 */
+  /** {@link DestroyPostpaidInstance 按量计费实例销毁}({@link DestroyPostpaidInstanceRequest 请求参数}): {@link DestroyPostpaidInstanceResponse 返回参数} */
   DestroyPostpaidInstance(data: DestroyPostpaidInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyPostpaidInstanceResponse>;
-  /** 包年包月实例退还 */
+  /** {@link DestroyPrepaidInstance 包年包月实例退还}({@link DestroyPrepaidInstanceRequest 请求参数}): {@link DestroyPrepaidInstanceResponse 返回参数} */
   DestroyPrepaidInstance(data: DestroyPrepaidInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyPrepaidInstanceResponse>;
-  /** 禁用读写分离 */
+  /** {@link DisableReplicaReadonly 禁用读写分离}({@link DisableReplicaReadonlyRequest 请求参数}): {@link DisableReplicaReadonlyResponse 返回参数} */
   DisableReplicaReadonly(data: DisableReplicaReadonlyRequest, config?: AxiosRequestConfig): AxiosPromise<DisableReplicaReadonlyResponse>;
-  /** 安全组批量解绑云资源 */
+  /** {@link DisassociateSecurityGroups 安全组批量解绑云资源}({@link DisassociateSecurityGroupsRequest 请求参数}): {@link DisassociateSecurityGroupsResponse 返回参数} */
   DisassociateSecurityGroups(data: DisassociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupsResponse>;
-  /** 启用读写分离 */
+  /** {@link EnableReplicaReadonly 启用读写分离}({@link EnableReplicaReadonlyRequest 请求参数}): {@link EnableReplicaReadonlyResponse 返回参数} */
   EnableReplicaReadonly(data: EnableReplicaReadonlyRequest, config?: AxiosRequestConfig): AxiosPromise<EnableReplicaReadonlyResponse>;
-  /** 查询新购实例价格 */
+  /** {@link InquiryPriceCreateInstance 查询新购实例价格}({@link InquiryPriceCreateInstanceRequest 请求参数}): {@link InquiryPriceCreateInstanceResponse 返回参数} */
   InquiryPriceCreateInstance(data: InquiryPriceCreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateInstanceResponse>;
-  /** 查询实例续费价格（包年包月） */
+  /** {@link InquiryPriceRenewInstance 查询实例续费价格（包年包月）}({@link InquiryPriceRenewInstanceRequest 请求参数}): {@link InquiryPriceRenewInstanceResponse 返回参数} */
   InquiryPriceRenewInstance(data: InquiryPriceRenewInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewInstanceResponse>;
-  /** 查询实例扩容价格 */
+  /** {@link InquiryPriceUpgradeInstance 查询实例扩容价格}({@link InquiryPriceUpgradeInstanceRequest 请求参数}): {@link InquiryPriceUpgradeInstanceResponse 返回参数} */
   InquiryPriceUpgradeInstance(data: InquiryPriceUpgradeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceUpgradeInstanceResponse>;
-  /** 模拟故障接口 */
+  /** {@link KillMasterGroup 模拟故障接口}({@link KillMasterGroupRequest 请求参数}): {@link KillMasterGroupResponse 返回参数} */
   KillMasterGroup(data: KillMasterGroupRequest, config?: AxiosRequestConfig): AxiosPromise<KillMasterGroupResponse>;
-  /** 手动备份Redis实例 */
+  /** {@link ManualBackupInstance 手动备份Redis实例}({@link ManualBackupInstanceRequest 请求参数}): {@link ManualBackupInstanceResponse 返回参数} */
   ManualBackupInstance(data: ManualBackupInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ManualBackupInstanceResponse>;
-  /** 修改Redis密码 */
+  /** {@link ModfiyInstancePassword 修改Redis密码}({@link ModfiyInstancePasswordRequest 请求参数}): {@link ModfiyInstancePasswordResponse 返回参数} */
   ModfiyInstancePassword(data: ModfiyInstancePasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModfiyInstancePasswordResponse>;
-  /** 设置自动备份配置 */
+  /** {@link ModifyAutoBackupConfig 设置自动备份配置}({@link ModifyAutoBackupConfigRequest 请求参数}): {@link ModifyAutoBackupConfigResponse 返回参数} */
   ModifyAutoBackupConfig(data: ModifyAutoBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoBackupConfigResponse>;
-  /** 修改实例连接配置 */
+  /** {@link ModifyConnectionConfig 修改实例连接配置}({@link ModifyConnectionConfigRequest 请求参数}): {@link ModifyConnectionConfigResponse 返回参数} */
   ModifyConnectionConfig(data: ModifyConnectionConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConnectionConfigResponse>;
-  /** 修改云数据库安全组 */
+  /** {@link ModifyDBInstanceSecurityGroups 修改云数据库安全组}({@link ModifyDBInstanceSecurityGroupsRequest 请求参数}): {@link ModifyDBInstanceSecurityGroupsResponse 返回参数} */
   ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
-  /** 修改实例相关信息 */
+  /** {@link ModifyInstance 修改实例相关信息}({@link ModifyInstanceRequest 请求参数}): {@link ModifyInstanceResponse 返回参数} */
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
-  /** 修改实例子账号 */
+  /** {@link ModifyInstanceAccount 修改实例子账号}({@link ModifyInstanceAccountRequest 请求参数}): {@link ModifyInstanceAccountResponse 返回参数} */
   ModifyInstanceAccount(data: ModifyInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAccountResponse>;
-  /** 修改实例参数 */
+  /** {@link ModifyInstanceParams 修改实例参数}({@link ModifyInstanceParamsRequest 请求参数}): {@link ModifyInstanceParamsResponse 返回参数} */
   ModifyInstanceParams(data: ModifyInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamsResponse>;
-  /** 设置实例输入模式 */
+  /** {@link ModifyInstanceReadOnly 设置实例输入模式}({@link ModifyInstanceReadOnlyRequest 请求参数}): {@link ModifyInstanceReadOnlyResponse 返回参数} */
   ModifyInstanceReadOnly(data: ModifyInstanceReadOnlyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceReadOnlyResponse>;
-  /** 修改实例维护时间窗时间 */
+  /** {@link ModifyMaintenanceWindow 修改实例维护时间窗时间}({@link ModifyMaintenanceWindowRequest 请求参数}): {@link ModifyMaintenanceWindowResponse 返回参数} */
   ModifyMaintenanceWindow(data: ModifyMaintenanceWindowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintenanceWindowResponse>;
-  /** 修改实例网络配置 */
+  /** {@link ModifyNetworkConfig 修改实例网络配置}({@link ModifyNetworkConfigRequest 请求参数}): {@link ModifyNetworkConfigResponse 返回参数} */
   ModifyNetworkConfig(data: ModifyNetworkConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetworkConfigResponse>;
-  /** 修改参数模板 */
+  /** {@link ModifyParamTemplate 修改参数模板}({@link ModifyParamTemplateRequest 请求参数}): {@link ModifyParamTemplateResponse 返回参数} */
   ModifyParamTemplate(data: ModifyParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyParamTemplateResponse>;
-  /** 开启SSL */
+  /** {@link OpenSSL 开启SSL}({@link OpenSSLRequest 请求参数}): {@link OpenSSLResponse 返回参数} */
   OpenSSL(data: OpenSSLRequest, config?: AxiosRequestConfig): AxiosPromise<OpenSSLResponse>;
-  /** 关闭外网接口 */
+  /** {@link ReleaseWanAddress 关闭外网接口}({@link ReleaseWanAddressRequest 请求参数}): {@link ReleaseWanAddressResponse 返回参数} */
   ReleaseWanAddress(data: ReleaseWanAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseWanAddressResponse>;
-  /** 续费实例 */
+  /** {@link RenewInstance 续费实例}({@link RenewInstanceRequest 请求参数}): {@link RenewInstanceResponse 返回参数} */
   RenewInstance(data: RenewInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenewInstanceResponse>;
-  /** 重置密码 */
+  /** {@link ResetPassword 重置密码}({@link ResetPasswordRequest 请求参数}): {@link ResetPasswordResponse 返回参数} */
   ResetPassword(data: ResetPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetPasswordResponse>;
-  /** 恢复 CRS 实例 */
+  /** {@link RestoreInstance 恢复 CRS 实例}({@link RestoreInstanceRequest 请求参数}): {@link RestoreInstanceResponse 返回参数} */
   RestoreInstance(data: RestoreInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreInstanceResponse>;
-  /** 实例解隔离 */
+  /** {@link StartupInstance 实例解隔离}({@link StartupInstanceRequest 请求参数}): {@link StartupInstanceResponse 返回参数} */
   StartupInstance(data: StartupInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StartupInstanceResponse>;
-  /** 交换实例VIP */
+  /** {@link SwitchInstanceVip 交换实例VIP}({@link SwitchInstanceVipRequest 请求参数}): {@link SwitchInstanceVipResponse 返回参数} */
   SwitchInstanceVip(data: SwitchInstanceVipRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchInstanceVipResponse>;
-  /** Proxy模拟故障接口 */
+  /** {@link SwitchProxy Proxy模拟故障接口}({@link SwitchProxyRequest 请求参数}): {@link SwitchProxyResponse 返回参数} */
   SwitchProxy(data: SwitchProxyRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchProxyResponse>;
-  /** 升级实例 */
+  /** {@link UpgradeInstance 升级实例}({@link UpgradeInstanceRequest 请求参数}): {@link UpgradeInstanceResponse 返回参数} */
   UpgradeInstance(data: UpgradeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceResponse>;
-  /** 升级实例版本或者结构 */
+  /** {@link UpgradeInstanceVersion 升级实例版本或者结构}({@link UpgradeInstanceVersionRequest 请求参数}): {@link UpgradeInstanceVersionResponse 返回参数} */
   UpgradeInstanceVersion(data: UpgradeInstanceVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceVersionResponse>;
-  /** 实例proxy版本升级接口 */
+  /** {@link UpgradeProxyVersion 实例proxy版本升级接口}({@link UpgradeProxyVersionRequest 请求参数}): {@link UpgradeProxyVersionResponse 返回参数} */
   UpgradeProxyVersion(data: UpgradeProxyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeProxyVersionResponse>;
-  /** 实例小版本升级接口 */
+  /** {@link UpgradeSmallVersion 实例小版本升级接口}({@link UpgradeSmallVersionRequest 请求参数}): {@link UpgradeSmallVersionResponse 返回参数} */
   UpgradeSmallVersion(data: UpgradeSmallVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeSmallVersionResponse>;
-  /** 升级实例支持多AZ */
+  /** {@link UpgradeVersionToMultiAvailabilityZones 升级实例支持多AZ}({@link UpgradeVersionToMultiAvailabilityZonesRequest 请求参数}): {@link UpgradeVersionToMultiAvailabilityZonesResponse 返回参数} */
   UpgradeVersionToMultiAvailabilityZones(data: UpgradeVersionToMultiAvailabilityZonesRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeVersionToMultiAvailabilityZonesResponse>;
 }
 

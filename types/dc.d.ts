@@ -778,50 +778,50 @@ declare interface ReleaseInternetAddressResponse {
   RequestId?: string;
 }
 
-/** [专线接入](https://cloud.tencent.com/document/product/216) */
+/** {@link Dc 专线接入} */
 declare interface Dc {
   (): Versions;
-  /** 接受专用通道申请 */
+  /** {@link AcceptDirectConnectTunnel 接受专用通道申请}({@link AcceptDirectConnectTunnelRequest 请求参数}): {@link AcceptDirectConnectTunnelResponse 返回参数} */
   AcceptDirectConnectTunnel(data: AcceptDirectConnectTunnelRequest, config?: AxiosRequestConfig): AxiosPromise<AcceptDirectConnectTunnelResponse>;
-  /** 申请互联网地址 */
+  /** {@link ApplyInternetAddress 申请互联网地址}({@link ApplyInternetAddressRequest 请求参数}): {@link ApplyInternetAddressResponse 返回参数} */
   ApplyInternetAddress(data: ApplyInternetAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyInternetAddressResponse>;
-  /** 申请物理专线 */
+  /** {@link CreateDirectConnect 申请物理专线}({@link CreateDirectConnectRequest 请求参数}): {@link CreateDirectConnectResponse 返回参数} */
   CreateDirectConnect(data: CreateDirectConnectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDirectConnectResponse>;
-  /** 创建专用通道 */
+  /** {@link CreateDirectConnectTunnel 创建专用通道}({@link CreateDirectConnectTunnelRequest 请求参数}): {@link CreateDirectConnectTunnelResponse 返回参数} */
   CreateDirectConnectTunnel(data: CreateDirectConnectTunnelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDirectConnectTunnelResponse>;
-  /** 删除物理专线 */
+  /** {@link DeleteDirectConnect 删除物理专线}({@link DeleteDirectConnectRequest 请求参数}): {@link DeleteDirectConnectResponse 返回参数} */
   DeleteDirectConnect(data: DeleteDirectConnectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDirectConnectResponse>;
-  /** 删除专用通道 */
+  /** {@link DeleteDirectConnectTunnel 删除专用通道}({@link DeleteDirectConnectTunnelRequest 请求参数}): {@link DeleteDirectConnectTunnelResponse 返回参数} */
   DeleteDirectConnectTunnel(data: DeleteDirectConnectTunnelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDirectConnectTunnelResponse>;
-  /** 查询物理专线接入点 */
+  /** {@link DescribeAccessPoints 查询物理专线接入点}({@link DescribeAccessPointsRequest 请求参数}): {@link DescribeAccessPointsResponse 返回参数} */
   DescribeAccessPoints(data?: DescribeAccessPointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessPointsResponse>;
-  /** 查询专用通道扩展信息 */
+  /** {@link DescribeDirectConnectTunnelExtra 查询专用通道扩展信息}({@link DescribeDirectConnectTunnelExtraRequest 请求参数}): {@link DescribeDirectConnectTunnelExtraResponse 返回参数} */
   DescribeDirectConnectTunnelExtra(data: DescribeDirectConnectTunnelExtraRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectTunnelExtraResponse>;
-  /** 查询专用通道列表 */
+  /** {@link DescribeDirectConnectTunnels 查询专用通道列表}({@link DescribeDirectConnectTunnelsRequest 请求参数}): {@link DescribeDirectConnectTunnelsResponse 返回参数} */
   DescribeDirectConnectTunnels(data?: DescribeDirectConnectTunnelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectTunnelsResponse>;
-  /** 查询物理专线列表 */
+  /** {@link DescribeDirectConnects 查询物理专线列表}({@link DescribeDirectConnectsRequest 请求参数}): {@link DescribeDirectConnectsResponse 返回参数} */
   DescribeDirectConnects(data?: DescribeDirectConnectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectsResponse>;
-  /** 获取用户互联网公网地址信息 */
+  /** {@link DescribeInternetAddress 获取用户互联网公网地址信息}({@link DescribeInternetAddressRequest 请求参数}): {@link DescribeInternetAddressResponse 返回参数} */
   DescribeInternetAddress(data?: DescribeInternetAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInternetAddressResponse>;
-  /** 获取互联网公网地址配额 */
+  /** {@link DescribeInternetAddressQuota 获取互联网公网地址配额}({@link DescribeInternetAddressQuotaRequest 请求参数}): {@link DescribeInternetAddressQuotaResponse 返回参数} */
   DescribeInternetAddressQuota(data?: DescribeInternetAddressQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInternetAddressQuotaResponse>;
-  /** 获取用户互联网公网地址统计信息 */
+  /** {@link DescribeInternetAddressStatistics 获取用户互联网公网地址统计信息}({@link DescribeInternetAddressStatisticsRequest 请求参数}): {@link DescribeInternetAddressStatisticsResponse 返回参数} */
   DescribeInternetAddressStatistics(data?: DescribeInternetAddressStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInternetAddressStatisticsResponse>;
-  /** 查询互联网通道路由列表 */
+  /** {@link DescribePublicDirectConnectTunnelRoutes 查询互联网通道路由列表}({@link DescribePublicDirectConnectTunnelRoutesRequest 请求参数}): {@link DescribePublicDirectConnectTunnelRoutesResponse 返回参数} */
   DescribePublicDirectConnectTunnelRoutes(data: DescribePublicDirectConnectTunnelRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicDirectConnectTunnelRoutesResponse>;
-  /** 停用公网互联网地址 */
+  /** {@link DisableInternetAddress 停用公网互联网地址}({@link DisableInternetAddressRequest 请求参数}): {@link DisableInternetAddressResponse 返回参数} */
   DisableInternetAddress(data: DisableInternetAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DisableInternetAddressResponse>;
-  /** 启用互联网公网地址 */
+  /** {@link EnableInternetAddress 启用互联网公网地址}({@link EnableInternetAddressRequest 请求参数}): {@link EnableInternetAddressResponse 返回参数} */
   EnableInternetAddress(data: EnableInternetAddressRequest, config?: AxiosRequestConfig): AxiosPromise<EnableInternetAddressResponse>;
-  /** 修改物理专线属性 */
+  /** {@link ModifyDirectConnectAttribute 修改物理专线属性}({@link ModifyDirectConnectAttributeRequest 请求参数}): {@link ModifyDirectConnectAttributeResponse 返回参数} */
   ModifyDirectConnectAttribute(data: ModifyDirectConnectAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDirectConnectAttributeResponse>;
-  /** 修改专用通道属性 */
+  /** {@link ModifyDirectConnectTunnelAttribute 修改专用通道属性}({@link ModifyDirectConnectTunnelAttributeRequest 请求参数}): {@link ModifyDirectConnectTunnelAttributeResponse 返回参数} */
   ModifyDirectConnectTunnelAttribute(data: ModifyDirectConnectTunnelAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDirectConnectTunnelAttributeResponse>;
-  /** 修改专用通道扩展信息 */
+  /** {@link ModifyDirectConnectTunnelExtra 修改专用通道扩展信息}({@link ModifyDirectConnectTunnelExtraRequest 请求参数}): {@link ModifyDirectConnectTunnelExtraResponse 返回参数} */
   ModifyDirectConnectTunnelExtra(data: ModifyDirectConnectTunnelExtraRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDirectConnectTunnelExtraResponse>;
-  /** 拒绝专用通道申请 */
+  /** {@link RejectDirectConnectTunnel 拒绝专用通道申请}({@link RejectDirectConnectTunnelRequest 请求参数}): {@link RejectDirectConnectTunnelResponse 返回参数} */
   RejectDirectConnectTunnel(data: RejectDirectConnectTunnelRequest, config?: AxiosRequestConfig): AxiosPromise<RejectDirectConnectTunnelResponse>;
-  /** 释放互联网地址 */
+  /** {@link ReleaseInternetAddress 释放互联网地址}({@link ReleaseInternetAddressRequest 请求参数}): {@link ReleaseInternetAddressResponse 返回参数} */
   ReleaseInternetAddress(data: ReleaseInternetAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseInternetAddressResponse>;
 }
 

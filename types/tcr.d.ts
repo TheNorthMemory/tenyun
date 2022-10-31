@@ -2510,224 +2510,224 @@ declare interface ValidateRepositoryExistPersonalResponse {
   RequestId?: string;
 }
 
-/** [容器镜像服务](https://cloud.tencent.com/document/product/1141) */
+/** {@link Tcr 容器镜像服务} */
 declare interface Tcr {
   (): Versions;
-  /** 个人版镜像仓库批量删除Tag */
+  /** {@link BatchDeleteImagePersonal 个人版镜像仓库批量删除Tag}({@link BatchDeleteImagePersonalRequest 请求参数}): {@link BatchDeleteImagePersonalResponse 返回参数} */
   BatchDeleteImagePersonal(data: BatchDeleteImagePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteImagePersonalResponse>;
-  /** 批量删除个人版仓库 */
+  /** {@link BatchDeleteRepositoryPersonal 批量删除个人版仓库}({@link BatchDeleteRepositoryPersonalRequest 请求参数}): {@link BatchDeleteRepositoryPersonalResponse 返回参数} */
   BatchDeleteRepositoryPersonal(data: BatchDeleteRepositoryPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteRepositoryPersonalResponse>;
-  /** 校验实例信息 */
+  /** {@link CheckInstance 校验实例信息}({@link CheckInstanceRequest 请求参数}): {@link CheckInstanceResponse 返回参数} */
   CheckInstance(data: CheckInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CheckInstanceResponse>;
-  /** 检查待创建的实例名称是否符合规范 */
+  /** {@link CheckInstanceName 检查待创建的实例名称是否符合规范}({@link CheckInstanceNameRequest 请求参数}): {@link CheckInstanceNameResponse 返回参数} */
   CheckInstanceName(data: CheckInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckInstanceNameResponse>;
-  /** 创建应用更新触发器 */
+  /** {@link CreateApplicationTriggerPersonal 创建应用更新触发器}({@link CreateApplicationTriggerPersonalRequest 请求参数}): {@link CreateApplicationTriggerPersonalResponse 返回参数} */
   CreateApplicationTriggerPersonal(data: CreateApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationTriggerPersonalResponse>;
-  /** 创建镜像加速服务 */
+  /** {@link CreateImageAccelerationService 创建镜像加速服务}({@link CreateImageAccelerationServiceRequest 请求参数}): {@link CreateImageAccelerationServiceResponse 返回参数} */
   CreateImageAccelerationService(data: CreateImageAccelerationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageAccelerationServiceResponse>;
-  /** 创建个人版镜像版本清理策略 */
+  /** {@link CreateImageLifecyclePersonal 创建个人版镜像版本清理策略}({@link CreateImageLifecyclePersonalRequest 请求参数}): {@link CreateImageLifecyclePersonalResponse 返回参数} */
   CreateImageLifecyclePersonal(data: CreateImageLifecyclePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageLifecyclePersonalResponse>;
-  /** 创建镜像不可变规则 */
+  /** {@link CreateImmutableTagRules 创建镜像不可变规则}({@link CreateImmutableTagRulesRequest 请求参数}): {@link CreateImmutableTagRulesResponse 返回参数} */
   CreateImmutableTagRules(data: CreateImmutableTagRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImmutableTagRulesResponse>;
-  /** 创建实例 */
+  /** {@link CreateInstance 创建实例}({@link CreateInstanceRequest 请求参数}): {@link CreateInstanceResponse 返回参数} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
-  /** 创建自定义域名 */
+  /** {@link CreateInstanceCustomizedDomain 创建自定义域名}({@link CreateInstanceCustomizedDomainRequest 请求参数}): {@link CreateInstanceCustomizedDomainResponse 返回参数} */
   CreateInstanceCustomizedDomain(data: CreateInstanceCustomizedDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceCustomizedDomainResponse>;
-  /** 创建实例访问凭证 */
+  /** {@link CreateInstanceToken 创建实例访问凭证}({@link CreateInstanceTokenRequest 请求参数}): {@link CreateInstanceTokenResponse 返回参数} */
   CreateInstanceToken(data: CreateInstanceTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceTokenResponse>;
-  /** 创建私有域名解析 */
+  /** {@link CreateInternalEndpointDns 创建私有域名解析}({@link CreateInternalEndpointDnsRequest 请求参数}): {@link CreateInternalEndpointDnsResponse 返回参数} */
   CreateInternalEndpointDns(data: CreateInternalEndpointDnsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInternalEndpointDnsResponse>;
-  /** 创建实例公网访问多白名单策略 */
+  /** {@link CreateMultipleSecurityPolicy 创建实例公网访问多白名单策略}({@link CreateMultipleSecurityPolicyRequest 请求参数}): {@link CreateMultipleSecurityPolicyResponse 返回参数} */
   CreateMultipleSecurityPolicy(data: CreateMultipleSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultipleSecurityPolicyResponse>;
-  /** 创建命名空间 */
+  /** {@link CreateNamespace 创建命名空间}({@link CreateNamespaceRequest 请求参数}): {@link CreateNamespaceResponse 返回参数} */
   CreateNamespace(data: CreateNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNamespaceResponse>;
-  /** 创建个人版命名空间 */
+  /** {@link CreateNamespacePersonal 创建个人版命名空间}({@link CreateNamespacePersonalRequest 请求参数}): {@link CreateNamespacePersonalResponse 返回参数} */
   CreateNamespacePersonal(data: CreateNamespacePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNamespacePersonalResponse>;
-  /** 创建从实例 */
+  /** {@link CreateReplicationInstance 创建从实例}({@link CreateReplicationInstanceRequest 请求参数}): {@link CreateReplicationInstanceResponse 返回参数} */
   CreateReplicationInstance(data: CreateReplicationInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReplicationInstanceResponse>;
-  /** 创建镜像仓库 */
+  /** {@link CreateRepository 创建镜像仓库}({@link CreateRepositoryRequest 请求参数}): {@link CreateRepositoryResponse 返回参数} */
   CreateRepository(data: CreateRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRepositoryResponse>;
-  /** 创建个人版镜像仓库 */
+  /** {@link CreateRepositoryPersonal 创建个人版镜像仓库}({@link CreateRepositoryPersonalRequest 请求参数}): {@link CreateRepositoryPersonalResponse 返回参数} */
   CreateRepositoryPersonal(data: CreateRepositoryPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRepositoryPersonalResponse>;
-  /** 创建实例公网访问白名单策略 */
+  /** {@link CreateSecurityPolicies 创建实例公网访问白名单策略}({@link CreateSecurityPoliciesRequest 请求参数}): {@link CreateSecurityPoliciesResponse 返回参数} */
   CreateSecurityPolicies(data: CreateSecurityPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityPoliciesResponse>;
-  /** 创建实例公网访问白名单策略 */
+  /** {@link CreateSecurityPolicy 创建实例公网访问白名单策略}({@link CreateSecurityPolicyRequest 请求参数}): {@link CreateSecurityPolicyResponse 返回参数} */
   CreateSecurityPolicy(data: CreateSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityPolicyResponse>;
-  /** 创建镜像签名 */
+  /** {@link CreateSignature 创建镜像签名}({@link CreateSignatureRequest 请求参数}): {@link CreateSignatureResponse 返回参数} */
   CreateSignature(data: CreateSignatureRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignatureResponse>;
-  /** 创建签名策略 */
+  /** {@link CreateSignaturePolicy 创建签名策略}({@link CreateSignaturePolicyRequest 请求参数}): {@link CreateSignaturePolicyResponse 返回参数} */
   CreateSignaturePolicy(data: CreateSignaturePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignaturePolicyResponse>;
-  /** 手动执行版本保留 */
+  /** {@link CreateTagRetentionExecution 手动执行版本保留}({@link CreateTagRetentionExecutionRequest 请求参数}): {@link CreateTagRetentionExecutionResponse 返回参数} */
   CreateTagRetentionExecution(data: CreateTagRetentionExecutionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTagRetentionExecutionResponse>;
-  /** 创建版本保留规则 */
+  /** {@link CreateTagRetentionRule 创建版本保留规则}({@link CreateTagRetentionRuleRequest 请求参数}): {@link CreateTagRetentionRuleResponse 返回参数} */
   CreateTagRetentionRule(data: CreateTagRetentionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTagRetentionRuleResponse>;
-  /** 创建个人用户 */
+  /** {@link CreateUserPersonal 创建个人用户}({@link CreateUserPersonalRequest 请求参数}): {@link CreateUserPersonalResponse 返回参数} */
   CreateUserPersonal(data: CreateUserPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserPersonalResponse>;
-  /** 创建触发器 */
+  /** {@link CreateWebhookTrigger 创建触发器}({@link CreateWebhookTriggerRequest 请求参数}): {@link CreateWebhookTriggerResponse 返回参数} */
   CreateWebhookTrigger(data: CreateWebhookTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebhookTriggerResponse>;
-  /** 删除应用更新触发器 */
+  /** {@link DeleteApplicationTriggerPersonal 删除应用更新触发器}({@link DeleteApplicationTriggerPersonalRequest 请求参数}): {@link DeleteApplicationTriggerPersonalResponse 返回参数} */
   DeleteApplicationTriggerPersonal(data: DeleteApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationTriggerPersonalResponse>;
-  /** 删除指定镜像 */
+  /** {@link DeleteImage 删除指定镜像}({@link DeleteImageRequest 请求参数}): {@link DeleteImageResponse 返回参数} */
   DeleteImage(data: DeleteImageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageResponse>;
-  /** 删除镜像加速服务 */
+  /** {@link DeleteImageAccelerateService 删除镜像加速服务}({@link DeleteImageAccelerateServiceRequest 请求参数}): {@link DeleteImageAccelerateServiceResponse 返回参数} */
   DeleteImageAccelerateService(data: DeleteImageAccelerateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageAccelerateServiceResponse>;
-  /** 删除个人版全局镜像版本自动清理策略 */
+  /** {@link DeleteImageLifecycleGlobalPersonal 删除个人版全局镜像版本自动清理策略}({@link DeleteImageLifecycleGlobalPersonalRequest 请求参数}): {@link DeleteImageLifecycleGlobalPersonalResponse 返回参数} */
   DeleteImageLifecycleGlobalPersonal(data?: DeleteImageLifecycleGlobalPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageLifecycleGlobalPersonalResponse>;
-  /** 删除个人版镜像仓库Tag自动清理策略 */
+  /** {@link DeleteImageLifecyclePersonal 删除个人版镜像仓库Tag自动清理策略}({@link DeleteImageLifecyclePersonalRequest 请求参数}): {@link DeleteImageLifecyclePersonalResponse 返回参数} */
   DeleteImageLifecyclePersonal(data: DeleteImageLifecyclePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageLifecyclePersonalResponse>;
-  /** 删除个人版仓库tag */
+  /** {@link DeleteImagePersonal 删除个人版仓库tag}({@link DeleteImagePersonalRequest 请求参数}): {@link DeleteImagePersonalResponse 返回参数} */
   DeleteImagePersonal(data: DeleteImagePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImagePersonalResponse>;
-  /** 删除镜像不可变规则 */
+  /** {@link DeleteImmutableTagRules 删除镜像不可变规则}({@link DeleteImmutableTagRulesRequest 请求参数}): {@link DeleteImmutableTagRulesResponse 返回参数} */
   DeleteImmutableTagRules(data: DeleteImmutableTagRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImmutableTagRulesResponse>;
-  /** 删除实例 */
+  /** {@link DeleteInstance 删除实例}({@link DeleteInstanceRequest 请求参数}): {@link DeleteInstanceResponse 返回参数} */
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
-  /** 删除自定义域名 */
+  /** {@link DeleteInstanceCustomizedDomain 删除自定义域名}({@link DeleteInstanceCustomizedDomainRequest 请求参数}): {@link DeleteInstanceCustomizedDomainResponse 返回参数} */
   DeleteInstanceCustomizedDomain(data: DeleteInstanceCustomizedDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceCustomizedDomainResponse>;
-  /** 删除长期访问凭证 */
+  /** {@link DeleteInstanceToken 删除长期访问凭证}({@link DeleteInstanceTokenRequest 请求参数}): {@link DeleteInstanceTokenResponse 返回参数} */
   DeleteInstanceToken(data: DeleteInstanceTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceTokenResponse>;
-  /** 删除私有域名解析 */
+  /** {@link DeleteInternalEndpointDns 删除私有域名解析}({@link DeleteInternalEndpointDnsRequest 请求参数}): {@link DeleteInternalEndpointDnsResponse 返回参数} */
   DeleteInternalEndpointDns(data: DeleteInternalEndpointDnsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInternalEndpointDnsResponse>;
-  /** 删除实例公网访问多白名单策略 */
+  /** {@link DeleteMultipleSecurityPolicy 删除实例公网访问多白名单策略}({@link DeleteMultipleSecurityPolicyRequest 请求参数}): {@link DeleteMultipleSecurityPolicyResponse 返回参数} */
   DeleteMultipleSecurityPolicy(data: DeleteMultipleSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMultipleSecurityPolicyResponse>;
-  /** 删除命名空间 */
+  /** {@link DeleteNamespace 删除命名空间}({@link DeleteNamespaceRequest 请求参数}): {@link DeleteNamespaceResponse 返回参数} */
   DeleteNamespace(data: DeleteNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNamespaceResponse>;
-  /** 删除个人版命名空间 */
+  /** {@link DeleteNamespacePersonal 删除个人版命名空间}({@link DeleteNamespacePersonalRequest 请求参数}): {@link DeleteNamespacePersonalResponse 返回参数} */
   DeleteNamespacePersonal(data: DeleteNamespacePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNamespacePersonalResponse>;
-  /** 删除从实例 */
+  /** {@link DeleteReplicationInstance 删除从实例}({@link DeleteReplicationInstanceRequest 请求参数}): {@link DeleteReplicationInstanceResponse 返回参数} */
   DeleteReplicationInstance(data: DeleteReplicationInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReplicationInstanceResponse>;
-  /** 删除镜像仓库 */
+  /** {@link DeleteRepository 删除镜像仓库}({@link DeleteRepositoryRequest 请求参数}): {@link DeleteRepositoryResponse 返回参数} */
   DeleteRepository(data: DeleteRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRepositoryResponse>;
-  /** 删除个人版镜像仓库 */
+  /** {@link DeleteRepositoryPersonal 删除个人版镜像仓库}({@link DeleteRepositoryPersonalRequest 请求参数}): {@link DeleteRepositoryPersonalResponse 返回参数} */
   DeleteRepositoryPersonal(data: DeleteRepositoryPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRepositoryPersonalResponse>;
-  /** 批量删除Repository Tag */
+  /** {@link DeleteRepositoryTags 批量删除Repository Tag}({@link DeleteRepositoryTagsRequest 请求参数}): {@link DeleteRepositoryTagsResponse 返回参数} */
   DeleteRepositoryTags(data: DeleteRepositoryTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRepositoryTagsResponse>;
-  /** 删除实例公网访问白名单策略 */
+  /** {@link DeleteSecurityPolicy 删除实例公网访问白名单策略}({@link DeleteSecurityPolicyRequest 请求参数}): {@link DeleteSecurityPolicyResponse 返回参数} */
   DeleteSecurityPolicy(data: DeleteSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityPolicyResponse>;
-  /** 删除命名空间加签策略 */
+  /** {@link DeleteSignaturePolicy 删除命名空间加签策略}({@link DeleteSignaturePolicyRequest 请求参数}): {@link DeleteSignaturePolicyResponse 返回参数} */
   DeleteSignaturePolicy(data: DeleteSignaturePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSignaturePolicyResponse>;
-  /** 删除版本保留规则 */
+  /** {@link DeleteTagRetentionRule 删除版本保留规则}({@link DeleteTagRetentionRuleRequest 请求参数}): {@link DeleteTagRetentionRuleResponse 返回参数} */
   DeleteTagRetentionRule(data: DeleteTagRetentionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTagRetentionRuleResponse>;
-  /** 删除触发器 */
+  /** {@link DeleteWebhookTrigger 删除触发器}({@link DeleteWebhookTriggerRequest 请求参数}): {@link DeleteWebhookTriggerResponse 返回参数} */
   DeleteWebhookTrigger(data: DeleteWebhookTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWebhookTriggerResponse>;
-  /** 查询应用更新触发器触发日志 */
+  /** {@link DescribeApplicationTriggerLogPersonal 查询应用更新触发器触发日志}({@link DescribeApplicationTriggerLogPersonalRequest 请求参数}): {@link DescribeApplicationTriggerLogPersonalResponse 返回参数} */
   DescribeApplicationTriggerLogPersonal(data?: DescribeApplicationTriggerLogPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationTriggerLogPersonalResponse>;
-  /** 查询应用更新触发器 */
+  /** {@link DescribeApplicationTriggerPersonal 查询应用更新触发器}({@link DescribeApplicationTriggerPersonalRequest 请求参数}): {@link DescribeApplicationTriggerPersonalResponse 返回参数} */
   DescribeApplicationTriggerPersonal(data?: DescribeApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationTriggerPersonalResponse>;
-  /** 查询Chart包下载信息 */
+  /** {@link DescribeChartDownloadInfo 查询Chart包下载信息}({@link DescribeChartDownloadInfoRequest 请求参数}): {@link DescribeChartDownloadInfoResponse 返回参数} */
   DescribeChartDownloadInfo(data: DescribeChartDownloadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChartDownloadInfoResponse>;
-  /** 查询实例公网访问入口状态 */
+  /** {@link DescribeExternalEndpointStatus 查询实例公网访问入口状态}({@link DescribeExternalEndpointStatusRequest 请求参数}): {@link DescribeExternalEndpointStatusResponse 返回参数} */
   DescribeExternalEndpointStatus(data: DescribeExternalEndpointStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExternalEndpointStatusResponse>;
-  /** 查询个人收藏仓库 */
+  /** {@link DescribeFavorRepositoryPersonal 查询个人收藏仓库}({@link DescribeFavorRepositoryPersonalRequest 请求参数}): {@link DescribeFavorRepositoryPersonalResponse 返回参数} */
   DescribeFavorRepositoryPersonal(data: DescribeFavorRepositoryPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFavorRepositoryPersonalResponse>;
-  /** GC 历史 */
+  /** {@link DescribeGCJobs GC 历史}({@link DescribeGCJobsRequest 请求参数}): {@link DescribeGCJobsResponse 返回参数} */
   DescribeGCJobs(data: DescribeGCJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGCJobsResponse>;
-  /** 查询镜像加速服务状态 */
+  /** {@link DescribeImageAccelerateService 查询镜像加速服务状态}({@link DescribeImageAccelerateServiceRequest 请求参数}): {@link DescribeImageAccelerateServiceResponse 返回参数} */
   DescribeImageAccelerateService(data: DescribeImageAccelerateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAccelerateServiceResponse>;
-  /** 查询个人版中与指定tag镜像内容相同的tag列表 */
+  /** {@link DescribeImageFilterPersonal 查询个人版中与指定tag镜像内容相同的tag列表}({@link DescribeImageFilterPersonalRequest 请求参数}): {@link DescribeImageFilterPersonalResponse 返回参数} */
   DescribeImageFilterPersonal(data: DescribeImageFilterPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageFilterPersonalResponse>;
-  /** 获取个人版全局镜像版本自动清理策略 */
+  /** {@link DescribeImageLifecycleGlobalPersonal 获取个人版全局镜像版本自动清理策略}({@link DescribeImageLifecycleGlobalPersonalRequest 请求参数}): {@link DescribeImageLifecycleGlobalPersonalResponse 返回参数} */
   DescribeImageLifecycleGlobalPersonal(data?: DescribeImageLifecycleGlobalPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageLifecycleGlobalPersonalResponse>;
-  /** 获取个人版仓库自动清理策略 */
+  /** {@link DescribeImageLifecyclePersonal 获取个人版仓库自动清理策略}({@link DescribeImageLifecyclePersonalRequest 请求参数}): {@link DescribeImageLifecyclePersonalResponse 返回参数} */
   DescribeImageLifecyclePersonal(data: DescribeImageLifecyclePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageLifecyclePersonalResponse>;
-  /** 查询容器镜像Manifest信息 */
+  /** {@link DescribeImageManifests 查询容器镜像Manifest信息}({@link DescribeImageManifestsRequest 请求参数}): {@link DescribeImageManifestsResponse 返回参数} */
   DescribeImageManifests(data: DescribeImageManifestsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageManifestsResponse>;
-  /** 获取个人版镜像仓库tag列表 */
+  /** {@link DescribeImagePersonal 获取个人版镜像仓库tag列表}({@link DescribeImagePersonalRequest 请求参数}): {@link DescribeImagePersonalResponse 返回参数} */
   DescribeImagePersonal(data: DescribeImagePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagePersonalResponse>;
-  /** 查询容器镜像信息 */
+  /** {@link DescribeImages 查询容器镜像信息}({@link DescribeImagesRequest 请求参数}): {@link DescribeImagesResponse 返回参数} */
   DescribeImages(data: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
-  /** 列出镜像不可变规则 */
+  /** {@link DescribeImmutableTagRules 列出镜像不可变规则}({@link DescribeImmutableTagRulesRequest 请求参数}): {@link DescribeImmutableTagRulesResponse 返回参数} */
   DescribeImmutableTagRules(data: DescribeImmutableTagRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImmutableTagRulesResponse>;
-  /** 查询全部实例信息 */
+  /** {@link DescribeInstanceAll 查询全部实例信息}({@link DescribeInstanceAllRequest 请求参数}): {@link DescribeInstanceAllResponse 返回参数} */
   DescribeInstanceAll(data?: DescribeInstanceAllRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAllResponse>;
-  /** 查询所有实例命名空间 */
+  /** {@link DescribeInstanceAllNamespaces 查询所有实例命名空间}({@link DescribeInstanceAllNamespacesRequest 请求参数}): {@link DescribeInstanceAllNamespacesResponse 返回参数} */
   DescribeInstanceAllNamespaces(data?: DescribeInstanceAllNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAllNamespacesResponse>;
-  /** 查询实例自定义域名列表 */
+  /** {@link DescribeInstanceCustomizedDomain 查询实例自定义域名列表}({@link DescribeInstanceCustomizedDomainRequest 请求参数}): {@link DescribeInstanceCustomizedDomainResponse 返回参数} */
   DescribeInstanceCustomizedDomain(data: DescribeInstanceCustomizedDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceCustomizedDomainResponse>;
-  /** 查询实例状态 */
+  /** {@link DescribeInstanceStatus 查询实例状态}({@link DescribeInstanceStatusRequest 请求参数}): {@link DescribeInstanceStatusResponse 返回参数} */
   DescribeInstanceStatus(data: DescribeInstanceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceStatusResponse>;
-  /** 查询长期访问凭证信息 */
+  /** {@link DescribeInstanceToken 查询长期访问凭证信息}({@link DescribeInstanceTokenRequest 请求参数}): {@link DescribeInstanceTokenResponse 返回参数} */
   DescribeInstanceToken(data: DescribeInstanceTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceTokenResponse>;
-  /** 查询实例信息 */
+  /** {@link DescribeInstances 查询实例信息}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** 查询私有域名解析状态 */
+  /** {@link DescribeInternalEndpointDnsStatus 查询私有域名解析状态}({@link DescribeInternalEndpointDnsStatusRequest 请求参数}): {@link DescribeInternalEndpointDnsStatusResponse 返回参数} */
   DescribeInternalEndpointDnsStatus(data: DescribeInternalEndpointDnsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInternalEndpointDnsStatusResponse>;
-  /** 查询实例内网访问VPC链接 */
+  /** {@link DescribeInternalEndpoints 查询实例内网访问VPC链接}({@link DescribeInternalEndpointsRequest 请求参数}): {@link DescribeInternalEndpointsResponse 返回参数} */
   DescribeInternalEndpoints(data: DescribeInternalEndpointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInternalEndpointsResponse>;
-  /** 查询个人版命名空间信息 */
+  /** {@link DescribeNamespacePersonal 查询个人版命名空间信息}({@link DescribeNamespacePersonalRequest 请求参数}): {@link DescribeNamespacePersonalResponse 返回参数} */
   DescribeNamespacePersonal(data: DescribeNamespacePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNamespacePersonalResponse>;
-  /** 查询命名空间信息 */
+  /** {@link DescribeNamespaces 查询命名空间信息}({@link DescribeNamespacesRequest 请求参数}): {@link DescribeNamespacesResponse 返回参数} */
   DescribeNamespaces(data: DescribeNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNamespacesResponse>;
-  /** 列出TCR可用区域 */
+  /** {@link DescribeRegions 列出TCR可用区域}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** 查询创建从实例任务状态 */
+  /** {@link DescribeReplicationInstanceCreateTasks 查询创建从实例任务状态}({@link DescribeReplicationInstanceCreateTasksRequest 请求参数}): {@link DescribeReplicationInstanceCreateTasksResponse 返回参数} */
   DescribeReplicationInstanceCreateTasks(data: DescribeReplicationInstanceCreateTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationInstanceCreateTasksResponse>;
-  /** 查询从实例同步状态 */
+  /** {@link DescribeReplicationInstanceSyncStatus 查询从实例同步状态}({@link DescribeReplicationInstanceSyncStatusRequest 请求参数}): {@link DescribeReplicationInstanceSyncStatusResponse 返回参数} */
   DescribeReplicationInstanceSyncStatus(data: DescribeReplicationInstanceSyncStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationInstanceSyncStatusResponse>;
-  /** 查询从实例列表 */
+  /** {@link DescribeReplicationInstances 查询从实例列表}({@link DescribeReplicationInstancesRequest 请求参数}): {@link DescribeReplicationInstancesResponse 返回参数} */
   DescribeReplicationInstances(data: DescribeReplicationInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationInstancesResponse>;
-  /** 查询镜像仓库信息 */
+  /** {@link DescribeRepositories 查询镜像仓库信息}({@link DescribeRepositoriesRequest 请求参数}): {@link DescribeRepositoriesResponse 返回参数} */
   DescribeRepositories(data: DescribeRepositoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoriesResponse>;
-  /** 获取满足输入搜索条件的个人版镜像仓库 */
+  /** {@link DescribeRepositoryFilterPersonal 获取满足输入搜索条件的个人版镜像仓库}({@link DescribeRepositoryFilterPersonalRequest 请求参数}): {@link DescribeRepositoryFilterPersonalResponse 返回参数} */
   DescribeRepositoryFilterPersonal(data?: DescribeRepositoryFilterPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryFilterPersonalResponse>;
-  /** 查询个人版所有仓库 */
+  /** {@link DescribeRepositoryOwnerPersonal 查询个人版所有仓库}({@link DescribeRepositoryOwnerPersonalRequest 请求参数}): {@link DescribeRepositoryOwnerPersonalResponse 返回参数} */
   DescribeRepositoryOwnerPersonal(data?: DescribeRepositoryOwnerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryOwnerPersonalResponse>;
-  /** 查询个人版仓库信息 */
+  /** {@link DescribeRepositoryPersonal 查询个人版仓库信息}({@link DescribeRepositoryPersonalRequest 请求参数}): {@link DescribeRepositoryPersonalResponse 返回参数} */
   DescribeRepositoryPersonal(data: DescribeRepositoryPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryPersonalResponse>;
-  /** 查询实例公网访问白名单策略 */
+  /** {@link DescribeSecurityPolicies 查询实例公网访问白名单策略}({@link DescribeSecurityPoliciesRequest 请求参数}): {@link DescribeSecurityPoliciesResponse 返回参数} */
   DescribeSecurityPolicies(data: DescribeSecurityPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPoliciesResponse>;
-  /** 查询版本保留执行记录 */
+  /** {@link DescribeTagRetentionExecution 查询版本保留执行记录}({@link DescribeTagRetentionExecutionRequest 请求参数}): {@link DescribeTagRetentionExecutionResponse 返回参数} */
   DescribeTagRetentionExecution(data: DescribeTagRetentionExecutionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagRetentionExecutionResponse>;
-  /** 查询版本保留执行任务 */
+  /** {@link DescribeTagRetentionExecutionTask 查询版本保留执行任务}({@link DescribeTagRetentionExecutionTaskRequest 请求参数}): {@link DescribeTagRetentionExecutionTaskResponse 返回参数} */
   DescribeTagRetentionExecutionTask(data: DescribeTagRetentionExecutionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagRetentionExecutionTaskResponse>;
-  /** 查询版本保留规则 */
+  /** {@link DescribeTagRetentionRules 查询版本保留规则}({@link DescribeTagRetentionRulesRequest 请求参数}): {@link DescribeTagRetentionRulesResponse 返回参数} */
   DescribeTagRetentionRules(data: DescribeTagRetentionRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagRetentionRulesResponse>;
-  /** 查询个人用户配额 */
+  /** {@link DescribeUserQuotaPersonal 查询个人用户配额}({@link DescribeUserQuotaPersonalRequest 请求参数}): {@link DescribeUserQuotaPersonalResponse 返回参数} */
   DescribeUserQuotaPersonal(data?: DescribeUserQuotaPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotaPersonalResponse>;
-  /** 查询触发器 */
+  /** {@link DescribeWebhookTrigger 查询触发器}({@link DescribeWebhookTriggerRequest 请求参数}): {@link DescribeWebhookTriggerResponse 返回参数} */
   DescribeWebhookTrigger(data: DescribeWebhookTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebhookTriggerResponse>;
-  /** 获取触发器日志 */
+  /** {@link DescribeWebhookTriggerLog 获取触发器日志}({@link DescribeWebhookTriggerLogRequest 请求参数}): {@link DescribeWebhookTriggerLogResponse 返回参数} */
   DescribeWebhookTriggerLog(data: DescribeWebhookTriggerLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebhookTriggerLogResponse>;
-  /** 下载Helm Chart */
+  /** {@link DownloadHelmChart 下载Helm Chart}({@link DownloadHelmChartRequest 请求参数}): {@link DownloadHelmChartResponse 返回参数} */
   DownloadHelmChart(data: DownloadHelmChartRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadHelmChartResponse>;
-  /** 复制个人版仓库镜像版本 */
+  /** {@link DuplicateImagePersonal 复制个人版仓库镜像版本}({@link DuplicateImagePersonalRequest 请求参数}): {@link DuplicateImagePersonalResponse 返回参数} */
   DuplicateImagePersonal(data: DuplicateImagePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DuplicateImagePersonalResponse>;
-  /** 管理实例公网访问 */
+  /** {@link ManageExternalEndpoint 管理实例公网访问}({@link ManageExternalEndpointRequest 请求参数}): {@link ManageExternalEndpointResponse 返回参数} */
   ManageExternalEndpoint(data: ManageExternalEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<ManageExternalEndpointResponse>;
-  /** 设置个人版全局镜像版本自动清理策略 */
+  /** {@link ManageImageLifecycleGlobalPersonal 设置个人版全局镜像版本自动清理策略}({@link ManageImageLifecycleGlobalPersonalRequest 请求参数}): {@link ManageImageLifecycleGlobalPersonalResponse 返回参数} */
   ManageImageLifecycleGlobalPersonal(data: ManageImageLifecycleGlobalPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ManageImageLifecycleGlobalPersonalResponse>;
-  /** 管理实例内网访问VPC链接 */
+  /** {@link ManageInternalEndpoint 管理实例内网访问VPC链接}({@link ManageInternalEndpointRequest 请求参数}): {@link ManageInternalEndpointResponse 返回参数} */
   ManageInternalEndpoint(data: ManageInternalEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<ManageInternalEndpointResponse>;
-  /** 管理实例同步 */
+  /** {@link ManageReplication 管理实例同步}({@link ManageReplicationRequest 请求参数}): {@link ManageReplicationResponse 返回参数} */
   ManageReplication(data: ManageReplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ManageReplicationResponse>;
-  /** 修改应用更新触发器 */
+  /** {@link ModifyApplicationTriggerPersonal 修改应用更新触发器}({@link ModifyApplicationTriggerPersonalRequest 请求参数}): {@link ModifyApplicationTriggerPersonalResponse 返回参数} */
   ModifyApplicationTriggerPersonal(data?: ModifyApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationTriggerPersonalResponse>;
-  /** 更新镜像不可变规则 */
+  /** {@link ModifyImmutableTagRules 更新镜像不可变规则}({@link ModifyImmutableTagRulesRequest 请求参数}): {@link ModifyImmutableTagRulesResponse 返回参数} */
   ModifyImmutableTagRules(data: ModifyImmutableTagRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImmutableTagRulesResponse>;
-  /** 更新实例信息 */
+  /** {@link ModifyInstance 更新实例信息}({@link ModifyInstanceRequest 请求参数}): {@link ModifyInstanceResponse 返回参数} */
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
-  /** 更新实例长期访问凭证 */
+  /** {@link ModifyInstanceToken 更新实例长期访问凭证}({@link ModifyInstanceTokenRequest 请求参数}): {@link ModifyInstanceTokenResponse 返回参数} */
   ModifyInstanceToken(data: ModifyInstanceTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceTokenResponse>;
-  /** 更新命名空间信息 */
+  /** {@link ModifyNamespace 更新命名空间信息}({@link ModifyNamespaceRequest 请求参数}): {@link ModifyNamespaceResponse 返回参数} */
   ModifyNamespace(data: ModifyNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNamespaceResponse>;
-  /** 更新镜像仓库信息 */
+  /** {@link ModifyRepository 更新镜像仓库信息}({@link ModifyRepositoryRequest 请求参数}): {@link ModifyRepositoryResponse 返回参数} */
   ModifyRepository(data: ModifyRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRepositoryResponse>;
-  /** 更新个人版仓库访问属性 */
+  /** {@link ModifyRepositoryAccessPersonal 更新个人版仓库访问属性}({@link ModifyRepositoryAccessPersonalRequest 请求参数}): {@link ModifyRepositoryAccessPersonalResponse 返回参数} */
   ModifyRepositoryAccessPersonal(data: ModifyRepositoryAccessPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRepositoryAccessPersonalResponse>;
-  /** 更新个人版镜像仓库描述 */
+  /** {@link ModifyRepositoryInfoPersonal 更新个人版镜像仓库描述}({@link ModifyRepositoryInfoPersonalRequest 请求参数}): {@link ModifyRepositoryInfoPersonalResponse 返回参数} */
   ModifyRepositoryInfoPersonal(data: ModifyRepositoryInfoPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRepositoryInfoPersonalResponse>;
-  /** 更新实例公网访问白名单 */
+  /** {@link ModifySecurityPolicy 更新实例公网访问白名单}({@link ModifySecurityPolicyRequest 请求参数}): {@link ModifySecurityPolicyResponse 返回参数} */
   ModifySecurityPolicy(data: ModifySecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityPolicyResponse>;
-  /** 更新版本保留规则 */
+  /** {@link ModifyTagRetentionRule 更新版本保留规则}({@link ModifyTagRetentionRuleRequest 请求参数}): {@link ModifyTagRetentionRuleResponse 返回参数} */
   ModifyTagRetentionRule(data: ModifyTagRetentionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTagRetentionRuleResponse>;
-  /** 修改个人用户登录密码 */
+  /** {@link ModifyUserPasswordPersonal 修改个人用户登录密码}({@link ModifyUserPasswordPersonalRequest 请求参数}): {@link ModifyUserPasswordPersonalResponse 返回参数} */
   ModifyUserPasswordPersonal(data: ModifyUserPasswordPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserPasswordPersonalResponse>;
-  /** 更新触发器 */
+  /** {@link ModifyWebhookTrigger 更新触发器}({@link ModifyWebhookTriggerRequest 请求参数}): {@link ModifyWebhookTriggerResponse 返回参数} */
   ModifyWebhookTrigger(data: ModifyWebhookTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebhookTriggerResponse>;
-  /** 续费实例 */
+  /** {@link RenewInstance 续费实例}({@link RenewInstanceRequest 请求参数}): {@link RenewInstanceResponse 返回参数} */
   RenewInstance(data: RenewInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenewInstanceResponse>;
-  /** 验证个人版命名空间是否存在 */
+  /** {@link ValidateNamespaceExistPersonal 验证个人版命名空间是否存在}({@link ValidateNamespaceExistPersonalRequest 请求参数}): {@link ValidateNamespaceExistPersonalResponse 返回参数} */
   ValidateNamespaceExistPersonal(data: ValidateNamespaceExistPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ValidateNamespaceExistPersonalResponse>;
-  /** 验证个人版仓库是否存在 */
+  /** {@link ValidateRepositoryExistPersonal 验证个人版仓库是否存在}({@link ValidateRepositoryExistPersonalRequest 请求参数}): {@link ValidateRepositoryExistPersonalResponse 返回参数} */
   ValidateRepositoryExistPersonal(data: ValidateRepositoryExistPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ValidateRepositoryExistPersonalResponse>;
 }
 

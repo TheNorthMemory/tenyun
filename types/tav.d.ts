@@ -78,16 +78,16 @@ declare interface ScanFileResponse {
   RequestId?: string;
 }
 
-/** 文件检测 */
+/** {@link Tav 文件检测} */
 declare interface Tav {
   (): Versions;
-  /** 本地引擎下载地址获取 */
+  /** {@link GetLocalEngine 本地引擎下载地址获取}({@link GetLocalEngineRequest 请求参数}): {@link GetLocalEngineResponse 返回参数} */
   GetLocalEngine(data: GetLocalEngineRequest, config?: AxiosRequestConfig): AxiosPromise<GetLocalEngineResponse>;
-  /** 文件上传扫描结果查询 */
+  /** {@link GetScanResult 文件上传扫描结果查询}({@link GetScanResultRequest 请求参数}): {@link GetScanResultResponse 返回参数} */
   GetScanResult(data: GetScanResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetScanResultResponse>;
-  /** 文件上传扫描 */
+  /** {@link ScanFile 文件上传扫描}({@link ScanFileRequest 请求参数}): {@link ScanFileResponse 返回参数} */
   ScanFile(data: ScanFileRequest, config?: AxiosRequestConfig): AxiosPromise<ScanFileResponse>;
-  /** 公有云查 */
+  /** {@link ScanFileHash 公有云查}({@link ScanFileHashRequest 请求参数}): {@link ScanFileHashResponse 返回参数} */
   ScanFileHash(data: ScanFileHashRequest, config?: AxiosRequestConfig): AxiosPromise<ScanFileHashResponse>;
 }
 

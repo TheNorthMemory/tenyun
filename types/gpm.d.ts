@@ -576,44 +576,44 @@ declare interface StartMatchingResponse {
   RequestId?: string;
 }
 
-/** [游戏玩家匹配](https://cloud.tencent.com/document/product/1294) */
+/** {@link Gpm 游戏玩家匹配} */
 declare interface Gpm {
   (): Versions;
-  /** 取消匹配 */
+  /** {@link CancelMatching 取消匹配}({@link CancelMatchingRequest 请求参数}): {@link CancelMatchingResponse 返回参数} */
   CancelMatching(data: CancelMatchingRequest, config?: AxiosRequestConfig): AxiosPromise<CancelMatchingResponse>;
-  /** 创建匹配 */
+  /** {@link CreateMatch 创建匹配}({@link CreateMatchRequest 请求参数}): {@link CreateMatchResponse 返回参数} */
   CreateMatch(data: CreateMatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMatchResponse>;
-  /** 创建规则 */
+  /** {@link CreateRule 创建规则}({@link CreateRuleRequest 请求参数}): {@link CreateRuleResponse 返回参数} */
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
-  /** 删除匹配 */
+  /** {@link DeleteMatch 删除匹配}({@link DeleteMatchRequest 请求参数}): {@link DeleteMatchResponse 返回参数} */
   DeleteMatch(data: DeleteMatchRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMatchResponse>;
-  /** 删除规则 */
+  /** {@link DeleteRule 删除规则}({@link DeleteRuleRequest 请求参数}): {@link DeleteRuleResponse 返回参数} */
   DeleteRule(data: DeleteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleResponse>;
-  /** 统计数据 */
+  /** {@link DescribeData 统计数据}({@link DescribeDataRequest 请求参数}): {@link DescribeDataResponse 返回参数} */
   DescribeData(data: DescribeDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataResponse>;
-  /** 查询匹配详情 */
+  /** {@link DescribeMatch 查询匹配详情}({@link DescribeMatchRequest 请求参数}): {@link DescribeMatchResponse 返回参数} */
   DescribeMatch(data: DescribeMatchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMatchResponse>;
-  /** 分页查询匹配Code */
+  /** {@link DescribeMatchCodes 分页查询匹配Code}({@link DescribeMatchCodesRequest 请求参数}): {@link DescribeMatchCodesResponse 返回参数} */
   DescribeMatchCodes(data: DescribeMatchCodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMatchCodesResponse>;
-  /** 分页查询匹配列表 */
+  /** {@link DescribeMatches 分页查询匹配列表}({@link DescribeMatchesRequest 请求参数}): {@link DescribeMatchesResponse 返回参数} */
   DescribeMatches(data?: DescribeMatchesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMatchesResponse>;
-  /** 查询匹配进度 */
+  /** {@link DescribeMatchingProgress 查询匹配进度}({@link DescribeMatchingProgressRequest 请求参数}): {@link DescribeMatchingProgressResponse 返回参数} */
   DescribeMatchingProgress(data: DescribeMatchingProgressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMatchingProgressResponse>;
-  /** 查询规则详情 */
+  /** {@link DescribeRule 查询规则详情}({@link DescribeRuleRequest 请求参数}): {@link DescribeRuleResponse 返回参数} */
   DescribeRule(data: DescribeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleResponse>;
-  /** 分页查询规则集列表 */
+  /** {@link DescribeRules 分页查询规则集列表}({@link DescribeRulesRequest 请求参数}): {@link DescribeRulesResponse 返回参数} */
   DescribeRules(data?: DescribeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesResponse>;
-  /** 查询匹配Token */
+  /** {@link DescribeToken 查询匹配Token}({@link DescribeTokenRequest 请求参数}): {@link DescribeTokenResponse 返回参数} */
   DescribeToken(data: DescribeTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenResponse>;
-  /** 修改匹配 */
+  /** {@link ModifyMatch 修改匹配}({@link ModifyMatchRequest 请求参数}): {@link ModifyMatchResponse 返回参数} */
   ModifyMatch(data: ModifyMatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMatchResponse>;
-  /** 修改规则 */
+  /** {@link ModifyRule 修改规则}({@link ModifyRuleRequest 请求参数}): {@link ModifyRuleResponse 返回参数} */
   ModifyRule(data: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
-  /** 修改匹配Token */
+  /** {@link ModifyToken 修改匹配Token}({@link ModifyTokenRequest 请求参数}): {@link ModifyTokenResponse 返回参数} */
   ModifyToken(data: ModifyTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTokenResponse>;
-  /** 发起匹配 */
+  /** {@link StartMatching 发起匹配}({@link StartMatchingRequest 请求参数}): {@link StartMatchingResponse 返回参数} */
   StartMatching(data: StartMatchingRequest, config?: AxiosRequestConfig): AxiosPromise<StartMatchingResponse>;
-  /** 发起回填匹配 */
+  /** {@link StartMatchingBackfill 发起回填匹配}({@link StartMatchingBackfillRequest 请求参数}): {@link StartMatchingBackfillResponse 返回参数} */
   StartMatchingBackfill(data: StartMatchingBackfillRequest, config?: AxiosRequestConfig): AxiosPromise<StartMatchingBackfillResponse>;
 }
 

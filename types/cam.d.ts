@@ -1752,174 +1752,174 @@ declare interface UpdateUserSAMLConfigResponse {
   RequestId?: string;
 }
 
-/** [访问管理](https://cloud.tencent.com/document/product/598) */
+/** {@link Cam 访问管理} */
 declare interface Cam {
   (): Versions;
-  /** 添加子用户 */
+  /** {@link AddUser 添加子用户}({@link AddUserRequest 请求参数}): {@link AddUserResponse 返回参数} */
   AddUser(data: AddUserRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserResponse>;
-  /** 用户加入到用户组 */
+  /** {@link AddUserToGroup 用户加入到用户组}({@link AddUserToGroupRequest 请求参数}): {@link AddUserToGroupResponse 返回参数} */
   AddUserToGroup(data: AddUserToGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserToGroupResponse>;
-  /** 绑定策略到用户组 */
+  /** {@link AttachGroupPolicy 绑定策略到用户组}({@link AttachGroupPolicyRequest 请求参数}): {@link AttachGroupPolicyResponse 返回参数} */
   AttachGroupPolicy(data: AttachGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachGroupPolicyResponse>;
-  /** 绑定权限策略到角色 */
+  /** {@link AttachRolePolicy 绑定权限策略到角色}({@link AttachRolePolicyRequest 请求参数}): {@link AttachRolePolicyResponse 返回参数} */
   AttachRolePolicy(data?: AttachRolePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachRolePolicyResponse>;
-  /** 绑定策略到用户 */
+  /** {@link AttachUserPolicy 绑定策略到用户}({@link AttachUserPolicyRequest 请求参数}): {@link AttachUserPolicyResponse 返回参数} */
   AttachUserPolicy(data: AttachUserPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachUserPolicyResponse>;
-  /** 验证自定义多因子Token */
+  /** {@link ConsumeCustomMFAToken 验证自定义多因子Token}({@link ConsumeCustomMFATokenRequest 请求参数}): {@link ConsumeCustomMFATokenResponse 返回参数} */
   ConsumeCustomMFAToken(data: ConsumeCustomMFATokenRequest, config?: AxiosRequestConfig): AxiosPromise<ConsumeCustomMFATokenResponse>;
-  /** 创建用户组 */
+  /** {@link CreateGroup 创建用户组}({@link CreateGroupRequest 请求参数}): {@link CreateGroupResponse 返回参数} */
   CreateGroup(data: CreateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupResponse>;
-  /** 创建角色OIDC配置 */
+  /** {@link CreateOIDCConfig 创建角色OIDC配置}({@link CreateOIDCConfigRequest 请求参数}): {@link CreateOIDCConfigResponse 返回参数} */
   CreateOIDCConfig(data: CreateOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOIDCConfigResponse>;
-  /** 创建策略 */
+  /** {@link CreatePolicy 创建策略}({@link CreatePolicyRequest 请求参数}): {@link CreatePolicyResponse 返回参数} */
   CreatePolicy(data: CreatePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePolicyResponse>;
-  /** 新增策略版本接口 */
+  /** {@link CreatePolicyVersion 新增策略版本接口}({@link CreatePolicyVersionRequest 请求参数}): {@link CreatePolicyVersionResponse 返回参数} */
   CreatePolicyVersion(data: CreatePolicyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePolicyVersionResponse>;
-  /** 创建角色 */
+  /** {@link CreateRole 创建角色}({@link CreateRoleRequest 请求参数}): {@link CreateRoleResponse 返回参数} */
   CreateRole(data: CreateRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleResponse>;
-  /** 创建SAML身份提供商 */
+  /** {@link CreateSAMLProvider 创建SAML身份提供商}({@link CreateSAMLProviderRequest 请求参数}): {@link CreateSAMLProviderResponse 返回参数} */
   CreateSAMLProvider(data: CreateSAMLProviderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSAMLProviderResponse>;
-  /** 创建服务相关角色 */
+  /** {@link CreateServiceLinkedRole 创建服务相关角色}({@link CreateServiceLinkedRoleRequest 请求参数}): {@link CreateServiceLinkedRoleResponse 返回参数} */
   CreateServiceLinkedRole(data: CreateServiceLinkedRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceLinkedRoleResponse>;
-  /** 创建用户OIDC配置 */
+  /** {@link CreateUserOIDCConfig 创建用户OIDC配置}({@link CreateUserOIDCConfigRequest 请求参数}): {@link CreateUserOIDCConfigResponse 返回参数} */
   CreateUserOIDCConfig(data: CreateUserOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserOIDCConfigResponse>;
-  /** 创建用户SAML配置 */
+  /** {@link CreateUserSAMLConfig 创建用户SAML配置}({@link CreateUserSAMLConfigRequest 请求参数}): {@link CreateUserSAMLConfigResponse 返回参数} */
   CreateUserSAMLConfig(data: CreateUserSAMLConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserSAMLConfigResponse>;
-  /** 删除用户组 */
+  /** {@link DeleteGroup 删除用户组}({@link DeleteGroupRequest 请求参数}): {@link DeleteGroupResponse 返回参数} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
-  /** 删除OIDC身份提供商 */
+  /** {@link DeleteOIDCConfig 删除OIDC身份提供商}({@link DeleteOIDCConfigRequest 请求参数}): {@link DeleteOIDCConfigResponse 返回参数} */
   DeleteOIDCConfig(data: DeleteOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOIDCConfigResponse>;
-  /** 删除策略 */
+  /** {@link DeletePolicy 删除策略}({@link DeletePolicyRequest 请求参数}): {@link DeletePolicyResponse 返回参数} */
   DeletePolicy(data: DeletePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePolicyResponse>;
-  /** 删除策略的策略版本 */
+  /** {@link DeletePolicyVersion 删除策略的策略版本}({@link DeletePolicyVersionRequest 请求参数}): {@link DeletePolicyVersionResponse 返回参数} */
   DeletePolicyVersion(data: DeletePolicyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePolicyVersionResponse>;
-  /** 删除角色 */
+  /** {@link DeleteRole 删除角色}({@link DeleteRoleRequest 请求参数}): {@link DeleteRoleResponse 返回参数} */
   DeleteRole(data?: DeleteRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleResponse>;
-  /** 删除角色权限边界 */
+  /** {@link DeleteRolePermissionsBoundary 删除角色权限边界}({@link DeleteRolePermissionsBoundaryRequest 请求参数}): {@link DeleteRolePermissionsBoundaryResponse 返回参数} */
   DeleteRolePermissionsBoundary(data?: DeleteRolePermissionsBoundaryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRolePermissionsBoundaryResponse>;
-  /** 删除SAML身份提供商 */
+  /** {@link DeleteSAMLProvider 删除SAML身份提供商}({@link DeleteSAMLProviderRequest 请求参数}): {@link DeleteSAMLProviderResponse 返回参数} */
   DeleteSAMLProvider(data: DeleteSAMLProviderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSAMLProviderResponse>;
-  /** 删除服务相关角色 */
+  /** {@link DeleteServiceLinkedRole 删除服务相关角色}({@link DeleteServiceLinkedRoleRequest 请求参数}): {@link DeleteServiceLinkedRoleResponse 返回参数} */
   DeleteServiceLinkedRole(data: DeleteServiceLinkedRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceLinkedRoleResponse>;
-  /** 删除子用户 */
+  /** {@link DeleteUser 删除子用户}({@link DeleteUserRequest 请求参数}): {@link DeleteUserResponse 返回参数} */
   DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
-  /** 删除用户权限边界 */
+  /** {@link DeleteUserPermissionsBoundary 删除用户权限边界}({@link DeleteUserPermissionsBoundaryRequest 请求参数}): {@link DeleteUserPermissionsBoundaryResponse 返回参数} */
   DeleteUserPermissionsBoundary(data: DeleteUserPermissionsBoundaryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserPermissionsBoundaryResponse>;
-  /** 查询角色OIDC配置 */
+  /** {@link DescribeOIDCConfig 查询角色OIDC配置}({@link DescribeOIDCConfigRequest 请求参数}): {@link DescribeOIDCConfigResponse 返回参数} */
   DescribeOIDCConfig(data: DescribeOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOIDCConfigResponse>;
-  /** 获取角色列表 */
+  /** {@link DescribeRoleList 获取角色列表}({@link DescribeRoleListRequest 请求参数}): {@link DescribeRoleListResponse 返回参数} */
   DescribeRoleList(data: DescribeRoleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoleListResponse>;
-  /** 查询用户安全设置 */
+  /** {@link DescribeSafeAuthFlag 查询用户安全设置}({@link DescribeSafeAuthFlagRequest 请求参数}): {@link DescribeSafeAuthFlagResponse 返回参数} */
   DescribeSafeAuthFlag(data?: DescribeSafeAuthFlagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSafeAuthFlagResponse>;
-  /** 查询安全设置 */
+  /** {@link DescribeSafeAuthFlagColl 查询安全设置}({@link DescribeSafeAuthFlagCollRequest 请求参数}): {@link DescribeSafeAuthFlagCollResponse 返回参数} */
   DescribeSafeAuthFlagColl(data: DescribeSafeAuthFlagCollRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSafeAuthFlagCollResponse>;
-  /** 查询安全设置(国际站) */
+  /** {@link DescribeSafeAuthFlagIntl 查询安全设置(国际站)}({@link DescribeSafeAuthFlagIntlRequest 请求参数}): {@link DescribeSafeAuthFlagIntlResponse 返回参数} */
   DescribeSafeAuthFlagIntl(data?: DescribeSafeAuthFlagIntlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSafeAuthFlagIntlResponse>;
-  /** 通过子用户UIN列表查询子用户 */
+  /** {@link DescribeSubAccounts 通过子用户UIN列表查询子用户}({@link DescribeSubAccountsRequest 请求参数}): {@link DescribeSubAccountsResponse 返回参数} */
   DescribeSubAccounts(data: DescribeSubAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubAccountsResponse>;
-  /** 查询用户OIDC配置 */
+  /** {@link DescribeUserOIDCConfig 查询用户OIDC配置}({@link DescribeUserOIDCConfigRequest 请求参数}): {@link DescribeUserOIDCConfigResponse 返回参数} */
   DescribeUserOIDCConfig(data?: DescribeUserOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserOIDCConfigResponse>;
-  /** 查询用户SAML配置 */
+  /** {@link DescribeUserSAMLConfig 查询用户SAML配置}({@link DescribeUserSAMLConfigRequest 请求参数}): {@link DescribeUserSAMLConfigResponse 返回参数} */
   DescribeUserSAMLConfig(data?: DescribeUserSAMLConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserSAMLConfigResponse>;
-  /** 解除绑定到用户组的策略 */
+  /** {@link DetachGroupPolicy 解除绑定到用户组的策略}({@link DetachGroupPolicyRequest 请求参数}): {@link DetachGroupPolicyResponse 返回参数} */
   DetachGroupPolicy(data: DetachGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DetachGroupPolicyResponse>;
-  /** 解绑角色的策略 */
+  /** {@link DetachRolePolicy 解绑角色的策略}({@link DetachRolePolicyRequest 请求参数}): {@link DetachRolePolicyResponse 返回参数} */
   DetachRolePolicy(data?: DetachRolePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DetachRolePolicyResponse>;
-  /** 解除绑定到用户的策略 */
+  /** {@link DetachUserPolicy 解除绑定到用户的策略}({@link DetachUserPolicyRequest 请求参数}): {@link DetachUserPolicyResponse 返回参数} */
   DetachUserPolicy(data: DetachUserPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DetachUserPolicyResponse>;
-  /** 禁用用户SSO */
+  /** {@link DisableUserSSO 禁用用户SSO}({@link DisableUserSSORequest 请求参数}): {@link DisableUserSSOResponse 返回参数} */
   DisableUserSSO(data?: DisableUserSSORequest, config?: AxiosRequestConfig): AxiosPromise<DisableUserSSOResponse>;
-  /** 查询账户摘要 */
+  /** {@link GetAccountSummary 查询账户摘要}({@link GetAccountSummaryRequest 请求参数}): {@link GetAccountSummaryResponse 返回参数} */
   GetAccountSummary(data?: GetAccountSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<GetAccountSummaryResponse>;
-  /** 获取自定义多因子Token关联信息 */
+  /** {@link GetCustomMFATokenInfo 获取自定义多因子Token关联信息}({@link GetCustomMFATokenInfoRequest 请求参数}): {@link GetCustomMFATokenInfoResponse 返回参数} */
   GetCustomMFATokenInfo(data: GetCustomMFATokenInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetCustomMFATokenInfoResponse>;
-  /** 查询用户组详情 */
+  /** {@link GetGroup 查询用户组详情}({@link GetGroupRequest 请求参数}): {@link GetGroupResponse 返回参数} */
   GetGroup(data: GetGroupRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupResponse>;
-  /** 查看策略详情 */
+  /** {@link GetPolicy 查看策略详情}({@link GetPolicyRequest 请求参数}): {@link GetPolicyResponse 返回参数} */
   GetPolicy(data: GetPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<GetPolicyResponse>;
-  /** 查询策略版本详情 */
+  /** {@link GetPolicyVersion 查询策略版本详情}({@link GetPolicyVersionRequest 请求参数}): {@link GetPolicyVersionResponse 返回参数} */
   GetPolicyVersion(data: GetPolicyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<GetPolicyVersionResponse>;
-  /** 获取角色详情 */
+  /** {@link GetRole 获取角色详情}({@link GetRoleRequest 请求参数}): {@link GetRoleResponse 返回参数} */
   GetRole(data?: GetRoleRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoleResponse>;
-  /** 获取角色权限边界 */
+  /** {@link GetRolePermissionBoundary 获取角色权限边界}({@link GetRolePermissionBoundaryRequest 请求参数}): {@link GetRolePermissionBoundaryResponse 返回参数} */
   GetRolePermissionBoundary(data: GetRolePermissionBoundaryRequest, config?: AxiosRequestConfig): AxiosPromise<GetRolePermissionBoundaryResponse>;
-  /** 查询SAML身份提供商详情 */
+  /** {@link GetSAMLProvider 查询SAML身份提供商详情}({@link GetSAMLProviderRequest 请求参数}): {@link GetSAMLProviderResponse 返回参数} */
   GetSAMLProvider(data: GetSAMLProviderRequest, config?: AxiosRequestConfig): AxiosPromise<GetSAMLProviderResponse>;
-  /** 获取密钥最近使用情况 */
+  /** {@link GetSecurityLastUsed 获取密钥最近使用情况}({@link GetSecurityLastUsedRequest 请求参数}): {@link GetSecurityLastUsedResponse 返回参数} */
   GetSecurityLastUsed(data: GetSecurityLastUsedRequest, config?: AxiosRequestConfig): AxiosPromise<GetSecurityLastUsedResponse>;
-  /** 获取服务相关角色删除状态 */
+  /** {@link GetServiceLinkedRoleDeletionStatus 获取服务相关角色删除状态}({@link GetServiceLinkedRoleDeletionStatusRequest 请求参数}): {@link GetServiceLinkedRoleDeletionStatusResponse 返回参数} */
   GetServiceLinkedRoleDeletionStatus(data: GetServiceLinkedRoleDeletionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetServiceLinkedRoleDeletionStatusResponse>;
-  /** 查询子用户 */
+  /** {@link GetUser 查询子用户}({@link GetUserRequest 请求参数}): {@link GetUserResponse 返回参数} */
   GetUser(data: GetUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetUserResponse>;
-  /** 获取用户AppId */
+  /** {@link GetUserAppId 获取用户AppId}({@link GetUserAppIdRequest 请求参数}): {@link GetUserAppIdResponse 返回参数} */
   GetUserAppId(data?: GetUserAppIdRequest, config?: AxiosRequestConfig): AxiosPromise<GetUserAppIdResponse>;
-  /** 获取用户权限边界 */
+  /** {@link GetUserPermissionBoundary 获取用户权限边界}({@link GetUserPermissionBoundaryRequest 请求参数}): {@link GetUserPermissionBoundaryResponse 返回参数} */
   GetUserPermissionBoundary(data: GetUserPermissionBoundaryRequest, config?: AxiosRequestConfig): AxiosPromise<GetUserPermissionBoundaryResponse>;
-  /** 列出访问密钥 */
+  /** {@link ListAccessKeys 列出访问密钥}({@link ListAccessKeysRequest 请求参数}): {@link ListAccessKeysResponse 返回参数} */
   ListAccessKeys(data?: ListAccessKeysRequest, config?: AxiosRequestConfig): AxiosPromise<ListAccessKeysResponse>;
-  /** 查询用户组关联的策略列表 */
+  /** {@link ListAttachedGroupPolicies 查询用户组关联的策略列表}({@link ListAttachedGroupPoliciesRequest 请求参数}): {@link ListAttachedGroupPoliciesResponse 返回参数} */
   ListAttachedGroupPolicies(data: ListAttachedGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAttachedGroupPoliciesResponse>;
-  /** 获取角色绑定的策略列表 */
+  /** {@link ListAttachedRolePolicies 获取角色绑定的策略列表}({@link ListAttachedRolePoliciesRequest 请求参数}): {@link ListAttachedRolePoliciesResponse 返回参数} */
   ListAttachedRolePolicies(data: ListAttachedRolePoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAttachedRolePoliciesResponse>;
-  /** 列出用户关联的策略（包括随组关联） */
+  /** {@link ListAttachedUserAllPolicies 列出用户关联的策略（包括随组关联）}({@link ListAttachedUserAllPoliciesRequest 请求参数}): {@link ListAttachedUserAllPoliciesResponse 返回参数} */
   ListAttachedUserAllPolicies(data: ListAttachedUserAllPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAttachedUserAllPoliciesResponse>;
-  /** 查询子账号关联的策略列表 */
+  /** {@link ListAttachedUserPolicies 查询子账号关联的策略列表}({@link ListAttachedUserPoliciesRequest 请求参数}): {@link ListAttachedUserPoliciesResponse 返回参数} */
   ListAttachedUserPolicies(data: ListAttachedUserPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAttachedUserPoliciesResponse>;
-  /** 获取协作者列表 */
+  /** {@link ListCollaborators 获取协作者列表}({@link ListCollaboratorsRequest 请求参数}): {@link ListCollaboratorsResponse 返回参数} */
   ListCollaborators(data?: ListCollaboratorsRequest, config?: AxiosRequestConfig): AxiosPromise<ListCollaboratorsResponse>;
-  /** 查询策略关联的实体列表 */
+  /** {@link ListEntitiesForPolicy 查询策略关联的实体列表}({@link ListEntitiesForPolicyRequest 请求参数}): {@link ListEntitiesForPolicyResponse 返回参数} */
   ListEntitiesForPolicy(data: ListEntitiesForPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ListEntitiesForPolicyResponse>;
-  /** 查询用户组列表 */
+  /** {@link ListGroups 查询用户组列表}({@link ListGroupsRequest 请求参数}): {@link ListGroupsResponse 返回参数} */
   ListGroups(data?: ListGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListGroupsResponse>;
-  /** 列出用户关联的用户组 */
+  /** {@link ListGroupsForUser 列出用户关联的用户组}({@link ListGroupsForUserRequest 请求参数}): {@link ListGroupsForUserResponse 返回参数} */
   ListGroupsForUser(data?: ListGroupsForUserRequest, config?: AxiosRequestConfig): AxiosPromise<ListGroupsForUserResponse>;
-  /** 查询策略列表 */
+  /** {@link ListPolicies 查询策略列表}({@link ListPoliciesRequest 请求参数}): {@link ListPoliciesResponse 返回参数} */
   ListPolicies(data?: ListPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ListPoliciesResponse>;
-  /** 获取所有已授权服务 */
+  /** {@link ListPoliciesGrantingServiceAccess 获取所有已授权服务}({@link ListPoliciesGrantingServiceAccessRequest 请求参数}): {@link ListPoliciesGrantingServiceAccessResponse 返回参数} */
   ListPoliciesGrantingServiceAccess(data?: ListPoliciesGrantingServiceAccessRequest, config?: AxiosRequestConfig): AxiosPromise<ListPoliciesGrantingServiceAccessResponse>;
-  /** 获取策略版本列表 */
+  /** {@link ListPolicyVersions 获取策略版本列表}({@link ListPolicyVersionsRequest 请求参数}): {@link ListPolicyVersionsResponse 返回参数} */
   ListPolicyVersions(data: ListPolicyVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListPolicyVersionsResponse>;
-  /** 查询SAML身份提供商列表 */
+  /** {@link ListSAMLProviders 查询SAML身份提供商列表}({@link ListSAMLProvidersRequest 请求参数}): {@link ListSAMLProvidersResponse 返回参数} */
   ListSAMLProviders(data?: ListSAMLProvidersRequest, config?: AxiosRequestConfig): AxiosPromise<ListSAMLProvidersResponse>;
-  /** 拉取子用户 */
+  /** {@link ListUsers 拉取子用户}({@link ListUsersRequest 请求参数}): {@link ListUsersResponse 返回参数} */
   ListUsers(data?: ListUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsersResponse>;
-  /** 查询用户组关联的用户列表 */
+  /** {@link ListUsersForGroup 查询用户组关联的用户列表}({@link ListUsersForGroupRequest 请求参数}): {@link ListUsersForGroupResponse 返回参数} */
   ListUsersForGroup(data: ListUsersForGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsersForGroupResponse>;
-  /** 获取企业微信子用户列表 */
+  /** {@link ListWeChatWorkSubAccounts 获取企业微信子用户列表}({@link ListWeChatWorkSubAccountsRequest 请求参数}): {@link ListWeChatWorkSubAccountsResponse 返回参数} */
   ListWeChatWorkSubAccounts(data: ListWeChatWorkSubAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWeChatWorkSubAccountsResponse>;
-  /** 设置角色权限边界 */
+  /** {@link PutRolePermissionsBoundary 设置角色权限边界}({@link PutRolePermissionsBoundaryRequest 请求参数}): {@link PutRolePermissionsBoundaryResponse 返回参数} */
   PutRolePermissionsBoundary(data: PutRolePermissionsBoundaryRequest, config?: AxiosRequestConfig): AxiosPromise<PutRolePermissionsBoundaryResponse>;
-  /** 设置用户权限边界 */
+  /** {@link PutUserPermissionsBoundary 设置用户权限边界}({@link PutUserPermissionsBoundaryRequest 请求参数}): {@link PutUserPermissionsBoundaryResponse 返回参数} */
   PutUserPermissionsBoundary(data: PutUserPermissionsBoundaryRequest, config?: AxiosRequestConfig): AxiosPromise<PutUserPermissionsBoundaryResponse>;
-  /** 从用户组删除用户 */
+  /** {@link RemoveUserFromGroup 从用户组删除用户}({@link RemoveUserFromGroupRequest 请求参数}): {@link RemoveUserFromGroupResponse 返回参数} */
   RemoveUserFromGroup(data: RemoveUserFromGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserFromGroupResponse>;
-  /** 设置生效的策略版本 */
+  /** {@link SetDefaultPolicyVersion 设置生效的策略版本}({@link SetDefaultPolicyVersionRequest 请求参数}): {@link SetDefaultPolicyVersionResponse 返回参数} */
   SetDefaultPolicyVersion(data: SetDefaultPolicyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<SetDefaultPolicyVersionResponse>;
-  /** 设置子用户的登录保护和敏感操作校验方式 */
+  /** {@link SetMfaFlag 设置子用户的登录保护和敏感操作校验方式}({@link SetMfaFlagRequest 请求参数}): {@link SetMfaFlagResponse 返回参数} */
   SetMfaFlag(data?: SetMfaFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetMfaFlagResponse>;
-  /** 角色绑定标签 */
+  /** {@link TagRole 角色绑定标签}({@link TagRoleRequest 请求参数}): {@link TagRoleResponse 返回参数} */
   TagRole(data: TagRoleRequest, config?: AxiosRequestConfig): AxiosPromise<TagRoleResponse>;
-  /** 角色解绑标签 */
+  /** {@link UntagRole 角色解绑标签}({@link UntagRoleRequest 请求参数}): {@link UntagRoleResponse 返回参数} */
   UntagRole(data: UntagRoleRequest, config?: AxiosRequestConfig): AxiosPromise<UntagRoleResponse>;
-  /** 修改角色信任策略 */
+  /** {@link UpdateAssumeRolePolicy 修改角色信任策略}({@link UpdateAssumeRolePolicyRequest 请求参数}): {@link UpdateAssumeRolePolicyResponse 返回参数} */
   UpdateAssumeRolePolicy(data: UpdateAssumeRolePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAssumeRolePolicyResponse>;
-  /** 更新用户组 */
+  /** {@link UpdateGroup 更新用户组}({@link UpdateGroupRequest 请求参数}): {@link UpdateGroupResponse 返回参数} */
   UpdateGroup(data: UpdateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGroupResponse>;
-  /** 修改角色OIDC配置 */
+  /** {@link UpdateOIDCConfig 修改角色OIDC配置}({@link UpdateOIDCConfigRequest 请求参数}): {@link UpdateOIDCConfigResponse 返回参数} */
   UpdateOIDCConfig(data: UpdateOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOIDCConfigResponse>;
-  /** 更新策略信息 */
+  /** {@link UpdatePolicy 更新策略信息}({@link UpdatePolicyRequest 请求参数}): {@link UpdatePolicyResponse 返回参数} */
   UpdatePolicy(data?: UpdatePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePolicyResponse>;
-  /** 修改角色是否可登录 */
+  /** {@link UpdateRoleConsoleLogin 修改角色是否可登录}({@link UpdateRoleConsoleLoginRequest 请求参数}): {@link UpdateRoleConsoleLoginResponse 返回参数} */
   UpdateRoleConsoleLogin(data: UpdateRoleConsoleLoginRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRoleConsoleLoginResponse>;
-  /** 修改角色描述信息 */
+  /** {@link UpdateRoleDescription 修改角色描述信息}({@link UpdateRoleDescriptionRequest 请求参数}): {@link UpdateRoleDescriptionResponse 返回参数} */
   UpdateRoleDescription(data: UpdateRoleDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRoleDescriptionResponse>;
-  /** 更新SAML身份提供商信息 */
+  /** {@link UpdateSAMLProvider 更新SAML身份提供商信息}({@link UpdateSAMLProviderRequest 请求参数}): {@link UpdateSAMLProviderResponse 返回参数} */
   UpdateSAMLProvider(data: UpdateSAMLProviderRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSAMLProviderResponse>;
-  /** 更新子用户 */
+  /** {@link UpdateUser 更新子用户}({@link UpdateUserRequest 请求参数}): {@link UpdateUserResponse 返回参数} */
   UpdateUser(data: UpdateUserRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserResponse>;
-  /** 修改用户OIDC配置 */
+  /** {@link UpdateUserOIDCConfig 修改用户OIDC配置}({@link UpdateUserOIDCConfigRequest 请求参数}): {@link UpdateUserOIDCConfigResponse 返回参数} */
   UpdateUserOIDCConfig(data: UpdateUserOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserOIDCConfigResponse>;
-  /** 修改用户SAML配置 */
+  /** {@link UpdateUserSAMLConfig 修改用户SAML配置}({@link UpdateUserSAMLConfigRequest 请求参数}): {@link UpdateUserSAMLConfigResponse 返回参数} */
   UpdateUserSAMLConfig(data: UpdateUserSAMLConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserSAMLConfigResponse>;
 }
 

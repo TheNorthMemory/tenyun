@@ -574,36 +574,36 @@ declare interface UpdateCaptchaAppIdInfoResponse {
   RequestId?: string;
 }
 
-/** [验证码](https://cloud.tencent.com/document/product/1110) */
+/** {@link Captcha 验证码} */
 declare interface Captcha {
   (): Versions;
-  /** 查询安全验证码应用APPId信息 */
+  /** {@link DescribeCaptchaAppIdInfo 查询安全验证码应用APPId信息}({@link DescribeCaptchaAppIdInfoRequest 请求参数}): {@link DescribeCaptchaAppIdInfoResponse 返回参数} */
   DescribeCaptchaAppIdInfo(data: DescribeCaptchaAppIdInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaAppIdInfoResponse>;
-  /** 安全验证码分类查询数据接口 */
+  /** {@link DescribeCaptchaData 安全验证码分类查询数据接口}({@link DescribeCaptchaDataRequest 请求参数}): {@link DescribeCaptchaDataResponse 返回参数} */
   DescribeCaptchaData(data: DescribeCaptchaDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaDataResponse>;
-  /** 安全验证码查询请求数据概况 */
+  /** {@link DescribeCaptchaDataSum 安全验证码查询请求数据概况}({@link DescribeCaptchaDataSumRequest 请求参数}): {@link DescribeCaptchaDataSumResponse 返回参数} */
   DescribeCaptchaDataSum(data: DescribeCaptchaDataSumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaDataSumResponse>;
-  /** 安全验证码小程序插件分类查询数据接口 */
+  /** {@link DescribeCaptchaMiniData 安全验证码小程序插件分类查询数据接口}({@link DescribeCaptchaMiniDataRequest 请求参数}): {@link DescribeCaptchaMiniDataResponse 返回参数} */
   DescribeCaptchaMiniData(data: DescribeCaptchaMiniDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniDataResponse>;
-  /** 安全验证码小程序插件查询请求数据概况 */
+  /** {@link DescribeCaptchaMiniDataSum 安全验证码小程序插件查询请求数据概况}({@link DescribeCaptchaMiniDataSumRequest 请求参数}): {@link DescribeCaptchaMiniDataSumResponse 返回参数} */
   DescribeCaptchaMiniDataSum(data: DescribeCaptchaMiniDataSumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniDataSumResponse>;
-  /** 安全验证码小程序插件用户操作数据查询 */
+  /** {@link DescribeCaptchaMiniOperData 安全验证码小程序插件用户操作数据查询}({@link DescribeCaptchaMiniOperDataRequest 请求参数}): {@link DescribeCaptchaMiniOperDataResponse 返回参数} */
   DescribeCaptchaMiniOperData(data: DescribeCaptchaMiniOperDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniOperDataResponse>;
-  /** 核查验证码票据结果(小程序插件) */
+  /** {@link DescribeCaptchaMiniResult 核查验证码票据结果(小程序插件)}({@link DescribeCaptchaMiniResultRequest 请求参数}): {@link DescribeCaptchaMiniResultResponse 返回参数} */
   DescribeCaptchaMiniResult(data: DescribeCaptchaMiniResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniResultResponse>;
-  /** 核查验证码小程序插件票据接入风控结果(Beta) */
+  /** {@link DescribeCaptchaMiniRiskResult 核查验证码小程序插件票据接入风控结果(Beta)}({@link DescribeCaptchaMiniRiskResultRequest 请求参数}): {@link DescribeCaptchaMiniRiskResultResponse 返回参数} */
   DescribeCaptchaMiniRiskResult(data: DescribeCaptchaMiniRiskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniRiskResultResponse>;
-  /** 安全验证码用户操作数据查询 */
+  /** {@link DescribeCaptchaOperData 安全验证码用户操作数据查询}({@link DescribeCaptchaOperDataRequest 请求参数}): {@link DescribeCaptchaOperDataResponse 返回参数} */
   DescribeCaptchaOperData(data: DescribeCaptchaOperDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaOperDataResponse>;
-  /** 核查验证码票据结果(Web及APP) */
+  /** {@link DescribeCaptchaResult 核查验证码票据结果(Web及APP)}({@link DescribeCaptchaResultRequest 请求参数}): {@link DescribeCaptchaResultResponse 返回参数} */
   DescribeCaptchaResult(data: DescribeCaptchaResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaResultResponse>;
-  /** 安全验证码用户操作票据数据查询 */
+  /** {@link DescribeCaptchaTicketData 安全验证码用户操作票据数据查询}({@link DescribeCaptchaTicketDataRequest 请求参数}): {@link DescribeCaptchaTicketDataResponse 返回参数} */
   DescribeCaptchaTicketData(data: DescribeCaptchaTicketDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaTicketDataResponse>;
-  /** 安全验证码获取用户注册所有APPId和应用名称 */
+  /** {@link DescribeCaptchaUserAllAppId 安全验证码获取用户注册所有APPId和应用名称}({@link DescribeCaptchaUserAllAppIdRequest 请求参数}): {@link DescribeCaptchaUserAllAppIdResponse 返回参数} */
   DescribeCaptchaUserAllAppId(data?: DescribeCaptchaUserAllAppIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaUserAllAppIdResponse>;
-  /** 查询整体票据校验统计（控制台2.0-当前版本） */
+  /** {@link GetTotalTicketStatistics 查询整体票据校验统计（控制台2.0-当前版本）}({@link GetTotalTicketStatisticsRequest 请求参数}): {@link GetTotalTicketStatisticsResponse 返回参数} */
   GetTotalTicketStatistics(data: GetTotalTicketStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<GetTotalTicketStatisticsResponse>;
-  /** 更新验证码应用APPId信息 */
+  /** {@link UpdateCaptchaAppIdInfo 更新验证码应用APPId信息}({@link UpdateCaptchaAppIdInfoRequest 请求参数}): {@link UpdateCaptchaAppIdInfoResponse 返回参数} */
   UpdateCaptchaAppIdInfo(data: UpdateCaptchaAppIdInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCaptchaAppIdInfoResponse>;
 }
 

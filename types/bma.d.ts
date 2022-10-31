@@ -908,66 +908,66 @@ declare interface UpdateCRWorkResponse {
   RequestId?: string;
 }
 
-/** [品牌经营管家](https://cloud.tencent.com/document/product/1296) */
+/** {@link Bma 品牌经营管家} */
 declare interface Bma {
   (): Versions;
-  /** 添加仿冒链接（举报） */
+  /** {@link CreateBPFakeURL 添加仿冒链接（举报）}({@link CreateBPFakeURLRequest 请求参数}): {@link CreateBPFakeURLResponse 返回参数} */
   CreateBPFakeURL(data?: CreateBPFakeURLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPFakeURLResponse>;
-  /** 添加误报工单 */
+  /** {@link CreateBPFalseTicket 添加误报工单}({@link CreateBPFalseTicketRequest 请求参数}): {@link CreateBPFalseTicketResponse 返回参数} */
   CreateBPFalseTicket(data?: CreateBPFalseTicketRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPFalseTicketResponse>;
-  /** 添加下线材料 */
+  /** {@link CreateBPOfflineAttachment 添加下线材料}({@link CreateBPOfflineAttachmentRequest 请求参数}): {@link CreateBPOfflineAttachmentResponse 返回参数} */
   CreateBPOfflineAttachment(data?: CreateBPOfflineAttachmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPOfflineAttachmentResponse>;
-  /** 添加下线工单 */
+  /** {@link CreateBPOfflineTicket 添加下线工单}({@link CreateBPOfflineTicketRequest 请求参数}): {@link CreateBPOfflineTicketResponse 返回参数} */
   CreateBPOfflineTicket(data?: CreateBPOfflineTicketRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPOfflineTicketResponse>;
-  /** 添加保护网站 */
+  /** {@link CreateBPProtectURLs 添加保护网站}({@link CreateBPProtectURLsRequest 请求参数}): {@link CreateBPProtectURLsResponse 返回参数} */
   CreateBPProtectURLs(data?: CreateBPProtectURLsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPProtectURLsResponse>;
-  /** 新建协查处置 */
+  /** {@link CreateCRBlock 新建协查处置}({@link CreateCRBlockRequest 请求参数}): {@link CreateCRBlockResponse 返回参数} */
   CreateCRBlock(data: CreateCRBlockRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRBlockResponse>;
-  /** 企业认证 */
+  /** {@link CreateCRCompanyVerify 企业认证}({@link CreateCRCompanyVerifyRequest 请求参数}): {@link CreateCRCompanyVerifyResponse 返回参数} */
   CreateCRCompanyVerify(data: CreateCRCompanyVerifyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRCompanyVerifyResponse>;
-  /** 新建过程取证码 */
+  /** {@link CreateCRDesktopCode 新建过程取证码}({@link CreateCRDesktopCodeRequest 请求参数}): {@link CreateCRDesktopCodeResponse 返回参数} */
   CreateCRDesktopCode(data: CreateCRDesktopCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRDesktopCodeResponse>;
-  /** 新建取证 */
+  /** {@link CreateCRObtain 新建取证}({@link CreateCRObtainRequest 请求参数}): {@link CreateCRObtainResponse 返回参数} */
   CreateCRObtain(data: CreateCRObtainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRObtainResponse>;
-  /** 新建发函 */
+  /** {@link CreateCRRight 新建发函}({@link CreateCRRightRequest 请求参数}): {@link CreateCRRightResponse 返回参数} */
   CreateCRRight(data: CreateCRRightRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRRightResponse>;
-  /** 权属文件添加 */
+  /** {@link CreateCRRightFile 权属文件添加}({@link CreateCRRightFileRequest 请求参数}): {@link CreateCRRightFileResponse 返回参数} */
   CreateCRRightFile(data: CreateCRRightFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRRightFileResponse>;
-  /** 举报侵权链接 */
+  /** {@link CreateCRTort 举报侵权链接}({@link CreateCRTortRequest 请求参数}): {@link CreateCRTortResponse 返回参数} */
   CreateCRTort(data: CreateCRTortRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRTortResponse>;
-  /** 个人认证 */
+  /** {@link CreateCRUserVerify 个人认证}({@link CreateCRUserVerifyRequest 请求参数}): {@link CreateCRUserVerifyResponse 返回参数} */
   CreateCRUserVerify(data: CreateCRUserVerifyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRUserVerifyResponse>;
-  /** 新建作品 */
+  /** {@link CreateCRWork 新建作品}({@link CreateCRWorkRequest 请求参数}): {@link CreateCRWorkResponse 返回参数} */
   CreateCRWork(data: CreateCRWorkRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRWorkResponse>;
-  /** 查询企业信息 */
+  /** {@link DescribeBPCompanyInfo 查询企业信息}({@link DescribeBPCompanyInfoRequest 请求参数}): {@link DescribeBPCompanyInfoResponse 返回参数} */
   DescribeBPCompanyInfo(data?: DescribeBPCompanyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPCompanyInfoResponse>;
-  /** 查询仿冒链接 */
+  /** {@link DescribeBPFakeURLs 查询仿冒链接}({@link DescribeBPFakeURLsRequest 请求参数}): {@link DescribeBPFakeURLsResponse 返回参数} */
   DescribeBPFakeURLs(data?: DescribeBPFakeURLsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPFakeURLsResponse>;
-  /** 查询保护网站 */
+  /** {@link DescribeBPProtectURLs 查询保护网站}({@link DescribeBPProtectURLsRequest 请求参数}): {@link DescribeBPProtectURLsResponse 返回参数} */
   DescribeBPProtectURLs(data?: DescribeBPProtectURLsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPProtectURLsResponse>;
-  /** 查询举报列表 */
+  /** {@link DescribeBPReportFakeURLs 查询举报列表}({@link DescribeBPReportFakeURLsRequest 请求参数}): {@link DescribeBPReportFakeURLsResponse 返回参数} */
   DescribeBPReportFakeURLs(data?: DescribeBPReportFakeURLsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPReportFakeURLsResponse>;
-  /** 查询作品监测详情 */
+  /** {@link DescribeCRMonitorDetail 查询作品监测详情}({@link DescribeCRMonitorDetailRequest 请求参数}): {@link DescribeCRMonitorDetailResponse 返回参数} */
   DescribeCRMonitorDetail(data: DescribeCRMonitorDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCRMonitorDetailResponse>;
-  /** 查询监测列表 */
+  /** {@link DescribeCRMonitors 查询监测列表}({@link DescribeCRMonitorsRequest 请求参数}): {@link DescribeCRMonitorsResponse 返回参数} */
   DescribeCRMonitors(data?: DescribeCRMonitorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCRMonitorsResponse>;
-  /** 查询取证详情 */
+  /** {@link DescribeCRObtainDetail 查询取证详情}({@link DescribeCRObtainDetailRequest 请求参数}): {@link DescribeCRObtainDetailResponse 返回参数} */
   DescribeCRObtainDetail(data: DescribeCRObtainDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCRObtainDetailResponse>;
-  /** 查询作品基本信息 */
+  /** {@link DescribeCRWorkInfo 查询作品基本信息}({@link DescribeCRWorkInfoRequest 请求参数}): {@link DescribeCRWorkInfoResponse 返回参数} */
   DescribeCRWorkInfo(data: DescribeCRWorkInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCRWorkInfoResponse>;
-  /** 修改下线材料 */
+  /** {@link ModifyBPOfflineAttachment 修改下线材料}({@link ModifyBPOfflineAttachmentRequest 请求参数}): {@link ModifyBPOfflineAttachmentResponse 返回参数} */
   ModifyBPOfflineAttachment(data?: ModifyBPOfflineAttachmentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBPOfflineAttachmentResponse>;
-  /** 协查处置申请 */
+  /** {@link ModifyCRBlockStatus 协查处置申请}({@link ModifyCRBlockStatusRequest 请求参数}): {@link ModifyCRBlockStatusResponse 返回参数} */
   ModifyCRBlockStatus(data: ModifyCRBlockStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCRBlockStatusResponse>;
-  /** 开启或关闭监测 */
+  /** {@link ModifyCRMonitor 开启或关闭监测}({@link ModifyCRMonitorRequest 请求参数}): {@link ModifyCRMonitorResponse 返回参数} */
   ModifyCRMonitor(data: ModifyCRMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCRMonitorResponse>;
-  /** 取证申请 */
+  /** {@link ModifyCRObtainStatus 取证申请}({@link ModifyCRObtainStatusRequest 请求参数}): {@link ModifyCRObtainStatusResponse 返回参数} */
   ModifyCRObtainStatus(data: ModifyCRObtainStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCRObtainStatusResponse>;
-  /** 发函申请 */
+  /** {@link ModifyCRRightStatus 发函申请}({@link ModifyCRRightStatusRequest 请求参数}): {@link ModifyCRRightStatusResponse 返回参数} */
   ModifyCRRightStatus(data: ModifyCRRightStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCRRightStatusResponse>;
-  /** 修改白名单列表 */
+  /** {@link ModifyCRWhiteList 修改白名单列表}({@link ModifyCRWhiteListRequest 请求参数}): {@link ModifyCRWhiteListResponse 返回参数} */
   ModifyCRWhiteList(data?: ModifyCRWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCRWhiteListResponse>;
-  /** 更新作品 */
+  /** {@link UpdateCRWork 更新作品}({@link UpdateCRWorkRequest 请求参数}): {@link UpdateCRWorkResponse 返回参数} */
   UpdateCRWork(data: UpdateCRWorkRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCRWorkResponse>;
 }
 

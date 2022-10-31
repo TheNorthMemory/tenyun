@@ -536,28 +536,28 @@ declare interface UpdateCloudRunServerResponse {
   RequestId?: string;
 }
 
-/** [云托管 CloudBase Run](https://cloud.tencent.com/document/product/1243) */
+/** {@link Tcbr 云托管 CloudBase Run} */
 declare interface Tcbr {
   (): Versions;
-  /** 创建环境 */
+  /** {@link CreateCloudRunEnv 创建环境}({@link CreateCloudRunEnvRequest 请求参数}): {@link CreateCloudRunEnvResponse 返回参数} */
   CreateCloudRunEnv(data: CreateCloudRunEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudRunEnvResponse>;
-  /** 创建云托管服务 */
+  /** {@link CreateCloudRunServer 创建云托管服务}({@link CreateCloudRunServerRequest 请求参数}): {@link CreateCloudRunServerResponse 返回参数} */
   CreateCloudRunServer(data: CreateCloudRunServerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudRunServerResponse>;
-  /** 查询环境列表 */
+  /** {@link DescribeCloudRunEnvs 查询环境列表}({@link DescribeCloudRunEnvsRequest 请求参数}): {@link DescribeCloudRunEnvsResponse 返回参数} */
   DescribeCloudRunEnvs(data?: DescribeCloudRunEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRunEnvsResponse>;
-  /** 查询云托管服务详情 */
+  /** {@link DescribeCloudRunServerDetail 查询云托管服务详情}({@link DescribeCloudRunServerDetailRequest 请求参数}): {@link DescribeCloudRunServerDetailResponse 返回参数} */
   DescribeCloudRunServerDetail(data: DescribeCloudRunServerDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRunServerDetailResponse>;
-  /** 查询云托管服务列表 */
+  /** {@link DescribeCloudRunServers 查询云托管服务列表}({@link DescribeCloudRunServersRequest 请求参数}): {@link DescribeCloudRunServersResponse 返回参数} */
   DescribeCloudRunServers(data: DescribeCloudRunServersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRunServersResponse>;
-  /** 查询环境基础信息 */
+  /** {@link DescribeEnvBaseInfo 查询环境基础信息}({@link DescribeEnvBaseInfoRequest 请求参数}): {@link DescribeEnvBaseInfoResponse 返回参数} */
   DescribeEnvBaseInfo(data: DescribeEnvBaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvBaseInfoResponse>;
-  /** 查询服务管理任务信息 */
+  /** {@link DescribeServerManageTask 查询服务管理任务信息}({@link DescribeServerManageTaskRequest 请求参数}): {@link DescribeServerManageTaskResponse 返回参数} */
   DescribeServerManageTask(data: DescribeServerManageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerManageTaskResponse>;
-  /** 操作发布单 */
+  /** {@link OperateServerManage 操作发布单}({@link OperateServerManageRequest 请求参数}): {@link OperateServerManageResponse 返回参数} */
   OperateServerManage(data: OperateServerManageRequest, config?: AxiosRequestConfig): AxiosPromise<OperateServerManageResponse>;
-  /** 灰度发布 */
+  /** {@link ReleaseGray 灰度发布}({@link ReleaseGrayRequest 请求参数}): {@link ReleaseGrayResponse 返回参数} */
   ReleaseGray(data: ReleaseGrayRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseGrayResponse>;
-  /** 更新云托管服务 */
+  /** {@link UpdateCloudRunServer 更新云托管服务}({@link UpdateCloudRunServerRequest 请求参数}): {@link UpdateCloudRunServerResponse 返回参数} */
   UpdateCloudRunServer(data: UpdateCloudRunServerRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCloudRunServerResponse>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DeleteCloudRunServer(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;

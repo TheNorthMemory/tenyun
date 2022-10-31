@@ -824,64 +824,64 @@ declare interface UploadFileResponse {
   RequestId?: string;
 }
 
-/** [金融联络机器人](https://cloud.tencent.com/document/product/656) */
+/** {@link Cr 金融联络机器人} */
 declare interface Cr {
   (): Versions;
-  /** 提交黑名单申请 */
+  /** {@link ApplyBlackList 提交黑名单申请}({@link ApplyBlackListRequest 请求参数}): {@link ApplyBlackListResponse 返回参数} */
   ApplyBlackList(data: ApplyBlackListRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyBlackListResponse>;
-  /** 提交机器人黑名单申请 */
+  /** {@link ApplyBlackListData 提交机器人黑名单申请}({@link ApplyBlackListDataRequest 请求参数}): {@link ApplyBlackListDataResponse 返回参数} */
   ApplyBlackListData(data: ApplyBlackListDataRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyBlackListDataResponse>;
-  /** 提交信审申请 */
+  /** {@link ApplyCreditAudit 提交信审申请}({@link ApplyCreditAuditRequest 请求参数}): {@link ApplyCreditAuditResponse 返回参数} */
   ApplyCreditAudit(data: ApplyCreditAuditRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyCreditAuditResponse>;
-  /** 更新机器人任务作业状态 */
+  /** {@link ChangeBotCallStatus 更新机器人任务作业状态}({@link ChangeBotCallStatusRequest 请求参数}): {@link ChangeBotCallStatusResponse 返回参数} */
   ChangeBotCallStatus(data: ChangeBotCallStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeBotCallStatusResponse>;
-  /** 更新机器人任务状态 */
+  /** {@link ChangeBotTaskStatus 更新机器人任务状态}({@link ChangeBotTaskStatusRequest 请求参数}): {@link ChangeBotTaskStatusResponse 返回参数} */
   ChangeBotTaskStatus(data: ChangeBotTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeBotTaskStatusResponse>;
-  /** 创建机器人任务 */
+  /** {@link CreateBotTask 创建机器人任务}({@link CreateBotTaskRequest 请求参数}): {@link CreateBotTaskResponse 返回参数} */
   CreateBotTask(data: CreateBotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBotTaskResponse>;
-  /** 查询机器人对话流 */
+  /** {@link DescribeBotFlow 查询机器人对话流}({@link DescribeBotFlowRequest 请求参数}): {@link DescribeBotFlowResponse 返回参数} */
   DescribeBotFlow(data: DescribeBotFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotFlowResponse>;
-  /** 获取信审结果 */
+  /** {@link DescribeCreditResult 获取信审结果}({@link DescribeCreditResultRequest 请求参数}): {@link DescribeCreditResultResponse 返回参数} */
   DescribeCreditResult(data: DescribeCreditResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCreditResultResponse>;
-  /** 查询机器人文件模板 */
+  /** {@link DescribeFileModel 查询机器人文件模板}({@link DescribeFileModelRequest 请求参数}): {@link DescribeFileModelResponse 返回参数} */
   DescribeFileModel(data: DescribeFileModelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileModelResponse>;
-  /** 录音查询（接口） */
+  /** {@link DescribeRecords 录音查询（接口）}({@link DescribeRecordsRequest 请求参数}): {@link DescribeRecordsResponse 返回参数} */
   DescribeRecords(data: DescribeRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordsResponse>;
-  /** 获取任务状态 */
+  /** {@link DescribeTaskStatus 获取任务状态}({@link DescribeTaskStatusRequest 请求参数}): {@link DescribeTaskStatusResponse 返回参数} */
   DescribeTaskStatus(data: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
-  /** 下载任务录音与文本 */
+  /** {@link DownloadBotRecord 下载任务录音与文本}({@link DownloadBotRecordRequest 请求参数}): {@link DownloadBotRecordResponse 返回参数} */
   DownloadBotRecord(data: DownloadBotRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadBotRecordResponse>;
-  /** 对话文本下载 */
+  /** {@link DownloadDialogueText 对话文本下载}({@link DownloadDialogueTextRequest 请求参数}): {@link DownloadDialogueTextResponse 返回参数} */
   DownloadDialogueText(data: DownloadDialogueTextRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadDialogueTextResponse>;
-  /** 录音查询（文件） */
+  /** {@link DownloadRecordList 录音查询（文件）}({@link DownloadRecordListRequest 请求参数}): {@link DownloadRecordListResponse 返回参数} */
   DownloadRecordList(data: DownloadRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadRecordListResponse>;
-  /** 报告下载 */
+  /** {@link DownloadReport 报告下载}({@link DownloadReportRequest 请求参数}): {@link DownloadReportResponse 返回参数} */
   DownloadReport(data: DownloadReportRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadReportResponse>;
-  /** 导出机器人数据 */
+  /** {@link ExportBotData 导出机器人数据}({@link ExportBotDataRequest 请求参数}): {@link ExportBotDataResponse 返回参数} */
   ExportBotData(data: ExportBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBotDataResponse>;
-  /** 查看黑名单数据列表 */
+  /** {@link QueryBlackListData 查看黑名单数据列表}({@link QueryBlackListDataRequest 请求参数}): {@link QueryBlackListDataResponse 返回参数} */
   QueryBlackListData(data: QueryBlackListDataRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBlackListDataResponse>;
-  /** 查询机器人任务状态列表 */
+  /** {@link QueryBotList 查询机器人任务状态列表}({@link QueryBotListRequest 请求参数}): {@link QueryBotListResponse 返回参数} */
   QueryBotList(data: QueryBotListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBotListResponse>;
-  /** 机器人任务查询 */
+  /** {@link QueryCallList 机器人任务查询}({@link QueryCallListRequest 请求参数}): {@link QueryCallListResponse 返回参数} */
   QueryCallList(data: QueryCallListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCallListResponse>;
-  /** 实时数据查询 */
+  /** {@link QueryInstantData 实时数据查询}({@link QueryInstantDataRequest 请求参数}): {@link QueryInstantDataResponse 返回参数} */
   QueryInstantData(data: QueryInstantDataRequest, config?: AxiosRequestConfig): AxiosPromise<QueryInstantDataResponse>;
-  /** 查询产品列表 */
+  /** {@link QueryProducts 查询产品列表}({@link QueryProductsRequest 请求参数}): {@link QueryProductsResponse 返回参数} */
   QueryProducts(data: QueryProductsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryProductsResponse>;
-  /** 查询录音列表 */
+  /** {@link QueryRecordList 查询录音列表}({@link QueryRecordListRequest 请求参数}): {@link QueryRecordListResponse 返回参数} */
   QueryRecordList(data: QueryRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRecordListResponse>;
-  /** 更新机器人任务 */
+  /** {@link UpdateBotTask 更新机器人任务}({@link UpdateBotTaskRequest 请求参数}): {@link UpdateBotTaskResponse 返回参数} */
   UpdateBotTask(data: UpdateBotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateBotTaskResponse>;
-  /** 上传机器人任务数据 */
+  /** {@link UploadBotData 上传机器人任务数据}({@link UploadBotDataRequest 请求参数}): {@link UploadBotDataResponse 返回参数} */
   UploadBotData(data: UploadBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<UploadBotDataResponse>;
-  /** 上传机器人文件 */
+  /** {@link UploadBotFile 上传机器人文件}({@link UploadBotFileRequest 请求参数}): {@link UploadBotFileResponse 返回参数} */
   UploadBotFile(data: UploadBotFileRequest, config?: AxiosRequestConfig): AxiosPromise<UploadBotFileResponse>;
-  /** 上传文件 */
+  /** {@link UploadDataFile 上传文件}({@link UploadDataFileRequest 请求参数}): {@link UploadDataFileResponse 返回参数} */
   UploadDataFile(data: UploadDataFileRequest, config?: AxiosRequestConfig): AxiosPromise<UploadDataFileResponse>;
-  /** 上传Json格式数据 */
+  /** {@link UploadDataJson 上传Json格式数据}({@link UploadDataJsonRequest 请求参数}): {@link UploadDataJsonResponse 返回参数} */
   UploadDataJson(data: UploadDataJsonRequest, config?: AxiosRequestConfig): AxiosPromise<UploadDataJsonResponse>;
-  /** 上传数据文件 */
+  /** {@link UploadFile 上传数据文件}({@link UploadFileRequest 请求参数}): {@link UploadFileResponse 返回参数} */
   UploadFile(data: UploadFileRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFileResponse>;
 }
 

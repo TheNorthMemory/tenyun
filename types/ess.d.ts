@@ -78,7 +78,7 @@ declare interface CcInfo {
 
 /** 模板控件信息 */
 declare interface Component {
-  /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件；MULTI_LINE_TEXT - 多行文本控件；CHECK_BOX - 勾选框控件；FILL_IMAGE - 图片控件；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件；SELECTOR - 选择器控件；如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；表单域的控件不能作为印章和签名控件 */
+  /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件；MULTI_LINE_TEXT - 多行文本控件；CHECK_BOX - 勾选框控件；FILL_IMAGE - 图片控件；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件；SELECTOR - 选择器控件；DATE - 日期控件；默认是格式化为xxxx年xx月xx日如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；DATE， 日期控件，默认是格式化为xxxx年xx月xx日SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight表单域的控件不能作为印章和签名控件 */
   ComponentType: string;
   /** 参数控件宽度，单位pt */
   ComponentWidth: number;
@@ -1042,56 +1042,56 @@ declare interface VerifyPdfResponse {
   RequestId?: string;
 }
 
-/** [电子签服务](https://cloud.tencent.com/document/product/1323) */
+/** {@link Ess 腾讯电子签企业版} */
 declare interface Ess {
   (): Versions;
-  /** 撤销签署流程 */
+  /** {@link CancelFlow 撤销签署流程}({@link CancelFlowRequest 请求参数}): {@link CancelFlowResponse 返回参数} */
   CancelFlow(data: CancelFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CancelFlowResponse>;
-  /** 取消一码多扫二维码 */
+  /** {@link CancelMultiFlowSignQRCode 取消一码多扫二维码}({@link CancelMultiFlowSignQRCodeRequest 请求参数}): {@link CancelMultiFlowSignQRCodeResponse 返回参数} */
   CancelMultiFlowSignQRCode(data: CancelMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CancelMultiFlowSignQRCodeResponse>;
-  /** 获取批量撤销签署流程链接 */
+  /** {@link CreateBatchCancelFlowUrl 获取批量撤销签署流程链接}({@link CreateBatchCancelFlowUrlRequest 请求参数}): {@link CreateBatchCancelFlowUrlResponse 返回参数} */
   CreateBatchCancelFlowUrl(data: CreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchCancelFlowUrlResponse>;
-  /** 创建文件转换任务 */
+  /** {@link CreateConvertTaskApi 创建文件转换任务}({@link CreateConvertTaskApiRequest 请求参数}): {@link CreateConvertTaskApiResponse 返回参数} */
   CreateConvertTaskApi(data: CreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConvertTaskApiResponse>;
-  /** 创建电子文档 */
+  /** {@link CreateDocument 创建电子文档}({@link CreateDocumentRequest 请求参数}): {@link CreateDocumentResponse 返回参数} */
   CreateDocument(data: CreateDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocumentResponse>;
-  /** 创建签署流程 */
+  /** {@link CreateFlow 创建签署流程}({@link CreateFlowRequest 请求参数}): {@link CreateFlowResponse 返回参数} */
   CreateFlow(data: CreateFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowResponse>;
-  /** 补充签署流程本企业签署人信息 */
+  /** {@link CreateFlowApprovers 补充签署流程本企业签署人信息}({@link CreateFlowApproversRequest 请求参数}): {@link CreateFlowApproversResponse 返回参数} */
   CreateFlowApprovers(data: CreateFlowApproversRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowApproversResponse>;
-  /** 用PDF文件创建签署流程 */
+  /** {@link CreateFlowByFiles 用PDF文件创建签署流程}({@link CreateFlowByFilesRequest 请求参数}): {@link CreateFlowByFilesResponse 返回参数} */
   CreateFlowByFiles(data: CreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowByFilesResponse>;
-  /** 创建并返回出证报告 */
+  /** {@link CreateFlowEvidenceReport 创建并返回出证报告}({@link CreateFlowEvidenceReportRequest 请求参数}): {@link CreateFlowEvidenceReportResponse 返回参数} */
   CreateFlowEvidenceReport(data: CreateFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowEvidenceReportResponse>;
-  /** 提交企业签署流程审批结果 */
+  /** {@link CreateFlowSignReview 提交企业签署流程审批结果}({@link CreateFlowSignReviewRequest 请求参数}): {@link CreateFlowSignReviewResponse 返回参数} */
   CreateFlowSignReview(data: CreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignReviewResponse>;
-  /** 创建员工 */
+  /** {@link CreateIntegrationEmployees 创建员工}({@link CreateIntegrationEmployeesRequest 请求参数}): {@link CreateIntegrationEmployeesResponse 返回参数} */
   CreateIntegrationEmployees(data: CreateIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationEmployeesResponse>;
-  /** 创建一码多扫流程签署二维码 */
+  /** {@link CreateMultiFlowSignQRCode 创建一码多扫流程签署二维码}({@link CreateMultiFlowSignQRCodeRequest 请求参数}): {@link CreateMultiFlowSignQRCodeResponse 返回参数} */
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
-  /** 获取小程序跳转链接 */
+  /** {@link CreateSchemeUrl 获取小程序跳转链接}({@link CreateSchemeUrlRequest 请求参数}): {@link CreateSchemeUrlResponse 返回参数} */
   CreateSchemeUrl(data: CreateSchemeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchemeUrlResponse>;
-  /** 移除员工 */
+  /** {@link DeleteIntegrationEmployees 移除员工}({@link DeleteIntegrationEmployeesRequest 请求参数}): {@link DeleteIntegrationEmployeesResponse 返回参数} */
   DeleteIntegrationEmployees(data: DeleteIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationEmployeesResponse>;
-  /** 查询文件下载URL */
+  /** {@link DescribeFileUrls 查询文件下载URL}({@link DescribeFileUrlsRequest 请求参数}): {@link DescribeFileUrlsResponse 返回参数} */
   DescribeFileUrls(data: DescribeFileUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileUrlsResponse>;
-  /** 查询流程摘要 */
+  /** {@link DescribeFlowBriefs 查询流程摘要}({@link DescribeFlowBriefsRequest 请求参数}): {@link DescribeFlowBriefsResponse 返回参数} */
   DescribeFlowBriefs(data: DescribeFlowBriefsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowBriefsResponse>;
-  /** 查询合同详情 */
+  /** {@link DescribeFlowInfo 查询合同详情}({@link DescribeFlowInfoRequest 请求参数}): {@link DescribeFlowInfoResponse 返回参数} */
   DescribeFlowInfo(data: DescribeFlowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowInfoResponse>;
-  /** 查询模板 */
+  /** {@link DescribeFlowTemplates 查询模板}({@link DescribeFlowTemplatesRequest 请求参数}): {@link DescribeFlowTemplatesResponse 返回参数} */
   DescribeFlowTemplates(data: DescribeFlowTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTemplatesResponse>;
-  /** 查询员工信息 */
+  /** {@link DescribeIntegrationEmployees 查询员工信息}({@link DescribeIntegrationEmployeesRequest 请求参数}): {@link DescribeIntegrationEmployeesResponse 返回参数} */
   DescribeIntegrationEmployees(data: DescribeIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationEmployeesResponse>;
-  /** 通过AuthCode查询用户是否实名 */
+  /** {@link DescribeThirdPartyAuthCode 通过AuthCode查询用户是否实名}({@link DescribeThirdPartyAuthCodeRequest 请求参数}): {@link DescribeThirdPartyAuthCodeResponse 返回参数} */
   DescribeThirdPartyAuthCode(data: DescribeThirdPartyAuthCodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThirdPartyAuthCodeResponse>;
-  /** 查询转换任务状态 */
+  /** {@link GetTaskResultApi 查询转换任务状态}({@link GetTaskResultApiRequest 请求参数}): {@link GetTaskResultApiResponse 返回参数} */
   GetTaskResultApi(data: GetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskResultApiResponse>;
-  /** 发起流程 */
+  /** {@link StartFlow 发起流程}({@link StartFlowRequest 请求参数}): {@link StartFlowResponse 返回参数} */
   StartFlow(data: StartFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StartFlowResponse>;
-  /** 多文件上传 */
+  /** {@link UploadFiles 多文件上传}({@link UploadFilesRequest 请求参数}): {@link UploadFilesResponse 返回参数} */
   UploadFiles(data: UploadFilesRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFilesResponse>;
-  /** 合同文件验签 */
+  /** {@link VerifyPdf 合同文件验签}({@link VerifyPdfRequest 请求参数}): {@link VerifyPdfResponse 返回参数} */
   VerifyPdf(data: VerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyPdfResponse>;
 }
 

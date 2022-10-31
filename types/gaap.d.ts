@@ -2770,212 +2770,212 @@ declare interface SetAuthenticationResponse {
   RequestId?: string;
 }
 
-/** [全球应用加速](https://cloud.tencent.com/document/product/608) */
+/** {@link Gaap 全球应用加速} */
 declare interface Gaap {
   (): Versions;
-  /** 添加源站 */
+  /** {@link AddRealServers 添加源站}({@link AddRealServersRequest 请求参数}): {@link AddRealServersResponse 返回参数} */
   AddRealServers(data: AddRealServersRequest, config?: AxiosRequestConfig): AxiosPromise<AddRealServersResponse>;
-  /** 封禁解封跨境通道实例 */
+  /** {@link BanAndRecoverProxy 封禁解封跨境通道实例}({@link BanAndRecoverProxyRequest 请求参数}): {@link BanAndRecoverProxyResponse 返回参数} */
   BanAndRecoverProxy(data?: BanAndRecoverProxyRequest, config?: AxiosRequestConfig): AxiosPromise<BanAndRecoverProxyResponse>;
-  /** 监听器绑定源站 */
+  /** {@link BindListenerRealServers 监听器绑定源站}({@link BindListenerRealServersRequest 请求参数}): {@link BindListenerRealServersResponse 返回参数} */
   BindListenerRealServers(data: BindListenerRealServersRequest, config?: AxiosRequestConfig): AxiosPromise<BindListenerRealServersResponse>;
-  /** 转发规则绑定源站 */
+  /** {@link BindRuleRealServers 转发规则绑定源站}({@link BindRuleRealServersRequest 请求参数}): {@link BindRuleRealServersResponse 返回参数} */
   BindRuleRealServers(data: BindRuleRealServersRequest, config?: AxiosRequestConfig): AxiosPromise<BindRuleRealServersResponse>;
-  /** 查询通道是否可以创建 */
+  /** {@link CheckProxyCreate 查询通道是否可以创建}({@link CheckProxyCreateRequest 请求参数}): {@link CheckProxyCreateResponse 返回参数} */
   CheckProxyCreate(data: CheckProxyCreateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckProxyCreateResponse>;
-  /** 关闭通道 */
+  /** {@link CloseProxies 关闭通道}({@link CloseProxiesRequest 请求参数}): {@link CloseProxiesResponse 返回参数} */
   CloseProxies(data?: CloseProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<CloseProxiesResponse>;
-  /** 关闭通道组 */
+  /** {@link CloseProxyGroup 关闭通道组}({@link CloseProxyGroupRequest 请求参数}): {@link CloseProxyGroupResponse 返回参数} */
   CloseProxyGroup(data: CloseProxyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CloseProxyGroupResponse>;
-  /** 关闭安全策略 */
+  /** {@link CloseSecurityPolicy 关闭安全策略}({@link CloseSecurityPolicyRequest 请求参数}): {@link CloseSecurityPolicyResponse 返回参数} */
   CloseSecurityPolicy(data?: CloseSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CloseSecurityPolicyResponse>;
-  /** 创建证书 */
+  /** {@link CreateCertificate 创建证书}({@link CreateCertificateRequest 请求参数}): {@link CreateCertificateResponse 返回参数} */
   CreateCertificate(data: CreateCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCertificateResponse>;
-  /** 创建自定义header */
+  /** {@link CreateCustomHeader 创建自定义header}({@link CreateCustomHeaderRequest 请求参数}): {@link CreateCustomHeaderResponse 返回参数} */
   CreateCustomHeader(data: CreateCustomHeaderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomHeaderResponse>;
-  /** 创建HTTPS监听器的访问域名 */
+  /** {@link CreateDomain 创建HTTPS监听器的访问域名}({@link CreateDomainRequest 请求参数}): {@link CreateDomainResponse 返回参数} */
   CreateDomain(data: CreateDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainResponse>;
-  /** 定制域名指定错误码的错误响应 */
+  /** {@link CreateDomainErrorPageInfo 定制域名指定错误码的错误响应}({@link CreateDomainErrorPageInfoRequest 请求参数}): {@link CreateDomainErrorPageInfoResponse 返回参数} */
   CreateDomainErrorPageInfo(data: CreateDomainErrorPageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainErrorPageInfoResponse>;
-  /** 创建接入段加速会话 */
+  /** {@link CreateFirstLinkSession 创建接入段加速会话}({@link CreateFirstLinkSessionRequest 请求参数}): {@link CreateFirstLinkSessionResponse 返回参数} */
   CreateFirstLinkSession(data: CreateFirstLinkSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFirstLinkSessionResponse>;
-  /** 创建域名 */
+  /** {@link CreateGlobalDomain 创建域名}({@link CreateGlobalDomainRequest 请求参数}): {@link CreateGlobalDomainResponse 返回参数} */
   CreateGlobalDomain(data: CreateGlobalDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlobalDomainResponse>;
-  /** 创建域名解析记录 */
+  /** {@link CreateGlobalDomainDns 创建域名解析记录}({@link CreateGlobalDomainDnsRequest 请求参数}): {@link CreateGlobalDomainDnsResponse 返回参数} */
   CreateGlobalDomainDns(data: CreateGlobalDomainDnsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlobalDomainDnsResponse>;
-  /** 创建HTTP监听器 */
+  /** {@link CreateHTTPListener 创建HTTP监听器}({@link CreateHTTPListenerRequest 请求参数}): {@link CreateHTTPListenerResponse 返回参数} */
   CreateHTTPListener(data: CreateHTTPListenerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHTTPListenerResponse>;
-  /** 创建HTTPS监听器 */
+  /** {@link CreateHTTPSListener 创建HTTPS监听器}({@link CreateHTTPSListenerRequest 请求参数}): {@link CreateHTTPSListenerResponse 返回参数} */
   CreateHTTPSListener(data: CreateHTTPSListenerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHTTPSListenerResponse>;
-  /** 创建通道 */
+  /** {@link CreateProxy 创建通道}({@link CreateProxyRequest 请求参数}): {@link CreateProxyResponse 返回参数} */
   CreateProxy(data: CreateProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProxyResponse>;
-  /** 创建通道组 */
+  /** {@link CreateProxyGroup 创建通道组}({@link CreateProxyGroupRequest 请求参数}): {@link CreateProxyGroupResponse 返回参数} */
   CreateProxyGroup(data: CreateProxyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProxyGroupResponse>;
-  /** 开通通道组域名（废弃） */
+  /** {@link CreateProxyGroupDomain 开通通道组域名（废弃）}({@link CreateProxyGroupDomainRequest 请求参数}): {@link CreateProxyGroupDomainResponse 返回参数} */
   CreateProxyGroupDomain(data: CreateProxyGroupDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProxyGroupDomainResponse>;
-  /** 创建监听器转发规则 */
+  /** {@link CreateRule 创建监听器转发规则}({@link CreateRuleRequest 请求参数}): {@link CreateRuleResponse 返回参数} */
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
-  /** 创建安全策略 */
+  /** {@link CreateSecurityPolicy 创建安全策略}({@link CreateSecurityPolicyRequest 请求参数}): {@link CreateSecurityPolicyResponse 返回参数} */
   CreateSecurityPolicy(data: CreateSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityPolicyResponse>;
-  /** 添加安全策略规则 */
+  /** {@link CreateSecurityRules 添加安全策略规则}({@link CreateSecurityRulesRequest 请求参数}): {@link CreateSecurityRulesResponse 返回参数} */
   CreateSecurityRules(data: CreateSecurityRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityRulesResponse>;
-  /** 创建TCP监听器 */
+  /** {@link CreateTCPListeners 创建TCP监听器}({@link CreateTCPListenersRequest 请求参数}): {@link CreateTCPListenersResponse 返回参数} */
   CreateTCPListeners(data: CreateTCPListenersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTCPListenersResponse>;
-  /** 创建UDP监听器 */
+  /** {@link CreateUDPListeners 创建UDP监听器}({@link CreateUDPListenersRequest 请求参数}): {@link CreateUDPListenersResponse 返回参数} */
   CreateUDPListeners(data: CreateUDPListenersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUDPListenersResponse>;
-  /** 删除证书 */
+  /** {@link DeleteCertificate 删除证书}({@link DeleteCertificateRequest 请求参数}): {@link DeleteCertificateResponse 返回参数} */
   DeleteCertificate(data: DeleteCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCertificateResponse>;
-  /** 根据域名删除转发规则 */
+  /** {@link DeleteDomain 根据域名删除转发规则}({@link DeleteDomainRequest 请求参数}): {@link DeleteDomainResponse 返回参数} */
   DeleteDomain(data: DeleteDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainResponse>;
-  /** 删除域名的定制错误 */
+  /** {@link DeleteDomainErrorPageInfo 删除域名的定制错误}({@link DeleteDomainErrorPageInfoRequest 请求参数}): {@link DeleteDomainErrorPageInfoResponse 返回参数} */
   DeleteDomainErrorPageInfo(data: DeleteDomainErrorPageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainErrorPageInfoResponse>;
-  /** 删除接入段加速会话 */
+  /** {@link DeleteFirstLinkSession 删除接入段加速会话}({@link DeleteFirstLinkSessionRequest 请求参数}): {@link DeleteFirstLinkSessionResponse 返回参数} */
   DeleteFirstLinkSession(data: DeleteFirstLinkSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFirstLinkSessionResponse>;
-  /** 删除域名 */
+  /** {@link DeleteGlobalDomain 删除域名}({@link DeleteGlobalDomainRequest 请求参数}): {@link DeleteGlobalDomainResponse 返回参数} */
   DeleteGlobalDomain(data: DeleteGlobalDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlobalDomainResponse>;
-  /** 删除域名解析记录 */
+  /** {@link DeleteGlobalDomainDns 删除域名解析记录}({@link DeleteGlobalDomainDnsRequest 请求参数}): {@link DeleteGlobalDomainDnsResponse 返回参数} */
   DeleteGlobalDomainDns(data: DeleteGlobalDomainDnsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlobalDomainDnsResponse>;
-  /** 删除通道监听器 */
+  /** {@link DeleteListeners 删除通道监听器}({@link DeleteListenersRequest 请求参数}): {@link DeleteListenersResponse 返回参数} */
   DeleteListeners(data: DeleteListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteListenersResponse>;
-  /** 删除通道组 */
+  /** {@link DeleteProxyGroup 删除通道组}({@link DeleteProxyGroupRequest 请求参数}): {@link DeleteProxyGroupResponse 返回参数} */
   DeleteProxyGroup(data?: DeleteProxyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProxyGroupResponse>;
-  /** 删除7层监听器转发规则 */
+  /** {@link DeleteRule 删除7层监听器转发规则}({@link DeleteRuleRequest 请求参数}): {@link DeleteRuleResponse 返回参数} */
   DeleteRule(data: DeleteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleResponse>;
-  /** 删除安全策略 */
+  /** {@link DeleteSecurityPolicy 删除安全策略}({@link DeleteSecurityPolicyRequest 请求参数}): {@link DeleteSecurityPolicyResponse 返回参数} */
   DeleteSecurityPolicy(data: DeleteSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityPolicyResponse>;
-  /** 删除安全策略规则 */
+  /** {@link DeleteSecurityRules 删除安全策略规则}({@link DeleteSecurityRulesRequest 请求参数}): {@link DeleteSecurityRulesResponse 返回参数} */
   DeleteSecurityRules(data: DeleteSecurityRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityRulesResponse>;
-  /** 查询加速区域 */
+  /** {@link DescribeAccessRegions 查询加速区域}({@link DescribeAccessRegionsRequest 请求参数}): {@link DescribeAccessRegionsResponse 返回参数} */
   DescribeAccessRegions(data?: DescribeAccessRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessRegionsResponse>;
-  /** 根据源站区域查询可用加速区域 */
+  /** {@link DescribeAccessRegionsByDestRegion 根据源站区域查询可用加速区域}({@link DescribeAccessRegionsByDestRegionRequest 请求参数}): {@link DescribeAccessRegionsByDestRegionResponse 返回参数} */
   DescribeAccessRegionsByDestRegion(data: DescribeAccessRegionsByDestRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessRegionsByDestRegionResponse>;
-  /** 查询禁用自定义header 名称列表 */
+  /** {@link DescribeBlackHeader 查询禁用自定义header 名称列表}({@link DescribeBlackHeaderRequest 请求参数}): {@link DescribeBlackHeaderResponse 返回参数} */
   DescribeBlackHeader(data?: DescribeBlackHeaderRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlackHeaderResponse>;
-  /** 查询证书详情 */
+  /** {@link DescribeCertificateDetail 查询证书详情}({@link DescribeCertificateDetailRequest 请求参数}): {@link DescribeCertificateDetailResponse 返回参数} */
   DescribeCertificateDetail(data: DescribeCertificateDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateDetailResponse>;
-  /** 查询服务器证书列表 */
+  /** {@link DescribeCertificates 查询服务器证书列表}({@link DescribeCertificatesRequest 请求参数}): {@link DescribeCertificatesResponse 返回参数} */
   DescribeCertificates(data?: DescribeCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificatesResponse>;
-  /** 获取国家地区编码映射表 */
+  /** {@link DescribeCountryAreaMapping 获取国家地区编码映射表}({@link DescribeCountryAreaMappingRequest 请求参数}): {@link DescribeCountryAreaMappingResponse 返回参数} */
   DescribeCountryAreaMapping(data?: DescribeCountryAreaMappingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCountryAreaMappingResponse>;
-  /** 查询跨境通道实例列表 */
+  /** {@link DescribeCrossBorderProxies 查询跨境通道实例列表}({@link DescribeCrossBorderProxiesRequest 请求参数}): {@link DescribeCrossBorderProxiesResponse 返回参数} */
   DescribeCrossBorderProxies(data?: DescribeCrossBorderProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossBorderProxiesResponse>;
-  /** 查询自定义header列表 */
+  /** {@link DescribeCustomHeader 查询自定义header列表}({@link DescribeCustomHeaderRequest 请求参数}): {@link DescribeCustomHeaderResponse 返回参数} */
   DescribeCustomHeader(data?: DescribeCustomHeaderRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomHeaderResponse>;
-  /** 查询源站区域 */
+  /** {@link DescribeDestRegions 查询源站区域}({@link DescribeDestRegionsRequest 请求参数}): {@link DescribeDestRegionsResponse 返回参数} */
   DescribeDestRegions(data?: DescribeDestRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDestRegionsResponse>;
-  /** 查询目前定制域名的错误响应 */
+  /** {@link DescribeDomainErrorPageInfo 查询目前定制域名的错误响应}({@link DescribeDomainErrorPageInfoRequest 请求参数}): {@link DescribeDomainErrorPageInfoResponse 返回参数} */
   DescribeDomainErrorPageInfo(data: DescribeDomainErrorPageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainErrorPageInfoResponse>;
-  /** 根据定制错误ID查询错误响应 */
+  /** {@link DescribeDomainErrorPageInfoByIds 根据定制错误ID查询错误响应}({@link DescribeDomainErrorPageInfoByIdsRequest 请求参数}): {@link DescribeDomainErrorPageInfoByIdsResponse 返回参数} */
   DescribeDomainErrorPageInfoByIds(data: DescribeDomainErrorPageInfoByIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainErrorPageInfoByIdsResponse>;
-  /** 查询接入段加速会话信息 */
+  /** {@link DescribeFirstLinkSession 查询接入段加速会话信息}({@link DescribeFirstLinkSessionRequest 请求参数}): {@link DescribeFirstLinkSessionResponse 返回参数} */
   DescribeFirstLinkSession(data: DescribeFirstLinkSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirstLinkSessionResponse>;
-  /** 查询域名解析列表 */
+  /** {@link DescribeGlobalDomainDns 查询域名解析列表}({@link DescribeGlobalDomainDnsRequest 请求参数}): {@link DescribeGlobalDomainDnsResponse 返回参数} */
   DescribeGlobalDomainDns(data: DescribeGlobalDomainDnsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlobalDomainDnsResponse>;
-  /** 查询域名列表 */
+  /** {@link DescribeGlobalDomains 查询域名列表}({@link DescribeGlobalDomainsRequest 请求参数}): {@link DescribeGlobalDomainsResponse 返回参数} */
   DescribeGlobalDomains(data: DescribeGlobalDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlobalDomainsResponse>;
-  /** 查询统计通道组和通道信息 */
+  /** {@link DescribeGroupAndStatisticsProxy 查询统计通道组和通道信息}({@link DescribeGroupAndStatisticsProxyRequest 请求参数}): {@link DescribeGroupAndStatisticsProxyResponse 返回参数} */
   DescribeGroupAndStatisticsProxy(data: DescribeGroupAndStatisticsProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupAndStatisticsProxyResponse>;
-  /** 获取通道组域名解析配置详情（废弃） */
+  /** {@link DescribeGroupDomainConfig 获取通道组域名解析配置详情（废弃）}({@link DescribeGroupDomainConfigRequest 请求参数}): {@link DescribeGroupDomainConfigResponse 返回参数} */
   DescribeGroupDomainConfig(data: DescribeGroupDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupDomainConfigResponse>;
-  /** 查询HTTP监听器信息 */
+  /** {@link DescribeHTTPListeners 查询HTTP监听器信息}({@link DescribeHTTPListenersRequest 请求参数}): {@link DescribeHTTPListenersResponse 返回参数} */
   DescribeHTTPListeners(data?: DescribeHTTPListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHTTPListenersResponse>;
-  /** 查询HTTPS监听器信息 */
+  /** {@link DescribeHTTPSListeners 查询HTTPS监听器信息}({@link DescribeHTTPSListenersRequest 请求参数}): {@link DescribeHTTPSListenersResponse 返回参数} */
   DescribeHTTPSListeners(data?: DescribeHTTPSListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHTTPSListenersResponse>;
-  /** 查询监听器源站列表 */
+  /** {@link DescribeListenerRealServers 查询监听器源站列表}({@link DescribeListenerRealServersRequest 请求参数}): {@link DescribeListenerRealServersResponse 返回参数} */
   DescribeListenerRealServers(data: DescribeListenerRealServersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenerRealServersResponse>;
-  /** 查询监听器统计数据 */
+  /** {@link DescribeListenerStatistics 查询监听器统计数据}({@link DescribeListenerStatisticsRequest 请求参数}): {@link DescribeListenerStatisticsResponse 返回参数} */
   DescribeListenerStatistics(data: DescribeListenerStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenerStatisticsResponse>;
-  /** 查询通道实例列表 */
+  /** {@link DescribeProxies 查询通道实例列表}({@link DescribeProxiesRequest 请求参数}): {@link DescribeProxiesResponse 返回参数} */
   DescribeProxies(data?: DescribeProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxiesResponse>;
-  /** 查询通道状态列表 */
+  /** {@link DescribeProxiesStatus 查询通道状态列表}({@link DescribeProxiesStatusRequest 请求参数}): {@link DescribeProxiesStatusResponse 返回参数} */
   DescribeProxiesStatus(data?: DescribeProxiesStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxiesStatusResponse>;
-  /** 查询统计通道和监听器信息 */
+  /** {@link DescribeProxyAndStatisticsListeners 查询统计通道和监听器信息}({@link DescribeProxyAndStatisticsListenersRequest 请求参数}): {@link DescribeProxyAndStatisticsListenersResponse 返回参数} */
   DescribeProxyAndStatisticsListeners(data: DescribeProxyAndStatisticsListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyAndStatisticsListenersResponse>;
-  /** 查询通道详情 */
+  /** {@link DescribeProxyDetail 查询通道详情}({@link DescribeProxyDetailRequest 请求参数}): {@link DescribeProxyDetailResponse 返回参数} */
   DescribeProxyDetail(data: DescribeProxyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyDetailResponse>;
-  /** 查询通道组详情 */
+  /** {@link DescribeProxyGroupDetails 查询通道组详情}({@link DescribeProxyGroupDetailsRequest 请求参数}): {@link DescribeProxyGroupDetailsResponse 返回参数} */
   DescribeProxyGroupDetails(data: DescribeProxyGroupDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyGroupDetailsResponse>;
-  /** 拉取通道组列表 */
+  /** {@link DescribeProxyGroupList 拉取通道组列表}({@link DescribeProxyGroupListRequest 请求参数}): {@link DescribeProxyGroupListResponse 返回参数} */
   DescribeProxyGroupList(data: DescribeProxyGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyGroupListResponse>;
-  /** 查询通道组统计数据 */
+  /** {@link DescribeProxyGroupStatistics 查询通道组统计数据}({@link DescribeProxyGroupStatisticsRequest 请求参数}): {@link DescribeProxyGroupStatisticsResponse 返回参数} */
   DescribeProxyGroupStatistics(data: DescribeProxyGroupStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyGroupStatisticsResponse>;
-  /** 查询通道统计数据 */
+  /** {@link DescribeProxyStatistics 查询通道统计数据}({@link DescribeProxyStatisticsRequest 请求参数}): {@link DescribeProxyStatisticsResponse 返回参数} */
   DescribeProxyStatistics(data: DescribeProxyStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyStatisticsResponse>;
-  /** 查询已绑定源站健康检查统计数据(废弃) */
+  /** {@link DescribeRealServerStatistics 查询已绑定源站健康检查统计数据(废弃)}({@link DescribeRealServerStatisticsRequest 请求参数}): {@link DescribeRealServerStatisticsResponse 返回参数} */
   DescribeRealServerStatistics(data: DescribeRealServerStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealServerStatisticsResponse>;
-  /** 查询源站信息 */
+  /** {@link DescribeRealServers 查询源站信息}({@link DescribeRealServersRequest 请求参数}): {@link DescribeRealServersResponse 返回参数} */
   DescribeRealServers(data: DescribeRealServersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealServersResponse>;
-  /** 查询源站绑定状态 */
+  /** {@link DescribeRealServersStatus 查询源站绑定状态}({@link DescribeRealServersStatusRequest 请求参数}): {@link DescribeRealServersStatusResponse 返回参数} */
   DescribeRealServersStatus(data: DescribeRealServersStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealServersStatusResponse>;
-  /** 获取源站区域和带宽梯度价格 */
+  /** {@link DescribeRegionAndPrice 获取源站区域和带宽梯度价格}({@link DescribeRegionAndPriceRequest 请求参数}): {@link DescribeRegionAndPriceResponse 返回参数} */
   DescribeRegionAndPrice(data?: DescribeRegionAndPriceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionAndPriceResponse>;
-  /** 根据标签拉取资源列表 */
+  /** {@link DescribeResourcesByTag 根据标签拉取资源列表}({@link DescribeResourcesByTagRequest 请求参数}): {@link DescribeResourcesByTagResponse 返回参数} */
   DescribeResourcesByTag(data: DescribeResourcesByTagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesByTagResponse>;
-  /** 查询转发规则相关源站信息 */
+  /** {@link DescribeRuleRealServers 查询转发规则相关源站信息}({@link DescribeRuleRealServersRequest 请求参数}): {@link DescribeRuleRealServersResponse 返回参数} */
   DescribeRuleRealServers(data: DescribeRuleRealServersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleRealServersResponse>;
-  /** 查询转发规则信息 */
+  /** {@link DescribeRules 查询转发规则信息}({@link DescribeRulesRequest 请求参数}): {@link DescribeRulesResponse 返回参数} */
   DescribeRules(data: DescribeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesResponse>;
-  /** 根据规则ID拉取规则信息列表 */
+  /** {@link DescribeRulesByRuleIds 根据规则ID拉取规则信息列表}({@link DescribeRulesByRuleIdsRequest 请求参数}): {@link DescribeRulesByRuleIdsResponse 返回参数} */
   DescribeRulesByRuleIds(data: DescribeRulesByRuleIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesByRuleIdsResponse>;
-  /** 获取安全策略详情 */
+  /** {@link DescribeSecurityPolicyDetail 获取安全策略详情}({@link DescribeSecurityPolicyDetailRequest 请求参数}): {@link DescribeSecurityPolicyDetailResponse 返回参数} */
   DescribeSecurityPolicyDetail(data: DescribeSecurityPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPolicyDetailResponse>;
-  /** 根据安全规则ID查询安全规则详情列表 */
+  /** {@link DescribeSecurityRules 根据安全规则ID查询安全规则详情列表}({@link DescribeSecurityRulesRequest 请求参数}): {@link DescribeSecurityRulesResponse 返回参数} */
   DescribeSecurityRules(data: DescribeSecurityRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityRulesResponse>;
-  /** 查询TCP监听器列表 */
+  /** {@link DescribeTCPListeners 查询TCP监听器列表}({@link DescribeTCPListenersRequest 请求参数}): {@link DescribeTCPListenersResponse 返回参数} */
   DescribeTCPListeners(data?: DescribeTCPListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTCPListenersResponse>;
-  /** 查询UDP监听器列表 */
+  /** {@link DescribeUDPListeners 查询UDP监听器列表}({@link DescribeUDPListenersRequest 请求参数}): {@link DescribeUDPListenersResponse 返回参数} */
   DescribeUDPListeners(data?: DescribeUDPListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUDPListenersResponse>;
-  /** 销毁通道 */
+  /** {@link DestroyProxies 销毁通道}({@link DestroyProxiesRequest 请求参数}): {@link DestroyProxiesResponse 返回参数} */
   DestroyProxies(data: DestroyProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyProxiesResponse>;
-  /** 暂停域名解析 */
+  /** {@link DisableGlobalDomain 暂停域名解析}({@link DisableGlobalDomainRequest 请求参数}): {@link DisableGlobalDomainResponse 返回参数} */
   DisableGlobalDomain(data: DisableGlobalDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DisableGlobalDomainResponse>;
-  /** 开启域名解析 */
+  /** {@link EnableGlobalDomain 开启域名解析}({@link EnableGlobalDomainRequest 请求参数}): {@link EnableGlobalDomainResponse 返回参数} */
   EnableGlobalDomain(data: EnableGlobalDomainRequest, config?: AxiosRequestConfig): AxiosPromise<EnableGlobalDomainResponse>;
-  /** 创建加速通道询价 */
+  /** {@link InquiryPriceCreateProxy 创建加速通道询价}({@link InquiryPriceCreateProxyRequest 请求参数}): {@link InquiryPriceCreateProxyResponse 返回参数} */
   InquiryPriceCreateProxy(data: InquiryPriceCreateProxyRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateProxyResponse>;
-  /** 修改域名对应的证书 */
+  /** {@link ModifyCertificate 修改域名对应的证书}({@link ModifyCertificateRequest 请求参数}): {@link ModifyCertificateResponse 返回参数} */
   ModifyCertificate(data: ModifyCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCertificateResponse>;
-  /** 修改证书属性 */
+  /** {@link ModifyCertificateAttributes 修改证书属性}({@link ModifyCertificateAttributesRequest 请求参数}): {@link ModifyCertificateAttributesResponse 返回参数} */
   ModifyCertificateAttributes(data: ModifyCertificateAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCertificateAttributesResponse>;
-  /** 更新监听器转发规则域名 */
+  /** {@link ModifyDomain 更新监听器转发规则域名}({@link ModifyDomainRequest 请求参数}): {@link ModifyDomainResponse 返回参数} */
   ModifyDomain(data: ModifyDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainResponse>;
-  /** 修改域名属性 */
+  /** {@link ModifyGlobalDomainAttribute 修改域名属性}({@link ModifyGlobalDomainAttributeRequest 请求参数}): {@link ModifyGlobalDomainAttributeResponse 返回参数} */
   ModifyGlobalDomainAttribute(data: ModifyGlobalDomainAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlobalDomainAttributeResponse>;
-  /** 修改域名解析记录 */
+  /** {@link ModifyGlobalDomainDns 修改域名解析记录}({@link ModifyGlobalDomainDnsRequest 请求参数}): {@link ModifyGlobalDomainDnsResponse 返回参数} */
   ModifyGlobalDomainDns(data: ModifyGlobalDomainDnsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlobalDomainDnsResponse>;
-  /** 配置通道组就近接入域名（废弃） */
+  /** {@link ModifyGroupDomainConfig 配置通道组就近接入域名（废弃）}({@link ModifyGroupDomainConfigRequest 请求参数}): {@link ModifyGroupDomainConfigResponse 返回参数} */
   ModifyGroupDomainConfig(data: ModifyGroupDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGroupDomainConfigResponse>;
-  /** 修改HTTP监听器配置 */
+  /** {@link ModifyHTTPListenerAttribute 修改HTTP监听器配置}({@link ModifyHTTPListenerAttributeRequest 请求参数}): {@link ModifyHTTPListenerAttributeResponse 返回参数} */
   ModifyHTTPListenerAttribute(data: ModifyHTTPListenerAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHTTPListenerAttributeResponse>;
-  /** 修改HTTPS监听器配置 */
+  /** {@link ModifyHTTPSListenerAttribute 修改HTTPS监听器配置}({@link ModifyHTTPSListenerAttributeRequest 请求参数}): {@link ModifyHTTPSListenerAttributeResponse 返回参数} */
   ModifyHTTPSListenerAttribute(data: ModifyHTTPSListenerAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHTTPSListenerAttributeResponse>;
-  /** 修改通道的属性 */
+  /** {@link ModifyProxiesAttribute 修改通道的属性}({@link ModifyProxiesAttributeRequest 请求参数}): {@link ModifyProxiesAttributeResponse 返回参数} */
   ModifyProxiesAttribute(data?: ModifyProxiesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProxiesAttributeResponse>;
-  /** 修改通道所属项目 */
+  /** {@link ModifyProxiesProject 修改通道所属项目}({@link ModifyProxiesProjectRequest 请求参数}): {@link ModifyProxiesProjectResponse 返回参数} */
   ModifyProxiesProject(data: ModifyProxiesProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProxiesProjectResponse>;
-  /** 修改通道配置 */
+  /** {@link ModifyProxyConfiguration 修改通道配置}({@link ModifyProxyConfigurationRequest 请求参数}): {@link ModifyProxyConfigurationResponse 返回参数} */
   ModifyProxyConfiguration(data?: ModifyProxyConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProxyConfigurationResponse>;
-  /** 修改通道组属性 */
+  /** {@link ModifyProxyGroupAttribute 修改通道组属性}({@link ModifyProxyGroupAttributeRequest 请求参数}): {@link ModifyProxyGroupAttributeResponse 返回参数} */
   ModifyProxyGroupAttribute(data: ModifyProxyGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProxyGroupAttributeResponse>;
-  /** 修改源站名称 */
+  /** {@link ModifyRealServerName 修改源站名称}({@link ModifyRealServerNameRequest 请求参数}): {@link ModifyRealServerNameResponse 返回参数} */
   ModifyRealServerName(data: ModifyRealServerNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRealServerNameResponse>;
-  /** 修改转发规则信息 */
+  /** {@link ModifyRuleAttribute 修改转发规则信息}({@link ModifyRuleAttributeRequest 请求参数}): {@link ModifyRuleAttributeResponse 返回参数} */
   ModifyRuleAttribute(data: ModifyRuleAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleAttributeResponse>;
-  /** 修改安全策略规则名 */
+  /** {@link ModifySecurityRule 修改安全策略规则名}({@link ModifySecurityRuleRequest 请求参数}): {@link ModifySecurityRuleResponse 返回参数} */
   ModifySecurityRule(data: ModifySecurityRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityRuleResponse>;
-  /** 修改TCP监听器配置 */
+  /** {@link ModifyTCPListenerAttribute 修改TCP监听器配置}({@link ModifyTCPListenerAttributeRequest 请求参数}): {@link ModifyTCPListenerAttributeResponse 返回参数} */
   ModifyTCPListenerAttribute(data: ModifyTCPListenerAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTCPListenerAttributeResponse>;
-  /** 修改UDP监听器配置 */
+  /** {@link ModifyUDPListenerAttribute 修改UDP监听器配置}({@link ModifyUDPListenerAttributeRequest 请求参数}): {@link ModifyUDPListenerAttributeResponse 返回参数} */
   ModifyUDPListenerAttribute(data: ModifyUDPListenerAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUDPListenerAttributeResponse>;
-  /** 开启通道 */
+  /** {@link OpenProxies 开启通道}({@link OpenProxiesRequest 请求参数}): {@link OpenProxiesResponse 返回参数} */
   OpenProxies(data?: OpenProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<OpenProxiesResponse>;
-  /** 开启通道组 */
+  /** {@link OpenProxyGroup 开启通道组}({@link OpenProxyGroupRequest 请求参数}): {@link OpenProxyGroupResponse 返回参数} */
   OpenProxyGroup(data: OpenProxyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<OpenProxyGroupResponse>;
-  /** 开启安全策略 */
+  /** {@link OpenSecurityPolicy 开启安全策略}({@link OpenSecurityPolicyRequest 请求参数}): {@link OpenSecurityPolicyResponse 返回参数} */
   OpenSecurityPolicy(data?: OpenSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<OpenSecurityPolicyResponse>;
-  /** 删除源站 */
+  /** {@link RemoveRealServers 删除源站}({@link RemoveRealServersRequest 请求参数}): {@link RemoveRealServersResponse 返回参数} */
   RemoveRealServers(data: RemoveRealServersRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveRealServersResponse>;
-  /** 认证高级配置 */
+  /** {@link SetAuthentication 认证高级配置}({@link SetAuthenticationRequest 请求参数}): {@link SetAuthenticationResponse 返回参数} */
   SetAuthentication(data: SetAuthenticationRequest, config?: AxiosRequestConfig): AxiosPromise<SetAuthenticationResponse>;
 }
 

@@ -616,26 +616,26 @@ declare interface TextModerationResponse {
   RequestId?: string;
 }
 
-/** 内容安全 */
+/** {@link Cms 内容安全} */
 declare interface Cms {
   (): Versions;
-  /** 新增图片样本库 */
+  /** {@link CreateFileSample 新增图片样本库}({@link CreateFileSampleRequest 请求参数}): {@link CreateFileSampleResponse 返回参数} */
   CreateFileSample(data: CreateFileSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileSampleResponse>;
-  /** 新增文本样本库 */
+  /** {@link CreateTextSample 新增文本样本库}({@link CreateTextSampleRequest 请求参数}): {@link CreateTextSampleResponse 返回参数} */
   CreateTextSample(data: CreateTextSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTextSampleResponse>;
-  /** 删除图片样本库 */
+  /** {@link DeleteFileSample 删除图片样本库}({@link DeleteFileSampleRequest 请求参数}): {@link DeleteFileSampleResponse 返回参数} */
   DeleteFileSample(data: DeleteFileSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFileSampleResponse>;
-  /** 删除文本样本库 */
+  /** {@link DeleteTextSample 删除文本样本库}({@link DeleteTextSampleRequest 请求参数}): {@link DeleteTextSampleResponse 返回参数} */
   DeleteTextSample(data: DeleteTextSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTextSampleResponse>;
-  /** 查询图片样本库 */
+  /** {@link DescribeFileSample 查询图片样本库}({@link DescribeFileSampleRequest 请求参数}): {@link DescribeFileSampleResponse 返回参数} */
   DescribeFileSample(data?: DescribeFileSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileSampleResponse>;
-  /** 查询文本样本库 */
+  /** {@link DescribeTextSample 查询文本样本库}({@link DescribeTextSampleRequest 请求参数}): {@link DescribeTextSampleResponse 返回参数} */
   DescribeTextSample(data?: DescribeTextSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTextSampleResponse>;
-  /** 图片内容检测 */
+  /** {@link ImageModeration 图片内容检测}({@link ImageModerationRequest 请求参数}): {@link ImageModerationResponse 返回参数} */
   ImageModeration(data?: ImageModerationRequest, config?: AxiosRequestConfig): AxiosPromise<ImageModerationResponse>;
-  /** 人工审核对外接口 */
+  /** {@link ManualReview 人工审核对外接口}({@link ManualReviewRequest 请求参数}): {@link ManualReviewResponse 返回参数} */
   ManualReview(data: ManualReviewRequest, config?: AxiosRequestConfig): AxiosPromise<ManualReviewResponse>;
-  /** 文本内容检测 */
+  /** {@link TextModeration 文本内容检测}({@link TextModerationRequest 请求参数}): {@link TextModerationResponse 返回参数} */
   TextModeration(data: TextModerationRequest, config?: AxiosRequestConfig): AxiosPromise<TextModerationResponse>;
 }
 

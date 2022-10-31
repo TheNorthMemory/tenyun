@@ -1324,50 +1324,50 @@ declare interface SaDivulgeDataQueryPubResponse {
   RequestId?: string;
 }
 
-/** [安全运营中心](https://cloud.tencent.com/document/product/664) */
+/** {@link Ssa 安全运营中心} */
 declare interface Ssa {
   (): Versions;
-  /** 资产安全页资产详情 */
+  /** {@link DescribeAssetDetail 资产安全页资产详情}({@link DescribeAssetDetailRequest 请求参数}): {@link DescribeAssetDetailResponse 返回参数} */
   DescribeAssetDetail(data: DescribeAssetDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDetailResponse>;
-  /** 资产安全资产列表 */
+  /** {@link DescribeAssetList 资产安全资产列表}({@link DescribeAssetListRequest 请求参数}): {@link DescribeAssetListResponse 返回参数} */
   DescribeAssetList(data: DescribeAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetListResponse>;
-  /** 资产测绘-测绘列表 */
+  /** {@link DescribeAssetsMappingList 资产测绘-测绘列表}({@link DescribeAssetsMappingListRequest 请求参数}): {@link DescribeAssetsMappingListResponse 返回参数} */
   DescribeAssetsMappingList(data: DescribeAssetsMappingListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetsMappingListResponse>;
-  /** 云安全配置管理资产组列表 */
+  /** {@link DescribeCheckConfigAssetList 云安全配置管理资产组列表}({@link DescribeCheckConfigAssetListRequest 请求参数}): {@link DescribeCheckConfigAssetListResponse 返回参数} */
   DescribeCheckConfigAssetList(data: DescribeCheckConfigAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckConfigAssetListResponse>;
-  /** 云安全配置检查项详情 */
+  /** {@link DescribeCheckConfigDetail 云安全配置检查项详情}({@link DescribeCheckConfigDetailRequest 请求参数}): {@link DescribeCheckConfigDetailResponse 返回参数} */
   DescribeCheckConfigDetail(data: DescribeCheckConfigDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckConfigDetailResponse>;
-  /** 合规管理-资产列表 */
+  /** {@link DescribeComplianceAssetList 合规管理-资产列表}({@link DescribeComplianceAssetListRequest 请求参数}): {@link DescribeComplianceAssetListResponse 返回参数} */
   DescribeComplianceAssetList(data: DescribeComplianceAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceAssetListResponse>;
-  /** 合规管理检查项详情 */
+  /** {@link DescribeComplianceDetail 合规管理检查项详情}({@link DescribeComplianceDetailRequest 请求参数}): {@link DescribeComplianceDetailResponse 返回参数} */
   DescribeComplianceDetail(data: DescribeComplianceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceDetailResponse>;
-  /** 合规管理总览页检查项列表 */
+  /** {@link DescribeComplianceList 合规管理总览页检查项列表}({@link DescribeComplianceListRequest 请求参数}): {@link DescribeComplianceListResponse 返回参数} */
   DescribeComplianceList(data?: DescribeComplianceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceListResponse>;
-  /** 云配置检查项总览页检查项列表 */
+  /** {@link DescribeConfigList 云配置检查项总览页检查项列表}({@link DescribeConfigListRequest 请求参数}): {@link DescribeConfigListResponse 返回参数} */
   DescribeConfigList(data?: DescribeConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigListResponse>;
-  /** 获取安全事件详情 */
+  /** {@link DescribeEventDetail 获取安全事件详情}({@link DescribeEventDetailRequest 请求参数}): {@link DescribeEventDetailResponse 返回参数} */
   DescribeEventDetail(data?: DescribeEventDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventDetailResponse>;
-  /** 获取泄露列表 */
+  /** {@link DescribeLeakDetectionList 获取泄露列表}({@link DescribeLeakDetectionListRequest 请求参数}): {@link DescribeLeakDetectionListResponse 返回参数} */
   DescribeLeakDetectionList(data: DescribeLeakDetectionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLeakDetectionListResponse>;
-  /** 获取测绘列表 */
+  /** {@link DescribeMappingResults 获取测绘列表}({@link DescribeMappingResultsRequest 请求参数}): {@link DescribeMappingResultsResponse 返回参数} */
   DescribeMappingResults(data?: DescribeMappingResultsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMappingResultsResponse>;
-  /** 获取安全事件列表 */
+  /** {@link DescribeSafetyEventList 获取安全事件列表}({@link DescribeSafetyEventListRequest 请求参数}): {@link DescribeSafetyEventListResponse 返回参数} */
   DescribeSafetyEventList(data: DescribeSafetyEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSafetyEventListResponse>;
-  /** 告警详情 */
+  /** {@link DescribeSocAlertDetails 告警详情}({@link DescribeSocAlertDetailsRequest 请求参数}): {@link DescribeSocAlertDetailsResponse 返回参数} */
   DescribeSocAlertDetails(data: DescribeSocAlertDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSocAlertDetailsResponse>;
-  /** 告警列表 */
+  /** {@link DescribeSocAlertList 告警列表}({@link DescribeSocAlertListRequest 请求参数}): {@link DescribeSocAlertListResponse 返回参数} */
   DescribeSocAlertList(data: DescribeSocAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSocAlertListResponse>;
-  /** 云安全配置检查项列表 */
+  /** {@link DescribeSocCheckItemList 云安全配置检查项列表}({@link DescribeSocCheckItemListRequest 请求参数}): {@link DescribeSocCheckItemListResponse 返回参数} */
   DescribeSocCheckItemList(data?: DescribeSocCheckItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSocCheckItemListResponse>;
-  /** 云安全配置检查项结果列表 */
+  /** {@link DescribeSocCheckResultList 云安全配置检查项结果列表}({@link DescribeSocCheckResultListRequest 请求参数}): {@link DescribeSocCheckResultListResponse 返回参数} */
   DescribeSocCheckResultList(data?: DescribeSocCheckResultListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSocCheckResultListResponse>;
-  /** 合规详情 */
+  /** {@link DescribeSocCspmCompliance 合规详情}({@link DescribeSocCspmComplianceRequest 请求参数}): {@link DescribeSocCspmComplianceResponse 返回参数} */
   DescribeSocCspmCompliance(data?: DescribeSocCspmComplianceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSocCspmComplianceResponse>;
-  /** 漏洞列表-漏洞详情 */
+  /** {@link DescribeVulDetail 漏洞列表-漏洞详情}({@link DescribeVulDetailRequest 请求参数}): {@link DescribeVulDetailResponse 返回参数} */
   DescribeVulDetail(data: DescribeVulDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDetailResponse>;
-  /** 漏洞管理-漏洞列表 */
+  /** {@link DescribeVulList 漏洞管理-漏洞列表}({@link DescribeVulListRequest 请求参数}): {@link DescribeVulListResponse 返回参数} */
   DescribeVulList(data: DescribeVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulListResponse>;
-  /** 查询【通用字段】【泄露监测数据列表】 */
+  /** {@link SaDivulgeDataQueryPub 查询【通用字段】【泄露监测数据列表】}({@link SaDivulgeDataQueryPubRequest 请求参数}): {@link SaDivulgeDataQueryPubResponse 返回参数} */
   SaDivulgeDataQueryPub(data: SaDivulgeDataQueryPubRequest, config?: AxiosRequestConfig): AxiosPromise<SaDivulgeDataQueryPubResponse>;
 }
 

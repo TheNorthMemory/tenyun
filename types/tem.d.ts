@@ -2716,142 +2716,142 @@ declare namespace V20201221 {
   }
 }
 
-/** [弹性微服务](https://cloud.tencent.com/document/product/1371) */
+/** {@link Tem 弹性微服务 TEM} */
 declare interface Tem {
   (): Versions;
-  /** 创建应用 */
+  /** {@link CreateApplication 创建应用}({@link CreateApplicationRequest 请求参数}): {@link CreateApplicationResponse 返回参数} */
   CreateApplication(data: CreateApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationResponse>;
-  /** 创建弹性伸缩策略组合 */
+  /** {@link CreateApplicationAutoscaler 创建弹性伸缩策略组合}({@link CreateApplicationAutoscalerRequest 请求参数}): {@link CreateApplicationAutoscalerResponse 返回参数} */
   CreateApplicationAutoscaler(data: CreateApplicationAutoscalerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationAutoscalerResponse>;
-  /** 新增访问方式 */
+  /** {@link CreateApplicationService 新增访问方式}({@link CreateApplicationServiceRequest 请求参数}): {@link CreateApplicationServiceResponse 返回参数} */
   CreateApplicationService(data: CreateApplicationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationServiceResponse>;
-  /** 创建配置 */
+  /** {@link CreateConfigData 创建配置}({@link CreateConfigDataRequest 请求参数}): {@link CreateConfigDataResponse 返回参数} */
   CreateConfigData(data: CreateConfigDataRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigDataResponse>;
-  /** 生成Cos临时秘钥 */
+  /** {@link CreateCosToken 生成Cos临时秘钥}({@link CreateCosTokenRequest 请求参数}): {@link CreateCosTokenResponse 返回参数} */
   CreateCosToken(data: CreateCosTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosTokenResponse>;
-  /** 创建环境 */
+  /** {@link CreateEnvironment 创建环境}({@link CreateEnvironmentRequest 请求参数}): {@link CreateEnvironmentResponse 返回参数} */
   CreateEnvironment(data: CreateEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentResponse>;
-  /** 创建日志收集配置 */
+  /** {@link CreateLogConfig 创建日志收集配置}({@link CreateLogConfigRequest 请求参数}): {@link CreateLogConfigResponse 返回参数} */
   CreateLogConfig(data: CreateLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogConfigResponse>;
-  /** 绑定云资源 */
+  /** {@link CreateResource 绑定云资源}({@link CreateResourceRequest 请求参数}): {@link CreateResourceResponse 返回参数} */
   CreateResource(data: CreateResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceResponse>;
-  /** 服务删除 */
+  /** {@link DeleteApplication 服务删除}({@link DeleteApplicationRequest 请求参数}): {@link DeleteApplicationResponse 返回参数} */
   DeleteApplication(data: DeleteApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationResponse>;
-  /** 删除应用弹性策略组合 */
+  /** {@link DeleteApplicationAutoscaler 删除应用弹性策略组合}({@link DeleteApplicationAutoscalerRequest 请求参数}): {@link DeleteApplicationAutoscalerResponse 返回参数} */
   DeleteApplicationAutoscaler(data: DeleteApplicationAutoscalerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationAutoscalerResponse>;
-  /** 删除一条访问方式 */
+  /** {@link DeleteApplicationService 删除一条访问方式}({@link DeleteApplicationServiceRequest 请求参数}): {@link DeleteApplicationServiceResponse 返回参数} */
   DeleteApplicationService(data?: DeleteApplicationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationServiceResponse>;
-  /** 删除 Ingress 规则 */
+  /** {@link DeleteIngress 删除 Ingress 规则}({@link DeleteIngressRequest 请求参数}): {@link DeleteIngressResponse 返回参数} */
   DeleteIngress(data: DeleteIngressRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIngressResponse>;
-  /** 应用部署 */
+  /** {@link DeployApplication 应用部署}({@link DeployApplicationRequest 请求参数}): {@link DeployApplicationResponse 返回参数} */
   DeployApplication(data: DeployApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DeployApplicationResponse>;
-  /** 获取应用弹性策略组合 */
+  /** {@link DescribeApplicationAutoscalerList 获取应用弹性策略组合}({@link DescribeApplicationAutoscalerListRequest 请求参数}): {@link DescribeApplicationAutoscalerListResponse 返回参数} */
   DescribeApplicationAutoscalerList(data: DescribeApplicationAutoscalerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationAutoscalerListResponse>;
-  /** 服务基本信息查看 */
+  /** {@link DescribeApplicationInfo 服务基本信息查看}({@link DescribeApplicationInfoRequest 请求参数}): {@link DescribeApplicationInfoResponse 返回参数} */
   DescribeApplicationInfo(data: DescribeApplicationInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationInfoResponse>;
-  /** 获取应用实例列表 */
+  /** {@link DescribeApplicationPods 获取应用实例列表}({@link DescribeApplicationPodsRequest 请求参数}): {@link DescribeApplicationPodsResponse 返回参数} */
   DescribeApplicationPods(data: DescribeApplicationPodsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationPodsResponse>;
-  /** 查询应用访问方式列表 */
+  /** {@link DescribeApplicationServiceList 查询应用访问方式列表}({@link DescribeApplicationServiceListRequest 请求参数}): {@link DescribeApplicationServiceListResponse 返回参数} */
   DescribeApplicationServiceList(data: DescribeApplicationServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationServiceListResponse>;
-  /** 获取运行服务列表 */
+  /** {@link DescribeApplications 获取运行服务列表}({@link DescribeApplicationsRequest 请求参数}): {@link DescribeApplicationsResponse 返回参数} */
   DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
-  /** 单环境下所有应用状态查看 */
+  /** {@link DescribeApplicationsStatus 单环境下所有应用状态查看}({@link DescribeApplicationsStatusRequest 请求参数}): {@link DescribeApplicationsStatusResponse 返回参数} */
   DescribeApplicationsStatus(data?: DescribeApplicationsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsStatusResponse>;
-  /** 查询配置详情 */
+  /** {@link DescribeConfigData 查询配置详情}({@link DescribeConfigDataRequest 请求参数}): {@link DescribeConfigDataResponse 返回参数} */
   DescribeConfigData(data: DescribeConfigDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigDataResponse>;
-  /** 查询配置列表 */
+  /** {@link DescribeConfigDataList 查询配置列表}({@link DescribeConfigDataListRequest 请求参数}): {@link DescribeConfigDataListResponse 返回参数} */
   DescribeConfigDataList(data: DescribeConfigDataListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigDataListResponse>;
-  /** 获取分批发布详情 */
+  /** {@link DescribeDeployApplicationDetail 获取分批发布详情}({@link DescribeDeployApplicationDetailRequest 请求参数}): {@link DescribeDeployApplicationDetailResponse 返回参数} */
   DescribeDeployApplicationDetail(data?: DescribeDeployApplicationDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployApplicationDetailResponse>;
-  /** 获取环境基础信息 */
+  /** {@link DescribeEnvironment 获取环境基础信息}({@link DescribeEnvironmentRequest 请求参数}): {@link DescribeEnvironmentResponse 返回参数} */
   DescribeEnvironment(data: DescribeEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentResponse>;
-  /** 获取环境状态 */
+  /** {@link DescribeEnvironmentStatus 获取环境状态}({@link DescribeEnvironmentStatusRequest 请求参数}): {@link DescribeEnvironmentStatusResponse 返回参数} */
   DescribeEnvironmentStatus(data: DescribeEnvironmentStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentStatusResponse>;
-  /** 获取环境列表 */
+  /** {@link DescribeEnvironments 获取环境列表}({@link DescribeEnvironmentsRequest 请求参数}): {@link DescribeEnvironmentsResponse 返回参数} */
   DescribeEnvironments(data?: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
-  /** 查询 Ingress 规则 */
+  /** {@link DescribeIngress 查询 Ingress 规则}({@link DescribeIngressRequest 请求参数}): {@link DescribeIngressResponse 返回参数} */
   DescribeIngress(data: DescribeIngressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIngressResponse>;
-  /** 查询 Ingress 规则列表 */
+  /** {@link DescribeIngresses 查询 Ingress 规则列表}({@link DescribeIngressesRequest 请求参数}): {@link DescribeIngressesResponse 返回参数} */
   DescribeIngresses(data?: DescribeIngressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIngressesResponse>;
-  /** 查询日志收集配置详情 */
+  /** {@link DescribeLogConfig 查询日志收集配置详情}({@link DescribeLogConfigRequest 请求参数}): {@link DescribeLogConfigResponse 返回参数} */
   DescribeLogConfig(data: DescribeLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogConfigResponse>;
-  /** 查询分页的日志收集配置列表 */
+  /** {@link DescribePagedLogConfigList 查询分页的日志收集配置列表}({@link DescribePagedLogConfigListRequest 请求参数}): {@link DescribePagedLogConfigListResponse 返回参数} */
   DescribePagedLogConfigList(data: DescribePagedLogConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePagedLogConfigListResponse>;
-  /** 查询应用关联的 Ingress 规则列表 */
+  /** {@link DescribeRelatedIngresses 查询应用关联的 Ingress 规则列表}({@link DescribeRelatedIngressesRequest 请求参数}): {@link DescribeRelatedIngressesResponse 返回参数} */
   DescribeRelatedIngresses(data?: DescribeRelatedIngressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelatedIngressesResponse>;
-  /** 销毁配置 */
+  /** {@link DestroyConfigData 销毁配置}({@link DestroyConfigDataRequest 请求参数}): {@link DestroyConfigDataResponse 返回参数} */
   DestroyConfigData(data: DestroyConfigDataRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyConfigDataResponse>;
-  /** 销毁环境 */
+  /** {@link DestroyEnvironment 销毁环境}({@link DestroyEnvironmentRequest 请求参数}): {@link DestroyEnvironmentResponse 返回参数} */
   DestroyEnvironment(data: DestroyEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyEnvironmentResponse>;
-  /** 销毁日志收集配置 */
+  /** {@link DestroyLogConfig 销毁日志收集配置}({@link DestroyLogConfigRequest 请求参数}): {@link DestroyLogConfigResponse 返回参数} */
   DestroyLogConfig(data: DestroyLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyLogConfigResponse>;
-  /** 关闭应用弹性策略组合 */
+  /** {@link DisableApplicationAutoscaler 关闭应用弹性策略组合}({@link DisableApplicationAutoscalerRequest 请求参数}): {@link DisableApplicationAutoscalerResponse 返回参数} */
   DisableApplicationAutoscaler(data: DisableApplicationAutoscalerRequest, config?: AxiosRequestConfig): AxiosPromise<DisableApplicationAutoscalerResponse>;
-  /** 启用应用弹性策略组合 */
+  /** {@link EnableApplicationAutoscaler 启用应用弹性策略组合}({@link EnableApplicationAutoscalerRequest 请求参数}): {@link EnableApplicationAutoscalerResponse 返回参数} */
   EnableApplicationAutoscaler(data: EnableApplicationAutoscalerRequest, config?: AxiosRequestConfig): AxiosPromise<EnableApplicationAutoscalerResponse>;
-  /** 生成应用程序包预签名下载链接 */
+  /** {@link GenerateApplicationPackageDownloadUrl 生成应用程序包预签名下载链接}({@link GenerateApplicationPackageDownloadUrlRequest 请求参数}): {@link GenerateApplicationPackageDownloadUrlResponse 返回参数} */
   GenerateApplicationPackageDownloadUrl(data: GenerateApplicationPackageDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateApplicationPackageDownloadUrlResponse>;
-  /** 修改弹性伸缩策略组合 */
+  /** {@link ModifyApplicationAutoscaler 修改弹性伸缩策略组合}({@link ModifyApplicationAutoscalerRequest 请求参数}): {@link ModifyApplicationAutoscalerResponse 返回参数} */
   ModifyApplicationAutoscaler(data: ModifyApplicationAutoscalerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationAutoscalerResponse>;
-  /** 修改应用基本信息 */
+  /** {@link ModifyApplicationInfo 修改应用基本信息}({@link ModifyApplicationInfoRequest 请求参数}): {@link ModifyApplicationInfoResponse 返回参数} */
   ModifyApplicationInfo(data: ModifyApplicationInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationInfoResponse>;
-  /** 修改应用实例数量 */
+  /** {@link ModifyApplicationReplicas 修改应用实例数量}({@link ModifyApplicationReplicasRequest 请求参数}): {@link ModifyApplicationReplicasResponse 返回参数} */
   ModifyApplicationReplicas(data: ModifyApplicationReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationReplicasResponse>;
-  /** 修改服务访问方式列表 */
+  /** {@link ModifyApplicationService 修改服务访问方式列表}({@link ModifyApplicationServiceRequest 请求参数}): {@link ModifyApplicationServiceResponse 返回参数} */
   ModifyApplicationService(data: ModifyApplicationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationServiceResponse>;
-  /** 编辑配置 */
+  /** {@link ModifyConfigData 编辑配置}({@link ModifyConfigDataRequest 请求参数}): {@link ModifyConfigDataResponse 返回参数} */
   ModifyConfigData(data: ModifyConfigDataRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigDataResponse>;
-  /** 编辑环境 */
+  /** {@link ModifyEnvironment 编辑环境}({@link ModifyEnvironmentRequest 请求参数}): {@link ModifyEnvironmentResponse 返回参数} */
   ModifyEnvironment(data: ModifyEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvironmentResponse>;
-  /** 创建或者更新 Ingress 规则 */
+  /** {@link ModifyIngress 创建或者更新 Ingress 规则}({@link ModifyIngressRequest 请求参数}): {@link ModifyIngressResponse 返回参数} */
   ModifyIngress(data: ModifyIngressRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIngressResponse>;
-  /** 编辑日志收集配置 */
+  /** {@link ModifyLogConfig 编辑日志收集配置}({@link ModifyLogConfigRequest 请求参数}): {@link ModifyLogConfigResponse 返回参数} */
   ModifyLogConfig(data: ModifyLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogConfigResponse>;
-  /** 服务重启 */
+  /** {@link RestartApplication 服务重启}({@link RestartApplicationRequest 请求参数}): {@link RestartApplicationResponse 返回参数} */
   RestartApplication(data: RestartApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<RestartApplicationResponse>;
-  /** 重启应用实例 */
+  /** {@link RestartApplicationPod 重启应用实例}({@link RestartApplicationPodRequest 请求参数}): {@link RestartApplicationPodResponse 返回参数} */
   RestartApplicationPod(data: RestartApplicationPodRequest, config?: AxiosRequestConfig): AxiosPromise<RestartApplicationPodResponse>;
-  /** 开始下一批次发布 */
+  /** {@link ResumeDeployApplication 开始下一批次发布}({@link ResumeDeployApplicationRequest 请求参数}): {@link ResumeDeployApplicationResponse 返回参数} */
   ResumeDeployApplication(data?: ResumeDeployApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeDeployApplicationResponse>;
-  /** 回滚分批发布 */
+  /** {@link RevertDeployApplication 回滚分批发布}({@link RevertDeployApplicationRequest 请求参数}): {@link RevertDeployApplicationResponse 返回参数} */
   RevertDeployApplication(data?: RevertDeployApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<RevertDeployApplicationResponse>;
-  /** 更新应用部署版本 */
+  /** {@link RollingUpdateApplicationByVersion 更新应用部署版本}({@link RollingUpdateApplicationByVersionRequest 请求参数}): {@link RollingUpdateApplicationByVersionResponse 返回参数} */
   RollingUpdateApplicationByVersion(data: RollingUpdateApplicationByVersionRequest, config?: AxiosRequestConfig): AxiosPromise<RollingUpdateApplicationByVersionResponse>;
-  /** 服务停止 */
+  /** {@link StopApplication 服务停止}({@link StopApplicationRequest 请求参数}): {@link StopApplicationResponse 返回参数} */
   StopApplication(data: StopApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<StopApplicationResponse>;
-  /** 生成Cos临时秘钥 */
+  /** {@link V20201221.CreateCosToken 生成Cos临时秘钥}({@link V20201221.CreateCosTokenRequest 请求参数}): {@link V20201221.CreateCosTokenResponse 返回参数} */
   CreateCosToken(data: V20201221.CreateCosTokenRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.CreateCosTokenResponse>;
-  /** 生成Cos临时秘钥V2 */
+  /** {@link V20201221.CreateCosTokenV2 生成Cos临时秘钥V2}({@link V20201221.CreateCosTokenV2Request 请求参数}): {@link V20201221.CreateCosTokenV2Response 返回参数} */
   CreateCosTokenV2(data: V20201221.CreateCosTokenV2Request, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.CreateCosTokenV2Response>;
-  /** 创建命名空间 */
+  /** {@link V20201221.CreateNamespace 创建命名空间}({@link V20201221.CreateNamespaceRequest 请求参数}): {@link V20201221.CreateNamespaceResponse 返回参数} */
   CreateNamespace(data: V20201221.CreateNamespaceRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.CreateNamespaceResponse>;
-  /** 绑定云资源 */
+  /** {@link V20201221.CreateResource 绑定云资源}({@link V20201221.CreateResourceRequest 请求参数}): {@link V20201221.CreateResourceResponse 返回参数} */
   CreateResource(data: V20201221.CreateResourceRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.CreateResourceResponse>;
-  /** 创建服务 */
+  /** {@link V20201221.CreateServiceV2 创建服务}({@link V20201221.CreateServiceV2Request 请求参数}): {@link V20201221.CreateServiceV2Response 返回参数} */
   CreateServiceV2(data: V20201221.CreateServiceV2Request, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.CreateServiceV2Response>;
-  /** 删除 Ingress 规则 */
+  /** {@link V20201221.DeleteIngress 删除 Ingress 规则}({@link V20201221.DeleteIngressRequest 请求参数}): {@link V20201221.DeleteIngressResponse 返回参数} */
   DeleteIngress(data: V20201221.DeleteIngressRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.DeleteIngressResponse>;
-  /** 服务部署 */
+  /** {@link V20201221.DeployServiceV2 服务部署}({@link V20201221.DeployServiceV2Request 请求参数}): {@link V20201221.DeployServiceV2Response 返回参数} */
   DeployServiceV2(data: V20201221.DeployServiceV2Request, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.DeployServiceV2Response>;
-  /** 查询 Ingress 规则 */
+  /** {@link V20201221.DescribeIngress 查询 Ingress 规则}({@link V20201221.DescribeIngressRequest 请求参数}): {@link V20201221.DescribeIngressResponse 返回参数} */
   DescribeIngress(data: V20201221.DescribeIngressRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.DescribeIngressResponse>;
-  /** 查询 Ingress 规则列表 */
+  /** {@link V20201221.DescribeIngresses 查询 Ingress 规则列表}({@link V20201221.DescribeIngressesRequest 请求参数}): {@link V20201221.DescribeIngressesResponse 返回参数} */
   DescribeIngresses(data: V20201221.DescribeIngressesRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.DescribeIngressesResponse>;
-  /** 获取租户命名空间列表 */
+  /** {@link V20201221.DescribeNamespaces 获取租户命名空间列表}({@link V20201221.DescribeNamespacesRequest 请求参数}): {@link V20201221.DescribeNamespacesResponse 返回参数} */
   DescribeNamespaces(data: V20201221.DescribeNamespacesRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.DescribeNamespacesResponse>;
-  /** 查询服务关联的 Ingress 规则列表 */
+  /** {@link V20201221.DescribeRelatedIngresses 查询服务关联的 Ingress 规则列表}({@link V20201221.DescribeRelatedIngressesRequest 请求参数}): {@link V20201221.DescribeRelatedIngressesResponse 返回参数} */
   DescribeRelatedIngresses(data: V20201221.DescribeRelatedIngressesRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.DescribeRelatedIngressesResponse>;
-  /** 获取服务下面运行pod列表 */
+  /** {@link V20201221.DescribeServiceRunPodListV2 获取服务下面运行pod列表}({@link V20201221.DescribeServiceRunPodListV2Request 请求参数}): {@link V20201221.DescribeServiceRunPodListV2Response 返回参数} */
   DescribeServiceRunPodListV2(data: V20201221.DescribeServiceRunPodListV2Request, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.DescribeServiceRunPodListV2Response>;
-  /** 生成包预签名下载链接 */
+  /** {@link V20201221.GenerateDownloadUrl 生成包预签名下载链接}({@link V20201221.GenerateDownloadUrlRequest 请求参数}): {@link V20201221.GenerateDownloadUrlResponse 返回参数} */
   GenerateDownloadUrl(data: V20201221.GenerateDownloadUrlRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.GenerateDownloadUrlResponse>;
-  /** 创建或者更新 Ingress 规则 */
+  /** {@link V20201221.ModifyIngress 创建或者更新 Ingress 规则}({@link V20201221.ModifyIngressRequest 请求参数}): {@link V20201221.ModifyIngressResponse 返回参数} */
   ModifyIngress(data: V20201221.ModifyIngressRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.ModifyIngressResponse>;
-  /** 编辑命名空间 */
+  /** {@link V20201221.ModifyNamespace 编辑命名空间}({@link V20201221.ModifyNamespaceRequest 请求参数}): {@link V20201221.ModifyNamespaceResponse 返回参数} */
   ModifyNamespace(data: V20201221.ModifyNamespaceRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.ModifyNamespaceResponse>;
-  /** 修改服务基本信息 */
+  /** {@link V20201221.ModifyServiceInfo 修改服务基本信息}({@link V20201221.ModifyServiceInfoRequest 请求参数}): {@link V20201221.ModifyServiceInfoResponse 返回参数} */
   ModifyServiceInfo(data: V20201221.ModifyServiceInfoRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.ModifyServiceInfoResponse>;
-  /** 重启实例 */
+  /** {@link V20201221.RestartServiceRunPod 重启实例}({@link V20201221.RestartServiceRunPodRequest 请求参数}): {@link V20201221.RestartServiceRunPodResponse 返回参数} */
   RestartServiceRunPod(data: V20201221.RestartServiceRunPodRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.RestartServiceRunPodResponse>;
 }
 

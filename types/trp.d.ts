@@ -1074,86 +1074,86 @@ declare interface ModifyTraceDataResponse {
   RequestId?: string;
 }
 
-/** [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) */
+/** {@link Trp T-Sec-安心平台(RP)} */
 declare interface Trp {
   (): Versions;
-  /** 新增批次 */
+  /** {@link CreateCodeBatch 新增批次}({@link CreateCodeBatchRequest 请求参数}): {@link CreateCodeBatchResponse 返回参数} */
   CreateCodeBatch(data?: CreateCodeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeBatchResponse>;
-  /** 生成普通码包 */
+  /** {@link CreateCodePack 生成普通码包}({@link CreateCodePackRequest 请求参数}): {@link CreateCodePackResponse 返回参数} */
   CreateCodePack(data: CreateCodePackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodePackResponse>;
-  /** 生成自定义码包 */
+  /** {@link CreateCustomPack 生成自定义码包}({@link CreateCustomPackRequest 请求参数}): {@link CreateCustomPackResponse 返回参数} */
   CreateCustomPack(data: CreateCustomPackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomPackResponse>;
-  /** 新建自定义码规则 */
+  /** {@link CreateCustomRule 新建自定义码规则}({@link CreateCustomRuleRequest 请求参数}): {@link CreateCustomRuleResponse 返回参数} */
   CreateCustomRule(data: CreateCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomRuleResponse>;
-  /** 新建商户 */
+  /** {@link CreateMerchant 新建商户}({@link CreateMerchantRequest 请求参数}): {@link CreateMerchantResponse 返回参数} */
   CreateMerchant(data: CreateMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMerchantResponse>;
-  /** 新建商品 */
+  /** {@link CreateProduct 新建商品}({@link CreateProductRequest 请求参数}): {@link CreateProductResponse 返回参数} */
   CreateProduct(data: CreateProductRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProductResponse>;
-  /** 上链溯源信息 */
+  /** {@link CreateTraceChain 上链溯源信息}({@link CreateTraceChainRequest 请求参数}): {@link CreateTraceChainResponse 返回参数} */
   CreateTraceChain(data?: CreateTraceChainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTraceChainResponse>;
-  /** 批量导入二维码 */
+  /** {@link CreateTraceCodes 批量导入二维码}({@link CreateTraceCodesRequest 请求参数}): {@link CreateTraceCodesResponse 返回参数} */
   CreateTraceCodes(data: CreateTraceCodesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTraceCodesResponse>;
-  /** 异步导入激活码包 */
+  /** {@link CreateTraceCodesAsync 异步导入激活码包}({@link CreateTraceCodesAsyncRequest 请求参数}): {@link CreateTraceCodesAsyncResponse 返回参数} */
   CreateTraceCodesAsync(data?: CreateTraceCodesAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTraceCodesAsyncResponse>;
-  /** 新增溯源信息 */
+  /** {@link CreateTraceData 新增溯源信息}({@link CreateTraceDataRequest 请求参数}): {@link CreateTraceDataResponse 返回参数} */
   CreateTraceData(data?: CreateTraceDataRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTraceDataResponse>;
-  /** 删除批次 */
+  /** {@link DeleteCodeBatch 删除批次}({@link DeleteCodeBatchRequest 请求参数}): {@link DeleteCodeBatchResponse 返回参数} */
   DeleteCodeBatch(data?: DeleteCodeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCodeBatchResponse>;
-  /** 删除商户 */
+  /** {@link DeleteMerchant 删除商户}({@link DeleteMerchantRequest 请求参数}): {@link DeleteMerchantResponse 返回参数} */
   DeleteMerchant(data: DeleteMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMerchantResponse>;
-  /** 删除商品 */
+  /** {@link DeleteProduct 删除商品}({@link DeleteProductRequest 请求参数}): {@link DeleteProductResponse 返回参数} */
   DeleteProduct(data: DeleteProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProductResponse>;
-  /** 删除溯源信息 */
+  /** {@link DeleteTraceData 删除溯源信息}({@link DeleteTraceDataRequest 请求参数}): {@link DeleteTraceDataResponse 返回参数} */
   DeleteTraceData(data: DeleteTraceDataRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTraceDataResponse>;
-  /** 查询批次信息 */
+  /** {@link DescribeCodeBatchById 查询批次信息}({@link DescribeCodeBatchByIdRequest 请求参数}): {@link DescribeCodeBatchByIdResponse 返回参数} */
   DescribeCodeBatchById(data?: DescribeCodeBatchByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodeBatchByIdResponse>;
-  /** 查询批次列表 */
+  /** {@link DescribeCodeBatchs 查询批次列表}({@link DescribeCodeBatchsRequest 请求参数}): {@link DescribeCodeBatchsResponse 返回参数} */
   DescribeCodeBatchs(data?: DescribeCodeBatchsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodeBatchsResponse>;
-  /** 查询码包状态 */
+  /** {@link DescribeCodePackStatus 查询码包状态}({@link DescribeCodePackStatusRequest 请求参数}): {@link DescribeCodePackStatusResponse 返回参数} */
   DescribeCodePackStatus(data: DescribeCodePackStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodePackStatusResponse>;
-  /** 查询码包地址 */
+  /** {@link DescribeCodePackUrl 查询码包地址}({@link DescribeCodePackUrlRequest 请求参数}): {@link DescribeCodePackUrlResponse 返回参数} */
   DescribeCodePackUrl(data: DescribeCodePackUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodePackUrlResponse>;
-  /** 查询码包列表 */
+  /** {@link DescribeCodePacks 查询码包列表}({@link DescribeCodePacksRequest 请求参数}): {@link DescribeCodePacksResponse 返回参数} */
   DescribeCodePacks(data?: DescribeCodePacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodePacksResponse>;
-  /** 查询码包的二维码列表 */
+  /** {@link DescribeCodesByPack 查询码包的二维码列表}({@link DescribeCodesByPackRequest 请求参数}): {@link DescribeCodesByPackResponse 返回参数} */
   DescribeCodesByPack(data: DescribeCodesByPackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodesByPackResponse>;
-  /** 查自定义码规则 */
+  /** {@link DescribeCustomRuleById 查自定义码规则}({@link DescribeCustomRuleByIdRequest 请求参数}): {@link DescribeCustomRuleByIdResponse 返回参数} */
   DescribeCustomRuleById(data: DescribeCustomRuleByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomRuleByIdResponse>;
-  /** 查自定义码规则列表 */
+  /** {@link DescribeCustomRules 查自定义码规则列表}({@link DescribeCustomRulesRequest 请求参数}): {@link DescribeCustomRulesResponse 返回参数} */
   DescribeCustomRules(data?: DescribeCustomRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomRulesResponse>;
-  /** 获取异步任务的输出地址 */
+  /** {@link DescribeJobFileUrl 获取异步任务的输出地址}({@link DescribeJobFileUrlRequest 请求参数}): {@link DescribeJobFileUrlResponse 返回参数} */
   DescribeJobFileUrl(data: DescribeJobFileUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobFileUrlResponse>;
-  /** 查询商户信息 */
+  /** {@link DescribeMerchantById 查询商户信息}({@link DescribeMerchantByIdRequest 请求参数}): {@link DescribeMerchantByIdResponse 返回参数} */
   DescribeMerchantById(data: DescribeMerchantByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMerchantByIdResponse>;
-  /** 查询商户列表 */
+  /** {@link DescribeMerchants 查询商户列表}({@link DescribeMerchantsRequest 请求参数}): {@link DescribeMerchantsResponse 返回参数} */
   DescribeMerchants(data?: DescribeMerchantsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMerchantsResponse>;
-  /** 查询商品信息 */
+  /** {@link DescribeProductById 查询商品信息}({@link DescribeProductByIdRequest 请求参数}): {@link DescribeProductByIdResponse 返回参数} */
   DescribeProductById(data: DescribeProductByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductByIdResponse>;
-  /** 查询商品列表 */
+  /** {@link DescribeProducts 查询商品列表}({@link DescribeProductsRequest 请求参数}): {@link DescribeProductsResponse 返回参数} */
   DescribeProducts(data?: DescribeProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductsResponse>;
-  /** 查询临时Token */
+  /** {@link DescribeTmpToken 查询临时Token}({@link DescribeTmpTokenRequest 请求参数}): {@link DescribeTmpTokenResponse 返回参数} */
   DescribeTmpToken(data?: DescribeTmpTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTmpTokenResponse>;
-  /** 查询二维码信息 */
+  /** {@link DescribeTraceCodeById 查询二维码信息}({@link DescribeTraceCodeByIdRequest 请求参数}): {@link DescribeTraceCodeByIdResponse 返回参数} */
   DescribeTraceCodeById(data?: DescribeTraceCodeByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceCodeByIdResponse>;
-  /** 查询二维码列表 */
+  /** {@link DescribeTraceCodes 查询二维码列表}({@link DescribeTraceCodesRequest 请求参数}): {@link DescribeTraceCodesResponse 返回参数} */
   DescribeTraceCodes(data?: DescribeTraceCodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceCodesResponse>;
-  /** 查询溯源信息 */
+  /** {@link DescribeTraceDataList 查询溯源信息}({@link DescribeTraceDataListRequest 请求参数}): {@link DescribeTraceDataListResponse 返回参数} */
   DescribeTraceDataList(data?: DescribeTraceDataListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceDataListResponse>;
-  /** 修改批次 */
+  /** {@link ModifyCodeBatch 修改批次}({@link ModifyCodeBatchRequest 请求参数}): {@link ModifyCodeBatchResponse 返回参数} */
   ModifyCodeBatch(data: ModifyCodeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCodeBatchResponse>;
-  /** 修改自定义码规则 */
+  /** {@link ModifyCustomRule 修改自定义码规则}({@link ModifyCustomRuleRequest 请求参数}): {@link ModifyCustomRuleResponse 返回参数} */
   ModifyCustomRule(data: ModifyCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomRuleResponse>;
-  /** 更新自定义码规则状态 */
+  /** {@link ModifyCustomRuleStatus 更新自定义码规则状态}({@link ModifyCustomRuleStatusRequest 请求参数}): {@link ModifyCustomRuleStatusResponse 返回参数} */
   ModifyCustomRuleStatus(data: ModifyCustomRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomRuleStatusResponse>;
-  /** 编辑商户 */
+  /** {@link ModifyMerchant 编辑商户}({@link ModifyMerchantRequest 请求参数}): {@link ModifyMerchantResponse 返回参数} */
   ModifyMerchant(data: ModifyMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMerchantResponse>;
-  /** 编辑商品 */
+  /** {@link ModifyProduct 编辑商品}({@link ModifyProductRequest 请求参数}): {@link ModifyProductResponse 返回参数} */
   ModifyProduct(data: ModifyProductRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProductResponse>;
-  /** 修改二维码的状态 */
+  /** {@link ModifyTraceCode 修改二维码的状态}({@link ModifyTraceCodeRequest 请求参数}): {@link ModifyTraceCodeResponse 返回参数} */
   ModifyTraceCode(data: ModifyTraceCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceCodeResponse>;
-  /** 修改溯源信息 */
+  /** {@link ModifyTraceData 修改溯源信息}({@link ModifyTraceDataRequest 请求参数}): {@link ModifyTraceDataResponse 返回参数} */
   ModifyTraceData(data?: ModifyTraceDataRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceDataResponse>;
-  /** 修改溯源信息的排序 */
+  /** {@link ModifyTraceDataRanks 修改溯源信息的排序}({@link ModifyTraceDataRanksRequest 请求参数}): {@link ModifyTraceDataRanksResponse 返回参数} */
   ModifyTraceDataRanks(data?: ModifyTraceDataRanksRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceDataRanksResponse>;
 }
 

@@ -24,10 +24,10 @@ declare interface SendMessageResponse {
   RequestId?: string;
 }
 
-/** [数据接入平台](https://cloud.tencent.com/document/product/1591) */
+/** {@link Dataintegration 数据接入平台} */
 declare interface Dataintegration {
   (): Versions;
-  /** 数据上报 */
+  /** {@link SendMessage 数据上报}({@link SendMessageRequest 请求参数}): {@link SendMessageResponse 返回参数} */
   SendMessage(data: SendMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendMessageResponse>;
 }
 

@@ -540,28 +540,28 @@ declare interface ModifyTaskRunStatusResponse {
   RequestId?: string;
 }
 
-/** [混沌演练平台](https://cloud.tencent.com/document/product/1500) */
+/** {@link Cfg 混沌演练平台} */
 declare interface Cfg {
   (): Versions;
-  /** 从经验库创建演练 */
+  /** {@link CreateTaskFromTemplate 从经验库创建演练}({@link CreateTaskFromTemplateRequest 请求参数}): {@link CreateTaskFromTemplateResponse 返回参数} */
   CreateTaskFromTemplate(data: CreateTaskFromTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFromTemplateResponse>;
-  /** 删除任务 */
+  /** {@link DeleteTask 删除任务}({@link DeleteTaskRequest 请求参数}): {@link DeleteTaskResponse 返回参数} */
   DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;
-  /** 查询任务 */
+  /** {@link DescribeTask 查询任务}({@link DescribeTaskRequest 请求参数}): {@link DescribeTaskResponse 返回参数} */
   DescribeTask(data: DescribeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResponse>;
-  /** 获取演练过程日志 */
+  /** {@link DescribeTaskExecuteLogs 获取演练过程日志}({@link DescribeTaskExecuteLogsRequest 请求参数}): {@link DescribeTaskExecuteLogsResponse 返回参数} */
   DescribeTaskExecuteLogs(data: DescribeTaskExecuteLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskExecuteLogsResponse>;
-  /** 查询任务列表 */
+  /** {@link DescribeTaskList 查询任务列表}({@link DescribeTaskListRequest 请求参数}): {@link DescribeTaskListResponse 返回参数} */
   DescribeTaskList(data: DescribeTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskListResponse>;
-  /** 查询经验库 */
+  /** {@link DescribeTemplate 查询经验库}({@link DescribeTemplateRequest 请求参数}): {@link DescribeTemplateResponse 返回参数} */
   DescribeTemplate(data: DescribeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateResponse>;
-  /** 查询经验库列表 */
+  /** {@link DescribeTemplateList 查询经验库列表}({@link DescribeTemplateListRequest 请求参数}): {@link DescribeTemplateListResponse 返回参数} */
   DescribeTemplateList(data: DescribeTemplateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateListResponse>;
-  /** 执行任务 */
+  /** {@link ExecuteTask 执行任务}({@link ExecuteTaskRequest 请求参数}): {@link ExecuteTaskResponse 返回参数} */
   ExecuteTask(data: ExecuteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskResponse>;
-  /** 执行任务动作实例 */
+  /** {@link ExecuteTaskInstance 执行任务动作实例}({@link ExecuteTaskInstanceRequest 请求参数}): {@link ExecuteTaskInstanceResponse 返回参数} */
   ExecuteTaskInstance(data: ExecuteTaskInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskInstanceResponse>;
-  /** 修改任务运行状态 */
+  /** {@link ModifyTaskRunStatus 修改任务运行状态}({@link ModifyTaskRunStatusRequest 请求参数}): {@link ModifyTaskRunStatusResponse 返回参数} */
   ModifyTaskRunStatus(data: ModifyTaskRunStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskRunStatusResponse>;
 }
 

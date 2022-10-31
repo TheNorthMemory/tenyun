@@ -2462,160 +2462,160 @@ declare interface SetSecurityGroupForLoadbalancersResponse {
   RequestId?: string;
 }
 
-/** [负载均衡](https://cloud.tencent.com/document/product/214) */
+/** {@link Clb 负载均衡} */
 declare interface Clb {
   (): Versions;
-  /** 规则关联目标组 */
+  /** {@link AssociateTargetGroups 规则关联目标组}({@link AssociateTargetGroupsRequest 请求参数}): {@link AssociateTargetGroupsResponse 返回参数} */
   AssociateTargetGroups(data: AssociateTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateTargetGroupsResponse>;
-  /** 自动生成负载均衡转发规则的重定向关系 */
+  /** {@link AutoRewrite 自动生成负载均衡转发规则的重定向关系}({@link AutoRewriteRequest 请求参数}): {@link AutoRewriteResponse 返回参数} */
   AutoRewrite(data: AutoRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<AutoRewriteResponse>;
-  /** 批量解绑四七层后端服务 */
+  /** {@link BatchDeregisterTargets 批量解绑四七层后端服务}({@link BatchDeregisterTargetsRequest 请求参数}): {@link BatchDeregisterTargetsResponse 返回参数} */
   BatchDeregisterTargets(data: BatchDeregisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeregisterTargetsResponse>;
-  /** 批量修改监听器绑定的后端机器的转发权重 */
+  /** {@link BatchModifyTargetWeight 批量修改监听器绑定的后端机器的转发权重}({@link BatchModifyTargetWeightRequest 请求参数}): {@link BatchModifyTargetWeightResponse 返回参数} */
   BatchModifyTargetWeight(data: BatchModifyTargetWeightRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyTargetWeightResponse>;
-  /** 批量绑定虚拟主机或弹性网卡 */
+  /** {@link BatchRegisterTargets 批量绑定虚拟主机或弹性网卡}({@link BatchRegisterTargetsRequest 请求参数}): {@link BatchRegisterTargetsResponse 返回参数} */
   BatchRegisterTargets(data: BatchRegisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchRegisterTargetsResponse>;
-  /** 克隆负载均衡实例 */
+  /** {@link CloneLoadBalancer 克隆负载均衡实例}({@link CloneLoadBalancerRequest 请求参数}): {@link CloneLoadBalancerResponse 返回参数} */
   CloneLoadBalancer(data: CloneLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<CloneLoadBalancerResponse>;
-  /** 创建CLB专有日志集 */
+  /** {@link CreateClsLogSet 创建CLB专有日志集}({@link CreateClsLogSetRequest 请求参数}): {@link CreateClsLogSetResponse 返回参数} */
   CreateClsLogSet(data?: CreateClsLogSetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClsLogSetResponse>;
-  /** 创建负载均衡监听器 */
+  /** {@link CreateListener 创建负载均衡监听器}({@link CreateListenerRequest 请求参数}): {@link CreateListenerResponse 返回参数} */
   CreateListener(data: CreateListenerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateListenerResponse>;
-  /** 购买负载均衡实例 */
+  /** {@link CreateLoadBalancer 购买负载均衡实例}({@link CreateLoadBalancerRequest 请求参数}): {@link CreateLoadBalancerResponse 返回参数} */
   CreateLoadBalancer(data: CreateLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadBalancerResponse>;
-  /** 添加SnatIp */
+  /** {@link CreateLoadBalancerSnatIps 添加SnatIp}({@link CreateLoadBalancerSnatIpsRequest 请求参数}): {@link CreateLoadBalancerSnatIpsResponse 返回参数} */
   CreateLoadBalancerSnatIps(data: CreateLoadBalancerSnatIpsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadBalancerSnatIpsResponse>;
-  /** 创建负载均衡七层监听器转发规则 */
+  /** {@link CreateRule 创建负载均衡七层监听器转发规则}({@link CreateRuleRequest 请求参数}): {@link CreateRuleResponse 返回参数} */
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
-  /** 创建目标组 */
+  /** {@link CreateTargetGroup 创建目标组}({@link CreateTargetGroupRequest 请求参数}): {@link CreateTargetGroupResponse 返回参数} */
   CreateTargetGroup(data?: CreateTargetGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTargetGroupResponse>;
-  /** 创建主题 */
+  /** {@link CreateTopic 创建主题}({@link CreateTopicRequest 请求参数}): {@link CreateTopicResponse 返回参数} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
-  /** 删除负载均衡监听器 */
+  /** {@link DeleteListener 删除负载均衡监听器}({@link DeleteListenerRequest 请求参数}): {@link DeleteListenerResponse 返回参数} */
   DeleteListener(data: DeleteListenerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteListenerResponse>;
-  /** 删除负载均衡实例 */
+  /** {@link DeleteLoadBalancer 删除负载均衡实例}({@link DeleteLoadBalancerRequest 请求参数}): {@link DeleteLoadBalancerResponse 返回参数} */
   DeleteLoadBalancer(data: DeleteLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerResponse>;
-  /** 删除负载均衡多个监听器 */
+  /** {@link DeleteLoadBalancerListeners 删除负载均衡多个监听器}({@link DeleteLoadBalancerListenersRequest 请求参数}): {@link DeleteLoadBalancerListenersResponse 返回参数} */
   DeleteLoadBalancerListeners(data: DeleteLoadBalancerListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerListenersResponse>;
-  /** 删除SnatIp */
+  /** {@link DeleteLoadBalancerSnatIps 删除SnatIp}({@link DeleteLoadBalancerSnatIpsRequest 请求参数}): {@link DeleteLoadBalancerSnatIpsResponse 返回参数} */
   DeleteLoadBalancerSnatIps(data: DeleteLoadBalancerSnatIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerSnatIpsResponse>;
-  /** 删除负载均衡转发规则之间的重定向关系 */
+  /** {@link DeleteRewrite 删除负载均衡转发规则之间的重定向关系}({@link DeleteRewriteRequest 请求参数}): {@link DeleteRewriteResponse 返回参数} */
   DeleteRewrite(data: DeleteRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRewriteResponse>;
-  /** 删除负载均衡七层监听器的转发规则 */
+  /** {@link DeleteRule 删除负载均衡七层监听器的转发规则}({@link DeleteRuleRequest 请求参数}): {@link DeleteRuleResponse 返回参数} */
   DeleteRule(data: DeleteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleResponse>;
-  /** 删除目标组 */
+  /** {@link DeleteTargetGroups 删除目标组}({@link DeleteTargetGroupsRequest 请求参数}): {@link DeleteTargetGroupsResponse 返回参数} */
   DeleteTargetGroups(data: DeleteTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTargetGroupsResponse>;
-  /** 解绑目标组服务器 */
+  /** {@link DeregisterTargetGroupInstances 解绑目标组服务器}({@link DeregisterTargetGroupInstancesRequest 请求参数}): {@link DeregisterTargetGroupInstancesResponse 返回参数} */
   DeregisterTargetGroupInstances(data: DeregisterTargetGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterTargetGroupInstancesResponse>;
-  /** 从负载均衡监听器上解绑后端服务 */
+  /** {@link DeregisterTargets 从负载均衡监听器上解绑后端服务}({@link DeregisterTargetsRequest 请求参数}): {@link DeregisterTargetsResponse 返回参数} */
   DeregisterTargets(data: DeregisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterTargetsResponse>;
-  /** 解绑传统型负载均衡的后端服务器 */
+  /** {@link DeregisterTargetsFromClassicalLB 解绑传统型负载均衡的后端服务器}({@link DeregisterTargetsFromClassicalLBRequest 请求参数}): {@link DeregisterTargetsFromClassicalLBResponse 返回参数} */
   DeregisterTargetsFromClassicalLB(data: DeregisterTargetsFromClassicalLBRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterTargetsFromClassicalLBResponse>;
-  /** 查询一个负载均衡所封禁的IP列表（黑名单） */
+  /** {@link DescribeBlockIPList 查询一个负载均衡所封禁的IP列表（黑名单）}({@link DescribeBlockIPListRequest 请求参数}): {@link DescribeBlockIPListResponse 返回参数} */
   DescribeBlockIPList(data: DescribeBlockIPListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockIPListResponse>;
-  /** 查询封禁IP（黑名单）异步任务的执行状态 */
+  /** {@link DescribeBlockIPTask 查询封禁IP（黑名单）异步任务的执行状态}({@link DescribeBlockIPTaskRequest 请求参数}): {@link DescribeBlockIPTaskResponse 返回参数} */
   DescribeBlockIPTask(data: DescribeBlockIPTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockIPTaskResponse>;
-  /** 通过后端主机反向查找其绑定的传统型负载均衡 */
+  /** {@link DescribeClassicalLBByInstanceId 通过后端主机反向查找其绑定的传统型负载均衡}({@link DescribeClassicalLBByInstanceIdRequest 请求参数}): {@link DescribeClassicalLBByInstanceIdResponse 返回参数} */
   DescribeClassicalLBByInstanceId(data: DescribeClassicalLBByInstanceIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassicalLBByInstanceIdResponse>;
-  /** 获取传统型负载均衡后端的健康状态 */
+  /** {@link DescribeClassicalLBHealthStatus 获取传统型负载均衡后端的健康状态}({@link DescribeClassicalLBHealthStatusRequest 请求参数}): {@link DescribeClassicalLBHealthStatusResponse 返回参数} */
   DescribeClassicalLBHealthStatus(data: DescribeClassicalLBHealthStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassicalLBHealthStatusResponse>;
-  /** 获取传统型负载均衡监听器列表 */
+  /** {@link DescribeClassicalLBListeners 获取传统型负载均衡监听器列表}({@link DescribeClassicalLBListenersRequest 请求参数}): {@link DescribeClassicalLBListenersResponse 返回参数} */
   DescribeClassicalLBListeners(data: DescribeClassicalLBListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassicalLBListenersResponse>;
-  /** 获取传统型负载均衡绑定的后端服务器列表 */
+  /** {@link DescribeClassicalLBTargets 获取传统型负载均衡绑定的后端服务器列表}({@link DescribeClassicalLBTargetsRequest 请求参数}): {@link DescribeClassicalLBTargetsResponse 返回参数} */
   DescribeClassicalLBTargets(data: DescribeClassicalLBTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassicalLBTargetsResponse>;
-  /** 获取用户的CLB专有日志集 */
+  /** {@link DescribeClsLogSet 获取用户的CLB专有日志集}({@link DescribeClsLogSetRequest 请求参数}): {@link DescribeClsLogSetResponse 返回参数} */
   DescribeClsLogSet(data?: DescribeClsLogSetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClsLogSetResponse>;
-  /** 查询集群中资源列表 */
+  /** {@link DescribeClusterResources 查询集群中资源列表}({@link DescribeClusterResourcesRequest 请求参数}): {@link DescribeClusterResourcesResponse 返回参数} */
   DescribeClusterResources(data?: DescribeClusterResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterResourcesResponse>;
-  /** 查询跨域2.0版本云联网后端子机和网卡信息 */
+  /** {@link DescribeCrossTargets 查询跨域2.0版本云联网后端子机和网卡信息}({@link DescribeCrossTargetsRequest 请求参数}): {@link DescribeCrossTargetsResponse 返回参数} */
   DescribeCrossTargets(data?: DescribeCrossTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossTargetsResponse>;
-  /** 拉取配置绑定的server或location。 */
+  /** {@link DescribeCustomizedConfigAssociateList 拉取配置绑定的server或location。}({@link DescribeCustomizedConfigAssociateListRequest 请求参数}): {@link DescribeCustomizedConfigAssociateListResponse 返回参数} */
   DescribeCustomizedConfigAssociateList(data?: DescribeCustomizedConfigAssociateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomizedConfigAssociateListResponse>;
-  /** 拉取配置列表 */
+  /** {@link DescribeCustomizedConfigList 拉取配置列表}({@link DescribeCustomizedConfigListRequest 请求参数}): {@link DescribeCustomizedConfigListResponse 返回参数} */
   DescribeCustomizedConfigList(data: DescribeCustomizedConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomizedConfigListResponse>;
-  /** 查询集群列表 */
+  /** {@link DescribeExclusiveClusters 查询集群列表}({@link DescribeExclusiveClustersRequest 请求参数}): {@link DescribeExclusiveClustersResponse 返回参数} */
   DescribeExclusiveClusters(data?: DescribeExclusiveClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExclusiveClustersResponse>;
-  /** 查询负载均衡闲置实例 */
+  /** {@link DescribeIdleLoadBalancers 查询负载均衡闲置实例}({@link DescribeIdleLoadBalancersRequest 请求参数}): {@link DescribeIdleLoadBalancersResponse 返回参数} */
   DescribeIdleLoadBalancers(data?: DescribeIdleLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdleLoadBalancersResponse>;
-  /** 查询后端云主机或弹性网卡绑定的负载均衡 */
+  /** {@link DescribeLBListeners 查询后端云主机或弹性网卡绑定的负载均衡}({@link DescribeLBListenersRequest 请求参数}): {@link DescribeLBListenersResponse 返回参数} */
   DescribeLBListeners(data: DescribeLBListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLBListenersResponse>;
-  /** 查询负载均衡的监听器列表 */
+  /** {@link DescribeListeners 查询负载均衡的监听器列表}({@link DescribeListenersRequest 请求参数}): {@link DescribeListenersResponse 返回参数} */
   DescribeListeners(data: DescribeListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenersResponse>;
-  /** 根据证书ID查询负载均衡 */
+  /** {@link DescribeLoadBalancerListByCertId 根据证书ID查询负载均衡}({@link DescribeLoadBalancerListByCertIdRequest 请求参数}): {@link DescribeLoadBalancerListByCertIdResponse 返回参数} */
   DescribeLoadBalancerListByCertId(data: DescribeLoadBalancerListByCertIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerListByCertIdResponse>;
-  /** 查询负载均衡状态统计数据 */
+  /** {@link DescribeLoadBalancerOverview 查询负载均衡状态统计数据}({@link DescribeLoadBalancerOverviewRequest 请求参数}): {@link DescribeLoadBalancerOverviewResponse 返回参数} */
   DescribeLoadBalancerOverview(data?: DescribeLoadBalancerOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerOverviewResponse>;
-  /** 查询账号下高流量负载均衡 */
+  /** {@link DescribeLoadBalancerTraffic 查询账号下高流量负载均衡}({@link DescribeLoadBalancerTrafficRequest 请求参数}): {@link DescribeLoadBalancerTrafficResponse 返回参数} */
   DescribeLoadBalancerTraffic(data?: DescribeLoadBalancerTrafficRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerTrafficResponse>;
-  /** 查询负载均衡实例列表 */
+  /** {@link DescribeLoadBalancers 查询负载均衡实例列表}({@link DescribeLoadBalancersRequest 请求参数}): {@link DescribeLoadBalancersResponse 返回参数} */
   DescribeLoadBalancers(data?: DescribeLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersResponse>;
-  /** 查询负载均衡详细信息 */
+  /** {@link DescribeLoadBalancersDetail 查询负载均衡详细信息}({@link DescribeLoadBalancersDetailRequest 请求参数}): {@link DescribeLoadBalancersDetailResponse 返回参数} */
   DescribeLoadBalancersDetail(data?: DescribeLoadBalancersDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersDetailResponse>;
-  /** 查询配额 */
+  /** {@link DescribeQuota 查询配额}({@link DescribeQuotaRequest 请求参数}): {@link DescribeQuotaResponse 返回参数} */
   DescribeQuota(data?: DescribeQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuotaResponse>;
-  /** 查询用户在当前地域支持可用区列表和资源列表 */
+  /** {@link DescribeResources 查询用户在当前地域支持可用区列表和资源列表}({@link DescribeResourcesRequest 请求参数}): {@link DescribeResourcesResponse 返回参数} */
   DescribeResources(data?: DescribeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesResponse>;
-  /** 查询负载均衡转发规则的重定向关系 */
+  /** {@link DescribeRewrite 查询负载均衡转发规则的重定向关系}({@link DescribeRewriteRequest 请求参数}): {@link DescribeRewriteResponse 返回参数} */
   DescribeRewrite(data: DescribeRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRewriteResponse>;
-  /** 获取目标组绑定的服务器 */
+  /** {@link DescribeTargetGroupInstances 获取目标组绑定的服务器}({@link DescribeTargetGroupInstancesRequest 请求参数}): {@link DescribeTargetGroupInstancesResponse 返回参数} */
   DescribeTargetGroupInstances(data: DescribeTargetGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupInstancesResponse>;
-  /** 获取目标组列表 */
+  /** {@link DescribeTargetGroupList 获取目标组列表}({@link DescribeTargetGroupListRequest 请求参数}): {@link DescribeTargetGroupListResponse 返回参数} */
   DescribeTargetGroupList(data?: DescribeTargetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupListResponse>;
-  /** 查询目标组信息 */
+  /** {@link DescribeTargetGroups 查询目标组信息}({@link DescribeTargetGroupsRequest 请求参数}): {@link DescribeTargetGroupsResponse 返回参数} */
   DescribeTargetGroups(data?: DescribeTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupsResponse>;
-  /** 获取负载均衡后端服务的健康检查状态 */
+  /** {@link DescribeTargetHealth 获取负载均衡后端服务的健康检查状态}({@link DescribeTargetHealthRequest 请求参数}): {@link DescribeTargetHealthResponse 返回参数} */
   DescribeTargetHealth(data: DescribeTargetHealthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetHealthResponse>;
-  /** 查询负载均衡绑定的后端服务列表 */
+  /** {@link DescribeTargets 查询负载均衡绑定的后端服务列表}({@link DescribeTargetsRequest 请求参数}): {@link DescribeTargetsResponse 返回参数} */
   DescribeTargets(data: DescribeTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetsResponse>;
-  /** 查询异步任务状态 */
+  /** {@link DescribeTaskStatus 查询异步任务状态}({@link DescribeTaskStatusRequest 请求参数}): {@link DescribeTaskStatusResponse 返回参数} */
   DescribeTaskStatus(data?: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
-  /** 解除规则的目标组关联关系 */
+  /** {@link DisassociateTargetGroups 解除规则的目标组关联关系}({@link DisassociateTargetGroupsRequest 请求参数}): {@link DisassociateTargetGroupsResponse 返回参数} */
   DisassociateTargetGroups(data: DisassociateTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateTargetGroupsResponse>;
-  /** 手动添加负载均衡转发规则的重定向关系 */
+  /** {@link ManualRewrite 手动添加负载均衡转发规则的重定向关系}({@link ManualRewriteRequest 请求参数}): {@link ManualRewriteResponse 返回参数} */
   ManualRewrite(data: ManualRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<ManualRewriteResponse>;
-  /** 传统型负载均衡迁移成(原应用型)负载均衡 */
+  /** {@link MigrateClassicalLoadBalancers 传统型负载均衡迁移成(原应用型)负载均衡}({@link MigrateClassicalLoadBalancersRequest 请求参数}): {@link MigrateClassicalLoadBalancersResponse 返回参数} */
   MigrateClassicalLoadBalancers(data: MigrateClassicalLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<MigrateClassicalLoadBalancersResponse>;
-  /** 修改负载均衡的IP封禁黑名单列表 */
+  /** {@link ModifyBlockIPList 修改负载均衡的IP封禁黑名单列表}({@link ModifyBlockIPListRequest 请求参数}): {@link ModifyBlockIPListResponse 返回参数} */
   ModifyBlockIPList(data: ModifyBlockIPListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockIPListResponse>;
-  /** 修改七层转发规则的域名 */
+  /** {@link ModifyDomain 修改七层转发规则的域名}({@link ModifyDomainRequest 请求参数}): {@link ModifyDomainResponse 返回参数} */
   ModifyDomain(data: ModifyDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainResponse>;
-  /** 修改负载均衡七层监听器转发规则的域名级别属性 */
+  /** {@link ModifyDomainAttributes 修改负载均衡七层监听器转发规则的域名级别属性}({@link ModifyDomainAttributesRequest 请求参数}): {@link ModifyDomainAttributesResponse 返回参数} */
   ModifyDomainAttributes(data: ModifyDomainAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainAttributesResponse>;
-  /** 修改负载均衡监听器属性 */
+  /** {@link ModifyListener 修改负载均衡监听器属性}({@link ModifyListenerRequest 请求参数}): {@link ModifyListenerResponse 返回参数} */
   ModifyListener(data: ModifyListenerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyListenerResponse>;
-  /** 修改负载均衡实例的属性 */
+  /** {@link ModifyLoadBalancerAttributes 修改负载均衡实例的属性}({@link ModifyLoadBalancerAttributesRequest 请求参数}): {@link ModifyLoadBalancerAttributesResponse 返回参数} */
   ModifyLoadBalancerAttributes(data: ModifyLoadBalancerAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerAttributesResponse>;
-  /** 修改IPv6FullChain负载均衡7层监听器支持混绑目标特性。 */
+  /** {@link ModifyLoadBalancerMixIpTarget 修改IPv6FullChain负载均衡7层监听器支持混绑目标特性。}({@link ModifyLoadBalancerMixIpTargetRequest 请求参数}): {@link ModifyLoadBalancerMixIpTargetResponse 返回参数} */
   ModifyLoadBalancerMixIpTarget(data: ModifyLoadBalancerMixIpTargetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerMixIpTargetResponse>;
-  /** 性能容量型变配 */
+  /** {@link ModifyLoadBalancerSla 性能容量型变配}({@link ModifyLoadBalancerSlaRequest 请求参数}): {@link ModifyLoadBalancerSlaResponse 返回参数} */
   ModifyLoadBalancerSla(data: ModifyLoadBalancerSlaRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerSlaResponse>;
-  /** 修改负载均衡七层监听器的转发规则 */
+  /** {@link ModifyRule 修改负载均衡七层监听器的转发规则}({@link ModifyRuleRequest 请求参数}): {@link ModifyRuleResponse 返回参数} */
   ModifyRule(data: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
-  /** 修改目标组属性 */
+  /** {@link ModifyTargetGroupAttribute 修改目标组属性}({@link ModifyTargetGroupAttributeRequest 请求参数}): {@link ModifyTargetGroupAttributeResponse 返回参数} */
   ModifyTargetGroupAttribute(data: ModifyTargetGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetGroupAttributeResponse>;
-  /** 批量修改目标组服务器端口 */
+  /** {@link ModifyTargetGroupInstancesPort 批量修改目标组服务器端口}({@link ModifyTargetGroupInstancesPortRequest 请求参数}): {@link ModifyTargetGroupInstancesPortResponse 返回参数} */
   ModifyTargetGroupInstancesPort(data: ModifyTargetGroupInstancesPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetGroupInstancesPortResponse>;
-  /** 批量修改目标组的服务器权重 */
+  /** {@link ModifyTargetGroupInstancesWeight 批量修改目标组的服务器权重}({@link ModifyTargetGroupInstancesWeightRequest 请求参数}): {@link ModifyTargetGroupInstancesWeightResponse 返回参数} */
   ModifyTargetGroupInstancesWeight(data: ModifyTargetGroupInstancesWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetGroupInstancesWeightResponse>;
-  /** 修改监听器绑定的后端机器的端口 */
+  /** {@link ModifyTargetPort 修改监听器绑定的后端机器的端口}({@link ModifyTargetPortRequest 请求参数}): {@link ModifyTargetPortResponse 返回参数} */
   ModifyTargetPort(data: ModifyTargetPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetPortResponse>;
-  /** 修改监听器绑定的后端机器的转发权重 */
+  /** {@link ModifyTargetWeight 修改监听器绑定的后端机器的转发权重}({@link ModifyTargetWeightRequest 请求参数}): {@link ModifyTargetWeightResponse 返回参数} */
   ModifyTargetWeight(data: ModifyTargetWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetWeightResponse>;
-  /** 注册服务器到目标组 */
+  /** {@link RegisterTargetGroupInstances 注册服务器到目标组}({@link RegisterTargetGroupInstancesRequest 请求参数}): {@link RegisterTargetGroupInstancesResponse 返回参数} */
   RegisterTargetGroupInstances(data: RegisterTargetGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterTargetGroupInstancesResponse>;
-  /** 绑定后端机器到监听器上 */
+  /** {@link RegisterTargets 绑定后端机器到监听器上}({@link RegisterTargetsRequest 请求参数}): {@link RegisterTargetsResponse 返回参数} */
   RegisterTargets(data: RegisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterTargetsResponse>;
-  /** 绑定后端服务到传统型负载均衡 */
+  /** {@link RegisterTargetsWithClassicalLB 绑定后端服务到传统型负载均衡}({@link RegisterTargetsWithClassicalLBRequest 请求参数}): {@link RegisterTargetsWithClassicalLBResponse 返回参数} */
   RegisterTargetsWithClassicalLB(data: RegisterTargetsWithClassicalLBRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterTargetsWithClassicalLBResponse>;
-  /** 替换负载均衡实例所关联的证书 */
+  /** {@link ReplaceCertForLoadBalancers 替换负载均衡实例所关联的证书}({@link ReplaceCertForLoadBalancersRequest 请求参数}): {@link ReplaceCertForLoadBalancersResponse 返回参数} */
   ReplaceCertForLoadBalancers(data: ReplaceCertForLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceCertForLoadBalancersResponse>;
-  /** 负载均衡维度的个性化配置相关操作 */
+  /** {@link SetCustomizedConfigForLoadBalancer 负载均衡维度的个性化配置相关操作}({@link SetCustomizedConfigForLoadBalancerRequest 请求参数}): {@link SetCustomizedConfigForLoadBalancerResponse 返回参数} */
   SetCustomizedConfigForLoadBalancer(data: SetCustomizedConfigForLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<SetCustomizedConfigForLoadBalancerResponse>;
-  /** 设置负载均衡的日志服务主题 */
+  /** {@link SetLoadBalancerClsLog 设置负载均衡的日志服务主题}({@link SetLoadBalancerClsLogRequest 请求参数}): {@link SetLoadBalancerClsLogResponse 返回参数} */
   SetLoadBalancerClsLog(data: SetLoadBalancerClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<SetLoadBalancerClsLogResponse>;
-  /** 设置负载均衡实例的安全组 */
+  /** {@link SetLoadBalancerSecurityGroups 设置负载均衡实例的安全组}({@link SetLoadBalancerSecurityGroupsRequest 请求参数}): {@link SetLoadBalancerSecurityGroupsResponse 返回参数} */
   SetLoadBalancerSecurityGroups(data: SetLoadBalancerSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<SetLoadBalancerSecurityGroupsResponse>;
-  /** 绑定或解绑一个安全组到多个负载均衡实例 */
+  /** {@link SetSecurityGroupForLoadbalancers 绑定或解绑一个安全组到多个负载均衡实例}({@link SetSecurityGroupForLoadbalancersRequest 请求参数}): {@link SetSecurityGroupForLoadbalancersResponse 返回参数} */
   SetSecurityGroupForLoadbalancers(data: SetSecurityGroupForLoadbalancersRequest, config?: AxiosRequestConfig): AxiosPromise<SetSecurityGroupForLoadbalancersResponse>;
 }
 

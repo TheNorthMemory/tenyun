@@ -1282,34 +1282,34 @@ declare namespace V20200709 {
   }
 }
 
-/** [视频内容安全](https://cloud.tencent.com/document/product/1265) */
+/** {@link Vm 视频内容安全} */
 declare interface Vm {
   (): Versions;
-  /** 取消任务 */
+  /** {@link CancelTask 取消任务}({@link CancelTaskRequest 请求参数}): {@link CancelTaskResponse 返回参数} */
   CancelTask(data: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
-  /** 创建视频审核任务 */
+  /** {@link CreateVideoModerationTask 创建视频审核任务}({@link CreateVideoModerationTaskRequest 请求参数}): {@link CreateVideoModerationTaskResponse 返回参数} */
   CreateVideoModerationTask(data: CreateVideoModerationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoModerationTaskResponse>;
-  /** 查看任务详情 */
+  /** {@link DescribeTaskDetail 查看任务详情}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** 查看审核任务列表 */
+  /** {@link DescribeTasks 查看审核任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** 取消任务 */
+  /** {@link V20201229.CancelTask 取消任务}({@link V20201229.CancelTaskRequest 请求参数}): {@link V20201229.CancelTaskResponse 返回参数} */
   CancelTask(data: V20201229.CancelTaskRequest, config: AxiosRequestConfig & V20201229.VersionHeader): AxiosPromise<V20201229.CancelTaskResponse>;
-  /** 创建视频审核任务 */
+  /** {@link V20201229.CreateVideoModerationTask 创建视频审核任务}({@link V20201229.CreateVideoModerationTaskRequest 请求参数}): {@link V20201229.CreateVideoModerationTaskResponse 返回参数} */
   CreateVideoModerationTask(data: V20201229.CreateVideoModerationTaskRequest, config: AxiosRequestConfig & V20201229.VersionHeader): AxiosPromise<V20201229.CreateVideoModerationTaskResponse>;
-  /** 查看任务详情 */
+  /** {@link V20201229.DescribeTaskDetail 查看任务详情}({@link V20201229.DescribeTaskDetailRequest 请求参数}): {@link V20201229.DescribeTaskDetailResponse 返回参数} */
   DescribeTaskDetail(data: V20201229.DescribeTaskDetailRequest, config: AxiosRequestConfig & V20201229.VersionHeader): AxiosPromise<V20201229.DescribeTaskDetailResponse>;
-  /** 查看审核任务列表 */
+  /** {@link V20201229.DescribeTasks 查看审核任务列表}({@link V20201229.DescribeTasksRequest 请求参数}): {@link V20201229.DescribeTasksResponse 返回参数} */
   DescribeTasks(data: V20201229.DescribeTasksRequest, config: AxiosRequestConfig & V20201229.VersionHeader): AxiosPromise<V20201229.DescribeTasksResponse>;
-  /** 取消任务 */
+  /** {@link V20200709.CancelTask 取消任务}({@link V20200709.CancelTaskRequest 请求参数}): {@link V20200709.CancelTaskResponse 返回参数} */
   CancelTask(data: V20200709.CancelTaskRequest, config: AxiosRequestConfig & V20200709.VersionHeader): AxiosPromise<V20200709.CancelTaskResponse>;
-  /** 创建业务配置 */
+  /** {@link V20200709.CreateBizConfig 创建业务配置}({@link V20200709.CreateBizConfigRequest 请求参数}): {@link V20200709.CreateBizConfigResponse 返回参数} */
   CreateBizConfig(data: V20200709.CreateBizConfigRequest, config: AxiosRequestConfig & V20200709.VersionHeader): AxiosPromise<V20200709.CreateBizConfigResponse>;
-  /** 创建视频审核任务 */
+  /** {@link V20200709.CreateVideoModerationTask 创建视频审核任务}({@link V20200709.CreateVideoModerationTaskRequest 请求参数}): {@link V20200709.CreateVideoModerationTaskResponse 返回参数} */
   CreateVideoModerationTask(data: V20200709.CreateVideoModerationTaskRequest, config: AxiosRequestConfig & V20200709.VersionHeader): AxiosPromise<V20200709.CreateVideoModerationTaskResponse>;
-  /** 查看任务详情 */
+  /** {@link V20200709.DescribeTaskDetail 查看任务详情}({@link V20200709.DescribeTaskDetailRequest 请求参数}): {@link V20200709.DescribeTaskDetailResponse 返回参数} */
   DescribeTaskDetail(data: V20200709.DescribeTaskDetailRequest, config: AxiosRequestConfig & V20200709.VersionHeader): AxiosPromise<V20200709.DescribeTaskDetailResponse>;
-  /** 识别统计 */
+  /** {@link V20200709.DescribeVideoStat 识别统计}({@link V20200709.DescribeVideoStatRequest 请求参数}): {@link V20200709.DescribeVideoStatResponse 返回参数} */
   DescribeVideoStat(data: V20200709.DescribeVideoStatRequest, config: AxiosRequestConfig & V20200709.VersionHeader): AxiosPromise<V20200709.DescribeVideoStatResponse>;
 }
 

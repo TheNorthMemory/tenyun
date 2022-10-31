@@ -254,26 +254,26 @@ declare interface StopExecutionResponse {
   RequestId?: string;
 }
 
-/** [应用与服务编排工作流](https://cloud.tencent.com/document/product/1272) */
+/** {@link Asw 应用与服务编排工作流} */
 declare interface Asw {
   (): Versions;
-  /** 创建状态机 */
+  /** {@link CreateFlowService 创建状态机}({@link CreateFlowServiceRequest 请求参数}): {@link CreateFlowServiceResponse 返回参数} */
   CreateFlowService(data: CreateFlowServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowServiceResponse>;
-  /** 查询执行详细信息 */
+  /** {@link DescribeExecution 查询执行详细信息}({@link DescribeExecutionRequest 请求参数}): {@link DescribeExecutionResponse 返回参数} */
   DescribeExecution(data: DescribeExecutionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExecutionResponse>;
-  /** 查询执行的事件历史 */
+  /** {@link DescribeExecutionHistory 查询执行的事件历史}({@link DescribeExecutionHistoryRequest 请求参数}): {@link DescribeExecutionHistoryResponse 返回参数} */
   DescribeExecutionHistory(data: DescribeExecutionHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExecutionHistoryResponse>;
-  /** 查询状态机执行列表 */
+  /** {@link DescribeExecutions 查询状态机执行列表}({@link DescribeExecutionsRequest 请求参数}): {@link DescribeExecutionsResponse 返回参数} */
   DescribeExecutions(data: DescribeExecutionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExecutionsResponse>;
-  /** 查询状态机详情 */
+  /** {@link DescribeFlowServiceDetail 查询状态机详情}({@link DescribeFlowServiceDetailRequest 请求参数}): {@link DescribeFlowServiceDetailResponse 返回参数} */
   DescribeFlowServiceDetail(data: DescribeFlowServiceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowServiceDetailResponse>;
-  /** 查询状态机列表 */
+  /** {@link DescribeFlowServices 查询状态机列表}({@link DescribeFlowServicesRequest 请求参数}): {@link DescribeFlowServicesResponse 返回参数} */
   DescribeFlowServices(data?: DescribeFlowServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowServicesResponse>;
-  /** 修改状态机 */
+  /** {@link ModifyFlowService 修改状态机}({@link ModifyFlowServiceRequest 请求参数}): {@link ModifyFlowServiceResponse 返回参数} */
   ModifyFlowService(data: ModifyFlowServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFlowServiceResponse>;
-  /** 启动执行 */
+  /** {@link StartExecution 启动执行}({@link StartExecutionRequest 请求参数}): {@link StartExecutionResponse 返回参数} */
   StartExecution(data: StartExecutionRequest, config?: AxiosRequestConfig): AxiosPromise<StartExecutionResponse>;
-  /** 停止状态机 */
+  /** {@link StopExecution 停止状态机}({@link StopExecutionRequest 请求参数}): {@link StopExecutionResponse 返回参数} */
   StopExecution(data: StopExecutionRequest, config?: AxiosRequestConfig): AxiosPromise<StopExecutionResponse>;
 }
 

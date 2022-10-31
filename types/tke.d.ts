@@ -4892,352 +4892,352 @@ declare interface UpgradeClusterInstancesResponse {
   RequestId?: string;
 }
 
-/** [容器服务](https://cloud.tencent.com/document/product/457) */
+/** {@link Tke 容器服务} */
 declare interface Tke {
   (): Versions;
-  /** 获取集群RBAC管理员角色 */
+  /** {@link AcquireClusterAdminRole 获取集群RBAC管理员角色}({@link AcquireClusterAdminRoleRequest 请求参数}): {@link AcquireClusterAdminRoleResponse 返回参数} */
   AcquireClusterAdminRole(data: AcquireClusterAdminRoleRequest, config?: AxiosRequestConfig): AxiosPromise<AcquireClusterAdminRoleResponse>;
-  /** 给集群增加ClusterCIDR */
+  /** {@link AddClusterCIDR 给集群增加ClusterCIDR}({@link AddClusterCIDRRequest 请求参数}): {@link AddClusterCIDRResponse 返回参数} */
   AddClusterCIDR(data: AddClusterCIDRRequest, config?: AxiosRequestConfig): AxiosPromise<AddClusterCIDRResponse>;
-  /** 添加已经存在的实例到集群 */
+  /** {@link AddExistedInstances 添加已经存在的实例到集群}({@link AddExistedInstancesRequest 请求参数}): {@link AddExistedInstancesResponse 返回参数} */
   AddExistedInstances(data: AddExistedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AddExistedInstancesResponse>;
-  /** 将集群内节点移入节点池 */
+  /** {@link AddNodeToNodePool 将集群内节点移入节点池}({@link AddNodeToNodePoolRequest 请求参数}): {@link AddNodeToNodePoolResponse 返回参数} */
   AddNodeToNodePool(data: AddNodeToNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<AddNodeToNodePoolResponse>;
-  /** 增加集群子网 */
+  /** {@link AddVpcCniSubnets 增加集群子网}({@link AddVpcCniSubnetsRequest 请求参数}): {@link AddVpcCniSubnetsResponse 返回参数} */
   AddVpcCniSubnets(data: AddVpcCniSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<AddVpcCniSubnetsResponse>;
-  /** 检查边缘计算集群的CIDR是否冲突 */
+  /** {@link CheckEdgeClusterCIDR 检查边缘计算集群的CIDR是否冲突}({@link CheckEdgeClusterCIDRRequest 请求参数}): {@link CheckEdgeClusterCIDRResponse 返回参数} */
   CheckEdgeClusterCIDR(data: CheckEdgeClusterCIDRRequest, config?: AxiosRequestConfig): AxiosPromise<CheckEdgeClusterCIDRResponse>;
-  /** 节点是否可升级 */
+  /** {@link CheckInstancesUpgradeAble 节点是否可升级}({@link CheckInstancesUpgradeAbleRequest 请求参数}): {@link CheckInstancesUpgradeAbleResponse 返回参数} */
   CheckInstancesUpgradeAble(data: CheckInstancesUpgradeAbleRequest, config?: AxiosRequestConfig): AxiosPromise<CheckInstancesUpgradeAbleResponse>;
-  /** 创建集群 */
+  /** {@link CreateCluster 创建集群}({@link CreateClusterRequest 请求参数}): {@link CreateClusterResponse 返回参数} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
-  /** 创建集群访问端口 */
+  /** {@link CreateClusterEndpoint 创建集群访问端口}({@link CreateClusterEndpointRequest 请求参数}): {@link CreateClusterEndpointResponse 返回参数} */
   CreateClusterEndpoint(data: CreateClusterEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterEndpointResponse>;
-  /** 创建托管集群外网访问端口 */
+  /** {@link CreateClusterEndpointVip 创建托管集群外网访问端口}({@link CreateClusterEndpointVipRequest 请求参数}): {@link CreateClusterEndpointVipResponse 返回参数} */
   CreateClusterEndpointVip(data: CreateClusterEndpointVipRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterEndpointVipResponse>;
-  /** 扩展集群节点 */
+  /** {@link CreateClusterInstances 扩展集群节点}({@link CreateClusterInstancesRequest 请求参数}): {@link CreateClusterInstancesResponse 返回参数} */
   CreateClusterInstances(data: CreateClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterInstancesResponse>;
-  /** 创建节点池 */
+  /** {@link CreateClusterNodePool 创建节点池}({@link CreateClusterNodePoolRequest 请求参数}): {@link CreateClusterNodePoolResponse 返回参数} */
   CreateClusterNodePool(data: CreateClusterNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterNodePoolResponse>;
-  /** 从伸缩组创建节点池 */
+  /** {@link CreateClusterNodePoolFromExistingAsg 从伸缩组创建节点池}({@link CreateClusterNodePoolFromExistingAsgRequest 请求参数}): {@link CreateClusterNodePoolFromExistingAsgResponse 返回参数} */
   CreateClusterNodePoolFromExistingAsg(data: CreateClusterNodePoolFromExistingAsgRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterNodePoolFromExistingAsgResponse>;
-  /** 创建集群路由 */
+  /** {@link CreateClusterRoute 创建集群路由}({@link CreateClusterRouteRequest 请求参数}): {@link CreateClusterRouteResponse 返回参数} */
   CreateClusterRoute(data: CreateClusterRouteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterRouteResponse>;
-  /** 创建集群路由表 */
+  /** {@link CreateClusterRouteTable 创建集群路由表}({@link CreateClusterRouteTableRequest 请求参数}): {@link CreateClusterRouteTableResponse 返回参数} */
   CreateClusterRouteTable(data: CreateClusterRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterRouteTableResponse>;
-  /** 创建边缘计算ECM机器 */
+  /** {@link CreateECMInstances 创建边缘计算ECM机器}({@link CreateECMInstancesRequest 请求参数}): {@link CreateECMInstancesResponse 返回参数} */
   CreateECMInstances(data: CreateECMInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateECMInstancesResponse>;
-  /** 创建弹性集群 */
+  /** {@link CreateEKSCluster 创建弹性集群}({@link CreateEKSClusterRequest 请求参数}): {@link CreateEKSClusterResponse 返回参数} */
   CreateEKSCluster(data: CreateEKSClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEKSClusterResponse>;
-  /** 创建容器实例 */
+  /** {@link CreateEKSContainerInstances 创建容器实例}({@link CreateEKSContainerInstancesRequest 请求参数}): {@link CreateEKSContainerInstancesResponse 返回参数} */
   CreateEKSContainerInstances(data: CreateEKSContainerInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEKSContainerInstancesResponse>;
-  /** 创建边缘容器CVM机器 */
+  /** {@link CreateEdgeCVMInstances 创建边缘容器CVM机器}({@link CreateEdgeCVMInstancesRequest 请求参数}): {@link CreateEdgeCVMInstancesResponse 返回参数} */
   CreateEdgeCVMInstances(data: CreateEdgeCVMInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeCVMInstancesResponse>;
-  /** 创建边缘集群日志采集配置 */
+  /** {@link CreateEdgeLogConfig 创建边缘集群日志采集配置}({@link CreateEdgeLogConfigRequest 请求参数}): {@link CreateEdgeLogConfigResponse 返回参数} */
   CreateEdgeLogConfig(data: CreateEdgeLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeLogConfigResponse>;
-  /** 创建镜像缓存 */
+  /** {@link CreateImageCache 创建镜像缓存}({@link CreateImageCacheRequest 请求参数}): {@link CreateImageCacheResponse 返回参数} */
   CreateImageCache(data: CreateImageCacheRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageCacheResponse>;
-  /** 创建告警策略 */
+  /** {@link CreatePrometheusAlertPolicy 创建告警策略}({@link CreatePrometheusAlertPolicyRequest 请求参数}): {@link CreatePrometheusAlertPolicyResponse 返回参数} */
   CreatePrometheusAlertPolicy(data: CreatePrometheusAlertPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusAlertPolicyResponse>;
-  /** 创建告警规则 */
+  /** {@link CreatePrometheusAlertRule 创建告警规则}({@link CreatePrometheusAlertRuleRequest 请求参数}): {@link CreatePrometheusAlertRuleResponse 返回参数} */
   CreatePrometheusAlertRule(data: CreatePrometheusAlertRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusAlertRuleResponse>;
-  /** 2.0实例关联集群 */
+  /** {@link CreatePrometheusClusterAgent 2.0实例关联集群}({@link CreatePrometheusClusterAgentRequest 请求参数}): {@link CreatePrometheusClusterAgentResponse 返回参数} */
   CreatePrometheusClusterAgent(data: CreatePrometheusClusterAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusClusterAgentResponse>;
-  /** 创建prometheus配置 */
+  /** {@link CreatePrometheusConfig 创建prometheus配置}({@link CreatePrometheusConfigRequest 请求参数}): {@link CreatePrometheusConfigResponse 返回参数} */
   CreatePrometheusConfig(data: CreatePrometheusConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusConfigResponse>;
-  /** 创建grafana监控面板 */
+  /** {@link CreatePrometheusDashboard 创建grafana监控面板}({@link CreatePrometheusDashboardRequest 请求参数}): {@link CreatePrometheusDashboardResponse 返回参数} */
   CreatePrometheusDashboard(data: CreatePrometheusDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusDashboardResponse>;
-  /** 创建全局告警通知渠道 */
+  /** {@link CreatePrometheusGlobalNotification 创建全局告警通知渠道}({@link CreatePrometheusGlobalNotificationRequest 请求参数}): {@link CreatePrometheusGlobalNotificationResponse 返回参数} */
   CreatePrometheusGlobalNotification(data: CreatePrometheusGlobalNotificationRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusGlobalNotificationResponse>;
-  /** 以Yaml的方式创建聚合规则 */
+  /** {@link CreatePrometheusRecordRuleYaml 以Yaml的方式创建聚合规则}({@link CreatePrometheusRecordRuleYamlRequest 请求参数}): {@link CreatePrometheusRecordRuleYamlResponse 返回参数} */
   CreatePrometheusRecordRuleYaml(data: CreatePrometheusRecordRuleYamlRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusRecordRuleYamlResponse>;
-  /** 新建模板 */
+  /** {@link CreatePrometheusTemp 新建模板}({@link CreatePrometheusTempRequest 请求参数}): {@link CreatePrometheusTempResponse 返回参数} */
   CreatePrometheusTemp(data: CreatePrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusTempResponse>;
-  /** 创建模板 */
+  /** {@link CreatePrometheusTemplate 创建模板}({@link CreatePrometheusTemplateRequest 请求参数}): {@link CreatePrometheusTemplateResponse 返回参数} */
   CreatePrometheusTemplate(data: CreatePrometheusTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusTemplateResponse>;
-  /** 创建边缘计算集群 */
+  /** {@link CreateTKEEdgeCluster 创建边缘计算集群}({@link CreateTKEEdgeClusterRequest 请求参数}): {@link CreateTKEEdgeClusterResponse 返回参数} */
   CreateTKEEdgeCluster(data: CreateTKEEdgeClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTKEEdgeClusterResponse>;
-  /** 删除集群 */
+  /** {@link DeleteCluster 删除集群}({@link DeleteClusterRequest 请求参数}): {@link DeleteClusterResponse 返回参数} */
   DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
-  /** 删除集群伸缩组 */
+  /** {@link DeleteClusterAsGroups 删除集群伸缩组}({@link DeleteClusterAsGroupsRequest 请求参数}): {@link DeleteClusterAsGroupsResponse 返回参数} */
   DeleteClusterAsGroups(data: DeleteClusterAsGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterAsGroupsResponse>;
-  /** 删除集群访问端口 */
+  /** {@link DeleteClusterEndpoint 删除集群访问端口}({@link DeleteClusterEndpointRequest 请求参数}): {@link DeleteClusterEndpointResponse 返回参数} */
   DeleteClusterEndpoint(data: DeleteClusterEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterEndpointResponse>;
-  /** 删除托管集群外网访问端口 */
+  /** {@link DeleteClusterEndpointVip 删除托管集群外网访问端口}({@link DeleteClusterEndpointVipRequest 请求参数}): {@link DeleteClusterEndpointVipResponse 返回参数} */
   DeleteClusterEndpointVip(data: DeleteClusterEndpointVipRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterEndpointVipResponse>;
-  /** 删除集群中的节点 */
+  /** {@link DeleteClusterInstances 删除集群中的节点}({@link DeleteClusterInstancesRequest 请求参数}): {@link DeleteClusterInstancesResponse 返回参数} */
   DeleteClusterInstances(data: DeleteClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterInstancesResponse>;
-  /** 删除节点池 */
+  /** {@link DeleteClusterNodePool 删除节点池}({@link DeleteClusterNodePoolRequest 请求参数}): {@link DeleteClusterNodePoolResponse 返回参数} */
   DeleteClusterNodePool(data: DeleteClusterNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterNodePoolResponse>;
-  /** 删除集群路由 */
+  /** {@link DeleteClusterRoute 删除集群路由}({@link DeleteClusterRouteRequest 请求参数}): {@link DeleteClusterRouteResponse 返回参数} */
   DeleteClusterRoute(data: DeleteClusterRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterRouteResponse>;
-  /** 删除集群路由表 */
+  /** {@link DeleteClusterRouteTable 删除集群路由表}({@link DeleteClusterRouteTableRequest 请求参数}): {@link DeleteClusterRouteTableResponse 返回参数} */
   DeleteClusterRouteTable(data: DeleteClusterRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterRouteTableResponse>;
-  /** 删除ECM实例 */
+  /** {@link DeleteECMInstances 删除ECM实例}({@link DeleteECMInstancesRequest 请求参数}): {@link DeleteECMInstancesResponse 返回参数} */
   DeleteECMInstances(data: DeleteECMInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteECMInstancesResponse>;
-  /** 删除弹性集群 */
+  /** {@link DeleteEKSCluster 删除弹性集群}({@link DeleteEKSClusterRequest 请求参数}): {@link DeleteEKSClusterResponse 返回参数} */
   DeleteEKSCluster(data: DeleteEKSClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEKSClusterResponse>;
-  /** 删除容器实例 */
+  /** {@link DeleteEKSContainerInstances 删除容器实例}({@link DeleteEKSContainerInstancesRequest 请求参数}): {@link DeleteEKSContainerInstancesResponse 返回参数} */
   DeleteEKSContainerInstances(data: DeleteEKSContainerInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEKSContainerInstancesResponse>;
-  /** 删除边缘容器CVM实例 */
+  /** {@link DeleteEdgeCVMInstances 删除边缘容器CVM实例}({@link DeleteEdgeCVMInstancesRequest 请求参数}): {@link DeleteEdgeCVMInstancesResponse 返回参数} */
   DeleteEdgeCVMInstances(data: DeleteEdgeCVMInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeCVMInstancesResponse>;
-  /** 删除边缘计算实例 */
+  /** {@link DeleteEdgeClusterInstances 删除边缘计算实例}({@link DeleteEdgeClusterInstancesRequest 请求参数}): {@link DeleteEdgeClusterInstancesResponse 返回参数} */
   DeleteEdgeClusterInstances(data: DeleteEdgeClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeClusterInstancesResponse>;
-  /** 删除镜像缓存 */
+  /** {@link DeleteImageCaches 删除镜像缓存}({@link DeleteImageCachesRequest 请求参数}): {@link DeleteImageCachesResponse 返回参数} */
   DeleteImageCaches(data: DeleteImageCachesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageCachesResponse>;
-  /** 删除2.0实例告警策略 */
+  /** {@link DeletePrometheusAlertPolicy 删除2.0实例告警策略}({@link DeletePrometheusAlertPolicyRequest 请求参数}): {@link DeletePrometheusAlertPolicyResponse 返回参数} */
   DeletePrometheusAlertPolicy(data: DeletePrometheusAlertPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusAlertPolicyResponse>;
-  /** 删除告警规则 */
+  /** {@link DeletePrometheusAlertRule 删除告警规则}({@link DeletePrometheusAlertRuleRequest 请求参数}): {@link DeletePrometheusAlertRuleResponse 返回参数} */
   DeletePrometheusAlertRule(data: DeletePrometheusAlertRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusAlertRuleResponse>;
-  /** 解除TMP实例的集群关联 */
+  /** {@link DeletePrometheusClusterAgent 解除TMP实例的集群关联}({@link DeletePrometheusClusterAgentRequest 请求参数}): {@link DeletePrometheusClusterAgentResponse 返回参数} */
   DeletePrometheusClusterAgent(data: DeletePrometheusClusterAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusClusterAgentResponse>;
-  /** 删除Prometheus配置 */
+  /** {@link DeletePrometheusConfig 删除Prometheus配置}({@link DeletePrometheusConfigRequest 请求参数}): {@link DeletePrometheusConfigResponse 返回参数} */
   DeletePrometheusConfig(data: DeletePrometheusConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusConfigResponse>;
-  /** 删除聚合实例 */
+  /** {@link DeletePrometheusRecordRuleYaml 删除聚合实例}({@link DeletePrometheusRecordRuleYamlRequest 请求参数}): {@link DeletePrometheusRecordRuleYamlResponse 返回参数} */
   DeletePrometheusRecordRuleYaml(data: DeletePrometheusRecordRuleYamlRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusRecordRuleYamlResponse>;
-  /** 删除模板实例 */
+  /** {@link DeletePrometheusTemp 删除模板实例}({@link DeletePrometheusTempRequest 请求参数}): {@link DeletePrometheusTempResponse 返回参数} */
   DeletePrometheusTemp(data: DeletePrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusTempResponse>;
-  /** 解除模板同步 */
+  /** {@link DeletePrometheusTempSync 解除模板同步}({@link DeletePrometheusTempSyncRequest 请求参数}): {@link DeletePrometheusTempSyncResponse 返回参数} */
   DeletePrometheusTempSync(data: DeletePrometheusTempSyncRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusTempSyncResponse>;
-  /** 删除模板 */
+  /** {@link DeletePrometheusTemplate 删除模板}({@link DeletePrometheusTemplateRequest 请求参数}): {@link DeletePrometheusTemplateResponse 返回参数} */
   DeletePrometheusTemplate(data: DeletePrometheusTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusTemplateResponse>;
-  /** 取消模板同步 */
+  /** {@link DeletePrometheusTemplateSync 取消模板同步}({@link DeletePrometheusTemplateSyncRequest 请求参数}): {@link DeletePrometheusTemplateSyncResponse 返回参数} */
   DeletePrometheusTemplateSync(data: DeletePrometheusTemplateSyncRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusTemplateSyncResponse>;
-  /** 删除边缘计算集群 */
+  /** {@link DeleteTKEEdgeCluster 删除边缘计算集群}({@link DeleteTKEEdgeClusterRequest 请求参数}): {@link DeleteTKEEdgeClusterResponse 返回参数} */
   DeleteTKEEdgeCluster(data: DeleteTKEEdgeClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTKEEdgeClusterResponse>;
-  /** 获取集群可以升级的所有版本 */
+  /** {@link DescribeAvailableClusterVersion 获取集群可以升级的所有版本}({@link DescribeAvailableClusterVersionRequest 请求参数}): {@link DescribeAvailableClusterVersionResponse 返回参数} */
   DescribeAvailableClusterVersion(data?: DescribeAvailableClusterVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableClusterVersionResponse>;
-  /** 边缘计算支持的k8s版本 */
+  /** {@link DescribeAvailableTKEEdgeVersion 边缘计算支持的k8s版本}({@link DescribeAvailableTKEEdgeVersionRequest 请求参数}): {@link DescribeAvailableTKEEdgeVersionResponse 返回参数} */
   DescribeAvailableTKEEdgeVersion(data?: DescribeAvailableTKEEdgeVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableTKEEdgeVersionResponse>;
-  /** 集群弹性伸缩配置 */
+  /** {@link DescribeClusterAsGroupOption 集群弹性伸缩配置}({@link DescribeClusterAsGroupOptionRequest 请求参数}): {@link DescribeClusterAsGroupOptionResponse 返回参数} */
   DescribeClusterAsGroupOption(data: DescribeClusterAsGroupOptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterAsGroupOptionResponse>;
-  /** 集群关联的伸缩组列表 */
+  /** {@link DescribeClusterAsGroups 集群关联的伸缩组列表}({@link DescribeClusterAsGroupsRequest 请求参数}): {@link DescribeClusterAsGroupsResponse 返回参数} */
   DescribeClusterAsGroups(data: DescribeClusterAsGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterAsGroupsResponse>;
-  /** 查看集群认证配置 */
+  /** {@link DescribeClusterAuthenticationOptions 查看集群认证配置}({@link DescribeClusterAuthenticationOptionsRequest 请求参数}): {@link DescribeClusterAuthenticationOptionsResponse 返回参数} */
   DescribeClusterAuthenticationOptions(data: DescribeClusterAuthenticationOptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterAuthenticationOptionsResponse>;
-  /** 获取集群子账户CommonName映射关系 */
+  /** {@link DescribeClusterCommonNames 获取集群子账户CommonName映射关系}({@link DescribeClusterCommonNamesRequest 请求参数}): {@link DescribeClusterCommonNamesResponse 返回参数} */
   DescribeClusterCommonNames(data: DescribeClusterCommonNamesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterCommonNamesResponse>;
-  /** 查询Kubernetes控制器状态 */
+  /** {@link DescribeClusterControllers 查询Kubernetes控制器状态}({@link DescribeClusterControllersRequest 请求参数}): {@link DescribeClusterControllersResponse 返回参数} */
   DescribeClusterControllers(data: DescribeClusterControllersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterControllersResponse>;
-  /** 查询集群访问端口状态 */
+  /** {@link DescribeClusterEndpointStatus 查询集群访问端口状态}({@link DescribeClusterEndpointStatusRequest 请求参数}): {@link DescribeClusterEndpointStatusResponse 返回参数} */
   DescribeClusterEndpointStatus(data: DescribeClusterEndpointStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterEndpointStatusResponse>;
-  /** 查询托管集群开启外网端口流程状态 */
+  /** {@link DescribeClusterEndpointVipStatus 查询托管集群开启外网端口流程状态}({@link DescribeClusterEndpointVipStatusRequest 请求参数}): {@link DescribeClusterEndpointVipStatusResponse 返回参数} */
   DescribeClusterEndpointVipStatus(data: DescribeClusterEndpointVipStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterEndpointVipStatusResponse>;
-  /** 获取集群访问地址 */
+  /** {@link DescribeClusterEndpoints 获取集群访问地址}({@link DescribeClusterEndpointsRequest 请求参数}): {@link DescribeClusterEndpointsResponse 返回参数} */
   DescribeClusterEndpoints(data: DescribeClusterEndpointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterEndpointsResponse>;
-  /** 查询集群节点信息 */
+  /** {@link DescribeClusterInstances 查询集群节点信息}({@link DescribeClusterInstancesRequest 请求参数}): {@link DescribeClusterInstancesResponse 返回参数} */
   DescribeClusterInstances(data: DescribeClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstancesResponse>;
-  /** 获取集群kubeconfig文件 */
+  /** {@link DescribeClusterKubeconfig 获取集群kubeconfig文件}({@link DescribeClusterKubeconfigRequest 请求参数}): {@link DescribeClusterKubeconfigResponse 返回参数} */
   DescribeClusterKubeconfig(data: DescribeClusterKubeconfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterKubeconfigResponse>;
-  /** 获取集群规模 */
+  /** {@link DescribeClusterLevelAttribute 获取集群规模}({@link DescribeClusterLevelAttributeRequest 请求参数}): {@link DescribeClusterLevelAttributeResponse 返回参数} */
   DescribeClusterLevelAttribute(data?: DescribeClusterLevelAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterLevelAttributeResponse>;
-  /** 查询集群变配记录 */
+  /** {@link DescribeClusterLevelChangeRecords 查询集群变配记录}({@link DescribeClusterLevelChangeRecordsRequest 请求参数}): {@link DescribeClusterLevelChangeRecordsResponse 返回参数} */
   DescribeClusterLevelChangeRecords(data: DescribeClusterLevelChangeRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterLevelChangeRecordsResponse>;
-  /** 查询节点池详情 */
+  /** {@link DescribeClusterNodePoolDetail 查询节点池详情}({@link DescribeClusterNodePoolDetailRequest 请求参数}): {@link DescribeClusterNodePoolDetailResponse 返回参数} */
   DescribeClusterNodePoolDetail(data: DescribeClusterNodePoolDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNodePoolDetailResponse>;
-  /** 查询节点池列表 */
+  /** {@link DescribeClusterNodePools 查询节点池列表}({@link DescribeClusterNodePoolsRequest 请求参数}): {@link DescribeClusterNodePoolsResponse 返回参数} */
   DescribeClusterNodePools(data: DescribeClusterNodePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNodePoolsResponse>;
-  /** 查询集群路由表 */
+  /** {@link DescribeClusterRouteTables 查询集群路由表}({@link DescribeClusterRouteTablesRequest 请求参数}): {@link DescribeClusterRouteTablesResponse 返回参数} */
   DescribeClusterRouteTables(data?: DescribeClusterRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterRouteTablesResponse>;
-  /** 查询集群路由 */
+  /** {@link DescribeClusterRoutes 查询集群路由}({@link DescribeClusterRoutesRequest 请求参数}): {@link DescribeClusterRoutesResponse 返回参数} */
   DescribeClusterRoutes(data: DescribeClusterRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterRoutesResponse>;
-  /** 集群的密钥信息 */
+  /** {@link DescribeClusterSecurity 集群的密钥信息}({@link DescribeClusterSecurityRequest 请求参数}): {@link DescribeClusterSecurityResponse 返回参数} */
   DescribeClusterSecurity(data: DescribeClusterSecurityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterSecurityResponse>;
-  /** 查看集群状态列表 */
+  /** {@link DescribeClusterStatus 查看集群状态列表}({@link DescribeClusterStatusRequest 请求参数}): {@link DescribeClusterStatusResponse 返回参数} */
   DescribeClusterStatus(data?: DescribeClusterStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterStatusResponse>;
-  /** 查询集群列表 */
+  /** {@link DescribeClusters 查询集群列表}({@link DescribeClustersRequest 请求参数}): {@link DescribeClustersResponse 返回参数} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
-  /** 获取ECM实例相关信息 */
+  /** {@link DescribeECMInstances 获取ECM实例相关信息}({@link DescribeECMInstancesRequest 请求参数}): {@link DescribeECMInstancesResponse 返回参数} */
   DescribeECMInstances(data: DescribeECMInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeECMInstancesResponse>;
-  /** 获取弹性容器集群的认证信息 */
+  /** {@link DescribeEKSClusterCredential 获取弹性容器集群的认证信息}({@link DescribeEKSClusterCredentialRequest 请求参数}): {@link DescribeEKSClusterCredentialResponse 返回参数} */
   DescribeEKSClusterCredential(data: DescribeEKSClusterCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEKSClusterCredentialResponse>;
-  /** 查询弹性集群列表 */
+  /** {@link DescribeEKSClusters 查询弹性集群列表}({@link DescribeEKSClustersRequest 请求参数}): {@link DescribeEKSClustersResponse 返回参数} */
   DescribeEKSClusters(data?: DescribeEKSClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEKSClustersResponse>;
-  /** 查询容器实例的事件 */
+  /** {@link DescribeEKSContainerInstanceEvent 查询容器实例的事件}({@link DescribeEKSContainerInstanceEventRequest 请求参数}): {@link DescribeEKSContainerInstanceEventResponse 返回参数} */
   DescribeEKSContainerInstanceEvent(data: DescribeEKSContainerInstanceEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEKSContainerInstanceEventResponse>;
-  /** 查询容器实例支持的地域 */
+  /** {@link DescribeEKSContainerInstanceRegions 查询容器实例支持的地域}({@link DescribeEKSContainerInstanceRegionsRequest 请求参数}): {@link DescribeEKSContainerInstanceRegionsResponse 返回参数} */
   DescribeEKSContainerInstanceRegions(data?: DescribeEKSContainerInstanceRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEKSContainerInstanceRegionsResponse>;
-  /** 查询容器实例 */
+  /** {@link DescribeEKSContainerInstances 查询容器实例}({@link DescribeEKSContainerInstancesRequest 请求参数}): {@link DescribeEKSContainerInstancesResponse 返回参数} */
   DescribeEKSContainerInstances(data?: DescribeEKSContainerInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEKSContainerInstancesResponse>;
-  /** 查询边缘容器集群可用的自定义参数 */
+  /** {@link DescribeEdgeAvailableExtraArgs 查询边缘容器集群可用的自定义参数}({@link DescribeEdgeAvailableExtraArgsRequest 请求参数}): {@link DescribeEdgeAvailableExtraArgsResponse 返回参数} */
   DescribeEdgeAvailableExtraArgs(data?: DescribeEdgeAvailableExtraArgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeAvailableExtraArgsResponse>;
-  /** 获取边缘容器CVM实例相关信息 */
+  /** {@link DescribeEdgeCVMInstances 获取边缘容器CVM实例相关信息}({@link DescribeEdgeCVMInstancesRequest 请求参数}): {@link DescribeEdgeCVMInstancesResponse 返回参数} */
   DescribeEdgeCVMInstances(data: DescribeEdgeCVMInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeCVMInstancesResponse>;
-  /** 查询边缘集群自定义参数 */
+  /** {@link DescribeEdgeClusterExtraArgs 查询边缘集群自定义参数}({@link DescribeEdgeClusterExtraArgsRequest 请求参数}): {@link DescribeEdgeClusterExtraArgsResponse 返回参数} */
   DescribeEdgeClusterExtraArgs(data: DescribeEdgeClusterExtraArgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeClusterExtraArgsResponse>;
-  /** 查询边缘计算集群的节点信息 */
+  /** {@link DescribeEdgeClusterInstances 查询边缘计算集群的节点信息}({@link DescribeEdgeClusterInstancesRequest 请求参数}): {@link DescribeEdgeClusterInstancesResponse 返回参数} */
   DescribeEdgeClusterInstances(data: DescribeEdgeClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeClusterInstancesResponse>;
-  /** 查询边缘集群升级信息 */
+  /** {@link DescribeEdgeClusterUpgradeInfo 查询边缘集群升级信息}({@link DescribeEdgeClusterUpgradeInfoRequest 请求参数}): {@link DescribeEdgeClusterUpgradeInfoResponse 返回参数} */
   DescribeEdgeClusterUpgradeInfo(data: DescribeEdgeClusterUpgradeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeClusterUpgradeInfoResponse>;
-  /** 查询边缘集群日志开关列表 */
+  /** {@link DescribeEdgeLogSwitches 查询边缘集群日志开关列表}({@link DescribeEdgeLogSwitchesRequest 请求参数}): {@link DescribeEdgeLogSwitchesResponse 返回参数} */
   DescribeEdgeLogSwitches(data: DescribeEdgeLogSwitchesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeLogSwitchesResponse>;
-  /** 查询容器实例日志 */
+  /** {@link DescribeEksContainerInstanceLog 查询容器实例日志}({@link DescribeEksContainerInstanceLogRequest 请求参数}): {@link DescribeEksContainerInstanceLogResponse 返回参数} */
   DescribeEksContainerInstanceLog(data: DescribeEksContainerInstanceLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEksContainerInstanceLogResponse>;
-  /** 查询开启vpc-cni异步任务的进度 */
+  /** {@link DescribeEnableVpcCniProgress 查询开启vpc-cni异步任务的进度}({@link DescribeEnableVpcCniProgressRequest 请求参数}): {@link DescribeEnableVpcCniProgressResponse 返回参数} */
   DescribeEnableVpcCniProgress(data: DescribeEnableVpcCniProgressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnableVpcCniProgressResponse>;
-  /** 查询已经存在的节点 */
+  /** {@link DescribeExistedInstances 查询已经存在的节点}({@link DescribeExistedInstancesRequest 请求参数}): {@link DescribeExistedInstancesResponse 返回参数} */
   DescribeExistedInstances(data?: DescribeExistedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExistedInstancesResponse>;
-  /** 获取导入第三方集群YAML定义 */
+  /** {@link DescribeExternalClusterSpec 获取导入第三方集群YAML定义}({@link DescribeExternalClusterSpecRequest 请求参数}): {@link DescribeExternalClusterSpecResponse 返回参数} */
   DescribeExternalClusterSpec(data: DescribeExternalClusterSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExternalClusterSpecResponse>;
-  /** 查询镜像缓存信息 */
+  /** {@link DescribeImageCaches 查询镜像缓存信息}({@link DescribeImageCachesRequest 请求参数}): {@link DescribeImageCachesResponse 返回参数} */
   DescribeImageCaches(data?: DescribeImageCachesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageCachesResponse>;
-  /** 获取镜像信息 */
+  /** {@link DescribeImages 获取镜像信息}({@link DescribeImagesRequest 请求参数}): {@link DescribeImagesResponse 返回参数} */
   DescribeImages(data?: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
-  /** 获取关联目标集群的实例列表 */
+  /** {@link DescribePrometheusAgentInstances 获取关联目标集群的实例列表}({@link DescribePrometheusAgentInstancesRequest 请求参数}): {@link DescribePrometheusAgentInstancesResponse 返回参数} */
   DescribePrometheusAgentInstances(data: DescribePrometheusAgentInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAgentInstancesResponse>;
-  /** 获取被关联集群列表 */
+  /** {@link DescribePrometheusAgents 获取被关联集群列表}({@link DescribePrometheusAgentsRequest 请求参数}): {@link DescribePrometheusAgentsResponse 返回参数} */
   DescribePrometheusAgents(data: DescribePrometheusAgentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAgentsResponse>;
-  /** 获取告警历史 */
+  /** {@link DescribePrometheusAlertHistory 获取告警历史}({@link DescribePrometheusAlertHistoryRequest 请求参数}): {@link DescribePrometheusAlertHistoryResponse 返回参数} */
   DescribePrometheusAlertHistory(data: DescribePrometheusAlertHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAlertHistoryResponse>;
-  /** 获取2.0实例告警策略列表 */
+  /** {@link DescribePrometheusAlertPolicy 获取2.0实例告警策略列表}({@link DescribePrometheusAlertPolicyRequest 请求参数}): {@link DescribePrometheusAlertPolicyResponse 返回参数} */
   DescribePrometheusAlertPolicy(data: DescribePrometheusAlertPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAlertPolicyResponse>;
-  /** 获取告警规则列表 */
+  /** {@link DescribePrometheusAlertRule 获取告警规则列表}({@link DescribePrometheusAlertRuleRequest 请求参数}): {@link DescribePrometheusAlertRuleResponse 返回参数} */
   DescribePrometheusAlertRule(data: DescribePrometheusAlertRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAlertRuleResponse>;
-  /** 获取TMP实例关联集群列表 */
+  /** {@link DescribePrometheusClusterAgents 获取TMP实例关联集群列表}({@link DescribePrometheusClusterAgentsRequest 请求参数}): {@link DescribePrometheusClusterAgentsResponse 返回参数} */
   DescribePrometheusClusterAgents(data: DescribePrometheusClusterAgentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusClusterAgentsResponse>;
-  /** 拉取Prometheus配置 */
+  /** {@link DescribePrometheusConfig 拉取Prometheus配置}({@link DescribePrometheusConfigRequest 请求参数}): {@link DescribePrometheusConfigResponse 返回参数} */
   DescribePrometheusConfig(data: DescribePrometheusConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusConfigResponse>;
-  /** 获得实例级别抓取配置 */
+  /** {@link DescribePrometheusGlobalConfig 获得实例级别抓取配置}({@link DescribePrometheusGlobalConfigRequest 请求参数}): {@link DescribePrometheusGlobalConfigResponse 返回参数} */
   DescribePrometheusGlobalConfig(data: DescribePrometheusGlobalConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusGlobalConfigResponse>;
-  /** 查询全局告警通知渠道 */
+  /** {@link DescribePrometheusGlobalNotification 查询全局告警通知渠道}({@link DescribePrometheusGlobalNotificationRequest 请求参数}): {@link DescribePrometheusGlobalNotificationResponse 返回参数} */
   DescribePrometheusGlobalNotification(data: DescribePrometheusGlobalNotificationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusGlobalNotificationResponse>;
-  /** 获取实例详细信息 */
+  /** {@link DescribePrometheusInstance 获取实例详细信息}({@link DescribePrometheusInstanceRequest 请求参数}): {@link DescribePrometheusInstanceResponse 返回参数} */
   DescribePrometheusInstance(data: DescribePrometheusInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstanceResponse>;
-  /** 获取2.0实例初始化任务状态 */
+  /** {@link DescribePrometheusInstanceInitStatus 获取2.0实例初始化任务状态}({@link DescribePrometheusInstanceInitStatusRequest 请求参数}): {@link DescribePrometheusInstanceInitStatusResponse 返回参数} */
   DescribePrometheusInstanceInitStatus(data: DescribePrometheusInstanceInitStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstanceInitStatusResponse>;
-  /** 获取2.0实例列表 */
+  /** {@link DescribePrometheusInstancesOverview 获取2.0实例列表}({@link DescribePrometheusInstancesOverviewRequest 请求参数}): {@link DescribePrometheusInstancesOverviewResponse 返回参数} */
   DescribePrometheusInstancesOverview(data?: DescribePrometheusInstancesOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstancesOverviewResponse>;
-  /** 获取实例列表 */
+  /** {@link DescribePrometheusOverviews 获取实例列表}({@link DescribePrometheusOverviewsRequest 请求参数}): {@link DescribePrometheusOverviewsResponse 返回参数} */
   DescribePrometheusOverviews(data?: DescribePrometheusOverviewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusOverviewsResponse>;
-  /** 获取聚合规则列表，包含关联集群内的资源 */
+  /** {@link DescribePrometheusRecordRules 获取聚合规则列表，包含关联集群内的资源}({@link DescribePrometheusRecordRulesRequest 请求参数}): {@link DescribePrometheusRecordRulesResponse 返回参数} */
   DescribePrometheusRecordRules(data: DescribePrometheusRecordRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusRecordRulesResponse>;
-  /** 获取targets信息 */
+  /** {@link DescribePrometheusTargets 获取targets信息}({@link DescribePrometheusTargetsRequest 请求参数}): {@link DescribePrometheusTargetsResponse 返回参数} */
   DescribePrometheusTargets(data: DescribePrometheusTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTargetsResponse>;
-  /** 拉取模板列表 */
+  /** {@link DescribePrometheusTemp 拉取模板列表}({@link DescribePrometheusTempRequest 请求参数}): {@link DescribePrometheusTempResponse 返回参数} */
   DescribePrometheusTemp(data?: DescribePrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTempResponse>;
-  /** 获取模板关联实例信息 */
+  /** {@link DescribePrometheusTempSync 获取模板关联实例信息}({@link DescribePrometheusTempSyncRequest 请求参数}): {@link DescribePrometheusTempSyncResponse 返回参数} */
   DescribePrometheusTempSync(data: DescribePrometheusTempSyncRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTempSyncResponse>;
-  /** 获取模板同步信息 */
+  /** {@link DescribePrometheusTemplateSync 获取模板同步信息}({@link DescribePrometheusTemplateSyncRequest 请求参数}): {@link DescribePrometheusTemplateSyncResponse 返回参数} */
   DescribePrometheusTemplateSync(data: DescribePrometheusTemplateSyncRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTemplateSyncResponse>;
-  /** 模板列表 */
+  /** {@link DescribePrometheusTemplates 模板列表}({@link DescribePrometheusTemplatesRequest 请求参数}): {@link DescribePrometheusTemplatesResponse 返回参数} */
   DescribePrometheusTemplates(data?: DescribePrometheusTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTemplatesResponse>;
-  /** 查询地域列表 */
+  /** {@link DescribeRegions 查询地域列表}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** 获取集群资源使用量 */
+  /** {@link DescribeResourceUsage 获取集群资源使用量}({@link DescribeResourceUsageRequest 请求参数}): {@link DescribeResourceUsageResponse 返回参数} */
   DescribeResourceUsage(data: DescribeResourceUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceUsageResponse>;
-  /** 查询路由表冲突列表 */
+  /** {@link DescribeRouteTableConflicts 查询路由表冲突列表}({@link DescribeRouteTableConflictsRequest 请求参数}): {@link DescribeRouteTableConflictsResponse 返回参数} */
   DescribeRouteTableConflicts(data: DescribeRouteTableConflictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTableConflictsResponse>;
-  /** 获取边缘计算集群的认证信息 */
+  /** {@link DescribeTKEEdgeClusterCredential 获取边缘计算集群的认证信息}({@link DescribeTKEEdgeClusterCredentialRequest 请求参数}): {@link DescribeTKEEdgeClusterCredentialResponse 返回参数} */
   DescribeTKEEdgeClusterCredential(data: DescribeTKEEdgeClusterCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTKEEdgeClusterCredentialResponse>;
-  /** 查询边缘计算集群状态 */
+  /** {@link DescribeTKEEdgeClusterStatus 查询边缘计算集群状态}({@link DescribeTKEEdgeClusterStatusRequest 请求参数}): {@link DescribeTKEEdgeClusterStatusResponse 返回参数} */
   DescribeTKEEdgeClusterStatus(data: DescribeTKEEdgeClusterStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTKEEdgeClusterStatusResponse>;
-  /** 查询边缘集群列表 */
+  /** {@link DescribeTKEEdgeClusters 查询边缘集群列表}({@link DescribeTKEEdgeClustersRequest 请求参数}): {@link DescribeTKEEdgeClustersResponse 返回参数} */
   DescribeTKEEdgeClusters(data?: DescribeTKEEdgeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTKEEdgeClustersResponse>;
-  /** 获取边缘计算外部访问的kubeconfig */
+  /** {@link DescribeTKEEdgeExternalKubeconfig 获取边缘计算外部访问的kubeconfig}({@link DescribeTKEEdgeExternalKubeconfigRequest 请求参数}): {@link DescribeTKEEdgeExternalKubeconfigResponse 返回参数} */
   DescribeTKEEdgeExternalKubeconfig(data: DescribeTKEEdgeExternalKubeconfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTKEEdgeExternalKubeconfigResponse>;
-  /** 获取边缘脚本链接 */
+  /** {@link DescribeTKEEdgeScript 获取边缘脚本链接}({@link DescribeTKEEdgeScriptRequest 请求参数}): {@link DescribeTKEEdgeScriptResponse 返回参数} */
   DescribeTKEEdgeScript(data: DescribeTKEEdgeScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTKEEdgeScriptResponse>;
-  /** 集群版本信息 */
+  /** {@link DescribeVersions 集群版本信息}({@link DescribeVersionsRequest 请求参数}): {@link DescribeVersionsResponse 返回参数} */
   DescribeVersions(data?: DescribeVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVersionsResponse>;
-  /** 查询机型可支持的最大VPC-CNI模式Pod数量 */
+  /** {@link DescribeVpcCniPodLimits 查询机型可支持的最大VPC-CNI模式Pod数量}({@link DescribeVpcCniPodLimitsRequest 请求参数}): {@link DescribeVpcCniPodLimitsResponse 返回参数} */
   DescribeVpcCniPodLimits(data?: DescribeVpcCniPodLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcCniPodLimitsResponse>;
-  /** 关闭集群审计 */
+  /** {@link DisableClusterAudit 关闭集群审计}({@link DisableClusterAuditRequest 请求参数}): {@link DisableClusterAuditResponse 返回参数} */
   DisableClusterAudit(data: DisableClusterAuditRequest, config?: AxiosRequestConfig): AxiosPromise<DisableClusterAuditResponse>;
-  /** 关闭集群删除保护 */
+  /** {@link DisableClusterDeletionProtection 关闭集群删除保护}({@link DisableClusterDeletionProtectionRequest 请求参数}): {@link DisableClusterDeletionProtectionResponse 返回参数} */
   DisableClusterDeletionProtection(data: DisableClusterDeletionProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DisableClusterDeletionProtectionResponse>;
-  /** 关闭事件持久化功能 */
+  /** {@link DisableEventPersistence 关闭事件持久化功能}({@link DisableEventPersistenceRequest 请求参数}): {@link DisableEventPersistenceResponse 返回参数} */
   DisableEventPersistence(data: DisableEventPersistenceRequest, config?: AxiosRequestConfig): AxiosPromise<DisableEventPersistenceResponse>;
-  /** 关闭附加的VPC-CNI网络能力 */
+  /** {@link DisableVpcCniNetworkType 关闭附加的VPC-CNI网络能力}({@link DisableVpcCniNetworkTypeRequest 请求参数}): {@link DisableVpcCniNetworkTypeResponse 返回参数} */
   DisableVpcCniNetworkType(data: DisableVpcCniNetworkTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DisableVpcCniNetworkTypeResponse>;
-  /** 开启集群审计 */
+  /** {@link EnableClusterAudit 开启集群审计}({@link EnableClusterAuditRequest 请求参数}): {@link EnableClusterAuditResponse 返回参数} */
   EnableClusterAudit(data: EnableClusterAuditRequest, config?: AxiosRequestConfig): AxiosPromise<EnableClusterAuditResponse>;
-  /** 启用集群删除保护 */
+  /** {@link EnableClusterDeletionProtection 启用集群删除保护}({@link EnableClusterDeletionProtectionRequest 请求参数}): {@link EnableClusterDeletionProtectionResponse 返回参数} */
   EnableClusterDeletionProtection(data: EnableClusterDeletionProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<EnableClusterDeletionProtectionResponse>;
-  /** 开启事件持久化功能 */
+  /** {@link EnableEventPersistence 开启事件持久化功能}({@link EnableEventPersistenceRequest 请求参数}): {@link EnableEventPersistenceResponse 返回参数} */
   EnableEventPersistence(data: EnableEventPersistenceRequest, config?: AxiosRequestConfig): AxiosPromise<EnableEventPersistenceResponse>;
-  /** 开启vpc-cni容器网络能力 */
+  /** {@link EnableVpcCniNetworkType 开启vpc-cni容器网络能力}({@link EnableVpcCniNetworkTypeRequest 请求参数}): {@link EnableVpcCniNetworkTypeResponse 返回参数} */
   EnableVpcCniNetworkType(data: EnableVpcCniNetworkTypeRequest, config?: AxiosRequestConfig): AxiosPromise<EnableVpcCniNetworkTypeResponse>;
-  /** 操作TKE集群的addon */
+  /** {@link ForwardApplicationRequestV3 操作TKE集群的addon}({@link ForwardApplicationRequestV3Request 请求参数}): {@link ForwardApplicationRequestV3Response 返回参数} */
   ForwardApplicationRequestV3(data: ForwardApplicationRequestV3Request, config?: AxiosRequestConfig): AxiosPromise<ForwardApplicationRequestV3Response>;
-  /** 操作TKEEdge集群的addon */
+  /** {@link ForwardTKEEdgeApplicationRequestV3 操作TKEEdge集群的addon}({@link ForwardTKEEdgeApplicationRequestV3Request 请求参数}): {@link ForwardTKEEdgeApplicationRequestV3Response 返回参数} */
   ForwardTKEEdgeApplicationRequestV3(data: ForwardTKEEdgeApplicationRequestV3Request, config?: AxiosRequestConfig): AxiosPromise<ForwardTKEEdgeApplicationRequestV3Response>;
-  /** 获取集群规模价格 */
+  /** {@link GetClusterLevelPrice 获取集群规模价格}({@link GetClusterLevelPriceRequest 请求参数}): {@link GetClusterLevelPriceResponse 返回参数} */
   GetClusterLevelPrice(data: GetClusterLevelPriceRequest, config?: AxiosRequestConfig): AxiosPromise<GetClusterLevelPriceResponse>;
-  /** 查询匹配的镜像缓存 */
+  /** {@link GetMostSuitableImageCache 查询匹配的镜像缓存}({@link GetMostSuitableImageCacheRequest 请求参数}): {@link GetMostSuitableImageCacheResponse 返回参数} */
   GetMostSuitableImageCache(data: GetMostSuitableImageCacheRequest, config?: AxiosRequestConfig): AxiosPromise<GetMostSuitableImageCacheResponse>;
-  /** 获取TKE支持的App列表 */
+  /** {@link GetTkeAppChartList 获取TKE支持的App列表}({@link GetTkeAppChartListRequest 请求参数}): {@link GetTkeAppChartListResponse 返回参数} */
   GetTkeAppChartList(data?: GetTkeAppChartListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTkeAppChartListResponse>;
-  /** 获得节点升级当前的进度 */
+  /** {@link GetUpgradeInstanceProgress 获得节点升级当前的进度}({@link GetUpgradeInstanceProgressRequest 请求参数}): {@link GetUpgradeInstanceProgressResponse 返回参数} */
   GetUpgradeInstanceProgress(data: GetUpgradeInstanceProgressRequest, config?: AxiosRequestConfig): AxiosPromise<GetUpgradeInstanceProgressResponse>;
-  /** 安装边缘日志采集组件 */
+  /** {@link InstallEdgeLogAgent 安装边缘日志采集组件}({@link InstallEdgeLogAgentRequest 请求参数}): {@link InstallEdgeLogAgentResponse 返回参数} */
   InstallEdgeLogAgent(data: InstallEdgeLogAgentRequest, config?: AxiosRequestConfig): AxiosPromise<InstallEdgeLogAgentResponse>;
-  /** 安装日志采集组件 */
+  /** {@link InstallLogAgent 安装日志采集组件}({@link InstallLogAgentRequest 请求参数}): {@link InstallLogAgentResponse 返回参数} */
   InstallLogAgent(data: InstallLogAgentRequest, config?: AxiosRequestConfig): AxiosPromise<InstallLogAgentResponse>;
-  /** 修改集群伸缩组属性 */
+  /** {@link ModifyClusterAsGroupAttribute 修改集群伸缩组属性}({@link ModifyClusterAsGroupAttributeRequest 请求参数}): {@link ModifyClusterAsGroupAttributeResponse 返回参数} */
   ModifyClusterAsGroupAttribute(data: ModifyClusterAsGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterAsGroupAttributeResponse>;
-  /** 修改集群弹性伸缩属性 */
+  /** {@link ModifyClusterAsGroupOptionAttribute 修改集群弹性伸缩属性}({@link ModifyClusterAsGroupOptionAttributeRequest 请求参数}): {@link ModifyClusterAsGroupOptionAttributeResponse 返回参数} */
   ModifyClusterAsGroupOptionAttribute(data: ModifyClusterAsGroupOptionAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterAsGroupOptionAttributeResponse>;
-  /** 修改集群属性 */
+  /** {@link ModifyClusterAttribute 修改集群属性}({@link ModifyClusterAttributeRequest 请求参数}): {@link ModifyClusterAttributeResponse 返回参数} */
   ModifyClusterAttribute(data: ModifyClusterAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterAttributeResponse>;
-  /** 修改集群认证配置 */
+  /** {@link ModifyClusterAuthenticationOptions 修改集群认证配置}({@link ModifyClusterAuthenticationOptionsRequest 请求参数}): {@link ModifyClusterAuthenticationOptionsResponse 返回参数} */
   ModifyClusterAuthenticationOptions(data: ModifyClusterAuthenticationOptionsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterAuthenticationOptionsResponse>;
-  /** 修改托管集群外网端口的安全策略 */
+  /** {@link ModifyClusterEndpointSP 修改托管集群外网端口的安全策略}({@link ModifyClusterEndpointSPRequest 请求参数}): {@link ModifyClusterEndpointSPResponse 返回参数} */
   ModifyClusterEndpointSP(data: ModifyClusterEndpointSPRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterEndpointSPResponse>;
-  /** 编辑节点池 */
+  /** {@link ModifyClusterNodePool 编辑节点池}({@link ModifyClusterNodePoolRequest 请求参数}): {@link ModifyClusterNodePoolResponse 返回参数} */
   ModifyClusterNodePool(data: ModifyClusterNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterNodePoolResponse>;
-  /** 修改节点池关联伸缩组的期望实例数 */
+  /** {@link ModifyNodePoolDesiredCapacityAboutAsg 修改节点池关联伸缩组的期望实例数}({@link ModifyNodePoolDesiredCapacityAboutAsgRequest 请求参数}): {@link ModifyNodePoolDesiredCapacityAboutAsgResponse 返回参数} */
   ModifyNodePoolDesiredCapacityAboutAsg(data: ModifyNodePoolDesiredCapacityAboutAsgRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNodePoolDesiredCapacityAboutAsgResponse>;
-  /** 修改节点池的机型配置 */
+  /** {@link ModifyNodePoolInstanceTypes 修改节点池的机型配置}({@link ModifyNodePoolInstanceTypesRequest 请求参数}): {@link ModifyNodePoolInstanceTypesResponse 返回参数} */
   ModifyNodePoolInstanceTypes(data: ModifyNodePoolInstanceTypesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNodePoolInstanceTypesResponse>;
-  /** 修改被关联集群的external labels */
+  /** {@link ModifyPrometheusAgentExternalLabels 修改被关联集群的external labels}({@link ModifyPrometheusAgentExternalLabelsRequest 请求参数}): {@link ModifyPrometheusAgentExternalLabelsResponse 返回参数} */
   ModifyPrometheusAgentExternalLabels(data: ModifyPrometheusAgentExternalLabelsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusAgentExternalLabelsResponse>;
-  /** 修改2.0实例告警策略 */
+  /** {@link ModifyPrometheusAlertPolicy 修改2.0实例告警策略}({@link ModifyPrometheusAlertPolicyRequest 请求参数}): {@link ModifyPrometheusAlertPolicyResponse 返回参数} */
   ModifyPrometheusAlertPolicy(data: ModifyPrometheusAlertPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusAlertPolicyResponse>;
-  /** 修改告警规则 */
+  /** {@link ModifyPrometheusAlertRule 修改告警规则}({@link ModifyPrometheusAlertRuleRequest 请求参数}): {@link ModifyPrometheusAlertRuleResponse 返回参数} */
   ModifyPrometheusAlertRule(data: ModifyPrometheusAlertRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusAlertRuleResponse>;
-  /** 修改prometheus配置 */
+  /** {@link ModifyPrometheusConfig 修改prometheus配置}({@link ModifyPrometheusConfigRequest 请求参数}): {@link ModifyPrometheusConfigResponse 返回参数} */
   ModifyPrometheusConfig(data: ModifyPrometheusConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusConfigResponse>;
-  /** 修改全局告警通知渠道 */
+  /** {@link ModifyPrometheusGlobalNotification 修改全局告警通知渠道}({@link ModifyPrometheusGlobalNotificationRequest 请求参数}): {@link ModifyPrometheusGlobalNotificationResponse 返回参数} */
   ModifyPrometheusGlobalNotification(data: ModifyPrometheusGlobalNotificationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusGlobalNotificationResponse>;
-  /** 通过yaml的方式修改Prometheus聚合实例 */
+  /** {@link ModifyPrometheusRecordRuleYaml 通过yaml的方式修改Prometheus聚合实例}({@link ModifyPrometheusRecordRuleYamlRequest 请求参数}): {@link ModifyPrometheusRecordRuleYamlResponse 返回参数} */
   ModifyPrometheusRecordRuleYaml(data: ModifyPrometheusRecordRuleYamlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusRecordRuleYamlResponse>;
-  /** 修改模板实例 */
+  /** {@link ModifyPrometheusTemp 修改模板实例}({@link ModifyPrometheusTempRequest 请求参数}): {@link ModifyPrometheusTempResponse 返回参数} */
   ModifyPrometheusTemp(data: ModifyPrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusTempResponse>;
-  /** 修改模板 */
+  /** {@link ModifyPrometheusTemplate 修改模板}({@link ModifyPrometheusTemplateRequest 请求参数}): {@link ModifyPrometheusTemplateResponse 返回参数} */
   ModifyPrometheusTemplate(data: ModifyPrometheusTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusTemplateResponse>;
-  /** 移出节点池节点 */
+  /** {@link RemoveNodeFromNodePool 移出节点池节点}({@link RemoveNodeFromNodePoolRequest 请求参数}): {@link RemoveNodeFromNodePoolResponse 返回参数} */
   RemoveNodeFromNodePool(data: RemoveNodeFromNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveNodeFromNodePoolResponse>;
-  /** 重启容器实例 */
+  /** {@link RestartEKSContainerInstances 重启容器实例}({@link RestartEKSContainerInstancesRequest 请求参数}): {@link RestartEKSContainerInstancesResponse 返回参数} */
   RestartEKSContainerInstances(data: RestartEKSContainerInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RestartEKSContainerInstancesResponse>;
-  /** 初始化TMP实例 */
+  /** {@link RunPrometheusInstance 初始化TMP实例}({@link RunPrometheusInstanceRequest 请求参数}): {@link RunPrometheusInstanceResponse 返回参数} */
   RunPrometheusInstance(data: RunPrometheusInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RunPrometheusInstanceResponse>;
-  /** 缩容独立集群master节点 */
+  /** {@link ScaleInClusterMaster 缩容独立集群master节点}({@link ScaleInClusterMasterRequest 请求参数}): {@link ScaleInClusterMasterResponse 返回参数} */
   ScaleInClusterMaster(data: ScaleInClusterMasterRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleInClusterMasterResponse>;
-  /** 扩容独立集群master节点 */
+  /** {@link ScaleOutClusterMaster 扩容独立集群master节点}({@link ScaleOutClusterMasterRequest 请求参数}): {@link ScaleOutClusterMasterResponse 返回参数} */
   ScaleOutClusterMaster(data: ScaleOutClusterMasterRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutClusterMasterResponse>;
-  /** 节点池节点设置移出保护 */
+  /** {@link SetNodePoolNodeProtection 节点池节点设置移出保护}({@link SetNodePoolNodeProtectionRequest 请求参数}): {@link SetNodePoolNodeProtectionResponse 返回参数} */
   SetNodePoolNodeProtection(data: SetNodePoolNodeProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<SetNodePoolNodeProtectionResponse>;
-  /** 同步模板 */
+  /** {@link SyncPrometheusTemp 同步模板}({@link SyncPrometheusTempRequest 请求参数}): {@link SyncPrometheusTempResponse 返回参数} */
   SyncPrometheusTemp(data: SyncPrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<SyncPrometheusTempResponse>;
-  /** 同步模板到实例或者集群 */
+  /** {@link SyncPrometheusTemplate 同步模板到实例或者集群}({@link SyncPrometheusTemplateRequest 请求参数}): {@link SyncPrometheusTemplateResponse 返回参数} */
   SyncPrometheusTemplate(data: SyncPrometheusTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<SyncPrometheusTemplateResponse>;
-  /** 卸载边缘日志采集组件 */
+  /** {@link UninstallEdgeLogAgent 卸载边缘日志采集组件}({@link UninstallEdgeLogAgentRequest 请求参数}): {@link UninstallEdgeLogAgentResponse 返回参数} */
   UninstallEdgeLogAgent(data: UninstallEdgeLogAgentRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallEdgeLogAgentResponse>;
-  /** 卸载日志采集组件 */
+  /** {@link UninstallLogAgent 卸载日志采集组件}({@link UninstallLogAgentRequest 请求参数}): {@link UninstallLogAgentResponse 返回参数} */
   UninstallLogAgent(data: UninstallLogAgentRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallLogAgentResponse>;
-  /** 升级集群 */
+  /** {@link UpdateClusterVersion 升级集群}({@link UpdateClusterVersionRequest 请求参数}): {@link UpdateClusterVersionResponse 返回参数} */
   UpdateClusterVersion(data: UpdateClusterVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateClusterVersionResponse>;
-  /** 修改弹性集群EKS */
+  /** {@link UpdateEKSCluster 修改弹性集群EKS}({@link UpdateEKSClusterRequest 请求参数}): {@link UpdateEKSClusterResponse 返回参数} */
   UpdateEKSCluster(data: UpdateEKSClusterRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEKSClusterResponse>;
-  /** 更新容器实例 */
+  /** {@link UpdateEKSContainerInstance 更新容器实例}({@link UpdateEKSContainerInstanceRequest 请求参数}): {@link UpdateEKSContainerInstanceResponse 返回参数} */
   UpdateEKSContainerInstance(data: UpdateEKSContainerInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEKSContainerInstanceResponse>;
-  /** 升级边缘集群 */
+  /** {@link UpdateEdgeClusterVersion 升级边缘集群}({@link UpdateEdgeClusterVersionRequest 请求参数}): {@link UpdateEdgeClusterVersionResponse 返回参数} */
   UpdateEdgeClusterVersion(data: UpdateEdgeClusterVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEdgeClusterVersionResponse>;
-  /** 更新镜像缓存 */
+  /** {@link UpdateImageCache 更新镜像缓存}({@link UpdateImageCacheRequest 请求参数}): {@link UpdateImageCacheResponse 返回参数} */
   UpdateImageCache(data: UpdateImageCacheRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateImageCacheResponse>;
-  /** 修改边缘计算的集群 */
+  /** {@link UpdateTKEEdgeCluster 修改边缘计算的集群}({@link UpdateTKEEdgeClusterRequest 请求参数}): {@link UpdateTKEEdgeClusterResponse 返回参数} */
   UpdateTKEEdgeCluster(data: UpdateTKEEdgeClusterRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTKEEdgeClusterResponse>;
-  /** 集群节点升级 */
+  /** {@link UpgradeClusterInstances 集群节点升级}({@link UpgradeClusterInstancesRequest 请求参数}): {@link UpgradeClusterInstancesResponse 返回参数} */
   UpgradeClusterInstances(data: UpgradeClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeClusterInstancesResponse>;
 }
 

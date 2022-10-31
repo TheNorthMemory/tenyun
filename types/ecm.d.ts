@@ -3696,268 +3696,268 @@ declare interface TerminateInstancesResponse {
   RequestId?: string;
 }
 
-/** [边缘计算机器](https://cloud.tencent.com/document/product/1108) */
+/** {@link Ecm 边缘计算机器} */
 declare interface Ecm {
   (): Versions;
-  /** 创建弹性公网IP */
+  /** {@link AllocateAddresses 创建弹性公网IP}({@link AllocateAddressesRequest 请求参数}): {@link AllocateAddressesResponse 返回参数} */
   AllocateAddresses(data: AllocateAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateAddressesResponse>;
-  /** 分配IPv6地址 */
+  /** {@link AssignIpv6Addresses 分配IPv6地址}({@link AssignIpv6AddressesRequest 请求参数}): {@link AssignIpv6AddressesResponse 返回参数} */
   AssignIpv6Addresses(data: AssignIpv6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<AssignIpv6AddressesResponse>;
-  /** 弹性网卡申请内网 IP */
+  /** {@link AssignPrivateIpAddresses 弹性网卡申请内网 IP}({@link AssignPrivateIpAddressesRequest 请求参数}): {@link AssignPrivateIpAddressesResponse 返回参数} */
   AssignPrivateIpAddresses(data: AssignPrivateIpAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<AssignPrivateIpAddressesResponse>;
-  /** 绑定弹性公网IP */
+  /** {@link AssociateAddress 绑定弹性公网IP}({@link AssociateAddressRequest 请求参数}): {@link AssociateAddressResponse 返回参数} */
   AssociateAddress(data: AssociateAddressRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateAddressResponse>;
-  /** 绑定安全组 */
+  /** {@link AssociateSecurityGroups 绑定安全组}({@link AssociateSecurityGroupsRequest 请求参数}): {@link AssociateSecurityGroupsResponse 返回参数} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
-  /** 挂载云硬盘 */
+  /** {@link AttachDisks 挂载云硬盘}({@link AttachDisksRequest 请求参数}): {@link AttachDisksResponse 返回参数} */
   AttachDisks(data: AttachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<AttachDisksResponse>;
-  /** 弹性网卡绑定云主机 */
+  /** {@link AttachNetworkInterface 弹性网卡绑定云主机}({@link AttachNetworkInterfaceRequest 请求参数}): {@link AttachNetworkInterfaceResponse 返回参数} */
   AttachNetworkInterface(data: AttachNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<AttachNetworkInterfaceResponse>;
-  /** 批量解绑后端服务 */
+  /** {@link BatchDeregisterTargets 批量解绑后端服务}({@link BatchDeregisterTargetsRequest 请求参数}): {@link BatchDeregisterTargetsResponse 返回参数} */
   BatchDeregisterTargets(data: BatchDeregisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeregisterTargetsResponse>;
-  /** 批量修改监听器绑定的后端机器的转发权重 */
+  /** {@link BatchModifyTargetWeight 批量修改监听器绑定的后端机器的转发权重}({@link BatchModifyTargetWeightRequest 请求参数}): {@link BatchModifyTargetWeightResponse 返回参数} */
   BatchModifyTargetWeight(data: BatchModifyTargetWeightRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyTargetWeightResponse>;
-  /** 批量绑定后端目标 */
+  /** {@link BatchRegisterTargets 批量绑定后端目标}({@link BatchRegisterTargetsRequest 请求参数}): {@link BatchRegisterTargetsResponse 返回参数} */
   BatchRegisterTargets(data: BatchRegisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchRegisterTargetsResponse>;
-  /** 创建云硬盘 */
+  /** {@link CreateDisks 创建云硬盘}({@link CreateDisksRequest 请求参数}): {@link CreateDisksResponse 返回参数} */
   CreateDisks(data: CreateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDisksResponse>;
-  /** 创建HAVIP */
+  /** {@link CreateHaVip 创建HAVIP}({@link CreateHaVipRequest 请求参数}): {@link CreateHaVipResponse 返回参数} */
   CreateHaVip(data: CreateHaVipRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHaVipResponse>;
-  /** 创建镜像 */
+  /** {@link CreateImage 创建镜像}({@link CreateImageRequest 请求参数}): {@link CreateImageResponse 返回参数} */
   CreateImage(data: CreateImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageResponse>;
-  /** 创建密钥对 */
+  /** {@link CreateKeyPair 创建密钥对}({@link CreateKeyPairRequest 请求参数}): {@link CreateKeyPairResponse 返回参数} */
   CreateKeyPair(data: CreateKeyPairRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKeyPairResponse>;
-  /** 创建负载均衡监听器 */
+  /** {@link CreateListener 创建负载均衡监听器}({@link CreateListenerRequest 请求参数}): {@link CreateListenerResponse 返回参数} */
   CreateListener(data: CreateListenerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateListenerResponse>;
-  /** 购买负载均衡实例 */
+  /** {@link CreateLoadBalancer 购买负载均衡实例}({@link CreateLoadBalancerRequest 请求参数}): {@link CreateLoadBalancerResponse 返回参数} */
   CreateLoadBalancer(data: CreateLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadBalancerResponse>;
-  /** 创建模块 */
+  /** {@link CreateModule 创建模块}({@link CreateModuleRequest 请求参数}): {@link CreateModuleResponse 返回参数} */
   CreateModule(data: CreateModuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModuleResponse>;
-  /** 创建弹性网卡 */
+  /** {@link CreateNetworkInterface 创建弹性网卡}({@link CreateNetworkInterfaceRequest 请求参数}): {@link CreateNetworkInterfaceResponse 返回参数} */
   CreateNetworkInterface(data: CreateNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkInterfaceResponse>;
-  /** 创建路由表 */
+  /** {@link CreateRouteTable 创建路由表}({@link CreateRouteTableRequest 请求参数}): {@link CreateRouteTableResponse 返回参数} */
   CreateRouteTable(data: CreateRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRouteTableResponse>;
-  /** 创建路由策略 */
+  /** {@link CreateRoutes 创建路由策略}({@link CreateRoutesRequest 请求参数}): {@link CreateRoutesResponse 返回参数} */
   CreateRoutes(data: CreateRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoutesResponse>;
-  /** 创建安全组 */
+  /** {@link CreateSecurityGroup 创建安全组}({@link CreateSecurityGroupRequest 请求参数}): {@link CreateSecurityGroupResponse 返回参数} */
   CreateSecurityGroup(data: CreateSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityGroupResponse>;
-  /** 安全组添加规则 */
+  /** {@link CreateSecurityGroupPolicies 安全组添加规则}({@link CreateSecurityGroupPoliciesRequest 请求参数}): {@link CreateSecurityGroupPoliciesResponse 返回参数} */
   CreateSecurityGroupPolicies(data: CreateSecurityGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityGroupPoliciesResponse>;
-  /** 创建子网 */
+  /** {@link CreateSubnet 创建子网}({@link CreateSubnetRequest 请求参数}): {@link CreateSubnetResponse 返回参数} */
   CreateSubnet(data: CreateSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubnetResponse>;
-  /** 创建VPC */
+  /** {@link CreateVpc 创建VPC}({@link CreateVpcRequest 请求参数}): {@link CreateVpcResponse 返回参数} */
   CreateVpc(data: CreateVpcRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcResponse>;
-  /** 删除HAVIP */
+  /** {@link DeleteHaVip 删除HAVIP}({@link DeleteHaVipRequest 请求参数}): {@link DeleteHaVipResponse 返回参数} */
   DeleteHaVip(data: DeleteHaVipRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHaVipResponse>;
-  /** 删除镜像 */
+  /** {@link DeleteImage 删除镜像}({@link DeleteImageRequest 请求参数}): {@link DeleteImageResponse 返回参数} */
   DeleteImage(data: DeleteImageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageResponse>;
-  /** 删除负载均衡监听器 */
+  /** {@link DeleteListener 删除负载均衡监听器}({@link DeleteListenerRequest 请求参数}): {@link DeleteListenerResponse 返回参数} */
   DeleteListener(data: DeleteListenerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteListenerResponse>;
-  /** 删除负载均衡实例 */
+  /** {@link DeleteLoadBalancer 删除负载均衡实例}({@link DeleteLoadBalancerRequest 请求参数}): {@link DeleteLoadBalancerResponse 返回参数} */
   DeleteLoadBalancer(data?: DeleteLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerResponse>;
-  /** 删除负载均衡多个监听器 */
+  /** {@link DeleteLoadBalancerListeners 删除负载均衡多个监听器}({@link DeleteLoadBalancerListenersRequest 请求参数}): {@link DeleteLoadBalancerListenersResponse 返回参数} */
   DeleteLoadBalancerListeners(data: DeleteLoadBalancerListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerListenersResponse>;
-  /** 删除业务模块 */
+  /** {@link DeleteModule 删除业务模块}({@link DeleteModuleRequest 请求参数}): {@link DeleteModuleResponse 返回参数} */
   DeleteModule(data: DeleteModuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModuleResponse>;
-  /** 删除弹性网卡 */
+  /** {@link DeleteNetworkInterface 删除弹性网卡}({@link DeleteNetworkInterfaceRequest 请求参数}): {@link DeleteNetworkInterfaceResponse 返回参数} */
   DeleteNetworkInterface(data: DeleteNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNetworkInterfaceResponse>;
-  /** 删除路由表 */
+  /** {@link DeleteRouteTable 删除路由表}({@link DeleteRouteTableRequest 请求参数}): {@link DeleteRouteTableResponse 返回参数} */
   DeleteRouteTable(data: DeleteRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRouteTableResponse>;
-  /** 删除路由策略 */
+  /** {@link DeleteRoutes 删除路由策略}({@link DeleteRoutesRequest 请求参数}): {@link DeleteRoutesResponse 返回参数} */
   DeleteRoutes(data: DeleteRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoutesResponse>;
-  /** 删除安全组 */
+  /** {@link DeleteSecurityGroup 删除安全组}({@link DeleteSecurityGroupRequest 请求参数}): {@link DeleteSecurityGroupResponse 返回参数} */
   DeleteSecurityGroup(data: DeleteSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityGroupResponse>;
-  /** 删除安全组规则 */
+  /** {@link DeleteSecurityGroupPolicies 删除安全组规则}({@link DeleteSecurityGroupPoliciesRequest 请求参数}): {@link DeleteSecurityGroupPoliciesResponse 返回参数} */
   DeleteSecurityGroupPolicies(data: DeleteSecurityGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityGroupPoliciesResponse>;
-  /** 删除快照 */
+  /** {@link DeleteSnapshots 删除快照}({@link DeleteSnapshotsRequest 请求参数}): {@link DeleteSnapshotsResponse 返回参数} */
   DeleteSnapshots(data: DeleteSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotsResponse>;
-  /** 删除子网 */
+  /** {@link DeleteSubnet 删除子网}({@link DeleteSubnetRequest 请求参数}): {@link DeleteSubnetResponse 返回参数} */
   DeleteSubnet(data: DeleteSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubnetResponse>;
-  /** 删除VPC */
+  /** {@link DeleteVpc 删除VPC}({@link DeleteVpcRequest 请求参数}): {@link DeleteVpcResponse 返回参数} */
   DeleteVpc(data: DeleteVpcRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcResponse>;
-  /** 查询弹性公网IP配额 */
+  /** {@link DescribeAddressQuota 查询弹性公网IP配额}({@link DescribeAddressQuotaRequest 请求参数}): {@link DescribeAddressQuotaResponse 返回参数} */
   DescribeAddressQuota(data: DescribeAddressQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressQuotaResponse>;
-  /** 查询弹性公网IP列表 */
+  /** {@link DescribeAddresses 查询弹性公网IP列表}({@link DescribeAddressesRequest 请求参数}): {@link DescribeAddressesResponse 返回参数} */
   DescribeAddresses(data: DescribeAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressesResponse>;
-  /** 获取概览页统计的基本数据 */
+  /** {@link DescribeBaseOverview 获取概览页统计的基本数据}({@link DescribeBaseOverviewRequest 请求参数}): {@link DescribeBaseOverviewResponse 返回参数} */
   DescribeBaseOverview(data?: DescribeBaseOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaseOverviewResponse>;
-  /** 获取配置限制信息 */
+  /** {@link DescribeConfig 获取配置限制信息}({@link DescribeConfigRequest 请求参数}): {@link DescribeConfigResponse 返回参数} */
   DescribeConfig(data?: DescribeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigResponse>;
-  /** 查询导入镜像任务 */
+  /** {@link DescribeCustomImageTask 查询导入镜像任务}({@link DescribeCustomImageTaskRequest 请求参数}): {@link DescribeCustomImageTaskResponse 返回参数} */
   DescribeCustomImageTask(data: DescribeCustomImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomImageTaskResponse>;
-  /** 查询可用区的默认子网 */
+  /** {@link DescribeDefaultSubnet 查询可用区的默认子网}({@link DescribeDefaultSubnetRequest 请求参数}): {@link DescribeDefaultSubnetResponse 返回参数} */
   DescribeDefaultSubnet(data: DescribeDefaultSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultSubnetResponse>;
-  /** 查询云硬盘列表 */
+  /** {@link DescribeDisks 查询云硬盘列表}({@link DescribeDisksRequest 请求参数}): {@link DescribeDisksResponse 返回参数} */
   DescribeDisks(data?: DescribeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksResponse>;
-  /** 查询HAVIP列表 */
+  /** {@link DescribeHaVips 查询HAVIP列表}({@link DescribeHaVipsRequest 请求参数}): {@link DescribeHaVipsResponse 返回参数} */
   DescribeHaVips(data?: DescribeHaVipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHaVipsResponse>;
-  /** 展示镜像列表 */
+  /** {@link DescribeImage 展示镜像列表}({@link DescribeImageRequest 请求参数}): {@link DescribeImageResponse 返回参数} */
   DescribeImage(data?: DescribeImageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageResponse>;
-  /** 查询外部导入镜像支持的OS列表 */
+  /** {@link DescribeImportImageOs 查询外部导入镜像支持的OS列表}({@link DescribeImportImageOsRequest 请求参数}): {@link DescribeImportImageOsResponse 返回参数} */
   DescribeImportImageOs(data?: DescribeImportImageOsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImportImageOsResponse>;
-  /** 获取机型配置列表 */
+  /** {@link DescribeInstanceTypeConfig 获取机型配置列表}({@link DescribeInstanceTypeConfigRequest 请求参数}): {@link DescribeInstanceTypeConfigResponse 返回参数} */
   DescribeInstanceTypeConfig(data?: DescribeInstanceTypeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceTypeConfigResponse>;
-  /** 查询实例管理终端地址 */
+  /** {@link DescribeInstanceVncUrl 查询实例管理终端地址}({@link DescribeInstanceVncUrlRequest 请求参数}): {@link DescribeInstanceVncUrlResponse 返回参数} */
   DescribeInstanceVncUrl(data: DescribeInstanceVncUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceVncUrlResponse>;
-  /** 获取实例相关信息 */
+  /** {@link DescribeInstances 获取实例相关信息}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** 获取禁止的操作列表 */
+  /** {@link DescribeInstancesDeniedActions 获取禁止的操作列表}({@link DescribeInstancesDeniedActionsRequest 请求参数}): {@link DescribeInstancesDeniedActionsResponse 返回参数} */
   DescribeInstancesDeniedActions(data: DescribeInstancesDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDeniedActionsResponse>;
-  /** 查询负载均衡的监听器列表 */
+  /** {@link DescribeListeners 查询负载均衡的监听器列表}({@link DescribeListenersRequest 请求参数}): {@link DescribeListenersResponse 返回参数} */
   DescribeListeners(data: DescribeListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenersResponse>;
-  /** 查询负载均衡相关的任务状态 */
+  /** {@link DescribeLoadBalanceTaskStatus 查询负载均衡相关的任务状态}({@link DescribeLoadBalanceTaskStatusRequest 请求参数}): {@link DescribeLoadBalanceTaskStatusResponse 返回参数} */
   DescribeLoadBalanceTaskStatus(data: DescribeLoadBalanceTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalanceTaskStatusResponse>;
-  /** 查询负载均衡实例列表 */
+  /** {@link DescribeLoadBalancers 查询负载均衡实例列表}({@link DescribeLoadBalancersRequest 请求参数}): {@link DescribeLoadBalancersResponse 返回参数} */
   DescribeLoadBalancers(data?: DescribeLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersResponse>;
-  /** 获取模块列表 */
+  /** {@link DescribeModule 获取模块列表}({@link DescribeModuleRequest 请求参数}): {@link DescribeModuleResponse 返回参数} */
   DescribeModule(data?: DescribeModuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModuleResponse>;
-  /** 展示模块详细信息 */
+  /** {@link DescribeModuleDetail 展示模块详细信息}({@link DescribeModuleDetailRequest 请求参数}): {@link DescribeModuleDetailResponse 返回参数} */
   DescribeModuleDetail(data: DescribeModuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModuleDetailResponse>;
-  /** 获取客户节点上的出入月峰和计费带宽 */
+  /** {@link DescribeMonthPeakNetwork 获取客户节点上的出入月峰和计费带宽}({@link DescribeMonthPeakNetworkRequest 请求参数}): {@link DescribeMonthPeakNetworkResponse 返回参数} */
   DescribeMonthPeakNetwork(data: DescribeMonthPeakNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonthPeakNetworkResponse>;
-  /** 查询弹性网卡列表 */
+  /** {@link DescribeNetworkInterfaces 查询弹性网卡列表}({@link DescribeNetworkInterfacesRequest 请求参数}): {@link DescribeNetworkInterfacesResponse 返回参数} */
   DescribeNetworkInterfaces(data?: DescribeNetworkInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkInterfacesResponse>;
-  /** 获取节点列表 */
+  /** {@link DescribeNode 获取节点列表}({@link DescribeNodeRequest 请求参数}): {@link DescribeNodeResponse 返回参数} */
   DescribeNode(data?: DescribeNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeResponse>;
-  /** 获取装箱配额组 */
+  /** {@link DescribePackingQuotaGroup 获取装箱配额组}({@link DescribePackingQuotaGroupRequest 请求参数}): {@link DescribePackingQuotaGroupResponse 返回参数} */
   DescribePackingQuotaGroup(data?: DescribePackingQuotaGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackingQuotaGroupResponse>;
-  /** 基础信息峰值数据 */
+  /** {@link DescribePeakBaseOverview 基础信息峰值数据}({@link DescribePeakBaseOverviewRequest 请求参数}): {@link DescribePeakBaseOverviewResponse 返回参数} */
   DescribePeakBaseOverview(data?: DescribePeakBaseOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePeakBaseOverviewResponse>;
-  /** 获取网络峰值数据 */
+  /** {@link DescribePeakNetworkOverview 获取网络峰值数据}({@link DescribePeakNetworkOverviewRequest 请求参数}): {@link DescribePeakNetworkOverviewResponse 返回参数} */
   DescribePeakNetworkOverview(data?: DescribePeakNetworkOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePeakNetworkOverviewResponse>;
-  /** 查询实例价格 */
+  /** {@link DescribePriceRunInstance 查询实例价格}({@link DescribePriceRunInstanceRequest 请求参数}): {@link DescribePriceRunInstanceResponse 返回参数} */
   DescribePriceRunInstance(data: DescribePriceRunInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePriceRunInstanceResponse>;
-  /** 查询路由策略冲突列表 */
+  /** {@link DescribeRouteConflicts 查询路由策略冲突列表}({@link DescribeRouteConflictsRequest 请求参数}): {@link DescribeRouteConflictsResponse 返回参数} */
   DescribeRouteConflicts(data: DescribeRouteConflictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteConflictsResponse>;
-  /** 查询路由表对象列表 */
+  /** {@link DescribeRouteTables 查询路由表对象列表}({@link DescribeRouteTablesRequest 请求参数}): {@link DescribeRouteTablesResponse 返回参数} */
   DescribeRouteTables(data?: DescribeRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTablesResponse>;
-  /** 查询安全组关联统计 */
+  /** {@link DescribeSecurityGroupAssociationStatistics 查询安全组关联统计}({@link DescribeSecurityGroupAssociationStatisticsRequest 请求参数}): {@link DescribeSecurityGroupAssociationStatisticsResponse 返回参数} */
   DescribeSecurityGroupAssociationStatistics(data: DescribeSecurityGroupAssociationStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupAssociationStatisticsResponse>;
-  /** 查询用户安全组配额 */
+  /** {@link DescribeSecurityGroupLimits 查询用户安全组配额}({@link DescribeSecurityGroupLimitsRequest 请求参数}): {@link DescribeSecurityGroupLimitsResponse 返回参数} */
   DescribeSecurityGroupLimits(data?: DescribeSecurityGroupLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupLimitsResponse>;
-  /** 查询安全组规则 */
+  /** {@link DescribeSecurityGroupPolicies 查询安全组规则}({@link DescribeSecurityGroupPoliciesRequest 请求参数}): {@link DescribeSecurityGroupPoliciesResponse 返回参数} */
   DescribeSecurityGroupPolicies(data: DescribeSecurityGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupPoliciesResponse>;
-  /** 查看安全组 */
+  /** {@link DescribeSecurityGroups 查看安全组}({@link DescribeSecurityGroupsRequest 请求参数}): {@link DescribeSecurityGroupsResponse 返回参数} */
   DescribeSecurityGroups(data?: DescribeSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupsResponse>;
-  /** 查询快照列表 */
+  /** {@link DescribeSnapshots 查询快照列表}({@link DescribeSnapshotsRequest 请求参数}): {@link DescribeSnapshotsResponse 返回参数} */
   DescribeSnapshots(data?: DescribeSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsResponse>;
-  /** 查询子网列表 */
+  /** {@link DescribeSubnets 查询子网列表}({@link DescribeSubnetsRequest 请求参数}): {@link DescribeSubnetsResponse 返回参数} */
   DescribeSubnets(data?: DescribeSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetsResponse>;
-  /** 获取负载均衡后端服务的健康检查状态 */
+  /** {@link DescribeTargetHealth 获取负载均衡后端服务的健康检查状态}({@link DescribeTargetHealthRequest 请求参数}): {@link DescribeTargetHealthResponse 返回参数} */
   DescribeTargetHealth(data: DescribeTargetHealthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetHealthResponse>;
-  /** 查询负载均衡绑定的后端服务列表 */
+  /** {@link DescribeTargets 查询负载均衡绑定的后端服务列表}({@link DescribeTargetsRequest 请求参数}): {@link DescribeTargetsResponse 返回参数} */
   DescribeTargets(data: DescribeTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetsResponse>;
-  /** 查询异步任务执行结果 */
+  /** {@link DescribeTaskResult 查询异步任务执行结果}({@link DescribeTaskResultRequest 请求参数}): {@link DescribeTaskResultResponse 返回参数} */
   DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
-  /** 获取任务状态 */
+  /** {@link DescribeTaskStatus 获取任务状态}({@link DescribeTaskStatusRequest 请求参数}): {@link DescribeTaskStatusResponse 返回参数} */
   DescribeTaskStatus(data: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
-  /** 查询VPC列表 */
+  /** {@link DescribeVpcs 查询VPC列表}({@link DescribeVpcsRequest 请求参数}): {@link DescribeVpcsResponse 返回参数} */
   DescribeVpcs(data?: DescribeVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcsResponse>;
-  /** 卸载云硬盘 */
+  /** {@link DetachDisks 卸载云硬盘}({@link DetachDisksRequest 请求参数}): {@link DetachDisksResponse 返回参数} */
   DetachDisks(data: DetachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DetachDisksResponse>;
-  /** 弹性网卡解绑云主机 */
+  /** {@link DetachNetworkInterface 弹性网卡解绑云主机}({@link DetachNetworkInterfaceRequest 请求参数}): {@link DetachNetworkInterfaceResponse 返回参数} */
   DetachNetworkInterface(data: DetachNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<DetachNetworkInterfaceResponse>;
-  /** 禁用子网路由 */
+  /** {@link DisableRoutes 禁用子网路由}({@link DisableRoutesRequest 请求参数}): {@link DisableRoutesResponse 返回参数} */
   DisableRoutes(data: DisableRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DisableRoutesResponse>;
-  /** 解绑定弹性公网IP */
+  /** {@link DisassociateAddress 解绑定弹性公网IP}({@link DisassociateAddressRequest 请求参数}): {@link DisassociateAddressResponse 返回参数} */
   DisassociateAddress(data: DisassociateAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateAddressResponse>;
-  /** 解绑密钥对 */
+  /** {@link DisassociateInstancesKeyPairs 解绑密钥对}({@link DisassociateInstancesKeyPairsRequest 请求参数}): {@link DisassociateInstancesKeyPairsResponse 返回参数} */
   DisassociateInstancesKeyPairs(data: DisassociateInstancesKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateInstancesKeyPairsResponse>;
-  /** 解绑安全组 */
+  /** {@link DisassociateSecurityGroups 解绑安全组}({@link DisassociateSecurityGroupsRequest 请求参数}): {@link DisassociateSecurityGroupsResponse 返回参数} */
   DisassociateSecurityGroups(data: DisassociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupsResponse>;
-  /** 启用子网路由 */
+  /** {@link EnableRoutes 启用子网路由}({@link EnableRoutesRequest 请求参数}): {@link EnableRoutesResponse 返回参数} */
   EnableRoutes(data: EnableRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<EnableRoutesResponse>;
-  /** 导入自定义镜像 */
+  /** {@link ImportCustomImage 导入自定义镜像}({@link ImportCustomImageRequest 请求参数}): {@link ImportCustomImageResponse 返回参数} */
   ImportCustomImage(data: ImportCustomImageRequest, config?: AxiosRequestConfig): AxiosPromise<ImportCustomImageResponse>;
-  /** 导入镜像 */
+  /** {@link ImportImage 导入镜像}({@link ImportImageRequest 请求参数}): {@link ImportImageResponse 返回参数} */
   ImportImage(data: ImportImageRequest, config?: AxiosRequestConfig): AxiosPromise<ImportImageResponse>;
-  /** 弹性网卡迁移 */
+  /** {@link MigrateNetworkInterface 弹性网卡迁移}({@link MigrateNetworkInterfaceRequest 请求参数}): {@link MigrateNetworkInterfaceResponse 返回参数} */
   MigrateNetworkInterface(data: MigrateNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<MigrateNetworkInterfaceResponse>;
-  /** 弹性网卡内网IP迁移 */
+  /** {@link MigratePrivateIpAddress 弹性网卡内网IP迁移}({@link MigratePrivateIpAddressRequest 请求参数}): {@link MigratePrivateIpAddressResponse 返回参数} */
   MigratePrivateIpAddress(data: MigratePrivateIpAddressRequest, config?: AxiosRequestConfig): AxiosPromise<MigratePrivateIpAddressResponse>;
-  /** 修改弹性公网IP属性 */
+  /** {@link ModifyAddressAttribute 修改弹性公网IP属性}({@link ModifyAddressAttributeRequest 请求参数}): {@link ModifyAddressAttributeResponse 返回参数} */
   ModifyAddressAttribute(data: ModifyAddressAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAddressAttributeResponse>;
-  /** 调整弹性公网IP带宽 */
+  /** {@link ModifyAddressesBandwidth 调整弹性公网IP带宽}({@link ModifyAddressesBandwidthRequest 请求参数}): {@link ModifyAddressesBandwidthResponse 返回参数} */
   ModifyAddressesBandwidth(data: ModifyAddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAddressesBandwidthResponse>;
-  /** 修改默认子网 */
+  /** {@link ModifyDefaultSubnet 修改默认子网}({@link ModifyDefaultSubnetRequest 请求参数}): {@link ModifyDefaultSubnetResponse 返回参数} */
   ModifyDefaultSubnet(data: ModifyDefaultSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDefaultSubnetResponse>;
-  /** 修改HAVIP属性 */
+  /** {@link ModifyHaVipAttribute 修改HAVIP属性}({@link ModifyHaVipAttributeRequest 请求参数}): {@link ModifyHaVipAttributeResponse 返回参数} */
   ModifyHaVipAttribute(data: ModifyHaVipAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHaVipAttributeResponse>;
-  /** 修改镜像属性 */
+  /** {@link ModifyImageAttribute 修改镜像属性}({@link ModifyImageAttributeRequest 请求参数}): {@link ModifyImageAttributeResponse 返回参数} */
   ModifyImageAttribute(data: ModifyImageAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageAttributeResponse>;
-  /** 修改实例属性 */
+  /** {@link ModifyInstancesAttribute 修改实例属性}({@link ModifyInstancesAttributeRequest 请求参数}): {@link ModifyInstancesAttributeResponse 返回参数} */
   ModifyInstancesAttribute(data: ModifyInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesAttributeResponse>;
-  /** 修改弹性网卡IPv6地址属性 */
+  /** {@link ModifyIpv6AddressesAttribute 修改弹性网卡IPv6地址属性}({@link ModifyIpv6AddressesAttributeRequest 请求参数}): {@link ModifyIpv6AddressesAttributeResponse 返回参数} */
   ModifyIpv6AddressesAttribute(data: ModifyIpv6AddressesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIpv6AddressesAttributeResponse>;
-  /** 修改负载均衡监听器属性 */
+  /** {@link ModifyListener 修改负载均衡监听器属性}({@link ModifyListenerRequest 请求参数}): {@link ModifyListenerResponse 返回参数} */
   ModifyListener(data: ModifyListenerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyListenerResponse>;
-  /** 修改负载均衡实例的属性 */
+  /** {@link ModifyLoadBalancerAttributes 修改负载均衡实例的属性}({@link ModifyLoadBalancerAttributesRequest 请求参数}): {@link ModifyLoadBalancerAttributesResponse 返回参数} */
   ModifyLoadBalancerAttributes(data: ModifyLoadBalancerAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerAttributesResponse>;
-  /** 修改模块配置 */
+  /** {@link ModifyModuleConfig 修改模块配置}({@link ModifyModuleConfigRequest 请求参数}): {@link ModifyModuleConfigResponse 返回参数} */
   ModifyModuleConfig(data: ModifyModuleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleConfigResponse>;
-  /** 修改模块是否禁止分配外网ip */
+  /** {@link ModifyModuleDisableWanIp 修改模块是否禁止分配外网ip}({@link ModifyModuleDisableWanIpRequest 请求参数}): {@link ModifyModuleDisableWanIpResponse 返回参数} */
   ModifyModuleDisableWanIp(data: ModifyModuleDisableWanIpRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleDisableWanIpResponse>;
-  /** 修改模块默认镜像 */
+  /** {@link ModifyModuleImage 修改模块默认镜像}({@link ModifyModuleImageRequest 请求参数}): {@link ModifyModuleImageResponse 返回参数} */
   ModifyModuleImage(data: ModifyModuleImageRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleImageResponse>;
-  /** 修改模块IP直通 */
+  /** {@link ModifyModuleIpDirect 修改模块IP直通}({@link ModifyModuleIpDirectRequest 请求参数}): {@link ModifyModuleIpDirectResponse 返回参数} */
   ModifyModuleIpDirect(data: ModifyModuleIpDirectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleIpDirectResponse>;
-  /** 修改模块名称 */
+  /** {@link ModifyModuleName 修改模块名称}({@link ModifyModuleNameRequest 请求参数}): {@link ModifyModuleNameResponse 返回参数} */
   ModifyModuleName(data: ModifyModuleNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleNameResponse>;
-  /** 修改模块默认带宽上限 */
+  /** {@link ModifyModuleNetwork 修改模块默认带宽上限}({@link ModifyModuleNetworkRequest 请求参数}): {@link ModifyModuleNetworkResponse 返回参数} */
   ModifyModuleNetwork(data: ModifyModuleNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleNetworkResponse>;
-  /** 修改模块默认安全组 */
+  /** {@link ModifyModuleSecurityGroups 修改模块默认安全组}({@link ModifyModuleSecurityGroupsRequest 请求参数}): {@link ModifyModuleSecurityGroupsResponse 返回参数} */
   ModifyModuleSecurityGroups(data: ModifyModuleSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleSecurityGroupsResponse>;
-  /** 修改弹性网卡内网IP信息 */
+  /** {@link ModifyPrivateIpAddressesAttribute 修改弹性网卡内网IP信息}({@link ModifyPrivateIpAddressesAttributeRequest 请求参数}): {@link ModifyPrivateIpAddressesAttributeResponse 返回参数} */
   ModifyPrivateIpAddressesAttribute(data: ModifyPrivateIpAddressesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateIpAddressesAttributeResponse>;
-  /** 修改路由表属性 */
+  /** {@link ModifyRouteTableAttribute 修改路由表属性}({@link ModifyRouteTableAttributeRequest 请求参数}): {@link ModifyRouteTableAttributeResponse 返回参数} */
   ModifyRouteTableAttribute(data: ModifyRouteTableAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRouteTableAttributeResponse>;
-  /** 修改安全组属性 */
+  /** {@link ModifySecurityGroupAttribute 修改安全组属性}({@link ModifySecurityGroupAttributeRequest 请求参数}): {@link ModifySecurityGroupAttributeResponse 返回参数} */
   ModifySecurityGroupAttribute(data: ModifySecurityGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityGroupAttributeResponse>;
-  /** 修改安全组出站和入站规则 */
+  /** {@link ModifySecurityGroupPolicies 修改安全组出站和入站规则}({@link ModifySecurityGroupPoliciesRequest 请求参数}): {@link ModifySecurityGroupPoliciesResponse 返回参数} */
   ModifySecurityGroupPolicies(data: ModifySecurityGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityGroupPoliciesResponse>;
-  /** 修改子网属性 */
+  /** {@link ModifySubnetAttribute 修改子网属性}({@link ModifySubnetAttributeRequest 请求参数}): {@link ModifySubnetAttributeResponse 返回参数} */
   ModifySubnetAttribute(data: ModifySubnetAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubnetAttributeResponse>;
-  /** 修改监听器绑定的后端机器的端口 */
+  /** {@link ModifyTargetPort 修改监听器绑定的后端机器的端口}({@link ModifyTargetPortRequest 请求参数}): {@link ModifyTargetPortResponse 返回参数} */
   ModifyTargetPort(data: ModifyTargetPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetPortResponse>;
-  /** 修改监听器绑定的后端机器的转发权重 */
+  /** {@link ModifyTargetWeight 修改监听器绑定的后端机器的转发权重}({@link ModifyTargetWeightRequest 请求参数}): {@link ModifyTargetWeightResponse 返回参数} */
   ModifyTargetWeight(data: ModifyTargetWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetWeightResponse>;
-  /** 修改VPC属性 */
+  /** {@link ModifyVpcAttribute 修改VPC属性}({@link ModifyVpcAttributeRequest 请求参数}): {@link ModifyVpcAttributeResponse 返回参数} */
   ModifyVpcAttribute(data: ModifyVpcAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcAttributeResponse>;
-  /** 重启实例 */
+  /** {@link RebootInstances 重启实例}({@link RebootInstancesRequest 请求参数}): {@link RebootInstancesResponse 返回参数} */
   RebootInstances(data: RebootInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootInstancesResponse>;
-  /** 释放弹性公网IP */
+  /** {@link ReleaseAddresses 释放弹性公网IP}({@link ReleaseAddressesRequest 请求参数}): {@link ReleaseAddressesResponse 返回参数} */
   ReleaseAddresses(data: ReleaseAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseAddressesResponse>;
-  /** 释放IPv6地址 */
+  /** {@link ReleaseIpv6Addresses 释放IPv6地址}({@link ReleaseIpv6AddressesRequest 请求参数}): {@link ReleaseIpv6AddressesResponse 返回参数} */
   ReleaseIpv6Addresses(data: ReleaseIpv6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseIpv6AddressesResponse>;
-  /** 弹性网卡退还内网 IP */
+  /** {@link RemovePrivateIpAddresses 弹性网卡退还内网 IP}({@link RemovePrivateIpAddressesRequest 请求参数}): {@link RemovePrivateIpAddressesResponse 返回参数} */
   RemovePrivateIpAddresses(data: RemovePrivateIpAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<RemovePrivateIpAddressesResponse>;
-  /** 替换路由表绑定关系 */
+  /** {@link ReplaceRouteTableAssociation 替换路由表绑定关系}({@link ReplaceRouteTableAssociationRequest 请求参数}): {@link ReplaceRouteTableAssociationResponse 返回参数} */
   ReplaceRouteTableAssociation(data: ReplaceRouteTableAssociationRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceRouteTableAssociationResponse>;
-  /** 替换路由策略 */
+  /** {@link ReplaceRoutes 替换路由策略}({@link ReplaceRoutesRequest 请求参数}): {@link ReplaceRoutesResponse 返回参数} */
   ReplaceRoutes(data: ReplaceRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceRoutesResponse>;
-  /** 替换单条安全组路由规则 */
+  /** {@link ReplaceSecurityGroupPolicy 替换单条安全组路由规则}({@link ReplaceSecurityGroupPolicyRequest 请求参数}): {@link ReplaceSecurityGroupPolicyResponse 返回参数} */
   ReplaceSecurityGroupPolicy(data: ReplaceSecurityGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceSecurityGroupPolicyResponse>;
-  /** 重装实例 */
+  /** {@link ResetInstances 重装实例}({@link ResetInstancesRequest 请求参数}): {@link ResetInstancesResponse 返回参数} */
   ResetInstances(data: ResetInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstancesResponse>;
-  /** 重置实例的最大带宽上限 */
+  /** {@link ResetInstancesMaxBandwidth 重置实例的最大带宽上限}({@link ResetInstancesMaxBandwidthRequest 请求参数}): {@link ResetInstancesMaxBandwidthResponse 返回参数} */
   ResetInstancesMaxBandwidth(data: ResetInstancesMaxBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstancesMaxBandwidthResponse>;
-  /** 重置实例密码 */
+  /** {@link ResetInstancesPassword 重置实例密码}({@link ResetInstancesPasswordRequest 请求参数}): {@link ResetInstancesPasswordResponse 返回参数} */
   ResetInstancesPassword(data: ResetInstancesPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstancesPasswordResponse>;
-  /** 重置路由表名称和路由策略 */
+  /** {@link ResetRoutes 重置路由表名称和路由策略}({@link ResetRoutesRequest 请求参数}): {@link ResetRoutesResponse 返回参数} */
   ResetRoutes(data: ResetRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ResetRoutesResponse>;
-  /** 创建实例 */
+  /** {@link RunInstances 创建实例}({@link RunInstancesRequest 请求参数}): {@link RunInstancesResponse 返回参数} */
   RunInstances(data: RunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RunInstancesResponse>;
-  /** 设置负载均衡实例的安全组 */
+  /** {@link SetLoadBalancerSecurityGroups 设置负载均衡实例的安全组}({@link SetLoadBalancerSecurityGroupsRequest 请求参数}): {@link SetLoadBalancerSecurityGroupsResponse 返回参数} */
   SetLoadBalancerSecurityGroups(data: SetLoadBalancerSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<SetLoadBalancerSecurityGroupsResponse>;
-  /** 绑定或解绑一个安全组到多个负载均衡实例 */
+  /** {@link SetSecurityGroupForLoadbalancers 绑定或解绑一个安全组到多个负载均衡实例}({@link SetSecurityGroupForLoadbalancersRequest 请求参数}): {@link SetSecurityGroupForLoadbalancersResponse 返回参数} */
   SetSecurityGroupForLoadbalancers(data: SetSecurityGroupForLoadbalancersRequest, config?: AxiosRequestConfig): AxiosPromise<SetSecurityGroupForLoadbalancersResponse>;
-  /** 开启实例 */
+  /** {@link StartInstances 开启实例}({@link StartInstancesRequest 请求参数}): {@link StartInstancesResponse 返回参数} */
   StartInstances(data: StartInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StartInstancesResponse>;
-  /** 实例关机 */
+  /** {@link StopInstances 实例关机}({@link StopInstancesRequest 请求参数}): {@link StopInstancesResponse 返回参数} */
   StopInstances(data: StopInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstancesResponse>;
-  /** 退还云硬盘 */
+  /** {@link TerminateDisks 退还云硬盘}({@link TerminateDisksRequest 请求参数}): {@link TerminateDisksResponse 返回参数} */
   TerminateDisks(data: TerminateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDisksResponse>;
-  /** 销毁实例 */
+  /** {@link TerminateInstances 销毁实例}({@link TerminateInstancesRequest 请求参数}): {@link TerminateInstancesResponse 返回参数} */
   TerminateInstances(data: TerminateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstancesResponse>;
 }
 

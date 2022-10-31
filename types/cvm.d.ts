@@ -2593,182 +2593,182 @@ declare interface TerminateInstancesResponse {
   RequestId?: string;
 }
 
-/** [云服务器](https://cloud.tencent.com/document/product/213) */
+/** {@link Cvm 云服务器} */
 declare interface Cvm {
   (): Versions;
-  /** 创建CDH实例 */
+  /** {@link AllocateHosts 创建CDH实例}({@link AllocateHostsRequest 请求参数}): {@link AllocateHostsResponse 返回参数} */
   AllocateHosts(data: AllocateHostsRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateHostsResponse>;
-  /** 绑定密钥对 */
+  /** {@link AssociateInstancesKeyPairs 绑定密钥对}({@link AssociateInstancesKeyPairsRequest 请求参数}): {@link AssociateInstancesKeyPairsResponse 返回参数} */
   AssociateInstancesKeyPairs(data: AssociateInstancesKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateInstancesKeyPairsResponse>;
-  /** 绑定安全组 */
+  /** {@link AssociateSecurityGroups 绑定安全组}({@link AssociateSecurityGroupsRequest 请求参数}): {@link AssociateSecurityGroupsResponse 返回参数} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
-  /** 配置CHC物理服务器的带外和部署网络 */
+  /** {@link ConfigureChcAssistVpc 配置CHC物理服务器的带外和部署网络}({@link ConfigureChcAssistVpcRequest 请求参数}): {@link ConfigureChcAssistVpcResponse 返回参数} */
   ConfigureChcAssistVpc(data: ConfigureChcAssistVpcRequest, config?: AxiosRequestConfig): AxiosPromise<ConfigureChcAssistVpcResponse>;
-  /** 配置CHC物理服务器部署网络 */
+  /** {@link ConfigureChcDeployVpc 配置CHC物理服务器部署网络}({@link ConfigureChcDeployVpcRequest 请求参数}): {@link ConfigureChcDeployVpcResponse 返回参数} */
   ConfigureChcDeployVpc(data: ConfigureChcDeployVpcRequest, config?: AxiosRequestConfig): AxiosPromise<ConfigureChcDeployVpcResponse>;
-  /** 创建分散置放群组 */
+  /** {@link CreateDisasterRecoverGroup 创建分散置放群组}({@link CreateDisasterRecoverGroupRequest 请求参数}): {@link CreateDisasterRecoverGroupResponse 返回参数} */
   CreateDisasterRecoverGroup(data: CreateDisasterRecoverGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDisasterRecoverGroupResponse>;
-  /** 创建镜像 */
+  /** {@link CreateImage 创建镜像}({@link CreateImageRequest 请求参数}): {@link CreateImageResponse 返回参数} */
   CreateImage(data: CreateImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageResponse>;
-  /** 创建密钥对 */
+  /** {@link CreateKeyPair 创建密钥对}({@link CreateKeyPairRequest 请求参数}): {@link CreateKeyPairResponse 返回参数} */
   CreateKeyPair(data: CreateKeyPairRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKeyPairResponse>;
-  /** 创建实例启动模板 */
+  /** {@link CreateLaunchTemplate 创建实例启动模板}({@link CreateLaunchTemplateRequest 请求参数}): {@link CreateLaunchTemplateResponse 返回参数} */
   CreateLaunchTemplate(data: CreateLaunchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLaunchTemplateResponse>;
-  /** 创建实例启动模板新版本 */
+  /** {@link CreateLaunchTemplateVersion 创建实例启动模板新版本}({@link CreateLaunchTemplateVersionRequest 请求参数}): {@link CreateLaunchTemplateVersionResponse 返回参数} */
   CreateLaunchTemplateVersion(data: CreateLaunchTemplateVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLaunchTemplateVersionResponse>;
-  /** 删除分散置放群组 */
+  /** {@link DeleteDisasterRecoverGroups 删除分散置放群组}({@link DeleteDisasterRecoverGroupsRequest 请求参数}): {@link DeleteDisasterRecoverGroupsResponse 返回参数} */
   DeleteDisasterRecoverGroups(data: DeleteDisasterRecoverGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDisasterRecoverGroupsResponse>;
-  /** 删除镜像 */
+  /** {@link DeleteImages 删除镜像}({@link DeleteImagesRequest 请求参数}): {@link DeleteImagesResponse 返回参数} */
   DeleteImages(data: DeleteImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImagesResponse>;
-  /** 删除密钥对 */
+  /** {@link DeleteKeyPairs 删除密钥对}({@link DeleteKeyPairsRequest 请求参数}): {@link DeleteKeyPairsResponse 返回参数} */
   DeleteKeyPairs(data: DeleteKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKeyPairsResponse>;
-  /** 删除实例启动模板 */
+  /** {@link DeleteLaunchTemplate 删除实例启动模板}({@link DeleteLaunchTemplateRequest 请求参数}): {@link DeleteLaunchTemplateResponse 返回参数} */
   DeleteLaunchTemplate(data: DeleteLaunchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLaunchTemplateResponse>;
-  /** 删除实例启动模板版本 */
+  /** {@link DeleteLaunchTemplateVersions 删除实例启动模板版本}({@link DeleteLaunchTemplateVersionsRequest 请求参数}): {@link DeleteLaunchTemplateVersionsResponse 返回参数} */
   DeleteLaunchTemplateVersions(data: DeleteLaunchTemplateVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLaunchTemplateVersionsResponse>;
-  /** 查询用户配额详情 */
+  /** {@link DescribeAccountQuota 查询用户配额详情}({@link DescribeAccountQuotaRequest 请求参数}): {@link DescribeAccountQuotaResponse 返回参数} */
   DescribeAccountQuota(data?: DescribeAccountQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountQuotaResponse>;
-  /** 查询CHC物理服务器禁止做的操作 */
+  /** {@link DescribeChcDeniedActions 查询CHC物理服务器禁止做的操作}({@link DescribeChcDeniedActionsRequest 请求参数}): {@link DescribeChcDeniedActionsResponse 返回参数} */
   DescribeChcDeniedActions(data: DescribeChcDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChcDeniedActionsResponse>;
-  /** 查询CHC物理服务器 */
+  /** {@link DescribeChcHosts 查询CHC物理服务器}({@link DescribeChcHostsRequest 请求参数}): {@link DescribeChcHostsResponse 返回参数} */
   DescribeChcHosts(data?: DescribeChcHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChcHostsResponse>;
-  /** 查询置放群组配额 */
+  /** {@link DescribeDisasterRecoverGroupQuota 查询置放群组配额}({@link DescribeDisasterRecoverGroupQuotaRequest 请求参数}): {@link DescribeDisasterRecoverGroupQuotaResponse 返回参数} */
   DescribeDisasterRecoverGroupQuota(data?: DescribeDisasterRecoverGroupQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisasterRecoverGroupQuotaResponse>;
-  /** 查询分散置放群组信息 */
+  /** {@link DescribeDisasterRecoverGroups 查询分散置放群组信息}({@link DescribeDisasterRecoverGroupsRequest 请求参数}): {@link DescribeDisasterRecoverGroupsResponse 返回参数} */
   DescribeDisasterRecoverGroups(data?: DescribeDisasterRecoverGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisasterRecoverGroupsResponse>;
-  /** 查看CDH实例列表 */
+  /** {@link DescribeHosts 查看CDH实例列表}({@link DescribeHostsRequest 请求参数}): {@link DescribeHostsResponse 返回参数} */
   DescribeHosts(data?: DescribeHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostsResponse>;
-  /** 查询镜像配额上限 */
+  /** {@link DescribeImageQuota 查询镜像配额上限}({@link DescribeImageQuotaRequest 请求参数}): {@link DescribeImageQuotaResponse 返回参数} */
   DescribeImageQuota(data?: DescribeImageQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageQuotaResponse>;
-  /** 查看镜像分享信息 */
+  /** {@link DescribeImageSharePermission 查看镜像分享信息}({@link DescribeImageSharePermissionRequest 请求参数}): {@link DescribeImageSharePermissionResponse 返回参数} */
   DescribeImageSharePermission(data: DescribeImageSharePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSharePermissionResponse>;
-  /** 查看镜像列表 */
+  /** {@link DescribeImages 查看镜像列表}({@link DescribeImagesRequest 请求参数}): {@link DescribeImagesResponse 返回参数} */
   DescribeImages(data?: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
-  /** 查询外部导入镜像支持的OS列表 */
+  /** {@link DescribeImportImageOs 查询外部导入镜像支持的OS列表}({@link DescribeImportImageOsRequest 请求参数}): {@link DescribeImportImageOsResponse 返回参数} */
   DescribeImportImageOs(data?: DescribeImportImageOsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImportImageOsResponse>;
-  /** 查询所支持的实例机型族信息 */
+  /** {@link DescribeInstanceFamilyConfigs 查询所支持的实例机型族信息}({@link DescribeInstanceFamilyConfigsRequest 请求参数}): {@link DescribeInstanceFamilyConfigsResponse 返回参数} */
   DescribeInstanceFamilyConfigs(data?: DescribeInstanceFamilyConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceFamilyConfigsResponse>;
-  /** 查询实例带宽配置 */
+  /** {@link DescribeInstanceInternetBandwidthConfigs 查询实例带宽配置}({@link DescribeInstanceInternetBandwidthConfigsRequest 请求参数}): {@link DescribeInstanceInternetBandwidthConfigsResponse 返回参数} */
   DescribeInstanceInternetBandwidthConfigs(data: DescribeInstanceInternetBandwidthConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceInternetBandwidthConfigsResponse>;
-  /** 查询实例机型列表 */
+  /** {@link DescribeInstanceTypeConfigs 查询实例机型列表}({@link DescribeInstanceTypeConfigsRequest 请求参数}): {@link DescribeInstanceTypeConfigsResponse 返回参数} */
   DescribeInstanceTypeConfigs(data?: DescribeInstanceTypeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceTypeConfigsResponse>;
-  /** 查询实例管理终端地址 */
+  /** {@link DescribeInstanceVncUrl 查询实例管理终端地址}({@link DescribeInstanceVncUrlRequest 请求参数}): {@link DescribeInstanceVncUrlResponse 返回参数} */
   DescribeInstanceVncUrl(data: DescribeInstanceVncUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceVncUrlResponse>;
-  /** 查看实例列表 */
+  /** {@link DescribeInstances 查看实例列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** 查询实例可调整配置 */
+  /** {@link DescribeInstancesModification 查询实例可调整配置}({@link DescribeInstancesModificationRequest 请求参数}): {@link DescribeInstancesModificationResponse 返回参数} */
   DescribeInstancesModification(data: DescribeInstancesModificationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesModificationResponse>;
-  /** 查询实例操作限制 */
+  /** {@link DescribeInstancesOperationLimit 查询实例操作限制}({@link DescribeInstancesOperationLimitRequest 请求参数}): {@link DescribeInstancesOperationLimitResponse 返回参数} */
   DescribeInstancesOperationLimit(data: DescribeInstancesOperationLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesOperationLimitResponse>;
-  /** 查看实例状态列表 */
+  /** {@link DescribeInstancesStatus 查看实例状态列表}({@link DescribeInstancesStatusRequest 请求参数}): {@link DescribeInstancesStatusResponse 返回参数} */
   DescribeInstancesStatus(data?: DescribeInstancesStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesStatusResponse>;
-  /** 查询网络计费类型 */
+  /** {@link DescribeInternetChargeTypeConfigs 查询网络计费类型}({@link DescribeInternetChargeTypeConfigsRequest 请求参数}): {@link DescribeInternetChargeTypeConfigsResponse 返回参数} */
   DescribeInternetChargeTypeConfigs(data?: DescribeInternetChargeTypeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInternetChargeTypeConfigsResponse>;
-  /** 查询密钥对列表 */
+  /** {@link DescribeKeyPairs 查询密钥对列表}({@link DescribeKeyPairsRequest 请求参数}): {@link DescribeKeyPairsResponse 返回参数} */
   DescribeKeyPairs(data?: DescribeKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeyPairsResponse>;
-  /** 查询实例模板版本信息 */
+  /** {@link DescribeLaunchTemplateVersions 查询实例模板版本信息}({@link DescribeLaunchTemplateVersionsRequest 请求参数}): {@link DescribeLaunchTemplateVersionsResponse 返回参数} */
   DescribeLaunchTemplateVersions(data: DescribeLaunchTemplateVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaunchTemplateVersionsResponse>;
-  /** 查询实例启动模板 */
+  /** {@link DescribeLaunchTemplates 查询实例启动模板}({@link DescribeLaunchTemplatesRequest 请求参数}): {@link DescribeLaunchTemplatesResponse 返回参数} */
   DescribeLaunchTemplates(data?: DescribeLaunchTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaunchTemplatesResponse>;
-  /** 查询地域列表 */
+  /** {@link DescribeRegions 查询地域列表}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** 列出已购买的预留实例 */
+  /** {@link DescribeReservedInstances 列出已购买的预留实例}({@link DescribeReservedInstancesRequest 请求参数}): {@link DescribeReservedInstancesResponse 返回参数} */
   DescribeReservedInstances(data?: DescribeReservedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesResponse>;
-  /** 查询预留实例机型配置 */
+  /** {@link DescribeReservedInstancesConfigInfos 查询预留实例机型配置}({@link DescribeReservedInstancesConfigInfosRequest 请求参数}): {@link DescribeReservedInstancesConfigInfosResponse 返回参数} */
   DescribeReservedInstancesConfigInfos(data?: DescribeReservedInstancesConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesConfigInfosResponse>;
-  /** 列出可购买的预留实例配置 */
+  /** {@link DescribeReservedInstancesOfferings 列出可购买的预留实例配置}({@link DescribeReservedInstancesOfferingsRequest 请求参数}): {@link DescribeReservedInstancesOfferingsResponse 返回参数} */
   DescribeReservedInstancesOfferings(data?: DescribeReservedInstancesOfferingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesOfferingsResponse>;
-  /** 获取可用区机型配置信息 */
+  /** {@link DescribeZoneInstanceConfigInfos 获取可用区机型配置信息}({@link DescribeZoneInstanceConfigInfosRequest 请求参数}): {@link DescribeZoneInstanceConfigInfosResponse 返回参数} */
   DescribeZoneInstanceConfigInfos(data?: DescribeZoneInstanceConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneInstanceConfigInfosResponse>;
-  /** 查询可用区列表 */
+  /** {@link DescribeZones 查询可用区列表}({@link DescribeZonesRequest 请求参数}): {@link DescribeZonesResponse 返回参数} */
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
-  /** 解绑密钥对 */
+  /** {@link DisassociateInstancesKeyPairs 解绑密钥对}({@link DisassociateInstancesKeyPairsRequest 请求参数}): {@link DisassociateInstancesKeyPairsResponse 返回参数} */
   DisassociateInstancesKeyPairs(data: DisassociateInstancesKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateInstancesKeyPairsResponse>;
-  /** 解绑安全组 */
+  /** {@link DisassociateSecurityGroups 解绑安全组}({@link DisassociateSecurityGroupsRequest 请求参数}): {@link DisassociateSecurityGroupsResponse 返回参数} */
   DisassociateSecurityGroups(data: DisassociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupsResponse>;
-  /** 导出自定义镜像 */
+  /** {@link ExportImages 导出自定义镜像}({@link ExportImagesRequest 请求参数}): {@link ExportImagesResponse 返回参数} */
   ExportImages(data: ExportImagesRequest, config?: AxiosRequestConfig): AxiosPromise<ExportImagesResponse>;
-  /** 外部镜像导入 */
+  /** {@link ImportImage 外部镜像导入}({@link ImportImageRequest 请求参数}): {@link ImportImageResponse 返回参数} */
   ImportImage(data: ImportImageRequest, config?: AxiosRequestConfig): AxiosPromise<ImportImageResponse>;
-  /** 导入密钥对 */
+  /** {@link ImportKeyPair 导入密钥对}({@link ImportKeyPairRequest 请求参数}): {@link ImportKeyPairResponse 返回参数} */
   ImportKeyPair(data: ImportKeyPairRequest, config?: AxiosRequestConfig): AxiosPromise<ImportKeyPairResponse>;
-  /** 创建预留实例询价 */
+  /** {@link InquirePricePurchaseReservedInstancesOffering 创建预留实例询价}({@link InquirePricePurchaseReservedInstancesOfferingRequest 请求参数}): {@link InquirePricePurchaseReservedInstancesOfferingResponse 返回参数} */
   InquirePricePurchaseReservedInstancesOffering(data: InquirePricePurchaseReservedInstancesOfferingRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePricePurchaseReservedInstancesOfferingResponse>;
-  /** 修改实例计费模式询价 */
+  /** {@link InquiryPriceModifyInstancesChargeType 修改实例计费模式询价}({@link InquiryPriceModifyInstancesChargeTypeRequest 请求参数}): {@link InquiryPriceModifyInstancesChargeTypeResponse 返回参数} */
   InquiryPriceModifyInstancesChargeType(data: InquiryPriceModifyInstancesChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceModifyInstancesChargeTypeResponse>;
-  /** 续费实例询价 */
+  /** {@link InquiryPriceRenewInstances 续费实例询价}({@link InquiryPriceRenewInstancesRequest 请求参数}): {@link InquiryPriceRenewInstancesResponse 返回参数} */
   InquiryPriceRenewInstances(data: InquiryPriceRenewInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewInstancesResponse>;
-  /** 重装实例询价 */
+  /** {@link InquiryPriceResetInstance 重装实例询价}({@link InquiryPriceResetInstanceRequest 请求参数}): {@link InquiryPriceResetInstanceResponse 返回参数} */
   InquiryPriceResetInstance(data: InquiryPriceResetInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceResetInstanceResponse>;
-  /** 调整实例带宽上限询价 */
+  /** {@link InquiryPriceResetInstancesInternetMaxBandwidth 调整实例带宽上限询价}({@link InquiryPriceResetInstancesInternetMaxBandwidthRequest 请求参数}): {@link InquiryPriceResetInstancesInternetMaxBandwidthResponse 返回参数} */
   InquiryPriceResetInstancesInternetMaxBandwidth(data: InquiryPriceResetInstancesInternetMaxBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceResetInstancesInternetMaxBandwidthResponse>;
-  /** 调整实例配置询价 */
+  /** {@link InquiryPriceResetInstancesType 调整实例配置询价}({@link InquiryPriceResetInstancesTypeRequest 请求参数}): {@link InquiryPriceResetInstancesTypeResponse 返回参数} */
   InquiryPriceResetInstancesType(data: InquiryPriceResetInstancesTypeRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceResetInstancesTypeResponse>;
-  /** 扩容实例磁盘询价 */
+  /** {@link InquiryPriceResizeInstanceDisks 扩容实例磁盘询价}({@link InquiryPriceResizeInstanceDisksRequest 请求参数}): {@link InquiryPriceResizeInstanceDisksResponse 返回参数} */
   InquiryPriceResizeInstanceDisks(data: InquiryPriceResizeInstanceDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceResizeInstanceDisksResponse>;
-  /** 创建实例询价 */
+  /** {@link InquiryPriceRunInstances 创建实例询价}({@link InquiryPriceRunInstancesRequest 请求参数}): {@link InquiryPriceRunInstancesResponse 返回参数} */
   InquiryPriceRunInstances(data: InquiryPriceRunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRunInstancesResponse>;
-  /** 退还实例询价 */
+  /** {@link InquiryPriceTerminateInstances 退还实例询价}({@link InquiryPriceTerminateInstancesRequest 请求参数}): {@link InquiryPriceTerminateInstancesResponse 返回参数} */
   InquiryPriceTerminateInstances(data: InquiryPriceTerminateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceTerminateInstancesResponse>;
-  /** 修改CHC物理服务器的属性 */
+  /** {@link ModifyChcAttribute 修改CHC物理服务器的属性}({@link ModifyChcAttributeRequest 请求参数}): {@link ModifyChcAttributeResponse 返回参数} */
   ModifyChcAttribute(data: ModifyChcAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyChcAttributeResponse>;
-  /** 修改分散置放群组属性 */
+  /** {@link ModifyDisasterRecoverGroupAttribute 修改分散置放群组属性}({@link ModifyDisasterRecoverGroupAttributeRequest 请求参数}): {@link ModifyDisasterRecoverGroupAttributeResponse 返回参数} */
   ModifyDisasterRecoverGroupAttribute(data: ModifyDisasterRecoverGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisasterRecoverGroupAttributeResponse>;
-  /** 修改CDH实例的属性 */
+  /** {@link ModifyHostsAttribute 修改CDH实例的属性}({@link ModifyHostsAttributeRequest 请求参数}): {@link ModifyHostsAttributeResponse 返回参数} */
   ModifyHostsAttribute(data: ModifyHostsAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostsAttributeResponse>;
-  /** 修改镜像属性 */
+  /** {@link ModifyImageAttribute 修改镜像属性}({@link ModifyImageAttributeRequest 请求参数}): {@link ModifyImageAttributeResponse 返回参数} */
   ModifyImageAttribute(data: ModifyImageAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageAttributeResponse>;
-  /** 修改镜像分享信息 */
+  /** {@link ModifyImageSharePermission 修改镜像分享信息}({@link ModifyImageSharePermissionRequest 请求参数}): {@link ModifyImageSharePermissionResponse 返回参数} */
   ModifyImageSharePermission(data: ModifyImageSharePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageSharePermissionResponse>;
-  /** 修改实例的硬盘介质 */
+  /** {@link ModifyInstanceDiskType 修改实例的硬盘介质}({@link ModifyInstanceDiskTypeRequest 请求参数}): {@link ModifyInstanceDiskTypeResponse 返回参数} */
   ModifyInstanceDiskType(data: ModifyInstanceDiskTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceDiskTypeResponse>;
-  /** 修改实例的属性 */
+  /** {@link ModifyInstancesAttribute 修改实例的属性}({@link ModifyInstancesAttributeRequest 请求参数}): {@link ModifyInstancesAttributeResponse 返回参数} */
   ModifyInstancesAttribute(data: ModifyInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesAttributeResponse>;
-  /** 修改实例计费模式 */
+  /** {@link ModifyInstancesChargeType 修改实例计费模式}({@link ModifyInstancesChargeTypeRequest 请求参数}): {@link ModifyInstancesChargeTypeResponse 返回参数} */
   ModifyInstancesChargeType(data: ModifyInstancesChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesChargeTypeResponse>;
-  /** 修改实例所属项目 */
+  /** {@link ModifyInstancesProject 修改实例所属项目}({@link ModifyInstancesProjectRequest 请求参数}): {@link ModifyInstancesProjectResponse 返回参数} */
   ModifyInstancesProject(data: ModifyInstancesProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesProjectResponse>;
-  /** 修改实例续费标识 */
+  /** {@link ModifyInstancesRenewFlag 修改实例续费标识}({@link ModifyInstancesRenewFlagRequest 请求参数}): {@link ModifyInstancesRenewFlagResponse 返回参数} */
   ModifyInstancesRenewFlag(data: ModifyInstancesRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesRenewFlagResponse>;
-  /** 修改实例vpc属性 */
+  /** {@link ModifyInstancesVpcAttribute 修改实例vpc属性}({@link ModifyInstancesVpcAttributeRequest 请求参数}): {@link ModifyInstancesVpcAttributeResponse 返回参数} */
   ModifyInstancesVpcAttribute(data: ModifyInstancesVpcAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesVpcAttributeResponse>;
-  /** 修改密钥对属性 */
+  /** {@link ModifyKeyPairAttribute 修改密钥对属性}({@link ModifyKeyPairAttributeRequest 请求参数}): {@link ModifyKeyPairAttributeResponse 返回参数} */
   ModifyKeyPairAttribute(data: ModifyKeyPairAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKeyPairAttributeResponse>;
-  /** 修改实例启动模板默认版本 */
+  /** {@link ModifyLaunchTemplateDefaultVersion 修改实例启动模板默认版本}({@link ModifyLaunchTemplateDefaultVersionRequest 请求参数}): {@link ModifyLaunchTemplateDefaultVersionResponse 返回参数} */
   ModifyLaunchTemplateDefaultVersion(data: ModifyLaunchTemplateDefaultVersionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLaunchTemplateDefaultVersionResponse>;
-  /** 在线烧录FPGA镜像 */
+  /** {@link ProgramFpgaImage 在线烧录FPGA镜像}({@link ProgramFpgaImageRequest 请求参数}): {@link ProgramFpgaImageResponse 返回参数} */
   ProgramFpgaImage(data: ProgramFpgaImageRequest, config?: AxiosRequestConfig): AxiosPromise<ProgramFpgaImageResponse>;
-  /** 购买预留实例 */
+  /** {@link PurchaseReservedInstancesOffering 购买预留实例}({@link PurchaseReservedInstancesOfferingRequest 请求参数}): {@link PurchaseReservedInstancesOfferingResponse 返回参数} */
   PurchaseReservedInstancesOffering(data: PurchaseReservedInstancesOfferingRequest, config?: AxiosRequestConfig): AxiosPromise<PurchaseReservedInstancesOfferingResponse>;
-  /** 重启实例 */
+  /** {@link RebootInstances 重启实例}({@link RebootInstancesRequest 请求参数}): {@link RebootInstancesResponse 返回参数} */
   RebootInstances(data: RebootInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootInstancesResponse>;
-  /** 清理CHC物理服务器的带外网络和部署网络 */
+  /** {@link RemoveChcAssistVpc 清理CHC物理服务器的带外网络和部署网络}({@link RemoveChcAssistVpcRequest 请求参数}): {@link RemoveChcAssistVpcResponse 返回参数} */
   RemoveChcAssistVpc(data: RemoveChcAssistVpcRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveChcAssistVpcResponse>;
-  /** 清理CHC物理服务器的部署网络 */
+  /** {@link RemoveChcDeployVpc 清理CHC物理服务器的部署网络}({@link RemoveChcDeployVpcRequest 请求参数}): {@link RemoveChcDeployVpcResponse 返回参数} */
   RemoveChcDeployVpc(data: RemoveChcDeployVpcRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveChcDeployVpcResponse>;
-  /** 续费CDH实例 */
+  /** {@link RenewHosts 续费CDH实例}({@link RenewHostsRequest 请求参数}): {@link RenewHostsResponse 返回参数} */
   RenewHosts(data: RenewHostsRequest, config?: AxiosRequestConfig): AxiosPromise<RenewHostsResponse>;
-  /** 续费实例 */
+  /** {@link RenewInstances 续费实例}({@link RenewInstancesRequest 请求参数}): {@link RenewInstancesResponse 返回参数} */
   RenewInstances(data: RenewInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RenewInstancesResponse>;
-  /** 重装实例 */
+  /** {@link ResetInstance 重装实例}({@link ResetInstanceRequest 请求参数}): {@link ResetInstanceResponse 返回参数} */
   ResetInstance(data: ResetInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstanceResponse>;
-  /** 调整实例带宽上限 */
+  /** {@link ResetInstancesInternetMaxBandwidth 调整实例带宽上限}({@link ResetInstancesInternetMaxBandwidthRequest 请求参数}): {@link ResetInstancesInternetMaxBandwidthResponse 返回参数} */
   ResetInstancesInternetMaxBandwidth(data: ResetInstancesInternetMaxBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstancesInternetMaxBandwidthResponse>;
-  /** 重置实例密码 */
+  /** {@link ResetInstancesPassword 重置实例密码}({@link ResetInstancesPasswordRequest 请求参数}): {@link ResetInstancesPasswordResponse 返回参数} */
   ResetInstancesPassword(data: ResetInstancesPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstancesPasswordResponse>;
-  /** 调整实例配置 */
+  /** {@link ResetInstancesType 调整实例配置}({@link ResetInstancesTypeRequest 请求参数}): {@link ResetInstancesTypeResponse 返回参数} */
   ResetInstancesType(data: ResetInstancesTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstancesTypeResponse>;
-  /** 扩容实例磁盘 */
+  /** {@link ResizeInstanceDisks 扩容实例磁盘}({@link ResizeInstanceDisksRequest 请求参数}): {@link ResizeInstanceDisksResponse 返回参数} */
   ResizeInstanceDisks(data: ResizeInstanceDisksRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeInstanceDisksResponse>;
-  /** 创建实例 */
+  /** {@link RunInstances 创建实例}({@link RunInstancesRequest 请求参数}): {@link RunInstancesResponse 返回参数} */
   RunInstances(data?: RunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RunInstancesResponse>;
-  /** 启动实例 */
+  /** {@link StartInstances 启动实例}({@link StartInstancesRequest 请求参数}): {@link StartInstancesResponse 返回参数} */
   StartInstances(data: StartInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StartInstancesResponse>;
-  /** 关闭实例 */
+  /** {@link StopInstances 关闭实例}({@link StopInstancesRequest 请求参数}): {@link StopInstancesResponse 返回参数} */
   StopInstances(data: StopInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstancesResponse>;
-  /** 同步镜像 */
+  /** {@link SyncImages 同步镜像}({@link SyncImagesRequest 请求参数}): {@link SyncImagesResponse 返回参数} */
   SyncImages(data: SyncImagesRequest, config?: AxiosRequestConfig): AxiosPromise<SyncImagesResponse>;
-  /** 退还实例 */
+  /** {@link TerminateInstances 退还实例}({@link TerminateInstancesRequest 请求参数}): {@link TerminateInstancesResponse 返回参数} */
   TerminateInstances(data: TerminateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstancesResponse>;
 }
 

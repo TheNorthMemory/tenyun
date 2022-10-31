@@ -10672,436 +10672,436 @@ declare interface WithdrawCashMembershipResponse {
   RequestId?: string;
 }
 
-/** [企业收付平台](https://cloud.tencent.com/document/product/1122) */
+/** {@link Cpdp 企业收付平台} */
 declare interface Cpdp {
   (): Versions;
-  /** 云支付-添加合同接口 */
+  /** {@link AddContract 云支付-添加合同接口}({@link AddContractRequest 请求参数}): {@link AddContractResponse 返回参数} */
   AddContract(data: AddContractRequest, config?: AxiosRequestConfig): AxiosPromise<AddContractResponse>;
-  /** 灵云V2-补充证件信息 */
+  /** {@link AddFlexIdInfo 灵云V2-补充证件信息}({@link AddFlexIdInfoRequest 请求参数}): {@link AddFlexIdInfoResponse 返回参数} */
   AddFlexIdInfo(data: AddFlexIdInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddFlexIdInfoResponse>;
-  /** 灵云V2-补充手机号信息 */
+  /** {@link AddFlexPhoneNo 灵云V2-补充手机号信息}({@link AddFlexPhoneNoRequest 请求参数}): {@link AddFlexPhoneNoResponse 返回参数} */
   AddFlexPhoneNo(data: AddFlexPhoneNoRequest, config?: AxiosRequestConfig): AxiosPromise<AddFlexPhoneNoResponse>;
-  /** 云支付-添加商户接口 */
+  /** {@link AddMerchant 云支付-添加商户接口}({@link AddMerchantRequest 请求参数}): {@link AddMerchantResponse 返回参数} */
   AddMerchant(data: AddMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<AddMerchantResponse>;
-  /** 云支付-添加门店接口 */
+  /** {@link AddShop 云支付-添加门店接口}({@link AddShopRequest 请求参数}): {@link AddShopResponse 返回参数} */
   AddShop(data: AddShopRequest, config?: AxiosRequestConfig): AxiosPromise<AddShopResponse>;
-  /** 跨境-提交申报材料 */
+  /** {@link ApplyApplicationMaterial 跨境-提交申报材料}({@link ApplyApplicationMaterialRequest 请求参数}): {@link ApplyApplicationMaterialResponse 返回参数} */
   ApplyApplicationMaterial(data: ApplyApplicationMaterialRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyApplicationMaterialResponse>;
-  /** 灵云V2-付款 */
+  /** {@link ApplyFlexPayment 灵云V2-付款}({@link ApplyFlexPaymentRequest 请求参数}): {@link ApplyFlexPaymentResponse 返回参数} */
   ApplyFlexPayment(data: ApplyFlexPaymentRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyFlexPaymentResponse>;
-  /** 灵云V2-结算 */
+  /** {@link ApplyFlexSettlement 灵云V2-结算}({@link ApplyFlexSettlementRequest 请求参数}): {@link ApplyFlexSettlementResponse 返回参数} */
   ApplyFlexSettlement(data: ApplyFlexSettlementRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyFlexSettlementResponse>;
-  /** 云企付-申请单笔交易回单 */
+  /** {@link ApplyOpenBankOrderDetailReceipt 云企付-申请单笔交易回单}({@link ApplyOpenBankOrderDetailReceiptRequest 请求参数}): {@link ApplyOpenBankOrderDetailReceiptResponse 返回参数} */
   ApplyOpenBankOrderDetailReceipt(data: ApplyOpenBankOrderDetailReceiptRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyOpenBankOrderDetailReceiptResponse>;
-  /** 云企付-结算申请接口 */
+  /** {@link ApplyOpenBankSettleOrder 云企付-结算申请接口}({@link ApplyOpenBankSettleOrderRequest 请求参数}): {@link ApplyOpenBankSettleOrderResponse 返回参数} */
   ApplyOpenBankSettleOrder(data: ApplyOpenBankSettleOrderRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyOpenBankSettleOrderResponse>;
-  /** 云企付-子商户在线签约 */
+  /** {@link ApplyOpenBankSubMerchantSignOnline 云企付-子商户在线签约}({@link ApplyOpenBankSubMerchantSignOnlineRequest 请求参数}): {@link ApplyOpenBankSubMerchantSignOnlineResponse 返回参数} */
   ApplyOpenBankSubMerchantSignOnline(data: ApplyOpenBankSubMerchantSignOnlineRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyOpenBankSubMerchantSignOnlineResponse>;
-  /** 跨境-汇出指令申请 */
+  /** {@link ApplyOutwardOrder 跨境-汇出指令申请}({@link ApplyOutwardOrderRequest 请求参数}): {@link ApplyOutwardOrderResponse 返回参数} */
   ApplyOutwardOrder(data: ApplyOutwardOrderRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyOutwardOrderResponse>;
-  /** 跨境-付款人申请 */
+  /** {@link ApplyPayerInfo 跨境-付款人申请}({@link ApplyPayerInfoRequest 请求参数}): {@link ApplyPayerInfoResponse 返回参数} */
   ApplyPayerInfo(data: ApplyPayerInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyPayerInfoResponse>;
-  /** 聚鑫-重新提现接口 */
+  /** {@link ApplyReWithdrawal 聚鑫-重新提现接口}({@link ApplyReWithdrawalRequest 请求参数}): {@link ApplyReWithdrawalResponse 返回参数} */
   ApplyReWithdrawal(data: ApplyReWithdrawalRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyReWithdrawalResponse>;
-  /** 聚鑫-申请对账文件 */
+  /** {@link ApplyReconciliationFile 聚鑫-申请对账文件}({@link ApplyReconciliationFileRequest 请求参数}): {@link ApplyReconciliationFileResponse 返回参数} */
   ApplyReconciliationFile(data: ApplyReconciliationFileRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyReconciliationFileResponse>;
-  /** 跨境-提交贸易材料 */
+  /** {@link ApplyTrade 跨境-提交贸易材料}({@link ApplyTradeRequest 请求参数}): {@link ApplyTradeResponse 返回参数} */
   ApplyTrade(data: ApplyTradeRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyTradeResponse>;
-  /** 聚鑫-提现 */
+  /** {@link ApplyWithdrawal 聚鑫-提现}({@link ApplyWithdrawalRequest 请求参数}): {@link ApplyWithdrawalResponse 返回参数} */
   ApplyWithdrawal(data: ApplyWithdrawalRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyWithdrawalResponse>;
-  /** 灵云-绑定账号 */
+  /** {@link BindAccount 灵云-绑定账号}({@link BindAccountRequest 请求参数}): {@link BindAccountResponse 返回参数} */
   BindAccount(data: BindAccountRequest, config?: AxiosRequestConfig): AxiosPromise<BindAccountResponse>;
-  /** 聚鑫-绑定提现银行卡 */
+  /** {@link BindAcct 聚鑫-绑定提现银行卡}({@link BindAcctRequest 请求参数}): {@link BindAcctResponse 返回参数} */
   BindAcct(data: BindAcctRequest, config?: AxiosRequestConfig): AxiosPromise<BindAcctResponse>;
-  /** 云企付-子商户银行卡绑定 */
+  /** {@link BindOpenBankExternalSubMerchantBankAccount 云企付-子商户银行卡绑定}({@link BindOpenBankExternalSubMerchantBankAccountRequest 请求参数}): {@link BindOpenBankExternalSubMerchantBankAccountResponse 返回参数} */
   BindOpenBankExternalSubMerchantBankAccount(data: BindOpenBankExternalSubMerchantBankAccountRequest, config?: AxiosRequestConfig): AxiosPromise<BindOpenBankExternalSubMerchantBankAccountResponse>;
-  /** 云企付-绑定分账收款方 */
+  /** {@link BindOpenBankProfitSharePayee 云企付-绑定分账收款方}({@link BindOpenBankProfitSharePayeeRequest 请求参数}): {@link BindOpenBankProfitSharePayeeResponse 返回参数} */
   BindOpenBankProfitSharePayee(data: BindOpenBankProfitSharePayeeRequest, config?: AxiosRequestConfig): AxiosPromise<BindOpenBankProfitSharePayeeResponse>;
-  /** 云鉴-会员绑定提现账户-回填银联鉴权短信码 */
+  /** {@link BindRelateAccReUnionPay 云鉴-会员绑定提现账户-回填银联鉴权短信码}({@link BindRelateAccReUnionPayRequest 请求参数}): {@link BindRelateAccReUnionPayResponse 返回参数} */
   BindRelateAccReUnionPay(data: BindRelateAccReUnionPayRequest, config?: AxiosRequestConfig): AxiosPromise<BindRelateAccReUnionPayResponse>;
-  /** 云鉴-会员绑定提现账户-小额鉴权 */
+  /** {@link BindRelateAcctSmallAmount 云鉴-会员绑定提现账户-小额鉴权}({@link BindRelateAcctSmallAmountRequest 请求参数}): {@link BindRelateAcctSmallAmountResponse 返回参数} */
   BindRelateAcctSmallAmount(data: BindRelateAcctSmallAmountRequest, config?: AxiosRequestConfig): AxiosPromise<BindRelateAcctSmallAmountResponse>;
-  /** 云鉴-会员绑定提现账户-银联鉴权 */
+  /** {@link BindRelateAcctUnionPay 云鉴-会员绑定提现账户-银联鉴权}({@link BindRelateAcctUnionPayRequest 请求参数}): {@link BindRelateAcctUnionPayResponse 返回参数} */
   BindRelateAcctUnionPay(data: BindRelateAcctUnionPayRequest, config?: AxiosRequestConfig): AxiosPromise<BindRelateAcctUnionPayResponse>;
-  /** 聚鑫-提现银行卡验证 */
+  /** {@link CheckAcct 聚鑫-提现银行卡验证}({@link CheckAcctRequest 请求参数}): {@link CheckAcctResponse 返回参数} */
   CheckAcct(data: CheckAcctRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAcctResponse>;
-  /** 云鉴-验证鉴权金额 */
+  /** {@link CheckAmount 云鉴-验证鉴权金额}({@link CheckAmountRequest 请求参数}): {@link CheckAmountResponse 返回参数} */
   CheckAmount(data: CheckAmountRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAmountResponse>;
-  /** 聚鑫V2-关闭订单 */
+  /** {@link CloseCloudOrder 聚鑫V2-关闭订单}({@link CloseCloudOrderRequest 请求参数}): {@link CloseCloudOrderResponse 返回参数} */
   CloseCloudOrder(data: CloseCloudOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CloseCloudOrderResponse>;
-  /** 云企付-关闭订单 */
+  /** {@link CloseOpenBankPaymentOrder 云企付-关闭订单}({@link CloseOpenBankPaymentOrderRequest 请求参数}): {@link CloseOpenBankPaymentOrderResponse 返回参数} */
   CloseOpenBankPaymentOrder(data: CloseOpenBankPaymentOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CloseOpenBankPaymentOrderResponse>;
-  /** 聚鑫-关闭订单接口 */
+  /** {@link CloseOrder 聚鑫-关闭订单接口}({@link CloseOrderRequest 请求参数}): {@link CloseOrderResponse 返回参数} */
   CloseOrder(data: CloseOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CloseOrderResponse>;
-  /** 云鉴-消费订单确认接口 */
+  /** {@link ConfirmOrder 云鉴-消费订单确认接口}({@link ConfirmOrderRequest 请求参数}): {@link ConfirmOrderResponse 返回参数} */
   ConfirmOrder(data: ConfirmOrderRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmOrderResponse>;
-  /** 支付中签约接口 */
+  /** {@link ContractOrder 支付中签约接口}({@link ContractOrderRequest 请求参数}): {@link ContractOrderResponse 返回参数} */
   ContractOrder(data: ContractOrderRequest, config?: AxiosRequestConfig): AxiosPromise<ContractOrderResponse>;
-  /** 聚鑫-商户入驻 */
+  /** {@link CreateAcct 聚鑫-商户入驻}({@link CreateAcctRequest 请求参数}): {@link CreateAcctResponse 返回参数} */
   CreateAcct(data: CreateAcctRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAcctResponse>;
-  /** 直播平台-代理商完税信息录入 */
+  /** {@link CreateAgentTaxPaymentInfos 直播平台-代理商完税信息录入}({@link CreateAgentTaxPaymentInfosRequest 请求参数}): {@link CreateAgentTaxPaymentInfosResponse 返回参数} */
   CreateAgentTaxPaymentInfos(data: CreateAgentTaxPaymentInfosRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentTaxPaymentInfosResponse>;
-  /** 直播平台-主播入驻 */
+  /** {@link CreateAnchor 直播平台-主播入驻}({@link CreateAnchorRequest 请求参数}): {@link CreateAnchorResponse 返回参数} */
   CreateAnchor(data: CreateAnchorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAnchorResponse>;
-  /** 灵云-批量主播转账接口 */
+  /** {@link CreateBatchPayment 灵云-批量主播转账接口}({@link CreateBatchPaymentRequest 请求参数}): {@link CreateBatchPaymentResponse 返回参数} */
   CreateBatchPayment(data: CreateBatchPaymentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchPaymentResponse>;
-  /** 聚鑫V2-创建子商户 */
+  /** {@link CreateCloudSubMerchant 聚鑫V2-创建子商户}({@link CreateCloudSubMerchantRequest 请求参数}): {@link CreateCloudSubMerchantResponse 返回参数} */
   CreateCloudSubMerchant(data: CreateCloudSubMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudSubMerchantResponse>;
-  /** 云鉴-会员子账户开立 */
+  /** {@link CreateCustAcctId 云鉴-会员子账户开立}({@link CreateCustAcctIdRequest 请求参数}): {@link CreateCustAcctIdResponse 返回参数} */
   CreateCustAcctId(data: CreateCustAcctIdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustAcctIdResponse>;
-  /** 灵云-主播入驻 */
+  /** {@link CreateExternalAnchor 灵云-主播入驻}({@link CreateExternalAnchorRequest 请求参数}): {@link CreateExternalAnchorResponse 返回参数} */
   CreateExternalAnchor(data: CreateExternalAnchorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExternalAnchorResponse>;
-  /** 灵云V2-收款用户开立 */
+  /** {@link CreateFlexPayee 灵云V2-收款用户开立}({@link CreateFlexPayeeRequest 请求参数}): {@link CreateFlexPayeeResponse 返回参数} */
   CreateFlexPayee(data: CreateFlexPayeeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlexPayeeResponse>;
-  /** 智慧零售-发票开具 */
+  /** {@link CreateInvoice 智慧零售-发票开具}({@link CreateInvoiceRequest 请求参数}): {@link CreateInvoiceResponse 返回参数} */
   CreateInvoice(data: CreateInvoiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInvoiceResponse>;
-  /** 智慧零售-发票开具V2 */
+  /** {@link CreateInvoiceV2 智慧零售-发票开具V2}({@link CreateInvoiceV2Request 请求参数}): {@link CreateInvoiceV2Response 返回参数} */
   CreateInvoiceV2(data: CreateInvoiceV2Request, config?: AxiosRequestConfig): AxiosPromise<CreateInvoiceV2Response>;
-  /** 智慧零售-商户注册 */
+  /** {@link CreateMerchant 智慧零售-商户注册}({@link CreateMerchantRequest 请求参数}): {@link CreateMerchantResponse 返回参数} */
   CreateMerchant(data: CreateMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMerchantResponse>;
-  /** 云企付-子商户进件V2 */
+  /** {@link CreateOpenBankAggregatedSubMerchantRegistration 云企付-子商户进件V2}({@link CreateOpenBankAggregatedSubMerchantRegistrationRequest 请求参数}): {@link CreateOpenBankAggregatedSubMerchantRegistrationResponse 返回参数} */
   CreateOpenBankAggregatedSubMerchantRegistration(data: CreateOpenBankAggregatedSubMerchantRegistrationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankAggregatedSubMerchantRegistrationResponse>;
-  /** 云企付-子商户电子记账本创建接口 */
+  /** {@link CreateOpenBankExternalSubMerchantAccountBook 云企付-子商户电子记账本创建接口}({@link CreateOpenBankExternalSubMerchantAccountBookRequest 请求参数}): {@link CreateOpenBankExternalSubMerchantAccountBookResponse 返回参数} */
   CreateOpenBankExternalSubMerchantAccountBook(data: CreateOpenBankExternalSubMerchantAccountBookRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankExternalSubMerchantAccountBookResponse>;
-  /** 云企付-子商户进件 */
+  /** {@link CreateOpenBankExternalSubMerchantRegistration 云企付-子商户进件}({@link CreateOpenBankExternalSubMerchantRegistrationRequest 请求参数}): {@link CreateOpenBankExternalSubMerchantRegistrationResponse 返回参数} */
   CreateOpenBankExternalSubMerchantRegistration(data: CreateOpenBankExternalSubMerchantRegistrationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankExternalSubMerchantRegistrationResponse>;
-  /** 云企付-跨境支付下单 */
+  /** {@link CreateOpenBankGlobalPaymentOrder 云企付-跨境支付下单}({@link CreateOpenBankGlobalPaymentOrderRequest 请求参数}): {@link CreateOpenBankGlobalPaymentOrderResponse 返回参数} */
   CreateOpenBankGlobalPaymentOrder(data: CreateOpenBankGlobalPaymentOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankGlobalPaymentOrderResponse>;
-  /** 云企付-创建商户 */
+  /** {@link CreateOpenBankMerchant 云企付-创建商户}({@link CreateOpenBankMerchantRequest 请求参数}): {@link CreateOpenBankMerchantResponse 返回参数} */
   CreateOpenBankMerchant(data: CreateOpenBankMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankMerchantResponse>;
-  /** 云企付-创建支付订单 */
+  /** {@link CreateOpenBankPaymentOrder 云企付-创建支付订单}({@link CreateOpenBankPaymentOrderRequest 请求参数}): {@link CreateOpenBankPaymentOrderResponse 返回参数} */
   CreateOpenBankPaymentOrder(data: CreateOpenBankPaymentOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankPaymentOrderResponse>;
-  /** 云企付-创建充值订单 */
+  /** {@link CreateOpenBankRechargeOrder 云企付-创建充值订单}({@link CreateOpenBankRechargeOrderRequest 请求参数}): {@link CreateOpenBankRechargeOrderResponse 返回参数} */
   CreateOpenBankRechargeOrder(data: CreateOpenBankRechargeOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankRechargeOrderResponse>;
-  /** 云企付-子商户费率配置 */
+  /** {@link CreateOpenBankSubMerchantRateConfigure 云企付-子商户费率配置}({@link CreateOpenBankSubMerchantRateConfigureRequest 请求参数}): {@link CreateOpenBankSubMerchantRateConfigureResponse 返回参数} */
   CreateOpenBankSubMerchantRateConfigure(data: CreateOpenBankSubMerchantRateConfigureRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankSubMerchantRateConfigureResponse>;
-  /** 云企付-聚合下单 */
+  /** {@link CreateOpenBankUnifiedOrder 云企付-聚合下单}({@link CreateOpenBankUnifiedOrderRequest 请求参数}): {@link CreateOpenBankUnifiedOrderResponse 返回参数} */
   CreateOpenBankUnifiedOrder(data: CreateOpenBankUnifiedOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankUnifiedOrderResponse>;
-  /** 云企付-创建核销申请 */
+  /** {@link CreateOpenBankVerificationOrder 云企付-创建核销申请}({@link CreateOpenBankVerificationOrderRequest 请求参数}): {@link CreateOpenBankVerificationOrderResponse 返回参数} */
   CreateOpenBankVerificationOrder(data: CreateOpenBankVerificationOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankVerificationOrderResponse>;
-  /** 云鉴-消费订单发起接口 */
+  /** {@link CreateOrder 云鉴-消费订单发起接口}({@link CreateOrderRequest 请求参数}): {@link CreateOrderResponse 返回参数} */
   CreateOrder(data: CreateOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrderResponse>;
-  /** 云鉴-商户新增接口 */
+  /** {@link CreatePayMerchant 云鉴-商户新增接口}({@link CreatePayMerchantRequest 请求参数}): {@link CreatePayMerchantResponse 返回参数} */
   CreatePayMerchant(data: CreatePayMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePayMerchantResponse>;
-  /** 务工卡-核身预下单 */
+  /** {@link CreatePayRollPreOrder 务工卡-核身预下单}({@link CreatePayRollPreOrderRequest 请求参数}): {@link CreatePayRollPreOrderResponse 返回参数} */
   CreatePayRollPreOrder(data: CreatePayRollPreOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePayRollPreOrderResponse>;
-  /** 务工卡-核身预下单带授权 */
+  /** {@link CreatePayRollPreOrderWithAuth 务工卡-核身预下单带授权}({@link CreatePayRollPreOrderWithAuthRequest 请求参数}): {@link CreatePayRollPreOrderWithAuthResponse 返回参数} */
   CreatePayRollPreOrderWithAuth(data: CreatePayRollPreOrderWithAuthRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePayRollPreOrderWithAuthResponse>;
-  /** 务工卡-生成授权令牌 */
+  /** {@link CreatePayRollToken 务工卡-生成授权令牌}({@link CreatePayRollTokenRequest 请求参数}): {@link CreatePayRollTokenResponse 返回参数} */
   CreatePayRollToken(data: CreatePayRollTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePayRollTokenResponse>;
-  /** 智慧零售-发票红冲 */
+  /** {@link CreateRedInvoice 智慧零售-发票红冲}({@link CreateRedInvoiceRequest 请求参数}): {@link CreateRedInvoiceResponse 返回参数} */
   CreateRedInvoice(data: CreateRedInvoiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRedInvoiceResponse>;
-  /** 智慧零售-发票红冲V2 */
+  /** {@link CreateRedInvoiceV2 智慧零售-发票红冲V2}({@link CreateRedInvoiceV2Request 请求参数}): {@link CreateRedInvoiceV2Response 返回参数} */
   CreateRedInvoiceV2(data: CreateRedInvoiceV2Request, config?: AxiosRequestConfig): AxiosPromise<CreateRedInvoiceV2Response>;
-  /** 灵云-单笔主播转账接口 */
+  /** {@link CreateSinglePayment 灵云-单笔主播转账接口}({@link CreateSinglePaymentRequest 请求参数}): {@link CreateSinglePaymentResponse 返回参数} */
   CreateSinglePayment(data: CreateSinglePaymentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSinglePaymentResponse>;
-  /** 智慧薪酬-发起批量转账 */
+  /** {@link CreateTransferBatch 智慧薪酬-发起批量转账}({@link CreateTransferBatchRequest 请求参数}): {@link CreateTransferBatchResponse 返回参数} */
   CreateTransferBatch(data: CreateTransferBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTransferBatchResponse>;
-  /** 直播平台-扣减额度 */
+  /** {@link DeduceQuota 直播平台-扣减额度}({@link DeduceQuotaRequest 请求参数}): {@link DeduceQuotaResponse 返回参数} */
   DeduceQuota(data: DeduceQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DeduceQuotaResponse>;
-  /** 直播平台-删除代理商完税信息 */
+  /** {@link DeleteAgentTaxPaymentInfo 直播平台-删除代理商完税信息}({@link DeleteAgentTaxPaymentInfoRequest 请求参数}): {@link DeleteAgentTaxPaymentInfoResponse 返回参数} */
   DeleteAgentTaxPaymentInfo(data: DeleteAgentTaxPaymentInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentTaxPaymentInfoResponse>;
-  /** 直播平台-删除代理商完税信息 */
+  /** {@link DeleteAgentTaxPaymentInfos 直播平台-删除代理商完税信息}({@link DeleteAgentTaxPaymentInfosRequest 请求参数}): {@link DeleteAgentTaxPaymentInfosResponse 返回参数} */
   DeleteAgentTaxPaymentInfos(data: DeleteAgentTaxPaymentInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentTaxPaymentInfosResponse>;
-  /** 查询充值明细接口 */
+  /** {@link DescribeChargeDetail 查询充值明细接口}({@link DescribeChargeDetailRequest 请求参数}): {@link DescribeChargeDetailResponse 返回参数} */
   DescribeChargeDetail(data: DescribeChargeDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChargeDetailResponse>;
-  /** 查询单笔订单交易状态 */
+  /** {@link DescribeOrderStatus 查询单笔订单交易状态}({@link DescribeOrderStatusRequest 请求参数}): {@link DescribeOrderStatusResponse 返回参数} */
   DescribeOrderStatus(data: DescribeOrderStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrderStatusResponse>;
-  /** 云支付-分账授权申请查询接口 */
+  /** {@link DistributeAccreditQuery 云支付-分账授权申请查询接口}({@link DistributeAccreditQueryRequest 请求参数}): {@link DistributeAccreditQueryResponse 返回参数} */
   DistributeAccreditQuery(data: DistributeAccreditQueryRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeAccreditQueryResponse>;
-  /** 云支付-分账授权申请接口 */
+  /** {@link DistributeAccreditTlinx 云支付-分账授权申请接口}({@link DistributeAccreditTlinxRequest 请求参数}): {@link DistributeAccreditTlinxResponse 返回参数} */
   DistributeAccreditTlinx(data: DistributeAccreditTlinxRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeAccreditTlinxResponse>;
-  /** 云支付-分账添加分账接收方接口 */
+  /** {@link DistributeAddReceiver 云支付-分账添加分账接收方接口}({@link DistributeAddReceiverRequest 请求参数}): {@link DistributeAddReceiverResponse 返回参数} */
   DistributeAddReceiver(data: DistributeAddReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeAddReceiverResponse>;
-  /** 云支付-分账请求接口 */
+  /** {@link DistributeApply 云支付-分账请求接口}({@link DistributeApplyRequest 请求参数}): {@link DistributeApplyResponse 返回参数} */
   DistributeApply(data: DistributeApplyRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeApplyResponse>;
-  /** 云支付-分账撤销接口 */
+  /** {@link DistributeCancel 云支付-分账撤销接口}({@link DistributeCancelRequest 请求参数}): {@link DistributeCancelResponse 返回参数} */
   DistributeCancel(data: DistributeCancelRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeCancelResponse>;
-  /** 云支付-分账结果查询接口 */
+  /** {@link DistributeQuery 云支付-分账结果查询接口}({@link DistributeQueryRequest 请求参数}): {@link DistributeQueryResponse 返回参数} */
   DistributeQuery(data: DistributeQueryRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeQueryResponse>;
-  /** 云支付-查询已添加分账接收方接口 */
+  /** {@link DistributeQueryReceiver 云支付-查询已添加分账接收方接口}({@link DistributeQueryReceiverRequest 请求参数}): {@link DistributeQueryReceiverResponse 返回参数} */
   DistributeQueryReceiver(data: DistributeQueryReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeQueryReceiverResponse>;
-  /** 云支付-分账解除分账接收方接口 */
+  /** {@link DistributeRemoveReceiver 云支付-分账解除分账接收方接口}({@link DistributeRemoveReceiverRequest 请求参数}): {@link DistributeRemoveReceiverResponse 返回参数} */
   DistributeRemoveReceiver(data: DistributeRemoveReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeRemoveReceiverResponse>;
-  /** 聚鑫-账单下载 */
+  /** {@link DownloadBill 聚鑫-账单下载}({@link DownloadBillRequest 请求参数}): {@link DownloadBillResponse 返回参数} */
   DownloadBill(data: DownloadBillRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadBillResponse>;
-  /** 云支付-下载机构文件接口 */
+  /** {@link DownloadOrgFile 云支付-下载机构文件接口}({@link DownloadOrgFileRequest 请求参数}): {@link DownloadOrgFileResponse 返回参数} */
   DownloadOrgFile(data: DownloadOrgFileRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadOrgFileResponse>;
-  /** 灵云-对账中心账单下载接口 */
+  /** {@link DownloadReconciliationUrl 灵云-对账中心账单下载接口}({@link DownloadReconciliationUrlRequest 请求参数}): {@link DownloadReconciliationUrlResponse 返回参数} */
   DownloadReconciliationUrl(data: DownloadReconciliationUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadReconciliationUrlResponse>;
-  /** 会员间交易接口 */
+  /** {@link ExecuteMemberTransaction 会员间交易接口}({@link ExecuteMemberTransactionRequest 请求参数}): {@link ExecuteMemberTransactionResponse 返回参数} */
   ExecuteMemberTransaction(data: ExecuteMemberTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteMemberTransactionResponse>;
-  /** 灵云V2-冻结余额 */
+  /** {@link FreezeFlexBalance 灵云V2-冻结余额}({@link FreezeFlexBalanceRequest 请求参数}): {@link FreezeFlexBalanceResponse 返回参数} */
   FreezeFlexBalance(data: FreezeFlexBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<FreezeFlexBalanceResponse>;
-  /** 云支付-获取机构账单文件下载地址 */
+  /** {@link GetBillDownloadUrl 云支付-获取机构账单文件下载地址}({@link GetBillDownloadUrlRequest 请求参数}): {@link GetBillDownloadUrlResponse 返回参数} */
   GetBillDownloadUrl(data: GetBillDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetBillDownloadUrlResponse>;
-  /** 云支付-获取机构分账账单文件下载地址 */
+  /** {@link GetDistributeBillDownloadUrl 云支付-获取机构分账账单文件下载地址}({@link GetDistributeBillDownloadUrlRequest 请求参数}): {@link GetDistributeBillDownloadUrlResponse 返回参数} */
   GetDistributeBillDownloadUrl(data: GetDistributeBillDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetDistributeBillDownloadUrlResponse>;
-  /** 务工卡-查询授权关系 */
+  /** {@link GetPayRollAuth 务工卡-查询授权关系}({@link GetPayRollAuthRequest 请求参数}): {@link GetPayRollAuthResponse 返回参数} */
   GetPayRollAuth(data: GetPayRollAuthRequest, config?: AxiosRequestConfig): AxiosPromise<GetPayRollAuthResponse>;
-  /** 务工卡-查询核身记录 */
+  /** {@link GetPayRollAuthList 务工卡-查询核身记录}({@link GetPayRollAuthListRequest 请求参数}): {@link GetPayRollAuthListResponse 返回参数} */
   GetPayRollAuthList(data: GetPayRollAuthListRequest, config?: AxiosRequestConfig): AxiosPromise<GetPayRollAuthListResponse>;
-  /** 务工卡-获取核身结果 */
+  /** {@link GetPayRollAuthResult 务工卡-获取核身结果}({@link GetPayRollAuthResultRequest 请求参数}): {@link GetPayRollAuthResultResponse 返回参数} */
   GetPayRollAuthResult(data: GetPayRollAuthResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetPayRollAuthResultResponse>;
-  /** 智慧零售-系统迁移存量订单退款 */
+  /** {@link MigrateOrderRefund 智慧零售-系统迁移存量订单退款}({@link MigrateOrderRefundRequest 请求参数}): {@link MigrateOrderRefundResponse 返回参数} */
   MigrateOrderRefund(data: MigrateOrderRefundRequest, config?: AxiosRequestConfig): AxiosPromise<MigrateOrderRefundResponse>;
-  /** 智慧零售-系统迁移存量订单退款查询 */
+  /** {@link MigrateOrderRefundQuery 智慧零售-系统迁移存量订单退款查询}({@link MigrateOrderRefundQueryRequest 请求参数}): {@link MigrateOrderRefundQueryResponse 返回参数} */
   MigrateOrderRefundQuery(data: MigrateOrderRefundQueryRequest, config?: AxiosRequestConfig): AxiosPromise<MigrateOrderRefundQueryResponse>;
-  /** 直播平台-修改代理商完税信息 */
+  /** {@link ModifyAgentTaxPaymentInfo 直播平台-修改代理商完税信息}({@link ModifyAgentTaxPaymentInfoRequest 请求参数}): {@link ModifyAgentTaxPaymentInfoResponse 返回参数} */
   ModifyAgentTaxPaymentInfo(data: ModifyAgentTaxPaymentInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAgentTaxPaymentInfoResponse>;
-  /** 灵云-重新绑定账号 */
+  /** {@link ModifyBindedAccount 灵云-重新绑定账号}({@link ModifyBindedAccountRequest 请求参数}): {@link ModifyBindedAccountResponse 返回参数} */
   ModifyBindedAccount(data: ModifyBindedAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBindedAccountResponse>;
-  /** 灵云V2-收款用户账户权益状态修改 */
+  /** {@link ModifyFlexPayeeAccountRightStatus 灵云V2-收款用户账户权益状态修改}({@link ModifyFlexPayeeAccountRightStatusRequest 请求参数}): {@link ModifyFlexPayeeAccountRightStatusResponse 返回参数} */
   ModifyFlexPayeeAccountRightStatus(data: ModifyFlexPayeeAccountRightStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFlexPayeeAccountRightStatusResponse>;
-  /** 云鉴-商户信息修改接口 */
+  /** {@link ModifyMerchant 云鉴-商户信息修改接口}({@link ModifyMerchantRequest 请求参数}): {@link ModifyMerchantResponse 返回参数} */
   ModifyMerchant(data: ModifyMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMerchantResponse>;
-  /** 云鉴-维护会员绑定提现账户联行号 */
+  /** {@link ModifyMntMbrBindRelateAcctBankCode 云鉴-维护会员绑定提现账户联行号}({@link ModifyMntMbrBindRelateAcctBankCodeRequest 请求参数}): {@link ModifyMntMbrBindRelateAcctBankCodeResponse 返回参数} */
   ModifyMntMbrBindRelateAcctBankCode(data: ModifyMntMbrBindRelateAcctBankCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMntMbrBindRelateAcctBankCodeResponse>;
-  /** 聚鑫-查询子账户绑定银行卡 */
+  /** {@link QueryAcctBinding 聚鑫-查询子账户绑定银行卡}({@link QueryAcctBindingRequest 请求参数}): {@link QueryAcctBindingResponse 返回参数} */
   QueryAcctBinding(data: QueryAcctBindingRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAcctBindingResponse>;
-  /** 聚鑫-开户查询 */
+  /** {@link QueryAcctInfo 聚鑫-开户查询}({@link QueryAcctInfoRequest 请求参数}): {@link QueryAcctInfoResponse 返回参数} */
   QueryAcctInfo(data: QueryAcctInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAcctInfoResponse>;
-  /** 聚鑫-开户列表查询 */
+  /** {@link QueryAcctInfoList 聚鑫-开户列表查询}({@link QueryAcctInfoListRequest 请求参数}): {@link QueryAcctInfoListResponse 返回参数} */
   QueryAcctInfoList(data: QueryAcctInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAcctInfoListResponse>;
-  /** 直播平台-查询代理商结算单链接 */
+  /** {@link QueryAgentStatements 直播平台-查询代理商结算单链接}({@link QueryAgentStatementsRequest 请求参数}): {@link QueryAgentStatementsResponse 返回参数} */
   QueryAgentStatements(data: QueryAgentStatementsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAgentStatementsResponse>;
-  /** 直播平台-查询批次信息 */
+  /** {@link QueryAgentTaxPaymentBatch 直播平台-查询批次信息}({@link QueryAgentTaxPaymentBatchRequest 请求参数}): {@link QueryAgentTaxPaymentBatchResponse 返回参数} */
   QueryAgentTaxPaymentBatch(data: QueryAgentTaxPaymentBatchRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAgentTaxPaymentBatchResponse>;
-  /** 直播平台-查询主播签约信息 */
+  /** {@link QueryAnchorContractInfo 直播平台-查询主播签约信息}({@link QueryAnchorContractInfoRequest 请求参数}): {@link QueryAnchorContractInfoResponse 返回参数} */
   QueryAnchorContractInfo(data: QueryAnchorContractInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAnchorContractInfoResponse>;
-  /** 跨境-成功申报材料查询 */
+  /** {@link QueryApplicationMaterial 跨境-成功申报材料查询}({@link QueryApplicationMaterialRequest 请求参数}): {@link QueryApplicationMaterialResponse 返回参数} */
   QueryApplicationMaterial(data: QueryApplicationMaterialRequest, config?: AxiosRequestConfig): AxiosPromise<QueryApplicationMaterialResponse>;
-  /** 直播平台-查询分配关系 */
+  /** {@link QueryAssignment 直播平台-查询分配关系}({@link QueryAssignmentRequest 请求参数}): {@link QueryAssignmentResponse 返回参数} */
   QueryAssignment(data: QueryAssignmentRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAssignmentResponse>;
-  /** 聚鑫-余额查询 */
+  /** {@link QueryBalance 聚鑫-余额查询}({@link QueryBalanceRequest 请求参数}): {@link QueryBalanceResponse 返回参数} */
   QueryBalance(data: QueryBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBalanceResponse>;
-  /** 云鉴-查询银行在途清算结果 */
+  /** {@link QueryBankClear 云鉴-查询银行在途清算结果}({@link QueryBankClearRequest 请求参数}): {@link QueryBankClearResponse 返回参数} */
   QueryBankClear(data: QueryBankClearRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBankClearResponse>;
-  /** 云鉴-查询银行时间段内交易明细 */
+  /** {@link QueryBankTransactionDetails 云鉴-查询银行时间段内交易明细}({@link QueryBankTransactionDetailsRequest 请求参数}): {@link QueryBankTransactionDetailsResponse 返回参数} */
   QueryBankTransactionDetails(data: QueryBankTransactionDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBankTransactionDetailsResponse>;
-  /** 云鉴-查询银行时间段内清分提现明细 */
+  /** {@link QueryBankWithdrawCashDetails 云鉴-查询银行时间段内清分提现明细}({@link QueryBankWithdrawCashDetailsRequest 请求参数}): {@link QueryBankWithdrawCashDetailsResponse 返回参数} */
   QueryBankWithdrawCashDetails(data: QueryBankWithdrawCashDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBankWithdrawCashDetailsResponse>;
-  /** 灵云-批量转账结果查询 */
+  /** {@link QueryBatchPaymentResult 灵云-批量转账结果查询}({@link QueryBatchPaymentResultRequest 请求参数}): {@link QueryBatchPaymentResultResponse 返回参数} */
   QueryBatchPaymentResult(data: QueryBatchPaymentResultRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBatchPaymentResultResponse>;
-  /** 智能代发-单笔代发转账对账单下载接口 */
+  /** {@link QueryBillDownloadURL 智能代发-单笔代发转账对账单下载接口}({@link QueryBillDownloadURLRequest 请求参数}): {@link QueryBillDownloadURLResponse 返回参数} */
   QueryBillDownloadURL(data: QueryBillDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBillDownloadURLResponse>;
-  /** 云支付-查询城市编码接口 */
+  /** {@link QueryCityCode 云支付-查询城市编码接口}({@link QueryCityCodeRequest 请求参数}): {@link QueryCityCodeResponse 返回参数} */
   QueryCityCode(data: QueryCityCodeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCityCodeResponse>;
-  /** 聚鑫V2-查询第三方渠道数据 */
+  /** {@link QueryCloudChannelData 聚鑫V2-查询第三方渠道数据}({@link QueryCloudChannelDataRequest 请求参数}): {@link QueryCloudChannelDataResponse 返回参数} */
   QueryCloudChannelData(data: QueryCloudChannelDataRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCloudChannelDataResponse>;
-  /** 聚鑫V2-查询订单 */
+  /** {@link QueryCloudOrder 聚鑫V2-查询订单}({@link QueryCloudOrderRequest 请求参数}): {@link QueryCloudOrderResponse 返回参数} */
   QueryCloudOrder(data: QueryCloudOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCloudOrderResponse>;
-  /** 聚鑫V2-查询退款 */
+  /** {@link QueryCloudRefundOrder 聚鑫V2-查询退款}({@link QueryCloudRefundOrderRequest 请求参数}): {@link QueryCloudRefundOrderResponse 返回参数} */
   QueryCloudRefundOrder(data: QueryCloudRefundOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCloudRefundOrderResponse>;
-  /** 云鉴-查询普通转账充值明细 */
+  /** {@link QueryCommonTransferRecharge 云鉴-查询普通转账充值明细}({@link QueryCommonTransferRechargeRequest 请求参数}): {@link QueryCommonTransferRechargeResponse 返回参数} */
   QueryCommonTransferRecharge(data: QueryCommonTransferRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCommonTransferRechargeResponse>;
-  /** 智慧零售-查询公司抬头 */
+  /** {@link QueryCompanyTitle 智慧零售-查询公司抬头}({@link QueryCompanyTitleRequest 请求参数}): {@link QueryCompanyTitleResponse 返回参数} */
   QueryCompanyTitle(data: QueryCompanyTitleRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCompanyTitleResponse>;
-  /** 查询签约数据接口 */
+  /** {@link QueryContract 查询签约数据接口}({@link QueryContractRequest 请求参数}): {@link QueryContractResponse 返回参数} */
   QueryContract(data: QueryContractRequest, config?: AxiosRequestConfig): AxiosPromise<QueryContractResponse>;
-  /** 云支付-查询支付方式费率及自定义表单项接口 */
+  /** {@link QueryContractPayFee 云支付-查询支付方式费率及自定义表单项接口}({@link QueryContractPayFeeRequest 请求参数}): {@link QueryContractPayFeeResponse 返回参数} */
   QueryContractPayFee(data: QueryContractPayFeeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryContractPayFeeResponse>;
-  /** 云支付-查询合同支付方式列表接口 */
+  /** {@link QueryContractPayWayList 云支付-查询合同支付方式列表接口}({@link QueryContractPayWayListRequest 请求参数}): {@link QueryContractPayWayListResponse 返回参数} */
   QueryContractPayWayList(data: QueryContractPayWayListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryContractPayWayListResponse>;
-  /** 云支付-查询合同可关联门店接口 */
+  /** {@link QueryContractRelateShop 云支付-查询合同可关联门店接口}({@link QueryContractRelateShopRequest 请求参数}): {@link QueryContractRelateShopResponse 返回参数} */
   QueryContractRelateShop(data: QueryContractRelateShopRequest, config?: AxiosRequestConfig): AxiosPromise<QueryContractRelateShopResponse>;
-  /** 云鉴-查询银行子账户余额 */
+  /** {@link QueryCustAcctIdBalance 云鉴-查询银行子账户余额}({@link QueryCustAcctIdBalanceRequest 请求参数}): {@link QueryCustAcctIdBalanceResponse 返回参数} */
   QueryCustAcctIdBalance(data: QueryCustAcctIdBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCustAcctIdBalanceResponse>;
-  /** 云鉴-查询对账单下载地址接口 */
+  /** {@link QueryDownloadBillURL 云鉴-查询对账单下载地址接口}({@link QueryDownloadBillURLRequest 请求参数}): {@link QueryDownloadBillURLResponse 返回参数} */
   QueryDownloadBillURL(data: QueryDownloadBillURLRequest, config?: AxiosRequestConfig): AxiosPromise<QueryDownloadBillURLResponse>;
-  /** 灵云-查询超额信息 */
+  /** {@link QueryExceedingInfo 灵云-查询超额信息}({@link QueryExceedingInfoRequest 请求参数}): {@link QueryExceedingInfoResponse 返回参数} */
   QueryExceedingInfo(data: QueryExceedingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExceedingInfoResponse>;
-  /** 跨境-查询汇率 */
+  /** {@link QueryExchangeRate 跨境-查询汇率}({@link QueryExchangeRateRequest 请求参数}): {@link QueryExchangeRateResponse 返回参数} */
   QueryExchangeRate(data: QueryExchangeRateRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExchangeRateResponse>;
-  /** 财税-查询金融数据文件下载链接 */
+  /** {@link QueryFinancialDataUrl 财税-查询金融数据文件下载链接}({@link QueryFinancialDataUrlRequest 请求参数}): {@link QueryFinancialDataUrlResponse 返回参数} */
   QueryFinancialDataUrl(data: QueryFinancialDataUrlRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFinancialDataUrlResponse>;
-  /** 灵云V2-查询税前金额 */
+  /** {@link QueryFlexAmountBeforeTax 灵云V2-查询税前金额}({@link QueryFlexAmountBeforeTaxRequest 请求参数}): {@link QueryFlexAmountBeforeTaxResponse 返回参数} */
   QueryFlexAmountBeforeTax(data: QueryFlexAmountBeforeTaxRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexAmountBeforeTaxResponse>;
-  /** 灵云V2-查询对账单文件下载链接 */
+  /** {@link QueryFlexBillDownloadUrl 灵云V2-查询对账单文件下载链接}({@link QueryFlexBillDownloadUrlRequest 请求参数}): {@link QueryFlexBillDownloadUrlResponse 返回参数} */
   QueryFlexBillDownloadUrl(data: QueryFlexBillDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexBillDownloadUrlResponse>;
-  /** 灵云V2-查询冻结订单列表 */
+  /** {@link QueryFlexFreezeOrderList 灵云V2-查询冻结订单列表}({@link QueryFlexFreezeOrderListRequest 请求参数}): {@link QueryFlexFreezeOrderListResponse 返回参数} */
   QueryFlexFreezeOrderList(data: QueryFlexFreezeOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexFreezeOrderListResponse>;
-  /** 灵云V2-订单汇总列表查询 */
+  /** {@link QueryFlexOrderSummaryList 灵云V2-订单汇总列表查询}({@link QueryFlexOrderSummaryListRequest 请求参数}): {@link QueryFlexOrderSummaryListResponse 返回参数} */
   QueryFlexOrderSummaryList(data: QueryFlexOrderSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexOrderSummaryListResponse>;
-  /** 灵云V2-收款用户账户余额查询 */
+  /** {@link QueryFlexPayeeAccountBalance 灵云V2-收款用户账户余额查询}({@link QueryFlexPayeeAccountBalanceRequest 请求参数}): {@link QueryFlexPayeeAccountBalanceResponse 返回参数} */
   QueryFlexPayeeAccountBalance(data: QueryFlexPayeeAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPayeeAccountBalanceResponse>;
-  /** 灵云V2-收款用户账户信息查询 */
+  /** {@link QueryFlexPayeeAccountInfo 灵云V2-收款用户账户信息查询}({@link QueryFlexPayeeAccountInfoRequest 请求参数}): {@link QueryFlexPayeeAccountInfoResponse 返回参数} */
   QueryFlexPayeeAccountInfo(data?: QueryFlexPayeeAccountInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPayeeAccountInfoResponse>;
-  /** 灵云V2-收款用户账户列表查询 */
+  /** {@link QueryFlexPayeeAccountList 灵云V2-收款用户账户列表查询}({@link QueryFlexPayeeAccountListRequest 请求参数}): {@link QueryFlexPayeeAccountListResponse 返回参数} */
   QueryFlexPayeeAccountList(data: QueryFlexPayeeAccountListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPayeeAccountListResponse>;
-  /** 灵云V2-收款用户信息查询 */
+  /** {@link QueryFlexPayeeInfo 灵云V2-收款用户信息查询}({@link QueryFlexPayeeInfoRequest 请求参数}): {@link QueryFlexPayeeInfoResponse 返回参数} */
   QueryFlexPayeeInfo(data?: QueryFlexPayeeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPayeeInfoResponse>;
-  /** 灵云V2-查询付款订单列表 */
+  /** {@link QueryFlexPaymentOrderList 灵云V2-查询付款订单列表}({@link QueryFlexPaymentOrderListRequest 请求参数}): {@link QueryFlexPaymentOrderListResponse 返回参数} */
   QueryFlexPaymentOrderList(data: QueryFlexPaymentOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPaymentOrderListResponse>;
-  /** 灵云V2-查询付款订单状态 */
+  /** {@link QueryFlexPaymentOrderStatus 灵云V2-查询付款订单状态}({@link QueryFlexPaymentOrderStatusRequest 请求参数}): {@link QueryFlexPaymentOrderStatusResponse 返回参数} */
   QueryFlexPaymentOrderStatus(data?: QueryFlexPaymentOrderStatusRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPaymentOrderStatusResponse>;
-  /** 灵云V2-查询结算订单列表 */
+  /** {@link QueryFlexSettlementOrderList 灵云V2-查询结算订单列表}({@link QueryFlexSettlementOrderListRequest 请求参数}): {@link QueryFlexSettlementOrderListResponse 返回参数} */
   QueryFlexSettlementOrderList(data: QueryFlexSettlementOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexSettlementOrderListResponse>;
-  /** 聚鑫-查询会员资金交易信息列表 */
+  /** {@link QueryFundsTransactionDetails 聚鑫-查询会员资金交易信息列表}({@link QueryFundsTransactionDetailsRequest 请求参数}): {@link QueryFundsTransactionDetailsResponse 返回参数} */
   QueryFundsTransactionDetails(data: QueryFundsTransactionDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFundsTransactionDetailsResponse>;
-  /** 智慧零售-发票查询 */
+  /** {@link QueryInvoice 智慧零售-发票查询}({@link QueryInvoiceRequest 请求参数}): {@link QueryInvoiceResponse 返回参数} */
   QueryInvoice(data: QueryInvoiceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryInvoiceResponse>;
-  /** 智慧零售-发票查询V2 */
+  /** {@link QueryInvoiceV2 智慧零售-发票查询V2}({@link QueryInvoiceV2Request 请求参数}): {@link QueryInvoiceV2Response 返回参数} */
   QueryInvoiceV2(data: QueryInvoiceV2Request, config?: AxiosRequestConfig): AxiosPromise<QueryInvoiceV2Response>;
-  /** 商户恶意注册接口 */
+  /** {@link QueryMaliciousRegistration 商户恶意注册接口}({@link QueryMaliciousRegistrationRequest 请求参数}): {@link QueryMaliciousRegistrationResponse 返回参数} */
   QueryMaliciousRegistration(data: QueryMaliciousRegistrationRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMaliciousRegistrationResponse>;
-  /** 云鉴-会员绑定信息查询 */
+  /** {@link QueryMemberBind 云鉴-会员绑定信息查询}({@link QueryMemberBindRequest 请求参数}): {@link QueryMemberBindResponse 返回参数} */
   QueryMemberBind(data: QueryMemberBindRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMemberBindResponse>;
-  /** 云鉴-会员间交易-不验证 */
+  /** {@link QueryMemberTransaction 云鉴-会员间交易-不验证}({@link QueryMemberTransactionRequest 请求参数}): {@link QueryMemberTransactionResponse 返回参数} */
   QueryMemberTransaction(data: QueryMemberTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMemberTransactionResponse>;
-  /** 聚鑫-查询会员间交易信息列表 */
+  /** {@link QueryMemberTransactionDetails 聚鑫-查询会员间交易信息列表}({@link QueryMemberTransactionDetailsRequest 请求参数}): {@link QueryMemberTransactionDetailsResponse 返回参数} */
   QueryMemberTransactionDetails(data: QueryMemberTransactionDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMemberTransactionDetailsResponse>;
-  /** 云鉴-商户信息查询接口 */
+  /** {@link QueryMerchant 云鉴-商户信息查询接口}({@link QueryMerchantRequest 请求参数}): {@link QueryMerchantResponse 返回参数} */
   QueryMerchant(data: QueryMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMerchantResponse>;
-  /** 跨境-对接方账户余额查询 */
+  /** {@link QueryMerchantBalance 跨境-对接方账户余额查询}({@link QueryMerchantBalanceRequest 请求参数}): {@link QueryMerchantBalanceResponse 返回参数} */
   QueryMerchantBalance(data: QueryMerchantBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMerchantBalanceResponse>;
-  /** 云支付-查询商户分类接口 */
+  /** {@link QueryMerchantClassification 云支付-查询商户分类接口}({@link QueryMerchantClassificationRequest 请求参数}): {@link QueryMerchantClassificationResponse 返回参数} */
   QueryMerchantClassification(data: QueryMerchantClassificationRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMerchantClassificationResponse>;
-  /** 智慧零售-查询管理端商户 */
+  /** {@link QueryMerchantInfoForManagement 智慧零售-查询管理端商户}({@link QueryMerchantInfoForManagementRequest 请求参数}): {@link QueryMerchantInfoForManagementResponse 返回参数} */
   QueryMerchantInfoForManagement(data: QueryMerchantInfoForManagementRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMerchantInfoForManagementResponse>;
-  /** 云鉴-消费订单查询接口 */
+  /** {@link QueryMerchantOrder 云鉴-消费订单查询接口}({@link QueryMerchantOrderRequest 请求参数}): {@link QueryMerchantOrderResponse 返回参数} */
   QueryMerchantOrder(data: QueryMerchantOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMerchantOrderResponse>;
-  /** 云支付-查询商户支付方式列表 */
+  /** {@link QueryMerchantPayWayList 云支付-查询商户支付方式列表}({@link QueryMerchantPayWayListRequest 请求参数}): {@link QueryMerchantPayWayListResponse 返回参数} */
   QueryMerchantPayWayList(data: QueryMerchantPayWayListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMerchantPayWayListResponse>;
-  /** 云企付-子商户银行卡余额查询 */
+  /** {@link QueryOpenBankBankAccountBalance 云企付-子商户银行卡余额查询}({@link QueryOpenBankBankAccountBalanceRequest 请求参数}): {@link QueryOpenBankBankAccountBalanceResponse 返回参数} */
   QueryOpenBankBankAccountBalance(data: QueryOpenBankBankAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankBankAccountBalanceResponse>;
-  /** 云企付-查询联行号 */
+  /** {@link QueryOpenBankBankBranchList 云企付-查询联行号}({@link QueryOpenBankBankBranchListRequest 请求参数}): {@link QueryOpenBankBankBranchListResponse 返回参数} */
   QueryOpenBankBankBranchList(data: QueryOpenBankBankBranchListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankBankBranchListResponse>;
-  /** 云企付-分页查询对账单数据 */
+  /** {@link QueryOpenBankBillDataPage 云企付-分页查询对账单数据}({@link QueryOpenBankBillDataPageRequest 请求参数}): {@link QueryOpenBankBillDataPageResponse 返回参数} */
   QueryOpenBankBillDataPage(data: QueryOpenBankBillDataPageRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankBillDataPageResponse>;
-  /** 云企付-子商户银行卡绑定结果查询 */
+  /** {@link QueryOpenBankBindExternalSubMerchantBankAccount 云企付-子商户银行卡绑定结果查询}({@link QueryOpenBankBindExternalSubMerchantBankAccountRequest 请求参数}): {@link QueryOpenBankBindExternalSubMerchantBankAccountResponse 返回参数} */
   QueryOpenBankBindExternalSubMerchantBankAccount(data: QueryOpenBankBindExternalSubMerchantBankAccountRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankBindExternalSubMerchantBankAccountResponse>;
-  /** 云企付-按日期批量查询回单下载地址 */
+  /** {@link QueryOpenBankDailyReceiptDownloadUrl 云企付-按日期批量查询回单下载地址}({@link QueryOpenBankDailyReceiptDownloadUrlRequest 请求参数}): {@link QueryOpenBankDailyReceiptDownloadUrlResponse 返回参数} */
   QueryOpenBankDailyReceiptDownloadUrl(data: QueryOpenBankDailyReceiptDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankDailyReceiptDownloadUrlResponse>;
-  /** 云企付-查询对账单下载地址 */
+  /** {@link QueryOpenBankDownLoadUrl 云企付-查询对账单下载地址}({@link QueryOpenBankDownLoadUrlRequest 请求参数}): {@link QueryOpenBankDownLoadUrlResponse 返回参数} */
   QueryOpenBankDownLoadUrl(data: QueryOpenBankDownLoadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankDownLoadUrlResponse>;
-  /** 云企付-子商户电子记账本余额查询 */
+  /** {@link QueryOpenBankExternalSubAccountBookBalance 云企付-子商户电子记账本余额查询}({@link QueryOpenBankExternalSubAccountBookBalanceRequest 请求参数}): {@link QueryOpenBankExternalSubAccountBookBalanceResponse 返回参数} */
   QueryOpenBankExternalSubAccountBookBalance(data: QueryOpenBankExternalSubAccountBookBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankExternalSubAccountBookBalanceResponse>;
-  /** 云企付-子商户银行卡列表查询 */
+  /** {@link QueryOpenBankExternalSubMerchantBankAccount 云企付-子商户银行卡列表查询}({@link QueryOpenBankExternalSubMerchantBankAccountRequest 请求参数}): {@link QueryOpenBankExternalSubMerchantBankAccountResponse 返回参数} */
   QueryOpenBankExternalSubMerchantBankAccount(data: QueryOpenBankExternalSubMerchantBankAccountRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankExternalSubMerchantBankAccountResponse>;
-  /** 云企付-子商户进件结果查询 */
+  /** {@link QueryOpenBankExternalSubMerchantRegistration 云企付-子商户进件结果查询}({@link QueryOpenBankExternalSubMerchantRegistrationRequest 请求参数}): {@link QueryOpenBankExternalSubMerchantRegistrationResponse 返回参数} */
   QueryOpenBankExternalSubMerchantRegistration(data: QueryOpenBankExternalSubMerchantRegistrationRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankExternalSubMerchantRegistrationResponse>;
-  /** 云企付-单笔交易回单申请结果查询 */
+  /** {@link QueryOpenBankOrderDetailReceiptInfo 云企付-单笔交易回单申请结果查询}({@link QueryOpenBankOrderDetailReceiptInfoRequest 请求参数}): {@link QueryOpenBankOrderDetailReceiptInfoResponse 返回参数} */
   QueryOpenBankOrderDetailReceiptInfo(data: QueryOpenBankOrderDetailReceiptInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankOrderDetailReceiptInfoResponse>;
-  /** 云企付-查询订单支付结果 */
+  /** {@link QueryOpenBankPaymentOrder 云企付-查询订单支付结果}({@link QueryOpenBankPaymentOrderRequest 请求参数}): {@link QueryOpenBankPaymentOrderResponse 返回参数} */
   QueryOpenBankPaymentOrder(data: QueryOpenBankPaymentOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankPaymentOrderResponse>;
-  /** 云企付-绑定分账收款方查询 */
+  /** {@link QueryOpenBankProfitSharePayee 云企付-绑定分账收款方查询}({@link QueryOpenBankProfitSharePayeeRequest 请求参数}): {@link QueryOpenBankProfitSharePayeeResponse 返回参数} */
   QueryOpenBankProfitSharePayee(data: QueryOpenBankProfitSharePayeeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankProfitSharePayeeResponse>;
-  /** 云企付-退款结果查询 */
+  /** {@link QueryOpenBankRefundOrder 云企付-退款结果查询}({@link QueryOpenBankRefundOrderRequest 请求参数}): {@link QueryOpenBankRefundOrderResponse 返回参数} */
   QueryOpenBankRefundOrder(data: QueryOpenBankRefundOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankRefundOrderResponse>;
-  /** 云企付-结算单查询结果 */
+  /** {@link QueryOpenBankSettleOrder 云企付-结算单查询结果}({@link QueryOpenBankSettleOrderRequest 请求参数}): {@link QueryOpenBankSettleOrderResponse 返回参数} */
   QueryOpenBankSettleOrder(data: QueryOpenBankSettleOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankSettleOrderResponse>;
-  /** 云企付-子商户资质文件查询 */
+  /** {@link QueryOpenBankSubMerchantCredential 云企付-子商户资质文件查询}({@link QueryOpenBankSubMerchantCredentialRequest 请求参数}): {@link QueryOpenBankSubMerchantCredentialResponse 返回参数} */
   QueryOpenBankSubMerchantCredential(data: QueryOpenBankSubMerchantCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankSubMerchantCredentialResponse>;
-  /** 云企付-子商户费率配置结果查询 */
+  /** {@link QueryOpenBankSubMerchantRateConfigure 云企付-子商户费率配置结果查询}({@link QueryOpenBankSubMerchantRateConfigureRequest 请求参数}): {@link QueryOpenBankSubMerchantRateConfigureResponse 返回参数} */
   QueryOpenBankSubMerchantRateConfigure(data: QueryOpenBankSubMerchantRateConfigureRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankSubMerchantRateConfigureResponse>;
-  /** 云企付-子商户在线签约查询 */
+  /** {@link QueryOpenBankSubMerchantSignOnline 云企付-子商户在线签约查询}({@link QueryOpenBankSubMerchantSignOnlineRequest 请求参数}): {@link QueryOpenBankSubMerchantSignOnlineResponse 返回参数} */
   QueryOpenBankSubMerchantSignOnline(data: QueryOpenBankSubMerchantSignOnlineRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankSubMerchantSignOnlineResponse>;
-  /** 云企付-查询支持银行列表 */
+  /** {@link QueryOpenBankSupportBankList 云企付-查询支持银行列表}({@link QueryOpenBankSupportBankListRequest 请求参数}): {@link QueryOpenBankSupportBankListResponse 返回参数} */
   QueryOpenBankSupportBankList(data: QueryOpenBankSupportBankListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankSupportBankListResponse>;
-  /** 云企付-子商户银行卡解绑结果查询 */
+  /** {@link QueryOpenBankUnbindExternalSubMerchantBankAccount 云企付-子商户银行卡解绑结果查询}({@link QueryOpenBankUnbindExternalSubMerchantBankAccountRequest 请求参数}): {@link QueryOpenBankUnbindExternalSubMerchantBankAccountResponse 返回参数} */
   QueryOpenBankUnbindExternalSubMerchantBankAccount(data: QueryOpenBankUnbindExternalSubMerchantBankAccountRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankUnbindExternalSubMerchantBankAccountResponse>;
-  /** 云企付-查询核销订单状态 */
+  /** {@link QueryOpenBankVerificationOrder 云企付-查询核销订单状态}({@link QueryOpenBankVerificationOrderRequest 请求参数}): {@link QueryOpenBankVerificationOrderResponse 返回参数} */
   QueryOpenBankVerificationOrder(data: QueryOpenBankVerificationOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankVerificationOrderResponse>;
-  /** 聚鑫-查询订单接口 */
+  /** {@link QueryOrder 聚鑫-查询订单接口}({@link QueryOrderRequest 请求参数}): {@link QueryOrderResponse 返回参数} */
   QueryOrder(data: QueryOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOrderResponse>;
-  /** 云支付-查询订单付款状态 */
+  /** {@link QueryOrderStatus 云支付-查询订单付款状态}({@link QueryOrderStatusRequest 请求参数}): {@link QueryOrderStatusResponse 返回参数} */
   QueryOrderStatus(data: QueryOrderStatusRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOrderStatusResponse>;
-  /** 跨境-查询汇出结果 */
+  /** {@link QueryOutwardOrder 跨境-查询汇出结果}({@link QueryOutwardOrderRequest 请求参数}): {@link QueryOutwardOrderResponse 返回参数} */
   QueryOutwardOrder(data: QueryOutwardOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOutwardOrderResponse>;
-  /** 跨境-付款人查询 */
+  /** {@link QueryPayerInfo 跨境-付款人查询}({@link QueryPayerInfoRequest 请求参数}): {@link QueryPayerInfoResponse 返回参数} */
   QueryPayerInfo(data: QueryPayerInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryPayerInfoResponse>;
-  /** 云鉴-查询对账文件信息 */
+  /** {@link QueryReconciliationDocument 云鉴-查询对账文件信息}({@link QueryReconciliationDocumentRequest 请求参数}): {@link QueryReconciliationDocumentResponse 返回参数} */
   QueryReconciliationDocument(data: QueryReconciliationDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<QueryReconciliationDocumentResponse>;
-  /** 聚鑫-查询对账文件申请结果 */
+  /** {@link QueryReconciliationFileApplyInfo 聚鑫-查询对账文件申请结果}({@link QueryReconciliationFileApplyInfoRequest 请求参数}): {@link QueryReconciliationFileApplyInfoResponse 返回参数} */
   QueryReconciliationFileApplyInfo(data: QueryReconciliationFileApplyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryReconciliationFileApplyInfoResponse>;
-  /** 聚鑫-查询退款接口 */
+  /** {@link QueryRefund 聚鑫-查询退款接口}({@link QueryRefundRequest 请求参数}): {@link QueryRefundResponse 返回参数} */
   QueryRefund(data: QueryRefundRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRefundResponse>;
-  /** 云支付-获取门店OpenId接口 */
+  /** {@link QueryShopOpenId 云支付-获取门店OpenId接口}({@link QueryShopOpenIdRequest 请求参数}): {@link QueryShopOpenIdResponse 返回参数} */
   QueryShopOpenId(data: QueryShopOpenIdRequest, config?: AxiosRequestConfig): AxiosPromise<QueryShopOpenIdResponse>;
-  /** 灵云-单笔转账结果查询 */
+  /** {@link QuerySinglePaymentResult 灵云-单笔转账结果查询}({@link QuerySinglePaymentResultRequest 请求参数}): {@link QuerySinglePaymentResultResponse 返回参数} */
   QuerySinglePaymentResult(data: QuerySinglePaymentResultRequest, config?: AxiosRequestConfig): AxiosPromise<QuerySinglePaymentResultResponse>;
-  /** 云鉴-查询银行单笔交易状态 */
+  /** {@link QuerySingleTransactionStatus 云鉴-查询银行单笔交易状态}({@link QuerySingleTransactionStatusRequest 请求参数}): {@link QuerySingleTransactionStatusResponse 返回参数} */
   QuerySingleTransactionStatus(data: QuerySingleTransactionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<QuerySingleTransactionStatusResponse>;
-  /** 云鉴-查询小额鉴权转账结果 */
+  /** {@link QuerySmallAmountTransfer 云鉴-查询小额鉴权转账结果}({@link QuerySmallAmountTransferRequest 请求参数}): {@link QuerySmallAmountTransferResponse 返回参数} */
   QuerySmallAmountTransfer(data: QuerySmallAmountTransferRequest, config?: AxiosRequestConfig): AxiosPromise<QuerySmallAmountTransferResponse>;
-  /** 跨境-贸易材料明细查询 */
+  /** {@link QueryTrade 跨境-贸易材料明细查询}({@link QueryTradeRequest 请求参数}): {@link QueryTradeResponse 返回参数} */
   QueryTrade(data: QueryTradeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTradeResponse>;
-  /** 智慧薪酬-通过商家或者微信批次号查询批次单 */
+  /** {@link QueryTransferBatch 智慧薪酬-通过商家或者微信批次号查询批次单}({@link QueryTransferBatchRequest 请求参数}): {@link QueryTransferBatchResponse 返回参数} */
   QueryTransferBatch(data: QueryTransferBatchRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTransferBatchResponse>;
-  /** 智慧薪酬-通过明细单号查询批明细单 */
+  /** {@link QueryTransferDetail 智慧薪酬-通过明细单号查询批明细单}({@link QueryTransferDetailRequest 请求参数}): {@link QueryTransferDetailResponse 返回参数} */
   QueryTransferDetail(data: QueryTransferDetailRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTransferDetailResponse>;
-  /** 智能代发-单笔代发转账查询接口 */
+  /** {@link QueryTransferResult 智能代发-单笔代发转账查询接口}({@link QueryTransferResultRequest 请求参数}): {@link QueryTransferResultResponse 返回参数} */
   QueryTransferResult(data: QueryTransferResultRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTransferResultResponse>;
-  /** 会员在途充值(经第三方支付渠道)接口 */
+  /** {@link RechargeByThirdPay 会员在途充值(经第三方支付渠道)接口}({@link RechargeByThirdPayRequest 请求参数}): {@link RechargeByThirdPayResponse 返回参数} */
   RechargeByThirdPay(data: RechargeByThirdPayRequest, config?: AxiosRequestConfig): AxiosPromise<RechargeByThirdPayResponse>;
-  /** 云鉴-会员在途充值(经第三方支付渠道) */
+  /** {@link RechargeMemberThirdPay 云鉴-会员在途充值(经第三方支付渠道)}({@link RechargeMemberThirdPayRequest 请求参数}): {@link RechargeMemberThirdPayResponse 返回参数} */
   RechargeMemberThirdPay(data: RechargeMemberThirdPayRequest, config?: AxiosRequestConfig): AxiosPromise<RechargeMemberThirdPayResponse>;
-  /** 聚鑫-退款接口 */
+  /** {@link Refund 聚鑫-退款接口}({@link RefundRequest 请求参数}): {@link RefundResponse 返回参数} */
   Refund(data: RefundRequest, config?: AxiosRequestConfig): AxiosPromise<RefundResponse>;
-  /** 聚鑫V2-退款申请 */
+  /** {@link RefundCloudOrder 聚鑫V2-退款申请}({@link RefundCloudOrderRequest 请求参数}): {@link RefundCloudOrderResponse 返回参数} */
   RefundCloudOrder(data: RefundCloudOrderRequest, config?: AxiosRequestConfig): AxiosPromise<RefundCloudOrderResponse>;
-  /** 会员间交易退款 */
+  /** {@link RefundMemberTransaction 会员间交易退款}({@link RefundMemberTransactionRequest 请求参数}): {@link RefundMemberTransactionResponse 返回参数} */
   RefundMemberTransaction(data: RefundMemberTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<RefundMemberTransactionResponse>;
-  /** 云企付-退款申请 */
+  /** {@link RefundOpenBankOrder 云企付-退款申请}({@link RefundOpenBankOrderRequest 请求参数}): {@link RefundOpenBankOrderResponse 返回参数} */
   RefundOpenBankOrder(data: RefundOpenBankOrderRequest, config?: AxiosRequestConfig): AxiosPromise<RefundOpenBankOrderResponse>;
-  /** 云鉴-消费订单退款接口 */
+  /** {@link RefundOrder 云鉴-消费订单退款接口}({@link RefundOrderRequest 请求参数}): {@link RefundOrderResponse 返回参数} */
   RefundOrder(data: RefundOrderRequest, config?: AxiosRequestConfig): AxiosPromise<RefundOrderResponse>;
-  /** 云支付-订单退款接口 */
+  /** {@link RefundTlinxOrder 云支付-订单退款接口}({@link RefundTlinxOrderRequest 请求参数}): {@link RefundTlinxOrderResponse 返回参数} */
   RefundTlinxOrder(data: RefundTlinxOrderRequest, config?: AxiosRequestConfig): AxiosPromise<RefundTlinxOrderResponse>;
-  /** 聚鑫-签约行为上报 */
+  /** {@link RegisterBehavior 聚鑫-签约行为上报}({@link RegisterBehaviorRequest 请求参数}): {@link RegisterBehaviorResponse 返回参数} */
   RegisterBehavior(data: RegisterBehaviorRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterBehaviorResponse>;
-  /** 登记挂账(支持撤销) */
+  /** {@link RegisterBill 登记挂账(支持撤销)}({@link RegisterBillRequest 请求参数}): {@link RegisterBillResponse 返回参数} */
   RegisterBill(data: RegisterBillRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterBillResponse>;
-  /** 云鉴-登记挂账 */
+  /** {@link RegisterBillSupportWithdraw 云鉴-登记挂账}({@link RegisterBillSupportWithdrawRequest 请求参数}): {@link RegisterBillSupportWithdrawResponse 返回参数} */
   RegisterBillSupportWithdraw(data: RegisterBillSupportWithdrawRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterBillSupportWithdrawResponse>;
-  /** 云鉴-登记挂账撤销 */
+  /** {@link RevResigterBillSupportWithdraw 云鉴-登记挂账撤销}({@link RevResigterBillSupportWithdrawRequest 请求参数}): {@link RevResigterBillSupportWithdrawResponse 返回参数} */
   RevResigterBillSupportWithdraw(data: RevResigterBillSupportWithdrawRequest, config?: AxiosRequestConfig): AxiosPromise<RevResigterBillSupportWithdrawResponse>;
-  /** 云鉴-修改会员属性-普通商户子账户 */
+  /** {@link ReviseMbrProperty 云鉴-修改会员属性-普通商户子账户}({@link ReviseMbrPropertyRequest 请求参数}): {@link ReviseMbrPropertyResponse 返回参数} */
   ReviseMbrProperty(data: ReviseMbrPropertyRequest, config?: AxiosRequestConfig): AxiosPromise<ReviseMbrPropertyResponse>;
-  /** 云鉴-撤销会员在途充值(经第三方支付渠道) */
+  /** {@link RevokeMemberRechargeThirdPay 云鉴-撤销会员在途充值(经第三方支付渠道)}({@link RevokeMemberRechargeThirdPayRequest 请求参数}): {@link RevokeMemberRechargeThirdPayResponse 返回参数} */
   RevokeMemberRechargeThirdPay(data: RevokeMemberRechargeThirdPayRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeMemberRechargeThirdPayResponse>;
-  /** 撤销会员在途充值(经第三方支付渠道)接口 */
+  /** {@link RevokeRechargeByThirdPay 撤销会员在途充值(经第三方支付渠道)接口}({@link RevokeRechargeByThirdPayRequest 请求参数}): {@link RevokeRechargeByThirdPayResponse 返回参数} */
   RevokeRechargeByThirdPay(data: RevokeRechargeByThirdPayRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeRechargeByThirdPayResponse>;
-  /** 签约状态同步接口 */
+  /** {@link SyncContractData 签约状态同步接口}({@link SyncContractDataRequest 请求参数}): {@link SyncContractDataResponse 返回参数} */
   SyncContractData(data: SyncContractDataRequest, config?: AxiosRequestConfig): AxiosPromise<SyncContractDataResponse>;
-  /** 解除签约关系接口 */
+  /** {@link TerminateContract 解除签约关系接口}({@link TerminateContractRequest 请求参数}): {@link TerminateContractResponse 返回参数} */
   TerminateContract(data: TerminateContractRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateContractResponse>;
-  /** 智能代发-单笔代发转账接口 */
+  /** {@link TransferSinglePay 智能代发-单笔代发转账接口}({@link TransferSinglePayRequest 请求参数}): {@link TransferSinglePayResponse 返回参数} */
   TransferSinglePay(data: TransferSinglePayRequest, config?: AxiosRequestConfig): AxiosPromise<TransferSinglePayResponse>;
-  /** 聚鑫-解绑银行卡 */
+  /** {@link UnBindAcct 聚鑫-解绑银行卡}({@link UnBindAcctRequest 请求参数}): {@link UnBindAcctResponse 返回参数} */
   UnBindAcct(data: UnBindAcctRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindAcctResponse>;
-  /** 云企付-子商户银行卡解绑 */
+  /** {@link UnbindOpenBankExternalSubMerchantBankAccount 云企付-子商户银行卡解绑}({@link UnbindOpenBankExternalSubMerchantBankAccountRequest 请求参数}): {@link UnbindOpenBankExternalSubMerchantBankAccountResponse 返回参数} */
   UnbindOpenBankExternalSubMerchantBankAccount(data: UnbindOpenBankExternalSubMerchantBankAccountRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindOpenBankExternalSubMerchantBankAccountResponse>;
-  /** 云鉴-会员解绑提现账户 */
+  /** {@link UnbindRelateAcct 云鉴-会员解绑提现账户}({@link UnbindRelateAcctRequest 请求参数}): {@link UnbindRelateAcctResponse 返回参数} */
   UnbindRelateAcct(data: UnbindRelateAcctRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindRelateAcctResponse>;
-  /** 聚鑫V2-统一下单 */
+  /** {@link UnifiedCloudOrder 聚鑫V2-统一下单}({@link UnifiedCloudOrderRequest 请求参数}): {@link UnifiedCloudOrderResponse 返回参数} */
   UnifiedCloudOrder(data: UnifiedCloudOrderRequest, config?: AxiosRequestConfig): AxiosPromise<UnifiedCloudOrderResponse>;
-  /** 聚鑫-统一下单接口 */
+  /** {@link UnifiedOrder 聚鑫-统一下单接口}({@link UnifiedOrderRequest 请求参数}): {@link UnifiedOrderResponse 返回参数} */
   UnifiedOrder(data: UnifiedOrderRequest, config?: AxiosRequestConfig): AxiosPromise<UnifiedOrderResponse>;
-  /** 云支付-统一下单接口 */
+  /** {@link UnifiedTlinxOrder 云支付-统一下单接口}({@link UnifiedTlinxOrderRequest 请求参数}): {@link UnifiedTlinxOrderResponse 返回参数} */
   UnifiedTlinxOrder(data: UnifiedTlinxOrderRequest, config?: AxiosRequestConfig): AxiosPromise<UnifiedTlinxOrderResponse>;
-  /** 灵云-上传主播信息 */
+  /** {@link UploadExternalAnchorInfo 灵云-上传主播信息}({@link UploadExternalAnchorInfoRequest 请求参数}): {@link UploadExternalAnchorInfoResponse 返回参数} */
   UploadExternalAnchorInfo(data: UploadExternalAnchorInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UploadExternalAnchorInfoResponse>;
-  /** 直播平台-文件上传 */
+  /** {@link UploadFile 直播平台-文件上传}({@link UploadFileRequest 请求参数}): {@link UploadFileResponse 返回参数} */
   UploadFile(data: UploadFileRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFileResponse>;
-  /** 云企付-子商户资质文件上传 */
+  /** {@link UploadOpenBankSubMerchantCredential 云企付-子商户资质文件上传}({@link UploadOpenBankSubMerchantCredentialRequest 请求参数}): {@link UploadOpenBankSubMerchantCredentialResponse 返回参数} */
   UploadOpenBankSubMerchantCredential(data: UploadOpenBankSubMerchantCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<UploadOpenBankSubMerchantCredentialResponse>;
-  /** 云支付-上传机构文件接口 */
+  /** {@link UploadOrgFile 云支付-上传机构文件接口}({@link UploadOrgFileRequest 请求参数}): {@link UploadOrgFileResponse 返回参数} */
   UploadOrgFile(data: UploadOrgFileRequest, config?: AxiosRequestConfig): AxiosPromise<UploadOrgFileResponse>;
-  /** 直播平台-上传代理商完税列表 */
+  /** {@link UploadTaxList 直播平台-上传代理商完税列表}({@link UploadTaxListRequest 请求参数}): {@link UploadTaxListResponse 返回参数} */
   UploadTaxList(data: UploadTaxListRequest, config?: AxiosRequestConfig): AxiosPromise<UploadTaxListResponse>;
-  /** 直播平台-上传代理商完税证明 */
+  /** {@link UploadTaxPayment 直播平台-上传代理商完税证明}({@link UploadTaxPaymentRequest 请求参数}): {@link UploadTaxPaymentResponse 返回参数} */
   UploadTaxPayment(data: UploadTaxPaymentRequest, config?: AxiosRequestConfig): AxiosPromise<UploadTaxPaymentResponse>;
-  /** 云企付-子商户银行卡打款验证 */
+  /** {@link VerifyOpenBankAccount 云企付-子商户银行卡打款验证}({@link VerifyOpenBankAccountRequest 请求参数}): {@link VerifyOpenBankAccountResponse 返回参数} */
   VerifyOpenBankAccount(data: VerifyOpenBankAccountRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyOpenBankAccountResponse>;
-  /** 云支付-查询合同明细接口 */
+  /** {@link ViewContract 云支付-查询合同明细接口}({@link ViewContractRequest 请求参数}): {@link ViewContractResponse 返回参数} */
   ViewContract(data: ViewContractRequest, config?: AxiosRequestConfig): AxiosPromise<ViewContractResponse>;
-  /** 云支付-查询商户明细接口 */
+  /** {@link ViewMerchant 云支付-查询商户明细接口}({@link ViewMerchantRequest 请求参数}): {@link ViewMerchantResponse 返回参数} */
   ViewMerchant(data: ViewMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<ViewMerchantResponse>;
-  /** 云支付-查询门店明细接口 */
+  /** {@link ViewShop 云支付-查询门店明细接口}({@link ViewShopRequest 请求参数}): {@link ViewShopResponse 返回参数} */
   ViewShop(data: ViewShopRequest, config?: AxiosRequestConfig): AxiosPromise<ViewShopResponse>;
-  /** 云鉴-会员提现-不验证 */
+  /** {@link WithdrawCashMembership 云鉴-会员提现-不验证}({@link WithdrawCashMembershipRequest 请求参数}): {@link WithdrawCashMembershipResponse 返回参数} */
   WithdrawCashMembership(data: WithdrawCashMembershipRequest, config?: AxiosRequestConfig): AxiosPromise<WithdrawCashMembershipResponse>;
 }
 

@@ -6462,580 +6462,580 @@ declare interface WithdrawNotifyRoutesResponse {
   RequestId?: string;
 }
 
-/** [私有网络](https://cloud.tencent.com/document/product/215) */
+/** {@link Vpc 私有网络} */
 declare interface Vpc {
   (): Versions;
-  /** 云联网接受关联实例 */
+  /** {@link AcceptAttachCcnInstances 云联网接受关联实例}({@link AcceptAttachCcnInstancesRequest 请求参数}): {@link AcceptAttachCcnInstancesResponse 返回参数} */
   AcceptAttachCcnInstances(data: AcceptAttachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AcceptAttachCcnInstancesResponse>;
-  /** 添加带宽包资源 */
+  /** {@link AddBandwidthPackageResources 添加带宽包资源}({@link AddBandwidthPackageResourcesRequest 请求参数}): {@link AddBandwidthPackageResourcesResponse 返回参数} */
   AddBandwidthPackageResources(data: AddBandwidthPackageResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<AddBandwidthPackageResourcesResponse>;
-  /** 添加IPV6转换规则 */
+  /** {@link AddIp6Rules 添加IPV6转换规则}({@link AddIp6RulesRequest 请求参数}): {@link AddIp6RulesResponse 返回参数} */
   AddIp6Rules(data: AddIp6RulesRequest, config?: AxiosRequestConfig): AxiosPromise<AddIp6RulesResponse>;
-  /** 增加模板对象成员 */
+  /** {@link AddTemplateMember 增加模板对象成员}({@link AddTemplateMemberRequest 请求参数}): {@link AddTemplateMemberResponse 返回参数} */
   AddTemplateMember(data: AddTemplateMemberRequest, config?: AxiosRequestConfig): AxiosPromise<AddTemplateMemberResponse>;
-  /** 更换公网IP */
+  /** {@link AdjustPublicAddress 更换公网IP}({@link AdjustPublicAddressRequest 请求参数}): {@link AdjustPublicAddressResponse 返回参数} */
   AdjustPublicAddress(data?: AdjustPublicAddressRequest, config?: AxiosRequestConfig): AxiosPromise<AdjustPublicAddressResponse>;
-  /** 创建弹性公网IP */
+  /** {@link AllocateAddresses 创建弹性公网IP}({@link AllocateAddressesRequest 请求参数}): {@link AllocateAddressesResponse 返回参数} */
   AllocateAddresses(data?: AllocateAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateAddressesResponse>;
-  /** IPv6地址分配公网带宽 */
+  /** {@link AllocateIp6AddressesBandwidth IPv6地址分配公网带宽}({@link AllocateIp6AddressesBandwidthRequest 请求参数}): {@link AllocateIp6AddressesBandwidthResponse 返回参数} */
   AllocateIp6AddressesBandwidth(data: AllocateIp6AddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateIp6AddressesBandwidthResponse>;
-  /** 分配IPv6地址 */
+  /** {@link AssignIpv6Addresses 分配IPv6地址}({@link AssignIpv6AddressesRequest 请求参数}): {@link AssignIpv6AddressesResponse 返回参数} */
   AssignIpv6Addresses(data: AssignIpv6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<AssignIpv6AddressesResponse>;
-  /** 分配IPv6网段 */
+  /** {@link AssignIpv6CidrBlock 分配IPv6网段}({@link AssignIpv6CidrBlockRequest 请求参数}): {@link AssignIpv6CidrBlockResponse 返回参数} */
   AssignIpv6CidrBlock(data: AssignIpv6CidrBlockRequest, config?: AxiosRequestConfig): AxiosPromise<AssignIpv6CidrBlockResponse>;
-  /** 分配IPv6子网段 */
+  /** {@link AssignIpv6SubnetCidrBlock 分配IPv6子网段}({@link AssignIpv6SubnetCidrBlockRequest 请求参数}): {@link AssignIpv6SubnetCidrBlockResponse 返回参数} */
   AssignIpv6SubnetCidrBlock(data: AssignIpv6SubnetCidrBlockRequest, config?: AxiosRequestConfig): AxiosPromise<AssignIpv6SubnetCidrBlockResponse>;
-  /** 弹性网卡申请内网 IP */
+  /** {@link AssignPrivateIpAddresses 弹性网卡申请内网 IP}({@link AssignPrivateIpAddressesRequest 请求参数}): {@link AssignPrivateIpAddressesResponse 返回参数} */
   AssignPrivateIpAddresses(data: AssignPrivateIpAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<AssignPrivateIpAddressesResponse>;
-  /** 绑定弹性公网IP */
+  /** {@link AssociateAddress 绑定弹性公网IP}({@link AssociateAddressRequest 请求参数}): {@link AssociateAddressResponse 返回参数} */
   AssociateAddress(data: AssociateAddressRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateAddressResponse>;
-  /** DhcpIp绑定EIP */
+  /** {@link AssociateDhcpIpWithAddressIp DhcpIp绑定EIP}({@link AssociateDhcpIpWithAddressIpRequest 请求参数}): {@link AssociateDhcpIpWithAddressIpResponse 返回参数} */
   AssociateDhcpIpWithAddressIp(data: AssociateDhcpIpWithAddressIpRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateDhcpIpWithAddressIpResponse>;
-  /** 专线网关绑定NAT网关 */
+  /** {@link AssociateDirectConnectGatewayNatGateway 专线网关绑定NAT网关}({@link AssociateDirectConnectGatewayNatGatewayRequest 请求参数}): {@link AssociateDirectConnectGatewayNatGatewayResponse 返回参数} */
   AssociateDirectConnectGatewayNatGateway(data: AssociateDirectConnectGatewayNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateDirectConnectGatewayNatGatewayResponse>;
-  /** NAT网关绑定弹性IP */
+  /** {@link AssociateNatGatewayAddress NAT网关绑定弹性IP}({@link AssociateNatGatewayAddressRequest 请求参数}): {@link AssociateNatGatewayAddressResponse 返回参数} */
   AssociateNatGatewayAddress(data: AssociateNatGatewayAddressRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateNatGatewayAddressResponse>;
-  /** 网络ACL关联子网 */
+  /** {@link AssociateNetworkAclSubnets 网络ACL关联子网}({@link AssociateNetworkAclSubnetsRequest 请求参数}): {@link AssociateNetworkAclSubnetsResponse 返回参数} */
   AssociateNetworkAclSubnets(data: AssociateNetworkAclSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateNetworkAclSubnetsResponse>;
-  /** 弹性网卡绑定安全组 */
+  /** {@link AssociateNetworkInterfaceSecurityGroups 弹性网卡绑定安全组}({@link AssociateNetworkInterfaceSecurityGroupsRequest 请求参数}): {@link AssociateNetworkInterfaceSecurityGroupsResponse 返回参数} */
   AssociateNetworkInterfaceSecurityGroups(data: AssociateNetworkInterfaceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateNetworkInterfaceSecurityGroupsResponse>;
-  /** 云联网关联实例 */
+  /** {@link AttachCcnInstances 云联网关联实例}({@link AttachCcnInstancesRequest 请求参数}): {@link AttachCcnInstancesResponse 返回参数} */
   AttachCcnInstances(data: AttachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachCcnInstancesResponse>;
-  /** 创建基础网络互通 */
+  /** {@link AttachClassicLinkVpc 创建基础网络互通}({@link AttachClassicLinkVpcRequest 请求参数}): {@link AttachClassicLinkVpcResponse 返回参数} */
   AttachClassicLinkVpc(data: AttachClassicLinkVpcRequest, config?: AxiosRequestConfig): AxiosPromise<AttachClassicLinkVpcResponse>;
-  /** 弹性网卡绑定云服务器 */
+  /** {@link AttachNetworkInterface 弹性网卡绑定云服务器}({@link AttachNetworkInterfaceRequest 请求参数}): {@link AttachNetworkInterfaceResponse 返回参数} */
   AttachNetworkInterface(data: AttachNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<AttachNetworkInterfaceResponse>;
-  /** 合规化审批 */
+  /** {@link AuditCrossBorderCompliance 合规化审批}({@link AuditCrossBorderComplianceRequest 请求参数}): {@link AuditCrossBorderComplianceResponse 返回参数} */
   AuditCrossBorderCompliance(data: AuditCrossBorderComplianceRequest, config?: AxiosRequestConfig): AxiosPromise<AuditCrossBorderComplianceResponse>;
-  /** 检查辅助CIDR冲突 */
+  /** {@link CheckAssistantCidr 检查辅助CIDR冲突}({@link CheckAssistantCidrRequest 请求参数}): {@link CheckAssistantCidrResponse 返回参数} */
   CheckAssistantCidr(data: CheckAssistantCidrRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAssistantCidrResponse>;
-  /** 预判是否可建默认子网 */
+  /** {@link CheckDefaultSubnet 预判是否可建默认子网}({@link CheckDefaultSubnetRequest 请求参数}): {@link CheckDefaultSubnetResponse 返回参数} */
   CheckDefaultSubnet(data?: CheckDefaultSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDefaultSubnetResponse>;
-  /** 验证网络探测 */
+  /** {@link CheckNetDetectState 验证网络探测}({@link CheckNetDetectStateRequest 请求参数}): {@link CheckNetDetectStateResponse 返回参数} */
   CheckNetDetectState(data: CheckNetDetectStateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckNetDetectStateResponse>;
-  /** 克隆安全组 */
+  /** {@link CloneSecurityGroup 克隆安全组}({@link CloneSecurityGroupRequest 请求参数}): {@link CloneSecurityGroupResponse 返回参数} */
   CloneSecurityGroup(data: CloneSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CloneSecurityGroupResponse>;
-  /** 创建IP地址模板 */
+  /** {@link CreateAddressTemplate 创建IP地址模板}({@link CreateAddressTemplateRequest 请求参数}): {@link CreateAddressTemplateResponse 返回参数} */
   CreateAddressTemplate(data: CreateAddressTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAddressTemplateResponse>;
-  /** 创建IP地址模板集合 */
+  /** {@link CreateAddressTemplateGroup 创建IP地址模板集合}({@link CreateAddressTemplateGroupRequest 请求参数}): {@link CreateAddressTemplateGroupResponse 返回参数} */
   CreateAddressTemplateGroup(data: CreateAddressTemplateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAddressTemplateGroupResponse>;
-  /** 创建弹性网卡并绑定云服务器 */
+  /** {@link CreateAndAttachNetworkInterface 创建弹性网卡并绑定云服务器}({@link CreateAndAttachNetworkInterfaceRequest 请求参数}): {@link CreateAndAttachNetworkInterfaceResponse 返回参数} */
   CreateAndAttachNetworkInterface(data: CreateAndAttachNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndAttachNetworkInterfaceResponse>;
-  /** 创建辅助CIDR */
+  /** {@link CreateAssistantCidr 创建辅助CIDR}({@link CreateAssistantCidrRequest 请求参数}): {@link CreateAssistantCidrResponse 返回参数} */
   CreateAssistantCidr(data: CreateAssistantCidrRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssistantCidrResponse>;
-  /** 创建共享带宽包 */
+  /** {@link CreateBandwidthPackage 创建共享带宽包}({@link CreateBandwidthPackageRequest 请求参数}): {@link CreateBandwidthPackageResponse 返回参数} */
   CreateBandwidthPackage(data?: CreateBandwidthPackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBandwidthPackageResponse>;
-  /** 创建CCN */
+  /** {@link CreateCcn 创建CCN}({@link CreateCcnRequest 请求参数}): {@link CreateCcnResponse 返回参数} */
   CreateCcn(data: CreateCcnRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCcnResponse>;
-  /** 创建对端网关 */
+  /** {@link CreateCustomerGateway 创建对端网关}({@link CreateCustomerGatewayRequest 请求参数}): {@link CreateCustomerGatewayResponse 返回参数} */
   CreateCustomerGateway(data: CreateCustomerGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomerGatewayResponse>;
-  /** 创建默认安全组 */
+  /** {@link CreateDefaultSecurityGroup 创建默认安全组}({@link CreateDefaultSecurityGroupRequest 请求参数}): {@link CreateDefaultSecurityGroupResponse 返回参数} */
   CreateDefaultSecurityGroup(data?: CreateDefaultSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDefaultSecurityGroupResponse>;
-  /** 创建默认VPC和默认子网 */
+  /** {@link CreateDefaultVpc 创建默认VPC和默认子网}({@link CreateDefaultVpcRequest 请求参数}): {@link CreateDefaultVpcResponse 返回参数} */
   CreateDefaultVpc(data?: CreateDefaultVpcRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDefaultVpcResponse>;
-  /** 创建DhcpIp */
+  /** {@link CreateDhcpIp 创建DhcpIp}({@link CreateDhcpIpRequest 请求参数}): {@link CreateDhcpIpResponse 返回参数} */
   CreateDhcpIp(data: CreateDhcpIpRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDhcpIpResponse>;
-  /** 创建专线网关 */
+  /** {@link CreateDirectConnectGateway 创建专线网关}({@link CreateDirectConnectGatewayRequest 请求参数}): {@link CreateDirectConnectGatewayResponse 返回参数} */
   CreateDirectConnectGateway(data: CreateDirectConnectGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDirectConnectGatewayResponse>;
-  /** 创建专线网关云联网路由 */
+  /** {@link CreateDirectConnectGatewayCcnRoutes 创建专线网关云联网路由}({@link CreateDirectConnectGatewayCcnRoutesRequest 请求参数}): {@link CreateDirectConnectGatewayCcnRoutesResponse 返回参数} */
   CreateDirectConnectGatewayCcnRoutes(data: CreateDirectConnectGatewayCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDirectConnectGatewayCcnRoutesResponse>;
-  /** 创建流日志 */
+  /** {@link CreateFlowLog 创建流日志}({@link CreateFlowLogRequest 请求参数}): {@link CreateFlowLogResponse 返回参数} */
   CreateFlowLog(data: CreateFlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowLogResponse>;
-  /** 创建HAVIP */
+  /** {@link CreateHaVip 创建HAVIP}({@link CreateHaVipRequest 请求参数}): {@link CreateHaVipResponse 返回参数} */
   CreateHaVip(data: CreateHaVipRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHaVipResponse>;
-  /** 创建IPV6转换IPV4实例 */
+  /** {@link CreateIp6Translators 创建IPV6转换IPV4实例}({@link CreateIp6TranslatorsRequest 请求参数}): {@link CreateIp6TranslatorsResponse 返回参数} */
   CreateIp6Translators(data?: CreateIp6TranslatorsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIp6TranslatorsResponse>;
-  /** 创建本地网关 */
+  /** {@link CreateLocalGateway 创建本地网关}({@link CreateLocalGatewayRequest 请求参数}): {@link CreateLocalGatewayResponse 返回参数} */
   CreateLocalGateway(data: CreateLocalGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLocalGatewayResponse>;
-  /** 创建NAT网关 */
+  /** {@link CreateNatGateway 创建NAT网关}({@link CreateNatGatewayRequest 请求参数}): {@link CreateNatGatewayResponse 返回参数} */
   CreateNatGateway(data: CreateNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNatGatewayResponse>;
-  /** 创建NAT网关端口转发规则 */
+  /** {@link CreateNatGatewayDestinationIpPortTranslationNatRule 创建NAT网关端口转发规则}({@link CreateNatGatewayDestinationIpPortTranslationNatRuleRequest 请求参数}): {@link CreateNatGatewayDestinationIpPortTranslationNatRuleResponse 返回参数} */
   CreateNatGatewayDestinationIpPortTranslationNatRule(data: CreateNatGatewayDestinationIpPortTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNatGatewayDestinationIpPortTranslationNatRuleResponse>;
-  /** 创建NAT网关SNAT规则 */
+  /** {@link CreateNatGatewaySourceIpTranslationNatRule 创建NAT网关SNAT规则}({@link CreateNatGatewaySourceIpTranslationNatRuleRequest 请求参数}): {@link CreateNatGatewaySourceIpTranslationNatRuleResponse 返回参数} */
   CreateNatGatewaySourceIpTranslationNatRule(data: CreateNatGatewaySourceIpTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNatGatewaySourceIpTranslationNatRuleResponse>;
-  /** 创建网络探测 */
+  /** {@link CreateNetDetect 创建网络探测}({@link CreateNetDetectRequest 请求参数}): {@link CreateNetDetectResponse 返回参数} */
   CreateNetDetect(data: CreateNetDetectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetDetectResponse>;
-  /** 创建网络ACL */
+  /** {@link CreateNetworkAcl 创建网络ACL}({@link CreateNetworkAclRequest 请求参数}): {@link CreateNetworkAclResponse 返回参数} */
   CreateNetworkAcl(data: CreateNetworkAclRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkAclResponse>;
-  /** 增量添加网络ACL五元组规则接口 */
+  /** {@link CreateNetworkAclQuintupleEntries 增量添加网络ACL五元组规则接口}({@link CreateNetworkAclQuintupleEntriesRequest 请求参数}): {@link CreateNetworkAclQuintupleEntriesResponse 返回参数} */
   CreateNetworkAclQuintupleEntries(data: CreateNetworkAclQuintupleEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkAclQuintupleEntriesResponse>;
-  /** 创建弹性网卡 */
+  /** {@link CreateNetworkInterface 创建弹性网卡}({@link CreateNetworkInterfaceRequest 请求参数}): {@link CreateNetworkInterfaceResponse 返回参数} */
   CreateNetworkInterface(data: CreateNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkInterfaceResponse>;
-  /** 创建路由表 */
+  /** {@link CreateRouteTable 创建路由表}({@link CreateRouteTableRequest 请求参数}): {@link CreateRouteTableResponse 返回参数} */
   CreateRouteTable(data: CreateRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRouteTableResponse>;
-  /** 创建路由策略 */
+  /** {@link CreateRoutes 创建路由策略}({@link CreateRoutesRequest 请求参数}): {@link CreateRoutesResponse 返回参数} */
   CreateRoutes(data: CreateRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoutesResponse>;
-  /** 创建安全组 */
+  /** {@link CreateSecurityGroup 创建安全组}({@link CreateSecurityGroupRequest 请求参数}): {@link CreateSecurityGroupResponse 返回参数} */
   CreateSecurityGroup(data: CreateSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityGroupResponse>;
-  /** 安全组添加规则 */
+  /** {@link CreateSecurityGroupPolicies 安全组添加规则}({@link CreateSecurityGroupPoliciesRequest 请求参数}): {@link CreateSecurityGroupPoliciesResponse 返回参数} */
   CreateSecurityGroupPolicies(data: CreateSecurityGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityGroupPoliciesResponse>;
-  /** 创建安全组和规则 */
+  /** {@link CreateSecurityGroupWithPolicies 创建安全组和规则}({@link CreateSecurityGroupWithPoliciesRequest 请求参数}): {@link CreateSecurityGroupWithPoliciesResponse 返回参数} */
   CreateSecurityGroupWithPolicies(data: CreateSecurityGroupWithPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityGroupWithPoliciesResponse>;
-  /** 创建协议端口模板 */
+  /** {@link CreateServiceTemplate 创建协议端口模板}({@link CreateServiceTemplateRequest 请求参数}): {@link CreateServiceTemplateResponse 返回参数} */
   CreateServiceTemplate(data: CreateServiceTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceTemplateResponse>;
-  /** 创建协议端口模板集合 */
+  /** {@link CreateServiceTemplateGroup 创建协议端口模板集合}({@link CreateServiceTemplateGroupRequest 请求参数}): {@link CreateServiceTemplateGroupResponse 返回参数} */
   CreateServiceTemplateGroup(data: CreateServiceTemplateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceTemplateGroupResponse>;
-  /** 创建子网 */
+  /** {@link CreateSubnet 创建子网}({@link CreateSubnetRequest 请求参数}): {@link CreateSubnetResponse 返回参数} */
   CreateSubnet(data: CreateSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubnetResponse>;
-  /** 批量创建子网 */
+  /** {@link CreateSubnets 批量创建子网}({@link CreateSubnetsRequest 请求参数}): {@link CreateSubnetsResponse 返回参数} */
   CreateSubnets(data: CreateSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubnetsResponse>;
-  /** 创建VPC */
+  /** {@link CreateVpc 创建VPC}({@link CreateVpcRequest 请求参数}): {@link CreateVpcResponse 返回参数} */
   CreateVpc(data: CreateVpcRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcResponse>;
-  /** 创建终端节点 */
+  /** {@link CreateVpcEndPoint 创建终端节点}({@link CreateVpcEndPointRequest 请求参数}): {@link CreateVpcEndPointResponse 返回参数} */
   CreateVpcEndPoint(data: CreateVpcEndPointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcEndPointResponse>;
-  /** 创建终端节点服务 */
+  /** {@link CreateVpcEndPointService 创建终端节点服务}({@link CreateVpcEndPointServiceRequest 请求参数}): {@link CreateVpcEndPointServiceResponse 返回参数} */
   CreateVpcEndPointService(data: CreateVpcEndPointServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcEndPointServiceResponse>;
-  /** 创建终端服务白名单 */
+  /** {@link CreateVpcEndPointServiceWhiteList 创建终端服务白名单}({@link CreateVpcEndPointServiceWhiteListRequest 请求参数}): {@link CreateVpcEndPointServiceWhiteListResponse 返回参数} */
   CreateVpcEndPointServiceWhiteList(data: CreateVpcEndPointServiceWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcEndPointServiceWhiteListResponse>;
-  /** 创建VPN通道 */
+  /** {@link CreateVpnConnection 创建VPN通道}({@link CreateVpnConnectionRequest 请求参数}): {@link CreateVpnConnectionResponse 返回参数} */
   CreateVpnConnection(data: CreateVpnConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpnConnectionResponse>;
-  /** 创建VPN网关 */
+  /** {@link CreateVpnGateway 创建VPN网关}({@link CreateVpnGatewayRequest 请求参数}): {@link CreateVpnGatewayResponse 返回参数} */
   CreateVpnGateway(data: CreateVpnGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpnGatewayResponse>;
-  /** 创建VPN网关路由 */
+  /** {@link CreateVpnGatewayRoutes 创建VPN网关路由}({@link CreateVpnGatewayRoutesRequest 请求参数}): {@link CreateVpnGatewayRoutesResponse 返回参数} */
   CreateVpnGatewayRoutes(data: CreateVpnGatewayRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpnGatewayRoutesResponse>;
-  /** 创建SSL-VPN-CLIENT */
+  /** {@link CreateVpnGatewaySslClient 创建SSL-VPN-CLIENT}({@link CreateVpnGatewaySslClientRequest 请求参数}): {@link CreateVpnGatewaySslClientResponse 返回参数} */
   CreateVpnGatewaySslClient(data: CreateVpnGatewaySslClientRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpnGatewaySslClientResponse>;
-  /** 创建SSL-VPN Server端 */
+  /** {@link CreateVpnGatewaySslServer 创建SSL-VPN Server端}({@link CreateVpnGatewaySslServerRequest 请求参数}): {@link CreateVpnGatewaySslServerResponse 返回参数} */
   CreateVpnGatewaySslServer(data: CreateVpnGatewaySslServerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpnGatewaySslServerResponse>;
-  /** 删除IP地址模板 */
+  /** {@link DeleteAddressTemplate 删除IP地址模板}({@link DeleteAddressTemplateRequest 请求参数}): {@link DeleteAddressTemplateResponse 返回参数} */
   DeleteAddressTemplate(data: DeleteAddressTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAddressTemplateResponse>;
-  /** 删除IP地址模板集合 */
+  /** {@link DeleteAddressTemplateGroup 删除IP地址模板集合}({@link DeleteAddressTemplateGroupRequest 请求参数}): {@link DeleteAddressTemplateGroupResponse 返回参数} */
   DeleteAddressTemplateGroup(data: DeleteAddressTemplateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAddressTemplateGroupResponse>;
-  /** 删除辅助CIDR */
+  /** {@link DeleteAssistantCidr 删除辅助CIDR}({@link DeleteAssistantCidrRequest 请求参数}): {@link DeleteAssistantCidrResponse 返回参数} */
   DeleteAssistantCidr(data: DeleteAssistantCidrRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAssistantCidrResponse>;
-  /** 删除共享带宽包 */
+  /** {@link DeleteBandwidthPackage 删除共享带宽包}({@link DeleteBandwidthPackageRequest 请求参数}): {@link DeleteBandwidthPackageResponse 返回参数} */
   DeleteBandwidthPackage(data: DeleteBandwidthPackageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBandwidthPackageResponse>;
-  /** 删除CCN */
+  /** {@link DeleteCcn 删除CCN}({@link DeleteCcnRequest 请求参数}): {@link DeleteCcnResponse 返回参数} */
   DeleteCcn(data: DeleteCcnRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCcnResponse>;
-  /** 删除对端网关 */
+  /** {@link DeleteCustomerGateway 删除对端网关}({@link DeleteCustomerGatewayRequest 请求参数}): {@link DeleteCustomerGatewayResponse 返回参数} */
   DeleteCustomerGateway(data: DeleteCustomerGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomerGatewayResponse>;
-  /** 删除DhcpIp */
+  /** {@link DeleteDhcpIp 删除DhcpIp}({@link DeleteDhcpIpRequest 请求参数}): {@link DeleteDhcpIpResponse 返回参数} */
   DeleteDhcpIp(data: DeleteDhcpIpRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDhcpIpResponse>;
-  /** 删除专线网关 */
+  /** {@link DeleteDirectConnectGateway 删除专线网关}({@link DeleteDirectConnectGatewayRequest 请求参数}): {@link DeleteDirectConnectGatewayResponse 返回参数} */
   DeleteDirectConnectGateway(data: DeleteDirectConnectGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDirectConnectGatewayResponse>;
-  /** 删除专线网关云联网路由 */
+  /** {@link DeleteDirectConnectGatewayCcnRoutes 删除专线网关云联网路由}({@link DeleteDirectConnectGatewayCcnRoutesRequest 请求参数}): {@link DeleteDirectConnectGatewayCcnRoutesResponse 返回参数} */
   DeleteDirectConnectGatewayCcnRoutes(data: DeleteDirectConnectGatewayCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDirectConnectGatewayCcnRoutesResponse>;
-  /** 删除流日志 */
+  /** {@link DeleteFlowLog 删除流日志}({@link DeleteFlowLogRequest 请求参数}): {@link DeleteFlowLogResponse 返回参数} */
   DeleteFlowLog(data: DeleteFlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFlowLogResponse>;
-  /** 删除HAVIP */
+  /** {@link DeleteHaVip 删除HAVIP}({@link DeleteHaVipRequest 请求参数}): {@link DeleteHaVipResponse 返回参数} */
   DeleteHaVip(data: DeleteHaVipRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHaVipResponse>;
-  /** 释放IPV6转换实例 */
+  /** {@link DeleteIp6Translators 释放IPV6转换实例}({@link DeleteIp6TranslatorsRequest 请求参数}): {@link DeleteIp6TranslatorsResponse 返回参数} */
   DeleteIp6Translators(data: DeleteIp6TranslatorsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIp6TranslatorsResponse>;
-  /** 删除本地网关 */
+  /** {@link DeleteLocalGateway 删除本地网关}({@link DeleteLocalGatewayRequest 请求参数}): {@link DeleteLocalGatewayResponse 返回参数} */
   DeleteLocalGateway(data: DeleteLocalGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLocalGatewayResponse>;
-  /** 删除NAT网关 */
+  /** {@link DeleteNatGateway 删除NAT网关}({@link DeleteNatGatewayRequest 请求参数}): {@link DeleteNatGatewayResponse 返回参数} */
   DeleteNatGateway(data: DeleteNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNatGatewayResponse>;
-  /** 删除NAT网关端口转发规则 */
+  /** {@link DeleteNatGatewayDestinationIpPortTranslationNatRule 删除NAT网关端口转发规则}({@link DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest 请求参数}): {@link DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse 返回参数} */
   DeleteNatGatewayDestinationIpPortTranslationNatRule(data: DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse>;
-  /** 删除NAT网关的SNAT转发规则 */
+  /** {@link DeleteNatGatewaySourceIpTranslationNatRule 删除NAT网关的SNAT转发规则}({@link DeleteNatGatewaySourceIpTranslationNatRuleRequest 请求参数}): {@link DeleteNatGatewaySourceIpTranslationNatRuleResponse 返回参数} */
   DeleteNatGatewaySourceIpTranslationNatRule(data: DeleteNatGatewaySourceIpTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNatGatewaySourceIpTranslationNatRuleResponse>;
-  /** 删除网络探测 */
+  /** {@link DeleteNetDetect 删除网络探测}({@link DeleteNetDetectRequest 请求参数}): {@link DeleteNetDetectResponse 返回参数} */
   DeleteNetDetect(data: DeleteNetDetectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNetDetectResponse>;
-  /** 删除网络ACL */
+  /** {@link DeleteNetworkAcl 删除网络ACL}({@link DeleteNetworkAclRequest 请求参数}): {@link DeleteNetworkAclResponse 返回参数} */
   DeleteNetworkAcl(data: DeleteNetworkAclRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNetworkAclResponse>;
-  /** 删除网络ACL五元组指定的部分条目接口。 */
+  /** {@link DeleteNetworkAclQuintupleEntries 删除网络ACL五元组指定的部分条目接口。}({@link DeleteNetworkAclQuintupleEntriesRequest 请求参数}): {@link DeleteNetworkAclQuintupleEntriesResponse 返回参数} */
   DeleteNetworkAclQuintupleEntries(data: DeleteNetworkAclQuintupleEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNetworkAclQuintupleEntriesResponse>;
-  /** 删除弹性网卡 */
+  /** {@link DeleteNetworkInterface 删除弹性网卡}({@link DeleteNetworkInterfaceRequest 请求参数}): {@link DeleteNetworkInterfaceResponse 返回参数} */
   DeleteNetworkInterface(data: DeleteNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNetworkInterfaceResponse>;
-  /** 删除路由表 */
+  /** {@link DeleteRouteTable 删除路由表}({@link DeleteRouteTableRequest 请求参数}): {@link DeleteRouteTableResponse 返回参数} */
   DeleteRouteTable(data: DeleteRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRouteTableResponse>;
-  /** 删除路由策略 */
+  /** {@link DeleteRoutes 删除路由策略}({@link DeleteRoutesRequest 请求参数}): {@link DeleteRoutesResponse 返回参数} */
   DeleteRoutes(data: DeleteRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoutesResponse>;
-  /** 删除安全组 */
+  /** {@link DeleteSecurityGroup 删除安全组}({@link DeleteSecurityGroupRequest 请求参数}): {@link DeleteSecurityGroupResponse 返回参数} */
   DeleteSecurityGroup(data: DeleteSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityGroupResponse>;
-  /** 删除安全组规则 */
+  /** {@link DeleteSecurityGroupPolicies 删除安全组规则}({@link DeleteSecurityGroupPoliciesRequest 请求参数}): {@link DeleteSecurityGroupPoliciesResponse 返回参数} */
   DeleteSecurityGroupPolicies(data: DeleteSecurityGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityGroupPoliciesResponse>;
-  /** 删除协议端口模板 */
+  /** {@link DeleteServiceTemplate 删除协议端口模板}({@link DeleteServiceTemplateRequest 请求参数}): {@link DeleteServiceTemplateResponse 返回参数} */
   DeleteServiceTemplate(data: DeleteServiceTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceTemplateResponse>;
-  /** 删除协议端口模板集合 */
+  /** {@link DeleteServiceTemplateGroup 删除协议端口模板集合}({@link DeleteServiceTemplateGroupRequest 请求参数}): {@link DeleteServiceTemplateGroupResponse 返回参数} */
   DeleteServiceTemplateGroup(data: DeleteServiceTemplateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceTemplateGroupResponse>;
-  /** 删除子网 */
+  /** {@link DeleteSubnet 删除子网}({@link DeleteSubnetRequest 请求参数}): {@link DeleteSubnetResponse 返回参数} */
   DeleteSubnet(data: DeleteSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubnetResponse>;
-  /** 删除模板对象成员 */
+  /** {@link DeleteTemplateMember 删除模板对象成员}({@link DeleteTemplateMemberRequest 请求参数}): {@link DeleteTemplateMemberResponse 返回参数} */
   DeleteTemplateMember(data: DeleteTemplateMemberRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTemplateMemberResponse>;
-  /** 删除VPC */
+  /** {@link DeleteVpc 删除VPC}({@link DeleteVpcRequest 请求参数}): {@link DeleteVpcResponse 返回参数} */
   DeleteVpc(data: DeleteVpcRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcResponse>;
-  /** 删除终端节点 */
+  /** {@link DeleteVpcEndPoint 删除终端节点}({@link DeleteVpcEndPointRequest 请求参数}): {@link DeleteVpcEndPointResponse 返回参数} */
   DeleteVpcEndPoint(data: DeleteVpcEndPointRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcEndPointResponse>;
-  /** 删除终端节点服务 */
+  /** {@link DeleteVpcEndPointService 删除终端节点服务}({@link DeleteVpcEndPointServiceRequest 请求参数}): {@link DeleteVpcEndPointServiceResponse 返回参数} */
   DeleteVpcEndPointService(data: DeleteVpcEndPointServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcEndPointServiceResponse>;
-  /** 删除终端节点服务白名单 */
+  /** {@link DeleteVpcEndPointServiceWhiteList 删除终端节点服务白名单}({@link DeleteVpcEndPointServiceWhiteListRequest 请求参数}): {@link DeleteVpcEndPointServiceWhiteListResponse 返回参数} */
   DeleteVpcEndPointServiceWhiteList(data: DeleteVpcEndPointServiceWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcEndPointServiceWhiteListResponse>;
-  /** 删除VPN通道 */
+  /** {@link DeleteVpnConnection 删除VPN通道}({@link DeleteVpnConnectionRequest 请求参数}): {@link DeleteVpnConnectionResponse 返回参数} */
   DeleteVpnConnection(data: DeleteVpnConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnConnectionResponse>;
-  /** 删除VPN网关 */
+  /** {@link DeleteVpnGateway 删除VPN网关}({@link DeleteVpnGatewayRequest 请求参数}): {@link DeleteVpnGatewayResponse 返回参数} */
   DeleteVpnGateway(data: DeleteVpnGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnGatewayResponse>;
-  /** 删除VPN网关路由 */
+  /** {@link DeleteVpnGatewayRoutes 删除VPN网关路由}({@link DeleteVpnGatewayRoutesRequest 请求参数}): {@link DeleteVpnGatewayRoutesResponse 返回参数} */
   DeleteVpnGatewayRoutes(data: DeleteVpnGatewayRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnGatewayRoutesResponse>;
-  /** 删除SSL-VPN-CLIENT */
+  /** {@link DeleteVpnGatewaySslClient 删除SSL-VPN-CLIENT}({@link DeleteVpnGatewaySslClientRequest 请求参数}): {@link DeleteVpnGatewaySslClientResponse 返回参数} */
   DeleteVpnGatewaySslClient(data: DeleteVpnGatewaySslClientRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnGatewaySslClientResponse>;
-  /** 删除SSL-VPN-SERVER */
+  /** {@link DeleteVpnGatewaySslServer 删除SSL-VPN-SERVER}({@link DeleteVpnGatewaySslServerRequest 请求参数}): {@link DeleteVpnGatewaySslServerResponse 返回参数} */
   DeleteVpnGatewaySslServer(data: DeleteVpnGatewaySslServerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnGatewaySslServerResponse>;
-  /** 查询账户属性 */
+  /** {@link DescribeAccountAttributes 查询账户属性}({@link DescribeAccountAttributesRequest 请求参数}): {@link DescribeAccountAttributesResponse 返回参数} */
   DescribeAccountAttributes(data?: DescribeAccountAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountAttributesResponse>;
-  /** 查询弹性公网IP配额 */
+  /** {@link DescribeAddressQuota 查询弹性公网IP配额}({@link DescribeAddressQuotaRequest 请求参数}): {@link DescribeAddressQuotaResponse 返回参数} */
   DescribeAddressQuota(data?: DescribeAddressQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressQuotaResponse>;
-  /** 查询IP地址模板集合 */
+  /** {@link DescribeAddressTemplateGroups 查询IP地址模板集合}({@link DescribeAddressTemplateGroupsRequest 请求参数}): {@link DescribeAddressTemplateGroupsResponse 返回参数} */
   DescribeAddressTemplateGroups(data?: DescribeAddressTemplateGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressTemplateGroupsResponse>;
-  /** 查询IP地址模板 */
+  /** {@link DescribeAddressTemplates 查询IP地址模板}({@link DescribeAddressTemplatesRequest 请求参数}): {@link DescribeAddressTemplatesResponse 返回参数} */
   DescribeAddressTemplates(data?: DescribeAddressTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressTemplatesResponse>;
-  /** 查询弹性公网IP列表 */
+  /** {@link DescribeAddresses 查询弹性公网IP列表}({@link DescribeAddressesRequest 请求参数}): {@link DescribeAddressesResponse 返回参数} */
   DescribeAddresses(data?: DescribeAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressesResponse>;
-  /** 查询辅助CIDR列表 */
+  /** {@link DescribeAssistantCidr 查询辅助CIDR列表}({@link DescribeAssistantCidrRequest 请求参数}): {@link DescribeAssistantCidrResponse 返回参数} */
   DescribeAssistantCidr(data?: DescribeAssistantCidrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssistantCidrResponse>;
-  /** 查询后付费共享带宽包当前的用量 */
+  /** {@link DescribeBandwidthPackageBillUsage 查询后付费共享带宽包当前的用量}({@link DescribeBandwidthPackageBillUsageRequest 请求参数}): {@link DescribeBandwidthPackageBillUsageResponse 返回参数} */
   DescribeBandwidthPackageBillUsage(data: DescribeBandwidthPackageBillUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBandwidthPackageBillUsageResponse>;
-  /** 查询带宽包配额 */
+  /** {@link DescribeBandwidthPackageQuota 查询带宽包配额}({@link DescribeBandwidthPackageQuotaRequest 请求参数}): {@link DescribeBandwidthPackageQuotaResponse 返回参数} */
   DescribeBandwidthPackageQuota(data?: DescribeBandwidthPackageQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBandwidthPackageQuotaResponse>;
-  /** 查询共享带宽包内的资源 */
+  /** {@link DescribeBandwidthPackageResources 查询共享带宽包内的资源}({@link DescribeBandwidthPackageResourcesRequest 请求参数}): {@link DescribeBandwidthPackageResourcesResponse 返回参数} */
   DescribeBandwidthPackageResources(data: DescribeBandwidthPackageResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBandwidthPackageResourcesResponse>;
-  /** 查询带宽包资源 */
+  /** {@link DescribeBandwidthPackages 查询带宽包资源}({@link DescribeBandwidthPackagesRequest 请求参数}): {@link DescribeBandwidthPackagesResponse 返回参数} */
   DescribeBandwidthPackages(data?: DescribeBandwidthPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBandwidthPackagesResponse>;
-  /** 查询云联网关联实例列表 */
+  /** {@link DescribeCcnAttachedInstances 查询云联网关联实例列表}({@link DescribeCcnAttachedInstancesRequest 请求参数}): {@link DescribeCcnAttachedInstancesResponse 返回参数} */
   DescribeCcnAttachedInstances(data?: DescribeCcnAttachedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnAttachedInstancesResponse>;
-  /** 查询云联网各地域出带宽上限 */
+  /** {@link DescribeCcnRegionBandwidthLimits 查询云联网各地域出带宽上限}({@link DescribeCcnRegionBandwidthLimitsRequest 请求参数}): {@link DescribeCcnRegionBandwidthLimitsResponse 返回参数} */
   DescribeCcnRegionBandwidthLimits(data: DescribeCcnRegionBandwidthLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnRegionBandwidthLimitsResponse>;
-  /** 查询云联网路由策略 */
+  /** {@link DescribeCcnRoutes 查询云联网路由策略}({@link DescribeCcnRoutesRequest 请求参数}): {@link DescribeCcnRoutesResponse 返回参数} */
   DescribeCcnRoutes(data: DescribeCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnRoutesResponse>;
-  /** 查询CCN列表 */
+  /** {@link DescribeCcns 查询CCN列表}({@link DescribeCcnsRequest 请求参数}): {@link DescribeCcnsResponse 返回参数} */
   DescribeCcns(data?: DescribeCcnsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnsResponse>;
-  /** 查询基础网络互通列表 */
+  /** {@link DescribeClassicLinkInstances 查询基础网络互通列表}({@link DescribeClassicLinkInstancesRequest 请求参数}): {@link DescribeClassicLinkInstancesResponse 返回参数} */
   DescribeClassicLinkInstances(data?: DescribeClassicLinkInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassicLinkInstancesResponse>;
-  /** 查询云联网跨境限速实例 */
+  /** {@link DescribeCrossBorderCcnRegionBandwidthLimits 查询云联网跨境限速实例}({@link DescribeCrossBorderCcnRegionBandwidthLimitsRequest 请求参数}): {@link DescribeCrossBorderCcnRegionBandwidthLimitsResponse 返回参数} */
   DescribeCrossBorderCcnRegionBandwidthLimits(data?: DescribeCrossBorderCcnRegionBandwidthLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossBorderCcnRegionBandwidthLimitsResponse>;
-  /** 查询合规化审批单 */
+  /** {@link DescribeCrossBorderCompliance 查询合规化审批单}({@link DescribeCrossBorderComplianceRequest 请求参数}): {@link DescribeCrossBorderComplianceResponse 返回参数} */
   DescribeCrossBorderCompliance(data?: DescribeCrossBorderComplianceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossBorderComplianceResponse>;
-  /** 查询跨境带宽监控数据 */
+  /** {@link DescribeCrossBorderFlowMonitor 查询跨境带宽监控数据}({@link DescribeCrossBorderFlowMonitorRequest 请求参数}): {@link DescribeCrossBorderFlowMonitorResponse 返回参数} */
   DescribeCrossBorderFlowMonitor(data: DescribeCrossBorderFlowMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossBorderFlowMonitorResponse>;
-  /** 查询可支持的对端网关厂商信息 */
+  /** {@link DescribeCustomerGatewayVendors 查询可支持的对端网关厂商信息}({@link DescribeCustomerGatewayVendorsRequest 请求参数}): {@link DescribeCustomerGatewayVendorsResponse 返回参数} */
   DescribeCustomerGatewayVendors(data?: DescribeCustomerGatewayVendorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomerGatewayVendorsResponse>;
-  /** 查询对端网关 */
+  /** {@link DescribeCustomerGateways 查询对端网关}({@link DescribeCustomerGatewaysRequest 请求参数}): {@link DescribeCustomerGatewaysResponse 返回参数} */
   DescribeCustomerGateways(data?: DescribeCustomerGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomerGatewaysResponse>;
-  /** 查询DhcpIp列表 */
+  /** {@link DescribeDhcpIps 查询DhcpIp列表}({@link DescribeDhcpIpsRequest 请求参数}): {@link DescribeDhcpIpsResponse 返回参数} */
   DescribeDhcpIps(data?: DescribeDhcpIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDhcpIpsResponse>;
-  /** 查询专线网关云联网路由 */
+  /** {@link DescribeDirectConnectGatewayCcnRoutes 查询专线网关云联网路由}({@link DescribeDirectConnectGatewayCcnRoutesRequest 请求参数}): {@link DescribeDirectConnectGatewayCcnRoutesResponse 返回参数} */
   DescribeDirectConnectGatewayCcnRoutes(data: DescribeDirectConnectGatewayCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectGatewayCcnRoutesResponse>;
-  /** 查询专线网关 */
+  /** {@link DescribeDirectConnectGateways 查询专线网关}({@link DescribeDirectConnectGatewaysRequest 请求参数}): {@link DescribeDirectConnectGatewaysResponse 返回参数} */
   DescribeDirectConnectGateways(data?: DescribeDirectConnectGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectGatewaysResponse>;
-  /** 查询流日志实例信息 */
+  /** {@link DescribeFlowLog 查询流日志实例信息}({@link DescribeFlowLogRequest 请求参数}): {@link DescribeFlowLogResponse 返回参数} */
   DescribeFlowLog(data: DescribeFlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowLogResponse>;
-  /** 查询流日志集合 */
+  /** {@link DescribeFlowLogs 查询流日志集合}({@link DescribeFlowLogsRequest 请求参数}): {@link DescribeFlowLogsResponse 返回参数} */
   DescribeFlowLogs(data?: DescribeFlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowLogsResponse>;
-  /** 查询网关流量监控明细 */
+  /** {@link DescribeGatewayFlowMonitorDetail 查询网关流量监控明细}({@link DescribeGatewayFlowMonitorDetailRequest 请求参数}): {@link DescribeGatewayFlowMonitorDetailResponse 返回参数} */
   DescribeGatewayFlowMonitorDetail(data: DescribeGatewayFlowMonitorDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayFlowMonitorDetailResponse>;
-  /** 查询网关来访IP流控带宽 */
+  /** {@link DescribeGatewayFlowQos 查询网关来访IP流控带宽}({@link DescribeGatewayFlowQosRequest 请求参数}): {@link DescribeGatewayFlowQosResponse 返回参数} */
   DescribeGatewayFlowQos(data: DescribeGatewayFlowQosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayFlowQosResponse>;
-  /** 查询HAVIP列表 */
+  /** {@link DescribeHaVips 查询HAVIP列表}({@link DescribeHaVipsRequest 请求参数}): {@link DescribeHaVipsResponse 返回参数} */
   DescribeHaVips(data?: DescribeHaVipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHaVipsResponse>;
-  /** 查询IPV6地址信息 */
+  /** {@link DescribeIp6Addresses 查询IPV6地址信息}({@link DescribeIp6AddressesRequest 请求参数}): {@link DescribeIp6AddressesResponse 返回参数} */
   DescribeIp6Addresses(data?: DescribeIp6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIp6AddressesResponse>;
-  /** 查询账户在指定地域IPV6转换实例和规则的配额 */
+  /** {@link DescribeIp6TranslatorQuota 查询账户在指定地域IPV6转换实例和规则的配额}({@link DescribeIp6TranslatorQuotaRequest 请求参数}): {@link DescribeIp6TranslatorQuotaResponse 返回参数} */
   DescribeIp6TranslatorQuota(data?: DescribeIp6TranslatorQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIp6TranslatorQuotaResponse>;
-  /** 查询IPV6转换实例及其绑定规则信息 */
+  /** {@link DescribeIp6Translators 查询IPV6转换实例及其绑定规则信息}({@link DescribeIp6TranslatorsRequest 请求参数}): {@link DescribeIp6TranslatorsResponse 返回参数} */
   DescribeIp6Translators(data?: DescribeIp6TranslatorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIp6TranslatorsResponse>;
-  /** 获取IP地理位置库下载链接 */
+  /** {@link DescribeIpGeolocationDatabaseUrl 获取IP地理位置库下载链接}({@link DescribeIpGeolocationDatabaseUrlRequest 请求参数}): {@link DescribeIpGeolocationDatabaseUrlResponse 返回参数} */
   DescribeIpGeolocationDatabaseUrl(data: DescribeIpGeolocationDatabaseUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpGeolocationDatabaseUrlResponse>;
-  /** 查询IP地理位置信息 */
+  /** {@link DescribeIpGeolocationInfos 查询IP地理位置信息}({@link DescribeIpGeolocationInfosRequest 请求参数}): {@link DescribeIpGeolocationInfosResponse 返回参数} */
   DescribeIpGeolocationInfos(data: DescribeIpGeolocationInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpGeolocationInfosResponse>;
-  /** 查询本地网关 */
+  /** {@link DescribeLocalGateway 查询本地网关}({@link DescribeLocalGatewayRequest 请求参数}): {@link DescribeLocalGatewayResponse 返回参数} */
   DescribeLocalGateway(data?: DescribeLocalGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLocalGatewayResponse>;
-  /** 查询NAT网关端口转发规则 */
+  /** {@link DescribeNatGatewayDestinationIpPortTranslationNatRules 查询NAT网关端口转发规则}({@link DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest 请求参数}): {@link DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse 返回参数} */
   DescribeNatGatewayDestinationIpPortTranslationNatRules(data?: DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse>;
-  /** 查询专线绑定NAT路由 */
+  /** {@link DescribeNatGatewayDirectConnectGatewayRoute 查询专线绑定NAT路由}({@link DescribeNatGatewayDirectConnectGatewayRouteRequest 请求参数}): {@link DescribeNatGatewayDirectConnectGatewayRouteResponse 返回参数} */
   DescribeNatGatewayDirectConnectGatewayRoute(data: DescribeNatGatewayDirectConnectGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewayDirectConnectGatewayRouteResponse>;
-  /** 查询NAT网关SNAT转发规则 */
+  /** {@link DescribeNatGatewaySourceIpTranslationNatRules 查询NAT网关SNAT转发规则}({@link DescribeNatGatewaySourceIpTranslationNatRulesRequest 请求参数}): {@link DescribeNatGatewaySourceIpTranslationNatRulesResponse 返回参数} */
   DescribeNatGatewaySourceIpTranslationNatRules(data: DescribeNatGatewaySourceIpTranslationNatRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewaySourceIpTranslationNatRulesResponse>;
-  /** 查询NAT网关 */
+  /** {@link DescribeNatGateways 查询NAT网关}({@link DescribeNatGatewaysRequest 请求参数}): {@link DescribeNatGatewaysResponse 返回参数} */
   DescribeNatGateways(data?: DescribeNatGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewaysResponse>;
-  /** 查询网络探测验证结果列表 */
+  /** {@link DescribeNetDetectStates 查询网络探测验证结果列表}({@link DescribeNetDetectStatesRequest 请求参数}): {@link DescribeNetDetectStatesResponse 返回参数} */
   DescribeNetDetectStates(data?: DescribeNetDetectStatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetDetectStatesResponse>;
-  /** 查询网络探测列表 */
+  /** {@link DescribeNetDetects 查询网络探测列表}({@link DescribeNetDetectsRequest 请求参数}): {@link DescribeNetDetectsResponse 返回参数} */
   DescribeNetDetects(data?: DescribeNetDetectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetDetectsResponse>;
-  /** 分页查询网络ACL五元组条目列表 */
+  /** {@link DescribeNetworkAclQuintupleEntries 分页查询网络ACL五元组条目列表}({@link DescribeNetworkAclQuintupleEntriesRequest 请求参数}): {@link DescribeNetworkAclQuintupleEntriesResponse 返回参数} */
   DescribeNetworkAclQuintupleEntries(data: DescribeNetworkAclQuintupleEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkAclQuintupleEntriesResponse>;
-  /** 查询网络ACL列表 */
+  /** {@link DescribeNetworkAcls 查询网络ACL列表}({@link DescribeNetworkAclsRequest 请求参数}): {@link DescribeNetworkAclsResponse 返回参数} */
   DescribeNetworkAcls(data?: DescribeNetworkAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkAclsResponse>;
-  /** 查询弹性网卡配额 */
+  /** {@link DescribeNetworkInterfaceLimit 查询弹性网卡配额}({@link DescribeNetworkInterfaceLimitRequest 请求参数}): {@link DescribeNetworkInterfaceLimitResponse 返回参数} */
   DescribeNetworkInterfaceLimit(data: DescribeNetworkInterfaceLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkInterfaceLimitResponse>;
-  /** 查询弹性网卡列表 */
+  /** {@link DescribeNetworkInterfaces 查询弹性网卡列表}({@link DescribeNetworkInterfacesRequest 请求参数}): {@link DescribeNetworkInterfacesResponse 返回参数} */
   DescribeNetworkInterfaces(data?: DescribeNetworkInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkInterfacesResponse>;
-  /** 查询网络产品配额信息 */
+  /** {@link DescribeProductQuota 查询网络产品配额信息}({@link DescribeProductQuotaRequest 请求参数}): {@link DescribeProductQuotaResponse 返回参数} */
   DescribeProductQuota(data: DescribeProductQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductQuotaResponse>;
-  /** 查询路由策略冲突列表 */
+  /** {@link DescribeRouteConflicts 查询路由策略冲突列表}({@link DescribeRouteConflictsRequest 请求参数}): {@link DescribeRouteConflictsResponse 返回参数} */
   DescribeRouteConflicts(data: DescribeRouteConflictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteConflictsResponse>;
-  /** 查询路由列表 */
+  /** {@link DescribeRouteTables 查询路由列表}({@link DescribeRouteTablesRequest 请求参数}): {@link DescribeRouteTablesResponse 返回参数} */
   DescribeRouteTables(data?: DescribeRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTablesResponse>;
-  /** 查询安全组关联实例统计 */
+  /** {@link DescribeSecurityGroupAssociationStatistics 查询安全组关联实例统计}({@link DescribeSecurityGroupAssociationStatisticsRequest 请求参数}): {@link DescribeSecurityGroupAssociationStatisticsResponse 返回参数} */
   DescribeSecurityGroupAssociationStatistics(data: DescribeSecurityGroupAssociationStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupAssociationStatisticsResponse>;
-  /** 查询用户安全组配额 */
+  /** {@link DescribeSecurityGroupLimits 查询用户安全组配额}({@link DescribeSecurityGroupLimitsRequest 请求参数}): {@link DescribeSecurityGroupLimitsResponse 返回参数} */
   DescribeSecurityGroupLimits(data?: DescribeSecurityGroupLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupLimitsResponse>;
-  /** 查询安全组规则 */
+  /** {@link DescribeSecurityGroupPolicies 查询安全组规则}({@link DescribeSecurityGroupPoliciesRequest 请求参数}): {@link DescribeSecurityGroupPoliciesResponse 返回参数} */
   DescribeSecurityGroupPolicies(data: DescribeSecurityGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupPoliciesResponse>;
-  /** 查询安全组被引用信息 */
+  /** {@link DescribeSecurityGroupReferences 查询安全组被引用信息}({@link DescribeSecurityGroupReferencesRequest 请求参数}): {@link DescribeSecurityGroupReferencesResponse 返回参数} */
   DescribeSecurityGroupReferences(data: DescribeSecurityGroupReferencesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupReferencesResponse>;
-  /** 查看安全组 */
+  /** {@link DescribeSecurityGroups 查看安全组}({@link DescribeSecurityGroupsRequest 请求参数}): {@link DescribeSecurityGroupsResponse 返回参数} */
   DescribeSecurityGroups(data?: DescribeSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupsResponse>;
-  /** 查询协议端口模板集合 */
+  /** {@link DescribeServiceTemplateGroups 查询协议端口模板集合}({@link DescribeServiceTemplateGroupsRequest 请求参数}): {@link DescribeServiceTemplateGroupsResponse 返回参数} */
   DescribeServiceTemplateGroups(data?: DescribeServiceTemplateGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceTemplateGroupsResponse>;
-  /** 查询协议端口模板 */
+  /** {@link DescribeServiceTemplates 查询协议端口模板}({@link DescribeServiceTemplatesRequest 请求参数}): {@link DescribeServiceTemplatesResponse 返回参数} */
   DescribeServiceTemplates(data?: DescribeServiceTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceTemplatesResponse>;
-  /** 查询子网列表 */
+  /** {@link DescribeSubnets 查询子网列表}({@link DescribeSubnetsRequest 请求参数}): {@link DescribeSubnetsResponse 返回参数} */
   DescribeSubnets(data?: DescribeSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetsResponse>;
-  /** 查询异步任务执行结果 */
+  /** {@link DescribeTaskResult 查询异步任务执行结果}({@link DescribeTaskResultRequest 请求参数}): {@link DescribeTaskResultResponse 返回参数} */
   DescribeTaskResult(data?: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
-  /** 查询参数模板配额列表 */
+  /** {@link DescribeTemplateLimits 查询参数模板配额列表}({@link DescribeTemplateLimitsRequest 请求参数}): {@link DescribeTemplateLimitsResponse 返回参数} */
   DescribeTemplateLimits(data?: DescribeTemplateLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateLimitsResponse>;
-  /** 查询租户云联网实例 */
+  /** {@link DescribeTenantCcns 查询租户云联网实例}({@link DescribeTenantCcnsRequest 请求参数}): {@link DescribeTenantCcnsResponse 返回参数} */
   DescribeTenantCcns(data?: DescribeTenantCcnsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTenantCcnsResponse>;
-  /** 查询共享流量包 */
+  /** {@link DescribeTrafficPackages 查询共享流量包}({@link DescribeTrafficPackagesRequest 请求参数}): {@link DescribeTrafficPackagesResponse 返回参数} */
   DescribeTrafficPackages(data?: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;
-  /** 查询终端节点列表 */
+  /** {@link DescribeVpcEndPoint 查询终端节点列表}({@link DescribeVpcEndPointRequest 请求参数}): {@link DescribeVpcEndPointResponse 返回参数} */
   DescribeVpcEndPoint(data?: DescribeVpcEndPointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcEndPointResponse>;
-  /** 查询终端节点服务列表 */
+  /** {@link DescribeVpcEndPointService 查询终端节点服务列表}({@link DescribeVpcEndPointServiceRequest 请求参数}): {@link DescribeVpcEndPointServiceResponse 返回参数} */
   DescribeVpcEndPointService(data?: DescribeVpcEndPointServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcEndPointServiceResponse>;
-  /** 查询终端节点服务的服务白名单列表 */
+  /** {@link DescribeVpcEndPointServiceWhiteList 查询终端节点服务的服务白名单列表}({@link DescribeVpcEndPointServiceWhiteListRequest 请求参数}): {@link DescribeVpcEndPointServiceWhiteListResponse 返回参数} */
   DescribeVpcEndPointServiceWhiteList(data?: DescribeVpcEndPointServiceWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcEndPointServiceWhiteListResponse>;
-  /** 查询VPC下的云主机实例列表 */
+  /** {@link DescribeVpcInstances 查询VPC下的云主机实例列表}({@link DescribeVpcInstancesRequest 请求参数}): {@link DescribeVpcInstancesResponse 返回参数} */
   DescribeVpcInstances(data: DescribeVpcInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcInstancesResponse>;
-  /** 查询VPC内IPv6列表 */
+  /** {@link DescribeVpcIpv6Addresses 查询VPC内IPv6列表}({@link DescribeVpcIpv6AddressesRequest 请求参数}): {@link DescribeVpcIpv6AddressesResponse 返回参数} */
   DescribeVpcIpv6Addresses(data: DescribeVpcIpv6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcIpv6AddressesResponse>;
-  /** 获取私有网络配额 */
+  /** {@link DescribeVpcLimits 获取私有网络配额}({@link DescribeVpcLimitsRequest 请求参数}): {@link DescribeVpcLimitsResponse 返回参数} */
   DescribeVpcLimits(data: DescribeVpcLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcLimitsResponse>;
-  /** 查询VPC内网IP信息 */
+  /** {@link DescribeVpcPrivateIpAddresses 查询VPC内网IP信息}({@link DescribeVpcPrivateIpAddressesRequest 请求参数}): {@link DescribeVpcPrivateIpAddressesResponse 返回参数} */
   DescribeVpcPrivateIpAddresses(data: DescribeVpcPrivateIpAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcPrivateIpAddressesResponse>;
-  /** 查看VPC资源信息 */
+  /** {@link DescribeVpcResourceDashboard 查看VPC资源信息}({@link DescribeVpcResourceDashboardRequest 请求参数}): {@link DescribeVpcResourceDashboardResponse 返回参数} */
   DescribeVpcResourceDashboard(data: DescribeVpcResourceDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcResourceDashboardResponse>;
-  /** 查询VPC异步任务执行结果 */
+  /** {@link DescribeVpcTaskResult 查询VPC异步任务执行结果}({@link DescribeVpcTaskResultRequest 请求参数}): {@link DescribeVpcTaskResultResponse 返回参数} */
   DescribeVpcTaskResult(data: DescribeVpcTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcTaskResultResponse>;
-  /** 查询VPC列表 */
+  /** {@link DescribeVpcs 查询VPC列表}({@link DescribeVpcsRequest 请求参数}): {@link DescribeVpcsResponse 返回参数} */
   DescribeVpcs(data?: DescribeVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcsResponse>;
-  /** 查询VPN通道列表 */
+  /** {@link DescribeVpnConnections 查询VPN通道列表}({@link DescribeVpnConnectionsRequest 请求参数}): {@link DescribeVpnConnectionsResponse 返回参数} */
   DescribeVpnConnections(data?: DescribeVpnConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnConnectionsResponse>;
-  /** 查询VPN网关云联网路由 */
+  /** {@link DescribeVpnGatewayCcnRoutes 查询VPN网关云联网路由}({@link DescribeVpnGatewayCcnRoutesRequest 请求参数}): {@link DescribeVpnGatewayCcnRoutesResponse 返回参数} */
   DescribeVpnGatewayCcnRoutes(data: DescribeVpnGatewayCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewayCcnRoutesResponse>;
-  /** 查询VPN网关路由 */
+  /** {@link DescribeVpnGatewayRoutes 查询VPN网关路由}({@link DescribeVpnGatewayRoutesRequest 请求参数}): {@link DescribeVpnGatewayRoutesResponse 返回参数} */
   DescribeVpnGatewayRoutes(data: DescribeVpnGatewayRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewayRoutesResponse>;
-  /** 查询SSL-VPN-CLIENT 列表 */
+  /** {@link DescribeVpnGatewaySslClients 查询SSL-VPN-CLIENT 列表}({@link DescribeVpnGatewaySslClientsRequest 请求参数}): {@link DescribeVpnGatewaySslClientsResponse 返回参数} */
   DescribeVpnGatewaySslClients(data?: DescribeVpnGatewaySslClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewaySslClientsResponse>;
-  /** 查询SSL-VPN SERVER 列表 */
+  /** {@link DescribeVpnGatewaySslServers 查询SSL-VPN SERVER 列表}({@link DescribeVpnGatewaySslServersRequest 请求参数}): {@link DescribeVpnGatewaySslServersResponse 返回参数} */
   DescribeVpnGatewaySslServers(data?: DescribeVpnGatewaySslServersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewaySslServersResponse>;
-  /** 查询VPN网关 */
+  /** {@link DescribeVpnGateways 查询VPN网关}({@link DescribeVpnGatewaysRequest 请求参数}): {@link DescribeVpnGatewaysResponse 返回参数} */
   DescribeVpnGateways(data?: DescribeVpnGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewaysResponse>;
-  /** 云联网解关联实例 */
+  /** {@link DetachCcnInstances 云联网解关联实例}({@link DetachCcnInstancesRequest 请求参数}): {@link DetachCcnInstancesResponse 返回参数} */
   DetachCcnInstances(data: DetachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachCcnInstancesResponse>;
-  /** 删除基础网络互通 */
+  /** {@link DetachClassicLinkVpc 删除基础网络互通}({@link DetachClassicLinkVpcRequest 请求参数}): {@link DetachClassicLinkVpcResponse 返回参数} */
   DetachClassicLinkVpc(data: DetachClassicLinkVpcRequest, config?: AxiosRequestConfig): AxiosPromise<DetachClassicLinkVpcResponse>;
-  /** 弹性网卡解绑云服务器 */
+  /** {@link DetachNetworkInterface 弹性网卡解绑云服务器}({@link DetachNetworkInterfaceRequest 请求参数}): {@link DetachNetworkInterfaceResponse 返回参数} */
   DetachNetworkInterface(data: DetachNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<DetachNetworkInterfaceResponse>;
-  /** 禁用云联网路由 */
+  /** {@link DisableCcnRoutes 禁用云联网路由}({@link DisableCcnRoutesRequest 请求参数}): {@link DisableCcnRoutesResponse 返回参数} */
   DisableCcnRoutes(data: DisableCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DisableCcnRoutesResponse>;
-  /** 停止流日志 */
+  /** {@link DisableFlowLogs 停止流日志}({@link DisableFlowLogsRequest 请求参数}): {@link DisableFlowLogsResponse 返回参数} */
   DisableFlowLogs(data: DisableFlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DisableFlowLogsResponse>;
-  /** 关闭网关流量监控 */
+  /** {@link DisableGatewayFlowMonitor 关闭网关流量监控}({@link DisableGatewayFlowMonitorRequest 请求参数}): {@link DisableGatewayFlowMonitorResponse 返回参数} */
   DisableGatewayFlowMonitor(data: DisableGatewayFlowMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<DisableGatewayFlowMonitorResponse>;
-  /** 禁用子网路由 */
+  /** {@link DisableRoutes 禁用子网路由}({@link DisableRoutesRequest 请求参数}): {@link DisableRoutesResponse 返回参数} */
   DisableRoutes(data: DisableRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DisableRoutesResponse>;
-  /** 禁用SSL-VPN-CLIENT 证书 */
+  /** {@link DisableVpnGatewaySslClientCert 禁用SSL-VPN-CLIENT 证书}({@link DisableVpnGatewaySslClientCertRequest 请求参数}): {@link DisableVpnGatewaySslClientCertResponse 返回参数} */
   DisableVpnGatewaySslClientCert(data: DisableVpnGatewaySslClientCertRequest, config?: AxiosRequestConfig): AxiosPromise<DisableVpnGatewaySslClientCertResponse>;
-  /** 解绑定弹性公网IP */
+  /** {@link DisassociateAddress 解绑定弹性公网IP}({@link DisassociateAddressRequest 请求参数}): {@link DisassociateAddressResponse 返回参数} */
   DisassociateAddress(data: DisassociateAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateAddressResponse>;
-  /** DhcpIp解绑EIP */
+  /** {@link DisassociateDhcpIpWithAddressIp DhcpIp解绑EIP}({@link DisassociateDhcpIpWithAddressIpRequest 请求参数}): {@link DisassociateDhcpIpWithAddressIpResponse 返回参数} */
   DisassociateDhcpIpWithAddressIp(data: DisassociateDhcpIpWithAddressIpRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateDhcpIpWithAddressIpResponse>;
-  /** 专线网关解绑NAT网关 */
+  /** {@link DisassociateDirectConnectGatewayNatGateway 专线网关解绑NAT网关}({@link DisassociateDirectConnectGatewayNatGatewayRequest 请求参数}): {@link DisassociateDirectConnectGatewayNatGatewayResponse 返回参数} */
   DisassociateDirectConnectGatewayNatGateway(data: DisassociateDirectConnectGatewayNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateDirectConnectGatewayNatGatewayResponse>;
-  /** NAT网关解绑弹性IP */
+  /** {@link DisassociateNatGatewayAddress NAT网关解绑弹性IP}({@link DisassociateNatGatewayAddressRequest 请求参数}): {@link DisassociateNatGatewayAddressResponse 返回参数} */
   DisassociateNatGatewayAddress(data: DisassociateNatGatewayAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateNatGatewayAddressResponse>;
-  /** 网络ACL解关联子网 */
+  /** {@link DisassociateNetworkAclSubnets 网络ACL解关联子网}({@link DisassociateNetworkAclSubnetsRequest 请求参数}): {@link DisassociateNetworkAclSubnetsResponse 返回参数} */
   DisassociateNetworkAclSubnets(data: DisassociateNetworkAclSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateNetworkAclSubnetsResponse>;
-  /** 弹性网卡解绑安全组 */
+  /** {@link DisassociateNetworkInterfaceSecurityGroups 弹性网卡解绑安全组}({@link DisassociateNetworkInterfaceSecurityGroupsRequest 请求参数}): {@link DisassociateNetworkInterfaceSecurityGroupsResponse 返回参数} */
   DisassociateNetworkInterfaceSecurityGroups(data: DisassociateNetworkInterfaceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateNetworkInterfaceSecurityGroupsResponse>;
-  /** 终端节点解绑安全组 */
+  /** {@link DisassociateVpcEndPointSecurityGroups 终端节点解绑安全组}({@link DisassociateVpcEndPointSecurityGroupsRequest 请求参数}): {@link DisassociateVpcEndPointSecurityGroupsResponse 返回参数} */
   DisassociateVpcEndPointSecurityGroups(data: DisassociateVpcEndPointSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateVpcEndPointSecurityGroupsResponse>;
-  /** 下载VPN通道配置 */
+  /** {@link DownloadCustomerGatewayConfiguration 下载VPN通道配置}({@link DownloadCustomerGatewayConfigurationRequest 请求参数}): {@link DownloadCustomerGatewayConfigurationResponse 返回参数} */
   DownloadCustomerGatewayConfiguration(data: DownloadCustomerGatewayConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadCustomerGatewayConfigurationResponse>;
-  /** 下载SSL-VPN-CLIENT 客户端证书 */
+  /** {@link DownloadVpnGatewaySslClientCert 下载SSL-VPN-CLIENT 客户端证书}({@link DownloadVpnGatewaySslClientCertRequest 请求参数}): {@link DownloadVpnGatewaySslClientCertResponse 返回参数} */
   DownloadVpnGatewaySslClientCert(data: DownloadVpnGatewaySslClientCertRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadVpnGatewaySslClientCertResponse>;
-  /** 启用云联网路由 */
+  /** {@link EnableCcnRoutes 启用云联网路由}({@link EnableCcnRoutesRequest 请求参数}): {@link EnableCcnRoutesResponse 返回参数} */
   EnableCcnRoutes(data: EnableCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<EnableCcnRoutesResponse>;
-  /** 启动流日志 */
+  /** {@link EnableFlowLogs 启动流日志}({@link EnableFlowLogsRequest 请求参数}): {@link EnableFlowLogsResponse 返回参数} */
   EnableFlowLogs(data: EnableFlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<EnableFlowLogsResponse>;
-  /** 开启网关流量监控 */
+  /** {@link EnableGatewayFlowMonitor 开启网关流量监控}({@link EnableGatewayFlowMonitorRequest 请求参数}): {@link EnableGatewayFlowMonitorResponse 返回参数} */
   EnableGatewayFlowMonitor(data: EnableGatewayFlowMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<EnableGatewayFlowMonitorResponse>;
-  /** 启用子网路由 */
+  /** {@link EnableRoutes 启用子网路由}({@link EnableRoutesRequest 请求参数}): {@link EnableRoutesResponse 返回参数} */
   EnableRoutes(data: EnableRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<EnableRoutesResponse>;
-  /** 是否接受终端节点连接请求 */
+  /** {@link EnableVpcEndPointConnect 是否接受终端节点连接请求}({@link EnableVpcEndPointConnectRequest 请求参数}): {@link EnableVpcEndPointConnectResponse 返回参数} */
   EnableVpcEndPointConnect(data: EnableVpcEndPointConnectRequest, config?: AxiosRequestConfig): AxiosPromise<EnableVpcEndPointConnectResponse>;
-  /** 启用SSL-VPN-CLIENT 证书 */
+  /** {@link EnableVpnGatewaySslClientCert 启用SSL-VPN-CLIENT 证书}({@link EnableVpnGatewaySslClientCertRequest 请求参数}): {@link EnableVpnGatewaySslClientCertResponse 返回参数} */
   EnableVpnGatewaySslClientCert(data: EnableVpnGatewaySslClientCertRequest, config?: AxiosRequestConfig): AxiosPromise<EnableVpnGatewaySslClientCertResponse>;
-  /** 查询云联网相关地域带宽信息 */
+  /** {@link GetCcnRegionBandwidthLimits 查询云联网相关地域带宽信息}({@link GetCcnRegionBandwidthLimitsRequest 请求参数}): {@link GetCcnRegionBandwidthLimitsResponse 返回参数} */
   GetCcnRegionBandwidthLimits(data: GetCcnRegionBandwidthLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<GetCcnRegionBandwidthLimitsResponse>;
-  /** HAVIP绑定EIP */
+  /** {@link HaVipAssociateAddressIp HAVIP绑定EIP}({@link HaVipAssociateAddressIpRequest 请求参数}): {@link HaVipAssociateAddressIpResponse 返回参数} */
   HaVipAssociateAddressIp(data: HaVipAssociateAddressIpRequest, config?: AxiosRequestConfig): AxiosPromise<HaVipAssociateAddressIpResponse>;
-  /** HAVIP解绑EIP */
+  /** {@link HaVipDisassociateAddressIp HAVIP解绑EIP}({@link HaVipDisassociateAddressIpRequest 请求参数}): {@link HaVipDisassociateAddressIpResponse 返回参数} */
   HaVipDisassociateAddressIp(data: HaVipDisassociateAddressIpRequest, config?: AxiosRequestConfig): AxiosPromise<HaVipDisassociateAddressIpResponse>;
-  /** 创建专线网关询价 */
+  /** {@link InquirePriceCreateDirectConnectGateway 创建专线网关询价}({@link InquirePriceCreateDirectConnectGatewayRequest 请求参数}): {@link InquirePriceCreateDirectConnectGatewayResponse 返回参数} */
   InquirePriceCreateDirectConnectGateway(data?: InquirePriceCreateDirectConnectGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateDirectConnectGatewayResponse>;
-  /** 创建VPN网关询价 */
+  /** {@link InquiryPriceCreateVpnGateway 创建VPN网关询价}({@link InquiryPriceCreateVpnGatewayRequest 请求参数}): {@link InquiryPriceCreateVpnGatewayResponse 返回参数} */
   InquiryPriceCreateVpnGateway(data: InquiryPriceCreateVpnGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateVpnGatewayResponse>;
-  /** 续费VPN网关询价 */
+  /** {@link InquiryPriceRenewVpnGateway 续费VPN网关询价}({@link InquiryPriceRenewVpnGatewayRequest 请求参数}): {@link InquiryPriceRenewVpnGatewayResponse 返回参数} */
   InquiryPriceRenewVpnGateway(data: InquiryPriceRenewVpnGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewVpnGatewayResponse>;
-  /** 调整VPN网关带宽上限询价 */
+  /** {@link InquiryPriceResetVpnGatewayInternetMaxBandwidth 调整VPN网关带宽上限询价}({@link InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest 请求参数}): {@link InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse 返回参数} */
   InquiryPriceResetVpnGatewayInternetMaxBandwidth(data: InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse>;
-  /** 安全锁定云联网带宽 */
+  /** {@link LockCcnBandwidths 安全锁定云联网带宽}({@link LockCcnBandwidthsRequest 请求参数}): {@link LockCcnBandwidthsResponse 返回参数} */
   LockCcnBandwidths(data?: LockCcnBandwidthsRequest, config?: AxiosRequestConfig): AxiosPromise<LockCcnBandwidthsResponse>;
-  /** 安全锁定云联网实例 */
+  /** {@link LockCcns 安全锁定云联网实例}({@link LockCcnsRequest 请求参数}): {@link LockCcnsResponse 返回参数} */
   LockCcns(data?: LockCcnsRequest, config?: AxiosRequestConfig): AxiosPromise<LockCcnsResponse>;
-  /** 弹性网卡迁移 */
+  /** {@link MigrateNetworkInterface 弹性网卡迁移}({@link MigrateNetworkInterfaceRequest 请求参数}): {@link MigrateNetworkInterfaceResponse 返回参数} */
   MigrateNetworkInterface(data: MigrateNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<MigrateNetworkInterfaceResponse>;
-  /** 弹性网卡内网IP迁移 */
+  /** {@link MigratePrivateIpAddress 弹性网卡内网IP迁移}({@link MigratePrivateIpAddressRequest 请求参数}): {@link MigratePrivateIpAddressResponse 返回参数} */
   MigratePrivateIpAddress(data: MigratePrivateIpAddressRequest, config?: AxiosRequestConfig): AxiosPromise<MigratePrivateIpAddressResponse>;
-  /** 修改弹性公网IP属性 */
+  /** {@link ModifyAddressAttribute 修改弹性公网IP属性}({@link ModifyAddressAttributeRequest 请求参数}): {@link ModifyAddressAttributeResponse 返回参数} */
   ModifyAddressAttribute(data: ModifyAddressAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAddressAttributeResponse>;
-  /** 调整弹性公网ip计费模式 */
+  /** {@link ModifyAddressInternetChargeType 调整弹性公网ip计费模式}({@link ModifyAddressInternetChargeTypeRequest 请求参数}): {@link ModifyAddressInternetChargeTypeResponse 返回参数} */
   ModifyAddressInternetChargeType(data: ModifyAddressInternetChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAddressInternetChargeTypeResponse>;
-  /** 修改IP地址模板 */
+  /** {@link ModifyAddressTemplateAttribute 修改IP地址模板}({@link ModifyAddressTemplateAttributeRequest 请求参数}): {@link ModifyAddressTemplateAttributeResponse 返回参数} */
   ModifyAddressTemplateAttribute(data: ModifyAddressTemplateAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAddressTemplateAttributeResponse>;
-  /** 修改IP地址模板集合 */
+  /** {@link ModifyAddressTemplateGroupAttribute 修改IP地址模板集合}({@link ModifyAddressTemplateGroupAttributeRequest 请求参数}): {@link ModifyAddressTemplateGroupAttributeResponse 返回参数} */
   ModifyAddressTemplateGroupAttribute(data: ModifyAddressTemplateGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAddressTemplateGroupAttributeResponse>;
-  /** 调整弹性公网IP带宽 */
+  /** {@link ModifyAddressesBandwidth 调整弹性公网IP带宽}({@link ModifyAddressesBandwidthRequest 请求参数}): {@link ModifyAddressesBandwidthResponse 返回参数} */
   ModifyAddressesBandwidth(data: ModifyAddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAddressesBandwidthResponse>;
-  /** 修改辅助CIDR */
+  /** {@link ModifyAssistantCidr 修改辅助CIDR}({@link ModifyAssistantCidrRequest 请求参数}): {@link ModifyAssistantCidrResponse 返回参数} */
   ModifyAssistantCidr(data: ModifyAssistantCidrRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssistantCidrResponse>;
-  /** 修改带宽包属性 */
+  /** {@link ModifyBandwidthPackageAttribute 修改带宽包属性}({@link ModifyBandwidthPackageAttributeRequest 请求参数}): {@link ModifyBandwidthPackageAttributeResponse 返回参数} */
   ModifyBandwidthPackageAttribute(data: ModifyBandwidthPackageAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBandwidthPackageAttributeResponse>;
-  /** 修改CCN关联实例属性 */
+  /** {@link ModifyCcnAttachedInstancesAttribute 修改CCN关联实例属性}({@link ModifyCcnAttachedInstancesAttributeRequest 请求参数}): {@link ModifyCcnAttachedInstancesAttributeResponse 返回参数} */
   ModifyCcnAttachedInstancesAttribute(data: ModifyCcnAttachedInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCcnAttachedInstancesAttributeResponse>;
-  /** 修改CCN属性 */
+  /** {@link ModifyCcnAttribute 修改CCN属性}({@link ModifyCcnAttributeRequest 请求参数}): {@link ModifyCcnAttributeResponse 返回参数} */
   ModifyCcnAttribute(data: ModifyCcnAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCcnAttributeResponse>;
-  /** 后付费产品修改带宽限速策略 */
+  /** {@link ModifyCcnRegionBandwidthLimitsType 后付费产品修改带宽限速策略}({@link ModifyCcnRegionBandwidthLimitsTypeRequest 请求参数}): {@link ModifyCcnRegionBandwidthLimitsTypeResponse 返回参数} */
   ModifyCcnRegionBandwidthLimitsType(data: ModifyCcnRegionBandwidthLimitsTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCcnRegionBandwidthLimitsTypeResponse>;
-  /** 修改对端网关 */
+  /** {@link ModifyCustomerGatewayAttribute 修改对端网关}({@link ModifyCustomerGatewayAttributeRequest 请求参数}): {@link ModifyCustomerGatewayAttributeResponse 返回参数} */
   ModifyCustomerGatewayAttribute(data: ModifyCustomerGatewayAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomerGatewayAttributeResponse>;
-  /** 修改DhcpIp属性 */
+  /** {@link ModifyDhcpIpAttribute 修改DhcpIp属性}({@link ModifyDhcpIpAttributeRequest 请求参数}): {@link ModifyDhcpIpAttributeResponse 返回参数} */
   ModifyDhcpIpAttribute(data: ModifyDhcpIpAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDhcpIpAttributeResponse>;
-  /** 修改专线网关属性 */
+  /** {@link ModifyDirectConnectGatewayAttribute 修改专线网关属性}({@link ModifyDirectConnectGatewayAttributeRequest 请求参数}): {@link ModifyDirectConnectGatewayAttributeResponse 返回参数} */
   ModifyDirectConnectGatewayAttribute(data: ModifyDirectConnectGatewayAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDirectConnectGatewayAttributeResponse>;
-  /** 修改流日志属性 */
+  /** {@link ModifyFlowLogAttribute 修改流日志属性}({@link ModifyFlowLogAttributeRequest 请求参数}): {@link ModifyFlowLogAttributeResponse 返回参数} */
   ModifyFlowLogAttribute(data: ModifyFlowLogAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFlowLogAttributeResponse>;
-  /** 调整网关流控带宽 */
+  /** {@link ModifyGatewayFlowQos 调整网关流控带宽}({@link ModifyGatewayFlowQosRequest 请求参数}): {@link ModifyGatewayFlowQosResponse 返回参数} */
   ModifyGatewayFlowQos(data: ModifyGatewayFlowQosRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGatewayFlowQosResponse>;
-  /** 修改HAVIP属性 */
+  /** {@link ModifyHaVipAttribute 修改HAVIP属性}({@link ModifyHaVipAttributeRequest 请求参数}): {@link ModifyHaVipAttributeResponse 返回参数} */
   ModifyHaVipAttribute(data: ModifyHaVipAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHaVipAttributeResponse>;
-  /** 修改IPV6访问internet的带宽 */
+  /** {@link ModifyIp6AddressesBandwidth 修改IPV6访问internet的带宽}({@link ModifyIp6AddressesBandwidthRequest 请求参数}): {@link ModifyIp6AddressesBandwidthResponse 返回参数} */
   ModifyIp6AddressesBandwidth(data: ModifyIp6AddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIp6AddressesBandwidthResponse>;
-  /** 修改IPV6转换规则属性 */
+  /** {@link ModifyIp6Rule 修改IPV6转换规则属性}({@link ModifyIp6RuleRequest 请求参数}): {@link ModifyIp6RuleResponse 返回参数} */
   ModifyIp6Rule(data: ModifyIp6RuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIp6RuleResponse>;
-  /** 修改IP6转换实例属性 */
+  /** {@link ModifyIp6Translator 修改IP6转换实例属性}({@link ModifyIp6TranslatorRequest 请求参数}): {@link ModifyIp6TranslatorResponse 返回参数} */
   ModifyIp6Translator(data: ModifyIp6TranslatorRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIp6TranslatorResponse>;
-  /** 修改弹性网卡IPv6地址属性 */
+  /** {@link ModifyIpv6AddressesAttribute 修改弹性网卡IPv6地址属性}({@link ModifyIpv6AddressesAttributeRequest 请求参数}): {@link ModifyIpv6AddressesAttributeResponse 返回参数} */
   ModifyIpv6AddressesAttribute(data: ModifyIpv6AddressesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIpv6AddressesAttributeResponse>;
-  /** 修改本地网关 */
+  /** {@link ModifyLocalGateway 修改本地网关}({@link ModifyLocalGatewayRequest 请求参数}): {@link ModifyLocalGatewayResponse 返回参数} */
   ModifyLocalGateway(data: ModifyLocalGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLocalGatewayResponse>;
-  /** 修改NAT网关的属性 */
+  /** {@link ModifyNatGatewayAttribute 修改NAT网关的属性}({@link ModifyNatGatewayAttributeRequest 请求参数}): {@link ModifyNatGatewayAttributeResponse 返回参数} */
   ModifyNatGatewayAttribute(data: ModifyNatGatewayAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatGatewayAttributeResponse>;
-  /** 修改NAT网关端口转发规则 */
+  /** {@link ModifyNatGatewayDestinationIpPortTranslationNatRule 修改NAT网关端口转发规则}({@link ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest 请求参数}): {@link ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse 返回参数} */
   ModifyNatGatewayDestinationIpPortTranslationNatRule(data: ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse>;
-  /** 修改NAT网关SNAT转发规则 */
+  /** {@link ModifyNatGatewaySourceIpTranslationNatRule 修改NAT网关SNAT转发规则}({@link ModifyNatGatewaySourceIpTranslationNatRuleRequest 请求参数}): {@link ModifyNatGatewaySourceIpTranslationNatRuleResponse 返回参数} */
   ModifyNatGatewaySourceIpTranslationNatRule(data: ModifyNatGatewaySourceIpTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatGatewaySourceIpTranslationNatRuleResponse>;
-  /** 修改网络探测 */
+  /** {@link ModifyNetDetect 修改网络探测}({@link ModifyNetDetectRequest 请求参数}): {@link ModifyNetDetectResponse 返回参数} */
   ModifyNetDetect(data: ModifyNetDetectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetDetectResponse>;
-  /** 修改网络ACL属性 */
+  /** {@link ModifyNetworkAclAttribute 修改网络ACL属性}({@link ModifyNetworkAclAttributeRequest 请求参数}): {@link ModifyNetworkAclAttributeResponse 返回参数} */
   ModifyNetworkAclAttribute(data: ModifyNetworkAclAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetworkAclAttributeResponse>;
-  /** 修改网络ACL规则 */
+  /** {@link ModifyNetworkAclEntries 修改网络ACL规则}({@link ModifyNetworkAclEntriesRequest 请求参数}): {@link ModifyNetworkAclEntriesResponse 返回参数} */
   ModifyNetworkAclEntries(data: ModifyNetworkAclEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetworkAclEntriesResponse>;
-  /** 增量更新网络ACL五元组规则接口 */
+  /** {@link ModifyNetworkAclQuintupleEntries 增量更新网络ACL五元组规则接口}({@link ModifyNetworkAclQuintupleEntriesRequest 请求参数}): {@link ModifyNetworkAclQuintupleEntriesResponse 返回参数} */
   ModifyNetworkAclQuintupleEntries(data: ModifyNetworkAclQuintupleEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetworkAclQuintupleEntriesResponse>;
-  /** 修改弹性网卡 */
+  /** {@link ModifyNetworkInterfaceAttribute 修改弹性网卡}({@link ModifyNetworkInterfaceAttributeRequest 请求参数}): {@link ModifyNetworkInterfaceAttributeResponse 返回参数} */
   ModifyNetworkInterfaceAttribute(data: ModifyNetworkInterfaceAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetworkInterfaceAttributeResponse>;
-  /** 修改弹性网卡服务质量 */
+  /** {@link ModifyNetworkInterfaceQos 修改弹性网卡服务质量}({@link ModifyNetworkInterfaceQosRequest 请求参数}): {@link ModifyNetworkInterfaceQosResponse 返回参数} */
   ModifyNetworkInterfaceQos(data: ModifyNetworkInterfaceQosRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetworkInterfaceQosResponse>;
-  /** 修改弹性网卡内网IP信息 */
+  /** {@link ModifyPrivateIpAddressesAttribute 修改弹性网卡内网IP信息}({@link ModifyPrivateIpAddressesAttributeRequest 请求参数}): {@link ModifyPrivateIpAddressesAttributeResponse 返回参数} */
   ModifyPrivateIpAddressesAttribute(data: ModifyPrivateIpAddressesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateIpAddressesAttributeResponse>;
-  /** 修改路由表属性 */
+  /** {@link ModifyRouteTableAttribute 修改路由表属性}({@link ModifyRouteTableAttributeRequest 请求参数}): {@link ModifyRouteTableAttributeResponse 返回参数} */
   ModifyRouteTableAttribute(data: ModifyRouteTableAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRouteTableAttributeResponse>;
-  /** 修改安全组属性 */
+  /** {@link ModifySecurityGroupAttribute 修改安全组属性}({@link ModifySecurityGroupAttributeRequest 请求参数}): {@link ModifySecurityGroupAttributeResponse 返回参数} */
   ModifySecurityGroupAttribute(data: ModifySecurityGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityGroupAttributeResponse>;
-  /** 修改安全组出站和入站规则 */
+  /** {@link ModifySecurityGroupPolicies 修改安全组出站和入站规则}({@link ModifySecurityGroupPoliciesRequest 请求参数}): {@link ModifySecurityGroupPoliciesResponse 返回参数} */
   ModifySecurityGroupPolicies(data: ModifySecurityGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityGroupPoliciesResponse>;
-  /** 修改协议端口模板 */
+  /** {@link ModifyServiceTemplateAttribute 修改协议端口模板}({@link ModifyServiceTemplateAttributeRequest 请求参数}): {@link ModifyServiceTemplateAttributeResponse 返回参数} */
   ModifyServiceTemplateAttribute(data: ModifyServiceTemplateAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceTemplateAttributeResponse>;
-  /** 修改协议端口模板集合 */
+  /** {@link ModifyServiceTemplateGroupAttribute 修改协议端口模板集合}({@link ModifyServiceTemplateGroupAttributeRequest 请求参数}): {@link ModifyServiceTemplateGroupAttributeResponse 返回参数} */
   ModifyServiceTemplateGroupAttribute(data: ModifyServiceTemplateGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceTemplateGroupAttributeResponse>;
-  /** 修改子网属性 */
+  /** {@link ModifySubnetAttribute 修改子网属性}({@link ModifySubnetAttributeRequest 请求参数}): {@link ModifySubnetAttributeResponse 返回参数} */
   ModifySubnetAttribute(data: ModifySubnetAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubnetAttributeResponse>;
-  /** 修改模板对象成员 */
+  /** {@link ModifyTemplateMember 修改模板对象成员}({@link ModifyTemplateMemberRequest 请求参数}): {@link ModifyTemplateMemberResponse 返回参数} */
   ModifyTemplateMember(data: ModifyTemplateMemberRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTemplateMemberResponse>;
-  /** 修改VPC属性 */
+  /** {@link ModifyVpcAttribute 修改VPC属性}({@link ModifyVpcAttributeRequest 请求参数}): {@link ModifyVpcAttributeResponse 返回参数} */
   ModifyVpcAttribute(data: ModifyVpcAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcAttributeResponse>;
-  /** 修改终端节点属性 */
+  /** {@link ModifyVpcEndPointAttribute 修改终端节点属性}({@link ModifyVpcEndPointAttributeRequest 请求参数}): {@link ModifyVpcEndPointAttributeResponse 返回参数} */
   ModifyVpcEndPointAttribute(data: ModifyVpcEndPointAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcEndPointAttributeResponse>;
-  /** 修改终端节点服务属性 */
+  /** {@link ModifyVpcEndPointServiceAttribute 修改终端节点服务属性}({@link ModifyVpcEndPointServiceAttributeRequest 请求参数}): {@link ModifyVpcEndPointServiceAttributeResponse 返回参数} */
   ModifyVpcEndPointServiceAttribute(data: ModifyVpcEndPointServiceAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcEndPointServiceAttributeResponse>;
-  /** 修改终端节点服务白名单属性 */
+  /** {@link ModifyVpcEndPointServiceWhiteList 修改终端节点服务白名单属性}({@link ModifyVpcEndPointServiceWhiteListRequest 请求参数}): {@link ModifyVpcEndPointServiceWhiteListResponse 返回参数} */
   ModifyVpcEndPointServiceWhiteList(data: ModifyVpcEndPointServiceWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcEndPointServiceWhiteListResponse>;
-  /** 修改VPN通道 */
+  /** {@link ModifyVpnConnectionAttribute 修改VPN通道}({@link ModifyVpnConnectionAttributeRequest 请求参数}): {@link ModifyVpnConnectionAttributeResponse 返回参数} */
   ModifyVpnConnectionAttribute(data: ModifyVpnConnectionAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpnConnectionAttributeResponse>;
-  /** 修改VPN网关属性 */
+  /** {@link ModifyVpnGatewayAttribute 修改VPN网关属性}({@link ModifyVpnGatewayAttributeRequest 请求参数}): {@link ModifyVpnGatewayAttributeResponse 返回参数} */
   ModifyVpnGatewayAttribute(data: ModifyVpnGatewayAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpnGatewayAttributeResponse>;
-  /** 修改VPN网关云联网路由 */
+  /** {@link ModifyVpnGatewayCcnRoutes 修改VPN网关云联网路由}({@link ModifyVpnGatewayCcnRoutesRequest 请求参数}): {@link ModifyVpnGatewayCcnRoutesResponse 返回参数} */
   ModifyVpnGatewayCcnRoutes(data: ModifyVpnGatewayCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpnGatewayCcnRoutesResponse>;
-  /** 修改VPN路由状态 */
+  /** {@link ModifyVpnGatewayRoutes 修改VPN路由状态}({@link ModifyVpnGatewayRoutesRequest 请求参数}): {@link ModifyVpnGatewayRoutesResponse 返回参数} */
   ModifyVpnGatewayRoutes(data: ModifyVpnGatewayRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpnGatewayRoutesResponse>;
-  /** 发布路由至云联网 */
+  /** {@link NotifyRoutes 发布路由至云联网}({@link NotifyRoutesRequest 请求参数}): {@link NotifyRoutesResponse 返回参数} */
   NotifyRoutes(data: NotifyRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<NotifyRoutesResponse>;
-  /** 刷新专线直连NAT路由 */
+  /** {@link RefreshDirectConnectGatewayRouteToNatGateway 刷新专线直连NAT路由}({@link RefreshDirectConnectGatewayRouteToNatGatewayRequest 请求参数}): {@link RefreshDirectConnectGatewayRouteToNatGatewayResponse 返回参数} */
   RefreshDirectConnectGatewayRouteToNatGateway(data: RefreshDirectConnectGatewayRouteToNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshDirectConnectGatewayRouteToNatGatewayResponse>;
-  /** 云联网拒绝关联实例 */
+  /** {@link RejectAttachCcnInstances 云联网拒绝关联实例}({@link RejectAttachCcnInstancesRequest 请求参数}): {@link RejectAttachCcnInstancesResponse 返回参数} */
   RejectAttachCcnInstances(data: RejectAttachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RejectAttachCcnInstancesResponse>;
-  /** 释放弹性公网IP */
+  /** {@link ReleaseAddresses 释放弹性公网IP}({@link ReleaseAddressesRequest 请求参数}): {@link ReleaseAddressesResponse 返回参数} */
   ReleaseAddresses(data: ReleaseAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseAddressesResponse>;
-  /** 释放弹性公网IPv6地址带宽 */
+  /** {@link ReleaseIp6AddressesBandwidth 释放弹性公网IPv6地址带宽}({@link ReleaseIp6AddressesBandwidthRequest 请求参数}): {@link ReleaseIp6AddressesBandwidthResponse 返回参数} */
   ReleaseIp6AddressesBandwidth(data?: ReleaseIp6AddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseIp6AddressesBandwidthResponse>;
-  /** 删除带宽包资源 */
+  /** {@link RemoveBandwidthPackageResources 删除带宽包资源}({@link RemoveBandwidthPackageResourcesRequest 请求参数}): {@link RemoveBandwidthPackageResourcesResponse 返回参数} */
   RemoveBandwidthPackageResources(data?: RemoveBandwidthPackageResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveBandwidthPackageResourcesResponse>;
-  /** 删除IPV6转换规则 */
+  /** {@link RemoveIp6Rules 删除IPV6转换规则}({@link RemoveIp6RulesRequest 请求参数}): {@link RemoveIp6RulesResponse 返回参数} */
   RemoveIp6Rules(data: RemoveIp6RulesRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveIp6RulesResponse>;
-  /** 续费包月带宽弹性公网IP */
+  /** {@link RenewAddresses 续费包月带宽弹性公网IP}({@link RenewAddressesRequest 请求参数}): {@link RenewAddressesResponse 返回参数} */
   RenewAddresses(data: RenewAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<RenewAddressesResponse>;
-  /** 续费VPN网关 */
+  /** {@link RenewVpnGateway 续费VPN网关}({@link RenewVpnGatewayRequest 请求参数}): {@link RenewVpnGatewayResponse 返回参数} */
   RenewVpnGateway(data: RenewVpnGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<RenewVpnGatewayResponse>;
-  /** 替换专线网关云联网路由 */
+  /** {@link ReplaceDirectConnectGatewayCcnRoutes 替换专线网关云联网路由}({@link ReplaceDirectConnectGatewayCcnRoutesRequest 请求参数}): {@link ReplaceDirectConnectGatewayCcnRoutesResponse 返回参数} */
   ReplaceDirectConnectGatewayCcnRoutes(data: ReplaceDirectConnectGatewayCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceDirectConnectGatewayCcnRoutesResponse>;
-  /** 替换路由表绑定关系 */
+  /** {@link ReplaceRouteTableAssociation 替换路由表绑定关系}({@link ReplaceRouteTableAssociationRequest 请求参数}): {@link ReplaceRouteTableAssociationResponse 返回参数} */
   ReplaceRouteTableAssociation(data: ReplaceRouteTableAssociationRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceRouteTableAssociationResponse>;
-  /** 替换路由策略 */
+  /** {@link ReplaceRoutes 替换路由策略}({@link ReplaceRoutesRequest 请求参数}): {@link ReplaceRoutesResponse 返回参数} */
   ReplaceRoutes(data: ReplaceRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceRoutesResponse>;
-  /** 替换单条安全组规则 */
+  /** {@link ReplaceSecurityGroupPolicy 替换单条安全组规则}({@link ReplaceSecurityGroupPolicyRequest 请求参数}): {@link ReplaceSecurityGroupPolicyResponse 返回参数} */
   ReplaceSecurityGroupPolicy(data: ReplaceSecurityGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceSecurityGroupPolicyResponse>;
-  /** 重新申请关联实例 */
+  /** {@link ResetAttachCcnInstances 重新申请关联实例}({@link ResetAttachCcnInstancesRequest 请求参数}): {@link ResetAttachCcnInstancesResponse 返回参数} */
   ResetAttachCcnInstances(data: ResetAttachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAttachCcnInstancesResponse>;
-  /** 调整NAT网关并发连接上限 */
+  /** {@link ResetNatGatewayConnection 调整NAT网关并发连接上限}({@link ResetNatGatewayConnectionRequest 请求参数}): {@link ResetNatGatewayConnectionResponse 返回参数} */
   ResetNatGatewayConnection(data: ResetNatGatewayConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<ResetNatGatewayConnectionResponse>;
-  /** 重置路由表名称和路由策略 */
+  /** {@link ResetRoutes 重置路由表名称和路由策略}({@link ResetRoutesRequest 请求参数}): {@link ResetRoutesResponse 返回参数} */
   ResetRoutes(data: ResetRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ResetRoutesResponse>;
-  /** 重置VPN通道 */
+  /** {@link ResetVpnConnection 重置VPN通道}({@link ResetVpnConnectionRequest 请求参数}): {@link ResetVpnConnectionResponse 返回参数} */
   ResetVpnConnection(data: ResetVpnConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<ResetVpnConnectionResponse>;
-  /** 调整VPN网关带宽上限 */
+  /** {@link ResetVpnGatewayInternetMaxBandwidth 调整VPN网关带宽上限}({@link ResetVpnGatewayInternetMaxBandwidthRequest 请求参数}): {@link ResetVpnGatewayInternetMaxBandwidthResponse 返回参数} */
   ResetVpnGatewayInternetMaxBandwidth(data: ResetVpnGatewayInternetMaxBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ResetVpnGatewayInternetMaxBandwidthResponse>;
-  /** 设置云联网各地域出带宽上限或地域间上限 */
+  /** {@link SetCcnRegionBandwidthLimits 设置云联网各地域出带宽上限或地域间上限}({@link SetCcnRegionBandwidthLimitsRequest 请求参数}): {@link SetCcnRegionBandwidthLimitsResponse 返回参数} */
   SetCcnRegionBandwidthLimits(data: SetCcnRegionBandwidthLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<SetCcnRegionBandwidthLimitsResponse>;
-  /** 设置VPNGW续费标记 */
+  /** {@link SetVpnGatewaysRenewFlag 设置VPNGW续费标记}({@link SetVpnGatewaysRenewFlagRequest 请求参数}): {@link SetVpnGatewaysRenewFlagResponse 返回参数} */
   SetVpnGatewaysRenewFlag(data: SetVpnGatewaysRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetVpnGatewaysRenewFlagResponse>;
-  /** 普通IP转弹性IP */
+  /** {@link TransformAddress 普通IP转弹性IP}({@link TransformAddressRequest 请求参数}): {@link TransformAddressResponse 返回参数} */
   TransformAddress(data: TransformAddressRequest, config?: AxiosRequestConfig): AxiosPromise<TransformAddressResponse>;
-  /** 释放IPv6地址 */
+  /** {@link UnassignIpv6Addresses 释放IPv6地址}({@link UnassignIpv6AddressesRequest 请求参数}): {@link UnassignIpv6AddressesResponse 返回参数} */
   UnassignIpv6Addresses(data: UnassignIpv6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<UnassignIpv6AddressesResponse>;
-  /** 释放IPv6网段 */
+  /** {@link UnassignIpv6CidrBlock 释放IPv6网段}({@link UnassignIpv6CidrBlockRequest 请求参数}): {@link UnassignIpv6CidrBlockResponse 返回参数} */
   UnassignIpv6CidrBlock(data: UnassignIpv6CidrBlockRequest, config?: AxiosRequestConfig): AxiosPromise<UnassignIpv6CidrBlockResponse>;
-  /** 释放IPv6子网段 */
+  /** {@link UnassignIpv6SubnetCidrBlock 释放IPv6子网段}({@link UnassignIpv6SubnetCidrBlockRequest 请求参数}): {@link UnassignIpv6SubnetCidrBlockResponse 返回参数} */
   UnassignIpv6SubnetCidrBlock(data: UnassignIpv6SubnetCidrBlockRequest, config?: AxiosRequestConfig): AxiosPromise<UnassignIpv6SubnetCidrBlockResponse>;
-  /** 弹性网卡退还内网 IP */
+  /** {@link UnassignPrivateIpAddresses 弹性网卡退还内网 IP}({@link UnassignPrivateIpAddressesRequest 请求参数}): {@link UnassignPrivateIpAddressesResponse 返回参数} */
   UnassignPrivateIpAddresses(data: UnassignPrivateIpAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<UnassignPrivateIpAddressesResponse>;
-  /** 安全解锁云联网带宽 */
+  /** {@link UnlockCcnBandwidths 安全解锁云联网带宽}({@link UnlockCcnBandwidthsRequest 请求参数}): {@link UnlockCcnBandwidthsResponse 返回参数} */
   UnlockCcnBandwidths(data?: UnlockCcnBandwidthsRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockCcnBandwidthsResponse>;
-  /** 安全解锁云联网实例 */
+  /** {@link UnlockCcns 安全解锁云联网实例}({@link UnlockCcnsRequest 请求参数}): {@link UnlockCcnsResponse 返回参数} */
   UnlockCcns(data?: UnlockCcnsRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockCcnsResponse>;
-  /** 从云联网撤销路由 */
+  /** {@link WithdrawNotifyRoutes 从云联网撤销路由}({@link WithdrawNotifyRoutesRequest 请求参数}): {@link WithdrawNotifyRoutesResponse 返回参数} */
   WithdrawNotifyRoutes(data: WithdrawNotifyRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<WithdrawNotifyRoutesResponse>;
 }
 

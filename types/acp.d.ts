@@ -286,22 +286,22 @@ declare interface DescribeScanTaskStatusResponse {
   RequestId?: string;
 }
 
-/** [应用合规平台](https://cloud.tencent.com/document/product/1553) */
+/** {@link Acp 应用合规平台} */
 declare interface Acp {
   (): Versions;
-  /** 创建应用合规隐私诊断任务 */
+  /** {@link CreateAppScanTask 创建应用合规隐私诊断任务}({@link CreateAppScanTaskRequest 请求参数}): {@link CreateAppScanTaskResponse 返回参数} */
   CreateAppScanTask(data: CreateAppScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppScanTaskResponse>;
-  /** 应用合规隐私诊断重试任务 */
+  /** {@link CreateAppScanTaskRepeat 应用合规隐私诊断重试任务}({@link CreateAppScanTaskRepeatRequest 请求参数}): {@link CreateAppScanTaskRepeatResponse 返回参数} */
   CreateAppScanTaskRepeat(data: CreateAppScanTaskRepeatRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppScanTaskRepeatResponse>;
-  /** 获取应用合规文件上传凭证接口 */
+  /** {@link DescribeFileTicket 获取应用合规文件上传凭证接口}({@link DescribeFileTicketRequest 请求参数}): {@link DescribeFileTicketResponse 返回参数} */
   DescribeFileTicket(data: DescribeFileTicketRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileTicketResponse>;
-  /** 查询应用合规资源使用情况 */
+  /** {@link DescribeResourceUsageInfo 查询应用合规资源使用情况}({@link DescribeResourceUsageInfoRequest 请求参数}): {@link DescribeResourceUsageInfoResponse 返回参数} */
   DescribeResourceUsageInfo(data?: DescribeResourceUsageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceUsageInfoResponse>;
-  /** 获取应用合规隐私诊断任务列表 */
+  /** {@link DescribeScanTaskList 获取应用合规隐私诊断任务列表}({@link DescribeScanTaskListRequest 请求参数}): {@link DescribeScanTaskListResponse 返回参数} */
   DescribeScanTaskList(data: DescribeScanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskListResponse>;
-  /** 获取应用合规隐私诊断任务报告url */
+  /** {@link DescribeScanTaskReportUrl 获取应用合规隐私诊断任务报告url}({@link DescribeScanTaskReportUrlRequest 请求参数}): {@link DescribeScanTaskReportUrlResponse 返回参数} */
   DescribeScanTaskReportUrl(data: DescribeScanTaskReportUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskReportUrlResponse>;
-  /** 查询应用合规隐私诊断任务状态 */
+  /** {@link DescribeScanTaskStatus 查询应用合规隐私诊断任务状态}({@link DescribeScanTaskStatusRequest 请求参数}): {@link DescribeScanTaskStatusResponse 返回参数} */
   DescribeScanTaskStatus(data: DescribeScanTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskStatusResponse>;
 }
 

@@ -3004,162 +3004,162 @@ declare interface WaybillOCRResponse {
   RequestId?: string;
 }
 
-/** [文字识别](https://cloud.tencent.com/document/product/866) */
+/** {@link Ocr 文字识别} */
 declare interface Ocr {
   (): Versions;
-  /** 广告文字识别 */
+  /** {@link AdvertiseOCR 广告文字识别}({@link AdvertiseOCRRequest 请求参数}): {@link AdvertiseOCRResponse 返回参数} */
   AdvertiseOCR(data?: AdvertiseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<AdvertiseOCRResponse>;
-  /** 算式识别 */
+  /** {@link ArithmeticOCR 算式识别}({@link ArithmeticOCRRequest 请求参数}): {@link ArithmeticOCRResponse 返回参数} */
   ArithmeticOCR(data?: ArithmeticOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ArithmeticOCRResponse>;
-  /** 银行卡识别 */
+  /** {@link BankCardOCR 银行卡识别}({@link BankCardOCRRequest 请求参数}): {@link BankCardOCRResponse 返回参数} */
   BankCardOCR(data?: BankCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BankCardOCRResponse>;
-  /** 银行回单识别 */
+  /** {@link BankSlipOCR 银行回单识别}({@link BankSlipOCRRequest 请求参数}): {@link BankSlipOCRResponse 返回参数} */
   BankSlipOCR(data?: BankSlipOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BankSlipOCRResponse>;
-  /** 营业执照识别 */
+  /** {@link BizLicenseOCR 营业执照识别}({@link BizLicenseOCRRequest 请求参数}): {@link BizLicenseOCRResponse 返回参数} */
   BizLicenseOCR(data?: BizLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BizLicenseOCRResponse>;
-  /** 汽车票识别 */
+  /** {@link BusInvoiceOCR 汽车票识别}({@link BusInvoiceOCRRequest 请求参数}): {@link BusInvoiceOCRResponse 返回参数} */
   BusInvoiceOCR(data?: BusInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BusInvoiceOCRResponse>;
-  /** 名片识别 */
+  /** {@link BusinessCardOCR 名片识别}({@link BusinessCardOCRRequest 请求参数}): {@link BusinessCardOCRResponse 返回参数} */
   BusinessCardOCR(data?: BusinessCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BusinessCardOCRResponse>;
-  /** 购车发票识别 */
+  /** {@link CarInvoiceOCR 购车发票识别}({@link CarInvoiceOCRRequest 请求参数}): {@link CarInvoiceOCRResponse 返回参数} */
   CarInvoiceOCR(data?: CarInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<CarInvoiceOCRResponse>;
-  /** 智能卡证分类 */
+  /** {@link ClassifyDetectOCR 智能卡证分类}({@link ClassifyDetectOCRRequest 请求参数}): {@link ClassifyDetectOCRResponse 返回参数} */
   ClassifyDetectOCR(data?: ClassifyDetectOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyDetectOCRResponse>;
-  /** 驾驶证识别 */
+  /** {@link DriverLicenseOCR 驾驶证识别}({@link DriverLicenseOCRRequest 请求参数}): {@link DriverLicenseOCRResponse 返回参数} */
   DriverLicenseOCR(data?: DriverLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<DriverLicenseOCRResponse>;
-  /** 完税证明识别 */
+  /** {@link DutyPaidProofOCR 完税证明识别}({@link DutyPaidProofOCRRequest 请求参数}): {@link DutyPaidProofOCRResponse 返回参数} */
   DutyPaidProofOCR(data?: DutyPaidProofOCRRequest, config?: AxiosRequestConfig): AxiosPromise<DutyPaidProofOCRResponse>;
-  /** 数学试题识别 */
+  /** {@link EduPaperOCR 数学试题识别}({@link EduPaperOCRRequest 请求参数}): {@link EduPaperOCRResponse 返回参数} */
   EduPaperOCR(data?: EduPaperOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EduPaperOCRResponse>;
-  /** 英文识别 */
+  /** {@link EnglishOCR 英文识别}({@link EnglishOCRRequest 请求参数}): {@link EnglishOCRResponse 返回参数} */
   EnglishOCR(data?: EnglishOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EnglishOCRResponse>;
-  /** 企业证照识别 */
+  /** {@link EnterpriseLicenseOCR 企业证照识别}({@link EnterpriseLicenseOCRRequest 请求参数}): {@link EnterpriseLicenseOCRResponse 返回参数} */
   EnterpriseLicenseOCR(data?: EnterpriseLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EnterpriseLicenseOCRResponse>;
-  /** 不动产权证识别 */
+  /** {@link EstateCertOCR 不动产权证识别}({@link EstateCertOCRRequest 请求参数}): {@link EstateCertOCRResponse 返回参数} */
   EstateCertOCR(data?: EstateCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EstateCertOCRResponse>;
-  /** 金融票据整单识别 */
+  /** {@link FinanBillOCR 金融票据整单识别}({@link FinanBillOCRRequest 请求参数}): {@link FinanBillOCRResponse 返回参数} */
   FinanBillOCR(data?: FinanBillOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FinanBillOCRResponse>;
-  /** 金融票据切片识别 */
+  /** {@link FinanBillSliceOCR 金融票据切片识别}({@link FinanBillSliceOCRRequest 请求参数}): {@link FinanBillSliceOCRResponse 返回参数} */
   FinanBillSliceOCR(data?: FinanBillSliceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FinanBillSliceOCRResponse>;
-  /** 机票行程单识别 */
+  /** {@link FlightInvoiceOCR 机票行程单识别}({@link FlightInvoiceOCRRequest 请求参数}): {@link FlightInvoiceOCRResponse 返回参数} */
   FlightInvoiceOCR(data?: FlightInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FlightInvoiceOCRResponse>;
-  /** 数学公式识别 */
+  /** {@link FormulaOCR 数学公式识别}({@link FormulaOCRRequest 请求参数}): {@link FormulaOCRResponse 返回参数} */
   FormulaOCR(data?: FormulaOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FormulaOCRResponse>;
-  /** 通用印刷体识别（高精度版） */
+  /** {@link GeneralAccurateOCR 通用印刷体识别（高精度版）}({@link GeneralAccurateOCRRequest 请求参数}): {@link GeneralAccurateOCRResponse 返回参数} */
   GeneralAccurateOCR(data?: GeneralAccurateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralAccurateOCRResponse>;
-  /** 通用印刷体识别 */
+  /** {@link GeneralBasicOCR 通用印刷体识别}({@link GeneralBasicOCRRequest 请求参数}): {@link GeneralBasicOCRResponse 返回参数} */
   GeneralBasicOCR(data?: GeneralBasicOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralBasicOCRResponse>;
-  /** 通用印刷体识别（精简版） */
+  /** {@link GeneralEfficientOCR 通用印刷体识别（精简版）}({@link GeneralEfficientOCRRequest 请求参数}): {@link GeneralEfficientOCRResponse 返回参数} */
   GeneralEfficientOCR(data?: GeneralEfficientOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralEfficientOCRResponse>;
-  /** 通用印刷体识别（高速版） */
+  /** {@link GeneralFastOCR 通用印刷体识别（高速版）}({@link GeneralFastOCRRequest 请求参数}): {@link GeneralFastOCRResponse 返回参数} */
   GeneralFastOCR(data?: GeneralFastOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralFastOCRResponse>;
-  /** 通用手写体识别 */
+  /** {@link GeneralHandwritingOCR 通用手写体识别}({@link GeneralHandwritingOCRRequest 请求参数}): {@link GeneralHandwritingOCRResponse 返回参数} */
   GeneralHandwritingOCR(data?: GeneralHandwritingOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralHandwritingOCRResponse>;
-  /** 中国香港身份证识别 */
+  /** {@link HKIDCardOCR 中国香港身份证识别}({@link HKIDCardOCRRequest 请求参数}): {@link HKIDCardOCRResponse 返回参数} */
   HKIDCardOCR(data: HKIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<HKIDCardOCRResponse>;
-  /** 港澳台居住证识别 */
+  /** {@link HmtResidentPermitOCR 港澳台居住证识别}({@link HmtResidentPermitOCRRequest 请求参数}): {@link HmtResidentPermitOCRResponse 返回参数} */
   HmtResidentPermitOCR(data?: HmtResidentPermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<HmtResidentPermitOCRResponse>;
-  /** 身份证识别 */
+  /** {@link IDCardOCR 身份证识别}({@link IDCardOCRRequest 请求参数}): {@link IDCardOCRResponse 返回参数} */
   IDCardOCR(data?: IDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<IDCardOCRResponse>;
-  /** 文本图像增强 */
+  /** {@link ImageEnhancement 文本图像增强}({@link ImageEnhancementRequest 请求参数}): {@link ImageEnhancementResponse 返回参数} */
   ImageEnhancement(data?: ImageEnhancementRequest, config?: AxiosRequestConfig): AxiosPromise<ImageEnhancementResponse>;
-  /** 事业单位法人证书识别 */
+  /** {@link InstitutionOCR 事业单位法人证书识别}({@link InstitutionOCRRequest 请求参数}): {@link InstitutionOCRResponse 返回参数} */
   InstitutionOCR(data?: InstitutionOCRRequest, config?: AxiosRequestConfig): AxiosPromise<InstitutionOCRResponse>;
-  /** 保险单据识别 */
+  /** {@link InsuranceBillOCR 保险单据识别}({@link InsuranceBillOCRRequest 请求参数}): {@link InsuranceBillOCRResponse 返回参数} */
   InsuranceBillOCR(data?: InsuranceBillOCRRequest, config?: AxiosRequestConfig): AxiosPromise<InsuranceBillOCRResponse>;
-  /** 通用机打发票识别 */
+  /** {@link InvoiceGeneralOCR 通用机打发票识别}({@link InvoiceGeneralOCRRequest 请求参数}): {@link InvoiceGeneralOCRResponse 返回参数} */
   InvoiceGeneralOCR(data?: InvoiceGeneralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<InvoiceGeneralOCRResponse>;
-  /** 车牌识别 */
+  /** {@link LicensePlateOCR 车牌识别}({@link LicensePlateOCRRequest 请求参数}): {@link LicensePlateOCRResponse 返回参数} */
   LicensePlateOCR(data?: LicensePlateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<LicensePlateOCRResponse>;
-  /** 马来西亚身份证识别 */
+  /** {@link MLIDCardOCR 马来西亚身份证识别}({@link MLIDCardOCRRequest 请求参数}): {@link MLIDCardOCRResponse 返回参数} */
   MLIDCardOCR(data?: MLIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MLIDCardOCRResponse>;
-  /** 护照识别（港澳台地区及境外护照） */
+  /** {@link MLIDPassportOCR 护照识别（港澳台地区及境外护照）}({@link MLIDPassportOCRRequest 请求参数}): {@link MLIDPassportOCRResponse 返回参数} */
   MLIDPassportOCR(data: MLIDPassportOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MLIDPassportOCRResponse>;
-  /** 港澳台来往内地通行证识别 */
+  /** {@link MainlandPermitOCR 港澳台来往内地通行证识别}({@link MainlandPermitOCRRequest 请求参数}): {@link MainlandPermitOCRResponse 返回参数} */
   MainlandPermitOCR(data?: MainlandPermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MainlandPermitOCRResponse>;
-  /** 混贴票据分类 */
+  /** {@link MixedInvoiceDetect 混贴票据分类}({@link MixedInvoiceDetectRequest 请求参数}): {@link MixedInvoiceDetectResponse 返回参数} */
   MixedInvoiceDetect(data: MixedInvoiceDetectRequest, config?: AxiosRequestConfig): AxiosPromise<MixedInvoiceDetectResponse>;
-  /** 混贴票据识别 */
+  /** {@link MixedInvoiceOCR 混贴票据识别}({@link MixedInvoiceOCRRequest 请求参数}): {@link MixedInvoiceOCRResponse 返回参数} */
   MixedInvoiceOCR(data?: MixedInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MixedInvoiceOCRResponse>;
-  /** 组织机构代码证识别 */
+  /** {@link OrgCodeCertOCR 组织机构代码证识别}({@link OrgCodeCertOCRRequest 请求参数}): {@link OrgCodeCertOCRResponse 返回参数} */
   OrgCodeCertOCR(data?: OrgCodeCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<OrgCodeCertOCRResponse>;
-  /** 护照识别（中国大陆地区护照） */
+  /** {@link PassportOCR 护照识别（中国大陆地区护照）}({@link PassportOCRRequest 请求参数}): {@link PassportOCRResponse 返回参数} */
   PassportOCR(data?: PassportOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PassportOCRResponse>;
-  /** 港澳台通行证识别 */
+  /** {@link PermitOCR 港澳台通行证识别}({@link PermitOCRRequest 请求参数}): {@link PermitOCRResponse 返回参数} */
   PermitOCR(data?: PermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PermitOCRResponse>;
-  /** 房产证识别 */
+  /** {@link PropOwnerCertOCR 房产证识别}({@link PropOwnerCertOCRRequest 请求参数}): {@link PropOwnerCertOCRResponse 返回参数} */
   PropOwnerCertOCR(data?: PropOwnerCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PropOwnerCertOCRResponse>;
-  /** 二维码和条形码识别 */
+  /** {@link QrcodeOCR 二维码和条形码识别}({@link QrcodeOCRRequest 请求参数}): {@link QrcodeOCRResponse 返回参数} */
   QrcodeOCR(data?: QrcodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QrcodeOCRResponse>;
-  /** 条码信息查询 */
+  /** {@link QueryBarCode 条码信息查询}({@link QueryBarCodeRequest 请求参数}): {@link QueryBarCodeResponse 返回参数} */
   QueryBarCode(data: QueryBarCodeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBarCodeResponse>;
-  /** 定额发票识别 */
+  /** {@link QuotaInvoiceOCR 定额发票识别}({@link QuotaInvoiceOCRRequest 请求参数}): {@link QuotaInvoiceOCRResponse 返回参数} */
   QuotaInvoiceOCR(data?: QuotaInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QuotaInvoiceOCRResponse>;
-  /** 集装箱识别 */
+  /** {@link RecognizeContainerOCR 集装箱识别}({@link RecognizeContainerOCRRequest 请求参数}): {@link RecognizeContainerOCRResponse 返回参数} */
   RecognizeContainerOCR(data?: RecognizeContainerOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeContainerOCRResponse>;
-  /** 健康码识别 */
+  /** {@link RecognizeHealthCodeOCR 健康码识别}({@link RecognizeHealthCodeOCRRequest 请求参数}): {@link RecognizeHealthCodeOCRResponse 返回参数} */
   RecognizeHealthCodeOCR(data?: RecognizeHealthCodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeHealthCodeOCRResponse>;
-  /** 印尼身份证识别 */
+  /** {@link RecognizeIndonesiaIDCardOCR 印尼身份证识别}({@link RecognizeIndonesiaIDCardOCRRequest 请求参数}): {@link RecognizeIndonesiaIDCardOCRResponse 返回参数} */
   RecognizeIndonesiaIDCardOCR(data?: RecognizeIndonesiaIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeIndonesiaIDCardOCRResponse>;
-  /** 医疗票据识别 */
+  /** {@link RecognizeMedicalInvoiceOCR 医疗票据识别}({@link RecognizeMedicalInvoiceOCRRequest 请求参数}): {@link RecognizeMedicalInvoiceOCRResponse 返回参数} */
   RecognizeMedicalInvoiceOCR(data?: RecognizeMedicalInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeMedicalInvoiceOCRResponse>;
-  /** 网约车行程单识别 */
+  /** {@link RecognizeOnlineTaxiItineraryOCR 网约车行程单识别}({@link RecognizeOnlineTaxiItineraryOCRRequest 请求参数}): {@link RecognizeOnlineTaxiItineraryOCRResponse 返回参数} */
   RecognizeOnlineTaxiItineraryOCR(data?: RecognizeOnlineTaxiItineraryOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeOnlineTaxiItineraryOCRResponse>;
-  /** 菲律宾驾驶证识别 */
+  /** {@link RecognizePhilippinesDrivingLicenseOCR 菲律宾驾驶证识别}({@link RecognizePhilippinesDrivingLicenseOCRRequest 请求参数}): {@link RecognizePhilippinesDrivingLicenseOCRResponse 返回参数} */
   RecognizePhilippinesDrivingLicenseOCR(data?: RecognizePhilippinesDrivingLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesDrivingLicenseOCRResponse>;
-  /** 菲律宾VoteID识别 */
+  /** {@link RecognizePhilippinesVoteIDOCR 菲律宾VoteID识别}({@link RecognizePhilippinesVoteIDOCRRequest 请求参数}): {@link RecognizePhilippinesVoteIDOCRResponse 返回参数} */
   RecognizePhilippinesVoteIDOCR(data: RecognizePhilippinesVoteIDOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesVoteIDOCRResponse>;
-  /** 表格识别（V2) */
+  /** {@link RecognizeTableOCR 表格识别（V2)}({@link RecognizeTableOCRRequest 请求参数}): {@link RecognizeTableOCRResponse 返回参数} */
   RecognizeTableOCR(data?: RecognizeTableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTableOCRResponse>;
-  /** 泰国身份证识别 */
+  /** {@link RecognizeThaiIDCardOCR 泰国身份证识别}({@link RecognizeThaiIDCardOCRRequest 请求参数}): {@link RecognizeThaiIDCardOCRResponse 返回参数} */
   RecognizeThaiIDCardOCR(data?: RecognizeThaiIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeThaiIDCardOCRResponse>;
-  /** 通信行程卡识别 */
+  /** {@link RecognizeTravelCardOCR 通信行程卡识别}({@link RecognizeTravelCardOCRRequest 请求参数}): {@link RecognizeTravelCardOCRResponse 返回参数} */
   RecognizeTravelCardOCR(data?: RecognizeTravelCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTravelCardOCRResponse>;
-  /** 户口本识别 */
+  /** {@link ResidenceBookletOCR 户口本识别}({@link ResidenceBookletOCRRequest 请求参数}): {@link ResidenceBookletOCRResponse 返回参数} */
   ResidenceBookletOCR(data?: ResidenceBookletOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ResidenceBookletOCRResponse>;
-  /** 网约车驾驶证识别 */
+  /** {@link RideHailingDriverLicenseOCR 网约车驾驶证识别}({@link RideHailingDriverLicenseOCRRequest 请求参数}): {@link RideHailingDriverLicenseOCRResponse 返回参数} */
   RideHailingDriverLicenseOCR(data?: RideHailingDriverLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RideHailingDriverLicenseOCRResponse>;
-  /** 网约车运输证识别 */
+  /** {@link RideHailingTransportLicenseOCR 网约车运输证识别}({@link RideHailingTransportLicenseOCRRequest 请求参数}): {@link RideHailingTransportLicenseOCRResponse 返回参数} */
   RideHailingTransportLicenseOCR(data?: RideHailingTransportLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RideHailingTransportLicenseOCRResponse>;
-  /** 印章识别 */
+  /** {@link SealOCR 印章识别}({@link SealOCRRequest 请求参数}): {@link SealOCRResponse 返回参数} */
   SealOCR(data?: SealOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SealOCRResponse>;
-  /** 轮船票识别 */
+  /** {@link ShipInvoiceOCR 轮船票识别}({@link ShipInvoiceOCRRequest 请求参数}): {@link ShipInvoiceOCRResponse 返回参数} */
   ShipInvoiceOCR(data?: ShipInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ShipInvoiceOCRResponse>;
-  /** 智能结构化识别 */
+  /** {@link SmartStructuralOCR 智能结构化识别}({@link SmartStructuralOCRRequest 请求参数}): {@link SmartStructuralOCRResponse 返回参数} */
   SmartStructuralOCR(data?: SmartStructuralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralOCRResponse>;
-  /** 表格识别（V1) */
+  /** {@link TableOCR 表格识别（V1)}({@link TableOCRRequest 请求参数}): {@link TableOCRResponse 返回参数} */
   TableOCR(data?: TableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TableOCRResponse>;
-  /** 出租车发票识别 */
+  /** {@link TaxiInvoiceOCR 出租车发票识别}({@link TaxiInvoiceOCRRequest 请求参数}): {@link TaxiInvoiceOCRResponse 返回参数} */
   TaxiInvoiceOCR(data?: TaxiInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TaxiInvoiceOCRResponse>;
-  /** 快速文本检测 */
+  /** {@link TextDetect 快速文本检测}({@link TextDetectRequest 请求参数}): {@link TextDetectResponse 返回参数} */
   TextDetect(data?: TextDetectRequest, config?: AxiosRequestConfig): AxiosPromise<TextDetectResponse>;
-  /** 过路过桥费发票识别 */
+  /** {@link TollInvoiceOCR 过路过桥费发票识别}({@link TollInvoiceOCRRequest 请求参数}): {@link TollInvoiceOCRResponse 返回参数} */
   TollInvoiceOCR(data?: TollInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TollInvoiceOCRResponse>;
-  /** 火车票识别 */
+  /** {@link TrainTicketOCR 火车票识别}({@link TrainTicketOCRRequest 请求参数}): {@link TrainTicketOCRResponse 返回参数} */
   TrainTicketOCR(data?: TrainTicketOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TrainTicketOCRResponse>;
-  /** 增值税发票识别 */
+  /** {@link VatInvoiceOCR 增值税发票识别}({@link VatInvoiceOCRRequest 请求参数}): {@link VatInvoiceOCRResponse 返回参数} */
   VatInvoiceOCR(data?: VatInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceOCRResponse>;
-  /** 增值税发票核验 */
+  /** {@link VatInvoiceVerify 增值税发票核验}({@link VatInvoiceVerifyRequest 请求参数}): {@link VatInvoiceVerifyResponse 返回参数} */
   VatInvoiceVerify(data: VatInvoiceVerifyRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceVerifyResponse>;
-  /** 增值税发票核验（新版） */
+  /** {@link VatInvoiceVerifyNew 增值税发票核验（新版）}({@link VatInvoiceVerifyNewRequest 请求参数}): {@link VatInvoiceVerifyNewResponse 返回参数} */
   VatInvoiceVerifyNew(data: VatInvoiceVerifyNewRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceVerifyNewResponse>;
-  /** 增值税发票（卷票）识别 */
+  /** {@link VatRollInvoiceOCR 增值税发票（卷票）识别}({@link VatRollInvoiceOCRRequest 请求参数}): {@link VatRollInvoiceOCRResponse 返回参数} */
   VatRollInvoiceOCR(data?: VatRollInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VatRollInvoiceOCRResponse>;
-  /** 行驶证识别 */
+  /** {@link VehicleLicenseOCR 行驶证识别}({@link VehicleLicenseOCRRequest 请求参数}): {@link VehicleLicenseOCRResponse 返回参数} */
   VehicleLicenseOCR(data?: VehicleLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VehicleLicenseOCRResponse>;
-  /** 机动车登记证书识别 */
+  /** {@link VehicleRegCertOCR 机动车登记证书识别}({@link VehicleRegCertOCRRequest 请求参数}): {@link VehicleRegCertOCRResponse 返回参数} */
   VehicleRegCertOCR(data?: VehicleRegCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VehicleRegCertOCRResponse>;
-  /** 营业执照识别及核验（基础版） */
+  /** {@link VerifyBasicBizLicense 营业执照识别及核验（基础版）}({@link VerifyBasicBizLicenseRequest 请求参数}): {@link VerifyBasicBizLicenseResponse 返回参数} */
   VerifyBasicBizLicense(data?: VerifyBasicBizLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyBasicBizLicenseResponse>;
-  /** 营业执照识别及核验（详细版） */
+  /** {@link VerifyBizLicense 营业执照识别及核验（详细版）}({@link VerifyBizLicenseRequest 请求参数}): {@link VerifyBizLicenseResponse 返回参数} */
   VerifyBizLicense(data?: VerifyBizLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyBizLicenseResponse>;
-  /** 企业四要素核验 */
+  /** {@link VerifyEnterpriseFourFactors 企业四要素核验}({@link VerifyEnterpriseFourFactorsRequest 请求参数}): {@link VerifyEnterpriseFourFactorsResponse 返回参数} */
   VerifyEnterpriseFourFactors(data: VerifyEnterpriseFourFactorsRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyEnterpriseFourFactorsResponse>;
-  /** OFD发票识别 */
+  /** {@link VerifyOfdVatInvoiceOCR OFD发票识别}({@link VerifyOfdVatInvoiceOCRRequest 请求参数}): {@link VerifyOfdVatInvoiceOCRResponse 返回参数} */
   VerifyOfdVatInvoiceOCR(data?: VerifyOfdVatInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyOfdVatInvoiceOCRResponse>;
-  /** 车辆VIN码识别 */
+  /** {@link VinOCR 车辆VIN码识别}({@link VinOCRRequest 请求参数}): {@link VinOCRResponse 返回参数} */
   VinOCR(data?: VinOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VinOCRResponse>;
-  /** 运单识别 */
+  /** {@link WaybillOCR 运单识别}({@link WaybillOCRRequest 请求参数}): {@link WaybillOCRResponse 返回参数} */
   WaybillOCR(data?: WaybillOCRRequest, config?: AxiosRequestConfig): AxiosPromise<WaybillOCRResponse>;
 }
 

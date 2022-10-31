@@ -2554,148 +2554,148 @@ declare namespace V20191016 {
   }
 }
 
-/** [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) */
+/** {@link Dbbrain 数据库智能管家 DBbrain} */
 declare interface Dbbrain {
   (): Versions;
-  /** 添加联系人信息 */
+  /** {@link AddUserContact 添加联系人信息}({@link AddUserContactRequest 请求参数}): {@link AddUserContactResponse 返回参数} */
   AddUserContact(data: AddUserContactRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserContactResponse>;
-  /** 终止中断会话任务 */
+  /** {@link CancelKillTask 终止中断会话任务}({@link CancelKillTaskRequest 请求参数}): {@link CancelKillTaskResponse 返回参数} */
   CancelKillTask(data: CancelKillTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelKillTaskResponse>;
-  /** 创建健康报告生成任务 */
+  /** {@link CreateDBDiagReportTask 创建健康报告生成任务}({@link CreateDBDiagReportTaskRequest 请求参数}): {@link CreateDBDiagReportTaskResponse 返回参数} */
   CreateDBDiagReportTask(data: CreateDBDiagReportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBDiagReportTaskResponse>;
-  /** 创建健康报告浏览地址 */
+  /** {@link CreateDBDiagReportUrl 创建健康报告浏览地址}({@link CreateDBDiagReportUrlRequest 请求参数}): {@link CreateDBDiagReportUrlResponse 返回参数} */
   CreateDBDiagReportUrl(data: CreateDBDiagReportUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBDiagReportUrlResponse>;
-  /** 创建中断会话的任务 */
+  /** {@link CreateKillTask 创建中断会话的任务}({@link CreateKillTaskRequest 请求参数}): {@link CreateKillTaskResponse 返回参数} */
   CreateKillTask(data: CreateKillTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKillTaskResponse>;
-  /** 创建邮件配置 */
+  /** {@link CreateMailProfile 创建邮件配置}({@link CreateMailProfileRequest 请求参数}): {@link CreateMailProfileResponse 返回参数} */
   CreateMailProfile(data: CreateMailProfileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMailProfileResponse>;
-  /** 创建中止代理节点会话的任务 */
+  /** {@link CreateProxySessionKillTask 创建中止代理节点会话的任务}({@link CreateProxySessionKillTaskRequest 请求参数}): {@link CreateProxySessionKillTaskResponse 返回参数} */
   CreateProxySessionKillTask(data: CreateProxySessionKillTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProxySessionKillTaskResponse>;
-  /** 创建定期生成的邮件发送配置 */
+  /** {@link CreateSchedulerMailProfile 创建定期生成的邮件发送配置}({@link CreateSchedulerMailProfileRequest 请求参数}): {@link CreateSchedulerMailProfileResponse 返回参数} */
   CreateSchedulerMailProfile(data: CreateSchedulerMailProfileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchedulerMailProfileResponse>;
-  /** 创建安全审计日志导出任务 */
+  /** {@link CreateSecurityAuditLogExportTask 创建安全审计日志导出任务}({@link CreateSecurityAuditLogExportTaskRequest 请求参数}): {@link CreateSecurityAuditLogExportTaskResponse 返回参数} */
   CreateSecurityAuditLogExportTask(data: CreateSecurityAuditLogExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityAuditLogExportTaskResponse>;
-  /** 创建实例SQL限流任务 */
+  /** {@link CreateSqlFilter 创建实例SQL限流任务}({@link CreateSqlFilterRequest 请求参数}): {@link CreateSqlFilterResponse 返回参数} */
   CreateSqlFilter(data: CreateSqlFilterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSqlFilterResponse>;
-  /** 删除安全审计日志导出任务 */
+  /** {@link DeleteSecurityAuditLogExportTasks 删除安全审计日志导出任务}({@link DeleteSecurityAuditLogExportTasksRequest 请求参数}): {@link DeleteSecurityAuditLogExportTasksResponse 返回参数} */
   DeleteSecurityAuditLogExportTasks(data: DeleteSecurityAuditLogExportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityAuditLogExportTasksResponse>;
-  /** 删除实例SQL限流任务 */
+  /** {@link DeleteSqlFilters 删除实例SQL限流任务}({@link DeleteSqlFiltersRequest 请求参数}): {@link DeleteSqlFiltersResponse 返回参数} */
   DeleteSqlFilters(data: DeleteSqlFiltersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSqlFiltersResponse>;
-  /** 获取邮件发送中联系人信息 */
+  /** {@link DescribeAllUserContact 获取邮件发送中联系人信息}({@link DescribeAllUserContactRequest 请求参数}): {@link DescribeAllUserContactResponse 返回参数} */
   DescribeAllUserContact(data: DescribeAllUserContactRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllUserContactResponse>;
-  /** 获取邮件发送中联系组信息 */
+  /** {@link DescribeAllUserGroup 获取邮件发送中联系组信息}({@link DescribeAllUserGroupRequest 请求参数}): {@link DescribeAllUserGroupResponse 返回参数} */
   DescribeAllUserGroup(data: DescribeAllUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllUserGroupResponse>;
-  /** 获取诊断事件详情 */
+  /** {@link DescribeDBDiagEvent 获取诊断事件详情}({@link DescribeDBDiagEventRequest 请求参数}): {@link DescribeDBDiagEventResponse 返回参数} */
   DescribeDBDiagEvent(data: DescribeDBDiagEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBDiagEventResponse>;
-  /** 获取诊断事件列表 */
+  /** {@link DescribeDBDiagEvents 获取诊断事件列表}({@link DescribeDBDiagEventsRequest 请求参数}): {@link DescribeDBDiagEventsResponse 返回参数} */
   DescribeDBDiagEvents(data: DescribeDBDiagEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBDiagEventsResponse>;
-  /** 获取实例诊断历史 */
+  /** {@link DescribeDBDiagHistory 获取实例诊断历史}({@link DescribeDBDiagHistoryRequest 请求参数}): {@link DescribeDBDiagHistoryResponse 返回参数} */
   DescribeDBDiagHistory(data: DescribeDBDiagHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBDiagHistoryResponse>;
-  /** 查询健康报告生成任务列表 */
+  /** {@link DescribeDBDiagReportTasks 查询健康报告生成任务列表}({@link DescribeDBDiagReportTasksRequest 请求参数}): {@link DescribeDBDiagReportTasksResponse 返回参数} */
   DescribeDBDiagReportTasks(data?: DescribeDBDiagReportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBDiagReportTasksResponse>;
-  /** 获取指定时间段内的实例空间使用概览 */
+  /** {@link DescribeDBSpaceStatus 获取指定时间段内的实例空间使用概览}({@link DescribeDBSpaceStatusRequest 请求参数}): {@link DescribeDBSpaceStatusResponse 返回参数} */
   DescribeDBSpaceStatus(data: DescribeDBSpaceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSpaceStatusResponse>;
-  /** 获取实例信息列表 */
+  /** {@link DescribeDiagDBInstances 获取实例信息列表}({@link DescribeDiagDBInstancesRequest 请求参数}): {@link DescribeDiagDBInstancesResponse 返回参数} */
   DescribeDiagDBInstances(data: DescribeDiagDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiagDBInstancesResponse>;
-  /** 获取健康得分 */
+  /** {@link DescribeHealthScore 获取健康得分}({@link DescribeHealthScoreRequest 请求参数}): {@link DescribeHealthScoreResponse 返回参数} */
   DescribeHealthScore(data: DescribeHealthScoreRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHealthScoreResponse>;
-  /** 获取邮件配置 */
+  /** {@link DescribeMailProfile 获取邮件配置}({@link DescribeMailProfileRequest 请求参数}): {@link DescribeMailProfileResponse 返回参数} */
   DescribeMailProfile(data: DescribeMailProfileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMailProfileResponse>;
-  /** 查询实时线程列表 */
+  /** {@link DescribeMySqlProcessList 查询实时线程列表}({@link DescribeMySqlProcessListRequest 请求参数}): {@link DescribeMySqlProcessListResponse 返回参数} */
   DescribeMySqlProcessList(data: DescribeMySqlProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMySqlProcessListResponse>;
-  /** 查询实例无主键表 */
+  /** {@link DescribeNoPrimaryKeyTables 查询实例无主键表}({@link DescribeNoPrimaryKeyTablesRequest 请求参数}): {@link DescribeNoPrimaryKeyTablesResponse 返回参数} */
   DescribeNoPrimaryKeyTables(data: DescribeNoPrimaryKeyTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNoPrimaryKeyTablesResponse>;
-  /** 查询代理节点 kill 会话任务执行状态 */
+  /** {@link DescribeProxySessionKillTasks 查询代理节点 kill 会话任务执行状态}({@link DescribeProxySessionKillTasksRequest 请求参数}): {@link DescribeProxySessionKillTasksResponse 返回参数} */
   DescribeProxySessionKillTasks(data: DescribeProxySessionKillTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxySessionKillTasksResponse>;
-  /** 查询redis实例大key列表 */
+  /** {@link DescribeRedisTopBigKeys 查询redis实例大key列表}({@link DescribeRedisTopBigKeysRequest 请求参数}): {@link DescribeRedisTopBigKeysResponse 返回参数} */
   DescribeRedisTopBigKeys(data: DescribeRedisTopBigKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisTopBigKeysResponse>;
-  /** 查询redis实例top key前缀列表 */
+  /** {@link DescribeRedisTopKeyPrefixList 查询redis实例top key前缀列表}({@link DescribeRedisTopKeyPrefixListRequest 请求参数}): {@link DescribeRedisTopKeyPrefixListResponse 返回参数} */
   DescribeRedisTopKeyPrefixList(data: DescribeRedisTopKeyPrefixListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisTopKeyPrefixListResponse>;
-  /** 查询安全审计日志导出文件下载链接 */
+  /** {@link DescribeSecurityAuditLogDownloadUrls 查询安全审计日志导出文件下载链接}({@link DescribeSecurityAuditLogDownloadUrlsRequest 请求参数}): {@link DescribeSecurityAuditLogDownloadUrlsResponse 返回参数} */
   DescribeSecurityAuditLogDownloadUrls(data: DescribeSecurityAuditLogDownloadUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityAuditLogDownloadUrlsResponse>;
-  /** 查询安全审计日志导出任务列表 */
+  /** {@link DescribeSecurityAuditLogExportTasks 查询安全审计日志导出任务列表}({@link DescribeSecurityAuditLogExportTasksRequest 请求参数}): {@link DescribeSecurityAuditLogExportTasksResponse 返回参数} */
   DescribeSecurityAuditLogExportTasks(data: DescribeSecurityAuditLogExportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityAuditLogExportTasksResponse>;
-  /** 获取慢日志统计柱状图 */
+  /** {@link DescribeSlowLogTimeSeriesStats 获取慢日志统计柱状图}({@link DescribeSlowLogTimeSeriesStatsRequest 请求参数}): {@link DescribeSlowLogTimeSeriesStatsResponse 返回参数} */
   DescribeSlowLogTimeSeriesStats(data: DescribeSlowLogTimeSeriesStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogTimeSeriesStatsResponse>;
-  /** 按照Sql模板查询指定时间段内的慢日志统计结果 */
+  /** {@link DescribeSlowLogTopSqls 按照Sql模板查询指定时间段内的慢日志统计结果}({@link DescribeSlowLogTopSqlsRequest 请求参数}): {@link DescribeSlowLogTopSqlsResponse 返回参数} */
   DescribeSlowLogTopSqls(data: DescribeSlowLogTopSqlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogTopSqlsResponse>;
-  /** 获取慢日志来源地址统计分布图 */
+  /** {@link DescribeSlowLogUserHostStats 获取慢日志来源地址统计分布图}({@link DescribeSlowLogUserHostStatsRequest 请求参数}): {@link DescribeSlowLogUserHostStatsResponse 返回参数} */
   DescribeSlowLogUserHostStats(data: DescribeSlowLogUserHostStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogUserHostStatsResponse>;
-  /** 查询实例SQL限流任务列表 */
+  /** {@link DescribeSqlFilters 查询实例SQL限流任务列表}({@link DescribeSqlFiltersRequest 请求参数}): {@link DescribeSqlFiltersResponse 返回参数} */
   DescribeSqlFilters(data: DescribeSqlFiltersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSqlFiltersResponse>;
-  /** 查询SQL模板 */
+  /** {@link DescribeSqlTemplate 查询SQL模板}({@link DescribeSqlTemplateRequest 请求参数}): {@link DescribeSqlTemplateResponse 返回参数} */
   DescribeSqlTemplate(data: DescribeSqlTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSqlTemplateResponse>;
-  /** 获取Top库在指定时间段内的每日空间统计信息 */
+  /** {@link DescribeTopSpaceSchemaTimeSeries 获取Top库在指定时间段内的每日空间统计信息}({@link DescribeTopSpaceSchemaTimeSeriesRequest 请求参数}): {@link DescribeTopSpaceSchemaTimeSeriesResponse 返回参数} */
   DescribeTopSpaceSchemaTimeSeries(data: DescribeTopSpaceSchemaTimeSeriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopSpaceSchemaTimeSeriesResponse>;
-  /** 获取Top库的空间统计信息 */
+  /** {@link DescribeTopSpaceSchemas 获取Top库的空间统计信息}({@link DescribeTopSpaceSchemasRequest 请求参数}): {@link DescribeTopSpaceSchemasResponse 返回参数} */
   DescribeTopSpaceSchemas(data: DescribeTopSpaceSchemasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopSpaceSchemasResponse>;
-  /** 获取Top表在指定时间段内的每日空间统计信息 */
+  /** {@link DescribeTopSpaceTableTimeSeries 获取Top表在指定时间段内的每日空间统计信息}({@link DescribeTopSpaceTableTimeSeriesRequest 请求参数}): {@link DescribeTopSpaceTableTimeSeriesResponse 返回参数} */
   DescribeTopSpaceTableTimeSeries(data: DescribeTopSpaceTableTimeSeriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopSpaceTableTimeSeriesResponse>;
-  /** 获取Top表的空间统计信息 */
+  /** {@link DescribeTopSpaceTables 获取Top表的空间统计信息}({@link DescribeTopSpaceTablesRequest 请求参数}): {@link DescribeTopSpaceTablesResponse 返回参数} */
   DescribeTopSpaceTables(data: DescribeTopSpaceTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopSpaceTablesResponse>;
-  /** 获取SQL优化建议 */
+  /** {@link DescribeUserSqlAdvice 获取SQL优化建议}({@link DescribeUserSqlAdviceRequest 请求参数}): {@link DescribeUserSqlAdviceResponse 返回参数} */
   DescribeUserSqlAdvice(data: DescribeUserSqlAdviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserSqlAdviceResponse>;
-  /** 中断MySql会话线程 */
+  /** {@link KillMySqlThreads 中断MySql会话线程}({@link KillMySqlThreadsRequest 请求参数}): {@link KillMySqlThreadsResponse 返回参数} */
   KillMySqlThreads(data: KillMySqlThreadsRequest, config?: AxiosRequestConfig): AxiosPromise<KillMySqlThreadsResponse>;
-  /** 修改实例巡检开关状态 */
+  /** {@link ModifyDiagDBInstanceConf 修改实例巡检开关状态}({@link ModifyDiagDBInstanceConfRequest 请求参数}): {@link ModifyDiagDBInstanceConfResponse 返回参数} */
   ModifyDiagDBInstanceConf(data: ModifyDiagDBInstanceConfRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDiagDBInstanceConfResponse>;
-  /** 更改实例限流任务状态 */
+  /** {@link ModifySqlFilters 更改实例限流任务状态}({@link ModifySqlFiltersRequest 请求参数}): {@link ModifySqlFiltersResponse 返回参数} */
   ModifySqlFilters(data: ModifySqlFiltersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySqlFiltersResponse>;
-  /** 验证用户数据库账号权限 */
+  /** {@link VerifyUserAccount 验证用户数据库账号权限}({@link VerifyUserAccountRequest 请求参数}): {@link VerifyUserAccountResponse 返回参数} */
   VerifyUserAccount(data: VerifyUserAccountRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyUserAccountResponse>;
-  /** 添加联系人信息 */
+  /** {@link V20191016.AddUserContact 添加联系人信息}({@link V20191016.AddUserContactRequest 请求参数}): {@link V20191016.AddUserContactResponse 返回参数} */
   AddUserContact(data: V20191016.AddUserContactRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.AddUserContactResponse>;
-  /** 创建健康报告生成任务 */
+  /** {@link V20191016.CreateDBDiagReportTask 创建健康报告生成任务}({@link V20191016.CreateDBDiagReportTaskRequest 请求参数}): {@link V20191016.CreateDBDiagReportTaskResponse 返回参数} */
   CreateDBDiagReportTask(data: V20191016.CreateDBDiagReportTaskRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.CreateDBDiagReportTaskResponse>;
-  /** 创建健康报告浏览地址 */
+  /** {@link V20191016.CreateDBDiagReportUrl 创建健康报告浏览地址}({@link V20191016.CreateDBDiagReportUrlRequest 请求参数}): {@link V20191016.CreateDBDiagReportUrlResponse 返回参数} */
   CreateDBDiagReportUrl(data: V20191016.CreateDBDiagReportUrlRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.CreateDBDiagReportUrlResponse>;
-  /** 创建邮件配置 */
+  /** {@link V20191016.CreateMailProfile 创建邮件配置}({@link V20191016.CreateMailProfileRequest 请求参数}): {@link V20191016.CreateMailProfileResponse 返回参数} */
   CreateMailProfile(data: V20191016.CreateMailProfileRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.CreateMailProfileResponse>;
-  /** 创建定期生成的邮件发送配置 */
+  /** {@link V20191016.CreateSchedulerMailProfile 创建定期生成的邮件发送配置}({@link V20191016.CreateSchedulerMailProfileRequest 请求参数}): {@link V20191016.CreateSchedulerMailProfileResponse 返回参数} */
   CreateSchedulerMailProfile(data: V20191016.CreateSchedulerMailProfileRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.CreateSchedulerMailProfileResponse>;
-  /** 创建安全审计日志导出任务 */
+  /** {@link V20191016.CreateSecurityAuditLogExportTask 创建安全审计日志导出任务}({@link V20191016.CreateSecurityAuditLogExportTaskRequest 请求参数}): {@link V20191016.CreateSecurityAuditLogExportTaskResponse 返回参数} */
   CreateSecurityAuditLogExportTask(data: V20191016.CreateSecurityAuditLogExportTaskRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.CreateSecurityAuditLogExportTaskResponse>;
-  /** 删除安全审计日志导出任务 */
+  /** {@link V20191016.DeleteSecurityAuditLogExportTasks 删除安全审计日志导出任务}({@link V20191016.DeleteSecurityAuditLogExportTasksRequest 请求参数}): {@link V20191016.DeleteSecurityAuditLogExportTasksResponse 返回参数} */
   DeleteSecurityAuditLogExportTasks(data: V20191016.DeleteSecurityAuditLogExportTasksRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DeleteSecurityAuditLogExportTasksResponse>;
-  /** 获取邮件发送中联系人信息 */
+  /** {@link V20191016.DescribeAllUserContact 获取邮件发送中联系人信息}({@link V20191016.DescribeAllUserContactRequest 请求参数}): {@link V20191016.DescribeAllUserContactResponse 返回参数} */
   DescribeAllUserContact(data: V20191016.DescribeAllUserContactRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeAllUserContactResponse>;
-  /** 获取邮件发送中联系组信息 */
+  /** {@link V20191016.DescribeAllUserGroup 获取邮件发送中联系组信息}({@link V20191016.DescribeAllUserGroupRequest 请求参数}): {@link V20191016.DescribeAllUserGroupResponse 返回参数} */
   DescribeAllUserGroup(data: V20191016.DescribeAllUserGroupRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeAllUserGroupResponse>;
-  /** 获取诊断事件详情 */
+  /** {@link V20191016.DescribeDBDiagEvent 获取诊断事件详情}({@link V20191016.DescribeDBDiagEventRequest 请求参数}): {@link V20191016.DescribeDBDiagEventResponse 返回参数} */
   DescribeDBDiagEvent(data: V20191016.DescribeDBDiagEventRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeDBDiagEventResponse>;
-  /** 获取实例诊断历史 */
+  /** {@link V20191016.DescribeDBDiagHistory 获取实例诊断历史}({@link V20191016.DescribeDBDiagHistoryRequest 请求参数}): {@link V20191016.DescribeDBDiagHistoryResponse 返回参数} */
   DescribeDBDiagHistory(data: V20191016.DescribeDBDiagHistoryRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeDBDiagHistoryResponse>;
-  /** 查询健康报告生成任务列表 */
+  /** {@link V20191016.DescribeDBDiagReportTasks 查询健康报告生成任务列表}({@link V20191016.DescribeDBDiagReportTasksRequest 请求参数}): {@link V20191016.DescribeDBDiagReportTasksResponse 返回参数} */
   DescribeDBDiagReportTasks(data: V20191016.DescribeDBDiagReportTasksRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeDBDiagReportTasksResponse>;
-  /** 获取指定时间段内的实例空间使用概览 */
+  /** {@link V20191016.DescribeDBSpaceStatus 获取指定时间段内的实例空间使用概览}({@link V20191016.DescribeDBSpaceStatusRequest 请求参数}): {@link V20191016.DescribeDBSpaceStatusResponse 返回参数} */
   DescribeDBSpaceStatus(data: V20191016.DescribeDBSpaceStatusRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeDBSpaceStatusResponse>;
-  /** 获取实例信息列表 */
+  /** {@link V20191016.DescribeDiagDBInstances 获取实例信息列表}({@link V20191016.DescribeDiagDBInstancesRequest 请求参数}): {@link V20191016.DescribeDiagDBInstancesResponse 返回参数} */
   DescribeDiagDBInstances(data: V20191016.DescribeDiagDBInstancesRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeDiagDBInstancesResponse>;
-  /** 获取健康得分 */
+  /** {@link V20191016.DescribeHealthScore 获取健康得分}({@link V20191016.DescribeHealthScoreRequest 请求参数}): {@link V20191016.DescribeHealthScoreResponse 返回参数} */
   DescribeHealthScore(data: V20191016.DescribeHealthScoreRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeHealthScoreResponse>;
-  /** 获取邮件配置 */
+  /** {@link V20191016.DescribeMailProfile 获取邮件配置}({@link V20191016.DescribeMailProfileRequest 请求参数}): {@link V20191016.DescribeMailProfileResponse 返回参数} */
   DescribeMailProfile(data: V20191016.DescribeMailProfileRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeMailProfileResponse>;
-  /** 查询安全审计日志导出文件下载链接 */
+  /** {@link V20191016.DescribeSecurityAuditLogDownloadUrls 查询安全审计日志导出文件下载链接}({@link V20191016.DescribeSecurityAuditLogDownloadUrlsRequest 请求参数}): {@link V20191016.DescribeSecurityAuditLogDownloadUrlsResponse 返回参数} */
   DescribeSecurityAuditLogDownloadUrls(data: V20191016.DescribeSecurityAuditLogDownloadUrlsRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeSecurityAuditLogDownloadUrlsResponse>;
-  /** 查询安全审计日志导出任务列表 */
+  /** {@link V20191016.DescribeSecurityAuditLogExportTasks 查询安全审计日志导出任务列表}({@link V20191016.DescribeSecurityAuditLogExportTasksRequest 请求参数}): {@link V20191016.DescribeSecurityAuditLogExportTasksResponse 返回参数} */
   DescribeSecurityAuditLogExportTasks(data: V20191016.DescribeSecurityAuditLogExportTasksRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeSecurityAuditLogExportTasksResponse>;
-  /** 获取慢日志统计柱状图 */
+  /** {@link V20191016.DescribeSlowLogTimeSeriesStats 获取慢日志统计柱状图}({@link V20191016.DescribeSlowLogTimeSeriesStatsRequest 请求参数}): {@link V20191016.DescribeSlowLogTimeSeriesStatsResponse 返回参数} */
   DescribeSlowLogTimeSeriesStats(data: V20191016.DescribeSlowLogTimeSeriesStatsRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeSlowLogTimeSeriesStatsResponse>;
-  /** 按照Sql模板查询指定时间段内的慢日志统计结果 */
+  /** {@link V20191016.DescribeSlowLogTopSqls 按照Sql模板查询指定时间段内的慢日志统计结果}({@link V20191016.DescribeSlowLogTopSqlsRequest 请求参数}): {@link V20191016.DescribeSlowLogTopSqlsResponse 返回参数} */
   DescribeSlowLogTopSqls(data: V20191016.DescribeSlowLogTopSqlsRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeSlowLogTopSqlsResponse>;
-  /** 获取慢日志来源地址统计分布图 */
+  /** {@link V20191016.DescribeSlowLogUserHostStats 获取慢日志来源地址统计分布图}({@link V20191016.DescribeSlowLogUserHostStatsRequest 请求参数}): {@link V20191016.DescribeSlowLogUserHostStatsResponse 返回参数} */
   DescribeSlowLogUserHostStats(data: V20191016.DescribeSlowLogUserHostStatsRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeSlowLogUserHostStatsResponse>;
-  /** 获取Top库在指定时间段内的每日空间统计信息 */
+  /** {@link V20191016.DescribeTopSpaceSchemaTimeSeries 获取Top库在指定时间段内的每日空间统计信息}({@link V20191016.DescribeTopSpaceSchemaTimeSeriesRequest 请求参数}): {@link V20191016.DescribeTopSpaceSchemaTimeSeriesResponse 返回参数} */
   DescribeTopSpaceSchemaTimeSeries(data: V20191016.DescribeTopSpaceSchemaTimeSeriesRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeTopSpaceSchemaTimeSeriesResponse>;
-  /** 获取Top库的空间统计信息 */
+  /** {@link V20191016.DescribeTopSpaceSchemas 获取Top库的空间统计信息}({@link V20191016.DescribeTopSpaceSchemasRequest 请求参数}): {@link V20191016.DescribeTopSpaceSchemasResponse 返回参数} */
   DescribeTopSpaceSchemas(data: V20191016.DescribeTopSpaceSchemasRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeTopSpaceSchemasResponse>;
-  /** 获取Top表在指定时间段内的每日空间统计信息 */
+  /** {@link V20191016.DescribeTopSpaceTableTimeSeries 获取Top表在指定时间段内的每日空间统计信息}({@link V20191016.DescribeTopSpaceTableTimeSeriesRequest 请求参数}): {@link V20191016.DescribeTopSpaceTableTimeSeriesResponse 返回参数} */
   DescribeTopSpaceTableTimeSeries(data: V20191016.DescribeTopSpaceTableTimeSeriesRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeTopSpaceTableTimeSeriesResponse>;
-  /** 获取Top表的空间统计信息 */
+  /** {@link V20191016.DescribeTopSpaceTables 获取Top表的空间统计信息}({@link V20191016.DescribeTopSpaceTablesRequest 请求参数}): {@link V20191016.DescribeTopSpaceTablesResponse 返回参数} */
   DescribeTopSpaceTables(data: V20191016.DescribeTopSpaceTablesRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeTopSpaceTablesResponse>;
-  /** 获取SQL优化建议 */
+  /** {@link V20191016.DescribeUserSqlAdvice 获取SQL优化建议}({@link V20191016.DescribeUserSqlAdviceRequest 请求参数}): {@link V20191016.DescribeUserSqlAdviceResponse 返回参数} */
   DescribeUserSqlAdvice(data: V20191016.DescribeUserSqlAdviceRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeUserSqlAdviceResponse>;
-  /** 修改实例巡检开关状态 */
+  /** {@link V20191016.ModifyDiagDBInstanceConf 修改实例巡检开关状态}({@link V20191016.ModifyDiagDBInstanceConfRequest 请求参数}): {@link V20191016.ModifyDiagDBInstanceConfResponse 返回参数} */
   ModifyDiagDBInstanceConf(data: V20191016.ModifyDiagDBInstanceConfRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.ModifyDiagDBInstanceConfResponse>;
 }
 

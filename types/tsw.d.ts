@@ -64,16 +64,16 @@ declare namespace V20200924 {
   }
 }
 
-/** [腾讯微服务观测平台 TSW](https://cloud.tencent.com/document/product/1311) */
+/** {@link Tsw 微服务观测平台 TSW} */
 declare interface Tsw {
   (): Versions;
-  /** 获取告警对象-组件告警 */
+  /** {@link DescribeComponentAlertObject 获取告警对象-组件告警}({@link DescribeComponentAlertObjectRequest 请求参数}): {@link DescribeComponentAlertObjectResponse 返回参数} */
   DescribeComponentAlertObject(data?: DescribeComponentAlertObjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComponentAlertObjectResponse>;
-  /** 获取告警对象-服务告警表 */
+  /** {@link DescribeServiceAlertObject 获取告警对象-服务告警表}({@link DescribeServiceAlertObjectRequest 请求参数}): {@link DescribeServiceAlertObjectResponse 返回参数} */
   DescribeServiceAlertObject(data?: DescribeServiceAlertObjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceAlertObjectResponse>;
-  /** 查询token */
+  /** {@link DescribeToken 查询token}({@link DescribeTokenRequest 请求参数}): {@link DescribeTokenResponse 返回参数} */
   DescribeToken(data: DescribeTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenResponse>;
-  /** 获取服务接入信息 */
+  /** {@link V20200924.DescribeAgentShell 获取服务接入信息}({@link V20200924.DescribeAgentShellRequest 请求参数}): {@link V20200924.DescribeAgentShellResponse 返回参数} */
   DescribeAgentShell(data: V20200924.DescribeAgentShellRequest, config: AxiosRequestConfig & V20200924.VersionHeader): AxiosPromise<V20200924.DescribeAgentShellResponse>;
 }
 

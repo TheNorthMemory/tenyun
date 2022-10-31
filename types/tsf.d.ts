@@ -6448,390 +6448,390 @@ declare interface UpdateUnitRuleResponse {
   RequestId?: string;
 }
 
-/** [腾讯微服务平台 TSF](https://cloud.tencent.com/document/product/649) */
+/** {@link Tsf 微服务平台 TSF} */
 declare interface Tsf {
   (): Versions;
-  /** 集群添加云主机 */
+  /** {@link AddClusterInstances 集群添加云主机}({@link AddClusterInstancesRequest 请求参数}): {@link AddClusterInstancesResponse 返回参数} */
   AddClusterInstances(data: AddClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AddClusterInstancesResponse>;
-  /** 集群导入云主机 */
+  /** {@link AddInstances 集群导入云主机}({@link AddInstancesRequest 请求参数}): {@link AddInstancesResponse 返回参数} */
   AddInstances(data: AddInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AddInstancesResponse>;
-  /** 关联日志配置项到应用 */
+  /** {@link AssociateBusinessLogConfig 关联日志配置项到应用}({@link AssociateBusinessLogConfigRequest 请求参数}): {@link AssociateBusinessLogConfigResponse 返回参数} */
   AssociateBusinessLogConfig(data: AssociateBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateBusinessLogConfigResponse>;
-  /** 关联投递配置到部署组 */
+  /** {@link AssociateConfigWithGroup 关联投递配置到部署组}({@link AssociateConfigWithGroupRequest 请求参数}): {@link AssociateConfigWithGroupResponse 返回参数} */
   AssociateConfigWithGroup(data: AssociateConfigWithGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateConfigWithGroupResponse>;
-  /** 网关与API分组批量绑定 */
+  /** {@link BindApiGroup 网关与API分组批量绑定}({@link BindApiGroupRequest 请求参数}): {@link BindApiGroupResponse 返回参数} */
   BindApiGroup(data: BindApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<BindApiGroupResponse>;
-  /** 批量绑定插件 */
+  /** {@link BindPlugin 批量绑定插件}({@link BindPluginRequest 请求参数}): {@link BindPluginResponse 返回参数} */
   BindPlugin(data: BindPluginRequest, config?: AxiosRequestConfig): AxiosPromise<BindPluginResponse>;
-  /** 启用或禁用API */
+  /** {@link ChangeApiUsableStatus 启用或禁用API}({@link ChangeApiUsableStatusRequest 请求参数}): {@link ChangeApiUsableStatusResponse 返回参数} */
   ChangeApiUsableStatus(data: ChangeApiUsableStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeApiUsableStatusResponse>;
-  /** 续跑任务批次 */
+  /** {@link ContinueRunFailedTaskBatch 续跑任务批次}({@link ContinueRunFailedTaskBatchRequest 请求参数}): {@link ContinueRunFailedTaskBatchResponse 返回参数} */
   ContinueRunFailedTaskBatch(data: ContinueRunFailedTaskBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ContinueRunFailedTaskBatchResponse>;
-  /** 一键导入API分组 */
+  /** {@link CreateAllGatewayApiAsync 一键导入API分组}({@link CreateAllGatewayApiAsyncRequest 请求参数}): {@link CreateAllGatewayApiAsyncResponse 返回参数} */
   CreateAllGatewayApiAsync(data: CreateAllGatewayApiAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAllGatewayApiAsyncResponse>;
-  /** 创建API分组 */
+  /** {@link CreateApiGroup 创建API分组}({@link CreateApiGroupRequest 请求参数}): {@link CreateApiGroupResponse 返回参数} */
   CreateApiGroup(data: CreateApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiGroupResponse>;
-  /** 创建API限流规则 */
+  /** {@link CreateApiRateLimitRule 创建API限流规则}({@link CreateApiRateLimitRuleRequest 请求参数}): {@link CreateApiRateLimitRuleResponse 返回参数} */
   CreateApiRateLimitRule(data: CreateApiRateLimitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiRateLimitRuleResponse>;
-  /** 创建应用 */
+  /** {@link CreateApplication 创建应用}({@link CreateApplicationRequest 请求参数}): {@link CreateApplicationResponse 返回参数} */
   CreateApplication(data: CreateApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationResponse>;
-  /** 创建集群 */
+  /** {@link CreateCluster 创建集群}({@link CreateClusterRequest 请求参数}): {@link CreateClusterResponse 返回参数} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
-  /** 创建配置项 */
+  /** {@link CreateConfig 创建配置项}({@link CreateConfigRequest 请求参数}): {@link CreateConfigResponse 返回参数} */
   CreateConfig(data: CreateConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigResponse>;
-  /** 创建容器部署组 */
+  /** {@link CreateContainGroup 创建容器部署组}({@link CreateContainGroupRequest 请求参数}): {@link CreateContainGroupResponse 返回参数} */
   CreateContainGroup(data: CreateContainGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContainGroupResponse>;
-  /** 创建文件配置项 */
+  /** {@link CreateFileConfig 创建文件配置项}({@link CreateFileConfigRequest 请求参数}): {@link CreateFileConfigResponse 返回参数} */
   CreateFileConfig(data: CreateFileConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileConfigResponse>;
-  /** 批量导入API至api分组 */
+  /** {@link CreateGatewayApi 批量导入API至api分组}({@link CreateGatewayApiRequest 请求参数}): {@link CreateGatewayApiResponse 返回参数} */
   CreateGatewayApi(data: CreateGatewayApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGatewayApiResponse>;
-  /** 创建部署组 */
+  /** {@link CreateGroup 创建部署组}({@link CreateGroupRequest 请求参数}): {@link CreateGroupResponse 返回参数} */
   CreateGroup(data: CreateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupResponse>;
-  /** 创建泳道 */
+  /** {@link CreateLane 创建泳道}({@link CreateLaneRequest 请求参数}): {@link CreateLaneResponse 返回参数} */
   CreateLane(data: CreateLaneRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLaneResponse>;
-  /** 创建泳道规则 */
+  /** {@link CreateLaneRule 创建泳道规则}({@link CreateLaneRuleRequest 请求参数}): {@link CreateLaneRuleResponse 返回参数} */
   CreateLaneRule(data: CreateLaneRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLaneRuleResponse>;
-  /** 新增微服务 */
+  /** {@link CreateMicroservice 新增微服务}({@link CreateMicroserviceRequest 请求参数}): {@link CreateMicroserviceResponse 返回参数} */
   CreateMicroservice(data: CreateMicroserviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMicroserviceResponse>;
-  /** 创建命名空间 */
+  /** {@link CreateNamespace 创建命名空间}({@link CreateNamespaceRequest 请求参数}): {@link CreateNamespaceResponse 返回参数} */
   CreateNamespace(data: CreateNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNamespaceResponse>;
-  /** 创建路径重写 */
+  /** {@link CreatePathRewrites 创建路径重写}({@link CreatePathRewritesRequest 请求参数}): {@link CreatePathRewritesResponse 返回参数} */
   CreatePathRewrites(data: CreatePathRewritesRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePathRewritesResponse>;
-  /** 创建公共配置项 */
+  /** {@link CreatePublicConfig 创建公共配置项}({@link CreatePublicConfigRequest 请求参数}): {@link CreatePublicConfigResponse 返回参数} */
   CreatePublicConfig(data: CreatePublicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePublicConfigResponse>;
-  /** 创建仓库 */
+  /** {@link CreateRepository 创建仓库}({@link CreateRepositoryRequest 请求参数}): {@link CreateRepositoryResponse 返回参数} */
   CreateRepository(data: CreateRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRepositoryResponse>;
-  /** 创建任务 */
+  /** {@link CreateTask 创建任务}({@link CreateTaskRequest 请求参数}): {@link CreateTaskResponse 返回参数} */
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
-  /** 创建工作流 */
+  /** {@link CreateTaskFlow 创建工作流}({@link CreateTaskFlowRequest 请求参数}): {@link CreateTaskFlowResponse 返回参数} */
   CreateTaskFlow(data: CreateTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFlowResponse>;
-  /** 创建单元化规则 */
+  /** {@link CreateUnitRule 创建单元化规则}({@link CreateUnitRuleRequest 请求参数}): {@link CreateUnitRuleResponse 返回参数} */
   CreateUnitRule(data: CreateUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUnitRuleResponse>;
-  /** 删除Api分组 */
+  /** {@link DeleteApiGroup 删除Api分组}({@link DeleteApiGroupRequest 请求参数}): {@link DeleteApiGroupResponse 返回参数} */
   DeleteApiGroup(data: DeleteApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiGroupResponse>;
-  /** 删除应用 */
+  /** {@link DeleteApplication 删除应用}({@link DeleteApplicationRequest 请求参数}): {@link DeleteApplicationResponse 返回参数} */
   DeleteApplication(data: DeleteApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationResponse>;
-  /** 删除配置项 */
+  /** {@link DeleteConfig 删除配置项}({@link DeleteConfigRequest 请求参数}): {@link DeleteConfigResponse 返回参数} */
   DeleteConfig(data: DeleteConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigResponse>;
-  /** 删除容器部署组 */
+  /** {@link DeleteContainerGroup 删除容器部署组}({@link DeleteContainerGroupRequest 请求参数}): {@link DeleteContainerGroupResponse 返回参数} */
   DeleteContainerGroup(data: DeleteContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteContainerGroupResponse>;
-  /** 删除虚拟机部署组 */
+  /** {@link DeleteGroup 删除虚拟机部署组}({@link DeleteGroupRequest 请求参数}): {@link DeleteGroupResponse 返回参数} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
-  /** 批量删除镜像版本 */
+  /** {@link DeleteImageTags 批量删除镜像版本}({@link DeleteImageTagsRequest 请求参数}): {@link DeleteImageTagsResponse 返回参数} */
   DeleteImageTags(data: DeleteImageTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageTagsResponse>;
-  /** 删除泳道 */
+  /** {@link DeleteLane 删除泳道}({@link DeleteLaneRequest 请求参数}): {@link DeleteLaneResponse 返回参数} */
   DeleteLane(data: DeleteLaneRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLaneResponse>;
-  /** 删除泳道规则 */
+  /** {@link DeleteLaneRule 删除泳道规则}({@link DeleteLaneRuleRequest 请求参数}): {@link DeleteLaneRuleResponse 返回参数} */
   DeleteLaneRule(data: DeleteLaneRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLaneRuleResponse>;
-  /** 删除微服务 */
+  /** {@link DeleteMicroservice 删除微服务}({@link DeleteMicroserviceRequest 请求参数}): {@link DeleteMicroserviceResponse 返回参数} */
   DeleteMicroservice(data: DeleteMicroserviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMicroserviceResponse>;
-  /** 删除命名空间 */
+  /** {@link DeleteNamespace 删除命名空间}({@link DeleteNamespaceRequest 请求参数}): {@link DeleteNamespaceResponse 返回参数} */
   DeleteNamespace(data: DeleteNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNamespaceResponse>;
-  /** 删除路径重写 */
+  /** {@link DeletePathRewrites 删除路径重写}({@link DeletePathRewritesRequest 请求参数}): {@link DeletePathRewritesResponse 返回参数} */
   DeletePathRewrites(data: DeletePathRewritesRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePathRewritesResponse>;
-  /** 批量删除包 */
+  /** {@link DeletePkgs 批量删除包}({@link DeletePkgsRequest 请求参数}): {@link DeletePkgsResponse 返回参数} */
   DeletePkgs(data: DeletePkgsRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePkgsResponse>;
-  /** 删除公共配置项 */
+  /** {@link DeletePublicConfig 删除公共配置项}({@link DeletePublicConfigRequest 请求参数}): {@link DeletePublicConfigResponse 返回参数} */
   DeletePublicConfig(data: DeletePublicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePublicConfigResponse>;
-  /** 删除仓库 */
+  /** {@link DeleteRepository 删除仓库}({@link DeleteRepositoryRequest 请求参数}): {@link DeleteRepositoryResponse 返回参数} */
   DeleteRepository(data: DeleteRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRepositoryResponse>;
-  /** 删除部署组 */
+  /** {@link DeleteServerlessGroup 删除部署组}({@link DeleteServerlessGroupRequest 请求参数}): {@link DeleteServerlessGroupResponse 返回参数} */
   DeleteServerlessGroup(data: DeleteServerlessGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessGroupResponse>;
-  /** 删除任务 */
+  /** {@link DeleteTask 删除任务}({@link DeleteTaskRequest 请求参数}): {@link DeleteTaskResponse 返回参数} */
   DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;
-  /** 删除单元化命名空间 */
+  /** {@link DeleteUnitNamespaces 删除单元化命名空间}({@link DeleteUnitNamespacesRequest 请求参数}): {@link DeleteUnitNamespacesResponse 返回参数} */
   DeleteUnitNamespaces(data: DeleteUnitNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUnitNamespacesResponse>;
-  /** 删除单元化规则 */
+  /** {@link DeleteUnitRule 删除单元化规则}({@link DeleteUnitRuleRequest 请求参数}): {@link DeleteUnitRuleResponse 返回参数} */
   DeleteUnitRule(data: DeleteUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUnitRuleResponse>;
-  /** 部署容器应用 */
+  /** {@link DeployContainerGroup 部署容器应用}({@link DeployContainerGroupRequest 请求参数}): {@link DeployContainerGroupResponse 返回参数} */
   DeployContainerGroup(data: DeployContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeployContainerGroupResponse>;
-  /** 部署虚拟机部署组应用 */
+  /** {@link DeployGroup 部署虚拟机部署组应用}({@link DeployGroupRequest 请求参数}): {@link DeployGroupResponse 返回参数} */
   DeployGroup(data: DeployGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeployGroupResponse>;
-  /** 查询API详情 */
+  /** {@link DescribeApiDetail 查询API详情}({@link DescribeApiDetailRequest 请求参数}): {@link DescribeApiDetailResponse 返回参数} */
   DescribeApiDetail(data: DescribeApiDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiDetailResponse>;
-  /** 查询API分组 */
+  /** {@link DescribeApiGroup 查询API分组}({@link DescribeApiGroupRequest 请求参数}): {@link DescribeApiGroupResponse 返回参数} */
   DescribeApiGroup(data: DescribeApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiGroupResponse>;
-  /** 查询API 分组信息列表 */
+  /** {@link DescribeApiGroups 查询API 分组信息列表}({@link DescribeApiGroupsRequest 请求参数}): {@link DescribeApiGroupsResponse 返回参数} */
   DescribeApiGroups(data?: DescribeApiGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiGroupsResponse>;
-  /** 查询API限流规则 */
+  /** {@link DescribeApiRateLimitRules 查询API限流规则}({@link DescribeApiRateLimitRulesRequest 请求参数}): {@link DescribeApiRateLimitRulesResponse 返回参数} */
   DescribeApiRateLimitRules(data: DescribeApiRateLimitRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiRateLimitRulesResponse>;
-  /** 查询网关API监控明细数据 */
+  /** {@link DescribeApiUseDetail 查询网关API监控明细数据}({@link DescribeApiUseDetailRequest 请求参数}): {@link DescribeApiUseDetailResponse 返回参数} */
   DescribeApiUseDetail(data: DescribeApiUseDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiUseDetailResponse>;
-  /** 查询API版本 */
+  /** {@link DescribeApiVersions 查询API版本}({@link DescribeApiVersionsRequest 请求参数}): {@link DescribeApiVersionsResponse 返回参数} */
   DescribeApiVersions(data: DescribeApiVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiVersionsResponse>;
-  /** 获取应用详情 */
+  /** {@link DescribeApplication 获取应用详情}({@link DescribeApplicationRequest 请求参数}): {@link DescribeApplicationResponse 返回参数} */
   DescribeApplication(data: DescribeApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationResponse>;
-  /** 获取应用列表其它字段 */
+  /** {@link DescribeApplicationAttribute 获取应用列表其它字段}({@link DescribeApplicationAttributeRequest 请求参数}): {@link DescribeApplicationAttributeResponse 返回参数} */
   DescribeApplicationAttribute(data: DescribeApplicationAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationAttributeResponse>;
-  /** 查询应用关联日志配置项信息 */
+  /** {@link DescribeApplicationBusinessLogConfig 查询应用关联日志配置项信息}({@link DescribeApplicationBusinessLogConfigRequest 请求参数}): {@link DescribeApplicationBusinessLogConfigResponse 返回参数} */
   DescribeApplicationBusinessLogConfig(data: DescribeApplicationBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationBusinessLogConfigResponse>;
-  /** 获取应用列表 */
+  /** {@link DescribeApplications 获取应用列表}({@link DescribeApplicationsRequest 请求参数}): {@link DescribeApplicationsResponse 返回参数} */
   DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
-  /** TSF基本资源信息概览 */
+  /** {@link DescribeBasicResourceUsage TSF基本资源信息概览}({@link DescribeBasicResourceUsageRequest 请求参数}): {@link DescribeBasicResourceUsageResponse 返回参数} */
   DescribeBasicResourceUsage(data?: DescribeBasicResourceUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicResourceUsageResponse>;
-  /** 查询业务日志配置项信息 */
+  /** {@link DescribeBusinessLogConfig 查询业务日志配置项信息}({@link DescribeBusinessLogConfigRequest 请求参数}): {@link DescribeBusinessLogConfigResponse 返回参数} */
   DescribeBusinessLogConfig(data: DescribeBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBusinessLogConfigResponse>;
-  /** 查询日志配置项列表 */
+  /** {@link DescribeBusinessLogConfigs 查询日志配置项列表}({@link DescribeBusinessLogConfigsRequest 请求参数}): {@link DescribeBusinessLogConfigsResponse 返回参数} */
   DescribeBusinessLogConfigs(data?: DescribeBusinessLogConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBusinessLogConfigsResponse>;
-  /** 查询集群实例 */
+  /** {@link DescribeClusterInstances 查询集群实例}({@link DescribeClusterInstancesRequest 请求参数}): {@link DescribeClusterInstancesResponse 返回参数} */
   DescribeClusterInstances(data: DescribeClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstancesResponse>;
-  /** 查询配置 */
+  /** {@link DescribeConfig 查询配置}({@link DescribeConfigRequest 请求参数}): {@link DescribeConfigResponse 返回参数} */
   DescribeConfig(data: DescribeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigResponse>;
-  /** 查询配置发布历史 */
+  /** {@link DescribeConfigReleaseLogs 查询配置发布历史}({@link DescribeConfigReleaseLogsRequest 请求参数}): {@link DescribeConfigReleaseLogsResponse 返回参数} */
   DescribeConfigReleaseLogs(data?: DescribeConfigReleaseLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigReleaseLogsResponse>;
-  /** 查询配置发布信息 */
+  /** {@link DescribeConfigReleases 查询配置发布信息}({@link DescribeConfigReleasesRequest 请求参数}): {@link DescribeConfigReleasesResponse 返回参数} */
   DescribeConfigReleases(data?: DescribeConfigReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigReleasesResponse>;
-  /** 查询配置汇总列表 */
+  /** {@link DescribeConfigSummary 查询配置汇总列表}({@link DescribeConfigSummaryRequest 请求参数}): {@link DescribeConfigSummaryResponse 返回参数} */
   DescribeConfigSummary(data?: DescribeConfigSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigSummaryResponse>;
-  /** 查询配置项列表 */
+  /** {@link DescribeConfigs 查询配置项列表}({@link DescribeConfigsRequest 请求参数}): {@link DescribeConfigsResponse 返回参数} */
   DescribeConfigs(data?: DescribeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigsResponse>;
-  /** 获取容器事件列表 */
+  /** {@link DescribeContainerEvents 获取容器事件列表}({@link DescribeContainerEventsRequest 请求参数}): {@link DescribeContainerEventsResponse 返回参数} */
   DescribeContainerEvents(data: DescribeContainerEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerEventsResponse>;
-  /** 获取部署组详情 */
+  /** {@link DescribeContainerGroupDeployInfo 获取部署组详情}({@link DescribeContainerGroupDeployInfoRequest 请求参数}): {@link DescribeContainerGroupDeployInfoResponse 返回参数} */
   DescribeContainerGroupDeployInfo(data: DescribeContainerGroupDeployInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerGroupDeployInfoResponse>;
-  /** 查询容器部署组详情 */
+  /** {@link DescribeContainerGroupDetail 查询容器部署组详情}({@link DescribeContainerGroupDetailRequest 请求参数}): {@link DescribeContainerGroupDetailResponse 返回参数} */
   DescribeContainerGroupDetail(data: DescribeContainerGroupDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerGroupDetailResponse>;
-  /** 容器部署组列表 */
+  /** {@link DescribeContainerGroups 容器部署组列表}({@link DescribeContainerGroupsRequest 请求参数}): {@link DescribeContainerGroupsResponse 返回参数} */
   DescribeContainerGroups(data?: DescribeContainerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerGroupsResponse>;
-  /** 查询一键导入API分组任务的状态 */
+  /** {@link DescribeCreateGatewayApiStatus 查询一键导入API分组任务的状态}({@link DescribeCreateGatewayApiStatusRequest 请求参数}): {@link DescribeCreateGatewayApiStatusResponse 返回参数} */
   DescribeCreateGatewayApiStatus(data?: DescribeCreateGatewayApiStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCreateGatewayApiStatusResponse>;
-  /** 获取单个投递项配置 */
+  /** {@link DescribeDeliveryConfig 获取单个投递项配置}({@link DescribeDeliveryConfigRequest 请求参数}): {@link DescribeDeliveryConfigResponse 返回参数} */
   DescribeDeliveryConfig(data: DescribeDeliveryConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliveryConfigResponse>;
-  /** 用部署组id获取绑定信息 */
+  /** {@link DescribeDeliveryConfigByGroupId 用部署组id获取绑定信息}({@link DescribeDeliveryConfigByGroupIdRequest 请求参数}): {@link DescribeDeliveryConfigByGroupIdResponse 返回参数} */
   DescribeDeliveryConfigByGroupId(data: DescribeDeliveryConfigByGroupIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliveryConfigByGroupIdResponse>;
-  /** 获取多个投递项配置 */
+  /** {@link DescribeDeliveryConfigs 获取多个投递项配置}({@link DescribeDeliveryConfigsRequest 请求参数}): {@link DescribeDeliveryConfigsResponse 返回参数} */
   DescribeDeliveryConfigs(data?: DescribeDeliveryConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliveryConfigsResponse>;
-  /** 获取下载程序包信息 */
+  /** {@link DescribeDownloadInfo 获取下载程序包信息}({@link DescribeDownloadInfoRequest 请求参数}): {@link DescribeDownloadInfoResponse 返回参数} */
   DescribeDownloadInfo(data: DescribeDownloadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDownloadInfoResponse>;
-  /** 查询生效的单元化规则 */
+  /** {@link DescribeEnabledUnitRule 查询生效的单元化规则}({@link DescribeEnabledUnitRuleRequest 请求参数}): {@link DescribeEnabledUnitRuleResponse 返回参数} */
   DescribeEnabledUnitRule(data: DescribeEnabledUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnabledUnitRuleResponse>;
-  /** 查询文件配置项列表 */
+  /** {@link DescribeFileConfigs 查询文件配置项列表}({@link DescribeFileConfigsRequest 请求参数}): {@link DescribeFileConfigsResponse 返回参数} */
   DescribeFileConfigs(data?: DescribeFileConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileConfigsResponse>;
-  /** 查询工作流最近一个批次的执行状态 */
+  /** {@link DescribeFlowLastBatchState 查询工作流最近一个批次的执行状态}({@link DescribeFlowLastBatchStateRequest 请求参数}): {@link DescribeFlowLastBatchStateResponse 返回参数} */
   DescribeFlowLastBatchState(data: DescribeFlowLastBatchStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowLastBatchStateResponse>;
-  /** 查询网关所有分组下Api列表 */
+  /** {@link DescribeGatewayAllGroupApis 查询网关所有分组下Api列表}({@link DescribeGatewayAllGroupApisRequest 请求参数}): {@link DescribeGatewayAllGroupApisResponse 返回参数} */
   DescribeGatewayAllGroupApis(data: DescribeGatewayAllGroupApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayAllGroupApisResponse>;
-  /** 查询API分组下的Api列表信息 */
+  /** {@link DescribeGatewayApis 查询API分组下的Api列表信息}({@link DescribeGatewayApisRequest 请求参数}): {@link DescribeGatewayApisResponse 返回参数} */
   DescribeGatewayApis(data: DescribeGatewayApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayApisResponse>;
-  /** 查询网关监控概览 */
+  /** {@link DescribeGatewayMonitorOverview 查询网关监控概览}({@link DescribeGatewayMonitorOverviewRequest 请求参数}): {@link DescribeGatewayMonitorOverviewResponse 返回参数} */
   DescribeGatewayMonitorOverview(data: DescribeGatewayMonitorOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayMonitorOverviewResponse>;
-  /** 查询虚拟机部署组详情 */
+  /** {@link DescribeGroup 查询虚拟机部署组详情}({@link DescribeGroupRequest 请求参数}): {@link DescribeGroupResponse 返回参数} */
   DescribeGroup(data: DescribeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupResponse>;
-  /** 获取部署组其他属性 */
+  /** {@link DescribeGroupAttribute 获取部署组其他属性}({@link DescribeGroupAttributeRequest 请求参数}): {@link DescribeGroupAttributeResponse 返回参数} */
   DescribeGroupAttribute(data: DescribeGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupAttributeResponse>;
-  /** 查询某个API分组已绑定的网关部署组信息列表 */
+  /** {@link DescribeGroupBindedGateways 查询某个API分组已绑定的网关部署组信息列表}({@link DescribeGroupBindedGatewaysRequest 请求参数}): {@link DescribeGroupBindedGatewaysResponse 返回参数} */
   DescribeGroupBindedGateways(data: DescribeGroupBindedGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupBindedGatewaysResponse>;
-  /** 查询分组管理日志配置列表 */
+  /** {@link DescribeGroupBusinessLogConfigs 查询分组管理日志配置列表}({@link DescribeGroupBusinessLogConfigsRequest 请求参数}): {@link DescribeGroupBusinessLogConfigsResponse 返回参数} */
   DescribeGroupBusinessLogConfigs(data: DescribeGroupBusinessLogConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupBusinessLogConfigsResponse>;
-  /** 查询某个网关绑定的API 分组信息列表 */
+  /** {@link DescribeGroupGateways 查询某个网关绑定的API 分组信息列表}({@link DescribeGroupGatewaysRequest 请求参数}): {@link DescribeGroupGatewaysResponse 返回参数} */
   DescribeGroupGateways(data: DescribeGroupGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupGatewaysResponse>;
-  /** 查询虚拟机部署组云主机列表 */
+  /** {@link DescribeGroupInstances 查询虚拟机部署组云主机列表}({@link DescribeGroupInstancesRequest 请求参数}): {@link DescribeGroupInstancesResponse 返回参数} */
   DescribeGroupInstances(data: DescribeGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupInstancesResponse>;
-  /** 查询部署组发布信息 */
+  /** {@link DescribeGroupRelease 查询部署组发布信息}({@link DescribeGroupReleaseRequest 请求参数}): {@link DescribeGroupReleaseResponse 返回参数} */
   DescribeGroupRelease(data: DescribeGroupReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupReleaseResponse>;
-  /** 查询网关分组监控明细数据 */
+  /** {@link DescribeGroupUseDetail 查询网关分组监控明细数据}({@link DescribeGroupUseDetailRequest 请求参数}): {@link DescribeGroupUseDetailResponse 返回参数} */
   DescribeGroupUseDetail(data: DescribeGroupUseDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupUseDetailResponse>;
-  /** 获取虚拟机部署组列表 */
+  /** {@link DescribeGroups 获取虚拟机部署组列表}({@link DescribeGroupsRequest 请求参数}): {@link DescribeGroupsResponse 返回参数} */
   DescribeGroups(data?: DescribeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsResponse>;
-  /** 查询某个插件下绑定或未绑定的API分组 */
+  /** {@link DescribeGroupsWithPlugin 查询某个插件下绑定或未绑定的API分组}({@link DescribeGroupsWithPluginRequest 请求参数}): {@link DescribeGroupsWithPluginResponse 返回参数} */
   DescribeGroupsWithPlugin(data: DescribeGroupsWithPluginRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsWithPluginResponse>;
-  /** 镜像仓库列表 */
+  /** {@link DescribeImageRepository 镜像仓库列表}({@link DescribeImageRepositoryRequest 请求参数}): {@link DescribeImageRepositoryResponse 返回参数} */
   DescribeImageRepository(data?: DescribeImageRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRepositoryResponse>;
-  /** 镜像版本列表 */
+  /** {@link DescribeImageTags 镜像版本列表}({@link DescribeImageTagsRequest 请求参数}): {@link DescribeImageTagsResponse 返回参数} */
   DescribeImageTags(data: DescribeImageTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageTagsResponse>;
-  /** 查询调用监控指标 */
+  /** {@link DescribeInovcationIndicators 查询调用监控指标}({@link DescribeInovcationIndicatorsRequest 请求参数}): {@link DescribeInovcationIndicatorsResponse 返回参数} */
   DescribeInovcationIndicators(data: DescribeInovcationIndicatorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInovcationIndicatorsResponse>;
-  /** 查询机器列表 */
+  /** {@link DescribeInstances 查询机器列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** 查询调用指标数据变化曲线 */
+  /** {@link DescribeInvocationMetricDataCurve 查询调用指标数据变化曲线}({@link DescribeInvocationMetricDataCurveRequest 请求参数}): {@link DescribeInvocationMetricDataCurveResponse 返回参数} */
   DescribeInvocationMetricDataCurve(data?: DescribeInvocationMetricDataCurveRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationMetricDataCurveResponse>;
-  /** 查询维度 */
+  /** {@link DescribeInvocationMetricDataDimension 查询维度}({@link DescribeInvocationMetricDataDimensionRequest 请求参数}): {@link DescribeInvocationMetricDataDimensionResponse 返回参数} */
   DescribeInvocationMetricDataDimension(data: DescribeInvocationMetricDataDimensionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationMetricDataDimensionResponse>;
-  /** 查询单值指标维度 */
+  /** {@link DescribeInvocationMetricDataPoint 查询单值指标维度}({@link DescribeInvocationMetricDataPointRequest 请求参数}): {@link DescribeInvocationMetricDataPointResponse 返回参数} */
   DescribeInvocationMetricDataPoint(data: DescribeInvocationMetricDataPointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationMetricDataPointResponse>;
-  /** 查询调用指标数据散点图 */
+  /** {@link DescribeInvocationMetricScatterPlot 查询调用指标数据散点图}({@link DescribeInvocationMetricScatterPlotRequest 请求参数}): {@link DescribeInvocationMetricScatterPlotResponse 返回参数} */
   DescribeInvocationMetricScatterPlot(data?: DescribeInvocationMetricScatterPlotRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationMetricScatterPlotResponse>;
-  /** 查询java实例jvm监控数据 */
+  /** {@link DescribeJvmMonitor 查询java实例jvm监控数据}({@link DescribeJvmMonitorRequest 请求参数}): {@link DescribeJvmMonitorResponse 返回参数} */
   DescribeJvmMonitor(data: DescribeJvmMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJvmMonitorResponse>;
-  /** 查询泳道规则列表 */
+  /** {@link DescribeLaneRules 查询泳道规则列表}({@link DescribeLaneRulesRequest 请求参数}): {@link DescribeLaneRulesResponse 返回参数} */
   DescribeLaneRules(data: DescribeLaneRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaneRulesResponse>;
-  /** 查询泳道列表 */
+  /** {@link DescribeLanes 查询泳道列表}({@link DescribeLanesRequest 请求参数}): {@link DescribeLanesResponse 返回参数} */
   DescribeLanes(data?: DescribeLanesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLanesResponse>;
-  /** 查询微服务详情 */
+  /** {@link DescribeMicroservice 查询微服务详情}({@link DescribeMicroserviceRequest 请求参数}): {@link DescribeMicroserviceResponse 返回参数} */
   DescribeMicroservice(data: DescribeMicroserviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMicroserviceResponse>;
-  /** 获取微服务列表 */
+  /** {@link DescribeMicroservices 获取微服务列表}({@link DescribeMicroservicesRequest 请求参数}): {@link DescribeMicroservicesResponse 返回参数} */
   DescribeMicroservices(data: DescribeMicroservicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMicroservicesResponse>;
-  /** 查询服务API列表 */
+  /** {@link DescribeMsApiList 查询服务API列表}({@link DescribeMsApiListRequest 请求参数}): {@link DescribeMsApiListResponse 返回参数} */
   DescribeMsApiList(data: DescribeMsApiListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMsApiListResponse>;
-  /** 服务调用监控统计概览 */
+  /** {@link DescribeOverviewInvocation 服务调用监控统计概览}({@link DescribeOverviewInvocationRequest 请求参数}): {@link DescribeOverviewInvocationResponse 返回参数} */
   DescribeOverviewInvocation(data?: DescribeOverviewInvocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewInvocationResponse>;
-  /** 查询路径重写 */
+  /** {@link DescribePathRewrite 查询路径重写}({@link DescribePathRewriteRequest 请求参数}): {@link DescribePathRewriteResponse 返回参数} */
   DescribePathRewrite(data: DescribePathRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePathRewriteResponse>;
-  /** 查询路径重写列表 */
+  /** {@link DescribePathRewrites 查询路径重写列表}({@link DescribePathRewritesRequest 请求参数}): {@link DescribePathRewritesResponse 返回参数} */
   DescribePathRewrites(data: DescribePathRewritesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePathRewritesResponse>;
-  /** 获取某个应用的程序包信息列表 */
+  /** {@link DescribePkgs 获取某个应用的程序包信息列表}({@link DescribePkgsRequest 请求参数}): {@link DescribePkgsResponse 返回参数} */
   DescribePkgs(data: DescribePkgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePkgsResponse>;
-  /** 查询网关分组或API绑定（或未绑定）的插件列表 */
+  /** {@link DescribePluginInstances 查询网关分组或API绑定（或未绑定）的插件列表}({@link DescribePluginInstancesRequest 请求参数}): {@link DescribePluginInstancesResponse 返回参数} */
   DescribePluginInstances(data: DescribePluginInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginInstancesResponse>;
-  /** 获取部署组实例列表 */
+  /** {@link DescribePodInstances 获取部署组实例列表}({@link DescribePodInstancesRequest 请求参数}): {@link DescribePodInstancesResponse 返回参数} */
   DescribePodInstances(data: DescribePodInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePodInstancesResponse>;
-  /** 查询数据集列表 */
+  /** {@link DescribePrograms 查询数据集列表}({@link DescribeProgramsRequest 请求参数}): {@link DescribeProgramsResponse 返回参数} */
   DescribePrograms(data?: DescribeProgramsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProgramsResponse>;
-  /** 查询公共配置（单条） */
+  /** {@link DescribePublicConfig 查询公共配置（单条）}({@link DescribePublicConfigRequest 请求参数}): {@link DescribePublicConfigResponse 返回参数} */
   DescribePublicConfig(data: DescribePublicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigResponse>;
-  /** 查询公共配置发布历史 */
+  /** {@link DescribePublicConfigReleaseLogs 查询公共配置发布历史}({@link DescribePublicConfigReleaseLogsRequest 请求参数}): {@link DescribePublicConfigReleaseLogsResponse 返回参数} */
   DescribePublicConfigReleaseLogs(data?: DescribePublicConfigReleaseLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigReleaseLogsResponse>;
-  /** 查询公共配置发布信息 */
+  /** {@link DescribePublicConfigReleases 查询公共配置发布信息}({@link DescribePublicConfigReleasesRequest 请求参数}): {@link DescribePublicConfigReleasesResponse 返回参数} */
   DescribePublicConfigReleases(data?: DescribePublicConfigReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigReleasesResponse>;
-  /** 查询公共配置汇总列表 */
+  /** {@link DescribePublicConfigSummary 查询公共配置汇总列表}({@link DescribePublicConfigSummaryRequest 请求参数}): {@link DescribePublicConfigSummaryResponse 返回参数} */
   DescribePublicConfigSummary(data?: DescribePublicConfigSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigSummaryResponse>;
-  /** 查询公共配置项列表 */
+  /** {@link DescribePublicConfigs 查询公共配置项列表}({@link DescribePublicConfigsRequest 请求参数}): {@link DescribePublicConfigsResponse 返回参数} */
   DescribePublicConfigs(data?: DescribePublicConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigsResponse>;
-  /** 查询group发布的配置 */
+  /** {@link DescribeReleasedConfig 查询group发布的配置}({@link DescribeReleasedConfigRequest 请求参数}): {@link DescribeReleasedConfigResponse 返回参数} */
   DescribeReleasedConfig(data: DescribeReleasedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleasedConfigResponse>;
-  /** 查询仓库列表 */
+  /** {@link DescribeRepositories 查询仓库列表}({@link DescribeRepositoriesRequest 请求参数}): {@link DescribeRepositoriesResponse 返回参数} */
   DescribeRepositories(data?: DescribeRepositoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoriesResponse>;
-  /** 查询仓库信息 */
+  /** {@link DescribeRepository 查询仓库信息}({@link DescribeRepositoryRequest 请求参数}): {@link DescribeRepositoryResponse 返回参数} */
   DescribeRepository(data: DescribeRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryResponse>;
-  /** 查询简单应用列表 */
+  /** {@link DescribeSimpleApplications 查询简单应用列表}({@link DescribeSimpleApplicationsRequest 请求参数}): {@link DescribeSimpleApplicationsResponse 返回参数} */
   DescribeSimpleApplications(data?: DescribeSimpleApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleApplicationsResponse>;
-  /** 查询简单集群列表 */
+  /** {@link DescribeSimpleClusters 查询简单集群列表}({@link DescribeSimpleClustersRequest 请求参数}): {@link DescribeSimpleClustersResponse 返回参数} */
   DescribeSimpleClusters(data?: DescribeSimpleClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleClustersResponse>;
-  /** 查询简单部署组列表 */
+  /** {@link DescribeSimpleGroups 查询简单部署组列表}({@link DescribeSimpleGroupsRequest 请求参数}): {@link DescribeSimpleGroupsResponse 返回参数} */
   DescribeSimpleGroups(data?: DescribeSimpleGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleGroupsResponse>;
-  /** 查询简单命名空间列表 */
+  /** {@link DescribeSimpleNamespaces 查询简单命名空间列表}({@link DescribeSimpleNamespacesRequest 请求参数}): {@link DescribeSimpleNamespacesResponse 返回参数} */
   DescribeSimpleNamespaces(data?: DescribeSimpleNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleNamespacesResponse>;
-  /** 服务统计 */
+  /** {@link DescribeStatistics 服务统计}({@link DescribeStatisticsRequest 请求参数}): {@link DescribeStatisticsResponse 返回参数} */
   DescribeStatistics(data: DescribeStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStatisticsResponse>;
-  /** 查询任务详情 */
+  /** {@link DescribeTaskDetail 查询任务详情}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** 查看任务最近执行批次状态 */
+  /** {@link DescribeTaskLastStatus 查看任务最近执行批次状态}({@link DescribeTaskLastStatusRequest 请求参数}): {@link DescribeTaskLastStatusResponse 返回参数} */
   DescribeTaskLastStatus(data: DescribeTaskLastStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLastStatusResponse>;
-  /** 查询任务列表 */
+  /** {@link DescribeTaskRecords 查询任务列表}({@link DescribeTaskRecordsRequest 请求参数}): {@link DescribeTaskRecordsResponse 返回参数} */
   DescribeTaskRecords(data?: DescribeTaskRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskRecordsResponse>;
-  /** 查询单元化网关API监控明细数据 */
+  /** {@link DescribeUnitApiUseDetail 查询单元化网关API监控明细数据}({@link DescribeUnitApiUseDetailRequest 请求参数}): {@link DescribeUnitApiUseDetailResponse 返回参数} */
   DescribeUnitApiUseDetail(data: DescribeUnitApiUseDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnitApiUseDetailResponse>;
-  /** 查询单元化命名空间列表 */
+  /** {@link DescribeUnitNamespaces 查询单元化命名空间列表}({@link DescribeUnitNamespacesRequest 请求参数}): {@link DescribeUnitNamespacesResponse 返回参数} */
   DescribeUnitNamespaces(data: DescribeUnitNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnitNamespacesResponse>;
-  /** 查询单元化规则详情 */
+  /** {@link DescribeUnitRule 查询单元化规则详情}({@link DescribeUnitRuleRequest 请求参数}): {@link DescribeUnitRuleResponse 返回参数} */
   DescribeUnitRule(data: DescribeUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnitRuleResponse>;
-  /** 查询单元化规则列表 */
+  /** {@link DescribeUnitRules 查询单元化规则列表}({@link DescribeUnitRulesRequest 请求参数}): {@link DescribeUnitRulesResponse 返回参数} */
   DescribeUnitRules(data: DescribeUnitRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnitRulesResponse>;
-  /** 获取上传程序包信息 */
+  /** {@link DescribeUploadInfo 获取上传程序包信息}({@link DescribeUploadInfoRequest 请求参数}): {@link DescribeUploadInfoResponse 返回参数} */
   DescribeUploadInfo(data: DescribeUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUploadInfoResponse>;
-  /** 查询可用于被导入的命名空间列表 */
+  /** {@link DescribeUsableUnitNamespaces 查询可用于被导入的命名空间列表}({@link DescribeUsableUnitNamespacesRequest 请求参数}): {@link DescribeUsableUnitNamespacesResponse 返回参数} */
   DescribeUsableUnitNamespaces(data?: DescribeUsableUnitNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsableUnitNamespacesResponse>;
-  /** 停用任务 */
+  /** {@link DisableTask 停用任务}({@link DisableTaskRequest 请求参数}): {@link DisableTaskResponse 返回参数} */
   DisableTask(data: DisableTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DisableTaskResponse>;
-  /** 停用工作流 */
+  /** {@link DisableTaskFlow 停用工作流}({@link DisableTaskFlowRequest 请求参数}): {@link DisableTaskFlowResponse 返回参数} */
   DisableTaskFlow(data: DisableTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DisableTaskFlowResponse>;
-  /** 禁用单元化路由 */
+  /** {@link DisableUnitRoute 禁用单元化路由}({@link DisableUnitRouteRequest 请求参数}): {@link DisableUnitRouteResponse 返回参数} */
   DisableUnitRoute(data: DisableUnitRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DisableUnitRouteResponse>;
-  /** 禁用单元化规则 */
+  /** {@link DisableUnitRule 禁用单元化规则}({@link DisableUnitRuleRequest 请求参数}): {@link DisableUnitRuleResponse 返回参数} */
   DisableUnitRule(data: DisableUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DisableUnitRuleResponse>;
-  /** 取消关联业务日志配置项和应用 */
+  /** {@link DisassociateBusinessLogConfig 取消关联业务日志配置项和应用}({@link DisassociateBusinessLogConfigRequest 请求参数}): {@link DisassociateBusinessLogConfigResponse 返回参数} */
   DisassociateBusinessLogConfig(data: DisassociateBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateBusinessLogConfigResponse>;
-  /** 取消关联投递信息和部署组 */
+  /** {@link DisassociateKafkaConfig 取消关联投递信息和部署组}({@link DisassociateKafkaConfigRequest 请求参数}): {@link DisassociateKafkaConfigResponse 返回参数} */
   DisassociateKafkaConfig(data: DisassociateKafkaConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateKafkaConfigResponse>;
-  /** 下线Api分组 */
+  /** {@link DraftApiGroup 下线Api分组}({@link DraftApiGroupRequest 请求参数}): {@link DraftApiGroupResponse 返回参数} */
   DraftApiGroup(data: DraftApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DraftApiGroupResponse>;
-  /** 启用任务 */
+  /** {@link EnableTask 启用任务}({@link EnableTaskRequest 请求参数}): {@link EnableTaskResponse 返回参数} */
   EnableTask(data: EnableTaskRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTaskResponse>;
-  /** 启用工作流 */
+  /** {@link EnableTaskFlow 启用工作流}({@link EnableTaskFlowRequest 请求参数}): {@link EnableTaskFlowResponse 返回参数} */
   EnableTaskFlow(data: EnableTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTaskFlowResponse>;
-  /** 启用单元化路由 */
+  /** {@link EnableUnitRoute 启用单元化路由}({@link EnableUnitRouteRequest 请求参数}): {@link EnableUnitRouteResponse 返回参数} */
   EnableUnitRoute(data: EnableUnitRouteRequest, config?: AxiosRequestConfig): AxiosPromise<EnableUnitRouteResponse>;
-  /** 启用单元化规则 */
+  /** {@link EnableUnitRule 启用单元化规则}({@link EnableUnitRuleRequest 请求参数}): {@link EnableUnitRuleResponse 返回参数} */
   EnableUnitRule(data: EnableUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EnableUnitRuleResponse>;
-  /** 手动执行一次任务。 */
+  /** {@link ExecuteTask 手动执行一次任务。}({@link ExecuteTaskRequest 请求参数}): {@link ExecuteTaskResponse 返回参数} */
   ExecuteTask(data: ExecuteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskResponse>;
-  /** 执行一次工作流 */
+  /** {@link ExecuteTaskFlow 执行一次工作流}({@link ExecuteTaskFlowRequest 请求参数}): {@link ExecuteTaskFlowResponse 返回参数} */
   ExecuteTaskFlow(data?: ExecuteTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskFlowResponse>;
-  /** 虚拟机部署组添加实例 */
+  /** {@link ExpandGroup 虚拟机部署组添加实例}({@link ExpandGroupRequest 请求参数}): {@link ExpandGroupResponse 返回参数} */
   ExpandGroup(data: ExpandGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ExpandGroupResponse>;
-  /** 修改容器部署组 */
+  /** {@link ModifyContainerGroup 修改容器部署组}({@link ModifyContainerGroupRequest 请求参数}): {@link ModifyContainerGroupResponse 返回参数} */
   ModifyContainerGroup(data?: ModifyContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContainerGroupResponse>;
-  /** 修改容器部署组实例数 */
+  /** {@link ModifyContainerReplicas 修改容器部署组实例数}({@link ModifyContainerReplicasRequest 请求参数}): {@link ModifyContainerReplicasResponse 返回参数} */
   ModifyContainerReplicas(data: ModifyContainerReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContainerReplicasResponse>;
-  /** 更新泳道信息 */
+  /** {@link ModifyLane 更新泳道信息}({@link ModifyLaneRequest 请求参数}): {@link ModifyLaneResponse 返回参数} */
   ModifyLane(data: ModifyLaneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLaneResponse>;
-  /** 更新泳道规则 */
+  /** {@link ModifyLaneRule 更新泳道规则}({@link ModifyLaneRuleRequest 请求参数}): {@link ModifyLaneRuleResponse 返回参数} */
   ModifyLaneRule(data: ModifyLaneRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLaneRuleResponse>;
-  /** 修改微服务详情 */
+  /** {@link ModifyMicroservice 修改微服务详情}({@link ModifyMicroserviceRequest 请求参数}): {@link ModifyMicroserviceResponse 返回参数} */
   ModifyMicroservice(data: ModifyMicroserviceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMicroserviceResponse>;
-  /** 修改路径重写 */
+  /** {@link ModifyPathRewrite 修改路径重写}({@link ModifyPathRewriteRequest 请求参数}): {@link ModifyPathRewriteResponse 返回参数} */
   ModifyPathRewrite(data: ModifyPathRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPathRewriteResponse>;
-  /** 修改任务 */
+  /** {@link ModifyTask 修改任务}({@link ModifyTaskRequest 请求参数}): {@link ModifyTaskResponse 返回参数} */
   ModifyTask(data: ModifyTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskResponse>;
-  /** 更新上传程序包信息 */
+  /** {@link ModifyUploadInfo 更新上传程序包信息}({@link ModifyUploadInfoRequest 请求参数}): {@link ModifyUploadInfoResponse 返回参数} */
   ModifyUploadInfo(data: ModifyUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUploadInfoResponse>;
-  /** 绑定解绑tcr仓库 */
+  /** {@link OperateApplicationTcrBinding 绑定解绑tcr仓库}({@link OperateApplicationTcrBindingRequest 请求参数}): {@link OperateApplicationTcrBindingResponse 返回参数} */
   OperateApplicationTcrBinding(data?: OperateApplicationTcrBindingRequest, config?: AxiosRequestConfig): AxiosPromise<OperateApplicationTcrBindingResponse>;
-  /** 重关联业务日志配置 */
+  /** {@link ReassociateBusinessLogConfig 重关联业务日志配置}({@link ReassociateBusinessLogConfigRequest 请求参数}): {@link ReassociateBusinessLogConfigResponse 返回参数} */
   ReassociateBusinessLogConfig(data: ReassociateBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ReassociateBusinessLogConfigResponse>;
-  /** 重新执行任务 */
+  /** {@link RedoTask 重新执行任务}({@link RedoTaskRequest 请求参数}): {@link RedoTaskResponse 返回参数} */
   RedoTask(data: RedoTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RedoTaskResponse>;
-  /** 重新执行任务批次 */
+  /** {@link RedoTaskBatch 重新执行任务批次}({@link RedoTaskBatchRequest 请求参数}): {@link RedoTaskBatchResponse 返回参数} */
   RedoTaskBatch(data: RedoTaskBatchRequest, config?: AxiosRequestConfig): AxiosPromise<RedoTaskBatchResponse>;
-  /** 重新执行任务的一次执行 */
+  /** {@link RedoTaskExecute 重新执行任务的一次执行}({@link RedoTaskExecuteRequest 请求参数}): {@link RedoTaskExecuteResponse 返回参数} */
   RedoTaskExecute(data: RedoTaskExecuteRequest, config?: AxiosRequestConfig): AxiosPromise<RedoTaskExecuteResponse>;
-  /** 重新执行工作流批次 */
+  /** {@link RedoTaskFlowBatch 重新执行工作流批次}({@link RedoTaskFlowBatchRequest 请求参数}): {@link RedoTaskFlowBatchResponse 返回参数} */
   RedoTaskFlowBatch(data: RedoTaskFlowBatchRequest, config?: AxiosRequestConfig): AxiosPromise<RedoTaskFlowBatchResponse>;
-  /** 发布Api分组 */
+  /** {@link ReleaseApiGroup 发布Api分组}({@link ReleaseApiGroupRequest 请求参数}): {@link ReleaseApiGroupResponse 返回参数} */
   ReleaseApiGroup(data: ReleaseApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseApiGroupResponse>;
-  /** 发布配置 */
+  /** {@link ReleaseConfig 发布配置}({@link ReleaseConfigRequest 请求参数}): {@link ReleaseConfigResponse 返回参数} */
   ReleaseConfig(data: ReleaseConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseConfigResponse>;
-  /** 发布文件配置 */
+  /** {@link ReleaseFileConfig 发布文件配置}({@link ReleaseFileConfigRequest 请求参数}): {@link ReleaseFileConfigResponse 返回参数} */
   ReleaseFileConfig(data: ReleaseFileConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseFileConfigResponse>;
-  /** 发布公共配置 */
+  /** {@link ReleasePublicConfig 发布公共配置}({@link ReleasePublicConfigRequest 请求参数}): {@link ReleasePublicConfigResponse 返回参数} */
   ReleasePublicConfig(data: ReleasePublicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ReleasePublicConfigResponse>;
-  /** 移除云主机 */
+  /** {@link RemoveInstances 移除云主机}({@link RemoveInstancesRequest 请求参数}): {@link RemoveInstancesResponse 返回参数} */
   RemoveInstances(data: RemoveInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveInstancesResponse>;
-  /** 撤回已发布的配置 */
+  /** {@link RevocationConfig 撤回已发布的配置}({@link RevocationConfigRequest 请求参数}): {@link RevocationConfigResponse 返回参数} */
   RevocationConfig(data: RevocationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<RevocationConfigResponse>;
-  /** 撤回已发布的公共配置 */
+  /** {@link RevocationPublicConfig 撤回已发布的公共配置}({@link RevocationPublicConfigRequest 请求参数}): {@link RevocationPublicConfigResponse 返回参数} */
   RevocationPublicConfig(data: RevocationPublicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<RevocationPublicConfigResponse>;
-  /** 回滚配置 */
+  /** {@link RollbackConfig 回滚配置}({@link RollbackConfigRequest 请求参数}): {@link RollbackConfigResponse 返回参数} */
   RollbackConfig(data: RollbackConfigRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackConfigResponse>;
-  /** 业务日志搜索 */
+  /** {@link SearchBusinessLog 业务日志搜索}({@link SearchBusinessLogRequest 请求参数}): {@link SearchBusinessLogResponse 返回参数} */
   SearchBusinessLog(data: SearchBusinessLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchBusinessLogResponse>;
-  /** 标准输出日志搜索 */
+  /** {@link SearchStdoutLog 标准输出日志搜索}({@link SearchStdoutLogRequest 请求参数}): {@link SearchStdoutLogResponse 返回参数} */
   SearchStdoutLog(data?: SearchStdoutLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchStdoutLogResponse>;
-  /** 缩容虚拟机部署组 */
+  /** {@link ShrinkGroup 缩容虚拟机部署组}({@link ShrinkGroupRequest 请求参数}): {@link ShrinkGroupResponse 返回参数} */
   ShrinkGroup(data: ShrinkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ShrinkGroupResponse>;
-  /** 虚拟机部署组下线实例 */
+  /** {@link ShrinkInstances 虚拟机部署组下线实例}({@link ShrinkInstancesRequest 请求参数}): {@link ShrinkInstancesResponse 返回参数} */
   ShrinkInstances(data: ShrinkInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ShrinkInstancesResponse>;
-  /** 启动容器部署组 */
+  /** {@link StartContainerGroup 启动容器部署组}({@link StartContainerGroupRequest 请求参数}): {@link StartContainerGroupResponse 返回参数} */
   StartContainerGroup(data: StartContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<StartContainerGroupResponse>;
-  /** 启动虚拟机部署组 */
+  /** {@link StartGroup 启动虚拟机部署组}({@link StartGroupRequest 请求参数}): {@link StartGroupResponse 返回参数} */
   StartGroup(data: StartGroupRequest, config?: AxiosRequestConfig): AxiosPromise<StartGroupResponse>;
-  /** 停止容器部署组 */
+  /** {@link StopContainerGroup 停止容器部署组}({@link StopContainerGroupRequest 请求参数}): {@link StopContainerGroupResponse 返回参数} */
   StopContainerGroup(data: StopContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<StopContainerGroupResponse>;
-  /** 停止虚拟机部署组 */
+  /** {@link StopGroup 停止虚拟机部署组}({@link StopGroupRequest 请求参数}): {@link StopGroupResponse 返回参数} */
   StopGroup(data: StopGroupRequest, config?: AxiosRequestConfig): AxiosPromise<StopGroupResponse>;
-  /** 停止执行中的任务批次 */
+  /** {@link StopTaskBatch 停止执行中的任务批次}({@link StopTaskBatchRequest 请求参数}): {@link StopTaskBatchResponse 返回参数} */
   StopTaskBatch(data: StopTaskBatchRequest, config?: AxiosRequestConfig): AxiosPromise<StopTaskBatchResponse>;
-  /** 停止正在执行的任务 */
+  /** {@link StopTaskExecute 停止正在执行的任务}({@link StopTaskExecuteRequest 请求参数}): {@link StopTaskExecuteResponse 返回参数} */
   StopTaskExecute(data: StopTaskExecuteRequest, config?: AxiosRequestConfig): AxiosPromise<StopTaskExecuteResponse>;
-  /** 停止一个工作流批次 */
+  /** {@link TerminateTaskFlowBatch 停止一个工作流批次}({@link TerminateTaskFlowBatchRequest 请求参数}): {@link TerminateTaskFlowBatchResponse 返回参数} */
   TerminateTaskFlowBatch(data: TerminateTaskFlowBatchRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateTaskFlowBatchResponse>;
-  /** API分组批量与网关解绑 */
+  /** {@link UnbindApiGroup API分组批量与网关解绑}({@link UnbindApiGroupRequest 请求参数}): {@link UnbindApiGroupResponse 返回参数} */
   UnbindApiGroup(data: UnbindApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindApiGroupResponse>;
-  /** 更新Api分组 */
+  /** {@link UpdateApiGroup 更新Api分组}({@link UpdateApiGroupRequest 请求参数}): {@link UpdateApiGroupResponse 返回参数} */
   UpdateApiGroup(data: UpdateApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApiGroupResponse>;
-  /** 更新API限流规则 */
+  /** {@link UpdateApiRateLimitRule 更新API限流规则}({@link UpdateApiRateLimitRuleRequest 请求参数}): {@link UpdateApiRateLimitRuleResponse 返回参数} */
   UpdateApiRateLimitRule(data: UpdateApiRateLimitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApiRateLimitRuleResponse>;
-  /** 批量更新API限流规则 */
+  /** {@link UpdateApiRateLimitRules 批量更新API限流规则}({@link UpdateApiRateLimitRulesRequest 请求参数}): {@link UpdateApiRateLimitRulesResponse 返回参数} */
   UpdateApiRateLimitRules(data: UpdateApiRateLimitRulesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApiRateLimitRulesResponse>;
-  /** 更新API超时 */
+  /** {@link UpdateApiTimeouts 更新API超时}({@link UpdateApiTimeoutsRequest 请求参数}): {@link UpdateApiTimeoutsResponse 返回参数} */
   UpdateApiTimeouts(data: UpdateApiTimeoutsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApiTimeoutsResponse>;
-  /** 更新API */
+  /** {@link UpdateGatewayApi 更新API}({@link UpdateGatewayApiRequest 请求参数}): {@link UpdateGatewayApiResponse 返回参数} */
   UpdateGatewayApi(data: UpdateGatewayApiRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGatewayApiResponse>;
-  /** 更新健康检查配置 */
+  /** {@link UpdateHealthCheckSettings 更新健康检查配置}({@link UpdateHealthCheckSettingsRequest 请求参数}): {@link UpdateHealthCheckSettingsResponse 返回参数} */
   UpdateHealthCheckSettings(data: UpdateHealthCheckSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateHealthCheckSettingsResponse>;
-  /** 更新仓库信息 */
+  /** {@link UpdateRepository 更新仓库信息}({@link UpdateRepositoryRequest 请求参数}): {@link UpdateRepositoryResponse 返回参数} */
   UpdateRepository(data: UpdateRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRepositoryResponse>;
-  /** 更新单元化规则 */
+  /** {@link UpdateUnitRule 更新单元化规则}({@link UpdateUnitRuleRequest 请求参数}): {@link UpdateUnitRuleResponse 返回参数} */
   UpdateUnitRule(data: UpdateUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUnitRuleResponse>;
 }
 

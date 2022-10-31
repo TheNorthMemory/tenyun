@@ -616,58 +616,58 @@ declare interface UpdateEmailTemplateResponse {
   RequestId?: string;
 }
 
-/** [邮件推送](https://cloud.tencent.com/document/product/1288) */
+/** {@link Ses 邮件推送} */
 declare interface Ses {
   (): Versions;
-  /** 批量发送邮件 */
+  /** {@link BatchSendEmail 批量发送邮件}({@link BatchSendEmailRequest 请求参数}): {@link BatchSendEmailResponse 返回参数} */
   BatchSendEmail(data: BatchSendEmailRequest, config?: AxiosRequestConfig): AxiosPromise<BatchSendEmailResponse>;
-  /** 新建发信地址 */
+  /** {@link CreateEmailAddress 新建发信地址}({@link CreateEmailAddressRequest 请求参数}): {@link CreateEmailAddressResponse 返回参数} */
   CreateEmailAddress(data: CreateEmailAddressRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmailAddressResponse>;
-  /** 新建发信域名 */
+  /** {@link CreateEmailIdentity 新建发信域名}({@link CreateEmailIdentityRequest 请求参数}): {@link CreateEmailIdentityResponse 返回参数} */
   CreateEmailIdentity(data: CreateEmailIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmailIdentityResponse>;
-  /** 创建邮件模板 */
+  /** {@link CreateEmailTemplate 创建邮件模板}({@link CreateEmailTemplateRequest 请求参数}): {@link CreateEmailTemplateResponse 返回参数} */
   CreateEmailTemplate(data: CreateEmailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmailTemplateResponse>;
-  /** 创建收件人列表 */
+  /** {@link CreateReceiver 创建收件人列表}({@link CreateReceiverRequest 请求参数}): {@link CreateReceiverResponse 返回参数} */
   CreateReceiver(data: CreateReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReceiverResponse>;
-  /** 添加收件人地址 */
+  /** {@link CreateReceiverDetail 添加收件人地址}({@link CreateReceiverDetailRequest 请求参数}): {@link CreateReceiverDetailResponse 返回参数} */
   CreateReceiverDetail(data: CreateReceiverDetailRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReceiverDetailResponse>;
-  /** 添加收件人地址附带模板参数 */
+  /** {@link CreateReceiverDetailWithData 添加收件人地址附带模板参数}({@link CreateReceiverDetailWithDataRequest 请求参数}): {@link CreateReceiverDetailWithDataResponse 返回参数} */
   CreateReceiverDetailWithData(data: CreateReceiverDetailWithDataRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReceiverDetailWithDataResponse>;
-  /** 删除收件人黑名单 */
+  /** {@link DeleteBlackList 删除收件人黑名单}({@link DeleteBlackListRequest 请求参数}): {@link DeleteBlackListResponse 返回参数} */
   DeleteBlackList(data: DeleteBlackListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlackListResponse>;
-  /** 删除发信地址 */
+  /** {@link DeleteEmailAddress 删除发信地址}({@link DeleteEmailAddressRequest 请求参数}): {@link DeleteEmailAddressResponse 返回参数} */
   DeleteEmailAddress(data: DeleteEmailAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEmailAddressResponse>;
-  /** 删除发信域名 */
+  /** {@link DeleteEmailIdentity 删除发信域名}({@link DeleteEmailIdentityRequest 请求参数}): {@link DeleteEmailIdentityResponse 返回参数} */
   DeleteEmailIdentity(data: DeleteEmailIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEmailIdentityResponse>;
-  /** 删除发信模板 */
+  /** {@link DeleteEmailTemplate 删除发信模板}({@link DeleteEmailTemplateRequest 请求参数}): {@link DeleteEmailTemplateResponse 返回参数} */
   DeleteEmailTemplate(data: DeleteEmailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEmailTemplateResponse>;
-  /** 删除收件人列表 */
+  /** {@link DeleteReceiver 删除收件人列表}({@link DeleteReceiverRequest 请求参数}): {@link DeleteReceiverResponse 返回参数} */
   DeleteReceiver(data: DeleteReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReceiverResponse>;
-  /** 获取域名配置详情 */
+  /** {@link GetEmailIdentity 获取域名配置详情}({@link GetEmailIdentityRequest 请求参数}): {@link GetEmailIdentityResponse 返回参数} */
   GetEmailIdentity(data: GetEmailIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmailIdentityResponse>;
-  /** 获取模板详情 */
+  /** {@link GetEmailTemplate 获取模板详情}({@link GetEmailTemplateRequest 请求参数}): {@link GetEmailTemplateResponse 返回参数} */
   GetEmailTemplate(data: GetEmailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmailTemplateResponse>;
-  /** 获取邮件发送的状态（待废弃） */
+  /** {@link GetSendEmailStatus 获取邮件发送的状态（待废弃）}({@link GetSendEmailStatusRequest 请求参数}): {@link GetSendEmailStatusResponse 返回参数} */
   GetSendEmailStatus(data: GetSendEmailStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetSendEmailStatusResponse>;
-  /** 获取发送统计数据 */
+  /** {@link GetStatisticsReport 获取发送统计数据}({@link GetStatisticsReportRequest 请求参数}): {@link GetStatisticsReportResponse 返回参数} */
   GetStatisticsReport(data: GetStatisticsReportRequest, config?: AxiosRequestConfig): AxiosPromise<GetStatisticsReportResponse>;
-  /** 获取黑名单邮箱地址 */
+  /** {@link ListBlackEmailAddress 获取黑名单邮箱地址}({@link ListBlackEmailAddressRequest 请求参数}): {@link ListBlackEmailAddressResponse 返回参数} */
   ListBlackEmailAddress(data: ListBlackEmailAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ListBlackEmailAddressResponse>;
-  /** 获取发信地址列表 */
+  /** {@link ListEmailAddress 获取发信地址列表}({@link ListEmailAddressRequest 请求参数}): {@link ListEmailAddressResponse 返回参数} */
   ListEmailAddress(data?: ListEmailAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ListEmailAddressResponse>;
-  /** 获取当前发信域名列表 */
+  /** {@link ListEmailIdentities 获取当前发信域名列表}({@link ListEmailIdentitiesRequest 请求参数}): {@link ListEmailIdentitiesResponse 返回参数} */
   ListEmailIdentities(data?: ListEmailIdentitiesRequest, config?: AxiosRequestConfig): AxiosPromise<ListEmailIdentitiesResponse>;
-  /** 获取当前邮件模板列表 */
+  /** {@link ListEmailTemplates 获取当前邮件模板列表}({@link ListEmailTemplatesRequest 请求参数}): {@link ListEmailTemplatesResponse 返回参数} */
   ListEmailTemplates(data: ListEmailTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<ListEmailTemplatesResponse>;
-  /** 查询收件人列表 */
+  /** {@link ListReceivers 查询收件人列表}({@link ListReceiversRequest 请求参数}): {@link ListReceiversResponse 返回参数} */
   ListReceivers(data: ListReceiversRequest, config?: AxiosRequestConfig): AxiosPromise<ListReceiversResponse>;
-  /** 查询发送任务 */
+  /** {@link ListSendTasks 查询发送任务}({@link ListSendTasksRequest 请求参数}): {@link ListSendTasksResponse 返回参数} */
   ListSendTasks(data: ListSendTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListSendTasksResponse>;
-  /** 发送邮件 */
+  /** {@link SendEmail 发送邮件}({@link SendEmailRequest 请求参数}): {@link SendEmailResponse 返回参数} */
   SendEmail(data: SendEmailRequest, config?: AxiosRequestConfig): AxiosPromise<SendEmailResponse>;
-  /** 请求验证 */
+  /** {@link UpdateEmailIdentity 请求验证}({@link UpdateEmailIdentityRequest 请求参数}): {@link UpdateEmailIdentityResponse 返回参数} */
   UpdateEmailIdentity(data: UpdateEmailIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEmailIdentityResponse>;
-  /** 更新邮件模板 */
+  /** {@link UpdateEmailTemplate 更新邮件模板}({@link UpdateEmailTemplateRequest 请求参数}): {@link UpdateEmailTemplateResponse 返回参数} */
   UpdateEmailTemplate(data: UpdateEmailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEmailTemplateResponse>;
 }
 

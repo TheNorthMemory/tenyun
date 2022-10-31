@@ -160,20 +160,20 @@ declare interface SwapGenderPicResponse {
   RequestId?: string;
 }
 
-/** [人像变换](https://cloud.tencent.com/document/product/1202) */
+/** {@link Ft 人像变换} */
 declare interface Ft {
   (): Versions;
-  /** 撤销人像渐变任务 */
+  /** {@link CancelFaceMorphJob 撤销人像渐变任务}({@link CancelFaceMorphJobRequest 请求参数}): {@link CancelFaceMorphJobResponse 返回参数} */
   CancelFaceMorphJob(data: CancelFaceMorphJobRequest, config?: AxiosRequestConfig): AxiosPromise<CancelFaceMorphJobResponse>;
-  /** 人脸年龄变化 */
+  /** {@link ChangeAgePic 人脸年龄变化}({@link ChangeAgePicRequest 请求参数}): {@link ChangeAgePicResponse 返回参数} */
   ChangeAgePic(data: ChangeAgePicRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeAgePicResponse>;
-  /** 人像动漫化 */
+  /** {@link FaceCartoonPic 人像动漫化}({@link FaceCartoonPicRequest 请求参数}): {@link FaceCartoonPicResponse 返回参数} */
   FaceCartoonPic(data?: FaceCartoonPicRequest, config?: AxiosRequestConfig): AxiosPromise<FaceCartoonPicResponse>;
-  /** 人像渐变 */
+  /** {@link MorphFace 人像渐变}({@link MorphFaceRequest 请求参数}): {@link MorphFaceResponse 返回参数} */
   MorphFace(data?: MorphFaceRequest, config?: AxiosRequestConfig): AxiosPromise<MorphFaceResponse>;
-  /** 查询人像渐变任务 */
+  /** {@link QueryFaceMorphJob 查询人像渐变任务}({@link QueryFaceMorphJobRequest 请求参数}): {@link QueryFaceMorphJobResponse 返回参数} */
   QueryFaceMorphJob(data: QueryFaceMorphJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFaceMorphJobResponse>;
-  /** 人脸性别转换 */
+  /** {@link SwapGenderPic 人脸性别转换}({@link SwapGenderPicRequest 请求参数}): {@link SwapGenderPicResponse 返回参数} */
   SwapGenderPic(data: SwapGenderPicRequest, config?: AxiosRequestConfig): AxiosPromise<SwapGenderPicResponse>;
 }
 

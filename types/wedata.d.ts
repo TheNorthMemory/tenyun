@@ -1966,116 +1966,116 @@ declare interface TriggerEventResponse {
   RequestId?: string;
 }
 
-/** [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) */
+/** {@link Wedata 数据开发治理平台 WeData} */
 declare interface Wedata {
   (): Versions;
-  /** 批量删除任务【Beta版本】 */
+  /** {@link BatchDeleteTasksNew 批量删除任务【Beta版本】}({@link BatchDeleteTasksNewRequest 请求参数}): {@link BatchDeleteTasksNewResponse 返回参数} */
   BatchDeleteTasksNew(data: BatchDeleteTasksNewRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteTasksNewResponse>;
-  /** 批量修改任务责任人【Beta版本】 */
+  /** {@link BatchModifyOwnersNew 批量修改任务责任人【Beta版本】}({@link BatchModifyOwnersNewRequest 请求参数}): {@link BatchModifyOwnersNewResponse 返回参数} */
   BatchModifyOwnersNew(data: BatchModifyOwnersNewRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyOwnersNewResponse>;
-  /** 批量停止任务【Beta版本】 */
+  /** {@link BatchStopTasksNew 批量停止任务【Beta版本】}({@link BatchStopTasksNewRequest 请求参数}): {@link BatchStopTasksNewResponse 返回参数} */
   BatchStopTasksNew(data: BatchStopTasksNewRequest, config?: AxiosRequestConfig): AxiosPromise<BatchStopTasksNewResponse>;
-  /** 创建用户自定义函数 */
+  /** {@link CreateCustomFunction 创建用户自定义函数}({@link CreateCustomFunctionRequest 请求参数}): {@link CreateCustomFunctionResponse 返回参数} */
   CreateCustomFunction(data: CreateCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomFunctionResponse>;
-  /** 数据源管理-创建数据源【Beta版本】 */
+  /** {@link CreateDataSource 数据源管理-创建数据源【Beta版本】}({@link CreateDataSourceRequest 请求参数}): {@link CreateDataSourceResponse 返回参数} */
   CreateDataSource(data: CreateDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataSourceResponse>;
-  /** 创建文件夹【Beta版本】 */
+  /** {@link CreateFolder 创建文件夹【Beta版本】}({@link CreateFolderRequest 请求参数}): {@link CreateFolderResponse 返回参数} */
   CreateFolder(data: CreateFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFolderResponse>;
-  /** 资源管理将cos资源绑定到wedata */
+  /** {@link CreateOrUpdateResource 资源管理将cos资源绑定到wedata}({@link CreateOrUpdateResourceRequest 请求参数}): {@link CreateOrUpdateResourceResponse 返回参数} */
   CreateOrUpdateResource(data?: CreateOrUpdateResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrUpdateResourceResponse>;
-  /** 创建任务【Beta版本】 */
+  /** {@link CreateTask 创建任务【Beta版本】}({@link CreateTaskRequest 请求参数}): {@link CreateTaskResponse 返回参数} */
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
-  /** 创建工作流【Beta版本】 */
+  /** {@link CreateWorkflow 创建工作流【Beta版本】}({@link CreateWorkflowRequest 请求参数}): {@link CreateWorkflowResponse 返回参数} */
   CreateWorkflow(data: CreateWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowResponse>;
-  /** 删除用户自定义函数 */
+  /** {@link DeleteCustomFunction 删除用户自定义函数}({@link DeleteCustomFunctionRequest 请求参数}): {@link DeleteCustomFunctionResponse 返回参数} */
   DeleteCustomFunction(data: DeleteCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomFunctionResponse>;
-  /** 数据源管理-删除数据源【Beta版本】 */
+  /** {@link DeleteDataSources 数据源管理-删除数据源【Beta版本】}({@link DeleteDataSourcesRequest 请求参数}): {@link DeleteDataSourcesResponse 返回参数} */
   DeleteDataSources(data: DeleteDataSourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataSourcesResponse>;
-  /** 删除文件夹【Beta版本】 */
+  /** {@link DeleteFolder 删除文件夹【Beta版本】}({@link DeleteFolderRequest 请求参数}): {@link DeleteFolderResponse 返回参数} */
   DeleteFolder(data: DeleteFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFolderResponse>;
-  /** 删除资源 */
+  /** {@link DeleteResource 删除资源}({@link DeleteResourceRequest 请求参数}): {@link DeleteResourceResponse 返回参数} */
   DeleteResource(data?: DeleteResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceResponse>;
-  /** 删除工作流【Beta版本】 */
+  /** {@link DeleteWorkflowNew 删除工作流【Beta版本】}({@link DeleteWorkflowNewRequest 请求参数}): {@link DeleteWorkflowNewResponse 返回参数} */
   DeleteWorkflowNew(data: DeleteWorkflowNewRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkflowNewResponse>;
-  /** 数据源管理-查询数据源分页列表【Beta版本】 */
+  /** {@link DescribeDataSourceList 数据源管理-查询数据源分页列表【Beta版本】}({@link DescribeDataSourceListRequest 请求参数}): {@link DescribeDataSourceListResponse 返回参数} */
   DescribeDataSourceList(data?: DescribeDataSourceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSourceListResponse>;
-  /** 查看数据源列表不带额外信息【Beta版本】 */
+  /** {@link DescribeDataSourceWithoutInfo 查看数据源列表不带额外信息【Beta版本】}({@link DescribeDataSourceWithoutInfoRequest 请求参数}): {@link DescribeDataSourceWithoutInfoResponse 返回参数} */
   DescribeDataSourceWithoutInfo(data?: DescribeDataSourceWithoutInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSourceWithoutInfoResponse>;
-  /** 数据源管理-数据源详情【Beta版本】 */
+  /** {@link DescribeDatasource 数据源管理-数据源详情【Beta版本】}({@link DescribeDatasourceRequest 请求参数}): {@link DescribeDatasourceResponse 返回参数} */
   DescribeDatasource(data: DescribeDatasourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasourceResponse>;
-  /** 任务运维-根据层级查找上-下游任务节点【Beta版本】 */
+  /** {@link DescribeDependTasksNew 任务运维-根据层级查找上-下游任务节点【Beta版本】}({@link DescribeDependTasksNewRequest 请求参数}): {@link DescribeDependTasksNewResponse 返回参数} */
   DescribeDependTasksNew(data: DescribeDependTasksNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDependTasksNewResponse>;
-  /** 拉取文件夹目录【Beta版本】 */
+  /** {@link DescribeFolderList 拉取文件夹目录【Beta版本】}({@link DescribeFolderListRequest 请求参数}): {@link DescribeFolderListResponse 返回参数} */
   DescribeFolderList(data: DescribeFolderListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFolderListResponse>;
-  /** 拉取文件夹下的工作流【Beta版本】 */
+  /** {@link DescribeFolderWorkflowList 拉取文件夹下的工作流【Beta版本】}({@link DescribeFolderWorkflowListRequest 请求参数}): {@link DescribeFolderWorkflowListResponse 返回参数} */
   DescribeFolderWorkflowList(data: DescribeFolderWorkflowListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFolderWorkflowListResponse>;
-  /** 查询函数分类 */
+  /** {@link DescribeFunctionKinds 查询函数分类}({@link DescribeFunctionKindsRequest 请求参数}): {@link DescribeFunctionKindsResponse 返回参数} */
   DescribeFunctionKinds(data?: DescribeFunctionKindsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionKindsResponse>;
-  /** 查询函数类型 */
+  /** {@link DescribeFunctionTypes 查询函数类型}({@link DescribeFunctionTypesRequest 请求参数}): {@link DescribeFunctionTypesResponse 返回参数} */
   DescribeFunctionTypes(data?: DescribeFunctionTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionTypesResponse>;
-  /** 获取实例日志列表【Beta版本】 */
+  /** {@link DescribeInstanceLogs 获取实例日志列表【Beta版本】}({@link DescribeInstanceLogsRequest 请求参数}): {@link DescribeInstanceLogsResponse 返回参数} */
   DescribeInstanceLogs(data: DescribeInstanceLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLogsResponse>;
-  /** 查询全量函数（层级化）接口 */
+  /** {@link DescribeOrganizationalFunctions 查询全量函数（层级化）接口}({@link DescribeOrganizationalFunctionsRequest 请求参数}): {@link DescribeOrganizationalFunctionsResponse 返回参数} */
   DescribeOrganizationalFunctions(data: DescribeOrganizationalFunctionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationalFunctionsResponse>;
-  /** 获取项目信息 */
+  /** {@link DescribeProject 获取项目信息}({@link DescribeProjectRequest 请求参数}): {@link DescribeProjectResponse 返回参数} */
   DescribeProject(data?: DescribeProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectResponse>;
-  /** 查询任务实例的关联实例列表 */
+  /** {@link DescribeRelatedInstances 查询任务实例的关联实例列表}({@link DescribeRelatedInstancesRequest 请求参数}): {@link DescribeRelatedInstancesResponse 返回参数} */
   DescribeRelatedInstances(data: DescribeRelatedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelatedInstancesResponse>;
-  /** 获取资源管理目录树 */
+  /** {@link DescribeResourceManagePathTrees 获取资源管理目录树}({@link DescribeResourceManagePathTreesRequest 请求参数}): {@link DescribeResourceManagePathTreesResponse 返回参数} */
   DescribeResourceManagePathTrees(data?: DescribeResourceManagePathTreesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceManagePathTreesResponse>;
-  /** 查询任务具体详情【Beta版本】 */
+  /** {@link DescribeTaskDetail 查询任务具体详情【Beta版本】}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** 查询任务实例列表 */
+  /** {@link DescribeTaskInstances 查询任务实例列表}({@link DescribeTaskInstancesRequest 请求参数}): {@link DescribeTaskInstancesResponse 返回参数} */
   DescribeTaskInstances(data: DescribeTaskInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskInstancesResponse>;
-  /** 查询任务脚本【Beta版本】 */
+  /** {@link DescribeTaskScript 查询任务脚本【Beta版本】}({@link DescribeTaskScriptRequest 请求参数}): {@link DescribeTaskScriptResponse 返回参数} */
   DescribeTaskScript(data: DescribeTaskScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskScriptResponse>;
-  /** 根据工作流分页查询任务【Beta版本】 */
+  /** {@link DescribeTasksByPage 根据工作流分页查询任务【Beta版本】}({@link DescribeTasksByPageRequest 请求参数}): {@link DescribeTasksByPageResponse 返回参数} */
   DescribeTasksByPage(data: DescribeTasksByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksByPageResponse>;
-  /** 实例批量置成功【Beta版本】 */
+  /** {@link ForceSucInstances 实例批量置成功【Beta版本】}({@link ForceSucInstancesRequest 请求参数}): {@link ForceSucInstancesResponse 返回参数} */
   ForceSucInstances(data: ForceSucInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ForceSucInstancesResponse>;
-  /** 批量冻结任务【Beta版本】 */
+  /** {@link FreezeTasks 批量冻结任务【Beta版本】}({@link FreezeTasksRequest 请求参数}): {@link FreezeTasksResponse 返回参数} */
   FreezeTasks(data: FreezeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<FreezeTasksResponse>;
-  /** 基于多个工作流进行批量冻结任务操作【Beta版本】 */
+  /** {@link FreezeTasksByMultiWorkflow 基于多个工作流进行批量冻结任务操作【Beta版本】}({@link FreezeTasksByMultiWorkflowRequest 请求参数}): {@link FreezeTasksByMultiWorkflowResponse 返回参数} */
   FreezeTasksByMultiWorkflow(data: FreezeTasksByMultiWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<FreezeTasksByMultiWorkflowResponse>;
-  /** 实例批量终止操作【Beta版本】 */
+  /** {@link KillInstances 实例批量终止操作【Beta版本】}({@link KillInstancesRequest 请求参数}): {@link KillInstancesResponse 返回参数} */
   KillInstances(data: KillInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<KillInstancesResponse>;
-  /** 批量补录任务【Beta版本】 */
+  /** {@link MakeUpTasksNew 批量补录任务【Beta版本】}({@link MakeUpTasksNewRequest 请求参数}): {@link MakeUpTasksNewResponse 返回参数} */
   MakeUpTasksNew(data: MakeUpTasksNewRequest, config?: AxiosRequestConfig): AxiosPromise<MakeUpTasksNewResponse>;
-  /** 工作流任务补录【Beta版本】 */
+  /** {@link MakeUpWorkflowNew 工作流任务补录【Beta版本】}({@link MakeUpWorkflowNewRequest 请求参数}): {@link MakeUpWorkflowNewResponse 返回参数} */
   MakeUpWorkflowNew(data: MakeUpWorkflowNewRequest, config?: AxiosRequestConfig): AxiosPromise<MakeUpWorkflowNewResponse>;
-  /** 数据源管理-修改数据源【Beta版本】 */
+  /** {@link ModifyDataSource 数据源管理-修改数据源【Beta版本】}({@link ModifyDataSourceRequest 请求参数}): {@link ModifyDataSourceResponse 返回参数} */
   ModifyDataSource(data: ModifyDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataSourceResponse>;
-  /** 文件夹更新【Beta版本】 */
+  /** {@link ModifyFolder 文件夹更新【Beta版本】}({@link ModifyFolderRequest 请求参数}): {@link ModifyFolderResponse 返回参数} */
   ModifyFolder(data: ModifyFolderRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFolderResponse>;
-  /** 更新任务【Beta版本】 */
+  /** {@link ModifyTaskInfo 更新任务【Beta版本】}({@link ModifyTaskInfoRequest 请求参数}): {@link ModifyTaskInfoResponse 返回参数} */
   ModifyTaskInfo(data: ModifyTaskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskInfoResponse>;
-  /** 添加父任务依赖【Beta版本】 */
+  /** {@link ModifyTaskLinks 添加父任务依赖【Beta版本】}({@link ModifyTaskLinksRequest 请求参数}): {@link ModifyTaskLinksResponse 返回参数} */
   ModifyTaskLinks(data: ModifyTaskLinksRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskLinksResponse>;
-  /** 修改任务脚本【Beta版本】 */
+  /** {@link ModifyTaskScript 修改任务脚本【Beta版本】}({@link ModifyTaskScriptRequest 请求参数}): {@link ModifyTaskScriptResponse 返回参数} */
   ModifyTaskScript(data: ModifyTaskScriptRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskScriptResponse>;
-  /** 更新工作流【Beta版本】 */
+  /** {@link ModifyWorkflowInfo 更新工作流【Beta版本】}({@link ModifyWorkflowInfoRequest 请求参数}): {@link ModifyWorkflowInfoResponse 返回参数} */
   ModifyWorkflowInfo(data: ModifyWorkflowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkflowInfoResponse>;
-  /** 更新工作流调度【Beta版本】 */
+  /** {@link ModifyWorkflowSchedule 更新工作流调度【Beta版本】}({@link ModifyWorkflowScheduleRequest 请求参数}): {@link ModifyWorkflowScheduleResponse 返回参数} */
   ModifyWorkflowSchedule(data: ModifyWorkflowScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkflowScheduleResponse>;
-  /** 注册事件【Beta版本】 */
+  /** {@link RegisterEvent 注册事件【Beta版本】}({@link RegisterEventRequest 请求参数}): {@link RegisterEventResponse 返回参数} */
   RegisterEvent(data: RegisterEventRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterEventResponse>;
-  /** 注册事件监听器【Beta版本】 */
+  /** {@link RegisterEventListener 注册事件监听器【Beta版本】}({@link RegisterEventListenerRequest 请求参数}): {@link RegisterEventListenerResponse 返回参数} */
   RegisterEventListener(data: RegisterEventListenerRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterEventListenerResponse>;
-  /** 实例批量重跑【Beta版本】 */
+  /** {@link RerunInstances 实例批量重跑【Beta版本】}({@link RerunInstancesRequest 请求参数}): {@link RerunInstancesResponse 返回参数} */
   RerunInstances(data: RerunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RerunInstancesResponse>;
-  /** 运行任务【Beta版本】 */
+  /** {@link RunTask 运行任务【Beta版本】}({@link RunTaskRequest 请求参数}): {@link RunTaskResponse 返回参数} */
   RunTask(data: RunTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RunTaskResponse>;
-  /** 保存用户自定义函数 */
+  /** {@link SaveCustomFunction 保存用户自定义函数}({@link SaveCustomFunctionRequest 请求参数}): {@link SaveCustomFunctionResponse 返回参数} */
   SaveCustomFunction(data: SaveCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<SaveCustomFunctionResponse>;
-  /** 设置任务告警【Beta版本】 */
+  /** {@link SetTaskAlarmNew 设置任务告警【Beta版本】}({@link SetTaskAlarmNewRequest 请求参数}): {@link SetTaskAlarmNewResponse 返回参数} */
   SetTaskAlarmNew(data: SetTaskAlarmNewRequest, config?: AxiosRequestConfig): AxiosPromise<SetTaskAlarmNewResponse>;
-  /** 提交自定义函数 */
+  /** {@link SubmitCustomFunction 提交自定义函数}({@link SubmitCustomFunctionRequest 请求参数}): {@link SubmitCustomFunctionResponse 返回参数} */
   SubmitCustomFunction(data: SubmitCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitCustomFunctionResponse>;
-  /** 提交任务【Beta版本】 */
+  /** {@link SubmitTask 提交任务【Beta版本】}({@link SubmitTaskRequest 请求参数}): {@link SubmitTaskResponse 返回参数} */
   SubmitTask(data: SubmitTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTaskResponse>;
-  /** 提交工作流【Beta版本】 */
+  /** {@link SubmitWorkflow 提交工作流【Beta版本】}({@link SubmitWorkflowRequest 请求参数}): {@link SubmitWorkflowResponse 返回参数} */
   SubmitWorkflow(data: SubmitWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitWorkflowResponse>;
-  /** 触发事件【Beta版本】 */
+  /** {@link TriggerEvent 触发事件【Beta版本】}({@link TriggerEventRequest 请求参数}): {@link TriggerEventResponse 返回参数} */
   TriggerEvent(data: TriggerEventRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerEventResponse>;
 }
 

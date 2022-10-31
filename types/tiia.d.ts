@@ -632,46 +632,46 @@ declare interface SearchImageResponse {
   RequestId?: string;
 }
 
-/** [图像分析](https://cloud.tencent.com/document/product/865) */
+/** {@link Tiia 图像分析} */
 declare interface Tiia {
   (): Versions;
-  /** 图像质量评估 */
+  /** {@link AssessQuality 图像质量评估}({@link AssessQualityRequest 请求参数}): {@link AssessQualityResponse 返回参数} */
   AssessQuality(data?: AssessQualityRequest, config?: AxiosRequestConfig): AxiosPromise<AssessQualityResponse>;
-  /** 创建图片库 */
+  /** {@link CreateGroup 创建图片库}({@link CreateGroupRequest 请求参数}): {@link CreateGroupResponse 返回参数} */
   CreateGroup(data: CreateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupResponse>;
-  /** 创建图片 */
+  /** {@link CreateImage 创建图片}({@link CreateImageRequest 请求参数}): {@link CreateImageResponse 返回参数} */
   CreateImage(data: CreateImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageResponse>;
-  /** 图片智能裁剪 */
+  /** {@link CropImage 图片智能裁剪}({@link CropImageRequest 请求参数}): {@link CropImageResponse 返回参数} */
   CropImage(data: CropImageRequest, config?: AxiosRequestConfig): AxiosPromise<CropImageResponse>;
-  /** 删除图片 */
+  /** {@link DeleteImages 删除图片}({@link DeleteImagesRequest 请求参数}): {@link DeleteImagesResponse 返回参数} */
   DeleteImages(data: DeleteImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImagesResponse>;
-  /** 查询图片库 */
+  /** {@link DescribeGroups 查询图片库}({@link DescribeGroupsRequest 请求参数}): {@link DescribeGroupsResponse 返回参数} */
   DescribeGroups(data?: DescribeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsResponse>;
-  /** 查询图片信息 */
+  /** {@link DescribeImages 查询图片信息}({@link DescribeImagesRequest 请求参数}): {@link DescribeImagesResponse 返回参数} */
   DescribeImages(data: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
-  /** 恶心检测 */
+  /** {@link DetectDisgust 恶心检测}({@link DetectDisgustRequest 请求参数}): {@link DetectDisgustResponse 返回参数} */
   DetectDisgust(data?: DetectDisgustRequest, config?: AxiosRequestConfig): AxiosPromise<DetectDisgustResponse>;
-  /** 文件封识别 */
+  /** {@link DetectEnvelope 文件封识别}({@link DetectEnvelopeRequest 请求参数}): {@link DetectEnvelopeResponse 返回参数} */
   DetectEnvelope(data?: DetectEnvelopeRequest, config?: AxiosRequestConfig): AxiosPromise<DetectEnvelopeResponse>;
-  /** 图像标签 */
+  /** {@link DetectLabel 图像标签}({@link DetectLabelRequest 请求参数}): {@link DetectLabelResponse 返回参数} */
   DetectLabel(data?: DetectLabelRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLabelResponse>;
-  /** 图像标签测试接口 */
+  /** {@link DetectLabelBeta 图像标签测试接口}({@link DetectLabelBetaRequest 请求参数}): {@link DetectLabelBetaResponse 返回参数} */
   DetectLabelBeta(data?: DetectLabelBetaRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLabelBetaResponse>;
-  /** 通用图像标签 */
+  /** {@link DetectLabelPro 通用图像标签}({@link DetectLabelProRequest 请求参数}): {@link DetectLabelProResponse 返回参数} */
   DetectLabelPro(data?: DetectLabelProRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLabelProResponse>;
-  /** 不良行为识别 */
+  /** {@link DetectMisbehavior 不良行为识别}({@link DetectMisbehaviorRequest 请求参数}): {@link DetectMisbehaviorResponse 返回参数} */
   DetectMisbehavior(data?: DetectMisbehaviorRequest, config?: AxiosRequestConfig): AxiosPromise<DetectMisbehaviorResponse>;
-  /** 商品识别 */
+  /** {@link DetectProduct 商品识别}({@link DetectProductRequest 请求参数}): {@link DetectProductResponse 返回参数} */
   DetectProduct(data?: DetectProductRequest, config?: AxiosRequestConfig): AxiosPromise<DetectProductResponse>;
-  /** 商品识别-微信识物版 */
+  /** {@link DetectProductBeta 商品识别-微信识物版}({@link DetectProductBetaRequest 请求参数}): {@link DetectProductBetaResponse 返回参数} */
   DetectProductBeta(data?: DetectProductBetaRequest, config?: AxiosRequestConfig): AxiosPromise<DetectProductBetaResponse>;
-  /** 图像清晰度增强 */
+  /** {@link EnhanceImage 图像清晰度增强}({@link EnhanceImageRequest 请求参数}): {@link EnhanceImageResponse 返回参数} */
   EnhanceImage(data?: EnhanceImageRequest, config?: AxiosRequestConfig): AxiosPromise<EnhanceImageResponse>;
-  /** 车辆识别 */
+  /** {@link RecognizeCar 车辆识别}({@link RecognizeCarRequest 请求参数}): {@link RecognizeCarResponse 返回参数} */
   RecognizeCar(data?: RecognizeCarRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeCarResponse>;
-  /** 车辆识别（增强版） */
+  /** {@link RecognizeCarPro 车辆识别（增强版）}({@link RecognizeCarProRequest 请求参数}): {@link RecognizeCarProResponse 返回参数} */
   RecognizeCarPro(data?: RecognizeCarProRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeCarProResponse>;
-  /** 检索图片 */
+  /** {@link SearchImage 检索图片}({@link SearchImageRequest 请求参数}): {@link SearchImageResponse 返回参数} */
   SearchImage(data: SearchImageRequest, config?: AxiosRequestConfig): AxiosPromise<SearchImageResponse>;
 }
 

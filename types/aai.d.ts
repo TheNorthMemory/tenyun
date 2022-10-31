@@ -116,13 +116,13 @@ declare interface TextToVoiceResponse {
 
 declare interface Aai {
   (): Versions;
-  /** 智能闲聊 */
+  /** {@link Chat 智能闲聊}({@link ChatRequest 请求参数}): {@link ChatResponse 返回参数} */
   Chat(data: ChatRequest, config?: AxiosRequestConfig): AxiosPromise<ChatResponse>;
-  /** 一句话识别 */
+  /** {@link SentenceRecognition 一句话识别}({@link SentenceRecognitionRequest 请求参数}): {@link SentenceRecognitionResponse 返回参数} */
   SentenceRecognition(data: SentenceRecognitionRequest, config?: AxiosRequestConfig): AxiosPromise<SentenceRecognitionResponse>;
-  /** 同传 */
+  /** {@link SimultaneousInterpreting 同传}({@link SimultaneousInterpretingRequest 请求参数}): {@link SimultaneousInterpretingResponse 返回参数} */
   SimultaneousInterpreting(data: SimultaneousInterpretingRequest, config?: AxiosRequestConfig): AxiosPromise<SimultaneousInterpretingResponse>;
-  /** 语音合成 */
+  /** {@link TextToVoice 语音合成}({@link TextToVoiceRequest 请求参数}): {@link TextToVoiceResponse 返回参数} */
   TextToVoice(data: TextToVoiceRequest, config?: AxiosRequestConfig): AxiosPromise<TextToVoiceResponse>;
 }
 

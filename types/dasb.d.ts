@@ -734,56 +734,56 @@ declare interface ModifyUserResponse {
   RequestId?: string;
 }
 
-/** [堡垒机](https://cloud.tencent.com/document/product/1025) */
+/** {@link Dasb T-Sec-堡垒机（BH）} */
 declare interface Dasb {
   (): Versions;
-  /** 添加资产组成员 */
+  /** {@link AddDeviceGroupMembers 添加资产组成员}({@link AddDeviceGroupMembersRequest 请求参数}): {@link AddDeviceGroupMembersResponse 返回参数} */
   AddDeviceGroupMembers(data: AddDeviceGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<AddDeviceGroupMembersResponse>;
-  /** 添加用户组成员 */
+  /** {@link AddUserGroupMembers 添加用户组成员}({@link AddUserGroupMembersRequest 请求参数}): {@link AddUserGroupMembersResponse 返回参数} */
   AddUserGroupMembers(data: AddUserGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserGroupMembersResponse>;
-  /** 修改资产绑定的堡垒机服务 */
+  /** {@link BindDeviceResource 修改资产绑定的堡垒机服务}({@link BindDeviceResourceRequest 请求参数}): {@link BindDeviceResourceResponse 返回参数} */
   BindDeviceResource(data: BindDeviceResourceRequest, config?: AxiosRequestConfig): AxiosPromise<BindDeviceResourceResponse>;
-  /** 新建访问权限 */
+  /** {@link CreateAcl 新建访问权限}({@link CreateAclRequest 请求参数}): {@link CreateAclResponse 返回参数} */
   CreateAcl(data: CreateAclRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAclResponse>;
-  /** 新建资产组 */
+  /** {@link CreateDeviceGroup 新建资产组}({@link CreateDeviceGroupRequest 请求参数}): {@link CreateDeviceGroupResponse 返回参数} */
   CreateDeviceGroup(data: CreateDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceGroupResponse>;
-  /** 新建用户 */
+  /** {@link CreateUser 新建用户}({@link CreateUserRequest 请求参数}): {@link CreateUserResponse 返回参数} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
-  /** 新建用户组 */
+  /** {@link CreateUserGroup 新建用户组}({@link CreateUserGroupRequest 请求参数}): {@link CreateUserGroupResponse 返回参数} */
   CreateUserGroup(data: CreateUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserGroupResponse>;
-  /** 删除访问权限 */
+  /** {@link DeleteAcls 删除访问权限}({@link DeleteAclsRequest 请求参数}): {@link DeleteAclsResponse 返回参数} */
   DeleteAcls(data: DeleteAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAclsResponse>;
-  /** 删除资产组成员 */
+  /** {@link DeleteDeviceGroupMembers 删除资产组成员}({@link DeleteDeviceGroupMembersRequest 请求参数}): {@link DeleteDeviceGroupMembersResponse 返回参数} */
   DeleteDeviceGroupMembers(data: DeleteDeviceGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceGroupMembersResponse>;
-  /** 删除资产组 */
+  /** {@link DeleteDeviceGroups 删除资产组}({@link DeleteDeviceGroupsRequest 请求参数}): {@link DeleteDeviceGroupsResponse 返回参数} */
   DeleteDeviceGroups(data: DeleteDeviceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceGroupsResponse>;
-  /** 删除用户组成员 */
+  /** {@link DeleteUserGroupMembers 删除用户组成员}({@link DeleteUserGroupMembersRequest 请求参数}): {@link DeleteUserGroupMembersResponse 返回参数} */
   DeleteUserGroupMembers(data: DeleteUserGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserGroupMembersResponse>;
-  /** 删除用户组 */
+  /** {@link DeleteUserGroups 删除用户组}({@link DeleteUserGroupsRequest 请求参数}): {@link DeleteUserGroupsResponse 返回参数} */
   DeleteUserGroups(data: DeleteUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserGroupsResponse>;
-  /** 删除用户 */
+  /** {@link DeleteUsers 删除用户}({@link DeleteUsersRequest 请求参数}): {@link DeleteUsersResponse 返回参数} */
   DeleteUsers(data: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
-  /** 查询访问权限列表 */
+  /** {@link DescribeAcls 查询访问权限列表}({@link DescribeAclsRequest 请求参数}): {@link DescribeAclsResponse 返回参数} */
   DescribeAcls(data?: DescribeAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAclsResponse>;
-  /** 数盾-DASB-获取镜像列表 */
+  /** {@link DescribeDasbImageIds 数盾-DASB-获取镜像列表}({@link DescribeDasbImageIdsRequest 请求参数}): {@link DescribeDasbImageIdsResponse 返回参数} */
   DescribeDasbImageIds(data?: DescribeDasbImageIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDasbImageIdsResponse>;
-  /** 查询资产组成员列表 */
+  /** {@link DescribeDeviceGroupMembers 查询资产组成员列表}({@link DescribeDeviceGroupMembersRequest 请求参数}): {@link DescribeDeviceGroupMembersResponse 返回参数} */
   DescribeDeviceGroupMembers(data: DescribeDeviceGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceGroupMembersResponse>;
-  /** 查询资产组列表 */
+  /** {@link DescribeDeviceGroups 查询资产组列表}({@link DescribeDeviceGroupsRequest 请求参数}): {@link DescribeDeviceGroupsResponse 返回参数} */
   DescribeDeviceGroups(data?: DescribeDeviceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceGroupsResponse>;
-  /** 查询资产列表 */
+  /** {@link DescribeDevices 查询资产列表}({@link DescribeDevicesRequest 请求参数}): {@link DescribeDevicesResponse 返回参数} */
   DescribeDevices(data?: DescribeDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesResponse>;
-  /** 查询堡垒机服务信息 */
+  /** {@link DescribeResources 查询堡垒机服务信息}({@link DescribeResourcesRequest 请求参数}): {@link DescribeResourcesResponse 返回参数} */
   DescribeResources(data?: DescribeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesResponse>;
-  /** 查询用户组成员列表 */
+  /** {@link DescribeUserGroupMembers 查询用户组成员列表}({@link DescribeUserGroupMembersRequest 请求参数}): {@link DescribeUserGroupMembersResponse 返回参数} */
   DescribeUserGroupMembers(data: DescribeUserGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupMembersResponse>;
-  /** 查询用户组列表 */
+  /** {@link DescribeUserGroups 查询用户组列表}({@link DescribeUserGroupsRequest 请求参数}): {@link DescribeUserGroupsResponse 返回参数} */
   DescribeUserGroups(data?: DescribeUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupsResponse>;
-  /** 查询用户列表 */
+  /** {@link DescribeUsers 查询用户列表}({@link DescribeUsersRequest 请求参数}): {@link DescribeUsersResponse 返回参数} */
   DescribeUsers(data?: DescribeUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersResponse>;
-  /** 修改访问权限 */
+  /** {@link ModifyAcl 修改访问权限}({@link ModifyAclRequest 请求参数}): {@link ModifyAclResponse 返回参数} */
   ModifyAcl(data: ModifyAclRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAclResponse>;
-  /** 修改用户信息 */
+  /** {@link ModifyUser 修改用户信息}({@link ModifyUserRequest 请求参数}): {@link ModifyUserResponse 返回参数} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
 }
 

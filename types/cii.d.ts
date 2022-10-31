@@ -594,40 +594,40 @@ declare namespace V20201210 {
   }
 }
 
-/** [智能保险助手](https://cloud.tencent.com/document/product/1368) */
+/** {@link Cii 智能保险助手} */
 declare interface Cii {
   (): Versions;
-  /** 结构化增量子任务 */
+  /** {@link AddSubStructureTasks 结构化增量子任务}({@link AddSubStructureTasksRequest 请求参数}): {@link AddSubStructureTasksResponse 返回参数} */
   AddSubStructureTasks(data: AddSubStructureTasksRequest, config?: AxiosRequestConfig): AxiosPromise<AddSubStructureTasksResponse>;
-  /** 新建自动分类结构化任务 */
+  /** {@link CreateAutoClassifyStructureTask 新建自动分类结构化任务}({@link CreateAutoClassifyStructureTaskRequest 请求参数}): {@link CreateAutoClassifyStructureTaskResponse 返回参数} */
   CreateAutoClassifyStructureTask(data: CreateAutoClassifyStructureTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoClassifyStructureTaskResponse>;
-  /** 新建结构化任务 */
+  /** {@link CreateStructureTask 新建结构化任务}({@link CreateStructureTaskRequest 请求参数}): {@link CreateStructureTaskResponse 返回参数} */
   CreateStructureTask(data: CreateStructureTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStructureTaskResponse>;
-  /** 根据结构化任务ID创建核保任务 */
+  /** {@link CreateUnderwriteTaskById 根据结构化任务ID创建核保任务}({@link CreateUnderwriteTaskByIdRequest 请求参数}): {@link CreateUnderwriteTaskByIdResponse 返回参数} */
   CreateUnderwriteTaskById(data: CreateUnderwriteTaskByIdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUnderwriteTaskByIdResponse>;
-  /** 查询机器核保任务数据 */
+  /** {@link DescribeMachineUnderwrite 查询机器核保任务数据}({@link DescribeMachineUnderwriteRequest 请求参数}): {@link DescribeMachineUnderwriteResponse 返回参数} */
   DescribeMachineUnderwrite(data: DescribeMachineUnderwriteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineUnderwriteResponse>;
-  /** 获取图片质量分 */
+  /** {@link DescribeQualityScore 获取图片质量分}({@link DescribeQualityScoreRequest 请求参数}): {@link DescribeQualityScoreResponse 返回参数} */
   DescribeQualityScore(data: DescribeQualityScoreRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQualityScoreResponse>;
-  /** 报告自动分类 */
+  /** {@link DescribeReportClassify 报告自动分类}({@link DescribeReportClassifyRequest 请求参数}): {@link DescribeReportClassifyResponse 返回参数} */
   DescribeReportClassify(data: DescribeReportClassifyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportClassifyResponse>;
-  /** 结构化对比查询 */
+  /** {@link DescribeStructCompareData 结构化对比查询}({@link DescribeStructCompareDataRequest 请求参数}): {@link DescribeStructCompareDataResponse 返回参数} */
   DescribeStructCompareData(data?: DescribeStructCompareDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStructCompareDataResponse>;
-  /** 结构化复核差异查询 */
+  /** {@link DescribeStructureDifference 结构化复核差异查询}({@link DescribeStructureDifferenceRequest 请求参数}): {@link DescribeStructureDifferenceResponse 返回参数} */
   DescribeStructureDifference(data?: DescribeStructureDifferenceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStructureDifferenceResponse>;
-  /** 查询结构化结果接口 */
+  /** {@link DescribeStructureResult 查询结构化结果接口}({@link DescribeStructureResultRequest 请求参数}): {@link DescribeStructureResultResponse 返回参数} */
   DescribeStructureResult(data: DescribeStructureResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStructureResultResponse>;
-  /** 获取结构化结果接口 */
+  /** {@link DescribeStructureTaskResult 获取结构化结果接口}({@link DescribeStructureTaskResultRequest 请求参数}): {@link DescribeStructureTaskResultResponse 返回参数} */
   DescribeStructureTaskResult(data: DescribeStructureTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStructureTaskResultResponse>;
-  /** 查询核保任务数据 */
+  /** {@link DescribeUnderwriteTask 查询核保任务数据}({@link DescribeUnderwriteTaskRequest 请求参数}): {@link DescribeUnderwriteTaskResponse 返回参数} */
   DescribeUnderwriteTask(data?: DescribeUnderwriteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnderwriteTaskResponse>;
-  /** 上传医疗影像文件 */
+  /** {@link UploadMedicalFile 上传医疗影像文件}({@link UploadMedicalFileRequest 请求参数}): {@link UploadMedicalFileResponse 返回参数} */
   UploadMedicalFile(data?: UploadMedicalFileRequest, config?: AxiosRequestConfig): AxiosPromise<UploadMedicalFileResponse>;
-  /** 新建结构化任务 */
+  /** {@link V20201210.CreateStructureTask 新建结构化任务}({@link V20201210.CreateStructureTaskRequest 请求参数}): {@link V20201210.CreateStructureTaskResponse 返回参数} */
   CreateStructureTask(data: V20201210.CreateStructureTaskRequest, config: AxiosRequestConfig & V20201210.VersionHeader): AxiosPromise<V20201210.CreateStructureTaskResponse>;
-  /** 结构化对比查询 */
+  /** {@link V20201210.DescribeStructCompareData 结构化对比查询}({@link V20201210.DescribeStructCompareDataRequest 请求参数}): {@link V20201210.DescribeStructCompareDataResponse 返回参数} */
   DescribeStructCompareData(data: V20201210.DescribeStructCompareDataRequest, config: AxiosRequestConfig & V20201210.VersionHeader): AxiosPromise<V20201210.DescribeStructCompareDataResponse>;
-  /** 获取结构化结果接口 */
+  /** {@link V20201210.DescribeStructureTaskResult 获取结构化结果接口}({@link V20201210.DescribeStructureTaskResultRequest 请求参数}): {@link V20201210.DescribeStructureTaskResultResponse 返回参数} */
   DescribeStructureTaskResult(data: V20201210.DescribeStructureTaskResultRequest, config: AxiosRequestConfig & V20201210.VersionHeader): AxiosPromise<V20201210.DescribeStructureTaskResultResponse>;
 }
 

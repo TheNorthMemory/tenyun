@@ -88,10 +88,10 @@ declare interface QueryActivityAntiRushResponse {
   RequestId?: string;
 }
 
-/** [活动防刷](https://cloud.tencent.com/document/product/1189) */
+/** {@link Aa 活动防刷} */
 declare interface Aa {
   (): Versions;
-  /** 活动防刷 */
+  /** {@link QueryActivityAntiRush 活动防刷}({@link QueryActivityAntiRushRequest 请求参数}): {@link QueryActivityAntiRushResponse 返回参数} */
   QueryActivityAntiRush(data: QueryActivityAntiRushRequest, config?: AxiosRequestConfig): AxiosPromise<QueryActivityAntiRushResponse>;
 }
 

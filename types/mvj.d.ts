@@ -36,10 +36,10 @@ declare interface MarketingValueJudgementResponse {
   RequestId?: string;
 }
 
-/** 营销价值判断 */
+/** {@link Mvj 营销价值判断} */
 declare interface Mvj {
   (): Versions;
-  /** 营销价值判断 */
+  /** {@link MarketingValueJudgement 营销价值判断}({@link MarketingValueJudgementRequest 请求参数}): {@link MarketingValueJudgementResponse 返回参数} */
   MarketingValueJudgement(data: MarketingValueJudgementRequest, config?: AxiosRequestConfig): AxiosPromise<MarketingValueJudgementResponse>;
 }
 

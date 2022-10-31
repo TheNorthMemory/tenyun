@@ -264,28 +264,28 @@ declare interface ResolveDomainResponse {
   RequestId?: string;
 }
 
-/** [SSL 证书监控](https://cloud.tencent.com/document/product/1084) */
+/** {@link Sslpod SSL证书监控SSLPod} */
 declare interface Sslpod {
   (): Versions;
-  /** 添加域名 */
+  /** {@link CreateDomain 添加域名}({@link CreateDomainRequest 请求参数}): {@link CreateDomainResponse 返回参数} */
   CreateDomain(data: CreateDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainResponse>;
-  /** 删除域名 */
+  /** {@link DeleteDomain 删除域名}({@link DeleteDomainRequest 请求参数}): {@link DeleteDomainResponse 返回参数} */
   DeleteDomain(data: DeleteDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainResponse>;
-  /** 仪表盘数据 */
+  /** {@link DescribeDashboard 仪表盘数据}({@link DescribeDashboardRequest 请求参数}): {@link DescribeDashboardResponse 返回参数} */
   DescribeDashboard(data?: DescribeDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDashboardResponse>;
-  /** 获取域名证书 */
+  /** {@link DescribeDomainCerts 获取域名证书}({@link DescribeDomainCertsRequest 请求参数}): {@link DescribeDomainCertsResponse 返回参数} */
   DescribeDomainCerts(data: DescribeDomainCertsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainCertsResponse>;
-  /** 获取账号的tags */
+  /** {@link DescribeDomainTags 获取账号的tags}({@link DescribeDomainTagsRequest 请求参数}): {@link DescribeDomainTagsResponse 返回参数} */
   DescribeDomainTags(data?: DescribeDomainTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainTagsResponse>;
-  /** 搜索域名 */
+  /** {@link DescribeDomains 搜索域名}({@link DescribeDomainsRequest 请求参数}): {@link DescribeDomainsResponse 返回参数} */
   DescribeDomains(data: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
-  /** 通知额度信息 */
+  /** {@link DescribeNoticeInfo 通知额度信息}({@link DescribeNoticeInfoRequest 请求参数}): {@link DescribeNoticeInfoResponse 返回参数} */
   DescribeNoticeInfo(data?: DescribeNoticeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNoticeInfoResponse>;
-  /** 修改域名tag */
+  /** {@link ModifyDomainTags 修改域名tag}({@link ModifyDomainTagsRequest 请求参数}): {@link ModifyDomainTagsResponse 返回参数} */
   ModifyDomainTags(data: ModifyDomainTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainTagsResponse>;
-  /** 重新检测域名 */
+  /** {@link RefreshDomain 重新检测域名}({@link RefreshDomainRequest 请求参数}): {@link RefreshDomainResponse 返回参数} */
   RefreshDomain(data: RefreshDomainRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshDomainResponse>;
-  /** 域名解析 */
+  /** {@link ResolveDomain 域名解析}({@link ResolveDomainRequest 请求参数}): {@link ResolveDomainResponse 返回参数} */
   ResolveDomain(data: ResolveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ResolveDomainResponse>;
 }
 

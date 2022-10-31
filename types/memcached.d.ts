@@ -96,10 +96,10 @@ declare interface DescribeInstancesResponse {
   RequestId?: string;
 }
 
-/** [云数据库 Memcached](https://cloud.tencent.com/document/product/241) */
+/** {@link Memcached 云数据库Memcached} */
 declare interface Memcached {
   (): Versions;
-  /** 获取Cmem实例列表 */
+  /** {@link DescribeInstances 获取Cmem实例列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
 }
 

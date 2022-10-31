@@ -699,50 +699,50 @@ declare interface SmsSuccessResponse {
   Message: string;
 }
 
-/** 珠玑 */
+/** {@link Zj 珠玑} */
 declare interface Zj {
   (): Versions;
-  /** 添加短信人群包信息 */
+  /** {@link AddCrowdPackInfo 添加短信人群包信息}({@link AddCrowdPackInfoRequest 请求参数}): {@link AddCrowdPackInfoResponse 返回参数} */
   AddCrowdPackInfo(data: AddCrowdPackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddCrowdPackInfoResponse>;
-  /** 短信签名创建接口 */
+  /** {@link AddSmsSign 短信签名创建接口}({@link AddSmsSignRequest 请求参数}): {@link AddSmsSignResponse 返回参数} */
   AddSmsSign(data: AddSmsSignRequest, config?: AxiosRequestConfig): AxiosPromise<AddSmsSignResponse>;
-  /** 短信模板创建接口 */
+  /** {@link AddSmsTemplate 短信模板创建接口}({@link AddSmsTemplateRequest 请求参数}): {@link AddSmsTemplateResponse 返回参数} */
   AddSmsTemplate(data: AddSmsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<AddSmsTemplateResponse>;
-  /** 取消短信活动 */
+  /** {@link CancelCampaign 取消短信活动}({@link CancelCampaignRequest 请求参数}): {@link CancelCampaignResponse 返回参数} */
   CancelCampaign(data: CancelCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<CancelCampaignResponse>;
-  /** 创建短信活动 */
+  /** {@link CreateCampaign 创建短信活动}({@link CreateCampaignRequest 请求参数}): {@link CreateCampaignResponse 返回参数} */
   CreateCampaign(data: CreateCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCampaignResponse>;
-  /** 创建超级短信素材样例 */
+  /** {@link CreateMmsInstance 创建超级短信素材样例}({@link CreateMmsInstanceRequest 请求参数}): {@link CreateMmsInstanceResponse 返回参数} */
   CreateMmsInstance(data: CreateMmsInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMmsInstanceResponse>;
-  /** 删除人群包 */
+  /** {@link DelCrowdPack 删除人群包}({@link DelCrowdPackRequest 请求参数}): {@link DelCrowdPackResponse 返回参数} */
   DelCrowdPack(data: DelCrowdPackRequest, config?: AxiosRequestConfig): AxiosPromise<DelCrowdPackResponse>;
-  /** 删除短信模板 */
+  /** {@link DelTemplate 删除短信模板}({@link DelTemplateRequest 请求参数}): {@link DelTemplateResponse 返回参数} */
   DelTemplate(data: DelTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DelTemplateResponse>;
-  /** 删除超级短信样例 */
+  /** {@link DeleteMmsInstance 删除超级短信样例}({@link DeleteMmsInstanceRequest 请求参数}): {@link DeleteMmsInstanceResponse 返回参数} */
   DeleteMmsInstance(data: DeleteMmsInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMmsInstanceResponse>;
-  /** 获取彩信实例信息 */
+  /** {@link DescribeMmsInstanceInfo 获取彩信实例信息}({@link DescribeMmsInstanceInfoRequest 请求参数}): {@link DescribeMmsInstanceInfoResponse 返回参数} */
   DescribeMmsInstanceInfo(data: DescribeMmsInstanceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMmsInstanceInfoResponse>;
-  /** 获取彩信实例列表 */
+  /** {@link DescribeMmsInstanceList 获取彩信实例列表}({@link DescribeMmsInstanceListRequest 请求参数}): {@link DescribeMmsInstanceListResponse 返回参数} */
   DescribeMmsInstanceList(data: DescribeMmsInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMmsInstanceListResponse>;
-  /** 获取短信超短活动统计数据 */
+  /** {@link DescribeSmsCampaignStatistics 获取短信超短活动统计数据}({@link DescribeSmsCampaignStatisticsRequest 请求参数}): {@link DescribeSmsCampaignStatisticsResponse 返回参数} */
   DescribeSmsCampaignStatistics(data: DescribeSmsCampaignStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmsCampaignStatisticsResponse>;
-  /** 短信签名查询接口 */
+  /** {@link DescribeSmsSignList 短信签名查询接口}({@link DescribeSmsSignListRequest 请求参数}): {@link DescribeSmsSignListResponse 返回参数} */
   DescribeSmsSignList(data: DescribeSmsSignListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmsSignListResponse>;
-  /** 短信模板查询接口 */
+  /** {@link DescribeSmsTemplateList 短信模板查询接口}({@link DescribeSmsTemplateListRequest 请求参数}): {@link DescribeSmsTemplateListResponse 返回参数} */
   DescribeSmsTemplateList(data: DescribeSmsTemplateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmsTemplateListResponse>;
-  /** 获取人群包列表 */
+  /** {@link GetCrowdPackList 获取人群包列表}({@link GetCrowdPackListRequest 请求参数}): {@link GetCrowdPackListResponse 返回参数} */
   GetCrowdPackList(data: GetCrowdPackListRequest, config?: AxiosRequestConfig): AxiosPromise<GetCrowdPackListResponse>;
-  /** 获取短信人群包cos上传信息 */
+  /** {@link GetCrowdUploadInfo 获取短信人群包cos上传信息}({@link GetCrowdUploadInfoRequest 请求参数}): {@link GetCrowdUploadInfoResponse 返回参数} */
   GetCrowdUploadInfo(data: GetCrowdUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetCrowdUploadInfoResponse>;
-  /** 获取账号短信额度配置信息 */
+  /** {@link GetSmsAmountInfo 获取账号短信额度配置信息}({@link GetSmsAmountInfoRequest 请求参数}): {@link GetSmsAmountInfoResponse 返回参数} */
   GetSmsAmountInfo(data: GetSmsAmountInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetSmsAmountInfoResponse>;
-  /** 获取短信活动状态 */
+  /** {@link GetSmsCampaignStatus 获取短信活动状态}({@link GetSmsCampaignStatusRequest 请求参数}): {@link GetSmsCampaignStatusResponse 返回参数} */
   GetSmsCampaignStatus(data: GetSmsCampaignStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetSmsCampaignStatusResponse>;
-  /** 短信模板编辑接口 */
+  /** {@link ModifySmsTemplate 短信模板编辑接口}({@link ModifySmsTemplateRequest 请求参数}): {@link ModifySmsTemplateResponse 返回参数} */
   ModifySmsTemplate(data: ModifySmsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySmsTemplateResponse>;
-  /** 推送超级短信内容 */
+  /** {@link PushMmsContent 推送超级短信内容}({@link PushMmsContentRequest 请求参数}): {@link PushMmsContentResponse 返回参数} */
   PushMmsContent(data: PushMmsContentRequest, config?: AxiosRequestConfig): AxiosPromise<PushMmsContentResponse>;
-  /** 发送短信 */
+  /** {@link SendSms 发送短信}({@link SendSmsRequest 请求参数}): {@link SendSmsResponse 返回参数} */
   SendSms(data: SendSmsRequest, config?: AxiosRequestConfig): AxiosPromise<SendSmsResponse>;
 }
 

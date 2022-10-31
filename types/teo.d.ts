@@ -162,7 +162,7 @@ declare interface ApplicationProxyRule {
   Port: string[];
   /** 源站类型，取值有：custom：手动添加；origins：源站组。 */
   OriginType: string;
-  /** 源站信息：当OriginType=custom时，表示一个或多个源站，如：OriginValue=["8.8.8.8:80","9.9.9.9:80"]OriginValue=["test.com:80"]；当OriginType=origins时，要求有且仅有一个元素，表示源站组ID，如：OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。 */
+  /** 源站信息：当 OriginType 为 custom 时，表示一个或多个源站，如`["8.8.8.8","9.9.9.9"]` 或 `OriginValue=["test.com"]`；当 OriginType 为 origins 时，要求有且仅有一个元素，表示源站组ID，如`["origin-537f5b41-162a-11ed-abaa-525400c5da15"]`。 */
   OriginValue: string[];
   /** 规则ID。 */
   RuleId?: string;
@@ -172,6 +172,8 @@ declare interface ApplicationProxyRule {
   ForwardClientIp?: string;
   /** 是否开启会话保持，取值有：true：开启；false：关闭。默认值：false。 */
   SessionPersist?: boolean;
+  /** 源站端口，支持格式：单端口，如：80。端口段：81-82，表示81，82两个端口。 */
+  OriginPort?: string;
 }
 
 /** 站点归属信息 */
@@ -2313,16 +2315,18 @@ declare interface CreateApplicationProxyRuleRequest {
   ProxyId: string;
   /** 协议，取值有：TCP：TCP协议；UDP：UDP协议。 */
   Proto: string;
-  /** 源站类型，取值有：custom：手动添加；origins：源站组。 */
+  /** 端口，支持格式：80：80端口；81-90：81至90端口。 */
   Port: string[];
-  /** 源站类型，取值：custom：手动添加origins：源站组 */
+  /** 源站类型，取值有：custom：手动添加；origins：源站组。 */
   OriginType: string;
-  /** 源站信息：当OriginType=custom时，表示一个或多个源站，如：OriginValue=["8.8.8.8:80","9.9.9.9:80"]OriginValue=["test.com:80"]；当OriginType=origins时，要求有且仅有一个元素，表示源站组ID，如：OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。 */
+  /** 源站信息：当 OriginType 为 custom 时，表示一个或多个源站，如`["8.8.8.8","9.9.9.9"]` 或 `OriginValue=["test.com"]`；当 OriginType 为 origins 时，要求有且仅有一个元素，表示源站组ID，如`["origin-537f5b41-162a-11ed-abaa-525400c5da15"]`。 */
   OriginValue: string[];
   /** 传递客户端IP，取值有：TOA：TOA（仅Proto=TCP时可选）；PPV1：Proxy Protocol传递，协议版本V1（仅Proto=TCP时可选）；PPV2：Proxy Protocol传递，协议版本V2；OFF：不传递。默认值：OFF。 */
   ForwardClientIp?: string;
   /** 是否开启会话保持，取值有：true：开启；false：关闭。默认值：false。 */
   SessionPersist?: boolean;
+  /** 源站端口，支持格式：单端口：80；端口段：81-90，81至90端口。 */
+  OriginPort?: string;
 }
 
 declare interface CreateApplicationProxyRuleResponse {
@@ -4287,16 +4291,18 @@ declare interface ModifyApplicationProxyRuleRequest {
   RuleId: string;
   /** 源站类型，取值有：custom：手动添加；origins：源站组。不填保持原有值。 */
   OriginType: string;
-  /** 端口，支持格式：80：80端口81-90：81至90端口。不填保持原有值。 */
+  /** 端口，支持格式：80：80端口；81-90：81至90端口。 */
   Port: string[];
   /** 协议，取值有：TCP：TCP协议；UDP：UDP协议。不填保持原有值。 */
   Proto?: string;
-  /** 源站信息：当OriginType=custom时，表示一个或多个源站，如：OriginValue=["8.8.8.8:80","9.9.9.9:80"]OriginValue=["test.com:80"]；当OriginType=origins时，要求有且仅有一个元素，表示源站组ID，如：OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。不填保持原有值。 */
+  /** 源站信息：当 OriginType 为 custom 时，表示一个或多个源站，如`["8.8.8.8","9.9.9.9"]` 或 `OriginValue=["test.com"]`；当 OriginType 为 origins 时，要求有且仅有一个元素，表示源站组ID，如`["origin-537f5b41-162a-11ed-abaa-525400c5da15"]`。不填保持原有值。 */
   OriginValue?: string[];
   /** 传递客户端IP，取值有：TOA：TOA（仅Proto=TCP时可选）；PPV1：Proxy Protocol传递，协议版本V1（仅Proto=TCP时可选）；PPV2：Proxy Protocol传递，协议版本V2；OFF：不传递。不填保持原有值。 */
   ForwardClientIp?: string;
-  /** 是否开启会话保持，取值有：true：开启；false：关闭。不填保持原有值。 */
+  /** 是否开启会话保持，取值有：true：开启；false：关闭。不填为false。 */
   SessionPersist?: boolean;
+  /** 源站端口，支持格式：单端口：80；端口段：81-90，81至90端口。 */
+  OriginPort?: string;
 }
 
 declare interface ModifyApplicationProxyRuleResponse {
@@ -8886,450 +8892,450 @@ declare namespace V20220106 {
   }
 }
 
-/** [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) */
+/** {@link Teo 边缘安全加速平台} */
 declare interface Teo {
   (): Versions;
-  /** 校验证书 */
+  /** {@link CheckCertificate 校验证书}({@link CheckCertificateRequest 请求参数}): {@link CheckCertificateResponse 返回参数} */
   CheckCertificate(data: CheckCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCertificateResponse>;
-  /** 创建别称域名 */
+  /** {@link CreateAliasDomain 创建别称域名}({@link CreateAliasDomainRequest 请求参数}): {@link CreateAliasDomainResponse 返回参数} */
   CreateAliasDomain(data: CreateAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAliasDomainResponse>;
-  /** 创建应用代理 */
+  /** {@link CreateApplicationProxy 创建应用代理}({@link CreateApplicationProxyRequest 请求参数}): {@link CreateApplicationProxyResponse 返回参数} */
   CreateApplicationProxy(data: CreateApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationProxyResponse>;
-  /** 创建应用代理规则 */
+  /** {@link CreateApplicationProxyRule 创建应用代理规则}({@link CreateApplicationProxyRuleRequest 请求参数}): {@link CreateApplicationProxyRuleResponse 返回参数} */
   CreateApplicationProxyRule(data: CreateApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationProxyRuleResponse>;
-  /** 创建凭证 */
+  /** {@link CreateCredential 创建凭证}({@link CreateCredentialRequest 请求参数}): {@link CreateCredentialResponse 返回参数} */
   CreateCredential(data?: CreateCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCredentialResponse>;
-  /** 创建自定义页 */
+  /** {@link CreateCustomErrorPage 创建自定义页}({@link CreateCustomErrorPageRequest 请求参数}): {@link CreateCustomErrorPageResponse 返回参数} */
   CreateCustomErrorPage(data: CreateCustomErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomErrorPageResponse>;
-  /** 创建 DNS 记录 */
+  /** {@link CreateDnsRecord 创建 DNS 记录}({@link CreateDnsRecordRequest 请求参数}): {@link CreateDnsRecordResponse 返回参数} */
   CreateDnsRecord(data: CreateDnsRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDnsRecordResponse>;
-  /** 创建IP黑白名单列表 */
+  /** {@link CreateIpTableList 创建IP黑白名单列表}({@link CreateIpTableListRequest 请求参数}): {@link CreateIpTableListResponse 返回参数} */
   CreateIpTableList(data: CreateIpTableListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIpTableListResponse>;
-  /** 创建负载均衡 */
+  /** {@link CreateLoadBalancing 创建负载均衡}({@link CreateLoadBalancingRequest 请求参数}): {@link CreateLoadBalancingResponse 返回参数} */
   CreateLoadBalancing(data: CreateLoadBalancingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadBalancingResponse>;
-  /** 创建日志集 */
+  /** {@link CreateLogSet 创建日志集}({@link CreateLogSetRequest 请求参数}): {@link CreateLogSetResponse 返回参数} */
   CreateLogSet(data: CreateLogSetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogSetResponse>;
-  /** 创建推送任务 */
+  /** {@link CreateLogTopicTask 创建推送任务}({@link CreateLogTopicTaskRequest 请求参数}): {@link CreateLogTopicTaskResponse 返回参数} */
   CreateLogTopicTask(data: CreateLogTopicTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogTopicTaskResponse>;
-  /** 创建源站组 */
+  /** {@link CreateOriginGroup 创建源站组}({@link CreateOriginGroupRequest 请求参数}): {@link CreateOriginGroupResponse 返回参数} */
   CreateOriginGroup(data: CreateOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOriginGroupResponse>;
-  /** 为未购买套餐的站点购买套餐 */
+  /** {@link CreatePlanForZone 为未购买套餐的站点购买套餐}({@link CreatePlanForZoneRequest 请求参数}): {@link CreatePlanForZoneResponse 返回参数} */
   CreatePlanForZone(data: CreatePlanForZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePlanForZoneResponse>;
-  /** 创建预热任务 */
+  /** {@link CreatePrefetchTask 创建预热任务}({@link CreatePrefetchTaskRequest 请求参数}): {@link CreatePrefetchTaskResponse 返回参数} */
   CreatePrefetchTask(data: CreatePrefetchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrefetchTaskResponse>;
-  /** 创建清除缓存任务 */
+  /** {@link CreatePurgeTask 创建清除缓存任务}({@link CreatePurgeTaskRequest 请求参数}): {@link CreatePurgeTaskResponse 返回参数} */
   CreatePurgeTask(data: CreatePurgeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePurgeTaskResponse>;
-  /** 创建重放任务 */
+  /** {@link CreateReplayTask 创建重放任务}({@link CreateReplayTaskRequest 请求参数}): {@link CreateReplayTaskResponse 返回参数} */
   CreateReplayTask(data: CreateReplayTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReplayTaskResponse>;
-  /** 创建规则引擎规则 */
+  /** {@link CreateRule 创建规则引擎规则}({@link CreateRuleRequest 请求参数}): {@link CreateRuleResponse 返回参数} */
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
-  /** 创建自定义拦截页面 */
+  /** {@link CreateSecurityDropPage 创建自定义拦截页面}({@link CreateSecurityDropPageRequest 请求参数}): {@link CreateSecurityDropPageResponse 返回参数} */
   CreateSecurityDropPage(data: CreateSecurityDropPageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityDropPageResponse>;
-  /** 创建站点拨测任务 */
+  /** {@link CreateSpeedTesting 创建站点拨测任务}({@link CreateSpeedTestingRequest 请求参数}): {@link CreateSpeedTestingResponse 返回参数} */
   CreateSpeedTesting(data: CreateSpeedTestingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSpeedTestingResponse>;
-  /** 创建站点 */
+  /** {@link CreateZone 创建站点}({@link CreateZoneRequest 请求参数}): {@link CreateZoneResponse 返回参数} */
   CreateZone(data: CreateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreateZoneResponse>;
-  /** 删除别称域名 */
+  /** {@link DeleteAliasDomain 删除别称域名}({@link DeleteAliasDomainRequest 请求参数}): {@link DeleteAliasDomainResponse 返回参数} */
   DeleteAliasDomain(data: DeleteAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAliasDomainResponse>;
-  /** 删除应用代理 */
+  /** {@link DeleteApplicationProxy 删除应用代理}({@link DeleteApplicationProxyRequest 请求参数}): {@link DeleteApplicationProxyResponse 返回参数} */
   DeleteApplicationProxy(data: DeleteApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyResponse>;
-  /** 删除应用代理规则 */
+  /** {@link DeleteApplicationProxyRule 删除应用代理规则}({@link DeleteApplicationProxyRuleRequest 请求参数}): {@link DeleteApplicationProxyRuleResponse 返回参数} */
   DeleteApplicationProxyRule(data: DeleteApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyRuleResponse>;
-  /** 批量删除 DNS 记录 */
+  /** {@link DeleteDnsRecords 批量删除 DNS 记录}({@link DeleteDnsRecordsRequest 请求参数}): {@link DeleteDnsRecordsResponse 返回参数} */
   DeleteDnsRecords(data: DeleteDnsRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDnsRecordsResponse>;
-  /** 删除负载均衡 */
+  /** {@link DeleteLoadBalancing 删除负载均衡}({@link DeleteLoadBalancingRequest 请求参数}): {@link DeleteLoadBalancingResponse 返回参数} */
   DeleteLoadBalancing(data: DeleteLoadBalancingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancingResponse>;
-  /** 删除推送任务 */
+  /** {@link DeleteLogTopicTask 删除推送任务}({@link DeleteLogTopicTaskRequest 请求参数}): {@link DeleteLogTopicTaskResponse 返回参数} */
   DeleteLogTopicTask(data: DeleteLogTopicTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogTopicTaskResponse>;
-  /** 删除源站组 */
+  /** {@link DeleteOriginGroup 删除源站组}({@link DeleteOriginGroupRequest 请求参数}): {@link DeleteOriginGroupResponse 返回参数} */
   DeleteOriginGroup(data: DeleteOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOriginGroupResponse>;
-  /** 批量删除规则引擎规则 */
+  /** {@link DeleteRules 批量删除规则引擎规则}({@link DeleteRulesRequest 请求参数}): {@link DeleteRulesResponse 返回参数} */
   DeleteRules(data: DeleteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRulesResponse>;
-  /** 删除站点 */
+  /** {@link DeleteZone 删除站点}({@link DeleteZoneRequest 请求参数}): {@link DeleteZoneResponse 返回参数} */
   DeleteZone(data: DeleteZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteZoneResponse>;
-  /** 查询剩余可添加的日志推送实体列表 */
+  /** {@link DescribeAddableEntityList 查询剩余可添加的日志推送实体列表}({@link DescribeAddableEntityListRequest 请求参数}): {@link DescribeAddableEntityListResponse 返回参数} */
   DescribeAddableEntityList(data: DescribeAddableEntityListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddableEntityListResponse>;
-  /** 查询别称域名信息列表 */
+  /** {@link DescribeAliasDomains 查询别称域名信息列表}({@link DescribeAliasDomainsRequest 请求参数}): {@link DescribeAliasDomainsResponse 返回参数} */
   DescribeAliasDomains(data?: DescribeAliasDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAliasDomainsResponse>;
-  /** 查询应用代理列表 */
+  /** {@link DescribeApplicationProxies 查询应用代理列表}({@link DescribeApplicationProxiesRequest 请求参数}): {@link DescribeApplicationProxiesResponse 返回参数} */
   DescribeApplicationProxies(data?: DescribeApplicationProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationProxiesResponse>;
-  /** 查询当前账户可购买套餐信息列表 */
+  /** {@link DescribeAvailablePlans 查询当前账户可购买套餐信息列表}({@link DescribeAvailablePlansRequest 请求参数}): {@link DescribeAvailablePlansResponse 返回参数} */
   DescribeAvailablePlans(data?: DescribeAvailablePlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailablePlansResponse>;
-  /** 获取计费数据 */
+  /** {@link DescribeBillingData 获取计费数据}({@link DescribeBillingDataRequest 请求参数}): {@link DescribeBillingDataResponse 返回参数} */
   DescribeBillingData(data: DescribeBillingDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingDataResponse>;
-  /** 查询Bot攻击客户端Ip信息 */
+  /** {@link DescribeBotClientIpList 查询Bot攻击客户端Ip信息}({@link DescribeBotClientIpListRequest 请求参数}): {@link DescribeBotClientIpListResponse 返回参数} */
   DescribeBotClientIpList(data: DescribeBotClientIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotClientIpListResponse>;
-  /** 查询Bot攻击时序数据 */
+  /** {@link DescribeBotData 查询Bot攻击时序数据}({@link DescribeBotDataRequest 请求参数}): {@link DescribeBotDataResponse 返回参数} */
   DescribeBotData(data: DescribeBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotDataResponse>;
-  /** 查询Bot攻击命中规则详情 */
+  /** {@link DescribeBotHitRuleDetail 查询Bot攻击命中规则详情}({@link DescribeBotHitRuleDetailRequest 请求参数}): {@link DescribeBotHitRuleDetailResponse 返回参数} */
   DescribeBotHitRuleDetail(data: DescribeBotHitRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotHitRuleDetailResponse>;
-  /** 查询Bot攻击日志 */
+  /** {@link DescribeBotLog 查询Bot攻击日志}({@link DescribeBotLogRequest 请求参数}): {@link DescribeBotLogResponse 返回参数} */
   DescribeBotLog(data: DescribeBotLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotLogResponse>;
-  /** 查询Bot托管规则 */
+  /** {@link DescribeBotManagedRules 查询Bot托管规则}({@link DescribeBotManagedRulesRequest 请求参数}): {@link DescribeBotManagedRulesResponse 返回参数} */
   DescribeBotManagedRules(data: DescribeBotManagedRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotManagedRulesResponse>;
-  /** 查询Bot攻击Top数据 */
+  /** {@link DescribeBotTopData 查询Bot攻击Top数据}({@link DescribeBotTopDataRequest 请求参数}): {@link DescribeBotTopDataResponse 返回参数} */
   DescribeBotTopData(data: DescribeBotTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotTopDataResponse>;
-  /** 查询封禁客户端信息列表 */
+  /** {@link DescribeClientRuleList 查询封禁客户端信息列表}({@link DescribeClientRuleListRequest 请求参数}): {@link DescribeClientRuleListResponse 返回参数} */
   DescribeClientRuleList(data: DescribeClientRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientRuleListResponse>;
-  /** 查询内容管理接口配额 */
+  /** {@link DescribeContentQuota 查询内容管理接口配额}({@link DescribeContentQuotaRequest 请求参数}): {@link DescribeContentQuotaResponse 返回参数} */
   DescribeContentQuota(data: DescribeContentQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentQuotaResponse>;
-  /** 查询DDoS攻击时序数据 */
+  /** {@link DescribeDDoSAttackData 查询DDoS攻击时序数据}({@link DescribeDDoSAttackDataRequest 请求参数}): {@link DescribeDDoSAttackDataResponse 返回参数} */
   DescribeDDoSAttackData(data: DescribeDDoSAttackDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackDataResponse>;
-  /** 查询DDoS攻击事件列表 */
+  /** {@link DescribeDDoSAttackEvent 查询DDoS攻击事件列表}({@link DescribeDDoSAttackEventRequest 请求参数}): {@link DescribeDDoSAttackEventResponse 返回参数} */
   DescribeDDoSAttackEvent(data: DescribeDDoSAttackEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackEventResponse>;
-  /** 查询DDoS攻击事件详情 */
+  /** {@link DescribeDDoSAttackEventDetail 查询DDoS攻击事件详情}({@link DescribeDDoSAttackEventDetailRequest 请求参数}): {@link DescribeDDoSAttackEventDetailResponse 返回参数} */
   DescribeDDoSAttackEventDetail(data: DescribeDDoSAttackEventDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackEventDetailResponse>;
-  /** 查询DDoS攻击源列表 */
+  /** {@link DescribeDDoSAttackSourceEvent 查询DDoS攻击源列表}({@link DescribeDDoSAttackSourceEventRequest 请求参数}): {@link DescribeDDoSAttackSourceEventResponse 返回参数} */
   DescribeDDoSAttackSourceEvent(data: DescribeDDoSAttackSourceEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackSourceEventResponse>;
-  /** 查询DDoS攻击Top数据 */
+  /** {@link DescribeDDoSAttackTopData 查询DDoS攻击Top数据}({@link DescribeDDoSAttackTopDataRequest 请求参数}): {@link DescribeDDoSAttackTopDataResponse 返回参数} */
   DescribeDDoSAttackTopData(data: DescribeDDoSAttackTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackTopDataResponse>;
-  /** 查询DDoS封禁解封列表 */
+  /** {@link DescribeDDoSBlockList 查询DDoS封禁解封列表}({@link DescribeDDoSBlockListRequest 请求参数}): {@link DescribeDDoSBlockListResponse 返回参数} */
   DescribeDDoSBlockList(data: DescribeDDoSBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSBlockListResponse>;
-  /** 查询DDoS主攻击事件列表 */
+  /** {@link DescribeDDoSMajorAttackEvent 查询DDoS主攻击事件列表}({@link DescribeDDoSMajorAttackEventRequest 请求参数}): {@link DescribeDDoSMajorAttackEventResponse 返回参数} */
   DescribeDDoSMajorAttackEvent(data: DescribeDDoSMajorAttackEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSMajorAttackEventResponse>;
-  /** 查询DDoS防护配置详情 */
+  /** {@link DescribeDDoSPolicy 查询DDoS防护配置详情}({@link DescribeDDoSPolicyRequest 请求参数}): {@link DescribeDDoSPolicyResponse 返回参数} */
   DescribeDDoSPolicy(data: DescribeDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSPolicyResponse>;
-  /** 查询默认证书列表 */
+  /** {@link DescribeDefaultCertificates 查询默认证书列表}({@link DescribeDefaultCertificatesRequest 请求参数}): {@link DescribeDefaultCertificatesResponse 返回参数} */
   DescribeDefaultCertificates(data: DescribeDefaultCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultCertificatesResponse>;
-  /** 获取DNS请求数统计曲线 */
+  /** {@link DescribeDnsData 获取DNS请求数统计曲线}({@link DescribeDnsDataRequest 请求参数}): {@link DescribeDnsDataResponse 返回参数} */
   DescribeDnsData(data: DescribeDnsDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDnsDataResponse>;
-  /** 查询 DNS 记录列表 */
+  /** {@link DescribeDnsRecords 查询 DNS 记录列表}({@link DescribeDnsRecordsRequest 请求参数}): {@link DescribeDnsRecordsResponse 返回参数} */
   DescribeDnsRecords(data?: DescribeDnsRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDnsRecordsResponse>;
-  /** 查询 DNSSEC 信息 */
+  /** {@link DescribeDnssec 查询 DNSSEC 信息}({@link DescribeDnssecRequest 请求参数}): {@link DescribeDnssecResponse 返回参数} */
   DescribeDnssec(data: DescribeDnssecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDnssecResponse>;
-  /** 查询域名详细配置 */
+  /** {@link DescribeHostsSetting 查询域名详细配置}({@link DescribeHostsSettingRequest 请求参数}): {@link DescribeHostsSettingResponse 返回参数} */
   DescribeHostsSetting(data: DescribeHostsSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostsSettingResponse>;
-  /** 查询站点的验证信息 */
+  /** {@link DescribeIdentifications 查询站点的验证信息}({@link DescribeIdentificationsRequest 请求参数}): {@link DescribeIdentificationsResponse 返回参数} */
   DescribeIdentifications(data: DescribeIdentificationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdentificationsResponse>;
-  /** 获取负载均衡列表 */
+  /** {@link DescribeLoadBalancing 获取负载均衡列表}({@link DescribeLoadBalancingRequest 请求参数}): {@link DescribeLoadBalancingResponse 返回参数} */
   DescribeLoadBalancing(data: DescribeLoadBalancingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancingResponse>;
-  /** 获取日志集列表 */
+  /** {@link DescribeLogSets 获取日志集列表}({@link DescribeLogSetsRequest 请求参数}): {@link DescribeLogSetsResponse 返回参数} */
   DescribeLogSets(data: DescribeLogSetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogSetsResponse>;
-  /** 获取推送任务详细信息 */
+  /** {@link DescribeLogTopicTaskDetail 获取推送任务详细信息}({@link DescribeLogTopicTaskDetailRequest 请求参数}): {@link DescribeLogTopicTaskDetailResponse 返回参数} */
   DescribeLogTopicTaskDetail(data: DescribeLogTopicTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogTopicTaskDetailResponse>;
-  /** 获取推送任务列表 */
+  /** {@link DescribeLogTopicTasks 获取推送任务列表}({@link DescribeLogTopicTasksRequest 请求参数}): {@link DescribeLogTopicTasksResponse 返回参数} */
   DescribeLogTopicTasks(data: DescribeLogTopicTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogTopicTasksResponse>;
-  /** 获取源站组列表 */
+  /** {@link DescribeOriginGroup 获取源站组列表}({@link DescribeOriginGroupRequest 请求参数}): {@link DescribeOriginGroupResponse 返回参数} */
   DescribeOriginGroup(data: DescribeOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginGroupResponse>;
-  /** 查询七层监控类时序流量数据 */
+  /** {@link DescribeOverviewL7Data 查询七层监控类时序流量数据}({@link DescribeOverviewL7DataRequest 请求参数}): {@link DescribeOverviewL7DataResponse 返回参数} */
   DescribeOverviewL7Data(data: DescribeOverviewL7DataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewL7DataResponse>;
-  /** 查询预热任务状态 */
+  /** {@link DescribePrefetchTasks 查询预热任务状态}({@link DescribePrefetchTasksRequest 请求参数}): {@link DescribePrefetchTasksResponse 返回参数} */
   DescribePrefetchTasks(data?: DescribePrefetchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrefetchTasksResponse>;
-  /** 查询清除缓存历史记录 */
+  /** {@link DescribePurgeTasks 查询清除缓存历史记录}({@link DescribePurgeTasksRequest 请求参数}): {@link DescribePurgeTasksResponse 返回参数} */
   DescribePurgeTasks(data?: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;
-  /** 查询速率限制智能客户端过滤规则 */
+  /** {@link DescribeRateLimitIntelligenceRule 查询速率限制智能客户端过滤规则}({@link DescribeRateLimitIntelligenceRuleRequest 请求参数}): {@link DescribeRateLimitIntelligenceRuleResponse 返回参数} */
   DescribeRateLimitIntelligenceRule(data: DescribeRateLimitIntelligenceRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRateLimitIntelligenceRuleResponse>;
-  /** 查询规则引擎规则 */
+  /** {@link DescribeRules 查询规则引擎规则}({@link DescribeRulesRequest 请求参数}): {@link DescribeRulesResponse 返回参数} */
   DescribeRules(data: DescribeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesResponse>;
-  /** 查询规则引擎的设置参数 */
+  /** {@link DescribeRulesSetting 查询规则引擎的设置参数}({@link DescribeRulesSettingRequest 请求参数}): {@link DescribeRulesSettingResponse 返回参数} */
   DescribeRulesSetting(data?: DescribeRulesSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesSettingResponse>;
-  /** 获取托管规则组 */
+  /** {@link DescribeSecurityGroupManagedRules 获取托管规则组}({@link DescribeSecurityGroupManagedRulesRequest 请求参数}): {@link DescribeSecurityGroupManagedRulesResponse 返回参数} */
   DescribeSecurityGroupManagedRules(data: DescribeSecurityGroupManagedRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupManagedRulesResponse>;
-  /** 查询安全防护配置详情 */
+  /** {@link DescribeSecurityPolicy 查询安全防护配置详情}({@link DescribeSecurityPolicyRequest 请求参数}): {@link DescribeSecurityPolicyResponse 返回参数} */
   DescribeSecurityPolicy(data: DescribeSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPolicyResponse>;
-  /** 查询全部安全实例 */
+  /** {@link DescribeSecurityPolicyList 查询全部安全实例}({@link DescribeSecurityPolicyListRequest 请求参数}): {@link DescribeSecurityPolicyListResponse 返回参数} */
   DescribeSecurityPolicyList(data: DescribeSecurityPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPolicyListResponse>;
-  /** 查询所有地域信息 */
+  /** {@link DescribeSecurityPolicyRegions 查询所有地域信息}({@link DescribeSecurityPolicyRegionsRequest 请求参数}): {@link DescribeSecurityPolicyRegionsResponse 返回参数} */
   DescribeSecurityPolicyRegions(data?: DescribeSecurityPolicyRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPolicyRegionsResponse>;
-  /** 查询Bot用户画像规则 */
+  /** {@link DescribeSecurityPortraitRules 查询Bot用户画像规则}({@link DescribeSecurityPortraitRulesRequest 请求参数}): {@link DescribeSecurityPortraitRulesResponse 返回参数} */
   DescribeSecurityPortraitRules(data: DescribeSecurityPortraitRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPortraitRulesResponse>;
-  /** 查询安全规则详情 */
+  /** {@link DescribeSecurityRuleId 查询安全规则详情}({@link DescribeSecurityRuleIdRequest 请求参数}): {@link DescribeSecurityRuleIdResponse 返回参数} */
   DescribeSecurityRuleId(data: DescribeSecurityRuleIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityRuleIdResponse>;
-  /** 查询七层数据分析类单值数据 */
+  /** {@link DescribeSingleL7AnalysisData 查询七层数据分析类单值数据}({@link DescribeSingleL7AnalysisDataRequest 请求参数}): {@link DescribeSingleL7AnalysisDataResponse 返回参数} */
   DescribeSingleL7AnalysisData(data: DescribeSingleL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSingleL7AnalysisDataResponse>;
-  /** 查询拨测分地区数据 */
+  /** {@link DescribeSpeedTestingDetails 查询拨测分地区数据}({@link DescribeSpeedTestingDetailsRequest 请求参数}): {@link DescribeSpeedTestingDetailsResponse 返回参数} */
   DescribeSpeedTestingDetails(data?: DescribeSpeedTestingDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpeedTestingDetailsResponse>;
-  /** 查询站点拨测结果 */
+  /** {@link DescribeSpeedTestingMetricData 查询站点拨测结果}({@link DescribeSpeedTestingMetricDataRequest 请求参数}): {@link DescribeSpeedTestingMetricDataResponse 返回参数} */
   DescribeSpeedTestingMetricData(data: DescribeSpeedTestingMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpeedTestingMetricDataResponse>;
-  /** 查询站点拨测配额 */
+  /** {@link DescribeSpeedTestingQuota 查询站点拨测配额}({@link DescribeSpeedTestingQuotaRequest 请求参数}): {@link DescribeSpeedTestingQuotaResponse 返回参数} */
   DescribeSpeedTestingQuota(data: DescribeSpeedTestingQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpeedTestingQuotaResponse>;
-  /** 查询四层时序流量数据 */
+  /** {@link DescribeTimingL4Data 查询四层时序流量数据}({@link DescribeTimingL4DataRequest 请求参数}): {@link DescribeTimingL4DataResponse 返回参数} */
   DescribeTimingL4Data(data: DescribeTimingL4DataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL4DataResponse>;
-  /** 查询七层数据分析类时序数据 */
+  /** {@link DescribeTimingL7AnalysisData 查询七层数据分析类时序数据}({@link DescribeTimingL7AnalysisDataRequest 请求参数}): {@link DescribeTimingL7AnalysisDataResponse 返回参数} */
   DescribeTimingL7AnalysisData(data: DescribeTimingL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL7AnalysisDataResponse>;
-  /** 查询七层缓存分析类时序数据 */
+  /** {@link DescribeTimingL7CacheData 查询七层缓存分析类时序数据}({@link DescribeTimingL7CacheDataRequest 请求参数}): {@link DescribeTimingL7CacheDataResponse 返回参数} */
   DescribeTimingL7CacheData(data: DescribeTimingL7CacheDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL7CacheDataResponse>;
-  /** 查询七层数据分析Top数据 */
+  /** {@link DescribeTopL7AnalysisData 查询七层数据分析Top数据}({@link DescribeTopL7AnalysisDataRequest 请求参数}): {@link DescribeTopL7AnalysisDataResponse 返回参数} */
   DescribeTopL7AnalysisData(data: DescribeTopL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopL7AnalysisDataResponse>;
-  /** 查询七层缓存分析Top数据 */
+  /** {@link DescribeTopL7CacheData 查询七层缓存分析Top数据}({@link DescribeTopL7CacheDataRequest 请求参数}): {@link DescribeTopL7CacheDataResponse 返回参数} */
   DescribeTopL7CacheData(data: DescribeTopL7CacheDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopL7CacheDataResponse>;
-  /** 查询WAF攻击时序数据 */
+  /** {@link DescribeWebManagedRulesData 查询WAF攻击时序数据}({@link DescribeWebManagedRulesDataRequest 请求参数}): {@link DescribeWebManagedRulesDataResponse 返回参数} */
   DescribeWebManagedRulesData(data: DescribeWebManagedRulesDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebManagedRulesDataResponse>;
-  /** 查询WAF攻击命中规则详情 */
+  /** {@link DescribeWebManagedRulesHitRuleDetail 查询WAF攻击命中规则详情}({@link DescribeWebManagedRulesHitRuleDetailRequest 请求参数}): {@link DescribeWebManagedRulesHitRuleDetailResponse 返回参数} */
   DescribeWebManagedRulesHitRuleDetail(data: DescribeWebManagedRulesHitRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebManagedRulesHitRuleDetailResponse>;
-  /** 查询Web攻击日志 */
+  /** {@link DescribeWebManagedRulesLog 查询Web攻击日志}({@link DescribeWebManagedRulesLogRequest 请求参数}): {@link DescribeWebManagedRulesLogResponse 返回参数} */
   DescribeWebManagedRulesLog(data: DescribeWebManagedRulesLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebManagedRulesLogResponse>;
-  /** 查询CC相关攻击事件 */
+  /** {@link DescribeWebProtectionAttackEvents 查询CC相关攻击事件}({@link DescribeWebProtectionAttackEventsRequest 请求参数}): {@link DescribeWebProtectionAttackEventsResponse 返回参数} */
   DescribeWebProtectionAttackEvents(data: DescribeWebProtectionAttackEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebProtectionAttackEventsResponse>;
-  /** 查询CC防护攻击源IP信息列表 */
+  /** {@link DescribeWebProtectionClientIpList 查询CC防护攻击源IP信息列表}({@link DescribeWebProtectionClientIpListRequest 请求参数}): {@link DescribeWebProtectionClientIpListResponse 返回参数} */
   DescribeWebProtectionClientIpList(data: DescribeWebProtectionClientIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebProtectionClientIpListResponse>;
-  /** 查询CC防护时序数据列表 */
+  /** {@link DescribeWebProtectionData 查询CC防护时序数据列表}({@link DescribeWebProtectionDataRequest 请求参数}): {@link DescribeWebProtectionDataResponse 返回参数} */
   DescribeWebProtectionData(data: DescribeWebProtectionDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebProtectionDataResponse>;
-  /** 查询CC防护命中规则详情列表 */
+  /** {@link DescribeWebProtectionHitRuleDetail 查询CC防护命中规则详情列表}({@link DescribeWebProtectionHitRuleDetailRequest 请求参数}): {@link DescribeWebProtectionHitRuleDetailResponse 返回参数} */
   DescribeWebProtectionHitRuleDetail(data: DescribeWebProtectionHitRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebProtectionHitRuleDetailResponse>;
-  /** 查询CC防护Top数据 */
+  /** {@link DescribeWebProtectionTopData 查询CC防护Top数据}({@link DescribeWebProtectionTopDataRequest 请求参数}): {@link DescribeWebProtectionTopDataResponse 返回参数} */
   DescribeWebProtectionTopData(data: DescribeWebProtectionTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebProtectionTopDataResponse>;
-  /** 查询所有DDoS防护分区 */
+  /** {@link DescribeZoneDDoSPolicy 查询所有DDoS防护分区}({@link DescribeZoneDDoSPolicyRequest 请求参数}): {@link DescribeZoneDDoSPolicyResponse 返回参数} */
   DescribeZoneDDoSPolicy(data?: DescribeZoneDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneDDoSPolicyResponse>;
-  /** 查询站点配置 */
+  /** {@link DescribeZoneSetting 查询站点配置}({@link DescribeZoneSettingRequest 请求参数}): {@link DescribeZoneSettingResponse 返回参数} */
   DescribeZoneSetting(data: DescribeZoneSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneSettingResponse>;
-  /** 查询用户站点信息列表 */
+  /** {@link DescribeZones 查询用户站点信息列表}({@link DescribeZonesRequest 请求参数}): {@link DescribeZonesResponse 返回参数} */
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
-  /** 下载四层离线日志 */
+  /** {@link DownloadL4Logs 下载四层离线日志}({@link DownloadL4LogsRequest 请求参数}): {@link DownloadL4LogsResponse 返回参数} */
   DownloadL4Logs(data: DownloadL4LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL4LogsResponse>;
-  /** 下载七层离线日志 */
+  /** {@link DownloadL7Logs 下载七层离线日志}({@link DownloadL7LogsRequest 请求参数}): {@link DownloadL7LogsResponse 返回参数} */
   DownloadL7Logs(data: DownloadL7LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL7LogsResponse>;
-  /** 认证站点 */
+  /** {@link IdentifyZone 认证站点}({@link IdentifyZoneRequest 请求参数}): {@link IdentifyZoneResponse 返回参数} */
   IdentifyZone(data: IdentifyZoneRequest, config?: AxiosRequestConfig): AxiosPromise<IdentifyZoneResponse>;
-  /** 修改用户告警配置 */
+  /** {@link ModifyAlarmConfig 修改用户告警配置}({@link ModifyAlarmConfigRequest 请求参数}): {@link ModifyAlarmConfigResponse 返回参数} */
   ModifyAlarmConfig(data: ModifyAlarmConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmConfigResponse>;
-  /** 修改告警默认阈值 */
+  /** {@link ModifyAlarmDefaultThreshold 修改告警默认阈值}({@link ModifyAlarmDefaultThresholdRequest 请求参数}): {@link ModifyAlarmDefaultThresholdResponse 返回参数} */
   ModifyAlarmDefaultThreshold(data: ModifyAlarmDefaultThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmDefaultThresholdResponse>;
-  /** 修改别称域名 */
+  /** {@link ModifyAliasDomain 修改别称域名}({@link ModifyAliasDomainRequest 请求参数}): {@link ModifyAliasDomainResponse 返回参数} */
   ModifyAliasDomain(data: ModifyAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAliasDomainResponse>;
-  /** 修改别称域名状态 */
+  /** {@link ModifyAliasDomainStatus 修改别称域名状态}({@link ModifyAliasDomainStatusRequest 请求参数}): {@link ModifyAliasDomainStatusResponse 返回参数} */
   ModifyAliasDomainStatus(data: ModifyAliasDomainStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAliasDomainStatusResponse>;
-  /** 修改应用代理 */
+  /** {@link ModifyApplicationProxy 修改应用代理}({@link ModifyApplicationProxyRequest 请求参数}): {@link ModifyApplicationProxyResponse 返回参数} */
   ModifyApplicationProxy(data: ModifyApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyResponse>;
-  /** 修改应用代理规则 */
+  /** {@link ModifyApplicationProxyRule 修改应用代理规则}({@link ModifyApplicationProxyRuleRequest 请求参数}): {@link ModifyApplicationProxyRuleResponse 返回参数} */
   ModifyApplicationProxyRule(data: ModifyApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyRuleResponse>;
-  /** 修改应用代理规则的状态 */
+  /** {@link ModifyApplicationProxyRuleStatus 修改应用代理规则的状态}({@link ModifyApplicationProxyRuleStatusRequest 请求参数}): {@link ModifyApplicationProxyRuleStatusResponse 返回参数} */
   ModifyApplicationProxyRuleStatus(data: ModifyApplicationProxyRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyRuleStatusResponse>;
-  /** 修改应用代理的状态 */
+  /** {@link ModifyApplicationProxyStatus 修改应用代理的状态}({@link ModifyApplicationProxyStatusRequest 请求参数}): {@link ModifyApplicationProxyStatusResponse 返回参数} */
   ModifyApplicationProxyStatus(data: ModifyApplicationProxyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyStatusResponse>;
-  /** 修改DDoS防护分区配置 */
+  /** {@link ModifyDDoSPolicy 修改DDoS防护分区配置}({@link ModifyDDoSPolicyRequest 请求参数}): {@link ModifyDDoSPolicyResponse 返回参数} */
   ModifyDDoSPolicy(data: ModifyDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSPolicyResponse>;
-  /** 域名DDoS高可用开关 */
+  /** {@link ModifyDDoSPolicyHost 域名DDoS高可用开关}({@link ModifyDDoSPolicyHostRequest 请求参数}): {@link ModifyDDoSPolicyHostResponse 返回参数} */
   ModifyDDoSPolicyHost(data: ModifyDDoSPolicyHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSPolicyHostResponse>;
-  /** 修改默认证书状态 */
+  /** {@link ModifyDefaultCertificate 修改默认证书状态}({@link ModifyDefaultCertificateRequest 请求参数}): {@link ModifyDefaultCertificateResponse 返回参数} */
   ModifyDefaultCertificate(data: ModifyDefaultCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDefaultCertificateResponse>;
-  /** 修改 DNS 记录 */
+  /** {@link ModifyDnsRecord 修改 DNS 记录}({@link ModifyDnsRecordRequest 请求参数}): {@link ModifyDnsRecordResponse 返回参数} */
   ModifyDnsRecord(data: ModifyDnsRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDnsRecordResponse>;
-  /** 修改 DNSSEC 状态 */
+  /** {@link ModifyDnssec 修改 DNSSEC 状态}({@link ModifyDnssecRequest 请求参数}): {@link ModifyDnssecResponse 返回参数} */
   ModifyDnssec(data: ModifyDnssecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDnssecResponse>;
-  /** 修改域名证书 */
+  /** {@link ModifyHostsCertificate 修改域名证书}({@link ModifyHostsCertificateRequest 请求参数}): {@link ModifyHostsCertificateResponse 返回参数} */
   ModifyHostsCertificate(data: ModifyHostsCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostsCertificateResponse>;
-  /** 修改负载均衡 */
+  /** {@link ModifyLoadBalancing 修改负载均衡}({@link ModifyLoadBalancingRequest 请求参数}): {@link ModifyLoadBalancingResponse 返回参数} */
   ModifyLoadBalancing(data: ModifyLoadBalancingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancingResponse>;
-  /** 修改负载均衡状态 */
+  /** {@link ModifyLoadBalancingStatus 修改负载均衡状态}({@link ModifyLoadBalancingStatusRequest 请求参数}): {@link ModifyLoadBalancingStatusResponse 返回参数} */
   ModifyLoadBalancingStatus(data: ModifyLoadBalancingStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancingStatusResponse>;
-  /** 修改推送任务 */
+  /** {@link ModifyLogTopicTask 修改推送任务}({@link ModifyLogTopicTaskRequest 请求参数}): {@link ModifyLogTopicTaskResponse 返回参数} */
   ModifyLogTopicTask(data: ModifyLogTopicTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogTopicTaskResponse>;
-  /** 修改源站组 */
+  /** {@link ModifyOriginGroup 修改源站组}({@link ModifyOriginGroupRequest 请求参数}): {@link ModifyOriginGroupResponse 返回参数} */
   ModifyOriginGroup(data: ModifyOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOriginGroupResponse>;
-  /** 修改规则引擎规则 */
+  /** {@link ModifyRule 修改规则引擎规则}({@link ModifyRuleRequest 请求参数}): {@link ModifyRuleResponse 返回参数} */
   ModifyRule(data: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
-  /** 修改规则引擎规则优先级 */
+  /** {@link ModifyRulePriority 修改规则引擎规则优先级}({@link ModifyRulePriorityRequest 请求参数}): {@link ModifyRulePriorityResponse 返回参数} */
   ModifyRulePriority(data: ModifyRulePriorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRulePriorityResponse>;
-  /** 修改Web&Bot安全配置 */
+  /** {@link ModifySecurityPolicy 修改Web&Bot安全配置}({@link ModifySecurityPolicyRequest 请求参数}): {@link ModifySecurityPolicyResponse 返回参数} */
   ModifySecurityPolicy(data: ModifySecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityPolicyResponse>;
-  /** 修改安全配置托管规则 */
+  /** {@link ModifySecurityWafGroupPolicy 修改安全配置托管规则}({@link ModifySecurityWafGroupPolicyRequest 请求参数}): {@link ModifySecurityWafGroupPolicyResponse 返回参数} */
   ModifySecurityWafGroupPolicy(data: ModifySecurityWafGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityWafGroupPolicyResponse>;
-  /** 修改站点 */
+  /** {@link ModifyZone 修改站点}({@link ModifyZoneRequest 请求参数}): {@link ModifyZoneResponse 返回参数} */
   ModifyZone(data: ModifyZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneResponse>;
-  /** 修改 CNAME 加速状态 */
+  /** {@link ModifyZoneCnameSpeedUp 修改 CNAME 加速状态}({@link ModifyZoneCnameSpeedUpRequest 请求参数}): {@link ModifyZoneCnameSpeedUpResponse 返回参数} */
   ModifyZoneCnameSpeedUp(data: ModifyZoneCnameSpeedUpRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneCnameSpeedUpResponse>;
-  /** 修改站点配置 */
+  /** {@link ModifyZoneSetting 修改站点配置}({@link ModifyZoneSettingRequest 请求参数}): {@link ModifyZoneSettingResponse 返回参数} */
   ModifyZoneSetting(data: ModifyZoneSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneSettingResponse>;
-  /** 切换站点状态 */
+  /** {@link ModifyZoneStatus 切换站点状态}({@link ModifyZoneStatusRequest 请求参数}): {@link ModifyZoneStatusResponse 返回参数} */
   ModifyZoneStatus(data: ModifyZoneStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneStatusResponse>;
-  /** 取回别称域名 */
+  /** {@link ReclaimAliasDomain 取回别称域名}({@link ReclaimAliasDomainRequest 请求参数}): {@link ReclaimAliasDomainResponse 返回参数} */
   ReclaimAliasDomain(data?: ReclaimAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ReclaimAliasDomainResponse>;
-  /** 找回站点 */
+  /** {@link ReclaimZone 找回站点}({@link ReclaimZoneRequest 请求参数}): {@link ReclaimZoneResponse 返回参数} */
   ReclaimZone(data: ReclaimZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ReclaimZoneResponse>;
-  /** 开启或关闭推送任务 */
+  /** {@link SwitchLogTopicTask 开启或关闭推送任务}({@link SwitchLogTopicTaskRequest 请求参数}): {@link SwitchLogTopicTaskResponse 返回参数} */
   SwitchLogTopicTask(data: SwitchLogTopicTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchLogTopicTaskResponse>;
-  /** 校验证书 */
+  /** {@link V20220106.CheckCertificate 校验证书}({@link V20220106.CheckCertificateRequest 请求参数}): {@link V20220106.CheckCertificateResponse 返回参数} */
   CheckCertificate(data: V20220106.CheckCertificateRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CheckCertificateResponse>;
-  /** 创建应用代理 */
+  /** {@link V20220106.CreateApplicationProxy 创建应用代理}({@link V20220106.CreateApplicationProxyRequest 请求参数}): {@link V20220106.CreateApplicationProxyResponse 返回参数} */
   CreateApplicationProxy(data: V20220106.CreateApplicationProxyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateApplicationProxyResponse>;
-  /** 创建应用代理规则 */
+  /** {@link V20220106.CreateApplicationProxyRule 创建应用代理规则}({@link V20220106.CreateApplicationProxyRuleRequest 请求参数}): {@link V20220106.CreateApplicationProxyRuleResponse 返回参数} */
   CreateApplicationProxyRule(data: V20220106.CreateApplicationProxyRuleRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateApplicationProxyRuleResponse>;
-  /** 批量创建应用代理规则 */
+  /** {@link V20220106.CreateApplicationProxyRules 批量创建应用代理规则}({@link V20220106.CreateApplicationProxyRulesRequest 请求参数}): {@link V20220106.CreateApplicationProxyRulesResponse 返回参数} */
   CreateApplicationProxyRules(data: V20220106.CreateApplicationProxyRulesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateApplicationProxyRulesResponse>;
-  /** 创建自定义页 */
+  /** {@link V20220106.CreateCustomErrorPage 创建自定义页}({@link V20220106.CreateCustomErrorPageRequest 请求参数}): {@link V20220106.CreateCustomErrorPageResponse 返回参数} */
   CreateCustomErrorPage(data: V20220106.CreateCustomErrorPageRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateCustomErrorPageResponse>;
-  /** 创建 DNS 记录 */
+  /** {@link V20220106.CreateDnsRecord 创建 DNS 记录}({@link V20220106.CreateDnsRecordRequest 请求参数}): {@link V20220106.CreateDnsRecordResponse 返回参数} */
   CreateDnsRecord(data: V20220106.CreateDnsRecordRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateDnsRecordResponse>;
-  /** 创建负载均衡 */
+  /** {@link V20220106.CreateLoadBalancing 创建负载均衡}({@link V20220106.CreateLoadBalancingRequest 请求参数}): {@link V20220106.CreateLoadBalancingResponse 返回参数} */
   CreateLoadBalancing(data: V20220106.CreateLoadBalancingRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateLoadBalancingResponse>;
-  /** 源站组创建 */
+  /** {@link V20220106.CreateOriginGroup 源站组创建}({@link V20220106.CreateOriginGroupRequest 请求参数}): {@link V20220106.CreateOriginGroupResponse 返回参数} */
   CreateOriginGroup(data: V20220106.CreateOriginGroupRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateOriginGroupResponse>;
-  /** 为未购买套餐的站点购买套餐 */
+  /** {@link V20220106.CreatePlanForZone 为未购买套餐的站点购买套餐}({@link V20220106.CreatePlanForZoneRequest 请求参数}): {@link V20220106.CreatePlanForZoneResponse 返回参数} */
   CreatePlanForZone(data: V20220106.CreatePlanForZoneRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreatePlanForZoneResponse>;
-  /** 创建预热任务 */
+  /** {@link V20220106.CreatePrefetchTask 创建预热任务}({@link V20220106.CreatePrefetchTaskRequest 请求参数}): {@link V20220106.CreatePrefetchTaskResponse 返回参数} */
   CreatePrefetchTask(data: V20220106.CreatePrefetchTaskRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreatePrefetchTaskResponse>;
-  /** 创建清除缓存任务 */
+  /** {@link V20220106.CreatePurgeTask 创建清除缓存任务}({@link V20220106.CreatePurgeTaskRequest 请求参数}): {@link V20220106.CreatePurgeTaskResponse 返回参数} */
   CreatePurgeTask(data: V20220106.CreatePurgeTaskRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreatePurgeTaskResponse>;
-  /** 创建规则引擎规则 */
+  /** {@link V20220106.CreateRule 创建规则引擎规则}({@link V20220106.CreateRuleRequest 请求参数}): {@link V20220106.CreateRuleResponse 返回参数} */
   CreateRule(data: V20220106.CreateRuleRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateRuleResponse>;
-  /** 创建站点 */
+  /** {@link V20220106.CreateZone 创建站点}({@link V20220106.CreateZoneRequest 请求参数}): {@link V20220106.CreateZoneResponse 返回参数} */
   CreateZone(data: V20220106.CreateZoneRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateZoneResponse>;
-  /** 删除应用代理 */
+  /** {@link V20220106.DeleteApplicationProxy 删除应用代理}({@link V20220106.DeleteApplicationProxyRequest 请求参数}): {@link V20220106.DeleteApplicationProxyResponse 返回参数} */
   DeleteApplicationProxy(data: V20220106.DeleteApplicationProxyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DeleteApplicationProxyResponse>;
-  /** 删除应用代理规则 */
+  /** {@link V20220106.DeleteApplicationProxyRule 删除应用代理规则}({@link V20220106.DeleteApplicationProxyRuleRequest 请求参数}): {@link V20220106.DeleteApplicationProxyRuleResponse 返回参数} */
   DeleteApplicationProxyRule(data: V20220106.DeleteApplicationProxyRuleRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DeleteApplicationProxyRuleResponse>;
-  /** 批量删除 DNS 记录 */
+  /** {@link V20220106.DeleteDnsRecords 批量删除 DNS 记录}({@link V20220106.DeleteDnsRecordsRequest 请求参数}): {@link V20220106.DeleteDnsRecordsResponse 返回参数} */
   DeleteDnsRecords(data: V20220106.DeleteDnsRecordsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DeleteDnsRecordsResponse>;
-  /** 删除负载均衡 */
+  /** {@link V20220106.DeleteLoadBalancing 删除负载均衡}({@link V20220106.DeleteLoadBalancingRequest 请求参数}): {@link V20220106.DeleteLoadBalancingResponse 返回参数} */
   DeleteLoadBalancing(data: V20220106.DeleteLoadBalancingRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DeleteLoadBalancingResponse>;
-  /** 源站组删除 */
+  /** {@link V20220106.DeleteOriginGroup 源站组删除}({@link V20220106.DeleteOriginGroupRequest 请求参数}): {@link V20220106.DeleteOriginGroupResponse 返回参数} */
   DeleteOriginGroup(data: V20220106.DeleteOriginGroupRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DeleteOriginGroupResponse>;
-  /** 批量删除规则引擎规则 */
+  /** {@link V20220106.DeleteRules 批量删除规则引擎规则}({@link V20220106.DeleteRulesRequest 请求参数}): {@link V20220106.DeleteRulesResponse 返回参数} */
   DeleteRules(data: V20220106.DeleteRulesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DeleteRulesResponse>;
-  /** 删除站点 */
+  /** {@link V20220106.DeleteZone 删除站点}({@link V20220106.DeleteZoneRequest 请求参数}): {@link V20220106.DeleteZoneResponse 返回参数} */
   DeleteZone(data: V20220106.DeleteZoneRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DeleteZoneResponse>;
-  /** 获取应用代理列表 */
+  /** {@link V20220106.DescribeApplicationProxy 获取应用代理列表}({@link V20220106.DescribeApplicationProxyRequest 请求参数}): {@link V20220106.DescribeApplicationProxyResponse 返回参数} */
   DescribeApplicationProxy(data: V20220106.DescribeApplicationProxyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeApplicationProxyResponse>;
-  /** 获取应用代理详细信息 */
+  /** {@link V20220106.DescribeApplicationProxyDetail 获取应用代理详细信息}({@link V20220106.DescribeApplicationProxyDetailRequest 请求参数}): {@link V20220106.DescribeApplicationProxyDetailResponse 返回参数} */
   DescribeApplicationProxyDetail(data: V20220106.DescribeApplicationProxyDetailRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeApplicationProxyDetailResponse>;
-  /** 查询当前账户可购买套餐信息列表 */
+  /** {@link V20220106.DescribeAvailablePlans 查询当前账户可购买套餐信息列表}({@link V20220106.DescribeAvailablePlansRequest 请求参数}): {@link V20220106.DescribeAvailablePlansResponse 返回参数} */
   DescribeAvailablePlans(data: V20220106.DescribeAvailablePlansRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeAvailablePlansResponse>;
-  /** 查询Bot攻击日志 */
+  /** {@link V20220106.DescribeBotLog 查询Bot攻击日志}({@link V20220106.DescribeBotLogRequest 请求参数}): {@link V20220106.DescribeBotLogResponse 返回参数} */
   DescribeBotLog(data: V20220106.DescribeBotLogRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeBotLogResponse>;
-  /** 分页查询Bot托管规则 */
+  /** {@link V20220106.DescribeBotManagedRules 分页查询Bot托管规则}({@link V20220106.DescribeBotManagedRulesRequest 请求参数}): {@link V20220106.DescribeBotManagedRulesResponse 返回参数} */
   DescribeBotManagedRules(data: V20220106.DescribeBotManagedRulesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeBotManagedRulesResponse>;
-  /** 查询域名 CNAME 状态 */
+  /** {@link V20220106.DescribeCnameStatus 查询域名 CNAME 状态}({@link V20220106.DescribeCnameStatusRequest 请求参数}): {@link V20220106.DescribeCnameStatusResponse 返回参数} */
   DescribeCnameStatus(data: V20220106.DescribeCnameStatusRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeCnameStatusResponse>;
-  /** 查询DDoS防护配置详情 */
+  /** {@link V20220106.DescribeDDoSPolicy 查询DDoS防护配置详情}({@link V20220106.DescribeDDoSPolicyRequest 请求参数}): {@link V20220106.DescribeDDoSPolicyResponse 返回参数} */
   DescribeDDoSPolicy(data: V20220106.DescribeDDoSPolicyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDDoSPolicyResponse>;
-  /** 查询DDos攻击时序数据 */
+  /** {@link V20220106.DescribeDDosAttackData 查询DDos攻击时序数据}({@link V20220106.DescribeDDosAttackDataRequest 请求参数}): {@link V20220106.DescribeDDosAttackDataResponse 返回参数} */
   DescribeDDosAttackData(data: V20220106.DescribeDDosAttackDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDDosAttackDataResponse>;
-  /** 查询DDos攻击事件 */
+  /** {@link V20220106.DescribeDDosAttackEvent 查询DDos攻击事件}({@link V20220106.DescribeDDosAttackEventRequest 请求参数}): {@link V20220106.DescribeDDosAttackEventResponse 返回参数} */
   DescribeDDosAttackEvent(data: V20220106.DescribeDDosAttackEventRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDDosAttackEventResponse>;
-  /** 查询DDos攻击事件详情 */
+  /** {@link V20220106.DescribeDDosAttackEventDetail 查询DDos攻击事件详情}({@link V20220106.DescribeDDosAttackEventDetailRequest 请求参数}): {@link V20220106.DescribeDDosAttackEventDetailResponse 返回参数} */
   DescribeDDosAttackEventDetail(data: V20220106.DescribeDDosAttackEventDetailRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDDosAttackEventDetailResponse>;
-  /** 查询DDos攻击源信息 */
+  /** {@link V20220106.DescribeDDosAttackSourceEvent 查询DDos攻击源信息}({@link V20220106.DescribeDDosAttackSourceEventRequest 请求参数}): {@link V20220106.DescribeDDosAttackSourceEventResponse 返回参数} */
   DescribeDDosAttackSourceEvent(data: V20220106.DescribeDDosAttackSourceEventRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDDosAttackSourceEventResponse>;
-  /** 查询DDos攻击Top数据 */
+  /** {@link V20220106.DescribeDDosAttackTopData 查询DDos攻击Top数据}({@link V20220106.DescribeDDosAttackTopDataRequest 请求参数}): {@link V20220106.DescribeDDosAttackTopDataResponse 返回参数} */
   DescribeDDosAttackTopData(data: V20220106.DescribeDDosAttackTopDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDDosAttackTopDataResponse>;
-  /** 查询DDos主攻击事件 */
+  /** {@link V20220106.DescribeDDosMajorAttackEvent 查询DDos主攻击事件}({@link V20220106.DescribeDDosMajorAttackEventRequest 请求参数}): {@link V20220106.DescribeDDosMajorAttackEventResponse 返回参数} */
   DescribeDDosMajorAttackEvent(data: V20220106.DescribeDDosMajorAttackEventRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDDosMajorAttackEventResponse>;
-  /** 查询默认证书列表 */
+  /** {@link V20220106.DescribeDefaultCertificates 查询默认证书列表}({@link V20220106.DescribeDefaultCertificatesRequest 请求参数}): {@link V20220106.DescribeDefaultCertificatesResponse 返回参数} */
   DescribeDefaultCertificates(data: V20220106.DescribeDefaultCertificatesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDefaultCertificatesResponse>;
-  /** 获取DNS请求数统计曲线 */
+  /** {@link V20220106.DescribeDnsData 获取DNS请求数统计曲线}({@link V20220106.DescribeDnsDataRequest 请求参数}): {@link V20220106.DescribeDnsDataResponse 返回参数} */
   DescribeDnsData(data: V20220106.DescribeDnsDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDnsDataResponse>;
-  /** 查询 DNS 记录列表 */
+  /** {@link V20220106.DescribeDnsRecords 查询 DNS 记录列表}({@link V20220106.DescribeDnsRecordsRequest 请求参数}): {@link V20220106.DescribeDnsRecordsResponse 返回参数} */
   DescribeDnsRecords(data: V20220106.DescribeDnsRecordsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDnsRecordsResponse>;
-  /** 查询 DNSSEC 信息 */
+  /** {@link V20220106.DescribeDnssec 查询 DNSSEC 信息}({@link V20220106.DescribeDnssecRequest 请求参数}): {@link V20220106.DescribeDnssecResponse 返回参数} */
   DescribeDnssec(data: V20220106.DescribeDnssecRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDnssecResponse>;
-  /** 查询域名证书列表 */
+  /** {@link V20220106.DescribeHostsCertificate 查询域名证书列表}({@link V20220106.DescribeHostsCertificateRequest 请求参数}): {@link V20220106.DescribeHostsCertificateResponse 返回参数} */
   DescribeHostsCertificate(data: V20220106.DescribeHostsCertificateRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeHostsCertificateResponse>;
-  /** 查询域名详细配置 */
+  /** {@link V20220106.DescribeHostsSetting 查询域名详细配置}({@link V20220106.DescribeHostsSettingRequest 请求参数}): {@link V20220106.DescribeHostsSettingResponse 返回参数} */
   DescribeHostsSetting(data: V20220106.DescribeHostsSettingRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeHostsSettingResponse>;
-  /** 查询站点的验证状态 */
+  /** {@link V20220106.DescribeIdentification 查询站点的验证状态}({@link V20220106.DescribeIdentificationRequest 请求参数}): {@link V20220106.DescribeIdentificationResponse 返回参数} */
   DescribeIdentification(data: V20220106.DescribeIdentificationRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeIdentificationResponse>;
-  /** 获取负载均衡列表 */
+  /** {@link V20220106.DescribeLoadBalancing 获取负载均衡列表}({@link V20220106.DescribeLoadBalancingRequest 请求参数}): {@link V20220106.DescribeLoadBalancingResponse 返回参数} */
   DescribeLoadBalancing(data: V20220106.DescribeLoadBalancingRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeLoadBalancingResponse>;
-  /** 获取负载均衡详细信息 */
+  /** {@link V20220106.DescribeLoadBalancingDetail 获取负载均衡详细信息}({@link V20220106.DescribeLoadBalancingDetailRequest 请求参数}): {@link V20220106.DescribeLoadBalancingDetailResponse 返回参数} */
   DescribeLoadBalancingDetail(data: V20220106.DescribeLoadBalancingDetailRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeLoadBalancingDetailResponse>;
-  /** 获取源站组信息列表 */
+  /** {@link V20220106.DescribeOriginGroup 获取源站组信息列表}({@link V20220106.DescribeOriginGroupRequest 请求参数}): {@link V20220106.DescribeOriginGroupResponse 返回参数} */
   DescribeOriginGroup(data: V20220106.DescribeOriginGroupRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeOriginGroupResponse>;
-  /** 获取源站组详细信息 */
+  /** {@link V20220106.DescribeOriginGroupDetail 获取源站组详细信息}({@link V20220106.DescribeOriginGroupDetailRequest 请求参数}): {@link V20220106.DescribeOriginGroupDetailResponse 返回参数} */
   DescribeOriginGroupDetail(data: V20220106.DescribeOriginGroupDetailRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeOriginGroupDetailResponse>;
-  /** 查询七层监控类时序流量数据 */
+  /** {@link V20220106.DescribeOverviewL7Data 查询七层监控类时序流量数据}({@link V20220106.DescribeOverviewL7DataRequest 请求参数}): {@link V20220106.DescribeOverviewL7DataResponse 返回参数} */
   DescribeOverviewL7Data(data: V20220106.DescribeOverviewL7DataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeOverviewL7DataResponse>;
-  /** 查询预热任务状态 */
+  /** {@link V20220106.DescribePrefetchTasks 查询预热任务状态}({@link V20220106.DescribePrefetchTasksRequest 请求参数}): {@link V20220106.DescribePrefetchTasksResponse 返回参数} */
   DescribePrefetchTasks(data: V20220106.DescribePrefetchTasksRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribePrefetchTasksResponse>;
-  /** 查询清除缓存历史记录 */
+  /** {@link V20220106.DescribePurgeTasks 查询清除缓存历史记录}({@link V20220106.DescribePurgeTasksRequest 请求参数}): {@link V20220106.DescribePurgeTasksResponse 返回参数} */
   DescribePurgeTasks(data: V20220106.DescribePurgeTasksRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribePurgeTasksResponse>;
-  /** 查询规则引擎规则 */
+  /** {@link V20220106.DescribeRules 查询规则引擎规则}({@link V20220106.DescribeRulesRequest 请求参数}): {@link V20220106.DescribeRulesResponse 返回参数} */
   DescribeRules(data: V20220106.DescribeRulesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeRulesResponse>;
-  /** 查询规则引擎的设置参数 */
+  /** {@link V20220106.DescribeRulesSetting 查询规则引擎的设置参数}({@link V20220106.DescribeRulesSettingRequest 请求参数}): {@link V20220106.DescribeRulesSettingResponse 返回参数} */
   DescribeRulesSetting(data: V20220106.DescribeRulesSettingRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeRulesSettingResponse>;
-  /** 查询安全防护配置详情 */
+  /** {@link V20220106.DescribeSecurityPolicy 查询安全防护配置详情}({@link V20220106.DescribeSecurityPolicyRequest 请求参数}): {@link V20220106.DescribeSecurityPolicyResponse 返回参数} */
   DescribeSecurityPolicy(data: V20220106.DescribeSecurityPolicyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeSecurityPolicyResponse>;
-  /** 查询全部安全实例 */
+  /** {@link V20220106.DescribeSecurityPolicyList 查询全部安全实例}({@link V20220106.DescribeSecurityPolicyListRequest 请求参数}): {@link V20220106.DescribeSecurityPolicyListResponse 返回参数} */
   DescribeSecurityPolicyList(data: V20220106.DescribeSecurityPolicyListRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeSecurityPolicyListResponse>;
-  /** 分页查询门神规则 */
+  /** {@link V20220106.DescribeSecurityPolicyManagedRules 分页查询门神规则}({@link V20220106.DescribeSecurityPolicyManagedRulesRequest 请求参数}): {@link V20220106.DescribeSecurityPolicyManagedRulesResponse 返回参数} */
   DescribeSecurityPolicyManagedRules(data: V20220106.DescribeSecurityPolicyManagedRulesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeSecurityPolicyManagedRulesResponse>;
-  /** 规则id查询门神规则详情 */
+  /** {@link V20220106.DescribeSecurityPolicyManagedRulesId 规则id查询门神规则详情}({@link V20220106.DescribeSecurityPolicyManagedRulesIdRequest 请求参数}): {@link V20220106.DescribeSecurityPolicyManagedRulesIdResponse 返回参数} */
   DescribeSecurityPolicyManagedRulesId(data: V20220106.DescribeSecurityPolicyManagedRulesIdRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeSecurityPolicyManagedRulesIdResponse>;
-  /** 查询所有地域信息 */
+  /** {@link V20220106.DescribeSecurityPolicyRegions 查询所有地域信息}({@link V20220106.DescribeSecurityPolicyRegionsRequest 请求参数}): {@link V20220106.DescribeSecurityPolicyRegionsResponse 返回参数} */
   DescribeSecurityPolicyRegions(data: V20220106.DescribeSecurityPolicyRegionsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeSecurityPolicyRegionsResponse>;
-  /** 查询Bot用户画像规则 */
+  /** {@link V20220106.DescribeSecurityPortraitRules 查询Bot用户画像规则}({@link V20220106.DescribeSecurityPortraitRulesRequest 请求参数}): {@link V20220106.DescribeSecurityPortraitRulesResponse 返回参数} */
   DescribeSecurityPortraitRules(data: V20220106.DescribeSecurityPortraitRulesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeSecurityPortraitRulesResponse>;
-  /** 四层时序流量数据查询接口 */
+  /** {@link V20220106.DescribeTimingL4Data 四层时序流量数据查询接口}({@link V20220106.DescribeTimingL4DataRequest 请求参数}): {@link V20220106.DescribeTimingL4DataResponse 返回参数} */
   DescribeTimingL4Data(data: V20220106.DescribeTimingL4DataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeTimingL4DataResponse>;
-  /** 查询七层数据分析类时序流量数据 */
+  /** {@link V20220106.DescribeTimingL7AnalysisData 查询七层数据分析类时序流量数据}({@link V20220106.DescribeTimingL7AnalysisDataRequest 请求参数}): {@link V20220106.DescribeTimingL7AnalysisDataResponse 返回参数} */
   DescribeTimingL7AnalysisData(data: V20220106.DescribeTimingL7AnalysisDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeTimingL7AnalysisDataResponse>;
-  /** 七层缓存分析类时序流量数据接口 */
+  /** {@link V20220106.DescribeTimingL7CacheData 七层缓存分析类时序流量数据接口}({@link V20220106.DescribeTimingL7CacheDataRequest 请求参数}): {@link V20220106.DescribeTimingL7CacheDataResponse 返回参数} */
   DescribeTimingL7CacheData(data: V20220106.DescribeTimingL7CacheDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeTimingL7CacheDataResponse>;
-  /** 七层数据分析类top流量数据接口 */
+  /** {@link V20220106.DescribeTopL7AnalysisData 七层数据分析类top流量数据接口}({@link V20220106.DescribeTopL7AnalysisDataRequest 请求参数}): {@link V20220106.DescribeTopL7AnalysisDataResponse 返回参数} */
   DescribeTopL7AnalysisData(data: V20220106.DescribeTopL7AnalysisDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeTopL7AnalysisDataResponse>;
-  /** 七层缓存分析类top流量数据接口 */
+  /** {@link V20220106.DescribeTopL7CacheData 七层缓存分析类top流量数据接口}({@link V20220106.DescribeTopL7CacheDataRequest 请求参数}): {@link V20220106.DescribeTopL7CacheDataResponse 返回参数} */
   DescribeTopL7CacheData(data: V20220106.DescribeTopL7CacheDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeTopL7CacheDataResponse>;
-  /** 查询Web托管攻击事件 */
+  /** {@link V20220106.DescribeWebManagedRulesAttackEvents 查询Web托管攻击事件}({@link V20220106.DescribeWebManagedRulesAttackEventsRequest 请求参数}): {@link V20220106.DescribeWebManagedRulesAttackEventsResponse 返回参数} */
   DescribeWebManagedRulesAttackEvents(data: V20220106.DescribeWebManagedRulesAttackEventsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebManagedRulesAttackEventsResponse>;
-  /** 查询waf攻击时序数据 */
+  /** {@link V20220106.DescribeWebManagedRulesData 查询waf攻击时序数据}({@link V20220106.DescribeWebManagedRulesDataRequest 请求参数}): {@link V20220106.DescribeWebManagedRulesDataResponse 返回参数} */
   DescribeWebManagedRulesData(data: V20220106.DescribeWebManagedRulesDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebManagedRulesDataResponse>;
-  /** 查询waf攻击日志 */
+  /** {@link V20220106.DescribeWebManagedRulesLog 查询waf攻击日志}({@link V20220106.DescribeWebManagedRulesLogRequest 请求参数}): {@link V20220106.DescribeWebManagedRulesLogResponse 返回参数} */
   DescribeWebManagedRulesLog(data: V20220106.DescribeWebManagedRulesLogRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebManagedRulesLogResponse>;
-  /** 查询waf攻击top数据 */
+  /** {@link V20220106.DescribeWebManagedRulesTopData 查询waf攻击top数据}({@link V20220106.DescribeWebManagedRulesTopDataRequest 请求参数}): {@link V20220106.DescribeWebManagedRulesTopDataResponse 返回参数} */
   DescribeWebManagedRulesTopData(data: V20220106.DescribeWebManagedRulesTopDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebManagedRulesTopDataResponse>;
-  /** 查询web防护攻击事件 */
+  /** {@link V20220106.DescribeWebProtectionAttackEvents 查询web防护攻击事件}({@link V20220106.DescribeWebProtectionAttackEventsRequest 请求参数}): {@link V20220106.DescribeWebProtectionAttackEventsResponse 返回参数} */
   DescribeWebProtectionAttackEvents(data: V20220106.DescribeWebProtectionAttackEventsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebProtectionAttackEventsResponse>;
-  /** 查询CC防护时序数据 */
+  /** {@link V20220106.DescribeWebProtectionData 查询CC防护时序数据}({@link V20220106.DescribeWebProtectionDataRequest 请求参数}): {@link V20220106.DescribeWebProtectionDataResponse 返回参数} */
   DescribeWebProtectionData(data: V20220106.DescribeWebProtectionDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebProtectionDataResponse>;
-  /** 查询CC防护日志 */
+  /** {@link V20220106.DescribeWebProtectionLog 查询CC防护日志}({@link V20220106.DescribeWebProtectionLogRequest 请求参数}): {@link V20220106.DescribeWebProtectionLogResponse 返回参数} */
   DescribeWebProtectionLog(data: V20220106.DescribeWebProtectionLogRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebProtectionLogResponse>;
-  /** 查询所有DDoS防护分区 */
+  /** {@link V20220106.DescribeZoneDDoSPolicy 查询所有DDoS防护分区}({@link V20220106.DescribeZoneDDoSPolicyRequest 请求参数}): {@link V20220106.DescribeZoneDDoSPolicyResponse 返回参数} */
   DescribeZoneDDoSPolicy(data: V20220106.DescribeZoneDDoSPolicyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeZoneDDoSPolicyResponse>;
-  /** 查询某个站点的详细信息 */
+  /** {@link V20220106.DescribeZoneDetails 查询某个站点的详细信息}({@link V20220106.DescribeZoneDetailsRequest 请求参数}): {@link V20220106.DescribeZoneDetailsResponse 返回参数} */
   DescribeZoneDetails(data: V20220106.DescribeZoneDetailsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeZoneDetailsResponse>;
-  /** 查询站点配置 */
+  /** {@link V20220106.DescribeZoneSetting 查询站点配置}({@link V20220106.DescribeZoneSettingRequest 请求参数}): {@link V20220106.DescribeZoneSettingResponse 返回参数} */
   DescribeZoneSetting(data: V20220106.DescribeZoneSettingRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeZoneSettingResponse>;
-  /** 查询用户站点信息列表 */
+  /** {@link V20220106.DescribeZones 查询用户站点信息列表}({@link V20220106.DescribeZonesRequest 请求参数}): {@link V20220106.DescribeZonesResponse 返回参数} */
   DescribeZones(data: V20220106.DescribeZonesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeZonesResponse>;
-  /** 七层离线日志下载 */
+  /** {@link V20220106.DownloadL7Logs 七层离线日志下载}({@link V20220106.DownloadL7LogsRequest 请求参数}): {@link V20220106.DownloadL7LogsResponse 返回参数} */
   DownloadL7Logs(data: V20220106.DownloadL7LogsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DownloadL7LogsResponse>;
-  /** 认证站点 */
+  /** {@link V20220106.IdentifyZone 认证站点}({@link V20220106.IdentifyZoneRequest 请求参数}): {@link V20220106.IdentifyZoneResponse 返回参数} */
   IdentifyZone(data: V20220106.IdentifyZoneRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.IdentifyZoneResponse>;
-  /** 导入 DNS 记录 */
+  /** {@link V20220106.ImportDnsRecords 导入 DNS 记录}({@link V20220106.ImportDnsRecordsRequest 请求参数}): {@link V20220106.ImportDnsRecordsResponse 返回参数} */
   ImportDnsRecords(data: V20220106.ImportDnsRecordsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ImportDnsRecordsResponse>;
-  /** 修改应用代理 */
+  /** {@link V20220106.ModifyApplicationProxy 修改应用代理}({@link V20220106.ModifyApplicationProxyRequest 请求参数}): {@link V20220106.ModifyApplicationProxyResponse 返回参数} */
   ModifyApplicationProxy(data: V20220106.ModifyApplicationProxyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyApplicationProxyResponse>;
-  /** 修改应用代理规则 */
+  /** {@link V20220106.ModifyApplicationProxyRule 修改应用代理规则}({@link V20220106.ModifyApplicationProxyRuleRequest 请求参数}): {@link V20220106.ModifyApplicationProxyRuleResponse 返回参数} */
   ModifyApplicationProxyRule(data: V20220106.ModifyApplicationProxyRuleRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyApplicationProxyRuleResponse>;
-  /** 修改应用代理规则的状态 */
+  /** {@link V20220106.ModifyApplicationProxyRuleStatus 修改应用代理规则的状态}({@link V20220106.ModifyApplicationProxyRuleStatusRequest 请求参数}): {@link V20220106.ModifyApplicationProxyRuleStatusResponse 返回参数} */
   ModifyApplicationProxyRuleStatus(data: V20220106.ModifyApplicationProxyRuleStatusRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyApplicationProxyRuleStatusResponse>;
-  /** 修改应用代理的状态 */
+  /** {@link V20220106.ModifyApplicationProxyStatus 修改应用代理的状态}({@link V20220106.ModifyApplicationProxyStatusRequest 请求参数}): {@link V20220106.ModifyApplicationProxyStatusResponse 返回参数} */
   ModifyApplicationProxyStatus(data: V20220106.ModifyApplicationProxyStatusRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyApplicationProxyStatusResponse>;
-  /** 修改DDoS防护分区配置 */
+  /** {@link V20220106.ModifyDDoSPolicy 修改DDoS防护分区配置}({@link V20220106.ModifyDDoSPolicyRequest 请求参数}): {@link V20220106.ModifyDDoSPolicyResponse 返回参数} */
   ModifyDDoSPolicy(data: V20220106.ModifyDDoSPolicyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyDDoSPolicyResponse>;
-  /** 域名DDoS高可用开关 */
+  /** {@link V20220106.ModifyDDoSPolicyHost 域名DDoS高可用开关}({@link V20220106.ModifyDDoSPolicyHostRequest 请求参数}): {@link V20220106.ModifyDDoSPolicyHostResponse 返回参数} */
   ModifyDDoSPolicyHost(data: V20220106.ModifyDDoSPolicyHostRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyDDoSPolicyHostResponse>;
-  /** 修改默认证书状态 */
+  /** {@link V20220106.ModifyDefaultCertificate 修改默认证书状态}({@link V20220106.ModifyDefaultCertificateRequest 请求参数}): {@link V20220106.ModifyDefaultCertificateResponse 返回参数} */
   ModifyDefaultCertificate(data: V20220106.ModifyDefaultCertificateRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyDefaultCertificateResponse>;
-  /** 修改 DNS 记录 */
+  /** {@link V20220106.ModifyDnsRecord 修改 DNS 记录}({@link V20220106.ModifyDnsRecordRequest 请求参数}): {@link V20220106.ModifyDnsRecordResponse 返回参数} */
   ModifyDnsRecord(data: V20220106.ModifyDnsRecordRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyDnsRecordResponse>;
-  /** 修改 DNSSEC */
+  /** {@link V20220106.ModifyDnssec 修改 DNSSEC}({@link V20220106.ModifyDnssecRequest 请求参数}): {@link V20220106.ModifyDnssecResponse 返回参数} */
   ModifyDnssec(data: V20220106.ModifyDnssecRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyDnssecResponse>;
-  /** 修改域名证书 */
+  /** {@link V20220106.ModifyHostsCertificate 修改域名证书}({@link V20220106.ModifyHostsCertificateRequest 请求参数}): {@link V20220106.ModifyHostsCertificateResponse 返回参数} */
   ModifyHostsCertificate(data: V20220106.ModifyHostsCertificateRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyHostsCertificateResponse>;
-  /** 修改负载均衡 */
+  /** {@link V20220106.ModifyLoadBalancing 修改负载均衡}({@link V20220106.ModifyLoadBalancingRequest 请求参数}): {@link V20220106.ModifyLoadBalancingResponse 返回参数} */
   ModifyLoadBalancing(data: V20220106.ModifyLoadBalancingRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyLoadBalancingResponse>;
-  /** 修改负载均衡状态 */
+  /** {@link V20220106.ModifyLoadBalancingStatus 修改负载均衡状态}({@link V20220106.ModifyLoadBalancingStatusRequest 请求参数}): {@link V20220106.ModifyLoadBalancingStatusResponse 返回参数} */
   ModifyLoadBalancingStatus(data: V20220106.ModifyLoadBalancingStatusRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyLoadBalancingStatusResponse>;
-  /** 源站组修改 */
+  /** {@link V20220106.ModifyOriginGroup 源站组修改}({@link V20220106.ModifyOriginGroupRequest 请求参数}): {@link V20220106.ModifyOriginGroupResponse 返回参数} */
   ModifyOriginGroup(data: V20220106.ModifyOriginGroupRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyOriginGroupResponse>;
-  /** 修改规则引擎规则 */
+  /** {@link V20220106.ModifyRule 修改规则引擎规则}({@link V20220106.ModifyRuleRequest 请求参数}): {@link V20220106.ModifyRuleResponse 返回参数} */
   ModifyRule(data: V20220106.ModifyRuleRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyRuleResponse>;
-  /** 修改规则引擎规则优先级 */
+  /** {@link V20220106.ModifyRulePriority 修改规则引擎规则优先级}({@link V20220106.ModifyRulePriorityRequest 请求参数}): {@link V20220106.ModifyRulePriorityResponse 返回参数} */
   ModifyRulePriority(data: V20220106.ModifyRulePriorityRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyRulePriorityResponse>;
-  /** 修改Web&Bot安全配置 */
+  /** {@link V20220106.ModifySecurityPolicy 修改Web&Bot安全配置}({@link V20220106.ModifySecurityPolicyRequest 请求参数}): {@link V20220106.ModifySecurityPolicyResponse 返回参数} */
   ModifySecurityPolicy(data: V20220106.ModifySecurityPolicyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifySecurityPolicyResponse>;
-  /** 修改站点 */
+  /** {@link V20220106.ModifyZone 修改站点}({@link V20220106.ModifyZoneRequest 请求参数}): {@link V20220106.ModifyZoneResponse 返回参数} */
   ModifyZone(data: V20220106.ModifyZoneRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyZoneResponse>;
-  /** 修改 CNAME 加速状态 */
+  /** {@link V20220106.ModifyZoneCnameSpeedUp 修改 CNAME 加速状态}({@link V20220106.ModifyZoneCnameSpeedUpRequest 请求参数}): {@link V20220106.ModifyZoneCnameSpeedUpResponse 返回参数} */
   ModifyZoneCnameSpeedUp(data: V20220106.ModifyZoneCnameSpeedUpRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyZoneCnameSpeedUpResponse>;
-  /** 修改站点配置 */
+  /** {@link V20220106.ModifyZoneSetting 修改站点配置}({@link V20220106.ModifyZoneSettingRequest 请求参数}): {@link V20220106.ModifyZoneSettingResponse 返回参数} */
   ModifyZoneSetting(data: V20220106.ModifyZoneSettingRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyZoneSettingResponse>;
-  /** 切换站点状态 */
+  /** {@link V20220106.ModifyZoneStatus 切换站点状态}({@link V20220106.ModifyZoneStatusRequest 请求参数}): {@link V20220106.ModifyZoneStatusResponse 返回参数} */
   ModifyZoneStatus(data: V20220106.ModifyZoneStatusRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyZoneStatusResponse>;
-  /** 找回站点 */
+  /** {@link V20220106.ReclaimZone 找回站点}({@link V20220106.ReclaimZoneRequest 请求参数}): {@link V20220106.ReclaimZoneResponse 返回参数} */
   ReclaimZone(data: V20220106.ReclaimZoneRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ReclaimZoneResponse>;
-  /** 扫描站点历史解析记录 */
+  /** {@link V20220106.ScanDnsRecords 扫描站点历史解析记录}({@link V20220106.ScanDnsRecordsRequest 请求参数}): {@link V20220106.ScanDnsRecordsResponse 返回参数} */
   ScanDnsRecords(data: V20220106.ScanDnsRecordsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ScanDnsRecordsResponse>;
 }
 

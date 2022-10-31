@@ -152,10 +152,10 @@ declare interface GetIndustryV1HomeMembersResponse {
   RequestId?: string;
 }
 
-/** [对话机器人](https://cloud.tencent.com/document/product/1268) */
+/** {@link Icr 对话机器人} */
 declare interface Icr {
   (): Versions;
-  /** 获取成员列表 */
+  /** {@link GetIndustryV1HomeMembers 获取成员列表}({@link GetIndustryV1HomeMembersRequest 请求参数}): {@link GetIndustryV1HomeMembersResponse 返回参数} */
   GetIndustryV1HomeMembers(data: GetIndustryV1HomeMembersRequest, config?: AxiosRequestConfig): AxiosPromise<GetIndustryV1HomeMembersResponse>;
 }
 

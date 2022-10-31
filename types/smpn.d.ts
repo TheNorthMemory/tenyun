@@ -136,18 +136,18 @@ declare interface MRLResponse {
   CheatLevel: number;
 }
 
-/** [营销号码安全](https://cloud.tencent.com/document/product/1127) */
+/** {@link Smpn 营销号码安全} */
 declare interface Smpn {
   (): Versions;
-  /** 企业号码认证 */
+  /** {@link CreateSmpnEpa 企业号码认证}({@link CreateSmpnEpaRequest 请求参数}): {@link CreateSmpnEpaResponse 返回参数} */
   CreateSmpnEpa(data: CreateSmpnEpaRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSmpnEpaResponse>;
-  /** 终端骚扰保护 */
+  /** {@link DescribeSmpnChp 终端骚扰保护}({@link DescribeSmpnChpRequest 请求参数}): {@link DescribeSmpnChpResponse 返回参数} */
   DescribeSmpnChp(data: DescribeSmpnChpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmpnChpResponse>;
-  /** 虚假号码识别 */
+  /** {@link DescribeSmpnFnr 虚假号码识别}({@link DescribeSmpnFnrRequest 请求参数}): {@link DescribeSmpnFnrResponse 返回参数} */
   DescribeSmpnFnr(data: DescribeSmpnFnrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmpnFnrResponse>;
-  /** 号码营销监控 */
+  /** {@link DescribeSmpnMhm 号码营销监控}({@link DescribeSmpnMhmRequest 请求参数}): {@link DescribeSmpnMhmResponse 返回参数} */
   DescribeSmpnMhm(data: DescribeSmpnMhmRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmpnMhmResponse>;
-  /** 恶意标记等级 */
+  /** {@link DescribeSmpnMrl 恶意标记等级}({@link DescribeSmpnMrlRequest 请求参数}): {@link DescribeSmpnMrlResponse 返回参数} */
   DescribeSmpnMrl(data: DescribeSmpnMrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmpnMrlResponse>;
 }
 

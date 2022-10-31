@@ -592,58 +592,58 @@ declare interface TransformClusterPayModeResponse {
   RequestId?: string;
 }
 
-/** [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) */
+/** {@link Tdcpg TDSQL-C PostgreSQL 版} */
 declare interface Tdcpg {
   (): Versions;
-  /** 克隆集群 */
+  /** {@link CloneClusterToPointInTime 克隆集群}({@link CloneClusterToPointInTimeRequest 请求参数}): {@link CloneClusterToPointInTimeResponse 返回参数} */
   CloneClusterToPointInTime(data: CloneClusterToPointInTimeRequest, config?: AxiosRequestConfig): AxiosPromise<CloneClusterToPointInTimeResponse>;
-  /** 创建集群 */
+  /** {@link CreateCluster 创建集群}({@link CreateClusterRequest 请求参数}): {@link CreateClusterResponse 返回参数} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
-  /** 创建实例 */
+  /** {@link CreateClusterInstances 创建实例}({@link CreateClusterInstancesRequest 请求参数}): {@link CreateClusterInstancesResponse 返回参数} */
   CreateClusterInstances(data: CreateClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterInstancesResponse>;
-  /** 删除集群 */
+  /** {@link DeleteCluster 删除集群}({@link DeleteClusterRequest 请求参数}): {@link DeleteClusterResponse 返回参数} */
   DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
-  /** 删除实例 */
+  /** {@link DeleteClusterInstances 删除实例}({@link DeleteClusterInstancesRequest 请求参数}): {@link DeleteClusterInstancesResponse 返回参数} */
   DeleteClusterInstances(data: DeleteClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterInstancesResponse>;
-  /** 查询数据库账号信息 */
+  /** {@link DescribeAccounts 查询数据库账号信息}({@link DescribeAccountsRequest 请求参数}): {@link DescribeAccountsResponse 返回参数} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
-  /** 查询集群的备份集 */
+  /** {@link DescribeClusterBackups 查询集群的备份集}({@link DescribeClusterBackupsRequest 请求参数}): {@link DescribeClusterBackupsResponse 返回参数} */
   DescribeClusterBackups(data: DescribeClusterBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterBackupsResponse>;
-  /** 查询集群接入点 */
+  /** {@link DescribeClusterEndpoints 查询集群接入点}({@link DescribeClusterEndpointsRequest 请求参数}): {@link DescribeClusterEndpointsResponse 返回参数} */
   DescribeClusterEndpoints(data: DescribeClusterEndpointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterEndpointsResponse>;
-  /** 查询实例 */
+  /** {@link DescribeClusterInstances 查询实例}({@link DescribeClusterInstancesRequest 请求参数}): {@link DescribeClusterInstancesResponse 返回参数} */
   DescribeClusterInstances(data: DescribeClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstancesResponse>;
-  /** 查询集群可回档时间范围 */
+  /** {@link DescribeClusterRecoveryTimeRange 查询集群可回档时间范围}({@link DescribeClusterRecoveryTimeRangeRequest 请求参数}): {@link DescribeClusterRecoveryTimeRangeResponse 返回参数} */
   DescribeClusterRecoveryTimeRange(data: DescribeClusterRecoveryTimeRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterRecoveryTimeRangeResponse>;
-  /** 查询集群 */
+  /** {@link DescribeClusters 查询集群}({@link DescribeClustersRequest 请求参数}): {@link DescribeClustersResponse 返回参数} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
-  /** 根据订单号获取资源信息 */
+  /** {@link DescribeResourcesByDealName 根据订单号获取资源信息}({@link DescribeResourcesByDealNameRequest 请求参数}): {@link DescribeResourcesByDealNameResponse 返回参数} */
   DescribeResourcesByDealName(data: DescribeResourcesByDealNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesByDealNameResponse>;
-  /** 隔离集群 */
+  /** {@link IsolateCluster 隔离集群}({@link IsolateClusterRequest 请求参数}): {@link IsolateClusterResponse 返回参数} */
   IsolateCluster(data: IsolateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateClusterResponse>;
-  /** 隔离实例 */
+  /** {@link IsolateClusterInstances 隔离实例}({@link IsolateClusterInstancesRequest 请求参数}): {@link IsolateClusterInstancesResponse 返回参数} */
   IsolateClusterInstances(data: IsolateClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateClusterInstancesResponse>;
-  /** 修改数据库账号描述 */
+  /** {@link ModifyAccountDescription 修改数据库账号描述}({@link ModifyAccountDescriptionRequest 请求参数}): {@link ModifyAccountDescriptionResponse 返回参数} */
   ModifyAccountDescription(data: ModifyAccountDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountDescriptionResponse>;
-  /** 修改接入点外网状态 */
+  /** {@link ModifyClusterEndpointWanStatus 修改接入点外网状态}({@link ModifyClusterEndpointWanStatusRequest 请求参数}): {@link ModifyClusterEndpointWanStatusResponse 返回参数} */
   ModifyClusterEndpointWanStatus(data: ModifyClusterEndpointWanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterEndpointWanStatusResponse>;
-  /** 修改实例规格 */
+  /** {@link ModifyClusterInstancesSpec 修改实例规格}({@link ModifyClusterInstancesSpecRequest 请求参数}): {@link ModifyClusterInstancesSpecResponse 返回参数} */
   ModifyClusterInstancesSpec(data: ModifyClusterInstancesSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterInstancesSpecResponse>;
-  /** 修改集群名字 */
+  /** {@link ModifyClusterName 修改集群名字}({@link ModifyClusterNameRequest 请求参数}): {@link ModifyClusterNameResponse 返回参数} */
   ModifyClusterName(data: ModifyClusterNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterNameResponse>;
-  /** 修改集群自动续费 */
+  /** {@link ModifyClustersAutoRenewFlag 修改集群自动续费}({@link ModifyClustersAutoRenewFlagRequest 请求参数}): {@link ModifyClustersAutoRenewFlagResponse 返回参数} */
   ModifyClustersAutoRenewFlag(data: ModifyClustersAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClustersAutoRenewFlagResponse>;
-  /** 恢复集群 */
+  /** {@link RecoverCluster 恢复集群}({@link RecoverClusterRequest 请求参数}): {@link RecoverClusterResponse 返回参数} */
   RecoverCluster(data: RecoverClusterRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverClusterResponse>;
-  /** 恢复实例 */
+  /** {@link RecoverClusterInstances 恢复实例}({@link RecoverClusterInstancesRequest 请求参数}): {@link RecoverClusterInstancesResponse 返回参数} */
   RecoverClusterInstances(data: RecoverClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverClusterInstancesResponse>;
-  /** 续费集群 */
+  /** {@link RenewCluster 续费集群}({@link RenewClusterRequest 请求参数}): {@link RenewClusterResponse 返回参数} */
   RenewCluster(data: RenewClusterRequest, config?: AxiosRequestConfig): AxiosPromise<RenewClusterResponse>;
-  /** 重置数据库账号密码 */
+  /** {@link ResetAccountPassword 重置数据库账号密码}({@link ResetAccountPasswordRequest 请求参数}): {@link ResetAccountPasswordResponse 返回参数} */
   ResetAccountPassword(data: ResetAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAccountPasswordResponse>;
-  /** 重启实例 */
+  /** {@link RestartClusterInstances 重启实例}({@link RestartClusterInstancesRequest 请求参数}): {@link RestartClusterInstancesResponse 返回参数} */
   RestartClusterInstances(data: RestartClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RestartClusterInstancesResponse>;
-  /** 转换集群付费模式 */
+  /** {@link TransformClusterPayMode 转换集群付费模式}({@link TransformClusterPayModeRequest 请求参数}): {@link TransformClusterPayModeResponse 返回参数} */
   TransformClusterPayMode(data: TransformClusterPayModeRequest, config?: AxiosRequestConfig): AxiosPromise<TransformClusterPayModeResponse>;
 }
 

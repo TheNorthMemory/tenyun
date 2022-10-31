@@ -192,12 +192,12 @@ declare interface QueryAntiFraudVipResponse {
   RequestId?: string;
 }
 
-/** [定制建模](https://cloud.tencent.com/document/product/1029) */
+/** {@link Afc 定制建模} */
 declare interface Afc {
   (): Versions;
-  /** 反欺诈VIP评分接口 */
+  /** {@link GetAntiFraudVip 反欺诈VIP评分接口}({@link GetAntiFraudVipRequest 请求参数}): {@link GetAntiFraudVipResponse 返回参数} */
   GetAntiFraudVip(data?: GetAntiFraudVipRequest, config?: AxiosRequestConfig): AxiosPromise<GetAntiFraudVipResponse>;
-  /** 定制建模 */
+  /** {@link QueryAntiFraudVip 定制建模}({@link QueryAntiFraudVipRequest 请求参数}): {@link QueryAntiFraudVipResponse 返回参数} */
   QueryAntiFraudVip(data?: QueryAntiFraudVipRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAntiFraudVipResponse>;
 }
 

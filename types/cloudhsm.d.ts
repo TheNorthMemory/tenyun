@@ -416,30 +416,30 @@ declare interface ModifyVsmAttributesResponse {
   RequestId?: string;
 }
 
-/** [云加密机](https://cloud.tencent.com/document/product/639) */
+/** {@link Cloudhsm 云加密机} */
 declare interface Cloudhsm {
   (): Versions;
-  /** 通过SubnetId获取Hsm资源数 */
+  /** {@link DescribeHSMBySubnetId 通过SubnetId获取Hsm资源数}({@link DescribeHSMBySubnetIdRequest 请求参数}): {@link DescribeHSMBySubnetIdResponse 返回参数} */
   DescribeHSMBySubnetId(data: DescribeHSMBySubnetIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHSMBySubnetIdResponse>;
-  /** 通过VpcId获取Hsm资源数 */
+  /** {@link DescribeHSMByVpcId 通过VpcId获取Hsm资源数}({@link DescribeHSMByVpcIdRequest 请求参数}): {@link DescribeHSMByVpcIdResponse 返回参数} */
   DescribeHSMByVpcId(data: DescribeHSMByVpcIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHSMByVpcIdResponse>;
-  /** 查询子网列表 */
+  /** {@link DescribeSubnet 查询子网列表}({@link DescribeSubnetRequest 请求参数}): {@link DescribeSubnetResponse 返回参数} */
   DescribeSubnet(data: DescribeSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetResponse>;
-  /** 获取当前地域所支持的设备列表 */
+  /** {@link DescribeSupportedHsm 获取当前地域所支持的设备列表}({@link DescribeSupportedHsmRequest 请求参数}): {@link DescribeSupportedHsmResponse 返回参数} */
   DescribeSupportedHsm(data?: DescribeSupportedHsmRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportedHsmResponse>;
-  /** 获取用户安全组列表 */
+  /** {@link DescribeUsg 获取用户安全组列表}({@link DescribeUsgRequest 请求参数}): {@link DescribeUsgResponse 返回参数} */
   DescribeUsg(data: DescribeUsgRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsgResponse>;
-  /** 获取安全组详情 */
+  /** {@link DescribeUsgRule 获取安全组详情}({@link DescribeUsgRuleRequest 请求参数}): {@link DescribeUsgRuleResponse 返回参数} */
   DescribeUsgRule(data: DescribeUsgRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsgRuleResponse>;
-  /** 查询私有网络列表 */
+  /** {@link DescribeVpc 查询私有网络列表}({@link DescribeVpcRequest 请求参数}): {@link DescribeVpcResponse 返回参数} */
   DescribeVpc(data: DescribeVpcRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcResponse>;
-  /** 获取VSM属性 */
+  /** {@link DescribeVsmAttributes 获取VSM属性}({@link DescribeVsmAttributesRequest 请求参数}): {@link DescribeVsmAttributesResponse 返回参数} */
   DescribeVsmAttributes(data: DescribeVsmAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVsmAttributesResponse>;
-  /** 获取用户VSM列表 */
+  /** {@link DescribeVsms 获取用户VSM列表}({@link DescribeVsmsRequest 请求参数}): {@link DescribeVsmsResponse 返回参数} */
   DescribeVsms(data: DescribeVsmsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVsmsResponse>;
-  /** 询价 */
+  /** {@link InquiryPriceBuyVsm 询价}({@link InquiryPriceBuyVsmRequest 请求参数}): {@link InquiryPriceBuyVsmResponse 返回参数} */
   InquiryPriceBuyVsm(data: InquiryPriceBuyVsmRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceBuyVsmResponse>;
-  /** 修改VSM属性 */
+  /** {@link ModifyVsmAttributes 修改VSM属性}({@link ModifyVsmAttributesRequest 请求参数}): {@link ModifyVsmAttributesResponse 返回参数} */
   ModifyVsmAttributes(data: ModifyVsmAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVsmAttributesResponse>;
 }
 

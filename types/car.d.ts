@@ -46,14 +46,14 @@ declare interface DestroySessionResponse {
   RequestId?: string;
 }
 
-/** [应用云渲染](https://cloud.tencent.com/document/product/1547) */
+/** {@link Car 应用云渲染} */
 declare interface Car {
   (): Versions;
-  /** 申请并发 */
+  /** {@link ApplyConcurrent 申请并发}({@link ApplyConcurrentRequest 请求参数}): {@link ApplyConcurrentResponse 返回参数} */
   ApplyConcurrent(data: ApplyConcurrentRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyConcurrentResponse>;
-  /** 创建会话 */
+  /** {@link CreateSession 创建会话}({@link CreateSessionRequest 请求参数}): {@link CreateSessionResponse 返回参数} */
   CreateSession(data: CreateSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSessionResponse>;
-  /** 销毁会话 */
+  /** {@link DestroySession 销毁会话}({@link DestroySessionRequest 请求参数}): {@link DestroySessionResponse 返回参数} */
   DestroySession(data: DestroySessionRequest, config?: AxiosRequestConfig): AxiosPromise<DestroySessionResponse>;
 }
 

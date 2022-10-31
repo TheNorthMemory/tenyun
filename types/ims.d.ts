@@ -600,16 +600,16 @@ declare namespace V20200713 {
   }
 }
 
-/** [图片内容安全](https://cloud.tencent.com/document/product/1125) */
+/** {@link Ims 图片内容安全} */
 declare interface Ims {
   (): Versions;
-  /** 图片内容检测 */
+  /** {@link ImageModeration 图片内容检测}({@link ImageModerationRequest 请求参数}): {@link ImageModerationResponse 返回参数} */
   ImageModeration(data?: ImageModerationRequest, config?: AxiosRequestConfig): AxiosPromise<ImageModerationResponse>;
-  /** 识别统计 */
+  /** {@link V20200713.DescribeImageStat 识别统计}({@link V20200713.DescribeImageStatRequest 请求参数}): {@link V20200713.DescribeImageStatResponse 返回参数} */
   DescribeImageStat(data: V20200713.DescribeImageStatRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.DescribeImageStatResponse>;
-  /** 获取图片审核明细数据 */
+  /** {@link V20200713.DescribeImsList 获取图片审核明细数据}({@link V20200713.DescribeImsListRequest 请求参数}): {@link V20200713.DescribeImsListResponse 返回参数} */
   DescribeImsList(data: V20200713.DescribeImsListRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.DescribeImsListResponse>;
-  /** 图片内容检测 */
+  /** {@link V20200713.ImageModeration 图片内容检测}({@link V20200713.ImageModerationRequest 请求参数}): {@link V20200713.ImageModerationResponse 返回参数} */
   ImageModeration(data: V20200713.ImageModerationRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.ImageModerationResponse>;
 }
 

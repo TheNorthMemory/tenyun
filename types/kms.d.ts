@@ -846,106 +846,106 @@ declare interface VerifyByAsymmetricKeyResponse {
   RequestId?: string;
 }
 
-/** [密钥管理系统](https://cloud.tencent.com/document/product/573) */
+/** {@link Kms 密钥管理系统} */
 declare interface Kms {
   (): Versions;
-  /** 密钥归档 */
+  /** {@link ArchiveKey 密钥归档}({@link ArchiveKeyRequest 请求参数}): {@link ArchiveKeyResponse 返回参数} */
   ArchiveKey(data: ArchiveKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ArchiveKeyResponse>;
-  /** 非对称密钥RSA解密 */
+  /** {@link AsymmetricRsaDecrypt 非对称密钥RSA解密}({@link AsymmetricRsaDecryptRequest 请求参数}): {@link AsymmetricRsaDecryptResponse 返回参数} */
   AsymmetricRsaDecrypt(data: AsymmetricRsaDecryptRequest, config?: AxiosRequestConfig): AxiosPromise<AsymmetricRsaDecryptResponse>;
-  /** 非对称密钥Sm2解密 */
+  /** {@link AsymmetricSm2Decrypt 非对称密钥Sm2解密}({@link AsymmetricSm2DecryptRequest 请求参数}): {@link AsymmetricSm2DecryptResponse 返回参数} */
   AsymmetricSm2Decrypt(data: AsymmetricSm2DecryptRequest, config?: AxiosRequestConfig): AxiosPromise<AsymmetricSm2DecryptResponse>;
-  /** 绑定密钥和云产品资源的使用关系 */
+  /** {@link BindCloudResource 绑定密钥和云产品资源的使用关系}({@link BindCloudResourceRequest 请求参数}): {@link BindCloudResourceResponse 返回参数} */
   BindCloudResource(data: BindCloudResourceRequest, config?: AxiosRequestConfig): AxiosPromise<BindCloudResourceResponse>;
-  /** 取消密钥归档 */
+  /** {@link CancelKeyArchive 取消密钥归档}({@link CancelKeyArchiveRequest 请求参数}): {@link CancelKeyArchiveResponse 返回参数} */
   CancelKeyArchive(data: CancelKeyArchiveRequest, config?: AxiosRequestConfig): AxiosPromise<CancelKeyArchiveResponse>;
-  /** 取消CMK计划删除操作 */
+  /** {@link CancelKeyDeletion 取消CMK计划删除操作}({@link CancelKeyDeletionRequest 请求参数}): {@link CancelKeyDeletionResponse 返回参数} */
   CancelKeyDeletion(data: CancelKeyDeletionRequest, config?: AxiosRequestConfig): AxiosPromise<CancelKeyDeletionResponse>;
-  /** 创建主密钥 */
+  /** {@link CreateKey 创建主密钥}({@link CreateKeyRequest 请求参数}): {@link CreateKeyResponse 返回参数} */
   CreateKey(data: CreateKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKeyResponse>;
-  /** 创建白盒密钥 */
+  /** {@link CreateWhiteBoxKey 创建白盒密钥}({@link CreateWhiteBoxKeyRequest 请求参数}): {@link CreateWhiteBoxKeyResponse 返回参数} */
   CreateWhiteBoxKey(data: CreateWhiteBoxKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWhiteBoxKeyResponse>;
-  /** 解密 */
+  /** {@link Decrypt 解密}({@link DecryptRequest 请求参数}): {@link DecryptResponse 返回参数} */
   Decrypt(data: DecryptRequest, config?: AxiosRequestConfig): AxiosPromise<DecryptResponse>;
-  /** 删除导入的密钥材料 */
+  /** {@link DeleteImportedKeyMaterial 删除导入的密钥材料}({@link DeleteImportedKeyMaterialRequest 请求参数}): {@link DeleteImportedKeyMaterialResponse 返回参数} */
   DeleteImportedKeyMaterial(data: DeleteImportedKeyMaterialRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImportedKeyMaterialResponse>;
-  /** 删除白盒密钥 */
+  /** {@link DeleteWhiteBoxKey 删除白盒密钥}({@link DeleteWhiteBoxKeyRequest 请求参数}): {@link DeleteWhiteBoxKeyResponse 返回参数} */
   DeleteWhiteBoxKey(data: DeleteWhiteBoxKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWhiteBoxKeyResponse>;
-  /** 获取主密钥属性 */
+  /** {@link DescribeKey 获取主密钥属性}({@link DescribeKeyRequest 请求参数}): {@link DescribeKeyResponse 返回参数} */
   DescribeKey(data: DescribeKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeyResponse>;
-  /** 获取多个主密钥属性 */
+  /** {@link DescribeKeys 获取多个主密钥属性}({@link DescribeKeysRequest 请求参数}): {@link DescribeKeysResponse 返回参数} */
   DescribeKeys(data: DescribeKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeysResponse>;
-  /** 获取白盒解密密钥 */
+  /** {@link DescribeWhiteBoxDecryptKey 获取白盒解密密钥}({@link DescribeWhiteBoxDecryptKeyRequest 请求参数}): {@link DescribeWhiteBoxDecryptKeyResponse 返回参数} */
   DescribeWhiteBoxDecryptKey(data: DescribeWhiteBoxDecryptKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteBoxDecryptKeyResponse>;
-  /** 获取指定密钥的设备指纹列表 */
+  /** {@link DescribeWhiteBoxDeviceFingerprints 获取指定密钥的设备指纹列表}({@link DescribeWhiteBoxDeviceFingerprintsRequest 请求参数}): {@link DescribeWhiteBoxDeviceFingerprintsResponse 返回参数} */
   DescribeWhiteBoxDeviceFingerprints(data: DescribeWhiteBoxDeviceFingerprintsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteBoxDeviceFingerprintsResponse>;
-  /** 展示白盒密钥的信息 */
+  /** {@link DescribeWhiteBoxKey 展示白盒密钥的信息}({@link DescribeWhiteBoxKeyRequest 请求参数}): {@link DescribeWhiteBoxKeyResponse 返回参数} */
   DescribeWhiteBoxKey(data: DescribeWhiteBoxKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteBoxKeyResponse>;
-  /** 获取白盒密钥列表 */
+  /** {@link DescribeWhiteBoxKeyDetails 获取白盒密钥列表}({@link DescribeWhiteBoxKeyDetailsRequest 请求参数}): {@link DescribeWhiteBoxKeyDetailsResponse 返回参数} */
   DescribeWhiteBoxKeyDetails(data?: DescribeWhiteBoxKeyDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteBoxKeyDetailsResponse>;
-  /** 获取白盒密钥服务状态 */
+  /** {@link DescribeWhiteBoxServiceStatus 获取白盒密钥服务状态}({@link DescribeWhiteBoxServiceStatusRequest 请求参数}): {@link DescribeWhiteBoxServiceStatusResponse 返回参数} */
   DescribeWhiteBoxServiceStatus(data?: DescribeWhiteBoxServiceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteBoxServiceStatusResponse>;
-  /** 禁用主密钥 */
+  /** {@link DisableKey 禁用主密钥}({@link DisableKeyRequest 请求参数}): {@link DisableKeyResponse 返回参数} */
   DisableKey(data: DisableKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DisableKeyResponse>;
-  /** 禁止密钥轮换 */
+  /** {@link DisableKeyRotation 禁止密钥轮换}({@link DisableKeyRotationRequest 请求参数}): {@link DisableKeyRotationResponse 返回参数} */
   DisableKeyRotation(data: DisableKeyRotationRequest, config?: AxiosRequestConfig): AxiosPromise<DisableKeyRotationResponse>;
-  /** 批量禁用主密钥 */
+  /** {@link DisableKeys 批量禁用主密钥}({@link DisableKeysRequest 请求参数}): {@link DisableKeysResponse 返回参数} */
   DisableKeys(data: DisableKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DisableKeysResponse>;
-  /** 禁用白盒密钥 */
+  /** {@link DisableWhiteBoxKey 禁用白盒密钥}({@link DisableWhiteBoxKeyRequest 请求参数}): {@link DisableWhiteBoxKeyResponse 返回参数} */
   DisableWhiteBoxKey(data: DisableWhiteBoxKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DisableWhiteBoxKeyResponse>;
-  /** 批量禁用白盒密钥 */
+  /** {@link DisableWhiteBoxKeys 批量禁用白盒密钥}({@link DisableWhiteBoxKeysRequest 请求参数}): {@link DisableWhiteBoxKeysResponse 返回参数} */
   DisableWhiteBoxKeys(data: DisableWhiteBoxKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DisableWhiteBoxKeysResponse>;
-  /** 启用主密钥 */
+  /** {@link EnableKey 启用主密钥}({@link EnableKeyRequest 请求参数}): {@link EnableKeyResponse 返回参数} */
   EnableKey(data: EnableKeyRequest, config?: AxiosRequestConfig): AxiosPromise<EnableKeyResponse>;
-  /** 开启密钥轮换 */
+  /** {@link EnableKeyRotation 开启密钥轮换}({@link EnableKeyRotationRequest 请求参数}): {@link EnableKeyRotationResponse 返回参数} */
   EnableKeyRotation(data: EnableKeyRotationRequest, config?: AxiosRequestConfig): AxiosPromise<EnableKeyRotationResponse>;
-  /** 批量启动主密钥 */
+  /** {@link EnableKeys 批量启动主密钥}({@link EnableKeysRequest 请求参数}): {@link EnableKeysResponse 返回参数} */
   EnableKeys(data: EnableKeysRequest, config?: AxiosRequestConfig): AxiosPromise<EnableKeysResponse>;
-  /** 启用白盒密钥 */
+  /** {@link EnableWhiteBoxKey 启用白盒密钥}({@link EnableWhiteBoxKeyRequest 请求参数}): {@link EnableWhiteBoxKeyResponse 返回参数} */
   EnableWhiteBoxKey(data: EnableWhiteBoxKeyRequest, config?: AxiosRequestConfig): AxiosPromise<EnableWhiteBoxKeyResponse>;
-  /** 批量启用白盒密钥 */
+  /** {@link EnableWhiteBoxKeys 批量启用白盒密钥}({@link EnableWhiteBoxKeysRequest 请求参数}): {@link EnableWhiteBoxKeysResponse 返回参数} */
   EnableWhiteBoxKeys(data: EnableWhiteBoxKeysRequest, config?: AxiosRequestConfig): AxiosPromise<EnableWhiteBoxKeysResponse>;
-  /** 加密 */
+  /** {@link Encrypt 加密}({@link EncryptRequest 请求参数}): {@link EncryptResponse 返回参数} */
   Encrypt(data: EncryptRequest, config?: AxiosRequestConfig): AxiosPromise<EncryptResponse>;
-  /** 使用白盒密钥进行加密 */
+  /** {@link EncryptByWhiteBox 使用白盒密钥进行加密}({@link EncryptByWhiteBoxRequest 请求参数}): {@link EncryptByWhiteBoxResponse 返回参数} */
   EncryptByWhiteBox(data: EncryptByWhiteBoxRequest, config?: AxiosRequestConfig): AxiosPromise<EncryptByWhiteBoxResponse>;
-  /** 生成数据密钥 */
+  /** {@link GenerateDataKey 生成数据密钥}({@link GenerateDataKeyRequest 请求参数}): {@link GenerateDataKeyResponse 返回参数} */
   GenerateDataKey(data: GenerateDataKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateDataKeyResponse>;
-  /** 随机数生成接口 */
+  /** {@link GenerateRandom 随机数生成接口}({@link GenerateRandomRequest 请求参数}): {@link GenerateRandomResponse 返回参数} */
   GenerateRandom(data: GenerateRandomRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateRandomResponse>;
-  /** 查询密钥轮换状态 */
+  /** {@link GetKeyRotationStatus 查询密钥轮换状态}({@link GetKeyRotationStatusRequest 请求参数}): {@link GetKeyRotationStatusResponse 返回参数} */
   GetKeyRotationStatus(data: GetKeyRotationStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetKeyRotationStatusResponse>;
-  /** 获取导入主密钥（CMK）材料的参数 */
+  /** {@link GetParametersForImport 获取导入主密钥（CMK）材料的参数}({@link GetParametersForImportRequest 请求参数}): {@link GetParametersForImportResponse 返回参数} */
   GetParametersForImport(data: GetParametersForImportRequest, config?: AxiosRequestConfig): AxiosPromise<GetParametersForImportResponse>;
-  /** 获取非对称密钥的公钥 */
+  /** {@link GetPublicKey 获取非对称密钥的公钥}({@link GetPublicKeyRequest 请求参数}): {@link GetPublicKeyResponse 返回参数} */
   GetPublicKey(data: GetPublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GetPublicKeyResponse>;
-  /** 获取可以提供KMS服务的地域列表 */
+  /** {@link GetRegions 获取可以提供KMS服务的地域列表}({@link GetRegionsRequest 请求参数}): {@link GetRegionsResponse 返回参数} */
   GetRegions(data?: GetRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRegionsResponse>;
-  /** 查询服务状态 */
+  /** {@link GetServiceStatus 查询服务状态}({@link GetServiceStatusRequest 请求参数}): {@link GetServiceStatusResponse 返回参数} */
   GetServiceStatus(data?: GetServiceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetServiceStatusResponse>;
-  /** 导入密钥材料 */
+  /** {@link ImportKeyMaterial 导入密钥材料}({@link ImportKeyMaterialRequest 请求参数}): {@link ImportKeyMaterialResponse 返回参数} */
   ImportKeyMaterial(data: ImportKeyMaterialRequest, config?: AxiosRequestConfig): AxiosPromise<ImportKeyMaterialResponse>;
-  /** 列出当前Region支持的加密方式 */
+  /** {@link ListAlgorithms 列出当前Region支持的加密方式}({@link ListAlgorithmsRequest 请求参数}): {@link ListAlgorithmsResponse 返回参数} */
   ListAlgorithms(data?: ListAlgorithmsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAlgorithmsResponse>;
-  /** 获取主密钥列表详情 */
+  /** {@link ListKeyDetail 获取主密钥列表详情}({@link ListKeyDetailRequest 请求参数}): {@link ListKeyDetailResponse 返回参数} */
   ListKeyDetail(data?: ListKeyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListKeyDetailResponse>;
-  /** 获取主密钥列表 */
+  /** {@link ListKeys 获取主密钥列表}({@link ListKeysRequest 请求参数}): {@link ListKeysResponse 返回参数} */
   ListKeys(data?: ListKeysRequest, config?: AxiosRequestConfig): AxiosPromise<ListKeysResponse>;
-  /** 覆盖指定密钥的设备指纹信息 */
+  /** {@link OverwriteWhiteBoxDeviceFingerprints 覆盖指定密钥的设备指纹信息}({@link OverwriteWhiteBoxDeviceFingerprintsRequest 请求参数}): {@link OverwriteWhiteBoxDeviceFingerprintsResponse 返回参数} */
   OverwriteWhiteBoxDeviceFingerprints(data: OverwriteWhiteBoxDeviceFingerprintsRequest, config?: AxiosRequestConfig): AxiosPromise<OverwriteWhiteBoxDeviceFingerprintsResponse>;
-  /** 密文刷新 */
+  /** {@link ReEncrypt 密文刷新}({@link ReEncryptRequest 请求参数}): {@link ReEncryptResponse 返回参数} */
   ReEncrypt(data: ReEncryptRequest, config?: AxiosRequestConfig): AxiosPromise<ReEncryptResponse>;
-  /** CMK计划删除接口 */
+  /** {@link ScheduleKeyDeletion CMK计划删除接口}({@link ScheduleKeyDeletionRequest 请求参数}): {@link ScheduleKeyDeletionResponse 返回参数} */
   ScheduleKeyDeletion(data: ScheduleKeyDeletionRequest, config?: AxiosRequestConfig): AxiosPromise<ScheduleKeyDeletionResponse>;
-  /** 签名 */
+  /** {@link SignByAsymmetricKey 签名}({@link SignByAsymmetricKeyRequest 请求参数}): {@link SignByAsymmetricKeyResponse 返回参数} */
   SignByAsymmetricKey(data: SignByAsymmetricKeyRequest, config?: AxiosRequestConfig): AxiosPromise<SignByAsymmetricKeyResponse>;
-  /** 解绑CMK和云资源的关联关系 */
+  /** {@link UnbindCloudResource 解绑CMK和云资源的关联关系}({@link UnbindCloudResourceRequest 请求参数}): {@link UnbindCloudResourceResponse 返回参数} */
   UnbindCloudResource(data: UnbindCloudResourceRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindCloudResourceResponse>;
-  /** 修改别名 */
+  /** {@link UpdateAlias 修改别名}({@link UpdateAliasRequest 请求参数}): {@link UpdateAliasResponse 返回参数} */
   UpdateAlias(data: UpdateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAliasResponse>;
-  /** 修改主密钥描述信息 */
+  /** {@link UpdateKeyDescription 修改主密钥描述信息}({@link UpdateKeyDescriptionRequest 请求参数}): {@link UpdateKeyDescriptionResponse 返回参数} */
   UpdateKeyDescription(data: UpdateKeyDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateKeyDescriptionResponse>;
-  /** 验证签名 */
+  /** {@link VerifyByAsymmetricKey 验证签名}({@link VerifyByAsymmetricKeyRequest 请求参数}): {@link VerifyByAsymmetricKeyResponse 返回参数} */
   VerifyByAsymmetricKey(data: VerifyByAsymmetricKeyRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyByAsymmetricKeyResponse>;
 }
 

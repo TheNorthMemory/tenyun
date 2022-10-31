@@ -450,48 +450,48 @@ declare interface UnbindVpcIpResponse {
   RequestId?: string;
 }
 
-/** [黑石弹性公网IP](https://cloud.tencent.com/document/product/1028) */
+/** {@link Bmeip 黑石弹性公网IP} */
 declare interface Bmeip {
   (): Versions;
-  /** 绑定弹性公网IP ACL */
+  /** {@link BindEipAcls 绑定弹性公网IP ACL}({@link BindEipAclsRequest 请求参数}): {@link BindEipAclsResponse 返回参数} */
   BindEipAcls(data: BindEipAclsRequest, config?: AxiosRequestConfig): AxiosPromise<BindEipAclsResponse>;
-  /** 黑石托管机器绑定EIP */
+  /** {@link BindHosted 黑石托管机器绑定EIP}({@link BindHostedRequest 请求参数}): {@link BindHostedResponse 返回参数} */
   BindHosted(data: BindHostedRequest, config?: AxiosRequestConfig): AxiosPromise<BindHostedResponse>;
-  /** 绑定黑石EIP */
+  /** {@link BindRs 绑定黑石EIP}({@link BindRsRequest 请求参数}): {@link BindRsResponse 返回参数} */
   BindRs(data: BindRsRequest, config?: AxiosRequestConfig): AxiosPromise<BindRsResponse>;
-  /** 黑石EIP绑定VPCIP */
+  /** {@link BindVpcIp 黑石EIP绑定VPCIP}({@link BindVpcIpRequest 请求参数}): {@link BindVpcIpResponse 返回参数} */
   BindVpcIp(data: BindVpcIpRequest, config?: AxiosRequestConfig): AxiosPromise<BindVpcIpResponse>;
-  /** 创建黑石EIP */
+  /** {@link CreateEip 创建黑石EIP}({@link CreateEipRequest 请求参数}): {@link CreateEipResponse 返回参数} */
   CreateEip(data?: CreateEipRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEipResponse>;
-  /** 创建黑石弹性公网 EIPACL */
+  /** {@link CreateEipAcl 创建黑石弹性公网 EIPACL}({@link CreateEipAclRequest 请求参数}): {@link CreateEipAclResponse 返回参数} */
   CreateEipAcl(data: CreateEipAclRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEipAclResponse>;
-  /** 释放黑石弹性公网IP */
+  /** {@link DeleteEip 释放黑石弹性公网IP}({@link DeleteEipRequest 请求参数}): {@link DeleteEipResponse 返回参数} */
   DeleteEip(data: DeleteEipRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEipResponse>;
-  /** 删除弹性公网IP ACL */
+  /** {@link DeleteEipAcl 删除弹性公网IP ACL}({@link DeleteEipAclRequest 请求参数}): {@link DeleteEipAclResponse 返回参数} */
   DeleteEipAcl(data: DeleteEipAclRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEipAclResponse>;
-  /** 查询弹性公网IP ACL */
+  /** {@link DescribeEipAcls 查询弹性公网IP ACL}({@link DescribeEipAclsRequest 请求参数}): {@link DescribeEipAclsResponse 返回参数} */
   DescribeEipAcls(data?: DescribeEipAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEipAclsResponse>;
-  /** 查询黑石EIP 限额 */
+  /** {@link DescribeEipQuota 查询黑石EIP 限额}({@link DescribeEipQuotaRequest 请求参数}): {@link DescribeEipQuotaResponse 返回参数} */
   DescribeEipQuota(data?: DescribeEipQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEipQuotaResponse>;
-  /** 黑石EIP查询任务状态 */
+  /** {@link DescribeEipTask 黑石EIP查询任务状态}({@link DescribeEipTaskRequest 请求参数}): {@link DescribeEipTaskResponse 返回参数} */
   DescribeEipTask(data: DescribeEipTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEipTaskResponse>;
-  /** 黑石EIP查询接口 */
+  /** {@link DescribeEips 黑石EIP查询接口}({@link DescribeEipsRequest 请求参数}): {@link DescribeEipsResponse 返回参数} */
   DescribeEips(data?: DescribeEipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEipsResponse>;
-  /** 修改弹性公网IP ACL */
+  /** {@link ModifyEipAcl 修改弹性公网IP ACL}({@link ModifyEipAclRequest 请求参数}): {@link ModifyEipAclResponse 返回参数} */
   ModifyEipAcl(data: ModifyEipAclRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEipAclResponse>;
-  /** 黑石EIP修改计费方式 */
+  /** {@link ModifyEipCharge 黑石EIP修改计费方式}({@link ModifyEipChargeRequest 请求参数}): {@link ModifyEipChargeResponse 返回参数} */
   ModifyEipCharge(data: ModifyEipChargeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEipChargeResponse>;
-  /** 更新黑石EIP名称 */
+  /** {@link ModifyEipName 更新黑石EIP名称}({@link ModifyEipNameRequest 请求参数}): {@link ModifyEipNameResponse 返回参数} */
   ModifyEipName(data: ModifyEipNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEipNameResponse>;
-  /** 解绑弹性公网IP ACL */
+  /** {@link UnbindEipAcls 解绑弹性公网IP ACL}({@link UnbindEipAclsRequest 请求参数}): {@link UnbindEipAclsResponse 返回参数} */
   UnbindEipAcls(data: UnbindEipAclsRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindEipAclsResponse>;
-  /** 黑石托管机器解绑EIP */
+  /** {@link UnbindHosted 黑石托管机器解绑EIP}({@link UnbindHostedRequest 请求参数}): {@link UnbindHostedResponse 返回参数} */
   UnbindHosted(data: UnbindHostedRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindHostedResponse>;
-  /** 解绑黑石EIP */
+  /** {@link UnbindRs 解绑黑石EIP}({@link UnbindRsRequest 请求参数}): {@link UnbindRsResponse 返回参数} */
   UnbindRs(data: UnbindRsRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindRsResponse>;
-  /** 批量解绑物理机弹性公网IP */
+  /** {@link UnbindRsList 批量解绑物理机弹性公网IP}({@link UnbindRsListRequest 请求参数}): {@link UnbindRsListResponse 返回参数} */
   UnbindRsList(data: UnbindRsListRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindRsListResponse>;
-  /** 黑石EIP解绑VPCIP */
+  /** {@link UnbindVpcIp 黑石EIP解绑VPCIP}({@link UnbindVpcIpRequest 请求参数}): {@link UnbindVpcIpResponse 返回参数} */
   UnbindVpcIp(data: UnbindVpcIpRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindVpcIpResponse>;
 }
 

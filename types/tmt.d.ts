@@ -214,22 +214,22 @@ declare interface TextTranslateResponse {
   RequestId?: string;
 }
 
-/** [机器翻译](https://cloud.tencent.com/document/product/551) */
+/** {@link Tmt 机器翻译} */
 declare interface Tmt {
   (): Versions;
-  /** 文件翻译请求 */
+  /** {@link FileTranslate 文件翻译请求}({@link FileTranslateRequest 请求参数}): {@link FileTranslateResponse 返回参数} */
   FileTranslate(data: FileTranslateRequest, config?: AxiosRequestConfig): AxiosPromise<FileTranslateResponse>;
-  /** 文件翻译结果查询 */
+  /** {@link GetFileTranslate 文件翻译结果查询}({@link GetFileTranslateRequest 请求参数}): {@link GetFileTranslateResponse 返回参数} */
   GetFileTranslate(data: GetFileTranslateRequest, config?: AxiosRequestConfig): AxiosPromise<GetFileTranslateResponse>;
-  /** 图片翻译 */
+  /** {@link ImageTranslate 图片翻译}({@link ImageTranslateRequest 请求参数}): {@link ImageTranslateResponse 返回参数} */
   ImageTranslate(data: ImageTranslateRequest, config?: AxiosRequestConfig): AxiosPromise<ImageTranslateResponse>;
-  /** 语种识别 */
+  /** {@link LanguageDetect 语种识别}({@link LanguageDetectRequest 请求参数}): {@link LanguageDetectResponse 返回参数} */
   LanguageDetect(data: LanguageDetectRequest, config?: AxiosRequestConfig): AxiosPromise<LanguageDetectResponse>;
-  /** 语音翻译 */
+  /** {@link SpeechTranslate 语音翻译}({@link SpeechTranslateRequest 请求参数}): {@link SpeechTranslateResponse 返回参数} */
   SpeechTranslate(data: SpeechTranslateRequest, config?: AxiosRequestConfig): AxiosPromise<SpeechTranslateResponse>;
-  /** 文本翻译 */
+  /** {@link TextTranslate 文本翻译}({@link TextTranslateRequest 请求参数}): {@link TextTranslateResponse 返回参数} */
   TextTranslate(data: TextTranslateRequest, config?: AxiosRequestConfig): AxiosPromise<TextTranslateResponse>;
-  /** 批量文本翻译 */
+  /** {@link TextTranslateBatch 批量文本翻译}({@link TextTranslateBatchRequest 请求参数}): {@link TextTranslateBatchResponse 返回参数} */
   TextTranslateBatch(data: TextTranslateBatchRequest, config?: AxiosRequestConfig): AxiosPromise<TextTranslateBatchResponse>;
 }
 

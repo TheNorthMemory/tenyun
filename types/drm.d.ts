@@ -254,26 +254,26 @@ declare interface StartEncryptionResponse {
   RequestId?: string;
 }
 
-/** [数字版权管理](https://cloud.tencent.com/document/product/1000) */
+/** {@link Drm 数字版权管理} */
 declare interface Drm {
   (): Versions;
-  /** 新设置fairplay方案所需私钥 */
+  /** {@link AddFairPlayPem 新设置fairplay方案所需私钥}({@link AddFairPlayPemRequest 请求参数}): {@link AddFairPlayPemResponse 返回参数} */
   AddFairPlayPem(data: AddFairPlayPemRequest, config?: AxiosRequestConfig): AxiosPromise<AddFairPlayPemResponse>;
-  /** 设置加密密钥 */
+  /** {@link CreateEncryptKeys 设置加密密钥}({@link CreateEncryptKeysRequest 请求参数}): {@link CreateEncryptKeysResponse 返回参数} */
   CreateEncryptKeys(data: CreateEncryptKeysRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEncryptKeysResponse>;
-  /** 生成DRM的播放许可证 */
+  /** {@link CreateLicense 生成DRM的播放许可证}({@link CreateLicenseRequest 请求参数}): {@link CreateLicenseResponse 返回参数} */
   CreateLicense(data: CreateLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLicenseResponse>;
-  /** 删除Fairplay方案的私钥、ask */
+  /** {@link DeleteFairPlayPem 删除Fairplay方案的私钥、ask}({@link DeleteFairPlayPemRequest 请求参数}): {@link DeleteFairPlayPemResponse 返回参数} */
   DeleteFairPlayPem(data?: DeleteFairPlayPemRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFairPlayPemResponse>;
-  /** 查询所有加密密钥列表 */
+  /** {@link DescribeAllKeys 查询所有加密密钥列表}({@link DescribeAllKeysRequest 请求参数}): {@link DescribeAllKeysResponse 返回参数} */
   DescribeAllKeys(data: DescribeAllKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllKeysResponse>;
-  /** 查询所设置的FairPlay私钥 */
+  /** {@link DescribeFairPlayPem 查询所设置的FairPlay私钥}({@link DescribeFairPlayPemRequest 请求参数}): {@link DescribeFairPlayPemResponse 返回参数} */
   DescribeFairPlayPem(data?: DescribeFairPlayPemRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFairPlayPemResponse>;
-  /** 查询加密密钥列表 */
+  /** {@link DescribeKeys 查询加密密钥列表}({@link DescribeKeysRequest 请求参数}): {@link DescribeKeysResponse 返回参数} */
   DescribeKeys(data: DescribeKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeysResponse>;
-  /** 设置fairplay方案所需私钥 */
+  /** {@link ModifyFairPlayPem 设置fairplay方案所需私钥}({@link ModifyFairPlayPemRequest 请求参数}): {@link ModifyFairPlayPemResponse 返回参数} */
   ModifyFairPlayPem(data: ModifyFairPlayPemRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFairPlayPemResponse>;
-  /** 启动DRM加密(该接口已下线) */
+  /** {@link StartEncryption 启动DRM加密(该接口已下线)}({@link StartEncryptionRequest 请求参数}): {@link StartEncryptionResponse 返回参数} */
   StartEncryption(data: StartEncryptionRequest, config?: AxiosRequestConfig): AxiosPromise<StartEncryptionResponse>;
 }
 

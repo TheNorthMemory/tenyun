@@ -1252,28 +1252,28 @@ declare interface StopMediaQualityRestorationTaskResponse {
   RequestId?: string;
 }
 
-/** [智能编辑](https://cloud.tencent.com/document/product/1186) */
+/** {@link Ie 智能编辑} */
 declare interface Ie {
   (): Versions;
-  /** 创建编辑理解任务 */
+  /** {@link CreateEditingTask 创建编辑理解任务}({@link CreateEditingTaskRequest 请求参数}): {@link CreateEditingTaskResponse 返回参数} */
   CreateEditingTask(data: CreateEditingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEditingTaskResponse>;
-  /** 创建编辑处理任务 */
+  /** {@link CreateMediaProcessTask 创建编辑处理任务}({@link CreateMediaProcessTaskRequest 请求参数}): {@link CreateMediaProcessTaskResponse 返回参数} */
   CreateMediaProcessTask(data: CreateMediaProcessTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMediaProcessTaskResponse>;
-  /** 创建画质重生任务 */
+  /** {@link CreateMediaQualityRestorationTask 创建画质重生任务}({@link CreateMediaQualityRestorationTaskRequest 请求参数}): {@link CreateMediaQualityRestorationTaskResponse 返回参数} */
   CreateMediaQualityRestorationTask(data: CreateMediaQualityRestorationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMediaQualityRestorationTaskResponse>;
-  /** 创建媒体质检任务 */
+  /** {@link CreateQualityControlTask 创建媒体质检任务}({@link CreateQualityControlTaskRequest 请求参数}): {@link CreateQualityControlTaskResponse 返回参数} */
   CreateQualityControlTask(data: CreateQualityControlTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQualityControlTaskResponse>;
-  /** 获取编辑理解任务结果 */
+  /** {@link DescribeEditingTaskResult 获取编辑理解任务结果}({@link DescribeEditingTaskResultRequest 请求参数}): {@link DescribeEditingTaskResultResponse 返回参数} */
   DescribeEditingTaskResult(data: DescribeEditingTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEditingTaskResultResponse>;
-  /** 获取编辑处理任务结果 */
+  /** {@link DescribeMediaProcessTaskResult 获取编辑处理任务结果}({@link DescribeMediaProcessTaskResultRequest 请求参数}): {@link DescribeMediaProcessTaskResultResponse 返回参数} */
   DescribeMediaProcessTaskResult(data: DescribeMediaProcessTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaProcessTaskResultResponse>;
-  /** 获取画质重生任务结果 */
+  /** {@link DescribeMediaQualityRestorationTaskRusult 获取画质重生任务结果}({@link DescribeMediaQualityRestorationTaskRusultRequest 请求参数}): {@link DescribeMediaQualityRestorationTaskRusultResponse 返回参数} */
   DescribeMediaQualityRestorationTaskRusult(data: DescribeMediaQualityRestorationTaskRusultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaQualityRestorationTaskRusultResponse>;
-  /** 获取媒体质检任务结果 */
+  /** {@link DescribeQualityControlTaskResult 获取媒体质检任务结果}({@link DescribeQualityControlTaskResultRequest 请求参数}): {@link DescribeQualityControlTaskResultResponse 返回参数} */
   DescribeQualityControlTaskResult(data: DescribeQualityControlTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQualityControlTaskResultResponse>;
-  /** 停止编辑处理任务 */
+  /** {@link StopMediaProcessTask 停止编辑处理任务}({@link StopMediaProcessTaskRequest 请求参数}): {@link StopMediaProcessTaskResponse 返回参数} */
   StopMediaProcessTask(data: StopMediaProcessTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopMediaProcessTaskResponse>;
-  /** 删除画质重生任务 */
+  /** {@link StopMediaQualityRestorationTask 删除画质重生任务}({@link StopMediaQualityRestorationTaskRequest 请求参数}): {@link StopMediaQualityRestorationTaskResponse 返回参数} */
   StopMediaQualityRestorationTask(data: StopMediaQualityRestorationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopMediaQualityRestorationTaskResponse>;
 }
 

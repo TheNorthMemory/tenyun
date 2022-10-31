@@ -3884,232 +3884,232 @@ declare interface UpgradeGrafanaInstanceResponse {
   RequestId?: string;
 }
 
-/** [云监控](https://cloud.tencent.com/document/product/248) */
+/** {@link Monitor 云监控} */
 declare interface Monitor {
   (): Versions;
-  /** 绑定 Grafana 可视化服务实例 */
+  /** {@link BindPrometheusManagedGrafana 绑定 Grafana 可视化服务实例}({@link BindPrometheusManagedGrafanaRequest 请求参数}): {@link BindPrometheusManagedGrafanaResponse 返回参数} */
   BindPrometheusManagedGrafana(data: BindPrometheusManagedGrafanaRequest, config?: AxiosRequestConfig): AxiosPromise<BindPrometheusManagedGrafanaResponse>;
-  /** 绑定策略对象 */
+  /** {@link BindingPolicyObject 绑定策略对象}({@link BindingPolicyObjectRequest 请求参数}): {@link BindingPolicyObjectResponse 返回参数} */
   BindingPolicyObject(data: BindingPolicyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<BindingPolicyObjectResponse>;
-  /** 策略绑定标签 */
+  /** {@link BindingPolicyTag 策略绑定标签}({@link BindingPolicyTagRequest 请求参数}): {@link BindingPolicyTagResponse 返回参数} */
   BindingPolicyTag(data: BindingPolicyTagRequest, config?: AxiosRequestConfig): AxiosPromise<BindingPolicyTagResponse>;
-  /** 强制销毁 Grafana 实例 */
+  /** {@link CleanGrafanaInstance 强制销毁 Grafana 实例}({@link CleanGrafanaInstanceRequest 请求参数}): {@link CleanGrafanaInstanceResponse 返回参数} */
   CleanGrafanaInstance(data: CleanGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CleanGrafanaInstanceResponse>;
-  /** 创建通知模板 */
+  /** {@link CreateAlarmNotice 创建通知模板}({@link CreateAlarmNoticeRequest 请求参数}): {@link CreateAlarmNoticeResponse 返回参数} */
   CreateAlarmNotice(data: CreateAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmNoticeResponse>;
-  /** 创建云监控告警策略 */
+  /** {@link CreateAlarmPolicy 创建云监控告警策略}({@link CreateAlarmPolicyRequest 请求参数}): {@link CreateAlarmPolicyResponse 返回参数} */
   CreateAlarmPolicy(data: CreateAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmPolicyResponse>;
-  /** 创建告警规则 */
+  /** {@link CreateAlertRule 创建告警规则}({@link CreateAlertRuleRequest 请求参数}): {@link CreateAlertRuleResponse 返回参数} */
   CreateAlertRule(data: CreateAlertRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlertRuleResponse>;
-  /** 创建 exporter 集成 */
+  /** {@link CreateExporterIntegration 创建 exporter 集成}({@link CreateExporterIntegrationRequest 请求参数}): {@link CreateExporterIntegrationResponse 返回参数} */
   CreateExporterIntegration(data: CreateExporterIntegrationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExporterIntegrationResponse>;
-  /** 创建 Grafana 实例 */
+  /** {@link CreateGrafanaInstance 创建 Grafana 实例}({@link CreateGrafanaInstanceRequest 请求参数}): {@link CreateGrafanaInstanceResponse 返回参数} */
   CreateGrafanaInstance(data: CreateGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGrafanaInstanceResponse>;
-  /** 创建 Grafana 集成配置 */
+  /** {@link CreateGrafanaIntegration 创建 Grafana 集成配置}({@link CreateGrafanaIntegrationRequest 请求参数}): {@link CreateGrafanaIntegrationResponse 返回参数} */
   CreateGrafanaIntegration(data: CreateGrafanaIntegrationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGrafanaIntegrationResponse>;
-  /** 创建 Grafana 告警通道 */
+  /** {@link CreateGrafanaNotificationChannel 创建 Grafana 告警通道}({@link CreateGrafanaNotificationChannelRequest 请求参数}): {@link CreateGrafanaNotificationChannelResponse 返回参数} */
   CreateGrafanaNotificationChannel(data: CreateGrafanaNotificationChannelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGrafanaNotificationChannelResponse>;
-  /** 增加策略组 */
+  /** {@link CreatePolicyGroup 增加策略组}({@link CreatePolicyGroupRequest 请求参数}): {@link CreatePolicyGroupResponse 返回参数} */
   CreatePolicyGroup(data: CreatePolicyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePolicyGroupResponse>;
-  /** 创建 Prometheus CVM Agent */
+  /** {@link CreatePrometheusAgent 创建 Prometheus CVM Agent}({@link CreatePrometheusAgentRequest 请求参数}): {@link CreatePrometheusAgentResponse 返回参数} */
   CreatePrometheusAgent(data: CreatePrometheusAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusAgentResponse>;
-  /** 创建按量 Prometheus 实例 */
+  /** {@link CreatePrometheusMultiTenantInstancePostPayMode 创建按量 Prometheus 实例}({@link CreatePrometheusMultiTenantInstancePostPayModeRequest 请求参数}): {@link CreatePrometheusMultiTenantInstancePostPayModeResponse 返回参数} */
   CreatePrometheusMultiTenantInstancePostPayMode(data: CreatePrometheusMultiTenantInstancePostPayModeRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusMultiTenantInstancePostPayModeResponse>;
-  /** 创建 Prometheus 抓取任务 */
+  /** {@link CreatePrometheusScrapeJob 创建 Prometheus 抓取任务}({@link CreatePrometheusScrapeJobRequest 请求参数}): {@link CreatePrometheusScrapeJobResponse 返回参数} */
   CreatePrometheusScrapeJob(data: CreatePrometheusScrapeJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusScrapeJobResponse>;
-  /** 创建预聚合规则 */
+  /** {@link CreateRecordingRule 创建预聚合规则}({@link CreateRecordingRuleRequest 请求参数}): {@link CreateRecordingRuleResponse 返回参数} */
   CreateRecordingRule(data: CreateRecordingRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordingRuleResponse>;
-  /** 授权腾讯云用户 */
+  /** {@link CreateSSOAccount 授权腾讯云用户}({@link CreateSSOAccountRequest 请求参数}): {@link CreateSSOAccountResponse 返回参数} */
   CreateSSOAccount(data: CreateSSOAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSSOAccountResponse>;
-  /** 创建服务发现 */
+  /** {@link CreateServiceDiscovery 创建服务发现}({@link CreateServiceDiscoveryRequest 请求参数}): {@link CreateServiceDiscoveryResponse 返回参数} */
   CreateServiceDiscovery(data: CreateServiceDiscoveryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceDiscoveryResponse>;
-  /** 删除告警通知模板（批量） */
+  /** {@link DeleteAlarmNotices 删除告警通知模板（批量）}({@link DeleteAlarmNoticesRequest 请求参数}): {@link DeleteAlarmNoticesResponse 返回参数} */
   DeleteAlarmNotices(data: DeleteAlarmNoticesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmNoticesResponse>;
-  /** 删除告警策略 */
+  /** {@link DeleteAlarmPolicy 删除告警策略}({@link DeleteAlarmPolicyRequest 请求参数}): {@link DeleteAlarmPolicyResponse 返回参数} */
   DeleteAlarmPolicy(data: DeleteAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmPolicyResponse>;
-  /** 删除报警规则 */
+  /** {@link DeleteAlertRules 删除报警规则}({@link DeleteAlertRulesRequest 请求参数}): {@link DeleteAlertRulesResponse 返回参数} */
   DeleteAlertRules(data: DeleteAlertRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlertRulesResponse>;
-  /** 删除 exporter 集成 */
+  /** {@link DeleteExporterIntegration 删除 exporter 集成}({@link DeleteExporterIntegrationRequest 请求参数}): {@link DeleteExporterIntegrationResponse 返回参数} */
   DeleteExporterIntegration(data: DeleteExporterIntegrationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteExporterIntegrationResponse>;
-  /** 删除 Grafana 实例 */
+  /** {@link DeleteGrafanaInstance 删除 Grafana 实例}({@link DeleteGrafanaInstanceRequest 请求参数}): {@link DeleteGrafanaInstanceResponse 返回参数} */
   DeleteGrafanaInstance(data: DeleteGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGrafanaInstanceResponse>;
-  /** 删除 Grafana 集成配置 */
+  /** {@link DeleteGrafanaIntegration 删除 Grafana 集成配置}({@link DeleteGrafanaIntegrationRequest 请求参数}): {@link DeleteGrafanaIntegrationResponse 返回参数} */
   DeleteGrafanaIntegration(data: DeleteGrafanaIntegrationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGrafanaIntegrationResponse>;
-  /** 删除 Grafana 告警通道 */
+  /** {@link DeleteGrafanaNotificationChannel 删除 Grafana 告警通道}({@link DeleteGrafanaNotificationChannelRequest 请求参数}): {@link DeleteGrafanaNotificationChannelResponse 返回参数} */
   DeleteGrafanaNotificationChannel(data: DeleteGrafanaNotificationChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGrafanaNotificationChannelResponse>;
-  /** 删除告警策略组 */
+  /** {@link DeletePolicyGroup 删除告警策略组}({@link DeletePolicyGroupRequest 请求参数}): {@link DeletePolicyGroupResponse 返回参数} */
   DeletePolicyGroup(data: DeletePolicyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePolicyGroupResponse>;
-  /** 删除 Prometheus 抓取任务 */
+  /** {@link DeletePrometheusScrapeJobs 删除 Prometheus 抓取任务}({@link DeletePrometheusScrapeJobsRequest 请求参数}): {@link DeletePrometheusScrapeJobsResponse 返回参数} */
   DeletePrometheusScrapeJobs(data: DeletePrometheusScrapeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusScrapeJobsResponse>;
-  /** 删除预聚合规则 */
+  /** {@link DeleteRecordingRules 删除预聚合规则}({@link DeleteRecordingRulesRequest 请求参数}): {@link DeleteRecordingRulesResponse 返回参数} */
   DeleteRecordingRules(data: DeleteRecordingRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordingRulesResponse>;
-  /** 删除授权用户 */
+  /** {@link DeleteSSOAccount 删除授权用户}({@link DeleteSSOAccountRequest 请求参数}): {@link DeleteSSOAccountResponse 返回参数} */
   DeleteSSOAccount(data: DeleteSSOAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSSOAccountResponse>;
-  /** 删除服务发现 */
+  /** {@link DeleteServiceDiscovery 删除服务发现}({@link DeleteServiceDiscoveryRequest 请求参数}): {@link DeleteServiceDiscoveryResponse 返回参数} */
   DeleteServiceDiscovery(data: DeleteServiceDiscoveryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceDiscoveryResponse>;
-  /** 获取平台事件列表 */
+  /** {@link DescribeAccidentEventList 获取平台事件列表}({@link DescribeAccidentEventListRequest 请求参数}): {@link DescribeAccidentEventListResponse 返回参数} */
   DescribeAccidentEventList(data: DescribeAccidentEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccidentEventListResponse>;
-  /** 查询告警事件列表 */
+  /** {@link DescribeAlarmEvents 查询告警事件列表}({@link DescribeAlarmEventsRequest 请求参数}): {@link DescribeAlarmEventsResponse 返回参数} */
   DescribeAlarmEvents(data: DescribeAlarmEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmEventsResponse>;
-  /** 查询告警历史 */
+  /** {@link DescribeAlarmHistories 查询告警历史}({@link DescribeAlarmHistoriesRequest 请求参数}): {@link DescribeAlarmHistoriesResponse 返回参数} */
   DescribeAlarmHistories(data: DescribeAlarmHistoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmHistoriesResponse>;
-  /** 查询告警指标列表 */
+  /** {@link DescribeAlarmMetrics 查询告警指标列表}({@link DescribeAlarmMetricsRequest 请求参数}): {@link DescribeAlarmMetricsResponse 返回参数} */
   DescribeAlarmMetrics(data: DescribeAlarmMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmMetricsResponse>;
-  /** 查询单个通知模板的详情 */
+  /** {@link DescribeAlarmNotice 查询单个通知模板的详情}({@link DescribeAlarmNoticeRequest 请求参数}): {@link DescribeAlarmNoticeResponse 返回参数} */
   DescribeAlarmNotice(data: DescribeAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNoticeResponse>;
-  /** 查询账号下所有回调URL列表 */
+  /** {@link DescribeAlarmNoticeCallbacks 查询账号下所有回调URL列表}({@link DescribeAlarmNoticeCallbacksRequest 请求参数}): {@link DescribeAlarmNoticeCallbacksResponse 返回参数} */
   DescribeAlarmNoticeCallbacks(data: DescribeAlarmNoticeCallbacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNoticeCallbacksResponse>;
-  /** 查询通知模板列表 */
+  /** {@link DescribeAlarmNotices 查询通知模板列表}({@link DescribeAlarmNoticesRequest 请求参数}): {@link DescribeAlarmNoticesResponse 返回参数} */
   DescribeAlarmNotices(data: DescribeAlarmNoticesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNoticesResponse>;
-  /** 查询告警策略列表（支持按实例等条件筛选） */
+  /** {@link DescribeAlarmPolicies 查询告警策略列表（支持按实例等条件筛选）}({@link DescribeAlarmPoliciesRequest 请求参数}): {@link DescribeAlarmPoliciesResponse 返回参数} */
   DescribeAlarmPolicies(data: DescribeAlarmPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmPoliciesResponse>;
-  /** 获取单个告警策略详情 */
+  /** {@link DescribeAlarmPolicy 获取单个告警策略详情}({@link DescribeAlarmPolicyRequest 请求参数}): {@link DescribeAlarmPolicyResponse 返回参数} */
   DescribeAlarmPolicy(data: DescribeAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmPolicyResponse>;
-  /** 报警规则查询 */
+  /** {@link DescribeAlertRules 报警规则查询}({@link DescribeAlertRulesRequest 请求参数}): {@link DescribeAlertRulesResponse 返回参数} */
   DescribeAlertRules(data: DescribeAlertRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertRulesResponse>;
-  /** 查询所有名字空间 */
+  /** {@link DescribeAllNamespaces 查询所有名字空间}({@link DescribeAllNamespacesRequest 请求参数}): {@link DescribeAllNamespacesResponse 返回参数} */
   DescribeAllNamespaces(data: DescribeAllNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllNamespacesResponse>;
-  /** 获取基础指标属性 */
+  /** {@link DescribeBaseMetrics 获取基础指标属性}({@link DescribeBaseMetricsRequest 请求参数}): {@link DescribeBaseMetricsResponse 返回参数} */
   DescribeBaseMetrics(data: DescribeBaseMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaseMetricsResponse>;
-  /** 获取基础告警列表 */
+  /** {@link DescribeBasicAlarmList 获取基础告警列表}({@link DescribeBasicAlarmListRequest 请求参数}): {@link DescribeBasicAlarmListResponse 返回参数} */
   DescribeBasicAlarmList(data: DescribeBasicAlarmListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicAlarmListResponse>;
-  /** 获取已绑定对象列表 */
+  /** {@link DescribeBindingPolicyObjectList 获取已绑定对象列表}({@link DescribeBindingPolicyObjectListRequest 请求参数}): {@link DescribeBindingPolicyObjectListResponse 返回参数} */
   DescribeBindingPolicyObjectList(data: DescribeBindingPolicyObjectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindingPolicyObjectListResponse>;
-  /** 获取条件模板列表 */
+  /** {@link DescribeConditionsTemplateList 获取条件模板列表}({@link DescribeConditionsTemplateListRequest 请求参数}): {@link DescribeConditionsTemplateListResponse 返回参数} */
   DescribeConditionsTemplateList(data: DescribeConditionsTemplateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConditionsTemplateListResponse>;
-  /** 列出 Grafana DNS 配置 */
+  /** {@link DescribeDNSConfig 列出 Grafana DNS 配置}({@link DescribeDNSConfigRequest 请求参数}): {@link DescribeDNSConfigResponse 返回参数} */
   DescribeDNSConfig(data: DescribeDNSConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDNSConfigResponse>;
-  /** 查询 exporter 集成列表 */
+  /** {@link DescribeExporterIntegrations 查询 exporter 集成列表}({@link DescribeExporterIntegrationsRequest 请求参数}): {@link DescribeExporterIntegrationsResponse 返回参数} */
   DescribeExporterIntegrations(data: DescribeExporterIntegrationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExporterIntegrationsResponse>;
-  /** 列出 Grafana 所有告警通道 */
+  /** {@link DescribeGrafanaChannels 列出 Grafana 所有告警通道}({@link DescribeGrafanaChannelsRequest 请求参数}): {@link DescribeGrafanaChannelsResponse 返回参数} */
   DescribeGrafanaChannels(data: DescribeGrafanaChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGrafanaChannelsResponse>;
-  /** 列出 Grafana 的设置 */
+  /** {@link DescribeGrafanaConfig 列出 Grafana 的设置}({@link DescribeGrafanaConfigRequest 请求参数}): {@link DescribeGrafanaConfigResponse 返回参数} */
   DescribeGrafanaConfig(data: DescribeGrafanaConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGrafanaConfigResponse>;
-  /** 列出 Grafana 环境变量 */
+  /** {@link DescribeGrafanaEnvironments 列出 Grafana 环境变量}({@link DescribeGrafanaEnvironmentsRequest 请求参数}): {@link DescribeGrafanaEnvironmentsResponse 返回参数} */
   DescribeGrafanaEnvironments(data: DescribeGrafanaEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGrafanaEnvironmentsResponse>;
-  /** 列出用户所有的 Grafana 服务 */
+  /** {@link DescribeGrafanaInstances 列出用户所有的 Grafana 服务}({@link DescribeGrafanaInstancesRequest 请求参数}): {@link DescribeGrafanaInstancesResponse 返回参数} */
   DescribeGrafanaInstances(data: DescribeGrafanaInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGrafanaInstancesResponse>;
-  /** 列出 Grafana 已安装的集成 */
+  /** {@link DescribeGrafanaIntegrations 列出 Grafana 已安装的集成}({@link DescribeGrafanaIntegrationsRequest 请求参数}): {@link DescribeGrafanaIntegrationsResponse 返回参数} */
   DescribeGrafanaIntegrations(data: DescribeGrafanaIntegrationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGrafanaIntegrationsResponse>;
-  /** 列出 Grafana 告警通道 */
+  /** {@link DescribeGrafanaNotificationChannels 列出 Grafana 告警通道}({@link DescribeGrafanaNotificationChannelsRequest 请求参数}): {@link DescribeGrafanaNotificationChannelsResponse 返回参数} */
   DescribeGrafanaNotificationChannels(data: DescribeGrafanaNotificationChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGrafanaNotificationChannelsResponse>;
-  /** 列出 Grafana 白名单 */
+  /** {@link DescribeGrafanaWhiteList 列出 Grafana 白名单}({@link DescribeGrafanaWhiteListRequest 请求参数}): {@link DescribeGrafanaWhiteListResponse 返回参数} */
   DescribeGrafanaWhiteList(data: DescribeGrafanaWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGrafanaWhiteListResponse>;
-  /** 列出实例已安装的插件 */
+  /** {@link DescribeInstalledPlugins 列出实例已安装的插件}({@link DescribeInstalledPluginsRequest 请求参数}): {@link DescribeInstalledPluginsResponse 返回参数} */
   DescribeInstalledPlugins(data: DescribeInstalledPluginsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstalledPluginsResponse>;
-  /** 查询监控类型 */
+  /** {@link DescribeMonitorTypes 查询监控类型}({@link DescribeMonitorTypesRequest 请求参数}): {@link DescribeMonitorTypesResponse 返回参数} */
   DescribeMonitorTypes(data: DescribeMonitorTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorTypesResponse>;
-  /** 列出所有 Grafana 插件 */
+  /** {@link DescribePluginOverviews 列出所有 Grafana 插件}({@link DescribePluginOverviewsRequest 请求参数}): {@link DescribePluginOverviewsResponse 返回参数} */
   DescribePluginOverviews(data?: DescribePluginOverviewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginOverviewsResponse>;
-  /** 获取基础告警策略条件 */
+  /** {@link DescribePolicyConditionList 获取基础告警策略条件}({@link DescribePolicyConditionListRequest 请求参数}): {@link DescribePolicyConditionListResponse 返回参数} */
   DescribePolicyConditionList(data: DescribePolicyConditionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyConditionListResponse>;
-  /** 获取基础策略组详情 */
+  /** {@link DescribePolicyGroupInfo 获取基础策略组详情}({@link DescribePolicyGroupInfoRequest 请求参数}): {@link DescribePolicyGroupInfoResponse 返回参数} */
   DescribePolicyGroupInfo(data: DescribePolicyGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyGroupInfoResponse>;
-  /** 获取基础策略告警组列表 */
+  /** {@link DescribePolicyGroupList 获取基础策略告警组列表}({@link DescribePolicyGroupListRequest 请求参数}): {@link DescribePolicyGroupListResponse 返回参数} */
   DescribePolicyGroupList(data: DescribePolicyGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyGroupListResponse>;
-  /** 获取产品事件列表 */
+  /** {@link DescribeProductEventList 获取产品事件列表}({@link DescribeProductEventListRequest 请求参数}): {@link DescribeProductEventListResponse 返回参数} */
   DescribeProductEventList(data: DescribeProductEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductEventListResponse>;
-  /** 查询云监控产品列表 */
+  /** {@link DescribeProductList 查询云监控产品列表}({@link DescribeProductListRequest 请求参数}): {@link DescribeProductListResponse 返回参数} */
   DescribeProductList(data: DescribeProductListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductListResponse>;
-  /** 列出 Prometheus CVM Agent */
+  /** {@link DescribePrometheusAgents 列出 Prometheus CVM Agent}({@link DescribePrometheusAgentsRequest 请求参数}): {@link DescribePrometheusAgentsResponse 返回参数} */
   DescribePrometheusAgents(data: DescribePrometheusAgentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAgentsResponse>;
-  /** 查看 Prometheus 实例列表 */
+  /** {@link DescribePrometheusInstances 查看 Prometheus 实例列表}({@link DescribePrometheusInstancesRequest 请求参数}): {@link DescribePrometheusInstancesResponse 返回参数} */
   DescribePrometheusInstances(data?: DescribePrometheusInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstancesResponse>;
-  /** 列出 Prometheus 抓取任务 */
+  /** {@link DescribePrometheusScrapeJobs 列出 Prometheus 抓取任务}({@link DescribePrometheusScrapeJobsRequest 请求参数}): {@link DescribePrometheusScrapeJobsResponse 返回参数} */
   DescribePrometheusScrapeJobs(data: DescribePrometheusScrapeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusScrapeJobsResponse>;
-  /** 查询预聚合规则 */
+  /** {@link DescribeRecordingRules 查询预聚合规则}({@link DescribeRecordingRulesRequest 请求参数}): {@link DescribeRecordingRulesResponse 返回参数} */
   DescribeRecordingRules(data: DescribeRecordingRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordingRulesResponse>;
-  /** 列出授权账号 */
+  /** {@link DescribeSSOAccount 列出授权账号}({@link DescribeSSOAccountRequest 请求参数}): {@link DescribeSSOAccountResponse 返回参数} */
   DescribeSSOAccount(data: DescribeSSOAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSSOAccountResponse>;
-  /** 列出服务发现列表 */
+  /** {@link DescribeServiceDiscovery 列出服务发现列表}({@link DescribeServiceDiscoveryRequest 请求参数}): {@link DescribeServiceDiscoveryResponse 返回参数} */
   DescribeServiceDiscovery(data: DescribeServiceDiscoveryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceDiscoveryResponse>;
-  /** 根据维度条件查询监控数据 */
+  /** {@link DescribeStatisticData 根据维度条件查询监控数据}({@link DescribeStatisticDataRequest 请求参数}): {@link DescribeStatisticDataResponse 返回参数} */
   DescribeStatisticData(data: DescribeStatisticDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStatisticDataResponse>;
-  /** 强制释放 Prometheus 实例 */
+  /** {@link DestroyPrometheusInstance 强制释放 Prometheus 实例}({@link DestroyPrometheusInstanceRequest 请求参数}): {@link DestroyPrometheusInstanceResponse 返回参数} */
   DestroyPrometheusInstance(data: DestroyPrometheusInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyPrometheusInstanceResponse>;
-  /** 设置 Grafana 公网访问 */
+  /** {@link EnableGrafanaInternet 设置 Grafana 公网访问}({@link EnableGrafanaInternetRequest 请求参数}): {@link EnableGrafanaInternetResponse 返回参数} */
   EnableGrafanaInternet(data: EnableGrafanaInternetRequest, config?: AxiosRequestConfig): AxiosPromise<EnableGrafanaInternetResponse>;
-  /** 设置 Grafana 单点登录 */
+  /** {@link EnableGrafanaSSO 设置 Grafana 单点登录}({@link EnableGrafanaSSORequest 请求参数}): {@link EnableGrafanaSSOResponse 返回参数} */
   EnableGrafanaSSO(data: EnableGrafanaSSORequest, config?: AxiosRequestConfig): AxiosPromise<EnableGrafanaSSOResponse>;
-  /** 设置SSO登录是否鉴权 */
+  /** {@link EnableSSOCamCheck 设置SSO登录是否鉴权}({@link EnableSSOCamCheckRequest 请求参数}): {@link EnableSSOCamCheckResponse 返回参数} */
   EnableSSOCamCheck(data: EnableSSOCamCheckRequest, config?: AxiosRequestConfig): AxiosPromise<EnableSSOCamCheckResponse>;
-  /** 拉取指标监控数据 */
+  /** {@link GetMonitorData 拉取指标监控数据}({@link GetMonitorDataRequest 请求参数}): {@link GetMonitorDataResponse 返回参数} */
   GetMonitorData(data: GetMonitorDataRequest, config?: AxiosRequestConfig): AxiosPromise<GetMonitorDataResponse>;
-  /** 获取 Prometheus Agent 管理相关的命令行 */
+  /** {@link GetPrometheusAgentManagementCommand 获取 Prometheus Agent 管理相关的命令行}({@link GetPrometheusAgentManagementCommandRequest 请求参数}): {@link GetPrometheusAgentManagementCommandResponse 返回参数} */
   GetPrometheusAgentManagementCommand(data: GetPrometheusAgentManagementCommandRequest, config?: AxiosRequestConfig): AxiosPromise<GetPrometheusAgentManagementCommandResponse>;
-  /** 安装 Grafana Plugin */
+  /** {@link InstallPlugins 安装 Grafana Plugin}({@link InstallPluginsRequest 请求参数}): {@link InstallPluginsResponse 返回参数} */
   InstallPlugins(data: InstallPluginsRequest, config?: AxiosRequestConfig): AxiosPromise<InstallPluginsResponse>;
-  /** 修改通知模板 */
+  /** {@link ModifyAlarmNotice 修改通知模板}({@link ModifyAlarmNoticeRequest 请求参数}): {@link ModifyAlarmNoticeResponse 返回参数} */
   ModifyAlarmNotice(data: ModifyAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmNoticeResponse>;
-  /** 修改告警策略触发条件 */
+  /** {@link ModifyAlarmPolicyCondition 修改告警策略触发条件}({@link ModifyAlarmPolicyConditionRequest 请求参数}): {@link ModifyAlarmPolicyConditionResponse 返回参数} */
   ModifyAlarmPolicyCondition(data: ModifyAlarmPolicyConditionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmPolicyConditionResponse>;
-  /** 修改告警策略基本信息 */
+  /** {@link ModifyAlarmPolicyInfo 修改告警策略基本信息}({@link ModifyAlarmPolicyInfoRequest 请求参数}): {@link ModifyAlarmPolicyInfoResponse 返回参数} */
   ModifyAlarmPolicyInfo(data: ModifyAlarmPolicyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmPolicyInfoResponse>;
-  /** 修改告警策略绑定的告警通知模板 */
+  /** {@link ModifyAlarmPolicyNotice 修改告警策略绑定的告警通知模板}({@link ModifyAlarmPolicyNoticeRequest 请求参数}): {@link ModifyAlarmPolicyNoticeResponse 返回参数} */
   ModifyAlarmPolicyNotice(data: ModifyAlarmPolicyNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmPolicyNoticeResponse>;
-  /** 启停告警策略 */
+  /** {@link ModifyAlarmPolicyStatus 启停告警策略}({@link ModifyAlarmPolicyStatusRequest 请求参数}): {@link ModifyAlarmPolicyStatusResponse 返回参数} */
   ModifyAlarmPolicyStatus(data: ModifyAlarmPolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmPolicyStatusResponse>;
-  /** 修改告警策略的触发任务 */
+  /** {@link ModifyAlarmPolicyTasks 修改告警策略的触发任务}({@link ModifyAlarmPolicyTasksRequest 请求参数}): {@link ModifyAlarmPolicyTasksResponse 返回参数} */
   ModifyAlarmPolicyTasks(data: ModifyAlarmPolicyTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmPolicyTasksResponse>;
-  /** 修改告警接收人 */
+  /** {@link ModifyAlarmReceivers 修改告警接收人}({@link ModifyAlarmReceiversRequest 请求参数}): {@link ModifyAlarmReceiversResponse 返回参数} */
   ModifyAlarmReceivers(data: ModifyAlarmReceiversRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmReceiversResponse>;
-  /** 修改 Grafana 实例属性 */
+  /** {@link ModifyGrafanaInstance 修改 Grafana 实例属性}({@link ModifyGrafanaInstanceRequest 请求参数}): {@link ModifyGrafanaInstanceResponse 返回参数} */
   ModifyGrafanaInstance(data: ModifyGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGrafanaInstanceResponse>;
-  /** 更新策略组 */
+  /** {@link ModifyPolicyGroup 更新策略组}({@link ModifyPolicyGroupRequest 请求参数}): {@link ModifyPolicyGroupResponse 返回参数} */
   ModifyPolicyGroup(data: ModifyPolicyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPolicyGroupResponse>;
-  /** 修改 Prometheus 实例相关属性 */
+  /** {@link ModifyPrometheusInstanceAttributes 修改 Prometheus 实例相关属性}({@link ModifyPrometheusInstanceAttributesRequest 请求参数}): {@link ModifyPrometheusInstanceAttributesResponse 返回参数} */
   ModifyPrometheusInstanceAttributes(data: ModifyPrometheusInstanceAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusInstanceAttributesResponse>;
-  /** 自定义监控上报数据 */
+  /** {@link PutMonitorData 自定义监控上报数据}({@link PutMonitorDataRequest 请求参数}): {@link PutMonitorDataResponse 返回参数} */
   PutMonitorData(data: PutMonitorDataRequest, config?: AxiosRequestConfig): AxiosPromise<PutMonitorDataResponse>;
-  /** 恢复 Grafana 实例 */
+  /** {@link ResumeGrafanaInstance 恢复 Grafana 实例}({@link ResumeGrafanaInstanceRequest 请求参数}): {@link ResumeGrafanaInstanceResponse 返回参数} */
   ResumeGrafanaInstance(data: ResumeGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeGrafanaInstanceResponse>;
-  /** 发送自定义消息告警 */
+  /** {@link SendCustomAlarmMsg 发送自定义消息告警}({@link SendCustomAlarmMsgRequest 请求参数}): {@link SendCustomAlarmMsgResponse 返回参数} */
   SendCustomAlarmMsg(data: SendCustomAlarmMsgRequest, config?: AxiosRequestConfig): AxiosPromise<SendCustomAlarmMsgResponse>;
-  /** 设为默认告警策略 */
+  /** {@link SetDefaultAlarmPolicy 设为默认告警策略}({@link SetDefaultAlarmPolicyRequest 请求参数}): {@link SetDefaultAlarmPolicyResponse 返回参数} */
   SetDefaultAlarmPolicy(data: SetDefaultAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<SetDefaultAlarmPolicyResponse>;
-  /** 销毁按量 Prometheus 实例 */
+  /** {@link TerminatePrometheusInstances 销毁按量 Prometheus 实例}({@link TerminatePrometheusInstancesRequest 请求参数}): {@link TerminatePrometheusInstancesResponse 返回参数} */
   TerminatePrometheusInstances(data: TerminatePrometheusInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminatePrometheusInstancesResponse>;
-  /** 删除全部的关联对象 */
+  /** {@link UnBindingAllPolicyObject 删除全部的关联对象}({@link UnBindingAllPolicyObjectRequest 请求参数}): {@link UnBindingAllPolicyObjectResponse 返回参数} */
   UnBindingAllPolicyObject(data: UnBindingAllPolicyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindingAllPolicyObjectResponse>;
-  /** 删除策略的关联对象 */
+  /** {@link UnBindingPolicyObject 删除策略的关联对象}({@link UnBindingPolicyObjectRequest 请求参数}): {@link UnBindingPolicyObjectResponse 返回参数} */
   UnBindingPolicyObject(data: UnBindingPolicyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindingPolicyObjectResponse>;
-  /** 解除实例绑定的 Grafana 可视化实例 */
+  /** {@link UnbindPrometheusManagedGrafana 解除实例绑定的 Grafana 可视化实例}({@link UnbindPrometheusManagedGrafanaRequest 请求参数}): {@link UnbindPrometheusManagedGrafanaResponse 返回参数} */
   UnbindPrometheusManagedGrafana(data: UnbindPrometheusManagedGrafanaRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindPrometheusManagedGrafanaResponse>;
-  /** 删除 Grafana Dashboard */
+  /** {@link UninstallGrafanaDashboard 删除 Grafana Dashboard}({@link UninstallGrafanaDashboardRequest 请求参数}): {@link UninstallGrafanaDashboardResponse 返回参数} */
   UninstallGrafanaDashboard(data: UninstallGrafanaDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallGrafanaDashboardResponse>;
-  /** 删除已安装的插件 */
+  /** {@link UninstallGrafanaPlugins 删除已安装的插件}({@link UninstallGrafanaPluginsRequest 请求参数}): {@link UninstallGrafanaPluginsResponse 返回参数} */
   UninstallGrafanaPlugins(data: UninstallGrafanaPluginsRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallGrafanaPluginsResponse>;
-  /** 更新报警规则 */
+  /** {@link UpdateAlertRule 更新报警规则}({@link UpdateAlertRuleRequest 请求参数}): {@link UpdateAlertRuleResponse 返回参数} */
   UpdateAlertRule(data: UpdateAlertRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAlertRuleResponse>;
-  /** 更新报警策略状态 */
+  /** {@link UpdateAlertRuleState 更新报警策略状态}({@link UpdateAlertRuleStateRequest 请求参数}): {@link UpdateAlertRuleStateResponse 返回参数} */
   UpdateAlertRuleState(data: UpdateAlertRuleStateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAlertRuleStateResponse>;
-  /** 更新 Grafana 的 DNS 配置 */
+  /** {@link UpdateDNSConfig 更新 Grafana 的 DNS 配置}({@link UpdateDNSConfigRequest 请求参数}): {@link UpdateDNSConfigResponse 返回参数} */
   UpdateDNSConfig(data: UpdateDNSConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDNSConfigResponse>;
-  /** 更新 exporter 集成配置 */
+  /** {@link UpdateExporterIntegration 更新 exporter 集成配置}({@link UpdateExporterIntegrationRequest 请求参数}): {@link UpdateExporterIntegrationResponse 返回参数} */
   UpdateExporterIntegration(data: UpdateExporterIntegrationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateExporterIntegrationResponse>;
-  /** 更新 Grafana 配置 */
+  /** {@link UpdateGrafanaConfig 更新 Grafana 配置}({@link UpdateGrafanaConfigRequest 请求参数}): {@link UpdateGrafanaConfigResponse 返回参数} */
   UpdateGrafanaConfig(data: UpdateGrafanaConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGrafanaConfigResponse>;
-  /** 更新 Grafana 环境变量 */
+  /** {@link UpdateGrafanaEnvironments 更新 Grafana 环境变量}({@link UpdateGrafanaEnvironmentsRequest 请求参数}): {@link UpdateGrafanaEnvironmentsResponse 返回参数} */
   UpdateGrafanaEnvironments(data: UpdateGrafanaEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGrafanaEnvironmentsResponse>;
-  /** 更新 Grafana 集成配置 */
+  /** {@link UpdateGrafanaIntegration 更新 Grafana 集成配置}({@link UpdateGrafanaIntegrationRequest 请求参数}): {@link UpdateGrafanaIntegrationResponse 返回参数} */
   UpdateGrafanaIntegration(data: UpdateGrafanaIntegrationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGrafanaIntegrationResponse>;
-  /** 更新 Grafana 告警通道 */
+  /** {@link UpdateGrafanaNotificationChannel 更新 Grafana 告警通道}({@link UpdateGrafanaNotificationChannelRequest 请求参数}): {@link UpdateGrafanaNotificationChannelResponse 返回参数} */
   UpdateGrafanaNotificationChannel(data: UpdateGrafanaNotificationChannelRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGrafanaNotificationChannelResponse>;
-  /** 更新 Grafana 白名单 */
+  /** {@link UpdateGrafanaWhiteList 更新 Grafana 白名单}({@link UpdateGrafanaWhiteListRequest 请求参数}): {@link UpdateGrafanaWhiteListResponse 返回参数} */
   UpdateGrafanaWhiteList(data: UpdateGrafanaWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGrafanaWhiteListResponse>;
-  /** 更新 Prometheus CVM Agent 状态 */
+  /** {@link UpdatePrometheusAgentStatus 更新 Prometheus CVM Agent 状态}({@link UpdatePrometheusAgentStatusRequest 请求参数}): {@link UpdatePrometheusAgentStatusResponse 返回参数} */
   UpdatePrometheusAgentStatus(data: UpdatePrometheusAgentStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePrometheusAgentStatusResponse>;
-  /** 更新 Prometheus 抓取任务 */
+  /** {@link UpdatePrometheusScrapeJob 更新 Prometheus 抓取任务}({@link UpdatePrometheusScrapeJobRequest 请求参数}): {@link UpdatePrometheusScrapeJobResponse 返回参数} */
   UpdatePrometheusScrapeJob(data: UpdatePrometheusScrapeJobRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePrometheusScrapeJobResponse>;
-  /** 更新预聚合规则 */
+  /** {@link UpdateRecordingRule 更新预聚合规则}({@link UpdateRecordingRuleRequest 请求参数}): {@link UpdateRecordingRuleResponse 返回参数} */
   UpdateRecordingRule(data: UpdateRecordingRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRecordingRuleResponse>;
-  /** 更新账号信息 */
+  /** {@link UpdateSSOAccount 更新账号信息}({@link UpdateSSOAccountRequest 请求参数}): {@link UpdateSSOAccountResponse 返回参数} */
   UpdateSSOAccount(data: UpdateSSOAccountRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSSOAccountResponse>;
-  /** 更新服务发现 */
+  /** {@link UpdateServiceDiscovery 更新服务发现}({@link UpdateServiceDiscoveryRequest 请求参数}): {@link UpdateServiceDiscoveryResponse 返回参数} */
   UpdateServiceDiscovery(data: UpdateServiceDiscoveryRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateServiceDiscoveryResponse>;
-  /** 升级 Grafana Dashboard */
+  /** {@link UpgradeGrafanaDashboard 升级 Grafana Dashboard}({@link UpgradeGrafanaDashboardRequest 请求参数}): {@link UpgradeGrafanaDashboardResponse 返回参数} */
   UpgradeGrafanaDashboard(data: UpgradeGrafanaDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeGrafanaDashboardResponse>;
-  /** 升级 Grafana 实例 */
+  /** {@link UpgradeGrafanaInstance 升级 Grafana 实例}({@link UpgradeGrafanaInstanceRequest 请求参数}): {@link UpgradeGrafanaInstanceResponse 返回参数} */
   UpgradeGrafanaInstance(data: UpgradeGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeGrafanaInstanceResponse>;
 }
 

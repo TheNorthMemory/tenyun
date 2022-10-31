@@ -1890,134 +1890,134 @@ declare interface UpgradeDBInstanceResponse {
   RequestId?: string;
 }
 
-/** [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) */
+/** {@link Postgres 云数据库 PostgreSQL} */
 declare interface Postgres {
   (): Versions;
-  /** 添加只读实例到只读组 */
+  /** {@link AddDBInstanceToReadOnlyGroup 添加只读实例到只读组}({@link AddDBInstanceToReadOnlyGroupRequest 请求参数}): {@link AddDBInstanceToReadOnlyGroupResponse 返回参数} */
   AddDBInstanceToReadOnlyGroup(data: AddDBInstanceToReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddDBInstanceToReadOnlyGroupResponse>;
-  /** 克隆实例 */
+  /** {@link CloneDBInstance 克隆实例}({@link CloneDBInstanceRequest 请求参数}): {@link CloneDBInstanceResponse 返回参数} */
   CloneDBInstance(data: CloneDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CloneDBInstanceResponse>;
-  /** 关闭实例外网链接 */
+  /** {@link CloseDBExtranetAccess 关闭实例外网链接}({@link CloseDBExtranetAccessRequest 请求参数}): {@link CloseDBExtranetAccessResponse 返回参数} */
   CloseDBExtranetAccess(data: CloseDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseDBExtranetAccessResponse>;
-  /** 关闭serverlessDB实例外网 */
+  /** {@link CloseServerlessDBExtranetAccess 关闭serverlessDB实例外网}({@link CloseServerlessDBExtranetAccessRequest 请求参数}): {@link CloseServerlessDBExtranetAccessResponse 返回参数} */
   CloseServerlessDBExtranetAccess(data?: CloseServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseServerlessDBExtranetAccessResponse>;
-  /** 添加实例网络 */
+  /** {@link CreateDBInstanceNetworkAccess 添加实例网络}({@link CreateDBInstanceNetworkAccessRequest 请求参数}): {@link CreateDBInstanceNetworkAccessResponse 返回参数} */
   CreateDBInstanceNetworkAccess(data: CreateDBInstanceNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceNetworkAccessResponse>;
-  /** 创建实例(旧) */
+  /** {@link CreateDBInstances 创建实例(旧)}({@link CreateDBInstancesRequest 请求参数}): {@link CreateDBInstancesResponse 返回参数} */
   CreateDBInstances(data: CreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstancesResponse>;
-  /** 创建实例(新) */
+  /** {@link CreateInstances 创建实例(新)}({@link CreateInstancesRequest 请求参数}): {@link CreateInstancesResponse 返回参数} */
   CreateInstances(data: CreateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancesResponse>;
-  /** 创建只读实例 */
+  /** {@link CreateReadOnlyDBInstance 创建只读实例}({@link CreateReadOnlyDBInstanceRequest 请求参数}): {@link CreateReadOnlyDBInstanceResponse 返回参数} */
   CreateReadOnlyDBInstance(data: CreateReadOnlyDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyDBInstanceResponse>;
-  /** 创建只读组 */
+  /** {@link CreateReadOnlyGroup 创建只读组}({@link CreateReadOnlyGroupRequest 请求参数}): {@link CreateReadOnlyGroupResponse 返回参数} */
   CreateReadOnlyGroup(data: CreateReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyGroupResponse>;
-  /** 添加RO组网络 */
+  /** {@link CreateReadOnlyGroupNetworkAccess 添加RO组网络}({@link CreateReadOnlyGroupNetworkAccessRequest 请求参数}): {@link CreateReadOnlyGroupNetworkAccessResponse 返回参数} */
   CreateReadOnlyGroupNetworkAccess(data: CreateReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyGroupNetworkAccessResponse>;
-  /** 创建ServerlessDB实例 */
+  /** {@link CreateServerlessDBInstance 创建ServerlessDB实例}({@link CreateServerlessDBInstanceRequest 请求参数}): {@link CreateServerlessDBInstanceResponse 返回参数} */
   CreateServerlessDBInstance(data: CreateServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServerlessDBInstanceResponse>;
-  /** 删除实例网络 */
+  /** {@link DeleteDBInstanceNetworkAccess 删除实例网络}({@link DeleteDBInstanceNetworkAccessRequest 请求参数}): {@link DeleteDBInstanceNetworkAccessResponse 返回参数} */
   DeleteDBInstanceNetworkAccess(data: DeleteDBInstanceNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBInstanceNetworkAccessResponse>;
-  /** 删除只读组 */
+  /** {@link DeleteReadOnlyGroup 删除只读组}({@link DeleteReadOnlyGroupRequest 请求参数}): {@link DeleteReadOnlyGroupResponse 返回参数} */
   DeleteReadOnlyGroup(data: DeleteReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReadOnlyGroupResponse>;
-  /** 删除RO组网络 */
+  /** {@link DeleteReadOnlyGroupNetworkAccess 删除RO组网络}({@link DeleteReadOnlyGroupNetworkAccessRequest 请求参数}): {@link DeleteReadOnlyGroupNetworkAccessResponse 返回参数} */
   DeleteReadOnlyGroupNetworkAccess(data: DeleteReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReadOnlyGroupNetworkAccessResponse>;
-  /** 删除ServerlessDB实例 */
+  /** {@link DeleteServerlessDBInstance 删除ServerlessDB实例}({@link DeleteServerlessDBInstanceRequest 请求参数}): {@link DeleteServerlessDBInstanceResponse 返回参数} */
   DeleteServerlessDBInstance(data?: DeleteServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessDBInstanceResponse>;
-  /** 获取实例用户列表 */
+  /** {@link DescribeAccounts 获取实例用户列表}({@link DescribeAccountsRequest 请求参数}): {@link DescribeAccountsResponse 返回参数} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
-  /** 查询实例可恢复的时间范围 */
+  /** {@link DescribeAvailableRecoveryTime 查询实例可恢复的时间范围}({@link DescribeAvailableRecoveryTimeRequest 请求参数}): {@link DescribeAvailableRecoveryTimeResponse 返回参数} */
   DescribeAvailableRecoveryTime(data: DescribeAvailableRecoveryTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableRecoveryTimeResponse>;
-  /** 查询备份计划 */
+  /** {@link DescribeBackupPlans 查询备份计划}({@link DescribeBackupPlansRequest 请求参数}): {@link DescribeBackupPlansResponse 返回参数} */
   DescribeBackupPlans(data: DescribeBackupPlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupPlansResponse>;
-  /** 查询克隆实例购买规格 */
+  /** {@link DescribeCloneDBInstanceSpec 查询克隆实例购买规格}({@link DescribeCloneDBInstanceSpecRequest 请求参数}): {@link DescribeCloneDBInstanceSpecResponse 返回参数} */
   DescribeCloneDBInstanceSpec(data: DescribeCloneDBInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloneDBInstanceSpecResponse>;
-  /** 查询实例备份列表 */
+  /** {@link DescribeDBBackups 查询实例备份列表}({@link DescribeDBBackupsRequest 请求参数}): {@link DescribeDBBackupsResponse 返回参数} */
   DescribeDBBackups(data: DescribeDBBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBBackupsResponse>;
-  /** 获取错误日志 */
+  /** {@link DescribeDBErrlogs 获取错误日志}({@link DescribeDBErrlogsRequest 请求参数}): {@link DescribeDBErrlogsResponse 返回参数} */
   DescribeDBErrlogs(data: DescribeDBErrlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBErrlogsResponse>;
-  /** 查询实例详情 */
+  /** {@link DescribeDBInstanceAttribute 查询实例详情}({@link DescribeDBInstanceAttributeRequest 请求参数}): {@link DescribeDBInstanceAttributeResponse 返回参数} */
   DescribeDBInstanceAttribute(data: DescribeDBInstanceAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceAttributeResponse>;
-  /** 获取实例可修改参数列表 */
+  /** {@link DescribeDBInstanceParameters 获取实例可修改参数列表}({@link DescribeDBInstanceParametersRequest 请求参数}): {@link DescribeDBInstanceParametersResponse 返回参数} */
   DescribeDBInstanceParameters(data: DescribeDBInstanceParametersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceParametersResponse>;
-  /** 查询实例列表 */
+  /** {@link DescribeDBInstances 查询实例列表}({@link DescribeDBInstancesRequest 请求参数}): {@link DescribeDBInstancesResponse 返回参数} */
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
-  /** 获取慢查询日志 （废弃） */
+  /** {@link DescribeDBSlowlogs 获取慢查询日志 （废弃）}({@link DescribeDBSlowlogsRequest 请求参数}): {@link DescribeDBSlowlogsResponse 返回参数} */
   DescribeDBSlowlogs(data: DescribeDBSlowlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSlowlogsResponse>;
-  /** 获取实例Xlog列表 */
+  /** {@link DescribeDBXlogs 获取实例Xlog列表}({@link DescribeDBXlogsRequest 请求参数}): {@link DescribeDBXlogsResponse 返回参数} */
   DescribeDBXlogs(data: DescribeDBXlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBXlogsResponse>;
-  /** 拉取数据库列表 */
+  /** {@link DescribeDatabases 拉取数据库列表}({@link DescribeDatabasesRequest 请求参数}): {@link DescribeDatabasesResponse 返回参数} */
   DescribeDatabases(data: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
-  /** 实例密钥信息列表 */
+  /** {@link DescribeEncryptionKeys 实例密钥信息列表}({@link DescribeEncryptionKeysRequest 请求参数}): {@link DescribeEncryptionKeysResponse 返回参数} */
   DescribeEncryptionKeys(data: DescribeEncryptionKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEncryptionKeysResponse>;
-  /** 获取订单信息 */
+  /** {@link DescribeOrders 获取订单信息}({@link DescribeOrdersRequest 请求参数}): {@link DescribeOrdersResponse 返回参数} */
   DescribeOrders(data: DescribeOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrdersResponse>;
-  /** 获取参数修改事件详情 */
+  /** {@link DescribeParamsEvent 获取参数修改事件详情}({@link DescribeParamsEventRequest 请求参数}): {@link DescribeParamsEventResponse 返回参数} */
   DescribeParamsEvent(data: DescribeParamsEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamsEventResponse>;
-  /** 查询售卖规格配置 */
+  /** {@link DescribeProductConfig 查询售卖规格配置}({@link DescribeProductConfigRequest 请求参数}): {@link DescribeProductConfigResponse 返回参数} */
   DescribeProductConfig(data?: DescribeProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductConfigResponse>;
-  /** 查询只读组信息 */
+  /** {@link DescribeReadOnlyGroups 查询只读组信息}({@link DescribeReadOnlyGroupsRequest 请求参数}): {@link DescribeReadOnlyGroupsResponse 返回参数} */
   DescribeReadOnlyGroups(data?: DescribeReadOnlyGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReadOnlyGroupsResponse>;
-  /** 查询售卖地域 */
+  /** {@link DescribeRegions 查询售卖地域}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** 查询ServerlessDB实例列表 */
+  /** {@link DescribeServerlessDBInstances 查询ServerlessDB实例列表}({@link DescribeServerlessDBInstancesRequest 请求参数}): {@link DescribeServerlessDBInstancesResponse 返回参数} */
   DescribeServerlessDBInstances(data?: DescribeServerlessDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessDBInstancesResponse>;
-  /** 获取慢查询统计分析列表 */
+  /** {@link DescribeSlowQueryAnalysis 获取慢查询统计分析列表}({@link DescribeSlowQueryAnalysisRequest 请求参数}): {@link DescribeSlowQueryAnalysisResponse 返回参数} */
   DescribeSlowQueryAnalysis(data: DescribeSlowQueryAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowQueryAnalysisResponse>;
-  /** 获取慢查询列表 */
+  /** {@link DescribeSlowQueryList 获取慢查询列表}({@link DescribeSlowQueryListRequest 请求参数}): {@link DescribeSlowQueryListResponse 返回参数} */
   DescribeSlowQueryList(data: DescribeSlowQueryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowQueryListResponse>;
-  /** 查询售卖可用区 */
+  /** {@link DescribeZones 查询售卖可用区}({@link DescribeZonesRequest 请求参数}): {@link DescribeZonesResponse 返回参数} */
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
-  /** 销毁实例 */
+  /** {@link DestroyDBInstance 销毁实例}({@link DestroyDBInstanceRequest 请求参数}): {@link DestroyDBInstanceResponse 返回参数} */
   DestroyDBInstance(data: DestroyDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyDBInstanceResponse>;
-  /** 解隔离实例 */
+  /** {@link DisIsolateDBInstances 解隔离实例}({@link DisIsolateDBInstancesRequest 请求参数}): {@link DisIsolateDBInstancesResponse 返回参数} */
   DisIsolateDBInstances(data: DisIsolateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DisIsolateDBInstancesResponse>;
-  /** 初始化实例 */
+  /** {@link InitDBInstances 初始化实例}({@link InitDBInstancesRequest 请求参数}): {@link InitDBInstancesResponse 返回参数} */
   InitDBInstances(data: InitDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InitDBInstancesResponse>;
-  /** 查询售卖价格 */
+  /** {@link InquiryPriceCreateDBInstances 查询售卖价格}({@link InquiryPriceCreateDBInstancesRequest 请求参数}): {@link InquiryPriceCreateDBInstancesResponse 返回参数} */
   InquiryPriceCreateDBInstances(data: InquiryPriceCreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateDBInstancesResponse>;
-  /** 查询实例续费价格 */
+  /** {@link InquiryPriceRenewDBInstance 查询实例续费价格}({@link InquiryPriceRenewDBInstanceRequest 请求参数}): {@link InquiryPriceRenewDBInstanceResponse 返回参数} */
   InquiryPriceRenewDBInstance(data: InquiryPriceRenewDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewDBInstanceResponse>;
-  /** 查询升级实例价格 */
+  /** {@link InquiryPriceUpgradeDBInstance 查询升级实例价格}({@link InquiryPriceUpgradeDBInstanceRequest 请求参数}): {@link InquiryPriceUpgradeDBInstanceResponse 返回参数} */
   InquiryPriceUpgradeDBInstance(data: InquiryPriceUpgradeDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceUpgradeDBInstanceResponse>;
-  /** 隔离实例 */
+  /** {@link IsolateDBInstances 隔离实例}({@link IsolateDBInstancesRequest 请求参数}): {@link IsolateDBInstancesResponse 返回参数} */
   IsolateDBInstances(data: IsolateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBInstancesResponse>;
-  /** 修改帐号备注 */
+  /** {@link ModifyAccountRemark 修改帐号备注}({@link ModifyAccountRemarkRequest 请求参数}): {@link ModifyAccountRemarkResponse 返回参数} */
   ModifyAccountRemark(data: ModifyAccountRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountRemarkResponse>;
-  /** 修改备份计划 */
+  /** {@link ModifyBackupPlan 修改备份计划}({@link ModifyBackupPlanRequest 请求参数}): {@link ModifyBackupPlanResponse 返回参数} */
   ModifyBackupPlan(data: ModifyBackupPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupPlanResponse>;
-  /** 修改实例部署方式 */
+  /** {@link ModifyDBInstanceDeployment 修改实例部署方式}({@link ModifyDBInstanceDeploymentRequest 请求参数}): {@link ModifyDBInstanceDeploymentResponse 返回参数} */
   ModifyDBInstanceDeployment(data: ModifyDBInstanceDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceDeploymentResponse>;
-  /** 修改实例名字 */
+  /** {@link ModifyDBInstanceName 修改实例名字}({@link ModifyDBInstanceNameRequest 请求参数}): {@link ModifyDBInstanceNameResponse 返回参数} */
   ModifyDBInstanceName(data: ModifyDBInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNameResponse>;
-  /** 批量修改参数 */
+  /** {@link ModifyDBInstanceParameters 批量修改参数}({@link ModifyDBInstanceParametersRequest 请求参数}): {@link ModifyDBInstanceParametersResponse 返回参数} */
   ModifyDBInstanceParameters(data: ModifyDBInstanceParametersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceParametersResponse>;
-  /** 修改实例所属的只读组 */
+  /** {@link ModifyDBInstanceReadOnlyGroup 修改实例所属的只读组}({@link ModifyDBInstanceReadOnlyGroupRequest 请求参数}): {@link ModifyDBInstanceReadOnlyGroupResponse 返回参数} */
   ModifyDBInstanceReadOnlyGroup(data: ModifyDBInstanceReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceReadOnlyGroupResponse>;
-  /** 调整实例规格（新） */
+  /** {@link ModifyDBInstanceSpec 调整实例规格（新）}({@link ModifyDBInstanceSpecRequest 请求参数}): {@link ModifyDBInstanceSpecResponse 返回参数} */
   ModifyDBInstanceSpec(data: ModifyDBInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSpecResponse>;
-  /** 将实例转至其他项目 */
+  /** {@link ModifyDBInstancesProject 将实例转至其他项目}({@link ModifyDBInstancesProjectRequest 请求参数}): {@link ModifyDBInstancesProjectResponse 返回参数} */
   ModifyDBInstancesProject(data: ModifyDBInstancesProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstancesProjectResponse>;
-  /** 修改只读组配置 */
+  /** {@link ModifyReadOnlyGroupConfig 修改只读组配置}({@link ModifyReadOnlyGroupConfigRequest 请求参数}): {@link ModifyReadOnlyGroupConfigResponse 返回参数} */
   ModifyReadOnlyGroupConfig(data: ModifyReadOnlyGroupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReadOnlyGroupConfigResponse>;
-  /** 修改变更配置切换时间 */
+  /** {@link ModifySwitchTimePeriod 修改变更配置切换时间}({@link ModifySwitchTimePeriodRequest 请求参数}): {@link ModifySwitchTimePeriodResponse 返回参数} */
   ModifySwitchTimePeriod(data: ModifySwitchTimePeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySwitchTimePeriodResponse>;
-  /** 开通外网 */
+  /** {@link OpenDBExtranetAccess 开通外网}({@link OpenDBExtranetAccessRequest 请求参数}): {@link OpenDBExtranetAccessResponse 返回参数} */
   OpenDBExtranetAccess(data: OpenDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenDBExtranetAccessResponse>;
-  /** 开通serverlessDB实例外网 */
+  /** {@link OpenServerlessDBExtranetAccess 开通serverlessDB实例外网}({@link OpenServerlessDBExtranetAccessRequest 请求参数}): {@link OpenServerlessDBExtranetAccessResponse 返回参数} */
   OpenServerlessDBExtranetAccess(data?: OpenServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenServerlessDBExtranetAccessResponse>;
-  /** 均衡只读组内实例的负载 */
+  /** {@link RebalanceReadOnlyGroup 均衡只读组内实例的负载}({@link RebalanceReadOnlyGroupRequest 请求参数}): {@link RebalanceReadOnlyGroupResponse 返回参数} */
   RebalanceReadOnlyGroup(data: RebalanceReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RebalanceReadOnlyGroupResponse>;
-  /** 将只读实例从只读组中移除 */
+  /** {@link RemoveDBInstanceFromReadOnlyGroup 将只读实例从只读组中移除}({@link RemoveDBInstanceFromReadOnlyGroupRequest 请求参数}): {@link RemoveDBInstanceFromReadOnlyGroupResponse 返回参数} */
   RemoveDBInstanceFromReadOnlyGroup(data: RemoveDBInstanceFromReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveDBInstanceFromReadOnlyGroupResponse>;
-  /** 续费实例 */
+  /** {@link RenewInstance 续费实例}({@link RenewInstanceRequest 请求参数}): {@link RenewInstanceResponse 返回参数} */
   RenewInstance(data: RenewInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenewInstanceResponse>;
-  /** 重置账户密码 */
+  /** {@link ResetAccountPassword 重置账户密码}({@link ResetAccountPasswordRequest 请求参数}): {@link ResetAccountPasswordResponse 返回参数} */
   ResetAccountPassword(data: ResetAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAccountPasswordResponse>;
-  /** 重启实例 */
+  /** {@link RestartDBInstance 重启实例}({@link RestartDBInstanceRequest 请求参数}): {@link RestartDBInstanceResponse 返回参数} */
   RestartDBInstance(data: RestartDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDBInstanceResponse>;
-  /** 设置自动续费 */
+  /** {@link SetAutoRenewFlag 设置自动续费}({@link SetAutoRenewFlagRequest 请求参数}): {@link SetAutoRenewFlagResponse 返回参数} */
   SetAutoRenewFlag(data: SetAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetAutoRenewFlagResponse>;
-  /** 升级实例配置（废弃） */
+  /** {@link UpgradeDBInstance 升级实例配置（废弃）}({@link UpgradeDBInstanceRequest 请求参数}): {@link UpgradeDBInstanceResponse 返回参数} */
   UpgradeDBInstance(data: UpgradeDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceResponse>;
 }
 

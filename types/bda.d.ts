@@ -624,44 +624,44 @@ declare interface TerminateSegmentationTaskResponse {
   RequestId?: string;
 }
 
-/** [人体分析](https://cloud.tencent.com/document/product/1208) */
+/** {@link Bda 人体分析} */
 declare interface Bda {
   (): Versions;
-  /** 创建人体库 */
+  /** {@link CreateGroup 创建人体库}({@link CreateGroupRequest 请求参数}): {@link CreateGroupResponse 返回参数} */
   CreateGroup(data: CreateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupResponse>;
-  /** 创建人员 */
+  /** {@link CreatePerson 创建人员}({@link CreatePersonRequest 请求参数}): {@link CreatePersonResponse 返回参数} */
   CreatePerson(data: CreatePersonRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonResponse>;
-  /** 创建视频人像分割处理任务 */
+  /** {@link CreateSegmentationTask 创建视频人像分割处理任务}({@link CreateSegmentationTaskRequest 请求参数}): {@link CreateSegmentationTaskResponse 返回参数} */
   CreateSegmentationTask(data: CreateSegmentationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSegmentationTaskResponse>;
-  /** 增加人员动作轨迹 */
+  /** {@link CreateTrace 增加人员动作轨迹}({@link CreateTraceRequest 请求参数}): {@link CreateTraceResponse 返回参数} */
   CreateTrace(data: CreateTraceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTraceResponse>;
-  /** 删除人体库 */
+  /** {@link DeleteGroup 删除人体库}({@link DeleteGroupRequest 请求参数}): {@link DeleteGroupResponse 返回参数} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
-  /** 删除人员 */
+  /** {@link DeletePerson 删除人员}({@link DeletePersonRequest 请求参数}): {@link DeletePersonResponse 返回参数} */
   DeletePerson(data: DeletePersonRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonResponse>;
-  /** 查看视频人像分割处理任务信息 */
+  /** {@link DescribeSegmentationTask 查看视频人像分割处理任务信息}({@link DescribeSegmentationTaskRequest 请求参数}): {@link DescribeSegmentationTaskResponse 返回参数} */
   DescribeSegmentationTask(data: DescribeSegmentationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSegmentationTaskResponse>;
-  /** 人体检测与属性分析 */
+  /** {@link DetectBody 人体检测与属性分析}({@link DetectBodyRequest 请求参数}): {@link DetectBodyResponse 返回参数} */
   DetectBody(data?: DetectBodyRequest, config?: AxiosRequestConfig): AxiosPromise<DetectBodyResponse>;
-  /** 人体关键点分析 */
+  /** {@link DetectBodyJoints 人体关键点分析}({@link DetectBodyJointsRequest 请求参数}): {@link DetectBodyJointsResponse 返回参数} */
   DetectBodyJoints(data?: DetectBodyJointsRequest, config?: AxiosRequestConfig): AxiosPromise<DetectBodyJointsResponse>;
-  /** 获取人体库列表 */
+  /** {@link GetGroupList 获取人体库列表}({@link GetGroupListRequest 请求参数}): {@link GetGroupListResponse 返回参数} */
   GetGroupList(data?: GetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupListResponse>;
-  /** 获取人员列表 */
+  /** {@link GetPersonList 获取人员列表}({@link GetPersonListRequest 请求参数}): {@link GetPersonListResponse 返回参数} */
   GetPersonList(data: GetPersonListRequest, config?: AxiosRequestConfig): AxiosPromise<GetPersonListResponse>;
-  /** 获取人体库汇总信息 */
+  /** {@link GetSummaryInfo 获取人体库汇总信息}({@link GetSummaryInfoRequest 请求参数}): {@link GetSummaryInfoResponse 返回参数} */
   GetSummaryInfo(data?: GetSummaryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetSummaryInfoResponse>;
-  /** 修改人体库 */
+  /** {@link ModifyGroup 修改人体库}({@link ModifyGroupRequest 请求参数}): {@link ModifyGroupResponse 返回参数} */
   ModifyGroup(data: ModifyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGroupResponse>;
-  /** 修改人员信息 */
+  /** {@link ModifyPersonInfo 修改人员信息}({@link ModifyPersonInfoRequest 请求参数}): {@link ModifyPersonInfoResponse 返回参数} */
   ModifyPersonInfo(data: ModifyPersonInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonInfoResponse>;
-  /** 人体搜索 */
+  /** {@link SearchTrace 人体搜索}({@link SearchTraceRequest 请求参数}): {@link SearchTraceResponse 返回参数} */
   SearchTrace(data: SearchTraceRequest, config?: AxiosRequestConfig): AxiosPromise<SearchTraceResponse>;
-  /** 自定义人像分割 */
+  /** {@link SegmentCustomizedPortraitPic 自定义人像分割}({@link SegmentCustomizedPortraitPicRequest 请求参数}): {@link SegmentCustomizedPortraitPicResponse 返回参数} */
   SegmentCustomizedPortraitPic(data: SegmentCustomizedPortraitPicRequest, config?: AxiosRequestConfig): AxiosPromise<SegmentCustomizedPortraitPicResponse>;
-  /** 人像分割 */
+  /** {@link SegmentPortraitPic 人像分割}({@link SegmentPortraitPicRequest 请求参数}): {@link SegmentPortraitPicResponse 返回参数} */
   SegmentPortraitPic(data?: SegmentPortraitPicRequest, config?: AxiosRequestConfig): AxiosPromise<SegmentPortraitPicResponse>;
-  /** 终止视频人像分割处理任务 */
+  /** {@link TerminateSegmentationTask 终止视频人像分割处理任务}({@link TerminateSegmentationTaskRequest 请求参数}): {@link TerminateSegmentationTaskResponse 返回参数} */
   TerminateSegmentationTask(data: TerminateSegmentationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateSegmentationTaskResponse>;
 }
 

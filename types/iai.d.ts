@@ -2252,144 +2252,144 @@ declare namespace V20180301 {
   }
 }
 
-/** [人脸识别](https://cloud.tencent.com/document/product/867) */
+/** {@link Iai 人脸识别} */
 declare interface Iai {
   (): Versions;
-  /** 稠密关键点 */
+  /** {@link AnalyzeDenseLandmarks 稠密关键点}({@link AnalyzeDenseLandmarksRequest 请求参数}): {@link AnalyzeDenseLandmarksResponse 返回参数} */
   AnalyzeDenseLandmarks(data?: AnalyzeDenseLandmarksRequest, config?: AxiosRequestConfig): AxiosPromise<AnalyzeDenseLandmarksResponse>;
-  /** 五官定位 */
+  /** {@link AnalyzeFace 五官定位}({@link AnalyzeFaceRequest 请求参数}): {@link AnalyzeFaceResponse 返回参数} */
   AnalyzeFace(data?: AnalyzeFaceRequest, config?: AxiosRequestConfig): AxiosPromise<AnalyzeFaceResponse>;
-  /** 人脸比对 */
+  /** {@link CompareFace 人脸比对}({@link CompareFaceRequest 请求参数}): {@link CompareFaceResponse 返回参数} */
   CompareFace(data?: CompareFaceRequest, config?: AxiosRequestConfig): AxiosPromise<CompareFaceResponse>;
-  /** 防疫场景人脸比对 */
+  /** {@link CompareMaskFace 防疫场景人脸比对}({@link CompareMaskFaceRequest 请求参数}): {@link CompareMaskFaceResponse 返回参数} */
   CompareMaskFace(data?: CompareMaskFaceRequest, config?: AxiosRequestConfig): AxiosPromise<CompareMaskFaceResponse>;
-  /** 复制人员 */
+  /** {@link CopyPerson 复制人员}({@link CopyPersonRequest 请求参数}): {@link CopyPersonResponse 返回参数} */
   CopyPerson(data: CopyPersonRequest, config?: AxiosRequestConfig): AxiosPromise<CopyPersonResponse>;
-  /** 增加人脸 */
+  /** {@link CreateFace 增加人脸}({@link CreateFaceRequest 请求参数}): {@link CreateFaceResponse 返回参数} */
   CreateFace(data: CreateFaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFaceResponse>;
-  /** 创建人员库 */
+  /** {@link CreateGroup 创建人员库}({@link CreateGroupRequest 请求参数}): {@link CreateGroupResponse 返回参数} */
   CreateGroup(data: CreateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupResponse>;
-  /** 创建人员 */
+  /** {@link CreatePerson 创建人员}({@link CreatePersonRequest 请求参数}): {@link CreatePersonResponse 返回参数} */
   CreatePerson(data: CreatePersonRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonResponse>;
-  /** 删除人脸 */
+  /** {@link DeleteFace 删除人脸}({@link DeleteFaceRequest 请求参数}): {@link DeleteFaceResponse 返回参数} */
   DeleteFace(data: DeleteFaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFaceResponse>;
-  /** 删除人员库 */
+  /** {@link DeleteGroup 删除人员库}({@link DeleteGroupRequest 请求参数}): {@link DeleteGroupResponse 返回参数} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
-  /** 删除人员 */
+  /** {@link DeletePerson 删除人员}({@link DeletePersonRequest 请求参数}): {@link DeletePersonResponse 返回参数} */
   DeletePerson(data: DeletePersonRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonResponse>;
-  /** 人员库删除人员 */
+  /** {@link DeletePersonFromGroup 人员库删除人员}({@link DeletePersonFromGroupRequest 请求参数}): {@link DeletePersonFromGroupResponse 返回参数} */
   DeletePersonFromGroup(data: DeletePersonFromGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonFromGroupResponse>;
-  /** 人脸检测与分析 */
+  /** {@link DetectFace 人脸检测与分析}({@link DetectFaceRequest 请求参数}): {@link DetectFaceResponse 返回参数} */
   DetectFace(data?: DetectFaceRequest, config?: AxiosRequestConfig): AxiosPromise<DetectFaceResponse>;
-  /** 人脸检测与属性分析 */
+  /** {@link DetectFaceAttributes 人脸检测与属性分析}({@link DetectFaceAttributesRequest 请求参数}): {@link DetectFaceAttributesResponse 返回参数} */
   DetectFaceAttributes(data?: DetectFaceAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DetectFaceAttributesResponse>;
-  /** 人脸静态活体检测 */
+  /** {@link DetectLiveFace 人脸静态活体检测}({@link DetectLiveFaceRequest 请求参数}): {@link DetectLiveFaceResponse 返回参数} */
   DetectLiveFace(data?: DetectLiveFaceRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLiveFaceResponse>;
-  /** 人脸静态活体检测（高精度版） */
+  /** {@link DetectLiveFaceAccurate 人脸静态活体检测（高精度版）}({@link DetectLiveFaceAccurateRequest 请求参数}): {@link DetectLiveFaceAccurateResponse 返回参数} */
   DetectLiveFaceAccurate(data?: DetectLiveFaceAccurateRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLiveFaceAccurateResponse>;
-  /** 获取人员库信息 */
+  /** {@link GetGroupInfo 获取人员库信息}({@link GetGroupInfoRequest 请求参数}): {@link GetGroupInfoResponse 返回参数} */
   GetGroupInfo(data: GetGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupInfoResponse>;
-  /** 获取人员库列表 */
+  /** {@link GetGroupList 获取人员库列表}({@link GetGroupListRequest 请求参数}): {@link GetGroupListResponse 返回参数} */
   GetGroupList(data?: GetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupListResponse>;
-  /** 获取人员基础信息 */
+  /** {@link GetPersonBaseInfo 获取人员基础信息}({@link GetPersonBaseInfoRequest 请求参数}): {@link GetPersonBaseInfoResponse 返回参数} */
   GetPersonBaseInfo(data: GetPersonBaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetPersonBaseInfoResponse>;
-  /** 获取人员归属信息 */
+  /** {@link GetPersonGroupInfo 获取人员归属信息}({@link GetPersonGroupInfoRequest 请求参数}): {@link GetPersonGroupInfoResponse 返回参数} */
   GetPersonGroupInfo(data: GetPersonGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetPersonGroupInfoResponse>;
-  /** 获取人员列表 */
+  /** {@link GetPersonList 获取人员列表}({@link GetPersonListRequest 请求参数}): {@link GetPersonListResponse 返回参数} */
   GetPersonList(data: GetPersonListRequest, config?: AxiosRequestConfig): AxiosPromise<GetPersonListResponse>;
-  /** 获取人员列表长度 */
+  /** {@link GetPersonListNum 获取人员列表长度}({@link GetPersonListNumRequest 请求参数}): {@link GetPersonListNumResponse 返回参数} */
   GetPersonListNum(data: GetPersonListNumRequest, config?: AxiosRequestConfig): AxiosPromise<GetPersonListNumResponse>;
-  /** 获取人员库升级任务列表 */
+  /** {@link GetUpgradeGroupFaceModelVersionJobList 获取人员库升级任务列表}({@link GetUpgradeGroupFaceModelVersionJobListRequest 请求参数}): {@link GetUpgradeGroupFaceModelVersionJobListResponse 返回参数} */
   GetUpgradeGroupFaceModelVersionJobList(data?: GetUpgradeGroupFaceModelVersionJobListRequest, config?: AxiosRequestConfig): AxiosPromise<GetUpgradeGroupFaceModelVersionJobListResponse>;
-  /** 人员库升级结果查询 */
+  /** {@link GetUpgradeGroupFaceModelVersionResult 人员库升级结果查询}({@link GetUpgradeGroupFaceModelVersionResultRequest 请求参数}): {@link GetUpgradeGroupFaceModelVersionResultResponse 返回参数} */
   GetUpgradeGroupFaceModelVersionResult(data: GetUpgradeGroupFaceModelVersionResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetUpgradeGroupFaceModelVersionResultResponse>;
-  /** 修改人员库 */
+  /** {@link ModifyGroup 修改人员库}({@link ModifyGroupRequest 请求参数}): {@link ModifyGroupResponse 返回参数} */
   ModifyGroup(data: ModifyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGroupResponse>;
-  /** 修改人员基础信息 */
+  /** {@link ModifyPersonBaseInfo 修改人员基础信息}({@link ModifyPersonBaseInfoRequest 请求参数}): {@link ModifyPersonBaseInfoResponse 返回参数} */
   ModifyPersonBaseInfo(data: ModifyPersonBaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonBaseInfoResponse>;
-  /** 修改人员描述信息 */
+  /** {@link ModifyPersonGroupInfo 修改人员描述信息}({@link ModifyPersonGroupInfoRequest 请求参数}): {@link ModifyPersonGroupInfoResponse 返回参数} */
   ModifyPersonGroupInfo(data: ModifyPersonGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonGroupInfoResponse>;
-  /** 人员库版本回滚 */
+  /** {@link RevertGroupFaceModelVersion 人员库版本回滚}({@link RevertGroupFaceModelVersionRequest 请求参数}): {@link RevertGroupFaceModelVersionResponse 返回参数} */
   RevertGroupFaceModelVersion(data: RevertGroupFaceModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<RevertGroupFaceModelVersionResponse>;
-  /** 人脸搜索 */
+  /** {@link SearchFaces 人脸搜索}({@link SearchFacesRequest 请求参数}): {@link SearchFacesResponse 返回参数} */
   SearchFaces(data: SearchFacesRequest, config?: AxiosRequestConfig): AxiosPromise<SearchFacesResponse>;
-  /** 人脸搜索分库返回 */
+  /** {@link SearchFacesReturnsByGroup 人脸搜索分库返回}({@link SearchFacesReturnsByGroupRequest 请求参数}): {@link SearchFacesReturnsByGroupResponse 返回参数} */
   SearchFacesReturnsByGroup(data: SearchFacesReturnsByGroupRequest, config?: AxiosRequestConfig): AxiosPromise<SearchFacesReturnsByGroupResponse>;
-  /** 人员搜索 */
+  /** {@link SearchPersons 人员搜索}({@link SearchPersonsRequest 请求参数}): {@link SearchPersonsResponse 返回参数} */
   SearchPersons(data: SearchPersonsRequest, config?: AxiosRequestConfig): AxiosPromise<SearchPersonsResponse>;
-  /** 人员搜索按库返回 */
+  /** {@link SearchPersonsReturnsByGroup 人员搜索按库返回}({@link SearchPersonsReturnsByGroupRequest 请求参数}): {@link SearchPersonsReturnsByGroupResponse 返回参数} */
   SearchPersonsReturnsByGroup(data: SearchPersonsReturnsByGroupRequest, config?: AxiosRequestConfig): AxiosPromise<SearchPersonsReturnsByGroupResponse>;
-  /** 人员库升级 */
+  /** {@link UpgradeGroupFaceModelVersion 人员库升级}({@link UpgradeGroupFaceModelVersionRequest 请求参数}): {@link UpgradeGroupFaceModelVersionResponse 返回参数} */
   UpgradeGroupFaceModelVersion(data: UpgradeGroupFaceModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeGroupFaceModelVersionResponse>;
-  /** 人脸验证 */
+  /** {@link VerifyFace 人脸验证}({@link VerifyFaceRequest 请求参数}): {@link VerifyFaceResponse 返回参数} */
   VerifyFace(data: VerifyFaceRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyFaceResponse>;
-  /** 人员验证 */
+  /** {@link VerifyPerson 人员验证}({@link VerifyPersonRequest 请求参数}): {@link VerifyPersonResponse 返回参数} */
   VerifyPerson(data: VerifyPersonRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyPersonResponse>;
-  /** 稠密关键点 */
+  /** {@link V20180301.AnalyzeDenseLandmarks 稠密关键点}({@link V20180301.AnalyzeDenseLandmarksRequest 请求参数}): {@link V20180301.AnalyzeDenseLandmarksResponse 返回参数} */
   AnalyzeDenseLandmarks(data: V20180301.AnalyzeDenseLandmarksRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.AnalyzeDenseLandmarksResponse>;
-  /** 五官定位 */
+  /** {@link V20180301.AnalyzeFace 五官定位}({@link V20180301.AnalyzeFaceRequest 请求参数}): {@link V20180301.AnalyzeFaceResponse 返回参数} */
   AnalyzeFace(data: V20180301.AnalyzeFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.AnalyzeFaceResponse>;
-  /** 人脸比对 */
+  /** {@link V20180301.CompareFace 人脸比对}({@link V20180301.CompareFaceRequest 请求参数}): {@link V20180301.CompareFaceResponse 返回参数} */
   CompareFace(data: V20180301.CompareFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.CompareFaceResponse>;
-  /** 复制人员 */
+  /** {@link V20180301.CopyPerson 复制人员}({@link V20180301.CopyPersonRequest 请求参数}): {@link V20180301.CopyPersonResponse 返回参数} */
   CopyPerson(data: V20180301.CopyPersonRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.CopyPersonResponse>;
-  /** 增加人脸 */
+  /** {@link V20180301.CreateFace 增加人脸}({@link V20180301.CreateFaceRequest 请求参数}): {@link V20180301.CreateFaceResponse 返回参数} */
   CreateFace(data: V20180301.CreateFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.CreateFaceResponse>;
-  /** 创建人员库 */
+  /** {@link V20180301.CreateGroup 创建人员库}({@link V20180301.CreateGroupRequest 请求参数}): {@link V20180301.CreateGroupResponse 返回参数} */
   CreateGroup(data: V20180301.CreateGroupRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.CreateGroupResponse>;
-  /** 创建人员 */
+  /** {@link V20180301.CreatePerson 创建人员}({@link V20180301.CreatePersonRequest 请求参数}): {@link V20180301.CreatePersonResponse 返回参数} */
   CreatePerson(data: V20180301.CreatePersonRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.CreatePersonResponse>;
-  /** 删除人脸 */
+  /** {@link V20180301.DeleteFace 删除人脸}({@link V20180301.DeleteFaceRequest 请求参数}): {@link V20180301.DeleteFaceResponse 返回参数} */
   DeleteFace(data: V20180301.DeleteFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DeleteFaceResponse>;
-  /** 删除人员库 */
+  /** {@link V20180301.DeleteGroup 删除人员库}({@link V20180301.DeleteGroupRequest 请求参数}): {@link V20180301.DeleteGroupResponse 返回参数} */
   DeleteGroup(data: V20180301.DeleteGroupRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DeleteGroupResponse>;
-  /** 删除人员 */
+  /** {@link V20180301.DeletePerson 删除人员}({@link V20180301.DeletePersonRequest 请求参数}): {@link V20180301.DeletePersonResponse 返回参数} */
   DeletePerson(data: V20180301.DeletePersonRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DeletePersonResponse>;
-  /** 人员库删除人员 */
+  /** {@link V20180301.DeletePersonFromGroup 人员库删除人员}({@link V20180301.DeletePersonFromGroupRequest 请求参数}): {@link V20180301.DeletePersonFromGroupResponse 返回参数} */
   DeletePersonFromGroup(data: V20180301.DeletePersonFromGroupRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DeletePersonFromGroupResponse>;
-  /** 人脸检测与分析 */
+  /** {@link V20180301.DetectFace 人脸检测与分析}({@link V20180301.DetectFaceRequest 请求参数}): {@link V20180301.DetectFaceResponse 返回参数} */
   DetectFace(data: V20180301.DetectFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DetectFaceResponse>;
-  /** 人脸检测与属性分析 */
+  /** {@link V20180301.DetectFaceAttributes 人脸检测与属性分析}({@link V20180301.DetectFaceAttributesRequest 请求参数}): {@link V20180301.DetectFaceAttributesResponse 返回参数} */
   DetectFaceAttributes(data: V20180301.DetectFaceAttributesRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DetectFaceAttributesResponse>;
-  /** 人脸静态活体检测 */
+  /** {@link V20180301.DetectLiveFace 人脸静态活体检测}({@link V20180301.DetectLiveFaceRequest 请求参数}): {@link V20180301.DetectLiveFaceResponse 返回参数} */
   DetectLiveFace(data: V20180301.DetectLiveFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DetectLiveFaceResponse>;
-  /** 获取人员库信息 */
+  /** {@link V20180301.GetGroupInfo 获取人员库信息}({@link V20180301.GetGroupInfoRequest 请求参数}): {@link V20180301.GetGroupInfoResponse 返回参数} */
   GetGroupInfo(data: V20180301.GetGroupInfoRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetGroupInfoResponse>;
-  /** 获取人员库列表 */
+  /** {@link V20180301.GetGroupList 获取人员库列表}({@link V20180301.GetGroupListRequest 请求参数}): {@link V20180301.GetGroupListResponse 返回参数} */
   GetGroupList(data: V20180301.GetGroupListRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetGroupListResponse>;
-  /** 获取人员基础信息 */
+  /** {@link V20180301.GetPersonBaseInfo 获取人员基础信息}({@link V20180301.GetPersonBaseInfoRequest 请求参数}): {@link V20180301.GetPersonBaseInfoResponse 返回参数} */
   GetPersonBaseInfo(data: V20180301.GetPersonBaseInfoRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetPersonBaseInfoResponse>;
-  /** 获取人员归属信息 */
+  /** {@link V20180301.GetPersonGroupInfo 获取人员归属信息}({@link V20180301.GetPersonGroupInfoRequest 请求参数}): {@link V20180301.GetPersonGroupInfoResponse 返回参数} */
   GetPersonGroupInfo(data: V20180301.GetPersonGroupInfoRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetPersonGroupInfoResponse>;
-  /** 获取人员列表 */
+  /** {@link V20180301.GetPersonList 获取人员列表}({@link V20180301.GetPersonListRequest 请求参数}): {@link V20180301.GetPersonListResponse 返回参数} */
   GetPersonList(data: V20180301.GetPersonListRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetPersonListResponse>;
-  /** 获取人员列表长度 */
+  /** {@link V20180301.GetPersonListNum 获取人员列表长度}({@link V20180301.GetPersonListNumRequest 请求参数}): {@link V20180301.GetPersonListNumResponse 返回参数} */
   GetPersonListNum(data: V20180301.GetPersonListNumRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetPersonListNumResponse>;
-  /** 获取人员库升级任务列表 */
+  /** {@link V20180301.GetUpgradeGroupFaceModelVersionJobList 获取人员库升级任务列表}({@link V20180301.GetUpgradeGroupFaceModelVersionJobListRequest 请求参数}): {@link V20180301.GetUpgradeGroupFaceModelVersionJobListResponse 返回参数} */
   GetUpgradeGroupFaceModelVersionJobList(data: V20180301.GetUpgradeGroupFaceModelVersionJobListRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetUpgradeGroupFaceModelVersionJobListResponse>;
-  /** 人员库升级结果查询 */
+  /** {@link V20180301.GetUpgradeGroupFaceModelVersionResult 人员库升级结果查询}({@link V20180301.GetUpgradeGroupFaceModelVersionResultRequest 请求参数}): {@link V20180301.GetUpgradeGroupFaceModelVersionResultResponse 返回参数} */
   GetUpgradeGroupFaceModelVersionResult(data: V20180301.GetUpgradeGroupFaceModelVersionResultRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetUpgradeGroupFaceModelVersionResultResponse>;
-  /** 修改人员库 */
+  /** {@link V20180301.ModifyGroup 修改人员库}({@link V20180301.ModifyGroupRequest 请求参数}): {@link V20180301.ModifyGroupResponse 返回参数} */
   ModifyGroup(data: V20180301.ModifyGroupRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.ModifyGroupResponse>;
-  /** 修改人员基础信息 */
+  /** {@link V20180301.ModifyPersonBaseInfo 修改人员基础信息}({@link V20180301.ModifyPersonBaseInfoRequest 请求参数}): {@link V20180301.ModifyPersonBaseInfoResponse 返回参数} */
   ModifyPersonBaseInfo(data: V20180301.ModifyPersonBaseInfoRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.ModifyPersonBaseInfoResponse>;
-  /** 修改人员描述信息 */
+  /** {@link V20180301.ModifyPersonGroupInfo 修改人员描述信息}({@link V20180301.ModifyPersonGroupInfoRequest 请求参数}): {@link V20180301.ModifyPersonGroupInfoResponse 返回参数} */
   ModifyPersonGroupInfo(data: V20180301.ModifyPersonGroupInfoRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.ModifyPersonGroupInfoResponse>;
-  /** 人员库版本回滚 */
+  /** {@link V20180301.RevertGroupFaceModelVersion 人员库版本回滚}({@link V20180301.RevertGroupFaceModelVersionRequest 请求参数}): {@link V20180301.RevertGroupFaceModelVersionResponse 返回参数} */
   RevertGroupFaceModelVersion(data: V20180301.RevertGroupFaceModelVersionRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.RevertGroupFaceModelVersionResponse>;
-  /** 人脸搜索 */
+  /** {@link V20180301.SearchFaces 人脸搜索}({@link V20180301.SearchFacesRequest 请求参数}): {@link V20180301.SearchFacesResponse 返回参数} */
   SearchFaces(data: V20180301.SearchFacesRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.SearchFacesResponse>;
-  /** 人脸搜索分库返回 */
+  /** {@link V20180301.SearchFacesReturnsByGroup 人脸搜索分库返回}({@link V20180301.SearchFacesReturnsByGroupRequest 请求参数}): {@link V20180301.SearchFacesReturnsByGroupResponse 返回参数} */
   SearchFacesReturnsByGroup(data: V20180301.SearchFacesReturnsByGroupRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.SearchFacesReturnsByGroupResponse>;
-  /** 人员搜索 */
+  /** {@link V20180301.SearchPersons 人员搜索}({@link V20180301.SearchPersonsRequest 请求参数}): {@link V20180301.SearchPersonsResponse 返回参数} */
   SearchPersons(data: V20180301.SearchPersonsRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.SearchPersonsResponse>;
-  /** 人员搜索按库返回 */
+  /** {@link V20180301.SearchPersonsReturnsByGroup 人员搜索按库返回}({@link V20180301.SearchPersonsReturnsByGroupRequest 请求参数}): {@link V20180301.SearchPersonsReturnsByGroupResponse 返回参数} */
   SearchPersonsReturnsByGroup(data: V20180301.SearchPersonsReturnsByGroupRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.SearchPersonsReturnsByGroupResponse>;
-  /** 人员库升级 */
+  /** {@link V20180301.UpgradeGroupFaceModelVersion 人员库升级}({@link V20180301.UpgradeGroupFaceModelVersionRequest 请求参数}): {@link V20180301.UpgradeGroupFaceModelVersionResponse 返回参数} */
   UpgradeGroupFaceModelVersion(data: V20180301.UpgradeGroupFaceModelVersionRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.UpgradeGroupFaceModelVersionResponse>;
-  /** 人脸验证 */
+  /** {@link V20180301.VerifyFace 人脸验证}({@link V20180301.VerifyFaceRequest 请求参数}): {@link V20180301.VerifyFaceResponse 返回参数} */
   VerifyFace(data: V20180301.VerifyFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.VerifyFaceResponse>;
-  /** 人员验证 */
+  /** {@link V20180301.VerifyPerson 人员验证}({@link V20180301.VerifyPersonRequest 请求参数}): {@link V20180301.VerifyPersonResponse 返回参数} */
   VerifyPerson(data: V20180301.VerifyPersonRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.VerifyPersonResponse>;
 }
 

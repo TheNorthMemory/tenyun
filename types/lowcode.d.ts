@@ -140,10 +140,10 @@ declare interface DescribeDataSourceListResponse {
   RequestId?: string;
 }
 
-/** [云开发低码](https://cloud.tencent.com/document/product/1301) */
+/** {@link Lowcode 云开发低码} */
 declare interface Lowcode {
   (): Versions;
-  /** 获取数据源详情列表 */
+  /** {@link DescribeDataSourceList 获取数据源详情列表}({@link DescribeDataSourceListRequest 请求参数}): {@link DescribeDataSourceListResponse 返回参数} */
   DescribeDataSourceList(data: DescribeDataSourceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSourceListResponse>;
 }
 

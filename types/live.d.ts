@@ -3480,250 +3480,250 @@ declare interface UpdateLiveWatermarkResponse {
   RequestId?: string;
 }
 
-/** [云直播](https://cloud.tencent.com/document/product/267) */
+/** {@link Live 云直播CSS} */
 declare interface Live {
   (): Versions;
-  /** 设置延时直播 */
+  /** {@link AddDelayLiveStream 设置延时直播}({@link AddDelayLiveStreamRequest 请求参数}): {@link AddDelayLiveStreamResponse 返回参数} */
   AddDelayLiveStream(data: AddDelayLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<AddDelayLiveStreamResponse>;
-  /** 添加域名 */
+  /** {@link AddLiveDomain 添加域名}({@link AddLiveDomainRequest 请求参数}): {@link AddLiveDomainResponse 返回参数} */
   AddLiveDomain(data: AddLiveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<AddLiveDomainResponse>;
-  /** 添加水印 */
+  /** {@link AddLiveWatermark 添加水印}({@link AddLiveWatermarkRequest 请求参数}): {@link AddLiveWatermarkResponse 返回参数} */
   AddLiveWatermark(data: AddLiveWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<AddLiveWatermarkResponse>;
-  /** 验证直播域名所有权 */
+  /** {@link AuthenticateDomainOwner 验证直播域名所有权}({@link AuthenticateDomainOwnerRequest 请求参数}): {@link AuthenticateDomainOwnerResponse 返回参数} */
   AuthenticateDomainOwner(data: AuthenticateDomainOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<AuthenticateDomainOwnerResponse>;
-  /** 取消通用混流 */
+  /** {@link CancelCommonMixStream 取消通用混流}({@link CancelCommonMixStreamRequest 请求参数}): {@link CancelCommonMixStreamResponse 返回参数} */
   CancelCommonMixStream(data: CancelCommonMixStreamRequest, config?: AxiosRequestConfig): AxiosPromise<CancelCommonMixStreamResponse>;
-  /** 创建通用混流 */
+  /** {@link CreateCommonMixStream 创建通用混流}({@link CreateCommonMixStreamRequest 请求参数}): {@link CreateCommonMixStreamResponse 返回参数} */
   CreateCommonMixStream(data: CreateCommonMixStreamRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCommonMixStreamResponse>;
-  /** 创建回调规则 */
+  /** {@link CreateLiveCallbackRule 创建回调规则}({@link CreateLiveCallbackRuleRequest 请求参数}): {@link CreateLiveCallbackRuleResponse 返回参数} */
   CreateLiveCallbackRule(data: CreateLiveCallbackRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveCallbackRuleResponse>;
-  /** 创建回调模板 */
+  /** {@link CreateLiveCallbackTemplate 创建回调模板}({@link CreateLiveCallbackTemplateRequest 请求参数}): {@link CreateLiveCallbackTemplateResponse 返回参数} */
   CreateLiveCallbackTemplate(data: CreateLiveCallbackTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveCallbackTemplateResponse>;
-  /** 创建直播拉流任务 */
+  /** {@link CreateLivePullStreamTask 创建直播拉流任务}({@link CreateLivePullStreamTaskRequest 请求参数}): {@link CreateLivePullStreamTaskResponse 返回参数} */
   CreateLivePullStreamTask(data: CreateLivePullStreamTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLivePullStreamTaskResponse>;
-  /** 创建录制任务(已废弃,请使用新接口) */
+  /** {@link CreateLiveRecord 创建录制任务(已废弃,请使用新接口)}({@link CreateLiveRecordRequest 请求参数}): {@link CreateLiveRecordResponse 返回参数} */
   CreateLiveRecord(data: CreateLiveRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveRecordResponse>;
-  /** 创建录制规则 */
+  /** {@link CreateLiveRecordRule 创建录制规则}({@link CreateLiveRecordRuleRequest 请求参数}): {@link CreateLiveRecordRuleResponse 返回参数} */
   CreateLiveRecordRule(data: CreateLiveRecordRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveRecordRuleResponse>;
-  /** 直播创建录制模板 */
+  /** {@link CreateLiveRecordTemplate 直播创建录制模板}({@link CreateLiveRecordTemplateRequest 请求参数}): {@link CreateLiveRecordTemplateResponse 返回参数} */
   CreateLiveRecordTemplate(data: CreateLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveRecordTemplateResponse>;
-  /** 创建截图规则 */
+  /** {@link CreateLiveSnapshotRule 创建截图规则}({@link CreateLiveSnapshotRuleRequest 请求参数}): {@link CreateLiveSnapshotRuleResponse 返回参数} */
   CreateLiveSnapshotRule(data: CreateLiveSnapshotRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveSnapshotRuleResponse>;
-  /** 创建截图模板 */
+  /** {@link CreateLiveSnapshotTemplate 创建截图模板}({@link CreateLiveSnapshotTemplateRequest 请求参数}): {@link CreateLiveSnapshotTemplateResponse 返回参数} */
   CreateLiveSnapshotTemplate(data: CreateLiveSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveSnapshotTemplateResponse>;
-  /** 创建转码规则 */
+  /** {@link CreateLiveTranscodeRule 创建转码规则}({@link CreateLiveTranscodeRuleRequest 请求参数}): {@link CreateLiveTranscodeRuleResponse 返回参数} */
   CreateLiveTranscodeRule(data: CreateLiveTranscodeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveTranscodeRuleResponse>;
-  /** 创建转码模板 */
+  /** {@link CreateLiveTranscodeTemplate 创建转码模板}({@link CreateLiveTranscodeTemplateRequest 请求参数}): {@link CreateLiveTranscodeTemplateResponse 返回参数} */
   CreateLiveTranscodeTemplate(data: CreateLiveTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveTranscodeTemplateResponse>;
-  /** 创建水印规则 */
+  /** {@link CreateLiveWatermarkRule 创建水印规则}({@link CreateLiveWatermarkRuleRequest 请求参数}): {@link CreateLiveWatermarkRuleResponse 返回参数} */
   CreateLiveWatermarkRule(data: CreateLiveWatermarkRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveWatermarkRuleResponse>;
-  /** 添加拉流配置(该接口已下线,请使用新接口 CreateLivePullStreamTask) */
+  /** {@link CreatePullStreamConfig 添加拉流配置(该接口已下线,请使用新接口 CreateLivePullStreamTask)}({@link CreatePullStreamConfigRequest 请求参数}): {@link CreatePullStreamConfigResponse 返回参数} */
   CreatePullStreamConfig(data: CreatePullStreamConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePullStreamConfigResponse>;
-  /** 创建录制任务（新） */
+  /** {@link CreateRecordTask 创建录制任务（新）}({@link CreateRecordTaskRequest 请求参数}): {@link CreateRecordTaskResponse 返回参数} */
   CreateRecordTask(data: CreateRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordTaskResponse>;
-  /** 创建截图任务 */
+  /** {@link CreateScreenshotTask 创建截图任务}({@link CreateScreenshotTaskRequest 请求参数}): {@link CreateScreenshotTaskResponse 返回参数} */
   CreateScreenshotTask(data: CreateScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScreenshotTaskResponse>;
-  /** 删除回调规则 */
+  /** {@link DeleteLiveCallbackRule 删除回调规则}({@link DeleteLiveCallbackRuleRequest 请求参数}): {@link DeleteLiveCallbackRuleResponse 返回参数} */
   DeleteLiveCallbackRule(data: DeleteLiveCallbackRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveCallbackRuleResponse>;
-  /** 删除回调模板 */
+  /** {@link DeleteLiveCallbackTemplate 删除回调模板}({@link DeleteLiveCallbackTemplateRequest 请求参数}): {@link DeleteLiveCallbackTemplateResponse 返回参数} */
   DeleteLiveCallbackTemplate(data: DeleteLiveCallbackTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveCallbackTemplateResponse>;
-  /** 删除域名 */
+  /** {@link DeleteLiveDomain 删除域名}({@link DeleteLiveDomainRequest 请求参数}): {@link DeleteLiveDomainResponse 返回参数} */
   DeleteLiveDomain(data: DeleteLiveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveDomainResponse>;
-  /** 删除直播拉流任务 */
+  /** {@link DeleteLivePullStreamTask 删除直播拉流任务}({@link DeleteLivePullStreamTaskRequest 请求参数}): {@link DeleteLivePullStreamTaskResponse 返回参数} */
   DeleteLivePullStreamTask(data: DeleteLivePullStreamTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLivePullStreamTaskResponse>;
-  /** 删除录制任务(已废弃,请使用新接口) */
+  /** {@link DeleteLiveRecord 删除录制任务(已废弃,请使用新接口)}({@link DeleteLiveRecordRequest 请求参数}): {@link DeleteLiveRecordResponse 返回参数} */
   DeleteLiveRecord(data: DeleteLiveRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveRecordResponse>;
-  /** 删除录制规则 */
+  /** {@link DeleteLiveRecordRule 删除录制规则}({@link DeleteLiveRecordRuleRequest 请求参数}): {@link DeleteLiveRecordRuleResponse 返回参数} */
   DeleteLiveRecordRule(data: DeleteLiveRecordRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveRecordRuleResponse>;
-  /** 删除录制模板 */
+  /** {@link DeleteLiveRecordTemplate 删除录制模板}({@link DeleteLiveRecordTemplateRequest 请求参数}): {@link DeleteLiveRecordTemplateResponse 返回参数} */
   DeleteLiveRecordTemplate(data: DeleteLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveRecordTemplateResponse>;
-  /** 删除截图规则 */
+  /** {@link DeleteLiveSnapshotRule 删除截图规则}({@link DeleteLiveSnapshotRuleRequest 请求参数}): {@link DeleteLiveSnapshotRuleResponse 返回参数} */
   DeleteLiveSnapshotRule(data: DeleteLiveSnapshotRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveSnapshotRuleResponse>;
-  /** 删除截图模板 */
+  /** {@link DeleteLiveSnapshotTemplate 删除截图模板}({@link DeleteLiveSnapshotTemplateRequest 请求参数}): {@link DeleteLiveSnapshotTemplateResponse 返回参数} */
   DeleteLiveSnapshotTemplate(data: DeleteLiveSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveSnapshotTemplateResponse>;
-  /** 删除转码规则 */
+  /** {@link DeleteLiveTranscodeRule 删除转码规则}({@link DeleteLiveTranscodeRuleRequest 请求参数}): {@link DeleteLiveTranscodeRuleResponse 返回参数} */
   DeleteLiveTranscodeRule(data: DeleteLiveTranscodeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveTranscodeRuleResponse>;
-  /** 删除转码模板 */
+  /** {@link DeleteLiveTranscodeTemplate 删除转码模板}({@link DeleteLiveTranscodeTemplateRequest 请求参数}): {@link DeleteLiveTranscodeTemplateResponse 返回参数} */
   DeleteLiveTranscodeTemplate(data: DeleteLiveTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveTranscodeTemplateResponse>;
-  /** 删除水印 */
+  /** {@link DeleteLiveWatermark 删除水印}({@link DeleteLiveWatermarkRequest 请求参数}): {@link DeleteLiveWatermarkResponse 返回参数} */
   DeleteLiveWatermark(data: DeleteLiveWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveWatermarkResponse>;
-  /** 删除水印规则 */
+  /** {@link DeleteLiveWatermarkRule 删除水印规则}({@link DeleteLiveWatermarkRuleRequest 请求参数}): {@link DeleteLiveWatermarkRuleResponse 返回参数} */
   DeleteLiveWatermarkRule(data: DeleteLiveWatermarkRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveWatermarkRuleResponse>;
-  /** 删除拉流配置(该接口已下线,请使用新接口 DeleteLivePullStreamTask) */
+  /** {@link DeletePullStreamConfig 删除拉流配置(该接口已下线,请使用新接口 DeleteLivePullStreamTask)}({@link DeletePullStreamConfigRequest 请求参数}): {@link DeletePullStreamConfigResponse 返回参数} */
   DeletePullStreamConfig(data: DeletePullStreamConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePullStreamConfigResponse>;
-  /** 删除录制任务（新） */
+  /** {@link DeleteRecordTask 删除录制任务（新）}({@link DeleteRecordTaskRequest 请求参数}): {@link DeleteRecordTaskResponse 返回参数} */
   DeleteRecordTask(data: DeleteRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordTaskResponse>;
-  /** 删除截图任务 */
+  /** {@link DeleteScreenshotTask 删除截图任务}({@link DeleteScreenshotTaskRequest 请求参数}): {@link DeleteScreenshotTaskResponse 返回参数} */
   DeleteScreenshotTask(data: DeleteScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScreenshotTaskResponse>;
-  /** 查询某个时间点所有流的下行播放数据 */
+  /** {@link DescribeAllStreamPlayInfoList 查询某个时间点所有流的下行播放数据}({@link DescribeAllStreamPlayInfoListRequest 请求参数}): {@link DescribeAllStreamPlayInfoListResponse 返回参数} */
   DescribeAllStreamPlayInfoList(data: DescribeAllStreamPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllStreamPlayInfoListResponse>;
-  /** 海外分区直播播放带宽和流量数据查询 */
+  /** {@link DescribeAreaBillBandwidthAndFluxList 海外分区直播播放带宽和流量数据查询}({@link DescribeAreaBillBandwidthAndFluxListRequest 请求参数}): {@link DescribeAreaBillBandwidthAndFluxListResponse 返回参数} */
   DescribeAreaBillBandwidthAndFluxList(data: DescribeAreaBillBandwidthAndFluxListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAreaBillBandwidthAndFluxListResponse>;
-  /** 直播播放带宽和流量数据查询 */
+  /** {@link DescribeBillBandwidthAndFluxList 直播播放带宽和流量数据查询}({@link DescribeBillBandwidthAndFluxListRequest 请求参数}): {@link DescribeBillBandwidthAndFluxListResponse 返回参数} */
   DescribeBillBandwidthAndFluxList(data: DescribeBillBandwidthAndFluxListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillBandwidthAndFluxListResponse>;
-  /** 回调事件查询 */
+  /** {@link DescribeCallbackRecordsList 回调事件查询}({@link DescribeCallbackRecordsListRequest 请求参数}): {@link DescribeCallbackRecordsListResponse 返回参数} */
   DescribeCallbackRecordsList(data: DescribeCallbackRecordsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallbackRecordsListResponse>;
-  /** 查询并发录制路数 */
+  /** {@link DescribeConcurrentRecordStreamNum 查询并发录制路数}({@link DescribeConcurrentRecordStreamNumRequest 请求参数}): {@link DescribeConcurrentRecordStreamNumResponse 返回参数} */
   DescribeConcurrentRecordStreamNum(data: DescribeConcurrentRecordStreamNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConcurrentRecordStreamNumResponse>;
-  /** 查询直播转推计费带宽 */
+  /** {@link DescribeDeliverBandwidthList 查询直播转推计费带宽}({@link DescribeDeliverBandwidthListRequest 请求参数}): {@link DescribeDeliverBandwidthListResponse 返回参数} */
   DescribeDeliverBandwidthList(data: DescribeDeliverBandwidthListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliverBandwidthListResponse>;
-  /** 查询按省份和运营商分组的播放数据 */
+  /** {@link DescribeGroupProIspPlayInfoList 查询按省份和运营商分组的播放数据}({@link DescribeGroupProIspPlayInfoListRequest 请求参数}): {@link DescribeGroupProIspPlayInfoListResponse 返回参数} */
   DescribeGroupProIspPlayInfoList(data: DescribeGroupProIspPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupProIspPlayInfoListResponse>;
-  /** 查询播放http状态码明细数据 */
+  /** {@link DescribeHttpStatusInfoList 查询播放http状态码明细数据}({@link DescribeHttpStatusInfoListRequest 请求参数}): {@link DescribeHttpStatusInfoListResponse 返回参数} */
   DescribeHttpStatusInfoList(data: DescribeHttpStatusInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHttpStatusInfoListResponse>;
-  /** 获取回调规则列表 */
+  /** {@link DescribeLiveCallbackRules 获取回调规则列表}({@link DescribeLiveCallbackRulesRequest 请求参数}): {@link DescribeLiveCallbackRulesResponse 返回参数} */
   DescribeLiveCallbackRules(data?: DescribeLiveCallbackRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCallbackRulesResponse>;
-  /** 获取单个回调模板 */
+  /** {@link DescribeLiveCallbackTemplate 获取单个回调模板}({@link DescribeLiveCallbackTemplateRequest 请求参数}): {@link DescribeLiveCallbackTemplateResponse 返回参数} */
   DescribeLiveCallbackTemplate(data: DescribeLiveCallbackTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCallbackTemplateResponse>;
-  /** 获取回调模板列表 */
+  /** {@link DescribeLiveCallbackTemplates 获取回调模板列表}({@link DescribeLiveCallbackTemplatesRequest 请求参数}): {@link DescribeLiveCallbackTemplatesResponse 返回参数} */
   DescribeLiveCallbackTemplates(data?: DescribeLiveCallbackTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCallbackTemplatesResponse>;
-  /** 获取证书信息 */
+  /** {@link DescribeLiveCert 获取证书信息}({@link DescribeLiveCertRequest 请求参数}): {@link DescribeLiveCertResponse 返回参数} */
   DescribeLiveCert(data: DescribeLiveCertRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCertResponse>;
-  /** 获取证书信息列表 */
+  /** {@link DescribeLiveCerts 获取证书信息列表}({@link DescribeLiveCertsRequest 请求参数}): {@link DescribeLiveCertsResponse 返回参数} */
   DescribeLiveCerts(data?: DescribeLiveCertsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCertsResponse>;
-  /** 获取直播延播列表 */
+  /** {@link DescribeLiveDelayInfoList 获取直播延播列表}({@link DescribeLiveDelayInfoListRequest 请求参数}): {@link DescribeLiveDelayInfoListResponse 返回参数} */
   DescribeLiveDelayInfoList(data?: DescribeLiveDelayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDelayInfoListResponse>;
-  /** 查询域名信息 */
+  /** {@link DescribeLiveDomain 查询域名信息}({@link DescribeLiveDomainRequest 请求参数}): {@link DescribeLiveDomainResponse 返回参数} */
   DescribeLiveDomain(data: DescribeLiveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainResponse>;
-  /** 获取域名证书信息 */
+  /** {@link DescribeLiveDomainCert 获取域名证书信息}({@link DescribeLiveDomainCertRequest 请求参数}): {@link DescribeLiveDomainCertResponse 返回参数} */
   DescribeLiveDomainCert(data: DescribeLiveDomainCertRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainCertResponse>;
-  /** 查询绑定证书的域名列表 */
+  /** {@link DescribeLiveDomainCertBindings 查询绑定证书的域名列表}({@link DescribeLiveDomainCertBindingsRequest 请求参数}): {@link DescribeLiveDomainCertBindingsResponse 返回参数} */
   DescribeLiveDomainCertBindings(data?: DescribeLiveDomainCertBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainCertBindingsResponse>;
-  /** 查询实时的域名维度下行播放数据 */
+  /** {@link DescribeLiveDomainPlayInfoList 查询实时的域名维度下行播放数据}({@link DescribeLiveDomainPlayInfoListRequest 请求参数}): {@link DescribeLiveDomainPlayInfoListResponse 返回参数} */
   DescribeLiveDomainPlayInfoList(data?: DescribeLiveDomainPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainPlayInfoListResponse>;
-  /** 查询直播域名 Referer 黑白名单配置 */
+  /** {@link DescribeLiveDomainReferer 查询直播域名 Referer 黑白名单配置}({@link DescribeLiveDomainRefererRequest 请求参数}): {@link DescribeLiveDomainRefererResponse 返回参数} */
   DescribeLiveDomainReferer(data: DescribeLiveDomainRefererRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainRefererResponse>;
-  /** 查询域名列表 */
+  /** {@link DescribeLiveDomains 查询域名列表}({@link DescribeLiveDomainsRequest 请求参数}): {@link DescribeLiveDomainsResponse 返回参数} */
   DescribeLiveDomains(data?: DescribeLiveDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainsResponse>;
-  /** 获取禁推流列表 */
+  /** {@link DescribeLiveForbidStreamList 获取禁推流列表}({@link DescribeLiveForbidStreamListRequest 请求参数}): {@link DescribeLiveForbidStreamListResponse 返回参数} */
   DescribeLiveForbidStreamList(data?: DescribeLiveForbidStreamListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveForbidStreamListResponse>;
-  /** 查询直播套餐包信息 */
+  /** {@link DescribeLivePackageInfo 查询直播套餐包信息}({@link DescribeLivePackageInfoRequest 请求参数}): {@link DescribeLivePackageInfoResponse 返回参数} */
   DescribeLivePackageInfo(data: DescribeLivePackageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePackageInfoResponse>;
-  /** 查询播放鉴权key */
+  /** {@link DescribeLivePlayAuthKey 查询播放鉴权key}({@link DescribeLivePlayAuthKeyRequest 请求参数}): {@link DescribeLivePlayAuthKeyResponse 返回参数} */
   DescribeLivePlayAuthKey(data: DescribeLivePlayAuthKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePlayAuthKeyResponse>;
-  /** 查询直播拉流任务 */
+  /** {@link DescribeLivePullStreamTasks 查询直播拉流任务}({@link DescribeLivePullStreamTasksRequest 请求参数}): {@link DescribeLivePullStreamTasksResponse 返回参数} */
   DescribeLivePullStreamTasks(data?: DescribeLivePullStreamTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePullStreamTasksResponse>;
-  /** 查询推流鉴权key */
+  /** {@link DescribeLivePushAuthKey 查询推流鉴权key}({@link DescribeLivePushAuthKeyRequest 请求参数}): {@link DescribeLivePushAuthKeyResponse 返回参数} */
   DescribeLivePushAuthKey(data: DescribeLivePushAuthKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePushAuthKeyResponse>;
-  /** 获取录制规则列表 */
+  /** {@link DescribeLiveRecordRules 获取录制规则列表}({@link DescribeLiveRecordRulesRequest 请求参数}): {@link DescribeLiveRecordRulesResponse 返回参数} */
   DescribeLiveRecordRules(data?: DescribeLiveRecordRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordRulesResponse>;
-  /** 获取单个录制模板 */
+  /** {@link DescribeLiveRecordTemplate 获取单个录制模板}({@link DescribeLiveRecordTemplateRequest 请求参数}): {@link DescribeLiveRecordTemplateResponse 返回参数} */
   DescribeLiveRecordTemplate(data: DescribeLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordTemplateResponse>;
-  /** 获取录制模板列表 */
+  /** {@link DescribeLiveRecordTemplates 获取录制模板列表}({@link DescribeLiveRecordTemplatesRequest 请求参数}): {@link DescribeLiveRecordTemplatesResponse 返回参数} */
   DescribeLiveRecordTemplates(data?: DescribeLiveRecordTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordTemplatesResponse>;
-  /** 获取截图规则列表 */
+  /** {@link DescribeLiveSnapshotRules 获取截图规则列表}({@link DescribeLiveSnapshotRulesRequest 请求参数}): {@link DescribeLiveSnapshotRulesResponse 返回参数} */
   DescribeLiveSnapshotRules(data?: DescribeLiveSnapshotRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveSnapshotRulesResponse>;
-  /** 获取单个截图模板 */
+  /** {@link DescribeLiveSnapshotTemplate 获取单个截图模板}({@link DescribeLiveSnapshotTemplateRequest 请求参数}): {@link DescribeLiveSnapshotTemplateResponse 返回参数} */
   DescribeLiveSnapshotTemplate(data: DescribeLiveSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveSnapshotTemplateResponse>;
-  /** 获取截图模板列表 */
+  /** {@link DescribeLiveSnapshotTemplates 获取截图模板列表}({@link DescribeLiveSnapshotTemplatesRequest 请求参数}): {@link DescribeLiveSnapshotTemplatesResponse 返回参数} */
   DescribeLiveSnapshotTemplates(data?: DescribeLiveSnapshotTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveSnapshotTemplatesResponse>;
-  /** 查询推断流事件 */
+  /** {@link DescribeLiveStreamEventList 查询推断流事件}({@link DescribeLiveStreamEventListRequest 请求参数}): {@link DescribeLiveStreamEventListResponse 返回参数} */
   DescribeLiveStreamEventList(data: DescribeLiveStreamEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamEventListResponse>;
-  /** 查询直播中的流 */
+  /** {@link DescribeLiveStreamOnlineList 查询直播中的流}({@link DescribeLiveStreamOnlineListRequest 请求参数}): {@link DescribeLiveStreamOnlineListResponse 返回参数} */
   DescribeLiveStreamOnlineList(data?: DescribeLiveStreamOnlineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamOnlineListResponse>;
-  /** 查询历史流列表 */
+  /** {@link DescribeLiveStreamPublishedList 查询历史流列表}({@link DescribeLiveStreamPublishedListRequest 请求参数}): {@link DescribeLiveStreamPublishedListResponse 返回参数} */
   DescribeLiveStreamPublishedList(data: DescribeLiveStreamPublishedListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamPublishedListResponse>;
-  /** 获取在线流的推流数据 */
+  /** {@link DescribeLiveStreamPushInfoList 获取在线流的推流数据}({@link DescribeLiveStreamPushInfoListRequest 请求参数}): {@link DescribeLiveStreamPushInfoListResponse 返回参数} */
   DescribeLiveStreamPushInfoList(data?: DescribeLiveStreamPushInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamPushInfoListResponse>;
-  /** 查询流状态 */
+  /** {@link DescribeLiveStreamState 查询流状态}({@link DescribeLiveStreamStateRequest 请求参数}): {@link DescribeLiveStreamStateResponse 返回参数} */
   DescribeLiveStreamState(data: DescribeLiveStreamStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamStateResponse>;
-  /** 直播时移计费信息查询 */
+  /** {@link DescribeLiveTimeShiftBillInfoList 直播时移计费信息查询}({@link DescribeLiveTimeShiftBillInfoListRequest 请求参数}): {@link DescribeLiveTimeShiftBillInfoListResponse 返回参数} */
   DescribeLiveTimeShiftBillInfoList(data: DescribeLiveTimeShiftBillInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTimeShiftBillInfoListResponse>;
-  /** 查询直播转码统计信息 */
+  /** {@link DescribeLiveTranscodeDetailInfo 查询直播转码统计信息}({@link DescribeLiveTranscodeDetailInfoRequest 请求参数}): {@link DescribeLiveTranscodeDetailInfoResponse 返回参数} */
   DescribeLiveTranscodeDetailInfo(data?: DescribeLiveTranscodeDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTranscodeDetailInfoResponse>;
-  /** 获取转码规则列表 */
+  /** {@link DescribeLiveTranscodeRules 获取转码规则列表}({@link DescribeLiveTranscodeRulesRequest 请求参数}): {@link DescribeLiveTranscodeRulesResponse 返回参数} */
   DescribeLiveTranscodeRules(data?: DescribeLiveTranscodeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTranscodeRulesResponse>;
-  /** 获取单个转码模板 */
+  /** {@link DescribeLiveTranscodeTemplate 获取单个转码模板}({@link DescribeLiveTranscodeTemplateRequest 请求参数}): {@link DescribeLiveTranscodeTemplateResponse 返回参数} */
   DescribeLiveTranscodeTemplate(data: DescribeLiveTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTranscodeTemplateResponse>;
-  /** 获取转码模板列表 */
+  /** {@link DescribeLiveTranscodeTemplates 获取转码模板列表}({@link DescribeLiveTranscodeTemplatesRequest 请求参数}): {@link DescribeLiveTranscodeTemplatesResponse 返回参数} */
   DescribeLiveTranscodeTemplates(data?: DescribeLiveTranscodeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTranscodeTemplatesResponse>;
-  /** 查询转码总量数据 */
+  /** {@link DescribeLiveTranscodeTotalInfo 查询转码总量数据}({@link DescribeLiveTranscodeTotalInfoRequest 请求参数}): {@link DescribeLiveTranscodeTotalInfoResponse 返回参数} */
   DescribeLiveTranscodeTotalInfo(data: DescribeLiveTranscodeTotalInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTranscodeTotalInfoResponse>;
-  /** 获取单个水印 */
+  /** {@link DescribeLiveWatermark 获取单个水印}({@link DescribeLiveWatermarkRequest 请求参数}): {@link DescribeLiveWatermarkResponse 返回参数} */
   DescribeLiveWatermark(data: DescribeLiveWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveWatermarkResponse>;
-  /** 获取水印规则列表 */
+  /** {@link DescribeLiveWatermarkRules 获取水印规则列表}({@link DescribeLiveWatermarkRulesRequest 请求参数}): {@link DescribeLiveWatermarkRulesResponse 返回参数} */
   DescribeLiveWatermarkRules(data?: DescribeLiveWatermarkRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveWatermarkRulesResponse>;
-  /** 查询水印列表 */
+  /** {@link DescribeLiveWatermarks 查询水印列表}({@link DescribeLiveWatermarksRequest 请求参数}): {@link DescribeLiveWatermarksResponse 返回参数} */
   DescribeLiveWatermarks(data?: DescribeLiveWatermarksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveWatermarksResponse>;
-  /** 批量获取日志URL */
+  /** {@link DescribeLogDownloadList 批量获取日志URL}({@link DescribeLogDownloadListRequest 请求参数}): {@link DescribeLogDownloadListResponse 返回参数} */
   DescribeLogDownloadList(data: DescribeLogDownloadListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogDownloadListResponse>;
-  /** 查询播放http错误码实时数据 */
+  /** {@link DescribePlayErrorCodeDetailInfoList 查询播放http错误码实时数据}({@link DescribePlayErrorCodeDetailInfoListRequest 请求参数}): {@link DescribePlayErrorCodeDetailInfoListResponse 返回参数} */
   DescribePlayErrorCodeDetailInfoList(data: DescribePlayErrorCodeDetailInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlayErrorCodeDetailInfoListResponse>;
-  /** 查询播放http错误码汇总数据 */
+  /** {@link DescribePlayErrorCodeSumInfoList 查询播放http错误码汇总数据}({@link DescribePlayErrorCodeSumInfoListRequest 请求参数}): {@link DescribePlayErrorCodeSumInfoListResponse 返回参数} */
   DescribePlayErrorCodeSumInfoList(data: DescribePlayErrorCodeSumInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlayErrorCodeSumInfoListResponse>;
-  /** 查询分省份分运营商播放汇总数据 */
+  /** {@link DescribeProIspPlaySumInfoList 查询分省份分运营商播放汇总数据}({@link DescribeProIspPlaySumInfoListRequest 请求参数}): {@link DescribeProIspPlaySumInfoListResponse 返回参数} */
   DescribeProIspPlaySumInfoList(data: DescribeProIspPlaySumInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProIspPlaySumInfoListResponse>;
-  /** 按省份运营商查询播放信息 */
+  /** {@link DescribeProvinceIspPlayInfoList 按省份运营商查询播放信息}({@link DescribeProvinceIspPlayInfoListRequest 请求参数}): {@link DescribeProvinceIspPlayInfoListResponse 返回参数} */
   DescribeProvinceIspPlayInfoList(data: DescribeProvinceIspPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProvinceIspPlayInfoListResponse>;
-  /** 查询拉流配置(该接口已下线,请使用新接口 DescribeLivePullStreamTasks) */
+  /** {@link DescribePullStreamConfigs 查询拉流配置(该接口已下线,请使用新接口 DescribeLivePullStreamTasks)}({@link DescribePullStreamConfigsRequest 请求参数}): {@link DescribePullStreamConfigsResponse 返回参数} */
   DescribePullStreamConfigs(data?: DescribePullStreamConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePullStreamConfigsResponse>;
-  /** 直播推流带宽和流量数据查询 */
+  /** {@link DescribePushBandwidthAndFluxList 直播推流带宽和流量数据查询}({@link DescribePushBandwidthAndFluxListRequest 请求参数}): {@link DescribePushBandwidthAndFluxListResponse 返回参数} */
   DescribePushBandwidthAndFluxList(data: DescribePushBandwidthAndFluxListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushBandwidthAndFluxListResponse>;
-  /** 查询录制任务列表（新） */
+  /** {@link DescribeRecordTask 查询录制任务列表（新）}({@link DescribeRecordTaskRequest 请求参数}): {@link DescribeRecordTaskResponse 返回参数} */
   DescribeRecordTask(data: DescribeRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordTaskResponse>;
-  /** 查询截图张数 */
+  /** {@link DescribeScreenShotSheetNumList 查询截图张数}({@link DescribeScreenShotSheetNumListRequest 请求参数}): {@link DescribeScreenShotSheetNumListResponse 返回参数} */
   DescribeScreenShotSheetNumList(data: DescribeScreenShotSheetNumListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScreenShotSheetNumListResponse>;
-  /** 查询截图任务列表 */
+  /** {@link DescribeScreenshotTask 查询截图任务列表}({@link DescribeScreenshotTaskRequest 请求参数}): {@link DescribeScreenshotTaskResponse 返回参数} */
   DescribeScreenshotTask(data: DescribeScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScreenshotTaskResponse>;
-  /** 查询所有流的流量数据 */
+  /** {@link DescribeStreamDayPlayInfoList 查询所有流的流量数据}({@link DescribeStreamDayPlayInfoListRequest 请求参数}): {@link DescribeStreamDayPlayInfoListResponse 返回参数} */
   DescribeStreamDayPlayInfoList(data: DescribeStreamDayPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamDayPlayInfoListResponse>;
-  /** 查询流的播放信息列表 */
+  /** {@link DescribeStreamPlayInfoList 查询流的播放信息列表}({@link DescribeStreamPlayInfoListRequest 请求参数}): {@link DescribeStreamPlayInfoListResponse 返回参数} */
   DescribeStreamPlayInfoList(data: DescribeStreamPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPlayInfoListResponse>;
-  /** 查询某条流上行推流质量数据 */
+  /** {@link DescribeStreamPushInfoList 查询某条流上行推流质量数据}({@link DescribeStreamPushInfoListRequest 请求参数}): {@link DescribeStreamPushInfoListResponse 返回参数} */
   DescribeStreamPushInfoList(data: DescribeStreamPushInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPushInfoListResponse>;
-  /** 查询某段时间top n客户端ip汇总信息 */
+  /** {@link DescribeTopClientIpSumInfoList 查询某段时间top n客户端ip汇总信息}({@link DescribeTopClientIpSumInfoListRequest 请求参数}): {@link DescribeTopClientIpSumInfoListResponse 返回参数} */
   DescribeTopClientIpSumInfoList(data: DescribeTopClientIpSumInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopClientIpSumInfoListResponse>;
-  /** 查询转码任务数。 */
+  /** {@link DescribeTranscodeTaskNum 查询转码任务数。}({@link DescribeTranscodeTaskNumRequest 请求参数}): {@link DescribeTranscodeTaskNumResponse 返回参数} */
   DescribeTranscodeTaskNum(data: DescribeTranscodeTaskNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeTaskNumResponse>;
-  /** 直播上行路数查询 */
+  /** {@link DescribeUploadStreamNums 直播上行路数查询}({@link DescribeUploadStreamNumsRequest 请求参数}): {@link DescribeUploadStreamNumsResponse 返回参数} */
   DescribeUploadStreamNums(data: DescribeUploadStreamNumsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUploadStreamNumsResponse>;
-  /** 查询某时间段top n的域名或流id信息 */
+  /** {@link DescribeVisitTopSumInfoList 查询某时间段top n的域名或流id信息}({@link DescribeVisitTopSumInfoListRequest 请求参数}): {@link DescribeVisitTopSumInfoListResponse 返回参数} */
   DescribeVisitTopSumInfoList(data: DescribeVisitTopSumInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVisitTopSumInfoListResponse>;
-  /** 断开直播推流 */
+  /** {@link DropLiveStream 断开直播推流}({@link DropLiveStreamRequest 请求参数}): {@link DropLiveStreamResponse 返回参数} */
   DropLiveStream(data: DropLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<DropLiveStreamResponse>;
-  /** 启用域名 */
+  /** {@link EnableLiveDomain 启用域名}({@link EnableLiveDomainRequest 请求参数}): {@link EnableLiveDomainResponse 返回参数} */
   EnableLiveDomain(data: EnableLiveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<EnableLiveDomainResponse>;
-  /** 禁用域名 */
+  /** {@link ForbidLiveDomain 禁用域名}({@link ForbidLiveDomainRequest 请求参数}): {@link ForbidLiveDomainResponse 返回参数} */
   ForbidLiveDomain(data: ForbidLiveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidLiveDomainResponse>;
-  /** 禁推直播流 */
+  /** {@link ForbidLiveStream 禁推直播流}({@link ForbidLiveStreamRequest 请求参数}): {@link ForbidLiveStreamResponse 返回参数} */
   ForbidLiveStream(data: ForbidLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidLiveStreamResponse>;
-  /** 修改回调模板 */
+  /** {@link ModifyLiveCallbackTemplate 修改回调模板}({@link ModifyLiveCallbackTemplateRequest 请求参数}): {@link ModifyLiveCallbackTemplateResponse 返回参数} */
   ModifyLiveCallbackTemplate(data: ModifyLiveCallbackTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveCallbackTemplateResponse>;
-  /** 批量绑定证书对应的播放域名 */
+  /** {@link ModifyLiveDomainCertBindings 批量绑定证书对应的播放域名}({@link ModifyLiveDomainCertBindingsRequest 请求参数}): {@link ModifyLiveDomainCertBindingsResponse 返回参数} */
   ModifyLiveDomainCertBindings(data: ModifyLiveDomainCertBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveDomainCertBindingsResponse>;
-  /** 设置直播域名 Referer 黑白名单 */
+  /** {@link ModifyLiveDomainReferer 设置直播域名 Referer 黑白名单}({@link ModifyLiveDomainRefererRequest 请求参数}): {@link ModifyLiveDomainRefererResponse 返回参数} */
   ModifyLiveDomainReferer(data: ModifyLiveDomainRefererRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveDomainRefererResponse>;
-  /** 修改播放鉴权key */
+  /** {@link ModifyLivePlayAuthKey 修改播放鉴权key}({@link ModifyLivePlayAuthKeyRequest 请求参数}): {@link ModifyLivePlayAuthKeyResponse 返回参数} */
   ModifyLivePlayAuthKey(data: ModifyLivePlayAuthKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLivePlayAuthKeyResponse>;
-  /** 修改播放域名信息 */
+  /** {@link ModifyLivePlayDomain 修改播放域名信息}({@link ModifyLivePlayDomainRequest 请求参数}): {@link ModifyLivePlayDomainResponse 返回参数} */
   ModifyLivePlayDomain(data: ModifyLivePlayDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLivePlayDomainResponse>;
-  /** 更新直播拉流任务 */
+  /** {@link ModifyLivePullStreamTask 更新直播拉流任务}({@link ModifyLivePullStreamTaskRequest 请求参数}): {@link ModifyLivePullStreamTaskResponse 返回参数} */
   ModifyLivePullStreamTask(data: ModifyLivePullStreamTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLivePullStreamTaskResponse>;
-  /** 修改推流鉴权key */
+  /** {@link ModifyLivePushAuthKey 修改推流鉴权key}({@link ModifyLivePushAuthKeyRequest 请求参数}): {@link ModifyLivePushAuthKeyResponse 返回参数} */
   ModifyLivePushAuthKey(data: ModifyLivePushAuthKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLivePushAuthKeyResponse>;
-  /** 直播修改录制模板配置 */
+  /** {@link ModifyLiveRecordTemplate 直播修改录制模板配置}({@link ModifyLiveRecordTemplateRequest 请求参数}): {@link ModifyLiveRecordTemplateResponse 返回参数} */
   ModifyLiveRecordTemplate(data: ModifyLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveRecordTemplateResponse>;
-  /** 修改截图模板 */
+  /** {@link ModifyLiveSnapshotTemplate 修改截图模板}({@link ModifyLiveSnapshotTemplateRequest 请求参数}): {@link ModifyLiveSnapshotTemplateResponse 返回参数} */
   ModifyLiveSnapshotTemplate(data: ModifyLiveSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveSnapshotTemplateResponse>;
-  /** 修改转码模板配置 */
+  /** {@link ModifyLiveTranscodeTemplate 修改转码模板配置}({@link ModifyLiveTranscodeTemplateRequest 请求参数}): {@link ModifyLiveTranscodeTemplateResponse 返回参数} */
   ModifyLiveTranscodeTemplate(data: ModifyLiveTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveTranscodeTemplateResponse>;
-  /** 更新拉流配置(该接口已下线,请使用新接口 ModifyLivePullStreamTask) */
+  /** {@link ModifyPullStreamConfig 更新拉流配置(该接口已下线,请使用新接口 ModifyLivePullStreamTask)}({@link ModifyPullStreamConfigRequest 请求参数}): {@link ModifyPullStreamConfigResponse 返回参数} */
   ModifyPullStreamConfig(data: ModifyPullStreamConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPullStreamConfigResponse>;
-  /** 修改拉流配置状态(该接口已下线,请使用新接口 ModifyLivePullStreamTask) */
+  /** {@link ModifyPullStreamStatus 修改拉流配置状态(该接口已下线,请使用新接口 ModifyLivePullStreamTask)}({@link ModifyPullStreamStatusRequest 请求参数}): {@link ModifyPullStreamStatusResponse 返回参数} */
   ModifyPullStreamStatus(data: ModifyPullStreamStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPullStreamStatusResponse>;
-  /** 取消直播延时 */
+  /** {@link ResumeDelayLiveStream 取消直播延时}({@link ResumeDelayLiveStreamRequest 请求参数}): {@link ResumeDelayLiveStreamResponse 返回参数} */
   ResumeDelayLiveStream(data: ResumeDelayLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeDelayLiveStreamResponse>;
-  /** 恢复直播推流 */
+  /** {@link ResumeLiveStream 恢复直播推流}({@link ResumeLiveStreamRequest 请求参数}): {@link ResumeLiveStreamResponse 返回参数} */
   ResumeLiveStream(data: ResumeLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeLiveStreamResponse>;
-  /** 终止录制任务(已废弃,请使用新接口) */
+  /** {@link StopLiveRecord 终止录制任务(已废弃,请使用新接口)}({@link StopLiveRecordRequest 请求参数}): {@link StopLiveRecordResponse 返回参数} */
   StopLiveRecord(data: StopLiveRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopLiveRecordResponse>;
-  /** 终止录制任务（新） */
+  /** {@link StopRecordTask 终止录制任务（新）}({@link StopRecordTaskRequest 请求参数}): {@link StopRecordTaskResponse 返回参数} */
   StopRecordTask(data: StopRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopRecordTaskResponse>;
-  /** 终止截图任务 */
+  /** {@link StopScreenshotTask 终止截图任务}({@link StopScreenshotTaskRequest 请求参数}): {@link StopScreenshotTaskResponse 返回参数} */
   StopScreenshotTask(data: StopScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopScreenshotTaskResponse>;
-  /** 解绑域名证书 */
+  /** {@link UnBindLiveDomainCert 解绑域名证书}({@link UnBindLiveDomainCertRequest 请求参数}): {@link UnBindLiveDomainCertResponse 返回参数} */
   UnBindLiveDomainCert(data: UnBindLiveDomainCertRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindLiveDomainCertResponse>;
-  /** 更新水印 */
+  /** {@link UpdateLiveWatermark 更新水印}({@link UpdateLiveWatermarkRequest 请求参数}): {@link UpdateLiveWatermarkResponse 返回参数} */
   UpdateLiveWatermark(data: UpdateLiveWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateLiveWatermarkResponse>;
 }
 

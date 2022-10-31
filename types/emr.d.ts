@@ -1630,56 +1630,56 @@ declare interface TerminateTasksResponse {
   RequestId?: string;
 }
 
-/** [弹性 MapReduce](https://cloud.tencent.com/document/product/589) */
+/** {@link Emr 弹性 MapReduce} */
 declare interface Emr {
   (): Versions;
-  /** 用户管理-新增用户列表 */
+  /** {@link AddUsersForUserManager 用户管理-新增用户列表}({@link AddUsersForUserManagerRequest 请求参数}): {@link AddUsersForUserManagerResponse 返回参数} */
   AddUsersForUserManager(data: AddUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<AddUsersForUserManagerResponse>;
-  /** 创建EMR实例 */
+  /** {@link CreateInstance 创建EMR实例}({@link CreateInstanceRequest 请求参数}): {@link CreateInstanceResponse 返回参数} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
-  /** 查询硬件节点信息 */
+  /** {@link DescribeClusterNodes 查询硬件节点信息}({@link DescribeClusterNodesRequest 请求参数}): {@link DescribeClusterNodesResponse 返回参数} */
   DescribeClusterNodes(data: DescribeClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNodesResponse>;
-  /** 获取账户的CVM配额 */
+  /** {@link DescribeCvmQuota 获取账户的CVM配额}({@link DescribeCvmQuotaRequest 请求参数}): {@link DescribeCvmQuotaResponse 返回参数} */
   DescribeCvmQuota(data: DescribeCvmQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCvmQuotaResponse>;
-  /** 【监控】查询Application统计信息 */
+  /** {@link DescribeEmrApplicationStatics 【监控】查询Application统计信息}({@link DescribeEmrApplicationStaticsRequest 请求参数}): {@link DescribeEmrApplicationStaticsResponse 返回参数} */
   DescribeEmrApplicationStatics(data: DescribeEmrApplicationStaticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmrApplicationStaticsResponse>;
-  /** 预付费集群隔离后续费资源查询 */
+  /** {@link DescribeInstanceRenewNodes 预付费集群隔离后续费资源查询}({@link DescribeInstanceRenewNodesRequest 请求参数}): {@link DescribeInstanceRenewNodesResponse 返回参数} */
   DescribeInstanceRenewNodes(data: DescribeInstanceRenewNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceRenewNodesResponse>;
-  /** 查询EMR实例 */
+  /** {@link DescribeInstances 查询EMR实例}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
   DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** EMR集群实例列表查询 */
+  /** {@link DescribeInstancesList EMR集群实例列表查询}({@link DescribeInstancesListRequest 请求参数}): {@link DescribeInstancesListResponse 返回参数} */
   DescribeInstancesList(data: DescribeInstancesListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesListResponse>;
-  /** 查询流程任务 */
+  /** {@link DescribeJobFlow 查询流程任务}({@link DescribeJobFlowRequest 请求参数}): {@link DescribeJobFlowResponse 返回参数} */
   DescribeJobFlow(data: DescribeJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobFlowResponse>;
-  /** 获取yarn资源调度页面的数据 */
+  /** {@link DescribeResourceSchedule 获取yarn资源调度页面的数据}({@link DescribeResourceScheduleRequest 请求参数}): {@link DescribeResourceScheduleResponse 返回参数} */
   DescribeResourceSchedule(data: DescribeResourceScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceScheduleResponse>;
-  /** 用户管理-查询用户列表 */
+  /** {@link DescribeUsersForUserManager 用户管理-查询用户列表}({@link DescribeUsersForUserManagerRequest 请求参数}): {@link DescribeUsersForUserManagerResponse 返回参数} */
   DescribeUsersForUserManager(data: DescribeUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersForUserManagerResponse>;
-  /** 集群续费询价 */
+  /** {@link InquirePriceRenewEmr 集群续费询价}({@link InquirePriceRenewEmrRequest 请求参数}): {@link InquirePriceRenewEmrResponse 返回参数} */
   InquirePriceRenewEmr(data: InquirePriceRenewEmrRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewEmrResponse>;
-  /** 创建实例询价 */
+  /** {@link InquiryPriceCreateInstance 创建实例询价}({@link InquiryPriceCreateInstanceRequest 请求参数}): {@link InquiryPriceCreateInstanceResponse 返回参数} */
   InquiryPriceCreateInstance(data: InquiryPriceCreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateInstanceResponse>;
-  /** 续费询价 */
+  /** {@link InquiryPriceRenewInstance 续费询价}({@link InquiryPriceRenewInstanceRequest 请求参数}): {@link InquiryPriceRenewInstanceResponse 返回参数} */
   InquiryPriceRenewInstance(data: InquiryPriceRenewInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewInstanceResponse>;
-  /** 扩容询价 */
+  /** {@link InquiryPriceScaleOutInstance 扩容询价}({@link InquiryPriceScaleOutInstanceRequest 请求参数}): {@link InquiryPriceScaleOutInstanceResponse 返回参数} */
   InquiryPriceScaleOutInstance(data: InquiryPriceScaleOutInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceScaleOutInstanceResponse>;
-  /** 变配询价 */
+  /** {@link InquiryPriceUpdateInstance 变配询价}({@link InquiryPriceUpdateInstanceRequest 请求参数}): {@link InquiryPriceUpdateInstanceResponse 返回参数} */
   InquiryPriceUpdateInstance(data: InquiryPriceUpdateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceUpdateInstanceResponse>;
-  /** 刷新动态资源池 */
+  /** {@link ModifyResourcePools 刷新动态资源池}({@link ModifyResourcePoolsRequest 请求参数}): {@link ModifyResourcePoolsResponse 返回参数} */
   ModifyResourcePools(data: ModifyResourcePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePoolsResponse>;
-  /** 修改yarn资源调度的资源配置 */
+  /** {@link ModifyResourceScheduleConfig 修改yarn资源调度的资源配置}({@link ModifyResourceScheduleConfigRequest 请求参数}): {@link ModifyResourceScheduleConfigResponse 返回参数} */
   ModifyResourceScheduleConfig(data: ModifyResourceScheduleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceScheduleConfigResponse>;
-  /** 部署生效yarn的资源调度器 */
+  /** {@link ModifyResourceScheduler 部署生效yarn的资源调度器}({@link ModifyResourceSchedulerRequest 请求参数}): {@link ModifyResourceSchedulerResponse 返回参数} */
   ModifyResourceScheduler(data: ModifyResourceSchedulerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceSchedulerResponse>;
-  /** 创建流程作业 */
+  /** {@link RunJobFlow 创建流程作业}({@link RunJobFlowRequest 请求参数}): {@link RunJobFlowResponse 返回参数} */
   RunJobFlow(data: RunJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<RunJobFlowResponse>;
-  /** 实例扩容 */
+  /** {@link ScaleOutInstance 实例扩容}({@link ScaleOutInstanceRequest 请求参数}): {@link ScaleOutInstanceResponse 返回参数} */
   ScaleOutInstance(data: ScaleOutInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutInstanceResponse>;
-  /** EMR同步POD状态 */
+  /** {@link SyncPodState EMR同步POD状态}({@link SyncPodStateRequest 请求参数}): {@link SyncPodStateResponse 返回参数} */
   SyncPodState(data: SyncPodStateRequest, config?: AxiosRequestConfig): AxiosPromise<SyncPodStateResponse>;
-  /** 销毁EMR实例 */
+  /** {@link TerminateInstance 销毁EMR实例}({@link TerminateInstanceRequest 请求参数}): {@link TerminateInstanceResponse 返回参数} */
   TerminateInstance(data: TerminateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstanceResponse>;
-  /** 缩容Task节点 */
+  /** {@link TerminateTasks 缩容Task节点}({@link TerminateTasksRequest 请求参数}): {@link TerminateTasksResponse 返回参数} */
   TerminateTasks(data: TerminateTasksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateTasksResponse>;
 }
 

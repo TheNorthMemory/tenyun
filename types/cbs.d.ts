@@ -1104,92 +1104,92 @@ declare interface UnbindAutoSnapshotPolicyResponse {
   RequestId?: string;
 }
 
-/** [云硬盘](https://cloud.tencent.com/document/product/362) */
+/** {@link Cbs 云硬盘} */
 declare interface Cbs {
   (): Versions;
-  /** 回滚备份点 */
+  /** {@link ApplyDiskBackup 回滚备份点}({@link ApplyDiskBackupRequest 请求参数}): {@link ApplyDiskBackupResponse 返回参数} */
   ApplyDiskBackup(data: ApplyDiskBackupRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyDiskBackupResponse>;
-  /** 回滚快照 */
+  /** {@link ApplySnapshot 回滚快照}({@link ApplySnapshotRequest 请求参数}): {@link ApplySnapshotResponse 返回参数} */
   ApplySnapshot(data: ApplySnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<ApplySnapshotResponse>;
-  /** 挂载云硬盘 */
+  /** {@link AttachDisks 挂载云硬盘}({@link AttachDisksRequest 请求参数}): {@link AttachDisksResponse 返回参数} */
   AttachDisks(data: AttachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<AttachDisksResponse>;
-  /** 绑定定期快照策略 */
+  /** {@link BindAutoSnapshotPolicy 绑定定期快照策略}({@link BindAutoSnapshotPolicyRequest 请求参数}): {@link BindAutoSnapshotPolicyResponse 返回参数} */
   BindAutoSnapshotPolicy(data: BindAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<BindAutoSnapshotPolicyResponse>;
-  /** 快照跨地域复制 */
+  /** {@link CopySnapshotCrossRegions 快照跨地域复制}({@link CopySnapshotCrossRegionsRequest 请求参数}): {@link CopySnapshotCrossRegionsResponse 返回参数} */
   CopySnapshotCrossRegions(data: CopySnapshotCrossRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<CopySnapshotCrossRegionsResponse>;
-  /** 创建定期快照策略 */
+  /** {@link CreateAutoSnapshotPolicy 创建定期快照策略}({@link CreateAutoSnapshotPolicyRequest 请求参数}): {@link CreateAutoSnapshotPolicyResponse 返回参数} */
   CreateAutoSnapshotPolicy(data: CreateAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoSnapshotPolicyResponse>;
-  /** 创建云硬盘 */
+  /** {@link CreateDisks 创建云硬盘}({@link CreateDisksRequest 请求参数}): {@link CreateDisksResponse 返回参数} */
   CreateDisks(data: CreateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDisksResponse>;
-  /** 创建快照 */
+  /** {@link CreateSnapshot 创建快照}({@link CreateSnapshotRequest 请求参数}): {@link CreateSnapshotResponse 返回参数} */
   CreateSnapshot(data: CreateSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotResponse>;
-  /** 删除定期快照策略 */
+  /** {@link DeleteAutoSnapshotPolicies 删除定期快照策略}({@link DeleteAutoSnapshotPoliciesRequest 请求参数}): {@link DeleteAutoSnapshotPoliciesResponse 返回参数} */
   DeleteAutoSnapshotPolicies(data: DeleteAutoSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoSnapshotPoliciesResponse>;
-  /** 删除云硬盘备份点 */
+  /** {@link DeleteDiskBackups 删除云硬盘备份点}({@link DeleteDiskBackupsRequest 请求参数}): {@link DeleteDiskBackupsResponse 返回参数} */
   DeleteDiskBackups(data: DeleteDiskBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDiskBackupsResponse>;
-  /** 删除快照 */
+  /** {@link DeleteSnapshots 删除快照}({@link DeleteSnapshotsRequest 请求参数}): {@link DeleteSnapshotsResponse 返回参数} */
   DeleteSnapshots(data: DeleteSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotsResponse>;
-  /** 查询定期快照策略 */
+  /** {@link DescribeAutoSnapshotPolicies 查询定期快照策略}({@link DescribeAutoSnapshotPoliciesRequest 请求参数}): {@link DescribeAutoSnapshotPoliciesResponse 返回参数} */
   DescribeAutoSnapshotPolicies(data?: DescribeAutoSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoSnapshotPoliciesResponse>;
-  /** 查询云硬盘关联定期快照策略 */
+  /** {@link DescribeDiskAssociatedAutoSnapshotPolicy 查询云硬盘关联定期快照策略}({@link DescribeDiskAssociatedAutoSnapshotPolicyRequest 请求参数}): {@link DescribeDiskAssociatedAutoSnapshotPolicyResponse 返回参数} */
   DescribeDiskAssociatedAutoSnapshotPolicy(data: DescribeDiskAssociatedAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskAssociatedAutoSnapshotPolicyResponse>;
-  /** 查询备份点列表 */
+  /** {@link DescribeDiskBackups 查询备份点列表}({@link DescribeDiskBackupsRequest 请求参数}): {@link DescribeDiskBackupsResponse 返回参数} */
   DescribeDiskBackups(data?: DescribeDiskBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskBackupsResponse>;
-  /** 查询云硬盘配额 */
+  /** {@link DescribeDiskConfigQuota 查询云硬盘配额}({@link DescribeDiskConfigQuotaRequest 请求参数}): {@link DescribeDiskConfigQuotaResponse 返回参数} */
   DescribeDiskConfigQuota(data: DescribeDiskConfigQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskConfigQuotaResponse>;
-  /** 查询云盘操作日志列表 */
+  /** {@link DescribeDiskOperationLogs 查询云盘操作日志列表}({@link DescribeDiskOperationLogsRequest 请求参数}): {@link DescribeDiskOperationLogsResponse 返回参数} */
   DescribeDiskOperationLogs(data: DescribeDiskOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskOperationLogsResponse>;
-  /** 查询云硬盘独享集群列表 */
+  /** {@link DescribeDiskStoragePool 查询云硬盘独享集群列表}({@link DescribeDiskStoragePoolRequest 请求参数}): {@link DescribeDiskStoragePoolResponse 返回参数} */
   DescribeDiskStoragePool(data?: DescribeDiskStoragePoolRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskStoragePoolResponse>;
-  /** 查询云硬盘列表 */
+  /** {@link DescribeDisks 查询云硬盘列表}({@link DescribeDisksRequest 请求参数}): {@link DescribeDisksResponse 返回参数} */
   DescribeDisks(data?: DescribeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksResponse>;
-  /** 查询实例关联的云硬盘数量 */
+  /** {@link DescribeInstancesDiskNum 查询实例关联的云硬盘数量}({@link DescribeInstancesDiskNumRequest 请求参数}): {@link DescribeInstancesDiskNumResponse 返回参数} */
   DescribeInstancesDiskNum(data: DescribeInstancesDiskNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDiskNumResponse>;
-  /** 查询快照操作日志列表 */
+  /** {@link DescribeSnapshotOperationLogs 查询快照操作日志列表}({@link DescribeSnapshotOperationLogsRequest 请求参数}): {@link DescribeSnapshotOperationLogsResponse 返回参数} */
   DescribeSnapshotOperationLogs(data: DescribeSnapshotOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotOperationLogsResponse>;
-  /** 查看快照分享信息 */
+  /** {@link DescribeSnapshotSharePermission 查看快照分享信息}({@link DescribeSnapshotSharePermissionRequest 请求参数}): {@link DescribeSnapshotSharePermissionResponse 返回参数} */
   DescribeSnapshotSharePermission(data: DescribeSnapshotSharePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotSharePermissionResponse>;
-  /** 查询快照列表 */
+  /** {@link DescribeSnapshots 查询快照列表}({@link DescribeSnapshotsRequest 请求参数}): {@link DescribeSnapshotsResponse 返回参数} */
   DescribeSnapshots(data?: DescribeSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsResponse>;
-  /** 卸载云硬盘 */
+  /** {@link DetachDisks 卸载云硬盘}({@link DetachDisksRequest 请求参数}): {@link DetachDisksResponse 返回参数} */
   DetachDisks(data: DetachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DetachDisksResponse>;
-  /** 获取快照概览信息 */
+  /** {@link GetSnapOverview 获取快照概览信息}({@link GetSnapOverviewRequest 请求参数}): {@link GetSnapOverviewResponse 返回参数} */
   GetSnapOverview(data?: GetSnapOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<GetSnapOverviewResponse>;
-  /** 重新初始化云硬盘 */
+  /** {@link InitializeDisks 重新初始化云硬盘}({@link InitializeDisksRequest 请求参数}): {@link InitializeDisksResponse 返回参数} */
   InitializeDisks(data: InitializeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeDisksResponse>;
-  /** 修改云硬盘备份点配额询价 */
+  /** {@link InquirePriceModifyDiskBackupQuota 修改云硬盘备份点配额询价}({@link InquirePriceModifyDiskBackupQuotaRequest 请求参数}): {@link InquirePriceModifyDiskBackupQuotaResponse 返回参数} */
   InquirePriceModifyDiskBackupQuota(data: InquirePriceModifyDiskBackupQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceModifyDiskBackupQuotaResponse>;
-  /** 调整云硬盘额外性能询价 */
+  /** {@link InquirePriceModifyDiskExtraPerformance 调整云硬盘额外性能询价}({@link InquirePriceModifyDiskExtraPerformanceRequest 请求参数}): {@link InquirePriceModifyDiskExtraPerformanceResponse 返回参数} */
   InquirePriceModifyDiskExtraPerformance(data: InquirePriceModifyDiskExtraPerformanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceModifyDiskExtraPerformanceResponse>;
-  /** 创建云硬盘询价 */
+  /** {@link InquiryPriceCreateDisks 创建云硬盘询价}({@link InquiryPriceCreateDisksRequest 请求参数}): {@link InquiryPriceCreateDisksResponse 返回参数} */
   InquiryPriceCreateDisks(data: InquiryPriceCreateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateDisksResponse>;
-  /** 续费云硬盘询价 */
+  /** {@link InquiryPriceRenewDisks 续费云硬盘询价}({@link InquiryPriceRenewDisksRequest 请求参数}): {@link InquiryPriceRenewDisksResponse 返回参数} */
   InquiryPriceRenewDisks(data: InquiryPriceRenewDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewDisksResponse>;
-  /** 扩容云硬盘询价 */
+  /** {@link InquiryPriceResizeDisk 扩容云硬盘询价}({@link InquiryPriceResizeDiskRequest 请求参数}): {@link InquiryPriceResizeDiskResponse 返回参数} */
   InquiryPriceResizeDisk(data: InquiryPriceResizeDiskRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceResizeDiskResponse>;
-  /** 修改定期快照策略信息 */
+  /** {@link ModifyAutoSnapshotPolicyAttribute 修改定期快照策略信息}({@link ModifyAutoSnapshotPolicyAttributeRequest 请求参数}): {@link ModifyAutoSnapshotPolicyAttributeResponse 返回参数} */
   ModifyAutoSnapshotPolicyAttribute(data: ModifyAutoSnapshotPolicyAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoSnapshotPolicyAttributeResponse>;
-  /** 修改云硬盘属性 */
+  /** {@link ModifyDiskAttributes 修改云硬盘属性}({@link ModifyDiskAttributesRequest 请求参数}): {@link ModifyDiskAttributesResponse 返回参数} */
   ModifyDiskAttributes(data: ModifyDiskAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDiskAttributesResponse>;
-  /** 调整云硬盘备份点配额 */
+  /** {@link ModifyDiskBackupQuota 调整云硬盘备份点配额}({@link ModifyDiskBackupQuotaRequest 请求参数}): {@link ModifyDiskBackupQuotaResponse 返回参数} */
   ModifyDiskBackupQuota(data: ModifyDiskBackupQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDiskBackupQuotaResponse>;
-  /** 调整云硬盘额外性能 */
+  /** {@link ModifyDiskExtraPerformance 调整云硬盘额外性能}({@link ModifyDiskExtraPerformanceRequest 请求参数}): {@link ModifyDiskExtraPerformanceResponse 返回参数} */
   ModifyDiskExtraPerformance(data: ModifyDiskExtraPerformanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDiskExtraPerformanceResponse>;
-  /** 修改弹性云盘计费模式 */
+  /** {@link ModifyDisksChargeType 修改弹性云盘计费模式}({@link ModifyDisksChargeTypeRequest 请求参数}): {@link ModifyDisksChargeTypeResponse 返回参数} */
   ModifyDisksChargeType(data: ModifyDisksChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisksChargeTypeResponse>;
-  /** 修改云硬盘续费标识 */
+  /** {@link ModifyDisksRenewFlag 修改云硬盘续费标识}({@link ModifyDisksRenewFlagRequest 请求参数}): {@link ModifyDisksRenewFlagResponse 返回参数} */
   ModifyDisksRenewFlag(data: ModifyDisksRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisksRenewFlagResponse>;
-  /** 修改快照信息 */
+  /** {@link ModifySnapshotAttribute 修改快照信息}({@link ModifySnapshotAttributeRequest 请求参数}): {@link ModifySnapshotAttributeResponse 返回参数} */
   ModifySnapshotAttribute(data: ModifySnapshotAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotAttributeResponse>;
-  /** 修改快照分享信息 */
+  /** {@link ModifySnapshotsSharePermission 修改快照分享信息}({@link ModifySnapshotsSharePermissionRequest 请求参数}): {@link ModifySnapshotsSharePermissionResponse 返回参数} */
   ModifySnapshotsSharePermission(data: ModifySnapshotsSharePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotsSharePermissionResponse>;
-  /** 续费云硬盘 */
+  /** {@link RenewDisk 续费云硬盘}({@link RenewDiskRequest 请求参数}): {@link RenewDiskResponse 返回参数} */
   RenewDisk(data: RenewDiskRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDiskResponse>;
-  /** 扩容云硬盘 */
+  /** {@link ResizeDisk 扩容云硬盘}({@link ResizeDiskRequest 请求参数}): {@link ResizeDiskResponse 返回参数} */
   ResizeDisk(data: ResizeDiskRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeDiskResponse>;
-  /** 退还云硬盘 */
+  /** {@link TerminateDisks 退还云硬盘}({@link TerminateDisksRequest 请求参数}): {@link TerminateDisksResponse 返回参数} */
   TerminateDisks(data: TerminateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDisksResponse>;
-  /** 解绑定期快照策略 */
+  /** {@link UnbindAutoSnapshotPolicy 解绑定期快照策略}({@link UnbindAutoSnapshotPolicyRequest 请求参数}): {@link UnbindAutoSnapshotPolicyResponse 返回参数} */
   UnbindAutoSnapshotPolicy(data: UnbindAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindAutoSnapshotPolicyResponse>;
 }
 

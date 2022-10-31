@@ -5546,486 +5546,486 @@ declare namespace V20191126 {
   }
 }
 
-/** [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) */
+/** {@link Iotvideo 物联网智能视频服务} */
 declare interface Iotvideo {
   (): Versions;
-  /** 申请AI模型 */
+  /** {@link ApplyAIModel 申请AI模型}({@link ApplyAIModelRequest 请求参数}): {@link ApplyAIModelResponse 返回参数} */
   ApplyAIModel(data: ApplyAIModelRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyAIModelResponse>;
-  /** 批量更新固件 */
+  /** {@link BatchUpdateFirmware 批量更新固件}({@link BatchUpdateFirmwareRequest 请求参数}): {@link BatchUpdateFirmwareResponse 返回参数} */
   BatchUpdateFirmware(data: BatchUpdateFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<BatchUpdateFirmwareResponse>;
-  /** 绑定云存用户 */
+  /** {@link BindCloudStorageUser 绑定云存用户}({@link BindCloudStorageUserRequest 请求参数}): {@link BindCloudStorageUserResponse 返回参数} */
   BindCloudStorageUser(data: BindCloudStorageUserRequest, config?: AxiosRequestConfig): AxiosPromise<BindCloudStorageUserResponse>;
-  /** 异步调用设备行为 */
+  /** {@link CallDeviceActionAsync 异步调用设备行为}({@link CallDeviceActionAsyncRequest 请求参数}): {@link CallDeviceActionAsyncResponse 返回参数} */
   CallDeviceActionAsync(data: CallDeviceActionAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionAsyncResponse>;
-  /** 同步调用设备行为 */
+  /** {@link CallDeviceActionSync 同步调用设备行为}({@link CallDeviceActionSyncRequest 请求参数}): {@link CallDeviceActionSyncResponse 返回参数} */
   CallDeviceActionSync(data: CallDeviceActionSyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionSyncResponse>;
-  /** 取消AI模型申请 */
+  /** {@link CancelAIModelApplication 取消AI模型申请}({@link CancelAIModelApplicationRequest 请求参数}): {@link CancelAIModelApplicationResponse 返回参数} */
   CancelAIModelApplication(data: CancelAIModelApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAIModelApplicationResponse>;
-  /** 取消设备升级任务 */
+  /** {@link CancelDeviceFirmwareTask 取消设备升级任务}({@link CancelDeviceFirmwareTaskRequest 请求参数}): {@link CancelDeviceFirmwareTaskResponse 返回参数} */
   CancelDeviceFirmwareTask(data: CancelDeviceFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelDeviceFirmwareTaskResponse>;
-  /** 判断是否开启的转发的权限 */
+  /** {@link CheckForwardAuth 判断是否开启的转发的权限}({@link CheckForwardAuthRequest 请求参数}): {@link CheckForwardAuthResponse 返回参数} */
   CheckForwardAuth(data: CheckForwardAuthRequest, config?: AxiosRequestConfig): AxiosPromise<CheckForwardAuthResponse>;
-  /** 设备远程控制 */
+  /** {@link ControlDeviceData 设备远程控制}({@link ControlDeviceDataRequest 请求参数}): {@link ControlDeviceDataResponse 返回参数} */
   ControlDeviceData(data: ControlDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDeviceDataResponse>;
-  /** 发起AI推理请求 */
+  /** {@link CreateAIDetection 发起AI推理请求}({@link CreateAIDetectionRequest 请求参数}): {@link CreateAIDetectionResponse 返回参数} */
   CreateAIDetection(data: CreateAIDetectionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIDetectionResponse>;
-  /** 创建批次 */
+  /** {@link CreateBatch 创建批次}({@link CreateBatchRequest 请求参数}): {@link CreateBatchResponse 返回参数} */
   CreateBatch(data: CreateBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchResponse>;
-  /** 创建COS上传密钥 */
+  /** {@link CreateCOSCredentials 创建COS上传密钥}({@link CreateCOSCredentialsRequest 请求参数}): {@link CreateCOSCredentialsResponse 返回参数} */
   CreateCOSCredentials(data: CreateCOSCredentialsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCOSCredentialsResponse>;
-  /** 开通云存服务 */
+  /** {@link CreateCloudStorage 开通云存服务}({@link CreateCloudStorageRequest 请求参数}): {@link CreateCloudStorageResponse 返回参数} */
   CreateCloudStorage(data: CreateCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudStorageResponse>;
-  /** 创建数据转发 */
+  /** {@link CreateDataForward 创建数据转发}({@link CreateDataForwardRequest 请求参数}): {@link CreateDataForwardResponse 返回参数} */
   CreateDataForward(data: CreateDataForwardRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataForwardResponse>;
-  /** 创建转发规则 */
+  /** {@link CreateForwardRule 创建转发规则}({@link CreateForwardRuleRequest 请求参数}): {@link CreateForwardRuleResponse 返回参数} */
   CreateForwardRule(data: CreateForwardRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateForwardRuleResponse>;
-  /** 创建产品 */
+  /** {@link CreateProduct 创建产品}({@link CreateProductRequest 请求参数}): {@link CreateProductResponse 返回参数} */
   CreateProduct(data: CreateProductRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProductResponse>;
-  /** 获取任务文件上传链接 */
+  /** {@link CreateTaskFileUrl 获取任务文件上传链接}({@link CreateTaskFileUrlRequest 请求参数}): {@link CreateTaskFileUrlResponse 返回参数} */
   CreateTaskFileUrl(data: CreateTaskFileUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFileUrlResponse>;
-  /** 删除设备 */
+  /** {@link DeleteDevice 删除设备}({@link DeleteDeviceRequest 请求参数}): {@link DeleteDeviceResponse 返回参数} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
-  /** 删除固件 */
+  /** {@link DeleteFirmware 删除固件}({@link DeleteFirmwareRequest 请求参数}): {@link DeleteFirmwareResponse 返回参数} */
   DeleteFirmware(data: DeleteFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFirmwareResponse>;
-  /** 删除转发规则 */
+  /** {@link DeleteForwardRule 删除转发规则}({@link DeleteForwardRuleRequest 请求参数}): {@link DeleteForwardRuleResponse 返回参数} */
   DeleteForwardRule(data: DeleteForwardRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteForwardRuleResponse>;
-  /** 删除产品 */
+  /** {@link DeleteProduct 删除产品}({@link DeleteProductRequest 请求参数}): {@link DeleteProductResponse 返回参数} */
   DeleteProduct(data: DeleteProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProductResponse>;
-  /** 用户AI模型申请记录 */
+  /** {@link DescribeAIModelApplications 用户AI模型申请记录}({@link DescribeAIModelApplicationsRequest 请求参数}): {@link DescribeAIModelApplicationsResponse 返回参数} */
   DescribeAIModelApplications(data: DescribeAIModelApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIModelApplicationsResponse>;
-  /** 查看AI推理结果推送配置 */
+  /** {@link DescribeAIModelChannel 查看AI推理结果推送配置}({@link DescribeAIModelChannelRequest 请求参数}): {@link DescribeAIModelChannelResponse 返回参数} */
   DescribeAIModelChannel(data: DescribeAIModelChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIModelChannelResponse>;
-  /** 查看AI模型资源包 */
+  /** {@link DescribeAIModelUsage 查看AI模型资源包}({@link DescribeAIModelUsageRequest 请求参数}): {@link DescribeAIModelUsageResponse 返回参数} */
   DescribeAIModelUsage(data: DescribeAIModelUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIModelUsageResponse>;
-  /** 拉取AI模型列表 */
+  /** {@link DescribeAIModels 拉取AI模型列表}({@link DescribeAIModelsRequest 请求参数}): {@link DescribeAIModelsResponse 返回参数} */
   DescribeAIModels(data: DescribeAIModelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIModelsResponse>;
-  /** 获取消费版账号信息 */
+  /** {@link DescribeAccount 获取消费版账号信息}({@link DescribeAccountRequest 请求参数}): {@link DescribeAccountResponse 返回参数} */
   DescribeAccount(data: DescribeAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountResponse>;
-  /** 查询账户余额 */
+  /** {@link DescribeBalance 查询账户余额}({@link DescribeBalanceRequest 请求参数}): {@link DescribeBalanceResponse 返回参数} */
   DescribeBalance(data: DescribeBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBalanceResponse>;
-  /** 拉取账户流水 */
+  /** {@link DescribeBalanceTransactions 拉取账户流水}({@link DescribeBalanceTransactionsRequest 请求参数}): {@link DescribeBalanceTransactionsResponse 返回参数} */
   DescribeBalanceTransactions(data: DescribeBalanceTransactionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBalanceTransactionsResponse>;
-  /** 获取批次详情 */
+  /** {@link DescribeBatch 获取批次详情}({@link DescribeBatchRequest 请求参数}): {@link DescribeBatchResponse 返回参数} */
   DescribeBatch(data: DescribeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchResponse>;
-  /** 获取批次列表 */
+  /** {@link DescribeBatchs 获取批次列表}({@link DescribeBatchsRequest 请求参数}): {@link DescribeBatchsResponse 返回参数} */
   DescribeBatchs(data: DescribeBatchsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchsResponse>;
-  /** 查看运营活动资源包列表 */
+  /** {@link DescribeBonuses 查看运营活动资源包列表}({@link DescribeBonusesRequest 请求参数}): {@link DescribeBonusesResponse 返回参数} */
   DescribeBonuses(data: DescribeBonusesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBonusesResponse>;
-  /** 获取Category详情 */
+  /** {@link DescribeCategory 获取Category详情}({@link DescribeCategoryRequest 请求参数}): {@link DescribeCategoryResponse 返回参数} */
   DescribeCategory(data: DescribeCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCategoryResponse>;
-  /** 获取设备云存服务详情 */
+  /** {@link DescribeCloudStorage 获取设备云存服务详情}({@link DescribeCloudStorageRequest 请求参数}): {@link DescribeCloudStorageResponse 返回参数} */
   DescribeCloudStorage(data: DescribeCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageResponse>;
-  /** 获取具有云存的日期 */
+  /** {@link DescribeCloudStorageDate 获取具有云存的日期}({@link DescribeCloudStorageDateRequest 请求参数}): {@link DescribeCloudStorageDateResponse 返回参数} */
   DescribeCloudStorageDate(data: DescribeCloudStorageDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageDateResponse>;
-  /** 拉取云存事件列表 */
+  /** {@link DescribeCloudStorageEvents 拉取云存事件列表}({@link DescribeCloudStorageEventsRequest 请求参数}): {@link DescribeCloudStorageEventsResponse 返回参数} */
   DescribeCloudStorageEvents(data: DescribeCloudStorageEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageEventsResponse>;
-  /** 获取云存套餐包消耗详细记录 */
+  /** {@link DescribeCloudStoragePackageConsumeDetails 获取云存套餐包消耗详细记录}({@link DescribeCloudStoragePackageConsumeDetailsRequest 请求参数}): {@link DescribeCloudStoragePackageConsumeDetailsResponse 返回参数} */
   DescribeCloudStoragePackageConsumeDetails(data: DescribeCloudStoragePackageConsumeDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStoragePackageConsumeDetailsResponse>;
-  /** 获取云存套餐包消耗统计 */
+  /** {@link DescribeCloudStoragePackageConsumeStats 获取云存套餐包消耗统计}({@link DescribeCloudStoragePackageConsumeStatsRequest 请求参数}): {@link DescribeCloudStoragePackageConsumeStatsResponse 返回参数} */
   DescribeCloudStoragePackageConsumeStats(data: DescribeCloudStoragePackageConsumeStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStoragePackageConsumeStatsResponse>;
-  /** 获取设备图片流数据 */
+  /** {@link DescribeCloudStorageStreamData 获取设备图片流数据}({@link DescribeCloudStorageStreamDataRequest 请求参数}): {@link DescribeCloudStorageStreamDataResponse 返回参数} */
   DescribeCloudStorageStreamData(data: DescribeCloudStorageStreamDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageStreamDataResponse>;
-  /** 拉取云存事件缩略图 */
+  /** {@link DescribeCloudStorageThumbnail 拉取云存事件缩略图}({@link DescribeCloudStorageThumbnailRequest 请求参数}): {@link DescribeCloudStorageThumbnailResponse 返回参数} */
   DescribeCloudStorageThumbnail(data: DescribeCloudStorageThumbnailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageThumbnailResponse>;
-  /** 获取某一天云存时间轴 */
+  /** {@link DescribeCloudStorageTime 获取某一天云存时间轴}({@link DescribeCloudStorageTimeRequest 请求参数}): {@link DescribeCloudStorageTimeResponse 返回参数} */
   DescribeCloudStorageTime(data: DescribeCloudStorageTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageTimeResponse>;
-  /** 拉取云存用户列表 */
+  /** {@link DescribeCloudStorageUsers 拉取云存用户列表}({@link DescribeCloudStorageUsersRequest 请求参数}): {@link DescribeCloudStorageUsersResponse 返回参数} */
   DescribeCloudStorageUsers(data: DescribeCloudStorageUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageUsersResponse>;
-  /** 获取数据转发列表 */
+  /** {@link DescribeDataForwardList 获取数据转发列表}({@link DescribeDataForwardListRequest 请求参数}): {@link DescribeDataForwardListResponse 返回参数} */
   DescribeDataForwardList(data: DescribeDataForwardListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataForwardListResponse>;
-  /** 查看设备详情 */
+  /** {@link DescribeDevice 查看设备详情}({@link DescribeDeviceRequest 请求参数}): {@link DescribeDeviceResponse 返回参数} */
   DescribeDevice(data: DescribeDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceResponse>;
-  /** 获取设备动作历史 */
+  /** {@link DescribeDeviceActionHistory 获取设备动作历史}({@link DescribeDeviceActionHistoryRequest 请求参数}): {@link DescribeDeviceActionHistoryResponse 返回参数} */
   DescribeDeviceActionHistory(data: DescribeDeviceActionHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceActionHistoryResponse>;
-  /** 获取设备通讯日志 */
+  /** {@link DescribeDeviceCommLog 获取设备通讯日志}({@link DescribeDeviceCommLogRequest 请求参数}): {@link DescribeDeviceCommLogResponse 返回参数} */
   DescribeDeviceCommLog(data: DescribeDeviceCommLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCommLogResponse>;
-  /** 获取设备属性数据 */
+  /** {@link DescribeDeviceData 获取设备属性数据}({@link DescribeDeviceDataRequest 请求参数}): {@link DescribeDeviceDataResponse 返回参数} */
   DescribeDeviceData(data: DescribeDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDataResponse>;
-  /** 获取设备历史数据 */
+  /** {@link DescribeDeviceDataHistory 获取设备历史数据}({@link DescribeDeviceDataHistoryRequest 请求参数}): {@link DescribeDeviceDataHistoryResponse 返回参数} */
   DescribeDeviceDataHistory(data: DescribeDeviceDataHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDataHistoryResponse>;
-  /** 查询设备数据统计 */
+  /** {@link DescribeDeviceDataStats 查询设备数据统计}({@link DescribeDeviceDataStatsRequest 请求参数}): {@link DescribeDeviceDataStatsResponse 返回参数} */
   DescribeDeviceDataStats(data: DescribeDeviceDataStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDataStatsResponse>;
-  /** 获取设备的历史事件 */
+  /** {@link DescribeDeviceEventHistory 获取设备的历史事件}({@link DescribeDeviceEventHistoryRequest 请求参数}): {@link DescribeDeviceEventHistoryResponse 返回参数} */
   DescribeDeviceEventHistory(data: DescribeDeviceEventHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceEventHistoryResponse>;
-  /** 获取设备上下线日志 */
+  /** {@link DescribeDeviceStatusLog 获取设备上下线日志}({@link DescribeDeviceStatusLogRequest 请求参数}): {@link DescribeDeviceStatusLogResponse 返回参数} */
   DescribeDeviceStatusLog(data: DescribeDeviceStatusLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceStatusLogResponse>;
-  /** 获取设备列表 */
+  /** {@link DescribeDevices 获取设备列表}({@link DescribeDevicesRequest 请求参数}): {@link DescribeDevicesResponse 返回参数} */
   DescribeDevices(data: DescribeDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesResponse>;
-  /** 查询固件信息 */
+  /** {@link DescribeFirmware 查询固件信息}({@link DescribeFirmwareRequest 请求参数}): {@link DescribeFirmwareResponse 返回参数} */
   DescribeFirmware(data: DescribeFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareResponse>;
-  /** 查询固件升级任务详情 */
+  /** {@link DescribeFirmwareTask 查询固件升级任务详情}({@link DescribeFirmwareTaskRequest 请求参数}): {@link DescribeFirmwareTaskResponse 返回参数} */
   DescribeFirmwareTask(data: DescribeFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskResponse>;
-  /** 查询固件升级任务的设备列表 */
+  /** {@link DescribeFirmwareTaskDevices 查询固件升级任务的设备列表}({@link DescribeFirmwareTaskDevicesRequest 请求参数}): {@link DescribeFirmwareTaskDevicesResponse 返回参数} */
   DescribeFirmwareTaskDevices(data: DescribeFirmwareTaskDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskDevicesResponse>;
-  /** 查询固件升级任务状态分布 */
+  /** {@link DescribeFirmwareTaskDistribution 查询固件升级任务状态分布}({@link DescribeFirmwareTaskDistributionRequest 请求参数}): {@link DescribeFirmwareTaskDistributionResponse 返回参数} */
   DescribeFirmwareTaskDistribution(data: DescribeFirmwareTaskDistributionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskDistributionResponse>;
-  /** 查询固件升级任务统计信息 */
+  /** {@link DescribeFirmwareTaskStatistics 查询固件升级任务统计信息}({@link DescribeFirmwareTaskStatisticsRequest 请求参数}): {@link DescribeFirmwareTaskStatisticsResponse 返回参数} */
   DescribeFirmwareTaskStatistics(data: DescribeFirmwareTaskStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskStatisticsResponse>;
-  /** 查询固件升级任务列表 */
+  /** {@link DescribeFirmwareTasks 查询固件升级任务列表}({@link DescribeFirmwareTasksRequest 请求参数}): {@link DescribeFirmwareTasksResponse 返回参数} */
   DescribeFirmwareTasks(data: DescribeFirmwareTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTasksResponse>;
-  /** 获取产品转发规则 */
+  /** {@link DescribeForwardRule 获取产品转发规则}({@link DescribeForwardRuleRequest 请求参数}): {@link DescribeForwardRuleResponse 返回参数} */
   DescribeForwardRule(data: DescribeForwardRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeForwardRuleResponse>;
-  /** 查询设备消息数量统计 */
+  /** {@link DescribeMessageDataStats 查询设备消息数量统计}({@link DescribeMessageDataStatsRequest 请求参数}): {@link DescribeMessageDataStatsResponse 返回参数} */
   DescribeMessageDataStats(data: DescribeMessageDataStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageDataStatsResponse>;
-  /** 查询产品数据模板 */
+  /** {@link DescribeModelDefinition 查询产品数据模板}({@link DescribeModelDefinitionRequest 请求参数}): {@link DescribeModelDefinitionResponse 返回参数} */
   DescribeModelDefinition(data: DescribeModelDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelDefinitionResponse>;
-  /** 查询套餐消耗记录详情 */
+  /** {@link DescribePackageConsumeTask 查询套餐消耗记录详情}({@link DescribePackageConsumeTaskRequest 请求参数}): {@link DescribePackageConsumeTaskResponse 返回参数} */
   DescribePackageConsumeTask(data: DescribePackageConsumeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackageConsumeTaskResponse>;
-  /** 查询套餐消耗记录列表 */
+  /** {@link DescribePackageConsumeTasks 查询套餐消耗记录列表}({@link DescribePackageConsumeTasksRequest 请求参数}): {@link DescribePackageConsumeTasksResponse 返回参数} */
   DescribePackageConsumeTasks(data: DescribePackageConsumeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackageConsumeTasksResponse>;
-  /** 获取产品详情 */
+  /** {@link DescribeProduct 获取产品详情}({@link DescribeProductRequest 请求参数}): {@link DescribeProductResponse 返回参数} */
   DescribeProduct(data: DescribeProductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductResponse>;
-  /** 获取产品动态注册详情 */
+  /** {@link DescribeProductDynamicRegister 获取产品动态注册详情}({@link DescribeProductDynamicRegisterRequest 请求参数}): {@link DescribeProductDynamicRegisterResponse 返回参数} */
   DescribeProductDynamicRegister(data: DescribeProductDynamicRegisterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductDynamicRegisterResponse>;
-  /** 获取产品列表 */
+  /** {@link DescribeProducts 获取产品列表}({@link DescribeProductsRequest 请求参数}): {@link DescribeProductsResponse 返回参数} */
   DescribeProducts(data: DescribeProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductsResponse>;
-  /** 查看推送通道 */
+  /** {@link DescribePushChannel 查看推送通道}({@link DescribePushChannelRequest 请求参数}): {@link DescribePushChannelResponse 返回参数} */
   DescribePushChannel(data: DescribePushChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushChannelResponse>;
-  /** 获取设备sdk日志 */
+  /** {@link DescribeSDKLog 获取设备sdk日志}({@link DescribeSDKLogRequest 请求参数}): {@link DescribeSDKLogResponse 返回参数} */
   DescribeSDKLog(data: DescribeSDKLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSDKLogResponse>;
-  /** 获取用户信息 */
+  /** {@link DescribeUser 获取用户信息}({@link DescribeUserRequest 请求参数}): {@link DescribeUserResponse 返回参数} */
   DescribeUser(data?: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
-  /** 编辑固件信息 */
+  /** {@link EditFirmware 编辑固件信息}({@link EditFirmwareRequest 请求参数}): {@link EditFirmwareResponse 返回参数} */
   EditFirmware(data: EditFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<EditFirmwareResponse>;
-  /** 生成单个设备绑定的签名 */
+  /** {@link GenSingleDeviceSignatureOfPublic 生成单个设备绑定的签名}({@link GenSingleDeviceSignatureOfPublicRequest 请求参数}): {@link GenSingleDeviceSignatureOfPublicResponse 返回参数} */
   GenSingleDeviceSignatureOfPublic(data: GenSingleDeviceSignatureOfPublicRequest, config?: AxiosRequestConfig): AxiosPromise<GenSingleDeviceSignatureOfPublicResponse>;
-  /** 获取视频防盗链播放URL */
+  /** {@link GenerateSignedVideoURL 获取视频防盗链播放URL}({@link GenerateSignedVideoURLRequest 请求参数}): {@link GenerateSignedVideoURLResponse 返回参数} */
   GenerateSignedVideoURL(data: GenerateSignedVideoURLRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateSignedVideoURLResponse>;
-  /** 获取所有版本列表 */
+  /** {@link GetAllFirmwareVersion 获取所有版本列表}({@link GetAllFirmwareVersionRequest 请求参数}): {@link GetAllFirmwareVersionResponse 返回参数} */
   GetAllFirmwareVersion(data: GetAllFirmwareVersionRequest, config?: AxiosRequestConfig): AxiosPromise<GetAllFirmwareVersionResponse>;
-  /** 获取固件下载地址 */
+  /** {@link GetFirmwareURL 获取固件下载地址}({@link GetFirmwareURLRequest 请求参数}): {@link GetFirmwareURLResponse 返回参数} */
   GetFirmwareURL(data: GetFirmwareURLRequest, config?: AxiosRequestConfig): AxiosPromise<GetFirmwareURLResponse>;
-  /** 导入其它产品的数据模板 */
+  /** {@link ImportModelDefinition 导入其它产品的数据模板}({@link ImportModelDefinitionRequest 请求参数}): {@link ImportModelDefinitionResponse 返回参数} */
   ImportModelDefinition(data: ImportModelDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<ImportModelDefinitionResponse>;
-  /** 继承云存用户 */
+  /** {@link InheritCloudStorageUser 继承云存用户}({@link InheritCloudStorageUserRequest 请求参数}): {@link InheritCloudStorageUserResponse 返回参数} */
   InheritCloudStorageUser(data: InheritCloudStorageUserRequest, config?: AxiosRequestConfig): AxiosPromise<InheritCloudStorageUserResponse>;
-  /** 获取固件列表 */
+  /** {@link ListFirmwares 获取固件列表}({@link ListFirmwaresRequest 请求参数}): {@link ListFirmwaresResponse 返回参数} */
   ListFirmwares(data: ListFirmwaresRequest, config?: AxiosRequestConfig): AxiosPromise<ListFirmwaresResponse>;
-  /** 修改数据转发 */
+  /** {@link ModifyDataForward 修改数据转发}({@link ModifyDataForwardRequest 请求参数}): {@link ModifyDataForwardResponse 返回参数} */
   ModifyDataForward(data: ModifyDataForwardRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataForwardResponse>;
-  /** 设置数据转发状态 */
+  /** {@link ModifyDataForwardStatus 设置数据转发状态}({@link ModifyDataForwardStatusRequest 请求参数}): {@link ModifyDataForwardStatusResponse 返回参数} */
   ModifyDataForwardStatus(data: ModifyDataForwardStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataForwardStatusResponse>;
-  /** 修改设备信息 */
+  /** {@link ModifyDevice 修改设备信息}({@link ModifyDeviceRequest 请求参数}): {@link ModifyDeviceResponse 返回参数} */
   ModifyDevice(data: ModifyDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceResponse>;
-  /** 更新设备日志级别 */
+  /** {@link ModifyDeviceLogLevel 更新设备日志级别}({@link ModifyDeviceLogLevelRequest 请求参数}): {@link ModifyDeviceLogLevelResponse 返回参数} */
   ModifyDeviceLogLevel(data: ModifyDeviceLogLevelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceLogLevelResponse>;
-  /** 修改转发规则 */
+  /** {@link ModifyForwardRule 修改转发规则}({@link ModifyForwardRuleRequest 请求参数}): {@link ModifyForwardRuleResponse 返回参数} */
   ModifyForwardRule(data: ModifyForwardRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyForwardRuleResponse>;
-  /** 修改产品数据模板 */
+  /** {@link ModifyModelDefinition 修改产品数据模板}({@link ModifyModelDefinitionRequest 请求参数}): {@link ModifyModelDefinitionResponse 返回参数} */
   ModifyModelDefinition(data: ModifyModelDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelDefinitionResponse>;
-  /** 修改产品信息 */
+  /** {@link ModifyProduct 修改产品信息}({@link ModifyProductRequest 请求参数}): {@link ModifyProductResponse 返回参数} */
   ModifyProduct(data: ModifyProductRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProductResponse>;
-  /** 修改产品动态注册 */
+  /** {@link ModifyProductDynamicRegister 修改产品动态注册}({@link ModifyProductDynamicRegisterRequest 请求参数}): {@link ModifyProductDynamicRegisterResponse 返回参数} */
   ModifyProductDynamicRegister(data: ModifyProductDynamicRegisterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProductDynamicRegisterResponse>;
-  /** 更新推送通道 */
+  /** {@link ModifyPushChannel 更新推送通道}({@link ModifyPushChannelRequest 请求参数}): {@link ModifyPushChannelResponse 返回参数} */
   ModifyPushChannel(data: ModifyPushChannelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPushChannelResponse>;
-  /** 设备透传指令控制 */
+  /** {@link PublishMessage 设备透传指令控制}({@link PublishMessageRequest 请求参数}): {@link PublishMessageResponse 返回参数} */
   PublishMessage(data: PublishMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishMessageResponse>;
-  /** 上报活跃设备 */
+  /** {@link ReportAliveDevice 上报活跃设备}({@link ReportAliveDeviceRequest 请求参数}): {@link ReportAliveDeviceResponse 返回参数} */
   ReportAliveDevice(data: ReportAliveDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ReportAliveDeviceResponse>;
-  /** 重置云存服务 */
+  /** {@link ResetCloudStorage 重置云存服务}({@link ResetCloudStorageRequest 请求参数}): {@link ResetCloudStorageResponse 返回参数} */
   ResetCloudStorage(data: ResetCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<ResetCloudStorageResponse>;
-  /** 重试设备升级任务 */
+  /** {@link RetryDeviceFirmwareTask 重试设备升级任务}({@link RetryDeviceFirmwareTaskRequest 请求参数}): {@link RetryDeviceFirmwareTaskResponse 返回参数} */
   RetryDeviceFirmwareTask(data: RetryDeviceFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RetryDeviceFirmwareTaskResponse>;
-  /** 设置转发权限 */
+  /** {@link SetForwardAuth 设置转发权限}({@link SetForwardAuthRequest 请求参数}): {@link SetForwardAuthResponse 返回参数} */
   SetForwardAuth(data: SetForwardAuthRequest, config?: AxiosRequestConfig): AxiosPromise<SetForwardAuthResponse>;
-  /** 转移云存服务 */
+  /** {@link TransferCloudStorage 转移云存服务}({@link TransferCloudStorageRequest 请求参数}): {@link TransferCloudStorageResponse 返回参数} */
   TransferCloudStorage(data: TransferCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<TransferCloudStorageResponse>;
-  /** 更新AI推理结果推送配置 */
+  /** {@link UpdateAIModelChannel 更新AI推理结果推送配置}({@link UpdateAIModelChannelRequest 请求参数}): {@link UpdateAIModelChannelResponse 返回参数} */
   UpdateAIModelChannel(data: UpdateAIModelChannelRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAIModelChannelResponse>;
-  /** 上传固件信息 */
+  /** {@link UploadFirmware 上传固件信息}({@link UploadFirmwareRequest 请求参数}): {@link UploadFirmwareResponse 返回参数} */
   UploadFirmware(data: UploadFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFirmwareResponse>;
-  /** 设备唤醒 */
+  /** {@link WakeUpDevice 设备唤醒}({@link WakeUpDeviceRequest 请求参数}): {@link WakeUpDeviceResponse 返回参数} */
   WakeUpDevice(data: WakeUpDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<WakeUpDeviceResponse>;
-  /** 申请AI模型 */
+  /** {@link V20201215.ApplyAIModel 申请AI模型}({@link V20201215.ApplyAIModelRequest 请求参数}): {@link V20201215.ApplyAIModelResponse 返回参数} */
   ApplyAIModel(data: V20201215.ApplyAIModelRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ApplyAIModelResponse>;
-  /** 批量更新固件 */
+  /** {@link V20201215.BatchUpdateFirmware 批量更新固件}({@link V20201215.BatchUpdateFirmwareRequest 请求参数}): {@link V20201215.BatchUpdateFirmwareResponse 返回参数} */
   BatchUpdateFirmware(data: V20201215.BatchUpdateFirmwareRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.BatchUpdateFirmwareResponse>;
-  /** 绑定云存用户 */
+  /** {@link V20201215.BindCloudStorageUser 绑定云存用户}({@link V20201215.BindCloudStorageUserRequest 请求参数}): {@link V20201215.BindCloudStorageUserResponse 返回参数} */
   BindCloudStorageUser(data: V20201215.BindCloudStorageUserRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.BindCloudStorageUserResponse>;
-  /** 取消AI模型申请 */
+  /** {@link V20201215.CancelAIModelApplication 取消AI模型申请}({@link V20201215.CancelAIModelApplicationRequest 请求参数}): {@link V20201215.CancelAIModelApplicationResponse 返回参数} */
   CancelAIModelApplication(data: V20201215.CancelAIModelApplicationRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CancelAIModelApplicationResponse>;
-  /** 取消设备升级任务 */
+  /** {@link V20201215.CancelDeviceFirmwareTask 取消设备升级任务}({@link V20201215.CancelDeviceFirmwareTaskRequest 请求参数}): {@link V20201215.CancelDeviceFirmwareTaskResponse 返回参数} */
   CancelDeviceFirmwareTask(data: V20201215.CancelDeviceFirmwareTaskRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CancelDeviceFirmwareTaskResponse>;
-  /** 判断是否开启的转发的权限 */
+  /** {@link V20201215.CheckForwardAuth 判断是否开启的转发的权限}({@link V20201215.CheckForwardAuthRequest 请求参数}): {@link V20201215.CheckForwardAuthResponse 返回参数} */
   CheckForwardAuth(data: V20201215.CheckForwardAuthRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CheckForwardAuthResponse>;
-  /** 设备远程控制 */
+  /** {@link V20201215.ControlDeviceData 设备远程控制}({@link V20201215.ControlDeviceDataRequest 请求参数}): {@link V20201215.ControlDeviceDataResponse 返回参数} */
   ControlDeviceData(data: V20201215.ControlDeviceDataRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ControlDeviceDataResponse>;
-  /** 发起AI推理请求 */
+  /** {@link V20201215.CreateAIDetection 发起AI推理请求}({@link V20201215.CreateAIDetectionRequest 请求参数}): {@link V20201215.CreateAIDetectionResponse 返回参数} */
   CreateAIDetection(data: V20201215.CreateAIDetectionRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CreateAIDetectionResponse>;
-  /** 创建批次 */
+  /** {@link V20201215.CreateBatch 创建批次}({@link V20201215.CreateBatchRequest 请求参数}): {@link V20201215.CreateBatchResponse 返回参数} */
   CreateBatch(data: V20201215.CreateBatchRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CreateBatchResponse>;
-  /** 创建COS上传密钥 */
+  /** {@link V20201215.CreateCOSCredentials 创建COS上传密钥}({@link V20201215.CreateCOSCredentialsRequest 请求参数}): {@link V20201215.CreateCOSCredentialsResponse 返回参数} */
   CreateCOSCredentials(data: V20201215.CreateCOSCredentialsRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CreateCOSCredentialsResponse>;
-  /** 开通云存服务 */
+  /** {@link V20201215.CreateCloudStorage 开通云存服务}({@link V20201215.CreateCloudStorageRequest 请求参数}): {@link V20201215.CreateCloudStorageResponse 返回参数} */
   CreateCloudStorage(data: V20201215.CreateCloudStorageRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CreateCloudStorageResponse>;
-  /** 创建数据转发 */
+  /** {@link V20201215.CreateDataForward 创建数据转发}({@link V20201215.CreateDataForwardRequest 请求参数}): {@link V20201215.CreateDataForwardResponse 返回参数} */
   CreateDataForward(data: V20201215.CreateDataForwardRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CreateDataForwardResponse>;
-  /** 创建转发规则 */
+  /** {@link V20201215.CreateForwardRule 创建转发规则}({@link V20201215.CreateForwardRuleRequest 请求参数}): {@link V20201215.CreateForwardRuleResponse 返回参数} */
   CreateForwardRule(data: V20201215.CreateForwardRuleRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CreateForwardRuleResponse>;
-  /** 创建产品 */
+  /** {@link V20201215.CreateProduct 创建产品}({@link V20201215.CreateProductRequest 请求参数}): {@link V20201215.CreateProductResponse 返回参数} */
   CreateProduct(data: V20201215.CreateProductRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CreateProductResponse>;
-  /** 获取任务文件上传链接 */
+  /** {@link V20201215.CreateTaskFileUrl 获取任务文件上传链接}({@link V20201215.CreateTaskFileUrlRequest 请求参数}): {@link V20201215.CreateTaskFileUrlResponse 返回参数} */
   CreateTaskFileUrl(data: V20201215.CreateTaskFileUrlRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CreateTaskFileUrlResponse>;
-  /** 删除设备 */
+  /** {@link V20201215.DeleteDevice 删除设备}({@link V20201215.DeleteDeviceRequest 请求参数}): {@link V20201215.DeleteDeviceResponse 返回参数} */
   DeleteDevice(data: V20201215.DeleteDeviceRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DeleteDeviceResponse>;
-  /** 删除固件 */
+  /** {@link V20201215.DeleteFirmware 删除固件}({@link V20201215.DeleteFirmwareRequest 请求参数}): {@link V20201215.DeleteFirmwareResponse 返回参数} */
   DeleteFirmware(data: V20201215.DeleteFirmwareRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DeleteFirmwareResponse>;
-  /** 删除转发规则 */
+  /** {@link V20201215.DeleteForwardRule 删除转发规则}({@link V20201215.DeleteForwardRuleRequest 请求参数}): {@link V20201215.DeleteForwardRuleResponse 返回参数} */
   DeleteForwardRule(data: V20201215.DeleteForwardRuleRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DeleteForwardRuleResponse>;
-  /** 删除产品 */
+  /** {@link V20201215.DeleteProduct 删除产品}({@link V20201215.DeleteProductRequest 请求参数}): {@link V20201215.DeleteProductResponse 返回参数} */
   DeleteProduct(data: V20201215.DeleteProductRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DeleteProductResponse>;
-  /** 用户AI模型申请记录 */
+  /** {@link V20201215.DescribeAIModelApplications 用户AI模型申请记录}({@link V20201215.DescribeAIModelApplicationsRequest 请求参数}): {@link V20201215.DescribeAIModelApplicationsResponse 返回参数} */
   DescribeAIModelApplications(data: V20201215.DescribeAIModelApplicationsRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeAIModelApplicationsResponse>;
-  /** 查看AI推理结果推送配置 */
+  /** {@link V20201215.DescribeAIModelChannel 查看AI推理结果推送配置}({@link V20201215.DescribeAIModelChannelRequest 请求参数}): {@link V20201215.DescribeAIModelChannelResponse 返回参数} */
   DescribeAIModelChannel(data: V20201215.DescribeAIModelChannelRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeAIModelChannelResponse>;
-  /** 查看AI模型资源包 */
+  /** {@link V20201215.DescribeAIModelUsage 查看AI模型资源包}({@link V20201215.DescribeAIModelUsageRequest 请求参数}): {@link V20201215.DescribeAIModelUsageResponse 返回参数} */
   DescribeAIModelUsage(data: V20201215.DescribeAIModelUsageRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeAIModelUsageResponse>;
-  /** 拉取AI模型列表 */
+  /** {@link V20201215.DescribeAIModels 拉取AI模型列表}({@link V20201215.DescribeAIModelsRequest 请求参数}): {@link V20201215.DescribeAIModelsResponse 返回参数} */
   DescribeAIModels(data: V20201215.DescribeAIModelsRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeAIModelsResponse>;
-  /** 查询账户余额 */
+  /** {@link V20201215.DescribeBalance 查询账户余额}({@link V20201215.DescribeBalanceRequest 请求参数}): {@link V20201215.DescribeBalanceResponse 返回参数} */
   DescribeBalance(data: V20201215.DescribeBalanceRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeBalanceResponse>;
-  /** 拉取账户流水 */
+  /** {@link V20201215.DescribeBalanceTransactions 拉取账户流水}({@link V20201215.DescribeBalanceTransactionsRequest 请求参数}): {@link V20201215.DescribeBalanceTransactionsResponse 返回参数} */
   DescribeBalanceTransactions(data: V20201215.DescribeBalanceTransactionsRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeBalanceTransactionsResponse>;
-  /** 获取批次详情 */
+  /** {@link V20201215.DescribeBatch 获取批次详情}({@link V20201215.DescribeBatchRequest 请求参数}): {@link V20201215.DescribeBatchResponse 返回参数} */
   DescribeBatch(data: V20201215.DescribeBatchRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeBatchResponse>;
-  /** 获取批次列表 */
+  /** {@link V20201215.DescribeBatchs 获取批次列表}({@link V20201215.DescribeBatchsRequest 请求参数}): {@link V20201215.DescribeBatchsResponse 返回参数} */
   DescribeBatchs(data: V20201215.DescribeBatchsRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeBatchsResponse>;
-  /** 获取Category详情 */
+  /** {@link V20201215.DescribeCategory 获取Category详情}({@link V20201215.DescribeCategoryRequest 请求参数}): {@link V20201215.DescribeCategoryResponse 返回参数} */
   DescribeCategory(data: V20201215.DescribeCategoryRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeCategoryResponse>;
-  /** 获取设备云存服务详情 */
+  /** {@link V20201215.DescribeCloudStorage 获取设备云存服务详情}({@link V20201215.DescribeCloudStorageRequest 请求参数}): {@link V20201215.DescribeCloudStorageResponse 返回参数} */
   DescribeCloudStorage(data: V20201215.DescribeCloudStorageRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeCloudStorageResponse>;
-  /** 获取具有云存的日期 */
+  /** {@link V20201215.DescribeCloudStorageDate 获取具有云存的日期}({@link V20201215.DescribeCloudStorageDateRequest 请求参数}): {@link V20201215.DescribeCloudStorageDateResponse 返回参数} */
   DescribeCloudStorageDate(data: V20201215.DescribeCloudStorageDateRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeCloudStorageDateResponse>;
-  /** 拉取云存事件列表 */
+  /** {@link V20201215.DescribeCloudStorageEvents 拉取云存事件列表}({@link V20201215.DescribeCloudStorageEventsRequest 请求参数}): {@link V20201215.DescribeCloudStorageEventsResponse 返回参数} */
   DescribeCloudStorageEvents(data: V20201215.DescribeCloudStorageEventsRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeCloudStorageEventsResponse>;
-  /** 拉取云存事件缩略图 */
+  /** {@link V20201215.DescribeCloudStorageThumbnail 拉取云存事件缩略图}({@link V20201215.DescribeCloudStorageThumbnailRequest 请求参数}): {@link V20201215.DescribeCloudStorageThumbnailResponse 返回参数} */
   DescribeCloudStorageThumbnail(data: V20201215.DescribeCloudStorageThumbnailRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeCloudStorageThumbnailResponse>;
-  /** 获取某一天云存时间轴 */
+  /** {@link V20201215.DescribeCloudStorageTime 获取某一天云存时间轴}({@link V20201215.DescribeCloudStorageTimeRequest 请求参数}): {@link V20201215.DescribeCloudStorageTimeResponse 返回参数} */
   DescribeCloudStorageTime(data: V20201215.DescribeCloudStorageTimeRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeCloudStorageTimeResponse>;
-  /** 拉取云存用户列表 */
+  /** {@link V20201215.DescribeCloudStorageUsers 拉取云存用户列表}({@link V20201215.DescribeCloudStorageUsersRequest 请求参数}): {@link V20201215.DescribeCloudStorageUsersResponse 返回参数} */
   DescribeCloudStorageUsers(data: V20201215.DescribeCloudStorageUsersRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeCloudStorageUsersResponse>;
-  /** 获取数据转发列表 */
+  /** {@link V20201215.DescribeDataForwardList 获取数据转发列表}({@link V20201215.DescribeDataForwardListRequest 请求参数}): {@link V20201215.DescribeDataForwardListResponse 返回参数} */
   DescribeDataForwardList(data: V20201215.DescribeDataForwardListRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDataForwardListResponse>;
-  /** 查看设备详情 */
+  /** {@link V20201215.DescribeDevice 查看设备详情}({@link V20201215.DescribeDeviceRequest 请求参数}): {@link V20201215.DescribeDeviceResponse 返回参数} */
   DescribeDevice(data: V20201215.DescribeDeviceRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDeviceResponse>;
-  /** 获取设备动作历史 */
+  /** {@link V20201215.DescribeDeviceActionHistory 获取设备动作历史}({@link V20201215.DescribeDeviceActionHistoryRequest 请求参数}): {@link V20201215.DescribeDeviceActionHistoryResponse 返回参数} */
   DescribeDeviceActionHistory(data: V20201215.DescribeDeviceActionHistoryRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDeviceActionHistoryResponse>;
-  /** 获取设备通讯日志 */
+  /** {@link V20201215.DescribeDeviceCommLog 获取设备通讯日志}({@link V20201215.DescribeDeviceCommLogRequest 请求参数}): {@link V20201215.DescribeDeviceCommLogResponse 返回参数} */
   DescribeDeviceCommLog(data: V20201215.DescribeDeviceCommLogRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDeviceCommLogResponse>;
-  /** 获取设备属性数据 */
+  /** {@link V20201215.DescribeDeviceData 获取设备属性数据}({@link V20201215.DescribeDeviceDataRequest 请求参数}): {@link V20201215.DescribeDeviceDataResponse 返回参数} */
   DescribeDeviceData(data: V20201215.DescribeDeviceDataRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDeviceDataResponse>;
-  /** 获取设备历史数据 */
+  /** {@link V20201215.DescribeDeviceDataHistory 获取设备历史数据}({@link V20201215.DescribeDeviceDataHistoryRequest 请求参数}): {@link V20201215.DescribeDeviceDataHistoryResponse 返回参数} */
   DescribeDeviceDataHistory(data: V20201215.DescribeDeviceDataHistoryRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDeviceDataHistoryResponse>;
-  /** 获取设备的历史事件 */
+  /** {@link V20201215.DescribeDeviceEventHistory 获取设备的历史事件}({@link V20201215.DescribeDeviceEventHistoryRequest 请求参数}): {@link V20201215.DescribeDeviceEventHistoryResponse 返回参数} */
   DescribeDeviceEventHistory(data: V20201215.DescribeDeviceEventHistoryRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDeviceEventHistoryResponse>;
-  /** 获取设备上下线日志 */
+  /** {@link V20201215.DescribeDeviceStatusLog 获取设备上下线日志}({@link V20201215.DescribeDeviceStatusLogRequest 请求参数}): {@link V20201215.DescribeDeviceStatusLogResponse 返回参数} */
   DescribeDeviceStatusLog(data: V20201215.DescribeDeviceStatusLogRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDeviceStatusLogResponse>;
-  /** 获取设备列表 */
+  /** {@link V20201215.DescribeDevices 获取设备列表}({@link V20201215.DescribeDevicesRequest 请求参数}): {@link V20201215.DescribeDevicesResponse 返回参数} */
   DescribeDevices(data: V20201215.DescribeDevicesRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDevicesResponse>;
-  /** 查询固件信息 */
+  /** {@link V20201215.DescribeFirmware 查询固件信息}({@link V20201215.DescribeFirmwareRequest 请求参数}): {@link V20201215.DescribeFirmwareResponse 返回参数} */
   DescribeFirmware(data: V20201215.DescribeFirmwareRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeFirmwareResponse>;
-  /** 查询固件升级任务详情 */
+  /** {@link V20201215.DescribeFirmwareTask 查询固件升级任务详情}({@link V20201215.DescribeFirmwareTaskRequest 请求参数}): {@link V20201215.DescribeFirmwareTaskResponse 返回参数} */
   DescribeFirmwareTask(data: V20201215.DescribeFirmwareTaskRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeFirmwareTaskResponse>;
-  /** 查询固件升级任务的设备列表 */
+  /** {@link V20201215.DescribeFirmwareTaskDevices 查询固件升级任务的设备列表}({@link V20201215.DescribeFirmwareTaskDevicesRequest 请求参数}): {@link V20201215.DescribeFirmwareTaskDevicesResponse 返回参数} */
   DescribeFirmwareTaskDevices(data: V20201215.DescribeFirmwareTaskDevicesRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeFirmwareTaskDevicesResponse>;
-  /** 查询固件升级任务状态分布 */
+  /** {@link V20201215.DescribeFirmwareTaskDistribution 查询固件升级任务状态分布}({@link V20201215.DescribeFirmwareTaskDistributionRequest 请求参数}): {@link V20201215.DescribeFirmwareTaskDistributionResponse 返回参数} */
   DescribeFirmwareTaskDistribution(data: V20201215.DescribeFirmwareTaskDistributionRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeFirmwareTaskDistributionResponse>;
-  /** 查询固件升级任务统计信息 */
+  /** {@link V20201215.DescribeFirmwareTaskStatistics 查询固件升级任务统计信息}({@link V20201215.DescribeFirmwareTaskStatisticsRequest 请求参数}): {@link V20201215.DescribeFirmwareTaskStatisticsResponse 返回参数} */
   DescribeFirmwareTaskStatistics(data: V20201215.DescribeFirmwareTaskStatisticsRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeFirmwareTaskStatisticsResponse>;
-  /** 查询固件升级任务列表 */
+  /** {@link V20201215.DescribeFirmwareTasks 查询固件升级任务列表}({@link V20201215.DescribeFirmwareTasksRequest 请求参数}): {@link V20201215.DescribeFirmwareTasksResponse 返回参数} */
   DescribeFirmwareTasks(data: V20201215.DescribeFirmwareTasksRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeFirmwareTasksResponse>;
-  /** 获取产品转发规则 */
+  /** {@link V20201215.DescribeForwardRule 获取产品转发规则}({@link V20201215.DescribeForwardRuleRequest 请求参数}): {@link V20201215.DescribeForwardRuleResponse 返回参数} */
   DescribeForwardRule(data: V20201215.DescribeForwardRuleRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeForwardRuleResponse>;
-  /** 查询产品数据模板 */
+  /** {@link V20201215.DescribeModelDefinition 查询产品数据模板}({@link V20201215.DescribeModelDefinitionRequest 请求参数}): {@link V20201215.DescribeModelDefinitionResponse 返回参数} */
   DescribeModelDefinition(data: V20201215.DescribeModelDefinitionRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeModelDefinitionResponse>;
-  /** 获取产品详情 */
+  /** {@link V20201215.DescribeProduct 获取产品详情}({@link V20201215.DescribeProductRequest 请求参数}): {@link V20201215.DescribeProductResponse 返回参数} */
   DescribeProduct(data: V20201215.DescribeProductRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeProductResponse>;
-  /** 获取产品动态注册详情 */
+  /** {@link V20201215.DescribeProductDynamicRegister 获取产品动态注册详情}({@link V20201215.DescribeProductDynamicRegisterRequest 请求参数}): {@link V20201215.DescribeProductDynamicRegisterResponse 返回参数} */
   DescribeProductDynamicRegister(data: V20201215.DescribeProductDynamicRegisterRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeProductDynamicRegisterResponse>;
-  /** 获取产品列表 */
+  /** {@link V20201215.DescribeProducts 获取产品列表}({@link V20201215.DescribeProductsRequest 请求参数}): {@link V20201215.DescribeProductsResponse 返回参数} */
   DescribeProducts(data: V20201215.DescribeProductsRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeProductsResponse>;
-  /** 获取设备sdk日志 */
+  /** {@link V20201215.DescribeSDKLog 获取设备sdk日志}({@link V20201215.DescribeSDKLogRequest 请求参数}): {@link V20201215.DescribeSDKLogResponse 返回参数} */
   DescribeSDKLog(data: V20201215.DescribeSDKLogRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeSDKLogResponse>;
-  /** 编辑固件信息 */
+  /** {@link V20201215.EditFirmware 编辑固件信息}({@link V20201215.EditFirmwareRequest 请求参数}): {@link V20201215.EditFirmwareResponse 返回参数} */
   EditFirmware(data: V20201215.EditFirmwareRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.EditFirmwareResponse>;
-  /** 获取视频防盗链播放URL */
+  /** {@link V20201215.GenerateSignedVideoURL 获取视频防盗链播放URL}({@link V20201215.GenerateSignedVideoURLRequest 请求参数}): {@link V20201215.GenerateSignedVideoURLResponse 返回参数} */
   GenerateSignedVideoURL(data: V20201215.GenerateSignedVideoURLRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.GenerateSignedVideoURLResponse>;
-  /** 获取所有版本列表 */
+  /** {@link V20201215.GetAllFirmwareVersion 获取所有版本列表}({@link V20201215.GetAllFirmwareVersionRequest 请求参数}): {@link V20201215.GetAllFirmwareVersionResponse 返回参数} */
   GetAllFirmwareVersion(data: V20201215.GetAllFirmwareVersionRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.GetAllFirmwareVersionResponse>;
-  /** 获取固件下载地址 */
+  /** {@link V20201215.GetFirmwareURL 获取固件下载地址}({@link V20201215.GetFirmwareURLRequest 请求参数}): {@link V20201215.GetFirmwareURLResponse 返回参数} */
   GetFirmwareURL(data: V20201215.GetFirmwareURLRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.GetFirmwareURLResponse>;
-  /** 导入其它产品的数据模板 */
+  /** {@link V20201215.ImportModelDefinition 导入其它产品的数据模板}({@link V20201215.ImportModelDefinitionRequest 请求参数}): {@link V20201215.ImportModelDefinitionResponse 返回参数} */
   ImportModelDefinition(data: V20201215.ImportModelDefinitionRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ImportModelDefinitionResponse>;
-  /** 继承云存用户 */
+  /** {@link V20201215.InheritCloudStorageUser 继承云存用户}({@link V20201215.InheritCloudStorageUserRequest 请求参数}): {@link V20201215.InheritCloudStorageUserResponse 返回参数} */
   InheritCloudStorageUser(data: V20201215.InheritCloudStorageUserRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.InheritCloudStorageUserResponse>;
-  /** 获取固件列表 */
+  /** {@link V20201215.ListFirmwares 获取固件列表}({@link V20201215.ListFirmwaresRequest 请求参数}): {@link V20201215.ListFirmwaresResponse 返回参数} */
   ListFirmwares(data: V20201215.ListFirmwaresRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ListFirmwaresResponse>;
-  /** 修改数据转发 */
+  /** {@link V20201215.ModifyDataForward 修改数据转发}({@link V20201215.ModifyDataForwardRequest 请求参数}): {@link V20201215.ModifyDataForwardResponse 返回参数} */
   ModifyDataForward(data: V20201215.ModifyDataForwardRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ModifyDataForwardResponse>;
-  /** 设置数据转发状态 */
+  /** {@link V20201215.ModifyDataForwardStatus 设置数据转发状态}({@link V20201215.ModifyDataForwardStatusRequest 请求参数}): {@link V20201215.ModifyDataForwardStatusResponse 返回参数} */
   ModifyDataForwardStatus(data: V20201215.ModifyDataForwardStatusRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ModifyDataForwardStatusResponse>;
-  /** 修改设备信息 */
+  /** {@link V20201215.ModifyDevice 修改设备信息}({@link V20201215.ModifyDeviceRequest 请求参数}): {@link V20201215.ModifyDeviceResponse 返回参数} */
   ModifyDevice(data: V20201215.ModifyDeviceRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ModifyDeviceResponse>;
-  /** 更新设备日志级别 */
+  /** {@link V20201215.ModifyDeviceLogLevel 更新设备日志级别}({@link V20201215.ModifyDeviceLogLevelRequest 请求参数}): {@link V20201215.ModifyDeviceLogLevelResponse 返回参数} */
   ModifyDeviceLogLevel(data: V20201215.ModifyDeviceLogLevelRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ModifyDeviceLogLevelResponse>;
-  /** 修改转发规则 */
+  /** {@link V20201215.ModifyForwardRule 修改转发规则}({@link V20201215.ModifyForwardRuleRequest 请求参数}): {@link V20201215.ModifyForwardRuleResponse 返回参数} */
   ModifyForwardRule(data: V20201215.ModifyForwardRuleRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ModifyForwardRuleResponse>;
-  /** 修改产品数据模板 */
+  /** {@link V20201215.ModifyModelDefinition 修改产品数据模板}({@link V20201215.ModifyModelDefinitionRequest 请求参数}): {@link V20201215.ModifyModelDefinitionResponse 返回参数} */
   ModifyModelDefinition(data: V20201215.ModifyModelDefinitionRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ModifyModelDefinitionResponse>;
-  /** 修改产品信息 */
+  /** {@link V20201215.ModifyProduct 修改产品信息}({@link V20201215.ModifyProductRequest 请求参数}): {@link V20201215.ModifyProductResponse 返回参数} */
   ModifyProduct(data: V20201215.ModifyProductRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ModifyProductResponse>;
-  /** 修改产品动态注册 */
+  /** {@link V20201215.ModifyProductDynamicRegister 修改产品动态注册}({@link V20201215.ModifyProductDynamicRegisterRequest 请求参数}): {@link V20201215.ModifyProductDynamicRegisterResponse 返回参数} */
   ModifyProductDynamicRegister(data: V20201215.ModifyProductDynamicRegisterRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ModifyProductDynamicRegisterResponse>;
-  /** 设备透传指令控制 */
+  /** {@link V20201215.PublishMessage 设备透传指令控制}({@link V20201215.PublishMessageRequest 请求参数}): {@link V20201215.PublishMessageResponse 返回参数} */
   PublishMessage(data: V20201215.PublishMessageRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.PublishMessageResponse>;
-  /** 上报活跃设备 */
+  /** {@link V20201215.ReportAliveDevice 上报活跃设备}({@link V20201215.ReportAliveDeviceRequest 请求参数}): {@link V20201215.ReportAliveDeviceResponse 返回参数} */
   ReportAliveDevice(data: V20201215.ReportAliveDeviceRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ReportAliveDeviceResponse>;
-  /** 重置云存服务 */
+  /** {@link V20201215.ResetCloudStorage 重置云存服务}({@link V20201215.ResetCloudStorageRequest 请求参数}): {@link V20201215.ResetCloudStorageResponse 返回参数} */
   ResetCloudStorage(data: V20201215.ResetCloudStorageRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ResetCloudStorageResponse>;
-  /** 重试设备升级任务 */
+  /** {@link V20201215.RetryDeviceFirmwareTask 重试设备升级任务}({@link V20201215.RetryDeviceFirmwareTaskRequest 请求参数}): {@link V20201215.RetryDeviceFirmwareTaskResponse 返回参数} */
   RetryDeviceFirmwareTask(data: V20201215.RetryDeviceFirmwareTaskRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.RetryDeviceFirmwareTaskResponse>;
-  /** 设置转发权限 */
+  /** {@link V20201215.SetForwardAuth 设置转发权限}({@link V20201215.SetForwardAuthRequest 请求参数}): {@link V20201215.SetForwardAuthResponse 返回参数} */
   SetForwardAuth(data: V20201215.SetForwardAuthRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.SetForwardAuthResponse>;
-  /** 转移云存服务 */
+  /** {@link V20201215.TransferCloudStorage 转移云存服务}({@link V20201215.TransferCloudStorageRequest 请求参数}): {@link V20201215.TransferCloudStorageResponse 返回参数} */
   TransferCloudStorage(data: V20201215.TransferCloudStorageRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.TransferCloudStorageResponse>;
-  /** 更新AI推理结果推送配置 */
+  /** {@link V20201215.UpdateAIModelChannel 更新AI推理结果推送配置}({@link V20201215.UpdateAIModelChannelRequest 请求参数}): {@link V20201215.UpdateAIModelChannelResponse 返回参数} */
   UpdateAIModelChannel(data: V20201215.UpdateAIModelChannelRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.UpdateAIModelChannelResponse>;
-  /** 上传固件信息 */
+  /** {@link V20201215.UploadFirmware 上传固件信息}({@link V20201215.UploadFirmwareRequest 请求参数}): {@link V20201215.UploadFirmwareResponse 返回参数} */
   UploadFirmware(data: V20201215.UploadFirmwareRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.UploadFirmwareResponse>;
-  /** 设备唤醒 */
+  /** {@link V20201215.WakeUpDevice 设备唤醒}({@link V20201215.WakeUpDeviceRequest 请求参数}): {@link V20201215.WakeUpDeviceResponse 返回参数} */
   WakeUpDevice(data: V20201215.WakeUpDeviceRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.WakeUpDeviceResponse>;
-  /** 清除设备激活码 */
+  /** {@link V20191126.ClearDeviceActiveCode 清除设备激活码}({@link V20191126.ClearDeviceActiveCodeRequest 请求参数}): {@link V20191126.ClearDeviceActiveCodeResponse 返回参数} */
   ClearDeviceActiveCode(data: V20191126.ClearDeviceActiveCodeRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.ClearDeviceActiveCodeResponse>;
-  /** 创建匿名访问Token */
+  /** {@link V20191126.CreateAnonymousAccessToken 创建匿名访问Token}({@link V20191126.CreateAnonymousAccessTokenRequest 请求参数}): {@link V20191126.CreateAnonymousAccessTokenResponse 返回参数} */
   CreateAnonymousAccessToken(data: V20191126.CreateAnonymousAccessTokenRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateAnonymousAccessTokenResponse>;
-  /** 终端用户注册 */
+  /** {@link V20191126.CreateAppUsr 终端用户注册}({@link V20191126.CreateAppUsrRequest 请求参数}): {@link V20191126.CreateAppUsrResponse 返回参数} */
   CreateAppUsr(data: V20191126.CreateAppUsrRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateAppUsrResponse>;
-  /** 终端用户绑定设备 */
+  /** {@link V20191126.CreateBinding 终端用户绑定设备}({@link V20191126.CreateBindingRequest 请求参数}): {@link V20191126.CreateBindingResponse 返回参数} */
   CreateBinding(data: V20191126.CreateBindingRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateBindingResponse>;
-  /** 终端用户临时访问设备授权 */
+  /** {@link V20191126.CreateDevToken 终端用户临时访问设备授权}({@link V20191126.CreateDevTokenRequest 请求参数}): {@link V20191126.CreateDevTokenResponse 返回参数} */
   CreateDevToken(data: V20191126.CreateDevTokenRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateDevTokenResponse>;
-  /** 创建设备 */
+  /** {@link V20191126.CreateDevices 创建设备}({@link V20191126.CreateDevicesRequest 请求参数}): {@link V20191126.CreateDevicesResponse 返回参数} */
   CreateDevices(data: V20191126.CreateDevicesRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateDevicesResponse>;
-  /** 生成设备物模型源代码 */
+  /** {@link V20191126.CreateGencode 生成设备物模型源代码}({@link V20191126.CreateGencodeRequest 请求参数}): {@link V20191126.CreateGencodeResponse 返回参数} */
   CreateGencode(data: V20191126.CreateGencodeRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateGencodeResponse>;
-  /** 创建自定义物模型数据类型 */
+  /** {@link V20191126.CreateIotDataType 创建自定义物模型数据类型}({@link V20191126.CreateIotDataTypeRequest 请求参数}): {@link V20191126.CreateIotDataTypeResponse 返回参数} */
   CreateIotDataType(data: V20191126.CreateIotDataTypeRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateIotDataTypeResponse>;
-  /** 定义的物模型提交 */
+  /** {@link V20191126.CreateIotModel 定义的物模型提交}({@link V20191126.CreateIotModelRequest 请求参数}): {@link V20191126.CreateIotModelResponse 返回参数} */
   CreateIotModel(data: V20191126.CreateIotModelRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateIotModelResponse>;
-  /** 创建产品 */
+  /** {@link V20191126.CreateProduct 创建产品}({@link V20191126.CreateProductRequest 请求参数}): {@link V20191126.CreateProductResponse 返回参数} */
   CreateProduct(data: V20191126.CreateProductRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateProductResponse>;
-  /** 购买云存套餐 */
+  /** {@link V20191126.CreateStorage 购买云存套餐}({@link V20191126.CreateStorageRequest 请求参数}): {@link V20191126.CreateStorageResponse 返回参数} */
   CreateStorage(data: V20191126.CreateStorageRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateStorageResponse>;
-  /** 购买云存服务 */
+  /** {@link V20191126.CreateStorageService 购买云存服务}({@link V20191126.CreateStorageServiceRequest 请求参数}): {@link V20191126.CreateStorageServiceResponse 返回参数} */
   CreateStorageService(data: V20191126.CreateStorageServiceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateStorageServiceResponse>;
-  /** 将设备加到白名单 */
+  /** {@link V20191126.CreateTraceIds 将设备加到白名单}({@link V20191126.CreateTraceIdsRequest 请求参数}): {@link V20191126.CreateTraceIdsResponse 返回参数} */
   CreateTraceIds(data: V20191126.CreateTraceIdsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateTraceIdsResponse>;
-  /** 获取固件上传路径 */
+  /** {@link V20191126.CreateUploadPath 获取固件上传路径}({@link V20191126.CreateUploadPathRequest 请求参数}): {@link V20191126.CreateUploadPathResponse 返回参数} */
   CreateUploadPath(data: V20191126.CreateUploadPathRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateUploadPathResponse>;
-  /** 终端用户接入授权 */
+  /** {@link V20191126.CreateUsrToken 终端用户接入授权}({@link V20191126.CreateUsrTokenRequest 请求参数}): {@link V20191126.CreateUsrTokenResponse 返回参数} */
   CreateUsrToken(data: V20191126.CreateUsrTokenRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateUsrTokenResponse>;
-  /** 删除终端用户 */
+  /** {@link V20191126.DeleteAppUsr 删除终端用户}({@link V20191126.DeleteAppUsrRequest 请求参数}): {@link V20191126.DeleteAppUsrResponse 返回参数} */
   DeleteAppUsr(data: V20191126.DeleteAppUsrRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeleteAppUsrResponse>;
-  /** 终端用户解绑设备 */
+  /** {@link V20191126.DeleteBinding 终端用户解绑设备}({@link V20191126.DeleteBindingRequest 请求参数}): {@link V20191126.DeleteBindingResponse 返回参数} */
   DeleteBinding(data: V20191126.DeleteBindingRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeleteBindingResponse>;
-  /** 删除设备 */
+  /** {@link V20191126.DeleteDevice 删除设备}({@link V20191126.DeleteDeviceRequest 请求参数}): {@link V20191126.DeleteDeviceResponse 返回参数} */
   DeleteDevice(data: V20191126.DeleteDeviceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeleteDeviceResponse>;
-  /** 删除自定义物模型数据类型 */
+  /** {@link V20191126.DeleteIotDataType 删除自定义物模型数据类型}({@link V20191126.DeleteIotDataTypeRequest 请求参数}): {@link V20191126.DeleteIotDataTypeResponse 返回参数} */
   DeleteIotDataType(data: V20191126.DeleteIotDataTypeRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeleteIotDataTypeResponse>;
-  /** 删除产品转发消息配置 */
+  /** {@link V20191126.DeleteMessageQueue 删除产品转发消息配置}({@link V20191126.DeleteMessageQueueRequest 请求参数}): {@link V20191126.DeleteMessageQueueResponse 返回参数} */
   DeleteMessageQueue(data: V20191126.DeleteMessageQueueRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeleteMessageQueueResponse>;
-  /** 删除固件版本信息 */
+  /** {@link V20191126.DeleteOtaVersion 删除固件版本信息}({@link V20191126.DeleteOtaVersionRequest 请求参数}): {@link V20191126.DeleteOtaVersionResponse 返回参数} */
   DeleteOtaVersion(data: V20191126.DeleteOtaVersionRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeleteOtaVersionResponse>;
-  /** 删除产品 */
+  /** {@link V20191126.DeleteProduct 删除产品}({@link V20191126.DeleteProductRequest 请求参数}): {@link V20191126.DeleteProductResponse 返回参数} */
   DeleteProduct(data: V20191126.DeleteProductRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeleteProductResponse>;
-  /** 将设备从白名单删除 */
+  /** {@link V20191126.DeleteTraceIds 将设备从白名单删除}({@link V20191126.DeleteTraceIdsRequest 请求参数}): {@link V20191126.DeleteTraceIdsResponse 返回参数} */
   DeleteTraceIds(data: V20191126.DeleteTraceIdsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeleteTraceIdsResponse>;
-  /** 将已购买的云存服务转移到另一设备 */
+  /** {@link V20191126.DeliverStorageService 将已购买的云存服务转移到另一设备}({@link V20191126.DeliverStorageServiceRequest 请求参数}): {@link V20191126.DeliverStorageServiceResponse 返回参数} */
   DeliverStorageService(data: V20191126.DeliverStorageServiceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeliverStorageServiceResponse>;
-  /** 查询账户余额 */
+  /** {@link V20191126.DescribeAccountBalance 查询账户余额}({@link V20191126.DescribeAccountBalanceRequest 请求参数}): {@link V20191126.DescribeAccountBalanceResponse 返回参数} */
   DescribeAccountBalance(data: V20191126.DescribeAccountBalanceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeAccountBalanceResponse>;
-  /** 查询终端用户绑定的设备列表 */
+  /** {@link V20191126.DescribeBindDev 查询终端用户绑定的设备列表}({@link V20191126.DescribeBindDevRequest 请求参数}): {@link V20191126.DescribeBindDevResponse 返回参数} */
   DescribeBindDev(data: V20191126.DescribeBindDevRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeBindDevResponse>;
-  /** 查询设备绑定的终端用户列表 */
+  /** {@link V20191126.DescribeBindUsr 查询设备绑定的终端用户列表}({@link V20191126.DescribeBindUsrRequest 请求参数}): {@link V20191126.DescribeBindUsrResponse 返回参数} */
   DescribeBindUsr(data: V20191126.DescribeBindUsrRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeBindUsrResponse>;
-  /** 获取设备信息 */
+  /** {@link V20191126.DescribeDevice 获取设备信息}({@link V20191126.DescribeDeviceRequest 请求参数}): {@link V20191126.DescribeDeviceResponse 返回参数} */
   DescribeDevice(data: V20191126.DescribeDeviceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeDeviceResponse>;
-  /** 获取设备物模型 */
+  /** {@link V20191126.DescribeDeviceModel 获取设备物模型}({@link V20191126.DescribeDeviceModelRequest 请求参数}): {@link V20191126.DescribeDeviceModelResponse 返回参数} */
   DescribeDeviceModel(data: V20191126.DescribeDeviceModelRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeDeviceModelResponse>;
-  /** 获取设备信息列表 */
+  /** {@link V20191126.DescribeDevices 获取设备信息列表}({@link V20191126.DescribeDevicesRequest 请求参数}): {@link V20191126.DescribeDevicesResponse 返回参数} */
   DescribeDevices(data: V20191126.DescribeDevicesRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeDevicesResponse>;
-  /** 查询自定义物模型数据类型 */
+  /** {@link V20191126.DescribeIotDataType 查询自定义物模型数据类型}({@link V20191126.DescribeIotDataTypeRequest 请求参数}): {@link V20191126.DescribeIotDataTypeResponse 返回参数} */
   DescribeIotDataType(data: V20191126.DescribeIotDataTypeRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeIotDataTypeResponse>;
-  /** 获取物模型定义 */
+  /** {@link V20191126.DescribeIotModel 获取物模型定义}({@link V20191126.DescribeIotModelRequest 请求参数}): {@link V20191126.DescribeIotModelResponse 返回参数} */
   DescribeIotModel(data: V20191126.DescribeIotModelRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeIotModelResponse>;
-  /** 获取物模型历史版本列表 */
+  /** {@link V20191126.DescribeIotModels 获取物模型历史版本列表}({@link V20191126.DescribeIotModelsRequest 请求参数}): {@link V20191126.DescribeIotModelsResponse 返回参数} */
   DescribeIotModels(data: V20191126.DescribeIotModelsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeIotModelsResponse>;
-  /** 查询设备日志列表 */
+  /** {@link V20191126.DescribeLogs 查询设备日志列表}({@link V20191126.DescribeLogsRequest 请求参数}): {@link V20191126.DescribeLogsResponse 返回参数} */
   DescribeLogs(data: V20191126.DescribeLogsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeLogsResponse>;
-  /** 获取产品转发消息配置 */
+  /** {@link V20191126.DescribeMessageQueue 获取产品转发消息配置}({@link V20191126.DescribeMessageQueueRequest 请求参数}): {@link V20191126.DescribeMessageQueueResponse 返回参数} */
   DescribeMessageQueue(data: V20191126.DescribeMessageQueueRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeMessageQueueResponse>;
-  /** 获取物模型操作结果 */
+  /** {@link V20191126.DescribeModelDataRet 获取物模型操作结果}({@link V20191126.DescribeModelDataRetRequest 请求参数}): {@link V20191126.DescribeModelDataRetResponse 返回参数} */
   DescribeModelDataRet(data: V20191126.DescribeModelDataRetRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeModelDataRetResponse>;
-  /** 查看操作系统支持的芯片列表 */
+  /** {@link V20191126.DescribeOsList 查看操作系统支持的芯片列表}({@link V20191126.DescribeOsListRequest 请求参数}): {@link V20191126.DescribeOsListResponse 返回参数} */
   DescribeOsList(data: V20191126.DescribeOsListRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeOsListResponse>;
-  /** 查询固件版本信息列表 */
+  /** {@link V20191126.DescribeOtaVersions 查询固件版本信息列表}({@link V20191126.DescribeOtaVersionsRequest 请求参数}): {@link V20191126.DescribeOtaVersionsResponse 返回参数} */
   DescribeOtaVersions(data: V20191126.DescribeOtaVersionsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeOtaVersionsResponse>;
-  /** 获取单个产品详细信息 */
+  /** {@link V20191126.DescribeProduct 获取单个产品详细信息}({@link V20191126.DescribeProductRequest 请求参数}): {@link V20191126.DescribeProductResponse 返回参数} */
   DescribeProduct(data: V20191126.DescribeProductRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeProductResponse>;
-  /** 获取产品列表 */
+  /** {@link V20191126.DescribeProducts 获取产品列表}({@link V20191126.DescribeProductsRequest 请求参数}): {@link V20191126.DescribeProductsResponse 返回参数} */
   DescribeProducts(data: V20191126.DescribeProductsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeProductsResponse>;
-  /** 获取某一产品发布过的全部固件版本 */
+  /** {@link V20191126.DescribePubVersions 获取某一产品发布过的全部固件版本}({@link V20191126.DescribePubVersionsRequest 请求参数}): {@link V20191126.DescribePubVersionsResponse 返回参数} */
   DescribePubVersions(data: V20191126.DescribePubVersionsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribePubVersionsResponse>;
-  /** 查询充值记录 */
+  /** {@link V20191126.DescribeRechargeRecords 查询充值记录}({@link V20191126.DescribeRechargeRecordsRequest 请求参数}): {@link V20191126.DescribeRechargeRecordsResponse 返回参数} */
   DescribeRechargeRecords(data: V20191126.DescribeRechargeRecordsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeRechargeRecordsResponse>;
-  /** 查询终端用户的注册状态 */
+  /** {@link V20191126.DescribeRegistrationStatus 查询终端用户的注册状态}({@link V20191126.DescribeRegistrationStatusRequest 请求参数}): {@link V20191126.DescribeRegistrationStatusResponse 返回参数} */
   DescribeRegistrationStatus(data: V20191126.DescribeRegistrationStatusRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeRegistrationStatusResponse>;
-  /** 获取设备运行日志 */
+  /** {@link V20191126.DescribeRunLog 获取设备运行日志}({@link V20191126.DescribeRunLogRequest 请求参数}): {@link V20191126.DescribeRunLogResponse 返回参数} */
   DescribeRunLog(data: V20191126.DescribeRunLogRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeRunLogResponse>;
-  /** 查询云存服务 */
+  /** {@link V20191126.DescribeStorageService 查询云存服务}({@link V20191126.DescribeStorageServiceRequest 请求参数}): {@link V20191126.DescribeStorageServiceResponse 返回参数} */
   DescribeStorageService(data: V20191126.DescribeStorageServiceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeStorageServiceResponse>;
-  /** 请求设备直播流地址 */
+  /** {@link V20191126.DescribeStream 请求设备直播流地址}({@link V20191126.DescribeStreamRequest 请求参数}): {@link V20191126.DescribeStreamResponse 返回参数} */
   DescribeStream(data: V20191126.DescribeStreamRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeStreamResponse>;
-  /** 查询设备日志跟踪白名单 */
+  /** {@link V20191126.DescribeTraceIds 查询设备日志跟踪白名单}({@link V20191126.DescribeTraceIdsRequest 请求参数}): {@link V20191126.DescribeTraceIdsResponse 返回参数} */
   DescribeTraceIds(data: V20191126.DescribeTraceIdsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeTraceIdsResponse>;
-  /** 查询指定设备是否在白名单 */
+  /** {@link V20191126.DescribeTraceStatus 查询指定设备是否在白名单}({@link V20191126.DescribeTraceStatusRequest 请求参数}): {@link V20191126.DescribeTraceStatusResponse 返回参数} */
   DescribeTraceStatus(data: V20191126.DescribeTraceStatusRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeTraceStatusResponse>;
-  /** 禁用设备 */
+  /** {@link V20191126.DisableDevice 禁用设备}({@link V20191126.DisableDeviceRequest 请求参数}): {@link V20191126.DisableDeviceResponse 返回参数} */
   DisableDevice(data: V20191126.DisableDeviceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DisableDeviceResponse>;
-  /** 停止设备推流 */
+  /** {@link V20191126.DisableDeviceStream 停止设备推流}({@link V20191126.DisableDeviceStreamRequest 请求参数}): {@link V20191126.DisableDeviceStreamResponse 返回参数} */
   DisableDeviceStream(data: V20191126.DisableDeviceStreamRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DisableDeviceStreamResponse>;
-  /** 禁用固件版本 */
+  /** {@link V20191126.DisableOtaVersion 禁用固件版本}({@link V20191126.DisableOtaVersionRequest 请求参数}): {@link V20191126.DisableOtaVersionResponse 返回参数} */
   DisableOtaVersion(data: V20191126.DisableOtaVersionRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DisableOtaVersionResponse>;
-  /** 修改设备信息 */
+  /** {@link V20191126.ModifyDevice 修改设备信息}({@link V20191126.ModifyDeviceRequest 请求参数}): {@link V20191126.ModifyDeviceResponse 返回参数} */
   ModifyDevice(data: V20191126.ModifyDeviceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.ModifyDeviceResponse>;
-  /** 修改设备物模型行为 */
+  /** {@link V20191126.ModifyDeviceAction 修改设备物模型行为}({@link V20191126.ModifyDeviceActionRequest 请求参数}): {@link V20191126.ModifyDeviceActionResponse 返回参数} */
   ModifyDeviceAction(data: V20191126.ModifyDeviceActionRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.ModifyDeviceActionResponse>;
-  /** 修改设备物模型属性 */
+  /** {@link V20191126.ModifyDeviceProperty 修改设备物模型属性}({@link V20191126.ModifyDevicePropertyRequest 请求参数}): {@link V20191126.ModifyDevicePropertyResponse 返回参数} */
   ModifyDeviceProperty(data: V20191126.ModifyDevicePropertyRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.ModifyDevicePropertyResponse>;
-  /** 编辑产品信息 */
+  /** {@link V20191126.ModifyProduct 编辑产品信息}({@link V20191126.ModifyProductRequest 请求参数}): {@link V20191126.ModifyProductResponse 返回参数} */
   ModifyProduct(data: V20191126.ModifyProductRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.ModifyProductResponse>;
-  /** 编辑版本描述信息 */
+  /** {@link V20191126.ModifyVerContent 编辑版本描述信息}({@link V20191126.ModifyVerContentRequest 请求参数}): {@link V20191126.ModifyVerContentResponse 返回参数} */
   ModifyVerContent(data: V20191126.ModifyVerContentRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.ModifyVerContentResponse>;
-  /** 退订已购买的云存服务 */
+  /** {@link V20191126.RefundStorageService 退订已购买的云存服务}({@link V20191126.RefundStorageServiceRequest 请求参数}): {@link V20191126.RefundStorageServiceResponse 返回参数} */
   RefundStorageService(data: V20191126.RefundStorageServiceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.RefundStorageServiceResponse>;
-  /** 启用设备 */
+  /** {@link V20191126.RunDevice 启用设备}({@link V20191126.RunDeviceRequest 请求参数}): {@link V20191126.RunDeviceResponse 返回参数} */
   RunDevice(data: V20191126.RunDeviceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.RunDeviceResponse>;
-  /** 开启设备推流 */
+  /** {@link V20191126.RunDeviceStream 开启设备推流}({@link V20191126.RunDeviceStreamRequest 请求参数}): {@link V20191126.RunDeviceStreamResponse 返回参数} */
   RunDeviceStream(data: V20191126.RunDeviceStreamRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.RunDeviceStreamResponse>;
-  /** 定义的物模型发布 */
+  /** {@link V20191126.RunIotModel 定义的物模型发布}({@link V20191126.RunIotModelRequest 请求参数}): {@link V20191126.RunIotModelResponse 返回参数} */
   RunIotModel(data: V20191126.RunIotModelRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.RunIotModelResponse>;
-  /** 固件版本正式发布 */
+  /** {@link V20191126.RunOtaVersion 固件版本正式发布}({@link V20191126.RunOtaVersionRequest 请求参数}): {@link V20191126.RunOtaVersionResponse 返回参数} */
   RunOtaVersion(data: V20191126.RunOtaVersionRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.RunOtaVersionResponse>;
-  /** 固件版本测试发布 */
+  /** {@link V20191126.RunTestOtaVersion 固件版本测试发布}({@link V20191126.RunTestOtaVersionRequest 请求参数}): {@link V20191126.RunTestOtaVersionResponse 返回参数} */
   RunTestOtaVersion(data: V20191126.RunTestOtaVersionRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.RunTestOtaVersionResponse>;
-  /** 向设备发送在线消息 */
+  /** {@link V20191126.SendOnlineMsg 向设备发送在线消息}({@link V20191126.SendOnlineMsgRequest 请求参数}): {@link V20191126.SendOnlineMsgResponse 返回参数} */
   SendOnlineMsg(data: V20191126.SendOnlineMsgRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.SendOnlineMsgResponse>;
-  /** 配置产品转发消息队列 */
+  /** {@link V20191126.SetMessageQueue 配置产品转发消息队列}({@link V20191126.SetMessageQueueRequest 请求参数}): {@link V20191126.SetMessageQueueResponse 返回参数} */
   SetMessageQueue(data: V20191126.SetMessageQueueRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.SetMessageQueueResponse>;
-  /** 设备固件升级 */
+  /** {@link V20191126.UpgradeDevice 设备固件升级}({@link V20191126.UpgradeDeviceRequest 请求参数}): {@link V20191126.UpgradeDeviceResponse 返回参数} */
   UpgradeDevice(data: V20191126.UpgradeDeviceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.UpgradeDeviceResponse>;
-  /** 接收上传到控制台的固件版本信息 */
+  /** {@link V20191126.UploadOtaVersion 接收上传到控制台的固件版本信息}({@link V20191126.UploadOtaVersionRequest 请求参数}): {@link V20191126.UploadOtaVersionResponse 返回参数} */
   UploadOtaVersion(data: V20191126.UploadOtaVersionRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.UploadOtaVersionResponse>;
 }
 

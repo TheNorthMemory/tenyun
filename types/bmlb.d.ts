@@ -1824,106 +1824,106 @@ declare interface UploadCertResponse {
   RequestId?: string;
 }
 
-/** [黑石负载均衡](https://cloud.tencent.com/document/product/1027) */
+/** {@link Bmlb 黑石负载均衡} */
 declare interface Bmlb {
   (): Versions;
-  /** 绑定黑石服务器到四层监听器 */
+  /** {@link BindL4Backends 绑定黑石服务器到四层监听器}({@link BindL4BackendsRequest 请求参数}): {@link BindL4BackendsResponse 返回参数} */
   BindL4Backends(data: BindL4BackendsRequest, config?: AxiosRequestConfig): AxiosPromise<BindL4BackendsResponse>;
-  /** 绑定黑石物理服务器或半托管服务器到七层转发路径 */
+  /** {@link BindL7Backends 绑定黑石物理服务器或半托管服务器到七层转发路径}({@link BindL7BackendsRequest 请求参数}): {@link BindL7BackendsResponse 返回参数} */
   BindL7Backends(data: BindL7BackendsRequest, config?: AxiosRequestConfig): AxiosPromise<BindL7BackendsResponse>;
-  /** 绑定黑石服务器七层监听器到流量镜像实例 */
+  /** {@link BindTrafficMirrorListeners 绑定黑石服务器七层监听器到流量镜像实例}({@link BindTrafficMirrorListenersRequest 请求参数}): {@link BindTrafficMirrorListenersResponse 返回参数} */
   BindTrafficMirrorListeners(data: BindTrafficMirrorListenersRequest, config?: AxiosRequestConfig): AxiosPromise<BindTrafficMirrorListenersResponse>;
-  /** 绑定黑石物理服务器成为流量镜像接收机 */
+  /** {@link BindTrafficMirrorReceivers 绑定黑石物理服务器成为流量镜像接收机}({@link BindTrafficMirrorReceiversRequest 请求参数}): {@link BindTrafficMirrorReceiversResponse 返回参数} */
   BindTrafficMirrorReceivers(data: BindTrafficMirrorReceiversRequest, config?: AxiosRequestConfig): AxiosPromise<BindTrafficMirrorReceiversResponse>;
-  /** 创建黑石四层负载均衡监听器 */
+  /** {@link CreateL4Listeners 创建黑石四层负载均衡监听器}({@link CreateL4ListenersRequest 请求参数}): {@link CreateL4ListenersResponse 返回参数} */
   CreateL4Listeners(data: CreateL4ListenersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL4ListenersResponse>;
-  /** 创建黑石负载均衡七层监听器 */
+  /** {@link CreateL7Listeners 创建黑石负载均衡七层监听器}({@link CreateL7ListenersRequest 请求参数}): {@link CreateL7ListenersResponse 返回参数} */
   CreateL7Listeners(data: CreateL7ListenersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL7ListenersResponse>;
-  /** 创建黑石负载均衡七层转发规则 */
+  /** {@link CreateL7Rules 创建黑石负载均衡七层转发规则}({@link CreateL7RulesRequest 请求参数}): {@link CreateL7RulesResponse 返回参数} */
   CreateL7Rules(data: CreateL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL7RulesResponse>;
-  /** 创建黑石负载均衡实例 */
+  /** {@link CreateLoadBalancers 创建黑石负载均衡实例}({@link CreateLoadBalancersRequest 请求参数}): {@link CreateLoadBalancersResponse 返回参数} */
   CreateLoadBalancers(data: CreateLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadBalancersResponse>;
-  /** 创建流量镜像实例 */
+  /** {@link CreateTrafficMirror 创建流量镜像实例}({@link CreateTrafficMirrorRequest 请求参数}): {@link CreateTrafficMirrorResponse 返回参数} */
   CreateTrafficMirror(data: CreateTrafficMirrorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrafficMirrorResponse>;
-  /** 删除黑石负载均衡七层转发域名 */
+  /** {@link DeleteL7Domains 删除黑石负载均衡七层转发域名}({@link DeleteL7DomainsRequest 请求参数}): {@link DeleteL7DomainsResponse 返回参数} */
   DeleteL7Domains(data: DeleteL7DomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL7DomainsResponse>;
-  /** 删除黑石负载均衡七层转发规则 */
+  /** {@link DeleteL7Rules 删除黑石负载均衡七层转发规则}({@link DeleteL7RulesRequest 请求参数}): {@link DeleteL7RulesResponse 返回参数} */
   DeleteL7Rules(data: DeleteL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL7RulesResponse>;
-  /** 删除黑石负载均衡监听器 */
+  /** {@link DeleteListeners 删除黑石负载均衡监听器}({@link DeleteListenersRequest 请求参数}): {@link DeleteListenersResponse 返回参数} */
   DeleteListeners(data: DeleteListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteListenersResponse>;
-  /** 删除用户指定的黑石负载均衡实例 */
+  /** {@link DeleteLoadBalancer 删除用户指定的黑石负载均衡实例}({@link DeleteLoadBalancerRequest 请求参数}): {@link DeleteLoadBalancerResponse 返回参数} */
   DeleteLoadBalancer(data: DeleteLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerResponse>;
-  /** 删除流量镜像实例 */
+  /** {@link DeleteTrafficMirror 删除流量镜像实例}({@link DeleteTrafficMirrorRequest 请求参数}): {@link DeleteTrafficMirrorResponse 返回参数} */
   DeleteTrafficMirror(data: DeleteTrafficMirrorRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrafficMirrorResponse>;
-  /** 获取黑石负载均衡证书详情 */
+  /** {@link DescribeCertDetail 获取黑石负载均衡证书详情}({@link DescribeCertDetailRequest 请求参数}): {@link DescribeCertDetailResponse 返回参数} */
   DescribeCertDetail(data: DescribeCertDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertDetailResponse>;
-  /** 查询黑石物理机和虚机以及托管服务器绑定的黑石负载均衡详情 */
+  /** {@link DescribeDevicesBindInfo 查询黑石物理机和虚机以及托管服务器绑定的黑石负载均衡详情}({@link DescribeDevicesBindInfoRequest 请求参数}): {@link DescribeDevicesBindInfoResponse 返回参数} */
   DescribeDevicesBindInfo(data: DescribeDevicesBindInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesBindInfoResponse>;
-  /** 获取黑石负载均衡四层监听器绑定的主机列表 */
+  /** {@link DescribeL4Backends 获取黑石负载均衡四层监听器绑定的主机列表}({@link DescribeL4BackendsRequest 请求参数}): {@link DescribeL4BackendsResponse 返回参数} */
   DescribeL4Backends(data: DescribeL4BackendsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL4BackendsResponse>;
-  /** 查找绑定了某主机或者指定监听器名称的黑石负载均衡四层监听器 */
+  /** {@link DescribeL4ListenerInfo 查找绑定了某主机或者指定监听器名称的黑石负载均衡四层监听器}({@link DescribeL4ListenerInfoRequest 请求参数}): {@link DescribeL4ListenerInfoResponse 返回参数} */
   DescribeL4ListenerInfo(data: DescribeL4ListenerInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL4ListenerInfoResponse>;
-  /** 获取黑石负载均衡四层监听器 */
+  /** {@link DescribeL4Listeners 获取黑石负载均衡四层监听器}({@link DescribeL4ListenersRequest 请求参数}): {@link DescribeL4ListenersResponse 返回参数} */
   DescribeL4Listeners(data: DescribeL4ListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL4ListenersResponse>;
-  /** 获取黑石负载均衡七层转发路径绑定的主机列表 */
+  /** {@link DescribeL7Backends 获取黑石负载均衡七层转发路径绑定的主机列表}({@link DescribeL7BackendsRequest 请求参数}): {@link DescribeL7BackendsResponse 返回参数} */
   DescribeL7Backends(data: DescribeL7BackendsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL7BackendsResponse>;
-  /** 查找绑定了某主机或者有某转发域名黑石负载均衡七层监听器 */
+  /** {@link DescribeL7ListenerInfo 查找绑定了某主机或者有某转发域名黑石负载均衡七层监听器}({@link DescribeL7ListenerInfoRequest 请求参数}): {@link DescribeL7ListenerInfoResponse 返回参数} */
   DescribeL7ListenerInfo(data: DescribeL7ListenerInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL7ListenerInfoResponse>;
-  /** 获取黑石负载均衡七层监听器列表信息 */
+  /** {@link DescribeL7Listeners 获取黑石负载均衡七层监听器列表信息}({@link DescribeL7ListenersRequest 请求参数}): {@link DescribeL7ListenersResponse 返回参数} */
   DescribeL7Listeners(data: DescribeL7ListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL7ListenersResponse>;
-  /** 获取指定VPC下的7层监听器 */
+  /** {@link DescribeL7ListenersEx 获取指定VPC下的7层监听器}({@link DescribeL7ListenersExRequest 请求参数}): {@link DescribeL7ListenersExResponse 返回参数} */
   DescribeL7ListenersEx(data: DescribeL7ListenersExRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL7ListenersExResponse>;
-  /** 获取黑石负载均衡七层转发规则 */
+  /** {@link DescribeL7Rules 获取黑石负载均衡七层转发规则}({@link DescribeL7RulesRequest 请求参数}): {@link DescribeL7RulesResponse 返回参数} */
   DescribeL7Rules(data: DescribeL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL7RulesResponse>;
-  /** 获取黑石负载均衡端口相关信息 */
+  /** {@link DescribeLoadBalancerPortInfo 获取黑石负载均衡端口相关信息}({@link DescribeLoadBalancerPortInfoRequest 请求参数}): {@link DescribeLoadBalancerPortInfoResponse 返回参数} */
   DescribeLoadBalancerPortInfo(data: DescribeLoadBalancerPortInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerPortInfoResponse>;
-  /** 查询负载均衡实例异步任务的执行情况 */
+  /** {@link DescribeLoadBalancerTaskResult 查询负载均衡实例异步任务的执行情况}({@link DescribeLoadBalancerTaskResultRequest 请求参数}): {@link DescribeLoadBalancerTaskResultResponse 返回参数} */
   DescribeLoadBalancerTaskResult(data: DescribeLoadBalancerTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerTaskResultResponse>;
-  /** 获取黑石负载均衡实例列表 */
+  /** {@link DescribeLoadBalancers 获取黑石负载均衡实例列表}({@link DescribeLoadBalancersRequest 请求参数}): {@link DescribeLoadBalancersResponse 返回参数} */
   DescribeLoadBalancers(data?: DescribeLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersResponse>;
-  /** 获取流量镜像的监听器列表信息 */
+  /** {@link DescribeTrafficMirrorListeners 获取流量镜像的监听器列表信息}({@link DescribeTrafficMirrorListenersRequest 请求参数}): {@link DescribeTrafficMirrorListenersResponse 返回参数} */
   DescribeTrafficMirrorListeners(data: DescribeTrafficMirrorListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficMirrorListenersResponse>;
-  /** 获取流量镜像接收机健康状态 */
+  /** {@link DescribeTrafficMirrorReceiverHealthStatus 获取流量镜像接收机健康状态}({@link DescribeTrafficMirrorReceiverHealthStatusRequest 请求参数}): {@link DescribeTrafficMirrorReceiverHealthStatusResponse 返回参数} */
   DescribeTrafficMirrorReceiverHealthStatus(data: DescribeTrafficMirrorReceiverHealthStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficMirrorReceiverHealthStatusResponse>;
-  /** 获取指定流量镜像实例的接收机信息 */
+  /** {@link DescribeTrafficMirrorReceivers 获取指定流量镜像实例的接收机信息}({@link DescribeTrafficMirrorReceiversRequest 请求参数}): {@link DescribeTrafficMirrorReceiversResponse 返回参数} */
   DescribeTrafficMirrorReceivers(data: DescribeTrafficMirrorReceiversRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficMirrorReceiversResponse>;
-  /** 获取流量镜像实例的列表信息 */
+  /** {@link DescribeTrafficMirrors 获取流量镜像实例的列表信息}({@link DescribeTrafficMirrorsRequest 请求参数}): {@link DescribeTrafficMirrorsResponse 返回参数} */
   DescribeTrafficMirrors(data?: DescribeTrafficMirrorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficMirrorsResponse>;
-  /** 修改黑石负载均衡四层监听器后端实例端口 */
+  /** {@link ModifyL4BackendPort 修改黑石负载均衡四层监听器后端实例端口}({@link ModifyL4BackendPortRequest 请求参数}): {@link ModifyL4BackendPortResponse 返回参数} */
   ModifyL4BackendPort(data: ModifyL4BackendPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4BackendPortResponse>;
-  /** 修改黑石负载均衡四层监听器后端探测端口 */
+  /** {@link ModifyL4BackendProbePort 修改黑石负载均衡四层监听器后端探测端口}({@link ModifyL4BackendProbePortRequest 请求参数}): {@link ModifyL4BackendProbePortResponse 返回参数} */
   ModifyL4BackendProbePort(data: ModifyL4BackendProbePortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4BackendProbePortResponse>;
-  /** 修改黑石负载均衡四层监听器后端实例权重 */
+  /** {@link ModifyL4BackendWeight 修改黑石负载均衡四层监听器后端实例权重}({@link ModifyL4BackendWeightRequest 请求参数}): {@link ModifyL4BackendWeightResponse 返回参数} */
   ModifyL4BackendWeight(data: ModifyL4BackendWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4BackendWeightResponse>;
-  /** 修改黑石负载均衡四层监听器 */
+  /** {@link ModifyL4Listener 修改黑石负载均衡四层监听器}({@link ModifyL4ListenerRequest 请求参数}): {@link ModifyL4ListenerResponse 返回参数} */
   ModifyL4Listener(data: ModifyL4ListenerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4ListenerResponse>;
-  /** 修改黑石负载均衡七层转发路径后端实例端口 */
+  /** {@link ModifyL7BackendPort 修改黑石负载均衡七层转发路径后端实例端口}({@link ModifyL7BackendPortRequest 请求参数}): {@link ModifyL7BackendPortResponse 返回参数} */
   ModifyL7BackendPort(data: ModifyL7BackendPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL7BackendPortResponse>;
-  /** 修改黑石负载均衡七层转发路径后端实例权重 */
+  /** {@link ModifyL7BackendWeight 修改黑石负载均衡七层转发路径后端实例权重}({@link ModifyL7BackendWeightRequest 请求参数}): {@link ModifyL7BackendWeightResponse 返回参数} */
   ModifyL7BackendWeight(data: ModifyL7BackendWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL7BackendWeightResponse>;
-  /** 修改黑石负载均衡七层监听器 */
+  /** {@link ModifyL7Listener 修改黑石负载均衡七层监听器}({@link ModifyL7ListenerRequest 请求参数}): {@link ModifyL7ListenerResponse 返回参数} */
   ModifyL7Listener(data: ModifyL7ListenerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL7ListenerResponse>;
-  /** 修改黑石负载均衡七层转发路径 */
+  /** {@link ModifyL7Locations 修改黑石负载均衡七层转发路径}({@link ModifyL7LocationsRequest 请求参数}): {@link ModifyL7LocationsResponse 返回参数} */
   ModifyL7Locations(data: ModifyL7LocationsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL7LocationsResponse>;
-  /** 修改黑石负载均衡实例的基本配置信息 */
+  /** {@link ModifyLoadBalancer 修改黑石负载均衡实例的基本配置信息}({@link ModifyLoadBalancerRequest 请求参数}): {@link ModifyLoadBalancerResponse 返回参数} */
   ModifyLoadBalancer(data: ModifyLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerResponse>;
-  /** 更改黑石负载均衡的计费方式 */
+  /** {@link ModifyLoadBalancerChargeMode 更改黑石负载均衡的计费方式}({@link ModifyLoadBalancerChargeModeRequest 请求参数}): {@link ModifyLoadBalancerChargeModeResponse 返回参数} */
   ModifyLoadBalancerChargeMode(data: ModifyLoadBalancerChargeModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerChargeModeResponse>;
-  /** 更新黑石负载均衡证书 */
+  /** {@link ReplaceCert 更新黑石负载均衡证书}({@link ReplaceCertRequest 请求参数}): {@link ReplaceCertResponse 返回参数} */
   ReplaceCert(data: ReplaceCertRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceCertResponse>;
-  /** 设置流量镜像的别名 */
+  /** {@link SetTrafficMirrorAlias 设置流量镜像的别名}({@link SetTrafficMirrorAliasRequest 请求参数}): {@link SetTrafficMirrorAliasResponse 返回参数} */
   SetTrafficMirrorAlias(data: SetTrafficMirrorAliasRequest, config?: AxiosRequestConfig): AxiosPromise<SetTrafficMirrorAliasResponse>;
-  /** 设置流量镜像的健康检查参数 */
+  /** {@link SetTrafficMirrorHealthSwitch 设置流量镜像的健康检查参数}({@link SetTrafficMirrorHealthSwitchRequest 请求参数}): {@link SetTrafficMirrorHealthSwitchResponse 返回参数} */
   SetTrafficMirrorHealthSwitch(data: SetTrafficMirrorHealthSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<SetTrafficMirrorHealthSwitchResponse>;
-  /** 解绑黑石负载均衡四层监听器物理服务器 */
+  /** {@link UnbindL4Backends 解绑黑石负载均衡四层监听器物理服务器}({@link UnbindL4BackendsRequest 请求参数}): {@link UnbindL4BackendsResponse 返回参数} */
   UnbindL4Backends(data: UnbindL4BackendsRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindL4BackendsResponse>;
-  /** 解绑黑石物理服务器或者托管服务器到七层转发路径 */
+  /** {@link UnbindL7Backends 解绑黑石物理服务器或者托管服务器到七层转发路径}({@link UnbindL7BackendsRequest 请求参数}): {@link UnbindL7BackendsResponse 返回参数} */
   UnbindL7Backends(data: UnbindL7BackendsRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindL7BackendsResponse>;
-  /** 解绑流量镜像监听器 */
+  /** {@link UnbindTrafficMirrorListeners 解绑流量镜像监听器}({@link UnbindTrafficMirrorListenersRequest 请求参数}): {@link UnbindTrafficMirrorListenersResponse 返回参数} */
   UnbindTrafficMirrorListeners(data: UnbindTrafficMirrorListenersRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindTrafficMirrorListenersResponse>;
-  /** 解绑流量镜像接收机 */
+  /** {@link UnbindTrafficMirrorReceivers 解绑流量镜像接收机}({@link UnbindTrafficMirrorReceiversRequest 请求参数}): {@link UnbindTrafficMirrorReceiversResponse 返回参数} */
   UnbindTrafficMirrorReceivers(data: UnbindTrafficMirrorReceiversRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindTrafficMirrorReceiversResponse>;
-  /** 创建黑石负载均衡证书 */
+  /** {@link UploadCert 创建黑石负载均衡证书}({@link UploadCertRequest 请求参数}): {@link UploadCertResponse 返回参数} */
   UploadCert(data: UploadCertRequest, config?: AxiosRequestConfig): AxiosPromise<UploadCertResponse>;
 }
 

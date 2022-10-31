@@ -680,40 +680,40 @@ declare interface UpdateDomainConfigResponse {
   RequestId?: string;
 }
 
-/** [全站加速网络](https://cloud.tencent.com/document/product/570) */
+/** {@link Ecdn 全站加速网络} */
 declare interface Ecdn {
   (): Versions;
-  /** 新增加速域名 */
+  /** {@link AddEcdnDomain 新增加速域名}({@link AddEcdnDomainRequest 请求参数}): {@link AddEcdnDomainResponse 返回参数} */
   AddEcdnDomain(data: AddEcdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<AddEcdnDomainResponse>;
-  /** 生成解析记录 */
+  /** {@link CreateVerifyRecord 生成解析记录}({@link CreateVerifyRecordRequest 请求参数}): {@link CreateVerifyRecordResponse 返回参数} */
   CreateVerifyRecord(data: CreateVerifyRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVerifyRecordResponse>;
-  /** 删除加速域名 */
+  /** {@link DeleteEcdnDomain 删除加速域名}({@link DeleteEcdnDomainRequest 请求参数}): {@link DeleteEcdnDomainResponse 返回参数} */
   DeleteEcdnDomain(data: DeleteEcdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEcdnDomainResponse>;
-  /** 查询域名基本信息 */
+  /** {@link DescribeDomains 查询域名基本信息}({@link DescribeDomainsRequest 请求参数}): {@link DescribeDomainsResponse 返回参数} */
   DescribeDomains(data?: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
-  /** 查询域名详细配置 */
+  /** {@link DescribeDomainsConfig 查询域名详细配置}({@link DescribeDomainsConfigRequest 请求参数}): {@link DescribeDomainsConfigResponse 返回参数} */
   DescribeDomainsConfig(data?: DescribeDomainsConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsConfigResponse>;
-  /** 查询域名日志下载链接 */
+  /** {@link DescribeEcdnDomainLogs 查询域名日志下载链接}({@link DescribeEcdnDomainLogsRequest 请求参数}): {@link DescribeEcdnDomainLogsResponse 返回参数} */
   DescribeEcdnDomainLogs(data: DescribeEcdnDomainLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEcdnDomainLogsResponse>;
-  /** 域名统计指标查询 */
+  /** {@link DescribeEcdnDomainStatistics 域名统计指标查询}({@link DescribeEcdnDomainStatisticsRequest 请求参数}): {@link DescribeEcdnDomainStatisticsResponse 返回参数} */
   DescribeEcdnDomainStatistics(data: DescribeEcdnDomainStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEcdnDomainStatisticsResponse>;
-  /** 访问数据查询 */
+  /** {@link DescribeEcdnStatistics 访问数据查询}({@link DescribeEcdnStatisticsRequest 请求参数}): {@link DescribeEcdnStatisticsResponse 返回参数} */
   DescribeEcdnStatistics(data: DescribeEcdnStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEcdnStatisticsResponse>;
-  /** 查询平台服务节点IP */
+  /** {@link DescribeIpStatus 查询平台服务节点IP}({@link DescribeIpStatusRequest 请求参数}): {@link DescribeIpStatusResponse 返回参数} */
   DescribeIpStatus(data: DescribeIpStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpStatusResponse>;
-  /** 查询刷新用量配额 */
+  /** {@link DescribePurgeQuota 查询刷新用量配额}({@link DescribePurgeQuotaRequest 请求参数}): {@link DescribePurgeQuotaResponse 返回参数} */
   DescribePurgeQuota(data?: DescribePurgeQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeQuotaResponse>;
-  /** 刷新历史查询 */
+  /** {@link DescribePurgeTasks 刷新历史查询}({@link DescribePurgeTasksRequest 请求参数}): {@link DescribePurgeTasksResponse 返回参数} */
   DescribePurgeTasks(data?: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;
-  /** 刷新目录 */
+  /** {@link PurgePathCache 刷新目录}({@link PurgePathCacheRequest 请求参数}): {@link PurgePathCacheResponse 返回参数} */
   PurgePathCache(data: PurgePathCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PurgePathCacheResponse>;
-  /** 刷新 URL */
+  /** {@link PurgeUrlsCache 刷新 URL}({@link PurgeUrlsCacheRequest 请求参数}): {@link PurgeUrlsCacheResponse 返回参数} */
   PurgeUrlsCache(data: PurgeUrlsCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PurgeUrlsCacheResponse>;
-  /** 启用加速域名 */
+  /** {@link StartEcdnDomain 启用加速域名}({@link StartEcdnDomainRequest 请求参数}): {@link StartEcdnDomainResponse 返回参数} */
   StartEcdnDomain(data: StartEcdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StartEcdnDomainResponse>;
-  /** 停用加速域名 */
+  /** {@link StopEcdnDomain 停用加速域名}({@link StopEcdnDomainRequest 请求参数}): {@link StopEcdnDomainResponse 返回参数} */
   StopEcdnDomain(data: StopEcdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StopEcdnDomainResponse>;
-  /** 更新域名配置 */
+  /** {@link UpdateDomainConfig 更新域名配置}({@link UpdateDomainConfigRequest 请求参数}): {@link UpdateDomainConfigResponse 返回参数} */
   UpdateDomainConfig(data: UpdateDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDomainConfigResponse>;
 }
 

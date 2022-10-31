@@ -1134,92 +1134,92 @@ declare interface UpdateOrgNodeResponse {
   RequestId?: string;
 }
 
-/** [数字身份管控平台（员工版）](https://cloud.tencent.com/document/product/1442) */
+/** {@link Eiam 数字身份管控平台（员工版）} */
 declare interface Eiam {
   (): Versions;
-  /** 账号组添加账号 */
+  /** {@link AddAccountToAccountGroup 账号组添加账号}({@link AddAccountToAccountGroupRequest 请求参数}): {@link AddAccountToAccountGroupResponse 返回参数} */
   AddAccountToAccountGroup(data: AddAccountToAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddAccountToAccountGroupResponse>;
-  /** 加入用户到用户组 */
+  /** {@link AddUserToUserGroup 加入用户到用户组}({@link AddUserToUserGroupRequest 请求参数}): {@link AddUserToUserGroupResponse 返回参数} */
   AddUserToUserGroup(data: AddUserToUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserToUserGroupResponse>;
-  /** 创建账号组 */
+  /** {@link CreateAccountGroup 创建账号组}({@link CreateAccountGroupRequest 请求参数}): {@link CreateAccountGroupResponse 返回参数} */
   CreateAccountGroup(data: CreateAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountGroupResponse>;
-  /** 创建应用账号 */
+  /** {@link CreateAppAccount 创建应用账号}({@link CreateAppAccountRequest 请求参数}): {@link CreateAppAccountResponse 返回参数} */
   CreateAppAccount(data: CreateAppAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppAccountResponse>;
-  /** 新建机构节点 */
+  /** {@link CreateOrgNode 新建机构节点}({@link CreateOrgNodeRequest 请求参数}): {@link CreateOrgNodeResponse 返回参数} */
   CreateOrgNode(data: CreateOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrgNodeResponse>;
-  /** 新建用户 */
+  /** {@link CreateUser 新建用户}({@link CreateUserRequest 请求参数}): {@link CreateUserResponse 返回参数} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
-  /** 新建用户组 */
+  /** {@link CreateUserGroup 新建用户组}({@link CreateUserGroupRequest 请求参数}): {@link CreateUserGroupResponse 返回参数} */
   CreateUserGroup(data: CreateUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserGroupResponse>;
-  /** 删除账号组 */
+  /** {@link DeleteAccountGroup 删除账号组}({@link DeleteAccountGroupRequest 请求参数}): {@link DeleteAccountGroupResponse 返回参数} */
   DeleteAccountGroup(data: DeleteAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountGroupResponse>;
-  /** 删除应用账号 */
+  /** {@link DeleteAppAccount 删除应用账号}({@link DeleteAppAccountRequest 请求参数}): {@link DeleteAppAccountResponse 返回参数} */
   DeleteAppAccount(data: DeleteAppAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppAccountResponse>;
-  /** 删除机构节点 */
+  /** {@link DeleteOrgNode 删除机构节点}({@link DeleteOrgNodeRequest 请求参数}): {@link DeleteOrgNodeResponse 返回参数} */
   DeleteOrgNode(data: DeleteOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrgNodeResponse>;
-  /** 删除用户 */
+  /** {@link DeleteUser 删除用户}({@link DeleteUserRequest 请求参数}): {@link DeleteUserResponse 返回参数} */
   DeleteUser(data?: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
-  /** 删除用户组 */
+  /** {@link DeleteUserGroup 删除用户组}({@link DeleteUserGroupRequest 请求参数}): {@link DeleteUserGroupResponse 返回参数} */
   DeleteUserGroup(data: DeleteUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserGroupResponse>;
-  /** 批量删除用户 */
+  /** {@link DeleteUsers 批量删除用户}({@link DeleteUsersRequest 请求参数}): {@link DeleteUsersResponse 返回参数} */
   DeleteUsers(data?: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
-  /** 查询账号组列表 */
+  /** {@link DescribeAccountGroup 查询账号组列表}({@link DescribeAccountGroupRequest 请求参数}): {@link DescribeAccountGroupResponse 返回参数} */
   DescribeAccountGroup(data: DescribeAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountGroupResponse>;
-  /** 查询应用账号列表 */
+  /** {@link DescribeAppAccount 查询应用账号列表}({@link DescribeAppAccountRequest 请求参数}): {@link DescribeAppAccountResponse 返回参数} */
   DescribeAppAccount(data: DescribeAppAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppAccountResponse>;
-  /** 获取应用信息 */
+  /** {@link DescribeApplication 获取应用信息}({@link DescribeApplicationRequest 请求参数}): {@link DescribeApplicationResponse 返回参数} */
   DescribeApplication(data?: DescribeApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationResponse>;
-  /** 读取机构节点信息 */
+  /** {@link DescribeOrgNode 读取机构节点信息}({@link DescribeOrgNodeRequest 请求参数}): {@link DescribeOrgNodeResponse 返回参数} */
   DescribeOrgNode(data?: DescribeOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrgNodeResponse>;
-  /** 查询指定机构下的资源授权列表 */
+  /** {@link DescribeOrgResourcesAuthorization 查询指定机构下的资源授权列表}({@link DescribeOrgResourcesAuthorizationRequest 请求参数}): {@link DescribeOrgResourcesAuthorizationResponse 返回参数} */
   DescribeOrgResourcesAuthorization(data: DescribeOrgResourcesAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrgResourcesAuthorizationResponse>;
-  /** 获取JWT公钥信息 */
+  /** {@link DescribePublicKey 获取JWT公钥信息}({@link DescribePublicKeyRequest 请求参数}): {@link DescribePublicKeyResponse 返回参数} */
   DescribePublicKey(data: DescribePublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicKeyResponse>;
-  /** 获取用户组信息 */
+  /** {@link DescribeUserGroup 获取用户组信息}({@link DescribeUserGroupRequest 请求参数}): {@link DescribeUserGroupResponse 返回参数} */
   DescribeUserGroup(data: DescribeUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupResponse>;
-  /** 查询指定用户组下的资源授权列表 */
+  /** {@link DescribeUserGroupResourcesAuthorization 查询指定用户组下的资源授权列表}({@link DescribeUserGroupResourcesAuthorizationRequest 请求参数}): {@link DescribeUserGroupResourcesAuthorizationResponse 返回参数} */
   DescribeUserGroupResourcesAuthorization(data: DescribeUserGroupResourcesAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupResourcesAuthorizationResponse>;
-  /** 获取用户信息 */
+  /** {@link DescribeUserInfo 获取用户信息}({@link DescribeUserInfoRequest 请求参数}): {@link DescribeUserInfoResponse 返回参数} */
   DescribeUserInfo(data?: DescribeUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInfoResponse>;
-  /** 查询指定用户下的资源授权列表 */
+  /** {@link DescribeUserResourcesAuthorization 查询指定用户下的资源授权列表}({@link DescribeUserResourcesAuthorizationRequest 请求参数}): {@link DescribeUserResourcesAuthorizationResponse 返回参数} */
   DescribeUserResourcesAuthorization(data: DescribeUserResourcesAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResourcesAuthorizationResponse>;
-  /** 获取用户的第三方账号绑定信息 */
+  /** {@link DescribeUserThirdPartyAccountInfo 获取用户的第三方账号绑定信息}({@link DescribeUserThirdPartyAccountInfoRequest 请求参数}): {@link DescribeUserThirdPartyAccountInfoResponse 返回参数} */
   DescribeUserThirdPartyAccountInfo(data?: DescribeUserThirdPartyAccountInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserThirdPartyAccountInfoResponse>;
-  /** 获取账号组中的账号列表 */
+  /** {@link ListAccountInAccountGroup 获取账号组中的账号列表}({@link ListAccountInAccountGroupRequest 请求参数}): {@link ListAccountInAccountGroupResponse 返回参数} */
   ListAccountInAccountGroup(data: ListAccountInAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ListAccountInAccountGroupResponse>;
-  /** 应用授权关系列表信息 */
+  /** {@link ListApplicationAuthorizations 应用授权关系列表信息}({@link ListApplicationAuthorizationsRequest 请求参数}): {@link ListApplicationAuthorizationsResponse 返回参数} */
   ListApplicationAuthorizations(data: ListApplicationAuthorizationsRequest, config?: AxiosRequestConfig): AxiosPromise<ListApplicationAuthorizationsResponse>;
-  /** 获取应用列表信息 */
+  /** {@link ListApplications 获取应用列表信息}({@link ListApplicationsRequest 请求参数}): {@link ListApplicationsResponse 返回参数} */
   ListApplications(data?: ListApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<ListApplicationsResponse>;
-  /** 获取机构节点被授权访问的应用列表 */
+  /** {@link ListAuthorizedApplicationsToOrgNode 获取机构节点被授权访问的应用列表}({@link ListAuthorizedApplicationsToOrgNodeRequest 请求参数}): {@link ListAuthorizedApplicationsToOrgNodeResponse 返回参数} */
   ListAuthorizedApplicationsToOrgNode(data: ListAuthorizedApplicationsToOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ListAuthorizedApplicationsToOrgNodeResponse>;
-  /** 获取用户被授权访问的应用列表 */
+  /** {@link ListAuthorizedApplicationsToUser 获取用户被授权访问的应用列表}({@link ListAuthorizedApplicationsToUserRequest 请求参数}): {@link ListAuthorizedApplicationsToUserResponse 返回参数} */
   ListAuthorizedApplicationsToUser(data: ListAuthorizedApplicationsToUserRequest, config?: AxiosRequestConfig): AxiosPromise<ListAuthorizedApplicationsToUserResponse>;
-  /** 获取用户组被授权访问的应用列表 */
+  /** {@link ListAuthorizedApplicationsToUserGroup 获取用户组被授权访问的应用列表}({@link ListAuthorizedApplicationsToUserGroupRequest 请求参数}): {@link ListAuthorizedApplicationsToUserGroupResponse 返回参数} */
   ListAuthorizedApplicationsToUserGroup(data: ListAuthorizedApplicationsToUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ListAuthorizedApplicationsToUserGroupResponse>;
-  /** 获取用户组列表信息 */
+  /** {@link ListUserGroups 获取用户组列表信息}({@link ListUserGroupsRequest 请求参数}): {@link ListUserGroupsResponse 返回参数} */
   ListUserGroups(data?: ListUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListUserGroupsResponse>;
-  /** 获取用户所在的用户组列表 */
+  /** {@link ListUserGroupsOfUser 获取用户所在的用户组列表}({@link ListUserGroupsOfUserRequest 请求参数}): {@link ListUserGroupsOfUserResponse 返回参数} */
   ListUserGroupsOfUser(data: ListUserGroupsOfUserRequest, config?: AxiosRequestConfig): AxiosPromise<ListUserGroupsOfUserResponse>;
-  /** 获取用户列表信息 */
+  /** {@link ListUsers 获取用户列表信息}({@link ListUsersRequest 请求参数}): {@link ListUsersResponse 返回参数} */
   ListUsers(data?: ListUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsersResponse>;
-  /** 读取节点下用户 */
+  /** {@link ListUsersInOrgNode 读取节点下用户}({@link ListUsersInOrgNodeRequest 请求参数}): {@link ListUsersInOrgNodeResponse 返回参数} */
   ListUsersInOrgNode(data?: ListUsersInOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsersInOrgNodeResponse>;
-  /** 获取用户组中的用户列表 */
+  /** {@link ListUsersInUserGroup 获取用户组中的用户列表}({@link ListUsersInUserGroupRequest 请求参数}): {@link ListUsersInUserGroupResponse 返回参数} */
   ListUsersInUserGroup(data: ListUsersInUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsersInUserGroupResponse>;
-  /** 修改账号组 */
+  /** {@link ModifyAccountGroup 修改账号组}({@link ModifyAccountGroupRequest 请求参数}): {@link ModifyAccountGroupResponse 返回参数} */
   ModifyAccountGroup(data: ModifyAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountGroupResponse>;
-  /** 修改应用账号 */
+  /** {@link ModifyAppAccount 修改应用账号}({@link ModifyAppAccountRequest 请求参数}): {@link ModifyAppAccountResponse 返回参数} */
   ModifyAppAccount(data: ModifyAppAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppAccountResponse>;
-  /** 更新应用 */
+  /** {@link ModifyApplication 更新应用}({@link ModifyApplicationRequest 请求参数}): {@link ModifyApplicationResponse 返回参数} */
   ModifyApplication(data: ModifyApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationResponse>;
-  /** 修改用户 */
+  /** {@link ModifyUserInfo 修改用户}({@link ModifyUserInfoRequest 请求参数}): {@link ModifyUserInfoResponse 返回参数} */
   ModifyUserInfo(data?: ModifyUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserInfoResponse>;
-  /** 从账号组中移除账号 */
+  /** {@link RemoveAccountFromAccountGroup 从账号组中移除账号}({@link RemoveAccountFromAccountGroupRequest 请求参数}): {@link RemoveAccountFromAccountGroupResponse 返回参数} */
   RemoveAccountFromAccountGroup(data: RemoveAccountFromAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveAccountFromAccountGroupResponse>;
-  /** 从用户组中移除用户 */
+  /** {@link RemoveUserFromUserGroup 从用户组中移除用户}({@link RemoveUserFromUserGroupRequest 请求参数}): {@link RemoveUserFromUserGroupResponse 返回参数} */
   RemoveUserFromUserGroup(data: RemoveUserFromUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserFromUserGroupResponse>;
-  /** 更新机构节点 */
+  /** {@link UpdateOrgNode 更新机构节点}({@link UpdateOrgNodeRequest 请求参数}): {@link UpdateOrgNodeResponse 返回参数} */
   UpdateOrgNode(data: UpdateOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrgNodeResponse>;
 }
 

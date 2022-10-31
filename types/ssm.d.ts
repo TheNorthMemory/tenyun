@@ -538,56 +538,56 @@ declare interface UpdateSecretResponse {
   RequestId?: string;
 }
 
-/** [凭据管理系统](https://cloud.tencent.com/document/product/1140) */
+/** {@link Ssm 凭据管理系统} */
 declare interface Ssm {
   (): Versions;
-  /** 创建云产品凭据 */
+  /** {@link CreateProductSecret 创建云产品凭据}({@link CreateProductSecretRequest 请求参数}): {@link CreateProductSecretResponse 返回参数} */
   CreateProductSecret(data: CreateProductSecretRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProductSecretResponse>;
-  /** 创建SSH密钥对凭据 */
+  /** {@link CreateSSHKeyPairSecret 创建SSH密钥对凭据}({@link CreateSSHKeyPairSecretRequest 请求参数}): {@link CreateSSHKeyPairSecretResponse 返回参数} */
   CreateSSHKeyPairSecret(data: CreateSSHKeyPairSecretRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSSHKeyPairSecretResponse>;
-  /** 创建凭据 */
+  /** {@link CreateSecret 创建凭据}({@link CreateSecretRequest 请求参数}): {@link CreateSecretResponse 返回参数} */
   CreateSecret(data: CreateSecretRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecretResponse>;
-  /** 删除凭据信息 */
+  /** {@link DeleteSecret 删除凭据信息}({@link DeleteSecretRequest 请求参数}): {@link DeleteSecretResponse 返回参数} */
   DeleteSecret(data: DeleteSecretRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecretResponse>;
-  /** 删除指定版本的凭据 */
+  /** {@link DeleteSecretVersion 删除指定版本的凭据}({@link DeleteSecretVersionRequest 请求参数}): {@link DeleteSecretVersionResponse 返回参数} */
   DeleteSecretVersion(data: DeleteSecretVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecretVersionResponse>;
-  /** 查询异步任务的执行结果 */
+  /** {@link DescribeAsyncRequestInfo 查询异步任务的执行结果}({@link DescribeAsyncRequestInfoRequest 请求参数}): {@link DescribeAsyncRequestInfoResponse 返回参数} */
   DescribeAsyncRequestInfo(data: DescribeAsyncRequestInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsyncRequestInfoResponse>;
-  /** 查询凭据轮转详情 */
+  /** {@link DescribeRotationDetail 查询凭据轮转详情}({@link DescribeRotationDetailRequest 请求参数}): {@link DescribeRotationDetailResponse 返回参数} */
   DescribeRotationDetail(data: DescribeRotationDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRotationDetailResponse>;
-  /** 查询凭据轮转历史版本 */
+  /** {@link DescribeRotationHistory 查询凭据轮转历史版本}({@link DescribeRotationHistoryRequest 请求参数}): {@link DescribeRotationHistoryResponse 返回参数} */
   DescribeRotationHistory(data: DescribeRotationHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRotationHistoryResponse>;
-  /** 获取凭据详细信息 */
+  /** {@link DescribeSecret 获取凭据详细信息}({@link DescribeSecretRequest 请求参数}): {@link DescribeSecretResponse 返回参数} */
   DescribeSecret(data: DescribeSecretRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecretResponse>;
-  /** 查询支持的云产品列表 */
+  /** {@link DescribeSupportedProducts 查询支持的云产品列表}({@link DescribeSupportedProductsRequest 请求参数}): {@link DescribeSupportedProductsResponse 返回参数} */
   DescribeSupportedProducts(data?: DescribeSupportedProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportedProductsResponse>;
-  /** 停用凭据 */
+  /** {@link DisableSecret 停用凭据}({@link DisableSecretRequest 请求参数}): {@link DisableSecretResponse 返回参数} */
   DisableSecret(data: DisableSecretRequest, config?: AxiosRequestConfig): AxiosPromise<DisableSecretResponse>;
-  /** 启用凭据 */
+  /** {@link EnableSecret 启用凭据}({@link EnableSecretRequest 请求参数}): {@link EnableSecretResponse 返回参数} */
   EnableSecret(data: EnableSecretRequest, config?: AxiosRequestConfig): AxiosPromise<EnableSecretResponse>;
-  /** 获取控制台展示region列表 */
+  /** {@link GetRegions 获取控制台展示region列表}({@link GetRegionsRequest 请求参数}): {@link GetRegionsResponse 返回参数} */
   GetRegions(data?: GetRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRegionsResponse>;
-  /** 获取SSH密钥对凭据明文 */
+  /** {@link GetSSHKeyPairValue 获取SSH密钥对凭据明文}({@link GetSSHKeyPairValueRequest 请求参数}): {@link GetSSHKeyPairValueResponse 返回参数} */
   GetSSHKeyPairValue(data?: GetSSHKeyPairValueRequest, config?: AxiosRequestConfig): AxiosPromise<GetSSHKeyPairValueResponse>;
-  /** 获取凭据明文 */
+  /** {@link GetSecretValue 获取凭据明文}({@link GetSecretValueRequest 请求参数}): {@link GetSecretValueResponse 返回参数} */
   GetSecretValue(data: GetSecretValueRequest, config?: AxiosRequestConfig): AxiosPromise<GetSecretValueResponse>;
-  /** 获取用户服务开通状态 */
+  /** {@link GetServiceStatus 获取用户服务开通状态}({@link GetServiceStatusRequest 请求参数}): {@link GetServiceStatusResponse 返回参数} */
   GetServiceStatus(data?: GetServiceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetServiceStatusResponse>;
-  /** 获取指定凭据下的版本列表信息。 */
+  /** {@link ListSecretVersionIds 获取指定凭据下的版本列表信息。}({@link ListSecretVersionIdsRequest 请求参数}): {@link ListSecretVersionIdsResponse 返回参数} */
   ListSecretVersionIds(data: ListSecretVersionIdsRequest, config?: AxiosRequestConfig): AxiosPromise<ListSecretVersionIdsResponse>;
-  /** 获取凭据的详细信息列表 */
+  /** {@link ListSecrets 获取凭据的详细信息列表}({@link ListSecretsRequest 请求参数}): {@link ListSecretsResponse 返回参数} */
   ListSecrets(data?: ListSecretsRequest, config?: AxiosRequestConfig): AxiosPromise<ListSecretsResponse>;
-  /** 增加新版本凭据 */
+  /** {@link PutSecretValue 增加新版本凭据}({@link PutSecretValueRequest 请求参数}): {@link PutSecretValueResponse 返回参数} */
   PutSecretValue(data: PutSecretValueRequest, config?: AxiosRequestConfig): AxiosPromise<PutSecretValueResponse>;
-  /** 恢复计划删除中的凭据 */
+  /** {@link RestoreSecret 恢复计划删除中的凭据}({@link RestoreSecretRequest 请求参数}): {@link RestoreSecretResponse 返回参数} */
   RestoreSecret(data: RestoreSecretRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreSecretResponse>;
-  /** 轮转云产品凭据 */
+  /** {@link RotateProductSecret 轮转云产品凭据}({@link RotateProductSecretRequest 请求参数}): {@link RotateProductSecretResponse 返回参数} */
   RotateProductSecret(data: RotateProductSecretRequest, config?: AxiosRequestConfig): AxiosPromise<RotateProductSecretResponse>;
-  /** 更新凭据描述信息 */
+  /** {@link UpdateDescription 更新凭据描述信息}({@link UpdateDescriptionRequest 请求参数}): {@link UpdateDescriptionResponse 返回参数} */
   UpdateDescription(data: UpdateDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDescriptionResponse>;
-  /** 设置云产品凭据轮转策略 */
+  /** {@link UpdateRotationStatus 设置云产品凭据轮转策略}({@link UpdateRotationStatusRequest 请求参数}): {@link UpdateRotationStatusResponse 返回参数} */
   UpdateRotationStatus(data: UpdateRotationStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRotationStatusResponse>;
-  /** 更新凭据内容 */
+  /** {@link UpdateSecret 更新凭据内容}({@link UpdateSecretRequest 请求参数}): {@link UpdateSecretResponse 返回参数} */
   UpdateSecret(data: UpdateSecretRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSecretResponse>;
 }
 

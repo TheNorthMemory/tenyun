@@ -8858,632 +8858,632 @@ declare interface UpdateNetworkFirewallPolicyYamlDetailResponse {
   RequestId?: string;
 }
 
-/** [容器安全服务](https://cloud.tencent.com/document/product/1285) */
+/** {@link Tcss 容器安全服务} */
 declare interface Tcss {
   (): Versions;
-  /** 容器网络创建网络策略添加并发布任务 */
+  /** {@link AddAndPublishNetworkFirewallPolicyDetail 容器网络创建网络策略添加并发布任务}({@link AddAndPublishNetworkFirewallPolicyDetailRequest 请求参数}): {@link AddAndPublishNetworkFirewallPolicyDetailResponse 返回参数} */
   AddAndPublishNetworkFirewallPolicyDetail(data: AddAndPublishNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddAndPublishNetworkFirewallPolicyDetailResponse>;
-  /** 容器网络创建Yaml网络策略并发布任务 */
+  /** {@link AddAndPublishNetworkFirewallPolicyYamlDetail 容器网络创建Yaml网络策略并发布任务}({@link AddAndPublishNetworkFirewallPolicyYamlDetailRequest 请求参数}): {@link AddAndPublishNetworkFirewallPolicyYamlDetailResponse 返回参数} */
   AddAndPublishNetworkFirewallPolicyYamlDetail(data: AddAndPublishNetworkFirewallPolicyYamlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddAndPublishNetworkFirewallPolicyYamlDetailResponse>;
-  /** 新增单个镜像仓库详细信息 */
+  /** {@link AddAssetImageRegistryRegistryDetail 新增单个镜像仓库详细信息}({@link AddAssetImageRegistryRegistryDetailRequest 请求参数}): {@link AddAssetImageRegistryRegistryDetailResponse 返回参数} */
   AddAssetImageRegistryRegistryDetail(data: AddAssetImageRegistryRegistryDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddAssetImageRegistryRegistryDetailResponse>;
-  /** 安全合规忽略资产+检测项列表 */
+  /** {@link AddComplianceAssetPolicySetToWhitelist 安全合规忽略资产+检测项列表}({@link AddComplianceAssetPolicySetToWhitelistRequest 请求参数}): {@link AddComplianceAssetPolicySetToWhitelistResponse 返回参数} */
   AddComplianceAssetPolicySetToWhitelist(data: AddComplianceAssetPolicySetToWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<AddComplianceAssetPolicySetToWhitelistResponse>;
-  /** 安全合规忽略检测项+资产列表 */
+  /** {@link AddCompliancePolicyAssetSetToWhitelist 安全合规忽略检测项+资产列表}({@link AddCompliancePolicyAssetSetToWhitelistRequest 请求参数}): {@link AddCompliancePolicyAssetSetToWhitelistResponse 返回参数} */
   AddCompliancePolicyAssetSetToWhitelist(data: AddCompliancePolicyAssetSetToWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<AddCompliancePolicyAssetSetToWhitelistResponse>;
-  /** 安全合规忽略检测项列表 */
+  /** {@link AddCompliancePolicyItemToWhitelist 安全合规忽略检测项列表}({@link AddCompliancePolicyItemToWhitelistRequest 请求参数}): {@link AddCompliancePolicyItemToWhitelistResponse 返回参数} */
   AddCompliancePolicyItemToWhitelist(data: AddCompliancePolicyItemToWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<AddCompliancePolicyItemToWhitelistResponse>;
-  /** 添加编辑异常进程策略 */
+  /** {@link AddEditAbnormalProcessRule 添加编辑异常进程策略}({@link AddEditAbnormalProcessRuleRequest 请求参数}): {@link AddEditAbnormalProcessRuleResponse 返回参数} */
   AddEditAbnormalProcessRule(data: AddEditAbnormalProcessRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddEditAbnormalProcessRuleResponse>;
-  /** 添加编辑运行访问控制策略 */
+  /** {@link AddEditAccessControlRule 添加编辑运行访问控制策略}({@link AddEditAccessControlRuleRequest 请求参数}): {@link AddEditAccessControlRuleResponse 返回参数} */
   AddEditAccessControlRule(data: AddEditAccessControlRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddEditAccessControlRuleResponse>;
-  /** 新增或编辑本地镜像自动授权规则 */
+  /** {@link AddEditImageAutoAuthorizedRule 新增或编辑本地镜像自动授权规则}({@link AddEditImageAutoAuthorizedRuleRequest 请求参数}): {@link AddEditImageAutoAuthorizedRuleResponse 返回参数} */
   AddEditImageAutoAuthorizedRule(data: AddEditImageAutoAuthorizedRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddEditImageAutoAuthorizedRuleResponse>;
-  /** 添加编辑反弹shell白名单 */
+  /** {@link AddEditReverseShellWhiteList 添加编辑反弹shell白名单}({@link AddEditReverseShellWhiteListRequest 请求参数}): {@link AddEditReverseShellWhiteListResponse 返回参数} */
   AddEditReverseShellWhiteList(data: AddEditReverseShellWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<AddEditReverseShellWhiteListResponse>;
-  /** 添加编辑高危系统调用白名单 */
+  /** {@link AddEditRiskSyscallWhiteList 添加编辑高危系统调用白名单}({@link AddEditRiskSyscallWhiteListRequest 请求参数}): {@link AddEditRiskSyscallWhiteListResponse 返回参数} */
   AddEditRiskSyscallWhiteList(data?: AddEditRiskSyscallWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<AddEditRiskSyscallWhiteListResponse>;
-  /** 添加编辑告警策略 */
+  /** {@link AddEditWarningRules 添加编辑告警策略}({@link AddEditWarningRulesRequest 请求参数}): {@link AddEditWarningRulesResponse 返回参数} */
   AddEditWarningRules(data: AddEditWarningRulesRequest, config?: AxiosRequestConfig): AxiosPromise<AddEditWarningRulesResponse>;
-  /** 新增逃逸白名单 */
+  /** {@link AddEscapeWhiteList 新增逃逸白名单}({@link AddEscapeWhiteListRequest 请求参数}): {@link AddEscapeWhiteListResponse 返回参数} */
   AddEscapeWhiteList(data: AddEscapeWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<AddEscapeWhiteListResponse>;
-  /** 新增漏洞扫描忽略漏洞 */
+  /** {@link AddIgnoreVul 新增漏洞扫描忽略漏洞}({@link AddIgnoreVulRequest 请求参数}): {@link AddIgnoreVulResponse 返回参数} */
   AddIgnoreVul(data: AddIgnoreVulRequest, config?: AxiosRequestConfig): AxiosPromise<AddIgnoreVulResponse>;
-  /** 容器网络创建网络策略添加任务 */
+  /** {@link AddNetworkFirewallPolicyDetail 容器网络创建网络策略添加任务}({@link AddNetworkFirewallPolicyDetailRequest 请求参数}): {@link AddNetworkFirewallPolicyDetailResponse 返回参数} */
   AddNetworkFirewallPolicyDetail(data: AddNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddNetworkFirewallPolicyDetailResponse>;
-  /** 容器网络创建Yaml网络策略添加任务 */
+  /** {@link AddNetworkFirewallPolicyYamlDetail 容器网络创建Yaml网络策略添加任务}({@link AddNetworkFirewallPolicyYamlDetailRequest 请求参数}): {@link AddNetworkFirewallPolicyYamlDetailResponse 返回参数} */
   AddNetworkFirewallPolicyYamlDetail(data: AddNetworkFirewallPolicyYamlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddNetworkFirewallPolicyYamlDetailResponse>;
-  /** 容器网络创建检查Yaml网络策略任务 */
+  /** {@link CheckNetworkFirewallPolicyYaml 容器网络创建检查Yaml网络策略任务}({@link CheckNetworkFirewallPolicyYamlRequest 请求参数}): {@link CheckNetworkFirewallPolicyYamlResponse 返回参数} */
   CheckNetworkFirewallPolicyYaml(data: CheckNetworkFirewallPolicyYamlRequest, config?: AxiosRequestConfig): AxiosPromise<CheckNetworkFirewallPolicyYamlResponse>;
-  /** 检查单个镜像仓库名是否重复 */
+  /** {@link CheckRepeatAssetImageRegistry 检查单个镜像仓库名是否重复}({@link CheckRepeatAssetImageRegistryRequest 请求参数}): {@link CheckRepeatAssetImageRegistryResponse 返回参数} */
   CheckRepeatAssetImageRegistry(data: CheckRepeatAssetImageRegistryRequest, config?: AxiosRequestConfig): AxiosPromise<CheckRepeatAssetImageRegistryResponse>;
-  /** 容器网络创建网络策略确认任务 */
+  /** {@link ConfirmNetworkFirewallPolicy 容器网络创建网络策略确认任务}({@link ConfirmNetworkFirewallPolicyRequest 请求参数}): {@link ConfirmNetworkFirewallPolicyResponse 返回参数} */
   ConfirmNetworkFirewallPolicy(data: ConfirmNetworkFirewallPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmNetworkFirewallPolicyResponse>;
-  /** 镜像仓库创建镜像扫描任务 */
+  /** {@link CreateAssetImageRegistryScanTask 镜像仓库创建镜像扫描任务}({@link CreateAssetImageRegistryScanTaskRequest 请求参数}): {@link CreateAssetImageRegistryScanTaskResponse 返回参数} */
   CreateAssetImageRegistryScanTask(data?: CreateAssetImageRegistryScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageRegistryScanTaskResponse>;
-  /** 镜像仓库创建镜像一键扫描任务 */
+  /** {@link CreateAssetImageRegistryScanTaskOneKey 镜像仓库创建镜像一键扫描任务}({@link CreateAssetImageRegistryScanTaskOneKeyRequest 请求参数}): {@link CreateAssetImageRegistryScanTaskOneKeyResponse 返回参数} */
   CreateAssetImageRegistryScanTaskOneKey(data?: CreateAssetImageRegistryScanTaskOneKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageRegistryScanTaskOneKeyResponse>;
-  /** 添加容器安全镜像扫描设置 */
+  /** {@link CreateAssetImageScanSetting 添加容器安全镜像扫描设置}({@link CreateAssetImageScanSettingRequest 请求参数}): {@link CreateAssetImageScanSettingResponse 返回参数} */
   CreateAssetImageScanSetting(data: CreateAssetImageScanSettingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageScanSettingResponse>;
-  /** 创建镜像扫描任务 */
+  /** {@link CreateAssetImageScanTask 创建镜像扫描任务}({@link CreateAssetImageScanTaskRequest 请求参数}): {@link CreateAssetImageScanTaskResponse 返回参数} */
   CreateAssetImageScanTask(data?: CreateAssetImageScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageScanTaskResponse>;
-  /** 创建本地镜像木马列表导出任务 */
+  /** {@link CreateAssetImageVirusExportJob 创建本地镜像木马列表导出任务}({@link CreateAssetImageVirusExportJobRequest 请求参数}): {@link CreateAssetImageVirusExportJobResponse 返回参数} */
   CreateAssetImageVirusExportJob(data: CreateAssetImageVirusExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageVirusExportJobResponse>;
-  /** 安装检查组件 */
+  /** {@link CreateCheckComponent 安装检查组件}({@link CreateCheckComponentRequest 请求参数}): {@link CreateCheckComponentResponse 返回参数} */
   CreateCheckComponent(data: CreateCheckComponentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCheckComponentResponse>;
-  /** 创建集群检查任务 */
+  /** {@link CreateClusterCheckTask 创建集群检查任务}({@link CreateClusterCheckTaskRequest 请求参数}): {@link CreateClusterCheckTaskResponse 返回参数} */
   CreateClusterCheckTask(data: CreateClusterCheckTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterCheckTaskResponse>;
-  /** 安全合规创建合规检查任务 */
+  /** {@link CreateComplianceTask 安全合规创建合规检查任务}({@link CreateComplianceTaskRequest 请求参数}): {@link CreateComplianceTaskResponse 返回参数} */
   CreateComplianceTask(data?: CreateComplianceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateComplianceTaskResponse>;
-  /** 查询本地镜像组件列表导出 */
+  /** {@link CreateComponentExportJob 查询本地镜像组件列表导出}({@link CreateComponentExportJobRequest 请求参数}): {@link CreateComponentExportJobResponse 返回参数} */
   CreateComponentExportJob(data: CreateComponentExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateComponentExportJobResponse>;
-  /** 创建支持防御的漏洞导出任务 */
+  /** {@link CreateDefenceVulExportJob 创建支持防御的漏洞导出任务}({@link CreateDefenceVulExportJobRequest 请求参数}): {@link CreateDefenceVulExportJobResponse 返回参数} */
   CreateDefenceVulExportJob(data?: CreateDefenceVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDefenceVulExportJobResponse>;
-  /** 创建应急漏洞导出任务 */
+  /** {@link CreateEmergencyVulExportJob 创建应急漏洞导出任务}({@link CreateEmergencyVulExportJobRequest 请求参数}): {@link CreateEmergencyVulExportJobResponse 返回参数} */
   CreateEmergencyVulExportJob(data?: CreateEmergencyVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmergencyVulExportJobResponse>;
-  /** 创建逃逸事件导出异步任务 */
+  /** {@link CreateEscapeEventsExportJob 创建逃逸事件导出异步任务}({@link CreateEscapeEventsExportJobRequest 请求参数}): {@link CreateEscapeEventsExportJobResponse 返回参数} */
   CreateEscapeEventsExportJob(data?: CreateEscapeEventsExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEscapeEventsExportJobResponse>;
-  /** 创建逃逸白名单导出任务 */
+  /** {@link CreateEscapeWhiteListExportJob 创建逃逸白名单导出任务}({@link CreateEscapeWhiteListExportJobRequest 请求参数}): {@link CreateEscapeWhiteListExportJobResponse 返回参数} */
   CreateEscapeWhiteListExportJob(data?: CreateEscapeWhiteListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEscapeWhiteListExportJobResponse>;
-  /** 创建一个导出安全合规信息的任务 */
+  /** {@link CreateExportComplianceStatusListJob 创建一个导出安全合规信息的任务}({@link CreateExportComplianceStatusListJobRequest 请求参数}): {@link CreateExportComplianceStatusListJobResponse 返回参数} */
   CreateExportComplianceStatusListJob(data: CreateExportComplianceStatusListJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportComplianceStatusListJobResponse>;
-  /** 创建主机列表导出任务 */
+  /** {@link CreateHostExportJob 创建主机列表导出任务}({@link CreateHostExportJobRequest 请求参数}): {@link CreateHostExportJobResponse 返回参数} */
   CreateHostExportJob(data: CreateHostExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostExportJobResponse>;
-  /** 创建镜像导出任务 */
+  /** {@link CreateImageExportJob 创建镜像导出任务}({@link CreateImageExportJobRequest 请求参数}): {@link CreateImageExportJobResponse 返回参数} */
   CreateImageExportJob(data?: CreateImageExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageExportJobResponse>;
-  /** 容器网络集群下发刷新任务 */
+  /** {@link CreateNetworkFirewallClusterRefresh 容器网络集群下发刷新任务}({@link CreateNetworkFirewallClusterRefreshRequest 请求参数}): {@link CreateNetworkFirewallClusterRefreshResponse 返回参数} */
   CreateNetworkFirewallClusterRefresh(data?: CreateNetworkFirewallClusterRefreshRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkFirewallClusterRefreshResponse>;
-  /** 容器网络集群网络策略创建自动发现任务 */
+  /** {@link CreateNetworkFirewallPolicyDiscover 容器网络集群网络策略创建自动发现任务}({@link CreateNetworkFirewallPolicyDiscoverRequest 请求参数}): {@link CreateNetworkFirewallPolicyDiscoverResponse 返回参数} */
   CreateNetworkFirewallPolicyDiscover(data: CreateNetworkFirewallPolicyDiscoverRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkFirewallPolicyDiscoverResponse>;
-  /** 容器网络创建网络策略发布任务 */
+  /** {@link CreateNetworkFirewallPublish 容器网络创建网络策略发布任务}({@link CreateNetworkFirewallPublishRequest 请求参数}): {@link CreateNetworkFirewallPublishResponse 返回参数} */
   CreateNetworkFirewallPublish(data: CreateNetworkFirewallPublishRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkFirewallPublishResponse>;
-  /** 容器网络创建网络策略撤销任务 */
+  /** {@link CreateNetworkFirewallUndoPublish 容器网络创建网络策略撤销任务}({@link CreateNetworkFirewallUndoPublishRequest 请求参数}): {@link CreateNetworkFirewallUndoPublishResponse 返回参数} */
   CreateNetworkFirewallUndoPublish(data: CreateNetworkFirewallUndoPublishRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkFirewallUndoPublishResponse>;
-  /** 创建或者编辑弹性计费上限 */
+  /** {@link CreateOrModifyPostPayCores 创建或者编辑弹性计费上限}({@link CreateOrModifyPostPayCoresRequest 请求参数}): {@link CreateOrModifyPostPayCoresResponse 返回参数} */
   CreateOrModifyPostPayCores(data: CreateOrModifyPostPayCoresRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrModifyPostPayCoresResponse>;
-  /** 创建异常进程事件导出异步任务 */
+  /** {@link CreateProcessEventsExportJob 创建异常进程事件导出异步任务}({@link CreateProcessEventsExportJobRequest 请求参数}): {@link CreateProcessEventsExportJobResponse 返回参数} */
   CreateProcessEventsExportJob(data?: CreateProcessEventsExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProcessEventsExportJobResponse>;
-  /** 下发刷新任务 */
+  /** {@link CreateRefreshTask 下发刷新任务}({@link CreateRefreshTaskRequest 请求参数}): {@link CreateRefreshTaskResponse 返回参数} */
   CreateRefreshTask(data?: CreateRefreshTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRefreshTaskResponse>;
-  /** 添加检索模板 */
+  /** {@link CreateSearchTemplate 添加检索模板}({@link CreateSearchTemplateRequest 请求参数}): {@link CreateSearchTemplateResponse 返回参数} */
   CreateSearchTemplate(data: CreateSearchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSearchTemplateResponse>;
-  /** 创建系统漏洞导出任务 */
+  /** {@link CreateSystemVulExportJob 创建系统漏洞导出任务}({@link CreateSystemVulExportJobRequest 请求参数}): {@link CreateSystemVulExportJobResponse 返回参数} */
   CreateSystemVulExportJob(data?: CreateSystemVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSystemVulExportJobResponse>;
-  /** 运行时文件查杀重新检测 */
+  /** {@link CreateVirusScanAgain 运行时文件查杀重新检测}({@link CreateVirusScanAgainRequest 请求参数}): {@link CreateVirusScanAgainResponse 返回参数} */
   CreateVirusScanAgain(data: CreateVirusScanAgainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVirusScanAgainResponse>;
-  /** 运行时文件查杀一键扫描 */
+  /** {@link CreateVirusScanTask 运行时文件查杀一键扫描}({@link CreateVirusScanTaskRequest 请求参数}): {@link CreateVirusScanTaskResponse 返回参数} */
   CreateVirusScanTask(data: CreateVirusScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVirusScanTaskResponse>;
-  /** 创建受漏洞影响的容器导出任务 */
+  /** {@link CreateVulContainerExportJob 创建受漏洞影响的容器导出任务}({@link CreateVulContainerExportJobRequest 请求参数}): {@link CreateVulContainerExportJobResponse 返回参数} */
   CreateVulContainerExportJob(data: CreateVulContainerExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulContainerExportJobResponse>;
-  /** 创建漏洞防御导出任务 */
+  /** {@link CreateVulDefenceEventExportJob 创建漏洞防御导出任务}({@link CreateVulDefenceEventExportJobRequest 请求参数}): {@link CreateVulDefenceEventExportJobResponse 返回参数} */
   CreateVulDefenceEventExportJob(data?: CreateVulDefenceEventExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulDefenceEventExportJobResponse>;
-  /** 创建漏洞防御主机导出任务 */
+  /** {@link CreateVulDefenceHostExportJob 创建漏洞防御主机导出任务}({@link CreateVulDefenceHostExportJobRequest 请求参数}): {@link CreateVulDefenceHostExportJobResponse 返回参数} */
   CreateVulDefenceHostExportJob(data?: CreateVulDefenceHostExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulDefenceHostExportJobResponse>;
-  /** 查询本地镜像漏洞列表导出 */
+  /** {@link CreateVulExportJob 查询本地镜像漏洞列表导出}({@link CreateVulExportJobRequest 请求参数}): {@link CreateVulExportJobResponse 返回参数} */
   CreateVulExportJob(data: CreateVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulExportJobResponse>;
-  /** 创建导出受漏洞影响的镜像任务 */
+  /** {@link CreateVulImageExportJob 创建导出受漏洞影响的镜像任务}({@link CreateVulImageExportJobRequest 请求参数}): {@link CreateVulImageExportJobResponse 返回参数} */
   CreateVulImageExportJob(data: CreateVulImageExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulImageExportJobResponse>;
-  /** 创建漏洞扫描任务 */
+  /** {@link CreateVulScanTask 创建漏洞扫描任务}({@link CreateVulScanTaskRequest 请求参数}): {@link CreateVulScanTaskResponse 返回参数} */
   CreateVulScanTask(data?: CreateVulScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulScanTaskResponse>;
-  /** 创建web漏洞导出任务 */
+  /** {@link CreateWebVulExportJob 创建web漏洞导出任务}({@link CreateWebVulExportJobRequest 请求参数}): {@link CreateWebVulExportJobResponse 返回参数} */
   CreateWebVulExportJob(data?: CreateWebVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebVulExportJobResponse>;
-  /** 删除运行时异常进程策略 */
+  /** {@link DeleteAbnormalProcessRules 删除运行时异常进程策略}({@link DeleteAbnormalProcessRulesRequest 请求参数}): {@link DeleteAbnormalProcessRulesResponse 返回参数} */
   DeleteAbnormalProcessRules(data: DeleteAbnormalProcessRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAbnormalProcessRulesResponse>;
-  /** 删除运行时访问控制策略 */
+  /** {@link DeleteAccessControlRules 删除运行时访问控制策略}({@link DeleteAccessControlRulesRequest 请求参数}): {@link DeleteAccessControlRulesResponse 返回参数} */
   DeleteAccessControlRules(data: DeleteAccessControlRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessControlRulesResponse>;
-  /** 删除安全合规忽略项， 资产+检测项列表 */
+  /** {@link DeleteComplianceAssetPolicySetFromWhitelist 删除安全合规忽略项， 资产+检测项列表}({@link DeleteComplianceAssetPolicySetFromWhitelistRequest 请求参数}): {@link DeleteComplianceAssetPolicySetFromWhitelistResponse 返回参数} */
   DeleteComplianceAssetPolicySetFromWhitelist(data: DeleteComplianceAssetPolicySetFromWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteComplianceAssetPolicySetFromWhitelistResponse>;
-  /** 删除检测项+资产列表的白名单策略 */
+  /** {@link DeleteCompliancePolicyAssetSetFromWhitelist 删除检测项+资产列表的白名单策略}({@link DeleteCompliancePolicyAssetSetFromWhitelistRequest 请求参数}): {@link DeleteCompliancePolicyAssetSetFromWhitelistResponse 返回参数} */
   DeleteCompliancePolicyAssetSetFromWhitelist(data: DeleteCompliancePolicyAssetSetFromWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCompliancePolicyAssetSetFromWhitelistResponse>;
-  /** 安全合规取消忽略检测项列表 */
+  /** {@link DeleteCompliancePolicyItemFromWhitelist 安全合规取消忽略检测项列表}({@link DeleteCompliancePolicyItemFromWhitelistRequest 请求参数}): {@link DeleteCompliancePolicyItemFromWhitelistResponse 返回参数} */
   DeleteCompliancePolicyItemFromWhitelist(data: DeleteCompliancePolicyItemFromWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCompliancePolicyItemFromWhitelistResponse>;
-  /** 删除逃逸白名单 */
+  /** {@link DeleteEscapeWhiteList 删除逃逸白名单}({@link DeleteEscapeWhiteListRequest 请求参数}): {@link DeleteEscapeWhiteListResponse 返回参数} */
   DeleteEscapeWhiteList(data: DeleteEscapeWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEscapeWhiteListResponse>;
-  /** 取消漏洞扫描忽略漏洞 */
+  /** {@link DeleteIgnoreVul 取消漏洞扫描忽略漏洞}({@link DeleteIgnoreVulRequest 请求参数}): {@link DeleteIgnoreVulResponse 返回参数} */
   DeleteIgnoreVul(data: DeleteIgnoreVulRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIgnoreVulResponse>;
-  /** 卸载Agent客户端 */
+  /** {@link DeleteMachine 卸载Agent客户端}({@link DeleteMachineRequest 请求参数}): {@link DeleteMachineResponse 返回参数} */
   DeleteMachine(data: DeleteMachineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineResponse>;
-  /** 容器网络创建网络策略删除任务 */
+  /** {@link DeleteNetworkFirewallPolicyDetail 容器网络创建网络策略删除任务}({@link DeleteNetworkFirewallPolicyDetailRequest 请求参数}): {@link DeleteNetworkFirewallPolicyDetailResponse 返回参数} */
   DeleteNetworkFirewallPolicyDetail(data: DeleteNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNetworkFirewallPolicyDetailResponse>;
-  /** 删除运行时反弹shell事件 */
+  /** {@link DeleteReverseShellEvents 删除运行时反弹shell事件}({@link DeleteReverseShellEventsRequest 请求参数}): {@link DeleteReverseShellEventsResponse 返回参数} */
   DeleteReverseShellEvents(data: DeleteReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReverseShellEventsResponse>;
-  /** 删除运行时反弹shell白名单 */
+  /** {@link DeleteReverseShellWhiteLists 删除运行时反弹shell白名单}({@link DeleteReverseShellWhiteListsRequest 请求参数}): {@link DeleteReverseShellWhiteListsResponse 返回参数} */
   DeleteReverseShellWhiteLists(data: DeleteReverseShellWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReverseShellWhiteListsResponse>;
-  /** 删除运行时高危系统调用事件 */
+  /** {@link DeleteRiskSyscallEvents 删除运行时高危系统调用事件}({@link DeleteRiskSyscallEventsRequest 请求参数}): {@link DeleteRiskSyscallEventsResponse 返回参数} */
   DeleteRiskSyscallEvents(data: DeleteRiskSyscallEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskSyscallEventsResponse>;
-  /** 删除运行时高危系统调用白名单 */
+  /** {@link DeleteRiskSyscallWhiteLists 删除运行时高危系统调用白名单}({@link DeleteRiskSyscallWhiteListsRequest 请求参数}): {@link DeleteRiskSyscallWhiteListsResponse 返回参数} */
   DeleteRiskSyscallWhiteLists(data: DeleteRiskSyscallWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskSyscallWhiteListsResponse>;
-  /** 删除检索模板 */
+  /** {@link DeleteSearchTemplate 删除检索模板}({@link DeleteSearchTemplateRequest 请求参数}): {@link DeleteSearchTemplateResponse 返回参数} */
   DeleteSearchTemplate(data: DeleteSearchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSearchTemplateResponse>;
-  /** 获取用户当前灰度配置 */
+  /** {@link DescribeABTestConfig 获取用户当前灰度配置}({@link DescribeABTestConfigRequest 请求参数}): {@link DescribeABTestConfigResponse 返回参数} */
   DescribeABTestConfig(data?: DescribeABTestConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeABTestConfigResponse>;
-  /** 运行时异常进程事件详细信息 */
+  /** {@link DescribeAbnormalProcessDetail 运行时异常进程事件详细信息}({@link DescribeAbnormalProcessDetailRequest 请求参数}): {@link DescribeAbnormalProcessDetailResponse 返回参数} */
   DescribeAbnormalProcessDetail(data: DescribeAbnormalProcessDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessDetailResponse>;
-  /** 查询待处理异常进程事件趋势 */
+  /** {@link DescribeAbnormalProcessEventTendency 查询待处理异常进程事件趋势}({@link DescribeAbnormalProcessEventTendencyRequest 请求参数}): {@link DescribeAbnormalProcessEventTendencyResponse 返回参数} */
   DescribeAbnormalProcessEventTendency(data: DescribeAbnormalProcessEventTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessEventTendencyResponse>;
-  /** 运行时异常进程列表 */
+  /** {@link DescribeAbnormalProcessEvents 运行时异常进程列表}({@link DescribeAbnormalProcessEventsRequest 请求参数}): {@link DescribeAbnormalProcessEventsResponse 返回参数} */
   DescribeAbnormalProcessEvents(data?: DescribeAbnormalProcessEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessEventsResponse>;
-  /** 运行时异常进程列表导出 */
+  /** {@link DescribeAbnormalProcessEventsExport 运行时异常进程列表导出}({@link DescribeAbnormalProcessEventsExportRequest 请求参数}): {@link DescribeAbnormalProcessEventsExportResponse 返回参数} */
   DescribeAbnormalProcessEventsExport(data: DescribeAbnormalProcessEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessEventsExportResponse>;
-  /** 统计异常进程各威胁等级待处理事件数 */
+  /** {@link DescribeAbnormalProcessLevelSummary 统计异常进程各威胁等级待处理事件数}({@link DescribeAbnormalProcessLevelSummaryRequest 请求参数}): {@link DescribeAbnormalProcessLevelSummaryResponse 返回参数} */
   DescribeAbnormalProcessLevelSummary(data?: DescribeAbnormalProcessLevelSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessLevelSummaryResponse>;
-  /** 查询运行时异常进程策略详细信息 */
+  /** {@link DescribeAbnormalProcessRuleDetail 查询运行时异常进程策略详细信息}({@link DescribeAbnormalProcessRuleDetailRequest 请求参数}): {@link DescribeAbnormalProcessRuleDetailResponse 返回参数} */
   DescribeAbnormalProcessRuleDetail(data?: DescribeAbnormalProcessRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessRuleDetailResponse>;
-  /** 运行时异常进程策略列表 */
+  /** {@link DescribeAbnormalProcessRules 运行时异常进程策略列表}({@link DescribeAbnormalProcessRulesRequest 请求参数}): {@link DescribeAbnormalProcessRulesResponse 返回参数} */
   DescribeAbnormalProcessRules(data?: DescribeAbnormalProcessRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessRulesResponse>;
-  /** 运行时异常进程策略列表导出 */
+  /** {@link DescribeAbnormalProcessRulesExport 运行时异常进程策略列表导出}({@link DescribeAbnormalProcessRulesExportRequest 请求参数}): {@link DescribeAbnormalProcessRulesExportResponse 返回参数} */
   DescribeAbnormalProcessRulesExport(data: DescribeAbnormalProcessRulesExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessRulesExportResponse>;
-  /** 运行时访问控制事件详细信息 */
+  /** {@link DescribeAccessControlDetail 运行时访问控制事件详细信息}({@link DescribeAccessControlDetailRequest 请求参数}): {@link DescribeAccessControlDetailResponse 返回参数} */
   DescribeAccessControlDetail(data: DescribeAccessControlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlDetailResponse>;
-  /** 运行时访问控制事件列表 */
+  /** {@link DescribeAccessControlEvents 运行时访问控制事件列表}({@link DescribeAccessControlEventsRequest 请求参数}): {@link DescribeAccessControlEventsResponse 返回参数} */
   DescribeAccessControlEvents(data?: DescribeAccessControlEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlEventsResponse>;
-  /** 运行时访问控制事件列表导出 */
+  /** {@link DescribeAccessControlEventsExport 运行时访问控制事件列表导出}({@link DescribeAccessControlEventsExportRequest 请求参数}): {@link DescribeAccessControlEventsExportResponse 返回参数} */
   DescribeAccessControlEventsExport(data?: DescribeAccessControlEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlEventsExportResponse>;
-  /** 查询运行时访问控制策略详细信息 */
+  /** {@link DescribeAccessControlRuleDetail 查询运行时访问控制策略详细信息}({@link DescribeAccessControlRuleDetailRequest 请求参数}): {@link DescribeAccessControlRuleDetailResponse 返回参数} */
   DescribeAccessControlRuleDetail(data?: DescribeAccessControlRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlRuleDetailResponse>;
-  /** 运行时访问控制策略列表 */
+  /** {@link DescribeAccessControlRules 运行时访问控制策略列表}({@link DescribeAccessControlRulesRequest 请求参数}): {@link DescribeAccessControlRulesResponse 返回参数} */
   DescribeAccessControlRules(data?: DescribeAccessControlRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlRulesResponse>;
-  /** 运行时访问控制策略列表导出 */
+  /** {@link DescribeAccessControlRulesExport 运行时访问控制策略列表导出}({@link DescribeAccessControlRulesExportRequest 请求参数}): {@link DescribeAccessControlRulesExportResponse 返回参数} */
   DescribeAccessControlRulesExport(data: DescribeAccessControlRulesExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlRulesExportResponse>;
-  /** 获取受影响的集群数量 */
+  /** {@link DescribeAffectedClusterCount 获取受影响的集群数量}({@link DescribeAffectedClusterCountRequest 请求参数}): {@link DescribeAffectedClusterCountResponse 返回参数} */
   DescribeAffectedClusterCount(data?: DescribeAffectedClusterCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAffectedClusterCountResponse>;
-  /** 查询节点类型的影响范围 */
+  /** {@link DescribeAffectedNodeList 查询节点类型的影响范围}({@link DescribeAffectedNodeListRequest 请求参数}): {@link DescribeAffectedNodeListResponse 返回参数} */
   DescribeAffectedNodeList(data: DescribeAffectedNodeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAffectedNodeListResponse>;
-  /** 查询workload类型的影响范围 */
+  /** {@link DescribeAffectedWorkloadList 查询workload类型的影响范围}({@link DescribeAffectedWorkloadListRequest 请求参数}): {@link DescribeAffectedWorkloadListResponse 返回参数} */
   DescribeAffectedWorkloadList(data: DescribeAffectedWorkloadListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAffectedWorkloadListResponse>;
-  /** 查询平行容器安装命令 */
+  /** {@link DescribeAgentDaemonSetCmd 查询平行容器安装命令}({@link DescribeAgentDaemonSetCmdRequest 请求参数}): {@link DescribeAgentDaemonSetCmdResponse 返回参数} */
   DescribeAgentDaemonSetCmd(data: DescribeAgentDaemonSetCmdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDaemonSetCmdResponse>;
-  /** 查询agent安装命令 */
+  /** {@link DescribeAgentInstallCommand 查询agent安装命令}({@link DescribeAgentInstallCommandRequest 请求参数}): {@link DescribeAgentInstallCommandResponse 返回参数} */
   DescribeAgentInstallCommand(data: DescribeAgentInstallCommandRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentInstallCommandResponse>;
-  /** 查询app服务列表 */
+  /** {@link DescribeAssetAppServiceList 查询app服务列表}({@link DescribeAssetAppServiceListRequest 请求参数}): {@link DescribeAssetAppServiceListResponse 返回参数} */
   DescribeAssetAppServiceList(data?: DescribeAssetAppServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetAppServiceListResponse>;
-  /** 查询容器组件列表 */
+  /** {@link DescribeAssetComponentList 查询容器组件列表}({@link DescribeAssetComponentListRequest 请求参数}): {@link DescribeAssetComponentListResponse 返回参数} */
   DescribeAssetComponentList(data: DescribeAssetComponentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetComponentListResponse>;
-  /** 查询容器信息 */
+  /** {@link DescribeAssetContainerDetail 查询容器信息}({@link DescribeAssetContainerDetailRequest 请求参数}): {@link DescribeAssetContainerDetailResponse 返回参数} */
   DescribeAssetContainerDetail(data: DescribeAssetContainerDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetContainerDetailResponse>;
-  /** 查询容器列表 */
+  /** {@link DescribeAssetContainerList 查询容器列表}({@link DescribeAssetContainerListRequest 请求参数}): {@link DescribeAssetContainerListResponse 返回参数} */
   DescribeAssetContainerList(data?: DescribeAssetContainerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetContainerListResponse>;
-  /** 查询db服务列表 */
+  /** {@link DescribeAssetDBServiceList 查询db服务列表}({@link DescribeAssetDBServiceListRequest 请求参数}): {@link DescribeAssetDBServiceListResponse 返回参数} */
   DescribeAssetDBServiceList(data?: DescribeAssetDBServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDBServiceListResponse>;
-  /** 查询主机信息 */
+  /** {@link DescribeAssetHostDetail 查询主机信息}({@link DescribeAssetHostDetailRequest 请求参数}): {@link DescribeAssetHostDetailResponse 返回参数} */
   DescribeAssetHostDetail(data: DescribeAssetHostDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetHostDetailResponse>;
-  /** 查询主机列表 */
+  /** {@link DescribeAssetHostList 查询主机列表}({@link DescribeAssetHostListRequest 请求参数}): {@link DescribeAssetHostListResponse 返回参数} */
   DescribeAssetHostList(data?: DescribeAssetHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetHostListResponse>;
-  /** 镜像绑定规则列表 */
+  /** {@link DescribeAssetImageBindRuleInfo 镜像绑定规则列表}({@link DescribeAssetImageBindRuleInfoRequest 请求参数}): {@link DescribeAssetImageBindRuleInfoResponse 返回参数} */
   DescribeAssetImageBindRuleInfo(data?: DescribeAssetImageBindRuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageBindRuleInfoResponse>;
-  /** 查询镜像信息 */
+  /** {@link DescribeAssetImageDetail 查询镜像信息}({@link DescribeAssetImageDetailRequest 请求参数}): {@link DescribeAssetImageDetailResponse 返回参数} */
   DescribeAssetImageDetail(data: DescribeAssetImageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageDetailResponse>;
-  /** 查询镜像关联主机 */
+  /** {@link DescribeAssetImageHostList 查询镜像关联主机}({@link DescribeAssetImageHostListRequest 请求参数}): {@link DescribeAssetImageHostListResponse 返回参数} */
   DescribeAssetImageHostList(data?: DescribeAssetImageHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageHostListResponse>;
-  /** 查询镜像列表 */
+  /** {@link DescribeAssetImageList 查询镜像列表}({@link DescribeAssetImageListRequest 请求参数}): {@link DescribeAssetImageListResponse 返回参数} */
   DescribeAssetImageList(data?: DescribeAssetImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageListResponse>;
-  /** 查询镜像列表导出 */
+  /** {@link DescribeAssetImageListExport 查询镜像列表导出}({@link DescribeAssetImageListExportRequest 请求参数}): {@link DescribeAssetImageListExportResponse 返回参数} */
   DescribeAssetImageListExport(data: DescribeAssetImageListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageListExportResponse>;
-  /** 查看镜像仓库资产更新进度状态 */
+  /** {@link DescribeAssetImageRegistryAssetStatus 查看镜像仓库资产更新进度状态}({@link DescribeAssetImageRegistryAssetStatusRequest 请求参数}): {@link DescribeAssetImageRegistryAssetStatusResponse 返回参数} */
   DescribeAssetImageRegistryAssetStatus(data?: DescribeAssetImageRegistryAssetStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryAssetStatusResponse>;
-  /** 镜像仓库查询镜像仓库详情 */
+  /** {@link DescribeAssetImageRegistryDetail 镜像仓库查询镜像仓库详情}({@link DescribeAssetImageRegistryDetailRequest 请求参数}): {@link DescribeAssetImageRegistryDetailResponse 返回参数} */
   DescribeAssetImageRegistryDetail(data?: DescribeAssetImageRegistryDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryDetailResponse>;
-  /** 镜像仓库查询镜像仓库列表 */
+  /** {@link DescribeAssetImageRegistryList 镜像仓库查询镜像仓库列表}({@link DescribeAssetImageRegistryListRequest 请求参数}): {@link DescribeAssetImageRegistryListResponse 返回参数} */
   DescribeAssetImageRegistryList(data?: DescribeAssetImageRegistryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryListResponse>;
-  /** 镜像仓库镜像列表导出 */
+  /** {@link DescribeAssetImageRegistryListExport 镜像仓库镜像列表导出}({@link DescribeAssetImageRegistryListExportRequest 请求参数}): {@link DescribeAssetImageRegistryListExportResponse 返回参数} */
   DescribeAssetImageRegistryListExport(data: DescribeAssetImageRegistryListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryListExportResponse>;
-  /** 查看单个镜像仓库详细信息 */
+  /** {@link DescribeAssetImageRegistryRegistryDetail 查看单个镜像仓库详细信息}({@link DescribeAssetImageRegistryRegistryDetailRequest 请求参数}): {@link DescribeAssetImageRegistryRegistryDetailResponse 返回参数} */
   DescribeAssetImageRegistryRegistryDetail(data: DescribeAssetImageRegistryRegistryDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryRegistryDetailResponse>;
-  /** 镜像仓库仓库列表 */
+  /** {@link DescribeAssetImageRegistryRegistryList 镜像仓库仓库列表}({@link DescribeAssetImageRegistryRegistryListRequest 请求参数}): {@link DescribeAssetImageRegistryRegistryListResponse 返回参数} */
   DescribeAssetImageRegistryRegistryList(data?: DescribeAssetImageRegistryRegistryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryRegistryListResponse>;
-  /** 镜像仓库查询镜像高危行为列表 */
+  /** {@link DescribeAssetImageRegistryRiskInfoList 镜像仓库查询镜像高危行为列表}({@link DescribeAssetImageRegistryRiskInfoListRequest 请求参数}): {@link DescribeAssetImageRegistryRiskInfoListResponse 返回参数} */
   DescribeAssetImageRegistryRiskInfoList(data?: DescribeAssetImageRegistryRiskInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryRiskInfoListResponse>;
-  /** 镜像仓库敏感信息列表导出 */
+  /** {@link DescribeAssetImageRegistryRiskListExport 镜像仓库敏感信息列表导出}({@link DescribeAssetImageRegistryRiskListExportRequest 请求参数}): {@link DescribeAssetImageRegistryRiskListExportResponse 返回参数} */
   DescribeAssetImageRegistryRiskListExport(data: DescribeAssetImageRegistryRiskListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryRiskListExportResponse>;
-  /** 镜像仓库查询一键镜像扫描状态 */
+  /** {@link DescribeAssetImageRegistryScanStatusOneKey 镜像仓库查询一键镜像扫描状态}({@link DescribeAssetImageRegistryScanStatusOneKeyRequest 请求参数}): {@link DescribeAssetImageRegistryScanStatusOneKeyResponse 返回参数} */
   DescribeAssetImageRegistryScanStatusOneKey(data?: DescribeAssetImageRegistryScanStatusOneKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryScanStatusOneKeyResponse>;
-  /** 镜像仓库查询镜像统计信息 */
+  /** {@link DescribeAssetImageRegistrySummary 镜像仓库查询镜像统计信息}({@link DescribeAssetImageRegistrySummaryRequest 请求参数}): {@link DescribeAssetImageRegistrySummaryResponse 返回参数} */
   DescribeAssetImageRegistrySummary(data?: DescribeAssetImageRegistrySummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistrySummaryResponse>;
-  /** 镜像仓库查询木马病毒列表 */
+  /** {@link DescribeAssetImageRegistryVirusList 镜像仓库查询木马病毒列表}({@link DescribeAssetImageRegistryVirusListRequest 请求参数}): {@link DescribeAssetImageRegistryVirusListResponse 返回参数} */
   DescribeAssetImageRegistryVirusList(data?: DescribeAssetImageRegistryVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVirusListResponse>;
-  /** 镜像仓库木马信息列表导出 */
+  /** {@link DescribeAssetImageRegistryVirusListExport 镜像仓库木马信息列表导出}({@link DescribeAssetImageRegistryVirusListExportRequest 请求参数}): {@link DescribeAssetImageRegistryVirusListExportResponse 返回参数} */
   DescribeAssetImageRegistryVirusListExport(data: DescribeAssetImageRegistryVirusListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVirusListExportResponse>;
-  /** 镜像仓库查询镜像漏洞列表 */
+  /** {@link DescribeAssetImageRegistryVulList 镜像仓库查询镜像漏洞列表}({@link DescribeAssetImageRegistryVulListRequest 请求参数}): {@link DescribeAssetImageRegistryVulListResponse 返回参数} */
   DescribeAssetImageRegistryVulList(data?: DescribeAssetImageRegistryVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVulListResponse>;
-  /** 镜像仓库漏洞列表导出 */
+  /** {@link DescribeAssetImageRegistryVulListExport 镜像仓库漏洞列表导出}({@link DescribeAssetImageRegistryVulListExportRequest 请求参数}): {@link DescribeAssetImageRegistryVulListExportResponse 返回参数} */
   DescribeAssetImageRegistryVulListExport(data: DescribeAssetImageRegistryVulListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVulListExportResponse>;
-  /** 查询镜像风险列表 */
+  /** {@link DescribeAssetImageRiskList 查询镜像风险列表}({@link DescribeAssetImageRiskListRequest 请求参数}): {@link DescribeAssetImageRiskListResponse 返回参数} */
   DescribeAssetImageRiskList(data: DescribeAssetImageRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRiskListResponse>;
-  /** 镜像风险列表导出 */
+  /** {@link DescribeAssetImageRiskListExport 镜像风险列表导出}({@link DescribeAssetImageRiskListExportRequest 请求参数}): {@link DescribeAssetImageRiskListExportResponse 返回参数} */
   DescribeAssetImageRiskListExport(data: DescribeAssetImageRiskListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRiskListExportResponse>;
-  /** 获取镜像扫描设置信息 */
+  /** {@link DescribeAssetImageScanSetting 获取镜像扫描设置信息}({@link DescribeAssetImageScanSettingRequest 请求参数}): {@link DescribeAssetImageScanSettingResponse 返回参数} */
   DescribeAssetImageScanSetting(data?: DescribeAssetImageScanSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageScanSettingResponse>;
-  /** 查询镜像扫描状态 */
+  /** {@link DescribeAssetImageScanStatus 查询镜像扫描状态}({@link DescribeAssetImageScanStatusRequest 请求参数}): {@link DescribeAssetImageScanStatusResponse 返回参数} */
   DescribeAssetImageScanStatus(data?: DescribeAssetImageScanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageScanStatusResponse>;
-  /** 查询正在一键扫描的镜像扫描taskid */
+  /** {@link DescribeAssetImageScanTask 查询正在一键扫描的镜像扫描taskid}({@link DescribeAssetImageScanTaskRequest 请求参数}): {@link DescribeAssetImageScanTaskResponse 返回参数} */
   DescribeAssetImageScanTask(data?: DescribeAssetImageScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageScanTaskResponse>;
-  /** 查询镜像简略信息列表 */
+  /** {@link DescribeAssetImageSimpleList 查询镜像简略信息列表}({@link DescribeAssetImageSimpleListRequest 请求参数}): {@link DescribeAssetImageSimpleListResponse 返回参数} */
   DescribeAssetImageSimpleList(data?: DescribeAssetImageSimpleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageSimpleListResponse>;
-  /** 查询镜像病毒列表 */
+  /** {@link DescribeAssetImageVirusList 查询镜像病毒列表}({@link DescribeAssetImageVirusListRequest 请求参数}): {@link DescribeAssetImageVirusListResponse 返回参数} */
   DescribeAssetImageVirusList(data: DescribeAssetImageVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageVirusListResponse>;
-  /** 镜像木马列表导出 */
+  /** {@link DescribeAssetImageVirusListExport 镜像木马列表导出}({@link DescribeAssetImageVirusListExportRequest 请求参数}): {@link DescribeAssetImageVirusListExportResponse 返回参数} */
   DescribeAssetImageVirusListExport(data: DescribeAssetImageVirusListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageVirusListExportResponse>;
-  /** 查询镜像漏洞列表 */
+  /** {@link DescribeAssetImageVulList 查询镜像漏洞列表}({@link DescribeAssetImageVulListRequest 请求参数}): {@link DescribeAssetImageVulListResponse 返回参数} */
   DescribeAssetImageVulList(data: DescribeAssetImageVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageVulListResponse>;
-  /** 镜像漏洞列表导出 */
+  /** {@link DescribeAssetImageVulListExport 镜像漏洞列表导出}({@link DescribeAssetImageVulListExportRequest 请求参数}): {@link DescribeAssetImageVulListExportResponse 返回参数} */
   DescribeAssetImageVulListExport(data: DescribeAssetImageVulListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageVulListExportResponse>;
-  /** 查询端口占用列表 */
+  /** {@link DescribeAssetPortList 查询端口占用列表}({@link DescribeAssetPortListRequest 请求参数}): {@link DescribeAssetPortListResponse 返回参数} */
   DescribeAssetPortList(data?: DescribeAssetPortListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetPortListResponse>;
-  /** 查询进程列表 */
+  /** {@link DescribeAssetProcessList 查询进程列表}({@link DescribeAssetProcessListRequest 请求参数}): {@link DescribeAssetProcessListResponse 返回参数} */
   DescribeAssetProcessList(data?: DescribeAssetProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetProcessListResponse>;
-  /** 查询账户容器、镜像等统计信息 */
+  /** {@link DescribeAssetSummary 查询账户容器、镜像等统计信息}({@link DescribeAssetSummaryRequest 请求参数}): {@link DescribeAssetSummaryResponse 返回参数} */
   DescribeAssetSummary(data?: DescribeAssetSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSummaryResponse>;
-  /** 查询资产同步最近时间 */
+  /** {@link DescribeAssetSyncLastTime 查询资产同步最近时间}({@link DescribeAssetSyncLastTimeRequest 请求参数}): {@link DescribeAssetSyncLastTimeResponse 返回参数} */
   DescribeAssetSyncLastTime(data?: DescribeAssetSyncLastTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSyncLastTimeResponse>;
-  /** 查询web服务列表 */
+  /** {@link DescribeAssetWebServiceList 查询web服务列表}({@link DescribeAssetWebServiceListRequest 请求参数}): {@link DescribeAssetWebServiceListResponse 返回参数} */
   DescribeAssetWebServiceList(data?: DescribeAssetWebServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebServiceListResponse>;
-  /** 查询自动授权规则授权范围主机信息 */
+  /** {@link DescribeAutoAuthorizedRuleHost 查询自动授权规则授权范围主机信息}({@link DescribeAutoAuthorizedRuleHostRequest 请求参数}): {@link DescribeAutoAuthorizedRuleHostResponse 返回参数} */
   DescribeAutoAuthorizedRuleHost(data: DescribeAutoAuthorizedRuleHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoAuthorizedRuleHostResponse>;
-  /** 查询所有检查项接口 */
+  /** {@link DescribeCheckItemList 查询所有检查项接口}({@link DescribeCheckItemListRequest 请求参数}): {@link DescribeCheckItemListResponse 返回参数} */
   DescribeCheckItemList(data?: DescribeCheckItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckItemListResponse>;
-  /** 查询单个集群的详细信息 */
+  /** {@link DescribeClusterDetail 查询单个集群的详细信息}({@link DescribeClusterDetailRequest 请求参数}): {@link DescribeClusterDetailResponse 返回参数} */
   DescribeClusterDetail(data: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
-  /** 查询用户集群资产总览 */
+  /** {@link DescribeClusterSummary 查询用户集群资产总览}({@link DescribeClusterSummaryRequest 请求参数}): {@link DescribeClusterSummaryResponse 返回参数} */
   DescribeClusterSummary(data?: DescribeClusterSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterSummaryResponse>;
-  /** 安全合规查询某个资产的详情 */
+  /** {@link DescribeComplianceAssetDetailInfo 安全合规查询某个资产的详情}({@link DescribeComplianceAssetDetailInfoRequest 请求参数}): {@link DescribeComplianceAssetDetailInfoResponse 返回参数} */
   DescribeComplianceAssetDetailInfo(data: DescribeComplianceAssetDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceAssetDetailInfoResponse>;
-  /** 安全合规查询某类资产的列表 */
+  /** {@link DescribeComplianceAssetList 安全合规查询某类资产的列表}({@link DescribeComplianceAssetListRequest 请求参数}): {@link DescribeComplianceAssetListResponse 返回参数} */
   DescribeComplianceAssetList(data?: DescribeComplianceAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceAssetListResponse>;
-  /** 安全合规查询某资产下的检测项列表 */
+  /** {@link DescribeComplianceAssetPolicyItemList 安全合规查询某资产下的检测项列表}({@link DescribeComplianceAssetPolicyItemListRequest 请求参数}): {@link DescribeComplianceAssetPolicyItemListResponse 返回参数} */
   DescribeComplianceAssetPolicyItemList(data: DescribeComplianceAssetPolicyItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceAssetPolicyItemListResponse>;
-  /** 安全合规查询定时任务列表 */
+  /** {@link DescribeCompliancePeriodTaskList 安全合规查询定时任务列表}({@link DescribeCompliancePeriodTaskListRequest 请求参数}): {@link DescribeCompliancePeriodTaskListResponse 返回参数} */
   DescribeCompliancePeriodTaskList(data?: DescribeCompliancePeriodTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompliancePeriodTaskListResponse>;
-  /** 安全合规查询检测项影响的资产列表 */
+  /** {@link DescribeCompliancePolicyItemAffectedAssetList 安全合规查询检测项影响的资产列表}({@link DescribeCompliancePolicyItemAffectedAssetListRequest 请求参数}): {@link DescribeCompliancePolicyItemAffectedAssetListResponse 返回参数} */
   DescribeCompliancePolicyItemAffectedAssetList(data: DescribeCompliancePolicyItemAffectedAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompliancePolicyItemAffectedAssetListResponse>;
-  /** 安全合规查询某检测项影响的信息 */
+  /** {@link DescribeCompliancePolicyItemAffectedSummary 安全合规查询某检测项影响的信息}({@link DescribeCompliancePolicyItemAffectedSummaryRequest 请求参数}): {@link DescribeCompliancePolicyItemAffectedSummaryResponse 返回参数} */
   DescribeCompliancePolicyItemAffectedSummary(data: DescribeCompliancePolicyItemAffectedSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompliancePolicyItemAffectedSummaryResponse>;
-  /** 安全合规查询上次检测失败的资产的列表 */
+  /** {@link DescribeComplianceScanFailedAssetList 安全合规查询上次检测失败的资产的列表}({@link DescribeComplianceScanFailedAssetListRequest 请求参数}): {@link DescribeComplianceScanFailedAssetListResponse 返回参数} */
   DescribeComplianceScanFailedAssetList(data?: DescribeComplianceScanFailedAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceScanFailedAssetListResponse>;
-  /** 安全合规查询上次任务的资产通过率汇总信息 */
+  /** {@link DescribeComplianceTaskAssetSummary 安全合规查询上次任务的资产通过率汇总信息}({@link DescribeComplianceTaskAssetSummaryRequest 请求参数}): {@link DescribeComplianceTaskAssetSummaryResponse 返回参数} */
   DescribeComplianceTaskAssetSummary(data: DescribeComplianceTaskAssetSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceTaskAssetSummaryResponse>;
-  /** 安全合规查询上次任务的检测项的汇总信息列表 */
+  /** {@link DescribeComplianceTaskPolicyItemSummaryList 安全合规查询上次任务的检测项的汇总信息列表}({@link DescribeComplianceTaskPolicyItemSummaryListRequest 请求参数}): {@link DescribeComplianceTaskPolicyItemSummaryListResponse 返回参数} */
   DescribeComplianceTaskPolicyItemSummaryList(data?: DescribeComplianceTaskPolicyItemSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceTaskPolicyItemSummaryListResponse>;
-  /** 安全合规查询白名单列表 */
+  /** {@link DescribeComplianceWhitelistItemList 安全合规查询白名单列表}({@link DescribeComplianceWhitelistItemListRequest 请求参数}): {@link DescribeComplianceWhitelistItemListResponse 返回参数} */
   DescribeComplianceWhitelistItemList(data?: DescribeComplianceWhitelistItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceWhitelistItemListResponse>;
-  /** 查询容器安全资产概览 */
+  /** {@link DescribeContainerAssetSummary 查询容器安全资产概览}({@link DescribeContainerAssetSummaryRequest 请求参数}): {@link DescribeContainerAssetSummaryResponse 返回参数} */
   DescribeContainerAssetSummary(data?: DescribeContainerAssetSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerAssetSummaryResponse>;
-  /** 查询容器安全未处理事件概览 */
+  /** {@link DescribeContainerSecEventSummary 查询容器安全未处理事件概览}({@link DescribeContainerSecEventSummaryRequest 请求参数}): {@link DescribeContainerSecEventSummaryResponse 返回参数} */
   DescribeContainerSecEventSummary(data?: DescribeContainerSecEventSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerSecEventSummaryResponse>;
-  /** 获取ES字段聚合结果 */
+  /** {@link DescribeESAggregations 获取ES字段聚合结果}({@link DescribeESAggregationsRequest 请求参数}): {@link DescribeESAggregationsResponse 返回参数} */
   DescribeESAggregations(data: DescribeESAggregationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeESAggregationsResponse>;
-  /** 获取ES查询文档列表 */
+  /** {@link DescribeESHits 获取ES查询文档列表}({@link DescribeESHitsRequest 请求参数}): {@link DescribeESHitsResponse 返回参数} */
   DescribeESHits(data: DescribeESHitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeESHitsResponse>;
-  /** 查询应急漏洞列表 */
+  /** {@link DescribeEmergencyVulList 查询应急漏洞列表}({@link DescribeEmergencyVulListRequest 请求参数}): {@link DescribeEmergencyVulListResponse 返回参数} */
   DescribeEmergencyVulList(data?: DescribeEmergencyVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmergencyVulListResponse>;
-  /** 查询容器逃逸事件详情 */
+  /** {@link DescribeEscapeEventDetail 查询容器逃逸事件详情}({@link DescribeEscapeEventDetailRequest 请求参数}): {@link DescribeEscapeEventDetailResponse 返回参数} */
   DescribeEscapeEventDetail(data: DescribeEscapeEventDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeEventDetailResponse>;
-  /** 查询容器逃逸事件列表 */
+  /** {@link DescribeEscapeEventInfo 查询容器逃逸事件列表}({@link DescribeEscapeEventInfoRequest 请求参数}): {@link DescribeEscapeEventInfoResponse 返回参数} */
   DescribeEscapeEventInfo(data?: DescribeEscapeEventInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeEventInfoResponse>;
-  /** 查询待处理逃逸事件趋势 */
+  /** {@link DescribeEscapeEventTendency 查询待处理逃逸事件趋势}({@link DescribeEscapeEventTendencyRequest 请求参数}): {@link DescribeEscapeEventTendencyResponse 返回参数} */
   DescribeEscapeEventTendency(data: DescribeEscapeEventTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeEventTendencyResponse>;
-  /** 统计容器逃逸各事件类型和待处理事件数 */
+  /** {@link DescribeEscapeEventTypeSummary 统计容器逃逸各事件类型和待处理事件数}({@link DescribeEscapeEventTypeSummaryRequest 请求参数}): {@link DescribeEscapeEventTypeSummaryResponse 返回参数} */
   DescribeEscapeEventTypeSummary(data?: DescribeEscapeEventTypeSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeEventTypeSummaryResponse>;
-  /** 查询容器逃逸事件列表导出 */
+  /** {@link DescribeEscapeEventsExport 查询容器逃逸事件列表导出}({@link DescribeEscapeEventsExportRequest 请求参数}): {@link DescribeEscapeEventsExportResponse 返回参数} */
   DescribeEscapeEventsExport(data: DescribeEscapeEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeEventsExportResponse>;
-  /** 查询容器逃逸扫描规则信息 */
+  /** {@link DescribeEscapeRuleInfo 查询容器逃逸扫描规则信息}({@link DescribeEscapeRuleInfoRequest 请求参数}): {@link DescribeEscapeRuleInfoResponse 返回参数} */
   DescribeEscapeRuleInfo(data?: DescribeEscapeRuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeRuleInfoResponse>;
-  /** 查询容器逃逸安全状态 */
+  /** {@link DescribeEscapeSafeState 查询容器逃逸安全状态}({@link DescribeEscapeSafeStateRequest 请求参数}): {@link DescribeEscapeSafeStateResponse 返回参数} */
   DescribeEscapeSafeState(data?: DescribeEscapeSafeStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeSafeStateResponse>;
-  /** 查询逃逸白名单 */
+  /** {@link DescribeEscapeWhiteList 查询逃逸白名单}({@link DescribeEscapeWhiteListRequest 请求参数}): {@link DescribeEscapeWhiteListResponse 返回参数} */
   DescribeEscapeWhiteList(data?: DescribeEscapeWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeWhiteListResponse>;
-  /** 查询导出任务下载URL */
+  /** {@link DescribeExportJobDownloadURL 查询导出任务下载URL}({@link DescribeExportJobDownloadURLRequest 请求参数}): {@link DescribeExportJobDownloadURLResponse 返回参数} */
   DescribeExportJobDownloadURL(data: DescribeExportJobDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportJobDownloadURLResponse>;
-  /** 查询导出任务管理列表 */
+  /** {@link DescribeExportJobManageList 查询导出任务管理列表}({@link DescribeExportJobManageListRequest 请求参数}): {@link DescribeExportJobManageListResponse 返回参数} */
   DescribeExportJobManageList(data?: DescribeExportJobManageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportJobManageListResponse>;
-  /** 查询导出任务的结果 */
+  /** {@link DescribeExportJobResult 查询导出任务的结果}({@link DescribeExportJobResultRequest 请求参数}): {@link DescribeExportJobResultResponse 返回参数} */
   DescribeExportJobResult(data: DescribeExportJobResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportJobResultResponse>;
-  /** 查询镜像授权信息 */
+  /** {@link DescribeImageAuthorizedInfo 查询镜像授权信息}({@link DescribeImageAuthorizedInfoRequest 请求参数}): {@link DescribeImageAuthorizedInfoResponse 返回参数} */
   DescribeImageAuthorizedInfo(data?: DescribeImageAuthorizedInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAuthorizedInfoResponse>;
-  /** 查询镜像自动授权结果列表 */
+  /** {@link DescribeImageAutoAuthorizedLogList 查询镜像自动授权结果列表}({@link DescribeImageAutoAuthorizedLogListRequest 请求参数}): {@link DescribeImageAutoAuthorizedLogListResponse 返回参数} */
   DescribeImageAutoAuthorizedLogList(data: DescribeImageAutoAuthorizedLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAutoAuthorizedLogListResponse>;
-  /** 查询本地镜像自动授权规则 */
+  /** {@link DescribeImageAutoAuthorizedRule 查询本地镜像自动授权规则}({@link DescribeImageAutoAuthorizedRuleRequest 请求参数}): {@link DescribeImageAutoAuthorizedRuleResponse 返回参数} */
   DescribeImageAutoAuthorizedRule(data?: DescribeImageAutoAuthorizedRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAutoAuthorizedRuleResponse>;
-  /** 查询镜像自动授权任务列表 */
+  /** {@link DescribeImageAutoAuthorizedTaskList 查询镜像自动授权任务列表}({@link DescribeImageAutoAuthorizedTaskListRequest 请求参数}): {@link DescribeImageAutoAuthorizedTaskListResponse 返回参数} */
   DescribeImageAutoAuthorizedTaskList(data: DescribeImageAutoAuthorizedTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAutoAuthorizedTaskListResponse>;
-  /** 查询本地镜像组件列表 */
+  /** {@link DescribeImageComponentList 查询本地镜像组件列表}({@link DescribeImageComponentListRequest 请求参数}): {@link DescribeImageComponentListResponse 返回参数} */
   DescribeImageComponentList(data: DescribeImageComponentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageComponentListResponse>;
-  /** 查询用户镜像仓库下的项目名称列表 */
+  /** {@link DescribeImageRegistryNamespaceList 查询用户镜像仓库下的项目名称列表}({@link DescribeImageRegistryNamespaceListRequest 请求参数}): {@link DescribeImageRegistryNamespaceListResponse 返回参数} */
   DescribeImageRegistryNamespaceList(data?: DescribeImageRegistryNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryNamespaceListResponse>;
-  /** 镜像仓库查看定时任务 */
+  /** {@link DescribeImageRegistryTimingScanTask 镜像仓库查看定时任务}({@link DescribeImageRegistryTimingScanTaskRequest 请求参数}): {@link DescribeImageRegistryTimingScanTaskResponse 返回参数} */
   DescribeImageRegistryTimingScanTask(data?: DescribeImageRegistryTimingScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryTimingScanTaskResponse>;
-  /** 查询本地镜像风险概览 */
+  /** {@link DescribeImageRiskSummary 查询本地镜像风险概览}({@link DescribeImageRiskSummaryRequest 请求参数}): {@link DescribeImageRiskSummaryResponse 返回参数} */
   DescribeImageRiskSummary(data?: DescribeImageRiskSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRiskSummaryResponse>;
-  /** 查询容器安全本地镜像风险趋势 */
+  /** {@link DescribeImageRiskTendency 查询容器安全本地镜像风险趋势}({@link DescribeImageRiskTendencyRequest 请求参数}): {@link DescribeImageRiskTendencyResponse 返回参数} */
   DescribeImageRiskTendency(data: DescribeImageRiskTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRiskTendencyResponse>;
-  /** 查询全部镜像列表 */
+  /** {@link DescribeImageSimpleList 查询全部镜像列表}({@link DescribeImageSimpleListRequest 请求参数}): {@link DescribeImageSimpleListResponse 返回参数} */
   DescribeImageSimpleList(data?: DescribeImageSimpleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSimpleListResponse>;
-  /** 获取索引列表 */
+  /** {@link DescribeIndexList 获取索引列表}({@link DescribeIndexListRequest 请求参数}): {@link DescribeIndexListResponse 返回参数} */
   DescribeIndexList(data?: DescribeIndexListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexListResponse>;
-  /** 查询检查报告 */
+  /** {@link DescribeInspectionReport 查询检查报告}({@link DescribeInspectionReportRequest 请求参数}): {@link DescribeInspectionReportResponse 返回参数} */
   DescribeInspectionReport(data?: DescribeInspectionReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInspectionReportResponse>;
-  /** 获取日志检索容量使用统计 */
+  /** {@link DescribeLogStorageStatistic 获取日志检索容量使用统计}({@link DescribeLogStorageStatisticRequest 请求参数}): {@link DescribeLogStorageStatisticResponse 返回参数} */
   DescribeLogStorageStatistic(data?: DescribeLogStorageStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageStatisticResponse>;
-  /** 查询集群策略审计列表 */
+  /** {@link DescribeNetworkFirewallAuditRecord 查询集群策略审计列表}({@link DescribeNetworkFirewallAuditRecordRequest 请求参数}): {@link DescribeNetworkFirewallAuditRecordResponse 返回参数} */
   DescribeNetworkFirewallAuditRecord(data?: DescribeNetworkFirewallAuditRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallAuditRecordResponse>;
-  /** 查询集群策略列表 */
+  /** {@link DescribeNetworkFirewallClusterList 查询集群策略列表}({@link DescribeNetworkFirewallClusterListRequest 请求参数}): {@link DescribeNetworkFirewallClusterListResponse 返回参数} */
   DescribeNetworkFirewallClusterList(data?: DescribeNetworkFirewallClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallClusterListResponse>;
-  /** 容器网络查询资产任务进度 */
+  /** {@link DescribeNetworkFirewallClusterRefreshStatus 容器网络查询资产任务进度}({@link DescribeNetworkFirewallClusterRefreshStatusRequest 请求参数}): {@link DescribeNetworkFirewallClusterRefreshStatusResponse 返回参数} */
   DescribeNetworkFirewallClusterRefreshStatus(data: DescribeNetworkFirewallClusterRefreshStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallClusterRefreshStatusResponse>;
-  /** 查询集群网络空间标签列表 */
+  /** {@link DescribeNetworkFirewallNamespaceLabelList 查询集群网络空间标签列表}({@link DescribeNetworkFirewallNamespaceLabelListRequest 请求参数}): {@link DescribeNetworkFirewallNamespaceLabelListResponse 返回参数} */
   DescribeNetworkFirewallNamespaceLabelList(data: DescribeNetworkFirewallNamespaceLabelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallNamespaceLabelListResponse>;
-  /** 查询集群网络空间列表 */
+  /** {@link DescribeNetworkFirewallNamespaceList 查询集群网络空间列表}({@link DescribeNetworkFirewallNamespaceListRequest 请求参数}): {@link DescribeNetworkFirewallNamespaceListResponse 返回参数} */
   DescribeNetworkFirewallNamespaceList(data: DescribeNetworkFirewallNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallNamespaceListResponse>;
-  /** 查询集群网络pod标签 */
+  /** {@link DescribeNetworkFirewallPodLabelsList 查询集群网络pod标签}({@link DescribeNetworkFirewallPodLabelsListRequest 请求参数}): {@link DescribeNetworkFirewallPodLabelsListResponse 返回参数} */
   DescribeNetworkFirewallPodLabelsList(data: DescribeNetworkFirewallPodLabelsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPodLabelsListResponse>;
-  /** 容器网络集群查看策略详情 */
+  /** {@link DescribeNetworkFirewallPolicyDetail 容器网络集群查看策略详情}({@link DescribeNetworkFirewallPolicyDetailRequest 请求参数}): {@link DescribeNetworkFirewallPolicyDetailResponse 返回参数} */
   DescribeNetworkFirewallPolicyDetail(data: DescribeNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPolicyDetailResponse>;
-  /** 容器网络查询网络策略自动发现任务进度 */
+  /** {@link DescribeNetworkFirewallPolicyDiscover 容器网络查询网络策略自动发现任务进度}({@link DescribeNetworkFirewallPolicyDiscoverRequest 请求参数}): {@link DescribeNetworkFirewallPolicyDiscoverResponse 返回参数} */
   DescribeNetworkFirewallPolicyDiscover(data: DescribeNetworkFirewallPolicyDiscoverRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPolicyDiscoverResponse>;
-  /** 查询集群网络策略列表 */
+  /** {@link DescribeNetworkFirewallPolicyList 查询集群网络策略列表}({@link DescribeNetworkFirewallPolicyListRequest 请求参数}): {@link DescribeNetworkFirewallPolicyListResponse 返回参数} */
   DescribeNetworkFirewallPolicyList(data: DescribeNetworkFirewallPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPolicyListResponse>;
-  /** 容器网络查询网络策略策略执行状态 */
+  /** {@link DescribeNetworkFirewallPolicyStatus 容器网络查询网络策略策略执行状态}({@link DescribeNetworkFirewallPolicyStatusRequest 请求参数}): {@link DescribeNetworkFirewallPolicyStatusResponse 返回参数} */
   DescribeNetworkFirewallPolicyStatus(data: DescribeNetworkFirewallPolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPolicyStatusResponse>;
-  /** 容器网络集群查看Yaml网络策略详情 */
+  /** {@link DescribeNetworkFirewallPolicyYamlDetail 容器网络集群查看Yaml网络策略详情}({@link DescribeNetworkFirewallPolicyYamlDetailRequest 请求参数}): {@link DescribeNetworkFirewallPolicyYamlDetailResponse 返回参数} */
   DescribeNetworkFirewallPolicyYamlDetail(data: DescribeNetworkFirewallPolicyYamlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPolicyYamlDetailResponse>;
-  /** 查询最新披露漏洞列表 */
+  /** {@link DescribeNewestVul 查询最新披露漏洞列表}({@link DescribeNewestVulRequest 请求参数}): {@link DescribeNewestVulResponse 返回参数} */
   DescribeNewestVul(data?: DescribeNewestVulRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNewestVulResponse>;
-  /** 查询后付费详情 */
+  /** {@link DescribePostPayDetail 查询后付费详情}({@link DescribePostPayDetailRequest 请求参数}): {@link DescribePostPayDetailResponse 返回参数} */
   DescribePostPayDetail(data?: DescribePostPayDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostPayDetailResponse>;
-  /** 查询专业版需购买信息 */
+  /** {@link DescribeProVersionInfo 查询专业版需购买信息}({@link DescribeProVersionInfoRequest 请求参数}): {@link DescribeProVersionInfoResponse 返回参数} */
   DescribeProVersionInfo(data?: DescribeProVersionInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProVersionInfoResponse>;
-  /** 查询促销活动 */
+  /** {@link DescribePromotionActivity 查询促销活动}({@link DescribePromotionActivityRequest 请求参数}): {@link DescribePromotionActivityResponse 返回参数} */
   DescribePromotionActivity(data: DescribePromotionActivityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePromotionActivityResponse>;
-  /** 获取公钥 */
+  /** {@link DescribePublicKey 获取公钥}({@link DescribePublicKeyRequest 请求参数}): {@link DescribePublicKeyResponse 返回参数} */
   DescribePublicKey(data?: DescribePublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicKeyResponse>;
-  /** 查询容器安全服务已购买信息 */
+  /** {@link DescribePurchaseStateInfo 查询容器安全服务已购买信息}({@link DescribePurchaseStateInfoRequest 请求参数}): {@link DescribePurchaseStateInfoResponse 返回参数} */
   DescribePurchaseStateInfo(data?: DescribePurchaseStateInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurchaseStateInfoResponse>;
-  /** 查询刷新任务 */
+  /** {@link DescribeRefreshTask 查询刷新任务}({@link DescribeRefreshTaskRequest 请求参数}): {@link DescribeRefreshTaskResponse 返回参数} */
   DescribeRefreshTask(data: DescribeRefreshTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRefreshTaskResponse>;
-  /** 运行时反弹shell事件详细信息 */
+  /** {@link DescribeReverseShellDetail 运行时反弹shell事件详细信息}({@link DescribeReverseShellDetailRequest 请求参数}): {@link DescribeReverseShellDetailResponse 返回参数} */
   DescribeReverseShellDetail(data: DescribeReverseShellDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellDetailResponse>;
-  /** 运行时反弹shell列表 */
+  /** {@link DescribeReverseShellEvents 运行时反弹shell列表}({@link DescribeReverseShellEventsRequest 请求参数}): {@link DescribeReverseShellEventsResponse 返回参数} */
   DescribeReverseShellEvents(data?: DescribeReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsResponse>;
-  /** 运行时反弹shell列表导出 */
+  /** {@link DescribeReverseShellEventsExport 运行时反弹shell列表导出}({@link DescribeReverseShellEventsExportRequest 请求参数}): {@link DescribeReverseShellEventsExportResponse 返回参数} */
   DescribeReverseShellEventsExport(data?: DescribeReverseShellEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsExportResponse>;
-  /** 运行时反弹shell白名单详细信息 */
+  /** {@link DescribeReverseShellWhiteListDetail 运行时反弹shell白名单详细信息}({@link DescribeReverseShellWhiteListDetailRequest 请求参数}): {@link DescribeReverseShellWhiteListDetailResponse 返回参数} */
   DescribeReverseShellWhiteListDetail(data: DescribeReverseShellWhiteListDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellWhiteListDetailResponse>;
-  /** 运行时反弹shell白名单列表 */
+  /** {@link DescribeReverseShellWhiteLists 运行时反弹shell白名单列表}({@link DescribeReverseShellWhiteListsRequest 请求参数}): {@link DescribeReverseShellWhiteListsResponse 返回参数} */
   DescribeReverseShellWhiteLists(data?: DescribeReverseShellWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellWhiteListsResponse>;
-  /** 查询集群风险项列表 */
+  /** {@link DescribeRiskList 查询集群风险项列表}({@link DescribeRiskListRequest 请求参数}): {@link DescribeRiskListResponse 返回参数} */
   DescribeRiskList(data?: DescribeRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskListResponse>;
-  /** 运行时高危系统调用事件详细信息 */
+  /** {@link DescribeRiskSyscallDetail 运行时高危系统调用事件详细信息}({@link DescribeRiskSyscallDetailRequest 请求参数}): {@link DescribeRiskSyscallDetailResponse 返回参数} */
   DescribeRiskSyscallDetail(data: DescribeRiskSyscallDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallDetailResponse>;
-  /** 运行时高危系统调用列表 */
+  /** {@link DescribeRiskSyscallEvents 运行时高危系统调用列表}({@link DescribeRiskSyscallEventsRequest 请求参数}): {@link DescribeRiskSyscallEventsResponse 返回参数} */
   DescribeRiskSyscallEvents(data?: DescribeRiskSyscallEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallEventsResponse>;
-  /** 运行时高危系统调用列表导出 */
+  /** {@link DescribeRiskSyscallEventsExport 运行时高危系统调用列表导出}({@link DescribeRiskSyscallEventsExportRequest 请求参数}): {@link DescribeRiskSyscallEventsExportResponse 返回参数} */
   DescribeRiskSyscallEventsExport(data?: DescribeRiskSyscallEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallEventsExportResponse>;
-  /** 运行时高危系统调用系统名称列表 */
+  /** {@link DescribeRiskSyscallNames 运行时高危系统调用系统名称列表}({@link DescribeRiskSyscallNamesRequest 请求参数}): {@link DescribeRiskSyscallNamesResponse 返回参数} */
   DescribeRiskSyscallNames(data?: DescribeRiskSyscallNamesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallNamesResponse>;
-  /** 运行时高危系统调用白名单详细信息 */
+  /** {@link DescribeRiskSyscallWhiteListDetail 运行时高危系统调用白名单详细信息}({@link DescribeRiskSyscallWhiteListDetailRequest 请求参数}): {@link DescribeRiskSyscallWhiteListDetailResponse 返回参数} */
   DescribeRiskSyscallWhiteListDetail(data: DescribeRiskSyscallWhiteListDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallWhiteListDetailResponse>;
-  /** 运行时高危系统调用白名单列表 */
+  /** {@link DescribeRiskSyscallWhiteLists 运行时高危系统调用白名单列表}({@link DescribeRiskSyscallWhiteListsRequest 请求参数}): {@link DescribeRiskSyscallWhiteListsResponse 返回参数} */
   DescribeRiskSyscallWhiteLists(data?: DescribeRiskSyscallWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallWhiteListsResponse>;
-  /** 查询扫描忽略的漏洞列表 */
+  /** {@link DescribeScanIgnoreVulList 查询扫描忽略的漏洞列表}({@link DescribeScanIgnoreVulListRequest 请求参数}): {@link DescribeScanIgnoreVulListResponse 返回参数} */
   DescribeScanIgnoreVulList(data?: DescribeScanIgnoreVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanIgnoreVulListResponse>;
-  /** 导出ES查询文档列表 */
+  /** {@link DescribeSearchExportList 导出ES查询文档列表}({@link DescribeSearchExportListRequest 请求参数}): {@link DescribeSearchExportListResponse 返回参数} */
   DescribeSearchExportList(data: DescribeSearchExportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchExportListResponse>;
-  /** 获取历史搜索记录 */
+  /** {@link DescribeSearchLogs 获取历史搜索记录}({@link DescribeSearchLogsRequest 请求参数}): {@link DescribeSearchLogsResponse 返回参数} */
   DescribeSearchLogs(data?: DescribeSearchLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchLogsResponse>;
-  /** 获取快速检索列表 */
+  /** {@link DescribeSearchTemplates 获取快速检索列表}({@link DescribeSearchTemplatesRequest 请求参数}): {@link DescribeSearchTemplatesResponse 返回参数} */
   DescribeSearchTemplates(data?: DescribeSearchTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchTemplatesResponse>;
-  /** 查询容器运行时安全时间趋势 */
+  /** {@link DescribeSecEventsTendency 查询容器运行时安全时间趋势}({@link DescribeSecEventsTendencyRequest 请求参数}): {@link DescribeSecEventsTendencyResponse 返回参数} */
   DescribeSecEventsTendency(data: DescribeSecEventsTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecEventsTendencyResponse>;
-  /** 查询安全日志告警信息 */
+  /** {@link DescribeSecLogAlertMsg 查询安全日志告警信息}({@link DescribeSecLogAlertMsgRequest 请求参数}): {@link DescribeSecLogAlertMsgResponse 返回参数} */
   DescribeSecLogAlertMsg(data?: DescribeSecLogAlertMsgRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogAlertMsgResponse>;
-  /** 查询安全日志清理设置详情 */
+  /** {@link DescribeSecLogCleanSettingInfo 查询安全日志清理设置详情}({@link DescribeSecLogCleanSettingInfoRequest 请求参数}): {@link DescribeSecLogCleanSettingInfoResponse 返回参数} */
   DescribeSecLogCleanSettingInfo(data?: DescribeSecLogCleanSettingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogCleanSettingInfoResponse>;
-  /** 查询安全日志投递cls可选项 */
+  /** {@link DescribeSecLogDeliveryClsOptions 查询安全日志投递cls可选项}({@link DescribeSecLogDeliveryClsOptionsRequest 请求参数}): {@link DescribeSecLogDeliveryClsOptionsResponse 返回参数} */
   DescribeSecLogDeliveryClsOptions(data?: DescribeSecLogDeliveryClsOptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryClsOptionsResponse>;
-  /** 查询安全日志投递Cls配置 */
+  /** {@link DescribeSecLogDeliveryClsSetting 查询安全日志投递Cls配置}({@link DescribeSecLogDeliveryClsSettingRequest 请求参数}): {@link DescribeSecLogDeliveryClsSettingResponse 返回参数} */
   DescribeSecLogDeliveryClsSetting(data?: DescribeSecLogDeliveryClsSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryClsSettingResponse>;
-  /** 查询安全日志投递kafka可选项 */
+  /** {@link DescribeSecLogDeliveryKafkaOptions 查询安全日志投递kafka可选项}({@link DescribeSecLogDeliveryKafkaOptionsRequest 请求参数}): {@link DescribeSecLogDeliveryKafkaOptionsResponse 返回参数} */
   DescribeSecLogDeliveryKafkaOptions(data?: DescribeSecLogDeliveryKafkaOptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryKafkaOptionsResponse>;
-  /** 查询安全日志投递kafka配置 */
+  /** {@link DescribeSecLogDeliveryKafkaSetting 查询安全日志投递kafka配置}({@link DescribeSecLogDeliveryKafkaSettingRequest 请求参数}): {@link DescribeSecLogDeliveryKafkaSettingResponse 返回参数} */
   DescribeSecLogDeliveryKafkaSetting(data?: DescribeSecLogDeliveryKafkaSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryKafkaSettingResponse>;
-  /** 查询安全日志接入对象列表 */
+  /** {@link DescribeSecLogJoinObjectList 查询安全日志接入对象列表}({@link DescribeSecLogJoinObjectListRequest 请求参数}): {@link DescribeSecLogJoinObjectListResponse 返回参数} */
   DescribeSecLogJoinObjectList(data: DescribeSecLogJoinObjectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogJoinObjectListResponse>;
-  /** 查询安全日志接入列表 */
+  /** {@link DescribeSecLogJoinTypeList 查询安全日志接入列表}({@link DescribeSecLogJoinTypeListRequest 请求参数}): {@link DescribeSecLogJoinTypeListResponse 返回参数} */
   DescribeSecLogJoinTypeList(data?: DescribeSecLogJoinTypeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogJoinTypeListResponse>;
-  /** 查询安全日志KafkaUIN */
+  /** {@link DescribeSecLogKafkaUIN 查询安全日志KafkaUIN}({@link DescribeSecLogKafkaUINRequest 请求参数}): {@link DescribeSecLogKafkaUINResponse 返回参数} */
   DescribeSecLogKafkaUIN(data?: DescribeSecLogKafkaUINRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogKafkaUINResponse>;
-  /** 查询安全日志商品信息 */
+  /** {@link DescribeSecLogVasInfo 查询安全日志商品信息}({@link DescribeSecLogVasInfoRequest 请求参数}): {@link DescribeSecLogVasInfoResponse 返回参数} */
   DescribeSecLogVasInfo(data?: DescribeSecLogVasInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogVasInfoResponse>;
-  /** 查询支持防御的漏洞列表 */
+  /** {@link DescribeSupportDefenceVul 查询支持防御的漏洞列表}({@link DescribeSupportDefenceVulRequest 请求参数}): {@link DescribeSupportDefenceVulResponse 返回参数} */
   DescribeSupportDefenceVul(data?: DescribeSupportDefenceVulRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportDefenceVulResponse>;
-  /** 查询系统漏洞列表 */
+  /** {@link DescribeSystemVulList 查询系统漏洞列表}({@link DescribeSystemVulListRequest 请求参数}): {@link DescribeSystemVulListResponse 返回参数} */
   DescribeSystemVulList(data?: DescribeSystemVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSystemVulListResponse>;
-  /** 查询检查结果总览 */
+  /** {@link DescribeTaskResultSummary 查询检查结果总览}({@link DescribeTaskResultSummaryRequest 请求参数}): {@link DescribeTaskResultSummaryResponse 返回参数} */
   DescribeTaskResultSummary(data?: DescribeTaskResultSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultSummaryResponse>;
-  /** 查询容器安全概览信息 */
+  /** {@link DescribeTcssSummary 查询容器安全概览信息}({@link DescribeTcssSummaryRequest 请求参数}): {@link DescribeTcssSummaryResponse 返回参数} */
   DescribeTcssSummary(data?: DescribeTcssSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTcssSummaryResponse>;
-  /** 查询当天未授权核数趋势 */
+  /** {@link DescribeUnauthorizedCoresTendency 查询当天未授权核数趋势}({@link DescribeUnauthorizedCoresTendencyRequest 请求参数}): {@link DescribeUnauthorizedCoresTendencyResponse 返回参数} */
   DescribeUnauthorizedCoresTendency(data?: DescribeUnauthorizedCoresTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnauthorizedCoresTendencyResponse>;
-  /** 查询未完成的刷新资产任务信息 */
+  /** {@link DescribeUnfinishRefreshTask 查询未完成的刷新资产任务信息}({@link DescribeUnfinishRefreshTaskRequest 请求参数}): {@link DescribeUnfinishRefreshTaskResponse 返回参数} */
   DescribeUnfinishRefreshTask(data?: DescribeUnfinishRefreshTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnfinishRefreshTaskResponse>;
-  /** 用户集群资产查询 */
+  /** {@link DescribeUserCluster 用户集群资产查询}({@link DescribeUserClusterRequest 请求参数}): {@link DescribeUserClusterResponse 返回参数} */
   DescribeUserCluster(data?: DescribeUserClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserClusterResponse>;
-  /** 查询增值服务需购买信息 */
+  /** {@link DescribeValueAddedSrvInfo 查询增值服务需购买信息}({@link DescribeValueAddedSrvInfoRequest 请求参数}): {@link DescribeValueAddedSrvInfoResponse 返回参数} */
   DescribeValueAddedSrvInfo(data?: DescribeValueAddedSrvInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeValueAddedSrvInfoResponse>;
-  /** 查询木马自动隔离样本详情 */
+  /** {@link DescribeVirusAutoIsolateSampleDetail 查询木马自动隔离样本详情}({@link DescribeVirusAutoIsolateSampleDetailRequest 请求参数}): {@link DescribeVirusAutoIsolateSampleDetailResponse 返回参数} */
   DescribeVirusAutoIsolateSampleDetail(data: DescribeVirusAutoIsolateSampleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusAutoIsolateSampleDetailResponse>;
-  /** 查询木马自动隔离样本下载链接 */
+  /** {@link DescribeVirusAutoIsolateSampleDownloadURL 查询木马自动隔离样本下载链接}({@link DescribeVirusAutoIsolateSampleDownloadURLRequest 请求参数}): {@link DescribeVirusAutoIsolateSampleDownloadURLResponse 返回参数} */
   DescribeVirusAutoIsolateSampleDownloadURL(data: DescribeVirusAutoIsolateSampleDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusAutoIsolateSampleDownloadURLResponse>;
-  /** 查询木马自动隔离样本列表 */
+  /** {@link DescribeVirusAutoIsolateSampleList 查询木马自动隔离样本列表}({@link DescribeVirusAutoIsolateSampleListRequest 请求参数}): {@link DescribeVirusAutoIsolateSampleListResponse 返回参数} */
   DescribeVirusAutoIsolateSampleList(data?: DescribeVirusAutoIsolateSampleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusAutoIsolateSampleListResponse>;
-  /** 查询木马自动隔离设置 */
+  /** {@link DescribeVirusAutoIsolateSetting 查询木马自动隔离设置}({@link DescribeVirusAutoIsolateSettingRequest 请求参数}): {@link DescribeVirusAutoIsolateSettingResponse 返回参数} */
   DescribeVirusAutoIsolateSetting(data?: DescribeVirusAutoIsolateSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusAutoIsolateSettingResponse>;
-  /** 运行时查询木马文件信息 */
+  /** {@link DescribeVirusDetail 运行时查询木马文件信息}({@link DescribeVirusDetailRequest 请求参数}): {@link DescribeVirusDetailResponse 返回参数} */
   DescribeVirusDetail(data: DescribeVirusDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusDetailResponse>;
-  /** 查询木马事件趋势 */
+  /** {@link DescribeVirusEventTendency 查询木马事件趋势}({@link DescribeVirusEventTendencyRequest 请求参数}): {@link DescribeVirusEventTendencyResponse 返回参数} */
   DescribeVirusEventTendency(data: DescribeVirusEventTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusEventTendencyResponse>;
-  /** 查询运行时文件查杀事件列表 */
+  /** {@link DescribeVirusList 查询运行时文件查杀事件列表}({@link DescribeVirusListRequest 请求参数}): {@link DescribeVirusListResponse 返回参数} */
   DescribeVirusList(data?: DescribeVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusListResponse>;
-  /** 查询木马一键检测预估超时时间 */
+  /** {@link DescribeVirusManualScanEstimateTimeout 查询木马一键检测预估超时时间}({@link DescribeVirusManualScanEstimateTimeoutRequest 请求参数}): {@link DescribeVirusManualScanEstimateTimeoutResponse 返回参数} */
   DescribeVirusManualScanEstimateTimeout(data: DescribeVirusManualScanEstimateTimeoutRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusManualScanEstimateTimeoutResponse>;
-  /** 运行时查询文件查杀实时监控设置 */
+  /** {@link DescribeVirusMonitorSetting 运行时查询文件查杀实时监控设置}({@link DescribeVirusMonitorSettingRequest 请求参数}): {@link DescribeVirusMonitorSettingResponse 返回参数} */
   DescribeVirusMonitorSetting(data?: DescribeVirusMonitorSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusMonitorSettingResponse>;
-  /** 查询木马样本下载url */
+  /** {@link DescribeVirusSampleDownloadUrl 查询木马样本下载url}({@link DescribeVirusSampleDownloadUrlRequest 请求参数}): {@link DescribeVirusSampleDownloadUrlResponse 返回参数} */
   DescribeVirusSampleDownloadUrl(data: DescribeVirusSampleDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusSampleDownloadUrlResponse>;
-  /** 运行时查询文件查杀设置 */
+  /** {@link DescribeVirusScanSetting 运行时查询文件查杀设置}({@link DescribeVirusScanSettingRequest 请求参数}): {@link DescribeVirusScanSettingResponse 返回参数} */
   DescribeVirusScanSetting(data?: DescribeVirusScanSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusScanSettingResponse>;
-  /** 运行时查询文件查杀任务状态 */
+  /** {@link DescribeVirusScanTaskStatus 运行时查询文件查杀任务状态}({@link DescribeVirusScanTaskStatusRequest 请求参数}): {@link DescribeVirusScanTaskStatusResponse 返回参数} */
   DescribeVirusScanTaskStatus(data?: DescribeVirusScanTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusScanTaskStatusResponse>;
-  /** 运行时文件扫描超时设置查询 */
+  /** {@link DescribeVirusScanTimeoutSetting 运行时文件扫描超时设置查询}({@link DescribeVirusScanTimeoutSettingRequest 请求参数}): {@link DescribeVirusScanTimeoutSettingResponse 返回参数} */
   DescribeVirusScanTimeoutSetting(data: DescribeVirusScanTimeoutSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusScanTimeoutSettingResponse>;
-  /** 运行时查询木马概览信息 */
+  /** {@link DescribeVirusSummary 运行时查询木马概览信息}({@link DescribeVirusSummaryRequest 请求参数}): {@link DescribeVirusSummaryResponse 返回参数} */
   DescribeVirusSummary(data?: DescribeVirusSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusSummaryResponse>;
-  /** 运行时查询文件查杀任务列表 */
+  /** {@link DescribeVirusTaskList 运行时查询文件查杀任务列表}({@link DescribeVirusTaskListRequest 请求参数}): {@link DescribeVirusTaskListResponse 返回参数} */
   DescribeVirusTaskList(data: DescribeVirusTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusTaskListResponse>;
-  /** 查询受漏洞的容器列表 */
+  /** {@link DescribeVulContainerList 查询受漏洞的容器列表}({@link DescribeVulContainerListRequest 请求参数}): {@link DescribeVulContainerListResponse 返回参数} */
   DescribeVulContainerList(data: DescribeVulContainerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulContainerListResponse>;
-  /** 查询漏洞防御事件列表 */
+  /** {@link DescribeVulDefenceEvent 查询漏洞防御事件列表}({@link DescribeVulDefenceEventRequest 请求参数}): {@link DescribeVulDefenceEventResponse 返回参数} */
   DescribeVulDefenceEvent(data?: DescribeVulDefenceEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceEventResponse>;
-  /** 查询漏洞防御事件详情 */
+  /** {@link DescribeVulDefenceEventDetail 查询漏洞防御事件详情}({@link DescribeVulDefenceEventDetailRequest 请求参数}): {@link DescribeVulDefenceEventDetailResponse 返回参数} */
   DescribeVulDefenceEventDetail(data: DescribeVulDefenceEventDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceEventDetailResponse>;
-  /** 查询漏洞防御攻击事件趋势 */
+  /** {@link DescribeVulDefenceEventTendency 查询漏洞防御攻击事件趋势}({@link DescribeVulDefenceEventTendencyRequest 请求参数}): {@link DescribeVulDefenceEventTendencyResponse 返回参数} */
   DescribeVulDefenceEventTendency(data: DescribeVulDefenceEventTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceEventTendencyResponse>;
-  /** 查询漏洞防御的主机列表 */
+  /** {@link DescribeVulDefenceHost 查询漏洞防御的主机列表}({@link DescribeVulDefenceHostRequest 请求参数}): {@link DescribeVulDefenceHostResponse 返回参数} */
   DescribeVulDefenceHost(data?: DescribeVulDefenceHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceHostResponse>;
-  /** 查询漏洞防御插件列表 */
+  /** {@link DescribeVulDefencePlugin 查询漏洞防御插件列表}({@link DescribeVulDefencePluginRequest 请求参数}): {@link DescribeVulDefencePluginResponse 返回参数} */
   DescribeVulDefencePlugin(data?: DescribeVulDefencePluginRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefencePluginResponse>;
-  /** 查询漏洞防御设置信息 */
+  /** {@link DescribeVulDefenceSetting 查询漏洞防御设置信息}({@link DescribeVulDefenceSettingRequest 请求参数}): {@link DescribeVulDefenceSettingResponse 返回参数} */
   DescribeVulDefenceSetting(data?: DescribeVulDefenceSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceSettingResponse>;
-  /** 查询漏洞详情 */
+  /** {@link DescribeVulDetail 查询漏洞详情}({@link DescribeVulDetailRequest 请求参数}): {@link DescribeVulDetailResponse 返回参数} */
   DescribeVulDetail(data: DescribeVulDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDetailResponse>;
-  /** 查询漏洞扫描忽略的本地镜像列表 */
+  /** {@link DescribeVulIgnoreLocalImageList 查询漏洞扫描忽略的本地镜像列表}({@link DescribeVulIgnoreLocalImageListRequest 请求参数}): {@link DescribeVulIgnoreLocalImageListResponse 返回参数} */
   DescribeVulIgnoreLocalImageList(data: DescribeVulIgnoreLocalImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulIgnoreLocalImageListResponse>;
-  /** 查询漏洞扫描忽略的仓库镜像列表 */
+  /** {@link DescribeVulIgnoreRegistryImageList 查询漏洞扫描忽略的仓库镜像列表}({@link DescribeVulIgnoreRegistryImageListRequest 请求参数}): {@link DescribeVulIgnoreRegistryImageListResponse 返回参数} */
   DescribeVulIgnoreRegistryImageList(data: DescribeVulIgnoreRegistryImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulIgnoreRegistryImageListResponse>;
-  /** 查询漏洞影响的镜像列表 */
+  /** {@link DescribeVulImageList 查询漏洞影响的镜像列表}({@link DescribeVulImageListRequest 请求参数}): {@link DescribeVulImageListResponse 返回参数} */
   DescribeVulImageList(data: DescribeVulImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulImageListResponse>;
-  /** 查询漏洞镜像统计 */
+  /** {@link DescribeVulImageSummary 查询漏洞镜像统计}({@link DescribeVulImageSummaryRequest 请求参数}): {@link DescribeVulImageSummaryResponse 返回参数} */
   DescribeVulImageSummary(data?: DescribeVulImageSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulImageSummaryResponse>;
-  /** 查询应急漏洞各威胁等级统计镜像数 */
+  /** {@link DescribeVulLevelImageSummary 查询应急漏洞各威胁等级统计镜像数}({@link DescribeVulLevelImageSummaryRequest 请求参数}): {@link DescribeVulLevelImageSummaryResponse 返回参数} */
   DescribeVulLevelImageSummary(data?: DescribeVulLevelImageSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulLevelImageSummaryResponse>;
-  /** 查询漏洞各威胁等级统计数 */
+  /** {@link DescribeVulLevelSummary 查询漏洞各威胁等级统计数}({@link DescribeVulLevelSummaryRequest 请求参数}): {@link DescribeVulLevelSummaryResponse 返回参数} */
   DescribeVulLevelSummary(data: DescribeVulLevelSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulLevelSummaryResponse>;
-  /** 统计漏洞扫描页已授权和未扫描镜像数 */
+  /** {@link DescribeVulScanAuthorizedImageSummary 统计漏洞扫描页已授权和未扫描镜像数}({@link DescribeVulScanAuthorizedImageSummaryRequest 请求参数}): {@link DescribeVulScanAuthorizedImageSummaryResponse 返回参数} */
   DescribeVulScanAuthorizedImageSummary(data?: DescribeVulScanAuthorizedImageSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulScanAuthorizedImageSummaryResponse>;
-  /** 查询漏洞扫描任务信息 */
+  /** {@link DescribeVulScanInfo 查询漏洞扫描任务信息}({@link DescribeVulScanInfoRequest 请求参数}): {@link DescribeVulScanInfoResponse 返回参数} */
   DescribeVulScanInfo(data?: DescribeVulScanInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulScanInfoResponse>;
-  /** 查询漏洞扫描任务的本地镜像列表 */
+  /** {@link DescribeVulScanLocalImageList 查询漏洞扫描任务的本地镜像列表}({@link DescribeVulScanLocalImageListRequest 请求参数}): {@link DescribeVulScanLocalImageListResponse 返回参数} */
   DescribeVulScanLocalImageList(data: DescribeVulScanLocalImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulScanLocalImageListResponse>;
-  /** 查询漏洞风险统计概览 */
+  /** {@link DescribeVulSummary 查询漏洞风险统计概览}({@link DescribeVulSummaryRequest 请求参数}): {@link DescribeVulSummaryResponse 返回参数} */
   DescribeVulSummary(data?: DescribeVulSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulSummaryResponse>;
-  /** 查询漏洞风险趋势 */
+  /** {@link DescribeVulTendency 查询漏洞风险趋势}({@link DescribeVulTendencyRequest 请求参数}): {@link DescribeVulTendencyResponse 返回参数} */
   DescribeVulTendency(data: DescribeVulTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulTendencyResponse>;
-  /** 查询漏洞Top排名列表 */
+  /** {@link DescribeVulTopRanking 查询漏洞Top排名列表}({@link DescribeVulTopRankingRequest 请求参数}): {@link DescribeVulTopRankingResponse 返回参数} */
   DescribeVulTopRanking(data: DescribeVulTopRankingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulTopRankingResponse>;
-  /** 获取告警策略列表 */
+  /** {@link DescribeWarningRules 获取告警策略列表}({@link DescribeWarningRulesRequest 请求参数}): {@link DescribeWarningRulesResponse 返回参数} */
   DescribeWarningRules(data?: DescribeWarningRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWarningRulesResponse>;
-  /** 查询web应用漏洞列表 */
+  /** {@link DescribeWebVulList 查询web应用漏洞列表}({@link DescribeWebVulListRequest 请求参数}): {@link DescribeWebVulListResponse 返回参数} */
   DescribeWebVulList(data?: DescribeWebVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebVulListResponse>;
-  /** 运行时文件查杀事件列表导出 */
+  /** {@link ExportVirusList 运行时文件查杀事件列表导出}({@link ExportVirusListRequest 请求参数}): {@link ExportVirusListResponse 返回参数} */
   ExportVirusList(data?: ExportVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVirusListResponse>;
-  /** 安全合规初始化用户的合规基线检测环境 */
+  /** {@link InitializeUserComplianceEnvironment 安全合规初始化用户的合规基线检测环境}({@link InitializeUserComplianceEnvironmentRequest 请求参数}): {@link InitializeUserComplianceEnvironmentResponse 返回参数} */
   InitializeUserComplianceEnvironment(data?: InitializeUserComplianceEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeUserComplianceEnvironmentResponse>;
-  /** 修改运行时异常进程策略状态 */
+  /** {@link ModifyAbnormalProcessRuleStatus 修改运行时异常进程策略状态}({@link ModifyAbnormalProcessRuleStatusRequest 请求参数}): {@link ModifyAbnormalProcessRuleStatusResponse 返回参数} */
   ModifyAbnormalProcessRuleStatus(data: ModifyAbnormalProcessRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAbnormalProcessRuleStatusResponse>;
-  /** 修改异常进程事件状态 */
+  /** {@link ModifyAbnormalProcessStatus 修改异常进程事件状态}({@link ModifyAbnormalProcessStatusRequest 请求参数}): {@link ModifyAbnormalProcessStatusResponse 返回参数} */
   ModifyAbnormalProcessStatus(data: ModifyAbnormalProcessStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAbnormalProcessStatusResponse>;
-  /** 修改运行时访问控制策略状态 */
+  /** {@link ModifyAccessControlRuleStatus 修改运行时访问控制策略状态}({@link ModifyAccessControlRuleStatusRequest 请求参数}): {@link ModifyAccessControlRuleStatusResponse 返回参数} */
   ModifyAccessControlRuleStatus(data: ModifyAccessControlRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessControlRuleStatusResponse>;
-  /** 修改运行时访问控制事件状态 */
+  /** {@link ModifyAccessControlStatus 修改运行时访问控制事件状态}({@link ModifyAccessControlStatusRequest 请求参数}): {@link ModifyAccessControlStatusResponse 返回参数} */
   ModifyAccessControlStatus(data: ModifyAccessControlStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessControlStatusResponse>;
-  /** 主机资产刷新 */
+  /** {@link ModifyAsset 主机资产刷新}({@link ModifyAssetRequest 请求参数}): {@link ModifyAssetResponse 返回参数} */
   ModifyAsset(data?: ModifyAssetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetResponse>;
-  /** 镜像仓库停止镜像扫描任务 */
+  /** {@link ModifyAssetImageRegistryScanStop 镜像仓库停止镜像扫描任务}({@link ModifyAssetImageRegistryScanStopRequest 请求参数}): {@link ModifyAssetImageRegistryScanStopResponse 返回参数} */
   ModifyAssetImageRegistryScanStop(data?: ModifyAssetImageRegistryScanStopRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetImageRegistryScanStopResponse>;
-  /** 镜像仓库停止镜像一键扫描任务 */
+  /** {@link ModifyAssetImageRegistryScanStopOneKey 镜像仓库停止镜像一键扫描任务}({@link ModifyAssetImageRegistryScanStopOneKeyRequest 请求参数}): {@link ModifyAssetImageRegistryScanStopOneKeyResponse 返回参数} */
   ModifyAssetImageRegistryScanStopOneKey(data?: ModifyAssetImageRegistryScanStopOneKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetImageRegistryScanStopOneKeyResponse>;
-  /** 停止镜像扫描 */
+  /** {@link ModifyAssetImageScanStop 停止镜像扫描}({@link ModifyAssetImageScanStopRequest 请求参数}): {@link ModifyAssetImageScanStopResponse 返回参数} */
   ModifyAssetImageScanStop(data?: ModifyAssetImageScanStopRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetImageScanStopResponse>;
-  /** 安全合规编辑定时任务 */
+  /** {@link ModifyCompliancePeriodTask 安全合规编辑定时任务}({@link ModifyCompliancePeriodTaskRequest 请求参数}): {@link ModifyCompliancePeriodTaskResponse 返回参数} */
   ModifyCompliancePeriodTask(data: ModifyCompliancePeriodTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCompliancePeriodTaskResponse>;
-  /** 隔离容器网络状态 */
+  /** {@link ModifyContainerNetStatus 隔离容器网络状态}({@link ModifyContainerNetStatusRequest 请求参数}): {@link ModifyContainerNetStatusResponse 返回参数} */
   ModifyContainerNetStatus(data: ModifyContainerNetStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContainerNetStatusResponse>;
-  /** 修改容器逃逸扫描事件状态 */
+  /** {@link ModifyEscapeEventStatus 修改容器逃逸扫描事件状态}({@link ModifyEscapeEventStatusRequest 请求参数}): {@link ModifyEscapeEventStatusResponse 返回参数} */
   ModifyEscapeEventStatus(data: ModifyEscapeEventStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEscapeEventStatusResponse>;
-  /** 修改容器逃逸扫描规则信息 */
+  /** {@link ModifyEscapeRule 修改容器逃逸扫描规则信息}({@link ModifyEscapeRuleRequest 请求参数}): {@link ModifyEscapeRuleResponse 返回参数} */
   ModifyEscapeRule(data: ModifyEscapeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEscapeRuleResponse>;
-  /** 修改逃逸白名单 */
+  /** {@link ModifyEscapeWhiteList 修改逃逸白名单}({@link ModifyEscapeWhiteListRequest 请求参数}): {@link ModifyEscapeWhiteListResponse 返回参数} */
   ModifyEscapeWhiteList(data: ModifyEscapeWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEscapeWhiteListResponse>;
-  /** 批量授权镜像扫描V2.0 */
+  /** {@link ModifyImageAuthorized 批量授权镜像扫描V2.0}({@link ModifyImageAuthorizedRequest 请求参数}): {@link ModifyImageAuthorizedResponse 返回参数} */
   ModifyImageAuthorized(data: ModifyImageAuthorizedRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageAuthorizedResponse>;
-  /** 修改反弹shell事件状态 */
+  /** {@link ModifyReverseShellStatus 修改反弹shell事件状态}({@link ModifyReverseShellStatusRequest 请求参数}): {@link ModifyReverseShellStatusResponse 返回参数} */
   ModifyReverseShellStatus(data: ModifyReverseShellStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReverseShellStatusResponse>;
-  /** 修改高危系统调用事件状态 */
+  /** {@link ModifyRiskSyscallStatus 修改高危系统调用事件状态}({@link ModifyRiskSyscallStatusRequest 请求参数}): {@link ModifyRiskSyscallStatusResponse 返回参数} */
   ModifyRiskSyscallStatus(data: ModifyRiskSyscallStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskSyscallStatusResponse>;
-  /** 修改安全日志清理设置信息 */
+  /** {@link ModifySecLogCleanSettingInfo 修改安全日志清理设置信息}({@link ModifySecLogCleanSettingInfoRequest 请求参数}): {@link ModifySecLogCleanSettingInfoResponse 返回参数} */
   ModifySecLogCleanSettingInfo(data: ModifySecLogCleanSettingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogCleanSettingInfoResponse>;
-  /** 更新安全日志-日志投递cls配置 */
+  /** {@link ModifySecLogDeliveryClsSetting 更新安全日志-日志投递cls配置}({@link ModifySecLogDeliveryClsSettingRequest 请求参数}): {@link ModifySecLogDeliveryClsSettingResponse 返回参数} */
   ModifySecLogDeliveryClsSetting(data: ModifySecLogDeliveryClsSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogDeliveryClsSettingResponse>;
-  /** 更新安全日志投递kafka设置 */
+  /** {@link ModifySecLogDeliveryKafkaSetting 更新安全日志投递kafka设置}({@link ModifySecLogDeliveryKafkaSettingRequest 请求参数}): {@link ModifySecLogDeliveryKafkaSettingResponse 返回参数} */
   ModifySecLogDeliveryKafkaSetting(data?: ModifySecLogDeliveryKafkaSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogDeliveryKafkaSettingResponse>;
-  /** 修改安全日志接入对象 */
+  /** {@link ModifySecLogJoinObjects 修改安全日志接入对象}({@link ModifySecLogJoinObjectsRequest 请求参数}): {@link ModifySecLogJoinObjectsResponse 返回参数} */
   ModifySecLogJoinObjects(data: ModifySecLogJoinObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogJoinObjectsResponse>;
-  /** 修改安全日志接入状态 */
+  /** {@link ModifySecLogJoinState 修改安全日志接入状态}({@link ModifySecLogJoinStateRequest 请求参数}): {@link ModifySecLogJoinStateResponse 返回参数} */
   ModifySecLogJoinState(data: ModifySecLogJoinStateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogJoinStateResponse>;
-  /** 修改安全日志kafkaUIN */
+  /** {@link ModifySecLogKafkaUIN 修改安全日志kafkaUIN}({@link ModifySecLogKafkaUINRequest 请求参数}): {@link ModifySecLogKafkaUINResponse 返回参数} */
   ModifySecLogKafkaUIN(data?: ModifySecLogKafkaUINRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogKafkaUINResponse>;
-  /** 修改木马自动隔离样本开关 */
+  /** {@link ModifyVirusAutoIsolateExampleSwitch 修改木马自动隔离样本开关}({@link ModifyVirusAutoIsolateExampleSwitchRequest 请求参数}): {@link ModifyVirusAutoIsolateExampleSwitchResponse 返回参数} */
   ModifyVirusAutoIsolateExampleSwitch(data: ModifyVirusAutoIsolateExampleSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirusAutoIsolateExampleSwitchResponse>;
-  /** 修改木马自动隔离设置 */
+  /** {@link ModifyVirusAutoIsolateSetting 修改木马自动隔离设置}({@link ModifyVirusAutoIsolateSettingRequest 请求参数}): {@link ModifyVirusAutoIsolateSettingResponse 返回参数} */
   ModifyVirusAutoIsolateSetting(data: ModifyVirusAutoIsolateSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirusAutoIsolateSettingResponse>;
-  /** 运行时更新木马文件事件状态 */
+  /** {@link ModifyVirusFileStatus 运行时更新木马文件事件状态}({@link ModifyVirusFileStatusRequest 请求参数}): {@link ModifyVirusFileStatusResponse 返回参数} */
   ModifyVirusFileStatus(data: ModifyVirusFileStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirusFileStatusResponse>;
-  /** 运行时更新文件查杀实时监控设置 */
+  /** {@link ModifyVirusMonitorSetting 运行时更新文件查杀实时监控设置}({@link ModifyVirusMonitorSettingRequest 请求参数}): {@link ModifyVirusMonitorSettingResponse 返回参数} */
   ModifyVirusMonitorSetting(data: ModifyVirusMonitorSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirusMonitorSettingResponse>;
-  /** 运行时更新文件查杀设置 */
+  /** {@link ModifyVirusScanSetting 运行时更新文件查杀设置}({@link ModifyVirusScanSettingRequest 请求参数}): {@link ModifyVirusScanSettingResponse 返回参数} */
   ModifyVirusScanSetting(data: ModifyVirusScanSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirusScanSettingResponse>;
-  /** 运行时文件扫描超时设置 */
+  /** {@link ModifyVirusScanTimeoutSetting 运行时文件扫描超时设置}({@link ModifyVirusScanTimeoutSettingRequest 请求参数}): {@link ModifyVirusScanTimeoutSettingResponse 返回参数} */
   ModifyVirusScanTimeoutSetting(data: ModifyVirusScanTimeoutSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirusScanTimeoutSettingResponse>;
-  /** 修改漏洞防御事件状态 */
+  /** {@link ModifyVulDefenceEventStatus 修改漏洞防御事件状态}({@link ModifyVulDefenceEventStatusRequest 请求参数}): {@link ModifyVulDefenceEventStatusResponse 返回参数} */
   ModifyVulDefenceEventStatus(data: ModifyVulDefenceEventStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVulDefenceEventStatusResponse>;
-  /** 编辑漏洞防御设置 */
+  /** {@link ModifyVulDefenceSetting 编辑漏洞防御设置}({@link ModifyVulDefenceSettingRequest 请求参数}): {@link ModifyVulDefenceSettingResponse 返回参数} */
   ModifyVulDefenceSetting(data: ModifyVulDefenceSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVulDefenceSettingResponse>;
-  /** 开通容器安全服务试用 */
+  /** {@link OpenTcssTrial 开通容器安全服务试用}({@link OpenTcssTrialRequest 请求参数}): {@link OpenTcssTrialResponse 返回参数} */
   OpenTcssTrial(data?: OpenTcssTrialRequest, config?: AxiosRequestConfig): AxiosPromise<OpenTcssTrialResponse>;
-  /** 删除单个镜像仓库详细信息 */
+  /** {@link RemoveAssetImageRegistryRegistryDetail 删除单个镜像仓库详细信息}({@link RemoveAssetImageRegistryRegistryDetailRequest 请求参数}): {@link RemoveAssetImageRegistryRegistryDetailResponse 返回参数} */
   RemoveAssetImageRegistryRegistryDetail(data: RemoveAssetImageRegistryRegistryDetailRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveAssetImageRegistryRegistryDetailResponse>;
-  /** 授权镜像扫描 */
+  /** {@link RenewImageAuthorizeState 授权镜像扫描}({@link RenewImageAuthorizeStateRequest 请求参数}): {@link RenewImageAuthorizeStateResponse 返回参数} */
   RenewImageAuthorizeState(data: RenewImageAuthorizeStateRequest, config?: AxiosRequestConfig): AxiosPromise<RenewImageAuthorizeStateResponse>;
-  /** 重置安全日志主题设置 */
+  /** {@link ResetSecLogTopicConfig 重置安全日志主题设置}({@link ResetSecLogTopicConfigRequest 请求参数}): {@link ResetSecLogTopicConfigResponse 返回参数} */
   ResetSecLogTopicConfig(data: ResetSecLogTopicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ResetSecLogTopicConfigResponse>;
-  /** 安全合规重新检测选定的资产 */
+  /** {@link ScanComplianceAssets 安全合规重新检测选定的资产}({@link ScanComplianceAssetsRequest 请求参数}): {@link ScanComplianceAssetsResponse 返回参数} */
   ScanComplianceAssets(data: ScanComplianceAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<ScanComplianceAssetsResponse>;
-  /** 安全合规用指定的检测项重新检测选定的资产 */
+  /** {@link ScanComplianceAssetsByPolicyItem 安全合规用指定的检测项重新检测选定的资产}({@link ScanComplianceAssetsByPolicyItemRequest 请求参数}): {@link ScanComplianceAssetsByPolicyItemResponse 返回参数} */
   ScanComplianceAssetsByPolicyItem(data: ScanComplianceAssetsByPolicyItemRequest, config?: AxiosRequestConfig): AxiosPromise<ScanComplianceAssetsByPolicyItemResponse>;
-  /** 安全合规重新检测选定的检测项 */
+  /** {@link ScanCompliancePolicyItems 安全合规重新检测选定的检测项}({@link ScanCompliancePolicyItemsRequest 请求参数}): {@link ScanCompliancePolicyItemsResponse 返回参数} */
   ScanCompliancePolicyItems(data: ScanCompliancePolicyItemsRequest, config?: AxiosRequestConfig): AxiosPromise<ScanCompliancePolicyItemsResponse>;
-  /** 安全合规重新检测上次检测失败的资产 */
+  /** {@link ScanComplianceScanFailedAssets 安全合规重新检测上次检测失败的资产}({@link ScanComplianceScanFailedAssetsRequest 请求参数}): {@link ScanComplianceScanFailedAssetsResponse 返回参数} */
   ScanComplianceScanFailedAssets(data: ScanComplianceScanFailedAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<ScanComplianceScanFailedAssetsResponse>;
-  /** 设置检测模式和自动检查 */
+  /** {@link SetCheckMode 设置检测模式和自动检查}({@link SetCheckModeRequest 请求参数}): {@link SetCheckModeResponse 返回参数} */
   SetCheckMode(data: SetCheckModeRequest, config?: AxiosRequestConfig): AxiosPromise<SetCheckModeResponse>;
-  /** 运行时停止木马查杀任务 */
+  /** {@link StopVirusScanTask 运行时停止木马查杀任务}({@link StopVirusScanTaskRequest 请求参数}): {@link StopVirusScanTaskResponse 返回参数} */
   StopVirusScanTask(data: StopVirusScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopVirusScanTaskResponse>;
-  /** 停止漏洞扫描任务 */
+  /** {@link StopVulScanTask 停止漏洞扫描任务}({@link StopVulScanTaskRequest 请求参数}): {@link StopVulScanTaskResponse 返回参数} */
   StopVulScanTask(data?: StopVulScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopVulScanTaskResponse>;
-  /** 编辑本地镜像自动授权开关 */
+  /** {@link SwitchImageAutoAuthorizedRule 编辑本地镜像自动授权开关}({@link SwitchImageAutoAuthorizedRuleRequest 请求参数}): {@link SwitchImageAutoAuthorizedRuleResponse 返回参数} */
   SwitchImageAutoAuthorizedRule(data: SwitchImageAutoAuthorizedRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchImageAutoAuthorizedRuleResponse>;
-  /** 镜像仓库资产刷新 */
+  /** {@link SyncAssetImageRegistryAsset 镜像仓库资产刷新}({@link SyncAssetImageRegistryAssetRequest 请求参数}): {@link SyncAssetImageRegistryAssetResponse 返回参数} */
   SyncAssetImageRegistryAsset(data?: SyncAssetImageRegistryAssetRequest, config?: AxiosRequestConfig): AxiosPromise<SyncAssetImageRegistryAssetResponse>;
-  /** 容器网络创建网络策略更新并发布任务 */
+  /** {@link UpdateAndPublishNetworkFirewallPolicyDetail 容器网络创建网络策略更新并发布任务}({@link UpdateAndPublishNetworkFirewallPolicyDetailRequest 请求参数}): {@link UpdateAndPublishNetworkFirewallPolicyDetailResponse 返回参数} */
   UpdateAndPublishNetworkFirewallPolicyDetail(data: UpdateAndPublishNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAndPublishNetworkFirewallPolicyDetailResponse>;
-  /** 容器网络更新Yaml网络策略并发布任务 */
+  /** {@link UpdateAndPublishNetworkFirewallPolicyYamlDetail 容器网络更新Yaml网络策略并发布任务}({@link UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest 请求参数}): {@link UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse 返回参数} */
   UpdateAndPublishNetworkFirewallPolicyYamlDetail(data: UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse>;
-  /** 更新单个镜像仓库详细信息 */
+  /** {@link UpdateAssetImageRegistryRegistryDetail 更新单个镜像仓库详细信息}({@link UpdateAssetImageRegistryRegistryDetailRequest 请求参数}): {@link UpdateAssetImageRegistryRegistryDetailResponse 返回参数} */
   UpdateAssetImageRegistryRegistryDetail(data: UpdateAssetImageRegistryRegistryDetailRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAssetImageRegistryRegistryDetailResponse>;
-  /** 镜像仓库更新定时任务 */
+  /** {@link UpdateImageRegistryTimingScanTask 镜像仓库更新定时任务}({@link UpdateImageRegistryTimingScanTaskRequest 请求参数}): {@link UpdateImageRegistryTimingScanTaskResponse 返回参数} */
   UpdateImageRegistryTimingScanTask(data: UpdateImageRegistryTimingScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateImageRegistryTimingScanTaskResponse>;
-  /** 容器网络创建网络策略更新任务 */
+  /** {@link UpdateNetworkFirewallPolicyDetail 容器网络创建网络策略更新任务}({@link UpdateNetworkFirewallPolicyDetailRequest 请求参数}): {@link UpdateNetworkFirewallPolicyDetailResponse 返回参数} */
   UpdateNetworkFirewallPolicyDetail(data: UpdateNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateNetworkFirewallPolicyDetailResponse>;
-  /** 容器网络更新Yaml网络策略任务 */
+  /** {@link UpdateNetworkFirewallPolicyYamlDetail 容器网络更新Yaml网络策略任务}({@link UpdateNetworkFirewallPolicyYamlDetailRequest 请求参数}): {@link UpdateNetworkFirewallPolicyYamlDetailResponse 返回参数} */
   UpdateNetworkFirewallPolicyYamlDetail(data: UpdateNetworkFirewallPolicyYamlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateNetworkFirewallPolicyYamlDetailResponse>;
 }
 

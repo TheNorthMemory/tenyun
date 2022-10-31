@@ -292,26 +292,26 @@ declare interface SendSmsResponse {
   RequestId?: string;
 }
 
-/** [物联卡](https://cloud.tencent.com/document/product/636) */
+/** {@link Ic 图片瘦身} */
 declare interface Ic {
   (): Versions;
-  /** 查询应用详情 */
+  /** {@link DescribeApp 查询应用详情}({@link DescribeAppRequest 请求参数}): {@link DescribeAppResponse 返回参数} */
   DescribeApp(data: DescribeAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppResponse>;
-  /** 查询卡片详情 */
+  /** {@link DescribeCard 查询卡片详情}({@link DescribeCardRequest 请求参数}): {@link DescribeCardResponse 返回参数} */
   DescribeCard(data: DescribeCardRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCardResponse>;
-  /** 查询卡片列表 */
+  /** {@link DescribeCards 查询卡片列表}({@link DescribeCardsRequest 请求参数}): {@link DescribeCardsResponse 返回参数} */
   DescribeCards(data: DescribeCardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCardsResponse>;
-  /** 查询短信列表 */
+  /** {@link DescribeSms 查询短信列表}({@link DescribeSmsRequest 请求参数}): {@link DescribeSmsResponse 返回参数} */
   DescribeSms(data: DescribeSmsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmsResponse>;
-  /** 编辑卡片备注 */
+  /** {@link ModifyUserCardRemark 编辑卡片备注}({@link ModifyUserCardRemarkRequest 请求参数}): {@link ModifyUserCardRemarkResponse 返回参数} */
   ModifyUserCardRemark(data: ModifyUserCardRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserCardRemarkResponse>;
-  /** 购买套外流量包 */
+  /** {@link PayForExtendData 购买套外流量包}({@link PayForExtendDataRequest 请求参数}): {@link PayForExtendDataResponse 返回参数} */
   PayForExtendData(data: PayForExtendDataRequest, config?: AxiosRequestConfig): AxiosPromise<PayForExtendDataResponse>;
-  /** 卡片续费 */
+  /** {@link RenewCards 卡片续费}({@link RenewCardsRequest 请求参数}): {@link RenewCardsResponse 返回参数} */
   RenewCards(data: RenewCardsRequest, config?: AxiosRequestConfig): AxiosPromise<RenewCardsResponse>;
-  /** 群发短信接口 */
+  /** {@link SendMultiSms 群发短信接口}({@link SendMultiSmsRequest 请求参数}): {@link SendMultiSmsResponse 返回参数} */
   SendMultiSms(data: SendMultiSmsRequest, config?: AxiosRequestConfig): AxiosPromise<SendMultiSmsResponse>;
-  /** 发送短信息接口 */
+  /** {@link SendSms 发送短信息接口}({@link SendSmsRequest 请求参数}): {@link SendSmsResponse 返回参数} */
   SendSms(data: SendSmsRequest, config?: AxiosRequestConfig): AxiosPromise<SendSmsResponse>;
 }
 

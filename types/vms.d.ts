@@ -52,12 +52,12 @@ declare interface SendTtsVoiceResponse {
   RequestId?: string;
 }
 
-/** [语音消息](https://cloud.tencent.com/document/product/1128) */
+/** {@link Vms 语音消息} */
 declare interface Vms {
   (): Versions;
-  /** 发送语音验证码 */
+  /** {@link SendCodeVoice 发送语音验证码}({@link SendCodeVoiceRequest 请求参数}): {@link SendCodeVoiceResponse 返回参数} */
   SendCodeVoice(data: SendCodeVoiceRequest, config?: AxiosRequestConfig): AxiosPromise<SendCodeVoiceResponse>;
-  /** 指定模板发送语音通知 */
+  /** {@link SendTtsVoice 指定模板发送语音通知}({@link SendTtsVoiceRequest 请求参数}): {@link SendTtsVoiceResponse 返回参数} */
   SendTtsVoice(data: SendTtsVoiceRequest, config?: AxiosRequestConfig): AxiosPromise<SendTtsVoiceResponse>;
 }
 

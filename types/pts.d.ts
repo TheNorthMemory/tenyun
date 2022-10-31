@@ -1744,94 +1744,94 @@ declare interface UpdateScenarioResponse {
   RequestId?: string;
 }
 
-/** [云压测](https://cloud.tencent.com/document/product/1484) */
+/** {@link Pts 云压测} */
 declare interface Pts {
   (): Versions;
-  /** 停止定时任务 */
+  /** {@link AbortCronJobs 停止定时任务}({@link AbortCronJobsRequest 请求参数}): {@link AbortCronJobsResponse 返回参数} */
   AbortCronJobs(data: AbortCronJobsRequest, config?: AxiosRequestConfig): AxiosPromise<AbortCronJobsResponse>;
-  /** 停止任务 */
+  /** {@link AbortJob 停止任务}({@link AbortJobRequest 请求参数}): {@link AbortJobResponse 返回参数} */
   AbortJob(data: AbortJobRequest, config?: AxiosRequestConfig): AxiosPromise<AbortJobResponse>;
-  /** 调整任务目标RPS */
+  /** {@link AdjustJobSpeed 调整任务目标RPS}({@link AdjustJobSpeedRequest 请求参数}): {@link AdjustJobSpeedResponse 返回参数} */
   AdjustJobSpeed(data: AdjustJobSpeedRequest, config?: AxiosRequestConfig): AxiosPromise<AdjustJobSpeedResponse>;
-  /** 复制场景 */
+  /** {@link CopyScenario 复制场景}({@link CopyScenarioRequest 请求参数}): {@link CopyScenarioResponse 返回参数} */
   CopyScenario(data: CopyScenarioRequest, config?: AxiosRequestConfig): AxiosPromise<CopyScenarioResponse>;
-  /** 创建告警通知接收组 */
+  /** {@link CreateAlertChannel 创建告警通知接收组}({@link CreateAlertChannelRequest 请求参数}): {@link CreateAlertChannelResponse 返回参数} */
   CreateAlertChannel(data: CreateAlertChannelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlertChannelResponse>;
-  /** 创建定时任务 */
+  /** {@link CreateCronJob 创建定时任务}({@link CreateCronJobRequest 请求参数}): {@link CreateCronJobResponse 返回参数} */
   CreateCronJob(data: CreateCronJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCronJobResponse>;
-  /** 创建文件 */
+  /** {@link CreateFile 创建文件}({@link CreateFileRequest 请求参数}): {@link CreateFileResponse 返回参数} */
   CreateFile(data: CreateFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileResponse>;
-  /** 创建项目 */
+  /** {@link CreateProject 创建项目}({@link CreateProjectRequest 请求参数}): {@link CreateProjectResponse 返回参数} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
-  /** 创建场景 */
+  /** {@link CreateScenario 创建场景}({@link CreateScenarioRequest 请求参数}): {@link CreateScenarioResponse 返回参数} */
   CreateScenario(data: CreateScenarioRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScenarioResponse>;
-  /** 删除告警通知接收组 */
+  /** {@link DeleteAlertChannel 删除告警通知接收组}({@link DeleteAlertChannelRequest 请求参数}): {@link DeleteAlertChannelResponse 返回参数} */
   DeleteAlertChannel(data: DeleteAlertChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlertChannelResponse>;
-  /** 删除定时任务 */
+  /** {@link DeleteCronJobs 删除定时任务}({@link DeleteCronJobsRequest 请求参数}): {@link DeleteCronJobsResponse 返回参数} */
   DeleteCronJobs(data: DeleteCronJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCronJobsResponse>;
-  /** 删除文件 */
+  /** {@link DeleteFiles 删除文件}({@link DeleteFilesRequest 请求参数}): {@link DeleteFilesResponse 返回参数} */
   DeleteFiles(data: DeleteFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFilesResponse>;
-  /** 删除任务 */
+  /** {@link DeleteJobs 删除任务}({@link DeleteJobsRequest 请求参数}): {@link DeleteJobsResponse 返回参数} */
   DeleteJobs(data: DeleteJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJobsResponse>;
-  /** 删除项目 */
+  /** {@link DeleteProjects 删除项目}({@link DeleteProjectsRequest 请求参数}): {@link DeleteProjectsResponse 返回参数} */
   DeleteProjects(data: DeleteProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectsResponse>;
-  /** 删除场景 */
+  /** {@link DeleteScenarios 删除场景}({@link DeleteScenariosRequest 请求参数}): {@link DeleteScenariosResponse 返回参数} */
   DeleteScenarios(data: DeleteScenariosRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScenariosResponse>;
-  /** 查询告警通知接收组 */
+  /** {@link DescribeAlertChannels 查询告警通知接收组}({@link DescribeAlertChannelsRequest 请求参数}): {@link DescribeAlertChannelsResponse 返回参数} */
   DescribeAlertChannels(data: DescribeAlertChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertChannelsResponse>;
-  /** 查询告警历史 */
+  /** {@link DescribeAlertRecords 查询告警历史}({@link DescribeAlertRecordsRequest 请求参数}): {@link DescribeAlertRecordsResponse 返回参数} */
   DescribeAlertRecords(data: DescribeAlertRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertRecordsResponse>;
-  /** 查询系统支持的指标 */
+  /** {@link DescribeAvailableMetrics 查询系统支持的指标}({@link DescribeAvailableMetricsRequest 请求参数}): {@link DescribeAvailableMetricsResponse 返回参数} */
   DescribeAvailableMetrics(data?: DescribeAvailableMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableMetricsResponse>;
-  /** 查询检查点汇总信息 */
+  /** {@link DescribeCheckSummary 查询检查点汇总信息}({@link DescribeCheckSummaryRequest 请求参数}): {@link DescribeCheckSummaryResponse 返回参数} */
   DescribeCheckSummary(data: DescribeCheckSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckSummaryResponse>;
-  /** 列出定时任务 */
+  /** {@link DescribeCronJobs 列出定时任务}({@link DescribeCronJobsRequest 请求参数}): {@link DescribeCronJobsResponse 返回参数} */
   DescribeCronJobs(data: DescribeCronJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCronJobsResponse>;
-  /** 查询文件列表 */
+  /** {@link DescribeFiles 查询文件列表}({@link DescribeFilesRequest 请求参数}): {@link DescribeFilesResponse 返回参数} */
   DescribeFiles(data: DescribeFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFilesResponse>;
-  /** 查询任务列表 */
+  /** {@link DescribeJobs 查询任务列表}({@link DescribeJobsRequest 请求参数}): {@link DescribeJobsResponse 返回参数} */
   DescribeJobs(data: DescribeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobsResponse>;
-  /** 查询标签值 */
+  /** {@link DescribeLabelValues 查询标签值}({@link DescribeLabelValuesRequest 请求参数}): {@link DescribeLabelValuesResponse 返回参数} */
   DescribeLabelValues(data: DescribeLabelValuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLabelValuesResponse>;
-  /** 查询指标所有的label及values值 */
+  /** {@link DescribeMetricLabelWithValues 查询指标所有的label及values值}({@link DescribeMetricLabelWithValuesRequest 请求参数}): {@link DescribeMetricLabelWithValuesResponse 返回参数} */
   DescribeMetricLabelWithValues(data: DescribeMetricLabelWithValuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricLabelWithValuesResponse>;
-  /** 查询压测过程日志 */
+  /** {@link DescribeNormalLogs 查询压测过程日志}({@link DescribeNormalLogsRequest 请求参数}): {@link DescribeNormalLogsResponse 返回参数} */
   DescribeNormalLogs(data: DescribeNormalLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNormalLogsResponse>;
-  /** 查询项目列表 */
+  /** {@link DescribeProjects 查询项目列表}({@link DescribeProjectsRequest 请求参数}): {@link DescribeProjectsResponse 返回参数} */
   DescribeProjects(data?: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
-  /** 查询地域列表 */
+  /** {@link DescribeRegions 查询地域列表}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** 查询请求汇总信息 */
+  /** {@link DescribeRequestSummary 查询请求汇总信息}({@link DescribeRequestSummaryRequest 请求参数}): {@link DescribeRequestSummaryResponse 返回参数} */
   DescribeRequestSummary(data: DescribeRequestSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRequestSummaryResponse>;
-  /** 批量查询指标 */
+  /** {@link DescribeSampleBatchQuery 批量查询指标}({@link DescribeSampleBatchQueryRequest 请求参数}): {@link DescribeSampleBatchQueryResponse 返回参数} */
   DescribeSampleBatchQuery(data: DescribeSampleBatchQueryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleBatchQueryResponse>;
-  /** 查询采样日志 */
+  /** {@link DescribeSampleLogs 查询采样日志}({@link DescribeSampleLogsRequest 请求参数}): {@link DescribeSampleLogsResponse 返回参数} */
   DescribeSampleLogs(data: DescribeSampleLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleLogsResponse>;
-  /** 批量查询指标矩阵 */
+  /** {@link DescribeSampleMatrixBatchQuery 批量查询指标矩阵}({@link DescribeSampleMatrixBatchQueryRequest 请求参数}): {@link DescribeSampleMatrixBatchQueryResponse 返回参数} */
   DescribeSampleMatrixBatchQuery(data: DescribeSampleMatrixBatchQueryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleMatrixBatchQueryResponse>;
-  /** 查询指标矩阵 */
+  /** {@link DescribeSampleMatrixQuery 查询指标矩阵}({@link DescribeSampleMatrixQueryRequest 请求参数}): {@link DescribeSampleMatrixQueryResponse 返回参数} */
   DescribeSampleMatrixQuery(data: DescribeSampleMatrixQueryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleMatrixQueryResponse>;
-  /** 查询指标 */
+  /** {@link DescribeSampleQuery 查询指标}({@link DescribeSampleQueryRequest 请求参数}): {@link DescribeSampleQueryResponse 返回参数} */
   DescribeSampleQuery(data: DescribeSampleQueryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleQueryResponse>;
-  /** 查询场景及对应的任务 */
+  /** {@link DescribeScenarioWithJobs 查询场景及对应的任务}({@link DescribeScenarioWithJobsRequest 请求参数}): {@link DescribeScenarioWithJobsResponse 返回参数} */
   DescribeScenarioWithJobs(data?: DescribeScenarioWithJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScenarioWithJobsResponse>;
-  /** 查询场景列表 */
+  /** {@link DescribeScenarios 查询场景列表}({@link DescribeScenariosRequest 请求参数}): {@link DescribeScenariosResponse 返回参数} */
   DescribeScenarios(data?: DescribeScenariosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScenariosResponse>;
-  /** 生成临时COS凭证 */
+  /** {@link GenerateTmpKey 生成临时COS凭证}({@link GenerateTmpKeyRequest 请求参数}): {@link GenerateTmpKeyResponse 返回参数} */
   GenerateTmpKey(data: GenerateTmpKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateTmpKeyResponse>;
-  /** 重启定时任务 */
+  /** {@link RestartCronJobs 重启定时任务}({@link RestartCronJobsRequest 请求参数}): {@link RestartCronJobsResponse 返回参数} */
   RestartCronJobs(data: RestartCronJobsRequest, config?: AxiosRequestConfig): AxiosPromise<RestartCronJobsResponse>;
-  /** 创建并启动任务 */
+  /** {@link StartJob 创建并启动任务}({@link StartJobRequest 请求参数}): {@link StartJobResponse 返回参数} */
   StartJob(data: StartJobRequest, config?: AxiosRequestConfig): AxiosPromise<StartJobResponse>;
-  /** 更新定时任务 */
+  /** {@link UpdateCronJob 更新定时任务}({@link UpdateCronJobRequest 请求参数}): {@link UpdateCronJobResponse 返回参数} */
   UpdateCronJob(data: UpdateCronJobRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCronJobResponse>;
-  /** 更新关联文件场景 */
+  /** {@link UpdateFileScenarioRelation 更新关联文件场景}({@link UpdateFileScenarioRelationRequest 请求参数}): {@link UpdateFileScenarioRelationResponse 返回参数} */
   UpdateFileScenarioRelation(data: UpdateFileScenarioRelationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFileScenarioRelationResponse>;
-  /** 更新任务 */
+  /** {@link UpdateJob 更新任务}({@link UpdateJobRequest 请求参数}): {@link UpdateJobResponse 返回参数} */
   UpdateJob(data: UpdateJobRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateJobResponse>;
-  /** 更新项目 */
+  /** {@link UpdateProject 更新项目}({@link UpdateProjectRequest 请求参数}): {@link UpdateProjectResponse 返回参数} */
   UpdateProject(data: UpdateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProjectResponse>;
-  /** 更新场景 */
+  /** {@link UpdateScenario 更新场景}({@link UpdateScenarioRequest 请求参数}): {@link UpdateScenarioResponse 返回参数} */
   UpdateScenario(data: UpdateScenarioRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateScenarioResponse>;
 }
 

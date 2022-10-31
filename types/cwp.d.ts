@@ -7070,468 +7070,468 @@ declare interface UpdateMachineTagsResponse {
   RequestId?: string;
 }
 
-/** [主机安全](https://cloud.tencent.com/document/product/296) */
+/** {@link Cwp 主机安全} */
 declare interface Cwp {
   (): Versions;
-  /** 取消漏洞忽略 */
+  /** {@link CancelIgnoreVul 取消漏洞忽略}({@link CancelIgnoreVulRequest 请求参数}): {@link CancelIgnoreVulResponse 返回参数} */
   CancelIgnoreVul(data: CancelIgnoreVulRequest, config?: AxiosRequestConfig): AxiosPromise<CancelIgnoreVulResponse>;
-  /** 修改事件忽略状态 */
+  /** {@link ChangeRuleEventsIgnoreStatus 修改事件忽略状态}({@link ChangeRuleEventsIgnoreStatusRequest 请求参数}): {@link ChangeRuleEventsIgnoreStatusResponse 返回参数} */
   ChangeRuleEventsIgnoreStatus(data: ChangeRuleEventsIgnoreStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeRuleEventsIgnoreStatusResponse>;
-  /** 校验高危命新增用户规则参数 */
+  /** {@link CheckBashRuleParams 校验高危命新增用户规则参数}({@link CheckBashRuleParamsRequest 请求参数}): {@link CheckBashRuleParamsResponse 返回参数} */
   CheckBashRuleParams(data: CheckBashRuleParamsRequest, config?: AxiosRequestConfig): AxiosPromise<CheckBashRuleParamsResponse>;
-  /** 创建基线策略 */
+  /** {@link CreateBaselineStrategy 创建基线策略}({@link CreateBaselineStrategyRequest 请求参数}): {@link CreateBaselineStrategyResponse 返回参数} */
   CreateBaselineStrategy(data: CreateBaselineStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBaselineStrategyResponse>;
-  /** 应急漏洞扫描 */
+  /** {@link CreateEmergencyVulScan 应急漏洞扫描}({@link CreateEmergencyVulScanRequest 请求参数}): {@link CreateEmergencyVulScanResponse 返回参数} */
   CreateEmergencyVulScan(data: CreateEmergencyVulScanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmergencyVulScanResponse>;
-  /** 创建授权订单 */
+  /** {@link CreateLicenseOrder 创建授权订单}({@link CreateLicenseOrderRequest 请求参数}): {@link CreateLicenseOrderResponse 返回参数} */
   CreateLicenseOrder(data?: CreateLicenseOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLicenseOrderResponse>;
-  /** 添加网站防护服务器 */
+  /** {@link CreateProtectServer 添加网站防护服务器}({@link CreateProtectServerRequest 请求参数}): {@link CreateProtectServerResponse 返回参数} */
   CreateProtectServer(data: CreateProtectServerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProtectServerResponse>;
-  /** 文件查杀检测 */
+  /** {@link CreateScanMalwareSetting 文件查杀检测}({@link CreateScanMalwareSettingRequest 请求参数}): {@link CreateScanMalwareSettingResponse 返回参数} */
   CreateScanMalwareSetting(data: CreateScanMalwareSettingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScanMalwareSettingResponse>;
-  /** 添加历史搜索记录 */
+  /** {@link CreateSearchLog 添加历史搜索记录}({@link CreateSearchLogRequest 请求参数}): {@link CreateSearchLogResponse 返回参数} */
   CreateSearchLog(data: CreateSearchLogRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSearchLogResponse>;
-  /** 添加检索模板 */
+  /** {@link CreateSearchTemplate 添加检索模板}({@link CreateSearchTemplateRequest 请求参数}): {@link CreateSearchTemplateResponse 返回参数} */
   CreateSearchTemplate(data: CreateSearchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSearchTemplateResponse>;
-  /** 删除网络攻击日志 */
+  /** {@link DeleteAttackLogs 删除网络攻击日志}({@link DeleteAttackLogsRequest 请求参数}): {@link DeleteAttackLogsResponse 返回参数} */
   DeleteAttackLogs(data: DeleteAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackLogsResponse>;
-  /** 删除基线策略配置 */
+  /** {@link DeleteBaselinePolicy 删除基线策略配置}({@link DeleteBaselinePolicyRequest 请求参数}): {@link DeleteBaselinePolicyResponse 返回参数} */
   DeleteBaselinePolicy(data: DeleteBaselinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBaselinePolicyResponse>;
-  /** 删除基线策略 */
+  /** {@link DeleteBaselineStrategy 删除基线策略}({@link DeleteBaselineStrategyRequest 请求参数}): {@link DeleteBaselineStrategyResponse 返回参数} */
   DeleteBaselineStrategy(data: DeleteBaselineStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBaselineStrategyResponse>;
-  /** 删除高危命令事件 */
+  /** {@link DeleteBashEvents 删除高危命令事件}({@link DeleteBashEventsRequest 请求参数}): {@link DeleteBashEventsResponse 返回参数} */
   DeleteBashEvents(data: DeleteBashEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBashEventsResponse>;
-  /** 删除高危命令规则 */
+  /** {@link DeleteBashRules 删除高危命令规则}({@link DeleteBashRulesRequest 请求参数}): {@link DeleteBashRulesResponse 返回参数} */
   DeleteBashRules(data: DeleteBashRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBashRulesResponse>;
-  /** 删除暴力破解记录 */
+  /** {@link DeleteBruteAttacks 删除暴力破解记录}({@link DeleteBruteAttacksRequest 请求参数}): {@link DeleteBruteAttacksResponse 返回参数} */
   DeleteBruteAttacks(data: DeleteBruteAttacksRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBruteAttacksResponse>;
-  /** 删除授权记录 */
+  /** {@link DeleteLicenseRecord 删除授权记录}({@link DeleteLicenseRecordRequest 请求参数}): {@link DeleteLicenseRecordResponse 返回参数} */
   DeleteLicenseRecord(data: DeleteLicenseRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLicenseRecordResponse>;
-  /** 删除异地登录白名单规则 */
+  /** {@link DeleteLoginWhiteList 删除异地登录白名单规则}({@link DeleteLoginWhiteListRequest 请求参数}): {@link DeleteLoginWhiteListResponse 返回参数} */
   DeleteLoginWhiteList(data: DeleteLoginWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoginWhiteListResponse>;
-  /** 卸载云镜客户端 */
+  /** {@link DeleteMachine 卸载云镜客户端}({@link DeleteMachineRequest 请求参数}): {@link DeleteMachineResponse 返回参数} */
   DeleteMachine(data: DeleteMachineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineResponse>;
-  /** 删除服务器关联的标签 */
+  /** {@link DeleteMachineTag 删除服务器关联的标签}({@link DeleteMachineTagRequest 请求参数}): {@link DeleteMachineTagResponse 返回参数} */
   DeleteMachineTag(data: DeleteMachineTagRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineTagResponse>;
-  /** 删除恶意请求记录 */
+  /** {@link DeleteMaliciousRequests 删除恶意请求记录}({@link DeleteMaliciousRequestsRequest 请求参数}): {@link DeleteMaliciousRequestsResponse 返回参数} */
   DeleteMaliciousRequests(data: DeleteMaliciousRequestsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMaliciousRequestsResponse>;
-  /** 入侵管理-终止扫描任务 */
+  /** {@link DeleteMalwareScanTask 入侵管理-终止扫描任务}({@link DeleteMalwareScanTaskRequest 请求参数}): {@link DeleteMalwareScanTaskResponse 返回参数} */
   DeleteMalwareScanTask(data?: DeleteMalwareScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMalwareScanTaskResponse>;
-  /** 删除木马记录 */
+  /** {@link DeleteMalwares 删除木马记录}({@link DeleteMalwaresRequest 请求参数}): {@link DeleteMalwaresResponse 返回参数} */
   DeleteMalwares(data: DeleteMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMalwaresResponse>;
-  /** 删除异地登录记录 */
+  /** {@link DeleteNonlocalLoginPlaces 删除异地登录记录}({@link DeleteNonlocalLoginPlacesRequest 请求参数}): {@link DeleteNonlocalLoginPlacesResponse 返回参数} */
   DeleteNonlocalLoginPlaces(data?: DeleteNonlocalLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNonlocalLoginPlacesResponse>;
-  /** 删除本地提权事件 */
+  /** {@link DeletePrivilegeEvents 删除本地提权事件}({@link DeletePrivilegeEventsRequest 请求参数}): {@link DeletePrivilegeEventsResponse 返回参数} */
   DeletePrivilegeEvents(data: DeletePrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivilegeEventsResponse>;
-  /** 删除本地提权规则 */
+  /** {@link DeletePrivilegeRules 删除本地提权规则}({@link DeletePrivilegeRulesRequest 请求参数}): {@link DeletePrivilegeRulesResponse 返回参数} */
   DeletePrivilegeRules(data: DeletePrivilegeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivilegeRulesResponse>;
-  /** 删除防护网站 */
+  /** {@link DeleteProtectDir 删除防护网站}({@link DeleteProtectDirRequest 请求参数}): {@link DeleteProtectDirResponse 返回参数} */
   DeleteProtectDir(data: DeleteProtectDirRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProtectDirResponse>;
-  /** 删除反弹Shell事件 */
+  /** {@link DeleteReverseShellEvents 删除反弹Shell事件}({@link DeleteReverseShellEventsRequest 请求参数}): {@link DeleteReverseShellEventsResponse 返回参数} */
   DeleteReverseShellEvents(data: DeleteReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReverseShellEventsResponse>;
-  /** 删除反弹Shell规则 */
+  /** {@link DeleteReverseShellRules 删除反弹Shell规则}({@link DeleteReverseShellRulesRequest 请求参数}): {@link DeleteReverseShellRulesResponse 返回参数} */
   DeleteReverseShellRules(data: DeleteReverseShellRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReverseShellRulesResponse>;
-  /** 停止扫描任务 */
+  /** {@link DeleteScanTask 停止扫描任务}({@link DeleteScanTaskRequest 请求参数}): {@link DeleteScanTaskResponse 返回参数} */
   DeleteScanTask(data: DeleteScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScanTaskResponse>;
-  /** 删除检索模板 */
+  /** {@link DeleteSearchTemplate 删除检索模板}({@link DeleteSearchTemplateRequest 请求参数}): {@link DeleteSearchTemplateResponse 返回参数} */
   DeleteSearchTemplate(data: DeleteSearchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSearchTemplateResponse>;
-  /** 删除标签 */
+  /** {@link DeleteTags 删除标签}({@link DeleteTagsRequest 请求参数}): {@link DeleteTagsResponse 返回参数} */
   DeleteTags(data: DeleteTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTagsResponse>;
-  /** 删除事件记录 */
+  /** {@link DeleteWebPageEventLog 删除事件记录}({@link DeleteWebPageEventLogRequest 请求参数}): {@link DeleteWebPageEventLogResponse 返回参数} */
   DeleteWebPageEventLog(data?: DeleteWebPageEventLogRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWebPageEventLogResponse>;
-  /** 获取帐号统计列表数据 */
+  /** {@link DescribeAccountStatistics 获取帐号统计列表数据}({@link DescribeAccountStatisticsRequest 请求参数}): {@link DescribeAccountStatisticsResponse 返回参数} */
   DescribeAccountStatistics(data?: DescribeAccountStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountStatisticsResponse>;
-  /** 查询应用列表 */
+  /** {@link DescribeAssetAppList 查询应用列表}({@link DescribeAssetAppListRequest 请求参数}): {@link DescribeAssetAppListResponse 返回参数} */
   DescribeAssetAppList(data?: DescribeAssetAppListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetAppListResponse>;
-  /** 获取软件关联进程列表 */
+  /** {@link DescribeAssetAppProcessList 获取软件关联进程列表}({@link DescribeAssetAppProcessListRequest 请求参数}): {@link DescribeAssetAppProcessListResponse 返回参数} */
   DescribeAssetAppProcessList(data: DescribeAssetAppProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetAppProcessListResponse>;
-  /** 获取内核模块详情 */
+  /** {@link DescribeAssetCoreModuleInfo 获取内核模块详情}({@link DescribeAssetCoreModuleInfoRequest 请求参数}): {@link DescribeAssetCoreModuleInfoResponse 返回参数} */
   DescribeAssetCoreModuleInfo(data: DescribeAssetCoreModuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetCoreModuleInfoResponse>;
-  /** 查询资产管理内核模块列表 */
+  /** {@link DescribeAssetCoreModuleList 查询资产管理内核模块列表}({@link DescribeAssetCoreModuleListRequest 请求参数}): {@link DescribeAssetCoreModuleListResponse 返回参数} */
   DescribeAssetCoreModuleList(data?: DescribeAssetCoreModuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetCoreModuleListResponse>;
-  /** 获取资产管理数据库详情 */
+  /** {@link DescribeAssetDatabaseInfo 获取资产管理数据库详情}({@link DescribeAssetDatabaseInfoRequest 请求参数}): {@link DescribeAssetDatabaseInfoResponse 返回参数} */
   DescribeAssetDatabaseInfo(data: DescribeAssetDatabaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDatabaseInfoResponse>;
-  /** 查询资产管理数据库列表 */
+  /** {@link DescribeAssetDatabaseList 查询资产管理数据库列表}({@link DescribeAssetDatabaseListRequest 请求参数}): {@link DescribeAssetDatabaseListResponse 返回参数} */
   DescribeAssetDatabaseList(data?: DescribeAssetDatabaseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDatabaseListResponse>;
-  /** 查询资产管理环境变量列表 */
+  /** {@link DescribeAssetEnvList 查询资产管理环境变量列表}({@link DescribeAssetEnvListRequest 请求参数}): {@link DescribeAssetEnvListResponse 返回参数} */
   DescribeAssetEnvList(data?: DescribeAssetEnvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetEnvListResponse>;
-  /** 获取主机所有资源数量 */
+  /** {@link DescribeAssetHostTotalCount 获取主机所有资源数量}({@link DescribeAssetHostTotalCountRequest 请求参数}): {@link DescribeAssetHostTotalCountResponse 返回参数} */
   DescribeAssetHostTotalCount(data: DescribeAssetHostTotalCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetHostTotalCountResponse>;
-  /** 获取资产数量概况 */
+  /** {@link DescribeAssetInfo 获取资产数量概况}({@link DescribeAssetInfoRequest 请求参数}): {@link DescribeAssetInfoResponse 返回参数} */
   DescribeAssetInfo(data?: DescribeAssetInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetInfoResponse>;
-  /** 查询资产管理启动服务列表 */
+  /** {@link DescribeAssetInitServiceList 查询资产管理启动服务列表}({@link DescribeAssetInitServiceListRequest 请求参数}): {@link DescribeAssetInitServiceListResponse 返回参数} */
   DescribeAssetInitServiceList(data?: DescribeAssetInitServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetInitServiceListResponse>;
-  /** 获取Jar包详情 */
+  /** {@link DescribeAssetJarInfo 获取Jar包详情}({@link DescribeAssetJarInfoRequest 请求参数}): {@link DescribeAssetJarInfoResponse 返回参数} */
   DescribeAssetJarInfo(data: DescribeAssetJarInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetJarInfoResponse>;
-  /** 查询Jar包列表 */
+  /** {@link DescribeAssetJarList 查询Jar包列表}({@link DescribeAssetJarListRequest 请求参数}): {@link DescribeAssetJarListResponse 返回参数} */
   DescribeAssetJarList(data?: DescribeAssetJarListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetJarListResponse>;
-  /** 获取资产管理主机资源详细信息 */
+  /** {@link DescribeAssetMachineDetail 获取资产管理主机资源详细信息}({@link DescribeAssetMachineDetailRequest 请求参数}): {@link DescribeAssetMachineDetailResponse 返回参数} */
   DescribeAssetMachineDetail(data: DescribeAssetMachineDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetMachineDetailResponse>;
-  /** 获取资源监控列表 */
+  /** {@link DescribeAssetMachineList 获取资源监控列表}({@link DescribeAssetMachineListRequest 请求参数}): {@link DescribeAssetMachineListResponse 返回参数} */
   DescribeAssetMachineList(data?: DescribeAssetMachineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetMachineListResponse>;
-  /** 查询资产管理计划任务列表 */
+  /** {@link DescribeAssetPlanTaskList 查询资产管理计划任务列表}({@link DescribeAssetPlanTaskListRequest 请求参数}): {@link DescribeAssetPlanTaskListResponse 返回参数} */
   DescribeAssetPlanTaskList(data?: DescribeAssetPlanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetPlanTaskListResponse>;
-  /** 获取资产管理端口列表 */
+  /** {@link DescribeAssetPortInfoList 获取资产管理端口列表}({@link DescribeAssetPortInfoListRequest 请求参数}): {@link DescribeAssetPortInfoListResponse 返回参数} */
   DescribeAssetPortInfoList(data?: DescribeAssetPortInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetPortInfoListResponse>;
-  /** 获取资产管理进程列表 */
+  /** {@link DescribeAssetProcessInfoList 获取资产管理进程列表}({@link DescribeAssetProcessInfoListRequest 请求参数}): {@link DescribeAssetProcessInfoListResponse 返回参数} */
   DescribeAssetProcessInfoList(data?: DescribeAssetProcessInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetProcessInfoListResponse>;
-  /** 获取主机概况趋势 */
+  /** {@link DescribeAssetRecentMachineInfo 获取主机概况趋势}({@link DescribeAssetRecentMachineInfoRequest 请求参数}): {@link DescribeAssetRecentMachineInfoResponse 返回参数} */
   DescribeAssetRecentMachineInfo(data: DescribeAssetRecentMachineInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetRecentMachineInfoResponse>;
-  /** 获取资产管理系统安装包列表 */
+  /** {@link DescribeAssetSystemPackageList 获取资产管理系统安装包列表}({@link DescribeAssetSystemPackageListRequest 请求参数}): {@link DescribeAssetSystemPackageListResponse 返回参数} */
   DescribeAssetSystemPackageList(data: DescribeAssetSystemPackageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSystemPackageListResponse>;
-  /** 获取主机账号详情 */
+  /** {@link DescribeAssetUserInfo 获取主机账号详情}({@link DescribeAssetUserInfoRequest 请求参数}): {@link DescribeAssetUserInfoResponse 返回参数} */
   DescribeAssetUserInfo(data: DescribeAssetUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetUserInfoResponse>;
-  /** 获取账号列表 */
+  /** {@link DescribeAssetUserList 获取账号列表}({@link DescribeAssetUserListRequest 请求参数}): {@link DescribeAssetUserListResponse 返回参数} */
   DescribeAssetUserList(data?: DescribeAssetUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetUserListResponse>;
-  /** 获取资产管理Web应用列表 */
+  /** {@link DescribeAssetWebAppList 获取资产管理Web应用列表}({@link DescribeAssetWebAppListRequest 请求参数}): {@link DescribeAssetWebAppListResponse 返回参数} */
   DescribeAssetWebAppList(data?: DescribeAssetWebAppListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebAppListResponse>;
-  /** 获取资产管理Web应用插件列表 */
+  /** {@link DescribeAssetWebAppPluginList 获取资产管理Web应用插件列表}({@link DescribeAssetWebAppPluginListRequest 请求参数}): {@link DescribeAssetWebAppPluginListResponse 返回参数} */
   DescribeAssetWebAppPluginList(data: DescribeAssetWebAppPluginListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebAppPluginListResponse>;
-  /** 获取资产管理Web框架列表 */
+  /** {@link DescribeAssetWebFrameList 获取资产管理Web框架列表}({@link DescribeAssetWebFrameListRequest 请求参数}): {@link DescribeAssetWebFrameListResponse 返回参数} */
   DescribeAssetWebFrameList(data?: DescribeAssetWebFrameListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebFrameListResponse>;
-  /** 获取Web站点详情 */
+  /** {@link DescribeAssetWebLocationInfo 获取Web站点详情}({@link DescribeAssetWebLocationInfoRequest 请求参数}): {@link DescribeAssetWebLocationInfoResponse 返回参数} */
   DescribeAssetWebLocationInfo(data: DescribeAssetWebLocationInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebLocationInfoResponse>;
-  /** 获取Web站点列表 */
+  /** {@link DescribeAssetWebLocationList 获取Web站点列表}({@link DescribeAssetWebLocationListRequest 请求参数}): {@link DescribeAssetWebLocationListResponse 返回参数} */
   DescribeAssetWebLocationList(data?: DescribeAssetWebLocationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebLocationListResponse>;
-  /** 查询资产管理Web服务列表 */
+  /** {@link DescribeAssetWebServiceInfoList 查询资产管理Web服务列表}({@link DescribeAssetWebServiceInfoListRequest 请求参数}): {@link DescribeAssetWebServiceInfoListResponse 返回参数} */
   DescribeAssetWebServiceInfoList(data?: DescribeAssetWebServiceInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebServiceInfoListResponse>;
-  /** 获取Web服务关联进程列表 */
+  /** {@link DescribeAssetWebServiceProcessList 获取Web服务关联进程列表}({@link DescribeAssetWebServiceProcessListRequest 请求参数}): {@link DescribeAssetWebServiceProcessListResponse 返回参数} */
   DescribeAssetWebServiceProcessList(data: DescribeAssetWebServiceProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebServiceProcessListResponse>;
-  /** 网络攻击日志详情 */
+  /** {@link DescribeAttackLogInfo 网络攻击日志详情}({@link DescribeAttackLogInfoRequest 请求参数}): {@link DescribeAttackLogInfoResponse 返回参数} */
   DescribeAttackLogInfo(data: DescribeAttackLogInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogInfoResponse>;
-  /** 网络攻击日志列表 */
+  /** {@link DescribeAttackLogs 网络攻击日志列表}({@link DescribeAttackLogsRequest 请求参数}): {@link DescribeAttackLogsResponse 返回参数} */
   DescribeAttackLogs(data?: DescribeAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogsResponse>;
-  /** 获取网络攻击威胁类型列表 */
+  /** {@link DescribeAttackVulTypeList 获取网络攻击威胁类型列表}({@link DescribeAttackVulTypeListRequest 请求参数}): {@link DescribeAttackVulTypeListResponse 返回参数} */
   DescribeAttackVulTypeList(data?: DescribeAttackVulTypeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackVulTypeListResponse>;
-  /** 可用订单详情 */
+  /** {@link DescribeAvailableExpertServiceDetail 可用订单详情}({@link DescribeAvailableExpertServiceDetailRequest 请求参数}): {@link DescribeAvailableExpertServiceDetailResponse 返回参数} */
   DescribeAvailableExpertServiceDetail(data?: DescribeAvailableExpertServiceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableExpertServiceDetailResponse>;
-  /** 获取爆破阻断模式 */
+  /** {@link DescribeBanMode 获取爆破阻断模式}({@link DescribeBanModeRequest 请求参数}): {@link DescribeBanModeResponse 返回参数} */
   DescribeBanMode(data?: DescribeBanModeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBanModeResponse>;
-  /** 获取阻断地域 */
+  /** {@link DescribeBanRegions 获取阻断地域}({@link DescribeBanRegionsRequest 请求参数}): {@link DescribeBanRegionsResponse 返回参数} */
   DescribeBanRegions(data: DescribeBanRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBanRegionsResponse>;
-  /** 获取阻断按钮状态 */
+  /** {@link DescribeBanStatus 获取阻断按钮状态}({@link DescribeBanStatusRequest 请求参数}): {@link DescribeBanStatusResponse 返回参数} */
   DescribeBanStatus(data?: DescribeBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBanStatusResponse>;
-  /** 获取阻断白名单列表 */
+  /** {@link DescribeBanWhiteList 获取阻断白名单列表}({@link DescribeBanWhiteListRequest 请求参数}): {@link DescribeBanWhiteListResponse 返回参数} */
   DescribeBanWhiteList(data?: DescribeBanWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBanWhiteListResponse>;
-  /** 基线策略概览统计数据查询 */
+  /** {@link DescribeBaselineAnalysisData 基线策略概览统计数据查询}({@link DescribeBaselineAnalysisDataRequest 请求参数}): {@link DescribeBaselineAnalysisDataResponse 返回参数} */
   DescribeBaselineAnalysisData(data: DescribeBaselineAnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineAnalysisDataResponse>;
-  /** 查询基线基础信息 */
+  /** {@link DescribeBaselineBasicInfo 查询基线基础信息}({@link DescribeBaselineBasicInfoRequest 请求参数}): {@link DescribeBaselineBasicInfoResponse 返回参数} */
   DescribeBaselineBasicInfo(data?: DescribeBaselineBasicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineBasicInfoResponse>;
-  /** 查询基线详情 */
+  /** {@link DescribeBaselineDetail 查询基线详情}({@link DescribeBaselineDetailRequest 请求参数}): {@link DescribeBaselineDetailResponse 返回参数} */
   DescribeBaselineDetail(data: DescribeBaselineDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineDetailResponse>;
-  /** 基线影响主机列表 */
+  /** {@link DescribeBaselineEffectHostList 基线影响主机列表}({@link DescribeBaselineEffectHostListRequest 请求参数}): {@link DescribeBaselineEffectHostListResponse 返回参数} */
   DescribeBaselineEffectHostList(data: DescribeBaselineEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineEffectHostListResponse>;
-  /** 获取基线检测主机列表 */
+  /** {@link DescribeBaselineHostDetectList 获取基线检测主机列表}({@link DescribeBaselineHostDetectListRequest 请求参数}): {@link DescribeBaselineHostDetectListResponse 返回参数} */
   DescribeBaselineHostDetectList(data?: DescribeBaselineHostDetectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineHostDetectListResponse>;
-  /** 服务器风险top接口 */
+  /** {@link DescribeBaselineHostTop 服务器风险top接口}({@link DescribeBaselineHostTopRequest 请求参数}): {@link DescribeBaselineHostTopResponse 返回参数} */
   DescribeBaselineHostTop(data: DescribeBaselineHostTopRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineHostTopResponse>;
-  /** 获取基线检测项的列表 */
+  /** {@link DescribeBaselineItemDetectList 获取基线检测项的列表}({@link DescribeBaselineItemDetectListRequest 请求参数}): {@link DescribeBaselineItemDetectListResponse 返回参数} */
   DescribeBaselineItemDetectList(data?: DescribeBaselineItemDetectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineItemDetectListResponse>;
-  /** 获取基线项检测结果列表 */
+  /** {@link DescribeBaselineItemList 获取基线项检测结果列表}({@link DescribeBaselineItemListRequest 请求参数}): {@link DescribeBaselineItemListResponse 返回参数} */
   DescribeBaselineItemList(data?: DescribeBaselineItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineItemListResponse>;
-  /** 查询基线列表 */
+  /** {@link DescribeBaselineList 查询基线列表}({@link DescribeBaselineListRequest 请求参数}): {@link DescribeBaselineListResponse 返回参数} */
   DescribeBaselineList(data: DescribeBaselineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineListResponse>;
-  /** 获取基线策略列表 */
+  /** {@link DescribeBaselinePolicyList 获取基线策略列表}({@link DescribeBaselinePolicyListRequest 请求参数}): {@link DescribeBaselinePolicyListResponse 返回参数} */
   DescribeBaselinePolicyList(data?: DescribeBaselinePolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselinePolicyListResponse>;
-  /** 查询基线检测项信息 */
+  /** {@link DescribeBaselineRule 查询基线检测项信息}({@link DescribeBaselineRuleRequest 请求参数}): {@link DescribeBaselineRuleResponse 返回参数} */
   DescribeBaselineRule(data: DescribeBaselineRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineRuleResponse>;
-  /** 基线检测进度查询 */
+  /** {@link DescribeBaselineScanSchedule 基线检测进度查询}({@link DescribeBaselineScanScheduleRequest 请求参数}): {@link DescribeBaselineScanScheduleResponse 返回参数} */
   DescribeBaselineScanSchedule(data: DescribeBaselineScanScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineScanScheduleResponse>;
-  /** 查询基线策略详情 */
+  /** {@link DescribeBaselineStrategyDetail 查询基线策略详情}({@link DescribeBaselineStrategyDetailRequest 请求参数}): {@link DescribeBaselineStrategyDetailResponse 返回参数} */
   DescribeBaselineStrategyDetail(data: DescribeBaselineStrategyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineStrategyDetailResponse>;
-  /** 用户基线策略列表查询 */
+  /** {@link DescribeBaselineStrategyList 用户基线策略列表查询}({@link DescribeBaselineStrategyListRequest 请求参数}): {@link DescribeBaselineStrategyListResponse 返回参数} */
   DescribeBaselineStrategyList(data: DescribeBaselineStrategyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineStrategyListResponse>;
-  /** 基线检测项TOP */
+  /** {@link DescribeBaselineTop 基线检测项TOP}({@link DescribeBaselineTopRequest 请求参数}): {@link DescribeBaselineTopResponse 返回参数} */
   DescribeBaselineTop(data: DescribeBaselineTopRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineTopResponse>;
-  /** 获取高危命令列表 */
+  /** {@link DescribeBashEvents 获取高危命令列表}({@link DescribeBashEventsRequest 请求参数}): {@link DescribeBashEventsResponse 返回参数} */
   DescribeBashEvents(data?: DescribeBashEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashEventsResponse>;
-  /** 获取高危命令规则列表 */
+  /** {@link DescribeBashRules 获取高危命令规则列表}({@link DescribeBashRulesRequest 请求参数}): {@link DescribeBashRulesResponse 返回参数} */
   DescribeBashRules(data: DescribeBashRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashRulesResponse>;
-  /** 获取密码破解列表 */
+  /** {@link DescribeBruteAttackList 获取密码破解列表}({@link DescribeBruteAttackListRequest 请求参数}): {@link DescribeBruteAttackListResponse 返回参数} */
   DescribeBruteAttackList(data?: DescribeBruteAttackListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBruteAttackListResponse>;
-  /** 获取爆破破解规则 */
+  /** {@link DescribeBruteAttackRules 获取爆破破解规则}({@link DescribeBruteAttackRulesRequest 请求参数}): {@link DescribeBruteAttackRulesResponse 返回参数} */
   DescribeBruteAttackRules(data?: DescribeBruteAttackRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBruteAttackRulesResponse>;
-  /** 获取组件统计列表 */
+  /** {@link DescribeComponentStatistics 获取组件统计列表}({@link DescribeComponentStatisticsRequest 请求参数}): {@link DescribeComponentStatisticsResponse 返回参数} */
   DescribeComponentStatistics(data?: DescribeComponentStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComponentStatisticsResponse>;
-  /** 获取ES字段聚合结果 */
+  /** {@link DescribeESAggregations 获取ES字段聚合结果}({@link DescribeESAggregationsRequest 请求参数}): {@link DescribeESAggregationsResponse 返回参数} */
   DescribeESAggregations(data: DescribeESAggregationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeESAggregationsResponse>;
-  /** 应急响应列表 */
+  /** {@link DescribeEmergencyResponseList 应急响应列表}({@link DescribeEmergencyResponseListRequest 请求参数}): {@link DescribeEmergencyResponseListResponse 返回参数} */
   DescribeEmergencyResponseList(data?: DescribeEmergencyResponseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmergencyResponseListResponse>;
-  /** 应急漏洞列表 */
+  /** {@link DescribeEmergencyVulList 应急漏洞列表}({@link DescribeEmergencyVulListRequest 请求参数}): {@link DescribeEmergencyVulListResponse 返回参数} */
   DescribeEmergencyVulList(data?: DescribeEmergencyVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmergencyVulListResponse>;
-  /** 安全管家列表 */
+  /** {@link DescribeExpertServiceList 安全管家列表}({@link DescribeExpertServiceListRequest 请求参数}): {@link DescribeExpertServiceListResponse 返回参数} */
   DescribeExpertServiceList(data?: DescribeExpertServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExpertServiceListResponse>;
-  /** 专家服务订单列表 */
+  /** {@link DescribeExpertServiceOrderList 专家服务订单列表}({@link DescribeExpertServiceOrderListRequest 请求参数}): {@link DescribeExpertServiceOrderListResponse 返回参数} */
   DescribeExpertServiceOrderList(data?: DescribeExpertServiceOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExpertServiceOrderListResponse>;
-  /** 导出区域主机列表 */
+  /** {@link DescribeExportMachines 导出区域主机列表}({@link DescribeExportMachinesRequest 请求参数}): {@link DescribeExportMachinesResponse 返回参数} */
   DescribeExportMachines(data: DescribeExportMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportMachinesResponse>;
-  /** 获取主机相关统计 */
+  /** {@link DescribeGeneralStat 获取主机相关统计}({@link DescribeGeneralStatRequest 请求参数}): {@link DescribeGeneralStatResponse 返回参数} */
   DescribeGeneralStat(data?: DescribeGeneralStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralStatResponse>;
-  /** 获取帐号变更历史列表 */
+  /** {@link DescribeHistoryAccounts 获取帐号变更历史列表}({@link DescribeHistoryAccountsRequest 请求参数}): {@link DescribeHistoryAccountsResponse 返回参数} */
   DescribeHistoryAccounts(data: DescribeHistoryAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHistoryAccountsResponse>;
-  /** 查询日志检索服务信息 */
+  /** {@link DescribeHistoryService 查询日志检索服务信息}({@link DescribeHistoryServiceRequest 请求参数}): {@link DescribeHistoryServiceResponse 返回参数} */
   DescribeHistoryService(data?: DescribeHistoryServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHistoryServiceResponse>;
-  /** 获取登录审计列表 */
+  /** {@link DescribeHostLoginList 获取登录审计列表}({@link DescribeHostLoginListRequest 请求参数}): {@link DescribeHostLoginListResponse 返回参数} */
   DescribeHostLoginList(data?: DescribeHostLoginListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostLoginListResponse>;
-  /** 查询忽略检测项信息 */
+  /** {@link DescribeIgnoreBaselineRule 查询忽略检测项信息}({@link DescribeIgnoreBaselineRuleRequest 请求参数}): {@link DescribeIgnoreBaselineRuleResponse 返回参数} */
   DescribeIgnoreBaselineRule(data: DescribeIgnoreBaselineRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIgnoreBaselineRuleResponse>;
-  /** 查询忽略检测项影响主机列表 */
+  /** {@link DescribeIgnoreRuleEffectHostList 查询忽略检测项影响主机列表}({@link DescribeIgnoreRuleEffectHostListRequest 请求参数}): {@link DescribeIgnoreRuleEffectHostListResponse 返回参数} */
   DescribeIgnoreRuleEffectHostList(data: DescribeIgnoreRuleEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIgnoreRuleEffectHostListResponse>;
-  /** 查询批量导入机器信息 */
+  /** {@link DescribeImportMachineInfo 查询批量导入机器信息}({@link DescribeImportMachineInfoRequest 请求参数}): {@link DescribeImportMachineInfoResponse 返回参数} */
   DescribeImportMachineInfo(data: DescribeImportMachineInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImportMachineInfoResponse>;
-  /** 获取索引列表 */
+  /** {@link DescribeIndexList 获取索引列表}({@link DescribeIndexListRequest 请求参数}): {@link DescribeIndexListResponse 返回参数} */
   DescribeIndexList(data?: DescribeIndexListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexListResponse>;
-  /** 查询java内存马事件列表 */
+  /** {@link DescribeJavaMemShellList 查询java内存马事件列表}({@link DescribeJavaMemShellListRequest 请求参数}): {@link DescribeJavaMemShellListResponse 返回参数} */
   DescribeJavaMemShellList(data?: DescribeJavaMemShellListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJavaMemShellListResponse>;
-  /** 查看授权绑定列表 */
+  /** {@link DescribeLicenseBindList 查看授权绑定列表}({@link DescribeLicenseBindListRequest 请求参数}): {@link DescribeLicenseBindListResponse 返回参数} */
   DescribeLicenseBindList(data: DescribeLicenseBindListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseBindListResponse>;
-  /** 查询授权绑定进度 */
+  /** {@link DescribeLicenseBindSchedule 查询授权绑定进度}({@link DescribeLicenseBindScheduleRequest 请求参数}): {@link DescribeLicenseBindScheduleResponse 返回参数} */
   DescribeLicenseBindSchedule(data: DescribeLicenseBindScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseBindScheduleResponse>;
-  /** 授权概览信息 */
+  /** {@link DescribeLicenseGeneral 授权概览信息}({@link DescribeLicenseGeneralRequest 请求参数}): {@link DescribeLicenseGeneralResponse 返回参数} */
   DescribeLicenseGeneral(data?: DescribeLicenseGeneralRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseGeneralResponse>;
-  /** 获取授权订单列表 */
+  /** {@link DescribeLicenseList 获取授权订单列表}({@link DescribeLicenseListRequest 请求参数}): {@link DescribeLicenseListResponse 返回参数} */
   DescribeLicenseList(data?: DescribeLicenseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseListResponse>;
-  /** 获取日志检索容量使用统计 */
+  /** {@link DescribeLogStorageStatistic 获取日志检索容量使用统计}({@link DescribeLogStorageStatisticRequest 请求参数}): {@link DescribeLogStorageStatisticResponse 返回参数} */
   DescribeLogStorageStatistic(data?: DescribeLogStorageStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageStatisticResponse>;
-  /** 获取异地登录白名单合并后列表 */
+  /** {@link DescribeLoginWhiteCombinedList 获取异地登录白名单合并后列表}({@link DescribeLoginWhiteCombinedListRequest 请求参数}): {@link DescribeLoginWhiteCombinedListResponse 返回参数} */
   DescribeLoginWhiteCombinedList(data?: DescribeLoginWhiteCombinedListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginWhiteCombinedListResponse>;
-  /** 获取异地登录白名单列表 */
+  /** {@link DescribeLoginWhiteList 获取异地登录白名单列表}({@link DescribeLoginWhiteListRequest 请求参数}): {@link DescribeLoginWhiteListResponse 返回参数} */
   DescribeLoginWhiteList(data?: DescribeLoginWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginWhiteListResponse>;
-  /** 获取机器详情 */
+  /** {@link DescribeMachineInfo 获取机器详情}({@link DescribeMachineInfoRequest 请求参数}): {@link DescribeMachineInfoResponse 返回参数} */
   DescribeMachineInfo(data?: DescribeMachineInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineInfoResponse>;
-  /** 网页防篡改获取区域主机列表 */
+  /** {@link DescribeMachineList 网页防篡改获取区域主机列表}({@link DescribeMachineListRequest 请求参数}): {@link DescribeMachineListResponse 返回参数} */
   DescribeMachineList(data: DescribeMachineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineListResponse>;
-  /** 查询机器操作系统列表 */
+  /** {@link DescribeMachineOsList 查询机器操作系统列表}({@link DescribeMachineOsListRequest 请求参数}): {@link DescribeMachineOsListResponse 返回参数} */
   DescribeMachineOsList(data?: DescribeMachineOsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineOsListResponse>;
-  /** 获取机器地域列表 */
+  /** {@link DescribeMachineRegions 获取机器地域列表}({@link DescribeMachineRegionsRequest 请求参数}): {@link DescribeMachineRegionsResponse 返回参数} */
   DescribeMachineRegions(data?: DescribeMachineRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineRegionsResponse>;
-  /** 获取区域主机列表 */
+  /** {@link DescribeMachines 获取区域主机列表}({@link DescribeMachinesRequest 请求参数}): {@link DescribeMachinesResponse 返回参数} */
   DescribeMachines(data: DescribeMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachinesResponse>;
-  /** 获取木马列表 */
+  /** {@link DescribeMalWareList 获取木马列表}({@link DescribeMalWareListRequest 请求参数}): {@link DescribeMalWareListResponse 返回参数} */
   DescribeMalWareList(data?: DescribeMalWareListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalWareListResponse>;
-  /** 查询恶意请求白名单列表 */
+  /** {@link DescribeMaliciousRequestWhiteList 查询恶意请求白名单列表}({@link DescribeMaliciousRequestWhiteListRequest 请求参数}): {@link DescribeMaliciousRequestWhiteListResponse 返回参数} */
   DescribeMaliciousRequestWhiteList(data: DescribeMaliciousRequestWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaliciousRequestWhiteListResponse>;
-  /** 获取木马文件下载地址 */
+  /** {@link DescribeMalwareFile 获取木马文件下载地址}({@link DescribeMalwareFileRequest 请求参数}): {@link DescribeMalwareFileResponse 返回参数} */
   DescribeMalwareFile(data: DescribeMalwareFileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalwareFileResponse>;
-  /** 查看恶意文件详情 */
+  /** {@link DescribeMalwareInfo 查看恶意文件详情}({@link DescribeMalwareInfoRequest 请求参数}): {@link DescribeMalwareInfoResponse 返回参数} */
   DescribeMalwareInfo(data: DescribeMalwareInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalwareInfoResponse>;
-  /** 风险预警提示 */
+  /** {@link DescribeMalwareRiskWarning 风险预警提示}({@link DescribeMalwareRiskWarningRequest 请求参数}): {@link DescribeMalwareRiskWarningResponse 返回参数} */
   DescribeMalwareRiskWarning(data?: DescribeMalwareRiskWarningRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalwareRiskWarningResponse>;
-  /** 查询定时扫描配置 */
+  /** {@link DescribeMalwareTimingScanSetting 查询定时扫描配置}({@link DescribeMalwareTimingScanSettingRequest 请求参数}): {@link DescribeMalwareTimingScanSettingResponse 返回参数} */
   DescribeMalwareTimingScanSetting(data?: DescribeMalwareTimingScanSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalwareTimingScanSettingResponse>;
-  /** 安全管家月巡检报告下载 */
+  /** {@link DescribeMonthInspectionReport 安全管家月巡检报告下载}({@link DescribeMonthInspectionReportRequest 请求参数}): {@link DescribeMonthInspectionReportResponse 返回参数} */
   DescribeMonthInspectionReport(data: DescribeMonthInspectionReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonthInspectionReportResponse>;
-  /** 获取端口统计列表 */
+  /** {@link DescribeOpenPortStatistics 获取端口统计列表}({@link DescribeOpenPortStatisticsRequest 请求参数}): {@link DescribeOpenPortStatisticsResponse 返回参数} */
   DescribeOpenPortStatistics(data?: DescribeOpenPortStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOpenPortStatisticsResponse>;
-  /** 获取概览统计数据 */
+  /** {@link DescribeOverviewStatistics 获取概览统计数据}({@link DescribeOverviewStatisticsRequest 请求参数}): {@link DescribeOverviewStatisticsResponse 返回参数} */
   DescribeOverviewStatistics(data?: DescribeOverviewStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewStatisticsResponse>;
-  /** 获取本地提权事件列表 */
+  /** {@link DescribePrivilegeEvents 获取本地提权事件列表}({@link DescribePrivilegeEventsRequest 请求参数}): {@link DescribePrivilegeEventsResponse 返回参数} */
   DescribePrivilegeEvents(data?: DescribePrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivilegeEventsResponse>;
-  /** 获取本地提权规则列表 */
+  /** {@link DescribePrivilegeRules 获取本地提权规则列表}({@link DescribePrivilegeRulesRequest 请求参数}): {@link DescribePrivilegeRulesResponse 返回参数} */
   DescribePrivilegeRules(data?: DescribePrivilegeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivilegeRulesResponse>;
-  /** 获取专业版概览信息 */
+  /** {@link DescribeProVersionInfo 获取专业版概览信息}({@link DescribeProVersionInfoRequest 请求参数}): {@link DescribeProVersionInfoResponse 返回参数} */
   DescribeProVersionInfo(data?: DescribeProVersionInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProVersionInfoResponse>;
-  /** 获取专业版状态 */
+  /** {@link DescribeProVersionStatus 获取专业版状态}({@link DescribeProVersionStatusRequest 请求参数}): {@link DescribeProVersionStatusResponse 返回参数} */
   DescribeProVersionStatus(data: DescribeProVersionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProVersionStatusResponse>;
-  /** 获取进程统计列表 */
+  /** {@link DescribeProcessStatistics 获取进程统计列表}({@link DescribeProcessStatisticsRequest 请求参数}): {@link DescribeProcessStatisticsResponse 返回参数} */
   DescribeProcessStatistics(data?: DescribeProcessStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcessStatisticsResponse>;
-  /** 防护目录列表 */
+  /** {@link DescribeProtectDirList 防护目录列表}({@link DescribeProtectDirListRequest 请求参数}): {@link DescribeProtectDirListResponse 返回参数} */
   DescribeProtectDirList(data: DescribeProtectDirListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectDirListResponse>;
-  /** 查询防护目录关联服务器 */
+  /** {@link DescribeProtectDirRelatedServer 查询防护目录关联服务器}({@link DescribeProtectDirRelatedServerRequest 请求参数}): {@link DescribeProtectDirRelatedServerResponse 返回参数} */
   DescribeProtectDirRelatedServer(data: DescribeProtectDirRelatedServerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectDirRelatedServerResponse>;
-  /** 旗舰重保列表 */
+  /** {@link DescribeProtectNetList 旗舰重保列表}({@link DescribeProtectNetListRequest 请求参数}): {@link DescribeProtectNetListResponse 返回参数} */
   DescribeProtectNetList(data?: DescribeProtectNetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectNetListResponse>;
-  /** 获取反弹Shell列表 */
+  /** {@link DescribeReverseShellEvents 获取反弹Shell列表}({@link DescribeReverseShellEventsRequest 请求参数}): {@link DescribeReverseShellEventsResponse 返回参数} */
   DescribeReverseShellEvents(data?: DescribeReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsResponse>;
-  /** 获取反弹Shell规则列表 */
+  /** {@link DescribeReverseShellRules 获取反弹Shell规则列表}({@link DescribeReverseShellRulesRequest 请求参数}): {@link DescribeReverseShellRulesResponse 返回参数} */
   DescribeReverseShellRules(data?: DescribeReverseShellRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellRulesResponse>;
-  /** 获取恶意请求列表 */
+  /** {@link DescribeRiskDnsList 获取恶意请求列表}({@link DescribeRiskDnsListRequest 请求参数}): {@link DescribeRiskDnsListResponse 返回参数} */
   DescribeRiskDnsList(data?: DescribeRiskDnsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskDnsListResponse>;
-  /** 更新用户告警设置 */
+  /** {@link DescribeSaveOrUpdateWarnings 更新用户告警设置}({@link DescribeSaveOrUpdateWarningsRequest 请求参数}): {@link DescribeSaveOrUpdateWarningsResponse 返回参数} */
   DescribeSaveOrUpdateWarnings(data?: DescribeSaveOrUpdateWarningsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSaveOrUpdateWarningsResponse>;
-  /** 查询木马扫描进度 */
+  /** {@link DescribeScanMalwareSchedule 查询木马扫描进度}({@link DescribeScanMalwareScheduleRequest 请求参数}): {@link DescribeScanMalwareScheduleResponse 返回参数} */
   DescribeScanMalwareSchedule(data?: DescribeScanMalwareScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanMalwareScheduleResponse>;
-  /** 查询检测进度 */
+  /** {@link DescribeScanSchedule 查询检测进度}({@link DescribeScanScheduleRequest 请求参数}): {@link DescribeScanScheduleResponse 返回参数} */
   DescribeScanSchedule(data: DescribeScanScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanScheduleResponse>;
-  /** 查询扫描状态 */
+  /** {@link DescribeScanState 查询扫描状态}({@link DescribeScanStateRequest 请求参数}): {@link DescribeScanStateResponse 返回参数} */
   DescribeScanState(data: DescribeScanStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanStateResponse>;
-  /** 查询扫描任务详情 */
+  /** {@link DescribeScanTaskDetails 查询扫描任务详情}({@link DescribeScanTaskDetailsRequest 请求参数}): {@link DescribeScanTaskDetailsResponse 返回参数} */
   DescribeScanTaskDetails(data: DescribeScanTaskDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskDetailsResponse>;
-  /** 查询机器扫描状态列表 */
+  /** {@link DescribeScanTaskStatus 查询机器扫描状态列表}({@link DescribeScanTaskStatusRequest 请求参数}): {@link DescribeScanTaskStatusResponse 返回参数} */
   DescribeScanTaskStatus(data: DescribeScanTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskStatusResponse>;
-  /** 定期检测配置查询 */
+  /** {@link DescribeScanVulSetting 定期检测配置查询}({@link DescribeScanVulSettingRequest 请求参数}): {@link DescribeScanVulSettingResponse 返回参数} */
   DescribeScanVulSetting(data?: DescribeScanVulSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanVulSettingResponse>;
-  /** 导出ES查询文档列表 */
+  /** {@link DescribeSearchExportList 导出ES查询文档列表}({@link DescribeSearchExportListRequest 请求参数}): {@link DescribeSearchExportListResponse 返回参数} */
   DescribeSearchExportList(data: DescribeSearchExportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchExportListResponse>;
-  /** 获取历史搜索记录 */
+  /** {@link DescribeSearchLogs 获取历史搜索记录}({@link DescribeSearchLogsRequest 请求参数}): {@link DescribeSearchLogsResponse 返回参数} */
   DescribeSearchLogs(data?: DescribeSearchLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchLogsResponse>;
-  /** 获取快速检索列表 */
+  /** {@link DescribeSearchTemplates 获取快速检索列表}({@link DescribeSearchTemplatesRequest 请求参数}): {@link DescribeSearchTemplatesResponse 返回参数} */
   DescribeSearchTemplates(data?: DescribeSearchTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchTemplatesResponse>;
-  /** 获取安全事件动态消息 */
+  /** {@link DescribeSecurityDynamics 获取安全事件动态消息}({@link DescribeSecurityDynamicsRequest 请求参数}): {@link DescribeSecurityDynamicsResponse 返回参数} */
   DescribeSecurityDynamics(data?: DescribeSecurityDynamicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityDynamicsResponse>;
-  /** 获取安全事件统计 */
+  /** {@link DescribeSecurityEventStat 获取安全事件统计}({@link DescribeSecurityEventStatRequest 请求参数}): {@link DescribeSecurityEventStatResponse 返回参数} */
   DescribeSecurityEventStat(data?: DescribeSecurityEventStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityEventStatResponse>;
-  /** 获取安全事件数统计数据 */
+  /** {@link DescribeSecurityEventsCnt 获取安全事件数统计数据}({@link DescribeSecurityEventsCntRequest 请求参数}): {@link DescribeSecurityEventsCntResponse 返回参数} */
   DescribeSecurityEventsCnt(data?: DescribeSecurityEventsCntRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityEventsCntResponse>;
-  /** 获取安全事件统计数据 */
+  /** {@link DescribeSecurityTrends 获取安全事件统计数据}({@link DescribeSecurityTrendsRequest 请求参数}): {@link DescribeSecurityTrendsResponse 返回参数} */
   DescribeSecurityTrends(data: DescribeSecurityTrendsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityTrendsResponse>;
-  /** 查询服务器关联目录详情 */
+  /** {@link DescribeServerRelatedDirInfo 查询服务器关联目录详情}({@link DescribeServerRelatedDirInfoRequest 请求参数}): {@link DescribeServerRelatedDirInfoResponse 返回参数} */
   DescribeServerRelatedDirInfo(data: DescribeServerRelatedDirInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerRelatedDirInfoResponse>;
-  /** 获文件查杀概览信息 */
+  /** {@link DescribeServersAndRiskAndFirstInfo 获文件查杀概览信息}({@link DescribeServersAndRiskAndFirstInfoRequest 请求参数}): {@link DescribeServersAndRiskAndFirstInfoResponse 返回参数} */
   DescribeServersAndRiskAndFirstInfo(data?: DescribeServersAndRiskAndFirstInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServersAndRiskAndFirstInfoResponse>;
-  /** 根据策略名查询策略是否存在 */
+  /** {@link DescribeStrategyExist 根据策略名查询策略是否存在}({@link DescribeStrategyExistRequest 请求参数}): {@link DescribeStrategyExistResponse 返回参数} */
   DescribeStrategyExist(data: DescribeStrategyExistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStrategyExistResponse>;
-  /** 获取指定标签关联的服务器信息 */
+  /** {@link DescribeTagMachines 获取指定标签关联的服务器信息}({@link DescribeTagMachinesRequest 请求参数}): {@link DescribeTagMachinesResponse 返回参数} */
   DescribeTagMachines(data: DescribeTagMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagMachinesResponse>;
-  /** 获取所有主机标签 */
+  /** {@link DescribeTags 获取所有主机标签}({@link DescribeTagsRequest 请求参数}): {@link DescribeTagsResponse 返回参数} */
   DescribeTags(data?: DescribeTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagsResponse>;
-  /** 获取指定漏洞分类统计数 */
+  /** {@link DescribeUndoVulCounts 获取指定漏洞分类统计数}({@link DescribeUndoVulCountsRequest 请求参数}): {@link DescribeUndoVulCountsResponse 返回参数} */
   DescribeUndoVulCounts(data?: DescribeUndoVulCountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUndoVulCountsResponse>;
-  /** 查询常用登录地 */
+  /** {@link DescribeUsualLoginPlaces 查询常用登录地}({@link DescribeUsualLoginPlacesRequest 请求参数}): {@link DescribeUsualLoginPlacesResponse 返回参数} */
   DescribeUsualLoginPlaces(data: DescribeUsualLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsualLoginPlacesResponse>;
-  /** 获取专业版和基础版机器数 */
+  /** {@link DescribeVersionStatistics 获取专业版和基础版机器数}({@link DescribeVersionStatisticsRequest 请求参数}): {@link DescribeVersionStatisticsResponse 返回参数} */
   DescribeVersionStatistics(data?: DescribeVersionStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVersionStatisticsResponse>;
-  /** 获取近日指定类型的漏洞数量和主机数量 */
+  /** {@link DescribeVulCountByDates 获取近日指定类型的漏洞数量和主机数量}({@link DescribeVulCountByDatesRequest 请求参数}): {@link DescribeVulCountByDatesResponse 返回参数} */
   DescribeVulCountByDates(data?: DescribeVulCountByDatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulCountByDatesResponse>;
-  /** 漏洞影响主机列表 */
+  /** {@link DescribeVulEffectHostList 漏洞影响主机列表}({@link DescribeVulEffectHostListRequest 请求参数}): {@link DescribeVulEffectHostListResponse 返回参数} */
   DescribeVulEffectHostList(data: DescribeVulEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulEffectHostListResponse>;
-  /** 获取待处理漏洞数+影响主机数 */
+  /** {@link DescribeVulHostCountScanTime 获取待处理漏洞数+影响主机数}({@link DescribeVulHostCountScanTimeRequest 请求参数}): {@link DescribeVulHostCountScanTimeResponse 返回参数} */
   DescribeVulHostCountScanTime(data?: DescribeVulHostCountScanTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulHostCountScanTimeResponse>;
-  /** 获取服务器风险top列表 */
+  /** {@link DescribeVulHostTop 获取服务器风险top列表}({@link DescribeVulHostTopRequest 请求参数}): {@link DescribeVulHostTopResponse 返回参数} */
   DescribeVulHostTop(data: DescribeVulHostTopRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulHostTopResponse>;
-  /** 漏洞详情 */
+  /** {@link DescribeVulInfoCvss 漏洞详情}({@link DescribeVulInfoCvssRequest 请求参数}): {@link DescribeVulInfoCvssResponse 返回参数} */
   DescribeVulInfoCvss(data: DescribeVulInfoCvssRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulInfoCvssResponse>;
-  /** 查询漏洞数量等级分布统计 */
+  /** {@link DescribeVulLevelCount 查询漏洞数量等级分布统计}({@link DescribeVulLevelCountRequest 请求参数}): {@link DescribeVulLevelCountResponse 返回参数} */
   DescribeVulLevelCount(data?: DescribeVulLevelCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulLevelCountResponse>;
-  /** 漏洞列表 */
+  /** {@link DescribeVulList 漏洞列表}({@link DescribeVulListRequest 请求参数}): {@link DescribeVulListResponse 返回参数} */
   DescribeVulList(data?: DescribeVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulListResponse>;
-  /** 获取漏洞top统计 */
+  /** {@link DescribeVulTop 获取漏洞top统计}({@link DescribeVulTopRequest 请求参数}): {@link DescribeVulTopResponse 返回参数} */
   DescribeVulTop(data: DescribeVulTopRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulTopResponse>;
-  /** 获取当前用户告警列表 */
+  /** {@link DescribeWarningList 获取当前用户告警列表}({@link DescribeWarningListRequest 请求参数}): {@link DescribeWarningListResponse 返回参数} */
   DescribeWarningList(data?: DescribeWarningListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWarningListResponse>;
-  /** 查询篡改事件列表 */
+  /** {@link DescribeWebPageEventList 查询篡改事件列表}({@link DescribeWebPageEventListRequest 请求参数}): {@link DescribeWebPageEventListResponse 返回参数} */
   DescribeWebPageEventList(data?: DescribeWebPageEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebPageEventListResponse>;
-  /** 查询网页防篡改概览信息 */
+  /** {@link DescribeWebPageGeneralize 查询网页防篡改概览信息}({@link DescribeWebPageGeneralizeRequest 请求参数}): {@link DescribeWebPageGeneralizeResponse 返回参数} */
   DescribeWebPageGeneralize(data?: DescribeWebPageGeneralizeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebPageGeneralizeResponse>;
-  /** 查询网页防篡改防护统计 */
+  /** {@link DescribeWebPageProtectStat 查询网页防篡改防护统计}({@link DescribeWebPageProtectStatRequest 请求参数}): {@link DescribeWebPageProtectStatResponse 返回参数} */
   DescribeWebPageProtectStat(data?: DescribeWebPageProtectStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebPageProtectStatResponse>;
-  /** 查询网站防篡改服务信息 */
+  /** {@link DescribeWebPageServiceInfo 查询网站防篡改服务信息}({@link DescribeWebPageServiceInfoRequest 请求参数}): {@link DescribeWebPageServiceInfoResponse 返回参数} */
   DescribeWebPageServiceInfo(data?: DescribeWebPageServiceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebPageServiceInfoResponse>;
-  /** 销毁订单 */
+  /** {@link DestroyOrder 销毁订单}({@link DestroyOrderRequest 请求参数}): {@link DestroyOrderResponse 返回参数} */
   DestroyOrder(data: DestroyOrderRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyOrderResponse>;
-  /** 新增或修改高危命令规则（支持多服务器选择） */
+  /** {@link EditBashRules 新增或修改高危命令规则（支持多服务器选择）}({@link EditBashRulesRequest 请求参数}): {@link EditBashRulesResponse 返回参数} */
   EditBashRules(data?: EditBashRulesRequest, config?: AxiosRequestConfig): AxiosPromise<EditBashRulesResponse>;
-  /** 新增或编辑标签 */
+  /** {@link EditTags 新增或编辑标签}({@link EditTagsRequest 请求参数}): {@link EditTagsResponse 返回参数} */
   EditTags(data: EditTagsRequest, config?: AxiosRequestConfig): AxiosPromise<EditTagsResponse>;
-  /** 导出资产管理内核模块列表 */
+  /** {@link ExportAssetCoreModuleList 导出资产管理内核模块列表}({@link ExportAssetCoreModuleListRequest 请求参数}): {@link ExportAssetCoreModuleListResponse 返回参数} */
   ExportAssetCoreModuleList(data?: ExportAssetCoreModuleListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAssetCoreModuleListResponse>;
-  /** 导出资产管理Web服务列表 */
+  /** {@link ExportAssetWebServiceInfoList 导出资产管理Web服务列表}({@link ExportAssetWebServiceInfoListRequest 请求参数}): {@link ExportAssetWebServiceInfoListResponse 返回参数} */
   ExportAssetWebServiceInfoList(data?: ExportAssetWebServiceInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAssetWebServiceInfoListResponse>;
-  /** 导出网络攻击日志 */
+  /** {@link ExportAttackLogs 导出网络攻击日志}({@link ExportAttackLogsRequest 请求参数}): {@link ExportAttackLogsResponse 返回参数} */
   ExportAttackLogs(data?: ExportAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAttackLogsResponse>;
-  /** 基线影响主机列表导出 */
+  /** {@link ExportBaselineEffectHostList 基线影响主机列表导出}({@link ExportBaselineEffectHostListRequest 请求参数}): {@link ExportBaselineEffectHostListResponse 返回参数} */
   ExportBaselineEffectHostList(data: ExportBaselineEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBaselineEffectHostListResponse>;
-  /** 导出基线列表 */
+  /** {@link ExportBaselineList 导出基线列表}({@link ExportBaselineListRequest 请求参数}): {@link ExportBaselineListResponse 返回参数} */
   ExportBaselineList(data?: ExportBaselineListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBaselineListResponse>;
-  /** 导出高危命令事件 */
+  /** {@link ExportBashEvents 导出高危命令事件}({@link ExportBashEventsRequest 请求参数}): {@link ExportBashEventsResponse 返回参数} */
   ExportBashEvents(data?: ExportBashEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBashEventsResponse>;
-  /** 导出密码破解记录 */
+  /** {@link ExportBruteAttacks 导出密码破解记录}({@link ExportBruteAttacksRequest 请求参数}): {@link ExportBruteAttacksResponse 返回参数} */
   ExportBruteAttacks(data?: ExportBruteAttacksRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBruteAttacksResponse>;
-  /** 已忽略基线检测项导出 */
+  /** {@link ExportIgnoreBaselineRule 已忽略基线检测项导出}({@link ExportIgnoreBaselineRuleRequest 请求参数}): {@link ExportIgnoreBaselineRuleResponse 返回参数} */
   ExportIgnoreBaselineRule(data?: ExportIgnoreBaselineRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ExportIgnoreBaselineRuleResponse>;
-  /** 忽略检测项影响主机列表导出 */
+  /** {@link ExportIgnoreRuleEffectHostList 忽略检测项影响主机列表导出}({@link ExportIgnoreRuleEffectHostListRequest 请求参数}): {@link ExportIgnoreRuleEffectHostListResponse 返回参数} */
   ExportIgnoreRuleEffectHostList(data: ExportIgnoreRuleEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportIgnoreRuleEffectHostListResponse>;
-  /** 导出授权详情 */
+  /** {@link ExportLicenseDetail 导出授权详情}({@link ExportLicenseDetailRequest 请求参数}): {@link ExportLicenseDetailResponse 返回参数} */
   ExportLicenseDetail(data?: ExportLicenseDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ExportLicenseDetailResponse>;
-  /** 导出下载恶意请求文件 */
+  /** {@link ExportMaliciousRequests 导出下载恶意请求文件}({@link ExportMaliciousRequestsRequest 请求参数}): {@link ExportMaliciousRequestsResponse 返回参数} */
   ExportMaliciousRequests(data?: ExportMaliciousRequestsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportMaliciousRequestsResponse>;
-  /** 导出木马记录 */
+  /** {@link ExportMalwares 导出木马记录}({@link ExportMalwaresRequest 请求参数}): {@link ExportMalwaresResponse 返回参数} */
   ExportMalwares(data?: ExportMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<ExportMalwaresResponse>;
-  /** 导出异地登录记录 */
+  /** {@link ExportNonlocalLoginPlaces 导出异地登录记录}({@link ExportNonlocalLoginPlacesRequest 请求参数}): {@link ExportNonlocalLoginPlacesResponse 返回参数} */
   ExportNonlocalLoginPlaces(data?: ExportNonlocalLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<ExportNonlocalLoginPlacesResponse>;
-  /** 导出本地提权事件 */
+  /** {@link ExportPrivilegeEvents 导出本地提权事件}({@link ExportPrivilegeEventsRequest 请求参数}): {@link ExportPrivilegeEventsResponse 返回参数} */
   ExportPrivilegeEvents(data?: ExportPrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportPrivilegeEventsResponse>;
-  /** 导出防护目录列表 */
+  /** {@link ExportProtectDirList 导出防护目录列表}({@link ExportProtectDirListRequest 请求参数}): {@link ExportProtectDirListResponse 返回参数} */
   ExportProtectDirList(data?: ExportProtectDirListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportProtectDirListResponse>;
-  /** 导出反弹Shell事件 */
+  /** {@link ExportReverseShellEvents 导出反弹Shell事件}({@link ExportReverseShellEventsRequest 请求参数}): {@link ExportReverseShellEventsResponse 返回参数} */
   ExportReverseShellEvents(data?: ExportReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportReverseShellEventsResponse>;
-  /** 导出扫描任务详情 */
+  /** {@link ExportScanTaskDetails 导出扫描任务详情}({@link ExportScanTaskDetailsRequest 请求参数}): {@link ExportScanTaskDetailsResponse 返回参数} */
   ExportScanTaskDetails(data: ExportScanTaskDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportScanTaskDetailsResponse>;
-  /** 导出风险趋势 */
+  /** {@link ExportSecurityTrends 导出风险趋势}({@link ExportSecurityTrendsRequest 请求参数}): {@link ExportSecurityTrendsResponse 返回参数} */
   ExportSecurityTrends(data: ExportSecurityTrendsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportSecurityTrendsResponse>;
-  /** 异步导出任务 */
+  /** {@link ExportTasks 异步导出任务}({@link ExportTasksRequest 请求参数}): {@link ExportTasksResponse 返回参数} */
   ExportTasks(data: ExportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ExportTasksResponse>;
-  /** 导出本次漏洞检测Excel */
+  /** {@link ExportVulDetectionExcel 导出本次漏洞检测Excel}({@link ExportVulDetectionExcelRequest 请求参数}): {@link ExportVulDetectionExcelResponse 返回参数} */
   ExportVulDetectionExcel(data: ExportVulDetectionExcelRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVulDetectionExcelResponse>;
-  /** 导出漏洞检测报告 */
+  /** {@link ExportVulDetectionReport 导出漏洞检测报告}({@link ExportVulDetectionReportRequest 请求参数}): {@link ExportVulDetectionReportResponse 返回参数} */
   ExportVulDetectionReport(data: ExportVulDetectionReportRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVulDetectionReportResponse>;
-  /** 导出漏洞影响主机列表 */
+  /** {@link ExportVulEffectHostList 导出漏洞影响主机列表}({@link ExportVulEffectHostListRequest 请求参数}): {@link ExportVulEffectHostListResponse 返回参数} */
   ExportVulEffectHostList(data: ExportVulEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVulEffectHostListResponse>;
-  /** 漏洞管理-导出漏洞列表 */
+  /** {@link ExportVulList 漏洞管理-导出漏洞列表}({@link ExportVulListRequest 请求参数}): {@link ExportVulListResponse 返回参数} */
   ExportVulList(data?: ExportVulListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVulListResponse>;
-  /** 导出篡改事件列表 */
+  /** {@link ExportWebPageEventList 导出篡改事件列表}({@link ExportWebPageEventListRequest 请求参数}): {@link ExportWebPageEventListResponse 返回参数} */
   ExportWebPageEventList(data?: ExportWebPageEventListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportWebPageEventListResponse>;
-  /** 忽略漏洞 */
+  /** {@link IgnoreImpactedHosts 忽略漏洞}({@link IgnoreImpactedHostsRequest 请求参数}): {@link IgnoreImpactedHostsResponse 返回参数} */
   IgnoreImpactedHosts(data: IgnoreImpactedHostsRequest, config?: AxiosRequestConfig): AxiosPromise<IgnoreImpactedHostsResponse>;
-  /** 设置自动开通配置 */
+  /** {@link ModifyAutoOpenProVersionConfig 设置自动开通配置}({@link ModifyAutoOpenProVersionConfigRequest 请求参数}): {@link ModifyAutoOpenProVersionConfigResponse 返回参数} */
   ModifyAutoOpenProVersionConfig(data: ModifyAutoOpenProVersionConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoOpenProVersionConfigResponse>;
-  /** 修改爆破阻断模式 */
+  /** {@link ModifyBanMode 修改爆破阻断模式}({@link ModifyBanModeRequest 请求参数}): {@link ModifyBanModeResponse 返回参数} */
   ModifyBanMode(data: ModifyBanModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBanModeResponse>;
-  /** 设置阻断开关状态 */
+  /** {@link ModifyBanStatus 设置阻断开关状态}({@link ModifyBanStatusRequest 请求参数}): {@link ModifyBanStatusResponse 返回参数} */
   ModifyBanStatus(data: ModifyBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBanStatusResponse>;
-  /** 更改基线策略设置 */
+  /** {@link ModifyBaselinePolicy 更改基线策略设置}({@link ModifyBaselinePolicyRequest 请求参数}): {@link ModifyBaselinePolicyResponse 返回参数} */
   ModifyBaselinePolicy(data: ModifyBaselinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBaselinePolicyResponse>;
-  /** 修改暴力破解规则 */
+  /** {@link ModifyBruteAttackRules 修改暴力破解规则}({@link ModifyBruteAttackRulesRequest 请求参数}): {@link ModifyBruteAttackRulesResponse 返回参数} */
   ModifyBruteAttackRules(data: ModifyBruteAttackRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBruteAttackRulesResponse>;
-  /** 授权批量绑定 */
+  /** {@link ModifyLicenseBinds 授权批量绑定}({@link ModifyLicenseBindsRequest 请求参数}): {@link ModifyLicenseBindsResponse 返回参数} */
   ModifyLicenseBinds(data: ModifyLicenseBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLicenseBindsResponse>;
-  /** 授权批量解绑 */
+  /** {@link ModifyLicenseUnBinds 授权批量解绑}({@link ModifyLicenseUnBindsRequest 请求参数}): {@link ModifyLicenseUnBindsResponse 返回参数} */
   ModifyLicenseUnBinds(data: ModifyLicenseUnBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLicenseUnBindsResponse>;
-  /** 定时扫描设置 */
+  /** {@link ModifyMalwareTimingScanSettings 定时扫描设置}({@link ModifyMalwareTimingScanSettingsRequest 请求参数}): {@link ModifyMalwareTimingScanSettingsResponse 返回参数} */
   ModifyMalwareTimingScanSettings(data: ModifyMalwareTimingScanSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMalwareTimingScanSettingsResponse>;
-  /** 编辑订单属性 */
+  /** {@link ModifyOrderAttribute 编辑订单属性}({@link ModifyOrderAttributeRequest 请求参数}): {@link ModifyOrderAttributeResponse 返回参数} */
   ModifyOrderAttribute(data: ModifyOrderAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOrderAttributeResponse>;
-  /** 修改告警设置 */
+  /** {@link ModifyWarningSetting 修改告警设置}({@link ModifyWarningSettingRequest 请求参数}): {@link ModifyWarningSettingResponse 返回参数} */
   ModifyWarningSetting(data: ModifyWarningSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWarningSettingResponse>;
-  /** 创建网站防护目录 */
+  /** {@link ModifyWebPageProtectDir 创建网站防护目录}({@link ModifyWebPageProtectDirRequest 请求参数}): {@link ModifyWebPageProtectDirResponse 返回参数} */
   ModifyWebPageProtectDir(data: ModifyWebPageProtectDirRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebPageProtectDirResponse>;
-  /** 修改网站防护设置 */
+  /** {@link ModifyWebPageProtectSetting 修改网站防护设置}({@link ModifyWebPageProtectSettingRequest 请求参数}): {@link ModifyWebPageProtectSettingResponse 返回参数} */
   ModifyWebPageProtectSetting(data: ModifyWebPageProtectSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebPageProtectSettingResponse>;
-  /** 网站防护设置开关 */
+  /** {@link ModifyWebPageProtectSwitch 网站防护设置开关}({@link ModifyWebPageProtectSwitchRequest 请求参数}): {@link ModifyWebPageProtectSwitchResponse 返回参数} */
   ModifyWebPageProtectSwitch(data: ModifyWebPageProtectSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebPageProtectSwitchResponse>;
-  /** 恢复木马文件 */
+  /** {@link RecoverMalwares 恢复木马文件}({@link RecoverMalwaresRequest 请求参数}): {@link RecoverMalwaresResponse 返回参数} */
   RecoverMalwares(data: RecoverMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverMalwaresResponse>;
-  /** 资产指纹启动扫描 */
+  /** {@link ScanAsset 资产指纹启动扫描}({@link ScanAssetRequest 请求参数}): {@link ScanAssetResponse 返回参数} */
   ScanAsset(data?: ScanAssetRequest, config?: AxiosRequestConfig): AxiosPromise<ScanAssetResponse>;
-  /** 一键检测 */
+  /** {@link ScanVul 一键检测}({@link ScanVulRequest 请求参数}): {@link ScanVulResponse 返回参数} */
   ScanVul(data: ScanVulRequest, config?: AxiosRequestConfig): AxiosPromise<ScanVulResponse>;
-  /** 漏洞管理-重新检测接口 */
+  /** {@link ScanVulAgain 漏洞管理-重新检测接口}({@link ScanVulAgainRequest 请求参数}): {@link ScanVulAgainResponse 返回参数} */
   ScanVulAgain(data: ScanVulAgainRequest, config?: AxiosRequestConfig): AxiosPromise<ScanVulAgainResponse>;
-  /** 定期扫描漏洞设置 */
+  /** {@link ScanVulSetting 定期扫描漏洞设置}({@link ScanVulSettingRequest 请求参数}): {@link ScanVulSettingResponse 返回参数} */
   ScanVulSetting(data: ScanVulSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ScanVulSettingResponse>;
-  /** 隔离木马 */
+  /** {@link SeparateMalwares 隔离木马}({@link SeparateMalwaresRequest 请求参数}): {@link SeparateMalwaresResponse 返回参数} */
   SeparateMalwares(data: SeparateMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<SeparateMalwaresResponse>;
-  /** 设置高危命令事件状态 */
+  /** {@link SetBashEventsStatus 设置高危命令事件状态}({@link SetBashEventsStatusRequest 请求参数}): {@link SetBashEventsStatusResponse 返回参数} */
   SetBashEventsStatus(data: SetBashEventsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<SetBashEventsStatusResponse>;
-  /** 检测基线 */
+  /** {@link StartBaselineDetect 检测基线}({@link StartBaselineDetectRequest 请求参数}): {@link StartBaselineDetectResponse 返回参数} */
   StartBaselineDetect(data: StartBaselineDetectRequest, config?: AxiosRequestConfig): AxiosPromise<StartBaselineDetectResponse>;
-  /** 停止基线检测 */
+  /** {@link StopBaselineDetect 停止基线检测}({@link StopBaselineDetectRequest 请求参数}): {@link StopBaselineDetectResponse 返回参数} */
   StopBaselineDetect(data: StopBaselineDetectRequest, config?: AxiosRequestConfig): AxiosPromise<StopBaselineDetectResponse>;
-  /** 不再提醒爆破阻断提示弹窗 */
+  /** {@link StopNoticeBanTips 不再提醒爆破阻断提示弹窗}({@link StopNoticeBanTipsRequest 请求参数}): {@link StopNoticeBanTipsResponse 返回参数} */
   StopNoticeBanTips(data?: StopNoticeBanTipsRequest, config?: AxiosRequestConfig): AxiosPromise<StopNoticeBanTipsResponse>;
-  /** 切换高危命令规则状态 */
+  /** {@link SwitchBashRules 切换高危命令规则状态}({@link SwitchBashRulesRequest 请求参数}): {@link SwitchBashRulesResponse 返回参数} */
   SwitchBashRules(data: SwitchBashRulesRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchBashRulesResponse>;
-  /** 同步资产扫描信息 */
+  /** {@link SyncAssetScan 同步资产扫描信息}({@link SyncAssetScanRequest 请求参数}): {@link SyncAssetScanResponse 返回参数} */
   SyncAssetScan(data: SyncAssetScanRequest, config?: AxiosRequestConfig): AxiosPromise<SyncAssetScanResponse>;
-  /** 同步基线检测进度概要 */
+  /** {@link SyncBaselineDetectSummary 同步基线检测进度概要}({@link SyncBaselineDetectSummaryRequest 请求参数}): {@link SyncBaselineDetectSummaryResponse 返回参数} */
   SyncBaselineDetectSummary(data?: SyncBaselineDetectSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<SyncBaselineDetectSummaryResponse>;
-  /** 信任木马文件 */
+  /** {@link TrustMalwares 信任木马文件}({@link TrustMalwaresRequest 请求参数}): {@link TrustMalwaresResponse 返回参数} */
   TrustMalwares(data: TrustMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<TrustMalwaresResponse>;
-  /** 取消信任木马 */
+  /** {@link UntrustMalwares 取消信任木马}({@link UntrustMalwaresRequest 请求参数}): {@link UntrustMalwaresResponse 返回参数} */
   UntrustMalwares(data: UntrustMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<UntrustMalwaresResponse>;
-  /** 更新基线策略信息 */
+  /** {@link UpdateBaselineStrategy 更新基线策略信息}({@link UpdateBaselineStrategyRequest 请求参数}): {@link UpdateBaselineStrategyResponse 返回参数} */
   UpdateBaselineStrategy(data: UpdateBaselineStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateBaselineStrategyResponse>;
-  /** 关联机器标签列表 */
+  /** {@link UpdateMachineTags 关联机器标签列表}({@link UpdateMachineTagsRequest 请求参数}): {@link UpdateMachineTagsResponse 返回参数} */
   UpdateMachineTags(data: UpdateMachineTagsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateMachineTagsResponse>;
 }
 

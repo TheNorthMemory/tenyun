@@ -30,10 +30,10 @@ declare interface CopyCryptoColumnPolicyResponse {
   RequestId?: string;
 }
 
-/** [云数据加密代理网关](https://cloud.tencent.com/document/product/1303) */
+/** {@link Casb 云访问安全代理} */
 declare interface Casb {
   (): Versions;
-  /** 复制字段策略 */
+  /** {@link CopyCryptoColumnPolicy 复制字段策略}({@link CopyCryptoColumnPolicyRequest 请求参数}): {@link CopyCryptoColumnPolicyResponse 返回参数} */
   CopyCryptoColumnPolicy(data: CopyCryptoColumnPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CopyCryptoColumnPolicyResponse>;
 }
 

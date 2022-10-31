@@ -2006,132 +2006,132 @@ declare interface UpgradeInstanceResponse {
   RequestId?: string;
 }
 
-/** [云原生数据库 TDSQL-C](https://cloud.tencent.com/document/product/1003) */
+/** {@link Cynosdb TDSQL-C MySQL 版} */
 declare interface Cynosdb {
   (): Versions;
-  /** 恢复实例访问 */
+  /** {@link ActivateInstance 恢复实例访问}({@link ActivateInstanceRequest 请求参数}): {@link ActivateInstanceResponse 返回参数} */
   ActivateInstance(data: ActivateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateInstanceResponse>;
-  /** 增加从可用区 */
+  /** {@link AddClusterSlaveZone 增加从可用区}({@link AddClusterSlaveZoneRequest 请求参数}): {@link AddClusterSlaveZoneResponse 返回参数} */
   AddClusterSlaveZone(data: AddClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<AddClusterSlaveZoneResponse>;
-  /** 集群添加实例 */
+  /** {@link AddInstances 集群添加实例}({@link AddInstancesRequest 请求参数}): {@link AddInstancesResponse 返回参数} */
   AddInstances(data: AddInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AddInstancesResponse>;
-  /** 安全组批量绑定云资源 */
+  /** {@link AssociateSecurityGroups 安全组批量绑定云资源}({@link AssociateSecurityGroupsRequest 请求参数}): {@link AssociateSecurityGroupsResponse 返回参数} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
-  /** 创建账号 */
+  /** {@link CreateAccounts 创建账号}({@link CreateAccountsRequest 请求参数}): {@link CreateAccountsResponse 返回参数} */
   CreateAccounts(data: CreateAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountsResponse>;
-  /** 创建审计日志文件 */
+  /** {@link CreateAuditLogFile 创建审计日志文件}({@link CreateAuditLogFileRequest 请求参数}): {@link CreateAuditLogFileResponse 返回参数} */
   CreateAuditLogFile(data: CreateAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditLogFileResponse>;
-  /** 创建手动备份 */
+  /** {@link CreateBackup 创建手动备份}({@link CreateBackupRequest 请求参数}): {@link CreateBackupResponse 返回参数} */
   CreateBackup(data: CreateBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupResponse>;
-  /** 创建集群 */
+  /** {@link CreateClusters 创建集群}({@link CreateClustersRequest 请求参数}): {@link CreateClustersResponse 返回参数} */
   CreateClusters(data: CreateClustersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClustersResponse>;
-  /** 删除审计日志文件 */
+  /** {@link DeleteAuditLogFile 删除审计日志文件}({@link DeleteAuditLogFileRequest 请求参数}): {@link DeleteAuditLogFileResponse 返回参数} */
   DeleteAuditLogFile(data: DeleteAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditLogFileResponse>;
-  /** 账号所有权限 */
+  /** {@link DescribeAccountAllGrantPrivileges 账号所有权限}({@link DescribeAccountAllGrantPrivilegesRequest 请求参数}): {@link DescribeAccountAllGrantPrivilegesResponse 返回参数} */
   DescribeAccountAllGrantPrivileges(data: DescribeAccountAllGrantPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountAllGrantPrivilegesResponse>;
-  /** 查询数据库管理账号 */
+  /** {@link DescribeAccounts 查询数据库管理账号}({@link DescribeAccountsRequest 请求参数}): {@link DescribeAccountsResponse 返回参数} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
-  /** 查询审计日志文件 */
+  /** {@link DescribeAuditLogFiles 查询审计日志文件}({@link DescribeAuditLogFilesRequest 请求参数}): {@link DescribeAuditLogFilesResponse 返回参数} */
   DescribeAuditLogFiles(data: DescribeAuditLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogFilesResponse>;
-  /** 查询数据库审计日志 */
+  /** {@link DescribeAuditLogs 查询数据库审计日志}({@link DescribeAuditLogsRequest 请求参数}): {@link DescribeAuditLogsResponse 返回参数} */
   DescribeAuditLogs(data: DescribeAuditLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogsResponse>;
-  /** 查询备份配置信息 */
+  /** {@link DescribeBackupConfig 查询备份配置信息}({@link DescribeBackupConfigRequest 请求参数}): {@link DescribeBackupConfigResponse 返回参数} */
   DescribeBackupConfig(data: DescribeBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupConfigResponse>;
-  /** 查询备份下载地址 */
+  /** {@link DescribeBackupDownloadUrl 查询备份下载地址}({@link DescribeBackupDownloadUrlRequest 请求参数}): {@link DescribeBackupDownloadUrlResponse 返回参数} */
   DescribeBackupDownloadUrl(data: DescribeBackupDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadUrlResponse>;
-  /** 查询备份文件列表 */
+  /** {@link DescribeBackupList 查询备份文件列表}({@link DescribeBackupListRequest 请求参数}): {@link DescribeBackupListResponse 返回参数} */
   DescribeBackupList(data: DescribeBackupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupListResponse>;
-  /** 查询Binlog下载地址 */
+  /** {@link DescribeBinlogDownloadUrl 查询Binlog下载地址}({@link DescribeBinlogDownloadUrlRequest 请求参数}): {@link DescribeBinlogDownloadUrlResponse 返回参数} */
   DescribeBinlogDownloadUrl(data: DescribeBinlogDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogDownloadUrlResponse>;
-  /** 查询Binlog保留天数 */
+  /** {@link DescribeBinlogSaveDays 查询Binlog保留天数}({@link DescribeBinlogSaveDaysRequest 请求参数}): {@link DescribeBinlogSaveDaysResponse 返回参数} */
   DescribeBinlogSaveDays(data: DescribeBinlogSaveDaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogSaveDaysResponse>;
-  /** 查询Binlog列表 */
+  /** {@link DescribeBinlogs 查询Binlog列表}({@link DescribeBinlogsRequest 请求参数}): {@link DescribeBinlogsResponse 返回参数} */
   DescribeBinlogs(data: DescribeBinlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogsResponse>;
-  /** 集群详情 */
+  /** {@link DescribeClusterDetail 集群详情}({@link DescribeClusterDetailRequest 请求参数}): {@link DescribeClusterDetailResponse 返回参数} */
   DescribeClusterDetail(data: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
-  /** 查询实例组 */
+  /** {@link DescribeClusterInstanceGrps 查询实例组}({@link DescribeClusterInstanceGrpsRequest 请求参数}): {@link DescribeClusterInstanceGrpsResponse 返回参数} */
   DescribeClusterInstanceGrps(data: DescribeClusterInstanceGrpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstanceGrpsResponse>;
-  /** 查询参数修改日志 */
+  /** {@link DescribeClusterParamLogs 查询参数修改日志}({@link DescribeClusterParamLogsRequest 请求参数}): {@link DescribeClusterParamLogsResponse 返回参数} */
   DescribeClusterParamLogs(data: DescribeClusterParamLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterParamLogsResponse>;
-  /** 查询集群参数 */
+  /** {@link DescribeClusterParams 查询集群参数}({@link DescribeClusterParamsRequest 请求参数}): {@link DescribeClusterParamsResponse 返回参数} */
   DescribeClusterParams(data: DescribeClusterParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterParamsResponse>;
-  /** 查询集群列表 */
+  /** {@link DescribeClusters 查询集群列表}({@link DescribeClustersRequest 请求参数}): {@link DescribeClustersResponse 返回参数} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
-  /** 查询实例安全组信息 */
+  /** {@link DescribeDBSecurityGroups 查询实例安全组信息}({@link DescribeDBSecurityGroupsRequest 请求参数}): {@link DescribeDBSecurityGroupsResponse 返回参数} */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
-  /** 查询实例详情 */
+  /** {@link DescribeInstanceDetail 查询实例详情}({@link DescribeInstanceDetailRequest 请求参数}): {@link DescribeInstanceDetailResponse 返回参数} */
   DescribeInstanceDetail(data: DescribeInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDetailResponse>;
-  /** 查询实例慢查询日志 */
+  /** {@link DescribeInstanceSlowQueries 查询实例慢查询日志}({@link DescribeInstanceSlowQueriesRequest 请求参数}): {@link DescribeInstanceSlowQueriesResponse 返回参数} */
   DescribeInstanceSlowQueries(data: DescribeInstanceSlowQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSlowQueriesResponse>;
-  /** 查询实例规格 */
+  /** {@link DescribeInstanceSpecs 查询实例规格}({@link DescribeInstanceSpecsRequest 请求参数}): {@link DescribeInstanceSpecsResponse 返回参数} */
   DescribeInstanceSpecs(data: DescribeInstanceSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSpecsResponse>;
-  /** 查询实例列表 */
+  /** {@link DescribeInstances 查询实例列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** 查询实例维护时间窗 */
+  /** {@link DescribeMaintainPeriod 查询实例维护时间窗}({@link DescribeMaintainPeriodRequest 请求参数}): {@link DescribeMaintainPeriodResponse 返回参数} */
   DescribeMaintainPeriod(data: DescribeMaintainPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaintainPeriodResponse>;
-  /** 查询参数模板信息 */
+  /** {@link DescribeParamTemplates 查询参数模板信息}({@link DescribeParamTemplatesRequest 请求参数}): {@link DescribeParamTemplatesResponse 返回参数} */
   DescribeParamTemplates(data?: DescribeParamTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplatesResponse>;
-  /** 查询项目安全组信息 */
+  /** {@link DescribeProjectSecurityGroups 查询项目安全组信息}({@link DescribeProjectSecurityGroupsRequest 请求参数}): {@link DescribeProjectSecurityGroupsResponse 返回参数} */
   DescribeProjectSecurityGroups(data: DescribeProjectSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupsResponse>;
-  /** 根据订单id查询资源信息 */
+  /** {@link DescribeResourcesByDealName 根据订单id查询资源信息}({@link DescribeResourcesByDealNameRequest 请求参数}): {@link DescribeResourcesByDealNameResponse 返回参数} */
   DescribeResourcesByDealName(data?: DescribeResourcesByDealNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesByDealNameResponse>;
-  /** 查询有效回滚时间范围 */
+  /** {@link DescribeRollbackTimeRange 查询有效回滚时间范围}({@link DescribeRollbackTimeRangeRequest 请求参数}): {@link DescribeRollbackTimeRangeResponse 返回参数} */
   DescribeRollbackTimeRange(data: DescribeRollbackTimeRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeRangeResponse>;
-  /** 查询指定时间是否可回滚 */
+  /** {@link DescribeRollbackTimeValidity 查询指定时间是否可回滚}({@link DescribeRollbackTimeValidityRequest 请求参数}): {@link DescribeRollbackTimeValidityResponse 返回参数} */
   DescribeRollbackTimeValidity(data: DescribeRollbackTimeValidityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeValidityResponse>;
-  /** 安全组批量解绑云资源 */
+  /** {@link DisassociateSecurityGroups 安全组批量解绑云资源}({@link DisassociateSecurityGroupsRequest 请求参数}): {@link DisassociateSecurityGroupsResponse 返回参数} */
   DisassociateSecurityGroups(data: DisassociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupsResponse>;
-  /** 导出实例慢日志 */
+  /** {@link ExportInstanceSlowQueries 导出实例慢日志}({@link ExportInstanceSlowQueriesRequest 请求参数}): {@link ExportInstanceSlowQueriesResponse 返回参数} */
   ExportInstanceSlowQueries(data: ExportInstanceSlowQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<ExportInstanceSlowQueriesResponse>;
-  /** 批量授权账号权限 */
+  /** {@link GrantAccountPrivileges 批量授权账号权限}({@link GrantAccountPrivilegesRequest 请求参数}): {@link GrantAccountPrivilegesResponse 返回参数} */
   GrantAccountPrivileges(data: GrantAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<GrantAccountPrivilegesResponse>;
-  /** 新购集群询价 */
+  /** {@link InquirePriceCreate 新购集群询价}({@link InquirePriceCreateRequest 请求参数}): {@link InquirePriceCreateResponse 返回参数} */
   InquirePriceCreate(data: InquirePriceCreateRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateResponse>;
-  /** 续费集群询价 */
+  /** {@link InquirePriceRenew 续费集群询价}({@link InquirePriceRenewRequest 请求参数}): {@link InquirePriceRenewResponse 返回参数} */
   InquirePriceRenew(data: InquirePriceRenewRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewResponse>;
-  /** 隔离集群 */
+  /** {@link IsolateCluster 隔离集群}({@link IsolateClusterRequest 请求参数}): {@link IsolateClusterResponse 返回参数} */
   IsolateCluster(data: IsolateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateClusterResponse>;
-  /** 隔离实例 */
+  /** {@link IsolateInstance 隔离实例}({@link IsolateInstanceRequest 请求参数}): {@link IsolateInstanceResponse 返回参数} */
   IsolateInstance(data: IsolateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateInstanceResponse>;
-  /** 修改账号参数 */
+  /** {@link ModifyAccountParams 修改账号参数}({@link ModifyAccountParamsRequest 请求参数}): {@link ModifyAccountParamsResponse 返回参数} */
   ModifyAccountParams(data: ModifyAccountParamsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountParamsResponse>;
-  /** 修改备份配置 */
+  /** {@link ModifyBackupConfig 修改备份配置}({@link ModifyBackupConfigRequest 请求参数}): {@link ModifyBackupConfigResponse 返回参数} */
   ModifyBackupConfig(data: ModifyBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupConfigResponse>;
-  /** 修改备份文件备注名 */
+  /** {@link ModifyBackupName 修改备份文件备注名}({@link ModifyBackupNameRequest 请求参数}): {@link ModifyBackupNameResponse 返回参数} */
   ModifyBackupName(data: ModifyBackupNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupNameResponse>;
-  /** 修改集群名称 */
+  /** {@link ModifyClusterName 修改集群名称}({@link ModifyClusterNameRequest 请求参数}): {@link ModifyClusterNameResponse 返回参数} */
   ModifyClusterName(data: ModifyClusterNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterNameResponse>;
-  /** 修改集群参数 */
+  /** {@link ModifyClusterParam 修改集群参数}({@link ModifyClusterParamRequest 请求参数}): {@link ModifyClusterParamResponse 返回参数} */
   ModifyClusterParam(data: ModifyClusterParamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterParamResponse>;
-  /** 修改从可用区 */
+  /** {@link ModifyClusterSlaveZone 修改从可用区}({@link ModifyClusterSlaveZoneRequest 请求参数}): {@link ModifyClusterSlaveZoneResponse 返回参数} */
   ModifyClusterSlaveZone(data: ModifyClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterSlaveZoneResponse>;
-  /** 升级预付费存储 */
+  /** {@link ModifyClusterStorage 升级预付费存储}({@link ModifyClusterStorageRequest 请求参数}): {@link ModifyClusterStorageResponse 返回参数} */
   ModifyClusterStorage(data: ModifyClusterStorageRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterStorageResponse>;
-  /** 修改云数据库安全组 */
+  /** {@link ModifyDBInstanceSecurityGroups 修改云数据库安全组}({@link ModifyDBInstanceSecurityGroupsRequest 请求参数}): {@link ModifyDBInstanceSecurityGroupsResponse 返回参数} */
   ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
-  /** 修改实例名称 */
+  /** {@link ModifyInstanceName 修改实例名称}({@link ModifyInstanceNameRequest 请求参数}): {@link ModifyInstanceNameResponse 返回参数} */
   ModifyInstanceName(data: ModifyInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNameResponse>;
-  /** 修改维护时间配置 */
+  /** {@link ModifyMaintainPeriodConfig 修改维护时间配置}({@link ModifyMaintainPeriodConfigRequest 请求参数}): {@link ModifyMaintainPeriodConfigResponse 返回参数} */
   ModifyMaintainPeriodConfig(data: ModifyMaintainPeriodConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintainPeriodConfigResponse>;
-  /** 下线集群 */
+  /** {@link OfflineCluster 下线集群}({@link OfflineClusterRequest 请求参数}): {@link OfflineClusterResponse 返回参数} */
   OfflineCluster(data: OfflineClusterRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineClusterResponse>;
-  /** 下线实例 */
+  /** {@link OfflineInstance 下线实例}({@link OfflineInstanceRequest 请求参数}): {@link OfflineInstanceResponse 返回参数} */
   OfflineInstance(data: OfflineInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineInstanceResponse>;
-  /** 暂停serverless集群 */
+  /** {@link PauseServerless 暂停serverless集群}({@link PauseServerlessRequest 请求参数}): {@link PauseServerlessResponse 返回参数} */
   PauseServerless(data: PauseServerlessRequest, config?: AxiosRequestConfig): AxiosPromise<PauseServerlessResponse>;
-  /** 删除从可用区 */
+  /** {@link RemoveClusterSlaveZone 删除从可用区}({@link RemoveClusterSlaveZoneRequest 请求参数}): {@link RemoveClusterSlaveZoneResponse 返回参数} */
   RemoveClusterSlaveZone(data: RemoveClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveClusterSlaveZoneResponse>;
-  /** 恢复serverless集群 */
+  /** {@link ResumeServerless 恢复serverless集群}({@link ResumeServerlessRequest 请求参数}): {@link ResumeServerlessResponse 返回参数} */
   ResumeServerless(data: ResumeServerlessRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeServerlessResponse>;
-  /** 批量回收账号权限 */
+  /** {@link RevokeAccountPrivileges 批量回收账号权限}({@link RevokeAccountPrivilegesRequest 请求参数}): {@link RevokeAccountPrivilegesResponse 返回参数} */
   RevokeAccountPrivileges(data: RevokeAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeAccountPrivilegesResponse>;
-  /** 回档集群 */
+  /** {@link RollBackCluster 回档集群}({@link RollBackClusterRequest 请求参数}): {@link RollBackClusterResponse 返回参数} */
   RollBackCluster(data: RollBackClusterRequest, config?: AxiosRequestConfig): AxiosPromise<RollBackClusterResponse>;
-  /** 设置自动续费 */
+  /** {@link SetRenewFlag 设置自动续费}({@link SetRenewFlagRequest 请求参数}): {@link SetRenewFlagResponse 返回参数} */
   SetRenewFlag(data: SetRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetRenewFlagResponse>;
-  /** 切换到从可用区 */
+  /** {@link SwitchClusterZone 切换到从可用区}({@link SwitchClusterZoneRequest 请求参数}): {@link SwitchClusterZoneResponse 返回参数} */
   SwitchClusterZone(data: SwitchClusterZoneRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchClusterZoneResponse>;
-  /** 升级实例 */
+  /** {@link UpgradeInstance 升级实例}({@link UpgradeInstanceRequest 请求参数}): {@link UpgradeInstanceResponse 返回参数} */
   UpgradeInstance(data: UpgradeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceResponse>;
 }
 

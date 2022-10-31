@@ -82,10 +82,10 @@ declare interface QueryRegisterProtectionResponse {
   RequestId?: string;
 }
 
-/** [注册保护](https://cloud.tencent.com/document/product/1191) */
+/** {@link Rp 注册保护} */
 declare interface Rp {
   (): Versions;
-  /** 注册保护 */
+  /** {@link QueryRegisterProtection 注册保护}({@link QueryRegisterProtectionRequest 请求参数}): {@link QueryRegisterProtectionResponse 返回参数} */
   QueryRegisterProtection(data: QueryRegisterProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRegisterProtectionResponse>;
 }
 

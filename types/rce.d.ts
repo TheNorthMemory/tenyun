@@ -256,14 +256,14 @@ declare interface ManageMarketingRiskResponse {
   RequestId?: string;
 }
 
-/** [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) */
+/** {@link Rce 全栈式风控引擎} */
 declare interface Rce {
   (): Versions;
-  /** 查询风险评估结果 */
+  /** {@link DescribeRiskAssessment 查询风险评估结果}({@link DescribeRiskAssessmentRequest 请求参数}): {@link DescribeRiskAssessmentResponse 返回参数} */
   DescribeRiskAssessment(data?: DescribeRiskAssessmentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskAssessmentResponse>;
-  /** 风险趋势统计 */
+  /** {@link DescribeRiskTrends 风险趋势统计}({@link DescribeRiskTrendsRequest 请求参数}): {@link DescribeRiskTrendsResponse 返回参数} */
   DescribeRiskTrends(data: DescribeRiskTrendsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskTrendsResponse>;
-  /** 全栈式风控引擎 */
+  /** {@link ManageMarketingRisk 全栈式风控引擎}({@link ManageMarketingRiskRequest 请求参数}): {@link ManageMarketingRiskResponse 返回参数} */
   ManageMarketingRisk(data?: ManageMarketingRiskRequest, config?: AxiosRequestConfig): AxiosPromise<ManageMarketingRiskResponse>;
 }
 

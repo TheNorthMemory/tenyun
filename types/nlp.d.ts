@@ -474,56 +474,56 @@ declare interface WordSimilarityResponse {
   RequestId?: string;
 }
 
-/** [自然语言处理](https://cloud.tencent.com/document/product/271) */
+/** {@link Nlp 自然语言处理} */
 declare interface Nlp {
   (): Versions;
-  /** 自动摘要 */
+  /** {@link AutoSummarization 自动摘要}({@link AutoSummarizationRequest 请求参数}): {@link AutoSummarizationResponse 返回参数} */
   AutoSummarization(data: AutoSummarizationRequest, config?: AxiosRequestConfig): AxiosPromise<AutoSummarizationResponse>;
-  /** 闲聊 */
+  /** {@link ChatBot 闲聊}({@link ChatBotRequest 请求参数}): {@link ChatBotResponse 返回参数} */
   ChatBot(data: ChatBotRequest, config?: AxiosRequestConfig): AxiosPromise<ChatBotResponse>;
-  /** 创建自定义词库 */
+  /** {@link CreateDict 创建自定义词库}({@link CreateDictRequest 请求参数}): {@link CreateDictResponse 返回参数} */
   CreateDict(data: CreateDictRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDictResponse>;
-  /** 新增自定义词库词条 */
+  /** {@link CreateWordItems 新增自定义词库词条}({@link CreateWordItemsRequest 请求参数}): {@link CreateWordItemsResponse 返回参数} */
   CreateWordItems(data: CreateWordItemsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWordItemsResponse>;
-  /** 删除自定义词库 */
+  /** {@link DeleteDict 删除自定义词库}({@link DeleteDictRequest 请求参数}): {@link DeleteDictResponse 返回参数} */
   DeleteDict(data: DeleteDictRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDictResponse>;
-  /** 删除词条 */
+  /** {@link DeleteWordItems 删除词条}({@link DeleteWordItemsRequest 请求参数}): {@link DeleteWordItemsResponse 返回参数} */
   DeleteWordItems(data: DeleteWordItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWordItemsResponse>;
-  /** 句法依存分析 */
+  /** {@link DependencyParsing 句法依存分析}({@link DependencyParsingRequest 请求参数}): {@link DependencyParsingResponse 返回参数} */
   DependencyParsing(data: DependencyParsingRequest, config?: AxiosRequestConfig): AxiosPromise<DependencyParsingResponse>;
-  /** 查询词库信息 */
+  /** {@link DescribeDict 查询词库信息}({@link DescribeDictRequest 请求参数}): {@link DescribeDictResponse 返回参数} */
   DescribeDict(data?: DescribeDictRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDictResponse>;
-  /** 查询词库列表 */
+  /** {@link DescribeDicts 查询词库列表}({@link DescribeDictsRequest 请求参数}): {@link DescribeDictsResponse 返回参数} */
   DescribeDicts(data?: DescribeDictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDictsResponse>;
-  /** 查询指定词库的词条信息 */
+  /** {@link DescribeWordItems 查询指定词库的词条信息}({@link DescribeWordItemsRequest 请求参数}): {@link DescribeWordItemsResponse 返回参数} */
   DescribeWordItems(data: DescribeWordItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWordItemsResponse>;
-  /** 关键词提取 */
+  /** {@link KeywordsExtraction 关键词提取}({@link KeywordsExtractionRequest 请求参数}): {@link KeywordsExtractionResponse 返回参数} */
   KeywordsExtraction(data: KeywordsExtractionRequest, config?: AxiosRequestConfig): AxiosPromise<KeywordsExtractionResponse>;
-  /** 词法分析 */
+  /** {@link LexicalAnalysis 词法分析}({@link LexicalAnalysisRequest 请求参数}): {@link LexicalAnalysisResponse 返回参数} */
   LexicalAnalysis(data: LexicalAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<LexicalAnalysisResponse>;
-  /** 检索词条 */
+  /** {@link SearchWordItems 检索词条}({@link SearchWordItemsRequest 请求参数}): {@link SearchWordItemsResponse 返回参数} */
   SearchWordItems(data: SearchWordItemsRequest, config?: AxiosRequestConfig): AxiosPromise<SearchWordItemsResponse>;
-  /** 句向量 */
+  /** {@link SentenceEmbedding 句向量}({@link SentenceEmbeddingRequest 请求参数}): {@link SentenceEmbeddingResponse 返回参数} */
   SentenceEmbedding(data: SentenceEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<SentenceEmbeddingResponse>;
-  /** 情感分析 */
+  /** {@link SentimentAnalysis 情感分析}({@link SentimentAnalysisRequest 请求参数}): {@link SentimentAnalysisResponse 返回参数} */
   SentimentAnalysis(data: SentimentAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<SentimentAnalysisResponse>;
-  /** 相似词 */
+  /** {@link SimilarWords 相似词}({@link SimilarWordsRequest 请求参数}): {@link SimilarWordsResponse 返回参数} */
   SimilarWords(data: SimilarWordsRequest, config?: AxiosRequestConfig): AxiosPromise<SimilarWordsResponse>;
-  /** 文本分类 */
+  /** {@link TextClassification 文本分类}({@link TextClassificationRequest 请求参数}): {@link TextClassificationResponse 返回参数} */
   TextClassification(data: TextClassificationRequest, config?: AxiosRequestConfig): AxiosPromise<TextClassificationResponse>;
-  /** 文本纠错 */
+  /** {@link TextCorrection 文本纠错}({@link TextCorrectionRequest 请求参数}): {@link TextCorrectionResponse 返回参数} */
   TextCorrection(data: TextCorrectionRequest, config?: AxiosRequestConfig): AxiosPromise<TextCorrectionResponse>;
-  /** 文本纠错高级版 */
+  /** {@link TextCorrectionPro 文本纠错高级版}({@link TextCorrectionProRequest 请求参数}): {@link TextCorrectionProResponse 返回参数} */
   TextCorrectionPro(data: TextCorrectionProRequest, config?: AxiosRequestConfig): AxiosPromise<TextCorrectionProResponse>;
-  /** 句子相似度 */
+  /** {@link TextSimilarity 句子相似度}({@link TextSimilarityRequest 请求参数}): {@link TextSimilarityResponse 返回参数} */
   TextSimilarity(data: TextSimilarityRequest, config?: AxiosRequestConfig): AxiosPromise<TextSimilarityResponse>;
-  /** 句子相似度高级版 */
+  /** {@link TextSimilarityPro 句子相似度高级版}({@link TextSimilarityProRequest 请求参数}): {@link TextSimilarityProResponse 返回参数} */
   TextSimilarityPro(data: TextSimilarityProRequest, config?: AxiosRequestConfig): AxiosPromise<TextSimilarityProResponse>;
-  /** 修改自定义词库 */
+  /** {@link UpdateDict 修改自定义词库}({@link UpdateDictRequest 请求参数}): {@link UpdateDictResponse 返回参数} */
   UpdateDict(data: UpdateDictRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDictResponse>;
-  /** 词向量 */
+  /** {@link WordEmbedding 词向量}({@link WordEmbeddingRequest 请求参数}): {@link WordEmbeddingResponse 返回参数} */
   WordEmbedding(data: WordEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<WordEmbeddingResponse>;
-  /** 词相似度 */
+  /** {@link WordSimilarity 词相似度}({@link WordSimilarityRequest 请求参数}): {@link WordSimilarityResponse 返回参数} */
   WordSimilarity(data: WordSimilarityRequest, config?: AxiosRequestConfig): AxiosPromise<WordSimilarityResponse>;
 }
 

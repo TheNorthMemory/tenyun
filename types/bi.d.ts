@@ -82,12 +82,12 @@ declare interface CreateEmbedTokenResponse {
   RequestId?: string;
 }
 
-/** [商业智能分析 BI](https://cloud.tencent.com/document/product/590) */
+/** {@link Bi 商业智能分析 BI} */
 declare interface Bi {
   (): Versions;
-  /** 申请延长Token可用时间接口 */
+  /** {@link ApplyEmbedInterval 申请延长Token可用时间接口}({@link ApplyEmbedIntervalRequest 请求参数}): {@link ApplyEmbedIntervalResponse 返回参数} */
   ApplyEmbedInterval(data?: ApplyEmbedIntervalRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyEmbedIntervalResponse>;
-  /** 创建嵌出报表Token */
+  /** {@link CreateEmbedToken 创建嵌出报表Token}({@link CreateEmbedTokenRequest 请求参数}): {@link CreateEmbedTokenResponse 返回参数} */
   CreateEmbedToken(data?: CreateEmbedTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmbedTokenResponse>;
 }
 

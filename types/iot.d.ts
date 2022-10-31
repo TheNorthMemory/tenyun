@@ -1106,98 +1106,98 @@ declare interface UpdateRuleResponse {
   RequestId?: string;
 }
 
-/** [加速物联网套件](https://cloud.tencent.com/document/product/568) */
+/** {@link Iot 加速物联网套件} */
 declare interface Iot {
   (): Versions;
-  /** 启用规则 */
+  /** {@link ActivateRule 启用规则}({@link ActivateRuleRequest 请求参数}): {@link ActivateRuleResponse 返回参数} */
   ActivateRule(data: ActivateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateRuleResponse>;
-  /** 新增设备 */
+  /** {@link AddDevice 新增设备}({@link AddDeviceRequest 请求参数}): {@link AddDeviceResponse 返回参数} */
   AddDevice(data: AddDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AddDeviceResponse>;
-  /** 新增产品 */
+  /** {@link AddProduct 新增产品}({@link AddProductRequest 请求参数}): {@link AddProductResponse 返回参数} */
   AddProduct(data: AddProductRequest, config?: AxiosRequestConfig): AxiosPromise<AddProductResponse>;
-  /** 新增规则 */
+  /** {@link AddRule 新增规则}({@link AddRuleRequest 请求参数}): {@link AddRuleResponse 返回参数} */
   AddRule(data: AddRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddRuleResponse>;
-  /** 新增Topic */
+  /** {@link AddTopic 新增Topic}({@link AddTopicRequest 请求参数}): {@link AddTopicResponse 返回参数} */
   AddTopic(data: AddTopicRequest, config?: AxiosRequestConfig): AxiosPromise<AddTopicResponse>;
-  /** 用户注册 */
+  /** {@link AppAddUser 用户注册}({@link AppAddUserRequest 请求参数}): {@link AppAddUserResponse 返回参数} */
   AppAddUser(data: AppAddUserRequest, config?: AxiosRequestConfig): AxiosPromise<AppAddUserResponse>;
-  /** 用户解绑设备 */
+  /** {@link AppDeleteDevice 用户解绑设备}({@link AppDeleteDeviceRequest 请求参数}): {@link AppDeleteDeviceResponse 返回参数} */
   AppDeleteDevice(data: AppDeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AppDeleteDeviceResponse>;
-  /** 获取绑定设备信息 */
+  /** {@link AppGetDevice 获取绑定设备信息}({@link AppGetDeviceRequest 请求参数}): {@link AppGetDeviceResponse 返回参数} */
   AppGetDevice(data: AppGetDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AppGetDeviceResponse>;
-  /** 获取绑定设备数据 */
+  /** {@link AppGetDeviceData 获取绑定设备数据}({@link AppGetDeviceDataRequest 请求参数}): {@link AppGetDeviceDataResponse 返回参数} */
   AppGetDeviceData(data: AppGetDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<AppGetDeviceDataResponse>;
-  /** 获取绑定设备状态 */
+  /** {@link AppGetDeviceStatuses 获取绑定设备状态}({@link AppGetDeviceStatusesRequest 请求参数}): {@link AppGetDeviceStatusesResponse 返回参数} */
   AppGetDeviceStatuses(data: AppGetDeviceStatusesRequest, config?: AxiosRequestConfig): AxiosPromise<AppGetDeviceStatusesResponse>;
-  /** 获取绑定设备列表 */
+  /** {@link AppGetDevices 获取绑定设备列表}({@link AppGetDevicesRequest 请求参数}): {@link AppGetDevicesResponse 返回参数} */
   AppGetDevices(data: AppGetDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<AppGetDevicesResponse>;
-  /** 获取用户token */
+  /** {@link AppGetToken 获取用户token}({@link AppGetTokenRequest 请求参数}): {@link AppGetTokenResponse 返回参数} */
   AppGetToken(data: AppGetTokenRequest, config?: AxiosRequestConfig): AxiosPromise<AppGetTokenResponse>;
-  /** 获取用户信息 */
+  /** {@link AppGetUser 获取用户信息}({@link AppGetUserRequest 请求参数}): {@link AppGetUserResponse 返回参数} */
   AppGetUser(data: AppGetUserRequest, config?: AxiosRequestConfig): AxiosPromise<AppGetUserResponse>;
-  /** 用户控制设备 */
+  /** {@link AppIssueDeviceControl 用户控制设备}({@link AppIssueDeviceControlRequest 请求参数}): {@link AppIssueDeviceControlResponse 返回参数} */
   AppIssueDeviceControl(data: AppIssueDeviceControlRequest, config?: AxiosRequestConfig): AxiosPromise<AppIssueDeviceControlResponse>;
-  /** 重置用户密码 */
+  /** {@link AppResetPassword 重置用户密码}({@link AppResetPasswordRequest 请求参数}): {@link AppResetPasswordResponse 返回参数} */
   AppResetPassword(data: AppResetPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<AppResetPasswordResponse>;
-  /** 用户绑定设备 */
+  /** {@link AppSecureAddDevice 用户绑定设备}({@link AppSecureAddDeviceRequest 请求参数}): {@link AppSecureAddDeviceResponse 返回参数} */
   AppSecureAddDevice(data: AppSecureAddDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AppSecureAddDeviceResponse>;
-  /** 修改设备别名 */
+  /** {@link AppUpdateDevice 修改设备别名}({@link AppUpdateDeviceRequest 请求参数}): {@link AppUpdateDeviceResponse 返回参数} */
   AppUpdateDevice(data: AppUpdateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AppUpdateDeviceResponse>;
-  /** 用户信息修改 */
+  /** {@link AppUpdateUser 用户信息修改}({@link AppUpdateUserRequest 请求参数}): {@link AppUpdateUserResponse 返回参数} */
   AppUpdateUser(data: AppUpdateUserRequest, config?: AxiosRequestConfig): AxiosPromise<AppUpdateUserResponse>;
-  /** 关联子设备产品和网关产品 */
+  /** {@link AssociateSubDeviceToGatewayProduct 关联子设备产品和网关产品}({@link AssociateSubDeviceToGatewayProductRequest 请求参数}): {@link AssociateSubDeviceToGatewayProductResponse 返回参数} */
   AssociateSubDeviceToGatewayProduct(data: AssociateSubDeviceToGatewayProductRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSubDeviceToGatewayProductResponse>;
-  /** 禁用规则 */
+  /** {@link DeactivateRule 禁用规则}({@link DeactivateRuleRequest 请求参数}): {@link DeactivateRuleResponse 返回参数} */
   DeactivateRule(data: DeactivateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeactivateRuleResponse>;
-  /** 删除设备 */
+  /** {@link DeleteDevice 删除设备}({@link DeleteDeviceRequest 请求参数}): {@link DeleteDeviceResponse 返回参数} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
-  /** 删除产品 */
+  /** {@link DeleteProduct 删除产品}({@link DeleteProductRequest 请求参数}): {@link DeleteProductResponse 返回参数} */
   DeleteProduct(data: DeleteProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProductResponse>;
-  /** 删除规则 */
+  /** {@link DeleteRule 删除规则}({@link DeleteRuleRequest 请求参数}): {@link DeleteRuleResponse 返回参数} */
   DeleteRule(data: DeleteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleResponse>;
-  /** 删除Topic */
+  /** {@link DeleteTopic 删除Topic}({@link DeleteTopicRequest 请求参数}): {@link DeleteTopicResponse 返回参数} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
-  /** 获取设备历史数据 */
+  /** {@link GetDataHistory 获取设备历史数据}({@link GetDataHistoryRequest 请求参数}): {@link GetDataHistoryResponse 返回参数} */
   GetDataHistory(data: GetDataHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<GetDataHistoryResponse>;
-  /** 获取调试日志 */
+  /** {@link GetDebugLog 获取调试日志}({@link GetDebugLogRequest 请求参数}): {@link GetDebugLogResponse 返回参数} */
   GetDebugLog(data: GetDebugLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetDebugLogResponse>;
-  /** 获取设备信息 */
+  /** {@link GetDevice 获取设备信息}({@link GetDeviceRequest 请求参数}): {@link GetDeviceResponse 返回参数} */
   GetDevice(data: GetDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceResponse>;
-  /** 获取设备数据 */
+  /** {@link GetDeviceData 获取设备数据}({@link GetDeviceDataRequest 请求参数}): {@link GetDeviceDataResponse 返回参数} */
   GetDeviceData(data: GetDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceDataResponse>;
-  /** 获取设备日志 */
+  /** {@link GetDeviceLog 获取设备日志}({@link GetDeviceLogRequest 请求参数}): {@link GetDeviceLogResponse 返回参数} */
   GetDeviceLog(data: GetDeviceLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceLogResponse>;
-  /** 获取设备绑定签名 */
+  /** {@link GetDeviceSignatures 获取设备绑定签名}({@link GetDeviceSignaturesRequest 请求参数}): {@link GetDeviceSignaturesResponse 返回参数} */
   GetDeviceSignatures(data: GetDeviceSignaturesRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceSignaturesResponse>;
-  /** 获取设备统计指标 */
+  /** {@link GetDeviceStatistics 获取设备统计指标}({@link GetDeviceStatisticsRequest 请求参数}): {@link GetDeviceStatisticsResponse 返回参数} */
   GetDeviceStatistics(data?: GetDeviceStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceStatisticsResponse>;
-  /** 批量获取设备状态 */
+  /** {@link GetDeviceStatuses 批量获取设备状态}({@link GetDeviceStatusesRequest 请求参数}): {@link GetDeviceStatusesResponse 返回参数} */
   GetDeviceStatuses(data: GetDeviceStatusesRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceStatusesResponse>;
-  /** 获取设备列表 */
+  /** {@link GetDevices 获取设备列表}({@link GetDevicesRequest 请求参数}): {@link GetDevicesResponse 返回参数} */
   GetDevices(data: GetDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<GetDevicesResponse>;
-  /** 获取产品信息 */
+  /** {@link GetProduct 获取产品信息}({@link GetProductRequest 请求参数}): {@link GetProductResponse 返回参数} */
   GetProduct(data: GetProductRequest, config?: AxiosRequestConfig): AxiosPromise<GetProductResponse>;
-  /** 获取产品列表 */
+  /** {@link GetProducts 获取产品列表}({@link GetProductsRequest 请求参数}): {@link GetProductsResponse 返回参数} */
   GetProducts(data?: GetProductsRequest, config?: AxiosRequestConfig): AxiosPromise<GetProductsResponse>;
-  /** 获取转发规则信息 */
+  /** {@link GetRule 获取转发规则信息}({@link GetRuleRequest 请求参数}): {@link GetRuleResponse 返回参数} */
   GetRule(data: GetRuleRequest, config?: AxiosRequestConfig): AxiosPromise<GetRuleResponse>;
-  /** 获取转发规则列表 */
+  /** {@link GetRules 获取转发规则列表}({@link GetRulesRequest 请求参数}): {@link GetRulesResponse 返回参数} */
   GetRules(data?: GetRulesRequest, config?: AxiosRequestConfig): AxiosPromise<GetRulesResponse>;
-  /** 获取Topic信息 */
+  /** {@link GetTopic 获取Topic信息}({@link GetTopicRequest 请求参数}): {@link GetTopicResponse 返回参数} */
   GetTopic(data: GetTopicRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicResponse>;
-  /** 获取Topic列表 */
+  /** {@link GetTopics 获取Topic列表}({@link GetTopicsRequest 请求参数}): {@link GetTopicsResponse 返回参数} */
   GetTopics(data: GetTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicsResponse>;
-  /** 下发设备控制指令 */
+  /** {@link IssueDeviceControl 下发设备控制指令}({@link IssueDeviceControlRequest 请求参数}): {@link IssueDeviceControlResponse 返回参数} */
   IssueDeviceControl(data: IssueDeviceControlRequest, config?: AxiosRequestConfig): AxiosPromise<IssueDeviceControlResponse>;
-  /** 向Topic发布消息 */
+  /** {@link PublishMsg 向Topic发布消息}({@link PublishMsgRequest 请求参数}): {@link PublishMsgResponse 返回参数} */
   PublishMsg(data: PublishMsgRequest, config?: AxiosRequestConfig): AxiosPromise<PublishMsgResponse>;
-  /** 重置设备 */
+  /** {@link ResetDevice 重置设备}({@link ResetDeviceRequest 请求参数}): {@link ResetDeviceResponse 返回参数} */
   ResetDevice(data: ResetDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDeviceResponse>;
-  /** 取消子设备产品与网关设备产品的关联 */
+  /** {@link UnassociateSubDeviceFromGatewayProduct 取消子设备产品与网关设备产品的关联}({@link UnassociateSubDeviceFromGatewayProductRequest 请求参数}): {@link UnassociateSubDeviceFromGatewayProductResponse 返回参数} */
   UnassociateSubDeviceFromGatewayProduct(data: UnassociateSubDeviceFromGatewayProductRequest, config?: AxiosRequestConfig): AxiosPromise<UnassociateSubDeviceFromGatewayProductResponse>;
-  /** 更新产品信息 */
+  /** {@link UpdateProduct 更新产品信息}({@link UpdateProductRequest 请求参数}): {@link UpdateProductResponse 返回参数} */
   UpdateProduct(data: UpdateProductRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProductResponse>;
-  /** 更新规则 */
+  /** {@link UpdateRule 更新规则}({@link UpdateRuleRequest 请求参数}): {@link UpdateRuleResponse 返回参数} */
   UpdateRule(data: UpdateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRuleResponse>;
 }
 

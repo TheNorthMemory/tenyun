@@ -206,16 +206,16 @@ declare interface EHOCRResponse {
   RequestId?: string;
 }
 
-/** [英文作文批改](https://cloud.tencent.com/document/product/1076) */
+/** {@link Ecc 英文作文批改} */
 declare interface Ecc {
   (): Versions;
-  /** 多图像识别批改 */
+  /** {@link CorrectMultiImage 多图像识别批改}({@link CorrectMultiImageRequest 请求参数}): {@link CorrectMultiImageResponse 返回参数} */
   CorrectMultiImage(data: CorrectMultiImageRequest, config?: AxiosRequestConfig): AxiosPromise<CorrectMultiImageResponse>;
-  /** 查询异步任务结果 */
+  /** {@link DescribeTask 查询异步任务结果}({@link DescribeTaskRequest 请求参数}): {@link DescribeTaskResponse 返回参数} */
   DescribeTask(data: DescribeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResponse>;
-  /** 纯文本英语作文批改 */
+  /** {@link ECC 纯文本英语作文批改}({@link ECCRequest 请求参数}): {@link ECCResponse 返回参数} */
   ECC(data: ECCRequest, config?: AxiosRequestConfig): AxiosPromise<ECCResponse>;
-  /** 图像识别批改 */
+  /** {@link EHOCR 图像识别批改}({@link EHOCRRequest 请求参数}): {@link EHOCRResponse 返回参数} */
   EHOCR(data: EHOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EHOCRResponse>;
 }
 

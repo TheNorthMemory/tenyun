@@ -522,42 +522,42 @@ declare interface SendWxTouchTaskResponse {
   RequestId?: string;
 }
 
-/** 智汇零售 */
+/** {@link Solar 智汇零售} */
 declare interface Solar {
   (): Versions;
-  /** 员工渠道更改员工状态 */
+  /** {@link CheckStaffChUser 员工渠道更改员工状态}({@link CheckStaffChUserRequest 请求参数}): {@link CheckStaffChUserResponse 返回参数} */
   CheckStaffChUser(data: CheckStaffChUserRequest, config?: AxiosRequestConfig): AxiosPromise<CheckStaffChUserResponse>;
-  /** 复制活动渠道的策略 */
+  /** {@link CopyActivityChannel 复制活动渠道的策略}({@link CopyActivityChannelRequest 请求参数}): {@link CopyActivityChannelResponse 返回参数} */
   CopyActivityChannel(data: CopyActivityChannelRequest, config?: AxiosRequestConfig): AxiosPromise<CopyActivityChannelResponse>;
-  /** 创建项目 */
+  /** {@link CreateProject 创建项目}({@link CreateProjectRequest 请求参数}): {@link CreateProjectResponse 返回参数} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
-  /** 创建子项目 */
+  /** {@link CreateSubProject 创建子项目}({@link CreateSubProjectRequest 请求参数}): {@link CreateSubProjectResponse 返回参数} */
   CreateSubProject(data: CreateSubProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubProjectResponse>;
-  /** 删除项目 */
+  /** {@link DeleteProject 删除项目}({@link DeleteProjectRequest 请求参数}): {@link DeleteProjectResponse 返回参数} */
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
-  /** 客户档案查询客户详情 */
+  /** {@link DescribeCustomer 客户档案查询客户详情}({@link DescribeCustomerRequest 请求参数}): {@link DescribeCustomerResponse 返回参数} */
   DescribeCustomer(data: DescribeCustomerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomerResponse>;
-  /** 查询客户档案列表 */
+  /** {@link DescribeCustomers 查询客户档案列表}({@link DescribeCustomersRequest 请求参数}): {@link DescribeCustomersResponse 返回参数} */
   DescribeCustomers(data: DescribeCustomersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomersResponse>;
-  /** 项目详情展示 */
+  /** {@link DescribeProject 项目详情展示}({@link DescribeProjectRequest 请求参数}): {@link DescribeProjectResponse 返回参数} */
   DescribeProject(data: DescribeProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectResponse>;
-  /** 项目库存详情 */
+  /** {@link DescribeProjectStock 项目库存详情}({@link DescribeProjectStockRequest 请求参数}): {@link DescribeProjectStockResponse 返回参数} */
   DescribeProjectStock(data: DescribeProjectStockRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectStockResponse>;
-  /** 项目列表展示 */
+  /** {@link DescribeProjects 项目列表展示}({@link DescribeProjectsRequest 请求参数}): {@link DescribeProjectsResponse 返回参数} */
   DescribeProjects(data: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
-  /** 素材查询服务号模板标题的列表 */
+  /** {@link DescribeResourceTemplateHeaders 素材查询服务号模板标题的列表}({@link DescribeResourceTemplateHeadersRequest 请求参数}): {@link DescribeResourceTemplateHeadersResponse 返回参数} */
   DescribeResourceTemplateHeaders(data?: DescribeResourceTemplateHeadersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTemplateHeadersResponse>;
-  /** 子项目详情 */
+  /** {@link DescribeSubProject 子项目详情}({@link DescribeSubProjectRequest 请求参数}): {@link DescribeSubProjectResponse 返回参数} */
   DescribeSubProject(data: DescribeSubProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubProjectResponse>;
-  /** 工单失效接口 */
+  /** {@link ExpireFlow 工单失效接口}({@link ExpireFlowRequest 请求参数}): {@link ExpireFlowResponse 返回参数} */
   ExpireFlow(data: ExpireFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ExpireFlowResponse>;
-  /** 修改项目 */
+  /** {@link ModifyProject 修改项目}({@link ModifyProjectRequest 请求参数}): {@link ModifyProjectResponse 返回参数} */
   ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
-  /** 下线项目 */
+  /** {@link OffLineProject 下线项目}({@link OffLineProjectRequest 请求参数}): {@link OffLineProjectResponse 返回参数} */
   OffLineProject(data: OffLineProjectRequest, config?: AxiosRequestConfig): AxiosPromise<OffLineProjectResponse>;
-  /** 补充（子）项目库存 */
+  /** {@link ReplenishProjectStock 补充（子）项目库存}({@link ReplenishProjectStockRequest 请求参数}): {@link ReplenishProjectStockResponse 返回参数} */
   ReplenishProjectStock(data: ReplenishProjectStockRequest, config?: AxiosRequestConfig): AxiosPromise<ReplenishProjectStockResponse>;
-  /** 发送微信触达任务 */
+  /** {@link SendWxTouchTask 发送微信触达任务}({@link SendWxTouchTaskRequest 请求参数}): {@link SendWxTouchTaskResponse 返回参数} */
   SendWxTouchTask(data: SendWxTouchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SendWxTouchTaskResponse>;
 }
 

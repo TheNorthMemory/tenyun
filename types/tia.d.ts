@@ -302,28 +302,28 @@ declare interface QueryLogsResponse {
   RequestId?: string;
 }
 
-/** [智能钛机器学习](https://cloud.tencent.com/document/product/851) */
+/** {@link Tia 智能钛机器学习} */
 declare interface Tia {
   (): Versions;
-  /** 创建Job */
+  /** {@link CreateJob 创建Job}({@link CreateJobRequest 请求参数}): {@link CreateJobResponse 返回参数} */
   CreateJob(data: CreateJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobResponse>;
-  /** 创建Model */
+  /** {@link CreateModel 创建Model}({@link CreateModelRequest 请求参数}): {@link CreateModelResponse 返回参数} */
   CreateModel(data: CreateModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelResponse>;
-  /** 删除Job */
+  /** {@link DeleteJob 删除Job}({@link DeleteJobRequest 请求参数}): {@link DeleteJobResponse 返回参数} */
   DeleteJob(data: DeleteJobRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJobResponse>;
-  /** 删除Model */
+  /** {@link DeleteModel 删除Model}({@link DeleteModelRequest 请求参数}): {@link DeleteModelResponse 返回参数} */
   DeleteModel(data: DeleteModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelResponse>;
-  /** 获取Job详情 */
+  /** {@link DescribeJob 获取Job详情}({@link DescribeJobRequest 请求参数}): {@link DescribeJobResponse 返回参数} */
   DescribeJob(data: DescribeJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobResponse>;
-  /** 描述Model */
+  /** {@link DescribeModel 描述Model}({@link DescribeModelRequest 请求参数}): {@link DescribeModelResponse 返回参数} */
   DescribeModel(data: DescribeModelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelResponse>;
-  /** 安装agent */
+  /** {@link InstallAgent 安装agent}({@link InstallAgentRequest 请求参数}): {@link InstallAgentResponse 返回参数} */
   InstallAgent(data: InstallAgentRequest, config?: AxiosRequestConfig): AxiosPromise<InstallAgentResponse>;
-  /** 列举Job */
+  /** {@link ListJobs 列举Job}({@link ListJobsRequest 请求参数}): {@link ListJobsResponse 返回参数} */
   ListJobs(data: ListJobsRequest, config?: AxiosRequestConfig): AxiosPromise<ListJobsResponse>;
-  /** 列举Model */
+  /** {@link ListModels 列举Model}({@link ListModelsRequest 请求参数}): {@link ListModelsResponse 返回参数} */
   ListModels(data?: ListModelsRequest, config?: AxiosRequestConfig): AxiosPromise<ListModelsResponse>;
-  /** 查询日志 */
+  /** {@link QueryLogs 查询日志}({@link QueryLogsRequest 请求参数}): {@link QueryLogsResponse 返回参数} */
   QueryLogs(data: QueryLogsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryLogsResponse>;
 }
 

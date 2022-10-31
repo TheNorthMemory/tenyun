@@ -1624,90 +1624,90 @@ declare interface TransmitAudioStreamResponse {
   RequestId?: string;
 }
 
-/** 腾讯智学课堂分析 */
+/** {@link Tci 腾讯智学课堂分析} */
 declare interface Tci {
   (): Versions;
-  /** AI 助教标准接口 */
+  /** {@link AIAssistant AI 助教标准接口}({@link AIAssistantRequest 请求参数}): {@link AIAssistantResponse 返回参数} */
   AIAssistant(data: AIAssistantRequest, config?: AxiosRequestConfig): AxiosPromise<AIAssistantResponse>;
-  /** 取消任务执行 */
+  /** {@link CancelTask 取消任务执行}({@link CancelTaskRequest 请求参数}): {@link CancelTaskResponse 返回参数} */
   CancelTask(data?: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
-  /** 检查人脸图片 */
+  /** {@link CheckFacePhoto 检查人脸图片}({@link CheckFacePhotoRequest 请求参数}): {@link CheckFacePhotoResponse 返回参数} */
   CheckFacePhoto(data: CheckFacePhotoRequest, config?: AxiosRequestConfig): AxiosPromise<CheckFacePhotoResponse>;
-  /** 创建人脸 */
+  /** {@link CreateFace 创建人脸}({@link CreateFaceRequest 请求参数}): {@link CreateFaceResponse 返回参数} */
   CreateFace(data: CreateFaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFaceResponse>;
-  /** 创建人员库 */
+  /** {@link CreateLibrary 创建人员库}({@link CreateLibraryRequest 请求参数}): {@link CreateLibraryResponse 返回参数} */
   CreateLibrary(data: CreateLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLibraryResponse>;
-  /** 创建人员 */
+  /** {@link CreatePerson 创建人员}({@link CreatePersonRequest 请求参数}): {@link CreatePersonResponse 返回参数} */
   CreatePerson(data: CreatePersonRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonResponse>;
-  /** 创建词汇 */
+  /** {@link CreateVocab 创建词汇}({@link CreateVocabRequest 请求参数}): {@link CreateVocabResponse 返回参数} */
   CreateVocab(data: CreateVocabRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVocabResponse>;
-  /** 建立词汇库 */
+  /** {@link CreateVocabLib 建立词汇库}({@link CreateVocabLibRequest 请求参数}): {@link CreateVocabLibResponse 返回参数} */
   CreateVocabLib(data: CreateVocabLibRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVocabLibResponse>;
-  /** 删除人脸 */
+  /** {@link DeleteFace 删除人脸}({@link DeleteFaceRequest 请求参数}): {@link DeleteFaceResponse 返回参数} */
   DeleteFace(data: DeleteFaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFaceResponse>;
-  /** 删除人员库 */
+  /** {@link DeleteLibrary 删除人员库}({@link DeleteLibraryRequest 请求参数}): {@link DeleteLibraryResponse 返回参数} */
   DeleteLibrary(data: DeleteLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLibraryResponse>;
-  /** 删除人员 */
+  /** {@link DeletePerson 删除人员}({@link DeletePersonRequest 请求参数}): {@link DeletePersonResponse 返回参数} */
   DeletePerson(data: DeletePersonRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonResponse>;
-  /** 删除词汇 */
+  /** {@link DeleteVocab 删除词汇}({@link DeleteVocabRequest 请求参数}): {@link DeleteVocabResponse 返回参数} */
   DeleteVocab(data: DeleteVocabRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVocabResponse>;
-  /** 删除词汇库 */
+  /** {@link DeleteVocabLib 删除词汇库}({@link DeleteVocabLibRequest 请求参数}): {@link DeleteVocabLibResponse 返回参数} */
   DeleteVocabLib(data: DeleteVocabLibRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVocabLibResponse>;
-  /** 获取标准化接口任务结果 */
+  /** {@link DescribeAITaskResult 获取标准化接口任务结果}({@link DescribeAITaskResultRequest 请求参数}): {@link DescribeAITaskResultResponse 返回参数} */
   DescribeAITaskResult(data: DescribeAITaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAITaskResultResponse>;
-  /** 人脸考勤查询结果 */
+  /** {@link DescribeAttendanceResult 人脸考勤查询结果}({@link DescribeAttendanceResultRequest 请求参数}): {@link DescribeAttendanceResultResponse 返回参数} */
   DescribeAttendanceResult(data: DescribeAttendanceResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttendanceResultResponse>;
-  /** 音频分析结果查询 */
+  /** {@link DescribeAudioTask 音频分析结果查询}({@link DescribeAudioTaskRequest 请求参数}): {@link DescribeAudioTaskResponse 返回参数} */
   DescribeAudioTask(data: DescribeAudioTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAudioTaskResponse>;
-  /** 音频对话任务分析结果查询 */
+  /** {@link DescribeConversationTask 音频对话任务分析结果查询}({@link DescribeConversationTaskRequest 请求参数}): {@link DescribeConversationTaskResponse 返回参数} */
   DescribeConversationTask(data: DescribeConversationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConversationTaskResponse>;
-  /** 视频精彩集锦结果查询接口 */
+  /** {@link DescribeHighlightResult 视频精彩集锦结果查询接口}({@link DescribeHighlightResultRequest 请求参数}): {@link DescribeHighlightResultResponse 返回参数} */
   DescribeHighlightResult(data: DescribeHighlightResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHighlightResultResponse>;
-  /** 拉取任务详情 */
+  /** {@link DescribeImageTask 拉取任务详情}({@link DescribeImageTaskRequest 请求参数}): {@link DescribeImageTaskResponse 返回参数} */
   DescribeImageTask(data: DescribeImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageTaskResponse>;
-  /** 获取图像任务统计信息 */
+  /** {@link DescribeImageTaskStatistic 获取图像任务统计信息}({@link DescribeImageTaskStatisticRequest 请求参数}): {@link DescribeImageTaskStatisticResponse 返回参数} */
   DescribeImageTaskStatistic(data: DescribeImageTaskStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageTaskStatisticResponse>;
-  /** 获取人员库列表 */
+  /** {@link DescribeLibraries 获取人员库列表}({@link DescribeLibrariesRequest 请求参数}): {@link DescribeLibrariesResponse 返回参数} */
   DescribeLibraries(data?: DescribeLibrariesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibrariesResponse>;
-  /** 获取人员详情 */
+  /** {@link DescribePerson 获取人员详情}({@link DescribePersonRequest 请求参数}): {@link DescribePersonResponse 返回参数} */
   DescribePerson(data: DescribePersonRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonResponse>;
-  /** 拉取人员列表 */
+  /** {@link DescribePersons 拉取人员列表}({@link DescribePersonsRequest 请求参数}): {@link DescribePersonsResponse 返回参数} */
   DescribePersons(data: DescribePersonsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonsResponse>;
-  /** 查询词汇 */
+  /** {@link DescribeVocab 查询词汇}({@link DescribeVocabRequest 请求参数}): {@link DescribeVocabResponse 返回参数} */
   DescribeVocab(data: DescribeVocabRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVocabResponse>;
-  /** 查询词汇库 */
+  /** {@link DescribeVocabLib 查询词汇库}({@link DescribeVocabLibRequest 请求参数}): {@link DescribeVocabLibResponse 返回参数} */
   DescribeVocabLib(data?: DescribeVocabLibRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVocabLibResponse>;
-  /** 修改人员库信息 */
+  /** {@link ModifyLibrary 修改人员库信息}({@link ModifyLibraryRequest 请求参数}): {@link ModifyLibraryResponse 返回参数} */
   ModifyLibrary(data: ModifyLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLibraryResponse>;
-  /** 修改人员信息 */
+  /** {@link ModifyPerson 修改人员信息}({@link ModifyPersonRequest 请求参数}): {@link ModifyPersonResponse 返回参数} */
   ModifyPerson(data: ModifyPersonRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonResponse>;
-  /** 音频任务提交接口 */
+  /** {@link SubmitAudioTask 音频任务提交接口}({@link SubmitAudioTaskRequest 请求参数}): {@link SubmitAudioTaskResponse 返回参数} */
   SubmitAudioTask(data: SubmitAudioTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitAudioTaskResponse>;
-  /** 提交人员考勤任务 */
+  /** {@link SubmitCheckAttendanceTask 提交人员考勤任务}({@link SubmitCheckAttendanceTaskRequest 请求参数}): {@link SubmitCheckAttendanceTaskResponse 返回参数} */
   SubmitCheckAttendanceTask(data: SubmitCheckAttendanceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitCheckAttendanceTaskResponse>;
-  /** 提交高级人员考勤任务 */
+  /** {@link SubmitCheckAttendanceTaskPlus 提交高级人员考勤任务}({@link SubmitCheckAttendanceTaskPlusRequest 请求参数}): {@link SubmitCheckAttendanceTaskPlusResponse 返回参数} */
   SubmitCheckAttendanceTaskPlus(data: SubmitCheckAttendanceTaskPlusRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitCheckAttendanceTaskPlusResponse>;
-  /** 对话任务分析接口 */
+  /** {@link SubmitConversationTask 对话任务分析接口}({@link SubmitConversationTaskRequest 请求参数}): {@link SubmitConversationTaskResponse 返回参数} */
   SubmitConversationTask(data: SubmitConversationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitConversationTaskResponse>;
-  /** 发起双路视频生成精彩集锦接口 */
+  /** {@link SubmitDoubleVideoHighlights 发起双路视频生成精彩集锦接口}({@link SubmitDoubleVideoHighlightsRequest 请求参数}): {@link SubmitDoubleVideoHighlightsResponse 返回参数} */
   SubmitDoubleVideoHighlights(data: SubmitDoubleVideoHighlightsRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitDoubleVideoHighlightsResponse>;
-  /** 提交传统课堂授课任务 */
+  /** {@link SubmitFullBodyClassTask 提交传统课堂授课任务}({@link SubmitFullBodyClassTaskRequest 请求参数}): {@link SubmitFullBodyClassTaskResponse 返回参数} */
   SubmitFullBodyClassTask(data: SubmitFullBodyClassTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitFullBodyClassTaskResponse>;
-  /** 发起视频生成精彩集锦接口 */
+  /** {@link SubmitHighlights 发起视频生成精彩集锦接口}({@link SubmitHighlightsRequest 请求参数}): {@link SubmitHighlightsResponse 返回参数} */
   SubmitHighlights(data: SubmitHighlightsRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHighlightsResponse>;
-  /** 提交图像分析任务 */
+  /** {@link SubmitImageTask 提交图像分析任务}({@link SubmitImageTaskRequest 请求参数}): {@link SubmitImageTaskResponse 返回参数} */
   SubmitImageTask(data: SubmitImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitImageTaskResponse>;
-  /** 提交高级图像分析任务 */
+  /** {@link SubmitImageTaskPlus 提交高级图像分析任务}({@link SubmitImageTaskPlusRequest 请求参数}): {@link SubmitImageTaskPlusResponse 返回参数} */
   SubmitImageTaskPlus(data: SubmitImageTaskPlusRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitImageTaskPlusResponse>;
-  /** 提交在线1对1课堂任务 */
+  /** {@link SubmitOneByOneClassTask 提交在线1对1课堂任务}({@link SubmitOneByOneClassTaskRequest 请求参数}): {@link SubmitOneByOneClassTaskResponse 返回参数} */
   SubmitOneByOneClassTask(data: SubmitOneByOneClassTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitOneByOneClassTaskResponse>;
-  /** 提交线下小班（无课桌）课任务 */
+  /** {@link SubmitOpenClassTask 提交线下小班（无课桌）课任务}({@link SubmitOpenClassTaskRequest 请求参数}): {@link SubmitOpenClassTaskResponse 返回参数} */
   SubmitOpenClassTask(data: SubmitOpenClassTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitOpenClassTaskResponse>;
-  /** 提交在线小班课授课任务 */
+  /** {@link SubmitPartialBodyClassTask 提交在线小班课授课任务}({@link SubmitPartialBodyClassTaskRequest 请求参数}): {@link SubmitPartialBodyClassTaskResponse 返回参数} */
   SubmitPartialBodyClassTask(data: SubmitPartialBodyClassTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitPartialBodyClassTaskResponse>;
-  /** 提交传统面授大班课（含课桌）任务 */
+  /** {@link SubmitTraditionalClassTask 提交传统面授大班课（含课桌）任务}({@link SubmitTraditionalClassTaskRequest 请求参数}): {@link SubmitTraditionalClassTaskResponse 返回参数} */
   SubmitTraditionalClassTask(data: SubmitTraditionalClassTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTraditionalClassTaskResponse>;
-  /** 流式音频分析 */
+  /** {@link TransmitAudioStream 流式音频分析}({@link TransmitAudioStreamRequest 请求参数}): {@link TransmitAudioStreamResponse 返回参数} */
   TransmitAudioStream(data: TransmitAudioStreamRequest, config?: AxiosRequestConfig): AxiosPromise<TransmitAudioStreamResponse>;
 }
 

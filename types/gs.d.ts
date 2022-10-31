@@ -152,24 +152,24 @@ declare interface TrylockWorkerResponse {
   RequestId?: string;
 }
 
-/** [云游戏解决方案](https://cloud.tencent.com/document/product/1162) */
+/** {@link Gs 云游戏} */
 declare interface Gs {
   (): Versions;
-  /** 创建会话 */
+  /** {@link CreateSession 创建会话}({@link CreateSessionRequest 请求参数}): {@link CreateSessionResponse 返回参数} */
   CreateSession(data: CreateSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSessionResponse>;
-  /** 获取并发总数和运行数 */
+  /** {@link DescribeInstancesCount 获取并发总数和运行数}({@link DescribeInstancesCountRequest 请求参数}): {@link DescribeInstancesCountResponse 返回参数} */
   DescribeInstancesCount(data?: DescribeInstancesCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesCountResponse>;
-  /** 保存游戏存档 */
+  /** {@link SaveGameArchive 保存游戏存档}({@link SaveGameArchiveRequest 请求参数}): {@link SaveGameArchiveResponse 返回参数} */
   SaveGameArchive(data: SaveGameArchiveRequest, config?: AxiosRequestConfig): AxiosPromise<SaveGameArchiveResponse>;
-  /** 开始云端推流 */
+  /** {@link StartPublishStream 开始云端推流}({@link StartPublishStreamRequest 请求参数}): {@link StartPublishStreamResponse 返回参数} */
   StartPublishStream(data: StartPublishStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StartPublishStreamResponse>;
-  /** 强制退出游戏 */
+  /** {@link StopGame 强制退出游戏}({@link StopGameRequest 请求参数}): {@link StopGameResponse 返回参数} */
   StopGame(data: StopGameRequest, config?: AxiosRequestConfig): AxiosPromise<StopGameResponse>;
-  /** 停止云端推流 */
+  /** {@link StopPublishStream 停止云端推流}({@link StopPublishStreamRequest 请求参数}): {@link StopPublishStreamResponse 返回参数} */
   StopPublishStream(data: StopPublishStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StopPublishStreamResponse>;
-  /** 切换游戏存档 */
+  /** {@link SwitchGameArchive 切换游戏存档}({@link SwitchGameArchiveRequest 请求参数}): {@link SwitchGameArchiveResponse 返回参数} */
   SwitchGameArchive(data: SwitchGameArchiveRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchGameArchiveResponse>;
-  /** 尝试锁定机器 */
+  /** {@link TrylockWorker 尝试锁定机器}({@link TrylockWorkerRequest 请求参数}): {@link TrylockWorkerResponse 返回参数} */
   TrylockWorker(data: TrylockWorkerRequest, config?: AxiosRequestConfig): AxiosPromise<TrylockWorkerResponse>;
 }
 

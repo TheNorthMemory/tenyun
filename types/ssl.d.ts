@@ -1062,64 +1062,64 @@ declare interface VerifyManagerResponse {
   RequestId?: string;
 }
 
-/** [证书](https://cloud.tencent.com/document/product/400) */
+/** {@link Ssl SSL 证书} */
 declare interface Ssl {
   (): Versions;
-  /** 免费证书申请 */
+  /** {@link ApplyCertificate 免费证书申请}({@link ApplyCertificateRequest 请求参数}): {@link ApplyCertificateResponse 返回参数} */
   ApplyCertificate(data: ApplyCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyCertificateResponse>;
-  /** 取消证书订单 */
+  /** {@link CancelCertificateOrder 取消证书订单}({@link CancelCertificateOrderRequest 请求参数}): {@link CancelCertificateOrderResponse 返回参数} */
   CancelCertificateOrder(data: CancelCertificateOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CancelCertificateOrderResponse>;
-  /** 检查证书链完整性 */
+  /** {@link CheckCertificateChain 检查证书链完整性}({@link CheckCertificateChainRequest 请求参数}): {@link CheckCertificateChainResponse 返回参数} */
   CheckCertificateChain(data: CheckCertificateChainRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCertificateChainResponse>;
-  /** 提交证书订单 */
+  /** {@link CommitCertificateInformation 提交证书订单}({@link CommitCertificateInformationRequest 请求参数}): {@link CommitCertificateInformationResponse 返回参数} */
   CommitCertificateInformation(data: CommitCertificateInformationRequest, config?: AxiosRequestConfig): AxiosPromise<CommitCertificateInformationResponse>;
-  /** 主动触发证书验证 */
+  /** {@link CompleteCertificate 主动触发证书验证}({@link CompleteCertificateRequest 请求参数}): {@link CompleteCertificateResponse 返回参数} */
   CompleteCertificate(data: CompleteCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CompleteCertificateResponse>;
-  /** 创建付费证书 */
+  /** {@link CreateCertificate 创建付费证书}({@link CreateCertificateRequest 请求参数}): {@link CreateCertificateResponse 返回参数} */
   CreateCertificate(data: CreateCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCertificateResponse>;
-  /** 删除证书 */
+  /** {@link DeleteCertificate 删除证书}({@link DeleteCertificateRequest 请求参数}): {@link DeleteCertificateResponse 返回参数} */
   DeleteCertificate(data: DeleteCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCertificateResponse>;
-  /** 删除管理人 */
+  /** {@link DeleteManager 删除管理人}({@link DeleteManagerRequest 请求参数}): {@link DeleteManagerResponse 返回参数} */
   DeleteManager(data: DeleteManagerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteManagerResponse>;
-  /** 获取证书信息 */
+  /** {@link DescribeCertificate 获取证书信息}({@link DescribeCertificateRequest 请求参数}): {@link DescribeCertificateResponse 返回参数} */
   DescribeCertificate(data: DescribeCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateResponse>;
-  /** 获取证书详情 */
+  /** {@link DescribeCertificateDetail 获取证书详情}({@link DescribeCertificateDetailRequest 请求参数}): {@link DescribeCertificateDetailResponse 返回参数} */
   DescribeCertificateDetail(data: DescribeCertificateDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateDetailResponse>;
-  /** 获取证书操作日志 */
+  /** {@link DescribeCertificateOperateLogs 获取证书操作日志}({@link DescribeCertificateOperateLogsRequest 请求参数}): {@link DescribeCertificateOperateLogsResponse 返回参数} */
   DescribeCertificateOperateLogs(data?: DescribeCertificateOperateLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateOperateLogsResponse>;
-  /** 获取证书列表 */
+  /** {@link DescribeCertificates 获取证书列表}({@link DescribeCertificatesRequest 请求参数}): {@link DescribeCertificatesResponse 返回参数} */
   DescribeCertificates(data?: DescribeCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificatesResponse>;
-  /** 证书查询关联资源 */
+  /** {@link DescribeDeployedResources 证书查询关联资源}({@link DescribeDeployedResourcesRequest 请求参数}): {@link DescribeDeployedResourcesResponse 返回参数} */
   DescribeDeployedResources(data: DescribeDeployedResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployedResourcesResponse>;
-  /** 查询管理人详情 */
+  /** {@link DescribeManagerDetail 查询管理人详情}({@link DescribeManagerDetailRequest 请求参数}): {@link DescribeManagerDetailResponse 返回参数} */
   DescribeManagerDetail(data: DescribeManagerDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeManagerDetailResponse>;
-  /** 查询管理人列表 */
+  /** {@link DescribeManagers 查询管理人列表}({@link DescribeManagersRequest 请求参数}): {@link DescribeManagersResponse 返回参数} */
   DescribeManagers(data: DescribeManagersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeManagersResponse>;
-  /** 获得权益包列表 */
+  /** {@link DescribePackages 获得权益包列表}({@link DescribePackagesRequest 请求参数}): {@link DescribePackagesResponse 返回参数} */
   DescribePackages(data?: DescribePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackagesResponse>;
-  /** 下载证书 */
+  /** {@link DownloadCertificate 下载证书}({@link DownloadCertificateRequest 请求参数}): {@link DownloadCertificateResponse 返回参数} */
   DownloadCertificate(data: DownloadCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadCertificateResponse>;
-  /** 云资源托管 */
+  /** {@link HostCertificate 云资源托管}({@link HostCertificateRequest 请求参数}): {@link HostCertificateResponse 返回参数} */
   HostCertificate(data: HostCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<HostCertificateResponse>;
-  /** 修改证书备注 */
+  /** {@link ModifyCertificateAlias 修改证书备注}({@link ModifyCertificateAliasRequest 请求参数}): {@link ModifyCertificateAliasResponse 返回参数} */
   ModifyCertificateAlias(data: ModifyCertificateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCertificateAliasResponse>;
-  /** 修改证书所属项目 */
+  /** {@link ModifyCertificateProject 修改证书所属项目}({@link ModifyCertificateProjectRequest 请求参数}): {@link ModifyCertificateProjectResponse 返回参数} */
   ModifyCertificateProject(data: ModifyCertificateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCertificateProjectResponse>;
-  /** 重颁发证书 */
+  /** {@link ReplaceCertificate 重颁发证书}({@link ReplaceCertificateRequest 请求参数}): {@link ReplaceCertificateResponse 返回参数} */
   ReplaceCertificate(data: ReplaceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceCertificateResponse>;
-  /** 吊销证书 */
+  /** {@link RevokeCertificate 吊销证书}({@link RevokeCertificateRequest 请求参数}): {@link RevokeCertificateResponse 返回参数} */
   RevokeCertificate(data: RevokeCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeCertificateResponse>;
-  /** 重新提交审核管理人 */
+  /** {@link SubmitAuditManager 重新提交审核管理人}({@link SubmitAuditManagerRequest 请求参数}): {@link SubmitAuditManagerResponse 返回参数} */
   SubmitAuditManager(data: SubmitAuditManagerRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitAuditManagerResponse>;
-  /** 提交证书资料 */
+  /** {@link SubmitCertificateInformation 提交证书资料}({@link SubmitCertificateInformationRequest 请求参数}): {@link SubmitCertificateInformationResponse 返回参数} */
   SubmitCertificateInformation(data: SubmitCertificateInformationRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitCertificateInformationResponse>;
-  /** 上传证书 */
+  /** {@link UploadCertificate 上传证书}({@link UploadCertificateRequest 请求参数}): {@link UploadCertificateResponse 返回参数} */
   UploadCertificate(data: UploadCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<UploadCertificateResponse>;
-  /** 上传证书确认函 */
+  /** {@link UploadConfirmLetter 上传证书确认函}({@link UploadConfirmLetterRequest 请求参数}): {@link UploadConfirmLetterResponse 返回参数} */
   UploadConfirmLetter(data: UploadConfirmLetterRequest, config?: AxiosRequestConfig): AxiosPromise<UploadConfirmLetterResponse>;
-  /** 上传证书吊销确认函 */
+  /** {@link UploadRevokeLetter 上传证书吊销确认函}({@link UploadRevokeLetterRequest 请求参数}): {@link UploadRevokeLetterResponse 返回参数} */
   UploadRevokeLetter(data: UploadRevokeLetterRequest, config?: AxiosRequestConfig): AxiosPromise<UploadRevokeLetterResponse>;
-  /** 重新核验管理人 */
+  /** {@link VerifyManager 重新核验管理人}({@link VerifyManagerRequest 请求参数}): {@link VerifyManagerResponse 返回参数} */
   VerifyManager(data: VerifyManagerRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyManagerResponse>;
 }
 

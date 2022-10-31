@@ -2956,216 +2956,216 @@ declare interface UpgradeDBInstanceResponse {
   RequestId?: string;
 }
 
-/** [云数据库 SQL Server](https://cloud.tencent.com/document/product/238) */
+/** {@link Sqlserver 云数据库 SQL Server} */
 declare interface Sqlserver {
   (): Versions;
-  /** 安全组批量绑定云资源 */
+  /** {@link AssociateSecurityGroups 安全组批量绑定云资源}({@link AssociateSecurityGroupsRequest 请求参数}): {@link AssociateSecurityGroupsResponse 返回参数} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
-  /** 克隆数据库 */
+  /** {@link CloneDB 克隆数据库}({@link CloneDBRequest 请求参数}): {@link CloneDBResponse 返回参数} */
   CloneDB(data: CloneDBRequest, config?: AxiosRequestConfig): AxiosPromise<CloneDBResponse>;
-  /** 关闭实例互通 */
+  /** {@link CloseInterCommunication 关闭实例互通}({@link CloseInterCommunicationRequest 请求参数}): {@link CloseInterCommunicationResponse 返回参数} */
   CloseInterCommunication(data: CloseInterCommunicationRequest, config?: AxiosRequestConfig): AxiosPromise<CloseInterCommunicationResponse>;
-  /** 立刻完成扩容任务 */
+  /** {@link CompleteExpansion 立刻完成扩容任务}({@link CompleteExpansionRequest 请求参数}): {@link CompleteExpansionResponse 返回参数} */
   CompleteExpansion(data: CompleteExpansionRequest, config?: AxiosRequestConfig): AxiosPromise<CompleteExpansionResponse>;
-  /** 完成迁移任务 */
+  /** {@link CompleteMigration 完成迁移任务}({@link CompleteMigrationRequest 请求参数}): {@link CompleteMigrationResponse 返回参数} */
   CompleteMigration(data: CompleteMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<CompleteMigrationResponse>;
-  /** 创建实例账号 */
+  /** {@link CreateAccount 创建实例账号}({@link CreateAccountRequest 请求参数}): {@link CreateAccountResponse 返回参数} */
   CreateAccount(data: CreateAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountResponse>;
-  /** 创建备份 */
+  /** {@link CreateBackup 创建备份}({@link CreateBackupRequest 请求参数}): {@link CreateBackupResponse 返回参数} */
   CreateBackup(data?: CreateBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupResponse>;
-  /** 创建备份导入任务 */
+  /** {@link CreateBackupMigration 创建备份导入任务}({@link CreateBackupMigrationRequest 请求参数}): {@link CreateBackupMigrationResponse 返回参数} */
   CreateBackupMigration(data: CreateBackupMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupMigrationResponse>;
-  /** 创建基础版实例 */
+  /** {@link CreateBasicDBInstances 创建基础版实例}({@link CreateBasicDBInstancesRequest 请求参数}): {@link CreateBasicDBInstancesResponse 返回参数} */
   CreateBasicDBInstances(data: CreateBasicDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBasicDBInstancesResponse>;
-  /** 创建商业智能服务实例 */
+  /** {@link CreateBusinessDBInstances 创建商业智能服务实例}({@link CreateBusinessDBInstancesRequest 请求参数}): {@link CreateBusinessDBInstancesResponse 返回参数} */
   CreateBusinessDBInstances(data: CreateBusinessDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBusinessDBInstancesResponse>;
-  /** 创建商业智能服务文件 */
+  /** {@link CreateBusinessIntelligenceFile 创建商业智能服务文件}({@link CreateBusinessIntelligenceFileRequest 请求参数}): {@link CreateBusinessIntelligenceFileResponse 返回参数} */
   CreateBusinessIntelligenceFile(data: CreateBusinessIntelligenceFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBusinessIntelligenceFileResponse>;
-  /** 创建数据库 */
+  /** {@link CreateDB 创建数据库}({@link CreateDBRequest 请求参数}): {@link CreateDBResponse 返回参数} */
   CreateDB(data: CreateDBRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBResponse>;
-  /** 创建实例 */
+  /** {@link CreateDBInstances 创建实例}({@link CreateDBInstancesRequest 请求参数}): {@link CreateDBInstancesResponse 返回参数} */
   CreateDBInstances(data: CreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstancesResponse>;
-  /** 创建增量备份导入任务 */
+  /** {@link CreateIncrementalMigration 创建增量备份导入任务}({@link CreateIncrementalMigrationRequest 请求参数}): {@link CreateIncrementalMigrationResponse 返回参数} */
   CreateIncrementalMigration(data: CreateIncrementalMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIncrementalMigrationResponse>;
-  /** 创建迁移任务 */
+  /** {@link CreateMigration 创建迁移任务}({@link CreateMigrationRequest 请求参数}): {@link CreateMigrationResponse 返回参数} */
   CreateMigration(data: CreateMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMigrationResponse>;
-  /** 创建发布订阅 */
+  /** {@link CreatePublishSubscribe 创建发布订阅}({@link CreatePublishSubscribeRequest 请求参数}): {@link CreatePublishSubscribeResponse 返回参数} */
   CreatePublishSubscribe(data: CreatePublishSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePublishSubscribeResponse>;
-  /** 创建只读实例 */
+  /** {@link CreateReadOnlyDBInstances 创建只读实例}({@link CreateReadOnlyDBInstancesRequest 请求参数}): {@link CreateReadOnlyDBInstancesResponse 返回参数} */
   CreateReadOnlyDBInstances(data: CreateReadOnlyDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyDBInstancesResponse>;
-  /** 删除实例账号 */
+  /** {@link DeleteAccount 删除实例账号}({@link DeleteAccountRequest 请求参数}): {@link DeleteAccountResponse 返回参数} */
   DeleteAccount(data: DeleteAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountResponse>;
-  /** 删除备份导入任务 */
+  /** {@link DeleteBackupMigration 删除备份导入任务}({@link DeleteBackupMigrationRequest 请求参数}): {@link DeleteBackupMigrationResponse 返回参数} */
   DeleteBackupMigration(data: DeleteBackupMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupMigrationResponse>;
-  /** 删除商业智能文件 */
+  /** {@link DeleteBusinessIntelligenceFile 删除商业智能文件}({@link DeleteBusinessIntelligenceFileRequest 请求参数}): {@link DeleteBusinessIntelligenceFileResponse 返回参数} */
   DeleteBusinessIntelligenceFile(data: DeleteBusinessIntelligenceFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBusinessIntelligenceFileResponse>;
-  /** 删除数据库 */
+  /** {@link DeleteDB 删除数据库}({@link DeleteDBRequest 请求参数}): {@link DeleteDBResponse 返回参数} */
   DeleteDB(data: DeleteDBRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBResponse>;
-  /** 立即下线实例 */
+  /** {@link DeleteDBInstance 立即下线实例}({@link DeleteDBInstanceRequest 请求参数}): {@link DeleteDBInstanceResponse 返回参数} */
   DeleteDBInstance(data: DeleteDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBInstanceResponse>;
-  /** 删除增量备份导入任务 */
+  /** {@link DeleteIncrementalMigration 删除增量备份导入任务}({@link DeleteIncrementalMigrationRequest 请求参数}): {@link DeleteIncrementalMigrationResponse 返回参数} */
   DeleteIncrementalMigration(data: DeleteIncrementalMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIncrementalMigrationResponse>;
-  /** 删除迁移任务 */
+  /** {@link DeleteMigration 删除迁移任务}({@link DeleteMigrationRequest 请求参数}): {@link DeleteMigrationResponse 返回参数} */
   DeleteMigration(data: DeleteMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMigrationResponse>;
-  /** 删除发布订阅 */
+  /** {@link DeletePublishSubscribe 删除发布订阅}({@link DeletePublishSubscribeRequest 请求参数}): {@link DeletePublishSubscribeResponse 返回参数} */
   DeletePublishSubscribe(data: DeletePublishSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePublishSubscribeResponse>;
-  /** 拉取实例账户列表 */
+  /** {@link DescribeAccounts 拉取实例账户列表}({@link DescribeAccountsRequest 请求参数}): {@link DescribeAccountsResponse 返回参数} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
-  /** 根据流程ID查询备份信息 */
+  /** {@link DescribeBackupByFlowId 根据流程ID查询备份信息}({@link DescribeBackupByFlowIdRequest 请求参数}): {@link DescribeBackupByFlowIdResponse 返回参数} */
   DescribeBackupByFlowId(data: DescribeBackupByFlowIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupByFlowIdResponse>;
-  /** 查询创建备份命令 */
+  /** {@link DescribeBackupCommand 查询创建备份命令}({@link DescribeBackupCommandRequest 请求参数}): {@link DescribeBackupCommandResponse 返回参数} */
   DescribeBackupCommand(data: DescribeBackupCommandRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupCommandResponse>;
-  /** 查询备份文件列表 */
+  /** {@link DescribeBackupFiles 查询备份文件列表}({@link DescribeBackupFilesRequest 请求参数}): {@link DescribeBackupFilesResponse 返回参数} */
   DescribeBackupFiles(data: DescribeBackupFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupFilesResponse>;
-  /** 查询备份导入任务 */
+  /** {@link DescribeBackupMigration 查询备份导入任务}({@link DescribeBackupMigrationRequest 请求参数}): {@link DescribeBackupMigrationResponse 返回参数} */
   DescribeBackupMigration(data: DescribeBackupMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupMigrationResponse>;
-  /** 查询上传的备份文件大小 */
+  /** {@link DescribeBackupUploadSize 查询上传的备份文件大小}({@link DescribeBackupUploadSizeRequest 请求参数}): {@link DescribeBackupUploadSizeResponse 返回参数} */
   DescribeBackupUploadSize(data: DescribeBackupUploadSizeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupUploadSizeResponse>;
-  /** 查询备份列表 */
+  /** {@link DescribeBackups 查询备份列表}({@link DescribeBackupsRequest 请求参数}): {@link DescribeBackupsResponse 返回参数} */
   DescribeBackups(data: DescribeBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupsResponse>;
-  /** 查询商业智能服务需要的文件 */
+  /** {@link DescribeBusinessIntelligenceFile 查询商业智能服务需要的文件}({@link DescribeBusinessIntelligenceFileRequest 请求参数}): {@link DescribeBusinessIntelligenceFileResponse 返回参数} */
   DescribeBusinessIntelligenceFile(data: DescribeBusinessIntelligenceFileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBusinessIntelligenceFileResponse>;
-  /** 查询备机的容灾地域和可用区 */
+  /** {@link DescribeCrossRegionZone 查询备机的容灾地域和可用区}({@link DescribeCrossRegionZoneRequest 请求参数}): {@link DescribeCrossRegionZoneResponse 返回参数} */
   DescribeCrossRegionZone(data: DescribeCrossRegionZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossRegionZoneResponse>;
-  /** 查询数据库字符集 */
+  /** {@link DescribeDBCharsets 查询数据库字符集}({@link DescribeDBCharsetsRequest 请求参数}): {@link DescribeDBCharsetsResponse 返回参数} */
   DescribeDBCharsets(data: DescribeDBCharsetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCharsetsResponse>;
-  /** 查询互通实例的信息 */
+  /** {@link DescribeDBInstanceInter 查询互通实例的信息}({@link DescribeDBInstanceInterRequest 请求参数}): {@link DescribeDBInstanceInterResponse 返回参数} */
   DescribeDBInstanceInter(data: DescribeDBInstanceInterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceInterResponse>;
-  /** 查询实例列表 */
+  /** {@link DescribeDBInstances 查询实例列表}({@link DescribeDBInstancesRequest 请求参数}): {@link DescribeDBInstancesResponse 返回参数} */
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
-  /** 查询实例安全组信息 */
+  /** {@link DescribeDBSecurityGroups 查询实例安全组信息}({@link DescribeDBSecurityGroupsRequest 请求参数}): {@link DescribeDBSecurityGroupsResponse 返回参数} */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
-  /** 查询数据库列表 */
+  /** {@link DescribeDBs 查询数据库列表}({@link DescribeDBsRequest 请求参数}): {@link DescribeDBsResponse 返回参数} */
   DescribeDBs(data: DescribeDBsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBsResponse>;
-  /** 查询数据库配置信息 */
+  /** {@link DescribeDBsNormal 查询数据库配置信息}({@link DescribeDBsNormalRequest 请求参数}): {@link DescribeDBsNormalResponse 返回参数} */
   DescribeDBsNormal(data: DescribeDBsNormalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBsNormalResponse>;
-  /** 查询流程状态 */
+  /** {@link DescribeFlowStatus 查询流程状态}({@link DescribeFlowStatusRequest 请求参数}): {@link DescribeFlowStatusResponse 返回参数} */
   DescribeFlowStatus(data: DescribeFlowStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowStatusResponse>;
-  /** 查询增量备份导入任务 */
+  /** {@link DescribeIncrementalMigration 查询增量备份导入任务}({@link DescribeIncrementalMigrationRequest 请求参数}): {@link DescribeIncrementalMigrationResponse 返回参数} */
   DescribeIncrementalMigration(data: DescribeIncrementalMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIncrementalMigrationResponse>;
-  /** 查询实例参数修改历史 */
+  /** {@link DescribeInstanceParamRecords 查询实例参数修改历史}({@link DescribeInstanceParamRecordsRequest 请求参数}): {@link DescribeInstanceParamRecordsResponse 返回参数} */
   DescribeInstanceParamRecords(data: DescribeInstanceParamRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamRecordsResponse>;
-  /** 查询实例的可设置参数列表 */
+  /** {@link DescribeInstanceParams 查询实例的可设置参数列表}({@link DescribeInstanceParamsRequest 请求参数}): {@link DescribeInstanceParamsResponse 返回参数} */
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
-  /** 查询该实例的可维护时间窗 */
+  /** {@link DescribeMaintenanceSpan 查询该实例的可维护时间窗}({@link DescribeMaintenanceSpanRequest 请求参数}): {@link DescribeMaintenanceSpanResponse 返回参数} */
   DescribeMaintenanceSpan(data: DescribeMaintenanceSpanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaintenanceSpanResponse>;
-  /** 查询迁移数据库列表 */
+  /** {@link DescribeMigrationDatabases 查询迁移数据库列表}({@link DescribeMigrationDatabasesRequest 请求参数}): {@link DescribeMigrationDatabasesResponse 返回参数} */
   DescribeMigrationDatabases(data: DescribeMigrationDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationDatabasesResponse>;
-  /** 查询迁移任务详情 */
+  /** {@link DescribeMigrationDetail 查询迁移任务详情}({@link DescribeMigrationDetailRequest 请求参数}): {@link DescribeMigrationDetailResponse 返回参数} */
   DescribeMigrationDetail(data: DescribeMigrationDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationDetailResponse>;
-  /** 查询迁移任务列表 */
+  /** {@link DescribeMigrations 查询迁移任务列表}({@link DescribeMigrationsRequest 请求参数}): {@link DescribeMigrationsResponse 返回参数} */
   DescribeMigrations(data?: DescribeMigrationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationsResponse>;
-  /** 查询订单信息 */
+  /** {@link DescribeOrders 查询订单信息}({@link DescribeOrdersRequest 请求参数}): {@link DescribeOrdersResponse 返回参数} */
   DescribeOrders(data: DescribeOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrdersResponse>;
-  /** 查询售卖规格配置 */
+  /** {@link DescribeProductConfig 查询售卖规格配置}({@link DescribeProductConfigRequest 请求参数}): {@link DescribeProductConfigResponse 返回参数} */
   DescribeProductConfig(data: DescribeProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductConfigResponse>;
-  /** 查询项目安全组信息 */
+  /** {@link DescribeProjectSecurityGroups 查询项目安全组信息}({@link DescribeProjectSecurityGroupsRequest 请求参数}): {@link DescribeProjectSecurityGroupsResponse 返回参数} */
   DescribeProjectSecurityGroups(data: DescribeProjectSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupsResponse>;
-  /** 查询订阅发布 */
+  /** {@link DescribePublishSubscribe 查询订阅发布}({@link DescribePublishSubscribeRequest 请求参数}): {@link DescribePublishSubscribeResponse 返回参数} */
   DescribePublishSubscribe(data: DescribePublishSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublishSubscribeResponse>;
-  /** 通过只读实例查询只读组 */
+  /** {@link DescribeReadOnlyGroupByReadOnlyInstance 通过只读实例查询只读组}({@link DescribeReadOnlyGroupByReadOnlyInstanceRequest 请求参数}): {@link DescribeReadOnlyGroupByReadOnlyInstanceResponse 返回参数} */
   DescribeReadOnlyGroupByReadOnlyInstance(data: DescribeReadOnlyGroupByReadOnlyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReadOnlyGroupByReadOnlyInstanceResponse>;
-  /** 查询只读组详情 */
+  /** {@link DescribeReadOnlyGroupDetails 查询只读组详情}({@link DescribeReadOnlyGroupDetailsRequest 请求参数}): {@link DescribeReadOnlyGroupDetailsResponse 返回参数} */
   DescribeReadOnlyGroupDetails(data: DescribeReadOnlyGroupDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReadOnlyGroupDetailsResponse>;
-  /** 查询只读组列表 */
+  /** {@link DescribeReadOnlyGroupList 查询只读组列表}({@link DescribeReadOnlyGroupListRequest 请求参数}): {@link DescribeReadOnlyGroupListResponse 返回参数} */
   DescribeReadOnlyGroupList(data: DescribeReadOnlyGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReadOnlyGroupListResponse>;
-  /** 查询售卖地域 */
+  /** {@link DescribeRegions 查询售卖地域}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** 查询实例可回档时间范围 */
+  /** {@link DescribeRollbackTime 查询实例可回档时间范围}({@link DescribeRollbackTimeRequest 请求参数}): {@link DescribeRollbackTimeResponse 返回参数} */
   DescribeRollbackTime(data: DescribeRollbackTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeResponse>;
-  /** 获取慢查询日志文件信息 */
+  /** {@link DescribeSlowlogs 获取慢查询日志文件信息}({@link DescribeSlowlogsRequest 请求参数}): {@link DescribeSlowlogsResponse 返回参数} */
   DescribeSlowlogs(data: DescribeSlowlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowlogsResponse>;
-  /** 查询备份上传权限 */
+  /** {@link DescribeUploadBackupInfo 查询备份上传权限}({@link DescribeUploadBackupInfoRequest 请求参数}): {@link DescribeUploadBackupInfoResponse 返回参数} */
   DescribeUploadBackupInfo(data: DescribeUploadBackupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUploadBackupInfoResponse>;
-  /** 查询增量备份上传权限 */
+  /** {@link DescribeUploadIncrementalInfo 查询增量备份上传权限}({@link DescribeUploadIncrementalInfoRequest 请求参数}): {@link DescribeUploadIncrementalInfoResponse 返回参数} */
   DescribeUploadIncrementalInfo(data: DescribeUploadIncrementalInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUploadIncrementalInfoResponse>;
-  /** 查询售卖可用区 */
+  /** {@link DescribeZones 查询售卖可用区}({@link DescribeZonesRequest 请求参数}): {@link DescribeZonesResponse 返回参数} */
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
-  /** 安全组批量解绑云资源 */
+  /** {@link DisassociateSecurityGroups 安全组批量解绑云资源}({@link DisassociateSecurityGroupsRequest 请求参数}): {@link DisassociateSecurityGroupsResponse 返回参数} */
   DisassociateSecurityGroups(data: DisassociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupsResponse>;
-  /** 查询申请实例价格 */
+  /** {@link InquiryPriceCreateDBInstances 查询申请实例价格}({@link InquiryPriceCreateDBInstancesRequest 请求参数}): {@link InquiryPriceCreateDBInstancesResponse 返回参数} */
   InquiryPriceCreateDBInstances(data: InquiryPriceCreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateDBInstancesResponse>;
-  /** 查询实例续费价格 */
+  /** {@link InquiryPriceRenewDBInstance 查询实例续费价格}({@link InquiryPriceRenewDBInstanceRequest 请求参数}): {@link InquiryPriceRenewDBInstanceResponse 返回参数} */
   InquiryPriceRenewDBInstance(data: InquiryPriceRenewDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewDBInstanceResponse>;
-  /** 查询升级实例价格 */
+  /** {@link InquiryPriceUpgradeDBInstance 查询升级实例价格}({@link InquiryPriceUpgradeDBInstanceRequest 请求参数}): {@link InquiryPriceUpgradeDBInstanceResponse 返回参数} */
   InquiryPriceUpgradeDBInstance(data: InquiryPriceUpgradeDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceUpgradeDBInstanceResponse>;
-  /** 修改实例账户权限 */
+  /** {@link ModifyAccountPrivilege 修改实例账户权限}({@link ModifyAccountPrivilegeRequest 请求参数}): {@link ModifyAccountPrivilegeResponse 返回参数} */
   ModifyAccountPrivilege(data: ModifyAccountPrivilegeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountPrivilegeResponse>;
-  /** 修改账户备注 */
+  /** {@link ModifyAccountRemark 修改账户备注}({@link ModifyAccountRemarkRequest 请求参数}): {@link ModifyAccountRemarkResponse 返回参数} */
   ModifyAccountRemark(data: ModifyAccountRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountRemarkResponse>;
-  /** 修改备份导入任务 */
+  /** {@link ModifyBackupMigration 修改备份导入任务}({@link ModifyBackupMigrationRequest 请求参数}): {@link ModifyBackupMigrationResponse 返回参数} */
   ModifyBackupMigration(data: ModifyBackupMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupMigrationResponse>;
-  /** 修改备份名称 */
+  /** {@link ModifyBackupName 修改备份名称}({@link ModifyBackupNameRequest 请求参数}): {@link ModifyBackupNameResponse 返回参数} */
   ModifyBackupName(data: ModifyBackupNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupNameResponse>;
-  /** 设置备份策略 */
+  /** {@link ModifyBackupStrategy 设置备份策略}({@link ModifyBackupStrategyRequest 请求参数}): {@link ModifyBackupStrategyResponse 返回参数} */
   ModifyBackupStrategy(data: ModifyBackupStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupStrategyResponse>;
-  /** 修改实例名字 */
+  /** {@link ModifyDBInstanceName 修改实例名字}({@link ModifyDBInstanceNameRequest 请求参数}): {@link ModifyDBInstanceNameResponse 返回参数} */
   ModifyDBInstanceName(data: ModifyDBInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNameResponse>;
-  /** 修改实例网络 */
+  /** {@link ModifyDBInstanceNetwork 修改实例网络}({@link ModifyDBInstanceNetworkRequest 请求参数}): {@link ModifyDBInstanceNetworkResponse 返回参数} */
   ModifyDBInstanceNetwork(data: ModifyDBInstanceNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNetworkResponse>;
-  /** 修改数据库实例所属项目 */
+  /** {@link ModifyDBInstanceProject 修改数据库实例所属项目}({@link ModifyDBInstanceProjectRequest 请求参数}): {@link ModifyDBInstanceProjectResponse 返回参数} */
   ModifyDBInstanceProject(data: ModifyDBInstanceProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceProjectResponse>;
-  /** 修改实例续费标记 */
+  /** {@link ModifyDBInstanceRenewFlag 修改实例续费标记}({@link ModifyDBInstanceRenewFlagRequest 请求参数}): {@link ModifyDBInstanceRenewFlagResponse 返回参数} */
   ModifyDBInstanceRenewFlag(data: ModifyDBInstanceRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceRenewFlagResponse>;
-  /** 修改云数据库安全组 */
+  /** {@link ModifyDBInstanceSecurityGroups 修改云数据库安全组}({@link ModifyDBInstanceSecurityGroupsRequest 请求参数}): {@link ModifyDBInstanceSecurityGroupsResponse 返回参数} */
   ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
-  /** 更新数据库名 */
+  /** {@link ModifyDBName 更新数据库名}({@link ModifyDBNameRequest 请求参数}): {@link ModifyDBNameResponse 返回参数} */
   ModifyDBName(data: ModifyDBNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBNameResponse>;
-  /** 修改数据库备注 */
+  /** {@link ModifyDBRemark 修改数据库备注}({@link ModifyDBRemarkRequest 请求参数}): {@link ModifyDBRemarkResponse 返回参数} */
   ModifyDBRemark(data: ModifyDBRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBRemarkResponse>;
-  /** 开启&关闭数据库CDC */
+  /** {@link ModifyDatabaseCDC 开启&关闭数据库CDC}({@link ModifyDatabaseCDCRequest 请求参数}): {@link ModifyDatabaseCDCResponse 返回参数} */
   ModifyDatabaseCDC(data: ModifyDatabaseCDCRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseCDCResponse>;
-  /** 启用&禁用数据库CT */
+  /** {@link ModifyDatabaseCT 启用&禁用数据库CT}({@link ModifyDatabaseCTRequest 请求参数}): {@link ModifyDatabaseCTResponse 返回参数} */
   ModifyDatabaseCT(data: ModifyDatabaseCTRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseCTResponse>;
-  /** 收缩数据库mdf */
+  /** {@link ModifyDatabaseMdf 收缩数据库mdf}({@link ModifyDatabaseMdfRequest 请求参数}): {@link ModifyDatabaseMdfResponse 返回参数} */
   ModifyDatabaseMdf(data: ModifyDatabaseMdfRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseMdfResponse>;
-  /** 修改增量备份导入任务 */
+  /** {@link ModifyIncrementalMigration 修改增量备份导入任务}({@link ModifyIncrementalMigrationRequest 请求参数}): {@link ModifyIncrementalMigrationResponse 返回参数} */
   ModifyIncrementalMigration(data: ModifyIncrementalMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIncrementalMigrationResponse>;
-  /** 修改实例参数 */
+  /** {@link ModifyInstanceParam 修改实例参数}({@link ModifyInstanceParamRequest 请求参数}): {@link ModifyInstanceParamResponse 返回参数} */
   ModifyInstanceParam(data: ModifyInstanceParamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamResponse>;
-  /** 修改可维护时间窗 */
+  /** {@link ModifyMaintenanceSpan 修改可维护时间窗}({@link ModifyMaintenanceSpanRequest 请求参数}): {@link ModifyMaintenanceSpanResponse 返回参数} */
   ModifyMaintenanceSpan(data: ModifyMaintenanceSpanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintenanceSpanResponse>;
-  /** 修改迁移任务 */
+  /** {@link ModifyMigration 修改迁移任务}({@link ModifyMigrationRequest 请求参数}): {@link ModifyMigrationResponse 返回参数} */
   ModifyMigration(data: ModifyMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrationResponse>;
-  /** 修改发布订阅的名称 */
+  /** {@link ModifyPublishSubscribeName 修改发布订阅的名称}({@link ModifyPublishSubscribeNameRequest 请求参数}): {@link ModifyPublishSubscribeNameResponse 返回参数} */
   ModifyPublishSubscribeName(data: ModifyPublishSubscribeNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPublishSubscribeNameResponse>;
-  /** 修改只读组详情 */
+  /** {@link ModifyReadOnlyGroupDetails 修改只读组详情}({@link ModifyReadOnlyGroupDetailsRequest 请求参数}): {@link ModifyReadOnlyGroupDetailsResponse 返回参数} */
   ModifyReadOnlyGroupDetails(data: ModifyReadOnlyGroupDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReadOnlyGroupDetailsResponse>;
-  /** 打开实例的互通 */
+  /** {@link OpenInterCommunication 打开实例的互通}({@link OpenInterCommunicationRequest 请求参数}): {@link OpenInterCommunicationResponse 返回参数} */
   OpenInterCommunication(data: OpenInterCommunicationRequest, config?: AxiosRequestConfig): AxiosPromise<OpenInterCommunicationResponse>;
-  /** 查询迁移校验任务进度 */
+  /** {@link QueryMigrationCheckProcess 查询迁移校验任务进度}({@link QueryMigrationCheckProcessRequest 请求参数}): {@link QueryMigrationCheckProcessResponse 返回参数} */
   QueryMigrationCheckProcess(data: QueryMigrationCheckProcessRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMigrationCheckProcessResponse>;
-  /** 主动回收实例 */
+  /** {@link RecycleDBInstance 主动回收实例}({@link RecycleDBInstanceRequest 请求参数}): {@link RecycleDBInstanceResponse 返回参数} */
   RecycleDBInstance(data: RecycleDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RecycleDBInstanceResponse>;
-  /** 立即回收只读组的资源 */
+  /** {@link RecycleReadOnlyGroup 立即回收只读组的资源}({@link RecycleReadOnlyGroupRequest 请求参数}): {@link RecycleReadOnlyGroupResponse 返回参数} */
   RecycleReadOnlyGroup(data: RecycleReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RecycleReadOnlyGroupResponse>;
-  /** 删除手动备份 */
+  /** {@link RemoveBackups 删除手动备份}({@link RemoveBackupsRequest 请求参数}): {@link RemoveBackupsResponse 返回参数} */
   RemoveBackups(data: RemoveBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveBackupsResponse>;
-  /** 续费实例 */
+  /** {@link RenewDBInstance 续费实例}({@link RenewDBInstanceRequest 请求参数}): {@link RenewDBInstanceResponse 返回参数} */
   RenewDBInstance(data: RenewDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDBInstanceResponse>;
-  /** 恢复后付费实例 */
+  /** {@link RenewPostpaidDBInstance 恢复后付费实例}({@link RenewPostpaidDBInstanceRequest 请求参数}): {@link RenewPostpaidDBInstanceResponse 返回参数} */
   RenewPostpaidDBInstance(data: RenewPostpaidDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenewPostpaidDBInstanceResponse>;
-  /** 重置账户密码 */
+  /** {@link ResetAccountPassword 重置账户密码}({@link ResetAccountPasswordRequest 请求参数}): {@link ResetAccountPasswordResponse 返回参数} */
   ResetAccountPassword(data: ResetAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAccountPasswordResponse>;
-  /** 重启实例 */
+  /** {@link RestartDBInstance 重启实例}({@link RestartDBInstanceRequest 请求参数}): {@link RestartDBInstanceResponse 返回参数} */
   RestartDBInstance(data: RestartDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDBInstanceResponse>;
-  /** 根据备份文件恢复实例 */
+  /** {@link RestoreInstance 根据备份文件恢复实例}({@link RestoreInstanceRequest 请求参数}): {@link RestoreInstanceResponse 返回参数} */
   RestoreInstance(data: RestoreInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreInstanceResponse>;
-  /** 回档实例 */
+  /** {@link RollbackInstance 回档实例}({@link RollbackInstanceRequest 请求参数}): {@link RollbackInstanceResponse 返回参数} */
   RollbackInstance(data: RollbackInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackInstanceResponse>;
-  /** 执行迁移任务 */
+  /** {@link RunMigration 执行迁移任务}({@link RunMigrationRequest 请求参数}): {@link RunMigrationResponse 返回参数} */
   RunMigration(data: RunMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<RunMigrationResponse>;
-  /** 启动备份导入任务 */
+  /** {@link StartBackupMigration 启动备份导入任务}({@link StartBackupMigrationRequest 请求参数}): {@link StartBackupMigrationResponse 返回参数} */
   StartBackupMigration(data: StartBackupMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<StartBackupMigrationResponse>;
-  /** 启动增量备份导入任务 */
+  /** {@link StartIncrementalMigration 启动增量备份导入任务}({@link StartIncrementalMigrationRequest 请求参数}): {@link StartIncrementalMigrationResponse 返回参数} */
   StartIncrementalMigration(data: StartIncrementalMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<StartIncrementalMigrationResponse>;
-  /** 启动迁移校验 */
+  /** {@link StartMigrationCheck 启动迁移校验}({@link StartMigrationCheckRequest 请求参数}): {@link StartMigrationCheckResponse 返回参数} */
   StartMigrationCheck(data: StartMigrationCheckRequest, config?: AxiosRequestConfig): AxiosPromise<StartMigrationCheckResponse>;
-  /** 中止迁移任务 */
+  /** {@link StopMigration 中止迁移任务}({@link StopMigrationRequest 请求参数}): {@link StopMigrationResponse 返回参数} */
   StopMigration(data: StopMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<StopMigrationResponse>;
-  /** 主动隔离实例 */
+  /** {@link TerminateDBInstance 主动隔离实例}({@link TerminateDBInstanceRequest 请求参数}): {@link TerminateDBInstanceResponse 返回参数} */
   TerminateDBInstance(data: TerminateDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDBInstanceResponse>;
-  /** 升级实例 */
+  /** {@link UpgradeDBInstance 升级实例}({@link UpgradeDBInstanceRequest 请求参数}): {@link UpgradeDBInstanceResponse 返回参数} */
   UpgradeDBInstance(data: UpgradeDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceResponse>;
 }
 

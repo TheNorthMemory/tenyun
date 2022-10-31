@@ -2389,208 +2389,208 @@ declare interface UntrustMalwaresResponse {
   RequestId?: string;
 }
 
-/** 主机安全 */
+/** {@link Yunjing 主机安全} */
 declare interface Yunjing {
   (): Versions;
-  /** 新增白名单规则 */
+  /** {@link AddLoginWhiteList 新增白名单规则}({@link AddLoginWhiteListRequest 请求参数}): {@link AddLoginWhiteListResponse 返回参数} */
   AddLoginWhiteList(data: AddLoginWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<AddLoginWhiteListResponse>;
-  /** 增加机器关联标签 */
+  /** {@link AddMachineTag 增加机器关联标签}({@link AddMachineTagRequest 请求参数}): {@link AddMachineTagResponse 返回参数} */
   AddMachineTag(data: AddMachineTagRequest, config?: AxiosRequestConfig): AxiosPromise<AddMachineTagResponse>;
-  /** 关闭专业版 */
+  /** {@link CloseProVersion 关闭专业版}({@link CloseProVersionRequest 请求参数}): {@link CloseProVersionResponse 返回参数} */
   CloseProVersion(data?: CloseProVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CloseProVersionResponse>;
-  /** 创建基线策略 */
+  /** {@link CreateBaselineStrategy 创建基线策略}({@link CreateBaselineStrategyRequest 请求参数}): {@link CreateBaselineStrategyResponse 返回参数} */
   CreateBaselineStrategy(data: CreateBaselineStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBaselineStrategyResponse>;
-  /** 创建实时获取端口任务 */
+  /** {@link CreateOpenPortTask 创建实时获取端口任务}({@link CreateOpenPortTaskRequest 请求参数}): {@link CreateOpenPortTaskResponse 返回参数} */
   CreateOpenPortTask(data: CreateOpenPortTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenPortTaskResponse>;
-  /** 创建实时拉取进程任务 */
+  /** {@link CreateProcessTask 创建实时拉取进程任务}({@link CreateProcessTaskRequest 请求参数}): {@link CreateProcessTaskResponse 返回参数} */
   CreateProcessTask(data: CreateProcessTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProcessTaskResponse>;
-  /** 添加常用登录地 */
+  /** {@link CreateUsualLoginPlaces 添加常用登录地}({@link CreateUsualLoginPlacesRequest 请求参数}): {@link CreateUsualLoginPlacesResponse 返回参数} */
   CreateUsualLoginPlaces(data: CreateUsualLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUsualLoginPlacesResponse>;
-  /** 删除网络攻击日志 */
+  /** {@link DeleteAttackLogs 删除网络攻击日志}({@link DeleteAttackLogsRequest 请求参数}): {@link DeleteAttackLogsResponse 返回参数} */
   DeleteAttackLogs(data: DeleteAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackLogsResponse>;
-  /** 删除高危命令事件 */
+  /** {@link DeleteBashEvents 删除高危命令事件}({@link DeleteBashEventsRequest 请求参数}): {@link DeleteBashEventsResponse 返回参数} */
   DeleteBashEvents(data: DeleteBashEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBashEventsResponse>;
-  /** 删除高危命令规则 */
+  /** {@link DeleteBashRules 删除高危命令规则}({@link DeleteBashRulesRequest 请求参数}): {@link DeleteBashRulesResponse 返回参数} */
   DeleteBashRules(data: DeleteBashRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBashRulesResponse>;
-  /** 删除暴力破解记录 */
+  /** {@link DeleteBruteAttacks 删除暴力破解记录}({@link DeleteBruteAttacksRequest 请求参数}): {@link DeleteBruteAttacksResponse 返回参数} */
   DeleteBruteAttacks(data: DeleteBruteAttacksRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBruteAttacksResponse>;
-  /** 删除白名单规则 */
+  /** {@link DeleteLoginWhiteList 删除白名单规则}({@link DeleteLoginWhiteListRequest 请求参数}): {@link DeleteLoginWhiteListResponse 返回参数} */
   DeleteLoginWhiteList(data: DeleteLoginWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoginWhiteListResponse>;
-  /** 卸载云镜客户端 */
+  /** {@link DeleteMachine 卸载云镜客户端}({@link DeleteMachineRequest 请求参数}): {@link DeleteMachineResponse 返回参数} */
   DeleteMachine(data: DeleteMachineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineResponse>;
-  /** 删除服务器关联的标签 */
+  /** {@link DeleteMachineTag 删除服务器关联的标签}({@link DeleteMachineTagRequest 请求参数}): {@link DeleteMachineTagResponse 返回参数} */
   DeleteMachineTag(data: DeleteMachineTagRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineTagResponse>;
-  /** 删除恶意请求记录 */
+  /** {@link DeleteMaliciousRequests 删除恶意请求记录}({@link DeleteMaliciousRequestsRequest 请求参数}): {@link DeleteMaliciousRequestsResponse 返回参数} */
   DeleteMaliciousRequests(data: DeleteMaliciousRequestsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMaliciousRequestsResponse>;
-  /** 删除木马记录 */
+  /** {@link DeleteMalwares 删除木马记录}({@link DeleteMalwaresRequest 请求参数}): {@link DeleteMalwaresResponse 返回参数} */
   DeleteMalwares(data: DeleteMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMalwaresResponse>;
-  /** 删除异地登录记录 */
+  /** {@link DeleteNonlocalLoginPlaces 删除异地登录记录}({@link DeleteNonlocalLoginPlacesRequest 请求参数}): {@link DeleteNonlocalLoginPlacesResponse 返回参数} */
   DeleteNonlocalLoginPlaces(data: DeleteNonlocalLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNonlocalLoginPlacesResponse>;
-  /** 删除本地提权事件 */
+  /** {@link DeletePrivilegeEvents 删除本地提权事件}({@link DeletePrivilegeEventsRequest 请求参数}): {@link DeletePrivilegeEventsResponse 返回参数} */
   DeletePrivilegeEvents(data: DeletePrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivilegeEventsResponse>;
-  /** 删除本地提权规则 */
+  /** {@link DeletePrivilegeRules 删除本地提权规则}({@link DeletePrivilegeRulesRequest 请求参数}): {@link DeletePrivilegeRulesResponse 返回参数} */
   DeletePrivilegeRules(data: DeletePrivilegeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivilegeRulesResponse>;
-  /** 删除反弹Shell事件 */
+  /** {@link DeleteReverseShellEvents 删除反弹Shell事件}({@link DeleteReverseShellEventsRequest 请求参数}): {@link DeleteReverseShellEventsResponse 返回参数} */
   DeleteReverseShellEvents(data: DeleteReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReverseShellEventsResponse>;
-  /** 删除反弹Shell规则 */
+  /** {@link DeleteReverseShellRules 删除反弹Shell规则}({@link DeleteReverseShellRulesRequest 请求参数}): {@link DeleteReverseShellRulesResponse 返回参数} */
   DeleteReverseShellRules(data: DeleteReverseShellRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReverseShellRulesResponse>;
-  /** 删除标签 */
+  /** {@link DeleteTags 删除标签}({@link DeleteTagsRequest 请求参数}): {@link DeleteTagsResponse 返回参数} */
   DeleteTags(data: DeleteTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTagsResponse>;
-  /** 删除常用登录地 */
+  /** {@link DeleteUsualLoginPlaces 删除常用登录地}({@link DeleteUsualLoginPlacesRequest 请求参数}): {@link DeleteUsualLoginPlacesResponse 返回参数} */
   DeleteUsualLoginPlaces(data: DeleteUsualLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsualLoginPlacesResponse>;
-  /** 获取帐号统计列表数据 */
+  /** {@link DescribeAccountStatistics 获取帐号统计列表数据}({@link DescribeAccountStatisticsRequest 请求参数}): {@link DescribeAccountStatisticsResponse 返回参数} */
   DescribeAccountStatistics(data?: DescribeAccountStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountStatisticsResponse>;
-  /** 获取帐号列表 */
+  /** {@link DescribeAccounts 获取帐号列表}({@link DescribeAccountsRequest 请求参数}): {@link DescribeAccountsResponse 返回参数} */
   DescribeAccounts(data?: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
-  /** 获取单台主机的漏洞列表 */
+  /** {@link DescribeAgentVuls 获取单台主机的漏洞列表}({@link DescribeAgentVulsRequest 请求参数}): {@link DescribeAgentVulsResponse 返回参数} */
   DescribeAgentVuls(data: DescribeAgentVulsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentVulsResponse>;
-  /** 获取告警设置 */
+  /** {@link DescribeAlarmAttribute 获取告警设置}({@link DescribeAlarmAttributeRequest 请求参数}): {@link DescribeAlarmAttributeResponse 返回参数} */
   DescribeAlarmAttribute(data?: DescribeAlarmAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmAttributeResponse>;
-  /** 网络攻击日志详情 */
+  /** {@link DescribeAttackLogInfo 网络攻击日志详情}({@link DescribeAttackLogInfoRequest 请求参数}): {@link DescribeAttackLogInfoResponse 返回参数} */
   DescribeAttackLogInfo(data: DescribeAttackLogInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogInfoResponse>;
-  /** 网络攻击日志列表 */
+  /** {@link DescribeAttackLogs 网络攻击日志列表}({@link DescribeAttackLogsRequest 请求参数}): {@link DescribeAttackLogsResponse 返回参数} */
   DescribeAttackLogs(data?: DescribeAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogsResponse>;
-  /** 获取高危命令列表 */
+  /** {@link DescribeBashEvents 获取高危命令列表}({@link DescribeBashEventsRequest 请求参数}): {@link DescribeBashEventsResponse 返回参数} */
   DescribeBashEvents(data?: DescribeBashEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashEventsResponse>;
-  /** 获取高危命令规则列表 */
+  /** {@link DescribeBashRules 获取高危命令规则列表}({@link DescribeBashRulesRequest 请求参数}): {@link DescribeBashRulesResponse 返回参数} */
   DescribeBashRules(data: DescribeBashRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashRulesResponse>;
-  /** 获取云镜破解事件列表 */
+  /** {@link DescribeBruteAttacks 获取云镜破解事件列表}({@link DescribeBruteAttacksRequest 请求参数}): {@link DescribeBruteAttacksResponse 返回参数} */
   DescribeBruteAttacks(data?: DescribeBruteAttacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBruteAttacksResponse>;
-  /** 获取组件信息 */
+  /** {@link DescribeComponentInfo 获取组件信息}({@link DescribeComponentInfoRequest 请求参数}): {@link DescribeComponentInfoResponse 返回参数} */
   DescribeComponentInfo(data: DescribeComponentInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComponentInfoResponse>;
-  /** 获取组件统计列表 */
+  /** {@link DescribeComponentStatistics 获取组件统计列表}({@link DescribeComponentStatisticsRequest 请求参数}): {@link DescribeComponentStatisticsResponse 返回参数} */
   DescribeComponentStatistics(data?: DescribeComponentStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComponentStatisticsResponse>;
-  /** 获取组件列表 */
+  /** {@link DescribeComponents 获取组件列表}({@link DescribeComponentsRequest 请求参数}): {@link DescribeComponentsResponse 返回参数} */
   DescribeComponents(data?: DescribeComponentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComponentsResponse>;
-  /** 获取帐号变更历史列表 */
+  /** {@link DescribeHistoryAccounts 获取帐号变更历史列表}({@link DescribeHistoryAccountsRequest 请求参数}): {@link DescribeHistoryAccountsResponse 返回参数} */
   DescribeHistoryAccounts(data: DescribeHistoryAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHistoryAccountsResponse>;
-  /** 获取漏洞受影响机器列表 */
+  /** {@link DescribeImpactedHosts 获取漏洞受影响机器列表}({@link DescribeImpactedHostsRequest 请求参数}): {@link DescribeImpactedHostsResponse 返回参数} */
   DescribeImpactedHosts(data: DescribeImpactedHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImpactedHostsResponse>;
-  /** 获取异地登录白名单列表 */
+  /** {@link DescribeLoginWhiteList 获取异地登录白名单列表}({@link DescribeLoginWhiteListRequest 请求参数}): {@link DescribeLoginWhiteListResponse 返回参数} */
   DescribeLoginWhiteList(data?: DescribeLoginWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginWhiteListResponse>;
-  /** 获取机器详情 */
+  /** {@link DescribeMachineInfo 获取机器详情}({@link DescribeMachineInfoRequest 请求参数}): {@link DescribeMachineInfoResponse 返回参数} */
   DescribeMachineInfo(data?: DescribeMachineInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineInfoResponse>;
-  /** 获取区域主机列表 */
+  /** {@link DescribeMachines 获取区域主机列表}({@link DescribeMachinesRequest 请求参数}): {@link DescribeMachinesResponse 返回参数} */
   DescribeMachines(data: DescribeMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachinesResponse>;
-  /** 获取恶意请求数据 */
+  /** {@link DescribeMaliciousRequests 获取恶意请求数据}({@link DescribeMaliciousRequestsRequest 请求参数}): {@link DescribeMaliciousRequestsResponse 返回参数} */
   DescribeMaliciousRequests(data?: DescribeMaliciousRequestsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaliciousRequestsResponse>;
-  /** 获取木马信息 */
+  /** {@link DescribeMalwares 获取木马信息}({@link DescribeMalwaresRequest 请求参数}): {@link DescribeMalwaresResponse 返回参数} */
   DescribeMalwares(data?: DescribeMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalwaresResponse>;
-  /** 获取异地登录事件 */
+  /** {@link DescribeNonlocalLoginPlaces 获取异地登录事件}({@link DescribeNonlocalLoginPlacesRequest 请求参数}): {@link DescribeNonlocalLoginPlacesResponse 返回参数} */
   DescribeNonlocalLoginPlaces(data?: DescribeNonlocalLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNonlocalLoginPlacesResponse>;
-  /** 获取端口统计列表 */
+  /** {@link DescribeOpenPortStatistics 获取端口统计列表}({@link DescribeOpenPortStatisticsRequest 请求参数}): {@link DescribeOpenPortStatisticsResponse 返回参数} */
   DescribeOpenPortStatistics(data?: DescribeOpenPortStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOpenPortStatisticsResponse>;
-  /** 获取实时拉取端口任务状态 */
+  /** {@link DescribeOpenPortTaskStatus 获取实时拉取端口任务状态}({@link DescribeOpenPortTaskStatusRequest 请求参数}): {@link DescribeOpenPortTaskStatusResponse 返回参数} */
   DescribeOpenPortTaskStatus(data: DescribeOpenPortTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOpenPortTaskStatusResponse>;
-  /** 获取端口列表 */
+  /** {@link DescribeOpenPorts 获取端口列表}({@link DescribeOpenPortsRequest 请求参数}): {@link DescribeOpenPortsResponse 返回参数} */
   DescribeOpenPorts(data?: DescribeOpenPortsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOpenPortsResponse>;
-  /** 获取概览统计数据 */
+  /** {@link DescribeOverviewStatistics 获取概览统计数据}({@link DescribeOverviewStatisticsRequest 请求参数}): {@link DescribeOverviewStatisticsResponse 返回参数} */
   DescribeOverviewStatistics(data?: DescribeOverviewStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewStatisticsResponse>;
-  /** 获取本地提权事件列表 */
+  /** {@link DescribePrivilegeEvents 获取本地提权事件列表}({@link DescribePrivilegeEventsRequest 请求参数}): {@link DescribePrivilegeEventsResponse 返回参数} */
   DescribePrivilegeEvents(data?: DescribePrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivilegeEventsResponse>;
-  /** 获取本地提权规则列表 */
+  /** {@link DescribePrivilegeRules 获取本地提权规则列表}({@link DescribePrivilegeRulesRequest 请求参数}): {@link DescribePrivilegeRulesResponse 返回参数} */
   DescribePrivilegeRules(data?: DescribePrivilegeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivilegeRulesResponse>;
-  /** 获取专业版信息 */
+  /** {@link DescribeProVersionInfo 获取专业版信息}({@link DescribeProVersionInfoRequest 请求参数}): {@link DescribeProVersionInfoResponse 返回参数} */
   DescribeProVersionInfo(data?: DescribeProVersionInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProVersionInfoResponse>;
-  /** 获取进程统计列表 */
+  /** {@link DescribeProcessStatistics 获取进程统计列表}({@link DescribeProcessStatisticsRequest 请求参数}): {@link DescribeProcessStatisticsResponse 返回参数} */
   DescribeProcessStatistics(data?: DescribeProcessStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcessStatisticsResponse>;
-  /** 获取实时拉取进程任务状态 */
+  /** {@link DescribeProcessTaskStatus 获取实时拉取进程任务状态}({@link DescribeProcessTaskStatusRequest 请求参数}): {@link DescribeProcessTaskStatusResponse 返回参数} */
   DescribeProcessTaskStatus(data: DescribeProcessTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcessTaskStatusResponse>;
-  /** 获取进程列表 */
+  /** {@link DescribeProcesses 获取进程列表}({@link DescribeProcessesRequest 请求参数}): {@link DescribeProcessesResponse 返回参数} */
   DescribeProcesses(data?: DescribeProcessesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcessesResponse>;
-  /** 获取反弹Shell列表 */
+  /** {@link DescribeReverseShellEvents 获取反弹Shell列表}({@link DescribeReverseShellEventsRequest 请求参数}): {@link DescribeReverseShellEventsResponse 返回参数} */
   DescribeReverseShellEvents(data?: DescribeReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsResponse>;
-  /** 获取反弹Shell规则列表 */
+  /** {@link DescribeReverseShellRules 获取反弹Shell规则列表}({@link DescribeReverseShellRulesRequest 请求参数}): {@link DescribeReverseShellRulesResponse 返回参数} */
   DescribeReverseShellRules(data?: DescribeReverseShellRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellRulesResponse>;
-  /** 获取安全事件消息 */
+  /** {@link DescribeSecurityDynamics 获取安全事件消息}({@link DescribeSecurityDynamicsRequest 请求参数}): {@link DescribeSecurityDynamicsResponse 返回参数} */
   DescribeSecurityDynamics(data?: DescribeSecurityDynamicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityDynamicsResponse>;
-  /** 获取安全事件统计数据 */
+  /** {@link DescribeSecurityTrends 获取安全事件统计数据}({@link DescribeSecurityTrendsRequest 请求参数}): {@link DescribeSecurityTrendsResponse 返回参数} */
   DescribeSecurityTrends(data: DescribeSecurityTrendsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityTrendsResponse>;
-  /** 获取指定标签关联的服务器信息 */
+  /** {@link DescribeTagMachines 获取指定标签关联的服务器信息}({@link DescribeTagMachinesRequest 请求参数}): {@link DescribeTagMachinesResponse 返回参数} */
   DescribeTagMachines(data: DescribeTagMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagMachinesResponse>;
-  /** 获取所有主机标签 */
+  /** {@link DescribeTags 获取所有主机标签}({@link DescribeTagsRequest 请求参数}): {@link DescribeTagsResponse 返回参数} */
   DescribeTags(data?: DescribeTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagsResponse>;
-  /** 查询常用登录地 */
+  /** {@link DescribeUsualLoginPlaces 查询常用登录地}({@link DescribeUsualLoginPlacesRequest 请求参数}): {@link DescribeUsualLoginPlacesResponse 返回参数} */
   DescribeUsualLoginPlaces(data: DescribeUsualLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsualLoginPlacesResponse>;
-  /** 获取漏洞详情 */
+  /** {@link DescribeVulInfo 获取漏洞详情}({@link DescribeVulInfoRequest 请求参数}): {@link DescribeVulInfoResponse 返回参数} */
   DescribeVulInfo(data: DescribeVulInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulInfoResponse>;
-  /** 获取漏洞检测结果 */
+  /** {@link DescribeVulScanResult 获取漏洞检测结果}({@link DescribeVulScanResultRequest 请求参数}): {@link DescribeVulScanResultResponse 返回参数} */
   DescribeVulScanResult(data?: DescribeVulScanResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulScanResultResponse>;
-  /** 获取漏洞列表 */
+  /** {@link DescribeVuls 获取漏洞列表}({@link DescribeVulsRequest 请求参数}): {@link DescribeVulsResponse 返回参数} */
   DescribeVuls(data: DescribeVulsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulsResponse>;
-  /** 获取专业周报密码破解数据 */
+  /** {@link DescribeWeeklyReportBruteAttacks 获取专业周报密码破解数据}({@link DescribeWeeklyReportBruteAttacksRequest 请求参数}): {@link DescribeWeeklyReportBruteAttacksResponse 返回参数} */
   DescribeWeeklyReportBruteAttacks(data: DescribeWeeklyReportBruteAttacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWeeklyReportBruteAttacksResponse>;
-  /** 获取专业周报详情 */
+  /** {@link DescribeWeeklyReportInfo 获取专业周报详情}({@link DescribeWeeklyReportInfoRequest 请求参数}): {@link DescribeWeeklyReportInfoResponse 返回参数} */
   DescribeWeeklyReportInfo(data: DescribeWeeklyReportInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWeeklyReportInfoResponse>;
-  /** 获取专业周报木马数据 */
+  /** {@link DescribeWeeklyReportMalwares 获取专业周报木马数据}({@link DescribeWeeklyReportMalwaresRequest 请求参数}): {@link DescribeWeeklyReportMalwaresResponse 返回参数} */
   DescribeWeeklyReportMalwares(data: DescribeWeeklyReportMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWeeklyReportMalwaresResponse>;
-  /** 获取专业周报异地登录数据 */
+  /** {@link DescribeWeeklyReportNonlocalLoginPlaces 获取专业周报异地登录数据}({@link DescribeWeeklyReportNonlocalLoginPlacesRequest 请求参数}): {@link DescribeWeeklyReportNonlocalLoginPlacesResponse 返回参数} */
   DescribeWeeklyReportNonlocalLoginPlaces(data: DescribeWeeklyReportNonlocalLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWeeklyReportNonlocalLoginPlacesResponse>;
-  /** 获取专业版周报漏洞数据 */
+  /** {@link DescribeWeeklyReportVuls 获取专业版周报漏洞数据}({@link DescribeWeeklyReportVulsRequest 请求参数}): {@link DescribeWeeklyReportVulsResponse 返回参数} */
   DescribeWeeklyReportVuls(data: DescribeWeeklyReportVulsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWeeklyReportVulsResponse>;
-  /** 获取周报列表 */
+  /** {@link DescribeWeeklyReports 获取周报列表}({@link DescribeWeeklyReportsRequest 请求参数}): {@link DescribeWeeklyReportsResponse 返回参数} */
   DescribeWeeklyReports(data?: DescribeWeeklyReportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWeeklyReportsResponse>;
-  /** 新增或修改高危命令规则 */
+  /** {@link EditBashRule 新增或修改高危命令规则}({@link EditBashRuleRequest 请求参数}): {@link EditBashRuleResponse 返回参数} */
   EditBashRule(data: EditBashRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EditBashRuleResponse>;
-  /** 新增或修改本地提权规则 */
+  /** {@link EditPrivilegeRule 新增或修改本地提权规则}({@link EditPrivilegeRuleRequest 请求参数}): {@link EditPrivilegeRuleResponse 返回参数} */
   EditPrivilegeRule(data?: EditPrivilegeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EditPrivilegeRuleResponse>;
-  /** 编辑反弹Shell规则 */
+  /** {@link EditReverseShellRule 编辑反弹Shell规则}({@link EditReverseShellRuleRequest 请求参数}): {@link EditReverseShellRuleResponse 返回参数} */
   EditReverseShellRule(data?: EditReverseShellRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EditReverseShellRuleResponse>;
-  /** 新增或编辑标签 */
+  /** {@link EditTags 新增或编辑标签}({@link EditTagsRequest 请求参数}): {@link EditTagsResponse 返回参数} */
   EditTags(data: EditTagsRequest, config?: AxiosRequestConfig): AxiosPromise<EditTagsResponse>;
-  /** 导出网络攻击日志 */
+  /** {@link ExportAttackLogs 导出网络攻击日志}({@link ExportAttackLogsRequest 请求参数}): {@link ExportAttackLogsResponse 返回参数} */
   ExportAttackLogs(data?: ExportAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAttackLogsResponse>;
-  /** 导出高危命令事件 */
+  /** {@link ExportBashEvents 导出高危命令事件}({@link ExportBashEventsRequest 请求参数}): {@link ExportBashEventsResponse 返回参数} */
   ExportBashEvents(data?: ExportBashEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBashEventsResponse>;
-  /** 导出密码破解记录 */
+  /** {@link ExportBruteAttacks 导出密码破解记录}({@link ExportBruteAttacksRequest 请求参数}): {@link ExportBruteAttacksResponse 返回参数} */
   ExportBruteAttacks(data?: ExportBruteAttacksRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBruteAttacksResponse>;
-  /** 导出下载恶意请求文件 */
+  /** {@link ExportMaliciousRequests 导出下载恶意请求文件}({@link ExportMaliciousRequestsRequest 请求参数}): {@link ExportMaliciousRequestsResponse 返回参数} */
   ExportMaliciousRequests(data?: ExportMaliciousRequestsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportMaliciousRequestsResponse>;
-  /** 导出木马记录 */
+  /** {@link ExportMalwares 导出木马记录}({@link ExportMalwaresRequest 请求参数}): {@link ExportMalwaresResponse 返回参数} */
   ExportMalwares(data?: ExportMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<ExportMalwaresResponse>;
-  /** 导出异地登录记录 */
+  /** {@link ExportNonlocalLoginPlaces 导出异地登录记录}({@link ExportNonlocalLoginPlacesRequest 请求参数}): {@link ExportNonlocalLoginPlacesResponse 返回参数} */
   ExportNonlocalLoginPlaces(data?: ExportNonlocalLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<ExportNonlocalLoginPlacesResponse>;
-  /** 导出本地提权事件 */
+  /** {@link ExportPrivilegeEvents 导出本地提权事件}({@link ExportPrivilegeEventsRequest 请求参数}): {@link ExportPrivilegeEventsResponse 返回参数} */
   ExportPrivilegeEvents(data?: ExportPrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportPrivilegeEventsResponse>;
-  /** 导出反弹Shell事件 */
+  /** {@link ExportReverseShellEvents 导出反弹Shell事件}({@link ExportReverseShellEventsRequest 请求参数}): {@link ExportReverseShellEventsResponse 返回参数} */
   ExportReverseShellEvents(data?: ExportReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportReverseShellEventsResponse>;
-  /** 忽略漏洞 */
+  /** {@link IgnoreImpactedHosts 忽略漏洞}({@link IgnoreImpactedHostsRequest 请求参数}): {@link IgnoreImpactedHostsResponse 返回参数} */
   IgnoreImpactedHosts(data: IgnoreImpactedHostsRequest, config?: AxiosRequestConfig): AxiosPromise<IgnoreImpactedHostsResponse>;
-  /** 开通专业版询价(预付费) */
+  /** {@link InquiryPriceOpenProVersionPrepaid 开通专业版询价(预付费)}({@link InquiryPriceOpenProVersionPrepaidRequest 请求参数}): {@link InquiryPriceOpenProVersionPrepaidResponse 返回参数} */
   InquiryPriceOpenProVersionPrepaid(data: InquiryPriceOpenProVersionPrepaidRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceOpenProVersionPrepaidResponse>;
-  /** 误报异地登录 */
+  /** {@link MisAlarmNonlocalLoginPlaces 误报异地登录}({@link MisAlarmNonlocalLoginPlacesRequest 请求参数}): {@link MisAlarmNonlocalLoginPlacesResponse 返回参数} */
   MisAlarmNonlocalLoginPlaces(data: MisAlarmNonlocalLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<MisAlarmNonlocalLoginPlacesResponse>;
-  /** 修改告警设置 */
+  /** {@link ModifyAlarmAttribute 修改告警设置}({@link ModifyAlarmAttributeRequest 请求参数}): {@link ModifyAlarmAttributeResponse 返回参数} */
   ModifyAlarmAttribute(data: ModifyAlarmAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmAttributeResponse>;
-  /** 设置新增主机自动开通专业版配置 */
+  /** {@link ModifyAutoOpenProVersionConfig 设置新增主机自动开通专业版配置}({@link ModifyAutoOpenProVersionConfigRequest 请求参数}): {@link ModifyAutoOpenProVersionConfigResponse 返回参数} */
   ModifyAutoOpenProVersionConfig(data: ModifyAutoOpenProVersionConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoOpenProVersionConfigResponse>;
-  /** 编辑白名单规则 */
+  /** {@link ModifyLoginWhiteList 编辑白名单规则}({@link ModifyLoginWhiteListRequest 请求参数}): {@link ModifyLoginWhiteListResponse 返回参数} */
   ModifyLoginWhiteList(data: ModifyLoginWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoginWhiteListResponse>;
-  /** 修改专业版续费标识 */
+  /** {@link ModifyProVersionRenewFlag 修改专业版续费标识}({@link ModifyProVersionRenewFlagRequest 请求参数}): {@link ModifyProVersionRenewFlagResponse 返回参数} */
   ModifyProVersionRenewFlag(data: ModifyProVersionRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProVersionRenewFlagResponse>;
-  /** 开通专业版 */
+  /** {@link OpenProVersion 开通专业版}({@link OpenProVersionRequest 请求参数}): {@link OpenProVersionResponse 返回参数} */
   OpenProVersion(data: OpenProVersionRequest, config?: AxiosRequestConfig): AxiosPromise<OpenProVersionResponse>;
-  /** 开通专业版(包年包月) */
+  /** {@link OpenProVersionPrepaid 开通专业版(包年包月)}({@link OpenProVersionPrepaidRequest 请求参数}): {@link OpenProVersionPrepaidResponse 返回参数} */
   OpenProVersionPrepaid(data: OpenProVersionPrepaidRequest, config?: AxiosRequestConfig): AxiosPromise<OpenProVersionPrepaidResponse>;
-  /** 恢复木马文件 */
+  /** {@link RecoverMalwares 恢复木马文件}({@link RecoverMalwaresRequest 请求参数}): {@link RecoverMalwaresResponse 返回参数} */
   RecoverMalwares(data: RecoverMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverMalwaresResponse>;
-  /** 续费专业版 */
+  /** {@link RenewProVersion 续费专业版}({@link RenewProVersionRequest 请求参数}): {@link RenewProVersionResponse 返回参数} */
   RenewProVersion(data: RenewProVersionRequest, config?: AxiosRequestConfig): AxiosPromise<RenewProVersionResponse>;
-  /** 漏洞重新检测 */
+  /** {@link RescanImpactedHost 漏洞重新检测}({@link RescanImpactedHostRequest 请求参数}): {@link RescanImpactedHostResponse 返回参数} */
   RescanImpactedHost(data: RescanImpactedHostRequest, config?: AxiosRequestConfig): AxiosPromise<RescanImpactedHostResponse>;
-  /** 隔离木马 */
+  /** {@link SeparateMalwares 隔离木马}({@link SeparateMalwaresRequest 请求参数}): {@link SeparateMalwaresResponse 返回参数} */
   SeparateMalwares(data: SeparateMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<SeparateMalwaresResponse>;
-  /** 设置高危命令事件状态 */
+  /** {@link SetBashEventsStatus 设置高危命令事件状态}({@link SetBashEventsStatusRequest 请求参数}): {@link SetBashEventsStatusResponse 返回参数} */
   SetBashEventsStatus(data: SetBashEventsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<SetBashEventsStatusResponse>;
-  /** 切换高危命令规则状态 */
+  /** {@link SwitchBashRules 切换高危命令规则状态}({@link SwitchBashRulesRequest 请求参数}): {@link SwitchBashRulesResponse 返回参数} */
   SwitchBashRules(data: SwitchBashRulesRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchBashRulesResponse>;
-  /** 恶意请求添加信任 */
+  /** {@link TrustMaliciousRequest 恶意请求添加信任}({@link TrustMaliciousRequestRequest 请求参数}): {@link TrustMaliciousRequestResponse 返回参数} */
   TrustMaliciousRequest(data: TrustMaliciousRequestRequest, config?: AxiosRequestConfig): AxiosPromise<TrustMaliciousRequestResponse>;
-  /** 信任木马文件 */
+  /** {@link TrustMalwares 信任木马文件}({@link TrustMalwaresRequest 请求参数}): {@link TrustMalwaresResponse 返回参数} */
   TrustMalwares(data: TrustMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<TrustMalwaresResponse>;
-  /** 取消信任恶意请求 */
+  /** {@link UntrustMaliciousRequest 取消信任恶意请求}({@link UntrustMaliciousRequestRequest 请求参数}): {@link UntrustMaliciousRequestResponse 返回参数} */
   UntrustMaliciousRequest(data: UntrustMaliciousRequestRequest, config?: AxiosRequestConfig): AxiosPromise<UntrustMaliciousRequestResponse>;
-  /** 取消信任木马 */
+  /** {@link UntrustMalwares 取消信任木马}({@link UntrustMalwaresRequest 请求参数}): {@link UntrustMalwaresResponse 返回参数} */
   UntrustMalwares(data: UntrustMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<UntrustMalwaresResponse>;
 }
 

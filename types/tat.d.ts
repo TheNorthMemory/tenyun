@@ -626,46 +626,46 @@ declare interface RunCommandResponse {
   RequestId?: string;
 }
 
-/** [腾讯云自动化助手](https://cloud.tencent.com/document/product/1340) */
+/** {@link Tat 自动化助手} */
 declare interface Tat {
   (): Versions;
-  /** 取消命令执行 */
+  /** {@link CancelInvocation 取消命令执行}({@link CancelInvocationRequest 请求参数}): {@link CancelInvocationResponse 返回参数} */
   CancelInvocation(data: CancelInvocationRequest, config?: AxiosRequestConfig): AxiosPromise<CancelInvocationResponse>;
-  /** 创建命令 */
+  /** {@link CreateCommand 创建命令}({@link CreateCommandRequest 请求参数}): {@link CreateCommandResponse 返回参数} */
   CreateCommand(data: CreateCommandRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCommandResponse>;
-  /** 创建执行器 */
+  /** {@link CreateInvoker 创建执行器}({@link CreateInvokerRequest 请求参数}): {@link CreateInvokerResponse 返回参数} */
   CreateInvoker(data: CreateInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInvokerResponse>;
-  /** 删除命令 */
+  /** {@link DeleteCommand 删除命令}({@link DeleteCommandRequest 请求参数}): {@link DeleteCommandResponse 返回参数} */
   DeleteCommand(data: DeleteCommandRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCommandResponse>;
-  /** 删除执行器 */
+  /** {@link DeleteInvoker 删除执行器}({@link DeleteInvokerRequest 请求参数}): {@link DeleteInvokerResponse 返回参数} */
   DeleteInvoker(data: DeleteInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInvokerResponse>;
-  /** 查询客户端状态 */
+  /** {@link DescribeAutomationAgentStatus 查询客户端状态}({@link DescribeAutomationAgentStatusRequest 请求参数}): {@link DescribeAutomationAgentStatusResponse 返回参数} */
   DescribeAutomationAgentStatus(data?: DescribeAutomationAgentStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutomationAgentStatusResponse>;
-  /** 查询命令详情 */
+  /** {@link DescribeCommands 查询命令详情}({@link DescribeCommandsRequest 请求参数}): {@link DescribeCommandsResponse 返回参数} */
   DescribeCommands(data?: DescribeCommandsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCommandsResponse>;
-  /** 查询执行任务 */
+  /** {@link DescribeInvocationTasks 查询执行任务}({@link DescribeInvocationTasksRequest 请求参数}): {@link DescribeInvocationTasksResponse 返回参数} */
   DescribeInvocationTasks(data?: DescribeInvocationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationTasksResponse>;
-  /** 查询执行活动 */
+  /** {@link DescribeInvocations 查询执行活动}({@link DescribeInvocationsRequest 请求参数}): {@link DescribeInvocationsResponse 返回参数} */
   DescribeInvocations(data?: DescribeInvocationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationsResponse>;
-  /** 查询执行器执行记录 */
+  /** {@link DescribeInvokerRecords 查询执行器执行记录}({@link DescribeInvokerRecordsRequest 请求参数}): {@link DescribeInvokerRecordsResponse 返回参数} */
   DescribeInvokerRecords(data?: DescribeInvokerRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvokerRecordsResponse>;
-  /** 查询执行器 */
+  /** {@link DescribeInvokers 查询执行器}({@link DescribeInvokersRequest 请求参数}): {@link DescribeInvokersResponse 返回参数} */
   DescribeInvokers(data?: DescribeInvokersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvokersResponse>;
-  /** 查询地域列表 */
+  /** {@link DescribeRegions 查询地域列表}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** 停用执行器 */
+  /** {@link DisableInvoker 停用执行器}({@link DisableInvokerRequest 请求参数}): {@link DisableInvokerResponse 返回参数} */
   DisableInvoker(data: DisableInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<DisableInvokerResponse>;
-  /** 启用执行器 */
+  /** {@link EnableInvoker 启用执行器}({@link EnableInvokerRequest 请求参数}): {@link EnableInvokerResponse 返回参数} */
   EnableInvoker(data: EnableInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<EnableInvokerResponse>;
-  /** 触发命令 */
+  /** {@link InvokeCommand 触发命令}({@link InvokeCommandRequest 请求参数}): {@link InvokeCommandResponse 返回参数} */
   InvokeCommand(data: InvokeCommandRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeCommandResponse>;
-  /** 修改命令 */
+  /** {@link ModifyCommand 修改命令}({@link ModifyCommandRequest 请求参数}): {@link ModifyCommandResponse 返回参数} */
   ModifyCommand(data: ModifyCommandRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCommandResponse>;
-  /** 修改执行器 */
+  /** {@link ModifyInvoker 修改执行器}({@link ModifyInvokerRequest 请求参数}): {@link ModifyInvokerResponse 返回参数} */
   ModifyInvoker(data: ModifyInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInvokerResponse>;
-  /** 命令预览 */
+  /** {@link PreviewReplacedCommandContent 命令预览}({@link PreviewReplacedCommandContentRequest 请求参数}): {@link PreviewReplacedCommandContentResponse 返回参数} */
   PreviewReplacedCommandContent(data?: PreviewReplacedCommandContentRequest, config?: AxiosRequestConfig): AxiosPromise<PreviewReplacedCommandContentResponse>;
-  /** 执行命令 */
+  /** {@link RunCommand 执行命令}({@link RunCommandRequest 请求参数}): {@link RunCommandResponse 返回参数} */
   RunCommand(data: RunCommandRequest, config?: AxiosRequestConfig): AxiosPromise<RunCommandResponse>;
 }
 

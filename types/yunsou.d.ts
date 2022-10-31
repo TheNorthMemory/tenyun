@@ -216,16 +216,16 @@ declare namespace V20180504 {
   }
 }
 
-/** [腾讯云搜](https://cloud.tencent.com/document/product/270) */
+/** {@link Yunsou 腾讯云搜TCS} */
 declare interface Yunsou {
   (): Versions;
-  /** 云搜数据上传 */
+  /** {@link DataManipulation 云搜数据上传}({@link DataManipulationRequest 请求参数}): {@link DataManipulationResponse 返回参数} */
   DataManipulation(data: DataManipulationRequest, config?: AxiosRequestConfig): AxiosPromise<DataManipulationResponse>;
-  /** 数据检索接口 */
+  /** {@link DataSearch 数据检索接口}({@link DataSearchRequest 请求参数}): {@link DataSearchResponse 返回参数} */
   DataSearch(data: DataSearchRequest, config?: AxiosRequestConfig): AxiosPromise<DataSearchResponse>;
-  /** 云搜数据上传 */
+  /** {@link V20180504.DataManipulation 云搜数据上传}({@link V20180504.DataManipulationRequest 请求参数}): {@link V20180504.DataManipulationResponse 返回参数} */
   DataManipulation(data: V20180504.DataManipulationRequest, config: AxiosRequestConfig & V20180504.VersionHeader): AxiosPromise<V20180504.DataManipulationResponse>;
-  /** 数据检索接口 */
+  /** {@link V20180504.DataSearch 数据检索接口}({@link V20180504.DataSearchRequest 请求参数}): {@link V20180504.DataSearchResponse 返回参数} */
   DataSearch(data: V20180504.DataSearchRequest, config: AxiosRequestConfig & V20180504.VersionHeader): AxiosPromise<V20180504.DataSearchResponse>;
 }
 

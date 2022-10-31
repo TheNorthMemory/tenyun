@@ -4422,138 +4422,138 @@ declare interface ResetWorkflowResponse {
   RequestId?: string;
 }
 
-/** [视频处理](https://cloud.tencent.com/document/product/862) */
+/** {@link Mps 媒体处理} */
 declare interface Mps {
   (): Versions;
-  /** 创建内容分析模板 */
+  /** {@link CreateAIAnalysisTemplate 创建内容分析模板}({@link CreateAIAnalysisTemplateRequest 请求参数}): {@link CreateAIAnalysisTemplateResponse 返回参数} */
   CreateAIAnalysisTemplate(data?: CreateAIAnalysisTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIAnalysisTemplateResponse>;
-  /** 创建内容识别模板 */
+  /** {@link CreateAIRecognitionTemplate 创建内容识别模板}({@link CreateAIRecognitionTemplateRequest 请求参数}): {@link CreateAIRecognitionTemplateResponse 返回参数} */
   CreateAIRecognitionTemplate(data?: CreateAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIRecognitionTemplateResponse>;
-  /** 创建转自适应码流模板 */
+  /** {@link CreateAdaptiveDynamicStreamingTemplate 创建转自适应码流模板}({@link CreateAdaptiveDynamicStreamingTemplateRequest 请求参数}): {@link CreateAdaptiveDynamicStreamingTemplateResponse 返回参数} */
   CreateAdaptiveDynamicStreamingTemplate(data: CreateAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdaptiveDynamicStreamingTemplateResponse>;
-  /** 创建转动图模板 */
+  /** {@link CreateAnimatedGraphicsTemplate 创建转动图模板}({@link CreateAnimatedGraphicsTemplateRequest 请求参数}): {@link CreateAnimatedGraphicsTemplateResponse 返回参数} */
   CreateAnimatedGraphicsTemplate(data: CreateAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAnimatedGraphicsTemplateResponse>;
-  /** 创建内容审核模板 */
+  /** {@link CreateContentReviewTemplate 创建内容审核模板}({@link CreateContentReviewTemplateRequest 请求参数}): {@link CreateContentReviewTemplateResponse 返回参数} */
   CreateContentReviewTemplate(data?: CreateContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContentReviewTemplateResponse>;
-  /** 创建雪碧图模板 */
+  /** {@link CreateImageSpriteTemplate 创建雪碧图模板}({@link CreateImageSpriteTemplateRequest 请求参数}): {@link CreateImageSpriteTemplateResponse 返回参数} */
   CreateImageSpriteTemplate(data: CreateImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageSpriteTemplateResponse>;
-  /** 创建素材样本 */
+  /** {@link CreatePersonSample 创建素材样本}({@link CreatePersonSampleRequest 请求参数}): {@link CreatePersonSampleResponse 返回参数} */
   CreatePersonSample(data: CreatePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonSampleResponse>;
-  /** 创建采样截图模板 */
+  /** {@link CreateSampleSnapshotTemplate 创建采样截图模板}({@link CreateSampleSnapshotTemplateRequest 请求参数}): {@link CreateSampleSnapshotTemplateResponse 返回参数} */
   CreateSampleSnapshotTemplate(data: CreateSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSampleSnapshotTemplateResponse>;
-  /** 创建指定时间点截图模板 */
+  /** {@link CreateSnapshotByTimeOffsetTemplate 创建指定时间点截图模板}({@link CreateSnapshotByTimeOffsetTemplateRequest 请求参数}): {@link CreateSnapshotByTimeOffsetTemplateResponse 返回参数} */
   CreateSnapshotByTimeOffsetTemplate(data?: CreateSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotByTimeOffsetTemplateResponse>;
-  /** 创建转码模板 */
+  /** {@link CreateTranscodeTemplate 创建转码模板}({@link CreateTranscodeTemplateRequest 请求参数}): {@link CreateTranscodeTemplateResponse 返回参数} */
   CreateTranscodeTemplate(data: CreateTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTranscodeTemplateResponse>;
-  /** 创建水印模板 */
+  /** {@link CreateWatermarkTemplate 创建水印模板}({@link CreateWatermarkTemplateRequest 请求参数}): {@link CreateWatermarkTemplateResponse 返回参数} */
   CreateWatermarkTemplate(data: CreateWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWatermarkTemplateResponse>;
-  /** 创建关键词样本 */
+  /** {@link CreateWordSamples 创建关键词样本}({@link CreateWordSamplesRequest 请求参数}): {@link CreateWordSamplesResponse 返回参数} */
   CreateWordSamples(data: CreateWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWordSamplesResponse>;
-  /** 创建工作流 */
+  /** {@link CreateWorkflow 创建工作流}({@link CreateWorkflowRequest 请求参数}): {@link CreateWorkflowResponse 返回参数} */
   CreateWorkflow(data: CreateWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowResponse>;
-  /** 删除内容分析模板 */
+  /** {@link DeleteAIAnalysisTemplate 删除内容分析模板}({@link DeleteAIAnalysisTemplateRequest 请求参数}): {@link DeleteAIAnalysisTemplateResponse 返回参数} */
   DeleteAIAnalysisTemplate(data: DeleteAIAnalysisTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAIAnalysisTemplateResponse>;
-  /** 删除内容识别模板 */
+  /** {@link DeleteAIRecognitionTemplate 删除内容识别模板}({@link DeleteAIRecognitionTemplateRequest 请求参数}): {@link DeleteAIRecognitionTemplateResponse 返回参数} */
   DeleteAIRecognitionTemplate(data: DeleteAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAIRecognitionTemplateResponse>;
-  /** 删除转自适应码流模板 */
+  /** {@link DeleteAdaptiveDynamicStreamingTemplate 删除转自适应码流模板}({@link DeleteAdaptiveDynamicStreamingTemplateRequest 请求参数}): {@link DeleteAdaptiveDynamicStreamingTemplateResponse 返回参数} */
   DeleteAdaptiveDynamicStreamingTemplate(data: DeleteAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAdaptiveDynamicStreamingTemplateResponse>;
-  /** 删除转动图模板 */
+  /** {@link DeleteAnimatedGraphicsTemplate 删除转动图模板}({@link DeleteAnimatedGraphicsTemplateRequest 请求参数}): {@link DeleteAnimatedGraphicsTemplateResponse 返回参数} */
   DeleteAnimatedGraphicsTemplate(data: DeleteAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAnimatedGraphicsTemplateResponse>;
-  /** 删除内容审核模板 */
+  /** {@link DeleteContentReviewTemplate 删除内容审核模板}({@link DeleteContentReviewTemplateRequest 请求参数}): {@link DeleteContentReviewTemplateResponse 返回参数} */
   DeleteContentReviewTemplate(data: DeleteContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteContentReviewTemplateResponse>;
-  /** 删除雪碧图模板 */
+  /** {@link DeleteImageSpriteTemplate 删除雪碧图模板}({@link DeleteImageSpriteTemplateRequest 请求参数}): {@link DeleteImageSpriteTemplateResponse 返回参数} */
   DeleteImageSpriteTemplate(data: DeleteImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageSpriteTemplateResponse>;
-  /** 删除素材样本 */
+  /** {@link DeletePersonSample 删除素材样本}({@link DeletePersonSampleRequest 请求参数}): {@link DeletePersonSampleResponse 返回参数} */
   DeletePersonSample(data: DeletePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonSampleResponse>;
-  /** 删除采样截图模板 */
+  /** {@link DeleteSampleSnapshotTemplate 删除采样截图模板}({@link DeleteSampleSnapshotTemplateRequest 请求参数}): {@link DeleteSampleSnapshotTemplateResponse 返回参数} */
   DeleteSampleSnapshotTemplate(data: DeleteSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSampleSnapshotTemplateResponse>;
-  /** 删除指定时间点截图模板 */
+  /** {@link DeleteSnapshotByTimeOffsetTemplate 删除指定时间点截图模板}({@link DeleteSnapshotByTimeOffsetTemplateRequest 请求参数}): {@link DeleteSnapshotByTimeOffsetTemplateResponse 返回参数} */
   DeleteSnapshotByTimeOffsetTemplate(data: DeleteSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotByTimeOffsetTemplateResponse>;
-  /** 删除转码模板 */
+  /** {@link DeleteTranscodeTemplate 删除转码模板}({@link DeleteTranscodeTemplateRequest 请求参数}): {@link DeleteTranscodeTemplateResponse 返回参数} */
   DeleteTranscodeTemplate(data: DeleteTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTranscodeTemplateResponse>;
-  /** 删除水印模板 */
+  /** {@link DeleteWatermarkTemplate 删除水印模板}({@link DeleteWatermarkTemplateRequest 请求参数}): {@link DeleteWatermarkTemplateResponse 返回参数} */
   DeleteWatermarkTemplate(data: DeleteWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWatermarkTemplateResponse>;
-  /** 删除关键词样本 */
+  /** {@link DeleteWordSamples 删除关键词样本}({@link DeleteWordSamplesRequest 请求参数}): {@link DeleteWordSamplesResponse 返回参数} */
   DeleteWordSamples(data: DeleteWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWordSamplesResponse>;
-  /** 删除工作流 */
+  /** {@link DeleteWorkflow 删除工作流}({@link DeleteWorkflowRequest 请求参数}): {@link DeleteWorkflowResponse 返回参数} */
   DeleteWorkflow(data: DeleteWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkflowResponse>;
-  /** 获取内容分析模板列表 */
+  /** {@link DescribeAIAnalysisTemplates 获取内容分析模板列表}({@link DescribeAIAnalysisTemplatesRequest 请求参数}): {@link DescribeAIAnalysisTemplatesResponse 返回参数} */
   DescribeAIAnalysisTemplates(data?: DescribeAIAnalysisTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAnalysisTemplatesResponse>;
-  /** 获取内容识别模板列表 */
+  /** {@link DescribeAIRecognitionTemplates 获取内容识别模板列表}({@link DescribeAIRecognitionTemplatesRequest 请求参数}): {@link DescribeAIRecognitionTemplatesResponse 返回参数} */
   DescribeAIRecognitionTemplates(data?: DescribeAIRecognitionTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIRecognitionTemplatesResponse>;
-  /** 获取转自适应码流模板列表 */
+  /** {@link DescribeAdaptiveDynamicStreamingTemplates 获取转自适应码流模板列表}({@link DescribeAdaptiveDynamicStreamingTemplatesRequest 请求参数}): {@link DescribeAdaptiveDynamicStreamingTemplatesResponse 返回参数} */
   DescribeAdaptiveDynamicStreamingTemplates(data?: DescribeAdaptiveDynamicStreamingTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAdaptiveDynamicStreamingTemplatesResponse>;
-  /** 获取转动图模板列表 */
+  /** {@link DescribeAnimatedGraphicsTemplates 获取转动图模板列表}({@link DescribeAnimatedGraphicsTemplatesRequest 请求参数}): {@link DescribeAnimatedGraphicsTemplatesResponse 返回参数} */
   DescribeAnimatedGraphicsTemplates(data?: DescribeAnimatedGraphicsTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnimatedGraphicsTemplatesResponse>;
-  /** 获取智能审核模板列表 */
+  /** {@link DescribeContentReviewTemplates 获取智能审核模板列表}({@link DescribeContentReviewTemplatesRequest 请求参数}): {@link DescribeContentReviewTemplatesResponse 返回参数} */
   DescribeContentReviewTemplates(data?: DescribeContentReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentReviewTemplatesResponse>;
-  /** 获取雪碧图模板列表 */
+  /** {@link DescribeImageSpriteTemplates 获取雪碧图模板列表}({@link DescribeImageSpriteTemplatesRequest 请求参数}): {@link DescribeImageSpriteTemplatesResponse 返回参数} */
   DescribeImageSpriteTemplates(data?: DescribeImageSpriteTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSpriteTemplatesResponse>;
-  /** 获取媒体元信息 */
+  /** {@link DescribeMediaMetaData 获取媒体元信息}({@link DescribeMediaMetaDataRequest 请求参数}): {@link DescribeMediaMetaDataResponse 返回参数} */
   DescribeMediaMetaData(data: DescribeMediaMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaMetaDataResponse>;
-  /** 获取素材样本列表 */
+  /** {@link DescribePersonSamples 获取素材样本列表}({@link DescribePersonSamplesRequest 请求参数}): {@link DescribePersonSamplesResponse 返回参数} */
   DescribePersonSamples(data?: DescribePersonSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonSamplesResponse>;
-  /** 获取采样截图模板列表 */
+  /** {@link DescribeSampleSnapshotTemplates 获取采样截图模板列表}({@link DescribeSampleSnapshotTemplatesRequest 请求参数}): {@link DescribeSampleSnapshotTemplatesResponse 返回参数} */
   DescribeSampleSnapshotTemplates(data?: DescribeSampleSnapshotTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleSnapshotTemplatesResponse>;
-  /** 获取指定时间点截图模板列表 */
+  /** {@link DescribeSnapshotByTimeOffsetTemplates 获取指定时间点截图模板列表}({@link DescribeSnapshotByTimeOffsetTemplatesRequest 请求参数}): {@link DescribeSnapshotByTimeOffsetTemplatesResponse 返回参数} */
   DescribeSnapshotByTimeOffsetTemplates(data?: DescribeSnapshotByTimeOffsetTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotByTimeOffsetTemplatesResponse>;
-  /** 查询任务详情 */
+  /** {@link DescribeTaskDetail 查询任务详情}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** 获取任务列表 */
+  /** {@link DescribeTasks 获取任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
   DescribeTasks(data: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** 获取转码模板列表 */
+  /** {@link DescribeTranscodeTemplates 获取转码模板列表}({@link DescribeTranscodeTemplatesRequest 请求参数}): {@link DescribeTranscodeTemplatesResponse 返回参数} */
   DescribeTranscodeTemplates(data?: DescribeTranscodeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeTemplatesResponse>;
-  /** 获取水印模板列表 */
+  /** {@link DescribeWatermarkTemplates 获取水印模板列表}({@link DescribeWatermarkTemplatesRequest 请求参数}): {@link DescribeWatermarkTemplatesResponse 返回参数} */
   DescribeWatermarkTemplates(data?: DescribeWatermarkTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWatermarkTemplatesResponse>;
-  /** 获取关键词样本列表 */
+  /** {@link DescribeWordSamples 获取关键词样本列表}({@link DescribeWordSamplesRequest 请求参数}): {@link DescribeWordSamplesResponse 返回参数} */
   DescribeWordSamples(data?: DescribeWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWordSamplesResponse>;
-  /** 获取工作流列表 */
+  /** {@link DescribeWorkflows 获取工作流列表}({@link DescribeWorkflowsRequest 请求参数}): {@link DescribeWorkflowsResponse 返回参数} */
   DescribeWorkflows(data?: DescribeWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowsResponse>;
-  /** 禁用工作流 */
+  /** {@link DisableWorkflow 禁用工作流}({@link DisableWorkflowRequest 请求参数}): {@link DisableWorkflowResponse 返回参数} */
   DisableWorkflow(data: DisableWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<DisableWorkflowResponse>;
-  /** 编辑视频 */
+  /** {@link EditMedia 编辑视频}({@link EditMediaRequest 请求参数}): {@link EditMediaResponse 返回参数} */
   EditMedia(data: EditMediaRequest, config?: AxiosRequestConfig): AxiosPromise<EditMediaResponse>;
-  /** 启用工作流 */
+  /** {@link EnableWorkflow 启用工作流}({@link EnableWorkflowRequest 请求参数}): {@link EnableWorkflowResponse 返回参数} */
   EnableWorkflow(data: EnableWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<EnableWorkflowResponse>;
-  /** 执行定制 API */
+  /** {@link ExecuteFunction 执行定制 API}({@link ExecuteFunctionRequest 请求参数}): {@link ExecuteFunctionResponse 返回参数} */
   ExecuteFunction(data: ExecuteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteFunctionResponse>;
-  /** 任务管理 */
+  /** {@link ManageTask 任务管理}({@link ManageTaskRequest 请求参数}): {@link ManageTaskResponse 返回参数} */
   ManageTask(data: ManageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ManageTaskResponse>;
-  /** 修改内容分析模板 */
+  /** {@link ModifyAIAnalysisTemplate 修改内容分析模板}({@link ModifyAIAnalysisTemplateRequest 请求参数}): {@link ModifyAIAnalysisTemplateResponse 返回参数} */
   ModifyAIAnalysisTemplate(data: ModifyAIAnalysisTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAIAnalysisTemplateResponse>;
-  /** 修改内容识别模板 */
+  /** {@link ModifyAIRecognitionTemplate 修改内容识别模板}({@link ModifyAIRecognitionTemplateRequest 请求参数}): {@link ModifyAIRecognitionTemplateResponse 返回参数} */
   ModifyAIRecognitionTemplate(data: ModifyAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAIRecognitionTemplateResponse>;
-  /** 修改转自适应码流模板 */
+  /** {@link ModifyAdaptiveDynamicStreamingTemplate 修改转自适应码流模板}({@link ModifyAdaptiveDynamicStreamingTemplateRequest 请求参数}): {@link ModifyAdaptiveDynamicStreamingTemplateResponse 返回参数} */
   ModifyAdaptiveDynamicStreamingTemplate(data: ModifyAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAdaptiveDynamicStreamingTemplateResponse>;
-  /** 修改转动图模板 */
+  /** {@link ModifyAnimatedGraphicsTemplate 修改转动图模板}({@link ModifyAnimatedGraphicsTemplateRequest 请求参数}): {@link ModifyAnimatedGraphicsTemplateResponse 返回参数} */
   ModifyAnimatedGraphicsTemplate(data: ModifyAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAnimatedGraphicsTemplateResponse>;
-  /** 修改内容审核模板 */
+  /** {@link ModifyContentReviewTemplate 修改内容审核模板}({@link ModifyContentReviewTemplateRequest 请求参数}): {@link ModifyContentReviewTemplateResponse 返回参数} */
   ModifyContentReviewTemplate(data: ModifyContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContentReviewTemplateResponse>;
-  /** 修改雪碧图模板 */
+  /** {@link ModifyImageSpriteTemplate 修改雪碧图模板}({@link ModifyImageSpriteTemplateRequest 请求参数}): {@link ModifyImageSpriteTemplateResponse 返回参数} */
   ModifyImageSpriteTemplate(data: ModifyImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageSpriteTemplateResponse>;
-  /** 修改素材样本 */
+  /** {@link ModifyPersonSample 修改素材样本}({@link ModifyPersonSampleRequest 请求参数}): {@link ModifyPersonSampleResponse 返回参数} */
   ModifyPersonSample(data: ModifyPersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonSampleResponse>;
-  /** 修改采样截图模板 */
+  /** {@link ModifySampleSnapshotTemplate 修改采样截图模板}({@link ModifySampleSnapshotTemplateRequest 请求参数}): {@link ModifySampleSnapshotTemplateResponse 返回参数} */
   ModifySampleSnapshotTemplate(data: ModifySampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySampleSnapshotTemplateResponse>;
-  /** 修改指定时间点截图模板 */
+  /** {@link ModifySnapshotByTimeOffsetTemplate 修改指定时间点截图模板}({@link ModifySnapshotByTimeOffsetTemplateRequest 请求参数}): {@link ModifySnapshotByTimeOffsetTemplateResponse 返回参数} */
   ModifySnapshotByTimeOffsetTemplate(data: ModifySnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotByTimeOffsetTemplateResponse>;
-  /** 修改转码模板 */
+  /** {@link ModifyTranscodeTemplate 修改转码模板}({@link ModifyTranscodeTemplateRequest 请求参数}): {@link ModifyTranscodeTemplateResponse 返回参数} */
   ModifyTranscodeTemplate(data: ModifyTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTranscodeTemplateResponse>;
-  /** 修改水印模板 */
+  /** {@link ModifyWatermarkTemplate 修改水印模板}({@link ModifyWatermarkTemplateRequest 请求参数}): {@link ModifyWatermarkTemplateResponse 返回参数} */
   ModifyWatermarkTemplate(data: ModifyWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWatermarkTemplateResponse>;
-  /** 修改关键词样本 */
+  /** {@link ModifyWordSample 修改关键词样本}({@link ModifyWordSampleRequest 请求参数}): {@link ModifyWordSampleResponse 返回参数} */
   ModifyWordSample(data: ModifyWordSampleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWordSampleResponse>;
-  /** 解析直播流处理结果 */
+  /** {@link ParseLiveStreamProcessNotification 解析直播流处理结果}({@link ParseLiveStreamProcessNotificationRequest 请求参数}): {@link ParseLiveStreamProcessNotificationResponse 返回参数} */
   ParseLiveStreamProcessNotification(data: ParseLiveStreamProcessNotificationRequest, config?: AxiosRequestConfig): AxiosPromise<ParseLiveStreamProcessNotificationResponse>;
-  /** 解析事件通知 */
+  /** {@link ParseNotification 解析事件通知}({@link ParseNotificationRequest 请求参数}): {@link ParseNotificationResponse 返回参数} */
   ParseNotification(data: ParseNotificationRequest, config?: AxiosRequestConfig): AxiosPromise<ParseNotificationResponse>;
-  /** 对直播流发起处理 */
+  /** {@link ProcessLiveStream 对直播流发起处理}({@link ProcessLiveStreamRequest 请求参数}): {@link ProcessLiveStreamResponse 返回参数} */
   ProcessLiveStream(data: ProcessLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessLiveStreamResponse>;
-  /** 发起媒体处理 */
+  /** {@link ProcessMedia 发起媒体处理}({@link ProcessMediaRequest 请求参数}): {@link ProcessMediaResponse 返回参数} */
   ProcessMedia(data: ProcessMediaRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessMediaResponse>;
-  /** 智学智能媒体识别 */
+  /** {@link RecognizeMediaForZhiXue 智学智能媒体识别}({@link RecognizeMediaForZhiXueRequest 请求参数}): {@link RecognizeMediaForZhiXueResponse 返回参数} */
   RecognizeMediaForZhiXue(data: RecognizeMediaForZhiXueRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeMediaForZhiXueResponse>;
-  /** 重设工作流 */
+  /** {@link ResetWorkflow 重设工作流}({@link ResetWorkflowRequest 请求参数}): {@link ResetWorkflowResponse 返回参数} */
   ResetWorkflow(data: ResetWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<ResetWorkflowResponse>;
 }
 

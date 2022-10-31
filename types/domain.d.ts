@@ -664,60 +664,60 @@ declare interface UploadImageResponse {
   RequestId?: string;
 }
 
-/** [域名注册](https://cloud.tencent.com/document/product/242) */
+/** {@link Domain 域名注册} */
 declare interface Domain {
   (): Versions;
-  /** 批量域名信息修改 */
+  /** {@link BatchModifyDomainInfo 批量域名信息修改}({@link BatchModifyDomainInfoRequest 请求参数}): {@link BatchModifyDomainInfoResponse 返回参数} */
   BatchModifyDomainInfo(data: BatchModifyDomainInfoRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyDomainInfoResponse>;
-  /** 批量操作日志状态 */
+  /** {@link CheckBatchStatus 批量操作日志状态}({@link CheckBatchStatusRequest 请求参数}): {@link CheckBatchStatusResponse 返回参数} */
   CheckBatchStatus(data: CheckBatchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<CheckBatchStatusResponse>;
-  /** 域名注册查询 */
+  /** {@link CheckDomain 域名注册查询}({@link CheckDomainRequest 请求参数}): {@link CheckDomainResponse 返回参数} */
   CheckDomain(data: CheckDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDomainResponse>;
-  /** 批量域名注册 */
+  /** {@link CreateDomainBatch 批量域名注册}({@link CreateDomainBatchRequest 请求参数}): {@link CreateDomainBatchResponse 返回参数} */
   CreateDomainBatch(data: CreateDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainBatchResponse>;
-  /** 验证手机邮箱 */
+  /** {@link CreatePhoneEmail 验证手机邮箱}({@link CreatePhoneEmailRequest 请求参数}): {@link CreatePhoneEmailResponse 返回参数} */
   CreatePhoneEmail(data: CreatePhoneEmailRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePhoneEmailResponse>;
-  /** 添加域名信息模板 */
+  /** {@link CreateTemplate 添加域名信息模板}({@link CreateTemplateRequest 请求参数}): {@link CreateTemplateResponse 返回参数} */
   CreateTemplate(data: CreateTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTemplateResponse>;
-  /** 删除手机邮箱 */
+  /** {@link DeletePhoneEmail 删除手机邮箱}({@link DeletePhoneEmailRequest 请求参数}): {@link DeletePhoneEmailResponse 返回参数} */
   DeletePhoneEmail(data: DeletePhoneEmailRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePhoneEmailResponse>;
-  /** 删除信息模板 */
+  /** {@link DeleteTemplate 删除信息模板}({@link DeleteTemplateRequest 请求参数}): {@link DeleteTemplateResponse 返回参数} */
   DeleteTemplate(data: DeleteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTemplateResponse>;
-  /** 批量操作日志详情 */
+  /** {@link DescribeBatchOperationLogDetails 批量操作日志详情}({@link DescribeBatchOperationLogDetailsRequest 请求参数}): {@link DescribeBatchOperationLogDetailsResponse 返回参数} */
   DescribeBatchOperationLogDetails(data: DescribeBatchOperationLogDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOperationLogDetailsResponse>;
-  /** 批量操作日志列表 */
+  /** {@link DescribeBatchOperationLogs 批量操作日志列表}({@link DescribeBatchOperationLogsRequest 请求参数}): {@link DescribeBatchOperationLogsResponse 返回参数} */
   DescribeBatchOperationLogs(data?: DescribeBatchOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOperationLogsResponse>;
-  /** 域名基本信息 */
+  /** {@link DescribeDomainBaseInfo 域名基本信息}({@link DescribeDomainBaseInfoRequest 请求参数}): {@link DescribeDomainBaseInfoResponse 返回参数} */
   DescribeDomainBaseInfo(data: DescribeDomainBaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainBaseInfoResponse>;
-  /** 我的域名列表 */
+  /** {@link DescribeDomainNameList 我的域名列表}({@link DescribeDomainNameListRequest 请求参数}): {@link DescribeDomainNameListResponse 返回参数} */
   DescribeDomainNameList(data?: DescribeDomainNameListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainNameListResponse>;
-  /** 域名价格列表 */
+  /** {@link DescribeDomainPriceList 域名价格列表}({@link DescribeDomainPriceListRequest 请求参数}): {@link DescribeDomainPriceListResponse 返回参数} */
   DescribeDomainPriceList(data?: DescribeDomainPriceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainPriceListResponse>;
-  /** 获取域名实名信息 */
+  /** {@link DescribeDomainSimpleInfo 获取域名实名信息}({@link DescribeDomainSimpleInfoRequest 请求参数}): {@link DescribeDomainSimpleInfoResponse 返回参数} */
   DescribeDomainSimpleInfo(data: DescribeDomainSimpleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainSimpleInfoResponse>;
-  /** 已验证手机邮箱列表 */
+  /** {@link DescribePhoneEmailList 已验证手机邮箱列表}({@link DescribePhoneEmailListRequest 请求参数}): {@link DescribePhoneEmailListResponse 返回参数} */
   DescribePhoneEmailList(data?: DescribePhoneEmailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePhoneEmailListResponse>;
-  /** 获取模板信息 */
+  /** {@link DescribeTemplate 获取模板信息}({@link DescribeTemplateRequest 请求参数}): {@link DescribeTemplateResponse 返回参数} */
   DescribeTemplate(data: DescribeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateResponse>;
-  /** 信息模板列表 */
+  /** {@link DescribeTemplateList 信息模板列表}({@link DescribeTemplateListRequest 请求参数}): {@link DescribeTemplateListResponse 返回参数} */
   DescribeTemplateList(data?: DescribeTemplateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateListResponse>;
-  /** 批量域名 DNS 修改 */
+  /** {@link ModifyDomainDNSBatch 批量域名 DNS 修改}({@link ModifyDomainDNSBatchRequest 请求参数}): {@link ModifyDomainDNSBatchResponse 返回参数} */
   ModifyDomainDNSBatch(data: ModifyDomainDNSBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainDNSBatchResponse>;
-  /** 批量账号间转移 */
+  /** {@link ModifyDomainOwnerBatch 批量账号间转移}({@link ModifyDomainOwnerBatchRequest 请求参数}): {@link ModifyDomainOwnerBatchResponse 返回参数} */
   ModifyDomainOwnerBatch(data: ModifyDomainOwnerBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainOwnerBatchResponse>;
-  /** 批量域名续费 */
+  /** {@link RenewDomainBatch 批量域名续费}({@link RenewDomainBatchRequest 请求参数}): {@link RenewDomainBatchResponse 返回参数} */
   RenewDomainBatch(data: RenewDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDomainBatchResponse>;
-  /** 发送手机邮箱验证码 */
+  /** {@link SendPhoneEmailCode 发送手机邮箱验证码}({@link SendPhoneEmailCodeRequest 请求参数}): {@link SendPhoneEmailCodeResponse 返回参数} */
   SendPhoneEmailCode(data: SendPhoneEmailCodeRequest, config?: AxiosRequestConfig): AxiosPromise<SendPhoneEmailCodeResponse>;
-  /** 域名自动续费 */
+  /** {@link SetDomainAutoRenew 域名自动续费}({@link SetDomainAutoRenewRequest 请求参数}): {@link SetDomainAutoRenewResponse 返回参数} */
   SetDomainAutoRenew(data: SetDomainAutoRenewRequest, config?: AxiosRequestConfig): AxiosPromise<SetDomainAutoRenewResponse>;
-  /** 批量域名转入 */
+  /** {@link TransferInDomainBatch 批量域名转入}({@link TransferInDomainBatchRequest 请求参数}): {@link TransferInDomainBatchResponse 返回参数} */
   TransferInDomainBatch(data: TransferInDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<TransferInDomainBatchResponse>;
-  /** 批量禁止转移锁 */
+  /** {@link TransferProhibitionBatch 批量禁止转移锁}({@link TransferProhibitionBatchRequest 请求参数}): {@link TransferProhibitionBatchResponse 返回参数} */
   TransferProhibitionBatch(data: TransferProhibitionBatchRequest, config?: AxiosRequestConfig): AxiosPromise<TransferProhibitionBatchResponse>;
-  /** 批量禁止更新锁 */
+  /** {@link UpdateProhibitionBatch 批量禁止更新锁}({@link UpdateProhibitionBatchRequest 请求参数}): {@link UpdateProhibitionBatchResponse 返回参数} */
   UpdateProhibitionBatch(data: UpdateProhibitionBatchRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProhibitionBatchResponse>;
-  /** 证件图片上传 */
+  /** {@link UploadImage 证件图片上传}({@link UploadImageRequest 请求参数}): {@link UploadImageResponse 返回参数} */
   UploadImage(data: UploadImageRequest, config?: AxiosRequestConfig): AxiosPromise<UploadImageResponse>;
 }
 

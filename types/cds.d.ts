@@ -152,20 +152,20 @@ declare interface ModifyDbauditInstancesRenewFlagResponse {
   RequestId?: string;
 }
 
-/** [数据安全审计](https://cloud.tencent.com/document/product/856) */
+/** {@link Cds T-Sec-数据安全审计（DSA）} */
 declare interface Cds {
   (): Versions;
-  /** 数盾-DASB-获取镜像列表 */
+  /** {@link DescribeDasbImageIds 数盾-DASB-获取镜像列表}({@link DescribeDasbImageIdsRequest 请求参数}): {@link DescribeDasbImageIdsResponse 返回参数} */
   DescribeDasbImageIds(data?: DescribeDasbImageIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDasbImageIdsResponse>;
-  /** 获取产品规格信息列表 */
+  /** {@link DescribeDbauditInstanceType 获取产品规格信息列表}({@link DescribeDbauditInstanceTypeRequest 请求参数}): {@link DescribeDbauditInstanceTypeResponse 返回参数} */
   DescribeDbauditInstanceType(data?: DescribeDbauditInstanceTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbauditInstanceTypeResponse>;
-  /** 获取数据安全审计实例列表 */
+  /** {@link DescribeDbauditInstances 获取数据安全审计实例列表}({@link DescribeDbauditInstancesRequest 请求参数}): {@link DescribeDbauditInstancesResponse 返回参数} */
   DescribeDbauditInstances(data?: DescribeDbauditInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbauditInstancesResponse>;
-  /** 查询可售卖地域列表 */
+  /** {@link DescribeDbauditUsedRegions 查询可售卖地域列表}({@link DescribeDbauditUsedRegionsRequest 请求参数}): {@link DescribeDbauditUsedRegionsResponse 返回参数} */
   DescribeDbauditUsedRegions(data?: DescribeDbauditUsedRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbauditUsedRegionsResponse>;
-  /** 数据安全审计产品实例询价 */
+  /** {@link InquiryPriceDbauditInstance 数据安全审计产品实例询价}({@link InquiryPriceDbauditInstanceRequest 请求参数}): {@link InquiryPriceDbauditInstanceResponse 返回参数} */
   InquiryPriceDbauditInstance(data: InquiryPriceDbauditInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceDbauditInstanceResponse>;
-  /** 修改实例续费标识 */
+  /** {@link ModifyDbauditInstancesRenewFlag 修改实例续费标识}({@link ModifyDbauditInstancesRenewFlagRequest 请求参数}): {@link ModifyDbauditInstancesRenewFlagResponse 返回参数} */
   ModifyDbauditInstancesRenewFlag(data: ModifyDbauditInstancesRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDbauditInstancesRenewFlagResponse>;
 }
 

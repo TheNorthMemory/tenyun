@@ -220,20 +220,20 @@ declare namespace V20190311 {
   }
 }
 
-/** [腾讯智能对话平台](https://cloud.tencent.com/document/product/1060) */
+/** {@link Tbp 腾讯智能对话平台} */
 declare interface Tbp {
   (): Versions;
-  /** 文本处理 */
+  /** {@link TextProcess 文本处理}({@link TextProcessRequest 请求参数}): {@link TextProcessResponse 返回参数} */
   TextProcess(data: TextProcessRequest, config?: AxiosRequestConfig): AxiosPromise<TextProcessResponse>;
-  /** 会话重置 */
+  /** {@link TextReset 会话重置}({@link TextResetRequest 请求参数}): {@link TextResetResponse 返回参数} */
   TextReset(data: TextResetRequest, config?: AxiosRequestConfig): AxiosPromise<TextResetResponse>;
-  /** 创建机器人 */
+  /** {@link V20190311.CreateBot 创建机器人}({@link V20190311.CreateBotRequest 请求参数}): {@link V20190311.CreateBotResponse 返回参数} */
   CreateBot(data: V20190311.CreateBotRequest, config: AxiosRequestConfig & V20190311.VersionHeader): AxiosPromise<V20190311.CreateBotResponse>;
-  /** 复位 */
+  /** {@link V20190311.Reset 复位}({@link V20190311.ResetRequest 请求参数}): {@link V20190311.ResetResponse 返回参数} */
   Reset(data: V20190311.ResetRequest, config: AxiosRequestConfig & V20190311.VersionHeader): AxiosPromise<V20190311.ResetResponse>;
-  /** 文本处理 */
+  /** {@link V20190311.TextProcess 文本处理}({@link V20190311.TextProcessRequest 请求参数}): {@link V20190311.TextProcessResponse 返回参数} */
   TextProcess(data: V20190311.TextProcessRequest, config: AxiosRequestConfig & V20190311.VersionHeader): AxiosPromise<V20190311.TextProcessResponse>;
-  /** 会话重置 */
+  /** {@link V20190311.TextReset 会话重置}({@link V20190311.TextResetRequest 请求参数}): {@link V20190311.TextResetResponse 返回参数} */
   TextReset(data: V20190311.TextResetRequest, config: AxiosRequestConfig & V20190311.VersionHeader): AxiosPromise<V20190311.TextResetResponse>;
 }
 

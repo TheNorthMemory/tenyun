@@ -948,58 +948,58 @@ declare interface TriggerJobSavepointResponse {
   RequestId?: string;
 }
 
-/** [流计算 Oceanus](https://cloud.tencent.com/document/product/849) */
+/** {@link Oceanus 流计算 Oceanus} */
 declare interface Oceanus {
   (): Versions;
-  /** 检查快照是否可用 */
+  /** {@link CheckSavepoint 检查快照是否可用}({@link CheckSavepointRequest 请求参数}): {@link CheckSavepointResponse 返回参数} */
   CheckSavepoint(data: CheckSavepointRequest, config?: AxiosRequestConfig): AxiosPromise<CheckSavepointResponse>;
-  /** 复制作业 */
+  /** {@link CopyJobs 复制作业}({@link CopyJobsRequest 请求参数}): {@link CopyJobsResponse 返回参数} */
   CopyJobs(data: CopyJobsRequest, config?: AxiosRequestConfig): AxiosPromise<CopyJobsResponse>;
-  /** 创建文件夹 */
+  /** {@link CreateFolder 创建文件夹}({@link CreateFolderRequest 请求参数}): {@link CreateFolderResponse 返回参数} */
   CreateFolder(data: CreateFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFolderResponse>;
-  /** 新建作业 */
+  /** {@link CreateJob 新建作业}({@link CreateJobRequest 请求参数}): {@link CreateJobResponse 返回参数} */
   CreateJob(data: CreateJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobResponse>;
-  /** 创建作业配置 */
+  /** {@link CreateJobConfig 创建作业配置}({@link CreateJobConfigRequest 请求参数}): {@link CreateJobConfigResponse 返回参数} */
   CreateJobConfig(data: CreateJobConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobConfigResponse>;
-  /** 创建资源接口 */
+  /** {@link CreateResource 创建资源接口}({@link CreateResourceRequest 请求参数}): {@link CreateResourceResponse 返回参数} */
   CreateResource(data: CreateResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceResponse>;
-  /** 创建资源配置接口 */
+  /** {@link CreateResourceConfig 创建资源配置接口}({@link CreateResourceConfigRequest 请求参数}): {@link CreateResourceConfigResponse 返回参数} */
   CreateResourceConfig(data: CreateResourceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceConfigResponse>;
-  /** 删除作业 */
+  /** {@link DeleteJobs 删除作业}({@link DeleteJobsRequest 请求参数}): {@link DeleteJobsResponse 返回参数} */
   DeleteJobs(data: DeleteJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJobsResponse>;
-  /** 删除资源版本 */
+  /** {@link DeleteResourceConfigs 删除资源版本}({@link DeleteResourceConfigsRequest 请求参数}): {@link DeleteResourceConfigsResponse 返回参数} */
   DeleteResourceConfigs(data: DeleteResourceConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceConfigsResponse>;
-  /** 删除资源接口 */
+  /** {@link DeleteResources 删除资源接口}({@link DeleteResourcesRequest 请求参数}): {@link DeleteResourcesResponse 返回参数} */
   DeleteResources(data: DeleteResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourcesResponse>;
-  /** 删除作业表配置 */
+  /** {@link DeleteTableConfig 删除作业表配置}({@link DeleteTableConfigRequest 请求参数}): {@link DeleteTableConfigResponse 返回参数} */
   DeleteTableConfig(data: DeleteTableConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableConfigResponse>;
-  /** 查询集群 */
+  /** {@link DescribeClusters 查询集群}({@link DescribeClustersRequest 请求参数}): {@link DescribeClustersResponse 返回参数} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
-  /** 查询作业配置 */
+  /** {@link DescribeJobConfigs 查询作业配置}({@link DescribeJobConfigsRequest 请求参数}): {@link DescribeJobConfigsResponse 返回参数} */
   DescribeJobConfigs(data: DescribeJobConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobConfigsResponse>;
-  /** 查找Savepoint列表 */
+  /** {@link DescribeJobSavepoint 查找Savepoint列表}({@link DescribeJobSavepointRequest 请求参数}): {@link DescribeJobSavepointResponse 返回参数} */
   DescribeJobSavepoint(data: DescribeJobSavepointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobSavepointResponse>;
-  /** 查询作业 */
+  /** {@link DescribeJobs 查询作业}({@link DescribeJobsRequest 请求参数}): {@link DescribeJobsResponse 返回参数} */
   DescribeJobs(data?: DescribeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobsResponse>;
-  /** 描述资源配置接口 */
+  /** {@link DescribeResourceConfigs 描述资源配置接口}({@link DescribeResourceConfigsRequest 请求参数}): {@link DescribeResourceConfigsResponse 返回参数} */
   DescribeResourceConfigs(data?: DescribeResourceConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceConfigsResponse>;
-  /** 获取资源关联作业信息 */
+  /** {@link DescribeResourceRelatedJobs 获取资源关联作业信息}({@link DescribeResourceRelatedJobsRequest 请求参数}): {@link DescribeResourceRelatedJobsResponse 返回参数} */
   DescribeResourceRelatedJobs(data: DescribeResourceRelatedJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceRelatedJobsResponse>;
-  /** 描述资源接口 */
+  /** {@link DescribeResources 描述资源接口}({@link DescribeResourcesRequest 请求参数}): {@link DescribeResourcesResponse 返回参数} */
   DescribeResources(data?: DescribeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesResponse>;
-  /** 描述系统资源接口 */
+  /** {@link DescribeSystemResources 描述系统资源接口}({@link DescribeSystemResourcesRequest 请求参数}): {@link DescribeSystemResourcesResponse 返回参数} */
   DescribeSystemResources(data?: DescribeSystemResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSystemResourcesResponse>;
-  /** 自定义树状结构 */
+  /** {@link DescribeTreeJobs 自定义树状结构}({@link DescribeTreeJobsRequest 请求参数}): {@link DescribeTreeJobsResponse 返回参数} */
   DescribeTreeJobs(data?: DescribeTreeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTreeJobsResponse>;
-  /** 查询树状结构资源列表 */
+  /** {@link DescribeTreeResources 查询树状结构资源列表}({@link DescribeTreeResourcesRequest 请求参数}): {@link DescribeTreeResourcesResponse 返回参数} */
   DescribeTreeResources(data?: DescribeTreeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTreeResourcesResponse>;
-  /** 更新作业 */
+  /** {@link ModifyJob 更新作业}({@link ModifyJobRequest 请求参数}): {@link ModifyJobResponse 返回参数} */
   ModifyJob(data: ModifyJobRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyJobResponse>;
-  /** 运行作业 */
+  /** {@link RunJobs 运行作业}({@link RunJobsRequest 请求参数}): {@link RunJobsResponse 返回参数} */
   RunJobs(data: RunJobsRequest, config?: AxiosRequestConfig): AxiosPromise<RunJobsResponse>;
-  /** 停止作业 */
+  /** {@link StopJobs 停止作业}({@link StopJobsRequest 请求参数}): {@link StopJobsResponse 返回参数} */
   StopJobs(data: StopJobsRequest, config?: AxiosRequestConfig): AxiosPromise<StopJobsResponse>;
-  /** 触发Savepoint */
+  /** {@link TriggerJobSavepoint 触发Savepoint}({@link TriggerJobSavepointRequest 请求参数}): {@link TriggerJobSavepointResponse 返回参数} */
   TriggerJobSavepoint(data: TriggerJobSavepointRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerJobSavepointResponse>;
 }
 

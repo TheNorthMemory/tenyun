@@ -2820,206 +2820,206 @@ declare interface UnbindCmqDeadLetterResponse {
   RequestId?: string;
 }
 
-/** [分布式消息队列](https://cloud.tencent.com/document/product/1179) */
+/** {@link Tdmq 消息队列 TDMQ} */
 declare interface Tdmq {
   (): Versions;
-  /** 确认消息 */
+  /** {@link AcknowledgeMessage 确认消息}({@link AcknowledgeMessageRequest 请求参数}): {@link AcknowledgeMessageResponse 返回参数} */
   AcknowledgeMessage(data: AcknowledgeMessageRequest, config?: AxiosRequestConfig): AxiosPromise<AcknowledgeMessageResponse>;
-  /** 清空cmq消息队列中的消息 */
+  /** {@link ClearCmqQueue 清空cmq消息队列中的消息}({@link ClearCmqQueueRequest 请求参数}): {@link ClearCmqQueueResponse 返回参数} */
   ClearCmqQueue(data: ClearCmqQueueRequest, config?: AxiosRequestConfig): AxiosPromise<ClearCmqQueueResponse>;
-  /** 清空cmq订阅者消息标签 */
+  /** {@link ClearCmqSubscriptionFilterTags 清空cmq订阅者消息标签}({@link ClearCmqSubscriptionFilterTagsRequest 请求参数}): {@link ClearCmqSubscriptionFilterTagsResponse 返回参数} */
   ClearCmqSubscriptionFilterTags(data: ClearCmqSubscriptionFilterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ClearCmqSubscriptionFilterTagsResponse>;
-  /** 创建AMQP集群 */
+  /** {@link CreateAMQPCluster 创建AMQP集群}({@link CreateAMQPClusterRequest 请求参数}): {@link CreateAMQPClusterResponse 返回参数} */
   CreateAMQPCluster(data: CreateAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPClusterResponse>;
-  /** 创建AMQP Exchange */
+  /** {@link CreateAMQPExchange 创建AMQP Exchange}({@link CreateAMQPExchangeRequest 请求参数}): {@link CreateAMQPExchangeResponse 返回参数} */
   CreateAMQPExchange(data: CreateAMQPExchangeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPExchangeResponse>;
-  /** 创建AMQP队列 */
+  /** {@link CreateAMQPQueue 创建AMQP队列}({@link CreateAMQPQueueRequest 请求参数}): {@link CreateAMQPQueueResponse 返回参数} */
   CreateAMQPQueue(data: CreateAMQPQueueRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPQueueResponse>;
-  /** 创建AMQP路由关系 */
+  /** {@link CreateAMQPRouteRelation 创建AMQP路由关系}({@link CreateAMQPRouteRelationRequest 请求参数}): {@link CreateAMQPRouteRelationResponse 返回参数} */
   CreateAMQPRouteRelation(data: CreateAMQPRouteRelationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPRouteRelationResponse>;
-  /** 创建Amqp Vhost */
+  /** {@link CreateAMQPVHost 创建Amqp Vhost}({@link CreateAMQPVHostRequest 请求参数}): {@link CreateAMQPVHostResponse 返回参数} */
   CreateAMQPVHost(data: CreateAMQPVHostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPVHostResponse>;
-  /** 创建集群 */
+  /** {@link CreateCluster 创建集群}({@link CreateClusterRequest 请求参数}): {@link CreateClusterResponse 返回参数} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
-  /** 创建cmq队列接口 */
+  /** {@link CreateCmqQueue 创建cmq队列接口}({@link CreateCmqQueueRequest 请求参数}): {@link CreateCmqQueueResponse 返回参数} */
   CreateCmqQueue(data: CreateCmqQueueRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCmqQueueResponse>;
-  /** 创建cmq订阅接口 */
+  /** {@link CreateCmqSubscribe 创建cmq订阅接口}({@link CreateCmqSubscribeRequest 请求参数}): {@link CreateCmqSubscribeResponse 返回参数} */
   CreateCmqSubscribe(data: CreateCmqSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCmqSubscribeResponse>;
-  /** 创建cmq主题 */
+  /** {@link CreateCmqTopic 创建cmq主题}({@link CreateCmqTopicRequest 请求参数}): {@link CreateCmqTopicResponse 返回参数} */
   CreateCmqTopic(data: CreateCmqTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCmqTopicResponse>;
-  /** 创建命名空间 */
+  /** {@link CreateEnvironment 创建命名空间}({@link CreateEnvironmentRequest 请求参数}): {@link CreateEnvironmentResponse 返回参数} */
   CreateEnvironment(data: CreateEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentResponse>;
-  /** 创建环境角色授权 */
+  /** {@link CreateEnvironmentRole 创建环境角色授权}({@link CreateEnvironmentRoleRequest 请求参数}): {@link CreateEnvironmentRoleResponse 返回参数} */
   CreateEnvironmentRole(data: CreateEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentRoleResponse>;
-  /** 创建RocketMQ集群 */
+  /** {@link CreateRocketMQCluster 创建RocketMQ集群}({@link CreateRocketMQClusterRequest 请求参数}): {@link CreateRocketMQClusterResponse 返回参数} */
   CreateRocketMQCluster(data: CreateRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQClusterResponse>;
-  /** 创建RocketMQ消费组 */
+  /** {@link CreateRocketMQGroup 创建RocketMQ消费组}({@link CreateRocketMQGroupRequest 请求参数}): {@link CreateRocketMQGroupResponse 返回参数} */
   CreateRocketMQGroup(data: CreateRocketMQGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQGroupResponse>;
-  /** 创建RocketMQ命名空间 */
+  /** {@link CreateRocketMQNamespace 创建RocketMQ命名空间}({@link CreateRocketMQNamespaceRequest 请求参数}): {@link CreateRocketMQNamespaceResponse 返回参数} */
   CreateRocketMQNamespace(data: CreateRocketMQNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQNamespaceResponse>;
-  /** 创建RocketMQ主题 */
+  /** {@link CreateRocketMQTopic 创建RocketMQ主题}({@link CreateRocketMQTopicRequest 请求参数}): {@link CreateRocketMQTopicResponse 返回参数} */
   CreateRocketMQTopic(data: CreateRocketMQTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQTopicResponse>;
-  /** 创建角色 */
+  /** {@link CreateRole 创建角色}({@link CreateRoleRequest 请求参数}): {@link CreateRoleResponse 返回参数} */
   CreateRole(data: CreateRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleResponse>;
-  /** 创建订阅关系 */
+  /** {@link CreateSubscription 创建订阅关系}({@link CreateSubscriptionRequest 请求参数}): {@link CreateSubscriptionResponse 返回参数} */
   CreateSubscription(data: CreateSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubscriptionResponse>;
-  /** 新增主题 */
+  /** {@link CreateTopic 新增主题}({@link CreateTopicRequest 请求参数}): {@link CreateTopicResponse 返回参数} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
-  /** 删除AMQP集群 */
+  /** {@link DeleteAMQPCluster 删除AMQP集群}({@link DeleteAMQPClusterRequest 请求参数}): {@link DeleteAMQPClusterResponse 返回参数} */
   DeleteAMQPCluster(data: DeleteAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPClusterResponse>;
-  /** 删除Amqp交换机 */
+  /** {@link DeleteAMQPExchange 删除Amqp交换机}({@link DeleteAMQPExchangeRequest 请求参数}): {@link DeleteAMQPExchangeResponse 返回参数} */
   DeleteAMQPExchange(data: DeleteAMQPExchangeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPExchangeResponse>;
-  /** 删除Amqp队列 */
+  /** {@link DeleteAMQPQueue 删除Amqp队列}({@link DeleteAMQPQueueRequest 请求参数}): {@link DeleteAMQPQueueResponse 返回参数} */
   DeleteAMQPQueue(data: DeleteAMQPQueueRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPQueueResponse>;
-  /** 删除Amqp路由关系 */
+  /** {@link DeleteAMQPRouteRelation 删除Amqp路由关系}({@link DeleteAMQPRouteRelationRequest 请求参数}): {@link DeleteAMQPRouteRelationResponse 返回参数} */
   DeleteAMQPRouteRelation(data: DeleteAMQPRouteRelationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPRouteRelationResponse>;
-  /** 删除Vhost */
+  /** {@link DeleteAMQPVHost 删除Vhost}({@link DeleteAMQPVHostRequest 请求参数}): {@link DeleteAMQPVHostResponse 返回参数} */
   DeleteAMQPVHost(data: DeleteAMQPVHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPVHostResponse>;
-  /** 删除集群 */
+  /** {@link DeleteCluster 删除集群}({@link DeleteClusterRequest 请求参数}): {@link DeleteClusterResponse 返回参数} */
   DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
-  /** 删除cmq队列 */
+  /** {@link DeleteCmqQueue 删除cmq队列}({@link DeleteCmqQueueRequest 请求参数}): {@link DeleteCmqQueueResponse 返回参数} */
   DeleteCmqQueue(data: DeleteCmqQueueRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCmqQueueResponse>;
-  /** 删除cmq订阅 */
+  /** {@link DeleteCmqSubscribe 删除cmq订阅}({@link DeleteCmqSubscribeRequest 请求参数}): {@link DeleteCmqSubscribeResponse 返回参数} */
   DeleteCmqSubscribe(data: DeleteCmqSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCmqSubscribeResponse>;
-  /** 删除cmq主题 */
+  /** {@link DeleteCmqTopic 删除cmq主题}({@link DeleteCmqTopicRequest 请求参数}): {@link DeleteCmqTopicResponse 返回参数} */
   DeleteCmqTopic(data: DeleteCmqTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCmqTopicResponse>;
-  /** 删除环境角色授权 */
+  /** {@link DeleteEnvironmentRoles 删除环境角色授权}({@link DeleteEnvironmentRolesRequest 请求参数}): {@link DeleteEnvironmentRolesResponse 返回参数} */
   DeleteEnvironmentRoles(data: DeleteEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentRolesResponse>;
-  /** 删除命名空间 */
+  /** {@link DeleteEnvironments 删除命名空间}({@link DeleteEnvironmentsRequest 请求参数}): {@link DeleteEnvironmentsResponse 返回参数} */
   DeleteEnvironments(data: DeleteEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentsResponse>;
-  /** 删除RocketMQ集群 */
+  /** {@link DeleteRocketMQCluster 删除RocketMQ集群}({@link DeleteRocketMQClusterRequest 请求参数}): {@link DeleteRocketMQClusterResponse 返回参数} */
   DeleteRocketMQCluster(data: DeleteRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQClusterResponse>;
-  /** 删除RocketMQ消费组 */
+  /** {@link DeleteRocketMQGroup 删除RocketMQ消费组}({@link DeleteRocketMQGroupRequest 请求参数}): {@link DeleteRocketMQGroupResponse 返回参数} */
   DeleteRocketMQGroup(data: DeleteRocketMQGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQGroupResponse>;
-  /** 删除RocketMQ命名空间 */
+  /** {@link DeleteRocketMQNamespace 删除RocketMQ命名空间}({@link DeleteRocketMQNamespaceRequest 请求参数}): {@link DeleteRocketMQNamespaceResponse 返回参数} */
   DeleteRocketMQNamespace(data: DeleteRocketMQNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQNamespaceResponse>;
-  /** 删除RocketMQ主题 */
+  /** {@link DeleteRocketMQTopic 删除RocketMQ主题}({@link DeleteRocketMQTopicRequest 请求参数}): {@link DeleteRocketMQTopicResponse 返回参数} */
   DeleteRocketMQTopic(data: DeleteRocketMQTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQTopicResponse>;
-  /** 删除角色 */
+  /** {@link DeleteRoles 删除角色}({@link DeleteRolesRequest 请求参数}): {@link DeleteRolesResponse 返回参数} */
   DeleteRoles(data: DeleteRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRolesResponse>;
-  /** 删除订阅关系 */
+  /** {@link DeleteSubscriptions 删除订阅关系}({@link DeleteSubscriptionsRequest 请求参数}): {@link DeleteSubscriptionsResponse 返回参数} */
   DeleteSubscriptions(data: DeleteSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubscriptionsResponse>;
-  /** 删除主题 */
+  /** {@link DeleteTopics 删除主题}({@link DeleteTopicsRequest 请求参数}): {@link DeleteTopicsResponse 返回参数} */
   DeleteTopics(data: DeleteTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicsResponse>;
-  /** 获取单个Amqp集群信息 */
+  /** {@link DescribeAMQPCluster 获取单个Amqp集群信息}({@link DescribeAMQPClusterRequest 请求参数}): {@link DescribeAMQPClusterResponse 返回参数} */
   DescribeAMQPCluster(data: DescribeAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPClusterResponse>;
-  /** 获取amqp集群列表 */
+  /** {@link DescribeAMQPClusters 获取amqp集群列表}({@link DescribeAMQPClustersRequest 请求参数}): {@link DescribeAMQPClustersResponse 返回参数} */
   DescribeAMQPClusters(data: DescribeAMQPClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPClustersResponse>;
-  /** 获取用户配额 */
+  /** {@link DescribeAMQPCreateQuota 获取用户配额}({@link DescribeAMQPCreateQuotaRequest 请求参数}): {@link DescribeAMQPCreateQuotaResponse 返回参数} */
   DescribeAMQPCreateQuota(data?: DescribeAMQPCreateQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPCreateQuotaResponse>;
-  /** 获取AMQP Exchange列表 */
+  /** {@link DescribeAMQPExchanges 获取AMQP Exchange列表}({@link DescribeAMQPExchangesRequest 请求参数}): {@link DescribeAMQPExchangesResponse 返回参数} */
   DescribeAMQPExchanges(data: DescribeAMQPExchangesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPExchangesResponse>;
-  /** 获取Amqp队列列表 */
+  /** {@link DescribeAMQPQueues 获取Amqp队列列表}({@link DescribeAMQPQueuesRequest 请求参数}): {@link DescribeAMQPQueuesResponse 返回参数} */
   DescribeAMQPQueues(data: DescribeAMQPQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPQueuesResponse>;
-  /** 获取Amqp路由关系列表 */
+  /** {@link DescribeAMQPRouteRelations 获取Amqp路由关系列表}({@link DescribeAMQPRouteRelationsRequest 请求参数}): {@link DescribeAMQPRouteRelationsResponse 返回参数} */
   DescribeAMQPRouteRelations(data: DescribeAMQPRouteRelationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPRouteRelationsResponse>;
-  /** 获取Amqp Vhost列表 */
+  /** {@link DescribeAMQPVHosts 获取Amqp Vhost列表}({@link DescribeAMQPVHostsRequest 请求参数}): {@link DescribeAMQPVHostsResponse 返回参数} */
   DescribeAMQPVHosts(data: DescribeAMQPVHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPVHostsResponse>;
-  /** 获取某个租户的虚拟集群列表 */
+  /** {@link DescribeAllTenants 获取某个租户的虚拟集群列表}({@link DescribeAllTenantsRequest 请求参数}): {@link DescribeAllTenantsResponse 返回参数} */
   DescribeAllTenants(data: DescribeAllTenantsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllTenantsResponse>;
-  /** 获取专享集群列表 */
+  /** {@link DescribeBindClusters 获取专享集群列表}({@link DescribeBindClustersRequest 请求参数}): {@link DescribeBindClustersResponse 返回参数} */
   DescribeBindClusters(data?: DescribeBindClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindClustersResponse>;
-  /** 获取租户VPC绑定关系 */
+  /** {@link DescribeBindVpcs 获取租户VPC绑定关系}({@link DescribeBindVpcsRequest 请求参数}): {@link DescribeBindVpcsResponse 返回参数} */
   DescribeBindVpcs(data?: DescribeBindVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindVpcsResponse>;
-  /** 获取集群详情 */
+  /** {@link DescribeClusterDetail 获取集群详情}({@link DescribeClusterDetailRequest 请求参数}): {@link DescribeClusterDetailResponse 返回参数} */
   DescribeClusterDetail(data: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
-  /** 获取集群列表 */
+  /** {@link DescribeClusters 获取集群列表}({@link DescribeClustersRequest 请求参数}): {@link DescribeClustersResponse 返回参数} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
-  /** 枚举cmq死信队列源队列 */
+  /** {@link DescribeCmqDeadLetterSourceQueues 枚举cmq死信队列源队列}({@link DescribeCmqDeadLetterSourceQueuesRequest 请求参数}): {@link DescribeCmqDeadLetterSourceQueuesResponse 返回参数} */
   DescribeCmqDeadLetterSourceQueues(data: DescribeCmqDeadLetterSourceQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqDeadLetterSourceQueuesResponse>;
-  /** 查询cmq队列详情 */
+  /** {@link DescribeCmqQueueDetail 查询cmq队列详情}({@link DescribeCmqQueueDetailRequest 请求参数}): {@link DescribeCmqQueueDetailResponse 返回参数} */
   DescribeCmqQueueDetail(data: DescribeCmqQueueDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqQueueDetailResponse>;
-  /** 查询cmq全量队列 */
+  /** {@link DescribeCmqQueues 查询cmq全量队列}({@link DescribeCmqQueuesRequest 请求参数}): {@link DescribeCmqQueuesResponse 返回参数} */
   DescribeCmqQueues(data?: DescribeCmqQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqQueuesResponse>;
-  /** 查询cmq订阅详情 */
+  /** {@link DescribeCmqSubscriptionDetail 查询cmq订阅详情}({@link DescribeCmqSubscriptionDetailRequest 请求参数}): {@link DescribeCmqSubscriptionDetailResponse 返回参数} */
   DescribeCmqSubscriptionDetail(data: DescribeCmqSubscriptionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqSubscriptionDetailResponse>;
-  /** 查询cmq主题详情 */
+  /** {@link DescribeCmqTopicDetail 查询cmq主题详情}({@link DescribeCmqTopicDetailRequest 请求参数}): {@link DescribeCmqTopicDetailResponse 返回参数} */
   DescribeCmqTopicDetail(data?: DescribeCmqTopicDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqTopicDetailResponse>;
-  /** 枚举cmq全量主题 */
+  /** {@link DescribeCmqTopics 枚举cmq全量主题}({@link DescribeCmqTopicsRequest 请求参数}): {@link DescribeCmqTopicsResponse 返回参数} */
   DescribeCmqTopics(data?: DescribeCmqTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqTopicsResponse>;
-  /** 获取命名空间属性 */
+  /** {@link DescribeEnvironmentAttributes 获取命名空间属性}({@link DescribeEnvironmentAttributesRequest 请求参数}): {@link DescribeEnvironmentAttributesResponse 返回参数} */
   DescribeEnvironmentAttributes(data: DescribeEnvironmentAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentAttributesResponse>;
-  /** 获取命名空间角色列表 */
+  /** {@link DescribeEnvironmentRoles 获取命名空间角色列表}({@link DescribeEnvironmentRolesRequest 请求参数}): {@link DescribeEnvironmentRolesResponse 返回参数} */
   DescribeEnvironmentRoles(data?: DescribeEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentRolesResponse>;
-  /** 获取命名空间列表 */
+  /** {@link DescribeEnvironments 获取命名空间列表}({@link DescribeEnvironmentsRequest 请求参数}): {@link DescribeEnvironmentsResponse 返回参数} */
   DescribeEnvironments(data?: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
-  /** 运营端获取命名空间bundle列表 */
+  /** {@link DescribeNamespaceBundlesOpt 运营端获取命名空间bundle列表}({@link DescribeNamespaceBundlesOptRequest 请求参数}): {@link DescribeNamespaceBundlesOptResponse 返回参数} */
   DescribeNamespaceBundlesOpt(data: DescribeNamespaceBundlesOptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNamespaceBundlesOptResponse>;
-  /** 运营端获节点健康状态 */
+  /** {@link DescribeNodeHealthOpt 运营端获节点健康状态}({@link DescribeNodeHealthOptRequest 请求参数}): {@link DescribeNodeHealthOptResponse 返回参数} */
   DescribeNodeHealthOpt(data: DescribeNodeHealthOptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeHealthOptResponse>;
-  /** 获取消息生产概览 */
+  /** {@link DescribePublisherSummary 获取消息生产概览}({@link DescribePublisherSummaryRequest 请求参数}): {@link DescribePublisherSummaryResponse 返回参数} */
   DescribePublisherSummary(data: DescribePublisherSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublisherSummaryResponse>;
-  /** 获取生产者信息 */
+  /** {@link DescribePublishers 获取生产者信息}({@link DescribePublishersRequest 请求参数}): {@link DescribePublishersResponse 返回参数} */
   DescribePublishers(data: DescribePublishersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublishersResponse>;
-  /** 获取单个RocketMQ集群信息 */
+  /** {@link DescribeRocketMQCluster 获取单个RocketMQ集群信息}({@link DescribeRocketMQClusterRequest 请求参数}): {@link DescribeRocketMQClusterResponse 返回参数} */
   DescribeRocketMQCluster(data: DescribeRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQClusterResponse>;
-  /** 获取RocketMQ集群列表 */
+  /** {@link DescribeRocketMQClusters 获取RocketMQ集群列表}({@link DescribeRocketMQClustersRequest 请求参数}): {@link DescribeRocketMQClustersResponse 返回参数} */
   DescribeRocketMQClusters(data: DescribeRocketMQClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQClustersResponse>;
-  /** 获取RocketMQ消费组列表 */
+  /** {@link DescribeRocketMQGroups 获取RocketMQ消费组列表}({@link DescribeRocketMQGroupsRequest 请求参数}): {@link DescribeRocketMQGroupsResponse 返回参数} */
   DescribeRocketMQGroups(data: DescribeRocketMQGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQGroupsResponse>;
-  /** 获取RocketMQ命名空间列表 */
+  /** {@link DescribeRocketMQNamespaces 获取RocketMQ命名空间列表}({@link DescribeRocketMQNamespacesRequest 请求参数}): {@link DescribeRocketMQNamespacesResponse 返回参数} */
   DescribeRocketMQNamespaces(data: DescribeRocketMQNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQNamespacesResponse>;
-  /** 获取RocketMQ主题列表 */
+  /** {@link DescribeRocketMQTopics 获取RocketMQ主题列表}({@link DescribeRocketMQTopicsRequest 请求参数}): {@link DescribeRocketMQTopicsResponse 返回参数} */
   DescribeRocketMQTopics(data: DescribeRocketMQTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopicsResponse>;
-  /** 查询RocketMQ专享实例列表 */
+  /** {@link DescribeRocketMQVipInstances 查询RocketMQ专享实例列表}({@link DescribeRocketMQVipInstancesRequest 请求参数}): {@link DescribeRocketMQVipInstancesResponse 返回参数} */
   DescribeRocketMQVipInstances(data?: DescribeRocketMQVipInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQVipInstancesResponse>;
-  /** 获取角色列表 */
+  /** {@link DescribeRoles 获取角色列表}({@link DescribeRolesRequest 请求参数}): {@link DescribeRolesResponse 返回参数} */
   DescribeRoles(data?: DescribeRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRolesResponse>;
-  /** 获取消费订阅列表 */
+  /** {@link DescribeSubscriptions 获取消费订阅列表}({@link DescribeSubscriptionsRequest 请求参数}): {@link DescribeSubscriptionsResponse 返回参数} */
   DescribeSubscriptions(data: DescribeSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscriptionsResponse>;
-  /** 查询主题列表 */
+  /** {@link DescribeTopics 查询主题列表}({@link DescribeTopicsRequest 请求参数}): {@link DescribeTopicsResponse 返回参数} */
   DescribeTopics(data: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
-  /** 更新Amqp集群信息 */
+  /** {@link ModifyAMQPCluster 更新Amqp集群信息}({@link ModifyAMQPClusterRequest 请求参数}): {@link ModifyAMQPClusterResponse 返回参数} */
   ModifyAMQPCluster(data: ModifyAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPClusterResponse>;
-  /** 更新Amqp交换机 */
+  /** {@link ModifyAMQPExchange 更新Amqp交换机}({@link ModifyAMQPExchangeRequest 请求参数}): {@link ModifyAMQPExchangeResponse 返回参数} */
   ModifyAMQPExchange(data: ModifyAMQPExchangeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPExchangeResponse>;
-  /** 更新Amqp队列 */
+  /** {@link ModifyAMQPQueue 更新Amqp队列}({@link ModifyAMQPQueueRequest 请求参数}): {@link ModifyAMQPQueueResponse 返回参数} */
   ModifyAMQPQueue(data: ModifyAMQPQueueRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPQueueResponse>;
-  /** 更新Vhost */
+  /** {@link ModifyAMQPVHost 更新Vhost}({@link ModifyAMQPVHostRequest 请求参数}): {@link ModifyAMQPVHostResponse 返回参数} */
   ModifyAMQPVHost(data: ModifyAMQPVHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPVHostResponse>;
-  /** 更新集群信息 */
+  /** {@link ModifyCluster 更新集群信息}({@link ModifyClusterRequest 请求参数}): {@link ModifyClusterResponse 返回参数} */
   ModifyCluster(data: ModifyClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterResponse>;
-  /** 修改cmq队列属性 */
+  /** {@link ModifyCmqQueueAttribute 修改cmq队列属性}({@link ModifyCmqQueueAttributeRequest 请求参数}): {@link ModifyCmqQueueAttributeResponse 返回参数} */
   ModifyCmqQueueAttribute(data: ModifyCmqQueueAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCmqQueueAttributeResponse>;
-  /** 修改cmq订阅属性 */
+  /** {@link ModifyCmqSubscriptionAttribute 修改cmq订阅属性}({@link ModifyCmqSubscriptionAttributeRequest 请求参数}): {@link ModifyCmqSubscriptionAttributeResponse 返回参数} */
   ModifyCmqSubscriptionAttribute(data: ModifyCmqSubscriptionAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCmqSubscriptionAttributeResponse>;
-  /** 修改cmq主题属性 */
+  /** {@link ModifyCmqTopicAttribute 修改cmq主题属性}({@link ModifyCmqTopicAttributeRequest 请求参数}): {@link ModifyCmqTopicAttributeResponse 返回参数} */
   ModifyCmqTopicAttribute(data: ModifyCmqTopicAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCmqTopicAttributeResponse>;
-  /** 修改命名空间属性 */
+  /** {@link ModifyEnvironmentAttributes 修改命名空间属性}({@link ModifyEnvironmentAttributesRequest 请求参数}): {@link ModifyEnvironmentAttributesResponse 返回参数} */
   ModifyEnvironmentAttributes(data: ModifyEnvironmentAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvironmentAttributesResponse>;
-  /** 修改环境角色授权 */
+  /** {@link ModifyEnvironmentRole 修改环境角色授权}({@link ModifyEnvironmentRoleRequest 请求参数}): {@link ModifyEnvironmentRoleResponse 返回参数} */
   ModifyEnvironmentRole(data: ModifyEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvironmentRoleResponse>;
-  /** 更新RocketMQ集群信息 */
+  /** {@link ModifyRocketMQCluster 更新RocketMQ集群信息}({@link ModifyRocketMQClusterRequest 请求参数}): {@link ModifyRocketMQClusterResponse 返回参数} */
   ModifyRocketMQCluster(data: ModifyRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQClusterResponse>;
-  /** 更新RocketMQ消费组信息 */
+  /** {@link ModifyRocketMQGroup 更新RocketMQ消费组信息}({@link ModifyRocketMQGroupRequest 请求参数}): {@link ModifyRocketMQGroupResponse 返回参数} */
   ModifyRocketMQGroup(data: ModifyRocketMQGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQGroupResponse>;
-  /** 更新RocketMQ命名空间 */
+  /** {@link ModifyRocketMQNamespace 更新RocketMQ命名空间}({@link ModifyRocketMQNamespaceRequest 请求参数}): {@link ModifyRocketMQNamespaceResponse 返回参数} */
   ModifyRocketMQNamespace(data: ModifyRocketMQNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQNamespaceResponse>;
-  /** 更新RocketMQ主题信息 */
+  /** {@link ModifyRocketMQTopic 更新RocketMQ主题信息}({@link ModifyRocketMQTopicRequest 请求参数}): {@link ModifyRocketMQTopicResponse 返回参数} */
   ModifyRocketMQTopic(data: ModifyRocketMQTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQTopicResponse>;
-  /** 角色修改 */
+  /** {@link ModifyRole 角色修改}({@link ModifyRoleRequest 请求参数}): {@link ModifyRoleResponse 返回参数} */
   ModifyRole(data: ModifyRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoleResponse>;
-  /** 修改主题 */
+  /** {@link ModifyTopic 修改主题}({@link ModifyTopicRequest 请求参数}): {@link ModifyTopicResponse 返回参数} */
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
-  /** 发送cmq主题消息 */
+  /** {@link PublishCmqMsg 发送cmq主题消息}({@link PublishCmqMsgRequest 请求参数}): {@link PublishCmqMsgResponse 返回参数} */
   PublishCmqMsg(data: PublishCmqMsgRequest, config?: AxiosRequestConfig): AxiosPromise<PublishCmqMsgResponse>;
-  /** 接收消息 */
+  /** {@link ReceiveMessage 接收消息}({@link ReceiveMessageRequest 请求参数}): {@link ReceiveMessageResponse 返回参数} */
   ReceiveMessage(data: ReceiveMessageRequest, config?: AxiosRequestConfig): AxiosPromise<ReceiveMessageResponse>;
-  /** 消息回溯 */
+  /** {@link ResetMsgSubOffsetByTimestamp 消息回溯}({@link ResetMsgSubOffsetByTimestampRequest 请求参数}): {@link ResetMsgSubOffsetByTimestampResponse 返回参数} */
   ResetMsgSubOffsetByTimestamp(data: ResetMsgSubOffsetByTimestampRequest, config?: AxiosRequestConfig): AxiosPromise<ResetMsgSubOffsetByTimestampResponse>;
-  /** 重置RocketMQ消费位点 */
+  /** {@link ResetRocketMQConsumerOffSet 重置RocketMQ消费位点}({@link ResetRocketMQConsumerOffSetRequest 请求参数}): {@link ResetRocketMQConsumerOffSetResponse 返回参数} */
   ResetRocketMQConsumerOffSet(data: ResetRocketMQConsumerOffSetRequest, config?: AxiosRequestConfig): AxiosPromise<ResetRocketMQConsumerOffSetResponse>;
-  /** 回溯cmq队列 */
+  /** {@link RewindCmqQueue 回溯cmq队列}({@link RewindCmqQueueRequest 请求参数}): {@link RewindCmqQueueResponse 返回参数} */
   RewindCmqQueue(data: RewindCmqQueueRequest, config?: AxiosRequestConfig): AxiosPromise<RewindCmqQueueResponse>;
-  /** 批量发送消息 */
+  /** {@link SendBatchMessages 批量发送消息}({@link SendBatchMessagesRequest 请求参数}): {@link SendBatchMessagesResponse 返回参数} */
   SendBatchMessages(data: SendBatchMessagesRequest, config?: AxiosRequestConfig): AxiosPromise<SendBatchMessagesResponse>;
-  /** 发送cmq消息 */
+  /** {@link SendCmqMsg 发送cmq消息}({@link SendCmqMsgRequest 请求参数}): {@link SendCmqMsgResponse 返回参数} */
   SendCmqMsg(data: SendCmqMsgRequest, config?: AxiosRequestConfig): AxiosPromise<SendCmqMsgResponse>;
-  /** 发送单条消息 */
+  /** {@link SendMessages 发送单条消息}({@link SendMessagesRequest 请求参数}): {@link SendMessagesResponse 返回参数} */
   SendMessages(data: SendMessagesRequest, config?: AxiosRequestConfig): AxiosPromise<SendMessagesResponse>;
-  /** 发送消息 */
+  /** {@link SendMsg 发送消息}({@link SendMsgRequest 请求参数}): {@link SendMsgResponse 返回参数} */
   SendMsg(data: SendMsgRequest, config?: AxiosRequestConfig): AxiosPromise<SendMsgResponse>;
-  /** 解绑cmq死信队列 */
+  /** {@link UnbindCmqDeadLetter 解绑cmq死信队列}({@link UnbindCmqDeadLetterRequest 请求参数}): {@link UnbindCmqDeadLetterResponse 返回参数} */
   UnbindCmqDeadLetter(data: UnbindCmqDeadLetterRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindCmqDeadLetterResponse>;
 }
 

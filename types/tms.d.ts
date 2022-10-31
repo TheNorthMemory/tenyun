@@ -339,18 +339,18 @@ declare namespace V20200713 {
   }
 }
 
-/** [文本内容安全](https://cloud.tencent.com/document/product/1124) */
+/** {@link Tms 文本内容安全} */
 declare interface Tms {
   (): Versions;
-  /** 文本内容安全 */
+  /** {@link TextModeration 文本内容安全}({@link TextModerationRequest 请求参数}): {@link TextModerationResponse 返回参数} */
   TextModeration(data: TextModerationRequest, config?: AxiosRequestConfig): AxiosPromise<TextModerationResponse>;
-  /** 账号举报接口 */
+  /** {@link V20200713.AccountTipoffAccess 账号举报接口}({@link V20200713.AccountTipoffAccessRequest 请求参数}): {@link V20200713.AccountTipoffAccessResponse 返回参数} */
   AccountTipoffAccess(data: V20200713.AccountTipoffAccessRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.AccountTipoffAccessResponse>;
-  /** 获取用户词库列表 */
+  /** {@link V20200713.DescribeTextLib 获取用户词库列表}({@link V20200713.DescribeTextLibRequest 请求参数}): {@link V20200713.DescribeTextLibResponse 返回参数} */
   DescribeTextLib(data: V20200713.DescribeTextLibRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.DescribeTextLibResponse>;
-  /** 识别统计 */
+  /** {@link V20200713.DescribeTextStat 识别统计}({@link V20200713.DescribeTextStatRequest 请求参数}): {@link V20200713.DescribeTextStatResponse 返回参数} */
   DescribeTextStat(data: V20200713.DescribeTextStatRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.DescribeTextStatResponse>;
-  /** 文本内容安全 */
+  /** {@link V20200713.TextModeration 文本内容安全}({@link V20200713.TextModerationRequest 请求参数}): {@link V20200713.TextModerationResponse 返回参数} */
   TextModeration(data: V20200713.TextModerationRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.TextModerationResponse>;
 }
 

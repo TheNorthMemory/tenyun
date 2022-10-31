@@ -50,12 +50,12 @@ declare interface DescribeStockEstimationResponse {
   RequestId?: string;
 }
 
-/** [私域安全](https://cloud.tencent.com/document/product/1473) */
+/** {@link Pds 私域安全} */
 declare interface Pds {
   (): Versions;
-  /** 拉新判断服务 */
+  /** {@link DescribeNewUserAcquisition 拉新判断服务}({@link DescribeNewUserAcquisitionRequest 请求参数}): {@link DescribeNewUserAcquisitionResponse 返回参数} */
   DescribeNewUserAcquisition(data: DescribeNewUserAcquisitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNewUserAcquisitionResponse>;
-  /** 存量判断服务 */
+  /** {@link DescribeStockEstimation 存量判断服务}({@link DescribeStockEstimationRequest 请求参数}): {@link DescribeStockEstimationResponse 返回参数} */
   DescribeStockEstimation(data: DescribeStockEstimationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStockEstimationResponse>;
 }
 

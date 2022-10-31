@@ -1080,66 +1080,66 @@ declare interface StopMCUMixTranscodeResponse {
   RequestId?: string;
 }
 
-/** [实时音视频](https://cloud.tencent.com/document/product/647) */
+/** {@link Trtc 实时音视频} */
 declare interface Trtc {
   (): Versions;
-  /** 开始云端录制 */
+  /** {@link CreateCloudRecording 开始云端录制}({@link CreateCloudRecordingRequest 请求参数}): {@link CreateCloudRecordingResponse 返回参数} */
   CreateCloudRecording(data: CreateCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudRecordingResponse>;
-  /** 上传图片 */
+  /** {@link CreatePicture 上传图片}({@link CreatePictureRequest 请求参数}): {@link CreatePictureResponse 返回参数} */
   CreatePicture(data: CreatePictureRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePictureResponse>;
-  /** 停止云端录制任务 */
+  /** {@link DeleteCloudRecording 停止云端录制任务}({@link DeleteCloudRecordingRequest 请求参数}): {@link DeleteCloudRecordingResponse 返回参数} */
   DeleteCloudRecording(data: DeleteCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudRecordingResponse>;
-  /** 删除图片 */
+  /** {@link DeletePicture 删除图片}({@link DeletePictureRequest 请求参数}): {@link DeletePictureResponse 返回参数} */
   DeletePicture(data: DeletePictureRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePictureResponse>;
-  /** 查询历史用户列表与通话指标 */
+  /** {@link DescribeCallDetailInfo 查询历史用户列表与通话指标}({@link DescribeCallDetailInfoRequest 请求参数}): {@link DescribeCallDetailInfoResponse 返回参数} */
   DescribeCallDetailInfo(data: DescribeCallDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallDetailInfoResponse>;
-  /** 查询云端录制状态 */
+  /** {@link DescribeCloudRecording 查询云端录制状态}({@link DescribeCloudRecordingRequest 请求参数}): {@link DescribeCloudRecordingResponse 返回参数} */
   DescribeCloudRecording(data: DescribeCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRecordingResponse>;
-  /** 查询音视频用量计费时长（旧） */
+  /** {@link DescribeExternalTrtcMeasure 查询音视频用量计费时长（旧）}({@link DescribeExternalTrtcMeasureRequest 请求参数}): {@link DescribeExternalTrtcMeasureResponse 返回参数} */
   DescribeExternalTrtcMeasure(data: DescribeExternalTrtcMeasureRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExternalTrtcMeasureResponse>;
-  /** 查询TRTC混流转码用量 */
+  /** {@link DescribeMixTranscodingUsage 查询TRTC混流转码用量}({@link DescribeMixTranscodingUsageRequest 请求参数}): {@link DescribeMixTranscodingUsageResponse 返回参数} */
   DescribeMixTranscodingUsage(data: DescribeMixTranscodingUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMixTranscodingUsageResponse>;
-  /** 查询图片 */
+  /** {@link DescribePicture 查询图片}({@link DescribePictureRequest 请求参数}): {@link DescribePictureResponse 返回参数} */
   DescribePicture(data: DescribePictureRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePictureResponse>;
-  /** 查询云端录制计费时长（旧） */
+  /** {@link DescribeRecordStatistic 查询云端录制计费时长（旧）}({@link DescribeRecordStatisticRequest 请求参数}): {@link DescribeRecordStatisticResponse 返回参数} */
   DescribeRecordStatistic(data: DescribeRecordStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordStatisticResponse>;
-  /** 查询TRTC录制用量 */
+  /** {@link DescribeRecordingUsage 查询TRTC录制用量}({@link DescribeRecordingUsageRequest 请求参数}): {@link DescribeRecordingUsageResponse 返回参数} */
   DescribeRecordingUsage(data: DescribeRecordingUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordingUsageResponse>;
-  /** 查询TRTC旁路转推用量 */
+  /** {@link DescribeRelayUsage 查询TRTC旁路转推用量}({@link DescribeRelayUsageRequest 请求参数}): {@link DescribeRelayUsageResponse 返回参数} */
   DescribeRelayUsage(data: DescribeRelayUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelayUsageResponse>;
-  /** 查询历史房间列表 */
+  /** {@link DescribeRoomInfo 查询历史房间列表}({@link DescribeRoomInfoRequest 请求参数}): {@link DescribeRoomInfoResponse 返回参数} */
   DescribeRoomInfo(data: DescribeRoomInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomInfoResponse>;
-  /** 查询历史房间和用户数 */
+  /** {@link DescribeScaleInfo 查询历史房间和用户数}({@link DescribeScaleInfoRequest 请求参数}): {@link DescribeScaleInfoResponse 返回参数} */
   DescribeScaleInfo(data: DescribeScaleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScaleInfoResponse>;
-  /** 查询旁路转码计费时长(旧) */
+  /** {@link DescribeTrtcMcuTranscodeTime 查询旁路转码计费时长(旧)}({@link DescribeTrtcMcuTranscodeTimeRequest 请求参数}): {@link DescribeTrtcMcuTranscodeTimeResponse 返回参数} */
   DescribeTrtcMcuTranscodeTime(data: DescribeTrtcMcuTranscodeTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrtcMcuTranscodeTimeResponse>;
-  /** 查询TRTC音视频用量 */
+  /** {@link DescribeTrtcUsage 查询TRTC音视频用量}({@link DescribeTrtcUsageRequest 请求参数}): {@link DescribeTrtcUsageResponse 返回参数} */
   DescribeTrtcUsage(data: DescribeTrtcUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrtcUsageResponse>;
-  /** 查询异常体验事件 */
+  /** {@link DescribeUnusualEvent 查询异常体验事件}({@link DescribeUnusualEventRequest 请求参数}): {@link DescribeUnusualEventResponse 返回参数} */
   DescribeUnusualEvent(data: DescribeUnusualEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnusualEventResponse>;
-  /** 查询详细事件 */
+  /** {@link DescribeUserEvent 查询详细事件}({@link DescribeUserEventRequest 请求参数}): {@link DescribeUserEventResponse 返回参数} */
   DescribeUserEvent(data: DescribeUserEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserEventResponse>;
-  /** 查询历史用户列表 */
+  /** {@link DescribeUserInfo 查询历史用户列表}({@link DescribeUserInfoRequest 请求参数}): {@link DescribeUserInfoResponse 返回参数} */
   DescribeUserInfo(data: DescribeUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInfoResponse>;
-  /** 解散房间 */
+  /** {@link DismissRoom 解散房间}({@link DismissRoomRequest 请求参数}): {@link DismissRoomResponse 返回参数} */
   DismissRoom(data: DismissRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DismissRoomResponse>;
-  /** 解散房间（字符串房间号） */
+  /** {@link DismissRoomByStrRoomId 解散房间（字符串房间号）}({@link DismissRoomByStrRoomIdRequest 请求参数}): {@link DismissRoomByStrRoomIdResponse 返回参数} */
   DismissRoomByStrRoomId(data: DismissRoomByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<DismissRoomByStrRoomIdResponse>;
-  /** 更新云端录制任务 */
+  /** {@link ModifyCloudRecording 更新云端录制任务}({@link ModifyCloudRecordingRequest 请求参数}): {@link ModifyCloudRecordingResponse 返回参数} */
   ModifyCloudRecording(data: ModifyCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudRecordingResponse>;
-  /** 修改图片 */
+  /** {@link ModifyPicture 修改图片}({@link ModifyPictureRequest 请求参数}): {@link ModifyPictureResponse 返回参数} */
   ModifyPicture(data: ModifyPictureRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPictureResponse>;
-  /** 移出用户 */
+  /** {@link RemoveUser 移出用户}({@link RemoveUserRequest 请求参数}): {@link RemoveUserResponse 返回参数} */
   RemoveUser(data: RemoveUserRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserResponse>;
-  /** 移出用户（字符串房间号） */
+  /** {@link RemoveUserByStrRoomId 移出用户（字符串房间号）}({@link RemoveUserByStrRoomIdRequest 请求参数}): {@link RemoveUserByStrRoomIdResponse 返回参数} */
   RemoveUserByStrRoomId(data: RemoveUserByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserByStrRoomIdResponse>;
-  /** 启动云端混流 */
+  /** {@link StartMCUMixTranscode 启动云端混流}({@link StartMCUMixTranscodeRequest 请求参数}): {@link StartMCUMixTranscodeResponse 返回参数} */
   StartMCUMixTranscode(data: StartMCUMixTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<StartMCUMixTranscodeResponse>;
-  /** 启动云端混流（字符串房间号） */
+  /** {@link StartMCUMixTranscodeByStrRoomId 启动云端混流（字符串房间号）}({@link StartMCUMixTranscodeByStrRoomIdRequest 请求参数}): {@link StartMCUMixTranscodeByStrRoomIdResponse 返回参数} */
   StartMCUMixTranscodeByStrRoomId(data: StartMCUMixTranscodeByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<StartMCUMixTranscodeByStrRoomIdResponse>;
-  /** 结束云端混流 */
+  /** {@link StopMCUMixTranscode 结束云端混流}({@link StopMCUMixTranscodeRequest 请求参数}): {@link StopMCUMixTranscodeResponse 返回参数} */
   StopMCUMixTranscode(data: StopMCUMixTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<StopMCUMixTranscodeResponse>;
-  /** 结束云端混流（字符串房间号） */
+  /** {@link StopMCUMixTranscodeByStrRoomId 结束云端混流（字符串房间号）}({@link StopMCUMixTranscodeByStrRoomIdRequest 请求参数}): {@link StopMCUMixTranscodeByStrRoomIdResponse 返回参数} */
   StopMCUMixTranscodeByStrRoomId(data: StopMCUMixTranscodeByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<StopMCUMixTranscodeByStrRoomIdResponse>;
 }
 

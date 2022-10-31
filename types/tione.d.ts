@@ -2348,120 +2348,120 @@ declare namespace V20191022 {
   }
 }
 
-/** [腾讯云 TI 平台 TI-ONE](https://cloud.tencent.com/document/product/851) */
+/** {@link Tione 腾讯云 TI 平台 TI-ONE} */
 declare interface Tione {
   (): Versions;
-  /** 创建跑批任务 */
+  /** {@link CreateBatchTask 创建跑批任务}({@link CreateBatchTaskRequest 请求参数}): {@link CreateBatchTaskResponse 返回参数} */
   CreateBatchTask(data: CreateBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchTaskResponse>;
-  /** 创建数据集 */
+  /** {@link CreateDataset 创建数据集}({@link CreateDatasetRequest 请求参数}): {@link CreateDatasetResponse 返回参数} */
   CreateDataset(data: CreateDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatasetResponse>;
-  /** 导入模型 */
+  /** {@link CreateTrainingModel 导入模型}({@link CreateTrainingModelRequest 请求参数}): {@link CreateTrainingModelResponse 返回参数} */
   CreateTrainingModel(data: CreateTrainingModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingModelResponse>;
-  /** 创建模型训练任务 */
+  /** {@link CreateTrainingTask 创建模型训练任务}({@link CreateTrainingTaskRequest 请求参数}): {@link CreateTrainingTaskResponse 返回参数} */
   CreateTrainingTask(data: CreateTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingTaskResponse>;
-  /** 删除跑批任务 */
+  /** {@link DeleteBatchTask 删除跑批任务}({@link DeleteBatchTaskRequest 请求参数}): {@link DeleteBatchTaskResponse 返回参数} */
   DeleteBatchTask(data: DeleteBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBatchTaskResponse>;
-  /** 删除数据集 */
+  /** {@link DeleteDataset 删除数据集}({@link DeleteDatasetRequest 请求参数}): {@link DeleteDatasetResponse 返回参数} */
   DeleteDataset(data: DeleteDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatasetResponse>;
-  /** 删除模型 */
+  /** {@link DeleteTrainingModel 删除模型}({@link DeleteTrainingModelRequest 请求参数}): {@link DeleteTrainingModelResponse 返回参数} */
   DeleteTrainingModel(data: DeleteTrainingModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingModelResponse>;
-  /** 删除模型版本 */
+  /** {@link DeleteTrainingModelVersion 删除模型版本}({@link DeleteTrainingModelVersionRequest 请求参数}): {@link DeleteTrainingModelVersionResponse 返回参数} */
   DeleteTrainingModelVersion(data: DeleteTrainingModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingModelVersionResponse>;
-  /** 删除训练任务 */
+  /** {@link DeleteTrainingTask 删除训练任务}({@link DeleteTrainingTaskRequest 请求参数}): {@link DeleteTrainingTaskResponse 返回参数} */
   DeleteTrainingTask(data: DeleteTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingTaskResponse>;
-  /** 查询跑批任务 */
+  /** {@link DescribeBatchTask 查询跑批任务}({@link DescribeBatchTaskRequest 请求参数}): {@link DescribeBatchTaskResponse 返回参数} */
   DescribeBatchTask(data: DescribeBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskResponse>;
-  /** 跑批实例列表 */
+  /** {@link DescribeBatchTaskInstances 跑批实例列表}({@link DescribeBatchTaskInstancesRequest 请求参数}): {@link DescribeBatchTaskInstancesResponse 返回参数} */
   DescribeBatchTaskInstances(data: DescribeBatchTaskInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskInstancesResponse>;
-  /** 跑批任务列表 */
+  /** {@link DescribeBatchTasks 跑批任务列表}({@link DescribeBatchTasksRequest 请求参数}): {@link DescribeBatchTasksResponse 返回参数} */
   DescribeBatchTasks(data?: DescribeBatchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTasksResponse>;
-  /** 查询资源组详情 */
+  /** {@link DescribeBillingResourceGroups 查询资源组详情}({@link DescribeBillingResourceGroupsRequest 请求参数}): {@link DescribeBillingResourceGroupsResponse 返回参数} */
   DescribeBillingResourceGroups(data: DescribeBillingResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupsResponse>;
-  /** 查询计费项列表 */
+  /** {@link DescribeBillingSpecs 查询计费项列表}({@link DescribeBillingSpecsRequest 请求参数}): {@link DescribeBillingSpecsResponse 返回参数} */
   DescribeBillingSpecs(data: DescribeBillingSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingSpecsResponse>;
-  /** 查询计费项价格 */
+  /** {@link DescribeBillingSpecsPrice 查询计费项价格}({@link DescribeBillingSpecsPriceRequest 请求参数}): {@link DescribeBillingSpecsPriceResponse 返回参数} */
   DescribeBillingSpecsPrice(data: DescribeBillingSpecsPriceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingSpecsPriceResponse>;
-  /** 查询结构化数据集详情 */
+  /** {@link DescribeDatasetDetailStructured 查询结构化数据集详情}({@link DescribeDatasetDetailStructuredRequest 请求参数}): {@link DescribeDatasetDetailStructuredResponse 返回参数} */
   DescribeDatasetDetailStructured(data: DescribeDatasetDetailStructuredRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetDetailStructuredResponse>;
-  /** 查询非结构化数据集详情 */
+  /** {@link DescribeDatasetDetailUnstructured 查询非结构化数据集详情}({@link DescribeDatasetDetailUnstructuredRequest 请求参数}): {@link DescribeDatasetDetailUnstructuredResponse 返回参数} */
   DescribeDatasetDetailUnstructured(data?: DescribeDatasetDetailUnstructuredRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetDetailUnstructuredResponse>;
-  /** 查询数据集列表 */
+  /** {@link DescribeDatasets 查询数据集列表}({@link DescribeDatasetsRequest 请求参数}): {@link DescribeDatasetsResponse 返回参数} */
   DescribeDatasets(data?: DescribeDatasetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetsResponse>;
-  /** 查询推理镜像模板 */
+  /** {@link DescribeInferTemplates 查询推理镜像模板}({@link DescribeInferTemplatesRequest 请求参数}): {@link DescribeInferTemplatesResponse 返回参数} */
   DescribeInferTemplates(data?: DescribeInferTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferTemplatesResponse>;
-  /** 查询最近上报的训练自定义指标 */
+  /** {@link DescribeLatestTrainingMetrics 查询最近上报的训练自定义指标}({@link DescribeLatestTrainingMetricsRequest 请求参数}): {@link DescribeLatestTrainingMetricsResponse 返回参数} */
   DescribeLatestTrainingMetrics(data: DescribeLatestTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLatestTrainingMetricsResponse>;
-  /** 获取日志 */
+  /** {@link DescribeLogs 获取日志}({@link DescribeLogsRequest 请求参数}): {@link DescribeLogsResponse 返回参数} */
   DescribeLogs(data: DescribeLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsResponse>;
-  /** 训练框架列表 */
+  /** {@link DescribeTrainingFrameworks 训练框架列表}({@link DescribeTrainingFrameworksRequest 请求参数}): {@link DescribeTrainingFrameworksResponse 返回参数} */
   DescribeTrainingFrameworks(data?: DescribeTrainingFrameworksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingFrameworksResponse>;
-  /** 查询训练自定义指标 */
+  /** {@link DescribeTrainingMetrics 查询训练自定义指标}({@link DescribeTrainingMetricsRequest 请求参数}): {@link DescribeTrainingMetricsResponse 返回参数} */
   DescribeTrainingMetrics(data: DescribeTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingMetricsResponse>;
-  /** 查询模型版本 */
+  /** {@link DescribeTrainingModelVersion 查询模型版本}({@link DescribeTrainingModelVersionRequest 请求参数}): {@link DescribeTrainingModelVersionResponse 返回参数} */
   DescribeTrainingModelVersion(data: DescribeTrainingModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingModelVersionResponse>;
-  /** 模型版本列表 */
+  /** {@link DescribeTrainingModelVersions 模型版本列表}({@link DescribeTrainingModelVersionsRequest 请求参数}): {@link DescribeTrainingModelVersionsResponse 返回参数} */
   DescribeTrainingModelVersions(data: DescribeTrainingModelVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingModelVersionsResponse>;
-  /** 模型列表 */
+  /** {@link DescribeTrainingModels 模型列表}({@link DescribeTrainingModelsRequest 请求参数}): {@link DescribeTrainingModelsResponse 返回参数} */
   DescribeTrainingModels(data?: DescribeTrainingModelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingModelsResponse>;
-  /** 训练任务详情 */
+  /** {@link DescribeTrainingTask 训练任务详情}({@link DescribeTrainingTaskRequest 请求参数}): {@link DescribeTrainingTaskResponse 返回参数} */
   DescribeTrainingTask(data: DescribeTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTaskResponse>;
-  /** 训练任务pod列表 */
+  /** {@link DescribeTrainingTaskPods 训练任务pod列表}({@link DescribeTrainingTaskPodsRequest 请求参数}): {@link DescribeTrainingTaskPodsResponse 返回参数} */
   DescribeTrainingTaskPods(data: DescribeTrainingTaskPodsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTaskPodsResponse>;
-  /** 模型训练任务列表 */
+  /** {@link DescribeTrainingTasks 模型训练任务列表}({@link DescribeTrainingTasksRequest 请求参数}): {@link DescribeTrainingTasksResponse 返回参数} */
   DescribeTrainingTasks(data?: DescribeTrainingTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTasksResponse>;
-  /** 上报训练自定义指标 */
+  /** {@link PushTrainingMetrics 上报训练自定义指标}({@link PushTrainingMetricsRequest 请求参数}): {@link PushTrainingMetricsResponse 返回参数} */
   PushTrainingMetrics(data?: PushTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<PushTrainingMetricsResponse>;
-  /** 启动模型训练任务 */
+  /** {@link StartTrainingTask 启动模型训练任务}({@link StartTrainingTaskRequest 请求参数}): {@link StartTrainingTaskResponse 返回参数} */
   StartTrainingTask(data: StartTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StartTrainingTaskResponse>;
-  /** 停止跑批任务 */
+  /** {@link StopBatchTask 停止跑批任务}({@link StopBatchTaskRequest 请求参数}): {@link StopBatchTaskResponse 返回参数} */
   StopBatchTask(data: StopBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopBatchTaskResponse>;
-  /** 停止模型训练任务 */
+  /** {@link StopTrainingTask 停止模型训练任务}({@link StopTrainingTaskRequest 请求参数}): {@link StopTrainingTaskResponse 返回参数} */
   StopTrainingTask(data: StopTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopTrainingTaskResponse>;
-  /** 创建存储库 */
+  /** {@link V20191022.CreateCodeRepository 创建存储库}({@link V20191022.CreateCodeRepositoryRequest 请求参数}): {@link V20191022.CreateCodeRepositoryResponse 返回参数} */
   CreateCodeRepository(data: V20191022.CreateCodeRepositoryRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.CreateCodeRepositoryResponse>;
-  /** 创建Notebook实例 */
+  /** {@link V20191022.CreateNotebookInstance 创建Notebook实例}({@link V20191022.CreateNotebookInstanceRequest 请求参数}): {@link V20191022.CreateNotebookInstanceResponse 返回参数} */
   CreateNotebookInstance(data: V20191022.CreateNotebookInstanceRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.CreateNotebookInstanceResponse>;
-  /** 创建Notebook生命周期脚本 */
+  /** {@link V20191022.CreateNotebookLifecycleScript 创建Notebook生命周期脚本}({@link V20191022.CreateNotebookLifecycleScriptRequest 请求参数}): {@link V20191022.CreateNotebookLifecycleScriptResponse 返回参数} */
   CreateNotebookLifecycleScript(data: V20191022.CreateNotebookLifecycleScriptRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.CreateNotebookLifecycleScriptResponse>;
-  /** 创建Notebook授权Url */
+  /** {@link V20191022.CreatePresignedNotebookInstanceUrl 创建Notebook授权Url}({@link V20191022.CreatePresignedNotebookInstanceUrlRequest 请求参数}): {@link V20191022.CreatePresignedNotebookInstanceUrlResponse 返回参数} */
   CreatePresignedNotebookInstanceUrl(data: V20191022.CreatePresignedNotebookInstanceUrlRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.CreatePresignedNotebookInstanceUrlResponse>;
-  /** 创建训练任务 */
+  /** {@link V20191022.CreateTrainingJob 创建训练任务}({@link V20191022.CreateTrainingJobRequest 请求参数}): {@link V20191022.CreateTrainingJobResponse 返回参数} */
   CreateTrainingJob(data: V20191022.CreateTrainingJobRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.CreateTrainingJobResponse>;
-  /** 删除存储库 */
+  /** {@link V20191022.DeleteCodeRepository 删除存储库}({@link V20191022.DeleteCodeRepositoryRequest 请求参数}): {@link V20191022.DeleteCodeRepositoryResponse 返回参数} */
   DeleteCodeRepository(data: V20191022.DeleteCodeRepositoryRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DeleteCodeRepositoryResponse>;
-  /** 删除Notebook实例 */
+  /** {@link V20191022.DeleteNotebookInstance 删除Notebook实例}({@link V20191022.DeleteNotebookInstanceRequest 请求参数}): {@link V20191022.DeleteNotebookInstanceResponse 返回参数} */
   DeleteNotebookInstance(data: V20191022.DeleteNotebookInstanceRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DeleteNotebookInstanceResponse>;
-  /** 删除Notebook生命周期脚本 */
+  /** {@link V20191022.DeleteNotebookLifecycleScript 删除Notebook生命周期脚本}({@link V20191022.DeleteNotebookLifecycleScriptRequest 请求参数}): {@link V20191022.DeleteNotebookLifecycleScriptResponse 返回参数} */
   DeleteNotebookLifecycleScript(data: V20191022.DeleteNotebookLifecycleScriptRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DeleteNotebookLifecycleScriptResponse>;
-  /** 查询存储库列表 */
+  /** {@link V20191022.DescribeCodeRepositories 查询存储库列表}({@link V20191022.DescribeCodeRepositoriesRequest 请求参数}): {@link V20191022.DescribeCodeRepositoriesResponse 返回参数} */
   DescribeCodeRepositories(data: V20191022.DescribeCodeRepositoriesRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeCodeRepositoriesResponse>;
-  /** 查询存储库详情 */
+  /** {@link V20191022.DescribeCodeRepository 查询存储库详情}({@link V20191022.DescribeCodeRepositoryRequest 请求参数}): {@link V20191022.DescribeCodeRepositoryResponse 返回参数} */
   DescribeCodeRepository(data: V20191022.DescribeCodeRepositoryRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeCodeRepositoryResponse>;
-  /** 查询Notebook实例 */
+  /** {@link V20191022.DescribeNotebookInstance 查询Notebook实例}({@link V20191022.DescribeNotebookInstanceRequest 请求参数}): {@link V20191022.DescribeNotebookInstanceResponse 返回参数} */
   DescribeNotebookInstance(data: V20191022.DescribeNotebookInstanceRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeNotebookInstanceResponse>;
-  /** 查询Notebook实例列表 */
+  /** {@link V20191022.DescribeNotebookInstances 查询Notebook实例列表}({@link V20191022.DescribeNotebookInstancesRequest 请求参数}): {@link V20191022.DescribeNotebookInstancesResponse 返回参数} */
   DescribeNotebookInstances(data: V20191022.DescribeNotebookInstancesRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeNotebookInstancesResponse>;
-  /** 查看notebook生命周期脚本详情 */
+  /** {@link V20191022.DescribeNotebookLifecycleScript 查看notebook生命周期脚本详情}({@link V20191022.DescribeNotebookLifecycleScriptRequest 请求参数}): {@link V20191022.DescribeNotebookLifecycleScriptResponse 返回参数} */
   DescribeNotebookLifecycleScript(data: V20191022.DescribeNotebookLifecycleScriptRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeNotebookLifecycleScriptResponse>;
-  /** 查看notebook生命周期脚本列表 */
+  /** {@link V20191022.DescribeNotebookLifecycleScripts 查看notebook生命周期脚本列表}({@link V20191022.DescribeNotebookLifecycleScriptsRequest 请求参数}): {@link V20191022.DescribeNotebookLifecycleScriptsResponse 返回参数} */
   DescribeNotebookLifecycleScripts(data: V20191022.DescribeNotebookLifecycleScriptsRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeNotebookLifecycleScriptsResponse>;
-  /** 查询Notebook概览 */
+  /** {@link V20191022.DescribeNotebookSummary 查询Notebook概览}({@link V20191022.DescribeNotebookSummaryRequest 请求参数}): {@link V20191022.DescribeNotebookSummaryResponse 返回参数} */
   DescribeNotebookSummary(data: V20191022.DescribeNotebookSummaryRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeNotebookSummaryResponse>;
-  /** 查询训练任务 */
+  /** {@link V20191022.DescribeTrainingJob 查询训练任务}({@link V20191022.DescribeTrainingJobRequest 请求参数}): {@link V20191022.DescribeTrainingJobResponse 返回参数} */
   DescribeTrainingJob(data: V20191022.DescribeTrainingJobRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeTrainingJobResponse>;
-  /** 查询训练任务列表 */
+  /** {@link V20191022.DescribeTrainingJobs 查询训练任务列表}({@link V20191022.DescribeTrainingJobsRequest 请求参数}): {@link V20191022.DescribeTrainingJobsResponse 返回参数} */
   DescribeTrainingJobs(data: V20191022.DescribeTrainingJobsRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeTrainingJobsResponse>;
-  /** 启动Notebook实例 */
+  /** {@link V20191022.StartNotebookInstance 启动Notebook实例}({@link V20191022.StartNotebookInstanceRequest 请求参数}): {@link V20191022.StartNotebookInstanceResponse 返回参数} */
   StartNotebookInstance(data: V20191022.StartNotebookInstanceRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.StartNotebookInstanceResponse>;
-  /** 停止Notebook实例 */
+  /** {@link V20191022.StopNotebookInstance 停止Notebook实例}({@link V20191022.StopNotebookInstanceRequest 请求参数}): {@link V20191022.StopNotebookInstanceResponse 返回参数} */
   StopNotebookInstance(data: V20191022.StopNotebookInstanceRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.StopNotebookInstanceResponse>;
-  /** 停止训练任务 */
+  /** {@link V20191022.StopTrainingJob 停止训练任务}({@link V20191022.StopTrainingJobRequest 请求参数}): {@link V20191022.StopTrainingJobResponse 返回参数} */
   StopTrainingJob(data: V20191022.StopTrainingJobRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.StopTrainingJobResponse>;
-  /** 更新存储库 */
+  /** {@link V20191022.UpdateCodeRepository 更新存储库}({@link V20191022.UpdateCodeRepositoryRequest 请求参数}): {@link V20191022.UpdateCodeRepositoryResponse 返回参数} */
   UpdateCodeRepository(data: V20191022.UpdateCodeRepositoryRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.UpdateCodeRepositoryResponse>;
-  /** 更新Notebook实例 */
+  /** {@link V20191022.UpdateNotebookInstance 更新Notebook实例}({@link V20191022.UpdateNotebookInstanceRequest 请求参数}): {@link V20191022.UpdateNotebookInstanceResponse 返回参数} */
   UpdateNotebookInstance(data: V20191022.UpdateNotebookInstanceRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.UpdateNotebookInstanceResponse>;
-  /** 更新notebook生命周期脚本 */
+  /** {@link V20191022.UpdateNotebookLifecycleScript 更新notebook生命周期脚本}({@link V20191022.UpdateNotebookLifecycleScriptRequest 请求参数}): {@link V20191022.UpdateNotebookLifecycleScriptResponse 返回参数} */
   UpdateNotebookLifecycleScript(data: V20191022.UpdateNotebookLifecycleScriptRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.UpdateNotebookLifecycleScriptResponse>;
 }
 

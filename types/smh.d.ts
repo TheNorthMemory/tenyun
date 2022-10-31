@@ -296,28 +296,28 @@ declare interface VerifySmsCodeResponse {
   RequestId?: string;
 }
 
-/** [智能媒资托管](https://cloud.tencent.com/document/product/1339) */
+/** {@link Smh 智能媒资托管} */
 declare interface Smh {
   (): Versions;
-  /** 创建媒体库 */
+  /** {@link CreateLibrary 创建媒体库}({@link CreateLibraryRequest 请求参数}): {@link CreateLibraryResponse 返回参数} */
   CreateLibrary(data: CreateLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLibraryResponse>;
-  /** 删除媒体库 */
+  /** {@link DeleteLibrary 删除媒体库}({@link DeleteLibraryRequest 请求参数}): {@link DeleteLibraryResponse 返回参数} */
   DeleteLibrary(data: DeleteLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLibraryResponse>;
-  /** 查询媒体库 */
+  /** {@link DescribeLibraries 查询媒体库}({@link DescribeLibrariesRequest 请求参数}): {@link DescribeLibrariesResponse 返回参数} */
   DescribeLibraries(data?: DescribeLibrariesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibrariesResponse>;
-  /** 查询媒体库密钥 */
+  /** {@link DescribeLibrarySecret 查询媒体库密钥}({@link DescribeLibrarySecretRequest 请求参数}): {@link DescribeLibrarySecretResponse 返回参数} */
   DescribeLibrarySecret(data: DescribeLibrarySecretRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibrarySecretResponse>;
-  /** 查询官方实例 */
+  /** {@link DescribeOfficialInstances 查询官方实例}({@link DescribeOfficialInstancesRequest 请求参数}): {@link DescribeOfficialInstancesResponse 返回参数} */
   DescribeOfficialInstances(data?: DescribeOfficialInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfficialInstancesResponse>;
-  /** 查询官方实例概览数据 */
+  /** {@link DescribeOfficialOverview 查询官方实例概览数据}({@link DescribeOfficialOverviewRequest 请求参数}): {@link DescribeOfficialOverviewResponse 返回参数} */
   DescribeOfficialOverview(data?: DescribeOfficialOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfficialOverviewResponse>;
-  /** 查询流量包 */
+  /** {@link DescribeTrafficPackages 查询流量包}({@link DescribeTrafficPackagesRequest 请求参数}): {@link DescribeTrafficPackagesResponse 返回参数} */
   DescribeTrafficPackages(data?: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;
-  /** 修改媒体库配置项 */
+  /** {@link ModifyLibrary 修改媒体库配置项}({@link ModifyLibraryRequest 请求参数}): {@link ModifyLibraryResponse 返回参数} */
   ModifyLibrary(data: ModifyLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLibraryResponse>;
-  /** 发送短信验证码 */
+  /** {@link SendSmsCode 发送短信验证码}({@link SendSmsCodeRequest 请求参数}): {@link SendSmsCodeResponse 返回参数} */
   SendSmsCode(data: SendSmsCodeRequest, config?: AxiosRequestConfig): AxiosPromise<SendSmsCodeResponse>;
-  /** 验证短信验证码 */
+  /** {@link VerifySmsCode 验证短信验证码}({@link VerifySmsCodeRequest 请求参数}): {@link VerifySmsCodeResponse 返回参数} */
   VerifySmsCode(data: VerifySmsCodeRequest, config?: AxiosRequestConfig): AxiosPromise<VerifySmsCodeResponse>;
 }
 

@@ -3338,200 +3338,200 @@ declare interface UpdateServiceResponse {
   RequestId?: string;
 }
 
-/** [API网关](https://cloud.tencent.com/document/product/628) */
+/** {@link Apigateway API 网关} */
 declare interface Apigateway {
   (): Versions;
-  /** 插件绑定API */
+  /** {@link AttachPlugin 插件绑定API}({@link AttachPluginRequest 请求参数}): {@link AttachPluginResponse 返回参数} */
   AttachPlugin(data: AttachPluginRequest, config?: AxiosRequestConfig): AxiosPromise<AttachPluginResponse>;
-  /** 绑定应用到API */
+  /** {@link BindApiApp 绑定应用到API}({@link BindApiAppRequest 请求参数}): {@link BindApiAppResponse 返回参数} */
   BindApiApp(data: BindApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<BindApiAppResponse>;
-  /** 绑定使用计划到服务或API */
+  /** {@link BindEnvironment 绑定使用计划到服务或API}({@link BindEnvironmentRequest 请求参数}): {@link BindEnvironmentResponse 返回参数} */
   BindEnvironment(data: BindEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<BindEnvironmentResponse>;
-  /** API绑定IP策略 */
+  /** {@link BindIPStrategy API绑定IP策略}({@link BindIPStrategyRequest 请求参数}): {@link BindIPStrategyResponse 返回参数} */
   BindIPStrategy(data: BindIPStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<BindIPStrategyResponse>;
-  /** 使用计划绑定密钥 */
+  /** {@link BindSecretIds 使用计划绑定密钥}({@link BindSecretIdsRequest 请求参数}): {@link BindSecretIdsResponse 返回参数} */
   BindSecretIds(data: BindSecretIdsRequest, config?: AxiosRequestConfig): AxiosPromise<BindSecretIdsResponse>;
-  /** 服务绑定自定义域名 */
+  /** {@link BindSubDomain 服务绑定自定义域名}({@link BindSubDomainRequest 请求参数}): {@link BindSubDomainResponse 返回参数} */
   BindSubDomain(data: BindSubDomainRequest, config?: AxiosRequestConfig): AxiosPromise<BindSubDomainResponse>;
-  /** 构建 API 文档 */
+  /** {@link BuildAPIDoc 构建 API 文档}({@link BuildAPIDocRequest 请求参数}): {@link BuildAPIDocResponse 返回参数} */
   BuildAPIDoc(data: BuildAPIDocRequest, config?: AxiosRequestConfig): AxiosPromise<BuildAPIDocResponse>;
-  /** 创建 API 文档 */
+  /** {@link CreateAPIDoc 创建 API 文档}({@link CreateAPIDocRequest 请求参数}): {@link CreateAPIDocResponse 返回参数} */
   CreateAPIDoc(data: CreateAPIDocRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAPIDocResponse>;
-  /** 创建API */
+  /** {@link CreateApi 创建API}({@link CreateApiRequest 请求参数}): {@link CreateApiResponse 返回参数} */
   CreateApi(data: CreateApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiResponse>;
-  /** 创建应用 */
+  /** {@link CreateApiApp 创建应用}({@link CreateApiAppRequest 请求参数}): {@link CreateApiAppResponse 返回参数} */
   CreateApiApp(data: CreateApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiAppResponse>;
-  /** 创建密钥 */
+  /** {@link CreateApiKey 创建密钥}({@link CreateApiKeyRequest 请求参数}): {@link CreateApiKeyResponse 返回参数} */
   CreateApiKey(data: CreateApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiKeyResponse>;
-  /** 创建服务IP策略 */
+  /** {@link CreateIPStrategy 创建服务IP策略}({@link CreateIPStrategyRequest 请求参数}): {@link CreateIPStrategyResponse 返回参数} */
   CreateIPStrategy(data: CreateIPStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIPStrategyResponse>;
-  /** 创建插件 */
+  /** {@link CreatePlugin 创建插件}({@link CreatePluginRequest 请求参数}): {@link CreatePluginResponse 返回参数} */
   CreatePlugin(data: CreatePluginRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePluginResponse>;
-  /** 创建服务 */
+  /** {@link CreateService 创建服务}({@link CreateServiceRequest 请求参数}): {@link CreateServiceResponse 返回参数} */
   CreateService(data: CreateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceResponse>;
-  /** 创建后端通道 */
+  /** {@link CreateUpstream 创建后端通道}({@link CreateUpstreamRequest 请求参数}): {@link CreateUpstreamResponse 返回参数} */
   CreateUpstream(data: CreateUpstreamRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUpstreamResponse>;
-  /** 创建使用计划 */
+  /** {@link CreateUsagePlan 创建使用计划}({@link CreateUsagePlanRequest 请求参数}): {@link CreateUsagePlanResponse 返回参数} */
   CreateUsagePlan(data: CreateUsagePlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUsagePlanResponse>;
-  /** 删除 API 文档 */
+  /** {@link DeleteAPIDoc 删除 API 文档}({@link DeleteAPIDocRequest 请求参数}): {@link DeleteAPIDocResponse 返回参数} */
   DeleteAPIDoc(data: DeleteAPIDocRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAPIDocResponse>;
-  /** 删除API */
+  /** {@link DeleteApi 删除API}({@link DeleteApiRequest 请求参数}): {@link DeleteApiResponse 返回参数} */
   DeleteApi(data: DeleteApiRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiResponse>;
-  /** 删除应用 */
+  /** {@link DeleteApiApp 删除应用}({@link DeleteApiAppRequest 请求参数}): {@link DeleteApiAppResponse 返回参数} */
   DeleteApiApp(data: DeleteApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiAppResponse>;
-  /** 删除密钥 */
+  /** {@link DeleteApiKey 删除密钥}({@link DeleteApiKeyRequest 请求参数}): {@link DeleteApiKeyResponse 返回参数} */
   DeleteApiKey(data: DeleteApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiKeyResponse>;
-  /** 删除服务IP策略 */
+  /** {@link DeleteIPStrategy 删除服务IP策略}({@link DeleteIPStrategyRequest 请求参数}): {@link DeleteIPStrategyResponse 返回参数} */
   DeleteIPStrategy(data: DeleteIPStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIPStrategyResponse>;
-  /** 删除插件 */
+  /** {@link DeletePlugin 删除插件}({@link DeletePluginRequest 请求参数}): {@link DeletePluginResponse 返回参数} */
   DeletePlugin(data: DeletePluginRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePluginResponse>;
-  /** 删除服务 */
+  /** {@link DeleteService 删除服务}({@link DeleteServiceRequest 请求参数}): {@link DeleteServiceResponse 返回参数} */
   DeleteService(data: DeleteServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceResponse>;
-  /** 删除自定义域名的路径映射 */
+  /** {@link DeleteServiceSubDomainMapping 删除自定义域名的路径映射}({@link DeleteServiceSubDomainMappingRequest 请求参数}): {@link DeleteServiceSubDomainMappingResponse 返回参数} */
   DeleteServiceSubDomainMapping(data: DeleteServiceSubDomainMappingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceSubDomainMappingResponse>;
-  /** 删除后端通道 */
+  /** {@link DeleteUpstream 删除后端通道}({@link DeleteUpstreamRequest 请求参数}): {@link DeleteUpstreamResponse 返回参数} */
   DeleteUpstream(data: DeleteUpstreamRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUpstreamResponse>;
-  /** 删除使用计划 */
+  /** {@link DeleteUsagePlan 删除使用计划}({@link DeleteUsagePlanRequest 请求参数}): {@link DeleteUsagePlanResponse 返回参数} */
   DeleteUsagePlan(data: DeleteUsagePlanRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsagePlanResponse>;
-  /** 服务级别使用计划降级 */
+  /** {@link DemoteServiceUsagePlan 服务级别使用计划降级}({@link DemoteServiceUsagePlanRequest 请求参数}): {@link DemoteServiceUsagePlanResponse 返回参数} */
   DemoteServiceUsagePlan(data: DemoteServiceUsagePlanRequest, config?: AxiosRequestConfig): AxiosPromise<DemoteServiceUsagePlanResponse>;
-  /** 查询 API 文档详情 */
+  /** {@link DescribeAPIDocDetail 查询 API 文档详情}({@link DescribeAPIDocDetailRequest 请求参数}): {@link DescribeAPIDocDetailResponse 返回参数} */
   DescribeAPIDocDetail(data: DescribeAPIDocDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAPIDocDetailResponse>;
-  /** 查询 API 文档列表 */
+  /** {@link DescribeAPIDocs 查询 API 文档列表}({@link DescribeAPIDocsRequest 请求参数}): {@link DescribeAPIDocsResponse 返回参数} */
   DescribeAPIDocs(data?: DescribeAPIDocsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAPIDocsResponse>;
-  /** 展示插件相关的API列表 */
+  /** {@link DescribeAllPluginApis 展示插件相关的API列表}({@link DescribeAllPluginApisRequest 请求参数}): {@link DescribeAllPluginApisResponse 返回参数} */
   DescribeAllPluginApis(data: DescribeAllPluginApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllPluginApisResponse>;
-  /** 查询API详情 */
+  /** {@link DescribeApi 查询API详情}({@link DescribeApiRequest 请求参数}): {@link DescribeApiResponse 返回参数} */
   DescribeApi(data: DescribeApiRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiResponse>;
-  /** 搜索应用 */
+  /** {@link DescribeApiApp 搜索应用}({@link DescribeApiAppRequest 请求参数}): {@link DescribeApiAppResponse 返回参数} */
   DescribeApiApp(data: DescribeApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiAppResponse>;
-  /** 查询应用绑定的Api列表 */
+  /** {@link DescribeApiAppBindApisStatus 查询应用绑定的Api列表}({@link DescribeApiAppBindApisStatusRequest 请求参数}): {@link DescribeApiAppBindApisStatusResponse 返回参数} */
   DescribeApiAppBindApisStatus(data: DescribeApiAppBindApisStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiAppBindApisStatusResponse>;
-  /** 查询应用列表 */
+  /** {@link DescribeApiAppsStatus 查询应用列表}({@link DescribeApiAppsStatusRequest 请求参数}): {@link DescribeApiAppsStatusResponse 返回参数} */
   DescribeApiAppsStatus(data?: DescribeApiAppsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiAppsStatusResponse>;
-  /** 查询Api绑定的应用列表 */
+  /** {@link DescribeApiBindApiAppsStatus 查询Api绑定的应用列表}({@link DescribeApiBindApiAppsStatusRequest 请求参数}): {@link DescribeApiBindApiAppsStatusResponse 返回参数} */
   DescribeApiBindApiAppsStatus(data: DescribeApiBindApiAppsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiBindApiAppsStatusResponse>;
-  /** 展示API绑定的限流策略 */
+  /** {@link DescribeApiEnvironmentStrategy 展示API绑定的限流策略}({@link DescribeApiEnvironmentStrategyRequest 请求参数}): {@link DescribeApiEnvironmentStrategyResponse 返回参数} */
   DescribeApiEnvironmentStrategy(data: DescribeApiEnvironmentStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiEnvironmentStrategyResponse>;
-  /** 应用使用者查询API详情 */
+  /** {@link DescribeApiForApiApp 应用使用者查询API详情}({@link DescribeApiForApiAppRequest 请求参数}): {@link DescribeApiForApiAppResponse 返回参数} */
   DescribeApiForApiApp(data: DescribeApiForApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiForApiAppResponse>;
-  /** 查询密钥详情 */
+  /** {@link DescribeApiKey 查询密钥详情}({@link DescribeApiKeyRequest 请求参数}): {@link DescribeApiKeyResponse 返回参数} */
   DescribeApiKey(data: DescribeApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiKeyResponse>;
-  /** 查询密钥列表 */
+  /** {@link DescribeApiKeysStatus 查询密钥列表}({@link DescribeApiKeysStatusRequest 请求参数}): {@link DescribeApiKeysStatusResponse 返回参数} */
   DescribeApiKeysStatus(data?: DescribeApiKeysStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiKeysStatusResponse>;
-  /** 查询 API 使用计划详情 */
+  /** {@link DescribeApiUsagePlan 查询 API 使用计划详情}({@link DescribeApiUsagePlanRequest 请求参数}): {@link DescribeApiUsagePlanResponse 返回参数} */
   DescribeApiUsagePlan(data: DescribeApiUsagePlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiUsagePlanResponse>;
-  /** 查询 API 接口列表 */
+  /** {@link DescribeApisStatus 查询 API 接口列表}({@link DescribeApisStatusRequest 请求参数}): {@link DescribeApisStatusResponse 返回参数} */
   DescribeApisStatus(data: DescribeApisStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApisStatusResponse>;
-  /** 查询独享实例详情 */
+  /** {@link DescribeExclusiveInstanceDetail 查询独享实例详情}({@link DescribeExclusiveInstanceDetailRequest 请求参数}): {@link DescribeExclusiveInstanceDetailResponse 返回参数} */
   DescribeExclusiveInstanceDetail(data: DescribeExclusiveInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExclusiveInstanceDetailResponse>;
-  /** 查询独享实例列表 */
+  /** {@link DescribeExclusiveInstances 查询独享实例列表}({@link DescribeExclusiveInstancesRequest 请求参数}): {@link DescribeExclusiveInstancesResponse 返回参数} */
   DescribeExclusiveInstances(data: DescribeExclusiveInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExclusiveInstancesResponse>;
-  /** 查询专享实例列表（新） */
+  /** {@link DescribeExclusiveInstancesStatus 查询专享实例列表（新）}({@link DescribeExclusiveInstancesStatusRequest 请求参数}): {@link DescribeExclusiveInstancesStatusResponse 返回参数} */
   DescribeExclusiveInstancesStatus(data: DescribeExclusiveInstancesStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExclusiveInstancesStatusResponse>;
-  /** 查询IP策略详情 */
+  /** {@link DescribeIPStrategy 查询IP策略详情}({@link DescribeIPStrategyRequest 请求参数}): {@link DescribeIPStrategyResponse 返回参数} */
   DescribeIPStrategy(data: DescribeIPStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStrategyResponse>;
-  /** 查询IP策略绑定的API列表 */
+  /** {@link DescribeIPStrategyApisStatus 查询IP策略绑定的API列表}({@link DescribeIPStrategyApisStatusRequest 请求参数}): {@link DescribeIPStrategyApisStatusResponse 返回参数} */
   DescribeIPStrategyApisStatus(data: DescribeIPStrategyApisStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStrategyApisStatusResponse>;
-  /** 查询服务IP策略列表 */
+  /** {@link DescribeIPStrategysStatus 查询服务IP策略列表}({@link DescribeIPStrategysStatusRequest 请求参数}): {@link DescribeIPStrategysStatusResponse 返回参数} */
   DescribeIPStrategysStatus(data: DescribeIPStrategysStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStrategysStatusResponse>;
-  /** 日志搜索服务 */
+  /** {@link DescribeLogSearch 日志搜索服务}({@link DescribeLogSearchRequest 请求参数}): {@link DescribeLogSearchResponse 返回参数} */
   DescribeLogSearch(data: DescribeLogSearchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogSearchResponse>;
-  /** 查询插件详情 */
+  /** {@link DescribePlugin 查询插件详情}({@link DescribePluginRequest 请求参数}): {@link DescribePluginResponse 返回参数} */
   DescribePlugin(data: DescribePluginRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginResponse>;
-  /** 查询插件绑定的API列表 */
+  /** {@link DescribePluginApis 查询插件绑定的API列表}({@link DescribePluginApisRequest 请求参数}): {@link DescribePluginApisResponse 返回参数} */
   DescribePluginApis(data: DescribePluginApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginApisResponse>;
-  /** 查询插件列表和详情 */
+  /** {@link DescribePlugins 查询插件列表和详情}({@link DescribePluginsRequest 请求参数}): {@link DescribePluginsResponse 返回参数} */
   DescribePlugins(data?: DescribePluginsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginsResponse>;
-  /** 查询服务详情 */
+  /** {@link DescribeService 查询服务详情}({@link DescribeServiceRequest 请求参数}): {@link DescribeServiceResponse 返回参数} */
   DescribeService(data: DescribeServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceResponse>;
-  /** 查询服务环境列表 */
+  /** {@link DescribeServiceEnvironmentList 查询服务环境列表}({@link DescribeServiceEnvironmentListRequest 请求参数}): {@link DescribeServiceEnvironmentListResponse 返回参数} */
   DescribeServiceEnvironmentList(data: DescribeServiceEnvironmentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceEnvironmentListResponse>;
-  /** 查询服务环境的发布历史 */
+  /** {@link DescribeServiceEnvironmentReleaseHistory 查询服务环境的发布历史}({@link DescribeServiceEnvironmentReleaseHistoryRequest 请求参数}): {@link DescribeServiceEnvironmentReleaseHistoryResponse 返回参数} */
   DescribeServiceEnvironmentReleaseHistory(data: DescribeServiceEnvironmentReleaseHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceEnvironmentReleaseHistoryResponse>;
-  /** 展示服务限流策略 */
+  /** {@link DescribeServiceEnvironmentStrategy 展示服务限流策略}({@link DescribeServiceEnvironmentStrategyRequest 请求参数}): {@link DescribeServiceEnvironmentStrategyResponse 返回参数} */
   DescribeServiceEnvironmentStrategy(data: DescribeServiceEnvironmentStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceEnvironmentStrategyResponse>;
-  /** 应用使用者查询服务详情 */
+  /** {@link DescribeServiceForApiApp 应用使用者查询服务详情}({@link DescribeServiceForApiAppRequest 请求参数}): {@link DescribeServiceForApiAppResponse 返回参数} */
   DescribeServiceForApiApp(data: DescribeServiceForApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceForApiAppResponse>;
-  /** 查询服务已发布的版本 */
+  /** {@link DescribeServiceReleaseVersion 查询服务已发布的版本}({@link DescribeServiceReleaseVersionRequest 请求参数}): {@link DescribeServiceReleaseVersionResponse 返回参数} */
   DescribeServiceReleaseVersion(data: DescribeServiceReleaseVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceReleaseVersionResponse>;
-  /** 查询自定义域名的路径映射 */
+  /** {@link DescribeServiceSubDomainMappings 查询自定义域名的路径映射}({@link DescribeServiceSubDomainMappingsRequest 请求参数}): {@link DescribeServiceSubDomainMappingsResponse 返回参数} */
   DescribeServiceSubDomainMappings(data: DescribeServiceSubDomainMappingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceSubDomainMappingsResponse>;
-  /** 查询自定义域名列表 */
+  /** {@link DescribeServiceSubDomains 查询自定义域名列表}({@link DescribeServiceSubDomainsRequest 请求参数}): {@link DescribeServiceSubDomainsResponse 返回参数} */
   DescribeServiceSubDomains(data: DescribeServiceSubDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceSubDomainsResponse>;
-  /** 查询服务使用计划详情 */
+  /** {@link DescribeServiceUsagePlan 查询服务使用计划详情}({@link DescribeServiceUsagePlanRequest 请求参数}): {@link DescribeServiceUsagePlanResponse 返回参数} */
   DescribeServiceUsagePlan(data: DescribeServiceUsagePlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceUsagePlanResponse>;
-  /** 查询服务列表状态 */
+  /** {@link DescribeServicesStatus 查询服务列表状态}({@link DescribeServicesStatusRequest 请求参数}): {@link DescribeServicesStatusResponse 返回参数} */
   DescribeServicesStatus(data?: DescribeServicesStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServicesStatusResponse>;
-  /** 查询后端通道所绑定的API列表 */
+  /** {@link DescribeUpstreamBindApis 查询后端通道所绑定的API列表}({@link DescribeUpstreamBindApisRequest 请求参数}): {@link DescribeUpstreamBindApisResponse 返回参数} */
   DescribeUpstreamBindApis(data: DescribeUpstreamBindApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUpstreamBindApisResponse>;
-  /** 查询后端通道列表详情 */
+  /** {@link DescribeUpstreams 查询后端通道列表详情}({@link DescribeUpstreamsRequest 请求参数}): {@link DescribeUpstreamsResponse 返回参数} */
   DescribeUpstreams(data: DescribeUpstreamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUpstreamsResponse>;
-  /** 查询使用计划详情 */
+  /** {@link DescribeUsagePlan 查询使用计划详情}({@link DescribeUsagePlanRequest 请求参数}): {@link DescribeUsagePlanResponse 返回参数} */
   DescribeUsagePlan(data: DescribeUsagePlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsagePlanResponse>;
-  /** 查询使用计划绑定环境列表 */
+  /** {@link DescribeUsagePlanEnvironments 查询使用计划绑定环境列表}({@link DescribeUsagePlanEnvironmentsRequest 请求参数}): {@link DescribeUsagePlanEnvironmentsResponse 返回参数} */
   DescribeUsagePlanEnvironments(data: DescribeUsagePlanEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsagePlanEnvironmentsResponse>;
-  /** 查询使用计划绑定密钥列表 */
+  /** {@link DescribeUsagePlanSecretIds 查询使用计划绑定密钥列表}({@link DescribeUsagePlanSecretIdsRequest 请求参数}): {@link DescribeUsagePlanSecretIdsResponse 返回参数} */
   DescribeUsagePlanSecretIds(data: DescribeUsagePlanSecretIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsagePlanSecretIdsResponse>;
-  /** 查询使用计划列表 */
+  /** {@link DescribeUsagePlansStatus 查询使用计划列表}({@link DescribeUsagePlansStatusRequest 请求参数}): {@link DescribeUsagePlansStatusResponse 返回参数} */
   DescribeUsagePlansStatus(data?: DescribeUsagePlansStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsagePlansStatusResponse>;
-  /** 插件解绑API */
+  /** {@link DetachPlugin 插件解绑API}({@link DetachPluginRequest 请求参数}): {@link DetachPluginResponse 返回参数} */
   DetachPlugin(data: DetachPluginRequest, config?: AxiosRequestConfig): AxiosPromise<DetachPluginResponse>;
-  /** 禁用密钥 */
+  /** {@link DisableApiKey 禁用密钥}({@link DisableApiKeyRequest 请求参数}): {@link DisableApiKeyResponse 返回参数} */
   DisableApiKey(data: DisableApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DisableApiKeyResponse>;
-  /** 启用密钥 */
+  /** {@link EnableApiKey 启用密钥}({@link EnableApiKeyRequest 请求参数}): {@link EnableApiKeyResponse 返回参数} */
   EnableApiKey(data: EnableApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<EnableApiKeyResponse>;
-  /** 生成文档和 SDK */
+  /** {@link GenerateApiDocument 生成文档和 SDK}({@link GenerateApiDocumentRequest 请求参数}): {@link GenerateApiDocumentResponse 返回参数} */
   GenerateApiDocument(data: GenerateApiDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateApiDocumentResponse>;
-  /** 导入OpenAPI */
+  /** {@link ImportOpenApi 导入OpenAPI}({@link ImportOpenApiRequest 请求参数}): {@link ImportOpenApiResponse 返回参数} */
   ImportOpenApi(data: ImportOpenApiRequest, config?: AxiosRequestConfig): AxiosPromise<ImportOpenApiResponse>;
-  /** 修改 API 文档 */
+  /** {@link ModifyAPIDoc 修改 API 文档}({@link ModifyAPIDocRequest 请求参数}): {@link ModifyAPIDocResponse 返回参数} */
   ModifyAPIDoc(data: ModifyAPIDocRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAPIDocResponse>;
-  /** 修改API */
+  /** {@link ModifyApi 修改API}({@link ModifyApiRequest 请求参数}): {@link ModifyApiResponse 返回参数} */
   ModifyApi(data: ModifyApiRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiResponse>;
-  /** 修改应用 */
+  /** {@link ModifyApiApp 修改应用}({@link ModifyApiAppRequest 请求参数}): {@link ModifyApiAppResponse 返回参数} */
   ModifyApiApp(data: ModifyApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiAppResponse>;
-  /** 修改API限流策略 */
+  /** {@link ModifyApiEnvironmentStrategy 修改API限流策略}({@link ModifyApiEnvironmentStrategyRequest 请求参数}): {@link ModifyApiEnvironmentStrategyResponse 返回参数} */
   ModifyApiEnvironmentStrategy(data: ModifyApiEnvironmentStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiEnvironmentStrategyResponse>;
-  /** 增量更新API接口 */
+  /** {@link ModifyApiIncrement 增量更新API接口}({@link ModifyApiIncrementRequest 请求参数}): {@link ModifyApiIncrementResponse 返回参数} */
   ModifyApiIncrement(data: ModifyApiIncrementRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiIncrementResponse>;
-  /** 修改独享实例 */
+  /** {@link ModifyExclusiveInstance 修改独享实例}({@link ModifyExclusiveInstanceRequest 请求参数}): {@link ModifyExclusiveInstanceResponse 返回参数} */
   ModifyExclusiveInstance(data: ModifyExclusiveInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExclusiveInstanceResponse>;
-  /** 修改服务IP策略 */
+  /** {@link ModifyIPStrategy 修改服务IP策略}({@link ModifyIPStrategyRequest 请求参数}): {@link ModifyIPStrategyResponse 返回参数} */
   ModifyIPStrategy(data: ModifyIPStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIPStrategyResponse>;
-  /** 修改插件 */
+  /** {@link ModifyPlugin 修改插件}({@link ModifyPluginRequest 请求参数}): {@link ModifyPluginResponse 返回参数} */
   ModifyPlugin(data: ModifyPluginRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPluginResponse>;
-  /** 修改服务 */
+  /** {@link ModifyService 修改服务}({@link ModifyServiceRequest 请求参数}): {@link ModifyServiceResponse 返回参数} */
   ModifyService(data: ModifyServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceResponse>;
-  /** 修改服务限流策略 */
+  /** {@link ModifyServiceEnvironmentStrategy 修改服务限流策略}({@link ModifyServiceEnvironmentStrategyRequest 请求参数}): {@link ModifyServiceEnvironmentStrategyResponse 返回参数} */
   ModifyServiceEnvironmentStrategy(data: ModifyServiceEnvironmentStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceEnvironmentStrategyResponse>;
-  /** 服务修改自定义域名 */
+  /** {@link ModifySubDomain 服务修改自定义域名}({@link ModifySubDomainRequest 请求参数}): {@link ModifySubDomainResponse 返回参数} */
   ModifySubDomain(data: ModifySubDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubDomainResponse>;
-  /** 修改后端通道 */
+  /** {@link ModifyUpstream 修改后端通道}({@link ModifyUpstreamRequest 请求参数}): {@link ModifyUpstreamResponse 返回参数} */
   ModifyUpstream(data: ModifyUpstreamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUpstreamResponse>;
-  /** 修改使用计划 */
+  /** {@link ModifyUsagePlan 修改使用计划}({@link ModifyUsagePlanRequest 请求参数}): {@link ModifyUsagePlanResponse 返回参数} */
   ModifyUsagePlan(data: ModifyUsagePlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUsagePlanResponse>;
-  /** 发布服务 */
+  /** {@link ReleaseService 发布服务}({@link ReleaseServiceRequest 请求参数}): {@link ReleaseServiceResponse 返回参数} */
   ReleaseService(data: ReleaseServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseServiceResponse>;
-  /** 重置API文档密码 */
+  /** {@link ResetAPIDocPassword 重置API文档密码}({@link ResetAPIDocPasswordRequest 请求参数}): {@link ResetAPIDocPasswordResponse 返回参数} */
   ResetAPIDocPassword(data: ResetAPIDocPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAPIDocPasswordResponse>;
-  /** 从服务环境解绑使用计划 */
+  /** {@link UnBindEnvironment 从服务环境解绑使用计划}({@link UnBindEnvironmentRequest 请求参数}): {@link UnBindEnvironmentResponse 返回参数} */
   UnBindEnvironment(data: UnBindEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindEnvironmentResponse>;
-  /** 服务解绑IP策略 */
+  /** {@link UnBindIPStrategy 服务解绑IP策略}({@link UnBindIPStrategyRequest 请求参数}): {@link UnBindIPStrategyResponse 返回参数} */
   UnBindIPStrategy(data: UnBindIPStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindIPStrategyResponse>;
-  /** 使用计划解绑密钥 */
+  /** {@link UnBindSecretIds 使用计划解绑密钥}({@link UnBindSecretIdsRequest 请求参数}): {@link UnBindSecretIdsResponse 返回参数} */
   UnBindSecretIds(data: UnBindSecretIdsRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindSecretIdsResponse>;
-  /** 服务解绑自定义域名 */
+  /** {@link UnBindSubDomain 服务解绑自定义域名}({@link UnBindSubDomainRequest 请求参数}): {@link UnBindSubDomainResponse 返回参数} */
   UnBindSubDomain(data: UnBindSubDomainRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindSubDomainResponse>;
-  /** 下线服务 */
+  /** {@link UnReleaseService 下线服务}({@link UnReleaseServiceRequest 请求参数}): {@link UnReleaseServiceResponse 返回参数} */
   UnReleaseService(data: UnReleaseServiceRequest, config?: AxiosRequestConfig): AxiosPromise<UnReleaseServiceResponse>;
-  /** 解除应用和API绑定关系 */
+  /** {@link UnbindApiApp 解除应用和API绑定关系}({@link UnbindApiAppRequest 请求参数}): {@link UnbindApiAppResponse 返回参数} */
   UnbindApiApp(data: UnbindApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindApiAppResponse>;
-  /** 更新应用密钥 */
+  /** {@link UpdateApiAppKey 更新应用密钥}({@link UpdateApiAppKeyRequest 请求参数}): {@link UpdateApiAppKeyResponse 返回参数} */
   UpdateApiAppKey(data: UpdateApiAppKeyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApiAppKeyResponse>;
-  /** 更换密钥 */
+  /** {@link UpdateApiKey 更换密钥}({@link UpdateApiKeyRequest 请求参数}): {@link UpdateApiKeyResponse 返回参数} */
   UpdateApiKey(data: UpdateApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApiKeyResponse>;
-  /** 更新服务版本 */
+  /** {@link UpdateService 更新服务版本}({@link UpdateServiceRequest 请求参数}): {@link UpdateServiceResponse 返回参数} */
   UpdateService(data: UpdateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateServiceResponse>;
 }
 

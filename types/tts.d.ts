@@ -116,14 +116,14 @@ declare interface TextToVoiceResponse {
   RequestId?: string;
 }
 
-/** [语音合成](https://cloud.tencent.com/document/product/1073) */
+/** {@link Tts 语音合成} */
 declare interface Tts {
   (): Versions;
-  /** 长文本语音合成请求 */
+  /** {@link CreateTtsTask 长文本语音合成请求}({@link CreateTtsTaskRequest 请求参数}): {@link CreateTtsTaskResponse 返回参数} */
   CreateTtsTask(data: CreateTtsTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTtsTaskResponse>;
-  /** 长文本语音合成结果查询 */
+  /** {@link DescribeTtsTaskStatus 长文本语音合成结果查询}({@link DescribeTtsTaskStatusRequest 请求参数}): {@link DescribeTtsTaskStatusResponse 返回参数} */
   DescribeTtsTaskStatus(data: DescribeTtsTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTtsTaskStatusResponse>;
-  /** 基础语音合成 */
+  /** {@link TextToVoice 基础语音合成}({@link TextToVoiceRequest 请求参数}): {@link TextToVoiceResponse 返回参数} */
   TextToVoice(data: TextToVoiceRequest, config?: AxiosRequestConfig): AxiosPromise<TextToVoiceResponse>;
 }
 

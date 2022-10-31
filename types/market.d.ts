@@ -44,12 +44,12 @@ declare interface GetUsagePlanUsageAmountResponse {
   RequestId?: string;
 }
 
-/** [云市场](https://cloud.tencent.com/document/product/306) */
+/** {@link Market 云市场} */
 declare interface Market {
   (): Versions;
-  /** 计量商品用量提醒 */
+  /** {@link FlowProductRemind 计量商品用量提醒}({@link FlowProductRemindRequest 请求参数}): {@link FlowProductRemindResponse 返回参数} */
   FlowProductRemind(data: FlowProductRemindRequest, config?: AxiosRequestConfig): AxiosPromise<FlowProductRemindResponse>;
-  /** 查询使用计划使用量 */
+  /** {@link GetUsagePlanUsageAmount 查询使用计划使用量}({@link GetUsagePlanUsageAmountRequest 请求参数}): {@link GetUsagePlanUsageAmountResponse 返回参数} */
   GetUsagePlanUsageAmount(data: GetUsagePlanUsageAmountRequest, config?: AxiosRequestConfig): AxiosPromise<GetUsagePlanUsageAmountResponse>;
 }
 

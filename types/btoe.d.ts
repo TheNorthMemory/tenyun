@@ -538,58 +538,58 @@ declare namespace V20210303 {
   }
 }
 
-/** [区块链可信取证](https://cloud.tencent.com/document/product/1259) */
+/** {@link Btoe 区块链可信取证} */
 declare interface Btoe {
   (): Versions;
-  /** 音频文件存证 */
+  /** {@link CreateAudioDeposit 音频文件存证}({@link CreateAudioDepositRequest 请求参数}): {@link CreateAudioDepositResponse 返回参数} */
   CreateAudioDeposit(data: CreateAudioDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAudioDepositResponse>;
-  /** 业务数据明文存证 */
+  /** {@link CreateDataDeposit 业务数据明文存证}({@link CreateDataDepositRequest 请求参数}): {@link CreateDataDepositResponse 返回参数} */
   CreateDataDeposit(data: CreateDataDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataDepositResponse>;
-  /** 文档存证 */
+  /** {@link CreateDocDeposit 文档存证}({@link CreateDocDepositRequest 请求参数}): {@link CreateDocDepositResponse 返回参数} */
   CreateDocDeposit(data: CreateDocDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocDepositResponse>;
-  /** 哈希上链存证 */
+  /** {@link CreateHashDeposit 哈希上链存证}({@link CreateHashDepositRequest 请求参数}): {@link CreateHashDepositResponse 返回参数} */
   CreateHashDeposit(data: CreateHashDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHashDepositResponse>;
-  /** 哈希上链存证(无证书) */
+  /** {@link CreateHashDepositNoCert 哈希上链存证(无证书)}({@link CreateHashDepositNoCertRequest 请求参数}): {@link CreateHashDepositNoCertResponse 返回参数} */
   CreateHashDepositNoCert(data: CreateHashDepositNoCertRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHashDepositNoCertResponse>;
-  /** 哈希上链存证(有证书，无签章) */
+  /** {@link CreateHashDepositNoSeal 哈希上链存证(有证书，无签章)}({@link CreateHashDepositNoSealRequest 请求参数}): {@link CreateHashDepositNoSealResponse 返回参数} */
   CreateHashDepositNoSeal(data: CreateHashDepositNoSealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHashDepositNoSealResponse>;
-  /** 图片文件存证 */
+  /** {@link CreateImageDeposit 图片文件存证}({@link CreateImageDepositRequest 请求参数}): {@link CreateImageDepositResponse 返回参数} */
   CreateImageDeposit(data: CreateImageDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageDepositResponse>;
-  /** 视频文件存证 */
+  /** {@link CreateVideoDeposit 视频文件存证}({@link CreateVideoDepositRequest 请求参数}): {@link CreateVideoDepositResponse 返回参数} */
   CreateVideoDeposit(data: CreateVideoDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoDepositResponse>;
-  /** BTOE存证电子凭证查询 */
+  /** {@link GetDepositCert BTOE存证电子凭证查询}({@link GetDepositCertRequest 请求参数}): {@link GetDepositCertResponse 返回参数} */
   GetDepositCert(data: GetDepositCertRequest, config?: AxiosRequestConfig): AxiosPromise<GetDepositCertResponse>;
-  /** 存证文件查询 */
+  /** {@link GetDepositFile 存证文件查询}({@link GetDepositFileRequest 请求参数}): {@link GetDepositFileResponse 返回参数} */
   GetDepositFile(data: GetDepositFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetDepositFileResponse>;
-  /** 存证基本信息查询 */
+  /** {@link GetDepositInfo 存证基本信息查询}({@link GetDepositInfoRequest 请求参数}): {@link GetDepositInfoResponse 返回参数} */
   GetDepositInfo(data: GetDepositInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetDepositInfoResponse>;
-  /** 区块链交易hash核验接口 */
+  /** {@link VerifyEvidenceBlockChainTxHash 区块链交易hash核验接口}({@link VerifyEvidenceBlockChainTxHashRequest 请求参数}): {@link VerifyEvidenceBlockChainTxHashResponse 返回参数} */
   VerifyEvidenceBlockChainTxHash(data: VerifyEvidenceBlockChainTxHashRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyEvidenceBlockChainTxHashResponse>;
-  /** 核验存证内容hash */
+  /** {@link VerifyEvidenceHash 核验存证内容hash}({@link VerifyEvidenceHashRequest 请求参数}): {@link VerifyEvidenceHashResponse 返回参数} */
   VerifyEvidenceHash(data: VerifyEvidenceHashRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyEvidenceHashResponse>;
-  /** 音频文件存证 */
+  /** {@link V20210303.CreateAudioDeposit 音频文件存证}({@link V20210303.CreateAudioDepositRequest 请求参数}): {@link V20210303.CreateAudioDepositResponse 返回参数} */
   CreateAudioDeposit(data: V20210303.CreateAudioDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateAudioDepositResponse>;
-  /** 业务数据明文存证 */
+  /** {@link V20210303.CreateDataDeposit 业务数据明文存证}({@link V20210303.CreateDataDepositRequest 请求参数}): {@link V20210303.CreateDataDepositResponse 返回参数} */
   CreateDataDeposit(data: V20210303.CreateDataDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateDataDepositResponse>;
-  /** 文档存证 */
+  /** {@link V20210303.CreateDocDeposit 文档存证}({@link V20210303.CreateDocDepositRequest 请求参数}): {@link V20210303.CreateDocDepositResponse 返回参数} */
   CreateDocDeposit(data: V20210303.CreateDocDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateDocDepositResponse>;
-  /** 哈希上链存证 */
+  /** {@link V20210303.CreateHashDeposit 哈希上链存证}({@link V20210303.CreateHashDepositRequest 请求参数}): {@link V20210303.CreateHashDepositResponse 返回参数} */
   CreateHashDeposit(data: V20210303.CreateHashDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateHashDepositResponse>;
-  /** 哈希上链存证(无证书) */
+  /** {@link V20210303.CreateHashDepositNoCert 哈希上链存证(无证书)}({@link V20210303.CreateHashDepositNoCertRequest 请求参数}): {@link V20210303.CreateHashDepositNoCertResponse 返回参数} */
   CreateHashDepositNoCert(data: V20210303.CreateHashDepositNoCertRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateHashDepositNoCertResponse>;
-  /** 哈希上链存证(有证书，无签章) */
+  /** {@link V20210303.CreateHashDepositNoSeal 哈希上链存证(有证书，无签章)}({@link V20210303.CreateHashDepositNoSealRequest 请求参数}): {@link V20210303.CreateHashDepositNoSealResponse 返回参数} */
   CreateHashDepositNoSeal(data: V20210303.CreateHashDepositNoSealRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateHashDepositNoSealResponse>;
-  /** 图片文件存证 */
+  /** {@link V20210303.CreateImageDeposit 图片文件存证}({@link V20210303.CreateImageDepositRequest 请求参数}): {@link V20210303.CreateImageDepositResponse 返回参数} */
   CreateImageDeposit(data: V20210303.CreateImageDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateImageDepositResponse>;
-  /** 视频文件存证 */
+  /** {@link V20210303.CreateVideoDeposit 视频文件存证}({@link V20210303.CreateVideoDepositRequest 请求参数}): {@link V20210303.CreateVideoDepositResponse 返回参数} */
   CreateVideoDeposit(data: V20210303.CreateVideoDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateVideoDepositResponse>;
-  /** 网页快照存证 */
+  /** {@link V20210303.CreateWebpageDeposit 网页快照存证}({@link V20210303.CreateWebpageDepositRequest 请求参数}): {@link V20210303.CreateWebpageDepositResponse 返回参数} */
   CreateWebpageDeposit(data: V20210303.CreateWebpageDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateWebpageDepositResponse>;
-  /** BTOE存证电子凭证查询 */
+  /** {@link V20210303.GetDepositCert BTOE存证电子凭证查询}({@link V20210303.GetDepositCertRequest 请求参数}): {@link V20210303.GetDepositCertResponse 返回参数} */
   GetDepositCert(data: V20210303.GetDepositCertRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.GetDepositCertResponse>;
-  /** 存证文件查询 */
+  /** {@link V20210303.GetDepositFile 存证文件查询}({@link V20210303.GetDepositFileRequest 请求参数}): {@link V20210303.GetDepositFileResponse 返回参数} */
   GetDepositFile(data: V20210303.GetDepositFileRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.GetDepositFileResponse>;
-  /** 存证基本信息查询 */
+  /** {@link V20210303.GetDepositInfo 存证基本信息查询}({@link V20210303.GetDepositInfoRequest 请求参数}): {@link V20210303.GetDepositInfoResponse 返回参数} */
   GetDepositInfo(data: V20210303.GetDepositInfoRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.GetDepositInfoResponse>;
 }
 

@@ -1676,96 +1676,96 @@ declare interface UpdateNamespaceResponse {
   RequestId?: string;
 }
 
-/** [云函数](https://cloud.tencent.com/document/product/583) */
+/** {@link Scf 云函数} */
 declare interface Scf {
   (): Versions;
-  /** 复制函数 */
+  /** {@link CopyFunction 复制函数}({@link CopyFunctionRequest 请求参数}): {@link CopyFunctionResponse 返回参数} */
   CopyFunction(data: CopyFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CopyFunctionResponse>;
-  /** 创建函数版本别名 */
+  /** {@link CreateAlias 创建函数版本别名}({@link CreateAliasRequest 请求参数}): {@link CreateAliasResponse 返回参数} */
   CreateAlias(data: CreateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAliasResponse>;
-  /** 创建函数 */
+  /** {@link CreateFunction 创建函数}({@link CreateFunctionRequest 请求参数}): {@link CreateFunctionResponse 返回参数} */
   CreateFunction(data: CreateFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFunctionResponse>;
-  /** 创建命名空间 */
+  /** {@link CreateNamespace 创建命名空间}({@link CreateNamespaceRequest 请求参数}): {@link CreateNamespaceResponse 返回参数} */
   CreateNamespace(data: CreateNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNamespaceResponse>;
-  /** 设置函数触发方式 */
+  /** {@link CreateTrigger 设置函数触发方式}({@link CreateTriggerRequest 请求参数}): {@link CreateTriggerResponse 返回参数} */
   CreateTrigger(data: CreateTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTriggerResponse>;
-  /** 删除别名 */
+  /** {@link DeleteAlias 删除别名}({@link DeleteAliasRequest 请求参数}): {@link DeleteAliasResponse 返回参数} */
   DeleteAlias(data: DeleteAliasRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAliasResponse>;
-  /** 删除函数 */
+  /** {@link DeleteFunction 删除函数}({@link DeleteFunctionRequest 请求参数}): {@link DeleteFunctionResponse 返回参数} */
   DeleteFunction(data: DeleteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionResponse>;
-  /** 删除层版本 */
+  /** {@link DeleteLayerVersion 删除层版本}({@link DeleteLayerVersionRequest 请求参数}): {@link DeleteLayerVersionResponse 返回参数} */
   DeleteLayerVersion(data: DeleteLayerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLayerVersionResponse>;
-  /** 删除命名空间 */
+  /** {@link DeleteNamespace 删除命名空间}({@link DeleteNamespaceRequest 请求参数}): {@link DeleteNamespaceResponse 返回参数} */
   DeleteNamespace(data: DeleteNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNamespaceResponse>;
-  /** 删除预置并发 */
+  /** {@link DeleteProvisionedConcurrencyConfig 删除预置并发}({@link DeleteProvisionedConcurrencyConfigRequest 请求参数}): {@link DeleteProvisionedConcurrencyConfigResponse 返回参数} */
   DeleteProvisionedConcurrencyConfig(data: DeleteProvisionedConcurrencyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProvisionedConcurrencyConfigResponse>;
-  /** 删除函数最大独占配额 */
+  /** {@link DeleteReservedConcurrencyConfig 删除函数最大独占配额}({@link DeleteReservedConcurrencyConfigRequest 请求参数}): {@link DeleteReservedConcurrencyConfigResponse 返回参数} */
   DeleteReservedConcurrencyConfig(data: DeleteReservedConcurrencyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReservedConcurrencyConfigResponse>;
-  /** 删除触发器 */
+  /** {@link DeleteTrigger 删除触发器}({@link DeleteTriggerRequest 请求参数}): {@link DeleteTriggerResponse 返回参数} */
   DeleteTrigger(data: DeleteTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTriggerResponse>;
-  /** 获取账户信息 */
+  /** {@link GetAccount 获取账户信息}({@link GetAccountRequest 请求参数}): {@link GetAccountResponse 返回参数} */
   GetAccount(data?: GetAccountRequest, config?: AxiosRequestConfig): AxiosPromise<GetAccountResponse>;
-  /** 获取别名详细信息 */
+  /** {@link GetAlias 获取别名详细信息}({@link GetAliasRequest 请求参数}): {@link GetAliasResponse 返回参数} */
   GetAlias(data: GetAliasRequest, config?: AxiosRequestConfig): AxiosPromise<GetAliasResponse>;
-  /** 获取函数异步事件状态 */
+  /** {@link GetAsyncEventStatus 获取函数异步事件状态}({@link GetAsyncEventStatusRequest 请求参数}): {@link GetAsyncEventStatusResponse 返回参数} */
   GetAsyncEventStatus(data: GetAsyncEventStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetAsyncEventStatusResponse>;
-  /** 获取函数详细信息 */
+  /** {@link GetFunction 获取函数详细信息}({@link GetFunctionRequest 请求参数}): {@link GetFunctionResponse 返回参数} */
   GetFunction(data: GetFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<GetFunctionResponse>;
-  /** 获取函数代码下载地址 */
+  /** {@link GetFunctionAddress 获取函数代码下载地址}({@link GetFunctionAddressRequest 请求参数}): {@link GetFunctionAddressResponse 返回参数} */
   GetFunctionAddress(data: GetFunctionAddressRequest, config?: AxiosRequestConfig): AxiosPromise<GetFunctionAddressResponse>;
-  /** 获取函数异步重试配置 */
+  /** {@link GetFunctionEventInvokeConfig 获取函数异步重试配置}({@link GetFunctionEventInvokeConfigRequest 请求参数}): {@link GetFunctionEventInvokeConfigResponse 返回参数} */
   GetFunctionEventInvokeConfig(data: GetFunctionEventInvokeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<GetFunctionEventInvokeConfigResponse>;
-  /** 获取函数运行日志 */
+  /** {@link GetFunctionLogs 获取函数运行日志}({@link GetFunctionLogsRequest 请求参数}): {@link GetFunctionLogsResponse 返回参数} */
   GetFunctionLogs(data?: GetFunctionLogsRequest, config?: AxiosRequestConfig): AxiosPromise<GetFunctionLogsResponse>;
-  /** 获取层版本详细信息 */
+  /** {@link GetLayerVersion 获取层版本详细信息}({@link GetLayerVersionRequest 请求参数}): {@link GetLayerVersionResponse 返回参数} */
   GetLayerVersion(data: GetLayerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<GetLayerVersionResponse>;
-  /** 获取函数预置并发详情 */
+  /** {@link GetProvisionedConcurrencyConfig 获取函数预置并发详情}({@link GetProvisionedConcurrencyConfigRequest 请求参数}): {@link GetProvisionedConcurrencyConfigResponse 返回参数} */
   GetProvisionedConcurrencyConfig(data: GetProvisionedConcurrencyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<GetProvisionedConcurrencyConfigResponse>;
-  /** 获取函数单个请求运行状态 */
+  /** {@link GetRequestStatus 获取函数单个请求运行状态}({@link GetRequestStatusRequest 请求参数}): {@link GetRequestStatusResponse 返回参数} */
   GetRequestStatus(data: GetRequestStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetRequestStatusResponse>;
-  /** 获取函数最大独占配额详情 */
+  /** {@link GetReservedConcurrencyConfig 获取函数最大独占配额详情}({@link GetReservedConcurrencyConfigRequest 请求参数}): {@link GetReservedConcurrencyConfigResponse 返回参数} */
   GetReservedConcurrencyConfig(data: GetReservedConcurrencyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<GetReservedConcurrencyConfigResponse>;
-  /** 运行函数 */
+  /** {@link Invoke 运行函数}({@link InvokeRequest 请求参数}): {@link InvokeResponse 返回参数} */
   Invoke(data: InvokeRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeResponse>;
-  /** 同步Invoke调用接口 */
+  /** {@link InvokeFunction 同步Invoke调用接口}({@link InvokeFunctionRequest 请求参数}): {@link InvokeFunctionResponse 返回参数} */
   InvokeFunction(data: InvokeFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeFunctionResponse>;
-  /** 获取别名列表 */
+  /** {@link ListAliases 获取别名列表}({@link ListAliasesRequest 请求参数}): {@link ListAliasesResponse 返回参数} */
   ListAliases(data: ListAliasesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAliasesResponse>;
-  /** 拉取函数异步事件列表 */
+  /** {@link ListAsyncEvents 拉取函数异步事件列表}({@link ListAsyncEventsRequest 请求参数}): {@link ListAsyncEventsResponse 返回参数} */
   ListAsyncEvents(data: ListAsyncEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAsyncEventsResponse>;
-  /** 获取函数列表 */
+  /** {@link ListFunctions 获取函数列表}({@link ListFunctionsRequest 请求参数}): {@link ListFunctionsResponse 返回参数} */
   ListFunctions(data?: ListFunctionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListFunctionsResponse>;
-  /** 获取层版本列表 */
+  /** {@link ListLayerVersions 获取层版本列表}({@link ListLayerVersionsRequest 请求参数}): {@link ListLayerVersionsResponse 返回参数} */
   ListLayerVersions(data: ListLayerVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListLayerVersionsResponse>;
-  /** 返回层列表 */
+  /** {@link ListLayers 返回层列表}({@link ListLayersRequest 请求参数}): {@link ListLayersResponse 返回参数} */
   ListLayers(data?: ListLayersRequest, config?: AxiosRequestConfig): AxiosPromise<ListLayersResponse>;
-  /** 列出命名空间列表 */
+  /** {@link ListNamespaces 列出命名空间列表}({@link ListNamespacesRequest 请求参数}): {@link ListNamespacesResponse 返回参数} */
   ListNamespaces(data?: ListNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<ListNamespacesResponse>;
-  /** 获取函数触发器列表 */
+  /** {@link ListTriggers 获取函数触发器列表}({@link ListTriggersRequest 请求参数}): {@link ListTriggersResponse 返回参数} */
   ListTriggers(data: ListTriggersRequest, config?: AxiosRequestConfig): AxiosPromise<ListTriggersResponse>;
-  /** 查询函数版本 */
+  /** {@link ListVersionByFunction 查询函数版本}({@link ListVersionByFunctionRequest 请求参数}): {@link ListVersionByFunctionResponse 返回参数} */
   ListVersionByFunction(data: ListVersionByFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<ListVersionByFunctionResponse>;
-  /** 发布层版本 */
+  /** {@link PublishLayerVersion 发布层版本}({@link PublishLayerVersionRequest 请求参数}): {@link PublishLayerVersionResponse 返回参数} */
   PublishLayerVersion(data: PublishLayerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<PublishLayerVersionResponse>;
-  /** 发布新版本 */
+  /** {@link PublishVersion 发布新版本}({@link PublishVersionRequest 请求参数}): {@link PublishVersionResponse 返回参数} */
   PublishVersion(data: PublishVersionRequest, config?: AxiosRequestConfig): AxiosPromise<PublishVersionResponse>;
-  /** 设置预置并发 */
+  /** {@link PutProvisionedConcurrencyConfig 设置预置并发}({@link PutProvisionedConcurrencyConfigRequest 请求参数}): {@link PutProvisionedConcurrencyConfigResponse 返回参数} */
   PutProvisionedConcurrencyConfig(data: PutProvisionedConcurrencyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<PutProvisionedConcurrencyConfigResponse>;
-  /** 设置最大独占配额 */
+  /** {@link PutReservedConcurrencyConfig 设置最大独占配额}({@link PutReservedConcurrencyConfigRequest 请求参数}): {@link PutReservedConcurrencyConfigResponse 返回参数} */
   PutReservedConcurrencyConfig(data: PutReservedConcurrencyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<PutReservedConcurrencyConfigResponse>;
-  /** 修改账号并发限制配额 */
+  /** {@link PutTotalConcurrencyConfig 修改账号并发限制配额}({@link PutTotalConcurrencyConfigRequest 请求参数}): {@link PutTotalConcurrencyConfigResponse 返回参数} */
   PutTotalConcurrencyConfig(data: PutTotalConcurrencyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<PutTotalConcurrencyConfigResponse>;
-  /** 终止函数异步事件 */
+  /** {@link TerminateAsyncEvent 终止函数异步事件}({@link TerminateAsyncEventRequest 请求参数}): {@link TerminateAsyncEventResponse 返回参数} */
   TerminateAsyncEvent(data: TerminateAsyncEventRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateAsyncEventResponse>;
-  /** 更新别名的配置 */
+  /** {@link UpdateAlias 更新别名的配置}({@link UpdateAliasRequest 请求参数}): {@link UpdateAliasResponse 返回参数} */
   UpdateAlias(data: UpdateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAliasResponse>;
-  /** 更新函数代码 */
+  /** {@link UpdateFunctionCode 更新函数代码}({@link UpdateFunctionCodeRequest 请求参数}): {@link UpdateFunctionCodeResponse 返回参数} */
   UpdateFunctionCode(data: UpdateFunctionCodeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFunctionCodeResponse>;
-  /** 更新函数配置 */
+  /** {@link UpdateFunctionConfiguration 更新函数配置}({@link UpdateFunctionConfigurationRequest 请求参数}): {@link UpdateFunctionConfigurationResponse 返回参数} */
   UpdateFunctionConfiguration(data: UpdateFunctionConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFunctionConfigurationResponse>;
-  /** 更新函数异步重试配置 */
+  /** {@link UpdateFunctionEventInvokeConfig 更新函数异步重试配置}({@link UpdateFunctionEventInvokeConfigRequest 请求参数}): {@link UpdateFunctionEventInvokeConfigResponse 返回参数} */
   UpdateFunctionEventInvokeConfig(data: UpdateFunctionEventInvokeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFunctionEventInvokeConfigResponse>;
-  /** 更新命名空间 */
+  /** {@link UpdateNamespace 更新命名空间}({@link UpdateNamespaceRequest 请求参数}): {@link UpdateNamespaceResponse 返回参数} */
   UpdateNamespace(data: UpdateNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateNamespaceResponse>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   BatchCreateTrigger(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;

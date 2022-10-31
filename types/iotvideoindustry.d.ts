@@ -2238,216 +2238,216 @@ declare interface UpdateTimeTemplateResponse {
   RequestId?: string;
 }
 
-/** [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) */
+/** {@link Iotvideoindustry 物联网智能视频服务（行业版）} */
 declare interface Iotvideoindustry {
   (): Versions;
-  /** 绑定设备到分组 */
+  /** {@link BindGroupDevices 绑定设备到分组}({@link BindGroupDevicesRequest 请求参数}): {@link BindGroupDevicesResponse 返回参数} */
   BindGroupDevices(data: BindGroupDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<BindGroupDevicesResponse>;
-  /** 控制通道本地回放流 */
+  /** {@link ControlChannelLocalRecord 控制通道本地回放流}({@link ControlChannelLocalRecordRequest 请求参数}): {@link ControlChannelLocalRecordResponse 返回参数} */
   ControlChannelLocalRecord(data: ControlChannelLocalRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ControlChannelLocalRecordResponse>;
-  /** 远程PTZ控制设备通道 */
+  /** {@link ControlChannelPTZ 远程PTZ控制设备通道}({@link ControlChannelPTZRequest 请求参数}): {@link ControlChannelPTZResponse 返回参数} */
   ControlChannelPTZ(data: ControlChannelPTZRequest, config?: AxiosRequestConfig): AxiosPromise<ControlChannelPTZResponse>;
-  /** 远程PTZ控制设备通道（旧） */
+  /** {@link ControlDevicePTZ 远程PTZ控制设备通道（旧）}({@link ControlDevicePTZRequest 请求参数}): {@link ControlDevicePTZResponse 返回参数} */
   ControlDevicePTZ(data: ControlDevicePTZRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDevicePTZResponse>;
-  /** 看守位控制 */
+  /** {@link ControlHomePosition 看守位控制}({@link ControlHomePositionRequest 请求参数}): {@link ControlHomePositionResponse 返回参数} */
   ControlHomePosition(data: ControlHomePositionRequest, config?: AxiosRequestConfig): AxiosPromise<ControlHomePositionResponse>;
-  /** 预置位控制 */
+  /** {@link ControlPreset 预置位控制}({@link ControlPresetRequest 请求参数}): {@link ControlPresetResponse 返回参数} */
   ControlPreset(data: ControlPresetRequest, config?: AxiosRequestConfig): AxiosPromise<ControlPresetResponse>;
-  /** 控制通道本地回放流（旧） */
+  /** {@link ControlRecordStream 控制通道本地回放流（旧）}({@link ControlRecordStreamRequest 请求参数}): {@link ControlRecordStreamResponse 返回参数} */
   ControlRecordStream(data: ControlRecordStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ControlRecordStreamResponse>;
-  /** 创建设备 */
+  /** {@link CreateDevice 创建设备}({@link CreateDeviceRequest 请求参数}): {@link CreateDeviceResponse 返回参数} */
   CreateDevice(data: CreateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceResponse>;
-  /** 创建分组 */
+  /** {@link CreateDeviceGroup 创建分组}({@link CreateDeviceGroupRequest 请求参数}): {@link CreateDeviceGroupResponse 返回参数} */
   CreateDeviceGroup(data: CreateDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceGroupResponse>;
-  /** 创建直播频道 */
+  /** {@link CreateLiveChannel 创建直播频道}({@link CreateLiveChannelRequest 请求参数}): {@link CreateLiveChannelResponse 返回参数} */
   CreateLiveChannel(data: CreateLiveChannelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveChannelResponse>;
-  /** 创建直播录制计划 */
+  /** {@link CreateLiveRecordPlan 创建直播录制计划}({@link CreateLiveRecordPlanRequest 请求参数}): {@link CreateLiveRecordPlanResponse 返回参数} */
   CreateLiveRecordPlan(data: CreateLiveRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveRecordPlanResponse>;
-  /** 创建消息转发配置 */
+  /** {@link CreateMessageForward 创建消息转发配置}({@link CreateMessageForwardRequest 请求参数}): {@link CreateMessageForwardResponse 返回参数} */
   CreateMessageForward(data: CreateMessageForwardRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMessageForwardResponse>;
-  /** 创建录制计划（旧） */
+  /** {@link CreateRecordPlan 创建录制计划（旧）}({@link CreateRecordPlanRequest 请求参数}): {@link CreateRecordPlanResponse 返回参数} */
   CreateRecordPlan(data: CreateRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordPlanResponse>;
-  /** 创建录制计划 */
+  /** {@link CreateRecordingPlan 创建录制计划}({@link CreateRecordingPlanRequest 请求参数}): {@link CreateRecordingPlanResponse 返回参数} */
   CreateRecordingPlan(data: CreateRecordingPlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordingPlanResponse>;
-  /** 创建场景 */
+  /** {@link CreateScene 创建场景}({@link CreateSceneRequest 请求参数}): {@link CreateSceneResponse 返回参数} */
   CreateScene(data: CreateSceneRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSceneResponse>;
-  /** 创建时间模板 */
+  /** {@link CreateTimeTemplate 创建时间模板}({@link CreateTimeTemplateRequest 请求参数}): {@link CreateTimeTemplateResponse 返回参数} */
   CreateTimeTemplate(data: CreateTimeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTimeTemplateResponse>;
-  /** 删除指定设备下通道 */
+  /** {@link DeleteChannel 删除指定设备下通道}({@link DeleteChannelRequest 请求参数}): {@link DeleteChannelResponse 返回参数} */
   DeleteChannel(data: DeleteChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteChannelResponse>;
-  /** 删除设备 */
+  /** {@link DeleteDevice 删除设备}({@link DeleteDeviceRequest 请求参数}): {@link DeleteDeviceResponse 返回参数} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
-  /** 删除分组 */
+  /** {@link DeleteDeviceGroup 删除分组}({@link DeleteDeviceGroupRequest 请求参数}): {@link DeleteDeviceGroupResponse 返回参数} */
   DeleteDeviceGroup(data: DeleteDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceGroupResponse>;
-  /** 删除直播接口 */
+  /** {@link DeleteLiveChannel 删除直播接口}({@link DeleteLiveChannelRequest 请求参数}): {@link DeleteLiveChannelResponse 返回参数} */
   DeleteLiveChannel(data: DeleteLiveChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveChannelResponse>;
-  /** 删除直播录制计划 */
+  /** {@link DeleteLiveRecordPlan 删除直播录制计划}({@link DeleteLiveRecordPlanRequest 请求参数}): {@link DeleteLiveRecordPlanResponse 返回参数} */
   DeleteLiveRecordPlan(data: DeleteLiveRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveRecordPlanResponse>;
-  /** 直播录像删除 */
+  /** {@link DeleteLiveVideoList 直播录像删除}({@link DeleteLiveVideoListRequest 请求参数}): {@link DeleteLiveVideoListResponse 返回参数} */
   DeleteLiveVideoList(data: DeleteLiveVideoListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveVideoListResponse>;
-  /** 删除消息转发配置 */
+  /** {@link DeleteMessageForward 删除消息转发配置}({@link DeleteMessageForwardRequest 请求参数}): {@link DeleteMessageForwardResponse 返回参数} */
   DeleteMessageForward(data: DeleteMessageForwardRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMessageForwardResponse>;
-  /** 删除录制计划（旧） */
+  /** {@link DeleteRecordPlan 删除录制计划（旧）}({@link DeleteRecordPlanRequest 请求参数}): {@link DeleteRecordPlanResponse 返回参数} */
   DeleteRecordPlan(data: DeleteRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordPlanResponse>;
-  /** 删除录制计划 */
+  /** {@link DeleteRecordingPlan 删除录制计划}({@link DeleteRecordingPlanRequest 请求参数}): {@link DeleteRecordingPlanResponse 返回参数} */
   DeleteRecordingPlan(data: DeleteRecordingPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordingPlanResponse>;
-  /** 删除场景 */
+  /** {@link DeleteScene 删除场景}({@link DeleteSceneRequest 请求参数}): {@link DeleteSceneResponse 返回参数} */
   DeleteScene(data: DeleteSceneRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSceneResponse>;
-  /** 删除时间模板 */
+  /** {@link DeleteTimeTemplate 删除时间模板}({@link DeleteTimeTemplateRequest 请求参数}): {@link DeleteTimeTemplateResponse 返回参数} */
   DeleteTimeTemplate(data: DeleteTimeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTimeTemplateResponse>;
-  /** 删除录像存储列表 */
+  /** {@link DeleteVideoList 删除录像存储列表}({@link DeleteVideoListRequest 请求参数}): {@link DeleteVideoListResponse 返回参数} */
   DeleteVideoList(data: DeleteVideoListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVideoListResponse>;
-  /** 设备告警-删除告警 */
+  /** {@link DeleteWarning 设备告警-删除告警}({@link DeleteWarningRequest 请求参数}): {@link DeleteWarningResponse 返回参数} */
   DeleteWarning(data?: DeleteWarningRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWarningResponse>;
-  /** 获取异常事件统计 */
+  /** {@link DescribeAbnormalEvents 获取异常事件统计}({@link DescribeAbnormalEventsRequest 请求参数}): {@link DescribeAbnormalEventsResponse 返回参数} */
   DescribeAbnormalEvents(data: DescribeAbnormalEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalEventsResponse>;
-  /** 获取设备列表（旧） */
+  /** {@link DescribeAllDeviceList 获取设备列表（旧）}({@link DescribeAllDeviceListRequest 请求参数}): {@link DescribeAllDeviceListResponse 返回参数} */
   DescribeAllDeviceList(data?: DescribeAllDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllDeviceListResponse>;
-  /** 获取场景绑定通道列表 */
+  /** {@link DescribeBindSceneChannels 获取场景绑定通道列表}({@link DescribeBindSceneChannelsRequest 请求参数}): {@link DescribeBindSceneChannelsResponse 返回参数} */
   DescribeBindSceneChannels(data: DescribeBindSceneChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindSceneChannelsResponse>;
-  /** 获取场景绑定设备列表(旧) */
+  /** {@link DescribeBindSceneDevices 获取场景绑定设备列表(旧)}({@link DescribeBindSceneDevicesRequest 请求参数}): {@link DescribeBindSceneDevicesResponse 返回参数} */
   DescribeBindSceneDevices(data?: DescribeBindSceneDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindSceneDevicesResponse>;
-  /** 获取设备通道实时流地址 */
+  /** {@link DescribeChannelLiveStreamURL 获取设备通道实时流地址}({@link DescribeChannelLiveStreamURLRequest 请求参数}): {@link DescribeChannelLiveStreamURLResponse 返回参数} */
   DescribeChannelLiveStreamURL(data: DescribeChannelLiveStreamURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelLiveStreamURLResponse>;
-  /** 获取通道本地回放流地址 */
+  /** {@link DescribeChannelLocalRecordURL 获取通道本地回放流地址}({@link DescribeChannelLocalRecordURLRequest 请求参数}): {@link DescribeChannelLocalRecordURLResponse 返回参数} */
   DescribeChannelLocalRecordURL(data: DescribeChannelLocalRecordURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelLocalRecordURLResponse>;
-  /** 获取设备通道实时流地址（旧） */
+  /** {@link DescribeChannelStreamURL 获取设备通道实时流地址（旧）}({@link DescribeChannelStreamURLRequest 请求参数}): {@link DescribeChannelStreamURLResponse 返回参数} */
   DescribeChannelStreamURL(data: DescribeChannelStreamURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelStreamURLResponse>;
-  /** 获取设备下属通道列表 */
+  /** {@link DescribeChannels 获取设备下属通道列表}({@link DescribeChannelsRequest 请求参数}): {@link DescribeChannelsResponse 返回参数} */
   DescribeChannels(data: DescribeChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelsResponse>;
-  /** 根据直播录制计划获取频道列表 */
+  /** {@link DescribeChannelsByLiveRecordPlan 根据直播录制计划获取频道列表}({@link DescribeChannelsByLiveRecordPlanRequest 请求参数}): {@link DescribeChannelsByLiveRecordPlanResponse 返回参数} */
   DescribeChannelsByLiveRecordPlan(data: DescribeChannelsByLiveRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelsByLiveRecordPlanResponse>;
-  /** 查询设备统计当前信息 */
+  /** {@link DescribeCurrentDeviceData 查询设备统计当前信息}({@link DescribeCurrentDeviceDataRequest 请求参数}): {@link DescribeCurrentDeviceDataResponse 返回参数} */
   DescribeCurrentDeviceData(data?: DescribeCurrentDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCurrentDeviceDataResponse>;
-  /** 获取设备详情 */
+  /** {@link DescribeDevice 获取设备详情}({@link DescribeDeviceRequest 请求参数}): {@link DescribeDeviceResponse 返回参数} */
   DescribeDevice(data: DescribeDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceResponse>;
-  /** 获取设备事件 */
+  /** {@link DescribeDeviceEvent 获取设备事件}({@link DescribeDeviceEventRequest 请求参数}): {@link DescribeDeviceEventResponse 返回参数} */
   DescribeDeviceEvent(data: DescribeDeviceEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceEventResponse>;
-  /** 查询设备分组信息 */
+  /** {@link DescribeDeviceGroup 查询设备分组信息}({@link DescribeDeviceGroupRequest 请求参数}): {@link DescribeDeviceGroupResponse 返回参数} */
   DescribeDeviceGroup(data?: DescribeDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceGroupResponse>;
-  /** 获取设备列表 */
+  /** {@link DescribeDeviceList 获取设备列表}({@link DescribeDeviceListRequest 请求参数}): {@link DescribeDeviceListResponse 返回参数} */
   DescribeDeviceList(data?: DescribeDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceListResponse>;
-  /** 查询设备统计monitor信息 */
+  /** {@link DescribeDeviceMonitorData 查询设备统计monitor信息}({@link DescribeDeviceMonitorDataRequest 请求参数}): {@link DescribeDeviceMonitorDataResponse 返回参数} */
   DescribeDeviceMonitorData(data: DescribeDeviceMonitorDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceMonitorDataResponse>;
-  /** 查询设备密码 */
+  /** {@link DescribeDevicePassWord 查询设备密码}({@link DescribeDevicePassWordRequest 请求参数}): {@link DescribeDevicePassWordResponse 返回参数} */
   DescribeDevicePassWord(data: DescribeDevicePassWordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePassWordResponse>;
-  /** 获取设备实时流地址（旧） */
+  /** {@link DescribeDeviceStreams 获取设备实时流地址（旧）}({@link DescribeDeviceStreamsRequest 请求参数}): {@link DescribeDeviceStreamsResponse 返回参数} */
   DescribeDeviceStreams(data: DescribeDeviceStreamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceStreamsResponse>;
-  /** 根据分组ID查询分组 */
+  /** {@link DescribeGroupById 根据分组ID查询分组}({@link DescribeGroupByIdRequest 请求参数}): {@link DescribeGroupByIdResponse 返回参数} */
   DescribeGroupById(data: DescribeGroupByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupByIdResponse>;
-  /** 根据分组路径查询分组 */
+  /** {@link DescribeGroupByPath 根据分组路径查询分组}({@link DescribeGroupByPathRequest 请求参数}): {@link DescribeGroupByPathResponse 返回参数} */
   DescribeGroupByPath(data: DescribeGroupByPathRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupByPathResponse>;
-  /** 查询分组下的设备 */
+  /** {@link DescribeGroupDevices 查询分组下的设备}({@link DescribeGroupDevicesRequest 请求参数}): {@link DescribeGroupDevicesResponse 返回参数} */
   DescribeGroupDevices(data: DescribeGroupDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupDevicesResponse>;
-  /** 批量查询分组信息 */
+  /** {@link DescribeGroups 批量查询分组信息}({@link DescribeGroupsRequest 请求参数}): {@link DescribeGroupsResponse 返回参数} */
   DescribeGroups(data?: DescribeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsResponse>;
-  /** 获取IPC设备下属通道（旧） */
+  /** {@link DescribeIPCChannels 获取IPC设备下属通道（旧）}({@link DescribeIPCChannelsRequest 请求参数}): {@link DescribeIPCChannelsResponse 返回参数} */
   DescribeIPCChannels(data?: DescribeIPCChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPCChannelsResponse>;
-  /** 直播详情接口 */
+  /** {@link DescribeLiveChannel 直播详情接口}({@link DescribeLiveChannelRequest 请求参数}): {@link DescribeLiveChannelResponse 返回参数} */
   DescribeLiveChannel(data: DescribeLiveChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveChannelResponse>;
-  /** 直播列表接口 */
+  /** {@link DescribeLiveChannelList 直播列表接口}({@link DescribeLiveChannelListRequest 请求参数}): {@link DescribeLiveChannelListResponse 返回参数} */
   DescribeLiveChannelList(data: DescribeLiveChannelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveChannelListResponse>;
-  /** 获取直播录制计划详情 */
+  /** {@link DescribeLiveRecordPlanById 获取直播录制计划详情}({@link DescribeLiveRecordPlanByIdRequest 请求参数}): {@link DescribeLiveRecordPlanByIdResponse 返回参数} */
   DescribeLiveRecordPlanById(data: DescribeLiveRecordPlanByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordPlanByIdResponse>;
-  /** 获取直播录制计划列表 */
+  /** {@link DescribeLiveRecordPlanIds 获取直播录制计划列表}({@link DescribeLiveRecordPlanIdsRequest 请求参数}): {@link DescribeLiveRecordPlanIdsResponse 返回参数} */
   DescribeLiveRecordPlanIds(data?: DescribeLiveRecordPlanIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordPlanIdsResponse>;
-  /** 直播拉流接口 */
+  /** {@link DescribeLiveStream 直播拉流接口}({@link DescribeLiveStreamRequest 请求参数}): {@link DescribeLiveStreamResponse 返回参数} */
   DescribeLiveStream(data: DescribeLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamResponse>;
-  /** 直播录像回放列表 */
+  /** {@link DescribeLiveVideoList 直播录像回放列表}({@link DescribeLiveVideoListRequest 请求参数}): {@link DescribeLiveVideoListResponse 返回参数} */
   DescribeLiveVideoList(data: DescribeLiveVideoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveVideoListResponse>;
-  /** 查看消息转发配置详情 */
+  /** {@link DescribeMessageForward 查看消息转发配置详情}({@link DescribeMessageForwardRequest 请求参数}): {@link DescribeMessageForwardResponse 返回参数} */
   DescribeMessageForward(data: DescribeMessageForwardRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageForwardResponse>;
-  /** 查看消息转发配置列表 */
+  /** {@link DescribeMessageForwards 查看消息转发配置列表}({@link DescribeMessageForwardsRequest 请求参数}): {@link DescribeMessageForwardsResponse 返回参数} */
   DescribeMessageForwards(data: DescribeMessageForwardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageForwardsResponse>;
-  /** 运营中心-设备录像存储统计 */
+  /** {@link DescribeMonitorDataByDate 运营中心-设备录像存储统计}({@link DescribeMonitorDataByDateRequest 请求参数}): {@link DescribeMonitorDataByDateResponse 返回参数} */
   DescribeMonitorDataByDate(data: DescribeMonitorDataByDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorDataByDateResponse>;
-  /** 获取预置位列表 */
+  /** {@link DescribePresetList 获取预置位列表}({@link DescribePresetListRequest 请求参数}): {@link DescribePresetListResponse 返回参数} */
   DescribePresetList(data: DescribePresetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePresetListResponse>;
-  /** 获取设备录像日期列表 */
+  /** {@link DescribeRecordDatesByChannel 获取设备录像日期列表}({@link DescribeRecordDatesByChannelRequest 请求参数}): {@link DescribeRecordDatesByChannelResponse 返回参数} */
   DescribeRecordDatesByChannel(data: DescribeRecordDatesByChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordDatesByChannelResponse>;
-  /** 直播录像存储日期列表 */
+  /** {@link DescribeRecordDatesByLive 直播录像存储日期列表}({@link DescribeRecordDatesByLiveRequest 请求参数}): {@link DescribeRecordDatesByLiveResponse 返回参数} */
   DescribeRecordDatesByLive(data: DescribeRecordDatesByLiveRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordDatesByLiveResponse>;
-  /** 获取通道本地回放流地址（旧） */
+  /** {@link DescribeRecordStream 获取通道本地回放流地址（旧）}({@link DescribeRecordStreamRequest 请求参数}): {@link DescribeRecordStreamResponse 返回参数} */
   DescribeRecordStream(data: DescribeRecordStreamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordStreamResponse>;
-  /** 获取录制计划 */
+  /** {@link DescribeRecordingPlanById 获取录制计划}({@link DescribeRecordingPlanByIdRequest 请求参数}): {@link DescribeRecordingPlanByIdResponse 返回参数} */
   DescribeRecordingPlanById(data: DescribeRecordingPlanByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordingPlanByIdResponse>;
-  /** 获取全部录制计划 */
+  /** {@link DescribeRecordingPlans 获取全部录制计划}({@link DescribeRecordingPlansRequest 请求参数}): {@link DescribeRecordingPlansResponse 返回参数} */
   DescribeRecordingPlans(data?: DescribeRecordingPlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordingPlansResponse>;
-  /** 获取SIP服务器配置 */
+  /** {@link DescribeSIPServer 获取SIP服务器配置}({@link DescribeSIPServerRequest 请求参数}): {@link DescribeSIPServerResponse 返回参数} */
   DescribeSIPServer(data?: DescribeSIPServerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSIPServerResponse>;
-  /** 场景详情 */
+  /** {@link DescribeScene 场景详情}({@link DescribeSceneRequest 请求参数}): {@link DescribeSceneResponse 返回参数} */
   DescribeScene(data: DescribeSceneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSceneResponse>;
-  /** 获取场景列表 */
+  /** {@link DescribeScenes 获取场景列表}({@link DescribeScenesRequest 请求参数}): {@link DescribeScenesResponse 返回参数} */
   DescribeScenes(data: DescribeScenesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScenesResponse>;
-  /** 查询指定统计项详情 */
+  /** {@link DescribeStatisticDetails 查询指定统计项详情}({@link DescribeStatisticDetailsRequest 请求参数}): {@link DescribeStatisticDetailsResponse 返回参数} */
   DescribeStatisticDetails(data: DescribeStatisticDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStatisticDetailsResponse>;
-  /** 查询统计指标概览数据 */
+  /** {@link DescribeStatisticSummary 查询统计指标概览数据}({@link DescribeStatisticSummaryRequest 请求参数}): {@link DescribeStatisticSummaryResponse 返回参数} */
   DescribeStatisticSummary(data: DescribeStatisticSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStatisticSummaryResponse>;
-  /** 查询子分组列表 */
+  /** {@link DescribeSubGroups 查询子分组列表}({@link DescribeSubGroupsRequest 请求参数}): {@link DescribeSubGroupsResponse 返回参数} */
   DescribeSubGroups(data?: DescribeSubGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubGroupsResponse>;
-  /** 查询主设备订阅状态 */
+  /** {@link DescribeSubscriptionStatus 查询主设备订阅状态}({@link DescribeSubscriptionStatusRequest 请求参数}): {@link DescribeSubscriptionStatusResponse 返回参数} */
   DescribeSubscriptionStatus(data: DescribeSubscriptionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscriptionStatusResponse>;
-  /** 获取云端录制文件列表 */
+  /** {@link DescribeVideoList 获取云端录制文件列表}({@link DescribeVideoListRequest 请求参数}): {@link DescribeVideoListResponse 返回参数} */
   DescribeVideoList(data: DescribeVideoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoListResponse>;
-  /** 获取通道录制文件列表 */
+  /** {@link DescribeVideoListByChannel 获取通道录制文件列表}({@link DescribeVideoListByChannelRequest 请求参数}): {@link DescribeVideoListByChannelResponse 返回参数} */
   DescribeVideoListByChannel(data: DescribeVideoListByChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoListByChannelResponse>;
-  /** 告警等级列表 */
+  /** {@link DescribeWarnMod 告警等级列表}({@link DescribeWarnModRequest 请求参数}): {@link DescribeWarnModResponse 返回参数} */
   DescribeWarnMod(data?: DescribeWarnModRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWarnModResponse>;
-  /** 获取告警列表 */
+  /** {@link DescribeWarnings 获取告警列表}({@link DescribeWarningsRequest 请求参数}): {@link DescribeWarningsResponse 返回参数} */
   DescribeWarnings(data: DescribeWarningsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWarningsResponse>;
-  /** 获取X-P2P的统计数据 */
+  /** {@link DescribeXP2PData 获取X-P2P的统计数据}({@link DescribeXP2PDataRequest 请求参数}): {@link DescribeXP2PDataResponse 返回参数} */
   DescribeXP2PData(data: DescribeXP2PDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeXP2PDataResponse>;
-  /** 获取设备录像日期列表（旧） */
+  /** {@link GetRecordDatesByDev 获取设备录像日期列表（旧）}({@link GetRecordDatesByDevRequest 请求参数}): {@link GetRecordDatesByDevResponse 返回参数} */
   GetRecordDatesByDev(data: GetRecordDatesByDevRequest, config?: AxiosRequestConfig): AxiosPromise<GetRecordDatesByDevResponse>;
-  /** 获取设备绑定的录制计划 */
+  /** {@link GetRecordPlanByDev 获取设备绑定的录制计划}({@link GetRecordPlanByDevRequest 请求参数}): {@link GetRecordPlanByDevResponse 返回参数} */
   GetRecordPlanByDev(data: GetRecordPlanByDevRequest, config?: AxiosRequestConfig): AxiosPromise<GetRecordPlanByDevResponse>;
-  /** 获取录制计划（旧） */
+  /** {@link GetRecordPlanById 获取录制计划（旧）}({@link GetRecordPlanByIdRequest 请求参数}): {@link GetRecordPlanByIdResponse 返回参数} */
   GetRecordPlanById(data: GetRecordPlanByIdRequest, config?: AxiosRequestConfig): AxiosPromise<GetRecordPlanByIdResponse>;
-  /** 获取全部录制计划（旧） */
+  /** {@link GetRecordPlans 获取全部录制计划（旧）}({@link GetRecordPlansRequest 请求参数}): {@link GetRecordPlansResponse 返回参数} */
   GetRecordPlans(data?: GetRecordPlansRequest, config?: AxiosRequestConfig): AxiosPromise<GetRecordPlansResponse>;
-  /** 根据模板ID获取时间模板 */
+  /** {@link GetTimeTemplateById 根据模板ID获取时间模板}({@link GetTimeTemplateByIdRequest 请求参数}): {@link GetTimeTemplateByIdResponse 返回参数} */
   GetTimeTemplateById(data: GetTimeTemplateByIdRequest, config?: AxiosRequestConfig): AxiosPromise<GetTimeTemplateByIdResponse>;
-  /** 获取时间模板列表 */
+  /** {@link GetTimeTemplates 获取时间模板列表}({@link GetTimeTemplatesRequest 请求参数}): {@link GetTimeTemplatesResponse 返回参数} */
   GetTimeTemplates(data?: GetTimeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<GetTimeTemplatesResponse>;
-  /** 获取通道录制文件列表（旧） */
+  /** {@link GetVideoListByCon 获取通道录制文件列表（旧）}({@link GetVideoListByConRequest 请求参数}): {@link GetVideoListByConResponse 返回参数} */
   GetVideoListByCon(data: GetVideoListByConRequest, config?: AxiosRequestConfig): AxiosPromise<GetVideoListByConResponse>;
-  /** 直播录制计划绑定解绑直播频道 */
+  /** {@link ModifyBindPlanLiveChannel 直播录制计划绑定解绑直播频道}({@link ModifyBindPlanLiveChannelRequest 请求参数}): {@link ModifyBindPlanLiveChannelResponse 返回参数} */
   ModifyBindPlanLiveChannel(data: ModifyBindPlanLiveChannelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBindPlanLiveChannelResponse>;
-  /** 更新录制计划绑定的通道 */
+  /** {@link ModifyBindRecordingPlan 更新录制计划绑定的通道}({@link ModifyBindRecordingPlanRequest 请求参数}): {@link ModifyBindRecordingPlanResponse 返回参数} */
   ModifyBindRecordingPlan(data: ModifyBindRecordingPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBindRecordingPlanResponse>;
-  /** 场景绑定解绑通道接口 */
+  /** {@link ModifyBindSceneChannels 场景绑定解绑通道接口}({@link ModifyBindSceneChannelsRequest 请求参数}): {@link ModifyBindSceneChannelsResponse 返回参数} */
   ModifyBindSceneChannels(data: ModifyBindSceneChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBindSceneChannelsResponse>;
-  /** 场景绑定解绑通道接口(旧) */
+  /** {@link ModifyBindSceneDevice 场景绑定解绑通道接口(旧)}({@link ModifyBindSceneDeviceRequest 请求参数}): {@link ModifyBindSceneDeviceResponse 返回参数} */
   ModifyBindSceneDevice(data: ModifyBindSceneDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBindSceneDeviceResponse>;
-  /** 编辑设备信息 */
+  /** {@link ModifyDeviceData 编辑设备信息}({@link ModifyDeviceDataRequest 请求参数}): {@link ModifyDeviceDataResponse 返回参数} */
   ModifyDeviceData(data: ModifyDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceDataResponse>;
-  /** 编辑直播接口 */
+  /** {@link ModifyLiveChannel 编辑直播接口}({@link ModifyLiveChannelRequest 请求参数}): {@link ModifyLiveChannelResponse 返回参数} */
   ModifyLiveChannel(data: ModifyLiveChannelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveChannelResponse>;
-  /** 编辑直播录制计划 */
+  /** {@link ModifyLiveRecordPlan 编辑直播录制计划}({@link ModifyLiveRecordPlanRequest 请求参数}): {@link ModifyLiveRecordPlanResponse 返回参数} */
   ModifyLiveRecordPlan(data: ModifyLiveRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveRecordPlanResponse>;
-  /** 直播录像编辑 */
+  /** {@link ModifyLiveVideo 直播录像编辑}({@link ModifyLiveVideoRequest 请求参数}): {@link ModifyLiveVideoResponse 返回参数} */
   ModifyLiveVideo(data: ModifyLiveVideoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveVideoResponse>;
-  /** 修改消息转发配置 */
+  /** {@link ModifyMessageForward 修改消息转发配置}({@link ModifyMessageForwardRequest 请求参数}): {@link ModifyMessageForwardResponse 返回参数} */
   ModifyMessageForward(data: ModifyMessageForwardRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMessageForwardResponse>;
-  /** 编辑预置位信息 */
+  /** {@link ModifyPreset 编辑预置位信息}({@link ModifyPresetRequest 请求参数}): {@link ModifyPresetResponse 返回参数} */
   ModifyPreset(data: ModifyPresetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPresetResponse>;
-  /** 更新录制计划 */
+  /** {@link ModifyRecordingPlan 更新录制计划}({@link ModifyRecordingPlanRequest 请求参数}): {@link ModifyRecordingPlanResponse 返回参数} */
   ModifyRecordingPlan(data: ModifyRecordingPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordingPlanResponse>;
-  /** 修改场景 */
+  /** {@link ModifyScene 修改场景}({@link ModifySceneRequest 请求参数}): {@link ModifySceneResponse 返回参数} */
   ModifyScene(data: ModifySceneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySceneResponse>;
-  /** 编辑设备订阅状态 */
+  /** {@link ModifySubscriptionStatus 编辑设备订阅状态}({@link ModifySubscriptionStatusRequest 请求参数}): {@link ModifySubscriptionStatusResponse 返回参数} */
   ModifySubscriptionStatus(data: ModifySubscriptionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubscriptionStatusResponse>;
-  /** 修改录像存储列表 */
+  /** {@link ModifyVideoInfo 修改录像存储列表}({@link ModifyVideoInfoRequest 请求参数}): {@link ModifyVideoInfoResponse 返回参数} */
   ModifyVideoInfo(data: ModifyVideoInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVideoInfoResponse>;
-  /** 重置设备告警 */
+  /** {@link ResetWarning 重置设备告警}({@link ResetWarningRequest 请求参数}): {@link ResetWarningResponse 返回参数} */
   ResetWarning(data?: ResetWarningRequest, config?: AxiosRequestConfig): AxiosPromise<ResetWarningResponse>;
-  /** 修改分组信息 */
+  /** {@link UpdateDeviceGroup 修改分组信息}({@link UpdateDeviceGroupRequest 请求参数}): {@link UpdateDeviceGroupResponse 返回参数} */
   UpdateDeviceGroup(data: UpdateDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceGroupResponse>;
-  /** 修改设备密码 */
+  /** {@link UpdateDevicePassWord 修改设备密码}({@link UpdateDevicePassWordRequest 请求参数}): {@link UpdateDevicePassWordResponse 返回参数} */
   UpdateDevicePassWord(data: UpdateDevicePassWordRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDevicePassWordResponse>;
-  /** 更新录制计划（旧） */
+  /** {@link UpdateRecordPlan 更新录制计划（旧）}({@link UpdateRecordPlanRequest 请求参数}): {@link UpdateRecordPlanResponse 返回参数} */
   UpdateRecordPlan(data: UpdateRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRecordPlanResponse>;
-  /** 更新时间模板 */
+  /** {@link UpdateTimeTemplate 更新时间模板}({@link UpdateTimeTemplateRequest 请求参数}): {@link UpdateTimeTemplateResponse 返回参数} */
   UpdateTimeTemplate(data: UpdateTimeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTimeTemplateResponse>;
 }
 

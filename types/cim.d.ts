@@ -14,7 +14,7 @@ declare interface DescribeSdkAppidResponse {
 
 declare interface Cim {
   (): Versions;
-  /** 获取云通信 IM 的 SDKAppid */
+  /** {@link DescribeSdkAppid 获取云通信 IM 的 SDKAppid}({@link DescribeSdkAppidRequest 请求参数}): {@link DescribeSdkAppidResponse 返回参数} */
   DescribeSdkAppid(data?: DescribeSdkAppidRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSdkAppidResponse>;
 }
 

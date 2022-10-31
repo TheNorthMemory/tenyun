@@ -298,36 +298,36 @@ declare interface UnbindDocumentFromRoomResponse {
   RequestId?: string;
 }
 
-/** [低代码互动课堂](https://cloud.tencent.com/document/product/1639) */
+/** {@link Lcic 低代码互动课堂} */
 declare interface Lcic {
   (): Versions;
-  /** 绑定文档到房间 */
+  /** {@link BindDocumentToRoom 绑定文档到房间}({@link BindDocumentToRoomRequest 请求参数}): {@link BindDocumentToRoomResponse 返回参数} */
   BindDocumentToRoom(data: BindDocumentToRoomRequest, config?: AxiosRequestConfig): AxiosPromise<BindDocumentToRoomResponse>;
-  /** 创建文档 */
+  /** {@link CreateDocument 创建文档}({@link CreateDocumentRequest 请求参数}): {@link CreateDocumentResponse 返回参数} */
   CreateDocument(data: CreateDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocumentResponse>;
-  /** 创建房间 */
+  /** {@link CreateRoom 创建房间}({@link CreateRoomRequest 请求参数}): {@link CreateRoomResponse 返回参数} */
   CreateRoom(data: CreateRoomRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoomResponse>;
-  /** 创建巡课 */
+  /** {@link CreateSupervisor 创建巡课}({@link CreateSupervisorRequest 请求参数}): {@link CreateSupervisorResponse 返回参数} */
   CreateSupervisor(data?: CreateSupervisorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSupervisorResponse>;
-  /** 删除房间 */
+  /** {@link DeleteRoom 删除房间}({@link DeleteRoomRequest 请求参数}): {@link DeleteRoomResponse 返回参数} */
   DeleteRoom(data: DeleteRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoomResponse>;
-  /** 房间信息 */
+  /** {@link DescribeRoom 房间信息}({@link DescribeRoomRequest 请求参数}): {@link DescribeRoomResponse 返回参数} */
   DescribeRoom(data: DescribeRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomResponse>;
-  /** 获取房间统计信息 */
+  /** {@link DescribeRoomStatistics 获取房间统计信息}({@link DescribeRoomStatisticsRequest 请求参数}): {@link DescribeRoomStatisticsResponse 返回参数} */
   DescribeRoomStatistics(data: DescribeRoomStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomStatisticsResponse>;
-  /** 获取用户信息 */
+  /** {@link DescribeUser 获取用户信息}({@link DescribeUserRequest 请求参数}): {@link DescribeUserResponse 返回参数} */
   DescribeUser(data: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
-  /** 源账号登录 */
+  /** {@link LoginOriginId 源账号登录}({@link LoginOriginIdRequest 请求参数}): {@link LoginOriginIdResponse 返回参数} */
   LoginOriginId(data: LoginOriginIdRequest, config?: AxiosRequestConfig): AxiosPromise<LoginOriginIdResponse>;
-  /** 登录 */
+  /** {@link LoginUser 登录}({@link LoginUserRequest 请求参数}): {@link LoginUserResponse 返回参数} */
   LoginUser(data: LoginUserRequest, config?: AxiosRequestConfig): AxiosPromise<LoginUserResponse>;
-  /** 修改应用 */
+  /** {@link ModifyApp 修改应用}({@link ModifyAppRequest 请求参数}): {@link ModifyAppResponse 返回参数} */
   ModifyApp(data: ModifyAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppResponse>;
-  /** 注册用户 */
+  /** {@link RegisterUser 注册用户}({@link RegisterUserRequest 请求参数}): {@link RegisterUserResponse 返回参数} */
   RegisterUser(data: RegisterUserRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterUserResponse>;
-  /** 设置应用自定义内容 */
+  /** {@link SetAppCustomContent 设置应用自定义内容}({@link SetAppCustomContentRequest 请求参数}): {@link SetAppCustomContentResponse 返回参数} */
   SetAppCustomContent(data: SetAppCustomContentRequest, config?: AxiosRequestConfig): AxiosPromise<SetAppCustomContentResponse>;
-  /** 文档从房间解绑 */
+  /** {@link UnbindDocumentFromRoom 文档从房间解绑}({@link UnbindDocumentFromRoomRequest 请求参数}): {@link UnbindDocumentFromRoomResponse 返回参数} */
   UnbindDocumentFromRoom(data: UnbindDocumentFromRoomRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDocumentFromRoomResponse>;
 }
 

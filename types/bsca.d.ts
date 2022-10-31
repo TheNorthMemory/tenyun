@@ -270,18 +270,18 @@ declare interface MatchKBPURLListResponse {
   RequestId?: string;
 }
 
-/** [二进制软件成分分析](https://cloud.tencent.com/document/product/1483) */
+/** {@link Bsca 二进制软件成分分析} */
 declare interface Bsca {
   (): Versions;
-  /** 查询知识库组件信息 */
+  /** {@link DescribeKBComponent 查询知识库组件信息}({@link DescribeKBComponentRequest 请求参数}): {@link DescribeKBComponentResponse 返回参数} */
   DescribeKBComponent(data: DescribeKBComponentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBComponentResponse>;
-  /** 查询知识库组件漏洞 */
+  /** {@link DescribeKBComponentVulnerability 查询知识库组件漏洞}({@link DescribeKBComponentVulnerabilityRequest 请求参数}): {@link DescribeKBComponentVulnerabilityResponse 返回参数} */
   DescribeKBComponentVulnerability(data: DescribeKBComponentVulnerabilityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBComponentVulnerabilityResponse>;
-  /** 查询知识库许可证信息 */
+  /** {@link DescribeKBLicense 查询知识库许可证信息}({@link DescribeKBLicenseRequest 请求参数}): {@link DescribeKBLicenseResponse 返回参数} */
   DescribeKBLicense(data?: DescribeKBLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBLicenseResponse>;
-  /** 查询知识库漏洞详情列表 */
+  /** {@link DescribeKBVulnerability 查询知识库漏洞详情列表}({@link DescribeKBVulnerabilityRequest 请求参数}): {@link DescribeKBVulnerabilityResponse 返回参数} */
   DescribeKBVulnerability(data?: DescribeKBVulnerabilityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBVulnerabilityResponse>;
-  /** 匹配知识库组件列表 */
+  /** {@link MatchKBPURLList 匹配知识库组件列表}({@link MatchKBPURLListRequest 请求参数}): {@link MatchKBPURLListResponse 返回参数} */
   MatchKBPURLList(data?: MatchKBPURLListRequest, config?: AxiosRequestConfig): AxiosPromise<MatchKBPURLListResponse>;
 }
 

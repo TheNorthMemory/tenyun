@@ -46,14 +46,14 @@ declare interface SyncIcpOrderWebInfoResponse {
   RequestId?: string;
 }
 
-/** [网站备案](https://cloud.tencent.com/document/product/243) */
+/** {@link Ba 网站备案} */
 declare interface Ba {
   (): Versions;
-  /** 创建渠道备案小程序二维码 */
+  /** {@link CreateWeappQRUrl 创建渠道备案小程序二维码}({@link CreateWeappQRUrlRequest 请求参数}): {@link CreateWeappQRUrlResponse 返回参数} */
   CreateWeappQRUrl(data: CreateWeappQRUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWeappQRUrlResponse>;
-  /** 获取实名认证信息 */
+  /** {@link DescribeGetAuthInfo 获取实名认证信息}({@link DescribeGetAuthInfoRequest 请求参数}): {@link DescribeGetAuthInfoResponse 返回参数} */
   DescribeGetAuthInfo(data?: DescribeGetAuthInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGetAuthInfoResponse>;
-  /** 同步备案ICP订单网站信息 */
+  /** {@link SyncIcpOrderWebInfo 同步备案ICP订单网站信息}({@link SyncIcpOrderWebInfoRequest 请求参数}): {@link SyncIcpOrderWebInfoResponse 返回参数} */
   SyncIcpOrderWebInfo(data: SyncIcpOrderWebInfoRequest, config?: AxiosRequestConfig): AxiosPromise<SyncIcpOrderWebInfoResponse>;
 }
 

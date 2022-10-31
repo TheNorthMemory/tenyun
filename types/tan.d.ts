@@ -16,10 +16,10 @@ declare interface CreateBlockNodeRecordsResponse {
   RequestId?: string;
 }
 
-/** [碳引擎](https://cloud.tencent.com/document/product/1498) */
+/** {@link Tan 碳引擎} */
 declare interface Tan {
   (): Versions;
-  /** 推送节点数据 */
+  /** {@link CreateBlockNodeRecords 推送节点数据}({@link CreateBlockNodeRecordsRequest 请求参数}): {@link CreateBlockNodeRecordsResponse 返回参数} */
   CreateBlockNodeRecords(data: CreateBlockNodeRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlockNodeRecordsResponse>;
 }
 

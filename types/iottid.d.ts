@@ -154,26 +154,26 @@ declare interface VerifyChipBurnInfoResponse {
   RequestId?: string;
 }
 
-/** [物联网设备身份认证](https://cloud.tencent.com/document/product/1086) */
+/** {@link Iottid 物联网设备身份认证} */
 declare interface Iottid {
   (): Versions;
-  /** 单向认证测试TID */
+  /** {@link AuthTestTid 单向认证测试TID}({@link AuthTestTidRequest 请求参数}): {@link AuthTestTidResponse 返回参数} */
   AuthTestTid(data: AuthTestTidRequest, config?: AxiosRequestConfig): AxiosPromise<AuthTestTidResponse>;
-  /** 安全芯片TID烧录回执 */
+  /** {@link BurnTidNotify 安全芯片TID烧录回执}({@link BurnTidNotifyRequest 请求参数}): {@link BurnTidNotifyResponse 返回参数} */
   BurnTidNotify(data: BurnTidNotifyRequest, config?: AxiosRequestConfig): AxiosPromise<BurnTidNotifyResponse>;
-  /** 安全芯片TID空发回执 */
+  /** {@link DeliverTidNotify 安全芯片TID空发回执}({@link DeliverTidNotifyRequest 请求参数}): {@link DeliverTidNotifyResponse 返回参数} */
   DeliverTidNotify(data: DeliverTidNotifyRequest, config?: AxiosRequestConfig): AxiosPromise<DeliverTidNotifyResponse>;
-  /** 请求空发TID信息 */
+  /** {@link DeliverTids 请求空发TID信息}({@link DeliverTidsRequest 请求参数}): {@link DeliverTidsResponse 返回参数} */
   DeliverTids(data: DeliverTidsRequest, config?: AxiosRequestConfig): AxiosPromise<DeliverTidsResponse>;
-  /** 查询可空发的白盒密钥数量 */
+  /** {@link DescribeAvailableLibCount 查询可空发的白盒密钥数量}({@link DescribeAvailableLibCountRequest 请求参数}): {@link DescribeAvailableLibCountResponse 返回参数} */
   DescribeAvailableLibCount(data: DescribeAvailableLibCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableLibCountResponse>;
-  /** 查询权限 */
+  /** {@link DescribePermission 查询权限}({@link DescribePermissionRequest 请求参数}): {@link DescribePermissionResponse 返回参数} */
   DescribePermission(data?: DescribePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePermissionResponse>;
-  /** 下载芯片订单的TID */
+  /** {@link DownloadTids 下载芯片订单的TID}({@link DownloadTidsRequest 请求参数}): {@link DownloadTidsResponse 返回参数} */
   DownloadTids(data: DownloadTidsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadTidsResponse>;
-  /** 上传硬件唯一标识码 */
+  /** {@link UploadDeviceUniqueCode 上传硬件唯一标识码}({@link UploadDeviceUniqueCodeRequest 请求参数}): {@link UploadDeviceUniqueCodeResponse 返回参数} */
   UploadDeviceUniqueCode(data: UploadDeviceUniqueCodeRequest, config?: AxiosRequestConfig): AxiosPromise<UploadDeviceUniqueCodeResponse>;
-  /** 验证芯片烧录TID信息 */
+  /** {@link VerifyChipBurnInfo 验证芯片烧录TID信息}({@link VerifyChipBurnInfoRequest 请求参数}): {@link VerifyChipBurnInfoResponse 返回参数} */
   VerifyChipBurnInfo(data: VerifyChipBurnInfoRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyChipBurnInfoResponse>;
 }
 

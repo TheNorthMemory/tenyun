@@ -1623,108 +1623,108 @@ declare interface UpgradeLifecycleHookResponse {
   RequestId?: string;
 }
 
-/** [弹性伸缩](https://cloud.tencent.com/document/product/377) */
+/** {@link As 弹性伸缩} */
 declare interface As {
   (): Versions;
-  /** 添加 CVM 实例到伸缩组 */
+  /** {@link AttachInstances 添加 CVM 实例到伸缩组}({@link AttachInstancesRequest 请求参数}): {@link AttachInstancesResponse 返回参数} */
   AttachInstances(data: AttachInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachInstancesResponse>;
-  /** 添加负载均衡器 */
+  /** {@link AttachLoadBalancers 添加负载均衡器}({@link AttachLoadBalancersRequest 请求参数}): {@link AttachLoadBalancersResponse 返回参数} */
   AttachLoadBalancers(data: AttachLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<AttachLoadBalancersResponse>;
-  /** 清除启动配置属性 */
+  /** {@link ClearLaunchConfigurationAttributes 清除启动配置属性}({@link ClearLaunchConfigurationAttributesRequest 请求参数}): {@link ClearLaunchConfigurationAttributesResponse 返回参数} */
   ClearLaunchConfigurationAttributes(data: ClearLaunchConfigurationAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ClearLaunchConfigurationAttributesResponse>;
-  /** 完成生命周期动作 */
+  /** {@link CompleteLifecycleAction 完成生命周期动作}({@link CompleteLifecycleActionRequest 请求参数}): {@link CompleteLifecycleActionResponse 返回参数} */
   CompleteLifecycleAction(data: CompleteLifecycleActionRequest, config?: AxiosRequestConfig): AxiosPromise<CompleteLifecycleActionResponse>;
-  /** 创建伸缩组 */
+  /** {@link CreateAutoScalingGroup 创建伸缩组}({@link CreateAutoScalingGroupRequest 请求参数}): {@link CreateAutoScalingGroupResponse 返回参数} */
   CreateAutoScalingGroup(data: CreateAutoScalingGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoScalingGroupResponse>;
-  /** 根据实例创建启动配置及伸缩组 */
+  /** {@link CreateAutoScalingGroupFromInstance 根据实例创建启动配置及伸缩组}({@link CreateAutoScalingGroupFromInstanceRequest 请求参数}): {@link CreateAutoScalingGroupFromInstanceResponse 返回参数} */
   CreateAutoScalingGroupFromInstance(data: CreateAutoScalingGroupFromInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoScalingGroupFromInstanceResponse>;
-  /** 创建启动配置 */
+  /** {@link CreateLaunchConfiguration 创建启动配置}({@link CreateLaunchConfigurationRequest 请求参数}): {@link CreateLaunchConfigurationResponse 返回参数} */
   CreateLaunchConfiguration(data: CreateLaunchConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLaunchConfigurationResponse>;
-  /** 创建生命周期挂钩 */
+  /** {@link CreateLifecycleHook 创建生命周期挂钩}({@link CreateLifecycleHookRequest 请求参数}): {@link CreateLifecycleHookResponse 返回参数} */
   CreateLifecycleHook(data: CreateLifecycleHookRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLifecycleHookResponse>;
-  /** 创建通知 */
+  /** {@link CreateNotificationConfiguration 创建通知}({@link CreateNotificationConfigurationRequest 请求参数}): {@link CreateNotificationConfigurationResponse 返回参数} */
   CreateNotificationConfiguration(data: CreateNotificationConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotificationConfigurationResponse>;
-  /** 创建告警触发策略 */
+  /** {@link CreateScalingPolicy 创建告警触发策略}({@link CreateScalingPolicyRequest 请求参数}): {@link CreateScalingPolicyResponse 返回参数} */
   CreateScalingPolicy(data: CreateScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScalingPolicyResponse>;
-  /** 创建定时任务 */
+  /** {@link CreateScheduledAction 创建定时任务}({@link CreateScheduledActionRequest 请求参数}): {@link CreateScheduledActionResponse 返回参数} */
   CreateScheduledAction(data: CreateScheduledActionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduledActionResponse>;
-  /** 删除伸缩组 */
+  /** {@link DeleteAutoScalingGroup 删除伸缩组}({@link DeleteAutoScalingGroupRequest 请求参数}): {@link DeleteAutoScalingGroupResponse 返回参数} */
   DeleteAutoScalingGroup(data: DeleteAutoScalingGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoScalingGroupResponse>;
-  /** 删除启动配置 */
+  /** {@link DeleteLaunchConfiguration 删除启动配置}({@link DeleteLaunchConfigurationRequest 请求参数}): {@link DeleteLaunchConfigurationResponse 返回参数} */
   DeleteLaunchConfiguration(data: DeleteLaunchConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLaunchConfigurationResponse>;
-  /** 删除生命周期挂钩 */
+  /** {@link DeleteLifecycleHook 删除生命周期挂钩}({@link DeleteLifecycleHookRequest 请求参数}): {@link DeleteLifecycleHookResponse 返回参数} */
   DeleteLifecycleHook(data: DeleteLifecycleHookRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLifecycleHookResponse>;
-  /** 删除通知 */
+  /** {@link DeleteNotificationConfiguration 删除通知}({@link DeleteNotificationConfigurationRequest 请求参数}): {@link DeleteNotificationConfigurationResponse 返回参数} */
   DeleteNotificationConfiguration(data?: DeleteNotificationConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNotificationConfigurationResponse>;
-  /** 删除告警触发策略 */
+  /** {@link DeleteScalingPolicy 删除告警触发策略}({@link DeleteScalingPolicyRequest 请求参数}): {@link DeleteScalingPolicyResponse 返回参数} */
   DeleteScalingPolicy(data: DeleteScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScalingPolicyResponse>;
-  /** 删除定时任务 */
+  /** {@link DeleteScheduledAction 删除定时任务}({@link DeleteScheduledActionRequest 请求参数}): {@link DeleteScheduledActionResponse 返回参数} */
   DeleteScheduledAction(data: DeleteScheduledActionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduledActionResponse>;
-  /** 查询用户账号的资源限制 */
+  /** {@link DescribeAccountLimits 查询用户账号的资源限制}({@link DescribeAccountLimitsRequest 请求参数}): {@link DescribeAccountLimitsResponse 返回参数} */
   DescribeAccountLimits(data?: DescribeAccountLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountLimitsResponse>;
-  /** 查询伸缩活动 */
+  /** {@link DescribeAutoScalingActivities 查询伸缩活动}({@link DescribeAutoScalingActivitiesRequest 请求参数}): {@link DescribeAutoScalingActivitiesResponse 返回参数} */
   DescribeAutoScalingActivities(data?: DescribeAutoScalingActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingActivitiesResponse>;
-  /** 查询弹性伸缩配置建议 */
+  /** {@link DescribeAutoScalingAdvices 查询弹性伸缩配置建议}({@link DescribeAutoScalingAdvicesRequest 请求参数}): {@link DescribeAutoScalingAdvicesResponse 返回参数} */
   DescribeAutoScalingAdvices(data: DescribeAutoScalingAdvicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingAdvicesResponse>;
-  /** 查询伸缩组最新一次伸缩活动 */
+  /** {@link DescribeAutoScalingGroupLastActivities 查询伸缩组最新一次伸缩活动}({@link DescribeAutoScalingGroupLastActivitiesRequest 请求参数}): {@link DescribeAutoScalingGroupLastActivitiesResponse 返回参数} */
   DescribeAutoScalingGroupLastActivities(data: DescribeAutoScalingGroupLastActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingGroupLastActivitiesResponse>;
-  /** 查询伸缩组 */
+  /** {@link DescribeAutoScalingGroups 查询伸缩组}({@link DescribeAutoScalingGroupsRequest 请求参数}): {@link DescribeAutoScalingGroupsResponse 返回参数} */
   DescribeAutoScalingGroups(data?: DescribeAutoScalingGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingGroupsResponse>;
-  /** 查询实例 */
+  /** {@link DescribeAutoScalingInstances 查询实例}({@link DescribeAutoScalingInstancesRequest 请求参数}): {@link DescribeAutoScalingInstancesResponse 返回参数} */
   DescribeAutoScalingInstances(data?: DescribeAutoScalingInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingInstancesResponse>;
-  /** 查询启动配置 */
+  /** {@link DescribeLaunchConfigurations 查询启动配置}({@link DescribeLaunchConfigurationsRequest 请求参数}): {@link DescribeLaunchConfigurationsResponse 返回参数} */
   DescribeLaunchConfigurations(data?: DescribeLaunchConfigurationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaunchConfigurationsResponse>;
-  /** 查询生命周期挂钩 */
+  /** {@link DescribeLifecycleHooks 查询生命周期挂钩}({@link DescribeLifecycleHooksRequest 请求参数}): {@link DescribeLifecycleHooksResponse 返回参数} */
   DescribeLifecycleHooks(data?: DescribeLifecycleHooksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLifecycleHooksResponse>;
-  /** 查询通知 */
+  /** {@link DescribeNotificationConfigurations 查询通知}({@link DescribeNotificationConfigurationsRequest 请求参数}): {@link DescribeNotificationConfigurationsResponse 返回参数} */
   DescribeNotificationConfigurations(data?: DescribeNotificationConfigurationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotificationConfigurationsResponse>;
-  /** 查询告警触发策略 */
+  /** {@link DescribeScalingPolicies 查询告警触发策略}({@link DescribeScalingPoliciesRequest 请求参数}): {@link DescribeScalingPoliciesResponse 返回参数} */
   DescribeScalingPolicies(data?: DescribeScalingPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScalingPoliciesResponse>;
-  /** 查询定时任务 */
+  /** {@link DescribeScheduledActions 查询定时任务}({@link DescribeScheduledActionsRequest 请求参数}): {@link DescribeScheduledActionsResponse 返回参数} */
   DescribeScheduledActions(data?: DescribeScheduledActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledActionsResponse>;
-  /** 从伸缩组移出 CVM 实例 */
+  /** {@link DetachInstances 从伸缩组移出 CVM 实例}({@link DetachInstancesRequest 请求参数}): {@link DetachInstancesResponse 返回参数} */
   DetachInstances(data: DetachInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachInstancesResponse>;
-  /** 移出负载均衡器 */
+  /** {@link DetachLoadBalancers 移出负载均衡器}({@link DetachLoadBalancersRequest 请求参数}): {@link DetachLoadBalancersResponse 返回参数} */
   DetachLoadBalancers(data: DetachLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DetachLoadBalancersResponse>;
-  /** 停用伸缩组 */
+  /** {@link DisableAutoScalingGroup 停用伸缩组}({@link DisableAutoScalingGroupRequest 请求参数}): {@link DisableAutoScalingGroupResponse 返回参数} */
   DisableAutoScalingGroup(data: DisableAutoScalingGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DisableAutoScalingGroupResponse>;
-  /** 启用伸缩组 */
+  /** {@link EnableAutoScalingGroup 启用伸缩组}({@link EnableAutoScalingGroupRequest 请求参数}): {@link EnableAutoScalingGroupResponse 返回参数} */
   EnableAutoScalingGroup(data: EnableAutoScalingGroupRequest, config?: AxiosRequestConfig): AxiosPromise<EnableAutoScalingGroupResponse>;
-  /** 触发伸缩策略 */
+  /** {@link ExecuteScalingPolicy 触发伸缩策略}({@link ExecuteScalingPolicyRequest 请求参数}): {@link ExecuteScalingPolicyResponse 返回参数} */
   ExecuteScalingPolicy(data: ExecuteScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteScalingPolicyResponse>;
-  /** 修改伸缩组 */
+  /** {@link ModifyAutoScalingGroup 修改伸缩组}({@link ModifyAutoScalingGroupRequest 请求参数}): {@link ModifyAutoScalingGroupResponse 返回参数} */
   ModifyAutoScalingGroup(data: ModifyAutoScalingGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoScalingGroupResponse>;
-  /** 修改期望实例数 */
+  /** {@link ModifyDesiredCapacity 修改期望实例数}({@link ModifyDesiredCapacityRequest 请求参数}): {@link ModifyDesiredCapacityResponse 返回参数} */
   ModifyDesiredCapacity(data: ModifyDesiredCapacityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDesiredCapacityResponse>;
-  /** 修改启动配置属性 */
+  /** {@link ModifyLaunchConfigurationAttributes 修改启动配置属性}({@link ModifyLaunchConfigurationAttributesRequest 请求参数}): {@link ModifyLaunchConfigurationAttributesResponse 返回参数} */
   ModifyLaunchConfigurationAttributes(data: ModifyLaunchConfigurationAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLaunchConfigurationAttributesResponse>;
-  /** 修改生命周期挂钩 */
+  /** {@link ModifyLifecycleHook 修改生命周期挂钩}({@link ModifyLifecycleHookRequest 请求参数}): {@link ModifyLifecycleHookResponse 返回参数} */
   ModifyLifecycleHook(data: ModifyLifecycleHookRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLifecycleHookResponse>;
-  /** 修改负载均衡器目标规则属性 */
+  /** {@link ModifyLoadBalancerTargetAttributes 修改负载均衡器目标规则属性}({@link ModifyLoadBalancerTargetAttributesRequest 请求参数}): {@link ModifyLoadBalancerTargetAttributesResponse 返回参数} */
   ModifyLoadBalancerTargetAttributes(data: ModifyLoadBalancerTargetAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerTargetAttributesResponse>;
-  /** 修改伸缩组的负载均衡器 */
+  /** {@link ModifyLoadBalancers 修改伸缩组的负载均衡器}({@link ModifyLoadBalancersRequest 请求参数}): {@link ModifyLoadBalancersResponse 返回参数} */
   ModifyLoadBalancers(data: ModifyLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancersResponse>;
-  /** 修改通知 */
+  /** {@link ModifyNotificationConfiguration 修改通知}({@link ModifyNotificationConfigurationRequest 请求参数}): {@link ModifyNotificationConfigurationResponse 返回参数} */
   ModifyNotificationConfiguration(data: ModifyNotificationConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotificationConfigurationResponse>;
-  /** 修改告警触发策略 */
+  /** {@link ModifyScalingPolicy 修改告警触发策略}({@link ModifyScalingPolicyRequest 请求参数}): {@link ModifyScalingPolicyResponse 返回参数} */
   ModifyScalingPolicy(data: ModifyScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScalingPolicyResponse>;
-  /** 修改定时任务 */
+  /** {@link ModifyScheduledAction 修改定时任务}({@link ModifyScheduledActionRequest 请求参数}): {@link ModifyScheduledActionResponse 返回参数} */
   ModifyScheduledAction(data: ModifyScheduledActionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduledActionResponse>;
-  /** 从伸缩组中删除 CVM 实例 */
+  /** {@link RemoveInstances 从伸缩组中删除 CVM 实例}({@link RemoveInstancesRequest 请求参数}): {@link RemoveInstancesResponse 返回参数} */
   RemoveInstances(data: RemoveInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveInstancesResponse>;
-  /** 指定数量缩容实例 */
+  /** {@link ScaleInInstances 指定数量缩容实例}({@link ScaleInInstancesRequest 请求参数}): {@link ScaleInInstancesResponse 返回参数} */
   ScaleInInstances(data: ScaleInInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleInInstancesResponse>;
-  /** 指定数量扩容实例 */
+  /** {@link ScaleOutInstances 指定数量扩容实例}({@link ScaleOutInstancesRequest 请求参数}): {@link ScaleOutInstancesResponse 返回参数} */
   ScaleOutInstances(data: ScaleOutInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutInstancesResponse>;
-  /** 设置实例保护 */
+  /** {@link SetInstancesProtection 设置实例保护}({@link SetInstancesProtectionRequest 请求参数}): {@link SetInstancesProtectionResponse 返回参数} */
   SetInstancesProtection(data: SetInstancesProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<SetInstancesProtectionResponse>;
-  /** 开启伸缩组内 CVM 实例 */
+  /** {@link StartAutoScalingInstances 开启伸缩组内 CVM 实例}({@link StartAutoScalingInstancesRequest 请求参数}): {@link StartAutoScalingInstancesResponse 返回参数} */
   StartAutoScalingInstances(data: StartAutoScalingInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StartAutoScalingInstancesResponse>;
-  /** 关闭伸缩组内 CVM 实例 */
+  /** {@link StopAutoScalingInstances 关闭伸缩组内 CVM 实例}({@link StopAutoScalingInstancesRequest 请求参数}): {@link StopAutoScalingInstancesResponse 返回参数} */
   StopAutoScalingInstances(data: StopAutoScalingInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StopAutoScalingInstancesResponse>;
-  /** 升级启动配置 */
+  /** {@link UpgradeLaunchConfiguration 升级启动配置}({@link UpgradeLaunchConfigurationRequest 请求参数}): {@link UpgradeLaunchConfigurationResponse 返回参数} */
   UpgradeLaunchConfiguration(data: UpgradeLaunchConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeLaunchConfigurationResponse>;
-  /** 升级生命周期挂钩 */
+  /** {@link UpgradeLifecycleHook 升级生命周期挂钩}({@link UpgradeLifecycleHookRequest 请求参数}): {@link UpgradeLifecycleHookResponse 返回参数} */
   UpgradeLifecycleHook(data: UpgradeLifecycleHookRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeLifecycleHookResponse>;
 }
 

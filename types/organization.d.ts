@@ -510,58 +510,58 @@ declare namespace V20181225 {
   }
 }
 
-/** [企业组织](https://cloud.tencent.com/document/product/850) */
+/** {@link Organization 集团账号管理} */
 declare interface Organization {
   (): Versions;
-  /** 绑定组织成员和子账号的授权关系 */
+  /** {@link BindOrganizationMemberAuthAccount 绑定组织成员和子账号的授权关系}({@link BindOrganizationMemberAuthAccountRequest 请求参数}): {@link BindOrganizationMemberAuthAccountResponse 返回参数} */
   BindOrganizationMemberAuthAccount(data: BindOrganizationMemberAuthAccountRequest, config?: AxiosRequestConfig): AxiosPromise<BindOrganizationMemberAuthAccountResponse>;
-  /** 创建组织成员 */
+  /** {@link CreateOrganizationMember 创建组织成员}({@link CreateOrganizationMemberRequest 请求参数}): {@link CreateOrganizationMemberResponse 返回参数} */
   CreateOrganizationMember(data: CreateOrganizationMemberRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationMemberResponse>;
-  /** 创建组织成员的授权策略 */
+  /** {@link CreateOrganizationMemberPolicy 创建组织成员的授权策略}({@link CreateOrganizationMemberPolicyRequest 请求参数}): {@link CreateOrganizationMemberPolicyResponse 返回参数} */
   CreateOrganizationMemberPolicy(data: CreateOrganizationMemberPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationMemberPolicyResponse>;
-  /** 获取企业组织信息 */
+  /** {@link DescribeOrganization 获取企业组织信息}({@link DescribeOrganizationRequest 请求参数}): {@link DescribeOrganizationResponse 返回参数} */
   DescribeOrganization(data?: DescribeOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationResponse>;
-  /** 获取企业组织成员列表 */
+  /** {@link DescribeOrganizationMembers 获取企业组织成员列表}({@link DescribeOrganizationMembersRequest 请求参数}): {@link DescribeOrganizationMembersResponse 返回参数} */
   DescribeOrganizationMembers(data: DescribeOrganizationMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMembersResponse>;
-  /** 接受加入企业组织邀请 */
+  /** {@link V20181225.AcceptOrganizationInvitation 接受加入企业组织邀请}({@link V20181225.AcceptOrganizationInvitationRequest 请求参数}): {@link V20181225.AcceptOrganizationInvitationResponse 返回参数} */
   AcceptOrganizationInvitation(data: V20181225.AcceptOrganizationInvitationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.AcceptOrganizationInvitationResponse>;
-  /** 添加企业组织单元 */
+  /** {@link V20181225.AddOrganizationNode 添加企业组织单元}({@link V20181225.AddOrganizationNodeRequest 请求参数}): {@link V20181225.AddOrganizationNodeResponse 返回参数} */
   AddOrganizationNode(data: V20181225.AddOrganizationNodeRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.AddOrganizationNodeResponse>;
-  /** 取消企业组织邀请 */
+  /** {@link V20181225.CancelOrganizationInvitation 取消企业组织邀请}({@link V20181225.CancelOrganizationInvitationRequest 请求参数}): {@link V20181225.CancelOrganizationInvitationResponse 返回参数} */
   CancelOrganizationInvitation(data: V20181225.CancelOrganizationInvitationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.CancelOrganizationInvitationResponse>;
-  /** 创建企业组织 */
+  /** {@link V20181225.CreateOrganization 创建企业组织}({@link V20181225.CreateOrganizationRequest 请求参数}): {@link V20181225.CreateOrganizationResponse 返回参数} */
   CreateOrganization(data: V20181225.CreateOrganizationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.CreateOrganizationResponse>;
-  /** 删除企业组织 */
+  /** {@link V20181225.DeleteOrganization 删除企业组织}({@link V20181225.DeleteOrganizationRequest 请求参数}): {@link V20181225.DeleteOrganizationResponse 返回参数} */
   DeleteOrganization(data: V20181225.DeleteOrganizationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.DeleteOrganizationResponse>;
-  /** 删除企业组织成员 */
+  /** {@link V20181225.DeleteOrganizationMemberFromNode 删除企业组织成员}({@link V20181225.DeleteOrganizationMemberFromNodeRequest 请求参数}): {@link V20181225.DeleteOrganizationMemberFromNodeResponse 返回参数} */
   DeleteOrganizationMemberFromNode(data: V20181225.DeleteOrganizationMemberFromNodeRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.DeleteOrganizationMemberFromNodeResponse>;
-  /** 批量删除企业组织成员 */
+  /** {@link V20181225.DeleteOrganizationMembers 批量删除企业组织成员}({@link V20181225.DeleteOrganizationMembersRequest 请求参数}): {@link V20181225.DeleteOrganizationMembersResponse 返回参数} */
   DeleteOrganizationMembers(data: V20181225.DeleteOrganizationMembersRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.DeleteOrganizationMembersResponse>;
-  /** 批量删除企业组织单元 */
+  /** {@link V20181225.DeleteOrganizationNodes 批量删除企业组织单元}({@link V20181225.DeleteOrganizationNodesRequest 请求参数}): {@link V20181225.DeleteOrganizationNodesResponse 返回参数} */
   DeleteOrganizationNodes(data: V20181225.DeleteOrganizationNodesRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.DeleteOrganizationNodesResponse>;
-  /** 拒绝企业组织邀请 */
+  /** {@link V20181225.DenyOrganizationInvitation 拒绝企业组织邀请}({@link V20181225.DenyOrganizationInvitationRequest 请求参数}): {@link V20181225.DenyOrganizationInvitationResponse 返回参数} */
   DenyOrganizationInvitation(data: V20181225.DenyOrganizationInvitationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.DenyOrganizationInvitationResponse>;
-  /** 获取企业组织信息 */
+  /** {@link V20181225.GetOrganization 获取企业组织信息}({@link V20181225.GetOrganizationRequest 请求参数}): {@link V20181225.GetOrganizationResponse 返回参数} */
   GetOrganization(data: V20181225.GetOrganizationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.GetOrganizationResponse>;
-  /** 获取企业组织成员 */
+  /** {@link V20181225.GetOrganizationMember 获取企业组织成员}({@link V20181225.GetOrganizationMemberRequest 请求参数}): {@link V20181225.GetOrganizationMemberResponse 返回参数} */
   GetOrganizationMember(data: V20181225.GetOrganizationMemberRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.GetOrganizationMemberResponse>;
-  /** 获取邀请信息列表 */
+  /** {@link V20181225.ListOrganizationInvitations 获取邀请信息列表}({@link V20181225.ListOrganizationInvitationsRequest 请求参数}): {@link V20181225.ListOrganizationInvitationsResponse 返回参数} */
   ListOrganizationInvitations(data: V20181225.ListOrganizationInvitationsRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.ListOrganizationInvitationsResponse>;
-  /** 获取企业组织成员列表 */
+  /** {@link V20181225.ListOrganizationMembers 获取企业组织成员列表}({@link V20181225.ListOrganizationMembersRequest 请求参数}): {@link V20181225.ListOrganizationMembersResponse 返回参数} */
   ListOrganizationMembers(data: V20181225.ListOrganizationMembersRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.ListOrganizationMembersResponse>;
-  /** 获取企业组织单元成员列表 */
+  /** {@link V20181225.ListOrganizationNodeMembers 获取企业组织单元成员列表}({@link V20181225.ListOrganizationNodeMembersRequest 请求参数}): {@link V20181225.ListOrganizationNodeMembersResponse 返回参数} */
   ListOrganizationNodeMembers(data: V20181225.ListOrganizationNodeMembersRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.ListOrganizationNodeMembersResponse>;
-  /** 获取企业组织单元列表 */
+  /** {@link V20181225.ListOrganizationNodes 获取企业组织单元列表}({@link V20181225.ListOrganizationNodesRequest 请求参数}): {@link V20181225.ListOrganizationNodesResponse 返回参数} */
   ListOrganizationNodes(data: V20181225.ListOrganizationNodesRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.ListOrganizationNodesResponse>;
-  /** 移动成员到指定企业组织单元 */
+  /** {@link V20181225.MoveOrganizationMembersToNode 移动成员到指定企业组织单元}({@link V20181225.MoveOrganizationMembersToNodeRequest 请求参数}): {@link V20181225.MoveOrganizationMembersToNodeResponse 返回参数} */
   MoveOrganizationMembersToNode(data: V20181225.MoveOrganizationMembersToNodeRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.MoveOrganizationMembersToNodeResponse>;
-  /** 退出企业组织 */
+  /** {@link V20181225.QuitOrganization 退出企业组织}({@link V20181225.QuitOrganizationRequest 请求参数}): {@link V20181225.QuitOrganizationResponse 返回参数} */
   QuitOrganization(data: V20181225.QuitOrganizationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.QuitOrganizationResponse>;
-  /** 发送企业组织邀请 */
+  /** {@link V20181225.SendOrganizationInvitation 发送企业组织邀请}({@link V20181225.SendOrganizationInvitationRequest 请求参数}): {@link V20181225.SendOrganizationInvitationResponse 返回参数} */
   SendOrganizationInvitation(data: V20181225.SendOrganizationInvitationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.SendOrganizationInvitationResponse>;
-  /** 更新企业成员信息 */
+  /** {@link V20181225.UpdateOrganizationMember 更新企业成员信息}({@link V20181225.UpdateOrganizationMemberRequest 请求参数}): {@link V20181225.UpdateOrganizationMemberResponse 返回参数} */
   UpdateOrganizationMember(data: V20181225.UpdateOrganizationMemberRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.UpdateOrganizationMemberResponse>;
-  /** 更新企业组织单元 */
+  /** {@link V20181225.UpdateOrganizationNode 更新企业组织单元}({@link V20181225.UpdateOrganizationNodeRequest 请求参数}): {@link V20181225.UpdateOrganizationNodeResponse 返回参数} */
   UpdateOrganizationNode(data: V20181225.UpdateOrganizationNodeRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.UpdateOrganizationNodeResponse>;
 }
 

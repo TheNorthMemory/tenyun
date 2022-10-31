@@ -202,24 +202,24 @@ declare interface VerifyCredentialResponse {
   RequestId?: string;
 }
 
-/** [分布式身份](https://cloud.tencent.com/document/product/1439) */
+/** {@link Tdid 分布式身份} */
 declare interface Tdid {
   (): Versions;
-  /** 创建凭证 */
+  /** {@link CreateCredential 创建凭证}({@link CreateCredentialRequest 请求参数}): {@link CreateCredentialResponse 返回参数} */
   CreateCredential(data: CreateCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCredentialResponse>;
-  /** 创建选择性批露凭证 */
+  /** {@link CreateSelectiveCredential 创建选择性批露凭证}({@link CreateSelectiveCredentialRequest 请求参数}): {@link CreateSelectiveCredentialResponse 返回参数} */
   CreateSelectiveCredential(data: CreateSelectiveCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSelectiveCredentialResponse>;
-  /** 创建机构DID */
+  /** {@link CreateTDid 创建机构DID}({@link CreateTDidRequest 请求参数}): {@link CreateTDidResponse 返回参数} */
   CreateTDid(data: CreateTDidRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTDidResponse>;
-  /** 新建DID根据公钥生成Tdid */
+  /** {@link CreateTDidByPublicKey 新建DID根据公钥生成Tdid}({@link CreateTDidByPublicKeyRequest 请求参数}): {@link CreateTDidByPublicKeyResponse 返回参数} */
   CreateTDidByPublicKey(data: CreateTDidByPublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTDidByPublicKeyResponse>;
-  /** 获取权威机构信息 */
+  /** {@link GetAuthorityIssuer 获取权威机构信息}({@link GetAuthorityIssuerRequest 请求参数}): {@link GetAuthorityIssuerResponse 返回参数} */
   GetAuthorityIssuer(data: GetAuthorityIssuerRequest, config?: AxiosRequestConfig): AxiosPromise<GetAuthorityIssuerResponse>;
-  /** 查看DID文档 */
+  /** {@link GetDidDocument 查看DID文档}({@link GetDidDocumentRequest 请求参数}): {@link GetDidDocumentResponse 返回参数} */
   GetDidDocument(data: GetDidDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<GetDidDocumentResponse>;
-  /** 设置凭证链上状态 */
+  /** {@link SetCredentialStatus 设置凭证链上状态}({@link SetCredentialStatusRequest 请求参数}): {@link SetCredentialStatusResponse 返回参数} */
   SetCredentialStatus(data: SetCredentialStatusRequest, config?: AxiosRequestConfig): AxiosPromise<SetCredentialStatusResponse>;
-  /** 验证凭证 */
+  /** {@link VerifyCredential 验证凭证}({@link VerifyCredentialRequest 请求参数}): {@link VerifyCredentialResponse 返回参数} */
   VerifyCredential(data: VerifyCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyCredentialResponse>;
 }
 

@@ -546,50 +546,50 @@ declare interface SubscribePrivateZoneServiceResponse {
   RequestId?: string;
 }
 
-/** [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) */
+/** {@link Privatedns 私有域解析 Private DNS} */
 declare interface Privatedns {
   (): Versions;
-  /** 创建私有域解析账号 */
+  /** {@link CreatePrivateDNSAccount 创建私有域解析账号}({@link CreatePrivateDNSAccountRequest 请求参数}): {@link CreatePrivateDNSAccountResponse 返回参数} */
   CreatePrivateDNSAccount(data: CreatePrivateDNSAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateDNSAccountResponse>;
-  /** 创建私有域 */
+  /** {@link CreatePrivateZone 创建私有域}({@link CreatePrivateZoneRequest 请求参数}): {@link CreatePrivateZoneResponse 返回参数} */
   CreatePrivateZone(data: CreatePrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateZoneResponse>;
-  /** 添加私有域解析记录 */
+  /** {@link CreatePrivateZoneRecord 添加私有域解析记录}({@link CreatePrivateZoneRecordRequest 请求参数}): {@link CreatePrivateZoneRecordResponse 返回参数} */
   CreatePrivateZoneRecord(data: CreatePrivateZoneRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateZoneRecordResponse>;
-  /** 删除私有域解析账号 */
+  /** {@link DeletePrivateDNSAccount 删除私有域解析账号}({@link DeletePrivateDNSAccountRequest 请求参数}): {@link DeletePrivateDNSAccountResponse 返回参数} */
   DeletePrivateDNSAccount(data: DeletePrivateDNSAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateDNSAccountResponse>;
-  /** 删除私有域 */
+  /** {@link DeletePrivateZone 删除私有域}({@link DeletePrivateZoneRequest 请求参数}): {@link DeletePrivateZoneResponse 返回参数} */
   DeletePrivateZone(data?: DeletePrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateZoneResponse>;
-  /** 删除私有域解析记录 */
+  /** {@link DeletePrivateZoneRecord 删除私有域解析记录}({@link DeletePrivateZoneRecordRequest 请求参数}): {@link DeletePrivateZoneRecordResponse 返回参数} */
   DeletePrivateZoneRecord(data?: DeletePrivateZoneRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateZoneRecordResponse>;
-  /** 获取私有域解析账号的VPC列表 */
+  /** {@link DescribeAccountVpcList 获取私有域解析账号的VPC列表}({@link DescribeAccountVpcListRequest 请求参数}): {@link DescribeAccountVpcListResponse 返回参数} */
   DescribeAccountVpcList(data: DescribeAccountVpcListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountVpcListResponse>;
-  /** 获取操作日志列表 */
+  /** {@link DescribeAuditLog 获取操作日志列表}({@link DescribeAuditLogRequest 请求参数}): {@link DescribeAuditLogResponse 返回参数} */
   DescribeAuditLog(data: DescribeAuditLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogResponse>;
-  /** 获取私有域解析概览 */
+  /** {@link DescribeDashboard 获取私有域解析概览}({@link DescribeDashboardRequest 请求参数}): {@link DescribeDashboardResponse 返回参数} */
   DescribeDashboard(data?: DescribeDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDashboardResponse>;
-  /** 获取私有域解析账号列表 */
+  /** {@link DescribePrivateDNSAccountList 获取私有域解析账号列表}({@link DescribePrivateDNSAccountListRequest 请求参数}): {@link DescribePrivateDNSAccountListResponse 返回参数} */
   DescribePrivateDNSAccountList(data?: DescribePrivateDNSAccountListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateDNSAccountListResponse>;
-  /** 获取私有域信息 */
+  /** {@link DescribePrivateZone 获取私有域信息}({@link DescribePrivateZoneRequest 请求参数}): {@link DescribePrivateZoneResponse 返回参数} */
   DescribePrivateZone(data: DescribePrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateZoneResponse>;
-  /** 获取私有域列表 */
+  /** {@link DescribePrivateZoneList 获取私有域列表}({@link DescribePrivateZoneListRequest 请求参数}): {@link DescribePrivateZoneListResponse 返回参数} */
   DescribePrivateZoneList(data?: DescribePrivateZoneListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateZoneListResponse>;
-  /** 获取私有域记录列表 */
+  /** {@link DescribePrivateZoneRecordList 获取私有域记录列表}({@link DescribePrivateZoneRecordListRequest 请求参数}): {@link DescribePrivateZoneRecordListResponse 返回参数} */
   DescribePrivateZoneRecordList(data: DescribePrivateZoneRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateZoneRecordListResponse>;
-  /** 查询私有域解析开通状态 */
+  /** {@link DescribePrivateZoneService 查询私有域解析开通状态}({@link DescribePrivateZoneServiceRequest 请求参数}): {@link DescribePrivateZoneServiceResponse 返回参数} */
   DescribePrivateZoneService(data?: DescribePrivateZoneServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateZoneServiceResponse>;
-  /** 查询额度使用情况 */
+  /** {@link DescribeQuotaUsage 查询额度使用情况}({@link DescribeQuotaUsageRequest 请求参数}): {@link DescribeQuotaUsageResponse 返回参数} */
   DescribeQuotaUsage(data?: DescribeQuotaUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuotaUsageResponse>;
-  /** 获取私有域解析请求量 */
+  /** {@link DescribeRequestData 获取私有域解析请求量}({@link DescribeRequestDataRequest 请求参数}): {@link DescribeRequestDataResponse 返回参数} */
   DescribeRequestData(data: DescribeRequestDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRequestDataResponse>;
-  /** 修改私有域 */
+  /** {@link ModifyPrivateZone 修改私有域}({@link ModifyPrivateZoneRequest 请求参数}): {@link ModifyPrivateZoneResponse 返回参数} */
   ModifyPrivateZone(data: ModifyPrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateZoneResponse>;
-  /** 修改私有域解析记录 */
+  /** {@link ModifyPrivateZoneRecord 修改私有域解析记录}({@link ModifyPrivateZoneRecordRequest 请求参数}): {@link ModifyPrivateZoneRecordResponse 返回参数} */
   ModifyPrivateZoneRecord(data: ModifyPrivateZoneRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateZoneRecordResponse>;
-  /** 修改私有域关联的VPC */
+  /** {@link ModifyPrivateZoneVpc 修改私有域关联的VPC}({@link ModifyPrivateZoneVpcRequest 请求参数}): {@link ModifyPrivateZoneVpcResponse 返回参数} */
   ModifyPrivateZoneVpc(data: ModifyPrivateZoneVpcRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateZoneVpcResponse>;
-  /** 修改解析记录状态 */
+  /** {@link ModifyRecordsStatus 修改解析记录状态}({@link ModifyRecordsStatusRequest 请求参数}): {@link ModifyRecordsStatusResponse 返回参数} */
   ModifyRecordsStatus(data: ModifyRecordsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordsStatusResponse>;
-  /** 开通私有域解析 */
+  /** {@link SubscribePrivateZoneService 开通私有域解析}({@link SubscribePrivateZoneServiceRequest 请求参数}): {@link SubscribePrivateZoneServiceResponse 返回参数} */
   SubscribePrivateZoneService(data?: SubscribePrivateZoneServiceRequest, config?: AxiosRequestConfig): AxiosPromise<SubscribePrivateZoneServiceResponse>;
 }
 

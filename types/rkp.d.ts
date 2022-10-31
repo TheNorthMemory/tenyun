@@ -138,14 +138,14 @@ declare interface QueryDevAndRiskResponse {
   RequestId?: string;
 }
 
-/** [风险探针](https://cloud.tencent.com/document/product/1169) */
+/** {@link Rkp 风险探针} */
 declare interface Rkp {
   (): Versions;
-  /** RPopenID查询 */
+  /** {@link GetOpenId RPopenID查询}({@link GetOpenIdRequest 请求参数}): {@link GetOpenIdResponse 返回参数} */
   GetOpenId(data: GetOpenIdRequest, config?: AxiosRequestConfig): AxiosPromise<GetOpenIdResponse>;
-  /** 获取token */
+  /** {@link GetToken 获取token}({@link GetTokenRequest 请求参数}): {@link GetTokenResponse 返回参数} */
   GetToken(data: GetTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetTokenResponse>;
-  /** Devid及风险查询 */
+  /** {@link QueryDevAndRisk Devid及风险查询}({@link QueryDevAndRiskRequest 请求参数}): {@link QueryDevAndRiskResponse 返回参数} */
   QueryDevAndRisk(data: QueryDevAndRiskRequest, config?: AxiosRequestConfig): AxiosPromise<QueryDevAndRiskResponse>;
 }
 

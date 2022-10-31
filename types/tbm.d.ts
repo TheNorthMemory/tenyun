@@ -336,23 +336,23 @@ declare interface DescribeUserPortraitResponse {
 
 declare interface Tbm {
   (): Versions;
-  /** 获取品牌好差评数 */
+  /** {@link DescribeBrandCommentCount 获取品牌好差评数}({@link DescribeBrandCommentCountRequest 请求参数}): {@link DescribeBrandCommentCountResponse 返回参数} */
   DescribeBrandCommentCount(data: DescribeBrandCommentCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBrandCommentCountResponse>;
-  /** 获取品牌总热度 */
+  /** {@link DescribeBrandExposure 获取品牌总热度}({@link DescribeBrandExposureRequest 请求参数}): {@link DescribeBrandExposureResponse 返回参数} */
   DescribeBrandExposure(data: DescribeBrandExposureRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBrandExposureResponse>;
-  /** 获取品牌媒体报道数 */
+  /** {@link DescribeBrandMediaReport 获取品牌媒体报道数}({@link DescribeBrandMediaReportRequest 请求参数}): {@link DescribeBrandMediaReportResponse 返回参数} */
   DescribeBrandMediaReport(data: DescribeBrandMediaReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBrandMediaReportResponse>;
-  /** 获取品牌用户差评列表 */
+  /** {@link DescribeBrandNegComments 获取品牌用户差评列表}({@link DescribeBrandNegCommentsRequest 请求参数}): {@link DescribeBrandNegCommentsResponse 返回参数} */
   DescribeBrandNegComments(data: DescribeBrandNegCommentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBrandNegCommentsResponse>;
-  /** 获取品牌用户好评列表 */
+  /** {@link DescribeBrandPosComments 获取品牌用户好评列表}({@link DescribeBrandPosCommentsRequest 请求参数}): {@link DescribeBrandPosCommentsResponse 返回参数} */
   DescribeBrandPosComments(data: DescribeBrandPosCommentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBrandPosCommentsResponse>;
-  /** 获取品牌社交渠道观点 */
+  /** {@link DescribeBrandSocialOpinion 获取品牌社交渠道观点}({@link DescribeBrandSocialOpinionRequest 请求参数}): {@link DescribeBrandSocialOpinionResponse 返回参数} */
   DescribeBrandSocialOpinion(data: DescribeBrandSocialOpinionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBrandSocialOpinionResponse>;
-  /** 获取品牌社交渠道提及数 */
+  /** {@link DescribeBrandSocialReport 获取品牌社交渠道提及数}({@link DescribeBrandSocialReportRequest 请求参数}): {@link DescribeBrandSocialReportResponse 返回参数} */
   DescribeBrandSocialReport(data: DescribeBrandSocialReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBrandSocialReportResponse>;
-  /** 获取定制任务媒体报道列表 */
+  /** {@link DescribeIndustryNews 获取定制任务媒体报道列表}({@link DescribeIndustryNewsRequest 请求参数}): {@link DescribeIndustryNewsResponse 返回参数} */
   DescribeIndustryNews(data: DescribeIndustryNewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndustryNewsResponse>;
-  /** 获取品牌画像结果 */
+  /** {@link DescribeUserPortrait 获取品牌画像结果}({@link DescribeUserPortraitRequest 请求参数}): {@link DescribeUserPortraitResponse 返回参数} */
   DescribeUserPortrait(data: DescribeUserPortraitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserPortraitResponse>;
 }
 

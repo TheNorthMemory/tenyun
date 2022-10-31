@@ -782,64 +782,64 @@ declare interface StopWhiteboardPushResponse {
   RequestId?: string;
 }
 
-/** [互动白板](https://cloud.tencent.com/document/product/1137) */
+/** {@link Tiw 互动白板} */
 declare interface Tiw {
   (): Versions;
-  /** 创建白板板书生成任务 */
+  /** {@link CreateSnapshotTask 创建白板板书生成任务}({@link CreateSnapshotTaskRequest 请求参数}): {@link CreateSnapshotTaskResponse 返回参数} */
   CreateSnapshotTask(data: CreateSnapshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotTaskResponse>;
-  /** 创建文档转码任务 */
+  /** {@link CreateTranscode 创建文档转码任务}({@link CreateTranscodeRequest 请求参数}): {@link CreateTranscodeResponse 返回参数} */
   CreateTranscode(data: CreateTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTranscodeResponse>;
-  /** 创建录制视频生成任务 */
+  /** {@link CreateVideoGenerationTask 创建录制视频生成任务}({@link CreateVideoGenerationTaskRequest 请求参数}): {@link CreateVideoGenerationTaskResponse 返回参数} */
   CreateVideoGenerationTask(data: CreateVideoGenerationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoGenerationTaskResponse>;
-  /** 查询实时录制任务 */
+  /** {@link DescribeOnlineRecord 查询实时录制任务}({@link DescribeOnlineRecordRequest 请求参数}): {@link DescribeOnlineRecordResponse 返回参数} */
   DescribeOnlineRecord(data: DescribeOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOnlineRecordResponse>;
-  /** 查询实时录制回调地址 */
+  /** {@link DescribeOnlineRecordCallback 查询实时录制回调地址}({@link DescribeOnlineRecordCallbackRequest 请求参数}): {@link DescribeOnlineRecordCallbackResponse 返回参数} */
   DescribeOnlineRecordCallback(data: DescribeOnlineRecordCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOnlineRecordCallbackResponse>;
-  /** 查询质量数据 */
+  /** {@link DescribeQualityMetrics 查询质量数据}({@link DescribeQualityMetricsRequest 请求参数}): {@link DescribeQualityMetricsResponse 返回参数} */
   DescribeQualityMetrics(data: DescribeQualityMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQualityMetricsResponse>;
-  /** 获取白板板书生成任务信息 */
+  /** {@link DescribeSnapshotTask 获取白板板书生成任务信息}({@link DescribeSnapshotTaskRequest 请求参数}): {@link DescribeSnapshotTaskResponse 返回参数} */
   DescribeSnapshotTask(data: DescribeSnapshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotTaskResponse>;
-  /** 查询天维度计费用量 */
+  /** {@link DescribeTIWDailyUsage 查询天维度计费用量}({@link DescribeTIWDailyUsageRequest 请求参数}): {@link DescribeTIWDailyUsageResponse 返回参数} */
   DescribeTIWDailyUsage(data: DescribeTIWDailyUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTIWDailyUsageResponse>;
-  /** 查询文档转码任务 */
+  /** {@link DescribeTranscode 查询文档转码任务}({@link DescribeTranscodeRequest 请求参数}): {@link DescribeTranscodeResponse 返回参数} */
   DescribeTranscode(data: DescribeTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeResponse>;
-  /** 查询文档转码回调地址 */
+  /** {@link DescribeTranscodeCallback 查询文档转码回调地址}({@link DescribeTranscodeCallbackRequest 请求参数}): {@link DescribeTranscodeCallbackResponse 返回参数} */
   DescribeTranscodeCallback(data: DescribeTranscodeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeCallbackResponse>;
-  /** 查询录制视频生成任务 */
+  /** {@link DescribeVideoGenerationTask 查询录制视频生成任务}({@link DescribeVideoGenerationTaskRequest 请求参数}): {@link DescribeVideoGenerationTaskResponse 返回参数} */
   DescribeVideoGenerationTask(data: DescribeVideoGenerationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoGenerationTaskResponse>;
-  /** 查询录制视频生成回调地址 */
+  /** {@link DescribeVideoGenerationTaskCallback 查询录制视频生成回调地址}({@link DescribeVideoGenerationTaskCallbackRequest 请求参数}): {@link DescribeVideoGenerationTaskCallbackResponse 返回参数} */
   DescribeVideoGenerationTaskCallback(data: DescribeVideoGenerationTaskCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoGenerationTaskCallbackResponse>;
-  /** 查询白板推流任务 */
+  /** {@link DescribeWhiteboardPush 查询白板推流任务}({@link DescribeWhiteboardPushRequest 请求参数}): {@link DescribeWhiteboardPushResponse 返回参数} */
   DescribeWhiteboardPush(data: DescribeWhiteboardPushRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteboardPushResponse>;
-  /** 查询白板推流回调地址 */
+  /** {@link DescribeWhiteboardPushCallback 查询白板推流回调地址}({@link DescribeWhiteboardPushCallbackRequest 请求参数}): {@link DescribeWhiteboardPushCallbackResponse 返回参数} */
   DescribeWhiteboardPushCallback(data: DescribeWhiteboardPushCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteboardPushCallbackResponse>;
-  /** 暂停实时录制 */
+  /** {@link PauseOnlineRecord 暂停实时录制}({@link PauseOnlineRecordRequest 请求参数}): {@link PauseOnlineRecordResponse 返回参数} */
   PauseOnlineRecord(data: PauseOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<PauseOnlineRecordResponse>;
-  /** 恢复实时录制 */
+  /** {@link ResumeOnlineRecord 恢复实时录制}({@link ResumeOnlineRecordRequest 请求参数}): {@link ResumeOnlineRecordResponse 返回参数} */
   ResumeOnlineRecord(data: ResumeOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeOnlineRecordResponse>;
-  /** 设置实时录制回调地址 */
+  /** {@link SetOnlineRecordCallback 设置实时录制回调地址}({@link SetOnlineRecordCallbackRequest 请求参数}): {@link SetOnlineRecordCallbackResponse 返回参数} */
   SetOnlineRecordCallback(data: SetOnlineRecordCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetOnlineRecordCallbackResponse>;
-  /** 设置实时录制回调密钥 */
+  /** {@link SetOnlineRecordCallbackKey 设置实时录制回调密钥}({@link SetOnlineRecordCallbackKeyRequest 请求参数}): {@link SetOnlineRecordCallbackKeyResponse 返回参数} */
   SetOnlineRecordCallbackKey(data: SetOnlineRecordCallbackKeyRequest, config?: AxiosRequestConfig): AxiosPromise<SetOnlineRecordCallbackKeyResponse>;
-  /** 设置文档转码回调地址 */
+  /** {@link SetTranscodeCallback 设置文档转码回调地址}({@link SetTranscodeCallbackRequest 请求参数}): {@link SetTranscodeCallbackResponse 返回参数} */
   SetTranscodeCallback(data: SetTranscodeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetTranscodeCallbackResponse>;
-  /** 设置文档转码回调密钥 */
+  /** {@link SetTranscodeCallbackKey 设置文档转码回调密钥}({@link SetTranscodeCallbackKeyRequest 请求参数}): {@link SetTranscodeCallbackKeyResponse 返回参数} */
   SetTranscodeCallbackKey(data: SetTranscodeCallbackKeyRequest, config?: AxiosRequestConfig): AxiosPromise<SetTranscodeCallbackKeyResponse>;
-  /** 设置录制视频生成回调地址 */
+  /** {@link SetVideoGenerationTaskCallback 设置录制视频生成回调地址}({@link SetVideoGenerationTaskCallbackRequest 请求参数}): {@link SetVideoGenerationTaskCallbackResponse 返回参数} */
   SetVideoGenerationTaskCallback(data: SetVideoGenerationTaskCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetVideoGenerationTaskCallbackResponse>;
-  /** 设置录制视频生成回调密钥 */
+  /** {@link SetVideoGenerationTaskCallbackKey 设置录制视频生成回调密钥}({@link SetVideoGenerationTaskCallbackKeyRequest 请求参数}): {@link SetVideoGenerationTaskCallbackKeyResponse 返回参数} */
   SetVideoGenerationTaskCallbackKey(data: SetVideoGenerationTaskCallbackKeyRequest, config?: AxiosRequestConfig): AxiosPromise<SetVideoGenerationTaskCallbackKeyResponse>;
-  /** 设置白板推流回调地址 */
+  /** {@link SetWhiteboardPushCallback 设置白板推流回调地址}({@link SetWhiteboardPushCallbackRequest 请求参数}): {@link SetWhiteboardPushCallbackResponse 返回参数} */
   SetWhiteboardPushCallback(data: SetWhiteboardPushCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetWhiteboardPushCallbackResponse>;
-  /** 设置白板推流回调密钥 */
+  /** {@link SetWhiteboardPushCallbackKey 设置白板推流回调密钥}({@link SetWhiteboardPushCallbackKeyRequest 请求参数}): {@link SetWhiteboardPushCallbackKeyResponse 返回参数} */
   SetWhiteboardPushCallbackKey(data: SetWhiteboardPushCallbackKeyRequest, config?: AxiosRequestConfig): AxiosPromise<SetWhiteboardPushCallbackKeyResponse>;
-  /** 开始实时录制 */
+  /** {@link StartOnlineRecord 开始实时录制}({@link StartOnlineRecordRequest 请求参数}): {@link StartOnlineRecordResponse 返回参数} */
   StartOnlineRecord(data: StartOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StartOnlineRecordResponse>;
-  /** 开始白板推流 */
+  /** {@link StartWhiteboardPush 开始白板推流}({@link StartWhiteboardPushRequest 请求参数}): {@link StartWhiteboardPushResponse 返回参数} */
   StartWhiteboardPush(data: StartWhiteboardPushRequest, config?: AxiosRequestConfig): AxiosPromise<StartWhiteboardPushResponse>;
-  /** 停止实时录制 */
+  /** {@link StopOnlineRecord 停止实时录制}({@link StopOnlineRecordRequest 请求参数}): {@link StopOnlineRecordResponse 返回参数} */
   StopOnlineRecord(data: StopOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopOnlineRecordResponse>;
-  /** 结束白板推流 */
+  /** {@link StopWhiteboardPush 结束白板推流}({@link StopWhiteboardPushRequest 请求参数}): {@link StopWhiteboardPushResponse 返回参数} */
   StopWhiteboardPush(data: StopWhiteboardPushRequest, config?: AxiosRequestConfig): AxiosPromise<StopWhiteboardPushResponse>;
 }
 

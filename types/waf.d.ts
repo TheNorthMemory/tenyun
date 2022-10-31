@@ -1126,78 +1126,78 @@ declare interface UpsertIpAccessControlResponse {
   RequestId?: string;
 }
 
-/** [Web 应用防火墙](https://cloud.tencent.com/document/product/627) */
+/** {@link Waf Web 应用防火墙} */
 declare interface Waf {
   (): Versions;
-  /** 增加自定义策略 */
+  /** {@link AddCustomRule 增加自定义策略}({@link AddCustomRuleRequest 请求参数}): {@link AddCustomRuleResponse 返回参数} */
   AddCustomRule(data: AddCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomRuleResponse>;
-  /** 增加域名规则白名单 */
+  /** {@link AddDomainWhiteRule 增加域名规则白名单}({@link AddDomainWhiteRuleRequest 请求参数}): {@link AddDomainWhiteRuleResponse 返回参数} */
   AddDomainWhiteRule(data: AddDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddDomainWhiteRuleResponse>;
-  /** 添加Spart防护域名 */
+  /** {@link AddSpartaProtection 添加Spart防护域名}({@link AddSpartaProtectionRequest 请求参数}): {@link AddSpartaProtectionResponse 返回参数} */
   AddSpartaProtection(data: AddSpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpartaProtectionResponse>;
-  /** 创建访问日志导出 */
+  /** {@link CreateAccessExport 创建访问日志导出}({@link CreateAccessExportRequest 请求参数}): {@link CreateAccessExportResponse 返回参数} */
   CreateAccessExport(data: CreateAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessExportResponse>;
-  /** 删除访问日志导出 */
+  /** {@link DeleteAccessExport 删除访问日志导出}({@link DeleteAccessExportRequest 请求参数}): {@link DeleteAccessExportResponse 返回参数} */
   DeleteAccessExport(data: DeleteAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessExportResponse>;
-  /** 删除攻击日志下载任务记录 */
+  /** {@link DeleteAttackDownloadRecord 删除攻击日志下载任务记录}({@link DeleteAttackDownloadRecordRequest 请求参数}): {@link DeleteAttackDownloadRecordResponse 返回参数} */
   DeleteAttackDownloadRecord(data: DeleteAttackDownloadRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackDownloadRecordResponse>;
-  /** 删除域名规则白名单 */
+  /** {@link DeleteDomainWhiteRules 删除域名规则白名单}({@link DeleteDomainWhiteRulesRequest 请求参数}): {@link DeleteDomainWhiteRulesResponse 返回参数} */
   DeleteDomainWhiteRules(data: DeleteDomainWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainWhiteRulesResponse>;
-  /** 删除访问日志下载记录 */
+  /** {@link DeleteDownloadRecord 删除访问日志下载记录}({@link DeleteDownloadRecordRequest 请求参数}): {@link DeleteDownloadRecordResponse 返回参数} */
   DeleteDownloadRecord(data: DeleteDownloadRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDownloadRecordResponse>;
-  /** Waf IP黑白名单Delete接口 */
+  /** {@link DeleteIpAccessControl Waf IP黑白名单Delete接口}({@link DeleteIpAccessControlRequest 请求参数}): {@link DeleteIpAccessControlResponse 返回参数} */
   DeleteIpAccessControl(data: DeleteIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIpAccessControlResponse>;
-  /** 删除CC攻击的session设置 */
+  /** {@link DeleteSession 删除CC攻击的session设置}({@link DeleteSessionRequest 请求参数}): {@link DeleteSessionResponse 返回参数} */
   DeleteSession(data: DeleteSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSessionResponse>;
-  /** 获取访问日志导出列表 */
+  /** {@link DescribeAccessExports 获取访问日志导出列表}({@link DescribeAccessExportsRequest 请求参数}): {@link DescribeAccessExportsResponse 返回参数} */
   DescribeAccessExports(data: DescribeAccessExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessExportsResponse>;
-  /** 访问日志快速分析统计 */
+  /** {@link DescribeAccessFastAnalysis 访问日志快速分析统计}({@link DescribeAccessFastAnalysisRequest 请求参数}): {@link DescribeAccessFastAnalysisResponse 返回参数} */
   DescribeAccessFastAnalysis(data: DescribeAccessFastAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessFastAnalysisResponse>;
-  /** 获取访问日志索引配置信息 */
+  /** {@link DescribeAccessIndex 获取访问日志索引配置信息}({@link DescribeAccessIndexRequest 请求参数}): {@link DescribeAccessIndexResponse 返回参数} */
   DescribeAccessIndex(data?: DescribeAccessIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessIndexResponse>;
-  /** 描述WAF自动封禁IP详情 */
+  /** {@link DescribeAutoDenyIP 描述WAF自动封禁IP详情}({@link DescribeAutoDenyIPRequest 请求参数}): {@link DescribeAutoDenyIPResponse 返回参数} */
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
-  /** 获取域名的规则白名单 */
+  /** {@link DescribeDomainWhiteRules 获取域名的规则白名单}({@link DescribeDomainWhiteRulesRequest 请求参数}): {@link DescribeDomainWhiteRulesResponse 返回参数} */
   DescribeDomainWhiteRules(data: DescribeDomainWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainWhiteRulesResponse>;
-  /** 查询用户所有域名的详细信息 */
+  /** {@link DescribeDomains 查询用户所有域名的详细信息}({@link DescribeDomainsRequest 请求参数}): {@link DescribeDomainsResponse 返回参数} */
   DescribeDomains(data: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
-  /** 获取waf流量访问趋势 */
+  /** {@link DescribeFlowTrend 获取waf流量访问趋势}({@link DescribeFlowTrendRequest 请求参数}): {@link DescribeFlowTrendResponse 返回参数} */
   DescribeFlowTrend(data: DescribeFlowTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTrendResponse>;
-  /** 查询用户所有实例的详细信息 */
+  /** {@link DescribeInstances 查询用户所有实例的详细信息}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
   DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** Waf ip黑白名单查询 */
+  /** {@link DescribeIpAccessControl Waf ip黑白名单查询}({@link DescribeIpAccessControlRequest 请求参数}): {@link DescribeIpAccessControlResponse 返回参数} */
   DescribeIpAccessControl(data: DescribeIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpAccessControlResponse>;
-  /** Waf IP封堵状态查询 */
+  /** {@link DescribeIpHitItems Waf IP封堵状态查询}({@link DescribeIpHitItemsRequest 请求参数}): {@link DescribeIpHitItemsResponse 返回参数} */
   DescribeIpHitItems(data: DescribeIpHitItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpHitItemsResponse>;
-  /** 获取CDC场景下对客户已经开放的负载均衡型WAF(cdc-clb-waf)的地域 */
+  /** {@link DescribeUserCdcClbWafRegions 获取CDC场景下对客户已经开放的负载均衡型WAF(cdc-clb-waf)的地域}({@link DescribeUserCdcClbWafRegionsRequest 请求参数}): {@link DescribeUserCdcClbWafRegionsResponse 返回参数} */
   DescribeUserCdcClbWafRegions(data?: DescribeUserCdcClbWafRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCdcClbWafRegionsResponse>;
-  /** 获取对客户已经开放的负载均衡型WAF(clb-waf)的地域 */
+  /** {@link DescribeUserClbWafRegions 获取对客户已经开放的负载均衡型WAF(clb-waf)的地域}({@link DescribeUserClbWafRegionsRequest 请求参数}): {@link DescribeUserClbWafRegionsResponse 返回参数} */
   DescribeUserClbWafRegions(data?: DescribeUserClbWafRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserClbWafRegionsResponse>;
-  /** 查询ip惩罚规则 */
+  /** {@link DescribeWafAutoDenyRules 查询ip惩罚规则}({@link DescribeWafAutoDenyRulesRequest 请求参数}): {@link DescribeWafAutoDenyRulesResponse 返回参数} */
   DescribeWafAutoDenyRules(data: DescribeWafAutoDenyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafAutoDenyRulesResponse>;
-  /** 描述WAF自动封禁模块详情 */
+  /** {@link DescribeWafAutoDenyStatus 描述WAF自动封禁模块详情}({@link DescribeWafAutoDenyStatusRequest 请求参数}): {@link DescribeWafAutoDenyStatusResponse 返回参数} */
   DescribeWafAutoDenyStatus(data?: DescribeWafAutoDenyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafAutoDenyStatusResponse>;
-  /** 描述WAF威胁情报封禁模块配置详情 */
+  /** {@link DescribeWafThreatenIntelligence 描述WAF威胁情报封禁模块配置详情}({@link DescribeWafThreatenIntelligenceRequest 请求参数}): {@link DescribeWafThreatenIntelligenceResponse 返回参数} */
   DescribeWafThreatenIntelligence(data?: DescribeWafThreatenIntelligenceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafThreatenIntelligenceResponse>;
-  /** 查询下载攻击日志任务记录列表 */
+  /** {@link GetAttackDownloadRecords 查询下载攻击日志任务记录列表}({@link GetAttackDownloadRecordsRequest 请求参数}): {@link GetAttackDownloadRecordsResponse 返回参数} */
   GetAttackDownloadRecords(data?: GetAttackDownloadRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackDownloadRecordsResponse>;
-  /** 修改访问日志保存期限 */
+  /** {@link ModifyAccessPeriod 修改访问日志保存期限}({@link ModifyAccessPeriodRequest 请求参数}): {@link ModifyAccessPeriodResponse 返回参数} */
   ModifyAccessPeriod(data: ModifyAccessPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessPeriodResponse>;
-  /** 开启或禁用自定义策略 */
+  /** {@link ModifyCustomRuleStatus 开启或禁用自定义策略}({@link ModifyCustomRuleStatusRequest 请求参数}): {@link ModifyCustomRuleStatusResponse 返回参数} */
   ModifyCustomRuleStatus(data: ModifyCustomRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomRuleStatusResponse>;
-  /** 更改某一条规则 */
+  /** {@link ModifyDomainWhiteRule 更改某一条规则}({@link ModifyDomainWhiteRuleRequest 请求参数}): {@link ModifyDomainWhiteRuleResponse 返回参数} */
   ModifyDomainWhiteRule(data: ModifyDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainWhiteRuleResponse>;
-  /** 修改ip惩罚规则 */
+  /** {@link ModifyWafAutoDenyRules 修改ip惩罚规则}({@link ModifyWafAutoDenyRulesRequest 请求参数}): {@link ModifyWafAutoDenyRulesResponse 返回参数} */
   ModifyWafAutoDenyRules(data: ModifyWafAutoDenyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafAutoDenyRulesResponse>;
-  /** 配置WAF自动封禁模块状态 */
+  /** {@link ModifyWafAutoDenyStatus 配置WAF自动封禁模块状态}({@link ModifyWafAutoDenyStatusRequest 请求参数}): {@link ModifyWafAutoDenyStatusResponse 返回参数} */
   ModifyWafAutoDenyStatus(data: ModifyWafAutoDenyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafAutoDenyStatusResponse>;
-  /** 配置WAF威胁情报封禁模块详情 */
+  /** {@link ModifyWafThreatenIntelligence 配置WAF威胁情报封禁模块详情}({@link ModifyWafThreatenIntelligenceRequest 请求参数}): {@link ModifyWafThreatenIntelligenceResponse 返回参数} */
   ModifyWafThreatenIntelligence(data: ModifyWafThreatenIntelligenceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafThreatenIntelligenceResponse>;
-  /** 创建搜索下载攻击日志任务 */
+  /** {@link PostAttackDownloadTask 创建搜索下载攻击日志任务}({@link PostAttackDownloadTaskRequest 请求参数}): {@link PostAttackDownloadTaskResponse 返回参数} */
   PostAttackDownloadTask(data: PostAttackDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<PostAttackDownloadTaskResponse>;
-  /** 搜索访问日志 */
+  /** {@link SearchAccessLog 搜索访问日志}({@link SearchAccessLogRequest 请求参数}): {@link SearchAccessLogResponse 返回参数} */
   SearchAccessLog(data: SearchAccessLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchAccessLogResponse>;
-  /** Waf IP黑白名单Upsert接口 */
+  /** {@link UpsertIpAccessControl Waf IP黑白名单Upsert接口}({@link UpsertIpAccessControlRequest 请求参数}): {@link UpsertIpAccessControlResponse 返回参数} */
   UpsertIpAccessControl(data: UpsertIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertIpAccessControlResponse>;
 }
 

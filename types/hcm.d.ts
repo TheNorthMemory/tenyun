@@ -72,10 +72,10 @@ declare interface EvaluationResponse {
   RequestId?: string;
 }
 
-/** [数学作业批改](https://cloud.tencent.com/document/product/1004) */
+/** {@link Hcm 数学作业批改} */
 declare interface Hcm {
   (): Versions;
-  /** 速算题目批改接口 */
+  /** {@link Evaluation 速算题目批改接口}({@link EvaluationRequest 请求参数}): {@link EvaluationResponse 返回参数} */
   Evaluation(data: EvaluationRequest, config?: AxiosRequestConfig): AxiosPromise<EvaluationResponse>;
 }
 

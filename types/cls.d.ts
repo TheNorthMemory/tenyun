@@ -1908,128 +1908,128 @@ declare interface UploadLogResponse {
   RequestId?: string;
 }
 
-/** [日志服务](https://cloud.tencent.com/document/product/614) */
+/** {@link Cls 日志服务} */
 declare interface Cls {
   (): Versions;
-  /** 应用采集配置到指定机器组 */
+  /** {@link ApplyConfigToMachineGroup 应用采集配置到指定机器组}({@link ApplyConfigToMachineGroupRequest 请求参数}): {@link ApplyConfigToMachineGroupResponse 返回参数} */
   ApplyConfigToMachineGroup(data: ApplyConfigToMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyConfigToMachineGroupResponse>;
-  /** 关闭Kafka协议消费 */
+  /** {@link CloseKafkaConsumer 关闭Kafka协议消费}({@link CloseKafkaConsumerRequest 请求参数}): {@link CloseKafkaConsumerResponse 返回参数} */
   CloseKafkaConsumer(data: CloseKafkaConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CloseKafkaConsumerResponse>;
-  /** 创建告警策略 */
+  /** {@link CreateAlarm 创建告警策略}({@link CreateAlarmRequest 请求参数}): {@link CreateAlarmResponse 返回参数} */
   CreateAlarm(data: CreateAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmResponse>;
-  /** 创建通知渠道组 */
+  /** {@link CreateAlarmNotice 创建通知渠道组}({@link CreateAlarmNoticeRequest 请求参数}): {@link CreateAlarmNoticeResponse 返回参数} */
   CreateAlarmNotice(data: CreateAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmNoticeResponse>;
-  /** 创建采集规则配置 */
+  /** {@link CreateConfig 创建采集规则配置}({@link CreateConfigRequest 请求参数}): {@link CreateConfigResponse 返回参数} */
   CreateConfig(data: CreateConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigResponse>;
-  /** 创建特殊采集配置任务 */
+  /** {@link CreateConfigExtra 创建特殊采集配置任务}({@link CreateConfigExtraRequest 请求参数}): {@link CreateConfigExtraResponse 返回参数} */
   CreateConfigExtra(data: CreateConfigExtraRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigExtraResponse>;
-  /** 创建投递任务 */
+  /** {@link CreateConsumer 创建投递任务}({@link CreateConsumerRequest 请求参数}): {@link CreateConsumerResponse 返回参数} */
   CreateConsumer(data: CreateConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerResponse>;
-  /** 创建日志下载任务 */
+  /** {@link CreateExport 创建日志下载任务}({@link CreateExportRequest 请求参数}): {@link CreateExportResponse 返回参数} */
   CreateExport(data: CreateExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportResponse>;
-  /** 创建索引 */
+  /** {@link CreateIndex 创建索引}({@link CreateIndexRequest 请求参数}): {@link CreateIndexResponse 返回参数} */
   CreateIndex(data: CreateIndexRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIndexResponse>;
-  /** 创建日志集 */
+  /** {@link CreateLogset 创建日志集}({@link CreateLogsetRequest 请求参数}): {@link CreateLogsetResponse 返回参数} */
   CreateLogset(data: CreateLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogsetResponse>;
-  /** 创建机器组 */
+  /** {@link CreateMachineGroup 创建机器组}({@link CreateMachineGroupRequest 请求参数}): {@link CreateMachineGroupResponse 返回参数} */
   CreateMachineGroup(data: CreateMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMachineGroupResponse>;
-  /** 创建投递规则 */
+  /** {@link CreateShipper 创建投递规则}({@link CreateShipperRequest 请求参数}): {@link CreateShipperResponse 返回参数} */
   CreateShipper(data: CreateShipperRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShipperResponse>;
-  /** 创建日志主题 */
+  /** {@link CreateTopic 创建日志主题}({@link CreateTopicRequest 请求参数}): {@link CreateTopicResponse 返回参数} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
-  /** 删除告警策略 */
+  /** {@link DeleteAlarm 删除告警策略}({@link DeleteAlarmRequest 请求参数}): {@link DeleteAlarmResponse 返回参数} */
   DeleteAlarm(data: DeleteAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmResponse>;
-  /** 删除通知渠道组 */
+  /** {@link DeleteAlarmNotice 删除通知渠道组}({@link DeleteAlarmNoticeRequest 请求参数}): {@link DeleteAlarmNoticeResponse 返回参数} */
   DeleteAlarmNotice(data: DeleteAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmNoticeResponse>;
-  /** 删除采集规则配置 */
+  /** {@link DeleteConfig 删除采集规则配置}({@link DeleteConfigRequest 请求参数}): {@link DeleteConfigResponse 返回参数} */
   DeleteConfig(data: DeleteConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigResponse>;
-  /** 删除特殊采集规则配置 */
+  /** {@link DeleteConfigExtra 删除特殊采集规则配置}({@link DeleteConfigExtraRequest 请求参数}): {@link DeleteConfigExtraResponse 返回参数} */
   DeleteConfigExtra(data: DeleteConfigExtraRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigExtraResponse>;
-  /** 删除应用到机器组的采集配置 */
+  /** {@link DeleteConfigFromMachineGroup 删除应用到机器组的采集配置}({@link DeleteConfigFromMachineGroupRequest 请求参数}): {@link DeleteConfigFromMachineGroupResponse 返回参数} */
   DeleteConfigFromMachineGroup(data: DeleteConfigFromMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigFromMachineGroupResponse>;
-  /** 删除投递配置 */
+  /** {@link DeleteConsumer 删除投递配置}({@link DeleteConsumerRequest 请求参数}): {@link DeleteConsumerResponse 返回参数} */
   DeleteConsumer(data: DeleteConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerResponse>;
-  /** 删除日志下载任务 */
+  /** {@link DeleteExport 删除日志下载任务}({@link DeleteExportRequest 请求参数}): {@link DeleteExportResponse 返回参数} */
   DeleteExport(data: DeleteExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteExportResponse>;
-  /** 删除索引配置 */
+  /** {@link DeleteIndex 删除索引配置}({@link DeleteIndexRequest 请求参数}): {@link DeleteIndexResponse 返回参数} */
   DeleteIndex(data: DeleteIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIndexResponse>;
-  /** 删除日志集 */
+  /** {@link DeleteLogset 删除日志集}({@link DeleteLogsetRequest 请求参数}): {@link DeleteLogsetResponse 返回参数} */
   DeleteLogset(data: DeleteLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogsetResponse>;
-  /** 删除机器组 */
+  /** {@link DeleteMachineGroup 删除机器组}({@link DeleteMachineGroupRequest 请求参数}): {@link DeleteMachineGroupResponse 返回参数} */
   DeleteMachineGroup(data: DeleteMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineGroupResponse>;
-  /** 删除投递规则 */
+  /** {@link DeleteShipper 删除投递规则}({@link DeleteShipperRequest 请求参数}): {@link DeleteShipperResponse 返回参数} */
   DeleteShipper(data: DeleteShipperRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShipperResponse>;
-  /** 删除日志主题 */
+  /** {@link DeleteTopic 删除日志主题}({@link DeleteTopicRequest 请求参数}): {@link DeleteTopicResponse 返回参数} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
-  /** 获取通知渠道组列表 */
+  /** {@link DescribeAlarmNotices 获取通知渠道组列表}({@link DescribeAlarmNoticesRequest 请求参数}): {@link DescribeAlarmNoticesResponse 返回参数} */
   DescribeAlarmNotices(data?: DescribeAlarmNoticesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNoticesResponse>;
-  /** 获取告警策略列表 */
+  /** {@link DescribeAlarms 获取告警策略列表}({@link DescribeAlarmsRequest 请求参数}): {@link DescribeAlarmsResponse 返回参数} */
   DescribeAlarms(data?: DescribeAlarmsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmsResponse>;
-  /** 获取特殊采集配置 */
+  /** {@link DescribeConfigExtras 获取特殊采集配置}({@link DescribeConfigExtrasRequest 请求参数}): {@link DescribeConfigExtrasResponse 返回参数} */
   DescribeConfigExtras(data?: DescribeConfigExtrasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigExtrasResponse>;
-  /** 获取采集规则配置所绑定的机器组 */
+  /** {@link DescribeConfigMachineGroups 获取采集规则配置所绑定的机器组}({@link DescribeConfigMachineGroupsRequest 请求参数}): {@link DescribeConfigMachineGroupsResponse 返回参数} */
   DescribeConfigMachineGroups(data: DescribeConfigMachineGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigMachineGroupsResponse>;
-  /** 获取采集规则配置 */
+  /** {@link DescribeConfigs 获取采集规则配置}({@link DescribeConfigsRequest 请求参数}): {@link DescribeConfigsResponse 返回参数} */
   DescribeConfigs(data?: DescribeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigsResponse>;
-  /** 获取投递配置 */
+  /** {@link DescribeConsumer 获取投递配置}({@link DescribeConsumerRequest 请求参数}): {@link DescribeConsumerResponse 返回参数} */
   DescribeConsumer(data: DescribeConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerResponse>;
-  /** 获取日志下载任务列表 */
+  /** {@link DescribeExports 获取日志下载任务列表}({@link DescribeExportsRequest 请求参数}): {@link DescribeExportsResponse 返回参数} */
   DescribeExports(data: DescribeExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportsResponse>;
-  /** 获取索引配置信息 */
+  /** {@link DescribeIndex 获取索引配置信息}({@link DescribeIndexRequest 请求参数}): {@link DescribeIndexResponse 返回参数} */
   DescribeIndex(data: DescribeIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexResponse>;
-  /** 上下文检索 */
+  /** {@link DescribeLogContext 上下文检索}({@link DescribeLogContextRequest 请求参数}): {@link DescribeLogContextResponse 返回参数} */
   DescribeLogContext(data: DescribeLogContextRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogContextResponse>;
-  /** 获取日志数量直方图 */
+  /** {@link DescribeLogHistogram 获取日志数量直方图}({@link DescribeLogHistogramRequest 请求参数}): {@link DescribeLogHistogramResponse 返回参数} */
   DescribeLogHistogram(data: DescribeLogHistogramRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogHistogramResponse>;
-  /** 获取日志集列表 */
+  /** {@link DescribeLogsets 获取日志集列表}({@link DescribeLogsetsRequest 请求参数}): {@link DescribeLogsetsResponse 返回参数} */
   DescribeLogsets(data?: DescribeLogsetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsetsResponse>;
-  /** 获取机器组绑定的采集规则配置 */
+  /** {@link DescribeMachineGroupConfigs 获取机器组绑定的采集规则配置}({@link DescribeMachineGroupConfigsRequest 请求参数}): {@link DescribeMachineGroupConfigsResponse 返回参数} */
   DescribeMachineGroupConfigs(data: DescribeMachineGroupConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineGroupConfigsResponse>;
-  /** 获取机器组列表 */
+  /** {@link DescribeMachineGroups 获取机器组列表}({@link DescribeMachineGroupsRequest 请求参数}): {@link DescribeMachineGroupsResponse 返回参数} */
   DescribeMachineGroups(data?: DescribeMachineGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineGroupsResponse>;
-  /** 获取机器状态 */
+  /** {@link DescribeMachines 获取机器状态}({@link DescribeMachinesRequest 请求参数}): {@link DescribeMachinesResponse 返回参数} */
   DescribeMachines(data: DescribeMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachinesResponse>;
-  /** 获取分区列表 */
+  /** {@link DescribePartitions 获取分区列表}({@link DescribePartitionsRequest 请求参数}): {@link DescribePartitionsResponse 返回参数} */
   DescribePartitions(data: DescribePartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePartitionsResponse>;
-  /** 获取投递任务列表 */
+  /** {@link DescribeShipperTasks 获取投递任务列表}({@link DescribeShipperTasksRequest 请求参数}): {@link DescribeShipperTasksResponse 返回参数} */
   DescribeShipperTasks(data: DescribeShipperTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShipperTasksResponse>;
-  /** 获取投递规则 */
+  /** {@link DescribeShippers 获取投递规则}({@link DescribeShippersRequest 请求参数}): {@link DescribeShippersResponse 返回参数} */
   DescribeShippers(data?: DescribeShippersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShippersResponse>;
-  /** 获取日志主题列表 */
+  /** {@link DescribeTopics 获取日志主题列表}({@link DescribeTopicsRequest 请求参数}): {@link DescribeTopicsResponse 返回参数} */
   DescribeTopics(data?: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
-  /** 获取告警任务历史记录 */
+  /** {@link GetAlarmLog 获取告警任务历史记录}({@link GetAlarmLogRequest 请求参数}): {@link GetAlarmLogResponse 返回参数} */
   GetAlarmLog(data: GetAlarmLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetAlarmLogResponse>;
-  /** 合并分区 */
+  /** {@link MergePartition 合并分区}({@link MergePartitionRequest 请求参数}): {@link MergePartitionResponse 返回参数} */
   MergePartition(data: MergePartitionRequest, config?: AxiosRequestConfig): AxiosPromise<MergePartitionResponse>;
-  /** 修改告警策略 */
+  /** {@link ModifyAlarm 修改告警策略}({@link ModifyAlarmRequest 请求参数}): {@link ModifyAlarmResponse 返回参数} */
   ModifyAlarm(data: ModifyAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmResponse>;
-  /** 修改通知渠道组 */
+  /** {@link ModifyAlarmNotice 修改通知渠道组}({@link ModifyAlarmNoticeRequest 请求参数}): {@link ModifyAlarmNoticeResponse 返回参数} */
   ModifyAlarmNotice(data: ModifyAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmNoticeResponse>;
-  /** 修改采集规则配置 */
+  /** {@link ModifyConfig 修改采集规则配置}({@link ModifyConfigRequest 请求参数}): {@link ModifyConfigResponse 返回参数} */
   ModifyConfig(data: ModifyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigResponse>;
-  /** 修改特殊采集配置任务 */
+  /** {@link ModifyConfigExtra 修改特殊采集配置任务}({@link ModifyConfigExtraRequest 请求参数}): {@link ModifyConfigExtraResponse 返回参数} */
   ModifyConfigExtra(data: ModifyConfigExtraRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigExtraResponse>;
-  /** 修改投递任务 */
+  /** {@link ModifyConsumer 修改投递任务}({@link ModifyConsumerRequest 请求参数}): {@link ModifyConsumerResponse 返回参数} */
   ModifyConsumer(data: ModifyConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerResponse>;
-  /** 修改索引 */
+  /** {@link ModifyIndex 修改索引}({@link ModifyIndexRequest 请求参数}): {@link ModifyIndexResponse 返回参数} */
   ModifyIndex(data: ModifyIndexRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIndexResponse>;
-  /** 修改日志集 */
+  /** {@link ModifyLogset 修改日志集}({@link ModifyLogsetRequest 请求参数}): {@link ModifyLogsetResponse 返回参数} */
   ModifyLogset(data: ModifyLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogsetResponse>;
-  /** 修改机器组 */
+  /** {@link ModifyMachineGroup 修改机器组}({@link ModifyMachineGroupRequest 请求参数}): {@link ModifyMachineGroupResponse 返回参数} */
   ModifyMachineGroup(data: ModifyMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMachineGroupResponse>;
-  /** 修改投递规则 */
+  /** {@link ModifyShipper 修改投递规则}({@link ModifyShipperRequest 请求参数}): {@link ModifyShipperResponse 返回参数} */
   ModifyShipper(data: ModifyShipperRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyShipperResponse>;
-  /** 修改日志主题 */
+  /** {@link ModifyTopic 修改日志主题}({@link ModifyTopicRequest 请求参数}): {@link ModifyTopicResponse 返回参数} */
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
-  /** 打开Kafka协议消费 */
+  /** {@link OpenKafkaConsumer 打开Kafka协议消费}({@link OpenKafkaConsumerRequest 请求参数}): {@link OpenKafkaConsumerResponse 返回参数} */
   OpenKafkaConsumer(data: OpenKafkaConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<OpenKafkaConsumerResponse>;
-  /** 重试失败的投递任务 */
+  /** {@link RetryShipperTask 重试失败的投递任务}({@link RetryShipperTaskRequest 请求参数}): {@link RetryShipperTaskResponse 返回参数} */
   RetryShipperTask(data: RetryShipperTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RetryShipperTaskResponse>;
-  /** 检索分析日志 */
+  /** {@link SearchLog 检索分析日志}({@link SearchLogRequest 请求参数}): {@link SearchLogResponse 返回参数} */
   SearchLog(data: SearchLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchLogResponse>;
-  /** 分裂主题分区 */
+  /** {@link SplitPartition 分裂主题分区}({@link SplitPartitionRequest 请求参数}): {@link SplitPartitionResponse 返回参数} */
   SplitPartition(data: SplitPartitionRequest, config?: AxiosRequestConfig): AxiosPromise<SplitPartitionResponse>;
-  /** 上传日志 */
+  /** {@link UploadLog 上传日志}({@link UploadLogRequest 请求参数}): {@link UploadLogResponse 返回参数} */
   UploadLog(data: UploadLogRequest, config?: AxiosRequestConfig): AxiosPromise<UploadLogResponse>;
 }
 

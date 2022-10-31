@@ -722,48 +722,48 @@ declare interface ModifySiteInfoResponse {
   RequestId?: string;
 }
 
-/** [本地专用集群](https://cloud.tencent.com/document/product/1346) */
+/** {@link Cdc 本地专用集群} */
 declare interface Cdc {
   (): Versions;
-  /** 创建专用集群 */
+  /** {@link CreateDedicatedCluster 创建专用集群}({@link CreateDedicatedClusterRequest 请求参数}): {@link CreateDedicatedClusterResponse 返回参数} */
   CreateDedicatedCluster(data: CreateDedicatedClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDedicatedClusterResponse>;
-  /** 创建专用集群订单 */
+  /** {@link CreateDedicatedClusterOrder 创建专用集群订单}({@link CreateDedicatedClusterOrderRequest 请求参数}): {@link CreateDedicatedClusterOrderResponse 返回参数} */
   CreateDedicatedClusterOrder(data: CreateDedicatedClusterOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDedicatedClusterOrderResponse>;
-  /** 创建站点 */
+  /** {@link CreateSite 创建站点}({@link CreateSiteRequest 请求参数}): {@link CreateSiteResponse 返回参数} */
   CreateSite(data: CreateSiteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSiteResponse>;
-  /** 删除专用集群 */
+  /** {@link DeleteDedicatedClusters 删除专用集群}({@link DeleteDedicatedClustersRequest 请求参数}): {@link DeleteDedicatedClustersResponse 返回参数} */
   DeleteDedicatedClusters(data: DeleteDedicatedClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDedicatedClustersResponse>;
-  /** 删除站点 */
+  /** {@link DeleteSites 删除站点}({@link DeleteSitesRequest 请求参数}): {@link DeleteSitesResponse 返回参数} */
   DeleteSites(data: DeleteSitesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSitesResponse>;
-  /** 查询专用集群内cos的容量信息 */
+  /** {@link DescribeDedicatedClusterCosCapacity 查询专用集群内cos的容量信息}({@link DescribeDedicatedClusterCosCapacityRequest 请求参数}): {@link DescribeDedicatedClusterCosCapacityResponse 返回参数} */
   DescribeDedicatedClusterCosCapacity(data: DescribeDedicatedClusterCosCapacityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterCosCapacityResponse>;
-  /** 查询专用集群内宿主机的统计信息 */
+  /** {@link DescribeDedicatedClusterHostStatistics 查询专用集群内宿主机的统计信息}({@link DescribeDedicatedClusterHostStatisticsRequest 请求参数}): {@link DescribeDedicatedClusterHostStatisticsResponse 返回参数} */
   DescribeDedicatedClusterHostStatistics(data: DescribeDedicatedClusterHostStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterHostStatisticsResponse>;
-  /** 专用集群宿主机信息 */
+  /** {@link DescribeDedicatedClusterHosts 专用集群宿主机信息}({@link DescribeDedicatedClusterHostsRequest 请求参数}): {@link DescribeDedicatedClusterHostsResponse 返回参数} */
   DescribeDedicatedClusterHosts(data: DescribeDedicatedClusterHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterHostsResponse>;
-  /** 查询专用集群支持的实例规格列表 */
+  /** {@link DescribeDedicatedClusterInstanceTypes 查询专用集群支持的实例规格列表}({@link DescribeDedicatedClusterInstanceTypesRequest 请求参数}): {@link DescribeDedicatedClusterInstanceTypesResponse 返回参数} */
   DescribeDedicatedClusterInstanceTypes(data: DescribeDedicatedClusterInstanceTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterInstanceTypesResponse>;
-  /** 查询专用集群订单列表 */
+  /** {@link DescribeDedicatedClusterOrders 查询专用集群订单列表}({@link DescribeDedicatedClusterOrdersRequest 请求参数}): {@link DescribeDedicatedClusterOrdersResponse 返回参数} */
   DescribeDedicatedClusterOrders(data?: DescribeDedicatedClusterOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterOrdersResponse>;
-  /** 专用集群概览信息 */
+  /** {@link DescribeDedicatedClusterOverview 专用集群概览信息}({@link DescribeDedicatedClusterOverviewRequest 请求参数}): {@link DescribeDedicatedClusterOverviewResponse 返回参数} */
   DescribeDedicatedClusterOverview(data: DescribeDedicatedClusterOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterOverviewResponse>;
-  /** 查询专有集群配置列表 */
+  /** {@link DescribeDedicatedClusterTypes 查询专有集群配置列表}({@link DescribeDedicatedClusterTypesRequest 请求参数}): {@link DescribeDedicatedClusterTypesResponse 返回参数} */
   DescribeDedicatedClusterTypes(data?: DescribeDedicatedClusterTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterTypesResponse>;
-  /** 查询专用集群列表 */
+  /** {@link DescribeDedicatedClusters 查询专用集群列表}({@link DescribeDedicatedClustersRequest 请求参数}): {@link DescribeDedicatedClustersResponse 返回参数} */
   DescribeDedicatedClusters(data?: DescribeDedicatedClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClustersResponse>;
-  /** 查询专用集群支持的可用区列表 */
+  /** {@link DescribeDedicatedSupportedZones 查询专用集群支持的可用区列表}({@link DescribeDedicatedSupportedZonesRequest 请求参数}): {@link DescribeDedicatedSupportedZonesResponse 返回参数} */
   DescribeDedicatedSupportedZones(data?: DescribeDedicatedSupportedZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedSupportedZonesResponse>;
-  /** 查询站点列表 */
+  /** {@link DescribeSites 查询站点列表}({@link DescribeSitesRequest 请求参数}): {@link DescribeSitesResponse 返回参数} */
   DescribeSites(data?: DescribeSitesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSitesResponse>;
-  /** 查询站点详情 */
+  /** {@link DescribeSitesDetail 查询站点详情}({@link DescribeSitesDetailRequest 请求参数}): {@link DescribeSitesDetailResponse 返回参数} */
   DescribeSitesDetail(data?: DescribeSitesDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSitesDetailResponse>;
-  /** 修改本地专用集群信息 */
+  /** {@link ModifyDedicatedClusterInfo 修改本地专用集群信息}({@link ModifyDedicatedClusterInfoRequest 请求参数}): {@link ModifyDedicatedClusterInfoResponse 返回参数} */
   ModifyDedicatedClusterInfo(data: ModifyDedicatedClusterInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDedicatedClusterInfoResponse>;
-  /** 修改订单状态 */
+  /** {@link ModifyOrderStatus 修改订单状态}({@link ModifyOrderStatusRequest 请求参数}): {@link ModifyOrderStatusResponse 返回参数} */
   ModifyOrderStatus(data: ModifyOrderStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOrderStatusResponse>;
-  /** 修改机房设备信息 */
+  /** {@link ModifySiteDeviceInfo 修改机房设备信息}({@link ModifySiteDeviceInfoRequest 请求参数}): {@link ModifySiteDeviceInfoResponse 返回参数} */
   ModifySiteDeviceInfo(data: ModifySiteDeviceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySiteDeviceInfoResponse>;
-  /** 修改机房信息 */
+  /** {@link ModifySiteInfo 修改机房信息}({@link ModifySiteInfoRequest 请求参数}): {@link ModifySiteInfoResponse 返回参数} */
   ModifySiteInfo(data: ModifySiteInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySiteInfoResponse>;
 }
 

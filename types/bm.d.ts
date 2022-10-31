@@ -1630,114 +1630,114 @@ declare interface UnbindPsaTagResponse {
   RequestId?: string;
 }
 
-/** [黑石物理服务器1.0](https://cloud.tencent.com/document/product/386) */
+/** {@link Bm 黑石物理服务器1.0} */
 declare interface Bm {
   (): Versions;
-  /** 服务器绑定CAM角色 */
+  /** {@link AttachCamRole 服务器绑定CAM角色}({@link AttachCamRoleRequest 请求参数}): {@link AttachCamRoleResponse 返回参数} */
   AttachCamRole(data: AttachCamRoleRequest, config?: AxiosRequestConfig): AxiosPromise<AttachCamRoleResponse>;
-  /** 为预授权规则绑定标签 */
+  /** {@link BindPsaTag 为预授权规则绑定标签}({@link BindPsaTagRequest 请求参数}): {@link BindPsaTagResponse 返回参数} */
   BindPsaTag(data: BindPsaTagRequest, config?: AxiosRequestConfig): AxiosPromise<BindPsaTagResponse>;
-  /** 购买物理机 */
+  /** {@link BuyDevices 购买物理机}({@link BuyDevicesRequest 请求参数}): {@link BuyDevicesResponse 返回参数} */
   BuyDevices(data: BuyDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<BuyDevicesResponse>;
-  /** 创建自定义镜像 */
+  /** {@link CreateCustomImage 创建自定义镜像}({@link CreateCustomImageRequest 请求参数}): {@link CreateCustomImageResponse 返回参数} */
   CreateCustomImage(data: CreateCustomImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomImageResponse>;
-  /** 创建预授权规则 */
+  /** {@link CreatePsaRegulation 创建预授权规则}({@link CreatePsaRegulationRequest 请求参数}): {@link CreatePsaRegulationResponse 返回参数} */
   CreatePsaRegulation(data: CreatePsaRegulationRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePsaRegulationResponse>;
-  /** 创建黑石竞价实例 */
+  /** {@link CreateSpotDevice 创建黑石竞价实例}({@link CreateSpotDeviceRequest 请求参数}): {@link CreateSpotDeviceResponse 返回参数} */
   CreateSpotDevice(data: CreateSpotDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSpotDeviceResponse>;
-  /** 创建自定义脚本 */
+  /** {@link CreateUserCmd 创建自定义脚本}({@link CreateUserCmdRequest 请求参数}): {@link CreateUserCmdResponse 返回参数} */
   CreateUserCmd(data: CreateUserCmdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserCmdResponse>;
-  /** 删除自定义镜像 */
+  /** {@link DeleteCustomImages 删除自定义镜像}({@link DeleteCustomImagesRequest 请求参数}): {@link DeleteCustomImagesResponse 返回参数} */
   DeleteCustomImages(data: DeleteCustomImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomImagesResponse>;
-  /** 删除预授权规则 */
+  /** {@link DeletePsaRegulation 删除预授权规则}({@link DeletePsaRegulationRequest 请求参数}): {@link DeletePsaRegulationResponse 返回参数} */
   DeletePsaRegulation(data: DeletePsaRegulationRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePsaRegulationResponse>;
-  /** 删除自定义脚本 */
+  /** {@link DeleteUserCmds 删除自定义脚本}({@link DeleteUserCmdsRequest 请求参数}): {@link DeleteUserCmdsResponse 返回参数} */
   DeleteUserCmds(data: DeleteUserCmdsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserCmdsResponse>;
-  /** 查询自定义镜像制作进度 */
+  /** {@link DescribeCustomImageProcess 查询自定义镜像制作进度}({@link DescribeCustomImageProcessRequest 请求参数}): {@link DescribeCustomImageProcessResponse 返回参数} */
   DescribeCustomImageProcess(data: DescribeCustomImageProcessRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomImageProcessResponse>;
-  /** 查看自定义镜像列表 */
+  /** {@link DescribeCustomImages 查看自定义镜像列表}({@link DescribeCustomImagesRequest 请求参数}): {@link DescribeCustomImagesResponse 返回参数} */
   DescribeCustomImages(data: DescribeCustomImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomImagesResponse>;
-  /** 查询设备型号 */
+  /** {@link DescribeDeviceClass 查询设备型号}({@link DescribeDeviceClassRequest 请求参数}): {@link DescribeDeviceClassResponse 返回参数} */
   DescribeDeviceClass(data?: DescribeDeviceClassRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceClassResponse>;
-  /** 查询机型RAID方式以及系统盘大小 */
+  /** {@link DescribeDeviceClassPartition 查询机型RAID方式以及系统盘大小}({@link DescribeDeviceClassPartitionRequest 请求参数}): {@link DescribeDeviceClassPartitionResponse 返回参数} */
   DescribeDeviceClassPartition(data?: DescribeDeviceClassPartitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceClassPartitionResponse>;
-  /** 查询设备硬件配置信息 */
+  /** {@link DescribeDeviceHardwareInfo 查询设备硬件配置信息}({@link DescribeDeviceHardwareInfoRequest 请求参数}): {@link DescribeDeviceHardwareInfoResponse 返回参数} */
   DescribeDeviceHardwareInfo(data: DescribeDeviceHardwareInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceHardwareInfoResponse>;
-  /** 查询设备库存 */
+  /** {@link DescribeDeviceInventory 查询设备库存}({@link DescribeDeviceInventoryRequest 请求参数}): {@link DescribeDeviceInventoryResponse 返回参数} */
   DescribeDeviceInventory(data: DescribeDeviceInventoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceInventoryResponse>;
-  /** 查询设备操作日志 */
+  /** {@link DescribeDeviceOperationLog 查询设备操作日志}({@link DescribeDeviceOperationLogRequest 请求参数}): {@link DescribeDeviceOperationLogResponse 返回参数} */
   DescribeDeviceOperationLog(data: DescribeDeviceOperationLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceOperationLogResponse>;
-  /** 获取物理机的分区格式 */
+  /** {@link DescribeDevicePartition 获取物理机的分区格式}({@link DescribeDevicePartitionRequest 请求参数}): {@link DescribeDevicePartitionResponse 返回参数} */
   DescribeDevicePartition(data: DescribeDevicePartitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePartitionResponse>;
-  /** 查询设备位置信息 */
+  /** {@link DescribeDevicePosition 查询设备位置信息}({@link DescribeDevicePositionRequest 请求参数}): {@link DescribeDevicePositionResponse 返回参数} */
   DescribeDevicePosition(data?: DescribeDevicePositionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePositionResponse>;
-  /** 查询服务器价格信息 */
+  /** {@link DescribeDevicePriceInfo 查询服务器价格信息}({@link DescribeDevicePriceInfoRequest 请求参数}): {@link DescribeDevicePriceInfoResponse 返回参数} */
   DescribeDevicePriceInfo(data: DescribeDevicePriceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePriceInfoResponse>;
-  /** 查询物理机信息 */
+  /** {@link DescribeDevices 查询物理机信息}({@link DescribeDevicesRequest 请求参数}): {@link DescribeDevicesResponse 返回参数} */
   DescribeDevices(data: DescribeDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesResponse>;
-  /** 查询自定义机型部件信息 */
+  /** {@link DescribeHardwareSpecification 查询自定义机型部件信息}({@link DescribeHardwareSpecificationRequest 请求参数}): {@link DescribeHardwareSpecificationResponse 返回参数} */
   DescribeHardwareSpecification(data?: DescribeHardwareSpecificationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHardwareSpecificationResponse>;
-  /** 查询托管设备带外信息 */
+  /** {@link DescribeHostedDeviceOutBandInfo 查询托管设备带外信息}({@link DescribeHostedDeviceOutBandInfoRequest 请求参数}): {@link DescribeHostedDeviceOutBandInfoResponse 返回参数} */
   DescribeHostedDeviceOutBandInfo(data: DescribeHostedDeviceOutBandInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostedDeviceOutBandInfoResponse>;
-  /** 查询异步任务状态 */
+  /** {@link DescribeOperationResult 查询异步任务状态}({@link DescribeOperationResultRequest 请求参数}): {@link DescribeOperationResultResponse 返回参数} */
   DescribeOperationResult(data: DescribeOperationResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOperationResultResponse>;
-  /** 查询操作系统信息 */
+  /** {@link DescribeOsInfo 查询操作系统信息}({@link DescribeOsInfoRequest 请求参数}): {@link DescribeOsInfoResponse 返回参数} */
   DescribeOsInfo(data?: DescribeOsInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOsInfoResponse>;
-  /** 获取预授权规则列表 */
+  /** {@link DescribePsaRegulations 获取预授权规则列表}({@link DescribePsaRegulationsRequest 请求参数}): {@link DescribePsaRegulationsResponse 返回参数} */
   DescribePsaRegulations(data: DescribePsaRegulationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePsaRegulationsResponse>;
-  /** 查询地域以及可用区 */
+  /** {@link DescribeRegions 查询地域以及可用区}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** 维修任务配置获取 */
+  /** {@link DescribeRepairTaskConstant 维修任务配置获取}({@link DescribeRepairTaskConstantRequest 请求参数}): {@link DescribeRepairTaskConstantResponse 返回参数} */
   DescribeRepairTaskConstant(data?: DescribeRepairTaskConstantRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepairTaskConstantResponse>;
-  /** 维修任务信息获取 */
+  /** {@link DescribeTaskInfo 维修任务信息获取}({@link DescribeTaskInfoRequest 请求参数}): {@link DescribeTaskInfoResponse 返回参数} */
   DescribeTaskInfo(data: DescribeTaskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskInfoResponse>;
-  /** 维修任务操作日志获取 */
+  /** {@link DescribeTaskOperationLog 维修任务操作日志获取}({@link DescribeTaskOperationLogRequest 请求参数}): {@link DescribeTaskOperationLogResponse 返回参数} */
   DescribeTaskOperationLog(data: DescribeTaskOperationLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskOperationLogResponse>;
-  /** 获取自定义脚本任务详细信息 */
+  /** {@link DescribeUserCmdTaskInfo 获取自定义脚本任务详细信息}({@link DescribeUserCmdTaskInfoRequest 请求参数}): {@link DescribeUserCmdTaskInfoResponse 返回参数} */
   DescribeUserCmdTaskInfo(data: DescribeUserCmdTaskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCmdTaskInfoResponse>;
-  /** 获取自定义脚本任务列表 */
+  /** {@link DescribeUserCmdTasks 获取自定义脚本任务列表}({@link DescribeUserCmdTasksRequest 请求参数}): {@link DescribeUserCmdTasksResponse 返回参数} */
   DescribeUserCmdTasks(data: DescribeUserCmdTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCmdTasksResponse>;
-  /** 获取自定义脚本信息列表 */
+  /** {@link DescribeUserCmds 获取自定义脚本信息列表}({@link DescribeUserCmdsRequest 请求参数}): {@link DescribeUserCmdsResponse 返回参数} */
   DescribeUserCmds(data: DescribeUserCmdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCmdsResponse>;
-  /** 服务器解绑CAM角色 */
+  /** {@link DetachCamRole 服务器解绑CAM角色}({@link DetachCamRoleRequest 请求参数}): {@link DetachCamRoleResponse 返回参数} */
   DetachCamRole(data: DetachCamRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DetachCamRoleResponse>;
-  /** 修改自定义镜像属性 */
+  /** {@link ModifyCustomImageAttribute 修改自定义镜像属性}({@link ModifyCustomImageAttributeRequest 请求参数}): {@link ModifyCustomImageAttributeResponse 返回参数} */
   ModifyCustomImageAttribute(data: ModifyCustomImageAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomImageAttributeResponse>;
-  /** 修改服务器名称 */
+  /** {@link ModifyDeviceAliases 修改服务器名称}({@link ModifyDeviceAliasesRequest 请求参数}): {@link ModifyDeviceAliasesResponse 返回参数} */
   ModifyDeviceAliases(data: ModifyDeviceAliasesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceAliasesResponse>;
-  /** 修改物理机服务器自动续费标志 */
+  /** {@link ModifyDeviceAutoRenewFlag 修改物理机服务器自动续费标志}({@link ModifyDeviceAutoRenewFlagRequest 请求参数}): {@link ModifyDeviceAutoRenewFlagResponse 返回参数} */
   ModifyDeviceAutoRenewFlag(data: ModifyDeviceAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceAutoRenewFlagResponse>;
-  /** 修改物理机内网IP（不重装系统） */
+  /** {@link ModifyLanIp 修改物理机内网IP（不重装系统）}({@link ModifyLanIpRequest 请求参数}): {@link ModifyLanIpResponse 返回参数} */
   ModifyLanIp(data: ModifyLanIpRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLanIpResponse>;
-  /** 将设备从预付费转换为后付费 */
+  /** {@link ModifyPayModePre2Post 将设备从预付费转换为后付费}({@link ModifyPayModePre2PostRequest 请求参数}): {@link ModifyPayModePre2PostResponse 返回参数} */
   ModifyPayModePre2Post(data: ModifyPayModePre2PostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPayModePre2PostResponse>;
-  /** 修改预授权规则 */
+  /** {@link ModifyPsaRegulation 修改预授权规则}({@link ModifyPsaRegulationRequest 请求参数}): {@link ModifyPsaRegulationResponse 返回参数} */
   ModifyPsaRegulation(data: ModifyPsaRegulationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPsaRegulationResponse>;
-  /** 修改自定义脚本 */
+  /** {@link ModifyUserCmd 修改自定义脚本}({@link ModifyUserCmdRequest 请求参数}): {@link ModifyUserCmdResponse 返回参数} */
   ModifyUserCmd(data: ModifyUserCmdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserCmdResponse>;
-  /** 退还服务器 */
+  /** {@link OfflineDevices 退还服务器}({@link OfflineDevicesRequest 请求参数}): {@link OfflineDevicesResponse 返回参数} */
   OfflineDevices(data: OfflineDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineDevicesResponse>;
-  /** 重启机器 */
+  /** {@link RebootDevices 重启机器}({@link RebootDevicesRequest 请求参数}): {@link RebootDevicesResponse 返回参数} */
   RebootDevices(data: RebootDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootDevicesResponse>;
-  /** 恢复物理机 */
+  /** {@link RecoverDevices 恢复物理机}({@link RecoverDevicesRequest 请求参数}): {@link RecoverDevicesResponse 返回参数} */
   RecoverDevices(data: RecoverDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverDevicesResponse>;
-  /** 重装操作系统 */
+  /** {@link ReloadDeviceOs 重装操作系统}({@link ReloadDeviceOsRequest 请求参数}): {@link ReloadDeviceOsResponse 返回参数} */
   ReloadDeviceOs(data: ReloadDeviceOsRequest, config?: AxiosRequestConfig): AxiosPromise<ReloadDeviceOsResponse>;
-  /** 维修任务管理 */
+  /** {@link RepairTaskControl 维修任务管理}({@link RepairTaskControlRequest 请求参数}): {@link RepairTaskControlResponse 返回参数} */
   RepairTaskControl(data: RepairTaskControlRequest, config?: AxiosRequestConfig): AxiosPromise<RepairTaskControlResponse>;
-  /** 重置密码 */
+  /** {@link ResetDevicePassword 重置密码}({@link ResetDevicePasswordRequest 请求参数}): {@link ResetDevicePasswordResponse 返回参数} */
   ResetDevicePassword(data: ResetDevicePasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDevicePasswordResponse>;
-  /** 退回物理机 */
+  /** {@link ReturnDevices 退回物理机}({@link ReturnDevicesRequest 请求参数}): {@link ReturnDevicesResponse 返回参数} */
   ReturnDevices(data: ReturnDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<ReturnDevicesResponse>;
-  /** 运行自定义脚本 */
+  /** {@link RunUserCmd 运行自定义脚本}({@link RunUserCmdRequest 请求参数}): {@link RunUserCmdResponse 返回参数} */
   RunUserCmd(data: RunUserCmdRequest, config?: AxiosRequestConfig): AxiosPromise<RunUserCmdResponse>;
-  /** 设置带外VPN认证用户密码 */
+  /** {@link SetOutBandVpnAuthPassword 设置带外VPN认证用户密码}({@link SetOutBandVpnAuthPasswordRequest 请求参数}): {@link SetOutBandVpnAuthPasswordResponse 返回参数} */
   SetOutBandVpnAuthPassword(data: SetOutBandVpnAuthPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<SetOutBandVpnAuthPasswordResponse>;
-  /** 关闭服务器 */
+  /** {@link ShutdownDevices 关闭服务器}({@link ShutdownDevicesRequest 请求参数}): {@link ShutdownDevicesResponse 返回参数} */
   ShutdownDevices(data: ShutdownDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<ShutdownDevicesResponse>;
-  /** 开启服务器 */
+  /** {@link StartDevices 开启服务器}({@link StartDevicesRequest 请求参数}): {@link StartDevicesResponse 返回参数} */
   StartDevices(data: StartDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<StartDevicesResponse>;
-  /** 解除标签与预授权规则的绑定 */
+  /** {@link UnbindPsaTag 解除标签与预授权规则的绑定}({@link UnbindPsaTagRequest 请求参数}): {@link UnbindPsaTagResponse 返回参数} */
   UnbindPsaTag(data: UnbindPsaTagRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindPsaTagResponse>;
 }
 

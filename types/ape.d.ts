@@ -264,24 +264,24 @@ declare interface DescribeImagesResponse {
   RequestId?: string;
 }
 
-/** [正版图库直通车](https://cloud.tencent.com/document/product/1181) */
+/** {@link Ape 正版图库直通车} */
 declare interface Ape {
   (): Versions;
-  /** 批量获取授权书下载地址 */
+  /** {@link BatchDescribeOrderCertificate 批量获取授权书下载地址}({@link BatchDescribeOrderCertificateRequest 请求参数}): {@link BatchDescribeOrderCertificateResponse 返回参数} */
   BatchDescribeOrderCertificate(data: BatchDescribeOrderCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDescribeOrderCertificateResponse>;
-  /** 批量获取图片下载地址 */
+  /** {@link BatchDescribeOrderImage 批量获取图片下载地址}({@link BatchDescribeOrderImageRequest 请求参数}): {@link BatchDescribeOrderImageResponse 返回参数} */
   BatchDescribeOrderImage(data: BatchDescribeOrderImageRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDescribeOrderImageResponse>;
-  /** 获取图片下载地址 */
+  /** {@link CreateOrderAndDownloads 获取图片下载地址}({@link CreateOrderAndDownloadsRequest 请求参数}): {@link CreateOrderAndDownloadsResponse 返回参数} */
   CreateOrderAndDownloads(data: CreateOrderAndDownloadsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrderAndDownloadsResponse>;
-  /** 创建订单并支付 */
+  /** {@link CreateOrderAndPay 创建订单并支付}({@link CreateOrderAndPayRequest 请求参数}): {@link CreateOrderAndPayResponse 返回参数} */
   CreateOrderAndPay(data: CreateOrderAndPayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrderAndPayResponse>;
-  /** 查询授权人列表 */
+  /** {@link DescribeAuthUsers 查询授权人列表}({@link DescribeAuthUsersRequest 请求参数}): {@link DescribeAuthUsersResponse 返回参数} */
   DescribeAuthUsers(data: DescribeAuthUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthUsersResponse>;
-  /** 获取图片下载记录 */
+  /** {@link DescribeDownloadInfos 获取图片下载记录}({@link DescribeDownloadInfosRequest 请求参数}): {@link DescribeDownloadInfosResponse 返回参数} */
   DescribeDownloadInfos(data?: DescribeDownloadInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDownloadInfosResponse>;
-  /** 查询图片详情 */
+  /** {@link DescribeImage 查询图片详情}({@link DescribeImageRequest 请求参数}): {@link DescribeImageResponse 返回参数} */
   DescribeImage(data: DescribeImageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageResponse>;
-  /** 查询图片列表 */
+  /** {@link DescribeImages 查询图片列表}({@link DescribeImagesRequest 请求参数}): {@link DescribeImagesResponse 返回参数} */
   DescribeImages(data: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
 }
 

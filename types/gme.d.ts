@@ -726,54 +726,54 @@ declare interface UpdateScanUsersResponse {
   RequestId?: string;
 }
 
-/** [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) */
+/** {@link Gme 游戏多媒体引擎} */
 declare interface Gme {
   (): Versions;
-  /** 提交年龄语音识别任务 */
+  /** {@link CreateAgeDetectTask 提交年龄语音识别任务}({@link CreateAgeDetectTaskRequest 请求参数}): {@link CreateAgeDetectTaskResponse 返回参数} */
   CreateAgeDetectTask(data: CreateAgeDetectTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgeDetectTaskResponse>;
-  /** 创建GME应用 */
+  /** {@link CreateApp 创建GME应用}({@link CreateAppRequest 请求参数}): {@link CreateAppResponse 返回参数} */
   CreateApp(data: CreateAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppResponse>;
-  /** 创建语音消息转文本自学习模型 */
+  /** {@link CreateCustomization 创建语音消息转文本自学习模型}({@link CreateCustomizationRequest 请求参数}): {@link CreateCustomizationResponse 返回参数} */
   CreateCustomization(data: CreateCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomizationResponse>;
-  /** 新增自定义送检用户 */
+  /** {@link CreateScanUser 新增自定义送检用户}({@link CreateScanUserRequest 请求参数}): {@link CreateScanUserResponse 返回参数} */
   CreateScanUser(data: CreateScanUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScanUserResponse>;
-  /** 删除语音消息转文本自学习模型 */
+  /** {@link DeleteCustomization 删除语音消息转文本自学习模型}({@link DeleteCustomizationRequest 请求参数}): {@link DeleteCustomizationResponse 返回参数} */
   DeleteCustomization(data: DeleteCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomizationResponse>;
-  /** 剔除房间或房间成员 */
+  /** {@link DeleteRoomMember 剔除房间或房间成员}({@link DeleteRoomMemberRequest 请求参数}): {@link DeleteRoomMemberResponse 返回参数} */
   DeleteRoomMember(data: DeleteRoomMemberRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoomMemberResponse>;
-  /** 删除自定义送检用户 */
+  /** {@link DeleteScanUser 删除自定义送检用户}({@link DeleteScanUserRequest 请求参数}): {@link DeleteScanUserResponse 返回参数} */
   DeleteScanUser(data: DeleteScanUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScanUserResponse>;
-  /** 查询年龄语音识别任务结果 */
+  /** {@link DescribeAgeDetectTask 查询年龄语音识别任务结果}({@link DescribeAgeDetectTaskRequest 请求参数}): {@link DescribeAgeDetectTaskResponse 返回参数} */
   DescribeAgeDetectTask(data: DescribeAgeDetectTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgeDetectTaskResponse>;
-  /** 获取应用用量统计数据 */
+  /** {@link DescribeAppStatistics 获取应用用量统计数据}({@link DescribeAppStatisticsRequest 请求参数}): {@link DescribeAppStatisticsResponse 返回参数} */
   DescribeAppStatistics(data: DescribeAppStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppStatisticsResponse>;
-  /** 获取数据详情 */
+  /** {@link DescribeApplicationData 获取数据详情}({@link DescribeApplicationDataRequest 请求参数}): {@link DescribeApplicationDataResponse 返回参数} */
   DescribeApplicationData(data: DescribeApplicationDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationDataResponse>;
-  /** 获取用户自定义送检信息 */
+  /** {@link DescribeRealtimeScanConfig 获取用户自定义送检信息}({@link DescribeRealtimeScanConfigRequest 请求参数}): {@link DescribeRealtimeScanConfigResponse 返回参数} */
   DescribeRealtimeScanConfig(data: DescribeRealtimeScanConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealtimeScanConfigResponse>;
-  /** 获取房间内用户信息 */
+  /** {@link DescribeRoomInfo 获取房间内用户信息}({@link DescribeRoomInfoRequest 请求参数}): {@link DescribeRoomInfoResponse 返回参数} */
   DescribeRoomInfo(data: DescribeRoomInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomInfoResponse>;
-  /** 查询语音检测结果 */
+  /** {@link DescribeScanResultList 查询语音检测结果}({@link DescribeScanResultListRequest 请求参数}): {@link DescribeScanResultListResponse 返回参数} */
   DescribeScanResultList(data: DescribeScanResultListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanResultListResponse>;
-  /** 拉取用户在房间得进出时间 */
+  /** {@link DescribeUserInAndOutTime 拉取用户在房间得进出时间}({@link DescribeUserInAndOutTimeRequest 请求参数}): {@link DescribeUserInAndOutTimeResponse 返回参数} */
   DescribeUserInAndOutTime(data: DescribeUserInAndOutTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInAndOutTimeResponse>;
-  /** 查询语音消息转文本自学习模型列表 */
+  /** {@link GetCustomizationList 查询语音消息转文本自学习模型列表}({@link GetCustomizationListRequest 请求参数}): {@link GetCustomizationListResponse 返回参数} */
   GetCustomizationList(data: GetCustomizationListRequest, config?: AxiosRequestConfig): AxiosPromise<GetCustomizationListResponse>;
-  /** 修改应用开关状态 */
+  /** {@link ModifyAppStatus 修改应用开关状态}({@link ModifyAppStatusRequest 请求参数}): {@link ModifyAppStatusResponse 返回参数} */
   ModifyAppStatus(data: ModifyAppStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppStatusResponse>;
-  /** 更新语音消息转文本自学习模型 */
+  /** {@link ModifyCustomization 更新语音消息转文本自学习模型}({@link ModifyCustomizationRequest 请求参数}): {@link ModifyCustomizationResponse 返回参数} */
   ModifyCustomization(data: ModifyCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizationResponse>;
-  /** 修改语音消息转文本自学习模型状态 */
+  /** {@link ModifyCustomizationState 修改语音消息转文本自学习模型状态}({@link ModifyCustomizationStateRequest 请求参数}): {@link ModifyCustomizationStateResponse 返回参数} */
   ModifyCustomizationState(data: ModifyCustomizationStateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizationStateResponse>;
-  /** 修改房间信息 */
+  /** {@link ModifyRoomInfo 修改房间信息}({@link ModifyRoomInfoRequest 请求参数}): {@link ModifyRoomInfoResponse 返回参数} */
   ModifyRoomInfo(data: ModifyRoomInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoomInfoResponse>;
-  /** 修改用户麦克风状态 */
+  /** {@link ModifyUserMicStatus 修改用户麦克风状态}({@link ModifyUserMicStatusRequest 请求参数}): {@link ModifyUserMicStatusResponse 返回参数} */
   ModifyUserMicStatus(data: ModifyUserMicStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserMicStatusResponse>;
-  /** 提交语音检测任务 */
+  /** {@link ScanVoice 提交语音检测任务}({@link ScanVoiceRequest 请求参数}): {@link ScanVoiceResponse 返回参数} */
   ScanVoice(data: ScanVoiceRequest, config?: AxiosRequestConfig): AxiosPromise<ScanVoiceResponse>;
-  /** 更新送检房间号 */
+  /** {@link UpdateScanRooms 更新送检房间号}({@link UpdateScanRoomsRequest 请求参数}): {@link UpdateScanRoomsResponse 返回参数} */
   UpdateScanRooms(data: UpdateScanRoomsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateScanRoomsResponse>;
-  /** 更新送检用户号 */
+  /** {@link UpdateScanUsers 更新送检用户号}({@link UpdateScanUsersRequest 请求参数}): {@link UpdateScanUsersResponse 返回参数} */
   UpdateScanUsers(data: UpdateScanUsersRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateScanUsersResponse>;
 }
 

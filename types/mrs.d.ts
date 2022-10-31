@@ -1096,16 +1096,16 @@ declare interface TextToObjectResponse {
   RequestId?: string;
 }
 
-/** [医疗报告结构化](https://cloud.tencent.com/document/product/1314) */
+/** {@link Mrs 医疗报告结构化} */
 declare interface Mrs {
   (): Versions;
-  /** 图片分类接口 */
+  /** {@link ImageToClass 图片分类接口}({@link ImageToClassRequest 请求参数}): {@link ImageToClassResponse 返回参数} */
   ImageToClass(data: ImageToClassRequest, config?: AxiosRequestConfig): AxiosPromise<ImageToClassResponse>;
-  /** 图片结构化接口 */
+  /** {@link ImageToObject 图片结构化接口}({@link ImageToObjectRequest 请求参数}): {@link ImageToObjectResponse 返回参数} */
   ImageToObject(data: ImageToObjectRequest, config?: AxiosRequestConfig): AxiosPromise<ImageToObjectResponse>;
-  /** 文本分类接口 */
+  /** {@link TextToClass 文本分类接口}({@link TextToClassRequest 请求参数}): {@link TextToClassResponse 返回参数} */
   TextToClass(data: TextToClassRequest, config?: AxiosRequestConfig): AxiosPromise<TextToClassResponse>;
-  /** 文本结构化接口 */
+  /** {@link TextToObject 文本结构化接口}({@link TextToObjectRequest 请求参数}): {@link TextToObjectResponse 返回参数} */
   TextToObject(data: TextToObjectRequest, config?: AxiosRequestConfig): AxiosPromise<TextToObjectResponse>;
 }
 

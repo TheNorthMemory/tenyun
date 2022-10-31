@@ -1482,130 +1482,130 @@ declare interface UpgradeNatGatewayResponse {
   RequestId?: string;
 }
 
-/** [黑石私有网络](https://cloud.tencent.com/document/product/1024) */
+/** {@link Bmvpc 黑石私有网络} */
 declare interface Bmvpc {
   (): Versions;
-  /** 接受黑石对等连接 */
+  /** {@link AcceptVpcPeerConnection 接受黑石对等连接}({@link AcceptVpcPeerConnectionRequest 请求参数}): {@link AcceptVpcPeerConnectionResponse 返回参数} */
   AcceptVpcPeerConnection(data: AcceptVpcPeerConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<AcceptVpcPeerConnectionResponse>;
-  /** 批量注册虚拟IP */
+  /** {@link AsyncRegisterIps 批量注册虚拟IP}({@link AsyncRegisterIpsRequest 请求参数}): {@link AsyncRegisterIpsResponse 返回参数} */
   AsyncRegisterIps(data: AsyncRegisterIpsRequest, config?: AxiosRequestConfig): AxiosPromise<AsyncRegisterIpsResponse>;
-  /** NAT网关绑定EIP */
+  /** {@link BindEipsToNatGateway NAT网关绑定EIP}({@link BindEipsToNatGatewayRequest 请求参数}): {@link BindEipsToNatGatewayResponse 返回参数} */
   BindEipsToNatGateway(data: BindEipsToNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<BindEipsToNatGatewayResponse>;
-  /** NAT网关绑定IP */
+  /** {@link BindIpsToNatGateway NAT网关绑定IP}({@link BindIpsToNatGatewayRequest 请求参数}): {@link BindIpsToNatGatewayResponse 返回参数} */
   BindIpsToNatGateway(data: BindIpsToNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<BindIpsToNatGatewayResponse>;
-  /** NAT网关绑定子网 */
+  /** {@link BindSubnetsToNatGateway NAT网关绑定子网}({@link BindSubnetsToNatGatewayRequest 请求参数}): {@link BindSubnetsToNatGatewayResponse 返回参数} */
   BindSubnetsToNatGateway(data: BindSubnetsToNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<BindSubnetsToNatGatewayResponse>;
-  /** 创建对端网关 */
+  /** {@link CreateCustomerGateway 创建对端网关}({@link CreateCustomerGatewayRequest 请求参数}): {@link CreateCustomerGatewayResponse 返回参数} */
   CreateCustomerGateway(data: CreateCustomerGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomerGatewayResponse>;
-  /** 创建黑石Docker子网 */
+  /** {@link CreateDockerSubnetWithVlan 创建黑石Docker子网}({@link CreateDockerSubnetWithVlanRequest 请求参数}): {@link CreateDockerSubnetWithVlanResponse 返回参数} */
   CreateDockerSubnetWithVlan(data: CreateDockerSubnetWithVlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDockerSubnetWithVlanResponse>;
-  /** 黑石托管机器加入子网 */
+  /** {@link CreateHostedInterface 黑石托管机器加入子网}({@link CreateHostedInterfaceRequest 请求参数}): {@link CreateHostedInterfaceResponse 返回参数} */
   CreateHostedInterface(data: CreateHostedInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostedInterfaceResponse>;
-  /** 物理机加入子网 */
+  /** {@link CreateInterfaces 物理机加入子网}({@link CreateInterfacesRequest 请求参数}): {@link CreateInterfacesResponse 返回参数} */
   CreateInterfaces(data: CreateInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInterfacesResponse>;
-  /** 创建NAT网关 */
+  /** {@link CreateNatGateway 创建NAT网关}({@link CreateNatGatewayRequest 请求参数}): {@link CreateNatGatewayResponse 返回参数} */
   CreateNatGateway(data: CreateNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNatGatewayResponse>;
-  /** 创建黑石路由表的路由规则 */
+  /** {@link CreateRoutePolicies 创建黑石路由表的路由规则}({@link CreateRoutePoliciesRequest 请求参数}): {@link CreateRoutePoliciesResponse 返回参数} */
   CreateRoutePolicies(data: CreateRoutePoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoutePoliciesResponse>;
-  /** 创建黑石私有网络的子网 */
+  /** {@link CreateSubnet 创建黑石私有网络的子网}({@link CreateSubnetRequest 请求参数}): {@link CreateSubnetResponse 返回参数} */
   CreateSubnet(data: CreateSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubnetResponse>;
-  /** 创建黑石虚拟子网 */
+  /** {@link CreateVirtualSubnetWithVlan 创建黑石虚拟子网}({@link CreateVirtualSubnetWithVlanRequest 请求参数}): {@link CreateVirtualSubnetWithVlanResponse 返回参数} */
   CreateVirtualSubnetWithVlan(data: CreateVirtualSubnetWithVlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVirtualSubnetWithVlanResponse>;
-  /** 创建黑石私有网络 */
+  /** {@link CreateVpc 创建黑石私有网络}({@link CreateVpcRequest 请求参数}): {@link CreateVpcResponse 返回参数} */
   CreateVpc(data: CreateVpcRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcResponse>;
-  /** 创建对等连接 */
+  /** {@link CreateVpcPeerConnection 创建对等连接}({@link CreateVpcPeerConnectionRequest 请求参数}): {@link CreateVpcPeerConnectionResponse 返回参数} */
   CreateVpcPeerConnection(data: CreateVpcPeerConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcPeerConnectionResponse>;
-  /** 删除对端网关 */
+  /** {@link DeleteCustomerGateway 删除对端网关}({@link DeleteCustomerGatewayRequest 请求参数}): {@link DeleteCustomerGatewayResponse 返回参数} */
   DeleteCustomerGateway(data: DeleteCustomerGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomerGatewayResponse>;
-  /** 黑石托管机器移除子网 */
+  /** {@link DeleteHostedInterface 黑石托管机器移除子网}({@link DeleteHostedInterfaceRequest 请求参数}): {@link DeleteHostedInterfaceResponse 返回参数} */
   DeleteHostedInterface(data: DeleteHostedInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHostedInterfaceResponse>;
-  /** 托管机器移除子网(批量接口) */
+  /** {@link DeleteHostedInterfaces 托管机器移除子网(批量接口)}({@link DeleteHostedInterfacesRequest 请求参数}): {@link DeleteHostedInterfacesResponse 返回参数} */
   DeleteHostedInterfaces(data: DeleteHostedInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHostedInterfacesResponse>;
-  /** 物理机移除子网(批量接口) */
+  /** {@link DeleteInterfaces 物理机移除子网(批量接口)}({@link DeleteInterfacesRequest 请求参数}): {@link DeleteInterfacesResponse 返回参数} */
   DeleteInterfaces(data: DeleteInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInterfacesResponse>;
-  /** 删除NAT网关 */
+  /** {@link DeleteNatGateway 删除NAT网关}({@link DeleteNatGatewayRequest 请求参数}): {@link DeleteNatGatewayResponse 返回参数} */
   DeleteNatGateway(data: DeleteNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNatGatewayResponse>;
-  /** 删除黑石路由表路由规则 */
+  /** {@link DeleteRoutePolicy 删除黑石路由表路由规则}({@link DeleteRoutePolicyRequest 请求参数}): {@link DeleteRoutePolicyResponse 返回参数} */
   DeleteRoutePolicy(data: DeleteRoutePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoutePolicyResponse>;
-  /** 删除子网 */
+  /** {@link DeleteSubnet 删除子网}({@link DeleteSubnetRequest 请求参数}): {@link DeleteSubnetResponse 返回参数} */
   DeleteSubnet(data: DeleteSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubnetResponse>;
-  /** 退还虚拟IP */
+  /** {@link DeleteVirtualIp 退还虚拟IP}({@link DeleteVirtualIpRequest 请求参数}): {@link DeleteVirtualIpResponse 返回参数} */
   DeleteVirtualIp(data: DeleteVirtualIpRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVirtualIpResponse>;
-  /** 删除私有网络 */
+  /** {@link DeleteVpc 删除私有网络}({@link DeleteVpcRequest 请求参数}): {@link DeleteVpcResponse 返回参数} */
   DeleteVpc(data: DeleteVpcRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcResponse>;
-  /** 删除黑石对等连接 */
+  /** {@link DeleteVpcPeerConnection 删除黑石对等连接}({@link DeleteVpcPeerConnectionRequest 请求参数}): {@link DeleteVpcPeerConnectionResponse 返回参数} */
   DeleteVpcPeerConnection(data: DeleteVpcPeerConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcPeerConnectionResponse>;
-  /** 删除VPN通道 */
+  /** {@link DeleteVpnConnection 删除VPN通道}({@link DeleteVpnConnectionRequest 请求参数}): {@link DeleteVpnConnectionResponse 返回参数} */
   DeleteVpnConnection(data: DeleteVpnConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnConnectionResponse>;
-  /** 删除VPN网关 */
+  /** {@link DeleteVpnGateway 删除VPN网关}({@link DeleteVpnGatewayRequest 请求参数}): {@link DeleteVpnGatewayResponse 返回参数} */
   DeleteVpnGateway(data: DeleteVpnGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnGatewayResponse>;
-  /** 注销私有网络IP */
+  /** {@link DeregisterIps 注销私有网络IP}({@link DeregisterIpsRequest 请求参数}): {@link DeregisterIpsResponse 返回参数} */
   DeregisterIps(data: DeregisterIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterIpsResponse>;
-  /** 查询对端网关 */
+  /** {@link DescribeCustomerGateways 查询对端网关}({@link DescribeCustomerGatewaysRequest 请求参数}): {@link DescribeCustomerGatewaysResponse 返回参数} */
   DescribeCustomerGateways(data?: DescribeCustomerGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomerGatewaysResponse>;
-  /** 获取NAT网关列表 */
+  /** {@link DescribeNatGateways 获取NAT网关列表}({@link DescribeNatGatewaysRequest 请求参数}): {@link DescribeNatGatewaysResponse 返回参数} */
   DescribeNatGateways(data?: DescribeNatGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewaysResponse>;
-  /** 获取NAT关联的子网信息 */
+  /** {@link DescribeNatSubnets 获取NAT关联的子网信息}({@link DescribeNatSubnetsRequest 请求参数}): {@link DescribeNatSubnetsResponse 返回参数} */
   DescribeNatSubnets(data: DescribeNatSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatSubnetsResponse>;
-  /** 查询黑石路由表条目 */
+  /** {@link DescribeRoutePolicies 查询黑石路由表条目}({@link DescribeRoutePoliciesRequest 请求参数}): {@link DescribeRoutePoliciesResponse 返回参数} */
   DescribeRoutePolicies(data: DescribeRoutePoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoutePoliciesResponse>;
-  /** 查询路由表 */
+  /** {@link DescribeRouteTables 查询路由表}({@link DescribeRouteTablesRequest 请求参数}): {@link DescribeRouteTablesResponse 返回参数} */
   DescribeRouteTables(data?: DescribeRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTablesResponse>;
-  /** 获取子网内可用IP列表 */
+  /** {@link DescribeSubnetAvailableIps 获取子网内可用IP列表}({@link DescribeSubnetAvailableIpsRequest 请求参数}): {@link DescribeSubnetAvailableIpsResponse 返回参数} */
   DescribeSubnetAvailableIps(data: DescribeSubnetAvailableIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetAvailableIpsResponse>;
-  /** 查询物理机加入的子网列表 */
+  /** {@link DescribeSubnetByDevice 查询物理机加入的子网列表}({@link DescribeSubnetByDeviceRequest 请求参数}): {@link DescribeSubnetByDeviceResponse 返回参数} */
   DescribeSubnetByDevice(data: DescribeSubnetByDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetByDeviceResponse>;
-  /** 查询托管机器加入的子网列表 */
+  /** {@link DescribeSubnetByHostedDevice 查询托管机器加入的子网列表}({@link DescribeSubnetByHostedDeviceRequest 请求参数}): {@link DescribeSubnetByHostedDeviceResponse 返回参数} */
   DescribeSubnetByHostedDevice(data: DescribeSubnetByHostedDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetByHostedDeviceResponse>;
-  /** 查询子网列表 */
+  /** {@link DescribeSubnets 查询子网列表}({@link DescribeSubnetsRequest 请求参数}): {@link DescribeSubnetsResponse 返回参数} */
   DescribeSubnets(data?: DescribeSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetsResponse>;
-  /** 获取任务状态 */
+  /** {@link DescribeTaskStatus 获取任务状态}({@link DescribeTaskStatusRequest 请求参数}): {@link DescribeTaskStatusResponse 返回参数} */
   DescribeTaskStatus(data: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
-  /** 获取对等连接列表 */
+  /** {@link DescribeVpcPeerConnections 获取对等连接列表}({@link DescribeVpcPeerConnectionsRequest 请求参数}): {@link DescribeVpcPeerConnectionsResponse 返回参数} */
   DescribeVpcPeerConnections(data?: DescribeVpcPeerConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcPeerConnectionsResponse>;
-  /** 获取黑石私有网络的配额 */
+  /** {@link DescribeVpcQuota 获取黑石私有网络的配额}({@link DescribeVpcQuotaRequest 请求参数}): {@link DescribeVpcQuotaResponse 返回参数} */
   DescribeVpcQuota(data: DescribeVpcQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcQuotaResponse>;
-  /** 查询黑石私有网络关联资源 */
+  /** {@link DescribeVpcResource 查询黑石私有网络关联资源}({@link DescribeVpcResourceRequest 请求参数}): {@link DescribeVpcResourceResponse 返回参数} */
   DescribeVpcResource(data?: DescribeVpcResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcResourceResponse>;
-  /** 查询黑石VPC视图 */
+  /** {@link DescribeVpcView 查询黑石VPC视图}({@link DescribeVpcViewRequest 请求参数}): {@link DescribeVpcViewResponse 返回参数} */
   DescribeVpcView(data: DescribeVpcViewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcViewResponse>;
-  /** 查询VPC列表 */
+  /** {@link DescribeVpcs 查询VPC列表}({@link DescribeVpcsRequest 请求参数}): {@link DescribeVpcsResponse 返回参数} */
   DescribeVpcs(data?: DescribeVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcsResponse>;
-  /** 查询VPN通道列表 */
+  /** {@link DescribeVpnConnections 查询VPN通道列表}({@link DescribeVpnConnectionsRequest 请求参数}): {@link DescribeVpnConnectionsResponse 返回参数} */
   DescribeVpnConnections(data?: DescribeVpnConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnConnectionsResponse>;
-  /** 查询VPN网关 */
+  /** {@link DescribeVpnGateways 查询VPN网关}({@link DescribeVpnGatewaysRequest 请求参数}): {@link DescribeVpnGatewaysResponse 返回参数} */
   DescribeVpnGateways(data?: DescribeVpnGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewaysResponse>;
-  /** 下载VPN通道配置 */
+  /** {@link DownloadCustomerGatewayConfiguration 下载VPN通道配置}({@link DownloadCustomerGatewayConfigurationRequest 请求参数}): {@link DownloadCustomerGatewayConfigurationResponse 返回参数} */
   DownloadCustomerGatewayConfiguration(data: DownloadCustomerGatewayConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadCustomerGatewayConfigurationResponse>;
-  /** 修改对端网关 */
+  /** {@link ModifyCustomerGatewayAttribute 修改对端网关}({@link ModifyCustomerGatewayAttributeRequest 请求参数}): {@link ModifyCustomerGatewayAttributeResponse 返回参数} */
   ModifyCustomerGatewayAttribute(data: ModifyCustomerGatewayAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomerGatewayAttributeResponse>;
-  /** 修改自定义路由 */
+  /** {@link ModifyRoutePolicy 修改自定义路由}({@link ModifyRoutePolicyRequest 请求参数}): {@link ModifyRoutePolicyResponse 返回参数} */
   ModifyRoutePolicy(data: ModifyRoutePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoutePolicyResponse>;
-  /** 修改路由表 */
+  /** {@link ModifyRouteTable 修改路由表}({@link ModifyRouteTableRequest 请求参数}): {@link ModifyRouteTableResponse 返回参数} */
   ModifyRouteTable(data: ModifyRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRouteTableResponse>;
-  /** 修改子网属性 */
+  /** {@link ModifySubnetAttribute 修改子网属性}({@link ModifySubnetAttributeRequest 请求参数}): {@link ModifySubnetAttributeResponse 返回参数} */
   ModifySubnetAttribute(data: ModifySubnetAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubnetAttributeResponse>;
-  /** 修改子网DHCP Relay属性 */
+  /** {@link ModifySubnetDHCPRelay 修改子网DHCP Relay属性}({@link ModifySubnetDHCPRelayRequest 请求参数}): {@link ModifySubnetDHCPRelayResponse 返回参数} */
   ModifySubnetDHCPRelay(data: ModifySubnetDHCPRelayRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubnetDHCPRelayResponse>;
-  /** 修改黑石VPC属性 */
+  /** {@link ModifyVpcAttribute 修改黑石VPC属性}({@link ModifyVpcAttributeRequest 请求参数}): {@link ModifyVpcAttributeResponse 返回参数} */
   ModifyVpcAttribute(data: ModifyVpcAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcAttributeResponse>;
-  /** 修改黑石对等连接 */
+  /** {@link ModifyVpcPeerConnection 修改黑石对等连接}({@link ModifyVpcPeerConnectionRequest 请求参数}): {@link ModifyVpcPeerConnectionResponse 返回参数} */
   ModifyVpcPeerConnection(data: ModifyVpcPeerConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcPeerConnectionResponse>;
-  /** 修改VPN通道 */
+  /** {@link ModifyVpnConnectionAttribute 修改VPN通道}({@link ModifyVpnConnectionAttributeRequest 请求参数}): {@link ModifyVpnConnectionAttributeResponse 返回参数} */
   ModifyVpnConnectionAttribute(data: ModifyVpnConnectionAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpnConnectionAttributeResponse>;
-  /** 修改VPN网关属性 */
+  /** {@link ModifyVpnGatewayAttribute 修改VPN网关属性}({@link ModifyVpnGatewayAttributeRequest 请求参数}): {@link ModifyVpnGatewayAttributeResponse 返回参数} */
   ModifyVpnGatewayAttribute(data: ModifyVpnGatewayAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpnGatewayAttributeResponse>;
-  /** 拒绝黑石对等连接申请 */
+  /** {@link RejectVpcPeerConnection 拒绝黑石对等连接申请}({@link RejectVpcPeerConnectionRequest 请求参数}): {@link RejectVpcPeerConnectionResponse 返回参数} */
   RejectVpcPeerConnection(data: RejectVpcPeerConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<RejectVpcPeerConnectionResponse>;
-  /** 重置VPN通道 */
+  /** {@link ResetVpnConnection 重置VPN通道}({@link ResetVpnConnectionRequest 请求参数}): {@link ResetVpnConnectionResponse 返回参数} */
   ResetVpnConnection(data: ResetVpnConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<ResetVpnConnectionResponse>;
-  /** NAT网关解绑EIP */
+  /** {@link UnbindEipsFromNatGateway NAT网关解绑EIP}({@link UnbindEipsFromNatGatewayRequest 请求参数}): {@link UnbindEipsFromNatGatewayResponse 返回参数} */
   UnbindEipsFromNatGateway(data: UnbindEipsFromNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindEipsFromNatGatewayResponse>;
-  /** NAT网关解绑IP */
+  /** {@link UnbindIpsFromNatGateway NAT网关解绑IP}({@link UnbindIpsFromNatGatewayRequest 请求参数}): {@link UnbindIpsFromNatGatewayResponse 返回参数} */
   UnbindIpsFromNatGateway(data: UnbindIpsFromNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindIpsFromNatGatewayResponse>;
-  /** NAT网关解绑子网 */
+  /** {@link UnbindSubnetsFromNatGateway NAT网关解绑子网}({@link UnbindSubnetsFromNatGatewayRequest 请求参数}): {@link UnbindSubnetsFromNatGatewayResponse 返回参数} */
   UnbindSubnetsFromNatGateway(data: UnbindSubnetsFromNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindSubnetsFromNatGatewayResponse>;
-  /** 升级NAT网关 */
+  /** {@link UpgradeNatGateway 升级NAT网关}({@link UpgradeNatGatewayRequest 请求参数}): {@link UpgradeNatGatewayResponse 返回参数} */
   UpgradeNatGateway(data: UpgradeNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeNatGatewayResponse>;
 }
 

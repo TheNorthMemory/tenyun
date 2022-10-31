@@ -2712,190 +2712,190 @@ declare interface SwitchWaterPrintConfigResponse {
   RequestId?: string;
 }
 
-/** [DDoS 防护](https://cloud.tencent.com/document/product/1021) */
+/** {@link Antiddos T-Sec-DDoS防护(Anti-DDoS)} */
 declare interface Antiddos {
   (): Versions;
-  /** 绑定高防弹性公网IP */
+  /** {@link AssociateDDoSEipAddress 绑定高防弹性公网IP}({@link AssociateDDoSEipAddressRequest 请求参数}): {@link AssociateDDoSEipAddressResponse 返回参数} */
   AssociateDDoSEipAddress(data: AssociateDDoSEipAddressRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateDDoSEipAddressResponse>;
-  /** 绑定高防弹性公网IP到Clb */
+  /** {@link AssociateDDoSEipLoadBalancer 绑定高防弹性公网IP到Clb}({@link AssociateDDoSEipLoadBalancerRequest 请求参数}): {@link AssociateDDoSEipLoadBalancerResponse 返回参数} */
   AssociateDDoSEipLoadBalancer(data: AssociateDDoSEipLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateDDoSEipLoadBalancerResponse>;
-  /** 添加DDoS防护的IP黑白名单 */
+  /** {@link CreateBlackWhiteIpList 添加DDoS防护的IP黑白名单}({@link CreateBlackWhiteIpListRequest 请求参数}): {@link CreateBlackWhiteIpListResponse 返回参数} */
   CreateBlackWhiteIpList(data: CreateBlackWhiteIpListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlackWhiteIpListResponse>;
-  /** 绑定IP到高防包实例 */
+  /** {@link CreateBoundIP 绑定IP到高防包实例}({@link CreateBoundIPRequest 请求参数}): {@link CreateBoundIPResponse 返回参数} */
   CreateBoundIP(data: CreateBoundIPRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBoundIPResponse>;
-  /** 新增CC精准防护策略 */
+  /** {@link CreateCCPrecisionPolicy 新增CC精准防护策略}({@link CreateCCPrecisionPolicyRequest 请求参数}): {@link CreateCCPrecisionPolicyResponse 返回参数} */
   CreateCCPrecisionPolicy(data: CreateCCPrecisionPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCCPrecisionPolicyResponse>;
-  /** 新增CC频率限制策略 */
+  /** {@link CreateCCReqLimitPolicy 新增CC频率限制策略}({@link CreateCCReqLimitPolicyRequest 请求参数}): {@link CreateCCReqLimitPolicyResponse 返回参数} */
   CreateCCReqLimitPolicy(data: CreateCCReqLimitPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCCReqLimitPolicyResponse>;
-  /** 新建CC四层黑白名单 */
+  /** {@link CreateCcBlackWhiteIpList 新建CC四层黑白名单}({@link CreateCcBlackWhiteIpListRequest 请求参数}): {@link CreateCcBlackWhiteIpListResponse 返回参数} */
   CreateCcBlackWhiteIpList(data: CreateCcBlackWhiteIpListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCcBlackWhiteIpListResponse>;
-  /** 新建cc防护的地域封禁配置 */
+  /** {@link CreateCcGeoIPBlockConfig 新建cc防护的地域封禁配置}({@link CreateCcGeoIPBlockConfigRequest 请求参数}): {@link CreateCcGeoIPBlockConfigResponse 返回参数} */
   CreateCcGeoIPBlockConfig(data: CreateCcGeoIPBlockConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCcGeoIPBlockConfigResponse>;
-  /** 设置DDoS防护的AI防护开关 */
+  /** {@link CreateDDoSAI 设置DDoS防护的AI防护开关}({@link CreateDDoSAIRequest 请求参数}): {@link CreateDDoSAIResponse 返回参数} */
   CreateDDoSAI(data: CreateDDoSAIRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDDoSAIResponse>;
-  /** 添加DDoS防护的IP网段黑白名单 */
+  /** {@link CreateDDoSBlackWhiteIpList 添加DDoS防护的IP网段黑白名单}({@link CreateDDoSBlackWhiteIpListRequest 请求参数}): {@link CreateDDoSBlackWhiteIpListResponse 返回参数} */
   CreateDDoSBlackWhiteIpList(data: CreateDDoSBlackWhiteIpListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDDoSBlackWhiteIpListResponse>;
-  /** 配置DDoS连接抑制选项 */
+  /** {@link CreateDDoSConnectLimit 配置DDoS连接抑制选项}({@link CreateDDoSConnectLimitRequest 请求参数}): {@link CreateDDoSConnectLimitResponse 返回参数} */
   CreateDDoSConnectLimit(data: CreateDDoSConnectLimitRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDDoSConnectLimitResponse>;
-  /** 添加DDoS防护的区域封禁配置 */
+  /** {@link CreateDDoSGeoIPBlockConfig 添加DDoS防护的区域封禁配置}({@link CreateDDoSGeoIPBlockConfigRequest 请求参数}): {@link CreateDDoSGeoIPBlockConfigResponse 返回参数} */
   CreateDDoSGeoIPBlockConfig(data: CreateDDoSGeoIPBlockConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDDoSGeoIPBlockConfigResponse>;
-  /** 添加DDoS防护的访问限速配置 */
+  /** {@link CreateDDoSSpeedLimitConfig 添加DDoS防护的访问限速配置}({@link CreateDDoSSpeedLimitConfigRequest 请求参数}): {@link CreateDDoSSpeedLimitConfigResponse 返回参数} */
   CreateDDoSSpeedLimitConfig(data: CreateDDoSSpeedLimitConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDDoSSpeedLimitConfigResponse>;
-  /** 设置单IP默认告警阈值配置 */
+  /** {@link CreateDefaultAlarmThreshold 设置单IP默认告警阈值配置}({@link CreateDefaultAlarmThresholdRequest 请求参数}): {@link CreateDefaultAlarmThresholdResponse 返回参数} */
   CreateDefaultAlarmThreshold(data: CreateDefaultAlarmThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDefaultAlarmThresholdResponse>;
-  /** 设置单IP告警阈值配置 */
+  /** {@link CreateIPAlarmThresholdConfig 设置单IP告警阈值配置}({@link CreateIPAlarmThresholdConfigRequest 请求参数}): {@link CreateIPAlarmThresholdConfigResponse 返回参数} */
   CreateIPAlarmThresholdConfig(data: CreateIPAlarmThresholdConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIPAlarmThresholdConfigResponse>;
-  /** 批量配置L7转发规则的证书 */
+  /** {@link CreateL7RuleCerts 批量配置L7转发规则的证书}({@link CreateL7RuleCertsRequest 请求参数}): {@link CreateL7RuleCertsResponse 返回参数} */
   CreateL7RuleCerts(data: CreateL7RuleCertsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL7RuleCertsResponse>;
-  /** 添加7层转发规则 */
+  /** {@link CreateNewL7Rules 添加7层转发规则}({@link CreateNewL7RulesRequest 请求参数}): {@link CreateNewL7RulesResponse 返回参数} */
   CreateNewL7Rules(data: CreateNewL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNewL7RulesResponse>;
-  /** 添加DDoS防护的特征过滤规则 */
+  /** {@link CreatePacketFilterConfig 添加DDoS防护的特征过滤规则}({@link CreatePacketFilterConfigRequest 请求参数}): {@link CreatePacketFilterConfigResponse 返回参数} */
   CreatePacketFilterConfig(data: CreatePacketFilterConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePacketFilterConfigResponse>;
-  /** 添加DDoS防护的端口acl策略 */
+  /** {@link CreatePortAclConfig 添加DDoS防护的端口acl策略}({@link CreatePortAclConfigRequest 请求参数}): {@link CreatePortAclConfigResponse 返回参数} */
   CreatePortAclConfig(data: CreatePortAclConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePortAclConfigResponse>;
-  /** 批量添加DDoS防护的端口acl策略 */
+  /** {@link CreatePortAclConfigList 批量添加DDoS防护的端口acl策略}({@link CreatePortAclConfigListRequest 请求参数}): {@link CreatePortAclConfigListResponse 返回参数} */
   CreatePortAclConfigList(data: CreatePortAclConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePortAclConfigListResponse>;
-  /** 设置DDoS防护的协议封禁配置 */
+  /** {@link CreateProtocolBlockConfig 设置DDoS防护的协议封禁配置}({@link CreateProtocolBlockConfigRequest 请求参数}): {@link CreateProtocolBlockConfigResponse 返回参数} */
   CreateProtocolBlockConfig(data: CreateProtocolBlockConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProtocolBlockConfigResponse>;
-  /** 创建调度的域名 */
+  /** {@link CreateSchedulingDomain 创建调度的域名}({@link CreateSchedulingDomainRequest 请求参数}): {@link CreateSchedulingDomainResponse 返回参数} */
   CreateSchedulingDomain(data?: CreateSchedulingDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchedulingDomainResponse>;
-  /** 添加DDoS防护的水印防护配置 */
+  /** {@link CreateWaterPrintConfig 添加DDoS防护的水印防护配置}({@link CreateWaterPrintConfigRequest 请求参数}): {@link CreateWaterPrintConfigResponse 返回参数} */
   CreateWaterPrintConfig(data: CreateWaterPrintConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWaterPrintConfigResponse>;
-  /** 添加DDoS防护的水印防护密钥 */
+  /** {@link CreateWaterPrintKey 添加DDoS防护的水印防护密钥}({@link CreateWaterPrintKeyRequest 请求参数}): {@link CreateWaterPrintKeyResponse 返回参数} */
   CreateWaterPrintKey(data: CreateWaterPrintKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWaterPrintKeyResponse>;
-  /** 删除CC分级策略 */
+  /** {@link DeleteCCLevelPolicy 删除CC分级策略}({@link DeleteCCLevelPolicyRequest 请求参数}): {@link DeleteCCLevelPolicyResponse 返回参数} */
   DeleteCCLevelPolicy(data: DeleteCCLevelPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCCLevelPolicyResponse>;
-  /** 删除CC精准防护策略 */
+  /** {@link DeleteCCPrecisionPolicy 删除CC精准防护策略}({@link DeleteCCPrecisionPolicyRequest 请求参数}): {@link DeleteCCPrecisionPolicyResponse 返回参数} */
   DeleteCCPrecisionPolicy(data: DeleteCCPrecisionPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCCPrecisionPolicyResponse>;
-  /** 删除CC频率限制策略 */
+  /** {@link DeleteCCRequestLimitPolicy 删除CC频率限制策略}({@link DeleteCCRequestLimitPolicyRequest 请求参数}): {@link DeleteCCRequestLimitPolicyResponse 返回参数} */
   DeleteCCRequestLimitPolicy(data: DeleteCCRequestLimitPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCCRequestLimitPolicyResponse>;
-  /** 删除CC清洗阈值策略 */
+  /** {@link DeleteCCThresholdPolicy 删除CC清洗阈值策略}({@link DeleteCCThresholdPolicyRequest 请求参数}): {@link DeleteCCThresholdPolicyResponse 返回参数} */
   DeleteCCThresholdPolicy(data: DeleteCCThresholdPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCCThresholdPolicyResponse>;
-  /** 删除CC四层黑白名单 */
+  /** {@link DeleteCcBlackWhiteIpList 删除CC四层黑白名单}({@link DeleteCcBlackWhiteIpListRequest 请求参数}): {@link DeleteCcBlackWhiteIpListResponse 返回参数} */
   DeleteCcBlackWhiteIpList(data: DeleteCcBlackWhiteIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCcBlackWhiteIpListResponse>;
-  /** 删除CC防护的区域封禁配置 */
+  /** {@link DeleteCcGeoIPBlockConfig 删除CC防护的区域封禁配置}({@link DeleteCcGeoIPBlockConfigRequest 请求参数}): {@link DeleteCcGeoIPBlockConfigResponse 返回参数} */
   DeleteCcGeoIPBlockConfig(data: DeleteCcGeoIPBlockConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCcGeoIPBlockConfigResponse>;
-  /** 删除DDoS防护的IP网段黑白名单 */
+  /** {@link DeleteDDoSBlackWhiteIpList 删除DDoS防护的IP网段黑白名单}({@link DeleteDDoSBlackWhiteIpListRequest 请求参数}): {@link DeleteDDoSBlackWhiteIpListResponse 返回参数} */
   DeleteDDoSBlackWhiteIpList(data: DeleteDDoSBlackWhiteIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDDoSBlackWhiteIpListResponse>;
-  /** 删除DDoS防护的区域封禁配置 */
+  /** {@link DeleteDDoSGeoIPBlockConfig 删除DDoS防护的区域封禁配置}({@link DeleteDDoSGeoIPBlockConfigRequest 请求参数}): {@link DeleteDDoSGeoIPBlockConfigResponse 返回参数} */
   DeleteDDoSGeoIPBlockConfig(data: DeleteDDoSGeoIPBlockConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDDoSGeoIPBlockConfigResponse>;
-  /** 删除DDoS防护的访问限速配置 */
+  /** {@link DeleteDDoSSpeedLimitConfig 删除DDoS防护的访问限速配置}({@link DeleteDDoSSpeedLimitConfigRequest 请求参数}): {@link DeleteDDoSSpeedLimitConfigResponse 返回参数} */
   DeleteDDoSSpeedLimitConfig(data: DeleteDDoSSpeedLimitConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDDoSSpeedLimitConfigResponse>;
-  /** 删除DDoS防护的特征过滤规则 */
+  /** {@link DeletePacketFilterConfig 删除DDoS防护的特征过滤规则}({@link DeletePacketFilterConfigRequest 请求参数}): {@link DeletePacketFilterConfigResponse 返回参数} */
   DeletePacketFilterConfig(data: DeletePacketFilterConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePacketFilterConfigResponse>;
-  /** 删除DDoS防护的端口acl策略 */
+  /** {@link DeletePortAclConfig 删除DDoS防护的端口acl策略}({@link DeletePortAclConfigRequest 请求参数}): {@link DeletePortAclConfigResponse 返回参数} */
   DeletePortAclConfig(data: DeletePortAclConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePortAclConfigResponse>;
-  /** 删除DDoS防护的水印防护配置 */
+  /** {@link DeleteWaterPrintConfig 删除DDoS防护的水印防护配置}({@link DeleteWaterPrintConfigRequest 请求参数}): {@link DeleteWaterPrintConfigResponse 返回参数} */
   DeleteWaterPrintConfig(data: DeleteWaterPrintConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWaterPrintConfigResponse>;
-  /** 删除DDoS防护的水印防护密钥 */
+  /** {@link DeleteWaterPrintKey 删除DDoS防护的水印防护密钥}({@link DeleteWaterPrintKeyRequest 请求参数}): {@link DeleteWaterPrintKeyResponse 返回参数} */
   DeleteWaterPrintKey(data: DeleteWaterPrintKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWaterPrintKeyResponse>;
-  /** 获取基础防护攻击状态 */
+  /** {@link DescribeBasicDeviceStatus 获取基础防护攻击状态}({@link DescribeBasicDeviceStatusRequest 请求参数}): {@link DescribeBasicDeviceStatusResponse 返回参数} */
   DescribeBasicDeviceStatus(data: DescribeBasicDeviceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicDeviceStatusResponse>;
-  /** 获取高防包流量折线图 */
+  /** {@link DescribeBgpBizTrend 获取高防包流量折线图}({@link DescribeBgpBizTrendRequest 请求参数}): {@link DescribeBgpBizTrendResponse 返回参数} */
   DescribeBgpBizTrend(data: DescribeBgpBizTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBgpBizTrendResponse>;
-  /** 获取业务流量曲线 */
+  /** {@link DescribeBizTrend 获取业务流量曲线}({@link DescribeBizTrendRequest 请求参数}): {@link DescribeBizTrendResponse 返回参数} */
   DescribeBizTrend(data: DescribeBizTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBizTrendResponse>;
-  /** 获取DDoS防护的IP黑白名单 */
+  /** {@link DescribeBlackWhiteIpList 获取DDoS防护的IP黑白名单}({@link DescribeBlackWhiteIpListRequest 请求参数}): {@link DescribeBlackWhiteIpListResponse 返回参数} */
   DescribeBlackWhiteIpList(data: DescribeBlackWhiteIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlackWhiteIpListResponse>;
-  /** 获取CC防护等级列表 */
+  /** {@link DescribeCCLevelList 获取CC防护等级列表}({@link DescribeCCLevelListRequest 请求参数}): {@link DescribeCCLevelListResponse 返回参数} */
   DescribeCCLevelList(data: DescribeCCLevelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCLevelListResponse>;
-  /** 获取CC分级策略 */
+  /** {@link DescribeCCLevelPolicy 获取CC分级策略}({@link DescribeCCLevelPolicyRequest 请求参数}): {@link DescribeCCLevelPolicyResponse 返回参数} */
   DescribeCCLevelPolicy(data: DescribeCCLevelPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCLevelPolicyResponse>;
-  /** 获取CC精准防护列表 */
+  /** {@link DescribeCCPrecisionPlyList 获取CC精准防护列表}({@link DescribeCCPrecisionPlyListRequest 请求参数}): {@link DescribeCCPrecisionPlyListResponse 返回参数} */
   DescribeCCPrecisionPlyList(data: DescribeCCPrecisionPlyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCPrecisionPlyListResponse>;
-  /** 获取CC频率限制策略列表 */
+  /** {@link DescribeCCReqLimitPolicyList 获取CC频率限制策略列表}({@link DescribeCCReqLimitPolicyListRequest 请求参数}): {@link DescribeCCReqLimitPolicyListResponse 返回参数} */
   DescribeCCReqLimitPolicyList(data: DescribeCCReqLimitPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCReqLimitPolicyListResponse>;
-  /** 获取CC清洗阈值列表 */
+  /** {@link DescribeCCThresholdList 获取CC清洗阈值列表}({@link DescribeCCThresholdListRequest 请求参数}): {@link DescribeCCThresholdListResponse 返回参数} */
   DescribeCCThresholdList(data: DescribeCCThresholdListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCThresholdListResponse>;
-  /** 获取CC攻击指标曲线 */
+  /** {@link DescribeCCTrend 获取CC攻击指标曲线}({@link DescribeCCTrendRequest 请求参数}): {@link DescribeCCTrendResponse 返回参数} */
   DescribeCCTrend(data: DescribeCCTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCTrendResponse>;
-  /** 获取CC四层黑白名单列表 */
+  /** {@link DescribeCcBlackWhiteIpList 获取CC四层黑白名单列表}({@link DescribeCcBlackWhiteIpListRequest 请求参数}): {@link DescribeCcBlackWhiteIpListResponse 返回参数} */
   DescribeCcBlackWhiteIpList(data: DescribeCcBlackWhiteIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcBlackWhiteIpListResponse>;
-  /** 获取CC防护的区域封禁配置列表 */
+  /** {@link DescribeCcGeoIPBlockConfigList 获取CC防护的区域封禁配置列表}({@link DescribeCcGeoIPBlockConfigListRequest 请求参数}): {@link DescribeCcGeoIPBlockConfigListResponse 返回参数} */
   DescribeCcGeoIPBlockConfigList(data: DescribeCcGeoIPBlockConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcGeoIPBlockConfigListResponse>;
-  /** 获取DDoS防护的IP网段黑白名单 */
+  /** {@link DescribeDDoSBlackWhiteIpList 获取DDoS防护的IP网段黑白名单}({@link DescribeDDoSBlackWhiteIpListRequest 请求参数}): {@link DescribeDDoSBlackWhiteIpListResponse 返回参数} */
   DescribeDDoSBlackWhiteIpList(data: DescribeDDoSBlackWhiteIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSBlackWhiteIpListResponse>;
-  /** 获取DDoS连接抑制配置列表 */
+  /** {@link DescribeDDoSConnectLimitList 获取DDoS连接抑制配置列表}({@link DescribeDDoSConnectLimitListRequest 请求参数}): {@link DescribeDDoSConnectLimitListResponse 返回参数} */
   DescribeDDoSConnectLimitList(data: DescribeDDoSConnectLimitListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSConnectLimitListResponse>;
-  /** 获取DDoS攻击指标曲线 */
+  /** {@link DescribeDDoSTrend 获取DDoS攻击指标曲线}({@link DescribeDDoSTrendRequest 请求参数}): {@link DescribeDDoSTrendResponse 返回参数} */
   DescribeDDoSTrend(data: DescribeDDoSTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSTrendResponse>;
-  /** 获取单IP默认告警阈值配置 */
+  /** {@link DescribeDefaultAlarmThreshold 获取单IP默认告警阈值配置}({@link DescribeDefaultAlarmThresholdRequest 请求参数}): {@link DescribeDefaultAlarmThresholdResponse 返回参数} */
   DescribeDefaultAlarmThreshold(data: DescribeDefaultAlarmThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultAlarmThresholdResponse>;
-  /** 查询与证书ID匹配的七层规则 */
+  /** {@link DescribeL7RulesBySSLCertId 查询与证书ID匹配的七层规则}({@link DescribeL7RulesBySSLCertIdRequest 请求参数}): {@link DescribeL7RulesBySSLCertIdResponse 返回参数} */
   DescribeL7RulesBySSLCertId(data: DescribeL7RulesBySSLCertIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL7RulesBySSLCertIdResponse>;
-  /** 获取高防IP资产实例列表 */
+  /** {@link DescribeListBGPIPInstances 获取高防IP资产实例列表}({@link DescribeListBGPIPInstancesRequest 请求参数}): {@link DescribeListBGPIPInstancesResponse 返回参数} */
   DescribeListBGPIPInstances(data: DescribeListBGPIPInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListBGPIPInstancesResponse>;
-  /** 获取高防包资产实例列表 */
+  /** {@link DescribeListBGPInstances 获取高防包资产实例列表}({@link DescribeListBGPInstancesRequest 请求参数}): {@link DescribeListBGPInstancesResponse 返回参数} */
   DescribeListBGPInstances(data: DescribeListBGPInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListBGPInstancesResponse>;
-  /** 获取DDoS防护的IP黑白名单列表 */
+  /** {@link DescribeListBlackWhiteIpList 获取DDoS防护的IP黑白名单列表}({@link DescribeListBlackWhiteIpListRequest 请求参数}): {@link DescribeListBlackWhiteIpListResponse 返回参数} */
   DescribeListBlackWhiteIpList(data: DescribeListBlackWhiteIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListBlackWhiteIpListResponse>;
-  /** 获取DDoS防护的AI防护开关列表 */
+  /** {@link DescribeListDDoSAI 获取DDoS防护的AI防护开关列表}({@link DescribeListDDoSAIRequest 请求参数}): {@link DescribeListDDoSAIResponse 返回参数} */
   DescribeListDDoSAI(data: DescribeListDDoSAIRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListDDoSAIResponse>;
-  /** 获取DDoS防护的区域封禁配置列表 */
+  /** {@link DescribeListDDoSGeoIPBlockConfig 获取DDoS防护的区域封禁配置列表}({@link DescribeListDDoSGeoIPBlockConfigRequest 请求参数}): {@link DescribeListDDoSGeoIPBlockConfigResponse 返回参数} */
   DescribeListDDoSGeoIPBlockConfig(data: DescribeListDDoSGeoIPBlockConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListDDoSGeoIPBlockConfigResponse>;
-  /** 获取DDoS防护的访问限速配置列表 */
+  /** {@link DescribeListDDoSSpeedLimitConfig 获取DDoS防护的访问限速配置列表}({@link DescribeListDDoSSpeedLimitConfigRequest 请求参数}): {@link DescribeListDDoSSpeedLimitConfigResponse 返回参数} */
   DescribeListDDoSSpeedLimitConfig(data: DescribeListDDoSSpeedLimitConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListDDoSSpeedLimitConfigResponse>;
-  /** 获取单IP告警阈值配置列表 */
+  /** {@link DescribeListIPAlarmConfig 获取单IP告警阈值配置列表}({@link DescribeListIPAlarmConfigRequest 请求参数}): {@link DescribeListIPAlarmConfigResponse 返回参数} */
   DescribeListIPAlarmConfig(data: DescribeListIPAlarmConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListIPAlarmConfigResponse>;
-  /** 获取转发监听器列表 */
+  /** {@link DescribeListListener 获取转发监听器列表}({@link DescribeListListenerRequest 请求参数}): {@link DescribeListListenerResponse 返回参数} */
   DescribeListListener(data?: DescribeListListenerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListListenerResponse>;
-  /** 获取DDoS防护的特征过滤规则列表 */
+  /** {@link DescribeListPacketFilterConfig 获取DDoS防护的特征过滤规则列表}({@link DescribeListPacketFilterConfigRequest 请求参数}): {@link DescribeListPacketFilterConfigResponse 返回参数} */
   DescribeListPacketFilterConfig(data: DescribeListPacketFilterConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListPacketFilterConfigResponse>;
-  /** 获取DDoS防护的端口acl策略列表 */
+  /** {@link DescribeListPortAclList 获取DDoS防护的端口acl策略列表}({@link DescribeListPortAclListRequest 请求参数}): {@link DescribeListPortAclListResponse 返回参数} */
   DescribeListPortAclList(data: DescribeListPortAclListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListPortAclListResponse>;
-  /** 获取防护阈值配置列表 */
+  /** {@link DescribeListProtectThresholdConfig 获取防护阈值配置列表}({@link DescribeListProtectThresholdConfigRequest 请求参数}): {@link DescribeListProtectThresholdConfigResponse 返回参数} */
   DescribeListProtectThresholdConfig(data: DescribeListProtectThresholdConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListProtectThresholdConfigResponse>;
-  /** 获取DDoS防护的协议封禁配置列表 */
+  /** {@link DescribeListProtocolBlockConfig 获取DDoS防护的协议封禁配置列表}({@link DescribeListProtocolBlockConfigRequest 请求参数}): {@link DescribeListProtocolBlockConfigResponse 返回参数} */
   DescribeListProtocolBlockConfig(data: DescribeListProtocolBlockConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListProtocolBlockConfigResponse>;
-  /** 获取智能调度域名列表 */
+  /** {@link DescribeListSchedulingDomain 获取智能调度域名列表}({@link DescribeListSchedulingDomainRequest 请求参数}): {@link DescribeListSchedulingDomainResponse 返回参数} */
   DescribeListSchedulingDomain(data: DescribeListSchedulingDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListSchedulingDomainResponse>;
-  /** 获取DDoS防护的水印防护配置列表 */
+  /** {@link DescribeListWaterPrintConfig 获取DDoS防护的水印防护配置列表}({@link DescribeListWaterPrintConfigRequest 请求参数}): {@link DescribeListWaterPrintConfigResponse 返回参数} */
   DescribeListWaterPrintConfig(data: DescribeListWaterPrintConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListWaterPrintConfigResponse>;
-  /** 高防IP获取7层规则 */
+  /** {@link DescribeNewL7Rules 高防IP获取7层规则}({@link DescribeNewL7RulesRequest 请求参数}): {@link DescribeNewL7RulesResponse 返回参数} */
   DescribeNewL7Rules(data: DescribeNewL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNewL7RulesResponse>;
-  /** 获取L7转发规则健康检查异常结果列表 */
+  /** {@link DescribeNewL7RulesErrHealth 获取L7转发规则健康检查异常结果列表}({@link DescribeNewL7RulesErrHealthRequest 请求参数}): {@link DescribeNewL7RulesErrHealthResponse 返回参数} */
   DescribeNewL7RulesErrHealth(data: DescribeNewL7RulesErrHealthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNewL7RulesErrHealthResponse>;
-  /** 拉取防护概览攻击趋势 */
+  /** {@link DescribeOverviewAttackTrend 拉取防护概览攻击趋势}({@link DescribeOverviewAttackTrendRequest 请求参数}): {@link DescribeOverviewAttackTrendResponse 返回参数} */
   DescribeOverviewAttackTrend(data: DescribeOverviewAttackTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewAttackTrendResponse>;
-  /** 获取防护概览趋势图 */
+  /** {@link DescribeOverviewCCTrend 获取防护概览趋势图}({@link DescribeOverviewCCTrendRequest 请求参数}): {@link DescribeOverviewCCTrendResponse 返回参数} */
   DescribeOverviewCCTrend(data: DescribeOverviewCCTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewCCTrendResponse>;
-  /** 获取防护概览的ddos攻击事件 */
+  /** {@link DescribeOverviewDDoSEventList 获取防护概览的ddos攻击事件}({@link DescribeOverviewDDoSEventListRequest 请求参数}): {@link DescribeOverviewDDoSEventListResponse 返回参数} */
   DescribeOverviewDDoSEventList(data: DescribeOverviewDDoSEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewDDoSEventListResponse>;
-  /** 获取防护概览DDoS攻击流量带宽和攻击包速率数据 */
+  /** {@link DescribeOverviewDDoSTrend 获取防护概览DDoS攻击流量带宽和攻击包速率数据}({@link DescribeOverviewDDoSTrendRequest 请求参数}): {@link DescribeOverviewDDoSTrendResponse 返回参数} */
   DescribeOverviewDDoSTrend(data: DescribeOverviewDDoSTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewDDoSTrendResponse>;
-  /** 拉取防护概览指标 */
+  /** {@link DescribeOverviewIndex 拉取防护概览指标}({@link DescribeOverviewIndexRequest 请求参数}): {@link DescribeOverviewIndexResponse 返回参数} */
   DescribeOverviewIndex(data: DescribeOverviewIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewIndexResponse>;
-  /** 解绑高防弹性公网IP */
+  /** {@link DisassociateDDoSEipAddress 解绑高防弹性公网IP}({@link DisassociateDDoSEipAddressRequest 请求参数}): {@link DisassociateDDoSEipAddressResponse 返回参数} */
   DisassociateDDoSEipAddress(data: DisassociateDDoSEipAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateDDoSEipAddressResponse>;
-  /** 修改CC的防护等级 */
+  /** {@link ModifyCCLevelPolicy 修改CC的防护等级}({@link ModifyCCLevelPolicyRequest 请求参数}): {@link ModifyCCLevelPolicyResponse 返回参数} */
   ModifyCCLevelPolicy(data: ModifyCCLevelPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCLevelPolicyResponse>;
-  /** 修改CC精准防护策略 */
+  /** {@link ModifyCCPrecisionPolicy 修改CC精准防护策略}({@link ModifyCCPrecisionPolicyRequest 请求参数}): {@link ModifyCCPrecisionPolicyResponse 返回参数} */
   ModifyCCPrecisionPolicy(data: ModifyCCPrecisionPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCPrecisionPolicyResponse>;
-  /** 修改CC频率限制策略 */
+  /** {@link ModifyCCReqLimitPolicy 修改CC频率限制策略}({@link ModifyCCReqLimitPolicyRequest 请求参数}): {@link ModifyCCReqLimitPolicyResponse 返回参数} */
   ModifyCCReqLimitPolicy(data: ModifyCCReqLimitPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCReqLimitPolicyResponse>;
-  /** 修改CC清洗阈值 */
+  /** {@link ModifyCCThresholdPolicy 修改CC清洗阈值}({@link ModifyCCThresholdPolicyRequest 请求参数}): {@link ModifyCCThresholdPolicyResponse 返回参数} */
   ModifyCCThresholdPolicy(data: ModifyCCThresholdPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCThresholdPolicyResponse>;
-  /** 修改CC四层黑白名单 */
+  /** {@link ModifyCcBlackWhiteIpList 修改CC四层黑白名单}({@link ModifyCcBlackWhiteIpListRequest 请求参数}): {@link ModifyCcBlackWhiteIpListResponse 返回参数} */
   ModifyCcBlackWhiteIpList(data: ModifyCcBlackWhiteIpListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCcBlackWhiteIpListResponse>;
-  /** 修改DDoS黑白名单列表 */
+  /** {@link ModifyDDoSBlackWhiteIpList 修改DDoS黑白名单列表}({@link ModifyDDoSBlackWhiteIpListRequest 请求参数}): {@link ModifyDDoSBlackWhiteIpListResponse 返回参数} */
   ModifyDDoSBlackWhiteIpList(data: ModifyDDoSBlackWhiteIpListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSBlackWhiteIpListResponse>;
-  /** 修改DDoS防护的区域封禁配置 */
+  /** {@link ModifyDDoSGeoIPBlockConfig 修改DDoS防护的区域封禁配置}({@link ModifyDDoSGeoIPBlockConfigRequest 请求参数}): {@link ModifyDDoSGeoIPBlockConfigResponse 返回参数} */
   ModifyDDoSGeoIPBlockConfig(data: ModifyDDoSGeoIPBlockConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSGeoIPBlockConfigResponse>;
-  /** 修改DDoSIP防护等级 */
+  /** {@link ModifyDDoSLevel 修改DDoSIP防护等级}({@link ModifyDDoSLevelRequest 请求参数}): {@link ModifyDDoSLevelResponse 返回参数} */
   ModifyDDoSLevel(data: ModifyDDoSLevelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSLevelResponse>;
-  /** 修改DDoS防护的访问限速配置 */
+  /** {@link ModifyDDoSSpeedLimitConfig 修改DDoS防护的访问限速配置}({@link ModifyDDoSSpeedLimitConfigRequest 请求参数}): {@link ModifyDDoSSpeedLimitConfigResponse 返回参数} */
   ModifyDDoSSpeedLimitConfig(data: ModifyDDoSSpeedLimitConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSSpeedLimitConfigResponse>;
-  /** 修改DDoS清洗阈值 */
+  /** {@link ModifyDDoSThreshold 修改DDoS清洗阈值}({@link ModifyDDoSThresholdRequest 请求参数}): {@link ModifyDDoSThresholdResponse 返回参数} */
   ModifyDDoSThreshold(data: ModifyDDoSThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSThresholdResponse>;
-  /** 修改智能解析域名名称 */
+  /** {@link ModifyDomainUsrName 修改智能解析域名名称}({@link ModifyDomainUsrNameRequest 请求参数}): {@link ModifyDomainUsrNameResponse 返回参数} */
   ModifyDomainUsrName(data: ModifyDomainUsrNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainUsrNameResponse>;
-  /** 修改7层转发规则 */
+  /** {@link ModifyNewDomainRules 修改7层转发规则}({@link ModifyNewDomainRulesRequest 请求参数}): {@link ModifyNewDomainRulesResponse 返回参数} */
   ModifyNewDomainRules(data: ModifyNewDomainRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNewDomainRulesResponse>;
-  /** 修改DDoS防护的特征过滤规则 */
+  /** {@link ModifyPacketFilterConfig 修改DDoS防护的特征过滤规则}({@link ModifyPacketFilterConfigRequest 请求参数}): {@link ModifyPacketFilterConfigResponse 返回参数} */
   ModifyPacketFilterConfig(data: ModifyPacketFilterConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPacketFilterConfigResponse>;
-  /** 修改DDoS防护的端口acl策略 */
+  /** {@link ModifyPortAclConfig 修改DDoS防护的端口acl策略}({@link ModifyPortAclConfigRequest 请求参数}): {@link ModifyPortAclConfigResponse 返回参数} */
   ModifyPortAclConfig(data: ModifyPortAclConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPortAclConfigResponse>;
-  /** 开启或关闭DDoS防护的水印防护配置 */
+  /** {@link SwitchWaterPrintConfig 开启或关闭DDoS防护的水印防护配置}({@link SwitchWaterPrintConfigRequest 请求参数}): {@link SwitchWaterPrintConfigResponse 返回参数} */
   SwitchWaterPrintConfig(data: SwitchWaterPrintConfigRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchWaterPrintConfigResponse>;
 }
 

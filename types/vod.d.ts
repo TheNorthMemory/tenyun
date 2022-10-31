@@ -7340,276 +7340,276 @@ declare interface WeChatMiniProgramPublishResponse {
   RequestId?: string;
 }
 
-/** [云点播](https://cloud.tencent.com/document/product/266) */
+/** {@link Vod 云点播} */
 declare interface Vod {
   (): Versions;
-  /** 申请上传 */
+  /** {@link ApplyUpload 申请上传}({@link ApplyUploadRequest 请求参数}): {@link ApplyUploadResponse 返回参数} */
   ApplyUpload(data: ApplyUploadRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyUploadResponse>;
-  /** 关联媒体字幕 */
+  /** {@link AttachMediaSubtitles 关联媒体字幕}({@link AttachMediaSubtitlesRequest 请求参数}): {@link AttachMediaSubtitlesResponse 返回参数} */
   AttachMediaSubtitles(data: AttachMediaSubtitlesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachMediaSubtitlesResponse>;
-  /** 确认上传 */
+  /** {@link CommitUpload 确认上传}({@link CommitUploadRequest 请求参数}): {@link CommitUploadResponse 返回参数} */
   CommitUpload(data: CommitUploadRequest, config?: AxiosRequestConfig): AxiosPromise<CommitUploadResponse>;
-  /** 视频合成 */
+  /** {@link ComposeMedia 视频合成}({@link ComposeMediaRequest 请求参数}): {@link ComposeMediaResponse 返回参数} */
   ComposeMedia(data: ComposeMediaRequest, config?: AxiosRequestConfig): AxiosPromise<ComposeMediaResponse>;
-  /** 确认事件通知 */
+  /** {@link ConfirmEvents 确认事件通知}({@link ConfirmEventsRequest 请求参数}): {@link ConfirmEventsResponse 返回参数} */
   ConfirmEvents(data: ConfirmEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmEventsResponse>;
-  /** 创建音视频内容分析模板 */
+  /** {@link CreateAIAnalysisTemplate 创建音视频内容分析模板}({@link CreateAIAnalysisTemplateRequest 请求参数}): {@link CreateAIAnalysisTemplateResponse 返回参数} */
   CreateAIAnalysisTemplate(data?: CreateAIAnalysisTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIAnalysisTemplateResponse>;
-  /** 创建音视频内容识别模板 */
+  /** {@link CreateAIRecognitionTemplate 创建音视频内容识别模板}({@link CreateAIRecognitionTemplateRequest 请求参数}): {@link CreateAIRecognitionTemplateResponse 返回参数} */
   CreateAIRecognitionTemplate(data?: CreateAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIRecognitionTemplateResponse>;
-  /** 创建转自适应码流模板 */
+  /** {@link CreateAdaptiveDynamicStreamingTemplate 创建转自适应码流模板}({@link CreateAdaptiveDynamicStreamingTemplateRequest 请求参数}): {@link CreateAdaptiveDynamicStreamingTemplateResponse 返回参数} */
   CreateAdaptiveDynamicStreamingTemplate(data: CreateAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdaptiveDynamicStreamingTemplateResponse>;
-  /** 创建转动图模板 */
+  /** {@link CreateAnimatedGraphicsTemplate 创建转动图模板}({@link CreateAnimatedGraphicsTemplateRequest 请求参数}): {@link CreateAnimatedGraphicsTemplateResponse 返回参数} */
   CreateAnimatedGraphicsTemplate(data: CreateAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAnimatedGraphicsTemplateResponse>;
-  /** 创建分类 */
+  /** {@link CreateClass 创建分类}({@link CreateClassRequest 请求参数}): {@link CreateClassResponse 返回参数} */
   CreateClass(data: CreateClassRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClassResponse>;
-  /** 创建音视频内容审核模板 */
+  /** {@link CreateContentReviewTemplate 创建音视频内容审核模板}({@link CreateContentReviewTemplateRequest 请求参数}): {@link CreateContentReviewTemplateResponse 返回参数} */
   CreateContentReviewTemplate(data: CreateContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContentReviewTemplateResponse>;
-  /** 创建片头片尾模板 */
+  /** {@link CreateHeadTailTemplate 创建片头片尾模板}({@link CreateHeadTailTemplateRequest 请求参数}): {@link CreateHeadTailTemplateResponse 返回参数} */
   CreateHeadTailTemplate(data: CreateHeadTailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHeadTailTemplateResponse>;
-  /** 创建图片即时处理模板 */
+  /** {@link CreateImageProcessingTemplate 创建图片即时处理模板}({@link CreateImageProcessingTemplateRequest 请求参数}): {@link CreateImageProcessingTemplateResponse 返回参数} */
   CreateImageProcessingTemplate(data: CreateImageProcessingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageProcessingTemplateResponse>;
-  /** 创建雪碧图模板 */
+  /** {@link CreateImageSpriteTemplate 创建雪碧图模板}({@link CreateImageSpriteTemplateRequest 请求参数}): {@link CreateImageSpriteTemplateResponse 返回参数} */
   CreateImageSpriteTemplate(data: CreateImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageSpriteTemplateResponse>;
-  /** 创建素材样本 */
+  /** {@link CreatePersonSample 创建素材样本}({@link CreatePersonSampleRequest 请求参数}): {@link CreatePersonSampleResponse 返回参数} */
   CreatePersonSample(data: CreatePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonSampleResponse>;
-  /** 创建任务流模板 */
+  /** {@link CreateProcedureTemplate 创建任务流模板}({@link CreateProcedureTemplateRequest 请求参数}): {@link CreateProcedureTemplateResponse 返回参数} */
   CreateProcedureTemplate(data: CreateProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProcedureTemplateResponse>;
-  /** 创建采样截图模板 */
+  /** {@link CreateSampleSnapshotTemplate 创建采样截图模板}({@link CreateSampleSnapshotTemplateRequest 请求参数}): {@link CreateSampleSnapshotTemplateResponse 返回参数} */
   CreateSampleSnapshotTemplate(data: CreateSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSampleSnapshotTemplateResponse>;
-  /** 创建指定时间点截图模板 */
+  /** {@link CreateSnapshotByTimeOffsetTemplate 创建指定时间点截图模板}({@link CreateSnapshotByTimeOffsetTemplateRequest 请求参数}): {@link CreateSnapshotByTimeOffsetTemplateResponse 返回参数} */
   CreateSnapshotByTimeOffsetTemplate(data?: CreateSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotByTimeOffsetTemplateResponse>;
-  /** 开通某地域的存储 */
+  /** {@link CreateStorageRegion 开通某地域的存储}({@link CreateStorageRegionRequest 请求参数}): {@link CreateStorageRegionResponse 返回参数} */
   CreateStorageRegion(data: CreateStorageRegionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStorageRegionResponse>;
-  /** 创建子应用 */
+  /** {@link CreateSubAppId 创建子应用}({@link CreateSubAppIdRequest 请求参数}): {@link CreateSubAppIdResponse 返回参数} */
   CreateSubAppId(data: CreateSubAppIdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubAppIdResponse>;
-  /** 创建播放器配置 */
+  /** {@link CreateSuperPlayerConfig 创建播放器配置}({@link CreateSuperPlayerConfigRequest 请求参数}): {@link CreateSuperPlayerConfigResponse 返回参数} */
   CreateSuperPlayerConfig(data: CreateSuperPlayerConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSuperPlayerConfigResponse>;
-  /** 创建转码模板 */
+  /** {@link CreateTranscodeTemplate 创建转码模板}({@link CreateTranscodeTemplateRequest 请求参数}): {@link CreateTranscodeTemplateResponse 返回参数} */
   CreateTranscodeTemplate(data: CreateTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTranscodeTemplateResponse>;
-  /** 添加点播加速域名 */
+  /** {@link CreateVodDomain 添加点播加速域名}({@link CreateVodDomainRequest 请求参数}): {@link CreateVodDomainResponse 返回参数} */
   CreateVodDomain(data: CreateVodDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVodDomainResponse>;
-  /** 创建水印模板 */
+  /** {@link CreateWatermarkTemplate 创建水印模板}({@link CreateWatermarkTemplateRequest 请求参数}): {@link CreateWatermarkTemplateResponse 返回参数} */
   CreateWatermarkTemplate(data: CreateWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWatermarkTemplateResponse>;
-  /** 创建关键词样本 */
+  /** {@link CreateWordSamples 创建关键词样本}({@link CreateWordSamplesRequest 请求参数}): {@link CreateWordSamplesResponse 返回参数} */
   CreateWordSamples(data: CreateWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWordSamplesResponse>;
-  /** 删除音视频内容分析模板 */
+  /** {@link DeleteAIAnalysisTemplate 删除音视频内容分析模板}({@link DeleteAIAnalysisTemplateRequest 请求参数}): {@link DeleteAIAnalysisTemplateResponse 返回参数} */
   DeleteAIAnalysisTemplate(data: DeleteAIAnalysisTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAIAnalysisTemplateResponse>;
-  /** 删除音视频内容识别模板 */
+  /** {@link DeleteAIRecognitionTemplate 删除音视频内容识别模板}({@link DeleteAIRecognitionTemplateRequest 请求参数}): {@link DeleteAIRecognitionTemplateResponse 返回参数} */
   DeleteAIRecognitionTemplate(data: DeleteAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAIRecognitionTemplateResponse>;
-  /** 删除转自适应码流模板 */
+  /** {@link DeleteAdaptiveDynamicStreamingTemplate 删除转自适应码流模板}({@link DeleteAdaptiveDynamicStreamingTemplateRequest 请求参数}): {@link DeleteAdaptiveDynamicStreamingTemplateResponse 返回参数} */
   DeleteAdaptiveDynamicStreamingTemplate(data: DeleteAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAdaptiveDynamicStreamingTemplateResponse>;
-  /** 删除转动图模板 */
+  /** {@link DeleteAnimatedGraphicsTemplate 删除转动图模板}({@link DeleteAnimatedGraphicsTemplateRequest 请求参数}): {@link DeleteAnimatedGraphicsTemplateResponse 返回参数} */
   DeleteAnimatedGraphicsTemplate(data: DeleteAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAnimatedGraphicsTemplateResponse>;
-  /** 删除分类 */
+  /** {@link DeleteClass 删除分类}({@link DeleteClassRequest 请求参数}): {@link DeleteClassResponse 返回参数} */
   DeleteClass(data: DeleteClassRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClassResponse>;
-  /** 删除音视频内容审核模板 */
+  /** {@link DeleteContentReviewTemplate 删除音视频内容审核模板}({@link DeleteContentReviewTemplateRequest 请求参数}): {@link DeleteContentReviewTemplateResponse 返回参数} */
   DeleteContentReviewTemplate(data: DeleteContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteContentReviewTemplateResponse>;
-  /** 删除片头片尾模板 */
+  /** {@link DeleteHeadTailTemplate 删除片头片尾模板}({@link DeleteHeadTailTemplateRequest 请求参数}): {@link DeleteHeadTailTemplateResponse 返回参数} */
   DeleteHeadTailTemplate(data: DeleteHeadTailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHeadTailTemplateResponse>;
-  /** 删除图片即时处理模板 */
+  /** {@link DeleteImageProcessingTemplate 删除图片即时处理模板}({@link DeleteImageProcessingTemplateRequest 请求参数}): {@link DeleteImageProcessingTemplateResponse 返回参数} */
   DeleteImageProcessingTemplate(data: DeleteImageProcessingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageProcessingTemplateResponse>;
-  /** 删除雪碧图模板 */
+  /** {@link DeleteImageSpriteTemplate 删除雪碧图模板}({@link DeleteImageSpriteTemplateRequest 请求参数}): {@link DeleteImageSpriteTemplateResponse 返回参数} */
   DeleteImageSpriteTemplate(data: DeleteImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageSpriteTemplateResponse>;
-  /** 删除媒体 */
+  /** {@link DeleteMedia 删除媒体}({@link DeleteMediaRequest 请求参数}): {@link DeleteMediaResponse 返回参数} */
   DeleteMedia(data: DeleteMediaRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMediaResponse>;
-  /** 删除素材样本 */
+  /** {@link DeletePersonSample 删除素材样本}({@link DeletePersonSampleRequest 请求参数}): {@link DeletePersonSampleResponse 返回参数} */
   DeletePersonSample(data: DeletePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonSampleResponse>;
-  /** 删除任务流模板 */
+  /** {@link DeleteProcedureTemplate 删除任务流模板}({@link DeleteProcedureTemplateRequest 请求参数}): {@link DeleteProcedureTemplateResponse 返回参数} */
   DeleteProcedureTemplate(data: DeleteProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProcedureTemplateResponse>;
-  /** 删除采样截图模板 */
+  /** {@link DeleteSampleSnapshotTemplate 删除采样截图模板}({@link DeleteSampleSnapshotTemplateRequest 请求参数}): {@link DeleteSampleSnapshotTemplateResponse 返回参数} */
   DeleteSampleSnapshotTemplate(data: DeleteSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSampleSnapshotTemplateResponse>;
-  /** 删除指定时间点截图模板 */
+  /** {@link DeleteSnapshotByTimeOffsetTemplate 删除指定时间点截图模板}({@link DeleteSnapshotByTimeOffsetTemplateRequest 请求参数}): {@link DeleteSnapshotByTimeOffsetTemplateResponse 返回参数} */
   DeleteSnapshotByTimeOffsetTemplate(data: DeleteSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotByTimeOffsetTemplateResponse>;
-  /** 删除播放器配置 */
+  /** {@link DeleteSuperPlayerConfig 删除播放器配置}({@link DeleteSuperPlayerConfigRequest 请求参数}): {@link DeleteSuperPlayerConfigResponse 返回参数} */
   DeleteSuperPlayerConfig(data: DeleteSuperPlayerConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSuperPlayerConfigResponse>;
-  /** 删除转码模板 */
+  /** {@link DeleteTranscodeTemplate 删除转码模板}({@link DeleteTranscodeTemplateRequest 请求参数}): {@link DeleteTranscodeTemplateResponse 返回参数} */
   DeleteTranscodeTemplate(data: DeleteTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTranscodeTemplateResponse>;
-  /** 删除点播加速域名 */
+  /** {@link DeleteVodDomain 删除点播加速域名}({@link DeleteVodDomainRequest 请求参数}): {@link DeleteVodDomainResponse 返回参数} */
   DeleteVodDomain(data: DeleteVodDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVodDomainResponse>;
-  /** 删除水印模板 */
+  /** {@link DeleteWatermarkTemplate 删除水印模板}({@link DeleteWatermarkTemplateRequest 请求参数}): {@link DeleteWatermarkTemplateResponse 返回参数} */
   DeleteWatermarkTemplate(data: DeleteWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWatermarkTemplateResponse>;
-  /** 删除关键词样本 */
+  /** {@link DeleteWordSamples 删除关键词样本}({@link DeleteWordSamplesRequest 请求参数}): {@link DeleteWordSamplesResponse 返回参数} */
   DeleteWordSamples(data: DeleteWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWordSamplesResponse>;
-  /** 获取音视频内容分析模板列表 */
+  /** {@link DescribeAIAnalysisTemplates 获取音视频内容分析模板列表}({@link DescribeAIAnalysisTemplatesRequest 请求参数}): {@link DescribeAIAnalysisTemplatesResponse 返回参数} */
   DescribeAIAnalysisTemplates(data?: DescribeAIAnalysisTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAnalysisTemplatesResponse>;
-  /** 获取音视频内容识别模板列表 */
+  /** {@link DescribeAIRecognitionTemplates 获取音视频内容识别模板列表}({@link DescribeAIRecognitionTemplatesRequest 请求参数}): {@link DescribeAIRecognitionTemplatesResponse 返回参数} */
   DescribeAIRecognitionTemplates(data?: DescribeAIRecognitionTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIRecognitionTemplatesResponse>;
-  /** 获取转自适应码流模板列表 */
+  /** {@link DescribeAdaptiveDynamicStreamingTemplates 获取转自适应码流模板列表}({@link DescribeAdaptiveDynamicStreamingTemplatesRequest 请求参数}): {@link DescribeAdaptiveDynamicStreamingTemplatesResponse 返回参数} */
   DescribeAdaptiveDynamicStreamingTemplates(data?: DescribeAdaptiveDynamicStreamingTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAdaptiveDynamicStreamingTemplatesResponse>;
-  /** 获取所有分类 */
+  /** {@link DescribeAllClass 获取所有分类}({@link DescribeAllClassRequest 请求参数}): {@link DescribeAllClassResponse 返回参数} */
   DescribeAllClass(data?: DescribeAllClassRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllClassResponse>;
-  /** 获取转动图模板列表 */
+  /** {@link DescribeAnimatedGraphicsTemplates 获取转动图模板列表}({@link DescribeAnimatedGraphicsTemplatesRequest 请求参数}): {@link DescribeAnimatedGraphicsTemplatesResponse 返回参数} */
   DescribeAnimatedGraphicsTemplates(data?: DescribeAnimatedGraphicsTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnimatedGraphicsTemplatesResponse>;
-  /** 查询点播域名的 CDN 统计数据 */
+  /** {@link DescribeCDNStatDetails 查询点播域名的 CDN 统计数据}({@link DescribeCDNStatDetailsRequest 请求参数}): {@link DescribeCDNStatDetailsResponse 返回参数} */
   DescribeCDNStatDetails(data: DescribeCDNStatDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCDNStatDetailsResponse>;
-  /** 查询点播 CDN 用量数据 */
+  /** {@link DescribeCDNUsageData 查询点播 CDN 用量数据}({@link DescribeCDNUsageDataRequest 请求参数}): {@link DescribeCDNUsageDataResponse 返回参数} */
   DescribeCDNUsageData(data: DescribeCDNUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCDNUsageDataResponse>;
-  /** 查询 CDN 日志下载链接列表 */
+  /** {@link DescribeCdnLogs 查询 CDN 日志下载链接列表}({@link DescribeCdnLogsRequest 请求参数}): {@link DescribeCdnLogsResponse 返回参数} */
   DescribeCdnLogs(data: DescribeCdnLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnLogsResponse>;
-  /** 查询客户端上传加速统计数据 */
+  /** {@link DescribeClientUploadAccelerationUsageData 查询客户端上传加速统计数据}({@link DescribeClientUploadAccelerationUsageDataRequest 请求参数}): {@link DescribeClientUploadAccelerationUsageDataResponse 返回参数} */
   DescribeClientUploadAccelerationUsageData(data: DescribeClientUploadAccelerationUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientUploadAccelerationUsageDataResponse>;
-  /** 获取音视频内容审核模板列表 */
+  /** {@link DescribeContentReviewTemplates 获取音视频内容审核模板列表}({@link DescribeContentReviewTemplatesRequest 请求参数}): {@link DescribeContentReviewTemplatesResponse 返回参数} */
   DescribeContentReviewTemplates(data?: DescribeContentReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentReviewTemplatesResponse>;
-  /** 查询媒体文件的播放统计数据 */
+  /** {@link DescribeDailyMediaPlayStat 查询媒体文件的播放统计数据}({@link DescribeDailyMediaPlayStatRequest 请求参数}): {@link DescribeDailyMediaPlayStatResponse 返回参数} */
   DescribeDailyMediaPlayStat(data: DescribeDailyMediaPlayStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDailyMediaPlayStatResponse>;
-  /** 查询每日播放 Top100的媒体文件的播放统计数据 */
+  /** {@link DescribeDailyMostPlayedStat 查询每日播放 Top100的媒体文件的播放统计数据}({@link DescribeDailyMostPlayedStatRequest 请求参数}): {@link DescribeDailyMostPlayedStatResponse 返回参数} */
   DescribeDailyMostPlayedStat(data: DescribeDailyMostPlayedStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDailyMostPlayedStatResponse>;
-  /** 查询播放统计文件下载列表 */
+  /** {@link DescribeDailyPlayStatFileList 查询播放统计文件下载列表}({@link DescribeDailyPlayStatFileListRequest 请求参数}): {@link DescribeDailyPlayStatFileListResponse 返回参数} */
   DescribeDailyPlayStatFileList(data: DescribeDailyPlayStatFileListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDailyPlayStatFileListResponse>;
-  /** 获取视频解密密钥 */
+  /** {@link DescribeDrmDataKey 获取视频解密密钥}({@link DescribeDrmDataKeyRequest 请求参数}): {@link DescribeDrmDataKeyResponse 返回参数} */
   DescribeDrmDataKey(data: DescribeDrmDataKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDrmDataKeyResponse>;
-  /** 查询 DRM 密钥提供商信息 */
+  /** {@link DescribeDrmKeyProviderInfo 查询 DRM 密钥提供商信息}({@link DescribeDrmKeyProviderInfoRequest 请求参数}): {@link DescribeDrmKeyProviderInfoResponse 返回参数} */
   DescribeDrmKeyProviderInfo(data?: DescribeDrmKeyProviderInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDrmKeyProviderInfoResponse>;
-  /** 查询事件通知配置 */
+  /** {@link DescribeEventConfig 查询事件通知配置}({@link DescribeEventConfigRequest 请求参数}): {@link DescribeEventConfigResponse 返回参数} */
   DescribeEventConfig(data?: DescribeEventConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventConfigResponse>;
-  /** 获取事件通知状态 */
+  /** {@link DescribeEventsState 获取事件通知状态}({@link DescribeEventsStateRequest 请求参数}): {@link DescribeEventsStateResponse 返回参数} */
   DescribeEventsState(data?: DescribeEventsStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsStateResponse>;
-  /** 获取片头片尾模板列表 */
+  /** {@link DescribeHeadTailTemplates 获取片头片尾模板列表}({@link DescribeHeadTailTemplatesRequest 请求参数}): {@link DescribeHeadTailTemplatesResponse 返回参数} */
   DescribeHeadTailTemplates(data?: DescribeHeadTailTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHeadTailTemplatesResponse>;
-  /** 获取图片即时处理模板列表 */
+  /** {@link DescribeImageProcessingTemplates 获取图片即时处理模板列表}({@link DescribeImageProcessingTemplatesRequest 请求参数}): {@link DescribeImageProcessingTemplatesResponse 返回参数} */
   DescribeImageProcessingTemplates(data?: DescribeImageProcessingTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageProcessingTemplatesResponse>;
-  /** 查询图片审核用量统计数据 */
+  /** {@link DescribeImageReviewUsageData 查询图片审核用量统计数据}({@link DescribeImageReviewUsageDataRequest 请求参数}): {@link DescribeImageReviewUsageDataResponse 返回参数} */
   DescribeImageReviewUsageData(data: DescribeImageReviewUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageReviewUsageDataResponse>;
-  /** 获取雪碧图模板列表 */
+  /** {@link DescribeImageSpriteTemplates 获取雪碧图模板列表}({@link DescribeImageSpriteTemplatesRequest 请求参数}): {@link DescribeImageSpriteTemplatesResponse 返回参数} */
   DescribeImageSpriteTemplates(data?: DescribeImageSpriteTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSpriteTemplatesResponse>;
-  /** 查询 License 请求数统计数据 */
+  /** {@link DescribeLicenseUsageData 查询 License 请求数统计数据}({@link DescribeLicenseUsageDataRequest 请求参数}): {@link DescribeLicenseUsageDataResponse 返回参数} */
   DescribeLicenseUsageData(data: DescribeLicenseUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseUsageDataResponse>;
-  /** 获取媒体详细信息 */
+  /** {@link DescribeMediaInfos 获取媒体详细信息}({@link DescribeMediaInfosRequest 请求参数}): {@link DescribeMediaInfosResponse 返回参数} */
   DescribeMediaInfos(data: DescribeMediaInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaInfosResponse>;
-  /** 查询媒体文件按指定时间粒度统计的播放数据 */
+  /** {@link DescribeMediaPlayStatDetails 查询媒体文件按指定时间粒度统计的播放数据}({@link DescribeMediaPlayStatDetailsRequest 请求参数}): {@link DescribeMediaPlayStatDetailsResponse 返回参数} */
   DescribeMediaPlayStatDetails(data: DescribeMediaPlayStatDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaPlayStatDetailsResponse>;
-  /** 查询视频处理用量统计数据 */
+  /** {@link DescribeMediaProcessUsageData 查询视频处理用量统计数据}({@link DescribeMediaProcessUsageDataRequest 请求参数}): {@link DescribeMediaProcessUsageDataResponse 返回参数} */
   DescribeMediaProcessUsageData(data: DescribeMediaProcessUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaProcessUsageDataResponse>;
-  /** 获取素材样本列表 */
+  /** {@link DescribePersonSamples 获取素材样本列表}({@link DescribePersonSamplesRequest 请求参数}): {@link DescribePersonSamplesResponse 返回参数} */
   DescribePersonSamples(data?: DescribePersonSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonSamplesResponse>;
-  /** 查询购买的预付费商品列表 */
+  /** {@link DescribePrepaidProducts 查询购买的预付费商品列表}({@link DescribePrepaidProductsRequest 请求参数}): {@link DescribePrepaidProductsResponse 返回参数} */
   DescribePrepaidProducts(data?: DescribePrepaidProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrepaidProductsResponse>;
-  /** 获取任务流模板列表 */
+  /** {@link DescribeProcedureTemplates 获取任务流模板列表}({@link DescribeProcedureTemplatesRequest 请求参数}): {@link DescribeProcedureTemplatesResponse 返回参数} */
   DescribeProcedureTemplates(data?: DescribeProcedureTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcedureTemplatesResponse>;
-  /** 查询内容智能识别详情 */
+  /** {@link DescribeReviewDetails 查询内容智能识别详情}({@link DescribeReviewDetailsRequest 请求参数}): {@link DescribeReviewDetailsResponse 返回参数} */
   DescribeReviewDetails(data: DescribeReviewDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReviewDetailsResponse>;
-  /** 获取采样截图模板列表 */
+  /** {@link DescribeSampleSnapshotTemplates 获取采样截图模板列表}({@link DescribeSampleSnapshotTemplatesRequest 请求参数}): {@link DescribeSampleSnapshotTemplatesResponse 返回参数} */
   DescribeSampleSnapshotTemplates(data?: DescribeSampleSnapshotTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleSnapshotTemplatesResponse>;
-  /** 获取指定时间点截图模板列表 */
+  /** {@link DescribeSnapshotByTimeOffsetTemplates 获取指定时间点截图模板列表}({@link DescribeSnapshotByTimeOffsetTemplatesRequest 请求参数}): {@link DescribeSnapshotByTimeOffsetTemplatesResponse 返回参数} */
   DescribeSnapshotByTimeOffsetTemplates(data?: DescribeSnapshotByTimeOffsetTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotByTimeOffsetTemplatesResponse>;
-  /** 查询当前存储情况 */
+  /** {@link DescribeStorageData 查询当前存储情况}({@link DescribeStorageDataRequest 请求参数}): {@link DescribeStorageDataResponse 返回参数} */
   DescribeStorageData(data?: DescribeStorageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageDataResponse>;
-  /** 查询存储空间数据详情 */
+  /** {@link DescribeStorageDetails 查询存储空间数据详情}({@link DescribeStorageDetailsRequest 请求参数}): {@link DescribeStorageDetailsResponse 返回参数} */
   DescribeStorageDetails(data: DescribeStorageDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageDetailsResponse>;
-  /** 查询存储地域列表 */
+  /** {@link DescribeStorageRegions 查询存储地域列表}({@link DescribeStorageRegionsRequest 请求参数}): {@link DescribeStorageRegionsResponse 返回参数} */
   DescribeStorageRegions(data?: DescribeStorageRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageRegionsResponse>;
-  /** 查询子应用列表 */
+  /** {@link DescribeSubAppIds 查询子应用列表}({@link DescribeSubAppIdsRequest 请求参数}): {@link DescribeSubAppIdsResponse 返回参数} */
   DescribeSubAppIds(data?: DescribeSubAppIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubAppIdsResponse>;
-  /** 获取播放器配置列表 */
+  /** {@link DescribeSuperPlayerConfigs 获取播放器配置列表}({@link DescribeSuperPlayerConfigsRequest 请求参数}): {@link DescribeSuperPlayerConfigsResponse 返回参数} */
   DescribeSuperPlayerConfigs(data?: DescribeSuperPlayerConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSuperPlayerConfigsResponse>;
-  /** 查询任务详情 */
+  /** {@link DescribeTaskDetail 查询任务详情}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** 获取任务列表 */
+  /** {@link DescribeTasks 获取任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** 获取转码模板列表 */
+  /** {@link DescribeTranscodeTemplates 获取转码模板列表}({@link DescribeTranscodeTemplatesRequest 请求参数}): {@link DescribeTranscodeTemplatesResponse 返回参数} */
   DescribeTranscodeTemplates(data?: DescribeTranscodeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeTemplatesResponse>;
-  /** 查询点播域名列表 */
+  /** {@link DescribeVodDomains 查询点播域名列表}({@link DescribeVodDomainsRequest 请求参数}): {@link DescribeVodDomainsResponse 返回参数} */
   DescribeVodDomains(data?: DescribeVodDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVodDomainsResponse>;
-  /** 获取水印模板列表 */
+  /** {@link DescribeWatermarkTemplates 获取水印模板列表}({@link DescribeWatermarkTemplatesRequest 请求参数}): {@link DescribeWatermarkTemplatesResponse 返回参数} */
   DescribeWatermarkTemplates(data?: DescribeWatermarkTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWatermarkTemplatesResponse>;
-  /** 获取关键词样本列表 */
+  /** {@link DescribeWordSamples 获取关键词样本列表}({@link DescribeWordSamplesRequest 请求参数}): {@link DescribeWordSamplesResponse 返回参数} */
   DescribeWordSamples(data?: DescribeWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWordSamplesResponse>;
-  /** 编辑视频 */
+  /** {@link EditMedia 编辑视频}({@link EditMediaRequest 请求参数}): {@link EditMediaResponse 返回参数} */
   EditMedia(data: EditMediaRequest, config?: AxiosRequestConfig): AxiosPromise<EditMediaResponse>;
-  /** 执行定制 API */
+  /** {@link ExecuteFunction 执行定制 API}({@link ExecuteFunctionRequest 请求参数}): {@link ExecuteFunctionResponse 返回参数} */
   ExecuteFunction(data: ExecuteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteFunctionResponse>;
-  /** 提取溯源水印 */
+  /** {@link ExtractTraceWatermark 提取溯源水印}({@link ExtractTraceWatermarkRequest 请求参数}): {@link ExtractTraceWatermarkResponse 返回参数} */
   ExtractTraceWatermark(data: ExtractTraceWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<ExtractTraceWatermarkResponse>;
-  /** 禁播媒体 */
+  /** {@link ForbidMediaDistribution 禁播媒体}({@link ForbidMediaDistributionRequest 请求参数}): {@link ForbidMediaDistributionResponse 返回参数} */
   ForbidMediaDistribution(data: ForbidMediaDistributionRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidMediaDistributionResponse>;
-  /** 直播即时剪辑 */
+  /** {@link LiveRealTimeClip 直播即时剪辑}({@link LiveRealTimeClipRequest 请求参数}): {@link LiveRealTimeClipResponse 返回参数} */
   LiveRealTimeClip(data: LiveRealTimeClipRequest, config?: AxiosRequestConfig): AxiosPromise<LiveRealTimeClipResponse>;
-  /** 任务管理 */
+  /** {@link ManageTask 任务管理}({@link ManageTaskRequest 请求参数}): {@link ManageTaskResponse 返回参数} */
   ManageTask(data: ManageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ManageTaskResponse>;
-  /** 修改音视频内容分析模板 */
+  /** {@link ModifyAIAnalysisTemplate 修改音视频内容分析模板}({@link ModifyAIAnalysisTemplateRequest 请求参数}): {@link ModifyAIAnalysisTemplateResponse 返回参数} */
   ModifyAIAnalysisTemplate(data: ModifyAIAnalysisTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAIAnalysisTemplateResponse>;
-  /** 修改音视频内容识别模板 */
+  /** {@link ModifyAIRecognitionTemplate 修改音视频内容识别模板}({@link ModifyAIRecognitionTemplateRequest 请求参数}): {@link ModifyAIRecognitionTemplateResponse 返回参数} */
   ModifyAIRecognitionTemplate(data: ModifyAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAIRecognitionTemplateResponse>;
-  /** 修改转自适应码流模板 */
+  /** {@link ModifyAdaptiveDynamicStreamingTemplate 修改转自适应码流模板}({@link ModifyAdaptiveDynamicStreamingTemplateRequest 请求参数}): {@link ModifyAdaptiveDynamicStreamingTemplateResponse 返回参数} */
   ModifyAdaptiveDynamicStreamingTemplate(data: ModifyAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAdaptiveDynamicStreamingTemplateResponse>;
-  /** 修改转动图模板 */
+  /** {@link ModifyAnimatedGraphicsTemplate 修改转动图模板}({@link ModifyAnimatedGraphicsTemplateRequest 请求参数}): {@link ModifyAnimatedGraphicsTemplateResponse 返回参数} */
   ModifyAnimatedGraphicsTemplate(data: ModifyAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAnimatedGraphicsTemplateResponse>;
-  /** 修改分类 */
+  /** {@link ModifyClass 修改分类}({@link ModifyClassRequest 请求参数}): {@link ModifyClassResponse 返回参数} */
   ModifyClass(data: ModifyClassRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClassResponse>;
-  /** 修改音视频内容审核模板 */
+  /** {@link ModifyContentReviewTemplate 修改音视频内容审核模板}({@link ModifyContentReviewTemplateRequest 请求参数}): {@link ModifyContentReviewTemplateResponse 返回参数} */
   ModifyContentReviewTemplate(data: ModifyContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContentReviewTemplateResponse>;
-  /** 设置默认的存储地域 */
+  /** {@link ModifyDefaultStorageRegion 设置默认的存储地域}({@link ModifyDefaultStorageRegionRequest 请求参数}): {@link ModifyDefaultStorageRegionResponse 返回参数} */
   ModifyDefaultStorageRegion(data: ModifyDefaultStorageRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDefaultStorageRegionResponse>;
-  /** 修改事件通知配置 */
+  /** {@link ModifyEventConfig 修改事件通知配置}({@link ModifyEventConfigRequest 请求参数}): {@link ModifyEventConfigResponse 返回参数} */
   ModifyEventConfig(data?: ModifyEventConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEventConfigResponse>;
-  /** 修改片头片尾模板 */
+  /** {@link ModifyHeadTailTemplate 修改片头片尾模板}({@link ModifyHeadTailTemplateRequest 请求参数}): {@link ModifyHeadTailTemplateResponse 返回参数} */
   ModifyHeadTailTemplate(data: ModifyHeadTailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHeadTailTemplateResponse>;
-  /** 修改雪碧图模板 */
+  /** {@link ModifyImageSpriteTemplate 修改雪碧图模板}({@link ModifyImageSpriteTemplateRequest 请求参数}): {@link ModifyImageSpriteTemplateResponse 返回参数} */
   ModifyImageSpriteTemplate(data: ModifyImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageSpriteTemplateResponse>;
-  /** 修改媒体文件属性 */
+  /** {@link ModifyMediaInfo 修改媒体文件属性}({@link ModifyMediaInfoRequest 请求参数}): {@link ModifyMediaInfoResponse 返回参数} */
   ModifyMediaInfo(data: ModifyMediaInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMediaInfoResponse>;
-  /** 修改媒体文件存储类型 */
+  /** {@link ModifyMediaStorageClass 修改媒体文件存储类型}({@link ModifyMediaStorageClassRequest 请求参数}): {@link ModifyMediaStorageClassResponse 返回参数} */
   ModifyMediaStorageClass(data: ModifyMediaStorageClassRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMediaStorageClassResponse>;
-  /** 修改素材样本 */
+  /** {@link ModifyPersonSample 修改素材样本}({@link ModifyPersonSampleRequest 请求参数}): {@link ModifyPersonSampleResponse 返回参数} */
   ModifyPersonSample(data: ModifyPersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonSampleResponse>;
-  /** 修改采样截图模板 */
+  /** {@link ModifySampleSnapshotTemplate 修改采样截图模板}({@link ModifySampleSnapshotTemplateRequest 请求参数}): {@link ModifySampleSnapshotTemplateResponse 返回参数} */
   ModifySampleSnapshotTemplate(data: ModifySampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySampleSnapshotTemplateResponse>;
-  /** 修改指定时间点截图模板 */
+  /** {@link ModifySnapshotByTimeOffsetTemplate 修改指定时间点截图模板}({@link ModifySnapshotByTimeOffsetTemplateRequest 请求参数}): {@link ModifySnapshotByTimeOffsetTemplateResponse 返回参数} */
   ModifySnapshotByTimeOffsetTemplate(data: ModifySnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotByTimeOffsetTemplateResponse>;
-  /** 修改子应用信息 */
+  /** {@link ModifySubAppIdInfo 修改子应用信息}({@link ModifySubAppIdInfoRequest 请求参数}): {@link ModifySubAppIdInfoResponse 返回参数} */
   ModifySubAppIdInfo(data: ModifySubAppIdInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubAppIdInfoResponse>;
-  /** 修改子应用状态 */
+  /** {@link ModifySubAppIdStatus 修改子应用状态}({@link ModifySubAppIdStatusRequest 请求参数}): {@link ModifySubAppIdStatusResponse 返回参数} */
   ModifySubAppIdStatus(data: ModifySubAppIdStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubAppIdStatusResponse>;
-  /** 修改播放器配置 */
+  /** {@link ModifySuperPlayerConfig 修改播放器配置}({@link ModifySuperPlayerConfigRequest 请求参数}): {@link ModifySuperPlayerConfigResponse 返回参数} */
   ModifySuperPlayerConfig(data: ModifySuperPlayerConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySuperPlayerConfigResponse>;
-  /** 修改转码模板 */
+  /** {@link ModifyTranscodeTemplate 修改转码模板}({@link ModifyTranscodeTemplateRequest 请求参数}): {@link ModifyTranscodeTemplateResponse 返回参数} */
   ModifyTranscodeTemplate(data: ModifyTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTranscodeTemplateResponse>;
-  /** 开启或者关闭点播域名加速地域 */
+  /** {@link ModifyVodDomainAccelerateConfig 开启或者关闭点播域名加速地域}({@link ModifyVodDomainAccelerateConfigRequest 请求参数}): {@link ModifyVodDomainAccelerateConfigResponse 返回参数} */
   ModifyVodDomainAccelerateConfig(data: ModifyVodDomainAccelerateConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVodDomainAccelerateConfigResponse>;
-  /** 修改域名配置 */
+  /** {@link ModifyVodDomainConfig 修改域名配置}({@link ModifyVodDomainConfigRequest 请求参数}): {@link ModifyVodDomainConfigResponse 返回参数} */
   ModifyVodDomainConfig(data: ModifyVodDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVodDomainConfigResponse>;
-  /** 修改水印模板 */
+  /** {@link ModifyWatermarkTemplate 修改水印模板}({@link ModifyWatermarkTemplateRequest 请求参数}): {@link ModifyWatermarkTemplateResponse 返回参数} */
   ModifyWatermarkTemplate(data: ModifyWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWatermarkTemplateResponse>;
-  /** 修改关键词样本 */
+  /** {@link ModifyWordSample 修改关键词样本}({@link ModifyWordSampleRequest 请求参数}): {@link ModifyWordSampleResponse 返回参数} */
   ModifyWordSample(data: ModifyWordSampleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWordSampleResponse>;
-  /** 解析视频索引文件 */
+  /** {@link ParseStreamingManifest 解析视频索引文件}({@link ParseStreamingManifestRequest 请求参数}): {@link ParseStreamingManifestResponse 返回参数} */
   ParseStreamingManifest(data: ParseStreamingManifestRequest, config?: AxiosRequestConfig): AxiosPromise<ParseStreamingManifestResponse>;
-  /** 图片处理 */
+  /** {@link ProcessImage 图片处理}({@link ProcessImageRequest 请求参数}): {@link ProcessImageResponse 返回参数} */
   ProcessImage(data: ProcessImageRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessImageResponse>;
-  /** 视频处理 */
+  /** {@link ProcessMedia 视频处理}({@link ProcessMediaRequest 请求参数}): {@link ProcessMediaResponse 返回参数} */
   ProcessMedia(data: ProcessMediaRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessMediaResponse>;
-  /** 使用任务流模板进行视频处理 */
+  /** {@link ProcessMediaByProcedure 使用任务流模板进行视频处理}({@link ProcessMediaByProcedureRequest 请求参数}): {@link ProcessMediaByProcedureResponse 返回参数} */
   ProcessMediaByProcedure(data: ProcessMediaByProcedureRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessMediaByProcedureResponse>;
-  /** 对指定 URL 的视频发起视频处理 */
+  /** {@link ProcessMediaByUrl 对指定 URL 的视频发起视频处理}({@link ProcessMediaByUrlRequest 请求参数}): {@link ProcessMediaByUrlResponse 返回参数} */
   ProcessMediaByUrl(data?: ProcessMediaByUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessMediaByUrlResponse>;
-  /** 拉取事件通知 */
+  /** {@link PullEvents 拉取事件通知}({@link PullEventsRequest 请求参数}): {@link PullEventsResponse 返回参数} */
   PullEvents(data?: PullEventsRequest, config?: AxiosRequestConfig): AxiosPromise<PullEventsResponse>;
-  /** 拉取上传 */
+  /** {@link PullUpload 拉取上传}({@link PullUploadRequest 请求参数}): {@link PullUploadResponse 返回参数} */
   PullUpload(data: PullUploadRequest, config?: AxiosRequestConfig): AxiosPromise<PullUploadResponse>;
-  /** 预热URL */
+  /** {@link PushUrlCache 预热URL}({@link PushUrlCacheRequest 请求参数}): {@link PushUrlCacheResponse 返回参数} */
   PushUrlCache(data: PushUrlCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PushUrlCacheResponse>;
-  /** 刷新URL */
+  /** {@link RefreshUrlCache 刷新URL}({@link RefreshUrlCacheRequest 请求参数}): {@link RefreshUrlCacheResponse 返回参数} */
   RefreshUrlCache(data: RefreshUrlCacheRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshUrlCacheResponse>;
-  /** 智能去除水印 */
+  /** {@link RemoveWatermark 智能去除水印}({@link RemoveWatermarkRequest 请求参数}): {@link RemoveWatermarkResponse 返回参数} */
   RemoveWatermark(data: RemoveWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveWatermarkResponse>;
-  /** 重设任务流模板 */
+  /** {@link ResetProcedureTemplate 重设任务流模板}({@link ResetProcedureTemplateRequest 请求参数}): {@link ResetProcedureTemplateResponse 返回参数} */
   ResetProcedureTemplate(data: ResetProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ResetProcedureTemplateResponse>;
-  /** 解冻媒体文件 */
+  /** {@link RestoreMedia 解冻媒体文件}({@link RestoreMediaRequest 请求参数}): {@link RestoreMediaResponse 返回参数} */
   RestoreMedia(data: RestoreMediaRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreMediaResponse>;
-  /** 音视频审核 */
+  /** {@link ReviewAudioVideo 音视频审核}({@link ReviewAudioVideoRequest 请求参数}): {@link ReviewAudioVideoResponse 返回参数} */
   ReviewAudioVideo(data: ReviewAudioVideoRequest, config?: AxiosRequestConfig): AxiosPromise<ReviewAudioVideoResponse>;
-  /** 图片审核 */
+  /** {@link ReviewImage 图片审核}({@link ReviewImageRequest 请求参数}): {@link ReviewImageResponse 返回参数} */
   ReviewImage(data: ReviewImageRequest, config?: AxiosRequestConfig): AxiosPromise<ReviewImageResponse>;
-  /** 搜索媒体信息 */
+  /** {@link SearchMedia 搜索媒体信息}({@link SearchMediaRequest 请求参数}): {@link SearchMediaResponse 返回参数} */
   SearchMedia(data?: SearchMediaRequest, config?: AxiosRequestConfig): AxiosPromise<SearchMediaResponse>;
-  /** 设置 DRM 密钥提供商信息 */
+  /** {@link SetDrmKeyProviderInfo 设置 DRM 密钥提供商信息}({@link SetDrmKeyProviderInfoRequest 请求参数}): {@link SetDrmKeyProviderInfoResponse 返回参数} */
   SetDrmKeyProviderInfo(data?: SetDrmKeyProviderInfoRequest, config?: AxiosRequestConfig): AxiosPromise<SetDrmKeyProviderInfoResponse>;
-  /** 简单 HLS 剪辑 */
+  /** {@link SimpleHlsClip 简单 HLS 剪辑}({@link SimpleHlsClipRequest 请求参数}): {@link SimpleHlsClipResponse 返回参数} */
   SimpleHlsClip(data: SimpleHlsClipRequest, config?: AxiosRequestConfig): AxiosPromise<SimpleHlsClipResponse>;
-  /** 视频拆条 */
+  /** {@link SplitMedia 视频拆条}({@link SplitMediaRequest 请求参数}): {@link SplitMediaResponse 返回参数} */
   SplitMedia(data: SplitMediaRequest, config?: AxiosRequestConfig): AxiosPromise<SplitMediaResponse>;
-  /** 微信小程序视频发布 */
+  /** {@link WeChatMiniProgramPublish 微信小程序视频发布}({@link WeChatMiniProgramPublishRequest 请求参数}): {@link WeChatMiniProgramPublishResponse 返回参数} */
   WeChatMiniProgramPublish(data: WeChatMiniProgramPublishRequest, config?: AxiosRequestConfig): AxiosPromise<WeChatMiniProgramPublishResponse>;
 }
 

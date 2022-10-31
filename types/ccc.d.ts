@@ -88,6 +88,32 @@ declare interface ErrStaffItem {
   Message: string;
 }
 
+/** 话机信息 */
+declare interface ExtensionInfo {
+  /** 实例ID */
+  SdkAppId: number;
+  /** 分机全名 */
+  FullExtensionId: string;
+  /** 分机号 */
+  ExtensionId: string;
+  /** 所属技能组列表 */
+  SkillGroupId: string;
+  /** 分机名称 */
+  ExtensionName: string;
+  /** 创建时间 */
+  CreateTime: number;
+  /** 最后修改时间 */
+  ModifyTime: number;
+  /** 话机状态(0 离线、100 空闲、200忙碌） */
+  Status: number;
+  /** 是否注册 */
+  Register: boolean;
+  /** 绑定坐席邮箱 */
+  Relation: string;
+  /** 绑定坐席名称 */
+  RelationName: string;
+}
+
 /** 文本会话服务记录信息 */
 declare interface IMCdrInfo {
   /** 服务记录ID */
@@ -558,6 +584,20 @@ declare interface CreateCallOutSessionResponse {
   RequestId?: string;
 }
 
+declare interface CreateExtensionRequest {
+  /** TCCC 实例应用 ID */
+  SdkAppId: number;
+  /** 分机号 */
+  ExtensionId: string;
+  /** 分机名称 */
+  ExtensionName: string;
+}
+
+declare interface CreateExtensionResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateSDKLoginTokenRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -604,6 +644,18 @@ declare interface CreateUserSigRequest {
 declare interface CreateUserSigResponse {
   /** 签名结果 */
   UserSig: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteExtensionRequest {
+  /** TCCC 实例应用 ID */
+  SdkAppId: number;
+  /** 分机号 */
+  ExtensionId: string;
+}
+
+declare interface DeleteExtensionResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -728,6 +780,52 @@ declare interface DescribeChatMessagesResponse {
   TotalCount: number;
   /** 消息列表 */
   Messages: MessageBody[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeExtensionRequest {
+  /** TCCC 实例应用 ID */
+  SdkAppId: number;
+  /** 分机号 */
+  ExtensionId: string;
+}
+
+declare interface DescribeExtensionResponse {
+  /** 分机号 */
+  ExtensionId: string;
+  /** 域名 */
+  ExtensionDomain: string;
+  /** 注册密码 */
+  Password: string;
+  /** 代理服务器地址 */
+  OutboundProxy: string;
+  /** 传输协议 */
+  Transport: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeExtensionsRequest {
+  /** TCCC 实例应用 ID */
+  SdkAppId: number;
+  /** 分页页号（从0开始） */
+  PageNumber: number;
+  /** 筛选分机号列表 */
+  ExtensionIds?: string[];
+  /** 分页大小 */
+  PageSize?: number;
+  /** 模糊查询字段（模糊查询分机号、分机名称、坐席邮箱、坐席名称） */
+  FuzzingKeyWord?: string;
+  /** 是否需要返回话机当前状态 */
+  IsNeedStatus?: boolean;
+}
+
+declare interface DescribeExtensionsResponse {
+  /** 查询总数 */
+  Total: number;
+  /** 话机信息列表 */
+  ExtensionList: ExtensionInfo[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -940,6 +1038,24 @@ declare interface DisableCCCPhoneNumberResponse {
   RequestId?: string;
 }
 
+declare interface ModifyExtensionRequest {
+  /** TCCC 实例应用 ID */
+  SdkAppId: number;
+  /** 分机号 */
+  ExtensionId: string;
+  /** 分机名称 */
+  ExtensionName?: string;
+  /** 所属技能组列表 */
+  SkillGroupIds?: number[];
+  /** 绑定坐席邮箱账号 */
+  Relation?: string;
+}
+
+declare interface ModifyExtensionResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyStaffRequest {
   /** 应用ID */
   SdkAppId: number;
@@ -960,6 +1076,20 @@ declare interface ModifyStaffRequest {
 }
 
 declare interface ModifyStaffResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ResetExtensionPasswordRequest {
+  /** TCCC 实例应用 ID */
+  SdkAppId: number;
+  /** 分机号 */
+  ExtensionId: string;
+}
+
+declare interface ResetExtensionPasswordResponse {
+  /** 重置后密码 */
+  Password: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -990,60 +1120,72 @@ declare interface UnbindStaffSkillGroupListResponse {
   RequestId?: string;
 }
 
-/** [云呼叫中心](https://cloud.tencent.com/document/product/679) */
+/** {@link Ccc 云呼叫中心} */
 declare interface Ccc {
   (): Versions;
-  /** 绑定坐席所属技能组 */
+  /** {@link BindStaffSkillGroupList 绑定坐席所属技能组}({@link BindStaffSkillGroupListRequest 请求参数}): {@link BindStaffSkillGroupListResponse 返回参数} */
   BindStaffSkillGroupList(data: BindStaffSkillGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<BindStaffSkillGroupListResponse>;
-  /** 创建自动外呼任务 */
+  /** {@link CreateAutoCalloutTask 创建自动外呼任务}({@link CreateAutoCalloutTaskRequest 请求参数}): {@link CreateAutoCalloutTaskResponse 返回参数} */
   CreateAutoCalloutTask(data: CreateAutoCalloutTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoCalloutTaskResponse>;
-  /** 创建技能组 */
+  /** {@link CreateCCCSkillGroup 创建技能组}({@link CreateCCCSkillGroupRequest 请求参数}): {@link CreateCCCSkillGroupResponse 返回参数} */
   CreateCCCSkillGroup(data: CreateCCCSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCCCSkillGroupResponse>;
-  /** 创建外呼会话（当前仅支持双呼） */
+  /** {@link CreateCallOutSession 创建外呼会话（当前仅支持双呼）}({@link CreateCallOutSessionRequest 请求参数}): {@link CreateCallOutSessionResponse 返回参数} */
   CreateCallOutSession(data: CreateCallOutSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCallOutSessionResponse>;
-  /** 创建 SDK 登录 Token */
+  /** {@link CreateExtension 创建话机账号}({@link CreateExtensionRequest 请求参数}): {@link CreateExtensionResponse 返回参数} */
+  CreateExtension(data: CreateExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExtensionResponse>;
+  /** {@link CreateSDKLoginToken 创建 SDK 登录 Token}({@link CreateSDKLoginTokenRequest 请求参数}): {@link CreateSDKLoginTokenResponse 返回参数} */
   CreateSDKLoginToken(data: CreateSDKLoginTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSDKLoginTokenResponse>;
-  /** 创建客服账号 */
+  /** {@link CreateStaff 创建客服账号}({@link CreateStaffRequest 请求参数}): {@link CreateStaffResponse 返回参数} */
   CreateStaff(data: CreateStaffRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStaffResponse>;
-  /** 创建用户数据签名 */
+  /** {@link CreateUserSig 创建用户数据签名}({@link CreateUserSigRequest 请求参数}): {@link CreateUserSigResponse 返回参数} */
   CreateUserSig(data: CreateUserSigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserSigResponse>;
-  /** 删除坐席信息 */
+  /** {@link DeleteExtension 删除话机账号}({@link DeleteExtensionRequest 请求参数}): {@link DeleteExtensionResponse 返回参数} */
+  DeleteExtension(data: DeleteExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteExtensionResponse>;
+  /** {@link DeleteStaff 删除坐席信息}({@link DeleteStaffRequest 请求参数}): {@link DeleteStaffResponse 返回参数} */
   DeleteStaff(data: DeleteStaffRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStaffResponse>;
-  /** 查询自动外呼任务详情 */
+  /** {@link DescribeAutoCalloutTask 查询自动外呼任务详情}({@link DescribeAutoCalloutTaskRequest 请求参数}): {@link DescribeAutoCalloutTaskResponse 返回参数} */
   DescribeAutoCalloutTask(data: DescribeAutoCalloutTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoCalloutTaskResponse>;
-  /** 批量查询自动任务外呼 */
+  /** {@link DescribeAutoCalloutTasks 批量查询自动任务外呼}({@link DescribeAutoCalloutTasksRequest 请求参数}): {@link DescribeAutoCalloutTasksResponse 返回参数} */
   DescribeAutoCalloutTasks(data: DescribeAutoCalloutTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoCalloutTasksResponse>;
-  /** 获取用户购买信息列表 */
+  /** {@link DescribeCCCBuyInfoList 获取用户购买信息列表}({@link DescribeCCCBuyInfoListRequest 请求参数}): {@link DescribeCCCBuyInfoListResponse 返回参数} */
   DescribeCCCBuyInfoList(data?: DescribeCCCBuyInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCCBuyInfoListResponse>;
-  /** 获取呼入实时数据统计指标 */
+  /** {@link DescribeCallInMetrics 获取呼入实时数据统计指标}({@link DescribeCallInMetricsRequest 请求参数}): {@link DescribeCallInMetricsResponse 返回参数} */
   DescribeCallInMetrics(data: DescribeCallInMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallInMetricsResponse>;
-  /** 查询服务的聊天记录 */
+  /** {@link DescribeChatMessages 查询服务的聊天记录}({@link DescribeChatMessagesRequest 请求参数}): {@link DescribeChatMessagesResponse 返回参数} */
   DescribeChatMessages(data?: DescribeChatMessagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChatMessagesResponse>;
-  /** 查询在线客服记录 */
+  /** {@link DescribeExtension 获取话机信息}({@link DescribeExtensionRequest 请求参数}): {@link DescribeExtensionResponse 返回参数} */
+  DescribeExtension(data: DescribeExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtensionResponse>;
+  /** {@link DescribeExtensions 查询话机列表信息}({@link DescribeExtensionsRequest 请求参数}): {@link DescribeExtensionsResponse 返回参数} */
+  DescribeExtensions(data: DescribeExtensionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtensionsResponse>;
+  /** {@link DescribeIMCdrs 查询在线客服记录}({@link DescribeIMCdrsRequest 请求参数}): {@link DescribeIMCdrsResponse 返回参数} */
   DescribeIMCdrs(data: DescribeIMCdrsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIMCdrsResponse>;
-  /** 获取 PSTN 活动会话列表 */
+  /** {@link DescribePSTNActiveSessionList 获取 PSTN 活动会话列表}({@link DescribePSTNActiveSessionListRequest 请求参数}): {@link DescribePSTNActiveSessionListResponse 返回参数} */
   DescribePSTNActiveSessionList(data: DescribePSTNActiveSessionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePSTNActiveSessionListResponse>;
-  /** 获取主被叫受保护的电话服务记录与录音 */
+  /** {@link DescribeProtectedTelCdr 获取主被叫受保护的电话服务记录与录音}({@link DescribeProtectedTelCdrRequest 请求参数}): {@link DescribeProtectedTelCdrResponse 返回参数} */
   DescribeProtectedTelCdr(data: DescribeProtectedTelCdrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectedTelCdrResponse>;
-  /** 获取技能组信息列表 */
+  /** {@link DescribeSkillGroupInfoList 获取技能组信息列表}({@link DescribeSkillGroupInfoListRequest 请求参数}): {@link DescribeSkillGroupInfoListResponse 返回参数} */
   DescribeSkillGroupInfoList(data: DescribeSkillGroupInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillGroupInfoListResponse>;
-  /** 获取坐席信息列表 */
+  /** {@link DescribeStaffInfoList 获取坐席信息列表}({@link DescribeStaffInfoListRequest 请求参数}): {@link DescribeStaffInfoListResponse 返回参数} */
   DescribeStaffInfoList(data: DescribeStaffInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStaffInfoListResponse>;
-  /** 获取坐席实时状态统计指标 */
+  /** {@link DescribeStaffStatusMetrics 获取坐席实时状态统计指标}({@link DescribeStaffStatusMetricsRequest 请求参数}): {@link DescribeStaffStatusMetricsResponse 返回参数} */
   DescribeStaffStatusMetrics(data: DescribeStaffStatusMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStaffStatusMetricsResponse>;
-  /** 按实例获取电话消耗统计 */
+  /** {@link DescribeTelCallInfo 按实例获取电话消耗统计}({@link DescribeTelCallInfoRequest 请求参数}): {@link DescribeTelCallInfoResponse 返回参数} */
   DescribeTelCallInfo(data: DescribeTelCallInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTelCallInfoResponse>;
-  /** 获取电话服务记录与录音 */
+  /** {@link DescribeTelCdr 获取电话服务记录与录音}({@link DescribeTelCdrRequest 请求参数}): {@link DescribeTelCdrResponse 返回参数} */
   DescribeTelCdr(data: DescribeTelCdrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTelCdrResponse>;
-  /** 获取 PSTN 会话信息 */
+  /** {@link DescribeTelSession 获取 PSTN 会话信息}({@link DescribeTelSessionRequest 请求参数}): {@link DescribeTelSessionResponse 返回参数} */
   DescribeTelSession(data: DescribeTelSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTelSessionResponse>;
-  /** 停用号码 */
+  /** {@link DisableCCCPhoneNumber 停用号码}({@link DisableCCCPhoneNumberRequest 请求参数}): {@link DisableCCCPhoneNumberResponse 返回参数} */
   DisableCCCPhoneNumber(data: DisableCCCPhoneNumberRequest, config?: AxiosRequestConfig): AxiosPromise<DisableCCCPhoneNumberResponse>;
-  /** 修改客服账号 */
+  /** {@link ModifyExtension 修改话机账号(绑定技能组、绑定坐席账号)}({@link ModifyExtensionRequest 请求参数}): {@link ModifyExtensionResponse 返回参数} */
+  ModifyExtension(data: ModifyExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExtensionResponse>;
+  /** {@link ModifyStaff 修改客服账号}({@link ModifyStaffRequest 请求参数}): {@link ModifyStaffResponse 返回参数} */
   ModifyStaff(data: ModifyStaffRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStaffResponse>;
-  /** 停止自动外呼任务 */
+  /** {@link ResetExtensionPassword 重置话机注册密码}({@link ResetExtensionPasswordRequest 请求参数}): {@link ResetExtensionPasswordResponse 返回参数} */
+  ResetExtensionPassword(data: ResetExtensionPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetExtensionPasswordResponse>;
+  /** {@link StopAutoCalloutTask 停止自动外呼任务}({@link StopAutoCalloutTaskRequest 请求参数}): {@link StopAutoCalloutTaskResponse 返回参数} */
   StopAutoCalloutTask(data: StopAutoCalloutTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopAutoCalloutTaskResponse>;
-  /** 解绑坐席所属技能组 */
+  /** {@link UnbindStaffSkillGroupList 解绑坐席所属技能组}({@link UnbindStaffSkillGroupListRequest 请求参数}): {@link UnbindStaffSkillGroupListResponse 返回参数} */
   UnbindStaffSkillGroupList(data: UnbindStaffSkillGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindStaffSkillGroupListResponse>;
 }
 

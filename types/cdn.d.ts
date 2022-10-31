@@ -4262,164 +4262,164 @@ declare interface VerifyDomainRecordResponse {
   RequestId?: string;
 }
 
-/** [内容分发网络](https://cloud.tencent.com/document/product/228) */
+/** {@link Cdn 内容分发网络 CDN} */
 declare interface Cdn {
   (): Versions;
-  /** 新增日志主题下绑定的域名 */
+  /** {@link AddCLSTopicDomains 新增日志主题下绑定的域名}({@link AddCLSTopicDomainsRequest 请求参数}): {@link AddCLSTopicDomainsResponse 返回参数} */
   AddCLSTopicDomains(data: AddCLSTopicDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<AddCLSTopicDomainsResponse>;
-  /** 新增加速域名 */
+  /** {@link AddCdnDomain 新增加速域名}({@link AddCdnDomainRequest 请求参数}): {@link AddCdnDomainResponse 返回参数} */
   AddCdnDomain(data: AddCdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<AddCdnDomainResponse>;
-  /** 创建日志主题 */
+  /** {@link CreateClsLogTopic 创建日志主题}({@link CreateClsLogTopicRequest 请求参数}): {@link CreateClsLogTopicResponse 返回参数} */
   CreateClsLogTopic(data: CreateClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClsLogTopicResponse>;
-  /** 添加诊断URL */
+  /** {@link CreateDiagnoseUrl 添加诊断URL}({@link CreateDiagnoseUrlRequest 请求参数}): {@link CreateDiagnoseUrlResponse 返回参数} */
   CreateDiagnoseUrl(data: CreateDiagnoseUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDiagnoseUrlResponse>;
-  /** 动态打包任务提交 */
+  /** {@link CreateEdgePackTask 动态打包任务提交}({@link CreateEdgePackTaskRequest 请求参数}): {@link CreateEdgePackTaskResponse 返回参数} */
   CreateEdgePackTask(data: CreateEdgePackTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgePackTaskResponse>;
-  /** 创建SCDN域名 */
+  /** {@link CreateScdnDomain 创建SCDN域名}({@link CreateScdnDomainRequest 请求参数}): {@link CreateScdnDomainResponse 返回参数} */
   CreateScdnDomain(data: CreateScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScdnDomainResponse>;
-  /** 重试创建事件日志任务 */
+  /** {@link CreateScdnFailedLogTask 重试创建事件日志任务}({@link CreateScdnFailedLogTaskRequest 请求参数}): {@link CreateScdnFailedLogTaskResponse 返回参数} */
   CreateScdnFailedLogTask(data: CreateScdnFailedLogTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScdnFailedLogTaskResponse>;
-  /** 创建事件日志任务 */
+  /** {@link CreateScdnLogTask 创建事件日志任务}({@link CreateScdnLogTaskRequest 请求参数}): {@link CreateScdnLogTaskResponse 返回参数} */
   CreateScdnLogTask(data: CreateScdnLogTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScdnLogTaskResponse>;
-  /** 生成解析记录 */
+  /** {@link CreateVerifyRecord 生成解析记录}({@link CreateVerifyRecordRequest 请求参数}): {@link CreateVerifyRecordResponse 返回参数} */
   CreateVerifyRecord(data: CreateVerifyRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVerifyRecordResponse>;
-  /** 删除加速域名 */
+  /** {@link DeleteCdnDomain 删除加速域名}({@link DeleteCdnDomainRequest 请求参数}): {@link DeleteCdnDomainResponse 返回参数} */
   DeleteCdnDomain(data: DeleteCdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCdnDomainResponse>;
-  /** 删除日志主题 */
+  /** {@link DeleteClsLogTopic 删除日志主题}({@link DeleteClsLogTopicRequest 请求参数}): {@link DeleteClsLogTopicResponse 返回参数} */
   DeleteClsLogTopic(data: DeleteClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClsLogTopicResponse>;
-  /** 删除SCDN域名 */
+  /** {@link DeleteScdnDomain 删除SCDN域名}({@link DeleteScdnDomainRequest 请求参数}): {@link DeleteScdnDomainResponse 返回参数} */
   DeleteScdnDomain(data: DeleteScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScdnDomainResponse>;
-  /** 计费数据查询 */
+  /** {@link DescribeBillingData 计费数据查询}({@link DescribeBillingDataRequest 请求参数}): {@link DescribeBillingDataResponse 返回参数} */
   DescribeBillingData(data: DescribeBillingDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingDataResponse>;
-  /** CC统计数据查询 */
+  /** {@link DescribeCcData CC统计数据查询}({@link DescribeCcDataRequest 请求参数}): {@link DescribeCcDataResponse 返回参数} */
   DescribeCcData(data: DescribeCcDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcDataResponse>;
-  /** 访问数据查询 */
+  /** {@link DescribeCdnData 访问数据查询}({@link DescribeCdnDataRequest 请求参数}): {@link DescribeCdnDataResponse 返回参数} */
   DescribeCdnData(data: DescribeCdnDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnDataResponse>;
-  /** 日志下载链接查询 */
+  /** {@link DescribeCdnDomainLogs 日志下载链接查询}({@link DescribeCdnDomainLogsRequest 请求参数}): {@link DescribeCdnDomainLogsResponse 返回参数} */
   DescribeCdnDomainLogs(data: DescribeCdnDomainLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnDomainLogsResponse>;
-  /** IP 归属查询 */
+  /** {@link DescribeCdnIp IP 归属查询}({@link DescribeCdnIpRequest 请求参数}): {@link DescribeCdnIpResponse 返回参数} */
   DescribeCdnIp(data: DescribeCdnIpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnIpResponse>;
-  /** 查询回源节点 */
+  /** {@link DescribeCdnOriginIp 查询回源节点}({@link DescribeCdnOriginIpRequest 请求参数}): {@link DescribeCdnOriginIpResponse 返回参数} */
   DescribeCdnOriginIp(data?: DescribeCdnOriginIpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnOriginIpResponse>;
-  /** 获取SSL证书中的可用域名 */
+  /** {@link DescribeCertDomains 获取SSL证书中的可用域名}({@link DescribeCertDomainsRequest 请求参数}): {@link DescribeCertDomainsResponse 返回参数} */
   DescribeCertDomains(data?: DescribeCertDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertDomainsResponse>;
-  /** DDoS统计数据查询 */
+  /** {@link DescribeDDoSData DDoS统计数据查询}({@link DescribeDDoSDataRequest 请求参数}): {@link DescribeDDoSDataResponse 返回参数} */
   DescribeDDoSData(data: DescribeDDoSDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSDataResponse>;
-  /** 获取诊断报告 */
+  /** {@link DescribeDiagnoseReport 获取诊断报告}({@link DescribeDiagnoseReportRequest 请求参数}): {@link DescribeDiagnoseReportResponse 返回参数} */
   DescribeDiagnoseReport(data: DescribeDiagnoseReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiagnoseReportResponse>;
-  /** 地区运营商明细查询 */
+  /** {@link DescribeDistrictIspData 地区运营商明细查询}({@link DescribeDistrictIspDataRequest 请求参数}): {@link DescribeDistrictIspDataResponse 返回参数} */
   DescribeDistrictIspData(data: DescribeDistrictIspDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDistrictIspDataResponse>;
-  /** 查询域名基本信息 */
+  /** {@link DescribeDomains 查询域名基本信息}({@link DescribeDomainsRequest 请求参数}): {@link DescribeDomainsResponse 返回参数} */
   DescribeDomains(data?: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
-  /** 查询域名详细配置 */
+  /** {@link DescribeDomainsConfig 查询域名详细配置}({@link DescribeDomainsConfigRequest 请求参数}): {@link DescribeDomainsConfigResponse 返回参数} */
   DescribeDomainsConfig(data?: DescribeDomainsConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsConfigResponse>;
-  /** 查询事件日志统计曲线 */
+  /** {@link DescribeEventLogData 查询事件日志统计曲线}({@link DescribeEventLogDataRequest 请求参数}): {@link DescribeEventLogDataResponse 返回参数} */
   DescribeEventLogData(data: DescribeEventLogDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventLogDataResponse>;
-  /** 获取图片优化的配置 */
+  /** {@link DescribeImageConfig 获取图片优化的配置}({@link DescribeImageConfigRequest 请求参数}): {@link DescribeImageConfigResponse 返回参数} */
   DescribeImageConfig(data: DescribeImageConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageConfigResponse>;
-  /** 查询域名节点状态 */
+  /** {@link DescribeIpStatus 查询域名节点状态}({@link DescribeIpStatusRequest 请求参数}): {@link DescribeIpStatusResponse 返回参数} */
   DescribeIpStatus(data: DescribeIpStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpStatusResponse>;
-  /** 活跃用户查询 */
+  /** {@link DescribeIpVisit 活跃用户查询}({@link DescribeIpVisitRequest 请求参数}): {@link DescribeIpVisitResponse 返回参数} */
   DescribeIpVisit(data: DescribeIpVisitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpVisitResponse>;
-  /** 省份运营商映射查询 */
+  /** {@link DescribeMapInfo 省份运营商映射查询}({@link DescribeMapInfoRequest 请求参数}): {@link DescribeMapInfoResponse 返回参数} */
   DescribeMapInfo(data: DescribeMapInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMapInfoResponse>;
-  /** 回源数据查询 */
+  /** {@link DescribeOriginData 回源数据查询}({@link DescribeOriginDataRequest 请求参数}): {@link DescribeOriginDataResponse 返回参数} */
   DescribeOriginData(data: DescribeOriginDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginDataResponse>;
-  /** 查询计费方式 */
+  /** {@link DescribePayType 查询计费方式}({@link DescribePayTypeRequest 请求参数}): {@link DescribePayTypeResponse 返回参数} */
   DescribePayType(data?: DescribePayTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePayTypeResponse>;
-  /** 查询刷新用量配额 */
+  /** {@link DescribePurgeQuota 查询刷新用量配额}({@link DescribePurgeQuotaRequest 请求参数}): {@link DescribePurgeQuotaResponse 返回参数} */
   DescribePurgeQuota(data?: DescribePurgeQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeQuotaResponse>;
-  /** 刷新历史查询 */
+  /** {@link DescribePurgeTasks 刷新历史查询}({@link DescribePurgeTasksRequest 请求参数}): {@link DescribePurgeTasksResponse 返回参数} */
   DescribePurgeTasks(data?: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;
-  /** 查询预热用量配额 */
+  /** {@link DescribePushQuota 查询预热用量配额}({@link DescribePushQuotaRequest 请求参数}): {@link DescribePushQuotaResponse 返回参数} */
   DescribePushQuota(data?: DescribePushQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushQuotaResponse>;
-  /** 预热历史查询 */
+  /** {@link DescribePushTasks 预热历史查询}({@link DescribePushTasksRequest 请求参数}): {@link DescribePushTasksResponse 返回参数} */
   DescribePushTasks(data?: DescribePushTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushTasksResponse>;
-  /** 查询报表数据 */
+  /** {@link DescribeReportData 查询报表数据}({@link DescribeReportDataRequest 请求参数}): {@link DescribeReportDataResponse 返回参数} */
   DescribeReportData(data: DescribeReportDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportDataResponse>;
-  /** 获取BOT统计数据列表 */
+  /** {@link DescribeScdnBotData 获取BOT统计数据列表}({@link DescribeScdnBotDataRequest 请求参数}): {@link DescribeScdnBotDataResponse 返回参数} */
   DescribeScdnBotData(data: DescribeScdnBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnBotDataResponse>;
-  /** 查询BOT会话记录列表 */
+  /** {@link DescribeScdnBotRecords 查询BOT会话记录列表}({@link DescribeScdnBotRecordsRequest 请求参数}): {@link DescribeScdnBotRecordsResponse 返回参数} */
   DescribeScdnBotRecords(data: DescribeScdnBotRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnBotRecordsResponse>;
-  /** SCDN域名配置 */
+  /** {@link DescribeScdnConfig SCDN域名配置}({@link DescribeScdnConfigRequest 请求参数}): {@link DescribeScdnConfigResponse 返回参数} */
   DescribeScdnConfig(data: DescribeScdnConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnConfigResponse>;
-  /** 查询SCDN安全防护IP白名单 */
+  /** {@link DescribeScdnIpStrategy 查询SCDN安全防护IP白名单}({@link DescribeScdnIpStrategyRequest 请求参数}): {@link DescribeScdnIpStrategyResponse 返回参数} */
   DescribeScdnIpStrategy(data?: DescribeScdnIpStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnIpStrategyResponse>;
-  /** 获取SCDN的Top数据 */
+  /** {@link DescribeScdnTopData 获取SCDN的Top数据}({@link DescribeScdnTopDataRequest 请求参数}): {@link DescribeScdnTopDataResponse 返回参数} */
   DescribeScdnTopData(data: DescribeScdnTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnTopDataResponse>;
-  /** TOP 新版数据查询（beta版） */
+  /** {@link DescribeTopData TOP 新版数据查询（beta版）}({@link DescribeTopDataRequest 请求参数}): {@link DescribeTopDataResponse 返回参数} */
   DescribeTopData(data: DescribeTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopDataResponse>;
-  /** 流量包查询 */
+  /** {@link DescribeTrafficPackages 流量包查询}({@link DescribeTrafficPackagesRequest 请求参数}): {@link DescribeTrafficPackagesResponse 返回参数} */
   DescribeTrafficPackages(data?: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;
-  /** 违规历史查询 */
+  /** {@link DescribeUrlViolations 违规历史查询}({@link DescribeUrlViolationsRequest 请求参数}): {@link DescribeUrlViolationsResponse 返回参数} */
   DescribeUrlViolations(data?: DescribeUrlViolationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUrlViolationsResponse>;
-  /** Waf统计数据查询 */
+  /** {@link DescribeWafData Waf统计数据查询}({@link DescribeWafDataRequest 请求参数}): {@link DescribeWafDataResponse 返回参数} */
   DescribeWafData(data: DescribeWafDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafDataResponse>;
-  /** 禁用 URL */
+  /** {@link DisableCaches 禁用 URL}({@link DisableCachesRequest 请求参数}): {@link DisableCachesResponse 返回参数} */
   DisableCaches(data: DisableCachesRequest, config?: AxiosRequestConfig): AxiosPromise<DisableCachesResponse>;
-  /** 停止日志主题投递 */
+  /** {@link DisableClsLogTopic 停止日志主题投递}({@link DisableClsLogTopicRequest 请求参数}): {@link DisableClsLogTopicResponse 返回参数} */
   DisableClsLogTopic(data: DisableClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DisableClsLogTopicResponse>;
-  /** 拷贝域名 */
+  /** {@link DuplicateDomainConfig 拷贝域名}({@link DuplicateDomainConfigRequest 请求参数}): {@link DuplicateDomainConfigResponse 返回参数} */
   DuplicateDomainConfig(data: DuplicateDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DuplicateDomainConfigResponse>;
-  /** 解禁 URL */
+  /** {@link EnableCaches 解禁 URL}({@link EnableCachesRequest 请求参数}): {@link EnableCachesResponse 返回参数} */
   EnableCaches(data: EnableCachesRequest, config?: AxiosRequestConfig): AxiosPromise<EnableCachesResponse>;
-  /** 启动日志主题投递 */
+  /** {@link EnableClsLogTopic 启动日志主题投递}({@link EnableClsLogTopicRequest 请求参数}): {@link EnableClsLogTopicResponse 返回参数} */
   EnableClsLogTopic(data: EnableClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<EnableClsLogTopicResponse>;
-  /** 禁用历史查询 */
+  /** {@link GetDisableRecords 禁用历史查询}({@link GetDisableRecordsRequest 请求参数}): {@link GetDisableRecordsResponse 返回参数} */
   GetDisableRecords(data?: GetDisableRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<GetDisableRecordsResponse>;
-  /** 显示日志主题列表 */
+  /** {@link ListClsLogTopics 显示日志主题列表}({@link ListClsLogTopicsRequest 请求参数}): {@link ListClsLogTopicsResponse 返回参数} */
   ListClsLogTopics(data?: ListClsLogTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClsLogTopicsResponse>;
-  /** 获取日志主题下绑定的域名 */
+  /** {@link ListClsTopicDomains 获取日志主题下绑定的域名}({@link ListClsTopicDomainsRequest 请求参数}): {@link ListClsTopicDomainsResponse 返回参数} */
   ListClsTopicDomains(data: ListClsTopicDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClsTopicDomainsResponse>;
-  /** 获取诊断任务列表 */
+  /** {@link ListDiagnoseReport 获取诊断任务列表}({@link ListDiagnoseReportRequest 请求参数}): {@link ListDiagnoseReportResponse 返回参数} */
   ListDiagnoseReport(data?: ListDiagnoseReportRequest, config?: AxiosRequestConfig): AxiosPromise<ListDiagnoseReportResponse>;
-  /** 查询SCDN域名列表 */
+  /** {@link ListScdnDomains 查询SCDN域名列表}({@link ListScdnDomainsRequest 请求参数}): {@link ListScdnDomainsResponse 返回参数} */
   ListScdnDomains(data?: ListScdnDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnDomainsResponse>;
-  /** 查询SCDN日志下载任务列表 */
+  /** {@link ListScdnLogTasks 查询SCDN日志下载任务列表}({@link ListScdnLogTasksRequest 请求参数}): {@link ListScdnLogTasksResponse 返回参数} */
   ListScdnLogTasks(data?: ListScdnLogTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnLogTasksResponse>;
-  /** 获取Bot攻击的Top数据列表 */
+  /** {@link ListScdnTopBotData 获取Bot攻击的Top数据列表}({@link ListScdnTopBotDataRequest 请求参数}): {@link ListScdnTopBotDataResponse 返回参数} */
   ListScdnTopBotData(data: ListScdnTopBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnTopBotDataResponse>;
-  /** 获取Bot攻击的Top信息 */
+  /** {@link ListTopBotData 获取Bot攻击的Top信息}({@link ListTopBotDataRequest 请求参数}): {@link ListTopBotDataResponse 返回参数} */
   ListTopBotData(data: ListTopBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopBotDataResponse>;
-  /** 获取CC攻击Top数据 */
+  /** {@link ListTopCcData 获取CC攻击Top数据}({@link ListTopCcDataRequest 请求参数}): {@link ListTopCcDataResponse 返回参数} */
   ListTopCcData(data: ListTopCcDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopCcDataResponse>;
-  /** 通过CLS日志计算Top信息 */
+  /** {@link ListTopClsLogData 通过CLS日志计算Top信息}({@link ListTopClsLogDataRequest 请求参数}): {@link ListTopClsLogDataResponse 返回参数} */
   ListTopClsLogData(data: ListTopClsLogDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopClsLogDataResponse>;
-  /** 获取DDoS攻击Top数据 */
+  /** {@link ListTopDDoSData 获取DDoS攻击Top数据}({@link ListTopDDoSDataRequest 请求参数}): {@link ListTopDDoSDataResponse 返回参数} */
   ListTopDDoSData(data: ListTopDDoSDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopDDoSDataResponse>;
-  /** TOP 数据查询 */
+  /** {@link ListTopData TOP 数据查询}({@link ListTopDataRequest 请求参数}): {@link ListTopDataResponse 返回参数} */
   ListTopData(data: ListTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopDataResponse>;
-  /** 获取Waf攻击Top数据 */
+  /** {@link ListTopWafData 获取Waf攻击Top数据}({@link ListTopWafDataRequest 请求参数}): {@link ListTopWafDataResponse 返回参数} */
   ListTopWafData(data: ListTopWafDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopWafDataResponse>;
-  /** 管理日志主题下绑定的域名 */
+  /** {@link ManageClsTopicDomains 管理日志主题下绑定的域名}({@link ManageClsTopicDomainsRequest 请求参数}): {@link ManageClsTopicDomainsResponse 返回参数} */
   ManageClsTopicDomains(data: ManageClsTopicDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ManageClsTopicDomainsResponse>;
-  /** 上报定时刷新预热任务执行状态 */
+  /** {@link ModifyPurgeFetchTaskStatus 上报定时刷新预热任务执行状态}({@link ModifyPurgeFetchTaskStatusRequest 请求参数}): {@link ModifyPurgeFetchTaskStatusResponse 返回参数} */
   ModifyPurgeFetchTaskStatus(data: ModifyPurgeFetchTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPurgeFetchTaskStatusResponse>;
-  /** 刷新目录 */
+  /** {@link PurgePathCache 刷新目录}({@link PurgePathCacheRequest 请求参数}): {@link PurgePathCacheResponse 返回参数} */
   PurgePathCache(data: PurgePathCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PurgePathCacheResponse>;
-  /** 刷新 URL */
+  /** {@link PurgeUrlsCache 刷新 URL}({@link PurgeUrlsCacheRequest 请求参数}): {@link PurgeUrlsCacheResponse 返回参数} */
   PurgeUrlsCache(data: PurgeUrlsCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PurgeUrlsCacheResponse>;
-  /** 预热 URL */
+  /** {@link PushUrlsCache 预热 URL}({@link PushUrlsCacheRequest 请求参数}): {@link PushUrlsCacheResponse 返回参数} */
   PushUrlsCache(data: PushUrlsCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PushUrlsCacheResponse>;
-  /** 搜索CLS日志 */
+  /** {@link SearchClsLog 搜索CLS日志}({@link SearchClsLogRequest 请求参数}): {@link SearchClsLogResponse 返回参数} */
   SearchClsLog(data: SearchClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClsLogResponse>;
-  /** 启用加速域名 */
+  /** {@link StartCdnDomain 启用加速域名}({@link StartCdnDomainRequest 请求参数}): {@link StartCdnDomainResponse 返回参数} */
   StartCdnDomain(data: StartCdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StartCdnDomainResponse>;
-  /** 启动SCDN域名安全防护 */
+  /** {@link StartScdnDomain 启动SCDN域名安全防护}({@link StartScdnDomainRequest 请求参数}): {@link StartScdnDomainResponse 返回参数} */
   StartScdnDomain(data: StartScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StartScdnDomainResponse>;
-  /** 停用加速域名 */
+  /** {@link StopCdnDomain 停用加速域名}({@link StopCdnDomainRequest 请求参数}): {@link StopCdnDomainResponse 返回参数} */
   StopCdnDomain(data: StopCdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StopCdnDomainResponse>;
-  /** 停止SCDN域名安全防护 */
+  /** {@link StopScdnDomain 停止SCDN域名安全防护}({@link StopScdnDomainRequest 请求参数}): {@link StopScdnDomainResponse 返回参数} */
   StopScdnDomain(data: StopScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StopScdnDomainResponse>;
-  /** 更新加速域名配置 */
+  /** {@link UpdateDomainConfig 更新加速域名配置}({@link UpdateDomainConfigRequest 请求参数}): {@link UpdateDomainConfigResponse 返回参数} */
   UpdateDomainConfig(data: UpdateDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDomainConfigResponse>;
-  /** 更新图片优化配置 */
+  /** {@link UpdateImageConfig 更新图片优化配置}({@link UpdateImageConfigRequest 请求参数}): {@link UpdateImageConfigResponse 返回参数} */
   UpdateImageConfig(data: UpdateImageConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateImageConfigResponse>;
-  /** 修改计费类型 */
+  /** {@link UpdatePayType 修改计费类型}({@link UpdatePayTypeRequest 请求参数}): {@link UpdatePayTypeResponse 返回参数} */
   UpdatePayType(data: UpdatePayTypeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePayTypeResponse>;
-  /** 更新SCDN域名配置 */
+  /** {@link UpdateScdnDomain 更新SCDN域名配置}({@link UpdateScdnDomainRequest 请求参数}): {@link UpdateScdnDomainResponse 返回参数} */
   UpdateScdnDomain(data: UpdateScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateScdnDomainResponse>;
-  /** 验证域名解析 */
+  /** {@link VerifyDomainRecord 验证域名解析}({@link VerifyDomainRecordRequest 请求参数}): {@link VerifyDomainRecordResponse 返回参数} */
   VerifyDomainRecord(data: VerifyDomainRecordRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyDomainRecordResponse>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   TcbCheckResource(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;

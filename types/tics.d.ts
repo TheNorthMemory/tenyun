@@ -166,16 +166,16 @@ declare interface DescribeThreatInfoResponse {
   RequestId?: string;
 }
 
-/** [威胁情报云查服务](https://cloud.tencent.com/document/product/1013) */
+/** {@link Tics 威胁情报云查服务} */
 declare interface Tics {
   (): Versions;
-  /** 查询域名信誉 */
+  /** {@link DescribeDomainInfo 查询域名信誉}({@link DescribeDomainInfoRequest 请求参数}): {@link DescribeDomainInfoResponse 返回参数} */
   DescribeDomainInfo(data: DescribeDomainInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainInfoResponse>;
-  /** 查询文件信誉 */
+  /** {@link DescribeFileInfo 查询文件信誉}({@link DescribeFileInfoRequest 请求参数}): {@link DescribeFileInfoResponse 返回参数} */
   DescribeFileInfo(data: DescribeFileInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileInfoResponse>;
-  /** 查询IP信誉 */
+  /** {@link DescribeIpInfo 查询IP信誉}({@link DescribeIpInfoRequest 请求参数}): {@link DescribeIpInfoResponse 返回参数} */
   DescribeIpInfo(data: DescribeIpInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpInfoResponse>;
-  /** 查询威胁情报 */
+  /** {@link DescribeThreatInfo 查询威胁情报}({@link DescribeThreatInfoRequest 请求参数}): {@link DescribeThreatInfoResponse 返回参数} */
   DescribeThreatInfo(data: DescribeThreatInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThreatInfoResponse>;
 }
 

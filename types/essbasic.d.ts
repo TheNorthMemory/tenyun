@@ -52,7 +52,7 @@ declare interface CcInfo {
 declare interface Component {
   /** 控件编号注：当GenerateMode=3时，通过"^"来决定是否使用关键字整词匹配能力。例：当GenerateMode=3时，如果传入关键字"^甲方签署^"，则会在PDF文件中有且仅有"甲方签署"关键字的地方进行对应操作。如传入的关键字为"甲方签署"，则PDF文件中每个出现关键字的位置都会执行相应操作。创建控件时，此值为空查询时返回完整结构 */
   ComponentId?: string;
-  /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件；MULTI_LINE_TEXT - 多行文本控件；CHECK_BOX - 勾选框控件；FILL_IMAGE - 图片控件；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件；SELECTOR - 选择器控件；如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；表单域的控件不能作为印章和签名控件 */
+  /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件；MULTI_LINE_TEXT - 多行文本控件；CHECK_BOX - 勾选框控件；FILL_IMAGE - 图片控件；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件；SELECTOR - 选择器控件；DATE - 日期控件；默认是格式化为xxxx年xx月xx日如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight表单域的控件不能作为印章和签名控件 */
   ComponentType?: string;
   /** 控件简称，不能超过30个字符 */
   ComponentName?: string;
@@ -76,7 +76,7 @@ declare interface Component {
   ComponentPosY?: number;
   /** 参数控件样式，json格式表述不同类型的控件会有部分非通用参数TEXT/MULTI_LINE_TEXT控件可以指定1 Font：目前只支持黑体、宋体2 FontSize： 范围12-723 FontAlign： Left/Right/Center，左对齐/居中/右对齐例如：{"FontSize":12} */
   ComponentExtra?: string;
-  /** 控件填充vaule，ComponentType和传入值类型对应关系：TEXT - 文本内容MULTI_LINE_TEXT - 文本内容CHECK_BOX - true/falseFILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取SELECTOR - 选项值DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525 */
+  /** 控件填充vaule，ComponentType和传入值类型对应关系：TEXT - 文本内容MULTI_LINE_TEXT - 文本内容CHECK_BOX - true/falseFILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取SELECTOR - 选项值DATE - 默认是格式化为xxxx年xx月xx日DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525 */
   ComponentValue?: string;
   /** 日期签署控件的字号，默认为 12签署区日期控件会转换成图片格式并带存证，需要通过字体决定图片大小 */
   ComponentDateFontSize?: number;
@@ -2662,166 +2662,166 @@ declare namespace V20201222 {
   }
 }
 
-/** [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) */
+/** {@link Essbasic 腾讯电子签（基础版）} */
 declare interface Essbasic {
   (): Versions;
-  /** 电子签渠道版-根据签署流程id批量撤销合同 */
+  /** {@link ChannelBatchCancelFlows 电子签渠道版-根据签署流程id批量撤销合同}({@link ChannelBatchCancelFlowsRequest 请求参数}): {@link ChannelBatchCancelFlowsResponse 返回参数} */
   ChannelBatchCancelFlows(data: ChannelBatchCancelFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelBatchCancelFlowsResponse>;
-  /** 渠道版撤销签署流程 */
+  /** {@link ChannelCancelFlow 渠道版撤销签署流程}({@link ChannelCancelFlowRequest 请求参数}): {@link ChannelCancelFlowResponse 返回参数} */
   ChannelCancelFlow(data: ChannelCancelFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelFlowResponse>;
-  /** 取消一码多扫二维码 */
+  /** {@link ChannelCancelMultiFlowSignQRCode 取消一码多扫二维码}({@link ChannelCancelMultiFlowSignQRCodeRequest 请求参数}): {@link ChannelCancelMultiFlowSignQRCodeResponse 返回参数} */
   ChannelCancelMultiFlowSignQRCode(data: ChannelCancelMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelMultiFlowSignQRCodeResponse>;
-  /** 电子签渠道版-根据签署流程id创建批量撤销url */
+  /** {@link ChannelCreateBatchCancelFlowUrl 电子签渠道版-根据签署流程id创建批量撤销url}({@link ChannelCreateBatchCancelFlowUrlRequest 请求参数}): {@link ChannelCreateBatchCancelFlowUrlResponse 返回参数} */
   ChannelCreateBatchCancelFlowUrl(data: ChannelCreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBatchCancelFlowUrlResponse>;
-  /** 渠道创建文件转换任务 */
+  /** {@link ChannelCreateConvertTaskApi 渠道创建文件转换任务}({@link ChannelCreateConvertTaskApiRequest 请求参数}): {@link ChannelCreateConvertTaskApiResponse 返回参数} */
   ChannelCreateConvertTaskApi(data: ChannelCreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateConvertTaskApiResponse>;
-  /** 渠道版通过文件创建签署流程 */
+  /** {@link ChannelCreateFlowByFiles 渠道版通过文件创建签署流程}({@link ChannelCreateFlowByFilesRequest 请求参数}): {@link ChannelCreateFlowByFilesResponse 返回参数} */
   ChannelCreateFlowByFiles(data?: ChannelCreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowByFilesResponse>;
-  /** 通过多文件创建合同组签署流程 */
+  /** {@link ChannelCreateFlowGroupByFiles 通过多文件创建合同组签署流程}({@link ChannelCreateFlowGroupByFilesRequest 请求参数}): {@link ChannelCreateFlowGroupByFilesResponse 返回参数} */
   ChannelCreateFlowGroupByFiles(data: ChannelCreateFlowGroupByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowGroupByFilesResponse>;
-  /** 提交企业签署流程审批结果 */
+  /** {@link ChannelCreateFlowSignReview 提交企业签署流程审批结果}({@link ChannelCreateFlowSignReviewRequest 请求参数}): {@link ChannelCreateFlowSignReviewResponse 返回参数} */
   ChannelCreateFlowSignReview(data: ChannelCreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowSignReviewResponse>;
-  /** 创建一码多扫签署流程二维码 */
+  /** {@link ChannelCreateMultiFlowSignQRCode 创建一码多扫签署流程二维码}({@link ChannelCreateMultiFlowSignQRCodeRequest 请求参数}): {@link ChannelCreateMultiFlowSignQRCodeResponse 返回参数} */
   ChannelCreateMultiFlowSignQRCode(data: ChannelCreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateMultiFlowSignQRCodeResponse>;
-  /** 查询企业员工 */
+  /** {@link ChannelDescribeEmployees 查询企业员工}({@link ChannelDescribeEmployeesRequest 请求参数}): {@link ChannelDescribeEmployeesResponse 返回参数} */
   ChannelDescribeEmployees(data: ChannelDescribeEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeEmployeesResponse>;
-  /** 渠道版查询转换任务状态 */
+  /** {@link ChannelGetTaskResultApi 渠道版查询转换任务状态}({@link ChannelGetTaskResultApiRequest 请求参数}): {@link ChannelGetTaskResultApiResponse 返回参数} */
   ChannelGetTaskResultApi(data: ChannelGetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelGetTaskResultApiResponse>;
-  /** 合同文件验签 */
+  /** {@link ChannelVerifyPdf 合同文件验签}({@link ChannelVerifyPdfRequest 请求参数}): {@link ChannelVerifyPdfResponse 返回参数} */
   ChannelVerifyPdf(data: ChannelVerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelVerifyPdfResponse>;
-  /** 生成控制台链接 */
+  /** {@link CreateConsoleLoginUrl 生成控制台链接}({@link CreateConsoleLoginUrlRequest 请求参数}): {@link CreateConsoleLoginUrlResponse 返回参数} */
   CreateConsoleLoginUrl(data: CreateConsoleLoginUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleLoginUrlResponse>;
-  /** 使用多个模板批量创建签署流程 */
+  /** {@link CreateFlowsByTemplates 使用多个模板批量创建签署流程}({@link CreateFlowsByTemplatesRequest 请求参数}): {@link CreateFlowsByTemplatesResponse 返回参数} */
   CreateFlowsByTemplates(data: CreateFlowsByTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowsByTemplatesResponse>;
-  /** 渠道通过图片为子客代创建印章 */
+  /** {@link CreateSealByImage 渠道通过图片为子客代创建印章}({@link CreateSealByImageRequest 请求参数}): {@link CreateSealByImageResponse 返回参数} */
   CreateSealByImage(data: CreateSealByImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealByImageResponse>;
-  /** 获取跳转小程序查看或签署链接 */
+  /** {@link CreateSignUrls 获取跳转小程序查看或签署链接}({@link CreateSignUrlsRequest 请求参数}): {@link CreateSignUrlsResponse 返回参数} */
   CreateSignUrls(data: CreateSignUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignUrlsResponse>;
-  /** 查询合同(签署流程)的详细信息 */
+  /** {@link DescribeFlowDetailInfo 查询合同(签署流程)的详细信息}({@link DescribeFlowDetailInfoRequest 请求参数}): {@link DescribeFlowDetailInfoResponse 返回参数} */
   DescribeFlowDetailInfo(data: DescribeFlowDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowDetailInfoResponse>;
-  /** 根据签署流程信息批量获取资源下载链接 */
+  /** {@link DescribeResourceUrlsByFlows 根据签署流程信息批量获取资源下载链接}({@link DescribeResourceUrlsByFlowsRequest 请求参数}): {@link DescribeResourceUrlsByFlowsResponse 返回参数} */
   DescribeResourceUrlsByFlows(data: DescribeResourceUrlsByFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceUrlsByFlowsResponse>;
-  /** 查询模板信息列表 */
+  /** {@link DescribeTemplates 查询模板信息列表}({@link DescribeTemplatesRequest 请求参数}): {@link DescribeTemplatesResponse 返回参数} */
   DescribeTemplates(data: DescribeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplatesResponse>;
-  /** 渠道用量查询 */
+  /** {@link DescribeUsage 渠道用量查询}({@link DescribeUsageRequest 请求参数}): {@link DescribeUsageResponse 返回参数} */
   DescribeUsage(data: DescribeUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageResponse>;
-  /** 获取合同（流程）批量下载链接 */
+  /** {@link GetDownloadFlowUrl 获取合同（流程）批量下载链接}({@link GetDownloadFlowUrlRequest 请求参数}): {@link GetDownloadFlowUrlResponse 返回参数} */
   GetDownloadFlowUrl(data: GetDownloadFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetDownloadFlowUrlResponse>;
-  /** 操作渠道模板 */
+  /** {@link OperateChannelTemplate 操作渠道模板}({@link OperateChannelTemplateRequest 请求参数}): {@link OperateChannelTemplateResponse 返回参数} */
   OperateChannelTemplate(data: OperateChannelTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<OperateChannelTemplateResponse>;
-  /** 准备待发起文件 */
+  /** {@link PrepareFlows 准备待发起文件}({@link PrepareFlowsRequest 请求参数}): {@link PrepareFlowsResponse 返回参数} */
   PrepareFlows(data: PrepareFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<PrepareFlowsResponse>;
-  /** 同步企业信息 */
+  /** {@link SyncProxyOrganization 同步企业信息}({@link SyncProxyOrganizationRequest 请求参数}): {@link SyncProxyOrganizationResponse 返回参数} */
   SyncProxyOrganization(data: SyncProxyOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<SyncProxyOrganizationResponse>;
-  /** 同步企业经办人列表 */
+  /** {@link SyncProxyOrganizationOperators 同步企业经办人列表}({@link SyncProxyOrganizationOperatorsRequest 请求参数}): {@link SyncProxyOrganizationOperatorsResponse 返回参数} */
   SyncProxyOrganizationOperators(data: SyncProxyOrganizationOperatorsRequest, config?: AxiosRequestConfig): AxiosPromise<SyncProxyOrganizationOperatorsResponse>;
-  /** 文件上传 */
+  /** {@link UploadFiles 文件上传}({@link UploadFilesRequest 请求参数}): {@link UploadFilesResponse 返回参数} */
   UploadFiles(data: UploadFilesRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFilesResponse>;
-  /** 归档流程 */
+  /** {@link V20201222.ArchiveFlow 归档流程}({@link V20201222.ArchiveFlowRequest 请求参数}): {@link V20201222.ArchiveFlowResponse 返回参数} */
   ArchiveFlow(data: V20201222.ArchiveFlowRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.ArchiveFlowResponse>;
-  /** 撤销流程 */
+  /** {@link V20201222.CancelFlow 撤销流程}({@link V20201222.CancelFlowRequest 请求参数}): {@link V20201222.CancelFlowResponse 返回参数} */
   CancelFlow(data: V20201222.CancelFlowRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CancelFlowResponse>;
-  /** 银行卡二要素检测 */
+  /** {@link V20201222.CheckBankCard2EVerification 银行卡二要素检测}({@link V20201222.CheckBankCard2EVerificationRequest 请求参数}): {@link V20201222.CheckBankCard2EVerificationResponse 返回参数} */
   CheckBankCard2EVerification(data: V20201222.CheckBankCard2EVerificationRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckBankCard2EVerificationResponse>;
-  /** 银行卡三要素检测 */
+  /** {@link V20201222.CheckBankCard3EVerification 银行卡三要素检测}({@link V20201222.CheckBankCard3EVerificationRequest 请求参数}): {@link V20201222.CheckBankCard3EVerificationResponse 返回参数} */
   CheckBankCard3EVerification(data: V20201222.CheckBankCard3EVerificationRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckBankCard3EVerificationResponse>;
-  /** 银行卡四要素检测 */
+  /** {@link V20201222.CheckBankCard4EVerification 银行卡四要素检测}({@link V20201222.CheckBankCard4EVerificationRequest 请求参数}): {@link V20201222.CheckBankCard4EVerificationResponse 返回参数} */
   CheckBankCard4EVerification(data: V20201222.CheckBankCard4EVerificationRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckBankCard4EVerificationResponse>;
-  /** 银行卡二三四要素检测 */
+  /** {@link V20201222.CheckBankCardVerification 银行卡二三四要素检测}({@link V20201222.CheckBankCardVerificationRequest 请求参数}): {@link V20201222.CheckBankCardVerificationResponse 返回参数} */
   CheckBankCardVerification(data: V20201222.CheckBankCardVerificationRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckBankCardVerificationResponse>;
-  /** 检测人脸核身结果 */
+  /** {@link V20201222.CheckFaceIdentify 检测人脸核身结果}({@link V20201222.CheckFaceIdentifyRequest 请求参数}): {@link V20201222.CheckFaceIdentifyResponse 返回参数} */
   CheckFaceIdentify(data: V20201222.CheckFaceIdentifyRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckFaceIdentifyResponse>;
-  /** 身份证核验 */
+  /** {@link V20201222.CheckIdCardVerification 身份证核验}({@link V20201222.CheckIdCardVerificationRequest 请求参数}): {@link V20201222.CheckIdCardVerificationResponse 返回参数} */
   CheckIdCardVerification(data: V20201222.CheckIdCardVerificationRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckIdCardVerificationResponse>;
-  /** 手机号二要素核验 */
+  /** {@link V20201222.CheckMobileAndName 手机号二要素核验}({@link V20201222.CheckMobileAndNameRequest 请求参数}): {@link V20201222.CheckMobileAndNameResponse 返回参数} */
   CheckMobileAndName(data: V20201222.CheckMobileAndNameRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckMobileAndNameResponse>;
-  /** 手机号三要素核验 */
+  /** {@link V20201222.CheckMobileVerification 手机号三要素核验}({@link V20201222.CheckMobileVerificationRequest 请求参数}): {@link V20201222.CheckMobileVerificationResponse 返回参数} */
   CheckMobileVerification(data: V20201222.CheckMobileVerificationRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckMobileVerificationResponse>;
-  /** 确认验证码 */
+  /** {@link V20201222.CheckVerifyCodeMatchFlowId 确认验证码}({@link V20201222.CheckVerifyCodeMatchFlowIdRequest 请求参数}): {@link V20201222.CheckVerifyCodeMatchFlowIdResponse 返回参数} */
   CheckVerifyCodeMatchFlowId(data: V20201222.CheckVerifyCodeMatchFlowIdRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckVerifyCodeMatchFlowIdResponse>;
-  /** 生成慧眼API签名 */
+  /** {@link V20201222.CreateFaceIdSign 生成慧眼API签名}({@link V20201222.CreateFaceIdSignRequest 请求参数}): {@link V20201222.CreateFaceIdSignResponse 返回参数} */
   CreateFaceIdSign(data: V20201222.CreateFaceIdSignRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateFaceIdSignResponse>;
-  /** 用PDF文件创建流程 */
+  /** {@link V20201222.CreateFlowByFiles 用PDF文件创建流程}({@link V20201222.CreateFlowByFilesRequest 请求参数}): {@link V20201222.CreateFlowByFilesResponse 返回参数} */
   CreateFlowByFiles(data: V20201222.CreateFlowByFilesRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateFlowByFilesResponse>;
-  /** 获取慧眼H5人脸核身Url */
+  /** {@link V20201222.CreateH5FaceIdUrl 获取慧眼H5人脸核身Url}({@link V20201222.CreateH5FaceIdUrlRequest 请求参数}): {@link V20201222.CreateH5FaceIdUrlResponse 返回参数} */
   CreateH5FaceIdUrl(data: V20201222.CreateH5FaceIdUrlRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateH5FaceIdUrlResponse>;
-  /** 生成预览签署URL */
+  /** {@link V20201222.CreatePreviewSignUrl 生成预览签署URL}({@link V20201222.CreatePreviewSignUrlRequest 请求参数}): {@link V20201222.CreatePreviewSignUrlResponse 返回参数} */
   CreatePreviewSignUrl(data: V20201222.CreatePreviewSignUrlRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreatePreviewSignUrlResponse>;
-  /** 创建印章 */
+  /** {@link V20201222.CreateSeal 创建印章}({@link V20201222.CreateSealRequest 请求参数}): {@link V20201222.CreateSealResponse 返回参数} */
   CreateSeal(data: V20201222.CreateSealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateSealResponse>;
-  /** 流程静默签署 */
+  /** {@link V20201222.CreateServerFlowSign 流程静默签署}({@link V20201222.CreateServerFlowSignRequest 请求参数}): {@link V20201222.CreateServerFlowSignResponse 返回参数} */
   CreateServerFlowSign(data: V20201222.CreateServerFlowSignRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateServerFlowSignResponse>;
-  /** 生成签署URL */
+  /** {@link V20201222.CreateSignUrl 生成签署URL}({@link V20201222.CreateSignUrlRequest 请求参数}): {@link V20201222.CreateSignUrlResponse 返回参数} */
   CreateSignUrl(data: V20201222.CreateSignUrlRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateSignUrlResponse>;
-  /** 注册子机构 */
+  /** {@link V20201222.CreateSubOrganization 注册子机构}({@link V20201222.CreateSubOrganizationRequest 请求参数}): {@link V20201222.CreateSubOrganizationResponse 返回参数} */
   CreateSubOrganization(data: V20201222.CreateSubOrganizationRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateSubOrganizationResponse>;
-  /** 注册实名子机构并生成印章 */
+  /** {@link V20201222.CreateSubOrganizationAndSeal 注册实名子机构并生成印章}({@link V20201222.CreateSubOrganizationAndSealRequest 请求参数}): {@link V20201222.CreateSubOrganizationAndSealResponse 返回参数} */
   CreateSubOrganizationAndSeal(data: V20201222.CreateSubOrganizationAndSealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateSubOrganizationAndSealResponse>;
-  /** 注册个人用户 */
+  /** {@link V20201222.CreateUser 注册个人用户}({@link V20201222.CreateUserRequest 请求参数}): {@link V20201222.CreateUserResponse 返回参数} */
   CreateUser(data: V20201222.CreateUserRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateUserResponse>;
-  /** 注册实名个人用户并生成签名 */
+  /** {@link V20201222.CreateUserAndSeal 注册实名个人用户并生成签名}({@link V20201222.CreateUserAndSealRequest 请求参数}): {@link V20201222.CreateUserAndSealResponse 返回参数} */
   CreateUserAndSeal(data: V20201222.CreateUserAndSealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateUserAndSealResponse>;
-  /** 删除印章 */
+  /** {@link V20201222.DeleteSeal 删除印章}({@link V20201222.DeleteSealRequest 请求参数}): {@link V20201222.DeleteSealResponse 返回参数} */
   DeleteSeal(data: V20201222.DeleteSealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DeleteSealResponse>;
-  /** 拉取流程目录参与者的信息 */
+  /** {@link V20201222.DescribeCatalogApprovers 拉取流程目录参与者的信息}({@link V20201222.DescribeCatalogApproversRequest 请求参数}): {@link V20201222.DescribeCatalogApproversResponse 返回参数} */
   DescribeCatalogApprovers(data: V20201222.DescribeCatalogApproversRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeCatalogApproversResponse>;
-  /** 拉取目录签署区 */
+  /** {@link V20201222.DescribeCatalogSignComponents 拉取目录签署区}({@link V20201222.DescribeCatalogSignComponentsRequest 请求参数}): {@link V20201222.DescribeCatalogSignComponentsResponse 返回参数} */
   DescribeCatalogSignComponents(data: V20201222.DescribeCatalogSignComponentsRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeCatalogSignComponentsResponse>;
-  /** 根据用户自定义id查询流程id */
+  /** {@link V20201222.DescribeCustomFlowIds 根据用户自定义id查询流程id}({@link V20201222.DescribeCustomFlowIdsRequest 请求参数}): {@link V20201222.DescribeCustomFlowIdsResponse 返回参数} */
   DescribeCustomFlowIds(data: V20201222.DescribeCustomFlowIdsRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeCustomFlowIdsResponse>;
-  /** 根据流程id反查自定义流程id */
+  /** {@link V20201222.DescribeCustomFlowIdsByFlowId 根据流程id反查自定义流程id}({@link V20201222.DescribeCustomFlowIdsByFlowIdRequest 请求参数}): {@link V20201222.DescribeCustomFlowIdsByFlowIdResponse 返回参数} */
   DescribeCustomFlowIdsByFlowId(data: V20201222.DescribeCustomFlowIdsByFlowIdRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeCustomFlowIdsByFlowIdResponse>;
-  /** 查询慧眼人脸核身照片 */
+  /** {@link V20201222.DescribeFaceIdPhotos 查询慧眼人脸核身照片}({@link V20201222.DescribeFaceIdPhotosRequest 请求参数}): {@link V20201222.DescribeFaceIdPhotosResponse 返回参数} */
   DescribeFaceIdPhotos(data: V20201222.DescribeFaceIdPhotosRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeFaceIdPhotosResponse>;
-  /** 获取慧眼人脸核身结果 */
+  /** {@link V20201222.DescribeFaceIdResults 获取慧眼人脸核身结果}({@link V20201222.DescribeFaceIdResultsRequest 请求参数}): {@link V20201222.DescribeFaceIdResultsResponse 返回参数} */
   DescribeFaceIdResults(data: V20201222.DescribeFaceIdResultsRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeFaceIdResultsResponse>;
-  /** 根据用户自定义id查询文件id */
+  /** {@link V20201222.DescribeFileIdsByCustomIds 根据用户自定义id查询文件id}({@link V20201222.DescribeFileIdsByCustomIdsRequest 请求参数}): {@link V20201222.DescribeFileIdsByCustomIdsResponse 返回参数} */
   DescribeFileIdsByCustomIds(data: V20201222.DescribeFileIdsByCustomIdsRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeFileIdsByCustomIdsResponse>;
-  /** 查询文件下载链接 */
+  /** {@link V20201222.DescribeFileUrls 查询文件下载链接}({@link V20201222.DescribeFileUrlsRequest 请求参数}): {@link V20201222.DescribeFileUrlsResponse 返回参数} */
   DescribeFileUrls(data: V20201222.DescribeFileUrlsRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeFileUrlsResponse>;
-  /** 查询流程信息 */
+  /** {@link V20201222.DescribeFlow 查询流程信息}({@link V20201222.DescribeFlowRequest 请求参数}): {@link V20201222.DescribeFlowResponse 返回参数} */
   DescribeFlow(data: V20201222.DescribeFlowRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeFlowResponse>;
-  /** 查询流程参与者信息 */
+  /** {@link V20201222.DescribeFlowApprovers 查询流程参与者信息}({@link V20201222.DescribeFlowApproversRequest 请求参数}): {@link V20201222.DescribeFlowApproversResponse 返回参数} */
   DescribeFlowApprovers(data: V20201222.DescribeFlowApproversRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeFlowApproversResponse>;
-  /** 查询流程文件 */
+  /** {@link V20201222.DescribeFlowFiles 查询流程文件}({@link V20201222.DescribeFlowFilesRequest 请求参数}): {@link V20201222.DescribeFlowFilesResponse 返回参数} */
   DescribeFlowFiles(data: V20201222.DescribeFlowFilesRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeFlowFilesResponse>;
-  /** 查询电子印章 */
+  /** {@link V20201222.DescribeSeals 查询电子印章}({@link V20201222.DescribeSealsRequest 请求参数}): {@link V20201222.DescribeSealsResponse 返回参数} */
   DescribeSeals(data: V20201222.DescribeSealsRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeSealsResponse>;
-  /** 查询子机构信息 */
+  /** {@link V20201222.DescribeSubOrganizations 查询子机构信息}({@link V20201222.DescribeSubOrganizationsRequest 请求参数}): {@link V20201222.DescribeSubOrganizationsResponse 返回参数} */
   DescribeSubOrganizations(data: V20201222.DescribeSubOrganizationsRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeSubOrganizationsResponse>;
-  /** 查询个人用户信息 */
+  /** {@link V20201222.DescribeUsers 查询个人用户信息}({@link V20201222.DescribeUsersRequest 请求参数}): {@link V20201222.DescribeUsersResponse 返回参数} */
   DescribeUsers(data: V20201222.DescribeUsersRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeUsersResponse>;
-  /** 销毁流程文件 */
+  /** {@link V20201222.DestroyFlowFile 销毁流程文件}({@link V20201222.DestroyFlowFileRequest 请求参数}): {@link V20201222.DestroyFlowFileResponse 返回参数} */
   DestroyFlowFile(data: V20201222.DestroyFlowFileRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DestroyFlowFileResponse>;
-  /** 生成企业电子印章 */
+  /** {@link V20201222.GenerateOrganizationSeal 生成企业电子印章}({@link V20201222.GenerateOrganizationSealRequest 请求参数}): {@link V20201222.GenerateOrganizationSealResponse 返回参数} */
   GenerateOrganizationSeal(data: V20201222.GenerateOrganizationSealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.GenerateOrganizationSealResponse>;
-  /** 生成个人电子签名 */
+  /** {@link V20201222.GenerateUserSeal 生成个人电子签名}({@link V20201222.GenerateUserSealRequest 请求参数}): {@link V20201222.GenerateUserSealResponse 返回参数} */
   GenerateUserSeal(data: V20201222.GenerateUserSealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.GenerateUserSealResponse>;
-  /** 修改企业默认印章 */
+  /** {@link V20201222.ModifyOrganizationDefaultSeal 修改企业默认印章}({@link V20201222.ModifyOrganizationDefaultSealRequest 请求参数}): {@link V20201222.ModifyOrganizationDefaultSealResponse 返回参数} */
   ModifyOrganizationDefaultSeal(data: V20201222.ModifyOrganizationDefaultSealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.ModifyOrganizationDefaultSealResponse>;
-  /** 更新电子印章 */
+  /** {@link V20201222.ModifySeal 更新电子印章}({@link V20201222.ModifySealRequest 请求参数}): {@link V20201222.ModifySealResponse 返回参数} */
   ModifySeal(data: V20201222.ModifySealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.ModifySealResponse>;
-  /** 更新子机构信息 */
+  /** {@link V20201222.ModifySubOrganizationInfo 更新子机构信息}({@link V20201222.ModifySubOrganizationInfoRequest 请求参数}): {@link V20201222.ModifySubOrganizationInfoResponse 返回参数} */
   ModifySubOrganizationInfo(data: V20201222.ModifySubOrganizationInfoRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.ModifySubOrganizationInfoResponse>;
-  /** 更新个人用户信息 */
+  /** {@link V20201222.ModifyUser 更新个人用户信息}({@link V20201222.ModifyUserRequest 请求参数}): {@link V20201222.ModifyUserResponse 返回参数} */
   ModifyUser(data: V20201222.ModifyUserRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.ModifyUserResponse>;
-  /** 修改个人默认印章 */
+  /** {@link V20201222.ModifyUserDefaultSeal 修改个人默认印章}({@link V20201222.ModifyUserDefaultSealRequest 请求参数}): {@link V20201222.ModifyUserDefaultSealResponse 返回参数} */
   ModifyUserDefaultSeal(data: V20201222.ModifyUserDefaultSealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.ModifyUserDefaultSealResponse>;
-  /** 拒签流程 */
+  /** {@link V20201222.RejectFlow 拒签流程}({@link V20201222.RejectFlowRequest 请求参数}): {@link V20201222.RejectFlowResponse 返回参数} */
   RejectFlow(data: V20201222.RejectFlowRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.RejectFlowResponse>;
-  /** 发送流程 */
+  /** {@link V20201222.SendFlow 发送流程}({@link V20201222.SendFlowRequest 请求参数}): {@link V20201222.SendFlowResponse 返回参数} */
   SendFlow(data: V20201222.SendFlowRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.SendFlowResponse>;
-  /** 发送流程并生成签署URL */
+  /** {@link V20201222.SendFlowUrl 发送流程并生成签署URL}({@link V20201222.SendFlowUrlRequest 请求参数}): {@link V20201222.SendFlowUrlResponse 返回参数} */
   SendFlowUrl(data: V20201222.SendFlowUrlRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.SendFlowUrlResponse>;
-  /** 发送签署验证码 */
+  /** {@link V20201222.SendSignInnerVerifyCode 发送签署验证码}({@link V20201222.SendSignInnerVerifyCodeRequest 请求参数}): {@link V20201222.SendSignInnerVerifyCodeResponse 返回参数} */
   SendSignInnerVerifyCode(data: V20201222.SendSignInnerVerifyCodeRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.SendSignInnerVerifyCodeResponse>;
-  /** 签署流程 */
+  /** {@link V20201222.SignFlow 签署流程}({@link V20201222.SignFlowRequest 请求参数}): {@link V20201222.SignFlowResponse 返回参数} */
   SignFlow(data: V20201222.SignFlowRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.SignFlowResponse>;
-  /** 文件上传 */
+  /** {@link V20201222.UploadFiles 文件上传}({@link V20201222.UploadFilesRequest 请求参数}): {@link V20201222.UploadFilesResponse 返回参数} */
   UploadFiles(data: V20201222.UploadFilesRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.UploadFilesResponse>;
-  /** 子机构通过实名认证 */
+  /** {@link V20201222.VerifySubOrganization 子机构通过实名认证}({@link V20201222.VerifySubOrganizationRequest 请求参数}): {@link V20201222.VerifySubOrganizationResponse 返回参数} */
   VerifySubOrganization(data: V20201222.VerifySubOrganizationRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.VerifySubOrganizationResponse>;
-  /** 个人用户通过实名认证 */
+  /** {@link V20201222.VerifyUser 个人用户通过实名认证}({@link V20201222.VerifyUserRequest 请求参数}): {@link V20201222.VerifyUserResponse 返回参数} */
   VerifyUser(data: V20201222.VerifyUserRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.VerifyUserResponse>;
 }
 

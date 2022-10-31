@@ -410,44 +410,44 @@ declare interface UpdateAuditResponse {
   RequestId?: string;
 }
 
-/** [云审计](https://cloud.tencent.com/document/product/629) */
+/** {@link Cloudaudit 云审计} */
 declare interface Cloudaudit {
   (): Versions;
-  /** 创建跟踪集 */
+  /** {@link CreateAudit 创建跟踪集}({@link CreateAuditRequest 请求参数}): {@link CreateAuditResponse 返回参数} */
   CreateAudit(data: CreateAuditRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditResponse>;
-  /** 创建云审计跟踪集 */
+  /** {@link CreateAuditTrack 创建云审计跟踪集}({@link CreateAuditTrackRequest 请求参数}): {@link CreateAuditTrackResponse 返回参数} */
   CreateAuditTrack(data?: CreateAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditTrackResponse>;
-  /** 删除跟踪集 */
+  /** {@link DeleteAudit 删除跟踪集}({@link DeleteAuditRequest 请求参数}): {@link DeleteAuditResponse 返回参数} */
   DeleteAudit(data: DeleteAuditRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditResponse>;
-  /** 删除云审计跟踪集 */
+  /** {@link DeleteAuditTrack 删除云审计跟踪集}({@link DeleteAuditTrackRequest 请求参数}): {@link DeleteAuditTrackResponse 返回参数} */
   DeleteAuditTrack(data?: DeleteAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditTrackResponse>;
-  /** 查询跟踪集详情 */
+  /** {@link DescribeAudit 查询跟踪集详情}({@link DescribeAuditRequest 请求参数}): {@link DescribeAuditResponse 返回参数} */
   DescribeAudit(data: DescribeAuditRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditResponse>;
-  /** 查询云审计跟踪集列表 */
+  /** {@link DescribeAuditTracks 查询云审计跟踪集列表}({@link DescribeAuditTracksRequest 请求参数}): {@link DescribeAuditTracksResponse 返回参数} */
   DescribeAuditTracks(data?: DescribeAuditTracksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditTracksResponse>;
-  /** 查询云审计日志 */
+  /** {@link DescribeEvents 查询云审计日志}({@link DescribeEventsRequest 请求参数}): {@link DescribeEventsResponse 返回参数} */
   DescribeEvents(data: DescribeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsResponse>;
-  /** 查询AttributeKey的有效取值范围 */
+  /** {@link GetAttributeKey 查询AttributeKey的有效取值范围}({@link GetAttributeKeyRequest 请求参数}): {@link GetAttributeKeyResponse 返回参数} */
   GetAttributeKey(data?: GetAttributeKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttributeKeyResponse>;
-  /** 查询用户可创建跟踪集的数量 */
+  /** {@link InquireAuditCredit 查询用户可创建跟踪集的数量}({@link InquireAuditCreditRequest 请求参数}): {@link InquireAuditCreditResponse 返回参数} */
   InquireAuditCredit(data?: InquireAuditCreditRequest, config?: AxiosRequestConfig): AxiosPromise<InquireAuditCreditResponse>;
-  /** 查询跟踪集概要 */
+  /** {@link ListAudits 查询跟踪集概要}({@link ListAuditsRequest 请求参数}): {@link ListAuditsResponse 返回参数} */
   ListAudits(data?: ListAuditsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAuditsResponse>;
-  /** 查询云审计支持的cmq的可用区 */
+  /** {@link ListCmqEnableRegion 查询云审计支持的cmq的可用区}({@link ListCmqEnableRegionRequest 请求参数}): {@link ListCmqEnableRegionResponse 返回参数} */
   ListCmqEnableRegion(data?: ListCmqEnableRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ListCmqEnableRegionResponse>;
-  /** 查询云审计支持的cos可用区 */
+  /** {@link ListCosEnableRegion 查询云审计支持的cos可用区}({@link ListCosEnableRegionRequest 请求参数}): {@link ListCosEnableRegionResponse 返回参数} */
   ListCosEnableRegion(data?: ListCosEnableRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ListCosEnableRegionResponse>;
-  /** 根据地域获取KMS密钥别名 */
+  /** {@link ListKeyAliasByRegion 根据地域获取KMS密钥别名}({@link ListKeyAliasByRegionRequest 请求参数}): {@link ListKeyAliasByRegionResponse 返回参数} */
   ListKeyAliasByRegion(data: ListKeyAliasByRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ListKeyAliasByRegionResponse>;
-  /** 检索日志 */
+  /** {@link LookUpEvents 检索日志}({@link LookUpEventsRequest 请求参数}): {@link LookUpEventsResponse 返回参数} */
   LookUpEvents(data: LookUpEventsRequest, config?: AxiosRequestConfig): AxiosPromise<LookUpEventsResponse>;
-  /** 修改云审计跟踪 */
+  /** {@link ModifyAuditTrack 修改云审计跟踪}({@link ModifyAuditTrackRequest 请求参数}): {@link ModifyAuditTrackResponse 返回参数} */
   ModifyAuditTrack(data?: ModifyAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditTrackResponse>;
-  /** 开启跟踪集 */
+  /** {@link StartLogging 开启跟踪集}({@link StartLoggingRequest 请求参数}): {@link StartLoggingResponse 返回参数} */
   StartLogging(data: StartLoggingRequest, config?: AxiosRequestConfig): AxiosPromise<StartLoggingResponse>;
-  /** 关闭跟踪集 */
+  /** {@link StopLogging 关闭跟踪集}({@link StopLoggingRequest 请求参数}): {@link StopLoggingResponse 返回参数} */
   StopLogging(data: StopLoggingRequest, config?: AxiosRequestConfig): AxiosPromise<StopLoggingResponse>;
-  /** 更新跟踪集 */
+  /** {@link UpdateAudit 更新跟踪集}({@link UpdateAuditRequest 请求参数}): {@link UpdateAuditResponse 返回参数} */
   UpdateAudit(data: UpdateAuditRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAuditResponse>;
 }
 

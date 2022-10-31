@@ -700,30 +700,30 @@ declare namespace V20211109 {
   }
 }
 
-/** [高性能计算平台](https://cloud.tencent.com/document/product/1527) */
+/** {@link Thpc 高性能计算平台} */
 declare interface Thpc {
   (): Versions;
-  /** 添加节点 */
+  /** {@link AddNodes 添加节点}({@link AddNodesRequest 请求参数}): {@link AddNodesResponse 返回参数} */
   AddNodes(data: AddNodesRequest, config?: AxiosRequestConfig): AxiosPromise<AddNodesResponse>;
-  /** 绑定弹性伸缩组 */
+  /** {@link BindAutoScalingGroup 绑定弹性伸缩组}({@link BindAutoScalingGroupRequest 请求参数}): {@link BindAutoScalingGroupResponse 返回参数} */
   BindAutoScalingGroup(data: BindAutoScalingGroupRequest, config?: AxiosRequestConfig): AxiosPromise<BindAutoScalingGroupResponse>;
-  /** 创建集群 */
+  /** {@link CreateCluster 创建集群}({@link CreateClusterRequest 请求参数}): {@link CreateClusterResponse 返回参数} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
-  /** 删除集群 */
+  /** {@link DeleteCluster 删除集群}({@link DeleteClusterRequest 请求参数}): {@link DeleteClusterResponse 返回参数} */
   DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
-  /** 删除节点 */
+  /** {@link DeleteNodes 删除节点}({@link DeleteNodesRequest 请求参数}): {@link DeleteNodesResponse 返回参数} */
   DeleteNodes(data: DeleteNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNodesResponse>;
-  /** 查询集群列表 */
+  /** {@link DescribeClusters 查询集群列表}({@link DescribeClustersRequest 请求参数}): {@link DescribeClustersResponse 返回参数} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
-  /** 设置弹性伸缩配置信息 */
+  /** {@link SetAutoScalingConfiguration 设置弹性伸缩配置信息}({@link SetAutoScalingConfigurationRequest 请求参数}): {@link SetAutoScalingConfigurationResponse 返回参数} */
   SetAutoScalingConfiguration(data: SetAutoScalingConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<SetAutoScalingConfigurationResponse>;
-  /** 绑定弹性伸缩组 */
+  /** {@link V20211109.BindAutoScalingGroup 绑定弹性伸缩组}({@link V20211109.BindAutoScalingGroupRequest 请求参数}): {@link V20211109.BindAutoScalingGroupResponse 返回参数} */
   BindAutoScalingGroup(data: V20211109.BindAutoScalingGroupRequest, config: AxiosRequestConfig & V20211109.VersionHeader): AxiosPromise<V20211109.BindAutoScalingGroupResponse>;
-  /** 创建集群 */
+  /** {@link V20211109.CreateCluster 创建集群}({@link V20211109.CreateClusterRequest 请求参数}): {@link V20211109.CreateClusterResponse 返回参数} */
   CreateCluster(data: V20211109.CreateClusterRequest, config: AxiosRequestConfig & V20211109.VersionHeader): AxiosPromise<V20211109.CreateClusterResponse>;
-  /** 删除集群 */
+  /** {@link V20211109.DeleteCluster 删除集群}({@link V20211109.DeleteClusterRequest 请求参数}): {@link V20211109.DeleteClusterResponse 返回参数} */
   DeleteCluster(data: V20211109.DeleteClusterRequest, config: AxiosRequestConfig & V20211109.VersionHeader): AxiosPromise<V20211109.DeleteClusterResponse>;
-  /** 查询集群列表 */
+  /** {@link V20211109.DescribeClusters 查询集群列表}({@link V20211109.DescribeClustersRequest 请求参数}): {@link V20211109.DescribeClustersResponse 返回参数} */
   DescribeClusters(data: V20211109.DescribeClustersRequest, config: AxiosRequestConfig & V20211109.VersionHeader): AxiosPromise<V20211109.DescribeClustersResponse>;
 }
 

@@ -94,12 +94,12 @@ declare interface DescribeTaskStrategyRisksResponse {
   RequestId?: string;
 }
 
-/** [云顾问](https://cloud.tencent.com/document/product/1264) */
+/** {@link Advisor 云顾问} */
 declare interface Advisor {
   (): Versions;
-  /** 查询评估项信息 */
+  /** {@link DescribeStrategies 查询评估项信息}({@link DescribeStrategiesRequest 请求参数}): {@link DescribeStrategiesResponse 返回参数} */
   DescribeStrategies(data?: DescribeStrategiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStrategiesResponse>;
-  /** 查询评估项风险实例列表 */
+  /** {@link DescribeTaskStrategyRisks 查询评估项风险实例列表}({@link DescribeTaskStrategyRisksRequest 请求参数}): {@link DescribeTaskStrategyRisksResponse 返回参数} */
   DescribeTaskStrategyRisks(data: DescribeTaskStrategyRisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStrategyRisksResponse>;
 }
 

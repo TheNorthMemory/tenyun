@@ -1590,108 +1590,108 @@ declare interface VerifyIdlFilesResponse {
   RequestId?: string;
 }
 
-/** [游戏数据库 TcaplusDB](https://cloud.tencent.com/document/product/596) */
+/** {@link Tcaplusdb 游戏数据库 TcaplusDB} */
 declare interface Tcaplusdb {
   (): Versions;
-  /** 清除表数据 */
+  /** {@link ClearTables 清除表数据}({@link ClearTablesRequest 请求参数}): {@link ClearTablesResponse 返回参数} */
   ClearTables(data: ClearTablesRequest, config?: AxiosRequestConfig): AxiosPromise<ClearTablesResponse>;
-  /** 上传并校验改表文件 */
+  /** {@link CompareIdlFiles 上传并校验改表文件}({@link CompareIdlFilesRequest 请求参数}): {@link CompareIdlFilesResponse 返回参数} */
   CompareIdlFiles(data: CompareIdlFilesRequest, config?: AxiosRequestConfig): AxiosPromise<CompareIdlFilesResponse>;
-  /** 创建备份 */
+  /** {@link CreateBackup 创建备份}({@link CreateBackupRequest 请求参数}): {@link CreateBackupResponse 返回参数} */
   CreateBackup(data: CreateBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupResponse>;
-  /** 创建集群 */
+  /** {@link CreateCluster 创建集群}({@link CreateClusterRequest 请求参数}): {@link CreateClusterResponse 返回参数} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
-  /** 创建表格快照 */
+  /** {@link CreateSnapshots 创建表格快照}({@link CreateSnapshotsRequest 请求参数}): {@link CreateSnapshotsResponse 返回参数} */
   CreateSnapshots(data: CreateSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotsResponse>;
-  /** 新建表格组 */
+  /** {@link CreateTableGroup 新建表格组}({@link CreateTableGroupRequest 请求参数}): {@link CreateTableGroupResponse 返回参数} */
   CreateTableGroup(data: CreateTableGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTableGroupResponse>;
-  /** 批量创建表 */
+  /** {@link CreateTables 批量创建表}({@link CreateTablesRequest 请求参数}): {@link CreateTablesResponse 返回参数} */
   CreateTables(data: CreateTablesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTablesResponse>;
-  /** 删除集群 */
+  /** {@link DeleteCluster 删除集群}({@link DeleteClusterRequest 请求参数}): {@link DeleteClusterResponse 返回参数} */
   DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
-  /** 删除IDL描述文件 */
+  /** {@link DeleteIdlFiles 删除IDL描述文件}({@link DeleteIdlFilesRequest 请求参数}): {@link DeleteIdlFilesResponse 返回参数} */
   DeleteIdlFiles(data: DeleteIdlFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIdlFilesResponse>;
-  /** 删除表格快照 */
+  /** {@link DeleteSnapshots 删除表格快照}({@link DeleteSnapshotsRequest 请求参数}): {@link DeleteSnapshotsResponse 返回参数} */
   DeleteSnapshots(data: DeleteSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotsResponse>;
-  /** 删除表格的数据订阅 */
+  /** {@link DeleteTableDataFlow 删除表格的数据订阅}({@link DeleteTableDataFlowRequest 请求参数}): {@link DeleteTableDataFlowResponse 返回参数} */
   DeleteTableDataFlow(data: DeleteTableDataFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableDataFlowResponse>;
-  /** 删除表格组 */
+  /** {@link DeleteTableGroup 删除表格组}({@link DeleteTableGroupRequest 请求参数}): {@link DeleteTableGroupResponse 返回参数} */
   DeleteTableGroup(data: DeleteTableGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableGroupResponse>;
-  /** 删除表格的分布式索引 */
+  /** {@link DeleteTableIndex 删除表格的分布式索引}({@link DeleteTableIndexRequest 请求参数}): {@link DeleteTableIndexResponse 返回参数} */
   DeleteTableIndex(data: DeleteTableIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableIndexResponse>;
-  /** 删除表 */
+  /** {@link DeleteTables 删除表}({@link DeleteTablesRequest 请求参数}): {@link DeleteTablesResponse 返回参数} */
   DeleteTables(data: DeleteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTablesResponse>;
-  /** 获取审批管理的申请单 */
+  /** {@link DescribeApplications 获取审批管理的申请单}({@link DescribeApplicationsRequest 请求参数}): {@link DescribeApplicationsResponse 返回参数} */
   DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
-  /** 获取集群关联的标签列表 */
+  /** {@link DescribeClusterTags 获取集群关联的标签列表}({@link DescribeClusterTagsRequest 请求参数}): {@link DescribeClusterTagsResponse 返回参数} */
   DescribeClusterTags(data: DescribeClusterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterTagsResponse>;
-  /** 查询集群信息列表 */
+  /** {@link DescribeClusters 查询集群信息列表}({@link DescribeClustersRequest 请求参数}): {@link DescribeClustersResponse 返回参数} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
-  /** 查询表描述文件详情 */
+  /** {@link DescribeIdlFileInfos 查询表描述文件详情}({@link DescribeIdlFileInfosRequest 请求参数}): {@link DescribeIdlFileInfosResponse 返回参数} */
   DescribeIdlFileInfos(data: DescribeIdlFileInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdlFileInfosResponse>;
-  /** 查询独占集群剩余机器 */
+  /** {@link DescribeMachine 查询独占集群剩余机器}({@link DescribeMachineRequest 请求参数}): {@link DescribeMachineResponse 返回参数} */
   DescribeMachine(data?: DescribeMachineRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineResponse>;
-  /** 查询地域列表 */
+  /** {@link DescribeRegions 查询地域列表}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** 查询快照列表 */
+  /** {@link DescribeSnapshots 查询快照列表}({@link DescribeSnapshotsRequest 请求参数}): {@link DescribeSnapshotsResponse 返回参数} */
   DescribeSnapshots(data: DescribeSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsResponse>;
-  /** 获取表格组关联的标签列表 */
+  /** {@link DescribeTableGroupTags 获取表格组关联的标签列表}({@link DescribeTableGroupTagsRequest 请求参数}): {@link DescribeTableGroupTagsResponse 返回参数} */
   DescribeTableGroupTags(data: DescribeTableGroupTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableGroupTagsResponse>;
-  /** 查询表格组列表 */
+  /** {@link DescribeTableGroups 查询表格组列表}({@link DescribeTableGroupsRequest 请求参数}): {@link DescribeTableGroupsResponse 返回参数} */
   DescribeTableGroups(data: DescribeTableGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableGroupsResponse>;
-  /** 获取表格标签 */
+  /** {@link DescribeTableTags 获取表格标签}({@link DescribeTableTagsRequest 请求参数}): {@link DescribeTableTagsResponse 返回参数} */
   DescribeTableTags(data: DescribeTableTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableTagsResponse>;
-  /** 查询表详情 */
+  /** {@link DescribeTables 查询表详情}({@link DescribeTablesRequest 请求参数}): {@link DescribeTablesResponse 返回参数} */
   DescribeTables(data?: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
-  /** 查询回收站中的表详情 */
+  /** {@link DescribeTablesInRecycle 查询回收站中的表详情}({@link DescribeTablesInRecycleRequest 请求参数}): {@link DescribeTablesInRecycleResponse 返回参数} */
   DescribeTablesInRecycle(data?: DescribeTablesInRecycleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesInRecycleResponse>;
-  /** 查询任务列表 */
+  /** {@link DescribeTasks 查询任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** 查询本用户是否在白名单中 */
+  /** {@link DescribeUinInWhitelist 查询本用户是否在白名单中}({@link DescribeUinInWhitelistRequest 请求参数}): {@link DescribeUinInWhitelistResponse 返回参数} */
   DescribeUinInWhitelist(data?: DescribeUinInWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUinInWhitelistResponse>;
-  /** 关闭restful api */
+  /** {@link DisableRestProxy 关闭restful api}({@link DisableRestProxyRequest 请求参数}): {@link DisableRestProxyResponse 返回参数} */
   DisableRestProxy(data: DisableRestProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DisableRestProxyResponse>;
-  /** 开启restful api */
+  /** {@link EnableRestProxy 开启restful api}({@link EnableRestProxyRequest 请求参数}): {@link EnableRestProxyResponse 返回参数} */
   EnableRestProxy(data: EnableRestProxyRequest, config?: AxiosRequestConfig): AxiosPromise<EnableRestProxyResponse>;
-  /** 导入快照数据 */
+  /** {@link ImportSnapshots 导入快照数据}({@link ImportSnapshotsRequest 请求参数}): {@link ImportSnapshotsResponse 返回参数} */
   ImportSnapshots(data: ImportSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportSnapshotsResponse>;
-  /** 合服 */
+  /** {@link MergeTablesData 合服}({@link MergeTablesDataRequest 请求参数}): {@link MergeTablesDataResponse 返回参数} */
   MergeTablesData(data: MergeTablesDataRequest, config?: AxiosRequestConfig): AxiosPromise<MergeTablesDataResponse>;
-  /** 修改集群审批状态 */
+  /** {@link ModifyCensorship 修改集群审批状态}({@link ModifyCensorshipRequest 请求参数}): {@link ModifyCensorshipResponse 返回参数} */
   ModifyCensorship(data: ModifyCensorshipRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCensorshipResponse>;
-  /** 修改独占集群机器 */
+  /** {@link ModifyClusterMachine 修改独占集群机器}({@link ModifyClusterMachineRequest 请求参数}): {@link ModifyClusterMachineResponse 返回参数} */
   ModifyClusterMachine(data: ModifyClusterMachineRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterMachineResponse>;
-  /** 修改集群名称 */
+  /** {@link ModifyClusterName 修改集群名称}({@link ModifyClusterNameRequest 请求参数}): {@link ModifyClusterNameResponse 返回参数} */
   ModifyClusterName(data: ModifyClusterNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterNameResponse>;
-  /** 修改集群密码 */
+  /** {@link ModifyClusterPassword 修改集群密码}({@link ModifyClusterPasswordRequest 请求参数}): {@link ModifyClusterPasswordResponse 返回参数} */
   ModifyClusterPassword(data: ModifyClusterPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterPasswordResponse>;
-  /** 修改集群标签 */
+  /** {@link ModifyClusterTags 修改集群标签}({@link ModifyClusterTagsRequest 请求参数}): {@link ModifyClusterTagsResponse 返回参数} */
   ModifyClusterTags(data: ModifyClusterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterTagsResponse>;
-  /** 修改表格快照 */
+  /** {@link ModifySnapshots 修改表格快照}({@link ModifySnapshotsRequest 请求参数}): {@link ModifySnapshotsResponse 返回参数} */
   ModifySnapshots(data: ModifySnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotsResponse>;
-  /** 修改表格组名称 */
+  /** {@link ModifyTableGroupName 修改表格组名称}({@link ModifyTableGroupNameRequest 请求参数}): {@link ModifyTableGroupNameResponse 返回参数} */
   ModifyTableGroupName(data: ModifyTableGroupNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTableGroupNameResponse>;
-  /** 修改表格组标签 */
+  /** {@link ModifyTableGroupTags 修改表格组标签}({@link ModifyTableGroupTagsRequest 请求参数}): {@link ModifyTableGroupTagsResponse 返回参数} */
   ModifyTableGroupTags(data: ModifyTableGroupTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTableGroupTagsResponse>;
-  /** 修改表备注信息 */
+  /** {@link ModifyTableMemos 修改表备注信息}({@link ModifyTableMemosRequest 请求参数}): {@link ModifyTableMemosResponse 返回参数} */
   ModifyTableMemos(data: ModifyTableMemosRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTableMemosResponse>;
-  /** 表扩缩容 */
+  /** {@link ModifyTableQuotas 表扩缩容}({@link ModifyTableQuotasRequest 请求参数}): {@link ModifyTableQuotasResponse 返回参数} */
   ModifyTableQuotas(data: ModifyTableQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTableQuotasResponse>;
-  /** 修改表格标签 */
+  /** {@link ModifyTableTags 修改表格标签}({@link ModifyTableTagsRequest 请求参数}): {@link ModifyTableTagsResponse 返回参数} */
   ModifyTableTags(data: ModifyTableTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTableTagsResponse>;
-  /** 批量修改表结构 */
+  /** {@link ModifyTables 批量修改表结构}({@link ModifyTablesRequest 请求参数}): {@link ModifyTablesResponse 返回参数} */
   ModifyTables(data: ModifyTablesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTablesResponse>;
-  /** 恢复回收站中的表 */
+  /** {@link RecoverRecycleTables 恢复回收站中的表}({@link RecoverRecycleTablesRequest 请求参数}): {@link RecoverRecycleTablesResponse 返回参数} */
   RecoverRecycleTables(data: RecoverRecycleTablesRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverRecycleTablesResponse>;
-  /** 表格数据回档 */
+  /** {@link RollbackTables 表格数据回档}({@link RollbackTablesRequest 请求参数}): {@link RollbackTablesResponse 返回参数} */
   RollbackTables(data: RollbackTablesRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackTablesResponse>;
-  /** 新增、修改表格数据订阅 */
+  /** {@link SetTableDataFlow 新增、修改表格数据订阅}({@link SetTableDataFlowRequest 请求参数}): {@link SetTableDataFlowResponse 返回参数} */
   SetTableDataFlow(data: SetTableDataFlowRequest, config?: AxiosRequestConfig): AxiosPromise<SetTableDataFlowResponse>;
-  /** 设置表格分布式索引 */
+  /** {@link SetTableIndex 设置表格分布式索引}({@link SetTableIndexRequest 请求参数}): {@link SetTableIndexResponse 返回参数} */
   SetTableIndex(data: SetTableIndexRequest, config?: AxiosRequestConfig): AxiosPromise<SetTableIndexResponse>;
-  /** 更新申请单状态 */
+  /** {@link UpdateApply 更新申请单状态}({@link UpdateApplyRequest 请求参数}): {@link UpdateApplyResponse 返回参数} */
   UpdateApply(data: UpdateApplyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApplyResponse>;
-  /** 上传并校验创建表格文件 */
+  /** {@link VerifyIdlFiles 上传并校验创建表格文件}({@link VerifyIdlFilesRequest 请求参数}): {@link VerifyIdlFilesResponse 返回参数} */
   VerifyIdlFiles(data: VerifyIdlFilesRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyIdlFilesResponse>;
 }
 

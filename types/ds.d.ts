@@ -308,32 +308,32 @@ declare interface SignContractByKeywordResponse {
   RequestId?: string;
 }
 
-/** [电子合同服务](https://cloud.tencent.com/document/product/869) */
+/** {@link Ds 文档服务} */
 declare interface Ds {
   (): Versions;
-  /** 检测验证码 */
+  /** {@link CheckVcode 检测验证码}({@link CheckVcodeRequest 请求参数}): {@link CheckVcodeResponse 返回参数} */
   CheckVcode(data: CheckVcodeRequest, config?: AxiosRequestConfig): AxiosPromise<CheckVcodeResponse>;
-  /** 通过上传创建合同 */
+  /** {@link CreateContractByUpload 通过上传创建合同}({@link CreateContractByUploadRequest 请求参数}): {@link CreateContractByUploadResponse 返回参数} */
   CreateContractByUpload(data: CreateContractByUploadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContractByUploadResponse>;
-  /** 企业开户 */
+  /** {@link CreateEnterpriseAccount 企业开户}({@link CreateEnterpriseAccountRequest 请求参数}): {@link CreateEnterpriseAccountResponse 返回参数} */
   CreateEnterpriseAccount(data: CreateEnterpriseAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnterpriseAccountResponse>;
-  /** 个人开户 */
+  /** {@link CreatePersonalAccount 个人开户}({@link CreatePersonalAccountRequest 请求参数}): {@link CreatePersonalAccountResponse 返回参数} */
   CreatePersonalAccount(data: CreatePersonalAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonalAccountResponse>;
-  /** 新增签章 */
+  /** {@link CreateSeal 新增签章}({@link CreateSealRequest 请求参数}): {@link CreateSealResponse 返回参数} */
   CreateSeal(data: CreateSealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealResponse>;
-  /** 删除帐号 */
+  /** {@link DeleteAccount 删除帐号}({@link DeleteAccountRequest 请求参数}): {@link DeleteAccountResponse 返回参数} */
   DeleteAccount(data: DeleteAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountResponse>;
-  /** 删除签章 */
+  /** {@link DeleteSeal 删除签章}({@link DeleteSealRequest 请求参数}): {@link DeleteSealResponse 返回参数} */
   DeleteSeal(data: DeleteSealRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSealResponse>;
-  /** 获取任务状态 */
+  /** {@link DescribeTaskStatus 获取任务状态}({@link DescribeTaskStatusRequest 请求参数}): {@link DescribeTaskStatusResponse 返回参数} */
   DescribeTaskStatus(data: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
-  /** 下载合同 */
+  /** {@link DownloadContract 下载合同}({@link DownloadContractRequest 请求参数}): {@link DownloadContractResponse 返回参数} */
   DownloadContract(data: DownloadContractRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadContractResponse>;
-  /** 发送验证码 */
+  /** {@link SendVcode 发送验证码}({@link SendVcodeRequest 请求参数}): {@link SendVcodeResponse 返回参数} */
   SendVcode(data: SendVcodeRequest, config?: AxiosRequestConfig): AxiosPromise<SendVcodeResponse>;
-  /** 按坐标签署合同 */
+  /** {@link SignContractByCoordinate 按坐标签署合同}({@link SignContractByCoordinateRequest 请求参数}): {@link SignContractByCoordinateResponse 返回参数} */
   SignContractByCoordinate(data: SignContractByCoordinateRequest, config?: AxiosRequestConfig): AxiosPromise<SignContractByCoordinateResponse>;
-  /** 按关键字签署合同 */
+  /** {@link SignContractByKeyword 按关键字签署合同}({@link SignContractByKeywordRequest 请求参数}): {@link SignContractByKeywordResponse 返回参数} */
   SignContractByKeyword(data: SignContractByKeywordRequest, config?: AxiosRequestConfig): AxiosPromise<SignContractByKeywordResponse>;
 }
 

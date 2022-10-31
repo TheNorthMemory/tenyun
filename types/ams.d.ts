@@ -942,32 +942,32 @@ declare namespace V20200608 {
   }
 }
 
-/** [音频内容检测](https://cloud.tencent.com/document/product/1219) */
+/** {@link Ams 音频内容安全} */
 declare interface Ams {
   (): Versions;
-  /** 取消任务 */
+  /** {@link CancelTask 取消任务}({@link CancelTaskRequest 请求参数}): {@link CancelTaskResponse 返回参数} */
   CancelTask(data: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
-  /** 短音频审核同步接口 */
+  /** {@link CreateAudioModerationSyncTask 短音频审核同步接口}({@link CreateAudioModerationSyncTaskRequest 请求参数}): {@link CreateAudioModerationSyncTaskResponse 返回参数} */
   CreateAudioModerationSyncTask(data: CreateAudioModerationSyncTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAudioModerationSyncTaskResponse>;
-  /** 创建音频审核任务 */
+  /** {@link CreateAudioModerationTask 创建音频审核任务}({@link CreateAudioModerationTaskRequest 请求参数}): {@link CreateAudioModerationTaskResponse 返回参数} */
   CreateAudioModerationTask(data: CreateAudioModerationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAudioModerationTaskResponse>;
-  /** 查看任务详情 */
+  /** {@link DescribeTaskDetail 查看任务详情}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** 查看审核任务列表 */
+  /** {@link DescribeTasks 查看审核任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** 取消任务 */
+  /** {@link V20200608.CancelTask 取消任务}({@link V20200608.CancelTaskRequest 请求参数}): {@link V20200608.CancelTaskResponse 返回参数} */
   CancelTask(data: V20200608.CancelTaskRequest, config: AxiosRequestConfig & V20200608.VersionHeader): AxiosPromise<V20200608.CancelTaskResponse>;
-  /** 创建音频审核任务 */
+  /** {@link V20200608.CreateAudioModerationTask 创建音频审核任务}({@link V20200608.CreateAudioModerationTaskRequest 请求参数}): {@link V20200608.CreateAudioModerationTaskResponse 返回参数} */
   CreateAudioModerationTask(data: V20200608.CreateAudioModerationTaskRequest, config: AxiosRequestConfig & V20200608.VersionHeader): AxiosPromise<V20200608.CreateAudioModerationTaskResponse>;
-  /** 创建业务配置 */
+  /** {@link V20200608.CreateBizConfig 创建业务配置}({@link V20200608.CreateBizConfigRequest 请求参数}): {@link V20200608.CreateBizConfigResponse 返回参数} */
   CreateBizConfig(data: V20200608.CreateBizConfigRequest, config: AxiosRequestConfig & V20200608.VersionHeader): AxiosPromise<V20200608.CreateBizConfigResponse>;
-  /** 获取音频审核明细数据 */
+  /** {@link V20200608.DescribeAmsList 获取音频审核明细数据}({@link V20200608.DescribeAmsListRequest 请求参数}): {@link V20200608.DescribeAmsListResponse 返回参数} */
   DescribeAmsList(data: V20200608.DescribeAmsListRequest, config: AxiosRequestConfig & V20200608.VersionHeader): AxiosPromise<V20200608.DescribeAmsListResponse>;
-  /** 识别统计 */
+  /** {@link V20200608.DescribeAudioStat 识别统计}({@link V20200608.DescribeAudioStatRequest 请求参数}): {@link V20200608.DescribeAudioStatResponse 返回参数} */
   DescribeAudioStat(data: V20200608.DescribeAudioStatRequest, config: AxiosRequestConfig & V20200608.VersionHeader): AxiosPromise<V20200608.DescribeAudioStatResponse>;
-  /** 查看单个配置 */
+  /** {@link V20200608.DescribeBizConfig 查看单个配置}({@link V20200608.DescribeBizConfigRequest 请求参数}): {@link V20200608.DescribeBizConfigResponse 返回参数} */
   DescribeBizConfig(data: V20200608.DescribeBizConfigRequest, config: AxiosRequestConfig & V20200608.VersionHeader): AxiosPromise<V20200608.DescribeBizConfigResponse>;
-  /** 查看任务详情 */
+  /** {@link V20200608.DescribeTaskDetail 查看任务详情}({@link V20200608.DescribeTaskDetailRequest 请求参数}): {@link V20200608.DescribeTaskDetailResponse 返回参数} */
   DescribeTaskDetail(data: V20200608.DescribeTaskDetailRequest, config: AxiosRequestConfig & V20200608.VersionHeader): AxiosPromise<V20200608.DescribeTaskDetailResponse>;
 }
 

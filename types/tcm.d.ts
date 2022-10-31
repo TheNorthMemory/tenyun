@@ -640,22 +640,22 @@ declare interface UnlinkClusterResponse {
   RequestId?: string;
 }
 
-/** [服务网格](https://cloud.tencent.com/document/product/1261) */
+/** {@link Tcm 服务网格} */
 declare interface Tcm {
   (): Versions;
-  /** 创建网格 */
+  /** {@link CreateMesh 创建网格}({@link CreateMeshRequest 请求参数}): {@link CreateMeshResponse 返回参数} */
   CreateMesh(data: CreateMeshRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMeshResponse>;
-  /** 删除网格 */
+  /** {@link DeleteMesh 删除网格}({@link DeleteMeshRequest 请求参数}): {@link DeleteMeshResponse 返回参数} */
   DeleteMesh(data: DeleteMeshRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMeshResponse>;
-  /** 查询网格详情 */
+  /** {@link DescribeMesh 查询网格详情}({@link DescribeMeshRequest 请求参数}): {@link DescribeMeshResponse 返回参数} */
   DescribeMesh(data: DescribeMeshRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMeshResponse>;
-  /** 查询网格列表 */
+  /** {@link DescribeMeshList 查询网格列表}({@link DescribeMeshListRequest 请求参数}): {@link DescribeMeshListResponse 返回参数} */
   DescribeMeshList(data?: DescribeMeshListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMeshListResponse>;
-  /** 关联集群 */
+  /** {@link LinkClusterList 关联集群}({@link LinkClusterListRequest 请求参数}): {@link LinkClusterListResponse 返回参数} */
   LinkClusterList(data: LinkClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<LinkClusterListResponse>;
-  /** 修改网格 */
+  /** {@link ModifyMesh 修改网格}({@link ModifyMeshRequest 请求参数}): {@link ModifyMeshResponse 返回参数} */
   ModifyMesh(data: ModifyMeshRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMeshResponse>;
-  /** 解关联集群 */
+  /** {@link UnlinkCluster 解关联集群}({@link UnlinkClusterRequest 请求参数}): {@link UnlinkClusterResponse 返回参数} */
   UnlinkCluster(data: UnlinkClusterRequest, config?: AxiosRequestConfig): AxiosPromise<UnlinkClusterResponse>;
 }
 

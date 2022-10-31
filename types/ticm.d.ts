@@ -412,14 +412,14 @@ declare interface VideoModerationResponse {
   RequestId?: string;
 }
 
-/** [智能鉴黄](https://cloud.tencent.com/document/product/864) */
+/** {@link Ticm 智能鉴黄} */
 declare interface Ticm {
   (): Versions;
-  /** 查询视频内容审核的结果 */
+  /** {@link DescribeVideoTask 查询视频内容审核的结果}({@link DescribeVideoTaskRequest 请求参数}): {@link DescribeVideoTaskResponse 返回参数} */
   DescribeVideoTask(data: DescribeVideoTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoTaskResponse>;
-  /** 图像内容审核 */
+  /** {@link ImageModeration 图像内容审核}({@link ImageModerationRequest 请求参数}): {@link ImageModerationResponse 返回参数} */
   ImageModeration(data: ImageModerationRequest, config?: AxiosRequestConfig): AxiosPromise<ImageModerationResponse>;
-  /** 视频内容识别 */
+  /** {@link VideoModeration 视频内容识别}({@link VideoModerationRequest 请求参数}): {@link VideoModerationResponse 返回参数} */
   VideoModeration(data: VideoModerationRequest, config?: AxiosRequestConfig): AxiosPromise<VideoModerationResponse>;
 }
 
