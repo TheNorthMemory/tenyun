@@ -1890,6 +1890,14 @@ declare interface PromotionActivityContent {
   ImageAuthorizationNum: number;
 }
 
+/** 漏洞防御插件 rasp信息 */
+declare interface RaspInfo {
+  /** rasp名称 */
+  Name: string;
+  /** rasp 描述 */
+  Value: string;
+}
+
 /** 地域信息 */
 declare interface RegionInfo {
   /** 地域标识 */
@@ -2286,7 +2294,7 @@ declare interface SecLogJoinObjectInfo {
 declare interface SecTendencyEventInfo {
   /** 趋势列表 */
   EventSet: RunTimeTendencyInfo[];
-  /** 事件类型：ET_ESCAPE : 容器逃逸ET_REVERSE_SHELL: 反弹shellET_RISK_SYSCALL:高危系统调用ET_ABNORMAL_PROCESS: 异常进程ET_ACCESS_CONTROL 文件篡改 */
+  /** 事件类型：ET_ESCAPE : 容器逃逸ET_REVERSE_SHELL: 反弹shellET_RISK_SYSCALL:高危系统调用ET_ABNORMAL_PROCESS: 异常进程ET_ACCESS_CONTROL 文件篡改ET_VIRUS 木马事件ET_MALICIOUS_CONNECTION 恶意外连事件 */
   EventType: string;
 }
 
@@ -2644,6 +2652,8 @@ declare interface VulDefenceEventDetail {
   ContainerStatus: string | null;
   /** 接口Url */
   JNDIUrl: string | null;
+  /** rasp detail */
+  RaspDetail: RaspInfo[] | null;
 }
 
 /** 漏洞防御攻击事件趋势 */
@@ -5784,6 +5794,10 @@ declare interface DescribeContainerSecEventSummaryResponse {
   UnhandledFileCnt: number;
   /** 未处理木马事件 */
   UnhandledVirusEventCnt: number;
+  /** 未处理恶意外连事件 */
+  UnhandledMaliciousConnectionEventCnt: number;
+  /** 未处理k8sApi事件 */
+  UnhandledK8sApiEventCnt: number | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

@@ -94,28 +94,6 @@ declare interface AiRule {
   Mode: string;
 }
 
-/** 别称域名信息。 */
-declare interface AliasDomain {
-  /** 别称域名 ID。 */
-  AliasId: string;
-  /** 别称域名名称。 */
-  AliasName: string;
-  /** 站点 ID。 */
-  ZoneId: string;
-  /** 目标域名名称。 */
-  TargetName: string;
-  /** 别称域名状态，取值有： active：已生效； pending：部署中； conflict：被找回。 stop：已停用； deleted：已删除。 */
-  Status: string;
-  /** 封禁模式，取值有： 0：未封禁； 11：合规封禁； 14：未备案封禁。 */
-  ForbidMode: number;
-  /** 目标域名是否被封禁。 */
-  TargetForbid: boolean;
-  /** 别称域名创建时间。 */
-  CreatedOn: string;
-  /** 别称域名修改时间。 */
-  ModifiedOn: string;
-}
-
 /** 应用代理实例 */
 declare interface ApplicationProxy {
   /** 站点ID。 */
@@ -2260,26 +2238,6 @@ declare interface CheckCertificateResponse {
   RequestId?: string;
 }
 
-declare interface CreateAliasDomainRequest {
-  /** 站点 ID。 */
-  ZoneId: string;
-  /** 别称域名名称。 */
-  AliasName: string;
-  /** 目标域名名称。 */
-  TargetName: string;
-  /** 证书配置，取值有： none：不配置； hosting：SSL托管证书； apply：申请免费证书。 */
-  CertType: string;
-  /** 选择托管证书时需填入相应证书 ID。 */
-  CertId?: string[];
-}
-
-declare interface CreateAliasDomainResponse {
-  /** 别称域名 ID。 */
-  AliasId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
 declare interface CreateApplicationProxyRequest {
   /** 站点ID。 */
   ZoneId: string;
@@ -2636,18 +2594,6 @@ declare interface CreateZoneResponse {
   RequestId?: string;
 }
 
-declare interface DeleteAliasDomainRequest {
-  /** 站点 ID。 */
-  ZoneId: string;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：target-name 按照【目标域名名称】进行过滤。 类型：String 必选：否alias-id 按照【别称域名ID】进行过滤。 类型：String 必选：否alias-name 按照【别称域名名称】进行过滤。 类型：String 必选：否 */
-  Filters?: Filter[];
-}
-
-declare interface DeleteAliasDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
 declare interface DeleteApplicationProxyRequest {
   /** 站点ID。 */
   ZoneId: string;
@@ -2756,26 +2702,6 @@ declare interface DescribeAddableEntityListResponse {
   TotalCount: number;
   /** 可添加的实体列表。 */
   EntityList: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
-declare interface DescribeAliasDomainsRequest {
-  /** 站点 ID。不填时返回该AppID下所有别称域名信息列表。 */
-  ZoneId?: string;
-  /** 分页查询偏移量。默认值：0。 */
-  Offset?: number;
-  /** 分页查询限制数目。默认值：20，最大值：1000。 */
-  Limit?: number;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：target-name 按照【目标域名名称】进行过滤。 类型：String 必选：否alias-id 按照【别称域名ID】进行过滤。 类型：String 必选：否alias-name 按照【别称域名名称】进行过滤。 类型：String 必选：否模糊查询时仅支持过滤字段名为alias-name。 */
-  Filters?: AdvancedFilter[];
-}
-
-declare interface DescribeAliasDomainsResponse {
-  /** 符合条件的别称域名个数。 */
-  TotalCount: number;
-  /** 别称域名详细信息列表。 */
-  AliasDomains: AliasDomain[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -4226,38 +4152,6 @@ declare interface ModifyAlarmDefaultThresholdRequest {
 }
 
 declare interface ModifyAlarmDefaultThresholdResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
-declare interface ModifyAliasDomainRequest {
-  /** 站点 ID。 */
-  ZoneId: string;
-  /** 别称域名 ID。 */
-  AliasId: string;
-  /** 目标域名名称。 */
-  TargetName: string;
-  /** 证书配置，取值有： none：不配置； hosting：SSL托管证书； apply：申请免费证书。 */
-  CertType: string;
-  /** 选择托管证书时填入相应证书 ID。 */
-  CertId?: string[];
-}
-
-declare interface ModifyAliasDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
-declare interface ModifyAliasDomainStatusRequest {
-  /** 站点 ID。 */
-  ZoneId: string;
-  /** 别称域名状态，取值有： false：开启别称域名； true：关闭别称域名。 */
-  Paused: boolean;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：target-name 按照【目标域名名称】进行过滤。 类型：String 必选：否alias-id 按照【别称域名ID】进行过滤。 类型：String 必选：否alias-name 按照【别称域名名称】进行过滤。 类型：String 必选：否 */
-  Filters?: Filter[];
-}
-
-declare interface ModifyAliasDomainStatusResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -8897,8 +8791,6 @@ declare interface Teo {
   (): Versions;
   /** {@link CheckCertificate 校验证书}({@link CheckCertificateRequest 请求参数}): {@link CheckCertificateResponse 返回参数} */
   CheckCertificate(data: CheckCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCertificateResponse>;
-  /** {@link CreateAliasDomain 创建别称域名}({@link CreateAliasDomainRequest 请求参数}): {@link CreateAliasDomainResponse 返回参数} */
-  CreateAliasDomain(data: CreateAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAliasDomainResponse>;
   /** {@link CreateApplicationProxy 创建应用代理}({@link CreateApplicationProxyRequest 请求参数}): {@link CreateApplicationProxyResponse 返回参数} */
   CreateApplicationProxy(data: CreateApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationProxyResponse>;
   /** {@link CreateApplicationProxyRule 创建应用代理规则}({@link CreateApplicationProxyRuleRequest 请求参数}): {@link CreateApplicationProxyRuleResponse 返回参数} */
@@ -8935,8 +8827,6 @@ declare interface Teo {
   CreateSpeedTesting(data: CreateSpeedTestingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSpeedTestingResponse>;
   /** {@link CreateZone 创建站点}({@link CreateZoneRequest 请求参数}): {@link CreateZoneResponse 返回参数} */
   CreateZone(data: CreateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreateZoneResponse>;
-  /** {@link DeleteAliasDomain 删除别称域名}({@link DeleteAliasDomainRequest 请求参数}): {@link DeleteAliasDomainResponse 返回参数} */
-  DeleteAliasDomain(data: DeleteAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAliasDomainResponse>;
   /** {@link DeleteApplicationProxy 删除应用代理}({@link DeleteApplicationProxyRequest 请求参数}): {@link DeleteApplicationProxyResponse 返回参数} */
   DeleteApplicationProxy(data: DeleteApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyResponse>;
   /** {@link DeleteApplicationProxyRule 删除应用代理规则}({@link DeleteApplicationProxyRuleRequest 请求参数}): {@link DeleteApplicationProxyRuleResponse 返回参数} */
@@ -8955,8 +8845,6 @@ declare interface Teo {
   DeleteZone(data: DeleteZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteZoneResponse>;
   /** {@link DescribeAddableEntityList 查询剩余可添加的日志推送实体列表}({@link DescribeAddableEntityListRequest 请求参数}): {@link DescribeAddableEntityListResponse 返回参数} */
   DescribeAddableEntityList(data: DescribeAddableEntityListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddableEntityListResponse>;
-  /** {@link DescribeAliasDomains 查询别称域名信息列表}({@link DescribeAliasDomainsRequest 请求参数}): {@link DescribeAliasDomainsResponse 返回参数} */
-  DescribeAliasDomains(data?: DescribeAliasDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAliasDomainsResponse>;
   /** {@link DescribeApplicationProxies 查询应用代理列表}({@link DescribeApplicationProxiesRequest 请求参数}): {@link DescribeApplicationProxiesResponse 返回参数} */
   DescribeApplicationProxies(data?: DescribeApplicationProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationProxiesResponse>;
   /** {@link DescribeAvailablePlans 查询当前账户可购买套餐信息列表}({@link DescribeAvailablePlansRequest 请求参数}): {@link DescribeAvailablePlansResponse 返回参数} */
@@ -9091,10 +8979,6 @@ declare interface Teo {
   ModifyAlarmConfig(data: ModifyAlarmConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmConfigResponse>;
   /** {@link ModifyAlarmDefaultThreshold 修改告警默认阈值}({@link ModifyAlarmDefaultThresholdRequest 请求参数}): {@link ModifyAlarmDefaultThresholdResponse 返回参数} */
   ModifyAlarmDefaultThreshold(data: ModifyAlarmDefaultThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmDefaultThresholdResponse>;
-  /** {@link ModifyAliasDomain 修改别称域名}({@link ModifyAliasDomainRequest 请求参数}): {@link ModifyAliasDomainResponse 返回参数} */
-  ModifyAliasDomain(data: ModifyAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAliasDomainResponse>;
-  /** {@link ModifyAliasDomainStatus 修改别称域名状态}({@link ModifyAliasDomainStatusRequest 请求参数}): {@link ModifyAliasDomainStatusResponse 返回参数} */
-  ModifyAliasDomainStatus(data: ModifyAliasDomainStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAliasDomainStatusResponse>;
   /** {@link ModifyApplicationProxy 修改应用代理}({@link ModifyApplicationProxyRequest 请求参数}): {@link ModifyApplicationProxyResponse 返回参数} */
   ModifyApplicationProxy(data: ModifyApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyResponse>;
   /** {@link ModifyApplicationProxyRule 修改应用代理规则}({@link ModifyApplicationProxyRuleRequest 请求参数}): {@link ModifyApplicationProxyRuleResponse 返回参数} */

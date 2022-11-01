@@ -111,6 +111,18 @@ declare interface CertIdRelatedWithLoadBalancers {
 }
 
 /** 证书信息 */
+declare interface CertInfo {
+  /** 证书 ID，如果不填写此项则必须上传证书内容，包括CertName, CertContent，若为服务端证书必须包含CertKey。 */
+  CertId?: string;
+  /** 上传证书的名称，如果没有 CertId，则此项必传。 */
+  CertName?: string;
+  /** 上传证书的公钥，如果没有 CertId，则此项必传。 */
+  CertContent?: string;
+  /** 上传服务端证书的私钥，如果没有 CertId，则此项必传。 */
+  CertKey?: string;
+}
+
+/** 证书信息 */
 declare interface CertificateInput {
   /** 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证 */
   SSLMode?: string;
@@ -774,6 +786,14 @@ declare interface LoadBalancerTraffic {
   OutBandwidth: number;
 }
 
+/** CLB监听器或规则绑定的多证书信息 */
+declare interface MultiCertInfo {
+  /** 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证 */
+  SSLMode: string;
+  /** 监听器或规则证书列表，单双向认证，多本服务端证书算法类型不能重复;若SSLMode为双向认证，证书列表必须包含一本ca证书。 */
+  CertList: CertInfo[];
+}
+
 /** 描述配额信息，所有配额均指当前地域下的配额。 */
 declare interface Quota {
   /** 配额名称，取值范围： TOTAL_OPEN_CLB_QUOTA：用户当前地域下的公网CLB配额 TOTAL_INTERNAL_CLB_QUOTA：用户当前地域下的内网CLB配额 TOTAL_LISTENER_QUOTA：一个CLB下的监听器配额 TOTAL_LISTENER_RULE_QUOTA：一个监听器下的转发规则配额 TOTAL_TARGET_BIND_QUOTA：一条转发规则下可绑定设备的配额 TOTAL_SNAP_IP_QUOTA： 一个CLB实例下跨地域2.0的SNAT IP配额 TOTAL_ISP_CLB_QUOTA：用户当前地域下的三网CLB配额 */
@@ -858,7 +878,7 @@ declare interface RuleInput {
   SessionExpireTime?: number;
   /** 健康检查信息。详情请参见：[健康检查](https://cloud.tencent.com/document/product/214/6097) */
   HealthCheck?: HealthCheck;
-  /** 证书信息 */
+  /** 证书信息；此参数和MultiCertInfo不能同时传入。 */
   Certificate?: CertificateInput;
   /** 规则的请求转发方式，可选值：WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、按IP哈希， 默认为 WRR。 */
   Scheduler?: string;
@@ -878,6 +898,8 @@ declare interface RuleInput {
   Quic?: boolean;
   /** 转发规则的域名列表。每个域名的长度限制为：1~80。Domain和Domains只需要传一个，单域名规则传Domain，多域名规则传Domains。 */
   Domains?: string[];
+  /** 证书信息，支持同时传入不同算法类型的多本服务端证书；此参数和Certificate不能同时传入。 */
+  MultiCertInfo?: MultiCertInfo;
 }
 
 /** HTTP/HTTPS监听器的转发规则（输出） */
@@ -1251,7 +1273,7 @@ declare interface CreateListenerRequest {
   ListenerNames?: string[];
   /** 健康检查相关参数，此参数仅适用于TCP/UDP/TCP_SSL监听器。 */
   HealthCheck?: HealthCheck;
-  /** 证书相关信息，此参数仅适用于TCP_SSL监听器和未开启SNI特性的HTTPS监听器。 */
+  /** 证书相关信息，此参数仅适用于TCP_SSL监听器和未开启SNI特性的HTTPS监听器。此参数和MultiCertInfo不能同时传入。 */
   Certificate?: CertificateInput;
   /** 会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。此参数仅适用于TCP/UDP监听器。 */
   SessionExpireTime?: number;
@@ -1269,6 +1291,8 @@ declare interface CreateListenerRequest {
   EndPort?: number;
   /** 解绑后端目标时，是否发RST给客户端，此参数仅适用于TCP监听器。 */
   DeregisterTargetRst?: boolean;
+  /** 证书信息，支持同时传入不同算法类型的多本服务端证书；此参数仅适用于未开启SNI特性的HTTPS监听器。此参数和Certificate不能同时传入。 */
+  MultiCertInfo?: MultiCertInfo;
 }
 
 declare interface CreateListenerResponse {
@@ -2123,7 +2147,7 @@ declare interface ModifyDomainAttributesRequest {
   Domain: string;
   /** 要修改的新域名。NewDomain和NewDomains只能传一个。 */
   NewDomain?: string;
-  /** 域名相关的证书信息，注意，仅对启用SNI的监听器适用。 */
+  /** 域名相关的证书信息，注意，仅对启用SNI的监听器适用，不可和MultiCertInfo 同时传入。 */
   Certificate?: CertificateInput;
   /** 是否开启Http2，注意，只有HTTPS域名才能开启Http2。 */
   Http2?: boolean;
@@ -2133,6 +2157,8 @@ declare interface ModifyDomainAttributesRequest {
   NewDefaultServerDomain?: string;
   /** 要修改的新域名列表。NewDomain和NewDomains只能传一个。 */
   NewDomains?: string[];
+  /** 域名相关的证书信息，注意，仅对启用SNI的监听器适用；支持同时传入多本算法类型不同的服务器证书，不可和MultiCertInfo 同时传入。 */
+  MultiCertInfo?: MultiCertInfo;
 }
 
 declare interface ModifyDomainAttributesResponse {
@@ -2167,7 +2193,7 @@ declare interface ModifyListenerRequest {
   SessionExpireTime?: number;
   /** 健康检查相关参数，此参数仅适用于TCP/UDP/TCP_SSL监听器。 */
   HealthCheck?: HealthCheck;
-  /** 证书相关信息，此参数仅适用于HTTPS/TCP_SSL监听器。 */
+  /** 证书相关信息，此参数仅适用于HTTPS/TCP_SSL监听器；此参数和MultiCertInfo不能同时传入。 */
   Certificate?: CertificateInput;
   /** 监听器转发的方式。可选值：WRR、LEAST_CONN分别表示按权重轮询、最小连接数， 默认为 WRR。 */
   Scheduler?: string;
@@ -2181,6 +2207,8 @@ declare interface ModifyListenerRequest {
   DeregisterTargetRst?: boolean;
   /** 会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。 */
   SessionType?: string;
+  /** 证书信息，支持同时传入不同算法类型的多本服务端证书；此参数仅适用于未开启SNI特性的HTTPS监听器。此参数和Certificate不能同时传入。 */
+  MultiCertInfo?: MultiCertInfo;
 }
 
 declare interface ModifyListenerResponse {

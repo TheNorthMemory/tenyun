@@ -348,9 +348,9 @@ declare interface DescribeWhiteBoxKeyDetailsRequest {
 }
 
 declare interface DescribeWhiteBoxKeyDetailsResponse {
-  /** 白盒密钥信息列表 */
+  /** 白盒密钥信息列表。 */
   KeyInfos: WhiteboxKeyInfo[];
-  /** key总数量 */
+  /** 白盒密钥总数。 */
   TotalCount: number | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
@@ -622,7 +622,7 @@ declare interface GetServiceStatusResponse {
   InvalidType: number | null;
   /** 0-普通版，1-旗舰版 */
   UserLevel: number;
-  /** 旗舰版到期时间 */
+  /** 旗舰版到期时间（Epoch Unix Timestamp）。 */
   ProExpireTime: number | null;
   /** 旗舰版是否自动续费：0-不自动续费，1-自动续费 */
   ProRenewFlag: number | null;

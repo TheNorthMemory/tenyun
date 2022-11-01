@@ -40,7 +40,7 @@ declare interface ResourceInfo {
   RegionId: number | null;
   /** 区域Id */
   ZoneId: number | null;
-  /** 过期时间 */
+  /** 过期时间（Epoch Unix Timestamp） */
   ExpireTime: number | null;
   /** 地域名 */
   RegionName: string | null;
@@ -203,9 +203,9 @@ declare interface DescribeHSMByVpcIdResponse {
 }
 
 declare interface DescribeSubnetRequest {
-  /** 返回数量。 */
+  /** 返回数量。Limit需要在[1, 100]之间。 */
   Limit: number;
-  /** 偏移量。 */
+  /** 偏移量。偏移量最小为0。 */
   Offset: number;
   /** 查询指定VpcId下的子网信息。 */
   VpcId: string;
@@ -259,17 +259,17 @@ declare interface DescribeUsgRuleRequest {
 
 declare interface DescribeUsgRuleResponse {
   /** 安全组详情 */
-  SgRules?: UsgRuleDetail[] | null;
+  SgRules: UsgRuleDetail[] | null;
   /** 安全组详情数量 */
-  TotalCount?: number | null;
+  TotalCount: number | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
 
 declare interface DescribeVpcRequest {
-  /** 返回偏移量。 */
+  /** 返回偏移量。Offset最小为0。 */
   Offset: number;
-  /** 返回数量。 */
+  /** 返回数量。Limit需要在[1, 100]之间。 */
   Limit: number;
   /** 搜索关键字 */
   SearchWord?: string;
@@ -310,7 +310,7 @@ declare interface DescribeVsmAttributesResponse {
   RegionId: number;
   /** 区域Id，返回腾讯云每个地域的可用区代码 */
   ZoneId: number;
-  /** 过期时间 */
+  /** 资源过期时间，以时间戳形式展示。 */
   ExpireTime: number;
   /** 安全组详情信息 */
   SgList: UsgRuleDetail[] | null;

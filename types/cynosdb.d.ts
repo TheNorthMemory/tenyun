@@ -1060,6 +1060,18 @@ declare interface DeleteAuditLogFileResponse {
   RequestId?: string;
 }
 
+declare interface DeleteBackupRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 备份文件ID */
+  SnapshotIdList: number[];
+}
+
+declare interface DeleteBackupResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAccountAllGrantPrivilegesRequest {
   /** 集群id */
   ClusterId: string;
@@ -2027,6 +2039,8 @@ declare interface Cynosdb {
   CreateClusters(data: CreateClustersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClustersResponse>;
   /** {@link DeleteAuditLogFile 删除审计日志文件}({@link DeleteAuditLogFileRequest 请求参数}): {@link DeleteAuditLogFileResponse 返回参数} */
   DeleteAuditLogFile(data: DeleteAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditLogFileResponse>;
+  /** {@link DeleteBackup 删除手动备份}({@link DeleteBackupRequest 请求参数}): {@link DeleteBackupResponse 返回参数} */
+  DeleteBackup(data: DeleteBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupResponse>;
   /** {@link DescribeAccountAllGrantPrivileges 账号所有权限}({@link DescribeAccountAllGrantPrivilegesRequest 请求参数}): {@link DescribeAccountAllGrantPrivilegesResponse 返回参数} */
   DescribeAccountAllGrantPrivileges(data: DescribeAccountAllGrantPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountAllGrantPrivilegesResponse>;
   /** {@link DescribeAccounts 查询数据库管理账号}({@link DescribeAccountsRequest 请求参数}): {@link DescribeAccountsResponse 返回参数} */

@@ -572,6 +572,44 @@ declare interface Publisher {
   Partition: number | null;
 }
 
+/** RabbitMQ节点信息 */
+declare interface RabbitMQPrivateNode {
+  /** 节点名字 */
+  NodeName: string | null;
+}
+
+/** RabbitMQ专享实例信息 */
+declare interface RabbitMQVipInstance {
+  /** 实例id */
+  InstanceId: string;
+  /** 实例名称 */
+  InstanceName: string;
+  /** 实例版本 */
+  InstanceVersion: string | null;
+  /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败 */
+  Status: number;
+  /** 节点数量 */
+  NodeCount: number;
+  /** 实例配置规格名称 */
+  ConfigDisplay: string;
+  /** 峰值TPS */
+  MaxTps: number;
+  /** 峰值带宽，Mbps为单位 */
+  MaxBandWidth: number;
+  /** 存储容量，GB为单位 */
+  MaxStorage: number;
+  /** 实例到期时间，毫秒为单位 */
+  ExpireTime: number;
+  /** 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置) */
+  AutoRenewFlag: number;
+  /** 0-后付费，1-预付费 */
+  PayMode: number;
+  /** 备注信息 */
+  Remark: string | null;
+  /** 实例配置ID */
+  SpecName: string;
+}
+
 /** 消息保留策略 */
 declare interface RetentionPolicy {
   /** 消息保留时长 */
@@ -2092,6 +2130,42 @@ declare interface DescribePublishersResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRabbitMQNodeListRequest {
+  /** 不适用，默认参数 */
+  InstanceId: string;
+  /** 偏移量 */
+  Offset?: number;
+  /** 一页限制 */
+  Limit?: number;
+}
+
+declare interface DescribeRabbitMQNodeListResponse {
+  /** 集群列表数量 */
+  TotalCount: number;
+  /** 集群列表 */
+  NodeList: RabbitMQPrivateNode[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRabbitMQVipInstancesRequest {
+  /** 查询条件过滤器 */
+  Filters?: Filter[];
+  /** 查询数目上限，默认20 */
+  Limit?: number;
+  /** 查询起始位置 */
+  Offset?: number;
+}
+
+declare interface DescribeRabbitMQVipInstancesResponse {
+  /** 未分页的总数目 */
+  TotalCount: number;
+  /** 实例信息列表 */
+  Instances: RabbitMQVipInstance[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRocketMQClusterRequest {
   /** 集群ID */
   ClusterId: string;
@@ -2951,6 +3025,10 @@ declare interface Tdmq {
   DescribePublisherSummary(data: DescribePublisherSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublisherSummaryResponse>;
   /** {@link DescribePublishers 获取生产者信息}({@link DescribePublishersRequest 请求参数}): {@link DescribePublishersResponse 返回参数} */
   DescribePublishers(data: DescribePublishersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublishersResponse>;
+  /** {@link DescribeRabbitMQNodeList RabbitMQ专享版查询节点列表}({@link DescribeRabbitMQNodeListRequest 请求参数}): {@link DescribeRabbitMQNodeListResponse 返回参数} */
+  DescribeRabbitMQNodeList(data: DescribeRabbitMQNodeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQNodeListResponse>;
+  /** {@link DescribeRabbitMQVipInstances 查询RabbitMQ专享实例列表}({@link DescribeRabbitMQVipInstancesRequest 请求参数}): {@link DescribeRabbitMQVipInstancesResponse 返回参数} */
+  DescribeRabbitMQVipInstances(data?: DescribeRabbitMQVipInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVipInstancesResponse>;
   /** {@link DescribeRocketMQCluster 获取单个RocketMQ集群信息}({@link DescribeRocketMQClusterRequest 请求参数}): {@link DescribeRocketMQClusterResponse 返回参数} */
   DescribeRocketMQCluster(data: DescribeRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQClusterResponse>;
   /** {@link DescribeRocketMQClusters 获取RocketMQ集群列表}({@link DescribeRocketMQClustersRequest 请求参数}): {@link DescribeRocketMQClustersResponse 返回参数} */

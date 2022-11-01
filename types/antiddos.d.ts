@@ -2474,6 +2474,24 @@ declare interface DescribeOverviewIndexResponse {
   RequestId?: string;
 }
 
+declare interface DescribePendingRiskInfoRequest {
+}
+
+declare interface DescribePendingRiskInfoResponse {
+  /** 是否为付费用户 */
+  IsPaidUsr: boolean;
+  /** 攻击中的资源数量 */
+  AttackingCount: number;
+  /** 封堵中的资源数量 */
+  BlockingCount: number;
+  /** 已过期的资源数量 */
+  ExpiredCount: number;
+  /** 所有待处理风险事件总数 */
+  Total: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DisassociateDDoSEipAddressRequest {
   /** 资源实例ID，实例ID形如：bgpip-0000011x。只能填写高防IP实例。 */
   InstanceId: string;
@@ -2865,6 +2883,8 @@ declare interface Antiddos {
   DescribeOverviewDDoSTrend(data: DescribeOverviewDDoSTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewDDoSTrendResponse>;
   /** {@link DescribeOverviewIndex 拉取防护概览指标}({@link DescribeOverviewIndexRequest 请求参数}): {@link DescribeOverviewIndexResponse 返回参数} */
   DescribeOverviewIndex(data: DescribeOverviewIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewIndexResponse>;
+  /** {@link DescribePendingRiskInfo 查询账号维度待处理风险信息}({@link DescribePendingRiskInfoRequest 请求参数}): {@link DescribePendingRiskInfoResponse 返回参数} */
+  DescribePendingRiskInfo(data?: DescribePendingRiskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePendingRiskInfoResponse>;
   /** {@link DisassociateDDoSEipAddress 解绑高防弹性公网IP}({@link DisassociateDDoSEipAddressRequest 请求参数}): {@link DisassociateDDoSEipAddressResponse 返回参数} */
   DisassociateDDoSEipAddress(data: DisassociateDDoSEipAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateDDoSEipAddressResponse>;
   /** {@link ModifyCCLevelPolicy 修改CC的防护等级}({@link ModifyCCLevelPolicyRequest 请求参数}): {@link ModifyCCLevelPolicyResponse 返回参数} */

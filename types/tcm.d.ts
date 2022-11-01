@@ -612,6 +612,18 @@ declare interface LinkClusterListResponse {
   RequestId?: string;
 }
 
+declare interface LinkPrometheusRequest {
+  /** 网格ID */
+  MeshID: string;
+  /** 配置 */
+  Prometheus: PrometheusConfig;
+}
+
+declare interface LinkPrometheusResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyMeshRequest {
   /** 需要修改的网格Id */
   MeshId: string;
@@ -640,6 +652,16 @@ declare interface UnlinkClusterResponse {
   RequestId?: string;
 }
 
+declare interface UnlinkPrometheusRequest {
+  /** 网格ID */
+  MeshID: string;
+}
+
+declare interface UnlinkPrometheusResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 /** {@link Tcm 服务网格} */
 declare interface Tcm {
   (): Versions;
@@ -653,10 +675,14 @@ declare interface Tcm {
   DescribeMeshList(data?: DescribeMeshListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMeshListResponse>;
   /** {@link LinkClusterList 关联集群}({@link LinkClusterListRequest 请求参数}): {@link LinkClusterListResponse 返回参数} */
   LinkClusterList(data: LinkClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<LinkClusterListResponse>;
+  /** {@link LinkPrometheus 关联Prometheus}({@link LinkPrometheusRequest 请求参数}): {@link LinkPrometheusResponse 返回参数} */
+  LinkPrometheus(data: LinkPrometheusRequest, config?: AxiosRequestConfig): AxiosPromise<LinkPrometheusResponse>;
   /** {@link ModifyMesh 修改网格}({@link ModifyMeshRequest 请求参数}): {@link ModifyMeshResponse 返回参数} */
   ModifyMesh(data: ModifyMeshRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMeshResponse>;
   /** {@link UnlinkCluster 解关联集群}({@link UnlinkClusterRequest 请求参数}): {@link UnlinkClusterResponse 返回参数} */
   UnlinkCluster(data: UnlinkClusterRequest, config?: AxiosRequestConfig): AxiosPromise<UnlinkClusterResponse>;
+  /** {@link UnlinkPrometheus 解除关联Prometheus}({@link UnlinkPrometheusRequest 请求参数}): {@link UnlinkPrometheusResponse 返回参数} */
+  UnlinkPrometheus(data: UnlinkPrometheusRequest, config?: AxiosRequestConfig): AxiosPromise<UnlinkPrometheusResponse>;
 }
 
 export declare type Versions = ["2021-04-13"];

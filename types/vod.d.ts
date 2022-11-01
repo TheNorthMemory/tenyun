@@ -1336,6 +1336,8 @@ declare interface AudioTrackItem {
   SourceMediaStartTime?: number;
   /** 音频片段的时长，单位为秒。默认和素材本身长度一致，表示截取全部素材。 */
   Duration?: number;
+  /** 音频片段目标时长，单位为秒。当 TargetDuration 不填或填0时，表示目标时长和 Duration 一致；当 TargetDuration 取大于0的值时，将对音频片段做快进或慢放等处理，使得输出片段的时长等于 TargetDuration。 */
+  TargetDuration?: number;
   /** 对音频片段进行的操作，如音量调节等。 */
   AudioOperations?: AudioTransform[];
 }
@@ -4380,6 +4382,8 @@ declare interface VideoTrackItem {
   SourceMediaStartTime?: number;
   /** 视频片段时长，单位为秒。默认取视频素材本身长度，表示截取全部素材。如果源文件是图片，Duration需要大于0。 */
   Duration?: number;
+  /** 视频片段目标时长，单位为秒。当 TargetDuration 不填或填0时，表示目标时长和 Duration 一致；当 TargetDuration 取大于0的值时，将对视频片段做快进或慢放等处理，使得输出片段的时长等于 TargetDuration。 */
+  TargetDuration?: number;
   /** 视频原点位置，取值有：Center：坐标原点为中心位置，如画布中心。默认值 ：Center。 */
   CoordinateOrigin?: string;
   /** 视频片段原点距离画布原点的水平位置。支持 %、px 两种格式：当字符串以 % 结尾，表示视频片段 XPos 为画布宽度指定百分比的位置，如 10% 表示 XPos 为画布口宽度的 10%。当字符串以 px 结尾，表示视频片段 XPos 单位为像素，如 100px 表示 XPos 为100像素。默认值：0px。 */
@@ -4390,10 +4394,10 @@ declare interface VideoTrackItem {
   Width?: string;
   /** 视频片段的高度。支持 %、px 两种格式：当字符串以 % 结尾，表示视频片段 Height 为画布高度的百分比大小，如 10% 表示 Height 为画布高度的 10%；当字符串以 px 结尾，表示视频片段 Height 单位为像素，如 100px 表示 Height 为100像素。当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。当 Width 为空，Height 非空，则 Width 按比例缩放当 Width 非空，Height 为空，则 Height 按比例缩放。 */
   Height?: string;
-  /** 对图像进行的操作，如图像旋转等。 */
-  ImageOperations?: ImageTransform[];
   /** 对音频进行操作，如静音等。 */
   AudioOperations?: AudioTransform[];
+  /** 对图像进行的操作，如图像旋转等。 */
+  ImageOperations?: ImageTransform[];
 }
 
 /** 水印周期配置。 */

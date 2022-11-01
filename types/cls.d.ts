@@ -506,11 +506,13 @@ declare interface LogsetInfo {
   LogsetName: string;
   /** 创建时间 */
   CreateTime: string;
+  /** 云产品标识，日志集由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE */
+  AssumerName: string | null;
   /** 日志集绑定的标签 */
   Tags: Tag[] | null;
   /** 日志集下日志主题的数目 */
   TopicCount: number;
-  /** 若AssumerUin非空，则表示创建该日志集的服务方角色 */
+  /** 若AssumerName非空，则表示创建该日志集的服务方角色 */
   RoleName: string;
 }
 
@@ -720,6 +722,8 @@ declare interface TopicInfo {
   PartitionCount: number;
   /** 是否开启索引 */
   Index: boolean;
+  /** 云产品标识，日志主题由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE */
+  AssumerName: string | null;
   /** 创建时间 */
   CreateTime: string;
   /** 日主主题是否开启采集 */
@@ -734,6 +738,10 @@ declare interface TopicInfo {
   StorageType: string | null;
   /** 生命周期，单位天，可取值范围1~3600。取值为3640时代表永久保存 */
   Period: number | null;
+  /** 云产品二级标识，日志主题由其它云产品创建时，该字段会显示云产品名称及其日志类型的二级分类，例如TKE-Audit、TKE-Event。部分云产品仅有云产品标识(AssumerName)，无该字段。 */
+  SubAssumerName: string | null;
+  /** 日志主题描述 */
+  Describes: string | null;
 }
 
 /** 需要开启键值索引的字段的索引描述信息 */
