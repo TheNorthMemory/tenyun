@@ -2,6 +2,34 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 接口描述信息 */
+declare interface APIConfigDetail {
+  /** 接口id */
+  Id: string | null;
+  /** 接口所属服务组id */
+  ServiceGroupId: string | null;
+  /** 接口描述 */
+  Description: string | null;
+  /** 相对路径 */
+  RelativeUrl: string | null;
+  /** 服务类型 HTTP HTTPS */
+  ServiceType: string | null;
+  /** GET POST */
+  HttpMethod: string | null;
+  /** 请求示例 */
+  HttpInputExample: string | null;
+  /** 回包示例 */
+  HttpOutputExample: string | null;
+  /** 更新成员 */
+  UpdatedBy: string | null;
+  /** 更新时间 */
+  UpdatedAt: string | null;
+  /** 主账号uin */
+  Uin: string | null;
+  /** 子账号subuin */
+  SubUin: string | null;
+}
+
 /** 跑批任务详情 */
 declare interface BatchTaskDetail {
   /** 跑批任务ID */
@@ -150,6 +178,22 @@ declare interface CronInfo {
   StartTime?: string | null;
   /** 周期结束时间 */
   EndTime?: string | null;
+}
+
+/** 定时扩缩任务 */
+declare interface CronScaleJob {
+  /** Cron表达式，标识任务的执行时间，精确到分钟级 */
+  Schedule: string;
+  /** 定时任务名 */
+  Name?: string | null;
+  /** 目标实例数 */
+  TargetReplicas?: number | null;
+  /** 目标min */
+  MinReplicas?: number | null;
+  /** 目标max */
+  MaxReplicas?: number | null;
+  /** 例外时间，Cron表达式，在对应时间内不执行任务。最多支持3条。 */
+  ExcludeDates?: string[] | null;
 }
 
 /** 自定义指标 */
@@ -314,6 +358,14 @@ declare interface DetectionLabelInfo {
   FrameType: string | null;
 }
 
+/** 环境变量 */
+declare interface EnvVar {
+  /** 环境变量key */
+  Name?: string | null;
+  /** 环境变量value */
+  Value?: string | null;
+}
+
 /** 过滤器 */
 declare interface Filter {
   /** 过滤字段名称 */
@@ -378,6 +430,8 @@ declare interface FrameworkVersion {
   Version: string;
   /** 训练模式 */
   TrainingModes: string[];
+  /** 框架运行环境 */
+  Environment?: string;
 }
 
 /** gpu 详情 */
@@ -408,6 +462,16 @@ declare interface HDFSConfig {
   Path: string;
 }
 
+/** hpa的描述 */
+declare interface HorizontalPodAutoscaler {
+  /** 最小实例数 */
+  MinReplicas: number | null;
+  /** 最大实例数 */
+  MaxReplicas: number | null;
+  /** 扩缩容指标 */
+  HpaMetrics: Option[] | null;
+}
+
 /** 镜像描述信息 */
 declare interface ImageInfo {
   /** 镜像类型：TCR为腾讯云TCR镜像; CCR为腾讯云TCR个人版镜像，PreSet为平台预置镜像 */
@@ -418,6 +482,20 @@ declare interface ImageInfo {
   RegistryRegion?: string | null;
   /** TCR镜像对应的实例id */
   RegistryId?: string | null;
+}
+
+/** 服务的调用信息，服务组下唯一 */
+declare interface InferGatewayCallInfo {
+  /** 内网http调用地址 */
+  VpcHttpAddr: string | null;
+  /** 内网https调用地址 */
+  VpcHttpsAddr: string | null;
+  /** 内网grpc调用地址 */
+  VpcGrpcTlsAddr: string | null;
+  /** 可访问的vpcid */
+  VpcId: string | null;
+  /** 后端ip对应的子网 */
+  SubnetId: string | null;
 }
 
 /** 推理镜像详情 */
@@ -540,6 +618,14 @@ declare interface OcrLabelInfo {
   Direction: string | null;
 }
 
+/** 键值对 */
+declare interface Option {
+  /** 指标名 */
+  Name: string;
+  /** 指标值 */
+  Value: number;
+}
+
 /** 点信息描述 */
 declare interface PointInfo {
   /** X坐标值 */
@@ -596,10 +682,12 @@ declare interface ResourceInfo {
   Memory: number | null;
   /** Gpu卡个数资源, 单位为0.01单位的GpuType.Gpu=100表示使用了“一张”gpu卡, 但此处的“一张”卡有可能是虚拟化后的1/4卡, 也有可能是整张卡. 取决于实例的机型例1 实例的机型带有1张虚拟gpu卡, 每张虚拟gpu卡对应1/4张实际T4卡, 则此时 GpuType=T4, Gpu=100, RealGpu=25.例2 实例的机型带有4张gpu整卡, 每张卡对应1张实际T4卡, 则 此时 GpuType=T4, Gpu=400, RealGpu=400. */
   Gpu?: number | null;
-  /** Gpu卡型号 T4或者V100 */
+  /** Gpu卡型号 T4或者V100。仅展示当前 GPU 卡型号，若存在多类型同时使用，则参考 RealGpuDetailSet 的值。 */
   GpuType?: string | null;
   /** 创建或更新时无需填写，仅展示需要关注后付费非整卡实例对应的实际的Gpu卡资源, 表示gpu资源对应实际的gpu卡个数.RealGpu=100表示实际使用了一张gpu卡, 对应实际的实例机型, 有可能代表带有1/4卡的实例4个, 或者带有1/2卡的实例2个, 或者带有1卡的实力1个. */
   RealGpu?: number | null;
+  /** 创建或更新时无需填写，仅展示需要关注。详细的GPU使用信息。 */
+  RealGpuDetailSet?: GpuDetail[] | null;
 }
 
 /** 文本行信息 */
@@ -614,6 +702,14 @@ declare interface RowValue {
   Name: string;
   /** 列值 */
   Value: string | null;
+}
+
+/** 定时的事务和行为 */
+declare interface ScheduledAction {
+  /** 是否要定时停止服务，true or false。true 则 ScheduleStopTime 必填， false 则 ScheduleStopTime 不生效 */
+  ScheduleStop?: boolean;
+  /** 要执行定时停止的时间，格式：“2022-01-26 19:46:22” */
+  ScheduleStopTime?: string;
 }
 
 /** 表格数据集表头信息 */
@@ -634,6 +730,178 @@ declare interface SegmentationInfo {
   Gray: number | null;
   /** 颜色 */
   Color: string | null;
+}
+
+/** 描述在线服务 */
+declare interface Service {
+  /** 服务组id */
+  ServiceGroupId: string;
+  /** 服务id */
+  ServiceId: string;
+  /** 服务组名 */
+  ServiceGroupName: string;
+  /** 服务描述 */
+  ServiceDescription: string | null;
+  /** 集群id */
+  ClusterId: string | null;
+  /** 地域 */
+  Region: string | null;
+  /** 命名空间 */
+  Namespace: string | null;
+  /** 付费类型 */
+  ChargeType: string | null;
+  /** 后付费资源组id */
+  ResourceGroupId: string | null;
+  /** 创建者 */
+  CreatedBy: string | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 更新时间 */
+  UpdateTime: string | null;
+  /** 主账号 */
+  Uin: string | null;
+  /** 子账号 */
+  SubUin: string | null;
+  /** app_id */
+  AppId: number | null;
+  /** 版本号 */
+  Version: string | null;
+  /** 服务组下服务的最高版本号 */
+  LatestVersion: string | null;
+  /** 服务的详细信息 */
+  ServiceInfo: ServiceInfo | null;
+  /** 服务的业务状态 */
+  BusinessStatus: string | null;
+  /** 服务的创建来源 AUTO_ML,DEFAULT */
+  CreateSource: string | null;
+  /** 费用信息 */
+  BillingInfo: string | null;
+  /** 服务状态 */
+  Status: string | null;
+  /** 模型权重 */
+  Weight: number | null;
+  /** 服务所在的 ingress 的 name */
+  IngressName: string | null;
+  /** 服务限速限流相关配置 */
+  ServiceLimit: ServiceLimit | null;
+  /** 定时停止的配置 */
+  ScheduledAction: ScheduledAction | null;
+}
+
+/** 服务的调用信息，服务组下唯一 */
+declare interface ServiceCallInfo {
+  /** 服务组id */
+  ServiceGroupId: string | null;
+  /** 内网http调用地址 */
+  InnerHttpAddr: string | null;
+  /** 内网https调用地址 */
+  InnerHttpsAddr: string | null;
+  /** 内网http调用地址 */
+  OuterHttpAddr: string | null;
+  /** 内网https调用地址 */
+  OuterHttpsAddr: string | null;
+  /** 调用key */
+  AppKey: string | null;
+  /** 调用secret */
+  AppSecret: string | null;
+}
+
+/** 在线服务一个服务组的信息 */
+declare interface ServiceGroup {
+  /** 服务组id */
+  ServiceGroupId: string;
+  /** 服务组名 */
+  ServiceGroupName: string;
+  /** 创建者 */
+  CreatedBy: string;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 更新时间 */
+  UpdateTime: string;
+  /** 主账号 */
+  Uin: string;
+  /** 服务组下服务总数 */
+  ServiceCount: number | null;
+  /** 服务组下在运行的服务数量 */
+  RunningServiceCount: number | null;
+  /** 服务描述 */
+  Services: Service[] | null;
+  /** 服务组状态，与服务一致 CREATING 创建中 CREATE_FAILED 创建失败 Normal	正常运行中 Stopped 已停止 Stopping 停止中 Abnormal 异常 Pending 启动中 Waiting 就绪中 */
+  Status: string | null;
+  /** 服务组标签 */
+  Tags: Tag[] | null;
+  /** 服务组下最高版本 */
+  LatestVersion: string | null;
+  /** 服务的业务状态CREATING 创建中 CREATE_FAILED 创建失败 ARREARS_STOP 因欠费被强制停止 BILLING 计费中 WHITELIST_USING 白名单试用中 WHITELIST_STOP 白名单额度不足 */
+  BusinessStatus: string | null;
+  /** 服务的计费信息 */
+  BillingInfo: string | null;
+  /** 服务的创建来源 */
+  CreateSource: string | null;
+  /** 服务组的权重更新状态 UPDATING 更新中 UPDATED 更新成功 UPDATE_FAILED 更新失败 */
+  WeightUpdateStatus: string | null;
+}
+
+/** 服务历史版本 */
+declare interface ServiceHistory {
+  /** 版本 */
+  Revision: string | null;
+  /** 更新时间 */
+  UpdateTime: string | null;
+  /** 镜像 */
+  Image: string | null;
+  /** 模型文件 */
+  ModelFile: string | null;
+  /** 原始数据 */
+  RawData: string | null;
+}
+
+/** 推理服务在集群中的信息 */
+declare interface ServiceInfo {
+  /** 期望运行的Pod数量，停止状态是0不同计费模式和调节模式下对应关系如下PREPAID 和 POSTPAID_BY_HOUR:手动调节模式下对应 实例数量自动调节模式下对应 基于时间的默认策略的实例数量HYBRID_PAID:后付费实例手动调节模式下对应 实例数量后付费实例自动调节模式下对应 时间策略的默认策略的实例数量 */
+  Replicas: number | null;
+  /** 镜像信息 */
+  ImageInfo: ImageInfo | null;
+  /** 环境变量 */
+  Env: EnvVar[] | null;
+  /** 资源信息 */
+  Resources: ResourceInfo | null;
+  /** 后付费实例对应的机型规格 */
+  InstanceType: string | null;
+  /** 模型信息 */
+  ModelInfo: ModelInfo | null;
+  /** 是否启用日志 */
+  LogEnable: boolean | null;
+  /** 日志配置 */
+  LogConfig: LogConfig | null;
+  /** 是否开启鉴权 */
+  AuthorizationEnable: boolean | null;
+  /** hpa配置 */
+  HorizontalPodAutoscaler: HorizontalPodAutoscaler | null;
+  /** 服务的状态描述 */
+  Status: WorkloadStatus | null;
+  /** 权重 */
+  Weight: number | null;
+  /** 实例列表 */
+  PodList: string[] | null;
+  /** 资源总量 */
+  ResourceTotal: ResourceInfo | null;
+  /** 历史实例数 */
+  OldReplicas: number | null;
+  /** 计费模式[HYBRID_PAID]时生效, 用于标识混合计费模式下的预付费实例数, 若不填则默认为1 */
+  HybridBillingPrepaidReplicas: number | null;
+  /** 历史 HYBRID_PAID 时的实例数，用户恢复服务 */
+  OldHybridBillingPrepaidReplicas: number | null;
+  /** 是否开启模型的热更新。默认不开启 */
+  ModelHotUpdateEnable: boolean | null;
+}
+
+/** 服务的限流限速等配置 */
+declare interface ServiceLimit {
+  /** 是否开启实例层面限流限速，true or false。true 则 InstanceRpsLimit 必填， false 则 InstanceRpsLimit 不生效 */
+  EnableInstanceRpsLimit?: boolean;
+  /** 每个服务实例的 request per second 限速, 0 为不限流 */
+  InstanceRpsLimit?: number;
 }
 
 /** 计费项内容 */
@@ -672,6 +940,20 @@ declare interface StartCmdInfo {
   PsStartCmd?: string;
   /** worker启动命令 */
   WorkerStartCmd?: string;
+}
+
+/** 实例状况 */
+declare interface StatefulSetCondition {
+  /** 信息 */
+  Message: string | null;
+  /** 原因 */
+  Reason: string | null;
+  /** Status of the condition, one of True, False, Unknown. */
+  Status: string | null;
+  /** 类型 */
+  Type: string | null;
+  /** 上次更新的时间 */
+  LastTransitionTime: string | null;
 }
 
 /** 描述腾讯云标签 */
@@ -858,8 +1140,8 @@ declare interface TrainingTaskDetail {
   FrameworkName: string | null;
   /** 训练框架版本 */
   FrameworkVersion: string | null;
-  /** 训练模式，eg：PS_WORKER、DDP、MPI、HOROVOD */
-  TrainingMode: string | null;
+  /** 框架运行环境 */
+  FrameworkEnvironment: string | null;
   /** 计费模式 */
   ChargeType: string;
   /** 预付费专用资源组 */
@@ -868,8 +1150,8 @@ declare interface TrainingTaskDetail {
   ResourceConfigInfos: ResourceConfigInfo[];
   /** 标签 */
   Tags: Tag[] | null;
-  /** 自定义镜像信息 */
-  ImageInfo: ImageInfo | null;
+  /** 训练模式，eg：PS_WORKER、DDP、MPI、HOROVOD */
+  TrainingMode: string | null;
   /** 代码包 */
   CodePackagePath: CosPathInfo;
   /** 启动命令信息 */
@@ -890,8 +1172,8 @@ declare interface TrainingTaskDetail {
   VpcId: string | null;
   /** 子网ID */
   SubnetId: string | null;
-  /** 任务状态 */
-  Status: string;
+  /** 自定义镜像信息 */
+  ImageInfo: ImageInfo | null;
   /** 运行时长 */
   RuntimeInSeconds: number | null;
   /** 创建时间 */
@@ -918,6 +1200,8 @@ declare interface TrainingTaskDetail {
   ResourceGroupName: string | null;
   /** 任务信息 */
   Message: string | null;
+  /** 任务状态 */
+  Status: string;
 }
 
 /** 出参类型 */
@@ -930,8 +1214,8 @@ declare interface TrainingTaskSetItem {
   FrameworkName: string | null;
   /** 训练框架版本 */
   FrameworkVersion: string | null;
-  /** 训练模式eg：PS_WORKER、DDP、MPI、HOROVOD */
-  TrainingMode: string | null;
+  /** 框架运行环境 */
+  FrameworkEnvironment: string | null;
   /** 计费模式 */
   ChargeType: string;
   /** 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中 */
@@ -940,8 +1224,8 @@ declare interface TrainingTaskSetItem {
   ResourceGroupId: string | null;
   /** 资源配置 */
   ResourceConfigInfos: ResourceConfigInfo[];
-  /** 标签配置 */
-  Tags: Tag[] | null;
+  /** 训练模式eg：PS_WORKER、DDP、MPI、HOROVOD */
+  TrainingMode: string | null;
   /** 任务状态 */
   Status: string;
   /** 运行时长 */
@@ -966,6 +1250,42 @@ declare interface TrainingTaskSetItem {
   ImageInfo: ImageInfo | null;
   /** 任务信息 */
   Message: string | null;
+  /** 标签配置 */
+  Tags: Tag[] | null;
+}
+
+/** 外部挂载信息 */
+declare interface VolumeMount {
+  /** cfs的配置信息 */
+  CFSConfig: CFSConfig;
+  /** 挂载源类型 */
+  VolumeSourceType?: string;
+}
+
+/** 服务的权重 */
+declare interface WeightEntry {
+  /** 服务id */
+  ServiceId: string;
+  /** 流量权重值，同 ServiceGroup 下 总和应为 100 */
+  Weight: number;
+}
+
+/** 工作负载的状态 */
+declare interface WorkloadStatus {
+  /** 当前实例数 */
+  Replicas: number;
+  /** 更新的实例数 */
+  UpdatedReplicas: number;
+  /** 就绪的实例数 */
+  ReadyReplicas: number;
+  /** 可用的实例数 */
+  AvailableReplicas: number;
+  /** 不可用的实例数 */
+  UnavailableReplicas: number;
+  /** Normal	正常运行中Abnormal	服务异常，例如容器启动失败等Waiting	服务等待中，例如容器下载镜像过程等Stopped 已停止 Pending 启动中Stopping 停止中 */
+  Status: string;
+  /** 工作负载的状况信息 */
+  StatefulSetCondition?: StatefulSetCondition[];
 }
 
 declare interface CreateBatchTaskRequest {
@@ -1046,6 +1366,68 @@ declare interface CreateDatasetResponse {
   RequestId?: string;
 }
 
+declare interface CreateModelServiceRequest {
+  /** 镜像信息，配置服务运行所需的镜像地址等信息 */
+  ImageInfo: ImageInfo;
+  /** 新增版本时需要填写 */
+  ServiceGroupId?: string;
+  /** 不超过60个字，仅支持英文、数字、下划线"_"、短横"-"，只能以英文、数字开头 */
+  ServiceGroupName?: string;
+  /** 模型服务的描述 */
+  ServiceDescription?: string;
+  /** 付费模式,有 PREPAID 、 POSTPAID_BY_HOUR 和 HYBRID_PAID 三种 */
+  ChargeType?: string;
+  /** 预付费模式下所属的资源组id，同服务组下唯一 */
+  ResourceGroupId?: string;
+  /** 模型信息，需要挂载模型时填写 */
+  ModelInfo?: ModelInfo;
+  /** 环境变量，可选参数，用于配置容器中的环境变量 */
+  Env?: EnvVar[];
+  /** 资源描述，指定预付费模式下的cpu,mem,gpu等信息，后付费无需填写 */
+  Resources?: ResourceInfo;
+  /** 使用DescribeBillingSpecs接口返回的规格列表中的值，或者参考实例列表:TI.S.MEDIUM.POST	2C4GTI.S.LARGE.POST	4C8GTI.S.2XLARGE16.POST	8C16GTI.S.2XLARGE32.POST	8C32GTI.S.4XLARGE32.POST	16C32GTI.S.4XLARGE64.POST	16C64GTI.S.6XLARGE48.POST	24C48GTI.S.6XLARGE96.POST	24C96GTI.S.8XLARGE64.POST	32C64GTI.S.8XLARGE128.POST 32C128GTI.GN7.LARGE20.POST	4C20G T4*1/4TI.GN7.2XLARGE40.POST	10C40G T4*1/2TI.GN7.2XLARGE32.POST	8C32G T4*1TI.GN7.5XLARGE80.POST	20C80G T4*1TI.GN7.8XLARGE128.POST	32C128G T4*1TI.GN7.10XLARGE160.POST	40C160G T4*2TI.GN7.20XLARGE320.POST	80C320G T4*4 */
+  InstanceType?: string;
+  /** 扩缩容类型 支持：自动 - "AUTO", 手动 - "MANUAL",默认为MANUAL */
+  ScaleMode?: string;
+  /** 实例数量, 不同计费模式和调节模式下对应关系如下PREPAID 和 POSTPAID_BY_HOUR:手动调节模式下对应 实例数量自动调节模式下对应 基于时间的默认策略的实例数量HYBRID_PAID:后付费实例手动调节模式下对应 实例数量后付费实例自动调节模式下对应 时间策略的默认策略的实例数量 */
+  Replicas?: number;
+  /** 自动伸缩信息 */
+  HorizontalPodAutoscaler?: HorizontalPodAutoscaler;
+  /** 是否开启日志投递，开启后需填写配置投递到指定cls */
+  LogEnable?: boolean;
+  /** 日志配置，需要投递服务日志到指定cls时填写 */
+  LogConfig?: LogConfig;
+  /** 是否开启接口鉴权，开启后自动生成token信息，访问需要token鉴权 */
+  AuthorizationEnable?: boolean;
+  /** 腾讯云标签 */
+  Tags?: Tag[];
+  /** 是否新增版本 */
+  NewVersion?: boolean;
+  /** 定时任务配置，使用定时策略时填写 */
+  CronScaleJobs?: CronScaleJob[];
+  /** 自动伸缩策略配置 HPA : 通过HPA进行弹性伸缩 CRON 通过定时任务进行伸缩 */
+  ScaleStrategy?: string;
+  /** 计费模式[HYBRID_PAID]时生效, 用于标识混合计费模式下的预付费实例数 */
+  HybridBillingPrepaidReplicas?: number;
+  /** [AUTO_ML 自动学习，自动学习正式发布 AUTO_ML_FORMAL, DEFAULT 默认] */
+  CreateSource?: string;
+  /** 是否开启模型的热更新。默认不开启 */
+  ModelHotUpdateEnable?: boolean;
+  /** 定时停止配置 */
+  ScheduledAction?: ScheduledAction;
+  /** 挂载配置，目前只支持CFS */
+  VolumeMount?: VolumeMount;
+  /** 服务限速限流相关配置 */
+  ServiceLimit?: ServiceLimit;
+}
+
+declare interface CreateModelServiceResponse {
+  /** 生成的模型服务 */
+  Service: Service | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateTrainingModelRequest {
   /** 导入方式MODEL：导入新模型VERSION：导入新版本EXIST：导入现有版本 */
   ImportMethod: string;
@@ -1111,22 +1493,24 @@ declare interface CreateTrainingModelResponse {
 declare interface CreateTrainingTaskRequest {
   /** 训练任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
   Name: string;
-  /** 训练模式，通过DescribeTrainingFrameworks接口查询，eg：PS_WORKER、DDP、MPI、HOROVOD */
-  TrainingMode: string;
   /** 计费模式，eg：PREPAID预付费，即包年包月；POSTPAID_BY_HOUR按小时后付费 */
   ChargeType: string;
   /** 资源配置，需填写对应算力规格ID和节点数量，算力规格ID查询接口为DescribeBillingSpecsPrice，eg：[{"Role":"WORKER", "InstanceType": "TI.S.MEDIUM.POST", "InstanceNum": 1}] */
   ResourceConfigInfos: ResourceConfigInfo[];
   /** COS代码包路径 */
   CodePackagePath: CosPathInfo;
+  /** 训练模式，通过DescribeTrainingFrameworks接口查询，eg：PS_WORKER、DDP、MPI、HOROVOD */
+  TrainingMode: string;
   /** COS训练输出路径 */
   Output: CosPathInfo;
   /** 是否上报日志 */
   LogEnable: boolean;
   /** 训练框架名称，通过DescribeTrainingFrameworks接口查询，eg：SPARK、PYSPARK、TENSORFLOW、PYTORCH */
   FrameworkName?: string;
-  /** 训练框架版本，通过DescribeTrainingFrameworks接口查询，eg：tf1.15-py3.7-cpu、torch1.9-py3.8-cuda11.1-gpu */
+  /** 训练框架版本，通过DescribeTrainingFrameworks接口查询，eg：1.15、1.9 */
   FrameworkVersion?: string;
+  /** 训练框架环境，通过DescribeTrainingFrameworks接口查询，eg：tf1.15-py3.7-cpu、torch1.9-py3.8-cuda11.1-gpu */
+  FrameworkEnvironment?: string;
   /** 预付费专用资源组ID，通过DescribeBillingResourceGroups接口查询 */
   ResourceGroupId?: string;
   /** 标签配置 */
@@ -1135,8 +1519,6 @@ declare interface CreateTrainingTaskRequest {
   ImageInfo?: ImageInfo;
   /** 启动命令信息，默认为sh start.sh */
   StartCmdInfo?: StartCmdInfo;
-  /** 数据来源，eg：DATASET、COS、CFS、HDFS */
-  DataSource?: string;
   /** 数据配置 */
   DataConfigs?: DataConfig[];
   /** VPC Id */
@@ -1149,6 +1531,8 @@ declare interface CreateTrainingTaskRequest {
   TuningParameters?: string;
   /** 备注，最多500个字 */
   Remark?: string;
+  /** 数据来源，eg：DATASET、COS、CFS、HDFS */
+  DataSource?: string;
 }
 
 declare interface CreateTrainingTaskResponse {
@@ -1178,6 +1562,26 @@ declare interface DeleteDatasetRequest {
 declare interface DeleteDatasetResponse {
   /** 删除的datasetId */
   DatasetId: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteModelServiceGroupRequest {
+  /** 服务id */
+  ServiceGroupId: string;
+}
+
+declare interface DeleteModelServiceGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteModelServiceRequest {
+  /** 服务id */
+  ServiceId: string;
+}
+
+declare interface DeleteModelServiceResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1214,6 +1618,28 @@ declare interface DeleteTrainingTaskRequest {
 }
 
 declare interface DeleteTrainingTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAPIConfigsRequest {
+  /** 偏移量，默认为0 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100 */
+  Limit?: number;
+  /** 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列 */
+  Order?: string;
+  /** 排序的依据字段， 取值范围 "CreateTime" "UpdateTime" */
+  OrderField?: string;
+  /** 分页参数，支持的分页过滤Name包括：["ClusterId", "ServiceId", "ServiceGroupName", "ServiceGroupId"] */
+  Filters?: Filter[];
+}
+
+declare interface DescribeAPIConfigsResponse {
+  /** 接口数量 */
+  TotalCount: number | null;
+  /** 接口详情 */
+  Details: APIConfigDetail[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1456,6 +1882,120 @@ declare interface DescribeLogsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeModelServiceCallInfoRequest {
+  /** 服务组id */
+  ServiceGroupId: string;
+}
+
+declare interface DescribeModelServiceCallInfoResponse {
+  /** 服务调用信息 */
+  ServiceCallInfo: ServiceCallInfo | null;
+  /** 升级网关调用信息 */
+  InferGatewayCallInfo: InferGatewayCallInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelServiceGroupRequest {
+  /** 无 */
+  ServiceGroupId: string;
+}
+
+declare interface DescribeModelServiceGroupResponse {
+  /** 服务组信息 */
+  ServiceGroup: ServiceGroup | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelServiceGroupsRequest {
+  /** 偏移量，默认为0 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100 */
+  Limit?: number;
+  /** 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列 */
+  Order?: string;
+  /** 排序的依据字段， 取值范围 "CreateTime" "UpdateTime" */
+  OrderField?: string;
+  /** 分页参数，支持的分页过滤Name包括：["ClusterId", "ServiceId", "ServiceGroupName", "ServiceGroupId","Status","CreatedBy","ModelVersionId"] */
+  Filters?: Filter[];
+  /** 标签过滤参数 */
+  TagFilters?: TagFilter[];
+}
+
+declare interface DescribeModelServiceGroupsResponse {
+  /** 推理服务组数量。 */
+  TotalCount: number | null;
+  /** 服务组信息 */
+  ServiceGroups: ServiceGroup[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelServiceHistoryRequest {
+  /** 服务Id */
+  ServiceId: string;
+}
+
+declare interface DescribeModelServiceHistoryResponse {
+  /** 历史版本总数 */
+  TotalCount: number | null;
+  /** 服务版本 */
+  ServiceHistory: ServiceHistory[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelServiceHotUpdatedRequest {
+  /** 镜像信息，配置服务运行所需的镜像地址等信息 */
+  ImageInfo: ImageInfo;
+  /** 模型信息，需要挂载模型时填写 */
+  ModelInfo?: ModelInfo;
+  /** 挂载信息 */
+  VolumeMount?: VolumeMount;
+}
+
+declare interface DescribeModelServiceHotUpdatedResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelServiceRequest {
+  /** 服务id */
+  ServiceId: string;
+}
+
+declare interface DescribeModelServiceResponse {
+  /** 服务信息 */
+  Service: Service;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelServicesRequest {
+  /** 偏移量，默认为0 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为20 */
+  Limit?: number;
+  /** 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列 */
+  Order?: string;
+  /** 排序的依据字段， 取值范围 "CreateTime" "UpdateTime" */
+  OrderField?: string;
+  /** 分页参数，支持的分页过滤Name包括：["ClusterId", "ServiceId", "ServiceGroupName", "ServiceGroupId","Status","CreatedBy","ModelId"] */
+  Filters?: Filter[];
+  /** 标签过滤参数 */
+  TagFilters?: TagFilter[];
+}
+
+declare interface DescribeModelServicesResponse {
+  /** 服务数量 */
+  TotalCount: number | null;
+  /** 无 */
+  Services: Service[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTrainingFrameworksRequest {
 }
 
@@ -1576,6 +2116,20 @@ declare interface DescribeTrainingTasksResponse {
   TrainingTaskSet: TrainingTaskSetItem[];
   /** 数量 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyServiceGroupWeightsRequest {
+  /** 服务组id */
+  ServiceGroupId: string;
+  /** 权重设置 */
+  Weights: WeightEntry[];
+}
+
+declare interface ModifyServiceGroupWeightsResponse {
+  /** 更新权重后的服务组信息 */
+  ServiceGroup: ServiceGroup | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2355,6 +2909,8 @@ declare interface Tione {
   CreateBatchTask(data: CreateBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchTaskResponse>;
   /** {@link CreateDataset 创建数据集}({@link CreateDatasetRequest 请求参数}): {@link CreateDatasetResponse 返回参数} */
   CreateDataset(data: CreateDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatasetResponse>;
+  /** {@link CreateModelService 创建模型服务}({@link CreateModelServiceRequest 请求参数}): {@link CreateModelServiceResponse 返回参数} */
+  CreateModelService(data: CreateModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelServiceResponse>;
   /** {@link CreateTrainingModel 导入模型}({@link CreateTrainingModelRequest 请求参数}): {@link CreateTrainingModelResponse 返回参数} */
   CreateTrainingModel(data: CreateTrainingModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingModelResponse>;
   /** {@link CreateTrainingTask 创建模型训练任务}({@link CreateTrainingTaskRequest 请求参数}): {@link CreateTrainingTaskResponse 返回参数} */
@@ -2363,12 +2919,18 @@ declare interface Tione {
   DeleteBatchTask(data: DeleteBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBatchTaskResponse>;
   /** {@link DeleteDataset 删除数据集}({@link DeleteDatasetRequest 请求参数}): {@link DeleteDatasetResponse 返回参数} */
   DeleteDataset(data: DeleteDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatasetResponse>;
+  /** {@link DeleteModelService 删除模型服务}({@link DeleteModelServiceRequest 请求参数}): {@link DeleteModelServiceResponse 返回参数} */
+  DeleteModelService(data: DeleteModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelServiceResponse>;
+  /** {@link DeleteModelServiceGroup 删除模型服务组}({@link DeleteModelServiceGroupRequest 请求参数}): {@link DeleteModelServiceGroupResponse 返回参数} */
+  DeleteModelServiceGroup(data: DeleteModelServiceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelServiceGroupResponse>;
   /** {@link DeleteTrainingModel 删除模型}({@link DeleteTrainingModelRequest 请求参数}): {@link DeleteTrainingModelResponse 返回参数} */
   DeleteTrainingModel(data: DeleteTrainingModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingModelResponse>;
   /** {@link DeleteTrainingModelVersion 删除模型版本}({@link DeleteTrainingModelVersionRequest 请求参数}): {@link DeleteTrainingModelVersionResponse 返回参数} */
   DeleteTrainingModelVersion(data: DeleteTrainingModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingModelVersionResponse>;
   /** {@link DeleteTrainingTask 删除训练任务}({@link DeleteTrainingTaskRequest 请求参数}): {@link DeleteTrainingTaskResponse 返回参数} */
   DeleteTrainingTask(data: DeleteTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingTaskResponse>;
+  /** {@link DescribeAPIConfigs 列举API}({@link DescribeAPIConfigsRequest 请求参数}): {@link DescribeAPIConfigsResponse 返回参数} */
+  DescribeAPIConfigs(data?: DescribeAPIConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAPIConfigsResponse>;
   /** {@link DescribeBatchTask 查询跑批任务}({@link DescribeBatchTaskRequest 请求参数}): {@link DescribeBatchTaskResponse 返回参数} */
   DescribeBatchTask(data: DescribeBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskResponse>;
   /** {@link DescribeBatchTaskInstances 跑批实例列表}({@link DescribeBatchTaskInstancesRequest 请求参数}): {@link DescribeBatchTaskInstancesResponse 返回参数} */
@@ -2393,6 +2955,20 @@ declare interface Tione {
   DescribeLatestTrainingMetrics(data: DescribeLatestTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLatestTrainingMetricsResponse>;
   /** {@link DescribeLogs 获取日志}({@link DescribeLogsRequest 请求参数}): {@link DescribeLogsResponse 返回参数} */
   DescribeLogs(data: DescribeLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsResponse>;
+  /** {@link DescribeModelService 查询单个服务}({@link DescribeModelServiceRequest 请求参数}): {@link DescribeModelServiceResponse 返回参数} */
+  DescribeModelService(data: DescribeModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceResponse>;
+  /** {@link DescribeModelServiceCallInfo 展示服务的调用信息}({@link DescribeModelServiceCallInfoRequest 请求参数}): {@link DescribeModelServiceCallInfoResponse 返回参数} */
+  DescribeModelServiceCallInfo(data: DescribeModelServiceCallInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceCallInfoResponse>;
+  /** {@link DescribeModelServiceGroup 查询单个服务组}({@link DescribeModelServiceGroupRequest 请求参数}): {@link DescribeModelServiceGroupResponse 返回参数} */
+  DescribeModelServiceGroup(data: DescribeModelServiceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceGroupResponse>;
+  /** {@link DescribeModelServiceGroups 列举在线推理服务组}({@link DescribeModelServiceGroupsRequest 请求参数}): {@link DescribeModelServiceGroupsResponse 返回参数} */
+  DescribeModelServiceGroups(data?: DescribeModelServiceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceGroupsResponse>;
+  /** {@link DescribeModelServiceHistory 展示服务的历史版本}({@link DescribeModelServiceHistoryRequest 请求参数}): {@link DescribeModelServiceHistoryResponse 返回参数} */
+  DescribeModelServiceHistory(data: DescribeModelServiceHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceHistoryResponse>;
+  /** {@link DescribeModelServiceHotUpdated 查询模型服务能否开启热更新}({@link DescribeModelServiceHotUpdatedRequest 请求参数}): {@link DescribeModelServiceHotUpdatedResponse 返回参数} */
+  DescribeModelServiceHotUpdated(data: DescribeModelServiceHotUpdatedRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceHotUpdatedResponse>;
+  /** {@link DescribeModelServices 查询多个服务}({@link DescribeModelServicesRequest 请求参数}): {@link DescribeModelServicesResponse 返回参数} */
+  DescribeModelServices(data?: DescribeModelServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServicesResponse>;
   /** {@link DescribeTrainingFrameworks 训练框架列表}({@link DescribeTrainingFrameworksRequest 请求参数}): {@link DescribeTrainingFrameworksResponse 返回参数} */
   DescribeTrainingFrameworks(data?: DescribeTrainingFrameworksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingFrameworksResponse>;
   /** {@link DescribeTrainingMetrics 查询训练自定义指标}({@link DescribeTrainingMetricsRequest 请求参数}): {@link DescribeTrainingMetricsResponse 返回参数} */
@@ -2409,6 +2985,8 @@ declare interface Tione {
   DescribeTrainingTaskPods(data: DescribeTrainingTaskPodsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTaskPodsResponse>;
   /** {@link DescribeTrainingTasks 模型训练任务列表}({@link DescribeTrainingTasksRequest 请求参数}): {@link DescribeTrainingTasksResponse 返回参数} */
   DescribeTrainingTasks(data?: DescribeTrainingTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTasksResponse>;
+  /** {@link ModifyServiceGroupWeights 更新推理服务组流量分配}({@link ModifyServiceGroupWeightsRequest 请求参数}): {@link ModifyServiceGroupWeightsResponse 返回参数} */
+  ModifyServiceGroupWeights(data: ModifyServiceGroupWeightsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceGroupWeightsResponse>;
   /** {@link PushTrainingMetrics 上报训练自定义指标}({@link PushTrainingMetricsRequest 请求参数}): {@link PushTrainingMetricsResponse 返回参数} */
   PushTrainingMetrics(data?: PushTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<PushTrainingMetricsResponse>;
   /** {@link StartTrainingTask 启动模型训练任务}({@link StartTrainingTaskRequest 请求参数}): {@link StartTrainingTaskResponse 返回参数} */

@@ -516,6 +516,28 @@ declare interface DescribeCaptchaUserAllAppIdResponse {
   RequestId?: string;
 }
 
+declare interface GetTicketStatisticsRequest {
+  /** 验证码appid */
+  CaptchaAppId: string;
+  /** 开始时间字符串 */
+  StartTimeStr: string;
+  /** 结束时间字符串 */
+  EndTimeStr: string;
+  /** 查询粒度 */
+  Dimension: string;
+}
+
+declare interface GetTicketStatisticsResponse {
+  /** 查询后数据块 */
+  Data: CaptchaStatisticObj | null;
+  /** 验证码返回码 */
+  CaptchaCode: number;
+  /** 验证码返回信息 */
+  CaptchaMsg: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface GetTotalTicketStatisticsRequest {
   /** 开始时间 */
   StartTimeStr: string;
@@ -601,6 +623,8 @@ declare interface Captcha {
   DescribeCaptchaTicketData(data: DescribeCaptchaTicketDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaTicketDataResponse>;
   /** {@link DescribeCaptchaUserAllAppId 安全验证码获取用户注册所有APPId和应用名称}({@link DescribeCaptchaUserAllAppIdRequest 请求参数}): {@link DescribeCaptchaUserAllAppIdResponse 返回参数} */
   DescribeCaptchaUserAllAppId(data?: DescribeCaptchaUserAllAppIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaUserAllAppIdResponse>;
+  /** {@link GetTicketStatistics 查询单个票据校验统计}({@link GetTicketStatisticsRequest 请求参数}): {@link GetTicketStatisticsResponse 返回参数} */
+  GetTicketStatistics(data: GetTicketStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<GetTicketStatisticsResponse>;
   /** {@link GetTotalTicketStatistics 查询整体票据校验统计（控制台2.0-当前版本）}({@link GetTotalTicketStatisticsRequest 请求参数}): {@link GetTotalTicketStatisticsResponse 返回参数} */
   GetTotalTicketStatistics(data: GetTotalTicketStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<GetTotalTicketStatisticsResponse>;
   /** {@link UpdateCaptchaAppIdInfo 更新验证码应用APPId信息}({@link UpdateCaptchaAppIdInfoRequest 请求参数}): {@link UpdateCaptchaAppIdInfoResponse 返回参数} */

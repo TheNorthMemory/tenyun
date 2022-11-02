@@ -334,9 +334,9 @@ declare interface LogConfig {
   LogsetId: string | null;
   /** 日志主题 ID */
   TopicId: string | null;
-  /** 日志提取模式，minimalist_log 为单行全文；multiline_log 为多行全文； */
+  /** 日志提取模式，minimalist_log 为单行全文；multiline_log 为多行全文； fullregex_log 为单行正则； multiline_fullregex_log 为多行正则； json_log 为 json； */
   LogType: string;
-  /** 首行正则表达式，当LogType=multiline_log 时生效 */
+  /** 首行正则表达式，当 LogType 为多行全文、多行正则时生效 */
   BeginningRegex: string | null;
   /** 收集文件目录，当 InputType=container_file 时生效 */
   LogPath: string | null;
@@ -350,6 +350,30 @@ declare interface LogConfig {
   ApplicationId: string | null;
   /** 应用名 */
   ApplicationName: string | null;
+  /** 导出规则 */
+  ExtractRule: LogConfigExtractRule | null;
+}
+
+/** 日志采集的导出规则配置 */
+declare interface LogConfigExtractRule {
+  /** 首行正则表达式 */
+  BeginningRegex?: string | null;
+  /** 提取结果 */
+  Keys?: string[] | null;
+  /** 过滤键 */
+  FilterKeys?: string[] | null;
+  /** 过滤值 */
+  FilterRegex?: string[] | null;
+  /** 日志正则表达式 */
+  LogRegex?: string | null;
+  /** 时间字段 */
+  TimeKey?: string | null;
+  /** 时间格式 */
+  TimeFormat?: string | null;
+  /** 是否上传解析失败日志 */
+  UnMatchUpload?: string | null;
+  /** 解析失败日志的键名称 */
+  UnMatchedKey?: string | null;
 }
 
 /** LogConfig 列表结果 */
@@ -1145,6 +1169,8 @@ declare interface CreateLogConfigRequest {
   LogPath?: string;
   /** 收集文件名模式，当 InputType=container_file 时生效 */
   FilePattern?: string;
+  /** 导出规则 */
+  ExtractRule?: LogConfigExtractRule;
 }
 
 declare interface CreateLogConfigResponse {

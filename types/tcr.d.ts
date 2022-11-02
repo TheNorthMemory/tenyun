@@ -1725,6 +1725,10 @@ declare interface DescribeImmutableTagRulesResponse {
 }
 
 declare interface DescribeInstanceAllNamespacesRequest {
+  /** 每页个数 */
+  Limit?: number;
+  /** 起始偏移位置 */
+  Offset?: number;
 }
 
 declare interface DescribeInstanceAllNamespacesResponse {

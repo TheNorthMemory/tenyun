@@ -886,6 +886,20 @@ declare interface ModifyCertificateProjectResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCertificatesExpiringNotificationSwitchRequest {
+  /** 证书ID列表。最多50个 */
+  CertificateIds: string[];
+  /** 0:不忽略通知。1:忽略通知 */
+  SwitchStatus: number;
+}
+
+declare interface ModifyCertificatesExpiringNotificationSwitchResponse {
+  /** 证书ID列表 */
+  CertificateIds: string[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ReplaceCertificateRequest {
   /** 证书 ID。 */
   CertificateId: string;
@@ -1105,6 +1119,8 @@ declare interface Ssl {
   ModifyCertificateAlias(data: ModifyCertificateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCertificateAliasResponse>;
   /** {@link ModifyCertificateProject 修改证书所属项目}({@link ModifyCertificateProjectRequest 请求参数}): {@link ModifyCertificateProjectResponse 返回参数} */
   ModifyCertificateProject(data: ModifyCertificateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCertificateProjectResponse>;
+  /** {@link ModifyCertificatesExpiringNotificationSwitch 修改是否忽略证书到期通知}({@link ModifyCertificatesExpiringNotificationSwitchRequest 请求参数}): {@link ModifyCertificatesExpiringNotificationSwitchResponse 返回参数} */
+  ModifyCertificatesExpiringNotificationSwitch(data: ModifyCertificatesExpiringNotificationSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCertificatesExpiringNotificationSwitchResponse>;
   /** {@link ReplaceCertificate 重颁发证书}({@link ReplaceCertificateRequest 请求参数}): {@link ReplaceCertificateResponse 返回参数} */
   ReplaceCertificate(data: ReplaceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceCertificateResponse>;
   /** {@link RevokeCertificate 吊销证书}({@link RevokeCertificateRequest 请求参数}): {@link RevokeCertificateResponse 返回参数} */

@@ -36,6 +36,8 @@ declare interface ApproverInfo {
   ApproverSource?: string;
   /** 客户自定义签署人标识，64位长度，保证唯一，非企微场景不使用此字段 */
   CustomApproverTag?: string;
+  /** 签署人个性化能力值 */
+  ApproverOption?: ApproverOption;
 }
 
 /** 签署人个性化能力信息 */
@@ -571,7 +573,7 @@ declare interface CreateBatchCancelFlowUrlResponse {
 }
 
 declare interface CreateConvertTaskApiRequest {
-  /** 资源类型 取值范围doc,docx,html之一 */
+  /** 资源类型 取值范围doc,docx,html,excel之一 */
   ResourceType: string;
   /** 资源名称，长度限制为256字符 */
   ResourceName: string;
@@ -661,6 +663,8 @@ declare interface CreateFlowByFilesRequest {
   CustomShowMap?: string;
   /** 发起方企业的签署人进行签署操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。若设置为true，审核结果需通过接口 CreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。 */
   NeedSignReview?: boolean;
+  /** 用户自定义字段，回调的时候会进行透传，长度需要小于20480 */
+  UserData?: string;
   /** 应用号信息 */
   Agent?: Agent;
 }
@@ -703,7 +707,7 @@ declare interface CreateFlowRequest {
   RelatedFlowId?: string;
   /** 签署流程的签署截止时间。值为unix时间戳,精确到秒,不传默认为当前时间一年后 */
   DeadLine?: number;
-  /** 用户自定义字段(需进行base64 encode),回调的时候会进行透传, 长度需要小于20480 */
+  /** 用户自定义字段，回调的时候会进行透传，长度需要小于20480 */
   UserData?: string;
   /** 签署流程描述,最大长度1000个字符 */
   FlowDescription?: string;
@@ -1001,7 +1005,7 @@ declare interface StartFlowResponse {
 }
 
 declare interface UploadFilesRequest {
-  /** 文件对应业务类型，用于区分文件存储路径：1. TEMPLATE - 模板； 文件类型：.pdf .doc .docx .html2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.jpg/.png3. SEAL - 印章； 文件类型：.jpg/.jpeg/.png */
+  /** 文件对应业务类型1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html3. SEAL - 印章； 文件类型：.jpg/.jpeg/.png */
   BusinessType: string;
   /** 调用方信息 */
   Caller?: Caller;

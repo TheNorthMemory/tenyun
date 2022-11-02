@@ -107,6 +107,8 @@ declare interface CreateOrganizationMemberRequest {
   PayUin?: string;
   /** 管理身份 */
   IdentityRoleID?: number[];
+  /** 主体关系ID */
+  AuthRelationId?: number;
 }
 
 declare interface CreateOrganizationMemberResponse {

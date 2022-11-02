@@ -640,6 +640,24 @@ declare interface ModifyMeshResponse {
   RequestId?: string;
 }
 
+declare interface ModifyTracingConfigRequest {
+  /** mesh名字 */
+  MeshId: string;
+  /** 是否启用调用跟踪 */
+  Enable?: boolean;
+  /** 腾讯云 APM 服务相关参数 */
+  APM?: APM;
+  /** 调用跟踪采样值 */
+  Sampling?: number;
+  /** 调用追踪Zipkin相关配置 */
+  Zipkin?: TracingZipkin;
+}
+
+declare interface ModifyTracingConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface UnlinkClusterRequest {
   /** 网格Id */
   MeshId: string;
@@ -679,6 +697,8 @@ declare interface Tcm {
   LinkPrometheus(data: LinkPrometheusRequest, config?: AxiosRequestConfig): AxiosPromise<LinkPrometheusResponse>;
   /** {@link ModifyMesh 修改网格}({@link ModifyMeshRequest 请求参数}): {@link ModifyMeshResponse 返回参数} */
   ModifyMesh(data: ModifyMeshRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMeshResponse>;
+  /** {@link ModifyTracingConfig 修改 Tracing 配置}({@link ModifyTracingConfigRequest 请求参数}): {@link ModifyTracingConfigResponse 返回参数} */
+  ModifyTracingConfig(data: ModifyTracingConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTracingConfigResponse>;
   /** {@link UnlinkCluster 解关联集群}({@link UnlinkClusterRequest 请求参数}): {@link UnlinkClusterResponse 返回参数} */
   UnlinkCluster(data: UnlinkClusterRequest, config?: AxiosRequestConfig): AxiosPromise<UnlinkClusterResponse>;
   /** {@link UnlinkPrometheus 解除关联Prometheus}({@link UnlinkPrometheusRequest 请求参数}): {@link UnlinkPrometheusResponse 返回参数} */

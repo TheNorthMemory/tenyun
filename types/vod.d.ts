@@ -2418,7 +2418,7 @@ declare interface MediaContentReviewSegmentItem {
 
 /** 指定删除点播视频时的删除内容 */
 declare interface MediaDeleteItem {
-  /** 所指定的删除部分。如果未填写该字段则参数无效。可选值有：OriginalFiles（删除原文件，删除后无法发起转码、微信发布等任何视频处理操作）。TranscodeFiles（删除转码文件）。WechatPublishFiles（删除微信发布文件）。 */
+  /** 所指定的删除部分。如果未填写该字段则参数无效。可选值有：OriginalFiles（删除原文件，删除后无法发起转码、微信发布等任何视频处理操作）；TranscodeFiles（删除转码文件）；AdaptiveDynamicStreamingFiles（删除转自适应码流文件）；WechatPublishFiles（删除微信发布文件）。 */
   Type: string;
   /** 删除由Type参数指定的种类下的视频模板号，模板定义参见[转码模板](https://cloud.tencent.com/document/product/266/33478)。默认值为0，表示删除参数Type指定种类下所有的视频。 */
   Definition?: number;
@@ -7213,8 +7213,6 @@ declare interface SearchMediaRequest {
   SourceTypes?: string[];
   /** 推流直播码集合。匹配集合中的任意元素。数组长度限制：10。 */
   StreamIds?: string[];
-  /** 直播录制文件的唯一标识。匹配集合中的任意元素。数组长度限制：10。 */
-  Vids?: string[];
   /** 匹配创建时间在此时间段内的文件。包含所指定的头尾时间点。 */
   CreateTime?: TimeRange;
   /** 匹配过期时间在此时间段内的文件，无法检索到已过期文件。包含所指定的头尾时间点。 */
@@ -7241,12 +7239,14 @@ declare interface SearchMediaRequest {
   SourceType?: string;
   /** （不推荐：应使用 StreamIds 替代）推流直播码。 */
   StreamId?: string;
-  /** （不推荐：应使用 Vids 替代）直播录制文件的唯一标识。 */
-  Vid?: string;
   /** （不推荐：应使用 CreateTime 替代）创建时间的开始时间。大于等于开始时间。当 CreateTime.After 也存在时，将优先使用 CreateTime.After。格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
   StartTime?: string;
   /** （不推荐：应使用 CreateTime 替代）创建时间的结束时间。小于结束时间。当 CreateTime.Before 也存在时，将优先使用 CreateTime.Before。格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
   EndTime?: string;
+  /** 该字段已无效。 */
+  Vids?: string[];
+  /** 该字段已无效。 */
+  Vid?: string;
 }
 
 declare interface SearchMediaResponse {

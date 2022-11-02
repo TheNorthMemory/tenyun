@@ -50,7 +50,7 @@ declare interface CcInfo {
 
 /** 此结构体 (Component) 用于描述控件属性。在通过文件发起合同时，对应的component有三种定位方式1. 绝对定位方式2. 表单域(FIELD)定位方式3. 关键字(KEYWORD)定位方式可以参考官网说明https://cloud.tencent.com/document/product/1323/78346 */
 declare interface Component {
-  /** 控件编号注：当GenerateMode=3时，通过"^"来决定是否使用关键字整词匹配能力。例：当GenerateMode=3时，如果传入关键字"^甲方签署^"，则会在PDF文件中有且仅有"甲方签署"关键字的地方进行对应操作。如传入的关键字为"甲方签署"，则PDF文件中每个出现关键字的位置都会执行相应操作。创建控件时，此值为空查询时返回完整结构 */
+  /** 控件编号CreateFlowByTemplates发起合同时优先以ComponentId（不为空）填充；否则以ComponentName填充注：当GenerateMode=3时，通过"^"来决定是否使用关键字整词匹配能力。例：当GenerateMode=3时，如果传入关键字"^甲方签署^"，则会在PDF文件中有且仅有"甲方签署"关键字的地方进行对应操作。如传入的关键字为"甲方签署"，则PDF文件中每个出现关键字的位置都会执行相应操作。创建控件时，此值为空查询时返回完整结构 */
   ComponentId?: string;
   /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件；MULTI_LINE_TEXT - 多行文本控件；CHECK_BOX - 勾选框控件；FILL_IMAGE - 图片控件；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件；SELECTOR - 选择器控件；DATE - 日期控件；默认是格式化为xxxx年xx月xx日如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight表单域的控件不能作为印章和签名控件 */
   ComponentType?: string;
@@ -599,7 +599,7 @@ declare interface ChannelCreateBatchCancelFlowUrlResponse {
 declare interface ChannelCreateConvertTaskApiRequest {
   /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
-  /** 资源类型 取值范围doc,docx,html之一 */
+  /** 资源类型 取值范围doc,docx,html,excel之一 */
   ResourceType: string;
   /** 资源名称，长度限制为256字符 */
   ResourceName: string;
@@ -681,7 +681,7 @@ declare interface ChannelCreateFlowSignReviewRequest {
   Agent: Agent;
   /** 签署流程编号 */
   FlowId: string;
-  /** 企业内部审核结果PASS: 通过REJECT: 拒绝 */
+  /** 企业内部审核结果PASS: 通过REJECT: 拒绝SIGN_REJECT:拒签(流程结束) */
   ReviewType: string;
   /** 审核原因 当ReviewType 是REJECT 时此字段必填,字符串长度不超过200 */
   ReviewMessage?: string;
@@ -1113,7 +1113,7 @@ declare interface SyncProxyOrganizationResponse {
 declare interface UploadFilesRequest {
   /** 应用相关信息，若是渠道版调用 appid 和proxyappid 必填 */
   Agent: Agent;
-  /** 文件对应业务类型，用于区分文件存储路径：1. TEMPLATE - 模板； 文件类型：.pdf .doc .docx .html2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.jpg/.png */
+  /** 文件对应业务类型1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html */
   BusinessType: string;
   /** 上传文件内容数组，最多支持20个文件 */
   FileInfos?: UploadFile[];

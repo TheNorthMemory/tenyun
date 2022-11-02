@@ -182,6 +182,8 @@ declare interface IndexPolicyField {
   FrozenEnable?: string | null;
   /** frozen阶段转入时间 */
   FrozenMinAge?: string | null;
+  /** / */
+  ColdAction?: string | null;
 }
 
 /** 索引配置字段 */
