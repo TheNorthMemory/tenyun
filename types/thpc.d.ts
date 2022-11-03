@@ -313,7 +313,7 @@ declare interface CreateClusterRequest {
   ComputeNode?: ComputeNode;
   /** 指定计算节点的数量。默认取值：0。 */
   ComputeNodeCount?: number;
-  /** 调度器类型。SGE：SGE调度器。SLURM：SLURM调度器。 */
+  /** 调度器类型。默认取值：SLURM。SGE：SGE调度器。SLURM：SLURM调度器。 */
   SchedulerType?: string;
   /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜像。 */
   ImageId?: string;
@@ -327,7 +327,7 @@ declare interface CreateClusterRequest {
   ClientToken?: string;
   /** 是否只预检此次请求。true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId.false（默认）：发送正常请求，通过检查后直接创建实例 */
   DryRun?: boolean;
-  /** 域名字服务类型。默认值：NISNIS：NIS域名字服务。 */
+  /** 域名字服务类型。默认取值：NIS。NIS：NIS域名字服务。 */
   AccountType?: string;
   /** 集群显示名称。 */
   ClusterName?: string;

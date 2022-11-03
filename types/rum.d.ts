@@ -1395,7 +1395,7 @@ declare interface DescribeLogListRequest {
   Limit?: number;
   /** 上下文，加载更多日志时使用，透传上次返回的 Context 值，获取后续的日志内容，总计最多可获取1万条原始日志。过期时间1小时 */
   Context?: string;
-  /** 查询语句，参考控制台请求参数，语句长度最大为4096（必填） */
+  /** 查询语句，参考控制台请求参数，语句长度最大为4096（必填）例："id:120001 AND type:\"log\"" */
   Query?: string;
   /** 结束时间（必填） */
   EndTime?: string;

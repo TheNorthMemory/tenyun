@@ -636,24 +636,6 @@ declare interface ModifyCustomizationStateResponse {
   RequestId?: string;
 }
 
-declare interface ModifyRoomInfoRequest {
-  /** 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID */
-  SdkAppId: number;
-  /** 房间id */
-  RoomId: number;
-  /** 301 启动推流302 停止推流303 重置RTMP连接 */
-  OperationType: number;
-}
-
-declare interface ModifyRoomInfoResponse {
-  /** 操作结果, 0成功, 非0失败 */
-  Result: number | null;
-  /** 错误信息 */
-  ErrMsg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
 declare interface ModifyUserMicStatusRequest {
   /** 应用ID */
   BizId: number;
@@ -765,8 +747,6 @@ declare interface Gme {
   ModifyCustomization(data: ModifyCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizationResponse>;
   /** {@link ModifyCustomizationState 修改语音消息转文本自学习模型状态}({@link ModifyCustomizationStateRequest 请求参数}): {@link ModifyCustomizationStateResponse 返回参数} */
   ModifyCustomizationState(data: ModifyCustomizationStateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizationStateResponse>;
-  /** {@link ModifyRoomInfo 修改房间信息}({@link ModifyRoomInfoRequest 请求参数}): {@link ModifyRoomInfoResponse 返回参数} */
-  ModifyRoomInfo(data: ModifyRoomInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoomInfoResponse>;
   /** {@link ModifyUserMicStatus 修改用户麦克风状态}({@link ModifyUserMicStatusRequest 请求参数}): {@link ModifyUserMicStatusResponse 返回参数} */
   ModifyUserMicStatus(data: ModifyUserMicStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserMicStatusResponse>;
   /** {@link ScanVoice 提交语音检测任务}({@link ScanVoiceRequest 请求参数}): {@link ScanVoiceResponse 返回参数} */

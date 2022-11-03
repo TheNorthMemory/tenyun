@@ -184,6 +184,14 @@ declare interface Resource {
   PackageNode: number;
 }
 
+/** 资产标签 */
+declare interface TagFilter {
+  /** 标签键 */
+  TagKey: string;
+  /** 标签值 */
+  TagValue?: string[];
+}
+
 /** 用户信息 */
 declare interface User {
   /** 用户名, 3-20个字符 必须以英文字母开头，且不能包含字母、数字、.、_、-以外的字符 */
@@ -487,6 +495,8 @@ declare interface DescribeDeviceGroupMembersRequest {
   Kind?: number;
   /** 所属部门ID */
   DepartmentId?: string;
+  /** 过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系 */
+  TagFilters?: TagFilter[];
 }
 
 declare interface DescribeDeviceGroupMembersResponse {
@@ -543,6 +553,8 @@ declare interface DescribeDevicesRequest {
   KindSet?: number[];
   /** 过滤条件，可按照部门ID进行过滤 */
   DepartmentId?: string;
+  /** 过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系 */
+  TagFilters?: TagFilter[];
 }
 
 declare interface DescribeDevicesResponse {

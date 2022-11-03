@@ -408,6 +408,8 @@ declare interface GetEmailTemplateResponse {
   TemplateContent: TemplateContent;
   /** 模板状态 0-审核通过 1-待审核 2-审核拒绝 */
   TemplateStatus: number;
+  /** 模板名称 */
+  TemplateName: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

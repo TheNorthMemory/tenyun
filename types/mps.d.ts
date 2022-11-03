@@ -324,7 +324,7 @@ declare interface AiContentReviewTaskInput {
 
 /** 智能识别结果。 */
 declare interface AiRecognitionResult {
-  /** 任务的类型，取值范围：FaceRecognition：人脸识别，AsrWordsRecognition：语音关键词识别，OcrWordsRecognition：文本关键词识别，AsrFullTextRecognition：语音全文识别，OcrFullTextRecognition：文本全文识别。 */
+  /** 任务的类型，取值范围：FaceRecognition：人脸识别，AsrWordsRecognition：语音关键词识别，OcrWordsRecognition：文本关键词识别，AsrFullTextRecognition：语音全文识别，OcrFullTextRecognition：文本全文识别。TransTextRecognition：语音翻译。 */
   Type: string;
   /** 人脸识别结果，当 Type 为 FaceRecognition 时有效。 */
   FaceTask: AiRecognitionTaskFaceResult | null;
@@ -336,6 +336,8 @@ declare interface AiRecognitionResult {
   OcrWordsTask: AiRecognitionTaskOcrWordsResult | null;
   /** 文本全文识别结果，当 Type 为 OcrFullTextRecognition 时有效。 */
   OcrFullTextTask: AiRecognitionTaskOcrFullTextResult | null;
+  /** 翻译结果，当 Type 为 TransTextRecognition 时有效。 */
+  TransTextTask: AiRecognitionTaskTransTextResult | null;
 }
 
 /** 语音全文识别结果。 */
@@ -598,6 +600,52 @@ declare interface AiRecognitionTaskOcrWordsSegmentItem {
   Confidence: number;
   /** 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。 */
   AreaCoordSet: number[];
+}
+
+/** 翻译结果。 */
+declare interface AiRecognitionTaskTransTextResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status: string;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  ErrCodeExt: string;
+  /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
+  ErrCode: number;
+  /** 错误信息。 */
+  Message: string;
+  /** 翻译任务输入信息。 */
+  Input: AiRecognitionTaskTransTextResultInput;
+  /** 翻译任务输出信息。 */
+  Output: AiRecognitionTaskTransTextResultOutput | null;
+}
+
+/** 翻译的输入。 */
+declare interface AiRecognitionTaskTransTextResultInput {
+  /** 翻译模板 ID。 */
+  Definition: number;
+}
+
+/** 翻译结果。 */
+declare interface AiRecognitionTaskTransTextResultOutput {
+  /** 翻译片段列表。 */
+  SegmentSet: AiRecognitionTaskTransTextSegmentItem[];
+  /** 字幕文件地址。 */
+  SubtitlePath: string;
+  /** 字幕文件存储位置。 */
+  OutputStorage: TaskOutputStorage;
+}
+
+/** 翻译片段。 */
+declare interface AiRecognitionTaskTransTextSegmentItem {
+  /** 识别片段置信度。取值：0~100。 */
+  Confidence: number;
+  /** 识别片段起始的偏移时间，单位：秒。 */
+  StartTimeOffset: number;
+  /** 识别片段终止的偏移时间，单位：秒。 */
+  EndTimeOffset: number;
+  /** 识别文本。 */
+  Text: string;
+  /** 翻译文本。 */
+  Trans: string;
 }
 
 /** 内容审核 Asr 文字敏感任务输入参数类型 */
@@ -1382,6 +1430,8 @@ declare interface ImageSpriteTemplate {
   FillType: string;
   /** 模板描述信息。 */
   Comment: string;
+  /** 图片格式。 */
+  Format: string;
 }
 
 /** 图片水印模板输入参数 */
@@ -1428,7 +1478,7 @@ declare interface LiveStreamAiRecognitionResultInfo {
 
 /** 直播流 AI 识别结果 */
 declare interface LiveStreamAiRecognitionResultItem {
-  /** 结果的类型，取值范围：FaceRecognition：人脸识别，AsrWordsRecognition：语音关键词识别，OcrWordsRecognition：文本关键词识别，AsrFullTextRecognition：语音全文识别，OcrFullTextRecognition：文本全文识别。 */
+  /** 结果的类型，取值范围：FaceRecognition：人脸识别，AsrWordsRecognition：语音关键词识别，OcrWordsRecognition：文本关键词识别，AsrFullTextRecognition：语音全文识别，OcrFullTextRecognition：文本全文识别。TransTextRecognition：语音翻译。 */
   Type: string;
   /** 人脸识别结果，当 Type 为FaceRecognition 时有效。 */
   FaceRecognitionResultSet: LiveStreamFaceRecognitionResult[];
@@ -1440,6 +1490,8 @@ declare interface LiveStreamAiRecognitionResultItem {
   AsrFullTextRecognitionResultSet: LiveStreamAsrFullTextRecognitionResult[];
   /** 文本全文识别结果，当 Type 为OcrFullTextRecognition 时有效。 */
   OcrFullTextRecognitionResultSet: LiveStreamOcrFullTextRecognitionResult[];
+  /** 翻译结果，当Type 为 TransTextRecognition 时有效。 */
+  TransTextRecognitionResultSet: LiveStreamTransTextRecognitionResult[];
 }
 
 /** 直播 AI 内容审核图片敏感结果 */
@@ -1640,6 +1692,20 @@ declare interface LiveStreamTaskNotifyConfig {
   NotifyType?: string;
   /** HTTP回调地址，NotifyType为URL时必填。 */
   NotifyUrl?: string;
+}
+
+/** 直播实时翻译结果 */
+declare interface LiveStreamTransTextRecognitionResult {
+  /** 识别文本。 */
+  Text: string;
+  /** 翻译片段起始的 PTS 时间，单位：秒。 */
+  StartPtsTime: number;
+  /** 翻译片段终止的 PTS 时间，单位：秒。 */
+  EndPtsTime: number;
+  /** 翻译片段置信度。取值：0~100。 */
+  Confidence: number;
+  /** 翻译文本。 */
+  Trans: string;
 }
 
 /** 低光照增强配置 */
@@ -2150,6 +2216,8 @@ declare interface OverrideTranscodeParameter {
   AudioTemplate?: AudioTemplateInfoForUpdate;
   /** 极速高清转码参数。 */
   TEHDConfig?: TEHDConfigForUpdate;
+  /** 字幕流配置参数。 */
+  SubtitleTemplate?: SubtitleTemplate;
 }
 
 /** 语音涉敏任务控制参数 */
@@ -2582,6 +2650,10 @@ declare interface SnapshotByTimeOffsetTemplate {
   UpdateTime: string;
   /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。black：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。black：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。默认值：black 。 */
   FillType: string;
+}
+
+/** 字幕流配置参数。 */
+declare interface SubtitleTemplate {
 }
 
 /** 超分配置 */
@@ -3249,6 +3321,8 @@ declare interface CreateImageSpriteTemplateRequest {
   FillType?: string;
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
+  /** 图片格式，取值为 jpg、png、webp。默认为 jpg。 */
+  Format?: string;
 }
 
 declare interface CreateImageSpriteTemplateResponse {
@@ -3293,7 +3367,7 @@ declare interface CreateSampleSnapshotTemplateRequest {
   Height?: number;
   /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
   ResolutionAdaptive?: string;
-  /** 图片格式，取值为 jpg 和 png。默认为 jpg。 */
+  /** 图片格式，取值为 jpg、png、webp。默认为 jpg。 */
   Format?: string;
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
@@ -3317,7 +3391,7 @@ declare interface CreateSnapshotByTimeOffsetTemplateRequest {
   Height?: number;
   /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
   ResolutionAdaptive?: string;
-  /** 图片格式，取值可以为 jpg 和 png。默认为 jpg。 */
+  /** 图片格式，取值可以为 jpg、png、webp。默认为 jpg。 */
   Format?: string;
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
@@ -4117,6 +4191,8 @@ declare interface ModifyImageSpriteTemplateRequest {
   FillType?: string;
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
+  /** 图片格式，取值可以为 jpg、png、webp。 */
+  Format?: string;
 }
 
 declare interface ModifyImageSpriteTemplateResponse {
@@ -4163,7 +4239,7 @@ declare interface ModifySampleSnapshotTemplateRequest {
   SampleType?: string;
   /** 采样间隔。当 SampleType 为 Percent 时，指定采样间隔的百分比。当 SampleType 为 Time 时，指定采样间隔的时间，单位为秒。 */
   SampleInterval?: number;
-  /** 图片格式，取值为 jpg 和 png。 */
+  /** 图片格式，取值为 jpg、png、webp。 */
   Format?: string;
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
@@ -4187,7 +4263,7 @@ declare interface ModifySnapshotByTimeOffsetTemplateRequest {
   Height?: number;
   /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
   ResolutionAdaptive?: string;
-  /** 图片格式，取值可以为 jpg 和 png。 */
+  /** 图片格式，取值可以为 jpg、png、webp。 */
   Format?: string;
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
@@ -4365,7 +4441,7 @@ declare interface ProcessMediaRequest {
   SessionId?: string;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
   SessionContext?: string;
-  /** 编排ID。注意1：对于OutputStorage、OutputDir，如果编排任务里没有配置，将采用请求里对应参数。注意2：对于TaskNotifyConfig，如果编排任务里没有配置，将采用请求里对应的参数。注意3：编排的 Trigger 只是用来自动化触发场景，在手动发起的请求中已经配置的 Trigger 无意义。 */
+  /** 编排ID。注意1：对于OutputStorage、OutputDir参数：当服务编排中子任务节点配置了OutputStorage、OutputDir时，该子任务节点中配置的输出作为子任务的输出。当服务编排中子任务节点没有配置OutputStorage、OutputDir时，若创建任务接口（ProcessMedia）有输出，将覆盖原有编排的默认输出。注意2：对于TaskNotifyConfig参数，若创建任务接口（ProcessMedia）有设置，将覆盖原有编排的默认回调。注意3：编排的 Trigger 只是用来自动化触发场景，在手动发起的请求中已经配置的 Trigger 无意义。 */
   ScheduleId?: number;
 }
 

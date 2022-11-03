@@ -1161,7 +1161,7 @@ declare interface CreateLogConfigRequest {
   LogsetId?: string;
   /** 日志主题 ID */
   TopicId?: string;
-  /** 日志提取模式，minimalist_log 为单行全文；multiline_log 为多行全文； */
+  /** 日志提取模式，minimalist_log 为单行全文；multiline_log 为多行全文；json_log 为 json格式；fullregex_log 为单行正则；multiline_fullregex_log 为多行正则 */
   LogType?: string;
   /** 首行正则表达式，当LogType=multiline_log 时生效 */
   BeginningRegex?: string;

@@ -360,6 +360,34 @@ declare interface CreateCodePackResponse {
   RequestId?: string;
 }
 
+declare interface CreateCorporationOrderRequest {
+  /** 企业名称 */
+  CorpName: string;
+  /** 所有者ID */
+  Owner: string;
+  /** 溯源码额度 */
+  CodeQuota: number;
+  /** 额度过期时间 */
+  ExpireTime: string;
+  /** 金额 */
+  Amount: number;
+  /** 企业ID */
+  CorpId?: number;
+  /** 联系人 */
+  ContactPerson?: string;
+  /** 联系电话 */
+  ContactNumber?: string;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface CreateCorporationOrderResponse {
+  /** 企业ID */
+  CorpId: number | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateCustomPackRequest {
   /** 商户ID */
   MerchantId: string;
@@ -1081,6 +1109,8 @@ declare interface Trp {
   CreateCodeBatch(data?: CreateCodeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeBatchResponse>;
   /** {@link CreateCodePack 生成普通码包}({@link CreateCodePackRequest 请求参数}): {@link CreateCodePackResponse 返回参数} */
   CreateCodePack(data: CreateCodePackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodePackResponse>;
+  /** {@link CreateCorporationOrder 以订单方式新建企业}({@link CreateCorporationOrderRequest 请求参数}): {@link CreateCorporationOrderResponse 返回参数} */
+  CreateCorporationOrder(data: CreateCorporationOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCorporationOrderResponse>;
   /** {@link CreateCustomPack 生成自定义码包}({@link CreateCustomPackRequest 请求参数}): {@link CreateCustomPackResponse 返回参数} */
   CreateCustomPack(data: CreateCustomPackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomPackResponse>;
   /** {@link CreateCustomRule 新建自定义码规则}({@link CreateCustomRuleRequest 请求参数}): {@link CreateCustomRuleResponse 返回参数} */

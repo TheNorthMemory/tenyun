@@ -190,12 +190,14 @@ declare interface DetailedStatusMessage {
   InstanceType: string;
 }
 
-/** 描述了实例的增强服务启用情况与其设置，如云安全，云监控等实例 Agent。 */
+/** 描述了实例的增强服务启用情况与其设置，如云安全，云监控，自动化助手等实例 Agent。 */
 declare interface EnhancedService {
   /** 开启云安全服务。若不指定该参数，则默认开启云安全服务。 */
   SecurityService?: RunSecurityServiceEnabled;
   /** 开启云监控服务。若不指定该参数，则默认开启云监控服务。 */
   MonitorService?: RunMonitorServiceEnabled;
+  /** 开启自动化助手服务。若不指定该参数，则默认逻辑与CVM保持一致。 */
+  AutomationService?: RunAutomationServiceEnabled[];
 }
 
 /** >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。>> 以[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口的`Filter`为例。若我们需要查询可用区（`zone`）为广州一区 ***并且*** 实例计费模式（`instance-charge-type`）为包年包月 ***或者*** 按量计费的实例时，可如下实现：```Filters.0.Name=zone&Filters.0.Values.0=ap-guangzhou-1&Filters.1.Name=instance-charge-type&Filters.1.Values.0=PREPAID&Filters.1.Values.1=POSTPAID_BY_HOUR``` */
@@ -474,6 +476,12 @@ declare interface NotificationTarget {
   QueueName?: string;
   /** 主题名称，如果`TargetType`取值为`CMQ_TOPIC` 或 `TDMQ_CMQ_TOPIC`，则本字段必填。 */
   TopicName?: string;
+}
+
+/** 描述了 “自动化助手” 服务相关的信息 */
+declare interface RunAutomationServiceEnabled {
+  /** 是否开启[自动化助手](https://cloud.tencent.com/document/product/1340)服务。取值范围：TRUE：表示开启自动化助手服务FALSE：表示不开启自动化助手服务 */
+  Enabled?: boolean | null;
 }
 
 /** 描述了 “云监控” 服务相关的信息。 */
