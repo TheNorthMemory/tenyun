@@ -677,7 +677,7 @@ declare interface DescribeCertificateResponse {
 declare interface DescribeCertificatesRequest {
   /** 分页偏移量，从0开始。 */
   Offset?: number;
-  /** 每页数量，默认20。 */
+  /** 每页数量，默认20。最大1000 */
   Limit?: number;
   /** 搜索关键词，可搜索证书 ID、备注名称、域名。例如： a8xHcaIs。 */
   SearchKey?: string;

@@ -443,7 +443,7 @@ declare interface DescribeAclsRequest {
   IdSet?: number[];
   /** 访问权限名称，模糊查询，最长64字符 */
   Name?: string;
-  /** 分页偏移位置 */
+  /** 分页偏移位置，默认值为0 */
   Offset?: number;
   /** 每页条目数量，默认20，最大500 */
   Limit?: number;
@@ -487,7 +487,7 @@ declare interface DescribeDeviceGroupMembersRequest {
   Bound: boolean;
   /** 资产名或资产IP，模糊查询 */
   Name?: string;
-  /** 分页偏移位置 */
+  /** 分页偏移位置，默认值为0 */
   Offset?: number;
   /** 每页条目数，默认20, 最大500 */
   Limit?: number;
@@ -513,7 +513,7 @@ declare interface DescribeDeviceGroupsRequest {
   IdSet?: number[];
   /** 资产组名，最长64个字符，模糊查询 */
   Name?: string;
-  /** 分页偏移位置 */
+  /** 分页偏移位置，默认值为0 */
   Offset?: number;
   /** 每页条目数量，缺省20，最大500 */
   Limit?: number;
@@ -541,7 +541,7 @@ declare interface DescribeDevicesRequest {
   ApCodeSet?: string[];
   /** 操作系统类型, 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer */
   Kind?: number;
-  /** 分页，偏移位置 */
+  /** 分页偏移位置，默认值为0 */
   Offset?: number;
   /** 每页条目数量，默认20 */
   Limit?: number;
@@ -589,7 +589,7 @@ declare interface DescribeUserGroupMembersRequest {
   Bound: boolean;
   /** 用户名或用户姓名，最长64个字符，模糊查询 */
   Name?: string;
-  /** 分页偏移位置 */
+  /** 分页偏移位置，默认值为0 */
   Offset?: number;
   /** 每页条目数量，默认20, 最大500 */
   Limit?: number;
@@ -611,7 +611,7 @@ declare interface DescribeUserGroupsRequest {
   IdSet?: number[];
   /** 用户组名，模糊查询,长度：0-64字符 */
   Name?: string;
-  /** 分页偏移位置 */
+  /** 分页偏移位置，默认值为0 */
   Offset?: number;
   /** 每页条目数量，缺省20，最大500 */
   Limit?: number;
@@ -633,7 +633,7 @@ declare interface DescribeUsersRequest {
   IdSet?: number[];
   /** 模糊查询，IdSet、UserName、Phone为空时才生效，对用户名和姓名进行模糊查询 */
   Name?: string;
-  /** 分页，偏移位置 */
+  /** 分页偏移位置，默认值为0 */
   Offset?: number;
   /** 每页条目数量，默认20, 最大500 */
   Limit?: number;

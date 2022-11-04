@@ -339,6 +339,8 @@ declare interface CreateClusterRequest {
   LoginNodeCount?: number;
   /** 创建集群时同时绑定的标签对说明。 */
   Tags?: Tag[];
+  /** 弹性伸缩类型。AS：集群自动扩缩容由[弹性伸缩](https://cloud.tencent.com/document/product/377/3154)产品实现。THPC_AS：集群自动扩缩容由THPC产品内部实现。 */
+  AutoScalingType?: string;
 }
 
 declare interface CreateClusterResponse {

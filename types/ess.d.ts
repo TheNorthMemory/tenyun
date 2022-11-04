@@ -667,6 +667,8 @@ declare interface CreateFlowByFilesRequest {
   UserData?: string;
   /** 应用号信息 */
   Agent?: Agent;
+  /** 签署人校验方式VerifyCheck: 人脸识别（默认）MobileCheck：手机号验证参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。 */
+  ApproverVerifyType?: string;
 }
 
 declare interface CreateFlowByFilesResponse {
@@ -837,15 +839,13 @@ declare interface DeleteIntegrationEmployeesResponse {
 }
 
 declare interface DescribeFileUrlsRequest {
-  /** 文件对应的业务类型，目前支持：- 模板 "TEMPLATE"- 文档 "DOCUMENT"- 印章 “SEAL”- 流程 "FLOW" */
-  BusinessType: string;
-  /** 业务编号的数组，如模板编号、文档编号、印章编号最大支持20个资源 */
-  BusinessIds: string[];
-  /** 操作者信息 */
+  /** 调用方用户信息，UserId 必填 */
   Operator: UserInfo;
-  /** 应用相关信息 */
-  Agent?: Agent;
-  /** 下载后的文件命名，只有fileType为zip的时候生效 */
+  /** 文件对应的业务类型，目前支持：- 流程 "FLOW"，如需下载合同文件请选择此项- 模板 "TEMPLATE"- 文档 "DOCUMENT"- 印章 “SEAL” */
+  BusinessType: string;
+  /** 业务编号的数组，如流程编号、模板编号、文档编号、印章编号。如需下载合同文件请传入FlowId最大支持20个资源 */
+  BusinessIds: string[];
+  /** 下载后的文件命名，只有FileType为zip的时候生效 */
   FileName?: string;
   /** 文件类型，"JPG", "PDF","ZIP"等 */
   FileType?: string;
@@ -856,9 +856,11 @@ declare interface DescribeFileUrlsRequest {
   /** 下载url过期时间，单位秒。0: 按默认值5分钟，允许范围：1s~24x60x60s(1天) */
   UrlTtl?: number;
   /** 暂不开放 */
-  Scene?: string;
-  /** 暂不开放 */
   CcToken?: string;
+  /** 暂不开放 */
+  Scene?: string;
+  /** 应用相关信息 */
+  Agent?: Agent;
 }
 
 declare interface DescribeFileUrlsResponse {

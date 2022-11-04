@@ -1443,7 +1443,7 @@ declare interface InquiryPriceUpdateInstanceResponse {
 declare interface ModifyResourcePoolsRequest {
   /** emr集群id */
   InstanceId: string;
-  /** 标识是fair还是capacity */
+  /** 取值范围：fair:代表公平调度标识capacity:代表容量调度标识 */
   Key: string;
 }
 

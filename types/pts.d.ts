@@ -256,6 +256,8 @@ declare interface File {
   Uin: string | null;
   /** 用户子账号 */
   SubAccountUin: string | null;
+  /** 用户账号的 App ID */
+  AppId: number | null;
 }
 
 /** 文件基本信息 */
@@ -756,6 +758,8 @@ declare interface ScriptInfo {
   EncodedHttpArchive?: string | null;
   /** 脚本权重，范围 1-100 */
   LoadWeight?: number | null;
+  /** 文件 ID */
+  FileId?: string | null;
 }
 
 /** 脚本内置压力模型 */

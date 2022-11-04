@@ -12,6 +12,18 @@ declare interface AccessKey {
   CreateTime: string;
 }
 
+/** 访问密钥 */
+declare interface AccessKeyDetail {
+  /** 访问密钥标识 */
+  AccessKeyId: string;
+  /** 访问密钥（密钥仅创建时可见，请妥善保存） */
+  SecretAccessKey: string;
+  /** 密钥状态，激活（Active）或未激活（Inactive） */
+  Status: string;
+  /** 创建时间 */
+  CreateTime: string;
+}
+
 /** 策略关联的实体信息 */
 declare interface AttachEntityOfPolicy {
   /** 实体ID */
@@ -518,6 +530,18 @@ declare interface ConsumeCustomMFATokenResponse {
   RequestId?: string;
 }
 
+declare interface CreateAccessKeyRequest {
+  /** 指定用户Uin，不填默认为当前用户创建访问密钥 */
+  TargetUin?: number;
+}
+
+declare interface CreateAccessKeyResponse {
+  /** 访问密钥 */
+  AccessKey: AccessKeyDetail | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateGroupRequest {
   /** 用户组名 */
   GroupName: string;
@@ -670,6 +694,18 @@ declare interface CreateUserSAMLConfigRequest {
 }
 
 declare interface CreateUserSAMLConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAccessKeyRequest {
+  /** 指定需要删除的AccessKeyId */
+  AccessKeyId: string;
+  /** 指定用户Uin，不填默认为当前用户删除访问密钥 */
+  TargetUin?: number;
+}
+
+declare interface DeleteAccessKeyResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1582,6 +1618,20 @@ declare interface UntagRoleResponse {
   RequestId?: string;
 }
 
+declare interface UpdateAccessKeyRequest {
+  /** 指定需要更新的AccessKeyId */
+  AccessKeyId: string;
+  /** 密钥状态，激活（Active）或未激活（Inactive） */
+  Status: string;
+  /** 指定用户Uin，不填默认为当前用户更新访问密钥 */
+  TargetUin?: number;
+}
+
+declare interface UpdateAccessKeyResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface UpdateAssumeRolePolicyRequest {
   /** 策略文档，示例：{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}，principal用于指定角色的授权对象。获取该参数可参阅 获取角色详情（https://cloud.tencent.com/document/product/598/36221） 输出参数RoleInfo */
   PolicyDocument: string;
@@ -1767,6 +1817,8 @@ declare interface Cam {
   AttachUserPolicy(data: AttachUserPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachUserPolicyResponse>;
   /** {@link ConsumeCustomMFAToken 验证自定义多因子Token}({@link ConsumeCustomMFATokenRequest 请求参数}): {@link ConsumeCustomMFATokenResponse 返回参数} */
   ConsumeCustomMFAToken(data: ConsumeCustomMFATokenRequest, config?: AxiosRequestConfig): AxiosPromise<ConsumeCustomMFATokenResponse>;
+  /** {@link CreateAccessKey 创建访问密钥}({@link CreateAccessKeyRequest 请求参数}): {@link CreateAccessKeyResponse 返回参数} */
+  CreateAccessKey(data?: CreateAccessKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessKeyResponse>;
   /** {@link CreateGroup 创建用户组}({@link CreateGroupRequest 请求参数}): {@link CreateGroupResponse 返回参数} */
   CreateGroup(data: CreateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupResponse>;
   /** {@link CreateOIDCConfig 创建角色OIDC配置}({@link CreateOIDCConfigRequest 请求参数}): {@link CreateOIDCConfigResponse 返回参数} */
@@ -1785,6 +1837,8 @@ declare interface Cam {
   CreateUserOIDCConfig(data: CreateUserOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserOIDCConfigResponse>;
   /** {@link CreateUserSAMLConfig 创建用户SAML配置}({@link CreateUserSAMLConfigRequest 请求参数}): {@link CreateUserSAMLConfigResponse 返回参数} */
   CreateUserSAMLConfig(data: CreateUserSAMLConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserSAMLConfigResponse>;
+  /** {@link DeleteAccessKey 删除访问密钥}({@link DeleteAccessKeyRequest 请求参数}): {@link DeleteAccessKeyResponse 返回参数} */
+  DeleteAccessKey(data: DeleteAccessKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessKeyResponse>;
   /** {@link DeleteGroup 删除用户组}({@link DeleteGroupRequest 请求参数}): {@link DeleteGroupResponse 返回参数} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
   /** {@link DeleteOIDCConfig 删除OIDC身份提供商}({@link DeleteOIDCConfigRequest 请求参数}): {@link DeleteOIDCConfigResponse 返回参数} */
@@ -1901,6 +1955,8 @@ declare interface Cam {
   TagRole(data: TagRoleRequest, config?: AxiosRequestConfig): AxiosPromise<TagRoleResponse>;
   /** {@link UntagRole 角色解绑标签}({@link UntagRoleRequest 请求参数}): {@link UntagRoleResponse 返回参数} */
   UntagRole(data: UntagRoleRequest, config?: AxiosRequestConfig): AxiosPromise<UntagRoleResponse>;
+  /** {@link UpdateAccessKey 更新访问密钥}({@link UpdateAccessKeyRequest 请求参数}): {@link UpdateAccessKeyResponse 返回参数} */
+  UpdateAccessKey(data: UpdateAccessKeyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAccessKeyResponse>;
   /** {@link UpdateAssumeRolePolicy 修改角色信任策略}({@link UpdateAssumeRolePolicyRequest 请求参数}): {@link UpdateAssumeRolePolicyResponse 返回参数} */
   UpdateAssumeRolePolicy(data: UpdateAssumeRolePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAssumeRolePolicyResponse>;
   /** {@link UpdateGroup 更新用户组}({@link UpdateGroupRequest 请求参数}): {@link UpdateGroupResponse 返回参数} */

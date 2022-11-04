@@ -620,6 +620,8 @@ declare interface ZonesInfo {
   ZoneId: number;
   /** 可用区中文名 */
   ZoneName: string;
+  /** 是否在售 */
+  OnSale: boolean;
 }
 
 declare interface ActiveHourDCDBInstanceRequest {
@@ -1504,6 +1506,16 @@ declare interface InitDCDBInstancesResponse {
   RequestId?: string;
 }
 
+declare interface IsolateDedicatedDBInstanceRequest {
+  /** 实例 Id，形如：dcdbt-ow728lmc。 */
+  InstanceId: string;
+}
+
+declare interface IsolateDedicatedDBInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface IsolateHourDCDBInstanceRequest {
   /** 实例uuid列表 */
   InstanceIds: string[];
@@ -1873,6 +1885,8 @@ declare interface Dcdb {
   GrantAccountPrivileges(data: GrantAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<GrantAccountPrivilegesResponse>;
   /** {@link InitDCDBInstances 初始化实例}({@link InitDCDBInstancesRequest 请求参数}): {@link InitDCDBInstancesResponse 返回参数} */
   InitDCDBInstances(data: InitDCDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InitDCDBInstancesResponse>;
+  /** {@link IsolateDedicatedDBInstance 隔离独享云数据库实例}({@link IsolateDedicatedDBInstanceRequest 请求参数}): {@link IsolateDedicatedDBInstanceResponse 返回参数} */
+  IsolateDedicatedDBInstance(data: IsolateDedicatedDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDedicatedDBInstanceResponse>;
   /** {@link IsolateHourDCDBInstance 隔离DCDB后付费实例}({@link IsolateHourDCDBInstanceRequest 请求参数}): {@link IsolateHourDCDBInstanceResponse 返回参数} */
   IsolateHourDCDBInstance(data: IsolateHourDCDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateHourDCDBInstanceResponse>;
   /** {@link KillSession 杀死指定会话}({@link KillSessionRequest 请求参数}): {@link KillSessionResponse 返回参数} */

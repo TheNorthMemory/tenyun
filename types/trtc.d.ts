@@ -360,6 +360,14 @@ declare interface SdkAppIdTrtcMcuTranscodeTimeUsage {
   Flux: number;
 }
 
+/** SeriesInfo类型 */
+declare interface SeriesInfo {
+  /** 数据列 */
+  Columns: string[] | null;
+  /** 数据值 */
+  Values: number[] | null;
+}
+
 /** 画中画模板中有效，代表小画面的布局参数 */
 declare interface SmallVideoLayoutParams {
   /** 代表小画面对应的用户ID。 */
@@ -406,6 +414,16 @@ declare interface SubscribeStreamUserIds {
   SubscribeVideoUserIds?: string[];
   /** 订阅视频流黑名单，指定不订阅哪几个UserId的视频流，例如["1", "2", "3"], 代表不订阅UserId 1，2，3的视频流；["1.*$"], 代表不订阅UserId前缀为1的视频流。默认不填订阅房间内所有视频流，订阅列表用户数不超过32。 */
   UnSubscribeVideoUserIds?: string[];
+}
+
+/** TRTC数据大盘/实时监控 API接口数据出参 */
+declare interface TRTCDataResp {
+  /** StatementID值 */
+  StatementID: number | null;
+  /** Series数据 */
+  Series: SeriesInfo[] | null;
+  /** Total值 */
+  Total: number | null;
 }
 
 /** 腾讯云点播相关参数。 */
@@ -824,6 +842,78 @@ declare interface DescribeScaleInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTRTCMarketQualityMetricDataRequest {
+  /** 用户SdkAppId（如：1400xxxxxx） */
+  SdkAppId: string;
+  /** 查询开始时间，格式为YYYY-MM-DD。（查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天） */
+  StartTime: string;
+  /** 查询结束时间，格式为YYYY-MM-DD。 */
+  EndTime: string;
+  /** 返回数据的粒度，支持设为以下值：d：按天。此时返回查询时间范围内 UTC 时间为零点的数据。h：按小时。此时返回查询时间范围内 UTC 时间为整小时的数据。 */
+  Period: string;
+}
+
+declare interface DescribeTRTCMarketQualityMetricDataResponse {
+  /** TRTC监控数据出参 */
+  Data: TRTCDataResp | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTRTCMarketScaleMetricDataRequest {
+  /** 用户SdkAppId */
+  SdkAppId: string;
+  /** 查询开始时间，格式为YYYY-MM-DD。（查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天） */
+  StartTime: string;
+  /** 查询结束时间，格式为YYYY-MM-DD。 */
+  EndTime: string;
+  /** 返回数据的粒度，支持设为以下值：d：按天。此时返回查询时间范围内 UTC 时间为零点的数据。h：按小时。此时返回查询时间范围内 UTC 时间为整小时的数据。 */
+  Period: string;
+}
+
+declare interface DescribeTRTCMarketScaleMetricDataResponse {
+  /** TRTC监控数据出参 */
+  Data: TRTCDataResp | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTRTCRealTimeQualityMetricDataRequest {
+  /** 用户SdkAppId（如：1400xxxxxx） */
+  SdkAppId: string;
+  /** 开始时间，unix时间戳，单位：秒（查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时） */
+  StartTime: number;
+  /** 结束时间，unix时间戳，单位：秒 */
+  EndTime: number;
+  /** 房间ID */
+  RoomId?: string;
+}
+
+declare interface DescribeTRTCRealTimeQualityMetricDataResponse {
+  /** TRTC监控数据出参 */
+  Data: TRTCDataResp | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTRTCRealTimeScaleMetricDataRequest {
+  /** 用户SdkAppId（如：1400xxxxxx） */
+  SdkAppId: string;
+  /** 开始时间，unix时间戳，单位：秒（查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时） */
+  StartTime: number;
+  /** 结束时间，unix时间戳，单位：秒 */
+  EndTime: number;
+  /** 房间ID */
+  RoomId?: string;
+}
+
+declare interface DescribeTRTCRealTimeScaleMetricDataResponse {
+  /** TRTC监控数据出参 */
+  Data: TRTCDataResp | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTrtcMcuTranscodeTimeRequest {
   /** 查询开始时间，格式为YYYY-MM-DD。 */
   StartTime: string;
@@ -1111,6 +1201,14 @@ declare interface Trtc {
   DescribeRoomInfo(data: DescribeRoomInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomInfoResponse>;
   /** {@link DescribeScaleInfo 查询历史房间和用户数}({@link DescribeScaleInfoRequest 请求参数}): {@link DescribeScaleInfoResponse 返回参数} */
   DescribeScaleInfo(data: DescribeScaleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScaleInfoResponse>;
+  /** {@link DescribeTRTCMarketQualityMetricData 查询TRTC数据大盘质量指标}({@link DescribeTRTCMarketQualityMetricDataRequest 请求参数}): {@link DescribeTRTCMarketQualityMetricDataResponse 返回参数} */
+  DescribeTRTCMarketQualityMetricData(data: DescribeTRTCMarketQualityMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketQualityMetricDataResponse>;
+  /** {@link DescribeTRTCMarketScaleMetricData 查询TRTC数据大盘规模指标}({@link DescribeTRTCMarketScaleMetricDataRequest 请求参数}): {@link DescribeTRTCMarketScaleMetricDataResponse 返回参数} */
+  DescribeTRTCMarketScaleMetricData(data: DescribeTRTCMarketScaleMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketScaleMetricDataResponse>;
+  /** {@link DescribeTRTCRealTimeQualityMetricData 查询TRTC实时监控质量指标}({@link DescribeTRTCRealTimeQualityMetricDataRequest 请求参数}): {@link DescribeTRTCRealTimeQualityMetricDataResponse 返回参数} */
+  DescribeTRTCRealTimeQualityMetricData(data: DescribeTRTCRealTimeQualityMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeQualityMetricDataResponse>;
+  /** {@link DescribeTRTCRealTimeScaleMetricData 查询TRTC实时监控规模指标}({@link DescribeTRTCRealTimeScaleMetricDataRequest 请求参数}): {@link DescribeTRTCRealTimeScaleMetricDataResponse 返回参数} */
+  DescribeTRTCRealTimeScaleMetricData(data: DescribeTRTCRealTimeScaleMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeScaleMetricDataResponse>;
   /** {@link DescribeTrtcMcuTranscodeTime 查询旁路转码计费时长(旧)}({@link DescribeTrtcMcuTranscodeTimeRequest 请求参数}): {@link DescribeTrtcMcuTranscodeTimeResponse 返回参数} */
   DescribeTrtcMcuTranscodeTime(data: DescribeTrtcMcuTranscodeTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrtcMcuTranscodeTimeResponse>;
   /** {@link DescribeTrtcUsage 查询TRTC音视频用量}({@link DescribeTrtcUsageRequest 请求参数}): {@link DescribeTrtcUsageResponse 返回参数} */

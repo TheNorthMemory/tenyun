@@ -1974,7 +1974,7 @@ declare interface MalWareList {
   FilePath: string;
   /** 描述 */
   VirusName: string;
-  /** 状态；4-:待处理，5-已信任，6-已隔离，8-文件已删除 */
+  /** 状态；4-:待处理，5-已信任，6-已隔离，8-文件已删除, 14:已处理 */
   Status: number;
   /** 唯一ID */
   Id: number | null;
@@ -2993,6 +2993,8 @@ declare interface CreateScanMalwareSettingRequest {
   TimeoutPeriod?: number;
   /** 1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示） */
   EngineType?: number;
+  /** 是否开启恶意进程查杀[0:未开启,1:开启] */
+  EnableMemShellScan?: number;
 }
 
 declare interface CreateScanMalwareSettingResponse {
@@ -5118,6 +5120,8 @@ declare interface DescribeMalwareRiskWarningResponse {
   List: MalwareRisk[] | null;
   /** 是否弹出提示 true 弹出, false不弹 */
   IsPop: boolean;
+  /** 异常进程列表信息 */
+  ProcessList: MalwareRisk[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -5156,6 +5160,8 @@ declare interface DescribeMalwareTimingScanSettingResponse {
   EngineType: number;
   /** 启发引擎 0 关闭 1开启 */
   EnableInspiredEngine: number;
+  /** 是否开启恶意进程查杀[0:未开启,1:开启] */
+  EnableMemShellScan: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -6731,6 +6737,8 @@ declare interface ModifyMalwareTimingScanSettingsRequest {
   EngineType?: number;
   /** 启发引擎开关 0 关闭 1开启 */
   EnableInspiredEngine?: number;
+  /** 是否开启恶意进程查杀[0:未开启,1:开启] */
+  EnableMemShellScan?: number;
 }
 
 declare interface ModifyMalwareTimingScanSettingsResponse {

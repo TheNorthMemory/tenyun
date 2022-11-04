@@ -94,6 +94,14 @@ declare interface Monitor {
   InsertTime: string;
   /** 监测状态说明 */
   MonitorNote: string;
+  /** 作品类型全部展示 */
+  WorkCategoryAll: string;
+  /** 存证状态 */
+  EvidenceStatus: number;
+  /** 存证状态说明 */
+  EvidenceNote: string;
+  /** 侵权站点数量 */
+  TortSiteNum: number;
 }
 
 /** 监测侵权信息详情 */
@@ -148,6 +156,8 @@ declare interface MonitorTort {
   IsProducer: number;
   /** 是否境外网址 */
   IsOverseas: number;
+  /** ip地理位置 */
+  IPLoc: string;
 }
 
 /** 保护网站信息 */
@@ -678,6 +688,8 @@ declare interface DescribeCRMonitorDetailResponse {
   TotalCount: number;
   /** 监测状态 */
   MonitorStatus: number;
+  /** 导出地址 */
+  ExportURL: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -696,6 +708,8 @@ declare interface DescribeCRMonitorsResponse {
   Monitors: Monitor[];
   /** 记录总条数 */
   TotalCount: number;
+  /** 导出地址 */
+  ExportURL: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -736,6 +750,8 @@ declare interface DescribeCRObtainDetailResponse {
   ObtainDuration: string;
   /** 取证名称 */
   ObtainName: string;
+  /** 取证公证信息 */
+  DepositPdfCert: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
