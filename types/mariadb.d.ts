@@ -1728,6 +1728,18 @@ declare interface SwitchDBInstanceHAResponse {
   RequestId?: string;
 }
 
+declare interface TerminateDedicatedDBInstanceRequest {
+  /** 实例 Id，形如：tdsql-ow728lmc。 */
+  InstanceId: string;
+}
+
+declare interface TerminateDedicatedDBInstanceResponse {
+  /** 异步流程Id */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface UpgradeDBInstanceRequest {
   /** 待升级的实例ID。形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。 */
   InstanceId: string;
@@ -1881,6 +1893,8 @@ declare interface Mariadb {
   RestartDBInstances(data: RestartDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDBInstancesResponse>;
   /** {@link SwitchDBInstanceHA 实例主备切换}({@link SwitchDBInstanceHARequest 请求参数}): {@link SwitchDBInstanceHAResponse 返回参数} */
   SwitchDBInstanceHA(data: SwitchDBInstanceHARequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDBInstanceHAResponse>;
+  /** {@link TerminateDedicatedDBInstance 销毁独享云数据库实例}({@link TerminateDedicatedDBInstanceRequest 请求参数}): {@link TerminateDedicatedDBInstanceResponse 返回参数} */
+  TerminateDedicatedDBInstance(data: TerminateDedicatedDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDedicatedDBInstanceResponse>;
   /** {@link UpgradeDBInstance 扩容实例}({@link UpgradeDBInstanceRequest 请求参数}): {@link UpgradeDBInstanceResponse 返回参数} */
   UpgradeDBInstance(data: UpgradeDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceResponse>;
 }

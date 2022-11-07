@@ -42,6 +42,12 @@ declare interface AuthFailMessage {
   Message: string;
 }
 
+/** 授权用户 */
+declare interface AuthorizedUser {
+  /** 用户openid */
+  OpenId: string;
+}
+
 /** 抄送信息 */
 declare interface CcInfo {
   /** 被抄送人手机号，大陆11位手机号 */
@@ -272,6 +278,32 @@ declare interface FormField {
   ComponentId?: string | null;
   /** 控件的名字，跟ComponentId二选一，不能全为空 */
   ComponentName?: string | null;
+}
+
+/** 持有的电子印章信息 */
+declare interface OccupiedSeal {
+  /** 电子印章编号 */
+  SealId: string;
+  /** 电子印章名称 */
+  SealName: string;
+  /** 电子印章授权时间戳 */
+  CreateOn: number;
+  /** 电子印章授权人 */
+  Creator: string;
+  /** 电子印章策略Id */
+  SealPolicyId: string;
+  /** 印章状态，有以下六种：CHECKING（审核中）SUCCESS（已启用）FAIL（审核拒绝）CHECKING-SADM（待超管审核）DISABLE（已停用）STOPPED（已终止） */
+  SealStatus: string;
+  /** 审核失败原因 */
+  FailReason: string | null;
+  /** 印章图片url，5分钟内有效 */
+  Url: string;
+  /** 印章类型 */
+  SealType: string;
+  /** 用印申请是否为永久授权 */
+  IsAllTime: boolean;
+  /** 授权人列表 */
+  AuthorizedUsers: AuthorizedUser[];
 }
 
 /** 机构信息 */
@@ -748,6 +780,28 @@ declare interface ChannelDescribeEmployeesResponse {
   Limit: number;
   /** 符合条件的员工数量 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ChannelDescribeOrganizationSealsRequest {
+  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  Agent: Agent;
+  /** 返回最大数量，最大为100 */
+  Limit: number;
+  /** 偏移量，默认为0，最大为20000 */
+  Offset?: number;
+  /** 查询信息类型，为0时不返回授权用户，为1时返回 */
+  InfoType?: number;
+  /** 印章id（没有输入返回所有） */
+  SealId?: string;
+}
+
+declare interface ChannelDescribeOrganizationSealsResponse {
+  /** 在设置了SealId时返回0或1，没有设置时返回公司的总印章数量，可能比返回的印章数组数量多 */
+  TotalCount: number;
+  /** 查询到的印章结果数组 */
+  Seals: OccupiedSeal[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2687,6 +2741,8 @@ declare interface Essbasic {
   ChannelCreateMultiFlowSignQRCode(data: ChannelCreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateMultiFlowSignQRCodeResponse>;
   /** {@link ChannelDescribeEmployees 查询企业员工}({@link ChannelDescribeEmployeesRequest 请求参数}): {@link ChannelDescribeEmployeesResponse 返回参数} */
   ChannelDescribeEmployees(data: ChannelDescribeEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeEmployeesResponse>;
+  /** {@link ChannelDescribeOrganizationSeals 查询渠道子客企业电子印章}({@link ChannelDescribeOrganizationSealsRequest 请求参数}): {@link ChannelDescribeOrganizationSealsResponse 返回参数} */
+  ChannelDescribeOrganizationSeals(data: ChannelDescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeOrganizationSealsResponse>;
   /** {@link ChannelGetTaskResultApi 渠道版查询转换任务状态}({@link ChannelGetTaskResultApiRequest 请求参数}): {@link ChannelGetTaskResultApiResponse 返回参数} */
   ChannelGetTaskResultApi(data: ChannelGetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelGetTaskResultApiResponse>;
   /** {@link ChannelVerifyPdf 合同文件验签}({@link ChannelVerifyPdfRequest 请求参数}): {@link ChannelVerifyPdfResponse 返回参数} */

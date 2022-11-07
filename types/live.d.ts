@@ -618,7 +618,7 @@ declare interface PullStreamConfig {
 declare interface PullStreamTaskInfo {
   /** 拉流任务Id。 */
   TaskId: string;
-  /** 拉流源的类型：PullLivePushLive -直播，PullVodPushLive -点播。 */
+  /** 拉流源的类型：PullLivePushLive -直播，PullVodPushLive -点播，PullPicPushLive -图片。 */
   SourceType: string;
   /** 拉流源url列表。SourceType为直播（PullLiveToLive）只可以填1个，SourceType为点播（PullVodToLive）可以填多个，上限10个。 */
   SourceUrls: string[];
@@ -668,6 +668,8 @@ declare interface PullStreamTaskInfo {
   BackupSourceUrl: string | null;
   /** 水印信息列表。 */
   WatermarkList: PullPushWatermarkInfo[] | null;
+  /** 点播源是否启用本地推流模式，默认0，不启用。0 - 不启用。1 - 启用。 */
+  VodLocalMode: number | null;
 }
 
 /** 推流鉴权key信息。 */
@@ -768,6 +770,8 @@ declare interface PushQualityData {
   Bandwidth: number;
   /** 流量，单位MB。 */
   Flux: number;
+  /** 推流服务端 IP。 */
+  ServerIp: string | null;
 }
 
 /** 直播拉流当前正在拉的文件信息。 */

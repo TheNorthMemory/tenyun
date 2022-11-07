@@ -3854,14 +3854,16 @@ declare interface StickerTrackItem {
 
 /** 存储地域信息 */
 declare interface StorageRegionInfo {
-  /** 存储地域 */
+  /** 存储地域。 */
   Region: string;
-  /** 存储地域描述信息 */
+  /** 存储地域描述信息。 */
   Description: string;
   /** 状态，是否开通，取值有：opened：已经开通。unopened：未开通。 */
   Status: string;
-  /** 是否默认的存储地域，true：是；false：否 */
+  /** 是否默认的存储地域，true：是；false：否。 */
   IsDefault: boolean;
+  /** 存储区域，取值有：Chinese Mainland：中国境内（不包含港澳台）。Outside Chinese Mainland：中国境外。 */
+  Area: string;
 }
 
 /** 云点播存储用量的分区统计数据 */

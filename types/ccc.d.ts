@@ -136,6 +136,16 @@ declare interface IMCdrInfo {
   SkillGroupId: string | null;
   /** 技能组名称 */
   SkillGroupName: string | null;
+  /** 满意度 */
+  Satisfaction: IMSatisfaction | null;
+}
+
+/** IM满意度 */
+declare interface IMSatisfaction {
+  /** 满意度值 */
+  Id: number | null;
+  /** 满意度标签 */
+  Label: string | null;
 }
 
 /** ivr 按键信息 */

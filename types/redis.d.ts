@@ -2299,14 +2299,16 @@ declare interface ReleaseWanAddressResponse {
 }
 
 declare interface RenewInstanceRequest {
-  /** 购买时长，单位：月 */
+  /** 购买时长，单位：月。 */
   Period: number;
-  /** 实例ID */
+  /** 实例 ID。 */
   InstanceId: string;
+  /** 标识是否修改计费模式。当前实例计费模式为按量计费方式，预转换为包年包月而续费，请指定该参数为 prepaid。当前实例计费模式为包年包月方式，可不设置该参数。 */
+  ModifyPayMode?: string;
 }
 
 declare interface RenewInstanceResponse {
-  /** 交易ID */
+  /** 交易ID。 */
   DealId: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;

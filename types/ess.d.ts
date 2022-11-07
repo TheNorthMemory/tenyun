@@ -60,6 +60,12 @@ declare interface ApproverRestriction {
   IdCardNumber?: string;
 }
 
+/** 授权用户 */
+declare interface AuthorizedUser {
+  /** 用户id */
+  UserId: string;
+}
+
 /** 此结构体 (Caller) 用于描述调用方属性。 */
 declare interface Caller {
   /** 应用号 */
@@ -314,6 +320,32 @@ declare interface FormField {
   ComponentId?: string;
   /** 控件名字，最大长度不超过30字符，和ComponentId选择一项传入即可 */
   ComponentName?: string;
+}
+
+/** 持有的电子印章信息 */
+declare interface OccupiedSeal {
+  /** 电子印章编号 */
+  SealId: string;
+  /** 电子印章名称 */
+  SealName: string;
+  /** 电子印章授权时间戳 */
+  CreateOn: number;
+  /** 电子印章授权人 */
+  Creator: string;
+  /** 电子印章策略Id */
+  SealPolicyId: string;
+  /** 印章状态，有以下六种：CHECKING（审核中）SUCCESS（已启用）FAIL（审核拒绝）CHECKING-SADM（待超管审核）DISABLE（已停用）STOPPED（已终止） */
+  SealStatus: string;
+  /** 审核失败原因 */
+  FailReason: string | null;
+  /** 印章图片url，5分钟内有效 */
+  Url: string;
+  /** 印章类型 */
+  SealType: string;
+  /** 用印申请是否为永久授权 */
+  IsAllTime: boolean;
+  /** 授权人列表 */
+  AuthorizedUsers: AuthorizedUser[] | null;
 }
 
 /** 机构信息 */
@@ -952,6 +984,28 @@ declare interface DescribeIntegrationEmployeesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeOrganizationSealsRequest {
+  /** 调用方用户信息，userId 必填 */
+  Operator: UserInfo;
+  /** 返回最大数量，最大为100 */
+  Limit: number;
+  /** 偏移量，默认为0，最大为20000 */
+  Offset?: number;
+  /** 查询信息类型，为0时不返回授权用户，为1时返回 */
+  InfoType?: number;
+  /** 印章id（没有输入返回所有） */
+  SealId?: string;
+}
+
+declare interface DescribeOrganizationSealsResponse {
+  /** 在设置了SealId时返回0或1，没有设置时返回公司的总印章数量，可能比返回的印章数组数量多 */
+  TotalCount: number;
+  /** 查询到的印章结果数组 */
+  Seals: OccupiedSeal[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeThirdPartyAuthCodeRequest {
   /** 电子签小程序跳转客户小程序时携带的授权查看码 */
   AuthCode: string;
@@ -1089,6 +1143,8 @@ declare interface Ess {
   DescribeFlowTemplates(data: DescribeFlowTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTemplatesResponse>;
   /** {@link DescribeIntegrationEmployees 查询员工信息}({@link DescribeIntegrationEmployeesRequest 请求参数}): {@link DescribeIntegrationEmployeesResponse 返回参数} */
   DescribeIntegrationEmployees(data: DescribeIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationEmployeesResponse>;
+  /** {@link DescribeOrganizationSeals 查询企业电子印章}({@link DescribeOrganizationSealsRequest 请求参数}): {@link DescribeOrganizationSealsResponse 返回参数} */
+  DescribeOrganizationSeals(data: DescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationSealsResponse>;
   /** {@link DescribeThirdPartyAuthCode 通过AuthCode查询用户是否实名}({@link DescribeThirdPartyAuthCodeRequest 请求参数}): {@link DescribeThirdPartyAuthCodeResponse 返回参数} */
   DescribeThirdPartyAuthCode(data: DescribeThirdPartyAuthCodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThirdPartyAuthCodeResponse>;
   /** {@link GetTaskResultApi 查询转换任务状态}({@link GetTaskResultApiRequest 请求参数}): {@link GetTaskResultApiResponse 返回参数} */

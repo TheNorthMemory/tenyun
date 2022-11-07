@@ -5336,15 +5336,15 @@ declare interface ParseNotificationRequest {
 declare interface ParseNotificationResponse {
   /** 支持事件类型，目前取值有：WorkflowTask：视频工作流处理任务。EditMediaTask：视频编辑任务。ScheduleTask：编排任务。 */
   EventType: string;
-  /** 视频处理任务信息，仅当 TaskType 为 WorkflowTask，该字段有值。 */
+  /** 视频处理任务信息，仅当 EventType 为 WorkflowTask，该字段有值。 */
   WorkflowTaskEvent: WorkflowTask | null;
-  /** 视频编辑任务信息，仅当 TaskType 为 EditMediaTask，该字段有值。 */
+  /** 视频编辑任务信息，仅当 EventType 为 EditMediaTask，该字段有值。 */
   EditMediaTaskEvent: EditMediaTask | null;
   /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长50个字符，不带或者带空字符串表示不做去重。 */
   SessionId: string;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长1000个字符。 */
   SessionContext: string;
-  /** 编排任务信息，仅当 TaskType 为 ScheduleTask，该字段有值。 */
+  /** 编排任务信息，仅当 EventType 为 ScheduleTask，该字段有值。 */
   ScheduleTaskEvent: ScheduleTask | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;

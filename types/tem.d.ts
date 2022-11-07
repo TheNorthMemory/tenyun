@@ -762,6 +762,8 @@ declare interface TemNamespaceInfo {
   ClusterId: string | null;
   /** 标签 */
   Tags: Tag[] | null;
+  /** 资源是否有权限 */
+  HasAuthority: boolean | null;
 }
 
 /** 服务 */
@@ -800,6 +802,8 @@ declare interface TemService {
   EnableTracing: number | null;
   /** 标签 */
   Tags: Tag[] | null;
+  /** 是否有资源权限 */
+  HasAuthority: boolean | null;
 }
 
 /** 版本信息 */
