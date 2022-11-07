@@ -1246,6 +1246,364 @@ declare interface CoverConfigureInfoForUpdate {
   Switch?: string;
 }
 
+/** 创建输入的配置信息。 */
+declare interface CreateInput {
+  /** 输入名称，可填大小写、数字和下划线，长度为[1, 32]。 */
+  InputName: string;
+  /** 输入的协议，可选[SRT|RTP|RTMP|RTMP_PULL]。 */
+  Protocol: string;
+  /** 输入描述，长度为[0, 255]。 */
+  Description?: string;
+  /** 输入的IP白名单，格式为CIDR。 */
+  AllowIpList?: string[];
+  /** 输入的SRT配置信息。 */
+  SRTSettings?: CreateInputSRTSettings;
+  /** 输入的RTP配置信息。 */
+  RTPSettings?: CreateInputRTPSettings;
+  /** 输入的主备开关，可选[OPEN|CLOSE]，默认为CLOSE。 */
+  FailOver?: string;
+  /** 输入的RTMP_PULL配置信息。 */
+  RTMPPullSettings?: CreateInputRTMPPullSettings;
+  /** 输入的RTSP_PULL配置信息。 */
+  RTSPPullSettings?: CreateInputRTSPPullSettings;
+}
+
+/** 创建的输入RTMP拉流的配置信息。 */
+declare interface CreateInputRTMPPullSettings {
+  /** RTMP源站的源站地址，有且只能有一个。 */
+  SourceAddresses: RTMPPullSourceAddress[];
+}
+
+/** 创建输入的RTP配置信息。 */
+declare interface CreateInputRTPSettings {
+  /** 默认为“none”，可选值['none']。 */
+  FEC?: string;
+  /** 空闲超时时间，默认5000，单位ms，范围为[1000, 10000]。 */
+  IdleTimeout?: number;
+}
+
+/** 创建的输入RTSP拉流的配置信息。 */
+declare interface CreateInputRTSPPullSettings {
+  /** RTSP源站的源站地址，有且只能有一个。 */
+  SourceAddresses: RTSPPullSourceAddress[];
+}
+
+/** 创建的输入SRT的配置信息。 */
+declare interface CreateInputSRTSettings {
+  /** SRT模式，可选[LISTENER|CALLER]，默认为LISTENER。 */
+  Mode?: string;
+  /** 流Id，可选大小写字母、数字和特殊字符（.#!:&,=_-），长度为0~512。 */
+  StreamId?: string;
+  /** 延迟，默认0，单位ms，范围为[0, 3000]。 */
+  Latency?: number;
+  /** 接收延迟，默认120，单位ms，范围为[0, 3000]。 */
+  RecvLatency?: number;
+  /** 对端延迟，默认0，单位ms，范围为[0, 3000]。 */
+  PeerLatency?: number;
+  /** 对端超时时间，默认5000，单位ms，范围为[1000, 10000]。 */
+  PeerIdleTimeout?: number;
+  /** 解密密钥，默认为空，表示不加密。只可填ascii码值，长度为[10, 79]。 */
+  Passphrase?: string;
+  /** 密钥长度，默认为0，可选[0|16|24|32]。 */
+  PbKeyLen?: number;
+  /** SRT对端地址，当Mode为CALLER时必填，且只能填1组。 */
+  SourceAddresses?: SRTSourceAddressReq[];
+}
+
+/** 创建输出的配置信息。 */
+declare interface CreateOutputInfo {
+  /** 输出的名称。 */
+  OutputName: string;
+  /** 输出描述。 */
+  Description: string;
+  /** 输出协议，可选[SRT|RTP|RTMP|RTMP_PULL]。 */
+  Protocol: string;
+  /** 输出地区。 */
+  OutputRegion: string;
+  /** 输出的SRT的配置。 */
+  SRTSettings?: CreateOutputSRTSettings;
+  /** 输出的RTMP的配置。 */
+  RTMPSettings?: CreateOutputRTMPSettings;
+  /** 输出的RTP的配置。 */
+  RTPSettings?: CreateOutputInfoRTPSettings;
+  /** IP白名单列表，格式为CIDR，如0.0.0.0/0。当Protocol为RTMP_PULL有效，为空代表不限制客户端IP。 */
+  AllowIpList?: string[];
+}
+
+/** 创建媒体传输流的输出的RTP配置。 */
+declare interface CreateOutputInfoRTPSettings {
+  /** 转推的目标地址，可填1~2个。 */
+  Destinations: CreateOutputRTPSettingsDestinations[];
+  /** 只能填none。 */
+  FEC: string;
+  /** 空闲超时时间，单位ms。 */
+  IdleTimeout: number;
+}
+
+/** 创建媒体传输流的输出的RTMP配置。 */
+declare interface CreateOutputRTMPSettings {
+  /** 转推的目标地址，可填1~2个。 */
+  Destinations: CreateOutputRtmpSettingsDestinations[];
+  /** RTMP的Chunk大小，范围为[4096, 40960]。 */
+  ChunkSize?: number;
+}
+
+/** 创建媒体传输流的输出的RTP的目标地址。 */
+declare interface CreateOutputRTPSettingsDestinations {
+  /** 转推的目标IP。 */
+  Ip: string;
+  /** 转推的目标端口。 */
+  Port: number;
+}
+
+/** 创建媒体传输流的输出的RTMP的目标地址。 */
+declare interface CreateOutputRtmpSettingsDestinations {
+  /** 转推的URL，格式如：rtmp://domain/live。 */
+  Url: string;
+  /** 转推的StreamKey，格式如：stream?key=value。 */
+  StreamKey: string;
+}
+
+/** 创建媒体传输流的输出的SRT配置。 */
+declare interface CreateOutputSRTSettings {
+  /** 转推的目标地址，当Mode为CALLER时必填，且只能填1组。 */
+  Destinations: CreateOutputSRTSettingsDestinations[];
+  /** 转推SRT的流Id，可选大小写字母、数字和特殊字符（.#!:&,=_-），长度为0~512。 */
+  StreamId?: string;
+  /** 转推SRT的总延迟，默认0，单位ms，范围为[0, 3000]。 */
+  Latency?: number;
+  /** 转推SRT的接收延迟，默认120，单位ms，范围为[0, 3000]。 */
+  RecvLatency?: number;
+  /** 转推SRT的对端延迟，默认0，单位ms，范围为[0, 3000]。 */
+  PeerLatency?: number;
+  /** 转推SRT的对端空闲超时时间，默认5000，单位ms，范围为[1000, 10000]。 */
+  PeerIdleTimeout?: number;
+  /** 转推SRT的加密密钥，默认为空，表示不加密。只可填ascii码值，长度为[10, 79]。 */
+  Passphrase?: string;
+  /** 转推SRT的密钥长度，默认为0，可选[0|16|24|32]。 */
+  PbKeyLen?: number;
+  /** SRT模式，可选[LISTENER|CALLER]，默认为CALLER。 */
+  Mode?: string;
+}
+
+/** 创建媒体传输流的输出SRT的目标地址。 */
+declare interface CreateOutputSRTSettingsDestinations {
+  /** 输出的IP。 */
+  Ip: string;
+  /** 输出的端口。 */
+  Port: number;
+}
+
+/** 查询Flow的配置信息。 */
+declare interface DescribeFlow {
+  /** 流Id。 */
+  FlowId: string;
+  /** 流名称。 */
+  FlowName: string;
+  /** 流状态，目前有IDLE/RUNNING。 */
+  State: string;
+  /** 最大带宽值。 */
+  MaxBandwidth: number;
+  /** 输入组。 */
+  InputGroup: DescribeInput[];
+  /** 输出组。 */
+  OutputGroup: DescribeOutput[] | null;
+}
+
+/** 查询输入配置信息。 */
+declare interface DescribeInput {
+  /** 输入Id。 */
+  InputId: string;
+  /** 输入名称。 */
+  InputName: string;
+  /** 输入描述。 */
+  Description: string | null;
+  /** 输入协议。 */
+  Protocol: string;
+  /** 输入地址列表。 */
+  InputAddressList: InputAddress[];
+  /** 输入IP白名单列表。 */
+  AllowIpList: string[];
+  /** 输入的SRT配置信息。 */
+  SRTSettings: DescribeInputSRTSettings | null;
+  /** 输入的RTP配置信息。 */
+  RTPSettings: DescribeInputRTPSettings | null;
+  /** 输入的地区。 */
+  InputRegion: string;
+  /** 输入的RTMP配置信息。 */
+  RTMPSettings: DescribeInputRTMPSettings;
+  /** 输入的主备开关。 */
+  FailOver: string | null;
+  /** 输入的RTMP_PULL配置信息。 */
+  RTMPPullSettings: DescribeInputRTMPPullSettings | null;
+  /** 输入的RTSP_PULL配置信息。 */
+  RTSPPullSettings: DescribeInputRTSPPullSettings | null;
+}
+
+/** 查询输入的RTMP配置信息。 */
+declare interface DescribeInputRTMPPullSettings {
+  /** RTMP源站地址信息。 */
+  SourceAddresses: DescribeRTMPPullSourceAddress[];
+}
+
+/** 查询输入的RTMP配置信息。 */
+declare interface DescribeInputRTMPSettings {
+  /** RTMP的推流路径。 */
+  AppName: string | null;
+  /** RTMP的推流StreamKey。RTMP的推流地址拼接规则为：rtmp://Ip:1935/AppName/StreamKey */
+  StreamKey: string;
+}
+
+/** 查询输入的RTP配置信息。 */
+declare interface DescribeInputRTPSettings {
+  /** 是否FEC。 */
+  FEC: string;
+  /** 空闲超时时间。 */
+  IdleTimeout: number;
+}
+
+/** 查询输入的RTSP配置信息。 */
+declare interface DescribeInputRTSPPullSettings {
+  /** RTSP源站地址信息。 */
+  SourceAddresses: DescribeRTSPPullSourceAddress[];
+}
+
+/** 查询输入的SRT配置信息。 */
+declare interface DescribeInputSRTSettings {
+  /** SRT模式。 */
+  Mode: string | null;
+  /** 流Id。 */
+  StreamId: string;
+  /** 延迟。 */
+  Latency: number;
+  /** 接收延迟。 */
+  RecvLatency: number;
+  /** 对端延迟。 */
+  PeerLatency: number;
+  /** 对端空闲超时时间。 */
+  PeerIdleTimeout: number;
+  /** 解密密钥。 */
+  Passphrase: string;
+  /** 密钥长度。 */
+  PbKeyLen: number;
+  /** SRT对端地址。 */
+  SourceAddresses: SRTSourceAddressResp[] | null;
+}
+
+/** 查询输出的配置信息。 */
+declare interface DescribeOutput {
+  /** 输出Id。 */
+  OutputId: string;
+  /** 输出名称。 */
+  OutputName: string;
+  /** 输出类型。 */
+  OutputType: string;
+  /** 输出描述。 */
+  Description: string | null;
+  /** 输出协议。 */
+  Protocol: string;
+  /** 输出的出口地址信息列表。 */
+  OutputAddressList: OutputAddress[];
+  /** 输出的地区。 */
+  OutputRegion: string | null;
+  /** 输出的SRT配置信息。 */
+  SRTSettings: DescribeOutputSRTSettings | null;
+  /** 输出的RTP配置信息。 */
+  RTPSettings: DescribeOutputRTPSettings | null;
+  /** 输出的RTMP配置信息。 */
+  RTMPSettings: DescribeOutputRTMPSettings | null;
+  /** 输出的RTMP拉流配置信息。 */
+  RTMPPullSettings: DescribeOutputRTMPPullSettings | null;
+  /** CIDR白名单列表。当Protocol为RTMP_PULL有效，为空代表不限制客户端IP。 */
+  AllowIpList: string[] | null;
+  /** 输出的RTSP拉流配置信息。 */
+  RTSPPullSettings: DescribeOutputRTSPPullSettings | null;
+}
+
+/** 查询输出的RTMP拉流URL信息。 */
+declare interface DescribeOutputRTMPPullServerUrl {
+  /** RTMP拉流地址的tcUrl。 */
+  TcUrl: string;
+  /** RTMP拉流地址的流key。 */
+  StreamKey: string;
+}
+
+/** 查询输出的RTMP拉流配置信息。 */
+declare interface DescribeOutputRTMPPullSettings {
+  /** 拉流地址列表。 */
+  ServerUrls: DescribeOutputRTMPPullServerUrl[] | null;
+}
+
+/** 查询输出的RTMP配置信息。 */
+declare interface DescribeOutputRTMPSettings {
+  /** 空闲超时时间。 */
+  IdleTimeout: number | null;
+  /** Chunk大小。 */
+  ChunkSize: number | null;
+  /** 转推RTMP的目标地址信息列表。 */
+  Destinations: RTMPAddressDestination[] | null;
+}
+
+/** 查询输出的RTP配置信息。 */
+declare interface DescribeOutputRTPSettings {
+  /** 转推RTP的目标地址信息列表。 */
+  Destinations: RTPAddressDestination[] | null;
+  /** 是否FEC。 */
+  FEC: string | null;
+  /** 空闲超时时间。 */
+  IdleTimeout: number | null;
+}
+
+/** 查询输出的RTSP拉流URL信息。 */
+declare interface DescribeOutputRTSPPullServerUrl {
+  /** RTSP拉流地址的Url。 */
+  Url: string;
+}
+
+/** 查询输出的RTSP拉流配置信息。 */
+declare interface DescribeOutputRTSPPullSettings {
+  /** RTSP拉流地址列表。 */
+  ServerUrls: DescribeOutputRTSPPullServerUrl[] | null;
+}
+
+/** 查询输出的SRT配置信息。 */
+declare interface DescribeOutputSRTSettings {
+  /** 转推的目标的地址信息列表，SRT模式为CALLER时使用。 */
+  Destinations: SRTAddressDestination[] | null;
+  /** 流Id。 */
+  StreamId: string | null;
+  /** 延迟。 */
+  Latency: number | null;
+  /** 接收延迟。 */
+  RecvLatency: number | null;
+  /** 对端延迟。 */
+  PeerLatency: number | null;
+  /** 对端空闲超时时间。 */
+  PeerIdleTimeout: number | null;
+  /** 加密密钥。 */
+  Passphrase: string | null;
+  /** 加密密钥长度。 */
+  PbKeyLen: number | null;
+  /** SRT模式。 */
+  Mode: string | null;
+  /** 服务器监听地址，SRT模式为LISTENER时使用。 */
+  SourceAddresses: OutputSRTSourceAddressResp[] | null;
+}
+
+/** 查询输入的RTMP配置信息。 */
+declare interface DescribeRTMPPullSourceAddress {
+  /** RTMP源站的TcUrl地址。 */
+  TcUrl: string | null;
+  /** RTMP源站的StreamKey。RTMP源站地址拼接规则为：$TcUrl/$StreamKey。 */
+  StreamKey: string;
+}
+
+/** 查询输入的RTSP配置信息。 */
+declare interface DescribeRTSPPullSourceAddress {
+  /** RTSP源站的Url地址。 */
+  Url: string | null;
+}
+
 /** 编辑点播视频文件信息 */
 declare interface EditMediaFileInfo {
   /** 视频的输入信息。 */
@@ -1340,6 +1698,204 @@ declare interface FaceEnhanceConfig {
   Switch?: string;
   /** 强度，取值范围：0.0~1.0。默认：0.0。 */
   Intensity?: number | null;
+}
+
+/** 流的音频数据。 */
+declare interface FlowAudio {
+  /** 帧率。 */
+  Fps: number;
+  /** 码率，单位是bps。 */
+  Rate: number;
+  /** 音频Pid。 */
+  Pid: number;
+}
+
+/** 传输流日志信息。 */
+declare interface FlowLogInfo {
+  /** 时间戳，单位为秒。 */
+  Timestamp: number;
+  /** 输入输出类型（input/output）。 */
+  Type: string;
+  /** 输入或输出Id。 */
+  InputOutputId: string;
+  /** 协议。 */
+  Protocol: string;
+  /** 事件代码。 */
+  EventCode: string;
+  /** 事件信息。 */
+  EventMessage: string;
+  /** 对端IP。 */
+  RemoteIp: string;
+  /** 对端端口。 */
+  RemotePort: string;
+  /** 主备通道，0为主通道，1为备通道。 */
+  Pipeline: string;
+  /** 输入或输出的名称。 */
+  InputOutputName: string;
+}
+
+/** 传输流媒体的音频数据。 */
+declare interface FlowMediaAudio {
+  /** 帧率。 */
+  Fps: number;
+  /** 码率，单位是bps。 */
+  Rate: number;
+  /** 音频Pid。 */
+  Pid: number;
+  /** 标志同一次推流。 */
+  SessionId: string;
+}
+
+/** 传输流的媒体数据。 */
+declare interface FlowMediaInfo {
+  /** 时间戳，单位是秒。 */
+  Timestamp: number;
+  /** 总带宽。 */
+  Network: number;
+  /** 传输流的视频数据。 */
+  Video: FlowMediaVideo[];
+  /** 传输流的音频数据。 */
+  Audio: FlowMediaAudio[];
+  /** 标志同一次推流。 */
+  SessionId: string;
+  /** 客户端IP。 */
+  ClientIp: string;
+}
+
+/** 传输流媒体的视频数据。 */
+declare interface FlowMediaVideo {
+  /** 帧率。 */
+  Fps: number;
+  /** 码率，单位是bps。 */
+  Rate: number;
+  /** 视频Pid。 */
+  Pid: number;
+  /** 标志同一次推流。 */
+  SessionId: string;
+}
+
+/** 实时流状态查询的通用状态信息。 */
+declare interface FlowRealtimeStatusCommon {
+  /** 当前连接状态，Connected|Waiting|Idle。 */
+  State: string;
+  /** 连接模式，Listener|Caller。 */
+  Mode: string;
+  /** 已连接时长，单位为ms。 */
+  ConnectedTime: number;
+  /** 实时码率，单位为bps。 */
+  Bitrate: number;
+  /** 重试次数。 */
+  Reconnections: number;
+}
+
+/** 流状态实时查询接口的流状态信息 */
+declare interface FlowRealtimeStatusItem {
+  /** 类型，Input|Output。 */
+  Type: string;
+  /** 输入Id，如果Type为Input，此字段不为空。 */
+  InputId: string;
+  /** 输出Id，如果Type为Output，此字段不为空。 */
+  OutputId: string;
+  /** 流Id。 */
+  FlowId: string;
+  /** 协议， SRT | RTMP。 */
+  Protocol: string;
+  /** 共同状态信息。 */
+  CommonStatus: FlowRealtimeStatusCommon;
+  /** 如果是SRT协议则有此字段。 */
+  SRTStatus: FlowRealtimeStatusSRT | null;
+  /** 如果是RTMP协议则有此字段。 */
+  RTMPStatus: FlowRealtimeStatusRTMP | null;
+  /** 服务器IP。 */
+  ConnectServerIP: string;
+  /** 如果是RTP协议则有此字段。 */
+  RTPStatus: FlowRealtimeStatusRTP | null;
+}
+
+/** 流状态实时查询接口的RTMP信息。 */
+declare interface FlowRealtimeStatusRTMP {
+  /** 视频帧率。 */
+  VideoFPS: number;
+  /** 音频帧率。 */
+  AudioFPS: number;
+}
+
+/** 流状态实时查询接口的RTP流状态信息 */
+declare interface FlowRealtimeStatusRTP {
+  /** 传输的包个数 */
+  Packets: number;
+}
+
+/** 流状态实时查询接口的SRT信息。 */
+declare interface FlowRealtimeStatusSRT {
+  /** 延迟，单位为ms。 */
+  Latency: number;
+  /** RTT，单位为ms。 */
+  RTT: number;
+  /** 实时发包数或者收包数。 */
+  Packets: number;
+  /** 丢包率。 */
+  PacketLossRate: number;
+  /** 重传率。 */
+  RetransmitRate: number;
+  /** 实时丢包数。 */
+  DroppedPackets: number;
+  /** 是否加密，On|Off。 */
+  Encryption: string;
+}
+
+/** 传输流的SRT质量数据。 */
+declare interface FlowSRTInfo {
+  /** 时间戳，单位是秒。 */
+  Timestamp: number;
+  /** 发送丢包率。 */
+  SendPacketLossRate: number;
+  /** 发送重传率。 */
+  SendRetransmissionRate: number;
+  /** 接收丢包率。 */
+  RecvPacketLossRate: number;
+  /** 接收重传率。 */
+  RecvRetransmissionRate: number;
+  /** 与对端的RTT时延。 */
+  RTT: number;
+  /** 标志同一次推流。 */
+  SessionId: string;
+  /** 发送弃包数。 */
+  SendPacketDropNumber: number;
+  /** 接收弃包数。 */
+  RecvPacketDropNumber: number;
+}
+
+/** 流的统计数据。 */
+declare interface FlowStatistics {
+  /** 会话Id。 */
+  SessionId: string;
+  /** 对端IP。 */
+  ClientIp: string;
+  /** 总带宽。 */
+  Network: number;
+  /** 视频数据。 */
+  Video: FlowVideo[];
+  /** 音频数据。 */
+  Audio: FlowAudio[];
+}
+
+/** 流的统计数据列表。 */
+declare interface FlowStatisticsArray {
+  /** 时间戳。 */
+  Timestamp: number;
+  /** 每个会话的统计数据。 */
+  FlowStatistics: FlowStatistics[];
+}
+
+/** 流的视频数据。 */
+declare interface FlowVideo {
+  /** 帧率。 */
+  Fps: number;
+  /** 码率，单位是bps。 */
+  Rate: number;
+  /** 音频Pid。 */
+  Pid: number;
 }
 
 /** 插帧帧率配置 */
@@ -1468,6 +2024,14 @@ declare interface ImageWatermarkTemplate {
   Height: string;
   /** 水印重复类型。使用场景：水印为动态图像。取值范围：once：动态水印播放完后，不再出现；repeat_last_frame：水印播放完后，停留在最后一帧；repeat：水印循环播放，直到视频结束。 */
   RepeatType: string;
+}
+
+/** 输入地址信息。 */
+declare interface InputAddress {
+  /** 输入地址的IP。 */
+  Ip: string;
+  /** 输入地址的端口。 */
+  Port: number;
 }
 
 /** 直播流 AI 识别结果 */
@@ -2144,6 +2708,50 @@ declare interface MediaVideoStreamItem {
   HdrType: string | null;
 }
 
+/** 修改输入信息的参数。 */
+declare interface ModifyInput {
+  /** 输入Id。 */
+  InputId: string;
+  /** 输入名称。 */
+  InputName: string;
+  /** 输入描述。 */
+  Description: string;
+  /** 允许的推流的IP，CIDR格式。 */
+  AllowIpList: string[];
+  /** SRT的配置信息。 */
+  SRTSettings: CreateInputSRTSettings;
+  /** RTP的配置信息。 */
+  RTPSettings: CreateInputRTPSettings;
+  /** 输入的协议，可选[SRT|RTP|RTMP]。当输出包含RTP时，输入只能是RTP。当输出包含RTMP时，输入可以是SRT/RTMP。当输出包含SRT时，输入只能是SRT。 */
+  Protocol?: string;
+  /** 输入的主备开关，可选[OPEN|CLOSE]。 */
+  FailOver?: string;
+  /** RTMP_PULL的配置信息。 */
+  RTMPPullSettings?: CreateInputRTMPPullSettings;
+  /** RTSP_PULL的配置信息。 */
+  RTSPPullSettings?: CreateInputRTSPPullSettings;
+}
+
+/** 修改Output配置。 */
+declare interface ModifyOutputInfo {
+  /** 需要修改的Output的Id。 */
+  OutputId: string;
+  /** 输出的名称。 */
+  OutputName: string;
+  /** 输出的描述。 */
+  Description: string;
+  /** 输出的转推协议，支持SRT|RTP|RTMP。 */
+  Protocol: string;
+  /** 转推SRT的配置。 */
+  SRTSettings?: CreateOutputSRTSettings;
+  /** 转推RTP的配置。 */
+  RTPSettings?: CreateOutputInfoRTPSettings;
+  /** 转推RTMP的配置。 */
+  RTMPSettings?: CreateOutputRTMPSettings;
+  /** IP白名单列表，格式为CIDR，如0.0.0.0/0。当Protocol为RTMP_PULL有效，为空代表不限制客户端IP。 */
+  AllowIpList?: string[];
+}
+
 /** 媒体处理任务中的马赛克参数类型 */
 declare interface MosaicInput {
   /** 原点位置，目前仅支持：TopLeft：表示坐标原点位于视频图像左上角，马赛克原点为图片或文字的左上角。默认值：TopLeft。 */
@@ -2200,6 +2808,20 @@ declare interface OcrWordsConfigureInfoForUpdate {
   Switch?: string;
   /** 关键词过滤标签，指定需要返回的关键词的标签。如果未填或者为空，则全部结果都返回。标签个数最多 10 个，每个标签长度最多 16 个字符。 */
   LabelSet?: string[];
+}
+
+/** 输出的出口的地址。 */
+declare interface OutputAddress {
+  /** 出口IP。 */
+  Ip: string;
+}
+
+/** SRT输出的监听地址。 */
+declare interface OutputSRTSourceAddressResp {
+  /** 监听IP。 */
+  Ip: string;
+  /** 监听端口。 */
+  Port: number;
 }
 
 /** 自定义转码的规格参数。用于覆盖模板中对应参数值。 */
@@ -2444,6 +3066,36 @@ declare interface ProhibitedOcrReviewTemplateInfoForUpdate {
   ReviewConfidence?: number;
 }
 
+/** RTMP转推的目标地址信息。 */
+declare interface RTMPAddressDestination {
+  /** 转推RTMP的目标Url，格式如'rtmp://domain/live'。 */
+  Url: string;
+  /** 转推RTMP的目标StreamKey，格式如'steamid?key=value'。 */
+  StreamKey: string;
+}
+
+/** 创建的输入RTMP拉流源站配置信息。 */
+declare interface RTMPPullSourceAddress {
+  /** RTMP源站的TcUrl地址。 */
+  TcUrl: string;
+  /** RTMP源站的StreamKey信息。 */
+  StreamKey: string;
+}
+
+/** 转推的RTP目标地址信息。 */
+declare interface RTPAddressDestination {
+  /** 转推的目标地址的IP。 */
+  Ip: string;
+  /** 转推的目标地址的端口。 */
+  Port: number;
+}
+
+/** 创建的输入RTSP拉流源站配置信息。 */
+declare interface RTSPPullSourceAddress {
+  /** RTSP源站的Url地址。 */
+  Url: string;
+}
+
 /** 图片水印模板输入参数 */
 declare interface RawImageWatermarkInput {
   /** 水印图片的输入内容。支持 jpeg、png 图片格式。 */
@@ -2484,6 +3136,36 @@ declare interface RawWatermarkParameter {
   YPos?: string;
   /** 图片水印模板，当 Type 为 image，该字段必填。当 Type 为 text，该字段无效。 */
   ImageTemplate?: RawImageWatermarkInput;
+}
+
+/** 地区信息。 */
+declare interface RegionInfo {
+  /** 地区名称。 */
+  Name: string;
+}
+
+/** 转推的目标地址信息。 */
+declare interface SRTAddressDestination {
+  /** 目标地址的IP。 */
+  Ip: string;
+  /** 目标地址的端口。 */
+  Port: number;
+}
+
+/** SRT输入源地址。 */
+declare interface SRTSourceAddressReq {
+  /** 对端IP。 */
+  Ip: string;
+  /** 对端端口。 */
+  Port: number;
+}
+
+/** SRT输入源地址。 */
+declare interface SRTSourceAddressResp {
+  /** 对端IP。 */
+  Ip: string;
+  /** 对端端口。 */
+  Port: number;
 }
 
 /** 对视频做采样截图任务输入参数类型。 */
@@ -2650,6 +3332,12 @@ declare interface SnapshotByTimeOffsetTemplate {
   UpdateTime: string;
   /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。black：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。black：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。默认值：black 。 */
   FillType: string;
+}
+
+/** 媒体传输的地区信息。 */
+declare interface StreamLinkRegionInfo {
+  /** 媒体直传输的地区信息列表。 */
+  Regions: RegionInfo[];
 }
 
 /** 字幕流配置参数。 */
@@ -3406,6 +4094,36 @@ declare interface CreateSnapshotByTimeOffsetTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateStreamLinkFlowRequest {
+  /** 流名称。 */
+  FlowName: string;
+  /** 最大带宽，单位bps，可选[10000000, 20000000, 50000000]。 */
+  MaxBandwidth: number;
+  /** 流的输入组。 */
+  InputGroup: CreateInput[];
+}
+
+declare interface CreateStreamLinkFlowResponse {
+  /** 创建的Flow信息。 */
+  Info: DescribeFlow;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface CreateStreamLinkOutputInfoRequest {
+  /** 传输流Id。 */
+  FlowId: string;
+  /** 传输流的Output配置。 */
+  Output: CreateOutputInfo;
+}
+
+declare interface CreateStreamLinkOutputInfoResponse {
+  /** 创建后的Output信息。 */
+  Info: DescribeOutput;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateTranscodeTemplateRequest {
   /** 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。 */
   Container: string;
@@ -3592,6 +4310,28 @@ declare interface DeleteSnapshotByTimeOffsetTemplateRequest {
 }
 
 declare interface DeleteSnapshotByTimeOffsetTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteStreamLinkFlowRequest {
+  /** 传输流Id。 */
+  FlowId: string;
+}
+
+declare interface DeleteStreamLinkFlowResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteStreamLinkOutputRequest {
+  /** 流Id。 */
+  FlowId: string;
+  /** 输出Id。 */
+  OutputId: string;
+}
+
+declare interface DeleteStreamLinkOutputResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -3828,6 +4568,184 @@ declare interface DescribeSnapshotByTimeOffsetTemplatesResponse {
   TotalCount: number;
   /** 指定时间点截图模板详情列表。 */
   SnapshotByTimeOffsetTemplateSet: SnapshotByTimeOffsetTemplate[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamLinkActivateStateRequest {
+}
+
+declare interface DescribeStreamLinkActivateStateResponse {
+  /** 用户已激活为0，否则为非0。 */
+  Status: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamLinkFlowLogsRequest {
+  /** 传输流Id。 */
+  FlowId: string;
+  /** 统计的开始时间，默认为前一小时，最多支持查询近7天。UTC时间，如'2020-01-01T12:00:00Z'。 */
+  StartTime: string;
+  /** 统计的结束时间，默认为StartTime后一小时，最多支持查询24小时的数据。UTC时间，如'2020-01-01T12:00:00Z'。 */
+  EndTime: string;
+  /** 输入或输出类型，可选[input|output]。 */
+  Type: string[];
+  /** 主通道或备通道，可选[0|1]。 */
+  Pipeline: string[];
+  /** 每页大小，默认100，范围为[1, 1000]。 */
+  PageSize: number;
+  /** 按Timestamp升序或降序排序，默认降序，可选[desc|asc]。 */
+  SortType?: string;
+  /** 页码，默认1，范围为[1, 1000]。 */
+  PageNum?: number;
+}
+
+declare interface DescribeStreamLinkFlowLogsResponse {
+  /** 日志信息列表。 */
+  Infos: FlowLogInfo[];
+  /** 当前页码。 */
+  PageNum: number;
+  /** 每页大小。 */
+  PageSize: number;
+  /** 总数量。 */
+  TotalNum: number;
+  /** 总页数。 */
+  TotalPage: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamLinkFlowMediaStatisticsRequest {
+  /** 传输流ID。 */
+  FlowId: string;
+  /** 输入或输出类型，可选[input|output]。 */
+  Type: string;
+  /** 输入或输出Id。 */
+  InputOutputId: string;
+  /** 主通道或备通道，可选[0|1]。 */
+  Pipeline: string;
+  /** 查询间隔，可选[5s|1min|5min|15min]。 */
+  Period: string;
+  /** 统计的开始时间，默认为前一小时，最多支持查询近7天。UTC时间，如'2020-01-01T12:00:00Z'。 */
+  StartTime: string;
+  /** 统计的结束时间，默认为StartTime后一小时，最多支持查询24小时的数据。UTC时间，如'2020-01-01T12:00:00Z'。 */
+  EndTime: string;
+}
+
+declare interface DescribeStreamLinkFlowMediaStatisticsResponse {
+  /** 传输流的媒体数据列表。 */
+  Infos: FlowMediaInfo[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamLinkFlowRealtimeStatusRequest {
+  /** 流ID。 */
+  FlowId: string;
+  /** 输入id数组，如果输入输出数组都为空，则代表全量查询。 */
+  InputIds?: string[];
+  /** 输出id数组，如果输入输出数组都为空，则代表全量查询。 */
+  OutputIds?: string[];
+}
+
+declare interface DescribeStreamLinkFlowRealtimeStatusResponse {
+  /** 查询时间，单位s。 */
+  Timestamp: number;
+  /** 实时数据信息列表。 */
+  Datas: FlowRealtimeStatusItem[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamLinkFlowRequest {
+  /** 流Id。 */
+  FlowId: string;
+}
+
+declare interface DescribeStreamLinkFlowResponse {
+  /** 流的配置信息。 */
+  Info: DescribeFlow;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamLinkFlowSRTStatisticsRequest {
+  /** 传输流ID。 */
+  FlowId: string;
+  /** 输入或输出类型，可选[input|output]。 */
+  Type: string;
+  /** 输入或输出Id。 */
+  InputOutputId: string;
+  /** 主通道或备通道，可选[0|1]。 */
+  Pipeline: string;
+  /** 统计的开始时间，默认为前一小时，最多支持查询近7天。UTC时间，如'2020-01-01T12:00:00Z'。 */
+  StartTime: string;
+  /** 统计的结束时间，默认为StartTime后一小时，最多支持查询24小时的数据。UTC时间，如'2020-01-01T12:00:00Z'。 */
+  EndTime: string;
+  /** 查询间隔，可选[5s|1min|5min|15min]。 */
+  Period: string;
+}
+
+declare interface DescribeStreamLinkFlowSRTStatisticsResponse {
+  /** 传输流的SRT质量数据列表。 */
+  Infos: FlowSRTInfo[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamLinkFlowStatisticsRequest {
+  /** 传输流ID。 */
+  FlowId: string;
+  /** 输入或输出类型，可选[input|output]。 */
+  Type: string;
+  /** 输入或输出Id。 */
+  InputOutputId: string;
+  /** 主通道或备通道，可选[0|1]。 */
+  Pipeline: string;
+  /** 查询间隔，可选[5s|1min|5min|15min]。 */
+  Period: string;
+  /** 统计的开始时间，默认为前一小时，最多支持查询近7天。UTC时间，如'2020-01-01T12:00:00Z'。 */
+  StartTime: string;
+  /** 统计的结束时间，默认为StartTime后一小时，最多支持查询24小时的数据。UTC时间，如'2020-01-01T12:00:00Z'。 */
+  EndTime: string;
+}
+
+declare interface DescribeStreamLinkFlowStatisticsResponse {
+  /** 传输流的媒体数据列表。 */
+  Infos: FlowStatisticsArray[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamLinkFlowsRequest {
+  /** 当前页数，默认1。 */
+  PageNum?: number;
+  /** 每页大小，默认10。 */
+  PageSize?: number;
+}
+
+declare interface DescribeStreamLinkFlowsResponse {
+  /** 流的配置信息列表。 */
+  Infos: DescribeFlow[];
+  /** 当前页数。 */
+  PageNum: number;
+  /** 每页大小。 */
+  PageSize: number;
+  /** 总数量。 */
+  TotalNum: number;
+  /** 总页数。 */
+  TotalPage: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamLinkRegionsRequest {
+}
+
+declare interface DescribeStreamLinkRegionsResponse {
+  /** 媒体传输地区信息。 */
+  Info: StreamLinkRegionInfo;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -4276,6 +5194,46 @@ declare interface ModifySnapshotByTimeOffsetTemplateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyStreamLinkFlowRequest {
+  /** 流Id。 */
+  FlowId: string;
+  /** 需要修改的流名称。 */
+  FlowName: string;
+}
+
+declare interface ModifyStreamLinkFlowResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyStreamLinkInputRequest {
+  /** 流Id。 */
+  FlowId: string;
+  /** 需要修改的Input信息。 */
+  Input: ModifyInput;
+}
+
+declare interface ModifyStreamLinkInputResponse {
+  /** 修改后的Input信息。 */
+  Info: DescribeInput;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyStreamLinkOutputInfoRequest {
+  /** 流Id。 */
+  FlowId: string;
+  /** 需要修改的Output配置。 */
+  Output: ModifyOutputInfo;
+}
+
+declare interface ModifyStreamLinkOutputInfoResponse {
+  /** 修改后的Output配置。 */
+  Info: DescribeOutput;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyTranscodeTemplateRequest {
   /** 转码模板唯一标识。 */
   Definition: number;
@@ -4498,6 +5456,26 @@ declare interface ResetWorkflowResponse {
   RequestId?: string;
 }
 
+declare interface StartStreamLinkFlowRequest {
+  /** 流Id。 */
+  FlowId: string;
+}
+
+declare interface StartStreamLinkFlowResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface StopStreamLinkFlowRequest {
+  /** 流Id。 */
+  FlowId: string;
+}
+
+declare interface StopStreamLinkFlowResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 /** {@link Mps 媒体处理} */
 declare interface Mps {
   (): Versions;
@@ -4519,6 +5497,10 @@ declare interface Mps {
   CreateSampleSnapshotTemplate(data: CreateSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSampleSnapshotTemplateResponse>;
   /** {@link CreateSnapshotByTimeOffsetTemplate 创建指定时间点截图模板}({@link CreateSnapshotByTimeOffsetTemplateRequest 请求参数}): {@link CreateSnapshotByTimeOffsetTemplateResponse 返回参数} */
   CreateSnapshotByTimeOffsetTemplate(data?: CreateSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotByTimeOffsetTemplateResponse>;
+  /** {@link CreateStreamLinkFlow 创建媒体传输流}({@link CreateStreamLinkFlowRequest 请求参数}): {@link CreateStreamLinkFlowResponse 返回参数} */
+  CreateStreamLinkFlow(data: CreateStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamLinkFlowResponse>;
+  /** {@link CreateStreamLinkOutputInfo 创建媒体传输的输出信息}({@link CreateStreamLinkOutputInfoRequest 请求参数}): {@link CreateStreamLinkOutputInfoResponse 返回参数} */
+  CreateStreamLinkOutputInfo(data: CreateStreamLinkOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamLinkOutputInfoResponse>;
   /** {@link CreateTranscodeTemplate 创建转码模板}({@link CreateTranscodeTemplateRequest 请求参数}): {@link CreateTranscodeTemplateResponse 返回参数} */
   CreateTranscodeTemplate(data: CreateTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTranscodeTemplateResponse>;
   /** {@link CreateWatermarkTemplate 创建水印模板}({@link CreateWatermarkTemplateRequest 请求参数}): {@link CreateWatermarkTemplateResponse 返回参数} */
@@ -4545,6 +5527,10 @@ declare interface Mps {
   DeleteSampleSnapshotTemplate(data: DeleteSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSampleSnapshotTemplateResponse>;
   /** {@link DeleteSnapshotByTimeOffsetTemplate 删除指定时间点截图模板}({@link DeleteSnapshotByTimeOffsetTemplateRequest 请求参数}): {@link DeleteSnapshotByTimeOffsetTemplateResponse 返回参数} */
   DeleteSnapshotByTimeOffsetTemplate(data: DeleteSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotByTimeOffsetTemplateResponse>;
+  /** {@link DeleteStreamLinkFlow 删除媒体传输流}({@link DeleteStreamLinkFlowRequest 请求参数}): {@link DeleteStreamLinkFlowResponse 返回参数} */
+  DeleteStreamLinkFlow(data: DeleteStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamLinkFlowResponse>;
+  /** {@link DeleteStreamLinkOutput 删除媒体传输输出}({@link DeleteStreamLinkOutputRequest 请求参数}): {@link DeleteStreamLinkOutputResponse 返回参数} */
+  DeleteStreamLinkOutput(data: DeleteStreamLinkOutputRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamLinkOutputResponse>;
   /** {@link DeleteTranscodeTemplate 删除转码模板}({@link DeleteTranscodeTemplateRequest 请求参数}): {@link DeleteTranscodeTemplateResponse 返回参数} */
   DeleteTranscodeTemplate(data: DeleteTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTranscodeTemplateResponse>;
   /** {@link DeleteWatermarkTemplate 删除水印模板}({@link DeleteWatermarkTemplateRequest 请求参数}): {@link DeleteWatermarkTemplateResponse 返回参数} */
@@ -4573,6 +5559,24 @@ declare interface Mps {
   DescribeSampleSnapshotTemplates(data?: DescribeSampleSnapshotTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleSnapshotTemplatesResponse>;
   /** {@link DescribeSnapshotByTimeOffsetTemplates 获取指定时间点截图模板列表}({@link DescribeSnapshotByTimeOffsetTemplatesRequest 请求参数}): {@link DescribeSnapshotByTimeOffsetTemplatesResponse 返回参数} */
   DescribeSnapshotByTimeOffsetTemplates(data?: DescribeSnapshotByTimeOffsetTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotByTimeOffsetTemplatesResponse>;
+  /** {@link DescribeStreamLinkActivateState 查询媒体传输开通状态}({@link DescribeStreamLinkActivateStateRequest 请求参数}): {@link DescribeStreamLinkActivateStateResponse 返回参数} */
+  DescribeStreamLinkActivateState(data?: DescribeStreamLinkActivateStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkActivateStateResponse>;
+  /** {@link DescribeStreamLinkFlow 查询媒体输入流}({@link DescribeStreamLinkFlowRequest 请求参数}): {@link DescribeStreamLinkFlowResponse 返回参数} */
+  DescribeStreamLinkFlow(data: DescribeStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkFlowResponse>;
+  /** {@link DescribeStreamLinkFlowLogs 查询传输流的日志}({@link DescribeStreamLinkFlowLogsRequest 请求参数}): {@link DescribeStreamLinkFlowLogsResponse 返回参数} */
+  DescribeStreamLinkFlowLogs(data: DescribeStreamLinkFlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkFlowLogsResponse>;
+  /** {@link DescribeStreamLinkFlowMediaStatistics 查询媒体质量数据}({@link DescribeStreamLinkFlowMediaStatisticsRequest 请求参数}): {@link DescribeStreamLinkFlowMediaStatisticsResponse 返回参数} */
+  DescribeStreamLinkFlowMediaStatistics(data: DescribeStreamLinkFlowMediaStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkFlowMediaStatisticsResponse>;
+  /** {@link DescribeStreamLinkFlowRealtimeStatus 查询流实时状态接口}({@link DescribeStreamLinkFlowRealtimeStatusRequest 请求参数}): {@link DescribeStreamLinkFlowRealtimeStatusResponse 返回参数} */
+  DescribeStreamLinkFlowRealtimeStatus(data: DescribeStreamLinkFlowRealtimeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkFlowRealtimeStatusResponse>;
+  /** {@link DescribeStreamLinkFlowSRTStatistics 查询SRT数据信息}({@link DescribeStreamLinkFlowSRTStatisticsRequest 请求参数}): {@link DescribeStreamLinkFlowSRTStatisticsResponse 返回参数} */
+  DescribeStreamLinkFlowSRTStatistics(data: DescribeStreamLinkFlowSRTStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkFlowSRTStatisticsResponse>;
+  /** {@link DescribeStreamLinkFlowStatistics 查询流的媒体质量数据}({@link DescribeStreamLinkFlowStatisticsRequest 请求参数}): {@link DescribeStreamLinkFlowStatisticsResponse 返回参数} */
+  DescribeStreamLinkFlowStatistics(data: DescribeStreamLinkFlowStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkFlowStatisticsResponse>;
+  /** {@link DescribeStreamLinkFlows 批量查询媒体输入流}({@link DescribeStreamLinkFlowsRequest 请求参数}): {@link DescribeStreamLinkFlowsResponse 返回参数} */
+  DescribeStreamLinkFlows(data?: DescribeStreamLinkFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkFlowsResponse>;
+  /** {@link DescribeStreamLinkRegions 查询媒体传输地区}({@link DescribeStreamLinkRegionsRequest 请求参数}): {@link DescribeStreamLinkRegionsResponse 返回参数} */
+  DescribeStreamLinkRegions(data?: DescribeStreamLinkRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkRegionsResponse>;
   /** {@link DescribeTaskDetail 查询任务详情}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
   /** {@link DescribeTasks 获取任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
@@ -4613,6 +5617,12 @@ declare interface Mps {
   ModifySampleSnapshotTemplate(data: ModifySampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySampleSnapshotTemplateResponse>;
   /** {@link ModifySnapshotByTimeOffsetTemplate 修改指定时间点截图模板}({@link ModifySnapshotByTimeOffsetTemplateRequest 请求参数}): {@link ModifySnapshotByTimeOffsetTemplateResponse 返回参数} */
   ModifySnapshotByTimeOffsetTemplate(data: ModifySnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotByTimeOffsetTemplateResponse>;
+  /** {@link ModifyStreamLinkFlow 修改媒体传输流}({@link ModifyStreamLinkFlowRequest 请求参数}): {@link ModifyStreamLinkFlowResponse 返回参数} */
+  ModifyStreamLinkFlow(data: ModifyStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkFlowResponse>;
+  /** {@link ModifyStreamLinkInput 修改媒体传输输入}({@link ModifyStreamLinkInputRequest 请求参数}): {@link ModifyStreamLinkInputResponse 返回参数} */
+  ModifyStreamLinkInput(data: ModifyStreamLinkInputRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkInputResponse>;
+  /** {@link ModifyStreamLinkOutputInfo 修改媒体传输的输出信息}({@link ModifyStreamLinkOutputInfoRequest 请求参数}): {@link ModifyStreamLinkOutputInfoResponse 返回参数} */
+  ModifyStreamLinkOutputInfo(data: ModifyStreamLinkOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkOutputInfoResponse>;
   /** {@link ModifyTranscodeTemplate 修改转码模板}({@link ModifyTranscodeTemplateRequest 请求参数}): {@link ModifyTranscodeTemplateResponse 返回参数} */
   ModifyTranscodeTemplate(data: ModifyTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTranscodeTemplateResponse>;
   /** {@link ModifyWatermarkTemplate 修改水印模板}({@link ModifyWatermarkTemplateRequest 请求参数}): {@link ModifyWatermarkTemplateResponse 返回参数} */
@@ -4631,6 +5641,10 @@ declare interface Mps {
   RecognizeMediaForZhiXue(data: RecognizeMediaForZhiXueRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeMediaForZhiXueResponse>;
   /** {@link ResetWorkflow 重设工作流}({@link ResetWorkflowRequest 请求参数}): {@link ResetWorkflowResponse 返回参数} */
   ResetWorkflow(data: ResetWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<ResetWorkflowResponse>;
+  /** {@link StartStreamLinkFlow 开启媒体传输流}({@link StartStreamLinkFlowRequest 请求参数}): {@link StartStreamLinkFlowResponse 返回参数} */
+  StartStreamLinkFlow(data: StartStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StartStreamLinkFlowResponse>;
+  /** {@link StopStreamLinkFlow 停止媒体传输流}({@link StopStreamLinkFlowRequest 请求参数}): {@link StopStreamLinkFlowResponse 返回参数} */
+  StopStreamLinkFlow(data: StopStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StopStreamLinkFlowResponse>;
 }
 
 export declare type Versions = ["2019-06-12"];

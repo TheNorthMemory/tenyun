@@ -772,6 +772,18 @@ declare interface WebCallback {
   Index?: number;
 }
 
+declare interface AddMachineGroupInfoRequest {
+  /** 机器组ID */
+  GroupId: string;
+  /** 机器组类型目前type支持 ip 和 label */
+  MachineGroupType: MachineGroupTypeInfo;
+}
+
+declare interface AddMachineGroupInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ApplyConfigToMachineGroupRequest {
   /** 采集配置ID */
   ConfigId: string;
@@ -1156,6 +1168,18 @@ declare interface DeleteLogsetRequest {
 }
 
 declare interface DeleteLogsetResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteMachineGroupInfoRequest {
+  /** 机器组ID */
+  GroupId: string;
+  /** 机器组类型目前type支持 ip 和 label */
+  MachineGroupType: MachineGroupTypeInfo;
+}
+
+declare interface DeleteMachineGroupInfoResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1919,6 +1943,8 @@ declare interface UploadLogResponse {
 /** {@link Cls 日志服务} */
 declare interface Cls {
   (): Versions;
+  /** {@link AddMachineGroupInfo 添加机器组信息}({@link AddMachineGroupInfoRequest 请求参数}): {@link AddMachineGroupInfoResponse 返回参数} */
+  AddMachineGroupInfo(data: AddMachineGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddMachineGroupInfoResponse>;
   /** {@link ApplyConfigToMachineGroup 应用采集配置到指定机器组}({@link ApplyConfigToMachineGroupRequest 请求参数}): {@link ApplyConfigToMachineGroupResponse 返回参数} */
   ApplyConfigToMachineGroup(data: ApplyConfigToMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyConfigToMachineGroupResponse>;
   /** {@link CloseKafkaConsumer 关闭Kafka协议消费}({@link CloseKafkaConsumerRequest 请求参数}): {@link CloseKafkaConsumerResponse 返回参数} */
@@ -1965,6 +1991,8 @@ declare interface Cls {
   DeleteLogset(data: DeleteLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogsetResponse>;
   /** {@link DeleteMachineGroup 删除机器组}({@link DeleteMachineGroupRequest 请求参数}): {@link DeleteMachineGroupResponse 返回参数} */
   DeleteMachineGroup(data: DeleteMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineGroupResponse>;
+  /** {@link DeleteMachineGroupInfo 删除机器组信息}({@link DeleteMachineGroupInfoRequest 请求参数}): {@link DeleteMachineGroupInfoResponse 返回参数} */
+  DeleteMachineGroupInfo(data: DeleteMachineGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineGroupInfoResponse>;
   /** {@link DeleteShipper 删除投递规则}({@link DeleteShipperRequest 请求参数}): {@link DeleteShipperResponse 返回参数} */
   DeleteShipper(data: DeleteShipperRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShipperResponse>;
   /** {@link DeleteTopic 删除日志主题}({@link DeleteTopicRequest 请求参数}): {@link DeleteTopicResponse 返回参数} */

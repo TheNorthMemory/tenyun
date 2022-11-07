@@ -598,10 +598,12 @@ declare interface ProductConf {
   EnableRepicaReadOnly: boolean;
 }
 
-/** Proxy节点信息 */
+/** Proxy节点信息。 */
 declare interface ProxyNodes {
-  /** 节点ID */
+  /** 节点 ID。 */
   NodeId: string | null;
+  /** 可用区 ID。 */
+  ZoneId: number | null;
 }
 
 /** 实例的备份数组 */

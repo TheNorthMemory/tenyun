@@ -376,6 +376,8 @@ declare interface CmqTopic {
   NamespaceName: string | null;
   /** 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败 */
   Status: number | null;
+  /** 0表示pulsar，1表示rocketmq */
+  BrokerType: number | null;
 }
 
 /** cmq TransactionPolicy */

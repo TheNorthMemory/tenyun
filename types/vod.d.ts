@@ -2574,6 +2574,8 @@ declare interface MediaProcessTaskAdaptiveDynamicStreamingResult {
   ErrCode: number;
   /** 错误信息。 */
   Message: string;
+  /** 转自适应码流任务进度，取值范围 [0-100] 。 */
+  Progress: number;
   /** 对视频转自适应码流任务的输入。 */
   Input: AdaptiveDynamicStreamingTaskInput;
   /** 对视频转自适应码流任务的输出。 */

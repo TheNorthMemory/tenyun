@@ -1668,11 +1668,13 @@ declare interface SecHitRuleInfo {
   Description: string;
   /** 子域名。 */
   Domain: string;
+  /** Bot标签，取值有:evil_bot：恶意Bot；suspect_bot：疑似Bot；good_bot：正常Bot；normal：正常请求；none：未分类。 */
+  BotLabel: string;
 }
 
 /** 安全规则（cc/waf/bot）相关信息 */
 declare interface SecRuleRelatedInfo {
-  /** 规则ID列表（99999为无效id）。 */
+  /** 规则ID。 */
   RuleId: number;
   /** 执行动作（处置方式），取值有：trans ：通过 ；alg ：算法挑战 ；drop ：丢弃 ；ban ：封禁源ip ；redirect ：重定向 ；page ：返回指定页面 ；monitor ：观察 。 */
   Action: string;
@@ -1684,6 +1686,8 @@ declare interface SecRuleRelatedInfo {
   Description: string;
   /** 规则类型名称。 */
   RuleTypeName: string;
+  /** 攻击内容。 */
+  AttackContent: string | null;
 }
 
 /** 安全配置 */

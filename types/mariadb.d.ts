@@ -1380,6 +1380,20 @@ declare interface InitDBInstancesResponse {
   RequestId?: string;
 }
 
+declare interface IsolateDBInstanceRequest {
+  /** 实例 ID，格式如：tdsql-dasjkhd，与云数据库控制台页面中显示的实例 ID 相同，可使用 查询实例列表 接口获取，其值为输出参数中字段 InstanceId 的值。 */
+  InstanceIds: string[];
+}
+
+declare interface IsolateDBInstanceResponse {
+  /** 隔离成功实例ID列表。 */
+  SuccessInstanceIds: string[];
+  /** 隔离失败实例ID列表。 */
+  FailedInstanceIds: string[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface IsolateDedicatedDBInstanceRequest {
   /** 实例 Id，形如：tdsql-ow728lmc。 */
   InstanceId: string;
@@ -1821,6 +1835,8 @@ declare interface Mariadb {
   GrantAccountPrivileges(data: GrantAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<GrantAccountPrivilegesResponse>;
   /** {@link InitDBInstances 初始化实例}({@link InitDBInstancesRequest 请求参数}): {@link InitDBInstancesResponse 返回参数} */
   InitDBInstances(data: InitDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InitDBInstancesResponse>;
+  /** {@link IsolateDBInstance 隔离云数据库实例（包年包月）}({@link IsolateDBInstanceRequest 请求参数}): {@link IsolateDBInstanceResponse 返回参数} */
+  IsolateDBInstance(data: IsolateDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBInstanceResponse>;
   /** {@link IsolateDedicatedDBInstance 隔离独享云数据库实例}({@link IsolateDedicatedDBInstanceRequest 请求参数}): {@link IsolateDedicatedDBInstanceResponse 返回参数} */
   IsolateDedicatedDBInstance(data: IsolateDedicatedDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDedicatedDBInstanceResponse>;
   /** {@link IsolateHourDBInstance 隔离后付费实例}({@link IsolateHourDBInstanceRequest 请求参数}): {@link IsolateHourDBInstanceResponse 返回参数} */
