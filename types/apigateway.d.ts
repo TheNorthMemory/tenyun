@@ -394,6 +394,32 @@ declare interface AttachedApiSummary {
   AttachedApis: AttachedApiInfo[];
 }
 
+/** 已绑定的插件信息。 */
+declare interface AttachedPluginInfo {
+  /** 插件ID。 */
+  PluginId: string;
+  /** 环境信息。 */
+  Environment: string;
+  /** 绑定时间。 */
+  AttachedTime: string;
+  /** 插件名称。 */
+  PluginName: string;
+  /** 插件类型。 */
+  PluginType: string;
+  /** 插件描述。 */
+  Description: string;
+  /** 插件定义语句。 */
+  PluginData: string;
+}
+
+/** 已绑定的插件信息。 */
+declare interface AttachedPluginSummary {
+  /** 已绑定的插件总数。 */
+  TotalCount: number;
+  /** 已绑定的插件信息。 */
+  PluginSummary: AttachedPluginInfo[];
+}
+
 /** 插件相关的API信息。 */
 declare interface AvailableApiInfo {
   /** API ID。 */
@@ -2368,6 +2394,26 @@ declare interface DescribePluginResponse {
   RequestId?: string;
 }
 
+declare interface DescribePluginsByApiRequest {
+  /** 要查询的API ID。 */
+  ApiId: string;
+  /** 要查询的服务ID。 */
+  ServiceId: string;
+  /** 环境信息。 */
+  EnvironmentName?: string;
+  /** 返回数量，默认为 20，最大值为 100。 */
+  Limit?: number;
+  /** 偏移量，默认为 0。 */
+  Offset?: number;
+}
+
+declare interface DescribePluginsByApiResponse {
+  /** 插件可绑定的API列表信息。 */
+  Result: AttachedPluginSummary;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribePluginsRequest {
   /** 要查询的插件列表。 */
   PluginIds?: string[];
@@ -3443,6 +3489,8 @@ declare interface Apigateway {
   DescribePluginApis(data: DescribePluginApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginApisResponse>;
   /** {@link DescribePlugins 查询插件列表和详情}({@link DescribePluginsRequest 请求参数}): {@link DescribePluginsResponse 返回参数} */
   DescribePlugins(data?: DescribePluginsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginsResponse>;
+  /** {@link DescribePluginsByApi API上已绑定的插件}({@link DescribePluginsByApiRequest 请求参数}): {@link DescribePluginsByApiResponse 返回参数} */
+  DescribePluginsByApi(data: DescribePluginsByApiRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginsByApiResponse>;
   /** {@link DescribeService 查询服务详情}({@link DescribeServiceRequest 请求参数}): {@link DescribeServiceResponse 返回参数} */
   DescribeService(data: DescribeServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceResponse>;
   /** {@link DescribeServiceEnvironmentList 查询服务环境列表}({@link DescribeServiceEnvironmentListRequest 请求参数}): {@link DescribeServiceEnvironmentListResponse 返回参数} */

@@ -190,6 +190,16 @@ declare interface ObjectInfo {
   AllBox: Box[] | null;
 }
 
+/** 宠物具体信息 */
+declare interface Pet {
+  /** 识别出的宠物类型（猫或者狗，暂不支持识别猫狗品种）。 */
+  Name: string;
+  /** 识别服务给识别目标打出的置信度，范围在0-100之间。值越高，表示目标为相应结果的可能性越高。 */
+  Score: number;
+  /** 识别目标在图片中的坐标。 */
+  Location: Rect;
+}
+
 /** 检测到的单个商品结构体 */
 declare interface Product {
   /** 图片中商品的三级分类识别结果，选取所有三级分类中的置信度最大者 */
@@ -518,6 +528,20 @@ declare interface DetectMisbehaviorResponse {
   RequestId?: string;
 }
 
+declare interface DetectPetRequest {
+  /** 图片的URL地址。图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的Url速度和稳定性可能受一定影响。图片大小的限制为4M，图片像素的限制为4k。 */
+  ImageUrl?: string;
+  /** 图片经过base64编码的内容。与ImageUrl同时存在时优先使用ImageUrl字段。 图片大小的限制为4M，图片像素的限制为4k。**注意：图片需要base64编码，并且要去掉编码头部。** */
+  ImageBase64?: string;
+}
+
+declare interface DetectPetResponse {
+  /** 识别出图片中的宠物信息列表。 */
+  Pets: Pet[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DetectProductBetaRequest {
   /** 图片限制：内测版仅支持jpg、jpeg，图片大小不超过1M，分辨率在25万到100万之间。 建议先对图片进行压缩，以便提升处理速度。 */
   ImageUrl?: string;
@@ -661,6 +685,8 @@ declare interface Tiia {
   DetectLabelPro(data?: DetectLabelProRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLabelProResponse>;
   /** {@link DetectMisbehavior 不良行为识别}({@link DetectMisbehaviorRequest 请求参数}): {@link DetectMisbehaviorResponse 返回参数} */
   DetectMisbehavior(data?: DetectMisbehaviorRequest, config?: AxiosRequestConfig): AxiosPromise<DetectMisbehaviorResponse>;
+  /** {@link DetectPet 宠物识别}({@link DetectPetRequest 请求参数}): {@link DetectPetResponse 返回参数} */
+  DetectPet(data?: DetectPetRequest, config?: AxiosRequestConfig): AxiosPromise<DetectPetResponse>;
   /** {@link DetectProduct 商品识别}({@link DetectProductRequest 请求参数}): {@link DetectProductResponse 返回参数} */
   DetectProduct(data?: DetectProductRequest, config?: AxiosRequestConfig): AxiosPromise<DetectProductResponse>;
   /** {@link DetectProductBeta 商品识别-微信识物版}({@link DetectProductBetaRequest 请求参数}): {@link DetectProductBetaResponse 返回参数} */

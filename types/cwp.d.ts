@@ -1952,6 +1952,8 @@ declare interface Machine {
   CloudTags: Tags[] | null;
   /** 是否15天内新增的主机 0：非15天内新增的主机，1：15天内增加的主机 */
   IsAddedOnTheFifteen: number | null;
+  /** 主机ip列表 */
+  IpList: string | null;
 }
 
 /** 服务器标签信息 */
@@ -5031,7 +5033,7 @@ declare interface DescribeMachinesRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤条件。Keywords - String - 是否必填：否 - 查询关键字 Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线/关机 | ONLINE: 在线 | UNINSTALLED：未安装 | AGENT_OFFLINE 离线| AGENT_SHUTDOWN 已关机）Version - String 是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship : 旗舰版 | ProtectedMachines: 专业版+旗舰版）Risk - String 是否必填: 否 - 风险主机( yes ) Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )每个过滤条件只支持一个值，暂不支持多个值“或”关系查询Quuid - String - 是否必填: 否 - 云服务器uuid 最大100条.AddedOnTheFifteen- String 是否必填: 否 - 是否只查询15天内新增的主机( 1：是) */
+  /** 过滤条件。Ips - String - 是否必填：否 - 通过ip查询 Names - String - 是否必填：否 - 通过实例名查询 InstanceIds - String - 是否必填：否 - 通过实例id查询 Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线/关机 | ONLINE: 在线 | UNINSTALLED：未安装 | AGENT_OFFLINE 离线| AGENT_SHUTDOWN 已关机）Version - String 是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship : 旗舰版 | ProtectedMachines: 专业版+旗舰版）Risk - String 是否必填: 否 - 风险主机( yes ) Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )每个过滤条件只支持一个值，暂不支持多个值“或”关系查询Quuid - String - 是否必填: 否 - 云服务器uuid 最大100条.AddedOnTheFifteen- String 是否必填: 否 - 是否只查询15天内新增的主机( 1：是) */
   Filters?: Filter[];
   /** 机器所属业务ID列表 */
   ProjectIds?: number[];

@@ -1277,7 +1277,7 @@ declare interface CreateLiveCallbackTemplateResponse {
 }
 
 declare interface CreateLivePullStreamTaskRequest {
-  /** 拉流源的类型：PullLivePushLive -直播，PullVodPushLive -点播。 */
+  /** 拉流源的类型：PullLivePushLive -直播，PullVodPushLive -点播。PullPicPushLive -图片。 */
   SourceType: string;
   /** 拉流源 url 列表。SourceType 为直播（PullLivePushLive）只可以填1个，SourceType 为点播（PullVodPushLive）可以填多个，上限30个。当前支持的文件格式：flv，mp4，hls。当前支持的拉流协议：http，https，rtmp，rtmps，rtsp，srt。注意：1. 建议优先使用 flv 文件，对于 mp4 未交织好的文件轮播推流易产生卡顿，可通过点播转码进行重新交织后再轮播。2. 拒绝内网域名等攻击性拉流地址，如有使用，则做账号封禁处理。3. 源文件请保持时间戳正常交织递增，避免因源文件异常影响推流及播放。4. 视频编码格式仅支持: H264, H265。5. 音频编码格式仅支持: AAC。6. 点播源请使用小文件，尽量时长保持在1小时内，较大文件打开和续播耗时较久，耗时超过15秒会有无法正常转推风险。 */
   SourceUrls: string[];
@@ -1315,6 +1315,8 @@ declare interface CreateLivePullStreamTaskRequest {
   BackupSourceUrl?: string;
   /** 水印信息列表。注意：1. 最多支持4个不同位置的水印。2. 水印图片 URL 请使用合法外网可访问地址。3. 支持的水印图片格式：png，jpg，gif 等。 */
   WatermarkList?: PullPushWatermarkInfo[];
+  /** 点播源是否启用本地推流模式，默认0，不启用。0 - 不启用。1 - 启用。注意：启用本地模式后，会将源列表中的 MP4 文件进行本地下载，优先使用本地已下载文件进行推流，提高点播源推流稳定性。使用本地下载文件推流时，会产生增值费用。 */
+  VodLocalMode?: number;
 }
 
 declare interface CreateLivePullStreamTaskResponse {
@@ -3213,12 +3215,14 @@ declare interface ModifyLivePullStreamTaskRequest {
   OffsetTime?: number;
   /** 任务备注。 */
   Comment?: string;
-  /** 备源的类型：PullLivePushLive -直播，PullVodPushLive -点播。注意：1. 仅当主源类型为直播源时，备源才会生效。2. 主直播源拉流中断时，自动使用备源进行拉流。3. 如果备源为点播文件时，则每次轮播完点播文件就检查主源是否恢复，如果主源恢复则自动切回到主源，否则继续拉备源。 */
+  /** 备源的类型：PullLivePushLive -直播，PullVodPushLive -点播。注意：1. 仅当主源类型为直播源时，备源才会生效。2. 将该参数置为空，则可将任务去除备源信息。3. 主直播源拉流中断时，自动使用备源进行拉流。4. 如果备源为点播文件时，则每次轮播完点播文件就检查主源是否恢复，如果主源恢复则自动切回到主源，否则继续拉备源。 */
   BackupSourceType?: string;
   /** 备源 URL。只允许填一个备源 URL */
   BackupSourceUrl?: string;
   /** 水印信息列表。注意：1. 最多支持4个不同位置的水印。2. 水印图片 URL 请使用合法外网可访问地址。3. 支持的水印图片格式：png，jpg等。4. 轮播任务修改水印后，轮播到下一个文件时新水印生效。5. 直播源任务修改水印后，水印立即生效。6. 清除水印时，需携带该水印列表参数，内容为空数组。7. 暂不支持动图水印。 */
   WatermarkList?: PullPushWatermarkInfo[];
+  /** 点播源是否启用本地推流模式，默认0，不启用。0 - 不启用。1 - 启用。注意：启用本地模式后，会将源列表中的 MP4 文件进行本地下载，优先使用本地已下载文件进行推流，提高点播源推流稳定性。使用本地下载文件推流时，会产生增值费用。 */
+  VodLocalMode?: number;
 }
 
 declare interface ModifyLivePullStreamTaskResponse {

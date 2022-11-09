@@ -914,7 +914,7 @@ declare interface ExceptUserRuleScope {
 declare interface FailReason {
   /** 失败原因。 */
   Reason: string;
-  /** 处理失败的资源列表，该列表元素来源于输入参数中的Targets，因此格式和入参中的Targets保持一致。 */
+  /** 处理失败的资源列表。 */
   Targets: string[];
 }
 
@@ -1050,6 +1050,8 @@ declare interface IpTableRule {
   RuleID?: number;
   /** 更新时间。仅出参使用。 */
   UpdateTime?: string;
+  /** 规则启用状态，当返回为null时，为启用。取值有： on：启用； off：未启用。 */
+  Status?: string | null;
 }
 
 /** Ipv6访问配置 */
@@ -1360,7 +1362,7 @@ declare interface Quota {
   Daily: number;
   /** 每日剩余的可提交配额。 */
   DailyAvailable: number;
-  /** 配额类型，取值有： purge_prefix：前缀； purge_url：URL； purge_host：Hostname； purge_all：全部缓存内容。 */
+  /** 刷新预热缓存类型，取值有： purge_prefix：按前缀刷新； purge_url：按URL刷新； purge_host：按Hostname刷新； purge_all：刷新全部缓存内容； purge_cache_tag：按CacheTag刷新； prefetch_url：按URL预热。 */
   Type: string;
 }
 
@@ -1440,7 +1442,7 @@ declare interface RateLimitUserRule {
   PunishTime: number;
   /** 处罚时长单位，取值有：second：秒；minutes：分钟；hour：小时。 */
   PunishTimeUnit: string;
-  /** 规则状态，取值有：on：生效；off：不生效。hour：小时。默认on生效。 */
+  /** 规则状态，取值有：on：生效；off：不生效。默认on生效。 */
   RuleStatus: string;
   /** 规则详情。 */
   AclConditions: AclCondition[];
@@ -1448,10 +1450,12 @@ declare interface RateLimitUserRule {
   RulePriority: number;
   /** 规则id。仅出参使用。 */
   RuleID?: number | null;
-  /** 过滤词，取值有：host：域名；sip：客户端ip。 */
+  /** 过滤词，取值有：sip：客户端ip。 */
   FreqFields?: string[] | null;
   /** 更新时间。 */
   UpdateTime?: string | null;
+  /** 统计范围，字段为null时，代表source_to_eo。取值有：source_to_eo：（响应）源站到EdgeOne。client_to_eo：（请求）客户端到EdgeOne； */
+  FreqScope?: string[] | null;
 }
 
 /** 计费资源 */
@@ -1708,6 +1712,8 @@ declare interface SecurityConfig {
   ExceptConfig?: ExceptConfig | null;
   /** 自定义拦截页面配置。如果为null，默认使用历史配置。 */
   DropPageConfig?: DropPageConfig | null;
+  /** 模板配置。此处仅出参数使用。 */
+  TemplateConfig?: TemplateConfig | null;
 }
 
 /** 安全防护实例 */
@@ -1958,6 +1964,14 @@ declare interface Task {
   CreateTime: string;
   /** 任务完成时间。 */
   UpdateTime: string;
+}
+
+/** 安全模板配置 */
+declare interface TemplateConfig {
+  /** 模板ID。 */
+  TemplateId: string;
+  /** 模板名称。 */
+  TemplateName: string;
 }
 
 /** 统计曲线数据项 */
@@ -2529,9 +2543,9 @@ declare interface CreatePrefetchTaskResponse {
 declare interface CreatePurgeTaskRequest {
   /** 站点ID。 */
   ZoneId: string;
-  /** 清除缓存类型，取值有：purge_url：URL；purge_prefix：前缀；purge_host：Hostname；purge_all：全部缓存。 */
+  /** 清除缓存类型，取值有：purge_url：URL；purge_prefix：前缀；purge_host：Hostname；purge_all：全部缓存；purge_cache_tag：cache-tag刷新。 */
   Type: string;
-  /** 要刷新的资源列表，每个元素格式依据Type而定：1) Type = purge_host 时：形如：www.example.com 或 foo.bar.example.com。2) Type = purge_prefix 时：形如：http://www.example.com/example。3) Type = purge_url 时：形如：https://www.example.com/example.jpg。4）Type = purge_all 时：Targets可为空，不需要填写。 */
+  /** 要清除缓存的资源列表，每个元素格式依据Type而定：1) Type = purge_host 时：形如：www.example.com 或 foo.bar.example.com。2) Type = purge_prefix 时：形如：http://www.example.com/example。3) Type = purge_url 时：形如：https://www.example.com/example.jpg。4）Type = purge_all 时：Targets可为空，不需要填写。5）Type = purge_cache_tag 时：形如：tag1。 */
   Targets?: string[];
   /** 若有编码转换，仅清除编码转换后匹配的资源。若内容含有非 ASCII 字符集的字符，请开启此开关进行编码转换（编码规则遵循 RFC3986）。 */
   EncodeUrl?: boolean;
@@ -2945,16 +2959,18 @@ declare interface DescribeBotLogResponse {
 }
 
 declare interface DescribeBotManagedRulesRequest {
-  /** 站点Id。 */
-  ZoneId: string;
-  /** 子域名。 */
-  Entity: string;
   /** 分页查询偏移量。默认值：0。 */
   Offset: number;
   /** 分页查询限制数目。默认值：20，最大值：1000。 */
   Limit: number;
+  /** 站点Id。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。 */
+  ZoneId?: string;
+  /** 子域名/应用名。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。 */
+  Entity?: string;
   /** 规则类型，取值有： idcid；sipbot；uabot。传空或不传，即全部类型。 */
   RuleType?: string;
+  /** 模板Id。当使用模板Id时可不填ZoneId和Entity，否则必须填写ZoneId和Entity。 */
+  TemplateId?: string;
 }
 
 declare interface DescribeBotManagedRulesResponse {
@@ -3499,7 +3515,7 @@ declare interface DescribePrefetchTasksResponse {
 }
 
 declare interface DescribePurgeTasksRequest {
-  /** 站点 ID。 */
+  /** 字段已废弃，请使用Filters中的zone-id。 */
   ZoneId?: string;
   /** 查询起始时间。 */
   StartTime?: string;
@@ -3509,7 +3525,7 @@ declare interface DescribePurgeTasksRequest {
   Offset?: number;
   /** 分页查限制数目，默认值：20，最大值：1000。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：job-id 按照【任务ID】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。 类型：String 必选：否 模糊查询：不支持。target 按照【目标资源信息】进行过滤。target形如：http://www.qq.com/1.txt，暂不支持多值。 类型：String 必选：否 模糊查询：不支持。domains 按照【域名】进行过滤。domains形如：www.qq.com。 类型：String 必选：否 模糊查询：不支持。statuses 按照【任务状态】进行过滤。 必选：否 模糊查询：不支持。 可选项： processing：处理中 success：成功 failed：失败 timeout：超时type 按照【清除缓存类型】进行过滤，暂不支持多值。 类型：String 必选：否 模糊查询：不支持。 可选项： purge_url：URL purge_prefix：前缀 purge_all：全部缓存内容 purge_host：Hostname */
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：zone-id 按照【站点 ID】进行过滤。zone-id形如：zone-xxx，暂不支持多值 类型：String 必选：否 模糊查询：不支持job-id 按照【任务ID】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。 类型：String 必选：否 模糊查询：不支持target 按照【目标资源信息】进行过滤，target形如：http://www.qq.com/1.txt或者tag1，暂不支持多值 类型：String 必选：否 模糊查询：不支持domains 按照【域名】进行过滤，domains形如：www.qq.com 类型：String 必选：否 模糊查询：不支持。statuses 按照【任务状态】进行过滤 必选：否 模糊查询：不支持。 可选项： processing：处理中 success：成功 failed：失败 timeout：超时type 按照【清除缓存类型】进行过滤，暂不支持多值。 类型：String 必选：否 模糊查询：不支持 可选项： purge_url：URL purge_prefix：前缀 purge_all：全部缓存内容 purge_host：Hostname purge_cache_tag：CacheTag */
   Filters?: AdvancedFilter[];
 }
 
@@ -3563,14 +3579,16 @@ declare interface DescribeRulesSettingResponse {
 }
 
 declare interface DescribeSecurityGroupManagedRulesRequest {
-  /** 站点Id。 */
-  ZoneId: string;
-  /** 子域名/应用名。 */
-  Entity: string;
+  /** 站点Id。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。 */
+  ZoneId?: string;
+  /** 子域名/应用名。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。 */
+  Entity?: string;
   /** 分页查询偏移量。默认值：0。 */
   Offset?: number;
   /** 分页查询限制数目。默认值：20，最大值：1000。 */
   Limit?: number;
+  /** 模板Id。当使用模板Id时可不填ZoneId和Entity，否则必须填写ZoneId和Entity。 */
+  TemplateId?: string;
 }
 
 declare interface DescribeSecurityGroupManagedRulesResponse {
@@ -3614,9 +3632,11 @@ declare interface DescribeSecurityPolicyRegionsResponse {
 
 declare interface DescribeSecurityPolicyRequest {
   /** 站点Id。 */
-  ZoneId: string;
-  /** 子域名/应用名。 */
-  Entity: string;
+  ZoneId?: string;
+  /** 子域名/应用名。当使用Entity时可不填写TemplateId，否则必须填写TemplateId。 */
+  Entity?: string;
+  /** 模板策略id。当使用模板Id时可不填Entity，否则必须填写Entity。 */
+  TemplateId?: string;
 }
 
 declare interface DescribeSecurityPolicyResponse {
@@ -3627,10 +3647,12 @@ declare interface DescribeSecurityPolicyResponse {
 }
 
 declare interface DescribeSecurityPortraitRulesRequest {
-  /** 站点Id。 */
-  ZoneId: string;
-  /** 子域名/应用名。 */
-  Entity: string;
+  /** 站点Id。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。 */
+  ZoneId?: string;
+  /** 子域名/应用名。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。 */
+  Entity?: string;
+  /** 模板Id。当使用模板Id时可不填ZoneId和Entity，否则必须填写ZoneId和Entity。 */
+  TemplateId?: string;
 }
 
 declare interface DescribeSecurityPortraitRulesResponse {
@@ -4563,10 +4585,12 @@ declare interface ModifyRuleResponse {
 declare interface ModifySecurityPolicyRequest {
   /** 站点Id。 */
   ZoneId: string;
-  /** 子域名/应用名。 */
-  Entity: string;
   /** 安全配置。 */
   SecurityConfig: SecurityConfig;
+  /** 子域名/应用名。当使用Entity时可不填写TemplateId，否则必须填写TemplateId。 */
+  Entity?: string;
+  /** 模板策略id。当使用模板Id时可不填Entity，否则必须填写Entity。 */
+  TemplateId?: string;
 }
 
 declare interface ModifySecurityPolicyResponse {
@@ -4575,10 +4599,10 @@ declare interface ModifySecurityPolicyResponse {
 }
 
 declare interface ModifySecurityWafGroupPolicyRequest {
-  /** 站点Id。 */
-  ZoneId: string;
-  /** 子域名。 */
-  Entity: string;
+  /** 站点Id。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。 */
+  ZoneId?: string;
+  /** 子域名。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。 */
+  Entity?: string;
   /** 总开关，取值有：on：开启；off：关闭。不填默认为上次的配置。 */
   Switch?: string;
   /** 规则等级，取值有： loose：宽松； normal：正常； strict：严格； stricter：超严格； custom：自定义。不填默认为上次的配置。 */
@@ -4591,6 +4615,8 @@ declare interface ModifySecurityWafGroupPolicyRequest {
   AiRule?: AiRule;
   /** 托管规则等级组。不填默认为上次的配置。 */
   WafGroups?: WafGroup[];
+  /** 模板Id。当使用模板Id时可不填ZoneId和Entity，否则必须填写ZoneId和Entity。 */
+  TemplateId?: string;
 }
 
 declare interface ModifySecurityWafGroupPolicyResponse {
@@ -9028,15 +9054,15 @@ declare interface Teo {
   /** {@link DescribeRulesSetting 查询规则引擎的设置参数}({@link DescribeRulesSettingRequest 请求参数}): {@link DescribeRulesSettingResponse 返回参数} */
   DescribeRulesSetting(data?: DescribeRulesSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesSettingResponse>;
   /** {@link DescribeSecurityGroupManagedRules 获取托管规则组}({@link DescribeSecurityGroupManagedRulesRequest 请求参数}): {@link DescribeSecurityGroupManagedRulesResponse 返回参数} */
-  DescribeSecurityGroupManagedRules(data: DescribeSecurityGroupManagedRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupManagedRulesResponse>;
+  DescribeSecurityGroupManagedRules(data?: DescribeSecurityGroupManagedRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupManagedRulesResponse>;
   /** {@link DescribeSecurityPolicy 查询安全防护配置详情}({@link DescribeSecurityPolicyRequest 请求参数}): {@link DescribeSecurityPolicyResponse 返回参数} */
-  DescribeSecurityPolicy(data: DescribeSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPolicyResponse>;
+  DescribeSecurityPolicy(data?: DescribeSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPolicyResponse>;
   /** {@link DescribeSecurityPolicyList 查询全部安全实例}({@link DescribeSecurityPolicyListRequest 请求参数}): {@link DescribeSecurityPolicyListResponse 返回参数} */
   DescribeSecurityPolicyList(data: DescribeSecurityPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPolicyListResponse>;
   /** {@link DescribeSecurityPolicyRegions 查询所有地域信息}({@link DescribeSecurityPolicyRegionsRequest 请求参数}): {@link DescribeSecurityPolicyRegionsResponse 返回参数} */
   DescribeSecurityPolicyRegions(data?: DescribeSecurityPolicyRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPolicyRegionsResponse>;
   /** {@link DescribeSecurityPortraitRules 查询Bot用户画像规则}({@link DescribeSecurityPortraitRulesRequest 请求参数}): {@link DescribeSecurityPortraitRulesResponse 返回参数} */
-  DescribeSecurityPortraitRules(data: DescribeSecurityPortraitRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPortraitRulesResponse>;
+  DescribeSecurityPortraitRules(data?: DescribeSecurityPortraitRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPortraitRulesResponse>;
   /** {@link DescribeSecurityRuleId 查询安全规则详情}({@link DescribeSecurityRuleIdRequest 请求参数}): {@link DescribeSecurityRuleIdResponse 返回参数} */
   DescribeSecurityRuleId(data: DescribeSecurityRuleIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityRuleIdResponse>;
   /** {@link DescribeSingleL7AnalysisData 查询七层数据分析类单值数据}({@link DescribeSingleL7AnalysisDataRequest 请求参数}): {@link DescribeSingleL7AnalysisDataResponse 返回参数} */
@@ -9128,7 +9154,7 @@ declare interface Teo {
   /** {@link ModifySecurityPolicy 修改Web&Bot安全配置}({@link ModifySecurityPolicyRequest 请求参数}): {@link ModifySecurityPolicyResponse 返回参数} */
   ModifySecurityPolicy(data: ModifySecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityPolicyResponse>;
   /** {@link ModifySecurityWafGroupPolicy 修改安全配置托管规则}({@link ModifySecurityWafGroupPolicyRequest 请求参数}): {@link ModifySecurityWafGroupPolicyResponse 返回参数} */
-  ModifySecurityWafGroupPolicy(data: ModifySecurityWafGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityWafGroupPolicyResponse>;
+  ModifySecurityWafGroupPolicy(data?: ModifySecurityWafGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityWafGroupPolicyResponse>;
   /** {@link ModifyZone 修改站点}({@link ModifyZoneRequest 请求参数}): {@link ModifyZoneResponse 返回参数} */
   ModifyZone(data: ModifyZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneResponse>;
   /** {@link ModifyZoneCnameSpeedUp 修改 CNAME 加速状态}({@link ModifyZoneCnameSpeedUpRequest 请求参数}): {@link ModifyZoneCnameSpeedUpResponse 返回参数} */

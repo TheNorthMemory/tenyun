@@ -292,9 +292,9 @@ declare interface DatabaseTableObject {
 
 /** 数据同步中的ddl同步处理 */
 declare interface DdlOption {
-  /** ddl类型，如database,table,view等 */
+  /** ddl类型，如Database,Table,View,Index等 */
   DdlObject?: string | null;
-  /** ddl具体值，如Create,Drop等 */
+  /** ddl具体值，对于Database可取值[Create,Drop,Alter]对于Table可取值[Create,Drop,Alter,Truncate,Rename]对于View可取值[Create,Drop]对于Index可取值[Create,Drop] */
   DdlValue?: string[] | null;
 }
 

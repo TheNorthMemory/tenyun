@@ -866,6 +866,8 @@ declare interface PacketFilterConfig {
   IsNot2?: number;
   /** 特征过滤配置添加成功后自动生成的规则ID，当添加新特征过滤配置时，此字段不用填写； */
   Id?: string;
+  /** 大于报文长度，取值1+ */
+  PktLenGT?: number;
 }
 
 /** 特征过滤相关信息 */
@@ -902,6 +904,14 @@ declare interface ProtectThresholdRelation {
   InstanceDetailList: InstanceRelation[];
   /** 域名与协议纬度的防护阈值 */
   ListenerCcThresholdList: ListenerCcThreholdConfig[];
+  /** SYN FLOOD流量阈值 */
+  SynFloodThreshold: number | null;
+  /** SYN FLOOD包量阈值 */
+  SynFloodPktThreshold: number | null;
+  /** UDP FLOOD流量阈值 */
+  UdpFloodThreshold: number | null;
+  /** UDP FLOOD包量阈值 */
+  UdpFloodPktThreshold: number | null;
 }
 
 /** 协议封禁配置 */
@@ -916,6 +926,10 @@ declare interface ProtocolBlockConfig {
   DropOther: number;
   /** 异常空连接防护，取值[0(防护关)，1(防护开)] */
   CheckExceptNullConnect: number;
+  /** ping of death防护，取值[0(防护关)，1(防护开)] */
+  PingOfDeath?: number;
+  /** tear drop防护，取值[0(防护关)，1(防护开)] */
+  TearDrop?: number;
 }
 
 /** 协议封禁相关信息 */
@@ -2655,6 +2669,16 @@ declare interface ModifyDDoSThresholdRequest {
   Id: string;
   /** 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版） */
   Business: string;
+  /** 配置其他阈值标志位，1表示配置其他阈值 */
+  OtherThresholdFlag?: number;
+  /** SYN FLOOD流量阈值 */
+  SynFloodThreshold?: number;
+  /** SYN FLOOD包量阈值 */
+  SynFloodPktThreshold?: number;
+  /** UDP FLOOD流量阈值 */
+  UdpFloodThreshold?: number;
+  /** UDP FLOOD包量阈值 */
+  UdpFloodPktThreshold?: number;
 }
 
 declare interface ModifyDDoSThresholdResponse {

@@ -368,6 +368,18 @@ declare interface SuspendProbeTaskResponse {
   RequestId?: string;
 }
 
+declare interface UpdateProbeTaskAttributesRequest {
+  /** 任务 ID */
+  TaskId: string;
+  /** 任务名 */
+  Name?: string;
+}
+
+declare interface UpdateProbeTaskAttributesResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface UpdateProbeTaskConfigurationListRequest {
   /** 任务 ID */
   TaskIds: string[];
@@ -409,6 +421,8 @@ declare interface Cat {
   ResumeProbeTask(data: ResumeProbeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeProbeTaskResponse>;
   /** {@link SuspendProbeTask 暂停拨测任务}({@link SuspendProbeTaskRequest 请求参数}): {@link SuspendProbeTaskResponse 返回参数} */
   SuspendProbeTask(data: SuspendProbeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SuspendProbeTaskResponse>;
+  /** {@link UpdateProbeTaskAttributes 更新探测任务属性}({@link UpdateProbeTaskAttributesRequest 请求参数}): {@link UpdateProbeTaskAttributesResponse 返回参数} */
+  UpdateProbeTaskAttributes(data: UpdateProbeTaskAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProbeTaskAttributesResponse>;
   /** {@link UpdateProbeTaskConfigurationList 批量更新拨测任务配置}({@link UpdateProbeTaskConfigurationListRequest 请求参数}): {@link UpdateProbeTaskConfigurationListResponse 返回参数} */
   UpdateProbeTaskConfigurationList(data: UpdateProbeTaskConfigurationListRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProbeTaskConfigurationListResponse>;
 }
