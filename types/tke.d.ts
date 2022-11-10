@@ -214,7 +214,7 @@ declare interface ClusterAsGroupOption {
 
 /** 描述集群的基本配置信息 */
 declare interface ClusterBasicSettings {
-  /** 集群操作系统，支持设置公共镜像(字段传相应镜像ID)和自定义镜像(字段传相应镜像Name)，详情参考：https://cloud.tencent.com/document/product/457/68289 */
+  /** 集群操作系统，支持设置公共镜像(字段传相应镜像Name)和自定义镜像(字段传相应镜像ID)，详情参考：https://cloud.tencent.com/document/product/457/68289 */
   ClusterOs?: string;
   /** 集群版本,默认值为1.10.5 */
   ClusterVersion?: string;

@@ -30,6 +30,28 @@ declare interface APIConfigDetail {
   SubUin: string | null;
 }
 
+/** 批量模型加速任务 */
+declare interface BatchModelAccTask {
+  /** 模型ID */
+  ModelId: string;
+  /** 模型版本 */
+  ModelVersion: string;
+  /** 模型来源(JOB/COS) */
+  ModelSource: string;
+  /** 模型格式(TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/MMDETECTION/ONNX/HUGGING_FACE) */
+  ModelFormat: string;
+  /** 模型Tensor信息 */
+  TensorInfos: string[];
+  /** 加速引擎版本 */
+  AccEngineVersion: string;
+  /** 模型输入cos路径 */
+  ModelInputPath: CosPathInfo;
+  /** 模型名称 */
+  ModelName?: string;
+  /** SavedModel保存时配置的签名 */
+  ModelSignature?: string;
+}
+
 /** 跑批任务详情 */
 declare interface BatchTaskDetail {
   /** 跑批任务ID */
@@ -358,6 +380,14 @@ declare interface DetectionLabelInfo {
   FrameType: string | null;
 }
 
+/** 引擎版本 */
+declare interface EngineVersion {
+  /** 引擎版本 */
+  Version: string | null;
+  /** 运行镜像 */
+  Image: string | null;
+}
+
 /** 环境变量 */
 declare interface EnvVar {
   /** 环境变量key */
@@ -472,6 +502,24 @@ declare interface HorizontalPodAutoscaler {
   HpaMetrics: Option[] | null;
 }
 
+/** 模型专业参数 */
+declare interface HyperParameter {
+  /** 最大nnz数 */
+  MaxNNZ?: string | null;
+  /** slot数 */
+  SlotNum?: string | null;
+  /** gpu cache 使用率 */
+  CpuCachePercentage?: string | null;
+  /** cpu cache 使用率 */
+  GpuCachePercentage?: string | null;
+  /** 是否开启分布式模式(true/false) */
+  EnableDistributed?: string | null;
+  /** TORCH_SCRIPT、MMDETECTION、DETECTRON2、HUGGINGFACE格式在进行优化时切分子图的最小算子数目，一般无需进行改动，默认为3 */
+  MinBlockSizePt?: string | null;
+  /** FROZEN_GRAPH、SAVED_MODEL格式在进行优化时切分子图的最小算子数目，一般无需进行改动，默认为10 */
+  MinBlockSizeTf?: string | null;
+}
+
 /** 镜像描述信息 */
 declare interface ImageInfo {
   /** 镜像类型：TCR为腾讯云TCR镜像; CCR为腾讯云TCR个人版镜像，PreSet为平台预置镜像 */
@@ -580,6 +628,72 @@ declare interface MetricData {
   Points?: DataPoint[] | null;
 }
 
+/** 模型加速引擎版本 */
+declare interface ModelAccEngineVersion {
+  /** 模型格式 */
+  ModelFormat: string | null;
+  /** 引擎版本信息 */
+  EngineVersions: EngineVersion[] | null;
+}
+
+/** 模型加速任务 */
+declare interface ModelAccelerateTask {
+  /** 模型加速任务ID */
+  ModelAccTaskId: string | null;
+  /** 模型加速任务名称 */
+  ModelAccTaskName: string | null;
+  /** 模型ID */
+  ModelId: string | null;
+  /** 模型名称 */
+  ModelName: string | null;
+  /** 模型版本 */
+  ModelVersion: string | null;
+  /** 模型来源 */
+  ModelSource: string | null;
+  /** 优化级别 */
+  OptimizationLevel: string | null;
+  /** 任务状态 */
+  TaskStatus: string | null;
+  /** input节点个数 */
+  ModelInputNum: number | null;
+  /** input节点信息 */
+  ModelInputInfos: ModelInputInfo[] | null;
+  /** GPU型号 */
+  GPUType: string | null;
+  /** 计费模式 */
+  ChargeType: string | null;
+  /** 加速比 */
+  Speedup: string | null;
+  /** 模型输入cos路径 */
+  ModelInputPath: CosPathInfo | null;
+  /** 模型输出cos路径 */
+  ModelOutputPath: CosPathInfo | null;
+  /** 错误信息 */
+  ErrorMsg: string | null;
+  /** 算法框架 */
+  AlgorithmFramework: string | null;
+  /** 排队个数 */
+  WaitNumber: number | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 任务进度 */
+  TaskProgress: number | null;
+  /** 模型格式 */
+  ModelFormat: string | null;
+  /** 模型Tensor信息 */
+  TensorInfos: string[] | null;
+  /** 模型专业参数 */
+  HyperParameter: HyperParameter | null;
+  /** 加速引擎版本 */
+  AccEngineVersion: string | null;
+  /** 标签 */
+  Tags: Tag[] | null;
+  /** 优化模型是否已保存到模型仓库 */
+  IsSaved: boolean | null;
+  /** SAVED_MODEL保存时配置的签名 */
+  ModelSignature: string | null;
+}
+
 /** 模型描述信息 */
 declare interface ModelInfo {
   /** 模型版本id, DescribeTrainingModelVersion查询模型接口时的id自动学习类型的模型填写自动学习的任务id */
@@ -598,6 +712,14 @@ declare interface ModelInfo {
   AlgorithmFramework?: string | null;
   /** 默认为 NORMAL, 已加速模型: ACCELERATE, 自动学习模型 AUTO_ML */
   ModelType?: string | null;
+}
+
+/** 模型输入信息 */
+declare interface ModelInputInfo {
+  /** input数据类型FIXED：固定RANGE：浮动 */
+  ModelInputType: string | null;
+  /** input数据尺寸 */
+  ModelInputDimension: string[] | null;
 }
 
 /** OCR场景标签列表 */
@@ -1288,6 +1410,30 @@ declare interface WorkloadStatus {
   StatefulSetCondition?: StatefulSetCondition[];
 }
 
+declare interface CreateBatchModelAccTasksRequest {
+  /** 模型加速任务名称 */
+  ModelAccTaskName: string;
+  /** 批量模型加速任务 */
+  BatchModelAccTasks: BatchModelAccTask[];
+  /** 模型加速保存路径 */
+  ModelOutputPath: CosPathInfo;
+  /** 标签 */
+  Tags?: Tag[];
+  /** 优化级别(NO_LOSS/FP16)，默认FP16 */
+  OptimizationLevel?: string;
+  /** GPU卡类型(T4/V100)，默认T4 */
+  GPUType?: string;
+  /** 专业参数设置 */
+  HyperParameter?: HyperParameter;
+}
+
+declare interface CreateBatchModelAccTasksResponse {
+  /** 模型优化任务ID列表 */
+  ModelAccTaskIds: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateBatchTaskRequest {
   /** 跑批任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
   BatchTaskName: string;
@@ -1428,6 +1574,22 @@ declare interface CreateModelServiceResponse {
   RequestId?: string;
 }
 
+declare interface CreateOptimizedModelRequest {
+  /** 模型加速任务ID */
+  ModelAccTaskId: string;
+  /** 标签 */
+  Tags?: Tag[];
+}
+
+declare interface CreateOptimizedModelResponse {
+  /** 模型ID */
+  ModelId: string | null;
+  /** 模型版本ID */
+  ModelVersionId: string | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateTrainingModelRequest {
   /** 导入方式MODEL：导入新模型VERSION：导入新版本EXIST：导入现有版本 */
   ImportMethod: string;
@@ -1562,6 +1724,16 @@ declare interface DeleteDatasetRequest {
 declare interface DeleteDatasetResponse {
   /** 删除的datasetId */
   DatasetId: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteModelAccelerateTaskRequest {
+  /** 模型加速任务ID */
+  ModelAccTaskId: string;
+}
+
+declare interface DeleteModelAccelerateTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1882,6 +2054,58 @@ declare interface DescribeLogsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeModelAccEngineVersionsRequest {
+}
+
+declare interface DescribeModelAccEngineVersionsResponse {
+  /** 模型加速版本列表 */
+  ModelAccEngineVersions: ModelAccEngineVersion[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelAccelerateTaskRequest {
+  /** 模型加速任务ID */
+  ModelAccTaskId: string;
+}
+
+declare interface DescribeModelAccelerateTaskResponse {
+  /** 模型加速任务详情 */
+  ModelAccelerateTask: ModelAccelerateTask | null;
+  /** 模型加速时长，单位s */
+  ModelAccRuntimeInSecond: number | null;
+  /** 模型加速任务开始时间 */
+  ModelAccStartTime: string | null;
+  /** 模型加速任务结束时间 */
+  ModelAccEndTime: string | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelAccelerateTasksRequest {
+  /** 过滤器ModelAccTaskName 任务名称 */
+  Filters?: Filter[];
+  /** 排序字段，默认CreateTime */
+  OrderField?: string;
+  /** 排序方式：ASC/DESC，默认DESC */
+  Order?: string;
+  /** 偏移量 */
+  Offset?: number;
+  /** 返回记录条数，默认20 */
+  Limit?: number;
+  /** 标签过滤 */
+  TagFilters?: TagFilter[];
+}
+
+declare interface DescribeModelAccelerateTasksResponse {
+  /** 模型加速任务列表 */
+  ModelAccelerateTasks: ModelAccelerateTask[] | null;
+  /** 任务总数 */
+  TotalCount: number | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeModelServiceCallInfoRequest {
   /** 服务组id */
   ServiceGroupId: string;
@@ -2144,6 +2368,52 @@ declare interface PushTrainingMetricsResponse {
   RequestId?: string;
 }
 
+declare interface RestartModelAccelerateTaskRequest {
+  /** 模型加速任务ID */
+  ModelAccTaskId: string;
+  /** 模型加速任务名称 */
+  ModelAccTaskName?: string;
+  /** 模型来源（JOB/COS） */
+  ModelSource?: string;
+  /** 算法框架（废弃） */
+  AlgorithmFramework?: string;
+  /** 模型ID */
+  ModelId?: string;
+  /** 模型名称 */
+  ModelName?: string;
+  /** 模型版本 */
+  ModelVersion?: string;
+  /** 模型输入cos路径 */
+  ModelInputPath?: CosPathInfo;
+  /** 优化级别（NO_LOSS/FP16），默认FP16 */
+  OptimizationLevel?: string;
+  /** input节点个数（废弃） */
+  ModelInputNum?: number;
+  /** input节点信息（废弃） */
+  ModelInputInfos?: ModelInputInfo[];
+  /** 模型输出cos路径 */
+  ModelOutputPath?: CosPathInfo;
+  /** 模型格式（TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/MMDETECTION/ONNX/HUGGING_FACE） */
+  ModelFormat?: string;
+  /** 模型Tensor信息 */
+  TensorInfos?: string[];
+  /** GPU类型（T4/V100），默认T4 */
+  GPUType?: string;
+  /** 模型专业参数 */
+  HyperParameter?: HyperParameter;
+  /** 加速引擎版本 */
+  AccEngineVersion?: string;
+  /** 标签 */
+  Tags?: Tag[];
+  /** SavedModel保存时配置的签名 */
+  ModelSignature?: string;
+}
+
+declare interface RestartModelAccelerateTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface StartTrainingTaskRequest {
   /** 训练任务ID */
   Id: string;
@@ -2160,6 +2430,20 @@ declare interface StopBatchTaskRequest {
 }
 
 declare interface StopBatchTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface StopModelAccelerateTaskRequest {
+  /** 模型加速任务ID */
+  ModelAccTaskId: string;
+}
+
+declare interface StopModelAccelerateTaskResponse {
+  /** 模型加速任务ID */
+  ModelAccTaskId: string | null;
+  /** 异步任务ID */
+  AsyncTaskId: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2905,12 +3189,16 @@ declare namespace V20191022 {
 /** {@link Tione 腾讯云 TI 平台 TI-ONE} */
 declare interface Tione {
   (): Versions;
+  /** {@link CreateBatchModelAccTasks 批量创建模型加速任务}({@link CreateBatchModelAccTasksRequest 请求参数}): {@link CreateBatchModelAccTasksResponse 返回参数} */
+  CreateBatchModelAccTasks(data: CreateBatchModelAccTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchModelAccTasksResponse>;
   /** {@link CreateBatchTask 创建跑批任务}({@link CreateBatchTaskRequest 请求参数}): {@link CreateBatchTaskResponse 返回参数} */
   CreateBatchTask(data: CreateBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchTaskResponse>;
   /** {@link CreateDataset 创建数据集}({@link CreateDatasetRequest 请求参数}): {@link CreateDatasetResponse 返回参数} */
   CreateDataset(data: CreateDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatasetResponse>;
   /** {@link CreateModelService 创建模型服务}({@link CreateModelServiceRequest 请求参数}): {@link CreateModelServiceResponse 返回参数} */
   CreateModelService(data: CreateModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelServiceResponse>;
+  /** {@link CreateOptimizedModel 保存优化模型}({@link CreateOptimizedModelRequest 请求参数}): {@link CreateOptimizedModelResponse 返回参数} */
+  CreateOptimizedModel(data: CreateOptimizedModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOptimizedModelResponse>;
   /** {@link CreateTrainingModel 导入模型}({@link CreateTrainingModelRequest 请求参数}): {@link CreateTrainingModelResponse 返回参数} */
   CreateTrainingModel(data: CreateTrainingModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingModelResponse>;
   /** {@link CreateTrainingTask 创建模型训练任务}({@link CreateTrainingTaskRequest 请求参数}): {@link CreateTrainingTaskResponse 返回参数} */
@@ -2919,6 +3207,8 @@ declare interface Tione {
   DeleteBatchTask(data: DeleteBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBatchTaskResponse>;
   /** {@link DeleteDataset 删除数据集}({@link DeleteDatasetRequest 请求参数}): {@link DeleteDatasetResponse 返回参数} */
   DeleteDataset(data: DeleteDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatasetResponse>;
+  /** {@link DeleteModelAccelerateTask 删除模型加速任务}({@link DeleteModelAccelerateTaskRequest 请求参数}): {@link DeleteModelAccelerateTaskResponse 返回参数} */
+  DeleteModelAccelerateTask(data: DeleteModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelAccelerateTaskResponse>;
   /** {@link DeleteModelService 删除模型服务}({@link DeleteModelServiceRequest 请求参数}): {@link DeleteModelServiceResponse 返回参数} */
   DeleteModelService(data: DeleteModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelServiceResponse>;
   /** {@link DeleteModelServiceGroup 删除模型服务组}({@link DeleteModelServiceGroupRequest 请求参数}): {@link DeleteModelServiceGroupResponse 返回参数} */
@@ -2955,6 +3245,12 @@ declare interface Tione {
   DescribeLatestTrainingMetrics(data: DescribeLatestTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLatestTrainingMetricsResponse>;
   /** {@link DescribeLogs 获取日志}({@link DescribeLogsRequest 请求参数}): {@link DescribeLogsResponse 返回参数} */
   DescribeLogs(data: DescribeLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsResponse>;
+  /** {@link DescribeModelAccEngineVersions 查询模型加速引擎版本列表}({@link DescribeModelAccEngineVersionsRequest 请求参数}): {@link DescribeModelAccEngineVersionsResponse 返回参数} */
+  DescribeModelAccEngineVersions(data?: DescribeModelAccEngineVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelAccEngineVersionsResponse>;
+  /** {@link DescribeModelAccelerateTask 查询模型优化任务详情}({@link DescribeModelAccelerateTaskRequest 请求参数}): {@link DescribeModelAccelerateTaskResponse 返回参数} */
+  DescribeModelAccelerateTask(data: DescribeModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelAccelerateTaskResponse>;
+  /** {@link DescribeModelAccelerateTasks 查询模型加速任务列表}({@link DescribeModelAccelerateTasksRequest 请求参数}): {@link DescribeModelAccelerateTasksResponse 返回参数} */
+  DescribeModelAccelerateTasks(data?: DescribeModelAccelerateTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelAccelerateTasksResponse>;
   /** {@link DescribeModelService 查询单个服务}({@link DescribeModelServiceRequest 请求参数}): {@link DescribeModelServiceResponse 返回参数} */
   DescribeModelService(data: DescribeModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceResponse>;
   /** {@link DescribeModelServiceCallInfo 展示服务的调用信息}({@link DescribeModelServiceCallInfoRequest 请求参数}): {@link DescribeModelServiceCallInfoResponse 返回参数} */
@@ -2989,10 +3285,14 @@ declare interface Tione {
   ModifyServiceGroupWeights(data: ModifyServiceGroupWeightsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceGroupWeightsResponse>;
   /** {@link PushTrainingMetrics 上报训练自定义指标}({@link PushTrainingMetricsRequest 请求参数}): {@link PushTrainingMetricsResponse 返回参数} */
   PushTrainingMetrics(data?: PushTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<PushTrainingMetricsResponse>;
+  /** {@link RestartModelAccelerateTask 重启模型加速任务}({@link RestartModelAccelerateTaskRequest 请求参数}): {@link RestartModelAccelerateTaskResponse 返回参数} */
+  RestartModelAccelerateTask(data: RestartModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RestartModelAccelerateTaskResponse>;
   /** {@link StartTrainingTask 启动模型训练任务}({@link StartTrainingTaskRequest 请求参数}): {@link StartTrainingTaskResponse 返回参数} */
   StartTrainingTask(data: StartTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StartTrainingTaskResponse>;
   /** {@link StopBatchTask 停止跑批任务}({@link StopBatchTaskRequest 请求参数}): {@link StopBatchTaskResponse 返回参数} */
   StopBatchTask(data: StopBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopBatchTaskResponse>;
+  /** {@link StopModelAccelerateTask 停止模型加速任务}({@link StopModelAccelerateTaskRequest 请求参数}): {@link StopModelAccelerateTaskResponse 返回参数} */
+  StopModelAccelerateTask(data: StopModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopModelAccelerateTaskResponse>;
   /** {@link StopTrainingTask 停止模型训练任务}({@link StopTrainingTaskRequest 请求参数}): {@link StopTrainingTaskResponse 返回参数} */
   StopTrainingTask(data: StopTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopTrainingTaskResponse>;
   /** {@link V20191022.CreateCodeRepository 创建存储库}({@link V20191022.CreateCodeRepositoryRequest 请求参数}): {@link V20191022.CreateCodeRepositoryResponse 返回参数} */
