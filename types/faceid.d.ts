@@ -2,20 +2,6 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** 核身过程中，鉴伪或OCR单次结果。 */
-declare interface CardVerifyResult {
-  /** 鉴伪或OCR是否成功 */
-  IsPass: boolean;
-  /** 身份证鉴伪视频，仅开启证件视频鉴伪功能时返回，url链接有效期10分钟。 */
-  CardVideo: FileInfo | null;
-  /** 证件照图片，url链接有效期10分钟。 */
-  CardImage: FileInfo | null;
-  /** 证件照的文字识别结果，如果鉴伪失败或者ocr失败则该参数为空。url链接有效期10分钟。格式为json文本信息。IdCardType为HK时：- CnName string 中文姓名- EnName string 英文姓名- TelexCode string 中文姓名对应电码- Sex string 性别 ：“男M”或“女F”- Birthday string 出生日期- Permanent int 永久性居民身份证。0：非永久； 1：永久； -1：未知。- IdNum string 身份证号码- Symbol string 证件符号，出生日期下的符号，例如"***AZ"- FirstIssueDate string 首次签发日期- CurrentIssueDate string 最近领用日期IdCardType为ML时：- Sex string 男：LELAKI 女：PEREMPUAN- Birthday string 生日- ID string 证号- Name string 名字- Address string 地址- Type string 证件类型IdCardType为PhilippinesVoteID时：- Birthday string 生日- Address string 地址- LastName string 姓氏- FirstName string 姓名- VIN string VIN号- CivilStatus string 婚姻状况- Citizenship string 国籍- PrecinctNo string 地区IdCardType为PhilippinesDrivingLicense时：- Sex string 性别- Birthday string 生日- Name string 姓名- Address string 地址- LastName string 姓氏- FirstName string 首姓名- MiddleName string 中间姓名- Nationality string 国籍- LicenseNo string 证号- ExpiresDate string 有效期- AgencyCode string 机构代码 */
-  CardInfoOcrJson: FileInfo | null;
-  /** 单次流程请求标示。 */
-  RequestId: string;
-}
-
 /** 计费详情 */
 declare interface ChargeDetail {
   /** 一比一时间时间戳，13位。 */
@@ -36,38 +22,6 @@ declare interface ChargeDetail {
   ErrorCode: string;
   /** 本次活体一比一最终结果描述。 */
   ErrorMessage: string;
-}
-
-/** 单次比对结果描述 */
-declare interface CompareResult {
-  /** 最终比对结果 */
-  ErrorCode: string;
-  /** 最终比对结果描述 */
-  ErrorMsg: string;
-  /** 本次活体SDK生成的活体算法数据包 */
-  LiveData: FileInfo;
-  /** 本次用户活体验证过程的视频，url链接有效期10分钟。 */
-  LiveVideo: FileInfo;
-  /** 活体认证结果码 */
-  LiveErrorCode: string;
-  /** 活体认证结果描述 */
-  LiveErrorMsg: string;
-  /** 本次活体的最佳人像截图，url链接有效期10分钟。 */
-  BestFrame: FileInfo | null;
-  /** 证件照头像截图，url链接有效期10分钟。 */
-  ProfileImage: FileInfo;
-  /** 人脸比对结果码 */
-  CompareErrorCode: string | null;
-  /** 人脸比对结果描述 */
-  CompareErrorMsg: string | null;
-  /** 相似度 */
-  Sim: number | null;
-  /** 该字段废弃 */
-  IsNeedCharge: boolean;
-  /** 用户编辑后的证件照信息，如果DisableChangeOcrResult为true禁用编辑无该值。url链接有效期10分钟。格式为json文本信息。IdCardType为HK时：- CnName string 中文姓名- EnName string 英文姓名- TelexCode string 中文姓名对应电码- Sex string 性别 ：“男M”或“女F”- Birthday string 出生日期- Permanent int 永久性居民身份证。0：非永久； 1：永久； -1：未知。- IdNum string 身份证号码- Symbol string 证件符号，出生日期下的符号，例如"***AZ"- FirstIssueDate string 首次签发日期- CurrentIssueDate string 最近领用日期IdCardType为ML时：- Sex string 男：LELAKI 女：PEREMPUAN- Birthday string- ID string- Name string- Address string- Type string 证件类型 */
-  CardInfoInputJson: FileInfo | null;
-  /** 本次认证的请求标识。 */
-  RequestId: string;
 }
 
 /** 活体一比一详情 */
@@ -210,16 +164,6 @@ declare interface Encryption {
   TagList?: string[];
 }
 
-/** 用于描述一个文件内容，包括一个下载链接和与文件内容对应的MD5和大小。 */
-declare interface FileInfo {
-  /** 用于下载文件的URL */
-  Url: string;
-  /** 文件的32位MD5 */
-  MD5: string;
-  /** 文件字节数 */
-  Size: number;
-}
-
 /** 获取token时的的配置 */
 declare interface GetEidTokenConfig {
   /** 姓名身份证输入方式。1：传身份证正反面OCR 2：传身份证正面OCR 3：用户手动输入 4：客户后台传入 默认1注：使用OCR时仅支持用户修改结果中的姓名 */
@@ -276,28 +220,6 @@ declare interface IntentionVerifyData {
   AsrResultSimilarity: string | null;
 }
 
-/** 核验流程详细信息 */
-declare interface VerificationDetail {
-  /** 本次核验最终结果。0为核验通过，是同一人。 */
-  ErrorCode: number | null;
-  /** 本次核验最终结果描述。 */
-  ErrorMsg: string | null;
-  /** 本次核验活体结果。0为成功 */
-  LivenessErrorCode: number | null;
-  /** 本次核验活体结果描述 */
-  LivenessErrorMsg: string | null;
-  /** 本次核验比对结果。0为视频流中采集的最佳人脸照片和上传的比对照片是同一人。 */
-  CompareErrorCode: number | null;
-  /** 本次核验比对结果描述。 */
-  CompareErrorMsg: string | null;
-  /** 本次核验时间戳(毫秒) */
-  ReqTimestamp: number | null;
-  /** 本次核验视频流中采集的最佳人脸照片和上传的比对照片的相似度， 范围[0.00, 100.00]，默认大于等于70时判断为同一人。 */
-  Similarity: number | null;
-  /** 本次核验的唯一标识 */
-  Seq: string | null;
-}
-
 /** 账单详情 */
 declare interface WeChatBillDetail {
   /** token */
@@ -308,56 +230,6 @@ declare interface WeChatBillDetail {
   ChargeDetails: ChargeDetail[];
   /** 业务RuleId */
   RuleId: string;
-}
-
-declare interface ApplyLivenessTokenRequest {
-  /** 枚举值，取值范围：1、2、3、4各个含义如下1-静默2-眨眼3-光线4-眨眼+光线 （默认） */
-  SecureLevel?: string;
-}
-
-declare interface ApplyLivenessTokenResponse {
-  /** 标识一次SDK核验流程的令牌，有效时间为10分钟。流程结束后可用该令牌获取核验结果信息。 */
-  SdkToken: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
-declare interface ApplySdkVerificationTokenRequest {
-  /** 是否需要身份证鉴伪，如果不需要，则仅做证件OCR。当前仅IdCardType为HK支持鉴伪。 */
-  NeedVerifyIdCard: boolean;
-  /** 卡证类型，当前仅支持HK（香港身份证），ML（马来西亚身份证），PhilippinesVoteID（菲律宾选民卡），PhilippinesDrivingLicense（菲律宾驾驶证）。默认为HK。 */
-  IdCardType?: string;
-  /** 是否允许用户修改ocr结果，默认false，允许。 */
-  DisableChangeOcrResult?: boolean;
-  /** 是否关闭OCR告警，默认false，不关闭。如果为false开启OCR告警，我们会根据Ocr的告警信息进行拦截，当NeedVerifyIdCard为true时该字段将为true。 */
-  DisableCheckOcrWarnings?: boolean;
-  /** 透传字段，在获取验证结果时返回，最长1024位。 */
-  Extra?: string;
-}
-
-declare interface ApplySdkVerificationTokenResponse {
-  /** 标识一次SDK核验流程的令牌，有效时间为7,200秒。流程结束后可用该令牌获取核验结果信息。 */
-  SdkToken: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
-declare interface ApplyWebVerificationTokenRequest {
-  /** 核验结束后重定向的Web回跳地址。 */
-  RedirectUrl: string;
-  /** 人脸比对照片的腾讯云对象存储地址，可以使用以下两种方式：1. 调用CreateUploadUrl接口生成，确保成功上传照片后再调用此接口。2. 使用已有的腾讯云对象存储地址，如果是私有读写桶，请使用预签名URL授予下载权限，对象存储地域需要和入参Region保持一致。 */
-  CompareImageUrl: string;
-  /** 人脸比对照片（CompareImageUrl）内容的MD5散列值。 */
-  CompareImageMd5: string;
-}
-
-declare interface ApplyWebVerificationTokenResponse {
-  /** 用户浏览器需要打开此地址开始核验流程。 */
-  VerificationUrl: string;
-  /** 标识一次Web核验流程的令牌，有效时间为7,200秒。流程结束后可用该令牌获取核验结果信息。 */
-  BizToken: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
 }
 
 declare interface BankCard2EVerificationRequest {
@@ -538,22 +410,6 @@ declare interface CheckPhoneAndNameResponse {
   RequestId?: string;
 }
 
-declare interface CreateUploadUrlRequest {
-  /** 用于的接口 */
-  TargetAction: string;
-}
-
-declare interface CreateUploadUrlResponse {
-  /** 用于上传内容的链接，使用HTTP PUT方法上传。 */
-  UploadUrl: string;
-  /** 完成上传后将该链接用于后续需要传入资源URL的地方。 */
-  ResourceUrl: string;
-  /** 上传和下载链接过期时间点，10位unix时间戳。 */
-  ExpiredTimestamp: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
 declare interface DetectAuthRequest {
   /** 用于细分客户使用场景，申请开通服务后，可以在腾讯云慧眼人脸核身控制台（https://console.cloud.tencent.com/faceid） 自助接入里面创建，审核通过后即可调用。如有疑问，请添加[腾讯云人脸核身小助手](https://cloud.tencent.com/document/product/1007/56130)进行咨询。 */
   RuleId: string;
@@ -571,9 +427,9 @@ declare interface DetectAuthRequest {
   ImageBase64?: string;
   /** 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。 */
   Encryption?: Encryption;
-  /** 意愿核身使用的文案，若未使用意愿核身功能，该字段无需传入。默认为空，最长可接受120的字符串长度。 */
+  /** 意愿核身（朗读模式）使用的文案，若未使用意愿核身（朗读模式），则该字段无需传入。默认为空，最长可接受120的字符串长度。 */
   IntentionVerifyText?: string;
-  /** 意愿核身过程中播报文本/问题、用户朗读/回答的文本，当前支持一个播报文本+回答文本。 */
+  /** 意愿核身（问答模式）使用的文案，包括：系统语音播报的文本、需要核验的标准文本。当前仅支持一个播报文本+回答文本。 */
   IntentionQuestions?: IntentionQuestion[];
 }
 
@@ -582,32 +438,6 @@ declare interface DetectAuthResponse {
   Url: string;
   /** 一次核身流程的标识，有效时间为7,200秒；完成核身后，可用该标识获取验证结果信息。 */
   BizToken: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
-declare interface DetectReflectLivenessAndCompareRequest {
-  /** SDK生成的活体检测数据包的资源地址。 */
-  LiveDataUrl: string;
-  /** SDK生成的活体检测数据包的资源内容MD5（32位，用于校验LiveData的一致性）。 */
-  LiveDataMd5: string;
-  /** 用于比对的目标图片的资源地址。 */
-  ImageUrl: string;
-  /** 用于比对的目标图片的资源MD5（32位，用于校验Image的一致性）。 */
-  ImageMd5: string;
-}
-
-declare interface DetectReflectLivenessAndCompareResponse {
-  /** 验证通过后的视频最佳截图资源临时地址，jpg格式，资源和链接有效期2小时，务必在有效期内下载。 */
-  BestFrameUrl: string;
-  /** 验证通过后的视频最佳截图资源MD5（32位，用于校验BestFrame的一致性）。 */
-  BestFrameMd5: string;
-  /** 业务错误码，成功情况返回Success，错误情况请参考下方错误码 列表中FailedOperation部分。 */
-  Result: string;
-  /** 业务结果描述。 */
-  Description: string;
-  /** 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）。 */
-  Sim: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -628,24 +458,6 @@ declare interface EncryptedPhoneVerificationResponse {
   Result: string;
   /** 业务结果描述。 */
   Description: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
-declare interface GenerateReflectSequenceRequest {
-  /** SDK生成的打包数据的资源链接。 */
-  DeviceDataUrl: string;
-  /** SDK生成的打包数据的MD5值。 */
-  DeviceDataMd5: string;
-  /** 1-静默2-眨眼3-光线4-眨眼+光线 （默认） */
-  SecurityLevel?: string;
-}
-
-declare interface GenerateReflectSequenceResponse {
-  /** 光线序列的资源链接，下载后透传给SDK即可开始核身。 */
-  ReflectSequenceUrl: string;
-  /** 光线序列的资源MD5值，用于校验改序列是否被篡改。 */
-  ReflectSequenceMd5: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -836,24 +648,6 @@ declare interface GetLiveCodeResponse {
   RequestId?: string;
 }
 
-declare interface GetLivenessResultRequest {
-  /** 标识一次Sdk核验流程的令牌。 */
-  SdkToken: string;
-}
-
-declare interface GetLivenessResultResponse {
-  /** 流程的最终结果 */
-  Result: string;
-  /** 流程的最终结果描述 */
-  Description: string;
-  /** 人像截图 */
-  BestFrame: FileInfo;
-  /** 检测过程视频 */
-  Video: FileInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
 declare interface GetRealNameAuthResultRequest {
   /** 实名认证凭证 */
   AuthToken: string;
@@ -884,28 +678,6 @@ declare interface GetRealNameAuthTokenResponse {
   RequestId?: string;
 }
 
-declare interface GetSdkVerificationResultRequest {
-  /** 标识一次Sdk核验流程的令牌。 */
-  SdkToken: string;
-}
-
-declare interface GetSdkVerificationResultResponse {
-  /** 整个核验结果 */
-  Result: string;
-  /** 结果描述 */
-  Description: string;
-  /** 计费次数 */
-  ChargeCount: number;
-  /** 多次证照识别的结果（有序），取最终一次结果为有效结果 */
-  CardVerifyResults: CardVerifyResult[];
-  /** 多次活体认证的结果信息（有序），取最终一次结果为有效结果 */
-  CompareResults: CompareResult[];
-  /** 获取token时传入的 */
-  Extra: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
 declare interface GetWeChatBillDetailsRequest {
   /** 拉取的日期（YYYY-MM-DD）。最大可追溯到365天前。当天6点后才能拉取前一天的数据。 */
   Date: string;
@@ -922,30 +694,6 @@ declare interface GetWeChatBillDetailsResponse {
   NextCursor: number;
   /** 数据 */
   WeChatBillDetails: WeChatBillDetail[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
-declare interface GetWebVerificationResultRequest {
-  /** Web核验令牌，由ApplyWebVerificationToken接口生成。 */
-  BizToken: string;
-}
-
-declare interface GetWebVerificationResultResponse {
-  /** 本次核验最终结果。0为核验通过，是同一人。 */
-  ErrorCode: number | null;
-  /** 本次核验最终结果描述。 */
-  ErrorMsg: string | null;
-  /** 视频流中采集的最佳人脸照片临时地址，下载有效时间10分钟，如果需要存储请及时下载。 */
-  VideoBestFrameUrl: string | null;
-  /** 视频流中采集的最佳人脸照片内容MD5散列值，可以使用此值校验文件内容是否一致。 */
-  VideoBestFrameMd5: string | null;
-  /** 本次核验流程的详细信息列表。 */
-  VerificationDetailList: VerificationDetail[] | null;
-  /** 视频流中采集的视频临时地址，下载有效时间10分钟，如果需要存储请及时下载。 */
-  VideoUrl: string | null;
-  /** 视频流中采集的视频内容MD5散列值，可以使用此值校验文件内容是否一致。 */
-  VideoMd5: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1318,43 +1066,9 @@ declare interface PhoneVerificationResponse {
   RequestId?: string;
 }
 
-declare interface VideoLivenessCompareRequest {
-  /** 用于人脸比对照片的URL地址；图片下载后经Base64编码后的数据大小不超过3M，仅支持jpg、png格式。图片仅支持腾讯云同region的Cos地址，可保障更高的下载速度和稳定性，可使用CreateUploadUrl生成或自行购买Cos。 */
-  ImageUrl: string;
-  /** 比对图片的32位Md5值。 */
-  ImageMd5: string;
-  /** 用于活体检测的视频Url 地址。视频下载后经Base64编码后不超过 8M，视频下载耗时不超过4S，支持mp4、avi、flv格式。视频仅支持腾讯云同region的Cos地址，可保障更高的下载速度和稳定性，可使用CreateUploadUrl生成或自行购买Cos。 */
-  VideoUrl: string;
-  /** 视频的32位Md5值。 */
-  VideoMd5: string;
-  /** 活体检测类型，取值：LIP/ACTION/SILENT。LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。 */
-  LivenessType: string;
-  /** 数字模式传参：传数字验证码，需自定义四位数字验证码；动作模式传参：传动作顺序，需自定义动作顺序(2,1 or 1,2)；静默模式传参：空。 */
-  ValidateData?: string;
-}
-
-declare interface VideoLivenessCompareResponse {
-  /** 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）。 */
-  Sim: number;
-  /** 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分 */
-  Result: string;
-  /** 业务结果描述。 */
-  Description: string;
-  /** 验证通过后的视频最佳截图照片。 */
-  BestFrame: FileInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
 /** {@link Faceid 人脸核身} */
 declare interface Faceid {
   (): Versions;
-  /** {@link ApplyLivenessToken 申请活体检测流程令牌}({@link ApplyLivenessTokenRequest 请求参数}): {@link ApplyLivenessTokenResponse 返回参数} */
-  ApplyLivenessToken(data?: ApplyLivenessTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyLivenessTokenResponse>;
-  /** {@link ApplySdkVerificationToken 申请SDK核验令牌}({@link ApplySdkVerificationTokenRequest 请求参数}): {@link ApplySdkVerificationTokenResponse 返回参数} */
-  ApplySdkVerificationToken(data: ApplySdkVerificationTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ApplySdkVerificationTokenResponse>;
-  /** {@link ApplyWebVerificationToken 申请Web核验令牌}({@link ApplyWebVerificationTokenRequest 请求参数}): {@link ApplyWebVerificationTokenResponse 返回参数} */
-  ApplyWebVerificationToken(data: ApplyWebVerificationTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyWebVerificationTokenResponse>;
   /** {@link BankCard2EVerification 银行卡二要素核验}({@link BankCard2EVerificationRequest 请求参数}): {@link BankCard2EVerificationResponse 返回参数} */
   BankCard2EVerification(data: BankCard2EVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<BankCard2EVerificationResponse>;
   /** {@link BankCard4EVerification 银行卡四要素核验}({@link BankCard4EVerificationRequest 请求参数}): {@link BankCard4EVerificationResponse 返回参数} */
@@ -1371,16 +1085,10 @@ declare interface Faceid {
   CheckIdNameDate(data: CheckIdNameDateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIdNameDateResponse>;
   /** {@link CheckPhoneAndName 手机号二要素核验}({@link CheckPhoneAndNameRequest 请求参数}): {@link CheckPhoneAndNameResponse 返回参数} */
   CheckPhoneAndName(data: CheckPhoneAndNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckPhoneAndNameResponse>;
-  /** {@link CreateUploadUrl 生成上传链接}({@link CreateUploadUrlRequest 请求参数}): {@link CreateUploadUrlResponse 返回参数} */
-  CreateUploadUrl(data: CreateUploadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUploadUrlResponse>;
   /** {@link DetectAuth 实名核身鉴权}({@link DetectAuthRequest 请求参数}): {@link DetectAuthResponse 返回参数} */
   DetectAuth(data: DetectAuthRequest, config?: AxiosRequestConfig): AxiosPromise<DetectAuthResponse>;
-  /** {@link DetectReflectLivenessAndCompare 光线活体比对}({@link DetectReflectLivenessAndCompareRequest 请求参数}): {@link DetectReflectLivenessAndCompareResponse 返回参数} */
-  DetectReflectLivenessAndCompare(data: DetectReflectLivenessAndCompareRequest, config?: AxiosRequestConfig): AxiosPromise<DetectReflectLivenessAndCompareResponse>;
   /** {@link EncryptedPhoneVerification 运营商三要素核验（加密）}({@link EncryptedPhoneVerificationRequest 请求参数}): {@link EncryptedPhoneVerificationResponse 返回参数} */
   EncryptedPhoneVerification(data: EncryptedPhoneVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<EncryptedPhoneVerificationResponse>;
-  /** {@link GenerateReflectSequence 获取光线序列}({@link GenerateReflectSequenceRequest 请求参数}): {@link GenerateReflectSequenceResponse 返回参数} */
-  GenerateReflectSequence(data: GenerateReflectSequenceRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateReflectSequenceResponse>;
   /** {@link GetActionSequence 获取动作顺序}({@link GetActionSequenceRequest 请求参数}): {@link GetActionSequenceResponse 返回参数} */
   GetActionSequence(data?: GetActionSequenceRequest, config?: AxiosRequestConfig): AxiosPromise<GetActionSequenceResponse>;
   /** {@link GetDetectInfo 获取实名核身结果信息}({@link GetDetectInfoRequest 请求参数}): {@link GetDetectInfoResponse 返回参数} */
@@ -1397,18 +1105,12 @@ declare interface Faceid {
   GetFaceIdToken(data: GetFaceIdTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetFaceIdTokenResponse>;
   /** {@link GetLiveCode 获取数字验证码}({@link GetLiveCodeRequest 请求参数}): {@link GetLiveCodeResponse 返回参数} */
   GetLiveCode(data?: GetLiveCodeRequest, config?: AxiosRequestConfig): AxiosPromise<GetLiveCodeResponse>;
-  /** {@link GetLivenessResult 获取活体检测结果}({@link GetLivenessResultRequest 请求参数}): {@link GetLivenessResultResponse 返回参数} */
-  GetLivenessResult(data: GetLivenessResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetLivenessResultResponse>;
   /** {@link GetRealNameAuthResult 获取微信实名认证结果}({@link GetRealNameAuthResultRequest 请求参数}): {@link GetRealNameAuthResultResponse 返回参数} */
   GetRealNameAuthResult(data: GetRealNameAuthResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetRealNameAuthResultResponse>;
   /** {@link GetRealNameAuthToken 微信实名认证授权}({@link GetRealNameAuthTokenRequest 请求参数}): {@link GetRealNameAuthTokenResponse 返回参数} */
   GetRealNameAuthToken(data: GetRealNameAuthTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetRealNameAuthTokenResponse>;
-  /** {@link GetSdkVerificationResult 获取SDK验证结果}({@link GetSdkVerificationResultRequest 请求参数}): {@link GetSdkVerificationResultResponse 返回参数} */
-  GetSdkVerificationResult(data: GetSdkVerificationResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetSdkVerificationResultResponse>;
   /** {@link GetWeChatBillDetails 查询账单明细（微信渠道）}({@link GetWeChatBillDetailsRequest 请求参数}): {@link GetWeChatBillDetailsResponse 返回参数} */
   GetWeChatBillDetails(data: GetWeChatBillDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<GetWeChatBillDetailsResponse>;
-  /** {@link GetWebVerificationResult 获取Web核验结果}({@link GetWebVerificationResultRequest 请求参数}): {@link GetWebVerificationResultResponse 返回参数} */
-  GetWebVerificationResult(data: GetWebVerificationResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetWebVerificationResultResponse>;
   /** {@link IdCardOCRVerification 身份证识别及信息核验}({@link IdCardOCRVerificationRequest 请求参数}): {@link IdCardOCRVerificationResponse 返回参数} */
   IdCardOCRVerification(data?: IdCardOCRVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<IdCardOCRVerificationResponse>;
   /** {@link IdCardVerification 身份信息认证}({@link IdCardVerificationRequest 请求参数}): {@link IdCardVerificationResponse 返回参数} */
@@ -1437,8 +1139,6 @@ declare interface Faceid {
   PhoneVerificationCTCC(data: PhoneVerificationCTCCRequest, config?: AxiosRequestConfig): AxiosPromise<PhoneVerificationCTCCResponse>;
   /** {@link PhoneVerificationCUCC 手机号三要素核验（联通）}({@link PhoneVerificationCUCCRequest 请求参数}): {@link PhoneVerificationCUCCResponse 返回参数} */
   PhoneVerificationCUCC(data: PhoneVerificationCUCCRequest, config?: AxiosRequestConfig): AxiosPromise<PhoneVerificationCUCCResponse>;
-  /** {@link VideoLivenessCompare 视频活体人脸比对}({@link VideoLivenessCompareRequest 请求参数}): {@link VideoLivenessCompareResponse 返回参数} */
-  VideoLivenessCompare(data: VideoLivenessCompareRequest, config?: AxiosRequestConfig): AxiosPromise<VideoLivenessCompareResponse>;
 }
 
 export declare type Versions = ["2018-03-01"];

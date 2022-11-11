@@ -80,22 +80,22 @@ TenYun {
 | Token | <code>string</code> | 临时安全凭证(可选) |
 | Region | <code>string</code> | 地域参数(可选) |
 
-**`TenYun[ServiceShortName]() => string[]`**
+**`tenYun[ServiceShortName]() => string[]`**
 
 返回支持的服务版本 `YYYY-MM-DD` 格式字符串数组，`DESC` 排序。
 
-**`TenYun[ServiceShortName][ActionName](data?: any, config?: AxiosRequestConfig) => AxiosPromise`**
+**`tenYun[ServiceShortName][ActionName](data?: any, config?: AxiosRequestConfig) => AxiosPromise`**
 
 请求对应产品的服务。
 
-**`TenYun.client => AxiosInstance`**
+**`tenYun.client => AxiosInstance`**
 
 返回 `Axios` 实例。
 
 
 ## 支持的产品及服务
 
-<details><summary>共计 219+ 款产品，8562+ 服务数</summary>
+<details><summary>共计 219+ 款产品，8555+ 服务数</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -143,7 +143,7 @@ cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 20
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(78+3)
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(6)
 cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(10)
-cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(32)
+cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(35)
 cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(62)
 chdfs | [云 HDFS](https://cloud.tencent.com/document/product/1105) | 2020-11-12(29)<br/>2019-07-18(26)
 ciam | [账号风控平台](https://cloud.tencent.com/document/product/1441) | 2022-03-31(15)
@@ -190,7 +190,7 @@ es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2
 ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(25)
 essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(27)<br/>2020-12-22(53)
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2018-12-01(4)
-faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(45)
+faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(35)
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(10)
 ft | [人像变换](https://cloud.tencent.com/document/product/1202) | 2020-03-04(6)
 gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(102)

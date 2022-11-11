@@ -290,6 +290,20 @@ declare interface TagInfo {
   TagValue: string;
 }
 
+/** 文件系统配额信息 */
+declare interface UserQuota {
+  /** 指定配额类型，包括Uid、Gid */
+  UserType: string;
+  /** UID/GID信息 */
+  UserId: string;
+  /** 容量硬限制，单位GiB */
+  CapacityHardLimit: number;
+  /** 文件硬限制，单位个 */
+  FileHardLimit: number;
+  /** 文件系统ID */
+  FileSystemId: string;
+}
+
 declare interface BindAutoSnapshotPolicyRequest {
   /** 快照策略ID */
   AutoSnapshotPolicyId: string;
@@ -518,6 +532,20 @@ declare interface DeleteMountTargetResponse {
   RequestId?: string;
 }
 
+declare interface DeleteUserQuotaRequest {
+  /** 文件系统 ID */
+  FileSystemId: string;
+  /** 指定配额类型，包括Uid、Gid */
+  UserType: string;
+  /** UID/GID信息 */
+  UserId: string;
+}
+
+declare interface DeleteUserQuotaResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAutoSnapshotPoliciesRequest {
   /** 快照策略ID */
   AutoSnapshotPolicyId?: string;
@@ -680,6 +708,44 @@ declare interface DescribeSnapshotOperationLogsResponse {
   SnapshotId: string;
   /** 操作日志 */
   SnapshotOperates: SnapshotOperateLog[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserQuotaRequest {
+  /** 文件系统 ID */
+  FileSystemId: string;
+  /** 过滤条件。UserType - Array of String - 是否必填：否 -（过滤条件）按配额类型过滤。(Uid| Gid )UserId - Array of String - 是否必填：否 -（过滤条件）按UID/GID过滤。 */
+  Filters?: Filter[];
+  /** Offset 分页码 */
+  Offset?: number;
+  /** Limit 页面大小 */
+  Limit?: number;
+}
+
+declare interface DescribeUserQuotaResponse {
+  /** UserQuota条目总数 */
+  TotalCount: number;
+  /** UserQuota条目 */
+  UserQuotaInfo: UserQuota[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface SetUserQuotaRequest {
+  /** 文件系统 ID */
+  FileSystemId: string;
+  /** 指定配额类型，包括Uid、Gid */
+  UserType: string;
+  /** UID/GID信息 */
+  UserId: string;
+  /** 容量硬限制，单位GiB */
+  CapacityHardLimit?: number;
+  /** 文件硬限制，单位个 */
+  FileHardLimit?: number;
+}
+
+declare interface SetUserQuotaResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -871,6 +937,8 @@ declare interface Cfs {
   DeleteCfsSnapshot(data: DeleteCfsSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCfsSnapshotResponse>;
   /** {@link DeleteMountTarget 删除挂载点}({@link DeleteMountTargetRequest 请求参数}): {@link DeleteMountTargetResponse 返回参数} */
   DeleteMountTarget(data: DeleteMountTargetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMountTargetResponse>;
+  /** {@link DeleteUserQuota 删除文件系统配额}({@link DeleteUserQuotaRequest 请求参数}): {@link DeleteUserQuotaResponse 返回参数} */
+  DeleteUserQuota(data: DeleteUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserQuotaResponse>;
   /** {@link DescribeAutoSnapshotPolicies 查询文件系统快照策略列表信息}({@link DescribeAutoSnapshotPoliciesRequest 请求参数}): {@link DescribeAutoSnapshotPoliciesResponse 返回参数} */
   DescribeAutoSnapshotPolicies(data?: DescribeAutoSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoSnapshotPoliciesResponse>;
   /** {@link DescribeAvailableZoneInfo 查询区域可用情况}({@link DescribeAvailableZoneInfoRequest 请求参数}): {@link DescribeAvailableZoneInfoResponse 返回参数} */
@@ -893,6 +961,10 @@ declare interface Cfs {
   DescribeMountTargets(data: DescribeMountTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMountTargetsResponse>;
   /** {@link DescribeSnapshotOperationLogs 查询快照操作日志}({@link DescribeSnapshotOperationLogsRequest 请求参数}): {@link DescribeSnapshotOperationLogsResponse 返回参数} */
   DescribeSnapshotOperationLogs(data: DescribeSnapshotOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotOperationLogsResponse>;
+  /** {@link DescribeUserQuota 查询文件系统配额}({@link DescribeUserQuotaRequest 请求参数}): {@link DescribeUserQuotaResponse 返回参数} */
+  DescribeUserQuota(data: DescribeUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotaResponse>;
+  /** {@link SetUserQuota 设置文件系统配额}({@link SetUserQuotaRequest 请求参数}): {@link SetUserQuotaResponse 返回参数} */
+  SetUserQuota(data: SetUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<SetUserQuotaResponse>;
   /** {@link SignUpCfsService 开通CFS服务}({@link SignUpCfsServiceRequest 请求参数}): {@link SignUpCfsServiceResponse 返回参数} */
   SignUpCfsService(data?: SignUpCfsServiceRequest, config?: AxiosRequestConfig): AxiosPromise<SignUpCfsServiceResponse>;
   /** {@link UnbindAutoSnapshotPolicy 解绑快照策略}({@link UnbindAutoSnapshotPolicyRequest 请求参数}): {@link UnbindAutoSnapshotPolicyResponse 返回参数} */
