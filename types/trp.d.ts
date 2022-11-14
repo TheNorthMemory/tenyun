@@ -288,13 +288,13 @@ declare interface TraceData {
   Status: number | null;
 }
 
-/** 溯源数据 */
+/** 溯源数据项Type的枚举值text:文本类型, longtext:长文本类型, banner:单图片类型, image:多图片类型, video:视频类型, mp:小程序类型具体组合如下Type: "text" 文本类型, 对应值 Value: "文本字符串"Type: "longtext" 长文本类型, 对应值 Value: "长文本字符串, 支持换行\n"Type: "banner" 单图片类型, 对应图片地址 Value: "https://sample.cdn.com/xxx.jpg"Type: "image" 多图片类型, 对应图片地址 Values: ["https://sample.cdn.com/1.jpg", "https://sample.cdn.com/2.jpg"]Type: "video" 视频类型, 对应视频地址 Value: "https://sample.cdn.com/xxx.mp4"Type: "mp" 小程序类型, 对应配置 Values: ["WXAPPID", "WXAPP_PATH", "跳转说明"] */
 declare interface TraceItem {
-  /** 名称 */
+  /** 字段名称 */
   Name: string | null;
-  /** 单个值 */
+  /** 字段值 */
   Value: string | null;
-  /** 类型 */
+  /** 类型 text:文本类型, longtext:长文本类型, banner:单图片类型, image:多图片类型, video:视频类型, mp:小程序类型 */
   Type: string | null;
   /** 只读 */
   ReadOnly: boolean | null;

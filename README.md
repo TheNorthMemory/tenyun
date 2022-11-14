@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 219+ 款产品，8556+ 服务数</summary>
+<details><summary>共计 219+ 款产品，8610+ 服务数</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -311,7 +311,7 @@ vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(1
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(286)
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(35)
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(22)
-wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(140)
+wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(194)
 wss | SSL证书管理服务 | 2018-04-26(3)
 yinsuda | [音速达直播音乐版权引擎](https://cloud.tencent.com/document/product/1592) | 2022-05-27(12)
 youmall |  | 2018-02-28(31)

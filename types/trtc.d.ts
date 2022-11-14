@@ -418,11 +418,11 @@ declare interface SubscribeStreamUserIds {
 
 /** TRTC数据大盘/实时监控 API接口数据出参 */
 declare interface TRTCDataResp {
-  /** StatementID值 */
+  /** StatementID值，监控仪表盘下固定为0。 */
   StatementID: number | null;
-  /** Series数据 */
+  /** 查询结果数据，以Columns-Values形式返回。 */
   Series: SeriesInfo[] | null;
-  /** Total值 */
+  /** Total值，监控仪表盘功能下固定为1。 */
   Total: number | null;
 }
 

@@ -20,6 +20,8 @@ declare interface DetailResults {
   LibName: string | null;
   /** 该字段用于返回当前标签（Label）下的二级标签。 */
   SubLabel: string | null;
+  /** 该字段用于返回当前一级标签（Label）下的关键词、子标签及分数。 */
+  Tags: Tag[] | null;
 }
 
 /** 用于表示业务用户对应的设备信息 */
@@ -46,6 +48,16 @@ declare interface RiskDetails {
   Label: string;
   /** 该字段用于返回账号信息检测对应的风险等级，取值为：**1**（疑似存在风险）和**2**（存在恶意风险）。 */
   Level: number;
+}
+
+/** 该字段用于返回审核结果明细字段的标签及分数 */
+declare interface Tag {
+  /** 该字段用于返回命中的关键词 */
+  Keyword: string | null;
+  /** 该字段用于返回子标签 */
+  SubLabel: string | null;
+  /** 该字段用于返回子标签对应的分数 */
+  Score: number | null;
 }
 
 /** 用于表示业务用户的账号相关信息 */

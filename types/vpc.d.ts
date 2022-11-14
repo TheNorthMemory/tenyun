@@ -1212,6 +1212,8 @@ declare interface NetworkInterface {
   AttachType?: number | null;
   /** 用于保留网卡主IP的资源ID用于保留网卡主IP的资源ID。用于删除网卡时作为入参数。 */
   ResourceId?: string | null;
+  /** 服务质量级别：`DEFAULT`：默认`PT`：云金`AU`：云银`AG`：云铜 */
+  QosLevel?: string | null;
 }
 
 /** 弹性网卡绑定关系 */

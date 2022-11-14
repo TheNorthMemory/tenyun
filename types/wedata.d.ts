@@ -146,6 +146,76 @@ declare interface CommonId {
   Id: string | null;
 }
 
+/** 质量检查对比结果 */
+declare interface CompareResult {
+  /** 对比结果项列表 */
+  Items: CompareResultItem[] | null;
+  /** 检测总行数 */
+  TotalRows: number | null;
+  /** 检测通过行数 */
+  PassRows: number | null;
+  /** 检测不通过行数 */
+  TriggerRows: number | null;
+}
+
+/** 对比结果项 */
+declare interface CompareResultItem {
+  /** 对比结果， 1为真 2为假 */
+  FixResult: number | null;
+  /** 质量sql执行结果 */
+  ResultValue: string | null;
+  /** 阈值列表 */
+  Values: ThresholdValue[] | null;
+  /** 比较操作类型 */
+  Operator: string | null;
+  /** 比较类型 */
+  CompareType: number | null;
+  /** 值比较类型 */
+  ValueComputeType: number | null;
+}
+
+/** 对比规则 */
+declare interface CompareRule {
+  /** 比较条件列表 */
+  Items?: CompareRuleItem[] | null;
+}
+
+/** 比较条件 */
+declare interface CompareRuleItem {
+  /** 比较类型 1.固定值 2.波动值 3.数值范围比较 4.枚举范围比较 5.不用比较 */
+  CompareType?: number | null;
+  /** 比较操作类型 < <= == => > */
+  Operator?: string | null;
+  /** 质量统计值类型 1.绝对值 2.上升 3. 下降 4._C包含 5. N_C不包含 */
+  ValueComputeType?: number | null;
+  /** 比较阈值列表 */
+  ValueList?: ThresholdValue[] | null;
+}
+
+/** 日评分信息 */
+declare interface DailyScoreInfo {
+  /** 统计日期 时间戳 */
+  StatisticsDate: number | null;
+  /** 评分 */
+  Score: number | null;
+}
+
+/** 数据监测情况结果 */
+declare interface DataCheckStat {
+  /** 表总数 */
+  TableTotal: number;
+  /** 字段总数 */
+  ColumnTotal: number;
+  /** 表配置检测数 */
+  TableConfig: number;
+  /** 字段配置检测数 */
+  ColumnConfig: number;
+  /** 表实际检测数 */
+  TableExec: number;
+  /** 字段实际检测数 */
+  ColumnExec: number;
+}
+
 /** 数据源对象 */
 declare interface DataSourceInfo {
   /** 若数据源列表为绑定数据库，则为db名称 */
@@ -222,6 +292,22 @@ declare interface DataSourceInfoPage {
   TotalPageNumber: number | null;
 }
 
+/** 数据质量数据来源数据库 */
+declare interface DatabaseInfo {
+  /** 数据源名称 */
+  DatasourceName?: string | null;
+  /** 数据源Id */
+  DatasourceId?: string | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 数据库id */
+  DatabaseId?: string | null;
+  /** 实例Id */
+  InstanceId?: string | null;
+  /** 数据源类型 */
+  DatasourceType?: number | null;
+}
+
 /** 数据源对象 */
 declare interface DatasourceBaseInfo {
   /** 若数据源列表为绑定数据库，则为db名称 */
@@ -290,6 +376,70 @@ declare interface DescribeTaskInstancesData {
   PageNumber: number;
   /** 页大小 */
   PageSize: number;
+}
+
+/** 维度统计业务视图 */
+declare interface DimensionCount {
+  /** 维度类型1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性 */
+  DimType?: number | null;
+  /** 统计值 */
+  Count?: number | null;
+}
+
+/** 维度评分 */
+declare interface DimensionScore {
+  /** 维度评分列表 */
+  DimensionScoreList: DimensionScoreInfo[] | null;
+}
+
+/** 维度评分信息 */
+declare interface DimensionScoreInfo {
+  /** 维度名称 */
+  Name: string | null;
+  /** 权重 */
+  Weight: number | null;
+  /** 设置人id */
+  UserId: number | null;
+  /** 设置人名 */
+  UserName: string | null;
+  /** 更新时间 时间戳 */
+  UpdateTime: number | null;
+  /** 参与评估表数量 */
+  JoinTableNumber: number;
+  /** 评分 */
+  Score: number;
+}
+
+/** 数据导出任务详情 */
+declare interface ExportTaskInfo {
+  /** 导出任务id */
+  ExportTaskId?: number | null;
+  /** 导出任务类型(1.全部,2.触发行,3.通过行) */
+  TaskType?: number | null;
+  /** 任务创建人 id */
+  OperatorId?: number | null;
+  /** 任务创建人昵称 */
+  OperatorName?: string | null;
+  /** 任务创建时间 */
+  CreateTime?: string | null;
+  /** 导出状态(1.已提交 2.导出中 3.导出成功 4.导出失败) */
+  Status?: number | null;
+  /** 调度任务id */
+  SchedulerTaskId?: string | null;
+  /** 调度时间 */
+  SchedulerCurRunDate?: string | null;
+  /** 文件相对路径 */
+  FilePath?: string | null;
+}
+
+/** 字段变量 */
+declare interface FieldConfig {
+  /** 字段key */
+  FieldKey?: string | null;
+  /** 字段值 */
+  FieldValue?: string | null;
+  /** 字段值类型 */
+  FieldDataType?: string | null;
 }
 
 /** 通用过滤器 */
@@ -878,6 +1028,34 @@ declare interface ParamInfo {
   ParamValue: string;
 }
 
+/** 数据质量生产调度任务业务实体 */
+declare interface ProdSchedulerTask {
+  /** 生产调度任务工作流ID */
+  WorkflowId: string | null;
+  /** 生产调度任务Id */
+  TaskId?: string | null;
+  /** 生产调度任务名称 */
+  TaskName?: string | null;
+}
+
+/** 质量评分 */
+declare interface QualityScore {
+  /** 综合分数 */
+  CompositeScore: number | null;
+  /** 评分分布 */
+  ScoringDistribution: TableScoreStatisticsInfo[] | null;
+  /** 总表数 */
+  TotalTableNumber: number | null;
+}
+
+/** 质量评分趋势 */
+declare interface QualityScoreTrend {
+  /** 周期平均分 */
+  AverageScore: number | null;
+  /** 日评分列表 */
+  DailyScoreList: DailyScoreInfo[] | null;
+}
+
 /** 实时任务实例当前的节点信息 */
 declare interface RealTimeTaskInstanceNodeInfo {
   /** 任务名 */
@@ -948,6 +1126,572 @@ declare interface RobLockState {
   IsRob: boolean;
   /** 当前持锁人 */
   Locker: string;
+}
+
+/** 数据质量规则 */
+declare interface Rule {
+  /** 规则ID */
+  RuleId?: number | null;
+  /** 规则组ID */
+  RuleGroupId?: number | null;
+  /** 数据表Id */
+  TableId?: string | null;
+  /** 规则名称 */
+  Name?: string | null;
+  /** 规则类型 1.系统模版, 2.自定义模版, 3.自定义SQL */
+  Type?: number | null;
+  /** 规则模板Id */
+  RuleTemplateId?: number | null;
+  /** 规则模板概述 */
+  RuleTemplateContent?: string | null;
+  /** 规则所属质量维度 1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性 */
+  QualityDim?: number | null;
+  /** 规则适用的源数据对象类型（1：常量，2：离线表级，3：离线字段级别） */
+  SourceObjectType?: number | null;
+  /** 规则适用的源数据对象类型（1：数值，2：字符串） */
+  SourceObjectDataType?: number | null;
+  /** 源字段详细类型，INT、STRING */
+  SourceObjectDataTypeName?: string | null;
+  /** 源字段名称 */
+  SourceObjectValue?: string | null;
+  /** 检测范围 1.全表, 2.条件扫描 */
+  ConditionType?: number | null;
+  /** 条件扫描WHERE条件表达式 */
+  ConditionExpression?: string | null;
+  /** 自定义SQL */
+  CustomSql?: string | null;
+  /** 报警触发条件 */
+  CompareRule?: CompareRule | null;
+  /** 报警触发级别 1.低, 2.中, 3.高 */
+  AlarmLevel?: number | null;
+  /** 规则描述 */
+  Description?: string | null;
+  /** 规则配置人 */
+  Operator?: string | null;
+  /** 目标库Id */
+  TargetDatabaseId?: string | null;
+  /** 目标库名称 */
+  TargetDatabaseName?: string | null;
+  /** 目标表Id */
+  TargetTableId?: string | null;
+  /** 目标表名称 */
+  TargetTableName?: string | null;
+  /** 目标字段过滤条件表达式 */
+  TargetConditionExpr?: string | null;
+  /** 源字段与目标字段关联条件on表达式 */
+  RelConditionExpr?: string | null;
+  /** 自定义模版sql表达式参数 */
+  FieldConfig?: RuleFieldConfig | null;
+  /** 是否关联多表 */
+  MultiSourceFlag?: boolean | null;
+  /** 是否where参数 */
+  WhereFlag?: boolean | null;
+}
+
+/** 规则配置 */
+declare interface RuleConfig {
+  /** 规则ID */
+  RuleId?: number | null;
+  /** 规则检测范围类型 1.全表 2.条件扫描 */
+  ConditionType?: number | null;
+  /** 检测范围表达式 */
+  Condition?: string | null;
+  /** 目标检测范围表达式 */
+  TargetCondition?: string | null;
+}
+
+/** RuleDimCnt 规则维度统计 */
+declare interface RuleDimCnt {
+  /** 1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性 */
+  Dim: number;
+  /** count 数 */
+  Cnt: number;
+}
+
+/** 规则维度数统计 */
+declare interface RuleDimStat {
+  /** 总数 */
+  TotalCnt: number;
+  /** 维度统计数 */
+  DimCntList: RuleDimCnt[];
+}
+
+/** 规则执行配置 */
+declare interface RuleExecConfig {
+  /** 计算队列名称 */
+  QueueName?: string | null;
+  /** 执行资源组 */
+  ExecutorGroupId?: string | null;
+}
+
+/** 概览趋势结果 */
+declare interface RuleExecDateStat {
+  /** 统计日期 */
+  StatDate: string;
+  /** 告警数 */
+  AlarmCnt: number;
+  /** 阻塞数 */
+  PipelineCnt: number;
+}
+
+/** 规则执行结果导出结果 */
+declare interface RuleExecExportResult {
+  /** 规则执行id */
+  RuleExecId?: number | null;
+  /** 导出任务列表 */
+  ExportTasks?: ExportTaskInfo[] | null;
+}
+
+/** 规则执行日志 */
+declare interface RuleExecLog {
+  /** 是否完成 */
+  Finished?: boolean | null;
+  /** 内容 */
+  Log: string | null;
+}
+
+/** 规则执行结果 */
+declare interface RuleExecResult {
+  /** 规则执行ID */
+  RuleExecId?: number | null;
+  /** 规则组执行ID */
+  RuleGroupExecId?: number | null;
+  /** 规则组ID */
+  RuleGroupId?: number | null;
+  /** 规则ID */
+  RuleId?: number | null;
+  /** 规则名称 */
+  RuleName?: string | null;
+  /** 规则类型 1.系统模版, 2.自定义模版, 3.自定义SQL */
+  RuleType?: number | null;
+  /** 源字段详细类型，int string */
+  SourceObjectDataTypeName?: string | null;
+  /** 源字段名称 */
+  SourceObjectValue?: string | null;
+  /** 条件扫描WHERE条件表达式 */
+  ConditionExpression?: string | null;
+  /** 检测结果（1:检测通过，2：触发规则，3：检测失败） */
+  ExecResultStatus?: number | null;
+  /** 触发结果，告警发送成功, 阻断任务成功 */
+  TriggerResult?: string | null;
+  /** 对比结果 */
+  CompareResult?: CompareResult | null;
+  /** 模版名称 */
+  TemplateName: string | null;
+  /** 质量维度 */
+  QualityDim: number | null;
+  /** 目标表-库表名称 */
+  TargetDBTableName: string | null;
+  /** 目标表-字段名称 */
+  TargetObjectValue: string | null;
+  /** 目标表-字段类型 */
+  TargetObjectDataType: string | null;
+  /** 自定义模版sql表达式参数 */
+  FieldConfig: RuleFieldConfig | null;
+  /** 源字段与目标字段关联条件on表达式 */
+  RelConditionExpr: string | null;
+}
+
+/** 规则执行结果详情 */
+declare interface RuleExecResultDetail {
+  /** 数据源id */
+  DatasourceId?: number | null;
+  /** 数据源名称 */
+  DatasourceName?: string | null;
+  /** 数据库guid */
+  DatabaseId?: string | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 实例ID */
+  InstanceId?: string | null;
+  /** 表guid */
+  TableId?: string | null;
+  /** 表名 */
+  TableName?: string | null;
+  /** 规则执行记录 */
+  RuleExecResult?: RuleExecResult | null;
+  /** 表负责人userId */
+  TableOwnerUserId?: number | null;
+}
+
+/** 规则执行结果分页 */
+declare interface RuleExecResultPage {
+  /** 记录数 */
+  TotalCount: number | null;
+  /** 规则执行结果 */
+  Items: RuleExecResult[];
+}
+
+/** 规则运行情况结果 */
+declare interface RuleExecStat {
+  /** 规则运行总数 */
+  TotalCnt: number;
+  /** 环比规则运行总数 */
+  LastTotalCnt: number | null;
+  /** 规则运行总数占比 */
+  TotalCntRatio: number;
+  /** 规则运行总数环比变化 */
+  LastTotalCntRatio: number | null;
+  /** 规则触发数 */
+  TriggerCnt: number;
+  /** 环比规则触发数 */
+  LastTriggerCnt: number | null;
+  /** 触发占总数占比 */
+  TriggerCntRatio: number;
+  /** 环比规则触发数变化 */
+  LastTriggerCntRatio: number | null;
+  /** 规则报警数 */
+  AlarmCnt: number;
+  /** 环比规则报警数 */
+  LastAlarmCnt: number | null;
+  /** 报警占总数占比 */
+  AlarmCntRatio: number;
+  /** 环比报警数变化 */
+  LastAlarmCntRatio: number | null;
+  /** 阻塞发生数 */
+  PipelineCnt: number;
+  /** 环比阻塞发生数 */
+  LastPipelineCnt: number | null;
+  /** 阻塞占总数占比 */
+  PipelineCntRatio: number;
+  /** 环比阻塞发生数变化 */
+  LastPipelineCntRatio: number | null;
+}
+
+/** 规则变量替换 */
+declare interface RuleFieldConfig {
+  /** where变量 */
+  WhereConfig?: FieldConfig[] | null;
+  /** 库表变量 */
+  TableConfig?: TableConfig[] | null;
+}
+
+/** 数据质量规则组 */
+declare interface RuleGroup {
+  /** 规则组Id */
+  RuleGroupId?: number | null;
+  /** 数据源Id */
+  DatasourceId?: string | null;
+  /** 数据源名称 */
+  DatasourceName?: string | null;
+  /** 数据源类型 */
+  DatasourceType?: number | null;
+  /** 监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测 */
+  MonitorType?: number | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 关联数据表名称 */
+  TableName?: string | null;
+  /** 关联数据表Id */
+  TableId?: string | null;
+  /** 关联数据表负责人 */
+  TableOwnerName?: string | null;
+  /** 执行策略 */
+  ExecStrategy?: RuleGroupExecStrategy | null;
+  /** 执行策略 */
+  Subscription?: RuleGroupSubscribe | null;
+  /** 数据库id */
+  DatabaseId?: string | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 是否有权限 */
+  Permission?: boolean | null;
+  /** 已经配置的规则数量 */
+  RuleCount?: number | null;
+  /** 监控状态 */
+  MonitorStatus?: boolean | null;
+  /** 表负责人UserId */
+  TableOwnerUserId?: number | null;
+}
+
+/** 规则组执行结果 */
+declare interface RuleGroupExecResult {
+  /** 规则组执行ID */
+  RuleGroupExecId?: number | null;
+  /** 规则组ID */
+  RuleGroupId?: number | null;
+  /** 执行触发类型（1：手动触发， 2：调度事中触发，3：周期调度触发） */
+  TriggerType?: number | null;
+  /** 执行时间 yyyy-MM-dd HH:mm:ss */
+  ExecTime?: string | null;
+  /** 执行状态（1.已提交 2.检测中 3.正常 4.异常） */
+  Status?: number | null;
+  /** 异常规则数 */
+  AlarmRuleCount?: number | null;
+  /** 总规则数 */
+  TotalRuleCount?: number | null;
+  /** 源表负责人 */
+  TableOwnerName?: string | null;
+  /** 源表名称 */
+  TableName?: string | null;
+  /** 表id */
+  TableId?: string | null;
+  /** 数据库id */
+  DatabaseId?: string | null;
+  /** 数据源ID */
+  DatasourceId?: string | null;
+  /** 有无权限 */
+  Permission?: boolean | null;
+  /** 执行详情，调度计划或者关联生产任务ID */
+  ExecDetail?: string | null;
+}
+
+/** 规则组执行结果分页 */
+declare interface RuleGroupExecResultPage {
+  /** 记录数 */
+  TotalCount?: number | null;
+  /** 规则组执行结果 */
+  Items?: RuleGroupExecResult[] | null;
+}
+
+/** 质量规则执行策略 */
+declare interface RuleGroupExecStrategy {
+  /** 规则组Id */
+  RuleGroupId: number | null;
+  /** 监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测 */
+  MonitorType: number | null;
+  /** 计算队列 */
+  ExecQueue: string | null;
+  /** 执行资源组ID */
+  ExecutorGroupId: string | null;
+  /** 执行资源组名称 */
+  ExecutorGroupName: string | null;
+  /** 关联的生产调度任务列表 */
+  Tasks: ProdSchedulerTask[] | null;
+  /** 周期开始时间 */
+  StartTime: string | null;
+  /** 周期结束时间 */
+  EndTime: string | null;
+  /** 调度周期类型 */
+  CycleType: string | null;
+  /** 延迟调度时间 */
+  DelayTime: number | null;
+  /** 间隔 */
+  CycleStep: number | null;
+  /** 时间指定 */
+  TaskAction: string | null;
+}
+
+/** 规则组监控业务视图 */
+declare interface RuleGroupMonitor {
+  /** 规则组id */
+  RuleGroupId?: number | null;
+  /** 表guid */
+  TableId?: string | null;
+  /** 数据源id */
+  DatasourceId?: number | null;
+  /** 数据库guid */
+  DatabaseId?: string | null;
+  /** 监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测 */
+  MonitorType?: number | null;
+  /** 监控状态 0.false 1.true */
+  MonitorStatus?: number | null;
+  /** 规则组创建人id */
+  CreateUserId?: number | null;
+  /** 规则组创建人昵称 */
+  CreateUserName?: string | null;
+  /** 规则创建时间 yyyy-MM-dd HH:mm:ss */
+  CreateTime?: string | null;
+}
+
+/** 规则组监控业务分页视图 */
+declare interface RuleGroupMonitorPage {
+  /** 记录总数 */
+  TotalCount?: number | null;
+  /** 记录 */
+  Items?: RuleGroupMonitor[] | null;
+}
+
+/** 规则组分页 */
+declare interface RuleGroupPage {
+  /** 记录数 */
+  TotalCount: number | null;
+  /** 规则组列表 */
+  Items: RuleGroup[] | null;
+}
+
+/** 规则组调度信息 */
+declare interface RuleGroupSchedulerInfo {
+  /** 规则组ID */
+  Id: number | null;
+  /** 1:未配置 2:关联生产调度 3:离线周期检测 */
+  MonitorType: number | null;
+  /** 开始时间 */
+  StartTime: string | null;
+  /** 结束时间 */
+  EndTime: string | null;
+  /** 循环类型简写 */
+  CycleType: string | null;
+  /** 循环步长 */
+  CycleStep: number | null;
+  /** 循环类型 */
+  CycleDesc: string | null;
+  /** 离线周期检测下指定时间 */
+  TaskAction: string | null;
+  /** 离线周期检测下延迟时间 */
+  DelayTime: number | null;
+  /** 离线周期检测下注册到任务调度的任务ID */
+  CycleTaskId: string | null;
+  /** 关联生产调度下关联的任务ID */
+  AssociateTaskIds: string[] | null;
+}
+
+/** 数据质量规则组订阅信息 */
+declare interface RuleGroupSubscribe {
+  /** 规则组Id */
+  RuleGroupId?: number | null;
+  /** 订阅接收人列表 */
+  Receivers?: SubscribeReceiver[] | null;
+  /** 订阅方式 1.邮件email 2.短信sms */
+  SubscribeType?: number[] | null;
+}
+
+/** 表绑定规则组信息 */
+declare interface RuleGroupTable {
+  /** 表信息 */
+  TableInfo: RuleGroupTableInnerInfo | null;
+  /** 规则组调度信息 */
+  RuleGroups: RuleGroupSchedulerInfo[] | null;
+  /** 订阅者信息 */
+  Subscriptions: RuleGroupSubscribe[] | null;
+}
+
+/** 规则组关联表信息 */
+declare interface RuleGroupTableInnerInfo {
+  /** 表ID */
+  TableId: string | null;
+  /** 表名称 */
+  TableName: string | null;
+  /** 实例ID */
+  InstanceId: string | null;
+  /** 数据源ID */
+  DatasourceId: string | null;
+  /** 数据源名称 */
+  DatasourceName: string | null;
+  /** 数据源类型 */
+  DatasourceType: number | null;
+  /** 数据库ID */
+  DatabaseId: string | null;
+  /** 数据库名称 */
+  DatabaseName: string | null;
+  /** 项目ID */
+  ProjectId: number | null;
+  /** 责任人ID */
+  UserId: number | null;
+}
+
+/** 规则操作记录业务 */
+declare interface RuleHistory {
+  /** 规则ID */
+  RuleId?: number | null;
+  /** 变更时间 yyyy-MM-dd HH:mm:ss */
+  AlterTime?: string | null;
+  /** 变更内容 */
+  AlterContent?: string | null;
+  /** 操作账号UId */
+  OperatorUserId?: number | null;
+  /** 操作人名称 */
+  OperatorName?: string | null;
+}
+
+/** 数据质量规则操作历史分页 */
+declare interface RuleHistoryPage {
+  /** 记录数 */
+  TotalCount?: number | null;
+  /** 规则操作历史列表 */
+  Items?: RuleHistory[] | null;
+}
+
+/** 数据质量规则分页 */
+declare interface RulePage {
+  /** 记录数 */
+  TotalCount?: number | null;
+  /** 规则列表 */
+  Items?: Rule[] | null;
+}
+
+/** 规则模版 */
+declare interface RuleTemplate {
+  /** 规则模版ID */
+  RuleTemplateId: number;
+  /** 规则模版名称 */
+  Name: string;
+  /** 规则模版描述 */
+  Description: string;
+  /** 模版类型（1：系统模版，2：自定义） */
+  Type: number;
+  /** 规则适用的源数据对象类型（1：常量，2：离线表级，3：离线字段级别） */
+  SourceObjectType: number;
+  /** 规则适用的源数据对象类型（1：数值，2：字符串） */
+  SourceObjectDataType: number;
+  /** 规则模版源侧内容，区分引擎，JSON 结构 */
+  SourceContent: string | null;
+  /** 源数据适用类型 */
+  SourceEngineTypes: number[] | null;
+  /** 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性） */
+  QualityDim: number | null;
+  /** 规则支持的比较方式类型（1：固定值比较，大于、小于，大于等于等 2：波动值比较，绝对值、上升、下降） */
+  CompareType: number | null;
+  /** 引用次数 */
+  CitationCount: number | null;
+  /** 创建人id */
+  UserId: number | null;
+  /** 创建人昵称 */
+  UserName: string | null;
+  /** 更新时间yyyy-MM-dd HH:mm:ss */
+  UpdateTime: string | null;
+  /** 是否添加where参数 */
+  WhereFlag: boolean | null;
+  /** 是否关联多个库表 */
+  MultiSourceFlag: boolean | null;
+  /** 自定义模板SQL表达式 */
+  SqlExpression: string | null;
+  /** 模版子维度，0.父维度类型,1.一致性: 枚举范围一致性,2.一致性：数值范围一致性,3.一致性：字段数据相关性 */
+  SubQualityDim: number | null;
+}
+
+/** 规则模版变更历史记录视图 */
+declare interface RuleTemplateHistory {
+  /** 模版ID */
+  TemplateId?: number;
+  /** 版本 */
+  Version?: number;
+  /** 用户Id */
+  UserId?: number;
+  /** 用户昵称 */
+  UserName?: string;
+  /** 变更类型1.新增2.修改3.删除 */
+  AlterType?: number;
+  /** 变更内容 */
+  AlterContent?: string;
+}
+
+/** 规则模版分页 */
+declare interface RuleTemplateHistoryPage {
+  /** 总记录数 */
+  TotalCount?: number | null;
+  /** 记录列表 */
+  Items?: RuleTemplateHistory[] | null;
+}
+
+/** RuleTemplatePage 结果 */
+declare interface RuleTemplatePage {
+  /** 记录数 */
+  TotalCount: number;
+  /** 模版列表 */
+  Items: RuleTemplate[];
+}
+
+/** 规则执行结果 */
+declare interface RunnerRuleExecResult {
+  /** rule id */
+  RuleId: number;
+  /** rule exec id */
+  RuleExecId: number;
+  /** exec state */
+  State: string;
+  /** 结果 */
+  Data: string[];
 }
 
 /** 集成离线任务实例信息 */
@@ -1022,6 +1766,14 @@ declare interface SimpleTaskInfo {
   TaskName: string;
 }
 
+/** 数据质量数据对象 */
+declare interface SourceObject {
+  /** 源字段详细类型，int、string */
+  SourceObjectDataTypeName?: string | null;
+  /** 源字段名称 */
+  SourceObjectValue?: string | null;
+}
+
 /** 速度值对象 */
 declare interface SpeedValue {
   /** 带毫秒的时间戳 */
@@ -1042,12 +1794,76 @@ declare interface SubmitWorkflow {
   ErrorId: string | null;
 }
 
+/** 订阅接收人 */
+declare interface SubscribeReceiver {
+  /** 接收人Uin */
+  ReceiverUserId?: number | null;
+  /** 接收人名称 */
+  ReceiverName?: string | null;
+}
+
+/** 规则表变量替换 */
+declare interface TableConfig {
+  /** 数据库Id */
+  DatabaseId?: string | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 表Id */
+  TableId?: string | null;
+  /** 表名称 */
+  TableName?: string | null;
+  /** 表Key */
+  TableKey?: string | null;
+  /** 字段变量 */
+  FieldConfig?: FieldConfig[] | null;
+}
+
 /** 元数据表详细信息 */
 declare interface TableInfo {
   /** 表Id */
   TableId: string | null;
   /** 表名称 */
   TableName: string | null;
+}
+
+/** 表质量详情 */
+declare interface TableQualityDetail {
+  /** 数据库id */
+  DatabaseId: string | null;
+  /** 数据库名称 */
+  DatabaseName: string | null;
+  /** 表id */
+  TableId: string | null;
+  /** 表名称 */
+  TableName: string | null;
+  /** 表责任人ID */
+  OwnerUserId: number | null;
+  /** 表责任人名 */
+  OwnerUserName: string | null;
+  /** 库得分 */
+  DatabaseScore: number | null;
+  /** 表得分 */
+  TableScore: number | null;
+  /** 表环比 */
+  LastPeriodRatio: number | null;
+}
+
+/** 表质量分分页结果 */
+declare interface TableQualityDetailPage {
+  /** 总条数 */
+  TotalCount: number | null;
+  /** 表质量列表 */
+  Items: TableQualityDetail[] | null;
+}
+
+/** 表评分统计信息 */
+declare interface TableScoreStatisticsInfo {
+  /** 等级 1、2、3、4、5 */
+  Level: number | null;
+  /** 占比 */
+  Scale: number | null;
+  /** 表数量 */
+  TableNumber: number | null;
 }
 
 /** 任务告警信息 */
@@ -1446,6 +2262,32 @@ declare interface TaskScriptContent {
   ScriptContent: string | null;
 }
 
+/** 数据质量阈值 */
+declare interface ThresholdValue {
+  /** 阈值类型 1.低阈值 2.高阈值 3.普通阈值 4.枚举值 */
+  ValueType?: number | null;
+  /** 阈值 */
+  Value?: string | null;
+}
+
+/** 质量概览表排行结果 */
+declare interface TopTableStat {
+  /** 告警表列表 */
+  AlarmTables: TopTableStatItem[];
+  /** 阻塞表列表 */
+  PipelineTables: TopTableStatItem[];
+}
+
+/** 质量概览表排行元素 */
+declare interface TopTableStatItem {
+  /** 表Id */
+  TableId: string;
+  /** 表名 */
+  TableName: string | null;
+  /** 数 */
+  Cnt: number;
+}
+
 /** 用户文件信息 */
 declare interface UserFileDTO {
   /** 资源ID */
@@ -1486,6 +2328,14 @@ declare interface UserFileDTO {
   Bucket: string | null;
   /** 文件所属存储桶的地域 */
   Region: string | null;
+}
+
+/** 权重信息 */
+declare interface WeightInfo {
+  /** 权重 */
+  Weight: number;
+  /** 维度类型 1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性 */
+  QualityDim: number;
 }
 
 /** 工作流信息 */
@@ -1800,6 +2650,40 @@ declare interface CheckAlarmRegularNameExistResponse {
   RequestId?: string;
 }
 
+declare interface CheckDuplicateRuleNameRequest {
+  /** 项目Id */
+  ProjectId?: string;
+  /** 规则组Id */
+  RuleGroupId?: number;
+  /** 规则名称 */
+  Name?: string;
+  /** 规则Id */
+  RuleId?: number;
+}
+
+declare interface CheckDuplicateRuleNameResponse {
+  /** 规则名称是否重复 */
+  Data: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface CheckDuplicateTemplateNameRequest {
+  /** 规则模板ID */
+  TemplateId?: number;
+  /** 模板名称 */
+  Name?: string;
+  /** 项目Id */
+  ProjectId?: string;
+}
+
+declare interface CheckDuplicateTemplateNameResponse {
+  /** 是否重名 */
+  Data: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CheckIntegrationNodeNameExistsRequest {
   /** 任务ID */
   TaskId: string;
@@ -1854,6 +2738,26 @@ declare interface CheckTaskNameExistResponse {
   RequestId?: string;
 }
 
+declare interface CommitExportTaskRequest {
+  /** 项目id */
+  ProjectId?: string;
+  /** 规则执行Id */
+  RuleExecId?: number;
+  /** 导出类型(1.全部,2.触发行,3.通过行) */
+  ExportType?: number;
+  /** 执行资源组id */
+  ExecutorGroupId?: string;
+  /** 计算资源队列 */
+  QueueName?: string;
+}
+
+declare interface CommitExportTaskResponse {
+  /** 提交结果 */
+  Data: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CommitIntegrationTaskRequest {
   /** 任务id */
   TaskId: string;
@@ -1868,6 +2772,44 @@ declare interface CommitIntegrationTaskRequest {
 declare interface CommitIntegrationTaskResponse {
   /** 操作成功与否标识 */
   Data: boolean;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface CommitRuleGroupExecResultRequest {
+  /** preject id */
+  ProjectId: string;
+  /** rule group exec id */
+  RuleGroupExecId: number;
+  /** group exec state */
+  RuleGroupState: string;
+  /** runner rule exec result list */
+  RuleExecResults: RunnerRuleExecResult[];
+}
+
+declare interface CommitRuleGroupExecResultResponse {
+  /** 无 */
+  Data: string | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface CommitRuleGroupTaskRequest {
+  /** 规则组ID */
+  RuleGroupId?: number;
+  /** 触发类型 1.手动触发 2.调度事中触发 3.周期调度触发 */
+  TriggerType?: number;
+  /** 规则配置列表 */
+  ExecRuleConfig?: RuleConfig[];
+  /** 执行配置 */
+  ExecConfig?: RuleExecConfig;
+  /** 项目ID */
+  ProjectId?: string;
+}
+
+declare interface CommitRuleGroupTaskResponse {
+  /** 规则组执行id */
+  Data: RuleGroupExecResult | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2110,6 +3052,92 @@ declare interface CreateOrUpdateResourceResponse {
   RequestId?: string;
 }
 
+declare interface CreateRuleRequest {
+  /** 项目id */
+  ProjectId?: string;
+  /** 规则组Id */
+  RuleGroupId?: number;
+  /** 规则名称 */
+  Name?: string;
+  /** 数据表ID */
+  TableId?: string;
+  /** 规则模板列表 */
+  RuleTemplateId?: number;
+  /** 规则类型 1.系统模版, 2.自定义模版, 3.自定义SQL */
+  Type?: number;
+  /** 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性 */
+  QualityDim?: number;
+  /** 源字段详细类型，int、string */
+  SourceObjectDataTypeName?: string;
+  /** 源字段名称 */
+  SourceObjectValue?: string;
+  /** 检测范围 1.全表 2.条件扫描 */
+  ConditionType?: number;
+  /** 条件扫描WHERE条件表达式 */
+  ConditionExpression?: string;
+  /** 自定义SQL */
+  CustomSql?: string;
+  /** 报警触发条件 */
+  CompareRule?: CompareRule;
+  /** 报警触发级别 1.低, 2.中, 3.高 */
+  AlarmLevel?: number;
+  /** 规则描述 */
+  Description?: string;
+  /** 数据源Id */
+  DatasourceId?: string;
+  /** 数据库Id */
+  DatabaseId?: string;
+  /** 目标库Id */
+  TargetDatabaseId?: string;
+  /** 目标表Id */
+  TargetTableId?: string;
+  /** 目标过滤条件表达式 */
+  TargetConditionExpr?: string;
+  /** 源字段与目标字段关联条件on表达式 */
+  RelConditionExpr?: string;
+  /** 自定义模版sql表达式字段替换参数 */
+  FieldConfig?: RuleFieldConfig;
+  /** 目标字段名称 CITY */
+  TargetObjectValue?: string;
+}
+
+declare interface CreateRuleResponse {
+  /** 规则 */
+  Data: Rule | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface CreateRuleTemplateRequest {
+  /** 模版类型 1.系统模版 2.自定义模版 */
+  Type?: number;
+  /** 模版名称 */
+  Name?: string;
+  /** 质量检测维度 1.准确性 2.唯一性 3.完整性 4.一致性 5.及时性 6.有效性 */
+  QualityDim?: number;
+  /** 源端数据对象类型 1.常量 2.离线表级 2.离线字段级 */
+  SourceObjectType?: number;
+  /** 模板描述 */
+  Description?: string;
+  /** 源端对应的引擎类型 */
+  SourceEngineTypes?: number[];
+  /** 是否关联其它库表 */
+  MultiSourceFlag?: boolean;
+  /** SQL 表达式 */
+  SqlExpression?: string;
+  /** 项目Id */
+  ProjectId?: string;
+  /** 是否添加where参数 */
+  WhereFlag?: boolean;
+}
+
+declare interface CreateRuleTemplateResponse {
+  /** 模板Id */
+  Data: number | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateTaskAlarmRegularRequest {
   /** 告警配置信息 */
   TaskAlarmInfo: TaskAlarmInfo;
@@ -2276,6 +3304,34 @@ declare interface DeleteResourceResponse {
   RequestId?: string;
 }
 
+declare interface DeleteRuleRequest {
+  /** 质量规则ID */
+  RuleId?: number;
+  /** 项目ID */
+  ProjectId?: string;
+}
+
+declare interface DeleteRuleResponse {
+  /** 是否删除成功 */
+  Data: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRuleTemplateRequest {
+  /** 项目Id */
+  ProjectId?: string;
+  /** 模版Id列表 */
+  Ids?: number[];
+}
+
+declare interface DeleteRuleTemplateResponse {
+  /** 删除成功 */
+  Data: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DeleteTaskAlarmRegularRequest {
   /** 主键ID */
   Id: string;
@@ -2380,6 +3436,54 @@ declare interface DescribeClusterNamespaceListRequest {
 declare interface DescribeClusterNamespaceListResponse {
   /** 命名空间 */
   Namespaces: Namespace[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataBasesRequest {
+  /** 项目Id */
+  ProjectId?: string;
+  /** 数据源id */
+  DatasourceId?: string;
+}
+
+declare interface DescribeDataBasesResponse {
+  /** 数据来源数据数据库列表 */
+  Data: DatabaseInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataCheckStatRequest {
+  /** Project id */
+  ProjectId: string;
+  /** 开始时间，时间戳到秒 */
+  BeginDate: string;
+  /** 结束时间，时间戳到秒 */
+  EndDate: string;
+}
+
+declare interface DescribeDataCheckStatResponse {
+  /** 结果 */
+  Data: DataCheckStat;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataObjectsRequest {
+  /** 数据来源ID */
+  DatasourceId?: string;
+  /** 数据表ID */
+  TableId?: string;
+  /** 质量规则组ID */
+  RuleGroupId?: number;
+  /** 项目ID */
+  ProjectId?: string;
+}
+
+declare interface DescribeDataObjectsResponse {
+  /** 数据对象列表 */
+  Data: SourceObject[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2494,6 +3598,36 @@ declare interface DescribeDependTasksNewRequest {
 declare interface DescribeDependTasksNewResponse {
   /** 画布任务和链接信息 */
   Data: CanvasInfo;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDimensionScoreRequest {
+  /** 统计日期 时间戳 */
+  StatisticsDate: number;
+  /** 项目id */
+  ProjectId: string;
+  /** 数据来源id */
+  DatasourceId?: string;
+}
+
+declare interface DescribeDimensionScoreResponse {
+  /** 维度评分 */
+  Data: DimensionScore | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeExecStrategyRequest {
+  /** 规则组Id */
+  RuleGroupId?: number;
+  /** 项目Id */
+  ProjectId?: string;
+}
+
+declare interface DescribeExecStrategyResponse {
+  /** 规则组执行策略 */
+  Data: RuleGroupExecStrategy | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2752,6 +3886,24 @@ declare interface DescribeInstanceLogsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstancesRequest {
+  /** 项目id */
+  ProjectId?: string;
+  /** 页数 */
+  PageNumber?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeInstancesResponse {
+  /** Json 结果 */
+  Data: string | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeIntegrationNodeRequest {
   /** 节点id */
   Id: string;
@@ -2972,6 +4124,26 @@ declare interface DescribeKafkaTopicInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMonitorsByPageRequest {
+  /** 项目Id */
+  ProjectId?: string;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 排序条件 */
+  OrderFields?: OrderField[];
+  /** 分页序号 */
+  PageNumber?: number;
+}
+
+declare interface DescribeMonitorsByPageResponse {
+  /** 分页查询结果 */
+  Data: RuleGroupMonitorPage | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeOfflineTaskTokenRequest {
 }
 
@@ -3002,6 +4174,24 @@ declare interface DescribeOrganizationalFunctionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeProdTasksRequest {
+  /** 项目ID */
+  ProjectId?: string;
+  /** 页面大小 */
+  PageSize?: number;
+  /** 分页序号 */
+  PageNumber?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeProdTasksResponse {
+  /** 生产调度任务列表 */
+  Data: ProdSchedulerTask[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeProjectRequest {
   /** 项目id。一般使用项目Id来查询，与projectName必须存在一个。 */
   ProjectId?: string;
@@ -3020,6 +4210,40 @@ declare interface DescribeProjectRequest {
 }
 
 declare interface DescribeProjectResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeQualityScoreRequest {
+  /** 统计日期 */
+  StatisticsDate: number;
+  /** 项目id */
+  ProjectId: string;
+  /** 数据来源id */
+  DatasourceId?: string;
+}
+
+declare interface DescribeQualityScoreResponse {
+  /** 质量评分 */
+  Data: QualityScore | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeQualityScoreTrendRequest {
+  /** 统计开始日期 */
+  StatisticsStartDate: number;
+  /** 统计结束日期 */
+  StatisticsEndDate: number;
+  /** 项目id */
+  ProjectId: string;
+  /** 数据来源id */
+  DatasourceId?: string;
+}
+
+declare interface DescribeQualityScoreTrendResponse {
+  /** 质量评分趋势视图 */
+  Data: QualityScoreTrend | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -3132,6 +4356,382 @@ declare interface DescribeResourceManagePathTreesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRuleDataSourcesRequest {
+  /** 项目Id */
+  ProjectId?: string;
+  /** 数据来源Id */
+  DatasourceId?: string;
+}
+
+declare interface DescribeRuleDataSourcesResponse {
+  /** 数据源列表 */
+  Data: DatabaseInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleDimStatRequest {
+  /** Project Id */
+  ProjectId: string;
+  /** 开始时间，时间戳到秒 */
+  BeginDate: string;
+  /** 结束时间，时间戳到秒 */
+  EndDate: string;
+}
+
+declare interface DescribeRuleDimStatResponse {
+  /** 结果 */
+  Data: RuleDimStat;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleExecDetailRequest {
+  /** 项目id */
+  ProjectId?: string;
+  /** 规则执行id */
+  RuleExecId?: number;
+}
+
+declare interface DescribeRuleExecDetailResponse {
+  /** 规则执行结果详情 */
+  Data: RuleExecResultDetail | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleExecExportResultRequest {
+  /** 项目id */
+  ProjectId?: string;
+  /** 规则执行id */
+  RuleExecId?: number;
+}
+
+declare interface DescribeRuleExecExportResultResponse {
+  /** 导出结果 */
+  Data: RuleExecExportResult | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleExecHistoryRequest {
+  /** 规则Id */
+  RuleId?: number;
+  /** 项目Id */
+  ProjectId?: string;
+}
+
+declare interface DescribeRuleExecHistoryResponse {
+  /** 规则执行结果列表 */
+  Data: RuleExecResult[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleExecLogRequest {
+  /** 规则执行Id */
+  RuleExecId: number;
+  /** 项目id */
+  ProjectId: string;
+  /** 规则组执行id */
+  RuleGroupExecId: number;
+}
+
+declare interface DescribeRuleExecLogResponse {
+  /** 规则执行日志 */
+  Data: RuleExecLog | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleExecResultsByPageRequest {
+  /** 执行规则组ID */
+  RuleGroupExecId?: number;
+  /** page number */
+  PageNumber?: number;
+  /** page size */
+  PageSize?: number;
+}
+
+declare interface DescribeRuleExecResultsByPageResponse {
+  /** results */
+  Data: RuleExecResultPage | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleExecResultsRequest {
+  /** 规则组执行Id */
+  RuleGroupExecId?: number;
+  /** 项目Id */
+  ProjectId?: string;
+}
+
+declare interface DescribeRuleExecResultsResponse {
+  /** 规则执行结果列表 */
+  Data: RuleExecResultPage | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleExecStatRequest {
+  /** ProjectId 值 */
+  ProjectId: string;
+  /** 开始时间，时间戳到秒 */
+  BeginDate: string;
+  /** 结束时间，时间戳到秒 */
+  EndDate: string;
+}
+
+declare interface DescribeRuleExecStatResponse {
+  /** 结果 */
+  Data: RuleExecStat;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleGroupExecResultsByPageRequest {
+  /** 分页序号 */
+  PageNumber?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 排序字段 */
+  OrderFields?: OrderField[];
+  /** 项目ID */
+  ProjectId?: string;
+}
+
+declare interface DescribeRuleGroupExecResultsByPageResponse {
+  /** 规则组执行结果列表 */
+  Data: RuleGroupExecResultPage | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleGroupExecResultsByPageWithoutAuthRequest {
+  /** 分页序号 */
+  PageNumber?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 过滤条件，指定表ID过滤字段为 TableIds */
+  Filters?: Filter[];
+  /** 排序字段 */
+  OrderFields?: OrderField[];
+  /** 项目ID */
+  ProjectId?: string;
+}
+
+declare interface DescribeRuleGroupExecResultsByPageWithoutAuthResponse {
+  /** 规则组执行结果列表 */
+  Data: RuleGroupExecResultPage | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleGroupRequest {
+  /** 规则组ID */
+  RuleGroupId?: number;
+  /** 数据来源ID */
+  DatasourceId?: string;
+  /** 数据表Id */
+  TableId?: string;
+  /** 项目ID */
+  ProjectId?: string;
+  /** 数据库ID */
+  DatabaseId?: string;
+}
+
+declare interface DescribeRuleGroupResponse {
+  /** 数据质量规则组详情 */
+  Data: RuleGroup | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleGroupSubscriptionRequest {
+  /** 规则组ID */
+  RuleGroupId?: number;
+  /** 项目ID */
+  ProjectId?: string;
+}
+
+declare interface DescribeRuleGroupSubscriptionResponse {
+  /** 规则组订阅信息 */
+  Data: RuleGroupSubscribe | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleGroupTableRequest {
+  /** 表ID */
+  TableId: string;
+}
+
+declare interface DescribeRuleGroupTableResponse {
+  /** 数据 */
+  Data: RuleGroupTable | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleGroupsByPageRequest {
+  /** 分页序号 */
+  PageNumber?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 过滤条件,每次请求的Filters的上限为10，Filter.Values的上限为5 */
+  Filters?: Filter[];
+  /** 排序方式 */
+  OrderFields?: OrderField[];
+  /** 项目Id */
+  ProjectId?: string;
+}
+
+declare interface DescribeRuleGroupsByPageResponse {
+  /** 规则组列表 */
+  Data: RuleGroupPage | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleHistoryByPageRequest {
+  /** 项目ID */
+  ProjectId?: string;
+  /** 分页序号 */
+  PageNumber?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeRuleHistoryByPageResponse {
+  /** 规则组操作历史列表 */
+  Data: RuleHistoryPage | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleRequest {
+  /** 质量规则ID */
+  RuleId?: number;
+  /** 项目ID */
+  ProjectId?: string;
+}
+
+declare interface DescribeRuleResponse {
+  /** 规则详情 */
+  Data: Rule | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleTablesByPageRequest {
+  /** 项目Id */
+  ProjectId?: string;
+  /** 分页序号 */
+  PageSize?: number;
+  /** 分页大小 */
+  PageNumber?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 排序条件 */
+  OrderFields?: OrderField[];
+}
+
+declare interface DescribeRuleTablesByPageResponse {
+  /** 表列表 */
+  Data: RuleGroupPage | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleTemplateRequest {
+  /** 项目ID */
+  ProjectId?: string;
+  /** 规则模板Id */
+  TemplateId?: number;
+}
+
+declare interface DescribeRuleTemplateResponse {
+  /** 模板详情 */
+  Data: RuleTemplate | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleTemplatesByPageRequest {
+  /** 当前页 */
+  PageNumber: number;
+  /** 每页记录数 */
+  PageSize: number;
+  /** 工作空间ID */
+  ProjectId: string;
+  /** 通用排序字段 */
+  OrderFields?: OrderField[];
+  /** 通用过滤条件 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeRuleTemplatesByPageResponse {
+  /** 结果 */
+  Data: RuleTemplatePage;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleTemplatesRequest {
+  /** 模版类型 1.系统模版 2.自定义模版 */
+  Type?: number;
+  /** 1.常量 2.离线表级 2.离线字段级 */
+  SourceObjectType?: number;
+  /** 项目Id */
+  ProjectId?: string;
+}
+
+declare interface DescribeRuleTemplatesResponse {
+  /** 规则模版列表 */
+  Data: RuleTemplate[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRulesByPageRequest {
+  /** 分页序号 */
+  PageNumber?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 排序字段 */
+  OrderFields?: OrderField[];
+  /** 项目ID */
+  ProjectId?: string;
+}
+
+declare interface DescribeRulesByPageResponse {
+  /** 规则质量列表 */
+  Data: RulePage | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRulesRequest {
+  /** 项目id */
+  ProjectId?: string;
+  /** 规则组id */
+  RuleGroupId?: number;
+}
+
+declare interface DescribeRulesResponse {
+  /** 规则列表 */
+  Data: Rule[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeStandardRuleDetailInfoListRequest {
   /** 空间、项目id */
   ProjectId: string;
@@ -3192,6 +4792,30 @@ declare interface DescribeTableInfoListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTableQualityDetailsRequest {
+  /** 统计日期 */
+  StatisticsDate: number;
+  /** 项目id */
+  ProjectId: string;
+  /** 分页序号 */
+  PageNumber: number;
+  /** 分页大小 */
+  PageSize: number;
+  /** 过滤参数TableName、DatabaseId 、DatabaseName、OwnerUserName */
+  Filters?: Filter[];
+  /** 排序参数 排序方式 DESC 或者 ASC，表得分排序 TableScore */
+  OrderFields?: OrderField[];
+  /** 数据来源id */
+  DatasourceId?: string;
+}
+
+declare interface DescribeTableQualityDetailsResponse {
+  /** 表质量分详情结果 */
+  Data: TableQualityDetailPage | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTableSchemaInfoRequest {
   /** 表名称 */
   Name: string;
@@ -3210,6 +4834,24 @@ declare interface DescribeTableSchemaInfoRequest {
 declare interface DescribeTableSchemaInfoResponse {
   /** 123 */
   SchemaInfoList: SchemaDetail[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTableScoreTrendRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 开始时间 秒级时间戳 */
+  StatisticsStartDate: number;
+  /** 结束时间 秒级时间戳 */
+  StatisticsEndDate: number;
+  /** 表id */
+  TableId: string;
+}
+
+declare interface DescribeTableScoreTrendResponse {
+  /** 表得分趋势 */
+  Data: QualityScoreTrend | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -3442,6 +5084,70 @@ declare interface DescribeTasksByPageRequest {
 declare interface DescribeTasksByPageResponse {
   /** 无1 */
   Data: TaskInfoDataPage | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTemplateDimCountRequest {
+  /** 模版类型 */
+  Type?: number;
+  /** 项目ID */
+  ProjectId?: string;
+}
+
+declare interface DescribeTemplateDimCountResponse {
+  /** 维度统计结果 */
+  Data: DimensionCount[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTemplateHistoryRequest {
+  /** 分页序号 */
+  PageNumber?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 项目Id */
+  ProjectId?: string;
+}
+
+declare interface DescribeTemplateHistoryResponse {
+  /** 分页记录 */
+  Data: RuleTemplateHistoryPage | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTopTableStatRequest {
+  /** Project Id */
+  ProjectId: string;
+  /** 开始时间，时间戳到秒 */
+  BeginDate: string;
+  /** 结束时间，时间戳到秒 */
+  EndDate: string;
+}
+
+declare interface DescribeTopTableStatResponse {
+  /** 结果 */
+  Data: TopTableStat;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTrendStatRequest {
+  /** Project id */
+  ProjectId: string;
+  /** 开始时间，时间戳到秒 */
+  BeginDate: string;
+  /** 结束时间，时间戳到秒 */
+  EndDate: string;
+}
+
+declare interface DescribeTrendStatResponse {
+  /** 结果 */
+  Data: RuleExecDateStat[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -3708,6 +5414,64 @@ declare interface ModifyDataSourceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDimensionWeightRequest {
+  /** 权重信息列表 */
+  WeightInfoList: WeightInfo[];
+  /** 项目id */
+  ProjectId: string;
+  /** 是否重刷历史数据 */
+  Refresh: boolean;
+}
+
+declare interface ModifyDimensionWeightResponse {
+  /** 更新权重是否成功 */
+  Data: boolean;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyExecStrategyRequest {
+  /** 规则组ID */
+  RuleGroupId?: number;
+  /** 监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测 */
+  MonitorType?: number;
+  /** 计算队列 */
+  ExecQueue?: string;
+  /** 执行资源组ID */
+  ExecutorGroupId?: string;
+  /** 执行资源组名称 */
+  ExecutorGroupName?: string;
+  /** 关联的生产调度任务列表 */
+  Tasks?: ProdSchedulerTask[];
+  /** 项目ID */
+  ProjectId?: string;
+  /** 离线周期模式下,生效日期-开始时间 */
+  StartTime?: string;
+  /** 离线周期模式下,生效日期-结束时间 */
+  EndTime?: string;
+  /** 离线周期模式下,调度周期 MINUTE_CYCLE:I,HOUR_CYCLE:H,DAY_CYCLE:D,WEEK_CYCLE:W,MONTH_CYCLE:M */
+  CycleType?: string;
+  /** 离线周期模式下,调度步长 */
+  CycleStep?: number;
+  /** 离线周期模式下,指定时间 */
+  TaskAction?: string;
+  /** 延时执行时间，单位分钟，可选: <0-1439 */
+  DelayTime?: number;
+  /** 数据库Id */
+  DatabaseId?: string;
+  /** 数据源Id */
+  DatasourceId?: string;
+  /** 数据表Id */
+  TableId?: string;
+}
+
+declare interface ModifyExecStrategyResponse {
+  /** 规则组ID */
+  Data: number | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyFolderRequest {
   /** 项目Id */
   ProjectId: string;
@@ -3758,6 +5522,132 @@ declare interface ModifyIntegrationTaskRequest {
 declare interface ModifyIntegrationTaskResponse {
   /** 任务id */
   TaskId: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyMonitorStatusRequest {
+  /** 项目Id */
+  ProjectId?: string;
+  /** 规则组ID */
+  RuleGroupId?: number;
+  /** 监控开关状态 */
+  MonitorStatus?: boolean;
+}
+
+declare interface ModifyMonitorStatusResponse {
+  /** 监控状态修改成功 */
+  Data: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyRuleGroupSubscriptionRequest {
+  /** 规则组ID */
+  RuleGroupId?: number;
+  /** 订阅人信息 */
+  Receivers?: SubscribeReceiver[];
+  /** 订阅类型 */
+  SubscribeType?: number[];
+  /** 项目ID */
+  ProjectId?: string;
+  /** 数据库Id */
+  DatabaseId?: string;
+  /** 数据源Id */
+  DatasourceId?: string;
+  /** 数据表Id */
+  TableId?: string;
+}
+
+declare interface ModifyRuleGroupSubscriptionResponse {
+  /** 规则组ID */
+  Data: number | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyRuleRequest {
+  /** 项目Id */
+  ProjectId?: string;
+  /** 规则ID */
+  RuleId?: number;
+  /** 规则组ID */
+  RuleGroupId?: number;
+  /** 规则名称 */
+  Name?: string;
+  /** 数据表ID */
+  TableId?: string;
+  /** 规则模板ID */
+  RuleTemplateId?: number;
+  /** 规则类型 1.系统模版, 2.自定义模版, 3.自定义SQL */
+  Type?: number;
+  /** 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性 */
+  QualityDim?: number;
+  /** 源字段详细类型，int、string */
+  SourceObjectDataTypeName?: string;
+  /** 源字段名称 */
+  SourceObjectValue?: string;
+  /** 检测范围 1.全表 2.条件扫描 */
+  ConditionType?: number;
+  /** 条件扫描WHERE条件表达式 */
+  ConditionExpression?: string;
+  /** 自定义SQL */
+  CustomSql?: string;
+  /** 报警触发条件 */
+  CompareRule?: CompareRule;
+  /** 报警触发级别 1.低, 2.中, 3.高 */
+  AlarmLevel?: number;
+  /** 规则描述 */
+  Description?: string;
+  /** 目标库Id */
+  TargetDatabaseId?: string;
+  /** 目标表Id */
+  TargetTableId?: string;
+  /** 目标过滤条件表达式 */
+  TargetConditionExpr?: string;
+  /** 源字段与目标字段关联条件on表达式 */
+  RelConditionExpr?: string;
+  /** 自定义模版sql表达式字段替换参数 */
+  FieldConfig?: RuleFieldConfig;
+  /** 目标字段名称 CITY */
+  TargetObjectValue?: string;
+}
+
+declare interface ModifyRuleResponse {
+  /** 是否更新成功 */
+  Data: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyRuleTemplateRequest {
+  /** 模版ID */
+  TemplateId?: number;
+  /** 模版类型 1.系统模版 2.自定义模版 */
+  Type?: number;
+  /** 模版名称 */
+  Name?: string;
+  /** 质量检测维度 1.准确性 2.唯一性 3.完整性 4.一致性 5.及时性 6.有效性 */
+  QualityDim?: number;
+  /** 源端数据对象类型 1.常量 2.离线表级 2.离线字段级 */
+  SourceObjectType?: number;
+  /** 描述 */
+  Description?: string;
+  /** 源端对应的引擎类型 */
+  SourceEngineTypes?: number[];
+  /** 是否关联其它库表 */
+  MultiSourceFlag?: boolean;
+  /** SQL 表达式 */
+  SqlExpression?: string;
+  /** 项目Id */
+  ProjectId?: string;
+  /** 是否添加where参数 */
+  WhereFlag?: boolean;
+}
+
+declare interface ModifyRuleTemplateResponse {
+  /** 修改成功 */
+  Data: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -4353,14 +6243,24 @@ declare interface Wedata {
   BatchUpdateIntegrationTasks(data: BatchUpdateIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<BatchUpdateIntegrationTasksResponse>;
   /** {@link CheckAlarmRegularNameExist 判断告警规则重名}({@link CheckAlarmRegularNameExistRequest 请求参数}): {@link CheckAlarmRegularNameExistResponse 返回参数} */
   CheckAlarmRegularNameExist(data: CheckAlarmRegularNameExistRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAlarmRegularNameExistResponse>;
+  /** {@link CheckDuplicateRuleName 检查规则名称是否重复}({@link CheckDuplicateRuleNameRequest 请求参数}): {@link CheckDuplicateRuleNameResponse 返回参数} */
+  CheckDuplicateRuleName(data?: CheckDuplicateRuleNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDuplicateRuleNameResponse>;
+  /** {@link CheckDuplicateTemplateName 检查规则模板名称是否重复}({@link CheckDuplicateTemplateNameRequest 请求参数}): {@link CheckDuplicateTemplateNameResponse 返回参数} */
+  CheckDuplicateTemplateName(data?: CheckDuplicateTemplateNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDuplicateTemplateNameResponse>;
   /** {@link CheckIntegrationNodeNameExists 判断集成节点名称是否存在}({@link CheckIntegrationNodeNameExistsRequest 请求参数}): {@link CheckIntegrationNodeNameExistsResponse 返回参数} */
   CheckIntegrationNodeNameExists(data: CheckIntegrationNodeNameExistsRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIntegrationNodeNameExistsResponse>;
   /** {@link CheckIntegrationTaskNameExists 判断集成任务名称是否存在}({@link CheckIntegrationTaskNameExistsRequest 请求参数}): {@link CheckIntegrationTaskNameExistsResponse 返回参数} */
   CheckIntegrationTaskNameExists(data: CheckIntegrationTaskNameExistsRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIntegrationTaskNameExistsResponse>;
   /** {@link CheckTaskNameExist 离线任务重名校验}({@link CheckTaskNameExistRequest 请求参数}): {@link CheckTaskNameExistResponse 返回参数} */
   CheckTaskNameExist(data: CheckTaskNameExistRequest, config?: AxiosRequestConfig): AxiosPromise<CheckTaskNameExistResponse>;
+  /** {@link CommitExportTask 提交数据导出任务}({@link CommitExportTaskRequest 请求参数}): {@link CommitExportTaskResponse 返回参数} */
+  CommitExportTask(data?: CommitExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CommitExportTaskResponse>;
   /** {@link CommitIntegrationTask 提交集成任务}({@link CommitIntegrationTaskRequest 请求参数}): {@link CommitIntegrationTaskResponse 返回参数} */
   CommitIntegrationTask(data: CommitIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CommitIntegrationTaskResponse>;
+  /** {@link CommitRuleGroupExecResult 规则检测结果上报}({@link CommitRuleGroupExecResultRequest 请求参数}): {@link CommitRuleGroupExecResultResponse 返回参数} */
+  CommitRuleGroupExecResult(data: CommitRuleGroupExecResultRequest, config?: AxiosRequestConfig): AxiosPromise<CommitRuleGroupExecResultResponse>;
+  /** {@link CommitRuleGroupTask 提交规则组运行任务接口}({@link CommitRuleGroupTaskRequest 请求参数}): {@link CommitRuleGroupTaskResponse 返回参数} */
+  CommitRuleGroupTask(data?: CommitRuleGroupTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CommitRuleGroupTaskResponse>;
   /** {@link CreateCustomFunction 创建用户自定义函数}({@link CreateCustomFunctionRequest 请求参数}): {@link CreateCustomFunctionResponse 返回参数} */
   CreateCustomFunction(data: CreateCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomFunctionResponse>;
   /** {@link CreateDataSource 数据源管理-创建数据源【Beta版本】}({@link CreateDataSourceRequest 请求参数}): {@link CreateDataSourceResponse 返回参数} */
@@ -4381,6 +6281,10 @@ declare interface Wedata {
   CreateOfflineTask(data: CreateOfflineTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOfflineTaskResponse>;
   /** {@link CreateOrUpdateResource 资源管理将cos资源绑定到wedata}({@link CreateOrUpdateResourceRequest 请求参数}): {@link CreateOrUpdateResourceResponse 返回参数} */
   CreateOrUpdateResource(data?: CreateOrUpdateResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrUpdateResourceResponse>;
+  /** {@link CreateRule 创建质量规则接口}({@link CreateRuleRequest 请求参数}): {@link CreateRuleResponse 返回参数} */
+  CreateRule(data?: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
+  /** {@link CreateRuleTemplate 创建规则模版}({@link CreateRuleTemplateRequest 请求参数}): {@link CreateRuleTemplateResponse 返回参数} */
+  CreateRuleTemplate(data?: CreateRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleTemplateResponse>;
   /** {@link CreateTask 创建任务【Beta版本】}({@link CreateTaskRequest 请求参数}): {@link CreateTaskResponse 返回参数} */
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
   /** {@link CreateTaskAlarmRegular 创建任务告警规则}({@link CreateTaskAlarmRegularRequest 请求参数}): {@link CreateTaskAlarmRegularResponse 返回参数} */
@@ -4403,6 +6307,10 @@ declare interface Wedata {
   DeleteOfflineTask(data: DeleteOfflineTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOfflineTaskResponse>;
   /** {@link DeleteResource 删除资源}({@link DeleteResourceRequest 请求参数}): {@link DeleteResourceResponse 返回参数} */
   DeleteResource(data?: DeleteResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceResponse>;
+  /** {@link DeleteRule 删除质量规则接口}({@link DeleteRuleRequest 请求参数}): {@link DeleteRuleResponse 返回参数} */
+  DeleteRule(data?: DeleteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleResponse>;
+  /** {@link DeleteRuleTemplate 删除规则模版}({@link DeleteRuleTemplateRequest 请求参数}): {@link DeleteRuleTemplateResponse 返回参数} */
+  DeleteRuleTemplate(data?: DeleteRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleTemplateResponse>;
   /** {@link DeleteTaskAlarmRegular 删除任务告警规则}({@link DeleteTaskAlarmRegularRequest 请求参数}): {@link DeleteTaskAlarmRegularResponse 返回参数} */
   DeleteTaskAlarmRegular(data: DeleteTaskAlarmRegularRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskAlarmRegularResponse>;
   /** {@link DeleteWorkflowNew 删除工作流【Beta版本】}({@link DeleteWorkflowNewRequest 请求参数}): {@link DeleteWorkflowNewResponse 返回参数} */
@@ -4413,6 +6321,12 @@ declare interface Wedata {
   DescribeAlarmReceiver(data: DescribeAlarmReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmReceiverResponse>;
   /** {@link DescribeClusterNamespaceList 获取集群命名空间列表}({@link DescribeClusterNamespaceListRequest 请求参数}): {@link DescribeClusterNamespaceListResponse 返回参数} */
   DescribeClusterNamespaceList(data: DescribeClusterNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNamespaceListResponse>;
+  /** {@link DescribeDataBases 查询数据来源列表}({@link DescribeDataBasesRequest 请求参数}): {@link DescribeDataBasesResponse 返回参数} */
+  DescribeDataBases(data?: DescribeDataBasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataBasesResponse>;
+  /** {@link DescribeDataCheckStat 数据质量数据监测情况接口}({@link DescribeDataCheckStatRequest 请求参数}): {@link DescribeDataCheckStatResponse 返回参数} */
+  DescribeDataCheckStat(data: DescribeDataCheckStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataCheckStatResponse>;
+  /** {@link DescribeDataObjects 查询规则组数据对象列表}({@link DescribeDataObjectsRequest 请求参数}): {@link DescribeDataObjectsResponse 返回参数} */
+  DescribeDataObjects(data?: DescribeDataObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataObjectsResponse>;
   /** {@link DescribeDataSourceInfoList 获取数据源信息}({@link DescribeDataSourceInfoListRequest 请求参数}): {@link DescribeDataSourceInfoListResponse 返回参数} */
   DescribeDataSourceInfoList(data: DescribeDataSourceInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSourceInfoListResponse>;
   /** {@link DescribeDataSourceList 数据源管理-查询数据源分页列表【Beta版本】}({@link DescribeDataSourceListRequest 请求参数}): {@link DescribeDataSourceListResponse 返回参数} */
@@ -4427,6 +6341,10 @@ declare interface Wedata {
   DescribeDatasource(data: DescribeDatasourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasourceResponse>;
   /** {@link DescribeDependTasksNew 任务运维-根据层级查找上-下游任务节点【Beta版本】}({@link DescribeDependTasksNewRequest 请求参数}): {@link DescribeDependTasksNewResponse 返回参数} */
   DescribeDependTasksNew(data: DescribeDependTasksNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDependTasksNewResponse>;
+  /** {@link DescribeDimensionScore 查询维度评分}({@link DescribeDimensionScoreRequest 请求参数}): {@link DescribeDimensionScoreResponse 返回参数} */
+  DescribeDimensionScore(data: DescribeDimensionScoreRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDimensionScoreResponse>;
+  /** {@link DescribeExecStrategy 查询规则组执行策略}({@link DescribeExecStrategyRequest 请求参数}): {@link DescribeExecStrategyResponse 返回参数} */
+  DescribeExecStrategy(data?: DescribeExecStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExecStrategyResponse>;
   /** {@link DescribeFolderList 拉取文件夹目录【Beta版本】}({@link DescribeFolderListRequest 请求参数}): {@link DescribeFolderListResponse 返回参数} */
   DescribeFolderList(data: DescribeFolderListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFolderListResponse>;
   /** {@link DescribeFolderWorkflowList 拉取文件夹下的工作流【Beta版本】}({@link DescribeFolderWorkflowListRequest 请求参数}): {@link DescribeFolderWorkflowListResponse 返回参数} */
@@ -4453,6 +6371,8 @@ declare interface Wedata {
   DescribeInstanceLogList(data: DescribeInstanceLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLogListResponse>;
   /** {@link DescribeInstanceLogs 获取实例日志列表【Beta版本】}({@link DescribeInstanceLogsRequest 请求参数}): {@link DescribeInstanceLogsResponse 返回参数} */
   DescribeInstanceLogs(data: DescribeInstanceLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLogsResponse>;
+  /** {@link DescribeInstances 数据质量-查询实例列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
+  DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** {@link DescribeIntegrationNode 查询集成节点}({@link DescribeIntegrationNodeRequest 请求参数}): {@link DescribeIntegrationNodeResponse 返回参数} */
   DescribeIntegrationNode(data: DescribeIntegrationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationNodeResponse>;
   /** {@link DescribeIntegrationStatistics 数据集成大屏概览}({@link DescribeIntegrationStatisticsRequest 请求参数}): {@link DescribeIntegrationStatisticsResponse 返回参数} */
@@ -4475,12 +6395,20 @@ declare interface Wedata {
   DescribeIntegrationVersionNodesInfo(data: DescribeIntegrationVersionNodesInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationVersionNodesInfoResponse>;
   /** {@link DescribeKafkaTopicInfo 获取kafka的topic信息}({@link DescribeKafkaTopicInfoRequest 请求参数}): {@link DescribeKafkaTopicInfoResponse 返回参数} */
   DescribeKafkaTopicInfo(data: DescribeKafkaTopicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaTopicInfoResponse>;
+  /** {@link DescribeMonitorsByPage 分页查询质量监控组}({@link DescribeMonitorsByPageRequest 请求参数}): {@link DescribeMonitorsByPageResponse 返回参数} */
+  DescribeMonitorsByPage(data?: DescribeMonitorsByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorsByPageResponse>;
   /** {@link DescribeOfflineTaskToken 获取离线任务长连接Token}({@link DescribeOfflineTaskTokenRequest 请求参数}): {@link DescribeOfflineTaskTokenResponse 返回参数} */
   DescribeOfflineTaskToken(data?: DescribeOfflineTaskTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineTaskTokenResponse>;
   /** {@link DescribeOrganizationalFunctions 查询全量函数（层级化）接口}({@link DescribeOrganizationalFunctionsRequest 请求参数}): {@link DescribeOrganizationalFunctionsResponse 返回参数} */
   DescribeOrganizationalFunctions(data: DescribeOrganizationalFunctionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationalFunctionsResponse>;
+  /** {@link DescribeProdTasks 获取生产调度任务列表}({@link DescribeProdTasksRequest 请求参数}): {@link DescribeProdTasksResponse 返回参数} */
+  DescribeProdTasks(data?: DescribeProdTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProdTasksResponse>;
   /** {@link DescribeProject 获取项目信息}({@link DescribeProjectRequest 请求参数}): {@link DescribeProjectResponse 返回参数} */
   DescribeProject(data?: DescribeProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectResponse>;
+  /** {@link DescribeQualityScore 查询质量评分}({@link DescribeQualityScoreRequest 请求参数}): {@link DescribeQualityScoreResponse 返回参数} */
+  DescribeQualityScore(data: DescribeQualityScoreRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQualityScoreResponse>;
+  /** {@link DescribeQualityScoreTrend 查询质量分趋势}({@link DescribeQualityScoreTrendRequest 请求参数}): {@link DescribeQualityScoreTrendResponse 返回参数} */
+  DescribeQualityScoreTrend(data: DescribeQualityScoreTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQualityScoreTrendResponse>;
   /** {@link DescribeRealTimeTaskInstanceNodeInfo 查询实时任务实例节点信息}({@link DescribeRealTimeTaskInstanceNodeInfoRequest 请求参数}): {@link DescribeRealTimeTaskInstanceNodeInfoResponse 返回参数} */
   DescribeRealTimeTaskInstanceNodeInfo(data: DescribeRealTimeTaskInstanceNodeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealTimeTaskInstanceNodeInfoResponse>;
   /** {@link DescribeRealTimeTaskMetricOverview 实时任务运行指标概览}({@link DescribeRealTimeTaskMetricOverviewRequest 请求参数}): {@link DescribeRealTimeTaskMetricOverviewResponse 返回参数} */
@@ -4491,14 +6419,64 @@ declare interface Wedata {
   DescribeRelatedInstances(data: DescribeRelatedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelatedInstancesResponse>;
   /** {@link DescribeResourceManagePathTrees 获取资源管理目录树}({@link DescribeResourceManagePathTreesRequest 请求参数}): {@link DescribeResourceManagePathTreesResponse 返回参数} */
   DescribeResourceManagePathTrees(data?: DescribeResourceManagePathTreesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceManagePathTreesResponse>;
+  /** {@link DescribeRule 查询规则详情}({@link DescribeRuleRequest 请求参数}): {@link DescribeRuleResponse 返回参数} */
+  DescribeRule(data?: DescribeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleResponse>;
+  /** {@link DescribeRuleDataSources 查询质量规则数据源}({@link DescribeRuleDataSourcesRequest 请求参数}): {@link DescribeRuleDataSourcesResponse 返回参数} */
+  DescribeRuleDataSources(data?: DescribeRuleDataSourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleDataSourcesResponse>;
+  /** {@link DescribeRuleDimStat 数据质量触发维度分布统计接口}({@link DescribeRuleDimStatRequest 请求参数}): {@link DescribeRuleDimStatResponse 返回参数} */
+  DescribeRuleDimStat(data: DescribeRuleDimStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleDimStatResponse>;
+  /** {@link DescribeRuleExecDetail 查询规则执行结果详情}({@link DescribeRuleExecDetailRequest 请求参数}): {@link DescribeRuleExecDetailResponse 返回参数} */
+  DescribeRuleExecDetail(data?: DescribeRuleExecDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleExecDetailResponse>;
+  /** {@link DescribeRuleExecExportResult 查询规则执行导出结果}({@link DescribeRuleExecExportResultRequest 请求参数}): {@link DescribeRuleExecExportResultResponse 返回参数} */
+  DescribeRuleExecExportResult(data?: DescribeRuleExecExportResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleExecExportResultResponse>;
+  /** {@link DescribeRuleExecHistory 查询规则执行历史， 最近30条}({@link DescribeRuleExecHistoryRequest 请求参数}): {@link DescribeRuleExecHistoryResponse 返回参数} */
+  DescribeRuleExecHistory(data?: DescribeRuleExecHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleExecHistoryResponse>;
+  /** {@link DescribeRuleExecLog 规则执行日志查询}({@link DescribeRuleExecLogRequest 请求参数}): {@link DescribeRuleExecLogResponse 返回参数} */
+  DescribeRuleExecLog(data: DescribeRuleExecLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleExecLogResponse>;
+  /** {@link DescribeRuleExecResults 规则执行结果列表查询}({@link DescribeRuleExecResultsRequest 请求参数}): {@link DescribeRuleExecResultsResponse 返回参数} */
+  DescribeRuleExecResults(data?: DescribeRuleExecResultsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleExecResultsResponse>;
+  /** {@link DescribeRuleExecResultsByPage 分页查询规则执行结果列表}({@link DescribeRuleExecResultsByPageRequest 请求参数}): {@link DescribeRuleExecResultsByPageResponse 返回参数} */
+  DescribeRuleExecResultsByPage(data?: DescribeRuleExecResultsByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleExecResultsByPageResponse>;
+  /** {@link DescribeRuleExecStat 数据质量规则运行情况接口}({@link DescribeRuleExecStatRequest 请求参数}): {@link DescribeRuleExecStatResponse 返回参数} */
+  DescribeRuleExecStat(data: DescribeRuleExecStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleExecStatResponse>;
+  /** {@link DescribeRuleGroup 查询规则组详情接口}({@link DescribeRuleGroupRequest 请求参数}): {@link DescribeRuleGroupResponse 返回参数} */
+  DescribeRuleGroup(data?: DescribeRuleGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleGroupResponse>;
+  /** {@link DescribeRuleGroupExecResultsByPage 规则组执行结果分页查询接口}({@link DescribeRuleGroupExecResultsByPageRequest 请求参数}): {@link DescribeRuleGroupExecResultsByPageResponse 返回参数} */
+  DescribeRuleGroupExecResultsByPage(data?: DescribeRuleGroupExecResultsByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleGroupExecResultsByPageResponse>;
+  /** {@link DescribeRuleGroupExecResultsByPageWithoutAuth 规则组执行结果分页查询接口不带鉴权}({@link DescribeRuleGroupExecResultsByPageWithoutAuthRequest 请求参数}): {@link DescribeRuleGroupExecResultsByPageWithoutAuthResponse 返回参数} */
+  DescribeRuleGroupExecResultsByPageWithoutAuth(data?: DescribeRuleGroupExecResultsByPageWithoutAuthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleGroupExecResultsByPageWithoutAuthResponse>;
+  /** {@link DescribeRuleGroupSubscription 查询规则组订阅信息}({@link DescribeRuleGroupSubscriptionRequest 请求参数}): {@link DescribeRuleGroupSubscriptionResponse 返回参数} */
+  DescribeRuleGroupSubscription(data?: DescribeRuleGroupSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleGroupSubscriptionResponse>;
+  /** {@link DescribeRuleGroupTable 查询表绑定执行规则组信息}({@link DescribeRuleGroupTableRequest 请求参数}): {@link DescribeRuleGroupTableResponse 返回参数} */
+  DescribeRuleGroupTable(data: DescribeRuleGroupTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleGroupTableResponse>;
+  /** {@link DescribeRuleGroupsByPage 分页查询规则组接口}({@link DescribeRuleGroupsByPageRequest 请求参数}): {@link DescribeRuleGroupsByPageResponse 返回参数} */
+  DescribeRuleGroupsByPage(data?: DescribeRuleGroupsByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleGroupsByPageResponse>;
+  /** {@link DescribeRuleHistoryByPage 分页查询规则操作记录接口}({@link DescribeRuleHistoryByPageRequest 请求参数}): {@link DescribeRuleHistoryByPageResponse 返回参数} */
+  DescribeRuleHistoryByPage(data?: DescribeRuleHistoryByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleHistoryByPageResponse>;
+  /** {@link DescribeRuleTablesByPage 获取表列表}({@link DescribeRuleTablesByPageRequest 请求参数}): {@link DescribeRuleTablesByPageResponse 返回参数} */
+  DescribeRuleTablesByPage(data?: DescribeRuleTablesByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleTablesByPageResponse>;
+  /** {@link DescribeRuleTemplate 查询模板详情}({@link DescribeRuleTemplateRequest 请求参数}): {@link DescribeRuleTemplateResponse 返回参数} */
+  DescribeRuleTemplate(data?: DescribeRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleTemplateResponse>;
+  /** {@link DescribeRuleTemplates 查询规则模版列表}({@link DescribeRuleTemplatesRequest 请求参数}): {@link DescribeRuleTemplatesResponse 返回参数} */
+  DescribeRuleTemplates(data?: DescribeRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleTemplatesResponse>;
+  /** {@link DescribeRuleTemplatesByPage 规则模版查询接口}({@link DescribeRuleTemplatesByPageRequest 请求参数}): {@link DescribeRuleTemplatesByPageResponse 返回参数} */
+  DescribeRuleTemplatesByPage(data: DescribeRuleTemplatesByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleTemplatesByPageResponse>;
+  /** {@link DescribeRules 查询质量规则列表}({@link DescribeRulesRequest 请求参数}): {@link DescribeRulesResponse 返回参数} */
+  DescribeRules(data?: DescribeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesResponse>;
+  /** {@link DescribeRulesByPage 分页查询质量规则}({@link DescribeRulesByPageRequest 请求参数}): {@link DescribeRulesByPageResponse 返回参数} */
+  DescribeRulesByPage(data?: DescribeRulesByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesByPageResponse>;
   /** {@link DescribeStandardRuleDetailInfoList 获取数据标准规则详情}({@link DescribeStandardRuleDetailInfoListRequest 请求参数}): {@link DescribeStandardRuleDetailInfoListResponse 返回参数} */
   DescribeStandardRuleDetailInfoList(data: DescribeStandardRuleDetailInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStandardRuleDetailInfoListResponse>;
   /** {@link DescribeStreamTaskLogList 查询实时任务日志列表}({@link DescribeStreamTaskLogListRequest 请求参数}): {@link DescribeStreamTaskLogListResponse 返回参数} */
   DescribeStreamTaskLogList(data: DescribeStreamTaskLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamTaskLogListResponse>;
   /** {@link DescribeTableInfoList 获取数据表信息}({@link DescribeTableInfoListRequest 请求参数}): {@link DescribeTableInfoListResponse 返回参数} */
   DescribeTableInfoList(data: DescribeTableInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableInfoListResponse>;
+  /** {@link DescribeTableQualityDetails 查询表质量详情}({@link DescribeTableQualityDetailsRequest 请求参数}): {@link DescribeTableQualityDetailsResponse 返回参数} */
+  DescribeTableQualityDetails(data: DescribeTableQualityDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableQualityDetailsResponse>;
   /** {@link DescribeTableSchemaInfo 获取表schema信息}({@link DescribeTableSchemaInfoRequest 请求参数}): {@link DescribeTableSchemaInfoResponse 返回参数} */
   DescribeTableSchemaInfo(data: DescribeTableSchemaInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableSchemaInfoResponse>;
+  /** {@link DescribeTableScoreTrend 查询表得分趋势}({@link DescribeTableScoreTrendRequest 请求参数}): {@link DescribeTableScoreTrendResponse 返回参数} */
+  DescribeTableScoreTrend(data: DescribeTableScoreTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableScoreTrendResponse>;
   /** {@link DescribeTaskAlarmRegulations 查询任务告警规则列表}({@link DescribeTaskAlarmRegulationsRequest 请求参数}): {@link DescribeTaskAlarmRegulationsResponse 返回参数} */
   DescribeTaskAlarmRegulations(data: DescribeTaskAlarmRegulationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskAlarmRegulationsResponse>;
   /** {@link DescribeTaskDetail 查询任务具体详情【Beta版本】}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
@@ -4519,6 +6497,14 @@ declare interface Wedata {
   DescribeTaskScript(data: DescribeTaskScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskScriptResponse>;
   /** {@link DescribeTasksByPage 根据工作流分页查询任务【Beta版本】}({@link DescribeTasksByPageRequest 请求参数}): {@link DescribeTasksByPageResponse 返回参数} */
   DescribeTasksByPage(data: DescribeTasksByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksByPageResponse>;
+  /** {@link DescribeTemplateDimCount 查询规则模版维度分布情况}({@link DescribeTemplateDimCountRequest 请求参数}): {@link DescribeTemplateDimCountResponse 返回参数} */
+  DescribeTemplateDimCount(data?: DescribeTemplateDimCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateDimCountResponse>;
+  /** {@link DescribeTemplateHistory 查询规则模版操作记录}({@link DescribeTemplateHistoryRequest 请求参数}): {@link DescribeTemplateHistoryResponse 返回参数} */
+  DescribeTemplateHistory(data?: DescribeTemplateHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateHistoryResponse>;
+  /** {@link DescribeTopTableStat 数据质量表排行接口}({@link DescribeTopTableStatRequest 请求参数}): {@link DescribeTopTableStatResponse 返回参数} */
+  DescribeTopTableStat(data: DescribeTopTableStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopTableStatResponse>;
+  /** {@link DescribeTrendStat 数据质量概览页面趋势接口}({@link DescribeTrendStatRequest 请求参数}): {@link DescribeTrendStatResponse 返回参数} */
+  DescribeTrendStat(data: DescribeTrendStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrendStatResponse>;
   /** {@link DryRunDIOfflineTask 调试运行集成任务}({@link DryRunDIOfflineTaskRequest 请求参数}): {@link DryRunDIOfflineTaskResponse 返回参数} */
   DryRunDIOfflineTask(data: DryRunDIOfflineTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DryRunDIOfflineTaskResponse>;
   /** {@link ForceSucInstances 实例批量置成功【Beta版本】}({@link ForceSucInstancesRequest 请求参数}): {@link ForceSucInstancesResponse 返回参数} */
@@ -4545,12 +6531,24 @@ declare interface Wedata {
   MakeUpWorkflowNew(data: MakeUpWorkflowNewRequest, config?: AxiosRequestConfig): AxiosPromise<MakeUpWorkflowNewResponse>;
   /** {@link ModifyDataSource 数据源管理-修改数据源【Beta版本】}({@link ModifyDataSourceRequest 请求参数}): {@link ModifyDataSourceResponse 返回参数} */
   ModifyDataSource(data: ModifyDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataSourceResponse>;
+  /** {@link ModifyDimensionWeight 修改维度权重}({@link ModifyDimensionWeightRequest 请求参数}): {@link ModifyDimensionWeightResponse 返回参数} */
+  ModifyDimensionWeight(data: ModifyDimensionWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDimensionWeightResponse>;
+  /** {@link ModifyExecStrategy 更新规则组执行策略}({@link ModifyExecStrategyRequest 请求参数}): {@link ModifyExecStrategyResponse 返回参数} */
+  ModifyExecStrategy(data?: ModifyExecStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExecStrategyResponse>;
   /** {@link ModifyFolder 文件夹更新【Beta版本】}({@link ModifyFolderRequest 请求参数}): {@link ModifyFolderResponse 返回参数} */
   ModifyFolder(data: ModifyFolderRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFolderResponse>;
   /** {@link ModifyIntegrationNode 更新集成节点}({@link ModifyIntegrationNodeRequest 请求参数}): {@link ModifyIntegrationNodeResponse 返回参数} */
   ModifyIntegrationNode(data: ModifyIntegrationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntegrationNodeResponse>;
   /** {@link ModifyIntegrationTask 更新集成任务}({@link ModifyIntegrationTaskRequest 请求参数}): {@link ModifyIntegrationTaskResponse 返回参数} */
   ModifyIntegrationTask(data: ModifyIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntegrationTaskResponse>;
+  /** {@link ModifyMonitorStatus 更新监控状态}({@link ModifyMonitorStatusRequest 请求参数}): {@link ModifyMonitorStatusResponse 返回参数} */
+  ModifyMonitorStatus(data?: ModifyMonitorStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMonitorStatusResponse>;
+  /** {@link ModifyRule 更新质量规则接口}({@link ModifyRuleRequest 请求参数}): {@link ModifyRuleResponse 返回参数} */
+  ModifyRule(data?: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
+  /** {@link ModifyRuleGroupSubscription 更新规则组订阅信息}({@link ModifyRuleGroupSubscriptionRequest 请求参数}): {@link ModifyRuleGroupSubscriptionResponse 返回参数} */
+  ModifyRuleGroupSubscription(data?: ModifyRuleGroupSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleGroupSubscriptionResponse>;
+  /** {@link ModifyRuleTemplate 编辑规则模版}({@link ModifyRuleTemplateRequest 请求参数}): {@link ModifyRuleTemplateResponse 返回参数} */
+  ModifyRuleTemplate(data?: ModifyRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleTemplateResponse>;
   /** {@link ModifyTaskAlarmRegular 修改任务告警规则}({@link ModifyTaskAlarmRegularRequest 请求参数}): {@link ModifyTaskAlarmRegularResponse 返回参数} */
   ModifyTaskAlarmRegular(data: ModifyTaskAlarmRegularRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskAlarmRegularResponse>;
   /** {@link ModifyTaskInfo 更新任务【Beta版本】}({@link ModifyTaskInfoRequest 请求参数}): {@link ModifyTaskInfoResponse 返回参数} */

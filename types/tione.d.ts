@@ -2121,7 +2121,7 @@ declare interface DescribeModelServiceCallInfoResponse {
 }
 
 declare interface DescribeModelServiceGroupRequest {
-  /** 无 */
+  /** 服务组ID */
   ServiceGroupId: string;
 }
 

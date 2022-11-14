@@ -639,10 +639,12 @@ declare interface CreateDocumentRequest {
   FormFields?: FormField[];
   /** 是否需要生成预览文件 默认不生成；预览链接有效期300秒； */
   NeedPreview?: boolean;
-  /** 客户端Token，保持接口幂等性,最大长度64个字符 */
-  ClientToken?: string;
+  /** 预览链接类型 默认:0-文件流, 1- H5链接 注意:此参数在NeedPreview 为true 时有效, */
+  PreviewType?: number;
   /** 应用相关信息 */
   Agent?: Agent;
+  /** 客户端Token，保持接口幂等性,最大长度64个字符 */
+  ClientToken?: string;
 }
 
 declare interface CreateDocumentResponse {
@@ -685,8 +687,8 @@ declare interface CreateFlowByFilesRequest {
   CcInfos?: CcInfo[];
   /** 是否需要预览，true：预览模式，false：非预览（默认）；预览链接有效期300秒；注：如果使用“预览模式”，出参会返回合同预览链接 PreviewUrl，不会正式发起合同，且出参不会返回签署流程编号 FlowId；如果使用“非预览”，则会正常返回签署流程编号 FlowId，不会生成合同预览链接 PreviewUrl。 */
   NeedPreview?: boolean;
-  /** 签署流程描述,最大长度1000个字符 */
-  FlowDescription?: string;
+  /** 预览链接类型 默认:0-文件流, 1- H5链接 注意:此参数在NeedPreview 为true 时有效, */
+  PreviewType?: number;
   /** 签署流程的签署截止时间。值为unix时间戳,精确到秒,不传默认为当前时间一年后 */
   Deadline?: number;
   /** 发送类型：true：无序签false：有序签注：默认为false（有序签） */
@@ -701,6 +703,8 @@ declare interface CreateFlowByFilesRequest {
   Agent?: Agent;
   /** 签署人校验方式VerifyCheck: 人脸识别（默认）MobileCheck：手机号验证参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。 */
   ApproverVerifyType?: string;
+  /** 签署流程描述,最大长度1000个字符 */
+  FlowDescription?: string;
 }
 
 declare interface CreateFlowByFilesResponse {

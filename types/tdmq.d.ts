@@ -670,6 +670,10 @@ declare interface RocketMQClusterInfo {
   VpcEndPoint: string;
   /** 是否支持命名空间接入点 */
   SupportNamespaceEndpoint: boolean | null;
+  /** VPC信息 */
+  Vpcs: VpcConfig[] | null;
+  /** 是否为专享实例 */
+  IsVip: boolean | null;
 }
 
 /** RocketMQ近期使用量 */
@@ -930,6 +934,14 @@ declare interface VpcBindRecord {
   Port: number;
   /** 说明，128个字符以内 */
   Remark: string | null;
+}
+
+/** VPC配置信息 */
+declare interface VpcConfig {
+  /** vpc的id */
+  VpcId: string;
+  /** 子网id */
+  SubnetId: string;
 }
 
 declare interface AcknowledgeMessageRequest {
@@ -2133,7 +2145,7 @@ declare interface DescribePublishersResponse {
 }
 
 declare interface DescribeRabbitMQNodeListRequest {
-  /** 不适用，默认参数 */
+  /** rabbitmq集群ID */
   InstanceId: string;
   /** 偏移量 */
   Offset?: number;

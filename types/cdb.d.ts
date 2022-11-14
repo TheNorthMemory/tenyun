@@ -4245,7 +4245,7 @@ declare interface Cdb {
   DescribeUploadedFiles(data: DescribeUploadedFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUploadedFilesResponse>;
   /** {@link DisassociateSecurityGroups 安全组批量解绑云资源}({@link DisassociateSecurityGroupsRequest 请求参数}): {@link DisassociateSecurityGroupsResponse 返回参数} */
   DisassociateSecurityGroups(data: DisassociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupsResponse>;
-  /** {@link InitDBInstances 初始化新实例}({@link InitDBInstancesRequest 请求参数}): {@link InitDBInstancesResponse 返回参数} */
+  /** {@link InitDBInstances 初始化新实例（该接口已经不再维护，不建议使用）}({@link InitDBInstancesRequest 请求参数}): {@link InitDBInstancesResponse 返回参数} */
   InitDBInstances(data: InitDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InitDBInstancesResponse>;
   /** {@link InquiryPriceUpgradeInstances 查询数据库升级价格}({@link InquiryPriceUpgradeInstancesRequest 请求参数}): {@link InquiryPriceUpgradeInstancesResponse 返回参数} */
   InquiryPriceUpgradeInstances(data: InquiryPriceUpgradeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceUpgradeInstancesResponse>;

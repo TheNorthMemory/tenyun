@@ -2100,6 +2100,8 @@ declare interface ImageSpriteTemplate {
   FillType: string;
   /** 模板描述信息。 */
   Comment: string;
+  /** 图片格式。 */
+  Format: string;
 }
 
 /** 图像旋转、翻转等操作 */
@@ -4845,6 +4847,8 @@ declare interface CreateImageSpriteTemplateRequest {
   Height?: number;
   /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
   ResolutionAdaptive?: string;
+  /** 图片格式，取值： jpg：jpg 格式； png：png 格式； webp：webp 格式。默认值：jpg。 */
+  Format?: string;
 }
 
 declare interface CreateImageSpriteTemplateResponse {
@@ -6591,6 +6595,8 @@ declare interface ModifyImageSpriteTemplateRequest {
   FillType?: string;
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
+  /** 图片格式，取值： jpg：jpg 格式； png：png 格式； webp：webp 格式。 */
+  Format?: string;
 }
 
 declare interface ModifyImageSpriteTemplateResponse {
