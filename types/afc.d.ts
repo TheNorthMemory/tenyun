@@ -116,6 +116,26 @@ declare interface SimpleKindRiskDetail {
   RiskCodeValue?: string | null;
 }
 
+/** 天御信鸽取数平台接口入参 */
+declare interface TransportGeneralInterfaceInput {
+  /** 公证处请求接口名 */
+  InterfaceName?: string;
+  /** 公证处业务详情二层入参 */
+  NotarizationInput?: string;
+  /** 业务二层详情入参的哈希签名 */
+  NotarizationSign?: string;
+}
+
+/** 天御信鸽取数平台接口出参 */
+declare interface TransportGeneralInterfaceOutput {
+  /** 错误码 */
+  Code: string | null;
+  /** 回包信息 */
+  Message: string | null;
+  /** 公证处业务回包 */
+  NotarizationData: string | null;
+}
+
 declare interface GetAntiFraudVipRequest {
   /** 默认不传，约定用原始业务入参(二选一BusinessSecurityData 或BusinessCryptoData)。 */
   BusinessSecurityData?: AntiFraudVipFilter;
@@ -192,6 +212,18 @@ declare interface QueryAntiFraudVipResponse {
   RequestId?: string;
 }
 
+declare interface TransportGeneralInterfaceRequest {
+  /** 业务入参 */
+  BusinessSecurityData?: TransportGeneralInterfaceInput;
+}
+
+declare interface TransportGeneralInterfaceResponse {
+  /** 业务出参 */
+  Data: TransportGeneralInterfaceOutput | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 /** {@link Afc 定制建模} */
 declare interface Afc {
   (): Versions;
@@ -199,6 +231,8 @@ declare interface Afc {
   GetAntiFraudVip(data?: GetAntiFraudVipRequest, config?: AxiosRequestConfig): AxiosPromise<GetAntiFraudVipResponse>;
   /** {@link QueryAntiFraudVip 定制建模}({@link QueryAntiFraudVipRequest 请求参数}): {@link QueryAntiFraudVipResponse 返回参数} */
   QueryAntiFraudVip(data?: QueryAntiFraudVipRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAntiFraudVipResponse>;
+  /** {@link TransportGeneralInterface 信鸽取数平台接口}({@link TransportGeneralInterfaceRequest 请求参数}): {@link TransportGeneralInterfaceResponse 返回参数} */
+  TransportGeneralInterface(data?: TransportGeneralInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<TransportGeneralInterfaceResponse>;
 }
 
 export declare type Versions = ["2020-02-26"];

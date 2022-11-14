@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 219+ 款产品，8555+ 服务数</summary>
+<details><summary>共计 219+ 款产品，8556+ 服务数</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -104,7 +104,7 @@ aai |  | 2018-05-22(4)
 acp | [应用合规平台](https://cloud.tencent.com/document/product/1553) | 2022-01-05(7)
 advisor | [云顾问](https://cloud.tencent.com/document/product/1264) | 2020-07-21(2)
 af | [借贷反欺诈](https://cloud.tencent.com/document/product/668) | 2020-02-26(3)
-afc | [定制建模](https://cloud.tencent.com/document/product/1029) | 2020-02-26(2)
+afc | [定制建模](https://cloud.tencent.com/document/product/1029) | 2020-02-26(3)
 ame | [正版曲库直通车](https://cloud.tencent.com/document/product/1155) | 2019-09-16(31)
 ams | [音频内容安全](https://cloud.tencent.com/document/product/1219) | 2020-12-29(5)<br/>2020-06-08(7)
 antiddos | [T-Sec-DDoS防护(Anti-DDoS)](https://cloud.tencent.com/document/product/1021) | 2020-03-09(92)
