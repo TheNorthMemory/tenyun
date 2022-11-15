@@ -4,22 +4,26 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 运行时精简信息 */
 declare interface AbstractRuntimeMC {
-  /** 运行时id */
+  /** 环境id */
   RuntimeId: number;
-  /** 运行时名称，用户输入，同一uin内唯一 */
+  /** 环境名称，用户输入，同一uin内唯一 */
   DisplayName: string;
-  /** 运行时类型：0: sandbox, 1:shared, 2:private */
+  /** 环境类型：0: sandbox, 1:shared, 2:private */
   Type: number;
-  /** 运行时所在地域，tianjin，beijiing，guangzhou等 */
+  /** 环境所在地域，tianjin，beijiing，guangzhou等 */
   Zone: string;
-  /** 运行时所在地域，tianjin，beijiing，guangzhou等（同Zone） */
+  /** 环境所在地域，tianjin，beijiing，guangzhou等（同Zone） */
   Area: string;
-  /** 运行时应用listener地址后缀 */
+  /** 环境应用listener地址后缀 */
   Addr: string;
-  /** 运行时状态 */
+  /** 环境状态 */
   Status: number;
-  /** 运行时过期时间 */
+  /** 环境过期时间 */
   ExpiredAt: number;
+  /** 环境运行类型：0:运行时类型、1:api类型 */
+  RuntimeClass: number;
+  /** 是否已在当前环境发布 */
+  Deployed: boolean | null;
 }
 
 /** GetMonitorMetricResponse */
@@ -54,29 +58,49 @@ declare interface RuntimeDeployedInstanceMC {
   UpdatedAt: number;
   /** 应用类型：0:NormalApp普通应用 1:TemplateApp模板应用 2:LightApp轻应用 3:MicroConnTemplate微连接模板 4:MicroConnApp微连接应用 */
   ProjectType: number;
+  /** 应用版本：0:旧版 1:3.0新控制台 */
+  ProjectVersion: number;
+}
+
+/** 运行环境扩展组件 */
+declare interface RuntimeExtensionMC {
+  /** 扩展组件类型：0:cdc */
+  Type: number;
+  /** 部署规格vcore数 */
+  Size: number;
+  /** 副本数 */
+  Replica: number;
+  /** 扩展组件名称 */
+  Name: string;
+  /** 状态 1:未启用 2:已启用 */
+  Status: number;
+  /** 创建时间 */
+  CreatedAt: number;
+  /** 修改时间 */
+  UpdatedAt: number;
 }
 
 /** 运行时详细信息 */
 declare interface RuntimeMC {
-  /** 运行时id */
+  /** 环境id */
   RuntimeId: number;
   /** 主账号uin */
   Uin: string;
-  /** 运行时名称，用户输入，同一uin内唯一 */
+  /** 环境名称，用户输入，同一uin内唯一 */
   DisplayName: string;
-  /** 运行时所在地域，tianjin，beijiing，guangzhou等 */
+  /** 环境所在地域，tianjin，beijiing，guangzhou等 */
   Zone: string;
-  /** 运行时类型：0: sandbox, 1:shared, 2:private */
+  /** 环境类型：0: sandbox, 1:shared, 2:private 3: trial */
   Type: number;
   /** 运行时状态：1:running, 2:deleting, 3:creating, 4:scaling, 5:unavailable, 6:deleted, 7:errored */
   Status: number;
-  /** 运行时创建时间 */
+  /** 环境创建时间 */
   CreatedAt: number;
-  /** 运行时更新时间 */
+  /** 环境更新时间 */
   UpdatedAt: number;
-  /** 运行时资源配置，worker总配额，0:0vCore0G, 1:1vCore2G, 2:2vCore4G, 4:4vCore8G, 8:8vCore16G, 12:12vCore24G, 16:16vCore32G, 100:unlimited */
+  /** 环境资源配置，worker总配额，0:0vCore0G, 1:1vCore2G, 2:2vCore4G, 4:4vCore8G, 8:8vCore16G, 12:12vCore24G, 16:16vCore32G, 100:unlimited */
   WorkerSize: number;
-  /** 运行时资源配置，worker副本数 */
+  /** 环境资源配置，worker副本数 */
   WorkerReplica: number;
   /** 正在运行的应用实例数量 */
   RunningInstanceCount: number;
@@ -88,21 +112,33 @@ declare interface RuntimeMC {
   MemoryUsed: number;
   /** 内存上限 MB */
   MemoryLimit: number;
-  /** 运行时过期时间 */
+  /** 环境过期时间 */
   ExpiredAt: number | null;
-  /** 收费类型：0:缺省，1:通过订单页自助下单(支持续费/升配等操作) */
+  /** 收费类型：0:缺省，1:自助下单页购买(支持续费/升配等操作)，2:代销下单页购买 */
   ChargeType: number | null;
   /** 资源限制类型：0:无限制，1:有限制 */
   ResourceLimitType: number | null;
   /** 是否开启自动续费 */
   AutoRenewal: boolean | null;
+  /** 扩展组件列表 */
+  WorkerExtensions: RuntimeExtensionMC[] | null;
+  /** 环境类型：0: sandbox, 1:shared, 2:private 3: trial */
+  RuntimeType: number | null;
+  /** 环境运行类型：0:运行时类型、1:api类型 */
+  RuntimeClass: number | null;
+  /** 已使用出带宽 Mbps */
+  BandwidthOutUsed: number | null;
+  /** 出带宽上限 Mbps */
+  BandwidthOutLimit: number | null;
 }
 
 declare interface GetRuntimeMCRequest {
-  /** 运行时id */
+  /** 环境id */
   RuntimeId: number;
-  /** 运行时地域 */
+  /** 环境地域 */
   Zone: string;
+  /** 环境运行类型：0:运行时类型、1:api类型 */
+  RuntimeClass?: number;
 }
 
 declare interface GetRuntimeMCResponse {
@@ -125,6 +161,8 @@ declare interface GetRuntimeResourceMonitorMetricMCRequest {
   RateType: boolean;
   /** 采样粒度：60(s), 300(s), 3600(s), 86400(s) */
   Interval?: number;
+  /** 环境运行类型：0:运行时类型、1:api类型 */
+  RuntimeClass?: number;
 }
 
 declare interface GetRuntimeResourceMonitorMetricMCResponse {
@@ -177,6 +215,8 @@ declare interface ListRuntimeDeployedInstancesMCResponse {
 }
 
 declare interface ListRuntimesMCRequest {
+  /** 环境运行类型：0:运行时类型、1:api类型 */
+  RuntimeClass?: number;
 }
 
 declare interface ListRuntimesMCResponse {

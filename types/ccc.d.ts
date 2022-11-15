@@ -631,6 +631,8 @@ declare interface CreateStaffRequest {
   SdkAppId: number;
   /** 客服信息，个数不超过 10 */
   Staffs: SeatUserInfo[];
+  /** 是否发送密码邮件，默认true */
+  SendPassword?: boolean;
 }
 
 declare interface CreateStaffResponse {

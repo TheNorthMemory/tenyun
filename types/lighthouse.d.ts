@@ -142,6 +142,8 @@ declare interface DataDiskPrice {
   Discount: number;
   /** 折后总价。 */
   DiscountPrice: number;
+  /** 数据盘挂载的实例ID。 */
+  InstanceId: string | null;
 }
 
 /** 限制操作。 */
@@ -456,6 +458,14 @@ declare interface InstancePrice {
   Discount: number;
   /** 折后价。 */
   DiscountPrice: number;
+}
+
+/** 实例价格详细信息 */
+declare interface InstancePriceDetail {
+  /** 实例ID。 */
+  InstanceId: string | null;
+  /** 询价信息。 */
+  InstancePrice: InstancePrice | null;
 }
 
 /** 实例可退还信息。 */
@@ -1413,21 +1423,23 @@ declare interface InquirePriceRenewDisksResponse {
 }
 
 declare interface InquirePriceRenewInstancesRequest {
-  /** 待续费的实例。 */
+  /** 待续费的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573 )接口返回值中的InstanceId获取。每次请求批量实例的上限为50。 */
   InstanceIds: string[];
   /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。 */
   InstanceChargePrepaid?: InstanceChargePrepaid;
-  /** 是否续费数据盘 */
+  /** 是否续费数据盘。默认值: false, 即不续费。 */
   RenewDataDisk?: boolean;
-  /** 数据盘是否对齐实例到期时间 */
+  /** 数据盘是否对齐实例到期时间。默认值: false, 即不对齐。 */
   AlignInstanceExpiredTime?: boolean;
 }
 
 declare interface InquirePriceRenewInstancesResponse {
-  /** 询价信息。 */
+  /** 询价信息。默认为列表中第一个实例的价格信息。 */
   Price: Price;
   /** 数据盘价格信息列表。 */
   DataDiskPriceSet: DataDiskPrice[] | null;
+  /** 待续费实例价格列表。 */
+  InstancePriceDetailSet: InstancePriceDetail[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

@@ -26,10 +26,10 @@ declare interface DeadLetterSource {
 
 /** 过滤参数 */
 declare interface Filter {
-  /** 过滤参数的名字 */
-  Name?: string;
   /** 数值 */
   Values?: string[];
+  /** 过滤参数的名字 */
+  Name?: string;
 }
 
 /** 批量queue属性信息 */

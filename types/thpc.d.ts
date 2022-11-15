@@ -14,6 +14,32 @@ declare interface CFSOption {
   StorageType?: string;
 }
 
+/** 符合条件的集群活动信息。 */
+declare interface ClusterActivity {
+  /** 集群ID。 */
+  ClusterId: string;
+  /** 集群活动ID。 */
+  ActivityId: string;
+  /** 集群活动类型。 */
+  ActivityType: string;
+  /** 集群活动状态。取值范围：PENDING：等待运行RUNNING：运行中SUCCESSFUL：活动成功PARTIALLY_SUCCESSFUL：活动部分成功FAILED：活动失败 */
+  ActivityStatus: string;
+  /** 集群活动状态码。 */
+  ActivityStatusCode: string | null;
+  /** 集群活动结果详情。 */
+  ResultDetail: string | null;
+  /** 集群活动起因。 */
+  Cause: string;
+  /** 集群活动描述。 */
+  Description: string;
+  /** 集群活动相关节点活动集合。 */
+  RelatedNodeActivitySet: NodeActivity[];
+  /** 集群活动开始时间。 */
+  StartTime: string | null;
+  /** 集群活动结束时间。 */
+  EndTime: string | null;
+}
+
 /** 集群概览信息。 */
 declare interface ClusterOverview {
   /** 集群ID。 */
@@ -168,6 +194,18 @@ declare interface ManagerNode {
 declare interface ManagerNodeOverview {
   /** 管控节点ID。 */
   NodeId: string | null;
+}
+
+/** 节点活动信息。 */
+declare interface NodeActivity {
+  /** 节点活动所在的实例ID。 */
+  NodeInstanceId: string | null;
+  /** 节点活动状态。取值范围：RUNNING：运行中SUCCESSFUL：活动成功FAILED：活动失败 */
+  NodeActivityStatus: string;
+  /** 节点活动状态码。 */
+  NodeActivityStatusCode: string | null;
+  /** 节点活动状态原因。 */
+  NodeActivityStatusReason: string | null;
 }
 
 /** 描述了实例的抽象位置 */
@@ -368,6 +406,24 @@ declare interface DeleteNodesRequest {
 }
 
 declare interface DeleteNodesResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterActivitiesRequest {
+  /** 集群ID。通过该参数指定需要查询活动历史记录的集群。 */
+  ClusterId: string;
+  /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  Limit?: number;
+}
+
+declare interface DescribeClusterActivitiesResponse {
+  /** 集群活动历史记录列表。 */
+  ClusterActivitySet: ClusterActivity[];
+  /** 集群活动历史记录数量。 */
+  TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -715,6 +771,8 @@ declare interface Thpc {
   DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
   /** {@link DeleteNodes 删除节点}({@link DeleteNodesRequest 请求参数}): {@link DeleteNodesResponse 返回参数} */
   DeleteNodes(data: DeleteNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNodesResponse>;
+  /** {@link DescribeClusterActivities 查询集群活动历史记录}({@link DescribeClusterActivitiesRequest 请求参数}): {@link DescribeClusterActivitiesResponse 返回参数} */
+  DescribeClusterActivities(data: DescribeClusterActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterActivitiesResponse>;
   /** {@link DescribeClusters 查询集群列表}({@link DescribeClustersRequest 请求参数}): {@link DescribeClustersResponse 返回参数} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** {@link SetAutoScalingConfiguration 设置弹性伸缩配置信息}({@link SetAutoScalingConfigurationRequest 请求参数}): {@link SetAutoScalingConfigurationResponse 返回参数} */

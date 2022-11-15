@@ -2,12 +2,44 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 认证主体主要信息 */
+declare interface AuthNode {
+  /** 主体关系ID */
+  RelationId: number | null;
+  /** 主体名称 */
+  AuthName: string | null;
+}
+
+/** 组织身份策略 */
+declare interface IdentityPolicy {
+  /** 策略ID */
+  PolicyId: number;
+  /** 策略名称 */
+  PolicyName: string;
+}
+
 /** 成员管理身份 */
 declare interface MemberIdentity {
   /** 身份ID。 */
   IdentityId: number | null;
   /** 身份名称。 */
   IdentityAliasName: string | null;
+}
+
+/** 组织身份 */
+declare interface OrgIdentity {
+  /** 身份ID。 */
+  IdentityId: number | null;
+  /** 身份名称。 */
+  IdentityAliasName: string | null;
+  /** 描述。 */
+  Description: string | null;
+  /** 身份策略。 */
+  IdentityPolicy: IdentityPolicy[] | null;
+  /** 身份类型。 1-预设、 2-自定义 */
+  IdentityType: number | null;
+  /** 更新时间。 */
+  UpdateTime: string | null;
 }
 
 /** 企业组织成员 */
@@ -48,6 +80,58 @@ declare interface OrgMember {
   PermissionStatus: string | null;
 }
 
+/** 组织成员可授权的身份 */
+declare interface OrgMemberAuthIdentity {
+  /** 身份ID。 */
+  IdentityId: number | null;
+  /** 身份角色名。 */
+  IdentityRoleName: string | null;
+  /** 身份角色别名。 */
+  IdentityRoleAliasName: string | null;
+  /** 描述 */
+  Description: string | null;
+  /** 创建时间。 */
+  CreateTime: string | null;
+  /** 更新时间。 */
+  UpdateTime: string | null;
+}
+
+/** 组织成员被授权的策略 */
+declare interface OrgMemberPolicy {
+  /** 策略ID。 */
+  PolicyId: number | null;
+  /** 策略名。 */
+  PolicyName: string | null;
+  /** 身份ID。 */
+  IdentityId: number | null;
+  /** 身份角色名。 */
+  IdentityRoleName: string | null;
+  /** 身份角色别名。 */
+  IdentityRoleAliasName: string | null;
+  /** 描述。 */
+  Description: string | null;
+  /** 创建时间。 */
+  CreateTime: string | null;
+  /** 更新时间。 */
+  UpdateTime: string | null;
+}
+
+/** 企业组织单元 */
+declare interface OrgNode {
+  /** 组织节点ID */
+  NodeId: number | null;
+  /** 名称 */
+  Name: string | null;
+  /** 父节点ID */
+  ParentNodeId: number | null;
+  /** 备注 */
+  Remark: string | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 更新时间 */
+  UpdateTime: string | null;
+}
+
 /** 关系策略权限 */
 declare interface OrgPermission {
   /** 权限Id */
@@ -56,12 +140,28 @@ declare interface OrgPermission {
   Name: string;
 }
 
+declare interface AddOrganizationNodeRequest {
+  /** 父节点ID。可以调用DescribeOrganizationNodes获取 */
+  ParentNodeId: number;
+  /** 节点名称。最大长度为40个字符，支持英文字母、数字、汉字、符号+@、&._[]- */
+  Name: string;
+  /** 备注。 */
+  Remark?: string;
+}
+
+declare interface AddOrganizationNodeResponse {
+  /** 节点ID。 */
+  NodeId: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface BindOrganizationMemberAuthAccountRequest {
   /** 成员Uin。 */
   MemberUin: number;
-  /** 策略ID。 */
+  /** 策略ID。可以调用DescribeOrganizationMemberPolicies获取 */
   PolicyId: number;
-  /** 组织子账号Uin。 */
+  /** 组织管理员子账号Uin列表。最大5个 */
   OrgSubAccountUins: number[];
 }
 
@@ -73,9 +173,9 @@ declare interface BindOrganizationMemberAuthAccountResponse {
 declare interface CreateOrganizationMemberPolicyRequest {
   /** 成员Uin。 */
   MemberUin: number;
-  /** 策略名。 */
+  /** 策略名。最大长度为128个字符，支持英文字母、数字、符号+=,.@_- */
   PolicyName: string;
-  /** 身份ID。 */
+  /** 成员访问身份ID。可以调用DescribeOrganizationMemberAuthIdentities获取 */
   IdentityId: number;
   /** 描述。 */
   Description?: string;
@@ -89,55 +189,145 @@ declare interface CreateOrganizationMemberPolicyResponse {
 }
 
 declare interface CreateOrganizationMemberRequest {
-  /** 名称 */
+  /** 成员名称。最大长度为25个字符，支持英文字母、数字、汉字、符号+@、&._[]-:, */
   Name: string;
-  /** 关系策略 取值：Financial */
+  /** 关系策略。取值：Financial */
   PolicyType: string;
-  /** 关系权限 取值：1-查看账单、2-查看余额、3-资金划拨、4-合并出账、5-开票 ，1、2 默认必须 */
+  /** 成员财务权限ID列表。取值：1-查看账单、2-查看余额、3-资金划拨、4-合并出账、5-开票、6-优惠继承、7-代付费，1、2 默认必须 */
   PermissionIds: number[];
-  /** 成员所属部门的节点ID */
+  /** 成员所属部门的节点ID。可以调用DescribeOrganizationNodes获取 */
   NodeId: number;
-  /** 账号名 */
+  /** 账号名称。最大长度为25个字符，支持英文字母、数字、汉字、符号+@、&._[]-:, */
   AccountName: string;
-  /** 备注 */
+  /** 备注。 */
   Remark?: string;
-  /** 重试创建传记录ID */
+  /** 成员创建记录ID。创建异常重试时需要 */
   RecordId?: number;
-  /** 代付者Uin */
+  /** 代付者Uin。成员代付费时需要 */
   PayUin?: string;
-  /** 管理身份 */
+  /** 成员访问身份ID列表。可以调用ListOrganizationIdentity获取，1默认支持 */
   IdentityRoleID?: number[];
-  /** 主体关系ID */
+  /** 认证主体关系ID。给不同主体创建成员时需要，可以调用DescribeOrganizationAuthNode获取 */
   AuthRelationId?: number;
 }
 
 declare interface CreateOrganizationMemberResponse {
-  /** 成员Uin */
+  /** 成员Uin。 */
   Uin: number | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
 
-declare interface DescribeOrganizationMembersRequest {
-  /** 偏移量 */
+declare interface DeleteOrganizationMembersRequest {
+  /** 被删除成员的UIN列表。 */
+  MemberUin: number[];
+}
+
+declare interface DeleteOrganizationMembersResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteOrganizationNodesRequest {
+  /** 节点ID列表。 */
+  NodeId: number[];
+}
+
+declare interface DeleteOrganizationNodesResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOrganizationAuthNodeRequest {
+  /** 偏移量。 */
   Offset: number;
-  /** 限制数目 */
+  /** 限制数目。最大50 */
+  Limit: number;
+}
+
+declare interface DescribeOrganizationAuthNodeResponse {
+  /** 总数。 */
+  Total: number | null;
+  /** 条目详情。 */
+  Items: AuthNode[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOrganizationMemberAuthIdentitiesRequest {
+  /** 偏移量。 */
+  Offset: number;
+  /** 限制数目。最大50 */
+  Limit: number;
+  /** 组织成员Uin。 */
+  MemberUin: number;
+}
+
+declare interface DescribeOrganizationMemberAuthIdentitiesResponse {
+  /** 列表。 */
+  Items: OrgMemberAuthIdentity[] | null;
+  /** 总数目。 */
+  Total: number | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOrganizationMemberPoliciesRequest {
+  /** 偏移量。 */
+  Offset: number;
+  /** 限制数目。最大50 */
+  Limit: number;
+  /** 成员Uin。 */
+  MemberUin: number;
+  /** 搜索关键字。可用于策略名或描述搜索 */
+  SearchKey?: string;
+}
+
+declare interface DescribeOrganizationMemberPoliciesResponse {
+  /** 列表。 */
+  Items: OrgMemberPolicy[] | null;
+  /** 总数目。 */
+  Total: number | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOrganizationMembersRequest {
+  /** 偏移量。 */
+  Offset: number;
+  /** 限制数目。最大50 */
   Limit: number;
   /** 国际站：en，国内站：zh */
   Lang?: string;
-  /** 成员名或者成员ID搜索 */
+  /** 成员名称或者成员ID搜索。 */
   SearchKey?: string;
-  /** 主体名称 */
+  /** 主体名称搜索。 */
   AuthName?: string;
-  /** 集团服务（服务管理员查询时，必须指定） */
+  /** 可信服务产品简称。可信服务管理员查询时必须指定 */
   Product?: string;
 }
 
 declare interface DescribeOrganizationMembersResponse {
-  /** 成员列表 */
+  /** 成员列表。 */
   Items: OrgMember[];
-  /** 总数目 */
+  /** 总数目。 */
   Total: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOrganizationNodesRequest {
+  /** 限制数目。最大50 */
+  Limit: number;
+  /** 偏移量。 */
+  Offset: number;
+}
+
+declare interface DescribeOrganizationNodesResponse {
+  /** 总数。 */
+  Total: number | null;
+  /** 列表详情。 */
+  Items: OrgNode[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -145,43 +335,89 @@ declare interface DescribeOrganizationMembersResponse {
 declare interface DescribeOrganizationRequest {
   /** 国际站：en，国内站：zh */
   Lang?: string;
-  /** 产品简称（查询是否集团服务委派管理员必填） */
+  /** 可信服务产品简称。查询是否该可信服务管理员时必须指定 */
   Product?: string;
 }
 
 declare interface DescribeOrganizationResponse {
-  /** 企业组织ID */
+  /** 企业组织ID。 */
   OrgId: number | null;
-  /** 创建者UIN */
+  /** 创建者UIN。 */
   HostUin: number | null;
-  /** 创建者昵称 */
+  /** 创建者昵称。 */
   NickName: string | null;
-  /** 企业组织类型 */
+  /** 企业组织类型。 */
   OrgType: number | null;
-  /** 组织管理员：true，组织成员：false */
+  /** 是否组织管理员。是：true ，否：false */
   IsManager: boolean | null;
-  /** 策略类型 */
+  /** 策略类型。财务管理：Financial */
   OrgPolicyType: string | null;
-  /** 策略名 */
+  /** 策略名。 */
   OrgPolicyName: string | null;
-  /** 策略权限 */
+  /** 成员财务权限列表。 */
   OrgPermission: OrgPermission[] | null;
-  /** 根节点ID */
+  /** 组织根节点ID。 */
   RootNodeId: number | null;
-  /** 创建时间 */
+  /** 组织创建时间。 */
   CreateTime: string | null;
-  /** 成员加入时间 */
+  /** 成员加入时间。 */
   JoinTime: string | null;
-  /** 是否允许退出。允许：Allow，不允许：Denied。 */
+  /** 成员是否允许退出。允许：Allow，不允许：Denied */
   IsAllowQuit: string | null;
-  /** 代付者Uin */
+  /** 代付者Uin。 */
   PayUin: string | null;
-  /** 代付者名称 */
+  /** 代付者名称。 */
   PayName: string | null;
-  /** 是否集团服务委派管理员 true-是、false-否 */
+  /** 是否可信服务管理员。是：true，否：false */
   IsAssignManager: boolean | null;
-  /** 是否主体管理员 true-是、false-否 */
+  /** 是否实名主体管理员。是：true，否：false */
   IsAuthManager: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ListOrganizationIdentityRequest {
+  /** 偏移量。 */
+  Offset: number;
+  /** 限制数目。最大50 */
+  Limit: number;
+  /** 名称搜索关键字。 */
+  SearchKey?: string;
+  /** 身份ID搜索。 */
+  IdentityId?: number;
+}
+
+declare interface ListOrganizationIdentityResponse {
+  /** 总数。 */
+  Total: number | null;
+  /** 条目详情。 */
+  Items: OrgIdentity[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface MoveOrganizationNodeMembersRequest {
+  /** 组织节点ID。 */
+  NodeId: number;
+  /** 成员UIN列表。 */
+  MemberUin: number[];
+}
+
+declare interface MoveOrganizationNodeMembersResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface UpdateOrganizationNodeRequest {
+  /** 节点ID。 */
+  NodeId: number;
+  /** 节点名称。最大长度为40个字符，支持英文字母、数字、汉字、符号+@、&._[]- */
+  Name?: string;
+  /** 备注。 */
+  Remark?: string;
+}
+
+declare interface UpdateOrganizationNodeResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -515,16 +751,36 @@ declare namespace V20181225 {
 /** {@link Organization 集团账号管理} */
 declare interface Organization {
   (): Versions;
-  /** {@link BindOrganizationMemberAuthAccount 绑定组织成员和子账号的授权关系}({@link BindOrganizationMemberAuthAccountRequest 请求参数}): {@link BindOrganizationMemberAuthAccountResponse 返回参数} */
+  /** {@link AddOrganizationNode 添加企业组织节点}({@link AddOrganizationNodeRequest 请求参数}): {@link AddOrganizationNodeResponse 返回参数} */
+  AddOrganizationNode(data: AddOrganizationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<AddOrganizationNodeResponse>;
+  /** {@link BindOrganizationMemberAuthAccount 绑定组织成员和组织管理员子账号的授权关系}({@link BindOrganizationMemberAuthAccountRequest 请求参数}): {@link BindOrganizationMemberAuthAccountResponse 返回参数} */
   BindOrganizationMemberAuthAccount(data: BindOrganizationMemberAuthAccountRequest, config?: AxiosRequestConfig): AxiosPromise<BindOrganizationMemberAuthAccountResponse>;
   /** {@link CreateOrganizationMember 创建组织成员}({@link CreateOrganizationMemberRequest 请求参数}): {@link CreateOrganizationMemberResponse 返回参数} */
   CreateOrganizationMember(data: CreateOrganizationMemberRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationMemberResponse>;
-  /** {@link CreateOrganizationMemberPolicy 创建组织成员的授权策略}({@link CreateOrganizationMemberPolicyRequest 请求参数}): {@link CreateOrganizationMemberPolicyResponse 返回参数} */
+  /** {@link CreateOrganizationMemberPolicy 创建组织成员访问授权策略}({@link CreateOrganizationMemberPolicyRequest 请求参数}): {@link CreateOrganizationMemberPolicyResponse 返回参数} */
   CreateOrganizationMemberPolicy(data: CreateOrganizationMemberPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationMemberPolicyResponse>;
+  /** {@link DeleteOrganizationMembers 批量删除企业组织成员}({@link DeleteOrganizationMembersRequest 请求参数}): {@link DeleteOrganizationMembersResponse 返回参数} */
+  DeleteOrganizationMembers(data: DeleteOrganizationMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationMembersResponse>;
+  /** {@link DeleteOrganizationNodes 批量删除企业组织节点}({@link DeleteOrganizationNodesRequest 请求参数}): {@link DeleteOrganizationNodesResponse 返回参数} */
+  DeleteOrganizationNodes(data: DeleteOrganizationNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationNodesResponse>;
   /** {@link DescribeOrganization 获取企业组织信息}({@link DescribeOrganizationRequest 请求参数}): {@link DescribeOrganizationResponse 返回参数} */
   DescribeOrganization(data?: DescribeOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationResponse>;
+  /** {@link DescribeOrganizationAuthNode 获取可创建组织成员的认证主体关系列表}({@link DescribeOrganizationAuthNodeRequest 请求参数}): {@link DescribeOrganizationAuthNodeResponse 返回参数} */
+  DescribeOrganizationAuthNode(data: DescribeOrganizationAuthNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationAuthNodeResponse>;
+  /** {@link DescribeOrganizationMemberAuthIdentities 获取组织成员可被管理的身份列表}({@link DescribeOrganizationMemberAuthIdentitiesRequest 请求参数}): {@link DescribeOrganizationMemberAuthIdentitiesResponse 返回参数} */
+  DescribeOrganizationMemberAuthIdentities(data: DescribeOrganizationMemberAuthIdentitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberAuthIdentitiesResponse>;
+  /** {@link DescribeOrganizationMemberPolicies 获取组织成员的授权策略列表}({@link DescribeOrganizationMemberPoliciesRequest 请求参数}): {@link DescribeOrganizationMemberPoliciesResponse 返回参数} */
+  DescribeOrganizationMemberPolicies(data: DescribeOrganizationMemberPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberPoliciesResponse>;
   /** {@link DescribeOrganizationMembers 获取企业组织成员列表}({@link DescribeOrganizationMembersRequest 请求参数}): {@link DescribeOrganizationMembersResponse 返回参数} */
   DescribeOrganizationMembers(data: DescribeOrganizationMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMembersResponse>;
+  /** {@link DescribeOrganizationNodes 获取组织节点列表}({@link DescribeOrganizationNodesRequest 请求参数}): {@link DescribeOrganizationNodesResponse 返回参数} */
+  DescribeOrganizationNodes(data: DescribeOrganizationNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationNodesResponse>;
+  /** {@link ListOrganizationIdentity 获取组织成员访问身份列表}({@link ListOrganizationIdentityRequest 请求参数}): {@link ListOrganizationIdentityResponse 返回参数} */
+  ListOrganizationIdentity(data: ListOrganizationIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<ListOrganizationIdentityResponse>;
+  /** {@link MoveOrganizationNodeMembers 移动成员到指定企业组织节点}({@link MoveOrganizationNodeMembersRequest 请求参数}): {@link MoveOrganizationNodeMembersResponse 返回参数} */
+  MoveOrganizationNodeMembers(data: MoveOrganizationNodeMembersRequest, config?: AxiosRequestConfig): AxiosPromise<MoveOrganizationNodeMembersResponse>;
+  /** {@link UpdateOrganizationNode 更新企业组织节点}({@link UpdateOrganizationNodeRequest 请求参数}): {@link UpdateOrganizationNodeResponse 返回参数} */
+  UpdateOrganizationNode(data: UpdateOrganizationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrganizationNodeResponse>;
   /** {@link V20181225.AcceptOrganizationInvitation 接受加入企业组织邀请}({@link V20181225.AcceptOrganizationInvitationRequest 请求参数}): {@link V20181225.AcceptOrganizationInvitationResponse 返回参数} */
   AcceptOrganizationInvitation(data: V20181225.AcceptOrganizationInvitationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.AcceptOrganizationInvitationResponse>;
   /** {@link V20181225.AddOrganizationNode 添加企业组织单元}({@link V20181225.AddOrganizationNodeRequest 请求参数}): {@link V20181225.AddOrganizationNodeResponse 返回参数} */

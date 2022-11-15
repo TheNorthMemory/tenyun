@@ -100,7 +100,7 @@ declare interface Backup {
   DBs: string[];
   /** 备份策略（0-实例备份；1-多库备份） */
   Strategy: number;
-  /** 备份方式，0-定时备份；1-手动临时备份 */
+  /** 备份方式，0-定时备份；1-手动临时备份；2-定期备份 */
   BackupWay: number;
   /** 备份任务名称，可自定义 */
   BackupName: string;
@@ -1615,7 +1615,7 @@ declare interface DescribeBackupsRequest {
   BackupName?: string;
   /** 按照备份策略筛选，0-实例备份，1-多库备份，不填则不筛选此项 */
   Strategy?: number;
-  /** 按照备份方式筛选，0-后台自动定时备份，1-用户手动临时备份，不填则不筛选此项 */
+  /** 按照备份方式筛选，0-后台自动定时备份，1-用户手动临时备份，2-定期备份，不填则不筛选此项 */
   BackupWay?: number;
   /** 按照备份ID筛选，不填则不筛选此项 */
   BackupId?: number;
@@ -2413,6 +2413,16 @@ declare interface ModifyBackupStrategyRequest {
   BackupCycle?: number[];
   /** 数据(日志)备份保留时间，取值[3-1830]天，默认7天 */
   BackupSaveDays?: number;
+  /** 定期备份状态 enable-开启，disable-关闭，默认关闭 */
+  RegularBackupEnable?: string;
+  /** 定期备份保留天数 [90 - 3650]天，默认365天 */
+  RegularBackupSaveDays?: number;
+  /** 定期备份策略 years-每年，quarters-每季度，months-每月，默认months */
+  RegularBackupStrategy?: string;
+  /** 定期备份保留个数，默认1个 */
+  RegularBackupCounts?: number;
+  /** 定期备份开始日期，格式-YYYY-MM-DD 默认当前日期 */
+  RegularBackupStartTime?: string;
 }
 
 declare interface ModifyBackupStrategyResponse {

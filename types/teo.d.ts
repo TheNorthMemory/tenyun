@@ -1286,7 +1286,7 @@ declare interface PlanInfo {
   Flux: number;
   /** 结算周期，取值有： y ：按年结算； m ：按月结算； h ：按小时结算； M ：按分钟结算； s ：按秒结算。 */
   Frequency: string;
-  /** 套餐类型，取值有： sta ：全球内容分发网络（不包括中国大陆）标准版套餐； sta_with_bot ：全球内容分发网络（不包括中国大陆）标准版套餐附带bot管理； sta_cm ：中国大陆内容分发网络标准版套餐； sta_cm_with_bot ：中国大陆内容分发网络标准版套餐附带bot管理； ent ：全球内容分发网络（不包括中国大陆）企业版套餐； ent_with_bot ： 全球内容分发网络（不包括中国大陆）企业版套餐附带bot管理； ent_cm ：中国大陆内容分发网络企业版套餐； ent_cm_with_bot ：中国大陆内容分发网络企业版套餐附带bot管理。 */
+  /** 套餐类型，取值有： sta ：全球内容分发网络（不包括中国大陆）标准版套餐； sta_with_bot ：全球内容分发网络（不包括中国大陆）标准版套餐附带bot管理； sta_cm ：中国大陆内容分发网络标准版套餐； sta_cm_with_bot ：中国大陆内容分发网络标准版套餐附带bot管理； sta_global ：全球内容分发网络（包括中国大陆）标准版套餐； sta_global_with_bot ：全球内容分发网络（包括中国大陆）标准版套餐附带bot管理； ent ：全球内容分发网络（不包括中国大陆）企业版套餐； ent_with_bot ： 全球内容分发网络（不包括中国大陆）企业版套餐附带bot管理； ent_cm ：中国大陆内容分发网络企业版套餐； ent_cm_with_bot ：中国大陆内容分发网络企业版套餐附带bot管理； ent_global ：全球内容分发网络（包括中国大陆）企业版套餐； ent_global_with_bot ：全球内容分发网络（包括中国大陆）企业版套餐附带bot管理。 */
   PlanType: string;
   /** 套餐价格（单位：分）。 */
   Price: number;
@@ -1294,7 +1294,7 @@ declare interface PlanInfo {
   Request: number;
   /** 套餐所能绑定的站点个数。 */
   SiteNumber: number;
-  /** 套餐加速区域类型，取值有： mainland ：中国大陆； overseas ：全球（不包括中国大陆）。 */
+  /** 套餐加速区域类型，取值有： mainland ：中国大陆； overseas ：全球（不包括中国大陆）； global ：全球（包括中国大陆）。 */
   Area: string;
 }
 
@@ -2507,7 +2507,7 @@ declare interface CreateOriginGroupResponse {
 declare interface CreatePlanForZoneRequest {
   /** 站点ID。 */
   ZoneId: string;
-  /** 所要购买套餐的类型，取值有： sta: 全球内容分发网络（不包括中国大陆）标准版套餐； sta_with_bot: 全球内容分发网络（不包括中国大陆）标准版套餐附带bot管理； sta_cm: 中国大陆内容分发网络标准版套餐； sta_cm_with_bot: 中国大陆内容分发网络标准版套餐附带bot管理； ent: 全球内容分发网络（不包括中国大陆）企业版套餐； ent_with_bot: 全球内容分发网络（不包括中国大陆）企业版套餐附带bot管理； ent_cm: 中国大陆内容分发网络企业版套餐； ent_cm_with_bot: 中国大陆内容分发网络企业版套餐附带bot管理。当前账户可购买套餐类型请以DescribeAvailablePlans返回为准。 */
+  /** 所要购买套餐的类型，取值有： sta: 全球内容分发网络（不包括中国大陆）标准版套餐； sta_with_bot: 全球内容分发网络（不包括中国大陆）标准版套餐附带bot管理； sta_cm: 中国大陆内容分发网络标准版套餐； sta_cm_with_bot: 中国大陆内容分发网络标准版套餐附带bot管理； sta_global ：全球内容分发网络（包括中国大陆）标准版套餐； sta_global_with_bot ：全球内容分发网络（包括中国大陆）标准版套餐附带bot管理； ent: 全球内容分发网络（不包括中国大陆）企业版套餐； ent_with_bot: 全球内容分发网络（不包括中国大陆）企业版套餐附带bot管理； ent_cm: 中国大陆内容分发网络企业版套餐； ent_cm_with_bot: 中国大陆内容分发网络企业版套餐附带bot管理。 ent_global ：全球内容分发网络（包括中国大陆）企业版套餐； ent_global_with_bot ：全球内容分发网络（包括中国大陆）企业版套餐附带bot管理。当前账户可购买套餐类型请以DescribeAvailablePlans返回为准。 */
   PlanType: string;
 }
 

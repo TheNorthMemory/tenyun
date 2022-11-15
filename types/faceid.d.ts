@@ -458,6 +458,8 @@ declare interface EncryptedPhoneVerificationResponse {
   Result: string;
   /** 业务结果描述。 */
   Description: string;
+  /** 运营商名称。取值范围为["移动","联通","电信",""] */
+  ISP: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -619,7 +621,7 @@ declare interface GetFaceIdTokenRequest {
   CompareLib: string;
   /** CompareLib为商业库时必传。 */
   IdCard?: string;
-  /** CompareLib为商业库库时必传。 */
+  /** CompareLib为商业库时必传。 */
   Name?: string;
   /** CompareLib为上传照片比对时必传，Base64后图片最大8MB。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。 */
   ImageBase64?: string;
@@ -629,6 +631,8 @@ declare interface GetFaceIdTokenRequest {
   Extra?: string;
   /** 默认为false，设置该参数为true后，核身过程中的视频图片将会存储在人脸核身控制台授权cos的bucket中，拉取结果时会返回对应资源完整cos地址。开通地址见https://console.cloud.tencent.com/faceid/cos【注意】选择该参数为true后将不返回base64数据，请根据接入情况谨慎修改。 */
   UseCos?: boolean;
+  /** 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。 */
+  Encryption?: Encryption;
 }
 
 declare interface GetFaceIdTokenResponse {

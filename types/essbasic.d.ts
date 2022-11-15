@@ -542,6 +542,8 @@ declare interface UsageDetail {
   Usage: number;
   /** 撤回数量 */
   Cancel: number | null;
+  /** 消耗渠道 */
+  FlowChannel: string | null;
 }
 
 /** 接口调用者信息 */

@@ -190,7 +190,7 @@ declare interface DetailedStatusMessage {
   InstanceType: string;
 }
 
-/** 描述了实例的增强服务启用情况与其设置，如云安全，云监控等实例 Agent。 */
+/** 描述了实例的增强服务启用情况与其设置，如云安全，云监控，自动化助手等实例 Agent。 */
 declare interface EnhancedService {
   /** 开启云安全服务。若不指定该参数，则默认开启云安全服务。 */
   SecurityService?: RunSecurityServiceEnabled;
@@ -198,6 +198,8 @@ declare interface EnhancedService {
   MonitorService?: RunMonitorServiceEnabled;
   /** 该参数已废弃，查询时会返回空值，请勿使用。 */
   AutomationService?: RunAutomationServiceEnabled[];
+  /** 开启自动化助手服务。若不指定该参数，则默认逻辑与CVM保持一致。 */
+  AutomationToolsService?: RunAutomationServiceEnabled;
 }
 
 /** >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。>> 以[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口的`Filter`为例。若我们需要查询可用区（`zone`）为广州一区 ***并且*** 实例计费模式（`instance-charge-type`）为包年包月 ***或者*** 按量计费的实例时，可如下实现：```Filters.0.Name=zone&Filters.0.Values.0=ap-guangzhou-1&Filters.1.Name=instance-charge-type&Filters.1.Values.0=PREPAID&Filters.1.Values.1=POSTPAID_BY_HOUR``` */

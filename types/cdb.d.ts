@@ -1494,7 +1494,7 @@ declare interface CloseCDBProxyRequest {
   /** 实例ID */
   InstanceId: string;
   /** 代理组ID */
-  ProxyGroupId: string;
+  ProxyGroupId?: string;
   /** 是否只关闭读写分离，取值："true" | "false"，默认为"false" */
   OnlyCloseRW?: boolean;
 }
@@ -3801,6 +3801,8 @@ declare interface ReleaseIsolatedDBInstancesResponse {
 declare interface ReloadBalanceProxyNodeRequest {
   /** 代理组ID */
   ProxyGroupId: string;
+  /** 代理组地址ID */
+  ProxyAddressId?: string;
 }
 
 declare interface ReloadBalanceProxyNodeResponse {

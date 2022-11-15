@@ -172,6 +172,54 @@ declare interface CdcRegion {
 
 /** 域名的详细信息 */
 declare interface DomainInfo {
+  /** 域名 */
+  Domain: string;
+  /** 域名ID */
+  DomainId: string;
+  /** 实例ID */
+  InstanceId: string;
+  /** cname地址 */
+  Cname: string;
+  /** 实例类型 */
+  Edition: string;
+  /** 地域 */
+  Region: string;
+  /** 实例名 */
+  InstanceName: string;
+  /** 日志包 */
+  ClsStatus: number;
+  /** clb模式 */
+  FlowMode: number;
+  /** waf开关 */
+  Status: number;
+  /** 防御模式 */
+  Mode: number;
+  /** AI防御模式 */
+  Engine: number;
+  /** CC列表 */
+  CCList: string[];
+  /** 回源ip */
+  RsList: string[];
+  /** 服务端口配置 */
+  Ports: PortInfo[];
+  /** 负载均衡器 */
+  LoadBalancerSet: LoadBalancerPackageNew[];
+  /** 用户id */
+  AppId: number;
+  /** clb状态 */
+  State: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 0关闭 1开启 */
+  Ipv6Status?: number;
+  /** 0关闭 1开启 */
+  BotStatus?: number;
+  /** 版本信息 */
+  Level?: number;
+  /** 是否开启投递CLS功能 */
+  PostCLSStatus?: number;
+  /** 是否开启投递CKafka功能 */
+  PostCKafkaStatus?: number;
 }
 
 /** clb-waf 域名扩展套餐 */
@@ -186,6 +234,56 @@ declare interface DomainPackageNew {
   Count: number;
   /** 套餐购买地域，clb-waf暂时没有用到 */
   Region: string;
+}
+
+/** saas域名详情 */
+declare interface DomainsPartInfo {
+  /** 是否开启httpRewrite */
+  HttpsRewrite: number;
+  /** https回源端口 */
+  HttpsUpstreamPort: string;
+  /** 是否是cdn */
+  IsCdn: number;
+  /** 是否开启gray */
+  IsGray: number;
+  /** 是否是http2 */
+  IsHttp2: number;
+  /** 是否开启websocket */
+  IsWebsocket: number;
+  /** 负载均衡 */
+  LoadBalance: number;
+  /** 防御模式 */
+  Mode: number;
+  /** 私钥 */
+  PrivateKey: string;
+  /** ssl id */
+  SSLId: string;
+  /** 回源域名 */
+  UpstreamDomain: string;
+  /** 回源类型 */
+  UpstreamType: number;
+  /** 回源ip */
+  SrcList: string[];
+  /** 服务端口配置 */
+  Ports: PortInfo[];
+  /** 证书类型 */
+  CertType: number;
+  /** 回源方式 */
+  UpstreamScheme: string;
+  /** 日志包 */
+  Cls: number;
+  /** 一级cname */
+  Cname: string;
+  /** 是否长连接 */
+  IsKeepAlive: number;
+  /** 是否开启主动健康检测，1表示开启，0表示不开启 */
+  ActiveCheck: number | null;
+  /** TLS版本信息 */
+  TLSVersion: number | null;
+  /** 加密套件信息 */
+  Ciphers: number[] | null;
+  /** 模版 */
+  CipherTemplate: number | null;
 }
 
 /** 下载攻击日志记录数据项 */
@@ -366,6 +464,14 @@ declare interface IpHitItemsData {
   Res: IpHitItem[];
   /** 总数目 */
   TotalCount: number;
+}
+
+/** 负载均衡算法 */
+declare interface LoadBalancerPackageNew {
+}
+
+/** 防护域名端口配置信息 */
+declare interface PortInfo {
 }
 
 /** 防护域名端口配置信息 */
@@ -744,6 +850,22 @@ declare interface DescribeAutoDenyIPResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDomainDetailsSaasRequest {
+  /** 域名 */
+  Domain: string;
+  /** 域名id */
+  DomainId: string;
+  /** 实例id */
+  InstanceId: string;
+}
+
+declare interface DescribeDomainDetailsSaasResponse {
+  /** 域名详情 */
+  DomainsPartInfo: DomainsPartInfo;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDomainWhiteRulesRequest {
   /** 需要查询的域名 */
   Domain: string;
@@ -769,9 +891,9 @@ declare interface DescribeDomainWhiteRulesResponse {
 }
 
 declare interface DescribeDomainsRequest {
-  /** 偏移 */
+  /** 数据偏移量，从1开始。 */
   Offset: number;
-  /** 容量 */
+  /** 返回域名的数量 */
   Limit: number;
   /** 过滤数组 */
   Filters?: FiltersItemNew[];
@@ -1157,6 +1279,8 @@ declare interface Waf {
   DescribeAccessIndex(data?: DescribeAccessIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessIndexResponse>;
   /** {@link DescribeAutoDenyIP 描述WAF自动封禁IP详情}({@link DescribeAutoDenyIPRequest 请求参数}): {@link DescribeAutoDenyIPResponse 返回参数} */
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
+  /** {@link DescribeDomainDetailsSaas 查询单个saas域名详情}({@link DescribeDomainDetailsSaasRequest 请求参数}): {@link DescribeDomainDetailsSaasResponse 返回参数} */
+  DescribeDomainDetailsSaas(data: DescribeDomainDetailsSaasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainDetailsSaasResponse>;
   /** {@link DescribeDomainWhiteRules 获取域名的规则白名单}({@link DescribeDomainWhiteRulesRequest 请求参数}): {@link DescribeDomainWhiteRulesResponse 返回参数} */
   DescribeDomainWhiteRules(data: DescribeDomainWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainWhiteRulesResponse>;
   /** {@link DescribeDomains 查询用户所有域名的详细信息}({@link DescribeDomainsRequest 请求参数}): {@link DescribeDomainsResponse 返回参数} */

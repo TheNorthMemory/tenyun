@@ -306,6 +306,10 @@ declare interface DatabaseInfo {
   InstanceId?: string | null;
   /** 数据源类型 */
   DatasourceType?: number | null;
+  /** 数据库原始名称 */
+  OriginDatabaseName?: string | null;
+  /** schema名称 */
+  OriginSchemaName?: string | null;
 }
 
 /** 数据源对象 */
@@ -3445,6 +3449,8 @@ declare interface DescribeDataBasesRequest {
   ProjectId?: string;
   /** 数据源id */
   DatasourceId?: string;
+  /** 数据源类型 */
+  DsTypes?: number[];
 }
 
 declare interface DescribeDataBasesResponse {
@@ -4361,6 +4367,8 @@ declare interface DescribeRuleDataSourcesRequest {
   ProjectId?: string;
   /** 数据来源Id */
   DatasourceId?: string;
+  /** 数据源类型 */
+  DsTypes?: number[];
 }
 
 declare interface DescribeRuleDataSourcesResponse {
@@ -4689,6 +4697,8 @@ declare interface DescribeRuleTemplatesRequest {
   SourceObjectType?: number;
   /** 项目Id */
   ProjectId?: string;
+  /** 源端对应的引擎类型 */
+  SourceEngineTypes?: number[];
 }
 
 declare interface DescribeRuleTemplatesResponse {
