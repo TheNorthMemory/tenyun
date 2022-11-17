@@ -151,13 +151,17 @@ declare interface AddDeviceRequest {
   Remark?: string;
   /** 新建设备的base64密钥字符串，非必选，如果不填写则由系统自动生成 */
   DataKey?: string;
+  /** 是否设置预置密钥 */
+  Encrypted?: boolean;
 }
 
 declare interface AddDeviceResponse {
-  /** 后台生成的base64字符串密钥 */
+  /** 经过加密算法加密后的base64格式密钥 */
   DataKey: string;
   /** 设备ID */
   DeviceId: string;
+  /** 签名字符串 */
+  Signature: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

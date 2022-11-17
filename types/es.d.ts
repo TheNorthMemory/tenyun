@@ -500,6 +500,12 @@ declare interface LogstashInstanceInfo {
   ExtendedFiles: LogstashExtendedFile[] | null;
   /** 可维护时间段 */
   OperationDuration: OperationDuration | null;
+  /** CPU数量 */
+  CpuNum: number | null;
+  /** 实例标签信息 */
+  TagList: TagInfo[] | null;
+  /** 内存大小 */
+  MemSize: number | null;
 }
 
 /** Logstash节点信息 */
@@ -1169,6 +1175,8 @@ declare interface DescribeLogstashInstancesRequest {
   OrderByType?: number;
   /** VpcId 筛选项 */
   VpcIds?: string[];
+  /** 标签信息列表 */
+  TagList?: TagInfo[];
 }
 
 declare interface DescribeLogstashInstancesResponse {
@@ -1279,6 +1287,10 @@ declare interface RestartNodesRequest {
   NodeNames: string[];
   /** 是否强制重启 */
   ForceRestart?: boolean;
+  /** 可选重启模式"in-place","blue-green"，分别表示重启，蓝绿重启；默认值为"in-place" */
+  RestartMode?: string;
+  /** 节点状态，在蓝绿模式中使用；离线节点蓝绿有风险 */
+  IsOffline?: boolean;
 }
 
 declare interface RestartNodesResponse {

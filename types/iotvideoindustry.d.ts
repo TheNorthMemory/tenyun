@@ -1403,7 +1403,7 @@ declare interface DescribeLiveRecordPlanIdsResponse {
 declare interface DescribeLiveStreamRequest {
   /** 频道ID */
   LiveChannelId: string;
-  /** 过期时间 */
+  /** 过期时间 秒级unix时间戳 */
   ExpireTime: number;
 }
 

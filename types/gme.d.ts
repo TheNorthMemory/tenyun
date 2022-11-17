@@ -104,8 +104,14 @@ declare interface CustomizationConfigs {
   BizId: number;
   /** 模型ID */
   ModelId: string;
-  /** 模型状态，-1下线状态，1上线状态, 0训练中, -2训练失败 */
+  /** 模型状态，-1下线状态，1上线状态, 0训练中, -2训练失败, 3上线中, 4下线中 */
   ModelState: number;
+  /** 模型名称 */
+  ModelName?: string;
+  /** 文本文件的下载地址，服务会从该地址下载文件，目前仅支持腾讯云cos */
+  TextUrl?: string;
+  /** 更新时间，11位时间戳 */
+  UpdateTime?: number;
 }
 
 /** 剔除房间操作结果 */
@@ -375,6 +381,8 @@ declare interface CreateCustomizationRequest {
   BizId: number;
   /** 文本文件的下载地址，服务会从该地址下载文件，目前仅支持腾讯云cos */
   TextUrl: string;
+  /** 模型名称，名称长度不超过36，默认为BizId。 */
+  ModelName?: string;
 }
 
 declare interface CreateCustomizationResponse {
@@ -603,7 +611,7 @@ declare interface ModifyAppStatusResponse {
 declare interface ModifyCustomizationRequest {
   /** 应用 ID，登录控制台创建应用得到的AppID */
   BizId: number;
-  /** 文本文件 */
+  /** 文本文件的下载地址，服务会从该地址下载文件，目前仅支持腾讯云cos */
   TextUrl: string;
   /** 要修改的模型ID */
   ModelId: string;

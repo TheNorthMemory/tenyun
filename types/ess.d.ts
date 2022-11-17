@@ -86,7 +86,7 @@ declare interface CcInfo {
 
 /** 模板控件信息 */
 declare interface Component {
-  /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件；MULTI_LINE_TEXT - 多行文本控件；CHECK_BOX - 勾选框控件；FILL_IMAGE - 图片控件；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件；SELECTOR - 选择器控件；DATE - 日期控件；默认是格式化为xxxx年xx月xx日如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；DATE， 日期控件，默认是格式化为xxxx年xx月xx日SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight表单域的控件不能作为印章和签名控件 */
+  /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件；MULTI_LINE_TEXT - 多行文本控件；CHECK_BOX - 勾选框控件；FILL_IMAGE - 图片控件；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件；SELECTOR - 选择器控件；DATE - 日期控件；默认是格式化为xxxx年xx月xx日；DISTRICT - 省市区行政区划控件；如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；DATE， 日期控件，默认是格式化为xxxx年xx月xx日SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight表单域的控件不能作为印章和签名控件 */
   ComponentType: string;
   /** 参数控件宽度，单位pt */
   ComponentWidth: number;
@@ -106,7 +106,7 @@ declare interface Component {
   ComponentName?: string;
   /** 是否必选，默认为false */
   ComponentRequired?: boolean;
-  /** 扩展参数：ComponentType为SIGN_SIGNATURE类型可以控制签署方式{“ComponentTypeLimit”: [“xxx”]}xxx可以为：HANDWRITE – 手写签名BORDERLESS_ESIGN – 自动生成无边框腾讯体OCR_ESIGN -- AI智能识别手写签名ESIGN -- 个人印章类型如：{“ComponentTypeLimit”: [“BORDERLESS_ESIGN”]} */
+  /** 扩展参数：为JSON格式。ComponentType为FILL_IMAGE时，支持以下参数：NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true: 不居中FillMethod: int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型可以控制签署方式{“ComponentTypeLimit”: [“xxx”]}xxx可以为：HANDWRITE – 手写签名BORDERLESS_ESIGN – 自动生成无边框腾讯体OCR_ESIGN -- AI智能识别手写签名ESIGN -- 个人印章类型如：{“ComponentTypeLimit”: [“BORDERLESS_ESIGN”]} */
   ComponentExtra?: string;
   /** 控件关联的签署人ID */
   ComponentRecipientId?: string;
@@ -122,6 +122,14 @@ declare interface Component {
   OffsetX?: number;
   /** 指定关键字时纵坐标偏移量，单位pt */
   OffsetY?: number;
+  /** 指定关键字排序规则 */
+  KeywordOrder?: string;
+  /** 指定关键字页码 */
+  KeywordPage?: number;
+  /** 关键字位置模式 */
+  RelativeLocation?: string;
+  /** 关键字索引 */
+  KeywordIndexes?: number[];
 }
 
 /** 创建员工的结果 */
@@ -724,8 +732,12 @@ declare interface CreateFlowEvidenceReportRequest {
 }
 
 declare interface CreateFlowEvidenceReportResponse {
-  /** 出证报告 URL（有效期5分钟） */
-  ReportUrl: string;
+  /** 出证报告 ID */
+  ReportId: string | null;
+  /** 废除，字段无效 */
+  ReportUrl: string | null;
+  /** 执行中：EvidenceStatusExecuting成功：EvidenceStatusSuccess失败：EvidenceStatusFailed */
+  Status: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

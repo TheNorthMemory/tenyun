@@ -2218,6 +2218,10 @@ declare interface Zone {
   VanityNameServers: VanityNameServers | null;
   /** 用户自定义 NS IP 信息。 */
   VanityNameServersIps: VanityNameServersIps[] | null;
+  /** 展示状态，取值有： active：已启用； inactive：未生效； paused：已停用。 */
+  ActiveStatus: string;
+  /** 站点别名。数字、英文、-和_组合，限制20个字符。 */
+  AliasZoneName: string | null;
 }
 
 /** 站点配置。 */
@@ -2260,6 +2264,18 @@ declare interface ZoneSetting {
   Https: Https | null;
   /** 回源时是否携带客户端IP所属地域信息的配置。 */
   ClientIpCountry: ClientIpCountry | null;
+}
+
+declare interface BindZoneToPlanRequest {
+  /** 未绑定套餐的站点ID。 */
+  ZoneId: string;
+  /** 待绑定的目标套餐ID。 */
+  PlanId: string;
+}
+
+declare interface BindZoneToPlanResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
 }
 
 declare interface CheckCertificateRequest {
@@ -2639,6 +2655,8 @@ declare interface CreateZoneRequest {
   Tags?: Tag[];
   /** 是否允许重复接入。 true：允许重复接入； false：不允许重复接入。不填写使用默认值false。 */
   AllowDuplicates?: boolean;
+  /** 站点别名。数字、英文、-和_组合，限制20个字符。 */
+  AliasZoneName?: string;
 }
 
 declare interface CreateZoneResponse {
@@ -4143,6 +4161,10 @@ declare interface DescribeZonesRequest {
   Limit?: number;
   /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：zone-name 按照【站点名称】进行过滤。 类型：String 必选：否zone-id 按照【站点ID】进行过滤。站点ID形如：zone-xxx。 类型：String 必选：否status 按照【站点状态】进行过滤。 类型：String 必选：否tag-key 按照【标签键】进行过滤。 类型：String 必选：否tag-value 按照【标签值】进行过滤。 类型：String 必选：否模糊查询时仅支持过滤字段名为zone-name。 */
   Filters?: AdvancedFilter[];
+  /** 排序字段，取值有： type：接入类型； area：加速区域； create-time：创建时间； zone-name：站点名称； use-time：最近使用时间； active-status：生效状态。不填写使用默认值create-time。 */
+  Order?: string;
+  /** 排序方向，取值有： asc：从小到大排序； desc：从大到小排序。不填写使用默认值desc。 */
+  Direction?: string;
 }
 
 declare interface DescribeZonesResponse {
@@ -4643,6 +4665,8 @@ declare interface ModifyZoneRequest {
   Type?: string;
   /** 自定义站点信息，以替代系统默认分配的名称服务器。不填写保持原有配置。 */
   VanityNameServers?: VanityNameServers;
+  /** 站点别名。数字、英文、-和_组合，限制20个字符。 */
+  AliasZoneName?: string;
 }
 
 declare interface ModifyZoneResponse {
@@ -8919,6 +8943,8 @@ declare namespace V20220106 {
 /** {@link Teo 边缘安全加速平台} */
 declare interface Teo {
   (): Versions;
+  /** {@link BindZoneToPlan 为站点绑定套餐}({@link BindZoneToPlanRequest 请求参数}): {@link BindZoneToPlanResponse 返回参数} */
+  BindZoneToPlan(data: BindZoneToPlanRequest, config?: AxiosRequestConfig): AxiosPromise<BindZoneToPlanResponse>;
   /** {@link CheckCertificate 校验证书}({@link CheckCertificateRequest 请求参数}): {@link CheckCertificateResponse 返回参数} */
   CheckCertificate(data: CheckCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCertificateResponse>;
   /** {@link CreateAliasDomain 创建别称域名}({@link CreateAliasDomainRequest 请求参数}): {@link CreateAliasDomainResponse 返回参数} */

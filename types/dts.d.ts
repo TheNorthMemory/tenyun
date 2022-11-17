@@ -198,9 +198,9 @@ declare interface DBInfo {
   AccountRole?: string | null;
   /** 资源所属账号 为空或self(表示本账号内资源)、other(表示其他账户资源) */
   AccountMode?: string | null;
-  /** 临时秘钥Id */
+  /** 临时密钥Id */
   TmpSecretId?: string | null;
-  /** 临时秘钥Key */
+  /** 临时密钥Key */
   TmpSecretKey?: string | null;
   /** 临时Token */
   TmpToken?: string | null;
@@ -390,9 +390,9 @@ declare interface Endpoint {
   Account?: string | null;
   /** 跨账号同步时的角色，只允许[a-zA-Z0-9\-\_]+，如果为跨账号实例此项必填 */
   AccountRole?: string | null;
-  /** 临时秘钥Id，如果为跨账号实例此项必填 */
+  /** 临时密钥Id，如果为跨账号实例此项必填 */
   TmpSecretId?: string | null;
-  /** 临时秘钥Key，如果为跨账号实例此项必填 */
+  /** 临时密钥Key，如果为跨账号实例此项必填 */
   TmpSecretKey?: string | null;
   /** 临时Token，如果为跨账号实例此项必填 */
   TmpToken?: string | null;
@@ -1035,11 +1035,11 @@ declare interface DescribeMigrateDBInstancesRequest {
   Offset?: number;
   /** 资源所属账号 为空值或self(表示本账号内资源)、other(表示其他账户资源) */
   AccountMode?: string;
-  /** 临时秘钥Id，若为跨账号资源此项必填 */
+  /** 临时密钥Id，若为跨账号资源此项必填 */
   TmpSecretId?: string;
-  /** 临时秘钥Key，若为跨账号资源此项必填 */
+  /** 临时密钥Key，若为跨账号资源此项必填 */
   TmpSecretKey?: string;
-  /** 临时秘钥Token，若为跨账号资源此项必填 */
+  /** 临时密钥Token，若为跨账号资源此项必填 */
   TmpToken?: string;
 }
 

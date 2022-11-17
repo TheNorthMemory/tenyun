@@ -80,6 +80,28 @@ declare interface OrgMember {
   PermissionStatus: string | null;
 }
 
+/** 成员和子账号的授权关系 */
+declare interface OrgMemberAuthAccount {
+  /** 组织子账号Uin。 */
+  OrgSubAccountUin: number | null;
+  /** 策略ID。 */
+  PolicyId: number | null;
+  /** 策略名。 */
+  PolicyName: string | null;
+  /** 身份ID。 */
+  IdentityId: number | null;
+  /** 身份角色名。 */
+  IdentityRoleName: string | null;
+  /** 身份角色别名。 */
+  IdentityRoleAliasName: string | null;
+  /** 创建时间。 */
+  CreateTime: string | null;
+  /** 更新时间。 */
+  UpdateTime: string | null;
+  /** 子账号名称 */
+  OrgSubAccountName: string | null;
+}
+
 /** 组织成员可授权的身份 */
 declare interface OrgMemberAuthIdentity {
   /** 身份ID。 */
@@ -170,6 +192,20 @@ declare interface BindOrganizationMemberAuthAccountResponse {
   RequestId?: string;
 }
 
+declare interface CancelOrganizationMemberAuthAccountRequest {
+  /** 成员Uin。 */
+  MemberUin: number;
+  /** 策略ID。 */
+  PolicyId: number;
+  /** 组织子账号Uin。 */
+  OrgSubAccountUin: number;
+}
+
+declare interface CancelOrganizationMemberAuthAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateOrganizationMemberPolicyRequest {
   /** 成员Uin。 */
   MemberUin: number;
@@ -250,6 +286,26 @@ declare interface DescribeOrganizationAuthNodeResponse {
   Total: number | null;
   /** 条目详情。 */
   Items: AuthNode[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOrganizationMemberAuthAccountsRequest {
+  /** 偏移量。 */
+  Offset: number;
+  /** 限制数目。 */
+  Limit: number;
+  /** 成员Uin。 */
+  MemberUin: number;
+  /** 策略ID。 */
+  PolicyId: number;
+}
+
+declare interface DescribeOrganizationMemberAuthAccountsResponse {
+  /** 列表 */
+  Items: OrgMemberAuthAccount[] | null;
+  /** 总数目 */
+  Total: number | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -755,6 +811,8 @@ declare interface Organization {
   AddOrganizationNode(data: AddOrganizationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<AddOrganizationNodeResponse>;
   /** {@link BindOrganizationMemberAuthAccount 绑定组织成员和组织管理员子账号的授权关系}({@link BindOrganizationMemberAuthAccountRequest 请求参数}): {@link BindOrganizationMemberAuthAccountResponse 返回参数} */
   BindOrganizationMemberAuthAccount(data: BindOrganizationMemberAuthAccountRequest, config?: AxiosRequestConfig): AxiosPromise<BindOrganizationMemberAuthAccountResponse>;
+  /** {@link CancelOrganizationMemberAuthAccount 取消组织成员和子账号的授权绑定关系}({@link CancelOrganizationMemberAuthAccountRequest 请求参数}): {@link CancelOrganizationMemberAuthAccountResponse 返回参数} */
+  CancelOrganizationMemberAuthAccount(data: CancelOrganizationMemberAuthAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CancelOrganizationMemberAuthAccountResponse>;
   /** {@link CreateOrganizationMember 创建组织成员}({@link CreateOrganizationMemberRequest 请求参数}): {@link CreateOrganizationMemberResponse 返回参数} */
   CreateOrganizationMember(data: CreateOrganizationMemberRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationMemberResponse>;
   /** {@link CreateOrganizationMemberPolicy 创建组织成员访问授权策略}({@link CreateOrganizationMemberPolicyRequest 请求参数}): {@link CreateOrganizationMemberPolicyResponse 返回参数} */
@@ -767,6 +825,8 @@ declare interface Organization {
   DescribeOrganization(data?: DescribeOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationResponse>;
   /** {@link DescribeOrganizationAuthNode 获取可创建组织成员的认证主体关系列表}({@link DescribeOrganizationAuthNodeRequest 请求参数}): {@link DescribeOrganizationAuthNodeResponse 返回参数} */
   DescribeOrganizationAuthNode(data: DescribeOrganizationAuthNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationAuthNodeResponse>;
+  /** {@link DescribeOrganizationMemberAuthAccounts 获取组织成员被绑定的子账号列表}({@link DescribeOrganizationMemberAuthAccountsRequest 请求参数}): {@link DescribeOrganizationMemberAuthAccountsResponse 返回参数} */
+  DescribeOrganizationMemberAuthAccounts(data: DescribeOrganizationMemberAuthAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberAuthAccountsResponse>;
   /** {@link DescribeOrganizationMemberAuthIdentities 获取组织成员可被管理的身份列表}({@link DescribeOrganizationMemberAuthIdentitiesRequest 请求参数}): {@link DescribeOrganizationMemberAuthIdentitiesResponse 返回参数} */
   DescribeOrganizationMemberAuthIdentities(data: DescribeOrganizationMemberAuthIdentitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberAuthIdentitiesResponse>;
   /** {@link DescribeOrganizationMemberPolicies 获取组织成员的授权策略列表}({@link DescribeOrganizationMemberPoliciesRequest 请求参数}): {@link DescribeOrganizationMemberPoliciesResponse 返回参数} */

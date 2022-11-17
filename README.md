@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 219+ 款产品，8622+ 服务数</summary>
+<details><summary>共计 219+ 款产品，8668+ 服务数</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -162,7 +162,7 @@ cms | 内容安全 | 2019-03-21(9)
 cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(214)
 cr | [金融联络机器人](https://cloud.tencent.com/document/product/656) | 2018-03-21(28)
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(87)
-cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(230)
+cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(231)
 cws | 漏洞扫描服务 | 2018-03-12(19)
 cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(63)
 dasb | [T-Sec-堡垒机（BH）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(24)
@@ -217,7 +217,7 @@ irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 20
 ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2021-09-03(25)
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(49)
 lcic | [低代码互动课堂](https://cloud.tencent.com/document/product/1639) | 2022-08-17(14)
-lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(68)
+lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(69)
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(121)
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(1)
 lp | [登录保护](https://cloud.tencent.com/document/product/1190) | 2020-02-24(1)
@@ -238,7 +238,7 @@ nlp | [自然语言处理](https://cloud.tencent.com/document/product/271) | 201
 npp | 号码保护 | 2019-08-23(8)
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(25)
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(77)
-organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(15)<br/>2018-12-25(20)
+organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(17)<br/>2018-12-25(20)
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(22)
 pds | [私域安全](https://cloud.tencent.com/document/product/1473) | 2021-07-01(2)
 postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(63)
@@ -280,11 +280,11 @@ tcm | [服务网格](https://cloud.tencent.com/document/product/1261) | 2021-04-
 tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 2019-09-24(108)
 tcss | [容器安全服务](https://cloud.tencent.com/document/product/1285) | 2020-11-01(313)
 tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) | 2021-11-18(25)
-tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(8)
+tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(49)
 tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(101)
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(3)
 tem | [弹性微服务 TEM](https://cloud.tencent.com/document/product/1371) | 2021-07-01(50)<br/>2020-12-21(17)
-teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(125)<br/>2022-01-06(96)
+teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(126)<br/>2022-01-06(96)
 thpc | [高性能计算平台](https://cloud.tencent.com/document/product/1527) | 2022-04-01(8)<br/>2021-11-09(4)
 tia | [智能钛机器学习](https://cloud.tencent.com/document/product/851) | 2018-02-26(10)
 tic | [资源编排 TIC](https://cloud.tencent.com/document/product/1213) | 2020-11-17(13)

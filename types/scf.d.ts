@@ -262,6 +262,16 @@ declare interface ImageConfig {
   Command?: string | null;
   /** 容器的启动参数。该参数为可选参数，如果不填写，则默认使用 Dockerfile 中的 CMD。传入规范，以“空格”作为参数的分割标识，例如 -u app.py */
   Args?: string | null;
+  /** 镜像加速开关，默认False */
+  ContainerImageAccelerate?: boolean | null;
+}
+
+/** 多并发执行配置描述 */
+declare interface InstanceConcurrencyConfig {
+  /** 是否开启智能动态并发。'FALSE'时是静态并发。''时取消多并发配置。 */
+  DynamicEnabled?: string | null;
+  /** 单实例并发数最大值。取值范围 [1,100] */
+  MaxConcurrency?: number | null;
 }
 
 /** 层版本信息 */
@@ -741,6 +751,8 @@ declare interface CreateFunctionRequest {
   ProtocolType?: string;
   /** HTTP函数配置ProtocolType访问协议，当前协议可配置的参数 */
   ProtocolParams?: ProtocolParams;
+  /** 单实例多并发配置。只支持Web函数。 */
+  InstanceConcurrencyConfig?: InstanceConcurrencyConfig;
 }
 
 declare interface CreateFunctionResponse {
@@ -1643,6 +1655,8 @@ declare interface UpdateFunctionConfigurationRequest {
   InitTimeout?: number;
   /** HTTP函数配置ProtocolType访问协议，当前协议可配置的参数 */
   ProtocolParams?: ProtocolParams;
+  /** 单实例多并发配置。只支持Web函数。 */
+  InstanceConcurrencyConfig?: InstanceConcurrencyConfig;
 }
 
 declare interface UpdateFunctionConfigurationResponse {

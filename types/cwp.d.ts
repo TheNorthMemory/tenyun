@@ -2334,6 +2334,22 @@ declare interface ProtectStat {
   Num: number;
 }
 
+/** 客户端异常信息结构 */
+declare interface RecordInfo {
+  /** 主机ip */
+  HostIP: string;
+  /** 主机实例id */
+  InstanceID: string;
+  /** 客户端离线时间 */
+  OfflineTime: string;
+  /** 客户端卸载时间 */
+  UninstallTime: string;
+  /** 客户端卸载调用链 */
+  UninstallCmd: string;
+  /** 客户端uuid */
+  Uuid: string;
+}
+
 /** 地域信息 */
 declare interface RegionInfo {
   /** 地域标志，如 ap-guangzhou，ap-shanghai，ap-beijing */
@@ -4434,6 +4450,28 @@ declare interface DescribeBruteAttackRulesRequest {
 declare interface DescribeBruteAttackRulesResponse {
   /** 爆破阻断规则列表 */
   Rules: BruteAttackRuleList[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClientExceptionRequest {
+  /** 客户端异常类型 1:客户端离线，2:客户端卸载 */
+  ExceptionType: number;
+  /** 分页的偏移量 */
+  Offset: number;
+  /** 分页单页限制数目，不为0，最大值100 */
+  Limit: number;
+  /** 起始时间 `2006-01-02 15:04:05` 格式 */
+  StartTime?: string;
+  /** 结束时间 `2006-01-02 15:04:05` 格式 */
+  EndTime?: string;
+}
+
+declare interface DescribeClientExceptionResponse {
+  /** 事件总数量 */
+  TotalCount: number;
+  /** 事件详情 */
+  Records: RecordInfo[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -7261,6 +7299,8 @@ declare interface Cwp {
   DescribeBruteAttackList(data?: DescribeBruteAttackListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBruteAttackListResponse>;
   /** {@link DescribeBruteAttackRules 获取爆破破解规则}({@link DescribeBruteAttackRulesRequest 请求参数}): {@link DescribeBruteAttackRulesResponse 返回参数} */
   DescribeBruteAttackRules(data?: DescribeBruteAttackRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBruteAttackRulesResponse>;
+  /** {@link DescribeClientException 获取客户端异常事件}({@link DescribeClientExceptionRequest 请求参数}): {@link DescribeClientExceptionResponse 返回参数} */
+  DescribeClientException(data: DescribeClientExceptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientExceptionResponse>;
   /** {@link DescribeComponentStatistics 获取组件统计列表}({@link DescribeComponentStatisticsRequest 请求参数}): {@link DescribeComponentStatisticsResponse 返回参数} */
   DescribeComponentStatistics(data?: DescribeComponentStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComponentStatisticsResponse>;
   /** {@link DescribeESAggregations 获取ES字段聚合结果}({@link DescribeESAggregationsRequest 请求参数}): {@link DescribeESAggregationsResponse 返回参数} */

@@ -1534,6 +1534,20 @@ declare interface ModifyInstancesAttributeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstancesBundleRequest {
+  /** 实例ID列表。一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。每次请求批量实例的上限为30。 */
+  InstanceIds: string[];
+  /** 待变更的套餐Id。可通过[DescribeBundles](https://cloud.tencent.com/document/api/1207/47575)接口返回值中的BundleId获取。 */
+  BundleId: string;
+  /** 是否自动抵扣代金券。取值范围：true：表示自动抵扣代金券false：表示不自动抵扣代金券默认取值：false。 */
+  AutoVoucher?: boolean;
+}
+
+declare interface ModifyInstancesBundleResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstancesLoginKeyPairAttributeRequest {
   /** 实例 ID 列表。每次请求批量实例的上限为 100。 */
   InstanceIds: string[];
@@ -1787,6 +1801,8 @@ declare interface Lighthouse {
   ModifyFirewallRules(data: ModifyFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFirewallRulesResponse>;
   /** {@link ModifyInstancesAttribute 修改实例的属性}({@link ModifyInstancesAttributeRequest 请求参数}): {@link ModifyInstancesAttributeResponse 返回参数} */
   ModifyInstancesAttribute(data: ModifyInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesAttributeResponse>;
+  /** {@link ModifyInstancesBundle 变更实例套餐}({@link ModifyInstancesBundleRequest 请求参数}): {@link ModifyInstancesBundleResponse 返回参数} */
+  ModifyInstancesBundle(data: ModifyInstancesBundleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesBundleResponse>;
   /** {@link ModifyInstancesLoginKeyPairAttribute 修改实例默认登录密钥对属性}({@link ModifyInstancesLoginKeyPairAttributeRequest 请求参数}): {@link ModifyInstancesLoginKeyPairAttributeResponse 返回参数} */
   ModifyInstancesLoginKeyPairAttribute(data: ModifyInstancesLoginKeyPairAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesLoginKeyPairAttributeResponse>;
   /** {@link ModifyInstancesRenewFlag 修改实例续费标识}({@link ModifyInstancesRenewFlagRequest 请求参数}): {@link ModifyInstancesRenewFlagResponse 返回参数} */

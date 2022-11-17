@@ -188,7 +188,7 @@ declare interface AgentDealNewElem {
   GoodsName: string | null;
   /** 客户备注 */
   ClientRemark: string | null;
-  /** 订单操作类型，purchase（新购），renew（续费），modify（配置变更） */
+  /** 订单操作类型，"purchase":"新购","upgrade":"升配","upConvertExpire":"升配","downgrade":"降配","downConvertExpire":"降配","renew":"续费","refund":"退货","modifyNetworkMode":"调整带宽模式","modifyNetworkSize":"调整带宽大小","preMoveOut":"资源迁出","preMoveIn":"资源迁入","preToPost":"包年包月转按量","modify":"变配","postMoveOut":"资源迁出","postMoveIn":"资源迁入","recoverRefundForward":"调账补偿","recoverPayReserve":"调账补偿","recoverPayForward":"调账扣费","recoverRefundReserve":"调账扣费" */
   ActionType: string | null;
   /** 代金券抵扣金额，单位分 */
   VoucherDecline: string | null;
@@ -795,17 +795,17 @@ declare interface Partners {
   DescribeAgentClientGrade(data: DescribeAgentClientGradeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentClientGradeResponse>;
   /** {@link DescribeAgentClients 查询待审核客户列表}({@link DescribeAgentClientsRequest 请求参数}): {@link DescribeAgentClientsResponse 返回参数} */
   DescribeAgentClients(data?: DescribeAgentClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentClientsResponse>;
-  /** {@link DescribeAgentDealsByCache 代理商缓存订单查询接口}({@link DescribeAgentDealsByCacheRequest 请求参数}): {@link DescribeAgentDealsByCacheResponse 返回参数} */
+  /** {@link DescribeAgentDealsByCache 代理商缓存订单查询接口（预付费）}({@link DescribeAgentDealsByCacheRequest 请求参数}): {@link DescribeAgentDealsByCacheResponse 返回参数} */
   DescribeAgentDealsByCache(data: DescribeAgentDealsByCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsByCacheResponse>;
   /** {@link DescribeAgentDealsCache 代理商缓存订单查询接口（禁止接入）}({@link DescribeAgentDealsCacheRequest 请求参数}): {@link DescribeAgentDealsCacheResponse 返回参数} */
   DescribeAgentDealsCache(data: DescribeAgentDealsCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsCacheResponse>;
   /** {@link DescribeAgentPayDeals 代理商代付订单查询接口（禁止接入）}({@link DescribeAgentPayDealsRequest 请求参数}): {@link DescribeAgentPayDealsResponse 返回参数} */
   DescribeAgentPayDeals(data: DescribeAgentPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentPayDealsResponse>;
-  /** {@link DescribeAgentPayDealsV2 代理商代付订单查询接口}({@link DescribeAgentPayDealsV2Request 请求参数}): {@link DescribeAgentPayDealsV2Response 返回参数} */
+  /** {@link DescribeAgentPayDealsV2 代理商代付订单查询接口（预付费）}({@link DescribeAgentPayDealsV2Request 请求参数}): {@link DescribeAgentPayDealsV2Response 返回参数} */
   DescribeAgentPayDealsV2(data: DescribeAgentPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentPayDealsV2Response>;
   /** {@link DescribeAgentSelfPayDeals 代理商自付订单查询接口（禁止接入）}({@link DescribeAgentSelfPayDealsRequest 请求参数}): {@link DescribeAgentSelfPayDealsResponse 返回参数} */
   DescribeAgentSelfPayDeals(data: DescribeAgentSelfPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsResponse>;
-  /** {@link DescribeAgentSelfPayDealsV2 代理商自付订单查询接口}({@link DescribeAgentSelfPayDealsV2Request 请求参数}): {@link DescribeAgentSelfPayDealsV2Response 返回参数} */
+  /** {@link DescribeAgentSelfPayDealsV2 代理商自付订单查询接口（预付费）}({@link DescribeAgentSelfPayDealsV2Request 请求参数}): {@link DescribeAgentSelfPayDealsV2Response 返回参数} */
   DescribeAgentSelfPayDealsV2(data: DescribeAgentSelfPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsV2Response>;
   /** {@link DescribeClientBalance 查询客户余额}({@link DescribeClientBalanceRequest 请求参数}): {@link DescribeClientBalanceResponse 返回参数} */
   DescribeClientBalance(data: DescribeClientBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientBalanceResponse>;
