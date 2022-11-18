@@ -3687,14 +3687,14 @@ declare interface UpdateDNSConfigResponse {
 declare interface UpdateExporterIntegrationRequest {
   /** 实例 ID */
   InstanceId: string;
-  /** Kubernetes 集群类型，取值如下： 1= 容器集群(TKE) 2=弹性集群 3= Prometheus管理的弹性集群 */
-  KubeType: number;
-  /** 集群 ID */
-  ClusterId: string;
   /** 类型 */
   Kind: string;
   /** 配置内容 */
   Content: string;
+  /** Kubernetes 集群类型，取值如下： 1= 容器集群(TKE) 2=弹性集群 3= Prometheus管理的弹性集群 */
+  KubeType?: number;
+  /** 集群 ID */
+  ClusterId?: string;
 }
 
 declare interface UpdateExporterIntegrationResponse {

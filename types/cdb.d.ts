@@ -310,7 +310,7 @@ declare interface CdbSellConfig {
   Info: string;
   /** 状态值，0 表示该规格对外售卖 */
   Status: number;
-  /** 实例类型，可能的取值范围有：UNIVERSAL (通用型), EXCLUSIVE (独享型), BASIC (基础型) */
+  /** 实例类型，可能的取值范围有：UNIVERSAL (通用型), EXCLUSIVE (独享型), BASIC (基础型), BASIC_V2 (基础型v2) */
   DeviceType: string | null;
   /** 引擎类型描述，可能的取值范围有：Innodb，RocksDB */
   EngineType: string;

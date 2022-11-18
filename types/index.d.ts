@@ -665,7 +665,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   hcm: Hcm,
   /** {@link Iai 人脸识别} */
   iai: Iai,
-  /** {@link Ic 图片瘦身} */
+  /** {@link Ic 物联网卡} */
   ic: Ic,
   /** {@link Icr 对话机器人} */
   icr: Icr,

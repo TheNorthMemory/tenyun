@@ -292,7 +292,7 @@ declare interface SendSmsResponse {
   RequestId?: string;
 }
 
-/** {@link Ic 图片瘦身} */
+/** {@link Ic 物联网卡} */
 declare interface Ic {
   (): Versions;
   /** {@link DescribeApp 查询应用详情}({@link DescribeAppRequest 请求参数}): {@link DescribeAppResponse 返回参数} */

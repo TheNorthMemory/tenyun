@@ -1268,6 +1268,14 @@ declare interface CreateInput {
   RTMPPullSettings?: CreateInputRTMPPullSettings;
   /** 输入的RTSP_PULL配置信息。 */
   RTSPPullSettings?: CreateInputRTSPPullSettings;
+  /** 输入的HLS_PULL配置信息。 */
+  HLSPullSettings?: CreateInputHLSPullSettings;
+}
+
+/** 创建的输入HLS拉流的配置信息。 */
+declare interface CreateInputHLSPullSettings {
+  /** HLS源站的源站地址，有且只能有一个。 */
+  SourceAddresses: HLSPullSourceAddress[];
 }
 
 /** 创建的输入RTMP拉流的配置信息。 */
@@ -1412,6 +1420,12 @@ declare interface DescribeFlow {
   OutputGroup: DescribeOutput[] | null;
 }
 
+/** 查询输入的HLS配置信息。 */
+declare interface DescribeHLSPullSourceAddress {
+  /** HLS源站的Url地址。 */
+  Url: string | null;
+}
+
 /** 查询输入配置信息。 */
 declare interface DescribeInput {
   /** 输入Id。 */
@@ -1440,6 +1454,14 @@ declare interface DescribeInput {
   RTMPPullSettings: DescribeInputRTMPPullSettings | null;
   /** 输入的RTSP_PULL配置信息。 */
   RTSPPullSettings: DescribeInputRTSPPullSettings | null;
+  /** 输入的HLS_PULL配置信息。 */
+  HLSPullSettings: DescribeInputHLSPullSettings | null;
+}
+
+/** 查询输入的HLS配置信息。 */
+declare interface DescribeInputHLSPullSettings {
+  /** HLS源站地址信息。 */
+  SourceAddresses: DescribeHLSPullSourceAddress[];
 }
 
 /** 查询输入的RTMP配置信息。 */
@@ -1520,6 +1542,20 @@ declare interface DescribeOutput {
   AllowIpList: string[] | null;
   /** 输出的RTSP拉流配置信息。 */
   RTSPPullSettings: DescribeOutputRTSPPullSettings | null;
+  /** 输出的HLS拉流配置信息。 */
+  HLSPullSettings: DescribeOutputHLSPullSettings | null;
+}
+
+/** 查询输出的HLS拉流URL信息。 */
+declare interface DescribeOutputHLSPullServerUrl {
+  /** HLS拉流地址的Url。 */
+  Url: string;
+}
+
+/** 查询输出的HLS拉流配置信息。 */
+declare interface DescribeOutputHLSPullSettings {
+  /** HLS拉流地址列表。 */
+  ServerUrls: DescribeOutputHLSPullServerUrl[] | null;
 }
 
 /** 查询输出的RTMP拉流URL信息。 */
@@ -1918,6 +1954,12 @@ declare interface FrameTagConfigureInfo {
 declare interface FrameTagConfigureInfoForUpdate {
   /** 智能按帧标签任务开关，可选值：ON：开启智能按帧标签任务；OFF：关闭智能按帧标签任务。 */
   Switch?: string;
+}
+
+/** 创建的输入HLS拉流源站配置信息。 */
+declare interface HLSPullSourceAddress {
+  /** HLS源站的Url地址。 */
+  Url: string;
 }
 
 /** HDR配置 */
@@ -2732,6 +2774,8 @@ declare interface ModifyInput {
   RTMPPullSettings?: CreateInputRTMPPullSettings;
   /** RTSP_PULL的配置信息。 */
   RTSPPullSettings?: CreateInputRTSPPullSettings;
+  /** HLS_PULL的配置信息。 */
+  HLSPullSettings?: CreateInputHLSPullSettings;
 }
 
 /** 修改Output配置。 */

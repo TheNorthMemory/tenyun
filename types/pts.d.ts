@@ -394,6 +394,10 @@ declare interface Job {
   ProjectId?: string | null;
   /** 通知事件回调 */
   NotificationHooks?: NotificationHook[] | null;
+  /** 每秒接收字节数 */
+  NetworkReceiveRate?: number | null;
+  /** 每秒发送字节数 */
+  NetworkSendRate?: number | null;
 }
 
 /** 包含labelName 和labelValue */

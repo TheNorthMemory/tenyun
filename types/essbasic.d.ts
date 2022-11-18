@@ -524,7 +524,7 @@ declare interface TemplateInfo {
   Creator: string;
   /** 模板创建的时间戳（精确到秒） */
   CreatedOn: number;
-  /** 模板的预览链接 */
+  /** 模板的H5预览链接,可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。 */
   PreviewUrl: string | null;
 }
 

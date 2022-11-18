@@ -166,6 +166,16 @@ declare interface AddDeviceResponse {
   RequestId?: string;
 }
 
+declare interface CreateEncryptedKeyRequest {
+}
+
+declare interface CreateEncryptedKeyResponse {
+  /** 预置密钥 */
+  EncryptedKey: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateQosRequest {
   /** 加速业务源地址信息，SrcIpv6和（SrcIpv4+SrcPublicIpv4）二选一，目前Ipv6不可用，全部填写以Ipv4参数为准。 */
   SrcAddressInfo: SrcAddressInfo;
@@ -300,6 +310,16 @@ declare interface GetFlowStatisticResponse {
   RequestId?: string;
 }
 
+declare interface GetPublicKeyRequest {
+}
+
+declare interface GetPublicKeyResponse {
+  /** 非对称公钥 */
+  PublicKey: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface GetStatisticDataRequest {
   /** 设备ID，设备ID="-1"获取所有设备流量统计 */
   DeviceId: string;
@@ -339,6 +359,8 @@ declare interface Mna {
   (): Versions;
   /** {@link AddDevice 新建设备}({@link AddDeviceRequest 请求参数}): {@link AddDeviceResponse 返回参数} */
   AddDevice(data: AddDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AddDeviceResponse>;
+  /** {@link CreateEncryptedKey 设置或更新密钥}({@link CreateEncryptedKeyRequest 请求参数}): {@link CreateEncryptedKeyResponse 返回参数} */
+  CreateEncryptedKey(data?: CreateEncryptedKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEncryptedKeyResponse>;
   /** {@link CreateQos 发起Qos加速过程}({@link CreateQosRequest 请求参数}): {@link CreateQosResponse 返回参数} */
   CreateQos(data: CreateQosRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQosResponse>;
   /** {@link DeleteDevice 删除设备}({@link DeleteDeviceRequest 请求参数}): {@link DeleteDeviceResponse 返回参数} */
@@ -353,6 +375,8 @@ declare interface Mna {
   GetDevices(data: GetDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<GetDevicesResponse>;
   /** {@link GetFlowStatistic 获取数据流量统计数据}({@link GetFlowStatisticRequest 请求参数}): {@link GetFlowStatisticResponse 返回参数} */
   GetFlowStatistic(data: GetFlowStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticResponse>;
+  /** {@link GetPublicKey 获取公钥}({@link GetPublicKeyRequest 请求参数}): {@link GetPublicKeyResponse 返回参数} */
+  GetPublicKey(data?: GetPublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GetPublicKeyResponse>;
   /** {@link GetStatisticData 下载用量统计数据}({@link GetStatisticDataRequest 请求参数}): {@link GetStatisticDataResponse 返回参数} */
   GetStatisticData(data: GetStatisticDataRequest, config?: AxiosRequestConfig): AxiosPromise<GetStatisticDataResponse>;
   /** {@link UpdateDevice 更新设备}({@link UpdateDeviceRequest 请求参数}): {@link UpdateDeviceResponse 返回参数} */

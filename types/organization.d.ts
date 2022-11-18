@@ -811,7 +811,7 @@ declare interface Organization {
   AddOrganizationNode(data: AddOrganizationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<AddOrganizationNodeResponse>;
   /** {@link BindOrganizationMemberAuthAccount 绑定组织成员和组织管理员子账号的授权关系}({@link BindOrganizationMemberAuthAccountRequest 请求参数}): {@link BindOrganizationMemberAuthAccountResponse 返回参数} */
   BindOrganizationMemberAuthAccount(data: BindOrganizationMemberAuthAccountRequest, config?: AxiosRequestConfig): AxiosPromise<BindOrganizationMemberAuthAccountResponse>;
-  /** {@link CancelOrganizationMemberAuthAccount 取消组织成员和子账号的授权绑定关系}({@link CancelOrganizationMemberAuthAccountRequest 请求参数}): {@link CancelOrganizationMemberAuthAccountResponse 返回参数} */
+  /** {@link CancelOrganizationMemberAuthAccount 取消组织成员和组织管理员子账号的授权关系}({@link CancelOrganizationMemberAuthAccountRequest 请求参数}): {@link CancelOrganizationMemberAuthAccountResponse 返回参数} */
   CancelOrganizationMemberAuthAccount(data: CancelOrganizationMemberAuthAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CancelOrganizationMemberAuthAccountResponse>;
   /** {@link CreateOrganizationMember 创建组织成员}({@link CreateOrganizationMemberRequest 请求参数}): {@link CreateOrganizationMemberResponse 返回参数} */
   CreateOrganizationMember(data: CreateOrganizationMemberRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationMemberResponse>;
@@ -825,7 +825,7 @@ declare interface Organization {
   DescribeOrganization(data?: DescribeOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationResponse>;
   /** {@link DescribeOrganizationAuthNode 获取可创建组织成员的认证主体关系列表}({@link DescribeOrganizationAuthNodeRequest 请求参数}): {@link DescribeOrganizationAuthNodeResponse 返回参数} */
   DescribeOrganizationAuthNode(data: DescribeOrganizationAuthNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationAuthNodeResponse>;
-  /** {@link DescribeOrganizationMemberAuthAccounts 获取组织成员被绑定的子账号列表}({@link DescribeOrganizationMemberAuthAccountsRequest 请求参数}): {@link DescribeOrganizationMemberAuthAccountsResponse 返回参数} */
+  /** {@link DescribeOrganizationMemberAuthAccounts 获取组织成员被绑定授权关系的子账号列表}({@link DescribeOrganizationMemberAuthAccountsRequest 请求参数}): {@link DescribeOrganizationMemberAuthAccountsResponse 返回参数} */
   DescribeOrganizationMemberAuthAccounts(data: DescribeOrganizationMemberAuthAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberAuthAccountsResponse>;
   /** {@link DescribeOrganizationMemberAuthIdentities 获取组织成员可被管理的身份列表}({@link DescribeOrganizationMemberAuthIdentitiesRequest 请求参数}): {@link DescribeOrganizationMemberAuthIdentitiesResponse 返回参数} */
   DescribeOrganizationMemberAuthIdentities(data: DescribeOrganizationMemberAuthIdentitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberAuthIdentitiesResponse>;

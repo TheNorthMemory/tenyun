@@ -2344,6 +2344,22 @@ declare interface DescribeTrainingTasksResponse {
   RequestId?: string;
 }
 
+declare interface ModifyModelServicePartialConfigRequest {
+  /** 在线推理服务Id，需已存在 */
+  ServiceId: string;
+  /** 更新后服务不重启，定时停止的配置 */
+  ScheduledAction?: ScheduledAction;
+  /** 更新后服务不重启，服务对应限流限频配置 */
+  ServiceLimit?: ServiceLimit;
+}
+
+declare interface ModifyModelServicePartialConfigResponse {
+  /** 被修改后的服务配置 */
+  Service: Service;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyServiceGroupWeightsRequest {
   /** 服务组id */
   ServiceGroupId: string;
@@ -3281,6 +3297,8 @@ declare interface Tione {
   DescribeTrainingTaskPods(data: DescribeTrainingTaskPodsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTaskPodsResponse>;
   /** {@link DescribeTrainingTasks 模型训练任务列表}({@link DescribeTrainingTasksRequest 请求参数}): {@link DescribeTrainingTasksResponse 返回参数} */
   DescribeTrainingTasks(data?: DescribeTrainingTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTasksResponse>;
+  /** {@link ModifyModelServicePartialConfig 增量修改模型服务}({@link ModifyModelServicePartialConfigRequest 请求参数}): {@link ModifyModelServicePartialConfigResponse 返回参数} */
+  ModifyModelServicePartialConfig(data: ModifyModelServicePartialConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServicePartialConfigResponse>;
   /** {@link ModifyServiceGroupWeights 更新推理服务组流量分配}({@link ModifyServiceGroupWeightsRequest 请求参数}): {@link ModifyServiceGroupWeightsResponse 返回参数} */
   ModifyServiceGroupWeights(data: ModifyServiceGroupWeightsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceGroupWeightsResponse>;
   /** {@link PushTrainingMetrics 上报训练自定义指标}({@link PushTrainingMetricsRequest 请求参数}): {@link PushTrainingMetricsResponse 返回参数} */
