@@ -2,6 +2,18 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 生效运营商白名单号码 */
+declare interface ActiveCarrierPrivilegeNumber {
+  /** 实例Id */
+  SdkAppId?: number;
+  /** 主叫号码 */
+  Caller?: string;
+  /** 被叫号码 */
+  Callee?: string;
+  /** 生效unix时间戳(秒) */
+  CreateTime?: number;
+}
+
 /** 外呼任务被叫信息 */
 declare interface AutoCalloutTaskCalleeInfo {
   /** 被叫号码 */
@@ -78,6 +90,26 @@ declare interface CallInSkillGroupMetrics {
   Name: string;
 }
 
+/** 运营商白名单号码申请单 */
+declare interface CarrierPrivilegeNumberApplicant {
+  /** 实例Id */
+  SdkAppId?: number;
+  /** 申请单Id */
+  ApplicantId?: number;
+  /** 主叫号码列表 */
+  Callers?: string[];
+  /** 被叫号码列表 */
+  Callees?: string[];
+  /** 描述 */
+  Description?: string | null;
+  /** 审批状态:1 待审核、2 通过、3 拒绝 */
+  State?: number;
+  /** 创建时间，unix时间戳(秒) */
+  CreateTime?: number;
+  /** 更新时间，unix时间戳(秒) */
+  UpdateTime?: number;
+}
+
 /** 批量添加客服时，返回出错客服的像个信息 */
 declare interface ErrStaffItem {
   /** 坐席邮箱地址 */
@@ -112,6 +144,14 @@ declare interface ExtensionInfo {
   Relation: string;
   /** 绑定坐席名称 */
   RelationName: string;
+}
+
+/** 筛选条件 */
+declare interface Filter {
+  /** 筛选字段名 */
+  Name: string | null;
+  /** 筛选条件值 */
+  Values: string[] | null;
 }
 
 /** 文本会话服务记录信息 */
@@ -594,6 +634,24 @@ declare interface CreateCallOutSessionResponse {
   RequestId?: string;
 }
 
+declare interface CreateCarrierPrivilegeNumberApplicantRequest {
+  /** SdkAppId */
+  SdkAppId: number;
+  /** 主叫号码，必须为实例中存在的号码，格式为0086xxxx（暂时只支持国内号码） */
+  Callers: string[];
+  /** 被叫号码，必须为实例中坐席绑定的手机号码，格式为0086xxxx（暂时只支持国内号码） */
+  Callees: string[];
+  /** 描述 */
+  Description?: string;
+}
+
+declare interface CreateCarrierPrivilegeNumberApplicantResponse {
+  /** 申请单Id */
+  ApplicantId?: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateExtensionRequest {
   /** TCCC 实例应用 ID */
   SdkAppId: number;
@@ -686,6 +744,28 @@ declare interface DeleteStaffResponse {
   RequestId?: string;
 }
 
+declare interface DescribeActiveCarrierPrivilegeNumberRequest {
+  /** 实例Id */
+  SdkAppId: number;
+  /** 默认0 */
+  PageNumber?: number;
+  /** 默认10，最大100 */
+  PageSize?: number;
+  /** 筛选条件 Name支持PhoneNumber(按号码模糊查找) */
+  Filters?: Filter[];
+}
+
+declare interface DescribeActiveCarrierPrivilegeNumberResponse {
+  /** 总数量 */
+  TotalCount?: number;
+  /** 生效列表 */
+  ActiveCarrierPrivilegeNumbers?: ActiveCarrierPrivilegeNumber[];
+  /** 待审核单号 */
+  PendingApplicantIds?: number[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAutoCalloutTaskRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -766,6 +846,26 @@ declare interface DescribeCallInMetricsResponse {
   NumberMetrics: CallInNumberMetrics[] | null;
   /** 技能组维度指标 */
   SkillGroupMetrics: CallInSkillGroupMetrics[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCarrierPrivilegeNumberApplicantsRequest {
+  /** 实例Id */
+  SdkAppId: number;
+  /** 默认0，从0开始 */
+  PageNumber?: number;
+  /** 默认10，最大100 */
+  PageSize?: number;
+  /** 筛选条件,Name支持ApplicantId,PhoneNumber(按号码模糊查找) */
+  Filters?: Filter[];
+}
+
+declare interface DescribeCarrierPrivilegeNumberApplicantsResponse {
+  /** 筛选出的总申请单数量 */
+  TotalCount?: number;
+  /** 申请单列表 */
+  Applicants?: CarrierPrivilegeNumberApplicant[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1143,6 +1243,8 @@ declare interface Ccc {
   CreateCCCSkillGroup(data: CreateCCCSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCCCSkillGroupResponse>;
   /** {@link CreateCallOutSession 创建外呼会话（当前仅支持双呼）}({@link CreateCallOutSessionRequest 请求参数}): {@link CreateCallOutSessionResponse 返回参数} */
   CreateCallOutSession(data: CreateCallOutSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCallOutSessionResponse>;
+  /** {@link CreateCarrierPrivilegeNumberApplicant 申请运营商白名单号码}({@link CreateCarrierPrivilegeNumberApplicantRequest 请求参数}): {@link CreateCarrierPrivilegeNumberApplicantResponse 返回参数} */
+  CreateCarrierPrivilegeNumberApplicant(data: CreateCarrierPrivilegeNumberApplicantRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCarrierPrivilegeNumberApplicantResponse>;
   /** {@link CreateExtension 创建话机账号}({@link CreateExtensionRequest 请求参数}): {@link CreateExtensionResponse 返回参数} */
   CreateExtension(data: CreateExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExtensionResponse>;
   /** {@link CreateSDKLoginToken 创建 SDK 登录 Token}({@link CreateSDKLoginTokenRequest 请求参数}): {@link CreateSDKLoginTokenResponse 返回参数} */
@@ -1155,6 +1257,8 @@ declare interface Ccc {
   DeleteExtension(data: DeleteExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteExtensionResponse>;
   /** {@link DeleteStaff 删除坐席信息}({@link DeleteStaffRequest 请求参数}): {@link DeleteStaffResponse 返回参数} */
   DeleteStaff(data: DeleteStaffRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStaffResponse>;
+  /** {@link DescribeActiveCarrierPrivilegeNumber 查询生效运营商白名单规则}({@link DescribeActiveCarrierPrivilegeNumberRequest 请求参数}): {@link DescribeActiveCarrierPrivilegeNumberResponse 返回参数} */
+  DescribeActiveCarrierPrivilegeNumber(data: DescribeActiveCarrierPrivilegeNumberRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActiveCarrierPrivilegeNumberResponse>;
   /** {@link DescribeAutoCalloutTask 查询自动外呼任务详情}({@link DescribeAutoCalloutTaskRequest 请求参数}): {@link DescribeAutoCalloutTaskResponse 返回参数} */
   DescribeAutoCalloutTask(data: DescribeAutoCalloutTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoCalloutTaskResponse>;
   /** {@link DescribeAutoCalloutTasks 批量查询自动任务外呼}({@link DescribeAutoCalloutTasksRequest 请求参数}): {@link DescribeAutoCalloutTasksResponse 返回参数} */
@@ -1163,6 +1267,8 @@ declare interface Ccc {
   DescribeCCCBuyInfoList(data?: DescribeCCCBuyInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCCBuyInfoListResponse>;
   /** {@link DescribeCallInMetrics 获取呼入实时数据统计指标}({@link DescribeCallInMetricsRequest 请求参数}): {@link DescribeCallInMetricsResponse 返回参数} */
   DescribeCallInMetrics(data: DescribeCallInMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallInMetricsResponse>;
+  /** {@link DescribeCarrierPrivilegeNumberApplicants 查询运营商白名单号码申请}({@link DescribeCarrierPrivilegeNumberApplicantsRequest 请求参数}): {@link DescribeCarrierPrivilegeNumberApplicantsResponse 返回参数} */
+  DescribeCarrierPrivilegeNumberApplicants(data: DescribeCarrierPrivilegeNumberApplicantsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCarrierPrivilegeNumberApplicantsResponse>;
   /** {@link DescribeChatMessages 查询服务的聊天记录}({@link DescribeChatMessagesRequest 请求参数}): {@link DescribeChatMessagesResponse 返回参数} */
   DescribeChatMessages(data?: DescribeChatMessagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChatMessagesResponse>;
   /** {@link DescribeExtension 获取话机信息}({@link DescribeExtensionRequest 请求参数}): {@link DescribeExtensionResponse 返回参数} */

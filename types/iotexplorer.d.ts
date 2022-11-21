@@ -560,6 +560,14 @@ declare interface TopicRulePayload {
   RuleDisabled?: boolean;
 }
 
+/** wifi定位信息 */
+declare interface WifiInfo {
+  /** mac地址 */
+  MAC: string;
+  /** 信号强度 */
+  RSSI: number;
+}
+
 declare interface BindDevicesRequest {
   /** 网关设备的产品ID。 */
   GatewayProductId: string;
@@ -1114,6 +1122,32 @@ declare interface DescribeDeviceDataRequest {
 declare interface DescribeDeviceDataResponse {
   /** 设备数据 */
   Data: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeviceLocationSolveRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 定位解析类型，wifi或GNSSNavigation */
+  LocationType: string;
+  /** LoRaEdge卫星导航电文 */
+  GNSSNavigation?: string;
+  /** wifi信息 */
+  WiFiInfo?: WifiInfo[];
+}
+
+declare interface DescribeDeviceLocationSolveResponse {
+  /** 经度 */
+  Longitude: number;
+  /** 维度 */
+  Latitude: number;
+  /** 类型 */
+  LocationType: string;
+  /** 误差精度预估，单位为米 */
+  Accuracy: number | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2209,6 +2243,8 @@ declare interface Iotexplorer {
   DescribeDeviceData(data: DescribeDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDataResponse>;
   /** {@link DescribeDeviceDataHistory 获取设备历史数据}({@link DescribeDeviceDataHistoryRequest 请求参数}): {@link DescribeDeviceDataHistoryResponse 返回参数} */
   DescribeDeviceDataHistory(data: DescribeDeviceDataHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDataHistoryResponse>;
+  /** {@link DescribeDeviceLocationSolve 获取实时位置解析}({@link DescribeDeviceLocationSolveRequest 请求参数}): {@link DescribeDeviceLocationSolveResponse 返回参数} */
+  DescribeDeviceLocationSolve(data: DescribeDeviceLocationSolveRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceLocationSolveResponse>;
   /** {@link DescribeDevicePositionList 获取设备位置列表}({@link DescribeDevicePositionListRequest 请求参数}): {@link DescribeDevicePositionListResponse 返回参数} */
   DescribeDevicePositionList(data: DescribeDevicePositionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePositionListResponse>;
   /** {@link DescribeFenceBindList 获取围栏绑定信息列表}({@link DescribeFenceBindListRequest 请求参数}): {@link DescribeFenceBindListResponse 返回参数} */

@@ -124,8 +124,10 @@ declare interface DeployedResources {
   Count: number;
   /** 资源标识:clb,cdn,live,waf,antiddos */
   Type: string;
-  /** 关联资源ID或关联域名 */
+  /** 不建议使用。字段返回和Resources相同。本字段后续只返回null */
   ResourceIds: string[] | null;
+  /** 关联资源ID或关联域名。 */
+  Resources: string[] | null;
 }
 
 /** 获取证书列表（DescribeCertificate）返回参数键为 DvAuthDetail 的内容。 */

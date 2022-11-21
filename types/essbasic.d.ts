@@ -240,7 +240,7 @@ declare interface FlowFileInfo {
   NeedSignReview?: boolean;
 }
 
-/** 此结构体 (FlowInfo) 用于描述签署流程信息。【动态表格传参说明】当模板的 ComponentType='DYNAMIC_TABLE'时（渠道版），FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充动态表格（支持内容的单元格合并）输入示例```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 | */
+/** 此结构体 (FlowInfo) 用于描述签署流程信息。【动态表格传参说明】当模板的 ComponentType='DYNAMIC_TABLE'时（渠道版或集成版），FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充动态表格（支持内容的单元格合并）输入示例1：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例2（表格表头宽度比例配置）：```{ "headers":[ { "content":"head1", "widthPercent": 30 }, { "content":"head2", "widthPercent": 30 }, { "content":"head3", "widthPercent": 40 } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 |表格参数headers说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || widthPercent | Integer | 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35 || content | String | 表头单元格内容，字数不超过100 | */
 declare interface FlowInfo {
   /** 合同名字，最大长度200个字符 */
   FlowName: string;
@@ -634,6 +634,20 @@ declare interface ChannelCreateBatchCancelFlowUrlResponse {
   FailMessages: string[];
   /** 签署撤销url过期时间-年月日-时分秒 */
   UrlExpireOn: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ChannelCreateBoundFlowsRequest {
+  /** 应用信息此接口Agent.AppId、Agent.ProxyOrganizationOpenId 和 Agent. ProxyOperator.OpenId 必填 */
+  Agent: Agent;
+  /** 领取的合同id列表 */
+  FlowIds?: string[];
+  /** 操作者的信息 */
+  Operator?: UserInfo;
+}
+
+declare interface ChannelCreateBoundFlowsResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2753,6 +2767,8 @@ declare interface Essbasic {
   ChannelCancelMultiFlowSignQRCode(data: ChannelCancelMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelMultiFlowSignQRCodeResponse>;
   /** {@link ChannelCreateBatchCancelFlowUrl 电子签渠道版-根据签署流程id创建批量撤销url}({@link ChannelCreateBatchCancelFlowUrlRequest 请求参数}): {@link ChannelCreateBatchCancelFlowUrlResponse 返回参数} */
   ChannelCreateBatchCancelFlowUrl(data: ChannelCreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBatchCancelFlowUrlResponse>;
+  /** {@link ChannelCreateBoundFlows 渠道版领取合同}({@link ChannelCreateBoundFlowsRequest 请求参数}): {@link ChannelCreateBoundFlowsResponse 返回参数} */
+  ChannelCreateBoundFlows(data: ChannelCreateBoundFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBoundFlowsResponse>;
   /** {@link ChannelCreateConvertTaskApi 渠道创建文件转换任务}({@link ChannelCreateConvertTaskApiRequest 请求参数}): {@link ChannelCreateConvertTaskApiResponse 返回参数} */
   ChannelCreateConvertTaskApi(data: ChannelCreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateConvertTaskApiResponse>;
   /** {@link ChannelCreateFlowByFiles 渠道版通过文件创建签署流程}({@link ChannelCreateFlowByFilesRequest 请求参数}): {@link ChannelCreateFlowByFilesResponse 返回参数} */

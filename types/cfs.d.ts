@@ -510,7 +510,9 @@ declare interface DeleteCfsRuleResponse {
 
 declare interface DeleteCfsSnapshotRequest {
   /** 文件系统快照id */
-  SnapshotId: string;
+  SnapshotId?: string;
+  /** 需要删除的文件文件系统快照ID 列表，快照ID，跟ID列表至少填一项 */
+  SnapshotIds?: string[];
 }
 
 declare interface DeleteCfsSnapshotResponse {
@@ -934,7 +936,7 @@ declare interface Cfs {
   /** {@link DeleteCfsRule 删除权限组规则}({@link DeleteCfsRuleRequest 请求参数}): {@link DeleteCfsRuleResponse 返回参数} */
   DeleteCfsRule(data: DeleteCfsRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCfsRuleResponse>;
   /** {@link DeleteCfsSnapshot 删除文件系统快照}({@link DeleteCfsSnapshotRequest 请求参数}): {@link DeleteCfsSnapshotResponse 返回参数} */
-  DeleteCfsSnapshot(data: DeleteCfsSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCfsSnapshotResponse>;
+  DeleteCfsSnapshot(data?: DeleteCfsSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCfsSnapshotResponse>;
   /** {@link DeleteMountTarget 删除挂载点}({@link DeleteMountTargetRequest 请求参数}): {@link DeleteMountTargetResponse 返回参数} */
   DeleteMountTarget(data: DeleteMountTargetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMountTargetResponse>;
   /** {@link DeleteUserQuota 删除文件系统配额}({@link DeleteUserQuotaRequest 请求参数}): {@link DeleteUserQuotaResponse 返回参数} */
