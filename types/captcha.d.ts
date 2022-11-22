@@ -517,7 +517,7 @@ declare interface DescribeCaptchaUserAllAppIdResponse {
 }
 
 declare interface GetTicketStatisticsRequest {
-  /** 验证码appid */
+  /** 验证码AppId */
   CaptchaAppId: string;
   /** 开始时间字符串 */
   StartTimeStr: string;

@@ -10,6 +10,26 @@ declare interface Attribute {
   Details: string;
 }
 
+/** 属性检测到的人体 */
+declare interface AttributesForBody {
+  /** 人体框。当不开启人体检测时，内部参数默认为0。 */
+  Rect: ImageRect | null;
+  /** 人体检测置信度。取值0-1之间，当不开启人体检测开关时默认为0。 */
+  DetectConfidence: number | null;
+  /** 属性信息。 */
+  Attributes: BodyAttributes[] | null;
+}
+
+/** 属性列表。 */
+declare interface BodyAttributes {
+  /** 属性值。 */
+  Label: string | null;
+  /** 置信度，取值0-1之间。 */
+  Confidence: number | null;
+  /** 属性名称。 */
+  Name: string | null;
+}
+
 /** 图像主体区域。 */
 declare interface Box {
   /** 图像主体区域。 */
@@ -418,6 +438,24 @@ declare interface DescribeImagesResponse {
   RequestId?: string;
 }
 
+declare interface DetectChefDressRequest {
+  /** 图片的 Url 。ImageUrl和ImageBase64必须提供一个，同时存在时优先使用ImageUrl字段。图片限制：• 图片格式：支持PNG、JPG、JPEG、不支持 GIF 图片。• 图片大小：对应图片 base64 编码后大小不可超过5M。图片分辨率不超过 3840 x 2160pixel。建议：• 接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。 */
+  ImageUrl?: string;
+  /** 图片经过base64编码的内容。与ImageUrl同时存在时优先使用ImageUrl字段。注意：图片需要base64编码，并且要去掉编码头部。支持的图片格式：PNG、JPG、JPEG、暂不支持GIF格式。支持的图片大小：所下载图片经Base64编码后不超过5M。 */
+  ImageBase64?: string;
+  /** 人体检测模型开关，“true”为开启，“false”为关闭默认为开启，开启后可先对图片中的人体进行检测之后再进行属性识别 */
+  EnableDetect?: boolean;
+  /** 人体优选开关，“true”为开启，“false”为关闭开启后自动对检测质量低的人体进行优选过滤，有助于提高属性识别的准确率。默认为开启，仅在人体检测开关开启时可配置，人体检测模型关闭时人体优选也关闭人体优选开启时，检测到的人体分辨率不超过1920*1080 pixel */
+  EnablePreferred?: boolean;
+}
+
+declare interface DetectChefDressResponse {
+  /** 识别到的人体属性信息。单个人体属性信息包括人体检测置信度，属性信息，人体检测框。 */
+  Bodies: AttributesForBody[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DetectDisgustRequest {
   /** 图片URL地址。 图片限制： • 图片格式：PNG、JPG、JPEG。 • 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 建议：• 图片像素：大于50*50像素，否则影响识别效果； • 长宽比：长边：短边<5； 接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。 */
   ImageUrl?: string;
@@ -576,6 +614,24 @@ declare interface DetectProductResponse {
   RequestId?: string;
 }
 
+declare interface DetectSecurityRequest {
+  /** 图片的 Url 。ImageUrl和ImageBase64必须提供一个，同时存在时优先使用ImageUrl字段。图片限制：• 图片格式：支持PNG、JPG、JPEG、不支持 GIF 图片。• 图片大小：对应图片 base64 编码后大小不可超过5M。图片分辨率不超过3840 x 2160 pixel。建议：• 接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。 */
+  ImageUrl?: string;
+  /** 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。注意：图片需要base64编码，并且要去掉编码头部。支持的图片格式：PNG、JPG、JPEG、暂不支持GIF格式。支持的图片大小：所下载图片经Base64编码后不超过5M。 */
+  ImageBase64?: string;
+  /** 人体检测模型开关，“true”为开启，“false”为关闭开启后可先对图片中的人体进行检测之后再进行属性识别，默认为开启 */
+  EnableDetect?: boolean;
+  /** 人体优选开关，“true”为开启，“false”为关闭开启后自动对检测质量低的人体进行优选过滤，有助于提高属性识别的准确率。默认为开启，仅在人体检测开关开启时可配置，人体检测模型关闭时人体优选也关闭如开启人体优选，检测到的人体分辨率需不大于1920*1080 pixel */
+  EnablePreferred?: boolean;
+}
+
+declare interface DetectSecurityResponse {
+  /** 识别到的人体属性信息。单个人体属性信息包括人体检测置信度，属性信息，人体检测框。 */
+  Bodies: AttributesForBody[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface EnhanceImageRequest {
   /** 图片URL地址。 图片限制： • 图片格式：PNG、JPG、JPEG。 • 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 建议：• 图片像素：大于50*50像素，最大不超过250万像素，否则影响识别效果。 • 长宽比：长边：短边<5。 接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。 */
   ImageUrl?: string;
@@ -673,6 +729,8 @@ declare interface Tiia {
   DescribeGroups(data?: DescribeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsResponse>;
   /** {@link DescribeImages 查询图片信息}({@link DescribeImagesRequest 请求参数}): {@link DescribeImagesResponse 返回参数} */
   DescribeImages(data: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
+  /** {@link DetectChefDress 厨师穿戴识别接口}({@link DetectChefDressRequest 请求参数}): {@link DetectChefDressResponse 返回参数} */
+  DetectChefDress(data?: DetectChefDressRequest, config?: AxiosRequestConfig): AxiosPromise<DetectChefDressResponse>;
   /** {@link DetectDisgust 恶心检测}({@link DetectDisgustRequest 请求参数}): {@link DetectDisgustResponse 返回参数} */
   DetectDisgust(data?: DetectDisgustRequest, config?: AxiosRequestConfig): AxiosPromise<DetectDisgustResponse>;
   /** {@link DetectEnvelope 文件封识别}({@link DetectEnvelopeRequest 请求参数}): {@link DetectEnvelopeResponse 返回参数} */
@@ -691,6 +749,8 @@ declare interface Tiia {
   DetectProduct(data?: DetectProductRequest, config?: AxiosRequestConfig): AxiosPromise<DetectProductResponse>;
   /** {@link DetectProductBeta 商品识别-微信识物版}({@link DetectProductBetaRequest 请求参数}): {@link DetectProductBetaResponse 返回参数} */
   DetectProductBeta(data?: DetectProductBetaRequest, config?: AxiosRequestConfig): AxiosPromise<DetectProductBetaResponse>;
+  /** {@link DetectSecurity 安全属性识别}({@link DetectSecurityRequest 请求参数}): {@link DetectSecurityResponse 返回参数} */
+  DetectSecurity(data?: DetectSecurityRequest, config?: AxiosRequestConfig): AxiosPromise<DetectSecurityResponse>;
   /** {@link EnhanceImage 图像清晰度增强}({@link EnhanceImageRequest 请求参数}): {@link EnhanceImageResponse 返回参数} */
   EnhanceImage(data?: EnhanceImageRequest, config?: AxiosRequestConfig): AxiosPromise<EnhanceImageResponse>;
   /** {@link RecognizeCar 车辆识别}({@link RecognizeCarRequest 请求参数}): {@link RecognizeCarResponse 返回参数} */

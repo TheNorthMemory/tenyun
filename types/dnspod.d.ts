@@ -496,6 +496,64 @@ declare interface RecordListItem {
   MX: number | null;
 }
 
+/** 域名解析快照配置 */
+declare interface SnapshotConfig {
+  /** 配置类型：空字符串-不备份，half_hour-每半小时，hourly-每小时，daily-每天，monthly-每月 */
+  Config: string;
+  /** 添加时间 */
+  CreatedOn: string;
+  /** 所属域名 ID */
+  DomainId: string;
+  /** 配置 ID */
+  Id: string;
+  /** 快照数量 */
+  SnapshotCount: number;
+  /** 状态：enable-启用，disable-禁用 */
+  Status: string;
+  /** 更新时间 */
+  UpdatedOn: string;
+}
+
+/** 快照信息 */
+declare interface SnapshotInfo {
+  /** 快照的对象存储地址 */
+  CosUrl: string;
+  /** 添加时间 */
+  CreatedOn: string;
+  /** 所属域名 */
+  Domain: string;
+  /** 快照记录 ID */
+  Id: string;
+  /** 域名解析记录数 */
+  RecordCount: string;
+  /** 状态：normal-正常，create-备份中 */
+  Status: string;
+}
+
+/** 快照列表分页信息 */
+declare interface SnapshotPageInfo {
+  /** 快照总数 */
+  Total: number;
+}
+
+/** 快照解析记录 */
+declare interface SnapshotRecord {
+  /** 子域名 */
+  SubDomain: string;
+  /** 记录类型 */
+  RecordType: string;
+  /** 解析线路 */
+  RecordLine: string;
+  /** 解析值 */
+  Value: string;
+  /** TTL(秒) */
+  TTL: string;
+  /** 解析记录 ID */
+  RecordId?: string;
+  /** MX优先级 */
+  MX?: string | null;
+}
+
 /** 子域名别名解析量统计信息 */
 declare interface SubdomainAliasAnalyticsItem {
   /** 子域名解析量统计查询信息 */
@@ -546,6 +604,52 @@ declare interface UserInfo {
   Uin: number;
   /** 所属 DNS 服务器 */
   FreeNs: string[];
+}
+
+declare interface CheckRecordSnapshotRollbackRequest {
+  /** 域名 */
+  Domain: string;
+  /** 快照 ID */
+  SnapshotId: string;
+  /** 解析记录信息 */
+  Record: SnapshotRecord;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+}
+
+declare interface CheckRecordSnapshotRollbackResponse {
+  /** 错误原因 */
+  Reason: string | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface CheckSnapshotRollbackRequest {
+  /** 域名 */
+  Domain: string;
+  /** 快照记录 ID */
+  SnapshotId: string;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+}
+
+declare interface CheckSnapshotRollbackResponse {
+  /** 快照记录 ID */
+  SnapshotId: string;
+  /** 回滚时长（分钟） */
+  CostMinutes: number;
+  /** 快照所属域名 */
+  Domain: string;
+  /** 解析记录总数 */
+  Total: number;
+  /** 值为 1，表示超时 */
+  Timeout: number | null;
+  /** 检查失败数量 */
+  Failed: number | null;
+  /** 失败记录信息 */
+  FailedRecordList: SnapshotRecord[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
 }
 
 declare interface CreateDealRequest {
@@ -684,6 +788,18 @@ declare interface CreateRecordResponse {
   RequestId?: string;
 }
 
+declare interface CreateSnapshotRequest {
+  /** 域名 */
+  Domain: string;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+}
+
+declare interface CreateSnapshotResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDomainAliasRequest {
   /** 域名别名ID */
   DomainAliasId: number;
@@ -734,6 +850,20 @@ declare interface DeleteShareDomainRequest {
 }
 
 declare interface DeleteShareDomainResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSnapshotRequest {
+  /** 域名 */
+  Domain: string;
+  /** 快照记录 ID */
+  SnapshotId: string;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+}
+
+declare interface DeleteSnapshotResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -966,6 +1096,40 @@ declare interface DescribeRecordResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRecordSnapshotRollbackResultRequest {
+  /** 域名 */
+  Domain: string;
+  /** 回滚任务 ID */
+  JobId: number;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+}
+
+declare interface DescribeRecordSnapshotRollbackResultResponse {
+  /** 回滚任务 ID */
+  JobId: number;
+  /** 回滚状态 */
+  Status: string;
+  /** 失败的记录信息 */
+  FailedRecordList: SnapshotRecord[] | null;
+  /** 所属域名 */
+  Domain: string | null;
+  /** 回滚进度 */
+  Progress: number | null;
+  /** 回滚剩余时间（单位：分钟） */
+  LeftMinutes: number | null;
+  /** 总记录数 */
+  Total: number | null;
+  /** 失败记录数 */
+  Failed: number | null;
+  /** 成功记录数 */
+  Success: number | null;
+  /** 快照下载地址 */
+  CosUrl: string | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRecordTypeRequest {
   /** 域名等级。+ 旧套餐：D_FREE、D_PLUS、D_EXTRA、D_EXPERT、D_ULTRA 分别对应免费套餐、个人豪华、企业1、企业2、企业3。+ 新套餐：DP_FREE、DP_PLUS、DP_EXTRA、DP_EXPERT、DP_ULTRA 分别对应新免费、个人专业版、企业创业版、企业标准版、企业旗舰版。 */
   DomainGrade: string;
@@ -974,6 +1138,96 @@ declare interface DescribeRecordTypeRequest {
 declare interface DescribeRecordTypeResponse {
   /** 记录类型列表 */
   TypeList: string[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSnapshotConfigRequest {
+  /** 域名 */
+  Domain: string;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+}
+
+declare interface DescribeSnapshotConfigResponse {
+  /** 解析快照配置 */
+  SnapshotConfig: SnapshotConfig;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSnapshotListRequest {
+  /** 域名 */
+  Domain: string;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+}
+
+declare interface DescribeSnapshotListResponse {
+  /** 分页信息 */
+  Info: SnapshotPageInfo;
+  /** 快照列表 */
+  SnapshotList: SnapshotInfo[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSnapshotRollbackResultRequest {
+  /** 域名 */
+  Domain: string;
+  /** 快照回滚任务 ID */
+  TaskId: number;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+}
+
+declare interface DescribeSnapshotRollbackResultResponse {
+  /** 快照所属域名 */
+  Domain: string;
+  /** 回滚剩余时间（分钟） */
+  LeftMinutes: number;
+  /** 回滚进度百分比 */
+  Progress: number;
+  /** 快照 ID */
+  SnapshotId: string;
+  /** 回滚状态 */
+  Status: string;
+  /** 快照回滚任务 ID */
+  TaskId: number;
+  /** 成功数量 */
+  Success: number | null;
+  /** 失败数量 */
+  Failed: number | null;
+  /** 总数量 */
+  Total: number | null;
+  /** 失败详细信息 */
+  FailedRecordList: SnapshotRecord[] | null;
+  /** 快照的下载地址 */
+  CosUrl: string | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSnapshotRollbackTaskRequest {
+  /** 域名 */
+  Domain: string;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+}
+
+declare interface DescribeSnapshotRollbackTaskResponse {
+  /** 快照所属域名 */
+  Domain: string;
+  /** 快照 ID */
+  SnapshotId: string;
+  /** 回滚状态 */
+  Status: string;
+  /** 快照回滚任务 ID */
+  TaskId: number;
+  /** 总数量 */
+  RecordCount: number;
+  /** 开始回滚时间 */
+  CreatedOn: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1010,6 +1264,22 @@ declare interface DescribeUserDetailRequest {
 declare interface DescribeUserDetailResponse {
   /** 帐户信息 */
   UserInfo: UserInfo;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DownloadSnapshotRequest {
+  /** 域名 */
+  Domain: string;
+  /** 快照记录 ID */
+  SnapshotId: string;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+}
+
+declare interface DownloadSnapshotResponse {
+  /** 快照下载链接 */
+  CosUrl: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1214,6 +1484,20 @@ declare interface ModifyRecordStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifySnapshotConfigRequest {
+  /** 域名 */
+  Domain: string;
+  /** 备件间隔：空字符串-不备份，half_hour-每半小时，hourly-每小时，daily-每天，monthly-每月 */
+  Period: string;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+}
+
+declare interface ModifySnapshotConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifySubdomainStatusRequest {
   /** 域名 */
   Domain: string;
@@ -1262,9 +1546,49 @@ declare interface PayOrderWithBalanceResponse {
   RequestId?: string;
 }
 
+declare interface RollbackRecordSnapshotRequest {
+  /** 域名 */
+  Domain: string;
+  /** 快照 ID */
+  SnapshotId: string;
+  /** 解析记录信息 */
+  RecordList: SnapshotRecord[];
+  /** 之前的快照回滚任务 ID */
+  TaskId: number;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+}
+
+declare interface RollbackRecordSnapshotResponse {
+  /** 回滚任务 ID */
+  JobId: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface RollbackSnapshotRequest {
+  /** 域名 */
+  Domain: string;
+  /** 快照记录 ID */
+  SnapshotId: string;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+}
+
+declare interface RollbackSnapshotResponse {
+  /** 回滚任务 ID，用来查询回滚状态 */
+  TaskId: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 /** {@link Dnspod DNSPod} */
 declare interface Dnspod {
   (): Versions;
+  /** {@link CheckRecordSnapshotRollback 回滚前检查单条记录}({@link CheckRecordSnapshotRollbackRequest 请求参数}): {@link CheckRecordSnapshotRollbackResponse 返回参数} */
+  CheckRecordSnapshotRollback(data: CheckRecordSnapshotRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<CheckRecordSnapshotRollbackResponse>;
+  /** {@link CheckSnapshotRollback 快照回滚前检查}({@link CheckSnapshotRollbackRequest 请求参数}): {@link CheckSnapshotRollbackResponse 返回参数} */
+  CheckSnapshotRollback(data: CheckSnapshotRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<CheckSnapshotRollbackResponse>;
   /** {@link CreateDeal 商品下单}({@link CreateDealRequest 请求参数}): {@link CreateDealResponse 返回参数} */
   CreateDeal(data: CreateDealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDealResponse>;
   /** {@link CreateDomain 添加域名}({@link CreateDomainRequest 请求参数}): {@link CreateDomainResponse 返回参数} */
@@ -1279,6 +1603,8 @@ declare interface Dnspod {
   CreateRecord(data: CreateRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordResponse>;
   /** {@link CreateRecordBatch 批量添加记录}({@link CreateRecordBatchRequest 请求参数}): {@link CreateRecordBatchResponse 返回参数} */
   CreateRecordBatch(data: CreateRecordBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordBatchResponse>;
+  /** {@link CreateSnapshot 创建快照}({@link CreateSnapshotRequest 请求参数}): {@link CreateSnapshotResponse 返回参数} */
+  CreateSnapshot(data: CreateSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotResponse>;
   /** {@link DeleteDomain 删除域名}({@link DeleteDomainRequest 请求参数}): {@link DeleteDomainResponse 返回参数} */
   DeleteDomain(data: DeleteDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainResponse>;
   /** {@link DeleteDomainAlias 删除域名别名}({@link DeleteDomainAliasRequest 请求参数}): {@link DeleteDomainAliasResponse 返回参数} */
@@ -1287,6 +1613,8 @@ declare interface Dnspod {
   DeleteRecord(data: DeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordResponse>;
   /** {@link DeleteShareDomain 删除域名共享}({@link DeleteShareDomainRequest 请求参数}): {@link DeleteShareDomainResponse 返回参数} */
   DeleteShareDomain(data: DeleteShareDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShareDomainResponse>;
+  /** {@link DeleteSnapshot 删除快照}({@link DeleteSnapshotRequest 请求参数}): {@link DeleteSnapshotResponse 返回参数} */
+  DeleteSnapshot(data: DeleteSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotResponse>;
   /** {@link DescribeBatchTask 获取任务详情}({@link DescribeBatchTaskRequest 请求参数}): {@link DescribeBatchTaskResponse 返回参数} */
   DescribeBatchTask(data: DescribeBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskResponse>;
   /** {@link DescribeDomain 获取域名信息}({@link DescribeDomainRequest 请求参数}): {@link DescribeDomainResponse 返回参数} */
@@ -1311,12 +1639,24 @@ declare interface Dnspod {
   DescribeRecordLineList(data: DescribeRecordLineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordLineListResponse>;
   /** {@link DescribeRecordList 获取域名的解析记录}({@link DescribeRecordListRequest 请求参数}): {@link DescribeRecordListResponse 返回参数} */
   DescribeRecordList(data: DescribeRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordListResponse>;
+  /** {@link DescribeRecordSnapshotRollbackResult 查询解析记录重新回滚的结果}({@link DescribeRecordSnapshotRollbackResultRequest 请求参数}): {@link DescribeRecordSnapshotRollbackResultResponse 返回参数} */
+  DescribeRecordSnapshotRollbackResult(data: DescribeRecordSnapshotRollbackResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordSnapshotRollbackResultResponse>;
   /** {@link DescribeRecordType 获取等级允许的记录类型}({@link DescribeRecordTypeRequest 请求参数}): {@link DescribeRecordTypeResponse 返回参数} */
   DescribeRecordType(data: DescribeRecordTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordTypeResponse>;
+  /** {@link DescribeSnapshotConfig 查询解析快照配置}({@link DescribeSnapshotConfigRequest 请求参数}): {@link DescribeSnapshotConfigResponse 返回参数} */
+  DescribeSnapshotConfig(data: DescribeSnapshotConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotConfigResponse>;
+  /** {@link DescribeSnapshotList 查询快照列表}({@link DescribeSnapshotListRequest 请求参数}): {@link DescribeSnapshotListResponse 返回参数} */
+  DescribeSnapshotList(data: DescribeSnapshotListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotListResponse>;
+  /** {@link DescribeSnapshotRollbackResult 查询快照回滚结果}({@link DescribeSnapshotRollbackResultRequest 请求参数}): {@link DescribeSnapshotRollbackResultResponse 返回参数} */
+  DescribeSnapshotRollbackResult(data: DescribeSnapshotRollbackResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotRollbackResultResponse>;
+  /** {@link DescribeSnapshotRollbackTask 查询最近一次回滚}({@link DescribeSnapshotRollbackTaskRequest 请求参数}): {@link DescribeSnapshotRollbackTaskResponse 返回参数} */
+  DescribeSnapshotRollbackTask(data: DescribeSnapshotRollbackTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotRollbackTaskResponse>;
   /** {@link DescribeSubdomainAnalytics 子域名解析量统计}({@link DescribeSubdomainAnalyticsRequest 请求参数}): {@link DescribeSubdomainAnalyticsResponse 返回参数} */
   DescribeSubdomainAnalytics(data: DescribeSubdomainAnalyticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubdomainAnalyticsResponse>;
   /** {@link DescribeUserDetail 获取帐户信息}({@link DescribeUserDetailRequest 请求参数}): {@link DescribeUserDetailResponse 返回参数} */
   DescribeUserDetail(data?: DescribeUserDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDetailResponse>;
+  /** {@link DownloadSnapshot 下载快照}({@link DownloadSnapshotRequest 请求参数}): {@link DownloadSnapshotResponse 返回参数} */
+  DownloadSnapshot(data: DownloadSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadSnapshotResponse>;
   /** {@link ModifyDomainLock 锁定域名}({@link ModifyDomainLockRequest 请求参数}): {@link ModifyDomainLockResponse 返回参数} */
   ModifyDomainLock(data: ModifyDomainLockRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainLockResponse>;
   /** {@link ModifyDomainOwner 域名过户}({@link ModifyDomainOwnerRequest 请求参数}): {@link ModifyDomainOwnerResponse 返回参数} */
@@ -1339,12 +1679,18 @@ declare interface Dnspod {
   ModifyRecordRemark(data: ModifyRecordRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordRemarkResponse>;
   /** {@link ModifyRecordStatus 设置记录状态}({@link ModifyRecordStatusRequest 请求参数}): {@link ModifyRecordStatusResponse 返回参数} */
   ModifyRecordStatus(data: ModifyRecordStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordStatusResponse>;
+  /** {@link ModifySnapshotConfig 修改快照配置}({@link ModifySnapshotConfigRequest 请求参数}): {@link ModifySnapshotConfigResponse 返回参数} */
+  ModifySnapshotConfig(data: ModifySnapshotConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotConfigResponse>;
   /** {@link ModifySubdomainStatus 暂停子域名的解析记录}({@link ModifySubdomainStatusRequest 请求参数}): {@link ModifySubdomainStatusResponse 返回参数} */
   ModifySubdomainStatus(data: ModifySubdomainStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubdomainStatusResponse>;
   /** {@link ModifyVasAutoRenewStatus 增值服务自动续费设置}({@link ModifyVasAutoRenewStatusRequest 请求参数}): {@link ModifyVasAutoRenewStatusResponse 返回参数} */
   ModifyVasAutoRenewStatus(data: ModifyVasAutoRenewStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVasAutoRenewStatusResponse>;
   /** {@link PayOrderWithBalance DNSPod商品余额支付}({@link PayOrderWithBalanceRequest 请求参数}): {@link PayOrderWithBalanceResponse 返回参数} */
   PayOrderWithBalance(data: PayOrderWithBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<PayOrderWithBalanceResponse>;
+  /** {@link RollbackRecordSnapshot 重新回滚指定解析记录快照}({@link RollbackRecordSnapshotRequest 请求参数}): {@link RollbackRecordSnapshotResponse 返回参数} */
+  RollbackRecordSnapshot(data: RollbackRecordSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackRecordSnapshotResponse>;
+  /** {@link RollbackSnapshot 回滚快照}({@link RollbackSnapshotRequest 请求参数}): {@link RollbackSnapshotResponse 返回参数} */
+  RollbackSnapshot(data: RollbackSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackSnapshotResponse>;
 }
 
 export declare type Versions = ["2021-03-23"];

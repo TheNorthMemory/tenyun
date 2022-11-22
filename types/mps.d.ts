@@ -1270,6 +1270,8 @@ declare interface CreateInput {
   RTSPPullSettings?: CreateInputRTSPPullSettings;
   /** 输入的HLS_PULL配置信息。 */
   HLSPullSettings?: CreateInputHLSPullSettings;
+  /** 延播平滑吐流配置信息。 */
+  ResilientStream?: ResilientStreamConf;
 }
 
 /** 创建的输入HLS拉流的配置信息。 */
@@ -1456,6 +1458,8 @@ declare interface DescribeInput {
   RTSPPullSettings: DescribeInputRTSPPullSettings | null;
   /** 输入的HLS_PULL配置信息。 */
   HLSPullSettings: DescribeInputHLSPullSettings | null;
+  /** 延播平滑吐流配置信息。 */
+  ResilientStream: ResilientStreamConf | null;
 }
 
 /** 查询输入的HLS配置信息。 */
@@ -2776,6 +2780,8 @@ declare interface ModifyInput {
   RTSPPullSettings?: CreateInputRTSPPullSettings;
   /** HLS_PULL的配置信息。 */
   HLSPullSettings?: CreateInputHLSPullSettings;
+  /** 延播平滑吐流配置信息。 */
+  ResilientStream?: ResilientStreamConf;
 }
 
 /** 修改Output配置。 */
@@ -3188,6 +3194,14 @@ declare interface RawWatermarkParameter {
 declare interface RegionInfo {
   /** 地区名称。 */
   Name: string;
+}
+
+/** 延播平滑吐流配置。 */
+declare interface ResilientStreamConf {
+  /** 是否开启延播平滑吐流，true开启，false不开启，默认不开启。 */
+  Enable?: boolean | null;
+  /** 延播时间，单位秒，目前支持的范围为10~300秒。 */
+  BufferTime?: number | null;
 }
 
 /** 转推的目标地址信息。 */

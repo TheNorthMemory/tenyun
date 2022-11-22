@@ -894,11 +894,11 @@ declare interface Service {
   ServiceInfo: ServiceInfo | null;
   /** 服务的业务状态 */
   BusinessStatus: string | null;
-  /** 服务的创建来源 AUTO_ML,DEFAULT */
+  /** 服务的创建来源AUTO_ML: 来自自动学习的一键发布DEFAULT: 其他来源 */
   CreateSource: string | null;
   /** 费用信息 */
   BillingInfo: string | null;
-  /** 服务状态 */
+  /** 服务状态CREATING 创建中CREATE_FAILED 创建失败Normal	正常运行中Stopped 已停止Stopping 停止中Abnormal 异常Pending 启动中Waiting 就绪中 */
   Status: string | null;
   /** 模型权重 */
   Weight: number | null;

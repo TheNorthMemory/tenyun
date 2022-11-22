@@ -2391,20 +2391,20 @@ declare interface SwitchProxyResponse {
 }
 
 declare interface UpgradeInstanceRequest {
-  /** 实例ID */
+  /** 待变更实例 ID。 */
   InstanceId: string;
-  /** 分片大小 单位 MB。该参数不支持与RedisShardNum或RedisReplicasNum同时输入。 */
+  /** 指实例每个分片内存变更后的大小。单位 MB。每次只能修改参数MemSize、RedisShardNum和RedisReplicasNum其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。 */
   MemSize: number;
-  /** 分片数量，标准架构不需要填写。该参数不支持与RedisReplicasNum或MemSize同时输入。 */
+  /** 指实例变更后的分片数量。标准架构不需要配置该参数，集群架构为必填参数。集群架构，每次只能修改参数RedisShardNum、MemSize和RedisReplicasNum其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。 */
   RedisShardNum?: number;
-  /** 副本数量，多AZ实例修改副本时必须要传入NodeSet。该参数不支持与RedisShardNum或MemSize同时输入。 */
+  /** 指实例变更后的副本数量。每次只能修改参数RedisReplicasNum、MemSize和RedisShardNum其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。多AZ实例修改副本时必须要传入NodeSet。 */
   RedisReplicasNum?: number;
-  /** 多AZ实例增加副本时的附带信息，非多AZ实例不需要传此参数。多AZ增加副本时此参数为必传参数，传入要增加的副本的信息，包括副本的可用区和副本的类型（NodeType为1） */
+  /** 多AZ实例，增加副本时的附带信息，包括副本的可用区和副本的类型（NodeType为1）。非多AZ实例不需要配置该参数。 */
   NodeSet?: RedisNodeInfo[];
 }
 
 declare interface UpgradeInstanceResponse {
-  /** 订单ID */
+  /** 订单ID。 */
   DealId: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
@@ -2641,7 +2641,7 @@ declare interface Redis {
   SwitchInstanceVip(data: SwitchInstanceVipRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchInstanceVipResponse>;
   /** {@link SwitchProxy Proxy模拟故障接口}({@link SwitchProxyRequest 请求参数}): {@link SwitchProxyResponse 返回参数} */
   SwitchProxy(data: SwitchProxyRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchProxyResponse>;
-  /** {@link UpgradeInstance 升级实例}({@link UpgradeInstanceRequest 请求参数}): {@link UpgradeInstanceResponse 返回参数} */
+  /** {@link UpgradeInstance 变更实例配置}({@link UpgradeInstanceRequest 请求参数}): {@link UpgradeInstanceResponse 返回参数} */
   UpgradeInstance(data: UpgradeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceResponse>;
   /** {@link UpgradeInstanceVersion 升级实例版本或者结构}({@link UpgradeInstanceVersionRequest 请求参数}): {@link UpgradeInstanceVersionResponse 返回参数} */
   UpgradeInstanceVersion(data: UpgradeInstanceVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceVersionResponse>;

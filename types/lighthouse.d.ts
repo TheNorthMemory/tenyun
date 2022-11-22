@@ -1199,7 +1199,7 @@ declare interface DescribeKeyPairsRequest {
   Offset?: number;
   /** 返回数量，默认为 20，最大值为 100。 */
   Limit?: number;
-  /** 过滤器列表。key-id按照【密钥对ID】进行过滤。类型：String必选：否key-name按照【密钥对名称】进行过滤。类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 KeyIds 和 Filters。 */
+  /** 过滤器列表。key-id按照【密钥对ID】进行过滤。类型：String必选：否key-name按照【密钥对名称】进行过滤（支持模糊匹配）。类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 KeyIds 和 Filters。 */
   Filters?: Filter[];
 }
 

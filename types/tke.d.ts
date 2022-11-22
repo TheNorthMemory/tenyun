@@ -1858,6 +1858,10 @@ declare interface SubnetInfos {
   Name: string;
   /** 安全组id */
   SecurityGroups?: string[];
+  /** 系统 */
+  Os?: string;
+  /** 硬件架构 */
+  Arch?: string;
 }
 
 /** 标签绑定的资源类型，当前支持类型："cluster" */

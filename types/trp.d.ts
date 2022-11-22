@@ -351,6 +351,8 @@ declare interface CreateCodePackRequest {
   PackLevel?: number;
   /** 码包规格 */
   PackSpec?: PackSpec[];
+  /** 批次ID，如果传了生码后会同时绑定批次，并激活码 */
+  BatchId?: string;
 }
 
 declare interface CreateCodePackResponse {
@@ -405,6 +407,8 @@ declare interface CreateCustomPackRequest {
   CustomId?: string;
   /** 码段配置，和CustomId二选一必填 */
   CodeParts?: CodePart[];
+  /** 批次ID，如果传了生码后会同时绑定批次，并激活码 */
+  BatchId?: string;
 }
 
 declare interface CreateCustomPackResponse {
@@ -971,6 +975,8 @@ declare interface ModifyCustomRuleStatusRequest {
   CustomId: string;
   /** 码规则状态 0:未生效 1:已生效 -1:已失效 */
   Status: number;
+  /** 企业ID */
+  CorpId?: number;
 }
 
 declare interface ModifyCustomRuleStatusResponse {
