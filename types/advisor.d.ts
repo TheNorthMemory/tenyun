@@ -69,7 +69,7 @@ declare interface DescribeStrategiesResponse {
 declare interface DescribeTaskStrategyRisksRequest {
   /** 评估项ID */
   StrategyId: number;
-  /** 限制数量,默认100 */
+  /** 返回数量,默认值为100,最大值为200 */
   Limit?: number;
   /** 偏移量,默认0 */
   Offset?: number;

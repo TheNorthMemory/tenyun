@@ -764,6 +764,8 @@ declare interface IntegrationNodeSchema {
   Value?: string | null;
   /** schema拓展属性 */
   Properties?: RecordField[] | null;
+  /** schema别名 */
+  Alias?: string | null;
 }
 
 /** 集成节点schema映射 */
@@ -1768,6 +1770,16 @@ declare interface SimpleTaskInfo {
   TaskId: string;
   /** 任务名 */
   TaskName: string;
+}
+
+/** 上游节点字段信息 */
+declare interface SourceFieldInfo {
+  /** 字段名称 */
+  FieldName?: string;
+  /** 字段类型 */
+  FieldType?: string;
+  /** 字段别名 */
+  Alias?: string;
 }
 
 /** 数据质量数据对象 */
@@ -3052,6 +3064,22 @@ declare interface CreateOrUpdateResourceRequest {
 declare interface CreateOrUpdateResourceResponse {
   /** 响应数据 */
   Data: UserFileDTO[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface CreateResourcePathRequest {
+  /** 文件夹名称，如 aaa */
+  Name: string;
+  /** 文件夹所属父目录，请注意，根目录为 /datastudio/resource */
+  FilePath: string;
+  /** 项目ID */
+  ProjectId: string;
+}
+
+declare interface CreateResourcePathResponse {
+  /** 新建成功 */
+  Data: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -5247,6 +5275,8 @@ declare interface GenHiveTableDDLSqlRequest {
   SinkType?: string;
   /** schema名称 */
   SchemaName?: string;
+  /** 上游节点的字段信息 */
+  SourceFieldInfoList?: SourceFieldInfo[];
 }
 
 declare interface GenHiveTableDDLSqlResponse {
@@ -6291,6 +6321,8 @@ declare interface Wedata {
   CreateOfflineTask(data: CreateOfflineTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOfflineTaskResponse>;
   /** {@link CreateOrUpdateResource 资源管理将cos资源绑定到wedata}({@link CreateOrUpdateResourceRequest 请求参数}): {@link CreateOrUpdateResourceResponse 返回参数} */
   CreateOrUpdateResource(data?: CreateOrUpdateResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrUpdateResourceResponse>;
+  /** {@link CreateResourcePath 资源管理创建文件路径}({@link CreateResourcePathRequest 请求参数}): {@link CreateResourcePathResponse 返回参数} */
+  CreateResourcePath(data: CreateResourcePathRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourcePathResponse>;
   /** {@link CreateRule 创建质量规则接口}({@link CreateRuleRequest 请求参数}): {@link CreateRuleResponse 返回参数} */
   CreateRule(data?: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
   /** {@link CreateRuleTemplate 创建规则模版}({@link CreateRuleTemplateRequest 请求参数}): {@link CreateRuleTemplateResponse 返回参数} */

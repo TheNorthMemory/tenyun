@@ -1258,7 +1258,7 @@ declare interface TrainingTaskDetail {
   SubUin: string;
   /** 地域 */
   Region: string;
-  /** 训练框架名称，eg：SPARK、TENSORFLOW、PYTORCH、LIGHT */
+  /** 训练框架名称，eg：SPARK、PYSARK、TENSORFLOW、PYTORCH */
   FrameworkName: string | null;
   /** 训练框架版本 */
   FrameworkVersion: string | null;
@@ -1322,7 +1322,7 @@ declare interface TrainingTaskDetail {
   ResourceGroupName: string | null;
   /** 任务信息 */
   Message: string | null;
-  /** 任务状态 */
+  /** 任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成 */
   Status: string;
 }
 
@@ -1348,7 +1348,7 @@ declare interface TrainingTaskSetItem {
   ResourceConfigInfos: ResourceConfigInfo[];
   /** 训练模式eg：PS_WORKER、DDP、MPI、HOROVOD */
   TrainingMode: string | null;
-  /** 任务状态 */
+  /** 任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成 */
   Status: string;
   /** 运行时长 */
   RuntimeInSeconds: number | null;
@@ -1681,7 +1681,7 @@ declare interface CreateTrainingTaskRequest {
   ImageInfo?: ImageInfo;
   /** 启动命令信息，默认为sh start.sh */
   StartCmdInfo?: StartCmdInfo;
-  /** 数据配置 */
+  /** 数据配置，依赖DataSource字段 */
   DataConfigs?: DataConfig[];
   /** VPC Id */
   VpcId?: string;
@@ -2356,6 +2356,56 @@ declare interface ModifyModelServicePartialConfigRequest {
 declare interface ModifyModelServicePartialConfigResponse {
   /** 被修改后的服务配置 */
   Service: Service;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyModelServiceRequest {
+  /** 服务id */
+  ServiceId: string;
+  /** 模型信息，需要挂载模型时填写 */
+  ModelInfo?: ModelInfo;
+  /** 镜像信息，配置服务运行所需的镜像地址等信息 */
+  ImageInfo?: ImageInfo;
+  /** 环境变量，可选参数，用于配置容器中的环境变量 */
+  Env?: EnvVar[];
+  /** 资源描述，指定预付费模式下的cpu,mem,gpu等信息，后付费无需填写 */
+  Resources?: ResourceInfo;
+  /** 使用DescribeBillingSpecs接口返回的规格列表中的值，或者参考实例列表:TI.S.MEDIUM.POST	2C4GTI.S.LARGE.POST	4C8GTI.S.2XLARGE16.POST	8C16GTI.S.2XLARGE32.POST	8C32GTI.S.4XLARGE32.POST	16C32GTI.S.4XLARGE64.POST	16C64GTI.S.6XLARGE48.POST	24C48GTI.S.6XLARGE96.POST	24C96GTI.S.8XLARGE64.POST	32C64GTI.S.8XLARGE128.POST 32C128GTI.GN7.LARGE20.POST	4C20G T4*1/4TI.GN7.2XLARGE40.POST	10C40G T4*1/2TI.GN7.2XLARGE32.POST	8C32G T4*1TI.GN7.5XLARGE80.POST	20C80G T4*1TI.GN7.8XLARGE128.POST	32C128G T4*1TI.GN7.10XLARGE160.POST	40C160G T4*2TI.GN7.20XLARGE320.POST	80C320G T4*4 */
+  InstanceType?: string;
+  /** 扩缩容类型 支持：自动 - "AUTO", 手动 - "MANUAL" */
+  ScaleMode?: string;
+  /** 实例数量, 不同计费模式和调节模式下对应关系如下PREPAID 和 POSTPAID_BY_HOUR:手动调节模式下对应 实例数量自动调节模式下对应 基于时间的默认策略的实例数量HYBRID_PAID:后付费实例手动调节模式下对应 实例数量后付费实例自动调节模式下对应 时间策略的默认策略的实例数量 */
+  Replicas?: number;
+  /** 自动伸缩信息 */
+  HorizontalPodAutoscaler?: HorizontalPodAutoscaler;
+  /** 是否开启日志投递，开启后需填写配置投递到指定cls */
+  LogEnable?: boolean;
+  /** 日志配置，需要投递服务日志到指定cls时填写 */
+  LogConfig?: LogConfig;
+  /** 特殊更新行为： "STOP": 停止, "RESUME": 重启, "SCALE": 扩缩容, 存在这些特殊更新行为时，会忽略其他更新字段 */
+  ServiceAction?: string;
+  /** 服务的描述 */
+  ServiceDescription?: string;
+  /** 自动伸缩策略 */
+  ScaleStrategy?: string;
+  /** 自动伸缩策略配置 HPA : 通过HPA进行弹性伸缩 CRON 通过定时任务进行伸缩 */
+  CronScaleJobs?: CronScaleJob[];
+  /** 计费模式[HYBRID_PAID]时生效, 用于标识混合计费模式下的预付费实例数, 若不填则默认为1 */
+  HybridBillingPrepaidReplicas?: number;
+  /** 是否开启模型的热更新。默认不开启 */
+  ModelHotUpdateEnable?: boolean;
+  /** 定时停止配置 */
+  ScheduledAction?: ScheduledAction;
+  /** 服务限速限流相关配置 */
+  ServiceLimit?: ServiceLimit;
+  /** 挂载配置，目前只支持CFS */
+  VolumeMount?: VolumeMount;
+}
+
+declare interface ModifyModelServiceResponse {
+  /** 生成的模型服务 */
+  Service: Service | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -3297,6 +3347,8 @@ declare interface Tione {
   DescribeTrainingTaskPods(data: DescribeTrainingTaskPodsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTaskPodsResponse>;
   /** {@link DescribeTrainingTasks 模型训练任务列表}({@link DescribeTrainingTasksRequest 请求参数}): {@link DescribeTrainingTasksResponse 返回参数} */
   DescribeTrainingTasks(data?: DescribeTrainingTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTasksResponse>;
+  /** {@link ModifyModelService 更新模型服务}({@link ModifyModelServiceRequest 请求参数}): {@link ModifyModelServiceResponse 返回参数} */
+  ModifyModelService(data: ModifyModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServiceResponse>;
   /** {@link ModifyModelServicePartialConfig 增量修改模型服务}({@link ModifyModelServicePartialConfigRequest 请求参数}): {@link ModifyModelServicePartialConfigResponse 返回参数} */
   ModifyModelServicePartialConfig(data: ModifyModelServicePartialConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServicePartialConfigResponse>;
   /** {@link ModifyServiceGroupWeights 更新推理服务组流量分配}({@link ModifyServiceGroupWeightsRequest 请求参数}): {@link ModifyServiceGroupWeightsResponse 返回参数} */

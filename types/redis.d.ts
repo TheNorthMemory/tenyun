@@ -2393,7 +2393,7 @@ declare interface SwitchProxyResponse {
 declare interface UpgradeInstanceRequest {
   /** 待变更实例 ID。 */
   InstanceId: string;
-  /** 指实例每个分片内存变更后的大小。单位 MB。每次只能修改参数MemSize、RedisShardNum和RedisReplicasNum其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。 */
+  /** 指实例每个分片内存变更后的大小。单位 MB。每次只能修改参数MemSize、RedisShardNum和RedisReplicasNum其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。缩容时，缩容后的规格务必要大于等于使用容量的1.3倍，否则将执行失败。 */
   MemSize: number;
   /** 指实例变更后的分片数量。标准架构不需要配置该参数，集群架构为必填参数。集群架构，每次只能修改参数RedisShardNum、MemSize和RedisReplicasNum其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。 */
   RedisShardNum?: number;

@@ -174,6 +174,8 @@ declare interface HostDetail {
   PidTag: string;
   /** 计费ID */
   Pid: number;
+  /** 独享集群实例Id */
+  InstanceId: string;
 }
 
 /** 集群容量信息。 */

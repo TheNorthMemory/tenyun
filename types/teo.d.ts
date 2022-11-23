@@ -182,14 +182,6 @@ declare interface AscriptionInfo {
   RecordValue: string;
 }
 
-/** Dns数据曲线过滤参数 */
-declare interface BillingDataFilter {
-  /** 参数名称，取值范围：zone：站点名host：域名proxy: 四层实例plan: 套餐 */
-  Type: string;
-  /** 参数值 */
-  Value: string;
-}
-
 /** 安全Bot配置 */
 declare interface BotConfig {
   /** bot开关，取值有：on：开启；off：关闭。 */
@@ -2834,28 +2826,6 @@ declare interface DescribeAvailablePlansRequest {
 declare interface DescribeAvailablePlansResponse {
   /** 当前账户可购买套餐类型及相关信息。 */
   PlanInfo: PlanInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
-declare interface DescribeBillingDataRequest {
-  /** 起始时间。 */
-  StartTime: string;
-  /** 结束时间。 */
-  EndTime: string;
-  /** 时间粒度, 支持指定以下几种粒度：min：1分钟粒度；5min：5分钟粒度；hour：1小时粒度；day：天粒度； */
-  Interval: string;
-  /** 指标名,支持:acc_flux: 内容加速流量用量；quic_request: QUIC 请求数用量；sec_flux: 安全流量用量；sec_request_clean: 安全干净流量请求数； */
-  MetricName: string;
-  /** 筛选条件. 支持:zone: 站点级数据；plan: 套餐级数据；service: l4 / l7分别筛选四七层数据；tagKey: 标签Key；tagValue: 标签Value。 */
-  Filters: BillingDataFilter[];
-}
-
-declare interface DescribeBillingDataResponse {
-  /** 统计曲线数据 */
-  Data: DnsData[] | null;
-  /** 时间粒度 */
-  Interval: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -9011,8 +8981,6 @@ declare interface Teo {
   DescribeApplicationProxies(data?: DescribeApplicationProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationProxiesResponse>;
   /** {@link DescribeAvailablePlans 查询当前账户可购买套餐信息列表}({@link DescribeAvailablePlansRequest 请求参数}): {@link DescribeAvailablePlansResponse 返回参数} */
   DescribeAvailablePlans(data?: DescribeAvailablePlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailablePlansResponse>;
-  /** {@link DescribeBillingData 获取计费数据}({@link DescribeBillingDataRequest 请求参数}): {@link DescribeBillingDataResponse 返回参数} */
-  DescribeBillingData(data: DescribeBillingDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingDataResponse>;
   /** {@link DescribeBotClientIpList 查询Bot攻击客户端Ip信息}({@link DescribeBotClientIpListRequest 请求参数}): {@link DescribeBotClientIpListResponse 返回参数} */
   DescribeBotClientIpList(data: DescribeBotClientIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotClientIpListResponse>;
   /** {@link DescribeBotData 查询Bot攻击时序数据}({@link DescribeBotDataRequest 请求参数}): {@link DescribeBotDataResponse 返回参数} */

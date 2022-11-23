@@ -658,6 +658,10 @@ declare interface ParamTemplateListInfo {
   TemplateDescription: string;
   /** 引擎版本 */
   EngineVersion: string;
+  /** 数据库类型，可选值：NORMAL，SERVERLESS */
+  DbMode: string;
+  /** 参数模板详情 */
+  ParamInfoSet: TemplateParamInfo[] | null;
 }
 
 /** 安全组规则 */
@@ -786,6 +790,28 @@ declare interface Tag {
   TagKey: string;
   /** 标签值 */
   TagValue: string;
+}
+
+/** 参数模板详情 */
+declare interface TemplateParamInfo {
+  /** 当前值 */
+  CurrentValue: string;
+  /** 默认值 */
+  Default: string;
+  /** 参数类型为enum时可选的值类型集合 */
+  EnumValue: string[] | null;
+  /** 参数类型为float/integer时的最大值 */
+  Max: string | null;
+  /** 参数类型为float/integer时的最小值 */
+  Min: string | null;
+  /** 参数名称 */
+  ParamName: string;
+  /** 是否需要重启 */
+  NeedReboot: number;
+  /** 参数描述 */
+  Description: string;
+  /** 参数类型，integer/float/string/enum */
+  ParamType: string;
 }
 
 /** 计费询价结果 */
@@ -1471,6 +1497,28 @@ declare interface DescribeMaintainPeriodResponse {
 }
 
 declare interface DescribeParamTemplatesRequest {
+  /** 数据库引擎版本号 */
+  EngineVersions?: string[];
+  /** 模版名称 */
+  TemplateNames?: string[];
+  /** 模版ID */
+  TemplateIds?: number[];
+  /** 数据库类型，可选值：NORMAL，SERVERLESS */
+  DbModes?: string[];
+  /** 查询偏移量 */
+  Offset?: number;
+  /** 查询限制条数 */
+  Limit?: number;
+  /** 查询的模板对应的产品类型 */
+  Products?: string[];
+  /** 模版类型 */
+  TemplateTypes?: string[];
+  /** 版本类型 */
+  EngineTypes?: string[];
+  /** 返回结果的排序字段 */
+  OrderBy?: string;
+  /** 排序方式（asc、desc） */
+  OrderDirection?: string;
 }
 
 declare interface DescribeParamTemplatesResponse {
@@ -1941,11 +1989,11 @@ declare interface RollBackClusterRequest {
   RollbackId: number;
   /** 期望回档时间 */
   ExpectTime?: string;
-  /** 期望阈值 */
+  /** 期望阈值（已废弃） */
   ExpectTimeThresh?: number;
   /** 回档数据库列表 */
   RollbackDatabases?: RollbackDatabase[];
-  /** 回档数据库表 */
+  /** 回档数据库表列表 */
   RollbackTables?: RollbackTable[];
 }
 

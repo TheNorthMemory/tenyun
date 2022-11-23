@@ -176,6 +176,26 @@ declare interface DBParamValue {
   Value: string;
 }
 
+/** dcn 配置情况 */
+declare interface DCNReplicaConfig {
+  /** DCN 运行状态，START为正常运行，STOP为暂停 */
+  RoReplicationMode: string | null;
+  /** 延迟复制的类型，DEFAULT为正常，DUE_TIME为指定时间 */
+  DelayReplicationType: string | null;
+  /** 延迟复制的指定时间 */
+  DueTime: string | null;
+  /** 延迟复制时的延迟秒数 */
+  ReplicationDelay: number | null;
+}
+
+/** DCN的状态信息 */
+declare interface DCNReplicaStatus {
+  /** DCN 的运行状态，START为正常运行，STOP为暂停， */
+  Status: string | null;
+  /** 当前延迟情况，取备实例的 master 节点的 delay 值 */
+  Delay: number;
+}
+
 /** 数据库信息 */
 declare interface Database {
   /** 数据库名称 */
@@ -252,6 +272,12 @@ declare interface DcnDetailItem {
   PeriodEndTime: string;
   /** 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型） */
   InstanceType: number;
+  /** DCN复制的配置信息；对于主实例，此字段为null */
+  ReplicaConfig: DCNReplicaConfig | null;
+  /** DCN复制的状态；对于主实例，此字段为null */
+  ReplicaStatus: DCNReplicaStatus | null;
+  /** 是否开启了 kms */
+  EncryptStatus: number;
 }
 
 /** 订单信息 */
@@ -264,7 +290,7 @@ declare interface Deal {
   Count: number;
   /** 关联的流程 Id，可用于查询流程执行状态 */
   FlowId: number;
-  /** 只有创建实例的订单会填充该字段，表示该订单创建的实例的 ID。 */
+  /** 只有创建实例且已完成发货的订单会填充该字段，表示该订单创建的实例的 ID */
   InstanceIds: string[] | null;
   /** 付费模式，0后付费/1预付费 */
   PayMode: number;

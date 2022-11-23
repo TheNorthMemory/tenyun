@@ -2293,9 +2293,9 @@ declare interface LiveStreamProcessTask {
 /** 任务处理的事件通知配置。 */
 declare interface LiveStreamTaskNotifyConfig {
   /** CMQ 的模型，有 Queue 和 Topic 两种，目前仅支持 Queue。 */
-  CmqModel: string;
+  CmqModel?: string;
   /** CMQ 的园区，如 sh，bj 等。 */
-  CmqRegion: string;
+  CmqRegion?: string;
   /** 当模型为 Queue 时有效，表示接收事件通知的 CMQ 的队列名。 */
   QueueName?: string;
   /** 当模型为 Topic 时有效，表示接收事件通知的 CMQ 的主题名。 */

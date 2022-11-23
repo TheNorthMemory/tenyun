@@ -248,6 +248,26 @@ declare interface HostResource {
   GpuAvailable?: number;
 }
 
+/** 高性能计算集群 */
+declare interface HpcClusterInfo {
+  /** 高性能计算集群ID */
+  HpcClusterId: string;
+  /** 高性能计算集群名 */
+  Name: string | null;
+  /** 高性能计算集群备注 */
+  Remark: string | null;
+  /** 集群下设备容量 */
+  CvmQuotaTotal: number;
+  /** 集群所在可用区 */
+  Zone: string;
+  /** 集群当前已有设备量 */
+  CurrentNum: number;
+  /** 集群创建时间 */
+  CreateTime: string | null;
+  /** 集群内实例ID列表 */
+  InstanceIds: string[] | null;
+}
+
 /** 一个关于镜像详细信息的结构体，主要包括镜像的主要状态与属性。 */
 declare interface Image {
   /** 镜像ID */
@@ -1144,6 +1164,22 @@ declare interface CreateDisasterRecoverGroupResponse {
   RequestId?: string;
 }
 
+declare interface CreateHpcClusterRequest {
+  /** 可用区。 */
+  Zone: string;
+  /** 高性能计算集群名称。 */
+  Name: string;
+  /** 高性能计算集群备注。 */
+  Remark?: string;
+}
+
+declare interface CreateHpcClusterResponse {
+  /** 高性能计算集群信息。 */
+  HpcClusterSet?: HpcClusterInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateImageRequest {
   /** 镜像名称 */
   ImageName: string;
@@ -1328,6 +1364,16 @@ declare interface DeleteDisasterRecoverGroupsResponse {
   RequestId?: string;
 }
 
+declare interface DeleteHpcClustersRequest {
+  /** 高性能计算集群ID列表。 */
+  HpcClusterIds: string[];
+}
+
+declare interface DeleteHpcClustersResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DeleteImagesRequest {
   /** 准备删除的镜像Id列表 */
   ImageIds: string[];
@@ -1472,6 +1518,28 @@ declare interface DescribeHostsResponse {
   TotalCount: number;
   /** cdh实例详细信息列表 */
   HostSet: HostItem[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHpcClustersRequest {
+  /** 高性能计算集群ID数组。 */
+  HpcClusterIds?: string[];
+  /** 高性能计算集群名称。 */
+  Name?: string;
+  /** 可用区。 */
+  Zone?: string;
+  /** 偏移量, 默认值0。 */
+  Offset?: number;
+  /** 本次请求量, 默认值20。 */
+  Limit?: number;
+}
+
+declare interface DescribeHpcClustersResponse {
+  /** 高性能计算集群信息。 */
+  HpcClusterSet?: HpcClusterInfo[];
+  /** 高性能计算集群总数。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2149,6 +2217,20 @@ declare interface ModifyHostsAttributeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyHpcClusterAttributeRequest {
+  /** 高性能计算集群ID。 */
+  HpcClusterId: string;
+  /** 高性能计算集群新名称。 */
+  Name?: string;
+  /** 高性能计算集群新备注。 */
+  Remark?: string;
+}
+
+declare interface ModifyHpcClusterAttributeResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyImageAttributeRequest {
   /** 镜像ID，形如`img-gvbnzy6f`。镜像ID可以通过如下方式获取：通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回的`ImageId`获取。通过[镜像控制台](https://console.cloud.tencent.com/cvm/image)获取。 */
   ImageId: string;
@@ -2610,6 +2692,8 @@ declare interface Cvm {
   ConfigureChcDeployVpc(data: ConfigureChcDeployVpcRequest, config?: AxiosRequestConfig): AxiosPromise<ConfigureChcDeployVpcResponse>;
   /** {@link CreateDisasterRecoverGroup 创建分散置放群组}({@link CreateDisasterRecoverGroupRequest 请求参数}): {@link CreateDisasterRecoverGroupResponse 返回参数} */
   CreateDisasterRecoverGroup(data: CreateDisasterRecoverGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDisasterRecoverGroupResponse>;
+  /** {@link CreateHpcCluster 创建高性能计算集群}({@link CreateHpcClusterRequest 请求参数}): {@link CreateHpcClusterResponse 返回参数} */
+  CreateHpcCluster(data: CreateHpcClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHpcClusterResponse>;
   /** {@link CreateImage 创建镜像}({@link CreateImageRequest 请求参数}): {@link CreateImageResponse 返回参数} */
   CreateImage(data: CreateImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageResponse>;
   /** {@link CreateKeyPair 创建密钥对}({@link CreateKeyPairRequest 请求参数}): {@link CreateKeyPairResponse 返回参数} */
@@ -2620,6 +2704,8 @@ declare interface Cvm {
   CreateLaunchTemplateVersion(data: CreateLaunchTemplateVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLaunchTemplateVersionResponse>;
   /** {@link DeleteDisasterRecoverGroups 删除分散置放群组}({@link DeleteDisasterRecoverGroupsRequest 请求参数}): {@link DeleteDisasterRecoverGroupsResponse 返回参数} */
   DeleteDisasterRecoverGroups(data: DeleteDisasterRecoverGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDisasterRecoverGroupsResponse>;
+  /** {@link DeleteHpcClusters 删除高性能计算集群}({@link DeleteHpcClustersRequest 请求参数}): {@link DeleteHpcClustersResponse 返回参数} */
+  DeleteHpcClusters(data: DeleteHpcClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHpcClustersResponse>;
   /** {@link DeleteImages 删除镜像}({@link DeleteImagesRequest 请求参数}): {@link DeleteImagesResponse 返回参数} */
   DeleteImages(data: DeleteImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImagesResponse>;
   /** {@link DeleteKeyPairs 删除密钥对}({@link DeleteKeyPairsRequest 请求参数}): {@link DeleteKeyPairsResponse 返回参数} */
@@ -2640,6 +2726,8 @@ declare interface Cvm {
   DescribeDisasterRecoverGroups(data?: DescribeDisasterRecoverGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisasterRecoverGroupsResponse>;
   /** {@link DescribeHosts 查看CDH实例列表}({@link DescribeHostsRequest 请求参数}): {@link DescribeHostsResponse 返回参数} */
   DescribeHosts(data?: DescribeHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostsResponse>;
+  /** {@link DescribeHpcClusters 查询高性能集群信息}({@link DescribeHpcClustersRequest 请求参数}): {@link DescribeHpcClustersResponse 返回参数} */
+  DescribeHpcClusters(data?: DescribeHpcClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHpcClustersResponse>;
   /** {@link DescribeImageQuota 查询镜像配额上限}({@link DescribeImageQuotaRequest 请求参数}): {@link DescribeImageQuotaResponse 返回参数} */
   DescribeImageQuota(data?: DescribeImageQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageQuotaResponse>;
   /** {@link DescribeImageSharePermission 查看镜像分享信息}({@link DescribeImageSharePermissionRequest 请求参数}): {@link DescribeImageSharePermissionResponse 返回参数} */
@@ -2718,6 +2806,8 @@ declare interface Cvm {
   ModifyDisasterRecoverGroupAttribute(data: ModifyDisasterRecoverGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisasterRecoverGroupAttributeResponse>;
   /** {@link ModifyHostsAttribute 修改CDH实例的属性}({@link ModifyHostsAttributeRequest 请求参数}): {@link ModifyHostsAttributeResponse 返回参数} */
   ModifyHostsAttribute(data: ModifyHostsAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostsAttributeResponse>;
+  /** {@link ModifyHpcClusterAttribute 修改高性能计算集群属性}({@link ModifyHpcClusterAttributeRequest 请求参数}): {@link ModifyHpcClusterAttributeResponse 返回参数} */
+  ModifyHpcClusterAttribute(data: ModifyHpcClusterAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHpcClusterAttributeResponse>;
   /** {@link ModifyImageAttribute 修改镜像属性}({@link ModifyImageAttributeRequest 请求参数}): {@link ModifyImageAttributeResponse 返回参数} */
   ModifyImageAttribute(data: ModifyImageAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageAttributeResponse>;
   /** {@link ModifyImageSharePermission 修改镜像分享信息}({@link ModifyImageSharePermissionRequest 请求参数}): {@link ModifyImageSharePermissionResponse 返回参数} */

@@ -256,6 +256,8 @@ declare interface OnlineTaxiItineraryInfo {
   Name: string;
   /** 识别出的字段名称对应的值，也就是字段name对应的字符串结果。 */
   Value: string;
+  /** 字段所在行，下标从0开始，非行字段或未能识别行号的返回-1 */
+  Row: number;
 }
 
 /** 通行费发票信息 */

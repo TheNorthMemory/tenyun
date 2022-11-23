@@ -434,6 +434,16 @@ declare interface RecordCountInfo {
   TotalCount: number;
 }
 
+/** 解析记录分组信息 */
+declare interface RecordGroupInfo {
+  /** 分组 ID */
+  GroupId: number;
+  /** 分组名称 */
+  GroupName: string;
+  /** 分组类型：system-系统；user-用户 */
+  GroupType: string;
+}
+
 /** 记录信息 */
 declare interface RecordInfo {
   /** 记录 ID 。 */
@@ -756,6 +766,22 @@ declare interface CreateRecordBatchResponse {
   RequestId?: string;
 }
 
+declare interface CreateRecordGroupRequest {
+  /** 域名 */
+  Domain: string;
+  /** 分组名称 */
+  GroupName: string;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+}
+
+declare interface CreateRecordGroupResponse {
+  /** 新增的分组 ID */
+  GroupId: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateRecordRequest {
   /** 域名 */
   Domain: string;
@@ -822,6 +848,20 @@ declare interface DeleteDomainRequest {
 }
 
 declare interface DeleteDomainResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRecordGroupRequest {
+  /** 域名 */
+  Domain: string;
+  /** 分组 ID */
+  GroupId: number;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+}
+
+declare interface DeleteRecordGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1022,6 +1062,24 @@ declare interface DescribeDomainShareInfoResponse {
   ShareList: DomainShareInfo[];
   /** 域名拥有者账号 */
   Owner: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRecordGroupListRequest {
+  /** 域名 */
+  Domain: string;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+  /** 分页开始位置 */
+  Offset?: number;
+  /** 分页每页数 */
+  Limit?: number;
+}
+
+declare interface DescribeRecordGroupListResponse {
+  /** 分组列表 */
+  GroupList: RecordGroupInfo[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1416,6 +1474,24 @@ declare interface ModifyRecordBatchResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRecordGroupRequest {
+  /** 域名 */
+  Domain: string;
+  /** 分组名称 */
+  GroupName: string;
+  /** 要修改的分组 ID */
+  GroupId: number;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+}
+
+declare interface ModifyRecordGroupResponse {
+  /** 修改的分组 ID */
+  GroupId: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRecordRemarkRequest {
   /** 域名 */
   Domain: string;
@@ -1480,6 +1556,22 @@ declare interface ModifyRecordStatusRequest {
 declare interface ModifyRecordStatusResponse {
   /** 记录ID。 */
   RecordId: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyRecordToGroupRequest {
+  /** 域名 */
+  Domain: string;
+  /** 分组 ID */
+  GroupId: number;
+  /** 记录 ID，多个 ID 用竖线“|”分割 */
+  RecordId: string;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
+  DomainId?: number;
+}
+
+declare interface ModifyRecordToGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1603,6 +1695,8 @@ declare interface Dnspod {
   CreateRecord(data: CreateRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordResponse>;
   /** {@link CreateRecordBatch 批量添加记录}({@link CreateRecordBatchRequest 请求参数}): {@link CreateRecordBatchResponse 返回参数} */
   CreateRecordBatch(data: CreateRecordBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordBatchResponse>;
+  /** {@link CreateRecordGroup 添加记录分组}({@link CreateRecordGroupRequest 请求参数}): {@link CreateRecordGroupResponse 返回参数} */
+  CreateRecordGroup(data: CreateRecordGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordGroupResponse>;
   /** {@link CreateSnapshot 创建快照}({@link CreateSnapshotRequest 请求参数}): {@link CreateSnapshotResponse 返回参数} */
   CreateSnapshot(data: CreateSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotResponse>;
   /** {@link DeleteDomain 删除域名}({@link DeleteDomainRequest 请求参数}): {@link DeleteDomainResponse 返回参数} */
@@ -1611,6 +1705,8 @@ declare interface Dnspod {
   DeleteDomainAlias(data: DeleteDomainAliasRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainAliasResponse>;
   /** {@link DeleteRecord 删除记录}({@link DeleteRecordRequest 请求参数}): {@link DeleteRecordResponse 返回参数} */
   DeleteRecord(data: DeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordResponse>;
+  /** {@link DeleteRecordGroup 删除记录分组}({@link DeleteRecordGroupRequest 请求参数}): {@link DeleteRecordGroupResponse 返回参数} */
+  DeleteRecordGroup(data: DeleteRecordGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordGroupResponse>;
   /** {@link DeleteShareDomain 删除域名共享}({@link DeleteShareDomainRequest 请求参数}): {@link DeleteShareDomainResponse 返回参数} */
   DeleteShareDomain(data: DeleteShareDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShareDomainResponse>;
   /** {@link DeleteSnapshot 删除快照}({@link DeleteSnapshotRequest 请求参数}): {@link DeleteSnapshotResponse 返回参数} */
@@ -1635,6 +1731,8 @@ declare interface Dnspod {
   DescribeDomainShareInfo(data: DescribeDomainShareInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainShareInfoResponse>;
   /** {@link DescribeRecord 获取记录信息}({@link DescribeRecordRequest 请求参数}): {@link DescribeRecordResponse 返回参数} */
   DescribeRecord(data: DescribeRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordResponse>;
+  /** {@link DescribeRecordGroupList 查询解析记录分组列表}({@link DescribeRecordGroupListRequest 请求参数}): {@link DescribeRecordGroupListResponse 返回参数} */
+  DescribeRecordGroupList(data: DescribeRecordGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordGroupListResponse>;
   /** {@link DescribeRecordLineList 获取等级允许的线路}({@link DescribeRecordLineListRequest 请求参数}): {@link DescribeRecordLineListResponse 返回参数} */
   DescribeRecordLineList(data: DescribeRecordLineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordLineListResponse>;
   /** {@link DescribeRecordList 获取域名的解析记录}({@link DescribeRecordListRequest 请求参数}): {@link DescribeRecordListResponse 返回参数} */
@@ -1675,10 +1773,14 @@ declare interface Dnspod {
   ModifyRecord(data: ModifyRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordResponse>;
   /** {@link ModifyRecordBatch 批量修改记录}({@link ModifyRecordBatchRequest 请求参数}): {@link ModifyRecordBatchResponse 返回参数} */
   ModifyRecordBatch(data: ModifyRecordBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordBatchResponse>;
+  /** {@link ModifyRecordGroup 修改记录分组}({@link ModifyRecordGroupRequest 请求参数}): {@link ModifyRecordGroupResponse 返回参数} */
+  ModifyRecordGroup(data: ModifyRecordGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordGroupResponse>;
   /** {@link ModifyRecordRemark 设置记录备注}({@link ModifyRecordRemarkRequest 请求参数}): {@link ModifyRecordRemarkResponse 返回参数} */
   ModifyRecordRemark(data: ModifyRecordRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordRemarkResponse>;
   /** {@link ModifyRecordStatus 设置记录状态}({@link ModifyRecordStatusRequest 请求参数}): {@link ModifyRecordStatusResponse 返回参数} */
   ModifyRecordStatus(data: ModifyRecordStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordStatusResponse>;
+  /** {@link ModifyRecordToGroup 将记录添加到分组}({@link ModifyRecordToGroupRequest 请求参数}): {@link ModifyRecordToGroupResponse 返回参数} */
+  ModifyRecordToGroup(data: ModifyRecordToGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordToGroupResponse>;
   /** {@link ModifySnapshotConfig 修改快照配置}({@link ModifySnapshotConfigRequest 请求参数}): {@link ModifySnapshotConfigResponse 返回参数} */
   ModifySnapshotConfig(data: ModifySnapshotConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotConfigResponse>;
   /** {@link ModifySubdomainStatus 暂停子域名的解析记录}({@link ModifySubdomainStatusRequest 请求参数}): {@link ModifySubdomainStatusResponse 返回参数} */

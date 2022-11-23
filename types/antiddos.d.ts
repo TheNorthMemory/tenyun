@@ -912,6 +912,18 @@ declare interface ProtectThresholdRelation {
   UdpFloodThreshold: number | null;
   /** UDP FLOOD包量阈值 */
   UdpFloodPktThreshold: number | null;
+  /** ACK FLOOD流量阈值 */
+  AckFloodThreshold: number | null;
+  /** ACK FLOOD包量阈值 */
+  AckFloodPktThreshold: number | null;
+  /** SYNACK FLOOD流量阈值 */
+  SynAckFloodThreshold: number | null;
+  /** SYNACK FLOOD包量阈值 */
+  SynAckFloodPktThreshold: number | null;
+  /** RST FLOOD流量阈值 */
+  RstFloodThreshold: number | null;
+  /** RST FLOOD包量阈值 */
+  RstFloodPktThreshold: number | null;
 }
 
 /** 协议封禁配置 */
@@ -2679,6 +2691,18 @@ declare interface ModifyDDoSThresholdRequest {
   UdpFloodThreshold?: number;
   /** UDP FLOOD包量阈值 */
   UdpFloodPktThreshold?: number;
+  /** ACK FLOOD流量阈值 */
+  AckFloodThreshold?: number;
+  /** ACK FLOOD包量阈值 */
+  AckFloodPktThreshold?: number;
+  /** SYNACK FLOOD流量阈值 */
+  SynAckFloodThreshold?: number;
+  /** SYNACK FLOOD包量阈值 */
+  SynAckFloodPktThreshold?: number;
+  /** RST FLOOD流量阈值 */
+  RstFloodThreshold?: number;
+  /** RST FLOOD包量阈值 */
+  RstFloodPktThreshold?: number;
 }
 
 declare interface ModifyDDoSThresholdResponse {
