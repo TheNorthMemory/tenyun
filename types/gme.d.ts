@@ -72,6 +72,24 @@ declare interface ApplicationDataStatistics {
   PcuDataSum: StatisticsItem[];
 }
 
+/** 获取应用列表返回 */
+declare interface ApplicationList {
+  /** 服务开关状态 */
+  ServiceConf: ServiceStatus;
+  /** 应用ID(AppID) */
+  BizId: number;
+  /** 应用名称 */
+  AppName: string;
+  /** 项目ID，默认为0 */
+  ProjectId: number;
+  /** 应用状态，返回0表示正常，1表示关闭，2表示欠费停服，3表示欠费回收 */
+  AppStatus: number;
+  /** 创建时间，Unix时间戳格式 */
+  CreateTime: number;
+  /** 应用类型，无需关注此数值 */
+  AppType: number;
+}
+
 /** 录音转文本用量统计数据 */
 declare interface AudioTextStatisticsItem {
   /** 统计值，单位：秒 */
@@ -156,6 +174,14 @@ declare interface DescribeScanResult {
   Status: string;
   /** 提交检测的应用 ID */
   BizId: number;
+}
+
+/** 查找过滤 */
+declare interface Filter {
+  /** 要过滤的字段名, 比如"AppName" */
+  Name?: string;
+  /** 多个关键字 */
+  Values?: string[];
 }
 
 /** 用户进出房间信息 */
@@ -266,12 +292,32 @@ declare interface ScanVoiceResult {
   TaskId: string;
 }
 
+/** 服务开关状态 */
+declare interface ServiceStatus {
+  /** 实时语音服务开关状态 */
+  RealTimeSpeech: StatusInfo | null;
+  /** 语音消息服务开关状态 */
+  VoiceMessage: StatusInfo | null;
+  /** 语音内容安全服务开关状态 */
+  Porn: StatusInfo | null;
+  /** 语音录制服务开关状态 */
+  Live: StatusInfo | null;
+  /** 语音转文本服务开关状态 */
+  RealTimeAsr: StatusInfo | null;
+}
+
 /** 用量数据单元 */
 declare interface StatisticsItem {
   /** 日期，格式为年-月-日，如2018-07-13 */
   StatDate: string;
   /** 统计值 */
   Data: number;
+}
+
+/** 服务开关状态 */
+declare interface StatusInfo {
+  /** 服务开关状态， 0-正常，1-关闭 */
+  Status: number;
 }
 
 /** 流式转文本用量数据 */
@@ -498,6 +544,30 @@ declare interface DescribeApplicationDataRequest {
 declare interface DescribeApplicationDataResponse {
   /** 应用统计数据 */
   Data: ApplicationDataStatistics;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApplicationListRequest {
+  /** 项目ID，0表示默认项目，-1表示所有项目，如果需要查找具体项目下的应用列表，请填入具体项目ID，项目ID在项目管理中查看 https://console.cloud.tencent.com/project */
+  ProjectId: number;
+  /** 页码ID，0表示第一页，以此后推。默认填0 */
+  PageNo: number;
+  /** 每页展示应用数量。默认填200 */
+  PageSize: number;
+  /** 所查找应用名称的关键字，支持模糊匹配查找。空串表示查询所有应用 */
+  SearchText: string;
+  /** 标签列表 */
+  TagSet?: Tag[];
+  /** 查找过滤关键字列表 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeApplicationListResponse {
+  /** 获取应用列表返回 */
+  ApplicationList: ApplicationList[];
+  /** 应用总数 */
+  Total: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -739,6 +809,8 @@ declare interface Gme {
   DescribeAppStatistics(data: DescribeAppStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppStatisticsResponse>;
   /** {@link DescribeApplicationData 获取数据详情}({@link DescribeApplicationDataRequest 请求参数}): {@link DescribeApplicationDataResponse 返回参数} */
   DescribeApplicationData(data: DescribeApplicationDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationDataResponse>;
+  /** {@link DescribeApplicationList 查询某账号下的应用列表}({@link DescribeApplicationListRequest 请求参数}): {@link DescribeApplicationListResponse 返回参数} */
+  DescribeApplicationList(data: DescribeApplicationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationListResponse>;
   /** {@link DescribeRealtimeScanConfig 获取用户自定义送检信息}({@link DescribeRealtimeScanConfigRequest 请求参数}): {@link DescribeRealtimeScanConfigResponse 返回参数} */
   DescribeRealtimeScanConfig(data: DescribeRealtimeScanConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealtimeScanConfigResponse>;
   /** {@link DescribeRoomInfo 获取房间内用户信息}({@link DescribeRoomInfoRequest 请求参数}): {@link DescribeRoomInfoResponse 返回参数} */

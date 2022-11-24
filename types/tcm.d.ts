@@ -570,6 +570,26 @@ declare interface DeleteMeshResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAccessLogConfigRequest {
+  /** mesh名字 */
+  MeshId: string;
+}
+
+declare interface DescribeAccessLogConfigResponse {
+  /** 访问日志输出路径。默认 /dev/stdout */
+  File: string;
+  /** 访问日志的格式。 */
+  Format: string;
+  /** 访问日志输出编码。默认 “TEXT”。除此之外还有“JSON” */
+  Encoding: string;
+  /** 选中的范围 */
+  SelectedRange: SelectedRange | null;
+  /** 采用的模板，可取值为"istio, trace，默认为istio */
+  Template: string | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMeshListRequest {
   /** 过滤条件 */
   Filters?: Filter[];
@@ -620,6 +640,34 @@ declare interface LinkPrometheusRequest {
 }
 
 declare interface LinkPrometheusResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAccessLogConfigRequest {
+  /** mesh ID */
+  MeshId: string;
+  /** 选中的范围 */
+  SelectedRange?: SelectedRange;
+  /** 采用的模板，可选值：istio（默认）、trace、custom */
+  Template?: string;
+  /** 是否启用 */
+  Enable?: boolean;
+  /** 腾讯云日志服务相关参数 */
+  CLS?: CLS;
+  /** 编码格式，可选值：TEXT、JSON */
+  Encoding?: string;
+  /** 日志格式 */
+  Format?: string;
+  /** 是否启用标准输出 */
+  EnableStdout?: boolean;
+  /** 是否启动GRPC第三方服务器 */
+  EnableServer?: boolean;
+  /** GRPC第三方服务器地址 */
+  Address?: string;
+}
+
+declare interface ModifyAccessLogConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -687,6 +735,8 @@ declare interface Tcm {
   CreateMesh(data: CreateMeshRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMeshResponse>;
   /** {@link DeleteMesh 删除网格}({@link DeleteMeshRequest 请求参数}): {@link DeleteMeshResponse 返回参数} */
   DeleteMesh(data: DeleteMeshRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMeshResponse>;
+  /** {@link DescribeAccessLogConfig 获取AccessLog配置}({@link DescribeAccessLogConfigRequest 请求参数}): {@link DescribeAccessLogConfigResponse 返回参数} */
+  DescribeAccessLogConfig(data: DescribeAccessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessLogConfigResponse>;
   /** {@link DescribeMesh 查询网格详情}({@link DescribeMeshRequest 请求参数}): {@link DescribeMeshResponse 返回参数} */
   DescribeMesh(data: DescribeMeshRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMeshResponse>;
   /** {@link DescribeMeshList 查询网格列表}({@link DescribeMeshListRequest 请求参数}): {@link DescribeMeshListResponse 返回参数} */
@@ -695,6 +745,8 @@ declare interface Tcm {
   LinkClusterList(data: LinkClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<LinkClusterListResponse>;
   /** {@link LinkPrometheus 关联Prometheus}({@link LinkPrometheusRequest 请求参数}): {@link LinkPrometheusResponse 返回参数} */
   LinkPrometheus(data: LinkPrometheusRequest, config?: AxiosRequestConfig): AxiosPromise<LinkPrometheusResponse>;
+  /** {@link ModifyAccessLogConfig 修改访问日志配置}({@link ModifyAccessLogConfigRequest 请求参数}): {@link ModifyAccessLogConfigResponse 返回参数} */
+  ModifyAccessLogConfig(data: ModifyAccessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessLogConfigResponse>;
   /** {@link ModifyMesh 修改网格}({@link ModifyMeshRequest 请求参数}): {@link ModifyMeshResponse 返回参数} */
   ModifyMesh(data: ModifyMeshRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMeshResponse>;
   /** {@link ModifyTracingConfig 修改 Tracing 配置}({@link ModifyTracingConfigRequest 请求参数}): {@link ModifyTracingConfigResponse 返回参数} */

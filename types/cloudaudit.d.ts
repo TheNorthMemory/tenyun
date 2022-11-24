@@ -106,6 +106,38 @@ declare interface Resource {
   ResourceName?: string | null;
 }
 
+/** 跟踪集存储信息 */
+declare interface Storage {
+  /** 存储类型（目前支持 cos、cls） */
+  StorageType: string;
+  /** 存储所在地域 */
+  StorageRegion: string;
+  /** 存储名称(cos：存储名称为用户自定义的存储桶名称，不包含"-APPID"，仅支持小写字母、数字以及中划线"-"的组合，不能超过50字符，且不支持中划线"-"开头或结尾； cls：存储名称为日志主题id，字符长度为1-50个字符) */
+  StorageName: string;
+  /** 存储目录前缀，cos日志文件前缀仅支持字母和数字的组合，3-40个字符 */
+  StoragePrefix: string;
+}
+
+/** 跟踪集列表 */
+declare interface Tracks {
+  /** 跟踪集名称 */
+  Name: string;
+  /** 跟踪事件类型（读：Read；写：Write；全部：*） */
+  ActionType: string;
+  /** 跟踪事件所属产品（如：cos，全部：*） */
+  ResourceType: string;
+  /** 跟踪集状态（未开启：0；开启：1） */
+  Status: number;
+  /** 跟踪事件接口名列表（全部：[*]） */
+  EventNames: string[];
+  /** 数据投递存储（目前支持 cos、cls） */
+  Storage: Storage;
+  /** 跟踪集创建时间 */
+  CreateTime: string;
+  /** 跟踪集 ID */
+  TrackId: number;
+}
+
 declare interface CreateAuditRequest {
   /** 是否开启cmq消息通知。1：是，0：否。目前仅支持cmq的队列服务。如果开启cmq消息通知服务，云审计会将您的日志内容实时投递到您指定地域的指定队列中。 */
   IsEnableCmqNotify: number;
@@ -143,9 +175,25 @@ declare interface CreateAuditResponse {
 }
 
 declare interface CreateAuditTrackRequest {
+  /** 跟踪集名称，仅支持大小写字母、数字、-以及_的组合，3-48个字符 */
+  Name: string;
+  /** 跟踪事件类型（读：Read；写：Write；全部：*） */
+  ActionType: string;
+  /** 跟踪事件所属产品（支持全部产品或单个产品，如：cos，全部：*） */
+  ResourceType: string;
+  /** 跟踪集状态（未开启：0；开启：1） */
+  Status: number;
+  /** 跟踪事件接口名列表（ResourceType为 * 时，EventNames必须为全部：["*"]；指定ResourceType时，支持全部接口：["*"]；支持部分接口：["cos", "cls"]，接口列表上限10个） */
+  EventNames: string[];
+  /** 数据投递存储（目前支持 cos、cls） */
+  Storage: Storage;
+  /** 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号(0：未开启，1：开启，只能集团管理账号或者可信服务管理账号开启此项功能) */
+  TrackForAllMembers?: number;
 }
 
 declare interface CreateAuditTrackResponse {
+  /** 跟踪集 ID */
+  TrackId: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -163,6 +211,8 @@ declare interface DeleteAuditResponse {
 }
 
 declare interface DeleteAuditTrackRequest {
+  /** 跟踪集 ID */
+  TrackId: number;
 }
 
 declare interface DeleteAuditTrackResponse {
@@ -206,10 +256,44 @@ declare interface DescribeAuditResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAuditTrackRequest {
+  /** 跟踪集 ID */
+  TrackId: number;
+}
+
+declare interface DescribeAuditTrackResponse {
+  /** 跟踪集名称 */
+  Name: string;
+  /** 跟踪事件类型（读：Read；写：Write；全部：*） */
+  ActionType: string;
+  /** 跟踪事件所属产品（如：cos，全部：*） */
+  ResourceType: string;
+  /** 跟踪集状态（未开启：0；开启：1） */
+  Status: number;
+  /** 跟踪事件接口名列表（全部：[*]） */
+  EventNames: string[];
+  /** 数据投递存储（目前支持 cos、cls） */
+  Storage: Storage;
+  /** 跟踪集创建时间 */
+  CreateTime: string;
+  /** 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号 */
+  TrackForAllMembers: number | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAuditTracksRequest {
+  /** 页码 */
+  PageNumber: number;
+  /** 每页数目 */
+  PageSize: number;
 }
 
 declare interface DescribeAuditTracksResponse {
+  /** 跟踪集列表 */
+  Tracks: Tracks[];
+  /** 总数目 */
+  TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -343,6 +427,22 @@ declare interface LookUpEventsResponse {
 }
 
 declare interface ModifyAuditTrackRequest {
+  /** 跟踪集 ID */
+  TrackId: number;
+  /** 跟踪集名称，仅支持大小写字母、数字、-以及_的组合，3-48个字符 */
+  Name?: string;
+  /** 跟踪事件类型（读：Read；写：Write；全部：*） */
+  ActionType?: string;
+  /** 跟踪事件所属产品（支持全部产品或单个产品，如：cos，全部：*） */
+  ResourceType?: string;
+  /** 跟踪集状态（未开启：0；开启：1） */
+  Status?: number;
+  /** 跟踪事件接口名列表（ResourceType为 * 时，EventNames必须为全部：["*"]；指定ResourceType时，支持全部接口：["*"]；支持部分接口：["cos", "cls"]，接口列表上限10个） */
+  EventNames?: string[];
+  /** 数据投递存储（目前支持 cos、cls） */
+  Storage?: Storage;
+  /** 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号(0：未开启，1：开启，只能集团管理账号或者可信服务管理账号开启此项功能) */
+  TrackForAllMembers?: number;
 }
 
 declare interface ModifyAuditTrackResponse {
@@ -416,15 +516,17 @@ declare interface Cloudaudit {
   /** {@link CreateAudit 创建跟踪集}({@link CreateAuditRequest 请求参数}): {@link CreateAuditResponse 返回参数} */
   CreateAudit(data: CreateAuditRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditResponse>;
   /** {@link CreateAuditTrack 创建云审计跟踪集}({@link CreateAuditTrackRequest 请求参数}): {@link CreateAuditTrackResponse 返回参数} */
-  CreateAuditTrack(data?: CreateAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditTrackResponse>;
+  CreateAuditTrack(data: CreateAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditTrackResponse>;
   /** {@link DeleteAudit 删除跟踪集}({@link DeleteAuditRequest 请求参数}): {@link DeleteAuditResponse 返回参数} */
   DeleteAudit(data: DeleteAuditRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditResponse>;
   /** {@link DeleteAuditTrack 删除云审计跟踪集}({@link DeleteAuditTrackRequest 请求参数}): {@link DeleteAuditTrackResponse 返回参数} */
-  DeleteAuditTrack(data?: DeleteAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditTrackResponse>;
+  DeleteAuditTrack(data: DeleteAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditTrackResponse>;
   /** {@link DescribeAudit 查询跟踪集详情}({@link DescribeAuditRequest 请求参数}): {@link DescribeAuditResponse 返回参数} */
   DescribeAudit(data: DescribeAuditRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditResponse>;
+  /** {@link DescribeAuditTrack 查询云审计跟踪集详情}({@link DescribeAuditTrackRequest 请求参数}): {@link DescribeAuditTrackResponse 返回参数} */
+  DescribeAuditTrack(data: DescribeAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditTrackResponse>;
   /** {@link DescribeAuditTracks 查询云审计跟踪集列表}({@link DescribeAuditTracksRequest 请求参数}): {@link DescribeAuditTracksResponse 返回参数} */
-  DescribeAuditTracks(data?: DescribeAuditTracksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditTracksResponse>;
+  DescribeAuditTracks(data: DescribeAuditTracksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditTracksResponse>;
   /** {@link DescribeEvents 查询云审计日志}({@link DescribeEventsRequest 请求参数}): {@link DescribeEventsResponse 返回参数} */
   DescribeEvents(data: DescribeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsResponse>;
   /** {@link GetAttributeKey 查询AttributeKey的有效取值范围}({@link GetAttributeKeyRequest 请求参数}): {@link GetAttributeKeyResponse 返回参数} */
@@ -442,7 +544,7 @@ declare interface Cloudaudit {
   /** {@link LookUpEvents 检索日志}({@link LookUpEventsRequest 请求参数}): {@link LookUpEventsResponse 返回参数} */
   LookUpEvents(data: LookUpEventsRequest, config?: AxiosRequestConfig): AxiosPromise<LookUpEventsResponse>;
   /** {@link ModifyAuditTrack 修改云审计跟踪}({@link ModifyAuditTrackRequest 请求参数}): {@link ModifyAuditTrackResponse 返回参数} */
-  ModifyAuditTrack(data?: ModifyAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditTrackResponse>;
+  ModifyAuditTrack(data: ModifyAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditTrackResponse>;
   /** {@link StartLogging 开启跟踪集}({@link StartLoggingRequest 请求参数}): {@link StartLoggingResponse 返回参数} */
   StartLogging(data: StartLoggingRequest, config?: AxiosRequestConfig): AxiosPromise<StartLoggingResponse>;
   /** {@link StopLogging 关闭跟踪集}({@link StopLoggingRequest 请求参数}): {@link StopLoggingResponse 返回参数} */

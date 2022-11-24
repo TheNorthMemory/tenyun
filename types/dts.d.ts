@@ -730,7 +730,7 @@ declare interface Table {
   FilterCondition?: string | null;
 }
 
-/** 表图对象集合，当 TableMode 为 partial 时，此项需要填写 */
+/** 表对象集合，当 TableMode 为 partial 时，此项需要填写 */
 declare interface TableItem {
   /** 迁移的表名 */
   TableName?: string | null;
@@ -898,7 +898,7 @@ declare interface CreateMigrationServiceRequest {
 }
 
 declare interface CreateMigrationServiceResponse {
-  /** 下单成功随机生成的迁移服务id列表，形如：dts-c1f6rs21 */
+  /** 下单成功随机生成的迁移任务id列表，形如：dts-c1f6rs21 */
   JobIds: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
@@ -2149,13 +2149,13 @@ declare interface Dts {
   CreateCompareTask(data: CreateCompareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCompareTaskResponse>;
   /** {@link CreateMigrateCheckJob 校验迁移任务}({@link CreateMigrateCheckJobRequest 请求参数}): {@link CreateMigrateCheckJobResponse 返回参数} */
   CreateMigrateCheckJob(data: CreateMigrateCheckJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMigrateCheckJobResponse>;
-  /** {@link CreateMigrationService 购买迁移服务}({@link CreateMigrationServiceRequest 请求参数}): {@link CreateMigrationServiceResponse 返回参数} */
+  /** {@link CreateMigrationService 购买迁移任务}({@link CreateMigrationServiceRequest 请求参数}): {@link CreateMigrationServiceResponse 返回参数} */
   CreateMigrationService(data: CreateMigrationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMigrationServiceResponse>;
   /** {@link CreateSyncJob 创建同步任务}({@link CreateSyncJobRequest 请求参数}): {@link CreateSyncJobResponse 返回参数} */
   CreateSyncJob(data: CreateSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSyncJobResponse>;
   /** {@link DeleteCompareTask 删除一致性校验任务}({@link DeleteCompareTaskRequest 请求参数}): {@link DeleteCompareTaskResponse 返回参数} */
   DeleteCompareTask(data: DeleteCompareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCompareTaskResponse>;
-  /** {@link DescribeCheckSyncJobResult 查询校验同步任务结果}({@link DescribeCheckSyncJobResultRequest 请求参数}): {@link DescribeCheckSyncJobResultResponse 返回参数} */
+  /** {@link DescribeCheckSyncJobResult 查询同步校验任务结果}({@link DescribeCheckSyncJobResultRequest 请求参数}): {@link DescribeCheckSyncJobResultResponse 返回参数} */
   DescribeCheckSyncJobResult(data?: DescribeCheckSyncJobResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckSyncJobResultResponse>;
   /** {@link DescribeCompareReport 查询一致性校验任务详情}({@link DescribeCompareReportRequest 请求参数}): {@link DescribeCompareReportResponse 返回参数} */
   DescribeCompareReport(data: DescribeCompareReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompareReportResponse>;
@@ -2165,7 +2165,7 @@ declare interface Dts {
   DescribeMigrateDBInstances(data: DescribeMigrateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrateDBInstancesResponse>;
   /** {@link DescribeMigrationCheckJob 查询迁移校验任务结果}({@link DescribeMigrationCheckJobRequest 请求参数}): {@link DescribeMigrationCheckJobResponse 返回参数} */
   DescribeMigrationCheckJob(data: DescribeMigrationCheckJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationCheckJobResponse>;
-  /** {@link DescribeMigrationDetail 查询某个数据迁移任务详情}({@link DescribeMigrationDetailRequest 请求参数}): {@link DescribeMigrationDetailResponse 返回参数} */
+  /** {@link DescribeMigrationDetail 查询某个迁移任务详情}({@link DescribeMigrationDetailRequest 请求参数}): {@link DescribeMigrationDetailResponse 返回参数} */
   DescribeMigrationDetail(data: DescribeMigrationDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationDetailResponse>;
   /** {@link DescribeMigrationJobs 查询数据迁移任务列表}({@link DescribeMigrationJobsRequest 请求参数}): {@link DescribeMigrationJobsResponse 返回参数} */
   DescribeMigrationJobs(data?: DescribeMigrationJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationJobsResponse>;
@@ -2207,7 +2207,7 @@ declare interface Dts {
   StartSyncJob(data?: StartSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<StartSyncJobResponse>;
   /** {@link StopCompare 终止一致性校验任务}({@link StopCompareRequest 请求参数}): {@link StopCompareResponse 返回参数} */
   StopCompare(data: StopCompareRequest, config?: AxiosRequestConfig): AxiosPromise<StopCompareResponse>;
-  /** {@link StopMigrateJob 停止数据迁移任务}({@link StopMigrateJobRequest 请求参数}): {@link StopMigrateJobResponse 返回参数} */
+  /** {@link StopMigrateJob 终止数据迁移任务}({@link StopMigrateJobRequest 请求参数}): {@link StopMigrateJobResponse 返回参数} */
   StopMigrateJob(data: StopMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<StopMigrateJobResponse>;
   /** {@link StopSyncJob 终止同步任务}({@link StopSyncJobRequest 请求参数}): {@link StopSyncJobResponse 返回参数} */
   StopSyncJob(data: StopSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<StopSyncJobResponse>;

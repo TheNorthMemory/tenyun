@@ -146,6 +146,14 @@ declare interface PeerSet {
   OrgName: string;
 }
 
+/** 用于申请用户签名证书的结构体 */
+declare interface SignCertCsr {
+  /** 用户签名证书的标识，会存在于用户申请的证书中 */
+  CertMark: string;
+  /** 用户申请签名证书所需要的证书请求文件的base64编码 */
+  SignCsrContent: string;
+}
+
 /** 交易列表项信息 */
 declare interface TransactionItem {
   /** 交易ID */
@@ -164,6 +172,20 @@ declare interface TransactionItem {
   BlockHeight: number;
   /** 交易状态 */
   TransactionStatus: string;
+}
+
+declare interface ApplyChainMakerBatchUserCertRequest {
+  /** 网络ID，可在区块链网络详情或列表中获取 */
+  ClusterId: string;
+  /** 证书标识和证书请求文件，可参考TBaaS证书生成相关文档生成证书请求文件 */
+  SignUserCsrList: SignCertCsr[];
+}
+
+declare interface ApplyChainMakerBatchUserCertResponse {
+  /** 成功生成的用户证书的base64编码字符串列表，与SignUserCsrList一一对应 */
+  SignUserCrtList: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
 }
 
 declare interface ApplyUserCertRequest {
@@ -1017,6 +1039,8 @@ declare interface SrvInvokeResponse {
 /** {@link Tbaas 腾讯云区块链服务平台 TBaaS} */
 declare interface Tbaas {
   (): Versions;
+  /** {@link ApplyChainMakerBatchUserCert 批量申请长安链用户签名证书}({@link ApplyChainMakerBatchUserCertRequest 请求参数}): {@link ApplyChainMakerBatchUserCertResponse 返回参数} */
+  ApplyChainMakerBatchUserCert(data: ApplyChainMakerBatchUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyChainMakerBatchUserCertResponse>;
   /** {@link ApplyUserCert 申请用户证书}({@link ApplyUserCertRequest 请求参数}): {@link ApplyUserCertResponse 返回参数} */
   ApplyUserCert(data: ApplyUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyUserCertResponse>;
   /** {@link CreateChaincodeAndInstallForUser 创建并安装合约}({@link CreateChaincodeAndInstallForUserRequest 请求参数}): {@link CreateChaincodeAndInstallForUserResponse 返回参数} */

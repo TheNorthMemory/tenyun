@@ -230,6 +230,10 @@ declare interface DataFormat {
   AVRO: Other | null;
 }
 
+/** 数据治理规则 */
+declare interface DataGovernPolicy {
+}
+
 /** 数据库对象 */
 declare interface DatabaseInfo {
   /** 数据库名称，长度0~128，支持数字、字母下划线，不允许数字大头，统一转换为小写。 */
@@ -260,6 +264,10 @@ declare interface DatabaseResponseInfo {
   UserAlias: string | null;
   /** 建库用户ID */
   UserSubUin: string | null;
+  /** 数据治理配置项 */
+  GovernPolicy: DataGovernPolicy | null;
+  /** 数据库ID */
+  DatabaseId: string | null;
 }
 
 /** SQL语句对象 */
@@ -520,6 +528,8 @@ declare interface TableBaseInfo {
   UserAlias?: string | null;
   /** 建表用户ID */
   UserSubUin?: string | null;
+  /** 数据治理配置项 */
+  GovernPolicy?: DataGovernPolicy | null;
 }
 
 /** 返回数据表的相关信息。 */

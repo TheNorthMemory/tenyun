@@ -1224,7 +1224,7 @@ declare interface TrainingModelVersionDTO {
   ReasoningImageInfo: ImageInfo;
   /** 模型版本创建时间 */
   CreateTime: string;
-  /** 模型处理状态 */
+  /** 模型处理状态STATUS_SUCCESS：导入成功，STATUS_FAILED：导入失败 ，STATUS_RUNNING：导入中 */
   TrainingModelStatus: string | null;
   /** 模型处理进度 */
   TrainingModelProgress: number | null;
@@ -1631,7 +1631,7 @@ declare interface CreateTrainingModelRequest {
   TrainingJobVersion?: string;
   /** 模型版本类型；枚举值：NORMAL(通用) ACCELERATE(加速)注意: 默认为NORMAL */
   ModelVersionType?: string;
-  /** 模型格式 （PYTORCH/TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/PMML） */
+  /** 模型格式 （PYTORCH/TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/PMML/MMDETECTION/ONNX/HUGGING_FACE） */
   ModelFormat?: string;
   /** 推理镜像ID */
   ReasoningEnvironmentId?: string;
@@ -2083,7 +2083,7 @@ declare interface DescribeModelAccelerateTaskResponse {
 }
 
 declare interface DescribeModelAccelerateTasksRequest {
-  /** 过滤器ModelAccTaskName 任务名称 */
+  /** 过滤器ModelAccTaskName 任务名称ModelSource 模型来源 */
   Filters?: Filter[];
   /** 排序字段，默认CreateTime */
   OrderField?: string;
@@ -2091,7 +2091,7 @@ declare interface DescribeModelAccelerateTasksRequest {
   Order?: string;
   /** 偏移量 */
   Offset?: number;
-  /** 返回记录条数，默认20 */
+  /** 返回记录条数，默认10 */
   Limit?: number;
   /** 标签过滤 */
   TagFilters?: TagFilter[];
@@ -2271,7 +2271,7 @@ declare interface DescribeTrainingModelVersionsResponse {
 }
 
 declare interface DescribeTrainingModelsRequest {
-  /** 过滤器Filter.Name: 枚举值: keyword (模型名称) TrainingModelId (模型ID) ModelVersionType (模型版本类型) 其值Filter.Values支持: NORMAL(通用) ACCELERATE (加速) TrainingModelSource (模型来源) 其值Filter.Values支持： JOB/COS/AUTO_ML AlgorithmFramework (算法框架) 其值Filter.Values支持：TENSORFLOW/PYTORCH/DETECTRON2 ModelFormat（模型格式）其值Filter.Values支持：TORCH_SCRIPT/PYTORCH/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/PMMLFilter.Values: 当长度为1时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为10，Filter.Values的上限为100Filter.Fuzzy取值：true/false，是否支持模糊匹配 */
+  /** 过滤器Filter.Name: 枚举值: keyword (模型名称) TrainingModelId (模型ID) ModelVersionType (模型版本类型) 其值Filter.Values支持: NORMAL(通用) ACCELERATE (加速) TrainingModelSource (模型来源) 其值Filter.Values支持： JOB/COS ModelFormat（模型格式）其值Filter.Values支持：PYTORCH/TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/PMML/MMDETECTION/ONNX/HUGGING_FACEFilter.Values: 当长度为1时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为10，Filter.Values的上限为100Filter.Fuzzy取值：true/false，是否支持模糊匹配 */
   Filters?: Filter[];
   /** 排序字段，默认CreateTime */
   OrderField?: string;

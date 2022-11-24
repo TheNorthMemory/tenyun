@@ -186,6 +186,8 @@ declare interface DBInstanceNetInfo {
   VpcId: string | null;
   /** 子网ID */
   SubnetId: string | null;
+  /** 连接数据库的协议类型，当前支持：postgresql、mssql（MSSQL兼容语法） */
+  ProtocolType: string | null;
 }
 
 /** 描述实例节点信息，包括节点类型、节点所在可用区。 */

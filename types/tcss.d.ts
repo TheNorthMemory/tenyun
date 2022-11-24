@@ -1202,6 +1202,10 @@ declare interface HostInfo {
   InstanceID: string;
   /** 地域ID */
   RegionID: number;
+  /** 所属项目 */
+  Project: ProjectInfo | null;
+  /** 标签 */
+  Tags: TagInfo[] | null;
 }
 
 /** 镜像自动授权任务信息 */
@@ -1878,6 +1882,14 @@ declare interface ProcessInfo {
   PublicIp: string;
 }
 
+/** 主机所属项目 */
+declare interface ProjectInfo {
+  /** 项目名称 */
+  ProjectName: string;
+  /** 项目ID */
+  ProjectID: number;
+}
+
 /** 促销活动内容 */
 declare interface PromotionActivityContent {
   /** 月数 */
@@ -2368,6 +2380,14 @@ declare interface SupportDefenceVul {
   CVEID: string;
   /** 漏洞披露时间 */
   SubmitTime: string;
+}
+
+/** 主机标签信息 */
+declare interface TagInfo {
+  /** 标签键 */
+  TagKey: string;
+  /** 标签值 */
+  TagValue: string;
 }
 
 /** 未授权核数趋势 */
@@ -3473,18 +3493,18 @@ declare interface CreateExportComplianceStatusListJobResponse {
 }
 
 declare interface CreateHostExportJobRequest {
-  /** 导出字段 */
-  ExportField: string[];
-  /** 需要返回的数量，默认为10，最大值为10000 */
+  /** 过滤条件。Status - String - 是否必填：否 - agent状态筛选，"ALL":"全部"(或不传该字段),"UNINSTALL"："未安装","OFFLINE"："离线", "ONLINE"："防护中"HostName - String - 是否必填：否 - 主机名筛选Group- String - 是否必填：否 - 主机群组搜索HostIP- string - 是否必填：否 - 主机ip搜索HostID- string - 是否必填：否 - 主机id搜索DockerVersion- string - 是否必填：否 - docker版本搜索MachineType- string - 是否必填：否 - 主机来源MachineType搜索，"ALL":"全部"(或不传该字段),主机来源：["CVM", "ECM", "LH", "BM"] 中的之一为腾讯云服务器；["Other"]之一非腾讯云服务器；DockerStatus- string - 是否必填：否 - docker安装状态，"ALL":"全部"(或不传该字段),"INSTALL":"已安装","UNINSTALL":"未安装"ProjectID- string - 是否必填：否 - 所属项目id搜索Tag:xxx(tag:key)- string- 是否必填：否 - 标签键值搜索 示例Filters":[{"Name":"tag:tke-kind","Values":["service"]}] */
   Filters?: AssetFilters[];
   /** 偏移量，默认为0。 */
   Limit?: number;
-  /** 过滤参数,"Filters":[{"Name":"Status","Values":["2"]}] */
+  /** 需要返回的数量，默认为10，最大值为10000 */
   Offset?: number;
   /** 排序字段 */
   By?: string;
   /** 升序降序,asc desc */
   Order?: string;
+  /** 导出字段 */
+  ExportField?: string[];
 }
 
 declare interface CreateHostExportJobResponse {
@@ -4612,6 +4632,10 @@ declare interface DescribeAssetHostDetailResponse {
   InstanceID: string;
   /** 地域ID */
   RegionID: number;
+  /** 所属项目 */
+  Project: ProjectInfo;
+  /** 标签 */
+  Tags: TagInfo[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -4621,7 +4645,7 @@ declare interface DescribeAssetHostListRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤条件。Status - String - 是否必填：否 - agent状态筛选，"ALL":"全部"(或不传该字段),"UNINSTALL"："未安装","OFFLINE"："离线", "ONLINE"："防护中"HostName - String - 是否必填：否 - 主机名筛选Group- String - 是否必填：否 - 主机群组搜索HostIP- string - 是否必填：否 - 主机ip搜索HostID- string - 是否必填：否 - 主机id搜索DockerVersion- string - 是否必填：否 - docker版本搜索MachineType- string - 是否必填：否 - 主机来源MachineType搜索，"ALL":"全部"(或不传该字段),主机来源：["CVM", "ECM", "LH", "BM"] 中的之一为腾讯云服务器；["Other"]之一非腾讯云服务器；DockerStatus- string - 是否必填：否 - docker安装状态，"ALL":"全部"(或不传该字段),"INSTALL":"已安装","UNINSTALL":"未安装" */
+  /** 过滤条件。Status - String - 是否必填：否 - agent状态筛选，"ALL":"全部"(或不传该字段),"UNINSTALL"："未安装","OFFLINE"："离线", "ONLINE"："防护中"HostName - String - 是否必填：否 - 主机名筛选Group- String - 是否必填：否 - 主机群组搜索HostIP- string - 是否必填：否 - 主机ip搜索HostID- string - 是否必填：否 - 主机id搜索DockerVersion- string - 是否必填：否 - docker版本搜索MachineType- string - 是否必填：否 - 主机来源MachineType搜索，"ALL":"全部"(或不传该字段),主机来源：["CVM", "ECM", "LH", "BM"] 中的之一为腾讯云服务器；["Other"]之一非腾讯云服务器；DockerStatus- string - 是否必填：否 - docker安装状态，"ALL":"全部"(或不传该字段),"INSTALL":"已安装","UNINSTALL":"未安装"ProjectID- string - 是否必填：否 - 所属项目id搜索Tag:xxx(tag:key)- string- 是否必填：否 - 标签键值搜索 示例Filters":[{"Name":"tag:tke-kind","Values":["service"]}] */
   Filters?: AssetFilters[];
   /** 排序字段 */
   By?: string;
@@ -8962,7 +8986,7 @@ declare interface Tcss {
   /** {@link CreateExportComplianceStatusListJob 创建一个导出安全合规信息的任务}({@link CreateExportComplianceStatusListJobRequest 请求参数}): {@link CreateExportComplianceStatusListJobResponse 返回参数} */
   CreateExportComplianceStatusListJob(data: CreateExportComplianceStatusListJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportComplianceStatusListJobResponse>;
   /** {@link CreateHostExportJob 创建主机列表导出任务}({@link CreateHostExportJobRequest 请求参数}): {@link CreateHostExportJobResponse 返回参数} */
-  CreateHostExportJob(data: CreateHostExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostExportJobResponse>;
+  CreateHostExportJob(data?: CreateHostExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostExportJobResponse>;
   /** {@link CreateImageExportJob 创建镜像导出任务}({@link CreateImageExportJobRequest 请求参数}): {@link CreateImageExportJobResponse 返回参数} */
   CreateImageExportJob(data?: CreateImageExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageExportJobResponse>;
   /** {@link CreateNetworkFirewallClusterRefresh 容器网络集群下发刷新任务}({@link CreateNetworkFirewallClusterRefreshRequest 请求参数}): {@link CreateNetworkFirewallClusterRefreshResponse 返回参数} */

@@ -616,6 +616,10 @@ declare interface NodeHardwareInfo {
   DeviceName: string | null;
   /** 服务 */
   ServiceClient: string | null;
+  /** 该实例是否开启实例保护，true为开启 false为关闭 */
+  DisableApiTermination: boolean | null;
+  /** 0表示老计费，1表示新计费 */
+  TradeVersion: number | null;
 }
 
 /** 资源详情 */
@@ -652,10 +656,10 @@ declare interface PersistentVolumeContext {
 
 /** 描述集群实例位置信息 */
 declare interface Placement {
-  /** 实例所属项目ID。该参数可以通过调用 DescribeProject 的返回值中的 projectId 字段来获取。填0为默认项目。 */
-  ProjectId: number;
-  /** 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用 DescribeZones 的返回值中的Zone字段来获取。 */
+  /** 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用[DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。 */
   Zone: string;
+  /** 实例所属项目ID。该参数可以通过调用[DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。 */
+  ProjectId?: number;
 }
 
 /** POD自定义权限和自定义参数 */
@@ -762,6 +766,18 @@ declare interface PreExecuteFileSettings {
   CosSecretKey?: string;
   /** cos的appid，已废弃 */
   AppId?: string;
+}
+
+/** 价格详情 */
+declare interface PriceDetail {
+  /** 节点ID */
+  ResourceId: string;
+  /** 价格计算公式 */
+  Formula: string;
+  /** 原价 */
+  OriginalCost: number;
+  /** 折扣价 */
+  DiscountCost: number;
 }
 
 /** 询价资源 */
@@ -1425,6 +1441,8 @@ declare interface InquiryPriceUpdateInstanceRequest {
   Placement: Placement;
   /** 货币种类。取值范围：CNY：表示人民币。 */
   Currency?: string;
+  /** 批量变配资源ID列表 */
+  ResourceIdList?: string[];
 }
 
 declare interface InquiryPriceUpdateInstanceResponse {
@@ -1436,6 +1454,8 @@ declare interface InquiryPriceUpdateInstanceResponse {
   TimeUnit: string | null;
   /** 变配的时长。 */
   TimeSpan: number | null;
+  /** 价格详情 */
+  PriceDetail: PriceDetail[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1470,6 +1490,8 @@ declare interface ModifyResourceScheduleConfigResponse {
   IsDraft: boolean;
   /** 校验错误信息，如果不为空，则说明校验失败，配置没有成功 */
   ErrorMsg: string | null;
+  /** 返回数据 */
+  Data: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1637,7 +1659,7 @@ declare interface Emr {
   AddUsersForUserManager(data: AddUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<AddUsersForUserManagerResponse>;
   /** {@link CreateInstance 创建EMR实例}({@link CreateInstanceRequest 请求参数}): {@link CreateInstanceResponse 返回参数} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
-  /** {@link DescribeClusterNodes 查询硬件节点信息}({@link DescribeClusterNodesRequest 请求参数}): {@link DescribeClusterNodesResponse 返回参数} */
+  /** {@link DescribeClusterNodes 查询集群节点信息}({@link DescribeClusterNodesRequest 请求参数}): {@link DescribeClusterNodesResponse 返回参数} */
   DescribeClusterNodes(data: DescribeClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNodesResponse>;
   /** {@link DescribeCvmQuota 获取账户的CVM配额}({@link DescribeCvmQuotaRequest 请求参数}): {@link DescribeCvmQuotaResponse 返回参数} */
   DescribeCvmQuota(data: DescribeCvmQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCvmQuotaResponse>;
@@ -1667,7 +1689,7 @@ declare interface Emr {
   InquiryPriceUpdateInstance(data: InquiryPriceUpdateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceUpdateInstanceResponse>;
   /** {@link ModifyResourcePools 刷新动态资源池}({@link ModifyResourcePoolsRequest 请求参数}): {@link ModifyResourcePoolsResponse 返回参数} */
   ModifyResourcePools(data: ModifyResourcePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePoolsResponse>;
-  /** {@link ModifyResourceScheduleConfig 修改yarn资源调度的资源配置}({@link ModifyResourceScheduleConfigRequest 请求参数}): {@link ModifyResourceScheduleConfigResponse 返回参数} */
+  /** {@link ModifyResourceScheduleConfig 修改YARN资源调度的资源配置}({@link ModifyResourceScheduleConfigRequest 请求参数}): {@link ModifyResourceScheduleConfigResponse 返回参数} */
   ModifyResourceScheduleConfig(data: ModifyResourceScheduleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceScheduleConfigResponse>;
   /** {@link ModifyResourceScheduler 部署生效yarn的资源调度器}({@link ModifyResourceSchedulerRequest 请求参数}): {@link ModifyResourceSchedulerResponse 返回参数} */
   ModifyResourceScheduler(data: ModifyResourceSchedulerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceSchedulerResponse>;
