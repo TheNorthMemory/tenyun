@@ -308,6 +308,20 @@ declare interface AffectedWorkloadItem {
   VerifyInfo: string;
 }
 
+/** 集群列表Item */
+declare interface AssetClusterListItem {
+  /** 集群ID */
+  ClusterID: string;
+  /** 集群名称 */
+  ClusterName: string;
+  /** 集群状态CSR_RUNNING: 运行中CSR_EXCEPTION:异常CSR_DEL:已经删除 */
+  Status: string;
+  /** 绑定规则名称 */
+  BindRuleName: string;
+  /** 集群类型:CT_TKE: TKE集群CT_USER_CREATE: 用户自建集群 */
+  ClusterType: string;
+}
+
 /** 容器安全描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
 declare interface AssetFilters {
   /** 过滤键的名称 */
@@ -1624,6 +1638,160 @@ declare interface ImagesVul {
   FixedVersions: string | null;
   /** 漏洞标签:"CanBeFixed","DynamicLevelPoc","DynamicLevelExp" */
   Tag: string[] | null;
+}
+
+/** k8sApi异常事件详情 */
+declare interface K8sApiAbnormalEventInfo {
+  /** 命中规则名称 */
+  MatchRuleName: string;
+  /** 命中规则类型 */
+  MatchRuleType: string;
+  /** 告警等级 */
+  RiskLevel: string;
+  /** 集群ID */
+  ClusterID: string;
+  /** 集群名称 */
+  ClusterName: string;
+  /** 集群运行状态 */
+  ClusterRunningStatus: string;
+  /** 初次生成时间 */
+  FirstCreateTime: string;
+  /** 最近一次生成时间 */
+  LastCreateTime: string;
+  /** 告警数量 */
+  AlarmCount: number;
+  /** 状态"EVENT_UNDEAL":未处理"EVENT_DEALED": 已处理"EVENT_IGNORE": 忽略"EVENT_DEL": 删除"EVENT_ADD_WHITE": 加白 */
+  Status: string;
+  /** 集群masterIP */
+  ClusterMasterIP: string;
+  /** k8s版本 */
+  K8sVersion: string;
+  /** 运行时组件 */
+  RunningComponent: string[];
+  /** 描述 */
+  Desc: string;
+  /** 建议 */
+  Suggestion: string;
+  /** 请求信息 */
+  Info: string;
+  /** 规则ID */
+  MatchRuleID: string;
+  /** 高亮字段数组 */
+  HighLightFields: string[];
+  /** 命中规则 */
+  MatchRule: K8sApiAbnormalRuleScopeInfo;
+}
+
+/** k8sapi异常事件列表Item */
+declare interface K8sApiAbnormalEventListItem {
+  /** 事件ID */
+  ID: number;
+  /** 命中规则类型 */
+  MatchRuleType: string;
+  /** 威胁等级 */
+  RiskLevel: string;
+  /** 集群ID */
+  ClusterID: string;
+  /** 集群名称 */
+  ClusterName: string;
+  /** 集群运行状态 */
+  ClusterRunningStatus: string;
+  /** 初次生成时间 */
+  FirstCreateTime: string;
+  /** 最近一次生成时间 */
+  LastCreateTime: string;
+  /** 告警数量 */
+  AlarmCount: number;
+  /** 状态 */
+  Status: string;
+  /** 规则类型 */
+  RuleType: string;
+  /** 描述信息 */
+  Desc: string;
+  /** 解决方案 */
+  Suggestion: string;
+  /** 规则名称 */
+  RuleName: string;
+  /** 命中规则 */
+  MatchRule: K8sApiAbnormalRuleScopeInfo;
+}
+
+/** k8a api 异常请求规则详情 */
+declare interface K8sApiAbnormalRuleInfo {
+  /** 规则名称 */
+  RuleName: string;
+  /** 状态 */
+  Status: boolean;
+  /** 规则信息列表 */
+  RuleInfoList: K8sApiAbnormalRuleScopeInfo[];
+  /** 生效集群IDSet */
+  EffectClusterIDSet: string[];
+  /** 规则类型RT_SYSTEM 系统规则RT_USER 用户自定义 */
+  RuleType: string;
+  /** 是否所有集群生效 */
+  EffectAllCluster: boolean;
+  /** 规则ID */
+  RuleID?: string;
+}
+
+/** k8s api 异常请求规则列表Item */
+declare interface K8sApiAbnormalRuleListItem {
+  /** 规则ID */
+  RuleID: string;
+  /** 规则名称 */
+  RuleName: string;
+  /** 规则类型RT_SYSTEM 系统规则RT_USER 用户自定义 */
+  RuleType: string;
+  /** 受影响集群总数 */
+  EffectClusterCount: number;
+  /** 更新时间 */
+  UpdateTime: string;
+  /** 编辑账号 */
+  OprUin: string;
+  /** 状态 */
+  Status: boolean;
+}
+
+/** k8s api 异常事件规则配置范围 */
+declare interface K8sApiAbnormalRuleScopeInfo {
+  /** 范围系统事件:ANONYMOUS_ACCESS: 匿名访问ABNORMAL_UA_REQ: 异常UA请求ANONYMOUS_ABNORMAL_PERMISSION: 匿名用户权限异动GET_CREDENTIALS: 凭据信息获取MOUNT_SENSITIVE_PATH: 敏感路径挂载COMMAND_RUN: 命令执行PRIVILEGE_CONTAINER: 特权容器EXCEPTION_CRONTAB_TASK: 异常定时任务STATICS_POD: 静态pod创建ABNORMAL_CREATE_POD: 异常pod创建USER_DEFINED: 用户自定义 */
+  Scope: string;
+  /** 动作(RULE_MODE_ALERT: 告警 RULE_MODE_RELEASE:放行) */
+  Action: string;
+  /** 威胁等级 HIGH:高级 MIDDLE: 中级 LOW:低级 NOTICE:提示 */
+  RiskLevel?: string | null;
+  /** 开关状态(true:开 false:关) 适用于系统规则 */
+  Status?: boolean | null;
+  /** 是否被删除 适用于自定义规则入参 */
+  IsDelete?: boolean | null;
+}
+
+/** k8sapi异常请求趋势Item */
+declare interface K8sApiAbnormalTendencyItem {
+  /** 日期 */
+  Date: string;
+  /** 异常UA请求事件数 */
+  ExceptionUARequestCount: number;
+  /** 匿名用户权限事件数 */
+  AnonymousUserRightCount: number;
+  /** 凭据信息获取事件数 */
+  CredentialInformationObtainCount: number;
+  /** 敏感数据挂载事件数 */
+  SensitiveDataMountCount: number;
+  /** 命令执行事件数 */
+  CmdExecCount: number;
+  /** 异常定时任务事件数 */
+  AbnormalScheduledTaskCount: number;
+  /** 静态Pod创建数 */
+  StaticsPodCreateCount: number;
+  /** 可疑容器创建数 */
+  DoubtfulContainerCreateCount: number;
+  /** 自定义规则事件数 */
+  UserDefinedRuleCount: number;
+  /** 匿名访问事件数 */
+  AnonymousAccessCount: number;
+  /** 特权容器事件数 */
+  PrivilegeContainerCount: number;
 }
 
 /** 漏洞扫描新增和取消忽略漏洞入参 */
@@ -3538,6 +3706,58 @@ declare interface CreateImageExportJobResponse {
   RequestId?: string;
 }
 
+declare interface CreateK8sApiAbnormalEventExportJobRequest {
+  /** 过滤条件。TimeRange - string -是否必填: 否 - 时间范围筛选 ["2022-03-31 16:55:00", "2022-03-31 17:00:00"]MatchRules - string - 是否必填: 否 -命中规则筛选RiskLevel - string - 是否必填: 否 -威胁等级筛选Status - string - 是否必填: 否 -事件状态筛选MatchRuleType - string - 是否必填: 否 -命中规则类型筛选ClusterRunningStatus - string - 是否必填: 否 -集群运行状态ClusterName - string - 是否必填: 否 -集群名称ClusterID - string - 是否必填: 否 -集群ID */
+  Filters?: RunTimeFilters[];
+  /** 排序方式 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+  /** 导出字段 */
+  ExportField?: string[];
+}
+
+declare interface CreateK8sApiAbnormalEventExportJobResponse {
+  /** 导出任务ID，前端拿着任务ID查询任务进度 */
+  JobId: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface CreateK8sApiAbnormalRuleExportJobRequest {
+  /** 过滤条件。RuleType - string - 是否必填: 否 -规则类型Status - string - 是否必填: 否 -状态 */
+  Filters?: RunTimeFilters[];
+  /** 排序方式 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string[];
+  /** 导出字段 */
+  ExportField?: string[];
+}
+
+declare interface CreateK8sApiAbnormalRuleExportJobResponse {
+  /** 导出任务ID，前端拿着任务ID查询任务进度 */
+  JobId: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface CreateK8sApiAbnormalRuleInfoRequest {
+  /** 规则详情 */
+  RuleInfo: K8sApiAbnormalRuleInfo;
+  /** 拷贝规则ID(适用于复制规则场景) */
+  CopySrcRuleID?: string;
+  /** 事件ID(适用于事件加白场景) */
+  EventID?: number;
+}
+
+declare interface CreateK8sApiAbnormalRuleInfoResponse {
+  /** 规则ID */
+  RuleID: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateNetworkFirewallClusterRefreshRequest {
 }
 
@@ -3946,6 +4166,16 @@ declare interface DeleteIgnoreVulRequest {
 }
 
 declare interface DeleteIgnoreVulResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteK8sApiAbnormalRuleRequest {
+  /** 规则ID集合 */
+  RuleIDSet: string[];
+}
+
+declare interface DeleteK8sApiAbnormalRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -4448,6 +4678,28 @@ declare interface DescribeAssetAppServiceListRequest {
 declare interface DescribeAssetAppServiceListResponse {
   /** db服务列表 */
   List: ServiceInfo[];
+  /** 总数量 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAssetClusterListRequest {
+  /** 过滤条件。ClusterID - string - 是否必填: 否 -集群IDClusterName - string - 是否必填: 否 -集群名称Status - string - 是否必填: 否 -集群状态 */
+  Filters?: RunTimeFilters[];
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 排序方式 */
+  Order?: string;
+  /** 排序字段。 */
+  By?: string;
+}
+
+declare interface DescribeAssetClusterListResponse {
+  /** 集群列表 */
+  List: AssetClusterListItem[];
   /** 总数量 */
   TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
@@ -6298,6 +6550,124 @@ declare interface DescribeInspectionReportResponse {
   ReportName: string;
   /** 下载链接 */
   ReportUrl: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeK8sApiAbnormalEventInfoRequest {
+  /** 事件ID */
+  ID: number;
+}
+
+declare interface DescribeK8sApiAbnormalEventInfoResponse {
+  /** 事件详情 */
+  Info: K8sApiAbnormalEventInfo;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeK8sApiAbnormalEventListRequest {
+  /** 过滤条件。TimeRange - string -是否必填: 否 - 时间范围筛选 ["2022-03-31 16:55:00", "2022-03-31 17:00:00"]MatchRules - string - 是否必填: 否 -命中规则筛选RiskLevel - string - 是否必填: 否 -威胁等级筛选Status - string - 是否必填: 否 -事件状态筛选MatchRuleType - string - 是否必填: 否 -命中规则类型筛选ClusterRunningStatus - string - 是否必填: 否 -集群运行状态ClusterName - string - 是否必填: 否 -集群名称ClusterID - string - 是否必填: 否 -集群ID */
+  Filters?: RunTimeFilters[];
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 排序方式 */
+  Order?: string;
+  /** 排序字段LatestFoundTime: 最近生成时间AlarmCount: 告警数量 */
+  By?: string;
+}
+
+declare interface DescribeK8sApiAbnormalEventListResponse {
+  /** 事件列表 */
+  List: K8sApiAbnormalEventListItem[];
+  /** 总数量 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeK8sApiAbnormalRuleInfoRequest {
+  /** 规则ID */
+  RuleID: string;
+}
+
+declare interface DescribeK8sApiAbnormalRuleInfoResponse {
+  /** 规则详情 */
+  Info: K8sApiAbnormalRuleInfo;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeK8sApiAbnormalRuleListRequest {
+  /** 过滤条件。RuleType - string - 是否必填: 否 -规则类型Status - string - 是否必填: 否 -状态 */
+  Filters?: RunTimeFilters[];
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 排序方式 */
+  Order?: string;
+  /** 排序字段。UpdateTime - string - 是否必填: 否 -最后更新时间EffectClusterCount - string - 是否必填: 否 -影响集群数 */
+  By?: string;
+}
+
+declare interface DescribeK8sApiAbnormalRuleListResponse {
+  /** 规则列表 */
+  List: K8sApiAbnormalRuleListItem[];
+  /** 总数量 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeK8sApiAbnormalRuleScopeListRequest {
+  /** 规则ID */
+  RuleID: string;
+  /** 偏移量 */
+  Offset?: number;
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 过滤条件。Action - string -是否必填: 否 - 执行动作RiskLevel - string - 是否必填: 否 -威胁等级筛选 */
+  Filters?: RunTimeFilters[];
+}
+
+declare interface DescribeK8sApiAbnormalRuleScopeListResponse {
+  /** 总数 */
+  TotalCount: number;
+  /** 列表 */
+  List: K8sApiAbnormalRuleScopeInfo[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeK8sApiAbnormalSummaryRequest {
+}
+
+declare interface DescribeK8sApiAbnormalSummaryResponse {
+  /** 待处理事件个数 */
+  UnhandleEventCount: number;
+  /** 待处理高危事件个数 */
+  UnhandleHighLevelEventCount: number;
+  /** 待处理中危事件个数 */
+  UnhandleMediumLevelEventCount: number;
+  /** 待处理低危事件个数 */
+  UnhandleLowLevelEventCount: number;
+  /** 待处理提示级别事件个数 */
+  UnhandleNoticeLevelEventCount: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeK8sApiAbnormalTendencyRequest {
+  /** 趋势周期(默认为7天) */
+  TendencyPeriod: number;
+}
+
+declare interface DescribeK8sApiAbnormalTendencyResponse {
+  /** 趋势列表 */
+  List: K8sApiAbnormalTendencyItem[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -8366,6 +8736,42 @@ declare interface ModifyImageAuthorizedResponse {
   RequestId?: string;
 }
 
+declare interface ModifyK8sApiAbnormalEventStatusRequest {
+  /** 事件ID集合 */
+  EventIDSet: number[];
+  /** 状态 */
+  Status: string;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface ModifyK8sApiAbnormalEventStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyK8sApiAbnormalRuleInfoRequest {
+  /** 规则详情 */
+  RuleInfo: K8sApiAbnormalRuleInfo;
+}
+
+declare interface ModifyK8sApiAbnormalRuleInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyK8sApiAbnormalRuleStatusRequest {
+  /** 规则ID */
+  RuleID: string;
+  /** 状态(ture:开 false:关) */
+  Status: boolean;
+}
+
+declare interface ModifyK8sApiAbnormalRuleStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyReverseShellStatusRequest {
   /** 处理事件ids */
   EventIdSet: string[];
@@ -8989,6 +9395,12 @@ declare interface Tcss {
   CreateHostExportJob(data?: CreateHostExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostExportJobResponse>;
   /** {@link CreateImageExportJob 创建镜像导出任务}({@link CreateImageExportJobRequest 请求参数}): {@link CreateImageExportJobResponse 返回参数} */
   CreateImageExportJob(data?: CreateImageExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageExportJobResponse>;
+  /** {@link CreateK8sApiAbnormalEventExportJob 创建k8s api异常事件导出任务}({@link CreateK8sApiAbnormalEventExportJobRequest 请求参数}): {@link CreateK8sApiAbnormalEventExportJobResponse 返回参数} */
+  CreateK8sApiAbnormalEventExportJob(data?: CreateK8sApiAbnormalEventExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateK8sApiAbnormalEventExportJobResponse>;
+  /** {@link CreateK8sApiAbnormalRuleExportJob 创建k8sApi异常规则导出任务}({@link CreateK8sApiAbnormalRuleExportJobRequest 请求参数}): {@link CreateK8sApiAbnormalRuleExportJobResponse 返回参数} */
+  CreateK8sApiAbnormalRuleExportJob(data?: CreateK8sApiAbnormalRuleExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateK8sApiAbnormalRuleExportJobResponse>;
+  /** {@link CreateK8sApiAbnormalRuleInfo 创建k8sapi异常事件规则}({@link CreateK8sApiAbnormalRuleInfoRequest 请求参数}): {@link CreateK8sApiAbnormalRuleInfoResponse 返回参数} */
+  CreateK8sApiAbnormalRuleInfo(data: CreateK8sApiAbnormalRuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<CreateK8sApiAbnormalRuleInfoResponse>;
   /** {@link CreateNetworkFirewallClusterRefresh 容器网络集群下发刷新任务}({@link CreateNetworkFirewallClusterRefreshRequest 请求参数}): {@link CreateNetworkFirewallClusterRefreshResponse 返回参数} */
   CreateNetworkFirewallClusterRefresh(data?: CreateNetworkFirewallClusterRefreshRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkFirewallClusterRefreshResponse>;
   /** {@link CreateNetworkFirewallPolicyDiscover 容器网络集群网络策略创建自动发现任务}({@link CreateNetworkFirewallPolicyDiscoverRequest 请求参数}): {@link CreateNetworkFirewallPolicyDiscoverResponse 返回参数} */
@@ -9041,6 +9453,8 @@ declare interface Tcss {
   DeleteEscapeWhiteList(data: DeleteEscapeWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEscapeWhiteListResponse>;
   /** {@link DeleteIgnoreVul 取消漏洞扫描忽略漏洞}({@link DeleteIgnoreVulRequest 请求参数}): {@link DeleteIgnoreVulResponse 返回参数} */
   DeleteIgnoreVul(data: DeleteIgnoreVulRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIgnoreVulResponse>;
+  /** {@link DeleteK8sApiAbnormalRule 删除k8sapi异常事件规则}({@link DeleteK8sApiAbnormalRuleRequest 请求参数}): {@link DeleteK8sApiAbnormalRuleResponse 返回参数} */
+  DeleteK8sApiAbnormalRule(data: DeleteK8sApiAbnormalRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteK8sApiAbnormalRuleResponse>;
   /** {@link DeleteMachine 卸载Agent客户端}({@link DeleteMachineRequest 请求参数}): {@link DeleteMachineResponse 返回参数} */
   DeleteMachine(data: DeleteMachineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineResponse>;
   /** {@link DeleteNetworkFirewallPolicyDetail 容器网络创建网络策略删除任务}({@link DeleteNetworkFirewallPolicyDetailRequest 请求参数}): {@link DeleteNetworkFirewallPolicyDetailResponse 返回参数} */
@@ -9097,6 +9511,8 @@ declare interface Tcss {
   DescribeAgentInstallCommand(data: DescribeAgentInstallCommandRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentInstallCommandResponse>;
   /** {@link DescribeAssetAppServiceList 查询app服务列表}({@link DescribeAssetAppServiceListRequest 请求参数}): {@link DescribeAssetAppServiceListResponse 返回参数} */
   DescribeAssetAppServiceList(data?: DescribeAssetAppServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetAppServiceListResponse>;
+  /** {@link DescribeAssetClusterList 查询集群列表}({@link DescribeAssetClusterListRequest 请求参数}): {@link DescribeAssetClusterListResponse 返回参数} */
+  DescribeAssetClusterList(data?: DescribeAssetClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetClusterListResponse>;
   /** {@link DescribeAssetComponentList 查询容器组件列表}({@link DescribeAssetComponentListRequest 请求参数}): {@link DescribeAssetComponentListResponse 返回参数} */
   DescribeAssetComponentList(data: DescribeAssetComponentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetComponentListResponse>;
   /** {@link DescribeAssetContainerDetail 查询容器信息}({@link DescribeAssetContainerDetailRequest 请求参数}): {@link DescribeAssetContainerDetailResponse 返回参数} */
@@ -9261,6 +9677,20 @@ declare interface Tcss {
   DescribeIndexList(data?: DescribeIndexListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexListResponse>;
   /** {@link DescribeInspectionReport 查询检查报告}({@link DescribeInspectionReportRequest 请求参数}): {@link DescribeInspectionReportResponse 返回参数} */
   DescribeInspectionReport(data?: DescribeInspectionReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInspectionReportResponse>;
+  /** {@link DescribeK8sApiAbnormalEventInfo 查询k8s api 异常事件详情}({@link DescribeK8sApiAbnormalEventInfoRequest 请求参数}): {@link DescribeK8sApiAbnormalEventInfoResponse 返回参数} */
+  DescribeK8sApiAbnormalEventInfo(data: DescribeK8sApiAbnormalEventInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalEventInfoResponse>;
+  /** {@link DescribeK8sApiAbnormalEventList 查询k8s api异常事件列表}({@link DescribeK8sApiAbnormalEventListRequest 请求参数}): {@link DescribeK8sApiAbnormalEventListResponse 返回参数} */
+  DescribeK8sApiAbnormalEventList(data?: DescribeK8sApiAbnormalEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalEventListResponse>;
+  /** {@link DescribeK8sApiAbnormalRuleInfo 查询k8sapi异常请求规则详情}({@link DescribeK8sApiAbnormalRuleInfoRequest 请求参数}): {@link DescribeK8sApiAbnormalRuleInfoResponse 返回参数} */
+  DescribeK8sApiAbnormalRuleInfo(data: DescribeK8sApiAbnormalRuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalRuleInfoResponse>;
+  /** {@link DescribeK8sApiAbnormalRuleList 查询k8sapi异常请求规则列表}({@link DescribeK8sApiAbnormalRuleListRequest 请求参数}): {@link DescribeK8sApiAbnormalRuleListResponse 返回参数} */
+  DescribeK8sApiAbnormalRuleList(data?: DescribeK8sApiAbnormalRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalRuleListResponse>;
+  /** {@link DescribeK8sApiAbnormalRuleScopeList 查询k8s api 异常规则中范围列表}({@link DescribeK8sApiAbnormalRuleScopeListRequest 请求参数}): {@link DescribeK8sApiAbnormalRuleScopeListResponse 返回参数} */
+  DescribeK8sApiAbnormalRuleScopeList(data: DescribeK8sApiAbnormalRuleScopeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalRuleScopeListResponse>;
+  /** {@link DescribeK8sApiAbnormalSummary 查询k8sapi异常事件统计}({@link DescribeK8sApiAbnormalSummaryRequest 请求参数}): {@link DescribeK8sApiAbnormalSummaryResponse 返回参数} */
+  DescribeK8sApiAbnormalSummary(data?: DescribeK8sApiAbnormalSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalSummaryResponse>;
+  /** {@link DescribeK8sApiAbnormalTendency 查询k8sapi异常事件趋势}({@link DescribeK8sApiAbnormalTendencyRequest 请求参数}): {@link DescribeK8sApiAbnormalTendencyResponse 返回参数} */
+  DescribeK8sApiAbnormalTendency(data: DescribeK8sApiAbnormalTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalTendencyResponse>;
   /** {@link DescribeLogStorageStatistic 获取日志检索容量使用统计}({@link DescribeLogStorageStatisticRequest 请求参数}): {@link DescribeLogStorageStatisticResponse 返回参数} */
   DescribeLogStorageStatistic(data?: DescribeLogStorageStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageStatisticResponse>;
   /** {@link DescribeNetworkFirewallAuditRecord 查询集群策略审计列表}({@link DescribeNetworkFirewallAuditRecordRequest 请求参数}): {@link DescribeNetworkFirewallAuditRecordResponse 返回参数} */
@@ -9475,6 +9905,12 @@ declare interface Tcss {
   ModifyEscapeWhiteList(data: ModifyEscapeWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEscapeWhiteListResponse>;
   /** {@link ModifyImageAuthorized 批量授权镜像扫描V2.0}({@link ModifyImageAuthorizedRequest 请求参数}): {@link ModifyImageAuthorizedResponse 返回参数} */
   ModifyImageAuthorized(data: ModifyImageAuthorizedRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageAuthorizedResponse>;
+  /** {@link ModifyK8sApiAbnormalEventStatus 修改k8sapi异常事件状态}({@link ModifyK8sApiAbnormalEventStatusRequest 请求参数}): {@link ModifyK8sApiAbnormalEventStatusResponse 返回参数} */
+  ModifyK8sApiAbnormalEventStatus(data: ModifyK8sApiAbnormalEventStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyK8sApiAbnormalEventStatusResponse>;
+  /** {@link ModifyK8sApiAbnormalRuleInfo 修改k8sapi异常规则信息}({@link ModifyK8sApiAbnormalRuleInfoRequest 请求参数}): {@link ModifyK8sApiAbnormalRuleInfoResponse 返回参数} */
+  ModifyK8sApiAbnormalRuleInfo(data: ModifyK8sApiAbnormalRuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyK8sApiAbnormalRuleInfoResponse>;
+  /** {@link ModifyK8sApiAbnormalRuleStatus 修改k8sapi异常事件规则状态}({@link ModifyK8sApiAbnormalRuleStatusRequest 请求参数}): {@link ModifyK8sApiAbnormalRuleStatusResponse 返回参数} */
+  ModifyK8sApiAbnormalRuleStatus(data: ModifyK8sApiAbnormalRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyK8sApiAbnormalRuleStatusResponse>;
   /** {@link ModifyReverseShellStatus 修改反弹shell事件状态}({@link ModifyReverseShellStatusRequest 请求参数}): {@link ModifyReverseShellStatusResponse 返回参数} */
   ModifyReverseShellStatus(data: ModifyReverseShellStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReverseShellStatusResponse>;
   /** {@link ModifyRiskSyscallStatus 修改高危系统调用事件状态}({@link ModifyRiskSyscallStatusRequest 请求参数}): {@link ModifyRiskSyscallStatusResponse 返回参数} */

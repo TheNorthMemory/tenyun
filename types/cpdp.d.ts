@@ -568,6 +568,10 @@ declare interface CloudOrderReturn {
   PayScene: string | null;
   /** 支付方式 */
   PaymentMethod: string | null;
+  /** 平台应收金额单位：分，需要注意的是，TotalAmt=TotalPlatformIncome+TotalMchIncome */
+  TotalPlatformIncome: number | null;
+  /** 商户应收金额单位：分，需要注意的是，TotalAmt=TotalPlatformIncome+TotalMchIncome */
+  TotalMchIncome: number | null;
 }
 
 /** 结算信息对象 */

@@ -1211,9 +1211,9 @@ declare interface DescribeAutoBackupConfigResponse {
 }
 
 declare interface DescribeBackupUrlRequest {
-  /** 实例ID */
+  /** 实例 ID。 */
   InstanceId: string;
-  /** 备份ID，通过DescribeInstanceBackups接口可查 */
+  /** 备份 ID，可通过DescribeInstanceBackups接口返回的参数 BackupSet 获取。 */
   BackupId: string;
 }
 
@@ -1224,7 +1224,7 @@ declare interface DescribeBackupUrlResponse {
   InnerDownloadUrl: string[];
   /** 文件名称，该字段正在逐步废弃中。 */
   Filenames: string[] | null;
-  /** 备份文件信息列表 */
+  /** 备份文件信息列表。 */
   BackupInfos: BackupDownloadInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;

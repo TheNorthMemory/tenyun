@@ -674,6 +674,8 @@ declare interface RocketMQClusterInfo {
   Vpcs: VpcConfig[] | null;
   /** 是否为专享实例 */
   IsVip: boolean | null;
+  /** Rocketmq集群标识 */
+  RocketMQFlag: boolean | null;
 }
 
 /** RocketMQ近期使用量 */
