@@ -186,6 +186,8 @@ declare interface AiAnalysisTaskClassificationResult {
   Input: AiAnalysisTaskClassificationInput;
   /** 智能分类任务输出。 */
   Output: AiAnalysisTaskClassificationOutput | null;
+  /** 智能分类任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 智能分类任务输入类型 */
@@ -218,6 +220,8 @@ declare interface AiAnalysisTaskCoverResult {
   Input: AiAnalysisTaskCoverInput;
   /** 智能封面任务输出。 */
   Output: AiAnalysisTaskCoverOutput | null;
+  /** 智能封面任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 智能按帧标签任务输入类型 */
@@ -250,6 +254,8 @@ declare interface AiAnalysisTaskFrameTagResult {
   Input: AiAnalysisTaskFrameTagInput;
   /** 智能按帧标签任务输出。 */
   Output: AiAnalysisTaskFrameTagOutput | null;
+  /** 智能按帧标签任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 智能精彩片段任务输入类型 */
@@ -282,6 +288,8 @@ declare interface AiAnalysisTaskHighlightResult {
   Input: AiAnalysisTaskHighlightInput;
   /** 智能精彩片段任务输出。 */
   Output: AiAnalysisTaskHighlightOutput | null;
+  /** 智能精彩片段任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** AI 视频智能分析输入参数类型 */
@@ -320,6 +328,8 @@ declare interface AiAnalysisTaskTagResult {
   Input: AiAnalysisTaskTagInput;
   /** 智能标签任务输出。 */
   Output: AiAnalysisTaskTagOutput | null;
+  /** 智能标签任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 音视频审核结果 */
@@ -448,6 +458,8 @@ declare interface AiRecognitionTaskAsrWordsResult {
   Input: AiRecognitionTaskAsrWordsResultInput;
   /** 语音关键词识别任务输出信息。 */
   Output: AiRecognitionTaskAsrWordsResultOutput | null;
+  /** 语音关键词识别任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 语音关键词识别输入。 */
@@ -498,6 +510,8 @@ declare interface AiRecognitionTaskFaceResult {
   Input: AiRecognitionTaskFaceResultInput;
   /** 人脸识别任务输出信息。 */
   Output: AiRecognitionTaskFaceResultOutput | null;
+  /** 人脸识别任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 人脸识别输入。 */
@@ -554,6 +568,8 @@ declare interface AiRecognitionTaskHeadTailResult {
   Input: AiRecognitionTaskHeadTailResultInput;
   /** 视频片头片尾识别任务输出信息。 */
   Output: AiRecognitionTaskHeadTailResultOutput | null;
+  /** 视频片头片尾识别任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 视频片头片尾识别的输入。 */
@@ -594,6 +610,8 @@ declare interface AiRecognitionTaskObjectResult {
   Input: AiRecognitionTaskObjectResultInput;
   /** 物体识别任务输出信息。 */
   Output: AiRecognitionTaskObjectResultOutput | null;
+  /** 物体识别任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 物体识别任务输入类型。 */
@@ -646,6 +664,8 @@ declare interface AiRecognitionTaskOcrFullTextResult {
   Input: AiRecognitionTaskOcrFullTextResultInput;
   /** 文本全文识别任务输出信息。 */
   Output: AiRecognitionTaskOcrFullTextResultOutput | null;
+  /** 文本全文识别任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 文本全文识别输入。 */
@@ -698,6 +718,8 @@ declare interface AiRecognitionTaskOcrWordsResult {
   Input: AiRecognitionTaskOcrWordsResultInput;
   /** 文本关键词识别任务输出信息。 */
   Output: AiRecognitionTaskOcrWordsResultOutput | null;
+  /** 文本关键词识别任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 文本关键词识别输入。 */
@@ -750,6 +772,8 @@ declare interface AiRecognitionTaskSegmentResult {
   Input: AiRecognitionTaskSegmentResultInput | null;
   /** 视频拆条任务输出信息。 */
   Output: AiRecognitionTaskSegmentResultOutput | null;
+  /** 视频拆条任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 视频拆条输入。 */
@@ -964,6 +988,8 @@ declare interface AiReviewTaskPoliticalAsrResult {
   Input: AiReviewPoliticalAsrTaskInput;
   /** 音视频审核 Asr 文字涉及令人不适宜信息的任务输出。 */
   Output: AiReviewPoliticalAsrTaskOutput;
+  /** 音视频审核 Asr 文字涉及令人不适宜信息的任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 音视频审核 Ocr 文字涉及令人不适宜信息、违规任务结果类型 */
@@ -996,6 +1022,8 @@ declare interface AiReviewTaskPoliticalResult {
   Input: AiReviewPoliticalTaskInput;
   /** 音视频审核涉及令人不适宜信息的任务输出。 */
   Output: AiReviewPoliticalTaskOutput | null;
+  /** 音视频审核涉及令人不适宜信息的任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 音视频审核 Asr 文字涉及令人反感的信息的任务结果类型 */
@@ -1012,6 +1040,8 @@ declare interface AiReviewTaskPornAsrResult {
   Input: AiReviewPornAsrTaskInput;
   /** 音视频审核 Asr 文字涉及令人反感的信息的任务输出。 */
   Output: AiReviewPornAsrTaskOutput | null;
+  /** 音视频审核 Asr 文字涉及令人反感的信息的任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 音视频审核 Ocr 文字涉及令人反感的信息的任务结果类型 */
@@ -1028,6 +1058,8 @@ declare interface AiReviewTaskPornOcrResult {
   Input: AiReviewPornOcrTaskInput;
   /** Ocr 文字音视频审核涉及令人反感的信息的任务输出。 */
   Output: AiReviewPornOcrTaskOutput | null;
+  /** Ocr 文字音视频审核涉及令人反感的信息的任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 音视频审核涉及令人反感的信息的任务结果类型 */
@@ -1044,6 +1076,8 @@ declare interface AiReviewTaskPornResult {
   Input: AiReviewPornTaskInput;
   /** 音视频审核涉及令人反感的信息的任务输出。 */
   Output: AiReviewPornTaskOutput | null;
+  /** 音视频审核涉及令人反感的信息的任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 音视频审核 Asr 文字鉴违禁任务结果类型 */
@@ -1060,6 +1094,8 @@ declare interface AiReviewTaskProhibitedAsrResult {
   Input: AiReviewProhibitedAsrTaskInput;
   /** 音视频审核 Asr 文字鉴违禁任务输出。 */
   Output: AiReviewProhibitedAsrTaskOutput | null;
+  /** 音视频审核 Asr 文字鉴违禁任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 音视频审核 Ocr 文字鉴违禁任务结果类型 */
@@ -1076,6 +1112,8 @@ declare interface AiReviewTaskProhibitedOcrResult {
   Input: AiReviewProhibitedOcrTaskInput;
   /** 音视频审核 Ocr 文字鉴违禁任务输出。 */
   Output: AiReviewProhibitedOcrTaskOutput | null;
+  /** 音视频审核 Ocr 文字鉴违禁任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 音视频审核 Ocr 文字鉴别涉及令人不安全的信息的任务结果类型 */
@@ -1092,6 +1130,8 @@ declare interface AiReviewTaskTerrorismOcrResult {
   Input: AiReviewTerrorismOcrTaskInput;
   /** 音视频审核 Ocr 文字涉及令人不安全的信息的任务输出。 */
   Output: AiReviewTerrorismOcrTaskOutput | null;
+  /** 音视频审核 Ocr 文字涉及令人不安全的信息的任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 音视频审核涉及令人不安全的信息的任务结果类型 */
@@ -1108,6 +1148,8 @@ declare interface AiReviewTaskTerrorismResult {
   Input: AiReviewTerrorismTaskInput;
   /** 音视频审核涉及令人不安全的信息的任务输出。 */
   Output: AiReviewTerrorismTaskOutput | null;
+  /** 音视频审核涉及令人不安全的信息的任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 音视频审核 Ocr 文字涉及令人不安全的信息的任务输入参数类型 */
@@ -1792,7 +1834,7 @@ declare interface EmptyTrackItem {
 declare interface EventContent {
   /** 事件句柄，调用方必须调用 ConfirmEvents 来确认消息已经收到，确认有效时间 30 秒。失效后，事件可重新被获取。 */
   EventHandle: string;
-  /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；WechatPublishComplete：微信发布完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。FastClipMediaComplete：快速剪辑完成；ReviewAudioVideoComplete：音视频审核完成。ExtractTraceWatermarkComplete：提取溯源水印完成。兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
+  /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；WechatPublishComplete：微信发布完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。FastClipMediaComplete：快速剪辑完成；ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
   EventType: string;
   /** 视频上传完成事件，当事件类型为 NewFileUpload 时有效。 */
   FileUploadEvent: FileUploadTask | null;
@@ -1830,7 +1872,7 @@ declare interface EventContent {
   ExtractTraceWatermarkCompleteEvent: ExtractTraceWatermarkTask | null;
   /** 音视频审核完成事件，当事件类型为 ReviewAudioVideoComplete 时有效。 */
   ReviewAudioVideoCompleteEvent: ReviewAudioVideoTask | null;
-  /** 降码率完成事件，当事件类型为 ReduceMediaBitrateComplete 时有效。 */
+  /** 该字段已无效。 */
   ReduceMediaBitrateCompleteEvent: ReduceMediaBitrateTask | null;
 }
 
@@ -2598,6 +2640,8 @@ declare interface MediaProcessTaskAnimatedGraphicResult {
   Input: AnimatedGraphicTaskInput;
   /** 转动图任务的输出。 */
   Output: MediaAnimatedGraphicsItem | null;
+  /** 转动图任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 对视频截图做封面任务结果类型 */
@@ -2614,6 +2658,8 @@ declare interface MediaProcessTaskCoverBySnapshotResult {
   Input: CoverBySnapshotTaskInput;
   /** 对视频截图做封面任务的输出。 */
   Output: CoverBySnapshotTaskOutput;
+  /** 对视频截图做封面任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 对视频截雪碧图任务结果类型 */
@@ -2630,6 +2676,8 @@ declare interface MediaProcessTaskImageSpriteResult {
   Input: ImageSpriteTaskInput;
   /** 对视频截雪碧图任务的输出。 */
   Output: MediaImageSpriteItem | null;
+  /** 对视频截雪碧图任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 视频处理任务类型 */
@@ -2684,6 +2732,8 @@ declare interface MediaProcessTaskSampleSnapshotResult {
   Input: SampleSnapshotTaskInput;
   /** 对视频做采样截图任务输出。 */
   Output: MediaSampleSnapshotItem | null;
+  /** 对视频做采样截图任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 对视频按指定时间点截图任务结果类型 */
@@ -2700,6 +2750,8 @@ declare interface MediaProcessTaskSnapshotByTimeOffsetResult {
   Input: SnapshotByTimeOffsetTaskInput;
   /** 对视频按指定时间点截图任务输出。 */
   Output: MediaSnapshotByTimeOffsetItem | null;
+  /** 对视频按指定时间点截图任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 转码任务结果类型 */
@@ -3250,6 +3302,10 @@ declare interface ProcedureTask {
   SessionContext: string;
   /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
   SessionId: string;
+  /** 操作者。取值范围：System: 表示系统触发。 */
+  Operator: string;
+  /** 操作类型。取值范围：TSC: 表示使用极速高清进行智能降码。 */
+  OperationType: string;
 }
 
 /** 任务流模板详情 */
@@ -3390,6 +3446,8 @@ declare interface PullUploadTask {
   SessionContext: string;
   /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
   SessionId: string;
+  /** 转拉任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 降码率任务转自适应码流结果类型 */
@@ -3786,6 +3844,8 @@ declare interface SplitMediaTask {
   SessionContext: string;
   /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
   SessionId: string;
+  /** 视频拆条任务进度，取值范围 [0-100] 。 */
+  Progress: number;
 }
 
 /** 视频拆条任务配置信息。 */
@@ -6042,7 +6102,7 @@ declare interface DescribeTaskDetailRequest {
 }
 
 declare interface DescribeTaskDetailResponse {
-  /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务； ReviewAudioVideo：音视频审核任务。 ReduceMediaBitrate：降码率任务。 */
+  /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务； ReviewAudioVideo：音视频审核任务。 */
   TaskType: string;
   /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成。 */
   Status: string;
@@ -6082,7 +6142,7 @@ declare interface DescribeTaskDetailResponse {
   ExtractTraceWatermarkTask: ExtractTraceWatermarkTask | null;
   /** 音视频审核任务信息，仅当 TaskType 为 ReviewAudioVideo，该字段有值。 */
   ReviewAudioVideoTask: ReviewAudioVideoTask | null;
-  /** 降码率任务信息，仅当 TaskType 为 ReduceMediaBitrate，该字段有值。 */
+  /** 该字段已无效。 */
   ReduceMediaBitrateTask: ReduceMediaBitrateTask | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;

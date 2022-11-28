@@ -991,11 +991,11 @@ declare interface FlushInstanceRouterConfigResponse {
 declare interface InquirePriceCreateDBInstancesRequest {
   /** 实例所属区域及可用区信息。格式：ap-guangzhou-2。 */
   Zone: string;
-  /** 每个分片的主从节点数量。取值范围：请通过接口DescribeSpecInfo查询，其返回的数据结构SpecItems中的参数MinStorage与MaxStorage分别对应其最小磁盘规格与最大磁盘规格。 */
+  /** 每个分片的主从节点数量。取值范围：请通过接口DescribeSpecInfo查询，其返回的数据结构SpecItems中的参数MinNodeNum与MaxNodeNum分别对应其最小值与最大值。 */
   NodeNum: number;
   /** 实例内存大小。单位：GB。取值范围：请通过接口DescribeSpecInfo查询，其返回的数据结构SpecItems中的参数CPU与Memory分别对应CPU核数与内存规格。 */
   Memory: number;
-  /** 实例硬盘大小。单位：GB。取值范围：请通过接口DescribeSpecInfo查询，其返回的数据结构SpecItems中的参数MinNodeNum与MaxNodeNum分别对应其最小值与最大值。 */
+  /** 实例硬盘大小。单位：GB。取值范围：请通过接口DescribeSpecInfo查询，其返回的数据结构SpecItems中的参数MinStorage与MaxStorage分别对应其最小磁盘规格与最大磁盘规格。 */
   Volume: number;
   /** 实例版本信息。具体支持的版本，请通过接口DescribeSpecInfo查询，其返回的数据结构SpecItems中的参数MongoVersionCode为实例所支持的版本信息。版本信息与版本号对应关系如下：MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本。MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本。MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本。MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。 */
   MongoVersion: string;

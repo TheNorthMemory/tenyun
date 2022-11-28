@@ -659,7 +659,7 @@ declare interface ChannelCreateBoundFlowsResponse {
 declare interface ChannelCreateConvertTaskApiRequest {
   /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
-  /** 资源类型 取值范围doc,docx,html,excel之一 */
+  /** 资源类型 取值范围doc,docx,html,xls,xlsx之一 */
   ResourceType: string;
   /** 资源名称，长度限制为256字符 */
   ResourceName: string;
@@ -882,6 +882,26 @@ declare interface ChannelVerifyPdfResponse {
   RequestId?: string;
 }
 
+declare interface CreateChannelFlowEvidenceReportRequest {
+  /** 签署流程编号 */
+  FlowId: string;
+  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填 */
+  Agent: Agent;
+  /** 操作者的信息 */
+  Operator?: UserInfo;
+}
+
+declare interface CreateChannelFlowEvidenceReportResponse {
+  /** 废除，字段无效 */
+  ReportUrl: string | null;
+  /** 出证报告 ID */
+  ReportId: string | null;
+  /** 执行中：EvidenceStatusExecuting成功：EvidenceStatusSuccess失败：EvidenceStatusFailed */
+  Status: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateConsoleLoginUrlRequest {
   /** 应用信息此接口Agent.AppId、Agent.ProxyOrganizationOpenId 和 Agent. ProxyOperator.OpenId 必填 */
   Agent: Agent;
@@ -998,6 +1018,24 @@ declare interface CreateSignUrlsResponse {
   SignUrlInfos: SignUrlInfo[];
   /** 生成失败时的错误信息，成功返回”“，顺序和出参SignUrlInfos保持一致 */
   ErrorMessages: string[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeChannelFlowEvidenceReportRequest {
+  /** 出证报告编号 */
+  ReportId: string;
+  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填 */
+  Agent: Agent;
+  /** 操作者的信息 */
+  Operator?: UserInfo;
+}
+
+declare interface DescribeChannelFlowEvidenceReportResponse {
+  /** 出证报告 URL */
+  ReportUrl: string | null;
+  /** 执行中：EvidenceStatusExecuting成功：EvidenceStatusSuccess失败：EvidenceStatusFailed */
+  Status: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2795,6 +2833,8 @@ declare interface Essbasic {
   ChannelGetTaskResultApi(data: ChannelGetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelGetTaskResultApiResponse>;
   /** {@link ChannelVerifyPdf 合同文件验签}({@link ChannelVerifyPdfRequest 请求参数}): {@link ChannelVerifyPdfResponse 返回参数} */
   ChannelVerifyPdf(data: ChannelVerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelVerifyPdfResponse>;
+  /** {@link CreateChannelFlowEvidenceReport 创建并返回出证报告}({@link CreateChannelFlowEvidenceReportRequest 请求参数}): {@link CreateChannelFlowEvidenceReportResponse 返回参数} */
+  CreateChannelFlowEvidenceReport(data: CreateChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelFlowEvidenceReportResponse>;
   /** {@link CreateConsoleLoginUrl 生成控制台、移动端链接}({@link CreateConsoleLoginUrlRequest 请求参数}): {@link CreateConsoleLoginUrlResponse 返回参数} */
   CreateConsoleLoginUrl(data: CreateConsoleLoginUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleLoginUrlResponse>;
   /** {@link CreateFlowsByTemplates 使用多个模板批量创建签署流程}({@link CreateFlowsByTemplatesRequest 请求参数}): {@link CreateFlowsByTemplatesResponse 返回参数} */
@@ -2803,6 +2843,8 @@ declare interface Essbasic {
   CreateSealByImage(data: CreateSealByImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealByImageResponse>;
   /** {@link CreateSignUrls 获取跳转小程序查看或签署链接}({@link CreateSignUrlsRequest 请求参数}): {@link CreateSignUrlsResponse 返回参数} */
   CreateSignUrls(data: CreateSignUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignUrlsResponse>;
+  /** {@link DescribeChannelFlowEvidenceReport 查询出证报告}({@link DescribeChannelFlowEvidenceReportRequest 请求参数}): {@link DescribeChannelFlowEvidenceReportResponse 返回参数} */
+  DescribeChannelFlowEvidenceReport(data: DescribeChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelFlowEvidenceReportResponse>;
   /** {@link DescribeFlowDetailInfo 查询合同(签署流程)的详细信息}({@link DescribeFlowDetailInfoRequest 请求参数}): {@link DescribeFlowDetailInfoResponse 返回参数} */
   DescribeFlowDetailInfo(data: DescribeFlowDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowDetailInfoResponse>;
   /** {@link DescribeResourceUrlsByFlows 根据签署流程信息批量获取资源下载链接}({@link DescribeResourceUrlsByFlowsRequest 请求参数}): {@link DescribeResourceUrlsByFlowsResponse 返回参数} */

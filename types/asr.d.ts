@@ -62,6 +62,10 @@ declare interface SentenceDetail {
   SpeechSpeed: number | null;
   /** 声道或说话人 Id（请求中如果设置了 speaker_diarization或者ChannelNum为双声道，可区分说话人或声道） */
   SpeakerId: number | null;
+  /** 情绪能量值，取值为音量分贝值/10。取值范围：[1,10]。值越高情绪越强烈。 */
+  EmotionalEnergy: number | null;
+  /** 本句与上一句之间的静音时长 */
+  SilenceTime: number | null;
 }
 
 /** 一句话识别返回的词时间戳 */
@@ -207,7 +211,7 @@ declare interface CreateCustomizationResponse {
 }
 
 declare interface CreateRecTaskRequest {
-  /** 引擎模型类型。注意：非电话场景请务必使用16k的引擎。电话场景：• 8k_en：电话 8k 英语；• 8k_zh：电话 8k 中文普通话通用；非电话场景：• 16k_zh：16k 中文普通话通用；• 16k_zh_video：16k 音视频领域；• 16k_en：16k 英语；• 16k_ca：16k 粤语；• 16k_ja：16k 日语；• 16k_zh_edu 中文教育；• 16k_en_edu 英文教育；• 16k_zh_medical 医疗；• 16k_th 泰语； */
+  /** 引擎模型类型。注意：非电话场景请务必使用16k的引擎。电话场景：• 8k_en：电话 8k 英语；• 8k_zh：电话 8k 中文普通话通用；非电话场景：• 16k_zh：16k 中文普通话通用；• 16k_zh_video：16k 音视频领域；• 16k_en：16k 英语；• 16k_ca：16k 粤语；• 16k_ja：16k 日语；• 16k_zh_edu 中文教育；• 16k_en_edu 英文教育；• 16k_zh_medical 医疗；• 16k_th 泰语；• 16k_zh-PY 中英粤;• 16k_zh_dialect：多方言，支持23种方言（上海话、四川话、武汉话、贵阳话、昆明话、西安话、郑州话、太原话、兰州话、银川话、西宁话、南京话、合肥话、南昌话、长沙话、苏州话、杭州话、济南话、天津话、石家庄话、黑龙江话、吉林话、辽宁话）； */
   EngineModelType: string;
   /** 识别声道数。1：单声道（非电话场景，直接选择单声道即可，忽略音频声道数）；2：双声道（仅支持8k_zh电话场景，双声道应分别对应通话双方）。注意：双声道的电话音频已物理分离说话人，无需再开启说话人分离功能。 */
   ChannelNum: number;
@@ -241,6 +245,10 @@ declare interface CreateRecTaskRequest {
   FilterPunc?: number;
   /** 是否过滤语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。默认值为 0。 */
   FilterModal?: number;
+  /** 情绪能量值，取值为音量分贝值/10。取值范围：[1,10]。值越高情绪越强烈。0:不开启，1:开启 */
+  EmotionalEnergy?: number;
+  /** 热词增强功能。1:开启后（仅支持8k_zh,16k_zh），将开启同音替换功能，同音字、词在热词中配置。举例：热词配置“蜜制”并开启增强功能后，与“蜜制”同拼音（mizhi）的“秘制”、“蜜汁”的识别结果会被强制替换成“蜜制”。因此建议客户根据自己的实际情况开启该功能。 */
+  ReinforceHotword?: number;
 }
 
 declare interface CreateRecTaskResponse {
@@ -413,7 +421,7 @@ declare interface SentenceRecognitionRequest {
   ProjectId: number;
   /** 子服务类型。2： 一句话识别。 */
   SubServiceType: number;
-  /** 引擎模型类型。电话场景：• 8k_en：电话 8k 英语；• 8k_zh：电话 8k 中文普通话通用；非电话场景：• 16k_zh：16k 中文普通话通用；• 16k_en：16k 英语；• 16k_ca：16k 粤语；• 16k_ja：16k 日语；• 16k_zh_medical：16k 医疗； */
+  /** 引擎模型类型。电话场景：• 8k_en：电话 8k 英语；• 8k_zh：电话 8k 中文普通话通用；非电话场景：• 16k_zh：16k 中文普通话通用；• 16k_en：16k 英语；• 16k_ca：16k 粤语；• 16k_ja：16k 日语；• 16k_zh_medical：16k 医疗；• 16k_zh-PY 中英粤;• 16k_zh_dialect：多方言，支持23种方言（上海话、四川话、武汉话、贵阳话、昆明话、西安话、郑州话、太原话、兰州话、银川话、西宁话、南京话、合肥话、南昌话、长沙话、苏州话、杭州话、济南话、天津话、石家庄话、黑龙江话、吉林话、辽宁话）； */
   EngSerViceType: string;
   /** 语音数据来源。0：语音 URL；1：语音数据（post body）。 */
   SourceType: number;
@@ -441,6 +449,8 @@ declare interface SentenceRecognitionRequest {
   HotwordId?: string;
   /** 自学习模型 id。如设置了该参数，将生效对应的自学习模型。 */
   CustomizationId?: string;
+  /** 热词增强功能。1:开启后（仅支持8k_zh,16k_zh），将开启同音替换功能，同音字、词在热词中配置。举例：热词配置“蜜制”并开启增强功能后，与“蜜制”同拼音（mizhi）的“秘制”、“蜜汁”的识别结果会被强制替换成“蜜制”。因此建议客户根据自己的实际情况开启该功能。 */
+  ReinforceHotword?: number;
 }
 
 declare interface SentenceRecognitionResponse {

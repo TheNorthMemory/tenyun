@@ -1451,7 +1451,7 @@ declare interface ModifyAssetScanResponse {
 }
 
 declare interface ModifyBlockIgnoreListRequest {
-  /** 1拦截列表 2 忽略列表 */
+  /** 1封禁列表 2 放通列表 */
   RuleType: number;
   /** IP、Domain二选一，不能同时为空 */
   IOC: IocListData[];
@@ -1459,7 +1459,7 @@ declare interface ModifyBlockIgnoreListRequest {
   IocAction: string;
   /** 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填 */
   StartTime?: string;
-  /** 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填 */
+  /** 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填，必须大于当前时间且大于StartTime */
   EndTime?: string;
 }
 
@@ -1827,7 +1827,7 @@ declare interface Cfw {
   ModifyAllVPCSwitchStatus(data: ModifyAllVPCSwitchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllVPCSwitchStatusResponse>;
   /** {@link ModifyAssetScan 资产扫描}({@link ModifyAssetScanRequest 请求参数}): {@link ModifyAssetScanResponse 返回参数} */
   ModifyAssetScan(data: ModifyAssetScanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetScanResponse>;
-  /** {@link ModifyBlockIgnoreList 拦截列表和忽略列表批量操作接口}({@link ModifyBlockIgnoreListRequest 请求参数}): {@link ModifyBlockIgnoreListResponse 返回参数} */
+  /** {@link ModifyBlockIgnoreList 封禁列表和放通列表批量操作接口}({@link ModifyBlockIgnoreListRequest 请求参数}): {@link ModifyBlockIgnoreListResponse 返回参数} */
   ModifyBlockIgnoreList(data: ModifyBlockIgnoreListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockIgnoreListResponse>;
   /** {@link ModifyBlockTop 取消阻断记录置顶接口}({@link ModifyBlockTopRequest 请求参数}): {@link ModifyBlockTopResponse 返回参数} */
   ModifyBlockTop(data: ModifyBlockTopRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockTopResponse>;

@@ -1,6 +1,6 @@
 {
   "name": "tenyun",
-  "version": "0.4.19",
+  "version": "0.4.20",
   "description": "Promise based and Chainable Tencent Cloud OpenAPI client for NodeJS",
   "main": "index.js",
   "types": "types/index.d.ts",
@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
-    "@types/node": "^18.8.3",
+    "@types/node": ">=11.9.0",
     "eslint": "^8.25.0",
     "eslint-config-airbnb-base": "^15.0.0"
   },

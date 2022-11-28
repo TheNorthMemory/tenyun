@@ -613,7 +613,7 @@ declare interface CreateBatchCancelFlowUrlResponse {
 }
 
 declare interface CreateConvertTaskApiRequest {
-  /** 资源类型 取值范围doc,docx,html,excel之一 */
+  /** 资源类型 取值范围doc,docx,html,xls,xlsx之一 */
   ResourceType: string;
   /** 资源名称，长度限制为256字符 */
   ResourceName: string;
@@ -846,6 +846,32 @@ declare interface CreateMultiFlowSignQRCodeResponse {
   RequestId?: string;
 }
 
+declare interface CreatePrepareFlowRequest {
+  /** 调用方用户信息，userId 必填 */
+  Operator: UserInfo;
+  /** 资源Id,通过上传uploadfile接口获得 */
+  ResourceId: string;
+  /** 合同名称 */
+  FlowName: string;
+  /** 是否顺序签署(true:无序签,false:顺序签) */
+  Unordered?: boolean;
+  /** 签署流程的签署截止时间。值为unix时间戳,精确到秒,不传默认为当前时间一年后 */
+  Deadline?: number;
+  /** 用户自定义合同类型 */
+  UserFlowTypeId?: string;
+  /** 签署流程参与者信息，最大限制50方 */
+  Approvers?: FlowCreateApprover[];
+  /** 打开智能添加填写区(默认开启，打开:"OPEN" 关闭："CLOSE") */
+  IntelligentStatus?: string;
+}
+
+declare interface CreatePrepareFlowResponse {
+  /** 快速发起预览链接 */
+  Url: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateSchemeUrlRequest {
   /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
@@ -934,6 +960,22 @@ declare interface DescribeFlowBriefsRequest {
 declare interface DescribeFlowBriefsResponse {
   /** 流程列表 */
   FlowBriefs: FlowBrief[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFlowEvidenceReportRequest {
+  /** 调用方用户信息，userId 必填 */
+  Operator: UserInfo;
+  /** 出证报告编号 */
+  ReportId: string;
+}
+
+declare interface DescribeFlowEvidenceReportResponse {
+  /** 报告 URL */
+  ReportUrl: string | null;
+  /** 执行中：EvidenceStatusExecuting成功：EvidenceStatusSuccess失败：EvidenceStatusFailed */
+  Status: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1147,6 +1189,8 @@ declare interface Ess {
   CreateIntegrationEmployees(data: CreateIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationEmployeesResponse>;
   /** {@link CreateMultiFlowSignQRCode 创建一码多扫流程签署二维码}({@link CreateMultiFlowSignQRCodeRequest 请求参数}): {@link CreateMultiFlowSignQRCodeResponse 返回参数} */
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
+  /** {@link CreatePrepareFlow 创建快速发起流程}({@link CreatePrepareFlowRequest 请求参数}): {@link CreatePrepareFlowResponse 返回参数} */
+  CreatePrepareFlow(data: CreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrepareFlowResponse>;
   /** {@link CreateSchemeUrl 获取小程序跳转链接}({@link CreateSchemeUrlRequest 请求参数}): {@link CreateSchemeUrlResponse 返回参数} */
   CreateSchemeUrl(data: CreateSchemeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchemeUrlResponse>;
   /** {@link DeleteIntegrationEmployees 移除员工}({@link DeleteIntegrationEmployeesRequest 请求参数}): {@link DeleteIntegrationEmployeesResponse 返回参数} */
@@ -1155,6 +1199,8 @@ declare interface Ess {
   DescribeFileUrls(data: DescribeFileUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileUrlsResponse>;
   /** {@link DescribeFlowBriefs 查询流程摘要}({@link DescribeFlowBriefsRequest 请求参数}): {@link DescribeFlowBriefsResponse 返回参数} */
   DescribeFlowBriefs(data: DescribeFlowBriefsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowBriefsResponse>;
+  /** {@link DescribeFlowEvidenceReport 查询出证报告}({@link DescribeFlowEvidenceReportRequest 请求参数}): {@link DescribeFlowEvidenceReportResponse 返回参数} */
+  DescribeFlowEvidenceReport(data: DescribeFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowEvidenceReportResponse>;
   /** {@link DescribeFlowInfo 查询合同详情}({@link DescribeFlowInfoRequest 请求参数}): {@link DescribeFlowInfoResponse 返回参数} */
   DescribeFlowInfo(data: DescribeFlowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowInfoResponse>;
   /** {@link DescribeFlowTemplates 查询模板}({@link DescribeFlowTemplatesRequest 请求参数}): {@link DescribeFlowTemplatesResponse 返回参数} */
