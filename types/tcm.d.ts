@@ -585,7 +585,17 @@ declare interface DescribeAccessLogConfigResponse {
   /** 选中的范围 */
   SelectedRange: SelectedRange | null;
   /** 采用的模板，可取值为"istio, trace，默认为istio */
-  Template: string | null;
+  Template: string;
+  /** 腾讯云日志服务相关参数 */
+  CLS: CLS;
+  /** GRPC第三方服务器地址 */
+  Address: string;
+  /** 是否启用GRPC第三方服务器 */
+  EnableServer: boolean;
+  /** 是否启用标准输出 */
+  EnableStdout: boolean;
+  /** 是否启用访问日志采集 */
+  Enable: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

@@ -1408,6 +1408,8 @@ declare interface WorkloadStatus {
   Status: string;
   /** 工作负载的状况信息 */
   StatefulSetCondition?: StatefulSetCondition[];
+  /** 工作负载历史的状况信息 */
+  Conditions?: StatefulSetCondition[];
 }
 
 declare interface CreateBatchModelAccTasksRequest {

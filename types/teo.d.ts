@@ -2605,9 +2605,9 @@ declare interface CreateRuleResponse {
 }
 
 declare interface CreateSecurityDropPageRequest {
-  /** 站点Id。 */
+  /** 站点Id。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。 */
   ZoneId: string;
-  /** 站点子域名。 */
+  /** 子域名/应用名。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。 */
   Entity: string;
   /** 自定义页面的文件名。 */
   Name: string;
@@ -2617,6 +2617,8 @@ declare interface CreateSecurityDropPageRequest {
   Type: string;
   /** 页面所属的模块，取值有： waf ：托管规则模块； rate：自定义规则模块。 */
   Module: string;
+  /** 模板Id。当使用模板Id时可不填ZoneId和Entity，否则必须填写ZoneId和Entity。 */
+  TemplateId?: string;
 }
 
 declare interface CreateSecurityDropPageResponse {

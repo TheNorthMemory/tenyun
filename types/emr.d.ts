@@ -400,7 +400,7 @@ declare interface HostVolumeContext {
 declare interface InstanceChargePrepaid {
   /** 包年包月时间，默认为1，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11, 12, 24, 36, 48, 60。 */
   Period: number;
-  /** 是否自动续费，默认为否。 */
+  /** 是否自动续费，默认为否。true：是false：否 */
   RenewFlag: boolean;
 }
 
@@ -450,9 +450,9 @@ declare interface JobResult {
 
 /** 登录设置 */
 declare interface LoginSettings {
-  /** Password */
+  /** 实例登录密码，8-16个字符，包含大写字母、小写字母、数字和特殊字符四种，特殊符号仅支持!@%^*，密码第一位不能为特殊字符 */
   Password?: string;
-  /** Public Key */
+  /** 密钥ID。关联密钥后，就可以通过对应的私钥来访问实例；PublicKeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取 */
   PublicKeyId?: string;
 }
 
@@ -999,7 +999,7 @@ declare interface AddUsersForUserManagerResponse {
 }
 
 declare interface CreateInstanceRequest {
-  /** 产品ID，不同产品ID表示不同的EMR产品版本。取值范围：1：表示EMR-V1.3.1。2：表示EMR-V2.0.1。4：表示EMR-V2.1.0。7：表示EMR-V3.0.0。9：表示EMR-V2.2.0。11：表示CLICKHOUSE-V1.0.0。13：表示DRUID-V1.0.0。15：表示EMR-V2.2.1。16：表示EMR-V2.3.0。17：表示CLICKHOUSE-V1.1.0。19：表示EMR-V2.4.0。20：表示EMR-V2.5.0。22：表示CLICKHOUSE-V1.2.0。24：表示EMR-TianQiong-V1.0.0。25：表示EMR-V3.1.0。26：表示DORIS-V1.0.0。27：表示KAFKA-V1.0.0。28：表示EMR-V3.2.0。29：表示EMR-V2.5.1。30：表示EMR-V2.6.0。 */
+  /** 产品ID，不同产品ID表示不同的EMR产品版本。取值范围：16：表示EMR-V2.3.0。20：表示EMR-V2.5.0。25：表示EMR-V3.1.0。27：表示KAFKA-V1.0.0。30：表示EMR-V2.6.0。33 : 表示EMR-V3.2.1。34 : 表示EMR-V3.3.0。36 : 表示STARROCKS-V1.0.0。37 : 表示EMR-V3.4.0。38 : 表示EMR-V2.7.0。39 : 表示STARROCKS-V1.1.0。41 : 表示DRUID-V1.1.0。 */
   ProductId: number;
   /** 部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）对应不同可选组件列表，不同产品版本可选组件列表查询：[组件版本](https://cloud.tencent.com/document/product/589/20279) ；填写实例值：hive、flink。 */
   Software: string[];
@@ -1655,27 +1655,27 @@ declare interface TerminateTasksResponse {
 /** {@link Emr 弹性 MapReduce} */
 declare interface Emr {
   (): Versions;
-  /** {@link AddUsersForUserManager 用户管理-新增用户列表}({@link AddUsersForUserManagerRequest 请求参数}): {@link AddUsersForUserManagerResponse 返回参数} */
+  /** {@link AddUsersForUserManager 新增用户列表}({@link AddUsersForUserManagerRequest 请求参数}): {@link AddUsersForUserManagerResponse 返回参数} */
   AddUsersForUserManager(data: AddUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<AddUsersForUserManagerResponse>;
   /** {@link CreateInstance 创建EMR实例}({@link CreateInstanceRequest 请求参数}): {@link CreateInstanceResponse 返回参数} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
   /** {@link DescribeClusterNodes 查询集群节点信息}({@link DescribeClusterNodesRequest 请求参数}): {@link DescribeClusterNodesResponse 返回参数} */
   DescribeClusterNodes(data: DescribeClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNodesResponse>;
-  /** {@link DescribeCvmQuota 获取账户的CVM配额}({@link DescribeCvmQuotaRequest 请求参数}): {@link DescribeCvmQuotaResponse 返回参数} */
+  /** {@link DescribeCvmQuota 查询账户的CVM配额}({@link DescribeCvmQuotaRequest 请求参数}): {@link DescribeCvmQuotaResponse 返回参数} */
   DescribeCvmQuota(data: DescribeCvmQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCvmQuotaResponse>;
-  /** {@link DescribeEmrApplicationStatics 【监控】查询Application统计信息}({@link DescribeEmrApplicationStaticsRequest 请求参数}): {@link DescribeEmrApplicationStaticsResponse 返回参数} */
+  /** {@link DescribeEmrApplicationStatics 查询YARN的任务统计信息}({@link DescribeEmrApplicationStaticsRequest 请求参数}): {@link DescribeEmrApplicationStaticsResponse 返回参数} */
   DescribeEmrApplicationStatics(data: DescribeEmrApplicationStaticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmrApplicationStaticsResponse>;
-  /** {@link DescribeInstanceRenewNodes 预付费集群隔离后续费资源查询}({@link DescribeInstanceRenewNodesRequest 请求参数}): {@link DescribeInstanceRenewNodesResponse 返回参数} */
+  /** {@link DescribeInstanceRenewNodes 查询待续费节点信息}({@link DescribeInstanceRenewNodesRequest 请求参数}): {@link DescribeInstanceRenewNodesResponse 返回参数} */
   DescribeInstanceRenewNodes(data: DescribeInstanceRenewNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceRenewNodesResponse>;
-  /** {@link DescribeInstances 查询EMR实例}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
+  /** {@link DescribeInstances 查询集群实例信息}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
   DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** {@link DescribeInstancesList EMR集群实例列表查询}({@link DescribeInstancesListRequest 请求参数}): {@link DescribeInstancesListResponse 返回参数} */
+  /** {@link DescribeInstancesList 查询集群列表}({@link DescribeInstancesListRequest 请求参数}): {@link DescribeInstancesListResponse 返回参数} */
   DescribeInstancesList(data: DescribeInstancesListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesListResponse>;
-  /** {@link DescribeJobFlow 查询流程任务}({@link DescribeJobFlowRequest 请求参数}): {@link DescribeJobFlowResponse 返回参数} */
+  /** {@link DescribeJobFlow 查询流程作业状态}({@link DescribeJobFlowRequest 请求参数}): {@link DescribeJobFlowResponse 返回参数} */
   DescribeJobFlow(data: DescribeJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobFlowResponse>;
-  /** {@link DescribeResourceSchedule 获取yarn资源调度页面的数据}({@link DescribeResourceScheduleRequest 请求参数}): {@link DescribeResourceScheduleResponse 返回参数} */
+  /** {@link DescribeResourceSchedule 查询YARN资源调度数据信息}({@link DescribeResourceScheduleRequest 请求参数}): {@link DescribeResourceScheduleResponse 返回参数} */
   DescribeResourceSchedule(data: DescribeResourceScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceScheduleResponse>;
-  /** {@link DescribeUsersForUserManager 用户管理-查询用户列表}({@link DescribeUsersForUserManagerRequest 请求参数}): {@link DescribeUsersForUserManagerResponse 返回参数} */
+  /** {@link DescribeUsersForUserManager 查询用户列表}({@link DescribeUsersForUserManagerRequest 请求参数}): {@link DescribeUsersForUserManagerResponse 返回参数} */
   DescribeUsersForUserManager(data: DescribeUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersForUserManagerResponse>;
   /** {@link InquirePriceRenewEmr 集群续费询价}({@link InquirePriceRenewEmrRequest 请求参数}): {@link InquirePriceRenewEmrResponse 返回参数} */
   InquirePriceRenewEmr(data: InquirePriceRenewEmrRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewEmrResponse>;
@@ -1687,11 +1687,11 @@ declare interface Emr {
   InquiryPriceScaleOutInstance(data: InquiryPriceScaleOutInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceScaleOutInstanceResponse>;
   /** {@link InquiryPriceUpdateInstance 变配询价}({@link InquiryPriceUpdateInstanceRequest 请求参数}): {@link InquiryPriceUpdateInstanceResponse 返回参数} */
   InquiryPriceUpdateInstance(data: InquiryPriceUpdateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceUpdateInstanceResponse>;
-  /** {@link ModifyResourcePools 刷新动态资源池}({@link ModifyResourcePoolsRequest 请求参数}): {@link ModifyResourcePoolsResponse 返回参数} */
+  /** {@link ModifyResourcePools 刷新YARN的动态资源池}({@link ModifyResourcePoolsRequest 请求参数}): {@link ModifyResourcePoolsResponse 返回参数} */
   ModifyResourcePools(data: ModifyResourcePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePoolsResponse>;
   /** {@link ModifyResourceScheduleConfig 修改YARN资源调度的资源配置}({@link ModifyResourceScheduleConfigRequest 请求参数}): {@link ModifyResourceScheduleConfigResponse 返回参数} */
   ModifyResourceScheduleConfig(data: ModifyResourceScheduleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceScheduleConfigResponse>;
-  /** {@link ModifyResourceScheduler 部署生效yarn的资源调度器}({@link ModifyResourceSchedulerRequest 请求参数}): {@link ModifyResourceSchedulerResponse 返回参数} */
+  /** {@link ModifyResourceScheduler 修改YARN的资源调度器}({@link ModifyResourceSchedulerRequest 请求参数}): {@link ModifyResourceSchedulerResponse 返回参数} */
   ModifyResourceScheduler(data: ModifyResourceSchedulerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceSchedulerResponse>;
   /** {@link RunJobFlow 创建流程作业}({@link RunJobFlowRequest 请求参数}): {@link RunJobFlowResponse 返回参数} */
   RunJobFlow(data: RunJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<RunJobFlowResponse>;

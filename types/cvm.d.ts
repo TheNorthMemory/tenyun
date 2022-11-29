@@ -1002,6 +1002,14 @@ declare interface StorageBlock {
   MaxSize: number | null;
 }
 
+/** 同步镜像信息 */
+declare interface SyncImage {
+  /** 镜像ID */
+  ImageId: string;
+  /** 地域 */
+  Region: string;
+}
+
 /** 描述了操作系统所在块设备即系统盘的信息 */
 declare interface SystemDisk {
   /** 系统盘类型。系统盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：LOCAL_BASIC：本地硬盘LOCAL_SSD：本地SSD硬盘CLOUD_BASIC：普通云硬盘CLOUD_SSD：SSD云硬盘CLOUD_PREMIUM：高性能云硬盘CLOUD_BSSD：通用性SSD云硬盘默认取值：当前有库存的硬盘类型。 */
@@ -2660,9 +2668,13 @@ declare interface SyncImagesRequest {
   DryRun?: boolean;
   /** 目标镜像名称。 */
   ImageName?: string;
+  /** 是否需要返回目的地域的镜像ID。 */
+  ImageSetRequired?: boolean;
 }
 
 declare interface SyncImagesResponse {
+  /** 目的地域的镜像ID信息。 */
+  ImageSet?: SyncImage[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

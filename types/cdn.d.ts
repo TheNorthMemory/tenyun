@@ -1474,7 +1474,7 @@ declare interface OriginIp {
   Ip: string;
 }
 
-/** 跨国回源优化配置，默认为关闭状态（功能灰度中，尚未全量） */
+/** 跨国回源优化配置，默认为关闭状态 (已下线) */
 declare interface OriginPullOptimization {
   /** 跨国回源优化配置开关on：开启off：关闭 */
   Switch: string;
@@ -1486,7 +1486,7 @@ declare interface OriginPullOptimization {
 declare interface OriginPullTimeout {
   /** 回源建连超时时间，单位为秒，要求5~60之间 */
   ConnectTimeout: number | null;
-  /** 回源接收超时时间，单位为秒，要求10 ~ 60之间 */
+  /** 回源接收超时时间，单位为秒，要求10 ~ 300之间 */
   ReceiveTimeout: number | null;
 }
 
@@ -3109,6 +3109,8 @@ declare interface DescribeIpStatusRequest {
   Segment?: boolean;
   /** 是否查询节点 IPV6 信息。 */
   ShowIpv6?: boolean;
+  /** 是否对IPV6进行缩写。 */
+  AbbreviationIpv6?: boolean;
 }
 
 declare interface DescribeIpStatusResponse {
@@ -4131,7 +4133,7 @@ declare interface UpdateDomainConfigRequest {
   VideoSeek?: VideoSeek;
   /** 缓存过期时间配置 */
   Cache?: Cache;
-  /** 跨国链路优化配置 */
+  /** 跨国链路优化配置（已下线） */
   OriginPullOptimization?: OriginPullOptimization;
   /** Https 加速配置 */
   Https?: Https;

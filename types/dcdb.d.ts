@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 数据库账号信息 */
+declare interface Account {
+  /** 账户的名称 */
+  User: string;
+  /** 账户的域名 */
+  Host: string;
+}
+
 /** 升级实例 -- 新增分片类型 */
 declare interface AddShardConfig {
   /** 新增分片的数量 */
@@ -20,6 +28,18 @@ declare interface BriefNodeInfo {
   Role: string;
   /** 节点所属分片的分片ID */
   ShardId: string;
+}
+
+/** 列权限信息 */
+declare interface ColumnPrivilege {
+  /** 数据库名 */
+  Database: string;
+  /** 数据库表名 */
+  Table: string;
+  /** 数据库列名 */
+  Column: string;
+  /** 权限信息 */
+  Privileges: string[];
 }
 
 /** 约束类型值的范围 */
@@ -226,6 +246,14 @@ declare interface Database {
 declare interface DatabaseFunction {
   /** 函数名称 */
   Func: string;
+}
+
+/** 数据库权限 */
+declare interface DatabasePrivilege {
+  /** 权限信息 */
+  Privileges: string[];
+  /** 数据库名 */
+  Database: string;
 }
 
 /** 数据库存储过程信息 */
@@ -590,6 +618,16 @@ declare interface TableColumn {
   Type: string;
 }
 
+/** 数据库表权限 */
+declare interface TablePrivilege {
+  /** 数据库名 */
+  Database: string;
+  /** 数据库表名 */
+  Table: string;
+  /** 权限信息 */
+  Privileges: string[];
+}
+
 /** 用户任务信息 */
 declare interface UserTaskInfo {
   /** 任务ID */
@@ -614,6 +652,16 @@ declare interface UserTaskInfo {
   InstanceName: string;
   /** 地域ID */
   RegionId: number;
+}
+
+/** 视图权限信息 */
+declare interface ViewPrivileges {
+  /** 数据库名 */
+  Database: string;
+  /** 数据库视图名 */
+  View: string;
+  /** 权限信息 */
+  Privileges: string[];
 }
 
 /** 可用区信息 */
@@ -1574,6 +1622,30 @@ declare interface ModifyAccountDescriptionResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAccountPrivilegesRequest {
+  /** 实例 ID，格式如：tdsql-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+  /** 数据库的账号，包括用户名和域名。 */
+  Accounts: Account[];
+  /** 全局权限。其中，GlobalPrivileges 中权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "PROCESS", "DROP","REFERENCES","INDEX","ALTER","SHOW DATABASES","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。注意，不传该参数表示保留现有权限，如需清除，该字段传空数组。 */
+  GlobalPrivileges?: string[];
+  /** 数据库的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。 */
+  DatabasePrivileges?: DatabasePrivilege[];
+  /** 数据库中表的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。 */
+  TablePrivileges?: TablePrivilege[];
+  /** 数据库表中列的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","REFERENCES"。注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。 */
+  ColumnPrivileges?: ColumnPrivilege[];
+  /** 数据库视图的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。 */
+  ViewPrivileges?: ViewPrivileges[];
+}
+
+declare interface ModifyAccountPrivilegesResponse {
+  /** 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/237/16177)。 */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBInstanceNameRequest {
   /** 实例ID，形如tdsql-hdaprz0v */
   InstanceId: string;
@@ -1903,6 +1975,8 @@ declare interface Dcdb {
   KillSession(data: KillSessionRequest, config?: AxiosRequestConfig): AxiosPromise<KillSessionResponse>;
   /** {@link ModifyAccountDescription 修改数据库账号备注}({@link ModifyAccountDescriptionRequest 请求参数}): {@link ModifyAccountDescriptionResponse 返回参数} */
   ModifyAccountDescription(data: ModifyAccountDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountDescriptionResponse>;
+  /** {@link ModifyAccountPrivileges 修改云数据库实例账号的权限信息}({@link ModifyAccountPrivilegesRequest 请求参数}): {@link ModifyAccountPrivilegesResponse 返回参数} */
+  ModifyAccountPrivileges(data: ModifyAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountPrivilegesResponse>;
   /** {@link ModifyDBInstanceName 修改实例名字}({@link ModifyDBInstanceNameRequest 请求参数}): {@link ModifyDBInstanceNameResponse 返回参数} */
   ModifyDBInstanceName(data: ModifyDBInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNameResponse>;
   /** {@link ModifyDBInstanceSecurityGroups 修改云数据库安全组}({@link ModifyDBInstanceSecurityGroupsRequest 请求参数}): {@link ModifyDBInstanceSecurityGroupsResponse 返回参数} */

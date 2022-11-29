@@ -1128,10 +1128,6 @@ declare interface RoVipInfo {
   RoVip: string;
 }
 
-/** 实例权重 */
-declare interface RoWeight {
-}
-
 /** RO 实例的权重值 */
 declare interface RoWeightValue {
   /** RO 实例 ID。 */
@@ -3488,30 +3484,6 @@ declare interface ModifyCDBProxyDescResponse {
   RequestId?: string;
 }
 
-declare interface ModifyCDBProxyRequest {
-  /** 数据库代理组唯一ID */
-  ProxyGroupId: string;
-  /** 是否开始延迟剔除，默认false，取值："true" | "false" */
-  IsKickout?: boolean;
-  /** 最少保留数，最小为0，最大为实例数量 */
-  MinCount?: number;
-  /** 延迟剔除的阈值；如果IsKickOut="true", 该字段必填 */
-  MaxDelay?: number;
-  /** 读写权重分配模式；系统自动分配："system"， 自定义："custom" */
-  WeightMode?: string;
-  /** 实例只读权重 */
-  RoWeightValues?: RoWeight;
-  /** 是否开启故障转移，代理出现故障后，连接地址将路由到主实例，默认false，取值："true" | "false" */
-  FailOver?: boolean;
-  /** 是否自动添加只读实例，默认false，取值："true" | "false" */
-  AutoAddRo?: boolean;
-}
-
-declare interface ModifyCDBProxyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
 declare interface ModifyCDBProxyVipVPortRequest {
   /** 代理组ID */
   ProxyGroupId: string;
@@ -4273,8 +4245,6 @@ declare interface Cdb {
   ModifyBackupConfig(data: ModifyBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupConfigResponse>;
   /** {@link ModifyBackupDownloadRestriction 修改备份文件的限制下载来源}({@link ModifyBackupDownloadRestrictionRequest 请求参数}): {@link ModifyBackupDownloadRestrictionResponse 返回参数} */
   ModifyBackupDownloadRestriction(data: ModifyBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupDownloadRestrictionResponse>;
-  /** {@link ModifyCDBProxy 配置数据库代理读写分离}({@link ModifyCDBProxyRequest 请求参数}): {@link ModifyCDBProxyResponse 返回参数} */
-  ModifyCDBProxy(data: ModifyCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCDBProxyResponse>;
   /** {@link ModifyCDBProxyConnectionPool 配置数据库代理连接池}({@link ModifyCDBProxyConnectionPoolRequest 请求参数}): {@link ModifyCDBProxyConnectionPoolResponse 返回参数} */
   ModifyCDBProxyConnectionPool(data: ModifyCDBProxyConnectionPoolRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCDBProxyConnectionPoolResponse>;
   /** {@link ModifyCDBProxyDesc 修改数据库代理描述}({@link ModifyCDBProxyDescRequest 请求参数}): {@link ModifyCDBProxyDescResponse 返回参数} */

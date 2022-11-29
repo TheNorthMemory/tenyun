@@ -132,6 +132,8 @@ declare interface DeviceInfo {
   ProductName: string | null;
   /** 设备类型（设备、子设备、网关） */
   DeviceType: string | null;
+  /** 是否是 lora 设备 */
+  IsLora: boolean | null;
 }
 
 /** 设备位置详情 */

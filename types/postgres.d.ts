@@ -352,16 +352,16 @@ declare interface ParamInfo {
   Name: string | null;
   /** 参数值类型：integer（整型）、real（浮点型）、bool（布尔型）、enum（枚举类型）、mutil_enum（枚举类型、支持多选）。当参数类型为integer（整型）、real（浮点型）时，参数的取值范围根据返回值的Max、Min确定； 当参数类型为bool（布尔型）时，参数设置值取值范围是true | false； 当参数类型为enum（枚举类型）、mutil_enum（多枚举类型）时，参数的取值范围由返回值中的EnumValue确定。 */
   ParamValueType: string | null;
-  /** 参数值 单位。参数没有单位是，该字段返回空 */
+  /** 参数值 单位。参数没有单位时，该字段返回空 */
   Unit: string | null;
   /** 参数默认值。以字符串形式返回 */
   DefaultValue: string | null;
   /** 参数当前运行值。以字符串形式返回 */
   CurrentValue: string | null;
-  /** 枚举类型参数，取值范围 */
-  EnumValue: string[] | null;
   /** 数值类型（integer、real）参数，取值下界 */
   Max: number | null;
+  /** 枚举类型参数，取值范围 */
+  EnumValue: string[] | null;
   /** 数值类型（integer、real）参数，取值上界 */
   Min: number | null;
   /** 参数中文描述 */
@@ -380,6 +380,48 @@ declare interface ParamInfo {
   Advanced: boolean | null;
   /** 参数最后一次修改时间 */
   LastModifyTime: string | null;
+  /** 参数存在主备制约，0：无主备制约关系，1:备机参数值需比主机大，2:主机参数值需比备机大 */
+  StandbyRelated: number | null;
+  /** 参数版本关联信息，存储具体内核版本下的具体参数信息 */
+  VersionRelationSet: ParamVersionRelation[] | null;
+  /** 参数规格关联信息，存储具体规格下具体的参数信息 */
+  SpecRelationSet: ParamSpecRelation[] | null;
+}
+
+/** 描述各规格下的参数信息 */
+declare interface ParamSpecRelation {
+  /** 参数名称 */
+  Name: string | null;
+  /** 参数信息所属规格 */
+  Memory: string | null;
+  /** 参数在该规格下的默认值 */
+  Value: string | null;
+  /** 参数值单位。参数没有单位时，该字段返回空 */
+  Unit: string | null;
+  /** 数值类型（integer、real）参数，取值上界 */
+  Max: number | null;
+  /** 数值类型（integer、real）参数，取值下界 */
+  Min: number | null;
+  /** 枚举类型参数，取值范围 */
+  EnumValue: string[] | null;
+}
+
+/** 描述各版本下的参数信息 */
+declare interface ParamVersionRelation {
+  /** 参数名称 */
+  Name: string | null;
+  /** 参数信息所属内核版本 */
+  DBKernelVersion: string | null;
+  /** 参数在该版本该规格下的默认值 */
+  Value: string | null;
+  /** 参数值单位。参数没有单位时，该字段返回空 */
+  Unit: string | null;
+  /** 数值类型（integer、real）参数，取值上界 */
+  Max: number | null;
+  /** 数值类型（integer、real）参数，取值下界 */
+  Min: number | null;
+  /** 枚举类型参数，取值范围 */
+  EnumValue: string[] | null;
 }
 
 /** 订单详情 */
@@ -1542,9 +1584,9 @@ declare interface InquiryPriceRenewDBInstanceRequest {
 }
 
 declare interface InquiryPriceRenewDBInstanceResponse {
-  /** 总费用，打折前的。比如24650表示246.5元 */
+  /** 刊例价，单位为分。如24650表示246.5元 */
   OriginalPrice: number;
-  /** 实际需要付款金额。比如24650表示246.5元 */
+  /** 折后实际付款金额，单位为分。如24650表示246.5元 */
   Price: number;
   /** 币种。例如，CNY：人民币。 */
   Currency: string;

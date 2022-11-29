@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 220+ 款产品，8733+ 服务数</summary>
+<details><summary>共计 220+ 款产品，8734+ 服务数</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -138,7 +138,7 @@ casb | [云访问安全代理](https://cloud.tencent.com/document/product/1303) 
 cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(11)
 cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(42)
 ccc | [云呼叫中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(35)
-cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(135)
+cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(134)
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(20)
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(78+3)
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(6)
@@ -172,7 +172,7 @@ dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-
 dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(43)<br/>2019-10-16(27)
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6)
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(21)
-dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(61)
+dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(62)
 dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(62)
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(59)
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(26)
@@ -189,7 +189,7 @@ eis | [数据连接器](https://cloud.tencent.com/document/product/1270) | 2021-
 emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(24)
 es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2018-04-16(37)
 ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(27)
-essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(30)<br/>2020-12-22(53)
+essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(31)<br/>2020-12-22(53)
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2018-12-01(4)
 faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(35)
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(10)

@@ -396,6 +396,42 @@ declare interface Recipient {
   IsPromoter?: boolean;
 }
 
+/** 解除协议的签署人，如不指定，默认使用待解除流程（即原流程）中的签署人。注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该签署人。如果需要指定B端（机构身份类型）签署人，其中ReleasedApprover需要传递的参数如下：ApproverNumber, OrganizationName, ApproverType必传。对于其他身份标识- 渠道子客企业指定经办人：OpenId必传，OrganizationOpenId必传；- 非渠道合作企业：Name、Mobile必传。 */
+declare interface ReleasedApprover {
+  /** 企业签署方工商营业执照上的企业名称，签署方为非发起方企业场景下必传，最大长度64个字符 */
+  OrganizationName: string;
+  /** 签署人在原流程中的签署人列表中的顺序序号（从0开始，按顺序依次递增），如果不清楚原流程中的签署人列表，可以通过DescribeFlows接口查看 */
+  ApproverNumber: number;
+  /** 签署人类型，目前仅支持ORGANIZATION-企业 */
+  ApproverType: string;
+  /** 签署人姓名，最大长度50个字符 */
+  Name?: string;
+  /** 签署人身份证件类型1.ID_CARD 居民身份证2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证3.HONGKONG_AND_MACAO 港澳居民来往内地通行证 */
+  IdCardType?: string;
+  /** 签署人证件号 */
+  IdCardNumber?: string;
+  /** 签署人手机号，脱敏显示。大陆手机号为11位，暂不支持海外手机号 */
+  Mobile?: string;
+  /** 企业签署方在同一渠道下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符 */
+  OrganizationOpenId?: string;
+  /** 用户侧第三方id，最大长度64个字符当签署方为同一渠道下的员工时，该字必传 */
+  OpenId?: string;
+}
+
+/** 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。 */
+declare interface RelieveInfo {
+  /** 解除理由，最大支持200个字 */
+  Reason: string;
+  /** 解除后仍然有效的条款，保留条款，最大支持200个字 */
+  RemainInForceItem?: string;
+  /** 原合同事项处理-费用结算，最大支持200个字 */
+  OriginalExpenseSettlement?: string;
+  /** 原合同事项处理-其他事项，最大支持200个字 */
+  OriginalOtherSettlement?: string;
+  /** 其他约定，最大支持200个字 */
+  OtherDeals?: string;
+}
+
 /** 资源链接信息 */
 declare interface ResourceUrlInfo {
   /** 资源链接地址，过期时间5分钟 */
@@ -790,6 +826,30 @@ declare interface ChannelCreateMultiFlowSignQRCodeResponse {
   RequestId?: string;
 }
 
+declare interface ChannelCreateReleaseFlowRequest {
+  /** 待解除的流程编号（即原流程的编号） */
+  NeedRelievedFlowId: string;
+  /** 解除协议内容 */
+  ReliveInfo: RelieveInfo;
+  /** 应用相关信息 */
+  Agent: Agent;
+  /** 非必须，解除协议的本企业签署人列表，默认使用原流程的签署人列表；当解除协议的签署人与原流程的签署人不能相同时（比如原流程签署人离职了），需要指定本企业的其他签署人来替换原流程中的原签署人，注意需要指明ApproverNumber来代表需要替换哪一个签署人，解除协议的签署人数量不能多于原流程的签署人数量 */
+  ReleasedApprovers?: ReleasedApprover[];
+  /** 签署完回调url，最大长度1000个字符 */
+  CallbackUrl?: string;
+  /** 机构信息 */
+  Organization?: OrganizationInfo;
+  /** 用户信息 */
+  Operator?: UserInfo;
+}
+
+declare interface ChannelCreateReleaseFlowResponse {
+  /** 解除协议流程编号 */
+  FlowId: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ChannelDescribeEmployeesRequest {
   /** 返回最大数量，最大为20 */
   Limit: number;
@@ -823,7 +883,7 @@ declare interface ChannelDescribeOrganizationSealsRequest {
   Limit: number;
   /** 偏移量，默认为0，最大为20000 */
   Offset?: number;
-  /** 查询信息类型，为0时不返回授权用户，为1时返回 */
+  /** 查询信息类型，为1时返回授权用户，为其他值时不返回 */
   InfoType?: number;
   /** 印章id（没有输入返回所有） */
   SealId?: string;
@@ -2825,6 +2885,8 @@ declare interface Essbasic {
   ChannelCreateFlowSignReview(data: ChannelCreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowSignReviewResponse>;
   /** {@link ChannelCreateMultiFlowSignQRCode 创建一码多扫签署流程二维码}({@link ChannelCreateMultiFlowSignQRCodeRequest 请求参数}): {@link ChannelCreateMultiFlowSignQRCodeResponse 返回参数} */
   ChannelCreateMultiFlowSignQRCode(data: ChannelCreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateMultiFlowSignQRCodeResponse>;
+  /** {@link ChannelCreateReleaseFlow 发起解除协议}({@link ChannelCreateReleaseFlowRequest 请求参数}): {@link ChannelCreateReleaseFlowResponse 返回参数} */
+  ChannelCreateReleaseFlow(data: ChannelCreateReleaseFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateReleaseFlowResponse>;
   /** {@link ChannelDescribeEmployees 查询企业员工}({@link ChannelDescribeEmployeesRequest 请求参数}): {@link ChannelDescribeEmployeesResponse 返回参数} */
   ChannelDescribeEmployees(data: ChannelDescribeEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeEmployeesResponse>;
   /** {@link ChannelDescribeOrganizationSeals 查询渠道子客企业电子印章}({@link ChannelDescribeOrganizationSealsRequest 请求参数}): {@link ChannelDescribeOrganizationSealsResponse 返回参数} */
