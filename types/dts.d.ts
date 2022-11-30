@@ -905,7 +905,7 @@ declare interface CreateMigrationServiceResponse {
 }
 
 declare interface CreateSyncJobRequest {
-  /** 支付类型，PrePay：包年包月 PostPay：按时按量 */
+  /** 付款类型, 如：PrePay(表示包年包月)、PostPay(表示按时按量) */
   PayMode: string;
   /** 源端数据库类型,如mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等 */
   SrcDatabaseType: string;
@@ -917,15 +917,15 @@ declare interface CreateSyncJobRequest {
   DstRegion: string;
   /** 同步任务规格，Standard:标准版 */
   Specification?: string;
-  /** 无 */
+  /** 标签信息 */
   Tags?: TagItem[];
-  /** 同步任务数量 */
+  /** 一次购买的同步任务数量，取值范围为[1, 10]，默认为1 */
   Count?: number;
-  /** 自动续费标识 */
+  /** 自动续费标识，当PayMode值为PrePay则此项配置有意义，取值为：1（表示自动续费）、0（不自动续费，默认为此值） */
   AutoRenew?: number;
-  /** 同步链路规格 */
+  /** 同步链路规格，如micro,small,medium,large，默认为medium */
   InstanceClass?: string;
-  /** 同步链路名称 */
+  /** 同步任务名称 */
   JobName?: string;
   /** 创建类似任务的现有任务Id */
   ExistedJobId?: string;
@@ -2177,7 +2177,7 @@ declare interface Dts {
   DestroySyncJob(data: DestroySyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<DestroySyncJobResponse>;
   /** {@link IsolateMigrateJob 隔离数据迁移任务}({@link IsolateMigrateJobRequest 请求参数}): {@link IsolateMigrateJobResponse 返回参数} */
   IsolateMigrateJob(data: IsolateMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateMigrateJobResponse>;
-  /** {@link IsolateSyncJob 销毁同步任务}({@link IsolateSyncJobRequest 请求参数}): {@link IsolateSyncJobResponse 返回参数} */
+  /** {@link IsolateSyncJob 隔离同步任务}({@link IsolateSyncJobRequest 请求参数}): {@link IsolateSyncJobResponse 返回参数} */
   IsolateSyncJob(data: IsolateSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateSyncJobResponse>;
   /** {@link ModifyCompareTask 修改一致性校验任务}({@link ModifyCompareTaskRequest 请求参数}): {@link ModifyCompareTaskResponse 返回参数} */
   ModifyCompareTask(data: ModifyCompareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCompareTaskResponse>;

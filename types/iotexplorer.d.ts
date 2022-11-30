@@ -1144,7 +1144,7 @@ declare interface DescribeDeviceLocationSolveRequest {
 declare interface DescribeDeviceLocationSolveResponse {
   /** 经度 */
   Longitude: number;
-  /** 维度 */
+  /** 纬度 */
   Latitude: number;
   /** 类型 */
   LocationType: string;

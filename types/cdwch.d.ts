@@ -40,6 +40,46 @@ declare interface ConfigSubmitContext {
   FilePath?: string;
 }
 
+/** 磁盘规格描述 */
+declare interface DiskSpec {
+  /** 磁盘类型，例如“CLOUD_SSD", "LOCAL_SSD"等 */
+  DiskType: string;
+  /** 磁盘类型说明，例如"云SSD", "本地SSD"等 */
+  DiskDesc: string;
+  /** 磁盘最小规格大小，单位G */
+  MinDiskSize: number;
+  /** 磁盘最大规格大小，单位G */
+  MaxDiskSize: number;
+  /** 磁盘数目 */
+  DiskCount: number;
+}
+
+/** 资源规格描述信息 */
+declare interface ResourceSpec {
+  /** 规格名称，例如“SCH1" */
+  Name: string;
+  /** cpu核数 */
+  Cpu: number;
+  /** 内存大小，单位G */
+  Mem: number;
+  /** 分类标记，STANDARD/BIGDATA/HIGHIO分别表示标准型/大数据型/高IO */
+  Type: string;
+  /** 系统盘描述信息 */
+  SystemDisk: DiskSpec;
+  /** 数据盘描述信息 */
+  DataDisk: DiskSpec;
+  /** 最大节点数目限制 */
+  MaxNodeSize: number;
+  /** 是否可用，false代表售罄 */
+  Available: boolean | null;
+  /** 规格描述信息 */
+  ComputeSpecDesc: string | null;
+  /** 规格名 */
+  DisplayName: string | null;
+  /** 库存数 */
+  InstanceQuota: number | null;
+}
+
 declare interface ActionAlterCkUserRequest {
   /** 用户信息 */
   UserInfo: CkUserAlterInfo;
@@ -100,6 +140,26 @@ declare interface DescribeInstanceShardsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSpecRequest {
+  /** 地域信息，例如"ap-guangzhou-1" */
+  Zone: string;
+  /** 计费类型，PREPAID 包年包月，POSTPAID_BY_HOUR 按量计费 */
+  PayMode?: string;
+  /** 是否弹性ck */
+  IsElastic?: boolean;
+}
+
+declare interface DescribeSpecResponse {
+  /** zookeeper节点规格描述 */
+  CommonSpec: ResourceSpec[];
+  /** 数据节点规格描述 */
+  DataSpec: ResourceSpec[];
+  /** 云盘列表 */
+  AttachCBSSpec: DiskSpec[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyClusterConfigsRequest {
   /** 集群ID，例如cdwch-xxxx */
   InstanceId: string;
@@ -151,6 +211,8 @@ declare interface Cdwch {
   DescribeCkSqlApis(data: DescribeCkSqlApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCkSqlApisResponse>;
   /** {@link DescribeInstanceShards 获取实例shard信息列表}({@link DescribeInstanceShardsRequest 请求参数}): {@link DescribeInstanceShardsResponse 返回参数} */
   DescribeInstanceShards(data: DescribeInstanceShardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceShardsResponse>;
+  /** {@link DescribeSpec 获取集群规格}({@link DescribeSpecRequest 请求参数}): {@link DescribeSpecResponse 返回参数} */
+  DescribeSpec(data: DescribeSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecResponse>;
   /** {@link ModifyClusterConfigs 修改集群配置文件接口}({@link ModifyClusterConfigsRequest 请求参数}): {@link ModifyClusterConfigsResponse 返回参数} */
   ModifyClusterConfigs(data: ModifyClusterConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterConfigsResponse>;
   /** {@link ModifyUserNewPrivilege 新增、修改ck账号cluster权限（新版）}({@link ModifyUserNewPrivilegeRequest 请求参数}): {@link ModifyUserNewPrivilegeResponse 返回参数} */

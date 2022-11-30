@@ -590,6 +590,26 @@ declare interface ResetInstanceBlueprint {
   NonResettableMessage: string;
 }
 
+/** 使用场景信息 */
+declare interface Scene {
+  /** 使用场景Id */
+  SceneId: string;
+  /** 使用场景展示名称 */
+  DisplayName: string;
+  /** 使用场景描述 */
+  Description: string;
+}
+
+/** 使用场景详细信息 */
+declare interface SceneInfo {
+  /** 使用场景Id。 */
+  SceneId: string;
+  /** 使用场景展示名称。 */
+  DisplayName: string;
+  /** 使用场景描述信息。 */
+  Description: string;
+}
+
 /** 描述了快照相关信息。 */
 declare interface Snapshot {
   /** 快照 ID。 */
@@ -874,6 +894,24 @@ declare interface DeleteSnapshotsRequest {
 }
 
 declare interface DeleteSnapshotsResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAllScenesRequest {
+  /** 使用场景ID列表。 */
+  SceneIds?: string[];
+  /** 偏移量，默认为 0。 */
+  Offset?: number;
+  /** 返回数量，默认为 20，最大值为 100。 */
+  Limit?: number;
+}
+
+declare interface DescribeAllScenesResponse {
+  /** 使用场景详细信息列表。 */
+  SceneInfoSet: SceneInfo[];
+  /** 使用场景详细信息总数量。 */
+  TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1260,6 +1298,24 @@ declare interface DescribeResetInstanceBlueprintsResponse {
   TotalCount: number;
   /** 镜像重置信息列表 */
   ResetInstanceBlueprintSet: ResetInstanceBlueprint[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeScenesRequest {
+  /** 使用场景ID列表。 */
+  SceneIds?: string[];
+  /** 偏移量，默认为 0。 */
+  Offset?: number;
+  /** 返回数量，默认为 20，最大值为 100。 */
+  Limit?: number;
+}
+
+declare interface DescribeScenesResponse {
+  /** 使用场景列表。 */
+  SceneSet: Scene[];
+  /** 使用场景总数量。 */
+  TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1715,6 +1771,8 @@ declare interface Lighthouse {
   DeleteKeyPairs(data: DeleteKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKeyPairsResponse>;
   /** {@link DeleteSnapshots 删除快照}({@link DeleteSnapshotsRequest 请求参数}): {@link DeleteSnapshotsResponse 返回参数} */
   DeleteSnapshots(data: DeleteSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotsResponse>;
+  /** {@link DescribeAllScenes 查询全地域使用场景列表}({@link DescribeAllScenesRequest 请求参数}): {@link DescribeAllScenesResponse 返回参数} */
+  DescribeAllScenes(data?: DescribeAllScenesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllScenesResponse>;
   /** {@link DescribeBlueprintInstances 查询镜像实例信息}({@link DescribeBlueprintInstancesRequest 请求参数}): {@link DescribeBlueprintInstancesResponse 返回参数} */
   DescribeBlueprintInstances(data: DescribeBlueprintInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlueprintInstancesResponse>;
   /** {@link DescribeBlueprints 查询镜像信息}({@link DescribeBlueprintsRequest 请求参数}): {@link DescribeBlueprintsResponse 返回参数} */
@@ -1763,6 +1821,8 @@ declare interface Lighthouse {
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
   /** {@link DescribeResetInstanceBlueprints 查询重置实例的镜像信息}({@link DescribeResetInstanceBlueprintsRequest 请求参数}): {@link DescribeResetInstanceBlueprintsResponse 返回参数} */
   DescribeResetInstanceBlueprints(data: DescribeResetInstanceBlueprintsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResetInstanceBlueprintsResponse>;
+  /** {@link DescribeScenes 查看使用场景列表}({@link DescribeScenesRequest 请求参数}): {@link DescribeScenesResponse 返回参数} */
+  DescribeScenes(data?: DescribeScenesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScenesResponse>;
   /** {@link DescribeSnapshots 查看快照列表}({@link DescribeSnapshotsRequest 请求参数}): {@link DescribeSnapshotsResponse 返回参数} */
   DescribeSnapshots(data?: DescribeSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsResponse>;
   /** {@link DescribeSnapshotsDeniedActions 查看快照操作限制列表}({@link DescribeSnapshotsDeniedActionsRequest 请求参数}): {@link DescribeSnapshotsDeniedActionsResponse 返回参数} */

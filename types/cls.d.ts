@@ -1831,7 +1831,7 @@ declare interface ModifyTopicRequest {
   AutoSplit?: boolean;
   /** 若开启最大分裂，该主题能够能够允许的最大分区数 */
   MaxSplitPartitions?: number;
-  /** 生命周期，单位天，标准存储取值范围1~3600，低频存储取值范围7~3600。取值为3640时代表永久保存 */
+  /** 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600。取值为3640时代表永久保存 */
   Period?: number;
 }
 

@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 220+ 款产品，8734+ 服务数</summary>
+<details><summary>共计 220+ 款产品，8737+ 服务数</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -142,7 +142,7 @@ cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 201
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(20)
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(78+3)
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(6)
-cdwch | [云数据仓库 ClickHouse](https://cloud.tencent.com/document/product/1299) | 2020-09-15(7)
+cdwch | [云数据仓库 ClickHouse](https://cloud.tencent.com/document/product/1299) | 2020-09-15(8)
 cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(10)
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(35)
 cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(62)
@@ -218,7 +218,7 @@ irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 20
 ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2021-09-03(25)
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(49)
 lcic | [低代码互动课堂](https://cloud.tencent.com/document/product/1639) | 2022-08-17(14)
-lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(69)
+lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(71)
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(121)
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(1)
 lp | [登录保护](https://cloud.tencent.com/document/product/1190) | 2020-02-24(1)

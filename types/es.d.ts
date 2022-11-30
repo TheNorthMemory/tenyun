@@ -1423,13 +1423,13 @@ declare interface UpdateInstanceRequest {
   CosBackup?: CosBackup;
   /** 节点信息列表，可以只传递要更新的节点及其对应的规格信息。支持的操作包括修改一种节点的个数修改一种节点的节点规格及磁盘大小增加一种节点类型（需要同时指定该节点的类型，个数，规格，磁盘等信息）上述操作一次只能进行一种，且磁盘类型不支持修改 */
   NodeInfoList?: NodeInfo[];
-  /** 公网访问状态 */
+  /** ES集群公网访问状态OPEN 开启CLOSE 关闭 */
   PublicAccess?: string;
   /** 公网访问控制列表 */
   EsPublicAcl?: EsPublicAcl;
-  /** Kibana公网访问状态 */
+  /** Kibana公网访问状态OPEN 开启CLOSE 关闭 */
   KibanaPublicAccess?: string;
-  /** Kibana内网访问状态 */
+  /** Kibana内网访问状态OPEN 开启CLOSE 关闭 */
   KibanaPrivateAccess?: string;
   /** ES 6.8及以上版本基础版开启或关闭用户认证 */
   BasicSecurityType?: number;
@@ -1449,15 +1449,15 @@ declare interface UpdateInstanceRequest {
   SwitchPrivateLink?: string;
   /** 启用Cerebro */
   EnableCerebro?: boolean;
-  /** Cerebro公网访问状态 */
+  /** Cerebro公网访问状态OPEN 开启CLOSE 关闭 */
   CerebroPublicAccess?: string;
-  /** Cerebro内网访问状态 */
+  /** Cerebro内网访问状态OPEN 开启CLOSE 关闭 */
   CerebroPrivateAccess?: string;
   /** 新增或修改的配置组信息 */
   EsConfigSet?: EsConfigSetInfo;
   /** 可维护时间段 */
   OperationDuration?: OperationDurationUpdated;
-  /** 是否开启Altering 外网告警输出 */
+  /** 是否开启Alerting 外网告警输出：OPEN 开启CLOSE 关闭 */
   KibanaAlteringPublicAccess?: string;
 }
 

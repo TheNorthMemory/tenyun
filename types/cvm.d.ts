@@ -200,7 +200,7 @@ declare interface GPUInfo {
 declare interface HostItem {
   /** 专用宿主机实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。 */
   Placement?: Placement;
-  /** 专用宿主机实例id */
+  /** 专用宿主机实例ID */
   HostId?: string;
   /** 专用宿主机实例类型 */
   HostType?: string;
@@ -218,7 +218,7 @@ declare interface HostItem {
   InstanceIds?: string[];
   /** 专用宿主机实例状态 */
   HostState?: string;
-  /** 专用宿主机实例ip */
+  /** 专用宿主机实例IP */
   HostIp?: string;
   /** 专用宿主机实例资源信息 */
   HostResource?: HostResource;
@@ -228,9 +228,9 @@ declare interface HostItem {
 
 /** 专用宿主机实例的资源信息 */
 declare interface HostResource {
-  /** 专用宿主机实例总cpu核数 */
+  /** 专用宿主机实例总CPU核数 */
   CpuTotal?: number;
-  /** 专用宿主机实例可用cpu核数 */
+  /** 专用宿主机实例可用CPU核数 */
   CpuAvailable?: number;
   /** 专用宿主机实例总内存大小（单位为:GiB） */
   MemTotal?: number;
@@ -306,11 +306,11 @@ declare interface Image {
   LicenseType?: string;
 }
 
-/** 支持的操作系统类型，根据windows和Linux分类。 */
+/** 支持的操作系统类型，根据Windows和Linux分类。 */
 declare interface ImageOsList {
-  /** 支持的windows操作系统。 */
+  /** 支持的Windows操作系统。 */
   Windows: string[] | null;
-  /** 支持的linux操作系统 */
+  /** 支持的Linux操作系统 */
   Linux: string[] | null;
 }
 
@@ -660,7 +660,7 @@ declare interface LaunchTemplateVersionData {
   EnhancedService?: EnhancedService | null;
   /** 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。 */
   UserData?: string | null;
-  /** 置放群组id，仅支持指定一个。 */
+  /** 置放群组ID，仅支持指定一个。 */
   DisasterRecoverGroupIds?: string[] | null;
   /** 定时任务。通过该参数可以为实例指定定时任务，目前仅支持定时销毁。 */
   ActionTimer?: ActionTimer | null;
@@ -740,7 +740,7 @@ declare interface OsVersion {
   Architecture: string[];
 }
 
-/** 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅专用宿主机产品可用），母机ip等 */
+/** 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅专用宿主机产品可用），母机IP等 */
 declare interface Placement {
   /** 实例所属的可用区ID。该参数可以通过调用 [DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。 */
   Zone: string;
@@ -748,7 +748,7 @@ declare interface Placement {
   ProjectId?: number;
   /** 实例所属的专用宿主机ID列表，仅用于入参。如果您有购买专用宿主机并且指定了该参数，则您购买的实例就会随机的部署在这些专用宿主机上。 */
   HostIds?: string[];
-  /** 指定母机ip生产子机 */
+  /** 指定母机IP生产子机 */
   HostIps?: string[];
   /** 实例所属的专用宿主机ID，仅用于出参。 */
   HostId?: string;
@@ -846,7 +846,7 @@ declare interface ReservedInstancePriceItem {
   Zone: string;
   /** 预留实例计费【有效期】即预留实例计费购买时长。形如：31536000。计量单位：秒 */
   Duration: number;
-  /** 预留实例计费的平台描述（即操作系统）。形如：linux。返回项： linux 。 */
+  /** 预留实例计费的平台描述（即操作系统）。形如：Linux。返回项： Linux 。 */
   ProductDescription: string;
 }
 
@@ -1199,7 +1199,7 @@ declare interface CreateImageRequest {
   ForcePoweroff?: string;
   /** 创建Windows镜像时是否启用Sysprep。取值范围：TRUE或FALSE，默认取值为FALSE。关于Sysprep的详情请参考[链接](https://cloud.tencent.com/document/product/213/43498)。 */
   Sysprep?: string;
-  /** 基于实例创建整机镜像时，指定包含在镜像里的数据盘Id */
+  /** 基于实例创建整机镜像时，指定包含在镜像里的数据盘ID */
   DataDiskIds?: string[];
   /** 基于快照创建镜像，指定快照ID，必须包含一个系统盘快照。不可与InstanceId同时传入。 */
   SnapshotIds?: string[];
