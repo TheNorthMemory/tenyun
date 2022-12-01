@@ -3612,9 +3612,9 @@ declare interface ReviewAudioVideoSegmentItem {
   Confidence: number;
   /** 嫌疑片段鉴别涉及违规信息的结果建议，取值范围：review：疑似违规，建议复审；block：确认违规，建议封禁。 */
   Suggestion: string;
-  /** 嫌疑片段最可能的违规的标签，取值范围：Porn：色情；Terrorism：暴恐；Political：令人不适宜的信息。 */
+  /** 嫌疑片段最可能的违规的标签，取值范围：Porn：色情；Terror：暴恐；Polity：不适宜的信息；Ad：广告；Illegal：违法；Religion：宗教；Abuse：谩骂；Moan：娇喘。 */
   Label: string;
-  /** 当 Form 为 Image 或 Voice 时有效，表示当前标签（Label）下的二级标签。当 Form 为 Image 且 Label 为 Porn 时，取值范围：porn：色情；vulgar：低俗。当 Form 为 Image 且 Label 为 Terrorism 时，取值范围：guns：武器枪支；bloody：血腥画面；banners：暴恐旗帜； scenario：暴恐画面；explosion：爆炸火灾。当 Form 为 Image 且 Label 为 Political 时，取值范围：violation_photo：违规图标；nation_politician：国家领导人；province_politician：省部级领导人；county_politician：市/县级领导人；sensitive_politician：敏感相关人物；foreign_politician：国外政治人物；sensitive_entertainment：敏感娱乐明星；sensitive_military：敏感军事人物。当 Form 为 Voice 且 Label 为 Porn 时，取值范围：moan：娇喘。 */
+  /** 违规子标签。 */
   SubLabel: string;
   /** 嫌疑片段违禁的形式，取值范围：Image：画面上的人物或图标；OCR：画面上的文字；ASR：语音中的文字；Voice：声音。 */
   Form: string;
@@ -3650,13 +3650,15 @@ declare interface ReviewAudioVideoTask {
 declare interface ReviewAudioVideoTaskInput {
   /** 媒体文件 ID。 */
   FileId: string;
+  /** 音视频审核模板 ID。 */
+  Definition: number;
 }
 
 /** 音视频审核任务的输出。 */
 declare interface ReviewAudioVideoTaskOutput {
   /** 音视频内容审核的结果建议，取值范围：pass：建议通过；review：建议复审；block：建议封禁。 */
   Suggestion: string;
-  /** 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违规的标签，取值范围：Porn：色情；Terrorism：暴恐；Political：令人不适宜的信息。 */
+  /** 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违规的标签，取值范围：Porn：色情；Terror：暴恐；Polity：不适宜的信息；Ad：广告；Illegal：违法；Religion：宗教；Abuse：谩骂；Moan：娇喘。 */
   Label: string;
   /** 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违禁的形式，取值范围：Image：画面上的人物或图标；OCR：画面上的文字；ASR：语音中的文字；Voice：声音。 */
   Form: string;
@@ -7229,6 +7231,8 @@ declare interface ReviewAudioVideoRequest {
   FileId: string;
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: number;
+  /** 音视频审核模板 ID，默认值为 10。取值范围：10：预置模板，支持检测的违规标签包括色情（Porn）、暴恐（Terror）和不适宜的信息（Polity）。 */
+  Definition?: number;
   /** 任务流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
   TasksPriority?: number;
   /** 来源上下文，用于透传用户请求信息，音视频审核完成回调将返回该字段值，最长 1000 个字符。 */
