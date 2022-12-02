@@ -968,6 +968,98 @@ declare interface GroupOffsetTopic {
   Partitions: GroupOffsetPartition[] | null;
 }
 
+/** InquireCkafkaPrice接口询价返回值 */
+declare interface InquireCkafkaPriceResp {
+  /** 实例价格 */
+  InstancePrice: InquiryPrice | null;
+  /** 公网带宽价格 */
+  PublicNetworkBandwidthPrice: InquiryPrice | null;
+}
+
+/** 询价返回参数 */
+declare interface InquiryBasePrice {
+  /** 单位原价 */
+  UnitPrice: number | null;
+  /** 折扣单位价格 */
+  UnitPriceDiscount: number | null;
+  /** 合计原价 */
+  OriginalPrice: number | null;
+  /** 折扣合计价格 */
+  DiscountPrice: number | null;
+  /** 折扣(单位是%) */
+  Discount: number | null;
+  /** 商品数量 */
+  GoodsNum: number | null;
+  /** 付费货币 */
+  Currency: string | null;
+  /** 硬盘专用返回参数 */
+  DiskType: string | null;
+  /** 购买时长 */
+  TimeSpan: number | null;
+  /** 购买时长单位("m"按月, "h"按小时) */
+  TimeUnit: string | null;
+  /** 购买数量 */
+  Value: number | null;
+}
+
+/** 详细类别的价格 */
+declare interface InquiryDetailPrice {
+  /** 额外内网带宽价格 */
+  BandwidthPrice: InquiryBasePrice | null;
+  /** 硬盘价格 */
+  DiskPrice: InquiryBasePrice | null;
+  /** 额外分区价格 */
+  PartitionPrice: InquiryBasePrice | null;
+  /** 额外Topic价格 */
+  TopicPrice: InquiryBasePrice | null;
+  /** 实例套餐价格 */
+  InstanceTypePrice: InquiryBasePrice | null;
+}
+
+/** 购买硬盘参数 */
+declare interface InquiryDiskParam {
+  /** 购买硬盘类型: SSD(SSD), CLOUD_SSD(SSD云硬盘), CLOUD_PREMIUM(高性能云硬盘), CLOUD_BASIC(云盘) */
+  DiskType?: string;
+  /** 购买硬盘大小: 单位GB */
+  DiskSize?: number;
+}
+
+/** 询价返回参数 */
+declare interface InquiryPrice {
+  /** 单位原价 */
+  UnitPrice: number | null;
+  /** 折扣单位价格 */
+  UnitPriceDiscount: number | null;
+  /** 合计原价 */
+  OriginalPrice: number | null;
+  /** 折扣合计价格 */
+  DiscountPrice: number | null;
+  /** 折扣(单位是%) */
+  Discount: number | null;
+  /** 商品数量 */
+  GoodsNum: number | null;
+  /** 付费货币 */
+  Currency: string | null;
+  /** 硬盘专用返回参数 */
+  DiskType: string | null;
+  /** 购买时长 */
+  TimeSpan: number | null;
+  /** 购买时长单位("m"按月, "h"按小时) */
+  TimeUnit: string | null;
+  /** 购买数量 */
+  Value: number | null;
+  /** 详细类别的价格 */
+  DetailPrices: InquiryDetailPrice | null;
+}
+
+/** 公网带宽参数 */
+declare interface InquiryPublicNetworkParam {
+  /** 公网计费模式: BANDWIDTH_PREPAID(包年包月), BANDWIDTH_POSTPAID_BY_HOUR(带宽按小时计费) */
+  PublicNetworkChargeType?: string;
+  /** 公网带宽, 单位MB */
+  PublicNetworkMonthly?: number;
+}
+
 /** 实例对象 */
 declare interface Instance {
   /** 实例id */
@@ -978,6 +1070,14 @@ declare interface Instance {
   Status: number;
   /** 是否开源实例。开源：true，不开源：false */
   IfCommunity: boolean | null;
+}
+
+/** 实例购买付费参数 */
+declare interface InstanceChargeParam {
+  /** 实例付费类型: PREPAID(包年包月), POSTPAID_BY_HOUR(按量付费) */
+  InstanceChargeType?: string;
+  /** 购买时长: 包年包月时需要填写, 按量计费无需填写 */
+  InstanceChargePeriod?: number;
 }
 
 /** 实例配置实体 */
@@ -2226,6 +2326,30 @@ declare interface CreateDatahubTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateInstancePostRequest {
+  /** 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
+  InstanceName: string;
+  /** 实例带宽 */
+  BandWidth: number;
+  /** vpcId，不填默认基础网络 */
+  VpcId?: string;
+  /** 子网id，vpc网络需要传该参数，基础网络可以不传 */
+  SubnetId?: string;
+  /** 可选。实例日志的最长保留时间，单位分钟，默认为10080（7天），最大30天，不填默认0，代表不开启日志保留时间回收策略 */
+  MsgRetentionTime?: number;
+  /** 可用区 */
+  ZoneId?: number;
+  /** 创建实例时可以选择集群Id, 该入参表示集群Id */
+  ClusterId?: number;
+}
+
+declare interface CreateInstancePostResponse {
+  /** 返回结果 */
+  Result?: JgwOperateResponse;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateInstancePreRequest {
   /** 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
   InstanceName: string;
@@ -3091,6 +3215,42 @@ declare interface GroupResponse {
   GroupList: DescribeGroup[] | null;
 }
 
+declare interface InquireCkafkaPriceRequest {
+  /** 国内站标准版填写standards2, 专业版填写profession */
+  InstanceType: string;
+  /** 购买/续费付费类型(购买时不填的话, 默认获取购买包年包月一个月的费用) */
+  InstanceChargeParam?: InstanceChargeParam;
+  /** 购买/续费时购买的实例数量(不填时, 默认为1个) */
+  InstanceNum?: number;
+  /** 实例内网带宽大小, 单位MB/s (购买时必填) */
+  Bandwidth?: number;
+  /** 实例的硬盘购买类型以及大小 (购买时必填) */
+  InquiryDiskParam?: InquiryDiskParam;
+  /** 实例消息保留时间大小, 单位小时 (购买时必填) */
+  MessageRetention?: number;
+  /** 购买实例topic数, 单位个 (购买时必填) */
+  Topic?: number;
+  /** 购买实例分区数, 单位个 (购买时必填) */
+  Partition?: number;
+  /** 购买地域, 可通过查看DescribeCkafkaZone这个接口获取ZoneId */
+  ZoneIds?: number[];
+  /** 标记操作, 新购填写purchase, 续费填写renew, (不填时, 默认为purchase) */
+  CategoryAction?: string;
+  /** 国内站购买的版本, sv_ckafka_instance_s2_1(入门型), sv_ckafka_instance_s2_2(标准版), sv_ckafka_instance_s2_3(进阶型), 如果instanceType为standards2, 但该参数为空, 则默认值为sv_ckafka_instance_s2_1 */
+  BillType?: string;
+  /** 公网带宽计费模式, 目前只有专业版支持公网带宽 (购买公网带宽时必填) */
+  PublicNetworkParam?: InquiryPublicNetworkParam;
+  /** 续费时的实例id, 续费时填写 */
+  InstanceId?: string;
+}
+
+declare interface InquireCkafkaPriceResponse {
+  /** 出参 */
+  Result: InquireCkafkaPriceResp;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface InstanceAttributesResponse {
   /** 实例ID */
   InstanceId: string;
@@ -3485,6 +3645,8 @@ declare interface Ckafka {
   CreateConsumer(data: CreateConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerResponse>;
   /** {@link CreateDatahubTask 创建DIP转储任务}({@link CreateDatahubTaskRequest 请求参数}): {@link CreateDatahubTaskResponse 返回参数} */
   CreateDatahubTask(data: CreateDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatahubTaskResponse>;
+  /** {@link CreateInstancePost 创建按量计费实例}({@link CreateInstancePostRequest 请求参数}): {@link CreateInstancePostResponse 返回参数} */
+  CreateInstancePost(data: CreateInstancePostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancePostResponse>;
   /** {@link CreateInstancePre 创建实例(预付费包年包月)}({@link CreateInstancePreRequest 请求参数}): {@link CreateInstancePreResponse 返回参数} */
   CreateInstancePre(data: CreateInstancePreRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancePreResponse>;
   /** {@link CreatePartition 增加主题分区}({@link CreatePartitionRequest 请求参数}): {@link CreatePartitionResponse 返回参数} */
@@ -3577,6 +3739,8 @@ declare interface Ckafka {
   FetchMessageByOffset(data: FetchMessageByOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<FetchMessageByOffsetResponse>;
   /** {@link FetchMessageListByOffset 根据位点查询消息列表}({@link FetchMessageListByOffsetRequest 请求参数}): {@link FetchMessageListByOffsetResponse 返回参数} */
   FetchMessageListByOffset(data: FetchMessageListByOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<FetchMessageListByOffsetResponse>;
+  /** {@link InquireCkafkaPrice Ckafka询价}({@link InquireCkafkaPriceRequest 请求参数}): {@link InquireCkafkaPriceResponse 返回参数} */
+  InquireCkafkaPrice(data: InquireCkafkaPriceRequest, config?: AxiosRequestConfig): AxiosPromise<InquireCkafkaPriceResponse>;
   /** {@link ModifyConnectResource 编辑Datahub连接源}({@link ModifyConnectResourceRequest 请求参数}): {@link ModifyConnectResourceResponse 返回参数} */
   ModifyConnectResource(data: ModifyConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConnectResourceResponse>;
   /** {@link ModifyDatahubTask 修改Datahub任务}({@link ModifyDatahubTaskRequest 请求参数}): {@link ModifyDatahubTaskResponse 返回参数} */

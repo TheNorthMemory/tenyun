@@ -1240,6 +1240,24 @@ declare interface OIDCConfigAuthenticationOptions {
   AutoInstallPodIdentityWebhookAddon?: boolean | null;
 }
 
+/** 应用市场安装的Pending应用 */
+declare interface PendingRelease {
+  /** 应用状态详情 */
+  Condition: string | null;
+  /** 创建时间 */
+  CreatedTime: string | null;
+  /** 应用ID */
+  ID: string | null;
+  /** 应用名称 */
+  Name: string | null;
+  /** 应用命名空间 */
+  Namespace: string | null;
+  /** 应用状态 */
+  Status: string | null;
+  /** 更新时间 */
+  UpdatedTime: string | null;
+}
+
 /** 某机型可支持的最大 VPC-CNI 模式的 Pod 数量 */
 declare interface PodLimitsByType {
   /** TKE共享网卡非固定IP模式可支持的Pod数量 */
@@ -1738,6 +1756,14 @@ declare interface RegionInstance {
   Remark: string | null;
 }
 
+/** 应用市场自定义参数 */
+declare interface ReleaseValues {
+  /** 自定义参数原始值 */
+  RawOriginal: string;
+  /** 自定义参数值类型 */
+  ValuesType: string;
+}
+
 /** 资源删除选项 */
 declare interface ResourceDeleteOption {
   /** 资源类型，例如CBS */
@@ -2204,6 +2230,38 @@ declare interface CreateClusterNodePoolRequest {
 declare interface CreateClusterNodePoolResponse {
   /** 节点池id */
   NodePoolId: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface CreateClusterReleaseRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 应用名称 */
+  Name: string;
+  /** 应用命名空间 */
+  Namespace: string;
+  /** 制品名称或从第三方repo 安装chart时，制品压缩包下载地址, 不支持重定向类型chart 地址，结尾为*.tgz */
+  Chart: string;
+  /** 自定义参数 */
+  Values?: ReleaseValues;
+  /** 制品来源，范围：tke-market/tcr/other */
+  ChartFrom?: string;
+  /** 制品版本 */
+  ChartVersion?: string;
+  /** 制品仓库URL地址 */
+  ChartRepoURL?: string;
+  /** 制品访问用户名 */
+  Username?: string;
+  /** 制品访问密码 */
+  Password?: string;
+  /** 制品命名空间 */
+  ChartNamespace?: string;
+}
+
+declare interface CreateClusterReleaseResponse {
+  /** 应用详情 */
+  Release: PendingRelease | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -4937,6 +4995,8 @@ declare interface Tke {
   CreateClusterNodePool(data: CreateClusterNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterNodePoolResponse>;
   /** {@link CreateClusterNodePoolFromExistingAsg 从伸缩组创建节点池}({@link CreateClusterNodePoolFromExistingAsgRequest 请求参数}): {@link CreateClusterNodePoolFromExistingAsgResponse 返回参数} */
   CreateClusterNodePoolFromExistingAsg(data: CreateClusterNodePoolFromExistingAsgRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterNodePoolFromExistingAsgResponse>;
+  /** {@link CreateClusterRelease 集群安装应用}({@link CreateClusterReleaseRequest 请求参数}): {@link CreateClusterReleaseResponse 返回参数} */
+  CreateClusterRelease(data: CreateClusterReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterReleaseResponse>;
   /** {@link CreateClusterRoute 创建集群路由}({@link CreateClusterRouteRequest 请求参数}): {@link CreateClusterRouteResponse 返回参数} */
   CreateClusterRoute(data: CreateClusterRouteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterRouteResponse>;
   /** {@link CreateClusterRouteTable 创建集群路由表}({@link CreateClusterRouteTableRequest 请求参数}): {@link CreateClusterRouteTableResponse 返回参数} */
