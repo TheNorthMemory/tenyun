@@ -266,6 +266,8 @@ declare interface FirmwareInfo {
   Description: string;
   /** 产品ID */
   ProductId: string;
+  /** 固件升级模块 */
+  FwType: string | null;
 }
 
 /** 固件升级任务信息 */
@@ -467,6 +469,8 @@ declare interface BatchUpdateFirmwareRequest {
   FileSize?: number;
   /** 需要升级的设备名称列表 */
   DeviceNames?: string[];
+  /** 固件升级任务默认超时时间。 最小取值60秒，最大为3600秒 */
+  TimeoutInterval?: number;
 }
 
 declare interface BatchUpdateFirmwareResponse {
@@ -1484,6 +1488,8 @@ declare interface DescribeFirmwareResponse {
   Createtime: number | null;
   /** 产品名称 */
   ProductName: string;
+  /** 固件升级模块 */
+  FwType: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2213,6 +2219,8 @@ declare interface UploadFirmwareRequest {
   FirmwareName?: string;
   /** 固件描述 */
   FirmwareDescription?: string;
+  /** 固件升级模块；可选值 mcu|moudule */
+  FwType?: string;
 }
 
 declare interface UploadFirmwareResponse {

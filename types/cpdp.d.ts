@@ -154,6 +154,14 @@ declare interface ApplyFlexPaymentResult {
   AmountAfterTax: string;
   /** 税金 */
   Tax: string;
+  /** 增值税 */
+  Vat: string | null;
+  /** 个人所得税 */
+  IndividualIncomeTax: string | null;
+  /** 附加税总税额 */
+  AdditionalTaxSum: string | null;
+  /** 附加税税项。格式为JSON格式 */
+  AdditionalTaxItem: string | null;
 }
 
 /** 结算结果 */
@@ -2236,6 +2244,14 @@ declare interface PaymentOrderResult {
   OutUserId: string;
   /** 渠道支付订单号 */
   ChannelOrderId: string | null;
+  /** 增值税 */
+  Vat: string | null;
+  /** 个人所得税 */
+  IndividualIncomeTax: string | null;
+  /** 附加税总税额 */
+  AdditionalTaxSum: string | null;
+  /** 附加税税项。格式为JSON格式 */
+  AdditionalTaxItem: string | null;
 }
 
 /** 付款订单状态结果 */
@@ -6165,7 +6181,7 @@ declare interface CreateRedInvoiceV2Response {
 }
 
 declare interface CreateSinglePaymentRequest {
-  /** 转账类型 */
+  /** 转账类型1 微信企业付款 2 支付宝转账 3 平安银企直连代发转账 */
   TransferType: number;
   /** 订单流水号 */
   OrderId: string;
@@ -7895,6 +7911,8 @@ declare interface QueryFlexPayeeAccountBalanceRequest {
   IncomeType: string;
   /** 环境类型__release__:生产环境__sandbox__:沙箱环境__test__:测试环境缺省默认为生产环境 */
   Environment?: string;
+  /** 快照日期。格式yyyy-MM-dd */
+  SnapshotDate?: string;
 }
 
 declare interface QueryFlexPayeeAccountBalanceResponse {
@@ -8427,7 +8445,7 @@ declare interface QueryOpenBankBankBranchListRequest {
   BankBranchName: string;
   /** 银行简称。 */
   BankAbbreviation: string;
-  /** 页码。Index和Count必须大于等于1。 */
+  /** 页码。Index和Count必须大于等于1。Count建议不超过100。 */
   PageNumber: Paging;
   /** 环境类型。__release__:生产环境__sandbox__:沙箱环境_不填默认为生产环境_ */
   Environment?: string;

@@ -226,6 +226,8 @@ declare interface Docker {
   MaxRetryCount?: number;
   /** 拉取Docker镜像失败时延迟时间。单位：秒。 */
   DelayOnRetry?: number;
+  /** Docker命令运行参数。 */
+  DockerRunOption?: string | null;
 }
 
 /** 描述了实例的增强服务启用情况与其设置，如云安全，云监控等实例 Agent */

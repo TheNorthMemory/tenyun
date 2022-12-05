@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 220+ 款产品，8740+ 服务数</summary>
+<details><summary>共计 220+ 款产品，8745+ 服务数</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -165,7 +165,7 @@ cr | [金融联络机器人](https://cloud.tencent.com/document/product/656) | 2
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(91)
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(231)
 cws | 漏洞扫描服务 | 2018-03-12(19)
-cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(63)
+cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(67)
 dasb | [T-Sec-堡垒机（BH）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(24)
 dataintegration | [数据接入平台](https://cloud.tencent.com/document/product/1591) | 2022-06-13(1)
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112)
@@ -229,7 +229,7 @@ mgobe | [游戏联机对战引擎](https://cloud.tencent.com/document/product/10
 mmps | [小程序安全](https://cloud.tencent.com/document/product/1223) | 2020-07-10(15)
 mna | [移动网络加速](https://cloud.tencent.com/document/product/1385) | 2021-01-19(12)
 mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(34)<br/>2018-04-08(13)
-monitor | [云监控](https://cloud.tencent.com/document/product/248) | 2018-07-24(112)
+monitor | [云监控](https://cloud.tencent.com/document/product/248) | 2018-07-24(113)
 mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(83)
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(4)
 ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(17)

@@ -1019,9 +1019,9 @@ declare interface GetFunctionLogsResponse {
 declare interface GetFunctionRequest {
   /** 需要获取详情的函数名称 */
   FunctionName: string;
-  /** 函数的版本号 */
+  /** 函数的版本号默认值: $LATEST */
   Qualifier?: string;
-  /** 函数所属命名空间 */
+  /** 函数所属命名空间默认值: default */
   Namespace?: string;
   /** 是否显示代码, TRUE表示显示代码，FALSE表示不显示代码,大于1M的入口文件不会显示 */
   ShowCode?: string;
@@ -1627,7 +1627,7 @@ declare interface UpdateFunctionConfigurationRequest {
   Runtime?: string;
   /** 函数的环境变量 */
   Environment?: Environment;
-  /** 函数所属命名空间 */
+  /** 函数所属命名空间默认值: default */
   Namespace?: string;
   /** 函数的私有网络配置 */
   VpcConfig?: VpcConfig;

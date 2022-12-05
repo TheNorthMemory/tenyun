@@ -396,6 +396,8 @@ declare interface Endpoint {
   TmpSecretKey?: string | null;
   /** 临时Token，如果为跨账号实例此项必填 */
   TmpToken?: string | null;
+  /** 外部角色id */
+  RoleExternalId?: string | null;
 }
 
 /** 任务错误信息 */
@@ -644,6 +646,8 @@ declare interface StepTip {
   Solution?: string | null;
   /** 帮助文档 */
   HelpDoc?: string | null;
+  /** 当前步骤跳过信息 */
+  SkipInfo?: string | null;
 }
 
 /** 同步任务的步骤信息 */
@@ -668,15 +672,15 @@ declare interface SyncDetailInfo {
 
 /** 同步任务信息 */
 declare interface SyncJobInfo {
-  /** 同步任务id */
+  /** 同步任务id，如：sync-btso140 */
   JobId: string | null;
   /** 同步任务名 */
   JobName: string | null;
-  /** 付款方式 */
+  /** 付款方式，PostPay(按量付费)、PrePay(包年包月) */
   PayMode: string | null;
-  /** 运行模式 */
+  /** 运行模式，Immediate(表示立即运行，默认为此项值)、Timed(表示定时运行) */
   RunMode: string | null;
-  /** 期待运行时间 */
+  /** 期待运行时间，格式为 yyyy-mm-dd hh:mm:ss */
   ExpectRunTime: string | null;
   /** 支持的所有操作 */
   AllActions: string[] | null;
@@ -688,36 +692,44 @@ declare interface SyncJobInfo {
   Objects: Objects | null;
   /** 任务规格 */
   Specification: string | null;
-  /** 过期时间 */
+  /** 过期时间，格式为 yyyy-mm-dd hh:mm:ss */
   ExpireTime: string | null;
-  /** 源端地域 */
+  /** 源端地域，如：ap-guangzhou等 */
   SrcRegion: string | null;
-  /** 源端数据库类型 */
+  /** 源端数据库类型，mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等 */
   SrcDatabaseType: string | null;
-  /** 源端接入类型 */
+  /** 源端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云) */
   SrcAccessType: string | null;
   /** 源端信息 */
   SrcInfo: Endpoint | null;
-  /** 目标端地域 */
+  /** 目标端地域，如：ap-guangzhou等 */
   DstRegion: string | null;
-  /** 目标端数据库类型 */
+  /** 目标端数据库类型，mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等 */
   DstDatabaseType: string | null;
-  /** 目标端接入类型 */
+  /** 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云) */
   DstAccessType: string | null;
   /** 目标端信息 */
   DstInfo: Endpoint | null;
-  /** 创建时间 */
+  /** 创建时间，格式为 yyyy-mm-dd hh:mm:ss */
   CreateTime: string | null;
-  /** 开始时间 */
+  /** 开始时间，格式为 yyyy-mm-dd hh:mm:ss */
   StartTime: string | null;
-  /** 结束时间 */
+  /** 结束时间，格式为 yyyy-mm-dd hh:mm:ss */
   EndTime: string | null;
-  /** 任务状态 */
+  /** 任务状态，UnInitialized(未初始化)、Initialized(已初始化)、Checking(校验中)、CheckPass(校验通过)、CheckNotPass(校验不通过)、ReadyRunning(准备运行)、Running(运行中)、Pausing(暂停中)、Paused(已暂停)、Stopping(停止中)、Stopped(已停止)、ResumableErr(任务错误)、Resuming(恢复中)、Failed(失败)、Released(已释放)、Resetting(重置中)、Unknown(未知) */
   Status: string | null;
-  /** 标签相关 */
+  /** 标签相关信息 */
   Tags: TagItem[] | null;
   /** 同步任务运行步骤信息 */
   Detail: SyncDetailInfo | null;
+  /** 用于计费的状态，可能取值有：Normal(正常状态)、Resizing(变配中)、Renewing(续费中)、Isolating(隔离中)、Isolated(已隔离)、Offlining(下线中)、Offlined(已下线)、NotBilled(未计费)、Recovering(解隔离)、PostPay2Prepaying(按量计费转包年包月中)、PrePay2Postpaying(包年包月转按量计费中) */
+  TradeStatus: string | null;
+  /** 同步链路规格，如micro,small,medium,large */
+  InstanceClass: string | null;
+  /** 自动续费标识，当PayMode值为PrePay则此项配置有意义，取值为：1（表示自动续费）、0（不自动续费） */
+  AutoRenew: number | null;
+  /** 下线时间，格式为 yyyy-mm-dd hh:mm:ss */
+  OfflineTime: string | null;
 }
 
 /** 数据同步库表信息描述 */
@@ -1165,7 +1177,7 @@ declare interface DescribeMigrationJobsResponse {
 }
 
 declare interface DescribeSyncJobsRequest {
-  /** 同步任务id */
+  /** 同步任务id，如sync-werwfs23 */
   JobId?: string;
   /** 同步任务名 */
   JobName?: string;

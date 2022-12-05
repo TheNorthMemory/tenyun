@@ -1233,7 +1233,7 @@ declare interface CreateCcGeoIPBlockConfigRequest {
   Domain: string;
   /** 协议类型 */
   Protocol: string;
-  /** CC区域封禁配置，填写参数时配置ID请为空 */
+  /** CC区域封禁配置 */
   CcGeoIPBlockConfig: CcGeoIPBlockConfig;
 }
 
@@ -2371,18 +2371,18 @@ declare interface DescribeOverviewAttackTrendRequest {
   Dimension: string;
   /** 周期，当前仅支持86400 */
   Period: number;
-  /** 起始时间 */
+  /** 统计开始时间 */
   StartTime: string;
-  /** 结束时间 */
+  /** 统计结束时间 */
   EndTime: string;
 }
 
 declare interface DescribeOverviewAttackTrendResponse {
   /** 攻击类型 */
   Type: string;
-  /** 起始时间 */
+  /** 统计起始时间 */
   StartTime: string;
-  /** 结束时间 */
+  /** 统计结束时间 */
   EndTime: string;
   /** 周期 */
   Period: number;
@@ -2504,7 +2504,7 @@ declare interface DescribePendingRiskInfoRequest {
 }
 
 declare interface DescribePendingRiskInfoResponse {
-  /** 是否为付费用户 */
+  /** 是否为付费用户，true：付费用户， false：普通用户 */
   IsPaidUsr: boolean;
   /** 攻击中的资源数量 */
   AttackingCount: number;
@@ -2615,7 +2615,7 @@ declare interface ModifyCcBlackWhiteIpListResponse {
 declare interface ModifyDDoSBlackWhiteIpListRequest {
   /** 资源Id */
   InstanceId: string;
-  /** 当前黑名单类型，取值black时黑名单；取值white时白名单 */
+  /** 当前配置的黑白名单类型，取值black时表示黑名单；取值white时表示白名单 */
   OldIpType: string;
   /** 当前配置的Ip段，包含ip与掩码 */
   OldIp: IpSegment;

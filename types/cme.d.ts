@@ -351,19 +351,19 @@ declare interface MaterialImportedEvent {
 /** 媒体详情信息 */
 declare interface MaterialInfo {
   /** 媒体基本信息。 */
-  BasicInfo: MaterialBasicInfo;
+  BasicInfo?: MaterialBasicInfo;
   /** 视频媒体信息。 */
-  VideoMaterial: VideoMaterial | null;
+  VideoMaterial?: VideoMaterial | null;
   /** 音频媒体信息。 */
-  AudioMaterial: AudioMaterial | null;
+  AudioMaterial?: AudioMaterial | null;
   /** 图片媒体信息。 */
-  ImageMaterial: ImageMaterial | null;
+  ImageMaterial?: ImageMaterial | null;
   /** 链接媒体信息。 */
-  LinkMaterial: LinkMaterial | null;
+  LinkMaterial?: LinkMaterial | null;
   /** 模板媒体信息。 */
-  VideoEditTemplateMaterial: VideoEditTemplateMaterial | null;
+  VideoEditTemplateMaterial?: VideoEditTemplateMaterial | null;
   /** 其他类型媒体信息。 */
-  OtherMaterial: OtherMaterial | null;
+  OtherMaterial?: OtherMaterial | null;
 }
 
 /** 媒体更新事件。 */
@@ -1629,19 +1629,19 @@ declare interface DescribeTaskDetailRequest {
 
 declare interface DescribeTaskDetailResponse {
   /** 任务状态，取值有：PROCESSING：处理中：SUCCESS：成功；FAIL：失败。 */
-  Status: string;
+  Status?: string;
   /** 任务进度，取值为：0~100。 */
-  Progress: number;
+  Progress?: number;
   /** 错误码。0：成功；其他值：失败。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  ErrMsg: string;
+  ErrMsg?: string;
   /** 任务类型，取值有：VIDEO_EDIT_PROJECT_EXPORT：视频编辑项目导出。 */
-  TaskType: string;
-  /** 导出项目输出信息。 */
-  VideoEditProjectOutput: VideoEditProjectOutput | null;
+  TaskType?: string;
+  /** 导出项目输出信息。仅当 TaskType 为 VIDEO_EDIT_PROJECT_EXPORT 时有效。 */
+  VideoEditProjectOutput?: VideoEditProjectOutput | null;
   /** 创建时间，格式按照 ISO 8601 标准表示。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

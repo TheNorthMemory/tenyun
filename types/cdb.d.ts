@@ -186,6 +186,8 @@ declare interface BackupInfo {
   CosStorageType: number;
   /** 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
+  /** 备份文件是否加密， on-加密， off-未加密 */
+  EncryptionFlag: string | null;
 }
 
 /** 创建备份时，指定需要备份的库表信息 */
@@ -2963,9 +2965,9 @@ declare interface DescribeRoMinScaleRequest {
 
 declare interface DescribeRoMinScaleResponse {
   /** 内存规格大小, 单位为：MB。 */
-  Memory?: number;
+  Memory: number;
   /** 磁盘规格大小, 单位为：GB。 */
-  Volume?: number;
+  Volume: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

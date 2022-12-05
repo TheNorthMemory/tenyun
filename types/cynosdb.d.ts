@@ -1952,6 +1952,22 @@ declare interface RemoveClusterSlaveZoneResponse {
   RequestId?: string;
 }
 
+declare interface ResetAccountPasswordRequest {
+  /** 数据库账号名 */
+  AccountName: string;
+  /** 数据库账号新密码 */
+  AccountPassword: string;
+  /** 集群ID */
+  ClusterId: string;
+  /** 主机，不填默认为"%" */
+  Host?: string;
+}
+
+declare interface ResetAccountPasswordResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ResumeServerlessRequest {
   /** 集群ID */
   ClusterId: string;
@@ -2004,6 +2020,40 @@ declare interface RollBackClusterResponse {
   RequestId?: string;
 }
 
+declare interface SearchClusterDatabasesRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 数据库名 */
+  Database?: string;
+  /** 是否精确搜索。0: 模糊搜索 1:精确搜索 默认为0 */
+  MatchType?: number;
+}
+
+declare interface SearchClusterDatabasesResponse {
+  /** 数据库列表 */
+  Databases: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface SearchClusterTablesRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 数据库名 */
+  Database?: string;
+  /** 数据表名 */
+  Table?: string;
+  /** 数据表类型：view：只返回 view，base_table： 只返回基本表，all：返回 view 和表 */
+  TableType?: string;
+}
+
+declare interface SearchClusterTablesResponse {
+  /** 数据表列表 */
+  Tables: DatabaseTables[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface SetRenewFlagRequest {
   /** 需操作的实例ID */
   ResourceIds: string[];
@@ -2031,6 +2081,26 @@ declare interface SwitchClusterZoneRequest {
 
 declare interface SwitchClusterZoneResponse {
   /** 异步FlowId */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface SwitchProxyVpcRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 字符串vpc id */
+  UniqVpcId: string;
+  /** 字符串子网id */
+  UniqSubnetId: string;
+  /** 旧地址回收时间 */
+  OldIpReserveHours: number;
+  /** 数据库代理组Id */
+  ProxyGroupId?: string;
+}
+
+declare interface SwitchProxyVpcResponse {
+  /** 异步任务id。 */
   FlowId: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
@@ -2183,16 +2253,24 @@ declare interface Cynosdb {
   PauseServerless(data: PauseServerlessRequest, config?: AxiosRequestConfig): AxiosPromise<PauseServerlessResponse>;
   /** {@link RemoveClusterSlaveZone 删除从可用区}({@link RemoveClusterSlaveZoneRequest 请求参数}): {@link RemoveClusterSlaveZoneResponse 返回参数} */
   RemoveClusterSlaveZone(data: RemoveClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveClusterSlaveZoneResponse>;
+  /** {@link ResetAccountPassword 重置数据库账号密码}({@link ResetAccountPasswordRequest 请求参数}): {@link ResetAccountPasswordResponse 返回参数} */
+  ResetAccountPassword(data: ResetAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAccountPasswordResponse>;
   /** {@link ResumeServerless 恢复serverless集群}({@link ResumeServerlessRequest 请求参数}): {@link ResumeServerlessResponse 返回参数} */
   ResumeServerless(data: ResumeServerlessRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeServerlessResponse>;
   /** {@link RevokeAccountPrivileges 批量回收账号权限}({@link RevokeAccountPrivilegesRequest 请求参数}): {@link RevokeAccountPrivilegesResponse 返回参数} */
   RevokeAccountPrivileges(data: RevokeAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeAccountPrivilegesResponse>;
   /** {@link RollBackCluster 回档集群}({@link RollBackClusterRequest 请求参数}): {@link RollBackClusterResponse 返回参数} */
   RollBackCluster(data: RollBackClusterRequest, config?: AxiosRequestConfig): AxiosPromise<RollBackClusterResponse>;
+  /** {@link SearchClusterDatabases 搜索集群database列表}({@link SearchClusterDatabasesRequest 请求参数}): {@link SearchClusterDatabasesResponse 返回参数} */
+  SearchClusterDatabases(data: SearchClusterDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClusterDatabasesResponse>;
+  /** {@link SearchClusterTables 搜索集群数据表列表}({@link SearchClusterTablesRequest 请求参数}): {@link SearchClusterTablesResponse 返回参数} */
+  SearchClusterTables(data: SearchClusterTablesRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClusterTablesResponse>;
   /** {@link SetRenewFlag 设置自动续费}({@link SetRenewFlagRequest 请求参数}): {@link SetRenewFlagResponse 返回参数} */
   SetRenewFlag(data: SetRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetRenewFlagResponse>;
   /** {@link SwitchClusterZone 切换到从可用区}({@link SwitchClusterZoneRequest 请求参数}): {@link SwitchClusterZoneResponse 返回参数} */
   SwitchClusterZone(data: SwitchClusterZoneRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchClusterZoneResponse>;
+  /** {@link SwitchProxyVpc 更换数据库代理vpc}({@link SwitchProxyVpcRequest 请求参数}): {@link SwitchProxyVpcResponse 返回参数} */
+  SwitchProxyVpc(data: SwitchProxyVpcRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchProxyVpcResponse>;
   /** {@link UpgradeInstance 升级实例}({@link UpgradeInstanceRequest 请求参数}): {@link UpgradeInstanceResponse 返回参数} */
   UpgradeInstance(data: UpgradeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceResponse>;
 }

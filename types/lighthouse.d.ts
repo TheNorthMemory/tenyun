@@ -686,6 +686,14 @@ declare interface Tag {
   Value: string;
 }
 
+/** 总计价格信息 */
+declare interface TotalPrice {
+  /** 原始总计价格。 */
+  OriginalPrice?: number | null;
+  /** 折扣总计价格。 */
+  DiscountPrice?: number | null;
+}
+
 /** 流量包详情 */
 declare interface TrafficPackage {
   /** 流量包ID。 */
@@ -937,15 +945,15 @@ declare interface DescribeBlueprintsRequest {
   Offset?: number;
   /** 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
   Limit?: number;
-  /** 过滤器列表。blueprint-id按照【镜像 ID】进行过滤。类型：String必选：否blueprint-type按照【镜像类型】进行过滤。取值：APP_OS（应用镜像 ）；PURE_OS（系统镜像）；PRIVATE（自定义镜像）；SHARED（共享镜像）。类型：String必选：否platform-type按照【镜像平台类型】进行过滤。取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）。类型：String必选：否blueprint-name按照【镜像名称】进行过滤。类型：String必选：否blueprint-state按照【镜像状态】进行过滤。类型：String必选：否scene-id按照【使用场景Id】进行过滤。类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BlueprintIds 和 Filters 。 */
+  /** 过滤器列表。blueprint-id按照【镜像 ID】进行过滤。类型：String必选：否blueprint-type按照【镜像类型】进行过滤。取值：APP_OS（应用镜像 ）；PURE_OS（系统镜像）；PRIVATE（自定义镜像）；SHARED（共享镜像）。类型：String必选：否platform-type按照【镜像平台类型】进行过滤。取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）。类型：String必选：否blueprint-name按照【镜像名称】进行过滤。类型：String必选：否blueprint-state按照【镜像状态】进行过滤。类型：String必选：否scene-id按照【使用场景Id】进行过滤。类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 BlueprintIds 和 Filters 。 */
   Filters?: Filter[];
 }
 
 declare interface DescribeBlueprintsResponse {
   /** 符合条件的镜像数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 镜像详细信息列表。 */
-  BlueprintSet: Blueprint[];
+  BlueprintSet?: Blueprint[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1491,11 +1499,13 @@ declare interface InquirePriceRenewInstancesRequest {
 
 declare interface InquirePriceRenewInstancesResponse {
   /** 询价信息。默认为列表中第一个实例的价格信息。 */
-  Price: Price;
+  Price?: Price;
   /** 数据盘价格信息列表。 */
-  DataDiskPriceSet: DataDiskPrice[] | null;
+  DataDiskPriceSet?: DataDiskPrice[] | null;
   /** 待续费实例价格列表。 */
-  InstancePriceDetailSet: InstancePriceDetail[] | null;
+  InstancePriceDetailSet?: InstancePriceDetail[] | null;
+  /** 总计价格。 */
+  TotalPrice?: TotalPrice;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

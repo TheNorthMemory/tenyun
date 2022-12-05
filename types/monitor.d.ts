@@ -1572,6 +1572,20 @@ declare interface PrometheusTag {
   Value: string | null;
 }
 
+/** PrometheusZoneItem 响应结构体内的地域信息 */
+declare interface PrometheusZoneItem {
+  /** 可用区 */
+  Zone: string;
+  /** 可用区 ID */
+  ZoneId: number;
+  /** 可用区状态( 0: 不可用；1: 可用) */
+  ZoneState: number;
+  /** 地域 ID */
+  RegionId: number;
+  /** 可用区名（目前为中文） */
+  ZoneName: string;
+}
+
 /** 接收人信息 */
 declare interface ReceiverInfo {
   /** 告警时间段开始时间。范围[0,86400)，作为 UNIX 时间戳转成北京时间后去掉日期，例如7200表示"10:0:0" */
@@ -3132,6 +3146,18 @@ declare interface DescribePrometheusScrapeJobsResponse {
   RequestId?: string;
 }
 
+declare interface DescribePrometheusZonesRequest {
+  /** 地域 ID */
+  RegionId: number;
+}
+
+declare interface DescribePrometheusZonesResponse {
+  /** 区域列表 */
+  ZoneSet: PrometheusZoneItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRecordingRulesRequest {
   /** Prometheus 实例 ID */
   InstanceId: string;
@@ -4017,6 +4043,8 @@ declare interface Monitor {
   DescribePrometheusInstances(data?: DescribePrometheusInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstancesResponse>;
   /** {@link DescribePrometheusScrapeJobs 列出 Prometheus 抓取任务}({@link DescribePrometheusScrapeJobsRequest 请求参数}): {@link DescribePrometheusScrapeJobsResponse 返回参数} */
   DescribePrometheusScrapeJobs(data: DescribePrometheusScrapeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusScrapeJobsResponse>;
+  /** {@link DescribePrometheusZones 列出 Prometheus 服务可用区}({@link DescribePrometheusZonesRequest 请求参数}): {@link DescribePrometheusZonesResponse 返回参数} */
+  DescribePrometheusZones(data: DescribePrometheusZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusZonesResponse>;
   /** {@link DescribeRecordingRules 查询预聚合规则}({@link DescribeRecordingRulesRequest 请求参数}): {@link DescribeRecordingRulesResponse 返回参数} */
   DescribeRecordingRules(data: DescribeRecordingRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordingRulesResponse>;
   /** {@link DescribeSSOAccount 列出授权账号}({@link DescribeSSOAccountRequest 请求参数}): {@link DescribeSSOAccountResponse 返回参数} */
