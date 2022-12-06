@@ -1405,7 +1405,7 @@ declare interface UpdateInstanceRequest {
   EsConfig?: string;
   /** 默认用户elastic的密码（8到16位，至少包括两项（[a-z,A-Z],[0-9]和[-!@#$%&^*+=_:;,.?]的特殊符号） */
   Password?: string;
-  /** 访问控制列表 */
+  /** 可视化组件（Kibana、Cerebro）的公网访问策略 */
   EsAcl?: EsAcl;
   /** 已废弃请使用NodeInfoList磁盘大小（单位GB） */
   DiskSize?: number;

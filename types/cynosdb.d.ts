@@ -14,6 +14,8 @@ declare interface Account {
   UpdateTime: string;
   /** 主机 */
   Host: string;
+  /** 用户最大连接数 */
+  MaxUserConnections: number;
 }
 
 /** 账号参数 */
@@ -404,6 +406,16 @@ declare interface CynosdbInstance {
   StorageId: string | null;
   /** 存储付费类型 */
   StoragePayMode: number;
+  /** 物理区 */
+  PhysicalZone: string;
+  /** 商业类型 */
+  BusinessType: string | null;
+  /** 任务 */
+  Tasks: ObjectTask[] | null;
+  /** 是否冻结 */
+  IsFreeze: string | null;
+  /** 资源标签 */
+  ResourceTags: Tag[] | null;
 }
 
 /** 实例详情 */
@@ -566,6 +578,10 @@ declare interface InstanceSpec {
   ZoneStockInfos: ZoneStockInfo[] | null;
 }
 
+/** 参数是否可修改的详细信息 */
+declare interface ModifiableInfo {
+}
+
 /** 网络信息 */
 declare interface NetAddr {
   /** 内网ip */
@@ -636,6 +652,14 @@ declare interface ParamInfo {
   MatchValue: string;
   /** 参数描述 */
   Description: string;
+  /** 是否为全局参数 */
+  IsGlobal: number | null;
+  /** 参数是否可修改 */
+  ModifiableInfo: ModifiableInfo | null;
+  /** 是否为函数 */
+  IsFunc: boolean | null;
+  /** 函数 */
+  Func: string | null;
 }
 
 /** 修改参数时，传入参数描述 */
@@ -2095,7 +2119,7 @@ declare interface SwitchProxyVpcRequest {
   UniqSubnetId: string;
   /** 旧地址回收时间 */
   OldIpReserveHours: number;
-  /** 数据库代理组Id */
+  /** 数据库代理组Id（该参数为必填项，可以通过DescribeProxies接口获得） */
   ProxyGroupId?: string;
 }
 

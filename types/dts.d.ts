@@ -714,10 +714,10 @@ declare interface SyncJobInfo {
   CreateTime: string | null;
   /** 开始时间，格式为 yyyy-mm-dd hh:mm:ss */
   StartTime: string | null;
+  /** 任务状态，UnInitialized(未初始化)、Initialized(已初始化)、Checking(校验中)、CheckPass(校验通过)、CheckNotPass(校验不通过)、ReadyRunning(准备运行)、Running(运行中)、Pausing(暂停中)、Paused(已暂停)、Stopping(停止中)、Stopped(已结束)、ResumableErr(任务错误)、Resuming(恢复中)、Failed(失败)、Released(已释放)、Resetting(重置中)、Unknown(未知) */
+  Status: string | null;
   /** 结束时间，格式为 yyyy-mm-dd hh:mm:ss */
   EndTime: string | null;
-  /** 任务状态，UnInitialized(未初始化)、Initialized(已初始化)、Checking(校验中)、CheckPass(校验通过)、CheckNotPass(校验不通过)、ReadyRunning(准备运行)、Running(运行中)、Pausing(暂停中)、Paused(已暂停)、Stopping(停止中)、Stopped(已停止)、ResumableErr(任务错误)、Resuming(恢复中)、Failed(失败)、Released(已释放)、Resetting(重置中)、Unknown(未知) */
-  Status: string | null;
   /** 标签相关信息 */
   Tags: TagItem[] | null;
   /** 同步任务运行步骤信息 */
@@ -899,7 +899,7 @@ declare interface CreateMigrationServiceRequest {
   SrcRegion: string;
   /** 目标实例地域，如：ap-guangzhou。注意，目标地域必须和API请求地域保持一致。 */
   DstRegion: string;
-  /** 实例规格，包括：micro、small、medium、large、xlarge、2xlarge */
+  /** 实例规格，包括：small、medium、large、xlarge、2xlarge */
   InstanceClass: string;
   /** 购买数量，范围为[1,15]，默认为1 */
   Count?: number;
@@ -2221,7 +2221,7 @@ declare interface Dts {
   StopCompare(data: StopCompareRequest, config?: AxiosRequestConfig): AxiosPromise<StopCompareResponse>;
   /** {@link StopMigrateJob 终止数据迁移任务}({@link StopMigrateJobRequest 请求参数}): {@link StopMigrateJobResponse 返回参数} */
   StopMigrateJob(data: StopMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<StopMigrateJobResponse>;
-  /** {@link StopSyncJob 终止同步任务}({@link StopSyncJobRequest 请求参数}): {@link StopSyncJobResponse 返回参数} */
+  /** {@link StopSyncJob 结束同步任务}({@link StopSyncJobRequest 请求参数}): {@link StopSyncJobResponse 返回参数} */
   StopSyncJob(data: StopSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<StopSyncJobResponse>;
   /** {@link V20180330.ActivateSubscribe 配置数据订阅通道}({@link V20180330.ActivateSubscribeRequest 请求参数}): {@link V20180330.ActivateSubscribeResponse 返回参数} */
   ActivateSubscribe(data: V20180330.ActivateSubscribeRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.ActivateSubscribeResponse>;

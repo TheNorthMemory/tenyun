@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** APM浮点数类型键值对 */
+declare interface APMKV {
+  /** Key值定义 */
+  Key: string | null;
+  /** Value值定义 */
+  Value: number | null;
+}
+
 /** Apm通用KV结构 */
 declare interface APMKVItem {
   /** Key值定义 */
@@ -38,6 +46,8 @@ declare interface ApmField {
   Unit: string | null;
   /** 请求数 */
   Key: string;
+  /** 同环比上周期具体数值 */
+  LastPeriodValue: APMKV[] | null;
 }
 
 /** apm实例信息 */

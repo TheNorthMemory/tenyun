@@ -203,6 +203,7 @@ import Tke, { Versions as TkeVersions } from "./tke";
 import Tkgdq, { Versions as TkgdqVersions } from "./tkgdq";
 import Tms, { Versions as TmsVersions } from "./tms";
 import Tmt, { Versions as TmtVersions } from "./tmt";
+import Trdp, { Versions as TrdpVersions } from "./trdp";
 import Trp, { Versions as TrpVersions } from "./trp";
 import Trtc, { Versions as TrtcVersions } from "./trtc";
 import Tse, { Versions as TseVersions } from "./tse";
@@ -425,6 +426,7 @@ export declare type SERVICE_VERSIONS = {
   tkgdq: TkgdqVersions,
   tms: TmsVersions,
   tmt: TmtVersions,
+  trdp: TrdpVersions,
   trp: TrpVersions,
   trtc: TrtcVersions,
   tse: TseVersions,
@@ -862,6 +864,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   tms: Tms,
   /** {@link Tmt 机器翻译} */
   tmt: Tmt,
+  /** {@link Trdp 流量风险决策平台} */
+  trdp: Trdp,
   /** {@link Trp T-Sec-安心平台(RP)} */
   trp: Trp,
   /** {@link Trtc 实时音视频} */

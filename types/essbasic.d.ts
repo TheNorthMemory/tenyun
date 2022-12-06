@@ -58,7 +58,7 @@ declare interface CcInfo {
 declare interface Component {
   /** 控件编号CreateFlowByTemplates发起合同时优先以ComponentId（不为空）填充；否则以ComponentName填充注：当GenerateMode=3时，通过"^"来决定是否使用关键字整词匹配能力。例：当GenerateMode=3时，如果传入关键字"^甲方签署^"，则会在PDF文件中有且仅有"甲方签署"关键字的地方进行对应操作。如传入的关键字为"甲方签署"，则PDF文件中每个出现关键字的位置都会执行相应操作。创建控件时，此值为空查询时返回完整结构 */
   ComponentId?: string;
-  /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件；MULTI_LINE_TEXT - 多行文本控件；CHECK_BOX - 勾选框控件；FILL_IMAGE - 图片控件；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件；SELECTOR - 选择器控件；DATE - 日期控件；默认是格式化为xxxx年xx月xx日；DISTRICT - 省市区行政区划控件；如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight表单域的控件不能作为印章和签名控件 */
+  /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件；MULTI_LINE_TEXT - 多行文本控件；CHECK_BOX - 勾选框控件；FILL_IMAGE - 图片控件；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件；SELECTOR - 选择器控件；DATE - 日期控件；默认是格式化为xxxx年xx月xx日；DISTRICT - 省市区行政区划控件；如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeightSIGN_OPINION - 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认表单域的控件不能作为印章和签名控件 */
   ComponentType?: string;
   /** 控件简称，不能超过30个字符 */
   ComponentName?: string;
@@ -172,7 +172,7 @@ declare interface FlowApproverInfo {
   OpenId?: string;
   /** 企业签署方在同一渠道下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符； */
   OrganizationOpenId?: string;
-  /** 签署人类型，PERSON-个人；PERSON_AUTO_SIGN-个人自动签；ORGANIZATION-企业；ENTERPRISESERVER-企业静默签;注：ENTERPRISESERVER 类型仅用于使用文件创建签署流程（ChannelCreateFlowByFiles）接口； */
+  /** 签署人类型PERSON-个人/自然人；PERSON_AUTO_SIGN-个人自动签（定制化场景下使用）；ORGANIZATION-企业（企业签署方或模版发起时的企业静默签）；ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。 */
   ApproverType?: string;
   /** 签署流程签署人在模板中对应的签署人Id；在非单方签署、以及非B2C签署的场景下必传，用于指定当前签署方在签署流程中的位置； */
   RecipientId?: string;
@@ -1183,7 +1183,7 @@ declare interface DescribeTemplatesResponse {
 }
 
 declare interface DescribeUsageRequest {
-  /** 应用信息 */
+  /** 应用信息，此接口Agent.AppId必填 */
   Agent: Agent;
   /** 开始时间，例如：2021-03-21 */
   StartDate: string;

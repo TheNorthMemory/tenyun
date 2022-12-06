@@ -86,42 +86,46 @@ declare interface CcInfo {
 
 /** 模板控件信息 */
 declare interface Component {
-  /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件；MULTI_LINE_TEXT - 多行文本控件；CHECK_BOX - 勾选框控件；FILL_IMAGE - 图片控件；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件；SELECTOR - 选择器控件；DATE - 日期控件；默认是格式化为xxxx年xx月xx日；DISTRICT - 省市区行政区划控件；如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；DATE， 日期控件，默认是格式化为xxxx年xx月xx日SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight表单域的控件不能作为印章和签名控件 */
+  /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件；MULTI_LINE_TEXT - 多行文本控件；CHECK_BOX - 勾选框控件；FILL_IMAGE - 图片控件；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件；SELECTOR - 选择器控件；DATE - 日期控件；默认是格式化为xxxx年xx月xx日；DISTRICT - 省市区行政区划控件；如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeightSIGN_OPINION - 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认表单域的控件不能作为印章和签名控件 */
   ComponentType: string;
-  /** 参数控件宽度，单位pt */
-  ComponentWidth: number;
+  /** 控件所属文件的序号（模板中的resourceId排列序号，取值为：0-N） */
+  FileIndex: number;
   /** 参数控件高度，单位pt */
   ComponentHeight: number;
+  /** 参数控件宽度，单位pt */
+  ComponentWidth: number;
   /** 参数控件所在页码，取值为：1-N */
   ComponentPage: number;
   /** 参数控件X位置，单位pt */
   ComponentPosX: number;
   /** 参数控件Y位置，单位pt */
   ComponentPosY: number;
-  /** 控件所属文件的序号（模板中的resourceId排列序号，取值为：0-N） */
-  FileIndex: number;
   /** GenerateMode==KEYWORD 指定关键字 */
   ComponentId?: string;
   /** GenerateMode==FIELD 指定表单域名称 */
   ComponentName?: string;
   /** 是否必选，默认为false */
   ComponentRequired?: boolean;
-  /** 扩展参数：为JSON格式。ComponentType为FILL_IMAGE时，支持以下参数：NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true: 不居中FillMethod: int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型可以控制签署方式{“ComponentTypeLimit”: [“xxx”]}xxx可以为：HANDWRITE – 手写签名BORDERLESS_ESIGN – 自动生成无边框腾讯体OCR_ESIGN -- AI智能识别手写签名ESIGN -- 个人印章类型如：{“ComponentTypeLimit”: [“BORDERLESS_ESIGN”]} */
-  ComponentExtra?: string;
   /** 控件关联的签署人ID */
   ComponentRecipientId?: string;
-  /** 控件填充vaule，ComponentType和传入值类型对应关系：TEXT - 文本内容MULTI_LINE_TEXT - 文本内容CHECK_BOX - true/falseFILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取SELECTOR - 选项值DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525 */
-  ComponentValue?: string;
+  /** 扩展参数：为JSON格式。ComponentType为FILL_IMAGE时，支持以下参数：NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true: 不居中FillMethod: int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型可以控制签署方式{“ComponentTypeLimit”: [“xxx”]}xxx可以为：HANDWRITE – 手写签名BORDERLESS_ESIGN – 自动生成无边框腾讯体OCR_ESIGN -- AI智能识别手写签名ESIGN -- 个人印章类型如：{“ComponentTypeLimit”: [“BORDERLESS_ESIGN”]} */
+  ComponentExtra?: string;
   /** 是否是表单域类型，默认不存在 */
   IsFormType?: boolean;
+  /** 控件填充vaule，ComponentType和传入值类型对应关系：TEXT - 文本内容MULTI_LINE_TEXT - 文本内容CHECK_BOX - true/falseFILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取SELECTOR - 选项值DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525 */
+  ComponentValue?: string;
   /** NORMAL 正常模式，使用坐标制定签署控件位置FIELD 表单域，需使用ComponentName指定表单域名称KEYWORD 关键字，使用ComponentId指定关键字 */
   GenerateMode?: string;
-  /** 日期控件类型字号 */
+  /** 日期签署控件的字号，默认为 12 */
   ComponentDateFontSize?: number;
+  /** 渠道版控件 id 标识 */
+  ChannelComponentId?: string;
   /** 指定关键字时横坐标偏移量，单位pt */
   OffsetX?: number;
   /** 指定关键字时纵坐标偏移量，单位pt */
   OffsetY?: number;
+  /** //渠道子客控件来源。0-渠道指定；1-用户自定义 */
+  ChannelComponentSource?: number;
   /** 指定关键字排序规则，Positive-正序，Reverse-倒序。传入Positive时会根据关键字在PDF文件内的顺序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的第一个关键字。传入Reverse时会根据关键字在PDF文件内的反序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的最后一个关键字。 */
   KeywordOrder?: string;
   /** 指定关键字页码，可选参数，指定页码后，将只在指定的页码内查找关键字，非该页码的关键字将不会查询出来 */

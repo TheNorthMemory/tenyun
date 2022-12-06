@@ -2371,18 +2371,18 @@ declare interface DescribeOverviewAttackTrendRequest {
   Dimension: string;
   /** 周期，当前仅支持86400 */
   Period: number;
-  /** 统计开始时间 */
+  /** 防护概览攻击趋势开始时间 */
   StartTime: string;
-  /** 统计结束时间 */
+  /** 防护概览攻击趋势结束时间 */
   EndTime: string;
 }
 
 declare interface DescribeOverviewAttackTrendResponse {
   /** 攻击类型 */
   Type: string;
-  /** 统计起始时间 */
+  /** 防护概览攻击趋势起始时间 */
   StartTime: string;
-  /** 统计结束时间 */
+  /** 防护概览攻击趋势结束时间 */
   EndTime: string;
   /** 周期 */
   Period: number;
