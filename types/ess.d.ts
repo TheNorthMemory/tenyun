@@ -544,6 +544,10 @@ declare interface TemplateInfo {
   CreatedOn?: number;
   /** 发起人角色信息 */
   Promoter?: Recipient;
+  /** 模板创建组织id */
+  OrganizationId?: string;
+  /** 模板预览链接 */
+  PreviewUrl?: string | null;
 }
 
 /** 此结构体 (UploadFile) 用于描述多文件上传的文件信息。 */
@@ -1001,18 +1005,24 @@ declare interface DescribeFlowInfoResponse {
 declare interface DescribeFlowTemplatesRequest {
   /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
-  /** 搜索条件，具体参考Filter结构体。本接口取值：template-id：按照【 **模板唯一标识** 】进行过滤 */
-  Filters?: Filter[];
-  /** 查询个数，默认20，最大200 */
-  Limit?: number;
-  /** 查询偏移位置，默认0 */
-  Offset?: number;
-  /** 查询内容：0-模板列表及详情（默认），1-仅模板列表 */
-  ContentType?: number;
-  /** 暂未开放 */
-  GenerateSource?: number;
+  /** 企业组织相关信息 */
+  Organization?: OrganizationInfo;
   /** 应用相关信息 */
   Agent?: Agent;
+  /** 查询偏移位置，默认0 */
+  Offset?: number;
+  /** 查询个数，默认20，最大200 */
+  Limit?: number;
+  /** 搜索条件，具体参考Filter结构体。本接口取值：template-id：按照【 **模板唯一标识** 】进行过滤 */
+  Filters?: Filter[];
+  /** 这个参数跟下面的IsChannel参数配合使用。IsChannel=false时，ApplicationId参数不起任何作用。IsChannel=true时，ApplicationId为空，查询所有渠道模板列表；ApplicationId不为空，查询指定渠道下的模板列表ApplicationId为空，查询渠道模板列表 */
+  ApplicationId?: string;
+  /** 默认为false，查询SaaS模板库列表；为true，查询渠道模板库管理列表 */
+  IsChannel?: boolean;
+  /** 暂未开放 */
+  GenerateSource?: number;
+  /** 查询内容：0-模板列表及详情（默认），1-仅模板列表 */
+  ContentType?: number;
 }
 
 declare interface DescribeFlowTemplatesResponse {

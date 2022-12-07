@@ -3384,6 +3384,42 @@ declare interface ConfirmNetworkFirewallPolicyResponse {
   RequestId?: string;
 }
 
+declare interface CreateAbnormalProcessRulesExportJobRequest {
+  /** 过滤条件。RuleType - string - 是否必填: 否 -规则类型Status - string - 是否必填: 否 -状态 */
+  Filters?: RunTimeFilters[];
+  /** 排序方式 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+  /** 导出字段 */
+  ExportField?: string[];
+}
+
+declare interface CreateAbnormalProcessRulesExportJobResponse {
+  /** 导出任务ID，前端拿着任务ID查询任务进度 */
+  JobId: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface CreateAccessControlsRuleExportJobRequest {
+  /** 过滤条件。RuleType - string - 是否必填: 否 -规则类型Status - string - 是否必填: 否 -状态 */
+  Filters?: RunTimeFilters[];
+  /** 排序方式 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string[];
+  /** 导出字段 */
+  ExportField?: string[];
+}
+
+declare interface CreateAccessControlsRuleExportJobResponse {
+  /** 导出任务ID，前端拿着任务ID查询任务进度 */
+  JobId: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateAssetImageRegistryScanTaskOneKeyRequest {
   /** 是否扫描全部镜像 */
   All?: boolean;
@@ -9363,6 +9399,10 @@ declare interface Tcss {
   CheckRepeatAssetImageRegistry(data: CheckRepeatAssetImageRegistryRequest, config?: AxiosRequestConfig): AxiosPromise<CheckRepeatAssetImageRegistryResponse>;
   /** {@link ConfirmNetworkFirewallPolicy 容器网络创建网络策略确认任务}({@link ConfirmNetworkFirewallPolicyRequest 请求参数}): {@link ConfirmNetworkFirewallPolicyResponse 返回参数} */
   ConfirmNetworkFirewallPolicy(data: ConfirmNetworkFirewallPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmNetworkFirewallPolicyResponse>;
+  /** {@link CreateAbnormalProcessRulesExportJob 创建异常进程规则导出任务}({@link CreateAbnormalProcessRulesExportJobRequest 请求参数}): {@link CreateAbnormalProcessRulesExportJobResponse 返回参数} */
+  CreateAbnormalProcessRulesExportJob(data?: CreateAbnormalProcessRulesExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAbnormalProcessRulesExportJobResponse>;
+  /** {@link CreateAccessControlsRuleExportJob 创建文件篡改规则导出任务}({@link CreateAccessControlsRuleExportJobRequest 请求参数}): {@link CreateAccessControlsRuleExportJobResponse 返回参数} */
+  CreateAccessControlsRuleExportJob(data?: CreateAccessControlsRuleExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessControlsRuleExportJobResponse>;
   /** {@link CreateAssetImageRegistryScanTask 镜像仓库创建镜像扫描任务}({@link CreateAssetImageRegistryScanTaskRequest 请求参数}): {@link CreateAssetImageRegistryScanTaskResponse 返回参数} */
   CreateAssetImageRegistryScanTask(data?: CreateAssetImageRegistryScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageRegistryScanTaskResponse>;
   /** {@link CreateAssetImageRegistryScanTaskOneKey 镜像仓库创建镜像一键扫描任务}({@link CreateAssetImageRegistryScanTaskOneKeyRequest 请求参数}): {@link CreateAssetImageRegistryScanTaskOneKeyResponse 返回参数} */

@@ -114,6 +114,18 @@ declare interface CodePart {
   Ext: string | null;
 }
 
+/** 渠道商的子企业额度使用情况 */
+declare interface CorpQuota {
+  /** 企业ID */
+  CorpId: number;
+  /** 企业名称 */
+  CorpName: string;
+  /** 额度 */
+  Quota: Quota;
+  /** 额度使用量 */
+  UsageQuota: UsageQuota;
+}
+
 /** 码规则 */
 declare interface CustomRule {
   /** 码规则ID */
@@ -228,6 +240,36 @@ declare interface Product {
   MerchantName: string;
 }
 
+/** 企业配额信息 */
+declare interface Quota {
+  /** 服务开始时间 */
+  StartTime: string | null;
+  /** 服务结束时间 */
+  EndTime: string | null;
+  /** 配额ID */
+  QuotaId?: number | null;
+  /** 企业ID */
+  CorpId?: number | null;
+  /** 开通服务 */
+  Services?: string[] | null;
+  /** 工厂配额 */
+  FactoryQuota?: number | null;
+  /** 产品配额 */
+  ItemQuota?: number | null;
+  /** 溯源码配额 */
+  TrackQuota?: number | null;
+  /** 销售码配额 */
+  SaleQuota?: number | null;
+  /** 上链配额 */
+  ChainQuota?: number | null;
+  /** 风控配额 */
+  RiskQuota?: number | null;
+  /** 溯源类型 */
+  TrackType?: number | null;
+  /** 开通版本 basic standard enterprise */
+  Version?: string | null;
+}
+
 /** 溯源码 */
 declare interface TraceCode {
   /** 二维码 */
@@ -306,6 +348,26 @@ declare interface TraceItem {
   Key: string | null;
   /** 扩展字段 */
   Ext: string | null;
+}
+
+/** 付费信息使用量 */
+declare interface UsageQuota {
+  /** 企业ID */
+  CorpId: number | null;
+  /** 商户配额 */
+  FactoryCnt: number | null;
+  /** 商品数量 */
+  ItemCnt: number | null;
+  /** 溯源码量 */
+  TrackCnt: number | null;
+  /** 营销码额度 */
+  SaleCnt: number | null;
+  /** 区块链上链次数 */
+  ChainCnt: number | null;
+  /** 营销风控次数 */
+  RiskCnt: number | null;
+  /** 时间 */
+  UpdateTime: string | null;
 }
 
 declare interface CreateCodeBatchRequest {
@@ -724,6 +786,26 @@ declare interface DescribeCodesByPackRequest {
 declare interface DescribeCodesByPackResponse {
   /** 码列表 */
   Codes: CodeItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCorpQuotasRequest {
+  /** 渠道商ID，不要传 */
+  AgentId?: number;
+  /** 页数 */
+  PageNumber?: number;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 搜索企业ID */
+  Keyword?: string;
+}
+
+declare interface DescribeCorpQuotasResponse {
+  /** 子企业额度使用情况 */
+  CorpQuotas: CorpQuota[] | null;
+  /** 记录总数量 */
+  Total: number | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1153,6 +1235,8 @@ declare interface Trp {
   DescribeCodePacks(data?: DescribeCodePacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodePacksResponse>;
   /** {@link DescribeCodesByPack 查询码包的二维码列表}({@link DescribeCodesByPackRequest 请求参数}): {@link DescribeCodesByPackResponse 返回参数} */
   DescribeCodesByPack(data: DescribeCodesByPackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodesByPackResponse>;
+  /** {@link DescribeCorpQuotas 查询渠道商下属企业额度使用情况}({@link DescribeCorpQuotasRequest 请求参数}): {@link DescribeCorpQuotasResponse 返回参数} */
+  DescribeCorpQuotas(data?: DescribeCorpQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCorpQuotasResponse>;
   /** {@link DescribeCustomRuleById 查自定义码规则}({@link DescribeCustomRuleByIdRequest 请求参数}): {@link DescribeCustomRuleByIdResponse 返回参数} */
   DescribeCustomRuleById(data: DescribeCustomRuleByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomRuleByIdResponse>;
   /** {@link DescribeCustomRules 查自定义码规则列表}({@link DescribeCustomRulesRequest 请求参数}): {@link DescribeCustomRulesResponse 返回参数} */

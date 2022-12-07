@@ -324,6 +324,10 @@ declare interface DBInstance {
   Collation: string;
   /** 系统时区，默认：China Standard Time */
   TimeZone: string;
+  /** 是否跨AZ */
+  IsDrZone: boolean;
+  /** 备可用区信息 */
+  SlaveZones: SlaveZones | null;
 }
 
 /** 账号的数据库权限信息 */
@@ -860,6 +864,14 @@ declare interface SecurityGroupPolicy {
   IpProtocol: string;
   /** 规则限定的方向，OUTPUT-出战规则 INPUT-进站规则 */
   Dir: string;
+}
+
+/** 备可用区信息 */
+declare interface SlaveZones {
+  /** 备可用区地域码 */
+  SlaveZone: string;
+  /** 备可用区 */
+  SlaveZoneName: string;
 }
 
 /** 慢查询日志文件信息 */
@@ -1457,6 +1469,12 @@ declare interface DescribeAccountsRequest {
   Limit?: number;
   /** 分页返回，页编号，默认值为第0页 */
   Offset?: number;
+  /** 账号名称 */
+  Name?: string;
+  /** createTime,updateTime,passTime" note:"排序字段，默认按照账号创建时间倒序 */
+  OrderBy?: string;
+  /** 排序规则（desc-降序，asc-升序），默认desc */
+  OrderByType?: string;
 }
 
 declare interface DescribeAccountsResponse {
@@ -1793,6 +1811,10 @@ declare interface DescribeDBsRequest {
   Limit?: number;
   /** 分页返回，页编号，默认值为第0页 */
   Offset?: number;
+  /** 数据库名称 */
+  Name?: string;
+  /** 排序规则（desc-降序，asc-升序），默认desc */
+  OrderByType?: string;
 }
 
 declare interface DescribeDBsResponse {

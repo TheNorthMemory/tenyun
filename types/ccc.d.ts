@@ -383,19 +383,21 @@ declare interface ServeParticipant {
 /** 技能组信息 */
 declare interface SkillGroupInfoItem {
   /** 技能组ID */
-  SkillGroupId: number;
+  SkillGroupId?: number;
   /** 技能组名称 */
-  SkillGroupName: string;
-  /** 类型：IM、TEL、ALL（全媒体） */
-  Type: string;
+  SkillGroupName?: string;
+  /** （废弃）类型：IM、TEL、ALL（全媒体） */
+  Type?: string;
   /** 会话分配策略 */
-  RoutePolicy: string | null;
+  RoutePolicy?: string | null;
   /** 会话分配是否优先上次服务坐席 */
-  UsingLastSeat: number | null;
+  UsingLastSeat?: number | null;
   /** 单客服最大并发数（电话类型默认1） */
-  MaxConcurrency: number | null;
+  MaxConcurrency?: number | null;
   /** 最后修改时间 */
-  LastModifyTimestamp: number | null;
+  LastModifyTimestamp?: number | null;
+  /** 技能组类型0-电话，1-在线，3-音频，4-视频 */
+  SkillGroupType?: number | null;
 }
 
 /** 技能组信息 */

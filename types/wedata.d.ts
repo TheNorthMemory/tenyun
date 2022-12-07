@@ -1550,6 +1550,8 @@ declare interface RuleGroupSubscribe {
   Receivers?: SubscribeReceiver[] | null;
   /** 订阅方式 1.邮件email 2.短信sms */
   SubscribeType?: number[] | null;
+  /** 群机器人配置的webhook信息 */
+  WebHooks?: SubscribeWebHook[] | null;
 }
 
 /** 表绑定规则组信息 */
@@ -1816,6 +1818,14 @@ declare interface SubscribeReceiver {
   ReceiverUserId?: number | null;
   /** 接收人名称 */
   ReceiverName?: string | null;
+}
+
+/** 群机器人订阅配置 */
+declare interface SubscribeWebHook {
+  /** 群机器人类型，当前支持飞书 */
+  HookType?: string | null;
+  /** 群机器人webhook地址，配置方式参考https://cloud.tencent.com/document/product/1254/70736 */
+  HookAddress?: string | null;
 }
 
 /** 规则表变量替换 */
@@ -4595,7 +4605,7 @@ declare interface DescribeRuleGroupSubscriptionRequest {
 
 declare interface DescribeRuleGroupSubscriptionResponse {
   /** 规则组订阅信息 */
-  Data: RuleGroupSubscribe | null;
+  Data?: RuleGroupSubscribe | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -5597,11 +5607,13 @@ declare interface ModifyRuleGroupSubscriptionRequest {
   DatasourceId?: string;
   /** 数据表Id */
   TableId?: string;
+  /** 群机器人webhook信息 */
+  WebHooks?: SubscribeWebHook[];
 }
 
 declare interface ModifyRuleGroupSubscriptionResponse {
   /** 规则组ID */
-  Data: number | null;
+  Data?: number | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

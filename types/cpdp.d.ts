@@ -5733,7 +5733,7 @@ declare interface CreateOpenBankGlobalPaymentOrderResponse {
 declare interface CreateOpenBankMerchantRequest {
   /** 外部商户ID。 */
   OutMerchantId: string;
-  /** 渠道名称。__TENPAY__: 商企付__WECHAT__: 微信支付__ALIPAY__: 支付宝 */
+  /** 渠道名称。__TENPAY__: 商企付 */
   ChannelName: string;
   /** 外部商户名称。 */
   OutMerchantName: string;
@@ -5837,7 +5837,7 @@ declare interface CreateOpenBankRechargeOrderRequest {
   ChannelSubMerchantId: string;
   /** 通知地址，如www.test.com。 */
   NotifyUrl?: string;
-  /** 备注信息。 */
+  /** 备注信息。限制200个字符。 */
   Remark?: string;
   /** 环境类型。__release__:生产环境__sandbox__:沙箱环境_不填默认为生产环境_ */
   Environment?: string;

@@ -112,6 +112,14 @@ declare interface ApiGroupInfo {
   GatewayInstanceType: string | null;
   /** 网关实例ID */
   GatewayInstanceId: string | null;
+  /** 命名空间参数key值 */
+  NamespaceNameKey: string | null;
+  /** 微服务名参数key值 */
+  ServiceNameKey: string | null;
+  /** 命名空间参数位置，path，header或query，默认是path */
+  NamespaceNameKeyPosition: string | null;
+  /** 微服务名参数位置，path，header或query，默认是path */
+  ServiceNameKeyPosition: string | null;
 }
 
 /** 微服务网关API信息 */
@@ -618,6 +626,10 @@ declare interface ContainerGroupDeploy {
   KubeInjectEnable: boolean | null;
   /** 仓库类型 (person, tcr) */
   RepoType: string | null;
+  /** 预热配置设置 */
+  WarmupSetting: WarmupSetting | null;
+  /** Envoy网关服务配置 */
+  GatewayConfig: GatewayConfig | null;
 }
 
 /** 容器部署组详情 */
@@ -882,6 +894,10 @@ declare interface GatewayApiGroupVo {
   GatewayInstanceType: string | null;
   /** 网关实例ID */
   GatewayInstanceId: string | null;
+}
+
+/** TSF Envoy网关服务配置 */
+declare interface GatewayConfig {
 }
 
 /** api分组已绑定的网关部署组 */
@@ -2689,79 +2705,81 @@ declare interface ValueFrom {
 /** 虚拟机部署组信息 */
 declare interface VmGroup {
   /** 部署组ID */
-  GroupId: string | null;
+  GroupId?: string | null;
   /** 部署组名称 */
-  GroupName: string | null;
+  GroupName?: string | null;
   /** 部署组状态 */
-  GroupStatus: string | null;
+  GroupStatus?: string | null;
   /** 程序包ID */
-  PackageId: string | null;
+  PackageId?: string | null;
   /** 程序包名称 */
-  PackageName: string | null;
+  PackageName?: string | null;
   /** 程序包版本号 */
-  PackageVersion: string | null;
+  PackageVersion?: string | null;
   /** 集群ID */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 集群名称 */
-  ClusterName: string | null;
+  ClusterName?: string | null;
   /** 命名空间ID */
-  NamespaceId: string | null;
+  NamespaceId?: string | null;
   /** 命名空间名称 */
-  NamespaceName: string | null;
+  NamespaceName?: string | null;
   /** 应用ID */
-  ApplicationId: string | null;
+  ApplicationId?: string | null;
   /** 应用名称 */
-  ApplicationName: string | null;
+  ApplicationName?: string | null;
   /** 部署组机器数目 */
-  InstanceCount: number | null;
+  InstanceCount?: number | null;
   /** 部署组运行中机器数目 */
-  RunInstanceCount: number | null;
+  RunInstanceCount?: number | null;
   /** 部署组启动参数信息 */
-  StartupParameters: string | null;
+  StartupParameters?: string | null;
   /** 部署组创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 部署组更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 部署组停止机器数目 */
-  OffInstanceCount: number | null;
+  OffInstanceCount?: number | null;
   /** 部署组描述信息 */
-  GroupDesc: string | null;
+  GroupDesc?: string | null;
   /** 微服务类型 */
-  MicroserviceType: string | null;
+  MicroserviceType?: string | null;
   /** 应用类型 */
-  ApplicationType: string | null;
+  ApplicationType?: string | null;
   /** 部署组资源类型 */
-  GroupResourceType: string | null;
+  GroupResourceType?: string | null;
   /** 部署组更新时间戳 */
-  UpdatedTime: number | null;
+  UpdatedTime?: number | null;
   /** 部署应用描述信息 */
-  DeployDesc: string | null;
+  DeployDesc?: string | null;
   /** 滚动发布的更新方式 */
-  UpdateType: number | null;
+  UpdateType?: number | null;
   /** 发布是否启用beta批次 */
-  DeployBetaEnable: boolean | null;
+  DeployBetaEnable?: boolean | null;
   /** 滚动发布的批次比例列表 */
-  DeployBatch: number[] | null;
+  DeployBatch?: number[] | null;
   /** 滚动发布的批次执行方式 */
-  DeployExeMode: string | null;
+  DeployExeMode?: string | null;
   /** 滚动发布的每个批次的等待时间 */
-  DeployWaitTime: number | null;
+  DeployWaitTime?: number | null;
   /** 是否开启了健康检查 */
-  EnableHealthCheck: boolean | null;
+  EnableHealthCheck?: boolean | null;
   /** 健康检查配置 */
-  HealthCheckSettings: HealthCheckSettings | null;
+  HealthCheckSettings?: HealthCheckSettings | null;
   /** 程序包类型 */
-  PackageType: string | null;
+  PackageType?: string | null;
   /** 启动脚本 base64编码 */
-  StartScript: string | null;
+  StartScript?: string | null;
   /** 停止脚本 base64编码 */
-  StopScript: string | null;
+  StopScript?: string | null;
   /** 部署组备注 */
-  Alias: string | null;
+  Alias?: string | null;
   /** javaagent信息 */
-  AgentProfileList: AgentProfile[] | null;
+  AgentProfileList?: AgentProfile[] | null;
   /** 预热属性配置 */
-  WarmupSetting: WarmupSetting | null;
+  WarmupSetting?: WarmupSetting | null;
+  /** Envoy网关配置 */
+  GatewayConfig?: GatewayConfig | null;
 }
 
 /** 虚拟机部署组其他字段 */
@@ -3050,6 +3068,14 @@ declare interface CreateApiGroupRequest {
   GroupType?: string;
   /** 网关实体ID */
   GatewayInstanceId?: string;
+  /** 命名空间参数key值 */
+  NamespaceNameKey?: string;
+  /** 微服务名参数key值 */
+  ServiceNameKey?: string;
+  /** 命名空间参数位置，path，header或query，默认是path */
+  NamespaceNameKeyPosition?: string;
+  /** 微服务名参数位置，path，header或query，默认是path */
+  ServiceNameKeyPosition?: string;
 }
 
 declare interface CreateApiGroupResponse {
@@ -3914,7 +3940,7 @@ declare interface DescribeApiGroupRequest {
 
 declare interface DescribeApiGroupResponse {
   /** API分组信息 */
-  Result?: ApiGroupInfo;
+  Result: ApiGroupInfo | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -4260,7 +4286,7 @@ declare interface DescribeContainerGroupDeployInfoRequest {
 
 declare interface DescribeContainerGroupDeployInfoResponse {
   /** 获取部署组 */
-  Result: ContainerGroupDeploy;
+  Result: ContainerGroupDeploy | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -6321,11 +6347,19 @@ declare interface UpdateApiGroupRequest {
   AuthType?: string;
   /** 分组上下文 */
   GroupContext?: string;
+  /** 命名空间参数key值 */
+  NamespaceNameKey?: string;
+  /** 微服务名参数key值 */
+  ServiceNameKey?: string;
+  /** 命名空间参数位置，path，header或query，默认是path */
+  NamespaceNameKeyPosition?: string;
+  /** 微服务名参数位置，path，header或query，默认是path */
+  ServiceNameKeyPosition?: string;
 }
 
 declare interface UpdateApiGroupResponse {
   /** 返回结果，true: 成功, false: 失败 */
-  Result?: boolean;
+  Result: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

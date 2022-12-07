@@ -96,6 +96,20 @@ declare interface RecordControl {
   StreamControls?: StreamControl[];
 }
 
+/** 互动白板房间用量信息 */
+declare interface RoomUsageDataItem {
+  /** 日期，格式为YYYY-MM-DD */
+  Time: string;
+  /** 白板应用SDKAppID */
+  SdkAppId: number;
+  /** 互动白板子产品，请求参数传入的一致- sp_tiw_board: 互动白板时长- sp_tiw_ric: 实时录制时长 */
+  SubProduct: string;
+  /** 用量值- 白板时长、实时录制时长单位为分钟 */
+  Value: number;
+  /** 互动白板房间号 */
+  RoomID: number;
+}
+
 /** 板书文件存储cos参数 */
 declare interface SnapshotCOS {
   /** cos所在腾讯云帐号uin */
@@ -404,6 +418,32 @@ declare interface DescribeTIWDailyUsageRequest {
 declare interface DescribeTIWDailyUsageResponse {
   /** 指定区间指定产品的用量汇总 */
   Usages: UsageDataItem[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTIWRoomDailyUsageRequest {
+  /** 互动白板应用SdkAppId */
+  SdkAppId: number;
+  /** 需要查询的子产品用量，支持传入以下值- sp_tiw_board: 互动白板时长，单位为分钟- sp_tiw_ric: 实时录制时长，单位分钟 */
+  SubProduct: string;
+  /** 开始时间，格式YYYY-MM-DD，查询结果里包括该天数据 */
+  StartTime: string;
+  /** 结束时间，格式YYYY-MM-DD，查询结果里包括该天数据，单次查询统计区间最多不能超过31天。 */
+  EndTime: string;
+  /** 需要查询的房间ID列表，不填默认查询全部房间 */
+  RoomIDs?: number[];
+  /** 查询偏移量，默认为0 */
+  Offset?: number;
+  /** 每次查询返回条目限制，默认为20 */
+  Limit?: number;
+}
+
+declare interface DescribeTIWRoomDailyUsageResponse {
+  /** 指定区间指定产品的房间用量列表 */
+  Usages: RoomUsageDataItem[];
+  /** 用量列表总数 */
+  Total: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -801,6 +841,8 @@ declare interface Tiw {
   DescribeSnapshotTask(data: DescribeSnapshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotTaskResponse>;
   /** {@link DescribeTIWDailyUsage 查询天维度计费用量}({@link DescribeTIWDailyUsageRequest 请求参数}): {@link DescribeTIWDailyUsageResponse 返回参数} */
   DescribeTIWDailyUsage(data: DescribeTIWDailyUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTIWDailyUsageResponse>;
+  /** {@link DescribeTIWRoomDailyUsage 查询房间维度每天计费用量}({@link DescribeTIWRoomDailyUsageRequest 请求参数}): {@link DescribeTIWRoomDailyUsageResponse 返回参数} */
+  DescribeTIWRoomDailyUsage(data: DescribeTIWRoomDailyUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTIWRoomDailyUsageResponse>;
   /** {@link DescribeTranscode 查询文档转码任务}({@link DescribeTranscodeRequest 请求参数}): {@link DescribeTranscodeResponse 返回参数} */
   DescribeTranscode(data: DescribeTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeResponse>;
   /** {@link DescribeTranscodeCallback 查询文档转码回调地址}({@link DescribeTranscodeCallbackRequest 请求参数}): {@link DescribeTranscodeCallbackResponse 返回参数} */

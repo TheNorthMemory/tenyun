@@ -1438,32 +1438,6 @@ declare interface AddTimeWindowResponse {
   RequestId?: string;
 }
 
-declare interface ApplyCDBProxyRequest {
-  /** 主实例唯一标识ID */
-  InstanceId: string;
-  /** 私有网络ID */
-  UniqVpcId: string;
-  /** 私有网络子网ID */
-  UniqSubnetId: string;
-  /** 代理组节点个数 */
-  ProxyCount: number;
-  /** cpu核数 */
-  Cpu: number;
-  /** 内存 */
-  Mem: number;
-  /** 安全组 */
-  SecurityGroup?: string[];
-  /** 描述说明，最大支持256位。 */
-  Desc?: string;
-}
-
-declare interface ApplyCDBProxyResponse {
-  /** 异步处理ID */
-  AsyncRequestId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
 declare interface AssociateSecurityGroupsRequest {
   /** 安全组 ID。 */
   SecurityGroupId: string;
@@ -4059,8 +4033,6 @@ declare interface Cdb {
   (): Versions;
   /** {@link AddTimeWindow 添加维护时间窗口}({@link AddTimeWindowRequest 请求参数}): {@link AddTimeWindowResponse 返回参数} */
   AddTimeWindow(data: AddTimeWindowRequest, config?: AxiosRequestConfig): AxiosPromise<AddTimeWindowResponse>;
-  /** {@link ApplyCDBProxy 申请数据库代理组}({@link ApplyCDBProxyRequest 请求参数}): {@link ApplyCDBProxyResponse 返回参数} */
-  ApplyCDBProxy(data: ApplyCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyCDBProxyResponse>;
   /** {@link AssociateSecurityGroups 安全组批量绑定云资源}({@link AssociateSecurityGroupsRequest 请求参数}): {@link AssociateSecurityGroupsResponse 返回参数} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
   /** {@link BalanceRoGroupLoad 均衡RO组内实例的负载}({@link BalanceRoGroupLoadRequest 请求参数}): {@link BalanceRoGroupLoadResponse 返回参数} */

@@ -62,7 +62,7 @@ declare interface DeviceDetailInfo {
   MobileCountryAndNetworkCode?: string;
   /** 设备品牌 “华为”“oppo”“小米”Android设备 */
   VendorId?: string;
-  /** 安卓API等级Android设备 */
+  /** Android API等级Android设备 */
   AndroidApiLevel?: string;
   /** 屏幕亮度Android设备 */
   Brightness?: string;
@@ -90,9 +90,9 @@ declare interface DeviceDetailInfo {
   IsEmulator?: string;
   /** 充电状态；1-不在充电，2-USB充电，3-电源充电Android设备 */
   ChargeStatus?: string;
-  /** 网络类型：2G/3G/4G/5G/WiFi/WWAN/otherAndroid设备 */
+  /** 网络类型：2G/3G/4G/5G/Wi-Fi/WWAN/otherAndroid设备 */
   NetworkType?: string;
-  /** WiFi MAC地址Android设备 */
+  /** Wi-Fi MAC地址Android设备 */
   WifiMac?: string;
   /** 设备名称 "xxx 的 iPhone"，"xxx's IPhone" 等等IOS设备 */
   DeviceName?: string;
@@ -118,7 +118,7 @@ declare interface EvaluationResult {
   SSID: string;
   /** 风险价值分 */
   Score: number | null;
-  /** 风险标签，请参考官网风险类型账号风险1 账号信用低,账号近期存在因恶意被处罚历史，网络低活跃，被举报等因素11 疑似 低活跃账号,账号活跃度与正常用户有差异2 垃圾账号 疑似批量注册小号，近期存在严重违规或大量举报21 疑似小号 账号有疑似线上养号，小号等行为22 疑似违规账号 账号曾有违规行为、曾被举报过、曾因违规被处罚过等3 无效账号 送检账号参数无法成功解析，请检查微信 openid 是否有误/appid与QQopenid无法关联/微信openid权限是否有开通/手机号是否为中国大陆手机号；4 黑名单 该账号在业务侧有过拉黑记录5 白名单 业务自行有添加过白名单记录行为风险101 批量操作 存在 ip/设备/环境等因素的聚集性异常1011 疑似 IP 属性聚集，出现 IP 聚集1012 疑似 设备属性聚集 出现设备聚集102 自动机 疑似自动机批量请求103 恶意行为-网赚 疑似网赚104 微信登录态无效 检查 WeChatAccessToken 参数，是否已经失效；201 环境风险 环境异常 操作 ip/设备/环境存在异常。当前 ip 为非常用 ip 或恶意 ip 段2011 疑似 非常用IP 请求 当前请求 IP 非该账号常用 IP2012 疑似 IP 异常 使用 idc 机房 ip 或 使用代理 ip 或 使用恶意 ip 等205 非公网有效ip 传进来的 IP 地址为内网 ip 地址或者 ip 保留地址；设备风险206 设备异常 该设备存在异常的使用行为2061 疑似 非常用设备 当前请求的设备非该账号常用设备2062 疑似 虚拟设备 请求设备为模拟器、脚本、云设备等虚拟设备2063 疑似 群控设备 请求设备为猫池、手机墙等群控设备10201 设备处于开发者模式 来源于Android10202 设备疑似 Root 来源于Android10203 疑似应用被注 来源于Android10204 疑似应用被重打包 来源于Android10205 疑似使用 hook 技术 来源于Android10206 疑似应用被双开 来源于Android10207 疑似设备存在风险进程 来源于Android10208 疑似伪造地理位置 来源于Android10209 疑似使用 VPN 软件 来源于Android10210 疑似使用代理软件 来源于Android10211 疑似设备处于调试模式 来源于Android10212 疑似高危 ROM 来源于Android10213 疑似检测到系统劫持 来源于Android10003 疑似模拟器 来源于Android10301 疑似主流模拟器 来源于Android10302 疑似云模拟器 来源于Android10303 疑似开发板设备 来源于Android10004 疑似群控设备风险 来源于Android10401 疑似使用自动化软件 来源于Android10402 疑似群控自动化操作 来源于Android10501 疑似参数异常-IMEI 来源于Android10502 疑似参数异常-FP 来源于Android10504 疑似参数异常-IMSI 来源于Android10801 疑似存在刷量安装应用的行为 来源于Android10901 疑似多账号异常 来源于Android11001 疑似设备参数篡改 来源于Android11002 疑似存在风险软件 来源于Android11003 疑似应用被调试 来源于Android11100 疑似云真机 来源于Android25001 设备疑似越狱 来源于IOS25004 进程疑似有注入文件 来源于IOS25005 疑似使用代理软件 来源于IOS25006 疑似使用 VPN 软件 来源于IOS25007 疑似被 Hook 来源于IOS25008 疑似进程被调试 来源于IOS25009 疑似多开 来源于IOS25010 疑似改机 来源于IOS25011 疑似应用二次打包 来源于IOS25012 疑似模拟器 来源于IOS25013 疑似云真机 来源于IOS25014 疑似云模拟器 来源于IOS25015 疑似伪造地理位置 来源于IOS25016 疑似使用自动化脚本 来源于IOS25017 疑似群控自动化操作 来源于IOS30001 疑似虚拟浏览器 来源于H530002 疑似安装作弊插件 来源于H530003 疑似浏览器参数遭篡改 来源于H530004 疑似 JS 代码被篡改 来源于H530005 疑似 JS 被调试 来源于H530006 Cookies 被禁用 来源于H540001 疑似伪造地理位置 来源于小程序40002 疑似被调试 来源于小程序40003 疑似模拟器 来源于小程序 */
+  /** 风险标签，请参考官网风险类型账号风险1 账号信用低 账号近期存在因恶意被处罚历史，网络低活跃，被举报等因素11 疑似低活跃账号 账号活跃度与正常用户有差异2 垃圾账号 疑似批量注册小号，近期存在严重违规或大量举报21 疑似小号 账号有疑似线上养号，小号等行为22 疑似违规账号 账号曾有违规行为、曾被举报过、曾因违规被处罚过等3 无效账号 送检账号参数无法成功解析，请检查微信 Openid 是否有误/Appid与QQopenid无法关联/微信Openid权限是否有开通/手机号是否为中国大陆手机号4 黑名单 该账号在业务侧有过拉黑记录5 白名单 业务自行有添加过白名单记录行为风险101 批量操作存在 IP/设备/环境等因素的聚集性异常1011 疑似 IP 属性聚集 出现 IP 聚集1012 疑似设备属性聚集 出现设备聚集102 自动机 疑似自动机批量请求103 恶意行为-网赚 疑似网赚104 微信登录态无效 检查 WeChatAccessToken 参数，是否已经失效201 环境风险 环境异常 操作 IP/设备/环境存在异常。当前 IP 为非常用 IP 或恶意 IP 段2011 疑似非常用 IP 请求 当前请求 IP 非该账号常用 IP2012 疑似 IP 异常 使用 idc 机房 IP 或使用代理 IP 或使用恶意 IP 等205 非公网有效IP 传进来的 IP 地址为内网 IP 地址或者 IP 保留地址设备风险206 设备异常 该设备存在异常的使用行为2061 疑似非常用设备 当前请求的设备非该账号常用设备2062 疑似虚拟设备 请求设备为模拟器、脚本、云设备等虚拟设备2063 疑似群控设备 请求设备为猫池、手机墙等群控设备10201 设备处于开发者模式 来源于Android10202 设备疑似 Root 来源于Android10203 疑似应用被注 来源于Android10204 疑似应用被重打包 来源于Android10205 疑似使用 hook 技术 来源于Android10206 疑似应用被双开 来源于Android10207 疑似设备存在风险进程 来源于Android10208 疑似伪造地理位置 来源于Android10209 疑似使用 VPN 软件 来源于Android10210 疑似使用代理软件 来源于Android10211 疑似设备处于调试模式 来源于Android10212 疑似高危 ROM 来源于Android10213 疑似检测到系统劫持 来源于Android10003 疑似模拟器 来源于Android10301 疑似主流模拟器 来源于Android10302 疑似云模拟器 来源于Android10303 疑似开发板设备 来源于Android10004 疑似群控设备风险 来源于Android10401 疑似使用自动化软件 来源于Android10402 疑似群控自动化操作 来源于Android10501 疑似参数异常-IMEI 来源于Android10502 疑似参数异常-FP 来源于Android10504 疑似参数异常-IMSI 来源于Android10801 疑似存在刷量安装应用的行为 来源于Android10901 疑似多账号异常 来源于Android11001 疑似设备参数篡改 来源于Android11002 疑似存在风险软件 来源于Android11003 疑似应用被调试 来源于Android11100 疑似云真机 来源于Android25001 设备疑似越狱 来源于IOS25004 进程疑似有注入文件 来源于IOS25005 疑似使用代理软件 来源于IOS25006 疑似使用 VPN 软件 来源于IOS25007 疑似被 Hook 来源于IOS25008 疑似进程被调试 来源于IOS25009 疑似多开 来源于IOS25010 疑似改机 来源于IOS25011 疑似应用二次打包 来源于IOS25012 疑似模拟器 来源于IOS25013 疑似云真机 来源于IOS25014 疑似云模拟器 来源于IOS25015 疑似伪造地理位置 来源于IOS25016 疑似使用自动化脚本 来源于IOS25017 疑似群控自动化操作 来源于IOS30001 疑似虚拟浏览器 来源于H530002 疑似安装作弊插件 来源于H530003 疑似浏览器参数遭篡改 来源于H530004 疑似 JS 代码被篡改 来源于H530005 疑似 JS 被调试 来源于H530006 Cookies 被禁用 来源于H540001 疑似伪造地理位置 来源于小程序40002 疑似被调试 来源于小程序40003 疑似模拟器 来源于小程序 */
   RiskLabels: number[] | null;
 }
 
@@ -150,7 +150,7 @@ declare interface UserInfo {
   Ip: string;
   /** 来源渠道编码 */
   ChannelSource?: string;
-  /** 用户登录平台。1：安卓 2：iOS 3：H5 4：小程序 */
+  /** 用户登录平台。1：Android 2：iOS 3：H5 4：小程序 */
   Platform?: number;
   /** 姓名 */
   Name?: string;
@@ -177,7 +177,7 @@ declare interface EvaluateUserRiskRequest {
   ModelId: string;
   /** 设备指纹信息 */
   DeviceFingerprint?: DeviceFingerprintInfo;
-  /** 场景Code，不传默认活动防刷；e_activity_antirush；活动防刷场景e_login_protection；登陆保护场景e_register_protection：注册保护场景 */
+  /** 场景Code，不传默认活动防刷；e_activity_antirush；活动防刷场景e_login_protection；登录保护场景e_register_protection：注册保护场景 */
   SceneCode?: string;
   /** 设备详情 */
   DeviceDetail?: DeviceDetailInfo;

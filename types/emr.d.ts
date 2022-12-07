@@ -1072,6 +1072,18 @@ declare interface CreateInstanceResponse {
   RequestId?: string;
 }
 
+declare interface DeleteUserManagerUserListRequest {
+  /** 集群实例ID */
+  InstanceId: string;
+  /** 集群用户名列表 */
+  UserNameList: string[];
+}
+
+declare interface DeleteUserManagerUserListResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClusterNodesRequest {
   /** 集群实例ID,实例ID形如: emr-xxxxxxxx */
   InstanceId: string;
@@ -1659,6 +1671,8 @@ declare interface Emr {
   AddUsersForUserManager(data: AddUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<AddUsersForUserManagerResponse>;
   /** {@link CreateInstance 创建EMR实例}({@link CreateInstanceRequest 请求参数}): {@link CreateInstanceResponse 返回参数} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
+  /** {@link DeleteUserManagerUserList 删除用户列表（用户管理）}({@link DeleteUserManagerUserListRequest 请求参数}): {@link DeleteUserManagerUserListResponse 返回参数} */
+  DeleteUserManagerUserList(data: DeleteUserManagerUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserManagerUserListResponse>;
   /** {@link DescribeClusterNodes 查询集群节点信息}({@link DescribeClusterNodesRequest 请求参数}): {@link DescribeClusterNodesResponse 返回参数} */
   DescribeClusterNodes(data: DescribeClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNodesResponse>;
   /** {@link DescribeCvmQuota 查询账户的CVM配额}({@link DescribeCvmQuotaRequest 请求参数}): {@link DescribeCvmQuotaResponse 返回参数} */

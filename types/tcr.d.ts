@@ -518,32 +518,34 @@ declare interface Tag {
 declare interface TagInfo {
   /** Tag名称 */
   TagName: string;
-  /** 镜像Id */
+  /** 制品的 ID */
   TagId: string;
   /** docker image 可以看到的id */
   ImageId: string;
   /** 大小 */
   Size: string;
-  /** 镜像的创建时间 */
+  /** 制品的创建时间 */
   CreationTime: string;
-  /** 镜像创建至今时间长度 */
+  /** 制品创建至今时间长度 */
   DurationDays: string | null;
-  /** 镜像的作者 */
+  /** 标注的制品作者 */
   Author: string;
-  /** 次镜像建议运行的系统架构 */
+  /** 标注的制品平台 */
   Architecture: string;
-  /** 创建此镜像的docker版本 */
+  /** 创建制品的 Docker 版本 */
   DockerVersion: string;
-  /** 此镜像建议运行系统 */
+  /** 标注的制品操作系统 */
   OS: string;
-  /** SizeByte */
+  /** 制品大小 */
   SizeByte: number;
-  /** Id */
+  /** 序号 */
   Id: number;
   /** 数据更新时间 */
   UpdateTime: string;
-  /** 镜像更新时间 */
+  /** 制品更新时间 */
   PushTime: string;
+  /** 制品类型 */
+  Kind: string;
 }
 
 /** Tag列表的返回值 */

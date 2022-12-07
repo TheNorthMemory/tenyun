@@ -458,6 +458,10 @@ declare interface InstanceTypeQuotaItem {
   Fpga: number;
   /** 实例备注信息。 */
   Remark: string;
+  /** 实例机型映射的物理GPU卡数，单位：卡。vGPU卡型小于1，直通卡型大于等于1。vGPU是通过分片虚拟化技术，将物理GPU卡重新划分，同一块GPU卡经虚拟化分割后可分配至不同的实例使用。直通卡型会将GPU设备直接挂载给实例使用。 */
+  GpuCount: number;
+  /** 实例的CPU主频信息 */
+  Frequency: string;
 }
 
 /** 描述了实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等 */
