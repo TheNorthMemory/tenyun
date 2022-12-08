@@ -483,65 +483,67 @@ declare interface StaffStatusMetrics {
 /** 电话话单信息 */
 declare interface TelCdrInfo {
   /** 主叫号码 */
-  Caller: string;
+  Caller?: string;
   /** 被叫号码 */
-  Callee: string;
+  Callee?: string;
   /** 呼叫发起时间戳，Unix 时间戳 */
-  Time: number;
+  Time?: number;
   /** 呼入呼出方向 0 呼入 1 呼出 */
-  Direction: number;
+  Direction?: number;
   /** 通话时长 */
-  Duration: number;
+  Duration?: number;
   /** 录音信息 */
-  RecordURL: string;
+  RecordURL?: string;
   /** 坐席信息 */
-  SeatUser: SeatUserInfo;
+  SeatUser?: SeatUserInfo;
   /** 结束状态0	错误1	正常结束2	未接通17	坐席未接100	黑名单101	坐席转接102	IVR 期间用户放弃103	会话排队期间用户放弃104	会话振铃期间用户放弃105	无坐席在线106	非工作时间107	IVR后直接结束201	未知状态202	未接听203	拒接挂断204	关机205	空号206	通话中207	欠费208	运营商线路异常209	主叫取消210	不在服务区 */
-  EndStatus: number;
+  EndStatus?: number;
   /** 技能组名称 */
-  SkillGroup: string;
+  SkillGroup?: string;
   /** 主叫归属地 */
-  CallerLocation: string;
+  CallerLocation?: string;
   /** IVR 阶段耗时 */
-  IVRDuration: number | null;
+  IVRDuration?: number | null;
   /** 振铃时间戳，UNIX 秒级时间戳 */
-  RingTimestamp: number | null;
+  RingTimestamp?: number | null;
   /** 接听时间戳，UNIX 秒级时间戳 */
-  AcceptTimestamp: number | null;
+  AcceptTimestamp?: number | null;
   /** 结束时间戳，UNIX 秒级时间戳 */
-  EndedTimestamp: number | null;
+  EndedTimestamp?: number | null;
   /** IVR 按键信息 ，e.g. ["1","2","3"] */
-  IVRKeyPressed: string[] | null;
+  IVRKeyPressed?: string[] | null;
   /** 挂机方 seat 坐席 user 用户 */
-  HungUpSide: string | null;
+  HungUpSide?: string | null;
   /** 服务参与者列表 */
-  ServeParticipants: ServeParticipant[] | null;
+  ServeParticipants?: ServeParticipant[] | null;
   /** 技能组ID */
-  SkillGroupId: number | null;
+  SkillGroupId?: number | null;
   /** error 错误ok 正常结束unconnected 未接通seatGiveUp 坐席未接blackList 黑名单seatForward 坐席转接ivrGiveUp IVR 期间用户放弃waitingGiveUp 会话排队期间用户放弃ringingGiveUp 会话振铃期间用户放弃noSeatOnline 无坐席在线notWorkTime 非工作时间ivrEnd IVR后直接结束unknown 未知状态notAnswer 未接听userReject 拒接挂断powerOff 关机numberNotExist 空号busy 通话中outOfCredit 欠费operatorError 运营商线路异常callerCancel 主叫取消notInService 不在服务区 */
-  EndStatusString: string | null;
+  EndStatusString?: string | null;
   /** 会话开始时间戳，UNIX 秒级时间戳 */
-  StartTimestamp: number | null;
+  StartTimestamp?: number | null;
   /** 进入排队时间，Unix 秒级时间戳 */
-  QueuedTimestamp: number | null;
+  QueuedTimestamp?: number | null;
   /** 后置IVR按键信息（e.g. [{"Key":"1","Label":"非常满意"}]） */
-  PostIVRKeyPressed: IVRKeyPressedElement[] | null;
+  PostIVRKeyPressed?: IVRKeyPressedElement[] | null;
   /** 排队技能组Id */
-  QueuedSkillGroupId: number | null;
+  QueuedSkillGroupId?: number | null;
   /** 会话 ID */
-  SessionId: string | null;
+  SessionId?: string | null;
   /** 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空 */
-  ProtectedCaller: string | null;
+  ProtectedCaller?: string | null;
   /** 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空 */
-  ProtectedCallee: string | null;
+  ProtectedCallee?: string | null;
   /** 客户自定义数据（User-to-User Interface） */
-  Uui: string | null;
+  Uui?: string | null;
   /** IVR按键信息（e.g. [{"Key":"1","Label":"非常满意"}]） */
-  IVRKeyPressedEx: IVRKeyPressedElement[] | null;
+  IVRKeyPressedEx?: IVRKeyPressedElement[] | null;
   /** 获取录音ASR文本信息地址 */
-  AsrUrl: string | null;
+  AsrUrl?: string | null;
   /** 录音转存第三方COS地址 */
-  CustomRecordURL: string | null;
+  CustomRecordURL?: string | null;
+  /** 备注 */
+  Remark?: string | null;
 }
 
 /** 变量 */

@@ -407,21 +407,21 @@ declare interface Lymph {
 /** 医学资料 */
 declare interface MedDoc {
   /** 建议 */
-  Advice: Advice | null;
+  Advice?: Advice | null;
   /** 诊断结果 */
-  Diagnosis: DiagCertItem[] | null;
+  Diagnosis?: DiagCertItem[] | null;
   /** 疾病史 */
-  DiseaseMedicalHistory: DiseaseMedicalHistory | null;
+  DiseaseMedicalHistory?: DiseaseMedicalHistory | null;
   /** 个人史 */
-  PersonalMedicalHistory: PersonalMedicalHistory;
+  PersonalMedicalHistory?: PersonalMedicalHistory;
   /** 婚孕史 */
-  ObstericalMedicalHistory: ObstericalMedicalHistory;
+  ObstericalMedicalHistory?: ObstericalMedicalHistory;
   /** 家族史 */
-  FamilyMedicalHistory: FamilyMedicalHistory;
+  FamilyMedicalHistory?: FamilyMedicalHistory;
   /** 月经史 */
-  MenstrualMedicalHistory: MenstrualMedicalHistory;
+  MenstrualMedicalHistory?: MenstrualMedicalHistory;
   /** 诊疗记录 */
-  TreatmentRecord: TreatmentRecord;
+  TreatmentRecord?: TreatmentRecord;
 }
 
 /** 门诊病历信息 */
@@ -1039,6 +1039,8 @@ declare interface ImageToClassRequest {
   HandleParam: HandleParam;
   /** 不填，默认为0 */
   Type: number;
+  /** 用户类型，新客户传1，老客户可不传 */
+  UserType?: number;
 }
 
 declare interface ImageToClassResponse {
@@ -1057,6 +1059,8 @@ declare interface ImageToObjectRequest {
   Type: number;
   /** 是否使用分类引擎，当不确定报告类型时，可以使用收费的报告分类引擎服务。若该字段为 False，则 Type 字段不能为 0，否则无法输出结果。注意：当 IsUsedClassify 为True 时，表示使用收费的报告分类服务，将会产生额外的费用，具体收费标准参见 [购买指南的产品价格](https://cloud.tencent.com/document/product/1314/54264)。 */
   IsUsedClassify: boolean;
+  /** 用户类型，新客户传1，老客户可不传 */
+  UserType?: number;
 }
 
 declare interface ImageToObjectResponse {
@@ -1071,6 +1075,8 @@ declare interface ImageToObjectResponse {
 declare interface TextToClassRequest {
   /** 报告文本 */
   Text: string;
+  /** 用户类型，新客户传1，老客户可不传 */
+  UserType?: number;
 }
 
 declare interface TextToClassResponse {
@@ -1087,6 +1093,8 @@ declare interface TextToObjectRequest {
   Type: number;
   /** 是否使用分类引擎，当不确定报告类型时，可以使用收费的报告分类引擎服务。若该字段为False，则Type字段不能为0，否则无法输出结果。注意：当 IsUsedClassify 为True 时，表示使用收费的报告分类服务，将会产生额外的费用，具体收费标准参见 [购买指南的产品价格](https://cloud.tencent.com/document/product/1314/54264)。 */
   IsUsedClassify: boolean;
+  /** 用户类型，新客户传1，老客户可不传 */
+  UserType?: number;
 }
 
 declare interface TextToObjectResponse {

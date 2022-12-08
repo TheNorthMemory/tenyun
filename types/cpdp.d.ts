@@ -2252,6 +2252,8 @@ declare interface PaymentOrderResult {
   AdditionalTaxSum: string | null;
   /** 附加税税项。格式为JSON格式 */
   AdditionalTaxItem: string | null;
+  /** 失败原因。当Status为FAILED时，改字段为失败的原因。 */
+  FailReason: string | null;
 }
 
 /** 付款订单状态结果 */
@@ -2260,6 +2262,8 @@ declare interface PaymentOrderStatusResult {
   Status: string;
   /** 状态描述 */
   StatusDesc: string;
+  /** 失败原因。当Status为FAILED时，改字段为失败的原因。 */
+  FailReason: string | null;
 }
 
 /** 付款订单列表 */

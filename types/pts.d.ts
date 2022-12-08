@@ -250,7 +250,7 @@ declare interface File {
   CreatedAt: string | null;
   /** 项目 ID */
   ProjectId: string | null;
-  /** 用户账号的 App ID */
+  /** 此字段不再使用 */
   AppID: number | null;
   /** 用户主账号 */
   Uin: string | null;
@@ -324,11 +324,11 @@ declare interface Job {
   ScenarioId?: string | null;
   /** 任务的施压配置 */
   Load?: Load | null;
-  /** deprecated */
+  /** 此字段不再使用 */
   Configs?: string[] | null;
   /** 任务的数据集文件 */
   Datasets?: TestData[] | null;
-  /** deprecated */
+  /** 此字段不再使用 */
   Extensions?: string[] | null;
   /** 任务的运行状态, JobUnknown: 0,JobCreated:1,JobPending:2, JobPreparing:3,JobSelectClustering:4,JobCreateTasking:5,JobSyncTasking:6JobRunning:11,JobFinished:12,JobPrepareException:13,JobFinishException:14,JobAborting:15,JobAborted:16,JobAbortException:17,JobDeleted:18,JobSelectClusterException:19,JobCreateTaskException:20,JobSyncTaskException:21 */
   Status?: number | null;
@@ -344,7 +344,7 @@ declare interface Job {
   ErrorRate?: number | null;
   /** 任务发起人 */
   JobOwner?: string | null;
-  /** deprecated */
+  /** 此字段不再使用 */
   LoadSources?: LoadSource | null;
   /** 任务时长 */
   Duration?: number | null;
@@ -362,7 +362,7 @@ declare interface Job {
   ResponseTimeP95?: number | null;
   /** 响应时间第90百分位 */
   ResponseTimeP90?: number | null;
-  /** deprecated */
+  /** 此字段不再使用 */
   Scripts?: string[] | null;
   /** 最大响应时间 */
   ResponseTimeMax?: number | null;
@@ -398,6 +398,8 @@ declare interface Job {
   NetworkReceiveRate?: number | null;
   /** 每秒发送字节数 */
   NetworkSendRate?: number | null;
+  /** 任务状态描述 */
+  Message?: string | null;
 }
 
 /** 包含labelName 和labelValue */

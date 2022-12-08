@@ -1756,6 +1756,82 @@ declare interface RegionInstance {
   Remark: string | null;
 }
 
+/** 应用市场部署的应用结构 */
+declare interface Release {
+  /** 应用名称 */
+  Name: string;
+  /** 应用命名空间 */
+  Namespace: string;
+  /** 应用当前版本 */
+  Revision: string | null;
+  /** 应用状态 */
+  Status: string | null;
+  /** 制品名称 */
+  ChartName: string | null;
+  /** 制品版本 */
+  ChartVersion: string | null;
+  /** 制品应用版本 */
+  AppVersion: string | null;
+  /** 更新时间 */
+  UpdatedTime: string | null;
+  /** 应用描述 */
+  Description: string | null;
+}
+
+/** 应用市场的安装应用详情 */
+declare interface ReleaseDetails {
+  /** 应用名称 */
+  Name: string;
+  /** 应用所在命名空间 */
+  Namespace: string;
+  /** 应用当前版本 */
+  Version: number | null;
+  /** 应用状态 */
+  Status: string | null;
+  /** 应用描述 */
+  Description: string | null;
+  /** 应用提示 */
+  Notes: string | null;
+  /** 用户自定义参数 */
+  Config: string | null;
+  /** 应用资源详情 */
+  Manifest: string | null;
+  /** 应用制品版本 */
+  ChartVersion: string | null;
+  /** 应用制品名称 */
+  ChartName: string | null;
+  /** 应用制品描述 */
+  ChartDescription: string | null;
+  /** 应用制品app版本 */
+  AppVersion: string | null;
+  /** 应用首次部署时间 */
+  FirstDeployedTime: string | null;
+  /** 应用最近部署时间 */
+  LastDeployedTime: string | null;
+  /** 应用参数 */
+  ComputedValues: string | null;
+}
+
+/** 应用市场中部署的应用版本历史 */
+declare interface ReleaseHistory {
+  /** 应用名称 */
+  Name: string;
+  /** 应用命名空间 */
+  Namespace: string;
+  /** 应用版本 */
+  Revision: number | null;
+  /** 应用状态 */
+  Status: string | null;
+  /** 应用制品名称 */
+  Chart: string | null;
+  /** 应用制品版本 */
+  AppVersion: string | null;
+  /** 应用更新时间 */
+  UpdatedTime: string | null;
+  /** 应用描述 */
+  Description: string | null;
+}
+
 /** 应用市场自定义参数 */
 declare interface ReleaseValues {
   /** 自定义参数原始值 */
@@ -2080,6 +2156,22 @@ declare interface AddVpcCniSubnetsRequest {
 }
 
 declare interface AddVpcCniSubnetsResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface CancelClusterReleaseRequest {
+  /** 应用ID */
+  ID: string;
+  /** 集群ID */
+  ClusterId?: string;
+  /** 集群类型 */
+  ClusterType?: string;
+}
+
+declare interface CancelClusterReleaseResponse {
+  /** 应用信息 */
+  Release: PendingRelease | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -3240,6 +3332,96 @@ declare interface DescribeClusterNodePoolsResponse {
   NodePoolSet: NodePool[] | null;
   /** 资源总数 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterPendingReleasesRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 返回数量限制，默认20，最大100 */
+  Limit?: number;
+  /** 偏移量，默认0 */
+  Offset?: number;
+  /** 集群类型 */
+  ClusterType?: string;
+}
+
+declare interface DescribeClusterPendingReleasesResponse {
+  /** 正在安装中应用列表 */
+  ReleaseSet: PendingRelease[] | null;
+  /** 每页返回数量限制 */
+  Limit: number | null;
+  /** 页偏移量 */
+  Offset: number | null;
+  /** 总数量 */
+  Total: number | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterReleaseDetailsRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 应用名称 */
+  Name: string;
+  /** 应用所在命名空间 */
+  Namespace: string;
+  /** 集群类型 */
+  ClusterType?: string;
+}
+
+declare interface DescribeClusterReleaseDetailsResponse {
+  /** 应用详情 */
+  Release: ReleaseDetails | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterReleaseHistoryRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 应用名称 */
+  Name: string;
+  /** 应用所在命名空间 */
+  Namespace: string;
+  /** 集群类型 */
+  ClusterType?: string;
+}
+
+declare interface DescribeClusterReleaseHistoryResponse {
+  /** 已安装应用版本历史 */
+  ReleaseHistorySet: ReleaseHistory[] | null;
+  /** 总数量 */
+  Total: number | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterReleasesRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 每页数量限制 */
+  Limit?: number;
+  /** 页偏移量 */
+  Offset?: number;
+  /** helm Release 安装的namespace */
+  Namespace?: string;
+  /** helm Release 的名字 */
+  ReleaseName?: string;
+  /** helm Chart 的名字 */
+  ChartName?: string;
+}
+
+declare interface DescribeClusterReleasesResponse {
+  /** 数量限制 */
+  Limit: number | null;
+  /** 偏移量 */
+  Offset: number | null;
+  /** 已安装应用列表 */
+  ReleaseSet: Release[] | null;
+  /** 已安装应用总数量 */
+  Total: number | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -4704,6 +4886,26 @@ declare interface RestartEKSContainerInstancesResponse {
   RequestId?: string;
 }
 
+declare interface RollbackClusterReleaseRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 应用名称 */
+  Name: string;
+  /** 应用命名空间 */
+  Namespace: string;
+  /** 回滚版本号 */
+  Revision: number;
+  /** 集群类型 */
+  ClusterType?: string;
+}
+
+declare interface RollbackClusterReleaseResponse {
+  /** 应用详情 */
+  Release: PendingRelease | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface RunPrometheusInstanceRequest {
   /** 实例ID */
   InstanceId: string;
@@ -4786,6 +4988,24 @@ declare interface SyncPrometheusTemplateRequest {
 }
 
 declare interface SyncPrometheusTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface UninstallClusterReleaseRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 应用名称 */
+  Name: string;
+  /** 应用命名空间 */
+  Namespace: string;
+  /** 集群类型 */
+  ClusterType?: string;
+}
+
+declare interface UninstallClusterReleaseResponse {
+  /** 应用详情 */
+  Release: PendingRelease | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -4905,6 +5125,16 @@ declare interface UpdateImageCacheRequest {
   ImageCacheId: string;
   /** 镜像缓存名称 */
   ImageCacheName?: string;
+  /** 镜像仓库凭证数组 */
+  ImageRegistryCredentials?: ImageRegistryCredential[];
+  /** 用于制作镜像缓存的容器镜像列表 */
+  Images?: string[];
+  /** 镜像缓存的大小。默认为20 GiB。取值范围参考[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)中的高性能云盘类型的大小限制。 */
+  ImageCacheSize?: number;
+  /** 镜像缓存保留时间天数，过期将会自动清理，默认为0，永不过期。 */
+  RetentionDays?: number;
+  /** 安全组Id */
+  SecurityGroupIds?: string[];
 }
 
 declare interface UpdateImageCacheResponse {
@@ -4968,6 +5198,40 @@ declare interface UpgradeClusterInstancesResponse {
   RequestId?: string;
 }
 
+declare interface UpgradeClusterReleaseRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 自定义的应用名称 */
+  Name: string;
+  /** 应用命名空间 */
+  Namespace: string;
+  /** 制品名称或从第三方repo 安装chart时，制品压缩包下载地址, 不支持重定向类型chart 地址，结尾为*.tgz */
+  Chart: string;
+  /** 自定义参数，覆盖chart 中values.yaml 中的参数 */
+  Values?: ReleaseValues;
+  /** 制品来源，范围：tke-market/tcr/other */
+  ChartFrom?: string;
+  /** 制品版本( 从第三安装时，不传这个参数） */
+  ChartVersion?: string;
+  /** 制品仓库URL地址 */
+  ChartRepoURL?: string;
+  /** 制品访问用户名 */
+  Username?: string;
+  /** 制品访问密码 */
+  Password?: string;
+  /** 制品命名空间 */
+  ChartNamespace?: string;
+  /** 集群类型，支持传 tke, eks, tkeedge, exernal(注册集群） */
+  ClusterType?: string;
+}
+
+declare interface UpgradeClusterReleaseResponse {
+  /** 应用详情 */
+  Release: PendingRelease | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 /** {@link Tke 容器服务} */
 declare interface Tke {
   (): Versions;
@@ -4981,6 +5245,8 @@ declare interface Tke {
   AddNodeToNodePool(data: AddNodeToNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<AddNodeToNodePoolResponse>;
   /** {@link AddVpcCniSubnets 增加集群子网}({@link AddVpcCniSubnetsRequest 请求参数}): {@link AddVpcCniSubnetsResponse 返回参数} */
   AddVpcCniSubnets(data: AddVpcCniSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<AddVpcCniSubnetsResponse>;
+  /** {@link CancelClusterRelease 集群取消安装应用}({@link CancelClusterReleaseRequest 请求参数}): {@link CancelClusterReleaseResponse 返回参数} */
+  CancelClusterRelease(data: CancelClusterReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<CancelClusterReleaseResponse>;
   /** {@link CheckEdgeClusterCIDR 检查边缘计算集群的CIDR是否冲突}({@link CheckEdgeClusterCIDRRequest 请求参数}): {@link CheckEdgeClusterCIDRResponse 返回参数} */
   CheckEdgeClusterCIDR(data: CheckEdgeClusterCIDRRequest, config?: AxiosRequestConfig): AxiosPromise<CheckEdgeClusterCIDRResponse>;
   /** {@link CheckInstancesUpgradeAble 节点是否可升级}({@link CheckInstancesUpgradeAbleRequest 请求参数}): {@link CheckInstancesUpgradeAbleResponse 返回参数} */
@@ -5115,6 +5381,14 @@ declare interface Tke {
   DescribeClusterNodePoolDetail(data: DescribeClusterNodePoolDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNodePoolDetailResponse>;
   /** {@link DescribeClusterNodePools 查询节点池列表}({@link DescribeClusterNodePoolsRequest 请求参数}): {@link DescribeClusterNodePoolsResponse 返回参数} */
   DescribeClusterNodePools(data: DescribeClusterNodePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNodePoolsResponse>;
+  /** {@link DescribeClusterPendingReleases 查询集群安装中的应用列表}({@link DescribeClusterPendingReleasesRequest 请求参数}): {@link DescribeClusterPendingReleasesResponse 返回参数} */
+  DescribeClusterPendingReleases(data: DescribeClusterPendingReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterPendingReleasesResponse>;
+  /** {@link DescribeClusterReleaseDetails 查询集群已安装应用详情}({@link DescribeClusterReleaseDetailsRequest 请求参数}): {@link DescribeClusterReleaseDetailsResponse 返回参数} */
+  DescribeClusterReleaseDetails(data: DescribeClusterReleaseDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterReleaseDetailsResponse>;
+  /** {@link DescribeClusterReleaseHistory 查询集群已安装应用版本历史}({@link DescribeClusterReleaseHistoryRequest 请求参数}): {@link DescribeClusterReleaseHistoryResponse 返回参数} */
+  DescribeClusterReleaseHistory(data: DescribeClusterReleaseHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterReleaseHistoryResponse>;
+  /** {@link DescribeClusterReleases 查询集群已安装应用列表}({@link DescribeClusterReleasesRequest 请求参数}): {@link DescribeClusterReleasesResponse 返回参数} */
+  DescribeClusterReleases(data: DescribeClusterReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterReleasesResponse>;
   /** {@link DescribeClusterRouteTables 查询集群路由表}({@link DescribeClusterRouteTablesRequest 请求参数}): {@link DescribeClusterRouteTablesResponse 返回参数} */
   DescribeClusterRouteTables(data?: DescribeClusterRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterRouteTablesResponse>;
   /** {@link DescribeClusterRoutes 查询集群路由}({@link DescribeClusterRoutesRequest 请求参数}): {@link DescribeClusterRoutesResponse 返回参数} */
@@ -5287,6 +5561,8 @@ declare interface Tke {
   RemoveNodeFromNodePool(data: RemoveNodeFromNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveNodeFromNodePoolResponse>;
   /** {@link RestartEKSContainerInstances 重启容器实例}({@link RestartEKSContainerInstancesRequest 请求参数}): {@link RestartEKSContainerInstancesResponse 返回参数} */
   RestartEKSContainerInstances(data: RestartEKSContainerInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RestartEKSContainerInstancesResponse>;
+  /** {@link RollbackClusterRelease 集群回滚应用版本}({@link RollbackClusterReleaseRequest 请求参数}): {@link RollbackClusterReleaseResponse 返回参数} */
+  RollbackClusterRelease(data: RollbackClusterReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackClusterReleaseResponse>;
   /** {@link RunPrometheusInstance 初始化TMP实例}({@link RunPrometheusInstanceRequest 请求参数}): {@link RunPrometheusInstanceResponse 返回参数} */
   RunPrometheusInstance(data: RunPrometheusInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RunPrometheusInstanceResponse>;
   /** {@link ScaleInClusterMaster 缩容独立集群master节点}({@link ScaleInClusterMasterRequest 请求参数}): {@link ScaleInClusterMasterResponse 返回参数} */
@@ -5299,6 +5575,8 @@ declare interface Tke {
   SyncPrometheusTemp(data: SyncPrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<SyncPrometheusTempResponse>;
   /** {@link SyncPrometheusTemplate 同步模板到实例或者集群}({@link SyncPrometheusTemplateRequest 请求参数}): {@link SyncPrometheusTemplateResponse 返回参数} */
   SyncPrometheusTemplate(data: SyncPrometheusTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<SyncPrometheusTemplateResponse>;
+  /** {@link UninstallClusterRelease 集群删除应用}({@link UninstallClusterReleaseRequest 请求参数}): {@link UninstallClusterReleaseResponse 返回参数} */
+  UninstallClusterRelease(data: UninstallClusterReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallClusterReleaseResponse>;
   /** {@link UninstallEdgeLogAgent 卸载边缘日志采集组件}({@link UninstallEdgeLogAgentRequest 请求参数}): {@link UninstallEdgeLogAgentResponse 返回参数} */
   UninstallEdgeLogAgent(data: UninstallEdgeLogAgentRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallEdgeLogAgentResponse>;
   /** {@link UninstallLogAgent 卸载日志采集组件}({@link UninstallLogAgentRequest 请求参数}): {@link UninstallLogAgentResponse 返回参数} */
@@ -5317,6 +5595,8 @@ declare interface Tke {
   UpdateTKEEdgeCluster(data: UpdateTKEEdgeClusterRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTKEEdgeClusterResponse>;
   /** {@link UpgradeClusterInstances 集群节点升级}({@link UpgradeClusterInstancesRequest 请求参数}): {@link UpgradeClusterInstancesResponse 返回参数} */
   UpgradeClusterInstances(data: UpgradeClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeClusterInstancesResponse>;
+  /** {@link UpgradeClusterRelease 集群升级应用}({@link UpgradeClusterReleaseRequest 请求参数}): {@link UpgradeClusterReleaseResponse 返回参数} */
+  UpgradeClusterRelease(data: UpgradeClusterReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeClusterReleaseResponse>;
 }
 
 export declare type Versions = ["2018-05-25"];

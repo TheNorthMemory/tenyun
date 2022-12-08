@@ -908,6 +908,12 @@ declare interface Service {
   ServiceLimit: ServiceLimit | null;
   /** 定时停止的配置 */
   ScheduledAction: ScheduledAction | null;
+  /** 服务创建失败的原因，创建成功后该字段为默认值 CREATE_SUCCEED */
+  CreateFailedReason: string | null;
+  /** 预付费服务对应的资源组名字 */
+  ResourceGroupName: string | null;
+  /** 服务的标签 */
+  Tags: Tag[] | null;
 }
 
 /** 服务的调用信息，服务组下唯一 */
