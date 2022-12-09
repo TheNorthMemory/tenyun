@@ -10,7 +10,7 @@ declare interface AccelerateType {
 
 /** 精准防护条件 */
 declare interface AclCondition {
-  /** 匹配字段，取值有：host：请求域名；sip：客户端IP；ua：User-Agent；cookie：会话 Cookie；cgi：CGI 脚本；xff：XFF 扩展头部；url：请求 URL；accept：请求内容类型；method：请求方式；header：请求头部；sip_proto：网络层协议。 */
+  /** 匹配字段，取值有：host：请求域名；sip：客户端IP；ua：User-Agent；cookie：会话 Cookie；cgi：CGI 脚本；xff：XFF 扩展头部；url：请求 URL；accept：请求内容类型；method：请求方式；header：请求头部；app_proto：应用层协议；sip_proto：网络层协议。 */
   MatchFrom: string;
   /** 匹配字符串。当 MatchFrom 为 header 时，可以填入 header 的 key 作为参数。 */
   MatchParam: string;
@@ -204,26 +204,26 @@ declare interface BotLog {
   Domain: string;
   /** URI。 */
   RequestUri: string;
-  /** 攻击类型。 */
-  AttackType: string | null;
   /** 请求方法。 */
   RequestMethod: string;
   /** 攻击内容。 */
   AttackContent: string;
-  /** 攻击等级。 */
-  RiskLevel: string | null;
-  /** 规则ID。 */
-  RuleId: number | null;
   /** IP所在国家iso-3166中alpha-2编码，编码信息请参考[ISO-3166](https://git.woa.com/edgeone/iso-3166/blob/master/all/all.json)。 */
   SipCountryCode: string;
-  /** 请求（事件）ID。 */
+  /** user agent。 */
+  Ua: string;
+  /** 攻击事件ID。 */
   EventId: string;
+  /** 规则ID。 */
+  RuleId: number | null;
+  /** 攻击类型。 */
+  AttackType: string | null;
   /** 处置方式。 */
   DisposalMethod: string | null;
   /** HTTP日志。 */
   HttpLog: string | null;
-  /** user agent。 */
-  Ua: string;
+  /** 攻击等级。 */
+  RiskLevel: string | null;
   /** 检出方法。 */
   DetectionMethod: string | null;
   /** 置信度。 */
@@ -234,6 +234,8 @@ declare interface BotLog {
   RuleDetailList: SecRuleRelatedInfo[] | null;
   /** Bot标签。 */
   Label: string | null;
+  /** 日志所属的区域。 */
+  Area: string | null;
 }
 
 /** Bot 规则，下列规则ID可参考接口 DescribeBotManagedRules返回的ID信息 */
@@ -1036,14 +1038,18 @@ declare interface IpTableRule {
   Action: string;
   /** 根据类型匹配，取值有：ip：对ip进行匹配；area：对ip所属地区匹配。 */
   MatchFrom: string;
-  /** 匹配内容。 */
-  MatchContent: string;
+  /** 规则的匹配方式，默认为空代表等于。取值有： is_emty：配置为空； not_exists：配置为不存在； include：包含； not_include：不包含； equal：等于； not_equal：不等于。 */
+  Operator?: string | null;
   /** 规则id。仅出参使用。 */
   RuleID?: number;
   /** 更新时间。仅出参使用。 */
   UpdateTime?: string;
   /** 规则启用状态，当返回为null时，为启用。取值有： on：启用； off：未启用。 */
   Status?: string | null;
+  /** 规则名。 */
+  RuleName?: string | null;
+  /** 匹配内容。当 Operator为is_emty 或not_exists时，此值允许为空。 */
+  MatchContent?: string;
 }
 
 /** Ipv6访问配置 */
@@ -1376,6 +1382,8 @@ declare interface RateLimitIntelligence {
   Switch: string;
   /** 执行动作，取值有：monitor：观察；alg：挑战。 */
   Action: string;
+  /** 规则id，仅出参使用。 */
+  RuleId?: number;
 }
 
 /** 速率限制智能客户端过滤规则详情 */
@@ -1652,12 +1660,12 @@ declare interface SecEntryValue {
 
 /** 命中规则信息 */
 declare interface SecHitRuleInfo {
+  /** 站点ID。 */
+  ZoneId: string;
   /** 规则ID。 */
   RuleId: number;
   /** 规则类型名称。 */
   RuleTypeName: string;
-  /** 执行动作（处置方式），取值有：trans ：通过 ；alg ：算法挑战 ；drop ：丢弃 ；ban ：封禁源ip ；redirect ：重定向 ；page ：返回指定页面 ；monitor ：观察 。 */
-  Action: string;
   /** 命中时间，采用unix秒级时间戳。 */
   HitTime: number;
   /** 请求数。 */
@@ -1666,8 +1674,16 @@ declare interface SecHitRuleInfo {
   Description: string;
   /** 子域名。 */
   Domain: string;
+  /** 执行动作（处置方式），取值有：trans ：通过 ；alg ：算法挑战 ；drop ：丢弃 ；ban ：封禁源ip ；redirect ：重定向 ；page ：返回指定页面 ；monitor ：观察 。 */
+  Action: string;
   /** Bot标签，取值有:evil_bot：恶意Bot；suspect_bot：疑似Bot；good_bot：正常Bot；normal：正常请求；none：未分类。 */
   BotLabel: string;
+  /** 规则是否启用。 */
+  RuleEnabled: boolean;
+  /** 规则是否启用监控告警。 */
+  AlarmEnabled: boolean;
+  /** 规则是否存在，取值有：true: 规则不存在；false: 规则存在。 */
+  RuleDeleted: boolean;
 }
 
 /** 安全规则（cc/waf/bot）相关信息 */
@@ -1686,6 +1702,14 @@ declare interface SecRuleRelatedInfo {
   RuleTypeName: string;
   /** 攻击内容。 */
   AttackContent: string | null;
+  /** 规则类型，取值有：waf: 托管规则；acl：自定义规则；rate：速率限制规则；bot：bot防护规则。 */
+  RuleType: string;
+  /** 规则是否开启。 */
+  RuleEnabled: boolean;
+  /** 规则是否存在，取值有：true: 规则不存在；false: 规则存在。 */
+  RuleDeleted: boolean;
+  /** 规则是否启用监控告警。 */
+  AlarmEnabled: boolean;
 }
 
 /** 安全配置 */
@@ -1718,6 +1742,28 @@ declare interface SecurityEntity {
   Entity: string;
   /** 类型，取值有： domain：7层子域名； application：4层应用名。 */
   EntityType: string;
+}
+
+/** 托管规则详情 */
+declare interface SecurityRule {
+  /** 规则id。 */
+  RuleId: number;
+  /** 规则描述。 */
+  Description: string;
+  /** 规则类型名。 */
+  RuleTypeName: string;
+  /** 等级描述。 */
+  RuleLevelDesc: string | null;
+  /** 规则类型id。 */
+  RuleTypeId: number | null;
+  /** 规则类型描述。 */
+  RuleTypeDesc?: string | null;
+  /** 规则标签。部分类型的规则不存在该参数。 */
+  RuleTags: string[] | null;
+  /** 状态，取值有：on：开启；off：关闭。为空时对应接口Status无意义，例如仅查询规则详情时。 */
+  Status: string | null;
+  /** 子域名/应用名 */
+  Entity: string | null;
 }
 
 /** 安全类型配置项。 */
@@ -2168,6 +2214,8 @@ declare interface WebLogs {
   RuleDetailList: SecRuleRelatedInfo[] | null;
   /** 请求类型。 */
   ReqMethod: string | null;
+  /** 日志所属区域。 */
+  Area: string | null;
 }
 
 /** WebSocket配置 */
@@ -3659,17 +3707,21 @@ declare interface DescribeSecurityPortraitRulesResponse {
 }
 
 declare interface DescribeSecurityRuleIdRequest {
-  /** 规则Id数组。 */
-  RuleIdList: number[];
   /** 规则类型，取值有：waf：web托管规则；acl：自定义规则；rate：速率限制规则；bot：Bot基础规则。 */
   RuleType: string;
   /** 子域名/应用名。 */
   Entity?: string;
+  /** 规则Id数组。 当为空时查询 子域名或者应用名下所有规则 */
+  RuleIdList?: number[];
+  /** 子域名数组。 */
+  Domains?: string[];
 }
 
 declare interface DescribeSecurityRuleIdResponse {
-  /** 规则列表。 */
-  WafGroupRules: WafGroupRule[];
+  /** 托管规则类型的规则列表。 */
+  WafGroupRules: WafGroupRule[] | null;
+  /** 自定义规则、速率限制、Bot规则的规则列表。 */
+  SecurityRules: SecurityRule[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -9083,7 +9135,7 @@ declare interface Teo {
   DescribeTopL7CacheData(data: DescribeTopL7CacheDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopL7CacheDataResponse>;
   /** {@link DescribeWebManagedRulesData 查询WAF攻击时序数据}({@link DescribeWebManagedRulesDataRequest 请求参数}): {@link DescribeWebManagedRulesDataResponse 返回参数} */
   DescribeWebManagedRulesData(data: DescribeWebManagedRulesDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebManagedRulesDataResponse>;
-  /** {@link DescribeWebManagedRulesHitRuleDetail 查询WAF攻击命中规则详情}({@link DescribeWebManagedRulesHitRuleDetailRequest 请求参数}): {@link DescribeWebManagedRulesHitRuleDetailResponse 返回参数} */
+  /** {@link DescribeWebManagedRulesHitRuleDetail 查询Web攻击命中规则详情}({@link DescribeWebManagedRulesHitRuleDetailRequest 请求参数}): {@link DescribeWebManagedRulesHitRuleDetailResponse 返回参数} */
   DescribeWebManagedRulesHitRuleDetail(data: DescribeWebManagedRulesHitRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebManagedRulesHitRuleDetailResponse>;
   /** {@link DescribeWebManagedRulesLog 查询Web攻击日志}({@link DescribeWebManagedRulesLogRequest 请求参数}): {@link DescribeWebManagedRulesLogResponse 返回参数} */
   DescribeWebManagedRulesLog(data: DescribeWebManagedRulesLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebManagedRulesLogResponse>;

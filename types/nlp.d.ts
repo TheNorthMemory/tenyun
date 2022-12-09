@@ -133,7 +133,7 @@ declare interface AutoSummarizationRequest {
 
 declare interface AutoSummarizationResponse {
   /** 文本摘要结果 */
-  Summary?: string;
+  Summary: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -149,9 +149,9 @@ declare interface ChatBotRequest {
 
 declare interface ChatBotResponse {
   /** 闲聊回复 */
-  Reply?: string;
+  Reply: string;
   /** 对于当前输出回复的自信度 */
-  Confidence?: number;
+  Confidence: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -337,13 +337,13 @@ declare interface SentimentAnalysisRequest {
 
 declare interface SentimentAnalysisResponse {
   /** 正面情感概率 */
-  Positive?: number;
+  Positive: number;
   /** 中性情感概率，当输入参数Mode取值为3class时有效，否则值为空 */
-  Neutral?: number | null;
+  Neutral: number | null;
   /** 负面情感概率 */
-  Negative?: number;
+  Negative: number;
   /** 情感分类结果：1、positive，表示正面情感2、negative，表示负面情感3、neutral，表示中性、无情感 */
-  Sentiment?: string;
+  Sentiment: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -397,9 +397,9 @@ declare interface TextCorrectionRequest {
 
 declare interface TextCorrectionResponse {
   /** 纠错详情 */
-  CCITokens?: CCIToken[] | null;
+  CCITokens: CCIToken[] | null;
   /** 纠错后的文本 */
-  ResultText?: string;
+  ResultText: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

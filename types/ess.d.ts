@@ -484,6 +484,8 @@ declare interface Staff {
   CreatedOn?: number;
   /** 员工实名时间戳 */
   VerifiedOn?: number | null;
+  /** 员工是否离职：0-未离职，1-离职 */
+  QuiteJob?: number | null;
 }
 
 /** 集成版企业角色信息 */

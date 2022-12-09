@@ -1893,11 +1893,11 @@ declare interface CreateAlarmPolicyResponse {
 }
 
 declare interface CreateAlertRuleRequest {
-  /** Prometheus 实例 ID */
+  /** Prometheus 实例 ID，例如：prom-abcd1234 */
   InstanceId: string;
   /** 规则名称 */
   RuleName: string;
-  /** 规则表达式 */
+  /** 规则表达式，可参考告警规则说明 */
   Expr: string;
   /** 告警通知模板 ID 列表 */
   Receivers: string[];
@@ -2073,11 +2073,11 @@ declare interface CreatePrometheusMultiTenantInstancePostPayModeResponse {
 }
 
 declare interface CreatePrometheusScrapeJobRequest {
-  /** 实例 ID */
+  /** Prometheus 实例 ID，例如：prom-abcd1234 */
   InstanceId: string;
-  /** Agent ID */
+  /** Agent ID，例如：agent-abcd1234，可在控制台 Agent 管理中获取 */
   AgentId: string;
-  /** 任务内容 */
+  /** 抓取任务配置，格式：job_name:xx */
   Config?: string;
 }
 
@@ -2283,7 +2283,7 @@ declare interface DeleteSSOAccountResponse {
 }
 
 declare interface DeleteServiceDiscoveryRequest {
-  /** Prometheus 实例 ID */
+  /** Prometheus 实例 ID，例如：prom-sdfk2342a */
   InstanceId: string;
   /** 类型是 TKE，为对应的腾讯云容器服务集群 ID */
   KubeClusterId: string;
@@ -2767,7 +2767,7 @@ declare interface DescribeGrafanaChannelsResponse {
 }
 
 declare interface DescribeGrafanaConfigRequest {
-  /** 实例 ID */
+  /** Grafana 实例 ID，例如：grafana-12345678 */
   InstanceId: string;
 }
 
@@ -2855,7 +2855,7 @@ declare interface DescribeGrafanaNotificationChannelsResponse {
 }
 
 declare interface DescribeGrafanaWhiteListRequest {
-  /** 实例 ID */
+  /** Grafana 实例 ID，例如：grafana-abcdefgh */
   InstanceId: string;
 }
 
@@ -2867,9 +2867,9 @@ declare interface DescribeGrafanaWhiteListResponse {
 }
 
 declare interface DescribeInstalledPluginsRequest {
-  /** 实例 ID */
+  /** Grafana 实例 ID，例如：grafana-kleu3gt0 */
   InstanceId: string;
-  /** 按插件 ID 过滤 */
+  /** 按插件 ID 过滤，例如：grafana-piechart-panel，可通过接口 DescribeInstalledPlugins 查看已安装的插件 ID */
   PluginId?: string;
 }
 
@@ -3183,9 +3183,9 @@ declare interface DescribeRecordingRulesResponse {
 }
 
 declare interface DescribeSSOAccountRequest {
-  /** 实例ID */
+  /** Grafana 实例 ID，例如：grafana-abcdefgh */
   InstanceId: string;
-  /** 按账号 UIN 进行过滤 */
+  /** 填写对应的账号 ID，将会按账号 ID 进行过滤，例如：10000 */
   UserId?: string;
 }
 
@@ -3255,9 +3255,9 @@ declare interface DestroyPrometheusInstanceResponse {
 }
 
 declare interface EnableGrafanaInternetRequest {
-  /** 实例 ID */
+  /** Grafana 实例 ID，例如：grafana-kleu3gt0 */
   InstanceID: string;
-  /** 开启或关闭 */
+  /** 开启或关闭公网访问，true为开启，false 为不开启 */
   EnableInternet: boolean;
 }
 
@@ -3267,9 +3267,9 @@ declare interface EnableGrafanaInternetResponse {
 }
 
 declare interface EnableGrafanaSSORequest {
-  /** 是否开启 SSO */
+  /** 是否开启 SSO，true为开启，false 为不开启 */
   EnableSSO: boolean;
-  /** 实例 ID */
+  /** Grafana 实例 ID，例如：grafana-abcdefgh */
   InstanceId: string;
 }
 
@@ -3279,9 +3279,9 @@ declare interface EnableGrafanaSSOResponse {
 }
 
 declare interface EnableSSOCamCheckRequest {
-  /** 实例ID */
+  /** Grafana 实例 ID，例如：grafana-abcdefgh */
   InstanceId: string;
-  /** 是否开启cam鉴权 */
+  /** 是否开启 cam 鉴权，true为开启，false 为不开启 */
   EnableSSOCamCheck: boolean;
 }
 
@@ -3643,9 +3643,9 @@ declare interface UninstallGrafanaDashboardResponse {
 }
 
 declare interface UninstallGrafanaPluginsRequest {
-  /** 插件 ID 数组 */
+  /** 插件 ID 数组，例如"PluginIds": [ "grafana-clock-panel" ]，可通过 DescribePluginOverviews 获取 PluginId */
   PluginIds: string[];
-  /** 实例 ID */
+  /** Grafana 实例 ID，例如：grafana-abcdefg */
   InstanceId: string;
 }
 
@@ -3769,11 +3769,11 @@ declare interface UpdateGrafanaIntegrationResponse {
 }
 
 declare interface UpdateGrafanaNotificationChannelRequest {
-  /** 通道 ID */
+  /** 通道 ID，例如：nchannel-abcd1234 */
   ChannelId: string;
-  /** 实例 ID */
+  /** Grafana 实例 ID，例如：grafana-12345678 */
   InstanceId: string;
-  /** 渠道名 */
+  /** 告警通道名称，例如：test */
   ChannelName: string;
   /** 接受告警通道 ID 数组 */
   Receivers: string[];
@@ -3789,9 +3789,9 @@ declare interface UpdateGrafanaNotificationChannelResponse {
 }
 
 declare interface UpdateGrafanaWhiteListRequest {
-  /** 实例名 */
+  /** Grafana 实例 ID，例如：grafana-abcdefgh */
   InstanceId: string;
-  /** 白名单数组 */
+  /** 白名单数组，输入公网域名 IP ，例如：127.0.0.1，可通过接口 DescribeGrafanaWhiteList 查看 */
   Whitelist: string[];
 }
 
@@ -3801,9 +3801,9 @@ declare interface UpdateGrafanaWhiteListResponse {
 }
 
 declare interface UpdatePrometheusAgentStatusRequest {
-  /** 实例 ID */
+  /** Prometheus 实例 ID，例如：prom-abcd1234 */
   InstanceId: string;
-  /** Agent ID 列表 */
+  /** Agent ID 列表，例如：agent-abcd1234，可在控制台 Agent 管理中获取 */
   AgentIds: string[];
   /** 要更新的状态 1= 开启 2= 关闭 */
   Status: number;
@@ -3815,13 +3815,13 @@ declare interface UpdatePrometheusAgentStatusResponse {
 }
 
 declare interface UpdatePrometheusScrapeJobRequest {
-  /** 实例 ID */
+  /** Prometheus 实例 ID，例如：prom-abcd1234 */
   InstanceId: string;
-  /** Agent ID */
+  /** Agent ID，例如：agent-abcd1234，可在控制台 Agent 管理中获取 */
   AgentId: string;
-  /** 抓取任务 ID */
+  /** 抓取任务 ID，例如：job-abcd1234，可在控制台 Agent 管理-抓取任务配置中获取 */
   JobId: string;
-  /** 抓取任务配置 */
+  /** 抓取任务配置，格式：job_name:xx */
   Config: string;
 }
 
@@ -3851,9 +3851,9 @@ declare interface UpdateRecordingRuleResponse {
 }
 
 declare interface UpdateSSOAccountRequest {
-  /** 示例ID */
+  /** Grafana 实例 ID，例如：grafana-abcdefgh */
   InstanceId: string;
-  /** 用户账号ID */
+  /** 用户账号 ID ，例如：10000000 */
   UserId: string;
   /** 权限 */
   Role?: GrafanaAccountRole[];
@@ -3899,9 +3899,9 @@ declare interface UpgradeGrafanaDashboardResponse {
 }
 
 declare interface UpgradeGrafanaInstanceRequest {
-  /** 实例 ID */
+  /** Grafana 实例 ID，例如：grafana-12345678 */
   InstanceId: string;
-  /** 版本别名 */
+  /** 版本别名，例如：v7.4.2 */
   Alias: string;
 }
 

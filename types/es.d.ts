@@ -1083,7 +1083,7 @@ declare interface DescribeInstancesRequest {
   Offset?: number;
   /** 分页大小，默认值20 */
   Limit?: number;
-  /** 排序字段1：实例ID2：实例名称3：可用区4：创建时间若orderKey未传递则按创建时间降序排序 */
+  /** 排序字段1：实例ID2：实例名称3：可用区4：创建时间若orderByKey未传递则按创建时间降序排序 */
   OrderByKey?: number;
   /** 排序方式0：升序1：降序若传递了orderByKey未传递orderByType, 则默认升序 */
   OrderByType?: number;
@@ -1093,7 +1093,7 @@ declare interface DescribeInstancesRequest {
   IpList?: string[];
   /** 可用区列表 */
   ZoneList?: string[];
-  /** 健康状态筛列表 */
+  /** 健康状态筛列表:0表示绿色，1表示黄色，2表示红色,-1表示未知 */
   HealthStatus?: number[];
   /** Vpc列表 筛选项 */
   VpcIds?: string[];

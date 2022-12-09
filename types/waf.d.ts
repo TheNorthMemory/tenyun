@@ -284,6 +284,10 @@ declare interface DomainsPartInfo {
   Ciphers: number[] | null;
   /** 模版 */
   CipherTemplate: number | null;
+  /** 300s */
+  ProxyReadTimeout: number | null;
+  /** 300s */
+  ProxySendTimeout: number | null;
 }
 
 /** 下载攻击日志记录数据项 */
@@ -416,6 +420,10 @@ declare interface InstanceInfo {
   BotQPS?: BotQPS | null;
   /** qps弹性计费上限 */
   ElasticBilling?: number | null;
+  /** 攻击日志投递开关 */
+  AttackLogPost?: number | null;
+  /** 带宽峰值 */
+  MaxBandwidth?: number | null;
 }
 
 /** 数据封装 */
@@ -655,6 +663,10 @@ declare interface AddSpartaProtectionRequest {
   Ciphers?: number[];
   /** 0:不支持选择：默认模版 1:通用型模版 2:安全型模版 3:自定义模版 */
   CipherTemplate?: number;
+  /** 300s */
+  ProxyReadTimeout?: number;
+  /** 300s */
+  ProxySendTimeout?: number;
 }
 
 declare interface AddSpartaProtectionResponse {

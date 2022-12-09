@@ -1674,6 +1674,36 @@ declare interface DailyPlayStatInfo {
   Traffic: number;
 }
 
+/** 获取文件属性任务信息 */
+declare interface DescribeFileAttributesTask {
+  /** 任务 ID。 */
+  TaskId: string;
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status: string;
+  /** 错误码，0 表示成功，其他值表示失败：40000：输入参数不合法，请检查输入参数；60000：源文件错误（如视频数据损坏），请确认源文件是否正常；70000：内部服务错误，建议重试。 */
+  ErrCode: number;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
+  ErrCodeExt: string;
+  /** 错误信息。 */
+  Message: string;
+  /** 任务进度，取值范围 [0-100] 。 */
+  Progress: number;
+  /** 媒体文件 ID。 */
+  FileId: string;
+  /** 获取媒体文件属性任务的输出。 */
+  Output: DescribeFileAttributesTaskOutput | null;
+  /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+  SessionId: string;
+  /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+  SessionContext: string;
+}
+
+/** 获取文件属性任务输出 */
+declare interface DescribeFileAttributesTaskOutput {
+  /** 媒体文件的 Md5 值。 */
+  Md5: string;
+}
+
 /** 域名信息 */
 declare interface DomainDetailInfo {
   /** 域名名称。 */
@@ -1834,7 +1864,7 @@ declare interface EmptyTrackItem {
 declare interface EventContent {
   /** 事件句柄，调用方必须调用 ConfirmEvents 来确认消息已经收到，确认有效时间 30 秒。失效后，事件可重新被获取。 */
   EventHandle: string;
-  /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；WechatPublishComplete：微信发布完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。FastClipMediaComplete：快速剪辑完成；ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
+  /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；WechatPublishComplete：微信发布完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。FastClipMediaComplete：快速剪辑完成；ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；DescribeFileAttributesComplete：获取文件属性完成；兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
   EventType: string;
   /** 视频上传完成事件，当事件类型为 NewFileUpload 时有效。 */
   FileUploadEvent: FileUploadTask | null;
@@ -1874,6 +1904,8 @@ declare interface EventContent {
   ReviewAudioVideoCompleteEvent: ReviewAudioVideoTask | null;
   /** 该字段已无效。 */
   ReduceMediaBitrateCompleteEvent: ReduceMediaBitrateTask | null;
+  /** 获取文件属性完成事件，当事件类型为 DescribeFileAttributesComplete 时有效。 */
+  DescribeFileAttributesCompleteEvent: DescribeFileAttributesTask | null;
 }
 
 /** 提取溯源水印任务。 */
@@ -2566,6 +2598,8 @@ declare interface MediaMetaData {
   VideoDuration: number;
   /** 音频时长，单位：秒。 */
   AudioDuration: number;
+  /** 媒体文件的 Md5 值。注意：如需要获取媒体文件的 Md5，调用 DescribeFileAttributes 接口，待任务执行完成后获取。 */
+  Md5: string;
 }
 
 /** 小程序音视频审核概要元信息 */
@@ -3624,6 +3658,10 @@ declare interface ReviewAudioVideoSegmentItem {
   Text: string;
   /** 当 Form 为 OCR 或 ASR 时有效，表示嫌疑片段命中的违规关键词列表。 */
   KeywordSet: string[];
+  /** 嫌疑图片 URL （图片不会永久存储，到达 PicUrlExpireTime 时间点后图片将被删除）。 */
+  Url: string;
+  /** 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  PicUrlExpireTime: string;
 }
 
 /** 音视频审核任务信息。 */
@@ -6104,7 +6142,7 @@ declare interface DescribeTaskDetailRequest {
 }
 
 declare interface DescribeTaskDetailResponse {
-  /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务； ReviewAudioVideo：音视频审核任务。 */
+  /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务； ReviewAudioVideo：音视频审核任务。 */
   TaskType: string;
   /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成。 */
   Status: string;
@@ -6146,6 +6184,8 @@ declare interface DescribeTaskDetailResponse {
   ReviewAudioVideoTask: ReviewAudioVideoTask | null;
   /** 该字段已无效。 */
   ReduceMediaBitrateTask: ReduceMediaBitrateTask | null;
+  /** 获取文件属性任务信息，仅当 TaskType 为 DescribeFileAttributes，该字段有值。 */
+  DescribeFileAttributesTask: DescribeFileAttributesTask | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

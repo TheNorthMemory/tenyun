@@ -146,10 +146,12 @@ declare interface CertificateInput {
 declare interface CertificateOutput {
   /** 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证 */
   SSLMode: string;
-  /** 服务端证书的 ID。 */
+  /** 服务端证书的ID。 */
   CertId: string;
   /** 客户端证书的 ID。 */
   CertCaId: string | null;
+  /** 多本服务器证书场景扩展的服务器证书ID。 */
+  ExtCertIds: string[] | null;
 }
 
 /** 传统型负载均衡后端服务的健康状态 */
@@ -532,6 +534,8 @@ declare interface Listener {
   DeregisterTargetRst: boolean | null;
   /** 监听器的属性 */
   AttrFlags: string[] | null;
+  /** 绑定的目标组列表 */
+  TargetGroupList: BasicTargetGroupInfo[] | null;
 }
 
 /** 监听器上绑定的后端服务的信息 */
@@ -760,6 +764,12 @@ declare interface LoadBalancerDetail {
   TargetHealth: string | null;
   /** 转发规则的域名列表。 */
   Domains: string | null;
+  /** 多可用区负载均衡实例所选备区 */
+  SlaveZone: string[] | null;
+  /** 内网负载均衡实例所在可用区，由白名单CLB_Internal_Zone控制 */
+  Zones: string[] | null;
+  /** 是否开启SNI特性（本参数仅对于HTTPS监听器有意义）。 */
+  SniSwitch: number | null;
 }
 
 /** 负载均衡实例的健康检查状态 */
@@ -948,6 +958,8 @@ declare interface RuleOutput {
   QuicStatus: string | null;
   /** 转发规则的域名列表。 */
   Domains: string[] | null;
+  /** 绑定的目标组列表 */
+  TargetGroupList: BasicTargetGroupInfo[] | null;
 }
 
 /** HTTP/HTTPS监听器下的转发规则绑定的后端服务信息 */
@@ -1114,6 +1126,8 @@ declare interface ZoneInfo {
   ZoneRegion: string | null;
   /** 可用区是否是LocalZone可用区，如：false */
   LocalZone: boolean | null;
+  /** 可用区是否是EdgeZone可用区，如：false */
+  EdgeZone: boolean | null;
 }
 
 /** 可用区资源列表 */

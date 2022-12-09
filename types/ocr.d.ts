@@ -394,6 +394,8 @@ declare interface SealInfo {
   Location: Rect;
   /** 印章其它文本内容 */
   OtherTexts: string[];
+  /** 印章类型，表示为:圆形印章：0椭圆形印章：1方形印章：2菱形印章：3三角形印章：4 */
+  SealShape: string;
 }
 
 /** 轮船票字段信息 */

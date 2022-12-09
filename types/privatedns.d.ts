@@ -136,6 +136,14 @@ declare interface PrivateZone {
   IsCustomTld: boolean | null;
   /** CNAME加速状态：开通：ENABLED, 关闭，DISABLED */
   CnameSpeedupStatus: string;
+  /** 转发规则名称 */
+  ForwardRuleName: string | null;
+  /** 转发规则类型：云上到云下，DOWN；云下到云上，UP，目前只支持DOWN */
+  ForwardRuleType: string | null;
+  /** 转发的地址 */
+  ForwardAddress: string | null;
+  /** 终端节点名称 */
+  EndPointName: string | null;
 }
 
 /** 私有域信息 */

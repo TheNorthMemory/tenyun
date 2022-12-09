@@ -436,6 +436,8 @@ declare interface NamespaceInfo {
   Locked: number | null;
   /** 标签 */
   Tags: Tag[] | null;
+  /** 环境类型：test、pre、prod */
+  EnvType: string | null;
 }
 
 /** 命名空间分页 */
@@ -644,6 +646,14 @@ declare interface ServiceVersionBrief {
   CreateDate: string | null;
 }
 
+/** 查询过滤器 */
+declare interface SortType {
+  /** 排序字段名称 */
+  Key?: string;
+  /** 0：升序，1：倒序 */
+  Type?: number;
+}
+
 /** 存储卷配置 */
 declare interface StorageConf {
   /** 存储卷名称 */
@@ -766,6 +776,10 @@ declare interface TemNamespaceInfo {
   Tags: Tag[] | null;
   /** 资源是否有权限 */
   HasAuthority: boolean | null;
+  /** 环境类型: test、pre、prod */
+  EnvType: string | null;
+  /** 地域码 */
+  RegionId: string | null;
 }
 
 /** 服务 */
@@ -1145,6 +1159,10 @@ declare interface CreateEnvironmentRequest {
   EnableTswTraceService?: boolean;
   /** 标签 */
   Tags?: Tag[];
+  /** 环境类型：test、pre、prod */
+  EnvType?: string;
+  /** 创建环境的region */
+  CreateRegion?: string;
 }
 
 declare interface CreateEnvironmentResponse {
@@ -1467,6 +1485,8 @@ declare interface DescribeApplicationsRequest {
   Keyword?: string;
   /** 查询过滤器 */
   Filters?: QueryFilter[];
+  /** 排序字段 */
+  SortInfo?: SortType;
 }
 
 declare interface DescribeApplicationsResponse {
@@ -1577,6 +1597,8 @@ declare interface DescribeEnvironmentsRequest {
   SourceChannel?: number;
   /** 查询过滤器 */
   Filters?: QueryFilter[];
+  /** 排序字段 */
+  SortInfo?: SortType;
 }
 
 declare interface DescribeEnvironmentsResponse {
@@ -1885,6 +1907,8 @@ declare interface ModifyEnvironmentRequest {
   SubnetIds?: string[];
   /** 来源渠道 */
   SourceChannel?: number;
+  /** 环境类型：test、pre、prod */
+  EnvType?: string;
 }
 
 declare interface ModifyEnvironmentResponse {
