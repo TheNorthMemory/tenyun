@@ -324,7 +324,7 @@ declare interface FlowDetailInfo {
   FlowApproverInfos: FlowApproverDetail[];
 }
 
-/** 电子文档的控件填充信息 */
+/** 电子文档的控件填充信息。按照控件类型进行相应的填充。【数据表格传参说明】当模板的 ComponentType='DYNAMIC_TABLE'时（渠道版或集成版），FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）输入示例1：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例2（表格表头宽度比例配置）：```{ "headers":[ { "content":"head1", "widthPercent": 30 }, { "content":"head2", "widthPercent": 30 }, { "content":"head3", "widthPercent": 40 } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 |表格参数headers说明widthPercent Integer 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35content String 表头单元格内容，字数不超过100 */
 declare interface FormField {
   /** 控件填充vaule，ComponentType和传入值类型对应关系：TEXT - 文本内容MULTI_LINE_TEXT - 文本内容CHECK_BOX - true/falseFILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取SELECTOR - 选项值DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525 */
   ComponentValue: string;
@@ -859,7 +859,7 @@ declare interface CreateMultiFlowSignQRCodeResponse {
 declare interface CreatePrepareFlowRequest {
   /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
-  /** 资源Id,通过上传uploadfile接口获得 */
+  /** 资源Id，通过多文件上传（UploadFiles）接口获得 */
   ResourceId: string;
   /** 合同名称 */
   FlowName: string;
@@ -1139,18 +1139,18 @@ declare interface StartFlowResponse {
 declare interface UploadFilesRequest {
   /** 文件对应业务类型1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html3. SEAL - 印章； 文件类型：.jpg/.jpeg/.png */
   BusinessType: string;
-  /** 调用方信息 */
+  /** 调用方信息，其中OperatorId为必填字段，即用户的UserId */
   Caller?: Caller;
   /** 上传文件内容数组，最多支持20个文件 */
   FileInfos?: UploadFile[];
-  /** 不再使用，上传文件链接数组，最多支持20个URL */
-  FileUrls?: string;
-  /** 此参数只对 PDF 文件有效。是否将pdf灰色矩阵置白true--是，处理置白false--否，不处理 */
-  CoverRect?: boolean;
   /** 文件类型， 默认通过文件内容解析得到文件类型，客户可以显示的说明上传文件的类型。如：PDF 表示上传的文件 xxx.pdf的文件类型是 PDF */
   FileType?: string;
+  /** 此参数只对 PDF 文件有效。是否将pdf灰色矩阵置白true--是，处理置白默认为false--否，不处理 */
+  CoverRect?: boolean;
   /** 用户自定义ID数组，与上传文件一一对应 */
   CustomIds?: string[];
+  /** 不再使用，上传文件链接数组，最多支持20个URL */
+  FileUrls?: string;
 }
 
 declare interface UploadFilesResponse {

@@ -5758,6 +5758,28 @@ declare interface DescribeEventsStateResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFileAttributesRequest {
+  /** 媒体文件 ID */
+  FileId: string;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+  SessionId?: string;
+  /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+  SessionContext?: string;
+  /** 任务优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。 */
+  TasksPriority?: number;
+  /** 保留字段，特殊用途时使用。 */
+  ExtInfo?: string;
+}
+
+declare interface DescribeFileAttributesResponse {
+  /** 任务 ID 。 */
+  TaskId: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHeadTailTemplatesRequest {
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: number;
@@ -7583,6 +7605,8 @@ declare interface Vod {
   DescribeEventConfig(data?: DescribeEventConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventConfigResponse>;
   /** {@link DescribeEventsState 获取事件通知状态}({@link DescribeEventsStateRequest 请求参数}): {@link DescribeEventsStateResponse 返回参数} */
   DescribeEventsState(data?: DescribeEventsStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsStateResponse>;
+  /** {@link DescribeFileAttributes 获取文件属性}({@link DescribeFileAttributesRequest 请求参数}): {@link DescribeFileAttributesResponse 返回参数} */
+  DescribeFileAttributes(data: DescribeFileAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileAttributesResponse>;
   /** {@link DescribeHeadTailTemplates 获取片头片尾模板列表}({@link DescribeHeadTailTemplatesRequest 请求参数}): {@link DescribeHeadTailTemplatesResponse 返回参数} */
   DescribeHeadTailTemplates(data?: DescribeHeadTailTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHeadTailTemplatesResponse>;
   /** {@link DescribeImageProcessingTemplates 获取图片即时处理模板列表}({@link DescribeImageProcessingTemplatesRequest 请求参数}): {@link DescribeImageProcessingTemplatesResponse 返回参数} */
