@@ -94,7 +94,7 @@ declare interface ProbeTask {
   Name: string | null;
   /** 任务 ID */
   TaskId: string;
-  /** 任务类型 */
+  /** 拨测类型1 = 页面浏览 2 =文件上传 3 = 文件下载 4 = 端口性能 5 = 网络质量 6 =流媒体 即时拨测只支持页面浏览，网络质量，文件下载 */
   TaskType: number;
   /** 拨测节点列表 */
   Nodes: string[];
@@ -102,7 +102,7 @@ declare interface ProbeTask {
   Interval: number;
   /** 拨测参数 */
   Parameters: string;
-  /** 任务状态 */
+  /** 任务状态1 = 创建中 2 = 运行中 3 = 运行异常 4 = 暂停中 5 = 暂停异常 6 = 任务暂停 7 = 任务删除中 8 = 任务删除异常 9 = 任务删除 10 = 定时任务暂停中 */
   Status: number;
   /** 目标地址 */
   TargetAddress: string;
@@ -116,7 +116,7 @@ declare interface ProbeTask {
   CreatedAt: string;
   /** 定时任务cron表达式 */
   Cron: string | null;
-  /** 定时任务启动状态 */
+  /** 定时任务启动状态1 = 定时任务表达式生效 2 = 定时任务表达式未生效（一般为任务手动暂停） */
   CronState: number | null;
   /** 任务当前绑定的标签 */
   TagInfoList: KeyValuePair[] | null;

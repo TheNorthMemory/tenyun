@@ -2191,7 +2191,7 @@ declare interface AssignPrivateIpAddressesResponse {
 declare interface AssociateAddressRequest {
   /** 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：`eip-11112222`。 */
   AddressId: string;
-  /** 要绑定的实例 ID。实例 ID 形如：`ins-11112222`。可通过登录[控制台](https://console.cloud.tencent.com/cvm)查询，也可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。 */
+  /** 要绑定的实例 ID。实例 ID 形如：`ins-11112222`、`lb-11112222`。可通过登录[控制台](https://console.cloud.tencent.com/cvm)查询，也可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。 */
   InstanceId?: string;
   /** 要绑定的弹性网卡 ID。 弹性网卡 ID 形如：`eni-11112222`。`NetworkInterfaceId` 与 `InstanceId` 不可同时指定。弹性网卡 ID 可通过登录[控制台](https://console.cloud.tencent.com/vpc/eni)查询，也可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/api/215/15817)接口返回值中的`networkInterfaceId`获取。 */
   NetworkInterfaceId?: string;
@@ -6350,6 +6350,16 @@ declare interface ResetVpnGatewayInternetMaxBandwidthResponse {
   RequestId?: string;
 }
 
+declare interface ReturnNormalAddressesRequest {
+  /** 1 */
+  AddressIps?: string[];
+}
+
+declare interface ReturnNormalAddressesResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface SetCcnRegionBandwidthLimitsRequest {
   /** CCN实例ID。形如：ccn-f49l6u0z。 */
   CcnId: string;
@@ -7021,6 +7031,8 @@ declare interface Vpc {
   ResetVpnConnection(data: ResetVpnConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<ResetVpnConnectionResponse>;
   /** {@link ResetVpnGatewayInternetMaxBandwidth 调整VPN网关带宽上限}({@link ResetVpnGatewayInternetMaxBandwidthRequest 请求参数}): {@link ResetVpnGatewayInternetMaxBandwidthResponse 返回参数} */
   ResetVpnGatewayInternetMaxBandwidth(data: ResetVpnGatewayInternetMaxBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ResetVpnGatewayInternetMaxBandwidthResponse>;
+  /** {@link ReturnNormalAddresses 解绑并释放普通公网IP}({@link ReturnNormalAddressesRequest 请求参数}): {@link ReturnNormalAddressesResponse 返回参数} */
+  ReturnNormalAddresses(data?: ReturnNormalAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<ReturnNormalAddressesResponse>;
   /** {@link SetCcnRegionBandwidthLimits 设置云联网各地域出带宽上限或地域间上限}({@link SetCcnRegionBandwidthLimitsRequest 请求参数}): {@link SetCcnRegionBandwidthLimitsResponse 返回参数} */
   SetCcnRegionBandwidthLimits(data: SetCcnRegionBandwidthLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<SetCcnRegionBandwidthLimitsResponse>;
   /** {@link SetVpnGatewaysRenewFlag 设置VPNGW续费标记}({@link SetVpnGatewaysRenewFlagRequest 请求参数}): {@link SetVpnGatewaysRenewFlagResponse 返回参数} */

@@ -88,6 +88,8 @@ declare interface BGPIPInstance {
   AnycastOutPackRelation: AnycastOutPackRelation | null;
   /** 资源实例版本 */
   InstanceVersion: number | null;
+  /** 重保实例 */
+  ConvoyId: string | null;
 }
 
 /** 高防IP资产实例的规格信息 */
@@ -2019,7 +2021,7 @@ declare interface DescribeListBGPIPInstancesRequest {
   FilterEipEipAddressStatus?: string[];
   /** 是否只获取安全加速实例。填写时，只能填写1或者0。当填写1时，表示返回安全加速实例。当填写0时，表示返回非安全加速实例。 */
   FilterDamDDoSStatus?: number;
-  /** 获取特定状态的资源，运行中填idle，攻击中填attacking，封堵中填blocking */
+  /** 获取特定状态的资源，运行中填idle，攻击中填attacking，封堵中填blocking，试用资源填trial */
   FilterStatus?: string;
   /** 获取特定的实例Cname */
   FilterCname?: string;
@@ -2029,6 +2031,8 @@ declare interface DescribeListBGPIPInstancesRequest {
   FilterTag?: TagFilter;
   /** 按照套餐类型进行过滤 */
   FilterPackType?: string[];
+  /** 重保护航搜索 */
+  FilterConvoy?: number;
 }
 
 declare interface DescribeListBGPIPInstancesResponse {
@@ -2069,6 +2073,10 @@ declare interface DescribeListBGPInstancesRequest {
   FilterChannelFlag?: number;
   /** 标签搜索 */
   FilterTag?: TagFilter;
+  /** 试用资源搜索，1: 应急防护资源；2：PLG试用资源 */
+  FilterTrialFlag?: number;
+  /** 重保护航搜索 */
+  FilterConvoy?: number;
 }
 
 declare interface DescribeListBGPInstancesResponse {

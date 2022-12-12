@@ -1384,6 +1384,30 @@ declare interface ResumeSyncJobResponse {
   RequestId?: string;
 }
 
+declare interface SkipCheckItemRequest {
+  /** 数据迁移任务ID */
+  JobId: string;
+  /** 需要跳过校验项的步骤id，需要通过DescribeMigrationCheckJob接口返回StepInfo[i].StepId字段获取，例如：["OptimizeCheck"] */
+  StepIds: string[];
+}
+
+declare interface SkipCheckItemResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface SkipSyncCheckItemRequest {
+  /** 任务id，如：sync-4ddgid2 */
+  JobId: string;
+  /** 需要跳过校验项的步骤id，需要通过`DescribeCheckSyncJobResult`接口返回StepInfos[i].StepId字段获取，例如：["OptimizeCheck"] */
+  StepIds: string[];
+}
+
+declare interface SkipSyncCheckItemResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface StartCompareRequest {
   /** 迁移任务 Id */
   JobId: string;
@@ -2211,6 +2235,10 @@ declare interface Dts {
   ResumeMigrateJob(data: ResumeMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeMigrateJobResponse>;
   /** {@link ResumeSyncJob 重试同步任务}({@link ResumeSyncJobRequest 请求参数}): {@link ResumeSyncJobResponse 返回参数} */
   ResumeSyncJob(data: ResumeSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeSyncJobResponse>;
+  /** {@link SkipCheckItem 跳过迁移校验检查项}({@link SkipCheckItemRequest 请求参数}): {@link SkipCheckItemResponse 返回参数} */
+  SkipCheckItem(data: SkipCheckItemRequest, config?: AxiosRequestConfig): AxiosPromise<SkipCheckItemResponse>;
+  /** {@link SkipSyncCheckItem 跳过同步校验检查项}({@link SkipSyncCheckItemRequest 请求参数}): {@link SkipSyncCheckItemResponse 返回参数} */
+  SkipSyncCheckItem(data: SkipSyncCheckItemRequest, config?: AxiosRequestConfig): AxiosPromise<SkipSyncCheckItemResponse>;
   /** {@link StartCompare 启动一致性校验任务}({@link StartCompareRequest 请求参数}): {@link StartCompareResponse 返回参数} */
   StartCompare(data: StartCompareRequest, config?: AxiosRequestConfig): AxiosPromise<StartCompareResponse>;
   /** {@link StartMigrateJob 启动数据迁移任务}({@link StartMigrateJobRequest 请求参数}): {@link StartMigrateJobResponse 返回参数} */

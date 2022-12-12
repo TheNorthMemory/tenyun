@@ -2438,6 +2438,8 @@ declare interface SealOCRResponse {
   OtherTexts: string[];
   /** 全部印章信息 */
   SealInfos: SealInfo[];
+  /** 印章类型，表示为：圆形印章：0椭圆形印章：1方形印章：2菱形印章：3三角形印章：4 */
+  SealShape: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

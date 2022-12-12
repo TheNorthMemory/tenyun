@@ -148,6 +148,8 @@ declare interface IndexMetaField {
   IndexSettingsField: IndexSettingsField | null;
   /** 索引所属集群APP ID */
   AppId: number | null;
+  /** 索引文档数 */
+  IndexDocs: number | null;
 }
 
 /** 索引自治字段 */

@@ -1671,7 +1671,7 @@ declare interface Emr {
   AddUsersForUserManager(data: AddUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<AddUsersForUserManagerResponse>;
   /** {@link CreateInstance 创建EMR实例}({@link CreateInstanceRequest 请求参数}): {@link CreateInstanceResponse 返回参数} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
-  /** {@link DeleteUserManagerUserList 删除用户列表（用户管理）}({@link DeleteUserManagerUserListRequest 请求参数}): {@link DeleteUserManagerUserListResponse 返回参数} */
+  /** {@link DeleteUserManagerUserList 删除用户列表}({@link DeleteUserManagerUserListRequest 请求参数}): {@link DeleteUserManagerUserListResponse 返回参数} */
   DeleteUserManagerUserList(data: DeleteUserManagerUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserManagerUserListResponse>;
   /** {@link DescribeClusterNodes 查询集群节点信息}({@link DescribeClusterNodesRequest 请求参数}): {@link DescribeClusterNodesResponse 返回参数} */
   DescribeClusterNodes(data: DescribeClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNodesResponse>;
