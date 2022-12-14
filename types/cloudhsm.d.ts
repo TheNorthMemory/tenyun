@@ -24,7 +24,7 @@ declare interface ResourceInfo {
   ResourceId: string | null;
   /** 资源名称 */
   ResourceName: string | null;
-  /** 资源状态 */
+  /** 资源状态，1-正常，2-隔离，3-销毁 */
   Status: number | null;
   /** 资源IP */
   Vip: string | null;
@@ -34,7 +34,7 @@ declare interface ResourceInfo {
   SubnetId: string | null;
   /** 资源所属HSM规格 */
   Model: string | null;
-  /** 资源类型 */
+  /** 云加密机类型id */
   VsmType: number | null;
   /** 地域Id */
   RegionId: number | null;

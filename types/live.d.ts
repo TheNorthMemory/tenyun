@@ -84,6 +84,8 @@ declare interface CallBackTemplateInfo {
   PornCensorshipNotifyUrl: string;
   /** 回调的鉴权 key。 */
   CallbackKey: string;
+  /** 推流异常回调 URL。 */
+  PushExceptionNotifyUrl: string | null;
 }
 
 /** 回调事件信息 */
@@ -1267,6 +1269,8 @@ declare interface CreateLiveCallbackTemplateRequest {
   CallbackKey?: string;
   /** 参数已弃用。 */
   StreamMixNotifyUrl?: string;
+  /** 推流异常回调 URL。 */
+  PushExceptionNotifyUrl?: string;
 }
 
 declare interface CreateLiveCallbackTemplateResponse {
@@ -3111,6 +3115,8 @@ declare interface ModifyLiveCallbackTemplateRequest {
   PornCensorshipNotifyUrl?: string;
   /** 回调 Key，回调 URL 公用，回调签名详见事件消息通知文档。[事件消息通知](/document/product/267/32744)。 */
   CallbackKey?: string;
+  /** 推流异常回调 URL。 */
+  PushExceptionNotifyUrl?: string;
 }
 
 declare interface ModifyLiveCallbackTemplateResponse {

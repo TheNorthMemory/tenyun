@@ -451,21 +451,25 @@ declare interface InstanceDeniedActions {
 /** 关于Lighthouse Instance实例的价格信息 */
 declare interface InstancePrice {
   /** 套餐单价原价。 */
-  OriginalBundlePrice: number;
+  OriginalBundlePrice?: number;
   /** 原价。 */
-  OriginalPrice: number;
+  OriginalPrice?: number;
   /** 折扣。 */
-  Discount: number;
+  Discount?: number;
   /** 折后价。 */
-  DiscountPrice: number;
+  DiscountPrice?: number;
+  /** 价格货币单位。取值范围CNY:人民币。USD:美元。 */
+  Currency?: string | null;
 }
 
 /** 实例价格详细信息 */
 declare interface InstancePriceDetail {
   /** 实例ID。 */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 询价信息。 */
-  InstancePrice: InstancePrice | null;
+  InstancePrice?: InstancePrice | null;
+  /** 折扣梯度详情，每个梯度包含的信息有：时长，折扣数，总价，折扣价，折扣详情（用户折扣、官网折扣、最终折扣）。 */
+  DiscountDetail?: DiscountDetail[] | null;
 }
 
 /** 实例可退还信息。 */

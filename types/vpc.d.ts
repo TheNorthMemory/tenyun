@@ -624,6 +624,8 @@ declare interface EndPointService {
   EndPointSet: EndPoint[] | null;
   /** 创建时间。 */
   CreateTime: string;
+  /** 挂载的PAAS服务类型，CLB,CDB,CRS */
+  ServiceType: string;
 }
 
 /** 过滤器 */

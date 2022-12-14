@@ -172,7 +172,7 @@ declare interface FlowApproverInfo {
   OpenId?: string;
   /** 企业签署方在同一渠道下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符； */
   OrganizationOpenId?: string;
-  /** 签署人类型PERSON-个人/自然人；PERSON_AUTO_SIGN-个人自动签（定制化场景下使用）；ORGANIZATION-企业（企业签署方或模版发起时的企业静默签）；ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。 */
+  /** 签署人类型PERSON-个人/自然人；PERSON_AUTO_SIGN-个人自动签（定制化场景下使用）；ORGANIZATION-企业（企业签署方或模板发起时的企业静默签）；ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。 */
   ApproverType?: string;
   /** 签署流程签署人在模板中对应的签署人Id；在非单方签署、以及非B2C签署的场景下必传，用于指定当前签署方在签署流程中的位置； */
   RecipientId?: string;
@@ -362,7 +362,7 @@ declare interface PdfVerifyResult {
 
 /** 合作企业经办人列表信息 */
 declare interface ProxyOrganizationOperator {
-  /** 对应Agent-ProxyOperator-OpenId。渠道平台自定义，对渠道子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（比如，可以使用经办人企业名+员工身份证的hash值，需要渠道平台保存），最大64位字符串 */
+  /** 对应Agent-ProxyOperator-OpenId。渠道平台自定义，对渠道子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（例如，可以使用经办人企业名+员工身份证的hash值，需要渠道平台保存），最大64位字符串 */
   Id: string;
   /** 经办人姓名，最大长度50个字符 */
   Name?: string;
@@ -566,10 +566,16 @@ declare interface TemplateInfo {
   CreatedOn: number;
   /** 模板的H5预览链接,可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。 */
   PreviewUrl: string | null;
-  /** 渠道模板ID */
-  ChannelTemplateId: string;
   /** 渠道版-模板PDF文件链接 */
   PdfUrl: string | null;
+  /** 关联的渠道模板ID */
+  ChannelTemplateId: string;
+  /** 关联的渠道模板名称 */
+  ChannelTemplateName: string | null;
+  /** 0-需要渠道子客手动领取渠道的模板(默认); 1-渠道自动设置子客模板 */
+  ChannelAutoSave: number | null;
+  /** 模板版本，全数字字符。默认为空，初始版本为yyyyMMdd001。 */
+  TemplateVersion: string | null;
 }
 
 /** 此结构体 (UploadFile) 用于描述多文件上传的文件信息。 */
@@ -973,7 +979,7 @@ declare interface CreateConsoleLoginUrlRequest {
   ProxyOrganizationName: string;
   /** 渠道子客企业经办人的姓名，最大长度50个字符 */
   ProxyOperatorName?: string;
-  /** 控制台指定模块，文件/合同管理:"DOCUMENT"，模板管理:"TEMPLATE"，印章管理:"SEAL"，组织架构/人员:"OPERATOR"，空字符串："账号信息" */
+  /** PC控制台指定模块，文件/合同管理:"DOCUMENT"，模板管理:"TEMPLATE"，印章管理:"SEAL"，组织架构/人员:"OPERATOR"，空字符串："账号信息"。 EndPoint为"CHANNEL"/"APP"只支持"SEAL"-印章管理 */
   Module?: string;
   /** 控制台指定模块Id */
   ModuleId?: string;

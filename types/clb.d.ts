@@ -288,6 +288,8 @@ declare interface Cluster {
   ClustersZone: ClustersZone | null;
   /** 集群版本 */
   ClustersVersion: string | null;
+  /** 集群容灾类型，如SINGLE-ZONE，DISASTER-RECOVERY，MUTUAL-DISASTER-RECOVERY */
+  DisasterRecoveryType: string | null;
 }
 
 /** 独占集群信息 */
@@ -314,6 +316,8 @@ declare interface ClusterResource {
   ClusterName: string;
   /** 集群的Isp属性，如："BGP","CMCC","CUCC","CTCC","INTERNAL"。 */
   Isp: string | null;
+  /** 集群所在的可用区 */
+  ClustersZone: ClustersZone | null;
 }
 
 /** 集群所在的可用区。 */
@@ -820,6 +824,16 @@ declare interface Resource {
   Type: string[];
   /** 运营商信息，如"CMCC", "CUCC", "CTCC", "BGP", "INTERNAL"。 */
   Isp: string;
+  /** 可用资源。 */
+  AvailabilitySet: ResourceAvailability[] | null;
+}
+
+/** 资源可用性 */
+declare interface ResourceAvailability {
+  /** 运营商内具体资源信息，如"CMCC", "CUCC", "CTCC", "BGP"。 */
+  Type: string;
+  /** 资源可用性，"Available"：可用，"Unavailable"：不可用 */
+  Availability: string;
 }
 
 /** 转发规则之间的重定向关系 */
@@ -1144,6 +1158,10 @@ declare interface ZoneResource {
   ZoneRegion: string;
   /** 可用区是否是LocalZone可用区，如：false */
   LocalZone: boolean;
+  /** 可用区资源的类型，SHARED表示共享资源，EXCLUSIVE表示独占资源。 */
+  ZoneResourceType: string;
+  /** 可用区是否是EdgeZone可用区，如：false */
+  EdgeZone: boolean;
 }
 
 declare interface AssociateTargetGroupsRequest {

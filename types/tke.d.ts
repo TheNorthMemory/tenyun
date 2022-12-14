@@ -2274,20 +2274,6 @@ declare interface CreateClusterInstancesResponse {
   RequestId?: string;
 }
 
-declare interface CreateClusterNodePoolFromExistingAsgRequest {
-  /** 集群ID */
-  ClusterId: string;
-  /** 伸缩组ID */
-  AutoscalingGroupId: string;
-}
-
-declare interface CreateClusterNodePoolFromExistingAsgResponse {
-  /** 节点池ID */
-  NodePoolId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
 declare interface CreateClusterNodePoolRequest {
   /** cluster id */
   ClusterId: string;
@@ -2595,6 +2581,12 @@ declare interface CreateImageCacheRequest {
   ImageCacheSize?: number;
   /** 镜像缓存保留时间天数，过期将会自动清理，默认为0，永不过期。 */
   RetentionDays?: number;
+  /** 指定拉取镜像仓库的镜像时不校验证书。如["harbor.example.com"]。 */
+  RegistrySkipVerifyList?: string[];
+  /** 指定拉取镜像仓库的镜像时使用 HTTP 协议。如["harbor.example.com"]。 */
+  RegistryHttpEndPointList?: string[];
+  /** 自定义制作镜像缓存过程中容器实例的宿主机上的 DNS。如："nameserver 4.4.4.4\nnameserver 8.8.8.8" */
+  ResolveConfig?: string;
 }
 
 declare interface CreateImageCacheResponse {
@@ -5261,8 +5253,6 @@ declare interface Tke {
   CreateClusterInstances(data: CreateClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterInstancesResponse>;
   /** {@link CreateClusterNodePool 创建节点池}({@link CreateClusterNodePoolRequest 请求参数}): {@link CreateClusterNodePoolResponse 返回参数} */
   CreateClusterNodePool(data: CreateClusterNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterNodePoolResponse>;
-  /** {@link CreateClusterNodePoolFromExistingAsg 从伸缩组创建节点池}({@link CreateClusterNodePoolFromExistingAsgRequest 请求参数}): {@link CreateClusterNodePoolFromExistingAsgResponse 返回参数} */
-  CreateClusterNodePoolFromExistingAsg(data: CreateClusterNodePoolFromExistingAsgRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterNodePoolFromExistingAsgResponse>;
   /** {@link CreateClusterRelease 集群安装应用}({@link CreateClusterReleaseRequest 请求参数}): {@link CreateClusterReleaseResponse 返回参数} */
   CreateClusterRelease(data: CreateClusterReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterReleaseResponse>;
   /** {@link CreateClusterRoute 创建集群路由}({@link CreateClusterRouteRequest 请求参数}): {@link CreateClusterRouteResponse 返回参数} */

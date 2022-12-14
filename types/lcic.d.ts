@@ -245,7 +245,7 @@ declare interface LoginUserResponse {
 declare interface ModifyAppRequest {
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId: number;
-  /** 回调地址。 */
+  /** 回调地址。端口目前仅支持80、443 */
   Callback?: string;
 }
 

@@ -550,6 +550,10 @@ declare interface TemplateInfo {
   OrganizationId?: string;
   /** 模板预览链接 */
   PreviewUrl?: string | null;
+  /** 模板版本。默认为空时，全数字字符，初始版本为yyyyMMdd001。 */
+  TemplateVersion?: string | null;
+  /** 模板是否已发布。true-已发布；false-未发布 */
+  Published?: boolean | null;
 }
 
 /** 此结构体 (UploadFile) 用于描述多文件上传的文件信息。 */
