@@ -163,6 +163,7 @@ export const SERVICE_VERSIONS = {
   npp: ['2019-08-23'],
   oceanus: ['2019-04-22'],
   ocr: ['2018-11-19'],
+  open: ['2018-12-25'],
   organization: ['2021-03-31', '2018-12-25'],
   partners: ['2018-03-21'],
   pds: ['2021-07-01'],
