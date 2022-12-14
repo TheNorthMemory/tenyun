@@ -143,6 +143,7 @@ import Nlp, { Versions as NlpVersions } from "./nlp";
 import Npp, { Versions as NppVersions } from "./npp";
 import Oceanus, { Versions as OceanusVersions } from "./oceanus";
 import Ocr, { Versions as OcrVersions } from "./ocr";
+import Open, { Versions as OpenVersions } from "./open";
 import Organization, { Versions as OrganizationVersions } from "./organization";
 import Partners, { Versions as PartnersVersions } from "./partners";
 import Pds, { Versions as PdsVersions } from "./pds";
@@ -366,6 +367,7 @@ export declare type SERVICE_VERSIONS = {
   npp: NppVersions,
   oceanus: OceanusVersions,
   ocr: OcrVersions,
+  open: OpenVersions,
   organization: OrganizationVersions,
   partners: PartnersVersions,
   pds: PdsVersions,
@@ -745,6 +747,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   oceanus: Oceanus,
   /** {@link Ocr 文字识别} */
   ocr: Ocr,
+  /** {@link Open 腾讯云 OAuth} */
+  open: Open,
   /** {@link Organization 集团账号管理} */
   organization: Organization,
   /** {@link Partners 渠道合作伙伴} */

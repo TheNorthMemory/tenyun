@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 221+ 款产品，8767+ 服务数</summary>
+<details><summary>共计 222+ 款产品，8768+ 服务数</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -239,6 +239,7 @@ nlp | [自然语言处理](https://cloud.tencent.com/document/product/271) | 201
 npp | 号码保护 | 2019-08-23(8)
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(25)
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(77)
+open | 腾讯云 OAuth | 2018-12-25(1)
 organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(17)<br/>2018-12-25(20)
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(22)
 pds | [私域安全](https://cloud.tencent.com/document/product/1473) | 2021-07-01(2)
