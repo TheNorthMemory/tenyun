@@ -627,7 +627,7 @@ declare interface DetectSecurityRequest {
 
 declare interface DetectSecurityResponse {
   /** 识别到的人体属性信息。单个人体属性信息包括人体检测置信度，属性信息，人体检测框。 */
-  Bodies: AttributesForBody[] | null;
+  Bodies?: AttributesForBody[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

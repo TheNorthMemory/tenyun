@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 222+ 款产品，8769+ 服务数</summary>
+<details><summary>共计 222+ 款产品，8778+ 服务数</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -160,7 +160,7 @@ cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-1
 cme | [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) | 2019-10-29(49)
 cmq | [消息队列 CMQ](https://cloud.tencent.com/document/product/406) | 2019-03-04(17)
 cms | 内容安全 | 2019-03-21(9)
-cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(214)
+cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(215)
 cr | [金融联络机器人](https://cloud.tencent.com/document/product/656) | 2018-03-21(28)
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(91)
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(231)
@@ -243,7 +243,7 @@ open | 腾讯云 OAuth | 2018-12-25(2)
 organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(17)<br/>2018-12-25(20)
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(22)
 pds | [私域安全](https://cloud.tencent.com/document/product/1473) | 2021-07-01(2)
-postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(63)
+postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(71)
 privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(21)
 pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(43)
 rce | [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) | 2020-11-03(3)

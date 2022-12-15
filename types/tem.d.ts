@@ -1599,6 +1599,8 @@ declare interface DescribeEnvironmentsRequest {
   Filters?: QueryFilter[];
   /** 排序字段 */
   SortInfo?: SortType;
+  /** 环境id */
+  EnvironmentId?: string;
 }
 
 declare interface DescribeEnvironmentsResponse {

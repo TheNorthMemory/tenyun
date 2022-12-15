@@ -955,9 +955,9 @@ declare interface DescribeBlueprintsRequest {
 
 declare interface DescribeBlueprintsResponse {
   /** 符合条件的镜像数量。 */
-  TotalCount?: number;
+  TotalCount: number;
   /** 镜像详细信息列表。 */
-  BlueprintSet?: Blueprint[];
+  BlueprintSet: Blueprint[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

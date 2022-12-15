@@ -424,6 +424,20 @@ declare interface ParamVersionRelation {
   EnumValue: string[] | null;
 }
 
+/** 参数模板的基本信息 */
+declare interface ParameterTemplate {
+  /** 参数模板ID */
+  TemplateId: string;
+  /** 参数模板名称 */
+  TemplateName: string;
+  /** 参数模板适用的数据库版本 */
+  DBMajorVersion: string;
+  /** 参数模板适用的数据库引擎 */
+  DBEngine: string;
+  /** 参数模板描述 */
+  TemplateDescription: string;
+}
+
 /** 订单详情 */
 declare interface PgDeal {
   /** 订单名 */
@@ -438,6 +452,20 @@ declare interface PgDeal {
   FlowId: number;
   /** 实例ID数组 */
   DBInstanceIdSet: string[];
+}
+
+/** 安全组规则信息 */
+declare interface PolicyRule {
+  /** 策略，ACCEPT 或者 DROP */
+  Action: string;
+  /** 来源或目的 IP 或 IP 段，例如172.16.0.0/12 */
+  CidrIp: string;
+  /** 端口 */
+  PortRange: string;
+  /** 网络协议，支持 UDP、TCP 等 */
+  IpProtocol: string;
+  /** 规则描述 */
+  Description: string;
 }
 
 /** 慢SQL查询接口返回 慢SQL列表详情 */
@@ -508,6 +536,24 @@ declare interface RegionInfo {
   RegionState: string;
   /** 该地域是否支持国际站售卖，0：不支持，1：支持 */
   SupportInternational: number | null;
+}
+
+/** 安全组信息 */
+declare interface SecurityGroup {
+  /** 项目Id */
+  ProjectId: number;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 入站规则 */
+  Inbound: PolicyRule[];
+  /** 出站规则 */
+  Outbound: PolicyRule[];
+  /** 安全组ID */
+  SecurityGroupId: string;
+  /** 安全组名称 */
+  SecurityGroupName: string;
+  /** 安全组备注 */
+  SecurityGroupDescription: string;
 }
 
 /** serverless账号描述 */
@@ -900,6 +946,24 @@ declare interface CreateInstancesResponse {
   RequestId?: string;
 }
 
+declare interface CreateParameterTemplateRequest {
+  /** 模板名称，长度为1～60个字符，仅支持数字,英文大小写字母、中文以及特殊字符_-./()（）[]+=：:@ */
+  TemplateName: string;
+  /** 数据库大版本号，例如：11，12，13 */
+  DBMajorVersion: string;
+  /** 数据库引擎，例如：postgresql，mssql_compatible */
+  DBEngine: string;
+  /** 参数模板描述，长度为0～60个字符，仅支持数字,英文大小写字母、中文以及特殊字符_-./()（）[]+=：:@ */
+  TemplateDescription?: string;
+}
+
+declare interface CreateParameterTemplateResponse {
+  /** 参数模板ID，用于唯一确认参数模板 */
+  TemplateId: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateReadOnlyDBInstanceRequest {
   /** 售卖规格ID。该参数可以通过调用DescribeProductConfig的返回值中的SpecCode字段来获取。 */
   SpecCode: string;
@@ -1048,6 +1112,16 @@ declare interface DeleteDBInstanceNetworkAccessRequest {
 declare interface DeleteDBInstanceNetworkAccessResponse {
   /** 流程ID。 */
   FlowId: number | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteParameterTemplateRequest {
+  /** 参数模板ID，用于唯一确认待操作的参数模板 */
+  TemplateId: string;
+}
+
+declare interface DeleteParameterTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1238,6 +1312,20 @@ declare interface DescribeDBInstanceParametersResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBInstanceSecurityGroupsRequest {
+  /** 实例ID，DBInstanceId和ReadOnlyGroupId至少传一个；如果都传，忽略ReadOnlyGroupId */
+  DBInstanceId?: string;
+  /** 只读组ID，DBInstanceId和ReadOnlyGroupId至少传一个；如果要查询只读组关联的安全组，只传ReadOnlyGroupId */
+  ReadOnlyGroupId?: string;
+}
+
+declare interface DescribeDBInstanceSecurityGroupsResponse {
+  /** 安全组信息数组 */
+  SecurityGroupSet: SecurityGroup[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBInstancesRequest {
   /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：db-instance-id：按照实例ID过滤，类型为stringdb-instance-name：按照实例名过滤，类型为stringdb-project-id：按照项目ID过滤，类型为integerdb-pay-mode：按照付费模式过滤，类型为stringdb-tag-key：按照标签键过滤，类型为string */
   Filters?: Filter[];
@@ -1322,6 +1410,22 @@ declare interface DescribeDatabasesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDefaultParametersRequest {
+  /** 数据库版本，大版本号，例如11，12，13 */
+  DBMajorVersion: string;
+  /** 数据库引擎，例如：postgresql,mssql_compatible */
+  DBEngine: string;
+}
+
+declare interface DescribeDefaultParametersResponse {
+  /** 参数个数 */
+  TotalCount: number;
+  /** 参数信息 */
+  ParamInfoSet: ParamInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEncryptionKeysRequest {
   /** 实例ID。 */
   DBInstanceId: string;
@@ -1344,6 +1448,52 @@ declare interface DescribeOrdersResponse {
   TotalCount: number;
   /** 订单数组 */
   Deals: PgDeal[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeParameterTemplateAttributesRequest {
+  /** 参数模板ID */
+  TemplateId: string;
+}
+
+declare interface DescribeParameterTemplateAttributesResponse {
+  /** 参数模板ID */
+  TemplateId: string | null;
+  /** 参数模板包含的参数个数 */
+  TotalCount: number | null;
+  /** 参数模板包含的参数信息 */
+  ParamInfoSet: ParamInfo[] | null;
+  /** 参数模板名称 */
+  TemplateName: string | null;
+  /** 参数模板适用的数据库版本 */
+  DBMajorVersion: string | null;
+  /** 参数模板适用的数据库引擎 */
+  DBEngine: string | null;
+  /** 参数模板描述 */
+  TemplateDescription: string | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeParameterTemplatesRequest {
+  /** 过滤条件，目前支持的过滤条件有：TemplateName, TemplateId，DBMajorVersion，DBEngine */
+  Filters?: Filter[];
+  /** 每页显示数量，[0，100]，默认 20 */
+  Limit?: number;
+  /** 数据偏移量 */
+  Offset?: number;
+  /** 排序指标，枚举值，支持：CreateTime，TemplateName，DBMajorVersion */
+  OrderBy?: string;
+  /** 排序方式，枚举值，支持：asc（升序） ，desc（降序） */
+  OrderByType?: string;
+}
+
+declare interface DescribeParameterTemplatesResponse {
+  /** 符合查询条件的参数模板总数 */
+  TotalCount: number;
+  /** 参数模板列表 */
+  ParameterTemplateSet: ParameterTemplate[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1716,6 +1866,20 @@ declare interface ModifyDBInstanceReadOnlyGroupResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBInstanceSecurityGroupsRequest {
+  /** 实例或只读组要绑定的安全组列表 */
+  SecurityGroupIdSet: string[];
+  /** 实例ID，DBInstanceId和ReadOnlyGroupId至少传一个；如果都传，忽略ReadOnlyGroupId */
+  DBInstanceId?: string;
+  /** 只读组ID，DBInstanceId和ReadOnlyGroupId至少传一个；如果要修改只读组关联的安全组，只传ReadOnlyGroupId */
+  ReadOnlyGroupId?: string;
+}
+
+declare interface ModifyDBInstanceSecurityGroupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBInstanceSpecRequest {
   /** 实例ID，形如：postgres-6bwgamo3。 */
   DBInstanceId: string;
@@ -1756,6 +1920,24 @@ declare interface ModifyDBInstancesProjectRequest {
 declare interface ModifyDBInstancesProjectResponse {
   /** 转移项目成功的实例个数 */
   Count: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyParameterTemplateRequest {
+  /** 参数模板ID，用于唯一确认参数模板，不可修改 */
+  TemplateId: string;
+  /** 参数模板名称，长度为1～60个字符，仅支持数字,英文大小写字母、中文以及特殊字符_-./()（）[]+=：:@ 注：若该字段为空 ，则保持原参数模板名称 */
+  TemplateName?: string;
+  /** 参数模板描述，长度为0～60个字符，仅支持数字,英文大小写字母、中文以及特殊字符_-./()（）[]+=：:@ 注：若不传入该参数，则保持原参数模板描述 */
+  TemplateDescription?: string;
+  /** 需要修改或添加的参数集合，注：同一参数不能同时出现在修改添加集合和删除集合中 */
+  ModifyParamEntrySet?: ParamEntry[];
+  /** 需要从模板中删除的参数集合，注：同一参数不能同时出现在修改添加集合和删除集合中 */
+  DeleteParamSet?: string[];
+}
+
+declare interface ModifyParameterTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1951,6 +2133,8 @@ declare interface Postgres {
   CreateDBInstances(data: CreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstancesResponse>;
   /** {@link CreateInstances 创建实例(新)}({@link CreateInstancesRequest 请求参数}): {@link CreateInstancesResponse 返回参数} */
   CreateInstances(data: CreateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancesResponse>;
+  /** {@link CreateParameterTemplate 创建参数模板}({@link CreateParameterTemplateRequest 请求参数}): {@link CreateParameterTemplateResponse 返回参数} */
+  CreateParameterTemplate(data: CreateParameterTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateParameterTemplateResponse>;
   /** {@link CreateReadOnlyDBInstance 创建只读实例}({@link CreateReadOnlyDBInstanceRequest 请求参数}): {@link CreateReadOnlyDBInstanceResponse 返回参数} */
   CreateReadOnlyDBInstance(data: CreateReadOnlyDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyDBInstanceResponse>;
   /** {@link CreateReadOnlyGroup 创建只读组}({@link CreateReadOnlyGroupRequest 请求参数}): {@link CreateReadOnlyGroupResponse 返回参数} */
@@ -1961,6 +2145,8 @@ declare interface Postgres {
   CreateServerlessDBInstance(data: CreateServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServerlessDBInstanceResponse>;
   /** {@link DeleteDBInstanceNetworkAccess 删除实例网络}({@link DeleteDBInstanceNetworkAccessRequest 请求参数}): {@link DeleteDBInstanceNetworkAccessResponse 返回参数} */
   DeleteDBInstanceNetworkAccess(data: DeleteDBInstanceNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBInstanceNetworkAccessResponse>;
+  /** {@link DeleteParameterTemplate 删除参数模板}({@link DeleteParameterTemplateRequest 请求参数}): {@link DeleteParameterTemplateResponse 返回参数} */
+  DeleteParameterTemplate(data: DeleteParameterTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteParameterTemplateResponse>;
   /** {@link DeleteReadOnlyGroup 删除只读组}({@link DeleteReadOnlyGroupRequest 请求参数}): {@link DeleteReadOnlyGroupResponse 返回参数} */
   DeleteReadOnlyGroup(data: DeleteReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReadOnlyGroupResponse>;
   /** {@link DeleteReadOnlyGroupNetworkAccess 删除RO组网络}({@link DeleteReadOnlyGroupNetworkAccessRequest 请求参数}): {@link DeleteReadOnlyGroupNetworkAccessResponse 返回参数} */
@@ -1983,6 +2169,8 @@ declare interface Postgres {
   DescribeDBInstanceAttribute(data: DescribeDBInstanceAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceAttributeResponse>;
   /** {@link DescribeDBInstanceParameters 获取实例可修改参数列表}({@link DescribeDBInstanceParametersRequest 请求参数}): {@link DescribeDBInstanceParametersResponse 返回参数} */
   DescribeDBInstanceParameters(data: DescribeDBInstanceParametersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceParametersResponse>;
+  /** {@link DescribeDBInstanceSecurityGroups 查询实例安全组信息}({@link DescribeDBInstanceSecurityGroupsRequest 请求参数}): {@link DescribeDBInstanceSecurityGroupsResponse 返回参数} */
+  DescribeDBInstanceSecurityGroups(data?: DescribeDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceSecurityGroupsResponse>;
   /** {@link DescribeDBInstances 查询实例列表}({@link DescribeDBInstancesRequest 请求参数}): {@link DescribeDBInstancesResponse 返回参数} */
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
   /** {@link DescribeDBSlowlogs 获取慢查询日志 （废弃）}({@link DescribeDBSlowlogsRequest 请求参数}): {@link DescribeDBSlowlogsResponse 返回参数} */
@@ -1991,10 +2179,16 @@ declare interface Postgres {
   DescribeDBXlogs(data: DescribeDBXlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBXlogsResponse>;
   /** {@link DescribeDatabases 拉取数据库列表}({@link DescribeDatabasesRequest 请求参数}): {@link DescribeDatabasesResponse 返回参数} */
   DescribeDatabases(data: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
+  /** {@link DescribeDefaultParameters 查询默认参数列表}({@link DescribeDefaultParametersRequest 请求参数}): {@link DescribeDefaultParametersResponse 返回参数} */
+  DescribeDefaultParameters(data: DescribeDefaultParametersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultParametersResponse>;
   /** {@link DescribeEncryptionKeys 实例密钥信息列表}({@link DescribeEncryptionKeysRequest 请求参数}): {@link DescribeEncryptionKeysResponse 返回参数} */
   DescribeEncryptionKeys(data: DescribeEncryptionKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEncryptionKeysResponse>;
   /** {@link DescribeOrders 获取订单信息}({@link DescribeOrdersRequest 请求参数}): {@link DescribeOrdersResponse 返回参数} */
   DescribeOrders(data: DescribeOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrdersResponse>;
+  /** {@link DescribeParameterTemplateAttributes 查询参数模板详情}({@link DescribeParameterTemplateAttributesRequest 请求参数}): {@link DescribeParameterTemplateAttributesResponse 返回参数} */
+  DescribeParameterTemplateAttributes(data: DescribeParameterTemplateAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParameterTemplateAttributesResponse>;
+  /** {@link DescribeParameterTemplates 查询参数模板列表}({@link DescribeParameterTemplatesRequest 请求参数}): {@link DescribeParameterTemplatesResponse 返回参数} */
+  DescribeParameterTemplates(data?: DescribeParameterTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParameterTemplatesResponse>;
   /** {@link DescribeParamsEvent 获取参数修改事件详情}({@link DescribeParamsEventRequest 请求参数}): {@link DescribeParamsEventResponse 返回参数} */
   DescribeParamsEvent(data: DescribeParamsEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamsEventResponse>;
   /** {@link DescribeProductConfig 查询售卖规格配置}({@link DescribeProductConfigRequest 请求参数}): {@link DescribeProductConfigResponse 返回参数} */
@@ -2037,10 +2231,14 @@ declare interface Postgres {
   ModifyDBInstanceParameters(data: ModifyDBInstanceParametersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceParametersResponse>;
   /** {@link ModifyDBInstanceReadOnlyGroup 修改实例所属的只读组}({@link ModifyDBInstanceReadOnlyGroupRequest 请求参数}): {@link ModifyDBInstanceReadOnlyGroupResponse 返回参数} */
   ModifyDBInstanceReadOnlyGroup(data: ModifyDBInstanceReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceReadOnlyGroupResponse>;
+  /** {@link ModifyDBInstanceSecurityGroups 修改实例的安全组}({@link ModifyDBInstanceSecurityGroupsRequest 请求参数}): {@link ModifyDBInstanceSecurityGroupsResponse 返回参数} */
+  ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
   /** {@link ModifyDBInstanceSpec 调整实例规格（新）}({@link ModifyDBInstanceSpecRequest 请求参数}): {@link ModifyDBInstanceSpecResponse 返回参数} */
   ModifyDBInstanceSpec(data: ModifyDBInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSpecResponse>;
   /** {@link ModifyDBInstancesProject 将实例转至其他项目}({@link ModifyDBInstancesProjectRequest 请求参数}): {@link ModifyDBInstancesProjectResponse 返回参数} */
   ModifyDBInstancesProject(data: ModifyDBInstancesProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstancesProjectResponse>;
+  /** {@link ModifyParameterTemplate 修改参数模板信息}({@link ModifyParameterTemplateRequest 请求参数}): {@link ModifyParameterTemplateResponse 返回参数} */
+  ModifyParameterTemplate(data: ModifyParameterTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyParameterTemplateResponse>;
   /** {@link ModifyReadOnlyGroupConfig 修改只读组配置}({@link ModifyReadOnlyGroupConfigRequest 请求参数}): {@link ModifyReadOnlyGroupConfigResponse 返回参数} */
   ModifyReadOnlyGroupConfig(data: ModifyReadOnlyGroupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReadOnlyGroupConfigResponse>;
   /** {@link ModifySwitchTimePeriod 修改变更配置切换时间}({@link ModifySwitchTimePeriodRequest 请求参数}): {@link ModifySwitchTimePeriodResponse 返回参数} */

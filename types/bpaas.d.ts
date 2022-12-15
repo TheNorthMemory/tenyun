@@ -72,7 +72,7 @@ declare interface StatusNode {
   Opinion: ApproveOpinion | null;
   /** scf函数名称 */
   ScfName: string | null;
-  /** 状态（0：待审批，1：审批通过，2：拒绝，3：scf执行失败，4：scf执行成功） */
+  /** 状态（0：待审批，1：审批通过，2：拒绝，3：scf执行失败，4：scf执行成功）18: 外部审批中 */
   SubStatus: number | null;
   /** 审批节点审批人 */
   ApprovedUin: number[] | null;
@@ -92,6 +92,14 @@ declare interface StatusNode {
   ApproveType: number | null;
   /** 外部审批类型 scf:0或null ; CKafka:1 */
   CallMethod: number | null;
+  /** CKafka - 接入资源ID */
+  DataHubId: string | null;
+  /** CKafka - 任务名称 */
+  TaskName: string | null;
+  /** CKafka - 地域 */
+  CKafkaRegion: string | null;
+  /** 外部审批Url */
+  ExternalUrl: string | null;
 }
 
 declare interface GetBpaasApproveDetailRequest {

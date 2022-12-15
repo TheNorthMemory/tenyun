@@ -2274,6 +2274,22 @@ declare interface PaymentOrders {
   Count: number;
 }
 
+/** 平台账户余额信息 */
+declare interface PlatformAccountBalanceResult {
+  /** 收入类型LABOR:劳务所得OCCASION:偶然所得 */
+  IncomeType: string | null;
+  /** 总余额 */
+  Balance: string | null;
+  /** 系统冻结余额 */
+  SystemFreezeBalance: string | null;
+  /** 人工冻结余额 */
+  ManualFreezeBalance: string | null;
+  /** 可提现余额 */
+  PayableBalance: string | null;
+  /** 提现中余额 */
+  InPayBalance: string | null;
+}
+
 /** 查询账户列表接口 */
 declare interface QueryAcctItem {
   /** 子商户类型：个人: personal企业：enterprise缺省： enterprise */
@@ -8038,6 +8054,26 @@ declare interface QueryFlexPaymentOrderStatusResponse {
   RequestId?: string;
 }
 
+declare interface QueryFlexPlatformAccountBalanceRequest {
+  /** 收入类型LABOR:劳务所得OCCASION:偶然所得 */
+  IncomeType: string;
+  /** 环境类型__release__:生产环境__sandbox__:沙箱环境__test__:测试环境缺省默认为生产环境 */
+  Environment?: string;
+  /** 快照日期。格式yyyy-MM-dd */
+  SnapshotDate?: string;
+}
+
+declare interface QueryFlexPlatformAccountBalanceResponse {
+  /** 错误码。SUCCESS为成功，其他为失败 */
+  ErrCode: string;
+  /** 错误消息 */
+  ErrMessage: string;
+  /** 返回结果 */
+  Result: PlatformAccountBalanceResult | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface QueryFlexSettlementOrderListRequest {
   /** 收款用户ID */
   PayeeId: string;
@@ -10961,6 +10997,8 @@ declare interface Cpdp {
   QueryFlexPaymentOrderList(data: QueryFlexPaymentOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPaymentOrderListResponse>;
   /** {@link QueryFlexPaymentOrderStatus 灵云V2-查询付款订单状态}({@link QueryFlexPaymentOrderStatusRequest 请求参数}): {@link QueryFlexPaymentOrderStatusResponse 返回参数} */
   QueryFlexPaymentOrderStatus(data?: QueryFlexPaymentOrderStatusRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPaymentOrderStatusResponse>;
+  /** {@link QueryFlexPlatformAccountBalance 灵云V2-平台账户余额查询}({@link QueryFlexPlatformAccountBalanceRequest 请求参数}): {@link QueryFlexPlatformAccountBalanceResponse 返回参数} */
+  QueryFlexPlatformAccountBalance(data: QueryFlexPlatformAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPlatformAccountBalanceResponse>;
   /** {@link QueryFlexSettlementOrderList 灵云V2-查询结算订单列表}({@link QueryFlexSettlementOrderListRequest 请求参数}): {@link QueryFlexSettlementOrderListResponse 返回参数} */
   QueryFlexSettlementOrderList(data: QueryFlexSettlementOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexSettlementOrderListResponse>;
   /** {@link QueryFundsTransactionDetails 聚鑫-查询会员资金交易信息列表}({@link QueryFundsTransactionDetailsRequest 请求参数}): {@link QueryFundsTransactionDetailsResponse 返回参数} */

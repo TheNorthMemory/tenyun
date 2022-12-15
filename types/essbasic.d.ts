@@ -58,7 +58,7 @@ declare interface CcInfo {
 declare interface Component {
   /** 控件编号CreateFlowByTemplates发起合同时优先以ComponentId（不为空）填充；否则以ComponentName填充注：当GenerateMode=3时，通过"^"来决定是否使用关键字整词匹配能力。例：当GenerateMode=3时，如果传入关键字"^甲方签署^"，则会在PDF文件中有且仅有"甲方签署"关键字的地方进行对应操作。如传入的关键字为"甲方签署"，则PDF文件中每个出现关键字的位置都会执行相应操作。创建控件时，此值为空查询时返回完整结构 */
   ComponentId?: string;
-  /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件；MULTI_LINE_TEXT - 多行文本控件；CHECK_BOX - 勾选框控件；FILL_IMAGE - 图片控件；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件；SELECTOR - 选择器控件；DATE - 日期控件；默认是格式化为xxxx年xx月xx日；DISTRICT - 省市区行政区划控件；如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeightSIGN_OPINION - 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认表单域的控件不能作为印章和签名控件 */
+  /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件；MULTI_LINE_TEXT - 多行文本控件；CHECK_BOX - 勾选框控件；FILL_IMAGE - 图片控件；DYNAMIC_TABLE - 数据表格控件；ATTACHMENT - 附件控件；SELECTOR - 选择器控件；DATE - 日期控件；默认是格式化为xxxx年xx月xx日；DISTRICT - 省市区行政区划控件；如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeightSIGN_OPINION - 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认表单域的控件不能作为印章和签名控件 */
   ComponentType?: string;
   /** 控件简称，不能超过30个字符 */
   ComponentName?: string;

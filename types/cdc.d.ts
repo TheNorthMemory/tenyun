@@ -120,6 +120,8 @@ declare interface DedicatedClusterOrder {
   TimeUnit: string | null;
   /** 购买时长 */
   TimeSpan: number | null;
+  /** 订单类型 */
+  OrderType: string | null;
 }
 
 /** 专用集群子订单 */

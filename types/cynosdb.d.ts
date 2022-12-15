@@ -1081,7 +1081,7 @@ declare interface CreateClustersRequest {
   SecurityGroupIds?: string[];
   /** 告警策略Id数组 */
   AlarmPolicyIds?: string[];
-  /** 参数数组 */
+  /** 参数数组，暂时支持character_set_server （utf8｜latin1｜gbk｜utf8mb4） ，lower_case_table_names，1-大小写不敏感，0-大小写敏感 */
   ClusterParams?: ParamItem[];
   /** 交易模式，0-下单且支付，1-下单 */
   DealMode?: number;
@@ -1155,13 +1155,21 @@ declare interface DescribeAccountsRequest {
   ClusterId: string;
   /** 需要过滤的账户列表 */
   AccountNames?: string[];
-  /** 数据库类型，取值范围: MYSQL */
+  /** 数据库类型，取值范围: MYSQL 该参数已废用 */
   DbType?: string;
+  /** 需要过滤的账户列表 */
+  Hosts?: string[];
+  /** 限制量 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
 }
 
 declare interface DescribeAccountsResponse {
   /** 数据库账号列表 */
-  AccountSet: Account[];
+  AccountSet: Account[] | null;
+  /** 账号总数量 */
+  TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1273,6 +1281,8 @@ declare interface DescribeBackupListRequest {
   FileNames?: string[];
   /** 备份备注名，模糊查询 */
   BackupNames?: string[];
+  /** 快照备份Id列表 */
+  SnapshotIdList?: number[];
 }
 
 declare interface DescribeBackupListResponse {
@@ -1385,13 +1395,15 @@ declare interface DescribeClusterParamLogsResponse {
 declare interface DescribeClusterParamsRequest {
   /** 集群ID */
   ClusterId: string;
+  /** 参数名字 */
+  ParamName?: string;
 }
 
 declare interface DescribeClusterParamsResponse {
   /** 参数个数 */
   TotalCount: number;
   /** 实例参数列表 */
-  Items: ParamInfo[];
+  Items: ParamInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1570,12 +1582,20 @@ declare interface DescribeParamTemplatesResponse {
 
 declare interface DescribeProjectSecurityGroupsRequest {
   /** 项目ID */
-  ProjectId: number;
+  ProjectId?: number;
+  /** 限制量 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 搜索关键字 */
+  SearchKey?: string;
 }
 
 declare interface DescribeProjectSecurityGroupsResponse {
   /** 安全组详情 */
   Groups: SecurityGroup[];
+  /** 总数量 */
+  Total: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1601,9 +1621,9 @@ declare interface DescribeRollbackTimeRangeRequest {
 
 declare interface DescribeRollbackTimeRangeResponse {
   /** 有效回归时间范围开始时间点（已废弃） */
-  TimeRangeStart: string;
+  TimeRangeStart: string | null;
   /** 有效回归时间范围结束时间点（已废弃） */
-  TimeRangeEnd: string;
+  TimeRangeEnd: string | null;
   /** 可回档时间范围 */
   RollbackTimeRanges: RollbackTimeRange[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
@@ -2237,14 +2257,14 @@ declare interface Cynosdb {
   DescribeInstanceSlowQueries(data: DescribeInstanceSlowQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSlowQueriesResponse>;
   /** {@link DescribeInstanceSpecs 查询实例规格}({@link DescribeInstanceSpecsRequest 请求参数}): {@link DescribeInstanceSpecsResponse 返回参数} */
   DescribeInstanceSpecs(data: DescribeInstanceSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSpecsResponse>;
-  /** {@link DescribeInstances 查询实例列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
+  /** {@link DescribeInstances 查询实例的列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** {@link DescribeMaintainPeriod 查询实例维护时间窗}({@link DescribeMaintainPeriodRequest 请求参数}): {@link DescribeMaintainPeriodResponse 返回参数} */
   DescribeMaintainPeriod(data: DescribeMaintainPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaintainPeriodResponse>;
   /** {@link DescribeParamTemplates 查询参数模板信息}({@link DescribeParamTemplatesRequest 请求参数}): {@link DescribeParamTemplatesResponse 返回参数} */
   DescribeParamTemplates(data?: DescribeParamTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplatesResponse>;
   /** {@link DescribeProjectSecurityGroups 查询项目安全组信息}({@link DescribeProjectSecurityGroupsRequest 请求参数}): {@link DescribeProjectSecurityGroupsResponse 返回参数} */
-  DescribeProjectSecurityGroups(data: DescribeProjectSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupsResponse>;
+  DescribeProjectSecurityGroups(data?: DescribeProjectSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupsResponse>;
   /** {@link DescribeResourcesByDealName 根据订单id查询资源信息}({@link DescribeResourcesByDealNameRequest 请求参数}): {@link DescribeResourcesByDealNameResponse 返回参数} */
   DescribeResourcesByDealName(data?: DescribeResourcesByDealNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesByDealNameResponse>;
   /** {@link DescribeRollbackTimeRange 查询有效回滚时间范围}({@link DescribeRollbackTimeRangeRequest 请求参数}): {@link DescribeRollbackTimeRangeResponse 返回参数} */

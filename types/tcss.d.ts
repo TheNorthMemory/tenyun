@@ -8799,7 +8799,7 @@ declare interface ModifyK8sApiAbnormalRuleInfoResponse {
 declare interface ModifyK8sApiAbnormalRuleStatusRequest {
   /** 规则ID */
   RuleID: string;
-  /** 状态(ture:开 false:关) */
+  /** 状态(true:开 false:关) */
   Status: boolean;
 }
 
@@ -9725,7 +9725,7 @@ declare interface Tcss {
   DescribeK8sApiAbnormalRuleInfo(data: DescribeK8sApiAbnormalRuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalRuleInfoResponse>;
   /** {@link DescribeK8sApiAbnormalRuleList 查询k8sapi异常请求规则列表}({@link DescribeK8sApiAbnormalRuleListRequest 请求参数}): {@link DescribeK8sApiAbnormalRuleListResponse 返回参数} */
   DescribeK8sApiAbnormalRuleList(data?: DescribeK8sApiAbnormalRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalRuleListResponse>;
-  /** {@link DescribeK8sApiAbnormalRuleScopeList 查询k8s api 异常规则中范围列表}({@link DescribeK8sApiAbnormalRuleScopeListRequest 请求参数}): {@link DescribeK8sApiAbnormalRuleScopeListResponse 返回参数} */
+  /** {@link DescribeK8sApiAbnormalRuleScopeList 查询k8sapi 异常规则中范围列表}({@link DescribeK8sApiAbnormalRuleScopeListRequest 请求参数}): {@link DescribeK8sApiAbnormalRuleScopeListResponse 返回参数} */
   DescribeK8sApiAbnormalRuleScopeList(data: DescribeK8sApiAbnormalRuleScopeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalRuleScopeListResponse>;
   /** {@link DescribeK8sApiAbnormalSummary 查询k8sapi异常事件统计}({@link DescribeK8sApiAbnormalSummaryRequest 请求参数}): {@link DescribeK8sApiAbnormalSummaryResponse 返回参数} */
   DescribeK8sApiAbnormalSummary(data?: DescribeK8sApiAbnormalSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalSummaryResponse>;

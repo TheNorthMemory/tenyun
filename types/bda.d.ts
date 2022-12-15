@@ -595,20 +595,22 @@ declare interface SegmentPortraitPicRequest {
   Image?: string;
   /** 图片的 Url 。Url、Image必须提供一个，如果都提供，只使用 Url。图片分辨率须小于2000*2000 ，图片 base64 编码后大小不可超过5M。 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的Url速度和稳定性可能受一定影响。 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。 */
   Url?: string;
-  /** 返回图像方式（base64 或 url ) ，二选一。url有效期为30分钟。 */
+  /** 返回图像方式（base64 或 Url ) ，二选一。url有效期为30分钟。 */
   RspImgType?: string;
+  /** 适用场景类型。取值：GEN/GS。GEN为通用场景模式；GS为绿幕场景模式，针对绿幕场景下的人像分割效果更好。两种模式选择一种传入，默认为GEN。 */
+  Scene?: string;
 }
 
 declare interface SegmentPortraitPicResponse {
-  /** 处理后的图片 base64 数据，透明背景图 */
+  /** 处理后的图片 base64 数据，透明背景图。 */
   ResultImage: string | null;
-  /** 一个通过 Base64 编码的文件，解码后文件由 Float 型浮点数组成。这些浮点数代表原图从左上角开始的每一行的每一个像素点，每一个浮点数的值是原图相应像素点位于人体轮廓内的置信度（0-1）转化的灰度值（0-255） */
+  /** 一个通过 base64 编码的文件，解码后文件由 Float 型浮点数组成。这些浮点数代表原图从左上角开始的每一行的每一个像素点，每一个浮点数的值是原图相应像素点位于人体轮廓内的置信度（0-1）转化的灰度值（0-255）。 */
   ResultMask: string | null;
   /** 图片是否存在前景。 */
   HasForeground: boolean | null;
-  /** 支持将处理过的图片 base64 数据，透明背景图以URL的形式返回值，URL有效期为30分钟。 */
+  /** 支持将处理过的图片 base64 数据，透明背景图以Url的形式返回值，Url有效期为30分钟。 */
   ResultImageUrl: string | null;
-  /** 一个通过 Base64 编码的文件，解码后文件由 Float 型浮点数组成。支持以URL形式的返回值；URL有效期为30分钟。 */
+  /** 一个通过 base64 编码的文件，解码后文件由 Float 型浮点数组成。支持以Url形式的返回值；Url有效期为30分钟。 */
   ResultMaskUrl: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;

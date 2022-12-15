@@ -613,7 +613,7 @@ declare interface Captcha {
   DescribeCaptchaMiniOperData(data: DescribeCaptchaMiniOperDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniOperDataResponse>;
   /** {@link DescribeCaptchaMiniResult 核查验证码票据结果(小程序插件)}({@link DescribeCaptchaMiniResultRequest 请求参数}): {@link DescribeCaptchaMiniResultResponse 返回参数} */
   DescribeCaptchaMiniResult(data: DescribeCaptchaMiniResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniResultResponse>;
-  /** {@link DescribeCaptchaMiniRiskResult 核查验证码小程序插件票据接入风控结果(Beta)}({@link DescribeCaptchaMiniRiskResultRequest 请求参数}): {@link DescribeCaptchaMiniRiskResultResponse 返回参数} */
+  /** {@link DescribeCaptchaMiniRiskResult 核查验证码小程序插件票据接入风控结果(已停用)}({@link DescribeCaptchaMiniRiskResultRequest 请求参数}): {@link DescribeCaptchaMiniRiskResultResponse 返回参数} */
   DescribeCaptchaMiniRiskResult(data: DescribeCaptchaMiniRiskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniRiskResultResponse>;
   /** {@link DescribeCaptchaOperData 安全验证码用户操作数据查询}({@link DescribeCaptchaOperDataRequest 请求参数}): {@link DescribeCaptchaOperDataResponse 返回参数} */
   DescribeCaptchaOperData(data: DescribeCaptchaOperDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaOperDataResponse>;
