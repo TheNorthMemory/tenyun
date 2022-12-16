@@ -1154,6 +1154,18 @@ declare interface DisableCCCPhoneNumberResponse {
   RequestId?: string;
 }
 
+declare interface HangUpCallRequest {
+  /** TCCC 实例应用 ID */
+  SdkAppId: number;
+  /** 会话ID */
+  SessionId: string;
+}
+
+declare interface HangUpCallResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyExtensionRequest {
   /** TCCC 实例应用 ID */
   SdkAppId: number;
@@ -1299,6 +1311,8 @@ declare interface Ccc {
   DescribeTelSession(data: DescribeTelSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTelSessionResponse>;
   /** {@link DisableCCCPhoneNumber 停用号码}({@link DisableCCCPhoneNumberRequest 请求参数}): {@link DisableCCCPhoneNumberResponse 返回参数} */
   DisableCCCPhoneNumber(data: DisableCCCPhoneNumberRequest, config?: AxiosRequestConfig): AxiosPromise<DisableCCCPhoneNumberResponse>;
+  /** {@link HangUpCall 挂断电话}({@link HangUpCallRequest 请求参数}): {@link HangUpCallResponse 返回参数} */
+  HangUpCall(data: HangUpCallRequest, config?: AxiosRequestConfig): AxiosPromise<HangUpCallResponse>;
   /** {@link ModifyExtension 修改话机账号(绑定技能组、绑定坐席账号)}({@link ModifyExtensionRequest 请求参数}): {@link ModifyExtensionResponse 返回参数} */
   ModifyExtension(data: ModifyExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExtensionResponse>;
   /** {@link ModifyStaff 修改客服账号}({@link ModifyStaffRequest 请求参数}): {@link ModifyStaffResponse 返回参数} */

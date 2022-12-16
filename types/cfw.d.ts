@@ -780,7 +780,7 @@ declare interface DeleteAllAccessControlRuleRequest {
 }
 
 declare interface DeleteAllAccessControlRuleResponse {
-  /** 状态值 0: 修改成功, !0: 修改失败 */
+  /** 状态值 0: 修改成功, 非0: 修改失败 */
   Status: number;
   /** 删除了几条访问控制规则 */
   Info: number | null;

@@ -604,6 +604,18 @@ declare interface UpdateEmailIdentityResponse {
   RequestId?: string;
 }
 
+declare interface UpdateEmailSmtpPassWordRequest {
+  /** smtp密码，长度限制64 */
+  Password: string;
+  /** 发信邮箱,长度限制128 */
+  EmailAddress: string;
+}
+
+declare interface UpdateEmailSmtpPassWordResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface UpdateEmailTemplateRequest {
   /** 模板内容 */
   TemplateContent: TemplateContent;
@@ -669,6 +681,8 @@ declare interface Ses {
   SendEmail(data: SendEmailRequest, config?: AxiosRequestConfig): AxiosPromise<SendEmailResponse>;
   /** {@link UpdateEmailIdentity 请求验证}({@link UpdateEmailIdentityRequest 请求参数}): {@link UpdateEmailIdentityResponse 返回参数} */
   UpdateEmailIdentity(data: UpdateEmailIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEmailIdentityResponse>;
+  /** {@link UpdateEmailSmtpPassWord 设置邮箱的smtp密码}({@link UpdateEmailSmtpPassWordRequest 请求参数}): {@link UpdateEmailSmtpPassWordResponse 返回参数} */
+  UpdateEmailSmtpPassWord(data: UpdateEmailSmtpPassWordRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEmailSmtpPassWordResponse>;
   /** {@link UpdateEmailTemplate 更新邮件模板}({@link UpdateEmailTemplateRequest 请求参数}): {@link UpdateEmailTemplateResponse 返回参数} */
   UpdateEmailTemplate(data: UpdateEmailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEmailTemplateResponse>;
 }

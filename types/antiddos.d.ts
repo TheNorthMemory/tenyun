@@ -154,6 +154,10 @@ declare interface BGPInstance {
   IpCountNewFlag: number;
   /** 攻击封堵套餐标记 */
   VitalityVersion: number;
+  /** 网络线路 */
+  Line: number | null;
+  /** 弹性业务带宽开关 */
+  ElasticServiceBandwidth: number;
 }
 
 /** 高防包资产实例的规格信息 */
@@ -1074,6 +1078,8 @@ declare interface WaterPrintConfig {
   Keys?: WaterPrintKey[];
   /** 水印检查模式, 取值[checkall（普通模式）shortfpcheckall（精简模式）] */
   Verify?: string;
+  /** 是否开启代理，1开启则忽略IP+端口校验；0关闭则需要IP+端口校验 */
+  CloudSdkProxy?: number | null;
 }
 
 /** 生成的水印密钥 */
@@ -1651,7 +1657,7 @@ declare interface DescribeBizTrendRequest {
   Statistics: string;
   /** 大禹子产品代号（bgpip表示高防IP） */
   Business: string;
-  /** 统计周期，可取值300，1800，3600，21600，86400，单位秒 */
+  /** 统计周期，可取值60，300，1800，3600，21600，86400，单位秒 */
   Period: number;
   /** 统计开始时间。 例：“2020-09-22 00:00:00” */
   StartTime: string;
@@ -2779,6 +2785,8 @@ declare interface SwitchWaterPrintConfigRequest {
   InstanceId: string;
   /** 水印开启/关闭状态，1表示开启；0表示关闭 */
   OpenStatus: number;
+  /** 是否开启代理，1开启则忽略IP+端口校验；0关闭则需要IP+端口校验 */
+  CloudSdkProxy?: number;
 }
 
 declare interface SwitchWaterPrintConfigResponse {

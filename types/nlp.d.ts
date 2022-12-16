@@ -266,6 +266,42 @@ declare interface DescribeWordItemsResponse {
   RequestId?: string;
 }
 
+declare interface GenerateCoupletRequest {
+  /** 生成对联的关键词。长度需>=2，当长度>2时，自动截取前两个字作为关键字。内容需为常用汉字（不含有数字、英文、韩语、日语、符号等等其他）。 */
+  Text: string;
+  /** 返回的文本结果为繁体还是简体。0：简体；1：繁体。默认为0。 */
+  TargetType?: number;
+}
+
+declare interface GenerateCoupletResponse {
+  /** 横批。 */
+  TopScroll: string;
+  /** 上联与下联。 */
+  Content: string[];
+  /** 当对联随机生成时，展示随机生成原因。 */
+  RandomCause: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface GeneratePoetryRequest {
+  /** 生成诗词的关键词。 */
+  Text: string;
+  /** 生成诗词的类型。0：藏头或藏身；1：藏头；2：藏身。默认为0。 */
+  PoetryType?: number;
+  /** 诗的体裁。0：五言律诗或七言律诗；5：五言律诗；7：七言律诗。默认为0。 */
+  Genre?: number;
+}
+
+declare interface GeneratePoetryResponse {
+  /** 诗题，即输入的生成诗词的关键词。 */
+  Title: string;
+  /** 诗的内容。 */
+  Content: string[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface KeywordsExtractionRequest {
   /** 待处理的文本（仅支持UTF-8格式，不超过10000字符） */
   Text: string;
@@ -497,6 +533,10 @@ declare interface Nlp {
   DescribeDicts(data?: DescribeDictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDictsResponse>;
   /** {@link DescribeWordItems 查询指定词库的词条信息}({@link DescribeWordItemsRequest 请求参数}): {@link DescribeWordItemsResponse 返回参数} */
   DescribeWordItems(data: DescribeWordItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWordItemsResponse>;
+  /** {@link GenerateCouplet 智能春联}({@link GenerateCoupletRequest 请求参数}): {@link GenerateCoupletResponse 返回参数} */
+  GenerateCouplet(data: GenerateCoupletRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateCoupletResponse>;
+  /** {@link GeneratePoetry 智能写诗}({@link GeneratePoetryRequest 请求参数}): {@link GeneratePoetryResponse 返回参数} */
+  GeneratePoetry(data: GeneratePoetryRequest, config?: AxiosRequestConfig): AxiosPromise<GeneratePoetryResponse>;
   /** {@link KeywordsExtraction 关键词提取}({@link KeywordsExtractionRequest 请求参数}): {@link KeywordsExtractionResponse 返回参数} */
   KeywordsExtraction(data: KeywordsExtractionRequest, config?: AxiosRequestConfig): AxiosPromise<KeywordsExtractionResponse>;
   /** {@link LexicalAnalysis 词法分析}({@link LexicalAnalysisRequest 请求参数}): {@link LexicalAnalysisResponse 返回参数} */

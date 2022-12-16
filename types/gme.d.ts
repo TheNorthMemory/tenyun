@@ -116,7 +116,7 @@ declare interface CreateAppResp {
   VoiceFilterConf: VoiceFilterConf;
 }
 
-/** 语音消息转文本自学习模型配置 */
+/** 语音消息转文本热句模型配置 */
 declare interface CustomizationConfigs {
   /** 应用 ID，登录控制台创建应用得到的AppID */
   BizId: number;
@@ -453,7 +453,7 @@ declare interface CreateScanUserResponse {
 }
 
 declare interface DeleteCustomizationRequest {
-  /** 要删除的模型ID */
+  /** 删除的模型ID */
   ModelId: string;
   /** 应用 ID，登录控制台创建应用得到的AppID */
   BizId: number;
@@ -658,7 +658,7 @@ declare interface GetCustomizationListRequest {
 }
 
 declare interface GetCustomizationListResponse {
-  /** 语音消息转文本自学习模型配置 */
+  /** 语音消息转文本热句模型配置 */
   CustomizationConfigs: CustomizationConfigs[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
@@ -683,21 +683,21 @@ declare interface ModifyCustomizationRequest {
   BizId: number;
   /** 文本文件的下载地址，服务会从该地址下载文件，目前仅支持腾讯云cos */
   TextUrl: string;
-  /** 要修改的模型ID */
+  /** 修改的模型ID */
   ModelId: string;
 }
 
 declare interface ModifyCustomizationResponse {
   /** 返回值。0为成功，非0为失败。 */
   ErrorCode: number;
-  /** 自学习模型ID */
+  /** 模型ID */
   ModelId: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
 
 declare interface ModifyCustomizationStateRequest {
-  /** 自学习模型ID */
+  /** 模型ID */
   ModelId: string;
   /** 想要变换的模型状态，-1代表下线，1代表上线 */
   ToState: number;
@@ -706,7 +706,7 @@ declare interface ModifyCustomizationStateRequest {
 }
 
 declare interface ModifyCustomizationStateResponse {
-  /** 自学习模型ID */
+  /** 模型ID */
   ModelId: string;
   /** 返回值。0为成功，非0为失败。 */
   ErrorCode: number;
@@ -793,11 +793,11 @@ declare interface Gme {
   CreateAgeDetectTask(data: CreateAgeDetectTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgeDetectTaskResponse>;
   /** {@link CreateApp 创建GME应用}({@link CreateAppRequest 请求参数}): {@link CreateAppResponse 返回参数} */
   CreateApp(data: CreateAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppResponse>;
-  /** {@link CreateCustomization 创建语音消息转文本自学习模型}({@link CreateCustomizationRequest 请求参数}): {@link CreateCustomizationResponse 返回参数} */
+  /** {@link CreateCustomization 创建语音消息转文本热句模型}({@link CreateCustomizationRequest 请求参数}): {@link CreateCustomizationResponse 返回参数} */
   CreateCustomization(data: CreateCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomizationResponse>;
   /** {@link CreateScanUser 新增自定义送检用户}({@link CreateScanUserRequest 请求参数}): {@link CreateScanUserResponse 返回参数} */
   CreateScanUser(data: CreateScanUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScanUserResponse>;
-  /** {@link DeleteCustomization 删除语音消息转文本自学习模型}({@link DeleteCustomizationRequest 请求参数}): {@link DeleteCustomizationResponse 返回参数} */
+  /** {@link DeleteCustomization 删除语音消息转文本热句模型}({@link DeleteCustomizationRequest 请求参数}): {@link DeleteCustomizationResponse 返回参数} */
   DeleteCustomization(data: DeleteCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomizationResponse>;
   /** {@link DeleteRoomMember 剔除房间或房间成员}({@link DeleteRoomMemberRequest 请求参数}): {@link DeleteRoomMemberResponse 返回参数} */
   DeleteRoomMember(data: DeleteRoomMemberRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoomMemberResponse>;
@@ -819,13 +819,13 @@ declare interface Gme {
   DescribeScanResultList(data: DescribeScanResultListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanResultListResponse>;
   /** {@link DescribeUserInAndOutTime 拉取用户在房间得进出时间}({@link DescribeUserInAndOutTimeRequest 请求参数}): {@link DescribeUserInAndOutTimeResponse 返回参数} */
   DescribeUserInAndOutTime(data: DescribeUserInAndOutTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInAndOutTimeResponse>;
-  /** {@link GetCustomizationList 查询语音消息转文本自学习模型列表}({@link GetCustomizationListRequest 请求参数}): {@link GetCustomizationListResponse 返回参数} */
+  /** {@link GetCustomizationList 查询语音消息转文本热句模型列表}({@link GetCustomizationListRequest 请求参数}): {@link GetCustomizationListResponse 返回参数} */
   GetCustomizationList(data: GetCustomizationListRequest, config?: AxiosRequestConfig): AxiosPromise<GetCustomizationListResponse>;
   /** {@link ModifyAppStatus 修改应用开关状态}({@link ModifyAppStatusRequest 请求参数}): {@link ModifyAppStatusResponse 返回参数} */
   ModifyAppStatus(data: ModifyAppStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppStatusResponse>;
-  /** {@link ModifyCustomization 更新语音消息转文本自学习模型}({@link ModifyCustomizationRequest 请求参数}): {@link ModifyCustomizationResponse 返回参数} */
+  /** {@link ModifyCustomization 更新语音消息转文本热句模型}({@link ModifyCustomizationRequest 请求参数}): {@link ModifyCustomizationResponse 返回参数} */
   ModifyCustomization(data: ModifyCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizationResponse>;
-  /** {@link ModifyCustomizationState 修改语音消息转文本自学习模型状态}({@link ModifyCustomizationStateRequest 请求参数}): {@link ModifyCustomizationStateResponse 返回参数} */
+  /** {@link ModifyCustomizationState 修改语音消息转文本热句模型状态}({@link ModifyCustomizationStateRequest 请求参数}): {@link ModifyCustomizationStateResponse 返回参数} */
   ModifyCustomizationState(data: ModifyCustomizationStateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizationStateResponse>;
   /** {@link ModifyUserMicStatus 修改用户麦克风状态}({@link ModifyUserMicStatusRequest 请求参数}): {@link ModifyUserMicStatusResponse 返回参数} */
   ModifyUserMicStatus(data: ModifyUserMicStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserMicStatusResponse>;

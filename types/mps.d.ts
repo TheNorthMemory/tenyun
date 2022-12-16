@@ -2300,7 +2300,7 @@ declare interface LiveStreamTaskNotifyConfig {
   QueueName?: string;
   /** 当模型为 Topic 时有效，表示接收事件通知的 CMQ 的主题名。 */
   TopicName?: string;
-  /** 通知类型，默认CMQ，指定URL时HTTP回调推送到 NotifyUrl 指定的地址。 */
+  /** 通知类型，默认CMQ，指定URL时HTTP回调推送到 NotifyUrl 指定的地址。 注：不填或为空时默认 CMQ，如需采用其他类型需填写对应类型值。 */
   NotifyType?: string;
   /** HTTP回调地址，NotifyType为URL时必填。 */
   NotifyUrl?: string;
@@ -2504,7 +2504,7 @@ declare interface MediaImageSpriteItem {
 
 /** 媒体处理的输入对象信息。 */
 declare interface MediaInputInfo {
-  /** 输入来源对象的类型，支持 COS 和 URL 两种。 */
+  /** 输入来源对象的类型，支持 COS、URL 两种。 */
   Type: string;
   /** 当 Type 为 COS 时有效，则该项为必填，表示媒体处理 COS 对象信息。 */
   CosInputInfo?: CosInputInfo;
@@ -3473,16 +3473,16 @@ declare interface TagConfigureInfoForUpdate {
 /** 任务的事件通知配置。 */
 declare interface TaskNotifyConfig {
   /** CMQ或TDMQ-CMQ 的模型，有 Queue 和 Topic 两种。 */
-  CmqModel: string;
+  CmqModel?: string;
   /** CMQ或TDMQ-CMQ 的园区，如 sh，bj 等。 */
-  CmqRegion: string;
+  CmqRegion?: string;
   /** 当模型为 Topic 时有效，表示接收事件通知的 CMQ 或 TDMQ-CMQ 的主题名。 */
   TopicName?: string;
   /** 当模型为 Queue 时有效，表示接收事件通知的 CMQ 或 TDMQ-CMQ 的队列名。 */
   QueueName?: string;
   /** 工作流通知的模式，可取值有 Finish 和 Change，不填代表 Finish。 */
   NotifyMode?: string;
-  /** 通知类型，可选值：CMQ：已下线，建议切换到TDMQ-CMQTDMQ-CMQ：消息队列URL：指定URL时HTTP回调推送到 NotifyUrl 指定的地址，回调协议http+json，包体内容同解析事件通知接口的输出参数 SCF：不推荐使用，需要在控制台额外配置SCF目前 默认CMQ。 */
+  /** 通知类型，可选值：CMQ：已下线，建议切换到TDMQ-CMQTDMQ-CMQ：消息队列URL：指定URL时HTTP回调推送到 NotifyUrl 指定的地址，回调协议http+json，包体内容同解析事件通知接口的输出参数 SCF：不推荐使用，需要在控制台额外配置SCF 注：不填或为空时默认 CMQ，如需采用其他类型需填写对应类型值。 */
   NotifyType?: string;
   /** HTTP回调地址，NotifyType为URL时必填。 */
   NotifyUrl?: string;
@@ -5473,6 +5473,8 @@ declare interface ProcessMediaRequest {
   SessionContext?: string;
   /** 编排ID。注意1：对于OutputStorage、OutputDir参数：当服务编排中子任务节点配置了OutputStorage、OutputDir时，该子任务节点中配置的输出作为子任务的输出。当服务编排中子任务节点没有配置OutputStorage、OutputDir时，若创建任务接口（ProcessMedia）有输出，将覆盖原有编排的默认输出。注意2：对于TaskNotifyConfig参数，若创建任务接口（ProcessMedia）有设置，将覆盖原有编排的默认回调。注意3：编排的 Trigger 只是用来自动化触发场景，在手动发起的请求中已经配置的 Trigger 无意义。 */
   ScheduleId?: number;
+  /** 任务类型，默认Online Online：实时任务 Offline：闲时任务，不保证实效性，默认3天内处理完 */
+  TaskType?: string;
 }
 
 declare interface ProcessMediaResponse {
