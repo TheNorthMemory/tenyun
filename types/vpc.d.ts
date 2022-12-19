@@ -2101,6 +2101,8 @@ declare interface AllocateAddressesRequest {
   BandwidthPackageId?: string;
   /** EIP名称，用于申请EIP时用户自定义该EIP的个性化名称，默认值：未命名 */
   AddressName?: string;
+  /** 网络出口，默认是：center_egress1 */
+  Egress?: string;
 }
 
 declare interface AllocateAddressesResponse {
@@ -3031,8 +3033,10 @@ declare interface CreateVpcEndPointServiceRequest {
   AutoAcceptFlag: boolean;
   /** 后端服务ID，比如lb-xxx。 */
   ServiceInstanceId: string;
-  /** 是否是PassService类型。 */
+  /** ~~是否是PassService类型。该字段已废弃，请不要使用该字段。~~ */
   IsPassService?: boolean;
+  /** 挂载的PAAS服务类型，CLB,CDB,CRS，不填默认挂载为CLB。 */
+  ServiceType?: string;
 }
 
 declare interface CreateVpcEndPointServiceResponse {
@@ -5531,10 +5535,8 @@ declare interface ModifyBandwidthPackageAttributeRequest {
   BandwidthPackageId: string;
   /** 带宽包名称 */
   BandwidthPackageName: string;
-  /** 带宽包计费模式 */
+  /** 带宽包计费模式，示例 ：'TOP5_POSTPAID_BY_MONTH'（后付费-TOP5计费） */
   ChargeType?: string;
-  /** 退款时迁移为后付费带宽包。默认值：否 */
-  MigrateOnRefund?: boolean;
 }
 
 declare interface ModifyBandwidthPackageAttributeResponse {

@@ -96,6 +96,14 @@ declare interface Certificates {
   IsSM: boolean | null;
   /** 证书算法 */
   EncryptAlgorithm: string | null;
+  /** 上传CA证书的加密算法 */
+  CAEncryptAlgorithms: string[] | null;
+  /** 上传CA证书的过期时间 */
+  CAEndTimes: string[] | null;
+  /** 上传CA证书的通用名称 */
+  CACommonNames: string[] | null;
+  /** 证书预审核信息 */
+  PreAuditInfo: PreAuditInfo | null;
 }
 
 /** 公司信息 */
@@ -256,6 +264,16 @@ declare interface PackageTransferOutInfo {
   ReceiverUin: number | null;
   /** 接收时间。 */
   ReceiveTime: string | null;
+}
+
+/** 预审核信息列表 */
+declare interface PreAuditInfo {
+  /** 证书总年限 */
+  TotalPeriod: number | null;
+  /** 证书当前年限 */
+  NowPeriod: number | null;
+  /** 证书预审核管理人ID */
+  ManagerId: string | null;
 }
 
 /** 获取证书列表（DescribeCertificates）返回参数键为 Certificates 下，key为 ProjectInfo 的内容。 */

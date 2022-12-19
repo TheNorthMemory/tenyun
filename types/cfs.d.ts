@@ -302,6 +302,10 @@ declare interface UserQuota {
   FileHardLimit: number;
   /** 文件系统ID */
   FileSystemId: string;
+  /** 容量使用，单位GiB */
+  CapacityUsed?: number | null;
+  /** 文件使用个数，单位个 */
+  FileUsed?: number | null;
 }
 
 declare interface BindAutoSnapshotPolicyRequest {

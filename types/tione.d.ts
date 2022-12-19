@@ -1330,6 +1330,8 @@ declare interface TrainingTaskDetail {
   Message: string | null;
   /** 任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成 */
   Status: string;
+  /** 回调地址 */
+  CallbackUrl: string | null;
 }
 
 /** 出参类型 */
@@ -1380,6 +1382,8 @@ declare interface TrainingTaskSetItem {
   Message: string | null;
   /** 标签配置 */
   Tags: Tag[] | null;
+  /** 回调地址 */
+  CallbackUrl: string | null;
 }
 
 /** 外部挂载信息 */
@@ -1479,6 +1483,8 @@ declare interface CreateBatchTaskRequest {
   SubnetId?: string;
   /** 备注 */
   Remark?: string;
+  /** 任务执行结果回调URL，仅支持http和https。回调格式&内容详见: [TI-ONE 接口回调说明](https://cloud.tencent.com/document/product/851/84292) */
+  CallbackUrl?: string;
 }
 
 declare interface CreateBatchTaskResponse {
@@ -1573,13 +1579,13 @@ declare interface CreateModelServiceRequest {
   VolumeMount?: VolumeMount;
   /** 服务限速限流相关配置 */
   ServiceLimit?: ServiceLimit;
-  /** 回调地址，用于回调创建服务状态信息 */
+  /** 回调地址，用于回调创建服务状态信息，回调格式&内容详情见：[TI-ONE 接口回调说明](https://cloud.tencent.com/document/product/851/84292) */
   CallbackUrl?: string;
 }
 
 declare interface CreateModelServiceResponse {
   /** 生成的模型服务 */
-  Service: Service | null;
+  Service?: Service | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1705,11 +1711,13 @@ declare interface CreateTrainingTaskRequest {
   Remark?: string;
   /** 数据来源，eg：DATASET、COS、CFS、HDFS */
   DataSource?: string;
+  /** 回调地址，用于创建/启动/停止训练任务的异步回调。回调格式&内容详见：[[TI-ONE接口回调说明]](https://cloud.tencent.com/document/product/851/84292) */
+  CallbackUrl?: string;
 }
 
 declare interface CreateTrainingTaskResponse {
   /** 训练任务ID */
-  Id: string;
+  Id?: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

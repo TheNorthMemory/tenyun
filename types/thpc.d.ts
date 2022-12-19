@@ -4,9 +4,9 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 描述CFS文件系统版本和挂载信息 */
 declare interface CFSOption {
-  /** 文件系统本地挂载路径 */
+  /** 文件系统本地挂载路径。 */
   LocalPath: string;
-  /** 文件系统远程挂载ip及路径 */
+  /** 文件系统远程挂载ip及路径。 */
   RemotePath: string;
   /** 文件系统协议类型，默认值NFS 3.0。NFS 3.0。NFS 4.0。TURBO。 */
   Protocol?: string;
@@ -118,11 +118,11 @@ declare interface ExpansionNodeConfig {
 
 /** 描述GooseFS挂载信息 */
 declare interface GooseFSOption {
-  /** 文件系统本地挂载路径 */
+  /** 文件系统本地挂载路径。 */
   LocalPath: string;
-  /** 文件系统远程挂载路径 */
+  /** 文件系统远程挂载路径。 */
   RemotePath: string;
-  /** 文件系统master的ip和端口 */
+  /** 文件系统master的ip和端口。 */
   Masters: string[];
 }
 
