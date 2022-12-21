@@ -4530,20 +4530,6 @@ declare interface ModifyLoadBalancingResponse {
   RequestId?: string;
 }
 
-declare interface ModifyLoadBalancingStatusRequest {
-  /** 站点ID。 */
-  ZoneId: string;
-  /** 负载均衡ID。 */
-  LoadBalancingId: string;
-  /** 负载均衡状态，取值有：online：启用；offline：停用。 */
-  Status: string;
-}
-
-declare interface ModifyLoadBalancingStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
 declare interface ModifyLogTopicTaskRequest {
   /** 站点ID。 */
   ZoneId: string;
@@ -9191,8 +9177,6 @@ declare interface Teo {
   ModifyHostsCertificate(data: ModifyHostsCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostsCertificateResponse>;
   /** {@link ModifyLoadBalancing 修改负载均衡}({@link ModifyLoadBalancingRequest 请求参数}): {@link ModifyLoadBalancingResponse 返回参数} */
   ModifyLoadBalancing(data: ModifyLoadBalancingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancingResponse>;
-  /** {@link ModifyLoadBalancingStatus 修改负载均衡状态}({@link ModifyLoadBalancingStatusRequest 请求参数}): {@link ModifyLoadBalancingStatusResponse 返回参数} */
-  ModifyLoadBalancingStatus(data: ModifyLoadBalancingStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancingStatusResponse>;
   /** {@link ModifyLogTopicTask 修改推送任务}({@link ModifyLogTopicTaskRequest 请求参数}): {@link ModifyLogTopicTaskResponse 返回参数} */
   ModifyLogTopicTask(data: ModifyLogTopicTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogTopicTaskResponse>;
   /** {@link ModifyOriginGroup 修改源站组}({@link ModifyOriginGroupRequest 请求参数}): {@link ModifyOriginGroupResponse 返回参数} */

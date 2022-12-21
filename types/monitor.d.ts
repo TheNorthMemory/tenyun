@@ -1452,6 +1452,20 @@ declare interface PrometheusInstanceGrantInfo {
   HasApiOperation: number;
 }
 
+/** Prometheus用量信息 */
+declare interface PrometheusInstanceTenantUsage {
+  /** 实例ID */
+  InstanceId: string | null;
+  /** 计费周期 */
+  CalcDate: string | null;
+  /** 总用量 */
+  Total: number | null;
+  /** 基础指标用量 */
+  Basic: number | null;
+  /** 付费指标用量 */
+  Fee: number | null;
+}
+
 /** Prometheus 服务响应体 */
 declare interface PrometheusInstancesItem {
   /** 实例ID。 */
@@ -3092,6 +3106,22 @@ declare interface DescribePrometheusAgentsResponse {
   RequestId?: string;
 }
 
+declare interface DescribePrometheusInstanceUsageRequest {
+  /** 按照一个或者多个实例ID查询。实例ID形如：prom-xxxxxxxx。请求的实例的上限为100。 */
+  InstanceIds: string[];
+  /** 开始时间 */
+  StartCalcDate: string;
+  /** 结束时间 */
+  EndCalcDate: string;
+}
+
+declare interface DescribePrometheusInstanceUsageResponse {
+  /** 用量列表 */
+  UsageSet: PrometheusInstanceTenantUsage[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribePrometheusInstancesRequest {
   /** 按照一个或者多个实例ID查询。实例ID形如：prom-xxxxxxxx。请求的实例的上限为100。 */
   InstanceIds?: string[];
@@ -4039,6 +4069,8 @@ declare interface Monitor {
   DescribeProductList(data: DescribeProductListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductListResponse>;
   /** {@link DescribePrometheusAgents 列出 Prometheus CVM Agent}({@link DescribePrometheusAgentsRequest 请求参数}): {@link DescribePrometheusAgentsResponse 返回参数} */
   DescribePrometheusAgents(data: DescribePrometheusAgentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAgentsResponse>;
+  /** {@link DescribePrometheusInstanceUsage 查询Prometheus按量实例用量}({@link DescribePrometheusInstanceUsageRequest 请求参数}): {@link DescribePrometheusInstanceUsageResponse 返回参数} */
+  DescribePrometheusInstanceUsage(data: DescribePrometheusInstanceUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstanceUsageResponse>;
   /** {@link DescribePrometheusInstances 查看 Prometheus 实例列表}({@link DescribePrometheusInstancesRequest 请求参数}): {@link DescribePrometheusInstancesResponse 返回参数} */
   DescribePrometheusInstances(data?: DescribePrometheusInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstancesResponse>;
   /** {@link DescribePrometheusScrapeJobs 列出 Prometheus 抓取任务}({@link DescribePrometheusScrapeJobsRequest 请求参数}): {@link DescribePrometheusScrapeJobsResponse 返回参数} */

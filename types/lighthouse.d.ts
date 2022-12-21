@@ -230,6 +230,40 @@ declare interface Disk {
   DiskBackupQuota: number;
 }
 
+/** 描述了云硬盘备份点相关信息。 */
+declare interface DiskBackup {
+  /** 云硬盘备份点ID。 */
+  DiskBackupId: string;
+  /** 创建此云硬盘备份点的云硬盘类型。取值：DATA_DISK：数据盘 */
+  DiskUsage: string;
+  /** 创建此云硬盘备份点的云硬盘 ID。 */
+  DiskId: string;
+  /** 创建此云硬盘备份点的云硬盘大小，单位 GB。 */
+  DiskSize: number;
+  /** 云硬盘备份点名称，用户自定义的云硬盘备份点别名。 */
+  DiskBackupName: string;
+  /** 云硬盘备份点的状态。取值范围：NORMAL：正常。 CREATING：创建中。ROLLBACKING：回滚中。DELETING：删除中。 */
+  DiskBackupState: string;
+  /** 创建或回滚云硬盘备份点进度百分比，成功后此字段取值为 100。 */
+  Percent: number;
+  /** 上一次操作 */
+  LatestOperation: string | null;
+  /** 上一次操作状态 */
+  LatestOperationState: string | null;
+  /** 上一次请求ID */
+  LatestOperationRequestId: string | null;
+  /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
+  CreatedTime: string;
+}
+
+/** 云硬盘备份点操作限制列表。 */
+declare interface DiskBackupDeniedActions {
+  /** 云硬盘备份点ID。 */
+  DiskBackupId: string;
+  /** 操作限制列表。 */
+  DeniedActions: DeniedAction[];
+}
+
 /** 云硬盘包年包月相关参数设置 */
 declare interface DiskChargePrepaid {
   /** 新购周期。 */
@@ -730,6 +764,18 @@ declare interface ZoneInfo {
   InstanceDisplayLabel: string;
 }
 
+declare interface ApplyDiskBackupRequest {
+  /** 云硬盘ID，可通过[DescribeDisks](https://cloud.tencent.com/document/api/1207/66093)接口查询。 */
+  DiskId: string;
+  /** 云硬盘备份点ID，可通过 DescribeDiskBackups 接口查询。 */
+  DiskBackupId: string;
+}
+
+declare interface ApplyDiskBackupResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ApplyInstanceSnapshotRequest {
   /** 实例 ID。 */
   InstanceId: string;
@@ -790,6 +836,20 @@ declare interface CreateBlueprintRequest {
 declare interface CreateBlueprintResponse {
   /** 自定义镜像ID。 */
   BlueprintId: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface CreateDiskBackupRequest {
+  /** 云硬盘 ID。当前只支持数据盘创建备份点。 */
+  DiskId: string;
+  /** 云硬盘备份点名称，最大长度90。 */
+  DiskBackupName?: string;
+}
+
+declare interface CreateDiskBackupResponse {
+  /** 备份点ID。 */
+  DiskBackupId: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -872,6 +932,16 @@ declare interface DeleteBlueprintsRequest {
 }
 
 declare interface DeleteBlueprintsResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDiskBackupsRequest {
+  /** 云硬盘备份点ID列表，可通过 DescribeDiskBackups接口查询。 */
+  DiskBackupIds: string[];
+}
+
+declare interface DeleteDiskBackupsResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1004,6 +1074,38 @@ declare interface DescribeCcnAttachedInstancesRequest {
 declare interface DescribeCcnAttachedInstancesResponse {
   /** 云联网关联的实例列表。 */
   CcnAttachedInstanceSet: CcnAttachedInstance[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDiskBackupsDeniedActionsRequest {
+  /** 云硬盘备份点 ID 列表, 可通过 DescribeDiskBackups 接口查询。 */
+  DiskBackupIds: string[];
+}
+
+declare interface DescribeDiskBackupsDeniedActionsResponse {
+  /** 云硬盘备份点操作限制列表详细信息。 */
+  DiskBackupDeniedActionSet: DiskBackupDeniedActions[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDiskBackupsRequest {
+  /** 要查询云硬盘备份点的ID列表。参数不支持同时指定 DiskBackupIds 和 Filters。 */
+  DiskBackupIds?: string[];
+  /** 过滤器列表。disk-backup-id按照【云硬盘备份点 ID】进行过滤。类型：String必选：否disk-id按照【云硬盘 ID】进行过滤。类型：String必选：否disk-backup-state按照【云硬盘备份点状态】进行过滤。类型：String必选：否取值：参考数据结构DiskBackup下的DiskBackupState取值。disk-usage按照【云硬盘类型】进行过滤。类型：String必选：否取值：SYSTEM_DISK或DATA_DISK每次请求的 Filters 的上限为 10，Filter.Values 的上限为5。参数不支持同时指定DiskBackupIds 和 Filters。 */
+  Filters?: Filter[];
+  /** 偏移量，默认为 0。 */
+  Offset?: number;
+  /** 返回数量，默认为 20，最大值为 100。 */
+  Limit?: number;
+}
+
+declare interface DescribeDiskBackupsResponse {
+  /** 云硬盘备份点的数量。 */
+  TotalCount: number;
+  /** 云硬盘备份点信息列表。 */
+  DiskBackupSet: DiskBackup[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1540,6 +1642,18 @@ declare interface ModifyBlueprintAttributeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDiskBackupsAttributeRequest {
+  /** 云硬盘备份点ID列表。 */
+  DiskBackupIds: string[];
+  /** 云硬盘备份点名称，最大长度90。 */
+  DiskBackupName?: string;
+}
+
+declare interface ModifyDiskBackupsAttributeResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDisksAttributeRequest {
   /** 云硬盘ID列表。 */
   DiskIds: string[];
@@ -1759,6 +1873,8 @@ declare interface TerminateInstancesResponse {
 /** {@link Lighthouse 轻量应用服务器} */
 declare interface Lighthouse {
   (): Versions;
+  /** {@link ApplyDiskBackup 回滚云硬盘备份点}({@link ApplyDiskBackupRequest 请求参数}): {@link ApplyDiskBackupResponse 返回参数} */
+  ApplyDiskBackup(data: ApplyDiskBackupRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyDiskBackupResponse>;
   /** {@link ApplyInstanceSnapshot 回滚实例快照}({@link ApplyInstanceSnapshotRequest 请求参数}): {@link ApplyInstanceSnapshotResponse 返回参数} */
   ApplyInstanceSnapshot(data: ApplyInstanceSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyInstanceSnapshotResponse>;
   /** {@link AssociateInstancesKeyPairs 绑定密钥对}({@link AssociateInstancesKeyPairsRequest 请求参数}): {@link AssociateInstancesKeyPairsResponse 返回参数} */
@@ -1769,6 +1885,8 @@ declare interface Lighthouse {
   AttachDisks(data: AttachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<AttachDisksResponse>;
   /** {@link CreateBlueprint 创建镜像}({@link CreateBlueprintRequest 请求参数}): {@link CreateBlueprintResponse 返回参数} */
   CreateBlueprint(data: CreateBlueprintRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlueprintResponse>;
+  /** {@link CreateDiskBackup 创建云硬盘备份点}({@link CreateDiskBackupRequest 请求参数}): {@link CreateDiskBackupResponse 返回参数} */
+  CreateDiskBackup(data: CreateDiskBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDiskBackupResponse>;
   /** {@link CreateFirewallRules 添加防火墙规则}({@link CreateFirewallRulesRequest 请求参数}): {@link CreateFirewallRulesResponse 返回参数} */
   CreateFirewallRules(data: CreateFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFirewallRulesResponse>;
   /** {@link CreateInstanceSnapshot 创建实例快照}({@link CreateInstanceSnapshotRequest 请求参数}): {@link CreateInstanceSnapshotResponse 返回参数} */
@@ -1779,6 +1897,8 @@ declare interface Lighthouse {
   CreateKeyPair(data: CreateKeyPairRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKeyPairResponse>;
   /** {@link DeleteBlueprints 删除镜像}({@link DeleteBlueprintsRequest 请求参数}): {@link DeleteBlueprintsResponse 返回参数} */
   DeleteBlueprints(data: DeleteBlueprintsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlueprintsResponse>;
+  /** {@link DeleteDiskBackups 删除云硬盘备份点}({@link DeleteDiskBackupsRequest 请求参数}): {@link DeleteDiskBackupsResponse 返回参数} */
+  DeleteDiskBackups(data: DeleteDiskBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDiskBackupsResponse>;
   /** {@link DeleteFirewallRules 删除防火墙规则}({@link DeleteFirewallRulesRequest 请求参数}): {@link DeleteFirewallRulesResponse 返回参数} */
   DeleteFirewallRules(data: DeleteFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFirewallRulesResponse>;
   /** {@link DeleteKeyPairs 删除密钥对}({@link DeleteKeyPairsRequest 请求参数}): {@link DeleteKeyPairsResponse 返回参数} */
@@ -1797,6 +1917,10 @@ declare interface Lighthouse {
   DescribeBundles(data?: DescribeBundlesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBundlesResponse>;
   /** {@link DescribeCcnAttachedInstances 查询云联网关联的实例信息}({@link DescribeCcnAttachedInstancesRequest 请求参数}): {@link DescribeCcnAttachedInstancesResponse 返回参数} */
   DescribeCcnAttachedInstances(data?: DescribeCcnAttachedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnAttachedInstancesResponse>;
+  /** {@link DescribeDiskBackups 查看云硬盘备份点列表}({@link DescribeDiskBackupsRequest 请求参数}): {@link DescribeDiskBackupsResponse 返回参数} */
+  DescribeDiskBackups(data?: DescribeDiskBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskBackupsResponse>;
+  /** {@link DescribeDiskBackupsDeniedActions 查看云硬盘备份点操作限制列表}({@link DescribeDiskBackupsDeniedActionsRequest 请求参数}): {@link DescribeDiskBackupsDeniedActionsResponse 返回参数} */
+  DescribeDiskBackupsDeniedActions(data: DescribeDiskBackupsDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskBackupsDeniedActionsResponse>;
   /** {@link DescribeDiskConfigs 查看云硬盘配置}({@link DescribeDiskConfigsRequest 请求参数}): {@link DescribeDiskConfigsResponse 返回参数} */
   DescribeDiskConfigs(data?: DescribeDiskConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskConfigsResponse>;
   /** {@link DescribeDiskDiscount 查询云硬盘折扣信息}({@link DescribeDiskDiscountRequest 请求参数}): {@link DescribeDiskDiscountResponse 返回参数} */
@@ -1865,6 +1989,8 @@ declare interface Lighthouse {
   IsolateInstances(data: IsolateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateInstancesResponse>;
   /** {@link ModifyBlueprintAttribute 修改镜像属性}({@link ModifyBlueprintAttributeRequest 请求参数}): {@link ModifyBlueprintAttributeResponse 返回参数} */
   ModifyBlueprintAttribute(data: ModifyBlueprintAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlueprintAttributeResponse>;
+  /** {@link ModifyDiskBackupsAttribute 修改云硬盘备份点属性}({@link ModifyDiskBackupsAttributeRequest 请求参数}): {@link ModifyDiskBackupsAttributeResponse 返回参数} */
+  ModifyDiskBackupsAttribute(data: ModifyDiskBackupsAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDiskBackupsAttributeResponse>;
   /** {@link ModifyDisksAttribute 修改云硬盘属性}({@link ModifyDisksAttributeRequest 请求参数}): {@link ModifyDisksAttributeResponse 返回参数} */
   ModifyDisksAttribute(data: ModifyDisksAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisksAttributeResponse>;
   /** {@link ModifyDisksRenewFlag 修改云硬盘续费标识}({@link ModifyDisksRenewFlagRequest 请求参数}): {@link ModifyDisksRenewFlagResponse 返回参数} */

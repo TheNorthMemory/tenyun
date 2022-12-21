@@ -536,6 +536,30 @@ declare interface ForwardListener {
   FrontendPortEnd?: number;
 }
 
+/** 业务流量的http状态码聚合数据 */
+declare interface HttpStatusMap {
+  /** http2xx回源状态码 */
+  SourceHttp2xx: number[];
+  /** http5xx状态码 */
+  Http5xx: number[];
+  /** http5xx回源状态码 */
+  SourceHttp5xx: number[];
+  /** http404回源状态码 */
+  SourceHttp404: number[];
+  /** http4xx状态码 */
+  Http4xx: number[];
+  /** http4xx回源状态码 */
+  SourceHttp4xx: number[];
+  /** http2xx状态码 */
+  Http2xx: number[];
+  /** http404状态码 */
+  Http404: number[];
+  /** http3xx回源状态码 */
+  SourceHttp3xx: number[];
+  /** http3xx状态码 */
+  Http3xx: number[];
+}
+
 /** 单IP告警阈值配置 */
 declare interface IPAlarmThresholdRelation {
   /** 告警阈值类型，取值[1(入流量告警阈值)2(攻击清洗流量告警阈值)] */
@@ -1648,6 +1672,32 @@ declare interface DescribeBgpBizTrendResponse {
   MetricName: string;
   /** 返回数组最大值 */
   MaxData: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBizHttpStatusRequest {
+  /** 统计方式，仅支持sum */
+  Statistics: string;
+  /** 大禹子产品代号（bgpip表示高防IP） */
+  Business: string;
+  /** 统计周期，可取值60，300，1800，3600， 21600，86400，单位秒 */
+  Period: number;
+  /** 统计开始时间。 如2020-02-01 12:04:12 */
+  StartTime: string;
+  /** 统计结束时间。如2020-02-03 18:03:23 */
+  EndTime: string;
+  /** 资源Id */
+  Id: string;
+  /** 特定域名查询 */
+  Domain?: string;
+  /** 协议及端口列表，协议可取值TCP, UDP, HTTP, HTTPS，仅统计纬度为连接数时有效 */
+  ProtoInfo?: ProtocolPort[];
+}
+
+declare interface DescribeBizHttpStatusResponse {
+  /** 业务流量http状态码统计数据 */
+  HttpStatusMap: HttpStatusMap;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2875,6 +2925,8 @@ declare interface Antiddos {
   DescribeBasicDeviceStatus(data: DescribeBasicDeviceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicDeviceStatusResponse>;
   /** {@link DescribeBgpBizTrend 获取高防包流量折线图}({@link DescribeBgpBizTrendRequest 请求参数}): {@link DescribeBgpBizTrendResponse 返回参数} */
   DescribeBgpBizTrend(data: DescribeBgpBizTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBgpBizTrendResponse>;
+  /** {@link DescribeBizHttpStatus 获取业务流量状态码统计列表}({@link DescribeBizHttpStatusRequest 请求参数}): {@link DescribeBizHttpStatusResponse 返回参数} */
+  DescribeBizHttpStatus(data: DescribeBizHttpStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBizHttpStatusResponse>;
   /** {@link DescribeBizTrend 获取业务流量曲线}({@link DescribeBizTrendRequest 请求参数}): {@link DescribeBizTrendResponse 返回参数} */
   DescribeBizTrend(data: DescribeBizTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBizTrendResponse>;
   /** {@link DescribeBlackWhiteIpList 获取DDoS防护的IP黑白名单}({@link DescribeBlackWhiteIpListRequest 请求参数}): {@link DescribeBlackWhiteIpListResponse 返回参数} */

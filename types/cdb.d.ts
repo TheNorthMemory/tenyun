@@ -2166,6 +2166,14 @@ declare interface DescribeBackupConfigResponse {
   EnableBinlogArchive: string;
   /** 日志备份归档起始天数，日志备份达到归档起始天数时进行归档，最小为180天，不得大于日志备份保留天数 */
   BinlogArchiveDays: number;
+  /** 是否开启数据备份标准存储策略，off-关闭，on-打开，默认为off */
+  EnableBackupStandby: string;
+  /** 数据备份标准存储起始天数，数据备份达到标准存储起始天数时进行转换，最小为30天，不得大于数据备份保留天数。如果开启备份归档，不得大于等于备份归档天数 */
+  BackupStandbyDays: number;
+  /** 是否开启日志备份标准存储策略，off-关闭，on-打开，默认为off */
+  EnableBinlogStandby: string;
+  /** 日志备份标准存储起始天数，日志备份达到标准存储起始天数时进行转换，最小为30天，不得大于日志备份保留天数。如果开启备份归档，不得大于等于备份归档天数 */
+  BinlogStandbyDays: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2228,6 +2236,8 @@ declare interface DescribeBackupOverviewResponse {
   RemoteBackupVolume: number | null;
   /** 归档备份容量，包含数据备份以及日志备份。 */
   BackupArchiveVolume: number | null;
+  /** 标准存储备份容量，包含数据备份以及日志备份。 */
+  BackupStandbyVolume: number | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2314,6 +2324,10 @@ declare interface DescribeBinlogBackupOverviewResponse {
   BinlogArchiveVolume: number;
   /** 归档日志备份个数。 */
   BinlogArchiveCount: number;
+  /** 标准存储日志备份容量（单位为字节）。 */
+  BinlogStandbyVolume: number;
+  /** 标准存储日志备份个数。 */
+  BinlogStandbyCount: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2668,6 +2682,10 @@ declare interface DescribeDataBackupOverviewResponse {
   DataBackupArchiveVolume: number;
   /** 当前地域归档备份总个数。 */
   DataBackupArchiveCount: number;
+  /** 当前地域标准存储备份总容量。 */
+  DataBackupStandbyVolume: number;
+  /** 当前地域标准存储备份总个数。 */
+  DataBackupStandbyCount: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2914,6 +2932,26 @@ declare interface DescribeProxyCustomConfResponse {
   CustomConf: CustomConfig | null;
   /** 权重限制 */
   WeightRule: Rule | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRemoteBackupConfigRequest {
+  /** 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+}
+
+declare interface DescribeRemoteBackupConfigResponse {
+  /** 异地备份保留天时间，单位为天 */
+  ExpireDays: number;
+  /** 异地数据备份开关，off - 关闭异地备份，on-开启异地备份 */
+  RemoteBackupSave: string;
+  /** 异地日志备份开关，off - 关闭异地备份，on-开启异地备份，只有在参数RemoteBackupSave为on时，RemoteBinlogSave参数才可设置为on */
+  RemoteBinlogSave: string;
+  /** 用户已设置异地备份地域列表 */
+  RemoteRegion: string[];
+  /** 用户可设置异地备份地域列表 */
+  RegionList: string[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -3403,6 +3441,14 @@ declare interface ModifyBackupConfigRequest {
   BinlogArchiveDays?: number;
   /** 是否开启日志备份归档策略，off-关闭，on-打开，默认为off */
   EnableBinlogArchive?: string;
+  /** 是否开启数据备份标准存储策略，off-关闭，on-打开，默认为off */
+  EnableBackupStandby?: string;
+  /** 数据备份标准存储起始天数，数据备份达到标准存储起始天数时进行转换，最小为30天，不得大于数据备份保留天数。如果开启备份归档，不得大于等于备份归档天数 */
+  BackupStandbyDays?: number;
+  /** 是否开启日志备份标准存储策略，off-关闭，on-打开，默认为off */
+  EnableBinlogStandby?: string;
+  /** 日志备份标准存储起始天数，日志备份达到标准存储起始天数时进行转换，最小为30天，不得大于日志备份保留天数。如果开启备份归档，不得大于等于备份归档天数 */
+  BinlogStandbyDays?: number;
 }
 
 declare interface ModifyBackupConfigResponse {
@@ -3630,6 +3676,24 @@ declare interface ModifyParamTemplateRequest {
 }
 
 declare interface ModifyParamTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyRemoteBackupConfigRequest {
+  /** 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+  /** 异地数据备份开关，off - 关闭异地备份，on-开启异地备份 */
+  RemoteBackupSave: string;
+  /** 异地日志备份开关，off - 关闭异地备份，on-开启异地备份，只有在参数RemoteBackupSave为on时，RemoteBinlogSave参数才可设置为on */
+  RemoteBinlogSave: string;
+  /** 用户设置异地备份地域列表 */
+  RemoteRegion: string[];
+  /** 异地备份保留天时间，单位为天 */
+  ExpireDays: number;
+}
+
+declare interface ModifyRemoteBackupConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -4167,6 +4231,8 @@ declare interface Cdb {
   DescribeProxyConnectionPoolConf(data: DescribeProxyConnectionPoolConfRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyConnectionPoolConfResponse>;
   /** {@link DescribeProxyCustomConf 查询代理规格配置}({@link DescribeProxyCustomConfRequest 请求参数}): {@link DescribeProxyCustomConfResponse 返回参数} */
   DescribeProxyCustomConf(data: DescribeProxyCustomConfRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyCustomConfResponse>;
+  /** {@link DescribeRemoteBackupConfig 查询云数据库异地备份配置信息}({@link DescribeRemoteBackupConfigRequest 请求参数}): {@link DescribeRemoteBackupConfigResponse 返回参数} */
+  DescribeRemoteBackupConfig(data: DescribeRemoteBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRemoteBackupConfigResponse>;
   /** {@link DescribeRoGroups 查询云数据库实例的所有RO组的信息}({@link DescribeRoGroupsRequest 请求参数}): {@link DescribeRoGroupsResponse 返回参数} */
   DescribeRoGroups(data: DescribeRoGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoGroupsResponse>;
   /** {@link DescribeRoMinScale 获取只读实例购买或升级的最小规格}({@link DescribeRoMinScaleRequest 请求参数}): {@link DescribeRoMinScaleResponse 返回参数} */
@@ -4245,6 +4311,8 @@ declare interface Cdb {
   ModifyNameOrDescByDpId(data: ModifyNameOrDescByDpIdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNameOrDescByDpIdResponse>;
   /** {@link ModifyParamTemplate 修改参数模板}({@link ModifyParamTemplateRequest 请求参数}): {@link ModifyParamTemplateResponse 返回参数} */
   ModifyParamTemplate(data: ModifyParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyParamTemplateResponse>;
+  /** {@link ModifyRemoteBackupConfig 修改云数据库异地备份配置信息}({@link ModifyRemoteBackupConfigRequest 请求参数}): {@link ModifyRemoteBackupConfigResponse 返回参数} */
+  ModifyRemoteBackupConfig(data: ModifyRemoteBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRemoteBackupConfigResponse>;
   /** {@link ModifyRoGroupInfo 更新实例Ro组的信息}({@link ModifyRoGroupInfoRequest 请求参数}): {@link ModifyRoGroupInfoResponse 返回参数} */
   ModifyRoGroupInfo(data: ModifyRoGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoGroupInfoResponse>;
   /** {@link ModifyTimeWindow 更新维护时间窗口}({@link ModifyTimeWindowRequest 请求参数}): {@link ModifyTimeWindowResponse 返回参数} */

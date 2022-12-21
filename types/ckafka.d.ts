@@ -80,6 +80,12 @@ declare interface Assignment {
   Topics: GroupInfoTopics[] | null;
 }
 
+/** 批量解析 */
+declare interface BatchAnalyseParam {
+  /** ONE_BY_ONE单条输出，MERGE合并输出 */
+  Format: string | null;
+}
+
 /** 批量发送消息内容 */
 declare interface BatchContent {
   /** 发送的消息体 */
@@ -444,6 +450,8 @@ declare interface DatahubResource {
   SQLServerParam?: SQLServerParam | null;
   /** Ctsdb配置，Type为CTSDB时必填 */
   CtsdbParam?: CtsdbParam | null;
+  /** Scf配置，Type为SCF时必填 */
+  ScfParam?: ScfParam | null;
 }
 
 /** Datahub请求的taskid */
@@ -844,6 +852,8 @@ declare interface EsParam {
   DropCls?: DropCls;
   /** 转储到ES的消息为Database的binlog时，如果需要同步数据库操作，即增删改的操作到ES时填写数据库表主键 */
   DatabasePrimaryKey?: string;
+  /** 死信队列 */
+  DropDlq?: FailureParam;
 }
 
 /** EventBus配置 */
@@ -1216,6 +1226,8 @@ declare interface KafkaParam {
   UseAutoCreateTopic?: boolean | null;
   /** 写入Topic时是否进行压缩，不开启填"none"，开启的话，填写"open"。 */
   CompressionType?: string | null;
+  /** 源topic消息1条扩增成msgMultiple条写入目标topic(该参数目前只有ckafka流入ckafka适用) */
+  MsgMultiple?: number | null;
 }
 
 /** Map参数 */
@@ -1746,6 +1758,20 @@ declare interface SaleInfo {
   SoldOut: boolean | null;
 }
 
+/** Scf类型入参 */
+declare interface ScfParam {
+  /** SCF云函数函数名 */
+  FunctionName: string | null;
+  /** SCF云函数命名空间, 默认为default */
+  Namespace?: string | null;
+  /** SCF云函数版本及别名, 默认为$DEFAULT */
+  Qualifier?: string | null;
+  /** 每批最大发送消息数, 默认为1000 */
+  BatchSize?: number;
+  /** SCF调用失败后重试次数, 默认为5 */
+  MaxRetries?: number;
+}
+
 /** 数据处理——二次解析参数 */
 declare interface SecondaryAnalyseParam {
   /** 分隔符 */
@@ -1896,6 +1922,8 @@ declare interface TopicParam {
   CompressionType?: string | null;
   /** 使用的Topic是否需要自动创建（目前只支持SOURCE流入任务） */
   UseAutoCreateTopic?: boolean | null;
+  /** 源topic消息1条扩增成msgMultiple条写入目标topic(该参数目前只有ckafka流入ckafka适用) */
+  MsgMultiple?: number | null;
 }
 
 /** 分区详情 */
@@ -1986,6 +2014,8 @@ declare interface TransformsParam {
   RowParam?: RowParam | null;
   /** 是否保留数据源Topic元数据信息（源Topic、Partition、Offset），默认为false */
   KeepMetadata?: boolean | null;
+  /** 数组解析 */
+  BatchAnalyse?: BatchAnalyseParam | null;
 }
 
 /** Url解析 */

@@ -16,6 +16,16 @@ declare interface BackupTableContent {
   Ips?: string;
 }
 
+/** 集群计费相关信息 */
+declare interface Charge {
+  /** 计费类型，“PREPAID” 预付费，“POSTPAID_BY_HOUR” 后付费 */
+  ChargeType: string;
+  /** PREPAID需要传递，是否自动续费，1表示自动续费开启 */
+  RenewFlag?: number;
+  /** 预付费需要传递，计费时间长度，多少个月 */
+  TimeSpan?: number;
+}
+
 /** 新增或是修改ck用户 */
 declare interface CkUserAlterInfo {
   /** 集群实例id */
@@ -54,6 +64,98 @@ declare interface DiskSpec {
   DiskCount: number;
 }
 
+/** 实例描述信息 */
+declare interface InstanceInfo {
+  /** 集群实例ID, "cdw-xxxx" 字符串类型 */
+  InstanceId: string | null;
+  /** 集群实例名称 */
+  InstanceName: string | null;
+  /** 状态,Init 创建中; Serving 运行中； Deleted已销毁；Deleting 销毁中；Modify 集群变更中； */
+  Status: string | null;
+  /** 版本 */
+  Version: string | null;
+  /** 地域, ap-guangzhou */
+  Region: string | null;
+  /** 可用区， ap-guangzhou-3 */
+  Zone: string | null;
+  /** 私有网络名称 */
+  VpcId: string | null;
+  /** 子网名称 */
+  SubnetId: string | null;
+  /** 付费类型，"hour", "prepay" */
+  PayMode: string | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 过期时间 */
+  ExpireTime: string | null;
+  /** 数据节点描述信息 */
+  MasterSummary: NodesSummary | null;
+  /** zookeeper节点描述信息 */
+  CommonSummary: NodesSummary | null;
+  /** 高可用，“true" "false" */
+  HA: string | null;
+  /** 访问地址，例如 "10.0.0.1:9000" */
+  AccessInfo: string | null;
+  /** 记录ID，数值型 */
+  Id: number | null;
+  /** regionId, 表示地域 */
+  RegionId: number | null;
+  /** 可用区说明，例如 "广州二区" */
+  ZoneDesc: string | null;
+  /** 错误流程说明信息 */
+  FlowMsg: string | null;
+  /** 状态描述，例如“运行中”等 */
+  StatusDesc: string | null;
+  /** 自动续费标记 */
+  RenewFlag: boolean | null;
+  /** 标签列表 */
+  Tags: Tag[] | null;
+  /** 监控信息 */
+  Monitor: string | null;
+  /** 是否开通日志 */
+  HasClsTopic: boolean | null;
+  /** 日志主题ID */
+  ClsTopicId: string | null;
+  /** 日志集ID */
+  ClsLogSetId: string | null;
+  /** 是否支持xml配置管理 */
+  EnableXMLConfig: number | null;
+  /** 区域 */
+  RegionDesc: string | null;
+  /** 弹性网卡地址 */
+  Eip: string | null;
+  /** 冷热分层系数 */
+  CosMoveFactor: number | null;
+}
+
+/** 创建集群时的规格 */
+declare interface NodeSpec {
+  /** 规格名称 */
+  SpecName: string;
+  /** 数量 */
+  Count: number;
+  /** 云盘大小 */
+  DiskSize: number;
+}
+
+/** 节点角色描述信息 */
+declare interface NodesSummary {
+  /** 机型，如 S1 */
+  Spec: string;
+  /** 节点数目 */
+  NodeSize: number;
+  /** cpu核数，单位个 */
+  Core: number;
+  /** 内存大小，单位G */
+  Memory: number;
+  /** 磁盘大小，单位G */
+  Disk: number;
+  /** 磁盘类型 */
+  DiskType: string;
+  /** 磁盘描述 */
+  DiskDesc: string;
+}
+
 /** 资源规格描述信息 */
 declare interface ResourceSpec {
   /** 规格名称，例如“SCH1" */
@@ -78,6 +180,14 @@ declare interface ResourceSpec {
   DisplayName: string | null;
   /** 库存数 */
   InstanceQuota: number | null;
+}
+
+/** 标签描述 */
+declare interface Tag {
+  /** 标签的键 */
+  TagKey: string;
+  /** 标签的值 */
+  TagValue: string;
 }
 
 declare interface ActionAlterCkUserRequest {
@@ -110,6 +220,48 @@ declare interface CreateBackUpScheduleResponse {
   RequestId?: string;
 }
 
+declare interface CreateInstanceNewRequest {
+  /** 可用区 */
+  Zone: string;
+  /** 是否高可用 */
+  HaFlag: boolean;
+  /** 私有网络 */
+  UserVPCId: string;
+  /** 子网 */
+  UserSubnetId: string;
+  /** 版本 */
+  ProductVersion: string;
+  /** 计费方式 */
+  ChargeProperties: Charge;
+  /** 实例名称 */
+  InstanceName: string;
+  /** 数据节点 */
+  DataSpec: NodeSpec;
+  /** 标签列表 */
+  Tags?: Tag;
+  /** 日志主题ID */
+  ClsLogSetId?: string;
+  /** COS桶名称 */
+  CosBucketName?: string;
+  /** 是否是裸盘挂载 */
+  MountDiskType?: number;
+  /** 是否是ZK高可用 */
+  HAZk?: boolean;
+  /** ZK节点 */
+  CommonSpec?: NodeSpec;
+}
+
+declare interface CreateInstanceNewResponse {
+  /** 流程ID */
+  FlowId: string | null;
+  /** 实例ID */
+  InstanceId: string | null;
+  /** 错误信息 */
+  ErrorMsg: string | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCkSqlApisRequest {
   /** 实例id */
   InstanceId: string;
@@ -124,6 +276,18 @@ declare interface DescribeCkSqlApisRequest {
 declare interface DescribeCkSqlApisResponse {
   /** 返回的查询数据，大部分情况是list，也可能是bool */
   ReturnData: string | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceRequest {
+  /** 集群实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeInstanceResponse {
+  /** 实例描述信息 */
+  InstanceInfo: InstanceInfo;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -207,8 +371,12 @@ declare interface Cdwch {
   ActionAlterCkUser(data: ActionAlterCkUserRequest, config?: AxiosRequestConfig): AxiosPromise<ActionAlterCkUserResponse>;
   /** {@link CreateBackUpSchedule 创建或者修改备份策略}({@link CreateBackUpScheduleRequest 请求参数}): {@link CreateBackUpScheduleResponse 返回参数} */
   CreateBackUpSchedule(data?: CreateBackUpScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackUpScheduleResponse>;
+  /** {@link CreateInstanceNew 创建集群openApi}({@link CreateInstanceNewRequest 请求参数}): {@link CreateInstanceNewResponse 返回参数} */
+  CreateInstanceNew(data: CreateInstanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceNewResponse>;
   /** {@link DescribeCkSqlApis 查询集群用户相关信息}({@link DescribeCkSqlApisRequest 请求参数}): {@link DescribeCkSqlApisResponse 返回参数} */
   DescribeCkSqlApis(data: DescribeCkSqlApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCkSqlApisResponse>;
+  /** {@link DescribeInstance 描述实例信息}({@link DescribeInstanceRequest 请求参数}): {@link DescribeInstanceResponse 返回参数} */
+  DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** {@link DescribeInstanceShards 获取实例shard信息列表}({@link DescribeInstanceShardsRequest 请求参数}): {@link DescribeInstanceShardsResponse 返回参数} */
   DescribeInstanceShards(data: DescribeInstanceShardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceShardsResponse>;
   /** {@link DescribeSpec 获取集群规格}({@link DescribeSpecRequest 请求参数}): {@link DescribeSpecResponse 返回参数} */

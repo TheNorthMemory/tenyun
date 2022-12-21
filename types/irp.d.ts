@@ -14,7 +14,7 @@ declare interface DislikeInfo {
 declare interface DocItem {
   /** 内容唯一id，建议限制在128字符以内 */
   ItemId: string;
-  /** 内容类型：● article -图文● text -纯文本● video -视频● short_video -时长15秒以内的视频● mini_video -竖屏视频● image -纯图片（如当前类型不满足，请提单沟通解决方案） */
+  /** 内容类型：● article -图文● text -纯文本● video -视频● short_video -时长15秒以内的视频● mini_video -竖屏视频● image -纯图片（如当前类型不满足，请登录控制台进入对应项目，在物料管理->物料类型管理中添加） */
   ItemType: string;
   /** 内容状态：● 1 - 上架 ● 2 - 下架 Status=2的内容不会在推荐结果中出现 需要下架内容时，把Status的值修改为2即可 */
   Status: number;
@@ -62,7 +62,7 @@ declare interface DocItem {
   RewardCnt?: number;
   /** 内容质量评分，用作特征 */
   Score?: number;
-  /** json字符串，用于物料池管理的自定义扩展 */
+  /** json字符串，用于物料池管理的自定义扩展，需要base64加密 */
   Extension?: string;
 }
 
@@ -108,7 +108,7 @@ declare interface FeedBehaviorInfo {
   OsVersion?: string;
   /** 行为发生时的机型，用作特征 */
   DeviceModel?: string;
-  /** json字符串，用于行为数据的扩展 */
+  /** json字符串，用于行为数据的扩展，需要base64加密 */
   Extension?: string;
 }
 
@@ -150,7 +150,7 @@ declare interface FeedUserInfo {
   LastLoginIp?: string;
   /** 用户信息的最后修改时间戳，秒级时间戳（1639624786） */
   LastModifyTimestamp?: number;
-  /** json字符串，用于画像数据的扩展 */
+  /** json字符串，用于画像数据的扩展，需要base64加密 */
   Extension?: string;
 }
 
@@ -162,7 +162,7 @@ declare interface RecItemData {
   ItemType: string | null;
   /** 推荐追踪id，本次推荐内容产生的后续行为上报均要用该ItemTraceId上报。每次接口调用返回的ItemTraceId不同 */
   ItemTraceId: string | null;
-  /** 推荐结果分，取值范围[0,1000000] */
+  /** 推荐预测分，分值越高被推荐的理由越充分，取值范围[0,1000000]，用于做二次排序的参考 */
   Score: number | null;
 }
 

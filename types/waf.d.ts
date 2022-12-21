@@ -476,6 +476,28 @@ declare interface IpHitItemsData {
 
 /** 负载均衡算法 */
 declare interface LoadBalancerPackageNew {
+  /** 监听id */
+  ListenerId: string | null;
+  /** 监听名 */
+  ListenerName: string | null;
+  /** 负载均衡id */
+  LoadBalancerId: string | null;
+  /** 负载均衡名 */
+  LoadBalancerName: string | null;
+  /** 协议 */
+  Protocol: string | null;
+  /** 地区 */
+  Region: string | null;
+  /** 接入IP */
+  Vip: string | null;
+  /** 接入端口 */
+  Vport: number | null;
+  /** 地域 */
+  Zone: string | null;
+  /** VPCID */
+  NumericalVpcId: number | null;
+  /** CLB类型 */
+  LoadBalancerType: string | null;
 }
 
 /** 防护域名端口配置信息 */

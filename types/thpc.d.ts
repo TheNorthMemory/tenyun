@@ -270,6 +270,18 @@ declare interface VirtualPrivateCloud {
   SubnetId: string;
 }
 
+declare interface AddClusterStorageOptionRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+  /** 集群存储选项。 */
+  StorageOption: StorageOption;
+}
+
+declare interface AddClusterStorageOptionResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface AddNodesRequest {
   /** 集群中实例所在的位置。 */
   Placement: Placement;
@@ -398,6 +410,18 @@ declare interface DeleteClusterResponse {
   RequestId?: string;
 }
 
+declare interface DeleteClusterStorageOptionRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+  /** 本地挂载路径。 */
+  LocalPath: string;
+}
+
+declare interface DeleteClusterStorageOptionResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DeleteNodesRequest {
   /** 集群ID。 */
   ClusterId: string;
@@ -424,6 +448,16 @@ declare interface DescribeClusterActivitiesResponse {
   ClusterActivitySet: ClusterActivity[];
   /** 集群活动历史记录数量。 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterStorageOptionRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+}
+
+declare interface DescribeClusterStorageOptionResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -761,6 +795,8 @@ declare namespace V20211109 {
 /** {@link Thpc 高性能计算平台} */
 declare interface Thpc {
   (): Versions;
+  /** {@link AddClusterStorageOption 添加集群存储选项}({@link AddClusterStorageOptionRequest 请求参数}): {@link AddClusterStorageOptionResponse 返回参数} */
+  AddClusterStorageOption(data: AddClusterStorageOptionRequest, config?: AxiosRequestConfig): AxiosPromise<AddClusterStorageOptionResponse>;
   /** {@link AddNodes 添加节点}({@link AddNodesRequest 请求参数}): {@link AddNodesResponse 返回参数} */
   AddNodes(data: AddNodesRequest, config?: AxiosRequestConfig): AxiosPromise<AddNodesResponse>;
   /** {@link BindAutoScalingGroup 绑定弹性伸缩组}({@link BindAutoScalingGroupRequest 请求参数}): {@link BindAutoScalingGroupResponse 返回参数} */
@@ -769,10 +805,14 @@ declare interface Thpc {
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
   /** {@link DeleteCluster 删除集群}({@link DeleteClusterRequest 请求参数}): {@link DeleteClusterResponse 返回参数} */
   DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
+  /** {@link DeleteClusterStorageOption 删除集群存储选项}({@link DeleteClusterStorageOptionRequest 请求参数}): {@link DeleteClusterStorageOptionResponse 返回参数} */
+  DeleteClusterStorageOption(data: DeleteClusterStorageOptionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterStorageOptionResponse>;
   /** {@link DeleteNodes 删除节点}({@link DeleteNodesRequest 请求参数}): {@link DeleteNodesResponse 返回参数} */
   DeleteNodes(data: DeleteNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNodesResponse>;
   /** {@link DescribeClusterActivities 查询集群活动历史记录}({@link DescribeClusterActivitiesRequest 请求参数}): {@link DescribeClusterActivitiesResponse 返回参数} */
   DescribeClusterActivities(data: DescribeClusterActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterActivitiesResponse>;
+  /** {@link DescribeClusterStorageOption 查询集群存储选项}({@link DescribeClusterStorageOptionRequest 请求参数}): {@link DescribeClusterStorageOptionResponse 返回参数} */
+  DescribeClusterStorageOption(data: DescribeClusterStorageOptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterStorageOptionResponse>;
   /** {@link DescribeClusters 查询集群列表}({@link DescribeClustersRequest 请求参数}): {@link DescribeClustersResponse 返回参数} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** {@link SetAutoScalingConfiguration 设置弹性伸缩配置信息}({@link SetAutoScalingConfigurationRequest 请求参数}): {@link SetAutoScalingConfigurationResponse 返回参数} */

@@ -403,6 +403,8 @@ declare interface ApplyCertificateRequest {
   OldCertificateId?: string;
   /** 权益包ID，用于免费证书扩容包使用 */
   PackageId?: string;
+  /** 签发后是否删除自动域名验证记录， 默认为否；仅域名为DNS_AUTO验证类型支持传参 */
+  DeleteDnsAutoRecord?: boolean;
 }
 
 declare interface ApplyCertificateResponse {

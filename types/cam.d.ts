@@ -551,7 +551,7 @@ declare interface CreateGroupRequest {
 
 declare interface CreateGroupResponse {
   /** 用户组 ID */
-  GroupId?: number;
+  GroupId: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1395,9 +1395,9 @@ declare interface ListGroupsForUserRequest {
 
 declare interface ListGroupsForUserResponse {
   /** 子用户加入的用户组总数 */
-  TotalNum?: number;
+  TotalNum: number;
   /** 用户组信息 */
-  GroupInfo?: GroupInfo[];
+  GroupInfo: GroupInfo[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1805,7 +1805,7 @@ declare interface UpdateUserSAMLConfigResponse {
 /** {@link Cam 访问管理} */
 declare interface Cam {
   (): Versions;
-  /** {@link AddUser 添加子用户}({@link AddUserRequest 请求参数}): {@link AddUserResponse 返回参数} */
+  /** {@link AddUser 创建子用户}({@link AddUserRequest 请求参数}): {@link AddUserResponse 返回参数} */
   AddUser(data: AddUserRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserResponse>;
   /** {@link AddUserToGroup 用户加入到用户组}({@link AddUserToGroupRequest 请求参数}): {@link AddUserToGroupResponse 返回参数} */
   AddUserToGroup(data: AddUserToGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserToGroupResponse>;

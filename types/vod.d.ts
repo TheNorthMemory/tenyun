@@ -1988,6 +1988,14 @@ declare interface FileDeleteTask {
   FileDeleteResultInfo: FileDeleteResultItem[];
 }
 
+/** 文件审核信息。 */
+declare interface FileReviewInfo {
+  /** 媒体审核信息\*。\* 只展示通过 [音视频审核(ReviewAudioVideo)](https://cloud.tencent.com/document/api/266/80283) 或 [图片审核(ReviewImage)](https://cloud.tencent.com/document/api/266/73217) 发起的审核结果信息。 */
+  MediaReviewInfo?: ReviewInfo | null;
+  /** 媒体封面审核信息\*。\* 只展示通过 [音视频审核(ReviewAudioVideo)](https://cloud.tencent.com/document/api/266/80283) 或 [图片审核(ReviewImage)](https://cloud.tencent.com/document/api/266/73217) 发起的审核结果信息。 */
+  CoverReviewInfo?: ReviewInfo | null;
+}
+
 /** 文件上传任务信息 */
 declare interface FileUploadTask {
   /** 文件唯一 ID。 */
@@ -2525,29 +2533,31 @@ declare interface MediaImageSpriteItem {
 /** 点播文件信息 */
 declare interface MediaInfo {
   /** 基础信息。包括视频名称、分类、播放地址、封面图片等。 */
-  BasicInfo: MediaBasicInfo | null;
+  BasicInfo?: MediaBasicInfo | null;
   /** 元信息。包括大小、时长、视频流信息、音频流信息等。 */
-  MetaData: MediaMetaData | null;
+  MetaData?: MediaMetaData | null;
   /** 转码结果信息。包括该视频转码生成的各种码率的视频的地址、规格、码率、分辨率等。 */
-  TranscodeInfo: MediaTranscodeInfo | null;
+  TranscodeInfo?: MediaTranscodeInfo | null;
   /** 转动图结果信息。对视频转动图（如 gif）后，动图相关信息。 */
-  AnimatedGraphicsInfo: MediaAnimatedGraphicsInfo | null;
+  AnimatedGraphicsInfo?: MediaAnimatedGraphicsInfo | null;
   /** 采样截图信息。对视频采样截图后，相关截图信息。 */
-  SampleSnapshotInfo: MediaSampleSnapshotInfo | null;
+  SampleSnapshotInfo?: MediaSampleSnapshotInfo | null;
   /** 雪碧图信息。对视频截取雪碧图之后，雪碧的相关信息。 */
-  ImageSpriteInfo: MediaImageSpriteInfo | null;
+  ImageSpriteInfo?: MediaImageSpriteInfo | null;
   /** 指定时间点截图信息。对视频依照指定时间点截图后，各个截图的信息。 */
-  SnapshotByTimeOffsetInfo: MediaSnapshotByTimeOffsetInfo | null;
+  SnapshotByTimeOffsetInfo?: MediaSnapshotByTimeOffsetInfo | null;
   /** 视频打点信息。对视频设置的各个打点信息。 */
-  KeyFrameDescInfo: MediaKeyFrameDescInfo | null;
+  KeyFrameDescInfo?: MediaKeyFrameDescInfo | null;
   /** 转自适应码流信息。包括规格、加密类型、打包格式等相关信息。 */
-  AdaptiveDynamicStreamingInfo: MediaAdaptiveDynamicStreamingInfo | null;
+  AdaptiveDynamicStreamingInfo?: MediaAdaptiveDynamicStreamingInfo | null;
   /** 小程序审核信息。 */
-  MiniProgramReviewInfo: MediaMiniProgramReviewInfo | null;
+  MiniProgramReviewInfo?: MediaMiniProgramReviewInfo | null;
   /** 字幕信息。 */
-  SubtitleInfo: MediaSubtitleInfo | null;
+  SubtitleInfo?: MediaSubtitleInfo | null;
   /** 媒体文件唯一标识 ID。 */
-  FileId: string;
+  FileId?: string;
+  /** 审核信息。 */
+  ReviewInfo?: FileReviewInfo | null;
 }
 
 /** 要处理的源视频信息，视频名称、视频自定义 ID。 */
@@ -3706,6 +3716,36 @@ declare interface ReviewAudioVideoTaskOutput {
   SegmentSetFileUrl: string;
   /** 涉及违规信息的嫌疑的视频片段列表文件 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   SegmentSetFileUrlExpireTime: string;
+}
+
+/** 审核信息。 */
+declare interface ReviewInfo {
+  /** 审核模板 ID。 */
+  Definition?: number;
+  /** 审核的结果建议，取值范围：pass：建议通过；review：建议复审；block：建议封禁。 */
+  Suggestion?: string;
+  /** 审核类型，当 Suggestion 为 review 或 block 时有效，格式为：Form.Label。Form 表示违禁的形式，取值范围：Image：画面上的人物或图标；OCR：画面上的文字；ASR：语音中的文字；Voice：声音。Label 表示违禁的标签，取值范围：Porn：色情；Terror：暴恐；Polity：不适宜的信息；Ad：广告；Illegal：违法；Religion：宗教；Abuse：谩骂；Moan：娇喘。 */
+  TypeSet?: string[];
+  /** 审核时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  ReviewTime?: string;
+}
+
+/** 审核模版详情 */
+declare interface ReviewTemplate {
+  /** 审核模版唯一标签。 */
+  Definition: number;
+  /** 模板名称。 */
+  Name: string;
+  /** 模板描述信息。 */
+  Comment: string;
+  /** 模板类型，可选值：Preset：系统预置模板；Custom：用户自定义模板。 */
+  Type: string;
+  /** 需要返回的违规标签列表。 */
+  Labels: string[];
+  /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  CreateTime: string;
+  /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  UpdateTime: string;
 }
 
 /** 华曦达（SDMC）相关的 DRM 密钥提供商信息。 */
@@ -5004,6 +5044,24 @@ declare interface CreateProcedureTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateReviewTemplateRequest {
+  /** 需要返回的违规标签列表，可选值为：Porn：色情；Terror：暴恐；Polity：不适宜的信息；Illegal：违法；Religion：宗教；Abuse：谩骂；Ad：广告；Moan：娇喘。 */
+  Labels: string[];
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: string;
+  /** 审核模板名称，长度限制：64 个字符。 */
+  Name?: string;
+  /** 审核模板描述信息，长度限制：256 个字符。 */
+  Comment?: string;
+}
+
+declare interface CreateReviewTemplateResponse {
+  /** 审核模板唯一标识。 */
+  Definition: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateSampleSnapshotTemplateRequest {
   /** 采样截图类型，取值：Percent：按百分比。Time：按时间间隔。 */
   SampleType: string;
@@ -5350,6 +5408,18 @@ declare interface DeleteProcedureTemplateRequest {
 }
 
 declare interface DeleteProcedureTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DeleteReviewTemplateRequest {
+  /** 审核模板唯一标识。 */
+  Definition: number;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+}
+
+declare interface DeleteReviewTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -5707,6 +5777,8 @@ declare interface DescribeDailyPlayStatFileListResponse {
 declare interface DescribeDrmDataKeyRequest {
   /** 加密后的数据密钥列表，最大支持10个。 */
   EdkList: string[];
+  /** 点播[子应用](/document/product/266/14574) ID 。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
 }
 
 declare interface DescribeDrmDataKeyResponse {
@@ -5881,17 +5953,17 @@ declare interface DescribeLicenseUsageDataResponse {
 declare interface DescribeMediaInfosRequest {
   /** 媒体文件 ID 列表，N 从 0 开始取值，最大 19。 */
   FileIds: string[];
-  /** 指定所有媒体文件需要返回的信息，可同时指定多个信息，N 从 0 开始递增。如果未填写该字段，默认返回所有信息。选项有：basicInfo（视频基础信息）。metaData（视频元信息）。transcodeInfo（视频转码结果信息）。animatedGraphicsInfo（视频转动图结果信息）。imageSpriteInfo（视频雪碧图信息）。snapshotByTimeOffsetInfo（视频指定时间点截图信息）。sampleSnapshotInfo（采样截图信息）。keyFrameDescInfo（打点信息）。adaptiveDynamicStreamingInfo（转自适应码流信息）。miniProgramReviewInfo（小程序审核信息）。 */
-  Filters?: string[];
   /** 点播[子应用](/document/product/266/14574) ID 。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: number;
+  /** 指定所有媒体文件需要返回的信息，可同时指定多个信息，N 从 0 开始递增。如果未填写该字段，默认返回所有信息。选项有：basicInfo（视频基础信息）。metaData（视频元信息）。transcodeInfo（视频转码结果信息）。animatedGraphicsInfo（视频转动图结果信息）。imageSpriteInfo（视频雪碧图信息）。snapshotByTimeOffsetInfo（视频指定时间点截图信息）。sampleSnapshotInfo（采样截图信息）。keyFrameDescInfo（打点信息）。adaptiveDynamicStreamingInfo（转自适应码流信息）。miniProgramReviewInfo（小程序审核信息）。subtitleInfo（字幕信息）。reviewInfo（审核信息）。 */
+  Filters?: string[];
 }
 
 declare interface DescribeMediaInfosResponse {
   /** 媒体文件信息列表。 */
-  MediaInfoSet?: MediaInfo[];
+  MediaInfoSet: MediaInfo[];
   /** 不存在的文件 ID 列表。 */
-  NotExistFileIdSet?: string[];
+  NotExistFileIdSet: string[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -6008,6 +6080,28 @@ declare interface DescribeReviewDetailsResponse {
   TotalDuration: number;
   /** 内容智能识别时长统计数据，每天一个数据。 */
   Data: StatDataItem[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeReviewTemplatesRequest {
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 审核模版唯一标识过滤条件，数组长度限制：100。 */
+  Definitions?: number[];
+  /** 模板类型过滤条件，可选值：Preset：系统预置模板；Custom：用户自定义模板。 */
+  Type?: string;
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认值：10，最大值：100。 */
+  Limit?: number;
+}
+
+declare interface DescribeReviewTemplatesResponse {
+  /** 符合过滤条件的记录总数。 */
+  TotalCount: number;
+  /** 审核模板详情列表。 */
+  ReviewTemplateSet: ReviewTemplate[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -6814,6 +6908,24 @@ declare interface ModifyPersonSampleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyReviewTemplateRequest {
+  /** 审核模板唯一标识。 */
+  Definition: number;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 审核模板名称，长度限制：64 个字符。 */
+  Name?: string;
+  /** 审核模板描述信息，长度限制：256 个字符。 */
+  Comment?: string;
+  /** 需要返回的违规标签列表，可选值为：Porn：色情；Terror：暴恐；Polity：不适宜的信息；Illegal：违法；Religion：宗教；Abuse：谩骂；Ad：广告；Moan：娇喘。注意：不填表示不更新。 */
+  Labels?: string[];
+}
+
+declare interface ModifyReviewTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifySampleSnapshotTemplateRequest {
   /** 采样截图模板唯一标识。 */
   Definition: number;
@@ -7515,6 +7627,8 @@ declare interface Vod {
   CreatePersonSample(data: CreatePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonSampleResponse>;
   /** {@link CreateProcedureTemplate 创建任务流模板}({@link CreateProcedureTemplateRequest 请求参数}): {@link CreateProcedureTemplateResponse 返回参数} */
   CreateProcedureTemplate(data: CreateProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProcedureTemplateResponse>;
+  /** {@link CreateReviewTemplate 创建审核模板}({@link CreateReviewTemplateRequest 请求参数}): {@link CreateReviewTemplateResponse 返回参数} */
+  CreateReviewTemplate(data: CreateReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReviewTemplateResponse>;
   /** {@link CreateSampleSnapshotTemplate 创建采样截图模板}({@link CreateSampleSnapshotTemplateRequest 请求参数}): {@link CreateSampleSnapshotTemplateResponse 返回参数} */
   CreateSampleSnapshotTemplate(data: CreateSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSampleSnapshotTemplateResponse>;
   /** {@link CreateSnapshotByTimeOffsetTemplate 创建指定时间点截图模板}({@link CreateSnapshotByTimeOffsetTemplateRequest 请求参数}): {@link CreateSnapshotByTimeOffsetTemplateResponse 返回参数} */
@@ -7557,6 +7671,8 @@ declare interface Vod {
   DeletePersonSample(data: DeletePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonSampleResponse>;
   /** {@link DeleteProcedureTemplate 删除任务流模板}({@link DeleteProcedureTemplateRequest 请求参数}): {@link DeleteProcedureTemplateResponse 返回参数} */
   DeleteProcedureTemplate(data: DeleteProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProcedureTemplateResponse>;
+  /** {@link DeleteReviewTemplate 删除审核模板}({@link DeleteReviewTemplateRequest 请求参数}): {@link DeleteReviewTemplateResponse 返回参数} */
+  DeleteReviewTemplate(data: DeleteReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReviewTemplateResponse>;
   /** {@link DeleteSampleSnapshotTemplate 删除采样截图模板}({@link DeleteSampleSnapshotTemplateRequest 请求参数}): {@link DeleteSampleSnapshotTemplateResponse 返回参数} */
   DeleteSampleSnapshotTemplate(data: DeleteSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSampleSnapshotTemplateResponse>;
   /** {@link DeleteSnapshotByTimeOffsetTemplate 删除指定时间点截图模板}({@link DeleteSnapshotByTimeOffsetTemplateRequest 请求参数}): {@link DeleteSnapshotByTimeOffsetTemplateResponse 返回参数} */
@@ -7631,6 +7747,8 @@ declare interface Vod {
   DescribeProcedureTemplates(data?: DescribeProcedureTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcedureTemplatesResponse>;
   /** {@link DescribeReviewDetails 查询内容智能识别详情}({@link DescribeReviewDetailsRequest 请求参数}): {@link DescribeReviewDetailsResponse 返回参数} */
   DescribeReviewDetails(data: DescribeReviewDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReviewDetailsResponse>;
+  /** {@link DescribeReviewTemplates 获取审核模板列表}({@link DescribeReviewTemplatesRequest 请求参数}): {@link DescribeReviewTemplatesResponse 返回参数} */
+  DescribeReviewTemplates(data?: DescribeReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReviewTemplatesResponse>;
   /** {@link DescribeSampleSnapshotTemplates 获取采样截图模板列表}({@link DescribeSampleSnapshotTemplatesRequest 请求参数}): {@link DescribeSampleSnapshotTemplatesResponse 返回参数} */
   DescribeSampleSnapshotTemplates(data?: DescribeSampleSnapshotTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleSnapshotTemplatesResponse>;
   /** {@link DescribeSnapshotByTimeOffsetTemplates 获取指定时间点截图模板列表}({@link DescribeSnapshotByTimeOffsetTemplatesRequest 请求参数}): {@link DescribeSnapshotByTimeOffsetTemplatesResponse 返回参数} */
@@ -7695,6 +7813,8 @@ declare interface Vod {
   ModifyMediaStorageClass(data: ModifyMediaStorageClassRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMediaStorageClassResponse>;
   /** {@link ModifyPersonSample 修改素材样本}({@link ModifyPersonSampleRequest 请求参数}): {@link ModifyPersonSampleResponse 返回参数} */
   ModifyPersonSample(data: ModifyPersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonSampleResponse>;
+  /** {@link ModifyReviewTemplate 修改审核模板}({@link ModifyReviewTemplateRequest 请求参数}): {@link ModifyReviewTemplateResponse 返回参数} */
+  ModifyReviewTemplate(data: ModifyReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReviewTemplateResponse>;
   /** {@link ModifySampleSnapshotTemplate 修改采样截图模板}({@link ModifySampleSnapshotTemplateRequest 请求参数}): {@link ModifySampleSnapshotTemplateResponse 返回参数} */
   ModifySampleSnapshotTemplate(data: ModifySampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySampleSnapshotTemplateResponse>;
   /** {@link ModifySnapshotByTimeOffsetTemplate 修改指定时间点截图模板}({@link ModifySnapshotByTimeOffsetTemplateRequest 请求参数}): {@link ModifySnapshotByTimeOffsetTemplateResponse 返回参数} */
