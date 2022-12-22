@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 222+ 款产品，8800+ 服务数</summary>
+<details><summary>共计 223+ 款产品，8804+ 服务数</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -107,6 +107,7 @@ af | [借贷反欺诈](https://cloud.tencent.com/document/product/668) | 2020-02
 afc | [定制建模](https://cloud.tencent.com/document/product/1029) | 2020-02-26(3)
 ame | [正版曲库直通车](https://cloud.tencent.com/document/product/1155) | 2019-09-16(31)
 ams | [音频内容安全](https://cloud.tencent.com/document/product/1219) | 2020-12-29(5)<br/>2020-06-08(7)
+anicloud | [动效素材服务](https://cloud.tencent.com/document/product/1641) | 2022-09-23(3)
 antiddos | [T-Sec-DDoS防护(Anti-DDoS)](https://cloud.tencent.com/document/product/1021) | 2020-03-09(93)
 apcas | [汽车精准获客服务](https://cloud.tencent.com/document/product/1244) | 2020-11-27(7)
 ape | [正版图库直通车](https://cloud.tencent.com/document/product/1181) | 2020-05-13(8)
@@ -251,7 +252,7 @@ redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 20
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3)
 rkp | [风险探针](https://cloud.tencent.com/document/product/1169) | 2019-12-09(3)
 rp | [注册保护](https://cloud.tencent.com/document/product/1191) | 2020-02-24(1)
-rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(54)
+rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(55)
 scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(44+7)
 ses | [邮件推送](https://cloud.tencent.com/document/product/1288) | 2020-10-02(26)
 smh | [智能媒资托管](https://cloud.tencent.com/document/product/1339) | 2021-07-12(10)

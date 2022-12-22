@@ -2068,6 +2068,8 @@ declare interface RecognizeHealthCodeOCRResponse {
   Vaccination: string;
   /** 场所名称（允许返回空值） */
   SpotName: string;
+  /** 疫苗接种时间 */
+  VaccinationTime: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

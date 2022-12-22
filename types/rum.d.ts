@@ -1728,6 +1728,16 @@ declare interface StopInstanceResponse {
   RequestId?: string;
 }
 
+declare interface StopProjectRequest {
+  /** 项目 id */
+  ProjectId: number;
+}
+
+declare interface StopProjectResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 /** {@link Rum 前端性能监控} */
 declare interface Rum {
   (): Versions;
@@ -1839,6 +1849,8 @@ declare interface Rum {
   ResumeInstance(data: ResumeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeInstanceResponse>;
   /** {@link StopInstance 停止实例}({@link StopInstanceRequest 请求参数}): {@link StopInstanceResponse 返回参数} */
   StopInstance(data: StopInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstanceResponse>;
+  /** {@link StopProject 停止项目上报}({@link StopProjectRequest 请求参数}): {@link StopProjectResponse 返回参数} */
+  StopProject(data: StopProjectRequest, config?: AxiosRequestConfig): AxiosPromise<StopProjectResponse>;
 }
 
 export declare type Versions = ["2021-06-22"];

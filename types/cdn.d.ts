@@ -1652,7 +1652,7 @@ declare interface QueryStringKey {
   Switch: string | null;
   /** 是否重新排序 */
   Reorder?: string | null;
-  /** includeAll | excludeAll | includeCustom | excludeAll 使用/排除部分url参数 */
+  /** includeAll | excludeAll | includeCustom | excludeCustom 使用/排除部分url参数 */
   Action?: string | null;
   /** 使用/排除的url参数数组，';' 分割 */
   Value?: string | null;

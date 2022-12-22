@@ -11,6 +11,7 @@ import Af, { Versions as AfVersions } from "./af";
 import Afc, { Versions as AfcVersions } from "./afc";
 import Ame, { Versions as AmeVersions } from "./ame";
 import Ams, { Versions as AmsVersions } from "./ams";
+import Anicloud, { Versions as AnicloudVersions } from "./anicloud";
 import Antiddos, { Versions as AntiddosVersions } from "./antiddos";
 import Apcas, { Versions as ApcasVersions } from "./apcas";
 import Ape, { Versions as ApeVersions } from "./ape";
@@ -235,6 +236,7 @@ export declare type SERVICE_VERSIONS = {
   afc: AfcVersions,
   ame: AmeVersions,
   ams: AmsVersions,
+  anicloud: AnicloudVersions,
   antiddos: AntiddosVersions,
   apcas: ApcasVersions,
   ape: ApeVersions,
@@ -486,6 +488,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   ame: Ame,
   /** {@link Ams 音频内容安全} */
   ams: Ams,
+  /** {@link Anicloud 动效素材服务} */
+  anicloud: Anicloud,
   /** {@link Antiddos T-Sec-DDoS防护(Anti-DDoS)} */
   antiddos: Antiddos,
   /** {@link Apcas 汽车精准获客服务} */

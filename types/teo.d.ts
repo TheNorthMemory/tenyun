@@ -936,6 +936,8 @@ declare interface FollowOrigin {
   DefaultCacheTime?: number | null;
   /** 源站未返回 Cache-Control 头时, 设置缓存/不缓存 */
   DefaultCache?: string | null;
+  /** 源站未返回 Cache-Control 头时, 使用/不使用默认缓存策略 */
+  DefaultCacheStrategy?: string | null;
 }
 
 /** 访问协议强制https跳转配置 */
