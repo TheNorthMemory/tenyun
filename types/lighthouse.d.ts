@@ -581,11 +581,15 @@ declare interface ModifyBundle {
 /** 折扣详情信息。 */
 declare interface PolicyDetail {
   /** 用户折扣。 */
-  UserDiscount: number;
+  UserDiscount?: number;
   /** 公共折扣。 */
-  CommonDiscount: number;
+  CommonDiscount?: number;
   /** 最终折扣。 */
-  FinalDiscount: number;
+  FinalDiscount?: number;
+  /** 活动折扣。取值为null，表示无有效值，即没有折扣。 */
+  ActivityDiscount?: number | null;
+  /** 折扣类型。user：用户折扣; common：官网折扣; activity：活动折扣。 取值为null，表示无有效值，即没有折扣。 */
+  DiscountType?: string | null;
 }
 
 /** 价格信息 */
@@ -1039,9 +1043,9 @@ declare interface DescribeBundleDiscountRequest {
 
 declare interface DescribeBundleDiscountResponse {
   /** 币种：CNY人民币，USD 美元。 */
-  Currency: string;
+  Currency?: string;
   /** 折扣梯度详情，每个梯度包含的信息有：时长，折扣数，总价，折扣价，折扣详情（用户折扣、官网折扣、最终折扣）。 */
-  DiscountDetail: DiscountDetail[];
+  DiscountDetail?: DiscountDetail[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1133,9 +1137,9 @@ declare interface DescribeDiskDiscountRequest {
 
 declare interface DescribeDiskDiscountResponse {
   /** 币种：CNY人民币，USD 美元。 */
-  Currency: string;
+  Currency?: string;
   /** 折扣梯度详情，每个梯度包含的信息有：时长，折扣数，总价，折扣价，折扣详情（用户折扣、官网折扣、最终折扣）。 */
-  DiscountDetail: DiscountDetail[];
+  DiscountDetail?: DiscountDetail[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

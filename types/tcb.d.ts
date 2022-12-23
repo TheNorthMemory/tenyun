@@ -300,6 +300,10 @@ declare interface CloudBaseRunServerVersionItem {
   Architecture: string | null;
 }
 
+/** 主机路径挂载参数 */
+declare interface CloudBaseRunServiceVolumeHostPath {
+}
+
 /** 对标 EKS VolumeMount */
 declare interface CloudBaseRunServiceVolumeMount {
   /** Volume 名称 */
@@ -470,6 +474,8 @@ declare interface CloudRunServiceVolume {
   EnableEmptyDirVolume?: boolean | null;
   /** emptydir数据卷详细信息 */
   EmptyDir?: CloudBaseRunEmptyDirVolumeSource | null;
+  /** 主机路径挂载信息 */
+  HostPath?: CloudBaseRunServiceVolumeHostPath | null;
 }
 
 /** cls日志信息 */
@@ -952,6 +958,16 @@ declare interface Tag {
   Key: string;
   /** 标签值 */
   Value: string;
+}
+
+/** tke集群信息 */
+declare interface TkeClusterInfo {
+  /** 集群ID */
+  ClusterId?: string | null;
+  /** 集群的vpcId */
+  VpcId?: string | null;
+  /** 版本内网CLB所在子网Id */
+  VersionClbSubnetId?: string | null;
 }
 
 declare interface BindEnvGatewayRequest {
@@ -1772,6 +1788,10 @@ declare interface DescribeCloudBaseRunServerVersionResponse {
   RepoLanguage: string | null;
   /** 自动扩缩容策略组 */
   PolicyDetail: HpaPolicy[] | null;
+  /** Tke集群信息 */
+  TkeClusterInfo: TkeClusterInfo | null;
+  /** 版本工作负载类型；deployment/deamonset */
+  TkeWorkloadType: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

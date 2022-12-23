@@ -960,6 +960,12 @@ declare interface GeoIp {
   Province?: string;
 }
 
+/** Grpc配置项 */
+declare interface Grpc {
+  /** 是否开启Grpc配置，取值有：on：开启；off：关闭。 */
+  Switch: string;
+}
+
 /** 刷新预热附带的头部信息 */
 declare interface Header {
   /** HTTP头部名称。 */
@@ -2308,6 +2314,8 @@ declare interface ZoneSetting {
   Https: Https | null;
   /** 回源时是否携带客户端IP所属地域信息的配置。 */
   ClientIpCountry: ClientIpCountry | null;
+  /** Grpc协议支持配置。 */
+  Grpc: Grpc | null;
 }
 
 declare interface BindZoneToPlanRequest {
@@ -4725,6 +4733,8 @@ declare interface ModifyZoneSettingRequest {
   Ipv6?: Ipv6;
   /** 回源时是否携带客户端IP所属地域信息的配置。不填写表示保持原有配置。 */
   ClientIpCountry?: ClientIpCountry;
+  /** Grpc协议支持配置。不填写表示保持原有配置。 */
+  Grpc?: Grpc;
 }
 
 declare interface ModifyZoneSettingResponse {

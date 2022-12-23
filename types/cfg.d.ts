@@ -76,7 +76,7 @@ declare interface Task {
   Tags?: TagWithDescribe[] | null;
 }
 
-/** 从经验模版创建演练时需要配置的任务参数 */
+/** 从经验模板创建演练时需要配置的任务参数 */
 declare interface TaskConfig {
   /** 动作组配置，需要保证配置个数和经验中的动作组个数一致 */
   TaskGroupsConfig: TaskGroupConfig[];

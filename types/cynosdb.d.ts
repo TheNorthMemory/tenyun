@@ -564,6 +564,18 @@ declare interface InputAccount {
   Host?: string;
 }
 
+/** 实例初始化配置信息 */
+declare interface InstanceInitInfo {
+  /** 实例cpu */
+  Cpu: number;
+  /** 实例内存 */
+  Memory: number;
+  /** 实例类型 rw/ro */
+  InstanceType: string;
+  /** 实例个数,范围[1,15] */
+  InstanceCount: number;
+}
+
 /** 实例可售卖规格详细信息，创建实例时Cpu/Memory确定实例规格，存储可选大小为[MinStorageSize,MaxStorageSize] */
 declare interface InstanceSpec {
   /** 实例CPU，单位：核 */
@@ -1089,6 +1101,8 @@ declare interface CreateClustersRequest {
   ParamTemplateId?: number;
   /** 多可用区地址 */
   SlaveZone?: string;
+  /** 实例初始化配置信息，主要用于购买集群时选不同规格实例 */
+  InstanceInitInfos?: InstanceInitInfo[];
 }
 
 declare interface CreateClustersResponse {

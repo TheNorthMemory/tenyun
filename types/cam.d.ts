@@ -328,6 +328,8 @@ declare interface SecretIdLastUsed {
   SecretId: string;
   /** 最后访问日期(有1天延迟) */
   LastUsedDate: string | null;
+  /** 最后密钥访问日期 */
+  LastSecretUsedDate: number | null;
 }
 
 /** 策略信息 */

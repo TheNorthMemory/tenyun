@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 223+ 款产品，8804+ 服务数</summary>
+<details><summary>共计 223+ 款产品，8806+ 服务数</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -252,7 +252,7 @@ redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 20
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3)
 rkp | [风险探针](https://cloud.tencent.com/document/product/1169) | 2019-12-09(3)
 rp | [注册保护](https://cloud.tencent.com/document/product/1191) | 2020-02-24(1)
-rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(55)
+rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(57)
 scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(44+7)
 ses | [邮件推送](https://cloud.tencent.com/document/product/1288) | 2020-10-02(26)
 smh | [智能媒资托管](https://cloud.tencent.com/document/product/1339) | 2021-07-12(10)

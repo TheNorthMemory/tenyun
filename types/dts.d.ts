@@ -278,6 +278,14 @@ declare interface Database {
   ProcedureMode?: string | null;
   /** ProcedureMode取值为Partial时需要填写 */
   Procedures?: string[] | null;
+  /** 触发器迁移模式，all(为当前对象下的所有对象)，partial(部分对象) */
+  TriggerMode?: string | null;
+  /** 当TriggerMode为partial，指定要迁移的触发器名称 */
+  Triggers?: string[] | null;
+  /** 事件迁移模式，all(为当前对象下的所有对象)，partial(部分对象) */
+  EventMode?: string | null;
+  /** 当EventMode为partial，指定要迁移的事件名称 */
+  Events?: string[] | null;
 }
 
 /** 迁移对象选项，需要告知迁移服务迁移哪些库表对象 */
@@ -354,6 +362,8 @@ declare interface DifferenceItem {
 declare interface Endpoint {
   /** 地域英文名，如：ap-guangzhou */
   Region?: string | null;
+  /** tdsql mysql版的节点类型，枚举值为proxy、set */
+  Role?: string | null;
   /** 数据库内核类型，tdsql中用于区分不同内核：percona,mariadb,mysql */
   DbKernel?: string | null;
   /** 数据库实例ID，格式如：cdb-powiqx8q */
@@ -384,20 +394,22 @@ declare interface Endpoint {
   Supplier?: string | null;
   /** 数据库版本，当实例为RDS实例时才有效，其他实例忽略，格式如：5.6或者5.7，默认为5.6 */
   EngineVersion?: string | null;
-  /** 资源所属账号 为空或self(表示本账号内资源)、other(表示跨账号资源) */
-  AccountMode?: string | null;
   /** 实例所属账号，如果为跨账号实例此项必填 */
   Account?: string | null;
+  /** 资源所属账号 为空或self(表示本账号内资源)、other(表示跨账号资源) */
+  AccountMode?: string | null;
   /** 跨账号同步时的角色，只允许[a-zA-Z0-9\-\_]+，如果为跨账号实例此项必填 */
   AccountRole?: string | null;
+  /** 外部角色id */
+  RoleExternalId?: string | null;
   /** 临时密钥Id，如果为跨账号实例此项必填 */
   TmpSecretId?: string | null;
   /** 临时密钥Key，如果为跨账号实例此项必填 */
   TmpSecretKey?: string | null;
   /** 临时Token，如果为跨账号实例此项必填 */
   TmpToken?: string | null;
-  /** 外部角色id */
-  RoleExternalId?: string | null;
+  /** 是否走加密传输、UnEncrypted表示不走加密传输，Encrypted表示走加密传输，默认UnEncrypted */
+  EncryptConn?: string | null;
 }
 
 /** 任务错误信息 */
@@ -448,6 +460,8 @@ declare interface JobItem {
   TradeInfo: TradeInfo | null;
   /** 标签信息 */
   Tags: TagItem[] | null;
+  /** 自动重试时间段信息 */
+  AutoRetryTimeRangeMinutes: number | null;
 }
 
 /** 存放配置时的额外信息 */
@@ -522,6 +536,12 @@ declare interface Objects {
   Databases?: Database[] | null;
   /** 高级对象类型，如function、procedure，当需要同步高级对象时，初始化类型必须包含结构初始化类型，即Options.InitType字段值为Structure或Full */
   AdvancedObjects?: string[] | null;
+  /** OnlineDDL类型 */
+  OnlineDDL?: OnlineDDL | null;
+}
+
+/** OnlineDDL类型 */
+declare interface OnlineDDL {
 }
 
 /** 数据同步中的选项 */
@@ -700,7 +720,7 @@ declare interface SyncJobInfo {
   SrcDatabaseType: string | null;
   /** 源端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云) */
   SrcAccessType: string | null;
-  /** 源端信息 */
+  /** 源端信息，单节点数据库使用 */
   SrcInfo: Endpoint | null;
   /** 目标端地域，如：ap-guangzhou等 */
   DstRegion: string | null;
@@ -708,7 +728,7 @@ declare interface SyncJobInfo {
   DstDatabaseType: string | null;
   /** 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云) */
   DstAccessType: string | null;
-  /** 目标端信息 */
+  /** 目标端信息，单节点数据库使用 */
   DstInfo: Endpoint | null;
   /** 创建时间，格式为 yyyy-mm-dd hh:mm:ss */
   CreateTime: string | null;
@@ -730,6 +750,8 @@ declare interface SyncJobInfo {
   AutoRenew: number | null;
   /** 下线时间，格式为 yyyy-mm-dd hh:mm:ss */
   OfflineTime: string | null;
+  /** 自动重试时间段设置 */
+  AutoRetryTimeRangeMinutes: number | null;
 }
 
 /** 数据同步库表信息描述 */
@@ -829,22 +851,26 @@ declare interface ConfigureSyncJobRequest {
   JobId: string;
   /** 源端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)、noProxy,注意具体可选值依赖当前链路 */
   SrcAccessType: string;
-  /** 源端信息 */
-  SrcInfo: Endpoint;
   /** 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)、noProxy,注意具体可选值依赖当前链路 */
   DstAccessType: string;
-  /** 目标端信息 */
-  DstInfo: Endpoint;
   /** 同步任务选项 */
   Options: Options;
   /** 同步库表对象信息 */
   Objects: Objects;
   /** 同步任务名称 */
   JobName?: string;
+  /** 枚举值是 liteMode 和 fullMode ，分别对应精简模式或正常模式 */
+  JobMode?: string;
   /** 运行模式，取值如：Immediate(表示立即运行，默认为此项值)、Timed(表示定时运行) */
   RunMode?: string;
   /** 期待启动时间，当RunMode取值为Timed时，此值必填，形如："2006-01-02 15:04:05" */
   ExpectRunTime?: string;
+  /** 源端信息，单节点数据库使用 */
+  SrcInfo?: Endpoint;
+  /** 目标端信息，单节点数据库使用 */
+  DstInfo?: Endpoint;
+  /** 自动重试的时间段、可设置5至720分钟、0表示不重试 */
+  AutoRetryTimeRangeMinutes?: number;
 }
 
 declare interface ConfigureSyncJobResponse {
@@ -1323,6 +1349,8 @@ declare interface ModifyMigrationJobRequest {
   ExpectRunTime?: string;
   /** 标签信息 */
   Tags?: TagItem[];
+  /** 自动重试的时间段、可设置5至720分钟、0表示不重试 */
+  AutoRetryTimeRangeMinutes?: number;
 }
 
 declare interface ModifyMigrationJobResponse {
