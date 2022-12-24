@@ -1,6 +1,6 @@
 # TenYun
 
-Promise based and Chainable Tencent Cloud OpenAPI client for NodeJS
+Promise based and chained Tencent Cloud OpenAPI client for NodeJS
 
 [![release](https://img.shields.io/npm/v/tenyun)](https://github.com/TheNorthMemory/tenyun/releases)
 [![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/tenyun?label=snyk.io)](https://snyk.io/advisor/npm-package/tenyun)

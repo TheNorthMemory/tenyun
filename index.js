@@ -262,8 +262,8 @@ class TenYun {
   /**
    * @param {string} SecretId
    * @param {import('crypto').BinaryLike} SecretKey
-   * @param {?string} Token
-   * @param {?string} Region
+   * @param {string} [Token]
+   * @param {string} [Region]
    */
   constructor(SecretId, SecretKey, Token, Region) {
     this[SECRET_ID] = SecretId;
@@ -286,10 +286,7 @@ class TenYun {
      * @return {() => string[]}
      */
     return (instance, service) => {
-      if (typeof service === 'symbol' || service === 'inspect') {
-        return instance;
-      }
-
+      if (typeof service === 'symbol') { return instance[service]; }
       if (!Object.prototype.hasOwnProperty.call(instance, service)) {
         const name = `${service}${BASE_DOMAIN}`;
         Reflect.set(instance, service, new Proxy({ [name]: () => SERVICE_VERSIONS[service]?.slice() ?? [] }[name], { get: this[ACTION] }));
@@ -306,10 +303,7 @@ class TenYun {
      * @return {(data?: object|Buffer, config?: import('axios').AxiosRequestConfig) => import('axios').AxiosPromise}
      */
     return (endpoint, action) => {
-      if (typeof action === 'symbol' || action === 'inspect') {
-        return endpoint;
-      }
-
+      if (typeof action === 'symbol') { return endpoint[action]; }
       if (!Object.prototype.hasOwnProperty.call(endpoint, action)) {
         const client = this[CLIENT];
         Reflect.set(endpoint, action, {

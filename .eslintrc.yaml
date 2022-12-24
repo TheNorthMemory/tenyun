@@ -1,0 +1,19 @@
+parser: "@babel/eslint-parser"
+parserOptions:
+  requireConfigFile: false
+env:
+  node: true
+extends:
+  - airbnb-base
+rules:
+  max-len: [2, 180]
+  valid-jsdoc: 1
+overrides:
+    - env:
+        mocha: true
+        node: true
+      plugins:
+        - mocha
+      files:
+        - "tests/*.test.js"
+        - "tests/**/*.test.js"
