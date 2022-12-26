@@ -206,7 +206,7 @@ declare interface DBInfo {
   TmpToken?: string | null;
 }
 
-/** 迁移对象信息 */
+/** 迁移对象信息，在配置库表视图等对象信息时大小写敏感 */
 declare interface DBItem {
   /** 需要迁移或同步的库名，当ObjectMode为partial时，此项必填 */
   DbName?: string | null;
@@ -766,7 +766,7 @@ declare interface Table {
 
 /** 表对象集合，当 TableMode 为 partial 时，此项需要填写 */
 declare interface TableItem {
-  /** 迁移的表名 */
+  /** 迁移的表名，大小写敏感 */
   TableName?: string | null;
   /** 迁移后的表名，当TableEditMode为rename时此项必填 */
   NewTableName?: string | null;

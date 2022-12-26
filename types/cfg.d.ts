@@ -248,6 +248,22 @@ declare interface TaskMonitor {
   Unit: string | null;
 }
 
+/** 演练报告状态信息 */
+declare interface TaskReportInfo {
+  /** 0--未开始，1--正在导出，2--导出成功，3--导出失败 */
+  Stage: number;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 有效期截止时间 */
+  ExpirationTime: string;
+  /** 是否有效 */
+  Expired: boolean;
+  /** 演练报告cos文件地址 */
+  CosUrl: string | null;
+  /** 演练报告导出日志 */
+  Log: string | null;
+}
+
 /** 经验库 */
 declare interface Template {
   /** 经验库ID */
@@ -454,6 +470,8 @@ declare interface DescribeTaskRequest {
 declare interface DescribeTaskResponse {
   /** 任务信息 */
   Task: Task;
+  /** 任务对应的演练报告信息，null表示未导出报告 */
+  ReportInfo: TaskReportInfo | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

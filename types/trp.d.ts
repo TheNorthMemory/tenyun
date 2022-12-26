@@ -252,9 +252,9 @@ declare interface Quota {
   CorpId?: number | null;
   /** 开通服务 */
   Services?: string[] | null;
-  /** 工厂配额 */
+  /** 商户配额 */
   FactoryQuota?: number | null;
-  /** 产品配额 */
+  /** 商品配额 */
   ItemQuota?: number | null;
   /** 溯源码配额 */
   TrackQuota?: number | null;
@@ -266,7 +266,7 @@ declare interface Quota {
   RiskQuota?: number | null;
   /** 溯源类型 */
   TrackType?: number | null;
-  /** 开通版本 basic standard enterprise */
+  /** 开通版本 lite:轻量版, basic:基础版, standard:标准版 */
   Version?: string | null;
 }
 

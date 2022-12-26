@@ -3215,7 +3215,7 @@ declare interface DescribeDDoSAttackTopDataRequest {
   StartTime: string;
   /** 结束时间。 */
   EndTime: string;
-  /** 查询的统计指标，取值有：ddos_attackFlux_protocol：攻击总流量协议类型分布排行；ddos_attackPackageNum_protocol：攻击总包量协议类型分布排行；ddos_attackNum_attackType：攻击总次数攻击类型分布排行；ddos_attackNum_sregion：攻击总次数攻击源地区分布排行；ddos_attackFlux_sip：攻击总流量攻击源ip分布排行；ddos_attackFlux_sregion：攻击总流量攻击源地区分布排行。 */
+  /** 查询的统计指标，取值有：ddos_attackFlux_protocol：按各协议的攻击流量排行；ddos_attackPackageNum_protocol：按各协议的攻击包量排行；ddos_attackNum_attackType：按各攻击类型的攻击数量排行；ddos_attackNum_sregion：按攻击源地区的攻击数量排行；ddos_attackFlux_sip：按攻击源IP的攻击数量排行；ddos_attackFlux_sregion：按攻击源地区的攻击数量排行。 */
   MetricName: string;
   /** 站点ID集合，不填默认选择全部站点。 */
   ZoneIds?: string[];
@@ -3324,6 +3324,32 @@ declare interface DescribeDefaultCertificatesResponse {
   TotalCount: number;
   /** 默认证书列表。 */
   DefaultServerCertInfo: DefaultServerCertInfo[];
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDistributionL4AccessDataRequest {
+  /** 开始时间。 */
+  StartTime: string;
+  /** 结束时间。 */
+  EndTime: string;
+  /** 查询指标, 取值有：l4Flow_connection_distribution：连接时长分布情况。 */
+  MetricNames: string[];
+  /** 站点ID集合，不填默认选择全部站点。 */
+  ZoneIds?: string[];
+  /** 查询时间粒度，取值有：min：1分钟；5min：5分钟；hour：1小时；day：1天;。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
+  Interval?: string;
+  /** 过滤条件，详细的过滤条件如下：ruleId 按照【转发规则ID】进行过滤。 类型：String 必选：否proxyId 按照【四层代理实例ID】进行过滤。 类型：String 必选：否 */
+  QueryConditions?: QueryCondition[];
+  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
+  Area?: string;
+}
+
+declare interface DescribeDistributionL4AccessDataResponse {
+  /** 查询结果的总条数。 */
+  TotalCount: number;
+  /** 连接时长分布图。 */
+  TopDataRecords: TopDataRecord[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -3527,10 +3553,10 @@ declare interface DescribeOverviewL7DataRequest {
   Protocol?: string;
   /** 查询时间粒度，取值有：min：1分钟；5min：5分钟；hour：1小时；day：1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
   Interval?: string;
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据。不填将根据用户的地域智能选择地区。 */
-  Area?: string;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：tagKey 按照【标签Key】进行过滤。 类型：String 必选：否tagValue 按照【标签Value】进行过滤。 类型：String 必选：否 */
+  /** 过滤条件，详细的过滤条件如下：tagKey 按照【标签Key】进行过滤。 类型：String 必选：否tagValue 按照【标签Value】进行过滤。 类型：String 必选：否 */
   Filters?: QueryCondition[];
+  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
+  Area?: string;
 }
 
 declare interface DescribeOverviewL7DataResponse {
@@ -3745,11 +3771,11 @@ declare interface DescribeSingleL7AnalysisDataRequest {
   MetricNames: string[];
   /** 查询的站点集合，不填默认查询所有站点。 */
   ZoneIds?: string[];
-  /** 筛选条件, key可选的值有：country：国家/地区；domain：域名；protocol：协议类型；tagKey：标签Key；tagValue；标签Value。 */
+  /** 过滤条件，详细的过滤条件如下：country 按照【国家/地区】进行过滤，国家/地区遵循ISO 3166规范。 类型：String 必选：否domain 按照【子域名】进行过滤，子域名形如： test.example.com。 类型：String 必选：否protocol 按照【HTTP协议】进行过滤。 类型：String 必选：否 可选项： HTTP/1.0：HTTP 1.0； HTTP/1.1：HTTP 1.1； HTTP/2.0：HTTP 2.0； HTTP/3.0：HTTP 3.0； WebSocket：WebSocket。tagKey 按照【标签Key】进行过滤。 类型：String 必选：否tagValue 按照【标签Value】进行过滤。 类型：String 必选：否 */
   Filters?: QueryCondition[];
   /** 查询时间粒度，取值有：min：1分钟；5min：5分钟；hour：1小时；day：1天;。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
   Interval?: string;
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据。不填将根据用户所在地智能选择地区。 */
+  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
   Area?: string;
 }
 
@@ -3798,6 +3824,32 @@ declare interface DescribeSpeedTestingQuotaResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTimingL4AccessDataRequest {
+  /** 开始时间。 */
+  StartTime: string;
+  /** 结束时间。 */
+  EndTime: string;
+  /** 查询指标，取值有： l4Flow_connections：连接数。 */
+  MetricNames: string[];
+  /** 站点ID集合，不填默认选择全部站点。 */
+  ZoneIds?: string[];
+  /** 查询时间粒度，取值有：min：1分钟；5min：5分钟；hour：1小时；day：1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
+  Interval?: string;
+  /** 过滤条件，详细的过滤条件如下：ruleId 按照【转发规则ID】进行过滤。 类型：String 必选：否proxyId 按照【四层代理实例ID】进行过滤。 类型：String 必选：否 */
+  QueryConditions?: QueryCondition[];
+  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
+  Area?: string;
+}
+
+declare interface DescribeTimingL4AccessDataResponse {
+  /** 查询结果的总条数。 */
+  TotalCount: number;
+  /** 四层连接数列表。 */
+  TimingDataRecords: TimingDataRecord[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTimingL4DataRequest {
   /** 开始时间。 */
   StartTime: string;
@@ -3811,9 +3863,9 @@ declare interface DescribeTimingL4DataRequest {
   ProxyIds?: string[];
   /** 查询时间粒度，取值有：min: 1分钟 ；5min: 5分钟 ；hour: 1小时 ；day: 1天 。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
   Interval?: string;
-  /** 筛选条件, key可选的值有：ruleId: 根据规则Id进行过滤；proxyId: 根据通道Id进行过滤。 */
+  /** 过滤条件，详细的过滤条件如下：ruleId 按照【转发规则ID】进行过滤。 类型：String 必选：否proxyId 按照【四层代理实例ID】进行过滤。 类型：String 必选：否 */
   Filters?: QueryCondition[];
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据。不填将根据用户所在地智能选择地区。 */
+  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
   Area?: string;
 }
 
@@ -3837,17 +3889,17 @@ declare interface DescribeTimingL7AnalysisDataRequest {
   ZoneIds?: string[];
   /** 查询时间粒度，取值有：min: 1分钟；5min: 5分钟；hour: 1小时；day: 1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
   Interval?: string;
-  /** 筛选条件，key可选的值有：country：国家/地区；domain：域名；protocol：协议类型；resourceType：资源类型；statusCode：状态码； browserType：浏览器类型；deviceType：设备类型；operatingSystemType：操作系统类型；tlsVersion：tls版本；url：url地址；referer：refer头信息；ipVersion：ip版本；tagKey：标签Key；tagValue：标签Value。 */
+  /** 过滤条件，详细的过滤条件如下：country 按照【国家/地区】进行过滤，国家/地区遵循ISO 3166规范。 类型：String 必选：否province 按照【省份】进行过滤，此参数只支持服务区域为中国大陆。 类型：String 必选：否isp 按照【运营商】进行过滤，此参数只支持服务区域为中国大陆。 类型：String 必选：否 可选项： 2：中国电信； 26：中国联通； 1046：中国移动； 3947：中国铁通； 38：教育网； 43：长城带宽； 0：其他运营商。domain 按照【子域名】进行过滤，子域名形如： test.example.com。 类型：String 必选：否url 按照【URL】进行过滤，此参数最长支持30天的查询范围，如果需要过滤多个值，多个值之间使用分号间隔，URL形如：/content,。 类型：String 必选：否referer 按照【Referer头信息】进行过滤, 此参数最长支持30天的查询范围，Referer形如：example.com。 类型：String 必选：否 必选：否resourceType 按照【资源类型】进行过滤，此参数最长支持30天的的查询范围，资源类型形如：jpg，png。 类型：String 必选：否protocol 按照【HTTP协议】进行过滤。 类型：String 必选：否 可选项： HTTP/1.0：HTTP 1.0； HTTP/1.1：HTTP 1.1； HTTP/2.0：HTTP 2.0； HTTP/3.0：HTTP 3.0； WebSocket：WebSocket。statusCode 按照【状态码】进行过滤，此参数最长支持30天的查询范围。 类型：String 必选：否 可选项： 1XX：1xx类型的状态码； 100：100状态码； 101：101状态码； 102：102状态码； 2XX：2xx类型的状态码； 200：200状态码； 201：201状态码； 202：202状态码； 203：203状态码； 204：204状态码； 100：100状态码； 206：206状态码； 207：207状态码； 3XX：3xx类型的状态码； 300：300状态码； 301：301状态码； 302：302状态码； 303：303状态码； 304：304状态码； 305：305状态码； 307：307状态码； 4XX：4xx类型的状态码； 400：400状态码； 401：401状态码； 402：402状态码； 403：403状态码； 404：404状态码； 405：405状态码； 406：406状态码； 407：407状态码； 408：408状态码； 409：409状态码； 410：410状态码； 411：411状态码； 412：412状态码； 412：413状态码； 414：414状态码； 415：415状态码； 416：416状态码； 417：417状态码； 422：422状态码； 423：423状态码； 424：424状态码； 426：426状态码； 451：451状态码； 5XX：5xx类型的状态码； 500：500状态码； 501：501状态码； 502：502状态码； 503：503状态码； 504：504状态码； 505：505状态码； 506：506状态码； 507：507状态码； 510：510状态码； 514：514状态码； 544：544状态码。browserType 按照【浏览器类型】进行过滤，此参数最长支持30天的查询范围。 类型：String 必选：否 可选项： Firefox：Firefox浏览器； Chrome：Chrome浏览器； Safari：Safari浏览器； Other：其他浏览器类型； Empty：浏览器器类型为空； Bot：Bot攻击； MicrosoftEdge：MicrosoftEdge浏览器； IE：IE浏览器； Opera：Opera浏览器； QQBrowser：QQ浏览器； LBBrowser：LB浏览器； MaxthonBrowser：Maxthon浏览器； SouGouBrowser：搜狗浏览器； BIDUBrowser：BIDU浏览器； TaoBrowser：淘浏览器； UBrowser：UB浏览器。deviceType 按照【设备类型】进行过滤，此参数最长支持30天的查询范围。 类型：String 必选：否 可选项： TV：TV设备； Tablet：Tablet设备； Mobile：Mobile设备； Desktop：Desktop设备； Other：其他设备类型； Empty：设备类型为空。operatingSystemType 按照【操作系统类型】进行过滤，此参数最长支持30天的查询范围。 类型：String 必选：否 可选项： Linux：Linux操作系统； MacOS：MacOs操作系统； Android：Android操作系统； IOS：IOS操作系统； Windows：Windows操作系统； NetBSD：NetBSD； ChromiumOS：ChromiumOS； Bot：Bot攻击； Other：其他类型的操作系统； Empty：操作系统为空。tlsVersion 按照【TLS版本】进行过滤，此参数最长支持30天的查询范围。 类型：String 必选：否 可选项： TLS1.0：TLS 1.0； TLS1.1：TLS 1.1； TLS1.2：TLS 1.2； TLS1.3：TLS 1.3。ipVersion 按照【IP版本】进行过滤。 类型：String 必选：否 可选项： 4：Ipv4； 6：Ipv6。tagKey 按照【标签Key】进行过滤。 类型：String 必选：否tagValue 按照【标签Value】进行过滤。 类型：String 必选：否 */
   Filters?: QueryCondition[];
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据。不填将根据用户的地域智能选择地区。 */
+  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
   Area?: string;
 }
 
 declare interface DescribeTimingL7AnalysisDataResponse {
-  /** 时序流量数据列表。 */
-  Data: TimingDataRecord[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
+  /** 时序流量数据列表。 */
+  Data: TimingDataRecord[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -3861,19 +3913,19 @@ declare interface DescribeTimingL7CacheDataRequest {
   MetricNames: string[];
   /** 站点集合，不填默认选择全部站点。 */
   ZoneIds?: string[];
-  /** 筛选条件，key可选的值有： cacheType：缓存类型(状态)；domain：Host/域名；resourceType：资源类型；url：url地址；tagKey：标签Key；tagValue：标签Value。 */
+  /** 过滤条件，详细的过滤条件如下：domain 按照【子域名】进行过滤，子域名形如： test.example.com。 类型：String 必选：否url 按照【URL】进行过滤，此参数只支持30天的时间范围，URL形如：/content。 类型：String 必选：否resourceType 按照【资源类型】进行过滤，此参数只支持30天的时间范围，资源类型形如：jpg，png。 类型：String 必选：否cacheType 按照【缓存类型】进行过滤。 类型：String 必选：否 可选项： hit：命中缓存； dynamic：资源不可缓存； miss：未命中缓存。statusCode 按照【状态码】进行过滤，此参数只支持30天的时间范围。 类型：String 必选：否 可选项： 1XX：1xx类型的状态码； 100：100状态码； 101：101状态码； 102：102状态码； 2XX：2xx类型的状态码； 200：200状态码； 201：201状态码； 202：202状态码； 203：203状态码； 204：204状态码； 100：100状态码； 206：206状态码； 207：207状态码； 3XX：3xx类型的状态码； 300：300状态码； 301：301状态码； 302：302状态码； 303：303状态码； 304：304状态码； 305：305状态码； 307：307状态码； 4XX：4xx类型的状态码； 400：400状态码； 401：401状态码； 402：402状态码； 403：403状态码； 404：404状态码； 405：405状态码； 406：406状态码； 407：407状态码； 408：408状态码； 409：409状态码； 410：410状态码； 411：411状态码； 412：412状态码； 412：413状态码； 414：414状态码； 415：415状态码； 416：416状态码； 417：417状态码； 422：422状态码； 423：423状态码； 424：424状态码； 426：426状态码； 451：451状态码； 5XX：5xx类型的状态码； 500：500状态码； 501：501状态码； 502：502状态码； 503：503状态码； 504：504状态码； 505：505状态码； 506：506状态码； 507：507状态码； 510：510状态码； 514：514状态码； 544：544状态码。tagKey 按照【标签Key】进行过滤。 类型：String 必选：否tagValue 按照【标签Value】进行过滤。 类型：String 必选：否 */
   Filters?: QueryCondition[];
   /** 查询时间粒度，可选的值有：min：1分钟的时间粒度；5min：5分钟的时间粒度；hour：1小时的时间粒度；day：1天的时间粒度。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
   Interval?: string;
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据。不填将根据用户所在地智能选择地区。 */
+  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
   Area?: string;
 }
 
 declare interface DescribeTimingL7CacheDataResponse {
-  /** 七层缓存分析时序类流量数据列表。 */
-  Data: TimingDataRecord[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
+  /** 七层缓存分析时序类流量数据列表。 */
+  Data: TimingDataRecord[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -3889,19 +3941,19 @@ declare interface DescribeTopL7AnalysisDataRequest {
   ZoneIds?: string[];
   /** 查询前多少个数据，最大值为1000，不填默认默认为: 10， 表示查询前top10的数据。 */
   Limit?: number;
-  /** 筛选条件，key可选的值有：country：国家/地区；domain：域名；protocol：协议类型；resourceType：资源类型；statusCode：状态码； browserType：浏览器类型；deviceType：设备类型；operatingSystemType：操作系统类型；tlsVersion：tls版本；url：url地址；referer：refer头信息；ipVersion：ip版本；tagKey：标签Key；tagValue：标签Value。 */
+  /** 过滤条件，详细的过滤条件如下：country 按照【国家/地区】进行过滤，国家/地区遵循ISO 3166规范。 类型：String 必选：否province 按照【省份】进行过滤，此参数只支持服务区域为中国大陆。 类型：String 必选：否isp 按照【运营商】进行过滤，此参数只支持服务区域为中国大陆。 类型：String 必选：否 可选项： 2：中国电信； 26：中国联通； 1046：中国移动； 3947：中国铁通； 38：教育网； 43：长城带宽； 0：其他运营商。domain 按照【子域名】进行过滤，子域名形如： test.example.com。 类型：String 必选：否url 按照【URL】进行过滤，此参数最长支持30天的查询范围，如果需要过滤多个值，多个值之间使用分号间隔，URL形如：/content,。 类型：String 必选：否referer 按照【Referer头信息】进行过滤, 此参数最长支持30天的查询范围，Referer形如：example.com。 类型：String 必选：否 必选：否resourceType 按照【资源类型】进行过滤，此参数最长支持30天的的查询范围，资源类型形如：jpg，png。 类型：String 必选：否protocol 按照【HTTP协议】进行过滤。 类型：String 必选：否 可选项： HTTP/1.0：HTTP 1.0； HTTP/1.1：HTTP 1.1； HTTP/2.0：HTTP 2.0； HTTP/3.0：HTTP 3.0； WebSocket：WebSocket。statusCode 按照【状态码】进行过滤，此参数最长支持30天的查询范围。 类型：String 必选：否 可选项： 1XX：1xx类型的状态码； 100：100状态码； 101：101状态码； 102：102状态码； 2XX：2xx类型的状态码； 200：200状态码； 201：201状态码； 202：202状态码； 203：203状态码； 204：204状态码； 100：100状态码； 206：206状态码； 207：207状态码； 3XX：3xx类型的状态码； 300：300状态码； 301：301状态码； 302：302状态码； 303：303状态码； 304：304状态码； 305：305状态码； 307：307状态码； 4XX：4xx类型的状态码； 400：400状态码； 401：401状态码； 402：402状态码； 403：403状态码； 404：404状态码； 405：405状态码； 406：406状态码； 407：407状态码； 408：408状态码； 409：409状态码； 410：410状态码； 411：411状态码； 412：412状态码； 412：413状态码； 414：414状态码； 415：415状态码； 416：416状态码； 417：417状态码； 422：422状态码； 423：423状态码； 424：424状态码； 426：426状态码； 451：451状态码； 5XX：5xx类型的状态码； 500：500状态码； 501：501状态码； 502：502状态码； 503：503状态码； 504：504状态码； 505：505状态码； 506：506状态码； 507：507状态码； 510：510状态码； 514：514状态码； 544：544状态码。browserType 按照【浏览器类型】进行过滤，此参数最长支持30天的查询范围。 类型：String 必选：否 可选项： Firefox：Firefox浏览器； Chrome：Chrome浏览器； Safari：Safari浏览器； Other：其他浏览器类型； Empty：浏览器器类型为空； Bot：Bot攻击； MicrosoftEdge：MicrosoftEdge浏览器； IE：IE浏览器； Opera：Opera浏览器； QQBrowser：QQ浏览器； LBBrowser：LB浏览器； MaxthonBrowser：Maxthon浏览器； SouGouBrowser：搜狗浏览器； BIDUBrowser：BIDU浏览器； TaoBrowser：淘浏览器； UBrowser：UB浏览器。deviceType 按照【设备类型】进行过滤，此参数最长支持30天的查询范围。 类型：String 必选：否 可选项： TV：TV设备； Tablet：Tablet设备； Mobile：Mobile设备； Desktop：Desktop设备； Other：其他设备类型； Empty：设备类型为空。operatingSystemType 按照【操作系统类型】进行过滤，此参数最长支持30天的查询范围。 类型：String 必选：否 可选项： Linux：Linux操作系统； MacOS：MacOs操作系统； Android：Android操作系统； IOS：IOS操作系统； Windows：Windows操作系统； NetBSD：NetBSD； ChromiumOS：ChromiumOS； Bot：Bot攻击； Other：其他类型的操作系统； Empty：操作系统为空。tlsVersion 按照【TLS版本】进行过滤，此参数最长支持30天的查询范围。 类型：String 必选：否 可选项： TLS1.0：TLS 1.0； TLS1.1：TLS 1.1； TLS1.2：TLS 1.2； TLS1.3：TLS 1.3。ipVersion 按照【IP版本】进行过滤。 类型：String 必选：否 可选项： 4：Ipv4； 6：Ipv6。tagKey 按照【标签Key】进行过滤。 类型：String 必选：否tagValue 按照【标签Value】进行过滤。 类型：String 必选：否 */
   Filters?: QueryCondition[];
   /** 查询时间粒度，取值有：min：1分钟；5min：5分钟；hour：1小时；day：1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
   Interval?: string;
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据。不填将根据用户所在地智能选择地区。 */
+  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
   Area?: string;
 }
 
 declare interface DescribeTopL7AnalysisDataResponse {
-  /** 七层流量前topN数据列表。 */
-  Data: TopDataRecord[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
+  /** 七层流量前topN数据列表。 */
+  Data: TopDataRecord[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -3917,19 +3969,19 @@ declare interface DescribeTopL7CacheDataRequest {
   ZoneIds?: string[];
   /** 查询前多少个数据，不填默认默认为10， 表示查询前top 10的数据。 */
   Limit?: number;
-  /** 筛选条件，key可选的值有： cacheType：缓存类型(状态)；domain：Host/域名；resourceType：资源类型；url：url地址；tagKey：标签Key；tagValue：标签Value。 */
+  /** 过滤条件，详细的过滤条件如下：domain 按照【子域名】进行过滤，子域名形如： test.example.com。 类型：String 必选：否url 按照【URL】进行过滤，此参数只支持30天的时间范围，URL形如：/content。 类型：String 必选：否resourceType 按照【资源类型】进行过滤，此参数只支持30天的时间范围，资源类型形如：jpg，png。 类型：String 必选：否cacheType 按照【缓存类型】进行过滤。 类型：String 必选：否 可选项： hit：命中缓存； dynamic：资源不可缓存； miss：未命中缓存。statusCode 按照【状态码】进行过滤，此参数只支持30天的时间范围。 类型：String 必选：否 可选项： 1XX：1xx类型的状态码； 100：100状态码； 101：101状态码； 102：102状态码； 2XX：2xx类型的状态码； 200：200状态码； 201：201状态码； 202：202状态码； 203：203状态码； 204：204状态码； 100：100状态码； 206：206状态码； 207：207状态码； 3XX：3xx类型的状态码； 300：300状态码； 301：301状态码； 302：302状态码； 303：303状态码； 304：304状态码； 305：305状态码； 307：307状态码； 4XX：4xx类型的状态码； 400：400状态码； 401：401状态码； 402：402状态码； 403：403状态码； 404：404状态码； 405：405状态码； 406：406状态码； 407：407状态码； 408：408状态码； 409：409状态码； 410：410状态码； 411：411状态码； 412：412状态码； 412：413状态码； 414：414状态码； 415：415状态码； 416：416状态码； 417：417状态码； 422：422状态码； 423：423状态码； 424：424状态码； 426：426状态码； 451：451状态码； 5XX：5xx类型的状态码； 500：500状态码； 501：501状态码； 502：502状态码； 503：503状态码； 504：504状态码； 505：505状态码； 506：506状态码； 507：507状态码； 510：510状态码； 514：514状态码； 544：544状态码。tagKey 按照【标签Key】进行过滤。 类型：String 必选：否tagValue 按照【标签Value】进行过滤。 类型：String 必选：否 */
   Filters?: QueryCondition[];
   /** 查询时间粒度，取值有：min: 1分钟；5min: 5分钟；hour: 1小时；day: 1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
   Interval?: string;
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据。不填将根据用户所在地智能选择地区。 */
+  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
   Area?: string;
 }
 
 declare interface DescribeTopL7CacheDataResponse {
-  /** 七层缓存TopN流量数据列表。 */
-  Data: TopDataRecord[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
+  /** 七层缓存TopN流量数据列表。 */
+  Data: TopDataRecord[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -9069,6 +9121,8 @@ declare interface Teo {
   DescribeDDoSPolicy(data: DescribeDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSPolicyResponse>;
   /** {@link DescribeDefaultCertificates 查询默认证书列表}({@link DescribeDefaultCertificatesRequest 请求参数}): {@link DescribeDefaultCertificatesResponse 返回参数} */
   DescribeDefaultCertificates(data: DescribeDefaultCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultCertificatesResponse>;
+  /** {@link DescribeDistributionL4AccessData 查询四层连接时长时序数据}({@link DescribeDistributionL4AccessDataRequest 请求参数}): {@link DescribeDistributionL4AccessDataResponse 返回参数} */
+  DescribeDistributionL4AccessData(data: DescribeDistributionL4AccessDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDistributionL4AccessDataResponse>;
   /** {@link DescribeDnsData 获取DNS请求数统计曲线}({@link DescribeDnsDataRequest 请求参数}): {@link DescribeDnsDataResponse 返回参数} */
   DescribeDnsData(data: DescribeDnsDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDnsDataResponse>;
   /** {@link DescribeDnsRecords 查询 DNS 记录列表}({@link DescribeDnsRecordsRequest 请求参数}): {@link DescribeDnsRecordsResponse 返回参数} */
@@ -9089,7 +9143,7 @@ declare interface Teo {
   DescribeLogTopicTasks(data: DescribeLogTopicTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogTopicTasksResponse>;
   /** {@link DescribeOriginGroup 获取源站组列表}({@link DescribeOriginGroupRequest 请求参数}): {@link DescribeOriginGroupResponse 返回参数} */
   DescribeOriginGroup(data: DescribeOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginGroupResponse>;
-  /** {@link DescribeOverviewL7Data 查询七层监控类时序流量数据}({@link DescribeOverviewL7DataRequest 请求参数}): {@link DescribeOverviewL7DataResponse 返回参数} */
+  /** {@link DescribeOverviewL7Data 查询监控流量时序数据}({@link DescribeOverviewL7DataRequest 请求参数}): {@link DescribeOverviewL7DataResponse 返回参数} */
   DescribeOverviewL7Data(data: DescribeOverviewL7DataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewL7DataResponse>;
   /** {@link DescribePrefetchTasks 查询预热任务状态}({@link DescribePrefetchTasksRequest 请求参数}): {@link DescribePrefetchTasksResponse 返回参数} */
   DescribePrefetchTasks(data?: DescribePrefetchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrefetchTasksResponse>;
@@ -9113,7 +9167,7 @@ declare interface Teo {
   DescribeSecurityPortraitRules(data?: DescribeSecurityPortraitRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPortraitRulesResponse>;
   /** {@link DescribeSecurityRuleId 查询安全规则详情}({@link DescribeSecurityRuleIdRequest 请求参数}): {@link DescribeSecurityRuleIdResponse 返回参数} */
   DescribeSecurityRuleId(data: DescribeSecurityRuleIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityRuleIdResponse>;
-  /** {@link DescribeSingleL7AnalysisData 查询七层数据分析类单值数据}({@link DescribeSingleL7AnalysisDataRequest 请求参数}): {@link DescribeSingleL7AnalysisDataResponse 返回参数} */
+  /** {@link DescribeSingleL7AnalysisData 查询流量分析单值数据}({@link DescribeSingleL7AnalysisDataRequest 请求参数}): {@link DescribeSingleL7AnalysisDataResponse 返回参数} */
   DescribeSingleL7AnalysisData(data: DescribeSingleL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSingleL7AnalysisDataResponse>;
   /** {@link DescribeSpeedTestingDetails 查询拨测分地区数据}({@link DescribeSpeedTestingDetailsRequest 请求参数}): {@link DescribeSpeedTestingDetailsResponse 返回参数} */
   DescribeSpeedTestingDetails(data?: DescribeSpeedTestingDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpeedTestingDetailsResponse>;
@@ -9121,15 +9175,17 @@ declare interface Teo {
   DescribeSpeedTestingMetricData(data: DescribeSpeedTestingMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpeedTestingMetricDataResponse>;
   /** {@link DescribeSpeedTestingQuota 查询站点拨测配额}({@link DescribeSpeedTestingQuotaRequest 请求参数}): {@link DescribeSpeedTestingQuotaResponse 返回参数} */
   DescribeSpeedTestingQuota(data: DescribeSpeedTestingQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpeedTestingQuotaResponse>;
-  /** {@link DescribeTimingL4Data 查询四层时序流量数据}({@link DescribeTimingL4DataRequest 请求参数}): {@link DescribeTimingL4DataResponse 返回参数} */
+  /** {@link DescribeTimingL4AccessData 查询四层连接数时序数据}({@link DescribeTimingL4AccessDataRequest 请求参数}): {@link DescribeTimingL4AccessDataResponse 返回参数} */
+  DescribeTimingL4AccessData(data: DescribeTimingL4AccessDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL4AccessDataResponse>;
+  /** {@link DescribeTimingL4Data 查询四层流量时序数据}({@link DescribeTimingL4DataRequest 请求参数}): {@link DescribeTimingL4DataResponse 返回参数} */
   DescribeTimingL4Data(data: DescribeTimingL4DataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL4DataResponse>;
-  /** {@link DescribeTimingL7AnalysisData 查询七层数据分析类时序数据}({@link DescribeTimingL7AnalysisDataRequest 请求参数}): {@link DescribeTimingL7AnalysisDataResponse 返回参数} */
+  /** {@link DescribeTimingL7AnalysisData 查询流量分析时序数据}({@link DescribeTimingL7AnalysisDataRequest 请求参数}): {@link DescribeTimingL7AnalysisDataResponse 返回参数} */
   DescribeTimingL7AnalysisData(data: DescribeTimingL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL7AnalysisDataResponse>;
-  /** {@link DescribeTimingL7CacheData 查询七层缓存分析类时序数据}({@link DescribeTimingL7CacheDataRequest 请求参数}): {@link DescribeTimingL7CacheDataResponse 返回参数} */
+  /** {@link DescribeTimingL7CacheData 查询缓存分析时序数据}({@link DescribeTimingL7CacheDataRequest 请求参数}): {@link DescribeTimingL7CacheDataResponse 返回参数} */
   DescribeTimingL7CacheData(data: DescribeTimingL7CacheDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL7CacheDataResponse>;
-  /** {@link DescribeTopL7AnalysisData 查询七层数据分析Top数据}({@link DescribeTopL7AnalysisDataRequest 请求参数}): {@link DescribeTopL7AnalysisDataResponse 返回参数} */
+  /** {@link DescribeTopL7AnalysisData 查询流量分析Top数据}({@link DescribeTopL7AnalysisDataRequest 请求参数}): {@link DescribeTopL7AnalysisDataResponse 返回参数} */
   DescribeTopL7AnalysisData(data: DescribeTopL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopL7AnalysisDataResponse>;
-  /** {@link DescribeTopL7CacheData 查询七层缓存分析Top数据}({@link DescribeTopL7CacheDataRequest 请求参数}): {@link DescribeTopL7CacheDataResponse 返回参数} */
+  /** {@link DescribeTopL7CacheData 查询缓存分析Top数据}({@link DescribeTopL7CacheDataRequest 请求参数}): {@link DescribeTopL7CacheDataResponse 返回参数} */
   DescribeTopL7CacheData(data: DescribeTopL7CacheDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopL7CacheDataResponse>;
   /** {@link DescribeWebManagedRulesData 查询WAF攻击时序数据}({@link DescribeWebManagedRulesDataRequest 请求参数}): {@link DescribeWebManagedRulesDataResponse 返回参数} */
   DescribeWebManagedRulesData(data: DescribeWebManagedRulesDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebManagedRulesDataResponse>;

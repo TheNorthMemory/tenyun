@@ -246,7 +246,7 @@ declare interface HostNameSettings {
 declare interface IPv6InternetAccessible {
   /** 网络计费模式。取值包括TRAFFIC_POSTPAID_BY_HOUR、BANDWIDTH_PACKAGE，默认取值为TRAFFIC_POSTPAID_BY_HOUR。查看当前账户类型可参考[账户类型说明](https://cloud.tencent.com/document/product/1199/49090)。 IPv6对标准账户类型支持TRAFFIC_POSTPAID_BY_HOUR。 IPv6对传统账户类型支持BANDWIDTH_PACKAGE。 */
   InternetChargeType?: string | null;
-  /** 公网出带宽上限，单位：Mbps。默认值：0Mbps，此时不为IPv6分配公网带宽。不同机型、可用区、计费模式的带宽上限范围不一致，具体限制详见[公网带宽上限](https://cloud.tencent.com/document/product/213/12523)。 */
+  /** 公网出带宽上限，单位：Mbps。默认值：0，此时不为IPv6分配公网带宽。不同机型、可用区、计费模式的带宽上限范围不一致，具体限制详见[公网带宽上限](https://cloud.tencent.com/document/product/213/12523)。 */
   InternetMaxBandwidthOut?: number | null;
   /** 带宽包ID。可通过[DescribeBandwidthPackages](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。 */
   BandwidthPackageId?: string | null;
