@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 223+ 款产品，8808+ 服务数</summary>
+<details><summary>共计 223+ 款产品，8801+ 服务数</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -170,7 +170,7 @@ cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) |
 dasb | [T-Sec-堡垒机（BH）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(24)
 dataintegration | [数据接入平台](https://cloud.tencent.com/document/product/1591) | 2022-06-13(1)
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112)
-dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(43)<br/>2019-10-16(27)
+dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(44)<br/>2019-10-16(27)
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6)
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(21)
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(62)
@@ -287,7 +287,7 @@ tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021
 tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(101)
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(4)
 tem | [弹性微服务 TEM](https://cloud.tencent.com/document/product/1371) | 2021-07-01(50)<br/>2020-12-21(17)
-teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(126)<br/>2022-01-06(96)
+teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(118)<br/>2022-01-06(96)
 thpc | [高性能计算平台](https://cloud.tencent.com/document/product/1527) | 2022-04-01(11)<br/>2021-11-09(4)
 tia | [智能钛机器学习](https://cloud.tencent.com/document/product/851) | 2018-02-26(10)
 tic | [资源编排 TIC](https://cloud.tencent.com/document/product/1213) | 2020-11-17(13)

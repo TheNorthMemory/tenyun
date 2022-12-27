@@ -655,27 +655,35 @@ declare interface RocketMQClusterDetail {
 /** RocketMQ集群基本信息 */
 declare interface RocketMQClusterInfo {
   /** 集群ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 集群名称 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 地域信息 */
-  Region: string;
+  Region?: string;
   /** 创建时间，毫秒为单位 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 集群说明信息 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 公网接入地址 */
-  PublicEndPoint: string;
+  PublicEndPoint?: string;
   /** VPC接入地址 */
-  VpcEndPoint: string;
+  VpcEndPoint?: string;
   /** 是否支持命名空间接入点 */
-  SupportNamespaceEndpoint: boolean | null;
+  SupportNamespaceEndpoint?: boolean | null;
   /** VPC信息 */
-  Vpcs: VpcConfig[] | null;
+  Vpcs?: VpcConfig[] | null;
   /** 是否为专享实例 */
-  IsVip: boolean | null;
+  IsVip?: boolean | null;
   /** Rocketmq集群标识 */
-  RocketMQFlag: boolean | null;
+  RocketMQFlag?: boolean | null;
+  /** 计费状态，1表示正常，2表示已停服，3表示已销毁 */
+  Status?: number | null;
+  /** 欠费停服时间，毫秒为单位 */
+  IsolateTime?: number | null;
+  /** HTTP协议公网接入地址 */
+  HttpPublicEndpoint?: string | null;
+  /** HTTP协议VPC接入地址 */
+  HttpVpcEndpoint?: string | null;
 }
 
 /** RocketMQ近期使用量 */
@@ -693,31 +701,35 @@ declare interface RocketMQClusterRecentStats {
 /** RocketMQ消费组信息 */
 declare interface RocketMQGroup {
   /** 消费组名称 */
-  Name: string;
+  Name?: string;
   /** 在线消费者数量 */
-  ConsumerNum: number;
+  ConsumerNum?: number;
   /** 消费TPS */
-  TPS: number;
+  TPS?: number;
   /** 总堆积数量 */
-  TotalAccumulative: number;
+  TotalAccumulative?: number;
   /** 0表示集群消费模式，1表示广播消费模式，-1表示未知 */
-  ConsumptionMode: number;
+  ConsumptionMode?: number;
   /** 是否允许消费 */
-  ReadEnabled: boolean;
+  ReadEnabled?: boolean;
   /** 重试队列分区数 */
-  RetryPartitionNum: number | null;
+  RetryPartitionNum?: number | null;
   /** 创建时间，以毫秒为单位 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 修改时间，以毫秒为单位 */
-  UpdateTime: number;
+  UpdateTime?: number;
   /** 客户端协议 */
-  ClientProtocol: string;
+  ClientProtocol?: string;
   /** 说明信息 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 消费者类型，枚举值ACTIVELY, PASSIVELY */
-  ConsumerType: string | null;
+  ConsumerType?: string | null;
   /** 是否开启广播消费 */
-  BroadcastEnabled: boolean;
+  BroadcastEnabled?: boolean;
+  /** Group类型 */
+  GroupType?: string | null;
+  /** 重试次数 */
+  RetryMaxTimes?: number | null;
 }
 
 /** RocketMQ命名空间信息 */
@@ -1261,6 +1273,10 @@ declare interface CreateRocketMQGroupRequest {
   ClusterId: string;
   /** 说明信息，最长128个字符 */
   Remark?: string;
+  /** Group类型（TCP/HTTP） */
+  GroupType?: string;
+  /** Group最大重试次数 */
+  RetryMaxTimes?: number;
 }
 
 declare interface CreateRocketMQGroupResponse {
@@ -2243,13 +2259,15 @@ declare interface DescribeRocketMQGroupsRequest {
   SortOrder?: string;
   /** 订阅组名称，指定此参数后将只返回该订阅组信息 */
   FilterOneGroup?: string;
+  /** group类型 */
+  Types?: string[];
 }
 
 declare interface DescribeRocketMQGroupsResponse {
   /** 总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 订阅组列表 */
-  Groups: RocketMQGroup[];
+  Groups?: RocketMQGroup[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2623,6 +2641,8 @@ declare interface ModifyRocketMQGroupRequest {
   ReadEnable?: boolean;
   /** 是否开启广播消费 */
   BroadcastEnable?: boolean;
+  /** 最大重试次数 */
+  RetryMaxTimes?: number;
 }
 
 declare interface ModifyRocketMQGroupResponse {

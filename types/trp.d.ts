@@ -76,7 +76,7 @@ declare interface CodePack {
   CreateUser: string | null;
   /** 码数 */
   Amount: number | null;
-  /** 码长度 */
+  /** 防伪码长度 */
   CodeLength: number | null;
   /** 码类型 */
   CodeType: string | null;
@@ -379,7 +379,7 @@ declare interface CreateCodeBatchRequest {
   ProductId?: string;
   /** 批次类型 0:溯源 1:营销 */
   BatchType?: number;
-  /** 批次ID，系统自动生成 */
+  /** 批次ID，留空时系统自动生成 */
   BatchId?: string;
   /** 备注 */
   Remark?: string;
@@ -387,6 +387,8 @@ declare interface CreateCodeBatchRequest {
   MpTpl?: string;
   /** 克隆批次ID，同时会复制溯源信息 */
   CloneId?: string;
+  /** 批次编号，业务字段不判断唯一性 */
+  BatchCode?: string;
 }
 
 declare interface CreateCodeBatchResponse {
@@ -415,6 +417,8 @@ declare interface CreateCodePackRequest {
   PackSpec?: PackSpec[];
   /** 批次ID，如果传了生码后会同时绑定批次，并激活码 */
   BatchId?: string;
+  /** 是否有流水码 0:无 1:有 */
+  SerialType?: number;
 }
 
 declare interface CreateCodePackResponse {
@@ -471,6 +475,8 @@ declare interface CreateCustomPackRequest {
   CodeParts?: CodePart[];
   /** 批次ID，如果传了生码后会同时绑定批次，并激活码 */
   BatchId?: string;
+  /** 是否有流水码 0:无 1:有 */
+  SerialType?: number;
 }
 
 declare interface CreateCustomPackResponse {
@@ -765,6 +771,8 @@ declare interface DescribeCodePacksRequest {
   Keyword?: string;
   /** 企业ID */
   CorpId?: number;
+  /** 是否有流水码 0:无 1:有 */
+  SerialType?: number;
 }
 
 declare interface DescribeCodePacksResponse {
@@ -1023,6 +1031,8 @@ declare interface ModifyCodeBatchRequest {
   ProductId?: string;
   /** 备注 */
   Remark?: string;
+  /** 批次编码，业务字段不判断唯一性 */
+  BatchCode?: string;
 }
 
 declare interface ModifyCodeBatchResponse {

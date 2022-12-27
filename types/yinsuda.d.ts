@@ -2,6 +2,16 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** AME 曲库歌曲基础信息。 */
+declare interface AMEMusicBaseInfo {
+  /** 歌曲 Id。 */
+  MusicId: string;
+  /** 歌曲名称。 */
+  Name: string;
+  /** 歌手列表。 */
+  SingerSet: string[];
+}
+
 /** 副歌片段信息。 */
 declare interface ChorusClip {
   /** 开始时间，单位：毫秒。 */
@@ -30,6 +40,8 @@ declare interface KTVMatchMusic {
   KTVMusicBaseInfo: KTVMusicBaseInfo;
   /** 命中规则。 */
   MatchRule: KTVMatchRule;
+  /** AME 歌曲基础信息，仅在使用音速达歌曲 Id 匹配 AME 曲库时有效。 */
+  AMEMusicBaseInfo: AMEMusicBaseInfo | null;
 }
 
 /** 歌曲匹配规则。 */
@@ -38,6 +50,8 @@ declare interface KTVMatchRule {
   AMEMusicId?: string;
   /** 歌曲匹配信息。 */
   MusicInfo?: KTVMatchRuleMusicInfo | null;
+  /** 音速达歌曲 Id，用于匹配 AME 曲库歌曲。 */
+  MusicIdToMatchAME?: string;
 }
 
 /** 歌曲信息匹配。 */

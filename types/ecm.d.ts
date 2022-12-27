@@ -48,7 +48,7 @@ declare interface AddressInfo {
   PublicIPv6AddressInfo: PublicIPAddressInfo | null;
 }
 
-/** IP地址模版 */
+/** IP地址模板 */
 declare interface AddressTemplateSpecification {
   /** IP地址ID，例如：eipm-2uw6ujo6。 */
   AddressId: string;
@@ -1264,7 +1264,7 @@ declare interface SecurityGroupPolicySet {
   Ingress?: SecurityGroupPolicy[];
 }
 
-/** 协议端口模版 */
+/** 协议端口模板 */
 declare interface ServiceTemplateSpecification {
   /** 协议端口ID，例如：eppm-f5n1f8da。 */
   ServiceId: string;

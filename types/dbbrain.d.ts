@@ -276,6 +276,10 @@ declare interface MySqlProcess {
   Info: string;
 }
 
+/** 实时会话统计详情。 */
+declare interface ProcessStatistic {
+}
+
 /** 用户配置的信息 */
 declare interface ProfileInfo {
   /** 语言, 如"zh"。 */
@@ -1098,6 +1102,30 @@ declare interface DescribeNoPrimaryKeyTablesResponse {
   NoPrimaryKeyTables: Table[];
   /** 采集时间戳（秒）。 */
   Timestamp: number;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface DescribeProxyProcessStatisticsRequest {
+  /** 实例 ID 。 */
+  InstanceId: string;
+  /** 当前实例下的 ProxyID。 */
+  InstanceProxyId: string;
+  /** 返回数量。 */
+  Limit: number;
+  /** 服务产品类型，支持值包括： "redis" - 云数据库 Redis。 */
+  Product: string;
+  /** 偏移量，默认0。 */
+  Offset?: number;
+  /** 按照某字断排序。支持值包括："AllConn"，"ActiveConn"，"Ip"。 */
+  SortBy?: string;
+  /** 排序方向。支持值包括："DESC"，"ASC"。 */
+  OrderDirection?: string;
+}
+
+declare interface DescribeProxyProcessStatisticsResponse {
+  /** 实时会话统计详情。 */
+  ProcessStatistics: ProcessStatistic;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2605,6 +2633,8 @@ declare interface Dbbrain {
   DescribeMySqlProcessList(data: DescribeMySqlProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMySqlProcessListResponse>;
   /** {@link DescribeNoPrimaryKeyTables 查询实例无主键表}({@link DescribeNoPrimaryKeyTablesRequest 请求参数}): {@link DescribeNoPrimaryKeyTablesResponse 返回参数} */
   DescribeNoPrimaryKeyTables(data: DescribeNoPrimaryKeyTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNoPrimaryKeyTablesResponse>;
+  /** {@link DescribeProxyProcessStatistics 获取实时会话统计详情}({@link DescribeProxyProcessStatisticsRequest 请求参数}): {@link DescribeProxyProcessStatisticsResponse 返回参数} */
+  DescribeProxyProcessStatistics(data: DescribeProxyProcessStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyProcessStatisticsResponse>;
   /** {@link DescribeProxySessionKillTasks 查询代理节点 kill 会话任务执行状态}({@link DescribeProxySessionKillTasksRequest 请求参数}): {@link DescribeProxySessionKillTasksResponse 返回参数} */
   DescribeProxySessionKillTasks(data: DescribeProxySessionKillTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxySessionKillTasksResponse>;
   /** {@link DescribeRedisTopBigKeys 查询redis实例大key列表}({@link DescribeRedisTopBigKeysRequest 请求参数}): {@link DescribeRedisTopBigKeysResponse 返回参数} */

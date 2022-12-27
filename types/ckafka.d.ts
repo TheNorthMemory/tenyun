@@ -3468,7 +3468,7 @@ declare interface ModifyInstanceAttributesRequest {
   DynamicRetentionConfig?: DynamicRetentionTime;
   /** 修改升配置rebalance时间 */
   RebalanceTime?: number;
-  /** 时间戳 */
+  /** 公网带宽 */
   PublicNetwork?: number;
   /** 动态硬盘扩容策略配置 */
   DynamicDiskConfig?: DynamicDiskConfig;

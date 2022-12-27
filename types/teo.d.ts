@@ -78,16 +78,6 @@ declare interface AdvancedFilter {
   Fuzzy?: boolean;
 }
 
-/** 高级回源配置 */
-declare interface AdvancedOriginGroup {
-  /** 高级回源配置的匹配条件。其中相同的Target只能出现一次。 */
-  OriginGroupConditions: OriginGroupCondition[];
-  /** 主源站组ID。 */
-  OriginGroupId: string;
-  /** 备用源站组ID。 */
-  BackupOriginGroupId?: string;
-}
-
 /** AI规则引擎防护 */
 declare interface AiRule {
   /** AI规则引擎状态，取值有： smart_status_close：关闭； smart_status_open：拦截处置； smart_status_observe：观察处置。 */
@@ -774,40 +764,6 @@ declare interface DnsData {
   Value: number;
 }
 
-/** DNS 记录 */
-declare interface DnsRecord {
-  /** 记录 ID。 */
-  DnsRecordId: string;
-  /** DNS记录类型，取值有：A：将域名指向一个外网 IPv4 地址，如 8.8.8.8；AAAA：将域名指向一个外网 IPv6 地址；MX：用于邮箱服务器，相关记录值/优先级参数由邮件注册商提供。存在多条 MX 记录时，优先级越低越优先；CNAME：将域名指向另一个域名，再由该域名解析出最终 IP 地址；TXT：对域名进行标识和说明，常用于域名验证和 SPF 记录（反垃圾邮件）；NS：如果需要将子域名交给其他 DNS 服务商解析，则需要添加 NS 记录。根域名无法添加 NS 记录；CAA：指定可为本站点颁发证书的 CA；SRV：标识某台服务器使用了某个服务，常见于微软系统的目录管理。 */
-  DnsRecordType: string;
-  /** 记录名称。 */
-  DnsRecordName: string;
-  /** 记录值。 */
-  Content: string;
-  /** 代理模式，取值有：dns_only：仅DNS解析；proxied：代理加速。 */
-  Mode: string;
-  /** 缓存时间，数值越小，修改记录各地生效时间越快，单位：秒。 */
-  TTL: number;
-  /** MX记录优先级，数值越小越优先。 */
-  Priority: number;
-  /** 创建时间。 */
-  CreatedOn: string;
-  /** 修改时间。 */
-  ModifiedOn: string;
-  /** 域名锁定状态。 */
-  Locked: boolean;
-  /** 站点 ID。 */
-  ZoneId: string;
-  /** 站点名称。 */
-  ZoneName: string;
-  /** 记录解析状态，取值有：active：生效；pending：不生效。 */
-  Status: string;
-  /** CNAME 地址。 */
-  Cname: string | null;
-  /** 域名服务类型，取值有：lb：负载均衡；security：安全；l4：四层代理。 */
-  DomainStatus: string[];
-}
-
 /** DNSSEC 相关信息 */
 declare interface DnssecInfo {
   /** 标志。 */
@@ -1098,34 +1054,6 @@ declare interface L7OfflineLog {
   Area: string;
 }
 
-/** 负载均衡信息 */
-declare interface LoadBalancing {
-  /** 负载均衡ID。 */
-  LoadBalancingId: string;
-  /** 站点ID。 */
-  ZoneId: string;
-  /** 子域名，填写@表示根域。 */
-  Host: string;
-  /** 代理模式，取值有：dns_only：仅DNS；proxied：开启代理。 */
-  Type: string;
-  /** 当Type=dns_only表示DNS记录的缓存时间。 */
-  TTL: number;
-  /** 状态，取值有：online：部署成功；process：部署中。 */
-  Status: string;
-  /** 调度域名。 */
-  Cname: string;
-  /** 主源源站组ID。 */
-  OriginGroupId: string;
-  /** 备用源站源站组ID。为空表示不适用备用源站。 */
-  BackupOriginGroupId: string;
-  /** 更新时间。 */
-  UpdateTime: string;
-  /** 回源类型，取值有：normal：主备回源；advanced：高级回源配置。 */
-  OriginType: string;
-  /** 高级回源配置，当OriginType=advanced时有效。 */
-  AdvancedOriginGroups: AdvancedOriginGroup[] | null;
-}
-
 /** 日志集基本信息 */
 declare interface LogSetInfo {
   /** 日志集所属地区。 */
@@ -1244,16 +1172,6 @@ declare interface OriginGroup {
   UpdateTime: string;
   /** 当OriginType=self时，表示回源Host。 */
   HostHeader: string | null;
-}
-
-/** 回源配置的条件参数 */
-declare interface OriginGroupCondition {
-  /** 匹配类型，取值有：url：当前站点下匹配URL路径的请求，例如：/example 或 /example/foo.jpg。支持*表示通配符，支持?表示匹配一个字符。 */
-  Target: string;
-  /** 运算符，取值有：equal：等于。 */
-  Operator: string;
-  /** 对应匹配类型的取值。 */
-  Values: string[];
 }
 
 /** 源站组记录 */
@@ -2442,30 +2360,6 @@ declare interface CreateCustomErrorPageResponse {
   RequestId?: string;
 }
 
-declare interface CreateDnsRecordRequest {
-  /** DNS记录所属站点ID。 */
-  ZoneId: string;
-  /** DNS记录类型，取值有：A：将域名指向一个外网 IPv4 地址，如 8.8.8.8；AAAA：将域名指向一个外网 IPv6 地址；MX：用于邮箱服务器，相关记录值/优先级参数由邮件注册商提供。存在多条 MX 记录时，优先级越低越优先；CNAME：将域名指向另一个域名，再由该域名解析出最终 IP 地址；TXT：对域名进行标识和说明，常用于域名验证和 SPF 记录（反垃圾邮件）；NS：如果需要将子域名交给其他 DNS 服务商解析，则需要添加 NS 记录。根域名无法添加 NS 记录；CAA：指定可为本站点颁发证书的 CA；SRV：标识某台服务器使用了某个服务，常见于微软系统的目录管理。 */
-  Type: string;
-  /** DNS记录名。 */
-  Name: string;
-  /** DNS记录内容。 */
-  Content: string;
-  /** 代理模式，取值有：dns_only：仅DNS解析；proxied：代理加速。 */
-  Mode: string;
-  /** 缓存时间，数值越小，修改记录各地生效时间越快，默认为300，单位：秒。 */
-  TTL?: number;
-  /** 该参数在创建MX记录时生效，值越小优先级越高，用户可指定值范围1~50，不指定默认为0。 */
-  Priority?: number;
-}
-
-declare interface CreateDnsRecordResponse {
-  /** DNS解析记录ID。 */
-  DnsRecordId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
 declare interface CreateIpTableListRequest {
   /** 站点Id。 */
   ZoneId: string;
@@ -2476,32 +2370,6 @@ declare interface CreateIpTableListRequest {
 }
 
 declare interface CreateIpTableListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
-declare interface CreateLoadBalancingRequest {
-  /** 站点ID。 */
-  ZoneId: string;
-  /** 负载均衡域名。 */
-  Host: string;
-  /** 代理模式，取值有：dns_only：仅DNS；proxied：开启代理。 */
-  Type: string;
-  /** 主源站源站组ID。 */
-  OriginGroupId: string;
-  /** 备用源站源站组ID，当Type=proxied时可以填写，为空表示不使用备用源站。 */
-  BackupOriginGroupId: string;
-  /** 当Type=dns_only时，指解析记录在DNS服务器缓存的生存时间。取值范围60-86400，单位：秒，不填写使用默认值：600。 */
-  TTL?: number;
-  /** 回源类型，取值有：normal：主备回源；advanced：高级回源配置（仅当Type=proxied时可以使用）。为空表示使用主备回源。 */
-  OriginType?: string;
-  /** 高级回源配置，当OriginType=advanced时有效。 */
-  AdvancedOriginGroups?: AdvancedOriginGroup[];
-}
-
-declare interface CreateLoadBalancingResponse {
-  /** 负载均衡ID。 */
-  LoadBalancingId: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -2754,30 +2622,6 @@ declare interface DeleteApplicationProxyRuleRequest {
 }
 
 declare interface DeleteApplicationProxyRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
-declare interface DeleteDnsRecordsRequest {
-  /** 待删除记录所属站点 ID。 */
-  ZoneId: string;
-  /** 待删除记录 ID。 */
-  DnsRecordIds: string[];
-}
-
-declare interface DeleteDnsRecordsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
-declare interface DeleteLoadBalancingRequest {
-  /** 站点ID。 */
-  ZoneId: string;
-  /** 负载均衡ID。 */
-  LoadBalancingId: string;
-}
-
-declare interface DeleteLoadBalancingResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -3372,32 +3216,6 @@ declare interface DescribeDnsDataResponse {
   RequestId?: string;
 }
 
-declare interface DescribeDnsRecordsRequest {
-  /** DNS记录所属站点ID。不填写该参数默认返回所有站点下的记录。 */
-  ZoneId?: string;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：record-id 按照【DNS记录id】进行过滤。DNS记录ID形如：record-1a8df68z。 类型：String 必选：否record-name 按照【DNS记录名称】进行过滤。 类型：String 必选：否record-type 按照【DNS记录类型】进行过滤。 类型：String 必选：否 可选项： A：将域名指向一个外网 IPv4 地址，如 8.8.8.8 AAAA：将域名指向一个外网 IPv6 地址 CNAME：将域名指向另一个域名，再由该域名解析出最终 IP 地址 TXT：对域名进行标识和说明，常用于域名验证和 SPF 记录（反垃圾邮件） NS：如果需要将子域名交给其他 DNS 服务商解析，则需要添加 NS 记录。根域名无法添加 NS 记录 CAA：指定可为本站点颁发证书的 CA SRV：标识某台服务器使用了某个服务，常见于微软系统的目录管理 MX：指定收件人邮件服务器。mode 按照【代理模式】进行过滤。 类型：String 必选：否 可选项： dns_only：仅DNS解析 proxied：代理加速ttl 按照【解析生效时间】进行过滤。 类型：string 必选：否 */
-  Filters?: AdvancedFilter[];
-  /** 列表排序方式，取值有：asc：升序排列；desc：降序排列。默认值为asc。 */
-  Direction?: string;
-  /** 匹配方式，取值有：all：返回匹配所有查询条件的记录；any：返回匹配任意一个查询条件的记录。默认值为all。 */
-  Match?: string;
-  /** 分页查询限制数目，默认值：20，上限：1000。 */
-  Limit?: number;
-  /** 分页查询偏移量，默认为 0。 */
-  Offset?: number;
-  /** 排序依据，取值有：content：DNS记录内容；created_on：DNS记录创建时间；mode：代理模式；record-name：DNS记录名称；ttl：解析记录生效时间；record-type：DNS记录类型。默认根据record-type, recrod-name属性组合排序。 */
-  Order?: string;
-}
-
-declare interface DescribeDnsRecordsResponse {
-  /** DNS记录总数。 */
-  TotalCount: number;
-  /** DNS 记录列表。 */
-  DnsRecords: DnsRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
 declare interface DescribeDnssecRequest {
   /** 站点ID。 */
   ZoneId: string;
@@ -3448,24 +3266,6 @@ declare interface DescribeIdentificationsResponse {
   TotalCount: number;
   /** 站点验证信息列表。 */
   Identifications: Identification[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
-declare interface DescribeLoadBalancingRequest {
-  /** 分页查询偏移量，默认为0。 */
-  Offset: number;
-  /** 分页查询限制数目，默认为10，取值：1-1000。 */
-  Limit: number;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：zone-id 按照【站点ID】进行过滤。站点ID形如：zone-1a8df68z 类型：String 必选：否 模糊查询：不支持load-balancing-id 按照【负载均衡ID】进行过滤。负载均衡ID形如：lb-d21bfaf7-8d72-11ec-841d-00ff977fb3c8 类型：String 必选：否 模糊查询：不支持host 按照【负载均衡host】进行过滤。host形如：lb.tencent.com 类型：String 必选：否 模糊查询：支持，模糊查询时仅支持一个host */
-  Filters?: AdvancedFilter[];
-}
-
-declare interface DescribeLoadBalancingResponse {
-  /** 记录总数。 */
-  TotalCount: number;
-  /** 负载均衡信息。 */
-  Data: LoadBalancing[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -4516,30 +4316,6 @@ declare interface ModifyDefaultCertificateResponse {
   RequestId?: string;
 }
 
-declare interface ModifyDnsRecordRequest {
-  /** 记录ID。 */
-  DnsRecordId: string;
-  /** 站点ID。 */
-  ZoneId: string;
-  /** DNS记录类型，取值有：A：将域名指向一个外网 IPv4 地址，如 8.8.8.8；AAAA：将域名指向一个外网 IPv6 地址；MX：用于邮箱服务器，相关记录值/优先级参数由邮件注册商提供。存在多条 MX 记录时，优先级越低越优先；CNAME：将域名指向另一个域名，再由该域名解析出最终 IP 地址；TXT：对域名进行标识和说明，常用于域名验证和 SPF 记录（反垃圾邮件）；NS：如果需要将子域名交给其他 DNS 服务商解析，则需要添加 NS 记录。根域名无法添加 NS 记录；CAA：指定可为本站点颁发证书的 CA；SRV：标识某台服务器使用了某个服务，常见于微软系统的目录管理。不填写保持原有配置。 */
-  DnsRecordType?: string;
-  /** 记录名称，由主机记录+站点名称组成，不填写保持原有配置。 */
-  DnsRecordName?: string;
-  /** 记录内容，不填写保持原有配置。 */
-  Content?: string;
-  /** 缓存时间，数值越小，修改记录各地生效时间越快，默认为300，单位：秒，不填写保持原有配置。 */
-  TTL?: number;
-  /** 该参数在修改MX记录时生效，值越小优先级越高，用户可指定值范围为1~50，不指定默认为0，不填写保持原有配置。 */
-  Priority?: number;
-  /** 代理模式，取值有：dns_only：仅DNS解析；proxied：代理加速。不填写保持原有配置。 */
-  Mode?: string;
-}
-
-declare interface ModifyDnsRecordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
 declare interface ModifyDnssecRequest {
   /** 站点ID。 */
   ZoneId: string;
@@ -4564,30 +4340,6 @@ declare interface ModifyHostsCertificateRequest {
 }
 
 declare interface ModifyHostsCertificateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
-declare interface ModifyLoadBalancingRequest {
-  /** 站点ID。 */
-  ZoneId: string;
-  /** 负载均衡ID。 */
-  LoadBalancingId: string;
-  /** 代理模式，取值有：dns_only：仅DNS；proxied：开启代理。 */
-  Type: string;
-  /** 主源站源站组ID。 */
-  OriginGroupId: string;
-  /** 备用源站源站组ID，当Type=proxied时可以填写，为空表示不使用备用源站。 */
-  BackupOriginGroupId: string;
-  /** 当Type=dns_only时，指解析记录在DNS服务器缓存的生存时间。取值范围60-86400，单位：秒，不填写使用默认值：600。 */
-  TTL?: number;
-  /** 回源类型，取值有：normal：主备回源；advanced：高级回源配置（仅当Type=proxied时可以使用）。不填写表示使用主备回源。 */
-  OriginType?: string;
-  /** 高级回源配置，当OriginType=advanced时有效。不填写表示不使用高级回源配置。 */
-  AdvancedOriginGroups?: AdvancedOriginGroup[];
-}
-
-declare interface ModifyLoadBalancingResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -9033,12 +8785,8 @@ declare interface Teo {
   CreateCredential(data?: CreateCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCredentialResponse>;
   /** {@link CreateCustomErrorPage 创建自定义页}({@link CreateCustomErrorPageRequest 请求参数}): {@link CreateCustomErrorPageResponse 返回参数} */
   CreateCustomErrorPage(data: CreateCustomErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomErrorPageResponse>;
-  /** {@link CreateDnsRecord 创建 DNS 记录}({@link CreateDnsRecordRequest 请求参数}): {@link CreateDnsRecordResponse 返回参数} */
-  CreateDnsRecord(data: CreateDnsRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDnsRecordResponse>;
   /** {@link CreateIpTableList 创建IP黑白名单列表}({@link CreateIpTableListRequest 请求参数}): {@link CreateIpTableListResponse 返回参数} */
   CreateIpTableList(data: CreateIpTableListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIpTableListResponse>;
-  /** {@link CreateLoadBalancing 创建负载均衡}({@link CreateLoadBalancingRequest 请求参数}): {@link CreateLoadBalancingResponse 返回参数} */
-  CreateLoadBalancing(data: CreateLoadBalancingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadBalancingResponse>;
   /** {@link CreateLogSet 创建日志集}({@link CreateLogSetRequest 请求参数}): {@link CreateLogSetResponse 返回参数} */
   CreateLogSet(data: CreateLogSetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogSetResponse>;
   /** {@link CreateLogTopicTask 创建推送任务}({@link CreateLogTopicTaskRequest 请求参数}): {@link CreateLogTopicTaskResponse 返回参数} */
@@ -9067,10 +8815,6 @@ declare interface Teo {
   DeleteApplicationProxy(data: DeleteApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyResponse>;
   /** {@link DeleteApplicationProxyRule 删除应用代理规则}({@link DeleteApplicationProxyRuleRequest 请求参数}): {@link DeleteApplicationProxyRuleResponse 返回参数} */
   DeleteApplicationProxyRule(data: DeleteApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyRuleResponse>;
-  /** {@link DeleteDnsRecords 批量删除 DNS 记录}({@link DeleteDnsRecordsRequest 请求参数}): {@link DeleteDnsRecordsResponse 返回参数} */
-  DeleteDnsRecords(data: DeleteDnsRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDnsRecordsResponse>;
-  /** {@link DeleteLoadBalancing 删除负载均衡}({@link DeleteLoadBalancingRequest 请求参数}): {@link DeleteLoadBalancingResponse 返回参数} */
-  DeleteLoadBalancing(data: DeleteLoadBalancingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancingResponse>;
   /** {@link DeleteLogTopicTask 删除推送任务}({@link DeleteLogTopicTaskRequest 请求参数}): {@link DeleteLogTopicTaskResponse 返回参数} */
   DeleteLogTopicTask(data: DeleteLogTopicTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogTopicTaskResponse>;
   /** {@link DeleteOriginGroup 删除源站组}({@link DeleteOriginGroupRequest 请求参数}): {@link DeleteOriginGroupResponse 返回参数} */
@@ -9125,16 +8869,12 @@ declare interface Teo {
   DescribeDistributionL4AccessData(data: DescribeDistributionL4AccessDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDistributionL4AccessDataResponse>;
   /** {@link DescribeDnsData 获取DNS请求数统计曲线}({@link DescribeDnsDataRequest 请求参数}): {@link DescribeDnsDataResponse 返回参数} */
   DescribeDnsData(data: DescribeDnsDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDnsDataResponse>;
-  /** {@link DescribeDnsRecords 查询 DNS 记录列表}({@link DescribeDnsRecordsRequest 请求参数}): {@link DescribeDnsRecordsResponse 返回参数} */
-  DescribeDnsRecords(data?: DescribeDnsRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDnsRecordsResponse>;
   /** {@link DescribeDnssec 查询 DNSSEC 信息}({@link DescribeDnssecRequest 请求参数}): {@link DescribeDnssecResponse 返回参数} */
   DescribeDnssec(data: DescribeDnssecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDnssecResponse>;
   /** {@link DescribeHostsSetting 查询域名详细配置}({@link DescribeHostsSettingRequest 请求参数}): {@link DescribeHostsSettingResponse 返回参数} */
   DescribeHostsSetting(data: DescribeHostsSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostsSettingResponse>;
   /** {@link DescribeIdentifications 查询站点的验证信息}({@link DescribeIdentificationsRequest 请求参数}): {@link DescribeIdentificationsResponse 返回参数} */
   DescribeIdentifications(data: DescribeIdentificationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdentificationsResponse>;
-  /** {@link DescribeLoadBalancing 获取负载均衡列表}({@link DescribeLoadBalancingRequest 请求参数}): {@link DescribeLoadBalancingResponse 返回参数} */
-  DescribeLoadBalancing(data: DescribeLoadBalancingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancingResponse>;
   /** {@link DescribeLogSets 获取日志集列表}({@link DescribeLogSetsRequest 请求参数}): {@link DescribeLogSetsResponse 返回参数} */
   DescribeLogSets(data: DescribeLogSetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogSetsResponse>;
   /** {@link DescribeLogTopicTaskDetail 获取推送任务详细信息}({@link DescribeLogTopicTaskDetailRequest 请求参数}): {@link DescribeLogTopicTaskDetailResponse 返回参数} */
@@ -9237,14 +8977,10 @@ declare interface Teo {
   ModifyDDoSPolicyHost(data: ModifyDDoSPolicyHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSPolicyHostResponse>;
   /** {@link ModifyDefaultCertificate 修改默认证书状态}({@link ModifyDefaultCertificateRequest 请求参数}): {@link ModifyDefaultCertificateResponse 返回参数} */
   ModifyDefaultCertificate(data: ModifyDefaultCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDefaultCertificateResponse>;
-  /** {@link ModifyDnsRecord 修改 DNS 记录}({@link ModifyDnsRecordRequest 请求参数}): {@link ModifyDnsRecordResponse 返回参数} */
-  ModifyDnsRecord(data: ModifyDnsRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDnsRecordResponse>;
   /** {@link ModifyDnssec 修改 DNSSEC 状态}({@link ModifyDnssecRequest 请求参数}): {@link ModifyDnssecResponse 返回参数} */
   ModifyDnssec(data: ModifyDnssecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDnssecResponse>;
   /** {@link ModifyHostsCertificate 修改域名证书}({@link ModifyHostsCertificateRequest 请求参数}): {@link ModifyHostsCertificateResponse 返回参数} */
   ModifyHostsCertificate(data: ModifyHostsCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostsCertificateResponse>;
-  /** {@link ModifyLoadBalancing 修改负载均衡}({@link ModifyLoadBalancingRequest 请求参数}): {@link ModifyLoadBalancingResponse 返回参数} */
-  ModifyLoadBalancing(data: ModifyLoadBalancingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancingResponse>;
   /** {@link ModifyLogTopicTask 修改推送任务}({@link ModifyLogTopicTaskRequest 请求参数}): {@link ModifyLogTopicTaskResponse 返回参数} */
   ModifyLogTopicTask(data: ModifyLogTopicTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogTopicTaskResponse>;
   /** {@link ModifyOriginGroup 修改源站组}({@link ModifyOriginGroupRequest 请求参数}): {@link ModifyOriginGroupResponse 返回参数} */
