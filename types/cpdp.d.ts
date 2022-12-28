@@ -2176,6 +2176,12 @@ declare interface PayeeAccountUserInfo {
   Name: string | null;
 }
 
+/** 收款用户资金账户信息 */
+declare interface PayeeFundingAccountResult {
+  /** 资金账户ID */
+  FundingAccountBindSerialNo: string;
+}
+
 /** 收款用户信息结果 */
 declare interface PayeeInfoResult {
   /** 收款用户ID */
@@ -3362,6 +3368,12 @@ declare interface SceneInfo {
   UserClientIp: string | null;
 }
 
+/** 服务商账户余额返回信息 */
+declare interface ServiceProviderAccountBalanceResult {
+  /** 服务商账户余额 */
+  Balance: string;
+}
+
 /** 商户结算信息 */
 declare interface SettleInfo {
   /** 结算账户类型 PRIVATE：对私 BUSINESS：对公HELIPAY渠道必传 */
@@ -4028,6 +4040,34 @@ declare interface AddContractResponse {
   ErrCode: string;
   /** 添加合同响应对象 */
   Result: AddContractResult | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface AddFlexFundingAccountRequest {
+  /** 资金账户类型PINGAN_BANK:平安银行 */
+  FundingAccountType: string;
+  /** 收款资金账户姓名 */
+  FundingAccountName: string;
+  /** 收款资金账户号 */
+  FundingAccountNo: string;
+  /** 收款资金账户手机号 */
+  PhoneNo: string;
+  /** 收款用户ID */
+  PayeeId: string;
+  /** 环境类型__release__:生产环境__sandbox__:沙箱环境__test__:测试环境缺省默认为生产环境 */
+  Environment?: string;
+  /** 开户支行名 */
+  BankBranchName?: string;
+}
+
+declare interface AddFlexFundingAccountResponse {
+  /** 错误码。SUCCESS为成功，其他为失败 */
+  ErrCode: string;
+  /** 错误消息 */
+  ErrMessage: string;
+  /** 无 */
+  Result: PayeeFundingAccountResult | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -7000,6 +7040,36 @@ declare interface ModifyBindedAccountResponse {
   RequestId?: string;
 }
 
+declare interface ModifyFlexFundingAccountRequest {
+  /** 收款用户ID */
+  PayeeId: string;
+  /** 收款用户资金账户ID */
+  FundingAccountBindSerialNo: string;
+  /** 资金账户类型PINGAN_BANK:平安银行 */
+  FundingAccountType: string;
+  /** 收款资金账户手机号 */
+  PhoneNo: string;
+  /** 收款资金账户姓名 */
+  FundingAccountName: string;
+  /** 收款资金账户号 */
+  FundingAccountNo: string;
+  /** 环境类型__release__:生产环境__sandbox__:沙箱环境__test__:测试环境缺省默认为生产环境 */
+  Environment?: string;
+  /** 开户支行名 */
+  BankBranchName?: string;
+}
+
+declare interface ModifyFlexFundingAccountResponse {
+  /** 错误码。SUCCESS为成功，其他为失败 */
+  ErrCode: string;
+  /** 错误消息 */
+  ErrMessage: string;
+  /** 无 */
+  Result: string | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface ModifyFlexPayeeAccountRightStatusRequest {
   /** 收款用户ID */
   PayeeId: string;
@@ -8070,6 +8140,24 @@ declare interface QueryFlexPlatformAccountBalanceResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: PlatformAccountBalanceResult | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface QueryFlexServiceProviderAccountBalanceRequest {
+  /** 服务商ID */
+  ServiceProviderId: string;
+  /** 环境类型__release__:生产环境__sandbox__:沙箱环境__test__:测试环境缺省默认为生产环境 */
+  Environment?: string;
+}
+
+declare interface QueryFlexServiceProviderAccountBalanceResponse {
+  /** 错误码。SUCCESS为成功，其他为失败 */
+  ErrCode: string;
+  /** 错误消息 */
+  ErrMessage: string;
+  /** 返回结果 */
+  Result: ServiceProviderAccountBalanceResult | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -10739,6 +10827,8 @@ declare interface Cpdp {
   (): Versions;
   /** {@link AddContract 云支付-添加合同接口}({@link AddContractRequest 请求参数}): {@link AddContractResponse 返回参数} */
   AddContract(data: AddContractRequest, config?: AxiosRequestConfig): AxiosPromise<AddContractResponse>;
+  /** {@link AddFlexFundingAccount 灵云V2-绑定收款用户资金账号信息}({@link AddFlexFundingAccountRequest 请求参数}): {@link AddFlexFundingAccountResponse 返回参数} */
+  AddFlexFundingAccount(data: AddFlexFundingAccountRequest, config?: AxiosRequestConfig): AxiosPromise<AddFlexFundingAccountResponse>;
   /** {@link AddFlexIdInfo 灵云V2-补充证件信息}({@link AddFlexIdInfoRequest 请求参数}): {@link AddFlexIdInfoResponse 返回参数} */
   AddFlexIdInfo(data: AddFlexIdInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddFlexIdInfoResponse>;
   /** {@link AddFlexPhoneNo 灵云V2-补充手机号信息}({@link AddFlexPhoneNoRequest 请求参数}): {@link AddFlexPhoneNoResponse 返回参数} */
@@ -10913,6 +11003,8 @@ declare interface Cpdp {
   ModifyAgentTaxPaymentInfo(data: ModifyAgentTaxPaymentInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAgentTaxPaymentInfoResponse>;
   /** {@link ModifyBindedAccount 灵云-重新绑定账号}({@link ModifyBindedAccountRequest 请求参数}): {@link ModifyBindedAccountResponse 返回参数} */
   ModifyBindedAccount(data: ModifyBindedAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBindedAccountResponse>;
+  /** {@link ModifyFlexFundingAccount 灵云V2-修改收款用户资金账号信息}({@link ModifyFlexFundingAccountRequest 请求参数}): {@link ModifyFlexFundingAccountResponse 返回参数} */
+  ModifyFlexFundingAccount(data: ModifyFlexFundingAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFlexFundingAccountResponse>;
   /** {@link ModifyFlexPayeeAccountRightStatus 灵云V2-收款用户账户权益状态修改}({@link ModifyFlexPayeeAccountRightStatusRequest 请求参数}): {@link ModifyFlexPayeeAccountRightStatusResponse 返回参数} */
   ModifyFlexPayeeAccountRightStatus(data: ModifyFlexPayeeAccountRightStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFlexPayeeAccountRightStatusResponse>;
   /** {@link ModifyMerchant 云鉴-商户信息修改接口}({@link ModifyMerchantRequest 请求参数}): {@link ModifyMerchantResponse 返回参数} */
@@ -10999,6 +11091,8 @@ declare interface Cpdp {
   QueryFlexPaymentOrderStatus(data?: QueryFlexPaymentOrderStatusRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPaymentOrderStatusResponse>;
   /** {@link QueryFlexPlatformAccountBalance 灵云V2-平台账户余额查询}({@link QueryFlexPlatformAccountBalanceRequest 请求参数}): {@link QueryFlexPlatformAccountBalanceResponse 返回参数} */
   QueryFlexPlatformAccountBalance(data: QueryFlexPlatformAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPlatformAccountBalanceResponse>;
+  /** {@link QueryFlexServiceProviderAccountBalance 灵云V2-查询服务商账户余额}({@link QueryFlexServiceProviderAccountBalanceRequest 请求参数}): {@link QueryFlexServiceProviderAccountBalanceResponse 返回参数} */
+  QueryFlexServiceProviderAccountBalance(data: QueryFlexServiceProviderAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexServiceProviderAccountBalanceResponse>;
   /** {@link QueryFlexSettlementOrderList 灵云V2-查询结算订单列表}({@link QueryFlexSettlementOrderListRequest 请求参数}): {@link QueryFlexSettlementOrderListResponse 返回参数} */
   QueryFlexSettlementOrderList(data: QueryFlexSettlementOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexSettlementOrderListResponse>;
   /** {@link QueryFundsTransactionDetails 聚鑫-查询会员资金交易信息列表}({@link QueryFundsTransactionDetailsRequest 请求参数}): {@link QueryFundsTransactionDetailsResponse 返回参数} */

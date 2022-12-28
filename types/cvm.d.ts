@@ -226,6 +226,12 @@ declare interface HostItem {
   CageId: string | null;
 }
 
+/** cdh相关价格信息 */
+declare interface HostPriceInfo {
+  /** 描述了cdh实例相关的价格信息 */
+  HostPrice: ItemPrice;
+}
+
 /** 专用宿主机实例的资源信息 */
 declare interface HostResource {
   /** 专用宿主机实例总CPU核数 */
@@ -2036,6 +2042,22 @@ declare interface InquiryPriceModifyInstancesChargeTypeResponse {
   RequestId?: string;
 }
 
+declare interface InquiryPriceRenewHostsRequest {
+  /** 一个或多个待操作的`CDH`实例`ID`。可通过[`DescribeHosts`](https://cloud.tencent.com/document/api/213/16474)接口返回值中的`HostId`获取。每次请求批量实例的上限为100。 */
+  HostIds: string[];
+  /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。 */
+  HostChargePrepaid: ChargePrepaid;
+  /** 试运行，测试使用，不执行具体逻辑。取值范围：TRUE：跳过执行逻辑FALSE：执行逻辑默认取值：FALSE。 */
+  DryRun?: boolean;
+}
+
+declare interface InquiryPriceRenewHostsResponse {
+  /** CDH实例续费价格信息 */
+  Price?: HostPriceInfo;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface InquiryPriceRenewInstancesRequest {
   /** 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
   InstanceIds: string[];
@@ -2810,6 +2832,8 @@ declare interface Cvm {
   InquirePricePurchaseReservedInstancesOffering(data: InquirePricePurchaseReservedInstancesOfferingRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePricePurchaseReservedInstancesOfferingResponse>;
   /** {@link InquiryPriceModifyInstancesChargeType 修改实例计费模式询价}({@link InquiryPriceModifyInstancesChargeTypeRequest 请求参数}): {@link InquiryPriceModifyInstancesChargeTypeResponse 返回参数} */
   InquiryPriceModifyInstancesChargeType(data: InquiryPriceModifyInstancesChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceModifyInstancesChargeTypeResponse>;
+  /** {@link InquiryPriceRenewHosts 续费CDH实例询价}({@link InquiryPriceRenewHostsRequest 请求参数}): {@link InquiryPriceRenewHostsResponse 返回参数} */
+  InquiryPriceRenewHosts(data: InquiryPriceRenewHostsRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewHostsResponse>;
   /** {@link InquiryPriceRenewInstances 续费实例询价}({@link InquiryPriceRenewInstancesRequest 请求参数}): {@link InquiryPriceRenewInstancesResponse 返回参数} */
   InquiryPriceRenewInstances(data: InquiryPriceRenewInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewInstancesResponse>;
   /** {@link InquiryPriceResetInstance 重装实例询价}({@link InquiryPriceResetInstanceRequest 请求参数}): {@link InquiryPriceResetInstanceResponse 返回参数} */

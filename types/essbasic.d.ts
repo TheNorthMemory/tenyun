@@ -966,12 +966,12 @@ declare interface CreateChannelFlowEvidenceReportRequest {
 }
 
 declare interface CreateChannelFlowEvidenceReportResponse {
-  /** 废除，字段无效 */
-  ReportUrl: string | null;
-  /** 出证报告 ID */
+  /** 出证报告 ID，用于查询出证报告接口DescribeChannelFlowEvidenceReport时用到 */
   ReportId: string | null;
   /** 执行中：EvidenceStatusExecuting成功：EvidenceStatusSuccess失败：EvidenceStatusFailed */
   Status: string;
+  /** 废除，字段无效 */
+  ReportUrl: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1097,10 +1097,10 @@ declare interface CreateSignUrlsResponse {
 }
 
 declare interface DescribeChannelFlowEvidenceReportRequest {
-  /** 出证报告编号 */
-  ReportId: string;
   /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填 */
   Agent: Agent;
+  /** 出证报告编号 */
+  ReportId: string;
   /** 操作者的信息 */
   Operator?: UserInfo;
 }

@@ -104,6 +104,8 @@ declare interface Certificates {
   CACommonNames: string[] | null;
   /** 证书预审核信息 */
   PreAuditInfo: PreAuditInfo | null;
+  /** 是否自动续费 */
+  AutoRenewFlag: number | null;
 }
 
 /** 公司信息 */

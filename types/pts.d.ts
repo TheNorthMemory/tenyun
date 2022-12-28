@@ -679,7 +679,7 @@ declare interface Scenario {
   /** 场景ID */
   ScenarioId?: string;
   /** 场景名 */
-  Name: string;
+  Name?: string;
   /** 场景描述 */
   Description?: string | null;
   /** 场景类型，如pts-http, pts-js, pts-trpc, pts-jmeter */
@@ -707,25 +707,27 @@ declare interface Scenario {
   /** 项目ID */
   ProjectId?: string | null;
   /** App ID */
-  AppId: number | null;
+  AppId?: number | null;
   /** 用户ID */
-  Uin: string | null;
+  Uin?: string | null;
   /** 子用户ID */
-  SubAccountUin: string | null;
+  SubAccountUin?: string | null;
   /** 测试脚本信息 */
-  TestScripts: ScriptInfo[] | null;
+  TestScripts?: ScriptInfo[] | null;
   /** 协议文件信息 */
-  Protocols: ProtocolInfo[] | null;
+  Protocols?: ProtocolInfo[] | null;
   /** 请求文件信息 */
-  RequestFiles: FileInfo[] | null;
+  RequestFiles?: FileInfo[] | null;
   /** SLA 策略 */
-  SLAPolicy: SLAPolicy | null;
+  SLAPolicy?: SLAPolicy | null;
   /** 扩展包信息 */
-  Plugins: FileInfo[] | null;
+  Plugins?: FileInfo[] | null;
   /** 域名解析配置 */
-  DomainNameConfig: DomainNameConfig | null;
+  DomainNameConfig?: DomainNameConfig | null;
   /** 通知事件回调 */
-  NotificationHooks: NotificationHook[] | null;
+  NotificationHooks?: NotificationHook[] | null;
+  /** 创建人员 */
+  Owner?: string | null;
 }
 
 /** 查询与特定scenario关联的job的参数 */
@@ -1013,6 +1015,8 @@ declare interface CreateScenarioRequest {
   Plugins?: FileInfo[];
   /** 域名解析配置 */
   DomainNameConfig?: DomainNameConfig;
+  /** 创建人名 */
+  Owner?: string;
 }
 
 declare interface CreateScenarioResponse {
@@ -1537,13 +1541,17 @@ declare interface DescribeScenarioWithJobsRequest {
   IgnoreScript?: boolean;
   /** 是否需要返回测试数据文件信息 */
   IgnoreDataset?: boolean;
+  /** 场景类型，如pts-http, pts-js, pts-trpc, pts-jmeter */
+  ScenarioType?: string;
+  /** 创建人员 */
+  Owner?: string;
 }
 
 declare interface DescribeScenarioWithJobsResponse {
   /** 场景配置以及附带的job内容 */
-  ScenarioWithJobsSet: ScenarioWithJobs[] | null;
+  ScenarioWithJobsSet?: ScenarioWithJobs[] | null;
   /** 场景总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1747,6 +1755,8 @@ declare interface UpdateScenarioRequest {
   DomainNameConfig?: DomainNameConfig;
   /** WebHook请求配置 */
   NotificationHooks?: Notification[];
+  /** 创建人名 */
+  Owner?: string;
 }
 
 declare interface UpdateScenarioResponse {

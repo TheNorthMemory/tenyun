@@ -1023,7 +1023,7 @@ declare interface ModifyCodeBatchRequest {
   CorpId?: number;
   /** 状态 0: 未激活 1: 已激活 -1: 已冻结 */
   Status?: number;
-  /** 模版ID，或者活动ID */
+  /** 模板ID，或者活动ID */
   MpTpl?: string;
   /** 商户ID */
   MerchantId?: string;
@@ -1037,7 +1037,7 @@ declare interface ModifyCodeBatchRequest {
 
 declare interface ModifyCodeBatchResponse {
   /** 批次ID */
-  BatchId: string;
+  BatchId?: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1134,6 +1134,26 @@ declare interface ModifyTraceCodeRequest {
 }
 
 declare interface ModifyTraceCodeResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface ModifyTraceCodeUnlinkRequest {
+  /** 批次ID */
+  BatchId: string;
+  /** 溯源码列表 */
+  Codes: string[];
+  /** 企业ID */
+  CorpId?: number;
+}
+
+declare interface ModifyTraceCodeUnlinkResponse {
+  /** 成功解绑溯源码的数量 */
+  UnlinkCnt: number;
+  /** 当前批次的码数量 */
+  CodeCnt: number;
+  /** 批次ID */
+  BatchId: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1281,6 +1301,8 @@ declare interface Trp {
   ModifyProduct(data: ModifyProductRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProductResponse>;
   /** {@link ModifyTraceCode 修改二维码的状态}({@link ModifyTraceCodeRequest 请求参数}): {@link ModifyTraceCodeResponse 返回参数} */
   ModifyTraceCode(data: ModifyTraceCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceCodeResponse>;
+  /** {@link ModifyTraceCodeUnlink 解绑溯源码和批次的关系}({@link ModifyTraceCodeUnlinkRequest 请求参数}): {@link ModifyTraceCodeUnlinkResponse 返回参数} */
+  ModifyTraceCodeUnlink(data: ModifyTraceCodeUnlinkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceCodeUnlinkResponse>;
   /** {@link ModifyTraceData 修改溯源信息}({@link ModifyTraceDataRequest 请求参数}): {@link ModifyTraceDataResponse 返回参数} */
   ModifyTraceData(data?: ModifyTraceDataRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceDataResponse>;
   /** {@link ModifyTraceDataRanks 修改溯源信息的排序}({@link ModifyTraceDataRanksRequest 请求参数}): {@link ModifyTraceDataRanksResponse 返回参数} */

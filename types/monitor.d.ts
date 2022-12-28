@@ -1067,9 +1067,9 @@ declare interface GrafanaNotificationChannel {
   /** 额外生效组织，已废弃，请使用 OrganizationIds */
   ExtraOrgIds: string[] | null;
   /** 生效组织，已废弃，请使用 OrganizationIds */
-  OrgIds: string | null;
+  OrgIds: string[] | null;
   /** 告警渠道的所有生效组织 */
-  OrganizationIds: string | null;
+  OrganizationIds: string[] | null;
 }
 
 /** Grafana 插件 */

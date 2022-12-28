@@ -10,6 +10,14 @@ declare interface RegionInfo {
   RegionName: string;
   /** 地域是否可用状态 */
   RegionState: string;
+  /** 控制台类型，api调用时默认null */
+  RegionTypeMC: number | null;
+  /** 不同语言的地区 */
+  LocationMC: string | null;
+  /** 控制台展示的地域描述 */
+  RegionNameMC: string | null;
+  /** 1 */
+  RegionIdMC: string | null;
 }
 
 /** 地域管理系统支持的产品信息 */
@@ -28,6 +36,18 @@ declare interface ZoneInfo {
   ZoneId: string;
   /** 可用区状态，包含AVAILABLE和UNAVAILABLE。AVAILABLE代表可用，UNAVAILABLE代表不可用。 */
   ZoneState: string;
+  /** 父级zone */
+  ParentZone: string | null;
+  /** 父级可用区ID */
+  ParentZoneId: string | null;
+  /** 父级可用区描述 */
+  ParentZoneName: string | null;
+  /** zone类型 */
+  ZoneType: string | null;
+  /** 控制台类型 */
+  MachineRoomTypeMC: string | null;
+  /** 和ZoneId一样，适用于控制台调用。 */
+  ZoneIdMC: string | null;
 }
 
 declare interface DescribeProductsRequest {

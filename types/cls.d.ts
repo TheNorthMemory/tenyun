@@ -438,7 +438,7 @@ declare interface KeyRegexInfo {
 
 /** 键值或者元字段索引的字段信息 */
 declare interface KeyValueInfo {
-  /** 需要配置键值或者元字段索引的字段，元字段Key无需额外添加`__TAG__.`前缀，与上传日志时对应的字段Key一致即可，腾讯云控制台展示时将自动添加`__TAG__.`前缀 */
+  /** 需要配置键值或者元字段索引的字段名称，仅支持字母、数字和_-./@，且不能以_开头注意：1，元字段（tag）的Key无需额外添加`__TAG__.`前缀，与上传日志时对应的字段Key一致即可，腾讯云控制台展示时将自动添加`__TAG__.`前缀2，键值索引（KeyValue）及元字段索引（Tag）中的Key总数不能超过3003，Key的层级不能超过10层，例如a.b.c.d.e.f.g.h.j.k4，不允许同时包含json父子级字段，例如a及a.b */
   Key: string;
   /** 字段的索引描述信息 */
   Value: ValueInfo;
@@ -636,7 +636,7 @@ declare interface RuleInfo {
 declare interface RuleKeyValueInfo {
   /** 是否大小写敏感 */
   CaseSensitive: boolean;
-  /** 需要建立索引的键值对信息；最大只能配置100个键值对 */
+  /** 需要建立索引的键值对信息 */
   KeyValues?: KeyValueInfo[];
 }
 
@@ -752,7 +752,7 @@ declare interface ValueInfo {
   Tokenizer?: string;
   /** 字段是否开启分析功能 */
   SqlFlag?: boolean;
-  /** 是否包含中文 */
+  /** 是否包含中文，long及double类型字段需为false */
   ContainZH?: boolean | null;
 }
 

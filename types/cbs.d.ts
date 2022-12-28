@@ -502,6 +502,20 @@ declare interface CreateAutoSnapshotPolicyResponse {
   RequestId?: string;
 }
 
+declare interface CreateDiskBackupRequest {
+  /** 要创建备份点的云硬盘名称。 */
+  DiskId: string;
+  /** 云硬盘备份点名称。长度不能超过100个字符。 */
+  DiskBackupName?: string;
+}
+
+declare interface CreateDiskBackupResponse {
+  /** 云硬盘备份点的ID。 */
+  DiskBackupId: string;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface CreateDisksRequest {
   /** 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目。若不指定项目，将在默认项目下进行创建。 */
   Placement: Placement;
@@ -1119,6 +1133,8 @@ declare interface Cbs {
   CopySnapshotCrossRegions(data: CopySnapshotCrossRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<CopySnapshotCrossRegionsResponse>;
   /** {@link CreateAutoSnapshotPolicy 创建定期快照策略}({@link CreateAutoSnapshotPolicyRequest 请求参数}): {@link CreateAutoSnapshotPolicyResponse 返回参数} */
   CreateAutoSnapshotPolicy(data: CreateAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoSnapshotPolicyResponse>;
+  /** {@link CreateDiskBackup 创建云硬盘备份点}({@link CreateDiskBackupRequest 请求参数}): {@link CreateDiskBackupResponse 返回参数} */
+  CreateDiskBackup(data: CreateDiskBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDiskBackupResponse>;
   /** {@link CreateDisks 创建云硬盘}({@link CreateDisksRequest 请求参数}): {@link CreateDisksResponse 返回参数} */
   CreateDisks(data: CreateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDisksResponse>;
   /** {@link CreateSnapshot 创建快照}({@link CreateSnapshotRequest 请求参数}): {@link CreateSnapshotResponse 返回参数} */

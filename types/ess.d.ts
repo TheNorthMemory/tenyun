@@ -748,12 +748,12 @@ declare interface CreateFlowEvidenceReportRequest {
 }
 
 declare interface CreateFlowEvidenceReportResponse {
-  /** 出证报告 ID */
+  /** 出证报告 ID，用于查询出证报告DescribeFlowEvidenceReport接口时用到 */
   ReportId: string | null;
-  /** 废除，字段无效 */
-  ReportUrl: string | null;
   /** 执行中：EvidenceStatusExecuting成功：EvidenceStatusSuccess失败：EvidenceStatusFailed */
   Status: string;
+  /** 废除，字段无效 */
+  ReportUrl: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

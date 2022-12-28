@@ -93,11 +93,11 @@ declare interface CreateRoomRequest {
   SdkAppId: number;
   /** 分辨率。可以有如下取值：1 标清2 高清3 全高清 */
   Resolution: number;
-  /** 最大连麦人数（不包括老师）。取值范围[0, 17) */
+  /** 最大连麦人数（不包括老师）。取值范围[0, 16] */
   MaxMicNumber: number;
   /** 房间子类型，可以有以下取值：videodoc 文档+视频video 纯视频coteaching 双师 */
   SubType: string;
-  /** 老师ID。 */
+  /** 老师ID。通过[注册用户]接口获取的UserId。 */
   TeacherId?: string;
   /** 进入房间时是否自动连麦。可以有以下取值：0 不自动连麦（默认值）1 自动连麦 */
   AutoMic?: number;
@@ -105,7 +105,7 @@ declare interface CreateRoomRequest {
   AudioQuality?: number;
   /** 禁止录制。可以有以下取值：0 不禁止录制（默认值）1 禁止录制 */
   DisableRecord?: number;
-  /** 助教Id列表。 */
+  /** 助教Id列表。通过[注册用户]接口获取的UserId。 */
   Assistants?: string[];
   /** 录制布局。 */
   RecordLayout?: number;
@@ -113,7 +113,7 @@ declare interface CreateRoomRequest {
 
 declare interface CreateRoomResponse {
   /** 房间ID。 */
-  RoomId: number;
+  RoomId?: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
