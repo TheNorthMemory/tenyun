@@ -390,6 +390,26 @@ declare interface Filter {
   Values: string[];
 }
 
+/** SCF云函数（Serverless Cloud Function）相关信息。 */
+declare interface FunctionInfo {
+  /** 函数命名空间 */
+  FunctionNamespace: string;
+  /** 函数名称 */
+  FunctionName: string;
+  /** 函数的版本名称或别名 */
+  FunctionQualifier: string;
+  /** 标识 FunctionQualifier 参数的类型，可取值： VERSION（版本）、ALIAS（别名） */
+  FunctionQualifierType?: string | null;
+}
+
+/** SCF云函数（Serverless Cloud Function）作为后端服务 */
+declare interface FunctionTarget {
+  /** 云函数相关信息 */
+  Function: FunctionInfo | null;
+  /** 权重 */
+  Weight?: number;
+}
+
 /** 健康检查信息。注意，自定义探测相关参数 目前只有少量区域灰度支持。 */
 declare interface HealthCheck {
   /** 是否开启健康检查：1（开启）、0（关闭）。 */
@@ -1554,6 +1574,26 @@ declare interface DeleteTargetGroupsResponse {
   RequestId?: string;
 }
 
+declare interface DeregisterFunctionTargetsRequest {
+  /** 负载均衡实例 ID。 */
+  LoadBalancerId: string;
+  /** 负载均衡监听器 ID。 */
+  ListenerId: string;
+  /** 待解绑的云函数列表。 */
+  FunctionTargets: FunctionTarget[];
+  /** 目标转发规则的 ID，当将云函数从七层转发规则上解绑时，必须输入此参数或 Domain+Url 参数。 */
+  LocationId?: string;
+  /** 目标转发规则的域名，若已经输入 LocationId 参数，则本参数不生效。 */
+  Domain?: string;
+  /** 目标转发规则的 URL，若已经输入 LocationId 参数，则本参数不生效。 */
+  Url?: string;
+}
+
+declare interface DeregisterFunctionTargetsResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DeregisterTargetGroupInstancesRequest {
   /** 目标组ID。 */
   TargetGroupId: string;
@@ -2404,6 +2444,14 @@ declare interface ModifyTargetWeightResponse {
   RequestId?: string;
 }
 
+declare interface RegisterFunctionTargetsRequest {
+}
+
+declare interface RegisterFunctionTargetsResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface RegisterTargetGroupInstancesRequest {
   /** 目标组ID */
   TargetGroupId: string;
@@ -2565,6 +2613,8 @@ declare interface Clb {
   DeleteRule(data: DeleteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleResponse>;
   /** {@link DeleteTargetGroups 删除目标组}({@link DeleteTargetGroupsRequest 请求参数}): {@link DeleteTargetGroupsResponse 返回参数} */
   DeleteTargetGroups(data: DeleteTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTargetGroupsResponse>;
+  /** {@link DeregisterFunctionTargets 将云函数从转发规则上解绑}({@link DeregisterFunctionTargetsRequest 请求参数}): {@link DeregisterFunctionTargetsResponse 返回参数} */
+  DeregisterFunctionTargets(data: DeregisterFunctionTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterFunctionTargetsResponse>;
   /** {@link DeregisterTargetGroupInstances 解绑目标组服务器}({@link DeregisterTargetGroupInstancesRequest 请求参数}): {@link DeregisterTargetGroupInstancesResponse 返回参数} */
   DeregisterTargetGroupInstances(data: DeregisterTargetGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterTargetGroupInstancesResponse>;
   /** {@link DeregisterTargets 从负载均衡监听器上解绑后端服务}({@link DeregisterTargetsRequest 请求参数}): {@link DeregisterTargetsResponse 返回参数} */
@@ -2661,6 +2711,8 @@ declare interface Clb {
   ModifyTargetPort(data: ModifyTargetPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetPortResponse>;
   /** {@link ModifyTargetWeight 修改监听器绑定的后端机器的转发权重}({@link ModifyTargetWeightRequest 请求参数}): {@link ModifyTargetWeightResponse 返回参数} */
   ModifyTargetWeight(data: ModifyTargetWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetWeightResponse>;
+  /** {@link RegisterFunctionTargets 绑定云函数到转发规则上}({@link RegisterFunctionTargetsRequest 请求参数}): {@link RegisterFunctionTargetsResponse 返回参数} */
+  RegisterFunctionTargets(data?: RegisterFunctionTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterFunctionTargetsResponse>;
   /** {@link RegisterTargetGroupInstances 注册服务器到目标组}({@link RegisterTargetGroupInstancesRequest 请求参数}): {@link RegisterTargetGroupInstancesResponse 返回参数} */
   RegisterTargetGroupInstances(data: RegisterTargetGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterTargetGroupInstancesResponse>;
   /** {@link RegisterTargets 绑定后端机器到监听器上}({@link RegisterTargetsRequest 请求参数}): {@link RegisterTargetsResponse 返回参数} */

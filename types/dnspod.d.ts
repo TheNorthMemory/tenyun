@@ -637,7 +637,7 @@ declare interface CheckRecordSnapshotRollbackRequest {
 
 declare interface CheckRecordSnapshotRollbackResponse {
   /** 错误原因 */
-  Reason: string | null;
+  Reason?: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -653,19 +653,19 @@ declare interface CheckSnapshotRollbackRequest {
 
 declare interface CheckSnapshotRollbackResponse {
   /** 快照记录 ID */
-  SnapshotId: string;
+  SnapshotId?: string;
   /** 回滚时长（分钟） */
-  CostMinutes: number;
+  CostMinutes?: number;
   /** 快照所属域名 */
-  Domain: string;
+  Domain?: string;
   /** 解析记录总数 */
-  Total: number;
+  Total?: number;
   /** 值为 1，表示超时 */
-  Timeout: number | null;
+  Timeout?: number | null;
   /** 检查失败数量 */
-  Failed: number | null;
+  Failed?: number | null;
   /** 失败记录信息 */
-  FailedRecordList: SnapshotRecord[] | null;
+  FailedRecordList?: SnapshotRecord[] | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -691,9 +691,9 @@ declare interface CreateDealRequest {
 
 declare interface CreateDealResponse {
   /** 大订单号，一个大订单号下可以有多个子订单，说明是同一次下单 */
-  BigDealId: string;
+  BigDealId?: string;
   /** 子订单列表 */
-  DealList: Deals[];
+  DealList?: Deals[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -709,7 +709,7 @@ declare interface CreateDomainAliasRequest {
 
 declare interface CreateDomainAliasResponse {
   /** 域名别名ID */
-  DomainAliasId: number;
+  DomainAliasId?: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -723,9 +723,9 @@ declare interface CreateDomainBatchRequest {
 
 declare interface CreateDomainBatchResponse {
   /** 批量添加域名信息 */
-  DetailList: CreateDomainBatchDetail[];
+  DetailList?: CreateDomainBatchDetail[];
   /** 批量任务的ID */
-  JobId: number;
+  JobId?: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -737,7 +737,7 @@ declare interface CreateDomainGroupRequest {
 
 declare interface CreateDomainGroupResponse {
   /** 域名分组ID */
-  GroupId: number;
+  GroupId?: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -753,7 +753,7 @@ declare interface CreateDomainRequest {
 
 declare interface CreateDomainResponse {
   /** 域名信息 */
-  DomainInfo: DomainCreateInfo;
+  DomainInfo?: DomainCreateInfo;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -767,9 +767,9 @@ declare interface CreateRecordBatchRequest {
 
 declare interface CreateRecordBatchResponse {
   /** 批量添加域名信息 */
-  DetailList: CreateRecordBatchDetail[];
+  DetailList?: CreateRecordBatchDetail[];
   /** 批量任务的ID */
-  JobId: number;
+  JobId?: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -785,7 +785,7 @@ declare interface CreateRecordGroupRequest {
 
 declare interface CreateRecordGroupResponse {
   /** 新增的分组 ID */
-  GroupId: number;
+  GroupId?: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -817,7 +817,7 @@ declare interface CreateRecordRequest {
 
 declare interface CreateRecordResponse {
   /** 记录ID */
-  RecordId: number;
+  RecordId?: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -923,17 +923,17 @@ declare interface DescribeBatchTaskRequest {
 
 declare interface DescribeBatchTaskResponse {
   /** 批量任务详情 */
-  DetailList: DescribeBatchTaskDetail[];
+  DetailList?: DescribeBatchTaskDetail[];
   /** 总任务条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 成功条数 */
-  SuccessCount: number;
+  SuccessCount?: number;
   /** 失败条数 */
-  FailCount: number;
+  FailCount?: number;
   /** 批量任务类型 */
-  JobType: string;
+  JobType?: string;
   /** 任务创建时间 */
-  CreatedAt: string;
+  CreatedAt?: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -947,7 +947,7 @@ declare interface DescribeDomainAliasListRequest {
 
 declare interface DescribeDomainAliasListResponse {
   /** 域名别名列表 */
-  DomainAliasList: DomainAliasInfo[];
+  DomainAliasList?: DomainAliasInfo[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -967,11 +967,11 @@ declare interface DescribeDomainAnalyticsRequest {
 
 declare interface DescribeDomainAnalyticsResponse {
   /** 当前统计维度解析量小计 */
-  Data: DomainAnalyticsDetail[];
+  Data?: DomainAnalyticsDetail[];
   /** 域名解析量统计查询信息 */
-  Info: DomainAnalyticsInfo;
+  Info?: DomainAnalyticsInfo;
   /** 域名别名解析量统计信息 */
-  AliasData: DomainAliasAnalyticsItem[];
+  AliasData?: DomainAliasAnalyticsItem[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -981,7 +981,7 @@ declare interface DescribeDomainGroupListRequest {
 
 declare interface DescribeDomainGroupListResponse {
   /** 分组列表 */
-  GroupList: GroupInfo[];
+  GroupList?: GroupInfo[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1001,9 +1001,9 @@ declare interface DescribeDomainListRequest {
 
 declare interface DescribeDomainListResponse {
   /** 列表页统计信息 */
-  DomainCountInfo: DomainCountInfo;
+  DomainCountInfo?: DomainCountInfo;
   /** 域名列表 */
-  DomainList: DomainListItem[];
+  DomainList?: DomainListItem[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1021,11 +1021,11 @@ declare interface DescribeDomainLogListRequest {
 
 declare interface DescribeDomainLogListResponse {
   /** 域名信息 */
-  LogList: string[] | null;
+  LogList?: string[] | null;
   /** 分页大小 */
-  PageSize: number;
+  PageSize?: number;
   /** 日志总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1039,7 +1039,7 @@ declare interface DescribeDomainPurviewRequest {
 
 declare interface DescribeDomainPurviewResponse {
   /** 域名权限列表 */
-  PurviewList: PurviewInfo[];
+  PurviewList?: PurviewInfo[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1053,7 +1053,7 @@ declare interface DescribeDomainRequest {
 
 declare interface DescribeDomainResponse {
   /** 域名信息 */
-  DomainInfo: DomainInfo;
+  DomainInfo?: DomainInfo;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1067,9 +1067,9 @@ declare interface DescribeDomainShareInfoRequest {
 
 declare interface DescribeDomainShareInfoResponse {
   /** 域名共享信息 */
-  ShareList: DomainShareInfo[];
+  ShareList?: DomainShareInfo[];
   /** 域名拥有者账号 */
-  Owner: string;
+  Owner?: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1087,7 +1087,7 @@ declare interface DescribeRecordGroupListRequest {
 
 declare interface DescribeRecordGroupListResponse {
   /** 分组列表 */
-  GroupList: RecordGroupInfo[];
+  GroupList?: RecordGroupInfo[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1103,9 +1103,9 @@ declare interface DescribeRecordLineListRequest {
 
 declare interface DescribeRecordLineListResponse {
   /** 线路列表。 */
-  LineList: LineInfo[];
+  LineList?: LineInfo[];
   /** 线路分组列表。 */
-  LineGroupList: LineGroupInfo[];
+  LineGroupList?: LineGroupInfo[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1139,9 +1139,9 @@ declare interface DescribeRecordListRequest {
 
 declare interface DescribeRecordListResponse {
   /** 记录的数量统计信息 */
-  RecordCountInfo: RecordCountInfo;
+  RecordCountInfo?: RecordCountInfo;
   /** 获取的记录列表 */
-  RecordList: RecordListItem[];
+  RecordList?: RecordListItem[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1157,7 +1157,7 @@ declare interface DescribeRecordRequest {
 
 declare interface DescribeRecordResponse {
   /** 记录信息 */
-  RecordInfo: RecordInfo;
+  RecordInfo?: RecordInfo;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1173,25 +1173,25 @@ declare interface DescribeRecordSnapshotRollbackResultRequest {
 
 declare interface DescribeRecordSnapshotRollbackResultResponse {
   /** 回滚任务 ID */
-  JobId: number;
+  JobId?: number;
   /** 回滚状态 */
-  Status: string;
+  Status?: string;
   /** 失败的记录信息 */
-  FailedRecordList: SnapshotRecord[] | null;
+  FailedRecordList?: SnapshotRecord[] | null;
   /** 所属域名 */
-  Domain: string | null;
+  Domain?: string | null;
   /** 回滚进度 */
-  Progress: number | null;
+  Progress?: number | null;
   /** 回滚剩余时间（单位：分钟） */
-  LeftMinutes: number | null;
+  LeftMinutes?: number | null;
   /** 总记录数 */
-  Total: number | null;
+  Total?: number | null;
   /** 失败记录数 */
-  Failed: number | null;
+  Failed?: number | null;
   /** 成功记录数 */
-  Success: number | null;
+  Success?: number | null;
   /** 快照下载地址 */
-  CosUrl: string | null;
+  CosUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1203,7 +1203,7 @@ declare interface DescribeRecordTypeRequest {
 
 declare interface DescribeRecordTypeResponse {
   /** 记录类型列表 */
-  TypeList: string[];
+  TypeList?: string[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1217,7 +1217,7 @@ declare interface DescribeSnapshotConfigRequest {
 
 declare interface DescribeSnapshotConfigResponse {
   /** 解析快照配置 */
-  SnapshotConfig: SnapshotConfig;
+  SnapshotConfig?: SnapshotConfig;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1231,9 +1231,9 @@ declare interface DescribeSnapshotListRequest {
 
 declare interface DescribeSnapshotListResponse {
   /** 分页信息 */
-  Info: SnapshotPageInfo;
+  Info?: SnapshotPageInfo;
   /** 快照列表 */
-  SnapshotList: SnapshotInfo[];
+  SnapshotList?: SnapshotInfo[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1249,27 +1249,27 @@ declare interface DescribeSnapshotRollbackResultRequest {
 
 declare interface DescribeSnapshotRollbackResultResponse {
   /** 快照所属域名 */
-  Domain: string;
+  Domain?: string;
   /** 回滚剩余时间（分钟） */
-  LeftMinutes: number;
+  LeftMinutes?: number;
   /** 回滚进度百分比 */
-  Progress: number;
+  Progress?: number;
   /** 快照 ID */
-  SnapshotId: string;
+  SnapshotId?: string;
   /** 回滚状态 */
-  Status: string;
+  Status?: string;
   /** 快照回滚任务 ID */
-  TaskId: number;
+  TaskId?: number;
   /** 成功数量 */
-  Success: number | null;
+  Success?: number | null;
   /** 失败数量 */
-  Failed: number | null;
+  Failed?: number | null;
   /** 总数量 */
-  Total: number | null;
+  Total?: number | null;
   /** 失败详细信息 */
-  FailedRecordList: SnapshotRecord[] | null;
+  FailedRecordList?: SnapshotRecord[] | null;
   /** 快照的下载地址 */
-  CosUrl: string | null;
+  CosUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1283,17 +1283,17 @@ declare interface DescribeSnapshotRollbackTaskRequest {
 
 declare interface DescribeSnapshotRollbackTaskResponse {
   /** 快照所属域名 */
-  Domain: string;
+  Domain?: string;
   /** 快照 ID */
-  SnapshotId: string;
+  SnapshotId?: string;
   /** 回滚状态 */
-  Status: string;
+  Status?: string;
   /** 快照回滚任务 ID */
-  TaskId: number;
+  TaskId?: number;
   /** 总数量 */
-  RecordCount: number;
+  RecordCount?: number;
   /** 开始回滚时间 */
-  CreatedOn: string;
+  CreatedOn?: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1315,11 +1315,11 @@ declare interface DescribeSubdomainAnalyticsRequest {
 
 declare interface DescribeSubdomainAnalyticsResponse {
   /** 当前统计维度解析量小计 */
-  Data: DomainAnalyticsDetail[];
+  Data?: DomainAnalyticsDetail[];
   /** 子域名解析量统计查询信息 */
-  Info: SubdomainAnalyticsInfo;
+  Info?: SubdomainAnalyticsInfo;
   /** 子域名别名解析量统计信息 */
-  AliasData: SubdomainAliasAnalyticsItem[];
+  AliasData?: SubdomainAliasAnalyticsItem[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1345,7 +1345,7 @@ declare interface DownloadSnapshotRequest {
 
 declare interface DownloadSnapshotResponse {
   /** 快照下载链接 */
-  CosUrl: string;
+  CosUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1361,7 +1361,7 @@ declare interface ModifyDomainLockRequest {
 
 declare interface ModifyDomainLockResponse {
   /** 域名锁定信息 */
-  LockInfo: LockInfo;
+  LockInfo?: LockInfo;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1443,7 +1443,7 @@ declare interface ModifyDynamicDNSRequest {
 
 declare interface ModifyDynamicDNSResponse {
   /** 记录ID */
-  RecordId: number;
+  RecordId?: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1475,9 +1475,9 @@ declare interface ModifyRecordBatchRequest {
 
 declare interface ModifyRecordBatchResponse {
   /** 批量任务ID */
-  JobId: number;
+  JobId?: number;
   /** 见modifyRecordBatchDetail */
-  DetailList: ModifyRecordBatchDetail[];
+  DetailList?: ModifyRecordBatchDetail[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1495,7 +1495,7 @@ declare interface ModifyRecordFieldsRequest {
 
 declare interface ModifyRecordFieldsResponse {
   /** 记录ID */
-  RecordId: number;
+  RecordId?: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1513,7 +1513,7 @@ declare interface ModifyRecordGroupRequest {
 
 declare interface ModifyRecordGroupResponse {
   /** 修改的分组 ID */
-  GroupId: number;
+  GroupId?: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1563,7 +1563,7 @@ declare interface ModifyRecordRequest {
 
 declare interface ModifyRecordResponse {
   /** 记录ID */
-  RecordId: number;
+  RecordId?: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1581,7 +1581,7 @@ declare interface ModifyRecordStatusRequest {
 
 declare interface ModifyRecordStatusResponse {
   /** 记录ID。 */
-  RecordId: number;
+  RecordId?: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1655,11 +1655,11 @@ declare interface PayOrderWithBalanceRequest {
 
 declare interface PayOrderWithBalanceResponse {
   /** 此次操作支付成功的订单id数组 */
-  DealIdList: string[];
+  DealIdList?: string[];
   /** 此次操作支付成功的大订单号数组 */
-  BigDealIdList: string[];
+  BigDealIdList?: string[];
   /** 此次操作支付成功的订单号数组 */
-  DealNameList: string[];
+  DealNameList?: string[];
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1679,7 +1679,7 @@ declare interface RollbackRecordSnapshotRequest {
 
 declare interface RollbackRecordSnapshotResponse {
   /** 回滚任务 ID */
-  JobId: number;
+  JobId?: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -1695,7 +1695,7 @@ declare interface RollbackSnapshotRequest {
 
 declare interface RollbackSnapshotResponse {
   /** 回滚任务 ID，用来查询回滚状态 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }

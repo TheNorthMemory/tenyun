@@ -2,6 +2,18 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 集群支持的功能 */
+declare interface Ability {
+  /** 是否支持从可用区 */
+  IsSupportSlaveZone: string;
+  /** 不支持从可用区的原因 */
+  NonsupportSlaveZoneReason: string | null;
+  /** 是否支持RO实例 */
+  IsSupportRo: string;
+  /** 不支持RO实例的原因 */
+  NonsupportRoReason: string | null;
+}
+
 /** 数据库账号信息 */
 declare interface Account {
   /** 数据库账号名 */
@@ -182,6 +194,8 @@ declare interface ClusterInstanceDetail {
   InstanceMemory: number;
   /** 硬盘 */
   InstanceStorage: number;
+  /** 实例角色 */
+  InstanceRole: string;
 }
 
 /** 参数修改记录 */
@@ -223,57 +237,73 @@ declare interface CynosdbCluster {
   /** 实例数 */
   InstanceNum: number;
   /** 用户uin */
-  Uin: string;
+  Uin: string | null;
   /** 引擎类型 */
-  DbType: string;
+  DbType: string | null;
   /** 用户appid */
-  AppId: number;
+  AppId: number | null;
   /** 集群状态描述 */
-  StatusDesc: string;
+  StatusDesc: string | null;
   /** 集群创建时间 */
-  CreateTime: string;
+  CreateTime: string | null;
   /** 付费模式。0-按量计费，1-包年包月 */
-  PayMode: number;
+  PayMode: number | null;
   /** 截止时间 */
-  PeriodEndTime: string;
+  PeriodEndTime: string | null;
   /** 集群读写vip */
-  Vip: string;
+  Vip: string | null;
   /** 集群读写vport */
-  Vport: number;
+  Vport: number | null;
   /** 项目id */
-  ProjectID: number;
+  ProjectID: number | null;
   /** 私有网络ID */
-  VpcId?: string;
+  VpcId?: string | null;
   /** 子网ID */
-  SubnetId?: string;
+  SubnetId?: string | null;
   /** cynos内核版本 */
-  CynosVersion?: string;
+  CynosVersion?: string | null;
   /** 存储容量 */
-  StorageLimit?: number;
+  StorageLimit?: number | null;
   /** 续费标志 */
-  RenewFlag?: number;
+  RenewFlag?: number | null;
   /** 正在处理的任务 */
-  ProcessingTask?: string;
+  ProcessingTask?: string | null;
   /** 集群的任务数组 */
-  Tasks?: ObjectTask[];
+  Tasks?: ObjectTask[] | null;
   /** 集群绑定的tag数组 */
-  ResourceTags?: Tag[];
+  ResourceTags?: Tag[] | null;
   /** Db类型(NORMAL, SERVERLESS) */
-  DbMode?: string;
+  DbMode?: string | null;
   /** 当Db类型为SERVERLESS时，serverless集群状态，可选值:resumepause */
-  ServerlessStatus?: string;
+  ServerlessStatus?: string | null;
   /** 集群预付费存储值大小 */
-  Storage?: number;
+  Storage?: number | null;
   /** 集群存储为预付费时的存储ID，用于预付费存储变配 */
-  StorageId?: string;
+  StorageId?: string | null;
   /** 集群存储付费模式。0-按量计费，1-包年包月 */
-  StoragePayMode?: number;
+  StoragePayMode?: number | null;
   /** 集群计算规格对应的最小存储值 */
-  MinStorageSize?: number;
+  MinStorageSize?: number | null;
   /** 集群计算规格对应的最大存储值 */
-  MaxStorageSize?: number;
+  MaxStorageSize?: number | null;
   /** 集群网络信息 */
-  NetAddrs?: NetAddr[];
+  NetAddrs?: NetAddr[] | null;
+  /** 物理可用区 */
+  PhysicalZone?: string | null;
+  /** 主可用区 */
+  MasterZone?: string | null;
+  /** 是否有从可用区 */
+  HasSlaveZone?: string | null;
+  /** 从可用区 */
+  SlaveZones?: string[] | null;
+  /** 商业类型 */
+  BusinessType?: string | null;
+  /** 是否冻结 */
+  IsFreeze?: string | null;
+  /** 订单来源 */
+  OrderSource?: string | null;
+  /** 能力 */
+  Ability?: Ability | null;
 }
 
 /** 集群详情详细信息 */
@@ -326,6 +356,50 @@ declare interface CynosdbClusterDetail {
   ResourceTags: Tag[];
   /** 当Db类型为SERVERLESS时，serverless集群状态，可选值:resumeresumingpausepausing */
   ServerlessStatus: string;
+  /** binlog开关，可选值：ON, OFF */
+  LogBin: string | null;
+  /** pitr类型，可选值：normal, redo_pitr */
+  PitrType: string | null;
+  /** 物理可用区 */
+  PhysicalZone: string | null;
+  /** 存储Id */
+  StorageId: string | null;
+  /** 存储大小，单位为G */
+  Storage: number | null;
+  /** 最大存储规格，单位为G */
+  MaxStorageSize: number | null;
+  /** 最小存储规格，单位为G */
+  MinStorageSize: number | null;
+  /** 存储付费类型，1为包年包月，0为按量计费 */
+  StoragePayMode: number | null;
+  /** 数据库类型，normal，serverless */
+  DbMode: string | null;
+  /** 存储空间上限 */
+  StorageLimit: number | null;
+  /** 集群支持的功能 */
+  Ability: Ability | null;
+  /** cynos版本 */
+  CynosVersion: string | null;
+  /** 商业类型 */
+  BusinessType: string | null;
+  /** 是否有从可用区 */
+  HasSlaveZone: string | null;
+  /** 是否冻结 */
+  IsFreeze: string | null;
+  /** 任务列表 */
+  Tasks: ObjectTask[] | null;
+  /** 主可用区 */
+  MasterZone: string | null;
+  /** 从可用区列表 */
+  SlaveZones: string[] | null;
+  /** Proxy状态 */
+  ProxyStatus: string | null;
+  /** 是否跳过交易 */
+  IsSkipTrade: string | null;
+  /** 是否打开密码复杂度 */
+  IsOpenPasswordComplexity: string | null;
+  /** 网络类型 */
+  NetworkStatus: string | null;
 }
 
 /** 实例信息 */
@@ -620,18 +694,24 @@ declare interface NetAddr {
   UniqVpcId: string | null;
   /** 描述信息 */
   Description: string | null;
+  /** 外网IP */
+  WanIP: string | null;
+  /** 外网状态 */
+  WanStatus: string | null;
 }
 
-/** 新创建的账号 */
+/** x08新创建的账号 */
 declare interface NewAccount {
-  /** 账户名 */
+  /** 账户名，包含字母数字_,以字母开头，字母或数字结尾，长度1-16 */
   AccountName: string;
-  /** 密码 */
+  /** 密码，密码长度范围为8到64个字符 */
   AccountPassword: string;
   /** 主机 */
   Host: string;
   /** 描述 */
   Description?: string;
+  /** 用户最大连接数，不能大于10240 */
+  MaxUserConnections?: number;
 }
 
 /** 任务信息 */

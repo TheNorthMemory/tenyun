@@ -1179,6 +1179,8 @@ declare interface DescribeTemplatesRequest {
   WithPreviewUrl?: boolean;
   /** 是否获取模板的PDF文件链接-渠道版需要开启白名单时才能使用。 */
   WithPdfUrl?: boolean;
+  /** 渠道模板ID */
+  ChannelTemplateId?: string;
 }
 
 declare interface DescribeTemplatesResponse {

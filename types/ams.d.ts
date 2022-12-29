@@ -38,9 +38,9 @@ declare interface AudioResultDetailLanguageResult {
   Label: string | null;
   /** 该参数用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高**），越高代表音频越有可能属于当前返回的语种标签； */
   Score: number | null;
-  /** 该参数用于返回对应语种标签的片段在音频文件内的开始时间，单位为毫秒。 */
+  /** 该参数用于返回对应语种标签的片段在音频文件内的开始时间，单位为秒。 */
   StartTime: number | null;
-  /** 该参数用于返回对应语种标签的片段在音频文件内的结束时间，单位为毫秒。 */
+  /** 该参数用于返回对应语种标签的片段在音频文件内的结束时间，单位为秒。 */
   EndTime: number | null;
   /** *内测中，敬请期待* */
   SubLabelCode: string | null;
@@ -52,9 +52,9 @@ declare interface AudioResultDetailMoanResult {
   Label: string | null;
   /** 该字段用于返回呻吟检测的置信度，取值范围：0（**置信度最低**）-100（**置信度最高**），越高代表音频越有可能属于呻吟内容。 */
   Score: number;
-  /** 该字段用于返回对应呻吟标签的片段在音频文件内的开始时间，单位为毫秒。 */
+  /** 该字段用于返回对应呻吟标签的片段在音频文件内的开始时间，单位为秒。 */
   StartTime: number;
-  /** 该字段用于返回对应呻吟标签的片段在音频文件内的结束时间，单位为毫秒。 */
+  /** 该字段用于返回对应呻吟标签的片段在音频文件内的结束时间，单位为秒。 */
   EndTime: number;
   /** *内测中，敬请期待* */
   SubLabelCode: string;
@@ -70,9 +70,9 @@ declare interface AudioResultDetailSpeakerResult {
   Label: string | null;
   /** 该字段用于返回呻吟检测的置信度，取值范围：0（置信度最低）-100（置信度最高），越高代表音频越有可能属于说话人声纹。 */
   Score: number | null;
-  /** 该字段用于返回对应说话人的片段在音频文件内的开始时间，单位为毫秒。 */
+  /** 该字段用于返回对应说话人的片段在音频文件内的开始时间，单位为秒。 */
   StartTime: number | null;
-  /** 该字段用于返回对应说话人的片段在音频文件内的结束时间，单位为毫秒。 */
+  /** 该字段用于返回对应说话人的片段在音频文件内的结束时间，单位为秒。 */
   EndTime: number | null;
 }
 
@@ -146,9 +146,9 @@ declare interface MoanResult {
   Score: number;
   /** 建议您拿到判断结果后的执行操作。建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过 */
   Suggestion: string;
-  /** 违规事件开始时间，单位为毫秒（ms）； */
+  /** 违规事件开始时间，单位为秒（s）； */
   StartTime: number;
-  /** 违规事件结束时间，单位为毫秒（ms）； */
+  /** 违规事件结束时间，单位为秒（s）； */
   EndTime: number;
   /** 该字段用于返回当前标签（Lable）下的二级标签。注意：此字段可能返回null，表示取不到有效值。 */
   SubLabel: string | null;
@@ -326,6 +326,8 @@ declare interface CreateAudioModerationSyncTaskResponse {
   SpeakerResults: AudioResultDetailSpeakerResult[] | null;
   /** 识别类标签结果信息列表 */
   RecognitionResults: RecognitionResult[] | null;
+  /** 识别音频时长，单位为毫秒； */
+  Duration: string | null;
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
