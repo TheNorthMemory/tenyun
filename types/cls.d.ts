@@ -438,7 +438,7 @@ declare interface KeyRegexInfo {
 
 /** 键值或者元字段索引的字段信息 */
 declare interface KeyValueInfo {
-  /** 需要配置键值或者元字段索引的字段名称，仅支持字母、数字和_-./@，且不能以_开头注意：1，元字段（tag）的Key无需额外添加`__TAG__.`前缀，与上传日志时对应的字段Key一致即可，腾讯云控制台展示时将自动添加`__TAG__.`前缀2，键值索引（KeyValue）及元字段索引（Tag）中的Key总数不能超过3003，Key的层级不能超过10层，例如a.b.c.d.e.f.g.h.j.k4，不允许同时包含json父子级字段，例如a及a.b */
+  /** 需要配置键值或者元字段索引的字段名称，仅支持字母、数字、下划线和-./@，且不能以下划线开头注意：1，元字段（tag）的Key无需额外添加`__TAG__.`前缀，与上传日志时对应的字段Key一致即可，腾讯云控制台展示时将自动添加`__TAG__.`前缀2，键值索引（KeyValue）及元字段索引（Tag）中的Key总数不能超过3003，Key的层级不能超过10层，例如a.b.c.d.e.f.g.h.j.k4，不允许同时包含json父子级字段，例如a及a.b */
   Key: string;
   /** 字段的索引描述信息 */
   Value: ValueInfo;
@@ -624,11 +624,11 @@ declare interface PartitionInfo {
 
 /** 索引规则，FullText、KeyValue、Tag参数必须输入一个有效参数 */
 declare interface RuleInfo {
-  /** 全文索引配置 */
+  /** 全文索引配置, 如果为空时代表未开启全文索引 */
   FullText?: FullTextInfo | null;
-  /** 键值索引配置 */
+  /** 键值索引配置，如果为空时代表未开启键值索引 */
   KeyValue?: RuleKeyValueInfo | null;
-  /** 元字段索引配置 */
+  /** 元字段索引配置，如果为空时代表未开启元字段索引 */
   Tag?: RuleTagInfo | null;
 }
 

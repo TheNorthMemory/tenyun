@@ -676,6 +676,16 @@ declare interface InstanceSpec {
 declare interface ModifiableInfo {
 }
 
+/** 修改的实例参数信息 */
+declare interface ModifyParamItem {
+  /** 参数名 */
+  ParamName: string;
+  /** 参数当前值 */
+  CurrentValue: string;
+  /** 参数旧值（只在出参时有用） */
+  OldValue?: string | null;
+}
+
 /** 网络信息 */
 declare interface NetAddr {
   /** 内网ip */
@@ -1017,6 +1027,10 @@ declare interface AddInstancesRequest {
   OrderSource?: string;
   /** 交易模式 0-下单并支付 1-下单 */
   DealMode?: number;
+  /** 参数模版ID */
+  ParamTemplateId?: number;
+  /** 参数列表，ParamTemplateId 传入时InstanceParams才有效 */
+  InstanceParams?: ModifyParamItem[];
 }
 
 declare interface AddInstancesResponse {
@@ -1215,8 +1229,10 @@ declare interface DeleteAuditLogFileResponse {
 declare interface DeleteBackupRequest {
   /** 集群ID */
   ClusterId: string;
-  /** 备份文件ID */
-  SnapshotIdList: number[];
+  /** 备份文件ID，旧版本使用的字段，不推荐使用 */
+  SnapshotIdList?: number[];
+  /** 备份文件ID，推荐使用 */
+  BackupIds?: number[];
 }
 
 declare interface DeleteBackupResponse {
@@ -2163,6 +2179,8 @@ declare interface RollBackClusterRequest {
   RollbackDatabases?: RollbackDatabase[];
   /** 回档数据库表列表 */
   RollbackTables?: RollbackTable[];
+  /** 按时间点回档模式，full: 普通; db: 快速; table: 极速 （默认是普通） */
+  RollbackMode?: string;
 }
 
 declare interface RollBackClusterResponse {

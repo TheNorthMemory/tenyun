@@ -1088,22 +1088,6 @@ declare interface CreateRepositoryResponse {
   RequestId?: string;
 }
 
-declare interface CreateSecurityPoliciesRequest {
-  /** 实例Id */
-  RegistryId: string;
-  /** 192.168.0.0/24 */
-  CidrBlock: string;
-  /** 描述 */
-  Description?: string;
-}
-
-declare interface CreateSecurityPoliciesResponse {
-  /** 实例Id */
-  RegistryId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
-  RequestId?: string;
-}
-
 declare interface CreateSecurityPolicyRequest {
   /** 实例Id */
   RegistryId: string;
@@ -2559,8 +2543,6 @@ declare interface Tcr {
   CreateRepository(data: CreateRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRepositoryResponse>;
   /** {@link CreateRepositoryPersonal 创建个人版镜像仓库}({@link CreateRepositoryPersonalRequest 请求参数}): {@link CreateRepositoryPersonalResponse 返回参数} */
   CreateRepositoryPersonal(data: CreateRepositoryPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRepositoryPersonalResponse>;
-  /** {@link CreateSecurityPolicies 创建实例公网访问白名单策略}({@link CreateSecurityPoliciesRequest 请求参数}): {@link CreateSecurityPoliciesResponse 返回参数} */
-  CreateSecurityPolicies(data: CreateSecurityPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityPoliciesResponse>;
   /** {@link CreateSecurityPolicy 创建实例公网访问白名单策略}({@link CreateSecurityPolicyRequest 请求参数}): {@link CreateSecurityPolicyResponse 返回参数} */
   CreateSecurityPolicy(data: CreateSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityPolicyResponse>;
   /** {@link CreateSignature 创建镜像签名}({@link CreateSignatureRequest 请求参数}): {@link CreateSignatureResponse 返回参数} */

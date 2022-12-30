@@ -192,6 +192,14 @@ declare interface CompareRuleItem {
   ValueList?: ThresholdValue[] | null;
 }
 
+/** 采集器状态统计 */
+declare interface CvmAgentStatus {
+  /** agent状态 */
+  Status: string | null;
+  /** 对应状态的agent总数 */
+  Count: number | null;
+}
+
 /** 日评分信息 */
 declare interface DailyScoreInfo {
   /** 统计日期 时间戳 */
@@ -540,6 +548,12 @@ declare interface InLongAgentDetail {
   ExecutorGroupName: string;
   /** 关联任务数 */
   TaskCount: number;
+  /** 采集器组ID */
+  AgentGroupId: string | null;
+  /** agent状态统计 */
+  CvmAgentStatusList: CvmAgentStatus[] | null;
+  /** agent数量 */
+  AgentTotal: number | null;
 }
 
 /** 采集器关联的集成任务 */
@@ -3747,7 +3761,7 @@ declare interface DescribeInLongAgentListRequest {
   AgentId?: string;
   /** Agent Name */
   AgentName?: string;
-  /** 集群类型，1：TKE Agent，2：BOSS SDK，默认：1 */
+  /** 集群类型，1：TKE Agent，2：BOSS SDK，默认：1，3：CVM，4：自建服务器 【传多个用逗号分割】 */
   AgentType?: number;
   /** Agent状态(running运行中，initializing 操作中，failed心跳异常) */
   Status?: string;
@@ -3759,6 +3773,8 @@ declare interface DescribeInLongAgentListRequest {
   PageSize?: number;
   /** 名称搜索是否开启模糊匹配，1：开启，0：不开启（精确匹配） */
   Like?: number;
+  /** agent类型【多个用逗号分隔】 */
+  AgentTypes?: string;
 }
 
 declare interface DescribeInLongAgentListResponse {

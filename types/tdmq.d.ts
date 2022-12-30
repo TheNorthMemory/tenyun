@@ -752,6 +752,10 @@ declare interface RocketMQNamespace {
 declare interface RocketMQTopic {
   /** 主题名称 */
   Name: string;
+  /** 主题的类别，为枚举类型，Normal，GlobalOrder，PartitionedOrder，Transaction，Retry及DeadLetter */
+  Type: string;
+  /** 订阅组数量 */
+  GroupNum: number;
   /** 说明 */
   Remark: string | null;
   /** 读写分区数 */

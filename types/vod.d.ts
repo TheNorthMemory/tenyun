@@ -3312,6 +3312,14 @@ declare interface PornOcrReviewTemplateInfoForUpdate {
   ReviewConfidence?: number;
 }
 
+/** 任务流模板音视频审核输入参数类型。 */
+declare interface ProcedureReviewAudioVideoTaskInput {
+  /** 审核模板。 */
+  Definition: number;
+  /** 审核的内容，可选值：Media：原始音视频。不填或填空数组时，默认为审核 Media。 */
+  ReviewContents?: string[];
+}
+
 /** 音视频处理任务信息 */
 declare interface ProcedureTask {
   /** 音视频处理任务 ID。 */
@@ -3355,25 +3363,27 @@ declare interface ProcedureTask {
 /** 任务流模板详情 */
 declare interface ProcedureTemplate {
   /** 任务流名字。 */
-  Name: string;
+  Name?: string;
   /** 任务流模板类型，取值范围：Preset：系统预置任务流模板；Custom：用户自定义任务流模板。 */
-  Type: string;
+  Type?: string;
   /** 模板描述信息，长度限制：256 个字符。 */
-  Comment: string;
+  Comment?: string;
   /** 视频处理类型任务参数。 */
-  MediaProcessTask: MediaProcessTaskInput | null;
-  /** AI 智能审核类型任务参数。 */
-  AiContentReviewTask: AiContentReviewTaskInput | null;
+  MediaProcessTask?: MediaProcessTaskInput | null;
+  /** AI 智能审核类型任务参数 \*。\*：该参数用于发起旧版审核，不建议使用。推荐使用 ReviewAudioVideoTask 参数发起审核。 */
+  AiContentReviewTask?: AiContentReviewTaskInput | null;
   /** AI 智能内容分析类型任务参数。 */
-  AiAnalysisTask: AiAnalysisTaskInput | null;
+  AiAnalysisTask?: AiAnalysisTaskInput | null;
   /** AI 内容识别类型任务参数。 */
-  AiRecognitionTask: AiRecognitionTaskInput | null;
+  AiRecognitionTask?: AiRecognitionTaskInput | null;
   /** 微信小程序发布任务参数。 */
-  MiniProgramPublishTask: WechatMiniProgramPublishTaskInput | null;
+  MiniProgramPublishTask?: WechatMiniProgramPublishTaskInput | null;
+  /** 音视频审核类型任务参数。 */
+  ReviewAudioVideoTask?: ProcedureReviewAudioVideoTaskInput | null;
   /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 预付费商品实例 */
@@ -5067,12 +5077,14 @@ declare interface CreateProcedureTemplateRequest {
   Comment?: string;
   /** 视频处理类型任务参数。 */
   MediaProcessTask?: MediaProcessTaskInput;
-  /** AI 内容审核类型任务参数。 */
+  /** AI 内容审核类型任务参数 \*。\*：该参数用于发起旧版审核，不建议使用。推荐使用 ReviewAudioVideoTask 参数发起审核。 */
   AiContentReviewTask?: AiContentReviewTaskInput;
   /** AI 内容分析类型任务参数。 */
   AiAnalysisTask?: AiAnalysisTaskInput;
   /** AI 内容识别类型任务参数。 */
   AiRecognitionTask?: AiRecognitionTaskInput;
+  /** 音视频审核类型任务参数。 */
+  ReviewAudioVideoTask?: ProcedureReviewAudioVideoTaskInput;
 }
 
 declare interface CreateProcedureTemplateResponse {
@@ -6079,6 +6091,8 @@ declare interface DescribePrepaidProductsResponse {
 }
 
 declare interface DescribeProcedureTemplatesRequest {
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
   /** 任务流模板名字过滤条件，数组长度限制：100。 */
   Names?: string[];
   /** 任务流模板类型过滤条件，可选值：Preset：系统预置任务流模板；Custom：用户自定义任务流模板。 */
@@ -6087,8 +6101,6 @@ declare interface DescribeProcedureTemplatesRequest {
   Offset?: number;
   /** 返回记录条数，默认值：10，最大值：100。 */
   Limit?: number;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
-  SubAppId?: number;
 }
 
 declare interface DescribeProcedureTemplatesResponse {
@@ -7401,18 +7413,20 @@ declare interface RemoveWatermarkResponse {
 declare interface ResetProcedureTemplateRequest {
   /** 任务流名字 */
   Name: string;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
   /** 视频处理类型任务参数。 */
   MediaProcessTask?: MediaProcessTaskInput;
-  /** AI 智能内容审核类型任务参数。 */
+  /** AI 智能内容审核类型任务参数 \*。\*：该参数用于发起旧版审核，不建议使用。推荐使用 ReviewAudioVideoTask 参数发起审核。 */
   AiContentReviewTask?: AiContentReviewTaskInput;
   /** AI 智能内容分析类型任务参数。 */
   AiAnalysisTask?: AiAnalysisTaskInput;
   /** AI 内容识别类型任务参数。 */
   AiRecognitionTask?: AiRecognitionTaskInput;
-  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
-  SubAppId?: number;
+  /** 音视频审核类型任务参数。 */
+  ReviewAudioVideoTask?: ProcedureReviewAudioVideoTaskInput;
 }
 
 declare interface ResetProcedureTemplateResponse {

@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 223+ 款产品，8809+ 服务数</summary>
+<details><summary>共计 223+ 款产品，8810+ 服务数</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -280,14 +280,14 @@ tcbr | [云托管 CloudBase Run](https://cloud.tencent.com/document/product/1243
 tcex | [腾讯云释义](https://cloud.tencent.com/document/product/1266) | 2020-07-27(2)
 tci | 腾讯智学课堂分析 | 2019-03-18(41)
 tcm | [服务网格](https://cloud.tencent.com/document/product/1261) | 2021-04-13(12)
-tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 2019-09-24(108)
+tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 2019-09-24(107)
 tcss | [容器安全服务](https://cloud.tencent.com/document/product/1285) | 2020-11-01(330)
 tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) | 2021-11-18(25)
 tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(49)
 tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(101)
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(4)
 tem | [弹性微服务 TEM](https://cloud.tencent.com/document/product/1371) | 2021-07-01(50)<br/>2020-12-21(17)
-teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(118)<br/>2022-01-06(96)
+teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(120)<br/>2022-01-06(96)
 thpc | [高性能计算平台](https://cloud.tencent.com/document/product/1527) | 2022-04-01(11)<br/>2021-11-09(4)
 tia | [智能钛机器学习](https://cloud.tencent.com/document/product/851) | 2018-02-26(10)
 tic | [资源编排 TIC](https://cloud.tencent.com/document/product/1213) | 2020-11-17(13)

@@ -748,6 +748,18 @@ declare interface DetailHost {
   ClientIpCountry: ClientIpCountry | null;
 }
 
+/** 最新IP白名单列表相比于当前IP白名单列表的区别 */
+declare interface DiffIPWhitelist {
+  /** 最新IP白名单列表。 */
+  LatestIPWhitelist: IPWhitelist;
+  /** 最新IP白名单列表相比于当前IP白名单列表，新增部分。 */
+  AddedIPWhitelist: IPWhitelist;
+  /** 最新IP白名单列表相比于当前IP白名单列表，删减部分。 */
+  RemovedIPWhitelist: IPWhitelist;
+  /** 最新IP白名单列表相比于当前IP白名单列表，不变部分。 */
+  NoChangeIPWhitelist: IPWhitelist;
+}
+
 /** 拨测分地域统计数据 */
 declare interface DistrictStatistics {
   /** ISO 3166-2 国家/地区简写，详情请参考[ISO 3166-2](https://zh.m.wikipedia.org/zh-hans/ISO_3166-2)。 */
@@ -956,6 +968,14 @@ declare interface Https {
   CertInfo?: ServerCertInfo[] | null;
   /** 申请类型，取值有：apply：托管EdgeOne；none：不托管EdgeOne。不填，默认取值为none。 */
   ApplyType?: string | null;
+}
+
+/** 源站防护IP白名单 */
+declare interface IPWhitelist {
+  /** IPv4列表。 */
+  IPv4: string[];
+  /** IPv6列表。 */
+  IPv6: string[];
 }
 
 /** 站点验证信息 */
@@ -1172,6 +1192,26 @@ declare interface OriginGroup {
   UpdateTime: string;
   /** 当OriginType=self时，表示回源Host。 */
   HostHeader: string | null;
+}
+
+/** 源站防护信息 */
+declare interface OriginProtectionInfo {
+  /** 站点ID。 */
+  ZoneId: string;
+  /** 域名列表。 */
+  Hosts: string[];
+  /** 代理ID列表。 */
+  ProxyIds: string[];
+  /** 当前版本的IP白名单。 */
+  CurrentIPWhitelist: IPWhitelist | null;
+  /** 该站点是否需要更新源站白名单，取值有：true ：需要更新IP白名单 ；false ：无需更新IP白名单。 */
+  NeedUpdate: boolean;
+  /** 源站防护状态，取值有：online ：源站防护启用中 ；offline ：源站防护已停用 ；nonactivate ：源站防护未激活，仅在从未使用过源站防护功能的站点调用中返回。 */
+  Status: string;
+  /** 站点套餐是否支持源站防护，取值有：true ：支持 ；false ：不支持。 */
+  PlanSupport: boolean;
+  /** 最新IP白名单与当前IP白名单的对比。 */
+  DiffIPWhitelist: DiffIPWhitelist | null;
 }
 
 /** 源站组记录 */
@@ -3338,6 +3378,24 @@ declare interface DescribeOriginGroupResponse {
   RequestId?: string;
 }
 
+declare interface DescribeOriginProtectionRequest {
+  /** 查询的站点集合，不填默认查询所有站点。 */
+  ZoneIds?: string[];
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：need-update 按照【站点是否需要更新源站防护IP白名单】进行过滤。 类型：String 必选：否 可选项： true：需要更新 false：无需更新plan-support 按照【站点套餐是否支持源站防护】进行过滤。 类型：String 必选：否 可选项： true：支持 false：不支持 */
+  Filters?: Filter;
+  /** 分页查询偏移量，默认为0。 */
+  Offset?: number;
+  /** 分页查询限制数目。默认值：20，最大值：1000。 */
+  Limit?: number;
+}
+
+declare interface DescribeOriginProtectionResponse {
+  /** 源站防护信息。 */
+  OriginProtectionInfo: OriginProtectionInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
 declare interface DescribeOverviewL7DataRequest {
   /** 开始时间。 */
   StartTime: string;
@@ -4588,6 +4646,16 @@ declare interface SwitchLogTopicTaskRequest {
 }
 
 declare interface SwitchLogTopicTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  RequestId?: string;
+}
+
+declare interface UpdateOriginProtectionIPWhitelistRequest {
+  /** 站点ID。 */
+  ZoneId: string;
+}
+
+declare interface UpdateOriginProtectionIPWhitelistResponse {
   /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
   RequestId?: string;
 }
@@ -8883,6 +8951,8 @@ declare interface Teo {
   DescribeLogTopicTasks(data: DescribeLogTopicTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogTopicTasksResponse>;
   /** {@link DescribeOriginGroup 获取源站组列表}({@link DescribeOriginGroupRequest 请求参数}): {@link DescribeOriginGroupResponse 返回参数} */
   DescribeOriginGroup(data: DescribeOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginGroupResponse>;
+  /** {@link DescribeOriginProtection 查询源站防护信息}({@link DescribeOriginProtectionRequest 请求参数}): {@link DescribeOriginProtectionResponse 返回参数} */
+  DescribeOriginProtection(data?: DescribeOriginProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginProtectionResponse>;
   /** {@link DescribeOverviewL7Data 查询监控流量时序数据}({@link DescribeOverviewL7DataRequest 请求参数}): {@link DescribeOverviewL7DataResponse 返回参数} */
   DescribeOverviewL7Data(data: DescribeOverviewL7DataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewL7DataResponse>;
   /** {@link DescribePrefetchTasks 查询预热任务状态}({@link DescribePrefetchTasksRequest 请求参数}): {@link DescribePrefetchTasksResponse 返回参数} */
@@ -9007,6 +9077,8 @@ declare interface Teo {
   ReclaimZone(data: ReclaimZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ReclaimZoneResponse>;
   /** {@link SwitchLogTopicTask 开启或关闭推送任务}({@link SwitchLogTopicTaskRequest 请求参数}): {@link SwitchLogTopicTaskResponse 返回参数} */
   SwitchLogTopicTask(data: SwitchLogTopicTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchLogTopicTaskResponse>;
+  /** {@link UpdateOriginProtectionIPWhitelist 更新源站防护IP白名单}({@link UpdateOriginProtectionIPWhitelistRequest 请求参数}): {@link UpdateOriginProtectionIPWhitelistResponse 返回参数} */
+  UpdateOriginProtectionIPWhitelist(data: UpdateOriginProtectionIPWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOriginProtectionIPWhitelistResponse>;
   /** {@link V20220106.CheckCertificate 校验证书}({@link V20220106.CheckCertificateRequest 请求参数}): {@link V20220106.CheckCertificateResponse 返回参数} */
   CheckCertificate(data: V20220106.CheckCertificateRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CheckCertificateResponse>;
   /** {@link V20220106.CreateApplicationProxy 创建应用代理}({@link V20220106.CreateApplicationProxyRequest 请求参数}): {@link V20220106.CreateApplicationProxyResponse 返回参数} */
