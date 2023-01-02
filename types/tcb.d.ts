@@ -976,7 +976,7 @@ declare interface BindEnvGatewayRequest {
 }
 
 declare interface BindEnvGatewayResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -986,7 +986,7 @@ declare interface CheckTcbServiceRequest {
 declare interface CheckTcbServiceResponse {
   /** true表示已开通 */
   Initialized?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1002,7 +1002,7 @@ declare interface CommonServiceAPIRequest {
 declare interface CommonServiceAPIResponse {
   /** json格式response */
   JSONResp: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1038,7 +1038,7 @@ declare interface CreateAndDeployCloudBaseProjectRequest {
 declare interface CreateAndDeployCloudBaseProjectResponse {
   /** 环境Id */
   EnvId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1050,7 +1050,7 @@ declare interface CreateAuthDomainRequest {
 }
 
 declare interface CreateAuthDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1066,7 +1066,7 @@ declare interface CreateCloudBaseRunResourceRequest {
 declare interface CreateCloudBaseRunResourceResponse {
   /** 返回集群创建是否成功 succ为成功。并且中间无err */
   Result?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1168,7 +1168,7 @@ declare interface CreateCloudBaseRunServerVersionResponse {
   VersionName: string | null;
   /** 操作记录id */
   RunId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1182,7 +1182,7 @@ declare interface CreateHostingDomainRequest {
 }
 
 declare interface CreateHostingDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1212,7 +1212,7 @@ declare interface CreatePostpayPackageResponse {
   TranId: string;
   /** 环境ID */
   EnvId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1234,7 +1234,7 @@ declare interface CreateStandaloneGatewayRequest {
 declare interface CreateStandaloneGatewayResponse {
   /** 网关名称 */
   GatewayName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1248,7 +1248,7 @@ declare interface CreateStaticStoreRequest {
 declare interface CreateStaticStoreResponse {
   /** 创建静态资源结果(succ/fail) */
   Result?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1274,7 +1274,7 @@ declare interface CreateWxCloudBaseRunEnvResponse {
   EnvId: string;
   /** 后付费订单号 */
   TranId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1292,7 +1292,7 @@ declare interface CreateWxCloudBaseRunServerDBClusterRequest {
 }
 
 declare interface CreateWxCloudBaseRunServerDBClusterResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1306,7 +1306,7 @@ declare interface DeleteCloudBaseProjectLatestVersionRequest {
 }
 
 declare interface DeleteCloudBaseProjectLatestVersionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1328,7 +1328,7 @@ declare interface DeleteCloudBaseRunServerVersionRequest {
 declare interface DeleteCloudBaseRunServerVersionResponse {
   /** 返回结果，succ为成功 */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1340,7 +1340,7 @@ declare interface DeleteEndUserRequest {
 }
 
 declare interface DeleteEndUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1352,7 +1352,7 @@ declare interface DeleteWxGatewayRouteRequest {
 }
 
 declare interface DeleteWxGatewayRouteResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1364,7 +1364,7 @@ declare interface DescribeActivityInfoRequest {
 declare interface DescribeActivityInfoResponse {
   /** 活动详情 */
   ActivityInfoList: ActivityInfoItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1386,7 +1386,7 @@ declare interface DescribeActivityRecordRequest {
 declare interface DescribeActivityRecordResponse {
   /** 活动记录详情 */
   ActivityRecords: ActivityRecordItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1398,7 +1398,7 @@ declare interface DescribeAuthDomainsRequest {
 declare interface DescribeAuthDomainsResponse {
   /** 安全域名列表列表 */
   Domains?: AuthDomain[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1424,7 +1424,7 @@ declare interface DescribeBaasPackageListRequest {
 declare interface DescribeBaasPackageListResponse {
   /** 套餐列表 */
   PackageList: BaasPackageInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1456,7 +1456,7 @@ declare interface DescribeCloudBaseBuildServiceResponse {
   DownloadHeaders: KVPair[] | null;
   /** 下载链接是否过期 */
   OutDate: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1482,7 +1482,7 @@ declare interface DescribeCloudBaseProjectLatestVersionListResponse {
   ProjectList: CloudBaseProjectVersion[] | null;
   /** 总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1506,7 +1506,7 @@ declare interface DescribeCloudBaseProjectVersionListResponse {
   ProjectVersions: CloudBaseProjectVersion[] | null;
   /** 总个数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1518,7 +1518,7 @@ declare interface DescribeCloudBaseRunAllVpcsRequest {
 declare interface DescribeCloudBaseRunAllVpcsResponse {
   /** 所有vpcid */
   Vpcs: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1534,7 +1534,7 @@ declare interface DescribeCloudBaseRunConfForGateWayResponse {
   LastUpTime: string | null;
   /** 配置信息 */
   Data: CloudBaseRunForGatewayConf[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1568,7 +1568,7 @@ declare interface DescribeCloudBaseRunOneClickTaskExternalResponse {
   StartTime: string;
   /** 步骤信息 */
   Steps: OneClickTaskStepInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1584,7 +1584,7 @@ declare interface DescribeCloudBaseRunOperationTypesResponse {
   Action: string[] | null;
   /** 服务名列表 */
   ServerName: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1606,7 +1606,7 @@ declare interface DescribeCloudBaseRunPodListRequest {
 }
 
 declare interface DescribeCloudBaseRunPodListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1626,7 +1626,7 @@ declare interface DescribeCloudBaseRunResourceForExtendResponse {
   Region?: string | null;
   /** 子网信息 */
   SubnetIds?: CloudBaseRunVpcSubnet[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1646,7 +1646,7 @@ declare interface DescribeCloudBaseRunResourceResponse {
   Region?: string | null;
   /** 子网信息 */
   SubnetIds?: CloudBaseRunVpcSubnet[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1668,7 +1668,7 @@ declare interface DescribeCloudBaseRunServerDomainNameResponse {
   InternalDomain: string;
   /** 弃用 */
   DomainName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1700,7 +1700,7 @@ declare interface DescribeCloudBaseRunServerResponse {
   TrafficType: string | null;
   /** 服务创建类型，默认为空，一键部署为oneclick */
   SourceType: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1792,7 +1792,7 @@ declare interface DescribeCloudBaseRunServerVersionResponse {
   TkeClusterInfo: TkeClusterInfo | null;
   /** 版本工作负载类型；deployment/deamonset */
   TkeWorkloadType: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1866,7 +1866,7 @@ declare interface DescribeCloudBaseRunVersionResponse {
   CpuSize: number | null;
   /** MEM 大小 */
   MemSize: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1874,7 +1874,7 @@ declare interface DescribeCloudBaseRunVersionRsByConditionRequest {
 }
 
 declare interface DescribeCloudBaseRunVersionRsByConditionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1896,7 +1896,7 @@ declare interface DescribeCloudBaseRunVersionSnapshotRequest {
 declare interface DescribeCloudBaseRunVersionSnapshotResponse {
   /** 版本历史 */
   Snapshots: CloudRunServiceSimpleVersionSnapshot[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1926,7 +1926,7 @@ declare interface DescribeCurveDataResponse {
   Values: number[];
   /** 时间数据, 标识监控数据Values中的点是哪个时间段上报的. */
   Time: number[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1940,7 +1940,7 @@ declare interface DescribeDatabaseACLRequest {
 declare interface DescribeDatabaseACLResponse {
   /** 权限标签。包含以下取值： READONLY：所有用户可读，仅创建者和管理员可写 PRIVATE：仅创建者及管理员可读写 ADMINWRITE：所有用户可读，仅管理员可写 ADMINONLY：仅管理员可读写 */
   AclTag?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1956,7 +1956,7 @@ declare interface DescribeDownloadFileResponse {
   CustomKey: string | null;
   /** 下载链接 */
   DownloadUrl: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1970,7 +1970,7 @@ declare interface DescribeEndUserLoginStatisticRequest {
 declare interface DescribeEndUserLoginStatisticResponse {
   /** 环境终端用户新增与登录统计 */
   LoginStatistics?: LoginStatistic[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1984,7 +1984,7 @@ declare interface DescribeEndUserStatisticResponse {
   PlatformStatistics?: PlatformStatistic[] | null;
   /** 终端用户总数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2004,7 +2004,7 @@ declare interface DescribeEndUsersResponse {
   Total?: number;
   /** 用户列表 */
   Users?: EndUserInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2028,7 +2028,7 @@ declare interface DescribeEnvDealRegionResponse {
   RegionId: number;
   /** 下单zoneId */
   ZoneId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2042,7 +2042,7 @@ declare interface DescribeEnvFreeQuotaRequest {
 declare interface DescribeEnvFreeQuotaResponse {
   /** 免费抵扣配额详情 */
   QuotaItems?: PostpayEnvQuota[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2078,7 +2078,7 @@ declare interface DescribeEnvLimitResponse {
   ChangePayMonthly: number;
   /** 本月已用转支付额度 */
   CurrentChangePayMonthly: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2096,7 +2096,7 @@ declare interface DescribeEnvPostpaidDeductRequest {
 declare interface DescribeEnvPostpaidDeductResponse {
   /** 指标抵扣详情列表 */
   PostPaidEnvDeductInfoList: PostPaidEnvDeductInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2112,7 +2112,7 @@ declare interface DescribeEnvsRequest {
 declare interface DescribeEnvsResponse {
   /** 环境信息列表 */
   EnvList: EnvInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2124,7 +2124,7 @@ declare interface DescribeExtensionUploadInfoRequest {
 declare interface DescribeExtensionUploadInfoResponse {
   /** 待上传文件的信息数组 */
   FilesData: ExtensionFileInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2138,7 +2138,7 @@ declare interface DescribeExtraPkgBillingInfoResponse {
   EnvInfoList?: EnvBillingInfoItem[];
   /** 增值包数目 */
   Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2150,7 +2150,7 @@ declare interface DescribeHostingDomainTaskRequest {
 declare interface DescribeHostingDomainTaskResponse {
   /** todo/doing/done/error */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2162,7 +2162,7 @@ declare interface DescribePostpayFreeQuotasRequest {
 declare interface DescribePostpayFreeQuotasResponse {
   /** 免费量资源信息列表 */
   FreequotaInfoList?: FreequotaInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2176,7 +2176,7 @@ declare interface DescribePostpayPackageFreeQuotasRequest {
 declare interface DescribePostpayPackageFreeQuotasResponse {
   /** 免费量资源信息列表 */
   PackageFreeQuotaInfos?: PackageFreeQuotaInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2196,7 +2196,7 @@ declare interface DescribeQuotaDataResponse {
   Value?: number;
   /** 指标的附加值信息 */
   SubValue?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2208,7 +2208,7 @@ declare interface DescribeSmsQuotasRequest {
 declare interface DescribeSmsQuotasResponse {
   /** 短信免费量信息列表 */
   SmsFreeQuotaList?: SmsFreeQuota[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2224,7 +2224,7 @@ declare interface DescribeSpecialCostItemsRequest {
 declare interface DescribeSpecialCostItemsResponse {
   /** 1分钱抵扣详情 */
   SpecialCostItems: SpecialCostItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2240,7 +2240,7 @@ declare interface DescribeStandaloneGatewayPackageResponse {
   Total: number;
   /** 套餐详情 */
   StandaloneGatewayPackageList: StandaloneGatewayPackageInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2258,7 +2258,7 @@ declare interface DescribeStandaloneGatewayResponse {
   StandaloneGatewayList: StandaloneGatewayInfo[];
   /** 总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2284,7 +2284,7 @@ declare interface DescribeUserActivityInfoResponse {
   GroupTimeLeft: number;
   /** 昵称列表,通过","拼接， 1元钱裂变活动中与Notes中uin一一对应 */
   NickNameList: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2298,7 +2298,7 @@ declare interface DescribeWxCloudBaseRunEnvsRequest {
 declare interface DescribeWxCloudBaseRunEnvsResponse {
   /** env列表 */
   EnvList: EnvInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2312,7 +2312,7 @@ declare interface DescribeWxCloudBaseRunSubNetsRequest {
 declare interface DescribeWxCloudBaseRunSubNetsResponse {
   /** 子网Id列表 */
   SubNetIds: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2326,7 +2326,7 @@ declare interface DestroyEnvRequest {
 }
 
 declare interface DestroyEnvResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2342,7 +2342,7 @@ declare interface DestroyStandaloneGatewayRequest {
 declare interface DestroyStandaloneGatewayResponse {
   /** 删除独立网关状态 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2356,7 +2356,7 @@ declare interface DestroyStaticStoreRequest {
 declare interface DestroyStaticStoreResponse {
   /** 条件任务结果(succ/fail) */
   Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2392,7 +2392,7 @@ declare interface EstablishCloudBaseRunServerRequest {
 }
 
 declare interface EstablishCloudBaseRunServerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2410,7 +2410,7 @@ declare interface EstablishWxGatewayRouteRequest {
 }
 
 declare interface EstablishWxGatewayRouteResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2426,7 +2426,7 @@ declare interface FreezeCloudBaseRunServersResponse {
   Result: string | null;
   /** 冻结失败服务列表 */
   FailServerList: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2446,7 +2446,7 @@ declare interface ModifyCloudBaseRunServerFlowConfRequest {
 declare interface ModifyCloudBaseRunServerFlowConfResponse {
   /** 返回结果，succ代表成功 */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2480,7 +2480,7 @@ declare interface ModifyCloudBaseRunServerVersionRequest {
 declare interface ModifyCloudBaseRunServerVersionResponse {
   /** 返回结果（succ为成功） */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2492,7 +2492,7 @@ declare interface ModifyClsTopicRequest {
 }
 
 declare interface ModifyClsTopicResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2506,7 +2506,7 @@ declare interface ModifyDatabaseACLRequest {
 }
 
 declare interface ModifyDatabaseACLResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2520,7 +2520,7 @@ declare interface ModifyEndUserRequest {
 }
 
 declare interface ModifyEndUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2532,7 +2532,7 @@ declare interface ModifyEnvRequest {
 }
 
 declare interface ModifyEnvResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2542,7 +2542,7 @@ declare interface ReinstateEnvRequest {
 }
 
 declare interface ReinstateEnvResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2560,7 +2560,7 @@ declare interface ReplaceActivityRecordRequest {
 }
 
 declare interface ReplaceActivityRecordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2642,7 +2642,7 @@ declare interface RollUpdateCloudBaseRunServerVersionResponse {
   VersionName: string | null;
   /** 操作记录id */
   RunId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2668,7 +2668,7 @@ declare interface SearchClsLogRequest {
 declare interface SearchClsLogResponse {
   /** 日志内容结果 */
   LogResults?: LogResObject;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2684,7 +2684,7 @@ declare interface TurnOffStandaloneGatewayRequest {
 declare interface TurnOffStandaloneGatewayResponse {
   /** 关闭独立网关状态 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2700,7 +2700,7 @@ declare interface TurnOnStandaloneGatewayRequest {
 declare interface TurnOnStandaloneGatewayResponse {
   /** 小租户网关开启状态 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2716,172 +2716,172 @@ declare interface UnfreezeCloudBaseRunServersResponse {
   Result: string | null;
   /** 解冻失败列表 */
   FailServerList: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tcb 云开发 CloudBase} */
 declare interface Tcb {
   (): Versions;
-  /** {@link BindEnvGateway 绑定环境网关}({@link BindEnvGatewayRequest 请求参数}): {@link BindEnvGatewayResponse 返回参数} */
+  /** 绑定环境网关 {@link BindEnvGatewayRequest} {@link BindEnvGatewayResponse} */
   BindEnvGateway(data: BindEnvGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<BindEnvGatewayResponse>;
-  /** {@link CheckTcbService 检查是否开通Tcb服务}({@link CheckTcbServiceRequest 请求参数}): {@link CheckTcbServiceResponse 返回参数} */
+  /** 检查是否开通Tcb服务 {@link CheckTcbServiceRequest} {@link CheckTcbServiceResponse} */
   CheckTcbService(data?: CheckTcbServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CheckTcbServiceResponse>;
-  /** {@link CommonServiceAPI TCB云API统一入口}({@link CommonServiceAPIRequest 请求参数}): {@link CommonServiceAPIResponse 返回参数} */
+  /** TCB云API统一入口 {@link CommonServiceAPIRequest} {@link CommonServiceAPIResponse} */
   CommonServiceAPI(data: CommonServiceAPIRequest, config?: AxiosRequestConfig): AxiosPromise<CommonServiceAPIResponse>;
-  /** {@link CreateAndDeployCloudBaseProject 创建云开发项目}({@link CreateAndDeployCloudBaseProjectRequest 请求参数}): {@link CreateAndDeployCloudBaseProjectResponse 返回参数} */
+  /** 创建云开发项目 {@link CreateAndDeployCloudBaseProjectRequest} {@link CreateAndDeployCloudBaseProjectResponse} */
   CreateAndDeployCloudBaseProject(data: CreateAndDeployCloudBaseProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndDeployCloudBaseProjectResponse>;
-  /** {@link CreateAuthDomain 增加安全域名}({@link CreateAuthDomainRequest 请求参数}): {@link CreateAuthDomainResponse 返回参数} */
+  /** 增加安全域名 {@link CreateAuthDomainRequest} {@link CreateAuthDomainResponse} */
   CreateAuthDomain(data: CreateAuthDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuthDomainResponse>;
-  /** {@link CreateCloudBaseRunResource 开通容器托管的资源}({@link CreateCloudBaseRunResourceRequest 请求参数}): {@link CreateCloudBaseRunResourceResponse 返回参数} */
+  /** 开通容器托管的资源 {@link CreateCloudBaseRunResourceRequest} {@link CreateCloudBaseRunResourceResponse} */
   CreateCloudBaseRunResource(data: CreateCloudBaseRunResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudBaseRunResourceResponse>;
-  /** {@link CreateCloudBaseRunServerVersion 创建服务版本}({@link CreateCloudBaseRunServerVersionRequest 请求参数}): {@link CreateCloudBaseRunServerVersionResponse 返回参数} */
+  /** 创建服务版本 {@link CreateCloudBaseRunServerVersionRequest} {@link CreateCloudBaseRunServerVersionResponse} */
   CreateCloudBaseRunServerVersion(data: CreateCloudBaseRunServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudBaseRunServerVersionResponse>;
-  /** {@link CreateHostingDomain 创建托管域名}({@link CreateHostingDomainRequest 请求参数}): {@link CreateHostingDomainResponse 返回参数} */
+  /** 创建托管域名 {@link CreateHostingDomainRequest} {@link CreateHostingDomainResponse} */
   CreateHostingDomain(data: CreateHostingDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostingDomainResponse>;
-  /** {@link CreatePostpayPackage 开通后付费资源}({@link CreatePostpayPackageRequest 请求参数}): {@link CreatePostpayPackageResponse 返回参数} */
+  /** 开通后付费资源 {@link CreatePostpayPackageRequest} {@link CreatePostpayPackageResponse} */
   CreatePostpayPackage(data?: CreatePostpayPackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePostpayPackageResponse>;
-  /** {@link CreateStandaloneGateway 创建独立网关}({@link CreateStandaloneGatewayRequest 请求参数}): {@link CreateStandaloneGatewayResponse 返回参数} */
+  /** 创建独立网关 {@link CreateStandaloneGatewayRequest} {@link CreateStandaloneGatewayResponse} */
   CreateStandaloneGateway(data: CreateStandaloneGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStandaloneGatewayResponse>;
-  /** {@link CreateStaticStore 创建静态托管资源}({@link CreateStaticStoreRequest 请求参数}): {@link CreateStaticStoreResponse 返回参数} */
+  /** 创建静态托管资源 {@link CreateStaticStoreRequest} {@link CreateStaticStoreResponse} */
   CreateStaticStore(data: CreateStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStaticStoreResponse>;
-  /** {@link CreateWxCloudBaseRunEnv 创建微信云托管}({@link CreateWxCloudBaseRunEnvRequest 请求参数}): {@link CreateWxCloudBaseRunEnvResponse 返回参数} */
+  /** 创建微信云托管 {@link CreateWxCloudBaseRunEnvRequest} {@link CreateWxCloudBaseRunEnvResponse} */
   CreateWxCloudBaseRunEnv(data: CreateWxCloudBaseRunEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWxCloudBaseRunEnvResponse>;
-  /** {@link CreateWxCloudBaseRunServerDBCluster 开通微信云托管MySQL数据库服务}({@link CreateWxCloudBaseRunServerDBClusterRequest 请求参数}): {@link CreateWxCloudBaseRunServerDBClusterResponse 返回参数} */
+  /** 开通微信云托管MySQL数据库服务 {@link CreateWxCloudBaseRunServerDBClusterRequest} {@link CreateWxCloudBaseRunServerDBClusterResponse} */
   CreateWxCloudBaseRunServerDBCluster(data: CreateWxCloudBaseRunServerDBClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWxCloudBaseRunServerDBClusterResponse>;
-  /** {@link DeleteCloudBaseProjectLatestVersion 删除云项目}({@link DeleteCloudBaseProjectLatestVersionRequest 请求参数}): {@link DeleteCloudBaseProjectLatestVersionResponse 返回参数} */
+  /** 删除云项目 {@link DeleteCloudBaseProjectLatestVersionRequest} {@link DeleteCloudBaseProjectLatestVersionResponse} */
   DeleteCloudBaseProjectLatestVersion(data: DeleteCloudBaseProjectLatestVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudBaseProjectLatestVersionResponse>;
-  /** {@link DeleteCloudBaseRunServerVersion 删除服务版本}({@link DeleteCloudBaseRunServerVersionRequest 请求参数}): {@link DeleteCloudBaseRunServerVersionResponse 返回参数} */
+  /** 删除服务版本 {@link DeleteCloudBaseRunServerVersionRequest} {@link DeleteCloudBaseRunServerVersionResponse} */
   DeleteCloudBaseRunServerVersion(data: DeleteCloudBaseRunServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudBaseRunServerVersionResponse>;
-  /** {@link DeleteEndUser 删除终端用户}({@link DeleteEndUserRequest 请求参数}): {@link DeleteEndUserResponse 返回参数} */
+  /** 删除终端用户 {@link DeleteEndUserRequest} {@link DeleteEndUserResponse} */
   DeleteEndUser(data: DeleteEndUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEndUserResponse>;
-  /** {@link DeleteWxGatewayRoute 删除安全网关路由}({@link DeleteWxGatewayRouteRequest 请求参数}): {@link DeleteWxGatewayRouteResponse 返回参数} */
+  /** 删除安全网关路由 {@link DeleteWxGatewayRouteRequest} {@link DeleteWxGatewayRouteResponse} */
   DeleteWxGatewayRoute(data: DeleteWxGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWxGatewayRouteResponse>;
-  /** {@link DescribeActivityInfo 查询活动信息}({@link DescribeActivityInfoRequest 请求参数}): {@link DescribeActivityInfoResponse 返回参数} */
+  /** 查询活动信息 {@link DescribeActivityInfoRequest} {@link DescribeActivityInfoResponse} */
   DescribeActivityInfo(data?: DescribeActivityInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActivityInfoResponse>;
-  /** {@link DescribeActivityRecord 查询活动记录信息}({@link DescribeActivityRecordRequest 请求参数}): {@link DescribeActivityRecordResponse 返回参数} */
+  /** 查询活动记录信息 {@link DescribeActivityRecordRequest} {@link DescribeActivityRecordResponse} */
   DescribeActivityRecord(data: DescribeActivityRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActivityRecordResponse>;
-  /** {@link DescribeAuthDomains 获取安全域名列表}({@link DescribeAuthDomainsRequest 请求参数}): {@link DescribeAuthDomainsResponse 返回参数} */
+  /** 获取安全域名列表 {@link DescribeAuthDomainsRequest} {@link DescribeAuthDomainsResponse} */
   DescribeAuthDomains(data: DescribeAuthDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthDomainsResponse>;
-  /** {@link DescribeBaasPackageList 获取新套餐}({@link DescribeBaasPackageListRequest 请求参数}): {@link DescribeBaasPackageListResponse 返回参数} */
+  /** 获取新套餐 {@link DescribeBaasPackageListRequest} {@link DescribeBaasPackageListResponse} */
   DescribeBaasPackageList(data?: DescribeBaasPackageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaasPackageListResponse>;
-  /** {@link DescribeCloudBaseBuildService 获取云托管代码上传和下载url}({@link DescribeCloudBaseBuildServiceRequest 请求参数}): {@link DescribeCloudBaseBuildServiceResponse 返回参数} */
+  /** 获取云托管代码上传和下载url {@link DescribeCloudBaseBuildServiceRequest} {@link DescribeCloudBaseBuildServiceResponse} */
   DescribeCloudBaseBuildService(data: DescribeCloudBaseBuildServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseBuildServiceResponse>;
-  /** {@link DescribeCloudBaseProjectLatestVersionList 获取云开发项目列表}({@link DescribeCloudBaseProjectLatestVersionListRequest 请求参数}): {@link DescribeCloudBaseProjectLatestVersionListResponse 返回参数} */
+  /** 获取云开发项目列表 {@link DescribeCloudBaseProjectLatestVersionListRequest} {@link DescribeCloudBaseProjectLatestVersionListResponse} */
   DescribeCloudBaseProjectLatestVersionList(data: DescribeCloudBaseProjectLatestVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseProjectLatestVersionListResponse>;
-  /** {@link DescribeCloudBaseProjectVersionList 云项目部署版本列表}({@link DescribeCloudBaseProjectVersionListRequest 请求参数}): {@link DescribeCloudBaseProjectVersionListResponse 返回参数} */
+  /** 云项目部署版本列表 {@link DescribeCloudBaseProjectVersionListRequest} {@link DescribeCloudBaseProjectVersionListResponse} */
   DescribeCloudBaseProjectVersionList(data: DescribeCloudBaseProjectVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseProjectVersionListResponse>;
-  /** {@link DescribeCloudBaseRunAllVpcs 查看环境下的所有vpc}({@link DescribeCloudBaseRunAllVpcsRequest 请求参数}): {@link DescribeCloudBaseRunAllVpcsResponse 返回参数} */
+  /** 查看环境下的所有vpc {@link DescribeCloudBaseRunAllVpcsRequest} {@link DescribeCloudBaseRunAllVpcsResponse} */
   DescribeCloudBaseRunAllVpcs(data: DescribeCloudBaseRunAllVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunAllVpcsResponse>;
-  /** {@link DescribeCloudBaseRunConfForGateWay 独立网关云托管服务配置}({@link DescribeCloudBaseRunConfForGateWayRequest 请求参数}): {@link DescribeCloudBaseRunConfForGateWayResponse 返回参数} */
+  /** 独立网关云托管服务配置 {@link DescribeCloudBaseRunConfForGateWayRequest} {@link DescribeCloudBaseRunConfForGateWayResponse} */
   DescribeCloudBaseRunConfForGateWay(data: DescribeCloudBaseRunConfForGateWayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunConfForGateWayResponse>;
-  /** {@link DescribeCloudBaseRunOneClickTaskExternal 查询一键部署任务}({@link DescribeCloudBaseRunOneClickTaskExternalRequest 请求参数}): {@link DescribeCloudBaseRunOneClickTaskExternalResponse 返回参数} */
+  /** 查询一键部署任务 {@link DescribeCloudBaseRunOneClickTaskExternalRequest} {@link DescribeCloudBaseRunOneClickTaskExternalResponse} */
   DescribeCloudBaseRunOneClickTaskExternal(data: DescribeCloudBaseRunOneClickTaskExternalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunOneClickTaskExternalResponse>;
-  /** {@link DescribeCloudBaseRunOperationTypes 查询操作类型接口}({@link DescribeCloudBaseRunOperationTypesRequest 请求参数}): {@link DescribeCloudBaseRunOperationTypesResponse 返回参数} */
+  /** 查询操作类型接口 {@link DescribeCloudBaseRunOperationTypesRequest} {@link DescribeCloudBaseRunOperationTypesResponse} */
   DescribeCloudBaseRunOperationTypes(data: DescribeCloudBaseRunOperationTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunOperationTypesResponse>;
-  /** {@link DescribeCloudBaseRunPodList 查询云应用服务版本容器列表}({@link DescribeCloudBaseRunPodListRequest 请求参数}): {@link DescribeCloudBaseRunPodListResponse 返回参数} */
+  /** 查询云应用服务版本容器列表 {@link DescribeCloudBaseRunPodListRequest} {@link DescribeCloudBaseRunPodListResponse} */
   DescribeCloudBaseRunPodList(data: DescribeCloudBaseRunPodListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunPodListResponse>;
-  /** {@link DescribeCloudBaseRunResource 查看容器托管的资源状态}({@link DescribeCloudBaseRunResourceRequest 请求参数}): {@link DescribeCloudBaseRunResourceResponse 返回参数} */
+  /** 查看容器托管的资源状态 {@link DescribeCloudBaseRunResourceRequest} {@link DescribeCloudBaseRunResourceResponse} */
   DescribeCloudBaseRunResource(data: DescribeCloudBaseRunResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunResourceResponse>;
-  /** {@link DescribeCloudBaseRunResourceForExtend 查看容器托管的资源状态扩展使用}({@link DescribeCloudBaseRunResourceForExtendRequest 请求参数}): {@link DescribeCloudBaseRunResourceForExtendResponse 返回参数} */
+  /** 查看容器托管的资源状态扩展使用 {@link DescribeCloudBaseRunResourceForExtendRequest} {@link DescribeCloudBaseRunResourceForExtendResponse} */
   DescribeCloudBaseRunResourceForExtend(data: DescribeCloudBaseRunResourceForExtendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunResourceForExtendResponse>;
-  /** {@link DescribeCloudBaseRunServer 查询单个服务的详情}({@link DescribeCloudBaseRunServerRequest 请求参数}): {@link DescribeCloudBaseRunServerResponse 返回参数} */
+  /** 查询单个服务的详情 {@link DescribeCloudBaseRunServerRequest} {@link DescribeCloudBaseRunServerResponse} */
   DescribeCloudBaseRunServer(data: DescribeCloudBaseRunServerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunServerResponse>;
-  /** {@link DescribeCloudBaseRunServerDomainName 查询微信云托管服务域名}({@link DescribeCloudBaseRunServerDomainNameRequest 请求参数}): {@link DescribeCloudBaseRunServerDomainNameResponse 返回参数} */
+  /** 查询微信云托管服务域名 {@link DescribeCloudBaseRunServerDomainNameRequest} {@link DescribeCloudBaseRunServerDomainNameResponse} */
   DescribeCloudBaseRunServerDomainName(data: DescribeCloudBaseRunServerDomainNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunServerDomainNameResponse>;
-  /** {@link DescribeCloudBaseRunServerVersion 查询服务版本的详情}({@link DescribeCloudBaseRunServerVersionRequest 请求参数}): {@link DescribeCloudBaseRunServerVersionResponse 返回参数} */
+  /** 查询服务版本的详情 {@link DescribeCloudBaseRunServerVersionRequest} {@link DescribeCloudBaseRunServerVersionResponse} */
   DescribeCloudBaseRunServerVersion(data: DescribeCloudBaseRunServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunServerVersionResponse>;
-  /** {@link DescribeCloudBaseRunVersion 查询服务版本详情}({@link DescribeCloudBaseRunVersionRequest 请求参数}): {@link DescribeCloudBaseRunVersionResponse 返回参数} */
+  /** 查询服务版本详情 {@link DescribeCloudBaseRunVersionRequest} {@link DescribeCloudBaseRunVersionResponse} */
   DescribeCloudBaseRunVersion(data: DescribeCloudBaseRunVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunVersionResponse>;
-  /** {@link DescribeCloudBaseRunVersionRsByCondition 获取云托管详情}({@link DescribeCloudBaseRunVersionRsByConditionRequest 请求参数}): {@link DescribeCloudBaseRunVersionRsByConditionResponse 返回参数} */
+  /** 获取云托管详情 {@link DescribeCloudBaseRunVersionRsByConditionRequest} {@link DescribeCloudBaseRunVersionRsByConditionResponse} */
   DescribeCloudBaseRunVersionRsByCondition(data?: DescribeCloudBaseRunVersionRsByConditionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunVersionRsByConditionResponse>;
-  /** {@link DescribeCloudBaseRunVersionSnapshot 查询版本历史}({@link DescribeCloudBaseRunVersionSnapshotRequest 请求参数}): {@link DescribeCloudBaseRunVersionSnapshotResponse 返回参数} */
+  /** 查询版本历史 {@link DescribeCloudBaseRunVersionSnapshotRequest} {@link DescribeCloudBaseRunVersionSnapshotResponse} */
   DescribeCloudBaseRunVersionSnapshot(data: DescribeCloudBaseRunVersionSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunVersionSnapshotResponse>;
-  /** {@link DescribeCurveData 查询环境的监控曲线数据}({@link DescribeCurveDataRequest 请求参数}): {@link DescribeCurveDataResponse 返回参数} */
+  /** 查询环境的监控曲线数据 {@link DescribeCurveDataRequest} {@link DescribeCurveDataResponse} */
   DescribeCurveData(data: DescribeCurveDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCurveDataResponse>;
-  /** {@link DescribeDatabaseACL 获取数据库权限}({@link DescribeDatabaseACLRequest 请求参数}): {@link DescribeDatabaseACLResponse 返回参数} */
+  /** 获取数据库权限 {@link DescribeDatabaseACLRequest} {@link DescribeDatabaseACLResponse} */
   DescribeDatabaseACL(data: DescribeDatabaseACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseACLResponse>;
-  /** {@link DescribeDownloadFile 获取下载文件信息}({@link DescribeDownloadFileRequest 请求参数}): {@link DescribeDownloadFileResponse 返回参数} */
+  /** 获取下载文件信息 {@link DescribeDownloadFileRequest} {@link DescribeDownloadFileResponse} */
   DescribeDownloadFile(data: DescribeDownloadFileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDownloadFileResponse>;
-  /** {@link DescribeEndUserLoginStatistic 获取终端用户新增与登录信息}({@link DescribeEndUserLoginStatisticRequest 请求参数}): {@link DescribeEndUserLoginStatisticResponse 返回参数} */
+  /** 获取终端用户新增与登录信息 {@link DescribeEndUserLoginStatisticRequest} {@link DescribeEndUserLoginStatisticResponse} */
   DescribeEndUserLoginStatistic(data: DescribeEndUserLoginStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEndUserLoginStatisticResponse>;
-  /** {@link DescribeEndUserStatistic 获取终端用户分布}({@link DescribeEndUserStatisticRequest 请求参数}): {@link DescribeEndUserStatisticResponse 返回参数} */
+  /** 获取终端用户分布 {@link DescribeEndUserStatisticRequest} {@link DescribeEndUserStatisticResponse} */
   DescribeEndUserStatistic(data: DescribeEndUserStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEndUserStatisticResponse>;
-  /** {@link DescribeEndUsers 获取终端用户列表}({@link DescribeEndUsersRequest 请求参数}): {@link DescribeEndUsersResponse 返回参数} */
+  /** 获取终端用户列表 {@link DescribeEndUsersRequest} {@link DescribeEndUsersResponse} */
   DescribeEndUsers(data: DescribeEndUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEndUsersResponse>;
-  /** {@link DescribeEnvDealRegion 获取环境下单地域}({@link DescribeEnvDealRegionRequest 请求参数}): {@link DescribeEnvDealRegionResponse 返回参数} */
+  /** 获取环境下单地域 {@link DescribeEnvDealRegionRequest} {@link DescribeEnvDealRegionResponse} */
   DescribeEnvDealRegion(data: DescribeEnvDealRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvDealRegionResponse>;
-  /** {@link DescribeEnvFreeQuota 查询后付费免费配额信息}({@link DescribeEnvFreeQuotaRequest 请求参数}): {@link DescribeEnvFreeQuotaResponse 返回参数} */
+  /** 查询后付费免费配额信息 {@link DescribeEnvFreeQuotaRequest} {@link DescribeEnvFreeQuotaResponse} */
   DescribeEnvFreeQuota(data: DescribeEnvFreeQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvFreeQuotaResponse>;
-  /** {@link DescribeEnvLimit 查询环境个数上限接口}({@link DescribeEnvLimitRequest 请求参数}): {@link DescribeEnvLimitResponse 返回参数} */
+  /** 查询环境个数上限接口 {@link DescribeEnvLimitRequest} {@link DescribeEnvLimitResponse} */
   DescribeEnvLimit(data?: DescribeEnvLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvLimitResponse>;
-  /** {@link DescribeEnvPostpaidDeduct 查询环境后付费计费详情}({@link DescribeEnvPostpaidDeductRequest 请求参数}): {@link DescribeEnvPostpaidDeductResponse 返回参数} */
+  /** 查询环境后付费计费详情 {@link DescribeEnvPostpaidDeductRequest} {@link DescribeEnvPostpaidDeductResponse} */
   DescribeEnvPostpaidDeduct(data: DescribeEnvPostpaidDeductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvPostpaidDeductResponse>;
-  /** {@link DescribeEnvs 获取环境列表}({@link DescribeEnvsRequest 请求参数}): {@link DescribeEnvsResponse 返回参数} */
+  /** 获取环境列表 {@link DescribeEnvsRequest} {@link DescribeEnvsResponse} */
   DescribeEnvs(data?: DescribeEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvsResponse>;
-  /** {@link DescribeExtensionUploadInfo 描述扩展上传文件信息}({@link DescribeExtensionUploadInfoRequest 请求参数}): {@link DescribeExtensionUploadInfoResponse 返回参数} */
+  /** 描述扩展上传文件信息 {@link DescribeExtensionUploadInfoRequest} {@link DescribeExtensionUploadInfoResponse} */
   DescribeExtensionUploadInfo(data: DescribeExtensionUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtensionUploadInfoResponse>;
-  /** {@link DescribeExtraPkgBillingInfo 获取增值包计费相关信息}({@link DescribeExtraPkgBillingInfoRequest 请求参数}): {@link DescribeExtraPkgBillingInfoResponse 返回参数} */
+  /** 获取增值包计费相关信息 {@link DescribeExtraPkgBillingInfoRequest} {@link DescribeExtraPkgBillingInfoResponse} */
   DescribeExtraPkgBillingInfo(data?: DescribeExtraPkgBillingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtraPkgBillingInfoResponse>;
-  /** {@link DescribeHostingDomainTask 查询静态托管域名任务状态}({@link DescribeHostingDomainTaskRequest 请求参数}): {@link DescribeHostingDomainTaskResponse 返回参数} */
+  /** 查询静态托管域名任务状态 {@link DescribeHostingDomainTaskRequest} {@link DescribeHostingDomainTaskResponse} */
   DescribeHostingDomainTask(data: DescribeHostingDomainTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostingDomainTaskResponse>;
-  /** {@link DescribePostpayFreeQuotas 查询后付费资源免费量}({@link DescribePostpayFreeQuotasRequest 请求参数}): {@link DescribePostpayFreeQuotasResponse 返回参数} */
+  /** 查询后付费资源免费量 {@link DescribePostpayFreeQuotasRequest} {@link DescribePostpayFreeQuotasResponse} */
   DescribePostpayFreeQuotas(data: DescribePostpayFreeQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostpayFreeQuotasResponse>;
-  /** {@link DescribePostpayPackageFreeQuotas 获取后付费免费额度}({@link DescribePostpayPackageFreeQuotasRequest 请求参数}): {@link DescribePostpayPackageFreeQuotasResponse 返回参数} */
+  /** 获取后付费免费额度 {@link DescribePostpayPackageFreeQuotasRequest} {@link DescribePostpayPackageFreeQuotasResponse} */
   DescribePostpayPackageFreeQuotas(data?: DescribePostpayPackageFreeQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostpayPackageFreeQuotasResponse>;
-  /** {@link DescribeQuotaData 查询环境的配额使用量}({@link DescribeQuotaDataRequest 请求参数}): {@link DescribeQuotaDataResponse 返回参数} */
+  /** 查询环境的配额使用量 {@link DescribeQuotaDataRequest} {@link DescribeQuotaDataResponse} */
   DescribeQuotaData(data: DescribeQuotaDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuotaDataResponse>;
-  /** {@link DescribeSmsQuotas 查询后付费短信资源量}({@link DescribeSmsQuotasRequest 请求参数}): {@link DescribeSmsQuotasResponse 返回参数} */
+  /** 查询后付费短信资源量 {@link DescribeSmsQuotasRequest} {@link DescribeSmsQuotasResponse} */
   DescribeSmsQuotas(data: DescribeSmsQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmsQuotasResponse>;
-  /** {@link DescribeSpecialCostItems 查询环境1分钱抵扣信息}({@link DescribeSpecialCostItemsRequest 请求参数}): {@link DescribeSpecialCostItemsResponse 返回参数} */
+  /** 查询环境1分钱抵扣信息 {@link DescribeSpecialCostItemsRequest} {@link DescribeSpecialCostItemsResponse} */
   DescribeSpecialCostItems(data?: DescribeSpecialCostItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecialCostItemsResponse>;
-  /** {@link DescribeStandaloneGateway 查询小租户网关信息}({@link DescribeStandaloneGatewayRequest 请求参数}): {@link DescribeStandaloneGatewayResponse 返回参数} */
+  /** 查询小租户网关信息 {@link DescribeStandaloneGatewayRequest} {@link DescribeStandaloneGatewayResponse} */
   DescribeStandaloneGateway(data: DescribeStandaloneGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStandaloneGatewayResponse>;
-  /** {@link DescribeStandaloneGatewayPackage 查询小租户网关套餐信息}({@link DescribeStandaloneGatewayPackageRequest 请求参数}): {@link DescribeStandaloneGatewayPackageResponse 返回参数} */
+  /** 查询小租户网关套餐信息 {@link DescribeStandaloneGatewayPackageRequest} {@link DescribeStandaloneGatewayPackageResponse} */
   DescribeStandaloneGatewayPackage(data?: DescribeStandaloneGatewayPackageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStandaloneGatewayPackageResponse>;
-  /** {@link DescribeUserActivityInfo 查询用户活动信息}({@link DescribeUserActivityInfoRequest 请求参数}): {@link DescribeUserActivityInfoResponse 返回参数} */
+  /** 查询用户活动信息 {@link DescribeUserActivityInfoRequest} {@link DescribeUserActivityInfoResponse} */
   DescribeUserActivityInfo(data: DescribeUserActivityInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserActivityInfoResponse>;
-  /** {@link DescribeWxCloudBaseRunEnvs 查询微信云托管环境信息}({@link DescribeWxCloudBaseRunEnvsRequest 请求参数}): {@link DescribeWxCloudBaseRunEnvsResponse 返回参数} */
+  /** 查询微信云托管环境信息 {@link DescribeWxCloudBaseRunEnvsRequest} {@link DescribeWxCloudBaseRunEnvsResponse} */
   DescribeWxCloudBaseRunEnvs(data?: DescribeWxCloudBaseRunEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWxCloudBaseRunEnvsResponse>;
-  /** {@link DescribeWxCloudBaseRunSubNets 查询微信云托管子网}({@link DescribeWxCloudBaseRunSubNetsRequest 请求参数}): {@link DescribeWxCloudBaseRunSubNetsResponse 返回参数} */
+  /** 查询微信云托管子网 {@link DescribeWxCloudBaseRunSubNetsRequest} {@link DescribeWxCloudBaseRunSubNetsResponse} */
   DescribeWxCloudBaseRunSubNets(data: DescribeWxCloudBaseRunSubNetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWxCloudBaseRunSubNetsResponse>;
-  /** {@link DestroyEnv 销毁环境}({@link DestroyEnvRequest 请求参数}): {@link DestroyEnvResponse 返回参数} */
+  /** 销毁环境 {@link DestroyEnvRequest} {@link DestroyEnvResponse} */
   DestroyEnv(data: DestroyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyEnvResponse>;
-  /** {@link DestroyStandaloneGateway 销毁小租户网关}({@link DestroyStandaloneGatewayRequest 请求参数}): {@link DestroyStandaloneGatewayResponse 返回参数} */
+  /** 销毁小租户网关 {@link DestroyStandaloneGatewayRequest} {@link DestroyStandaloneGatewayResponse} */
   DestroyStandaloneGateway(data: DestroyStandaloneGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyStandaloneGatewayResponse>;
-  /** {@link DestroyStaticStore 销毁静态资源}({@link DestroyStaticStoreRequest 请求参数}): {@link DestroyStaticStoreResponse 返回参数} */
+  /** 销毁静态资源 {@link DestroyStaticStoreRequest} {@link DestroyStaticStoreResponse} */
   DestroyStaticStore(data: DestroyStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyStaticStoreResponse>;
-  /** {@link EstablishCloudBaseRunServer 创建云应用服务}({@link EstablishCloudBaseRunServerRequest 请求参数}): {@link EstablishCloudBaseRunServerResponse 返回参数} */
+  /** 创建云应用服务 {@link EstablishCloudBaseRunServerRequest} {@link EstablishCloudBaseRunServerResponse} */
   EstablishCloudBaseRunServer(data: EstablishCloudBaseRunServerRequest, config?: AxiosRequestConfig): AxiosPromise<EstablishCloudBaseRunServerResponse>;
-  /** {@link EstablishWxGatewayRoute 创建或修改安全网关路由}({@link EstablishWxGatewayRouteRequest 请求参数}): {@link EstablishWxGatewayRouteResponse 返回参数} */
+  /** 创建或修改安全网关路由 {@link EstablishWxGatewayRouteRequest} {@link EstablishWxGatewayRouteResponse} */
   EstablishWxGatewayRoute(data: EstablishWxGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<EstablishWxGatewayRouteResponse>;
-  /** {@link FreezeCloudBaseRunServers 批量冻结}({@link FreezeCloudBaseRunServersRequest 请求参数}): {@link FreezeCloudBaseRunServersResponse 返回参数} */
+  /** 批量冻结 {@link FreezeCloudBaseRunServersRequest} {@link FreezeCloudBaseRunServersResponse} */
   FreezeCloudBaseRunServers(data: FreezeCloudBaseRunServersRequest, config?: AxiosRequestConfig): AxiosPromise<FreezeCloudBaseRunServersResponse>;
-  /** {@link ModifyCloudBaseRunServerFlowConf 修改容器内的版本流量配置}({@link ModifyCloudBaseRunServerFlowConfRequest 请求参数}): {@link ModifyCloudBaseRunServerFlowConfResponse 返回参数} */
+  /** 修改容器内的版本流量配置 {@link ModifyCloudBaseRunServerFlowConfRequest} {@link ModifyCloudBaseRunServerFlowConfResponse} */
   ModifyCloudBaseRunServerFlowConf(data: ModifyCloudBaseRunServerFlowConfRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudBaseRunServerFlowConfResponse>;
-  /** {@link ModifyCloudBaseRunServerVersion 修改服务版本信息}({@link ModifyCloudBaseRunServerVersionRequest 请求参数}): {@link ModifyCloudBaseRunServerVersionResponse 返回参数} */
+  /** 修改服务版本信息 {@link ModifyCloudBaseRunServerVersionRequest} {@link ModifyCloudBaseRunServerVersionResponse} */
   ModifyCloudBaseRunServerVersion(data: ModifyCloudBaseRunServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudBaseRunServerVersionResponse>;
-  /** {@link ModifyClsTopic 修改日志主题}({@link ModifyClsTopicRequest 请求参数}): {@link ModifyClsTopicResponse 返回参数} */
+  /** 修改日志主题 {@link ModifyClsTopicRequest} {@link ModifyClsTopicResponse} */
   ModifyClsTopic(data: ModifyClsTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClsTopicResponse>;
-  /** {@link ModifyDatabaseACL 修改数据库权限}({@link ModifyDatabaseACLRequest 请求参数}): {@link ModifyDatabaseACLResponse 返回参数} */
+  /** 修改数据库权限 {@link ModifyDatabaseACLRequest} {@link ModifyDatabaseACLResponse} */
   ModifyDatabaseACL(data: ModifyDatabaseACLRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseACLResponse>;
-  /** {@link ModifyEndUser 管理终端用户}({@link ModifyEndUserRequest 请求参数}): {@link ModifyEndUserResponse 返回参数} */
+  /** 管理终端用户 {@link ModifyEndUserRequest} {@link ModifyEndUserResponse} */
   ModifyEndUser(data: ModifyEndUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEndUserResponse>;
-  /** {@link ModifyEnv 更新环境信息}({@link ModifyEnvRequest 请求参数}): {@link ModifyEnvResponse 返回参数} */
+  /** 更新环境信息 {@link ModifyEnvRequest} {@link ModifyEnvResponse} */
   ModifyEnv(data: ModifyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvResponse>;
-  /** {@link ReinstateEnv 恢复环境，解除隔离状态}({@link ReinstateEnvRequest 请求参数}): {@link ReinstateEnvResponse 返回参数} */
+  /** 恢复环境，解除隔离状态 {@link ReinstateEnvRequest} {@link ReinstateEnvResponse} */
   ReinstateEnv(data: ReinstateEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ReinstateEnvResponse>;
-  /** {@link ReplaceActivityRecord 更新活动详情}({@link ReplaceActivityRecordRequest 请求参数}): {@link ReplaceActivityRecordResponse 返回参数} */
+  /** 更新活动详情 {@link ReplaceActivityRecordRequest} {@link ReplaceActivityRecordResponse} */
   ReplaceActivityRecord(data: ReplaceActivityRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceActivityRecordResponse>;
-  /** {@link RollUpdateCloudBaseRunServerVersion 滚动更新服务版本}({@link RollUpdateCloudBaseRunServerVersionRequest 请求参数}): {@link RollUpdateCloudBaseRunServerVersionResponse 返回参数} */
+  /** 滚动更新服务版本 {@link RollUpdateCloudBaseRunServerVersionRequest} {@link RollUpdateCloudBaseRunServerVersionResponse} */
   RollUpdateCloudBaseRunServerVersion(data: RollUpdateCloudBaseRunServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<RollUpdateCloudBaseRunServerVersionResponse>;
-  /** {@link SearchClsLog 搜索CLS日志}({@link SearchClsLogRequest 请求参数}): {@link SearchClsLogResponse 返回参数} */
+  /** 搜索CLS日志 {@link SearchClsLogRequest} {@link SearchClsLogResponse} */
   SearchClsLog(data: SearchClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClsLogResponse>;
-  /** {@link TurnOffStandaloneGateway 关闭小租户网关}({@link TurnOffStandaloneGatewayRequest 请求参数}): {@link TurnOffStandaloneGatewayResponse 返回参数} */
+  /** 关闭小租户网关 {@link TurnOffStandaloneGatewayRequest} {@link TurnOffStandaloneGatewayResponse} */
   TurnOffStandaloneGateway(data: TurnOffStandaloneGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<TurnOffStandaloneGatewayResponse>;
-  /** {@link TurnOnStandaloneGateway 开启小租户网关}({@link TurnOnStandaloneGatewayRequest 请求参数}): {@link TurnOnStandaloneGatewayResponse 返回参数} */
+  /** 开启小租户网关 {@link TurnOnStandaloneGatewayRequest} {@link TurnOnStandaloneGatewayResponse} */
   TurnOnStandaloneGateway(data: TurnOnStandaloneGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<TurnOnStandaloneGatewayResponse>;
-  /** {@link UnfreezeCloudBaseRunServers 批量解冻服务}({@link UnfreezeCloudBaseRunServersRequest 请求参数}): {@link UnfreezeCloudBaseRunServersResponse 返回参数} */
+  /** 批量解冻服务 {@link UnfreezeCloudBaseRunServersRequest} {@link UnfreezeCloudBaseRunServersResponse} */
   UnfreezeCloudBaseRunServers(data: UnfreezeCloudBaseRunServersRequest, config?: AxiosRequestConfig): AxiosPromise<UnfreezeCloudBaseRunServersResponse>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   AddCustomDomain(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;

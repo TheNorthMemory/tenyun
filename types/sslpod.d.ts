@@ -142,7 +142,7 @@ declare interface CreateDomainRequest {
 }
 
 declare interface CreateDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -152,7 +152,7 @@ declare interface DeleteDomainRequest {
 }
 
 declare interface DeleteDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -162,7 +162,7 @@ declare interface DescribeDashboardRequest {
 declare interface DescribeDashboardResponse {
   /** dashboard面板数据 */
   Data?: DashboardResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -174,7 +174,7 @@ declare interface DescribeDomainCertsRequest {
 declare interface DescribeDomainCertsResponse {
   /** 证书信息 */
   Data?: CertInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -184,7 +184,7 @@ declare interface DescribeDomainTagsRequest {
 declare interface DescribeDomainTagsResponse {
   /** Tag数组 */
   Data?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -216,7 +216,7 @@ declare interface DescribeDomainsRequest {
 declare interface DescribeDomainsResponse {
   /** 列表数据 */
   Data: DescribeDomains;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -226,7 +226,7 @@ declare interface DescribeNoticeInfoRequest {
 declare interface DescribeNoticeInfoResponse {
   /** 通知信息结果 */
   Data?: NoticeInfoResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -238,7 +238,7 @@ declare interface ModifyDomainTagsRequest {
 }
 
 declare interface ModifyDomainTagsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -248,7 +248,7 @@ declare interface RefreshDomainRequest {
 }
 
 declare interface RefreshDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -260,32 +260,32 @@ declare interface ResolveDomainRequest {
 declare interface ResolveDomainResponse {
   /** 响应数据 */
   Data?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Sslpod SSL证书监控SSLPod} */
 declare interface Sslpod {
   (): Versions;
-  /** {@link CreateDomain 添加域名}({@link CreateDomainRequest 请求参数}): {@link CreateDomainResponse 返回参数} */
+  /** 添加域名 {@link CreateDomainRequest} {@link CreateDomainResponse} */
   CreateDomain(data: CreateDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainResponse>;
-  /** {@link DeleteDomain 删除域名}({@link DeleteDomainRequest 请求参数}): {@link DeleteDomainResponse 返回参数} */
+  /** 删除域名 {@link DeleteDomainRequest} {@link DeleteDomainResponse} */
   DeleteDomain(data: DeleteDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainResponse>;
-  /** {@link DescribeDashboard 仪表盘数据}({@link DescribeDashboardRequest 请求参数}): {@link DescribeDashboardResponse 返回参数} */
+  /** 仪表盘数据 {@link DescribeDashboardRequest} {@link DescribeDashboardResponse} */
   DescribeDashboard(data?: DescribeDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDashboardResponse>;
-  /** {@link DescribeDomainCerts 获取域名证书}({@link DescribeDomainCertsRequest 请求参数}): {@link DescribeDomainCertsResponse 返回参数} */
+  /** 获取域名证书 {@link DescribeDomainCertsRequest} {@link DescribeDomainCertsResponse} */
   DescribeDomainCerts(data: DescribeDomainCertsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainCertsResponse>;
-  /** {@link DescribeDomainTags 获取账号的tags}({@link DescribeDomainTagsRequest 请求参数}): {@link DescribeDomainTagsResponse 返回参数} */
+  /** 获取账号的tags {@link DescribeDomainTagsRequest} {@link DescribeDomainTagsResponse} */
   DescribeDomainTags(data?: DescribeDomainTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainTagsResponse>;
-  /** {@link DescribeDomains 搜索域名}({@link DescribeDomainsRequest 请求参数}): {@link DescribeDomainsResponse 返回参数} */
+  /** 搜索域名 {@link DescribeDomainsRequest} {@link DescribeDomainsResponse} */
   DescribeDomains(data: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
-  /** {@link DescribeNoticeInfo 通知额度信息}({@link DescribeNoticeInfoRequest 请求参数}): {@link DescribeNoticeInfoResponse 返回参数} */
+  /** 通知额度信息 {@link DescribeNoticeInfoRequest} {@link DescribeNoticeInfoResponse} */
   DescribeNoticeInfo(data?: DescribeNoticeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNoticeInfoResponse>;
-  /** {@link ModifyDomainTags 修改域名tag}({@link ModifyDomainTagsRequest 请求参数}): {@link ModifyDomainTagsResponse 返回参数} */
+  /** 修改域名tag {@link ModifyDomainTagsRequest} {@link ModifyDomainTagsResponse} */
   ModifyDomainTags(data: ModifyDomainTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainTagsResponse>;
-  /** {@link RefreshDomain 重新检测域名}({@link RefreshDomainRequest 请求参数}): {@link RefreshDomainResponse 返回参数} */
+  /** 重新检测域名 {@link RefreshDomainRequest} {@link RefreshDomainResponse} */
   RefreshDomain(data: RefreshDomainRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshDomainResponse>;
-  /** {@link ResolveDomain 域名解析}({@link ResolveDomainRequest 请求参数}): {@link ResolveDomainResponse 返回参数} */
+  /** 域名解析 {@link ResolveDomainRequest} {@link ResolveDomainResponse} */
   ResolveDomain(data: ResolveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ResolveDomainResponse>;
 }
 

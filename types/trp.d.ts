@@ -394,7 +394,7 @@ declare interface CreateCodeBatchRequest {
 declare interface CreateCodeBatchResponse {
   /** 批次ID */
   BatchId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -424,7 +424,7 @@ declare interface CreateCodePackRequest {
 declare interface CreateCodePackResponse {
   /** 码包ID */
   PackId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -452,7 +452,7 @@ declare interface CreateCorporationOrderRequest {
 declare interface CreateCorporationOrderResponse {
   /** 企业ID */
   CorpId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -482,7 +482,7 @@ declare interface CreateCustomPackRequest {
 declare interface CreateCustomPackResponse {
   /** 码包ID */
   PackId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -502,7 +502,7 @@ declare interface CreateCustomRuleRequest {
 declare interface CreateCustomRuleResponse {
   /** 码规则ID */
   CustomId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -522,7 +522,7 @@ declare interface CreateMerchantRequest {
 declare interface CreateMerchantResponse {
   /** 商户标识码 */
   MerchantId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -548,7 +548,7 @@ declare interface CreateProductRequest {
 declare interface CreateProductResponse {
   /** 商品ID */
   ProductId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -562,7 +562,7 @@ declare interface CreateTraceChainRequest {
 declare interface CreateTraceChainResponse {
   /** 溯源ID */
   TraceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -578,7 +578,7 @@ declare interface CreateTraceCodesAsyncRequest {
 declare interface CreateTraceCodesAsyncResponse {
   /** 批次ID */
   BatchId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -598,7 +598,7 @@ declare interface CreateTraceCodesResponse {
   ActiveCnt: number;
   /** 批次码数量 */
   CodeCnt: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -630,7 +630,7 @@ declare interface CreateTraceDataRequest {
 declare interface CreateTraceDataResponse {
   /** 溯源ID */
   TraceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -644,7 +644,7 @@ declare interface DeleteCodeBatchRequest {
 declare interface DeleteCodeBatchResponse {
   /** 批次ID */
   BatchId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -658,7 +658,7 @@ declare interface DeleteMerchantRequest {
 declare interface DeleteMerchantResponse {
   /** 商户标识码 */
   MerchantId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -672,7 +672,7 @@ declare interface DeleteProductRequest {
 declare interface DeleteProductResponse {
   /** 商品ID */
   ProductId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -686,7 +686,7 @@ declare interface DeleteTraceDataRequest {
 declare interface DeleteTraceDataResponse {
   /** 溯源id */
   TraceId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -700,7 +700,7 @@ declare interface DescribeCodeBatchByIdRequest {
 declare interface DescribeCodeBatchByIdResponse {
   /** 批次 */
   CodeBatch: CodeBatch;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -726,7 +726,7 @@ declare interface DescribeCodeBatchsResponse {
   CodeBatchs: CodeBatch[] | null;
   /** 总条数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -740,7 +740,7 @@ declare interface DescribeCodePackStatusRequest {
 declare interface DescribeCodePackStatusResponse {
   /** 码包状态 init: 初始化, pending: 执行中, done: 完成, error: 失败 */
   Status: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -758,7 +758,7 @@ declare interface DescribeCodePackUrlResponse {
   ImgUrl: string | null;
   /** 文字码包Key，用于上传导入 */
   FileKey: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -780,7 +780,7 @@ declare interface DescribeCodePacksResponse {
   CodePacks: CodePack[] | null;
   /** 总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -794,7 +794,7 @@ declare interface DescribeCodesByPackRequest {
 declare interface DescribeCodesByPackResponse {
   /** 码列表 */
   Codes: CodeItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -814,7 +814,7 @@ declare interface DescribeCorpQuotasResponse {
   CorpQuotas: CorpQuota[] | null;
   /** 记录总数量 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -828,7 +828,7 @@ declare interface DescribeCustomRuleByIdRequest {
 declare interface DescribeCustomRuleByIdResponse {
   /** 码规则信息 */
   CustomRule: CustomRule | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -852,7 +852,7 @@ declare interface DescribeCustomRulesResponse {
   CustomRules: CustomRule[] | null;
   /** 总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -866,7 +866,7 @@ declare interface DescribeJobFileUrlRequest {
 declare interface DescribeJobFileUrlResponse {
   /** 码包地址 */
   Url: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -880,7 +880,7 @@ declare interface DescribeMerchantByIdRequest {
 declare interface DescribeMerchantByIdResponse {
   /** 商户信息 */
   Merchant: Merchant | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -902,7 +902,7 @@ declare interface DescribeMerchantsResponse {
   Merchants: Merchant[] | null;
   /** 总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -916,7 +916,7 @@ declare interface DescribeProductByIdRequest {
 declare interface DescribeProductByIdResponse {
   /** 商品信息 */
   Product: Product | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -938,7 +938,7 @@ declare interface DescribeProductsResponse {
   Products: Product[] | null;
   /** 总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -950,7 +950,7 @@ declare interface DescribeTmpTokenRequest {
 declare interface DescribeTmpTokenResponse {
   /** 临时token */
   Token: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -964,7 +964,7 @@ declare interface DescribeTraceCodeByIdRequest {
 declare interface DescribeTraceCodeByIdResponse {
   /** 无 */
   TraceCode: TraceCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -986,7 +986,7 @@ declare interface DescribeTraceCodesResponse {
   TraceCodes: TraceCode[] | null;
   /** 条数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1012,7 +1012,7 @@ declare interface DescribeTraceDataListResponse {
   TotalCount: number;
   /** 无 */
   TraceDataList: TraceData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1038,7 +1038,7 @@ declare interface ModifyCodeBatchRequest {
 declare interface ModifyCodeBatchResponse {
   /** 批次ID */
   BatchId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1058,7 +1058,7 @@ declare interface ModifyCustomRuleRequest {
 declare interface ModifyCustomRuleResponse {
   /** 码规则ID */
   CustomId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1074,7 +1074,7 @@ declare interface ModifyCustomRuleStatusRequest {
 declare interface ModifyCustomRuleStatusResponse {
   /** 码规则ID */
   CustomId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1096,7 +1096,7 @@ declare interface ModifyMerchantRequest {
 declare interface ModifyMerchantResponse {
   /** 商户标识码 */
   MerchantId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1120,7 +1120,7 @@ declare interface ModifyProductRequest {
 declare interface ModifyProductResponse {
   /** 商品ID */
   ProductId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1134,7 +1134,7 @@ declare interface ModifyTraceCodeRequest {
 }
 
 declare interface ModifyTraceCodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1154,7 +1154,7 @@ declare interface ModifyTraceCodeUnlinkResponse {
   CodeCnt: number;
   /** 批次ID */
   BatchId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1172,7 +1172,7 @@ declare interface ModifyTraceDataRanksRequest {
 declare interface ModifyTraceDataRanksResponse {
   /** 批次ID */
   BatchId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1216,96 +1216,96 @@ declare interface ModifyTraceDataRequest {
 declare interface ModifyTraceDataResponse {
   /** 溯源ID */
   TraceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Trp T-Sec-安心平台(RP)} */
 declare interface Trp {
   (): Versions;
-  /** {@link CreateCodeBatch 新增批次}({@link CreateCodeBatchRequest 请求参数}): {@link CreateCodeBatchResponse 返回参数} */
+  /** 新增批次 {@link CreateCodeBatchRequest} {@link CreateCodeBatchResponse} */
   CreateCodeBatch(data?: CreateCodeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeBatchResponse>;
-  /** {@link CreateCodePack 生成普通码包}({@link CreateCodePackRequest 请求参数}): {@link CreateCodePackResponse 返回参数} */
+  /** 生成普通码包 {@link CreateCodePackRequest} {@link CreateCodePackResponse} */
   CreateCodePack(data: CreateCodePackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodePackResponse>;
-  /** {@link CreateCorporationOrder 以订单方式新建企业}({@link CreateCorporationOrderRequest 请求参数}): {@link CreateCorporationOrderResponse 返回参数} */
+  /** 以订单方式新建企业 {@link CreateCorporationOrderRequest} {@link CreateCorporationOrderResponse} */
   CreateCorporationOrder(data: CreateCorporationOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCorporationOrderResponse>;
-  /** {@link CreateCustomPack 生成自定义码包}({@link CreateCustomPackRequest 请求参数}): {@link CreateCustomPackResponse 返回参数} */
+  /** 生成自定义码包 {@link CreateCustomPackRequest} {@link CreateCustomPackResponse} */
   CreateCustomPack(data: CreateCustomPackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomPackResponse>;
-  /** {@link CreateCustomRule 新建自定义码规则}({@link CreateCustomRuleRequest 请求参数}): {@link CreateCustomRuleResponse 返回参数} */
+  /** 新建自定义码规则 {@link CreateCustomRuleRequest} {@link CreateCustomRuleResponse} */
   CreateCustomRule(data: CreateCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomRuleResponse>;
-  /** {@link CreateMerchant 新建商户}({@link CreateMerchantRequest 请求参数}): {@link CreateMerchantResponse 返回参数} */
+  /** 新建商户 {@link CreateMerchantRequest} {@link CreateMerchantResponse} */
   CreateMerchant(data: CreateMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMerchantResponse>;
-  /** {@link CreateProduct 新建商品}({@link CreateProductRequest 请求参数}): {@link CreateProductResponse 返回参数} */
+  /** 新建商品 {@link CreateProductRequest} {@link CreateProductResponse} */
   CreateProduct(data: CreateProductRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProductResponse>;
-  /** {@link CreateTraceChain 上链溯源信息}({@link CreateTraceChainRequest 请求参数}): {@link CreateTraceChainResponse 返回参数} */
+  /** 上链溯源信息 {@link CreateTraceChainRequest} {@link CreateTraceChainResponse} */
   CreateTraceChain(data?: CreateTraceChainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTraceChainResponse>;
-  /** {@link CreateTraceCodes 批量导入二维码}({@link CreateTraceCodesRequest 请求参数}): {@link CreateTraceCodesResponse 返回参数} */
+  /** 批量导入二维码 {@link CreateTraceCodesRequest} {@link CreateTraceCodesResponse} */
   CreateTraceCodes(data: CreateTraceCodesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTraceCodesResponse>;
-  /** {@link CreateTraceCodesAsync 异步导入激活码包}({@link CreateTraceCodesAsyncRequest 请求参数}): {@link CreateTraceCodesAsyncResponse 返回参数} */
+  /** 异步导入激活码包 {@link CreateTraceCodesAsyncRequest} {@link CreateTraceCodesAsyncResponse} */
   CreateTraceCodesAsync(data?: CreateTraceCodesAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTraceCodesAsyncResponse>;
-  /** {@link CreateTraceData 新增溯源信息}({@link CreateTraceDataRequest 请求参数}): {@link CreateTraceDataResponse 返回参数} */
+  /** 新增溯源信息 {@link CreateTraceDataRequest} {@link CreateTraceDataResponse} */
   CreateTraceData(data?: CreateTraceDataRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTraceDataResponse>;
-  /** {@link DeleteCodeBatch 删除批次}({@link DeleteCodeBatchRequest 请求参数}): {@link DeleteCodeBatchResponse 返回参数} */
+  /** 删除批次 {@link DeleteCodeBatchRequest} {@link DeleteCodeBatchResponse} */
   DeleteCodeBatch(data?: DeleteCodeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCodeBatchResponse>;
-  /** {@link DeleteMerchant 删除商户}({@link DeleteMerchantRequest 请求参数}): {@link DeleteMerchantResponse 返回参数} */
+  /** 删除商户 {@link DeleteMerchantRequest} {@link DeleteMerchantResponse} */
   DeleteMerchant(data: DeleteMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMerchantResponse>;
-  /** {@link DeleteProduct 删除商品}({@link DeleteProductRequest 请求参数}): {@link DeleteProductResponse 返回参数} */
+  /** 删除商品 {@link DeleteProductRequest} {@link DeleteProductResponse} */
   DeleteProduct(data: DeleteProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProductResponse>;
-  /** {@link DeleteTraceData 删除溯源信息}({@link DeleteTraceDataRequest 请求参数}): {@link DeleteTraceDataResponse 返回参数} */
+  /** 删除溯源信息 {@link DeleteTraceDataRequest} {@link DeleteTraceDataResponse} */
   DeleteTraceData(data: DeleteTraceDataRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTraceDataResponse>;
-  /** {@link DescribeCodeBatchById 查询批次信息}({@link DescribeCodeBatchByIdRequest 请求参数}): {@link DescribeCodeBatchByIdResponse 返回参数} */
+  /** 查询批次信息 {@link DescribeCodeBatchByIdRequest} {@link DescribeCodeBatchByIdResponse} */
   DescribeCodeBatchById(data?: DescribeCodeBatchByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodeBatchByIdResponse>;
-  /** {@link DescribeCodeBatchs 查询批次列表}({@link DescribeCodeBatchsRequest 请求参数}): {@link DescribeCodeBatchsResponse 返回参数} */
+  /** 查询批次列表 {@link DescribeCodeBatchsRequest} {@link DescribeCodeBatchsResponse} */
   DescribeCodeBatchs(data?: DescribeCodeBatchsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodeBatchsResponse>;
-  /** {@link DescribeCodePackStatus 查询码包状态}({@link DescribeCodePackStatusRequest 请求参数}): {@link DescribeCodePackStatusResponse 返回参数} */
+  /** 查询码包状态 {@link DescribeCodePackStatusRequest} {@link DescribeCodePackStatusResponse} */
   DescribeCodePackStatus(data: DescribeCodePackStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodePackStatusResponse>;
-  /** {@link DescribeCodePackUrl 查询码包地址}({@link DescribeCodePackUrlRequest 请求参数}): {@link DescribeCodePackUrlResponse 返回参数} */
+  /** 查询码包地址 {@link DescribeCodePackUrlRequest} {@link DescribeCodePackUrlResponse} */
   DescribeCodePackUrl(data: DescribeCodePackUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodePackUrlResponse>;
-  /** {@link DescribeCodePacks 查询码包列表}({@link DescribeCodePacksRequest 请求参数}): {@link DescribeCodePacksResponse 返回参数} */
+  /** 查询码包列表 {@link DescribeCodePacksRequest} {@link DescribeCodePacksResponse} */
   DescribeCodePacks(data?: DescribeCodePacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodePacksResponse>;
-  /** {@link DescribeCodesByPack 查询码包的二维码列表}({@link DescribeCodesByPackRequest 请求参数}): {@link DescribeCodesByPackResponse 返回参数} */
+  /** 查询码包的二维码列表 {@link DescribeCodesByPackRequest} {@link DescribeCodesByPackResponse} */
   DescribeCodesByPack(data: DescribeCodesByPackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodesByPackResponse>;
-  /** {@link DescribeCorpQuotas 查询渠道商下属企业额度使用情况}({@link DescribeCorpQuotasRequest 请求参数}): {@link DescribeCorpQuotasResponse 返回参数} */
+  /** 查询渠道商下属企业额度使用情况 {@link DescribeCorpQuotasRequest} {@link DescribeCorpQuotasResponse} */
   DescribeCorpQuotas(data?: DescribeCorpQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCorpQuotasResponse>;
-  /** {@link DescribeCustomRuleById 查自定义码规则}({@link DescribeCustomRuleByIdRequest 请求参数}): {@link DescribeCustomRuleByIdResponse 返回参数} */
+  /** 查自定义码规则 {@link DescribeCustomRuleByIdRequest} {@link DescribeCustomRuleByIdResponse} */
   DescribeCustomRuleById(data: DescribeCustomRuleByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomRuleByIdResponse>;
-  /** {@link DescribeCustomRules 查自定义码规则列表}({@link DescribeCustomRulesRequest 请求参数}): {@link DescribeCustomRulesResponse 返回参数} */
+  /** 查自定义码规则列表 {@link DescribeCustomRulesRequest} {@link DescribeCustomRulesResponse} */
   DescribeCustomRules(data?: DescribeCustomRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomRulesResponse>;
-  /** {@link DescribeJobFileUrl 获取异步任务的输出地址}({@link DescribeJobFileUrlRequest 请求参数}): {@link DescribeJobFileUrlResponse 返回参数} */
+  /** 获取异步任务的输出地址 {@link DescribeJobFileUrlRequest} {@link DescribeJobFileUrlResponse} */
   DescribeJobFileUrl(data: DescribeJobFileUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobFileUrlResponse>;
-  /** {@link DescribeMerchantById 查询商户信息}({@link DescribeMerchantByIdRequest 请求参数}): {@link DescribeMerchantByIdResponse 返回参数} */
+  /** 查询商户信息 {@link DescribeMerchantByIdRequest} {@link DescribeMerchantByIdResponse} */
   DescribeMerchantById(data: DescribeMerchantByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMerchantByIdResponse>;
-  /** {@link DescribeMerchants 查询商户列表}({@link DescribeMerchantsRequest 请求参数}): {@link DescribeMerchantsResponse 返回参数} */
+  /** 查询商户列表 {@link DescribeMerchantsRequest} {@link DescribeMerchantsResponse} */
   DescribeMerchants(data?: DescribeMerchantsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMerchantsResponse>;
-  /** {@link DescribeProductById 查询商品信息}({@link DescribeProductByIdRequest 请求参数}): {@link DescribeProductByIdResponse 返回参数} */
+  /** 查询商品信息 {@link DescribeProductByIdRequest} {@link DescribeProductByIdResponse} */
   DescribeProductById(data: DescribeProductByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductByIdResponse>;
-  /** {@link DescribeProducts 查询商品列表}({@link DescribeProductsRequest 请求参数}): {@link DescribeProductsResponse 返回参数} */
+  /** 查询商品列表 {@link DescribeProductsRequest} {@link DescribeProductsResponse} */
   DescribeProducts(data?: DescribeProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductsResponse>;
-  /** {@link DescribeTmpToken 查询临时Token}({@link DescribeTmpTokenRequest 请求参数}): {@link DescribeTmpTokenResponse 返回参数} */
+  /** 查询临时Token {@link DescribeTmpTokenRequest} {@link DescribeTmpTokenResponse} */
   DescribeTmpToken(data?: DescribeTmpTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTmpTokenResponse>;
-  /** {@link DescribeTraceCodeById 查询二维码信息}({@link DescribeTraceCodeByIdRequest 请求参数}): {@link DescribeTraceCodeByIdResponse 返回参数} */
+  /** 查询二维码信息 {@link DescribeTraceCodeByIdRequest} {@link DescribeTraceCodeByIdResponse} */
   DescribeTraceCodeById(data?: DescribeTraceCodeByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceCodeByIdResponse>;
-  /** {@link DescribeTraceCodes 查询二维码列表}({@link DescribeTraceCodesRequest 请求参数}): {@link DescribeTraceCodesResponse 返回参数} */
+  /** 查询二维码列表 {@link DescribeTraceCodesRequest} {@link DescribeTraceCodesResponse} */
   DescribeTraceCodes(data?: DescribeTraceCodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceCodesResponse>;
-  /** {@link DescribeTraceDataList 查询溯源信息}({@link DescribeTraceDataListRequest 请求参数}): {@link DescribeTraceDataListResponse 返回参数} */
+  /** 查询溯源信息 {@link DescribeTraceDataListRequest} {@link DescribeTraceDataListResponse} */
   DescribeTraceDataList(data?: DescribeTraceDataListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceDataListResponse>;
-  /** {@link ModifyCodeBatch 修改批次}({@link ModifyCodeBatchRequest 请求参数}): {@link ModifyCodeBatchResponse 返回参数} */
+  /** 修改批次 {@link ModifyCodeBatchRequest} {@link ModifyCodeBatchResponse} */
   ModifyCodeBatch(data: ModifyCodeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCodeBatchResponse>;
-  /** {@link ModifyCustomRule 修改自定义码规则}({@link ModifyCustomRuleRequest 请求参数}): {@link ModifyCustomRuleResponse 返回参数} */
+  /** 修改自定义码规则 {@link ModifyCustomRuleRequest} {@link ModifyCustomRuleResponse} */
   ModifyCustomRule(data: ModifyCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomRuleResponse>;
-  /** {@link ModifyCustomRuleStatus 更新自定义码规则状态}({@link ModifyCustomRuleStatusRequest 请求参数}): {@link ModifyCustomRuleStatusResponse 返回参数} */
+  /** 更新自定义码规则状态 {@link ModifyCustomRuleStatusRequest} {@link ModifyCustomRuleStatusResponse} */
   ModifyCustomRuleStatus(data: ModifyCustomRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomRuleStatusResponse>;
-  /** {@link ModifyMerchant 编辑商户}({@link ModifyMerchantRequest 请求参数}): {@link ModifyMerchantResponse 返回参数} */
+  /** 编辑商户 {@link ModifyMerchantRequest} {@link ModifyMerchantResponse} */
   ModifyMerchant(data: ModifyMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMerchantResponse>;
-  /** {@link ModifyProduct 编辑商品}({@link ModifyProductRequest 请求参数}): {@link ModifyProductResponse 返回参数} */
+  /** 编辑商品 {@link ModifyProductRequest} {@link ModifyProductResponse} */
   ModifyProduct(data: ModifyProductRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProductResponse>;
-  /** {@link ModifyTraceCode 修改二维码的状态}({@link ModifyTraceCodeRequest 请求参数}): {@link ModifyTraceCodeResponse 返回参数} */
+  /** 修改二维码的状态 {@link ModifyTraceCodeRequest} {@link ModifyTraceCodeResponse} */
   ModifyTraceCode(data: ModifyTraceCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceCodeResponse>;
-  /** {@link ModifyTraceCodeUnlink 解绑溯源码和批次的关系}({@link ModifyTraceCodeUnlinkRequest 请求参数}): {@link ModifyTraceCodeUnlinkResponse 返回参数} */
+  /** 解绑溯源码和批次的关系 {@link ModifyTraceCodeUnlinkRequest} {@link ModifyTraceCodeUnlinkResponse} */
   ModifyTraceCodeUnlink(data: ModifyTraceCodeUnlinkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceCodeUnlinkResponse>;
-  /** {@link ModifyTraceData 修改溯源信息}({@link ModifyTraceDataRequest 请求参数}): {@link ModifyTraceDataResponse 返回参数} */
+  /** 修改溯源信息 {@link ModifyTraceDataRequest} {@link ModifyTraceDataResponse} */
   ModifyTraceData(data?: ModifyTraceDataRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceDataResponse>;
-  /** {@link ModifyTraceDataRanks 修改溯源信息的排序}({@link ModifyTraceDataRanksRequest 请求参数}): {@link ModifyTraceDataRanksResponse 返回参数} */
+  /** 修改溯源信息的排序 {@link ModifyTraceDataRanksRequest} {@link ModifyTraceDataRanksResponse} */
   ModifyTraceDataRanks(data?: ModifyTraceDataRanksRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceDataRanksResponse>;
 }
 

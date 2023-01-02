@@ -2284,7 +2284,7 @@ declare interface BindZoneToPlanRequest {
 }
 
 declare interface BindZoneToPlanResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2296,7 +2296,7 @@ declare interface CheckCertificateRequest {
 }
 
 declare interface CheckCertificateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2314,7 +2314,7 @@ declare interface CreateAliasDomainRequest {
 }
 
 declare interface CreateAliasDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2342,7 +2342,7 @@ declare interface CreateApplicationProxyRequest {
 declare interface CreateApplicationProxyResponse {
   /** 新增的四层代理应用ID。 */
   ProxyId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2370,7 +2370,7 @@ declare interface CreateApplicationProxyRuleRequest {
 declare interface CreateApplicationProxyRuleResponse {
   /** 规则ID */
   RuleId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2378,7 +2378,7 @@ declare interface CreateCredentialRequest {
 }
 
 declare interface CreateCredentialResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2396,7 +2396,7 @@ declare interface CreateCustomErrorPageRequest {
 declare interface CreateCustomErrorPageResponse {
   /** 自定义页面上传后的唯一id。 */
   PageId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2410,7 +2410,7 @@ declare interface CreateIpTableListRequest {
 }
 
 declare interface CreateIpTableListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2424,7 +2424,7 @@ declare interface CreateLogSetRequest {
 declare interface CreateLogSetResponse {
   /** 创建成功的日志集ID。 */
   LogSetId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2454,7 +2454,7 @@ declare interface CreateLogTopicTaskRequest {
 declare interface CreateLogTopicTaskResponse {
   /** 创建成功的主题ID。 */
   TopicId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2476,7 +2476,7 @@ declare interface CreateOriginGroupRequest {
 declare interface CreateOriginGroupResponse {
   /** 源站组ID。 */
   OriginGroupId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2492,7 +2492,7 @@ declare interface CreatePlanForZoneResponse {
   ResourceNames: string[];
   /** 购买的订单号列表。 */
   DealNames: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2512,7 +2512,7 @@ declare interface CreatePrefetchTaskResponse {
   JobId: string;
   /** 失败的任务列表。 */
   FailedList: FailReason[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2532,7 +2532,7 @@ declare interface CreatePurgeTaskResponse {
   JobId: string;
   /** 失败的任务列表及原因。 */
   FailedList: FailReason[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2546,7 +2546,7 @@ declare interface CreateReplayTaskResponse {
   JobId: string;
   /** 失败的任务列表及原因。 */
   FailedList: FailReason[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2566,7 +2566,7 @@ declare interface CreateRuleRequest {
 declare interface CreateRuleResponse {
   /** 规则 ID。 */
   RuleId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2590,7 +2590,7 @@ declare interface CreateSecurityDropPageRequest {
 declare interface CreateSecurityDropPageResponse {
   /** 自定义页面上传后的唯一id。 */
   PageId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2602,7 +2602,7 @@ declare interface CreateSpeedTestingRequest {
 }
 
 declare interface CreateSpeedTestingResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2624,7 +2624,7 @@ declare interface CreateZoneRequest {
 declare interface CreateZoneResponse {
   /** 站点ID。 */
   ZoneId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2636,7 +2636,7 @@ declare interface DeleteAliasDomainRequest {
 }
 
 declare interface DeleteAliasDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2648,7 +2648,7 @@ declare interface DeleteApplicationProxyRequest {
 }
 
 declare interface DeleteApplicationProxyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2662,7 +2662,7 @@ declare interface DeleteApplicationProxyRuleRequest {
 }
 
 declare interface DeleteApplicationProxyRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2674,7 +2674,7 @@ declare interface DeleteLogTopicTaskRequest {
 }
 
 declare interface DeleteLogTopicTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2686,7 +2686,7 @@ declare interface DeleteOriginGroupRequest {
 }
 
 declare interface DeleteOriginGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2698,7 +2698,7 @@ declare interface DeleteRulesRequest {
 }
 
 declare interface DeleteRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2708,7 +2708,7 @@ declare interface DeleteZoneRequest {
 }
 
 declare interface DeleteZoneResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2724,7 +2724,7 @@ declare interface DescribeAddableEntityListResponse {
   TotalCount: number;
   /** 可添加的实体列表。 */
   EntityList: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2744,7 +2744,7 @@ declare interface DescribeAliasDomainsResponse {
   TotalCount: number;
   /** 别称域名详细信息列表。 */
   AliasDomains: AliasDomain[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2762,7 +2762,7 @@ declare interface DescribeApplicationProxiesResponse {
   ApplicationProxies: ApplicationProxy[];
   /** 记录总数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2772,7 +2772,7 @@ declare interface DescribeAvailablePlansRequest {
 declare interface DescribeAvailablePlansResponse {
   /** 当前账户可购买套餐类型及相关信息。 */
   PlanInfo: PlanInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2802,7 +2802,7 @@ declare interface DescribeBotClientIpListResponse {
   Data: SecClientIp[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2830,7 +2830,7 @@ declare interface DescribeBotDataResponse {
   Data: SecEntry[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2860,7 +2860,7 @@ declare interface DescribeBotHitRuleDetailResponse {
   Data: SecHitRuleInfo[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2888,7 +2888,7 @@ declare interface DescribeBotLogResponse {
   Data: BotLog[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2914,7 +2914,7 @@ declare interface DescribeBotManagedRulesResponse {
   BotManagedRuleDetails: BotManagedRuleDetail[];
   /** 总规则数。 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2944,7 +2944,7 @@ declare interface DescribeBotTopDataResponse {
   Data: TopEntry[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2972,7 +2972,7 @@ declare interface DescribeClientRuleListResponse {
   Data: ClientRule[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2986,7 +2986,7 @@ declare interface DescribeContentQuotaResponse {
   PurgeQuota: Quota[] | null;
   /** 预热相关配额。 */
   PrefetchQuota: Quota[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3018,7 +3018,7 @@ declare interface DescribeDDoSAttackDataResponse {
   Data: SecEntry[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3032,7 +3032,7 @@ declare interface DescribeDDoSAttackEventDetailRequest {
 declare interface DescribeDDoSAttackEventDetailResponse {
   /** DDoS攻击事件详情。 */
   Data: DDoSAttackEventDetailData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3062,7 +3062,7 @@ declare interface DescribeDDoSAttackEventResponse {
   Data: DDoSAttackEvent[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3090,7 +3090,7 @@ declare interface DescribeDDoSAttackSourceEventResponse {
   Data: DDoSAttackSourceEvent[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3122,7 +3122,7 @@ declare interface DescribeDDoSAttackTopDataResponse {
   Data: TopEntry[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3148,7 +3148,7 @@ declare interface DescribeDDoSBlockListResponse {
   Data: DDoSBlockData[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3176,7 +3176,7 @@ declare interface DescribeDDoSMajorAttackEventResponse {
   Data: DDoSMajorAttackEvent[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3190,7 +3190,7 @@ declare interface DescribeDDoSPolicyRequest {
 declare interface DescribeDDoSPolicyResponse {
   /** DDoS防护配置。 */
   DDoSRule: DDoSRule;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3208,7 +3208,7 @@ declare interface DescribeDefaultCertificatesResponse {
   TotalCount: number;
   /** 默认证书列表。 */
   DefaultServerCertInfo: DefaultServerCertInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3234,7 +3234,7 @@ declare interface DescribeDistributionL4AccessDataResponse {
   TotalCount: number;
   /** 连接时长分布图。 */
   TopDataRecords: TopDataRecord[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3252,7 +3252,7 @@ declare interface DescribeDnsDataRequest {
 declare interface DescribeDnsDataResponse {
   /** 统计数据。 */
   Data: DnsData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3268,7 +3268,7 @@ declare interface DescribeDnssecResponse {
   DnssecInfo: DnssecInfo | null;
   /** 站点信息更新时间。 */
   ModifiedOn: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3288,7 +3288,7 @@ declare interface DescribeHostsSettingResponse {
   DetailHosts: DetailHost[];
   /** 域名数量。 */
   TotalNumber: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3306,7 +3306,7 @@ declare interface DescribeIdentificationsResponse {
   TotalCount: number;
   /** 站点验证信息列表。 */
   Identifications: Identification[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3324,7 +3324,7 @@ declare interface DescribeLogSetsResponse {
   LogSetList: LogSetInfo[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3338,7 +3338,7 @@ declare interface DescribeLogTopicTaskDetailRequest {
 declare interface DescribeLogTopicTaskDetailResponse {
   /** 推送任务详情。 */
   LogTopicDetailInfo: LogTopicDetailInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3356,7 +3356,7 @@ declare interface DescribeLogTopicTasksResponse {
   TopicList: ClsLogTopicInfo[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3374,7 +3374,7 @@ declare interface DescribeOriginGroupResponse {
   TotalCount: number;
   /** 源站组信息。 */
   OriginGroups: OriginGroup[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3392,7 +3392,7 @@ declare interface DescribeOriginProtectionRequest {
 declare interface DescribeOriginProtectionResponse {
   /** 源站防护信息。 */
   OriginProtectionInfo: OriginProtectionInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3422,7 +3422,7 @@ declare interface DescribeOverviewL7DataResponse {
   TotalCount: number;
   /** 七层监控类时序流量数据列表。 */
   Data: TimingDataRecord[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3444,7 +3444,7 @@ declare interface DescribePrefetchTasksResponse {
   TotalCount: number;
   /** 任务结果列表。 */
   Tasks: Task[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3468,7 +3468,7 @@ declare interface DescribePurgeTasksResponse {
   TotalCount: number;
   /** 任务结果列表。 */
   Tasks: Task[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3482,7 +3482,7 @@ declare interface DescribeRateLimitIntelligenceRuleRequest {
 declare interface DescribeRateLimitIntelligenceRuleResponse {
   /** 速率限制智能规则。 */
   RateLimitIntelligenceRuleDetails: RateLimitIntelligenceRuleDetail[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3498,7 +3498,7 @@ declare interface DescribeRulesResponse {
   ZoneId: string;
   /** 规则列表，按规则执行顺序从先往后排序。 */
   RuleItems: RuleItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3508,7 +3508,7 @@ declare interface DescribeRulesSettingRequest {
 declare interface DescribeRulesSettingResponse {
   /** 规则引擎可应用匹配请求的设置列表及其详细建议配置信息。 */
   Actions: RulesSettingAction[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3532,7 +3532,7 @@ declare interface DescribeSecurityGroupManagedRulesResponse {
   Total: number;
   /** 托管规则信息。 */
   WafGroupInfo: WafGroupInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3544,7 +3544,7 @@ declare interface DescribeSecurityPolicyListRequest {
 declare interface DescribeSecurityPolicyListResponse {
   /** 防护资源列表。 */
   SecurityEntities: SecurityEntity[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3560,7 +3560,7 @@ declare interface DescribeSecurityPolicyRegionsResponse {
   Count: number;
   /** 地域信息。 */
   GeoIps: GeoIp[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3576,7 +3576,7 @@ declare interface DescribeSecurityPolicyRequest {
 declare interface DescribeSecurityPolicyResponse {
   /** 安全配置。 */
   SecurityConfig: SecurityConfig | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3596,7 +3596,7 @@ declare interface DescribeSecurityPortraitRulesResponse {
   PortraitManagedRuleDetails: PortraitManagedRuleDetail[];
   /** 总规则数。 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3616,7 +3616,7 @@ declare interface DescribeSecurityRuleIdResponse {
   WafGroupRules: WafGroupRule[] | null;
   /** 自定义规则、速率限制、Bot规则的规则列表。 */
   SecurityRules: SecurityRule[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3642,7 +3642,7 @@ declare interface DescribeSingleL7AnalysisDataResponse {
   TotalCount: number;
   /** 单值流量数据列表。 */
   Data: SingleDataRecord[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3654,7 +3654,7 @@ declare interface DescribeSpeedTestingDetailsRequest {
 declare interface DescribeSpeedTestingDetailsResponse {
   /** 分地域拨测统计数据。 */
   SpeedTestingDetailData: SpeedTestingDetailData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3666,7 +3666,7 @@ declare interface DescribeSpeedTestingMetricDataRequest {
 declare interface DescribeSpeedTestingMetricDataResponse {
   /** 站点拨测维度数据。 */
   SpeedTestingMetricData: SpeedTestingMetricData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3678,7 +3678,7 @@ declare interface DescribeSpeedTestingQuotaRequest {
 declare interface DescribeSpeedTestingQuotaResponse {
   /** 配额数据。 */
   SpeedTestingQuota: SpeedTestingQuota;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3704,7 +3704,7 @@ declare interface DescribeTimingL4AccessDataResponse {
   TotalCount: number;
   /** 四层连接数列表。 */
   TimingDataRecords: TimingDataRecord[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3732,7 +3732,7 @@ declare interface DescribeTimingL4DataResponse {
   TotalCount: number;
   /** 四层时序流量数据列表。 */
   Data: TimingDataRecord[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3758,7 +3758,7 @@ declare interface DescribeTimingL7AnalysisDataResponse {
   TotalCount: number;
   /** 时序流量数据列表。 */
   Data: TimingDataRecord[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3784,7 +3784,7 @@ declare interface DescribeTimingL7CacheDataResponse {
   TotalCount: number;
   /** 七层缓存分析时序类流量数据列表。 */
   Data: TimingDataRecord[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3812,7 +3812,7 @@ declare interface DescribeTopL7AnalysisDataResponse {
   TotalCount: number;
   /** 七层流量前topN数据列表。 */
   Data: TopDataRecord[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3840,7 +3840,7 @@ declare interface DescribeTopL7CacheDataResponse {
   TotalCount: number;
   /** 七层缓存TopN流量数据列表。 */
   Data: TopDataRecord[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3868,7 +3868,7 @@ declare interface DescribeWebManagedRulesDataResponse {
   Data: SecEntry[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3898,7 +3898,7 @@ declare interface DescribeWebManagedRulesHitRuleDetailResponse {
   Data: SecHitRuleInfo[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3926,7 +3926,7 @@ declare interface DescribeWebManagedRulesLogResponse {
   Data: WebLogs[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3950,7 +3950,7 @@ declare interface DescribeWebProtectionAttackEventsResponse {
   Data: CCInterceptEvent[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3980,7 +3980,7 @@ declare interface DescribeWebProtectionClientIpListResponse {
   Data: SecClientIp[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4008,7 +4008,7 @@ declare interface DescribeWebProtectionDataResponse {
   Data: SecEntry[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4040,7 +4040,7 @@ declare interface DescribeWebProtectionHitRuleDetailResponse {
   Data: SecHitRuleInfo[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4070,7 +4070,7 @@ declare interface DescribeWebProtectionTopDataResponse {
   Data: TopEntry[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4084,7 +4084,7 @@ declare interface DescribeZoneDDoSPolicyResponse {
   ShieldAreas: ShieldArea[];
   /** 所有开启代理的子域名信息。 */
   DDoSHosts: DDoSHost[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4096,7 +4096,7 @@ declare interface DescribeZoneSettingRequest {
 declare interface DescribeZoneSettingResponse {
   /** 站点配置。 */
   ZoneSetting: ZoneSetting | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4118,7 +4118,7 @@ declare interface DescribeZonesResponse {
   TotalCount: number;
   /** 站点详细信息列表。 */
   Zones: Zone[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4142,7 +4142,7 @@ declare interface DownloadL4LogsResponse {
   Data: L4OfflineLog[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4166,7 +4166,7 @@ declare interface DownloadL7LogsResponse {
   Data: L7OfflineLog[] | null;
   /** 查询结果的总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4180,7 +4180,7 @@ declare interface IdentifyZoneResponse {
   Ascription: AscriptionInfo;
   /** 站点归属权校验：文件校验信息。 */
   FileAscription: FileAscriptionInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4198,7 +4198,7 @@ declare interface ModifyAlarmConfigRequest {
 }
 
 declare interface ModifyAlarmConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4214,7 +4214,7 @@ declare interface ModifyAlarmDefaultThresholdRequest {
 }
 
 declare interface ModifyAlarmDefaultThresholdResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4232,7 +4232,7 @@ declare interface ModifyAliasDomainRequest {
 }
 
 declare interface ModifyAliasDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4246,7 +4246,7 @@ declare interface ModifyAliasDomainStatusRequest {
 }
 
 declare interface ModifyAliasDomainStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4266,7 +4266,7 @@ declare interface ModifyApplicationProxyRequest {
 }
 
 declare interface ModifyApplicationProxyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4294,7 +4294,7 @@ declare interface ModifyApplicationProxyRuleRequest {
 }
 
 declare interface ModifyApplicationProxyRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4310,7 +4310,7 @@ declare interface ModifyApplicationProxyRuleStatusRequest {
 }
 
 declare interface ModifyApplicationProxyRuleStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4324,7 +4324,7 @@ declare interface ModifyApplicationProxyStatusRequest {
 }
 
 declare interface ModifyApplicationProxyStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4342,7 +4342,7 @@ declare interface ModifyDDoSPolicyHostRequest {
 }
 
 declare interface ModifyDDoSPolicyHostResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4356,7 +4356,7 @@ declare interface ModifyDDoSPolicyRequest {
 }
 
 declare interface ModifyDDoSPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4370,7 +4370,7 @@ declare interface ModifyDefaultCertificateRequest {
 }
 
 declare interface ModifyDefaultCertificateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4382,7 +4382,7 @@ declare interface ModifyDnssecRequest {
 }
 
 declare interface ModifyDnssecResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4398,7 +4398,7 @@ declare interface ModifyHostsCertificateRequest {
 }
 
 declare interface ModifyHostsCertificateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4428,7 +4428,7 @@ declare interface ModifyLogTopicTaskRequest {
 }
 
 declare interface ModifyLogTopicTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4450,7 +4450,7 @@ declare interface ModifyOriginGroupRequest {
 }
 
 declare interface ModifyOriginGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4462,7 +4462,7 @@ declare interface ModifyRulePriorityRequest {
 }
 
 declare interface ModifyRulePriorityResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4484,7 +4484,7 @@ declare interface ModifyRuleRequest {
 declare interface ModifyRuleResponse {
   /** 规则 ID。 */
   RuleId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4500,7 +4500,7 @@ declare interface ModifySecurityPolicyRequest {
 }
 
 declare interface ModifySecurityPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4526,7 +4526,7 @@ declare interface ModifySecurityWafGroupPolicyRequest {
 }
 
 declare interface ModifySecurityWafGroupPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4538,7 +4538,7 @@ declare interface ModifyZoneCnameSpeedUpRequest {
 }
 
 declare interface ModifyZoneCnameSpeedUpResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4554,7 +4554,7 @@ declare interface ModifyZoneRequest {
 }
 
 declare interface ModifyZoneResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4600,7 +4600,7 @@ declare interface ModifyZoneSettingRequest {
 }
 
 declare interface ModifyZoneSettingResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4612,7 +4612,7 @@ declare interface ModifyZoneStatusRequest {
 }
 
 declare interface ModifyZoneStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4624,7 +4624,7 @@ declare interface ReclaimAliasDomainRequest {
 }
 
 declare interface ReclaimAliasDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4634,7 +4634,7 @@ declare interface ReclaimZoneRequest {
 }
 
 declare interface ReclaimZoneResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4646,7 +4646,7 @@ declare interface SwitchLogTopicTaskRequest {
 }
 
 declare interface SwitchLogTopicTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4656,7 +4656,7 @@ declare interface UpdateOriginProtectionIPWhitelistRequest {
 }
 
 declare interface UpdateOriginProtectionIPWhitelistResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6587,7 +6587,7 @@ declare namespace V20220106 {
   }
 
   interface CheckCertificateResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6621,7 +6621,7 @@ declare namespace V20220106 {
   interface CreateApplicationProxyResponse {
     /** 新增的四层代理应用ID。 */
     ProxyId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6647,7 +6647,7 @@ declare namespace V20220106 {
   interface CreateApplicationProxyRuleResponse {
     /** 规则ID */
     RuleId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6663,7 +6663,7 @@ declare namespace V20220106 {
   interface CreateApplicationProxyRulesResponse {
     /** 新增的规则ID数组 */
     RuleId: string[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6681,7 +6681,7 @@ declare namespace V20220106 {
   interface CreateCustomErrorPageResponse {
     /** 自定义页面上传后的唯一id */
     PageId: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6731,7 +6731,7 @@ declare namespace V20220106 {
     ZoneName: string;
     /** CNAME 地址 */
     Cname: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6751,7 +6751,7 @@ declare namespace V20220106 {
   interface CreateLoadBalancingResponse {
     /** 负载均衡ID */
     LoadBalancingId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6771,7 +6771,7 @@ declare namespace V20220106 {
   interface CreateOriginGroupResponse {
     /** 新增的源站组ID */
     OriginId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6787,7 +6787,7 @@ declare namespace V20220106 {
     ResourceNames: string[];
     /** 购买的订单号列表。 */
     DealNames: string[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6807,7 +6807,7 @@ declare namespace V20220106 {
     JobId: string;
     /** 失败的任务列表 */
     FailedList: FailReason[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6827,7 +6827,7 @@ declare namespace V20220106 {
     JobId: string;
     /** 失败的任务列表及原因 */
     FailedList: FailReason[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6845,7 +6845,7 @@ declare namespace V20220106 {
   interface CreateRuleResponse {
     /** 规则 ID。 */
     RuleId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6877,7 +6877,7 @@ declare namespace V20220106 {
     CreatedOn: string;
     /** 站点更新时间 */
     ModifiedOn: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6891,7 +6891,7 @@ declare namespace V20220106 {
   interface DeleteApplicationProxyResponse {
     /** 代理ID */
     ProxyId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6907,7 +6907,7 @@ declare namespace V20220106 {
   interface DeleteApplicationProxyRuleResponse {
     /** 规则ID */
     RuleId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6921,7 +6921,7 @@ declare namespace V20220106 {
   interface DeleteDnsRecordsResponse {
     /** 记录 ID */
     Ids: string[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6935,7 +6935,7 @@ declare namespace V20220106 {
   interface DeleteLoadBalancingResponse {
     /** 负载均衡ID */
     LoadBalancingId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6949,7 +6949,7 @@ declare namespace V20220106 {
   interface DeleteOriginGroupResponse {
     /** 源站组ID */
     OriginId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6961,7 +6961,7 @@ declare namespace V20220106 {
   }
 
   interface DeleteRulesResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -6973,7 +6973,7 @@ declare namespace V20220106 {
   interface DeleteZoneResponse {
     /** 站点 ID */
     Id: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7021,7 +7021,7 @@ declare namespace V20220106 {
     Ipv6: Ipv6Access;
     /** 加速区域，取值有：mainland：中国大陆境内;overseas：全球（不含中国大陆）。 */
     Area: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7047,7 +7047,7 @@ declare namespace V20220106 {
     IpCount: number;
     /** 当ProxyId为空时，表示套餐内PlatType为domain的CNAME的实例数量。 */
     DomainCount: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7057,7 +7057,7 @@ declare namespace V20220106 {
   interface DescribeAvailablePlansResponse {
     /** 当前账户可购买套餐类型及相关信息。 */
     PlanInfoList: PlanInfo[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7087,7 +7087,7 @@ declare namespace V20220106 {
     Status: number;
     /** 请求响应信息。 */
     Msg: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7111,7 +7111,7 @@ declare namespace V20220106 {
     Rules: BotManagedRuleDetail[];
     /** 总规则数 */
     Total: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7125,7 +7125,7 @@ declare namespace V20220106 {
   interface DescribeCnameStatusResponse {
     /** 状态列表 */
     Status: CnameStatus[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7139,7 +7139,7 @@ declare namespace V20220106 {
   interface DescribeDDoSPolicyResponse {
     /** DDoS防护配置 */
     DdosRule: DdosRule;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7175,7 +7175,7 @@ declare namespace V20220106 {
     Msg: string;
     /** 查询时间粒度，取值有：min ：1分钟 ；5min ：5分钟 ；hour ：1小时 ；day ：1天 。 */
     Interval: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7193,7 +7193,7 @@ declare namespace V20220106 {
     Status: number;
     /** 请求响应信息。 */
     Msg: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7225,7 +7225,7 @@ declare namespace V20220106 {
     Status: number;
     /** 请求响应信息。 */
     Msg: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7255,7 +7255,7 @@ declare namespace V20220106 {
     Status: number;
     /** 请求响应信息。 */
     Msg: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7289,7 +7289,7 @@ declare namespace V20220106 {
     Status: number;
     /** 请求响应消息。 */
     Msg: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7319,7 +7319,7 @@ declare namespace V20220106 {
     Status: number;
     /** 请求响应消息。 */
     Msg: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7333,7 +7333,7 @@ declare namespace V20220106 {
     TotalCount: number;
     /** 默认证书列表 */
     CertInfo: DefaultServerCertInfo[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7353,7 +7353,7 @@ declare namespace V20220106 {
     Data: DataItem[] | null;
     /** 时间粒度 */
     Interval: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7379,7 +7379,7 @@ declare namespace V20220106 {
     TotalCount: number;
     /** DNS 记录列表 */
     Records: DnsRecord[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7399,7 +7399,7 @@ declare namespace V20220106 {
     Dnssec: DnssecInfo | null;
     /** 修改时间 */
     ModifiedOn: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7421,7 +7421,7 @@ declare namespace V20220106 {
     TotalCount: number;
     /** 域名证书配置列表 */
     Hosts: HostCertSetting[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7441,7 +7441,7 @@ declare namespace V20220106 {
     Hosts: DetailHost[];
     /** 域名数量 */
     TotalNumber: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7463,7 +7463,7 @@ declare namespace V20220106 {
     RecordValue: string;
     /** 域名当前的 NS 记录 */
     OriginalNameServers: string[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7495,7 +7495,7 @@ declare namespace V20220106 {
     Status: string;
     /** 调度域名 */
     Cname: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7517,7 +7517,7 @@ declare namespace V20220106 {
     TotalCount: number;
     /** 负载均衡信息 */
     Data: LoadBalancing[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7551,7 +7551,7 @@ declare namespace V20220106 {
     LoadBalancingUsed: boolean | null;
     /** 使用当前源站组的负载均衡的类型：none：未被使用dns_only：被仅DNS类型负载均衡使用proxied：被代理加速类型负载均衡使用both：同时被仅DNS和代理加速类型负载均衡使用 */
     LoadBalancingUsedType: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7571,7 +7571,7 @@ declare namespace V20220106 {
     Data: OriginGroup[];
     /** 记录总数 */
     TotalCount: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7603,7 +7603,7 @@ declare namespace V20220106 {
     Interval: string;
     /** 七层监控类时序流量数据列表。 */
     Data: TimingDataRecord[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7633,7 +7633,7 @@ declare namespace V20220106 {
     TotalCount: number;
     /** 任务结果列表 */
     Tasks: Task[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7665,7 +7665,7 @@ declare namespace V20220106 {
     TotalCount: number;
     /** 任务结果列表 */
     Tasks: Task[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7681,7 +7681,7 @@ declare namespace V20220106 {
     ZoneId: string;
     /** 规则列表，按规则执行顺序从先往后排序。 */
     RuleList: RuleSettingDetail[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7691,7 +7691,7 @@ declare namespace V20220106 {
   interface DescribeRulesSettingResponse {
     /** 规则引擎可应用匹配请求的设置列表及其详细建议配置信息。 */
     Actions: RulesSettingAction[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7703,7 +7703,7 @@ declare namespace V20220106 {
   interface DescribeSecurityPolicyListResponse {
     /** 防护资源列表 */
     Entities: SecurityEntity[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7719,7 +7719,7 @@ declare namespace V20220106 {
     Rules: ManagedRule[];
     /** 返回总数 */
     Count: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7741,7 +7741,7 @@ declare namespace V20220106 {
     Rules: ManagedRule[];
     /** 总规则数 */
     Total: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7753,7 +7753,7 @@ declare namespace V20220106 {
     Count: number;
     /** 地域信息 */
     GeoIp: GeoIp[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7773,7 +7773,7 @@ declare namespace V20220106 {
     Entity: string;
     /** 安全配置 */
     Config: SecurityConfig | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7791,7 +7791,7 @@ declare namespace V20220106 {
     Rules: PortraitManagedRuleDetail[];
     /** 总规则数 */
     Total: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7827,7 +7827,7 @@ declare namespace V20220106 {
     Interval: string;
     /** 详细数据 */
     Data: TimingDataRecord[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7855,7 +7855,7 @@ declare namespace V20220106 {
     Type: string;
     /** 时间间隔 */
     Interval: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7883,7 +7883,7 @@ declare namespace V20220106 {
     Type: string;
     /** 时间间隔 */
     Interval: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7913,7 +7913,7 @@ declare namespace V20220106 {
     Type: string;
     /** 查询指标 */
     MetricName: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7943,7 +7943,7 @@ declare namespace V20220106 {
     Type: string;
     /** 查询指标 */
     MetricName: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -7973,7 +7973,7 @@ declare namespace V20220106 {
     Status: number;
     /** 返回数据 */
     Msg: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8009,7 +8009,7 @@ declare namespace V20220106 {
     Msg: string;
     /** 查询时间粒度，取值有：min ：1分钟 ；5min ：5分钟 ；hour ：1小时 ；day ：1天 。 */
     Interval: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8039,7 +8039,7 @@ declare namespace V20220106 {
     Status: number;
     /** 请求响应信息。 */
     Msg: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8079,7 +8079,7 @@ declare namespace V20220106 {
     Status: number;
     /** 请求响应消息。 */
     Msg: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8105,7 +8105,7 @@ declare namespace V20220106 {
     Status: number;
     /** 返回消息 */
     Msg: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8141,7 +8141,7 @@ declare namespace V20220106 {
     Msg: string;
     /** 查询时间粒度，取值有：min ：1分钟 ；5min ：5分钟 ；hour ：1小时 ；day ：1天 。 */
     Interval: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8173,7 +8173,7 @@ declare namespace V20220106 {
     Status: number;
     /** 请求响应信息。 */
     Msg: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8189,7 +8189,7 @@ declare namespace V20220106 {
     ShieldAreas: ShieldArea[];
     /** 所有子域名信息，包含安全加速/内容加速 */
     Domains: DDoSApplication[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8231,7 +8231,7 @@ declare namespace V20220106 {
     VanityNameServers: VanityNameServers | null;
     /** 用户自定义 NS IP 信息 */
     VanityNameServersIps: VanityNameServersIps[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8279,7 +8279,7 @@ declare namespace V20220106 {
     Ipv6: Ipv6Access | null;
     /** 站点加速区域信息，取值有：mainland：中国境内加速；overseas：中国境外加速。 */
     Area: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8297,7 +8297,7 @@ declare namespace V20220106 {
     TotalCount: number;
     /** 站点详细信息列表。 */
     Zones: Zone[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8327,7 +8327,7 @@ declare namespace V20220106 {
     Pages: number | null;
     /** 总条数 */
     TotalSize: number | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8345,7 +8345,7 @@ declare namespace V20220106 {
     RecordType: string;
     /** 记录值 */
     RecordValue: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8359,7 +8359,7 @@ declare namespace V20220106 {
   interface ImportDnsRecordsResponse {
     /** 记录 ID */
     Ids: string[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8385,7 +8385,7 @@ declare namespace V20220106 {
   interface ModifyApplicationProxyResponse {
     /** 代理ID。 */
     ProxyId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8413,7 +8413,7 @@ declare namespace V20220106 {
   interface ModifyApplicationProxyRuleResponse {
     /** 规则ID */
     RuleId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8431,7 +8431,7 @@ declare namespace V20220106 {
   interface ModifyApplicationProxyRuleStatusResponse {
     /** 规则ID */
     RuleId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8447,7 +8447,7 @@ declare namespace V20220106 {
   interface ModifyApplicationProxyStatusResponse {
     /** 代理ID */
     ProxyId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8467,7 +8467,7 @@ declare namespace V20220106 {
   interface ModifyDDoSPolicyHostResponse {
     /** 修改成功的host */
     Host: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8483,7 +8483,7 @@ declare namespace V20220106 {
   interface ModifyDDoSPolicyResponse {
     /** 策略id。 */
     PolicyId: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8497,7 +8497,7 @@ declare namespace V20220106 {
   }
 
   interface ModifyDefaultCertificateResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8549,7 +8549,7 @@ declare namespace V20220106 {
     ZoneId: string;
     /** 站点名称 */
     ZoneName: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8571,7 +8571,7 @@ declare namespace V20220106 {
     Dnssec: DnssecInfo | null;
     /** 修改时间 */
     ModifiedOn: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8585,7 +8585,7 @@ declare namespace V20220106 {
   }
 
   interface ModifyHostsCertificateResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8605,7 +8605,7 @@ declare namespace V20220106 {
   interface ModifyLoadBalancingResponse {
     /** 负载均衡ID */
     LoadBalancingId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8621,7 +8621,7 @@ declare namespace V20220106 {
   interface ModifyLoadBalancingStatusResponse {
     /** 负载均衡ID */
     LoadBalancingId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8643,7 +8643,7 @@ declare namespace V20220106 {
   interface ModifyOriginGroupResponse {
     /** 源站组ID */
     OriginId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8655,7 +8655,7 @@ declare namespace V20220106 {
   }
 
   interface ModifyRulePriorityResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8675,7 +8675,7 @@ declare namespace V20220106 {
   interface ModifyRuleResponse {
     /** 规则 ID。 */
     RuleId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8689,7 +8689,7 @@ declare namespace V20220106 {
   }
 
   interface ModifySecurityPolicyResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8709,7 +8709,7 @@ declare namespace V20220106 {
     Status: string;
     /** 更新时间 */
     ModifiedOn: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8741,7 +8741,7 @@ declare namespace V20220106 {
     ModifiedOn: string;
     /** cname 接入状态- finished 站点验证完成- pending 站点验证中 */
     CnameStatus: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8785,7 +8785,7 @@ declare namespace V20220106 {
   interface ModifyZoneSettingResponse {
     /** 站点ID。 */
     ZoneId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8805,7 +8805,7 @@ declare namespace V20220106 {
     Paused: boolean;
     /** 更新时间 */
     ModifiedOn: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8817,7 +8817,7 @@ declare namespace V20220106 {
   interface ReclaimZoneResponse {
     /** 站点名称 */
     Name: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -8831,7 +8831,7 @@ declare namespace V20220106 {
     Status: string;
     /** 扫描后添加的记录数 */
     RecordsAdded: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -8839,437 +8839,437 @@ declare namespace V20220106 {
 /** {@link Teo 边缘安全加速平台} */
 declare interface Teo {
   (): Versions;
-  /** {@link BindZoneToPlan 为站点绑定套餐}({@link BindZoneToPlanRequest 请求参数}): {@link BindZoneToPlanResponse 返回参数} */
+  /** 为站点绑定套餐 {@link BindZoneToPlanRequest} {@link BindZoneToPlanResponse} */
   BindZoneToPlan(data: BindZoneToPlanRequest, config?: AxiosRequestConfig): AxiosPromise<BindZoneToPlanResponse>;
-  /** {@link CheckCertificate 校验证书}({@link CheckCertificateRequest 请求参数}): {@link CheckCertificateResponse 返回参数} */
+  /** 校验证书 {@link CheckCertificateRequest} {@link CheckCertificateResponse} */
   CheckCertificate(data: CheckCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCertificateResponse>;
-  /** {@link CreateAliasDomain 创建别称域名}({@link CreateAliasDomainRequest 请求参数}): {@link CreateAliasDomainResponse 返回参数} */
+  /** 创建别称域名 {@link CreateAliasDomainRequest} {@link CreateAliasDomainResponse} */
   CreateAliasDomain(data: CreateAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAliasDomainResponse>;
-  /** {@link CreateApplicationProxy 创建应用代理}({@link CreateApplicationProxyRequest 请求参数}): {@link CreateApplicationProxyResponse 返回参数} */
+  /** 创建应用代理 {@link CreateApplicationProxyRequest} {@link CreateApplicationProxyResponse} */
   CreateApplicationProxy(data: CreateApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationProxyResponse>;
-  /** {@link CreateApplicationProxyRule 创建应用代理规则}({@link CreateApplicationProxyRuleRequest 请求参数}): {@link CreateApplicationProxyRuleResponse 返回参数} */
+  /** 创建应用代理规则 {@link CreateApplicationProxyRuleRequest} {@link CreateApplicationProxyRuleResponse} */
   CreateApplicationProxyRule(data: CreateApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationProxyRuleResponse>;
-  /** {@link CreateCredential 创建凭证}({@link CreateCredentialRequest 请求参数}): {@link CreateCredentialResponse 返回参数} */
+  /** 创建凭证 {@link CreateCredentialRequest} {@link CreateCredentialResponse} */
   CreateCredential(data?: CreateCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCredentialResponse>;
-  /** {@link CreateCustomErrorPage 创建自定义页}({@link CreateCustomErrorPageRequest 请求参数}): {@link CreateCustomErrorPageResponse 返回参数} */
+  /** 创建自定义页 {@link CreateCustomErrorPageRequest} {@link CreateCustomErrorPageResponse} */
   CreateCustomErrorPage(data: CreateCustomErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomErrorPageResponse>;
-  /** {@link CreateIpTableList 创建IP黑白名单列表}({@link CreateIpTableListRequest 请求参数}): {@link CreateIpTableListResponse 返回参数} */
+  /** 创建IP黑白名单列表 {@link CreateIpTableListRequest} {@link CreateIpTableListResponse} */
   CreateIpTableList(data: CreateIpTableListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIpTableListResponse>;
-  /** {@link CreateLogSet 创建日志集}({@link CreateLogSetRequest 请求参数}): {@link CreateLogSetResponse 返回参数} */
+  /** 创建日志集 {@link CreateLogSetRequest} {@link CreateLogSetResponse} */
   CreateLogSet(data: CreateLogSetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogSetResponse>;
-  /** {@link CreateLogTopicTask 创建推送任务}({@link CreateLogTopicTaskRequest 请求参数}): {@link CreateLogTopicTaskResponse 返回参数} */
+  /** 创建推送任务 {@link CreateLogTopicTaskRequest} {@link CreateLogTopicTaskResponse} */
   CreateLogTopicTask(data: CreateLogTopicTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogTopicTaskResponse>;
-  /** {@link CreateOriginGroup 创建源站组}({@link CreateOriginGroupRequest 请求参数}): {@link CreateOriginGroupResponse 返回参数} */
+  /** 创建源站组 {@link CreateOriginGroupRequest} {@link CreateOriginGroupResponse} */
   CreateOriginGroup(data: CreateOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOriginGroupResponse>;
-  /** {@link CreatePlanForZone 为未购买套餐的站点购买套餐}({@link CreatePlanForZoneRequest 请求参数}): {@link CreatePlanForZoneResponse 返回参数} */
+  /** 为未购买套餐的站点购买套餐 {@link CreatePlanForZoneRequest} {@link CreatePlanForZoneResponse} */
   CreatePlanForZone(data: CreatePlanForZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePlanForZoneResponse>;
-  /** {@link CreatePrefetchTask 创建预热任务}({@link CreatePrefetchTaskRequest 请求参数}): {@link CreatePrefetchTaskResponse 返回参数} */
+  /** 创建预热任务 {@link CreatePrefetchTaskRequest} {@link CreatePrefetchTaskResponse} */
   CreatePrefetchTask(data: CreatePrefetchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrefetchTaskResponse>;
-  /** {@link CreatePurgeTask 创建清除缓存任务}({@link CreatePurgeTaskRequest 请求参数}): {@link CreatePurgeTaskResponse 返回参数} */
+  /** 创建清除缓存任务 {@link CreatePurgeTaskRequest} {@link CreatePurgeTaskResponse} */
   CreatePurgeTask(data: CreatePurgeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePurgeTaskResponse>;
-  /** {@link CreateReplayTask 创建重放任务}({@link CreateReplayTaskRequest 请求参数}): {@link CreateReplayTaskResponse 返回参数} */
+  /** 创建重放任务 {@link CreateReplayTaskRequest} {@link CreateReplayTaskResponse} */
   CreateReplayTask(data: CreateReplayTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReplayTaskResponse>;
-  /** {@link CreateRule 创建规则引擎规则}({@link CreateRuleRequest 请求参数}): {@link CreateRuleResponse 返回参数} */
+  /** 创建规则引擎规则 {@link CreateRuleRequest} {@link CreateRuleResponse} */
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
-  /** {@link CreateSecurityDropPage 创建自定义拦截页面}({@link CreateSecurityDropPageRequest 请求参数}): {@link CreateSecurityDropPageResponse 返回参数} */
+  /** 创建自定义拦截页面 {@link CreateSecurityDropPageRequest} {@link CreateSecurityDropPageResponse} */
   CreateSecurityDropPage(data: CreateSecurityDropPageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityDropPageResponse>;
-  /** {@link CreateSpeedTesting 创建站点拨测任务}({@link CreateSpeedTestingRequest 请求参数}): {@link CreateSpeedTestingResponse 返回参数} */
+  /** 创建站点拨测任务 {@link CreateSpeedTestingRequest} {@link CreateSpeedTestingResponse} */
   CreateSpeedTesting(data: CreateSpeedTestingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSpeedTestingResponse>;
-  /** {@link CreateZone 创建站点}({@link CreateZoneRequest 请求参数}): {@link CreateZoneResponse 返回参数} */
+  /** 创建站点 {@link CreateZoneRequest} {@link CreateZoneResponse} */
   CreateZone(data: CreateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreateZoneResponse>;
-  /** {@link DeleteAliasDomain 删除别称域名}({@link DeleteAliasDomainRequest 请求参数}): {@link DeleteAliasDomainResponse 返回参数} */
+  /** 删除别称域名 {@link DeleteAliasDomainRequest} {@link DeleteAliasDomainResponse} */
   DeleteAliasDomain(data: DeleteAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAliasDomainResponse>;
-  /** {@link DeleteApplicationProxy 删除应用代理}({@link DeleteApplicationProxyRequest 请求参数}): {@link DeleteApplicationProxyResponse 返回参数} */
+  /** 删除应用代理 {@link DeleteApplicationProxyRequest} {@link DeleteApplicationProxyResponse} */
   DeleteApplicationProxy(data: DeleteApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyResponse>;
-  /** {@link DeleteApplicationProxyRule 删除应用代理规则}({@link DeleteApplicationProxyRuleRequest 请求参数}): {@link DeleteApplicationProxyRuleResponse 返回参数} */
+  /** 删除应用代理规则 {@link DeleteApplicationProxyRuleRequest} {@link DeleteApplicationProxyRuleResponse} */
   DeleteApplicationProxyRule(data: DeleteApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyRuleResponse>;
-  /** {@link DeleteLogTopicTask 删除推送任务}({@link DeleteLogTopicTaskRequest 请求参数}): {@link DeleteLogTopicTaskResponse 返回参数} */
+  /** 删除推送任务 {@link DeleteLogTopicTaskRequest} {@link DeleteLogTopicTaskResponse} */
   DeleteLogTopicTask(data: DeleteLogTopicTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogTopicTaskResponse>;
-  /** {@link DeleteOriginGroup 删除源站组}({@link DeleteOriginGroupRequest 请求参数}): {@link DeleteOriginGroupResponse 返回参数} */
+  /** 删除源站组 {@link DeleteOriginGroupRequest} {@link DeleteOriginGroupResponse} */
   DeleteOriginGroup(data: DeleteOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOriginGroupResponse>;
-  /** {@link DeleteRules 批量删除规则引擎规则}({@link DeleteRulesRequest 请求参数}): {@link DeleteRulesResponse 返回参数} */
+  /** 批量删除规则引擎规则 {@link DeleteRulesRequest} {@link DeleteRulesResponse} */
   DeleteRules(data: DeleteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRulesResponse>;
-  /** {@link DeleteZone 删除站点}({@link DeleteZoneRequest 请求参数}): {@link DeleteZoneResponse 返回参数} */
+  /** 删除站点 {@link DeleteZoneRequest} {@link DeleteZoneResponse} */
   DeleteZone(data: DeleteZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteZoneResponse>;
-  /** {@link DescribeAddableEntityList 查询剩余可添加的日志推送实体列表}({@link DescribeAddableEntityListRequest 请求参数}): {@link DescribeAddableEntityListResponse 返回参数} */
+  /** 查询剩余可添加的日志推送实体列表 {@link DescribeAddableEntityListRequest} {@link DescribeAddableEntityListResponse} */
   DescribeAddableEntityList(data: DescribeAddableEntityListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddableEntityListResponse>;
-  /** {@link DescribeAliasDomains 查询别称域名信息列表}({@link DescribeAliasDomainsRequest 请求参数}): {@link DescribeAliasDomainsResponse 返回参数} */
+  /** 查询别称域名信息列表 {@link DescribeAliasDomainsRequest} {@link DescribeAliasDomainsResponse} */
   DescribeAliasDomains(data: DescribeAliasDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAliasDomainsResponse>;
-  /** {@link DescribeApplicationProxies 查询应用代理列表}({@link DescribeApplicationProxiesRequest 请求参数}): {@link DescribeApplicationProxiesResponse 返回参数} */
+  /** 查询应用代理列表 {@link DescribeApplicationProxiesRequest} {@link DescribeApplicationProxiesResponse} */
   DescribeApplicationProxies(data?: DescribeApplicationProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationProxiesResponse>;
-  /** {@link DescribeAvailablePlans 查询当前账户可购买套餐信息列表}({@link DescribeAvailablePlansRequest 请求参数}): {@link DescribeAvailablePlansResponse 返回参数} */
+  /** 查询当前账户可购买套餐信息列表 {@link DescribeAvailablePlansRequest} {@link DescribeAvailablePlansResponse} */
   DescribeAvailablePlans(data?: DescribeAvailablePlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailablePlansResponse>;
-  /** {@link DescribeBotClientIpList 查询Bot攻击客户端Ip信息}({@link DescribeBotClientIpListRequest 请求参数}): {@link DescribeBotClientIpListResponse 返回参数} */
+  /** 查询Bot攻击客户端Ip信息 {@link DescribeBotClientIpListRequest} {@link DescribeBotClientIpListResponse} */
   DescribeBotClientIpList(data: DescribeBotClientIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotClientIpListResponse>;
-  /** {@link DescribeBotData 查询Bot攻击时序数据}({@link DescribeBotDataRequest 请求参数}): {@link DescribeBotDataResponse 返回参数} */
+  /** 查询Bot攻击时序数据 {@link DescribeBotDataRequest} {@link DescribeBotDataResponse} */
   DescribeBotData(data: DescribeBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotDataResponse>;
-  /** {@link DescribeBotHitRuleDetail 查询Bot攻击命中规则详情}({@link DescribeBotHitRuleDetailRequest 请求参数}): {@link DescribeBotHitRuleDetailResponse 返回参数} */
+  /** 查询Bot攻击命中规则详情 {@link DescribeBotHitRuleDetailRequest} {@link DescribeBotHitRuleDetailResponse} */
   DescribeBotHitRuleDetail(data: DescribeBotHitRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotHitRuleDetailResponse>;
-  /** {@link DescribeBotLog 查询Bot攻击日志}({@link DescribeBotLogRequest 请求参数}): {@link DescribeBotLogResponse 返回参数} */
+  /** 查询Bot攻击日志 {@link DescribeBotLogRequest} {@link DescribeBotLogResponse} */
   DescribeBotLog(data: DescribeBotLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotLogResponse>;
-  /** {@link DescribeBotManagedRules 查询Bot托管规则}({@link DescribeBotManagedRulesRequest 请求参数}): {@link DescribeBotManagedRulesResponse 返回参数} */
+  /** 查询Bot托管规则 {@link DescribeBotManagedRulesRequest} {@link DescribeBotManagedRulesResponse} */
   DescribeBotManagedRules(data: DescribeBotManagedRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotManagedRulesResponse>;
-  /** {@link DescribeBotTopData 查询Bot攻击Top数据}({@link DescribeBotTopDataRequest 请求参数}): {@link DescribeBotTopDataResponse 返回参数} */
+  /** 查询Bot攻击Top数据 {@link DescribeBotTopDataRequest} {@link DescribeBotTopDataResponse} */
   DescribeBotTopData(data: DescribeBotTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotTopDataResponse>;
-  /** {@link DescribeClientRuleList 查询封禁客户端信息列表}({@link DescribeClientRuleListRequest 请求参数}): {@link DescribeClientRuleListResponse 返回参数} */
+  /** 查询封禁客户端信息列表 {@link DescribeClientRuleListRequest} {@link DescribeClientRuleListResponse} */
   DescribeClientRuleList(data: DescribeClientRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientRuleListResponse>;
-  /** {@link DescribeContentQuota 查询内容管理接口配额}({@link DescribeContentQuotaRequest 请求参数}): {@link DescribeContentQuotaResponse 返回参数} */
+  /** 查询内容管理接口配额 {@link DescribeContentQuotaRequest} {@link DescribeContentQuotaResponse} */
   DescribeContentQuota(data: DescribeContentQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentQuotaResponse>;
-  /** {@link DescribeDDoSAttackData 查询DDoS攻击时序数据}({@link DescribeDDoSAttackDataRequest 请求参数}): {@link DescribeDDoSAttackDataResponse 返回参数} */
+  /** 查询DDoS攻击时序数据 {@link DescribeDDoSAttackDataRequest} {@link DescribeDDoSAttackDataResponse} */
   DescribeDDoSAttackData(data: DescribeDDoSAttackDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackDataResponse>;
-  /** {@link DescribeDDoSAttackEvent 查询DDoS攻击事件列表}({@link DescribeDDoSAttackEventRequest 请求参数}): {@link DescribeDDoSAttackEventResponse 返回参数} */
+  /** 查询DDoS攻击事件列表 {@link DescribeDDoSAttackEventRequest} {@link DescribeDDoSAttackEventResponse} */
   DescribeDDoSAttackEvent(data: DescribeDDoSAttackEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackEventResponse>;
-  /** {@link DescribeDDoSAttackEventDetail 查询DDoS攻击事件详情}({@link DescribeDDoSAttackEventDetailRequest 请求参数}): {@link DescribeDDoSAttackEventDetailResponse 返回参数} */
+  /** 查询DDoS攻击事件详情 {@link DescribeDDoSAttackEventDetailRequest} {@link DescribeDDoSAttackEventDetailResponse} */
   DescribeDDoSAttackEventDetail(data: DescribeDDoSAttackEventDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackEventDetailResponse>;
-  /** {@link DescribeDDoSAttackSourceEvent 查询DDoS攻击源列表}({@link DescribeDDoSAttackSourceEventRequest 请求参数}): {@link DescribeDDoSAttackSourceEventResponse 返回参数} */
+  /** 查询DDoS攻击源列表 {@link DescribeDDoSAttackSourceEventRequest} {@link DescribeDDoSAttackSourceEventResponse} */
   DescribeDDoSAttackSourceEvent(data: DescribeDDoSAttackSourceEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackSourceEventResponse>;
-  /** {@link DescribeDDoSAttackTopData 查询DDoS攻击Top数据}({@link DescribeDDoSAttackTopDataRequest 请求参数}): {@link DescribeDDoSAttackTopDataResponse 返回参数} */
+  /** 查询DDoS攻击Top数据 {@link DescribeDDoSAttackTopDataRequest} {@link DescribeDDoSAttackTopDataResponse} */
   DescribeDDoSAttackTopData(data: DescribeDDoSAttackTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackTopDataResponse>;
-  /** {@link DescribeDDoSBlockList 查询DDoS封禁解封列表}({@link DescribeDDoSBlockListRequest 请求参数}): {@link DescribeDDoSBlockListResponse 返回参数} */
+  /** 查询DDoS封禁解封列表 {@link DescribeDDoSBlockListRequest} {@link DescribeDDoSBlockListResponse} */
   DescribeDDoSBlockList(data: DescribeDDoSBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSBlockListResponse>;
-  /** {@link DescribeDDoSMajorAttackEvent 查询DDoS主攻击事件列表}({@link DescribeDDoSMajorAttackEventRequest 请求参数}): {@link DescribeDDoSMajorAttackEventResponse 返回参数} */
+  /** 查询DDoS主攻击事件列表 {@link DescribeDDoSMajorAttackEventRequest} {@link DescribeDDoSMajorAttackEventResponse} */
   DescribeDDoSMajorAttackEvent(data: DescribeDDoSMajorAttackEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSMajorAttackEventResponse>;
-  /** {@link DescribeDDoSPolicy 查询DDoS防护配置详情}({@link DescribeDDoSPolicyRequest 请求参数}): {@link DescribeDDoSPolicyResponse 返回参数} */
+  /** 查询DDoS防护配置详情 {@link DescribeDDoSPolicyRequest} {@link DescribeDDoSPolicyResponse} */
   DescribeDDoSPolicy(data: DescribeDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSPolicyResponse>;
-  /** {@link DescribeDefaultCertificates 查询默认证书列表}({@link DescribeDefaultCertificatesRequest 请求参数}): {@link DescribeDefaultCertificatesResponse 返回参数} */
+  /** 查询默认证书列表 {@link DescribeDefaultCertificatesRequest} {@link DescribeDefaultCertificatesResponse} */
   DescribeDefaultCertificates(data: DescribeDefaultCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultCertificatesResponse>;
-  /** {@link DescribeDistributionL4AccessData 查询四层连接时长时序数据}({@link DescribeDistributionL4AccessDataRequest 请求参数}): {@link DescribeDistributionL4AccessDataResponse 返回参数} */
+  /** 查询四层连接时长时序数据 {@link DescribeDistributionL4AccessDataRequest} {@link DescribeDistributionL4AccessDataResponse} */
   DescribeDistributionL4AccessData(data: DescribeDistributionL4AccessDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDistributionL4AccessDataResponse>;
-  /** {@link DescribeDnsData 获取DNS请求数统计曲线}({@link DescribeDnsDataRequest 请求参数}): {@link DescribeDnsDataResponse 返回参数} */
+  /** 获取DNS请求数统计曲线 {@link DescribeDnsDataRequest} {@link DescribeDnsDataResponse} */
   DescribeDnsData(data: DescribeDnsDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDnsDataResponse>;
-  /** {@link DescribeDnssec 查询 DNSSEC 信息}({@link DescribeDnssecRequest 请求参数}): {@link DescribeDnssecResponse 返回参数} */
+  /** 查询 DNSSEC 信息 {@link DescribeDnssecRequest} {@link DescribeDnssecResponse} */
   DescribeDnssec(data: DescribeDnssecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDnssecResponse>;
-  /** {@link DescribeHostsSetting 查询域名详细配置}({@link DescribeHostsSettingRequest 请求参数}): {@link DescribeHostsSettingResponse 返回参数} */
+  /** 查询域名详细配置 {@link DescribeHostsSettingRequest} {@link DescribeHostsSettingResponse} */
   DescribeHostsSetting(data: DescribeHostsSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostsSettingResponse>;
-  /** {@link DescribeIdentifications 查询站点的验证信息}({@link DescribeIdentificationsRequest 请求参数}): {@link DescribeIdentificationsResponse 返回参数} */
+  /** 查询站点的验证信息 {@link DescribeIdentificationsRequest} {@link DescribeIdentificationsResponse} */
   DescribeIdentifications(data: DescribeIdentificationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdentificationsResponse>;
-  /** {@link DescribeLogSets 获取日志集列表}({@link DescribeLogSetsRequest 请求参数}): {@link DescribeLogSetsResponse 返回参数} */
+  /** 获取日志集列表 {@link DescribeLogSetsRequest} {@link DescribeLogSetsResponse} */
   DescribeLogSets(data: DescribeLogSetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogSetsResponse>;
-  /** {@link DescribeLogTopicTaskDetail 获取推送任务详细信息}({@link DescribeLogTopicTaskDetailRequest 请求参数}): {@link DescribeLogTopicTaskDetailResponse 返回参数} */
+  /** 获取推送任务详细信息 {@link DescribeLogTopicTaskDetailRequest} {@link DescribeLogTopicTaskDetailResponse} */
   DescribeLogTopicTaskDetail(data: DescribeLogTopicTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogTopicTaskDetailResponse>;
-  /** {@link DescribeLogTopicTasks 获取推送任务列表}({@link DescribeLogTopicTasksRequest 请求参数}): {@link DescribeLogTopicTasksResponse 返回参数} */
+  /** 获取推送任务列表 {@link DescribeLogTopicTasksRequest} {@link DescribeLogTopicTasksResponse} */
   DescribeLogTopicTasks(data: DescribeLogTopicTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogTopicTasksResponse>;
-  /** {@link DescribeOriginGroup 获取源站组列表}({@link DescribeOriginGroupRequest 请求参数}): {@link DescribeOriginGroupResponse 返回参数} */
+  /** 获取源站组列表 {@link DescribeOriginGroupRequest} {@link DescribeOriginGroupResponse} */
   DescribeOriginGroup(data: DescribeOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginGroupResponse>;
-  /** {@link DescribeOriginProtection 查询源站防护信息}({@link DescribeOriginProtectionRequest 请求参数}): {@link DescribeOriginProtectionResponse 返回参数} */
+  /** 查询源站防护信息 {@link DescribeOriginProtectionRequest} {@link DescribeOriginProtectionResponse} */
   DescribeOriginProtection(data?: DescribeOriginProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginProtectionResponse>;
-  /** {@link DescribeOverviewL7Data 查询监控流量时序数据}({@link DescribeOverviewL7DataRequest 请求参数}): {@link DescribeOverviewL7DataResponse 返回参数} */
+  /** 查询监控流量时序数据 {@link DescribeOverviewL7DataRequest} {@link DescribeOverviewL7DataResponse} */
   DescribeOverviewL7Data(data: DescribeOverviewL7DataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewL7DataResponse>;
-  /** {@link DescribePrefetchTasks 查询预热任务状态}({@link DescribePrefetchTasksRequest 请求参数}): {@link DescribePrefetchTasksResponse 返回参数} */
+  /** 查询预热任务状态 {@link DescribePrefetchTasksRequest} {@link DescribePrefetchTasksResponse} */
   DescribePrefetchTasks(data?: DescribePrefetchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrefetchTasksResponse>;
-  /** {@link DescribePurgeTasks 查询清除缓存历史记录}({@link DescribePurgeTasksRequest 请求参数}): {@link DescribePurgeTasksResponse 返回参数} */
+  /** 查询清除缓存历史记录 {@link DescribePurgeTasksRequest} {@link DescribePurgeTasksResponse} */
   DescribePurgeTasks(data?: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;
-  /** {@link DescribeRateLimitIntelligenceRule 查询速率限制智能客户端过滤规则}({@link DescribeRateLimitIntelligenceRuleRequest 请求参数}): {@link DescribeRateLimitIntelligenceRuleResponse 返回参数} */
+  /** 查询速率限制智能客户端过滤规则 {@link DescribeRateLimitIntelligenceRuleRequest} {@link DescribeRateLimitIntelligenceRuleResponse} */
   DescribeRateLimitIntelligenceRule(data: DescribeRateLimitIntelligenceRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRateLimitIntelligenceRuleResponse>;
-  /** {@link DescribeRules 查询规则引擎规则}({@link DescribeRulesRequest 请求参数}): {@link DescribeRulesResponse 返回参数} */
+  /** 查询规则引擎规则 {@link DescribeRulesRequest} {@link DescribeRulesResponse} */
   DescribeRules(data: DescribeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesResponse>;
-  /** {@link DescribeRulesSetting 查询规则引擎的设置参数}({@link DescribeRulesSettingRequest 请求参数}): {@link DescribeRulesSettingResponse 返回参数} */
+  /** 查询规则引擎的设置参数 {@link DescribeRulesSettingRequest} {@link DescribeRulesSettingResponse} */
   DescribeRulesSetting(data?: DescribeRulesSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesSettingResponse>;
-  /** {@link DescribeSecurityGroupManagedRules 获取托管规则组}({@link DescribeSecurityGroupManagedRulesRequest 请求参数}): {@link DescribeSecurityGroupManagedRulesResponse 返回参数} */
+  /** 获取托管规则组 {@link DescribeSecurityGroupManagedRulesRequest} {@link DescribeSecurityGroupManagedRulesResponse} */
   DescribeSecurityGroupManagedRules(data?: DescribeSecurityGroupManagedRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupManagedRulesResponse>;
-  /** {@link DescribeSecurityPolicy 查询安全防护配置详情}({@link DescribeSecurityPolicyRequest 请求参数}): {@link DescribeSecurityPolicyResponse 返回参数} */
+  /** 查询安全防护配置详情 {@link DescribeSecurityPolicyRequest} {@link DescribeSecurityPolicyResponse} */
   DescribeSecurityPolicy(data?: DescribeSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPolicyResponse>;
-  /** {@link DescribeSecurityPolicyList 查询全部安全实例}({@link DescribeSecurityPolicyListRequest 请求参数}): {@link DescribeSecurityPolicyListResponse 返回参数} */
+  /** 查询全部安全实例 {@link DescribeSecurityPolicyListRequest} {@link DescribeSecurityPolicyListResponse} */
   DescribeSecurityPolicyList(data: DescribeSecurityPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPolicyListResponse>;
-  /** {@link DescribeSecurityPolicyRegions 查询所有地域信息}({@link DescribeSecurityPolicyRegionsRequest 请求参数}): {@link DescribeSecurityPolicyRegionsResponse 返回参数} */
+  /** 查询所有地域信息 {@link DescribeSecurityPolicyRegionsRequest} {@link DescribeSecurityPolicyRegionsResponse} */
   DescribeSecurityPolicyRegions(data?: DescribeSecurityPolicyRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPolicyRegionsResponse>;
-  /** {@link DescribeSecurityPortraitRules 查询Bot用户画像规则}({@link DescribeSecurityPortraitRulesRequest 请求参数}): {@link DescribeSecurityPortraitRulesResponse 返回参数} */
+  /** 查询Bot用户画像规则 {@link DescribeSecurityPortraitRulesRequest} {@link DescribeSecurityPortraitRulesResponse} */
   DescribeSecurityPortraitRules(data?: DescribeSecurityPortraitRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPortraitRulesResponse>;
-  /** {@link DescribeSecurityRuleId 查询安全规则详情}({@link DescribeSecurityRuleIdRequest 请求参数}): {@link DescribeSecurityRuleIdResponse 返回参数} */
+  /** 查询安全规则详情 {@link DescribeSecurityRuleIdRequest} {@link DescribeSecurityRuleIdResponse} */
   DescribeSecurityRuleId(data: DescribeSecurityRuleIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityRuleIdResponse>;
-  /** {@link DescribeSingleL7AnalysisData 查询流量分析单值数据}({@link DescribeSingleL7AnalysisDataRequest 请求参数}): {@link DescribeSingleL7AnalysisDataResponse 返回参数} */
+  /** 查询流量分析单值数据 {@link DescribeSingleL7AnalysisDataRequest} {@link DescribeSingleL7AnalysisDataResponse} */
   DescribeSingleL7AnalysisData(data: DescribeSingleL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSingleL7AnalysisDataResponse>;
-  /** {@link DescribeSpeedTestingDetails 查询拨测分地区数据}({@link DescribeSpeedTestingDetailsRequest 请求参数}): {@link DescribeSpeedTestingDetailsResponse 返回参数} */
+  /** 查询拨测分地区数据 {@link DescribeSpeedTestingDetailsRequest} {@link DescribeSpeedTestingDetailsResponse} */
   DescribeSpeedTestingDetails(data?: DescribeSpeedTestingDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpeedTestingDetailsResponse>;
-  /** {@link DescribeSpeedTestingMetricData 查询站点拨测结果}({@link DescribeSpeedTestingMetricDataRequest 请求参数}): {@link DescribeSpeedTestingMetricDataResponse 返回参数} */
+  /** 查询站点拨测结果 {@link DescribeSpeedTestingMetricDataRequest} {@link DescribeSpeedTestingMetricDataResponse} */
   DescribeSpeedTestingMetricData(data: DescribeSpeedTestingMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpeedTestingMetricDataResponse>;
-  /** {@link DescribeSpeedTestingQuota 查询站点拨测配额}({@link DescribeSpeedTestingQuotaRequest 请求参数}): {@link DescribeSpeedTestingQuotaResponse 返回参数} */
+  /** 查询站点拨测配额 {@link DescribeSpeedTestingQuotaRequest} {@link DescribeSpeedTestingQuotaResponse} */
   DescribeSpeedTestingQuota(data: DescribeSpeedTestingQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpeedTestingQuotaResponse>;
-  /** {@link DescribeTimingL4AccessData 查询四层连接数时序数据}({@link DescribeTimingL4AccessDataRequest 请求参数}): {@link DescribeTimingL4AccessDataResponse 返回参数} */
+  /** 查询四层连接数时序数据 {@link DescribeTimingL4AccessDataRequest} {@link DescribeTimingL4AccessDataResponse} */
   DescribeTimingL4AccessData(data: DescribeTimingL4AccessDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL4AccessDataResponse>;
-  /** {@link DescribeTimingL4Data 查询四层流量时序数据}({@link DescribeTimingL4DataRequest 请求参数}): {@link DescribeTimingL4DataResponse 返回参数} */
+  /** 查询四层流量时序数据 {@link DescribeTimingL4DataRequest} {@link DescribeTimingL4DataResponse} */
   DescribeTimingL4Data(data: DescribeTimingL4DataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL4DataResponse>;
-  /** {@link DescribeTimingL7AnalysisData 查询流量分析时序数据}({@link DescribeTimingL7AnalysisDataRequest 请求参数}): {@link DescribeTimingL7AnalysisDataResponse 返回参数} */
+  /** 查询流量分析时序数据 {@link DescribeTimingL7AnalysisDataRequest} {@link DescribeTimingL7AnalysisDataResponse} */
   DescribeTimingL7AnalysisData(data: DescribeTimingL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL7AnalysisDataResponse>;
-  /** {@link DescribeTimingL7CacheData 查询缓存分析时序数据}({@link DescribeTimingL7CacheDataRequest 请求参数}): {@link DescribeTimingL7CacheDataResponse 返回参数} */
+  /** 查询缓存分析时序数据 {@link DescribeTimingL7CacheDataRequest} {@link DescribeTimingL7CacheDataResponse} */
   DescribeTimingL7CacheData(data: DescribeTimingL7CacheDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL7CacheDataResponse>;
-  /** {@link DescribeTopL7AnalysisData 查询流量分析Top数据}({@link DescribeTopL7AnalysisDataRequest 请求参数}): {@link DescribeTopL7AnalysisDataResponse 返回参数} */
+  /** 查询流量分析Top数据 {@link DescribeTopL7AnalysisDataRequest} {@link DescribeTopL7AnalysisDataResponse} */
   DescribeTopL7AnalysisData(data: DescribeTopL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopL7AnalysisDataResponse>;
-  /** {@link DescribeTopL7CacheData 查询缓存分析Top数据}({@link DescribeTopL7CacheDataRequest 请求参数}): {@link DescribeTopL7CacheDataResponse 返回参数} */
+  /** 查询缓存分析Top数据 {@link DescribeTopL7CacheDataRequest} {@link DescribeTopL7CacheDataResponse} */
   DescribeTopL7CacheData(data: DescribeTopL7CacheDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopL7CacheDataResponse>;
-  /** {@link DescribeWebManagedRulesData 查询WAF攻击时序数据}({@link DescribeWebManagedRulesDataRequest 请求参数}): {@link DescribeWebManagedRulesDataResponse 返回参数} */
+  /** 查询WAF攻击时序数据 {@link DescribeWebManagedRulesDataRequest} {@link DescribeWebManagedRulesDataResponse} */
   DescribeWebManagedRulesData(data: DescribeWebManagedRulesDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebManagedRulesDataResponse>;
-  /** {@link DescribeWebManagedRulesHitRuleDetail 查询Web攻击命中规则详情}({@link DescribeWebManagedRulesHitRuleDetailRequest 请求参数}): {@link DescribeWebManagedRulesHitRuleDetailResponse 返回参数} */
+  /** 查询Web攻击命中规则详情 {@link DescribeWebManagedRulesHitRuleDetailRequest} {@link DescribeWebManagedRulesHitRuleDetailResponse} */
   DescribeWebManagedRulesHitRuleDetail(data: DescribeWebManagedRulesHitRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebManagedRulesHitRuleDetailResponse>;
-  /** {@link DescribeWebManagedRulesLog 查询Web攻击日志}({@link DescribeWebManagedRulesLogRequest 请求参数}): {@link DescribeWebManagedRulesLogResponse 返回参数} */
+  /** 查询Web攻击日志 {@link DescribeWebManagedRulesLogRequest} {@link DescribeWebManagedRulesLogResponse} */
   DescribeWebManagedRulesLog(data: DescribeWebManagedRulesLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebManagedRulesLogResponse>;
-  /** {@link DescribeWebProtectionAttackEvents 查询CC相关攻击事件}({@link DescribeWebProtectionAttackEventsRequest 请求参数}): {@link DescribeWebProtectionAttackEventsResponse 返回参数} */
+  /** 查询CC相关攻击事件 {@link DescribeWebProtectionAttackEventsRequest} {@link DescribeWebProtectionAttackEventsResponse} */
   DescribeWebProtectionAttackEvents(data: DescribeWebProtectionAttackEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebProtectionAttackEventsResponse>;
-  /** {@link DescribeWebProtectionClientIpList 查询CC防护攻击源IP信息列表}({@link DescribeWebProtectionClientIpListRequest 请求参数}): {@link DescribeWebProtectionClientIpListResponse 返回参数} */
+  /** 查询CC防护攻击源IP信息列表 {@link DescribeWebProtectionClientIpListRequest} {@link DescribeWebProtectionClientIpListResponse} */
   DescribeWebProtectionClientIpList(data: DescribeWebProtectionClientIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebProtectionClientIpListResponse>;
-  /** {@link DescribeWebProtectionData 查询CC防护时序数据列表}({@link DescribeWebProtectionDataRequest 请求参数}): {@link DescribeWebProtectionDataResponse 返回参数} */
+  /** 查询CC防护时序数据列表 {@link DescribeWebProtectionDataRequest} {@link DescribeWebProtectionDataResponse} */
   DescribeWebProtectionData(data: DescribeWebProtectionDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebProtectionDataResponse>;
-  /** {@link DescribeWebProtectionHitRuleDetail 查询CC防护命中规则详情列表}({@link DescribeWebProtectionHitRuleDetailRequest 请求参数}): {@link DescribeWebProtectionHitRuleDetailResponse 返回参数} */
+  /** 查询CC防护命中规则详情列表 {@link DescribeWebProtectionHitRuleDetailRequest} {@link DescribeWebProtectionHitRuleDetailResponse} */
   DescribeWebProtectionHitRuleDetail(data: DescribeWebProtectionHitRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebProtectionHitRuleDetailResponse>;
-  /** {@link DescribeWebProtectionTopData 查询CC防护Top数据}({@link DescribeWebProtectionTopDataRequest 请求参数}): {@link DescribeWebProtectionTopDataResponse 返回参数} */
+  /** 查询CC防护Top数据 {@link DescribeWebProtectionTopDataRequest} {@link DescribeWebProtectionTopDataResponse} */
   DescribeWebProtectionTopData(data: DescribeWebProtectionTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebProtectionTopDataResponse>;
-  /** {@link DescribeZoneDDoSPolicy 查询所有DDoS防护分区}({@link DescribeZoneDDoSPolicyRequest 请求参数}): {@link DescribeZoneDDoSPolicyResponse 返回参数} */
+  /** 查询所有DDoS防护分区 {@link DescribeZoneDDoSPolicyRequest} {@link DescribeZoneDDoSPolicyResponse} */
   DescribeZoneDDoSPolicy(data?: DescribeZoneDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneDDoSPolicyResponse>;
-  /** {@link DescribeZoneSetting 查询站点配置}({@link DescribeZoneSettingRequest 请求参数}): {@link DescribeZoneSettingResponse 返回参数} */
+  /** 查询站点配置 {@link DescribeZoneSettingRequest} {@link DescribeZoneSettingResponse} */
   DescribeZoneSetting(data: DescribeZoneSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneSettingResponse>;
-  /** {@link DescribeZones 查询用户站点信息列表}({@link DescribeZonesRequest 请求参数}): {@link DescribeZonesResponse 返回参数} */
+  /** 查询用户站点信息列表 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
-  /** {@link DownloadL4Logs 下载四层离线日志}({@link DownloadL4LogsRequest 请求参数}): {@link DownloadL4LogsResponse 返回参数} */
+  /** 下载四层离线日志 {@link DownloadL4LogsRequest} {@link DownloadL4LogsResponse} */
   DownloadL4Logs(data: DownloadL4LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL4LogsResponse>;
-  /** {@link DownloadL7Logs 下载七层离线日志}({@link DownloadL7LogsRequest 请求参数}): {@link DownloadL7LogsResponse 返回参数} */
+  /** 下载七层离线日志 {@link DownloadL7LogsRequest} {@link DownloadL7LogsResponse} */
   DownloadL7Logs(data: DownloadL7LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL7LogsResponse>;
-  /** {@link IdentifyZone 认证站点}({@link IdentifyZoneRequest 请求参数}): {@link IdentifyZoneResponse 返回参数} */
+  /** 认证站点 {@link IdentifyZoneRequest} {@link IdentifyZoneResponse} */
   IdentifyZone(data: IdentifyZoneRequest, config?: AxiosRequestConfig): AxiosPromise<IdentifyZoneResponse>;
-  /** {@link ModifyAlarmConfig 修改用户告警配置}({@link ModifyAlarmConfigRequest 请求参数}): {@link ModifyAlarmConfigResponse 返回参数} */
+  /** 修改用户告警配置 {@link ModifyAlarmConfigRequest} {@link ModifyAlarmConfigResponse} */
   ModifyAlarmConfig(data: ModifyAlarmConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmConfigResponse>;
-  /** {@link ModifyAlarmDefaultThreshold 修改告警默认阈值}({@link ModifyAlarmDefaultThresholdRequest 请求参数}): {@link ModifyAlarmDefaultThresholdResponse 返回参数} */
+  /** 修改告警默认阈值 {@link ModifyAlarmDefaultThresholdRequest} {@link ModifyAlarmDefaultThresholdResponse} */
   ModifyAlarmDefaultThreshold(data: ModifyAlarmDefaultThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmDefaultThresholdResponse>;
-  /** {@link ModifyAliasDomain 修改别称域名}({@link ModifyAliasDomainRequest 请求参数}): {@link ModifyAliasDomainResponse 返回参数} */
+  /** 修改别称域名 {@link ModifyAliasDomainRequest} {@link ModifyAliasDomainResponse} */
   ModifyAliasDomain(data: ModifyAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAliasDomainResponse>;
-  /** {@link ModifyAliasDomainStatus 修改别称域名状态}({@link ModifyAliasDomainStatusRequest 请求参数}): {@link ModifyAliasDomainStatusResponse 返回参数} */
+  /** 修改别称域名状态 {@link ModifyAliasDomainStatusRequest} {@link ModifyAliasDomainStatusResponse} */
   ModifyAliasDomainStatus(data: ModifyAliasDomainStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAliasDomainStatusResponse>;
-  /** {@link ModifyApplicationProxy 修改应用代理}({@link ModifyApplicationProxyRequest 请求参数}): {@link ModifyApplicationProxyResponse 返回参数} */
+  /** 修改应用代理 {@link ModifyApplicationProxyRequest} {@link ModifyApplicationProxyResponse} */
   ModifyApplicationProxy(data: ModifyApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyResponse>;
-  /** {@link ModifyApplicationProxyRule 修改应用代理规则}({@link ModifyApplicationProxyRuleRequest 请求参数}): {@link ModifyApplicationProxyRuleResponse 返回参数} */
+  /** 修改应用代理规则 {@link ModifyApplicationProxyRuleRequest} {@link ModifyApplicationProxyRuleResponse} */
   ModifyApplicationProxyRule(data: ModifyApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyRuleResponse>;
-  /** {@link ModifyApplicationProxyRuleStatus 修改应用代理规则的状态}({@link ModifyApplicationProxyRuleStatusRequest 请求参数}): {@link ModifyApplicationProxyRuleStatusResponse 返回参数} */
+  /** 修改应用代理规则的状态 {@link ModifyApplicationProxyRuleStatusRequest} {@link ModifyApplicationProxyRuleStatusResponse} */
   ModifyApplicationProxyRuleStatus(data: ModifyApplicationProxyRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyRuleStatusResponse>;
-  /** {@link ModifyApplicationProxyStatus 修改应用代理的状态}({@link ModifyApplicationProxyStatusRequest 请求参数}): {@link ModifyApplicationProxyStatusResponse 返回参数} */
+  /** 修改应用代理的状态 {@link ModifyApplicationProxyStatusRequest} {@link ModifyApplicationProxyStatusResponse} */
   ModifyApplicationProxyStatus(data: ModifyApplicationProxyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyStatusResponse>;
-  /** {@link ModifyDDoSPolicy 修改DDoS防护分区配置}({@link ModifyDDoSPolicyRequest 请求参数}): {@link ModifyDDoSPolicyResponse 返回参数} */
+  /** 修改DDoS防护分区配置 {@link ModifyDDoSPolicyRequest} {@link ModifyDDoSPolicyResponse} */
   ModifyDDoSPolicy(data: ModifyDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSPolicyResponse>;
-  /** {@link ModifyDDoSPolicyHost 域名DDoS高可用开关}({@link ModifyDDoSPolicyHostRequest 请求参数}): {@link ModifyDDoSPolicyHostResponse 返回参数} */
+  /** 域名DDoS高可用开关 {@link ModifyDDoSPolicyHostRequest} {@link ModifyDDoSPolicyHostResponse} */
   ModifyDDoSPolicyHost(data: ModifyDDoSPolicyHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSPolicyHostResponse>;
-  /** {@link ModifyDefaultCertificate 修改默认证书状态}({@link ModifyDefaultCertificateRequest 请求参数}): {@link ModifyDefaultCertificateResponse 返回参数} */
+  /** 修改默认证书状态 {@link ModifyDefaultCertificateRequest} {@link ModifyDefaultCertificateResponse} */
   ModifyDefaultCertificate(data: ModifyDefaultCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDefaultCertificateResponse>;
-  /** {@link ModifyDnssec 修改 DNSSEC 状态}({@link ModifyDnssecRequest 请求参数}): {@link ModifyDnssecResponse 返回参数} */
+  /** 修改 DNSSEC 状态 {@link ModifyDnssecRequest} {@link ModifyDnssecResponse} */
   ModifyDnssec(data: ModifyDnssecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDnssecResponse>;
-  /** {@link ModifyHostsCertificate 修改域名证书}({@link ModifyHostsCertificateRequest 请求参数}): {@link ModifyHostsCertificateResponse 返回参数} */
+  /** 修改域名证书 {@link ModifyHostsCertificateRequest} {@link ModifyHostsCertificateResponse} */
   ModifyHostsCertificate(data: ModifyHostsCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostsCertificateResponse>;
-  /** {@link ModifyLogTopicTask 修改推送任务}({@link ModifyLogTopicTaskRequest 请求参数}): {@link ModifyLogTopicTaskResponse 返回参数} */
+  /** 修改推送任务 {@link ModifyLogTopicTaskRequest} {@link ModifyLogTopicTaskResponse} */
   ModifyLogTopicTask(data: ModifyLogTopicTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogTopicTaskResponse>;
-  /** {@link ModifyOriginGroup 修改源站组}({@link ModifyOriginGroupRequest 请求参数}): {@link ModifyOriginGroupResponse 返回参数} */
+  /** 修改源站组 {@link ModifyOriginGroupRequest} {@link ModifyOriginGroupResponse} */
   ModifyOriginGroup(data: ModifyOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOriginGroupResponse>;
-  /** {@link ModifyRule 修改规则引擎规则}({@link ModifyRuleRequest 请求参数}): {@link ModifyRuleResponse 返回参数} */
+  /** 修改规则引擎规则 {@link ModifyRuleRequest} {@link ModifyRuleResponse} */
   ModifyRule(data: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
-  /** {@link ModifyRulePriority 修改规则引擎规则优先级}({@link ModifyRulePriorityRequest 请求参数}): {@link ModifyRulePriorityResponse 返回参数} */
+  /** 修改规则引擎规则优先级 {@link ModifyRulePriorityRequest} {@link ModifyRulePriorityResponse} */
   ModifyRulePriority(data: ModifyRulePriorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRulePriorityResponse>;
-  /** {@link ModifySecurityPolicy 修改Web&Bot安全配置}({@link ModifySecurityPolicyRequest 请求参数}): {@link ModifySecurityPolicyResponse 返回参数} */
+  /** 修改Web&Bot安全配置 {@link ModifySecurityPolicyRequest} {@link ModifySecurityPolicyResponse} */
   ModifySecurityPolicy(data: ModifySecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityPolicyResponse>;
-  /** {@link ModifySecurityWafGroupPolicy 修改安全配置托管规则}({@link ModifySecurityWafGroupPolicyRequest 请求参数}): {@link ModifySecurityWafGroupPolicyResponse 返回参数} */
+  /** 修改安全配置托管规则 {@link ModifySecurityWafGroupPolicyRequest} {@link ModifySecurityWafGroupPolicyResponse} */
   ModifySecurityWafGroupPolicy(data?: ModifySecurityWafGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityWafGroupPolicyResponse>;
-  /** {@link ModifyZone 修改站点}({@link ModifyZoneRequest 请求参数}): {@link ModifyZoneResponse 返回参数} */
+  /** 修改站点 {@link ModifyZoneRequest} {@link ModifyZoneResponse} */
   ModifyZone(data: ModifyZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneResponse>;
-  /** {@link ModifyZoneCnameSpeedUp 修改 CNAME 加速状态}({@link ModifyZoneCnameSpeedUpRequest 请求参数}): {@link ModifyZoneCnameSpeedUpResponse 返回参数} */
+  /** 修改 CNAME 加速状态 {@link ModifyZoneCnameSpeedUpRequest} {@link ModifyZoneCnameSpeedUpResponse} */
   ModifyZoneCnameSpeedUp(data: ModifyZoneCnameSpeedUpRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneCnameSpeedUpResponse>;
-  /** {@link ModifyZoneSetting 修改站点配置}({@link ModifyZoneSettingRequest 请求参数}): {@link ModifyZoneSettingResponse 返回参数} */
+  /** 修改站点配置 {@link ModifyZoneSettingRequest} {@link ModifyZoneSettingResponse} */
   ModifyZoneSetting(data: ModifyZoneSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneSettingResponse>;
-  /** {@link ModifyZoneStatus 切换站点状态}({@link ModifyZoneStatusRequest 请求参数}): {@link ModifyZoneStatusResponse 返回参数} */
+  /** 切换站点状态 {@link ModifyZoneStatusRequest} {@link ModifyZoneStatusResponse} */
   ModifyZoneStatus(data: ModifyZoneStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneStatusResponse>;
-  /** {@link ReclaimAliasDomain 取回别称域名}({@link ReclaimAliasDomainRequest 请求参数}): {@link ReclaimAliasDomainResponse 返回参数} */
+  /** 取回别称域名 {@link ReclaimAliasDomainRequest} {@link ReclaimAliasDomainResponse} */
   ReclaimAliasDomain(data?: ReclaimAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ReclaimAliasDomainResponse>;
-  /** {@link ReclaimZone 找回站点}({@link ReclaimZoneRequest 请求参数}): {@link ReclaimZoneResponse 返回参数} */
+  /** 找回站点 {@link ReclaimZoneRequest} {@link ReclaimZoneResponse} */
   ReclaimZone(data: ReclaimZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ReclaimZoneResponse>;
-  /** {@link SwitchLogTopicTask 开启或关闭推送任务}({@link SwitchLogTopicTaskRequest 请求参数}): {@link SwitchLogTopicTaskResponse 返回参数} */
+  /** 开启或关闭推送任务 {@link SwitchLogTopicTaskRequest} {@link SwitchLogTopicTaskResponse} */
   SwitchLogTopicTask(data: SwitchLogTopicTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchLogTopicTaskResponse>;
-  /** {@link UpdateOriginProtectionIPWhitelist 更新源站防护IP白名单}({@link UpdateOriginProtectionIPWhitelistRequest 请求参数}): {@link UpdateOriginProtectionIPWhitelistResponse 返回参数} */
+  /** 更新源站防护IP白名单 {@link UpdateOriginProtectionIPWhitelistRequest} {@link UpdateOriginProtectionIPWhitelistResponse} */
   UpdateOriginProtectionIPWhitelist(data: UpdateOriginProtectionIPWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOriginProtectionIPWhitelistResponse>;
-  /** {@link V20220106.CheckCertificate 校验证书}({@link V20220106.CheckCertificateRequest 请求参数}): {@link V20220106.CheckCertificateResponse 返回参数} */
+  /** 校验证书 {@link V20220106.CheckCertificateRequest} {@link V20220106.CheckCertificateResponse} */
   CheckCertificate(data: V20220106.CheckCertificateRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CheckCertificateResponse>;
-  /** {@link V20220106.CreateApplicationProxy 创建应用代理}({@link V20220106.CreateApplicationProxyRequest 请求参数}): {@link V20220106.CreateApplicationProxyResponse 返回参数} */
+  /** 创建应用代理 {@link V20220106.CreateApplicationProxyRequest} {@link V20220106.CreateApplicationProxyResponse} */
   CreateApplicationProxy(data: V20220106.CreateApplicationProxyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateApplicationProxyResponse>;
-  /** {@link V20220106.CreateApplicationProxyRule 创建应用代理规则}({@link V20220106.CreateApplicationProxyRuleRequest 请求参数}): {@link V20220106.CreateApplicationProxyRuleResponse 返回参数} */
+  /** 创建应用代理规则 {@link V20220106.CreateApplicationProxyRuleRequest} {@link V20220106.CreateApplicationProxyRuleResponse} */
   CreateApplicationProxyRule(data: V20220106.CreateApplicationProxyRuleRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateApplicationProxyRuleResponse>;
-  /** {@link V20220106.CreateApplicationProxyRules 批量创建应用代理规则}({@link V20220106.CreateApplicationProxyRulesRequest 请求参数}): {@link V20220106.CreateApplicationProxyRulesResponse 返回参数} */
+  /** 批量创建应用代理规则 {@link V20220106.CreateApplicationProxyRulesRequest} {@link V20220106.CreateApplicationProxyRulesResponse} */
   CreateApplicationProxyRules(data: V20220106.CreateApplicationProxyRulesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateApplicationProxyRulesResponse>;
-  /** {@link V20220106.CreateCustomErrorPage 创建自定义页}({@link V20220106.CreateCustomErrorPageRequest 请求参数}): {@link V20220106.CreateCustomErrorPageResponse 返回参数} */
+  /** 创建自定义页 {@link V20220106.CreateCustomErrorPageRequest} {@link V20220106.CreateCustomErrorPageResponse} */
   CreateCustomErrorPage(data: V20220106.CreateCustomErrorPageRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateCustomErrorPageResponse>;
-  /** {@link V20220106.CreateDnsRecord 创建 DNS 记录}({@link V20220106.CreateDnsRecordRequest 请求参数}): {@link V20220106.CreateDnsRecordResponse 返回参数} */
+  /** 创建 DNS 记录 {@link V20220106.CreateDnsRecordRequest} {@link V20220106.CreateDnsRecordResponse} */
   CreateDnsRecord(data: V20220106.CreateDnsRecordRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateDnsRecordResponse>;
-  /** {@link V20220106.CreateLoadBalancing 创建负载均衡}({@link V20220106.CreateLoadBalancingRequest 请求参数}): {@link V20220106.CreateLoadBalancingResponse 返回参数} */
+  /** 创建负载均衡 {@link V20220106.CreateLoadBalancingRequest} {@link V20220106.CreateLoadBalancingResponse} */
   CreateLoadBalancing(data: V20220106.CreateLoadBalancingRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateLoadBalancingResponse>;
-  /** {@link V20220106.CreateOriginGroup 源站组创建}({@link V20220106.CreateOriginGroupRequest 请求参数}): {@link V20220106.CreateOriginGroupResponse 返回参数} */
+  /** 源站组创建 {@link V20220106.CreateOriginGroupRequest} {@link V20220106.CreateOriginGroupResponse} */
   CreateOriginGroup(data: V20220106.CreateOriginGroupRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateOriginGroupResponse>;
-  /** {@link V20220106.CreatePlanForZone 为未购买套餐的站点购买套餐}({@link V20220106.CreatePlanForZoneRequest 请求参数}): {@link V20220106.CreatePlanForZoneResponse 返回参数} */
+  /** 为未购买套餐的站点购买套餐 {@link V20220106.CreatePlanForZoneRequest} {@link V20220106.CreatePlanForZoneResponse} */
   CreatePlanForZone(data: V20220106.CreatePlanForZoneRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreatePlanForZoneResponse>;
-  /** {@link V20220106.CreatePrefetchTask 创建预热任务}({@link V20220106.CreatePrefetchTaskRequest 请求参数}): {@link V20220106.CreatePrefetchTaskResponse 返回参数} */
+  /** 创建预热任务 {@link V20220106.CreatePrefetchTaskRequest} {@link V20220106.CreatePrefetchTaskResponse} */
   CreatePrefetchTask(data: V20220106.CreatePrefetchTaskRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreatePrefetchTaskResponse>;
-  /** {@link V20220106.CreatePurgeTask 创建清除缓存任务}({@link V20220106.CreatePurgeTaskRequest 请求参数}): {@link V20220106.CreatePurgeTaskResponse 返回参数} */
+  /** 创建清除缓存任务 {@link V20220106.CreatePurgeTaskRequest} {@link V20220106.CreatePurgeTaskResponse} */
   CreatePurgeTask(data: V20220106.CreatePurgeTaskRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreatePurgeTaskResponse>;
-  /** {@link V20220106.CreateRule 创建规则引擎规则}({@link V20220106.CreateRuleRequest 请求参数}): {@link V20220106.CreateRuleResponse 返回参数} */
+  /** 创建规则引擎规则 {@link V20220106.CreateRuleRequest} {@link V20220106.CreateRuleResponse} */
   CreateRule(data: V20220106.CreateRuleRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateRuleResponse>;
-  /** {@link V20220106.CreateZone 创建站点}({@link V20220106.CreateZoneRequest 请求参数}): {@link V20220106.CreateZoneResponse 返回参数} */
+  /** 创建站点 {@link V20220106.CreateZoneRequest} {@link V20220106.CreateZoneResponse} */
   CreateZone(data: V20220106.CreateZoneRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.CreateZoneResponse>;
-  /** {@link V20220106.DeleteApplicationProxy 删除应用代理}({@link V20220106.DeleteApplicationProxyRequest 请求参数}): {@link V20220106.DeleteApplicationProxyResponse 返回参数} */
+  /** 删除应用代理 {@link V20220106.DeleteApplicationProxyRequest} {@link V20220106.DeleteApplicationProxyResponse} */
   DeleteApplicationProxy(data: V20220106.DeleteApplicationProxyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DeleteApplicationProxyResponse>;
-  /** {@link V20220106.DeleteApplicationProxyRule 删除应用代理规则}({@link V20220106.DeleteApplicationProxyRuleRequest 请求参数}): {@link V20220106.DeleteApplicationProxyRuleResponse 返回参数} */
+  /** 删除应用代理规则 {@link V20220106.DeleteApplicationProxyRuleRequest} {@link V20220106.DeleteApplicationProxyRuleResponse} */
   DeleteApplicationProxyRule(data: V20220106.DeleteApplicationProxyRuleRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DeleteApplicationProxyRuleResponse>;
-  /** {@link V20220106.DeleteDnsRecords 批量删除 DNS 记录}({@link V20220106.DeleteDnsRecordsRequest 请求参数}): {@link V20220106.DeleteDnsRecordsResponse 返回参数} */
+  /** 批量删除 DNS 记录 {@link V20220106.DeleteDnsRecordsRequest} {@link V20220106.DeleteDnsRecordsResponse} */
   DeleteDnsRecords(data: V20220106.DeleteDnsRecordsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DeleteDnsRecordsResponse>;
-  /** {@link V20220106.DeleteLoadBalancing 删除负载均衡}({@link V20220106.DeleteLoadBalancingRequest 请求参数}): {@link V20220106.DeleteLoadBalancingResponse 返回参数} */
+  /** 删除负载均衡 {@link V20220106.DeleteLoadBalancingRequest} {@link V20220106.DeleteLoadBalancingResponse} */
   DeleteLoadBalancing(data: V20220106.DeleteLoadBalancingRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DeleteLoadBalancingResponse>;
-  /** {@link V20220106.DeleteOriginGroup 源站组删除}({@link V20220106.DeleteOriginGroupRequest 请求参数}): {@link V20220106.DeleteOriginGroupResponse 返回参数} */
+  /** 源站组删除 {@link V20220106.DeleteOriginGroupRequest} {@link V20220106.DeleteOriginGroupResponse} */
   DeleteOriginGroup(data: V20220106.DeleteOriginGroupRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DeleteOriginGroupResponse>;
-  /** {@link V20220106.DeleteRules 批量删除规则引擎规则}({@link V20220106.DeleteRulesRequest 请求参数}): {@link V20220106.DeleteRulesResponse 返回参数} */
+  /** 批量删除规则引擎规则 {@link V20220106.DeleteRulesRequest} {@link V20220106.DeleteRulesResponse} */
   DeleteRules(data: V20220106.DeleteRulesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DeleteRulesResponse>;
-  /** {@link V20220106.DeleteZone 删除站点}({@link V20220106.DeleteZoneRequest 请求参数}): {@link V20220106.DeleteZoneResponse 返回参数} */
+  /** 删除站点 {@link V20220106.DeleteZoneRequest} {@link V20220106.DeleteZoneResponse} */
   DeleteZone(data: V20220106.DeleteZoneRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DeleteZoneResponse>;
-  /** {@link V20220106.DescribeApplicationProxy 获取应用代理列表}({@link V20220106.DescribeApplicationProxyRequest 请求参数}): {@link V20220106.DescribeApplicationProxyResponse 返回参数} */
+  /** 获取应用代理列表 {@link V20220106.DescribeApplicationProxyRequest} {@link V20220106.DescribeApplicationProxyResponse} */
   DescribeApplicationProxy(data: V20220106.DescribeApplicationProxyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeApplicationProxyResponse>;
-  /** {@link V20220106.DescribeApplicationProxyDetail 获取应用代理详细信息}({@link V20220106.DescribeApplicationProxyDetailRequest 请求参数}): {@link V20220106.DescribeApplicationProxyDetailResponse 返回参数} */
+  /** 获取应用代理详细信息 {@link V20220106.DescribeApplicationProxyDetailRequest} {@link V20220106.DescribeApplicationProxyDetailResponse} */
   DescribeApplicationProxyDetail(data: V20220106.DescribeApplicationProxyDetailRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeApplicationProxyDetailResponse>;
-  /** {@link V20220106.DescribeAvailablePlans 查询当前账户可购买套餐信息列表}({@link V20220106.DescribeAvailablePlansRequest 请求参数}): {@link V20220106.DescribeAvailablePlansResponse 返回参数} */
+  /** 查询当前账户可购买套餐信息列表 {@link V20220106.DescribeAvailablePlansRequest} {@link V20220106.DescribeAvailablePlansResponse} */
   DescribeAvailablePlans(data: V20220106.DescribeAvailablePlansRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeAvailablePlansResponse>;
-  /** {@link V20220106.DescribeBotLog 查询Bot攻击日志}({@link V20220106.DescribeBotLogRequest 请求参数}): {@link V20220106.DescribeBotLogResponse 返回参数} */
+  /** 查询Bot攻击日志 {@link V20220106.DescribeBotLogRequest} {@link V20220106.DescribeBotLogResponse} */
   DescribeBotLog(data: V20220106.DescribeBotLogRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeBotLogResponse>;
-  /** {@link V20220106.DescribeBotManagedRules 分页查询Bot托管规则}({@link V20220106.DescribeBotManagedRulesRequest 请求参数}): {@link V20220106.DescribeBotManagedRulesResponse 返回参数} */
+  /** 分页查询Bot托管规则 {@link V20220106.DescribeBotManagedRulesRequest} {@link V20220106.DescribeBotManagedRulesResponse} */
   DescribeBotManagedRules(data: V20220106.DescribeBotManagedRulesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeBotManagedRulesResponse>;
-  /** {@link V20220106.DescribeCnameStatus 查询域名 CNAME 状态}({@link V20220106.DescribeCnameStatusRequest 请求参数}): {@link V20220106.DescribeCnameStatusResponse 返回参数} */
+  /** 查询域名 CNAME 状态 {@link V20220106.DescribeCnameStatusRequest} {@link V20220106.DescribeCnameStatusResponse} */
   DescribeCnameStatus(data: V20220106.DescribeCnameStatusRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeCnameStatusResponse>;
-  /** {@link V20220106.DescribeDDoSPolicy 查询DDoS防护配置详情}({@link V20220106.DescribeDDoSPolicyRequest 请求参数}): {@link V20220106.DescribeDDoSPolicyResponse 返回参数} */
+  /** 查询DDoS防护配置详情 {@link V20220106.DescribeDDoSPolicyRequest} {@link V20220106.DescribeDDoSPolicyResponse} */
   DescribeDDoSPolicy(data: V20220106.DescribeDDoSPolicyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDDoSPolicyResponse>;
-  /** {@link V20220106.DescribeDDosAttackData 查询DDos攻击时序数据}({@link V20220106.DescribeDDosAttackDataRequest 请求参数}): {@link V20220106.DescribeDDosAttackDataResponse 返回参数} */
+  /** 查询DDos攻击时序数据 {@link V20220106.DescribeDDosAttackDataRequest} {@link V20220106.DescribeDDosAttackDataResponse} */
   DescribeDDosAttackData(data: V20220106.DescribeDDosAttackDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDDosAttackDataResponse>;
-  /** {@link V20220106.DescribeDDosAttackEvent 查询DDos攻击事件}({@link V20220106.DescribeDDosAttackEventRequest 请求参数}): {@link V20220106.DescribeDDosAttackEventResponse 返回参数} */
+  /** 查询DDos攻击事件 {@link V20220106.DescribeDDosAttackEventRequest} {@link V20220106.DescribeDDosAttackEventResponse} */
   DescribeDDosAttackEvent(data: V20220106.DescribeDDosAttackEventRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDDosAttackEventResponse>;
-  /** {@link V20220106.DescribeDDosAttackEventDetail 查询DDos攻击事件详情}({@link V20220106.DescribeDDosAttackEventDetailRequest 请求参数}): {@link V20220106.DescribeDDosAttackEventDetailResponse 返回参数} */
+  /** 查询DDos攻击事件详情 {@link V20220106.DescribeDDosAttackEventDetailRequest} {@link V20220106.DescribeDDosAttackEventDetailResponse} */
   DescribeDDosAttackEventDetail(data: V20220106.DescribeDDosAttackEventDetailRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDDosAttackEventDetailResponse>;
-  /** {@link V20220106.DescribeDDosAttackSourceEvent 查询DDos攻击源信息}({@link V20220106.DescribeDDosAttackSourceEventRequest 请求参数}): {@link V20220106.DescribeDDosAttackSourceEventResponse 返回参数} */
+  /** 查询DDos攻击源信息 {@link V20220106.DescribeDDosAttackSourceEventRequest} {@link V20220106.DescribeDDosAttackSourceEventResponse} */
   DescribeDDosAttackSourceEvent(data: V20220106.DescribeDDosAttackSourceEventRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDDosAttackSourceEventResponse>;
-  /** {@link V20220106.DescribeDDosAttackTopData 查询DDos攻击Top数据}({@link V20220106.DescribeDDosAttackTopDataRequest 请求参数}): {@link V20220106.DescribeDDosAttackTopDataResponse 返回参数} */
+  /** 查询DDos攻击Top数据 {@link V20220106.DescribeDDosAttackTopDataRequest} {@link V20220106.DescribeDDosAttackTopDataResponse} */
   DescribeDDosAttackTopData(data: V20220106.DescribeDDosAttackTopDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDDosAttackTopDataResponse>;
-  /** {@link V20220106.DescribeDDosMajorAttackEvent 查询DDos主攻击事件}({@link V20220106.DescribeDDosMajorAttackEventRequest 请求参数}): {@link V20220106.DescribeDDosMajorAttackEventResponse 返回参数} */
+  /** 查询DDos主攻击事件 {@link V20220106.DescribeDDosMajorAttackEventRequest} {@link V20220106.DescribeDDosMajorAttackEventResponse} */
   DescribeDDosMajorAttackEvent(data: V20220106.DescribeDDosMajorAttackEventRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDDosMajorAttackEventResponse>;
-  /** {@link V20220106.DescribeDefaultCertificates 查询默认证书列表}({@link V20220106.DescribeDefaultCertificatesRequest 请求参数}): {@link V20220106.DescribeDefaultCertificatesResponse 返回参数} */
+  /** 查询默认证书列表 {@link V20220106.DescribeDefaultCertificatesRequest} {@link V20220106.DescribeDefaultCertificatesResponse} */
   DescribeDefaultCertificates(data: V20220106.DescribeDefaultCertificatesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDefaultCertificatesResponse>;
-  /** {@link V20220106.DescribeDnsData 获取DNS请求数统计曲线}({@link V20220106.DescribeDnsDataRequest 请求参数}): {@link V20220106.DescribeDnsDataResponse 返回参数} */
+  /** 获取DNS请求数统计曲线 {@link V20220106.DescribeDnsDataRequest} {@link V20220106.DescribeDnsDataResponse} */
   DescribeDnsData(data: V20220106.DescribeDnsDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDnsDataResponse>;
-  /** {@link V20220106.DescribeDnsRecords 查询 DNS 记录列表}({@link V20220106.DescribeDnsRecordsRequest 请求参数}): {@link V20220106.DescribeDnsRecordsResponse 返回参数} */
+  /** 查询 DNS 记录列表 {@link V20220106.DescribeDnsRecordsRequest} {@link V20220106.DescribeDnsRecordsResponse} */
   DescribeDnsRecords(data: V20220106.DescribeDnsRecordsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDnsRecordsResponse>;
-  /** {@link V20220106.DescribeDnssec 查询 DNSSEC 信息}({@link V20220106.DescribeDnssecRequest 请求参数}): {@link V20220106.DescribeDnssecResponse 返回参数} */
+  /** 查询 DNSSEC 信息 {@link V20220106.DescribeDnssecRequest} {@link V20220106.DescribeDnssecResponse} */
   DescribeDnssec(data: V20220106.DescribeDnssecRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDnssecResponse>;
-  /** {@link V20220106.DescribeHostsCertificate 查询域名证书列表}({@link V20220106.DescribeHostsCertificateRequest 请求参数}): {@link V20220106.DescribeHostsCertificateResponse 返回参数} */
+  /** 查询域名证书列表 {@link V20220106.DescribeHostsCertificateRequest} {@link V20220106.DescribeHostsCertificateResponse} */
   DescribeHostsCertificate(data: V20220106.DescribeHostsCertificateRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeHostsCertificateResponse>;
-  /** {@link V20220106.DescribeHostsSetting 查询域名详细配置}({@link V20220106.DescribeHostsSettingRequest 请求参数}): {@link V20220106.DescribeHostsSettingResponse 返回参数} */
+  /** 查询域名详细配置 {@link V20220106.DescribeHostsSettingRequest} {@link V20220106.DescribeHostsSettingResponse} */
   DescribeHostsSetting(data: V20220106.DescribeHostsSettingRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeHostsSettingResponse>;
-  /** {@link V20220106.DescribeIdentification 查询站点的验证状态}({@link V20220106.DescribeIdentificationRequest 请求参数}): {@link V20220106.DescribeIdentificationResponse 返回参数} */
+  /** 查询站点的验证状态 {@link V20220106.DescribeIdentificationRequest} {@link V20220106.DescribeIdentificationResponse} */
   DescribeIdentification(data: V20220106.DescribeIdentificationRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeIdentificationResponse>;
-  /** {@link V20220106.DescribeLoadBalancing 获取负载均衡列表}({@link V20220106.DescribeLoadBalancingRequest 请求参数}): {@link V20220106.DescribeLoadBalancingResponse 返回参数} */
+  /** 获取负载均衡列表 {@link V20220106.DescribeLoadBalancingRequest} {@link V20220106.DescribeLoadBalancingResponse} */
   DescribeLoadBalancing(data: V20220106.DescribeLoadBalancingRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeLoadBalancingResponse>;
-  /** {@link V20220106.DescribeLoadBalancingDetail 获取负载均衡详细信息}({@link V20220106.DescribeLoadBalancingDetailRequest 请求参数}): {@link V20220106.DescribeLoadBalancingDetailResponse 返回参数} */
+  /** 获取负载均衡详细信息 {@link V20220106.DescribeLoadBalancingDetailRequest} {@link V20220106.DescribeLoadBalancingDetailResponse} */
   DescribeLoadBalancingDetail(data: V20220106.DescribeLoadBalancingDetailRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeLoadBalancingDetailResponse>;
-  /** {@link V20220106.DescribeOriginGroup 获取源站组信息列表}({@link V20220106.DescribeOriginGroupRequest 请求参数}): {@link V20220106.DescribeOriginGroupResponse 返回参数} */
+  /** 获取源站组信息列表 {@link V20220106.DescribeOriginGroupRequest} {@link V20220106.DescribeOriginGroupResponse} */
   DescribeOriginGroup(data: V20220106.DescribeOriginGroupRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeOriginGroupResponse>;
-  /** {@link V20220106.DescribeOriginGroupDetail 获取源站组详细信息}({@link V20220106.DescribeOriginGroupDetailRequest 请求参数}): {@link V20220106.DescribeOriginGroupDetailResponse 返回参数} */
+  /** 获取源站组详细信息 {@link V20220106.DescribeOriginGroupDetailRequest} {@link V20220106.DescribeOriginGroupDetailResponse} */
   DescribeOriginGroupDetail(data: V20220106.DescribeOriginGroupDetailRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeOriginGroupDetailResponse>;
-  /** {@link V20220106.DescribeOverviewL7Data 查询七层监控类时序流量数据}({@link V20220106.DescribeOverviewL7DataRequest 请求参数}): {@link V20220106.DescribeOverviewL7DataResponse 返回参数} */
+  /** 查询七层监控类时序流量数据 {@link V20220106.DescribeOverviewL7DataRequest} {@link V20220106.DescribeOverviewL7DataResponse} */
   DescribeOverviewL7Data(data: V20220106.DescribeOverviewL7DataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeOverviewL7DataResponse>;
-  /** {@link V20220106.DescribePrefetchTasks 查询预热任务状态}({@link V20220106.DescribePrefetchTasksRequest 请求参数}): {@link V20220106.DescribePrefetchTasksResponse 返回参数} */
+  /** 查询预热任务状态 {@link V20220106.DescribePrefetchTasksRequest} {@link V20220106.DescribePrefetchTasksResponse} */
   DescribePrefetchTasks(data: V20220106.DescribePrefetchTasksRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribePrefetchTasksResponse>;
-  /** {@link V20220106.DescribePurgeTasks 查询清除缓存历史记录}({@link V20220106.DescribePurgeTasksRequest 请求参数}): {@link V20220106.DescribePurgeTasksResponse 返回参数} */
+  /** 查询清除缓存历史记录 {@link V20220106.DescribePurgeTasksRequest} {@link V20220106.DescribePurgeTasksResponse} */
   DescribePurgeTasks(data: V20220106.DescribePurgeTasksRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribePurgeTasksResponse>;
-  /** {@link V20220106.DescribeRules 查询规则引擎规则}({@link V20220106.DescribeRulesRequest 请求参数}): {@link V20220106.DescribeRulesResponse 返回参数} */
+  /** 查询规则引擎规则 {@link V20220106.DescribeRulesRequest} {@link V20220106.DescribeRulesResponse} */
   DescribeRules(data: V20220106.DescribeRulesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeRulesResponse>;
-  /** {@link V20220106.DescribeRulesSetting 查询规则引擎的设置参数}({@link V20220106.DescribeRulesSettingRequest 请求参数}): {@link V20220106.DescribeRulesSettingResponse 返回参数} */
+  /** 查询规则引擎的设置参数 {@link V20220106.DescribeRulesSettingRequest} {@link V20220106.DescribeRulesSettingResponse} */
   DescribeRulesSetting(data: V20220106.DescribeRulesSettingRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeRulesSettingResponse>;
-  /** {@link V20220106.DescribeSecurityPolicy 查询安全防护配置详情}({@link V20220106.DescribeSecurityPolicyRequest 请求参数}): {@link V20220106.DescribeSecurityPolicyResponse 返回参数} */
+  /** 查询安全防护配置详情 {@link V20220106.DescribeSecurityPolicyRequest} {@link V20220106.DescribeSecurityPolicyResponse} */
   DescribeSecurityPolicy(data: V20220106.DescribeSecurityPolicyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeSecurityPolicyResponse>;
-  /** {@link V20220106.DescribeSecurityPolicyList 查询全部安全实例}({@link V20220106.DescribeSecurityPolicyListRequest 请求参数}): {@link V20220106.DescribeSecurityPolicyListResponse 返回参数} */
+  /** 查询全部安全实例 {@link V20220106.DescribeSecurityPolicyListRequest} {@link V20220106.DescribeSecurityPolicyListResponse} */
   DescribeSecurityPolicyList(data: V20220106.DescribeSecurityPolicyListRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeSecurityPolicyListResponse>;
-  /** {@link V20220106.DescribeSecurityPolicyManagedRules 分页查询门神规则}({@link V20220106.DescribeSecurityPolicyManagedRulesRequest 请求参数}): {@link V20220106.DescribeSecurityPolicyManagedRulesResponse 返回参数} */
+  /** 分页查询门神规则 {@link V20220106.DescribeSecurityPolicyManagedRulesRequest} {@link V20220106.DescribeSecurityPolicyManagedRulesResponse} */
   DescribeSecurityPolicyManagedRules(data: V20220106.DescribeSecurityPolicyManagedRulesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeSecurityPolicyManagedRulesResponse>;
-  /** {@link V20220106.DescribeSecurityPolicyManagedRulesId 规则id查询门神规则详情}({@link V20220106.DescribeSecurityPolicyManagedRulesIdRequest 请求参数}): {@link V20220106.DescribeSecurityPolicyManagedRulesIdResponse 返回参数} */
+  /** 规则id查询门神规则详情 {@link V20220106.DescribeSecurityPolicyManagedRulesIdRequest} {@link V20220106.DescribeSecurityPolicyManagedRulesIdResponse} */
   DescribeSecurityPolicyManagedRulesId(data: V20220106.DescribeSecurityPolicyManagedRulesIdRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeSecurityPolicyManagedRulesIdResponse>;
-  /** {@link V20220106.DescribeSecurityPolicyRegions 查询所有地域信息}({@link V20220106.DescribeSecurityPolicyRegionsRequest 请求参数}): {@link V20220106.DescribeSecurityPolicyRegionsResponse 返回参数} */
+  /** 查询所有地域信息 {@link V20220106.DescribeSecurityPolicyRegionsRequest} {@link V20220106.DescribeSecurityPolicyRegionsResponse} */
   DescribeSecurityPolicyRegions(data: V20220106.DescribeSecurityPolicyRegionsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeSecurityPolicyRegionsResponse>;
-  /** {@link V20220106.DescribeSecurityPortraitRules 查询Bot用户画像规则}({@link V20220106.DescribeSecurityPortraitRulesRequest 请求参数}): {@link V20220106.DescribeSecurityPortraitRulesResponse 返回参数} */
+  /** 查询Bot用户画像规则 {@link V20220106.DescribeSecurityPortraitRulesRequest} {@link V20220106.DescribeSecurityPortraitRulesResponse} */
   DescribeSecurityPortraitRules(data: V20220106.DescribeSecurityPortraitRulesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeSecurityPortraitRulesResponse>;
-  /** {@link V20220106.DescribeTimingL4Data 四层时序流量数据查询接口}({@link V20220106.DescribeTimingL4DataRequest 请求参数}): {@link V20220106.DescribeTimingL4DataResponse 返回参数} */
+  /** 四层时序流量数据查询接口 {@link V20220106.DescribeTimingL4DataRequest} {@link V20220106.DescribeTimingL4DataResponse} */
   DescribeTimingL4Data(data: V20220106.DescribeTimingL4DataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeTimingL4DataResponse>;
-  /** {@link V20220106.DescribeTimingL7AnalysisData 查询七层数据分析类时序流量数据}({@link V20220106.DescribeTimingL7AnalysisDataRequest 请求参数}): {@link V20220106.DescribeTimingL7AnalysisDataResponse 返回参数} */
+  /** 查询七层数据分析类时序流量数据 {@link V20220106.DescribeTimingL7AnalysisDataRequest} {@link V20220106.DescribeTimingL7AnalysisDataResponse} */
   DescribeTimingL7AnalysisData(data: V20220106.DescribeTimingL7AnalysisDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeTimingL7AnalysisDataResponse>;
-  /** {@link V20220106.DescribeTimingL7CacheData 七层缓存分析类时序流量数据接口}({@link V20220106.DescribeTimingL7CacheDataRequest 请求参数}): {@link V20220106.DescribeTimingL7CacheDataResponse 返回参数} */
+  /** 七层缓存分析类时序流量数据接口 {@link V20220106.DescribeTimingL7CacheDataRequest} {@link V20220106.DescribeTimingL7CacheDataResponse} */
   DescribeTimingL7CacheData(data: V20220106.DescribeTimingL7CacheDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeTimingL7CacheDataResponse>;
-  /** {@link V20220106.DescribeTopL7AnalysisData 七层数据分析类top流量数据接口}({@link V20220106.DescribeTopL7AnalysisDataRequest 请求参数}): {@link V20220106.DescribeTopL7AnalysisDataResponse 返回参数} */
+  /** 七层数据分析类top流量数据接口 {@link V20220106.DescribeTopL7AnalysisDataRequest} {@link V20220106.DescribeTopL7AnalysisDataResponse} */
   DescribeTopL7AnalysisData(data: V20220106.DescribeTopL7AnalysisDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeTopL7AnalysisDataResponse>;
-  /** {@link V20220106.DescribeTopL7CacheData 七层缓存分析类top流量数据接口}({@link V20220106.DescribeTopL7CacheDataRequest 请求参数}): {@link V20220106.DescribeTopL7CacheDataResponse 返回参数} */
+  /** 七层缓存分析类top流量数据接口 {@link V20220106.DescribeTopL7CacheDataRequest} {@link V20220106.DescribeTopL7CacheDataResponse} */
   DescribeTopL7CacheData(data: V20220106.DescribeTopL7CacheDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeTopL7CacheDataResponse>;
-  /** {@link V20220106.DescribeWebManagedRulesAttackEvents 查询Web托管攻击事件}({@link V20220106.DescribeWebManagedRulesAttackEventsRequest 请求参数}): {@link V20220106.DescribeWebManagedRulesAttackEventsResponse 返回参数} */
+  /** 查询Web托管攻击事件 {@link V20220106.DescribeWebManagedRulesAttackEventsRequest} {@link V20220106.DescribeWebManagedRulesAttackEventsResponse} */
   DescribeWebManagedRulesAttackEvents(data: V20220106.DescribeWebManagedRulesAttackEventsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebManagedRulesAttackEventsResponse>;
-  /** {@link V20220106.DescribeWebManagedRulesData 查询waf攻击时序数据}({@link V20220106.DescribeWebManagedRulesDataRequest 请求参数}): {@link V20220106.DescribeWebManagedRulesDataResponse 返回参数} */
+  /** 查询waf攻击时序数据 {@link V20220106.DescribeWebManagedRulesDataRequest} {@link V20220106.DescribeWebManagedRulesDataResponse} */
   DescribeWebManagedRulesData(data: V20220106.DescribeWebManagedRulesDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebManagedRulesDataResponse>;
-  /** {@link V20220106.DescribeWebManagedRulesLog 查询waf攻击日志}({@link V20220106.DescribeWebManagedRulesLogRequest 请求参数}): {@link V20220106.DescribeWebManagedRulesLogResponse 返回参数} */
+  /** 查询waf攻击日志 {@link V20220106.DescribeWebManagedRulesLogRequest} {@link V20220106.DescribeWebManagedRulesLogResponse} */
   DescribeWebManagedRulesLog(data: V20220106.DescribeWebManagedRulesLogRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebManagedRulesLogResponse>;
-  /** {@link V20220106.DescribeWebManagedRulesTopData 查询waf攻击top数据}({@link V20220106.DescribeWebManagedRulesTopDataRequest 请求参数}): {@link V20220106.DescribeWebManagedRulesTopDataResponse 返回参数} */
+  /** 查询waf攻击top数据 {@link V20220106.DescribeWebManagedRulesTopDataRequest} {@link V20220106.DescribeWebManagedRulesTopDataResponse} */
   DescribeWebManagedRulesTopData(data: V20220106.DescribeWebManagedRulesTopDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebManagedRulesTopDataResponse>;
-  /** {@link V20220106.DescribeWebProtectionAttackEvents 查询web防护攻击事件}({@link V20220106.DescribeWebProtectionAttackEventsRequest 请求参数}): {@link V20220106.DescribeWebProtectionAttackEventsResponse 返回参数} */
+  /** 查询web防护攻击事件 {@link V20220106.DescribeWebProtectionAttackEventsRequest} {@link V20220106.DescribeWebProtectionAttackEventsResponse} */
   DescribeWebProtectionAttackEvents(data: V20220106.DescribeWebProtectionAttackEventsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebProtectionAttackEventsResponse>;
-  /** {@link V20220106.DescribeWebProtectionData 查询CC防护时序数据}({@link V20220106.DescribeWebProtectionDataRequest 请求参数}): {@link V20220106.DescribeWebProtectionDataResponse 返回参数} */
+  /** 查询CC防护时序数据 {@link V20220106.DescribeWebProtectionDataRequest} {@link V20220106.DescribeWebProtectionDataResponse} */
   DescribeWebProtectionData(data: V20220106.DescribeWebProtectionDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebProtectionDataResponse>;
-  /** {@link V20220106.DescribeWebProtectionLog 查询CC防护日志}({@link V20220106.DescribeWebProtectionLogRequest 请求参数}): {@link V20220106.DescribeWebProtectionLogResponse 返回参数} */
+  /** 查询CC防护日志 {@link V20220106.DescribeWebProtectionLogRequest} {@link V20220106.DescribeWebProtectionLogResponse} */
   DescribeWebProtectionLog(data: V20220106.DescribeWebProtectionLogRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebProtectionLogResponse>;
-  /** {@link V20220106.DescribeZoneDDoSPolicy 查询所有DDoS防护分区}({@link V20220106.DescribeZoneDDoSPolicyRequest 请求参数}): {@link V20220106.DescribeZoneDDoSPolicyResponse 返回参数} */
+  /** 查询所有DDoS防护分区 {@link V20220106.DescribeZoneDDoSPolicyRequest} {@link V20220106.DescribeZoneDDoSPolicyResponse} */
   DescribeZoneDDoSPolicy(data: V20220106.DescribeZoneDDoSPolicyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeZoneDDoSPolicyResponse>;
-  /** {@link V20220106.DescribeZoneDetails 查询某个站点的详细信息}({@link V20220106.DescribeZoneDetailsRequest 请求参数}): {@link V20220106.DescribeZoneDetailsResponse 返回参数} */
+  /** 查询某个站点的详细信息 {@link V20220106.DescribeZoneDetailsRequest} {@link V20220106.DescribeZoneDetailsResponse} */
   DescribeZoneDetails(data: V20220106.DescribeZoneDetailsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeZoneDetailsResponse>;
-  /** {@link V20220106.DescribeZoneSetting 查询站点配置}({@link V20220106.DescribeZoneSettingRequest 请求参数}): {@link V20220106.DescribeZoneSettingResponse 返回参数} */
+  /** 查询站点配置 {@link V20220106.DescribeZoneSettingRequest} {@link V20220106.DescribeZoneSettingResponse} */
   DescribeZoneSetting(data: V20220106.DescribeZoneSettingRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeZoneSettingResponse>;
-  /** {@link V20220106.DescribeZones 查询用户站点信息列表}({@link V20220106.DescribeZonesRequest 请求参数}): {@link V20220106.DescribeZonesResponse 返回参数} */
+  /** 查询用户站点信息列表 {@link V20220106.DescribeZonesRequest} {@link V20220106.DescribeZonesResponse} */
   DescribeZones(data: V20220106.DescribeZonesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeZonesResponse>;
-  /** {@link V20220106.DownloadL7Logs 七层离线日志下载}({@link V20220106.DownloadL7LogsRequest 请求参数}): {@link V20220106.DownloadL7LogsResponse 返回参数} */
+  /** 七层离线日志下载 {@link V20220106.DownloadL7LogsRequest} {@link V20220106.DownloadL7LogsResponse} */
   DownloadL7Logs(data: V20220106.DownloadL7LogsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DownloadL7LogsResponse>;
-  /** {@link V20220106.IdentifyZone 认证站点}({@link V20220106.IdentifyZoneRequest 请求参数}): {@link V20220106.IdentifyZoneResponse 返回参数} */
+  /** 认证站点 {@link V20220106.IdentifyZoneRequest} {@link V20220106.IdentifyZoneResponse} */
   IdentifyZone(data: V20220106.IdentifyZoneRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.IdentifyZoneResponse>;
-  /** {@link V20220106.ImportDnsRecords 导入 DNS 记录}({@link V20220106.ImportDnsRecordsRequest 请求参数}): {@link V20220106.ImportDnsRecordsResponse 返回参数} */
+  /** 导入 DNS 记录 {@link V20220106.ImportDnsRecordsRequest} {@link V20220106.ImportDnsRecordsResponse} */
   ImportDnsRecords(data: V20220106.ImportDnsRecordsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ImportDnsRecordsResponse>;
-  /** {@link V20220106.ModifyApplicationProxy 修改应用代理}({@link V20220106.ModifyApplicationProxyRequest 请求参数}): {@link V20220106.ModifyApplicationProxyResponse 返回参数} */
+  /** 修改应用代理 {@link V20220106.ModifyApplicationProxyRequest} {@link V20220106.ModifyApplicationProxyResponse} */
   ModifyApplicationProxy(data: V20220106.ModifyApplicationProxyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyApplicationProxyResponse>;
-  /** {@link V20220106.ModifyApplicationProxyRule 修改应用代理规则}({@link V20220106.ModifyApplicationProxyRuleRequest 请求参数}): {@link V20220106.ModifyApplicationProxyRuleResponse 返回参数} */
+  /** 修改应用代理规则 {@link V20220106.ModifyApplicationProxyRuleRequest} {@link V20220106.ModifyApplicationProxyRuleResponse} */
   ModifyApplicationProxyRule(data: V20220106.ModifyApplicationProxyRuleRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyApplicationProxyRuleResponse>;
-  /** {@link V20220106.ModifyApplicationProxyRuleStatus 修改应用代理规则的状态}({@link V20220106.ModifyApplicationProxyRuleStatusRequest 请求参数}): {@link V20220106.ModifyApplicationProxyRuleStatusResponse 返回参数} */
+  /** 修改应用代理规则的状态 {@link V20220106.ModifyApplicationProxyRuleStatusRequest} {@link V20220106.ModifyApplicationProxyRuleStatusResponse} */
   ModifyApplicationProxyRuleStatus(data: V20220106.ModifyApplicationProxyRuleStatusRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyApplicationProxyRuleStatusResponse>;
-  /** {@link V20220106.ModifyApplicationProxyStatus 修改应用代理的状态}({@link V20220106.ModifyApplicationProxyStatusRequest 请求参数}): {@link V20220106.ModifyApplicationProxyStatusResponse 返回参数} */
+  /** 修改应用代理的状态 {@link V20220106.ModifyApplicationProxyStatusRequest} {@link V20220106.ModifyApplicationProxyStatusResponse} */
   ModifyApplicationProxyStatus(data: V20220106.ModifyApplicationProxyStatusRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyApplicationProxyStatusResponse>;
-  /** {@link V20220106.ModifyDDoSPolicy 修改DDoS防护分区配置}({@link V20220106.ModifyDDoSPolicyRequest 请求参数}): {@link V20220106.ModifyDDoSPolicyResponse 返回参数} */
+  /** 修改DDoS防护分区配置 {@link V20220106.ModifyDDoSPolicyRequest} {@link V20220106.ModifyDDoSPolicyResponse} */
   ModifyDDoSPolicy(data: V20220106.ModifyDDoSPolicyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyDDoSPolicyResponse>;
-  /** {@link V20220106.ModifyDDoSPolicyHost 域名DDoS高可用开关}({@link V20220106.ModifyDDoSPolicyHostRequest 请求参数}): {@link V20220106.ModifyDDoSPolicyHostResponse 返回参数} */
+  /** 域名DDoS高可用开关 {@link V20220106.ModifyDDoSPolicyHostRequest} {@link V20220106.ModifyDDoSPolicyHostResponse} */
   ModifyDDoSPolicyHost(data: V20220106.ModifyDDoSPolicyHostRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyDDoSPolicyHostResponse>;
-  /** {@link V20220106.ModifyDefaultCertificate 修改默认证书状态}({@link V20220106.ModifyDefaultCertificateRequest 请求参数}): {@link V20220106.ModifyDefaultCertificateResponse 返回参数} */
+  /** 修改默认证书状态 {@link V20220106.ModifyDefaultCertificateRequest} {@link V20220106.ModifyDefaultCertificateResponse} */
   ModifyDefaultCertificate(data: V20220106.ModifyDefaultCertificateRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyDefaultCertificateResponse>;
-  /** {@link V20220106.ModifyDnsRecord 修改 DNS 记录}({@link V20220106.ModifyDnsRecordRequest 请求参数}): {@link V20220106.ModifyDnsRecordResponse 返回参数} */
+  /** 修改 DNS 记录 {@link V20220106.ModifyDnsRecordRequest} {@link V20220106.ModifyDnsRecordResponse} */
   ModifyDnsRecord(data: V20220106.ModifyDnsRecordRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyDnsRecordResponse>;
-  /** {@link V20220106.ModifyDnssec 修改 DNSSEC}({@link V20220106.ModifyDnssecRequest 请求参数}): {@link V20220106.ModifyDnssecResponse 返回参数} */
+  /** 修改 DNSSEC {@link V20220106.ModifyDnssecRequest} {@link V20220106.ModifyDnssecResponse} */
   ModifyDnssec(data: V20220106.ModifyDnssecRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyDnssecResponse>;
-  /** {@link V20220106.ModifyHostsCertificate 修改域名证书}({@link V20220106.ModifyHostsCertificateRequest 请求参数}): {@link V20220106.ModifyHostsCertificateResponse 返回参数} */
+  /** 修改域名证书 {@link V20220106.ModifyHostsCertificateRequest} {@link V20220106.ModifyHostsCertificateResponse} */
   ModifyHostsCertificate(data: V20220106.ModifyHostsCertificateRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyHostsCertificateResponse>;
-  /** {@link V20220106.ModifyLoadBalancing 修改负载均衡}({@link V20220106.ModifyLoadBalancingRequest 请求参数}): {@link V20220106.ModifyLoadBalancingResponse 返回参数} */
+  /** 修改负载均衡 {@link V20220106.ModifyLoadBalancingRequest} {@link V20220106.ModifyLoadBalancingResponse} */
   ModifyLoadBalancing(data: V20220106.ModifyLoadBalancingRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyLoadBalancingResponse>;
-  /** {@link V20220106.ModifyLoadBalancingStatus 修改负载均衡状态}({@link V20220106.ModifyLoadBalancingStatusRequest 请求参数}): {@link V20220106.ModifyLoadBalancingStatusResponse 返回参数} */
+  /** 修改负载均衡状态 {@link V20220106.ModifyLoadBalancingStatusRequest} {@link V20220106.ModifyLoadBalancingStatusResponse} */
   ModifyLoadBalancingStatus(data: V20220106.ModifyLoadBalancingStatusRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyLoadBalancingStatusResponse>;
-  /** {@link V20220106.ModifyOriginGroup 源站组修改}({@link V20220106.ModifyOriginGroupRequest 请求参数}): {@link V20220106.ModifyOriginGroupResponse 返回参数} */
+  /** 源站组修改 {@link V20220106.ModifyOriginGroupRequest} {@link V20220106.ModifyOriginGroupResponse} */
   ModifyOriginGroup(data: V20220106.ModifyOriginGroupRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyOriginGroupResponse>;
-  /** {@link V20220106.ModifyRule 修改规则引擎规则}({@link V20220106.ModifyRuleRequest 请求参数}): {@link V20220106.ModifyRuleResponse 返回参数} */
+  /** 修改规则引擎规则 {@link V20220106.ModifyRuleRequest} {@link V20220106.ModifyRuleResponse} */
   ModifyRule(data: V20220106.ModifyRuleRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyRuleResponse>;
-  /** {@link V20220106.ModifyRulePriority 修改规则引擎规则优先级}({@link V20220106.ModifyRulePriorityRequest 请求参数}): {@link V20220106.ModifyRulePriorityResponse 返回参数} */
+  /** 修改规则引擎规则优先级 {@link V20220106.ModifyRulePriorityRequest} {@link V20220106.ModifyRulePriorityResponse} */
   ModifyRulePriority(data: V20220106.ModifyRulePriorityRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyRulePriorityResponse>;
-  /** {@link V20220106.ModifySecurityPolicy 修改Web&Bot安全配置}({@link V20220106.ModifySecurityPolicyRequest 请求参数}): {@link V20220106.ModifySecurityPolicyResponse 返回参数} */
+  /** 修改Web&Bot安全配置 {@link V20220106.ModifySecurityPolicyRequest} {@link V20220106.ModifySecurityPolicyResponse} */
   ModifySecurityPolicy(data: V20220106.ModifySecurityPolicyRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifySecurityPolicyResponse>;
-  /** {@link V20220106.ModifyZone 修改站点}({@link V20220106.ModifyZoneRequest 请求参数}): {@link V20220106.ModifyZoneResponse 返回参数} */
+  /** 修改站点 {@link V20220106.ModifyZoneRequest} {@link V20220106.ModifyZoneResponse} */
   ModifyZone(data: V20220106.ModifyZoneRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyZoneResponse>;
-  /** {@link V20220106.ModifyZoneCnameSpeedUp 修改 CNAME 加速状态}({@link V20220106.ModifyZoneCnameSpeedUpRequest 请求参数}): {@link V20220106.ModifyZoneCnameSpeedUpResponse 返回参数} */
+  /** 修改 CNAME 加速状态 {@link V20220106.ModifyZoneCnameSpeedUpRequest} {@link V20220106.ModifyZoneCnameSpeedUpResponse} */
   ModifyZoneCnameSpeedUp(data: V20220106.ModifyZoneCnameSpeedUpRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyZoneCnameSpeedUpResponse>;
-  /** {@link V20220106.ModifyZoneSetting 修改站点配置}({@link V20220106.ModifyZoneSettingRequest 请求参数}): {@link V20220106.ModifyZoneSettingResponse 返回参数} */
+  /** 修改站点配置 {@link V20220106.ModifyZoneSettingRequest} {@link V20220106.ModifyZoneSettingResponse} */
   ModifyZoneSetting(data: V20220106.ModifyZoneSettingRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyZoneSettingResponse>;
-  /** {@link V20220106.ModifyZoneStatus 切换站点状态}({@link V20220106.ModifyZoneStatusRequest 请求参数}): {@link V20220106.ModifyZoneStatusResponse 返回参数} */
+  /** 切换站点状态 {@link V20220106.ModifyZoneStatusRequest} {@link V20220106.ModifyZoneStatusResponse} */
   ModifyZoneStatus(data: V20220106.ModifyZoneStatusRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ModifyZoneStatusResponse>;
-  /** {@link V20220106.ReclaimZone 找回站点}({@link V20220106.ReclaimZoneRequest 请求参数}): {@link V20220106.ReclaimZoneResponse 返回参数} */
+  /** 找回站点 {@link V20220106.ReclaimZoneRequest} {@link V20220106.ReclaimZoneResponse} */
   ReclaimZone(data: V20220106.ReclaimZoneRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ReclaimZoneResponse>;
-  /** {@link V20220106.ScanDnsRecords 扫描站点历史解析记录}({@link V20220106.ScanDnsRecordsRequest 请求参数}): {@link V20220106.ScanDnsRecordsResponse 返回参数} */
+  /** 扫描站点历史解析记录 {@link V20220106.ScanDnsRecordsRequest} {@link V20220106.ScanDnsRecordsResponse} */
   ScanDnsRecords(data: V20220106.ScanDnsRecordsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.ScanDnsRecordsResponse>;
 }
 

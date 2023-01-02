@@ -442,7 +442,7 @@ declare interface CreateBindInstanceRequest {
 declare interface CreateBindInstanceResponse {
   /** 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时 */
   Progress: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -470,7 +470,7 @@ declare interface CreateCosSecKeyInstanceResponse {
   CosTocken?: string;
   /** 密钥可访问的文件前缀人。例如：CosPrefix=test/123/666，则该密钥只能操作test/123/666为前缀的文件，例如test/123/666/1.txt */
   CosPrefix?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -488,7 +488,7 @@ declare interface CreateResourceInstancesRequest {
 declare interface CreateResourceInstancesResponse {
   /** 新创建的资源列表。 */
   ResourceSet?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -510,7 +510,7 @@ declare interface CreateScanInstancesResponse {
   LimitCount: number;
   /** 到期时间 */
   LimitTime: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -526,7 +526,7 @@ declare interface CreateShieldInstanceResponse {
   Progress: number;
   /** 任务唯一标识 */
   ItemId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -544,7 +544,7 @@ declare interface CreateShieldPlanInstanceResponse {
   PlanId: number;
   /** 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时 */
   Progress: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -556,7 +556,7 @@ declare interface DeleteScanInstancesRequest {
 declare interface DeleteScanInstancesResponse {
   /** 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时 */
   Progress: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -568,7 +568,7 @@ declare interface DeleteShieldInstancesRequest {
 declare interface DeleteShieldInstancesResponse {
   /** 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时 */
   Progress: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -586,7 +586,7 @@ declare interface DescribeApkDetectionResultResponse {
   Reason: string;
   /** APK检测结果数组 */
   ResultList: ResultListItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -610,7 +610,7 @@ declare interface DescribeResourceInstancesResponse {
   TotalCount: number;
   /** 符合要求的资源数组 */
   ResourceSet: ResourceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -634,7 +634,7 @@ declare interface DescribeScanInstancesResponse {
   TotalCount: number;
   /** 一个关于app详细信息的结构体，主要包括app的基本信息和扫描状态信息。 */
   ScanSet: AppScanSet[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -650,7 +650,7 @@ declare interface DescribeScanResultsResponse {
   ScanSet: ScanSetInfo[];
   /** 批量扫描结果的个数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -674,7 +674,7 @@ declare interface DescribeShieldInstancesResponse {
   TotalCount: number;
   /** 一个关于app详细信息的结构体，主要包括app的基本信息和加固信息。 */
   AppSet: AppSetInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -692,7 +692,7 @@ declare interface DescribeShieldPlanInstanceResponse {
   ShieldPlanInfo: ShieldPlanInfo;
   /** 加固资源信息 */
   ResourceServiceInfo: ResourceServiceInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -712,7 +712,7 @@ declare interface DescribeShieldResultResponse {
   StatusDesc: string;
   /** 状态指引 */
   StatusRef: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -748,7 +748,7 @@ declare interface DescribeUrlDetectionResultResponse {
   EvilTypeDesc: string;
   /** 该字段暂为空 */
   LevelDesc: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -762,46 +762,46 @@ declare interface DescribeUserBaseInfoInstanceResponse {
   UserAppid?: number;
   /** 系统时间戳 */
   TimeStamp?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ms 移动应用安全} */
 declare interface Ms {
   (): Versions;
-  /** {@link CreateBindInstance 将应用绑定到资源}({@link CreateBindInstanceRequest 请求参数}): {@link CreateBindInstanceResponse 返回参数} */
+  /** 将应用绑定到资源 {@link CreateBindInstanceRequest} {@link CreateBindInstanceResponse} */
   CreateBindInstance(data: CreateBindInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBindInstanceResponse>;
-  /** {@link CreateCosSecKeyInstance 获取云COS临时密钥}({@link CreateCosSecKeyInstanceRequest 请求参数}): {@link CreateCosSecKeyInstanceResponse 返回参数} */
+  /** 获取云COS临时密钥 {@link CreateCosSecKeyInstanceRequest} {@link CreateCosSecKeyInstanceResponse} */
   CreateCosSecKeyInstance(data?: CreateCosSecKeyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosSecKeyInstanceResponse>;
-  /** {@link CreateResourceInstances 创建资源}({@link CreateResourceInstancesRequest 请求参数}): {@link CreateResourceInstancesResponse 返回参数} */
+  /** 创建资源 {@link CreateResourceInstancesRequest} {@link CreateResourceInstancesResponse} */
   CreateResourceInstances(data: CreateResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceInstancesResponse>;
-  /** {@link CreateScanInstances 批量提交安全扫描}({@link CreateScanInstancesRequest 请求参数}): {@link CreateScanInstancesResponse 返回参数} */
+  /** 批量提交安全扫描 {@link CreateScanInstancesRequest} {@link CreateScanInstancesResponse} */
   CreateScanInstances(data: CreateScanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScanInstancesResponse>;
-  /** {@link CreateShieldInstance 提交加固基础数据}({@link CreateShieldInstanceRequest 请求参数}): {@link CreateShieldInstanceResponse 返回参数} */
+  /** 提交加固基础数据 {@link CreateShieldInstanceRequest} {@link CreateShieldInstanceResponse} */
   CreateShieldInstance(data: CreateShieldInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShieldInstanceResponse>;
-  /** {@link CreateShieldPlanInstance 新增加固策略}({@link CreateShieldPlanInstanceRequest 请求参数}): {@link CreateShieldPlanInstanceResponse 返回参数} */
+  /** 新增加固策略 {@link CreateShieldPlanInstanceRequest} {@link CreateShieldPlanInstanceResponse} */
   CreateShieldPlanInstance(data: CreateShieldPlanInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShieldPlanInstanceResponse>;
-  /** {@link DeleteScanInstances 批量删除提交过的app扫描信息}({@link DeleteScanInstancesRequest 请求参数}): {@link DeleteScanInstancesResponse 返回参数} */
+  /** 批量删除提交过的app扫描信息 {@link DeleteScanInstancesRequest} {@link DeleteScanInstancesResponse} */
   DeleteScanInstances(data: DeleteScanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScanInstancesResponse>;
-  /** {@link DeleteShieldInstances 批量删除提交过的app信息}({@link DeleteShieldInstancesRequest 请求参数}): {@link DeleteShieldInstancesResponse 返回参数} */
+  /** 批量删除提交过的app信息 {@link DeleteShieldInstancesRequest} {@link DeleteShieldInstancesResponse} */
   DeleteShieldInstances(data: DeleteShieldInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShieldInstancesResponse>;
-  /** {@link DescribeApkDetectionResult 环境安全检测-apk检测}({@link DescribeApkDetectionResultRequest 请求参数}): {@link DescribeApkDetectionResultResponse 返回参数} */
+  /** 环境安全检测-apk检测 {@link DescribeApkDetectionResultRequest} {@link DescribeApkDetectionResultResponse} */
   DescribeApkDetectionResult(data: DescribeApkDetectionResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApkDetectionResultResponse>;
-  /** {@link DescribeResourceInstances 获取用户的所有资源信息}({@link DescribeResourceInstancesRequest 请求参数}): {@link DescribeResourceInstancesResponse 返回参数} */
+  /** 获取用户的所有资源信息 {@link DescribeResourceInstancesRequest} {@link DescribeResourceInstancesResponse} */
   DescribeResourceInstances(data?: DescribeResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceInstancesResponse>;
-  /** {@link DescribeScanInstances 查询扫描列表}({@link DescribeScanInstancesRequest 请求参数}): {@link DescribeScanInstancesResponse 返回参数} */
+  /** 查询扫描列表 {@link DescribeScanInstancesRequest} {@link DescribeScanInstancesResponse} */
   DescribeScanInstances(data?: DescribeScanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanInstancesResponse>;
-  /** {@link DescribeScanResults 批量查询扫描结果}({@link DescribeScanResultsRequest 请求参数}): {@link DescribeScanResultsResponse 返回参数} */
+  /** 批量查询扫描结果 {@link DescribeScanResultsRequest} {@link DescribeScanResultsResponse} */
   DescribeScanResults(data: DescribeScanResultsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanResultsResponse>;
-  /** {@link DescribeShieldInstances 用户查询提交过的app列表}({@link DescribeShieldInstancesRequest 请求参数}): {@link DescribeShieldInstancesResponse 返回参数} */
+  /** 用户查询提交过的app列表 {@link DescribeShieldInstancesRequest} {@link DescribeShieldInstancesResponse} */
   DescribeShieldInstances(data?: DescribeShieldInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShieldInstancesResponse>;
-  /** {@link DescribeShieldPlanInstance 查询加固策略}({@link DescribeShieldPlanInstanceRequest 请求参数}): {@link DescribeShieldPlanInstanceResponse 返回参数} */
+  /** 查询加固策略 {@link DescribeShieldPlanInstanceRequest} {@link DescribeShieldPlanInstanceResponse} */
   DescribeShieldPlanInstance(data: DescribeShieldPlanInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShieldPlanInstanceResponse>;
-  /** {@link DescribeShieldResult 查询加固结果}({@link DescribeShieldResultRequest 请求参数}): {@link DescribeShieldResultResponse 返回参数} */
+  /** 查询加固结果 {@link DescribeShieldResultRequest} {@link DescribeShieldResultResponse} */
   DescribeShieldResult(data: DescribeShieldResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShieldResultResponse>;
-  /** {@link DescribeUrlDetectionResult 移动安全-查询网址检测结果服务}({@link DescribeUrlDetectionResultRequest 请求参数}): {@link DescribeUrlDetectionResultResponse 返回参数} */
+  /** 移动安全-查询网址检测结果服务 {@link DescribeUrlDetectionResultRequest} {@link DescribeUrlDetectionResultResponse} */
   DescribeUrlDetectionResult(data: DescribeUrlDetectionResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUrlDetectionResultResponse>;
-  /** {@link DescribeUserBaseInfoInstance 获取用户基础信息}({@link DescribeUserBaseInfoInstanceRequest 请求参数}): {@link DescribeUserBaseInfoInstanceResponse 返回参数} */
+  /** 获取用户基础信息 {@link DescribeUserBaseInfoInstanceRequest} {@link DescribeUserBaseInfoInstanceResponse} */
   DescribeUserBaseInfoInstance(data?: DescribeUserBaseInfoInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserBaseInfoInstanceResponse>;
 }
 

@@ -26,7 +26,7 @@ declare interface DescribeInvocationResultResponse {
   Results?: AlgorithmResult[];
   /** 0:获取结果失败1：结果还没有生成，继续轮询2：获取结果成功 */
   Status?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -42,16 +42,16 @@ declare interface InvokeServiceRequest {
 }
 
 declare interface InvokeServiceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tcex 腾讯云释义} */
 declare interface Tcex {
   (): Versions;
-  /** {@link DescribeInvocationResult 查询服务调用结果}({@link DescribeInvocationResultRequest 请求参数}): {@link DescribeInvocationResultResponse 返回参数} */
+  /** 查询服务调用结果 {@link DescribeInvocationResultRequest} {@link DescribeInvocationResultResponse} */
   DescribeInvocationResult(data: DescribeInvocationResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationResultResponse>;
-  /** {@link InvokeService 调用服务}({@link InvokeServiceRequest 请求参数}): {@link InvokeServiceResponse 返回参数} */
+  /** 调用服务 {@link InvokeServiceRequest} {@link InvokeServiceResponse} */
   InvokeService(data: InvokeServiceRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeServiceResponse>;
 }
 

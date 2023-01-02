@@ -236,7 +236,7 @@ declare interface ImageModerationResponse {
   Extra: string | null;
   /** 该字段用于返回检测对象对应的MD5校验值，以方便校验文件完整性。 */
   FileMD5: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -529,7 +529,7 @@ declare namespace V20200713 {
     TrendCount?: TrendCount[];
     /** 违规数据分布 */
     EvilCount?: EvilCount[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -547,7 +547,7 @@ declare namespace V20200713 {
     ImsDetailSet?: ImsDetail[] | null;
     /** 总条数 */
     TotalCount?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -595,7 +595,7 @@ declare namespace V20200713 {
     BizType: string;
     /** 扩展字段，用于特定信息返回，不同客户/Biztype下返回信息不同。 */
     Extra: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -603,13 +603,13 @@ declare namespace V20200713 {
 /** {@link Ims 图片内容安全} */
 declare interface Ims {
   (): Versions;
-  /** {@link ImageModeration 图片内容检测}({@link ImageModerationRequest 请求参数}): {@link ImageModerationResponse 返回参数} */
+  /** 图片内容检测 {@link ImageModerationRequest} {@link ImageModerationResponse} */
   ImageModeration(data?: ImageModerationRequest, config?: AxiosRequestConfig): AxiosPromise<ImageModerationResponse>;
-  /** {@link V20200713.DescribeImageStat 识别统计}({@link V20200713.DescribeImageStatRequest 请求参数}): {@link V20200713.DescribeImageStatResponse 返回参数} */
+  /** 识别统计 {@link V20200713.DescribeImageStatRequest} {@link V20200713.DescribeImageStatResponse} */
   DescribeImageStat(data: V20200713.DescribeImageStatRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.DescribeImageStatResponse>;
-  /** {@link V20200713.DescribeImsList 获取图片审核明细数据}({@link V20200713.DescribeImsListRequest 请求参数}): {@link V20200713.DescribeImsListResponse 返回参数} */
+  /** 获取图片审核明细数据 {@link V20200713.DescribeImsListRequest} {@link V20200713.DescribeImsListResponse} */
   DescribeImsList(data: V20200713.DescribeImsListRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.DescribeImsListResponse>;
-  /** {@link V20200713.ImageModeration 图片内容检测}({@link V20200713.ImageModerationRequest 请求参数}): {@link V20200713.ImageModerationResponse 返回参数} */
+  /** 图片内容检测 {@link V20200713.ImageModerationRequest} {@link V20200713.ImageModerationResponse} */
   ImageModeration(data: V20200713.ImageModerationRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.ImageModerationResponse>;
 }
 

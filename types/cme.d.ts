@@ -1194,7 +1194,7 @@ declare interface AddTeamMemberRequest {
 }
 
 declare interface AddTeamMemberResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1214,7 +1214,7 @@ declare interface CopyProjectRequest {
 declare interface CopyProjectResponse {
   /** 复制后的项目 ID。 */
   ProjectId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1230,7 +1230,7 @@ declare interface CreateClassRequest {
 }
 
 declare interface CreateClassResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1256,7 +1256,7 @@ declare interface CreateLinkRequest {
 declare interface CreateLinkResponse {
   /** 新建链接的媒体 Id。 */
   MaterialId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1294,7 +1294,7 @@ declare interface CreateProjectResponse {
   ProjectId: string;
   /** 当 Catagory 为 STREAM_CONNECT 时，数组返回长度为2 ，第0个代表主输入源推流信息，第1个代表备输入源推流信息。只有当各自输入源类型为推流时才有有效内容。 */
   RtmpPushInputInfoSet: RtmpPushInputInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1314,7 +1314,7 @@ declare interface CreateTeamRequest {
 declare interface CreateTeamResponse {
   /** 创建的团队 ID。 */
   TeamId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1338,7 +1338,7 @@ declare interface CreateVideoEncodingPresetRequest {
 declare interface CreateVideoEncodingPresetResponse {
   /** 模板 ID。 */
   Id: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1354,7 +1354,7 @@ declare interface DeleteClassRequest {
 }
 
 declare interface DeleteClassResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1366,7 +1366,7 @@ declare interface DeleteLoginStatusRequest {
 }
 
 declare interface DeleteLoginStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1380,7 +1380,7 @@ declare interface DeleteMaterialRequest {
 }
 
 declare interface DeleteMaterialResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1394,7 +1394,7 @@ declare interface DeleteProjectRequest {
 }
 
 declare interface DeleteProjectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1410,7 +1410,7 @@ declare interface DeleteTeamMembersRequest {
 }
 
 declare interface DeleteTeamMembersResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1424,7 +1424,7 @@ declare interface DeleteTeamRequest {
 }
 
 declare interface DeleteTeamResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1436,7 +1436,7 @@ declare interface DeleteVideoEncodingPresetRequest {
 }
 
 declare interface DeleteVideoEncodingPresetResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1456,7 +1456,7 @@ declare interface DescribeAccountsResponse {
   TotalCount: number;
   /** 账号信息列表。 */
   AccountInfoSet: AccountInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1472,7 +1472,7 @@ declare interface DescribeClassRequest {
 declare interface DescribeClassResponse {
   /** 分类信息列表。 */
   ClassInfoSet?: ClassInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1492,7 +1492,7 @@ declare interface DescribeJoinTeamsResponse {
   TotalCount: number;
   /** 团队列表。 */
   TeamSet: JoinTeamInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1506,7 +1506,7 @@ declare interface DescribeLoginStatusRequest {
 declare interface DescribeLoginStatusResponse {
   /** 用户登录状态列表。 */
   LoginStatusInfoSet: LoginStatusInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1524,7 +1524,7 @@ declare interface DescribeMaterialsRequest {
 declare interface DescribeMaterialsResponse {
   /** 媒体列表信息。 */
   MaterialInfoSet: MaterialInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1544,7 +1544,7 @@ declare interface DescribePlatformsResponse {
   TotalCount: number;
   /** 平台信息列表。 */
   PlatformInfoSet: PlatformInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1576,7 +1576,7 @@ declare interface DescribeProjectsResponse {
   TotalCount: number;
   /** 项目信息列表。 */
   ProjectInfoSet: ProjectInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1596,7 +1596,7 @@ declare interface DescribeResourceAuthorizationResponse {
   TotalCount: number | null;
   /** 授权信息列表。 */
   AuthorizationInfoSet: AuthorizationInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1614,7 +1614,7 @@ declare interface DescribeSharedSpaceResponse {
   TotalCount: number;
   /** 各个共享空间对应的授权者信息。 */
   AuthorizerSet: Authorizer[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1642,7 +1642,7 @@ declare interface DescribeTaskDetailResponse {
   VideoEditProjectOutput?: VideoEditProjectOutput | null;
   /** 创建时间，格式按照 ISO 8601 标准表示。 */
   CreateTime?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1668,7 +1668,7 @@ declare interface DescribeTasksResponse {
   TotalCount: number;
   /** 任务基础信息列表。 */
   TaskBaseInfoSet: TaskBaseInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1692,7 +1692,7 @@ declare interface DescribeTeamMembersResponse {
   TotalCount: number;
   /** 团队成员列表。 */
   MemberSet: TeamMemberInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1712,7 +1712,7 @@ declare interface DescribeTeamsResponse {
   TotalCount: number;
   /** 团队列表。 */
   TeamSet: TeamInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1732,7 +1732,7 @@ declare interface DescribeVideoEncodingPresetsResponse {
   TotalCount: number;
   /** 视频编码配置信息。 */
   VideoEncodingPresetSet: VideoEncodingPreset[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1760,7 +1760,7 @@ declare interface ExportVideoByEditorTrackDataRequest {
 declare interface ExportVideoByEditorTrackDataResponse {
   /** 任务 Id。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1786,7 +1786,7 @@ declare interface ExportVideoByTemplateRequest {
 declare interface ExportVideoByTemplateResponse {
   /** 导出任务 Id。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1814,7 +1814,7 @@ declare interface ExportVideoByVideoSegmentationDataRequest {
 declare interface ExportVideoByVideoSegmentationDataResponse {
   /** 任务 Id。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1842,7 +1842,7 @@ declare interface ExportVideoEditProjectRequest {
 declare interface ExportVideoEditProjectResponse {
   /** 任务 Id。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1866,7 +1866,7 @@ declare interface FlattenListMediaResponse {
   TotalCount: number;
   /** 该分类路径下及其子分类下的所有媒体基础信息列表。 */
   MaterialInfoSet: MaterialInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1882,7 +1882,7 @@ declare interface GenerateVideoSegmentationSchemeByAiRequest {
 declare interface GenerateVideoSegmentationSchemeByAiResponse {
   /** 视频智能拆条任务 Id 。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1902,7 +1902,7 @@ declare interface GrantResourceAuthorizationRequest {
 }
 
 declare interface GrantResourceAuthorizationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1930,7 +1930,7 @@ declare interface HandleStreamConnectProjectResponse {
   StreamInputRtmpPushUrl: string;
   /** 点播输入源播放进度信息，当 Operation 取值 DescribeInputPlayInfo 且 InputType 为 VodPull 类型时有效。 */
   VodPullInputPlayInfo: VodPullInputPlayInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1960,7 +1960,7 @@ declare interface ImportMaterialResponse {
   MaterialId: string;
   /** 媒体文预处理任务 ID，如果未指定发起预处理任务则为空。 */
   PreProcessTaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1988,7 +1988,7 @@ declare interface ImportMediaToProjectResponse {
   MaterialId: string;
   /** 媒体预处理任务 ID，如果未指定发起预处理任务则为空。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2014,7 +2014,7 @@ declare interface ListMediaResponse {
   MaterialInfoSet: MaterialInfo[];
   /** 浏览分类路径下的一级子类。 */
   ClassInfoSet: ClassInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2034,7 +2034,7 @@ declare interface ModifyMaterialRequest {
 }
 
 declare interface ModifyMaterialResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2054,7 +2054,7 @@ declare interface ModifyProjectRequest {
 }
 
 declare interface ModifyProjectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2074,7 +2074,7 @@ declare interface ModifyTeamMemberRequest {
 }
 
 declare interface ModifyTeamMemberResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2090,7 +2090,7 @@ declare interface ModifyTeamRequest {
 }
 
 declare interface ModifyTeamResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2112,7 +2112,7 @@ declare interface ModifyVideoEncodingPresetRequest {
 }
 
 declare interface ModifyVideoEncodingPresetResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2130,7 +2130,7 @@ declare interface MoveClassRequest {
 }
 
 declare interface MoveClassResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2146,7 +2146,7 @@ declare interface MoveResourceRequest {
 }
 
 declare interface MoveResourceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2160,7 +2160,7 @@ declare interface ParseEventRequest {
 declare interface ParseEventResponse {
   /** 事件内容。 */
   EventContent: EventContent;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2180,7 +2180,7 @@ declare interface RevokeResourceAuthorizationRequest {
 }
 
 declare interface RevokeResourceAuthorizationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2216,110 +2216,110 @@ declare interface SearchMaterialResponse {
   TotalCount: number;
   /** 媒体信息，仅返回基础信息。 */
   MaterialInfoSet: MaterialInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cme 多媒体创作引擎} */
 declare interface Cme {
   (): Versions;
-  /** {@link AddTeamMember 添加团队成员}({@link AddTeamMemberRequest 请求参数}): {@link AddTeamMemberResponse 返回参数} */
+  /** 添加团队成员 {@link AddTeamMemberRequest} {@link AddTeamMemberResponse} */
   AddTeamMember(data: AddTeamMemberRequest, config?: AxiosRequestConfig): AxiosPromise<AddTeamMemberResponse>;
-  /** {@link CopyProject 复制项目}({@link CopyProjectRequest 请求参数}): {@link CopyProjectResponse 返回参数} */
+  /** 复制项目 {@link CopyProjectRequest} {@link CopyProjectResponse} */
   CopyProject(data: CopyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CopyProjectResponse>;
-  /** {@link CreateClass 创建分类}({@link CreateClassRequest 请求参数}): {@link CreateClassResponse 返回参数} */
+  /** 创建分类 {@link CreateClassRequest} {@link CreateClassResponse} */
   CreateClass(data: CreateClassRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClassResponse>;
-  /** {@link CreateLink 创建链接}({@link CreateLinkRequest 请求参数}): {@link CreateLinkResponse 返回参数} */
+  /** 创建链接 {@link CreateLinkRequest} {@link CreateLinkResponse} */
   CreateLink(data: CreateLinkRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLinkResponse>;
-  /** {@link CreateProject 创建项目}({@link CreateProjectRequest 请求参数}): {@link CreateProjectResponse 返回参数} */
+  /** 创建项目 {@link CreateProjectRequest} {@link CreateProjectResponse} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
-  /** {@link CreateTeam 创建团队}({@link CreateTeamRequest 请求参数}): {@link CreateTeamResponse 返回参数} */
+  /** 创建团队 {@link CreateTeamRequest} {@link CreateTeamResponse} */
   CreateTeam(data: CreateTeamRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTeamResponse>;
-  /** {@link CreateVideoEncodingPreset 创建视频编码配置}({@link CreateVideoEncodingPresetRequest 请求参数}): {@link CreateVideoEncodingPresetResponse 返回参数} */
+  /** 创建视频编码配置 {@link CreateVideoEncodingPresetRequest} {@link CreateVideoEncodingPresetResponse} */
   CreateVideoEncodingPreset(data: CreateVideoEncodingPresetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoEncodingPresetResponse>;
-  /** {@link DeleteClass 删除分类}({@link DeleteClassRequest 请求参数}): {@link DeleteClassResponse 返回参数} */
+  /** 删除分类 {@link DeleteClassRequest} {@link DeleteClassResponse} */
   DeleteClass(data: DeleteClassRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClassResponse>;
-  /** {@link DeleteLoginStatus 删除登录态}({@link DeleteLoginStatusRequest 请求参数}): {@link DeleteLoginStatusResponse 返回参数} */
+  /** 删除登录态 {@link DeleteLoginStatusRequest} {@link DeleteLoginStatusResponse} */
   DeleteLoginStatus(data: DeleteLoginStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoginStatusResponse>;
-  /** {@link DeleteMaterial 删除媒体}({@link DeleteMaterialRequest 请求参数}): {@link DeleteMaterialResponse 返回参数} */
+  /** 删除媒体 {@link DeleteMaterialRequest} {@link DeleteMaterialResponse} */
   DeleteMaterial(data: DeleteMaterialRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMaterialResponse>;
-  /** {@link DeleteProject 删除项目}({@link DeleteProjectRequest 请求参数}): {@link DeleteProjectResponse 返回参数} */
+  /** 删除项目 {@link DeleteProjectRequest} {@link DeleteProjectResponse} */
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
-  /** {@link DeleteTeam 删除团队}({@link DeleteTeamRequest 请求参数}): {@link DeleteTeamResponse 返回参数} */
+  /** 删除团队 {@link DeleteTeamRequest} {@link DeleteTeamResponse} */
   DeleteTeam(data: DeleteTeamRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTeamResponse>;
-  /** {@link DeleteTeamMembers 删除团队成员}({@link DeleteTeamMembersRequest 请求参数}): {@link DeleteTeamMembersResponse 返回参数} */
+  /** 删除团队成员 {@link DeleteTeamMembersRequest} {@link DeleteTeamMembersResponse} */
   DeleteTeamMembers(data: DeleteTeamMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTeamMembersResponse>;
-  /** {@link DeleteVideoEncodingPreset 删除视频编码配置}({@link DeleteVideoEncodingPresetRequest 请求参数}): {@link DeleteVideoEncodingPresetResponse 返回参数} */
+  /** 删除视频编码配置 {@link DeleteVideoEncodingPresetRequest} {@link DeleteVideoEncodingPresetResponse} */
   DeleteVideoEncodingPreset(data: DeleteVideoEncodingPresetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVideoEncodingPresetResponse>;
-  /** {@link DescribeAccounts 获取账号信息}({@link DescribeAccountsRequest 请求参数}): {@link DescribeAccountsResponse 返回参数} */
+  /** 获取账号信息 {@link DescribeAccountsRequest} {@link DescribeAccountsResponse} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
-  /** {@link DescribeClass 获取分类列表}({@link DescribeClassRequest 请求参数}): {@link DescribeClassResponse 返回参数} */
+  /** 获取分类列表 {@link DescribeClassRequest} {@link DescribeClassResponse} */
   DescribeClass(data: DescribeClassRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassResponse>;
-  /** {@link DescribeJoinTeams 获取成员加入的团队列表}({@link DescribeJoinTeamsRequest 请求参数}): {@link DescribeJoinTeamsResponse 返回参数} */
+  /** 获取成员加入的团队列表 {@link DescribeJoinTeamsRequest} {@link DescribeJoinTeamsResponse} */
   DescribeJoinTeams(data: DescribeJoinTeamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJoinTeamsResponse>;
-  /** {@link DescribeLoginStatus 查询登录态}({@link DescribeLoginStatusRequest 请求参数}): {@link DescribeLoginStatusResponse 返回参数} */
+  /** 查询登录态 {@link DescribeLoginStatusRequest} {@link DescribeLoginStatusResponse} */
   DescribeLoginStatus(data: DescribeLoginStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginStatusResponse>;
-  /** {@link DescribeMaterials 获取媒体详情}({@link DescribeMaterialsRequest 请求参数}): {@link DescribeMaterialsResponse 返回参数} */
+  /** 获取媒体详情 {@link DescribeMaterialsRequest} {@link DescribeMaterialsResponse} */
   DescribeMaterials(data: DescribeMaterialsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaterialsResponse>;
-  /** {@link DescribePlatforms 获取平台列表}({@link DescribePlatformsRequest 请求参数}): {@link DescribePlatformsResponse 返回参数} */
+  /** 获取平台列表 {@link DescribePlatformsRequest} {@link DescribePlatformsResponse} */
   DescribePlatforms(data?: DescribePlatformsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlatformsResponse>;
-  /** {@link DescribeProjects 获取项目列表}({@link DescribeProjectsRequest 请求参数}): {@link DescribeProjectsResponse 返回参数} */
+  /** 获取项目列表 {@link DescribeProjectsRequest} {@link DescribeProjectsResponse} */
   DescribeProjects(data: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
-  /** {@link DescribeResourceAuthorization 获取资源授权列表}({@link DescribeResourceAuthorizationRequest 请求参数}): {@link DescribeResourceAuthorizationResponse 返回参数} */
+  /** 获取资源授权列表 {@link DescribeResourceAuthorizationRequest} {@link DescribeResourceAuthorizationResponse} */
   DescribeResourceAuthorization(data: DescribeResourceAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceAuthorizationResponse>;
-  /** {@link DescribeSharedSpace 获取共享空间}({@link DescribeSharedSpaceRequest 请求参数}): {@link DescribeSharedSpaceResponse 返回参数} */
+  /** 获取共享空间 {@link DescribeSharedSpaceRequest} {@link DescribeSharedSpaceResponse} */
   DescribeSharedSpace(data: DescribeSharedSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSharedSpaceResponse>;
-  /** {@link DescribeTaskDetail 获取任务详情}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
+  /** 获取任务详情 {@link DescribeTaskDetailRequest} {@link DescribeTaskDetailResponse} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** {@link DescribeTasks 获取任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
+  /** 获取任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** {@link DescribeTeamMembers 获取团队成员信息}({@link DescribeTeamMembersRequest 请求参数}): {@link DescribeTeamMembersResponse 返回参数} */
+  /** 获取团队成员信息 {@link DescribeTeamMembersRequest} {@link DescribeTeamMembersResponse} */
   DescribeTeamMembers(data: DescribeTeamMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTeamMembersResponse>;
-  /** {@link DescribeTeams 获取团队信息}({@link DescribeTeamsRequest 请求参数}): {@link DescribeTeamsResponse 返回参数} */
+  /** 获取团队信息 {@link DescribeTeamsRequest} {@link DescribeTeamsResponse} */
   DescribeTeams(data: DescribeTeamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTeamsResponse>;
-  /** {@link DescribeVideoEncodingPresets 查询视频编码配置}({@link DescribeVideoEncodingPresetsRequest 请求参数}): {@link DescribeVideoEncodingPresetsResponse 返回参数} */
+  /** 查询视频编码配置 {@link DescribeVideoEncodingPresetsRequest} {@link DescribeVideoEncodingPresetsResponse} */
   DescribeVideoEncodingPresets(data: DescribeVideoEncodingPresetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoEncodingPresetsResponse>;
-  /** {@link ExportVideoByEditorTrackData 使用视频合成协议导出视频}({@link ExportVideoByEditorTrackDataRequest 请求参数}): {@link ExportVideoByEditorTrackDataResponse 返回参数} */
+  /** 使用视频合成协议导出视频 {@link ExportVideoByEditorTrackDataRequest} {@link ExportVideoByEditorTrackDataResponse} */
   ExportVideoByEditorTrackData(data: ExportVideoByEditorTrackDataRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVideoByEditorTrackDataResponse>;
-  /** {@link ExportVideoByTemplate 使用视频剪辑模板导出视频}({@link ExportVideoByTemplateRequest 请求参数}): {@link ExportVideoByTemplateResponse 返回参数} */
+  /** 使用视频剪辑模板导出视频 {@link ExportVideoByTemplateRequest} {@link ExportVideoByTemplateResponse} */
   ExportVideoByTemplate(data: ExportVideoByTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVideoByTemplateResponse>;
-  /** {@link ExportVideoByVideoSegmentationData 使用视频智能拆条数据导出视频}({@link ExportVideoByVideoSegmentationDataRequest 请求参数}): {@link ExportVideoByVideoSegmentationDataResponse 返回参数} */
+  /** 使用视频智能拆条数据导出视频 {@link ExportVideoByVideoSegmentationDataRequest} {@link ExportVideoByVideoSegmentationDataResponse} */
   ExportVideoByVideoSegmentationData(data: ExportVideoByVideoSegmentationDataRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVideoByVideoSegmentationDataResponse>;
-  /** {@link ExportVideoEditProject 导出视频编辑项目}({@link ExportVideoEditProjectRequest 请求参数}): {@link ExportVideoEditProjectResponse 返回参数} */
+  /** 导出视频编辑项目 {@link ExportVideoEditProjectRequest} {@link ExportVideoEditProjectResponse} */
   ExportVideoEditProject(data: ExportVideoEditProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVideoEditProjectResponse>;
-  /** {@link FlattenListMedia 平铺浏览媒体}({@link FlattenListMediaRequest 请求参数}): {@link FlattenListMediaResponse 返回参数} */
+  /** 平铺浏览媒体 {@link FlattenListMediaRequest} {@link FlattenListMediaResponse} */
   FlattenListMedia(data: FlattenListMediaRequest, config?: AxiosRequestConfig): AxiosPromise<FlattenListMediaResponse>;
-  /** {@link GenerateVideoSegmentationSchemeByAi 视频智能拆条}({@link GenerateVideoSegmentationSchemeByAiRequest 请求参数}): {@link GenerateVideoSegmentationSchemeByAiResponse 返回参数} */
+  /** 视频智能拆条 {@link GenerateVideoSegmentationSchemeByAiRequest} {@link GenerateVideoSegmentationSchemeByAiResponse} */
   GenerateVideoSegmentationSchemeByAi(data: GenerateVideoSegmentationSchemeByAiRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateVideoSegmentationSchemeByAiResponse>;
-  /** {@link GrantResourceAuthorization 发起媒资授权}({@link GrantResourceAuthorizationRequest 请求参数}): {@link GrantResourceAuthorizationResponse 返回参数} */
+  /** 发起媒资授权 {@link GrantResourceAuthorizationRequest} {@link GrantResourceAuthorizationResponse} */
   GrantResourceAuthorization(data: GrantResourceAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<GrantResourceAuthorizationResponse>;
-  /** {@link HandleStreamConnectProject 操作云转推项目}({@link HandleStreamConnectProjectRequest 请求参数}): {@link HandleStreamConnectProjectResponse 返回参数} */
+  /** 操作云转推项目 {@link HandleStreamConnectProjectRequest} {@link HandleStreamConnectProjectResponse} */
   HandleStreamConnectProject(data: HandleStreamConnectProjectRequest, config?: AxiosRequestConfig): AxiosPromise<HandleStreamConnectProjectResponse>;
-  /** {@link ImportMaterial 导入媒体}({@link ImportMaterialRequest 请求参数}): {@link ImportMaterialResponse 返回参数} */
+  /** 导入媒体 {@link ImportMaterialRequest} {@link ImportMaterialResponse} */
   ImportMaterial(data: ImportMaterialRequest, config?: AxiosRequestConfig): AxiosPromise<ImportMaterialResponse>;
-  /** {@link ImportMediaToProject 在项目中导入媒体}({@link ImportMediaToProjectRequest 请求参数}): {@link ImportMediaToProjectResponse 返回参数} */
+  /** 在项目中导入媒体 {@link ImportMediaToProjectRequest} {@link ImportMediaToProjectResponse} */
   ImportMediaToProject(data: ImportMediaToProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ImportMediaToProjectResponse>;
-  /** {@link ListMedia 浏览媒体}({@link ListMediaRequest 请求参数}): {@link ListMediaResponse 返回参数} */
+  /** 浏览媒体 {@link ListMediaRequest} {@link ListMediaResponse} */
   ListMedia(data: ListMediaRequest, config?: AxiosRequestConfig): AxiosPromise<ListMediaResponse>;
-  /** {@link ModifyMaterial 修改媒体信息}({@link ModifyMaterialRequest 请求参数}): {@link ModifyMaterialResponse 返回参数} */
+  /** 修改媒体信息 {@link ModifyMaterialRequest} {@link ModifyMaterialResponse} */
   ModifyMaterial(data: ModifyMaterialRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaterialResponse>;
-  /** {@link ModifyProject 修改项目}({@link ModifyProjectRequest 请求参数}): {@link ModifyProjectResponse 返回参数} */
+  /** 修改项目 {@link ModifyProjectRequest} {@link ModifyProjectResponse} */
   ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
-  /** {@link ModifyTeam 修改团队信息}({@link ModifyTeamRequest 请求参数}): {@link ModifyTeamResponse 返回参数} */
+  /** 修改团队信息 {@link ModifyTeamRequest} {@link ModifyTeamResponse} */
   ModifyTeam(data: ModifyTeamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTeamResponse>;
-  /** {@link ModifyTeamMember 修改团队成员}({@link ModifyTeamMemberRequest 请求参数}): {@link ModifyTeamMemberResponse 返回参数} */
+  /** 修改团队成员 {@link ModifyTeamMemberRequest} {@link ModifyTeamMemberResponse} */
   ModifyTeamMember(data: ModifyTeamMemberRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTeamMemberResponse>;
-  /** {@link ModifyVideoEncodingPreset 修改视频编码配置}({@link ModifyVideoEncodingPresetRequest 请求参数}): {@link ModifyVideoEncodingPresetResponse 返回参数} */
+  /** 修改视频编码配置 {@link ModifyVideoEncodingPresetRequest} {@link ModifyVideoEncodingPresetResponse} */
   ModifyVideoEncodingPreset(data: ModifyVideoEncodingPresetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVideoEncodingPresetResponse>;
-  /** {@link MoveClass 移动分类}({@link MoveClassRequest 请求参数}): {@link MoveClassResponse 返回参数} */
+  /** 移动分类 {@link MoveClassRequest} {@link MoveClassResponse} */
   MoveClass(data: MoveClassRequest, config?: AxiosRequestConfig): AxiosPromise<MoveClassResponse>;
-  /** {@link MoveResource 移动资源}({@link MoveResourceRequest 请求参数}): {@link MoveResourceResponse 返回参数} */
+  /** 移动资源 {@link MoveResourceRequest} {@link MoveResourceResponse} */
   MoveResource(data: MoveResourceRequest, config?: AxiosRequestConfig): AxiosPromise<MoveResourceResponse>;
-  /** {@link ParseEvent 回调事件内容解析}({@link ParseEventRequest 请求参数}): {@link ParseEventResponse 返回参数} */
+  /** 回调事件内容解析 {@link ParseEventRequest} {@link ParseEventResponse} */
   ParseEvent(data: ParseEventRequest, config?: AxiosRequestConfig): AxiosPromise<ParseEventResponse>;
-  /** {@link RevokeResourceAuthorization 撤销资源授权}({@link RevokeResourceAuthorizationRequest 请求参数}): {@link RevokeResourceAuthorizationResponse 返回参数} */
+  /** 撤销资源授权 {@link RevokeResourceAuthorizationRequest} {@link RevokeResourceAuthorizationResponse} */
   RevokeResourceAuthorization(data: RevokeResourceAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeResourceAuthorizationResponse>;
-  /** {@link SearchMaterial 搜索媒体}({@link SearchMaterialRequest 请求参数}): {@link SearchMaterialResponse 返回参数} */
+  /** 搜索媒体 {@link SearchMaterialRequest} {@link SearchMaterialResponse} */
   SearchMaterial(data: SearchMaterialRequest, config?: AxiosRequestConfig): AxiosPromise<SearchMaterialResponse>;
 }
 

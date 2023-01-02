@@ -432,7 +432,7 @@ declare interface AddLabelRequest {
 }
 
 declare interface AddLabelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -442,7 +442,7 @@ declare interface CancelAuthorityIssuerRequest {
 }
 
 declare interface CancelAuthorityIssuerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -462,7 +462,7 @@ declare interface CheckChainResponse {
   ChainId: string;
   /** 应用名称 */
   AppName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -474,7 +474,7 @@ declare interface CheckDidDeployRequest {
 declare interface CheckDidDeployResponse {
   /** 服务信息 */
   Task: Task;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -492,7 +492,7 @@ declare interface CreateCredentialRequest {
 declare interface CreateCredentialResponse {
   /** Credential的具体信息 */
   CredentialData: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -516,7 +516,7 @@ declare interface CreateDidServiceRequest {
 declare interface CreateDidServiceResponse {
   /** 服务信息 */
   Task: Task;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -530,7 +530,7 @@ declare interface CreateLabelRequest {
 }
 
 declare interface CreateLabelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -544,7 +544,7 @@ declare interface CreateSelectiveCredentialRequest {
 declare interface CreateSelectiveCredentialResponse {
   /** 凭证字符串 */
   CredentialData: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -560,7 +560,7 @@ declare interface CreateTDidByPrivateKeyRequest {
 declare interface CreateTDidByPrivateKeyResponse {
   /** did的具体信息 */
   Did: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -578,7 +578,7 @@ declare interface CreateTDidByPublicKeyRequest {
 declare interface CreateTDidByPublicKeyResponse {
   /** did具体信息 */
   Did: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -594,7 +594,7 @@ declare interface CreateTDidRequest {
 declare interface CreateTDidResponse {
   /** TDID */
   Did: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -610,7 +610,7 @@ declare interface DeployByNameRequest {
 declare interface DeployByNameResponse {
   /** 哈希值 */
   Hash: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -620,7 +620,7 @@ declare interface DownCptRequest {
 }
 
 declare interface DownCptResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -630,7 +630,7 @@ declare interface EnableHashRequest {
 }
 
 declare interface EnableHashResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -644,7 +644,7 @@ declare interface GetAgencyTDidResponse {
   Prefix: string;
   /** did详情 */
   Identity: Identity[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -664,7 +664,7 @@ declare interface GetAuthoritiesListResponse {
   ResultList: Authority[];
   /** 总数 */
   AllCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -688,7 +688,7 @@ declare interface GetAuthorityIssuerResponse {
   RegisterTime: string;
   /** 认证时间 */
   RecognizeTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -700,7 +700,7 @@ declare interface GetConsortiumClusterListRequest {
 declare interface GetConsortiumClusterListResponse {
   /** 网络列表 */
   ClusterList: BcosClusterItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -710,7 +710,7 @@ declare interface GetConsortiumListRequest {
 declare interface GetConsortiumListResponse {
   /** 联盟列表 */
   ConsortiumList: ConsortiumItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -722,7 +722,7 @@ declare interface GetCptInfoRequest {
 declare interface GetCptInfoResponse {
   /** CptJsonData的具体信息 */
   CptJsonData: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -740,7 +740,7 @@ declare interface GetCptListResponse {
   CptDataList: CptListData[];
   /** 凭证模板总数 */
   AllCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -756,7 +756,7 @@ declare interface GetCredentialCptRankRequest {
 declare interface GetCredentialCptRankResponse {
   /** Rank集合 */
   RankIssueResult: CptIssueRank[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -772,7 +772,7 @@ declare interface GetCredentialIssueRankRequest {
 declare interface GetCredentialIssueRankResponse {
   /** Rank集合 */
   RankIssueResult: CptIssueRank[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -788,7 +788,7 @@ declare interface GetCredentialIssueTrendRequest {
 declare interface GetCredentialIssueTrendResponse {
   /** Trend集合 */
   Trend: Trend[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -800,7 +800,7 @@ declare interface GetCredentialStatusRequest {
 declare interface GetCredentialStatusResponse {
   /** 凭证状态信息 */
   CredentialStatus: CredentialStatus;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -834,7 +834,7 @@ declare interface GetDataPanelResponse {
   FabricCount: number;
   /** 长安链网络类型数量 */
   ChainMakerCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -870,7 +870,7 @@ declare interface GetDeployInfoResponse {
   SpecificAddress: string;
   /** 链ID */
   ChainId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -890,7 +890,7 @@ declare interface GetDeployListResponse {
   AllCount: number;
   /** 合约部署列表 */
   Result: Contract[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -906,7 +906,7 @@ declare interface GetDidClusterDetailResponse {
   ConsortiumName: string;
   /** 区块链组织名称 */
   ChainAgency: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -916,7 +916,7 @@ declare interface GetDidClusterListRequest {
 declare interface GetDidClusterListResponse {
   /** DID网络列表 */
   DidClusterList: DidCluster[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -946,7 +946,7 @@ declare interface GetDidDetailResponse {
   ResChainId: string;
   /** 创建时间 */
   CreateTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -960,7 +960,7 @@ declare interface GetDidDocumentResponse {
   Name: string;
   /** DID文档 */
   Document: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -982,7 +982,7 @@ declare interface GetDidListResponse {
   DataList: DidData[];
   /** 数据总条数 */
   AllCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -998,7 +998,7 @@ declare interface GetDidRegisterTrendRequest {
 declare interface GetDidRegisterTrendResponse {
   /** Trend集合 */
   Trend: Trend[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1010,7 +1010,7 @@ declare interface GetDidServiceDetailRequest {
 declare interface GetDidServiceDetailResponse {
   /** did服务信息 */
   DidService: DidServiceInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1022,7 +1022,7 @@ declare interface GetDidServiceListRequest {
 declare interface GetDidServiceListResponse {
   /** DID服务列表 */
   DidServiceList: DidServiceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1036,7 +1036,7 @@ declare interface GetGroupListRequest {
 declare interface GetGroupListResponse {
   /** 群组数据集合 */
   Result: Group[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1056,7 +1056,7 @@ declare interface GetLabelListResponse {
   Result: Label[];
   /** 总条数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1072,7 +1072,7 @@ declare interface GetPolicyListResponse {
   PolicyDataList: Policy[];
   /** 总数 */
   AllCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1086,7 +1086,7 @@ declare interface GetPublicKeyResponse {
   Did: string;
   /** 公钥 */
   PublicKey: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1104,7 +1104,7 @@ declare interface QueryPolicyResponse {
   CptId: number;
   /** 披露策略的具体信息 */
   PolicyData: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1114,7 +1114,7 @@ declare interface RecognizeAuthorityIssuerRequest {
 }
 
 declare interface RecognizeAuthorityIssuerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1130,7 +1130,7 @@ declare interface RegisterClaimPolicyResponse {
   Id: number;
   /** 披露策略ID */
   PolicyId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1150,7 +1150,7 @@ declare interface RegisterCptResponse {
   Id: number;
   /** 凭证模板id */
   CptId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1164,7 +1164,7 @@ declare interface RegisterIssuerRequest {
 }
 
 declare interface RegisterIssuerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1174,7 +1174,7 @@ declare interface RemoveHashRequest {
 }
 
 declare interface RemoveHashResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1184,7 +1184,7 @@ declare interface SetCredentialStatusRequest {
 }
 
 declare interface SetCredentialStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1200,7 +1200,7 @@ declare interface VerifyCredentialResponse {
   VerifyCode: number;
   /** 验证消息 */
   VerifyMessage: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1208,110 +1208,110 @@ declare interface VerifyPurchaseRequest {
 }
 
 declare interface VerifyPurchaseResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tdid 分布式身份} */
 declare interface Tdid {
   (): Versions;
-  /** {@link AddLabel DID添加标签}({@link AddLabelRequest 请求参数}): {@link AddLabelResponse 返回参数} */
+  /** DID添加标签 {@link AddLabelRequest} {@link AddLabelResponse} */
   AddLabel(data: AddLabelRequest, config?: AxiosRequestConfig): AxiosPromise<AddLabelResponse>;
-  /** {@link CancelAuthorityIssuer 撤消权威机构认证}({@link CancelAuthorityIssuerRequest 请求参数}): {@link CancelAuthorityIssuerResponse 返回参数} */
+  /** 撤消权威机构认证 {@link CancelAuthorityIssuerRequest} {@link CancelAuthorityIssuerResponse} */
   CancelAuthorityIssuer(data: CancelAuthorityIssuerRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAuthorityIssuerResponse>;
-  /** {@link CheckChain 检查区块链信息}({@link CheckChainRequest 请求参数}): {@link CheckChainResponse 返回参数} */
+  /** 检查区块链信息 {@link CheckChainRequest} {@link CheckChainResponse} */
   CheckChain(data: CheckChainRequest, config?: AxiosRequestConfig): AxiosPromise<CheckChainResponse>;
-  /** {@link CheckDidDeploy 检查部署情况}({@link CheckDidDeployRequest 请求参数}): {@link CheckDidDeployResponse 返回参数} */
+  /** 检查部署情况 {@link CheckDidDeployRequest} {@link CheckDidDeployResponse} */
   CheckDidDeploy(data: CheckDidDeployRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDidDeployResponse>;
-  /** {@link CreateCredential 创建凭证}({@link CreateCredentialRequest 请求参数}): {@link CreateCredentialResponse 返回参数} */
+  /** 创建凭证 {@link CreateCredentialRequest} {@link CreateCredentialResponse} */
   CreateCredential(data: CreateCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCredentialResponse>;
-  /** {@link CreateDidService 创建DID服务}({@link CreateDidServiceRequest 请求参数}): {@link CreateDidServiceResponse 返回参数} */
+  /** 创建DID服务 {@link CreateDidServiceRequest} {@link CreateDidServiceResponse} */
   CreateDidService(data: CreateDidServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDidServiceResponse>;
-  /** {@link CreateLabel 新建标签}({@link CreateLabelRequest 请求参数}): {@link CreateLabelResponse 返回参数} */
+  /** 新建标签 {@link CreateLabelRequest} {@link CreateLabelResponse} */
   CreateLabel(data: CreateLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLabelResponse>;
-  /** {@link CreateSelectiveCredential 创建选择性批露凭证}({@link CreateSelectiveCredentialRequest 请求参数}): {@link CreateSelectiveCredentialResponse 返回参数} */
+  /** 创建选择性批露凭证 {@link CreateSelectiveCredentialRequest} {@link CreateSelectiveCredentialResponse} */
   CreateSelectiveCredential(data: CreateSelectiveCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSelectiveCredentialResponse>;
-  /** {@link CreateTDid 创建机构DID}({@link CreateTDidRequest 请求参数}): {@link CreateTDidResponse 返回参数} */
+  /** 创建机构DID {@link CreateTDidRequest} {@link CreateTDidResponse} */
   CreateTDid(data: CreateTDidRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTDidResponse>;
-  /** {@link CreateTDidByPrivateKey 新建DID根据私钥生成Tdid}({@link CreateTDidByPrivateKeyRequest 请求参数}): {@link CreateTDidByPrivateKeyResponse 返回参数} */
+  /** 新建DID根据私钥生成Tdid {@link CreateTDidByPrivateKeyRequest} {@link CreateTDidByPrivateKeyResponse} */
   CreateTDidByPrivateKey(data: CreateTDidByPrivateKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTDidByPrivateKeyResponse>;
-  /** {@link CreateTDidByPublicKey 新建DID根据公钥生成Tdid}({@link CreateTDidByPublicKeyRequest 请求参数}): {@link CreateTDidByPublicKeyResponse 返回参数} */
+  /** 新建DID根据公钥生成Tdid {@link CreateTDidByPublicKeyRequest} {@link CreateTDidByPublicKeyResponse} */
   CreateTDidByPublicKey(data: CreateTDidByPublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTDidByPublicKeyResponse>;
-  /** {@link DeployByName 通过Name部署TDID合约}({@link DeployByNameRequest 请求参数}): {@link DeployByNameResponse 返回参数} */
+  /** 通过Name部署TDID合约 {@link DeployByNameRequest} {@link DeployByNameResponse} */
   DeployByName(data: DeployByNameRequest, config?: AxiosRequestConfig): AxiosPromise<DeployByNameResponse>;
-  /** {@link DownCpt 凭证模版下载}({@link DownCptRequest 请求参数}): {@link DownCptResponse 返回参数} */
+  /** 凭证模版下载 {@link DownCptRequest} {@link DownCptResponse} */
   DownCpt(data: DownCptRequest, config?: AxiosRequestConfig): AxiosPromise<DownCptResponse>;
-  /** {@link EnableHash 启用合约}({@link EnableHashRequest 请求参数}): {@link EnableHashResponse 返回参数} */
+  /** 启用合约 {@link EnableHashRequest} {@link EnableHashResponse} */
   EnableHash(data: EnableHashRequest, config?: AxiosRequestConfig): AxiosPromise<EnableHashResponse>;
-  /** {@link GetAgencyTDid 本机构DID详情}({@link GetAgencyTDidRequest 请求参数}): {@link GetAgencyTDidResponse 返回参数} */
+  /** 本机构DID详情 {@link GetAgencyTDidRequest} {@link GetAgencyTDidResponse} */
   GetAgencyTDid(data: GetAgencyTDidRequest, config?: AxiosRequestConfig): AxiosPromise<GetAgencyTDidResponse>;
-  /** {@link GetAuthoritiesList 权威机构列表}({@link GetAuthoritiesListRequest 请求参数}): {@link GetAuthoritiesListResponse 返回参数} */
+  /** 权威机构列表 {@link GetAuthoritiesListRequest} {@link GetAuthoritiesListResponse} */
   GetAuthoritiesList(data: GetAuthoritiesListRequest, config?: AxiosRequestConfig): AxiosPromise<GetAuthoritiesListResponse>;
-  /** {@link GetAuthorityIssuer 获取权威机构信息}({@link GetAuthorityIssuerRequest 请求参数}): {@link GetAuthorityIssuerResponse 返回参数} */
+  /** 获取权威机构信息 {@link GetAuthorityIssuerRequest} {@link GetAuthorityIssuerResponse} */
   GetAuthorityIssuer(data: GetAuthorityIssuerRequest, config?: AxiosRequestConfig): AxiosPromise<GetAuthorityIssuerResponse>;
-  /** {@link GetConsortiumClusterList 获取联盟bcos网络列表}({@link GetConsortiumClusterListRequest 请求参数}): {@link GetConsortiumClusterListResponse 返回参数} */
+  /** 获取联盟bcos网络列表 {@link GetConsortiumClusterListRequest} {@link GetConsortiumClusterListResponse} */
   GetConsortiumClusterList(data: GetConsortiumClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<GetConsortiumClusterListResponse>;
-  /** {@link GetConsortiumList 获取联盟列表}({@link GetConsortiumListRequest 请求参数}): {@link GetConsortiumListResponse 返回参数} */
+  /** 获取联盟列表 {@link GetConsortiumListRequest} {@link GetConsortiumListResponse} */
   GetConsortiumList(data?: GetConsortiumListRequest, config?: AxiosRequestConfig): AxiosPromise<GetConsortiumListResponse>;
-  /** {@link GetCptInfo 凭证模版详情}({@link GetCptInfoRequest 请求参数}): {@link GetCptInfoResponse 返回参数} */
+  /** 凭证模版详情 {@link GetCptInfoRequest} {@link GetCptInfoResponse} */
   GetCptInfo(data: GetCptInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetCptInfoResponse>;
-  /** {@link GetCptList 凭证模版列表}({@link GetCptListRequest 请求参数}): {@link GetCptListResponse 返回参数} */
+  /** 凭证模版列表 {@link GetCptListRequest} {@link GetCptListResponse} */
   GetCptList(data: GetCptListRequest, config?: AxiosRequestConfig): AxiosPromise<GetCptListResponse>;
-  /** {@link GetCredentialCptRank 凭证颁发模板排行}({@link GetCredentialCptRankRequest 请求参数}): {@link GetCredentialCptRankResponse 返回参数} */
+  /** 凭证颁发模板排行 {@link GetCredentialCptRankRequest} {@link GetCredentialCptRankResponse} */
   GetCredentialCptRank(data: GetCredentialCptRankRequest, config?: AxiosRequestConfig): AxiosPromise<GetCredentialCptRankResponse>;
-  /** {@link GetCredentialIssueRank 凭证颁发机构排行}({@link GetCredentialIssueRankRequest 请求参数}): {@link GetCredentialIssueRankResponse 返回参数} */
+  /** 凭证颁发机构排行 {@link GetCredentialIssueRankRequest} {@link GetCredentialIssueRankResponse} */
   GetCredentialIssueRank(data: GetCredentialIssueRankRequest, config?: AxiosRequestConfig): AxiosPromise<GetCredentialIssueRankResponse>;
-  /** {@link GetCredentialIssueTrend 凭证颁发趋势}({@link GetCredentialIssueTrendRequest 请求参数}): {@link GetCredentialIssueTrendResponse 返回参数} */
+  /** 凭证颁发趋势 {@link GetCredentialIssueTrendRequest} {@link GetCredentialIssueTrendResponse} */
   GetCredentialIssueTrend(data: GetCredentialIssueTrendRequest, config?: AxiosRequestConfig): AxiosPromise<GetCredentialIssueTrendResponse>;
-  /** {@link GetCredentialStatus 获取凭证链上状态}({@link GetCredentialStatusRequest 请求参数}): {@link GetCredentialStatusResponse 返回参数} */
+  /** 获取凭证链上状态 {@link GetCredentialStatusRequest} {@link GetCredentialStatusResponse} */
   GetCredentialStatus(data: GetCredentialStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetCredentialStatusResponse>;
-  /** {@link GetDataPanel 概览}({@link GetDataPanelRequest 请求参数}): {@link GetDataPanelResponse 返回参数} */
+  /** 概览 {@link GetDataPanelRequest} {@link GetDataPanelResponse} */
   GetDataPanel(data?: GetDataPanelRequest, config?: AxiosRequestConfig): AxiosPromise<GetDataPanelResponse>;
-  /** {@link GetDeployInfo 合约部署详情}({@link GetDeployInfoRequest 请求参数}): {@link GetDeployInfoResponse 返回参数} */
+  /** 合约部署详情 {@link GetDeployInfoRequest} {@link GetDeployInfoResponse} */
   GetDeployInfo(data: GetDeployInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeployInfoResponse>;
-  /** {@link GetDeployList 合约部署列表}({@link GetDeployListRequest 请求参数}): {@link GetDeployListResponse 返回参数} */
+  /** 合约部署列表 {@link GetDeployListRequest} {@link GetDeployListResponse} */
   GetDeployList(data: GetDeployListRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeployListResponse>;
-  /** {@link GetDidClusterDetail 获取DID网络详情}({@link GetDidClusterDetailRequest 请求参数}): {@link GetDidClusterDetailResponse 返回参数} */
+  /** 获取DID网络详情 {@link GetDidClusterDetailRequest} {@link GetDidClusterDetailResponse} */
   GetDidClusterDetail(data: GetDidClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<GetDidClusterDetailResponse>;
-  /** {@link GetDidClusterList 获取DID网络列表}({@link GetDidClusterListRequest 请求参数}): {@link GetDidClusterListResponse 返回参数} */
+  /** 获取DID网络列表 {@link GetDidClusterListRequest} {@link GetDidClusterListResponse} */
   GetDidClusterList(data?: GetDidClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<GetDidClusterListResponse>;
-  /** {@link GetDidDetail DID详情}({@link GetDidDetailRequest 请求参数}): {@link GetDidDetailResponse 返回参数} */
+  /** DID详情 {@link GetDidDetailRequest} {@link GetDidDetailResponse} */
   GetDidDetail(data: GetDidDetailRequest, config?: AxiosRequestConfig): AxiosPromise<GetDidDetailResponse>;
-  /** {@link GetDidDocument 查看DID文档}({@link GetDidDocumentRequest 请求参数}): {@link GetDidDocumentResponse 返回参数} */
+  /** 查看DID文档 {@link GetDidDocumentRequest} {@link GetDidDocumentResponse} */
   GetDidDocument(data: GetDidDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<GetDidDocumentResponse>;
-  /** {@link GetDidList DID列表}({@link GetDidListRequest 请求参数}): {@link GetDidListResponse 返回参数} */
+  /** DID列表 {@link GetDidListRequest} {@link GetDidListResponse} */
   GetDidList(data: GetDidListRequest, config?: AxiosRequestConfig): AxiosPromise<GetDidListResponse>;
-  /** {@link GetDidRegisterTrend DID注册趋势}({@link GetDidRegisterTrendRequest 请求参数}): {@link GetDidRegisterTrendResponse 返回参数} */
+  /** DID注册趋势 {@link GetDidRegisterTrendRequest} {@link GetDidRegisterTrendResponse} */
   GetDidRegisterTrend(data: GetDidRegisterTrendRequest, config?: AxiosRequestConfig): AxiosPromise<GetDidRegisterTrendResponse>;
-  /** {@link GetDidServiceDetail 获取DID服务详情}({@link GetDidServiceDetailRequest 请求参数}): {@link GetDidServiceDetailResponse 返回参数} */
+  /** 获取DID服务详情 {@link GetDidServiceDetailRequest} {@link GetDidServiceDetailResponse} */
   GetDidServiceDetail(data: GetDidServiceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<GetDidServiceDetailResponse>;
-  /** {@link GetDidServiceList 获取DID服务列表}({@link GetDidServiceListRequest 请求参数}): {@link GetDidServiceListResponse 返回参数} */
+  /** 获取DID服务列表 {@link GetDidServiceListRequest} {@link GetDidServiceListResponse} */
   GetDidServiceList(data: GetDidServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetDidServiceListResponse>;
-  /** {@link GetGroupList 主群组配置列表}({@link GetGroupListRequest 请求参数}): {@link GetGroupListResponse 返回参数} */
+  /** 主群组配置列表 {@link GetGroupListRequest} {@link GetGroupListResponse} */
   GetGroupList(data: GetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupListResponse>;
-  /** {@link GetLabelList 标签列表}({@link GetLabelListRequest 请求参数}): {@link GetLabelListResponse 返回参数} */
+  /** 标签列表 {@link GetLabelListRequest} {@link GetLabelListResponse} */
   GetLabelList(data: GetLabelListRequest, config?: AxiosRequestConfig): AxiosPromise<GetLabelListResponse>;
-  /** {@link GetPolicyList 披露策略Policy管理列表}({@link GetPolicyListRequest 请求参数}): {@link GetPolicyListResponse 返回参数} */
+  /** 披露策略Policy管理列表 {@link GetPolicyListRequest} {@link GetPolicyListResponse} */
   GetPolicyList(data: GetPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<GetPolicyListResponse>;
-  /** {@link GetPublicKey 查看公钥}({@link GetPublicKeyRequest 请求参数}): {@link GetPublicKeyResponse 返回参数} */
+  /** 查看公钥 {@link GetPublicKeyRequest} {@link GetPublicKeyResponse} */
   GetPublicKey(data: GetPublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GetPublicKeyResponse>;
-  /** {@link QueryPolicy 披露策略Policy查看}({@link QueryPolicyRequest 请求参数}): {@link QueryPolicyResponse 返回参数} */
+  /** 披露策略Policy查看 {@link QueryPolicyRequest} {@link QueryPolicyResponse} */
   QueryPolicy(data: QueryPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<QueryPolicyResponse>;
-  /** {@link RecognizeAuthorityIssuer 认证权威机构}({@link RecognizeAuthorityIssuerRequest 请求参数}): {@link RecognizeAuthorityIssuerResponse 返回参数} */
+  /** 认证权威机构 {@link RecognizeAuthorityIssuerRequest} {@link RecognizeAuthorityIssuerResponse} */
   RecognizeAuthorityIssuer(data: RecognizeAuthorityIssuerRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeAuthorityIssuerResponse>;
-  /** {@link RegisterClaimPolicy 披露策略Policy注册}({@link RegisterClaimPolicyRequest 请求参数}): {@link RegisterClaimPolicyResponse 返回参数} */
+  /** 披露策略Policy注册 {@link RegisterClaimPolicyRequest} {@link RegisterClaimPolicyResponse} */
   RegisterClaimPolicy(data: RegisterClaimPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterClaimPolicyResponse>;
-  /** {@link RegisterCpt 凭证模版新建}({@link RegisterCptRequest 请求参数}): {@link RegisterCptResponse 返回参数} */
+  /** 凭证模版新建 {@link RegisterCptRequest} {@link RegisterCptResponse} */
   RegisterCpt(data: RegisterCptRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterCptResponse>;
-  /** {@link RegisterIssuer 注册为权威机构}({@link RegisterIssuerRequest 请求参数}): {@link RegisterIssuerResponse 返回参数} */
+  /** 注册为权威机构 {@link RegisterIssuerRequest} {@link RegisterIssuerResponse} */
   RegisterIssuer(data: RegisterIssuerRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterIssuerResponse>;
-  /** {@link RemoveHash 删除合约}({@link RemoveHashRequest 请求参数}): {@link RemoveHashResponse 返回参数} */
+  /** 删除合约 {@link RemoveHashRequest} {@link RemoveHashResponse} */
   RemoveHash(data: RemoveHashRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveHashResponse>;
-  /** {@link SetCredentialStatus 设置凭证链上状态}({@link SetCredentialStatusRequest 请求参数}): {@link SetCredentialStatusResponse 返回参数} */
+  /** 设置凭证链上状态 {@link SetCredentialStatusRequest} {@link SetCredentialStatusResponse} */
   SetCredentialStatus(data: SetCredentialStatusRequest, config?: AxiosRequestConfig): AxiosPromise<SetCredentialStatusResponse>;
-  /** {@link VerifyCredential 验证凭证}({@link VerifyCredentialRequest 请求参数}): {@link VerifyCredentialResponse 返回参数} */
+  /** 验证凭证 {@link VerifyCredentialRequest} {@link VerifyCredentialResponse} */
   VerifyCredential(data: VerifyCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyCredentialResponse>;
-  /** {@link VerifyPurchase 验证购买}({@link VerifyPurchaseRequest 请求参数}): {@link VerifyPurchaseResponse 返回参数} */
+  /** 验证购买 {@link VerifyPurchaseRequest} {@link VerifyPurchaseResponse} */
   VerifyPurchase(data?: VerifyPurchaseRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyPurchaseResponse>;
 }
 

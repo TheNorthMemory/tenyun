@@ -184,7 +184,7 @@ declare interface DescribeHSMBySubnetIdResponse {
   TotalCount?: number;
   /** 作为查询条件的SubnetId */
   SubnetId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -198,7 +198,7 @@ declare interface DescribeHSMByVpcIdResponse {
   TotalCount?: number;
   /** 作为查询条件的VpcId */
   VpcId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -218,7 +218,7 @@ declare interface DescribeSubnetResponse {
   TotalCount: number;
   /** 返回的子网实例列表。 */
   SubnetList: Subnet[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -230,7 +230,7 @@ declare interface DescribeSupportedHsmRequest {
 declare interface DescribeSupportedHsmResponse {
   /** 当前地域所支持的设备列表 */
   DeviceTypes: DeviceInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -248,7 +248,7 @@ declare interface DescribeUsgResponse {
   SgList: SgUnit[] | null;
   /** 返回的安全组数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -262,7 +262,7 @@ declare interface DescribeUsgRuleResponse {
   SgRules: UsgRuleDetail[] | null;
   /** 安全组详情数量 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -280,7 +280,7 @@ declare interface DescribeVpcResponse {
   TotalCount: number;
   /** Vpc对象列表 */
   VpcList: Vpc[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -336,7 +336,7 @@ declare interface DescribeVsmAttributesResponse {
   RenewFlag: number | null;
   /** 厂商 */
   Manufacturer: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -360,7 +360,7 @@ declare interface DescribeVsmsResponse {
   TotalCount: number;
   /** 资源信息 */
   VsmList: ResourceInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -392,7 +392,7 @@ declare interface InquiryPriceBuyVsmResponse {
   TimeUnit: string | null;
   /** 应付总金额，浮点型参数，精确到小数点后两位，如：2000.99 */
   OriginalCost: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -412,34 +412,34 @@ declare interface ModifyVsmAttributesRequest {
 }
 
 declare interface ModifyVsmAttributesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cloudhsm 云加密机} */
 declare interface Cloudhsm {
   (): Versions;
-  /** {@link DescribeHSMBySubnetId 通过SubnetId获取Hsm资源数}({@link DescribeHSMBySubnetIdRequest 请求参数}): {@link DescribeHSMBySubnetIdResponse 返回参数} */
+  /** 通过SubnetId获取Hsm资源数 {@link DescribeHSMBySubnetIdRequest} {@link DescribeHSMBySubnetIdResponse} */
   DescribeHSMBySubnetId(data: DescribeHSMBySubnetIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHSMBySubnetIdResponse>;
-  /** {@link DescribeHSMByVpcId 通过VpcId获取Hsm资源数}({@link DescribeHSMByVpcIdRequest 请求参数}): {@link DescribeHSMByVpcIdResponse 返回参数} */
+  /** 通过VpcId获取Hsm资源数 {@link DescribeHSMByVpcIdRequest} {@link DescribeHSMByVpcIdResponse} */
   DescribeHSMByVpcId(data: DescribeHSMByVpcIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHSMByVpcIdResponse>;
-  /** {@link DescribeSubnet 查询子网列表}({@link DescribeSubnetRequest 请求参数}): {@link DescribeSubnetResponse 返回参数} */
+  /** 查询子网列表 {@link DescribeSubnetRequest} {@link DescribeSubnetResponse} */
   DescribeSubnet(data: DescribeSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetResponse>;
-  /** {@link DescribeSupportedHsm 获取当前地域所支持的设备列表}({@link DescribeSupportedHsmRequest 请求参数}): {@link DescribeSupportedHsmResponse 返回参数} */
+  /** 获取当前地域所支持的设备列表 {@link DescribeSupportedHsmRequest} {@link DescribeSupportedHsmResponse} */
   DescribeSupportedHsm(data?: DescribeSupportedHsmRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportedHsmResponse>;
-  /** {@link DescribeUsg 获取用户安全组列表}({@link DescribeUsgRequest 请求参数}): {@link DescribeUsgResponse 返回参数} */
+  /** 获取用户安全组列表 {@link DescribeUsgRequest} {@link DescribeUsgResponse} */
   DescribeUsg(data: DescribeUsgRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsgResponse>;
-  /** {@link DescribeUsgRule 获取安全组详情}({@link DescribeUsgRuleRequest 请求参数}): {@link DescribeUsgRuleResponse 返回参数} */
+  /** 获取安全组详情 {@link DescribeUsgRuleRequest} {@link DescribeUsgRuleResponse} */
   DescribeUsgRule(data: DescribeUsgRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsgRuleResponse>;
-  /** {@link DescribeVpc 查询私有网络列表}({@link DescribeVpcRequest 请求参数}): {@link DescribeVpcResponse 返回参数} */
+  /** 查询私有网络列表 {@link DescribeVpcRequest} {@link DescribeVpcResponse} */
   DescribeVpc(data: DescribeVpcRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcResponse>;
-  /** {@link DescribeVsmAttributes 获取VSM属性}({@link DescribeVsmAttributesRequest 请求参数}): {@link DescribeVsmAttributesResponse 返回参数} */
+  /** 获取VSM属性 {@link DescribeVsmAttributesRequest} {@link DescribeVsmAttributesResponse} */
   DescribeVsmAttributes(data: DescribeVsmAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVsmAttributesResponse>;
-  /** {@link DescribeVsms 获取用户VSM列表}({@link DescribeVsmsRequest 请求参数}): {@link DescribeVsmsResponse 返回参数} */
+  /** 获取用户VSM列表 {@link DescribeVsmsRequest} {@link DescribeVsmsResponse} */
   DescribeVsms(data: DescribeVsmsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVsmsResponse>;
-  /** {@link InquiryPriceBuyVsm 询价}({@link InquiryPriceBuyVsmRequest 请求参数}): {@link InquiryPriceBuyVsmResponse 返回参数} */
+  /** 询价 {@link InquiryPriceBuyVsmRequest} {@link InquiryPriceBuyVsmResponse} */
   InquiryPriceBuyVsm(data: InquiryPriceBuyVsmRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceBuyVsmResponse>;
-  /** {@link ModifyVsmAttributes 修改VSM属性}({@link ModifyVsmAttributesRequest 请求参数}): {@link ModifyVsmAttributesResponse 返回参数} */
+  /** 修改VSM属性 {@link ModifyVsmAttributesRequest} {@link ModifyVsmAttributesResponse} */
   ModifyVsmAttributes(data: ModifyVsmAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVsmAttributesResponse>;
 }
 

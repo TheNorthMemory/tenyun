@@ -54,7 +54,7 @@ declare interface AssumeRoleResponse {
   ExpiredTime: number;
   /** 证书无效的时间，以 iso8601 格式的 UTC 时间表示 */
   Expiration: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -78,7 +78,7 @@ declare interface AssumeRoleWithSAMLResponse {
   ExpiredTime?: number;
   /** 证书无效的时间，以 ISO8601 格式的 UTC 时间表示 */
   Expiration?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -102,7 +102,7 @@ declare interface AssumeRoleWithWebIdentityResponse {
   Expiration: string;
   /** 临时秘钥 */
   Credentials: Credentials;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -120,7 +120,7 @@ declare interface GetCallerIdentityResponse {
   PrincipalId?: string;
   /** 身份类型。 */
   Type?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -140,7 +140,7 @@ declare interface GetFederationTokenResponse {
   ExpiredTime?: number;
   /** 证书有效的时间，以 iso8601 格式的 UTC 时间表示 */
   Expiration?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -152,24 +152,24 @@ declare interface QueryApiKeyRequest {
 declare interface QueryApiKeyResponse {
   /** 密钥ID列表 */
   IdKeys?: ApiKey[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Sts 安全凭证服务} */
 declare interface Sts {
   (): Versions;
-  /** {@link AssumeRole 申请扮演角色}({@link AssumeRoleRequest 请求参数}): {@link AssumeRoleResponse 返回参数} */
+  /** 申请扮演角色 {@link AssumeRoleRequest} {@link AssumeRoleResponse} */
   AssumeRole(data: AssumeRoleRequest, config?: AxiosRequestConfig): AxiosPromise<AssumeRoleResponse>;
-  /** {@link AssumeRoleWithSAML 根据 SAML 断言申请角色临时凭证}({@link AssumeRoleWithSAMLRequest 请求参数}): {@link AssumeRoleWithSAMLResponse 返回参数} */
+  /** 根据 SAML 断言申请角色临时凭证 {@link AssumeRoleWithSAMLRequest} {@link AssumeRoleWithSAMLResponse} */
   AssumeRoleWithSAML(data: AssumeRoleWithSAMLRequest, config?: AxiosRequestConfig): AxiosPromise<AssumeRoleWithSAMLResponse>;
-  /** {@link AssumeRoleWithWebIdentity 申请OIDC角色临时密钥}({@link AssumeRoleWithWebIdentityRequest 请求参数}): {@link AssumeRoleWithWebIdentityResponse 返回参数} */
+  /** 申请OIDC角色临时密钥 {@link AssumeRoleWithWebIdentityRequest} {@link AssumeRoleWithWebIdentityResponse} */
   AssumeRoleWithWebIdentity(data: AssumeRoleWithWebIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<AssumeRoleWithWebIdentityResponse>;
-  /** {@link GetCallerIdentity 获取当前调用者的身份信息}({@link GetCallerIdentityRequest 请求参数}): {@link GetCallerIdentityResponse 返回参数} */
+  /** 获取当前调用者的身份信息 {@link GetCallerIdentityRequest} {@link GetCallerIdentityResponse} */
   GetCallerIdentity(data?: GetCallerIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<GetCallerIdentityResponse>;
-  /** {@link GetFederationToken 获取联合身份临时访问凭证}({@link GetFederationTokenRequest 请求参数}): {@link GetFederationTokenResponse 返回参数} */
+  /** 获取联合身份临时访问凭证 {@link GetFederationTokenRequest} {@link GetFederationTokenResponse} */
   GetFederationToken(data: GetFederationTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetFederationTokenResponse>;
-  /** {@link QueryApiKey 拉取API密钥列表}({@link QueryApiKeyRequest 请求参数}): {@link QueryApiKeyResponse 返回参数} */
+  /** 拉取API密钥列表 {@link QueryApiKeyRequest} {@link QueryApiKeyResponse} */
   QueryApiKey(data?: QueryApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<QueryApiKeyResponse>;
 }
 

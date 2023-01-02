@@ -24,7 +24,7 @@ declare interface FlowProductRemindResponse {
   FlowId: string;
   /** 消息 */
   Info: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -40,16 +40,16 @@ declare interface GetUsagePlanUsageAmountResponse {
   InUseRequestNum: number;
   /** 剩余调用量 */
   RemainingRequestNum: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Market 云市场} */
 declare interface Market {
   (): Versions;
-  /** {@link FlowProductRemind 计量商品用量提醒}({@link FlowProductRemindRequest 请求参数}): {@link FlowProductRemindResponse 返回参数} */
+  /** 计量商品用量提醒 {@link FlowProductRemindRequest} {@link FlowProductRemindResponse} */
   FlowProductRemind(data: FlowProductRemindRequest, config?: AxiosRequestConfig): AxiosPromise<FlowProductRemindResponse>;
-  /** {@link GetUsagePlanUsageAmount 查询使用计划使用量}({@link GetUsagePlanUsageAmountRequest 请求参数}): {@link GetUsagePlanUsageAmountResponse 返回参数} */
+  /** 查询使用计划使用量 {@link GetUsagePlanUsageAmountRequest} {@link GetUsagePlanUsageAmountResponse} */
   GetUsagePlanUsageAmount(data: GetUsagePlanUsageAmountRequest, config?: AxiosRequestConfig): AxiosPromise<GetUsagePlanUsageAmountResponse>;
 }
 

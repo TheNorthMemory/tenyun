@@ -124,7 +124,7 @@ declare interface TextModerationResponse {
   SubLabel: string | null;
   /** 该字段用于返回上下文关联文本 */
   ContextText: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -279,7 +279,7 @@ declare namespace V20200713 {
   interface AccountTipoffAccessResponse {
     /** 举报接口响应数据 */
     Data?: TipoffResponse | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -291,7 +291,7 @@ declare namespace V20200713 {
   interface DescribeTextLibResponse {
     /** 文本库id和name列表 */
     TextLib: TextLib[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -309,7 +309,7 @@ declare namespace V20200713 {
     TrendCount?: TrendCount[];
     /** 违规数据分布 */
     EvilCount?: EvilCount[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -347,7 +347,7 @@ declare namespace V20200713 {
     Extra: string | null;
     /** 请求参数中的DataId */
     DataId: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -362,15 +362,15 @@ declare namespace V20200713 {
 /** {@link Tms 文本内容安全} */
 declare interface Tms {
   (): Versions;
-  /** {@link TextModeration 文本内容安全}({@link TextModerationRequest 请求参数}): {@link TextModerationResponse 返回参数} */
+  /** 文本内容安全 {@link TextModerationRequest} {@link TextModerationResponse} */
   TextModeration(data: TextModerationRequest, config?: AxiosRequestConfig): AxiosPromise<TextModerationResponse>;
-  /** {@link V20200713.AccountTipoffAccess 账号举报接口}({@link V20200713.AccountTipoffAccessRequest 请求参数}): {@link V20200713.AccountTipoffAccessResponse 返回参数} */
+  /** 账号举报接口 {@link V20200713.AccountTipoffAccessRequest} {@link V20200713.AccountTipoffAccessResponse} */
   AccountTipoffAccess(data: V20200713.AccountTipoffAccessRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.AccountTipoffAccessResponse>;
-  /** {@link V20200713.DescribeTextLib 获取用户词库列表}({@link V20200713.DescribeTextLibRequest 请求参数}): {@link V20200713.DescribeTextLibResponse 返回参数} */
+  /** 获取用户词库列表 {@link V20200713.DescribeTextLibRequest} {@link V20200713.DescribeTextLibResponse} */
   DescribeTextLib(data: V20200713.DescribeTextLibRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.DescribeTextLibResponse>;
-  /** {@link V20200713.DescribeTextStat 识别统计}({@link V20200713.DescribeTextStatRequest 请求参数}): {@link V20200713.DescribeTextStatResponse 返回参数} */
+  /** 识别统计 {@link V20200713.DescribeTextStatRequest} {@link V20200713.DescribeTextStatResponse} */
   DescribeTextStat(data: V20200713.DescribeTextStatRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.DescribeTextStatResponse>;
-  /** {@link V20200713.TextModeration 文本内容安全}({@link V20200713.TextModerationRequest 请求参数}): {@link V20200713.TextModerationResponse 返回参数} */
+  /** 文本内容安全 {@link V20200713.TextModerationRequest} {@link V20200713.TextModerationResponse} */
   TextModeration(data: V20200713.TextModerationRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.TextModerationResponse>;
 }
 

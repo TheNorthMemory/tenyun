@@ -326,7 +326,7 @@ declare interface CreateCustomizeTemplatesRequest {
 declare interface CreateCustomizeTemplatesResponse {
   /** 无 */
   Data: WorkspaceTemplateInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -340,7 +340,7 @@ declare interface CreateWorkspaceByAgentRequest {
 declare interface CreateWorkspaceByAgentResponse {
   /** 无 */
   Data: WorkspaceInfoDTO | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -354,7 +354,7 @@ declare interface CreateWorkspaceByTemplateRequest {
 declare interface CreateWorkspaceByTemplateResponse {
   /** 创建工作空间返回的信息 */
   Data: WorkspaceInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -368,7 +368,7 @@ declare interface CreateWorkspaceByVersionControlRequest {
 declare interface CreateWorkspaceByVersionControlResponse {
   /** 无 */
   Data: WorkspaceInfoDTO | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -380,7 +380,7 @@ declare interface DeleteCustomizeTemplatesByIdRequest {
 }
 
 declare interface DeleteCustomizeTemplatesByIdResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -394,7 +394,7 @@ declare interface DescribeCustomizeTemplatesByIdRequest {
 declare interface DescribeCustomizeTemplatesByIdResponse {
   /** 无 */
   Data: WorkspaceTemplateInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -408,7 +408,7 @@ declare interface DescribeCustomizeTemplatesPresetsRequest {
 declare interface DescribeCustomizeTemplatesPresetsResponse {
   /** 无 */
   Data: CustomizeTemplatesPresetsInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -420,7 +420,7 @@ declare interface DescribeCustomizeTemplatesRequest {
 declare interface DescribeCustomizeTemplatesResponse {
   /** 无 */
   Data: WorkspaceTemplateInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -432,7 +432,7 @@ declare interface DescribeWorkspaceEnvListRequest {
 declare interface DescribeWorkspaceEnvListResponse {
   /** 无 */
   Data: ImageUserDTO[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -446,7 +446,7 @@ declare interface DescribeWorkspaceNameExistRequest {
 }
 
 declare interface DescribeWorkspaceNameExistResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -458,7 +458,7 @@ declare interface DescribeWorkspaceStatusListRequest {
 declare interface DescribeWorkspaceStatusListResponse {
   /** xxx */
   Data: WorkspaceStatusInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -472,7 +472,7 @@ declare interface DescribeWorkspaceStatusRequest {
 declare interface DescribeWorkspaceStatusResponse {
   /** 无 */
   Data: WorkspaceStatusInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -492,7 +492,7 @@ declare interface ModifyCustomizeTemplateVersionControlRequest {
 declare interface ModifyCustomizeTemplateVersionControlResponse {
   /** 无 */
   Data: WorkspaceTemplateInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -508,7 +508,7 @@ declare interface ModifyCustomizeTemplatesFullByIdRequest {
 declare interface ModifyCustomizeTemplatesFullByIdResponse {
   /** 自定义模板返回值 */
   Data: WorkspaceTemplateInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -524,7 +524,7 @@ declare interface ModifyCustomizeTemplatesPartByIdRequest {
 declare interface ModifyCustomizeTemplatesPartByIdResponse {
   /** 自定义模板返回值 */
   Data: WorkspaceTemplateInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -542,7 +542,7 @@ declare interface ModifyWorkspaceAttributesRequest {
 }
 
 declare interface ModifyWorkspaceAttributesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -554,7 +554,7 @@ declare interface RecoverWorkspaceRequest {
 }
 
 declare interface RecoverWorkspaceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -568,7 +568,7 @@ declare interface RemoveWorkspaceRequest {
 }
 
 declare interface RemoveWorkspaceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -580,7 +580,7 @@ declare interface RunWorkspaceRequest {
 }
 
 declare interface RunWorkspaceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -594,52 +594,52 @@ declare interface StopWorkspaceRequest {
 }
 
 declare interface StopWorkspaceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cloudstudio Cloud Studio（云端 IDE）} */
 declare interface Cloudstudio {
   (): Versions;
-  /** {@link CreateCustomizeTemplates 添加自定义模板}({@link CreateCustomizeTemplatesRequest 请求参数}): {@link CreateCustomizeTemplatesResponse 返回参数} */
+  /** 添加自定义模板 {@link CreateCustomizeTemplatesRequest} {@link CreateCustomizeTemplatesResponse} */
   CreateCustomizeTemplates(data: CreateCustomizeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomizeTemplatesResponse>;
-  /** {@link CreateWorkspaceByAgent 云服务器方式创建工作空间}({@link CreateWorkspaceByAgentRequest 请求参数}): {@link CreateWorkspaceByAgentResponse 返回参数} */
+  /** 云服务器方式创建工作空间 {@link CreateWorkspaceByAgentRequest} {@link CreateWorkspaceByAgentResponse} */
   CreateWorkspaceByAgent(data: CreateWorkspaceByAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspaceByAgentResponse>;
-  /** {@link CreateWorkspaceByTemplate 基于模板创建工作空间}({@link CreateWorkspaceByTemplateRequest 请求参数}): {@link CreateWorkspaceByTemplateResponse 返回参数} */
+  /** 基于模板创建工作空间 {@link CreateWorkspaceByTemplateRequest} {@link CreateWorkspaceByTemplateResponse} */
   CreateWorkspaceByTemplate(data: CreateWorkspaceByTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspaceByTemplateResponse>;
-  /** {@link CreateWorkspaceByVersionControl 根据模板创建工作空间}({@link CreateWorkspaceByVersionControlRequest 请求参数}): {@link CreateWorkspaceByVersionControlResponse 返回参数} */
+  /** 根据模板创建工作空间 {@link CreateWorkspaceByVersionControlRequest} {@link CreateWorkspaceByVersionControlResponse} */
   CreateWorkspaceByVersionControl(data: CreateWorkspaceByVersionControlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspaceByVersionControlResponse>;
-  /** {@link DeleteCustomizeTemplatesById 删除自定义模板}({@link DeleteCustomizeTemplatesByIdRequest 请求参数}): {@link DeleteCustomizeTemplatesByIdResponse 返回参数} */
+  /** 删除自定义模板 {@link DeleteCustomizeTemplatesByIdRequest} {@link DeleteCustomizeTemplatesByIdResponse} */
   DeleteCustomizeTemplatesById(data: DeleteCustomizeTemplatesByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomizeTemplatesByIdResponse>;
-  /** {@link DescribeCustomizeTemplates 获取所有模板列表}({@link DescribeCustomizeTemplatesRequest 请求参数}): {@link DescribeCustomizeTemplatesResponse 返回参数} */
+  /** 获取所有模板列表 {@link DescribeCustomizeTemplatesRequest} {@link DescribeCustomizeTemplatesResponse} */
   DescribeCustomizeTemplates(data: DescribeCustomizeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomizeTemplatesResponse>;
-  /** {@link DescribeCustomizeTemplatesById 获取特定模板信息}({@link DescribeCustomizeTemplatesByIdRequest 请求参数}): {@link DescribeCustomizeTemplatesByIdResponse 返回参数} */
+  /** 获取特定模板信息 {@link DescribeCustomizeTemplatesByIdRequest} {@link DescribeCustomizeTemplatesByIdResponse} */
   DescribeCustomizeTemplatesById(data: DescribeCustomizeTemplatesByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomizeTemplatesByIdResponse>;
-  /** {@link DescribeCustomizeTemplatesPresets 获取创建模板的预置参数}({@link DescribeCustomizeTemplatesPresetsRequest 请求参数}): {@link DescribeCustomizeTemplatesPresetsResponse 返回参数} */
+  /** 获取创建模板的预置参数 {@link DescribeCustomizeTemplatesPresetsRequest} {@link DescribeCustomizeTemplatesPresetsResponse} */
   DescribeCustomizeTemplatesPresets(data: DescribeCustomizeTemplatesPresetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomizeTemplatesPresetsResponse>;
-  /** {@link DescribeWorkspaceEnvList 环境列表接口}({@link DescribeWorkspaceEnvListRequest 请求参数}): {@link DescribeWorkspaceEnvListResponse 返回参数} */
+  /** 环境列表接口 {@link DescribeWorkspaceEnvListRequest} {@link DescribeWorkspaceEnvListResponse} */
   DescribeWorkspaceEnvList(data: DescribeWorkspaceEnvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceEnvListResponse>;
-  /** {@link DescribeWorkspaceNameExist 检查工作空间是否存在}({@link DescribeWorkspaceNameExistRequest 请求参数}): {@link DescribeWorkspaceNameExistResponse 返回参数} */
+  /** 检查工作空间是否存在 {@link DescribeWorkspaceNameExistRequest} {@link DescribeWorkspaceNameExistResponse} */
   DescribeWorkspaceNameExist(data: DescribeWorkspaceNameExistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceNameExistResponse>;
-  /** {@link DescribeWorkspaceStatus 获取工作空间元信息}({@link DescribeWorkspaceStatusRequest 请求参数}): {@link DescribeWorkspaceStatusResponse 返回参数} */
+  /** 获取工作空间元信息 {@link DescribeWorkspaceStatusRequest} {@link DescribeWorkspaceStatusResponse} */
   DescribeWorkspaceStatus(data: DescribeWorkspaceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceStatusResponse>;
-  /** {@link DescribeWorkspaceStatusList 获取用户工作空间列表}({@link DescribeWorkspaceStatusListRequest 请求参数}): {@link DescribeWorkspaceStatusListResponse 返回参数} */
+  /** 获取用户工作空间列表 {@link DescribeWorkspaceStatusListRequest} {@link DescribeWorkspaceStatusListResponse} */
   DescribeWorkspaceStatusList(data: DescribeWorkspaceStatusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceStatusListResponse>;
-  /** {@link ModifyCustomizeTemplateVersionControl 修改模板默认代码仓库}({@link ModifyCustomizeTemplateVersionControlRequest 请求参数}): {@link ModifyCustomizeTemplateVersionControlResponse 返回参数} */
+  /** 修改模板默认代码仓库 {@link ModifyCustomizeTemplateVersionControlRequest} {@link ModifyCustomizeTemplateVersionControlResponse} */
   ModifyCustomizeTemplateVersionControl(data: ModifyCustomizeTemplateVersionControlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizeTemplateVersionControlResponse>;
-  /** {@link ModifyCustomizeTemplatesFullById 全量修改自定义模板，不忽略空}({@link ModifyCustomizeTemplatesFullByIdRequest 请求参数}): {@link ModifyCustomizeTemplatesFullByIdResponse 返回参数} */
+  /** 全量修改自定义模板，不忽略空 {@link ModifyCustomizeTemplatesFullByIdRequest} {@link ModifyCustomizeTemplatesFullByIdResponse} */
   ModifyCustomizeTemplatesFullById(data: ModifyCustomizeTemplatesFullByIdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizeTemplatesFullByIdResponse>;
-  /** {@link ModifyCustomizeTemplatesPartById 全量修改自定义模板，忽略空}({@link ModifyCustomizeTemplatesPartByIdRequest 请求参数}): {@link ModifyCustomizeTemplatesPartByIdResponse 返回参数} */
+  /** 全量修改自定义模板，忽略空 {@link ModifyCustomizeTemplatesPartByIdRequest} {@link ModifyCustomizeTemplatesPartByIdResponse} */
   ModifyCustomizeTemplatesPartById(data: ModifyCustomizeTemplatesPartByIdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizeTemplatesPartByIdResponse>;
-  /** {@link ModifyWorkspaceAttributes 修改工作空间的名称和描述}({@link ModifyWorkspaceAttributesRequest 请求参数}): {@link ModifyWorkspaceAttributesResponse 返回参数} */
+  /** 修改工作空间的名称和描述 {@link ModifyWorkspaceAttributesRequest} {@link ModifyWorkspaceAttributesResponse} */
   ModifyWorkspaceAttributes(data: ModifyWorkspaceAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkspaceAttributesResponse>;
-  /** {@link RecoverWorkspace 恢复工作空间}({@link RecoverWorkspaceRequest 请求参数}): {@link RecoverWorkspaceResponse 返回参数} */
+  /** 恢复工作空间 {@link RecoverWorkspaceRequest} {@link RecoverWorkspaceResponse} */
   RecoverWorkspace(data: RecoverWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverWorkspaceResponse>;
-  /** {@link RemoveWorkspace 删除工作空间}({@link RemoveWorkspaceRequest 请求参数}): {@link RemoveWorkspaceResponse 返回参数} */
+  /** 删除工作空间 {@link RemoveWorkspaceRequest} {@link RemoveWorkspaceResponse} */
   RemoveWorkspace(data: RemoveWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveWorkspaceResponse>;
-  /** {@link RunWorkspace 运行空间}({@link RunWorkspaceRequest 请求参数}): {@link RunWorkspaceResponse 返回参数} */
+  /** 运行空间 {@link RunWorkspaceRequest} {@link RunWorkspaceResponse} */
   RunWorkspace(data: RunWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<RunWorkspaceResponse>;
-  /** {@link StopWorkspace 停止运行空间}({@link StopWorkspaceRequest 请求参数}): {@link StopWorkspaceResponse 返回参数} */
+  /** 停止运行空间 {@link StopWorkspaceRequest} {@link StopWorkspaceResponse} */
   StopWorkspace(data: StopWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<StopWorkspaceResponse>;
 }
 

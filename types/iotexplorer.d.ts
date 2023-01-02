@@ -582,7 +582,7 @@ declare interface BindDevicesRequest {
 }
 
 declare interface BindDevicesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -594,7 +594,7 @@ declare interface BindProductsRequest {
 }
 
 declare interface BindProductsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -614,7 +614,7 @@ declare interface CallDeviceActionAsyncResponse {
   ClientToken: string;
   /** 异步调用状态 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -636,7 +636,7 @@ declare interface CallDeviceActionSyncResponse {
   OutputParams: string | null;
   /** 返回状态，取值设备端上报$thing/up/action	method为action_reply 的 status字段，如果不包含status字段，则取默认值，空字符串，物模型协议参考https://cloud.tencent.com/document/product/1081/34916 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -660,7 +660,7 @@ declare interface ControlDeviceDataResponse {
   Data: string;
   /** JSON字符串， 返回下发控制的结果信息, Sent = 1 表示设备已经在线并且订阅了控制下发的mqtt topic.pushResult 是表示发送结果，其中 0 表示成功， 23101 表示设备未在线或没有订阅相关的 MQTT Topic。 */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -688,7 +688,7 @@ declare interface CreateBatchProductionResponse {
   ProductId: string;
   /** 量产id */
   BatchProductionId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -714,7 +714,7 @@ declare interface CreateDeviceRequest {
 declare interface CreateDeviceResponse {
   /** 设备参数描述。 */
   Data: DeviceData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -726,7 +726,7 @@ declare interface CreateFenceBindRequest {
 }
 
 declare interface CreateFenceBindResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -752,7 +752,7 @@ declare interface CreateLoRaFrequencyRequest {
 declare interface CreateLoRaFrequencyResponse {
   /** LoRa频点信息 */
   Data: LoRaFrequencyEntry;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -778,7 +778,7 @@ declare interface CreateLoRaGatewayRequest {
 declare interface CreateLoRaGatewayResponse {
   /** LoRa 网关信息 */
   Gateway: LoRaGatewayItem;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -794,7 +794,7 @@ declare interface CreatePositionFenceRequest {
 }
 
 declare interface CreatePositionFenceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -816,7 +816,7 @@ declare interface CreatePositionSpaceRequest {
 declare interface CreatePositionSpaceResponse {
   /** 空间Id */
   SpaceId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -832,7 +832,7 @@ declare interface CreateProjectRequest {
 declare interface CreateProjectResponse {
   /** 返回信息 */
   Project: ProjectEntry;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -858,7 +858,7 @@ declare interface CreateStudioProductRequest {
 declare interface CreateStudioProductResponse {
   /** 产品描述 */
   Product: ProductEntry;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -872,7 +872,7 @@ declare interface CreateTopicPolicyRequest {
 }
 
 declare interface CreateTopicPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -884,7 +884,7 @@ declare interface CreateTopicRuleRequest {
 }
 
 declare interface CreateTopicRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -902,7 +902,7 @@ declare interface DeleteDeviceResponse {
   ResultCode: string | null;
   /** 删除的结果信息 */
   ResultMessage: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -916,7 +916,7 @@ declare interface DeleteDevicesResponse {
   ResultCode: string | null;
   /** 删除的结果信息 */
   ResultMessage: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -928,7 +928,7 @@ declare interface DeleteFenceBindRequest {
 }
 
 declare interface DeleteFenceBindResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -938,7 +938,7 @@ declare interface DeleteLoRaFrequencyRequest {
 }
 
 declare interface DeleteLoRaFrequencyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -948,7 +948,7 @@ declare interface DeleteLoRaGatewayRequest {
 }
 
 declare interface DeleteLoRaGatewayResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -960,7 +960,7 @@ declare interface DeletePositionFenceRequest {
 }
 
 declare interface DeletePositionFenceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -970,7 +970,7 @@ declare interface DeletePositionSpaceRequest {
 }
 
 declare interface DeletePositionSpaceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -980,7 +980,7 @@ declare interface DeleteProjectRequest {
 }
 
 declare interface DeleteProjectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -990,7 +990,7 @@ declare interface DeleteStudioProductRequest {
 }
 
 declare interface DeleteStudioProductResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1002,7 +1002,7 @@ declare interface DeleteTopicPolicyRequest {
 }
 
 declare interface DeleteTopicPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1012,7 +1012,7 @@ declare interface DeleteTopicRuleRequest {
 }
 
 declare interface DeleteTopicRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1036,7 +1036,7 @@ declare interface DescribeBatchProductionResponse {
   GenerationMethod: number;
   /** 上传URL。 */
   UploadUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1056,7 +1056,7 @@ declare interface DescribeBindedProductsResponse {
   Products: BindProductInfo[];
   /** 绑定的子产品总数量 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1078,7 +1078,7 @@ declare interface DescribeDeviceBindGatewayResponse {
   GatewayProductOwnerName: string | null;
   /** 设备对应产品所属的主账号 UIN */
   GatewayProductOwnerUin: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1108,7 +1108,7 @@ declare interface DescribeDeviceDataHistoryResponse {
   Context: string | null;
   /** 历史数据结果数组，返回对应时间点及取值。 */
   Results: DeviceDataHistoryItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1124,7 +1124,7 @@ declare interface DescribeDeviceDataRequest {
 declare interface DescribeDeviceDataResponse {
   /** 设备数据 */
   Data: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1150,7 +1150,7 @@ declare interface DescribeDeviceLocationSolveResponse {
   LocationType: string;
   /** 误差精度预估，单位为米 */
   Accuracy: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1170,7 +1170,7 @@ declare interface DescribeDevicePositionListResponse {
   Positions: ProductDevicesPositionItem[];
   /** 产品设备位置信息的数目 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1186,7 +1186,7 @@ declare interface DescribeDeviceRequest {
 declare interface DescribeDeviceResponse {
   /** 设备信息 */
   Device: DeviceInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1204,7 +1204,7 @@ declare interface DescribeFenceBindListResponse {
   List: FenceBindProductItem[];
   /** 围栏绑定的设备总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1230,7 +1230,7 @@ declare interface DescribeFenceEventListResponse {
   List: FenceEventItem[];
   /** 围栏告警事件总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1260,7 +1260,7 @@ declare interface DescribeFirmwareTaskResponse {
   ProductId: string | null;
   /** 原始固件版本号，在UpgradeMode是originalVersion升级模式下会返回 */
   OriginalVersion: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1284,7 +1284,7 @@ declare interface DescribeGatewayBindDevicesResponse {
   Total: number;
   /** 子设备所属的产品名。 */
   ProductName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1304,7 +1304,7 @@ declare interface DescribeGatewaySubDeviceListResponse {
   Total: number | null;
   /** 设备列表 */
   DeviceList: FamilySubDevice[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1326,7 +1326,7 @@ declare interface DescribeGatewaySubProductsResponse {
   Products: BindProductInfo[];
   /** 可绑定或解绑的产品总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1338,7 +1338,7 @@ declare interface DescribeLoRaFrequencyRequest {
 declare interface DescribeLoRaFrequencyResponse {
   /** 返回详情项 */
   Data: LoRaFrequencyEntry | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1350,7 +1350,7 @@ declare interface DescribeModelDefinitionRequest {
 declare interface DescribeModelDefinitionResponse {
   /** 产品数据模板 */
   Model: ProductModelDefinition;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1368,7 +1368,7 @@ declare interface DescribePositionFenceListResponse {
   List: PositionFenceInfo[] | null;
   /** 围栏数量 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1380,7 +1380,7 @@ declare interface DescribeProjectRequest {
 declare interface DescribeProjectResponse {
   /** 返回信息 */
   Project: ProjectEntryEx;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1402,7 +1402,7 @@ declare interface DescribeSpaceFenceEventListResponse {
   List: FenceEventItem[] | null;
   /** 围栏告警事件总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1414,7 +1414,7 @@ declare interface DescribeStudioProductRequest {
 declare interface DescribeStudioProductResponse {
   /** 产品详情 */
   Product: ProductEntry;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1432,7 +1432,7 @@ declare interface DescribeTopicPolicyResponse {
   TopicName?: string;
   /** Topic权限 */
   Privilege?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1444,7 +1444,7 @@ declare interface DescribeTopicRuleRequest {
 declare interface DescribeTopicRuleResponse {
   /** 规则描述。 */
   Rule: TopicRule | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1466,7 +1466,7 @@ declare interface DirectBindDeviceInFamilyRequest {
 declare interface DirectBindDeviceInFamilyResponse {
   /** 返回设备信息 */
   AppDeviceInfo: AppDeviceInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1476,7 +1476,7 @@ declare interface DisableTopicRuleRequest {
 }
 
 declare interface DisableTopicRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1486,7 +1486,7 @@ declare interface EnableTopicRuleRequest {
 }
 
 declare interface EnableTopicRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1502,7 +1502,7 @@ declare interface GenSingleDeviceSignatureOfPublicRequest {
 declare interface GenSingleDeviceSignatureOfPublicResponse {
   /** 设备签名 */
   DeviceSignature: DeviceSignatureInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1520,7 +1520,7 @@ declare interface GetBatchProductionsListResponse {
   BatchProductions: BatchProductionInfo[] | null;
   /** 返回数量。 */
   TotalCnt: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1536,7 +1536,7 @@ declare interface GetCOSURLRequest {
 declare interface GetCOSURLResponse {
   /** 固件URL */
   Url: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1560,7 +1560,7 @@ declare interface GetDeviceListResponse {
   Devices: DeviceInfo[] | null;
   /** 产品下的设备总数 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1580,7 +1580,7 @@ declare interface GetDeviceLocationHistoryRequest {
 declare interface GetDeviceLocationHistoryResponse {
   /** 历史位置列表 */
   Positions: PositionItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1594,7 +1594,7 @@ declare interface GetFamilyDeviceUserListRequest {
 declare interface GetFamilyDeviceUserListResponse {
   /** 设备的用户列表 */
   UserList: DeviceUser[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1614,7 +1614,7 @@ declare interface GetGatewaySubDeviceListResponse {
   Total: number | null;
   /** 设备列表 */
   DeviceList: FamilySubDevice | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1632,7 +1632,7 @@ declare interface GetLoRaGatewayListResponse {
   Total: number;
   /** 返回详情项 */
   Gateways: LoRaGatewayItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1650,7 +1650,7 @@ declare interface GetPositionSpaceListResponse {
   List: PositionSpaceInfo[] | null;
   /** 位置空间数量 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1676,7 +1676,7 @@ declare interface GetProjectListResponse {
   Projects: ProjectEntryEx[] | null;
   /** 列表项个数 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1696,7 +1696,7 @@ declare interface GetStudioProductListResponse {
   Products: ProductEntry[];
   /** 产品数量 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1712,7 +1712,7 @@ declare interface GetTopicRuleListResponse {
   TotalCnt: number;
   /** 规则列表 */
   Rules: TopicRuleInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1744,7 +1744,7 @@ declare interface ListEventHistoryResponse {
   Listover: boolean | null;
   /** 搜集结果集 */
   EventHistory: EventHistoryItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1764,7 +1764,7 @@ declare interface ListFirmwaresResponse {
   TotalCount: number;
   /** 固件列表 */
   Firmwares: FirmwareInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1776,7 +1776,7 @@ declare interface ListTopicPolicyRequest {
 declare interface ListTopicPolicyResponse {
   /** Topic列表 */
   Topics?: TopicItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1788,7 +1788,7 @@ declare interface ModifyFenceBindRequest {
 }
 
 declare interface ModifyFenceBindResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1816,7 +1816,7 @@ declare interface ModifyLoRaFrequencyRequest {
 declare interface ModifyLoRaFrequencyResponse {
   /** 频点信息 */
   Data: LoRaFrequencyEntry;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1842,7 +1842,7 @@ declare interface ModifyLoRaGatewayRequest {
 declare interface ModifyLoRaGatewayResponse {
   /** 返回网关数据 */
   Gateway: LoRaGatewayItem;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1854,7 +1854,7 @@ declare interface ModifyModelDefinitionRequest {
 }
 
 declare interface ModifyModelDefinitionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1862,7 +1862,7 @@ declare interface ModifyPositionFenceRequest {
 }
 
 declare interface ModifyPositionFenceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1882,7 +1882,7 @@ declare interface ModifyPositionSpaceRequest {
 }
 
 declare interface ModifyPositionSpaceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1898,7 +1898,7 @@ declare interface ModifyProjectRequest {
 declare interface ModifyProjectResponse {
   /** 项目详情 */
   Project: ProjectEntry;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1912,7 +1912,7 @@ declare interface ModifySpacePropertyRequest {
 }
 
 declare interface ModifySpacePropertyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1932,7 +1932,7 @@ declare interface ModifyStudioProductRequest {
 declare interface ModifyStudioProductResponse {
   /** 产品描述 */
   Product: ProductEntry;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1948,7 +1948,7 @@ declare interface ModifyTopicPolicyRequest {
 }
 
 declare interface ModifyTopicPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1960,7 +1960,7 @@ declare interface ModifyTopicRuleRequest {
 }
 
 declare interface ModifyTopicRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1978,7 +1978,7 @@ declare interface PublishBroadcastMessageRequest {
 declare interface PublishBroadcastMessageResponse {
   /** 广播消息任务Id */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1998,7 +1998,7 @@ declare interface PublishMessageRequest {
 }
 
 declare interface PublishMessageResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2016,7 +2016,7 @@ declare interface PublishRRPCMessageResponse {
   MessageId: number | null;
   /** 设备回复的消息内容，采用base64编码 */
   PayloadBase64: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2028,7 +2028,7 @@ declare interface ReleaseStudioProductRequest {
 }
 
 declare interface ReleaseStudioProductResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2048,7 +2048,7 @@ declare interface SearchPositionSpaceResponse {
   List: PositionSpaceInfo[] | null;
   /** 符合条件的位置空间个数 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2072,7 +2072,7 @@ declare interface SearchStudioProductResponse {
   Products: ProductEntry[];
   /** 产品数量 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2086,7 +2086,7 @@ declare interface SearchTopicRuleResponse {
   TotalCnt: number;
   /** 规则信息列表 */
   Rules: TopicRuleInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2102,7 +2102,7 @@ declare interface UnbindDevicesRequest {
 }
 
 declare interface UnbindDevicesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2116,7 +2116,7 @@ declare interface UnbindProductsRequest {
 declare interface UnbindProductsResponse {
   /** 绑定了待解绑的LoRa产品下的设备的网关设备列表 */
   GatewayDeviceNames: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2132,7 +2132,7 @@ declare interface UpdateDevicesEnableStateResponse {
   ResultCode: string | null;
   /** 删除的结果信息 */
   ResultMessage: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2150,7 +2150,7 @@ declare interface UpdateFirmwareRequest {
 }
 
 declare interface UpdateFirmwareResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2172,192 +2172,192 @@ declare interface UploadFirmwareRequest {
 }
 
 declare interface UploadFirmwareResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Iotexplorer 物联网开发平台} */
 declare interface Iotexplorer {
   (): Versions;
-  /** {@link BindDevices 批量绑定子设备}({@link BindDevicesRequest 请求参数}): {@link BindDevicesResponse 返回参数} */
+  /** 批量绑定子设备 {@link BindDevicesRequest} {@link BindDevicesResponse} */
   BindDevices(data: BindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<BindDevicesResponse>;
-  /** {@link BindProducts 批量绑定子产品}({@link BindProductsRequest 请求参数}): {@link BindProductsResponse 返回参数} */
+  /** 批量绑定子产品 {@link BindProductsRequest} {@link BindProductsResponse} */
   BindProducts(data: BindProductsRequest, config?: AxiosRequestConfig): AxiosPromise<BindProductsResponse>;
-  /** {@link CallDeviceActionAsync 异步调用设备行为}({@link CallDeviceActionAsyncRequest 请求参数}): {@link CallDeviceActionAsyncResponse 返回参数} */
+  /** 异步调用设备行为 {@link CallDeviceActionAsyncRequest} {@link CallDeviceActionAsyncResponse} */
   CallDeviceActionAsync(data: CallDeviceActionAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionAsyncResponse>;
-  /** {@link CallDeviceActionSync 同步调用设备行为}({@link CallDeviceActionSyncRequest 请求参数}): {@link CallDeviceActionSyncResponse 返回参数} */
+  /** 同步调用设备行为 {@link CallDeviceActionSyncRequest} {@link CallDeviceActionSyncResponse} */
   CallDeviceActionSync(data: CallDeviceActionSyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionSyncResponse>;
-  /** {@link ControlDeviceData 设备远程控制}({@link ControlDeviceDataRequest 请求参数}): {@link ControlDeviceDataResponse 返回参数} */
+  /** 设备远程控制 {@link ControlDeviceDataRequest} {@link ControlDeviceDataResponse} */
   ControlDeviceData(data: ControlDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDeviceDataResponse>;
-  /** {@link CreateBatchProduction 创建量产任务}({@link CreateBatchProductionRequest 请求参数}): {@link CreateBatchProductionResponse 返回参数} */
+  /** 创建量产任务 {@link CreateBatchProductionRequest} {@link CreateBatchProductionResponse} */
   CreateBatchProduction(data: CreateBatchProductionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchProductionResponse>;
-  /** {@link CreateDevice 创建设备}({@link CreateDeviceRequest 请求参数}): {@link CreateDeviceResponse 返回参数} */
+  /** 创建设备 {@link CreateDeviceRequest} {@link CreateDeviceResponse} */
   CreateDevice(data: CreateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceResponse>;
-  /** {@link CreateFenceBind 创建围栏绑定信息}({@link CreateFenceBindRequest 请求参数}): {@link CreateFenceBindResponse 返回参数} */
+  /** 创建围栏绑定信息 {@link CreateFenceBindRequest} {@link CreateFenceBindResponse} */
   CreateFenceBind(data: CreateFenceBindRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFenceBindResponse>;
-  /** {@link CreateLoRaFrequency 创建 LoRa 自定义频点}({@link CreateLoRaFrequencyRequest 请求参数}): {@link CreateLoRaFrequencyResponse 返回参数} */
+  /** 创建 LoRa 自定义频点 {@link CreateLoRaFrequencyRequest} {@link CreateLoRaFrequencyResponse} */
   CreateLoRaFrequency(data?: CreateLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoRaFrequencyResponse>;
-  /** {@link CreateLoRaGateway 新建 LoRa 网关设备}({@link CreateLoRaGatewayRequest 请求参数}): {@link CreateLoRaGatewayResponse 返回参数} */
+  /** 新建 LoRa 网关设备 {@link CreateLoRaGatewayRequest} {@link CreateLoRaGatewayResponse} */
   CreateLoRaGateway(data: CreateLoRaGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoRaGatewayResponse>;
-  /** {@link CreatePositionFence 创建围栏}({@link CreatePositionFenceRequest 请求参数}): {@link CreatePositionFenceResponse 返回参数} */
+  /** 创建围栏 {@link CreatePositionFenceRequest} {@link CreatePositionFenceResponse} */
   CreatePositionFence(data: CreatePositionFenceRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePositionFenceResponse>;
-  /** {@link CreatePositionSpace 创建位置空间}({@link CreatePositionSpaceRequest 请求参数}): {@link CreatePositionSpaceResponse 返回参数} */
+  /** 创建位置空间 {@link CreatePositionSpaceRequest} {@link CreatePositionSpaceResponse} */
   CreatePositionSpace(data: CreatePositionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePositionSpaceResponse>;
-  /** {@link CreateProject 新建项目}({@link CreateProjectRequest 请求参数}): {@link CreateProjectResponse 返回参数} */
+  /** 新建项目 {@link CreateProjectRequest} {@link CreateProjectResponse} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
-  /** {@link CreateStudioProduct 新建产品}({@link CreateStudioProductRequest 请求参数}): {@link CreateStudioProductResponse 返回参数} */
+  /** 新建产品 {@link CreateStudioProductRequest} {@link CreateStudioProductResponse} */
   CreateStudioProduct(data: CreateStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStudioProductResponse>;
-  /** {@link CreateTopicPolicy 创建Topic}({@link CreateTopicPolicyRequest 请求参数}): {@link CreateTopicPolicyResponse 返回参数} */
+  /** 创建Topic {@link CreateTopicPolicyRequest} {@link CreateTopicPolicyResponse} */
   CreateTopicPolicy(data: CreateTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicPolicyResponse>;
-  /** {@link CreateTopicRule 创建规则}({@link CreateTopicRuleRequest 请求参数}): {@link CreateTopicRuleResponse 返回参数} */
+  /** 创建规则 {@link CreateTopicRuleRequest} {@link CreateTopicRuleResponse} */
   CreateTopicRule(data: CreateTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicRuleResponse>;
-  /** {@link DeleteDevice 删除设备}({@link DeleteDeviceRequest 请求参数}): {@link DeleteDeviceResponse 返回参数} */
+  /** 删除设备 {@link DeleteDeviceRequest} {@link DeleteDeviceResponse} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
-  /** {@link DeleteDevices 批量删除设备}({@link DeleteDevicesRequest 请求参数}): {@link DeleteDevicesResponse 返回参数} */
+  /** 批量删除设备 {@link DeleteDevicesRequest} {@link DeleteDevicesResponse} */
   DeleteDevices(data: DeleteDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDevicesResponse>;
-  /** {@link DeleteFenceBind 删除围栏绑定信息}({@link DeleteFenceBindRequest 请求参数}): {@link DeleteFenceBindResponse 返回参数} */
+  /** 删除围栏绑定信息 {@link DeleteFenceBindRequest} {@link DeleteFenceBindResponse} */
   DeleteFenceBind(data: DeleteFenceBindRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFenceBindResponse>;
-  /** {@link DeleteLoRaFrequency 删除LoRa自定义频点}({@link DeleteLoRaFrequencyRequest 请求参数}): {@link DeleteLoRaFrequencyResponse 返回参数} */
+  /** 删除LoRa自定义频点 {@link DeleteLoRaFrequencyRequest} {@link DeleteLoRaFrequencyResponse} */
   DeleteLoRaFrequency(data?: DeleteLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoRaFrequencyResponse>;
-  /** {@link DeleteLoRaGateway 删除 LoRa 网关}({@link DeleteLoRaGatewayRequest 请求参数}): {@link DeleteLoRaGatewayResponse 返回参数} */
+  /** 删除 LoRa 网关 {@link DeleteLoRaGatewayRequest} {@link DeleteLoRaGatewayResponse} */
   DeleteLoRaGateway(data: DeleteLoRaGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoRaGatewayResponse>;
-  /** {@link DeletePositionFence 删除围栏}({@link DeletePositionFenceRequest 请求参数}): {@link DeletePositionFenceResponse 返回参数} */
+  /** 删除围栏 {@link DeletePositionFenceRequest} {@link DeletePositionFenceResponse} */
   DeletePositionFence(data: DeletePositionFenceRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePositionFenceResponse>;
-  /** {@link DeletePositionSpace 删除位置空间}({@link DeletePositionSpaceRequest 请求参数}): {@link DeletePositionSpaceResponse 返回参数} */
+  /** 删除位置空间 {@link DeletePositionSpaceRequest} {@link DeletePositionSpaceResponse} */
   DeletePositionSpace(data: DeletePositionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePositionSpaceResponse>;
-  /** {@link DeleteProject 删除项目}({@link DeleteProjectRequest 请求参数}): {@link DeleteProjectResponse 返回参数} */
+  /** 删除项目 {@link DeleteProjectRequest} {@link DeleteProjectResponse} */
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
-  /** {@link DeleteStudioProduct 删除产品}({@link DeleteStudioProductRequest 请求参数}): {@link DeleteStudioProductResponse 返回参数} */
+  /** 删除产品 {@link DeleteStudioProductRequest} {@link DeleteStudioProductResponse} */
   DeleteStudioProduct(data: DeleteStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStudioProductResponse>;
-  /** {@link DeleteTopicPolicy 删除Topic}({@link DeleteTopicPolicyRequest 请求参数}): {@link DeleteTopicPolicyResponse 返回参数} */
+  /** 删除Topic {@link DeleteTopicPolicyRequest} {@link DeleteTopicPolicyResponse} */
   DeleteTopicPolicy(data: DeleteTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicPolicyResponse>;
-  /** {@link DeleteTopicRule 删除规则}({@link DeleteTopicRuleRequest 请求参数}): {@link DeleteTopicRuleResponse 返回参数} */
+  /** 删除规则 {@link DeleteTopicRuleRequest} {@link DeleteTopicRuleResponse} */
   DeleteTopicRule(data: DeleteTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicRuleResponse>;
-  /** {@link DescribeBatchProduction 获取量产详情}({@link DescribeBatchProductionRequest 请求参数}): {@link DescribeBatchProductionResponse 返回参数} */
+  /** 获取量产详情 {@link DescribeBatchProductionRequest} {@link DescribeBatchProductionResponse} */
   DescribeBatchProduction(data: DescribeBatchProductionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchProductionResponse>;
-  /** {@link DescribeBindedProducts 获取网关产品已经绑定的子产品}({@link DescribeBindedProductsRequest 请求参数}): {@link DescribeBindedProductsResponse 返回参数} */
+  /** 获取网关产品已经绑定的子产品 {@link DescribeBindedProductsRequest} {@link DescribeBindedProductsResponse} */
   DescribeBindedProducts(data: DescribeBindedProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindedProductsResponse>;
-  /** {@link DescribeDevice 查看设备详情}({@link DescribeDeviceRequest 请求参数}): {@link DescribeDeviceResponse 返回参数} */
+  /** 查看设备详情 {@link DescribeDeviceRequest} {@link DescribeDeviceResponse} */
   DescribeDevice(data: DescribeDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceResponse>;
-  /** {@link DescribeDeviceBindGateway 查询设备绑定的网关设备}({@link DescribeDeviceBindGatewayRequest 请求参数}): {@link DescribeDeviceBindGatewayResponse 返回参数} */
+  /** 查询设备绑定的网关设备 {@link DescribeDeviceBindGatewayRequest} {@link DescribeDeviceBindGatewayResponse} */
   DescribeDeviceBindGateway(data: DescribeDeviceBindGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceBindGatewayResponse>;
-  /** {@link DescribeDeviceData 获取设备属性数据}({@link DescribeDeviceDataRequest 请求参数}): {@link DescribeDeviceDataResponse 返回参数} */
+  /** 获取设备属性数据 {@link DescribeDeviceDataRequest} {@link DescribeDeviceDataResponse} */
   DescribeDeviceData(data: DescribeDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDataResponse>;
-  /** {@link DescribeDeviceDataHistory 获取设备历史数据}({@link DescribeDeviceDataHistoryRequest 请求参数}): {@link DescribeDeviceDataHistoryResponse 返回参数} */
+  /** 获取设备历史数据 {@link DescribeDeviceDataHistoryRequest} {@link DescribeDeviceDataHistoryResponse} */
   DescribeDeviceDataHistory(data: DescribeDeviceDataHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDataHistoryResponse>;
-  /** {@link DescribeDeviceLocationSolve 获取实时位置解析}({@link DescribeDeviceLocationSolveRequest 请求参数}): {@link DescribeDeviceLocationSolveResponse 返回参数} */
+  /** 获取实时位置解析 {@link DescribeDeviceLocationSolveRequest} {@link DescribeDeviceLocationSolveResponse} */
   DescribeDeviceLocationSolve(data: DescribeDeviceLocationSolveRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceLocationSolveResponse>;
-  /** {@link DescribeDevicePositionList 获取设备位置列表}({@link DescribeDevicePositionListRequest 请求参数}): {@link DescribeDevicePositionListResponse 返回参数} */
+  /** 获取设备位置列表 {@link DescribeDevicePositionListRequest} {@link DescribeDevicePositionListResponse} */
   DescribeDevicePositionList(data: DescribeDevicePositionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePositionListResponse>;
-  /** {@link DescribeFenceBindList 获取围栏绑定信息列表}({@link DescribeFenceBindListRequest 请求参数}): {@link DescribeFenceBindListResponse 返回参数} */
+  /** 获取围栏绑定信息列表 {@link DescribeFenceBindListRequest} {@link DescribeFenceBindListResponse} */
   DescribeFenceBindList(data: DescribeFenceBindListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFenceBindListResponse>;
-  /** {@link DescribeFenceEventList 获取围栏告警事件列表}({@link DescribeFenceEventListRequest 请求参数}): {@link DescribeFenceEventListResponse 返回参数} */
+  /** 获取围栏告警事件列表 {@link DescribeFenceEventListRequest} {@link DescribeFenceEventListResponse} */
   DescribeFenceEventList(data: DescribeFenceEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFenceEventListResponse>;
-  /** {@link DescribeFirmwareTask 查询固件升级任务列表}({@link DescribeFirmwareTaskRequest 请求参数}): {@link DescribeFirmwareTaskResponse 返回参数} */
+  /** 查询固件升级任务列表 {@link DescribeFirmwareTaskRequest} {@link DescribeFirmwareTaskResponse} */
   DescribeFirmwareTask(data: DescribeFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskResponse>;
-  /** {@link DescribeGatewayBindDevices 获取网关绑定的子设备列表}({@link DescribeGatewayBindDevicesRequest 请求参数}): {@link DescribeGatewayBindDevicesResponse 返回参数} */
+  /** 获取网关绑定的子设备列表 {@link DescribeGatewayBindDevicesRequest} {@link DescribeGatewayBindDevicesResponse} */
   DescribeGatewayBindDevices(data: DescribeGatewayBindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayBindDevicesResponse>;
-  /** {@link DescribeGatewaySubDeviceList 查询绑定到家庭的网关设备的子设备列表}({@link DescribeGatewaySubDeviceListRequest 请求参数}): {@link DescribeGatewaySubDeviceListResponse 返回参数} */
+  /** 查询绑定到家庭的网关设备的子设备列表 {@link DescribeGatewaySubDeviceListRequest} {@link DescribeGatewaySubDeviceListResponse} */
   DescribeGatewaySubDeviceList(data: DescribeGatewaySubDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewaySubDeviceListResponse>;
-  /** {@link DescribeGatewaySubProducts 获取网关可操作的子产品}({@link DescribeGatewaySubProductsRequest 请求参数}): {@link DescribeGatewaySubProductsResponse 返回参数} */
+  /** 获取网关可操作的子产品 {@link DescribeGatewaySubProductsRequest} {@link DescribeGatewaySubProductsResponse} */
   DescribeGatewaySubProducts(data: DescribeGatewaySubProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewaySubProductsResponse>;
-  /** {@link DescribeLoRaFrequency 获取LoRa自定义频点详情}({@link DescribeLoRaFrequencyRequest 请求参数}): {@link DescribeLoRaFrequencyResponse 返回参数} */
+  /** 获取LoRa自定义频点详情 {@link DescribeLoRaFrequencyRequest} {@link DescribeLoRaFrequencyResponse} */
   DescribeLoRaFrequency(data?: DescribeLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoRaFrequencyResponse>;
-  /** {@link DescribeModelDefinition 查询产品数据模板}({@link DescribeModelDefinitionRequest 请求参数}): {@link DescribeModelDefinitionResponse 返回参数} */
+  /** 查询产品数据模板 {@link DescribeModelDefinitionRequest} {@link DescribeModelDefinitionResponse} */
   DescribeModelDefinition(data: DescribeModelDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelDefinitionResponse>;
-  /** {@link DescribePositionFenceList 获取围栏列表}({@link DescribePositionFenceListRequest 请求参数}): {@link DescribePositionFenceListResponse 返回参数} */
+  /** 获取围栏列表 {@link DescribePositionFenceListRequest} {@link DescribePositionFenceListResponse} */
   DescribePositionFenceList(data: DescribePositionFenceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePositionFenceListResponse>;
-  /** {@link DescribeProject 查询项目详情}({@link DescribeProjectRequest 请求参数}): {@link DescribeProjectResponse 返回参数} */
+  /** 查询项目详情 {@link DescribeProjectRequest} {@link DescribeProjectResponse} */
   DescribeProject(data: DescribeProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectResponse>;
-  /** {@link DescribeSpaceFenceEventList 获取位置空间中围栏告警事件列表}({@link DescribeSpaceFenceEventListRequest 请求参数}): {@link DescribeSpaceFenceEventListResponse 返回参数} */
+  /** 获取位置空间中围栏告警事件列表 {@link DescribeSpaceFenceEventListRequest} {@link DescribeSpaceFenceEventListResponse} */
   DescribeSpaceFenceEventList(data: DescribeSpaceFenceEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpaceFenceEventListResponse>;
-  /** {@link DescribeStudioProduct 获取产品详情}({@link DescribeStudioProductRequest 请求参数}): {@link DescribeStudioProductResponse 返回参数} */
+  /** 获取产品详情 {@link DescribeStudioProductRequest} {@link DescribeStudioProductResponse} */
   DescribeStudioProduct(data: DescribeStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStudioProductResponse>;
-  /** {@link DescribeTopicPolicy 查看Topic详情}({@link DescribeTopicPolicyRequest 请求参数}): {@link DescribeTopicPolicyResponse 返回参数} */
+  /** 查看Topic详情 {@link DescribeTopicPolicyRequest} {@link DescribeTopicPolicyResponse} */
   DescribeTopicPolicy(data: DescribeTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicPolicyResponse>;
-  /** {@link DescribeTopicRule 获取规则信息}({@link DescribeTopicRuleRequest 请求参数}): {@link DescribeTopicRuleResponse 返回参数} */
+  /** 获取规则信息 {@link DescribeTopicRuleRequest} {@link DescribeTopicRuleResponse} */
   DescribeTopicRule(data: DescribeTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicRuleResponse>;
-  /** {@link DirectBindDeviceInFamily 直接绑定设备和家庭}({@link DirectBindDeviceInFamilyRequest 请求参数}): {@link DirectBindDeviceInFamilyResponse 返回参数} */
+  /** 直接绑定设备和家庭 {@link DirectBindDeviceInFamilyRequest} {@link DirectBindDeviceInFamilyResponse} */
   DirectBindDeviceInFamily(data: DirectBindDeviceInFamilyRequest, config?: AxiosRequestConfig): AxiosPromise<DirectBindDeviceInFamilyResponse>;
-  /** {@link DisableTopicRule 禁用规则}({@link DisableTopicRuleRequest 请求参数}): {@link DisableTopicRuleResponse 返回参数} */
+  /** 禁用规则 {@link DisableTopicRuleRequest} {@link DisableTopicRuleResponse} */
   DisableTopicRule(data: DisableTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DisableTopicRuleResponse>;
-  /** {@link EnableTopicRule 启用规则}({@link EnableTopicRuleRequest 请求参数}): {@link EnableTopicRuleResponse 返回参数} */
+  /** 启用规则 {@link EnableTopicRuleRequest} {@link EnableTopicRuleResponse} */
   EnableTopicRule(data: EnableTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTopicRuleResponse>;
-  /** {@link GenSingleDeviceSignatureOfPublic 生成单个设备绑定的签名}({@link GenSingleDeviceSignatureOfPublicRequest 请求参数}): {@link GenSingleDeviceSignatureOfPublicResponse 返回参数} */
+  /** 生成单个设备绑定的签名 {@link GenSingleDeviceSignatureOfPublicRequest} {@link GenSingleDeviceSignatureOfPublicResponse} */
   GenSingleDeviceSignatureOfPublic(data: GenSingleDeviceSignatureOfPublicRequest, config?: AxiosRequestConfig): AxiosPromise<GenSingleDeviceSignatureOfPublicResponse>;
-  /** {@link GetBatchProductionsList 列出量产数据列表}({@link GetBatchProductionsListRequest 请求参数}): {@link GetBatchProductionsListResponse 返回参数} */
+  /** 列出量产数据列表 {@link GetBatchProductionsListRequest} {@link GetBatchProductionsListResponse} */
   GetBatchProductionsList(data: GetBatchProductionsListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBatchProductionsListResponse>;
-  /** {@link GetCOSURL 获取固件存储请求地址}({@link GetCOSURLRequest 请求参数}): {@link GetCOSURLResponse 返回参数} */
+  /** 获取固件存储请求地址 {@link GetCOSURLRequest} {@link GetCOSURLResponse} */
   GetCOSURL(data: GetCOSURLRequest, config?: AxiosRequestConfig): AxiosPromise<GetCOSURLResponse>;
-  /** {@link GetDeviceList 获取产品的设备列表}({@link GetDeviceListRequest 请求参数}): {@link GetDeviceListResponse 返回参数} */
+  /** 获取产品的设备列表 {@link GetDeviceListRequest} {@link GetDeviceListResponse} */
   GetDeviceList(data: GetDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceListResponse>;
-  /** {@link GetDeviceLocationHistory 获取设备历史位置}({@link GetDeviceLocationHistoryRequest 请求参数}): {@link GetDeviceLocationHistoryResponse 返回参数} */
+  /** 获取设备历史位置 {@link GetDeviceLocationHistoryRequest} {@link GetDeviceLocationHistoryResponse} */
   GetDeviceLocationHistory(data: GetDeviceLocationHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceLocationHistoryResponse>;
-  /** {@link GetFamilyDeviceUserList 获取设备绑定的用户列表}({@link GetFamilyDeviceUserListRequest 请求参数}): {@link GetFamilyDeviceUserListResponse 返回参数} */
+  /** 获取设备绑定的用户列表 {@link GetFamilyDeviceUserListRequest} {@link GetFamilyDeviceUserListResponse} */
   GetFamilyDeviceUserList(data: GetFamilyDeviceUserListRequest, config?: AxiosRequestConfig): AxiosPromise<GetFamilyDeviceUserListResponse>;
-  /** {@link GetGatewaySubDeviceList 获取指定网关设备的子设备列表}({@link GetGatewaySubDeviceListRequest 请求参数}): {@link GetGatewaySubDeviceListResponse 返回参数} */
+  /** 获取指定网关设备的子设备列表 {@link GetGatewaySubDeviceListRequest} {@link GetGatewaySubDeviceListResponse} */
   GetGatewaySubDeviceList(data: GetGatewaySubDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetGatewaySubDeviceListResponse>;
-  /** {@link GetLoRaGatewayList 获取 LoRa 网关列表}({@link GetLoRaGatewayListRequest 请求参数}): {@link GetLoRaGatewayListResponse 返回参数} */
+  /** 获取 LoRa 网关列表 {@link GetLoRaGatewayListRequest} {@link GetLoRaGatewayListResponse} */
   GetLoRaGatewayList(data: GetLoRaGatewayListRequest, config?: AxiosRequestConfig): AxiosPromise<GetLoRaGatewayListResponse>;
-  /** {@link GetPositionSpaceList 获取位置空间列表}({@link GetPositionSpaceListRequest 请求参数}): {@link GetPositionSpaceListResponse 返回参数} */
+  /** 获取位置空间列表 {@link GetPositionSpaceListRequest} {@link GetPositionSpaceListResponse} */
   GetPositionSpaceList(data: GetPositionSpaceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetPositionSpaceListResponse>;
-  /** {@link GetProjectList 获取项目列表}({@link GetProjectListRequest 请求参数}): {@link GetProjectListResponse 返回参数} */
+  /** 获取项目列表 {@link GetProjectListRequest} {@link GetProjectListResponse} */
   GetProjectList(data?: GetProjectListRequest, config?: AxiosRequestConfig): AxiosPromise<GetProjectListResponse>;
-  /** {@link GetStudioProductList 获取产品列表}({@link GetStudioProductListRequest 请求参数}): {@link GetStudioProductListResponse 返回参数} */
+  /** 获取产品列表 {@link GetStudioProductListRequest} {@link GetStudioProductListResponse} */
   GetStudioProductList(data?: GetStudioProductListRequest, config?: AxiosRequestConfig): AxiosPromise<GetStudioProductListResponse>;
-  /** {@link GetTopicRuleList 获取规则列表}({@link GetTopicRuleListRequest 请求参数}): {@link GetTopicRuleListResponse 返回参数} */
+  /** 获取规则列表 {@link GetTopicRuleListRequest} {@link GetTopicRuleListResponse} */
   GetTopicRuleList(data: GetTopicRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicRuleListResponse>;
-  /** {@link ListEventHistory 获取设备的历史事件}({@link ListEventHistoryRequest 请求参数}): {@link ListEventHistoryResponse 返回参数} */
+  /** 获取设备的历史事件 {@link ListEventHistoryRequest} {@link ListEventHistoryResponse} */
   ListEventHistory(data: ListEventHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<ListEventHistoryResponse>;
-  /** {@link ListFirmwares 获取固件列表}({@link ListFirmwaresRequest 请求参数}): {@link ListFirmwaresResponse 返回参数} */
+  /** 获取固件列表 {@link ListFirmwaresRequest} {@link ListFirmwaresResponse} */
   ListFirmwares(data: ListFirmwaresRequest, config?: AxiosRequestConfig): AxiosPromise<ListFirmwaresResponse>;
-  /** {@link ListTopicPolicy 获取Topic列表}({@link ListTopicPolicyRequest 请求参数}): {@link ListTopicPolicyResponse 返回参数} */
+  /** 获取Topic列表 {@link ListTopicPolicyRequest} {@link ListTopicPolicyResponse} */
   ListTopicPolicy(data: ListTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopicPolicyResponse>;
-  /** {@link ModifyFenceBind 更新围栏绑定信息}({@link ModifyFenceBindRequest 请求参数}): {@link ModifyFenceBindResponse 返回参数} */
+  /** 更新围栏绑定信息 {@link ModifyFenceBindRequest} {@link ModifyFenceBindResponse} */
   ModifyFenceBind(data: ModifyFenceBindRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFenceBindResponse>;
-  /** {@link ModifyLoRaFrequency 修改LoRa自定义频点}({@link ModifyLoRaFrequencyRequest 请求参数}): {@link ModifyLoRaFrequencyResponse 返回参数} */
+  /** 修改LoRa自定义频点 {@link ModifyLoRaFrequencyRequest} {@link ModifyLoRaFrequencyResponse} */
   ModifyLoRaFrequency(data?: ModifyLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoRaFrequencyResponse>;
-  /** {@link ModifyLoRaGateway 修改 LoRa 网关信息}({@link ModifyLoRaGatewayRequest 请求参数}): {@link ModifyLoRaGatewayResponse 返回参数} */
+  /** 修改 LoRa 网关信息 {@link ModifyLoRaGatewayRequest} {@link ModifyLoRaGatewayResponse} */
   ModifyLoRaGateway(data: ModifyLoRaGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoRaGatewayResponse>;
-  /** {@link ModifyModelDefinition 修改产品数据模板}({@link ModifyModelDefinitionRequest 请求参数}): {@link ModifyModelDefinitionResponse 返回参数} */
+  /** 修改产品数据模板 {@link ModifyModelDefinitionRequest} {@link ModifyModelDefinitionResponse} */
   ModifyModelDefinition(data: ModifyModelDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelDefinitionResponse>;
-  /** {@link ModifyPositionFence 更新围栏}({@link ModifyPositionFenceRequest 请求参数}): {@link ModifyPositionFenceResponse 返回参数} */
+  /** 更新围栏 {@link ModifyPositionFenceRequest} {@link ModifyPositionFenceResponse} */
   ModifyPositionFence(data?: ModifyPositionFenceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPositionFenceResponse>;
-  /** {@link ModifyPositionSpace 更新位置空间}({@link ModifyPositionSpaceRequest 请求参数}): {@link ModifyPositionSpaceResponse 返回参数} */
+  /** 更新位置空间 {@link ModifyPositionSpaceRequest} {@link ModifyPositionSpaceResponse} */
   ModifyPositionSpace(data: ModifyPositionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPositionSpaceResponse>;
-  /** {@link ModifyProject 修改项目}({@link ModifyProjectRequest 请求参数}): {@link ModifyProjectResponse 返回参数} */
+  /** 修改项目 {@link ModifyProjectRequest} {@link ModifyProjectResponse} */
   ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
-  /** {@link ModifySpaceProperty 更新位置空间产品属性}({@link ModifySpacePropertyRequest 请求参数}): {@link ModifySpacePropertyResponse 返回参数} */
+  /** 更新位置空间产品属性 {@link ModifySpacePropertyRequest} {@link ModifySpacePropertyResponse} */
   ModifySpaceProperty(data: ModifySpacePropertyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySpacePropertyResponse>;
-  /** {@link ModifyStudioProduct 修改产品}({@link ModifyStudioProductRequest 请求参数}): {@link ModifyStudioProductResponse 返回参数} */
+  /** 修改产品 {@link ModifyStudioProductRequest} {@link ModifyStudioProductResponse} */
   ModifyStudioProduct(data: ModifyStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStudioProductResponse>;
-  /** {@link ModifyTopicPolicy 更新Topic}({@link ModifyTopicPolicyRequest 请求参数}): {@link ModifyTopicPolicyResponse 返回参数} */
+  /** 更新Topic {@link ModifyTopicPolicyRequest} {@link ModifyTopicPolicyResponse} */
   ModifyTopicPolicy(data: ModifyTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicPolicyResponse>;
-  /** {@link ModifyTopicRule 修改规则}({@link ModifyTopicRuleRequest 请求参数}): {@link ModifyTopicRuleResponse 返回参数} */
+  /** 修改规则 {@link ModifyTopicRuleRequest} {@link ModifyTopicRuleResponse} */
   ModifyTopicRule(data: ModifyTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicRuleResponse>;
-  /** {@link PublishBroadcastMessage 发布广播消息}({@link PublishBroadcastMessageRequest 请求参数}): {@link PublishBroadcastMessageResponse 返回参数} */
+  /** 发布广播消息 {@link PublishBroadcastMessageRequest} {@link PublishBroadcastMessageResponse} */
   PublishBroadcastMessage(data: PublishBroadcastMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishBroadcastMessageResponse>;
-  /** {@link PublishMessage 设备透传指令控制}({@link PublishMessageRequest 请求参数}): {@link PublishMessageResponse 返回参数} */
+  /** 设备透传指令控制 {@link PublishMessageRequest} {@link PublishMessageResponse} */
   PublishMessage(data: PublishMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishMessageResponse>;
-  /** {@link PublishRRPCMessage 发布RRPC消息}({@link PublishRRPCMessageRequest 请求参数}): {@link PublishRRPCMessageResponse 返回参数} */
+  /** 发布RRPC消息 {@link PublishRRPCMessageRequest} {@link PublishRRPCMessageResponse} */
   PublishRRPCMessage(data: PublishRRPCMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishRRPCMessageResponse>;
-  /** {@link ReleaseStudioProduct 发布产品}({@link ReleaseStudioProductRequest 请求参数}): {@link ReleaseStudioProductResponse 返回参数} */
+  /** 发布产品 {@link ReleaseStudioProductRequest} {@link ReleaseStudioProductResponse} */
   ReleaseStudioProduct(data: ReleaseStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseStudioProductResponse>;
-  /** {@link SearchPositionSpace 搜索位置空间}({@link SearchPositionSpaceRequest 请求参数}): {@link SearchPositionSpaceResponse 返回参数} */
+  /** 搜索位置空间 {@link SearchPositionSpaceRequest} {@link SearchPositionSpaceResponse} */
   SearchPositionSpace(data: SearchPositionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<SearchPositionSpaceResponse>;
-  /** {@link SearchStudioProduct 搜索产品}({@link SearchStudioProductRequest 请求参数}): {@link SearchStudioProductResponse 返回参数} */
+  /** 搜索产品 {@link SearchStudioProductRequest} {@link SearchStudioProductResponse} */
   SearchStudioProduct(data?: SearchStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<SearchStudioProductResponse>;
-  /** {@link SearchTopicRule 搜索规则}({@link SearchTopicRuleRequest 请求参数}): {@link SearchTopicRuleResponse 返回参数} */
+  /** 搜索规则 {@link SearchTopicRuleRequest} {@link SearchTopicRuleResponse} */
   SearchTopicRule(data: SearchTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SearchTopicRuleResponse>;
-  /** {@link UnbindDevices 批量解绑子设备}({@link UnbindDevicesRequest 请求参数}): {@link UnbindDevicesResponse 返回参数} */
+  /** 批量解绑子设备 {@link UnbindDevicesRequest} {@link UnbindDevicesResponse} */
   UnbindDevices(data: UnbindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDevicesResponse>;
-  /** {@link UnbindProducts 批量解绑子产品}({@link UnbindProductsRequest 请求参数}): {@link UnbindProductsResponse 返回参数} */
+  /** 批量解绑子产品 {@link UnbindProductsRequest} {@link UnbindProductsResponse} */
   UnbindProducts(data: UnbindProductsRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindProductsResponse>;
-  /** {@link UpdateDevicesEnableState 批量禁用启用设备}({@link UpdateDevicesEnableStateRequest 请求参数}): {@link UpdateDevicesEnableStateResponse 返回参数} */
+  /** 批量禁用启用设备 {@link UpdateDevicesEnableStateRequest} {@link UpdateDevicesEnableStateResponse} */
   UpdateDevicesEnableState(data: UpdateDevicesEnableStateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDevicesEnableStateResponse>;
-  /** {@link UpdateFirmware 更新设备固件}({@link UpdateFirmwareRequest 请求参数}): {@link UpdateFirmwareResponse 返回参数} */
+  /** 更新设备固件 {@link UpdateFirmwareRequest} {@link UpdateFirmwareResponse} */
   UpdateFirmware(data: UpdateFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFirmwareResponse>;
-  /** {@link UploadFirmware 创建固件版本信息}({@link UploadFirmwareRequest 请求参数}): {@link UploadFirmwareResponse 返回参数} */
+  /** 创建固件版本信息 {@link UploadFirmwareRequest} {@link UploadFirmwareResponse} */
   UploadFirmware(data: UploadFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFirmwareResponse>;
 }
 

@@ -84,14 +84,14 @@ declare interface QueryActivityAntiRushResponse {
   RootId: string | null;
   /** 业务侧错误码。成功时返回Success，错误时返回具体业务错误原因。 */
   CodeDesc: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Aa 活动防刷} */
 declare interface Aa {
   (): Versions;
-  /** {@link QueryActivityAntiRush 活动防刷}({@link QueryActivityAntiRushRequest 请求参数}): {@link QueryActivityAntiRushResponse 返回参数} */
+  /** 活动防刷 {@link QueryActivityAntiRushRequest} {@link QueryActivityAntiRushResponse} */
   QueryActivityAntiRush(data: QueryActivityAntiRushRequest, config?: AxiosRequestConfig): AxiosPromise<QueryActivityAntiRushResponse>;
 }
 

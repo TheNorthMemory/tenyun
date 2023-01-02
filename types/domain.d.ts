@@ -246,7 +246,7 @@ declare interface BatchModifyDomainInfoRequest {
 declare interface BatchModifyDomainInfoResponse {
   /** 日志ID */
   LogId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -258,7 +258,7 @@ declare interface CheckBatchStatusRequest {
 declare interface CheckBatchStatusResponse {
   /** 批量任务状态集 */
   StatusSet: BatchStatus[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -296,7 +296,7 @@ declare interface CheckDomainResponse {
   Period: number;
   /** 是否支持北京备案 true 支持 false 不支持 */
   RecordSupport: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -322,7 +322,7 @@ declare interface CreateDomainBatchRequest {
 declare interface CreateDomainBatchResponse {
   /** 批量日志ID */
   LogId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -336,7 +336,7 @@ declare interface CreatePhoneEmailRequest {
 }
 
 declare interface CreatePhoneEmailResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -350,7 +350,7 @@ declare interface CreateTemplateRequest {
 declare interface CreateTemplateResponse {
   /** 模板信息 */
   Template: TemplateInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -362,7 +362,7 @@ declare interface DeletePhoneEmailRequest {
 }
 
 declare interface DeletePhoneEmailResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -372,7 +372,7 @@ declare interface DeleteTemplateRequest {
 }
 
 declare interface DeleteTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -390,7 +390,7 @@ declare interface DescribeBatchOperationLogDetailsResponse {
   TotalCount: number;
   /** 日志详情列表。 */
   DomainBatchDetailSet: DomainBatchDetailSet[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -406,7 +406,7 @@ declare interface DescribeBatchOperationLogsResponse {
   TotalCount: number;
   /** 日志列表 */
   DomainBatchLogSet: DomainBatchLogSet[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -420,7 +420,7 @@ declare interface DescribeDomainBaseInfoResponse {
   DomainInfo: DomainBaseInfo;
   /** 用户Uin */
   Uin: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -436,7 +436,7 @@ declare interface DescribeDomainNameListResponse {
   DomainSet: DomainList[] | null;
   /** 域名总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -452,7 +452,7 @@ declare interface DescribeDomainPriceListRequest {
 declare interface DescribeDomainPriceListResponse {
   /** 域名价格列表 */
   PriceList: PriceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -466,7 +466,7 @@ declare interface DescribeDomainSimpleInfoResponse {
   DomainInfo: DomainSimpleInfo;
   /** 账号ID */
   Uin: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -486,7 +486,7 @@ declare interface DescribePhoneEmailListResponse {
   PhoneEmailList: PhoneEmailData[];
   /** 总数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -508,7 +508,7 @@ declare interface DescribeTemplateListResponse {
   TotalCount: number;
   /** 模板详细信息列表。 */
   TemplateSet: TemplateInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -520,7 +520,7 @@ declare interface DescribeTemplateRequest {
 declare interface DescribeTemplateResponse {
   /** 模板信息 */
   Template?: TemplateInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -534,7 +534,7 @@ declare interface ModifyDomainDNSBatchRequest {
 declare interface ModifyDomainDNSBatchResponse {
   /** 日志ID。 */
   LogId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -552,7 +552,7 @@ declare interface ModifyDomainOwnerBatchRequest {
 declare interface ModifyDomainOwnerBatchResponse {
   /** 日志id */
   LogId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -570,7 +570,7 @@ declare interface RenewDomainBatchRequest {
 declare interface RenewDomainBatchResponse {
   /** 操作日志ID。 */
   LogId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -582,7 +582,7 @@ declare interface SendPhoneEmailCodeRequest {
 }
 
 declare interface SendPhoneEmailCodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -594,7 +594,7 @@ declare interface SetDomainAutoRenewRequest {
 }
 
 declare interface SetDomainAutoRenewResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -620,7 +620,7 @@ declare interface TransferInDomainBatchRequest {
 declare interface TransferInDomainBatchResponse {
   /** 日志ID */
   LogId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -634,7 +634,7 @@ declare interface TransferProhibitionBatchRequest {
 declare interface TransferProhibitionBatchResponse {
   /** 日志ID */
   LogId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -648,7 +648,7 @@ declare interface UpdateProhibitionBatchRequest {
 declare interface UpdateProhibitionBatchResponse {
   /** 日志ID */
   LogId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -660,64 +660,64 @@ declare interface UploadImageRequest {
 declare interface UploadImageResponse {
   /** 资质照片地址。 */
   AccessUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Domain 域名注册} */
 declare interface Domain {
   (): Versions;
-  /** {@link BatchModifyDomainInfo 批量域名信息修改}({@link BatchModifyDomainInfoRequest 请求参数}): {@link BatchModifyDomainInfoResponse 返回参数} */
+  /** 批量域名信息修改 {@link BatchModifyDomainInfoRequest} {@link BatchModifyDomainInfoResponse} */
   BatchModifyDomainInfo(data: BatchModifyDomainInfoRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyDomainInfoResponse>;
-  /** {@link CheckBatchStatus 批量操作日志状态}({@link CheckBatchStatusRequest 请求参数}): {@link CheckBatchStatusResponse 返回参数} */
+  /** 批量操作日志状态 {@link CheckBatchStatusRequest} {@link CheckBatchStatusResponse} */
   CheckBatchStatus(data: CheckBatchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<CheckBatchStatusResponse>;
-  /** {@link CheckDomain 域名注册查询}({@link CheckDomainRequest 请求参数}): {@link CheckDomainResponse 返回参数} */
+  /** 域名注册查询 {@link CheckDomainRequest} {@link CheckDomainResponse} */
   CheckDomain(data: CheckDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDomainResponse>;
-  /** {@link CreateDomainBatch 批量域名注册}({@link CreateDomainBatchRequest 请求参数}): {@link CreateDomainBatchResponse 返回参数} */
+  /** 批量域名注册 {@link CreateDomainBatchRequest} {@link CreateDomainBatchResponse} */
   CreateDomainBatch(data: CreateDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainBatchResponse>;
-  /** {@link CreatePhoneEmail 验证手机邮箱}({@link CreatePhoneEmailRequest 请求参数}): {@link CreatePhoneEmailResponse 返回参数} */
+  /** 验证手机邮箱 {@link CreatePhoneEmailRequest} {@link CreatePhoneEmailResponse} */
   CreatePhoneEmail(data: CreatePhoneEmailRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePhoneEmailResponse>;
-  /** {@link CreateTemplate 添加域名信息模板}({@link CreateTemplateRequest 请求参数}): {@link CreateTemplateResponse 返回参数} */
+  /** 添加域名信息模板 {@link CreateTemplateRequest} {@link CreateTemplateResponse} */
   CreateTemplate(data: CreateTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTemplateResponse>;
-  /** {@link DeletePhoneEmail 删除手机邮箱}({@link DeletePhoneEmailRequest 请求参数}): {@link DeletePhoneEmailResponse 返回参数} */
+  /** 删除手机邮箱 {@link DeletePhoneEmailRequest} {@link DeletePhoneEmailResponse} */
   DeletePhoneEmail(data: DeletePhoneEmailRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePhoneEmailResponse>;
-  /** {@link DeleteTemplate 删除信息模板}({@link DeleteTemplateRequest 请求参数}): {@link DeleteTemplateResponse 返回参数} */
+  /** 删除信息模板 {@link DeleteTemplateRequest} {@link DeleteTemplateResponse} */
   DeleteTemplate(data: DeleteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTemplateResponse>;
-  /** {@link DescribeBatchOperationLogDetails 批量操作日志详情}({@link DescribeBatchOperationLogDetailsRequest 请求参数}): {@link DescribeBatchOperationLogDetailsResponse 返回参数} */
+  /** 批量操作日志详情 {@link DescribeBatchOperationLogDetailsRequest} {@link DescribeBatchOperationLogDetailsResponse} */
   DescribeBatchOperationLogDetails(data: DescribeBatchOperationLogDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOperationLogDetailsResponse>;
-  /** {@link DescribeBatchOperationLogs 批量操作日志列表}({@link DescribeBatchOperationLogsRequest 请求参数}): {@link DescribeBatchOperationLogsResponse 返回参数} */
+  /** 批量操作日志列表 {@link DescribeBatchOperationLogsRequest} {@link DescribeBatchOperationLogsResponse} */
   DescribeBatchOperationLogs(data?: DescribeBatchOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOperationLogsResponse>;
-  /** {@link DescribeDomainBaseInfo 域名基本信息}({@link DescribeDomainBaseInfoRequest 请求参数}): {@link DescribeDomainBaseInfoResponse 返回参数} */
+  /** 域名基本信息 {@link DescribeDomainBaseInfoRequest} {@link DescribeDomainBaseInfoResponse} */
   DescribeDomainBaseInfo(data: DescribeDomainBaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainBaseInfoResponse>;
-  /** {@link DescribeDomainNameList 我的域名列表}({@link DescribeDomainNameListRequest 请求参数}): {@link DescribeDomainNameListResponse 返回参数} */
+  /** 我的域名列表 {@link DescribeDomainNameListRequest} {@link DescribeDomainNameListResponse} */
   DescribeDomainNameList(data?: DescribeDomainNameListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainNameListResponse>;
-  /** {@link DescribeDomainPriceList 域名价格列表}({@link DescribeDomainPriceListRequest 请求参数}): {@link DescribeDomainPriceListResponse 返回参数} */
+  /** 域名价格列表 {@link DescribeDomainPriceListRequest} {@link DescribeDomainPriceListResponse} */
   DescribeDomainPriceList(data?: DescribeDomainPriceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainPriceListResponse>;
-  /** {@link DescribeDomainSimpleInfo 获取域名实名信息}({@link DescribeDomainSimpleInfoRequest 请求参数}): {@link DescribeDomainSimpleInfoResponse 返回参数} */
+  /** 获取域名实名信息 {@link DescribeDomainSimpleInfoRequest} {@link DescribeDomainSimpleInfoResponse} */
   DescribeDomainSimpleInfo(data: DescribeDomainSimpleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainSimpleInfoResponse>;
-  /** {@link DescribePhoneEmailList 已验证手机邮箱列表}({@link DescribePhoneEmailListRequest 请求参数}): {@link DescribePhoneEmailListResponse 返回参数} */
+  /** 已验证手机邮箱列表 {@link DescribePhoneEmailListRequest} {@link DescribePhoneEmailListResponse} */
   DescribePhoneEmailList(data?: DescribePhoneEmailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePhoneEmailListResponse>;
-  /** {@link DescribeTemplate 获取模板信息}({@link DescribeTemplateRequest 请求参数}): {@link DescribeTemplateResponse 返回参数} */
+  /** 获取模板信息 {@link DescribeTemplateRequest} {@link DescribeTemplateResponse} */
   DescribeTemplate(data: DescribeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateResponse>;
-  /** {@link DescribeTemplateList 信息模板列表}({@link DescribeTemplateListRequest 请求参数}): {@link DescribeTemplateListResponse 返回参数} */
+  /** 信息模板列表 {@link DescribeTemplateListRequest} {@link DescribeTemplateListResponse} */
   DescribeTemplateList(data?: DescribeTemplateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateListResponse>;
-  /** {@link ModifyDomainDNSBatch 批量域名 DNS 修改}({@link ModifyDomainDNSBatchRequest 请求参数}): {@link ModifyDomainDNSBatchResponse 返回参数} */
+  /** 批量域名 DNS 修改 {@link ModifyDomainDNSBatchRequest} {@link ModifyDomainDNSBatchResponse} */
   ModifyDomainDNSBatch(data: ModifyDomainDNSBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainDNSBatchResponse>;
-  /** {@link ModifyDomainOwnerBatch 批量账号间转移}({@link ModifyDomainOwnerBatchRequest 请求参数}): {@link ModifyDomainOwnerBatchResponse 返回参数} */
+  /** 批量账号间转移 {@link ModifyDomainOwnerBatchRequest} {@link ModifyDomainOwnerBatchResponse} */
   ModifyDomainOwnerBatch(data: ModifyDomainOwnerBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainOwnerBatchResponse>;
-  /** {@link RenewDomainBatch 批量域名续费}({@link RenewDomainBatchRequest 请求参数}): {@link RenewDomainBatchResponse 返回参数} */
+  /** 批量域名续费 {@link RenewDomainBatchRequest} {@link RenewDomainBatchResponse} */
   RenewDomainBatch(data: RenewDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDomainBatchResponse>;
-  /** {@link SendPhoneEmailCode 发送手机邮箱验证码}({@link SendPhoneEmailCodeRequest 请求参数}): {@link SendPhoneEmailCodeResponse 返回参数} */
+  /** 发送手机邮箱验证码 {@link SendPhoneEmailCodeRequest} {@link SendPhoneEmailCodeResponse} */
   SendPhoneEmailCode(data: SendPhoneEmailCodeRequest, config?: AxiosRequestConfig): AxiosPromise<SendPhoneEmailCodeResponse>;
-  /** {@link SetDomainAutoRenew 域名自动续费}({@link SetDomainAutoRenewRequest 请求参数}): {@link SetDomainAutoRenewResponse 返回参数} */
+  /** 域名自动续费 {@link SetDomainAutoRenewRequest} {@link SetDomainAutoRenewResponse} */
   SetDomainAutoRenew(data: SetDomainAutoRenewRequest, config?: AxiosRequestConfig): AxiosPromise<SetDomainAutoRenewResponse>;
-  /** {@link TransferInDomainBatch 批量域名转入}({@link TransferInDomainBatchRequest 请求参数}): {@link TransferInDomainBatchResponse 返回参数} */
+  /** 批量域名转入 {@link TransferInDomainBatchRequest} {@link TransferInDomainBatchResponse} */
   TransferInDomainBatch(data: TransferInDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<TransferInDomainBatchResponse>;
-  /** {@link TransferProhibitionBatch 批量禁止转移锁}({@link TransferProhibitionBatchRequest 请求参数}): {@link TransferProhibitionBatchResponse 返回参数} */
+  /** 批量禁止转移锁 {@link TransferProhibitionBatchRequest} {@link TransferProhibitionBatchResponse} */
   TransferProhibitionBatch(data: TransferProhibitionBatchRequest, config?: AxiosRequestConfig): AxiosPromise<TransferProhibitionBatchResponse>;
-  /** {@link UpdateProhibitionBatch 批量禁止更新锁}({@link UpdateProhibitionBatchRequest 请求参数}): {@link UpdateProhibitionBatchResponse 返回参数} */
+  /** 批量禁止更新锁 {@link UpdateProhibitionBatchRequest} {@link UpdateProhibitionBatchResponse} */
   UpdateProhibitionBatch(data: UpdateProhibitionBatchRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProhibitionBatchResponse>;
-  /** {@link UploadImage 证件图片上传}({@link UploadImageRequest 请求参数}): {@link UploadImageResponse 返回参数} */
+  /** 证件图片上传 {@link UploadImageRequest} {@link UploadImageResponse} */
   UploadImage(data: UploadImageRequest, config?: AxiosRequestConfig): AxiosPromise<UploadImageResponse>;
 }
 

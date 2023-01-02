@@ -92,14 +92,14 @@ declare interface DescribeInstancesResponse {
   InstanceList: InstanceListInfo[];
   /** 实例数量 */
   TotalNum: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Memcached 云数据库Memcached} */
 declare interface Memcached {
   (): Versions;
-  /** {@link DescribeInstances 获取Cmem实例列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
+  /** 获取Cmem实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
 }
 

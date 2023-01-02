@@ -1190,7 +1190,7 @@ declare interface AssociateTargetGroupsRequest {
 }
 
 declare interface AssociateTargetGroupsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1208,7 +1208,7 @@ declare interface AutoRewriteRequest {
 }
 
 declare interface AutoRewriteResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1222,7 +1222,7 @@ declare interface BatchDeregisterTargetsRequest {
 declare interface BatchDeregisterTargetsResponse {
   /** 解绑失败的监听器ID。 */
   FailListenerIdSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1234,7 +1234,7 @@ declare interface BatchModifyTargetWeightRequest {
 }
 
 declare interface BatchModifyTargetWeightResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1248,7 +1248,7 @@ declare interface BatchRegisterTargetsRequest {
 declare interface BatchRegisterTargetsResponse {
   /** 绑定失败的监听器ID，如为空表示全部绑定成功。 */
   FailListenerIdSet: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1294,7 +1294,7 @@ declare interface CloneLoadBalancerRequest {
 }
 
 declare interface CloneLoadBalancerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1310,7 +1310,7 @@ declare interface CreateClsLogSetRequest {
 declare interface CreateClsLogSetResponse {
   /** 日志集的 ID。 */
   LogsetId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1350,7 +1350,7 @@ declare interface CreateListenerRequest {
 declare interface CreateListenerResponse {
   /** 创建的监听器的唯一标识数组。 */
   ListenerIds: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1410,7 +1410,7 @@ declare interface CreateLoadBalancerResponse {
   LoadBalancerIds: string[] | null;
   /** 订单号。 */
   DealName: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1424,7 +1424,7 @@ declare interface CreateLoadBalancerSnatIpsRequest {
 }
 
 declare interface CreateLoadBalancerSnatIpsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1440,7 +1440,7 @@ declare interface CreateRuleRequest {
 declare interface CreateRuleResponse {
   /** 创建的转发规则的唯一标识数组。 */
   LocationIds: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1458,7 +1458,7 @@ declare interface CreateTargetGroupRequest {
 declare interface CreateTargetGroupResponse {
   /** 创建目标组后生成的id */
   TargetGroupId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1478,7 +1478,7 @@ declare interface CreateTopicRequest {
 declare interface CreateTopicResponse {
   /** 日志主题的 ID。 */
   TopicId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1490,7 +1490,7 @@ declare interface DeleteListenerRequest {
 }
 
 declare interface DeleteListenerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1502,7 +1502,7 @@ declare interface DeleteLoadBalancerListenersRequest {
 }
 
 declare interface DeleteLoadBalancerListenersResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1512,7 +1512,7 @@ declare interface DeleteLoadBalancerRequest {
 }
 
 declare interface DeleteLoadBalancerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1524,7 +1524,7 @@ declare interface DeleteLoadBalancerSnatIpsRequest {
 }
 
 declare interface DeleteLoadBalancerSnatIpsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1540,7 +1540,7 @@ declare interface DeleteRewriteRequest {
 }
 
 declare interface DeleteRewriteResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1560,7 +1560,7 @@ declare interface DeleteRuleRequest {
 }
 
 declare interface DeleteRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1570,7 +1570,7 @@ declare interface DeleteTargetGroupsRequest {
 }
 
 declare interface DeleteTargetGroupsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1590,7 +1590,7 @@ declare interface DeregisterFunctionTargetsRequest {
 }
 
 declare interface DeregisterFunctionTargetsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1602,7 +1602,7 @@ declare interface DeregisterTargetGroupInstancesRequest {
 }
 
 declare interface DeregisterTargetGroupInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1614,7 +1614,7 @@ declare interface DeregisterTargetsFromClassicalLBRequest {
 }
 
 declare interface DeregisterTargetsFromClassicalLBResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1634,7 +1634,7 @@ declare interface DeregisterTargetsRequest {
 }
 
 declare interface DeregisterTargetsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1654,7 +1654,7 @@ declare interface DescribeBlockIPListResponse {
   ClientIPField?: string;
   /** 加入了12360黑名单的IP列表 */
   BlockedIPList?: BlockedIP[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1666,7 +1666,7 @@ declare interface DescribeBlockIPTaskRequest {
 declare interface DescribeBlockIPTaskResponse {
   /** 1 running，2 fail，6 succ */
   Status?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1678,7 +1678,7 @@ declare interface DescribeClassicalLBByInstanceIdRequest {
 declare interface DescribeClassicalLBByInstanceIdResponse {
   /** 负载均衡相关信息列表。 */
   LoadBalancerInfoList: ClassicalLoadBalancerInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1692,7 +1692,7 @@ declare interface DescribeClassicalLBHealthStatusRequest {
 declare interface DescribeClassicalLBHealthStatusResponse {
   /** 后端健康状态列表。 */
   HealthList: ClassicalHealth[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1712,7 +1712,7 @@ declare interface DescribeClassicalLBListenersRequest {
 declare interface DescribeClassicalLBListenersResponse {
   /** 监听器列表。 */
   Listeners: ClassicalListener[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1724,7 +1724,7 @@ declare interface DescribeClassicalLBTargetsRequest {
 declare interface DescribeClassicalLBTargetsResponse {
   /** 后端服务列表。 */
   Targets: ClassicalTarget[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1736,7 +1736,7 @@ declare interface DescribeClsLogSetResponse {
   LogsetId: string;
   /** 健康检查日志集的 ID。 */
   HealthLogsetId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1754,7 +1754,7 @@ declare interface DescribeClusterResourcesResponse {
   ClusterResourceSet: ClusterResource[];
   /** 集群中资源总数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1772,7 +1772,7 @@ declare interface DescribeCrossTargetsResponse {
   TotalCount: number;
   /** 后端服务列表。 */
   CrossTargetSet: CrossTargets[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1792,7 +1792,7 @@ declare interface DescribeCustomizedConfigAssociateListResponse {
   BindList: BindDetailItem[];
   /** 绑定关系总数目 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1816,7 +1816,7 @@ declare interface DescribeCustomizedConfigListResponse {
   ConfigList: ConfigListItem[];
   /** 配置数目 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1834,7 +1834,7 @@ declare interface DescribeExclusiveClustersResponse {
   ClusterSet: Cluster[];
   /** 集群总数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1852,7 +1852,7 @@ declare interface DescribeIdleLoadBalancersResponse {
   IdleLoadBalancers: IdleLoadBalancer[] | null;
   /** 所有闲置实例数目 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1864,7 +1864,7 @@ declare interface DescribeLBListenersRequest {
 declare interface DescribeLBListenersResponse {
   /** 绑定的后端规则 */
   LoadBalancers: LBItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1884,7 +1884,7 @@ declare interface DescribeListenersResponse {
   Listeners: Listener[];
   /** 总的监听器个数（根据端口、协议、监听器ID过滤后）。 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1896,7 +1896,7 @@ declare interface DescribeLoadBalancerListByCertIdRequest {
 declare interface DescribeLoadBalancerListByCertIdResponse {
   /** 证书ID，以及与该证书ID关联的负载均衡实例列表 */
   CertSet: CertIdRelatedWithLoadBalancers[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1912,7 +1912,7 @@ declare interface DescribeLoadBalancerOverviewResponse {
   IsolationCount: number;
   /** 即将到期的负载均衡数目 */
   WillExpireCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1924,7 +1924,7 @@ declare interface DescribeLoadBalancerTrafficRequest {
 declare interface DescribeLoadBalancerTrafficResponse {
   /** 按出带宽从高到低排序后的负载均衡信息。 */
   LoadBalancerTraffic: LoadBalancerTraffic[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1946,7 +1946,7 @@ declare interface DescribeLoadBalancersDetailResponse {
   TotalCount: number;
   /** 负载均衡详情列表。 */
   LoadBalancerDetailSet: LoadBalancerDetail[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1996,7 +1996,7 @@ declare interface DescribeLoadBalancersResponse {
   TotalCount: number;
   /** 返回的负载均衡实例数组。 */
   LoadBalancerSet: LoadBalancer[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2006,7 +2006,7 @@ declare interface DescribeQuotaRequest {
 declare interface DescribeQuotaResponse {
   /** 配额列表 */
   QuotaSet: Quota[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2024,7 +2024,7 @@ declare interface DescribeResourcesResponse {
   ZoneResourceSet: ZoneResource[];
   /** 可用区资源列表数目。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2040,7 +2040,7 @@ declare interface DescribeRewriteRequest {
 declare interface DescribeRewriteResponse {
   /** 重定向转发规则构成的数组，若无重定向规则，则返回空数组。 */
   RewriteSet: RuleOutput[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2060,7 +2060,7 @@ declare interface DescribeTargetGroupInstancesResponse {
   TargetGroupInstanceSet: TargetGroupBackend[];
   /** 实际统计数量，不受Limit、Offset、CAM的影响。 */
   RealCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2080,7 +2080,7 @@ declare interface DescribeTargetGroupListResponse {
   TotalCount: number;
   /** 显示的目标组信息集合。 */
   TargetGroupSet: TargetGroupInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2100,7 +2100,7 @@ declare interface DescribeTargetGroupsResponse {
   TotalCount: number;
   /** 显示的目标组信息集合。 */
   TargetGroupSet: TargetGroupInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2112,7 +2112,7 @@ declare interface DescribeTargetHealthRequest {
 declare interface DescribeTargetHealthResponse {
   /** 负载均衡实例列表。 */
   LoadBalancers: LoadBalancerHealth[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2130,7 +2130,7 @@ declare interface DescribeTargetsRequest {
 declare interface DescribeTargetsResponse {
   /** 监听器后端绑定的机器信息。 */
   Listeners: ListenerBackend[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2146,7 +2146,7 @@ declare interface DescribeTaskStatusResponse {
   Status: number;
   /** 由负载均衡实例唯一 ID 组成的数组。 */
   LoadBalancerIds: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2156,7 +2156,7 @@ declare interface DisassociateTargetGroupsRequest {
 }
 
 declare interface DisassociateTargetGroupsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2172,7 +2172,7 @@ declare interface ManualRewriteRequest {
 }
 
 declare interface ManualRewriteResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2184,7 +2184,7 @@ declare interface MigrateClassicalLoadBalancersRequest {
 }
 
 declare interface MigrateClassicalLoadBalancersResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2206,7 +2206,7 @@ declare interface ModifyBlockIPListRequest {
 declare interface ModifyBlockIPListResponse {
   /** 异步任务的ID */
   JodId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2234,7 +2234,7 @@ declare interface ModifyDomainAttributesRequest {
 }
 
 declare interface ModifyDomainAttributesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2250,7 +2250,7 @@ declare interface ModifyDomainRequest {
 }
 
 declare interface ModifyDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2284,7 +2284,7 @@ declare interface ModifyListenerRequest {
 }
 
 declare interface ModifyListenerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2308,7 +2308,7 @@ declare interface ModifyLoadBalancerAttributesRequest {
 declare interface ModifyLoadBalancerAttributesResponse {
   /** 切换负载均衡计费方式时，可用此参数查询切换任务是否成功。 */
   DealName: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2320,7 +2320,7 @@ declare interface ModifyLoadBalancerMixIpTargetRequest {
 }
 
 declare interface ModifyLoadBalancerMixIpTargetResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2330,7 +2330,7 @@ declare interface ModifyLoadBalancerSlaRequest {
 }
 
 declare interface ModifyLoadBalancerSlaResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2358,7 +2358,7 @@ declare interface ModifyRuleRequest {
 }
 
 declare interface ModifyRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2372,7 +2372,7 @@ declare interface ModifyTargetGroupAttributeRequest {
 }
 
 declare interface ModifyTargetGroupAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2384,7 +2384,7 @@ declare interface ModifyTargetGroupInstancesPortRequest {
 }
 
 declare interface ModifyTargetGroupInstancesPortResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2396,7 +2396,7 @@ declare interface ModifyTargetGroupInstancesWeightRequest {
 }
 
 declare interface ModifyTargetGroupInstancesWeightResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2418,7 +2418,7 @@ declare interface ModifyTargetPortRequest {
 }
 
 declare interface ModifyTargetPortResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2440,7 +2440,7 @@ declare interface ModifyTargetWeightRequest {
 }
 
 declare interface ModifyTargetWeightResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2448,7 +2448,7 @@ declare interface RegisterFunctionTargetsRequest {
 }
 
 declare interface RegisterFunctionTargetsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2460,7 +2460,7 @@ declare interface RegisterTargetGroupInstancesRequest {
 }
 
 declare interface RegisterTargetGroupInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2480,7 +2480,7 @@ declare interface RegisterTargetsRequest {
 }
 
 declare interface RegisterTargetsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2492,7 +2492,7 @@ declare interface RegisterTargetsWithClassicalLBRequest {
 }
 
 declare interface RegisterTargetsWithClassicalLBResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2504,7 +2504,7 @@ declare interface ReplaceCertForLoadBalancersRequest {
 }
 
 declare interface ReplaceCertForLoadBalancersResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2524,7 +2524,7 @@ declare interface SetCustomizedConfigForLoadBalancerRequest {
 declare interface SetCustomizedConfigForLoadBalancerResponse {
   /** 个性化配置ID，如：pz-1234abcd */
   ConfigId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2540,7 +2540,7 @@ declare interface SetLoadBalancerClsLogRequest {
 }
 
 declare interface SetLoadBalancerClsLogResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2552,7 +2552,7 @@ declare interface SetLoadBalancerSecurityGroupsRequest {
 }
 
 declare interface SetLoadBalancerSecurityGroupsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2566,168 +2566,168 @@ declare interface SetSecurityGroupForLoadbalancersRequest {
 }
 
 declare interface SetSecurityGroupForLoadbalancersResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Clb 负载均衡} */
 declare interface Clb {
   (): Versions;
-  /** {@link AssociateTargetGroups 规则关联目标组}({@link AssociateTargetGroupsRequest 请求参数}): {@link AssociateTargetGroupsResponse 返回参数} */
+  /** 规则关联目标组 {@link AssociateTargetGroupsRequest} {@link AssociateTargetGroupsResponse} */
   AssociateTargetGroups(data: AssociateTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateTargetGroupsResponse>;
-  /** {@link AutoRewrite 自动生成负载均衡转发规则的重定向关系}({@link AutoRewriteRequest 请求参数}): {@link AutoRewriteResponse 返回参数} */
+  /** 自动生成负载均衡转发规则的重定向关系 {@link AutoRewriteRequest} {@link AutoRewriteResponse} */
   AutoRewrite(data: AutoRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<AutoRewriteResponse>;
-  /** {@link BatchDeregisterTargets 批量解绑四七层后端服务}({@link BatchDeregisterTargetsRequest 请求参数}): {@link BatchDeregisterTargetsResponse 返回参数} */
+  /** 批量解绑四七层后端服务 {@link BatchDeregisterTargetsRequest} {@link BatchDeregisterTargetsResponse} */
   BatchDeregisterTargets(data: BatchDeregisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeregisterTargetsResponse>;
-  /** {@link BatchModifyTargetWeight 批量修改监听器绑定的后端机器的转发权重}({@link BatchModifyTargetWeightRequest 请求参数}): {@link BatchModifyTargetWeightResponse 返回参数} */
+  /** 批量修改监听器绑定的后端机器的转发权重 {@link BatchModifyTargetWeightRequest} {@link BatchModifyTargetWeightResponse} */
   BatchModifyTargetWeight(data: BatchModifyTargetWeightRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyTargetWeightResponse>;
-  /** {@link BatchRegisterTargets 批量绑定虚拟主机或弹性网卡}({@link BatchRegisterTargetsRequest 请求参数}): {@link BatchRegisterTargetsResponse 返回参数} */
+  /** 批量绑定虚拟主机或弹性网卡 {@link BatchRegisterTargetsRequest} {@link BatchRegisterTargetsResponse} */
   BatchRegisterTargets(data: BatchRegisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchRegisterTargetsResponse>;
-  /** {@link CloneLoadBalancer 克隆负载均衡实例}({@link CloneLoadBalancerRequest 请求参数}): {@link CloneLoadBalancerResponse 返回参数} */
+  /** 克隆负载均衡实例 {@link CloneLoadBalancerRequest} {@link CloneLoadBalancerResponse} */
   CloneLoadBalancer(data: CloneLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<CloneLoadBalancerResponse>;
-  /** {@link CreateClsLogSet 创建CLB专有日志集}({@link CreateClsLogSetRequest 请求参数}): {@link CreateClsLogSetResponse 返回参数} */
+  /** 创建CLB专有日志集 {@link CreateClsLogSetRequest} {@link CreateClsLogSetResponse} */
   CreateClsLogSet(data?: CreateClsLogSetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClsLogSetResponse>;
-  /** {@link CreateListener 创建负载均衡监听器}({@link CreateListenerRequest 请求参数}): {@link CreateListenerResponse 返回参数} */
+  /** 创建负载均衡监听器 {@link CreateListenerRequest} {@link CreateListenerResponse} */
   CreateListener(data: CreateListenerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateListenerResponse>;
-  /** {@link CreateLoadBalancer 购买负载均衡实例}({@link CreateLoadBalancerRequest 请求参数}): {@link CreateLoadBalancerResponse 返回参数} */
+  /** 购买负载均衡实例 {@link CreateLoadBalancerRequest} {@link CreateLoadBalancerResponse} */
   CreateLoadBalancer(data: CreateLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadBalancerResponse>;
-  /** {@link CreateLoadBalancerSnatIps 添加SnatIp}({@link CreateLoadBalancerSnatIpsRequest 请求参数}): {@link CreateLoadBalancerSnatIpsResponse 返回参数} */
+  /** 添加SnatIp {@link CreateLoadBalancerSnatIpsRequest} {@link CreateLoadBalancerSnatIpsResponse} */
   CreateLoadBalancerSnatIps(data: CreateLoadBalancerSnatIpsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadBalancerSnatIpsResponse>;
-  /** {@link CreateRule 创建负载均衡七层监听器转发规则}({@link CreateRuleRequest 请求参数}): {@link CreateRuleResponse 返回参数} */
+  /** 创建负载均衡七层监听器转发规则 {@link CreateRuleRequest} {@link CreateRuleResponse} */
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
-  /** {@link CreateTargetGroup 创建目标组}({@link CreateTargetGroupRequest 请求参数}): {@link CreateTargetGroupResponse 返回参数} */
+  /** 创建目标组 {@link CreateTargetGroupRequest} {@link CreateTargetGroupResponse} */
   CreateTargetGroup(data?: CreateTargetGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTargetGroupResponse>;
-  /** {@link CreateTopic 创建主题}({@link CreateTopicRequest 请求参数}): {@link CreateTopicResponse 返回参数} */
+  /** 创建主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
-  /** {@link DeleteListener 删除负载均衡监听器}({@link DeleteListenerRequest 请求参数}): {@link DeleteListenerResponse 返回参数} */
+  /** 删除负载均衡监听器 {@link DeleteListenerRequest} {@link DeleteListenerResponse} */
   DeleteListener(data: DeleteListenerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteListenerResponse>;
-  /** {@link DeleteLoadBalancer 删除负载均衡实例}({@link DeleteLoadBalancerRequest 请求参数}): {@link DeleteLoadBalancerResponse 返回参数} */
+  /** 删除负载均衡实例 {@link DeleteLoadBalancerRequest} {@link DeleteLoadBalancerResponse} */
   DeleteLoadBalancer(data: DeleteLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerResponse>;
-  /** {@link DeleteLoadBalancerListeners 删除负载均衡多个监听器}({@link DeleteLoadBalancerListenersRequest 请求参数}): {@link DeleteLoadBalancerListenersResponse 返回参数} */
+  /** 删除负载均衡多个监听器 {@link DeleteLoadBalancerListenersRequest} {@link DeleteLoadBalancerListenersResponse} */
   DeleteLoadBalancerListeners(data: DeleteLoadBalancerListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerListenersResponse>;
-  /** {@link DeleteLoadBalancerSnatIps 删除SnatIp}({@link DeleteLoadBalancerSnatIpsRequest 请求参数}): {@link DeleteLoadBalancerSnatIpsResponse 返回参数} */
+  /** 删除SnatIp {@link DeleteLoadBalancerSnatIpsRequest} {@link DeleteLoadBalancerSnatIpsResponse} */
   DeleteLoadBalancerSnatIps(data: DeleteLoadBalancerSnatIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerSnatIpsResponse>;
-  /** {@link DeleteRewrite 删除负载均衡转发规则之间的重定向关系}({@link DeleteRewriteRequest 请求参数}): {@link DeleteRewriteResponse 返回参数} */
+  /** 删除负载均衡转发规则之间的重定向关系 {@link DeleteRewriteRequest} {@link DeleteRewriteResponse} */
   DeleteRewrite(data: DeleteRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRewriteResponse>;
-  /** {@link DeleteRule 删除负载均衡七层监听器的转发规则}({@link DeleteRuleRequest 请求参数}): {@link DeleteRuleResponse 返回参数} */
+  /** 删除负载均衡七层监听器的转发规则 {@link DeleteRuleRequest} {@link DeleteRuleResponse} */
   DeleteRule(data: DeleteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleResponse>;
-  /** {@link DeleteTargetGroups 删除目标组}({@link DeleteTargetGroupsRequest 请求参数}): {@link DeleteTargetGroupsResponse 返回参数} */
+  /** 删除目标组 {@link DeleteTargetGroupsRequest} {@link DeleteTargetGroupsResponse} */
   DeleteTargetGroups(data: DeleteTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTargetGroupsResponse>;
-  /** {@link DeregisterFunctionTargets 将云函数从转发规则上解绑}({@link DeregisterFunctionTargetsRequest 请求参数}): {@link DeregisterFunctionTargetsResponse 返回参数} */
+  /** 将云函数从转发规则上解绑 {@link DeregisterFunctionTargetsRequest} {@link DeregisterFunctionTargetsResponse} */
   DeregisterFunctionTargets(data: DeregisterFunctionTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterFunctionTargetsResponse>;
-  /** {@link DeregisterTargetGroupInstances 解绑目标组服务器}({@link DeregisterTargetGroupInstancesRequest 请求参数}): {@link DeregisterTargetGroupInstancesResponse 返回参数} */
+  /** 解绑目标组服务器 {@link DeregisterTargetGroupInstancesRequest} {@link DeregisterTargetGroupInstancesResponse} */
   DeregisterTargetGroupInstances(data: DeregisterTargetGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterTargetGroupInstancesResponse>;
-  /** {@link DeregisterTargets 从负载均衡监听器上解绑后端服务}({@link DeregisterTargetsRequest 请求参数}): {@link DeregisterTargetsResponse 返回参数} */
+  /** 从负载均衡监听器上解绑后端服务 {@link DeregisterTargetsRequest} {@link DeregisterTargetsResponse} */
   DeregisterTargets(data: DeregisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterTargetsResponse>;
-  /** {@link DeregisterTargetsFromClassicalLB 解绑传统型负载均衡的后端服务器}({@link DeregisterTargetsFromClassicalLBRequest 请求参数}): {@link DeregisterTargetsFromClassicalLBResponse 返回参数} */
+  /** 解绑传统型负载均衡的后端服务器 {@link DeregisterTargetsFromClassicalLBRequest} {@link DeregisterTargetsFromClassicalLBResponse} */
   DeregisterTargetsFromClassicalLB(data: DeregisterTargetsFromClassicalLBRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterTargetsFromClassicalLBResponse>;
-  /** {@link DescribeBlockIPList 查询一个负载均衡所封禁的IP列表（黑名单）}({@link DescribeBlockIPListRequest 请求参数}): {@link DescribeBlockIPListResponse 返回参数} */
+  /** 查询一个负载均衡所封禁的IP列表（黑名单） {@link DescribeBlockIPListRequest} {@link DescribeBlockIPListResponse} */
   DescribeBlockIPList(data: DescribeBlockIPListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockIPListResponse>;
-  /** {@link DescribeBlockIPTask 查询封禁IP（黑名单）异步任务的执行状态}({@link DescribeBlockIPTaskRequest 请求参数}): {@link DescribeBlockIPTaskResponse 返回参数} */
+  /** 查询封禁IP（黑名单）异步任务的执行状态 {@link DescribeBlockIPTaskRequest} {@link DescribeBlockIPTaskResponse} */
   DescribeBlockIPTask(data: DescribeBlockIPTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockIPTaskResponse>;
-  /** {@link DescribeClassicalLBByInstanceId 通过后端主机反向查找其绑定的传统型负载均衡}({@link DescribeClassicalLBByInstanceIdRequest 请求参数}): {@link DescribeClassicalLBByInstanceIdResponse 返回参数} */
+  /** 通过后端主机反向查找其绑定的传统型负载均衡 {@link DescribeClassicalLBByInstanceIdRequest} {@link DescribeClassicalLBByInstanceIdResponse} */
   DescribeClassicalLBByInstanceId(data: DescribeClassicalLBByInstanceIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassicalLBByInstanceIdResponse>;
-  /** {@link DescribeClassicalLBHealthStatus 获取传统型负载均衡后端的健康状态}({@link DescribeClassicalLBHealthStatusRequest 请求参数}): {@link DescribeClassicalLBHealthStatusResponse 返回参数} */
+  /** 获取传统型负载均衡后端的健康状态 {@link DescribeClassicalLBHealthStatusRequest} {@link DescribeClassicalLBHealthStatusResponse} */
   DescribeClassicalLBHealthStatus(data: DescribeClassicalLBHealthStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassicalLBHealthStatusResponse>;
-  /** {@link DescribeClassicalLBListeners 获取传统型负载均衡监听器列表}({@link DescribeClassicalLBListenersRequest 请求参数}): {@link DescribeClassicalLBListenersResponse 返回参数} */
+  /** 获取传统型负载均衡监听器列表 {@link DescribeClassicalLBListenersRequest} {@link DescribeClassicalLBListenersResponse} */
   DescribeClassicalLBListeners(data: DescribeClassicalLBListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassicalLBListenersResponse>;
-  /** {@link DescribeClassicalLBTargets 获取传统型负载均衡绑定的后端服务器列表}({@link DescribeClassicalLBTargetsRequest 请求参数}): {@link DescribeClassicalLBTargetsResponse 返回参数} */
+  /** 获取传统型负载均衡绑定的后端服务器列表 {@link DescribeClassicalLBTargetsRequest} {@link DescribeClassicalLBTargetsResponse} */
   DescribeClassicalLBTargets(data: DescribeClassicalLBTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassicalLBTargetsResponse>;
-  /** {@link DescribeClsLogSet 获取用户的CLB专有日志集}({@link DescribeClsLogSetRequest 请求参数}): {@link DescribeClsLogSetResponse 返回参数} */
+  /** 获取用户的CLB专有日志集 {@link DescribeClsLogSetRequest} {@link DescribeClsLogSetResponse} */
   DescribeClsLogSet(data?: DescribeClsLogSetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClsLogSetResponse>;
-  /** {@link DescribeClusterResources 查询集群中资源列表}({@link DescribeClusterResourcesRequest 请求参数}): {@link DescribeClusterResourcesResponse 返回参数} */
+  /** 查询集群中资源列表 {@link DescribeClusterResourcesRequest} {@link DescribeClusterResourcesResponse} */
   DescribeClusterResources(data?: DescribeClusterResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterResourcesResponse>;
-  /** {@link DescribeCrossTargets 查询跨域2.0版本云联网后端子机和网卡信息}({@link DescribeCrossTargetsRequest 请求参数}): {@link DescribeCrossTargetsResponse 返回参数} */
+  /** 查询跨域2.0版本云联网后端子机和网卡信息 {@link DescribeCrossTargetsRequest} {@link DescribeCrossTargetsResponse} */
   DescribeCrossTargets(data?: DescribeCrossTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossTargetsResponse>;
-  /** {@link DescribeCustomizedConfigAssociateList 拉取配置绑定的server或location。}({@link DescribeCustomizedConfigAssociateListRequest 请求参数}): {@link DescribeCustomizedConfigAssociateListResponse 返回参数} */
+  /** 拉取配置绑定的server或location。 {@link DescribeCustomizedConfigAssociateListRequest} {@link DescribeCustomizedConfigAssociateListResponse} */
   DescribeCustomizedConfigAssociateList(data?: DescribeCustomizedConfigAssociateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomizedConfigAssociateListResponse>;
-  /** {@link DescribeCustomizedConfigList 拉取配置列表}({@link DescribeCustomizedConfigListRequest 请求参数}): {@link DescribeCustomizedConfigListResponse 返回参数} */
+  /** 拉取配置列表 {@link DescribeCustomizedConfigListRequest} {@link DescribeCustomizedConfigListResponse} */
   DescribeCustomizedConfigList(data: DescribeCustomizedConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomizedConfigListResponse>;
-  /** {@link DescribeExclusiveClusters 查询集群列表}({@link DescribeExclusiveClustersRequest 请求参数}): {@link DescribeExclusiveClustersResponse 返回参数} */
+  /** 查询集群列表 {@link DescribeExclusiveClustersRequest} {@link DescribeExclusiveClustersResponse} */
   DescribeExclusiveClusters(data?: DescribeExclusiveClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExclusiveClustersResponse>;
-  /** {@link DescribeIdleLoadBalancers 查询负载均衡闲置实例}({@link DescribeIdleLoadBalancersRequest 请求参数}): {@link DescribeIdleLoadBalancersResponse 返回参数} */
+  /** 查询负载均衡闲置实例 {@link DescribeIdleLoadBalancersRequest} {@link DescribeIdleLoadBalancersResponse} */
   DescribeIdleLoadBalancers(data?: DescribeIdleLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdleLoadBalancersResponse>;
-  /** {@link DescribeLBListeners 查询后端云主机或弹性网卡绑定的负载均衡}({@link DescribeLBListenersRequest 请求参数}): {@link DescribeLBListenersResponse 返回参数} */
+  /** 查询后端云主机或弹性网卡绑定的负载均衡 {@link DescribeLBListenersRequest} {@link DescribeLBListenersResponse} */
   DescribeLBListeners(data: DescribeLBListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLBListenersResponse>;
-  /** {@link DescribeListeners 查询负载均衡的监听器列表}({@link DescribeListenersRequest 请求参数}): {@link DescribeListenersResponse 返回参数} */
+  /** 查询负载均衡的监听器列表 {@link DescribeListenersRequest} {@link DescribeListenersResponse} */
   DescribeListeners(data: DescribeListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenersResponse>;
-  /** {@link DescribeLoadBalancerListByCertId 根据证书ID查询负载均衡}({@link DescribeLoadBalancerListByCertIdRequest 请求参数}): {@link DescribeLoadBalancerListByCertIdResponse 返回参数} */
+  /** 根据证书ID查询负载均衡 {@link DescribeLoadBalancerListByCertIdRequest} {@link DescribeLoadBalancerListByCertIdResponse} */
   DescribeLoadBalancerListByCertId(data: DescribeLoadBalancerListByCertIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerListByCertIdResponse>;
-  /** {@link DescribeLoadBalancerOverview 查询负载均衡状态统计数据}({@link DescribeLoadBalancerOverviewRequest 请求参数}): {@link DescribeLoadBalancerOverviewResponse 返回参数} */
+  /** 查询负载均衡状态统计数据 {@link DescribeLoadBalancerOverviewRequest} {@link DescribeLoadBalancerOverviewResponse} */
   DescribeLoadBalancerOverview(data?: DescribeLoadBalancerOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerOverviewResponse>;
-  /** {@link DescribeLoadBalancerTraffic 查询账号下高流量负载均衡}({@link DescribeLoadBalancerTrafficRequest 请求参数}): {@link DescribeLoadBalancerTrafficResponse 返回参数} */
+  /** 查询账号下高流量负载均衡 {@link DescribeLoadBalancerTrafficRequest} {@link DescribeLoadBalancerTrafficResponse} */
   DescribeLoadBalancerTraffic(data?: DescribeLoadBalancerTrafficRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerTrafficResponse>;
-  /** {@link DescribeLoadBalancers 查询负载均衡实例列表}({@link DescribeLoadBalancersRequest 请求参数}): {@link DescribeLoadBalancersResponse 返回参数} */
+  /** 查询负载均衡实例列表 {@link DescribeLoadBalancersRequest} {@link DescribeLoadBalancersResponse} */
   DescribeLoadBalancers(data?: DescribeLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersResponse>;
-  /** {@link DescribeLoadBalancersDetail 查询负载均衡详细信息}({@link DescribeLoadBalancersDetailRequest 请求参数}): {@link DescribeLoadBalancersDetailResponse 返回参数} */
+  /** 查询负载均衡详细信息 {@link DescribeLoadBalancersDetailRequest} {@link DescribeLoadBalancersDetailResponse} */
   DescribeLoadBalancersDetail(data?: DescribeLoadBalancersDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersDetailResponse>;
-  /** {@link DescribeQuota 查询配额}({@link DescribeQuotaRequest 请求参数}): {@link DescribeQuotaResponse 返回参数} */
+  /** 查询配额 {@link DescribeQuotaRequest} {@link DescribeQuotaResponse} */
   DescribeQuota(data?: DescribeQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuotaResponse>;
-  /** {@link DescribeResources 查询用户在当前地域支持可用区列表和资源列表}({@link DescribeResourcesRequest 请求参数}): {@link DescribeResourcesResponse 返回参数} */
+  /** 查询用户在当前地域支持可用区列表和资源列表 {@link DescribeResourcesRequest} {@link DescribeResourcesResponse} */
   DescribeResources(data?: DescribeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesResponse>;
-  /** {@link DescribeRewrite 查询负载均衡转发规则的重定向关系}({@link DescribeRewriteRequest 请求参数}): {@link DescribeRewriteResponse 返回参数} */
+  /** 查询负载均衡转发规则的重定向关系 {@link DescribeRewriteRequest} {@link DescribeRewriteResponse} */
   DescribeRewrite(data: DescribeRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRewriteResponse>;
-  /** {@link DescribeTargetGroupInstances 获取目标组绑定的服务器}({@link DescribeTargetGroupInstancesRequest 请求参数}): {@link DescribeTargetGroupInstancesResponse 返回参数} */
+  /** 获取目标组绑定的服务器 {@link DescribeTargetGroupInstancesRequest} {@link DescribeTargetGroupInstancesResponse} */
   DescribeTargetGroupInstances(data: DescribeTargetGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupInstancesResponse>;
-  /** {@link DescribeTargetGroupList 获取目标组列表}({@link DescribeTargetGroupListRequest 请求参数}): {@link DescribeTargetGroupListResponse 返回参数} */
+  /** 获取目标组列表 {@link DescribeTargetGroupListRequest} {@link DescribeTargetGroupListResponse} */
   DescribeTargetGroupList(data?: DescribeTargetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupListResponse>;
-  /** {@link DescribeTargetGroups 查询目标组信息}({@link DescribeTargetGroupsRequest 请求参数}): {@link DescribeTargetGroupsResponse 返回参数} */
+  /** 查询目标组信息 {@link DescribeTargetGroupsRequest} {@link DescribeTargetGroupsResponse} */
   DescribeTargetGroups(data?: DescribeTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupsResponse>;
-  /** {@link DescribeTargetHealth 获取负载均衡后端服务的健康检查状态}({@link DescribeTargetHealthRequest 请求参数}): {@link DescribeTargetHealthResponse 返回参数} */
+  /** 获取负载均衡后端服务的健康检查状态 {@link DescribeTargetHealthRequest} {@link DescribeTargetHealthResponse} */
   DescribeTargetHealth(data: DescribeTargetHealthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetHealthResponse>;
-  /** {@link DescribeTargets 查询负载均衡绑定的后端服务列表}({@link DescribeTargetsRequest 请求参数}): {@link DescribeTargetsResponse 返回参数} */
+  /** 查询负载均衡绑定的后端服务列表 {@link DescribeTargetsRequest} {@link DescribeTargetsResponse} */
   DescribeTargets(data: DescribeTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetsResponse>;
-  /** {@link DescribeTaskStatus 查询异步任务状态}({@link DescribeTaskStatusRequest 请求参数}): {@link DescribeTaskStatusResponse 返回参数} */
+  /** 查询异步任务状态 {@link DescribeTaskStatusRequest} {@link DescribeTaskStatusResponse} */
   DescribeTaskStatus(data?: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
-  /** {@link DisassociateTargetGroups 解除规则的目标组关联关系}({@link DisassociateTargetGroupsRequest 请求参数}): {@link DisassociateTargetGroupsResponse 返回参数} */
+  /** 解除规则的目标组关联关系 {@link DisassociateTargetGroupsRequest} {@link DisassociateTargetGroupsResponse} */
   DisassociateTargetGroups(data: DisassociateTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateTargetGroupsResponse>;
-  /** {@link ManualRewrite 手动添加负载均衡转发规则的重定向关系}({@link ManualRewriteRequest 请求参数}): {@link ManualRewriteResponse 返回参数} */
+  /** 手动添加负载均衡转发规则的重定向关系 {@link ManualRewriteRequest} {@link ManualRewriteResponse} */
   ManualRewrite(data: ManualRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<ManualRewriteResponse>;
-  /** {@link MigrateClassicalLoadBalancers 传统型负载均衡迁移成(原应用型)负载均衡}({@link MigrateClassicalLoadBalancersRequest 请求参数}): {@link MigrateClassicalLoadBalancersResponse 返回参数} */
+  /** 传统型负载均衡迁移成(原应用型)负载均衡 {@link MigrateClassicalLoadBalancersRequest} {@link MigrateClassicalLoadBalancersResponse} */
   MigrateClassicalLoadBalancers(data: MigrateClassicalLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<MigrateClassicalLoadBalancersResponse>;
-  /** {@link ModifyBlockIPList 修改负载均衡的IP封禁黑名单列表}({@link ModifyBlockIPListRequest 请求参数}): {@link ModifyBlockIPListResponse 返回参数} */
+  /** 修改负载均衡的IP封禁黑名单列表 {@link ModifyBlockIPListRequest} {@link ModifyBlockIPListResponse} */
   ModifyBlockIPList(data: ModifyBlockIPListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockIPListResponse>;
-  /** {@link ModifyDomain 修改七层转发规则的域名}({@link ModifyDomainRequest 请求参数}): {@link ModifyDomainResponse 返回参数} */
+  /** 修改七层转发规则的域名 {@link ModifyDomainRequest} {@link ModifyDomainResponse} */
   ModifyDomain(data: ModifyDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainResponse>;
-  /** {@link ModifyDomainAttributes 修改负载均衡七层监听器转发规则的域名级别属性}({@link ModifyDomainAttributesRequest 请求参数}): {@link ModifyDomainAttributesResponse 返回参数} */
+  /** 修改负载均衡七层监听器转发规则的域名级别属性 {@link ModifyDomainAttributesRequest} {@link ModifyDomainAttributesResponse} */
   ModifyDomainAttributes(data: ModifyDomainAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainAttributesResponse>;
-  /** {@link ModifyListener 修改负载均衡监听器属性}({@link ModifyListenerRequest 请求参数}): {@link ModifyListenerResponse 返回参数} */
+  /** 修改负载均衡监听器属性 {@link ModifyListenerRequest} {@link ModifyListenerResponse} */
   ModifyListener(data: ModifyListenerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyListenerResponse>;
-  /** {@link ModifyLoadBalancerAttributes 修改负载均衡实例的属性}({@link ModifyLoadBalancerAttributesRequest 请求参数}): {@link ModifyLoadBalancerAttributesResponse 返回参数} */
+  /** 修改负载均衡实例的属性 {@link ModifyLoadBalancerAttributesRequest} {@link ModifyLoadBalancerAttributesResponse} */
   ModifyLoadBalancerAttributes(data: ModifyLoadBalancerAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerAttributesResponse>;
-  /** {@link ModifyLoadBalancerMixIpTarget 修改IPv6FullChain负载均衡7层监听器支持混绑目标特性。}({@link ModifyLoadBalancerMixIpTargetRequest 请求参数}): {@link ModifyLoadBalancerMixIpTargetResponse 返回参数} */
+  /** 修改IPv6FullChain负载均衡7层监听器支持混绑目标特性。 {@link ModifyLoadBalancerMixIpTargetRequest} {@link ModifyLoadBalancerMixIpTargetResponse} */
   ModifyLoadBalancerMixIpTarget(data: ModifyLoadBalancerMixIpTargetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerMixIpTargetResponse>;
-  /** {@link ModifyLoadBalancerSla 性能容量型变配}({@link ModifyLoadBalancerSlaRequest 请求参数}): {@link ModifyLoadBalancerSlaResponse 返回参数} */
+  /** 性能容量型变配 {@link ModifyLoadBalancerSlaRequest} {@link ModifyLoadBalancerSlaResponse} */
   ModifyLoadBalancerSla(data: ModifyLoadBalancerSlaRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerSlaResponse>;
-  /** {@link ModifyRule 修改负载均衡七层监听器的转发规则}({@link ModifyRuleRequest 请求参数}): {@link ModifyRuleResponse 返回参数} */
+  /** 修改负载均衡七层监听器的转发规则 {@link ModifyRuleRequest} {@link ModifyRuleResponse} */
   ModifyRule(data: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
-  /** {@link ModifyTargetGroupAttribute 修改目标组属性}({@link ModifyTargetGroupAttributeRequest 请求参数}): {@link ModifyTargetGroupAttributeResponse 返回参数} */
+  /** 修改目标组属性 {@link ModifyTargetGroupAttributeRequest} {@link ModifyTargetGroupAttributeResponse} */
   ModifyTargetGroupAttribute(data: ModifyTargetGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetGroupAttributeResponse>;
-  /** {@link ModifyTargetGroupInstancesPort 批量修改目标组服务器端口}({@link ModifyTargetGroupInstancesPortRequest 请求参数}): {@link ModifyTargetGroupInstancesPortResponse 返回参数} */
+  /** 批量修改目标组服务器端口 {@link ModifyTargetGroupInstancesPortRequest} {@link ModifyTargetGroupInstancesPortResponse} */
   ModifyTargetGroupInstancesPort(data: ModifyTargetGroupInstancesPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetGroupInstancesPortResponse>;
-  /** {@link ModifyTargetGroupInstancesWeight 批量修改目标组的服务器权重}({@link ModifyTargetGroupInstancesWeightRequest 请求参数}): {@link ModifyTargetGroupInstancesWeightResponse 返回参数} */
+  /** 批量修改目标组的服务器权重 {@link ModifyTargetGroupInstancesWeightRequest} {@link ModifyTargetGroupInstancesWeightResponse} */
   ModifyTargetGroupInstancesWeight(data: ModifyTargetGroupInstancesWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetGroupInstancesWeightResponse>;
-  /** {@link ModifyTargetPort 修改监听器绑定的后端机器的端口}({@link ModifyTargetPortRequest 请求参数}): {@link ModifyTargetPortResponse 返回参数} */
+  /** 修改监听器绑定的后端机器的端口 {@link ModifyTargetPortRequest} {@link ModifyTargetPortResponse} */
   ModifyTargetPort(data: ModifyTargetPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetPortResponse>;
-  /** {@link ModifyTargetWeight 修改监听器绑定的后端机器的转发权重}({@link ModifyTargetWeightRequest 请求参数}): {@link ModifyTargetWeightResponse 返回参数} */
+  /** 修改监听器绑定的后端机器的转发权重 {@link ModifyTargetWeightRequest} {@link ModifyTargetWeightResponse} */
   ModifyTargetWeight(data: ModifyTargetWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetWeightResponse>;
-  /** {@link RegisterFunctionTargets 绑定云函数到转发规则上}({@link RegisterFunctionTargetsRequest 请求参数}): {@link RegisterFunctionTargetsResponse 返回参数} */
+  /** 绑定云函数到转发规则上 {@link RegisterFunctionTargetsRequest} {@link RegisterFunctionTargetsResponse} */
   RegisterFunctionTargets(data?: RegisterFunctionTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterFunctionTargetsResponse>;
-  /** {@link RegisterTargetGroupInstances 注册服务器到目标组}({@link RegisterTargetGroupInstancesRequest 请求参数}): {@link RegisterTargetGroupInstancesResponse 返回参数} */
+  /** 注册服务器到目标组 {@link RegisterTargetGroupInstancesRequest} {@link RegisterTargetGroupInstancesResponse} */
   RegisterTargetGroupInstances(data: RegisterTargetGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterTargetGroupInstancesResponse>;
-  /** {@link RegisterTargets 绑定后端机器到监听器上}({@link RegisterTargetsRequest 请求参数}): {@link RegisterTargetsResponse 返回参数} */
+  /** 绑定后端机器到监听器上 {@link RegisterTargetsRequest} {@link RegisterTargetsResponse} */
   RegisterTargets(data: RegisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterTargetsResponse>;
-  /** {@link RegisterTargetsWithClassicalLB 绑定后端服务到传统型负载均衡}({@link RegisterTargetsWithClassicalLBRequest 请求参数}): {@link RegisterTargetsWithClassicalLBResponse 返回参数} */
+  /** 绑定后端服务到传统型负载均衡 {@link RegisterTargetsWithClassicalLBRequest} {@link RegisterTargetsWithClassicalLBResponse} */
   RegisterTargetsWithClassicalLB(data: RegisterTargetsWithClassicalLBRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterTargetsWithClassicalLBResponse>;
-  /** {@link ReplaceCertForLoadBalancers 替换负载均衡实例所关联的证书}({@link ReplaceCertForLoadBalancersRequest 请求参数}): {@link ReplaceCertForLoadBalancersResponse 返回参数} */
+  /** 替换负载均衡实例所关联的证书 {@link ReplaceCertForLoadBalancersRequest} {@link ReplaceCertForLoadBalancersResponse} */
   ReplaceCertForLoadBalancers(data: ReplaceCertForLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceCertForLoadBalancersResponse>;
-  /** {@link SetCustomizedConfigForLoadBalancer 负载均衡维度的个性化配置相关操作}({@link SetCustomizedConfigForLoadBalancerRequest 请求参数}): {@link SetCustomizedConfigForLoadBalancerResponse 返回参数} */
+  /** 负载均衡维度的个性化配置相关操作 {@link SetCustomizedConfigForLoadBalancerRequest} {@link SetCustomizedConfigForLoadBalancerResponse} */
   SetCustomizedConfigForLoadBalancer(data: SetCustomizedConfigForLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<SetCustomizedConfigForLoadBalancerResponse>;
-  /** {@link SetLoadBalancerClsLog 设置负载均衡的日志服务主题}({@link SetLoadBalancerClsLogRequest 请求参数}): {@link SetLoadBalancerClsLogResponse 返回参数} */
+  /** 设置负载均衡的日志服务主题 {@link SetLoadBalancerClsLogRequest} {@link SetLoadBalancerClsLogResponse} */
   SetLoadBalancerClsLog(data: SetLoadBalancerClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<SetLoadBalancerClsLogResponse>;
-  /** {@link SetLoadBalancerSecurityGroups 设置负载均衡实例的安全组}({@link SetLoadBalancerSecurityGroupsRequest 请求参数}): {@link SetLoadBalancerSecurityGroupsResponse 返回参数} */
+  /** 设置负载均衡实例的安全组 {@link SetLoadBalancerSecurityGroupsRequest} {@link SetLoadBalancerSecurityGroupsResponse} */
   SetLoadBalancerSecurityGroups(data: SetLoadBalancerSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<SetLoadBalancerSecurityGroupsResponse>;
-  /** {@link SetSecurityGroupForLoadbalancers 绑定或解绑一个安全组到多个负载均衡实例}({@link SetSecurityGroupForLoadbalancersRequest 请求参数}): {@link SetSecurityGroupForLoadbalancersResponse 返回参数} */
+  /** 绑定或解绑一个安全组到多个负载均衡实例 {@link SetSecurityGroupForLoadbalancersRequest} {@link SetSecurityGroupForLoadbalancersResponse} */
   SetSecurityGroupForLoadbalancers(data: SetSecurityGroupForLoadbalancersRequest, config?: AxiosRequestConfig): AxiosPromise<SetSecurityGroupForLoadbalancersResponse>;
 }
 

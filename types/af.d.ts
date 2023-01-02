@@ -218,7 +218,7 @@ declare interface DescribeAntiFraudRequest {
 declare interface DescribeAntiFraudResponse {
   /** 返回结果 */
   Data: FinanceAntiFraudRecord | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -232,7 +232,7 @@ declare interface GetAntiFraudRequest {
 declare interface GetAntiFraudResponse {
   /** 反欺诈评分接口结果 */
   Data: AntiFraudRecord;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -294,18 +294,18 @@ declare interface QueryAntiFraudResponse {
   RiskInfo?: RiskDetail[];
   /** 业务侧错误码。成功时返回Success，错误时返回具体业务错误原因。 */
   CodeDesc?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Af 借贷反欺诈} */
 declare interface Af {
   (): Versions;
-  /** {@link DescribeAntiFraud 金融借贷反欺诈}({@link DescribeAntiFraudRequest 请求参数}): {@link DescribeAntiFraudResponse 返回参数} */
+  /** 金融借贷反欺诈 {@link DescribeAntiFraudRequest} {@link DescribeAntiFraudResponse} */
   DescribeAntiFraud(data?: DescribeAntiFraudRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiFraudResponse>;
-  /** {@link GetAntiFraud 反欺诈评分接口}({@link GetAntiFraudRequest 请求参数}): {@link GetAntiFraudResponse 返回参数} */
+  /** 反欺诈评分接口 {@link GetAntiFraudRequest} {@link GetAntiFraudResponse} */
   GetAntiFraud(data?: GetAntiFraudRequest, config?: AxiosRequestConfig): AxiosPromise<GetAntiFraudResponse>;
-  /** {@link QueryAntiFraud 借贷反欺诈}({@link QueryAntiFraudRequest 请求参数}): {@link QueryAntiFraudResponse 返回参数} */
+  /** 借贷反欺诈 {@link QueryAntiFraudRequest} {@link QueryAntiFraudResponse} */
   QueryAntiFraud(data?: QueryAntiFraudRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAntiFraudResponse>;
 }
 

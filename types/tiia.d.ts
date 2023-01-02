@@ -304,7 +304,7 @@ declare interface AssessQualityResponse {
   ClarityScore: number;
   /** 综合评分。图像美观度得分， 从构图、色彩等多个艺术性维度评价图片，取值为[0, 100]，值越大，越美观。一般大于50为较美观图片，标准可以自行把握。 */
   AestheticScore: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -324,7 +324,7 @@ declare interface CreateGroupRequest {
 }
 
 declare interface CreateGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -354,7 +354,7 @@ declare interface CreateImageRequest {
 declare interface CreateImageResponse {
   /** 输入图的主体信息。若启用主体识别且在请求中指定了类目ID或主体区域，以指定的主体为准。若启用主体识别且没有指定，以最大面积主体为准。**注意：仅服务类型为商品图像搜索时才生效。** */
   Object: ObjectInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -384,7 +384,7 @@ declare interface CropImageResponse {
   OriginalHeight: number;
   /** 0：抠图正常；1：原图过长，指原图的高度是宽度的1.8倍以上；2：原图过宽，指原图的宽度是高度的1.8倍以上；3：抠图区域过长，指抠图的高度是主体备选框高度的1.6倍以上；4：抠图区域过宽，指当没有检测到人脸时，抠图区域宽度是检测出的原图主体区域宽度的1.6倍以上；5：纯色图，指裁剪区域视觉较为单一、缺乏主体部分 ；6：宽高比异常，指Width : Height取值超出[1, 2.5]的范围；以上是辅助决策的参考建议，可以根据业务需求选择采纳或忽视。 */
   CropResult: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -398,7 +398,7 @@ declare interface DeleteImagesRequest {
 }
 
 declare interface DeleteImagesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -414,7 +414,7 @@ declare interface DescribeGroupsRequest {
 declare interface DescribeGroupsResponse {
   /** 图库信息 */
   Groups: GroupInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -434,7 +434,7 @@ declare interface DescribeImagesResponse {
   EntityId: string;
   /** 图片信息。 */
   ImageInfos: ImageInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -452,7 +452,7 @@ declare interface DetectChefDressRequest {
 declare interface DetectChefDressResponse {
   /** 识别到的人体属性信息。单个人体属性信息包括人体检测置信度，属性信息，人体检测框。 */
   Bodies: AttributesForBody[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -468,7 +468,7 @@ declare interface DetectDisgustResponse {
   Confidence: number;
   /** 与图像内容最相似的恶心内容的类别，包含腐烂、密集、畸形、血腥、蛇、虫子、牙齿等。 */
   Type: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -484,7 +484,7 @@ declare interface DetectEnvelopeResponse {
   FirstTags: ImageTag[] | null;
   /** 二级标签结果数组。识别文件封正反面。 */
   SecondTags: ImageTag[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -510,7 +510,7 @@ declare interface DetectLabelBetaResponse {
   NoneCamLabels: DetectLabelItem[] | null;
   /** 识别结果 */
   LocationLabels: Product[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -524,7 +524,7 @@ declare interface DetectLabelProRequest {
 declare interface DetectLabelProResponse {
   /** 返回标签数组。 */
   Labels: DetectLabelItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -546,7 +546,7 @@ declare interface DetectLabelResponse {
   AlbumLabels: DetectLabelItem[] | null;
   /** News新闻版标签结果数组。如未选择NEWS场景，则为空。新闻版目前为测试阶段，暂不提供每个标签的一级、二级分类信息的输出。 */
   NewsLabels: DetectLabelItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -562,7 +562,7 @@ declare interface DetectMisbehaviorResponse {
   Confidence: number;
   /** 图像中最可能包含的不良行为类别，包括赌博、打架斗殴、吸毒等。 */
   Type: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -576,7 +576,7 @@ declare interface DetectPetRequest {
 declare interface DetectPetResponse {
   /** 识别出图片中的宠物信息列表。 */
   Pets: Pet[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -596,7 +596,7 @@ declare interface DetectProductBetaResponse {
   ProductInfo: ProductInfo;
   /** 相似商品信息列表 */
   ProductInfoList: ProductInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -610,7 +610,7 @@ declare interface DetectProductRequest {
 declare interface DetectProductResponse {
   /** 商品识别结果数组 */
   Products: Product[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -628,7 +628,7 @@ declare interface DetectSecurityRequest {
 declare interface DetectSecurityResponse {
   /** 识别到的人体属性信息。单个人体属性信息包括人体检测置信度，属性信息，人体检测框。 */
   Bodies?: AttributesForBody[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -642,7 +642,7 @@ declare interface EnhanceImageRequest {
 declare interface EnhanceImageResponse {
   /** 增强后图片的base64编码。 */
   EnhancedImage: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -658,7 +658,7 @@ declare interface RecognizeCarProResponse {
   CarCoords: Coord[];
   /** 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。注意：置信度是指车牌信息置信度。 */
   CarTags: CarTagItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -674,7 +674,7 @@ declare interface RecognizeCarResponse {
   CarCoords: Coord[];
   /** 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。 */
   CarTags: CarTagItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -708,56 +708,56 @@ declare interface SearchImageResponse {
   ImageInfos: ImageInfo[] | null;
   /** 输入图的主体信息。若启用主体识别且在请求中指定了类目ID或主体区域，以指定的主体为准。若启用主体识别且没有指定，以最大面积主体为准。**注意：仅服务类型为商品图像搜索时才生效。** */
   Object: ObjectInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tiia 图像分析} */
 declare interface Tiia {
   (): Versions;
-  /** {@link AssessQuality 图像质量评估}({@link AssessQualityRequest 请求参数}): {@link AssessQualityResponse 返回参数} */
+  /** 图像质量评估 {@link AssessQualityRequest} {@link AssessQualityResponse} */
   AssessQuality(data?: AssessQualityRequest, config?: AxiosRequestConfig): AxiosPromise<AssessQualityResponse>;
-  /** {@link CreateGroup 创建图片库}({@link CreateGroupRequest 请求参数}): {@link CreateGroupResponse 返回参数} */
+  /** 创建图片库 {@link CreateGroupRequest} {@link CreateGroupResponse} */
   CreateGroup(data: CreateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupResponse>;
-  /** {@link CreateImage 创建图片}({@link CreateImageRequest 请求参数}): {@link CreateImageResponse 返回参数} */
+  /** 创建图片 {@link CreateImageRequest} {@link CreateImageResponse} */
   CreateImage(data: CreateImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageResponse>;
-  /** {@link CropImage 图片智能裁剪}({@link CropImageRequest 请求参数}): {@link CropImageResponse 返回参数} */
+  /** 图片智能裁剪 {@link CropImageRequest} {@link CropImageResponse} */
   CropImage(data: CropImageRequest, config?: AxiosRequestConfig): AxiosPromise<CropImageResponse>;
-  /** {@link DeleteImages 删除图片}({@link DeleteImagesRequest 请求参数}): {@link DeleteImagesResponse 返回参数} */
+  /** 删除图片 {@link DeleteImagesRequest} {@link DeleteImagesResponse} */
   DeleteImages(data: DeleteImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImagesResponse>;
-  /** {@link DescribeGroups 查询图片库}({@link DescribeGroupsRequest 请求参数}): {@link DescribeGroupsResponse 返回参数} */
+  /** 查询图片库 {@link DescribeGroupsRequest} {@link DescribeGroupsResponse} */
   DescribeGroups(data?: DescribeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsResponse>;
-  /** {@link DescribeImages 查询图片信息}({@link DescribeImagesRequest 请求参数}): {@link DescribeImagesResponse 返回参数} */
+  /** 查询图片信息 {@link DescribeImagesRequest} {@link DescribeImagesResponse} */
   DescribeImages(data: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
-  /** {@link DetectChefDress 厨师穿戴识别接口}({@link DetectChefDressRequest 请求参数}): {@link DetectChefDressResponse 返回参数} */
+  /** 厨师穿戴识别接口 {@link DetectChefDressRequest} {@link DetectChefDressResponse} */
   DetectChefDress(data?: DetectChefDressRequest, config?: AxiosRequestConfig): AxiosPromise<DetectChefDressResponse>;
-  /** {@link DetectDisgust 恶心检测}({@link DetectDisgustRequest 请求参数}): {@link DetectDisgustResponse 返回参数} */
+  /** 恶心检测 {@link DetectDisgustRequest} {@link DetectDisgustResponse} */
   DetectDisgust(data?: DetectDisgustRequest, config?: AxiosRequestConfig): AxiosPromise<DetectDisgustResponse>;
-  /** {@link DetectEnvelope 文件封识别}({@link DetectEnvelopeRequest 请求参数}): {@link DetectEnvelopeResponse 返回参数} */
+  /** 文件封识别 {@link DetectEnvelopeRequest} {@link DetectEnvelopeResponse} */
   DetectEnvelope(data?: DetectEnvelopeRequest, config?: AxiosRequestConfig): AxiosPromise<DetectEnvelopeResponse>;
-  /** {@link DetectLabel 图像标签}({@link DetectLabelRequest 请求参数}): {@link DetectLabelResponse 返回参数} */
+  /** 图像标签 {@link DetectLabelRequest} {@link DetectLabelResponse} */
   DetectLabel(data?: DetectLabelRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLabelResponse>;
-  /** {@link DetectLabelBeta 图像标签测试接口}({@link DetectLabelBetaRequest 请求参数}): {@link DetectLabelBetaResponse 返回参数} */
+  /** 图像标签测试接口 {@link DetectLabelBetaRequest} {@link DetectLabelBetaResponse} */
   DetectLabelBeta(data?: DetectLabelBetaRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLabelBetaResponse>;
-  /** {@link DetectLabelPro 通用图像标签}({@link DetectLabelProRequest 请求参数}): {@link DetectLabelProResponse 返回参数} */
+  /** 通用图像标签 {@link DetectLabelProRequest} {@link DetectLabelProResponse} */
   DetectLabelPro(data?: DetectLabelProRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLabelProResponse>;
-  /** {@link DetectMisbehavior 不良行为识别}({@link DetectMisbehaviorRequest 请求参数}): {@link DetectMisbehaviorResponse 返回参数} */
+  /** 不良行为识别 {@link DetectMisbehaviorRequest} {@link DetectMisbehaviorResponse} */
   DetectMisbehavior(data?: DetectMisbehaviorRequest, config?: AxiosRequestConfig): AxiosPromise<DetectMisbehaviorResponse>;
-  /** {@link DetectPet 宠物识别}({@link DetectPetRequest 请求参数}): {@link DetectPetResponse 返回参数} */
+  /** 宠物识别 {@link DetectPetRequest} {@link DetectPetResponse} */
   DetectPet(data?: DetectPetRequest, config?: AxiosRequestConfig): AxiosPromise<DetectPetResponse>;
-  /** {@link DetectProduct 商品识别}({@link DetectProductRequest 请求参数}): {@link DetectProductResponse 返回参数} */
+  /** 商品识别 {@link DetectProductRequest} {@link DetectProductResponse} */
   DetectProduct(data?: DetectProductRequest, config?: AxiosRequestConfig): AxiosPromise<DetectProductResponse>;
-  /** {@link DetectProductBeta 商品识别-微信识物版}({@link DetectProductBetaRequest 请求参数}): {@link DetectProductBetaResponse 返回参数} */
+  /** 商品识别-微信识物版 {@link DetectProductBetaRequest} {@link DetectProductBetaResponse} */
   DetectProductBeta(data?: DetectProductBetaRequest, config?: AxiosRequestConfig): AxiosPromise<DetectProductBetaResponse>;
-  /** {@link DetectSecurity 安全属性识别}({@link DetectSecurityRequest 请求参数}): {@link DetectSecurityResponse 返回参数} */
+  /** 安全属性识别 {@link DetectSecurityRequest} {@link DetectSecurityResponse} */
   DetectSecurity(data?: DetectSecurityRequest, config?: AxiosRequestConfig): AxiosPromise<DetectSecurityResponse>;
-  /** {@link EnhanceImage 图像清晰度增强}({@link EnhanceImageRequest 请求参数}): {@link EnhanceImageResponse 返回参数} */
+  /** 图像清晰度增强 {@link EnhanceImageRequest} {@link EnhanceImageResponse} */
   EnhanceImage(data?: EnhanceImageRequest, config?: AxiosRequestConfig): AxiosPromise<EnhanceImageResponse>;
-  /** {@link RecognizeCar 车辆识别}({@link RecognizeCarRequest 请求参数}): {@link RecognizeCarResponse 返回参数} */
+  /** 车辆识别 {@link RecognizeCarRequest} {@link RecognizeCarResponse} */
   RecognizeCar(data?: RecognizeCarRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeCarResponse>;
-  /** {@link RecognizeCarPro 车辆识别（增强版）}({@link RecognizeCarProRequest 请求参数}): {@link RecognizeCarProResponse 返回参数} */
+  /** 车辆识别（增强版） {@link RecognizeCarProRequest} {@link RecognizeCarProResponse} */
   RecognizeCarPro(data?: RecognizeCarProRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeCarProResponse>;
-  /** {@link SearchImage 检索图片}({@link SearchImageRequest 请求参数}): {@link SearchImageResponse 返回参数} */
+  /** 检索图片 {@link SearchImageRequest} {@link SearchImageResponse} */
   SearchImage(data: SearchImageRequest, config?: AxiosRequestConfig): AxiosPromise<SearchImageResponse>;
 }
 

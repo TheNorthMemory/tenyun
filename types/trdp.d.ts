@@ -188,14 +188,14 @@ declare interface EvaluateUserRiskRequest {
 declare interface EvaluateUserRiskResponse {
   /** 评估结果 */
   EvaluationResult: EvaluationResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Trdp 流量风险决策平台} */
 declare interface Trdp {
   (): Versions;
-  /** {@link EvaluateUserRisk 用户风险质量接口}({@link EvaluateUserRiskRequest 请求参数}): {@link EvaluateUserRiskResponse 返回参数} */
+  /** 用户风险质量接口 {@link EvaluateUserRiskRequest} {@link EvaluateUserRiskResponse} */
   EvaluateUserRisk(data: EvaluateUserRiskRequest, config?: AxiosRequestConfig): AxiosPromise<EvaluateUserRiskResponse>;
 }
 

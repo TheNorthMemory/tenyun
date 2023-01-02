@@ -116,7 +116,7 @@ declare interface BindEipAclsRequest {
 }
 
 declare interface BindEipAclsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -130,7 +130,7 @@ declare interface BindHostedRequest {
 declare interface BindHostedResponse {
   /** 异步任务ID，可以通过EipBmQueryTask查询任务状态 */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -144,7 +144,7 @@ declare interface BindRsRequest {
 declare interface BindRsResponse {
   /** 绑定黑石物理机异步任务ID，可以通过DescribeEipTask查询任务状态 */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -160,7 +160,7 @@ declare interface BindVpcIpRequest {
 declare interface BindVpcIpResponse {
   /** EIP绑定VPC网络IP异步任务ID，可以通过查询EIP任务状态查询任务状态 */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -180,7 +180,7 @@ declare interface CreateEipAclResponse {
   AclName: string;
   /** ACL 实例创建时间 */
   CreatedAt: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -206,7 +206,7 @@ declare interface CreateEipResponse {
   EipIds: string[];
   /** 任务ID */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -216,7 +216,7 @@ declare interface DeleteEipAclRequest {
 }
 
 declare interface DeleteEipAclResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -228,7 +228,7 @@ declare interface DeleteEipRequest {
 declare interface DeleteEipResponse {
   /** 任务Id */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -260,7 +260,7 @@ declare interface DescribeEipAclsResponse {
   TotalCount: number;
   /** EIPACL列表 */
   EipAclList: EipAcl[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -278,7 +278,7 @@ declare interface DescribeEipQuotaResponse {
   DailyApplyQuota?: number;
   /** BatchApplyMax */
   BatchApplyMax?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -290,7 +290,7 @@ declare interface DescribeEipTaskRequest {
 declare interface DescribeEipTaskResponse {
   /** 当前任务状态码：0-成功，1-失败，2-进行中 */
   Status: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -332,7 +332,7 @@ declare interface DescribeEipsResponse {
   EipSet?: EipInfo[];
   /** 返回EIP数量 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -350,7 +350,7 @@ declare interface ModifyEipAclRequest {
 }
 
 declare interface ModifyEipAclResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -366,7 +366,7 @@ declare interface ModifyEipChargeRequest {
 declare interface ModifyEipChargeResponse {
   /** 修改计费模式的异步任务ID，可以通过查询EIP任务状态查询任务状态 */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -378,7 +378,7 @@ declare interface ModifyEipNameRequest {
 }
 
 declare interface ModifyEipNameResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -388,7 +388,7 @@ declare interface UnbindEipAclsRequest {
 }
 
 declare interface UnbindEipAclsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -404,7 +404,7 @@ declare interface UnbindHostedRequest {
 declare interface UnbindHostedResponse {
   /** 异步任务ID，可以通过EipBmQueryTask查询任务状态 */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -416,7 +416,7 @@ declare interface UnbindRsListRequest {
 declare interface UnbindRsListResponse {
   /** 解绑操作的异步任务ID，可以通过查询EIP任务状态查询任务状态 */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -430,7 +430,7 @@ declare interface UnbindRsRequest {
 declare interface UnbindRsResponse {
   /** 解绑操作的异步任务ID，可以通过查询EIP任务状态查询任务状态 */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -446,52 +446,52 @@ declare interface UnbindVpcIpRequest {
 declare interface UnbindVpcIpResponse {
   /** 绑定黑石物理机异步任务ID，可以通过查询EIP任务状态查询任务状态 */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Bmeip 黑石弹性公网IP} */
 declare interface Bmeip {
   (): Versions;
-  /** {@link BindEipAcls 绑定弹性公网IP ACL}({@link BindEipAclsRequest 请求参数}): {@link BindEipAclsResponse 返回参数} */
+  /** 绑定弹性公网IP ACL {@link BindEipAclsRequest} {@link BindEipAclsResponse} */
   BindEipAcls(data: BindEipAclsRequest, config?: AxiosRequestConfig): AxiosPromise<BindEipAclsResponse>;
-  /** {@link BindHosted 黑石托管机器绑定EIP}({@link BindHostedRequest 请求参数}): {@link BindHostedResponse 返回参数} */
+  /** 黑石托管机器绑定EIP {@link BindHostedRequest} {@link BindHostedResponse} */
   BindHosted(data: BindHostedRequest, config?: AxiosRequestConfig): AxiosPromise<BindHostedResponse>;
-  /** {@link BindRs 绑定黑石EIP}({@link BindRsRequest 请求参数}): {@link BindRsResponse 返回参数} */
+  /** 绑定黑石EIP {@link BindRsRequest} {@link BindRsResponse} */
   BindRs(data: BindRsRequest, config?: AxiosRequestConfig): AxiosPromise<BindRsResponse>;
-  /** {@link BindVpcIp 黑石EIP绑定VPCIP}({@link BindVpcIpRequest 请求参数}): {@link BindVpcIpResponse 返回参数} */
+  /** 黑石EIP绑定VPCIP {@link BindVpcIpRequest} {@link BindVpcIpResponse} */
   BindVpcIp(data: BindVpcIpRequest, config?: AxiosRequestConfig): AxiosPromise<BindVpcIpResponse>;
-  /** {@link CreateEip 创建黑石EIP}({@link CreateEipRequest 请求参数}): {@link CreateEipResponse 返回参数} */
+  /** 创建黑石EIP {@link CreateEipRequest} {@link CreateEipResponse} */
   CreateEip(data?: CreateEipRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEipResponse>;
-  /** {@link CreateEipAcl 创建黑石弹性公网 EIPACL}({@link CreateEipAclRequest 请求参数}): {@link CreateEipAclResponse 返回参数} */
+  /** 创建黑石弹性公网 EIPACL {@link CreateEipAclRequest} {@link CreateEipAclResponse} */
   CreateEipAcl(data: CreateEipAclRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEipAclResponse>;
-  /** {@link DeleteEip 释放黑石弹性公网IP}({@link DeleteEipRequest 请求参数}): {@link DeleteEipResponse 返回参数} */
+  /** 释放黑石弹性公网IP {@link DeleteEipRequest} {@link DeleteEipResponse} */
   DeleteEip(data: DeleteEipRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEipResponse>;
-  /** {@link DeleteEipAcl 删除弹性公网IP ACL}({@link DeleteEipAclRequest 请求参数}): {@link DeleteEipAclResponse 返回参数} */
+  /** 删除弹性公网IP ACL {@link DeleteEipAclRequest} {@link DeleteEipAclResponse} */
   DeleteEipAcl(data: DeleteEipAclRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEipAclResponse>;
-  /** {@link DescribeEipAcls 查询弹性公网IP ACL}({@link DescribeEipAclsRequest 请求参数}): {@link DescribeEipAclsResponse 返回参数} */
+  /** 查询弹性公网IP ACL {@link DescribeEipAclsRequest} {@link DescribeEipAclsResponse} */
   DescribeEipAcls(data?: DescribeEipAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEipAclsResponse>;
-  /** {@link DescribeEipQuota 查询黑石EIP 限额}({@link DescribeEipQuotaRequest 请求参数}): {@link DescribeEipQuotaResponse 返回参数} */
+  /** 查询黑石EIP 限额 {@link DescribeEipQuotaRequest} {@link DescribeEipQuotaResponse} */
   DescribeEipQuota(data?: DescribeEipQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEipQuotaResponse>;
-  /** {@link DescribeEipTask 黑石EIP查询任务状态}({@link DescribeEipTaskRequest 请求参数}): {@link DescribeEipTaskResponse 返回参数} */
+  /** 黑石EIP查询任务状态 {@link DescribeEipTaskRequest} {@link DescribeEipTaskResponse} */
   DescribeEipTask(data: DescribeEipTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEipTaskResponse>;
-  /** {@link DescribeEips 黑石EIP查询接口}({@link DescribeEipsRequest 请求参数}): {@link DescribeEipsResponse 返回参数} */
+  /** 黑石EIP查询接口 {@link DescribeEipsRequest} {@link DescribeEipsResponse} */
   DescribeEips(data?: DescribeEipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEipsResponse>;
-  /** {@link ModifyEipAcl 修改弹性公网IP ACL}({@link ModifyEipAclRequest 请求参数}): {@link ModifyEipAclResponse 返回参数} */
+  /** 修改弹性公网IP ACL {@link ModifyEipAclRequest} {@link ModifyEipAclResponse} */
   ModifyEipAcl(data: ModifyEipAclRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEipAclResponse>;
-  /** {@link ModifyEipCharge 黑石EIP修改计费方式}({@link ModifyEipChargeRequest 请求参数}): {@link ModifyEipChargeResponse 返回参数} */
+  /** 黑石EIP修改计费方式 {@link ModifyEipChargeRequest} {@link ModifyEipChargeResponse} */
   ModifyEipCharge(data: ModifyEipChargeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEipChargeResponse>;
-  /** {@link ModifyEipName 更新黑石EIP名称}({@link ModifyEipNameRequest 请求参数}): {@link ModifyEipNameResponse 返回参数} */
+  /** 更新黑石EIP名称 {@link ModifyEipNameRequest} {@link ModifyEipNameResponse} */
   ModifyEipName(data: ModifyEipNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEipNameResponse>;
-  /** {@link UnbindEipAcls 解绑弹性公网IP ACL}({@link UnbindEipAclsRequest 请求参数}): {@link UnbindEipAclsResponse 返回参数} */
+  /** 解绑弹性公网IP ACL {@link UnbindEipAclsRequest} {@link UnbindEipAclsResponse} */
   UnbindEipAcls(data: UnbindEipAclsRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindEipAclsResponse>;
-  /** {@link UnbindHosted 黑石托管机器解绑EIP}({@link UnbindHostedRequest 请求参数}): {@link UnbindHostedResponse 返回参数} */
+  /** 黑石托管机器解绑EIP {@link UnbindHostedRequest} {@link UnbindHostedResponse} */
   UnbindHosted(data: UnbindHostedRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindHostedResponse>;
-  /** {@link UnbindRs 解绑黑石EIP}({@link UnbindRsRequest 请求参数}): {@link UnbindRsResponse 返回参数} */
+  /** 解绑黑石EIP {@link UnbindRsRequest} {@link UnbindRsResponse} */
   UnbindRs(data: UnbindRsRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindRsResponse>;
-  /** {@link UnbindRsList 批量解绑物理机弹性公网IP}({@link UnbindRsListRequest 请求参数}): {@link UnbindRsListResponse 返回参数} */
+  /** 批量解绑物理机弹性公网IP {@link UnbindRsListRequest} {@link UnbindRsListResponse} */
   UnbindRsList(data: UnbindRsListRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindRsListResponse>;
-  /** {@link UnbindVpcIp 黑石EIP解绑VPCIP}({@link UnbindVpcIpRequest 请求参数}): {@link UnbindVpcIpResponse 返回参数} */
+  /** 黑石EIP解绑VPCIP {@link UnbindVpcIpRequest} {@link UnbindVpcIpResponse} */
   UnbindVpcIp(data: UnbindVpcIpRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindVpcIpResponse>;
 }
 

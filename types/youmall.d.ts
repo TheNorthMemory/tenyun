@@ -390,7 +390,7 @@ declare interface CreateAccountRequest {
 }
 
 declare interface CreateAccountResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -416,7 +416,7 @@ declare interface CreateFacePictureResponse {
   Status?: number;
   /** 图片url */
   PictureUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -430,7 +430,7 @@ declare interface DeletePersonFeatureRequest {
 }
 
 declare interface DeletePersonFeatureResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -464,7 +464,7 @@ declare interface DescribeCameraPersonResponse {
   PosId?: string;
   /** 抓取的顾客信息 */
   Infos?: CameraPersonInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -488,7 +488,7 @@ declare interface DescribeClusterPersonArrivedMallResponse {
   PersonId?: string;
   /** 到场信息 */
   ArrivedMallSet?: ArrivedMallInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -512,7 +512,7 @@ declare interface DescribeClusterPersonTraceResponse {
   PersonId?: string;
   /** 轨迹序列 */
   TracePointSet?: DailyTracePoint[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -546,7 +546,7 @@ declare interface DescribeFaceIdByTempIdResponse {
   FaceId?: number;
   /** 顾客属性信息 */
   PersonInfo?: PersonInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -570,7 +570,7 @@ declare interface DescribeHistoryNetworkInfoRequest {
 declare interface DescribeHistoryNetworkInfoResponse {
   /** 网络状态数据 */
   InstanceSet?: NetworkHistoryInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -586,7 +586,7 @@ declare interface DescribeNetworkInfoRequest {
 declare interface DescribeNetworkInfoResponse {
   /** 网络状态详情 */
   InstanceSet?: NetworkLastInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -610,7 +610,7 @@ declare interface DescribePersonArrivedMallResponse {
   PersonId?: string;
   /** 到场轨迹 */
   ArrivedMallSet?: ArrivedMallInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -638,7 +638,7 @@ declare interface DescribePersonInfoByFacePictureResponse {
   FirstVisitTime?: string;
   /** 顾客历史到访次数 */
   VisitTimes?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -668,7 +668,7 @@ declare interface DescribePersonInfoResponse {
   TotalCount?: number;
   /** 用户信息 */
   PersonInfoSet?: PersonInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -686,7 +686,7 @@ declare interface DescribePersonResponse {
   TotalCount?: number;
   /** 客户信息 */
   PersonSet?: PersonProfile[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -708,7 +708,7 @@ declare interface DescribePersonTraceDetailResponse {
   TraceId?: string;
   /** 轨迹点坐标序列 */
   CoordinateSet?: PersonCoordinate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -732,7 +732,7 @@ declare interface DescribePersonTraceResponse {
   PersonId?: string;
   /** 轨迹列表 */
   TraceRouteSet?: PersonTraceRoute[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -766,7 +766,7 @@ declare interface DescribePersonVisitInfoResponse {
   TotalCount?: number;
   /** 用户到访明细 */
   PersonVisitInfoSet?: PersonVisitInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -794,7 +794,7 @@ declare interface DescribeShopHourTrafficInfoResponse {
   TotalCount?: number;
   /** 分时客流信息 */
   ShopHourTrafficInfoSet?: ShopHourTrafficInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -810,7 +810,7 @@ declare interface DescribeShopInfoResponse {
   TotalCount?: number;
   /** 门店列表信息 */
   ShopInfoSet?: ShopInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -838,7 +838,7 @@ declare interface DescribeShopTrafficInfoResponse {
   TotalCount?: number;
   /** 客流信息列表 */
   ShopDayTrafficInfoSet?: ShopDayTrafficInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -872,7 +872,7 @@ declare interface DescribeTrajectoryDataResponse {
   Trajectory?: number;
   /** 返回动迹的具体信息 */
   Data?: TrajectorySunData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -900,7 +900,7 @@ declare interface DescribeZoneFlowAgeInfoByZoneIdResponse {
   ZoneName?: string;
   /** 当前年龄段占比 */
   Data?: number[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -922,7 +922,7 @@ declare interface DescribeZoneFlowAndStayTimeResponse {
   ShopId?: number;
   /** 各区域人流数目和停留时长 */
   Data?: ZoneFlowAndAvrStayTime[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -950,7 +950,7 @@ declare interface DescribeZoneFlowDailyByZoneIdResponse {
   ZoneName?: string;
   /** 每日人流量 */
   Data?: ZoneDayFlow[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -978,7 +978,7 @@ declare interface DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse {
   ZoneName?: string;
   /** 不同年龄段男女停留时间（返回格式为数组，从第 1 个到最后一个数据，年龄段分别为 0-17，18 - 23, 24 - 30, 31 - 40, 41 - 50, 51 - 60, 61 - 100） */
   Data?: ZoneAgeGroupAvrStayTime[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1008,7 +1008,7 @@ declare interface DescribeZoneFlowGenderInfoByZoneIdResponse {
   MalePercent?: number;
   /** 女性占比 */
   FemalePercent?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1036,7 +1036,7 @@ declare interface DescribeZoneFlowHourlyByZoneIdResponse {
   ZoneName?: string;
   /** 各个分时人流量 */
   Data?: ZoneHourFlow[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1064,7 +1064,7 @@ declare interface DescribeZoneTrafficInfoResponse {
   TotalCount?: number;
   /** 区域客流信息列表 */
   ZoneTrafficInfoSet?: ZoneTrafficInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1096,7 +1096,7 @@ declare interface ModifyPersonFeatureInfoResponse {
   PersonType?: number;
   /** 与请求的person_id类型相同、与请求图片特征相似的一个或多个person_id，需要额外确认这些id是否是同一个人 */
   SimilarPersonIds?: number[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1110,7 +1110,7 @@ declare interface ModifyPersonTagInfoRequest {
 }
 
 declare interface ModifyPersonTagInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1128,7 +1128,7 @@ declare interface ModifyPersonTypeRequest {
 }
 
 declare interface ModifyPersonTypeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1144,73 +1144,73 @@ declare interface RegisterCallbackRequest {
 }
 
 declare interface RegisterCallbackResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface Youmall {
   (): Versions;
-  /** {@link CreateAccount 创建集团门店管理员账号}({@link CreateAccountRequest 请求参数}): {@link CreateAccountResponse 返回参数} */
+  /** 创建集团门店管理员账号 {@link CreateAccountRequest} {@link CreateAccountResponse} */
   CreateAccount(data: CreateAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountResponse>;
-  /** {@link CreateFacePicture 上传人脸图片}({@link CreateFacePictureRequest 请求参数}): {@link CreateFacePictureResponse 返回参数} */
+  /** 上传人脸图片 {@link CreateFacePictureRequest} {@link CreateFacePictureResponse} */
   CreateFacePicture(data: CreateFacePictureRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFacePictureResponse>;
-  /** {@link DeletePersonFeature 删除顾客特征}({@link DeletePersonFeatureRequest 请求参数}): {@link DeletePersonFeatureResponse 返回参数} */
+  /** 删除顾客特征 {@link DeletePersonFeatureRequest} {@link DeletePersonFeatureResponse} */
   DeletePersonFeature(data: DeletePersonFeatureRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonFeatureResponse>;
-  /** {@link DescribeCameraPerson 获取收银台前顾客身份ID}({@link DescribeCameraPersonRequest 请求参数}): {@link DescribeCameraPersonResponse 返回参数} */
+  /** 获取收银台前顾客身份ID {@link DescribeCameraPersonRequest} {@link DescribeCameraPersonResponse} */
   DescribeCameraPerson(data: DescribeCameraPersonRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCameraPersonResponse>;
-  /** {@link DescribeClusterPersonArrivedMall 查询客户到场信息（按天聚合）}({@link DescribeClusterPersonArrivedMallRequest 请求参数}): {@link DescribeClusterPersonArrivedMallResponse 返回参数} */
+  /** 查询客户到场信息（按天聚合） {@link DescribeClusterPersonArrivedMallRequest} {@link DescribeClusterPersonArrivedMallResponse} */
   DescribeClusterPersonArrivedMall(data: DescribeClusterPersonArrivedMallRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterPersonArrivedMallResponse>;
-  /** {@link DescribeClusterPersonTrace 查询客户单次到场轨迹（按天聚合）}({@link DescribeClusterPersonTraceRequest 请求参数}): {@link DescribeClusterPersonTraceResponse 返回参数} */
+  /** 查询客户单次到场轨迹（按天聚合） {@link DescribeClusterPersonTraceRequest} {@link DescribeClusterPersonTraceResponse} */
   DescribeClusterPersonTrace(data: DescribeClusterPersonTraceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterPersonTraceResponse>;
-  /** {@link DescribeFaceIdByTempId 获取已绑定收银台顾客FaceID}({@link DescribeFaceIdByTempIdRequest 请求参数}): {@link DescribeFaceIdByTempIdResponse 返回参数} */
+  /** 获取已绑定收银台顾客FaceID {@link DescribeFaceIdByTempIdRequest} {@link DescribeFaceIdByTempIdResponse} */
   DescribeFaceIdByTempId(data: DescribeFaceIdByTempIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFaceIdByTempIdResponse>;
-  /** {@link DescribeHistoryNetworkInfo 查询设备历史网络状态}({@link DescribeHistoryNetworkInfoRequest 请求参数}): {@link DescribeHistoryNetworkInfoResponse 返回参数} */
+  /** 查询设备历史网络状态 {@link DescribeHistoryNetworkInfoRequest} {@link DescribeHistoryNetworkInfoResponse} */
   DescribeHistoryNetworkInfo(data: DescribeHistoryNetworkInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHistoryNetworkInfoResponse>;
-  /** {@link DescribeNetworkInfo 查询设备最新网络状态}({@link DescribeNetworkInfoRequest 请求参数}): {@link DescribeNetworkInfoResponse 返回参数} */
+  /** 查询设备最新网络状态 {@link DescribeNetworkInfoRequest} {@link DescribeNetworkInfoResponse} */
   DescribeNetworkInfo(data: DescribeNetworkInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkInfoResponse>;
-  /** {@link DescribePerson 查询客户信息}({@link DescribePersonRequest 请求参数}): {@link DescribePersonResponse 返回参数} */
+  /** 查询客户信息 {@link DescribePersonRequest} {@link DescribePersonResponse} */
   DescribePerson(data: DescribePersonRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonResponse>;
-  /** {@link DescribePersonArrivedMall 查询客户到场信息}({@link DescribePersonArrivedMallRequest 请求参数}): {@link DescribePersonArrivedMallResponse 返回参数} */
+  /** 查询客户到场信息 {@link DescribePersonArrivedMallRequest} {@link DescribePersonArrivedMallResponse} */
   DescribePersonArrivedMall(data: DescribePersonArrivedMallRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonArrivedMallResponse>;
-  /** {@link DescribePersonInfo 获取顾客详情列表}({@link DescribePersonInfoRequest 请求参数}): {@link DescribePersonInfoResponse 返回参数} */
+  /** 获取顾客详情列表 {@link DescribePersonInfoRequest} {@link DescribePersonInfoResponse} */
   DescribePersonInfo(data: DescribePersonInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonInfoResponse>;
-  /** {@link DescribePersonInfoByFacePicture 图片检索身份接口}({@link DescribePersonInfoByFacePictureRequest 请求参数}): {@link DescribePersonInfoByFacePictureResponse 返回参数} */
+  /** 图片检索身份接口 {@link DescribePersonInfoByFacePictureRequest} {@link DescribePersonInfoByFacePictureResponse} */
   DescribePersonInfoByFacePicture(data: DescribePersonInfoByFacePictureRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonInfoByFacePictureResponse>;
-  /** {@link DescribePersonTrace 查询客户单次到场轨迹}({@link DescribePersonTraceRequest 请求参数}): {@link DescribePersonTraceResponse 返回参数} */
+  /** 查询客户单次到场轨迹 {@link DescribePersonTraceRequest} {@link DescribePersonTraceResponse} */
   DescribePersonTrace(data: DescribePersonTraceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonTraceResponse>;
-  /** {@link DescribePersonTraceDetail 查询客户单次到场轨迹明细}({@link DescribePersonTraceDetailRequest 请求参数}): {@link DescribePersonTraceDetailResponse 返回参数} */
+  /** 查询客户单次到场轨迹明细 {@link DescribePersonTraceDetailRequest} {@link DescribePersonTraceDetailResponse} */
   DescribePersonTraceDetail(data: DescribePersonTraceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonTraceDetailResponse>;
-  /** {@link DescribePersonVisitInfo 获取顾客到访信息列表}({@link DescribePersonVisitInfoRequest 请求参数}): {@link DescribePersonVisitInfoResponse 返回参数} */
+  /** 获取顾客到访信息列表 {@link DescribePersonVisitInfoRequest} {@link DescribePersonVisitInfoResponse} */
   DescribePersonVisitInfo(data: DescribePersonVisitInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonVisitInfoResponse>;
-  /** {@link DescribeShopHourTrafficInfo 获取每小时客流人数}({@link DescribeShopHourTrafficInfoRequest 请求参数}): {@link DescribeShopHourTrafficInfoResponse 返回参数} */
+  /** 获取每小时客流人数 {@link DescribeShopHourTrafficInfoRequest} {@link DescribeShopHourTrafficInfoResponse} */
   DescribeShopHourTrafficInfo(data: DescribeShopHourTrafficInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShopHourTrafficInfoResponse>;
-  /** {@link DescribeShopInfo 获取客户所属门店列表}({@link DescribeShopInfoRequest 请求参数}): {@link DescribeShopInfoResponse 返回参数} */
+  /** 获取客户所属门店列表 {@link DescribeShopInfoRequest} {@link DescribeShopInfoResponse} */
   DescribeShopInfo(data: DescribeShopInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShopInfoResponse>;
-  /** {@link DescribeShopTrafficInfo 获取每日客流人数}({@link DescribeShopTrafficInfoRequest 请求参数}): {@link DescribeShopTrafficInfoResponse 返回参数} */
+  /** 获取每日客流人数 {@link DescribeShopTrafficInfoRequest} {@link DescribeShopTrafficInfoResponse} */
   DescribeShopTrafficInfo(data: DescribeShopTrafficInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShopTrafficInfoResponse>;
-  /** {@link DescribeTrajectoryData 获取动线轨迹信息}({@link DescribeTrajectoryDataRequest 请求参数}): {@link DescribeTrajectoryDataResponse 返回参数} */
+  /** 获取动线轨迹信息 {@link DescribeTrajectoryDataRequest} {@link DescribeTrajectoryDataResponse} */
   DescribeTrajectoryData(data: DescribeTrajectoryDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrajectoryDataResponse>;
-  /** {@link DescribeZoneFlowAgeInfoByZoneId 获取指定区域人流各年龄占比}({@link DescribeZoneFlowAgeInfoByZoneIdRequest 请求参数}): {@link DescribeZoneFlowAgeInfoByZoneIdResponse 返回参数} */
+  /** 获取指定区域人流各年龄占比 {@link DescribeZoneFlowAgeInfoByZoneIdRequest} {@link DescribeZoneFlowAgeInfoByZoneIdResponse} */
   DescribeZoneFlowAgeInfoByZoneId(data: DescribeZoneFlowAgeInfoByZoneIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneFlowAgeInfoByZoneIdResponse>;
-  /** {@link DescribeZoneFlowAndStayTime 获取区域人流和停留时间}({@link DescribeZoneFlowAndStayTimeRequest 请求参数}): {@link DescribeZoneFlowAndStayTimeResponse 返回参数} */
+  /** 获取区域人流和停留时间 {@link DescribeZoneFlowAndStayTimeRequest} {@link DescribeZoneFlowAndStayTimeResponse} */
   DescribeZoneFlowAndStayTime(data: DescribeZoneFlowAndStayTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneFlowAndStayTimeResponse>;
-  /** {@link DescribeZoneFlowDailyByZoneId 获取指定区域每日客流量}({@link DescribeZoneFlowDailyByZoneIdRequest 请求参数}): {@link DescribeZoneFlowDailyByZoneIdResponse 返回参数} */
+  /** 获取指定区域每日客流量 {@link DescribeZoneFlowDailyByZoneIdRequest} {@link DescribeZoneFlowDailyByZoneIdResponse} */
   DescribeZoneFlowDailyByZoneId(data: DescribeZoneFlowDailyByZoneIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneFlowDailyByZoneIdResponse>;
-  /** {@link DescribeZoneFlowGenderAvrStayTimeByZoneId 获取指定区域不同年龄段男女平均停留时间}({@link DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest 请求参数}): {@link DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse 返回参数} */
+  /** 获取指定区域不同年龄段男女平均停留时间 {@link DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest} {@link DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse} */
   DescribeZoneFlowGenderAvrStayTimeByZoneId(data: DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse>;
-  /** {@link DescribeZoneFlowGenderInfoByZoneId 获取指定区域性别占比}({@link DescribeZoneFlowGenderInfoByZoneIdRequest 请求参数}): {@link DescribeZoneFlowGenderInfoByZoneIdResponse 返回参数} */
+  /** 获取指定区域性别占比 {@link DescribeZoneFlowGenderInfoByZoneIdRequest} {@link DescribeZoneFlowGenderInfoByZoneIdResponse} */
   DescribeZoneFlowGenderInfoByZoneId(data: DescribeZoneFlowGenderInfoByZoneIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneFlowGenderInfoByZoneIdResponse>;
-  /** {@link DescribeZoneFlowHourlyByZoneId 获取指定区域分时客流量}({@link DescribeZoneFlowHourlyByZoneIdRequest 请求参数}): {@link DescribeZoneFlowHourlyByZoneIdResponse 返回参数} */
+  /** 获取指定区域分时客流量 {@link DescribeZoneFlowHourlyByZoneIdRequest} {@link DescribeZoneFlowHourlyByZoneIdResponse} */
   DescribeZoneFlowHourlyByZoneId(data: DescribeZoneFlowHourlyByZoneIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneFlowHourlyByZoneIdResponse>;
-  /** {@link DescribeZoneTrafficInfo 获取区域客流人次及停留时间}({@link DescribeZoneTrafficInfoRequest 请求参数}): {@link DescribeZoneTrafficInfoResponse 返回参数} */
+  /** 获取区域客流人次及停留时间 {@link DescribeZoneTrafficInfoRequest} {@link DescribeZoneTrafficInfoResponse} */
   DescribeZoneTrafficInfo(data: DescribeZoneTrafficInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneTrafficInfoResponse>;
-  /** {@link ModifyPersonFeatureInfo 修改顾客特征信息}({@link ModifyPersonFeatureInfoRequest 请求参数}): {@link ModifyPersonFeatureInfoResponse 返回参数} */
+  /** 修改顾客特征信息 {@link ModifyPersonFeatureInfoRequest} {@link ModifyPersonFeatureInfoResponse} */
   ModifyPersonFeatureInfo(data: ModifyPersonFeatureInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonFeatureInfoResponse>;
-  /** {@link ModifyPersonTagInfo 标记顾客身份类型}({@link ModifyPersonTagInfoRequest 请求参数}): {@link ModifyPersonTagInfoResponse 返回参数} */
+  /** 标记顾客身份类型 {@link ModifyPersonTagInfoRequest} {@link ModifyPersonTagInfoResponse} */
   ModifyPersonTagInfo(data: ModifyPersonTagInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonTagInfoResponse>;
-  /** {@link ModifyPersonType 修改顾客身份类型接口}({@link ModifyPersonTypeRequest 请求参数}): {@link ModifyPersonTypeResponse 返回参数} */
+  /** 修改顾客身份类型接口 {@link ModifyPersonTypeRequest} {@link ModifyPersonTypeResponse} */
   ModifyPersonType(data: ModifyPersonTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonTypeResponse>;
-  /** {@link RegisterCallback 门店到访通知回调地址注册}({@link RegisterCallbackRequest 请求参数}): {@link RegisterCallbackResponse 返回参数} */
+  /** 门店到访通知回调地址注册 {@link RegisterCallbackRequest} {@link RegisterCallbackResponse} */
   RegisterCallback(data: RegisterCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterCallbackResponse>;
 }
 

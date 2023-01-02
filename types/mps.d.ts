@@ -3960,7 +3960,7 @@ declare interface CreateAIAnalysisTemplateRequest {
 declare interface CreateAIAnalysisTemplateResponse {
   /** 视频内容分析模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3984,7 +3984,7 @@ declare interface CreateAIRecognitionTemplateRequest {
 declare interface CreateAIRecognitionTemplateResponse {
   /** 视频内容识别模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4006,7 +4006,7 @@ declare interface CreateAdaptiveDynamicStreamingTemplateRequest {
 declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
   /** 自适应转码模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4032,7 +4032,7 @@ declare interface CreateAnimatedGraphicsTemplateRequest {
 declare interface CreateAnimatedGraphicsTemplateResponse {
   /** 转动图模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4056,7 +4056,7 @@ declare interface CreateContentReviewTemplateRequest {
 declare interface CreateContentReviewTemplateResponse {
   /** 内容审核模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4088,7 +4088,7 @@ declare interface CreateImageSpriteTemplateRequest {
 declare interface CreateImageSpriteTemplateResponse {
   /** 雪碧图模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4110,7 +4110,7 @@ declare interface CreatePersonSampleResponse {
   Person?: AiSamplePerson;
   /** 处理失败的五官定位信息。 */
   FailFaceInfoSet?: AiSampleFailFaceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4138,7 +4138,7 @@ declare interface CreateSampleSnapshotTemplateRequest {
 declare interface CreateSampleSnapshotTemplateResponse {
   /** 采样截图模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4162,7 +4162,7 @@ declare interface CreateSnapshotByTimeOffsetTemplateRequest {
 declare interface CreateSnapshotByTimeOffsetTemplateResponse {
   /** 时间点截图模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4178,7 +4178,7 @@ declare interface CreateStreamLinkFlowRequest {
 declare interface CreateStreamLinkFlowResponse {
   /** 创建的Flow信息。 */
   Info: DescribeFlow;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4192,7 +4192,7 @@ declare interface CreateStreamLinkOutputInfoRequest {
 declare interface CreateStreamLinkOutputInfoResponse {
   /** 创建后的Output信息。 */
   Info: DescribeOutput;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4220,7 +4220,7 @@ declare interface CreateTranscodeTemplateRequest {
 declare interface CreateTranscodeTemplateResponse {
   /** 转码模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4250,7 +4250,7 @@ declare interface CreateWatermarkTemplateResponse {
   Definition: number;
   /** 水印图片地址，仅当 Type 为 image，该字段有效。 */
   ImageUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4262,7 +4262,7 @@ declare interface CreateWordSamplesRequest {
 }
 
 declare interface CreateWordSamplesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4292,7 +4292,7 @@ declare interface CreateWorkflowRequest {
 declare interface CreateWorkflowResponse {
   /** 工作流 ID。 */
   WorkflowId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4302,7 +4302,7 @@ declare interface DeleteAIAnalysisTemplateRequest {
 }
 
 declare interface DeleteAIAnalysisTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4312,7 +4312,7 @@ declare interface DeleteAIRecognitionTemplateRequest {
 }
 
 declare interface DeleteAIRecognitionTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4322,7 +4322,7 @@ declare interface DeleteAdaptiveDynamicStreamingTemplateRequest {
 }
 
 declare interface DeleteAdaptiveDynamicStreamingTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4332,7 +4332,7 @@ declare interface DeleteAnimatedGraphicsTemplateRequest {
 }
 
 declare interface DeleteAnimatedGraphicsTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4342,7 +4342,7 @@ declare interface DeleteContentReviewTemplateRequest {
 }
 
 declare interface DeleteContentReviewTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4352,7 +4352,7 @@ declare interface DeleteImageSpriteTemplateRequest {
 }
 
 declare interface DeleteImageSpriteTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4362,7 +4362,7 @@ declare interface DeletePersonSampleRequest {
 }
 
 declare interface DeletePersonSampleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4372,7 +4372,7 @@ declare interface DeleteSampleSnapshotTemplateRequest {
 }
 
 declare interface DeleteSampleSnapshotTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4382,7 +4382,7 @@ declare interface DeleteSnapshotByTimeOffsetTemplateRequest {
 }
 
 declare interface DeleteSnapshotByTimeOffsetTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4392,7 +4392,7 @@ declare interface DeleteStreamLinkFlowRequest {
 }
 
 declare interface DeleteStreamLinkFlowResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4404,7 +4404,7 @@ declare interface DeleteStreamLinkOutputRequest {
 }
 
 declare interface DeleteStreamLinkOutputResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4414,7 +4414,7 @@ declare interface DeleteTranscodeTemplateRequest {
 }
 
 declare interface DeleteTranscodeTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4424,7 +4424,7 @@ declare interface DeleteWatermarkTemplateRequest {
 }
 
 declare interface DeleteWatermarkTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4434,7 +4434,7 @@ declare interface DeleteWordSamplesRequest {
 }
 
 declare interface DeleteWordSamplesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4444,7 +4444,7 @@ declare interface DeleteWorkflowRequest {
 }
 
 declare interface DeleteWorkflowResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4464,7 +4464,7 @@ declare interface DescribeAIAnalysisTemplatesResponse {
   TotalCount: number;
   /** 视频内容分析模板详情列表。 */
   AIAnalysisTemplateSet: AIAnalysisTemplateItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4484,7 +4484,7 @@ declare interface DescribeAIRecognitionTemplatesResponse {
   TotalCount: number;
   /** 视频内容识别模板详情列表。 */
   AIRecognitionTemplateSet: AIRecognitionTemplateItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4504,7 +4504,7 @@ declare interface DescribeAdaptiveDynamicStreamingTemplatesResponse {
   TotalCount: number;
   /** 转自适应码流模板详情列表。 */
   AdaptiveDynamicStreamingTemplateSet: AdaptiveDynamicStreamingTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4524,7 +4524,7 @@ declare interface DescribeAnimatedGraphicsTemplatesResponse {
   TotalCount: number;
   /** 转动图模板详情列表。 */
   AnimatedGraphicsTemplateSet: AnimatedGraphicsTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4544,7 +4544,7 @@ declare interface DescribeContentReviewTemplatesResponse {
   TotalCount: number;
   /** 内容审核模板详情列表。 */
   ContentReviewTemplateSet: ContentReviewTemplateItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4564,7 +4564,7 @@ declare interface DescribeImageSpriteTemplatesResponse {
   TotalCount: number;
   /** 雪碧图模板详情列表。 */
   ImageSpriteTemplateSet: ImageSpriteTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4576,7 +4576,7 @@ declare interface DescribeMediaMetaDataRequest {
 declare interface DescribeMediaMetaDataResponse {
   /** 媒体元信息。 */
   MetaData?: MediaMetaData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4600,7 +4600,7 @@ declare interface DescribePersonSamplesResponse {
   TotalCount?: number;
   /** 素材信息。 */
   PersonSet?: AiSamplePerson[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4620,7 +4620,7 @@ declare interface DescribeSampleSnapshotTemplatesResponse {
   TotalCount: number;
   /** 采样截图模板详情列表。 */
   SampleSnapshotTemplateSet: SampleSnapshotTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4640,7 +4640,7 @@ declare interface DescribeSnapshotByTimeOffsetTemplatesResponse {
   TotalCount: number;
   /** 指定时间点截图模板详情列表。 */
   SnapshotByTimeOffsetTemplateSet: SnapshotByTimeOffsetTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4650,7 +4650,7 @@ declare interface DescribeStreamLinkActivateStateRequest {
 declare interface DescribeStreamLinkActivateStateResponse {
   /** 用户已激活为0，否则为非0。 */
   Status: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4684,7 +4684,7 @@ declare interface DescribeStreamLinkFlowLogsResponse {
   TotalNum: number;
   /** 总页数。 */
   TotalPage: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4708,7 +4708,7 @@ declare interface DescribeStreamLinkFlowMediaStatisticsRequest {
 declare interface DescribeStreamLinkFlowMediaStatisticsResponse {
   /** 传输流的媒体数据列表。 */
   Infos: FlowMediaInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4726,7 +4726,7 @@ declare interface DescribeStreamLinkFlowRealtimeStatusResponse {
   Timestamp: number;
   /** 实时数据信息列表。 */
   Datas: FlowRealtimeStatusItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4738,7 +4738,7 @@ declare interface DescribeStreamLinkFlowRequest {
 declare interface DescribeStreamLinkFlowResponse {
   /** 流的配置信息。 */
   Info: DescribeFlow;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4762,7 +4762,7 @@ declare interface DescribeStreamLinkFlowSRTStatisticsRequest {
 declare interface DescribeStreamLinkFlowSRTStatisticsResponse {
   /** 传输流的SRT质量数据列表。 */
   Infos: FlowSRTInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4786,7 +4786,7 @@ declare interface DescribeStreamLinkFlowStatisticsRequest {
 declare interface DescribeStreamLinkFlowStatisticsResponse {
   /** 传输流的媒体数据列表。 */
   Infos: FlowStatisticsArray[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4808,7 +4808,7 @@ declare interface DescribeStreamLinkFlowsResponse {
   TotalNum: number;
   /** 总页数。 */
   TotalPage: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4818,7 +4818,7 @@ declare interface DescribeStreamLinkRegionsRequest {
 declare interface DescribeStreamLinkRegionsResponse {
   /** 媒体传输地区信息。 */
   Info: StreamLinkRegionInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4856,7 +4856,7 @@ declare interface DescribeTaskDetailResponse {
   ExtInfo: string;
   /** 编排处理任务信息，仅当 TaskType 为 ScheduleTask，该字段有值。 */
   ScheduleTask: ScheduleTask | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4876,7 +4876,7 @@ declare interface DescribeTasksResponse {
   ScrollToken: string;
   /** 符合过滤条件的记录总数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4902,7 +4902,7 @@ declare interface DescribeTranscodeTemplatesResponse {
   TotalCount: number;
   /** 转码模板详情列表。 */
   TranscodeTemplateSet: TranscodeTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4922,7 +4922,7 @@ declare interface DescribeWatermarkTemplatesResponse {
   TotalCount: number;
   /** 水印模板详情列表。 */
   WatermarkTemplateSet: WatermarkTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4944,7 +4944,7 @@ declare interface DescribeWordSamplesResponse {
   TotalCount?: number | null;
   /** 关键词信息。 */
   WordSet?: AiSampleWord[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4964,7 +4964,7 @@ declare interface DescribeWorkflowsResponse {
   TotalCount: number;
   /** 工作流信息数组。 */
   WorkflowInfoSet: WorkflowInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4974,7 +4974,7 @@ declare interface DisableWorkflowRequest {
 }
 
 declare interface DisableWorkflowResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5000,7 +5000,7 @@ declare interface EditMediaRequest {
 declare interface EditMediaResponse {
   /** 编辑视频的任务 ID，可以通过该 ID 查询编辑任务的状态。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5010,7 +5010,7 @@ declare interface EnableWorkflowRequest {
 }
 
 declare interface EnableWorkflowResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5024,7 +5024,7 @@ declare interface ExecuteFunctionRequest {
 declare interface ExecuteFunctionResponse {
   /** 处理结果打包后的字符串，具体与后台一同协调。 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5036,7 +5036,7 @@ declare interface ManageTaskRequest {
 }
 
 declare interface ManageTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5058,7 +5058,7 @@ declare interface ModifyAIAnalysisTemplateRequest {
 }
 
 declare interface ModifyAIAnalysisTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5082,7 +5082,7 @@ declare interface ModifyAIRecognitionTemplateRequest {
 }
 
 declare interface ModifyAIRecognitionTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5104,7 +5104,7 @@ declare interface ModifyAdaptiveDynamicStreamingTemplateRequest {
 }
 
 declare interface ModifyAdaptiveDynamicStreamingTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5130,7 +5130,7 @@ declare interface ModifyAnimatedGraphicsTemplateRequest {
 }
 
 declare interface ModifyAnimatedGraphicsTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5154,7 +5154,7 @@ declare interface ModifyContentReviewTemplateRequest {
 }
 
 declare interface ModifyContentReviewTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5186,7 +5186,7 @@ declare interface ModifyImageSpriteTemplateRequest {
 }
 
 declare interface ModifyImageSpriteTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5210,7 +5210,7 @@ declare interface ModifyPersonSampleResponse {
   Person?: AiSamplePerson;
   /** 处理失败的五官信息。 */
   FailFaceInfoSet?: AiSampleFailFaceInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5238,7 +5238,7 @@ declare interface ModifySampleSnapshotTemplateRequest {
 }
 
 declare interface ModifySampleSnapshotTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5262,7 +5262,7 @@ declare interface ModifySnapshotByTimeOffsetTemplateRequest {
 }
 
 declare interface ModifySnapshotByTimeOffsetTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5274,7 +5274,7 @@ declare interface ModifyStreamLinkFlowRequest {
 }
 
 declare interface ModifyStreamLinkFlowResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5288,7 +5288,7 @@ declare interface ModifyStreamLinkInputRequest {
 declare interface ModifyStreamLinkInputResponse {
   /** 修改后的Input信息。 */
   Info: DescribeInput;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5302,7 +5302,7 @@ declare interface ModifyStreamLinkOutputInfoRequest {
 declare interface ModifyStreamLinkOutputInfoResponse {
   /** 修改后的Output配置。 */
   Info: DescribeOutput;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5330,7 +5330,7 @@ declare interface ModifyTranscodeTemplateRequest {
 }
 
 declare interface ModifyTranscodeTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5358,7 +5358,7 @@ declare interface ModifyWatermarkTemplateRequest {
 declare interface ModifyWatermarkTemplateResponse {
   /** 图片水印地址，仅当 ImageTemplate.ImageContent 非空，该字段有效。 */
   ImageUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5372,7 +5372,7 @@ declare interface ModifyWordSampleRequest {
 }
 
 declare interface ModifyWordSampleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5396,7 +5396,7 @@ declare interface ParseLiveStreamProcessNotificationResponse {
   SessionId?: string;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长1000个字符。 */
   SessionContext?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5418,7 +5418,7 @@ declare interface ParseNotificationResponse {
   SessionContext: string;
   /** 编排任务信息，仅当 EventType 为 ScheduleTask，该字段有值。 */
   ScheduleTaskEvent: ScheduleTask | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5444,7 +5444,7 @@ declare interface ProcessLiveStreamRequest {
 declare interface ProcessLiveStreamResponse {
   /** 任务 ID */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5480,7 +5480,7 @@ declare interface ProcessMediaRequest {
 declare interface ProcessMediaResponse {
   /** 任务 ID。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5496,7 +5496,7 @@ declare interface RecognizeMediaForZhiXueRequest {
 declare interface RecognizeMediaForZhiXueResponse {
   /** 任务 ID，可以通过该 ID 查询任务状态和结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5526,7 +5526,7 @@ declare interface ResetWorkflowRequest {
 }
 
 declare interface ResetWorkflowResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5536,7 +5536,7 @@ declare interface StartStreamLinkFlowRequest {
 }
 
 declare interface StartStreamLinkFlowResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5546,178 +5546,178 @@ declare interface StopStreamLinkFlowRequest {
 }
 
 declare interface StopStreamLinkFlowResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Mps 媒体处理} */
 declare interface Mps {
   (): Versions;
-  /** {@link CreateAIAnalysisTemplate 创建内容分析模板}({@link CreateAIAnalysisTemplateRequest 请求参数}): {@link CreateAIAnalysisTemplateResponse 返回参数} */
+  /** 创建内容分析模板 {@link CreateAIAnalysisTemplateRequest} {@link CreateAIAnalysisTemplateResponse} */
   CreateAIAnalysisTemplate(data?: CreateAIAnalysisTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIAnalysisTemplateResponse>;
-  /** {@link CreateAIRecognitionTemplate 创建内容识别模板}({@link CreateAIRecognitionTemplateRequest 请求参数}): {@link CreateAIRecognitionTemplateResponse 返回参数} */
+  /** 创建内容识别模板 {@link CreateAIRecognitionTemplateRequest} {@link CreateAIRecognitionTemplateResponse} */
   CreateAIRecognitionTemplate(data?: CreateAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIRecognitionTemplateResponse>;
-  /** {@link CreateAdaptiveDynamicStreamingTemplate 创建转自适应码流模板}({@link CreateAdaptiveDynamicStreamingTemplateRequest 请求参数}): {@link CreateAdaptiveDynamicStreamingTemplateResponse 返回参数} */
+  /** 创建转自适应码流模板 {@link CreateAdaptiveDynamicStreamingTemplateRequest} {@link CreateAdaptiveDynamicStreamingTemplateResponse} */
   CreateAdaptiveDynamicStreamingTemplate(data: CreateAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdaptiveDynamicStreamingTemplateResponse>;
-  /** {@link CreateAnimatedGraphicsTemplate 创建转动图模板}({@link CreateAnimatedGraphicsTemplateRequest 请求参数}): {@link CreateAnimatedGraphicsTemplateResponse 返回参数} */
+  /** 创建转动图模板 {@link CreateAnimatedGraphicsTemplateRequest} {@link CreateAnimatedGraphicsTemplateResponse} */
   CreateAnimatedGraphicsTemplate(data: CreateAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAnimatedGraphicsTemplateResponse>;
-  /** {@link CreateContentReviewTemplate 创建内容审核模板}({@link CreateContentReviewTemplateRequest 请求参数}): {@link CreateContentReviewTemplateResponse 返回参数} */
+  /** 创建内容审核模板 {@link CreateContentReviewTemplateRequest} {@link CreateContentReviewTemplateResponse} */
   CreateContentReviewTemplate(data?: CreateContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContentReviewTemplateResponse>;
-  /** {@link CreateImageSpriteTemplate 创建雪碧图模板}({@link CreateImageSpriteTemplateRequest 请求参数}): {@link CreateImageSpriteTemplateResponse 返回参数} */
+  /** 创建雪碧图模板 {@link CreateImageSpriteTemplateRequest} {@link CreateImageSpriteTemplateResponse} */
   CreateImageSpriteTemplate(data: CreateImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageSpriteTemplateResponse>;
-  /** {@link CreatePersonSample 创建素材样本}({@link CreatePersonSampleRequest 请求参数}): {@link CreatePersonSampleResponse 返回参数} */
+  /** 创建素材样本 {@link CreatePersonSampleRequest} {@link CreatePersonSampleResponse} */
   CreatePersonSample(data: CreatePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonSampleResponse>;
-  /** {@link CreateSampleSnapshotTemplate 创建采样截图模板}({@link CreateSampleSnapshotTemplateRequest 请求参数}): {@link CreateSampleSnapshotTemplateResponse 返回参数} */
+  /** 创建采样截图模板 {@link CreateSampleSnapshotTemplateRequest} {@link CreateSampleSnapshotTemplateResponse} */
   CreateSampleSnapshotTemplate(data: CreateSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSampleSnapshotTemplateResponse>;
-  /** {@link CreateSnapshotByTimeOffsetTemplate 创建指定时间点截图模板}({@link CreateSnapshotByTimeOffsetTemplateRequest 请求参数}): {@link CreateSnapshotByTimeOffsetTemplateResponse 返回参数} */
+  /** 创建指定时间点截图模板 {@link CreateSnapshotByTimeOffsetTemplateRequest} {@link CreateSnapshotByTimeOffsetTemplateResponse} */
   CreateSnapshotByTimeOffsetTemplate(data?: CreateSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotByTimeOffsetTemplateResponse>;
-  /** {@link CreateStreamLinkFlow 创建媒体传输流}({@link CreateStreamLinkFlowRequest 请求参数}): {@link CreateStreamLinkFlowResponse 返回参数} */
+  /** 创建媒体传输流 {@link CreateStreamLinkFlowRequest} {@link CreateStreamLinkFlowResponse} */
   CreateStreamLinkFlow(data: CreateStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamLinkFlowResponse>;
-  /** {@link CreateStreamLinkOutputInfo 创建媒体传输的输出信息}({@link CreateStreamLinkOutputInfoRequest 请求参数}): {@link CreateStreamLinkOutputInfoResponse 返回参数} */
+  /** 创建媒体传输的输出信息 {@link CreateStreamLinkOutputInfoRequest} {@link CreateStreamLinkOutputInfoResponse} */
   CreateStreamLinkOutputInfo(data: CreateStreamLinkOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamLinkOutputInfoResponse>;
-  /** {@link CreateTranscodeTemplate 创建转码模板}({@link CreateTranscodeTemplateRequest 请求参数}): {@link CreateTranscodeTemplateResponse 返回参数} */
+  /** 创建转码模板 {@link CreateTranscodeTemplateRequest} {@link CreateTranscodeTemplateResponse} */
   CreateTranscodeTemplate(data: CreateTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTranscodeTemplateResponse>;
-  /** {@link CreateWatermarkTemplate 创建水印模板}({@link CreateWatermarkTemplateRequest 请求参数}): {@link CreateWatermarkTemplateResponse 返回参数} */
+  /** 创建水印模板 {@link CreateWatermarkTemplateRequest} {@link CreateWatermarkTemplateResponse} */
   CreateWatermarkTemplate(data: CreateWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWatermarkTemplateResponse>;
-  /** {@link CreateWordSamples 创建关键词样本}({@link CreateWordSamplesRequest 请求参数}): {@link CreateWordSamplesResponse 返回参数} */
+  /** 创建关键词样本 {@link CreateWordSamplesRequest} {@link CreateWordSamplesResponse} */
   CreateWordSamples(data: CreateWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWordSamplesResponse>;
-  /** {@link CreateWorkflow 创建工作流}({@link CreateWorkflowRequest 请求参数}): {@link CreateWorkflowResponse 返回参数} */
+  /** 创建工作流 {@link CreateWorkflowRequest} {@link CreateWorkflowResponse} */
   CreateWorkflow(data: CreateWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowResponse>;
-  /** {@link DeleteAIAnalysisTemplate 删除内容分析模板}({@link DeleteAIAnalysisTemplateRequest 请求参数}): {@link DeleteAIAnalysisTemplateResponse 返回参数} */
+  /** 删除内容分析模板 {@link DeleteAIAnalysisTemplateRequest} {@link DeleteAIAnalysisTemplateResponse} */
   DeleteAIAnalysisTemplate(data: DeleteAIAnalysisTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAIAnalysisTemplateResponse>;
-  /** {@link DeleteAIRecognitionTemplate 删除内容识别模板}({@link DeleteAIRecognitionTemplateRequest 请求参数}): {@link DeleteAIRecognitionTemplateResponse 返回参数} */
+  /** 删除内容识别模板 {@link DeleteAIRecognitionTemplateRequest} {@link DeleteAIRecognitionTemplateResponse} */
   DeleteAIRecognitionTemplate(data: DeleteAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAIRecognitionTemplateResponse>;
-  /** {@link DeleteAdaptiveDynamicStreamingTemplate 删除转自适应码流模板}({@link DeleteAdaptiveDynamicStreamingTemplateRequest 请求参数}): {@link DeleteAdaptiveDynamicStreamingTemplateResponse 返回参数} */
+  /** 删除转自适应码流模板 {@link DeleteAdaptiveDynamicStreamingTemplateRequest} {@link DeleteAdaptiveDynamicStreamingTemplateResponse} */
   DeleteAdaptiveDynamicStreamingTemplate(data: DeleteAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAdaptiveDynamicStreamingTemplateResponse>;
-  /** {@link DeleteAnimatedGraphicsTemplate 删除转动图模板}({@link DeleteAnimatedGraphicsTemplateRequest 请求参数}): {@link DeleteAnimatedGraphicsTemplateResponse 返回参数} */
+  /** 删除转动图模板 {@link DeleteAnimatedGraphicsTemplateRequest} {@link DeleteAnimatedGraphicsTemplateResponse} */
   DeleteAnimatedGraphicsTemplate(data: DeleteAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAnimatedGraphicsTemplateResponse>;
-  /** {@link DeleteContentReviewTemplate 删除内容审核模板}({@link DeleteContentReviewTemplateRequest 请求参数}): {@link DeleteContentReviewTemplateResponse 返回参数} */
+  /** 删除内容审核模板 {@link DeleteContentReviewTemplateRequest} {@link DeleteContentReviewTemplateResponse} */
   DeleteContentReviewTemplate(data: DeleteContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteContentReviewTemplateResponse>;
-  /** {@link DeleteImageSpriteTemplate 删除雪碧图模板}({@link DeleteImageSpriteTemplateRequest 请求参数}): {@link DeleteImageSpriteTemplateResponse 返回参数} */
+  /** 删除雪碧图模板 {@link DeleteImageSpriteTemplateRequest} {@link DeleteImageSpriteTemplateResponse} */
   DeleteImageSpriteTemplate(data: DeleteImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageSpriteTemplateResponse>;
-  /** {@link DeletePersonSample 删除素材样本}({@link DeletePersonSampleRequest 请求参数}): {@link DeletePersonSampleResponse 返回参数} */
+  /** 删除素材样本 {@link DeletePersonSampleRequest} {@link DeletePersonSampleResponse} */
   DeletePersonSample(data: DeletePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonSampleResponse>;
-  /** {@link DeleteSampleSnapshotTemplate 删除采样截图模板}({@link DeleteSampleSnapshotTemplateRequest 请求参数}): {@link DeleteSampleSnapshotTemplateResponse 返回参数} */
+  /** 删除采样截图模板 {@link DeleteSampleSnapshotTemplateRequest} {@link DeleteSampleSnapshotTemplateResponse} */
   DeleteSampleSnapshotTemplate(data: DeleteSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSampleSnapshotTemplateResponse>;
-  /** {@link DeleteSnapshotByTimeOffsetTemplate 删除指定时间点截图模板}({@link DeleteSnapshotByTimeOffsetTemplateRequest 请求参数}): {@link DeleteSnapshotByTimeOffsetTemplateResponse 返回参数} */
+  /** 删除指定时间点截图模板 {@link DeleteSnapshotByTimeOffsetTemplateRequest} {@link DeleteSnapshotByTimeOffsetTemplateResponse} */
   DeleteSnapshotByTimeOffsetTemplate(data: DeleteSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotByTimeOffsetTemplateResponse>;
-  /** {@link DeleteStreamLinkFlow 删除媒体传输流}({@link DeleteStreamLinkFlowRequest 请求参数}): {@link DeleteStreamLinkFlowResponse 返回参数} */
+  /** 删除媒体传输流 {@link DeleteStreamLinkFlowRequest} {@link DeleteStreamLinkFlowResponse} */
   DeleteStreamLinkFlow(data: DeleteStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamLinkFlowResponse>;
-  /** {@link DeleteStreamLinkOutput 删除媒体传输输出}({@link DeleteStreamLinkOutputRequest 请求参数}): {@link DeleteStreamLinkOutputResponse 返回参数} */
+  /** 删除媒体传输输出 {@link DeleteStreamLinkOutputRequest} {@link DeleteStreamLinkOutputResponse} */
   DeleteStreamLinkOutput(data: DeleteStreamLinkOutputRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamLinkOutputResponse>;
-  /** {@link DeleteTranscodeTemplate 删除转码模板}({@link DeleteTranscodeTemplateRequest 请求参数}): {@link DeleteTranscodeTemplateResponse 返回参数} */
+  /** 删除转码模板 {@link DeleteTranscodeTemplateRequest} {@link DeleteTranscodeTemplateResponse} */
   DeleteTranscodeTemplate(data: DeleteTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTranscodeTemplateResponse>;
-  /** {@link DeleteWatermarkTemplate 删除水印模板}({@link DeleteWatermarkTemplateRequest 请求参数}): {@link DeleteWatermarkTemplateResponse 返回参数} */
+  /** 删除水印模板 {@link DeleteWatermarkTemplateRequest} {@link DeleteWatermarkTemplateResponse} */
   DeleteWatermarkTemplate(data: DeleteWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWatermarkTemplateResponse>;
-  /** {@link DeleteWordSamples 删除关键词样本}({@link DeleteWordSamplesRequest 请求参数}): {@link DeleteWordSamplesResponse 返回参数} */
+  /** 删除关键词样本 {@link DeleteWordSamplesRequest} {@link DeleteWordSamplesResponse} */
   DeleteWordSamples(data: DeleteWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWordSamplesResponse>;
-  /** {@link DeleteWorkflow 删除工作流}({@link DeleteWorkflowRequest 请求参数}): {@link DeleteWorkflowResponse 返回参数} */
+  /** 删除工作流 {@link DeleteWorkflowRequest} {@link DeleteWorkflowResponse} */
   DeleteWorkflow(data: DeleteWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkflowResponse>;
-  /** {@link DescribeAIAnalysisTemplates 获取内容分析模板列表}({@link DescribeAIAnalysisTemplatesRequest 请求参数}): {@link DescribeAIAnalysisTemplatesResponse 返回参数} */
+  /** 获取内容分析模板列表 {@link DescribeAIAnalysisTemplatesRequest} {@link DescribeAIAnalysisTemplatesResponse} */
   DescribeAIAnalysisTemplates(data?: DescribeAIAnalysisTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAnalysisTemplatesResponse>;
-  /** {@link DescribeAIRecognitionTemplates 获取内容识别模板列表}({@link DescribeAIRecognitionTemplatesRequest 请求参数}): {@link DescribeAIRecognitionTemplatesResponse 返回参数} */
+  /** 获取内容识别模板列表 {@link DescribeAIRecognitionTemplatesRequest} {@link DescribeAIRecognitionTemplatesResponse} */
   DescribeAIRecognitionTemplates(data?: DescribeAIRecognitionTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIRecognitionTemplatesResponse>;
-  /** {@link DescribeAdaptiveDynamicStreamingTemplates 获取转自适应码流模板列表}({@link DescribeAdaptiveDynamicStreamingTemplatesRequest 请求参数}): {@link DescribeAdaptiveDynamicStreamingTemplatesResponse 返回参数} */
+  /** 获取转自适应码流模板列表 {@link DescribeAdaptiveDynamicStreamingTemplatesRequest} {@link DescribeAdaptiveDynamicStreamingTemplatesResponse} */
   DescribeAdaptiveDynamicStreamingTemplates(data?: DescribeAdaptiveDynamicStreamingTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAdaptiveDynamicStreamingTemplatesResponse>;
-  /** {@link DescribeAnimatedGraphicsTemplates 获取转动图模板列表}({@link DescribeAnimatedGraphicsTemplatesRequest 请求参数}): {@link DescribeAnimatedGraphicsTemplatesResponse 返回参数} */
+  /** 获取转动图模板列表 {@link DescribeAnimatedGraphicsTemplatesRequest} {@link DescribeAnimatedGraphicsTemplatesResponse} */
   DescribeAnimatedGraphicsTemplates(data?: DescribeAnimatedGraphicsTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnimatedGraphicsTemplatesResponse>;
-  /** {@link DescribeContentReviewTemplates 获取智能审核模板列表}({@link DescribeContentReviewTemplatesRequest 请求参数}): {@link DescribeContentReviewTemplatesResponse 返回参数} */
+  /** 获取智能审核模板列表 {@link DescribeContentReviewTemplatesRequest} {@link DescribeContentReviewTemplatesResponse} */
   DescribeContentReviewTemplates(data?: DescribeContentReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentReviewTemplatesResponse>;
-  /** {@link DescribeImageSpriteTemplates 获取雪碧图模板列表}({@link DescribeImageSpriteTemplatesRequest 请求参数}): {@link DescribeImageSpriteTemplatesResponse 返回参数} */
+  /** 获取雪碧图模板列表 {@link DescribeImageSpriteTemplatesRequest} {@link DescribeImageSpriteTemplatesResponse} */
   DescribeImageSpriteTemplates(data?: DescribeImageSpriteTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSpriteTemplatesResponse>;
-  /** {@link DescribeMediaMetaData 获取媒体元信息}({@link DescribeMediaMetaDataRequest 请求参数}): {@link DescribeMediaMetaDataResponse 返回参数} */
+  /** 获取媒体元信息 {@link DescribeMediaMetaDataRequest} {@link DescribeMediaMetaDataResponse} */
   DescribeMediaMetaData(data: DescribeMediaMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaMetaDataResponse>;
-  /** {@link DescribePersonSamples 获取素材样本列表}({@link DescribePersonSamplesRequest 请求参数}): {@link DescribePersonSamplesResponse 返回参数} */
+  /** 获取素材样本列表 {@link DescribePersonSamplesRequest} {@link DescribePersonSamplesResponse} */
   DescribePersonSamples(data?: DescribePersonSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonSamplesResponse>;
-  /** {@link DescribeSampleSnapshotTemplates 获取采样截图模板列表}({@link DescribeSampleSnapshotTemplatesRequest 请求参数}): {@link DescribeSampleSnapshotTemplatesResponse 返回参数} */
+  /** 获取采样截图模板列表 {@link DescribeSampleSnapshotTemplatesRequest} {@link DescribeSampleSnapshotTemplatesResponse} */
   DescribeSampleSnapshotTemplates(data?: DescribeSampleSnapshotTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleSnapshotTemplatesResponse>;
-  /** {@link DescribeSnapshotByTimeOffsetTemplates 获取指定时间点截图模板列表}({@link DescribeSnapshotByTimeOffsetTemplatesRequest 请求参数}): {@link DescribeSnapshotByTimeOffsetTemplatesResponse 返回参数} */
+  /** 获取指定时间点截图模板列表 {@link DescribeSnapshotByTimeOffsetTemplatesRequest} {@link DescribeSnapshotByTimeOffsetTemplatesResponse} */
   DescribeSnapshotByTimeOffsetTemplates(data?: DescribeSnapshotByTimeOffsetTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotByTimeOffsetTemplatesResponse>;
-  /** {@link DescribeStreamLinkActivateState 查询媒体传输开通状态}({@link DescribeStreamLinkActivateStateRequest 请求参数}): {@link DescribeStreamLinkActivateStateResponse 返回参数} */
+  /** 查询媒体传输开通状态 {@link DescribeStreamLinkActivateStateRequest} {@link DescribeStreamLinkActivateStateResponse} */
   DescribeStreamLinkActivateState(data?: DescribeStreamLinkActivateStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkActivateStateResponse>;
-  /** {@link DescribeStreamLinkFlow 查询媒体输入流}({@link DescribeStreamLinkFlowRequest 请求参数}): {@link DescribeStreamLinkFlowResponse 返回参数} */
+  /** 查询媒体输入流 {@link DescribeStreamLinkFlowRequest} {@link DescribeStreamLinkFlowResponse} */
   DescribeStreamLinkFlow(data: DescribeStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkFlowResponse>;
-  /** {@link DescribeStreamLinkFlowLogs 查询传输流的日志}({@link DescribeStreamLinkFlowLogsRequest 请求参数}): {@link DescribeStreamLinkFlowLogsResponse 返回参数} */
+  /** 查询传输流的日志 {@link DescribeStreamLinkFlowLogsRequest} {@link DescribeStreamLinkFlowLogsResponse} */
   DescribeStreamLinkFlowLogs(data: DescribeStreamLinkFlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkFlowLogsResponse>;
-  /** {@link DescribeStreamLinkFlowMediaStatistics 查询媒体质量数据}({@link DescribeStreamLinkFlowMediaStatisticsRequest 请求参数}): {@link DescribeStreamLinkFlowMediaStatisticsResponse 返回参数} */
+  /** 查询媒体质量数据 {@link DescribeStreamLinkFlowMediaStatisticsRequest} {@link DescribeStreamLinkFlowMediaStatisticsResponse} */
   DescribeStreamLinkFlowMediaStatistics(data: DescribeStreamLinkFlowMediaStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkFlowMediaStatisticsResponse>;
-  /** {@link DescribeStreamLinkFlowRealtimeStatus 查询流实时状态接口}({@link DescribeStreamLinkFlowRealtimeStatusRequest 请求参数}): {@link DescribeStreamLinkFlowRealtimeStatusResponse 返回参数} */
+  /** 查询流实时状态接口 {@link DescribeStreamLinkFlowRealtimeStatusRequest} {@link DescribeStreamLinkFlowRealtimeStatusResponse} */
   DescribeStreamLinkFlowRealtimeStatus(data: DescribeStreamLinkFlowRealtimeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkFlowRealtimeStatusResponse>;
-  /** {@link DescribeStreamLinkFlowSRTStatistics 查询SRT数据信息}({@link DescribeStreamLinkFlowSRTStatisticsRequest 请求参数}): {@link DescribeStreamLinkFlowSRTStatisticsResponse 返回参数} */
+  /** 查询SRT数据信息 {@link DescribeStreamLinkFlowSRTStatisticsRequest} {@link DescribeStreamLinkFlowSRTStatisticsResponse} */
   DescribeStreamLinkFlowSRTStatistics(data: DescribeStreamLinkFlowSRTStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkFlowSRTStatisticsResponse>;
-  /** {@link DescribeStreamLinkFlowStatistics 查询流的媒体质量数据}({@link DescribeStreamLinkFlowStatisticsRequest 请求参数}): {@link DescribeStreamLinkFlowStatisticsResponse 返回参数} */
+  /** 查询流的媒体质量数据 {@link DescribeStreamLinkFlowStatisticsRequest} {@link DescribeStreamLinkFlowStatisticsResponse} */
   DescribeStreamLinkFlowStatistics(data: DescribeStreamLinkFlowStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkFlowStatisticsResponse>;
-  /** {@link DescribeStreamLinkFlows 批量查询媒体输入流}({@link DescribeStreamLinkFlowsRequest 请求参数}): {@link DescribeStreamLinkFlowsResponse 返回参数} */
+  /** 批量查询媒体输入流 {@link DescribeStreamLinkFlowsRequest} {@link DescribeStreamLinkFlowsResponse} */
   DescribeStreamLinkFlows(data?: DescribeStreamLinkFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkFlowsResponse>;
-  /** {@link DescribeStreamLinkRegions 查询媒体传输地区}({@link DescribeStreamLinkRegionsRequest 请求参数}): {@link DescribeStreamLinkRegionsResponse 返回参数} */
+  /** 查询媒体传输地区 {@link DescribeStreamLinkRegionsRequest} {@link DescribeStreamLinkRegionsResponse} */
   DescribeStreamLinkRegions(data?: DescribeStreamLinkRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkRegionsResponse>;
-  /** {@link DescribeTaskDetail 查询任务详情}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
+  /** 查询任务详情 {@link DescribeTaskDetailRequest} {@link DescribeTaskDetailResponse} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** {@link DescribeTasks 获取任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
+  /** 获取任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** {@link DescribeTranscodeTemplates 获取转码模板列表}({@link DescribeTranscodeTemplatesRequest 请求参数}): {@link DescribeTranscodeTemplatesResponse 返回参数} */
+  /** 获取转码模板列表 {@link DescribeTranscodeTemplatesRequest} {@link DescribeTranscodeTemplatesResponse} */
   DescribeTranscodeTemplates(data?: DescribeTranscodeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeTemplatesResponse>;
-  /** {@link DescribeWatermarkTemplates 获取水印模板列表}({@link DescribeWatermarkTemplatesRequest 请求参数}): {@link DescribeWatermarkTemplatesResponse 返回参数} */
+  /** 获取水印模板列表 {@link DescribeWatermarkTemplatesRequest} {@link DescribeWatermarkTemplatesResponse} */
   DescribeWatermarkTemplates(data?: DescribeWatermarkTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWatermarkTemplatesResponse>;
-  /** {@link DescribeWordSamples 获取关键词样本列表}({@link DescribeWordSamplesRequest 请求参数}): {@link DescribeWordSamplesResponse 返回参数} */
+  /** 获取关键词样本列表 {@link DescribeWordSamplesRequest} {@link DescribeWordSamplesResponse} */
   DescribeWordSamples(data?: DescribeWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWordSamplesResponse>;
-  /** {@link DescribeWorkflows 获取工作流列表}({@link DescribeWorkflowsRequest 请求参数}): {@link DescribeWorkflowsResponse 返回参数} */
+  /** 获取工作流列表 {@link DescribeWorkflowsRequest} {@link DescribeWorkflowsResponse} */
   DescribeWorkflows(data?: DescribeWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowsResponse>;
-  /** {@link DisableWorkflow 禁用工作流}({@link DisableWorkflowRequest 请求参数}): {@link DisableWorkflowResponse 返回参数} */
+  /** 禁用工作流 {@link DisableWorkflowRequest} {@link DisableWorkflowResponse} */
   DisableWorkflow(data: DisableWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<DisableWorkflowResponse>;
-  /** {@link EditMedia 编辑视频}({@link EditMediaRequest 请求参数}): {@link EditMediaResponse 返回参数} */
+  /** 编辑视频 {@link EditMediaRequest} {@link EditMediaResponse} */
   EditMedia(data: EditMediaRequest, config?: AxiosRequestConfig): AxiosPromise<EditMediaResponse>;
-  /** {@link EnableWorkflow 启用工作流}({@link EnableWorkflowRequest 请求参数}): {@link EnableWorkflowResponse 返回参数} */
+  /** 启用工作流 {@link EnableWorkflowRequest} {@link EnableWorkflowResponse} */
   EnableWorkflow(data: EnableWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<EnableWorkflowResponse>;
-  /** {@link ExecuteFunction 执行定制 API}({@link ExecuteFunctionRequest 请求参数}): {@link ExecuteFunctionResponse 返回参数} */
+  /** 执行定制 API {@link ExecuteFunctionRequest} {@link ExecuteFunctionResponse} */
   ExecuteFunction(data: ExecuteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteFunctionResponse>;
-  /** {@link ManageTask 任务管理}({@link ManageTaskRequest 请求参数}): {@link ManageTaskResponse 返回参数} */
+  /** 任务管理 {@link ManageTaskRequest} {@link ManageTaskResponse} */
   ManageTask(data: ManageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ManageTaskResponse>;
-  /** {@link ModifyAIAnalysisTemplate 修改内容分析模板}({@link ModifyAIAnalysisTemplateRequest 请求参数}): {@link ModifyAIAnalysisTemplateResponse 返回参数} */
+  /** 修改内容分析模板 {@link ModifyAIAnalysisTemplateRequest} {@link ModifyAIAnalysisTemplateResponse} */
   ModifyAIAnalysisTemplate(data: ModifyAIAnalysisTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAIAnalysisTemplateResponse>;
-  /** {@link ModifyAIRecognitionTemplate 修改内容识别模板}({@link ModifyAIRecognitionTemplateRequest 请求参数}): {@link ModifyAIRecognitionTemplateResponse 返回参数} */
+  /** 修改内容识别模板 {@link ModifyAIRecognitionTemplateRequest} {@link ModifyAIRecognitionTemplateResponse} */
   ModifyAIRecognitionTemplate(data: ModifyAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAIRecognitionTemplateResponse>;
-  /** {@link ModifyAdaptiveDynamicStreamingTemplate 修改转自适应码流模板}({@link ModifyAdaptiveDynamicStreamingTemplateRequest 请求参数}): {@link ModifyAdaptiveDynamicStreamingTemplateResponse 返回参数} */
+  /** 修改转自适应码流模板 {@link ModifyAdaptiveDynamicStreamingTemplateRequest} {@link ModifyAdaptiveDynamicStreamingTemplateResponse} */
   ModifyAdaptiveDynamicStreamingTemplate(data: ModifyAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAdaptiveDynamicStreamingTemplateResponse>;
-  /** {@link ModifyAnimatedGraphicsTemplate 修改转动图模板}({@link ModifyAnimatedGraphicsTemplateRequest 请求参数}): {@link ModifyAnimatedGraphicsTemplateResponse 返回参数} */
+  /** 修改转动图模板 {@link ModifyAnimatedGraphicsTemplateRequest} {@link ModifyAnimatedGraphicsTemplateResponse} */
   ModifyAnimatedGraphicsTemplate(data: ModifyAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAnimatedGraphicsTemplateResponse>;
-  /** {@link ModifyContentReviewTemplate 修改内容审核模板}({@link ModifyContentReviewTemplateRequest 请求参数}): {@link ModifyContentReviewTemplateResponse 返回参数} */
+  /** 修改内容审核模板 {@link ModifyContentReviewTemplateRequest} {@link ModifyContentReviewTemplateResponse} */
   ModifyContentReviewTemplate(data: ModifyContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContentReviewTemplateResponse>;
-  /** {@link ModifyImageSpriteTemplate 修改雪碧图模板}({@link ModifyImageSpriteTemplateRequest 请求参数}): {@link ModifyImageSpriteTemplateResponse 返回参数} */
+  /** 修改雪碧图模板 {@link ModifyImageSpriteTemplateRequest} {@link ModifyImageSpriteTemplateResponse} */
   ModifyImageSpriteTemplate(data: ModifyImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageSpriteTemplateResponse>;
-  /** {@link ModifyPersonSample 修改素材样本}({@link ModifyPersonSampleRequest 请求参数}): {@link ModifyPersonSampleResponse 返回参数} */
+  /** 修改素材样本 {@link ModifyPersonSampleRequest} {@link ModifyPersonSampleResponse} */
   ModifyPersonSample(data: ModifyPersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonSampleResponse>;
-  /** {@link ModifySampleSnapshotTemplate 修改采样截图模板}({@link ModifySampleSnapshotTemplateRequest 请求参数}): {@link ModifySampleSnapshotTemplateResponse 返回参数} */
+  /** 修改采样截图模板 {@link ModifySampleSnapshotTemplateRequest} {@link ModifySampleSnapshotTemplateResponse} */
   ModifySampleSnapshotTemplate(data: ModifySampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySampleSnapshotTemplateResponse>;
-  /** {@link ModifySnapshotByTimeOffsetTemplate 修改指定时间点截图模板}({@link ModifySnapshotByTimeOffsetTemplateRequest 请求参数}): {@link ModifySnapshotByTimeOffsetTemplateResponse 返回参数} */
+  /** 修改指定时间点截图模板 {@link ModifySnapshotByTimeOffsetTemplateRequest} {@link ModifySnapshotByTimeOffsetTemplateResponse} */
   ModifySnapshotByTimeOffsetTemplate(data: ModifySnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotByTimeOffsetTemplateResponse>;
-  /** {@link ModifyStreamLinkFlow 修改媒体传输流}({@link ModifyStreamLinkFlowRequest 请求参数}): {@link ModifyStreamLinkFlowResponse 返回参数} */
+  /** 修改媒体传输流 {@link ModifyStreamLinkFlowRequest} {@link ModifyStreamLinkFlowResponse} */
   ModifyStreamLinkFlow(data: ModifyStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkFlowResponse>;
-  /** {@link ModifyStreamLinkInput 修改媒体传输输入}({@link ModifyStreamLinkInputRequest 请求参数}): {@link ModifyStreamLinkInputResponse 返回参数} */
+  /** 修改媒体传输输入 {@link ModifyStreamLinkInputRequest} {@link ModifyStreamLinkInputResponse} */
   ModifyStreamLinkInput(data: ModifyStreamLinkInputRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkInputResponse>;
-  /** {@link ModifyStreamLinkOutputInfo 修改媒体传输的输出信息}({@link ModifyStreamLinkOutputInfoRequest 请求参数}): {@link ModifyStreamLinkOutputInfoResponse 返回参数} */
+  /** 修改媒体传输的输出信息 {@link ModifyStreamLinkOutputInfoRequest} {@link ModifyStreamLinkOutputInfoResponse} */
   ModifyStreamLinkOutputInfo(data: ModifyStreamLinkOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkOutputInfoResponse>;
-  /** {@link ModifyTranscodeTemplate 修改转码模板}({@link ModifyTranscodeTemplateRequest 请求参数}): {@link ModifyTranscodeTemplateResponse 返回参数} */
+  /** 修改转码模板 {@link ModifyTranscodeTemplateRequest} {@link ModifyTranscodeTemplateResponse} */
   ModifyTranscodeTemplate(data: ModifyTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTranscodeTemplateResponse>;
-  /** {@link ModifyWatermarkTemplate 修改水印模板}({@link ModifyWatermarkTemplateRequest 请求参数}): {@link ModifyWatermarkTemplateResponse 返回参数} */
+  /** 修改水印模板 {@link ModifyWatermarkTemplateRequest} {@link ModifyWatermarkTemplateResponse} */
   ModifyWatermarkTemplate(data: ModifyWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWatermarkTemplateResponse>;
-  /** {@link ModifyWordSample 修改关键词样本}({@link ModifyWordSampleRequest 请求参数}): {@link ModifyWordSampleResponse 返回参数} */
+  /** 修改关键词样本 {@link ModifyWordSampleRequest} {@link ModifyWordSampleResponse} */
   ModifyWordSample(data: ModifyWordSampleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWordSampleResponse>;
-  /** {@link ParseLiveStreamProcessNotification 解析直播流处理结果}({@link ParseLiveStreamProcessNotificationRequest 请求参数}): {@link ParseLiveStreamProcessNotificationResponse 返回参数} */
+  /** 解析直播流处理结果 {@link ParseLiveStreamProcessNotificationRequest} {@link ParseLiveStreamProcessNotificationResponse} */
   ParseLiveStreamProcessNotification(data: ParseLiveStreamProcessNotificationRequest, config?: AxiosRequestConfig): AxiosPromise<ParseLiveStreamProcessNotificationResponse>;
-  /** {@link ParseNotification 解析事件通知}({@link ParseNotificationRequest 请求参数}): {@link ParseNotificationResponse 返回参数} */
+  /** 解析事件通知 {@link ParseNotificationRequest} {@link ParseNotificationResponse} */
   ParseNotification(data: ParseNotificationRequest, config?: AxiosRequestConfig): AxiosPromise<ParseNotificationResponse>;
-  /** {@link ProcessLiveStream 对直播流发起处理}({@link ProcessLiveStreamRequest 请求参数}): {@link ProcessLiveStreamResponse 返回参数} */
+  /** 对直播流发起处理 {@link ProcessLiveStreamRequest} {@link ProcessLiveStreamResponse} */
   ProcessLiveStream(data: ProcessLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessLiveStreamResponse>;
-  /** {@link ProcessMedia 发起媒体处理}({@link ProcessMediaRequest 请求参数}): {@link ProcessMediaResponse 返回参数} */
+  /** 发起媒体处理 {@link ProcessMediaRequest} {@link ProcessMediaResponse} */
   ProcessMedia(data: ProcessMediaRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessMediaResponse>;
-  /** {@link RecognizeMediaForZhiXue 智学智能媒体识别}({@link RecognizeMediaForZhiXueRequest 请求参数}): {@link RecognizeMediaForZhiXueResponse 返回参数} */
+  /** 智学智能媒体识别 {@link RecognizeMediaForZhiXueRequest} {@link RecognizeMediaForZhiXueResponse} */
   RecognizeMediaForZhiXue(data: RecognizeMediaForZhiXueRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeMediaForZhiXueResponse>;
-  /** {@link ResetWorkflow 重设工作流}({@link ResetWorkflowRequest 请求参数}): {@link ResetWorkflowResponse 返回参数} */
+  /** 重设工作流 {@link ResetWorkflowRequest} {@link ResetWorkflowResponse} */
   ResetWorkflow(data: ResetWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<ResetWorkflowResponse>;
-  /** {@link StartStreamLinkFlow 开启媒体传输流}({@link StartStreamLinkFlowRequest 请求参数}): {@link StartStreamLinkFlowResponse 返回参数} */
+  /** 开启媒体传输流 {@link StartStreamLinkFlowRequest} {@link StartStreamLinkFlowResponse} */
   StartStreamLinkFlow(data: StartStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StartStreamLinkFlowResponse>;
-  /** {@link StopStreamLinkFlow 停止媒体传输流}({@link StopStreamLinkFlowRequest 请求参数}): {@link StopStreamLinkFlowResponse 返回参数} */
+  /** 停止媒体传输流 {@link StopStreamLinkFlowRequest} {@link StopStreamLinkFlowResponse} */
   StopStreamLinkFlow(data: StopStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StopStreamLinkFlowResponse>;
 }
 

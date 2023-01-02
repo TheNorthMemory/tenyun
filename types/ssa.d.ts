@@ -916,7 +916,7 @@ declare interface DescribeAssetDetailRequest {
 declare interface DescribeAssetDetailResponse {
   /** 资产详情 */
   Data: AssetDetail | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -932,7 +932,7 @@ declare interface DescribeAssetListResponse {
   AggregationData: AggregationObj[];
   /** 命名空间数据 */
   NamespaceData: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -948,7 +948,7 @@ declare interface DescribeAssetsMappingListResponse {
   TotalCount?: number;
   /** 类型分类统计数量 */
   CountByType?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -970,7 +970,7 @@ declare interface DescribeCheckConfigAssetListResponse {
   Total?: number;
   /** 资产列表项 */
   CheckAssetsList?: CheckAssetItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -982,7 +982,7 @@ declare interface DescribeCheckConfigDetailRequest {
 declare interface DescribeCheckConfigDetailResponse {
   /** 检查项详情 */
   CheckConfigDetail?: CheckConfigDetail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1004,7 +1004,7 @@ declare interface DescribeComplianceAssetListResponse {
   CheckAssetsList?: CheckAssetItem[];
   /** 资产组列表总数 */
   Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1016,7 +1016,7 @@ declare interface DescribeComplianceDetailRequest {
 declare interface DescribeComplianceDetailResponse {
   /** 合规管理检查项详情 */
   CheckConfigDetail?: ComplianceCheckDetail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1032,7 +1032,7 @@ declare interface DescribeComplianceListResponse {
   AssetTotalNum?: number | null;
   /** 总检查项 */
   ConfigTotalNum?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1044,7 +1044,7 @@ declare interface DescribeConfigListRequest {
 declare interface DescribeConfigListResponse {
   /** 检查项列表 */
   Data?: DataCheck[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1064,7 +1064,7 @@ declare interface DescribeEventDetailRequest {
 declare interface DescribeEventDetailResponse {
   /** 事件详情 */
   Data?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1086,7 +1086,7 @@ declare interface DescribeLeakDetectionListResponse {
   TotalCount?: number;
   /** 数据列表 */
   List?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1106,7 +1106,7 @@ declare interface DescribeMappingResultsResponse {
   Total: number | null;
   /** 列表 */
   Data: Results | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1134,7 +1134,7 @@ declare interface DescribeSafetyEventListResponse {
   List?: DataEvent[];
   /** 事件总条数 */
   Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1148,7 +1148,7 @@ declare interface DescribeSocAlertDetailsRequest {
 declare interface DescribeSocAlertDetailsResponse {
   /** 返回详情数据 */
   Data: AlertDetail | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1170,7 +1170,7 @@ declare interface DescribeSocAlertListRequest {
 declare interface DescribeSocAlertListResponse {
   /** 业务数据 */
   Data: AlertListData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1188,7 +1188,7 @@ declare interface DescribeSocCheckItemListRequest {
 declare interface DescribeSocCheckItemListResponse {
   /** 检查项列表 */
   Data: DescribeSocCheckItemListRspRsp | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1208,7 +1208,7 @@ declare interface DescribeSocCheckResultListRequest {
 declare interface DescribeSocCheckResultListResponse {
   /** 无 */
   Data: DescribeSocCheckResultListRspRsp | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1218,7 +1218,7 @@ declare interface DescribeSocCspmComplianceRequest {
 declare interface DescribeSocCspmComplianceResponse {
   /** 数据 */
   Data: SocComplianceInfoResp | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1274,7 +1274,7 @@ declare interface DescribeVulDetailResponse {
   SsaAssetCategory: number | null;
   /** 资产文件路径 */
   VulPath: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1286,7 +1286,7 @@ declare interface DescribeVulListRequest {
 declare interface DescribeVulListResponse {
   /** 漏洞列表 */
   Data: VulList;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1320,54 +1320,54 @@ declare interface SaDivulgeDataQueryPubRequest {
 declare interface SaDivulgeDataQueryPubResponse {
   /** 自定义泄露事件列表 */
   Data: SaDivulgeDataQueryPubList;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ssa 安全运营中心} */
 declare interface Ssa {
   (): Versions;
-  /** {@link DescribeAssetDetail 资产安全页资产详情}({@link DescribeAssetDetailRequest 请求参数}): {@link DescribeAssetDetailResponse 返回参数} */
+  /** 资产安全页资产详情 {@link DescribeAssetDetailRequest} {@link DescribeAssetDetailResponse} */
   DescribeAssetDetail(data: DescribeAssetDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDetailResponse>;
-  /** {@link DescribeAssetList 资产安全资产列表}({@link DescribeAssetListRequest 请求参数}): {@link DescribeAssetListResponse 返回参数} */
+  /** 资产安全资产列表 {@link DescribeAssetListRequest} {@link DescribeAssetListResponse} */
   DescribeAssetList(data: DescribeAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetListResponse>;
-  /** {@link DescribeAssetsMappingList 资产测绘-测绘列表}({@link DescribeAssetsMappingListRequest 请求参数}): {@link DescribeAssetsMappingListResponse 返回参数} */
+  /** 资产测绘-测绘列表 {@link DescribeAssetsMappingListRequest} {@link DescribeAssetsMappingListResponse} */
   DescribeAssetsMappingList(data: DescribeAssetsMappingListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetsMappingListResponse>;
-  /** {@link DescribeCheckConfigAssetList 云安全配置管理资产组列表}({@link DescribeCheckConfigAssetListRequest 请求参数}): {@link DescribeCheckConfigAssetListResponse 返回参数} */
+  /** 云安全配置管理资产组列表 {@link DescribeCheckConfigAssetListRequest} {@link DescribeCheckConfigAssetListResponse} */
   DescribeCheckConfigAssetList(data: DescribeCheckConfigAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckConfigAssetListResponse>;
-  /** {@link DescribeCheckConfigDetail 云安全配置检查项详情}({@link DescribeCheckConfigDetailRequest 请求参数}): {@link DescribeCheckConfigDetailResponse 返回参数} */
+  /** 云安全配置检查项详情 {@link DescribeCheckConfigDetailRequest} {@link DescribeCheckConfigDetailResponse} */
   DescribeCheckConfigDetail(data: DescribeCheckConfigDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckConfigDetailResponse>;
-  /** {@link DescribeComplianceAssetList 合规管理-资产列表}({@link DescribeComplianceAssetListRequest 请求参数}): {@link DescribeComplianceAssetListResponse 返回参数} */
+  /** 合规管理-资产列表 {@link DescribeComplianceAssetListRequest} {@link DescribeComplianceAssetListResponse} */
   DescribeComplianceAssetList(data: DescribeComplianceAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceAssetListResponse>;
-  /** {@link DescribeComplianceDetail 合规管理检查项详情}({@link DescribeComplianceDetailRequest 请求参数}): {@link DescribeComplianceDetailResponse 返回参数} */
+  /** 合规管理检查项详情 {@link DescribeComplianceDetailRequest} {@link DescribeComplianceDetailResponse} */
   DescribeComplianceDetail(data: DescribeComplianceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceDetailResponse>;
-  /** {@link DescribeComplianceList 合规管理总览页检查项列表}({@link DescribeComplianceListRequest 请求参数}): {@link DescribeComplianceListResponse 返回参数} */
+  /** 合规管理总览页检查项列表 {@link DescribeComplianceListRequest} {@link DescribeComplianceListResponse} */
   DescribeComplianceList(data?: DescribeComplianceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceListResponse>;
-  /** {@link DescribeConfigList 云配置检查项总览页检查项列表}({@link DescribeConfigListRequest 请求参数}): {@link DescribeConfigListResponse 返回参数} */
+  /** 云配置检查项总览页检查项列表 {@link DescribeConfigListRequest} {@link DescribeConfigListResponse} */
   DescribeConfigList(data?: DescribeConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigListResponse>;
-  /** {@link DescribeEventDetail 获取安全事件详情}({@link DescribeEventDetailRequest 请求参数}): {@link DescribeEventDetailResponse 返回参数} */
+  /** 获取安全事件详情 {@link DescribeEventDetailRequest} {@link DescribeEventDetailResponse} */
   DescribeEventDetail(data?: DescribeEventDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventDetailResponse>;
-  /** {@link DescribeLeakDetectionList 获取泄露列表}({@link DescribeLeakDetectionListRequest 请求参数}): {@link DescribeLeakDetectionListResponse 返回参数} */
+  /** 获取泄露列表 {@link DescribeLeakDetectionListRequest} {@link DescribeLeakDetectionListResponse} */
   DescribeLeakDetectionList(data: DescribeLeakDetectionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLeakDetectionListResponse>;
-  /** {@link DescribeMappingResults 获取测绘列表}({@link DescribeMappingResultsRequest 请求参数}): {@link DescribeMappingResultsResponse 返回参数} */
+  /** 获取测绘列表 {@link DescribeMappingResultsRequest} {@link DescribeMappingResultsResponse} */
   DescribeMappingResults(data?: DescribeMappingResultsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMappingResultsResponse>;
-  /** {@link DescribeSafetyEventList 获取安全事件列表}({@link DescribeSafetyEventListRequest 请求参数}): {@link DescribeSafetyEventListResponse 返回参数} */
+  /** 获取安全事件列表 {@link DescribeSafetyEventListRequest} {@link DescribeSafetyEventListResponse} */
   DescribeSafetyEventList(data: DescribeSafetyEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSafetyEventListResponse>;
-  /** {@link DescribeSocAlertDetails 告警详情}({@link DescribeSocAlertDetailsRequest 请求参数}): {@link DescribeSocAlertDetailsResponse 返回参数} */
+  /** 告警详情 {@link DescribeSocAlertDetailsRequest} {@link DescribeSocAlertDetailsResponse} */
   DescribeSocAlertDetails(data: DescribeSocAlertDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSocAlertDetailsResponse>;
-  /** {@link DescribeSocAlertList 告警列表}({@link DescribeSocAlertListRequest 请求参数}): {@link DescribeSocAlertListResponse 返回参数} */
+  /** 告警列表 {@link DescribeSocAlertListRequest} {@link DescribeSocAlertListResponse} */
   DescribeSocAlertList(data: DescribeSocAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSocAlertListResponse>;
-  /** {@link DescribeSocCheckItemList 云安全配置检查项列表}({@link DescribeSocCheckItemListRequest 请求参数}): {@link DescribeSocCheckItemListResponse 返回参数} */
+  /** 云安全配置检查项列表 {@link DescribeSocCheckItemListRequest} {@link DescribeSocCheckItemListResponse} */
   DescribeSocCheckItemList(data?: DescribeSocCheckItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSocCheckItemListResponse>;
-  /** {@link DescribeSocCheckResultList 云安全配置检查项结果列表}({@link DescribeSocCheckResultListRequest 请求参数}): {@link DescribeSocCheckResultListResponse 返回参数} */
+  /** 云安全配置检查项结果列表 {@link DescribeSocCheckResultListRequest} {@link DescribeSocCheckResultListResponse} */
   DescribeSocCheckResultList(data?: DescribeSocCheckResultListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSocCheckResultListResponse>;
-  /** {@link DescribeSocCspmCompliance 合规详情}({@link DescribeSocCspmComplianceRequest 请求参数}): {@link DescribeSocCspmComplianceResponse 返回参数} */
+  /** 合规详情 {@link DescribeSocCspmComplianceRequest} {@link DescribeSocCspmComplianceResponse} */
   DescribeSocCspmCompliance(data?: DescribeSocCspmComplianceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSocCspmComplianceResponse>;
-  /** {@link DescribeVulDetail 漏洞列表-漏洞详情}({@link DescribeVulDetailRequest 请求参数}): {@link DescribeVulDetailResponse 返回参数} */
+  /** 漏洞列表-漏洞详情 {@link DescribeVulDetailRequest} {@link DescribeVulDetailResponse} */
   DescribeVulDetail(data: DescribeVulDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDetailResponse>;
-  /** {@link DescribeVulList 漏洞管理-漏洞列表}({@link DescribeVulListRequest 请求参数}): {@link DescribeVulListResponse 返回参数} */
+  /** 漏洞管理-漏洞列表 {@link DescribeVulListRequest} {@link DescribeVulListResponse} */
   DescribeVulList(data: DescribeVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulListResponse>;
-  /** {@link SaDivulgeDataQueryPub 查询【通用字段】【泄露监测数据列表】}({@link SaDivulgeDataQueryPubRequest 请求参数}): {@link SaDivulgeDataQueryPubResponse 返回参数} */
+  /** 查询【通用字段】【泄露监测数据列表】 {@link SaDivulgeDataQueryPubRequest} {@link SaDivulgeDataQueryPubResponse} */
   SaDivulgeDataQueryPub(data: SaDivulgeDataQueryPubRequest, config?: AxiosRequestConfig): AxiosPromise<SaDivulgeDataQueryPubResponse>;
 }
 

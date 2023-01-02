@@ -24,7 +24,7 @@ declare interface CreateSmpnEpaRequest {
 declare interface CreateSmpnEpaResponse {
   /** 业号码认证回应内容 */
   ResponseData?: EPAResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -38,7 +38,7 @@ declare interface DescribeSmpnChpRequest {
 declare interface DescribeSmpnChpResponse {
   /** 终端骚扰保护回应 */
   ResponseData?: CHPResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -52,7 +52,7 @@ declare interface DescribeSmpnFnrRequest {
 declare interface DescribeSmpnFnrResponse {
   /** 虚假号码识别回应内容 */
   ResponseData?: FNRResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -66,7 +66,7 @@ declare interface DescribeSmpnMhmRequest {
 declare interface DescribeSmpnMhmResponse {
   /** 号码营销监控回应内容 */
   ResponseData?: MHMResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -80,7 +80,7 @@ declare interface DescribeSmpnMrlRequest {
 declare interface DescribeSmpnMrlResponse {
   /** 恶意标记等级回应内容 */
   ResponseData?: MRLResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -139,15 +139,15 @@ declare interface MRLResponse {
 /** {@link Smpn 营销号码安全} */
 declare interface Smpn {
   (): Versions;
-  /** {@link CreateSmpnEpa 企业号码认证}({@link CreateSmpnEpaRequest 请求参数}): {@link CreateSmpnEpaResponse 返回参数} */
+  /** 企业号码认证 {@link CreateSmpnEpaRequest} {@link CreateSmpnEpaResponse} */
   CreateSmpnEpa(data: CreateSmpnEpaRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSmpnEpaResponse>;
-  /** {@link DescribeSmpnChp 终端骚扰保护}({@link DescribeSmpnChpRequest 请求参数}): {@link DescribeSmpnChpResponse 返回参数} */
+  /** 终端骚扰保护 {@link DescribeSmpnChpRequest} {@link DescribeSmpnChpResponse} */
   DescribeSmpnChp(data: DescribeSmpnChpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmpnChpResponse>;
-  /** {@link DescribeSmpnFnr 虚假号码识别}({@link DescribeSmpnFnrRequest 请求参数}): {@link DescribeSmpnFnrResponse 返回参数} */
+  /** 虚假号码识别 {@link DescribeSmpnFnrRequest} {@link DescribeSmpnFnrResponse} */
   DescribeSmpnFnr(data: DescribeSmpnFnrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmpnFnrResponse>;
-  /** {@link DescribeSmpnMhm 号码营销监控}({@link DescribeSmpnMhmRequest 请求参数}): {@link DescribeSmpnMhmResponse 返回参数} */
+  /** 号码营销监控 {@link DescribeSmpnMhmRequest} {@link DescribeSmpnMhmResponse} */
   DescribeSmpnMhm(data: DescribeSmpnMhmRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmpnMhmResponse>;
-  /** {@link DescribeSmpnMrl 恶意标记等级}({@link DescribeSmpnMrlRequest 请求参数}): {@link DescribeSmpnMrlResponse 返回参数} */
+  /** 恶意标记等级 {@link DescribeSmpnMrlRequest} {@link DescribeSmpnMrlResponse} */
   DescribeSmpnMrl(data: DescribeSmpnMrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmpnMrlResponse>;
 }
 

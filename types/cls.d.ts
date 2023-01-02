@@ -780,7 +780,7 @@ declare interface AddMachineGroupInfoRequest {
 }
 
 declare interface AddMachineGroupInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -792,7 +792,7 @@ declare interface ApplyConfigToMachineGroupRequest {
 }
 
 declare interface ApplyConfigToMachineGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -802,7 +802,7 @@ declare interface CloseKafkaConsumerRequest {
 }
 
 declare interface CloseKafkaConsumerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -820,7 +820,7 @@ declare interface CreateAlarmNoticeRequest {
 declare interface CreateAlarmNoticeResponse {
   /** 告警模板ID */
   AlarmNoticeId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -852,7 +852,7 @@ declare interface CreateAlarmRequest {
 declare interface CreateAlarmResponse {
   /** 告警策略ID。 */
   AlarmId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -896,7 +896,7 @@ declare interface CreateConfigExtraRequest {
 declare interface CreateConfigExtraResponse {
   /** 采集配置扩展信息ID */
   ConfigExtraId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -920,7 +920,7 @@ declare interface CreateConfigRequest {
 declare interface CreateConfigResponse {
   /** 采集配置ID */
   ConfigId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -938,7 +938,7 @@ declare interface CreateConsumerRequest {
 }
 
 declare interface CreateConsumerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -962,7 +962,7 @@ declare interface CreateExportRequest {
 declare interface CreateExportResponse {
   /** 日志导出ID。 */
   ExportId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -980,7 +980,7 @@ declare interface CreateIndexRequest {
 }
 
 declare interface CreateIndexResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -994,7 +994,7 @@ declare interface CreateLogsetRequest {
 declare interface CreateLogsetResponse {
   /** 日志集ID */
   LogsetId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1018,7 +1018,7 @@ declare interface CreateMachineGroupRequest {
 declare interface CreateMachineGroupResponse {
   /** 机器组ID */
   GroupId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1050,7 +1050,7 @@ declare interface CreateShipperRequest {
 declare interface CreateShipperResponse {
   /** 投递规则ID */
   ShipperId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1076,7 +1076,7 @@ declare interface CreateTopicRequest {
 declare interface CreateTopicResponse {
   /** 日志主题ID */
   TopicId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1086,7 +1086,7 @@ declare interface DeleteAlarmNoticeRequest {
 }
 
 declare interface DeleteAlarmNoticeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1096,7 +1096,7 @@ declare interface DeleteAlarmRequest {
 }
 
 declare interface DeleteAlarmResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1106,7 +1106,7 @@ declare interface DeleteConfigExtraRequest {
 }
 
 declare interface DeleteConfigExtraResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1118,7 +1118,7 @@ declare interface DeleteConfigFromMachineGroupRequest {
 }
 
 declare interface DeleteConfigFromMachineGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1128,7 +1128,7 @@ declare interface DeleteConfigRequest {
 }
 
 declare interface DeleteConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1138,7 +1138,7 @@ declare interface DeleteConsumerRequest {
 }
 
 declare interface DeleteConsumerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1148,7 +1148,7 @@ declare interface DeleteExportRequest {
 }
 
 declare interface DeleteExportResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1158,7 +1158,7 @@ declare interface DeleteIndexRequest {
 }
 
 declare interface DeleteIndexResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1168,7 +1168,7 @@ declare interface DeleteLogsetRequest {
 }
 
 declare interface DeleteLogsetResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1180,7 +1180,7 @@ declare interface DeleteMachineGroupInfoRequest {
 }
 
 declare interface DeleteMachineGroupInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1190,7 +1190,7 @@ declare interface DeleteMachineGroupRequest {
 }
 
 declare interface DeleteMachineGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1200,7 +1200,7 @@ declare interface DeleteShipperRequest {
 }
 
 declare interface DeleteShipperResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1210,7 +1210,7 @@ declare interface DeleteTopicRequest {
 }
 
 declare interface DeleteTopicResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1228,7 +1228,7 @@ declare interface DescribeAlarmNoticesResponse {
   AlarmNotices: AlarmNotice[] | null;
   /** 符合条件的告警通知模板总数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1246,7 +1246,7 @@ declare interface DescribeAlarmsResponse {
   Alarms: AlarmInfo[];
   /** 符合查询条件的告警策略数目。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1264,7 +1264,7 @@ declare interface DescribeConfigExtrasResponse {
   Configs: ConfigExtraInfo[] | null;
   /** 过滤到的总数目 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1276,7 +1276,7 @@ declare interface DescribeConfigMachineGroupsRequest {
 declare interface DescribeConfigMachineGroupsResponse {
   /** 采集规则配置绑定的机器组列表 */
   MachineGroups: MachineGroupInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1294,7 +1294,7 @@ declare interface DescribeConfigsResponse {
   Configs: ConfigInfo[] | null;
   /** 过滤到的总数目 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1314,7 +1314,7 @@ declare interface DescribeConsumerResponse {
   Ckafka: Ckafka;
   /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4] */
   Compression: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1332,7 +1332,7 @@ declare interface DescribeExportsResponse {
   Exports: ExportInfo[];
   /** 总数目 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1354,7 +1354,7 @@ declare interface DescribeIndexResponse {
   IncludeInternalFields: boolean | null;
   /** 元数据相关标志位，默认为0。 0：全文索引包括开启键值索引的元数据字段， 1：全文索引包括所有元数据字段，2：全文索引不包括元数据字段。 */
   MetadataFlag: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1380,7 +1380,7 @@ declare interface DescribeLogContextResponse {
   PrevOver: boolean;
   /** 下文日志是否已经返回 */
   NextOver: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1404,7 +1404,7 @@ declare interface DescribeLogHistogramResponse {
   TotalCount: number;
   /** 周期内统计结果详情 */
   HistogramInfos: HistogramInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1422,7 +1422,7 @@ declare interface DescribeLogsetsResponse {
   TotalCount: number;
   /** 日志集列表 */
   Logsets: LogsetInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1434,7 +1434,7 @@ declare interface DescribeMachineGroupConfigsRequest {
 declare interface DescribeMachineGroupConfigsResponse {
   /** 采集规则配置列表 */
   Configs: ConfigInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1452,7 +1452,7 @@ declare interface DescribeMachineGroupsResponse {
   MachineGroups: MachineGroupInfo[] | null;
   /** 分页的总数目 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1474,7 +1474,7 @@ declare interface DescribeMachinesResponse {
   LatestAgentVersion: string;
   /** 是否开启服务日志 */
   ServiceLogging: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1486,7 +1486,7 @@ declare interface DescribePartitionsRequest {
 declare interface DescribePartitionsResponse {
   /** 分区列表 */
   Partitions: PartitionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1502,7 +1502,7 @@ declare interface DescribeShipperTasksRequest {
 declare interface DescribeShipperTasksResponse {
   /** 投递任务列表 */
   Tasks: ShipperTaskInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1520,7 +1520,7 @@ declare interface DescribeShippersResponse {
   Shippers: ShipperInfo[] | null;
   /** 本次查询获取到的总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1538,7 +1538,7 @@ declare interface DescribeTopicsResponse {
   Topics: TopicInfo[];
   /** 总数目 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1576,7 +1576,7 @@ declare interface GetAlarmLogResponse {
   AnalysisRecords: string[] | null;
   /** 日志分析的列属性; UseNewAnalysis为true有效 */
   Columns: Column[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1590,7 +1590,7 @@ declare interface MergePartitionRequest {
 declare interface MergePartitionResponse {
   /** 合并结果集 */
   Partitions: PartitionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1608,7 +1608,7 @@ declare interface ModifyAlarmNoticeRequest {
 }
 
 declare interface ModifyAlarmNoticeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1640,7 +1640,7 @@ declare interface ModifyAlarmRequest {
 }
 
 declare interface ModifyAlarmResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1682,7 +1682,7 @@ declare interface ModifyConfigExtraRequest {
 }
 
 declare interface ModifyConfigExtraResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1706,7 +1706,7 @@ declare interface ModifyConfigRequest {
 }
 
 declare interface ModifyConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1726,7 +1726,7 @@ declare interface ModifyConsumerRequest {
 }
 
 declare interface ModifyConsumerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1744,7 +1744,7 @@ declare interface ModifyIndexRequest {
 }
 
 declare interface ModifyIndexResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1758,7 +1758,7 @@ declare interface ModifyLogsetRequest {
 }
 
 declare interface ModifyLogsetResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1782,7 +1782,7 @@ declare interface ModifyMachineGroupRequest {
 }
 
 declare interface ModifyMachineGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1814,7 +1814,7 @@ declare interface ModifyShipperRequest {
 }
 
 declare interface ModifyShipperResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1836,7 +1836,7 @@ declare interface ModifyTopicRequest {
 }
 
 declare interface ModifyTopicResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1850,7 +1850,7 @@ declare interface OpenKafkaConsumerRequest {
 declare interface OpenKafkaConsumerResponse {
   /** 待消费TopicId */
   TopicID: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1862,7 +1862,7 @@ declare interface RetryShipperTaskRequest {
 }
 
 declare interface RetryShipperTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1904,7 +1904,7 @@ declare interface SearchLogResponse {
   AnalysisRecords: string[] | null;
   /** 日志统计分析结果的列属性当UseNewAnalysis为true时生效 */
   Columns: Column[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1922,7 +1922,7 @@ declare interface SplitPartitionRequest {
 declare interface SplitPartitionResponse {
   /** 分裂结果集 */
   Partitions: PartitionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1936,136 +1936,136 @@ declare interface UploadLogRequest {
 }
 
 declare interface UploadLogResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cls 日志服务} */
 declare interface Cls {
   (): Versions;
-  /** {@link AddMachineGroupInfo 添加机器组信息}({@link AddMachineGroupInfoRequest 请求参数}): {@link AddMachineGroupInfoResponse 返回参数} */
+  /** 添加机器组信息 {@link AddMachineGroupInfoRequest} {@link AddMachineGroupInfoResponse} */
   AddMachineGroupInfo(data: AddMachineGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddMachineGroupInfoResponse>;
-  /** {@link ApplyConfigToMachineGroup 应用采集配置到指定机器组}({@link ApplyConfigToMachineGroupRequest 请求参数}): {@link ApplyConfigToMachineGroupResponse 返回参数} */
+  /** 应用采集配置到指定机器组 {@link ApplyConfigToMachineGroupRequest} {@link ApplyConfigToMachineGroupResponse} */
   ApplyConfigToMachineGroup(data: ApplyConfigToMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyConfigToMachineGroupResponse>;
-  /** {@link CloseKafkaConsumer 关闭Kafka协议消费}({@link CloseKafkaConsumerRequest 请求参数}): {@link CloseKafkaConsumerResponse 返回参数} */
+  /** 关闭Kafka协议消费 {@link CloseKafkaConsumerRequest} {@link CloseKafkaConsumerResponse} */
   CloseKafkaConsumer(data: CloseKafkaConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CloseKafkaConsumerResponse>;
-  /** {@link CreateAlarm 创建告警策略}({@link CreateAlarmRequest 请求参数}): {@link CreateAlarmResponse 返回参数} */
+  /** 创建告警策略 {@link CreateAlarmRequest} {@link CreateAlarmResponse} */
   CreateAlarm(data: CreateAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmResponse>;
-  /** {@link CreateAlarmNotice 创建通知渠道组}({@link CreateAlarmNoticeRequest 请求参数}): {@link CreateAlarmNoticeResponse 返回参数} */
+  /** 创建通知渠道组 {@link CreateAlarmNoticeRequest} {@link CreateAlarmNoticeResponse} */
   CreateAlarmNotice(data: CreateAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmNoticeResponse>;
-  /** {@link CreateConfig 创建采集规则配置}({@link CreateConfigRequest 请求参数}): {@link CreateConfigResponse 返回参数} */
+  /** 创建采集规则配置 {@link CreateConfigRequest} {@link CreateConfigResponse} */
   CreateConfig(data: CreateConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigResponse>;
-  /** {@link CreateConfigExtra 创建特殊采集配置任务}({@link CreateConfigExtraRequest 请求参数}): {@link CreateConfigExtraResponse 返回参数} */
+  /** 创建特殊采集配置任务 {@link CreateConfigExtraRequest} {@link CreateConfigExtraResponse} */
   CreateConfigExtra(data: CreateConfigExtraRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigExtraResponse>;
-  /** {@link CreateConsumer 创建投递任务}({@link CreateConsumerRequest 请求参数}): {@link CreateConsumerResponse 返回参数} */
+  /** 创建投递任务 {@link CreateConsumerRequest} {@link CreateConsumerResponse} */
   CreateConsumer(data: CreateConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerResponse>;
-  /** {@link CreateExport 创建日志下载任务}({@link CreateExportRequest 请求参数}): {@link CreateExportResponse 返回参数} */
+  /** 创建日志下载任务 {@link CreateExportRequest} {@link CreateExportResponse} */
   CreateExport(data: CreateExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportResponse>;
-  /** {@link CreateIndex 创建索引}({@link CreateIndexRequest 请求参数}): {@link CreateIndexResponse 返回参数} */
+  /** 创建索引 {@link CreateIndexRequest} {@link CreateIndexResponse} */
   CreateIndex(data: CreateIndexRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIndexResponse>;
-  /** {@link CreateLogset 创建日志集}({@link CreateLogsetRequest 请求参数}): {@link CreateLogsetResponse 返回参数} */
+  /** 创建日志集 {@link CreateLogsetRequest} {@link CreateLogsetResponse} */
   CreateLogset(data: CreateLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogsetResponse>;
-  /** {@link CreateMachineGroup 创建机器组}({@link CreateMachineGroupRequest 请求参数}): {@link CreateMachineGroupResponse 返回参数} */
+  /** 创建机器组 {@link CreateMachineGroupRequest} {@link CreateMachineGroupResponse} */
   CreateMachineGroup(data: CreateMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMachineGroupResponse>;
-  /** {@link CreateShipper 创建投递规则}({@link CreateShipperRequest 请求参数}): {@link CreateShipperResponse 返回参数} */
+  /** 创建投递规则 {@link CreateShipperRequest} {@link CreateShipperResponse} */
   CreateShipper(data: CreateShipperRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShipperResponse>;
-  /** {@link CreateTopic 创建日志主题}({@link CreateTopicRequest 请求参数}): {@link CreateTopicResponse 返回参数} */
+  /** 创建日志主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
-  /** {@link DeleteAlarm 删除告警策略}({@link DeleteAlarmRequest 请求参数}): {@link DeleteAlarmResponse 返回参数} */
+  /** 删除告警策略 {@link DeleteAlarmRequest} {@link DeleteAlarmResponse} */
   DeleteAlarm(data: DeleteAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmResponse>;
-  /** {@link DeleteAlarmNotice 删除通知渠道组}({@link DeleteAlarmNoticeRequest 请求参数}): {@link DeleteAlarmNoticeResponse 返回参数} */
+  /** 删除通知渠道组 {@link DeleteAlarmNoticeRequest} {@link DeleteAlarmNoticeResponse} */
   DeleteAlarmNotice(data: DeleteAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmNoticeResponse>;
-  /** {@link DeleteConfig 删除采集规则配置}({@link DeleteConfigRequest 请求参数}): {@link DeleteConfigResponse 返回参数} */
+  /** 删除采集规则配置 {@link DeleteConfigRequest} {@link DeleteConfigResponse} */
   DeleteConfig(data: DeleteConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigResponse>;
-  /** {@link DeleteConfigExtra 删除特殊采集规则配置}({@link DeleteConfigExtraRequest 请求参数}): {@link DeleteConfigExtraResponse 返回参数} */
+  /** 删除特殊采集规则配置 {@link DeleteConfigExtraRequest} {@link DeleteConfigExtraResponse} */
   DeleteConfigExtra(data: DeleteConfigExtraRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigExtraResponse>;
-  /** {@link DeleteConfigFromMachineGroup 删除应用到机器组的采集配置}({@link DeleteConfigFromMachineGroupRequest 请求参数}): {@link DeleteConfigFromMachineGroupResponse 返回参数} */
+  /** 删除应用到机器组的采集配置 {@link DeleteConfigFromMachineGroupRequest} {@link DeleteConfigFromMachineGroupResponse} */
   DeleteConfigFromMachineGroup(data: DeleteConfigFromMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigFromMachineGroupResponse>;
-  /** {@link DeleteConsumer 删除投递配置}({@link DeleteConsumerRequest 请求参数}): {@link DeleteConsumerResponse 返回参数} */
+  /** 删除投递配置 {@link DeleteConsumerRequest} {@link DeleteConsumerResponse} */
   DeleteConsumer(data: DeleteConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerResponse>;
-  /** {@link DeleteExport 删除日志下载任务}({@link DeleteExportRequest 请求参数}): {@link DeleteExportResponse 返回参数} */
+  /** 删除日志下载任务 {@link DeleteExportRequest} {@link DeleteExportResponse} */
   DeleteExport(data: DeleteExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteExportResponse>;
-  /** {@link DeleteIndex 删除索引配置}({@link DeleteIndexRequest 请求参数}): {@link DeleteIndexResponse 返回参数} */
+  /** 删除索引配置 {@link DeleteIndexRequest} {@link DeleteIndexResponse} */
   DeleteIndex(data: DeleteIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIndexResponse>;
-  /** {@link DeleteLogset 删除日志集}({@link DeleteLogsetRequest 请求参数}): {@link DeleteLogsetResponse 返回参数} */
+  /** 删除日志集 {@link DeleteLogsetRequest} {@link DeleteLogsetResponse} */
   DeleteLogset(data: DeleteLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogsetResponse>;
-  /** {@link DeleteMachineGroup 删除机器组}({@link DeleteMachineGroupRequest 请求参数}): {@link DeleteMachineGroupResponse 返回参数} */
+  /** 删除机器组 {@link DeleteMachineGroupRequest} {@link DeleteMachineGroupResponse} */
   DeleteMachineGroup(data: DeleteMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineGroupResponse>;
-  /** {@link DeleteMachineGroupInfo 删除机器组信息}({@link DeleteMachineGroupInfoRequest 请求参数}): {@link DeleteMachineGroupInfoResponse 返回参数} */
+  /** 删除机器组信息 {@link DeleteMachineGroupInfoRequest} {@link DeleteMachineGroupInfoResponse} */
   DeleteMachineGroupInfo(data: DeleteMachineGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineGroupInfoResponse>;
-  /** {@link DeleteShipper 删除投递规则}({@link DeleteShipperRequest 请求参数}): {@link DeleteShipperResponse 返回参数} */
+  /** 删除投递规则 {@link DeleteShipperRequest} {@link DeleteShipperResponse} */
   DeleteShipper(data: DeleteShipperRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShipperResponse>;
-  /** {@link DeleteTopic 删除日志主题}({@link DeleteTopicRequest 请求参数}): {@link DeleteTopicResponse 返回参数} */
+  /** 删除日志主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
-  /** {@link DescribeAlarmNotices 获取通知渠道组列表}({@link DescribeAlarmNoticesRequest 请求参数}): {@link DescribeAlarmNoticesResponse 返回参数} */
+  /** 获取通知渠道组列表 {@link DescribeAlarmNoticesRequest} {@link DescribeAlarmNoticesResponse} */
   DescribeAlarmNotices(data?: DescribeAlarmNoticesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNoticesResponse>;
-  /** {@link DescribeAlarms 获取告警策略列表}({@link DescribeAlarmsRequest 请求参数}): {@link DescribeAlarmsResponse 返回参数} */
+  /** 获取告警策略列表 {@link DescribeAlarmsRequest} {@link DescribeAlarmsResponse} */
   DescribeAlarms(data?: DescribeAlarmsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmsResponse>;
-  /** {@link DescribeConfigExtras 获取特殊采集配置}({@link DescribeConfigExtrasRequest 请求参数}): {@link DescribeConfigExtrasResponse 返回参数} */
+  /** 获取特殊采集配置 {@link DescribeConfigExtrasRequest} {@link DescribeConfigExtrasResponse} */
   DescribeConfigExtras(data?: DescribeConfigExtrasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigExtrasResponse>;
-  /** {@link DescribeConfigMachineGroups 获取采集规则配置所绑定的机器组}({@link DescribeConfigMachineGroupsRequest 请求参数}): {@link DescribeConfigMachineGroupsResponse 返回参数} */
+  /** 获取采集规则配置所绑定的机器组 {@link DescribeConfigMachineGroupsRequest} {@link DescribeConfigMachineGroupsResponse} */
   DescribeConfigMachineGroups(data: DescribeConfigMachineGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigMachineGroupsResponse>;
-  /** {@link DescribeConfigs 获取采集规则配置}({@link DescribeConfigsRequest 请求参数}): {@link DescribeConfigsResponse 返回参数} */
+  /** 获取采集规则配置 {@link DescribeConfigsRequest} {@link DescribeConfigsResponse} */
   DescribeConfigs(data?: DescribeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigsResponse>;
-  /** {@link DescribeConsumer 获取投递配置}({@link DescribeConsumerRequest 请求参数}): {@link DescribeConsumerResponse 返回参数} */
+  /** 获取投递配置 {@link DescribeConsumerRequest} {@link DescribeConsumerResponse} */
   DescribeConsumer(data: DescribeConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerResponse>;
-  /** {@link DescribeExports 获取日志下载任务列表}({@link DescribeExportsRequest 请求参数}): {@link DescribeExportsResponse 返回参数} */
+  /** 获取日志下载任务列表 {@link DescribeExportsRequest} {@link DescribeExportsResponse} */
   DescribeExports(data: DescribeExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportsResponse>;
-  /** {@link DescribeIndex 获取索引配置信息}({@link DescribeIndexRequest 请求参数}): {@link DescribeIndexResponse 返回参数} */
+  /** 获取索引配置信息 {@link DescribeIndexRequest} {@link DescribeIndexResponse} */
   DescribeIndex(data: DescribeIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexResponse>;
-  /** {@link DescribeLogContext 上下文检索}({@link DescribeLogContextRequest 请求参数}): {@link DescribeLogContextResponse 返回参数} */
+  /** 上下文检索 {@link DescribeLogContextRequest} {@link DescribeLogContextResponse} */
   DescribeLogContext(data: DescribeLogContextRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogContextResponse>;
-  /** {@link DescribeLogHistogram 获取日志数量直方图}({@link DescribeLogHistogramRequest 请求参数}): {@link DescribeLogHistogramResponse 返回参数} */
+  /** 获取日志数量直方图 {@link DescribeLogHistogramRequest} {@link DescribeLogHistogramResponse} */
   DescribeLogHistogram(data: DescribeLogHistogramRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogHistogramResponse>;
-  /** {@link DescribeLogsets 获取日志集列表}({@link DescribeLogsetsRequest 请求参数}): {@link DescribeLogsetsResponse 返回参数} */
+  /** 获取日志集列表 {@link DescribeLogsetsRequest} {@link DescribeLogsetsResponse} */
   DescribeLogsets(data?: DescribeLogsetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsetsResponse>;
-  /** {@link DescribeMachineGroupConfigs 获取机器组绑定的采集规则配置}({@link DescribeMachineGroupConfigsRequest 请求参数}): {@link DescribeMachineGroupConfigsResponse 返回参数} */
+  /** 获取机器组绑定的采集规则配置 {@link DescribeMachineGroupConfigsRequest} {@link DescribeMachineGroupConfigsResponse} */
   DescribeMachineGroupConfigs(data: DescribeMachineGroupConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineGroupConfigsResponse>;
-  /** {@link DescribeMachineGroups 获取机器组列表}({@link DescribeMachineGroupsRequest 请求参数}): {@link DescribeMachineGroupsResponse 返回参数} */
+  /** 获取机器组列表 {@link DescribeMachineGroupsRequest} {@link DescribeMachineGroupsResponse} */
   DescribeMachineGroups(data?: DescribeMachineGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineGroupsResponse>;
-  /** {@link DescribeMachines 获取机器状态}({@link DescribeMachinesRequest 请求参数}): {@link DescribeMachinesResponse 返回参数} */
+  /** 获取机器状态 {@link DescribeMachinesRequest} {@link DescribeMachinesResponse} */
   DescribeMachines(data: DescribeMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachinesResponse>;
-  /** {@link DescribePartitions 获取分区列表}({@link DescribePartitionsRequest 请求参数}): {@link DescribePartitionsResponse 返回参数} */
+  /** 获取分区列表 {@link DescribePartitionsRequest} {@link DescribePartitionsResponse} */
   DescribePartitions(data: DescribePartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePartitionsResponse>;
-  /** {@link DescribeShipperTasks 获取投递任务列表}({@link DescribeShipperTasksRequest 请求参数}): {@link DescribeShipperTasksResponse 返回参数} */
+  /** 获取投递任务列表 {@link DescribeShipperTasksRequest} {@link DescribeShipperTasksResponse} */
   DescribeShipperTasks(data: DescribeShipperTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShipperTasksResponse>;
-  /** {@link DescribeShippers 获取投递规则}({@link DescribeShippersRequest 请求参数}): {@link DescribeShippersResponse 返回参数} */
+  /** 获取投递规则 {@link DescribeShippersRequest} {@link DescribeShippersResponse} */
   DescribeShippers(data?: DescribeShippersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShippersResponse>;
-  /** {@link DescribeTopics 获取日志主题列表}({@link DescribeTopicsRequest 请求参数}): {@link DescribeTopicsResponse 返回参数} */
+  /** 获取日志主题列表 {@link DescribeTopicsRequest} {@link DescribeTopicsResponse} */
   DescribeTopics(data?: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
-  /** {@link GetAlarmLog 获取告警任务历史记录}({@link GetAlarmLogRequest 请求参数}): {@link GetAlarmLogResponse 返回参数} */
+  /** 获取告警任务历史记录 {@link GetAlarmLogRequest} {@link GetAlarmLogResponse} */
   GetAlarmLog(data: GetAlarmLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetAlarmLogResponse>;
-  /** {@link MergePartition 合并分区}({@link MergePartitionRequest 请求参数}): {@link MergePartitionResponse 返回参数} */
+  /** 合并分区 {@link MergePartitionRequest} {@link MergePartitionResponse} */
   MergePartition(data: MergePartitionRequest, config?: AxiosRequestConfig): AxiosPromise<MergePartitionResponse>;
-  /** {@link ModifyAlarm 修改告警策略}({@link ModifyAlarmRequest 请求参数}): {@link ModifyAlarmResponse 返回参数} */
+  /** 修改告警策略 {@link ModifyAlarmRequest} {@link ModifyAlarmResponse} */
   ModifyAlarm(data: ModifyAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmResponse>;
-  /** {@link ModifyAlarmNotice 修改通知渠道组}({@link ModifyAlarmNoticeRequest 请求参数}): {@link ModifyAlarmNoticeResponse 返回参数} */
+  /** 修改通知渠道组 {@link ModifyAlarmNoticeRequest} {@link ModifyAlarmNoticeResponse} */
   ModifyAlarmNotice(data: ModifyAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmNoticeResponse>;
-  /** {@link ModifyConfig 修改采集规则配置}({@link ModifyConfigRequest 请求参数}): {@link ModifyConfigResponse 返回参数} */
+  /** 修改采集规则配置 {@link ModifyConfigRequest} {@link ModifyConfigResponse} */
   ModifyConfig(data: ModifyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigResponse>;
-  /** {@link ModifyConfigExtra 修改特殊采集配置任务}({@link ModifyConfigExtraRequest 请求参数}): {@link ModifyConfigExtraResponse 返回参数} */
+  /** 修改特殊采集配置任务 {@link ModifyConfigExtraRequest} {@link ModifyConfigExtraResponse} */
   ModifyConfigExtra(data: ModifyConfigExtraRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigExtraResponse>;
-  /** {@link ModifyConsumer 修改投递任务}({@link ModifyConsumerRequest 请求参数}): {@link ModifyConsumerResponse 返回参数} */
+  /** 修改投递任务 {@link ModifyConsumerRequest} {@link ModifyConsumerResponse} */
   ModifyConsumer(data: ModifyConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerResponse>;
-  /** {@link ModifyIndex 修改索引}({@link ModifyIndexRequest 请求参数}): {@link ModifyIndexResponse 返回参数} */
+  /** 修改索引 {@link ModifyIndexRequest} {@link ModifyIndexResponse} */
   ModifyIndex(data: ModifyIndexRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIndexResponse>;
-  /** {@link ModifyLogset 修改日志集}({@link ModifyLogsetRequest 请求参数}): {@link ModifyLogsetResponse 返回参数} */
+  /** 修改日志集 {@link ModifyLogsetRequest} {@link ModifyLogsetResponse} */
   ModifyLogset(data: ModifyLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogsetResponse>;
-  /** {@link ModifyMachineGroup 修改机器组}({@link ModifyMachineGroupRequest 请求参数}): {@link ModifyMachineGroupResponse 返回参数} */
+  /** 修改机器组 {@link ModifyMachineGroupRequest} {@link ModifyMachineGroupResponse} */
   ModifyMachineGroup(data: ModifyMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMachineGroupResponse>;
-  /** {@link ModifyShipper 修改投递规则}({@link ModifyShipperRequest 请求参数}): {@link ModifyShipperResponse 返回参数} */
+  /** 修改投递规则 {@link ModifyShipperRequest} {@link ModifyShipperResponse} */
   ModifyShipper(data: ModifyShipperRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyShipperResponse>;
-  /** {@link ModifyTopic 修改日志主题}({@link ModifyTopicRequest 请求参数}): {@link ModifyTopicResponse 返回参数} */
+  /** 修改日志主题 {@link ModifyTopicRequest} {@link ModifyTopicResponse} */
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
-  /** {@link OpenKafkaConsumer 打开Kafka协议消费}({@link OpenKafkaConsumerRequest 请求参数}): {@link OpenKafkaConsumerResponse 返回参数} */
+  /** 打开Kafka协议消费 {@link OpenKafkaConsumerRequest} {@link OpenKafkaConsumerResponse} */
   OpenKafkaConsumer(data: OpenKafkaConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<OpenKafkaConsumerResponse>;
-  /** {@link RetryShipperTask 重试失败的投递任务}({@link RetryShipperTaskRequest 请求参数}): {@link RetryShipperTaskResponse 返回参数} */
+  /** 重试失败的投递任务 {@link RetryShipperTaskRequest} {@link RetryShipperTaskResponse} */
   RetryShipperTask(data: RetryShipperTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RetryShipperTaskResponse>;
-  /** {@link SearchLog 检索分析日志}({@link SearchLogRequest 请求参数}): {@link SearchLogResponse 返回参数} */
+  /** 检索分析日志 {@link SearchLogRequest} {@link SearchLogResponse} */
   SearchLog(data: SearchLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchLogResponse>;
-  /** {@link SplitPartition 分裂主题分区}({@link SplitPartitionRequest 请求参数}): {@link SplitPartitionResponse 返回参数} */
+  /** 分裂主题分区 {@link SplitPartitionRequest} {@link SplitPartitionResponse} */
   SplitPartition(data: SplitPartitionRequest, config?: AxiosRequestConfig): AxiosPromise<SplitPartitionResponse>;
-  /** {@link UploadLog 上传日志}({@link UploadLogRequest 请求参数}): {@link UploadLogResponse 返回参数} */
+  /** 上传日志 {@link UploadLogRequest} {@link UploadLogResponse} */
   UploadLog(data: UploadLogRequest, config?: AxiosRequestConfig): AxiosPromise<UploadLogResponse>;
 }
 

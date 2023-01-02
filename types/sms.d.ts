@@ -230,7 +230,7 @@ declare interface AddSmsSignRequest {
 declare interface AddSmsSignResponse {
   /** 添加签名响应 */
   AddSignStatus: AddSignStatus;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -250,7 +250,7 @@ declare interface AddSmsTemplateRequest {
 declare interface AddSmsTemplateResponse {
   /** 添加短信模板响应包体 */
   AddTemplateStatus: AddTemplateStatus;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -270,7 +270,7 @@ declare interface CallbackStatusStatisticsRequest {
 declare interface CallbackStatusStatisticsResponse {
   /** 回执数据统计响应包体。 */
   CallbackStatusStatistics: CallbackStatusStatistics;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -282,7 +282,7 @@ declare interface DeleteSmsSignRequest {
 declare interface DeleteSmsSignResponse {
   /** 删除签名响应 */
   DeleteSignStatus: DeleteSignStatus;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -294,7 +294,7 @@ declare interface DeleteSmsTemplateRequest {
 declare interface DeleteSmsTemplateResponse {
   /** 删除模板响应 */
   DeleteTemplateStatus: DeleteTemplateStatus;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -306,7 +306,7 @@ declare interface DescribePhoneNumberInfoRequest {
 declare interface DescribePhoneNumberInfoResponse {
   /** 获取号码信息。 */
   PhoneNumberInfoSet: PhoneNumberInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -320,7 +320,7 @@ declare interface DescribeSmsSignListRequest {
 declare interface DescribeSmsSignListResponse {
   /** 获取签名信息响应 */
   DescribeSignListStatusSet: DescribeSignListStatus[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -338,7 +338,7 @@ declare interface DescribeSmsTemplateListRequest {
 declare interface DescribeSmsTemplateListResponse {
   /** 获取短信模板信息响应 */
   DescribeTemplateStatusSet: DescribeTemplateListStatus[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -366,7 +366,7 @@ declare interface ModifySmsSignRequest {
 declare interface ModifySmsSignResponse {
   /** 修改签名响应 */
   ModifySignStatus: ModifySignStatus;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -388,7 +388,7 @@ declare interface ModifySmsTemplateRequest {
 declare interface ModifySmsTemplateResponse {
   /** 修改模板参数响应 */
   ModifyTemplateStatus: ModifyTemplateStatus;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -410,7 +410,7 @@ declare interface PullSmsReplyStatusByPhoneNumberRequest {
 declare interface PullSmsReplyStatusByPhoneNumberResponse {
   /** 回复状态响应集合。 */
   PullSmsReplyStatusSet: PullSmsReplyStatus[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -424,7 +424,7 @@ declare interface PullSmsReplyStatusRequest {
 declare interface PullSmsReplyStatusResponse {
   /** 回复状态响应集合。 */
   PullSmsReplyStatusSet: PullSmsReplyStatus[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -446,7 +446,7 @@ declare interface PullSmsSendStatusByPhoneNumberRequest {
 declare interface PullSmsSendStatusByPhoneNumberResponse {
   /** 下发状态响应集合。 */
   PullSmsSendStatusSet: PullSmsSendStatus[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -460,7 +460,7 @@ declare interface PullSmsSendStatusRequest {
 declare interface PullSmsSendStatusResponse {
   /** 下发状态响应集合。 */
   PullSmsSendStatusSet: PullSmsSendStatus[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -476,7 +476,7 @@ declare interface ReportConversionRequest {
 declare interface ReportConversionResponse {
   /** 转化率上报响应包体。 */
   ReportConversionStatus: ReportConversionStatus;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -502,7 +502,7 @@ declare interface SendSmsRequest {
 declare interface SendSmsResponse {
   /** 短信发送状态。 */
   SendStatusSet: SendStatus[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -522,7 +522,7 @@ declare interface SendStatusStatisticsRequest {
 declare interface SendStatusStatisticsResponse {
   /** 发送数据统计响应包体。 */
   SendStatusStatistics: SendStatusStatistics;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -542,7 +542,7 @@ declare interface SmsPackagesStatisticsRequest {
 declare interface SmsPackagesStatisticsResponse {
   /** 发送数据统计响应包体。 */
   SmsPackagesStatisticsSet: SmsPackagesStatistics[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -759,7 +759,7 @@ declare namespace V20190711 {
   interface AddSmsSignResponse {
     /** 添加签名响应 */
     AddSignStatus: AddSignStatus;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -779,7 +779,7 @@ declare namespace V20190711 {
   interface AddSmsTemplateResponse {
     /** 添加短信模板响应包体 */
     AddTemplateStatus: AddTemplateStatus;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -799,7 +799,7 @@ declare namespace V20190711 {
   interface CallbackStatusStatisticsResponse {
     /** 回执数据统计响应包体。 */
     CallbackStatusStatistics: CallbackStatusStatistics;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -811,7 +811,7 @@ declare namespace V20190711 {
   interface DeleteSmsSignResponse {
     /** 删除签名响应 */
     DeleteSignStatus: DeleteSignStatus;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -823,7 +823,7 @@ declare namespace V20190711 {
   interface DeleteSmsTemplateResponse {
     /** 删除模板响应 */
     DeleteTemplateStatus: DeleteTemplateStatus;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -837,7 +837,7 @@ declare namespace V20190711 {
   interface DescribeSmsSignListResponse {
     /** 获取签名信息响应 */
     DescribeSignListStatusSet: DescribeSignListStatus[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -851,7 +851,7 @@ declare namespace V20190711 {
   interface DescribeSmsTemplateListResponse {
     /** 获取短信模板信息响应 */
     DescribeTemplateStatusSet: DescribeTemplateListStatus[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -879,7 +879,7 @@ declare namespace V20190711 {
   interface ModifySmsSignResponse {
     /** 修改签名响应 */
     ModifySignStatus: ModifySignStatus;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -901,7 +901,7 @@ declare namespace V20190711 {
   interface ModifySmsTemplateResponse {
     /** 修改模板参数响应 */
     ModifyTemplateStatus: ModifyTemplateStatus;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -923,7 +923,7 @@ declare namespace V20190711 {
   interface PullSmsReplyStatusByPhoneNumberResponse {
     /** 回复状态响应集合。 */
     PullSmsReplyStatusSet: PullSmsReplyStatus[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -937,7 +937,7 @@ declare namespace V20190711 {
   interface PullSmsReplyStatusResponse {
     /** 回复状态响应集合。 */
     PullSmsReplyStatusSet: PullSmsReplyStatus[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -959,7 +959,7 @@ declare namespace V20190711 {
   interface PullSmsSendStatusByPhoneNumberResponse {
     /** 下发状态响应集合。 */
     PullSmsSendStatusSet: PullSmsSendStatus[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -973,7 +973,7 @@ declare namespace V20190711 {
   interface PullSmsSendStatusResponse {
     /** 下发状态响应集合。 */
     PullSmsSendStatusSet: PullSmsSendStatus[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -999,7 +999,7 @@ declare namespace V20190711 {
   interface SendSmsResponse {
     /** 短信发送状态。 */
     SendStatusSet: SendStatus[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1019,7 +1019,7 @@ declare namespace V20190711 {
   interface SendStatusStatisticsResponse {
     /** 发送数据统计响应包体。 */
     SendStatusStatistics: SendStatusStatistics;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1035,7 +1035,7 @@ declare namespace V20190711 {
   interface SmsPackagesStatisticsResponse {
     /** 发送数据统计响应包体。 */
     SmsPackagesStatisticsSet: SmsPackagesStatistics[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -1043,73 +1043,73 @@ declare namespace V20190711 {
 /** {@link Sms 短信} */
 declare interface Sms {
   (): Versions;
-  /** {@link AddSmsSign 添加短信签名}({@link AddSmsSignRequest 请求参数}): {@link AddSmsSignResponse 返回参数} */
+  /** 添加短信签名 {@link AddSmsSignRequest} {@link AddSmsSignResponse} */
   AddSmsSign(data: AddSmsSignRequest, config?: AxiosRequestConfig): AxiosPromise<AddSmsSignResponse>;
-  /** {@link AddSmsTemplate 添加短信模板}({@link AddSmsTemplateRequest 请求参数}): {@link AddSmsTemplateResponse 返回参数} */
+  /** 添加短信模板 {@link AddSmsTemplateRequest} {@link AddSmsTemplateResponse} */
   AddSmsTemplate(data: AddSmsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<AddSmsTemplateResponse>;
-  /** {@link CallbackStatusStatistics 回执数据统计}({@link CallbackStatusStatisticsRequest 请求参数}): {@link CallbackStatusStatisticsResponse 返回参数} */
+  /** 回执数据统计 {@link CallbackStatusStatisticsRequest} {@link CallbackStatusStatisticsResponse} */
   CallbackStatusStatistics(data: CallbackStatusStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<CallbackStatusStatisticsResponse>;
-  /** {@link DeleteSmsSign 删除短信签名}({@link DeleteSmsSignRequest 请求参数}): {@link DeleteSmsSignResponse 返回参数} */
+  /** 删除短信签名 {@link DeleteSmsSignRequest} {@link DeleteSmsSignResponse} */
   DeleteSmsSign(data: DeleteSmsSignRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSmsSignResponse>;
-  /** {@link DeleteSmsTemplate 删除短信模板}({@link DeleteSmsTemplateRequest 请求参数}): {@link DeleteSmsTemplateResponse 返回参数} */
+  /** 删除短信模板 {@link DeleteSmsTemplateRequest} {@link DeleteSmsTemplateResponse} */
   DeleteSmsTemplate(data: DeleteSmsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSmsTemplateResponse>;
-  /** {@link DescribePhoneNumberInfo 号码信息查询}({@link DescribePhoneNumberInfoRequest 请求参数}): {@link DescribePhoneNumberInfoResponse 返回参数} */
+  /** 号码信息查询 {@link DescribePhoneNumberInfoRequest} {@link DescribePhoneNumberInfoResponse} */
   DescribePhoneNumberInfo(data: DescribePhoneNumberInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePhoneNumberInfoResponse>;
-  /** {@link DescribeSmsSignList 短信签名状态查询}({@link DescribeSmsSignListRequest 请求参数}): {@link DescribeSmsSignListResponse 返回参数} */
+  /** 短信签名状态查询 {@link DescribeSmsSignListRequest} {@link DescribeSmsSignListResponse} */
   DescribeSmsSignList(data: DescribeSmsSignListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmsSignListResponse>;
-  /** {@link DescribeSmsTemplateList 短信模板状态查询}({@link DescribeSmsTemplateListRequest 请求参数}): {@link DescribeSmsTemplateListResponse 返回参数} */
+  /** 短信模板状态查询 {@link DescribeSmsTemplateListRequest} {@link DescribeSmsTemplateListResponse} */
   DescribeSmsTemplateList(data: DescribeSmsTemplateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmsTemplateListResponse>;
-  /** {@link ModifySmsSign 修改短信签名}({@link ModifySmsSignRequest 请求参数}): {@link ModifySmsSignResponse 返回参数} */
+  /** 修改短信签名 {@link ModifySmsSignRequest} {@link ModifySmsSignResponse} */
   ModifySmsSign(data: ModifySmsSignRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySmsSignResponse>;
-  /** {@link ModifySmsTemplate 修改短信模板}({@link ModifySmsTemplateRequest 请求参数}): {@link ModifySmsTemplateResponse 返回参数} */
+  /** 修改短信模板 {@link ModifySmsTemplateRequest} {@link ModifySmsTemplateResponse} */
   ModifySmsTemplate(data: ModifySmsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySmsTemplateResponse>;
-  /** {@link PullSmsReplyStatus 拉取短信回复状态}({@link PullSmsReplyStatusRequest 请求参数}): {@link PullSmsReplyStatusResponse 返回参数} */
+  /** 拉取短信回复状态 {@link PullSmsReplyStatusRequest} {@link PullSmsReplyStatusResponse} */
   PullSmsReplyStatus(data: PullSmsReplyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<PullSmsReplyStatusResponse>;
-  /** {@link PullSmsReplyStatusByPhoneNumber 拉取单个号码短信回复状态}({@link PullSmsReplyStatusByPhoneNumberRequest 请求参数}): {@link PullSmsReplyStatusByPhoneNumberResponse 返回参数} */
+  /** 拉取单个号码短信回复状态 {@link PullSmsReplyStatusByPhoneNumberRequest} {@link PullSmsReplyStatusByPhoneNumberResponse} */
   PullSmsReplyStatusByPhoneNumber(data: PullSmsReplyStatusByPhoneNumberRequest, config?: AxiosRequestConfig): AxiosPromise<PullSmsReplyStatusByPhoneNumberResponse>;
-  /** {@link PullSmsSendStatus 拉取短信下发状态}({@link PullSmsSendStatusRequest 请求参数}): {@link PullSmsSendStatusResponse 返回参数} */
+  /** 拉取短信下发状态 {@link PullSmsSendStatusRequest} {@link PullSmsSendStatusResponse} */
   PullSmsSendStatus(data: PullSmsSendStatusRequest, config?: AxiosRequestConfig): AxiosPromise<PullSmsSendStatusResponse>;
-  /** {@link PullSmsSendStatusByPhoneNumber 拉取单个号码短信下发状态}({@link PullSmsSendStatusByPhoneNumberRequest 请求参数}): {@link PullSmsSendStatusByPhoneNumberResponse 返回参数} */
+  /** 拉取单个号码短信下发状态 {@link PullSmsSendStatusByPhoneNumberRequest} {@link PullSmsSendStatusByPhoneNumberResponse} */
   PullSmsSendStatusByPhoneNumber(data: PullSmsSendStatusByPhoneNumberRequest, config?: AxiosRequestConfig): AxiosPromise<PullSmsSendStatusByPhoneNumberResponse>;
-  /** {@link ReportConversion 上报转换率}({@link ReportConversionRequest 请求参数}): {@link ReportConversionResponse 返回参数} */
+  /** 上报转换率 {@link ReportConversionRequest} {@link ReportConversionResponse} */
   ReportConversion(data: ReportConversionRequest, config?: AxiosRequestConfig): AxiosPromise<ReportConversionResponse>;
-  /** {@link SendSms 发送短信}({@link SendSmsRequest 请求参数}): {@link SendSmsResponse 返回参数} */
+  /** 发送短信 {@link SendSmsRequest} {@link SendSmsResponse} */
   SendSms(data: SendSmsRequest, config?: AxiosRequestConfig): AxiosPromise<SendSmsResponse>;
-  /** {@link SendStatusStatistics 发送短信数据统计}({@link SendStatusStatisticsRequest 请求参数}): {@link SendStatusStatisticsResponse 返回参数} */
+  /** 发送短信数据统计 {@link SendStatusStatisticsRequest} {@link SendStatusStatisticsResponse} */
   SendStatusStatistics(data: SendStatusStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<SendStatusStatisticsResponse>;
-  /** {@link SmsPackagesStatistics 套餐包信息统计}({@link SmsPackagesStatisticsRequest 请求参数}): {@link SmsPackagesStatisticsResponse 返回参数} */
+  /** 套餐包信息统计 {@link SmsPackagesStatisticsRequest} {@link SmsPackagesStatisticsResponse} */
   SmsPackagesStatistics(data: SmsPackagesStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<SmsPackagesStatisticsResponse>;
-  /** {@link V20190711.AddSmsSign 添加短信签名}({@link V20190711.AddSmsSignRequest 请求参数}): {@link V20190711.AddSmsSignResponse 返回参数} */
+  /** 添加短信签名 {@link V20190711.AddSmsSignRequest} {@link V20190711.AddSmsSignResponse} */
   AddSmsSign(data: V20190711.AddSmsSignRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.AddSmsSignResponse>;
-  /** {@link V20190711.AddSmsTemplate 添加短信模板}({@link V20190711.AddSmsTemplateRequest 请求参数}): {@link V20190711.AddSmsTemplateResponse 返回参数} */
+  /** 添加短信模板 {@link V20190711.AddSmsTemplateRequest} {@link V20190711.AddSmsTemplateResponse} */
   AddSmsTemplate(data: V20190711.AddSmsTemplateRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.AddSmsTemplateResponse>;
-  /** {@link V20190711.CallbackStatusStatistics 回执数据统计}({@link V20190711.CallbackStatusStatisticsRequest 请求参数}): {@link V20190711.CallbackStatusStatisticsResponse 返回参数} */
+  /** 回执数据统计 {@link V20190711.CallbackStatusStatisticsRequest} {@link V20190711.CallbackStatusStatisticsResponse} */
   CallbackStatusStatistics(data: V20190711.CallbackStatusStatisticsRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.CallbackStatusStatisticsResponse>;
-  /** {@link V20190711.DeleteSmsSign 删除短信签名}({@link V20190711.DeleteSmsSignRequest 请求参数}): {@link V20190711.DeleteSmsSignResponse 返回参数} */
+  /** 删除短信签名 {@link V20190711.DeleteSmsSignRequest} {@link V20190711.DeleteSmsSignResponse} */
   DeleteSmsSign(data: V20190711.DeleteSmsSignRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.DeleteSmsSignResponse>;
-  /** {@link V20190711.DeleteSmsTemplate 删除短信模板}({@link V20190711.DeleteSmsTemplateRequest 请求参数}): {@link V20190711.DeleteSmsTemplateResponse 返回参数} */
+  /** 删除短信模板 {@link V20190711.DeleteSmsTemplateRequest} {@link V20190711.DeleteSmsTemplateResponse} */
   DeleteSmsTemplate(data: V20190711.DeleteSmsTemplateRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.DeleteSmsTemplateResponse>;
-  /** {@link V20190711.DescribeSmsSignList 短信签名状态查询}({@link V20190711.DescribeSmsSignListRequest 请求参数}): {@link V20190711.DescribeSmsSignListResponse 返回参数} */
+  /** 短信签名状态查询 {@link V20190711.DescribeSmsSignListRequest} {@link V20190711.DescribeSmsSignListResponse} */
   DescribeSmsSignList(data: V20190711.DescribeSmsSignListRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.DescribeSmsSignListResponse>;
-  /** {@link V20190711.DescribeSmsTemplateList 短信模板状态查询}({@link V20190711.DescribeSmsTemplateListRequest 请求参数}): {@link V20190711.DescribeSmsTemplateListResponse 返回参数} */
+  /** 短信模板状态查询 {@link V20190711.DescribeSmsTemplateListRequest} {@link V20190711.DescribeSmsTemplateListResponse} */
   DescribeSmsTemplateList(data: V20190711.DescribeSmsTemplateListRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.DescribeSmsTemplateListResponse>;
-  /** {@link V20190711.ModifySmsSign 修改短信签名}({@link V20190711.ModifySmsSignRequest 请求参数}): {@link V20190711.ModifySmsSignResponse 返回参数} */
+  /** 修改短信签名 {@link V20190711.ModifySmsSignRequest} {@link V20190711.ModifySmsSignResponse} */
   ModifySmsSign(data: V20190711.ModifySmsSignRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.ModifySmsSignResponse>;
-  /** {@link V20190711.ModifySmsTemplate 修改短信模板}({@link V20190711.ModifySmsTemplateRequest 请求参数}): {@link V20190711.ModifySmsTemplateResponse 返回参数} */
+  /** 修改短信模板 {@link V20190711.ModifySmsTemplateRequest} {@link V20190711.ModifySmsTemplateResponse} */
   ModifySmsTemplate(data: V20190711.ModifySmsTemplateRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.ModifySmsTemplateResponse>;
-  /** {@link V20190711.PullSmsReplyStatus 拉取短信回复状态}({@link V20190711.PullSmsReplyStatusRequest 请求参数}): {@link V20190711.PullSmsReplyStatusResponse 返回参数} */
+  /** 拉取短信回复状态 {@link V20190711.PullSmsReplyStatusRequest} {@link V20190711.PullSmsReplyStatusResponse} */
   PullSmsReplyStatus(data: V20190711.PullSmsReplyStatusRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.PullSmsReplyStatusResponse>;
-  /** {@link V20190711.PullSmsReplyStatusByPhoneNumber 拉取单个号码短信回复状态}({@link V20190711.PullSmsReplyStatusByPhoneNumberRequest 请求参数}): {@link V20190711.PullSmsReplyStatusByPhoneNumberResponse 返回参数} */
+  /** 拉取单个号码短信回复状态 {@link V20190711.PullSmsReplyStatusByPhoneNumberRequest} {@link V20190711.PullSmsReplyStatusByPhoneNumberResponse} */
   PullSmsReplyStatusByPhoneNumber(data: V20190711.PullSmsReplyStatusByPhoneNumberRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.PullSmsReplyStatusByPhoneNumberResponse>;
-  /** {@link V20190711.PullSmsSendStatus 拉取短信下发状态}({@link V20190711.PullSmsSendStatusRequest 请求参数}): {@link V20190711.PullSmsSendStatusResponse 返回参数} */
+  /** 拉取短信下发状态 {@link V20190711.PullSmsSendStatusRequest} {@link V20190711.PullSmsSendStatusResponse} */
   PullSmsSendStatus(data: V20190711.PullSmsSendStatusRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.PullSmsSendStatusResponse>;
-  /** {@link V20190711.PullSmsSendStatusByPhoneNumber 拉取单个号码短信下发状态}({@link V20190711.PullSmsSendStatusByPhoneNumberRequest 请求参数}): {@link V20190711.PullSmsSendStatusByPhoneNumberResponse 返回参数} */
+  /** 拉取单个号码短信下发状态 {@link V20190711.PullSmsSendStatusByPhoneNumberRequest} {@link V20190711.PullSmsSendStatusByPhoneNumberResponse} */
   PullSmsSendStatusByPhoneNumber(data: V20190711.PullSmsSendStatusByPhoneNumberRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.PullSmsSendStatusByPhoneNumberResponse>;
-  /** {@link V20190711.SendSms 发送短信}({@link V20190711.SendSmsRequest 请求参数}): {@link V20190711.SendSmsResponse 返回参数} */
+  /** 发送短信 {@link V20190711.SendSmsRequest} {@link V20190711.SendSmsResponse} */
   SendSms(data: V20190711.SendSmsRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.SendSmsResponse>;
-  /** {@link V20190711.SendStatusStatistics 发送短信数据统计}({@link V20190711.SendStatusStatisticsRequest 请求参数}): {@link V20190711.SendStatusStatisticsResponse 返回参数} */
+  /** 发送短信数据统计 {@link V20190711.SendStatusStatisticsRequest} {@link V20190711.SendStatusStatisticsResponse} */
   SendStatusStatistics(data: V20190711.SendStatusStatisticsRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.SendStatusStatisticsResponse>;
-  /** {@link V20190711.SmsPackagesStatistics 套餐包信息统计}({@link V20190711.SmsPackagesStatisticsRequest 请求参数}): {@link V20190711.SmsPackagesStatisticsResponse 返回参数} */
+  /** 套餐包信息统计 {@link V20190711.SmsPackagesStatisticsRequest} {@link V20190711.SmsPackagesStatisticsResponse} */
   SmsPackagesStatistics(data: V20190711.SmsPackagesStatisticsRequest, config: AxiosRequestConfig & V20190711.VersionHeader): AxiosPromise<V20190711.SmsPackagesStatisticsResponse>;
 }
 

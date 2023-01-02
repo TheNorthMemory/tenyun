@@ -448,7 +448,7 @@ declare interface ApplyAIModelRequest {
 }
 
 declare interface ApplyAIModelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -476,7 +476,7 @@ declare interface BatchUpdateFirmwareRequest {
 declare interface BatchUpdateFirmwareResponse {
   /** 任务ID */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -490,7 +490,7 @@ declare interface BindCloudStorageUserRequest {
 }
 
 declare interface BindCloudStorageUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -510,7 +510,7 @@ declare interface CallDeviceActionAsyncResponse {
   ClientToken: string | null;
   /** 异步调用状态 */
   Status: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -532,7 +532,7 @@ declare interface CallDeviceActionSyncResponse {
   OutputParams: string | null;
   /** 返回状态，当设备不在线等部分情况，会通过该 Status 返回。 */
   Status: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -544,7 +544,7 @@ declare interface CancelAIModelApplicationRequest {
 }
 
 declare interface CancelAIModelApplicationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -560,7 +560,7 @@ declare interface CancelDeviceFirmwareTaskRequest {
 }
 
 declare interface CancelDeviceFirmwareTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -582,7 +582,7 @@ declare interface CheckForwardAuthResponse {
   ErrMsg: string;
   /** 队列类型 0.CMQ 1.Ckafka */
   QueueType: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -604,7 +604,7 @@ declare interface ControlDeviceDataResponse {
   Data: string;
   /** JSON字符串， 返回下发控制的结果信息, Sent = 1 表示设备已经在线并且订阅了控制下发的mqtt topic */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -622,7 +622,7 @@ declare interface CreateAIDetectionRequest {
 }
 
 declare interface CreateAIDetectionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -638,7 +638,7 @@ declare interface CreateBatchRequest {
 declare interface CreateBatchResponse {
   /** 批次ID */
   BatchId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -664,7 +664,7 @@ declare interface CreateCOSCredentialsResponse {
   Token: string;
   /** 密钥信息过期时间 */
   ExpiredTime: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -682,7 +682,7 @@ declare interface CreateCloudStorageRequest {
 }
 
 declare interface CreateCloudStorageResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -696,7 +696,7 @@ declare interface CreateDataForwardRequest {
 }
 
 declare interface CreateDataForwardResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -748,7 +748,7 @@ declare interface CreateForwardRuleResponse {
   InstanceName: string;
   /** 错误消息 */
   ErrMsg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -780,7 +780,7 @@ declare interface CreateProductRequest {
 declare interface CreateProductResponse {
   /** 产品详情 */
   Data: VideoProduct;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -794,7 +794,7 @@ declare interface CreateTaskFileUrlResponse {
   Url: string;
   /** 任务文件名 */
   FileName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -806,7 +806,7 @@ declare interface DeleteDeviceRequest {
 }
 
 declare interface DeleteDeviceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -818,7 +818,7 @@ declare interface DeleteFirmwareRequest {
 }
 
 declare interface DeleteFirmwareResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -844,7 +844,7 @@ declare interface DeleteForwardRuleResponse {
   Result: number;
   /** 错误消息 */
   ErrMsg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -854,7 +854,7 @@ declare interface DeleteProductRequest {
 }
 
 declare interface DeleteProductResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -874,7 +874,7 @@ declare interface DescribeAIModelApplicationsResponse {
   TotalCount: number;
   /** 申请记录数组 */
   Applications: AIModelApplication[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -898,7 +898,7 @@ declare interface DescribeAIModelChannelResponse {
   CKafkaInstance: string | null;
   /** ckafka订阅主题 */
   CKafkaTopic: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -918,7 +918,7 @@ declare interface DescribeAIModelUsageResponse {
   TotalCount: number;
   /** AI模型资源包信息数组 */
   UsageInfo: AIModelUsageInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -938,7 +938,7 @@ declare interface DescribeAIModelsResponse {
   TotalCount: number;
   /** AI模型信息数组 */
   Models: AIModelInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -954,7 +954,7 @@ declare interface DescribeAccountResponse {
   BillType: number;
   /** 0未定义，1按套餐预付费，2按量后付费 */
   BillMode: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -966,7 +966,7 @@ declare interface DescribeBalanceRequest {
 declare interface DescribeBalanceResponse {
   /** 账户余额，单位：分（人民币）。 */
   Balance: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -986,7 +986,7 @@ declare interface DescribeBalanceTransactionsResponse {
   TotalCount: number;
   /** 账户流水详情数组。 */
   Transactions: BalanceTransaction[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -998,7 +998,7 @@ declare interface DescribeBatchRequest {
 declare interface DescribeBatchResponse {
   /** 批次详情 */
   Data: VideoBatch;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1016,7 +1016,7 @@ declare interface DescribeBatchsResponse {
   TotalCount: number;
   /** 批次列表详情 */
   Data: VideoBatch[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1032,7 +1032,7 @@ declare interface DescribeBonusesResponse {
   TotalCount: number;
   /** 资源包信息 */
   Bonuses: BonusInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1044,7 +1044,7 @@ declare interface DescribeCategoryRequest {
 declare interface DescribeCategoryResponse {
   /** Category详情 */
   Data: ProductTemplate;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1060,7 +1060,7 @@ declare interface DescribeCloudStorageDateRequest {
 declare interface DescribeCloudStorageDateResponse {
   /** 云存日期数组，["2021-01-05","2021-01-06"] */
   Data: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1096,7 +1096,7 @@ declare interface DescribeCloudStorageEventsResponse {
   Total: number;
   /** 视频播放URL */
   VideoURL: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1108,7 +1108,7 @@ declare interface DescribeCloudStoragePackageConsumeDetailsRequest {
 }
 
 declare interface DescribeCloudStoragePackageConsumeDetailsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1122,7 +1122,7 @@ declare interface DescribeCloudStoragePackageConsumeStatsRequest {
 declare interface DescribeCloudStoragePackageConsumeStatsResponse {
   /** 统计列表详情 */
   Stats: PackageConsumeStat[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1146,7 +1146,7 @@ declare interface DescribeCloudStorageResponse {
   ShiftDuration: number;
   /** 云存用户ID */
   UserId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1164,7 +1164,7 @@ declare interface DescribeCloudStorageStreamDataResponse {
   VideoStream: string;
   /** 图片流音频地址 */
   AudioStream: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1180,7 +1180,7 @@ declare interface DescribeCloudStorageThumbnailRequest {
 declare interface DescribeCloudStorageThumbnailResponse {
   /** 缩略图访问地址 */
   ThumbnailURL: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1202,7 +1202,7 @@ declare interface DescribeCloudStorageTimeRequest {
 declare interface DescribeCloudStorageTimeResponse {
   /** 接口返回数据 */
   Data: CloudStorageTimeData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1222,7 +1222,7 @@ declare interface DescribeCloudStorageUsersResponse {
   TotalCount: number;
   /** 用户信息 */
   Users: CloudStorageUserInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1234,7 +1234,7 @@ declare interface DescribeDataForwardListRequest {
 declare interface DescribeDataForwardListResponse {
   /** 数据转发列表。 */
   DataForwardList: DataForward[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1264,7 +1264,7 @@ declare interface DescribeDeviceActionHistoryResponse {
   Context: string | null;
   /** 搜索结果是否已经结束。 */
   Listover: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1292,7 +1292,7 @@ declare interface DescribeDeviceCommLogResponse {
   Context: string;
   /** 日志数据结果数组，返回对应时间点及取值。 */
   Results: DeviceCommLogItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1322,7 +1322,7 @@ declare interface DescribeDeviceDataHistoryResponse {
   Context: string | null;
   /** 历史数据结果数组，返回对应时间点及取值。 */
   Results: DeviceDataHistoryItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1336,7 +1336,7 @@ declare interface DescribeDeviceDataRequest {
 declare interface DescribeDeviceDataResponse {
   /** 设备数据 */
   Data: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1356,7 +1356,7 @@ declare interface DescribeDeviceDataStatsResponse {
   Data: DeviceCntStats[] | null;
   /** 总数 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1388,7 +1388,7 @@ declare interface DescribeDeviceEventHistoryResponse {
   Listover: boolean | null;
   /** 搜集结果集 */
   EventHistory: EventHistoryItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1414,7 +1414,7 @@ declare interface DescribeDeviceResponse {
   ExpireTime: number;
   /** 设备的sdk日志等级，0：关闭，1：错误，2：告警，3：信息，4：调试 */
   LogLevel: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1442,7 +1442,7 @@ declare interface DescribeDeviceStatusLogResponse {
   Results: DeviceStatusLogItem[] | null;
   /** 日志数据结果总条数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1462,7 +1462,7 @@ declare interface DescribeDevicesResponse {
   TotalCount: number;
   /** 设备详细信息列表 */
   Devices: DeviceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1490,7 +1490,7 @@ declare interface DescribeFirmwareResponse {
   ProductName: string;
   /** 固件升级模块 */
   FwType: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1512,7 +1512,7 @@ declare interface DescribeFirmwareTaskDevicesResponse {
   Total: number | null;
   /** 固件升级任务的设备列表 */
   Devices: DeviceUpdateStatus[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1528,7 +1528,7 @@ declare interface DescribeFirmwareTaskDistributionRequest {
 declare interface DescribeFirmwareTaskDistributionResponse {
   /** 固件升级任务状态分布信息 */
   StatusInfos: StatusStatistic[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1558,7 +1558,7 @@ declare interface DescribeFirmwareTaskResponse {
   ProductId: string | null;
   /** 原始固件版本号，在UpgradeMode是originalVersion升级模式下会返回 */
   OriginalVersion: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1576,7 +1576,7 @@ declare interface DescribeFirmwareTaskStatisticsResponse {
   FailureTotal: number | null;
   /** 正在升级的设备总数 */
   UpgradingTotal: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1598,7 +1598,7 @@ declare interface DescribeFirmwareTasksResponse {
   TaskInfos: FirmwareTaskInfo[] | null;
   /** 固件升级任务总数 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1638,7 +1638,7 @@ declare interface DescribeForwardRuleResponse {
   InstanceName: string;
   /** 错误消息 */
   ErrMsg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1656,7 +1656,7 @@ declare interface DescribeMessageDataStatsResponse {
   Data: MessageCntStats[] | null;
   /** 总数 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1668,7 +1668,7 @@ declare interface DescribeModelDefinitionRequest {
 declare interface DescribeModelDefinitionResponse {
   /** 产品数据模板 */
   Model: ProductModelDefinition;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1680,7 +1680,7 @@ declare interface DescribePackageConsumeTaskRequest {
 declare interface DescribePackageConsumeTaskResponse {
   /** 文件下载的url，文件详情是套餐包消耗详情 */
   URL: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1696,7 +1696,7 @@ declare interface DescribePackageConsumeTasksResponse {
   TotalCount: number;
   /** 任务列表 */
   List: PackageConsumeTask[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1712,7 +1712,7 @@ declare interface DescribeProductDynamicRegisterResponse {
   ProductSecret: string;
   /** 动态注册设备上限 */
   RegisterLimit: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1724,7 +1724,7 @@ declare interface DescribeProductRequest {
 declare interface DescribeProductResponse {
   /** 产品详情 */
   Data: VideoProduct;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1740,7 +1740,7 @@ declare interface DescribeProductsResponse {
   TotalCount: number;
   /** 产品详情列表 */
   Data: VideoProduct[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1762,7 +1762,7 @@ declare interface DescribePushChannelResponse {
   CKafkaInstance: string | null;
   /** ckafka订阅主题 */
   CKafkaTopic: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1786,7 +1786,7 @@ declare interface DescribeSDKLogResponse {
   Listover: boolean;
   /** 日志列表 */
   Results: SDKLogItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1794,7 +1794,7 @@ declare interface DescribeUserRequest {
 }
 
 declare interface DescribeUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1810,7 +1810,7 @@ declare interface EditFirmwareRequest {
 }
 
 declare interface EditFirmwareResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1826,7 +1826,7 @@ declare interface GenSingleDeviceSignatureOfPublicRequest {
 declare interface GenSingleDeviceSignatureOfPublicResponse {
   /** 设备签名信息 */
   DeviceSignature: DeviceSignatureInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1840,7 +1840,7 @@ declare interface GenerateSignedVideoURLRequest {
 declare interface GenerateSignedVideoURLResponse {
   /** 视频防盗链播放URL */
   SignedVideoURL: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1852,7 +1852,7 @@ declare interface GetAllFirmwareVersionRequest {
 declare interface GetAllFirmwareVersionResponse {
   /** 固件可用版本列表 */
   Version: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1866,7 +1866,7 @@ declare interface GetFirmwareURLRequest {
 declare interface GetFirmwareURLResponse {
   /** 固件URL */
   Url: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1878,7 +1878,7 @@ declare interface ImportModelDefinitionRequest {
 }
 
 declare interface ImportModelDefinitionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1894,7 +1894,7 @@ declare interface InheritCloudStorageUserRequest {
 }
 
 declare interface InheritCloudStorageUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1914,7 +1914,7 @@ declare interface ListFirmwaresResponse {
   TotalCount: number;
   /** 固件列表 */
   Firmwares: FirmwareInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1928,7 +1928,7 @@ declare interface ModifyDataForwardRequest {
 }
 
 declare interface ModifyDataForwardResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1940,7 +1940,7 @@ declare interface ModifyDataForwardStatusRequest {
 }
 
 declare interface ModifyDataForwardStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1954,7 +1954,7 @@ declare interface ModifyDeviceLogLevelRequest {
 }
 
 declare interface ModifyDeviceLogLevelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1968,7 +1968,7 @@ declare interface ModifyDeviceRequest {
 }
 
 declare interface ModifyDeviceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2006,7 +2006,7 @@ declare interface ModifyForwardRuleResponse {
   ErrMsg: string;
   /** 队列类型 0.CMQ 1.CKafka */
   QueueType: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2018,7 +2018,7 @@ declare interface ModifyModelDefinitionRequest {
 }
 
 declare interface ModifyModelDefinitionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2038,7 +2038,7 @@ declare interface ModifyProductDynamicRegisterResponse {
   ProductSecret: string;
   /** 动态注册设备上限 */
   RegisterLimit: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2052,7 +2052,7 @@ declare interface ModifyProductRequest {
 }
 
 declare interface ModifyProductResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2074,7 +2074,7 @@ declare interface ModifyPushChannelRequest {
 }
 
 declare interface ModifyPushChannelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2094,7 +2094,7 @@ declare interface PublishMessageRequest {
 }
 
 declare interface PublishMessageResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2106,7 +2106,7 @@ declare interface ReportAliveDeviceRequest {
 }
 
 declare interface ReportAliveDeviceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2122,7 +2122,7 @@ declare interface ResetCloudStorageRequest {
 }
 
 declare interface ResetCloudStorageResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2138,7 +2138,7 @@ declare interface RetryDeviceFirmwareTaskRequest {
 }
 
 declare interface RetryDeviceFirmwareTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2162,7 +2162,7 @@ declare interface SetForwardAuthResponse {
   QueueType: number;
   /** 错误消息 */
   ErrMsg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2176,7 +2176,7 @@ declare interface TransferCloudStorageRequest {
 }
 
 declare interface TransferCloudStorageResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2202,7 +2202,7 @@ declare interface UpdateAIModelChannelRequest {
 declare interface UpdateAIModelChannelResponse {
   /** 第三方推送密钥，如果选择自动生成则会返回此字段 */
   ForwardKey: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2224,7 +2224,7 @@ declare interface UploadFirmwareRequest {
 }
 
 declare interface UploadFirmwareResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2236,7 +2236,7 @@ declare interface WakeUpDeviceRequest {
 }
 
 declare interface WakeUpDeviceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2609,7 +2609,7 @@ declare namespace V20201215 {
   }
 
   interface ApplyAIModelResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2635,7 +2635,7 @@ declare namespace V20201215 {
   interface BatchUpdateFirmwareResponse {
     /** 任务ID */
     TaskId: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2649,7 +2649,7 @@ declare namespace V20201215 {
   }
 
   interface BindCloudStorageUserResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2661,7 +2661,7 @@ declare namespace V20201215 {
   }
 
   interface CancelAIModelApplicationResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2677,7 +2677,7 @@ declare namespace V20201215 {
   }
 
   interface CancelDeviceFirmwareTaskResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2699,7 +2699,7 @@ declare namespace V20201215 {
     ErrMsg: string;
     /** 队列类型 0.CMQ 1.Ckafka */
     QueueType: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2721,7 +2721,7 @@ declare namespace V20201215 {
     Data: string;
     /** JSON字符串， 返回下发控制的结果信息, Sent = 1 表示设备已经在线并且订阅了控制下发的mqtt topic */
     Result: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2739,7 +2739,7 @@ declare namespace V20201215 {
   }
 
   interface CreateAIDetectionResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2755,7 +2755,7 @@ declare namespace V20201215 {
   interface CreateBatchResponse {
     /** 批次ID */
     BatchId: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2781,7 +2781,7 @@ declare namespace V20201215 {
     Token: string;
     /** 密钥信息过期时间 */
     ExpiredTime: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2797,7 +2797,7 @@ declare namespace V20201215 {
   }
 
   interface CreateCloudStorageResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2811,7 +2811,7 @@ declare namespace V20201215 {
   }
 
   interface CreateDataForwardResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2863,7 +2863,7 @@ declare namespace V20201215 {
     InstanceName: string;
     /** 错误消息 */
     ErrMsg: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2893,7 +2893,7 @@ declare namespace V20201215 {
   interface CreateProductResponse {
     /** 产品详情 */
     Data: VideoProduct;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2907,7 +2907,7 @@ declare namespace V20201215 {
     Url: string;
     /** 任务文件名 */
     FileName: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2919,7 +2919,7 @@ declare namespace V20201215 {
   }
 
   interface DeleteDeviceResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2931,7 +2931,7 @@ declare namespace V20201215 {
   }
 
   interface DeleteFirmwareResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2957,7 +2957,7 @@ declare namespace V20201215 {
     Result: number;
     /** 错误消息 */
     ErrMsg: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2967,7 +2967,7 @@ declare namespace V20201215 {
   }
 
   interface DeleteProductResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2987,7 +2987,7 @@ declare namespace V20201215 {
     TotalCount: number;
     /** 申请记录数组 */
     Applications: AIModelApplication[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3011,7 +3011,7 @@ declare namespace V20201215 {
     CKafkaInstance: string | null;
     /** ckafka订阅主题 */
     CKafkaTopic: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3031,7 +3031,7 @@ declare namespace V20201215 {
     TotalCount: number;
     /** AI模型资源包信息数组 */
     UsageInfo: AIModelUsageInfo[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3051,7 +3051,7 @@ declare namespace V20201215 {
     TotalCount: number;
     /** AI模型信息数组 */
     Models: AIModelInfo[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3063,7 +3063,7 @@ declare namespace V20201215 {
   interface DescribeBalanceResponse {
     /** 账户余额，单位：分（人民币）。 */
     Balance: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3083,7 +3083,7 @@ declare namespace V20201215 {
     TotalCount: number;
     /** 账户流水详情数组。 */
     Transactions: BalanceTransaction[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3095,7 +3095,7 @@ declare namespace V20201215 {
   interface DescribeBatchResponse {
     /** 批次详情 */
     Data: VideoBatch;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3113,7 +3113,7 @@ declare namespace V20201215 {
     TotalCount: number;
     /** 批次列表详情 */
     Data: VideoBatch[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3125,7 +3125,7 @@ declare namespace V20201215 {
   interface DescribeCategoryResponse {
     /** Category详情 */
     Data: ProductTemplate;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3141,7 +3141,7 @@ declare namespace V20201215 {
   interface DescribeCloudStorageDateResponse {
     /** 云存日期数组，["2021-01-05","2021-01-06"] */
     Data: string[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3177,7 +3177,7 @@ declare namespace V20201215 {
     Total: number;
     /** 视频播放URL */
     VideoURL: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3201,7 +3201,7 @@ declare namespace V20201215 {
     ShiftDuration: number;
     /** 云存用户ID */
     UserId: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3217,7 +3217,7 @@ declare namespace V20201215 {
   interface DescribeCloudStorageThumbnailResponse {
     /** 缩略图访问地址 */
     ThumbnailURL: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3239,7 +3239,7 @@ declare namespace V20201215 {
   interface DescribeCloudStorageTimeResponse {
     /** 接口返回数据 */
     Data: CloudStorageTimeData;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3259,7 +3259,7 @@ declare namespace V20201215 {
     TotalCount: number;
     /** 用户信息 */
     Users: CloudStorageUserInfo[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3271,7 +3271,7 @@ declare namespace V20201215 {
   interface DescribeDataForwardListResponse {
     /** 数据转发列表。 */
     DataForwardList: DataForward[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3301,7 +3301,7 @@ declare namespace V20201215 {
     Context: string | null;
     /** 搜索结果是否已经结束。 */
     Listover: boolean | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3329,7 +3329,7 @@ declare namespace V20201215 {
     Context: string;
     /** 日志数据结果数组，返回对应时间点及取值。 */
     Results: DeviceCommLogItem[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3359,7 +3359,7 @@ declare namespace V20201215 {
     Context: string | null;
     /** 历史数据结果数组，返回对应时间点及取值。 */
     Results: DeviceDataHistoryItem[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3373,7 +3373,7 @@ declare namespace V20201215 {
   interface DescribeDeviceDataResponse {
     /** 设备数据 */
     Data: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3405,7 +3405,7 @@ declare namespace V20201215 {
     Listover: boolean | null;
     /** 搜集结果集 */
     EventHistory: EventHistoryItem[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3431,7 +3431,7 @@ declare namespace V20201215 {
     ExpireTime: number;
     /** 设备的sdk日志等级，0：关闭，1：错误，2：告警，3：信息，4：调试 */
     LogLevel: number | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3459,7 +3459,7 @@ declare namespace V20201215 {
     Results: DeviceStatusLogItem[] | null;
     /** 日志数据结果总条数 */
     TotalCount: number | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3479,7 +3479,7 @@ declare namespace V20201215 {
     TotalCount: number;
     /** 设备详细信息列表 */
     Devices: DeviceInfo[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3505,7 +3505,7 @@ declare namespace V20201215 {
     Createtime: number | null;
     /** 产品名称 */
     ProductName: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3527,7 +3527,7 @@ declare namespace V20201215 {
     Total: number | null;
     /** 固件升级任务的设备列表 */
     Devices: DeviceUpdateStatus[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3543,7 +3543,7 @@ declare namespace V20201215 {
   interface DescribeFirmwareTaskDistributionResponse {
     /** 固件升级任务状态分布信息 */
     StatusInfos: StatusStatistic[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3573,7 +3573,7 @@ declare namespace V20201215 {
     ProductId: string | null;
     /** 原始固件版本号，在UpgradeMode是originalVersion升级模式下会返回 */
     OriginalVersion: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3591,7 +3591,7 @@ declare namespace V20201215 {
     FailureTotal: number | null;
     /** 正在升级的设备总数 */
     UpgradingTotal: number | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3613,7 +3613,7 @@ declare namespace V20201215 {
     TaskInfos: FirmwareTaskInfo[] | null;
     /** 固件升级任务总数 */
     Total: number | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3653,7 +3653,7 @@ declare namespace V20201215 {
     InstanceName: string;
     /** 错误消息 */
     ErrMsg: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3665,7 +3665,7 @@ declare namespace V20201215 {
   interface DescribeModelDefinitionResponse {
     /** 产品数据模板 */
     Model: ProductModelDefinition;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3681,7 +3681,7 @@ declare namespace V20201215 {
     ProductSecret: string;
     /** 动态注册设备上限 */
     RegisterLimit: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3693,7 +3693,7 @@ declare namespace V20201215 {
   interface DescribeProductResponse {
     /** 产品详情 */
     Data: VideoProduct;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3709,7 +3709,7 @@ declare namespace V20201215 {
     TotalCount: number;
     /** 产品详情列表 */
     Data: VideoProduct[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3733,7 +3733,7 @@ declare namespace V20201215 {
     Listover: boolean;
     /** 日志列表 */
     Results: SDKLogItem[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3749,7 +3749,7 @@ declare namespace V20201215 {
   }
 
   interface EditFirmwareResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3763,7 +3763,7 @@ declare namespace V20201215 {
   interface GenerateSignedVideoURLResponse {
     /** 视频防盗链播放URL */
     SignedVideoURL: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3775,7 +3775,7 @@ declare namespace V20201215 {
   interface GetAllFirmwareVersionResponse {
     /** 固件可用版本列表 */
     Version: string[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3789,7 +3789,7 @@ declare namespace V20201215 {
   interface GetFirmwareURLResponse {
     /** 固件URL */
     Url: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3801,7 +3801,7 @@ declare namespace V20201215 {
   }
 
   interface ImportModelDefinitionResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3817,7 +3817,7 @@ declare namespace V20201215 {
   }
 
   interface InheritCloudStorageUserResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3837,7 +3837,7 @@ declare namespace V20201215 {
     TotalCount: number;
     /** 固件列表 */
     Firmwares: FirmwareInfo[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3851,7 +3851,7 @@ declare namespace V20201215 {
   }
 
   interface ModifyDataForwardResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3863,7 +3863,7 @@ declare namespace V20201215 {
   }
 
   interface ModifyDataForwardStatusResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3877,7 +3877,7 @@ declare namespace V20201215 {
   }
 
   interface ModifyDeviceLogLevelResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3891,7 +3891,7 @@ declare namespace V20201215 {
   }
 
   interface ModifyDeviceResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3929,7 +3929,7 @@ declare namespace V20201215 {
     ErrMsg: string;
     /** 队列类型 0.CMQ 1.CKafka */
     QueueType: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3941,7 +3941,7 @@ declare namespace V20201215 {
   }
 
   interface ModifyModelDefinitionResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3961,7 +3961,7 @@ declare namespace V20201215 {
     ProductSecret: string;
     /** 动态注册设备上限 */
     RegisterLimit: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3975,7 +3975,7 @@ declare namespace V20201215 {
   }
 
   interface ModifyProductResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3995,7 +3995,7 @@ declare namespace V20201215 {
   }
 
   interface PublishMessageResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4007,7 +4007,7 @@ declare namespace V20201215 {
   }
 
   interface ReportAliveDeviceResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4023,7 +4023,7 @@ declare namespace V20201215 {
   }
 
   interface ResetCloudStorageResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4039,7 +4039,7 @@ declare namespace V20201215 {
   }
 
   interface RetryDeviceFirmwareTaskResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4063,7 +4063,7 @@ declare namespace V20201215 {
     QueueType: number;
     /** 错误消息 */
     ErrMsg: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4077,7 +4077,7 @@ declare namespace V20201215 {
   }
 
   interface TransferCloudStorageResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4103,7 +4103,7 @@ declare namespace V20201215 {
   interface UpdateAIModelChannelResponse {
     /** 第三方推送密钥，如果选择自动生成则会返回此字段 */
     ForwardKey: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4123,7 +4123,7 @@ declare namespace V20201215 {
   }
 
   interface UploadFirmwareResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4135,7 +4135,7 @@ declare namespace V20201215 {
   }
 
   interface WakeUpDeviceResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -4479,7 +4479,7 @@ declare namespace V20191126 {
   }
 
   interface ClearDeviceActiveCodeResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4499,7 +4499,7 @@ declare namespace V20191126 {
     AccessToken?: string;
     /** Token的过期时间，单位秒(UTC时间) */
     ExpireTime?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4517,7 +4517,7 @@ declare namespace V20191126 {
     AccessId?: string;
     /** 用户是否为新创建 */
     NewRegist?: boolean;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4539,7 +4539,7 @@ declare namespace V20191126 {
   interface CreateBindingResponse {
     /** 访问设备的AccessToken */
     AccessToken: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4555,7 +4555,7 @@ declare namespace V20191126 {
   interface CreateDevTokenResponse {
     /** 返回的用户token列表 */
     Data?: DevTokenInfo[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4573,7 +4573,7 @@ declare namespace V20191126 {
   interface CreateDevicesResponse {
     /** 新创建设备的认证信息 */
     Data?: DeviceCertificate[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4587,7 +4587,7 @@ declare namespace V20191126 {
   interface CreateGencodeResponse {
     /** 生成的源代码(zip压缩后的base64编码) */
     ZipCode?: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4597,7 +4597,7 @@ declare namespace V20191126 {
   }
 
   interface CreateIotDataTypeResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4609,7 +4609,7 @@ declare namespace V20191126 {
   }
 
   interface CreateIotModelResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4641,7 +4641,7 @@ declare namespace V20191126 {
   interface CreateProductResponse {
     /** 产品详细信息 */
     Data?: ProductBase;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4655,7 +4655,7 @@ declare namespace V20191126 {
   }
 
   interface CreateStorageResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4697,7 +4697,7 @@ declare namespace V20191126 {
     Status: number;
     /** 新增的云存定单列表 */
     Data: StorageOrder[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4707,7 +4707,7 @@ declare namespace V20191126 {
   }
 
   interface CreateTraceIdsResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4721,7 +4721,7 @@ declare namespace V20191126 {
   interface CreateUploadPathResponse {
     /** 固件上传地址URL，用户可将本地的固件文件通过该URL以PUT的请求方式上传。 */
     Data?: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4745,7 +4745,7 @@ declare namespace V20191126 {
     ExpireTime: number;
     /** 终端ID */
     TerminalId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4755,7 +4755,7 @@ declare namespace V20191126 {
   }
 
   interface DeleteAppUsrResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4769,7 +4769,7 @@ declare namespace V20191126 {
   }
 
   interface DeleteBindingResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4779,7 +4779,7 @@ declare namespace V20191126 {
   }
 
   interface DeleteDeviceResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4789,7 +4789,7 @@ declare namespace V20191126 {
   }
 
   interface DeleteIotDataTypeResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4799,7 +4799,7 @@ declare namespace V20191126 {
   }
 
   interface DeleteMessageQueueResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4813,7 +4813,7 @@ declare namespace V20191126 {
   }
 
   interface DeleteOtaVersionResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4823,7 +4823,7 @@ declare namespace V20191126 {
   }
 
   interface DeleteProductResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4833,7 +4833,7 @@ declare namespace V20191126 {
   }
 
   interface DeleteTraceIdsResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4869,7 +4869,7 @@ declare namespace V20191126 {
     Status: number;
     /** 新增的云存定单列表 */
     Data: StorageOrder[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4887,7 +4887,7 @@ declare namespace V20191126 {
     State?: number | null;
     /** 最后修改时间，UTC值。 */
     LastUpdateTime?: number | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4899,7 +4899,7 @@ declare namespace V20191126 {
   interface DescribeBindDevResponse {
     /** 绑定的设备列表信息 */
     Data?: BindDevInfo[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4913,7 +4913,7 @@ declare namespace V20191126 {
   interface DescribeBindUsrResponse {
     /** 具有绑定关系的终端用户信息列表 */
     Data?: BindUsrInfo[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4927,7 +4927,7 @@ declare namespace V20191126 {
   interface DescribeDeviceModelResponse {
     /** 设备物模型信息 */
     Data?: DeviceModelData | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4939,7 +4939,7 @@ declare namespace V20191126 {
   interface DescribeDeviceResponse {
     /** 设备信息 */
     Data?: DeviceData | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4963,7 +4963,7 @@ declare namespace V20191126 {
     Data?: DevicesData[] | null;
     /** 设备总数 */
     TotalCount?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4975,7 +4975,7 @@ declare namespace V20191126 {
   interface DescribeIotDataTypeResponse {
     /** 自定义数据类型，json格式的字符串 */
     Data?: string[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -4989,7 +4989,7 @@ declare namespace V20191126 {
   interface DescribeIotModelResponse {
     /** 物模型定义，json格式的字符串 */
     Data?: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5001,7 +5001,7 @@ declare namespace V20191126 {
   interface DescribeIotModelsResponse {
     /** 历史版本列表 */
     Data?: IotModelData[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5027,7 +5027,7 @@ declare namespace V20191126 {
     Data?: LogData[] | null;
     /** Data数组所包含的信息条数 */
     TotalCount?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5039,7 +5039,7 @@ declare namespace V20191126 {
   interface DescribeMessageQueueResponse {
     /** 消息队列配置 */
     Data?: MsgQueueData | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5051,7 +5051,7 @@ declare namespace V20191126 {
   interface DescribeModelDataRetResponse {
     /** 设备响应结果 */
     Data?: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5061,7 +5061,7 @@ declare namespace V20191126 {
   interface DescribeOsListResponse {
     /** 系统类型 */
     Data?: SystemType | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5083,7 +5083,7 @@ declare namespace V20191126 {
     TotalCount?: number;
     /** 版本详细信息 */
     Data?: VersionData[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5095,7 +5095,7 @@ declare namespace V20191126 {
   interface DescribeProductResponse {
     /** 产品详情 */
     Data?: ProductData | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5117,7 +5117,7 @@ declare namespace V20191126 {
     Data?: ProductData[] | null;
     /** 产品总数 */
     TotalCount?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5129,7 +5129,7 @@ declare namespace V20191126 {
   interface DescribePubVersionsResponse {
     /** 历史发布的版本列表 */
     Data?: OtaPubHistory[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5147,7 +5147,7 @@ declare namespace V20191126 {
     AccountType?: number | null;
     /** 充值记录列表 */
     Records?: RechargeRecord[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5159,7 +5159,7 @@ declare namespace V20191126 {
   interface DescribeRegistrationStatusResponse {
     /** 终端用户注册状态列表 */
     Data?: RegisteredStatus[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5171,7 +5171,7 @@ declare namespace V20191126 {
   interface DescribeRunLogResponse {
     /** 设备运行日志文本信息 */
     Data?: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5201,7 +5201,7 @@ declare namespace V20191126 {
     Status: number;
     /** 云存定单列表 */
     Data: StorageOrder[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5221,7 +5221,7 @@ declare namespace V20191126 {
   interface DescribeStreamResponse {
     /** 返回参数结构 */
     Data: Data | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5231,7 +5231,7 @@ declare namespace V20191126 {
   interface DescribeTraceIdsResponse {
     /** 设备TID列表，列表元素之间以“,”分隔 */
     Data?: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5243,7 +5243,7 @@ declare namespace V20191126 {
   interface DescribeTraceStatusResponse {
     /** 设备追踪状态列表 */
     Data?: TraceStatus[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5253,7 +5253,7 @@ declare namespace V20191126 {
   }
 
   interface DisableDeviceResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5263,7 +5263,7 @@ declare namespace V20191126 {
   }
 
   interface DisableDeviceStreamResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5277,7 +5277,7 @@ declare namespace V20191126 {
   }
 
   interface DisableOtaVersionResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5299,7 +5299,7 @@ declare namespace V20191126 {
     Data?: string | null;
     /** 任务ID若设备端未能及时响应时，会返回此字段，用户可以通过DescribeModelDataRet获取设备的最终响应结果。 */
     TaskId?: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5317,7 +5317,7 @@ declare namespace V20191126 {
   }
 
   interface ModifyDevicePropertyResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5331,7 +5331,7 @@ declare namespace V20191126 {
   }
 
   interface ModifyDeviceResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5349,7 +5349,7 @@ declare namespace V20191126 {
   }
 
   interface ModifyProductResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5367,7 +5367,7 @@ declare namespace V20191126 {
   }
 
   interface ModifyVerContentResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5397,7 +5397,7 @@ declare namespace V20191126 {
     Status: number;
     /** 有效云存定单列表 */
     Data: StorageOrder[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5407,7 +5407,7 @@ declare namespace V20191126 {
   }
 
   interface RunDeviceResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5417,7 +5417,7 @@ declare namespace V20191126 {
   }
 
   interface RunDeviceStreamResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5429,7 +5429,7 @@ declare namespace V20191126 {
   }
 
   interface RunIotModelResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5451,7 +5451,7 @@ declare namespace V20191126 {
   }
 
   interface RunOtaVersionResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5469,7 +5469,7 @@ declare namespace V20191126 {
   }
 
   interface RunTestOtaVersionResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5491,7 +5491,7 @@ declare namespace V20191126 {
     TaskId?: string;
     /** 设备响应信息 */
     Data?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5511,7 +5511,7 @@ declare namespace V20191126 {
   }
 
   interface SetMessageQueueResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5527,7 +5527,7 @@ declare namespace V20191126 {
   interface UpgradeDeviceResponse {
     /** 设备端返回的数据 */
     Data?: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -5551,7 +5551,7 @@ declare namespace V20191126 {
   }
 
   interface UploadOtaVersionResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -5559,483 +5559,483 @@ declare namespace V20191126 {
 /** {@link Iotvideo 物联网智能视频服务} */
 declare interface Iotvideo {
   (): Versions;
-  /** {@link ApplyAIModel 申请AI模型}({@link ApplyAIModelRequest 请求参数}): {@link ApplyAIModelResponse 返回参数} */
+  /** 申请AI模型 {@link ApplyAIModelRequest} {@link ApplyAIModelResponse} */
   ApplyAIModel(data: ApplyAIModelRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyAIModelResponse>;
-  /** {@link BatchUpdateFirmware 批量更新固件}({@link BatchUpdateFirmwareRequest 请求参数}): {@link BatchUpdateFirmwareResponse 返回参数} */
+  /** 批量更新固件 {@link BatchUpdateFirmwareRequest} {@link BatchUpdateFirmwareResponse} */
   BatchUpdateFirmware(data: BatchUpdateFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<BatchUpdateFirmwareResponse>;
-  /** {@link BindCloudStorageUser 绑定云存用户}({@link BindCloudStorageUserRequest 请求参数}): {@link BindCloudStorageUserResponse 返回参数} */
+  /** 绑定云存用户 {@link BindCloudStorageUserRequest} {@link BindCloudStorageUserResponse} */
   BindCloudStorageUser(data: BindCloudStorageUserRequest, config?: AxiosRequestConfig): AxiosPromise<BindCloudStorageUserResponse>;
-  /** {@link CallDeviceActionAsync 异步调用设备行为}({@link CallDeviceActionAsyncRequest 请求参数}): {@link CallDeviceActionAsyncResponse 返回参数} */
+  /** 异步调用设备行为 {@link CallDeviceActionAsyncRequest} {@link CallDeviceActionAsyncResponse} */
   CallDeviceActionAsync(data: CallDeviceActionAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionAsyncResponse>;
-  /** {@link CallDeviceActionSync 同步调用设备行为}({@link CallDeviceActionSyncRequest 请求参数}): {@link CallDeviceActionSyncResponse 返回参数} */
+  /** 同步调用设备行为 {@link CallDeviceActionSyncRequest} {@link CallDeviceActionSyncResponse} */
   CallDeviceActionSync(data: CallDeviceActionSyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionSyncResponse>;
-  /** {@link CancelAIModelApplication 取消AI模型申请}({@link CancelAIModelApplicationRequest 请求参数}): {@link CancelAIModelApplicationResponse 返回参数} */
+  /** 取消AI模型申请 {@link CancelAIModelApplicationRequest} {@link CancelAIModelApplicationResponse} */
   CancelAIModelApplication(data: CancelAIModelApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAIModelApplicationResponse>;
-  /** {@link CancelDeviceFirmwareTask 取消设备升级任务}({@link CancelDeviceFirmwareTaskRequest 请求参数}): {@link CancelDeviceFirmwareTaskResponse 返回参数} */
+  /** 取消设备升级任务 {@link CancelDeviceFirmwareTaskRequest} {@link CancelDeviceFirmwareTaskResponse} */
   CancelDeviceFirmwareTask(data: CancelDeviceFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelDeviceFirmwareTaskResponse>;
-  /** {@link CheckForwardAuth 判断是否开启的转发的权限}({@link CheckForwardAuthRequest 请求参数}): {@link CheckForwardAuthResponse 返回参数} */
+  /** 判断是否开启的转发的权限 {@link CheckForwardAuthRequest} {@link CheckForwardAuthResponse} */
   CheckForwardAuth(data: CheckForwardAuthRequest, config?: AxiosRequestConfig): AxiosPromise<CheckForwardAuthResponse>;
-  /** {@link ControlDeviceData 设备远程控制}({@link ControlDeviceDataRequest 请求参数}): {@link ControlDeviceDataResponse 返回参数} */
+  /** 设备远程控制 {@link ControlDeviceDataRequest} {@link ControlDeviceDataResponse} */
   ControlDeviceData(data: ControlDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDeviceDataResponse>;
-  /** {@link CreateAIDetection 发起AI推理请求}({@link CreateAIDetectionRequest 请求参数}): {@link CreateAIDetectionResponse 返回参数} */
+  /** 发起AI推理请求 {@link CreateAIDetectionRequest} {@link CreateAIDetectionResponse} */
   CreateAIDetection(data: CreateAIDetectionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIDetectionResponse>;
-  /** {@link CreateBatch 创建批次}({@link CreateBatchRequest 请求参数}): {@link CreateBatchResponse 返回参数} */
+  /** 创建批次 {@link CreateBatchRequest} {@link CreateBatchResponse} */
   CreateBatch(data: CreateBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchResponse>;
-  /** {@link CreateCOSCredentials 创建COS上传密钥}({@link CreateCOSCredentialsRequest 请求参数}): {@link CreateCOSCredentialsResponse 返回参数} */
+  /** 创建COS上传密钥 {@link CreateCOSCredentialsRequest} {@link CreateCOSCredentialsResponse} */
   CreateCOSCredentials(data: CreateCOSCredentialsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCOSCredentialsResponse>;
-  /** {@link CreateCloudStorage 开通云存服务}({@link CreateCloudStorageRequest 请求参数}): {@link CreateCloudStorageResponse 返回参数} */
+  /** 开通云存服务 {@link CreateCloudStorageRequest} {@link CreateCloudStorageResponse} */
   CreateCloudStorage(data: CreateCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudStorageResponse>;
-  /** {@link CreateDataForward 创建数据转发}({@link CreateDataForwardRequest 请求参数}): {@link CreateDataForwardResponse 返回参数} */
+  /** 创建数据转发 {@link CreateDataForwardRequest} {@link CreateDataForwardResponse} */
   CreateDataForward(data: CreateDataForwardRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataForwardResponse>;
-  /** {@link CreateForwardRule 创建转发规则}({@link CreateForwardRuleRequest 请求参数}): {@link CreateForwardRuleResponse 返回参数} */
+  /** 创建转发规则 {@link CreateForwardRuleRequest} {@link CreateForwardRuleResponse} */
   CreateForwardRule(data: CreateForwardRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateForwardRuleResponse>;
-  /** {@link CreateProduct 创建产品}({@link CreateProductRequest 请求参数}): {@link CreateProductResponse 返回参数} */
+  /** 创建产品 {@link CreateProductRequest} {@link CreateProductResponse} */
   CreateProduct(data: CreateProductRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProductResponse>;
-  /** {@link CreateTaskFileUrl 获取任务文件上传链接}({@link CreateTaskFileUrlRequest 请求参数}): {@link CreateTaskFileUrlResponse 返回参数} */
+  /** 获取任务文件上传链接 {@link CreateTaskFileUrlRequest} {@link CreateTaskFileUrlResponse} */
   CreateTaskFileUrl(data: CreateTaskFileUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFileUrlResponse>;
-  /** {@link DeleteDevice 删除设备}({@link DeleteDeviceRequest 请求参数}): {@link DeleteDeviceResponse 返回参数} */
+  /** 删除设备 {@link DeleteDeviceRequest} {@link DeleteDeviceResponse} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
-  /** {@link DeleteFirmware 删除固件}({@link DeleteFirmwareRequest 请求参数}): {@link DeleteFirmwareResponse 返回参数} */
+  /** 删除固件 {@link DeleteFirmwareRequest} {@link DeleteFirmwareResponse} */
   DeleteFirmware(data: DeleteFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFirmwareResponse>;
-  /** {@link DeleteForwardRule 删除转发规则}({@link DeleteForwardRuleRequest 请求参数}): {@link DeleteForwardRuleResponse 返回参数} */
+  /** 删除转发规则 {@link DeleteForwardRuleRequest} {@link DeleteForwardRuleResponse} */
   DeleteForwardRule(data: DeleteForwardRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteForwardRuleResponse>;
-  /** {@link DeleteProduct 删除产品}({@link DeleteProductRequest 请求参数}): {@link DeleteProductResponse 返回参数} */
+  /** 删除产品 {@link DeleteProductRequest} {@link DeleteProductResponse} */
   DeleteProduct(data: DeleteProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProductResponse>;
-  /** {@link DescribeAIModelApplications 用户AI模型申请记录}({@link DescribeAIModelApplicationsRequest 请求参数}): {@link DescribeAIModelApplicationsResponse 返回参数} */
+  /** 用户AI模型申请记录 {@link DescribeAIModelApplicationsRequest} {@link DescribeAIModelApplicationsResponse} */
   DescribeAIModelApplications(data: DescribeAIModelApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIModelApplicationsResponse>;
-  /** {@link DescribeAIModelChannel 查看AI推理结果推送配置}({@link DescribeAIModelChannelRequest 请求参数}): {@link DescribeAIModelChannelResponse 返回参数} */
+  /** 查看AI推理结果推送配置 {@link DescribeAIModelChannelRequest} {@link DescribeAIModelChannelResponse} */
   DescribeAIModelChannel(data: DescribeAIModelChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIModelChannelResponse>;
-  /** {@link DescribeAIModelUsage 查看AI模型资源包}({@link DescribeAIModelUsageRequest 请求参数}): {@link DescribeAIModelUsageResponse 返回参数} */
+  /** 查看AI模型资源包 {@link DescribeAIModelUsageRequest} {@link DescribeAIModelUsageResponse} */
   DescribeAIModelUsage(data: DescribeAIModelUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIModelUsageResponse>;
-  /** {@link DescribeAIModels 拉取AI模型列表}({@link DescribeAIModelsRequest 请求参数}): {@link DescribeAIModelsResponse 返回参数} */
+  /** 拉取AI模型列表 {@link DescribeAIModelsRequest} {@link DescribeAIModelsResponse} */
   DescribeAIModels(data: DescribeAIModelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIModelsResponse>;
-  /** {@link DescribeAccount 获取消费版账号信息}({@link DescribeAccountRequest 请求参数}): {@link DescribeAccountResponse 返回参数} */
+  /** 获取消费版账号信息 {@link DescribeAccountRequest} {@link DescribeAccountResponse} */
   DescribeAccount(data: DescribeAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountResponse>;
-  /** {@link DescribeBalance 查询账户余额}({@link DescribeBalanceRequest 请求参数}): {@link DescribeBalanceResponse 返回参数} */
+  /** 查询账户余额 {@link DescribeBalanceRequest} {@link DescribeBalanceResponse} */
   DescribeBalance(data: DescribeBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBalanceResponse>;
-  /** {@link DescribeBalanceTransactions 拉取账户流水}({@link DescribeBalanceTransactionsRequest 请求参数}): {@link DescribeBalanceTransactionsResponse 返回参数} */
+  /** 拉取账户流水 {@link DescribeBalanceTransactionsRequest} {@link DescribeBalanceTransactionsResponse} */
   DescribeBalanceTransactions(data: DescribeBalanceTransactionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBalanceTransactionsResponse>;
-  /** {@link DescribeBatch 获取批次详情}({@link DescribeBatchRequest 请求参数}): {@link DescribeBatchResponse 返回参数} */
+  /** 获取批次详情 {@link DescribeBatchRequest} {@link DescribeBatchResponse} */
   DescribeBatch(data: DescribeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchResponse>;
-  /** {@link DescribeBatchs 获取批次列表}({@link DescribeBatchsRequest 请求参数}): {@link DescribeBatchsResponse 返回参数} */
+  /** 获取批次列表 {@link DescribeBatchsRequest} {@link DescribeBatchsResponse} */
   DescribeBatchs(data: DescribeBatchsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchsResponse>;
-  /** {@link DescribeBonuses 查看运营活动资源包列表}({@link DescribeBonusesRequest 请求参数}): {@link DescribeBonusesResponse 返回参数} */
+  /** 查看运营活动资源包列表 {@link DescribeBonusesRequest} {@link DescribeBonusesResponse} */
   DescribeBonuses(data: DescribeBonusesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBonusesResponse>;
-  /** {@link DescribeCategory 获取Category详情}({@link DescribeCategoryRequest 请求参数}): {@link DescribeCategoryResponse 返回参数} */
+  /** 获取Category详情 {@link DescribeCategoryRequest} {@link DescribeCategoryResponse} */
   DescribeCategory(data: DescribeCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCategoryResponse>;
-  /** {@link DescribeCloudStorage 获取设备云存服务详情}({@link DescribeCloudStorageRequest 请求参数}): {@link DescribeCloudStorageResponse 返回参数} */
+  /** 获取设备云存服务详情 {@link DescribeCloudStorageRequest} {@link DescribeCloudStorageResponse} */
   DescribeCloudStorage(data: DescribeCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageResponse>;
-  /** {@link DescribeCloudStorageDate 获取具有云存的日期}({@link DescribeCloudStorageDateRequest 请求参数}): {@link DescribeCloudStorageDateResponse 返回参数} */
+  /** 获取具有云存的日期 {@link DescribeCloudStorageDateRequest} {@link DescribeCloudStorageDateResponse} */
   DescribeCloudStorageDate(data: DescribeCloudStorageDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageDateResponse>;
-  /** {@link DescribeCloudStorageEvents 拉取云存事件列表}({@link DescribeCloudStorageEventsRequest 请求参数}): {@link DescribeCloudStorageEventsResponse 返回参数} */
+  /** 拉取云存事件列表 {@link DescribeCloudStorageEventsRequest} {@link DescribeCloudStorageEventsResponse} */
   DescribeCloudStorageEvents(data: DescribeCloudStorageEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageEventsResponse>;
-  /** {@link DescribeCloudStoragePackageConsumeDetails 获取云存套餐包消耗详细记录}({@link DescribeCloudStoragePackageConsumeDetailsRequest 请求参数}): {@link DescribeCloudStoragePackageConsumeDetailsResponse 返回参数} */
+  /** 获取云存套餐包消耗详细记录 {@link DescribeCloudStoragePackageConsumeDetailsRequest} {@link DescribeCloudStoragePackageConsumeDetailsResponse} */
   DescribeCloudStoragePackageConsumeDetails(data: DescribeCloudStoragePackageConsumeDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStoragePackageConsumeDetailsResponse>;
-  /** {@link DescribeCloudStoragePackageConsumeStats 获取云存套餐包消耗统计}({@link DescribeCloudStoragePackageConsumeStatsRequest 请求参数}): {@link DescribeCloudStoragePackageConsumeStatsResponse 返回参数} */
+  /** 获取云存套餐包消耗统计 {@link DescribeCloudStoragePackageConsumeStatsRequest} {@link DescribeCloudStoragePackageConsumeStatsResponse} */
   DescribeCloudStoragePackageConsumeStats(data: DescribeCloudStoragePackageConsumeStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStoragePackageConsumeStatsResponse>;
-  /** {@link DescribeCloudStorageStreamData 获取设备图片流数据}({@link DescribeCloudStorageStreamDataRequest 请求参数}): {@link DescribeCloudStorageStreamDataResponse 返回参数} */
+  /** 获取设备图片流数据 {@link DescribeCloudStorageStreamDataRequest} {@link DescribeCloudStorageStreamDataResponse} */
   DescribeCloudStorageStreamData(data: DescribeCloudStorageStreamDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageStreamDataResponse>;
-  /** {@link DescribeCloudStorageThumbnail 拉取云存事件缩略图}({@link DescribeCloudStorageThumbnailRequest 请求参数}): {@link DescribeCloudStorageThumbnailResponse 返回参数} */
+  /** 拉取云存事件缩略图 {@link DescribeCloudStorageThumbnailRequest} {@link DescribeCloudStorageThumbnailResponse} */
   DescribeCloudStorageThumbnail(data: DescribeCloudStorageThumbnailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageThumbnailResponse>;
-  /** {@link DescribeCloudStorageTime 获取某一天云存时间轴}({@link DescribeCloudStorageTimeRequest 请求参数}): {@link DescribeCloudStorageTimeResponse 返回参数} */
+  /** 获取某一天云存时间轴 {@link DescribeCloudStorageTimeRequest} {@link DescribeCloudStorageTimeResponse} */
   DescribeCloudStorageTime(data: DescribeCloudStorageTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageTimeResponse>;
-  /** {@link DescribeCloudStorageUsers 拉取云存用户列表}({@link DescribeCloudStorageUsersRequest 请求参数}): {@link DescribeCloudStorageUsersResponse 返回参数} */
+  /** 拉取云存用户列表 {@link DescribeCloudStorageUsersRequest} {@link DescribeCloudStorageUsersResponse} */
   DescribeCloudStorageUsers(data: DescribeCloudStorageUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageUsersResponse>;
-  /** {@link DescribeDataForwardList 获取数据转发列表}({@link DescribeDataForwardListRequest 请求参数}): {@link DescribeDataForwardListResponse 返回参数} */
+  /** 获取数据转发列表 {@link DescribeDataForwardListRequest} {@link DescribeDataForwardListResponse} */
   DescribeDataForwardList(data: DescribeDataForwardListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataForwardListResponse>;
-  /** {@link DescribeDevice 查看设备详情}({@link DescribeDeviceRequest 请求参数}): {@link DescribeDeviceResponse 返回参数} */
+  /** 查看设备详情 {@link DescribeDeviceRequest} {@link DescribeDeviceResponse} */
   DescribeDevice(data: DescribeDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceResponse>;
-  /** {@link DescribeDeviceActionHistory 获取设备动作历史}({@link DescribeDeviceActionHistoryRequest 请求参数}): {@link DescribeDeviceActionHistoryResponse 返回参数} */
+  /** 获取设备动作历史 {@link DescribeDeviceActionHistoryRequest} {@link DescribeDeviceActionHistoryResponse} */
   DescribeDeviceActionHistory(data: DescribeDeviceActionHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceActionHistoryResponse>;
-  /** {@link DescribeDeviceCommLog 获取设备通讯日志}({@link DescribeDeviceCommLogRequest 请求参数}): {@link DescribeDeviceCommLogResponse 返回参数} */
+  /** 获取设备通讯日志 {@link DescribeDeviceCommLogRequest} {@link DescribeDeviceCommLogResponse} */
   DescribeDeviceCommLog(data: DescribeDeviceCommLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCommLogResponse>;
-  /** {@link DescribeDeviceData 获取设备属性数据}({@link DescribeDeviceDataRequest 请求参数}): {@link DescribeDeviceDataResponse 返回参数} */
+  /** 获取设备属性数据 {@link DescribeDeviceDataRequest} {@link DescribeDeviceDataResponse} */
   DescribeDeviceData(data: DescribeDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDataResponse>;
-  /** {@link DescribeDeviceDataHistory 获取设备历史数据}({@link DescribeDeviceDataHistoryRequest 请求参数}): {@link DescribeDeviceDataHistoryResponse 返回参数} */
+  /** 获取设备历史数据 {@link DescribeDeviceDataHistoryRequest} {@link DescribeDeviceDataHistoryResponse} */
   DescribeDeviceDataHistory(data: DescribeDeviceDataHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDataHistoryResponse>;
-  /** {@link DescribeDeviceDataStats 查询设备数据统计}({@link DescribeDeviceDataStatsRequest 请求参数}): {@link DescribeDeviceDataStatsResponse 返回参数} */
+  /** 查询设备数据统计 {@link DescribeDeviceDataStatsRequest} {@link DescribeDeviceDataStatsResponse} */
   DescribeDeviceDataStats(data: DescribeDeviceDataStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDataStatsResponse>;
-  /** {@link DescribeDeviceEventHistory 获取设备的历史事件}({@link DescribeDeviceEventHistoryRequest 请求参数}): {@link DescribeDeviceEventHistoryResponse 返回参数} */
+  /** 获取设备的历史事件 {@link DescribeDeviceEventHistoryRequest} {@link DescribeDeviceEventHistoryResponse} */
   DescribeDeviceEventHistory(data: DescribeDeviceEventHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceEventHistoryResponse>;
-  /** {@link DescribeDeviceStatusLog 获取设备上下线日志}({@link DescribeDeviceStatusLogRequest 请求参数}): {@link DescribeDeviceStatusLogResponse 返回参数} */
+  /** 获取设备上下线日志 {@link DescribeDeviceStatusLogRequest} {@link DescribeDeviceStatusLogResponse} */
   DescribeDeviceStatusLog(data: DescribeDeviceStatusLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceStatusLogResponse>;
-  /** {@link DescribeDevices 获取设备列表}({@link DescribeDevicesRequest 请求参数}): {@link DescribeDevicesResponse 返回参数} */
+  /** 获取设备列表 {@link DescribeDevicesRequest} {@link DescribeDevicesResponse} */
   DescribeDevices(data: DescribeDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesResponse>;
-  /** {@link DescribeFirmware 查询固件信息}({@link DescribeFirmwareRequest 请求参数}): {@link DescribeFirmwareResponse 返回参数} */
+  /** 查询固件信息 {@link DescribeFirmwareRequest} {@link DescribeFirmwareResponse} */
   DescribeFirmware(data: DescribeFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareResponse>;
-  /** {@link DescribeFirmwareTask 查询固件升级任务详情}({@link DescribeFirmwareTaskRequest 请求参数}): {@link DescribeFirmwareTaskResponse 返回参数} */
+  /** 查询固件升级任务详情 {@link DescribeFirmwareTaskRequest} {@link DescribeFirmwareTaskResponse} */
   DescribeFirmwareTask(data: DescribeFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskResponse>;
-  /** {@link DescribeFirmwareTaskDevices 查询固件升级任务的设备列表}({@link DescribeFirmwareTaskDevicesRequest 请求参数}): {@link DescribeFirmwareTaskDevicesResponse 返回参数} */
+  /** 查询固件升级任务的设备列表 {@link DescribeFirmwareTaskDevicesRequest} {@link DescribeFirmwareTaskDevicesResponse} */
   DescribeFirmwareTaskDevices(data: DescribeFirmwareTaskDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskDevicesResponse>;
-  /** {@link DescribeFirmwareTaskDistribution 查询固件升级任务状态分布}({@link DescribeFirmwareTaskDistributionRequest 请求参数}): {@link DescribeFirmwareTaskDistributionResponse 返回参数} */
+  /** 查询固件升级任务状态分布 {@link DescribeFirmwareTaskDistributionRequest} {@link DescribeFirmwareTaskDistributionResponse} */
   DescribeFirmwareTaskDistribution(data: DescribeFirmwareTaskDistributionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskDistributionResponse>;
-  /** {@link DescribeFirmwareTaskStatistics 查询固件升级任务统计信息}({@link DescribeFirmwareTaskStatisticsRequest 请求参数}): {@link DescribeFirmwareTaskStatisticsResponse 返回参数} */
+  /** 查询固件升级任务统计信息 {@link DescribeFirmwareTaskStatisticsRequest} {@link DescribeFirmwareTaskStatisticsResponse} */
   DescribeFirmwareTaskStatistics(data: DescribeFirmwareTaskStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskStatisticsResponse>;
-  /** {@link DescribeFirmwareTasks 查询固件升级任务列表}({@link DescribeFirmwareTasksRequest 请求参数}): {@link DescribeFirmwareTasksResponse 返回参数} */
+  /** 查询固件升级任务列表 {@link DescribeFirmwareTasksRequest} {@link DescribeFirmwareTasksResponse} */
   DescribeFirmwareTasks(data: DescribeFirmwareTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTasksResponse>;
-  /** {@link DescribeForwardRule 获取产品转发规则}({@link DescribeForwardRuleRequest 请求参数}): {@link DescribeForwardRuleResponse 返回参数} */
+  /** 获取产品转发规则 {@link DescribeForwardRuleRequest} {@link DescribeForwardRuleResponse} */
   DescribeForwardRule(data: DescribeForwardRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeForwardRuleResponse>;
-  /** {@link DescribeMessageDataStats 查询设备消息数量统计}({@link DescribeMessageDataStatsRequest 请求参数}): {@link DescribeMessageDataStatsResponse 返回参数} */
+  /** 查询设备消息数量统计 {@link DescribeMessageDataStatsRequest} {@link DescribeMessageDataStatsResponse} */
   DescribeMessageDataStats(data: DescribeMessageDataStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageDataStatsResponse>;
-  /** {@link DescribeModelDefinition 查询产品数据模板}({@link DescribeModelDefinitionRequest 请求参数}): {@link DescribeModelDefinitionResponse 返回参数} */
+  /** 查询产品数据模板 {@link DescribeModelDefinitionRequest} {@link DescribeModelDefinitionResponse} */
   DescribeModelDefinition(data: DescribeModelDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelDefinitionResponse>;
-  /** {@link DescribePackageConsumeTask 查询套餐消耗记录详情}({@link DescribePackageConsumeTaskRequest 请求参数}): {@link DescribePackageConsumeTaskResponse 返回参数} */
+  /** 查询套餐消耗记录详情 {@link DescribePackageConsumeTaskRequest} {@link DescribePackageConsumeTaskResponse} */
   DescribePackageConsumeTask(data: DescribePackageConsumeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackageConsumeTaskResponse>;
-  /** {@link DescribePackageConsumeTasks 查询套餐消耗记录列表}({@link DescribePackageConsumeTasksRequest 请求参数}): {@link DescribePackageConsumeTasksResponse 返回参数} */
+  /** 查询套餐消耗记录列表 {@link DescribePackageConsumeTasksRequest} {@link DescribePackageConsumeTasksResponse} */
   DescribePackageConsumeTasks(data: DescribePackageConsumeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackageConsumeTasksResponse>;
-  /** {@link DescribeProduct 获取产品详情}({@link DescribeProductRequest 请求参数}): {@link DescribeProductResponse 返回参数} */
+  /** 获取产品详情 {@link DescribeProductRequest} {@link DescribeProductResponse} */
   DescribeProduct(data: DescribeProductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductResponse>;
-  /** {@link DescribeProductDynamicRegister 获取产品动态注册详情}({@link DescribeProductDynamicRegisterRequest 请求参数}): {@link DescribeProductDynamicRegisterResponse 返回参数} */
+  /** 获取产品动态注册详情 {@link DescribeProductDynamicRegisterRequest} {@link DescribeProductDynamicRegisterResponse} */
   DescribeProductDynamicRegister(data: DescribeProductDynamicRegisterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductDynamicRegisterResponse>;
-  /** {@link DescribeProducts 获取产品列表}({@link DescribeProductsRequest 请求参数}): {@link DescribeProductsResponse 返回参数} */
+  /** 获取产品列表 {@link DescribeProductsRequest} {@link DescribeProductsResponse} */
   DescribeProducts(data: DescribeProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductsResponse>;
-  /** {@link DescribePushChannel 查看推送通道}({@link DescribePushChannelRequest 请求参数}): {@link DescribePushChannelResponse 返回参数} */
+  /** 查看推送通道 {@link DescribePushChannelRequest} {@link DescribePushChannelResponse} */
   DescribePushChannel(data: DescribePushChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushChannelResponse>;
-  /** {@link DescribeSDKLog 获取设备sdk日志}({@link DescribeSDKLogRequest 请求参数}): {@link DescribeSDKLogResponse 返回参数} */
+  /** 获取设备sdk日志 {@link DescribeSDKLogRequest} {@link DescribeSDKLogResponse} */
   DescribeSDKLog(data: DescribeSDKLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSDKLogResponse>;
-  /** {@link DescribeUser 获取用户信息}({@link DescribeUserRequest 请求参数}): {@link DescribeUserResponse 返回参数} */
+  /** 获取用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
   DescribeUser(data?: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
-  /** {@link EditFirmware 编辑固件信息}({@link EditFirmwareRequest 请求参数}): {@link EditFirmwareResponse 返回参数} */
+  /** 编辑固件信息 {@link EditFirmwareRequest} {@link EditFirmwareResponse} */
   EditFirmware(data: EditFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<EditFirmwareResponse>;
-  /** {@link GenSingleDeviceSignatureOfPublic 生成单个设备绑定的签名}({@link GenSingleDeviceSignatureOfPublicRequest 请求参数}): {@link GenSingleDeviceSignatureOfPublicResponse 返回参数} */
+  /** 生成单个设备绑定的签名 {@link GenSingleDeviceSignatureOfPublicRequest} {@link GenSingleDeviceSignatureOfPublicResponse} */
   GenSingleDeviceSignatureOfPublic(data: GenSingleDeviceSignatureOfPublicRequest, config?: AxiosRequestConfig): AxiosPromise<GenSingleDeviceSignatureOfPublicResponse>;
-  /** {@link GenerateSignedVideoURL 获取视频防盗链播放URL}({@link GenerateSignedVideoURLRequest 请求参数}): {@link GenerateSignedVideoURLResponse 返回参数} */
+  /** 获取视频防盗链播放URL {@link GenerateSignedVideoURLRequest} {@link GenerateSignedVideoURLResponse} */
   GenerateSignedVideoURL(data: GenerateSignedVideoURLRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateSignedVideoURLResponse>;
-  /** {@link GetAllFirmwareVersion 获取所有版本列表}({@link GetAllFirmwareVersionRequest 请求参数}): {@link GetAllFirmwareVersionResponse 返回参数} */
+  /** 获取所有版本列表 {@link GetAllFirmwareVersionRequest} {@link GetAllFirmwareVersionResponse} */
   GetAllFirmwareVersion(data: GetAllFirmwareVersionRequest, config?: AxiosRequestConfig): AxiosPromise<GetAllFirmwareVersionResponse>;
-  /** {@link GetFirmwareURL 获取固件下载地址}({@link GetFirmwareURLRequest 请求参数}): {@link GetFirmwareURLResponse 返回参数} */
+  /** 获取固件下载地址 {@link GetFirmwareURLRequest} {@link GetFirmwareURLResponse} */
   GetFirmwareURL(data: GetFirmwareURLRequest, config?: AxiosRequestConfig): AxiosPromise<GetFirmwareURLResponse>;
-  /** {@link ImportModelDefinition 导入其它产品的数据模板}({@link ImportModelDefinitionRequest 请求参数}): {@link ImportModelDefinitionResponse 返回参数} */
+  /** 导入其它产品的数据模板 {@link ImportModelDefinitionRequest} {@link ImportModelDefinitionResponse} */
   ImportModelDefinition(data: ImportModelDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<ImportModelDefinitionResponse>;
-  /** {@link InheritCloudStorageUser 继承云存用户}({@link InheritCloudStorageUserRequest 请求参数}): {@link InheritCloudStorageUserResponse 返回参数} */
+  /** 继承云存用户 {@link InheritCloudStorageUserRequest} {@link InheritCloudStorageUserResponse} */
   InheritCloudStorageUser(data: InheritCloudStorageUserRequest, config?: AxiosRequestConfig): AxiosPromise<InheritCloudStorageUserResponse>;
-  /** {@link ListFirmwares 获取固件列表}({@link ListFirmwaresRequest 请求参数}): {@link ListFirmwaresResponse 返回参数} */
+  /** 获取固件列表 {@link ListFirmwaresRequest} {@link ListFirmwaresResponse} */
   ListFirmwares(data: ListFirmwaresRequest, config?: AxiosRequestConfig): AxiosPromise<ListFirmwaresResponse>;
-  /** {@link ModifyDataForward 修改数据转发}({@link ModifyDataForwardRequest 请求参数}): {@link ModifyDataForwardResponse 返回参数} */
+  /** 修改数据转发 {@link ModifyDataForwardRequest} {@link ModifyDataForwardResponse} */
   ModifyDataForward(data: ModifyDataForwardRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataForwardResponse>;
-  /** {@link ModifyDataForwardStatus 设置数据转发状态}({@link ModifyDataForwardStatusRequest 请求参数}): {@link ModifyDataForwardStatusResponse 返回参数} */
+  /** 设置数据转发状态 {@link ModifyDataForwardStatusRequest} {@link ModifyDataForwardStatusResponse} */
   ModifyDataForwardStatus(data: ModifyDataForwardStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataForwardStatusResponse>;
-  /** {@link ModifyDevice 修改设备信息}({@link ModifyDeviceRequest 请求参数}): {@link ModifyDeviceResponse 返回参数} */
+  /** 修改设备信息 {@link ModifyDeviceRequest} {@link ModifyDeviceResponse} */
   ModifyDevice(data: ModifyDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceResponse>;
-  /** {@link ModifyDeviceLogLevel 更新设备日志级别}({@link ModifyDeviceLogLevelRequest 请求参数}): {@link ModifyDeviceLogLevelResponse 返回参数} */
+  /** 更新设备日志级别 {@link ModifyDeviceLogLevelRequest} {@link ModifyDeviceLogLevelResponse} */
   ModifyDeviceLogLevel(data: ModifyDeviceLogLevelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceLogLevelResponse>;
-  /** {@link ModifyForwardRule 修改转发规则}({@link ModifyForwardRuleRequest 请求参数}): {@link ModifyForwardRuleResponse 返回参数} */
+  /** 修改转发规则 {@link ModifyForwardRuleRequest} {@link ModifyForwardRuleResponse} */
   ModifyForwardRule(data: ModifyForwardRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyForwardRuleResponse>;
-  /** {@link ModifyModelDefinition 修改产品数据模板}({@link ModifyModelDefinitionRequest 请求参数}): {@link ModifyModelDefinitionResponse 返回参数} */
+  /** 修改产品数据模板 {@link ModifyModelDefinitionRequest} {@link ModifyModelDefinitionResponse} */
   ModifyModelDefinition(data: ModifyModelDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelDefinitionResponse>;
-  /** {@link ModifyProduct 修改产品信息}({@link ModifyProductRequest 请求参数}): {@link ModifyProductResponse 返回参数} */
+  /** 修改产品信息 {@link ModifyProductRequest} {@link ModifyProductResponse} */
   ModifyProduct(data: ModifyProductRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProductResponse>;
-  /** {@link ModifyProductDynamicRegister 修改产品动态注册}({@link ModifyProductDynamicRegisterRequest 请求参数}): {@link ModifyProductDynamicRegisterResponse 返回参数} */
+  /** 修改产品动态注册 {@link ModifyProductDynamicRegisterRequest} {@link ModifyProductDynamicRegisterResponse} */
   ModifyProductDynamicRegister(data: ModifyProductDynamicRegisterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProductDynamicRegisterResponse>;
-  /** {@link ModifyPushChannel 更新推送通道}({@link ModifyPushChannelRequest 请求参数}): {@link ModifyPushChannelResponse 返回参数} */
+  /** 更新推送通道 {@link ModifyPushChannelRequest} {@link ModifyPushChannelResponse} */
   ModifyPushChannel(data: ModifyPushChannelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPushChannelResponse>;
-  /** {@link PublishMessage 设备透传指令控制}({@link PublishMessageRequest 请求参数}): {@link PublishMessageResponse 返回参数} */
+  /** 设备透传指令控制 {@link PublishMessageRequest} {@link PublishMessageResponse} */
   PublishMessage(data: PublishMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishMessageResponse>;
-  /** {@link ReportAliveDevice 上报活跃设备}({@link ReportAliveDeviceRequest 请求参数}): {@link ReportAliveDeviceResponse 返回参数} */
+  /** 上报活跃设备 {@link ReportAliveDeviceRequest} {@link ReportAliveDeviceResponse} */
   ReportAliveDevice(data: ReportAliveDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ReportAliveDeviceResponse>;
-  /** {@link ResetCloudStorage 重置云存服务}({@link ResetCloudStorageRequest 请求参数}): {@link ResetCloudStorageResponse 返回参数} */
+  /** 重置云存服务 {@link ResetCloudStorageRequest} {@link ResetCloudStorageResponse} */
   ResetCloudStorage(data: ResetCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<ResetCloudStorageResponse>;
-  /** {@link RetryDeviceFirmwareTask 重试设备升级任务}({@link RetryDeviceFirmwareTaskRequest 请求参数}): {@link RetryDeviceFirmwareTaskResponse 返回参数} */
+  /** 重试设备升级任务 {@link RetryDeviceFirmwareTaskRequest} {@link RetryDeviceFirmwareTaskResponse} */
   RetryDeviceFirmwareTask(data: RetryDeviceFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RetryDeviceFirmwareTaskResponse>;
-  /** {@link SetForwardAuth 设置转发权限}({@link SetForwardAuthRequest 请求参数}): {@link SetForwardAuthResponse 返回参数} */
+  /** 设置转发权限 {@link SetForwardAuthRequest} {@link SetForwardAuthResponse} */
   SetForwardAuth(data: SetForwardAuthRequest, config?: AxiosRequestConfig): AxiosPromise<SetForwardAuthResponse>;
-  /** {@link TransferCloudStorage 转移云存服务}({@link TransferCloudStorageRequest 请求参数}): {@link TransferCloudStorageResponse 返回参数} */
+  /** 转移云存服务 {@link TransferCloudStorageRequest} {@link TransferCloudStorageResponse} */
   TransferCloudStorage(data: TransferCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<TransferCloudStorageResponse>;
-  /** {@link UpdateAIModelChannel 更新AI推理结果推送配置}({@link UpdateAIModelChannelRequest 请求参数}): {@link UpdateAIModelChannelResponse 返回参数} */
+  /** 更新AI推理结果推送配置 {@link UpdateAIModelChannelRequest} {@link UpdateAIModelChannelResponse} */
   UpdateAIModelChannel(data: UpdateAIModelChannelRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAIModelChannelResponse>;
-  /** {@link UploadFirmware 上传固件信息}({@link UploadFirmwareRequest 请求参数}): {@link UploadFirmwareResponse 返回参数} */
+  /** 上传固件信息 {@link UploadFirmwareRequest} {@link UploadFirmwareResponse} */
   UploadFirmware(data: UploadFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFirmwareResponse>;
-  /** {@link WakeUpDevice 设备唤醒}({@link WakeUpDeviceRequest 请求参数}): {@link WakeUpDeviceResponse 返回参数} */
+  /** 设备唤醒 {@link WakeUpDeviceRequest} {@link WakeUpDeviceResponse} */
   WakeUpDevice(data: WakeUpDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<WakeUpDeviceResponse>;
-  /** {@link V20201215.ApplyAIModel 申请AI模型}({@link V20201215.ApplyAIModelRequest 请求参数}): {@link V20201215.ApplyAIModelResponse 返回参数} */
+  /** 申请AI模型 {@link V20201215.ApplyAIModelRequest} {@link V20201215.ApplyAIModelResponse} */
   ApplyAIModel(data: V20201215.ApplyAIModelRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ApplyAIModelResponse>;
-  /** {@link V20201215.BatchUpdateFirmware 批量更新固件}({@link V20201215.BatchUpdateFirmwareRequest 请求参数}): {@link V20201215.BatchUpdateFirmwareResponse 返回参数} */
+  /** 批量更新固件 {@link V20201215.BatchUpdateFirmwareRequest} {@link V20201215.BatchUpdateFirmwareResponse} */
   BatchUpdateFirmware(data: V20201215.BatchUpdateFirmwareRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.BatchUpdateFirmwareResponse>;
-  /** {@link V20201215.BindCloudStorageUser 绑定云存用户}({@link V20201215.BindCloudStorageUserRequest 请求参数}): {@link V20201215.BindCloudStorageUserResponse 返回参数} */
+  /** 绑定云存用户 {@link V20201215.BindCloudStorageUserRequest} {@link V20201215.BindCloudStorageUserResponse} */
   BindCloudStorageUser(data: V20201215.BindCloudStorageUserRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.BindCloudStorageUserResponse>;
-  /** {@link V20201215.CancelAIModelApplication 取消AI模型申请}({@link V20201215.CancelAIModelApplicationRequest 请求参数}): {@link V20201215.CancelAIModelApplicationResponse 返回参数} */
+  /** 取消AI模型申请 {@link V20201215.CancelAIModelApplicationRequest} {@link V20201215.CancelAIModelApplicationResponse} */
   CancelAIModelApplication(data: V20201215.CancelAIModelApplicationRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CancelAIModelApplicationResponse>;
-  /** {@link V20201215.CancelDeviceFirmwareTask 取消设备升级任务}({@link V20201215.CancelDeviceFirmwareTaskRequest 请求参数}): {@link V20201215.CancelDeviceFirmwareTaskResponse 返回参数} */
+  /** 取消设备升级任务 {@link V20201215.CancelDeviceFirmwareTaskRequest} {@link V20201215.CancelDeviceFirmwareTaskResponse} */
   CancelDeviceFirmwareTask(data: V20201215.CancelDeviceFirmwareTaskRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CancelDeviceFirmwareTaskResponse>;
-  /** {@link V20201215.CheckForwardAuth 判断是否开启的转发的权限}({@link V20201215.CheckForwardAuthRequest 请求参数}): {@link V20201215.CheckForwardAuthResponse 返回参数} */
+  /** 判断是否开启的转发的权限 {@link V20201215.CheckForwardAuthRequest} {@link V20201215.CheckForwardAuthResponse} */
   CheckForwardAuth(data: V20201215.CheckForwardAuthRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CheckForwardAuthResponse>;
-  /** {@link V20201215.ControlDeviceData 设备远程控制}({@link V20201215.ControlDeviceDataRequest 请求参数}): {@link V20201215.ControlDeviceDataResponse 返回参数} */
+  /** 设备远程控制 {@link V20201215.ControlDeviceDataRequest} {@link V20201215.ControlDeviceDataResponse} */
   ControlDeviceData(data: V20201215.ControlDeviceDataRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ControlDeviceDataResponse>;
-  /** {@link V20201215.CreateAIDetection 发起AI推理请求}({@link V20201215.CreateAIDetectionRequest 请求参数}): {@link V20201215.CreateAIDetectionResponse 返回参数} */
+  /** 发起AI推理请求 {@link V20201215.CreateAIDetectionRequest} {@link V20201215.CreateAIDetectionResponse} */
   CreateAIDetection(data: V20201215.CreateAIDetectionRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CreateAIDetectionResponse>;
-  /** {@link V20201215.CreateBatch 创建批次}({@link V20201215.CreateBatchRequest 请求参数}): {@link V20201215.CreateBatchResponse 返回参数} */
+  /** 创建批次 {@link V20201215.CreateBatchRequest} {@link V20201215.CreateBatchResponse} */
   CreateBatch(data: V20201215.CreateBatchRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CreateBatchResponse>;
-  /** {@link V20201215.CreateCOSCredentials 创建COS上传密钥}({@link V20201215.CreateCOSCredentialsRequest 请求参数}): {@link V20201215.CreateCOSCredentialsResponse 返回参数} */
+  /** 创建COS上传密钥 {@link V20201215.CreateCOSCredentialsRequest} {@link V20201215.CreateCOSCredentialsResponse} */
   CreateCOSCredentials(data: V20201215.CreateCOSCredentialsRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CreateCOSCredentialsResponse>;
-  /** {@link V20201215.CreateCloudStorage 开通云存服务}({@link V20201215.CreateCloudStorageRequest 请求参数}): {@link V20201215.CreateCloudStorageResponse 返回参数} */
+  /** 开通云存服务 {@link V20201215.CreateCloudStorageRequest} {@link V20201215.CreateCloudStorageResponse} */
   CreateCloudStorage(data: V20201215.CreateCloudStorageRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CreateCloudStorageResponse>;
-  /** {@link V20201215.CreateDataForward 创建数据转发}({@link V20201215.CreateDataForwardRequest 请求参数}): {@link V20201215.CreateDataForwardResponse 返回参数} */
+  /** 创建数据转发 {@link V20201215.CreateDataForwardRequest} {@link V20201215.CreateDataForwardResponse} */
   CreateDataForward(data: V20201215.CreateDataForwardRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CreateDataForwardResponse>;
-  /** {@link V20201215.CreateForwardRule 创建转发规则}({@link V20201215.CreateForwardRuleRequest 请求参数}): {@link V20201215.CreateForwardRuleResponse 返回参数} */
+  /** 创建转发规则 {@link V20201215.CreateForwardRuleRequest} {@link V20201215.CreateForwardRuleResponse} */
   CreateForwardRule(data: V20201215.CreateForwardRuleRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CreateForwardRuleResponse>;
-  /** {@link V20201215.CreateProduct 创建产品}({@link V20201215.CreateProductRequest 请求参数}): {@link V20201215.CreateProductResponse 返回参数} */
+  /** 创建产品 {@link V20201215.CreateProductRequest} {@link V20201215.CreateProductResponse} */
   CreateProduct(data: V20201215.CreateProductRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CreateProductResponse>;
-  /** {@link V20201215.CreateTaskFileUrl 获取任务文件上传链接}({@link V20201215.CreateTaskFileUrlRequest 请求参数}): {@link V20201215.CreateTaskFileUrlResponse 返回参数} */
+  /** 获取任务文件上传链接 {@link V20201215.CreateTaskFileUrlRequest} {@link V20201215.CreateTaskFileUrlResponse} */
   CreateTaskFileUrl(data: V20201215.CreateTaskFileUrlRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.CreateTaskFileUrlResponse>;
-  /** {@link V20201215.DeleteDevice 删除设备}({@link V20201215.DeleteDeviceRequest 请求参数}): {@link V20201215.DeleteDeviceResponse 返回参数} */
+  /** 删除设备 {@link V20201215.DeleteDeviceRequest} {@link V20201215.DeleteDeviceResponse} */
   DeleteDevice(data: V20201215.DeleteDeviceRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DeleteDeviceResponse>;
-  /** {@link V20201215.DeleteFirmware 删除固件}({@link V20201215.DeleteFirmwareRequest 请求参数}): {@link V20201215.DeleteFirmwareResponse 返回参数} */
+  /** 删除固件 {@link V20201215.DeleteFirmwareRequest} {@link V20201215.DeleteFirmwareResponse} */
   DeleteFirmware(data: V20201215.DeleteFirmwareRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DeleteFirmwareResponse>;
-  /** {@link V20201215.DeleteForwardRule 删除转发规则}({@link V20201215.DeleteForwardRuleRequest 请求参数}): {@link V20201215.DeleteForwardRuleResponse 返回参数} */
+  /** 删除转发规则 {@link V20201215.DeleteForwardRuleRequest} {@link V20201215.DeleteForwardRuleResponse} */
   DeleteForwardRule(data: V20201215.DeleteForwardRuleRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DeleteForwardRuleResponse>;
-  /** {@link V20201215.DeleteProduct 删除产品}({@link V20201215.DeleteProductRequest 请求参数}): {@link V20201215.DeleteProductResponse 返回参数} */
+  /** 删除产品 {@link V20201215.DeleteProductRequest} {@link V20201215.DeleteProductResponse} */
   DeleteProduct(data: V20201215.DeleteProductRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DeleteProductResponse>;
-  /** {@link V20201215.DescribeAIModelApplications 用户AI模型申请记录}({@link V20201215.DescribeAIModelApplicationsRequest 请求参数}): {@link V20201215.DescribeAIModelApplicationsResponse 返回参数} */
+  /** 用户AI模型申请记录 {@link V20201215.DescribeAIModelApplicationsRequest} {@link V20201215.DescribeAIModelApplicationsResponse} */
   DescribeAIModelApplications(data: V20201215.DescribeAIModelApplicationsRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeAIModelApplicationsResponse>;
-  /** {@link V20201215.DescribeAIModelChannel 查看AI推理结果推送配置}({@link V20201215.DescribeAIModelChannelRequest 请求参数}): {@link V20201215.DescribeAIModelChannelResponse 返回参数} */
+  /** 查看AI推理结果推送配置 {@link V20201215.DescribeAIModelChannelRequest} {@link V20201215.DescribeAIModelChannelResponse} */
   DescribeAIModelChannel(data: V20201215.DescribeAIModelChannelRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeAIModelChannelResponse>;
-  /** {@link V20201215.DescribeAIModelUsage 查看AI模型资源包}({@link V20201215.DescribeAIModelUsageRequest 请求参数}): {@link V20201215.DescribeAIModelUsageResponse 返回参数} */
+  /** 查看AI模型资源包 {@link V20201215.DescribeAIModelUsageRequest} {@link V20201215.DescribeAIModelUsageResponse} */
   DescribeAIModelUsage(data: V20201215.DescribeAIModelUsageRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeAIModelUsageResponse>;
-  /** {@link V20201215.DescribeAIModels 拉取AI模型列表}({@link V20201215.DescribeAIModelsRequest 请求参数}): {@link V20201215.DescribeAIModelsResponse 返回参数} */
+  /** 拉取AI模型列表 {@link V20201215.DescribeAIModelsRequest} {@link V20201215.DescribeAIModelsResponse} */
   DescribeAIModels(data: V20201215.DescribeAIModelsRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeAIModelsResponse>;
-  /** {@link V20201215.DescribeBalance 查询账户余额}({@link V20201215.DescribeBalanceRequest 请求参数}): {@link V20201215.DescribeBalanceResponse 返回参数} */
+  /** 查询账户余额 {@link V20201215.DescribeBalanceRequest} {@link V20201215.DescribeBalanceResponse} */
   DescribeBalance(data: V20201215.DescribeBalanceRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeBalanceResponse>;
-  /** {@link V20201215.DescribeBalanceTransactions 拉取账户流水}({@link V20201215.DescribeBalanceTransactionsRequest 请求参数}): {@link V20201215.DescribeBalanceTransactionsResponse 返回参数} */
+  /** 拉取账户流水 {@link V20201215.DescribeBalanceTransactionsRequest} {@link V20201215.DescribeBalanceTransactionsResponse} */
   DescribeBalanceTransactions(data: V20201215.DescribeBalanceTransactionsRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeBalanceTransactionsResponse>;
-  /** {@link V20201215.DescribeBatch 获取批次详情}({@link V20201215.DescribeBatchRequest 请求参数}): {@link V20201215.DescribeBatchResponse 返回参数} */
+  /** 获取批次详情 {@link V20201215.DescribeBatchRequest} {@link V20201215.DescribeBatchResponse} */
   DescribeBatch(data: V20201215.DescribeBatchRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeBatchResponse>;
-  /** {@link V20201215.DescribeBatchs 获取批次列表}({@link V20201215.DescribeBatchsRequest 请求参数}): {@link V20201215.DescribeBatchsResponse 返回参数} */
+  /** 获取批次列表 {@link V20201215.DescribeBatchsRequest} {@link V20201215.DescribeBatchsResponse} */
   DescribeBatchs(data: V20201215.DescribeBatchsRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeBatchsResponse>;
-  /** {@link V20201215.DescribeCategory 获取Category详情}({@link V20201215.DescribeCategoryRequest 请求参数}): {@link V20201215.DescribeCategoryResponse 返回参数} */
+  /** 获取Category详情 {@link V20201215.DescribeCategoryRequest} {@link V20201215.DescribeCategoryResponse} */
   DescribeCategory(data: V20201215.DescribeCategoryRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeCategoryResponse>;
-  /** {@link V20201215.DescribeCloudStorage 获取设备云存服务详情}({@link V20201215.DescribeCloudStorageRequest 请求参数}): {@link V20201215.DescribeCloudStorageResponse 返回参数} */
+  /** 获取设备云存服务详情 {@link V20201215.DescribeCloudStorageRequest} {@link V20201215.DescribeCloudStorageResponse} */
   DescribeCloudStorage(data: V20201215.DescribeCloudStorageRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeCloudStorageResponse>;
-  /** {@link V20201215.DescribeCloudStorageDate 获取具有云存的日期}({@link V20201215.DescribeCloudStorageDateRequest 请求参数}): {@link V20201215.DescribeCloudStorageDateResponse 返回参数} */
+  /** 获取具有云存的日期 {@link V20201215.DescribeCloudStorageDateRequest} {@link V20201215.DescribeCloudStorageDateResponse} */
   DescribeCloudStorageDate(data: V20201215.DescribeCloudStorageDateRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeCloudStorageDateResponse>;
-  /** {@link V20201215.DescribeCloudStorageEvents 拉取云存事件列表}({@link V20201215.DescribeCloudStorageEventsRequest 请求参数}): {@link V20201215.DescribeCloudStorageEventsResponse 返回参数} */
+  /** 拉取云存事件列表 {@link V20201215.DescribeCloudStorageEventsRequest} {@link V20201215.DescribeCloudStorageEventsResponse} */
   DescribeCloudStorageEvents(data: V20201215.DescribeCloudStorageEventsRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeCloudStorageEventsResponse>;
-  /** {@link V20201215.DescribeCloudStorageThumbnail 拉取云存事件缩略图}({@link V20201215.DescribeCloudStorageThumbnailRequest 请求参数}): {@link V20201215.DescribeCloudStorageThumbnailResponse 返回参数} */
+  /** 拉取云存事件缩略图 {@link V20201215.DescribeCloudStorageThumbnailRequest} {@link V20201215.DescribeCloudStorageThumbnailResponse} */
   DescribeCloudStorageThumbnail(data: V20201215.DescribeCloudStorageThumbnailRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeCloudStorageThumbnailResponse>;
-  /** {@link V20201215.DescribeCloudStorageTime 获取某一天云存时间轴}({@link V20201215.DescribeCloudStorageTimeRequest 请求参数}): {@link V20201215.DescribeCloudStorageTimeResponse 返回参数} */
+  /** 获取某一天云存时间轴 {@link V20201215.DescribeCloudStorageTimeRequest} {@link V20201215.DescribeCloudStorageTimeResponse} */
   DescribeCloudStorageTime(data: V20201215.DescribeCloudStorageTimeRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeCloudStorageTimeResponse>;
-  /** {@link V20201215.DescribeCloudStorageUsers 拉取云存用户列表}({@link V20201215.DescribeCloudStorageUsersRequest 请求参数}): {@link V20201215.DescribeCloudStorageUsersResponse 返回参数} */
+  /** 拉取云存用户列表 {@link V20201215.DescribeCloudStorageUsersRequest} {@link V20201215.DescribeCloudStorageUsersResponse} */
   DescribeCloudStorageUsers(data: V20201215.DescribeCloudStorageUsersRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeCloudStorageUsersResponse>;
-  /** {@link V20201215.DescribeDataForwardList 获取数据转发列表}({@link V20201215.DescribeDataForwardListRequest 请求参数}): {@link V20201215.DescribeDataForwardListResponse 返回参数} */
+  /** 获取数据转发列表 {@link V20201215.DescribeDataForwardListRequest} {@link V20201215.DescribeDataForwardListResponse} */
   DescribeDataForwardList(data: V20201215.DescribeDataForwardListRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDataForwardListResponse>;
-  /** {@link V20201215.DescribeDevice 查看设备详情}({@link V20201215.DescribeDeviceRequest 请求参数}): {@link V20201215.DescribeDeviceResponse 返回参数} */
+  /** 查看设备详情 {@link V20201215.DescribeDeviceRequest} {@link V20201215.DescribeDeviceResponse} */
   DescribeDevice(data: V20201215.DescribeDeviceRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDeviceResponse>;
-  /** {@link V20201215.DescribeDeviceActionHistory 获取设备动作历史}({@link V20201215.DescribeDeviceActionHistoryRequest 请求参数}): {@link V20201215.DescribeDeviceActionHistoryResponse 返回参数} */
+  /** 获取设备动作历史 {@link V20201215.DescribeDeviceActionHistoryRequest} {@link V20201215.DescribeDeviceActionHistoryResponse} */
   DescribeDeviceActionHistory(data: V20201215.DescribeDeviceActionHistoryRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDeviceActionHistoryResponse>;
-  /** {@link V20201215.DescribeDeviceCommLog 获取设备通讯日志}({@link V20201215.DescribeDeviceCommLogRequest 请求参数}): {@link V20201215.DescribeDeviceCommLogResponse 返回参数} */
+  /** 获取设备通讯日志 {@link V20201215.DescribeDeviceCommLogRequest} {@link V20201215.DescribeDeviceCommLogResponse} */
   DescribeDeviceCommLog(data: V20201215.DescribeDeviceCommLogRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDeviceCommLogResponse>;
-  /** {@link V20201215.DescribeDeviceData 获取设备属性数据}({@link V20201215.DescribeDeviceDataRequest 请求参数}): {@link V20201215.DescribeDeviceDataResponse 返回参数} */
+  /** 获取设备属性数据 {@link V20201215.DescribeDeviceDataRequest} {@link V20201215.DescribeDeviceDataResponse} */
   DescribeDeviceData(data: V20201215.DescribeDeviceDataRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDeviceDataResponse>;
-  /** {@link V20201215.DescribeDeviceDataHistory 获取设备历史数据}({@link V20201215.DescribeDeviceDataHistoryRequest 请求参数}): {@link V20201215.DescribeDeviceDataHistoryResponse 返回参数} */
+  /** 获取设备历史数据 {@link V20201215.DescribeDeviceDataHistoryRequest} {@link V20201215.DescribeDeviceDataHistoryResponse} */
   DescribeDeviceDataHistory(data: V20201215.DescribeDeviceDataHistoryRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDeviceDataHistoryResponse>;
-  /** {@link V20201215.DescribeDeviceEventHistory 获取设备的历史事件}({@link V20201215.DescribeDeviceEventHistoryRequest 请求参数}): {@link V20201215.DescribeDeviceEventHistoryResponse 返回参数} */
+  /** 获取设备的历史事件 {@link V20201215.DescribeDeviceEventHistoryRequest} {@link V20201215.DescribeDeviceEventHistoryResponse} */
   DescribeDeviceEventHistory(data: V20201215.DescribeDeviceEventHistoryRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDeviceEventHistoryResponse>;
-  /** {@link V20201215.DescribeDeviceStatusLog 获取设备上下线日志}({@link V20201215.DescribeDeviceStatusLogRequest 请求参数}): {@link V20201215.DescribeDeviceStatusLogResponse 返回参数} */
+  /** 获取设备上下线日志 {@link V20201215.DescribeDeviceStatusLogRequest} {@link V20201215.DescribeDeviceStatusLogResponse} */
   DescribeDeviceStatusLog(data: V20201215.DescribeDeviceStatusLogRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDeviceStatusLogResponse>;
-  /** {@link V20201215.DescribeDevices 获取设备列表}({@link V20201215.DescribeDevicesRequest 请求参数}): {@link V20201215.DescribeDevicesResponse 返回参数} */
+  /** 获取设备列表 {@link V20201215.DescribeDevicesRequest} {@link V20201215.DescribeDevicesResponse} */
   DescribeDevices(data: V20201215.DescribeDevicesRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeDevicesResponse>;
-  /** {@link V20201215.DescribeFirmware 查询固件信息}({@link V20201215.DescribeFirmwareRequest 请求参数}): {@link V20201215.DescribeFirmwareResponse 返回参数} */
+  /** 查询固件信息 {@link V20201215.DescribeFirmwareRequest} {@link V20201215.DescribeFirmwareResponse} */
   DescribeFirmware(data: V20201215.DescribeFirmwareRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeFirmwareResponse>;
-  /** {@link V20201215.DescribeFirmwareTask 查询固件升级任务详情}({@link V20201215.DescribeFirmwareTaskRequest 请求参数}): {@link V20201215.DescribeFirmwareTaskResponse 返回参数} */
+  /** 查询固件升级任务详情 {@link V20201215.DescribeFirmwareTaskRequest} {@link V20201215.DescribeFirmwareTaskResponse} */
   DescribeFirmwareTask(data: V20201215.DescribeFirmwareTaskRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeFirmwareTaskResponse>;
-  /** {@link V20201215.DescribeFirmwareTaskDevices 查询固件升级任务的设备列表}({@link V20201215.DescribeFirmwareTaskDevicesRequest 请求参数}): {@link V20201215.DescribeFirmwareTaskDevicesResponse 返回参数} */
+  /** 查询固件升级任务的设备列表 {@link V20201215.DescribeFirmwareTaskDevicesRequest} {@link V20201215.DescribeFirmwareTaskDevicesResponse} */
   DescribeFirmwareTaskDevices(data: V20201215.DescribeFirmwareTaskDevicesRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeFirmwareTaskDevicesResponse>;
-  /** {@link V20201215.DescribeFirmwareTaskDistribution 查询固件升级任务状态分布}({@link V20201215.DescribeFirmwareTaskDistributionRequest 请求参数}): {@link V20201215.DescribeFirmwareTaskDistributionResponse 返回参数} */
+  /** 查询固件升级任务状态分布 {@link V20201215.DescribeFirmwareTaskDistributionRequest} {@link V20201215.DescribeFirmwareTaskDistributionResponse} */
   DescribeFirmwareTaskDistribution(data: V20201215.DescribeFirmwareTaskDistributionRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeFirmwareTaskDistributionResponse>;
-  /** {@link V20201215.DescribeFirmwareTaskStatistics 查询固件升级任务统计信息}({@link V20201215.DescribeFirmwareTaskStatisticsRequest 请求参数}): {@link V20201215.DescribeFirmwareTaskStatisticsResponse 返回参数} */
+  /** 查询固件升级任务统计信息 {@link V20201215.DescribeFirmwareTaskStatisticsRequest} {@link V20201215.DescribeFirmwareTaskStatisticsResponse} */
   DescribeFirmwareTaskStatistics(data: V20201215.DescribeFirmwareTaskStatisticsRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeFirmwareTaskStatisticsResponse>;
-  /** {@link V20201215.DescribeFirmwareTasks 查询固件升级任务列表}({@link V20201215.DescribeFirmwareTasksRequest 请求参数}): {@link V20201215.DescribeFirmwareTasksResponse 返回参数} */
+  /** 查询固件升级任务列表 {@link V20201215.DescribeFirmwareTasksRequest} {@link V20201215.DescribeFirmwareTasksResponse} */
   DescribeFirmwareTasks(data: V20201215.DescribeFirmwareTasksRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeFirmwareTasksResponse>;
-  /** {@link V20201215.DescribeForwardRule 获取产品转发规则}({@link V20201215.DescribeForwardRuleRequest 请求参数}): {@link V20201215.DescribeForwardRuleResponse 返回参数} */
+  /** 获取产品转发规则 {@link V20201215.DescribeForwardRuleRequest} {@link V20201215.DescribeForwardRuleResponse} */
   DescribeForwardRule(data: V20201215.DescribeForwardRuleRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeForwardRuleResponse>;
-  /** {@link V20201215.DescribeModelDefinition 查询产品数据模板}({@link V20201215.DescribeModelDefinitionRequest 请求参数}): {@link V20201215.DescribeModelDefinitionResponse 返回参数} */
+  /** 查询产品数据模板 {@link V20201215.DescribeModelDefinitionRequest} {@link V20201215.DescribeModelDefinitionResponse} */
   DescribeModelDefinition(data: V20201215.DescribeModelDefinitionRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeModelDefinitionResponse>;
-  /** {@link V20201215.DescribeProduct 获取产品详情}({@link V20201215.DescribeProductRequest 请求参数}): {@link V20201215.DescribeProductResponse 返回参数} */
+  /** 获取产品详情 {@link V20201215.DescribeProductRequest} {@link V20201215.DescribeProductResponse} */
   DescribeProduct(data: V20201215.DescribeProductRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeProductResponse>;
-  /** {@link V20201215.DescribeProductDynamicRegister 获取产品动态注册详情}({@link V20201215.DescribeProductDynamicRegisterRequest 请求参数}): {@link V20201215.DescribeProductDynamicRegisterResponse 返回参数} */
+  /** 获取产品动态注册详情 {@link V20201215.DescribeProductDynamicRegisterRequest} {@link V20201215.DescribeProductDynamicRegisterResponse} */
   DescribeProductDynamicRegister(data: V20201215.DescribeProductDynamicRegisterRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeProductDynamicRegisterResponse>;
-  /** {@link V20201215.DescribeProducts 获取产品列表}({@link V20201215.DescribeProductsRequest 请求参数}): {@link V20201215.DescribeProductsResponse 返回参数} */
+  /** 获取产品列表 {@link V20201215.DescribeProductsRequest} {@link V20201215.DescribeProductsResponse} */
   DescribeProducts(data: V20201215.DescribeProductsRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeProductsResponse>;
-  /** {@link V20201215.DescribeSDKLog 获取设备sdk日志}({@link V20201215.DescribeSDKLogRequest 请求参数}): {@link V20201215.DescribeSDKLogResponse 返回参数} */
+  /** 获取设备sdk日志 {@link V20201215.DescribeSDKLogRequest} {@link V20201215.DescribeSDKLogResponse} */
   DescribeSDKLog(data: V20201215.DescribeSDKLogRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.DescribeSDKLogResponse>;
-  /** {@link V20201215.EditFirmware 编辑固件信息}({@link V20201215.EditFirmwareRequest 请求参数}): {@link V20201215.EditFirmwareResponse 返回参数} */
+  /** 编辑固件信息 {@link V20201215.EditFirmwareRequest} {@link V20201215.EditFirmwareResponse} */
   EditFirmware(data: V20201215.EditFirmwareRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.EditFirmwareResponse>;
-  /** {@link V20201215.GenerateSignedVideoURL 获取视频防盗链播放URL}({@link V20201215.GenerateSignedVideoURLRequest 请求参数}): {@link V20201215.GenerateSignedVideoURLResponse 返回参数} */
+  /** 获取视频防盗链播放URL {@link V20201215.GenerateSignedVideoURLRequest} {@link V20201215.GenerateSignedVideoURLResponse} */
   GenerateSignedVideoURL(data: V20201215.GenerateSignedVideoURLRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.GenerateSignedVideoURLResponse>;
-  /** {@link V20201215.GetAllFirmwareVersion 获取所有版本列表}({@link V20201215.GetAllFirmwareVersionRequest 请求参数}): {@link V20201215.GetAllFirmwareVersionResponse 返回参数} */
+  /** 获取所有版本列表 {@link V20201215.GetAllFirmwareVersionRequest} {@link V20201215.GetAllFirmwareVersionResponse} */
   GetAllFirmwareVersion(data: V20201215.GetAllFirmwareVersionRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.GetAllFirmwareVersionResponse>;
-  /** {@link V20201215.GetFirmwareURL 获取固件下载地址}({@link V20201215.GetFirmwareURLRequest 请求参数}): {@link V20201215.GetFirmwareURLResponse 返回参数} */
+  /** 获取固件下载地址 {@link V20201215.GetFirmwareURLRequest} {@link V20201215.GetFirmwareURLResponse} */
   GetFirmwareURL(data: V20201215.GetFirmwareURLRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.GetFirmwareURLResponse>;
-  /** {@link V20201215.ImportModelDefinition 导入其它产品的数据模板}({@link V20201215.ImportModelDefinitionRequest 请求参数}): {@link V20201215.ImportModelDefinitionResponse 返回参数} */
+  /** 导入其它产品的数据模板 {@link V20201215.ImportModelDefinitionRequest} {@link V20201215.ImportModelDefinitionResponse} */
   ImportModelDefinition(data: V20201215.ImportModelDefinitionRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ImportModelDefinitionResponse>;
-  /** {@link V20201215.InheritCloudStorageUser 继承云存用户}({@link V20201215.InheritCloudStorageUserRequest 请求参数}): {@link V20201215.InheritCloudStorageUserResponse 返回参数} */
+  /** 继承云存用户 {@link V20201215.InheritCloudStorageUserRequest} {@link V20201215.InheritCloudStorageUserResponse} */
   InheritCloudStorageUser(data: V20201215.InheritCloudStorageUserRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.InheritCloudStorageUserResponse>;
-  /** {@link V20201215.ListFirmwares 获取固件列表}({@link V20201215.ListFirmwaresRequest 请求参数}): {@link V20201215.ListFirmwaresResponse 返回参数} */
+  /** 获取固件列表 {@link V20201215.ListFirmwaresRequest} {@link V20201215.ListFirmwaresResponse} */
   ListFirmwares(data: V20201215.ListFirmwaresRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ListFirmwaresResponse>;
-  /** {@link V20201215.ModifyDataForward 修改数据转发}({@link V20201215.ModifyDataForwardRequest 请求参数}): {@link V20201215.ModifyDataForwardResponse 返回参数} */
+  /** 修改数据转发 {@link V20201215.ModifyDataForwardRequest} {@link V20201215.ModifyDataForwardResponse} */
   ModifyDataForward(data: V20201215.ModifyDataForwardRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ModifyDataForwardResponse>;
-  /** {@link V20201215.ModifyDataForwardStatus 设置数据转发状态}({@link V20201215.ModifyDataForwardStatusRequest 请求参数}): {@link V20201215.ModifyDataForwardStatusResponse 返回参数} */
+  /** 设置数据转发状态 {@link V20201215.ModifyDataForwardStatusRequest} {@link V20201215.ModifyDataForwardStatusResponse} */
   ModifyDataForwardStatus(data: V20201215.ModifyDataForwardStatusRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ModifyDataForwardStatusResponse>;
-  /** {@link V20201215.ModifyDevice 修改设备信息}({@link V20201215.ModifyDeviceRequest 请求参数}): {@link V20201215.ModifyDeviceResponse 返回参数} */
+  /** 修改设备信息 {@link V20201215.ModifyDeviceRequest} {@link V20201215.ModifyDeviceResponse} */
   ModifyDevice(data: V20201215.ModifyDeviceRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ModifyDeviceResponse>;
-  /** {@link V20201215.ModifyDeviceLogLevel 更新设备日志级别}({@link V20201215.ModifyDeviceLogLevelRequest 请求参数}): {@link V20201215.ModifyDeviceLogLevelResponse 返回参数} */
+  /** 更新设备日志级别 {@link V20201215.ModifyDeviceLogLevelRequest} {@link V20201215.ModifyDeviceLogLevelResponse} */
   ModifyDeviceLogLevel(data: V20201215.ModifyDeviceLogLevelRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ModifyDeviceLogLevelResponse>;
-  /** {@link V20201215.ModifyForwardRule 修改转发规则}({@link V20201215.ModifyForwardRuleRequest 请求参数}): {@link V20201215.ModifyForwardRuleResponse 返回参数} */
+  /** 修改转发规则 {@link V20201215.ModifyForwardRuleRequest} {@link V20201215.ModifyForwardRuleResponse} */
   ModifyForwardRule(data: V20201215.ModifyForwardRuleRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ModifyForwardRuleResponse>;
-  /** {@link V20201215.ModifyModelDefinition 修改产品数据模板}({@link V20201215.ModifyModelDefinitionRequest 请求参数}): {@link V20201215.ModifyModelDefinitionResponse 返回参数} */
+  /** 修改产品数据模板 {@link V20201215.ModifyModelDefinitionRequest} {@link V20201215.ModifyModelDefinitionResponse} */
   ModifyModelDefinition(data: V20201215.ModifyModelDefinitionRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ModifyModelDefinitionResponse>;
-  /** {@link V20201215.ModifyProduct 修改产品信息}({@link V20201215.ModifyProductRequest 请求参数}): {@link V20201215.ModifyProductResponse 返回参数} */
+  /** 修改产品信息 {@link V20201215.ModifyProductRequest} {@link V20201215.ModifyProductResponse} */
   ModifyProduct(data: V20201215.ModifyProductRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ModifyProductResponse>;
-  /** {@link V20201215.ModifyProductDynamicRegister 修改产品动态注册}({@link V20201215.ModifyProductDynamicRegisterRequest 请求参数}): {@link V20201215.ModifyProductDynamicRegisterResponse 返回参数} */
+  /** 修改产品动态注册 {@link V20201215.ModifyProductDynamicRegisterRequest} {@link V20201215.ModifyProductDynamicRegisterResponse} */
   ModifyProductDynamicRegister(data: V20201215.ModifyProductDynamicRegisterRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ModifyProductDynamicRegisterResponse>;
-  /** {@link V20201215.PublishMessage 设备透传指令控制}({@link V20201215.PublishMessageRequest 请求参数}): {@link V20201215.PublishMessageResponse 返回参数} */
+  /** 设备透传指令控制 {@link V20201215.PublishMessageRequest} {@link V20201215.PublishMessageResponse} */
   PublishMessage(data: V20201215.PublishMessageRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.PublishMessageResponse>;
-  /** {@link V20201215.ReportAliveDevice 上报活跃设备}({@link V20201215.ReportAliveDeviceRequest 请求参数}): {@link V20201215.ReportAliveDeviceResponse 返回参数} */
+  /** 上报活跃设备 {@link V20201215.ReportAliveDeviceRequest} {@link V20201215.ReportAliveDeviceResponse} */
   ReportAliveDevice(data: V20201215.ReportAliveDeviceRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ReportAliveDeviceResponse>;
-  /** {@link V20201215.ResetCloudStorage 重置云存服务}({@link V20201215.ResetCloudStorageRequest 请求参数}): {@link V20201215.ResetCloudStorageResponse 返回参数} */
+  /** 重置云存服务 {@link V20201215.ResetCloudStorageRequest} {@link V20201215.ResetCloudStorageResponse} */
   ResetCloudStorage(data: V20201215.ResetCloudStorageRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.ResetCloudStorageResponse>;
-  /** {@link V20201215.RetryDeviceFirmwareTask 重试设备升级任务}({@link V20201215.RetryDeviceFirmwareTaskRequest 请求参数}): {@link V20201215.RetryDeviceFirmwareTaskResponse 返回参数} */
+  /** 重试设备升级任务 {@link V20201215.RetryDeviceFirmwareTaskRequest} {@link V20201215.RetryDeviceFirmwareTaskResponse} */
   RetryDeviceFirmwareTask(data: V20201215.RetryDeviceFirmwareTaskRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.RetryDeviceFirmwareTaskResponse>;
-  /** {@link V20201215.SetForwardAuth 设置转发权限}({@link V20201215.SetForwardAuthRequest 请求参数}): {@link V20201215.SetForwardAuthResponse 返回参数} */
+  /** 设置转发权限 {@link V20201215.SetForwardAuthRequest} {@link V20201215.SetForwardAuthResponse} */
   SetForwardAuth(data: V20201215.SetForwardAuthRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.SetForwardAuthResponse>;
-  /** {@link V20201215.TransferCloudStorage 转移云存服务}({@link V20201215.TransferCloudStorageRequest 请求参数}): {@link V20201215.TransferCloudStorageResponse 返回参数} */
+  /** 转移云存服务 {@link V20201215.TransferCloudStorageRequest} {@link V20201215.TransferCloudStorageResponse} */
   TransferCloudStorage(data: V20201215.TransferCloudStorageRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.TransferCloudStorageResponse>;
-  /** {@link V20201215.UpdateAIModelChannel 更新AI推理结果推送配置}({@link V20201215.UpdateAIModelChannelRequest 请求参数}): {@link V20201215.UpdateAIModelChannelResponse 返回参数} */
+  /** 更新AI推理结果推送配置 {@link V20201215.UpdateAIModelChannelRequest} {@link V20201215.UpdateAIModelChannelResponse} */
   UpdateAIModelChannel(data: V20201215.UpdateAIModelChannelRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.UpdateAIModelChannelResponse>;
-  /** {@link V20201215.UploadFirmware 上传固件信息}({@link V20201215.UploadFirmwareRequest 请求参数}): {@link V20201215.UploadFirmwareResponse 返回参数} */
+  /** 上传固件信息 {@link V20201215.UploadFirmwareRequest} {@link V20201215.UploadFirmwareResponse} */
   UploadFirmware(data: V20201215.UploadFirmwareRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.UploadFirmwareResponse>;
-  /** {@link V20201215.WakeUpDevice 设备唤醒}({@link V20201215.WakeUpDeviceRequest 请求参数}): {@link V20201215.WakeUpDeviceResponse 返回参数} */
+  /** 设备唤醒 {@link V20201215.WakeUpDeviceRequest} {@link V20201215.WakeUpDeviceResponse} */
   WakeUpDevice(data: V20201215.WakeUpDeviceRequest, config: AxiosRequestConfig & V20201215.VersionHeader): AxiosPromise<V20201215.WakeUpDeviceResponse>;
-  /** {@link V20191126.ClearDeviceActiveCode 清除设备激活码}({@link V20191126.ClearDeviceActiveCodeRequest 请求参数}): {@link V20191126.ClearDeviceActiveCodeResponse 返回参数} */
+  /** 清除设备激活码 {@link V20191126.ClearDeviceActiveCodeRequest} {@link V20191126.ClearDeviceActiveCodeResponse} */
   ClearDeviceActiveCode(data: V20191126.ClearDeviceActiveCodeRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.ClearDeviceActiveCodeResponse>;
-  /** {@link V20191126.CreateAnonymousAccessToken 创建匿名访问Token}({@link V20191126.CreateAnonymousAccessTokenRequest 请求参数}): {@link V20191126.CreateAnonymousAccessTokenResponse 返回参数} */
+  /** 创建匿名访问Token {@link V20191126.CreateAnonymousAccessTokenRequest} {@link V20191126.CreateAnonymousAccessTokenResponse} */
   CreateAnonymousAccessToken(data: V20191126.CreateAnonymousAccessTokenRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateAnonymousAccessTokenResponse>;
-  /** {@link V20191126.CreateAppUsr 终端用户注册}({@link V20191126.CreateAppUsrRequest 请求参数}): {@link V20191126.CreateAppUsrResponse 返回参数} */
+  /** 终端用户注册 {@link V20191126.CreateAppUsrRequest} {@link V20191126.CreateAppUsrResponse} */
   CreateAppUsr(data: V20191126.CreateAppUsrRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateAppUsrResponse>;
-  /** {@link V20191126.CreateBinding 终端用户绑定设备}({@link V20191126.CreateBindingRequest 请求参数}): {@link V20191126.CreateBindingResponse 返回参数} */
+  /** 终端用户绑定设备 {@link V20191126.CreateBindingRequest} {@link V20191126.CreateBindingResponse} */
   CreateBinding(data: V20191126.CreateBindingRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateBindingResponse>;
-  /** {@link V20191126.CreateDevToken 终端用户临时访问设备授权}({@link V20191126.CreateDevTokenRequest 请求参数}): {@link V20191126.CreateDevTokenResponse 返回参数} */
+  /** 终端用户临时访问设备授权 {@link V20191126.CreateDevTokenRequest} {@link V20191126.CreateDevTokenResponse} */
   CreateDevToken(data: V20191126.CreateDevTokenRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateDevTokenResponse>;
-  /** {@link V20191126.CreateDevices 创建设备}({@link V20191126.CreateDevicesRequest 请求参数}): {@link V20191126.CreateDevicesResponse 返回参数} */
+  /** 创建设备 {@link V20191126.CreateDevicesRequest} {@link V20191126.CreateDevicesResponse} */
   CreateDevices(data: V20191126.CreateDevicesRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateDevicesResponse>;
-  /** {@link V20191126.CreateGencode 生成设备物模型源代码}({@link V20191126.CreateGencodeRequest 请求参数}): {@link V20191126.CreateGencodeResponse 返回参数} */
+  /** 生成设备物模型源代码 {@link V20191126.CreateGencodeRequest} {@link V20191126.CreateGencodeResponse} */
   CreateGencode(data: V20191126.CreateGencodeRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateGencodeResponse>;
-  /** {@link V20191126.CreateIotDataType 创建自定义物模型数据类型}({@link V20191126.CreateIotDataTypeRequest 请求参数}): {@link V20191126.CreateIotDataTypeResponse 返回参数} */
+  /** 创建自定义物模型数据类型 {@link V20191126.CreateIotDataTypeRequest} {@link V20191126.CreateIotDataTypeResponse} */
   CreateIotDataType(data: V20191126.CreateIotDataTypeRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateIotDataTypeResponse>;
-  /** {@link V20191126.CreateIotModel 定义的物模型提交}({@link V20191126.CreateIotModelRequest 请求参数}): {@link V20191126.CreateIotModelResponse 返回参数} */
+  /** 定义的物模型提交 {@link V20191126.CreateIotModelRequest} {@link V20191126.CreateIotModelResponse} */
   CreateIotModel(data: V20191126.CreateIotModelRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateIotModelResponse>;
-  /** {@link V20191126.CreateProduct 创建产品}({@link V20191126.CreateProductRequest 请求参数}): {@link V20191126.CreateProductResponse 返回参数} */
+  /** 创建产品 {@link V20191126.CreateProductRequest} {@link V20191126.CreateProductResponse} */
   CreateProduct(data: V20191126.CreateProductRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateProductResponse>;
-  /** {@link V20191126.CreateStorage 购买云存套餐}({@link V20191126.CreateStorageRequest 请求参数}): {@link V20191126.CreateStorageResponse 返回参数} */
+  /** 购买云存套餐 {@link V20191126.CreateStorageRequest} {@link V20191126.CreateStorageResponse} */
   CreateStorage(data: V20191126.CreateStorageRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateStorageResponse>;
-  /** {@link V20191126.CreateStorageService 购买云存服务}({@link V20191126.CreateStorageServiceRequest 请求参数}): {@link V20191126.CreateStorageServiceResponse 返回参数} */
+  /** 购买云存服务 {@link V20191126.CreateStorageServiceRequest} {@link V20191126.CreateStorageServiceResponse} */
   CreateStorageService(data: V20191126.CreateStorageServiceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateStorageServiceResponse>;
-  /** {@link V20191126.CreateTraceIds 将设备加到白名单}({@link V20191126.CreateTraceIdsRequest 请求参数}): {@link V20191126.CreateTraceIdsResponse 返回参数} */
+  /** 将设备加到白名单 {@link V20191126.CreateTraceIdsRequest} {@link V20191126.CreateTraceIdsResponse} */
   CreateTraceIds(data: V20191126.CreateTraceIdsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateTraceIdsResponse>;
-  /** {@link V20191126.CreateUploadPath 获取固件上传路径}({@link V20191126.CreateUploadPathRequest 请求参数}): {@link V20191126.CreateUploadPathResponse 返回参数} */
+  /** 获取固件上传路径 {@link V20191126.CreateUploadPathRequest} {@link V20191126.CreateUploadPathResponse} */
   CreateUploadPath(data: V20191126.CreateUploadPathRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateUploadPathResponse>;
-  /** {@link V20191126.CreateUsrToken 终端用户接入授权}({@link V20191126.CreateUsrTokenRequest 请求参数}): {@link V20191126.CreateUsrTokenResponse 返回参数} */
+  /** 终端用户接入授权 {@link V20191126.CreateUsrTokenRequest} {@link V20191126.CreateUsrTokenResponse} */
   CreateUsrToken(data: V20191126.CreateUsrTokenRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.CreateUsrTokenResponse>;
-  /** {@link V20191126.DeleteAppUsr 删除终端用户}({@link V20191126.DeleteAppUsrRequest 请求参数}): {@link V20191126.DeleteAppUsrResponse 返回参数} */
+  /** 删除终端用户 {@link V20191126.DeleteAppUsrRequest} {@link V20191126.DeleteAppUsrResponse} */
   DeleteAppUsr(data: V20191126.DeleteAppUsrRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeleteAppUsrResponse>;
-  /** {@link V20191126.DeleteBinding 终端用户解绑设备}({@link V20191126.DeleteBindingRequest 请求参数}): {@link V20191126.DeleteBindingResponse 返回参数} */
+  /** 终端用户解绑设备 {@link V20191126.DeleteBindingRequest} {@link V20191126.DeleteBindingResponse} */
   DeleteBinding(data: V20191126.DeleteBindingRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeleteBindingResponse>;
-  /** {@link V20191126.DeleteDevice 删除设备}({@link V20191126.DeleteDeviceRequest 请求参数}): {@link V20191126.DeleteDeviceResponse 返回参数} */
+  /** 删除设备 {@link V20191126.DeleteDeviceRequest} {@link V20191126.DeleteDeviceResponse} */
   DeleteDevice(data: V20191126.DeleteDeviceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeleteDeviceResponse>;
-  /** {@link V20191126.DeleteIotDataType 删除自定义物模型数据类型}({@link V20191126.DeleteIotDataTypeRequest 请求参数}): {@link V20191126.DeleteIotDataTypeResponse 返回参数} */
+  /** 删除自定义物模型数据类型 {@link V20191126.DeleteIotDataTypeRequest} {@link V20191126.DeleteIotDataTypeResponse} */
   DeleteIotDataType(data: V20191126.DeleteIotDataTypeRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeleteIotDataTypeResponse>;
-  /** {@link V20191126.DeleteMessageQueue 删除产品转发消息配置}({@link V20191126.DeleteMessageQueueRequest 请求参数}): {@link V20191126.DeleteMessageQueueResponse 返回参数} */
+  /** 删除产品转发消息配置 {@link V20191126.DeleteMessageQueueRequest} {@link V20191126.DeleteMessageQueueResponse} */
   DeleteMessageQueue(data: V20191126.DeleteMessageQueueRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeleteMessageQueueResponse>;
-  /** {@link V20191126.DeleteOtaVersion 删除固件版本信息}({@link V20191126.DeleteOtaVersionRequest 请求参数}): {@link V20191126.DeleteOtaVersionResponse 返回参数} */
+  /** 删除固件版本信息 {@link V20191126.DeleteOtaVersionRequest} {@link V20191126.DeleteOtaVersionResponse} */
   DeleteOtaVersion(data: V20191126.DeleteOtaVersionRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeleteOtaVersionResponse>;
-  /** {@link V20191126.DeleteProduct 删除产品}({@link V20191126.DeleteProductRequest 请求参数}): {@link V20191126.DeleteProductResponse 返回参数} */
+  /** 删除产品 {@link V20191126.DeleteProductRequest} {@link V20191126.DeleteProductResponse} */
   DeleteProduct(data: V20191126.DeleteProductRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeleteProductResponse>;
-  /** {@link V20191126.DeleteTraceIds 将设备从白名单删除}({@link V20191126.DeleteTraceIdsRequest 请求参数}): {@link V20191126.DeleteTraceIdsResponse 返回参数} */
+  /** 将设备从白名单删除 {@link V20191126.DeleteTraceIdsRequest} {@link V20191126.DeleteTraceIdsResponse} */
   DeleteTraceIds(data: V20191126.DeleteTraceIdsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeleteTraceIdsResponse>;
-  /** {@link V20191126.DeliverStorageService 将已购买的云存服务转移到另一设备}({@link V20191126.DeliverStorageServiceRequest 请求参数}): {@link V20191126.DeliverStorageServiceResponse 返回参数} */
+  /** 将已购买的云存服务转移到另一设备 {@link V20191126.DeliverStorageServiceRequest} {@link V20191126.DeliverStorageServiceResponse} */
   DeliverStorageService(data: V20191126.DeliverStorageServiceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DeliverStorageServiceResponse>;
-  /** {@link V20191126.DescribeAccountBalance 查询账户余额}({@link V20191126.DescribeAccountBalanceRequest 请求参数}): {@link V20191126.DescribeAccountBalanceResponse 返回参数} */
+  /** 查询账户余额 {@link V20191126.DescribeAccountBalanceRequest} {@link V20191126.DescribeAccountBalanceResponse} */
   DescribeAccountBalance(data: V20191126.DescribeAccountBalanceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeAccountBalanceResponse>;
-  /** {@link V20191126.DescribeBindDev 查询终端用户绑定的设备列表}({@link V20191126.DescribeBindDevRequest 请求参数}): {@link V20191126.DescribeBindDevResponse 返回参数} */
+  /** 查询终端用户绑定的设备列表 {@link V20191126.DescribeBindDevRequest} {@link V20191126.DescribeBindDevResponse} */
   DescribeBindDev(data: V20191126.DescribeBindDevRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeBindDevResponse>;
-  /** {@link V20191126.DescribeBindUsr 查询设备绑定的终端用户列表}({@link V20191126.DescribeBindUsrRequest 请求参数}): {@link V20191126.DescribeBindUsrResponse 返回参数} */
+  /** 查询设备绑定的终端用户列表 {@link V20191126.DescribeBindUsrRequest} {@link V20191126.DescribeBindUsrResponse} */
   DescribeBindUsr(data: V20191126.DescribeBindUsrRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeBindUsrResponse>;
-  /** {@link V20191126.DescribeDevice 获取设备信息}({@link V20191126.DescribeDeviceRequest 请求参数}): {@link V20191126.DescribeDeviceResponse 返回参数} */
+  /** 获取设备信息 {@link V20191126.DescribeDeviceRequest} {@link V20191126.DescribeDeviceResponse} */
   DescribeDevice(data: V20191126.DescribeDeviceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeDeviceResponse>;
-  /** {@link V20191126.DescribeDeviceModel 获取设备物模型}({@link V20191126.DescribeDeviceModelRequest 请求参数}): {@link V20191126.DescribeDeviceModelResponse 返回参数} */
+  /** 获取设备物模型 {@link V20191126.DescribeDeviceModelRequest} {@link V20191126.DescribeDeviceModelResponse} */
   DescribeDeviceModel(data: V20191126.DescribeDeviceModelRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeDeviceModelResponse>;
-  /** {@link V20191126.DescribeDevices 获取设备信息列表}({@link V20191126.DescribeDevicesRequest 请求参数}): {@link V20191126.DescribeDevicesResponse 返回参数} */
+  /** 获取设备信息列表 {@link V20191126.DescribeDevicesRequest} {@link V20191126.DescribeDevicesResponse} */
   DescribeDevices(data: V20191126.DescribeDevicesRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeDevicesResponse>;
-  /** {@link V20191126.DescribeIotDataType 查询自定义物模型数据类型}({@link V20191126.DescribeIotDataTypeRequest 请求参数}): {@link V20191126.DescribeIotDataTypeResponse 返回参数} */
+  /** 查询自定义物模型数据类型 {@link V20191126.DescribeIotDataTypeRequest} {@link V20191126.DescribeIotDataTypeResponse} */
   DescribeIotDataType(data: V20191126.DescribeIotDataTypeRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeIotDataTypeResponse>;
-  /** {@link V20191126.DescribeIotModel 获取物模型定义}({@link V20191126.DescribeIotModelRequest 请求参数}): {@link V20191126.DescribeIotModelResponse 返回参数} */
+  /** 获取物模型定义 {@link V20191126.DescribeIotModelRequest} {@link V20191126.DescribeIotModelResponse} */
   DescribeIotModel(data: V20191126.DescribeIotModelRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeIotModelResponse>;
-  /** {@link V20191126.DescribeIotModels 获取物模型历史版本列表}({@link V20191126.DescribeIotModelsRequest 请求参数}): {@link V20191126.DescribeIotModelsResponse 返回参数} */
+  /** 获取物模型历史版本列表 {@link V20191126.DescribeIotModelsRequest} {@link V20191126.DescribeIotModelsResponse} */
   DescribeIotModels(data: V20191126.DescribeIotModelsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeIotModelsResponse>;
-  /** {@link V20191126.DescribeLogs 查询设备日志列表}({@link V20191126.DescribeLogsRequest 请求参数}): {@link V20191126.DescribeLogsResponse 返回参数} */
+  /** 查询设备日志列表 {@link V20191126.DescribeLogsRequest} {@link V20191126.DescribeLogsResponse} */
   DescribeLogs(data: V20191126.DescribeLogsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeLogsResponse>;
-  /** {@link V20191126.DescribeMessageQueue 获取产品转发消息配置}({@link V20191126.DescribeMessageQueueRequest 请求参数}): {@link V20191126.DescribeMessageQueueResponse 返回参数} */
+  /** 获取产品转发消息配置 {@link V20191126.DescribeMessageQueueRequest} {@link V20191126.DescribeMessageQueueResponse} */
   DescribeMessageQueue(data: V20191126.DescribeMessageQueueRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeMessageQueueResponse>;
-  /** {@link V20191126.DescribeModelDataRet 获取物模型操作结果}({@link V20191126.DescribeModelDataRetRequest 请求参数}): {@link V20191126.DescribeModelDataRetResponse 返回参数} */
+  /** 获取物模型操作结果 {@link V20191126.DescribeModelDataRetRequest} {@link V20191126.DescribeModelDataRetResponse} */
   DescribeModelDataRet(data: V20191126.DescribeModelDataRetRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeModelDataRetResponse>;
-  /** {@link V20191126.DescribeOsList 查看操作系统支持的芯片列表}({@link V20191126.DescribeOsListRequest 请求参数}): {@link V20191126.DescribeOsListResponse 返回参数} */
+  /** 查看操作系统支持的芯片列表 {@link V20191126.DescribeOsListRequest} {@link V20191126.DescribeOsListResponse} */
   DescribeOsList(data: V20191126.DescribeOsListRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeOsListResponse>;
-  /** {@link V20191126.DescribeOtaVersions 查询固件版本信息列表}({@link V20191126.DescribeOtaVersionsRequest 请求参数}): {@link V20191126.DescribeOtaVersionsResponse 返回参数} */
+  /** 查询固件版本信息列表 {@link V20191126.DescribeOtaVersionsRequest} {@link V20191126.DescribeOtaVersionsResponse} */
   DescribeOtaVersions(data: V20191126.DescribeOtaVersionsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeOtaVersionsResponse>;
-  /** {@link V20191126.DescribeProduct 获取单个产品详细信息}({@link V20191126.DescribeProductRequest 请求参数}): {@link V20191126.DescribeProductResponse 返回参数} */
+  /** 获取单个产品详细信息 {@link V20191126.DescribeProductRequest} {@link V20191126.DescribeProductResponse} */
   DescribeProduct(data: V20191126.DescribeProductRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeProductResponse>;
-  /** {@link V20191126.DescribeProducts 获取产品列表}({@link V20191126.DescribeProductsRequest 请求参数}): {@link V20191126.DescribeProductsResponse 返回参数} */
+  /** 获取产品列表 {@link V20191126.DescribeProductsRequest} {@link V20191126.DescribeProductsResponse} */
   DescribeProducts(data: V20191126.DescribeProductsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeProductsResponse>;
-  /** {@link V20191126.DescribePubVersions 获取某一产品发布过的全部固件版本}({@link V20191126.DescribePubVersionsRequest 请求参数}): {@link V20191126.DescribePubVersionsResponse 返回参数} */
+  /** 获取某一产品发布过的全部固件版本 {@link V20191126.DescribePubVersionsRequest} {@link V20191126.DescribePubVersionsResponse} */
   DescribePubVersions(data: V20191126.DescribePubVersionsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribePubVersionsResponse>;
-  /** {@link V20191126.DescribeRechargeRecords 查询充值记录}({@link V20191126.DescribeRechargeRecordsRequest 请求参数}): {@link V20191126.DescribeRechargeRecordsResponse 返回参数} */
+  /** 查询充值记录 {@link V20191126.DescribeRechargeRecordsRequest} {@link V20191126.DescribeRechargeRecordsResponse} */
   DescribeRechargeRecords(data: V20191126.DescribeRechargeRecordsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeRechargeRecordsResponse>;
-  /** {@link V20191126.DescribeRegistrationStatus 查询终端用户的注册状态}({@link V20191126.DescribeRegistrationStatusRequest 请求参数}): {@link V20191126.DescribeRegistrationStatusResponse 返回参数} */
+  /** 查询终端用户的注册状态 {@link V20191126.DescribeRegistrationStatusRequest} {@link V20191126.DescribeRegistrationStatusResponse} */
   DescribeRegistrationStatus(data: V20191126.DescribeRegistrationStatusRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeRegistrationStatusResponse>;
-  /** {@link V20191126.DescribeRunLog 获取设备运行日志}({@link V20191126.DescribeRunLogRequest 请求参数}): {@link V20191126.DescribeRunLogResponse 返回参数} */
+  /** 获取设备运行日志 {@link V20191126.DescribeRunLogRequest} {@link V20191126.DescribeRunLogResponse} */
   DescribeRunLog(data: V20191126.DescribeRunLogRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeRunLogResponse>;
-  /** {@link V20191126.DescribeStorageService 查询云存服务}({@link V20191126.DescribeStorageServiceRequest 请求参数}): {@link V20191126.DescribeStorageServiceResponse 返回参数} */
+  /** 查询云存服务 {@link V20191126.DescribeStorageServiceRequest} {@link V20191126.DescribeStorageServiceResponse} */
   DescribeStorageService(data: V20191126.DescribeStorageServiceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeStorageServiceResponse>;
-  /** {@link V20191126.DescribeStream 请求设备直播流地址}({@link V20191126.DescribeStreamRequest 请求参数}): {@link V20191126.DescribeStreamResponse 返回参数} */
+  /** 请求设备直播流地址 {@link V20191126.DescribeStreamRequest} {@link V20191126.DescribeStreamResponse} */
   DescribeStream(data: V20191126.DescribeStreamRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeStreamResponse>;
-  /** {@link V20191126.DescribeTraceIds 查询设备日志跟踪白名单}({@link V20191126.DescribeTraceIdsRequest 请求参数}): {@link V20191126.DescribeTraceIdsResponse 返回参数} */
+  /** 查询设备日志跟踪白名单 {@link V20191126.DescribeTraceIdsRequest} {@link V20191126.DescribeTraceIdsResponse} */
   DescribeTraceIds(data: V20191126.DescribeTraceIdsRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeTraceIdsResponse>;
-  /** {@link V20191126.DescribeTraceStatus 查询指定设备是否在白名单}({@link V20191126.DescribeTraceStatusRequest 请求参数}): {@link V20191126.DescribeTraceStatusResponse 返回参数} */
+  /** 查询指定设备是否在白名单 {@link V20191126.DescribeTraceStatusRequest} {@link V20191126.DescribeTraceStatusResponse} */
   DescribeTraceStatus(data: V20191126.DescribeTraceStatusRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DescribeTraceStatusResponse>;
-  /** {@link V20191126.DisableDevice 禁用设备}({@link V20191126.DisableDeviceRequest 请求参数}): {@link V20191126.DisableDeviceResponse 返回参数} */
+  /** 禁用设备 {@link V20191126.DisableDeviceRequest} {@link V20191126.DisableDeviceResponse} */
   DisableDevice(data: V20191126.DisableDeviceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DisableDeviceResponse>;
-  /** {@link V20191126.DisableDeviceStream 停止设备推流}({@link V20191126.DisableDeviceStreamRequest 请求参数}): {@link V20191126.DisableDeviceStreamResponse 返回参数} */
+  /** 停止设备推流 {@link V20191126.DisableDeviceStreamRequest} {@link V20191126.DisableDeviceStreamResponse} */
   DisableDeviceStream(data: V20191126.DisableDeviceStreamRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DisableDeviceStreamResponse>;
-  /** {@link V20191126.DisableOtaVersion 禁用固件版本}({@link V20191126.DisableOtaVersionRequest 请求参数}): {@link V20191126.DisableOtaVersionResponse 返回参数} */
+  /** 禁用固件版本 {@link V20191126.DisableOtaVersionRequest} {@link V20191126.DisableOtaVersionResponse} */
   DisableOtaVersion(data: V20191126.DisableOtaVersionRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.DisableOtaVersionResponse>;
-  /** {@link V20191126.ModifyDevice 修改设备信息}({@link V20191126.ModifyDeviceRequest 请求参数}): {@link V20191126.ModifyDeviceResponse 返回参数} */
+  /** 修改设备信息 {@link V20191126.ModifyDeviceRequest} {@link V20191126.ModifyDeviceResponse} */
   ModifyDevice(data: V20191126.ModifyDeviceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.ModifyDeviceResponse>;
-  /** {@link V20191126.ModifyDeviceAction 修改设备物模型行为}({@link V20191126.ModifyDeviceActionRequest 请求参数}): {@link V20191126.ModifyDeviceActionResponse 返回参数} */
+  /** 修改设备物模型行为 {@link V20191126.ModifyDeviceActionRequest} {@link V20191126.ModifyDeviceActionResponse} */
   ModifyDeviceAction(data: V20191126.ModifyDeviceActionRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.ModifyDeviceActionResponse>;
-  /** {@link V20191126.ModifyDeviceProperty 修改设备物模型属性}({@link V20191126.ModifyDevicePropertyRequest 请求参数}): {@link V20191126.ModifyDevicePropertyResponse 返回参数} */
+  /** 修改设备物模型属性 {@link V20191126.ModifyDevicePropertyRequest} {@link V20191126.ModifyDevicePropertyResponse} */
   ModifyDeviceProperty(data: V20191126.ModifyDevicePropertyRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.ModifyDevicePropertyResponse>;
-  /** {@link V20191126.ModifyProduct 编辑产品信息}({@link V20191126.ModifyProductRequest 请求参数}): {@link V20191126.ModifyProductResponse 返回参数} */
+  /** 编辑产品信息 {@link V20191126.ModifyProductRequest} {@link V20191126.ModifyProductResponse} */
   ModifyProduct(data: V20191126.ModifyProductRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.ModifyProductResponse>;
-  /** {@link V20191126.ModifyVerContent 编辑版本描述信息}({@link V20191126.ModifyVerContentRequest 请求参数}): {@link V20191126.ModifyVerContentResponse 返回参数} */
+  /** 编辑版本描述信息 {@link V20191126.ModifyVerContentRequest} {@link V20191126.ModifyVerContentResponse} */
   ModifyVerContent(data: V20191126.ModifyVerContentRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.ModifyVerContentResponse>;
-  /** {@link V20191126.RefundStorageService 退订已购买的云存服务}({@link V20191126.RefundStorageServiceRequest 请求参数}): {@link V20191126.RefundStorageServiceResponse 返回参数} */
+  /** 退订已购买的云存服务 {@link V20191126.RefundStorageServiceRequest} {@link V20191126.RefundStorageServiceResponse} */
   RefundStorageService(data: V20191126.RefundStorageServiceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.RefundStorageServiceResponse>;
-  /** {@link V20191126.RunDevice 启用设备}({@link V20191126.RunDeviceRequest 请求参数}): {@link V20191126.RunDeviceResponse 返回参数} */
+  /** 启用设备 {@link V20191126.RunDeviceRequest} {@link V20191126.RunDeviceResponse} */
   RunDevice(data: V20191126.RunDeviceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.RunDeviceResponse>;
-  /** {@link V20191126.RunDeviceStream 开启设备推流}({@link V20191126.RunDeviceStreamRequest 请求参数}): {@link V20191126.RunDeviceStreamResponse 返回参数} */
+  /** 开启设备推流 {@link V20191126.RunDeviceStreamRequest} {@link V20191126.RunDeviceStreamResponse} */
   RunDeviceStream(data: V20191126.RunDeviceStreamRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.RunDeviceStreamResponse>;
-  /** {@link V20191126.RunIotModel 定义的物模型发布}({@link V20191126.RunIotModelRequest 请求参数}): {@link V20191126.RunIotModelResponse 返回参数} */
+  /** 定义的物模型发布 {@link V20191126.RunIotModelRequest} {@link V20191126.RunIotModelResponse} */
   RunIotModel(data: V20191126.RunIotModelRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.RunIotModelResponse>;
-  /** {@link V20191126.RunOtaVersion 固件版本正式发布}({@link V20191126.RunOtaVersionRequest 请求参数}): {@link V20191126.RunOtaVersionResponse 返回参数} */
+  /** 固件版本正式发布 {@link V20191126.RunOtaVersionRequest} {@link V20191126.RunOtaVersionResponse} */
   RunOtaVersion(data: V20191126.RunOtaVersionRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.RunOtaVersionResponse>;
-  /** {@link V20191126.RunTestOtaVersion 固件版本测试发布}({@link V20191126.RunTestOtaVersionRequest 请求参数}): {@link V20191126.RunTestOtaVersionResponse 返回参数} */
+  /** 固件版本测试发布 {@link V20191126.RunTestOtaVersionRequest} {@link V20191126.RunTestOtaVersionResponse} */
   RunTestOtaVersion(data: V20191126.RunTestOtaVersionRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.RunTestOtaVersionResponse>;
-  /** {@link V20191126.SendOnlineMsg 向设备发送在线消息}({@link V20191126.SendOnlineMsgRequest 请求参数}): {@link V20191126.SendOnlineMsgResponse 返回参数} */
+  /** 向设备发送在线消息 {@link V20191126.SendOnlineMsgRequest} {@link V20191126.SendOnlineMsgResponse} */
   SendOnlineMsg(data: V20191126.SendOnlineMsgRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.SendOnlineMsgResponse>;
-  /** {@link V20191126.SetMessageQueue 配置产品转发消息队列}({@link V20191126.SetMessageQueueRequest 请求参数}): {@link V20191126.SetMessageQueueResponse 返回参数} */
+  /** 配置产品转发消息队列 {@link V20191126.SetMessageQueueRequest} {@link V20191126.SetMessageQueueResponse} */
   SetMessageQueue(data: V20191126.SetMessageQueueRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.SetMessageQueueResponse>;
-  /** {@link V20191126.UpgradeDevice 设备固件升级}({@link V20191126.UpgradeDeviceRequest 请求参数}): {@link V20191126.UpgradeDeviceResponse 返回参数} */
+  /** 设备固件升级 {@link V20191126.UpgradeDeviceRequest} {@link V20191126.UpgradeDeviceResponse} */
   UpgradeDevice(data: V20191126.UpgradeDeviceRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.UpgradeDeviceResponse>;
-  /** {@link V20191126.UploadOtaVersion 接收上传到控制台的固件版本信息}({@link V20191126.UploadOtaVersionRequest 请求参数}): {@link V20191126.UploadOtaVersionResponse 返回参数} */
+  /** 接收上传到控制台的固件版本信息 {@link V20191126.UploadOtaVersionRequest} {@link V20191126.UploadOtaVersionResponse} */
   UploadOtaVersion(data: V20191126.UploadOtaVersionRequest, config: AxiosRequestConfig & V20191126.VersionHeader): AxiosPromise<V20191126.UploadOtaVersionResponse>;
 }
 

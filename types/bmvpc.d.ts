@@ -480,7 +480,7 @@ declare interface AcceptVpcPeerConnectionRequest {
 declare interface AcceptVpcPeerConnectionResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -496,7 +496,7 @@ declare interface AsyncRegisterIpsRequest {
 declare interface AsyncRegisterIpsResponse {
   /** 任务ID。 */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -514,7 +514,7 @@ declare interface BindEipsToNatGatewayRequest {
 declare interface BindEipsToNatGatewayResponse {
   /** 任务ID */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -530,7 +530,7 @@ declare interface BindIpsToNatGatewayRequest {
 declare interface BindIpsToNatGatewayResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -546,7 +546,7 @@ declare interface BindSubnetsToNatGatewayRequest {
 declare interface BindSubnetsToNatGatewayResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -562,7 +562,7 @@ declare interface CreateCustomerGatewayRequest {
 declare interface CreateCustomerGatewayResponse {
   /** 对端网关对象 */
   CustomerGateway?: CustomerGateway;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -576,7 +576,7 @@ declare interface CreateDockerSubnetWithVlanRequest {
 declare interface CreateDockerSubnetWithVlanResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -594,7 +594,7 @@ declare interface CreateHostedInterfaceResponse {
   TaskId?: number;
   /** 黑石托管机器ID */
   ResourceIds?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -610,7 +610,7 @@ declare interface CreateInterfacesRequest {
 declare interface CreateInterfacesResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -638,7 +638,7 @@ declare interface CreateNatGatewayRequest {
 declare interface CreateNatGatewayResponse {
   /** 任务ID */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -652,7 +652,7 @@ declare interface CreateRoutePoliciesRequest {
 declare interface CreateRoutePoliciesResponse {
   /** 异步任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -666,7 +666,7 @@ declare interface CreateSubnetRequest {
 declare interface CreateSubnetResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -680,7 +680,7 @@ declare interface CreateVirtualSubnetWithVlanRequest {
 declare interface CreateVirtualSubnetWithVlanResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -702,7 +702,7 @@ declare interface CreateVpcPeerConnectionRequest {
 declare interface CreateVpcPeerConnectionResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -722,7 +722,7 @@ declare interface CreateVpcRequest {
 declare interface CreateVpcResponse {
   /** 异步任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -732,7 +732,7 @@ declare interface DeleteCustomerGatewayRequest {
 }
 
 declare interface DeleteCustomerGatewayResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -750,7 +750,7 @@ declare interface DeleteHostedInterfaceResponse {
   TaskId?: number;
   /** 黑石托管机器ID */
   ResourceIds?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -764,7 +764,7 @@ declare interface DeleteHostedInterfacesRequest {
 declare interface DeleteHostedInterfacesResponse {
   /** 异步任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -778,7 +778,7 @@ declare interface DeleteInterfacesRequest {
 declare interface DeleteInterfacesResponse {
   /** 异步任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -792,7 +792,7 @@ declare interface DeleteNatGatewayRequest {
 declare interface DeleteNatGatewayResponse {
   /** 任务ID */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -806,7 +806,7 @@ declare interface DeleteRoutePolicyRequest {
 declare interface DeleteRoutePolicyResponse {
   /** 异步任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -820,7 +820,7 @@ declare interface DeleteSubnetRequest {
 declare interface DeleteSubnetResponse {
   /** 异步任务ID。 */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -834,7 +834,7 @@ declare interface DeleteVirtualIpRequest {
 declare interface DeleteVirtualIpResponse {
   /** 异步任务ID。 */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -846,7 +846,7 @@ declare interface DeleteVpcPeerConnectionRequest {
 declare interface DeleteVpcPeerConnectionResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -858,7 +858,7 @@ declare interface DeleteVpcRequest {
 declare interface DeleteVpcResponse {
   /** 异步任务ID。 */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -870,7 +870,7 @@ declare interface DeleteVpnConnectionRequest {
 declare interface DeleteVpnConnectionResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -882,7 +882,7 @@ declare interface DeleteVpnGatewayRequest {
 declare interface DeleteVpnGatewayResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -896,7 +896,7 @@ declare interface DeregisterIpsRequest {
 }
 
 declare interface DeregisterIpsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -920,7 +920,7 @@ declare interface DescribeCustomerGatewaysResponse {
   CustomerGatewaySet?: CustomerGateway[];
   /** 符合条件的实例数量。 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -950,7 +950,7 @@ declare interface DescribeNatGatewaysResponse {
   NatGatewayInfoSet?: NatGatewayInfo[];
   /** 总数目 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -964,7 +964,7 @@ declare interface DescribeNatSubnetsRequest {
 declare interface DescribeNatSubnetsResponse {
   /** NAT子网信息 */
   NatSubnetInfoSet?: NatSubnetInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -986,7 +986,7 @@ declare interface DescribeRoutePoliciesResponse {
   TotalCount: number;
   /** 路由策略列表 */
   RoutePolicySet: RoutePolicy[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1010,7 +1010,7 @@ declare interface DescribeRouteTablesResponse {
   TotalCount?: number;
   /** 路由表列表 */
   RouteTableSet?: RouteTable[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1024,7 +1024,7 @@ declare interface DescribeSubnetAvailableIpsRequest {
 declare interface DescribeSubnetAvailableIpsResponse {
   /** 可用IP的范围列表 */
   IpSet?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1044,7 +1044,7 @@ declare interface DescribeSubnetByDeviceResponse {
   TotalCount?: number;
   /** 子网列表 */
   Data?: SubnetInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1064,7 +1064,7 @@ declare interface DescribeSubnetByHostedDeviceResponse {
   TotalCount?: number;
   /** 子网列表 */
   Data?: SubnetInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1088,7 +1088,7 @@ declare interface DescribeSubnetsResponse {
   SubnetSet?: SubnetInfo[];
   /** 返回的子网总数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1100,7 +1100,7 @@ declare interface DescribeTaskStatusRequest {
 declare interface DescribeTaskStatusResponse {
   /** 任务状态，其中0表示任务执行成功，1表示任务执行失败，2表示任务正在执行中 */
   Status?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1122,7 +1122,7 @@ declare interface DescribeVpcPeerConnectionsResponse {
   TotalCount?: number;
   /** 对等连接实例。 */
   VpcPeerConnectionSet?: VpcPeerConnection[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1134,7 +1134,7 @@ declare interface DescribeVpcQuotaRequest {
 declare interface DescribeVpcQuotaResponse {
   /** 配额信息 */
   VpcQuotaSet?: VpcQuota[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1158,7 +1158,7 @@ declare interface DescribeVpcResourceResponse {
   VpcResourceSet?: VpcResource[];
   /** VPC个数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1170,7 +1170,7 @@ declare interface DescribeVpcViewRequest {
 declare interface DescribeVpcViewResponse {
   /** VPC视图信息 */
   VpcView?: VpcViewInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1188,7 +1188,7 @@ declare interface DescribeVpcsRequest {
 declare interface DescribeVpcsResponse {
   /** VPC列表 */
   VpcSet?: VpcInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1216,7 +1216,7 @@ declare interface DescribeVpnConnectionsResponse {
   TotalCount?: number;
   /** VPN通道实例。 */
   VpnConnectionSet?: VpnConnection[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1240,7 +1240,7 @@ declare interface DescribeVpnGatewaysResponse {
   TotalCount?: number;
   /** VPN网关实例详细信息列表。 */
   VpnGatewaySet?: VpnGateway[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1254,7 +1254,7 @@ declare interface DownloadCustomerGatewayConfigurationRequest {
 declare interface DownloadCustomerGatewayConfigurationResponse {
   /** 配置信息。 */
   CustomerGatewayConfiguration?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1266,7 +1266,7 @@ declare interface ModifyCustomerGatewayAttributeRequest {
 }
 
 declare interface ModifyCustomerGatewayAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1280,7 +1280,7 @@ declare interface ModifyRoutePolicyRequest {
 declare interface ModifyRoutePolicyResponse {
   /** 异步任务ID */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1292,7 +1292,7 @@ declare interface ModifyRouteTableRequest {
 }
 
 declare interface ModifyRouteTableResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1306,7 +1306,7 @@ declare interface ModifySubnetAttributeRequest {
 }
 
 declare interface ModifySubnetAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1324,7 +1324,7 @@ declare interface ModifySubnetDHCPRelayRequest {
 }
 
 declare interface ModifySubnetDHCPRelayResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1338,7 +1338,7 @@ declare interface ModifyVpcAttributeRequest {
 }
 
 declare interface ModifyVpcAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1354,7 +1354,7 @@ declare interface ModifyVpcPeerConnectionRequest {
 declare interface ModifyVpcPeerConnectionResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1378,7 +1378,7 @@ declare interface ModifyVpnConnectionAttributeRequest {
 declare interface ModifyVpnConnectionAttributeResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1390,7 +1390,7 @@ declare interface ModifyVpnGatewayAttributeRequest {
 }
 
 declare interface ModifyVpnGatewayAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1402,7 +1402,7 @@ declare interface RejectVpcPeerConnectionRequest {
 declare interface RejectVpcPeerConnectionResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1414,7 +1414,7 @@ declare interface ResetVpnConnectionRequest {
 }
 
 declare interface ResetVpnConnectionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1430,7 +1430,7 @@ declare interface UnbindEipsFromNatGatewayRequest {
 declare interface UnbindEipsFromNatGatewayResponse {
   /** 任务ID */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1446,7 +1446,7 @@ declare interface UnbindIpsFromNatGatewayRequest {
 declare interface UnbindIpsFromNatGatewayResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1462,7 +1462,7 @@ declare interface UnbindSubnetsFromNatGatewayRequest {
 declare interface UnbindSubnetsFromNatGatewayResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1478,134 +1478,134 @@ declare interface UpgradeNatGatewayRequest {
 declare interface UpgradeNatGatewayResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Bmvpc 黑石私有网络} */
 declare interface Bmvpc {
   (): Versions;
-  /** {@link AcceptVpcPeerConnection 接受黑石对等连接}({@link AcceptVpcPeerConnectionRequest 请求参数}): {@link AcceptVpcPeerConnectionResponse 返回参数} */
+  /** 接受黑石对等连接 {@link AcceptVpcPeerConnectionRequest} {@link AcceptVpcPeerConnectionResponse} */
   AcceptVpcPeerConnection(data: AcceptVpcPeerConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<AcceptVpcPeerConnectionResponse>;
-  /** {@link AsyncRegisterIps 批量注册虚拟IP}({@link AsyncRegisterIpsRequest 请求参数}): {@link AsyncRegisterIpsResponse 返回参数} */
+  /** 批量注册虚拟IP {@link AsyncRegisterIpsRequest} {@link AsyncRegisterIpsResponse} */
   AsyncRegisterIps(data: AsyncRegisterIpsRequest, config?: AxiosRequestConfig): AxiosPromise<AsyncRegisterIpsResponse>;
-  /** {@link BindEipsToNatGateway NAT网关绑定EIP}({@link BindEipsToNatGatewayRequest 请求参数}): {@link BindEipsToNatGatewayResponse 返回参数} */
+  /** NAT网关绑定EIP {@link BindEipsToNatGatewayRequest} {@link BindEipsToNatGatewayResponse} */
   BindEipsToNatGateway(data: BindEipsToNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<BindEipsToNatGatewayResponse>;
-  /** {@link BindIpsToNatGateway NAT网关绑定IP}({@link BindIpsToNatGatewayRequest 请求参数}): {@link BindIpsToNatGatewayResponse 返回参数} */
+  /** NAT网关绑定IP {@link BindIpsToNatGatewayRequest} {@link BindIpsToNatGatewayResponse} */
   BindIpsToNatGateway(data: BindIpsToNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<BindIpsToNatGatewayResponse>;
-  /** {@link BindSubnetsToNatGateway NAT网关绑定子网}({@link BindSubnetsToNatGatewayRequest 请求参数}): {@link BindSubnetsToNatGatewayResponse 返回参数} */
+  /** NAT网关绑定子网 {@link BindSubnetsToNatGatewayRequest} {@link BindSubnetsToNatGatewayResponse} */
   BindSubnetsToNatGateway(data: BindSubnetsToNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<BindSubnetsToNatGatewayResponse>;
-  /** {@link CreateCustomerGateway 创建对端网关}({@link CreateCustomerGatewayRequest 请求参数}): {@link CreateCustomerGatewayResponse 返回参数} */
+  /** 创建对端网关 {@link CreateCustomerGatewayRequest} {@link CreateCustomerGatewayResponse} */
   CreateCustomerGateway(data: CreateCustomerGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomerGatewayResponse>;
-  /** {@link CreateDockerSubnetWithVlan 创建黑石Docker子网}({@link CreateDockerSubnetWithVlanRequest 请求参数}): {@link CreateDockerSubnetWithVlanResponse 返回参数} */
+  /** 创建黑石Docker子网 {@link CreateDockerSubnetWithVlanRequest} {@link CreateDockerSubnetWithVlanResponse} */
   CreateDockerSubnetWithVlan(data: CreateDockerSubnetWithVlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDockerSubnetWithVlanResponse>;
-  /** {@link CreateHostedInterface 黑石托管机器加入子网}({@link CreateHostedInterfaceRequest 请求参数}): {@link CreateHostedInterfaceResponse 返回参数} */
+  /** 黑石托管机器加入子网 {@link CreateHostedInterfaceRequest} {@link CreateHostedInterfaceResponse} */
   CreateHostedInterface(data: CreateHostedInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostedInterfaceResponse>;
-  /** {@link CreateInterfaces 物理机加入子网}({@link CreateInterfacesRequest 请求参数}): {@link CreateInterfacesResponse 返回参数} */
+  /** 物理机加入子网 {@link CreateInterfacesRequest} {@link CreateInterfacesResponse} */
   CreateInterfaces(data: CreateInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInterfacesResponse>;
-  /** {@link CreateNatGateway 创建NAT网关}({@link CreateNatGatewayRequest 请求参数}): {@link CreateNatGatewayResponse 返回参数} */
+  /** 创建NAT网关 {@link CreateNatGatewayRequest} {@link CreateNatGatewayResponse} */
   CreateNatGateway(data: CreateNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNatGatewayResponse>;
-  /** {@link CreateRoutePolicies 创建黑石路由表的路由规则}({@link CreateRoutePoliciesRequest 请求参数}): {@link CreateRoutePoliciesResponse 返回参数} */
+  /** 创建黑石路由表的路由规则 {@link CreateRoutePoliciesRequest} {@link CreateRoutePoliciesResponse} */
   CreateRoutePolicies(data: CreateRoutePoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoutePoliciesResponse>;
-  /** {@link CreateSubnet 创建黑石私有网络的子网}({@link CreateSubnetRequest 请求参数}): {@link CreateSubnetResponse 返回参数} */
+  /** 创建黑石私有网络的子网 {@link CreateSubnetRequest} {@link CreateSubnetResponse} */
   CreateSubnet(data: CreateSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubnetResponse>;
-  /** {@link CreateVirtualSubnetWithVlan 创建黑石虚拟子网}({@link CreateVirtualSubnetWithVlanRequest 请求参数}): {@link CreateVirtualSubnetWithVlanResponse 返回参数} */
+  /** 创建黑石虚拟子网 {@link CreateVirtualSubnetWithVlanRequest} {@link CreateVirtualSubnetWithVlanResponse} */
   CreateVirtualSubnetWithVlan(data: CreateVirtualSubnetWithVlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVirtualSubnetWithVlanResponse>;
-  /** {@link CreateVpc 创建黑石私有网络}({@link CreateVpcRequest 请求参数}): {@link CreateVpcResponse 返回参数} */
+  /** 创建黑石私有网络 {@link CreateVpcRequest} {@link CreateVpcResponse} */
   CreateVpc(data: CreateVpcRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcResponse>;
-  /** {@link CreateVpcPeerConnection 创建对等连接}({@link CreateVpcPeerConnectionRequest 请求参数}): {@link CreateVpcPeerConnectionResponse 返回参数} */
+  /** 创建对等连接 {@link CreateVpcPeerConnectionRequest} {@link CreateVpcPeerConnectionResponse} */
   CreateVpcPeerConnection(data: CreateVpcPeerConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcPeerConnectionResponse>;
-  /** {@link DeleteCustomerGateway 删除对端网关}({@link DeleteCustomerGatewayRequest 请求参数}): {@link DeleteCustomerGatewayResponse 返回参数} */
+  /** 删除对端网关 {@link DeleteCustomerGatewayRequest} {@link DeleteCustomerGatewayResponse} */
   DeleteCustomerGateway(data: DeleteCustomerGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomerGatewayResponse>;
-  /** {@link DeleteHostedInterface 黑石托管机器移除子网}({@link DeleteHostedInterfaceRequest 请求参数}): {@link DeleteHostedInterfaceResponse 返回参数} */
+  /** 黑石托管机器移除子网 {@link DeleteHostedInterfaceRequest} {@link DeleteHostedInterfaceResponse} */
   DeleteHostedInterface(data: DeleteHostedInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHostedInterfaceResponse>;
-  /** {@link DeleteHostedInterfaces 托管机器移除子网(批量接口)}({@link DeleteHostedInterfacesRequest 请求参数}): {@link DeleteHostedInterfacesResponse 返回参数} */
+  /** 托管机器移除子网(批量接口) {@link DeleteHostedInterfacesRequest} {@link DeleteHostedInterfacesResponse} */
   DeleteHostedInterfaces(data: DeleteHostedInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHostedInterfacesResponse>;
-  /** {@link DeleteInterfaces 物理机移除子网(批量接口)}({@link DeleteInterfacesRequest 请求参数}): {@link DeleteInterfacesResponse 返回参数} */
+  /** 物理机移除子网(批量接口) {@link DeleteInterfacesRequest} {@link DeleteInterfacesResponse} */
   DeleteInterfaces(data: DeleteInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInterfacesResponse>;
-  /** {@link DeleteNatGateway 删除NAT网关}({@link DeleteNatGatewayRequest 请求参数}): {@link DeleteNatGatewayResponse 返回参数} */
+  /** 删除NAT网关 {@link DeleteNatGatewayRequest} {@link DeleteNatGatewayResponse} */
   DeleteNatGateway(data: DeleteNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNatGatewayResponse>;
-  /** {@link DeleteRoutePolicy 删除黑石路由表路由规则}({@link DeleteRoutePolicyRequest 请求参数}): {@link DeleteRoutePolicyResponse 返回参数} */
+  /** 删除黑石路由表路由规则 {@link DeleteRoutePolicyRequest} {@link DeleteRoutePolicyResponse} */
   DeleteRoutePolicy(data: DeleteRoutePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoutePolicyResponse>;
-  /** {@link DeleteSubnet 删除子网}({@link DeleteSubnetRequest 请求参数}): {@link DeleteSubnetResponse 返回参数} */
+  /** 删除子网 {@link DeleteSubnetRequest} {@link DeleteSubnetResponse} */
   DeleteSubnet(data: DeleteSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubnetResponse>;
-  /** {@link DeleteVirtualIp 退还虚拟IP}({@link DeleteVirtualIpRequest 请求参数}): {@link DeleteVirtualIpResponse 返回参数} */
+  /** 退还虚拟IP {@link DeleteVirtualIpRequest} {@link DeleteVirtualIpResponse} */
   DeleteVirtualIp(data: DeleteVirtualIpRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVirtualIpResponse>;
-  /** {@link DeleteVpc 删除私有网络}({@link DeleteVpcRequest 请求参数}): {@link DeleteVpcResponse 返回参数} */
+  /** 删除私有网络 {@link DeleteVpcRequest} {@link DeleteVpcResponse} */
   DeleteVpc(data: DeleteVpcRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcResponse>;
-  /** {@link DeleteVpcPeerConnection 删除黑石对等连接}({@link DeleteVpcPeerConnectionRequest 请求参数}): {@link DeleteVpcPeerConnectionResponse 返回参数} */
+  /** 删除黑石对等连接 {@link DeleteVpcPeerConnectionRequest} {@link DeleteVpcPeerConnectionResponse} */
   DeleteVpcPeerConnection(data: DeleteVpcPeerConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcPeerConnectionResponse>;
-  /** {@link DeleteVpnConnection 删除VPN通道}({@link DeleteVpnConnectionRequest 请求参数}): {@link DeleteVpnConnectionResponse 返回参数} */
+  /** 删除VPN通道 {@link DeleteVpnConnectionRequest} {@link DeleteVpnConnectionResponse} */
   DeleteVpnConnection(data: DeleteVpnConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnConnectionResponse>;
-  /** {@link DeleteVpnGateway 删除VPN网关}({@link DeleteVpnGatewayRequest 请求参数}): {@link DeleteVpnGatewayResponse 返回参数} */
+  /** 删除VPN网关 {@link DeleteVpnGatewayRequest} {@link DeleteVpnGatewayResponse} */
   DeleteVpnGateway(data: DeleteVpnGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnGatewayResponse>;
-  /** {@link DeregisterIps 注销私有网络IP}({@link DeregisterIpsRequest 请求参数}): {@link DeregisterIpsResponse 返回参数} */
+  /** 注销私有网络IP {@link DeregisterIpsRequest} {@link DeregisterIpsResponse} */
   DeregisterIps(data: DeregisterIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterIpsResponse>;
-  /** {@link DescribeCustomerGateways 查询对端网关}({@link DescribeCustomerGatewaysRequest 请求参数}): {@link DescribeCustomerGatewaysResponse 返回参数} */
+  /** 查询对端网关 {@link DescribeCustomerGatewaysRequest} {@link DescribeCustomerGatewaysResponse} */
   DescribeCustomerGateways(data?: DescribeCustomerGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomerGatewaysResponse>;
-  /** {@link DescribeNatGateways 获取NAT网关列表}({@link DescribeNatGatewaysRequest 请求参数}): {@link DescribeNatGatewaysResponse 返回参数} */
+  /** 获取NAT网关列表 {@link DescribeNatGatewaysRequest} {@link DescribeNatGatewaysResponse} */
   DescribeNatGateways(data?: DescribeNatGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewaysResponse>;
-  /** {@link DescribeNatSubnets 获取NAT关联的子网信息}({@link DescribeNatSubnetsRequest 请求参数}): {@link DescribeNatSubnetsResponse 返回参数} */
+  /** 获取NAT关联的子网信息 {@link DescribeNatSubnetsRequest} {@link DescribeNatSubnetsResponse} */
   DescribeNatSubnets(data: DescribeNatSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatSubnetsResponse>;
-  /** {@link DescribeRoutePolicies 查询黑石路由表条目}({@link DescribeRoutePoliciesRequest 请求参数}): {@link DescribeRoutePoliciesResponse 返回参数} */
+  /** 查询黑石路由表条目 {@link DescribeRoutePoliciesRequest} {@link DescribeRoutePoliciesResponse} */
   DescribeRoutePolicies(data: DescribeRoutePoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoutePoliciesResponse>;
-  /** {@link DescribeRouteTables 查询路由表}({@link DescribeRouteTablesRequest 请求参数}): {@link DescribeRouteTablesResponse 返回参数} */
+  /** 查询路由表 {@link DescribeRouteTablesRequest} {@link DescribeRouteTablesResponse} */
   DescribeRouteTables(data?: DescribeRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTablesResponse>;
-  /** {@link DescribeSubnetAvailableIps 获取子网内可用IP列表}({@link DescribeSubnetAvailableIpsRequest 请求参数}): {@link DescribeSubnetAvailableIpsResponse 返回参数} */
+  /** 获取子网内可用IP列表 {@link DescribeSubnetAvailableIpsRequest} {@link DescribeSubnetAvailableIpsResponse} */
   DescribeSubnetAvailableIps(data: DescribeSubnetAvailableIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetAvailableIpsResponse>;
-  /** {@link DescribeSubnetByDevice 查询物理机加入的子网列表}({@link DescribeSubnetByDeviceRequest 请求参数}): {@link DescribeSubnetByDeviceResponse 返回参数} */
+  /** 查询物理机加入的子网列表 {@link DescribeSubnetByDeviceRequest} {@link DescribeSubnetByDeviceResponse} */
   DescribeSubnetByDevice(data: DescribeSubnetByDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetByDeviceResponse>;
-  /** {@link DescribeSubnetByHostedDevice 查询托管机器加入的子网列表}({@link DescribeSubnetByHostedDeviceRequest 请求参数}): {@link DescribeSubnetByHostedDeviceResponse 返回参数} */
+  /** 查询托管机器加入的子网列表 {@link DescribeSubnetByHostedDeviceRequest} {@link DescribeSubnetByHostedDeviceResponse} */
   DescribeSubnetByHostedDevice(data: DescribeSubnetByHostedDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetByHostedDeviceResponse>;
-  /** {@link DescribeSubnets 查询子网列表}({@link DescribeSubnetsRequest 请求参数}): {@link DescribeSubnetsResponse 返回参数} */
+  /** 查询子网列表 {@link DescribeSubnetsRequest} {@link DescribeSubnetsResponse} */
   DescribeSubnets(data?: DescribeSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetsResponse>;
-  /** {@link DescribeTaskStatus 获取任务状态}({@link DescribeTaskStatusRequest 请求参数}): {@link DescribeTaskStatusResponse 返回参数} */
+  /** 获取任务状态 {@link DescribeTaskStatusRequest} {@link DescribeTaskStatusResponse} */
   DescribeTaskStatus(data: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
-  /** {@link DescribeVpcPeerConnections 获取对等连接列表}({@link DescribeVpcPeerConnectionsRequest 请求参数}): {@link DescribeVpcPeerConnectionsResponse 返回参数} */
+  /** 获取对等连接列表 {@link DescribeVpcPeerConnectionsRequest} {@link DescribeVpcPeerConnectionsResponse} */
   DescribeVpcPeerConnections(data?: DescribeVpcPeerConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcPeerConnectionsResponse>;
-  /** {@link DescribeVpcQuota 获取黑石私有网络的配额}({@link DescribeVpcQuotaRequest 请求参数}): {@link DescribeVpcQuotaResponse 返回参数} */
+  /** 获取黑石私有网络的配额 {@link DescribeVpcQuotaRequest} {@link DescribeVpcQuotaResponse} */
   DescribeVpcQuota(data: DescribeVpcQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcQuotaResponse>;
-  /** {@link DescribeVpcResource 查询黑石私有网络关联资源}({@link DescribeVpcResourceRequest 请求参数}): {@link DescribeVpcResourceResponse 返回参数} */
+  /** 查询黑石私有网络关联资源 {@link DescribeVpcResourceRequest} {@link DescribeVpcResourceResponse} */
   DescribeVpcResource(data?: DescribeVpcResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcResourceResponse>;
-  /** {@link DescribeVpcView 查询黑石VPC视图}({@link DescribeVpcViewRequest 请求参数}): {@link DescribeVpcViewResponse 返回参数} */
+  /** 查询黑石VPC视图 {@link DescribeVpcViewRequest} {@link DescribeVpcViewResponse} */
   DescribeVpcView(data: DescribeVpcViewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcViewResponse>;
-  /** {@link DescribeVpcs 查询VPC列表}({@link DescribeVpcsRequest 请求参数}): {@link DescribeVpcsResponse 返回参数} */
+  /** 查询VPC列表 {@link DescribeVpcsRequest} {@link DescribeVpcsResponse} */
   DescribeVpcs(data?: DescribeVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcsResponse>;
-  /** {@link DescribeVpnConnections 查询VPN通道列表}({@link DescribeVpnConnectionsRequest 请求参数}): {@link DescribeVpnConnectionsResponse 返回参数} */
+  /** 查询VPN通道列表 {@link DescribeVpnConnectionsRequest} {@link DescribeVpnConnectionsResponse} */
   DescribeVpnConnections(data?: DescribeVpnConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnConnectionsResponse>;
-  /** {@link DescribeVpnGateways 查询VPN网关}({@link DescribeVpnGatewaysRequest 请求参数}): {@link DescribeVpnGatewaysResponse 返回参数} */
+  /** 查询VPN网关 {@link DescribeVpnGatewaysRequest} {@link DescribeVpnGatewaysResponse} */
   DescribeVpnGateways(data?: DescribeVpnGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewaysResponse>;
-  /** {@link DownloadCustomerGatewayConfiguration 下载VPN通道配置}({@link DownloadCustomerGatewayConfigurationRequest 请求参数}): {@link DownloadCustomerGatewayConfigurationResponse 返回参数} */
+  /** 下载VPN通道配置 {@link DownloadCustomerGatewayConfigurationRequest} {@link DownloadCustomerGatewayConfigurationResponse} */
   DownloadCustomerGatewayConfiguration(data: DownloadCustomerGatewayConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadCustomerGatewayConfigurationResponse>;
-  /** {@link ModifyCustomerGatewayAttribute 修改对端网关}({@link ModifyCustomerGatewayAttributeRequest 请求参数}): {@link ModifyCustomerGatewayAttributeResponse 返回参数} */
+  /** 修改对端网关 {@link ModifyCustomerGatewayAttributeRequest} {@link ModifyCustomerGatewayAttributeResponse} */
   ModifyCustomerGatewayAttribute(data: ModifyCustomerGatewayAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomerGatewayAttributeResponse>;
-  /** {@link ModifyRoutePolicy 修改自定义路由}({@link ModifyRoutePolicyRequest 请求参数}): {@link ModifyRoutePolicyResponse 返回参数} */
+  /** 修改自定义路由 {@link ModifyRoutePolicyRequest} {@link ModifyRoutePolicyResponse} */
   ModifyRoutePolicy(data: ModifyRoutePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoutePolicyResponse>;
-  /** {@link ModifyRouteTable 修改路由表}({@link ModifyRouteTableRequest 请求参数}): {@link ModifyRouteTableResponse 返回参数} */
+  /** 修改路由表 {@link ModifyRouteTableRequest} {@link ModifyRouteTableResponse} */
   ModifyRouteTable(data: ModifyRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRouteTableResponse>;
-  /** {@link ModifySubnetAttribute 修改子网属性}({@link ModifySubnetAttributeRequest 请求参数}): {@link ModifySubnetAttributeResponse 返回参数} */
+  /** 修改子网属性 {@link ModifySubnetAttributeRequest} {@link ModifySubnetAttributeResponse} */
   ModifySubnetAttribute(data: ModifySubnetAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubnetAttributeResponse>;
-  /** {@link ModifySubnetDHCPRelay 修改子网DHCP Relay属性}({@link ModifySubnetDHCPRelayRequest 请求参数}): {@link ModifySubnetDHCPRelayResponse 返回参数} */
+  /** 修改子网DHCP Relay属性 {@link ModifySubnetDHCPRelayRequest} {@link ModifySubnetDHCPRelayResponse} */
   ModifySubnetDHCPRelay(data: ModifySubnetDHCPRelayRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubnetDHCPRelayResponse>;
-  /** {@link ModifyVpcAttribute 修改黑石VPC属性}({@link ModifyVpcAttributeRequest 请求参数}): {@link ModifyVpcAttributeResponse 返回参数} */
+  /** 修改黑石VPC属性 {@link ModifyVpcAttributeRequest} {@link ModifyVpcAttributeResponse} */
   ModifyVpcAttribute(data: ModifyVpcAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcAttributeResponse>;
-  /** {@link ModifyVpcPeerConnection 修改黑石对等连接}({@link ModifyVpcPeerConnectionRequest 请求参数}): {@link ModifyVpcPeerConnectionResponse 返回参数} */
+  /** 修改黑石对等连接 {@link ModifyVpcPeerConnectionRequest} {@link ModifyVpcPeerConnectionResponse} */
   ModifyVpcPeerConnection(data: ModifyVpcPeerConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcPeerConnectionResponse>;
-  /** {@link ModifyVpnConnectionAttribute 修改VPN通道}({@link ModifyVpnConnectionAttributeRequest 请求参数}): {@link ModifyVpnConnectionAttributeResponse 返回参数} */
+  /** 修改VPN通道 {@link ModifyVpnConnectionAttributeRequest} {@link ModifyVpnConnectionAttributeResponse} */
   ModifyVpnConnectionAttribute(data: ModifyVpnConnectionAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpnConnectionAttributeResponse>;
-  /** {@link ModifyVpnGatewayAttribute 修改VPN网关属性}({@link ModifyVpnGatewayAttributeRequest 请求参数}): {@link ModifyVpnGatewayAttributeResponse 返回参数} */
+  /** 修改VPN网关属性 {@link ModifyVpnGatewayAttributeRequest} {@link ModifyVpnGatewayAttributeResponse} */
   ModifyVpnGatewayAttribute(data: ModifyVpnGatewayAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpnGatewayAttributeResponse>;
-  /** {@link RejectVpcPeerConnection 拒绝黑石对等连接申请}({@link RejectVpcPeerConnectionRequest 请求参数}): {@link RejectVpcPeerConnectionResponse 返回参数} */
+  /** 拒绝黑石对等连接申请 {@link RejectVpcPeerConnectionRequest} {@link RejectVpcPeerConnectionResponse} */
   RejectVpcPeerConnection(data: RejectVpcPeerConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<RejectVpcPeerConnectionResponse>;
-  /** {@link ResetVpnConnection 重置VPN通道}({@link ResetVpnConnectionRequest 请求参数}): {@link ResetVpnConnectionResponse 返回参数} */
+  /** 重置VPN通道 {@link ResetVpnConnectionRequest} {@link ResetVpnConnectionResponse} */
   ResetVpnConnection(data: ResetVpnConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<ResetVpnConnectionResponse>;
-  /** {@link UnbindEipsFromNatGateway NAT网关解绑EIP}({@link UnbindEipsFromNatGatewayRequest 请求参数}): {@link UnbindEipsFromNatGatewayResponse 返回参数} */
+  /** NAT网关解绑EIP {@link UnbindEipsFromNatGatewayRequest} {@link UnbindEipsFromNatGatewayResponse} */
   UnbindEipsFromNatGateway(data: UnbindEipsFromNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindEipsFromNatGatewayResponse>;
-  /** {@link UnbindIpsFromNatGateway NAT网关解绑IP}({@link UnbindIpsFromNatGatewayRequest 请求参数}): {@link UnbindIpsFromNatGatewayResponse 返回参数} */
+  /** NAT网关解绑IP {@link UnbindIpsFromNatGatewayRequest} {@link UnbindIpsFromNatGatewayResponse} */
   UnbindIpsFromNatGateway(data: UnbindIpsFromNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindIpsFromNatGatewayResponse>;
-  /** {@link UnbindSubnetsFromNatGateway NAT网关解绑子网}({@link UnbindSubnetsFromNatGatewayRequest 请求参数}): {@link UnbindSubnetsFromNatGatewayResponse 返回参数} */
+  /** NAT网关解绑子网 {@link UnbindSubnetsFromNatGatewayRequest} {@link UnbindSubnetsFromNatGatewayResponse} */
   UnbindSubnetsFromNatGateway(data: UnbindSubnetsFromNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindSubnetsFromNatGatewayResponse>;
-  /** {@link UpgradeNatGateway 升级NAT网关}({@link UpgradeNatGatewayRequest 请求参数}): {@link UpgradeNatGatewayResponse 返回参数} */
+  /** 升级NAT网关 {@link UpgradeNatGatewayRequest} {@link UpgradeNatGatewayResponse} */
   UpgradeNatGateway(data: UpgradeNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeNatGatewayResponse>;
 }
 

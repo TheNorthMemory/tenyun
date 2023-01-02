@@ -68,14 +68,14 @@ declare interface EvaluationResponse {
   Items: Item[] | null;
   /** 任务 id，用于查询接口 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Hcm 数学作业批改} */
 declare interface Hcm {
   (): Versions;
-  /** {@link Evaluation 速算题目批改接口}({@link EvaluationRequest 请求参数}): {@link EvaluationResponse 返回参数} */
+  /** 速算题目批改接口 {@link EvaluationRequest} {@link EvaluationResponse} */
   Evaluation(data: EvaluationRequest, config?: AxiosRequestConfig): AxiosPromise<EvaluationResponse>;
 }
 

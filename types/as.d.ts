@@ -622,7 +622,7 @@ declare interface AttachInstancesRequest {
 declare interface AttachInstancesResponse {
   /** 伸缩活动ID */
   ActivityId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -638,7 +638,7 @@ declare interface AttachLoadBalancersRequest {
 declare interface AttachLoadBalancersResponse {
   /** 伸缩活动ID */
   ActivityId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -654,7 +654,7 @@ declare interface ClearLaunchConfigurationAttributesRequest {
 }
 
 declare interface ClearLaunchConfigurationAttributesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -670,7 +670,7 @@ declare interface CompleteLifecycleActionRequest {
 }
 
 declare interface CompleteLifecycleActionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -692,7 +692,7 @@ declare interface CreateAutoScalingGroupFromInstanceRequest {
 declare interface CreateAutoScalingGroupFromInstanceResponse {
   /** 伸缩组ID */
   AutoScalingGroupId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -750,7 +750,7 @@ declare interface CreateAutoScalingGroupRequest {
 declare interface CreateAutoScalingGroupResponse {
   /** 伸缩组ID */
   AutoScalingGroupId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -808,7 +808,7 @@ declare interface CreateLaunchConfigurationRequest {
 declare interface CreateLaunchConfigurationResponse {
   /** 当通过本接口来创建启动配置时会返回该参数，表示启动配置ID。 */
   LaunchConfigurationId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -836,7 +836,7 @@ declare interface CreateLifecycleHookRequest {
 declare interface CreateLifecycleHookResponse {
   /** 生命周期挂钩ID */
   LifecycleHookId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -858,7 +858,7 @@ declare interface CreateNotificationConfigurationRequest {
 declare interface CreateNotificationConfigurationResponse {
   /** 通知ID。 */
   AutoScalingNotificationId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -882,7 +882,7 @@ declare interface CreateScalingPolicyRequest {
 declare interface CreateScalingPolicyResponse {
   /** 告警触发策略ID。 */
   AutoScalingPolicyId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -908,7 +908,7 @@ declare interface CreateScheduledActionRequest {
 declare interface CreateScheduledActionResponse {
   /** 定时任务ID */
   ScheduledActionId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -918,7 +918,7 @@ declare interface DeleteAutoScalingGroupRequest {
 }
 
 declare interface DeleteAutoScalingGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -928,7 +928,7 @@ declare interface DeleteLaunchConfigurationRequest {
 }
 
 declare interface DeleteLaunchConfigurationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -938,7 +938,7 @@ declare interface DeleteLifecycleHookRequest {
 }
 
 declare interface DeleteLifecycleHookResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -948,7 +948,7 @@ declare interface DeleteNotificationConfigurationRequest {
 }
 
 declare interface DeleteNotificationConfigurationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -958,7 +958,7 @@ declare interface DeleteScalingPolicyRequest {
 }
 
 declare interface DeleteScalingPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -968,7 +968,7 @@ declare interface DeleteScheduledActionRequest {
 }
 
 declare interface DeleteScheduledActionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -984,7 +984,7 @@ declare interface DescribeAccountLimitsResponse {
   MaxNumberOfAutoScalingGroups: number;
   /** 用户账户伸缩组的当前数量 */
   NumberOfAutoScalingGroups: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1008,7 +1008,7 @@ declare interface DescribeAutoScalingActivitiesResponse {
   TotalCount: number;
   /** 符合条件的伸缩活动信息集合。 */
   ActivitySet: Activity[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1020,7 +1020,7 @@ declare interface DescribeAutoScalingAdvicesRequest {
 declare interface DescribeAutoScalingAdvicesResponse {
   /** 伸缩组配置建议集合。 */
   AutoScalingAdviceSet: AutoScalingAdvice[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1032,7 +1032,7 @@ declare interface DescribeAutoScalingGroupLastActivitiesRequest {
 declare interface DescribeAutoScalingGroupLastActivitiesResponse {
   /** 符合条件的伸缩活动信息集合。说明：伸缩组伸缩活动不存在的则不返回，如传50个伸缩组ID，返回45条数据，说明其中有5个伸缩组伸缩活动不存在。 */
   ActivitySet: Activity[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1052,7 +1052,7 @@ declare interface DescribeAutoScalingGroupsResponse {
   AutoScalingGroupSet: AutoScalingGroup[];
   /** 符合条件的伸缩组数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1072,7 +1072,7 @@ declare interface DescribeAutoScalingInstancesResponse {
   AutoScalingInstanceSet: Instance[];
   /** 符合条件的实例数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1092,7 +1092,7 @@ declare interface DescribeLaunchConfigurationsResponse {
   TotalCount: number;
   /** 启动配置详细信息列表。 */
   LaunchConfigurationSet: LaunchConfiguration[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1112,7 +1112,7 @@ declare interface DescribeLifecycleHooksResponse {
   LifecycleHookSet: LifecycleHook[];
   /** 总体数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1132,7 +1132,7 @@ declare interface DescribeNotificationConfigurationsResponse {
   TotalCount: number;
   /** 弹性伸缩事件通知详细信息列表。 */
   AutoScalingNotificationSet: AutoScalingNotification[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1152,7 +1152,7 @@ declare interface DescribeScalingPoliciesResponse {
   ScalingPolicySet: ScalingPolicy[];
   /** 符合条件的通知数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1172,7 +1172,7 @@ declare interface DescribeScheduledActionsResponse {
   TotalCount: number;
   /** 定时任务详细信息列表。 */
   ScheduledActionSet: ScheduledAction[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1186,7 +1186,7 @@ declare interface DetachInstancesRequest {
 declare interface DetachInstancesResponse {
   /** 伸缩活动ID */
   ActivityId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1202,7 +1202,7 @@ declare interface DetachLoadBalancersRequest {
 declare interface DetachLoadBalancersResponse {
   /** 伸缩活动ID */
   ActivityId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1212,7 +1212,7 @@ declare interface DisableAutoScalingGroupRequest {
 }
 
 declare interface DisableAutoScalingGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1222,7 +1222,7 @@ declare interface EnableAutoScalingGroupRequest {
 }
 
 declare interface EnableAutoScalingGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1238,7 +1238,7 @@ declare interface ExecuteScalingPolicyRequest {
 declare interface ExecuteScalingPolicyResponse {
   /** 伸缩活动ID */
   ActivityId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1297,7 +1297,7 @@ declare interface ModifyAutoScalingGroupRequest {
 }
 
 declare interface ModifyAutoScalingGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1313,7 +1313,7 @@ declare interface ModifyDesiredCapacityRequest {
 }
 
 declare interface ModifyDesiredCapacityResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1361,7 +1361,7 @@ declare interface ModifyLaunchConfigurationAttributesRequest {
 }
 
 declare interface ModifyLaunchConfigurationAttributesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1387,7 +1387,7 @@ declare interface ModifyLifecycleHookRequest {
 }
 
 declare interface ModifyLifecycleHookResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1401,7 +1401,7 @@ declare interface ModifyLoadBalancerTargetAttributesRequest {
 declare interface ModifyLoadBalancerTargetAttributesResponse {
   /** 伸缩活动ID */
   ActivityId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1419,7 +1419,7 @@ declare interface ModifyLoadBalancersRequest {
 declare interface ModifyLoadBalancersResponse {
   /** 伸缩活动ID */
   ActivityId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1437,7 +1437,7 @@ declare interface ModifyNotificationConfigurationRequest {
 }
 
 declare interface ModifyNotificationConfigurationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1459,7 +1459,7 @@ declare interface ModifyScalingPolicyRequest {
 }
 
 declare interface ModifyScalingPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1483,7 +1483,7 @@ declare interface ModifyScheduledActionRequest {
 }
 
 declare interface ModifyScheduledActionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1497,7 +1497,7 @@ declare interface RemoveInstancesRequest {
 declare interface RemoveInstancesResponse {
   /** 伸缩活动ID */
   ActivityId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1511,7 +1511,7 @@ declare interface ScaleInInstancesRequest {
 declare interface ScaleInInstancesResponse {
   /** 伸缩活动ID。 */
   ActivityId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1525,7 +1525,7 @@ declare interface ScaleOutInstancesRequest {
 declare interface ScaleOutInstancesResponse {
   /** 伸缩活动ID。 */
   ActivityId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1539,7 +1539,7 @@ declare interface SetInstancesProtectionRequest {
 }
 
 declare interface SetInstancesProtectionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1553,7 +1553,7 @@ declare interface StartAutoScalingInstancesRequest {
 declare interface StartAutoScalingInstancesResponse {
   /** 伸缩活动ID */
   ActivityId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1569,7 +1569,7 @@ declare interface StopAutoScalingInstancesRequest {
 declare interface StopAutoScalingInstancesResponse {
   /** 伸缩活动ID */
   ActivityId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1621,7 +1621,7 @@ declare interface UpgradeLaunchConfigurationRequest {
 }
 
 declare interface UpgradeLaunchConfigurationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1647,112 +1647,112 @@ declare interface UpgradeLifecycleHookRequest {
 }
 
 declare interface UpgradeLifecycleHookResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link As 弹性伸缩} */
 declare interface As {
   (): Versions;
-  /** {@link AttachInstances 添加 CVM 实例到伸缩组}({@link AttachInstancesRequest 请求参数}): {@link AttachInstancesResponse 返回参数} */
+  /** 添加 CVM 实例到伸缩组 {@link AttachInstancesRequest} {@link AttachInstancesResponse} */
   AttachInstances(data: AttachInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachInstancesResponse>;
-  /** {@link AttachLoadBalancers 添加负载均衡器}({@link AttachLoadBalancersRequest 请求参数}): {@link AttachLoadBalancersResponse 返回参数} */
+  /** 添加负载均衡器 {@link AttachLoadBalancersRequest} {@link AttachLoadBalancersResponse} */
   AttachLoadBalancers(data: AttachLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<AttachLoadBalancersResponse>;
-  /** {@link ClearLaunchConfigurationAttributes 清除启动配置属性}({@link ClearLaunchConfigurationAttributesRequest 请求参数}): {@link ClearLaunchConfigurationAttributesResponse 返回参数} */
+  /** 清除启动配置属性 {@link ClearLaunchConfigurationAttributesRequest} {@link ClearLaunchConfigurationAttributesResponse} */
   ClearLaunchConfigurationAttributes(data: ClearLaunchConfigurationAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ClearLaunchConfigurationAttributesResponse>;
-  /** {@link CompleteLifecycleAction 完成生命周期动作}({@link CompleteLifecycleActionRequest 请求参数}): {@link CompleteLifecycleActionResponse 返回参数} */
+  /** 完成生命周期动作 {@link CompleteLifecycleActionRequest} {@link CompleteLifecycleActionResponse} */
   CompleteLifecycleAction(data: CompleteLifecycleActionRequest, config?: AxiosRequestConfig): AxiosPromise<CompleteLifecycleActionResponse>;
-  /** {@link CreateAutoScalingGroup 创建伸缩组}({@link CreateAutoScalingGroupRequest 请求参数}): {@link CreateAutoScalingGroupResponse 返回参数} */
+  /** 创建伸缩组 {@link CreateAutoScalingGroupRequest} {@link CreateAutoScalingGroupResponse} */
   CreateAutoScalingGroup(data: CreateAutoScalingGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoScalingGroupResponse>;
-  /** {@link CreateAutoScalingGroupFromInstance 根据实例创建启动配置及伸缩组}({@link CreateAutoScalingGroupFromInstanceRequest 请求参数}): {@link CreateAutoScalingGroupFromInstanceResponse 返回参数} */
+  /** 根据实例创建启动配置及伸缩组 {@link CreateAutoScalingGroupFromInstanceRequest} {@link CreateAutoScalingGroupFromInstanceResponse} */
   CreateAutoScalingGroupFromInstance(data: CreateAutoScalingGroupFromInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoScalingGroupFromInstanceResponse>;
-  /** {@link CreateLaunchConfiguration 创建启动配置}({@link CreateLaunchConfigurationRequest 请求参数}): {@link CreateLaunchConfigurationResponse 返回参数} */
+  /** 创建启动配置 {@link CreateLaunchConfigurationRequest} {@link CreateLaunchConfigurationResponse} */
   CreateLaunchConfiguration(data: CreateLaunchConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLaunchConfigurationResponse>;
-  /** {@link CreateLifecycleHook 创建生命周期挂钩}({@link CreateLifecycleHookRequest 请求参数}): {@link CreateLifecycleHookResponse 返回参数} */
+  /** 创建生命周期挂钩 {@link CreateLifecycleHookRequest} {@link CreateLifecycleHookResponse} */
   CreateLifecycleHook(data: CreateLifecycleHookRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLifecycleHookResponse>;
-  /** {@link CreateNotificationConfiguration 创建通知}({@link CreateNotificationConfigurationRequest 请求参数}): {@link CreateNotificationConfigurationResponse 返回参数} */
+  /** 创建通知 {@link CreateNotificationConfigurationRequest} {@link CreateNotificationConfigurationResponse} */
   CreateNotificationConfiguration(data: CreateNotificationConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotificationConfigurationResponse>;
-  /** {@link CreateScalingPolicy 创建告警触发策略}({@link CreateScalingPolicyRequest 请求参数}): {@link CreateScalingPolicyResponse 返回参数} */
+  /** 创建告警触发策略 {@link CreateScalingPolicyRequest} {@link CreateScalingPolicyResponse} */
   CreateScalingPolicy(data: CreateScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScalingPolicyResponse>;
-  /** {@link CreateScheduledAction 创建定时任务}({@link CreateScheduledActionRequest 请求参数}): {@link CreateScheduledActionResponse 返回参数} */
+  /** 创建定时任务 {@link CreateScheduledActionRequest} {@link CreateScheduledActionResponse} */
   CreateScheduledAction(data: CreateScheduledActionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduledActionResponse>;
-  /** {@link DeleteAutoScalingGroup 删除伸缩组}({@link DeleteAutoScalingGroupRequest 请求参数}): {@link DeleteAutoScalingGroupResponse 返回参数} */
+  /** 删除伸缩组 {@link DeleteAutoScalingGroupRequest} {@link DeleteAutoScalingGroupResponse} */
   DeleteAutoScalingGroup(data: DeleteAutoScalingGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoScalingGroupResponse>;
-  /** {@link DeleteLaunchConfiguration 删除启动配置}({@link DeleteLaunchConfigurationRequest 请求参数}): {@link DeleteLaunchConfigurationResponse 返回参数} */
+  /** 删除启动配置 {@link DeleteLaunchConfigurationRequest} {@link DeleteLaunchConfigurationResponse} */
   DeleteLaunchConfiguration(data: DeleteLaunchConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLaunchConfigurationResponse>;
-  /** {@link DeleteLifecycleHook 删除生命周期挂钩}({@link DeleteLifecycleHookRequest 请求参数}): {@link DeleteLifecycleHookResponse 返回参数} */
+  /** 删除生命周期挂钩 {@link DeleteLifecycleHookRequest} {@link DeleteLifecycleHookResponse} */
   DeleteLifecycleHook(data: DeleteLifecycleHookRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLifecycleHookResponse>;
-  /** {@link DeleteNotificationConfiguration 删除通知}({@link DeleteNotificationConfigurationRequest 请求参数}): {@link DeleteNotificationConfigurationResponse 返回参数} */
+  /** 删除通知 {@link DeleteNotificationConfigurationRequest} {@link DeleteNotificationConfigurationResponse} */
   DeleteNotificationConfiguration(data?: DeleteNotificationConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNotificationConfigurationResponse>;
-  /** {@link DeleteScalingPolicy 删除告警触发策略}({@link DeleteScalingPolicyRequest 请求参数}): {@link DeleteScalingPolicyResponse 返回参数} */
+  /** 删除告警触发策略 {@link DeleteScalingPolicyRequest} {@link DeleteScalingPolicyResponse} */
   DeleteScalingPolicy(data: DeleteScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScalingPolicyResponse>;
-  /** {@link DeleteScheduledAction 删除定时任务}({@link DeleteScheduledActionRequest 请求参数}): {@link DeleteScheduledActionResponse 返回参数} */
+  /** 删除定时任务 {@link DeleteScheduledActionRequest} {@link DeleteScheduledActionResponse} */
   DeleteScheduledAction(data: DeleteScheduledActionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduledActionResponse>;
-  /** {@link DescribeAccountLimits 查询用户账号的资源限制}({@link DescribeAccountLimitsRequest 请求参数}): {@link DescribeAccountLimitsResponse 返回参数} */
+  /** 查询用户账号的资源限制 {@link DescribeAccountLimitsRequest} {@link DescribeAccountLimitsResponse} */
   DescribeAccountLimits(data?: DescribeAccountLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountLimitsResponse>;
-  /** {@link DescribeAutoScalingActivities 查询伸缩活动}({@link DescribeAutoScalingActivitiesRequest 请求参数}): {@link DescribeAutoScalingActivitiesResponse 返回参数} */
+  /** 查询伸缩活动 {@link DescribeAutoScalingActivitiesRequest} {@link DescribeAutoScalingActivitiesResponse} */
   DescribeAutoScalingActivities(data?: DescribeAutoScalingActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingActivitiesResponse>;
-  /** {@link DescribeAutoScalingAdvices 查询弹性伸缩配置建议}({@link DescribeAutoScalingAdvicesRequest 请求参数}): {@link DescribeAutoScalingAdvicesResponse 返回参数} */
+  /** 查询弹性伸缩配置建议 {@link DescribeAutoScalingAdvicesRequest} {@link DescribeAutoScalingAdvicesResponse} */
   DescribeAutoScalingAdvices(data: DescribeAutoScalingAdvicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingAdvicesResponse>;
-  /** {@link DescribeAutoScalingGroupLastActivities 查询伸缩组最新一次伸缩活动}({@link DescribeAutoScalingGroupLastActivitiesRequest 请求参数}): {@link DescribeAutoScalingGroupLastActivitiesResponse 返回参数} */
+  /** 查询伸缩组最新一次伸缩活动 {@link DescribeAutoScalingGroupLastActivitiesRequest} {@link DescribeAutoScalingGroupLastActivitiesResponse} */
   DescribeAutoScalingGroupLastActivities(data: DescribeAutoScalingGroupLastActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingGroupLastActivitiesResponse>;
-  /** {@link DescribeAutoScalingGroups 查询伸缩组}({@link DescribeAutoScalingGroupsRequest 请求参数}): {@link DescribeAutoScalingGroupsResponse 返回参数} */
+  /** 查询伸缩组 {@link DescribeAutoScalingGroupsRequest} {@link DescribeAutoScalingGroupsResponse} */
   DescribeAutoScalingGroups(data?: DescribeAutoScalingGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingGroupsResponse>;
-  /** {@link DescribeAutoScalingInstances 查询实例}({@link DescribeAutoScalingInstancesRequest 请求参数}): {@link DescribeAutoScalingInstancesResponse 返回参数} */
+  /** 查询实例 {@link DescribeAutoScalingInstancesRequest} {@link DescribeAutoScalingInstancesResponse} */
   DescribeAutoScalingInstances(data?: DescribeAutoScalingInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingInstancesResponse>;
-  /** {@link DescribeLaunchConfigurations 查询启动配置}({@link DescribeLaunchConfigurationsRequest 请求参数}): {@link DescribeLaunchConfigurationsResponse 返回参数} */
+  /** 查询启动配置 {@link DescribeLaunchConfigurationsRequest} {@link DescribeLaunchConfigurationsResponse} */
   DescribeLaunchConfigurations(data?: DescribeLaunchConfigurationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaunchConfigurationsResponse>;
-  /** {@link DescribeLifecycleHooks 查询生命周期挂钩}({@link DescribeLifecycleHooksRequest 请求参数}): {@link DescribeLifecycleHooksResponse 返回参数} */
+  /** 查询生命周期挂钩 {@link DescribeLifecycleHooksRequest} {@link DescribeLifecycleHooksResponse} */
   DescribeLifecycleHooks(data?: DescribeLifecycleHooksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLifecycleHooksResponse>;
-  /** {@link DescribeNotificationConfigurations 查询通知}({@link DescribeNotificationConfigurationsRequest 请求参数}): {@link DescribeNotificationConfigurationsResponse 返回参数} */
+  /** 查询通知 {@link DescribeNotificationConfigurationsRequest} {@link DescribeNotificationConfigurationsResponse} */
   DescribeNotificationConfigurations(data?: DescribeNotificationConfigurationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotificationConfigurationsResponse>;
-  /** {@link DescribeScalingPolicies 查询告警触发策略}({@link DescribeScalingPoliciesRequest 请求参数}): {@link DescribeScalingPoliciesResponse 返回参数} */
+  /** 查询告警触发策略 {@link DescribeScalingPoliciesRequest} {@link DescribeScalingPoliciesResponse} */
   DescribeScalingPolicies(data?: DescribeScalingPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScalingPoliciesResponse>;
-  /** {@link DescribeScheduledActions 查询定时任务}({@link DescribeScheduledActionsRequest 请求参数}): {@link DescribeScheduledActionsResponse 返回参数} */
+  /** 查询定时任务 {@link DescribeScheduledActionsRequest} {@link DescribeScheduledActionsResponse} */
   DescribeScheduledActions(data?: DescribeScheduledActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledActionsResponse>;
-  /** {@link DetachInstances 从伸缩组移出 CVM 实例}({@link DetachInstancesRequest 请求参数}): {@link DetachInstancesResponse 返回参数} */
+  /** 从伸缩组移出 CVM 实例 {@link DetachInstancesRequest} {@link DetachInstancesResponse} */
   DetachInstances(data: DetachInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachInstancesResponse>;
-  /** {@link DetachLoadBalancers 移出负载均衡器}({@link DetachLoadBalancersRequest 请求参数}): {@link DetachLoadBalancersResponse 返回参数} */
+  /** 移出负载均衡器 {@link DetachLoadBalancersRequest} {@link DetachLoadBalancersResponse} */
   DetachLoadBalancers(data: DetachLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DetachLoadBalancersResponse>;
-  /** {@link DisableAutoScalingGroup 停用伸缩组}({@link DisableAutoScalingGroupRequest 请求参数}): {@link DisableAutoScalingGroupResponse 返回参数} */
+  /** 停用伸缩组 {@link DisableAutoScalingGroupRequest} {@link DisableAutoScalingGroupResponse} */
   DisableAutoScalingGroup(data: DisableAutoScalingGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DisableAutoScalingGroupResponse>;
-  /** {@link EnableAutoScalingGroup 启用伸缩组}({@link EnableAutoScalingGroupRequest 请求参数}): {@link EnableAutoScalingGroupResponse 返回参数} */
+  /** 启用伸缩组 {@link EnableAutoScalingGroupRequest} {@link EnableAutoScalingGroupResponse} */
   EnableAutoScalingGroup(data: EnableAutoScalingGroupRequest, config?: AxiosRequestConfig): AxiosPromise<EnableAutoScalingGroupResponse>;
-  /** {@link ExecuteScalingPolicy 触发伸缩策略}({@link ExecuteScalingPolicyRequest 请求参数}): {@link ExecuteScalingPolicyResponse 返回参数} */
+  /** 触发伸缩策略 {@link ExecuteScalingPolicyRequest} {@link ExecuteScalingPolicyResponse} */
   ExecuteScalingPolicy(data: ExecuteScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteScalingPolicyResponse>;
-  /** {@link ModifyAutoScalingGroup 修改伸缩组}({@link ModifyAutoScalingGroupRequest 请求参数}): {@link ModifyAutoScalingGroupResponse 返回参数} */
+  /** 修改伸缩组 {@link ModifyAutoScalingGroupRequest} {@link ModifyAutoScalingGroupResponse} */
   ModifyAutoScalingGroup(data: ModifyAutoScalingGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoScalingGroupResponse>;
-  /** {@link ModifyDesiredCapacity 修改期望实例数}({@link ModifyDesiredCapacityRequest 请求参数}): {@link ModifyDesiredCapacityResponse 返回参数} */
+  /** 修改期望实例数 {@link ModifyDesiredCapacityRequest} {@link ModifyDesiredCapacityResponse} */
   ModifyDesiredCapacity(data: ModifyDesiredCapacityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDesiredCapacityResponse>;
-  /** {@link ModifyLaunchConfigurationAttributes 修改启动配置属性}({@link ModifyLaunchConfigurationAttributesRequest 请求参数}): {@link ModifyLaunchConfigurationAttributesResponse 返回参数} */
+  /** 修改启动配置属性 {@link ModifyLaunchConfigurationAttributesRequest} {@link ModifyLaunchConfigurationAttributesResponse} */
   ModifyLaunchConfigurationAttributes(data: ModifyLaunchConfigurationAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLaunchConfigurationAttributesResponse>;
-  /** {@link ModifyLifecycleHook 修改生命周期挂钩}({@link ModifyLifecycleHookRequest 请求参数}): {@link ModifyLifecycleHookResponse 返回参数} */
+  /** 修改生命周期挂钩 {@link ModifyLifecycleHookRequest} {@link ModifyLifecycleHookResponse} */
   ModifyLifecycleHook(data: ModifyLifecycleHookRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLifecycleHookResponse>;
-  /** {@link ModifyLoadBalancerTargetAttributes 修改负载均衡器目标规则属性}({@link ModifyLoadBalancerTargetAttributesRequest 请求参数}): {@link ModifyLoadBalancerTargetAttributesResponse 返回参数} */
+  /** 修改负载均衡器目标规则属性 {@link ModifyLoadBalancerTargetAttributesRequest} {@link ModifyLoadBalancerTargetAttributesResponse} */
   ModifyLoadBalancerTargetAttributes(data: ModifyLoadBalancerTargetAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerTargetAttributesResponse>;
-  /** {@link ModifyLoadBalancers 修改伸缩组的负载均衡器}({@link ModifyLoadBalancersRequest 请求参数}): {@link ModifyLoadBalancersResponse 返回参数} */
+  /** 修改伸缩组的负载均衡器 {@link ModifyLoadBalancersRequest} {@link ModifyLoadBalancersResponse} */
   ModifyLoadBalancers(data: ModifyLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancersResponse>;
-  /** {@link ModifyNotificationConfiguration 修改通知}({@link ModifyNotificationConfigurationRequest 请求参数}): {@link ModifyNotificationConfigurationResponse 返回参数} */
+  /** 修改通知 {@link ModifyNotificationConfigurationRequest} {@link ModifyNotificationConfigurationResponse} */
   ModifyNotificationConfiguration(data: ModifyNotificationConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotificationConfigurationResponse>;
-  /** {@link ModifyScalingPolicy 修改告警触发策略}({@link ModifyScalingPolicyRequest 请求参数}): {@link ModifyScalingPolicyResponse 返回参数} */
+  /** 修改告警触发策略 {@link ModifyScalingPolicyRequest} {@link ModifyScalingPolicyResponse} */
   ModifyScalingPolicy(data: ModifyScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScalingPolicyResponse>;
-  /** {@link ModifyScheduledAction 修改定时任务}({@link ModifyScheduledActionRequest 请求参数}): {@link ModifyScheduledActionResponse 返回参数} */
+  /** 修改定时任务 {@link ModifyScheduledActionRequest} {@link ModifyScheduledActionResponse} */
   ModifyScheduledAction(data: ModifyScheduledActionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduledActionResponse>;
-  /** {@link RemoveInstances 从伸缩组中删除 CVM 实例}({@link RemoveInstancesRequest 请求参数}): {@link RemoveInstancesResponse 返回参数} */
+  /** 从伸缩组中删除 CVM 实例 {@link RemoveInstancesRequest} {@link RemoveInstancesResponse} */
   RemoveInstances(data: RemoveInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveInstancesResponse>;
-  /** {@link ScaleInInstances 指定数量缩容实例}({@link ScaleInInstancesRequest 请求参数}): {@link ScaleInInstancesResponse 返回参数} */
+  /** 指定数量缩容实例 {@link ScaleInInstancesRequest} {@link ScaleInInstancesResponse} */
   ScaleInInstances(data: ScaleInInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleInInstancesResponse>;
-  /** {@link ScaleOutInstances 指定数量扩容实例}({@link ScaleOutInstancesRequest 请求参数}): {@link ScaleOutInstancesResponse 返回参数} */
+  /** 指定数量扩容实例 {@link ScaleOutInstancesRequest} {@link ScaleOutInstancesResponse} */
   ScaleOutInstances(data: ScaleOutInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutInstancesResponse>;
-  /** {@link SetInstancesProtection 设置实例保护}({@link SetInstancesProtectionRequest 请求参数}): {@link SetInstancesProtectionResponse 返回参数} */
+  /** 设置实例保护 {@link SetInstancesProtectionRequest} {@link SetInstancesProtectionResponse} */
   SetInstancesProtection(data: SetInstancesProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<SetInstancesProtectionResponse>;
-  /** {@link StartAutoScalingInstances 开启伸缩组内 CVM 实例}({@link StartAutoScalingInstancesRequest 请求参数}): {@link StartAutoScalingInstancesResponse 返回参数} */
+  /** 开启伸缩组内 CVM 实例 {@link StartAutoScalingInstancesRequest} {@link StartAutoScalingInstancesResponse} */
   StartAutoScalingInstances(data: StartAutoScalingInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StartAutoScalingInstancesResponse>;
-  /** {@link StopAutoScalingInstances 关闭伸缩组内 CVM 实例}({@link StopAutoScalingInstancesRequest 请求参数}): {@link StopAutoScalingInstancesResponse 返回参数} */
+  /** 关闭伸缩组内 CVM 实例 {@link StopAutoScalingInstancesRequest} {@link StopAutoScalingInstancesResponse} */
   StopAutoScalingInstances(data: StopAutoScalingInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StopAutoScalingInstancesResponse>;
-  /** {@link UpgradeLaunchConfiguration 升级启动配置}({@link UpgradeLaunchConfigurationRequest 请求参数}): {@link UpgradeLaunchConfigurationResponse 返回参数} */
+  /** 升级启动配置 {@link UpgradeLaunchConfigurationRequest} {@link UpgradeLaunchConfigurationResponse} */
   UpgradeLaunchConfiguration(data: UpgradeLaunchConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeLaunchConfigurationResponse>;
-  /** {@link UpgradeLifecycleHook 升级生命周期挂钩}({@link UpgradeLifecycleHookRequest 请求参数}): {@link UpgradeLifecycleHookResponse 返回参数} */
+  /** 升级生命周期挂钩 {@link UpgradeLifecycleHookRequest} {@link UpgradeLifecycleHookResponse} */
   UpgradeLifecycleHook(data: UpgradeLifecycleHookRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeLifecycleHookResponse>;
 }
 

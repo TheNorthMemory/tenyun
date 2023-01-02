@@ -930,7 +930,7 @@ declare interface AdvertiseOCRRequest {
 declare interface AdvertiseOCRResponse {
   /** 检测到的文本信息，包括文本行内容、置信度、文本行坐标以及文本行旋转纠正后的坐标，具体内容请点击左侧链接。 */
   TextDetections?: AdvertiseTextDetection[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -958,7 +958,7 @@ declare interface ArithmeticOCRResponse {
   TextDetections: TextArithmetic[];
   /** 图片横屏的角度(90度或270度) */
   Angle: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1000,7 +1000,7 @@ declare interface BankCardOCRResponse {
   WarningCode: number[] | null;
   /** 图片质量分数，请求EnableQualityValue时返回（取值范围：0-100，分数越低越模糊，建议阈值≥50）。 */
   QualityValue: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1020,7 +1020,7 @@ declare interface BankSlipOCRResponse {
   BankSlipInfos: BankSlipInfo[];
   /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。 */
   Angle: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1056,7 +1056,7 @@ declare interface BizLicenseOCRResponse {
   RecognizeWarnCode: number[];
   /** 告警码说明：OCR_WARNING_TYPE_NOT_MATCH 非营业执照WARN_COPY_CARD 黑白复印件告警注：告警信息可以同时存在多个 */
   RecognizeWarnMsg: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1076,7 +1076,7 @@ declare interface BusInvoiceOCRResponse {
   BusInvoiceInfos: BusInvoiceInfo[];
   /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。 */
   Angle: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1096,7 +1096,7 @@ declare interface BusinessCardOCRResponse {
   RetImageBase64?: string;
   /** 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看如何纠正倾斜文本 */
   Angle?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1114,7 +1114,7 @@ declare interface CarInvoiceOCRRequest {
 declare interface CarInvoiceOCRResponse {
   /** 购车发票识别结果，具体内容请点击左侧链接。 */
   CarInvoiceInfos: CarInvoiceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1130,7 +1130,7 @@ declare interface ClassifyDetectOCRRequest {
 declare interface ClassifyDetectOCRResponse {
   /** 智能卡证分类结果。当图片类型不支持分类识别或者识别出的类型不在请求参数DiscernType指定的范围内时，返回结果中的Type字段将为空字符串，Name字段将返回"其它" */
   ClassifyDetectInfos: ClassifyDetectInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1178,7 +1178,7 @@ declare interface DriverLicenseOCRResponse {
   State: string;
   /** 累积记分（仅电子驾驶证支持返回该字段） */
   CumulativeScore: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1198,7 +1198,7 @@ declare interface DutyPaidProofOCRResponse {
   DutyPaidProofInfos: DutyPaidProofInfo[];
   /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。 */
   Angle: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1218,7 +1218,7 @@ declare interface EduPaperOCRResponse {
   Angle: number;
   /** 结构化方式输出，具体内容请点击左侧链接。 */
   QuestionBlockInfos: QuestionBlockObj[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1240,7 +1240,7 @@ declare interface EnglishOCRResponse {
   TextDetections: TextDetectionEn[];
   /** 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看如何纠正倾斜文本 */
   Angel: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1256,7 +1256,7 @@ declare interface EnterpriseLicenseOCRResponse {
   EnterpriseLicenseInfos: EnterpriseLicenseInfo[];
   /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。 */
   Angle: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1292,7 +1292,7 @@ declare interface EstateCertOCRResponse {
   Angle?: number;
   /** 不动产权号 */
   Number?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1306,7 +1306,7 @@ declare interface FinanBillOCRRequest {
 declare interface FinanBillOCRResponse {
   /** 金融票据整单识别结果，具体内容请点击左侧链接。 */
   FinanBillInfos: FinanBillInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1320,7 +1320,7 @@ declare interface FinanBillSliceOCRRequest {
 declare interface FinanBillSliceOCRResponse {
   /** 金融票据切片识别结果，具体内容请点击左侧链接。 */
   FinanBillSliceInfos?: FinanBillSliceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1338,7 +1338,7 @@ declare interface FlightInvoiceOCRRequest {
 declare interface FlightInvoiceOCRResponse {
   /** 机票行程单识别结果，具体内容请点击左侧链接。 */
   FlightInvoiceInfos: FlightInvoiceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1354,7 +1354,7 @@ declare interface FormulaOCRResponse {
   Angle: number;
   /** 检测到的文本信息，具体内容请点击左侧链接。 */
   FormulaInfos: TextFormula[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1378,7 +1378,7 @@ declare interface GeneralAccurateOCRResponse {
   TextDetections: TextDetection[];
   /** 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看如何纠正倾斜文本 */
   Angel: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1408,7 +1408,7 @@ declare interface GeneralBasicOCRResponse {
   Angel: number;
   /** 图片为PDF时，返回PDF的总页数，默认为0 */
   PdfPageSize: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1424,7 +1424,7 @@ declare interface GeneralEfficientOCRResponse {
   TextDetections: TextDetection[];
   /** 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看如何纠正倾斜文本 */
   Angel: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1448,7 +1448,7 @@ declare interface GeneralFastOCRResponse {
   Angel: number;
   /** 图片为PDF时，返回PDF的总页数，默认为0 */
   PdfPageSize: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1470,7 +1470,7 @@ declare interface GeneralHandwritingOCRResponse {
   TextDetections: TextGeneralHandwriting[];
   /** 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看如何纠正倾斜文本 */
   Angel: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1512,7 +1512,7 @@ declare interface HKIDCardOCRResponse {
   HeadImage: string | null;
   /** 多重告警码，当身份证是翻拍、复印、PS件时返回对应告警码。-9102：证照复印件告警-9103：证照翻拍告警-9104：证照PS告警 */
   WarningCode: number[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1546,7 +1546,7 @@ declare interface HmtResidentPermitOCRResponse {
   VisaNum: string;
   /** 通行证号码 */
   PassNo: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1580,7 +1580,7 @@ declare interface IDCardOCRResponse {
   ValidDate: string;
   /** 扩展信息，不请求则不返回，具体输入参考示例3和示例4。IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;WarnInfos，告警信息，Code 告警码列表和释义：-9100	身份证有效日期不合法告警，-9101	身份证边框不完整告警，-9102	身份证复印件告警，-9103	身份证翻拍告警，-9105	身份证框内遮挡告警，-9104	临时身份证告警，-9106	身份证 PS 告警，-9107 身份证反光告警。 */
   AdvancedInfo: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1600,7 +1600,7 @@ declare interface ImageEnhancementResponse {
   ImageTag: string;
   /** 图片数据，返回预处理后图像或原图像base64字符 */
   Image: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1622,7 +1622,7 @@ declare interface InstitutionOCRResponse {
   Name: string;
   /** 法定代表人 */
   LegalPerson: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1636,7 +1636,7 @@ declare interface InsuranceBillOCRRequest {
 declare interface InsuranceBillOCRResponse {
   /** 保险单据识别结果，具体内容请点击左侧链接。 */
   InsuranceBillInfos: InsuranceBillInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1656,7 +1656,7 @@ declare interface InvoiceGeneralOCRResponse {
   InvoiceGeneralInfos: InvoiceGeneralInfo[];
   /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。 */
   Angle: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1678,7 +1678,7 @@ declare interface LicensePlateOCRResponse {
   Color: string;
   /** 全部车牌信息。 */
   LicensePlateInfos: LicensePlateInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1710,7 +1710,7 @@ declare interface MLIDCardOCRResponse {
   Type: string;
   /** 出生日期（目前该字段仅支持IKAD劳工证、MyKad 身份证） */
   Birthday: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1746,7 +1746,7 @@ declare interface MLIDPassportOCRResponse {
   CodeSet: string;
   /** 最下方第二行 MRZ Code 序列 */
   CodeCrc: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1782,7 +1782,7 @@ declare interface MainlandPermitOCRResponse {
   Type: string;
   /** RetProfile为True时返回头像字段， Base64编码 */
   Profile: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1802,7 +1802,7 @@ declare interface MixedInvoiceDetectRequest {
 declare interface MixedInvoiceDetectResponse {
   /** 检测出的票据类型列表，具体内容请点击左侧链接。 */
   InvoiceDetectInfos: InvoiceDetectInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1824,7 +1824,7 @@ declare interface MixedInvoiceOCRRequest {
 declare interface MixedInvoiceOCRResponse {
   /** 混贴票据识别结果，具体内容请点击左侧链接。 */
   MixedInvoiceItems: MixedInvoiceItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1844,7 +1844,7 @@ declare interface OrgCodeCertOCRResponse {
   Address: string;
   /** 有效期 */
   ValidDate: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1888,7 +1888,7 @@ declare interface PassportOCRResponse {
   FamilyName?: string;
   /** 名 */
   FirstName?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1916,7 +1916,7 @@ declare interface PermitOCRResponse {
   IssueAddress: string;
   /** 出生日期 */
   Birthday: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1940,7 +1940,7 @@ declare interface PropOwnerCertOCRResponse {
   Nature: string;
   /** 房地坐落 */
   Location: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1956,7 +1956,7 @@ declare interface QrcodeOCRResponse {
   CodeResults: QrcodeResultsInfo[];
   /** 图片大小，具体内容请点击左侧链接。 */
   ImgSize: QrcodeImgSize;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1970,7 +1970,7 @@ declare interface QueryBarCodeResponse {
   BarCode?: string;
   /** 条码信息数组 */
   ProductDataRecords?: ProductDataRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2002,7 +2002,7 @@ declare interface QuotaInvoiceOCRResponse {
   City: string | null;
   /** 是否有公司印章（1有 0无 空为识别不出） */
   HasStamp: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2036,7 +2036,7 @@ declare interface RecognizeContainerOCRResponse {
   TareKG?: string;
   /** 集装箱自身重量，单位：磅（LB） */
   TareLB?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2070,7 +2070,7 @@ declare interface RecognizeHealthCodeOCRResponse {
   SpotName: string;
   /** 疫苗接种时间 */
   VaccinationTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2118,7 +2118,7 @@ declare interface RecognizeIndonesiaIDCardOCRResponse {
   IssuedDate: string;
   /** 人像截图 */
   Photo: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2142,7 +2142,7 @@ declare interface RecognizeMedicalInvoiceOCRResponse {
   MedicalInvoiceInfos: MedicalInvoiceInfo[];
   /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。 */
   Angle: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2160,7 +2160,7 @@ declare interface RecognizeOnlineTaxiItineraryOCRRequest {
 declare interface RecognizeOnlineTaxiItineraryOCRResponse {
   /** 网约车行程单识别结果，具体内容请点击左侧链接。 */
   OnlineTaxiItineraryInfos: OnlineTaxiItineraryInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2198,7 +2198,7 @@ declare interface RecognizePhilippinesDrivingLicenseOCRResponse {
   AgencyCode: TextDetectionResult;
   /** 出生日期 */
   Birthday: TextDetectionResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2230,7 +2230,7 @@ declare interface RecognizePhilippinesVoteIDOCRResponse {
   Address: TextDetectionResult;
   /** 地区 */
   PrecinctNo: TextDetectionResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2256,7 +2256,7 @@ declare interface RecognizeTableOCRResponse {
   PdfPageSize: number;
   /** 图片旋转角度（角度制），文本的水平方向为0°，统一以逆时针方向旋转，逆时针为负，角度范围为-360°至0°。 */
   Angle: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2284,7 +2284,7 @@ declare interface RecognizeThaiIDCardOCRResponse {
   ExpirationDate?: string;
   /** 英文姓名 */
   EnLastName?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2306,7 +2306,7 @@ declare interface RecognizeTravelCardOCRResponse {
   RiskArea: string[];
   /** 电话号码 */
   Telephone: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2374,7 +2374,7 @@ declare interface ResidenceBookletOCRResponse {
   RegistrationDate: string;
   /** 曾用名 */
   FormerName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2396,7 +2396,7 @@ declare interface RideHailingDriverLicenseOCRResponse {
   EndDate?: string;
   /** 初始发证日期，对应网约车驾驶证字段：初始领证日期/发证日期 */
   ReleaseDate?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2420,7 +2420,7 @@ declare interface RideHailingTransportLicenseOCRResponse {
   EndDate?: string;
   /** 初始发证日期，对应网约车运输证字段：初始领证日期/发证日期。 */
   ReleaseDate?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2442,7 +2442,7 @@ declare interface SealOCRResponse {
   SealInfos: SealInfo[];
   /** 印章类型，表示为：圆形印章：0椭圆形印章：1方形印章：2菱形印章：3三角形印章：4 */
   SealShape: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2462,7 +2462,7 @@ declare interface ShipInvoiceOCRResponse {
   ShipInvoiceInfos: ShipInvoiceInfo[];
   /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。 */
   Angle: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2486,7 +2486,7 @@ declare interface SmartStructuralOCRResponse {
   Angle: number;
   /** 识别信息 */
   StructuralItems: StructuralItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2502,7 +2502,7 @@ declare interface TableOCRResponse {
   TextDetections?: TextTable[];
   /** Base64 编码后的 Excel 数据。 */
   Data?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2542,7 +2542,7 @@ declare interface TaxiInvoiceOCRResponse {
   Province: string | null;
   /** 市 */
   City: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2556,7 +2556,7 @@ declare interface TextDetectRequest {
 declare interface TextDetectResponse {
   /** 图片中是否包含文字。 */
   HasText: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2576,7 +2576,7 @@ declare interface TollInvoiceOCRResponse {
   TollInvoiceInfos: TollInvoiceInfo[];
   /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。 */
   Angle: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2632,7 +2632,7 @@ declare interface TrainTicketOCRResponse {
   ReceiptNumber: string;
   /** 仅供报销使用：1为是，0为否 */
   IsReceipt: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2656,7 +2656,7 @@ declare interface VatInvoiceOCRResponse {
   PdfPageSize: number;
   /** 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看如何纠正倾斜文本 */
   Angle: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2690,7 +2690,7 @@ declare interface VatInvoiceVerifyNewResponse {
   UsedVehicleInvoiceInfo: UsedVehicleInvoiceInfo;
   /** 通行费发票信息 */
   PassInvoiceInfoList: PassInvoiceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2712,7 +2712,7 @@ declare interface VatInvoiceVerifyResponse {
   VehicleInvoiceInfo: VehicleInvoiceInfo;
   /** 二手车销售统一发票信息 */
   UsedVehicleInvoiceInfo: UsedVehicleInvoiceInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2732,7 +2732,7 @@ declare interface VatRollInvoiceOCRResponse {
   VatRollInvoiceInfos: VatRollInvoiceInfo[];
   /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。 */
   Angle: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2754,7 +2754,7 @@ declare interface VehicleLicenseOCRResponse {
   RecognizeWarnCode: number[];
   /** 告警码说明：WARN_DRIVER_LICENSE_COPY_CARD 复印件告警WARN_DRIVER_LICENSE_SCREENED_CARD 翻拍件告警WARN_DRIVER_LICENSE_PS_CARD ps告警注：告警信息可以同时存在多个 */
   RecognizeWarnMsg: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2768,7 +2768,7 @@ declare interface VehicleRegCertOCRRequest {
 declare interface VehicleRegCertOCRResponse {
   /** 机动车登记证书识别结果，具体内容请点击左侧链接。 */
   VehicleRegCertInfos: VehicleRegCertInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2828,7 +2828,7 @@ declare interface VerifyBasicBizLicenseResponse {
   RegCapital: string;
   /** 成立/注册日期，只有输入参数EstablishTime为true时展示，默认为空 */
   EstablishTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2916,7 +2916,7 @@ declare interface VerifyBizLicenseResponse {
   Address: string;
   /** 验证结果 */
   RegNumResult: BizLicenseVerifyResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2936,7 +2936,7 @@ declare interface VerifyEnterpriseFourFactorsResponse {
   State: number;
   /** 核验结果明细，7：企业法人/负责人，6：企业股东，5：企业管理人员，-21：企业名称与企业标识不符，-22：姓名不一致，-23：证件号码不一致，-24：企业名称不一致，-25：企业标识不一致 */
   Detail: Detail | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2982,7 +2982,7 @@ declare interface VerifyOfdVatInvoiceOCRResponse {
   Note?: string;
   /** 货物或服务清单 */
   GoodsInfos?: VatInvoiceGoodsInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2996,7 +2996,7 @@ declare interface VinOCRRequest {
 declare interface VinOCRResponse {
   /** 检测到的车辆 VIN 码。 */
   Vin: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3016,166 +3016,166 @@ declare interface WaybillOCRRequest {
 declare interface WaybillOCRResponse {
   /** 检测到的文本信息，具体内容请点击左侧链接。 */
   TextDetections: TextWaybill;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ocr 文字识别} */
 declare interface Ocr {
   (): Versions;
-  /** {@link AdvertiseOCR 广告文字识别}({@link AdvertiseOCRRequest 请求参数}): {@link AdvertiseOCRResponse 返回参数} */
+  /** 广告文字识别 {@link AdvertiseOCRRequest} {@link AdvertiseOCRResponse} */
   AdvertiseOCR(data?: AdvertiseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<AdvertiseOCRResponse>;
-  /** {@link ArithmeticOCR 算式识别}({@link ArithmeticOCRRequest 请求参数}): {@link ArithmeticOCRResponse 返回参数} */
+  /** 算式识别 {@link ArithmeticOCRRequest} {@link ArithmeticOCRResponse} */
   ArithmeticOCR(data?: ArithmeticOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ArithmeticOCRResponse>;
-  /** {@link BankCardOCR 银行卡识别}({@link BankCardOCRRequest 请求参数}): {@link BankCardOCRResponse 返回参数} */
+  /** 银行卡识别 {@link BankCardOCRRequest} {@link BankCardOCRResponse} */
   BankCardOCR(data?: BankCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BankCardOCRResponse>;
-  /** {@link BankSlipOCR 银行回单识别}({@link BankSlipOCRRequest 请求参数}): {@link BankSlipOCRResponse 返回参数} */
+  /** 银行回单识别 {@link BankSlipOCRRequest} {@link BankSlipOCRResponse} */
   BankSlipOCR(data?: BankSlipOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BankSlipOCRResponse>;
-  /** {@link BizLicenseOCR 营业执照识别}({@link BizLicenseOCRRequest 请求参数}): {@link BizLicenseOCRResponse 返回参数} */
+  /** 营业执照识别 {@link BizLicenseOCRRequest} {@link BizLicenseOCRResponse} */
   BizLicenseOCR(data?: BizLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BizLicenseOCRResponse>;
-  /** {@link BusInvoiceOCR 汽车票识别}({@link BusInvoiceOCRRequest 请求参数}): {@link BusInvoiceOCRResponse 返回参数} */
+  /** 汽车票识别 {@link BusInvoiceOCRRequest} {@link BusInvoiceOCRResponse} */
   BusInvoiceOCR(data?: BusInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BusInvoiceOCRResponse>;
-  /** {@link BusinessCardOCR 名片识别}({@link BusinessCardOCRRequest 请求参数}): {@link BusinessCardOCRResponse 返回参数} */
+  /** 名片识别 {@link BusinessCardOCRRequest} {@link BusinessCardOCRResponse} */
   BusinessCardOCR(data?: BusinessCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BusinessCardOCRResponse>;
-  /** {@link CarInvoiceOCR 购车发票识别}({@link CarInvoiceOCRRequest 请求参数}): {@link CarInvoiceOCRResponse 返回参数} */
+  /** 购车发票识别 {@link CarInvoiceOCRRequest} {@link CarInvoiceOCRResponse} */
   CarInvoiceOCR(data?: CarInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<CarInvoiceOCRResponse>;
-  /** {@link ClassifyDetectOCR 智能卡证分类}({@link ClassifyDetectOCRRequest 请求参数}): {@link ClassifyDetectOCRResponse 返回参数} */
+  /** 智能卡证分类 {@link ClassifyDetectOCRRequest} {@link ClassifyDetectOCRResponse} */
   ClassifyDetectOCR(data?: ClassifyDetectOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyDetectOCRResponse>;
-  /** {@link DriverLicenseOCR 驾驶证识别}({@link DriverLicenseOCRRequest 请求参数}): {@link DriverLicenseOCRResponse 返回参数} */
+  /** 驾驶证识别 {@link DriverLicenseOCRRequest} {@link DriverLicenseOCRResponse} */
   DriverLicenseOCR(data?: DriverLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<DriverLicenseOCRResponse>;
-  /** {@link DutyPaidProofOCR 完税证明识别}({@link DutyPaidProofOCRRequest 请求参数}): {@link DutyPaidProofOCRResponse 返回参数} */
+  /** 完税证明识别 {@link DutyPaidProofOCRRequest} {@link DutyPaidProofOCRResponse} */
   DutyPaidProofOCR(data?: DutyPaidProofOCRRequest, config?: AxiosRequestConfig): AxiosPromise<DutyPaidProofOCRResponse>;
-  /** {@link EduPaperOCR 数学试题识别}({@link EduPaperOCRRequest 请求参数}): {@link EduPaperOCRResponse 返回参数} */
+  /** 数学试题识别 {@link EduPaperOCRRequest} {@link EduPaperOCRResponse} */
   EduPaperOCR(data?: EduPaperOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EduPaperOCRResponse>;
-  /** {@link EnglishOCR 英文识别}({@link EnglishOCRRequest 请求参数}): {@link EnglishOCRResponse 返回参数} */
+  /** 英文识别 {@link EnglishOCRRequest} {@link EnglishOCRResponse} */
   EnglishOCR(data?: EnglishOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EnglishOCRResponse>;
-  /** {@link EnterpriseLicenseOCR 企业证照识别}({@link EnterpriseLicenseOCRRequest 请求参数}): {@link EnterpriseLicenseOCRResponse 返回参数} */
+  /** 企业证照识别 {@link EnterpriseLicenseOCRRequest} {@link EnterpriseLicenseOCRResponse} */
   EnterpriseLicenseOCR(data?: EnterpriseLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EnterpriseLicenseOCRResponse>;
-  /** {@link EstateCertOCR 不动产权证识别}({@link EstateCertOCRRequest 请求参数}): {@link EstateCertOCRResponse 返回参数} */
+  /** 不动产权证识别 {@link EstateCertOCRRequest} {@link EstateCertOCRResponse} */
   EstateCertOCR(data?: EstateCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EstateCertOCRResponse>;
-  /** {@link FinanBillOCR 金融票据整单识别}({@link FinanBillOCRRequest 请求参数}): {@link FinanBillOCRResponse 返回参数} */
+  /** 金融票据整单识别 {@link FinanBillOCRRequest} {@link FinanBillOCRResponse} */
   FinanBillOCR(data?: FinanBillOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FinanBillOCRResponse>;
-  /** {@link FinanBillSliceOCR 金融票据切片识别}({@link FinanBillSliceOCRRequest 请求参数}): {@link FinanBillSliceOCRResponse 返回参数} */
+  /** 金融票据切片识别 {@link FinanBillSliceOCRRequest} {@link FinanBillSliceOCRResponse} */
   FinanBillSliceOCR(data?: FinanBillSliceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FinanBillSliceOCRResponse>;
-  /** {@link FlightInvoiceOCR 机票行程单识别}({@link FlightInvoiceOCRRequest 请求参数}): {@link FlightInvoiceOCRResponse 返回参数} */
+  /** 机票行程单识别 {@link FlightInvoiceOCRRequest} {@link FlightInvoiceOCRResponse} */
   FlightInvoiceOCR(data?: FlightInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FlightInvoiceOCRResponse>;
-  /** {@link FormulaOCR 数学公式识别}({@link FormulaOCRRequest 请求参数}): {@link FormulaOCRResponse 返回参数} */
+  /** 数学公式识别 {@link FormulaOCRRequest} {@link FormulaOCRResponse} */
   FormulaOCR(data?: FormulaOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FormulaOCRResponse>;
-  /** {@link GeneralAccurateOCR 通用印刷体识别（高精度版）}({@link GeneralAccurateOCRRequest 请求参数}): {@link GeneralAccurateOCRResponse 返回参数} */
+  /** 通用印刷体识别（高精度版） {@link GeneralAccurateOCRRequest} {@link GeneralAccurateOCRResponse} */
   GeneralAccurateOCR(data?: GeneralAccurateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralAccurateOCRResponse>;
-  /** {@link GeneralBasicOCR 通用印刷体识别}({@link GeneralBasicOCRRequest 请求参数}): {@link GeneralBasicOCRResponse 返回参数} */
+  /** 通用印刷体识别 {@link GeneralBasicOCRRequest} {@link GeneralBasicOCRResponse} */
   GeneralBasicOCR(data?: GeneralBasicOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralBasicOCRResponse>;
-  /** {@link GeneralEfficientOCR 通用印刷体识别（精简版）}({@link GeneralEfficientOCRRequest 请求参数}): {@link GeneralEfficientOCRResponse 返回参数} */
+  /** 通用印刷体识别（精简版） {@link GeneralEfficientOCRRequest} {@link GeneralEfficientOCRResponse} */
   GeneralEfficientOCR(data?: GeneralEfficientOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralEfficientOCRResponse>;
-  /** {@link GeneralFastOCR 通用印刷体识别（高速版）}({@link GeneralFastOCRRequest 请求参数}): {@link GeneralFastOCRResponse 返回参数} */
+  /** 通用印刷体识别（高速版） {@link GeneralFastOCRRequest} {@link GeneralFastOCRResponse} */
   GeneralFastOCR(data?: GeneralFastOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralFastOCRResponse>;
-  /** {@link GeneralHandwritingOCR 通用手写体识别}({@link GeneralHandwritingOCRRequest 请求参数}): {@link GeneralHandwritingOCRResponse 返回参数} */
+  /** 通用手写体识别 {@link GeneralHandwritingOCRRequest} {@link GeneralHandwritingOCRResponse} */
   GeneralHandwritingOCR(data?: GeneralHandwritingOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralHandwritingOCRResponse>;
-  /** {@link HKIDCardOCR 中国香港身份证识别}({@link HKIDCardOCRRequest 请求参数}): {@link HKIDCardOCRResponse 返回参数} */
+  /** 中国香港身份证识别 {@link HKIDCardOCRRequest} {@link HKIDCardOCRResponse} */
   HKIDCardOCR(data: HKIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<HKIDCardOCRResponse>;
-  /** {@link HmtResidentPermitOCR 港澳台居住证识别}({@link HmtResidentPermitOCRRequest 请求参数}): {@link HmtResidentPermitOCRResponse 返回参数} */
+  /** 港澳台居住证识别 {@link HmtResidentPermitOCRRequest} {@link HmtResidentPermitOCRResponse} */
   HmtResidentPermitOCR(data?: HmtResidentPermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<HmtResidentPermitOCRResponse>;
-  /** {@link IDCardOCR 身份证识别}({@link IDCardOCRRequest 请求参数}): {@link IDCardOCRResponse 返回参数} */
+  /** 身份证识别 {@link IDCardOCRRequest} {@link IDCardOCRResponse} */
   IDCardOCR(data?: IDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<IDCardOCRResponse>;
-  /** {@link ImageEnhancement 文本图像增强}({@link ImageEnhancementRequest 请求参数}): {@link ImageEnhancementResponse 返回参数} */
+  /** 文本图像增强 {@link ImageEnhancementRequest} {@link ImageEnhancementResponse} */
   ImageEnhancement(data?: ImageEnhancementRequest, config?: AxiosRequestConfig): AxiosPromise<ImageEnhancementResponse>;
-  /** {@link InstitutionOCR 事业单位法人证书识别}({@link InstitutionOCRRequest 请求参数}): {@link InstitutionOCRResponse 返回参数} */
+  /** 事业单位法人证书识别 {@link InstitutionOCRRequest} {@link InstitutionOCRResponse} */
   InstitutionOCR(data?: InstitutionOCRRequest, config?: AxiosRequestConfig): AxiosPromise<InstitutionOCRResponse>;
-  /** {@link InsuranceBillOCR 保险单据识别}({@link InsuranceBillOCRRequest 请求参数}): {@link InsuranceBillOCRResponse 返回参数} */
+  /** 保险单据识别 {@link InsuranceBillOCRRequest} {@link InsuranceBillOCRResponse} */
   InsuranceBillOCR(data?: InsuranceBillOCRRequest, config?: AxiosRequestConfig): AxiosPromise<InsuranceBillOCRResponse>;
-  /** {@link InvoiceGeneralOCR 通用机打发票识别}({@link InvoiceGeneralOCRRequest 请求参数}): {@link InvoiceGeneralOCRResponse 返回参数} */
+  /** 通用机打发票识别 {@link InvoiceGeneralOCRRequest} {@link InvoiceGeneralOCRResponse} */
   InvoiceGeneralOCR(data?: InvoiceGeneralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<InvoiceGeneralOCRResponse>;
-  /** {@link LicensePlateOCR 车牌识别}({@link LicensePlateOCRRequest 请求参数}): {@link LicensePlateOCRResponse 返回参数} */
+  /** 车牌识别 {@link LicensePlateOCRRequest} {@link LicensePlateOCRResponse} */
   LicensePlateOCR(data?: LicensePlateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<LicensePlateOCRResponse>;
-  /** {@link MLIDCardOCR 马来西亚身份证识别}({@link MLIDCardOCRRequest 请求参数}): {@link MLIDCardOCRResponse 返回参数} */
+  /** 马来西亚身份证识别 {@link MLIDCardOCRRequest} {@link MLIDCardOCRResponse} */
   MLIDCardOCR(data?: MLIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MLIDCardOCRResponse>;
-  /** {@link MLIDPassportOCR 护照识别（港澳台地区及境外护照）}({@link MLIDPassportOCRRequest 请求参数}): {@link MLIDPassportOCRResponse 返回参数} */
+  /** 护照识别（港澳台地区及境外护照） {@link MLIDPassportOCRRequest} {@link MLIDPassportOCRResponse} */
   MLIDPassportOCR(data: MLIDPassportOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MLIDPassportOCRResponse>;
-  /** {@link MainlandPermitOCR 港澳台来往内地通行证识别}({@link MainlandPermitOCRRequest 请求参数}): {@link MainlandPermitOCRResponse 返回参数} */
+  /** 港澳台来往内地通行证识别 {@link MainlandPermitOCRRequest} {@link MainlandPermitOCRResponse} */
   MainlandPermitOCR(data?: MainlandPermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MainlandPermitOCRResponse>;
-  /** {@link MixedInvoiceDetect 混贴票据分类}({@link MixedInvoiceDetectRequest 请求参数}): {@link MixedInvoiceDetectResponse 返回参数} */
+  /** 混贴票据分类 {@link MixedInvoiceDetectRequest} {@link MixedInvoiceDetectResponse} */
   MixedInvoiceDetect(data: MixedInvoiceDetectRequest, config?: AxiosRequestConfig): AxiosPromise<MixedInvoiceDetectResponse>;
-  /** {@link MixedInvoiceOCR 混贴票据识别}({@link MixedInvoiceOCRRequest 请求参数}): {@link MixedInvoiceOCRResponse 返回参数} */
+  /** 混贴票据识别 {@link MixedInvoiceOCRRequest} {@link MixedInvoiceOCRResponse} */
   MixedInvoiceOCR(data?: MixedInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MixedInvoiceOCRResponse>;
-  /** {@link OrgCodeCertOCR 组织机构代码证识别}({@link OrgCodeCertOCRRequest 请求参数}): {@link OrgCodeCertOCRResponse 返回参数} */
+  /** 组织机构代码证识别 {@link OrgCodeCertOCRRequest} {@link OrgCodeCertOCRResponse} */
   OrgCodeCertOCR(data?: OrgCodeCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<OrgCodeCertOCRResponse>;
-  /** {@link PassportOCR 护照识别（中国大陆地区护照）}({@link PassportOCRRequest 请求参数}): {@link PassportOCRResponse 返回参数} */
+  /** 护照识别（中国大陆地区护照） {@link PassportOCRRequest} {@link PassportOCRResponse} */
   PassportOCR(data?: PassportOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PassportOCRResponse>;
-  /** {@link PermitOCR 港澳台通行证识别}({@link PermitOCRRequest 请求参数}): {@link PermitOCRResponse 返回参数} */
+  /** 港澳台通行证识别 {@link PermitOCRRequest} {@link PermitOCRResponse} */
   PermitOCR(data?: PermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PermitOCRResponse>;
-  /** {@link PropOwnerCertOCR 房产证识别}({@link PropOwnerCertOCRRequest 请求参数}): {@link PropOwnerCertOCRResponse 返回参数} */
+  /** 房产证识别 {@link PropOwnerCertOCRRequest} {@link PropOwnerCertOCRResponse} */
   PropOwnerCertOCR(data?: PropOwnerCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PropOwnerCertOCRResponse>;
-  /** {@link QrcodeOCR 二维码和条形码识别}({@link QrcodeOCRRequest 请求参数}): {@link QrcodeOCRResponse 返回参数} */
+  /** 二维码和条形码识别 {@link QrcodeOCRRequest} {@link QrcodeOCRResponse} */
   QrcodeOCR(data?: QrcodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QrcodeOCRResponse>;
-  /** {@link QueryBarCode 条码信息查询}({@link QueryBarCodeRequest 请求参数}): {@link QueryBarCodeResponse 返回参数} */
+  /** 条码信息查询 {@link QueryBarCodeRequest} {@link QueryBarCodeResponse} */
   QueryBarCode(data: QueryBarCodeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBarCodeResponse>;
-  /** {@link QuotaInvoiceOCR 定额发票识别}({@link QuotaInvoiceOCRRequest 请求参数}): {@link QuotaInvoiceOCRResponse 返回参数} */
+  /** 定额发票识别 {@link QuotaInvoiceOCRRequest} {@link QuotaInvoiceOCRResponse} */
   QuotaInvoiceOCR(data?: QuotaInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QuotaInvoiceOCRResponse>;
-  /** {@link RecognizeContainerOCR 集装箱识别}({@link RecognizeContainerOCRRequest 请求参数}): {@link RecognizeContainerOCRResponse 返回参数} */
+  /** 集装箱识别 {@link RecognizeContainerOCRRequest} {@link RecognizeContainerOCRResponse} */
   RecognizeContainerOCR(data?: RecognizeContainerOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeContainerOCRResponse>;
-  /** {@link RecognizeHealthCodeOCR 健康码识别}({@link RecognizeHealthCodeOCRRequest 请求参数}): {@link RecognizeHealthCodeOCRResponse 返回参数} */
+  /** 健康码识别 {@link RecognizeHealthCodeOCRRequest} {@link RecognizeHealthCodeOCRResponse} */
   RecognizeHealthCodeOCR(data?: RecognizeHealthCodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeHealthCodeOCRResponse>;
-  /** {@link RecognizeIndonesiaIDCardOCR 印尼身份证识别}({@link RecognizeIndonesiaIDCardOCRRequest 请求参数}): {@link RecognizeIndonesiaIDCardOCRResponse 返回参数} */
+  /** 印尼身份证识别 {@link RecognizeIndonesiaIDCardOCRRequest} {@link RecognizeIndonesiaIDCardOCRResponse} */
   RecognizeIndonesiaIDCardOCR(data?: RecognizeIndonesiaIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeIndonesiaIDCardOCRResponse>;
-  /** {@link RecognizeMedicalInvoiceOCR 医疗票据识别}({@link RecognizeMedicalInvoiceOCRRequest 请求参数}): {@link RecognizeMedicalInvoiceOCRResponse 返回参数} */
+  /** 医疗票据识别 {@link RecognizeMedicalInvoiceOCRRequest} {@link RecognizeMedicalInvoiceOCRResponse} */
   RecognizeMedicalInvoiceOCR(data?: RecognizeMedicalInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeMedicalInvoiceOCRResponse>;
-  /** {@link RecognizeOnlineTaxiItineraryOCR 网约车行程单识别}({@link RecognizeOnlineTaxiItineraryOCRRequest 请求参数}): {@link RecognizeOnlineTaxiItineraryOCRResponse 返回参数} */
+  /** 网约车行程单识别 {@link RecognizeOnlineTaxiItineraryOCRRequest} {@link RecognizeOnlineTaxiItineraryOCRResponse} */
   RecognizeOnlineTaxiItineraryOCR(data?: RecognizeOnlineTaxiItineraryOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeOnlineTaxiItineraryOCRResponse>;
-  /** {@link RecognizePhilippinesDrivingLicenseOCR 菲律宾驾驶证识别}({@link RecognizePhilippinesDrivingLicenseOCRRequest 请求参数}): {@link RecognizePhilippinesDrivingLicenseOCRResponse 返回参数} */
+  /** 菲律宾驾驶证识别 {@link RecognizePhilippinesDrivingLicenseOCRRequest} {@link RecognizePhilippinesDrivingLicenseOCRResponse} */
   RecognizePhilippinesDrivingLicenseOCR(data?: RecognizePhilippinesDrivingLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesDrivingLicenseOCRResponse>;
-  /** {@link RecognizePhilippinesVoteIDOCR 菲律宾VoteID识别}({@link RecognizePhilippinesVoteIDOCRRequest 请求参数}): {@link RecognizePhilippinesVoteIDOCRResponse 返回参数} */
+  /** 菲律宾VoteID识别 {@link RecognizePhilippinesVoteIDOCRRequest} {@link RecognizePhilippinesVoteIDOCRResponse} */
   RecognizePhilippinesVoteIDOCR(data: RecognizePhilippinesVoteIDOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesVoteIDOCRResponse>;
-  /** {@link RecognizeTableOCR 表格识别（V2)}({@link RecognizeTableOCRRequest 请求参数}): {@link RecognizeTableOCRResponse 返回参数} */
+  /** 表格识别（V2) {@link RecognizeTableOCRRequest} {@link RecognizeTableOCRResponse} */
   RecognizeTableOCR(data?: RecognizeTableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTableOCRResponse>;
-  /** {@link RecognizeThaiIDCardOCR 泰国身份证识别}({@link RecognizeThaiIDCardOCRRequest 请求参数}): {@link RecognizeThaiIDCardOCRResponse 返回参数} */
+  /** 泰国身份证识别 {@link RecognizeThaiIDCardOCRRequest} {@link RecognizeThaiIDCardOCRResponse} */
   RecognizeThaiIDCardOCR(data?: RecognizeThaiIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeThaiIDCardOCRResponse>;
-  /** {@link RecognizeTravelCardOCR 通信行程卡识别}({@link RecognizeTravelCardOCRRequest 请求参数}): {@link RecognizeTravelCardOCRResponse 返回参数} */
+  /** 通信行程卡识别 {@link RecognizeTravelCardOCRRequest} {@link RecognizeTravelCardOCRResponse} */
   RecognizeTravelCardOCR(data?: RecognizeTravelCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTravelCardOCRResponse>;
-  /** {@link ResidenceBookletOCR 户口本识别}({@link ResidenceBookletOCRRequest 请求参数}): {@link ResidenceBookletOCRResponse 返回参数} */
+  /** 户口本识别 {@link ResidenceBookletOCRRequest} {@link ResidenceBookletOCRResponse} */
   ResidenceBookletOCR(data?: ResidenceBookletOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ResidenceBookletOCRResponse>;
-  /** {@link RideHailingDriverLicenseOCR 网约车驾驶证识别}({@link RideHailingDriverLicenseOCRRequest 请求参数}): {@link RideHailingDriverLicenseOCRResponse 返回参数} */
+  /** 网约车驾驶证识别 {@link RideHailingDriverLicenseOCRRequest} {@link RideHailingDriverLicenseOCRResponse} */
   RideHailingDriverLicenseOCR(data?: RideHailingDriverLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RideHailingDriverLicenseOCRResponse>;
-  /** {@link RideHailingTransportLicenseOCR 网约车运输证识别}({@link RideHailingTransportLicenseOCRRequest 请求参数}): {@link RideHailingTransportLicenseOCRResponse 返回参数} */
+  /** 网约车运输证识别 {@link RideHailingTransportLicenseOCRRequest} {@link RideHailingTransportLicenseOCRResponse} */
   RideHailingTransportLicenseOCR(data?: RideHailingTransportLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RideHailingTransportLicenseOCRResponse>;
-  /** {@link SealOCR 印章识别}({@link SealOCRRequest 请求参数}): {@link SealOCRResponse 返回参数} */
+  /** 印章识别 {@link SealOCRRequest} {@link SealOCRResponse} */
   SealOCR(data?: SealOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SealOCRResponse>;
-  /** {@link ShipInvoiceOCR 轮船票识别}({@link ShipInvoiceOCRRequest 请求参数}): {@link ShipInvoiceOCRResponse 返回参数} */
+  /** 轮船票识别 {@link ShipInvoiceOCRRequest} {@link ShipInvoiceOCRResponse} */
   ShipInvoiceOCR(data?: ShipInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ShipInvoiceOCRResponse>;
-  /** {@link SmartStructuralOCR 智能结构化识别}({@link SmartStructuralOCRRequest 请求参数}): {@link SmartStructuralOCRResponse 返回参数} */
+  /** 智能结构化识别 {@link SmartStructuralOCRRequest} {@link SmartStructuralOCRResponse} */
   SmartStructuralOCR(data?: SmartStructuralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralOCRResponse>;
-  /** {@link TableOCR 表格识别（V1)}({@link TableOCRRequest 请求参数}): {@link TableOCRResponse 返回参数} */
+  /** 表格识别（V1) {@link TableOCRRequest} {@link TableOCRResponse} */
   TableOCR(data?: TableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TableOCRResponse>;
-  /** {@link TaxiInvoiceOCR 出租车发票识别}({@link TaxiInvoiceOCRRequest 请求参数}): {@link TaxiInvoiceOCRResponse 返回参数} */
+  /** 出租车发票识别 {@link TaxiInvoiceOCRRequest} {@link TaxiInvoiceOCRResponse} */
   TaxiInvoiceOCR(data?: TaxiInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TaxiInvoiceOCRResponse>;
-  /** {@link TextDetect 快速文本检测}({@link TextDetectRequest 请求参数}): {@link TextDetectResponse 返回参数} */
+  /** 快速文本检测 {@link TextDetectRequest} {@link TextDetectResponse} */
   TextDetect(data?: TextDetectRequest, config?: AxiosRequestConfig): AxiosPromise<TextDetectResponse>;
-  /** {@link TollInvoiceOCR 过路过桥费发票识别}({@link TollInvoiceOCRRequest 请求参数}): {@link TollInvoiceOCRResponse 返回参数} */
+  /** 过路过桥费发票识别 {@link TollInvoiceOCRRequest} {@link TollInvoiceOCRResponse} */
   TollInvoiceOCR(data?: TollInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TollInvoiceOCRResponse>;
-  /** {@link TrainTicketOCR 火车票识别}({@link TrainTicketOCRRequest 请求参数}): {@link TrainTicketOCRResponse 返回参数} */
+  /** 火车票识别 {@link TrainTicketOCRRequest} {@link TrainTicketOCRResponse} */
   TrainTicketOCR(data?: TrainTicketOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TrainTicketOCRResponse>;
-  /** {@link VatInvoiceOCR 增值税发票识别}({@link VatInvoiceOCRRequest 请求参数}): {@link VatInvoiceOCRResponse 返回参数} */
+  /** 增值税发票识别 {@link VatInvoiceOCRRequest} {@link VatInvoiceOCRResponse} */
   VatInvoiceOCR(data?: VatInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceOCRResponse>;
-  /** {@link VatInvoiceVerify 增值税发票核验}({@link VatInvoiceVerifyRequest 请求参数}): {@link VatInvoiceVerifyResponse 返回参数} */
+  /** 增值税发票核验 {@link VatInvoiceVerifyRequest} {@link VatInvoiceVerifyResponse} */
   VatInvoiceVerify(data: VatInvoiceVerifyRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceVerifyResponse>;
-  /** {@link VatInvoiceVerifyNew 增值税发票核验（新版）}({@link VatInvoiceVerifyNewRequest 请求参数}): {@link VatInvoiceVerifyNewResponse 返回参数} */
+  /** 增值税发票核验（新版） {@link VatInvoiceVerifyNewRequest} {@link VatInvoiceVerifyNewResponse} */
   VatInvoiceVerifyNew(data: VatInvoiceVerifyNewRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceVerifyNewResponse>;
-  /** {@link VatRollInvoiceOCR 增值税发票（卷票）识别}({@link VatRollInvoiceOCRRequest 请求参数}): {@link VatRollInvoiceOCRResponse 返回参数} */
+  /** 增值税发票（卷票）识别 {@link VatRollInvoiceOCRRequest} {@link VatRollInvoiceOCRResponse} */
   VatRollInvoiceOCR(data?: VatRollInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VatRollInvoiceOCRResponse>;
-  /** {@link VehicleLicenseOCR 行驶证识别}({@link VehicleLicenseOCRRequest 请求参数}): {@link VehicleLicenseOCRResponse 返回参数} */
+  /** 行驶证识别 {@link VehicleLicenseOCRRequest} {@link VehicleLicenseOCRResponse} */
   VehicleLicenseOCR(data?: VehicleLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VehicleLicenseOCRResponse>;
-  /** {@link VehicleRegCertOCR 机动车登记证书识别}({@link VehicleRegCertOCRRequest 请求参数}): {@link VehicleRegCertOCRResponse 返回参数} */
+  /** 机动车登记证书识别 {@link VehicleRegCertOCRRequest} {@link VehicleRegCertOCRResponse} */
   VehicleRegCertOCR(data?: VehicleRegCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VehicleRegCertOCRResponse>;
-  /** {@link VerifyBasicBizLicense 营业执照识别及核验（基础版）}({@link VerifyBasicBizLicenseRequest 请求参数}): {@link VerifyBasicBizLicenseResponse 返回参数} */
+  /** 营业执照识别及核验（基础版） {@link VerifyBasicBizLicenseRequest} {@link VerifyBasicBizLicenseResponse} */
   VerifyBasicBizLicense(data?: VerifyBasicBizLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyBasicBizLicenseResponse>;
-  /** {@link VerifyBizLicense 营业执照识别及核验（详细版）}({@link VerifyBizLicenseRequest 请求参数}): {@link VerifyBizLicenseResponse 返回参数} */
+  /** 营业执照识别及核验（详细版） {@link VerifyBizLicenseRequest} {@link VerifyBizLicenseResponse} */
   VerifyBizLicense(data?: VerifyBizLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyBizLicenseResponse>;
-  /** {@link VerifyEnterpriseFourFactors 企业四要素核验}({@link VerifyEnterpriseFourFactorsRequest 请求参数}): {@link VerifyEnterpriseFourFactorsResponse 返回参数} */
+  /** 企业四要素核验 {@link VerifyEnterpriseFourFactorsRequest} {@link VerifyEnterpriseFourFactorsResponse} */
   VerifyEnterpriseFourFactors(data: VerifyEnterpriseFourFactorsRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyEnterpriseFourFactorsResponse>;
-  /** {@link VerifyOfdVatInvoiceOCR OFD发票识别}({@link VerifyOfdVatInvoiceOCRRequest 请求参数}): {@link VerifyOfdVatInvoiceOCRResponse 返回参数} */
+  /** OFD发票识别 {@link VerifyOfdVatInvoiceOCRRequest} {@link VerifyOfdVatInvoiceOCRResponse} */
   VerifyOfdVatInvoiceOCR(data?: VerifyOfdVatInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyOfdVatInvoiceOCRResponse>;
-  /** {@link VinOCR 车辆VIN码识别}({@link VinOCRRequest 请求参数}): {@link VinOCRResponse 返回参数} */
+  /** 车辆VIN码识别 {@link VinOCRRequest} {@link VinOCRResponse} */
   VinOCR(data?: VinOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VinOCRResponse>;
-  /** {@link WaybillOCR 运单识别}({@link WaybillOCRRequest 请求参数}): {@link WaybillOCRResponse 返回参数} */
+  /** 运单识别 {@link WaybillOCRRequest} {@link WaybillOCRResponse} */
   WaybillOCR(data?: WaybillOCRRequest, config?: AxiosRequestConfig): AxiosPromise<WaybillOCRResponse>;
 }
 

@@ -14,7 +14,7 @@ declare interface ApplyConcurrentRequest {
 }
 
 declare interface ApplyConcurrentResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -32,7 +32,7 @@ declare interface CreateSessionRequest {
 declare interface CreateSessionResponse {
   /** 服务端session信息，返回给SDK */
   ServerSession: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -42,18 +42,18 @@ declare interface DestroySessionRequest {
 }
 
 declare interface DestroySessionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Car 应用云渲染} */
 declare interface Car {
   (): Versions;
-  /** {@link ApplyConcurrent 申请并发}({@link ApplyConcurrentRequest 请求参数}): {@link ApplyConcurrentResponse 返回参数} */
+  /** 申请并发 {@link ApplyConcurrentRequest} {@link ApplyConcurrentResponse} */
   ApplyConcurrent(data: ApplyConcurrentRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyConcurrentResponse>;
-  /** {@link CreateSession 创建会话}({@link CreateSessionRequest 请求参数}): {@link CreateSessionResponse 返回参数} */
+  /** 创建会话 {@link CreateSessionRequest} {@link CreateSessionResponse} */
   CreateSession(data: CreateSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSessionResponse>;
-  /** {@link DestroySession 销毁会话}({@link DestroySessionRequest 请求参数}): {@link DestroySessionResponse 返回参数} */
+  /** 销毁会话 {@link DestroySessionRequest} {@link DestroySessionResponse} */
   DestroySession(data: DestroySessionRequest, config?: AxiosRequestConfig): AxiosPromise<DestroySessionResponse>;
 }
 

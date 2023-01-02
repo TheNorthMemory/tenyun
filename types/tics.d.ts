@@ -82,7 +82,7 @@ declare interface DescribeDomainInfoResponse {
   Intelligences?: IntelligenceType[];
   /** 情报相关的上下文 */
   Context?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -108,7 +108,7 @@ declare interface DescribeFileInfoResponse {
   Intelligences?: IntelligenceType[];
   /** 情报相关的上下文 */
   Context?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -134,7 +134,7 @@ declare interface DescribeIpInfoResponse {
   Intelligences?: IntelligenceType[];
   /** 情报相关的上下文 */
   Context?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -162,20 +162,20 @@ declare interface DescribeThreatInfoResponse {
   Status?: string;
   /** 情报相关的上下文，参数option=1 的时候提供每个数据默认为3 条 */
   Context?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tics 威胁情报云查服务} */
 declare interface Tics {
   (): Versions;
-  /** {@link DescribeDomainInfo 查询域名信誉}({@link DescribeDomainInfoRequest 请求参数}): {@link DescribeDomainInfoResponse 返回参数} */
+  /** 查询域名信誉 {@link DescribeDomainInfoRequest} {@link DescribeDomainInfoResponse} */
   DescribeDomainInfo(data: DescribeDomainInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainInfoResponse>;
-  /** {@link DescribeFileInfo 查询文件信誉}({@link DescribeFileInfoRequest 请求参数}): {@link DescribeFileInfoResponse 返回参数} */
+  /** 查询文件信誉 {@link DescribeFileInfoRequest} {@link DescribeFileInfoResponse} */
   DescribeFileInfo(data: DescribeFileInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileInfoResponse>;
-  /** {@link DescribeIpInfo 查询IP信誉}({@link DescribeIpInfoRequest 请求参数}): {@link DescribeIpInfoResponse 返回参数} */
+  /** 查询IP信誉 {@link DescribeIpInfoRequest} {@link DescribeIpInfoResponse} */
   DescribeIpInfo(data: DescribeIpInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpInfoResponse>;
-  /** {@link DescribeThreatInfo 查询威胁情报}({@link DescribeThreatInfoRequest 请求参数}): {@link DescribeThreatInfoResponse 返回参数} */
+  /** 查询威胁情报 {@link DescribeThreatInfoRequest} {@link DescribeThreatInfoResponse} */
   DescribeThreatInfo(data: DescribeThreatInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThreatInfoResponse>;
 }
 

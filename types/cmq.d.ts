@@ -168,7 +168,7 @@ declare interface ClearQueueRequest {
 }
 
 declare interface ClearQueueResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -180,7 +180,7 @@ declare interface ClearSubscriptionFilterTagsRequest {
 }
 
 declare interface ClearSubscriptionFilterTagsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -220,7 +220,7 @@ declare interface CreateQueueRequest {
 declare interface CreateQueueResponse {
   /** 创建成功的queueId */
   QueueId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -246,7 +246,7 @@ declare interface CreateSubscribeRequest {
 declare interface CreateSubscribeResponse {
   /** SubscriptionId */
   SubscriptionId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -266,7 +266,7 @@ declare interface CreateTopicRequest {
 declare interface CreateTopicResponse {
   /** TopicName */
   TopicId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -276,7 +276,7 @@ declare interface DeleteQueueRequest {
 }
 
 declare interface DeleteQueueResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -288,7 +288,7 @@ declare interface DeleteSubscribeRequest {
 }
 
 declare interface DeleteSubscribeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -298,7 +298,7 @@ declare interface DeleteTopicRequest {
 }
 
 declare interface DeleteTopicResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -318,7 +318,7 @@ declare interface DescribeDeadLetterSourceQueuesResponse {
   TotalCount?: number;
   /** 死信队列源队列 */
   QueueSet?: DeadLetterSource[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -340,7 +340,7 @@ declare interface DescribeQueueDetailResponse {
   TotalCount?: number;
   /** 队列详情列表。 */
   QueueSet?: QueueSet[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -360,7 +360,7 @@ declare interface DescribeSubscriptionDetailResponse {
   TotalCount?: number;
   /** Subscription属性集合 */
   SubscriptionSet?: Subscription[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -382,7 +382,7 @@ declare interface DescribeTopicDetailResponse {
   TotalCount?: number;
   /** 主题详情列表。 */
   TopicSet?: TopicSet[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -418,7 +418,7 @@ declare interface ModifyQueueAttributeRequest {
 }
 
 declare interface ModifyQueueAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -438,7 +438,7 @@ declare interface ModifySubscriptionAttributeRequest {
 }
 
 declare interface ModifySubscriptionAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -454,7 +454,7 @@ declare interface ModifyTopicAttributeRequest {
 }
 
 declare interface ModifyTopicAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -466,7 +466,7 @@ declare interface RewindQueueRequest {
 }
 
 declare interface RewindQueueResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -476,46 +476,46 @@ declare interface UnbindDeadLetterRequest {
 }
 
 declare interface UnbindDeadLetterResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cmq 消息队列 CMQ} */
 declare interface Cmq {
   (): Versions;
-  /** {@link ClearQueue 清空消息队列中的消息}({@link ClearQueueRequest 请求参数}): {@link ClearQueueResponse 返回参数} */
+  /** 清空消息队列中的消息 {@link ClearQueueRequest} {@link ClearQueueResponse} */
   ClearQueue(data: ClearQueueRequest, config?: AxiosRequestConfig): AxiosPromise<ClearQueueResponse>;
-  /** {@link ClearSubscriptionFilterTags 清空订阅者消息标签}({@link ClearSubscriptionFilterTagsRequest 请求参数}): {@link ClearSubscriptionFilterTagsResponse 返回参数} */
+  /** 清空订阅者消息标签 {@link ClearSubscriptionFilterTagsRequest} {@link ClearSubscriptionFilterTagsResponse} */
   ClearSubscriptionFilterTags(data: ClearSubscriptionFilterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ClearSubscriptionFilterTagsResponse>;
-  /** {@link CreateQueue 创建队列接口}({@link CreateQueueRequest 请求参数}): {@link CreateQueueResponse 返回参数} */
+  /** 创建队列接口 {@link CreateQueueRequest} {@link CreateQueueResponse} */
   CreateQueue(data: CreateQueueRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQueueResponse>;
-  /** {@link CreateSubscribe 创建订阅接口}({@link CreateSubscribeRequest 请求参数}): {@link CreateSubscribeResponse 返回参数} */
+  /** 创建订阅接口 {@link CreateSubscribeRequest} {@link CreateSubscribeResponse} */
   CreateSubscribe(data: CreateSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubscribeResponse>;
-  /** {@link CreateTopic 创建主题}({@link CreateTopicRequest 请求参数}): {@link CreateTopicResponse 返回参数} */
+  /** 创建主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
-  /** {@link DeleteQueue 删除队列}({@link DeleteQueueRequest 请求参数}): {@link DeleteQueueResponse 返回参数} */
+  /** 删除队列 {@link DeleteQueueRequest} {@link DeleteQueueResponse} */
   DeleteQueue(data: DeleteQueueRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQueueResponse>;
-  /** {@link DeleteSubscribe 删除订阅}({@link DeleteSubscribeRequest 请求参数}): {@link DeleteSubscribeResponse 返回参数} */
+  /** 删除订阅 {@link DeleteSubscribeRequest} {@link DeleteSubscribeResponse} */
   DeleteSubscribe(data: DeleteSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubscribeResponse>;
-  /** {@link DeleteTopic 删除主题}({@link DeleteTopicRequest 请求参数}): {@link DeleteTopicResponse 返回参数} */
+  /** 删除主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
-  /** {@link DescribeDeadLetterSourceQueues 枚举死信队列源队列}({@link DescribeDeadLetterSourceQueuesRequest 请求参数}): {@link DescribeDeadLetterSourceQueuesResponse 返回参数} */
+  /** 枚举死信队列源队列 {@link DescribeDeadLetterSourceQueuesRequest} {@link DescribeDeadLetterSourceQueuesResponse} */
   DescribeDeadLetterSourceQueues(data: DescribeDeadLetterSourceQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeadLetterSourceQueuesResponse>;
-  /** {@link DescribeQueueDetail 枚举队列}({@link DescribeQueueDetailRequest 请求参数}): {@link DescribeQueueDetailResponse 返回参数} */
+  /** 枚举队列 {@link DescribeQueueDetailRequest} {@link DescribeQueueDetailResponse} */
   DescribeQueueDetail(data?: DescribeQueueDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQueueDetailResponse>;
-  /** {@link DescribeSubscriptionDetail 查询订阅详情}({@link DescribeSubscriptionDetailRequest 请求参数}): {@link DescribeSubscriptionDetailResponse 返回参数} */
+  /** 查询订阅详情 {@link DescribeSubscriptionDetailRequest} {@link DescribeSubscriptionDetailResponse} */
   DescribeSubscriptionDetail(data: DescribeSubscriptionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscriptionDetailResponse>;
-  /** {@link DescribeTopicDetail 查询主题详情}({@link DescribeTopicDetailRequest 请求参数}): {@link DescribeTopicDetailResponse 返回参数} */
+  /** 查询主题详情 {@link DescribeTopicDetailRequest} {@link DescribeTopicDetailResponse} */
   DescribeTopicDetail(data?: DescribeTopicDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicDetailResponse>;
-  /** {@link ModifyQueueAttribute 修改队列属性}({@link ModifyQueueAttributeRequest 请求参数}): {@link ModifyQueueAttributeResponse 返回参数} */
+  /** 修改队列属性 {@link ModifyQueueAttributeRequest} {@link ModifyQueueAttributeResponse} */
   ModifyQueueAttribute(data: ModifyQueueAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQueueAttributeResponse>;
-  /** {@link ModifySubscriptionAttribute 修改订阅属性}({@link ModifySubscriptionAttributeRequest 请求参数}): {@link ModifySubscriptionAttributeResponse 返回参数} */
+  /** 修改订阅属性 {@link ModifySubscriptionAttributeRequest} {@link ModifySubscriptionAttributeResponse} */
   ModifySubscriptionAttribute(data: ModifySubscriptionAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubscriptionAttributeResponse>;
-  /** {@link ModifyTopicAttribute 修改主题属性}({@link ModifyTopicAttributeRequest 请求参数}): {@link ModifyTopicAttributeResponse 返回参数} */
+  /** 修改主题属性 {@link ModifyTopicAttributeRequest} {@link ModifyTopicAttributeResponse} */
   ModifyTopicAttribute(data: ModifyTopicAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicAttributeResponse>;
-  /** {@link RewindQueue 回溯队列}({@link RewindQueueRequest 请求参数}): {@link RewindQueueResponse 返回参数} */
+  /** 回溯队列 {@link RewindQueueRequest} {@link RewindQueueResponse} */
   RewindQueue(data: RewindQueueRequest, config?: AxiosRequestConfig): AxiosPromise<RewindQueueResponse>;
-  /** {@link UnbindDeadLetter 解绑死信队列}({@link UnbindDeadLetterRequest 请求参数}): {@link UnbindDeadLetterResponse 返回参数} */
+  /** 解绑死信队列 {@link UnbindDeadLetterRequest} {@link UnbindDeadLetterResponse} */
   UnbindDeadLetter(data: UnbindDeadLetterRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDeadLetterResponse>;
 }
 

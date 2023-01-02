@@ -808,7 +808,7 @@ declare interface DescribeAccountBalanceResponse {
   CreditBalance: number;
   /** 真实可用信用额度 */
   RealCreditBalance: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -846,7 +846,7 @@ declare interface DescribeBillDetailResponse {
   DetailSet: BillDetail[];
   /** 总记录数 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -892,7 +892,7 @@ declare interface DescribeBillListResponse {
   AgentOutAmount: number;
   /** 还垫付总额，单位（分） */
   AdvancePayAmount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -922,7 +922,7 @@ declare interface DescribeBillResourceSummaryResponse {
   ResourceSummarySet: BillResourceSummary[];
   /** 资源汇总列表总数 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -940,7 +940,7 @@ declare interface DescribeBillSummaryByPayModeResponse {
   Ready: number;
   /** 各付费模式花费分布详情 */
   SummaryOverview: PayModeSummaryOverviewItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -962,7 +962,7 @@ declare interface DescribeBillSummaryByProductResponse {
   SummaryTotal: BusinessSummaryTotal | null;
   /** 各产品花费分布 */
   SummaryOverview: BusinessSummaryOverviewItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -980,7 +980,7 @@ declare interface DescribeBillSummaryByProjectResponse {
   Ready: number;
   /** 各项目花费分布详情 */
   SummaryOverview: ProjectSummaryOverviewItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -998,7 +998,7 @@ declare interface DescribeBillSummaryByRegionResponse {
   Ready: number;
   /** 各地域花费分布详情 */
   SummaryOverview: RegionSummaryOverviewItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1022,7 +1022,7 @@ declare interface DescribeBillSummaryByTagResponse {
   SummaryOverview: TagSummaryOverviewItem[] | null;
   /** 总数 */
   SummaryTotal: SummaryTotal | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1052,7 +1052,7 @@ declare interface DescribeCostDetailResponse {
   DetailSet?: CostDetail[] | null;
   /** 记录数 */
   Total?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1080,7 +1080,7 @@ declare interface DescribeCostSummaryByProductResponse {
   Data?: ConsumptionBusinessSummaryDataItem[] | null;
   /** 记录数量，NeedRecordNum为0是返回null */
   RecordNum?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1108,7 +1108,7 @@ declare interface DescribeCostSummaryByProjectResponse {
   Data?: ConsumptionProjectSummaryDataItem[];
   /** 记录数量，NeedRecordNum为0是返回null */
   RecordNum?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1136,7 +1136,7 @@ declare interface DescribeCostSummaryByRegionResponse {
   Data?: ConsumptionRegionSummaryDataItem[];
   /** 记录数量，NeedRecordNum为0是返回null */
   RecordNum?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1170,7 +1170,7 @@ declare interface DescribeCostSummaryByResourceResponse {
   RecordNum?: number | null;
   /** 资源消耗详情 */
   Data?: ConsumptionResourceSummaryDataItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1198,7 +1198,7 @@ declare interface DescribeDealsByCondResponse {
   Deals: Deal[];
   /** 订单总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1214,7 +1214,7 @@ declare interface DescribeDosageCosDetailByDateRequest {
 declare interface DescribeDosageCosDetailByDateResponse {
   /** 用量数组 */
   DetailSets: CosDetailSets[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1240,7 +1240,7 @@ declare interface DescribeDosageDetailByDateResponse {
   RetCode: number | null;
   /** 错误信息 */
   RetMsg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1284,7 +1284,7 @@ declare interface DescribeVoucherInfoResponse {
   TotalBalance: number;
   /** 代金券相关信息 */
   VoucherInfos: VoucherInfos[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1306,7 +1306,7 @@ declare interface DescribeVoucherUsageDetailsResponse {
   TotalUsedAmount: number;
   /** 代金券使用记录细节 */
   UsageRecords: UsageRecords[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1328,52 +1328,52 @@ declare interface PayDealsResponse {
   ResourceIds?: string[];
   /** 此次操作支付成功的大订单号数组 */
   BigDealIds?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Billing 费用中心} */
 declare interface Billing {
   (): Versions;
-  /** {@link DescribeAccountBalance 获取账户余额}({@link DescribeAccountBalanceRequest 请求参数}): {@link DescribeAccountBalanceResponse 返回参数} */
+  /** 获取账户余额 {@link DescribeAccountBalanceRequest} {@link DescribeAccountBalanceResponse} */
   DescribeAccountBalance(data?: DescribeAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountBalanceResponse>;
-  /** {@link DescribeBillDetail 查询账单明细数据}({@link DescribeBillDetailRequest 请求参数}): {@link DescribeBillDetailResponse 返回参数} */
+  /** 查询账单明细数据 {@link DescribeBillDetailRequest} {@link DescribeBillDetailResponse} */
   DescribeBillDetail(data: DescribeBillDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillDetailResponse>;
-  /** {@link DescribeBillList 获取收支明细列表}({@link DescribeBillListRequest 请求参数}): {@link DescribeBillListResponse 返回参数} */
+  /** 获取收支明细列表 {@link DescribeBillListRequest} {@link DescribeBillListResponse} */
   DescribeBillList(data: DescribeBillListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillListResponse>;
-  /** {@link DescribeBillResourceSummary 查询账单资源汇总数据}({@link DescribeBillResourceSummaryRequest 请求参数}): {@link DescribeBillResourceSummaryResponse 返回参数} */
+  /** 查询账单资源汇总数据 {@link DescribeBillResourceSummaryRequest} {@link DescribeBillResourceSummaryResponse} */
   DescribeBillResourceSummary(data: DescribeBillResourceSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillResourceSummaryResponse>;
-  /** {@link DescribeBillSummaryByPayMode 获取按付费模式汇总费用分布}({@link DescribeBillSummaryByPayModeRequest 请求参数}): {@link DescribeBillSummaryByPayModeResponse 返回参数} */
+  /** 获取按付费模式汇总费用分布 {@link DescribeBillSummaryByPayModeRequest} {@link DescribeBillSummaryByPayModeResponse} */
   DescribeBillSummaryByPayMode(data: DescribeBillSummaryByPayModeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillSummaryByPayModeResponse>;
-  /** {@link DescribeBillSummaryByProduct 获取产品汇总费用分布}({@link DescribeBillSummaryByProductRequest 请求参数}): {@link DescribeBillSummaryByProductResponse 返回参数} */
+  /** 获取产品汇总费用分布 {@link DescribeBillSummaryByProductRequest} {@link DescribeBillSummaryByProductResponse} */
   DescribeBillSummaryByProduct(data: DescribeBillSummaryByProductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillSummaryByProductResponse>;
-  /** {@link DescribeBillSummaryByProject 获取按项目汇总费用分布}({@link DescribeBillSummaryByProjectRequest 请求参数}): {@link DescribeBillSummaryByProjectResponse 返回参数} */
+  /** 获取按项目汇总费用分布 {@link DescribeBillSummaryByProjectRequest} {@link DescribeBillSummaryByProjectResponse} */
   DescribeBillSummaryByProject(data: DescribeBillSummaryByProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillSummaryByProjectResponse>;
-  /** {@link DescribeBillSummaryByRegion 获取按地域汇总费用分布}({@link DescribeBillSummaryByRegionRequest 请求参数}): {@link DescribeBillSummaryByRegionResponse 返回参数} */
+  /** 获取按地域汇总费用分布 {@link DescribeBillSummaryByRegionRequest} {@link DescribeBillSummaryByRegionResponse} */
   DescribeBillSummaryByRegion(data: DescribeBillSummaryByRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillSummaryByRegionResponse>;
-  /** {@link DescribeBillSummaryByTag 获取按标签汇总费用分布}({@link DescribeBillSummaryByTagRequest 请求参数}): {@link DescribeBillSummaryByTagResponse 返回参数} */
+  /** 获取按标签汇总费用分布 {@link DescribeBillSummaryByTagRequest} {@link DescribeBillSummaryByTagResponse} */
   DescribeBillSummaryByTag(data: DescribeBillSummaryByTagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillSummaryByTagResponse>;
-  /** {@link DescribeCostDetail 查询消耗明细}({@link DescribeCostDetailRequest 请求参数}): {@link DescribeCostDetailResponse 返回参数} */
+  /** 查询消耗明细 {@link DescribeCostDetailRequest} {@link DescribeCostDetailResponse} */
   DescribeCostDetail(data: DescribeCostDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCostDetailResponse>;
-  /** {@link DescribeCostSummaryByProduct 获取按产品汇总消耗详情}({@link DescribeCostSummaryByProductRequest 请求参数}): {@link DescribeCostSummaryByProductResponse 返回参数} */
+  /** 获取按产品汇总消耗详情 {@link DescribeCostSummaryByProductRequest} {@link DescribeCostSummaryByProductResponse} */
   DescribeCostSummaryByProduct(data: DescribeCostSummaryByProductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCostSummaryByProductResponse>;
-  /** {@link DescribeCostSummaryByProject 获取按项目汇总消耗详情}({@link DescribeCostSummaryByProjectRequest 请求参数}): {@link DescribeCostSummaryByProjectResponse 返回参数} */
+  /** 获取按项目汇总消耗详情 {@link DescribeCostSummaryByProjectRequest} {@link DescribeCostSummaryByProjectResponse} */
   DescribeCostSummaryByProject(data: DescribeCostSummaryByProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCostSummaryByProjectResponse>;
-  /** {@link DescribeCostSummaryByRegion 获取按地域汇总消耗详情}({@link DescribeCostSummaryByRegionRequest 请求参数}): {@link DescribeCostSummaryByRegionResponse 返回参数} */
+  /** 获取按地域汇总消耗详情 {@link DescribeCostSummaryByRegionRequest} {@link DescribeCostSummaryByRegionResponse} */
   DescribeCostSummaryByRegion(data: DescribeCostSummaryByRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCostSummaryByRegionResponse>;
-  /** {@link DescribeCostSummaryByResource 获取按资源汇总消耗详情}({@link DescribeCostSummaryByResourceRequest 请求参数}): {@link DescribeCostSummaryByResourceResponse 返回参数} */
+  /** 获取按资源汇总消耗详情 {@link DescribeCostSummaryByResourceRequest} {@link DescribeCostSummaryByResourceResponse} */
   DescribeCostSummaryByResource(data: DescribeCostSummaryByResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCostSummaryByResourceResponse>;
-  /** {@link DescribeDealsByCond 查询订单数据}({@link DescribeDealsByCondRequest 请求参数}): {@link DescribeDealsByCondResponse 返回参数} */
+  /** 查询订单数据 {@link DescribeDealsByCondRequest} {@link DescribeDealsByCondResponse} */
   DescribeDealsByCond(data: DescribeDealsByCondRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDealsByCondResponse>;
-  /** {@link DescribeDosageCosDetailByDate 获取COS产品用量明细}({@link DescribeDosageCosDetailByDateRequest 请求参数}): {@link DescribeDosageCosDetailByDateResponse 返回参数} */
+  /** 获取COS产品用量明细 {@link DescribeDosageCosDetailByDateRequest} {@link DescribeDosageCosDetailByDateResponse} */
   DescribeDosageCosDetailByDate(data: DescribeDosageCosDetailByDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDosageCosDetailByDateResponse>;
-  /** {@link DescribeDosageDetailByDate 按日期获取产品用量明细}({@link DescribeDosageDetailByDateRequest 请求参数}): {@link DescribeDosageDetailByDateResponse 返回参数} */
+  /** 按日期获取产品用量明细 {@link DescribeDosageDetailByDateRequest} {@link DescribeDosageDetailByDateResponse} */
   DescribeDosageDetailByDate(data: DescribeDosageDetailByDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDosageDetailByDateResponse>;
-  /** {@link DescribeVoucherInfo 获取代金券相关信息}({@link DescribeVoucherInfoRequest 请求参数}): {@link DescribeVoucherInfoResponse 返回参数} */
+  /** 获取代金券相关信息 {@link DescribeVoucherInfoRequest} {@link DescribeVoucherInfoResponse} */
   DescribeVoucherInfo(data: DescribeVoucherInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVoucherInfoResponse>;
-  /** {@link DescribeVoucherUsageDetails 获取代金券使用记录}({@link DescribeVoucherUsageDetailsRequest 请求参数}): {@link DescribeVoucherUsageDetailsResponse 返回参数} */
+  /** 获取代金券使用记录 {@link DescribeVoucherUsageDetailsRequest} {@link DescribeVoucherUsageDetailsResponse} */
   DescribeVoucherUsageDetails(data: DescribeVoucherUsageDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVoucherUsageDetailsResponse>;
-  /** {@link PayDeals 支付订单}({@link PayDealsRequest 请求参数}): {@link PayDealsResponse 返回参数} */
+  /** 支付订单 {@link PayDealsRequest} {@link PayDealsResponse} */
   PayDeals(data?: PayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<PayDealsResponse>;
 }
 

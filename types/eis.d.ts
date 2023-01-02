@@ -144,7 +144,7 @@ declare interface GetRuntimeMCRequest {
 declare interface GetRuntimeMCResponse {
   /** 运行时详情 */
   Runtime: RuntimeMC;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -170,7 +170,7 @@ declare interface GetRuntimeResourceMonitorMetricMCResponse {
   MetricType: string;
   /** metric数值列表 */
   Values: MetricValueMC[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -180,7 +180,7 @@ declare interface ListDeployableRuntimesMCRequest {
 declare interface ListDeployableRuntimesMCResponse {
   /** 运行时列表 */
   Runtimes: AbstractRuntimeMC[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -210,7 +210,7 @@ declare interface ListRuntimeDeployedInstancesMCResponse {
   Instances: RuntimeDeployedInstanceMC[];
   /** 满足条件的记录总数，用于分页器 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -222,7 +222,7 @@ declare interface ListRuntimesMCRequest {
 declare interface ListRuntimesMCResponse {
   /** 运行时列表 */
   Runtimes: RuntimeMC[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -265,7 +265,7 @@ declare namespace V20200715 {
   interface DescribeEisConnectorConfigResponse {
     /** 连接器配置参数描述（json结构），示例如下：{ "attributes":{ "description":"测试", // 连接器的描述 "displayName":"测试", // 连接器的展示名 "name":"test", // 连接器的名称 "version":"1.0.0" // 连接器的版本号 }, "properties":[ { "attributes":{ "displayName":"企业ID", // 参数的展示名 "name":"para1", // 参数名 "required":"true", // 是否必填 "type":"int" // 参数的类型 } }, { "attributes":{ "displayName":"成员管理密钥", "name":"para2", "required":"true", "type":"float" } }, { "attributes":{ "displayName":"应用管理密钥", "name":"para3", "required":"true", "type":"string" } }, { "attributes":{ "displayName":"企业ID", "name":"para4", "required":"true", "type":"decimal" } }, { "attributes":{ "displayName":"成员管理密钥", "name":"para5", "required":"true", "type":"bool" } }, { "attributes":{ "displayName":"应用管理密钥", "name":"para6", "required":"true", "type":"date" } }, { "attributes":{ "displayName":"企业ID", "name":"para7", "required":"true", "type":"time" } }, { "attributes":{ "displayName":"成员管理密钥", "name":"para8", "required":"true", "type":"datetime" } }, { "attributes":{ "displayName":"应用管理密钥", "name":"para9", "required":"true", "type":"map" }, "children":[ { "attributes":{ "displayName":"key", "name":"key", "required":"true", "type":"string" } }, { "attributes":{ "displayName":"value", "name":"value", "required":"true", "type":"any" } } ] }, { "attributes":{ "displayName":"企业ID", "name":"para10", "required":"true", "type":"list" // list，list里元素的类型是结构体，children里是结构体的描述 }, "children":[ { "attributes":{ "displayName":"field1", "name":"field1", "required":"true", "type":"string" } }, { "attributes":{ "displayName":"field2", "name":"field2", "required":"true", "type":"any" } } ] }, { "attributes":{ "displayName":"成员管理密钥", "name":"para11", "required":"true", "type":"struct" }, "children":[ { "attributes":{ "displayName":"field1", // 结构体属性的展示名 "name":"field1", // 结构体属性的名称 "required":"true", // 是否必填 "type":"string" // 属性的类型 } }, { "attributes":{ "displayName":"field2", "name":"field2", "required":"true", "type":"any" } } ] }, { "attributes":{ "displayName":"应用管理密钥", "name":"para12", "required":"true", "type":"enum" }, "children":[ { "attributes":{ "displayName":"PC", // 枚举值的展示名 "name":"PC" // 枚举值的名称 } }, { "attributes":{ "displayName":"MAC", "name":"MAC" } } ] } ]} */
     ConnectorParameter: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -279,7 +279,7 @@ declare namespace V20200715 {
   interface ListEisConnectorOperationsResponse {
     /** 连接器列表 */
     Operations: EisConnectionOperation[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -297,7 +297,7 @@ declare namespace V20200715 {
     TotalCount: number;
     /** 连接器列表 */
     Connectors: EisConnectorSummary[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -305,21 +305,21 @@ declare namespace V20200715 {
 /** {@link Eis 数据连接器} */
 declare interface Eis {
   (): Versions;
-  /** {@link GetRuntimeMC 获取运行时详情}({@link GetRuntimeMCRequest 请求参数}): {@link GetRuntimeMCResponse 返回参数} */
+  /** 获取运行时详情 {@link GetRuntimeMCRequest} {@link GetRuntimeMCResponse} */
   GetRuntimeMC(data: GetRuntimeMCRequest, config?: AxiosRequestConfig): AxiosPromise<GetRuntimeMCResponse>;
-  /** {@link GetRuntimeResourceMonitorMetricMC 获取运行时资源监控详情}({@link GetRuntimeResourceMonitorMetricMCRequest 请求参数}): {@link GetRuntimeResourceMonitorMetricMCResponse 返回参数} */
+  /** 获取运行时资源监控详情 {@link GetRuntimeResourceMonitorMetricMCRequest} {@link GetRuntimeResourceMonitorMetricMCResponse} */
   GetRuntimeResourceMonitorMetricMC(data: GetRuntimeResourceMonitorMetricMCRequest, config?: AxiosRequestConfig): AxiosPromise<GetRuntimeResourceMonitorMetricMCResponse>;
-  /** {@link ListDeployableRuntimesMC 获取可部署运行时列表}({@link ListDeployableRuntimesMCRequest 请求参数}): {@link ListDeployableRuntimesMCResponse 返回参数} */
+  /** 获取可部署运行时列表 {@link ListDeployableRuntimesMCRequest} {@link ListDeployableRuntimesMCResponse} */
   ListDeployableRuntimesMC(data?: ListDeployableRuntimesMCRequest, config?: AxiosRequestConfig): AxiosPromise<ListDeployableRuntimesMCResponse>;
-  /** {@link ListRuntimeDeployedInstancesMC 获取运行时部署的应用实例列表}({@link ListRuntimeDeployedInstancesMCRequest 请求参数}): {@link ListRuntimeDeployedInstancesMCResponse 返回参数} */
+  /** 获取运行时部署的应用实例列表 {@link ListRuntimeDeployedInstancesMCRequest} {@link ListRuntimeDeployedInstancesMCResponse} */
   ListRuntimeDeployedInstancesMC(data: ListRuntimeDeployedInstancesMCRequest, config?: AxiosRequestConfig): AxiosPromise<ListRuntimeDeployedInstancesMCResponse>;
-  /** {@link ListRuntimesMC 获取运行时列表}({@link ListRuntimesMCRequest 请求参数}): {@link ListRuntimesMCResponse 返回参数} */
+  /** 获取运行时列表 {@link ListRuntimesMCRequest} {@link ListRuntimesMCResponse} */
   ListRuntimesMC(data?: ListRuntimesMCRequest, config?: AxiosRequestConfig): AxiosPromise<ListRuntimesMCResponse>;
-  /** {@link V20200715.DescribeEisConnectorConfig 获取连接器配置参数}({@link V20200715.DescribeEisConnectorConfigRequest 请求参数}): {@link V20200715.DescribeEisConnectorConfigResponse 返回参数} */
+  /** 获取连接器配置参数 {@link V20200715.DescribeEisConnectorConfigRequest} {@link V20200715.DescribeEisConnectorConfigResponse} */
   DescribeEisConnectorConfig(data: V20200715.DescribeEisConnectorConfigRequest, config: AxiosRequestConfig & V20200715.VersionHeader): AxiosPromise<V20200715.DescribeEisConnectorConfigResponse>;
-  /** {@link V20200715.ListEisConnectorOperations 获取连接器操作列表}({@link V20200715.ListEisConnectorOperationsRequest 请求参数}): {@link V20200715.ListEisConnectorOperationsResponse 返回参数} */
+  /** 获取连接器操作列表 {@link V20200715.ListEisConnectorOperationsRequest} {@link V20200715.ListEisConnectorOperationsResponse} */
   ListEisConnectorOperations(data: V20200715.ListEisConnectorOperationsRequest, config: AxiosRequestConfig & V20200715.VersionHeader): AxiosPromise<V20200715.ListEisConnectorOperationsResponse>;
-  /** {@link V20200715.ListEisConnectors 获取连接器列表}({@link V20200715.ListEisConnectorsRequest 请求参数}): {@link V20200715.ListEisConnectorsResponse 返回参数} */
+  /** 获取连接器列表 {@link V20200715.ListEisConnectorsRequest} {@link V20200715.ListEisConnectorsResponse} */
   ListEisConnectors(data: V20200715.ListEisConnectorsRequest, config: AxiosRequestConfig & V20200715.VersionHeader): AxiosPromise<V20200715.ListEisConnectorsResponse>;
 }
 

@@ -4040,7 +4040,7 @@ declare interface AddContractResponse {
   ErrCode: string;
   /** 添加合同响应对象 */
   Result: AddContractResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4068,7 +4068,7 @@ declare interface AddFlexFundingAccountResponse {
   ErrMessage: string;
   /** 无 */
   Result: PayeeFundingAccountResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4092,7 +4092,7 @@ declare interface AddFlexIdInfoResponse {
   ErrMessage: string;
   /** 无 */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4112,7 +4112,7 @@ declare interface AddFlexPhoneNoResponse {
   ErrMessage: string;
   /** 无 */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4242,7 +4242,7 @@ declare interface AddMerchantResponse {
   ErrCode: string;
   /** 添加商户响应对象 */
   Result: AddMerchantResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4298,7 +4298,7 @@ declare interface AddShopResponse {
   ErrCode: string;
   /** 添加申请响应对象 */
   Result: AddShopResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4328,7 +4328,7 @@ declare interface ApplyApplicationMaterialRequest {
 declare interface ApplyApplicationMaterialResponse {
   /** 提交申报材料结果 */
   Result: ApplyDeclareResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4358,7 +4358,7 @@ declare interface ApplyFlexPaymentResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: ApplyFlexPaymentResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4384,7 +4384,7 @@ declare interface ApplyFlexSettlementResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: ApplyFlexSettlementResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4412,7 +4412,7 @@ declare interface ApplyOpenBankOrderDetailReceiptResponse {
   ErrMessage: string | null;
   /** 返回结果。 */
   Result: ApplyOpenBankOrderDetailReceiptResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4446,7 +4446,7 @@ declare interface ApplyOpenBankSettleOrderResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: ApplyOpenBankSettleOrderResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4470,7 +4470,7 @@ declare interface ApplyOpenBankSubMerchantSignOnlineResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: ApplyOpenBankSubMerchantSignOnlineResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4520,7 +4520,7 @@ declare interface ApplyOutwardOrderRequest {
 declare interface ApplyOutwardOrderResponse {
   /** 汇出指令申请 */
   Result: ApplyOutwardOrderResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4550,7 +4550,7 @@ declare interface ApplyPayerInfoRequest {
 declare interface ApplyPayerInfoResponse {
   /** 付款人申请结果 */
   Result: ApplyPayerinfoResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4572,7 +4572,7 @@ declare interface ApplyReWithdrawalRequest {
 declare interface ApplyReWithdrawalResponse {
   /** 重新提现业务订单号 */
   WithdrawOrderId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4594,7 +4594,7 @@ declare interface ApplyReconciliationFileResponse {
   ErrMessage: string;
   /** 返回结果。 */
   Result: ApplyReconciliationFileResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4634,7 +4634,7 @@ declare interface ApplyTradeRequest {
 declare interface ApplyTradeResponse {
   /** 提交贸易材料结果 */
   Result: ApplyTradeResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4674,7 +4674,7 @@ declare interface ApplyWithdrawalRequest {
 }
 
 declare interface ApplyWithdrawalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4696,7 +4696,7 @@ declare interface BindAccountResponse {
   ErrMessage: string;
   /** 该字段为null。 */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4738,7 +4738,7 @@ declare interface BindAcctRequest {
 }
 
 declare interface BindAcctResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4768,7 +4768,7 @@ declare interface BindOpenBankExternalSubMerchantBankAccountResponse {
   ErrMessage: string;
   /** 返回结果。 */
   Result: BindOpenBankExternalSubMerchantBankAccountResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4798,7 +4798,7 @@ declare interface BindOpenBankProfitSharePayeeResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: BindOpenBankProfitSharePayeeResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4828,7 +4828,7 @@ declare interface BindRelateAccReUnionPayResponse {
   TxnReturnMsg?: string;
   /** String(22)，交易流水号 */
   CnsmrSeqNo?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4870,7 +4870,7 @@ declare interface BindRelateAcctSmallAmountResponse {
   CnsmrSeqNo?: string;
   /** STRING(1027)，保留域（来账鉴权的方式下，此字段的值为客户需往监管账户转入的金额。在同名子账户绑定的场景下，若返回""VERIFIED""则说明无需验证直接绑定成功） */
   ReservedMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4912,7 +4912,7 @@ declare interface BindRelateAcctUnionPayResponse {
   TxnReturnMsg?: string;
   /** String(22)，交易流水号 */
   CnsmrSeqNo?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4946,7 +4946,7 @@ declare interface CheckAcctRequest {
 declare interface CheckAcctResponse {
   /** 前置流水号，请保存 */
   FrontSeqNo: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4978,7 +4978,7 @@ declare interface CheckAmountResponse {
   FrontSeqNo?: string;
   /** STRING(1027)，保留域 */
   ReservedMsg?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4994,7 +4994,7 @@ declare interface CloseCloudOrderRequest {
 }
 
 declare interface CloseCloudOrderResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5016,7 +5016,7 @@ declare interface CloseOpenBankPaymentOrderResponse {
   ErrMessage: string;
   /** 关单响应对象 */
   Result: CloseOpenBankPaymentOrderResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5038,7 +5038,7 @@ declare interface CloseOrderRequest {
 }
 
 declare interface CloseOrderResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5058,7 +5058,7 @@ declare interface ConfirmOrderResponse {
   Status: string;
   /** 订单确认状态描述 */
   Description: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5140,7 +5140,7 @@ declare interface ContractOrderResponse {
   TransactionId: string;
   /** 外部签约协议号 */
   OutContractCode: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5194,7 +5194,7 @@ declare interface CreateAcctResponse {
   SubAppId: string;
   /** 银行生成的子商户账户 */
   SubAcctNo: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5218,7 +5218,7 @@ declare interface CreateAgentTaxPaymentInfosRequest {
 declare interface CreateAgentTaxPaymentInfosResponse {
   /** 代理商完税证明批次信息 */
   AgentTaxPaymentBatch: AgentTaxPaymentBatch;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5244,7 +5244,7 @@ declare interface CreateAnchorRequest {
 declare interface CreateAnchorResponse {
   /** 主播ID */
   AnchorId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5266,7 +5266,7 @@ declare interface CreateBatchPaymentResponse {
   ErrMessage: string;
   /** 返回响应 */
   Result: CreateBatchPaymentData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5298,7 +5298,7 @@ declare interface CreateCloudSubMerchantResponse {
   Level: number | null;
   /** 渠道应用ID */
   ChannelAppId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5346,7 +5346,7 @@ declare interface CreateCustAcctIdResponse {
   TxnReturnMsg?: string;
   /** String(22)，交易流水号 */
   CnsmrSeqNo?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5372,7 +5372,7 @@ declare interface CreateExternalAnchorResponse {
   ErrMessage: string;
   /** 返回响应 */
   Result: CreateExternalAnchorData | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5406,7 +5406,7 @@ declare interface CreateFlexPayeeResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: CreateFlexPayeeResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5488,7 +5488,7 @@ declare interface CreateInvoiceRequest {
 declare interface CreateInvoiceResponse {
   /** 发票开具结果 */
   Result: CreateInvoiceResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5574,7 +5574,7 @@ declare interface CreateInvoiceV2Response {
   ErrCode: string;
   /** 错误消息 */
   ErrMessage: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5626,7 +5626,7 @@ declare interface CreateMerchantRequest {
 declare interface CreateMerchantResponse {
   /** 商户注册结果 */
   Result: CreateMerchantResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5674,7 +5674,7 @@ declare interface CreateOpenBankAggregatedSubMerchantRegistrationResponse {
   ErrMessage: string | null;
   /** 返回结果。 */
   Result: CreateOpenBankExternalAggregatedSubMerchantRegistrationResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5700,7 +5700,7 @@ declare interface CreateOpenBankExternalSubMerchantAccountBookResponse {
   ErrMessage: string;
   /** 返回结果。 */
   Result: CreateExternalAccountBookResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5740,7 +5740,7 @@ declare interface CreateOpenBankExternalSubMerchantRegistrationResponse {
   ErrMessage: string;
   /** 返回结果。 */
   Result: CreateOpenBankExternalSubMerchantRegistrationResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5786,7 +5786,7 @@ declare interface CreateOpenBankGlobalPaymentOrderResponse {
   ErrMessage: string | null;
   /** 统一下单响应对象。 */
   Result: CreateOpenBankUnifiedOrderPaymentResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5814,7 +5814,7 @@ declare interface CreateOpenBankMerchantResponse {
   ErrMessage: string;
   /** 返回结果。 */
   Result: CreateOpenBankMerchantResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5872,7 +5872,7 @@ declare interface CreateOpenBankPaymentOrderResponse {
   ErrMessage: string | null;
   /** 统一下单响应对象。 */
   Result: CreateOpenBankOrderPaymentResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5910,7 +5910,7 @@ declare interface CreateOpenBankRechargeOrderResponse {
   ErrMessage: string | null;
   /** 充值响应对象 */
   Result: CreateOpenBankOrderRechargeResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5954,7 +5954,7 @@ declare interface CreateOpenBankSubMerchantRateConfigureResponse {
   ErrMessage: string | null;
   /** 返回结果。 */
   Result: CreateOpenBankSubMerchantRateConfigureResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6010,7 +6010,7 @@ declare interface CreateOpenBankUnifiedOrderResponse {
   ErrMessage: string | null;
   /** 统一下单响应对象。 */
   Result: CreateOpenBankOrderPaymentResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6042,7 +6042,7 @@ declare interface CreateOpenBankVerificationOrderResponse {
   ErrMessage: string | null;
   /** 核销申请响应对象。 */
   Result: CreateOpenBankVerificationResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6070,7 +6070,7 @@ declare interface CreateOrderResponse {
   OrderNo: string;
   /** 支付页面跳转地址，若下单成功则返回。 */
   PayUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6090,7 +6090,7 @@ declare interface CreatePayMerchantRequest {
 declare interface CreatePayMerchantResponse {
   /** 分配给商户的 AppId。该 AppId 为后续各项 交易的商户标识。 */
   MerchantAppId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6124,7 +6124,7 @@ declare interface CreatePayRollPreOrderResponse {
   SubMerchantId: string;
   /** Token值 */
   Token: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6164,7 +6164,7 @@ declare interface CreatePayRollPreOrderWithAuthResponse {
   SubMerchantId: string;
   /** Token值 */
   Token: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6196,7 +6196,7 @@ declare interface CreatePayRollTokenResponse {
   SubMerchantId: string;
   /** Token值 */
   Token: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6214,7 +6214,7 @@ declare interface CreateRedInvoiceRequest {
 declare interface CreateRedInvoiceResponse {
   /** 红冲结果 */
   Result: CreateRedInvoiceResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6236,7 +6236,7 @@ declare interface CreateRedInvoiceV2Response {
   ErrCode: string;
   /** 错误消息 */
   ErrMessage: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6268,7 +6268,7 @@ declare interface CreateSinglePaymentResponse {
   ErrMessage: string;
   /** 返回数据 */
   Result: CreateSinglePaymentData | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6300,7 +6300,7 @@ declare interface CreateTransferBatchResponse {
   BatchId?: string;
   /** 批次受理成功时返回，遵循rfc3339标准格式。格式为YYYY-MM-DDTHH:mm:ss.sss+TIMEZONE，YYYY-MM-DD表示年月日，T出现在字符串中，表示time元素的开头，HH:mm:ss.sss表示时分秒毫秒，TIMEZONE表示时区（+08:00表示东八区时间，领先UTC 8小时，即北京时间）。例如：2015-05-20T13:29:35.120+08:00表示北京时间2015年05月20日13点29分35秒。示例值：2015-05-20T13:29:35.120+08:00 */
   CreateTime?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6320,7 +6320,7 @@ declare interface DeduceQuotaResponse {
   ErrMsg: string;
   /** 返回响应 */
   Result: AssignmentData | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6332,7 +6332,7 @@ declare interface DeleteAgentTaxPaymentInfoRequest {
 }
 
 declare interface DeleteAgentTaxPaymentInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6342,7 +6342,7 @@ declare interface DeleteAgentTaxPaymentInfosRequest {
 }
 
 declare interface DeleteAgentTaxPaymentInfosResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6404,7 +6404,7 @@ declare interface DescribeChargeDetailResponse {
   FailMessage?: string;
   /** 请求类型 */
   RequestType?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6462,7 +6462,7 @@ declare interface DescribeOrderStatusResponse {
   FailMessage?: string;
   /** 请求类型 */
   RequestType?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6482,7 +6482,7 @@ declare interface DistributeAccreditQueryResponse {
   ErrCode: string;
   /** 查询授权申请结果响应对象 */
   Result: DistributeAccreditQueryResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6508,7 +6508,7 @@ declare interface DistributeAccreditTlinxResponse {
   ErrCode: string;
   /** 授权申请响应对象 */
   Result: DistributeAccreditResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6532,7 +6532,7 @@ declare interface DistributeAddReceiverResponse {
   ErrCode: string;
   /** 添加分账接收方响应对象 */
   Result: DistributeReceiverResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6562,7 +6562,7 @@ declare interface DistributeApplyResponse {
   ErrCode: string;
   /** 分账申请响应对象 */
   Result: DistributeMultiApplyResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6588,7 +6588,7 @@ declare interface DistributeCancelResponse {
   ErrCode: string;
   /** 分账撤销响应对象 */
   Result: DistributeCancelResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6608,7 +6608,7 @@ declare interface DistributeQueryReceiverResponse {
   ErrCode: string;
   /** 查询询已添加分账接收方响应对象 */
   Result: DistributeReceiverResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6636,7 +6636,7 @@ declare interface DistributeQueryResponse {
   ErrCode: string;
   /** 分账结果响应对象 */
   Result: DistributeQueryResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6660,7 +6660,7 @@ declare interface DistributeRemoveReceiverResponse {
   ErrCode: string;
   /** 解除分账接收方响应对象 */
   Result: DistributeReceiverResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6686,7 +6686,7 @@ declare interface DownloadBillResponse {
   DownloadUrl: string;
   /** 账单类型TRADE，对账单FUND，资金账单 */
   StateType: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6710,7 +6710,7 @@ declare interface DownloadOrgFileResponse {
   ErrCode: string;
   /** 下载机构文件响应对象 */
   Result: DownloadFileResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6732,7 +6732,7 @@ declare interface DownloadReconciliationUrlResponse {
   HashType: string | null;
   /** hash值 */
   HashValue: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6794,7 +6794,7 @@ declare interface ExecuteMemberTransactionResponse {
   FrontSequenceNumber?: string;
   /** 保留域 */
   ReservedMessage?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6822,7 +6822,7 @@ declare interface FreezeFlexBalanceResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: FreezeFlexBalanceResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6842,7 +6842,7 @@ declare interface GetBillDownloadUrlResponse {
   ErrMessage: string | null;
   /** 账单文件下载地址响应对象 */
   Result: BillDownloadUrlResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6862,7 +6862,7 @@ declare interface GetDistributeBillDownloadUrlResponse {
   ErrMessage: string | null;
   /** 账单文件下载地址响应对象 */
   Result: BillDownloadUrlResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6894,7 +6894,7 @@ declare interface GetPayRollAuthListResponse {
   Offset: number;
   /** 本次返回条数 */
   Limit: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6922,7 +6922,7 @@ declare interface GetPayRollAuthResponse {
   OpenId: string;
   /** 微信服务商下特约商户的商户号，由微信支付生成并下发 */
   SubMerchantId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6936,7 +6936,7 @@ declare interface GetPayRollAuthResultRequest {
 declare interface GetPayRollAuthResultResponse {
   /** 核身结果 */
   Result: PayRollAuthResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6964,7 +6964,7 @@ declare interface MigrateOrderRefundQueryResponse {
   TradeStatus?: number;
   /** 第三方支付机构支付交易号 */
   ThirdChannelOrderId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6996,7 +6996,7 @@ declare interface MigrateOrderRefundResponse {
   TradeSerialNo?: string;
   /** 交易备注 */
   TradeMsg?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7014,7 +7014,7 @@ declare interface ModifyAgentTaxPaymentInfoRequest {
 declare interface ModifyAgentTaxPaymentInfoResponse {
   /** 代理商完税证明批次信息 */
   AgentTaxPaymentBatch: AgentTaxPaymentBatch;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7036,7 +7036,7 @@ declare interface ModifyBindedAccountResponse {
   ErrMessage: string;
   /** 该字段为null。 */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7066,7 +7066,7 @@ declare interface ModifyFlexFundingAccountResponse {
   ErrMessage: string;
   /** 无 */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7088,7 +7088,7 @@ declare interface ModifyFlexPayeeAccountRightStatusResponse {
   ErrMessage: string;
   /** 返回结果。默认为空。 */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7102,7 +7102,7 @@ declare interface ModifyMerchantRequest {
 }
 
 declare interface ModifyMerchantResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7134,7 +7134,7 @@ declare interface ModifyMntMbrBindRelateAcctBankCodeResponse {
   CnsmrSeqNo?: string;
   /** STRING(1027)，保留域 */
   ReservedMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7158,7 +7158,7 @@ declare interface QueryAcctBindingResponse {
   TotalCount: number;
   /** 银行卡信息列表 */
   BankCardItems: BankCardItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7188,7 +7188,7 @@ declare interface QueryAcctInfoListResponse {
   TotalCount?: number;
   /** 查询结果项 [object,object] */
   QueryAcctItems?: QueryAcctItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7230,7 +7230,7 @@ declare interface QueryAcctInfoResponse {
   SubAcctNo?: string;
   /** 子商户会员类型：general:普通子账户merchant:商户子账户缺省： general */
   SubMerchantMemberType?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7244,7 +7244,7 @@ declare interface QueryAgentStatementsRequest {
 declare interface QueryAgentStatementsResponse {
   /** 文件下载链接 */
   FileUrl: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7258,7 +7258,7 @@ declare interface QueryAgentTaxPaymentBatchRequest {
 declare interface QueryAgentTaxPaymentBatchResponse {
   /** 代理商完税证明批次信息 */
   AgentTaxPaymentBatch: AgentTaxPaymentBatch;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7272,7 +7272,7 @@ declare interface QueryAnchorContractInfoRequest {
 declare interface QueryAnchorContractInfoResponse {
   /** 签约主播数据 */
   AnchorContractInfoList: AnchorContractInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7286,7 +7286,7 @@ declare interface QueryApplicationMaterialRequest {
 declare interface QueryApplicationMaterialResponse {
   /** 成功申报材料查询结果 */
   Result: QueryDeclareResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7302,7 +7302,7 @@ declare interface QueryAssignmentResponse {
   ErrMsg: string;
   /** 返回响应 */
   Result: AssignmentData | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7334,7 +7334,7 @@ declare interface QueryBalanceResponse {
   TotalCount?: string;
   /** 查询结果项 */
   QueryItems?: QueryItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7374,7 +7374,7 @@ declare interface QueryBankClearResponse {
   TranItemArray?: ClearItem[] | null;
   /** STRING(1027)，保留域 */
   ReservedMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7418,7 +7418,7 @@ declare interface QueryBankTransactionDetailsResponse {
   TranItemArray?: TransactionItem[] | null;
   /** STRING(1027)，保留域 */
   ReservedMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7462,7 +7462,7 @@ declare interface QueryBankWithdrawCashDetailsResponse {
   TranItemArray?: WithdrawItem[] | null;
   /** STRING(1027)，保留域 */
   ReservedMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7478,7 +7478,7 @@ declare interface QueryBatchPaymentResultResponse {
   ErrMessage: string;
   /** 返回响应 */
   Result: QueryBatchPaymentResultData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7498,7 +7498,7 @@ declare interface QueryBillDownloadURLResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: QueryBillDownloadURLData | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7518,7 +7518,7 @@ declare interface QueryCityCodeResponse {
   ErrCode: string;
   /** 查询城市编码响应对象 */
   Result: CityCodeResult[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7554,7 +7554,7 @@ declare interface QueryCloudChannelDataResponse {
   SubAppId: string | null;
   /** 米大师分配的支付主MidasAppId */
   AppId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7576,7 +7576,7 @@ declare interface QueryCloudOrderResponse {
   TotalNum: number;
   /** 订单列表 */
   OrderList: CloudOrderReturn[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7618,7 +7618,7 @@ declare interface QueryCloudRefundOrderResponse {
   AppId: string | null;
   /** 该笔退款订单退款后内部返回的退款单号 */
   ChannelRefundId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7658,7 +7658,7 @@ declare interface QueryCommonTransferRechargeResponse {
   TranItemArray?: TransferItem[] | null;
   /** STRING(1027)，保留域 */
   ReservedMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7680,7 +7680,7 @@ declare interface QueryCompanyTitleResponse {
   ErrMessage: string;
   /** 公司抬头结果 */
   Result: CompanyTitleResult[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7702,7 +7702,7 @@ declare interface QueryContractPayFeeResponse {
   ErrCode: string;
   /** 查询支付方式费率及自定义表单项响应对象 */
   Result: QueryContractPayFeeResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7722,7 +7722,7 @@ declare interface QueryContractPayWayListResponse {
   ErrCode: string;
   /** 查询合同支付方式响应对象 */
   Result: ContractPayListResult[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7744,7 +7744,7 @@ declare interface QueryContractRelateShopResponse {
   ErrCode: string;
   /** 查询合同可关联门店响应对象 */
   Result: QueryContractRelateShopResult[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7786,7 +7786,7 @@ declare interface QueryContractResponse {
   ContractData: ResponseQueryContract;
   /** 请求处理信息 */
   Msg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7824,7 +7824,7 @@ declare interface QueryCustAcctIdBalanceResponse {
   AcctArray?: Acct[] | null;
   /** STRING(1027)，保留域 */
   ReservedMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7842,7 +7842,7 @@ declare interface QueryDownloadBillURLResponse {
   MerchantAppId: string;
   /** 对账单下载地址。 */
   DownloadUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7862,7 +7862,7 @@ declare interface QueryExceedingInfoResponse {
   ErrMessage: string;
   /** 超额信息结果。 */
   Result: QueryExceedingInfoResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7878,7 +7878,7 @@ declare interface QueryExchangeRateRequest {
 declare interface QueryExchangeRateResponse {
   /** 查询汇率结果 */
   Result: QueryExchangerateResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7896,7 +7896,7 @@ declare interface QueryFinancialDataUrlResponse {
   CosUrl: string | null;
   /** 过期时间 */
   ExpireTime: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7918,7 +7918,7 @@ declare interface QueryFlexAmountBeforeTaxResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: AmountBeforeTaxResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7940,7 +7940,7 @@ declare interface QueryFlexBillDownloadUrlResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: FlexBillDownloadUrlResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7966,7 +7966,7 @@ declare interface QueryFlexFreezeOrderListResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: FreezeOrders | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7990,7 +7990,7 @@ declare interface QueryFlexOrderSummaryListResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: OrderSummaries | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8012,7 +8012,7 @@ declare interface QueryFlexPayeeAccountBalanceResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: PayeeAccountBalanceResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8032,7 +8032,7 @@ declare interface QueryFlexPayeeAccountInfoResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: PayeeAccountInfoResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8056,7 +8056,7 @@ declare interface QueryFlexPayeeAccountListResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: PayeeAccountInfos | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8076,7 +8076,7 @@ declare interface QueryFlexPayeeInfoResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: PayeeInfoResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8100,7 +8100,7 @@ declare interface QueryFlexPaymentOrderListResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: PaymentOrders | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8120,7 +8120,7 @@ declare interface QueryFlexPaymentOrderStatusResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: PaymentOrderStatusResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8140,7 +8140,7 @@ declare interface QueryFlexPlatformAccountBalanceResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: PlatformAccountBalanceResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8158,7 +8158,7 @@ declare interface QueryFlexServiceProviderAccountBalanceResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: ServiceProviderAccountBalanceResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8184,7 +8184,7 @@ declare interface QueryFlexSettlementOrderListResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: SettlementOrders | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8214,7 +8214,7 @@ declare interface QueryFundsTransactionDetailsResponse {
   ErrMessage: string;
   /** 返回结果。 */
   Result: QueryFundsTransactionDetailsResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8238,7 +8238,7 @@ declare interface QueryInvoiceRequest {
 declare interface QueryInvoiceResponse {
   /** 发票查询结果 */
   Result: QueryInvoiceResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8264,7 +8264,7 @@ declare interface QueryInvoiceV2Response {
   ErrCode: string;
   /** 错误消息 */
   ErrMessage: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8302,7 +8302,7 @@ declare interface QueryMaliciousRegistrationResponse {
   ErrMsg: string;
   /** 商户风险信息 */
   Result: MerchantRiskInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8340,7 +8340,7 @@ declare interface QueryMemberBindResponse {
   TxnReturnMsg?: string;
   /** String(22)，交易流水号 */
   CnsmrSeqNo?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8370,7 +8370,7 @@ declare interface QueryMemberTransactionDetailsResponse {
   ErrMessage: string;
   /** 返回结果。 */
   Result: QueryMemberTransactionDetailsResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8424,7 +8424,7 @@ declare interface QueryMemberTransactionResponse {
   FrontSeqNo?: string | null;
   /** STRING(1027)，保留域 */
   ReservedMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8438,7 +8438,7 @@ declare interface QueryMerchantBalanceRequest {
 declare interface QueryMerchantBalanceResponse {
   /** 对接方账户余额查询结果 */
   Result: QueryMerchantBalanceResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8458,7 +8458,7 @@ declare interface QueryMerchantClassificationResponse {
   ErrCode: string;
   /** 查询商户分类响应对象 */
   Result: MerchantClassificationId[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8476,7 +8476,7 @@ declare interface QueryMerchantInfoForManagementRequest {
 declare interface QueryMerchantInfoForManagementResponse {
   /** 商户结果 */
   Result: MerchantManagementResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8494,7 +8494,7 @@ declare interface QueryMerchantOrderResponse {
   OrderNo: string;
   /** 订单支付状态。0-下单失败 1-下单成功未支付 2-支付成功 3-支付失败 4-退款中 5-退款成功 6-退款失败 7-待付款 8-待确认。 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8516,7 +8516,7 @@ declare interface QueryMerchantPayWayListResponse {
   ErrMessage: string | null;
   /** 查询商户支付方式列表结果 */
   Result: MerchantPayWayData[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8532,7 +8532,7 @@ declare interface QueryMerchantResponse {
   MerchantName: string;
   /** B2B 支付标志。是否开通 B2B 支付， 1:开通 0:不开通。 */
   BusinessPayFlag: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8558,7 +8558,7 @@ declare interface QueryOpenBankBankAccountBalanceResponse {
   ErrMessage: string | null;
   /** 账户余额查询响应对象。 */
   Result: QueryOpenBankBankAccountBalanceResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8586,7 +8586,7 @@ declare interface QueryOpenBankBankBranchListResponse {
   ErrMessage: string | null;
   /** 返回结果。 */
   Result: QueryOpenBankBankBranchListResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8616,7 +8616,7 @@ declare interface QueryOpenBankBillDataPageResponse {
   ErrMessage: string;
   /** 结果 */
   Result: QueryOpenBankBillDataPageResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8640,7 +8640,7 @@ declare interface QueryOpenBankBindExternalSubMerchantBankAccountResponse {
   ErrMessage: string;
   /** 返回结果。 */
   Result: QueryOpenBankBindExternalSubMerchantBankAccountResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8668,7 +8668,7 @@ declare interface QueryOpenBankDailyReceiptDownloadUrlResponse {
   ErrMessage: string | null;
   /** 按日期查询回单下载地址响应对象。 */
   Result: QueryOpenBankDailyReceiptDownloadUrlResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8694,7 +8694,7 @@ declare interface QueryOpenBankDownLoadUrlResponse {
   ErrMessage: string;
   /** 查询对账文件下载响应对象。 */
   Result: QueryOpenBankDownLoadUrlResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8722,7 +8722,7 @@ declare interface QueryOpenBankExternalSubAccountBookBalanceResponse {
   ErrMessage: string;
   /** 返回结果。 */
   Result: QueryExternalAccountBookResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8746,7 +8746,7 @@ declare interface QueryOpenBankExternalSubMerchantBankAccountResponse {
   ErrMessage: string;
   /** 返回结果。 */
   Result: QueryOpenBankExternalSubMerchantBankAccountResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8768,7 +8768,7 @@ declare interface QueryOpenBankExternalSubMerchantRegistrationResponse {
   ErrMessage: string;
   /** 返回结果。 */
   Result: QueryOpenBankExternalSubMerchantRegistrationResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8796,7 +8796,7 @@ declare interface QueryOpenBankOrderDetailReceiptInfoResponse {
   ErrMessage: string | null;
   /** 返回结果。 */
   Result: QueryOpenBankOrderDetailReceiptInfoResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8818,7 +8818,7 @@ declare interface QueryOpenBankPaymentOrderResponse {
   ErrMessage: string;
   /** 查询支付结果响应对象。 */
   Result: QueryOpenBankPaymentOrderResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8844,7 +8844,7 @@ declare interface QueryOpenBankProfitSharePayeeResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: QueryOpenBankProfitSharePayeeResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8866,7 +8866,7 @@ declare interface QueryOpenBankRefundOrderResponse {
   ErrMessage: string | null;
   /** 返回结果 */
   Result: OpenBankQueryRefundOrderResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8890,7 +8890,7 @@ declare interface QueryOpenBankSettleOrderResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: QueryOpenBankSettleOrderResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8918,7 +8918,7 @@ declare interface QueryOpenBankSubMerchantCredentialResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: QueryOpenBankSubMerchantCredentialResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8946,7 +8946,7 @@ declare interface QueryOpenBankSubMerchantRateConfigureResponse {
   ErrMessage: string | null;
   /** 返回结果。 */
   Result: QueryOpenBankSubMerchantRateConfigureResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8968,7 +8968,7 @@ declare interface QueryOpenBankSubMerchantSignOnlineResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: QueryOpenBankSubMerchantSignOnlineResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8990,7 +8990,7 @@ declare interface QueryOpenBankSupportBankListResponse {
   ErrMessage: string | null;
   /** 返回结果。 */
   Result: QueryOpenBankSupportBankListResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9014,7 +9014,7 @@ declare interface QueryOpenBankUnbindExternalSubMerchantBankAccountResponse {
   ErrMessage: string;
   /** 返回结果。 */
   Result: QueryOpenBankUnbindExternalSubMerchantBankAccountResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9036,7 +9036,7 @@ declare interface QueryOpenBankVerificationOrderResponse {
   ErrMessage: string | null;
   /** 核销查询响应对象。 */
   Result: QueryOpenBankVerificationResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9072,7 +9072,7 @@ declare interface QueryOrderResponse {
   TotalNum: number;
   /** 查询结果的订单列表 */
   OrderList: QueryOrderOutOrderList[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9096,7 +9096,7 @@ declare interface QueryOrderStatusResponse {
   ErrMessage: string | null;
   /** 查询订单付款状态结果 */
   Result: QueryOrderStatusResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9110,7 +9110,7 @@ declare interface QueryOutwardOrderRequest {
 declare interface QueryOutwardOrderResponse {
   /** 查询汇出结果 */
   Result: QueryOutwardOrderResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9124,7 +9124,7 @@ declare interface QueryPayerInfoRequest {
 declare interface QueryPayerInfoResponse {
   /** 付款人查询结果 */
   Result: QueryPayerinfoResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9154,7 +9154,7 @@ declare interface QueryReconciliationDocumentResponse {
   TranItemArray?: FileItem[] | null;
   /** STRING(1027)，保留域 */
   ReservedMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9172,7 +9172,7 @@ declare interface QueryReconciliationFileApplyInfoResponse {
   ErrMessage: string;
   /** 返回结果。 */
   Result: QueryReconciliationFileApplyInfoResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9214,7 +9214,7 @@ declare interface QueryRefundResponse {
   UsedRefundId: string | null;
   /** 子单退款信息列表 */
   SubRefundList: OldSubRefund[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9236,7 +9236,7 @@ declare interface QueryShopOpenIdResponse {
   ErrCode: string;
   /** 获取门店OpenId响应对象 */
   Result: QueryShopOpenIdResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9256,7 +9256,7 @@ declare interface QuerySinglePaymentResultResponse {
   ErrMessage: string;
   /** 返回响应 */
   Result: QuerySinglePaymentResultData | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9302,7 +9302,7 @@ declare interface QuerySingleTransactionStatusResponse {
   FailMsg?: string | null;
   /** STRING(50)，原前置流水号 */
   OldTranFrontSeqNo?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9332,7 +9332,7 @@ declare interface QuerySmallAmountTransferResponse {
   ReturnMsg?: string | null;
   /** STRING(1027)，保留域 */
   ReservedMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9346,7 +9346,7 @@ declare interface QueryTradeRequest {
 declare interface QueryTradeResponse {
   /** 贸易材料明细查询结果 */
   Result: QueryTradeResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9406,7 +9406,7 @@ declare interface QueryTransferBatchResponse {
   BatchName?: string | null;
   /** 批次标注。 */
   BatchRemark?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9454,7 +9454,7 @@ declare interface QueryTransferDetailResponse {
   MerchantAppId?: string | null;
   /** 用户openId。 */
   OpenId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9480,7 +9480,7 @@ declare interface QueryTransferResultResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: QueryTransferResultData | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9540,7 +9540,7 @@ declare interface RechargeByThirdPayResponse {
   FrontSequenceNumber?: string | null;
   /** 请求类型 */
   RequestType?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9592,7 +9592,7 @@ declare interface RechargeMemberThirdPayResponse {
   ReservedMsgOne?: string | null;
   /** STRING(300)，保留域2 */
   ReservedMsgTwo?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9626,7 +9626,7 @@ declare interface RefundCloudOrderRequest {
 }
 
 declare interface RefundCloudOrderResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9688,7 +9688,7 @@ declare interface RefundMemberTransactionResponse {
   FrontSequenceNumber?: string;
   /** 保留域 */
   ReservedMessage?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9724,7 +9724,7 @@ declare interface RefundOpenBankOrderResponse {
   ErrMessage: string | null;
   /** 返回结果 */
   Result: OpenBankRefundOrderApplyResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9744,7 +9744,7 @@ declare interface RefundOrderResponse {
   Status: string;
   /** 订单退款状态描述 */
   Description: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9776,7 +9776,7 @@ declare interface RefundRequest {
 }
 
 declare interface RefundResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9808,7 +9808,7 @@ declare interface RefundTlinxOrderResponse {
   ErrMessage: string | null;
   /** 退款响应对象 */
   Result: RefundOrderResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9840,7 +9840,7 @@ declare interface RegisterBehaviorResponse {
   ReplenishSuccessFlag: string | null;
   /** 签约信息 */
   RegisterInfo: RegisterInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9892,7 +9892,7 @@ declare interface RegisterBillResponse {
   ReservedMessage?: string;
   /** 请求类型 */
   RequestType?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9930,7 +9930,7 @@ declare interface RegisterBillSupportWithdrawResponse {
   CnsmrSeqNo?: string | null;
   /** STRING(1027)，保留域 */
   ReservedMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9968,7 +9968,7 @@ declare interface RevResigterBillSupportWithdrawResponse {
   FrontSeqNo?: string | null;
   /** STRING(1027)，保留域 */
   ReservedMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9994,7 +9994,7 @@ declare interface ReviseMbrPropertyResponse {
   CnsmrSeqNo?: string;
   /** STRING(1027)，保留域 */
   ReservedMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10038,7 +10038,7 @@ declare interface RevokeMemberRechargeThirdPayResponse {
   ReservedMsgOne?: string | null;
   /** STRING(300)，保留域2 */
   ReservedMsgTwo?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10094,7 +10094,7 @@ declare interface RevokeRechargeByThirdPayResponse {
   ReservedMessage?: string | null;
   /** 银行流水号 */
   FrontSequenceNumber?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10128,7 +10128,7 @@ declare interface SyncContractDataRequest {
 declare interface SyncContractDataResponse {
   /** 请求处理信息 */
   Msg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10172,7 +10172,7 @@ declare interface TerminateContractResponse {
   ContractTerminateData: ResponseTerminateContract;
   /** 请求处理信息 */
   Msg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10232,7 +10232,7 @@ declare interface TransferSinglePayResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: TransferSinglePayData | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10254,7 +10254,7 @@ declare interface UnBindAcctRequest {
 }
 
 declare interface UnBindAcctResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10284,7 +10284,7 @@ declare interface UnbindOpenBankExternalSubMerchantBankAccountResponse {
   ErrMessage: string;
   /** 返回结果。 */
   Result: UnbindOpenBankExternalSubMerchantBankAccountResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10314,7 +10314,7 @@ declare interface UnbindRelateAcctResponse {
   FrontSeqNo?: string | null;
   /** STRING(1027)，保留域 */
   ReservedMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10412,7 +10412,7 @@ declare interface UnifiedCloudOrderResponse {
   TotalAmt: number | null;
   /** 渠道信息，用于拉起渠道支付。json字符串，注意此字段仅会在传入正确的PayScene入参时才会有效。 */
   ChannelInfo: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10480,7 +10480,7 @@ declare interface UnifiedOrderResponse {
   PayInfo: string;
   /** 聚鑫的交易订单 */
   TransactionId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10540,7 +10540,7 @@ declare interface UnifiedTlinxOrderResponse {
   ErrCode: string;
   /** 统一下单响应对象 */
   Result: PayOrderResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10560,7 +10560,7 @@ declare interface UploadExternalAnchorInfoResponse {
   ErrMessage: string;
   /** 该字段为null。 */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10580,7 +10580,7 @@ declare interface UploadFileRequest {
 declare interface UploadFileResponse {
   /** 文件ID */
   FileId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10614,7 +10614,7 @@ declare interface UploadOpenBankSubMerchantCredentialResponse {
   ErrMessage: string;
   /** 返回结果 */
   Result: UploadOpenBankSubMerchantCredentialResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10642,7 +10642,7 @@ declare interface UploadOrgFileResponse {
   ErrCode: string;
   /** 上传机构文件响应对象 */
   Result: UploadFileResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10660,7 +10660,7 @@ declare interface UploadTaxListRequest {
 declare interface UploadTaxListResponse {
   /** 完税ID */
   TaxId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10674,7 +10674,7 @@ declare interface UploadTaxPaymentRequest {
 }
 
 declare interface UploadTaxPaymentResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10698,7 +10698,7 @@ declare interface VerifyOpenBankAccountResponse {
   ErrMessage: string | null;
   /** 打款验证结果。前端使用url字段，根据指引完成打款验证动作 */
   Result: VerifyOpenBankAccountResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10722,7 +10722,7 @@ declare interface ViewContractResponse {
   ErrCode: string;
   /** 合同明细响应对象 */
   Result: ViewContractResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10746,7 +10746,7 @@ declare interface ViewMerchantResponse {
   ErrCode: string;
   /** 商户明细响应对象 */
   Result: ViewMerchantResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10770,7 +10770,7 @@ declare interface ViewShopResponse {
   ErrCode: string;
   /** 门店明细响应对象 */
   Result: ViewShopResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -10818,448 +10818,448 @@ declare interface WithdrawCashMembershipResponse {
   TransferFee?: string | null;
   /** STRING(1027)，保留域 */
   ReservedMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cpdp 企业收付平台} */
 declare interface Cpdp {
   (): Versions;
-  /** {@link AddContract 云支付-添加合同接口}({@link AddContractRequest 请求参数}): {@link AddContractResponse 返回参数} */
+  /** 云支付-添加合同接口 {@link AddContractRequest} {@link AddContractResponse} */
   AddContract(data: AddContractRequest, config?: AxiosRequestConfig): AxiosPromise<AddContractResponse>;
-  /** {@link AddFlexFundingAccount 灵云V2-绑定收款用户资金账号信息}({@link AddFlexFundingAccountRequest 请求参数}): {@link AddFlexFundingAccountResponse 返回参数} */
+  /** 灵云V2-绑定收款用户资金账号信息 {@link AddFlexFundingAccountRequest} {@link AddFlexFundingAccountResponse} */
   AddFlexFundingAccount(data: AddFlexFundingAccountRequest, config?: AxiosRequestConfig): AxiosPromise<AddFlexFundingAccountResponse>;
-  /** {@link AddFlexIdInfo 灵云V2-补充证件信息}({@link AddFlexIdInfoRequest 请求参数}): {@link AddFlexIdInfoResponse 返回参数} */
+  /** 灵云V2-补充证件信息 {@link AddFlexIdInfoRequest} {@link AddFlexIdInfoResponse} */
   AddFlexIdInfo(data: AddFlexIdInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddFlexIdInfoResponse>;
-  /** {@link AddFlexPhoneNo 灵云V2-补充手机号信息}({@link AddFlexPhoneNoRequest 请求参数}): {@link AddFlexPhoneNoResponse 返回参数} */
+  /** 灵云V2-补充手机号信息 {@link AddFlexPhoneNoRequest} {@link AddFlexPhoneNoResponse} */
   AddFlexPhoneNo(data: AddFlexPhoneNoRequest, config?: AxiosRequestConfig): AxiosPromise<AddFlexPhoneNoResponse>;
-  /** {@link AddMerchant 云支付-添加商户接口}({@link AddMerchantRequest 请求参数}): {@link AddMerchantResponse 返回参数} */
+  /** 云支付-添加商户接口 {@link AddMerchantRequest} {@link AddMerchantResponse} */
   AddMerchant(data: AddMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<AddMerchantResponse>;
-  /** {@link AddShop 云支付-添加门店接口}({@link AddShopRequest 请求参数}): {@link AddShopResponse 返回参数} */
+  /** 云支付-添加门店接口 {@link AddShopRequest} {@link AddShopResponse} */
   AddShop(data: AddShopRequest, config?: AxiosRequestConfig): AxiosPromise<AddShopResponse>;
-  /** {@link ApplyApplicationMaterial 跨境-提交申报材料}({@link ApplyApplicationMaterialRequest 请求参数}): {@link ApplyApplicationMaterialResponse 返回参数} */
+  /** 跨境-提交申报材料 {@link ApplyApplicationMaterialRequest} {@link ApplyApplicationMaterialResponse} */
   ApplyApplicationMaterial(data: ApplyApplicationMaterialRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyApplicationMaterialResponse>;
-  /** {@link ApplyFlexPayment 灵云V2-付款}({@link ApplyFlexPaymentRequest 请求参数}): {@link ApplyFlexPaymentResponse 返回参数} */
+  /** 灵云V2-付款 {@link ApplyFlexPaymentRequest} {@link ApplyFlexPaymentResponse} */
   ApplyFlexPayment(data: ApplyFlexPaymentRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyFlexPaymentResponse>;
-  /** {@link ApplyFlexSettlement 灵云V2-结算}({@link ApplyFlexSettlementRequest 请求参数}): {@link ApplyFlexSettlementResponse 返回参数} */
+  /** 灵云V2-结算 {@link ApplyFlexSettlementRequest} {@link ApplyFlexSettlementResponse} */
   ApplyFlexSettlement(data: ApplyFlexSettlementRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyFlexSettlementResponse>;
-  /** {@link ApplyOpenBankOrderDetailReceipt 云企付-申请单笔交易回单}({@link ApplyOpenBankOrderDetailReceiptRequest 请求参数}): {@link ApplyOpenBankOrderDetailReceiptResponse 返回参数} */
+  /** 云企付-申请单笔交易回单 {@link ApplyOpenBankOrderDetailReceiptRequest} {@link ApplyOpenBankOrderDetailReceiptResponse} */
   ApplyOpenBankOrderDetailReceipt(data: ApplyOpenBankOrderDetailReceiptRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyOpenBankOrderDetailReceiptResponse>;
-  /** {@link ApplyOpenBankSettleOrder 云企付-结算申请接口}({@link ApplyOpenBankSettleOrderRequest 请求参数}): {@link ApplyOpenBankSettleOrderResponse 返回参数} */
+  /** 云企付-结算申请接口 {@link ApplyOpenBankSettleOrderRequest} {@link ApplyOpenBankSettleOrderResponse} */
   ApplyOpenBankSettleOrder(data: ApplyOpenBankSettleOrderRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyOpenBankSettleOrderResponse>;
-  /** {@link ApplyOpenBankSubMerchantSignOnline 云企付-子商户在线签约}({@link ApplyOpenBankSubMerchantSignOnlineRequest 请求参数}): {@link ApplyOpenBankSubMerchantSignOnlineResponse 返回参数} */
+  /** 云企付-子商户在线签约 {@link ApplyOpenBankSubMerchantSignOnlineRequest} {@link ApplyOpenBankSubMerchantSignOnlineResponse} */
   ApplyOpenBankSubMerchantSignOnline(data: ApplyOpenBankSubMerchantSignOnlineRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyOpenBankSubMerchantSignOnlineResponse>;
-  /** {@link ApplyOutwardOrder 跨境-汇出指令申请}({@link ApplyOutwardOrderRequest 请求参数}): {@link ApplyOutwardOrderResponse 返回参数} */
+  /** 跨境-汇出指令申请 {@link ApplyOutwardOrderRequest} {@link ApplyOutwardOrderResponse} */
   ApplyOutwardOrder(data: ApplyOutwardOrderRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyOutwardOrderResponse>;
-  /** {@link ApplyPayerInfo 跨境-付款人申请}({@link ApplyPayerInfoRequest 请求参数}): {@link ApplyPayerInfoResponse 返回参数} */
+  /** 跨境-付款人申请 {@link ApplyPayerInfoRequest} {@link ApplyPayerInfoResponse} */
   ApplyPayerInfo(data: ApplyPayerInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyPayerInfoResponse>;
-  /** {@link ApplyReWithdrawal 聚鑫-重新提现接口}({@link ApplyReWithdrawalRequest 请求参数}): {@link ApplyReWithdrawalResponse 返回参数} */
+  /** 聚鑫-重新提现接口 {@link ApplyReWithdrawalRequest} {@link ApplyReWithdrawalResponse} */
   ApplyReWithdrawal(data: ApplyReWithdrawalRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyReWithdrawalResponse>;
-  /** {@link ApplyReconciliationFile 聚鑫-申请对账文件}({@link ApplyReconciliationFileRequest 请求参数}): {@link ApplyReconciliationFileResponse 返回参数} */
+  /** 聚鑫-申请对账文件 {@link ApplyReconciliationFileRequest} {@link ApplyReconciliationFileResponse} */
   ApplyReconciliationFile(data: ApplyReconciliationFileRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyReconciliationFileResponse>;
-  /** {@link ApplyTrade 跨境-提交贸易材料}({@link ApplyTradeRequest 请求参数}): {@link ApplyTradeResponse 返回参数} */
+  /** 跨境-提交贸易材料 {@link ApplyTradeRequest} {@link ApplyTradeResponse} */
   ApplyTrade(data: ApplyTradeRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyTradeResponse>;
-  /** {@link ApplyWithdrawal 聚鑫-提现}({@link ApplyWithdrawalRequest 请求参数}): {@link ApplyWithdrawalResponse 返回参数} */
+  /** 聚鑫-提现 {@link ApplyWithdrawalRequest} {@link ApplyWithdrawalResponse} */
   ApplyWithdrawal(data: ApplyWithdrawalRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyWithdrawalResponse>;
-  /** {@link BindAccount 灵云-绑定账号}({@link BindAccountRequest 请求参数}): {@link BindAccountResponse 返回参数} */
+  /** 灵云-绑定账号 {@link BindAccountRequest} {@link BindAccountResponse} */
   BindAccount(data: BindAccountRequest, config?: AxiosRequestConfig): AxiosPromise<BindAccountResponse>;
-  /** {@link BindAcct 聚鑫-绑定提现银行卡}({@link BindAcctRequest 请求参数}): {@link BindAcctResponse 返回参数} */
+  /** 聚鑫-绑定提现银行卡 {@link BindAcctRequest} {@link BindAcctResponse} */
   BindAcct(data: BindAcctRequest, config?: AxiosRequestConfig): AxiosPromise<BindAcctResponse>;
-  /** {@link BindOpenBankExternalSubMerchantBankAccount 云企付-子商户银行卡绑定}({@link BindOpenBankExternalSubMerchantBankAccountRequest 请求参数}): {@link BindOpenBankExternalSubMerchantBankAccountResponse 返回参数} */
+  /** 云企付-子商户银行卡绑定 {@link BindOpenBankExternalSubMerchantBankAccountRequest} {@link BindOpenBankExternalSubMerchantBankAccountResponse} */
   BindOpenBankExternalSubMerchantBankAccount(data: BindOpenBankExternalSubMerchantBankAccountRequest, config?: AxiosRequestConfig): AxiosPromise<BindOpenBankExternalSubMerchantBankAccountResponse>;
-  /** {@link BindOpenBankProfitSharePayee 云企付-绑定分账收款方}({@link BindOpenBankProfitSharePayeeRequest 请求参数}): {@link BindOpenBankProfitSharePayeeResponse 返回参数} */
+  /** 云企付-绑定分账收款方 {@link BindOpenBankProfitSharePayeeRequest} {@link BindOpenBankProfitSharePayeeResponse} */
   BindOpenBankProfitSharePayee(data: BindOpenBankProfitSharePayeeRequest, config?: AxiosRequestConfig): AxiosPromise<BindOpenBankProfitSharePayeeResponse>;
-  /** {@link BindRelateAccReUnionPay 云鉴-会员绑定提现账户-回填银联鉴权短信码}({@link BindRelateAccReUnionPayRequest 请求参数}): {@link BindRelateAccReUnionPayResponse 返回参数} */
+  /** 云鉴-会员绑定提现账户-回填银联鉴权短信码 {@link BindRelateAccReUnionPayRequest} {@link BindRelateAccReUnionPayResponse} */
   BindRelateAccReUnionPay(data: BindRelateAccReUnionPayRequest, config?: AxiosRequestConfig): AxiosPromise<BindRelateAccReUnionPayResponse>;
-  /** {@link BindRelateAcctSmallAmount 云鉴-会员绑定提现账户-小额鉴权}({@link BindRelateAcctSmallAmountRequest 请求参数}): {@link BindRelateAcctSmallAmountResponse 返回参数} */
+  /** 云鉴-会员绑定提现账户-小额鉴权 {@link BindRelateAcctSmallAmountRequest} {@link BindRelateAcctSmallAmountResponse} */
   BindRelateAcctSmallAmount(data: BindRelateAcctSmallAmountRequest, config?: AxiosRequestConfig): AxiosPromise<BindRelateAcctSmallAmountResponse>;
-  /** {@link BindRelateAcctUnionPay 云鉴-会员绑定提现账户-银联鉴权}({@link BindRelateAcctUnionPayRequest 请求参数}): {@link BindRelateAcctUnionPayResponse 返回参数} */
+  /** 云鉴-会员绑定提现账户-银联鉴权 {@link BindRelateAcctUnionPayRequest} {@link BindRelateAcctUnionPayResponse} */
   BindRelateAcctUnionPay(data: BindRelateAcctUnionPayRequest, config?: AxiosRequestConfig): AxiosPromise<BindRelateAcctUnionPayResponse>;
-  /** {@link CheckAcct 聚鑫-提现银行卡验证}({@link CheckAcctRequest 请求参数}): {@link CheckAcctResponse 返回参数} */
+  /** 聚鑫-提现银行卡验证 {@link CheckAcctRequest} {@link CheckAcctResponse} */
   CheckAcct(data: CheckAcctRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAcctResponse>;
-  /** {@link CheckAmount 云鉴-验证鉴权金额}({@link CheckAmountRequest 请求参数}): {@link CheckAmountResponse 返回参数} */
+  /** 云鉴-验证鉴权金额 {@link CheckAmountRequest} {@link CheckAmountResponse} */
   CheckAmount(data: CheckAmountRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAmountResponse>;
-  /** {@link CloseCloudOrder 聚鑫V2-关闭订单}({@link CloseCloudOrderRequest 请求参数}): {@link CloseCloudOrderResponse 返回参数} */
+  /** 聚鑫V2-关闭订单 {@link CloseCloudOrderRequest} {@link CloseCloudOrderResponse} */
   CloseCloudOrder(data: CloseCloudOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CloseCloudOrderResponse>;
-  /** {@link CloseOpenBankPaymentOrder 云企付-关闭订单}({@link CloseOpenBankPaymentOrderRequest 请求参数}): {@link CloseOpenBankPaymentOrderResponse 返回参数} */
+  /** 云企付-关闭订单 {@link CloseOpenBankPaymentOrderRequest} {@link CloseOpenBankPaymentOrderResponse} */
   CloseOpenBankPaymentOrder(data: CloseOpenBankPaymentOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CloseOpenBankPaymentOrderResponse>;
-  /** {@link CloseOrder 聚鑫-关闭订单接口}({@link CloseOrderRequest 请求参数}): {@link CloseOrderResponse 返回参数} */
+  /** 聚鑫-关闭订单接口 {@link CloseOrderRequest} {@link CloseOrderResponse} */
   CloseOrder(data: CloseOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CloseOrderResponse>;
-  /** {@link ConfirmOrder 云鉴-消费订单确认接口}({@link ConfirmOrderRequest 请求参数}): {@link ConfirmOrderResponse 返回参数} */
+  /** 云鉴-消费订单确认接口 {@link ConfirmOrderRequest} {@link ConfirmOrderResponse} */
   ConfirmOrder(data: ConfirmOrderRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmOrderResponse>;
-  /** {@link ContractOrder 支付中签约接口}({@link ContractOrderRequest 请求参数}): {@link ContractOrderResponse 返回参数} */
+  /** 支付中签约接口 {@link ContractOrderRequest} {@link ContractOrderResponse} */
   ContractOrder(data: ContractOrderRequest, config?: AxiosRequestConfig): AxiosPromise<ContractOrderResponse>;
-  /** {@link CreateAcct 聚鑫-商户入驻}({@link CreateAcctRequest 请求参数}): {@link CreateAcctResponse 返回参数} */
+  /** 聚鑫-商户入驻 {@link CreateAcctRequest} {@link CreateAcctResponse} */
   CreateAcct(data: CreateAcctRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAcctResponse>;
-  /** {@link CreateAgentTaxPaymentInfos 直播平台-代理商完税信息录入}({@link CreateAgentTaxPaymentInfosRequest 请求参数}): {@link CreateAgentTaxPaymentInfosResponse 返回参数} */
+  /** 直播平台-代理商完税信息录入 {@link CreateAgentTaxPaymentInfosRequest} {@link CreateAgentTaxPaymentInfosResponse} */
   CreateAgentTaxPaymentInfos(data: CreateAgentTaxPaymentInfosRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentTaxPaymentInfosResponse>;
-  /** {@link CreateAnchor 直播平台-主播入驻}({@link CreateAnchorRequest 请求参数}): {@link CreateAnchorResponse 返回参数} */
+  /** 直播平台-主播入驻 {@link CreateAnchorRequest} {@link CreateAnchorResponse} */
   CreateAnchor(data: CreateAnchorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAnchorResponse>;
-  /** {@link CreateBatchPayment 灵云-批量主播转账接口}({@link CreateBatchPaymentRequest 请求参数}): {@link CreateBatchPaymentResponse 返回参数} */
+  /** 灵云-批量主播转账接口 {@link CreateBatchPaymentRequest} {@link CreateBatchPaymentResponse} */
   CreateBatchPayment(data: CreateBatchPaymentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchPaymentResponse>;
-  /** {@link CreateCloudSubMerchant 聚鑫V2-创建子商户}({@link CreateCloudSubMerchantRequest 请求参数}): {@link CreateCloudSubMerchantResponse 返回参数} */
+  /** 聚鑫V2-创建子商户 {@link CreateCloudSubMerchantRequest} {@link CreateCloudSubMerchantResponse} */
   CreateCloudSubMerchant(data: CreateCloudSubMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudSubMerchantResponse>;
-  /** {@link CreateCustAcctId 云鉴-会员子账户开立}({@link CreateCustAcctIdRequest 请求参数}): {@link CreateCustAcctIdResponse 返回参数} */
+  /** 云鉴-会员子账户开立 {@link CreateCustAcctIdRequest} {@link CreateCustAcctIdResponse} */
   CreateCustAcctId(data: CreateCustAcctIdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustAcctIdResponse>;
-  /** {@link CreateExternalAnchor 灵云-主播入驻}({@link CreateExternalAnchorRequest 请求参数}): {@link CreateExternalAnchorResponse 返回参数} */
+  /** 灵云-主播入驻 {@link CreateExternalAnchorRequest} {@link CreateExternalAnchorResponse} */
   CreateExternalAnchor(data: CreateExternalAnchorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExternalAnchorResponse>;
-  /** {@link CreateFlexPayee 灵云V2-收款用户开立}({@link CreateFlexPayeeRequest 请求参数}): {@link CreateFlexPayeeResponse 返回参数} */
+  /** 灵云V2-收款用户开立 {@link CreateFlexPayeeRequest} {@link CreateFlexPayeeResponse} */
   CreateFlexPayee(data: CreateFlexPayeeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlexPayeeResponse>;
-  /** {@link CreateInvoice 智慧零售-发票开具}({@link CreateInvoiceRequest 请求参数}): {@link CreateInvoiceResponse 返回参数} */
+  /** 智慧零售-发票开具 {@link CreateInvoiceRequest} {@link CreateInvoiceResponse} */
   CreateInvoice(data: CreateInvoiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInvoiceResponse>;
-  /** {@link CreateInvoiceV2 智慧零售-发票开具V2}({@link CreateInvoiceV2Request 请求参数}): {@link CreateInvoiceV2Response 返回参数} */
+  /** 智慧零售-发票开具V2 {@link CreateInvoiceV2Request} {@link CreateInvoiceV2Response} */
   CreateInvoiceV2(data: CreateInvoiceV2Request, config?: AxiosRequestConfig): AxiosPromise<CreateInvoiceV2Response>;
-  /** {@link CreateMerchant 智慧零售-商户注册}({@link CreateMerchantRequest 请求参数}): {@link CreateMerchantResponse 返回参数} */
+  /** 智慧零售-商户注册 {@link CreateMerchantRequest} {@link CreateMerchantResponse} */
   CreateMerchant(data: CreateMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMerchantResponse>;
-  /** {@link CreateOpenBankAggregatedSubMerchantRegistration 云企付-子商户进件V2}({@link CreateOpenBankAggregatedSubMerchantRegistrationRequest 请求参数}): {@link CreateOpenBankAggregatedSubMerchantRegistrationResponse 返回参数} */
+  /** 云企付-子商户进件V2 {@link CreateOpenBankAggregatedSubMerchantRegistrationRequest} {@link CreateOpenBankAggregatedSubMerchantRegistrationResponse} */
   CreateOpenBankAggregatedSubMerchantRegistration(data: CreateOpenBankAggregatedSubMerchantRegistrationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankAggregatedSubMerchantRegistrationResponse>;
-  /** {@link CreateOpenBankExternalSubMerchantAccountBook 云企付-子商户电子记账本创建接口}({@link CreateOpenBankExternalSubMerchantAccountBookRequest 请求参数}): {@link CreateOpenBankExternalSubMerchantAccountBookResponse 返回参数} */
+  /** 云企付-子商户电子记账本创建接口 {@link CreateOpenBankExternalSubMerchantAccountBookRequest} {@link CreateOpenBankExternalSubMerchantAccountBookResponse} */
   CreateOpenBankExternalSubMerchantAccountBook(data: CreateOpenBankExternalSubMerchantAccountBookRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankExternalSubMerchantAccountBookResponse>;
-  /** {@link CreateOpenBankExternalSubMerchantRegistration 云企付-子商户进件}({@link CreateOpenBankExternalSubMerchantRegistrationRequest 请求参数}): {@link CreateOpenBankExternalSubMerchantRegistrationResponse 返回参数} */
+  /** 云企付-子商户进件 {@link CreateOpenBankExternalSubMerchantRegistrationRequest} {@link CreateOpenBankExternalSubMerchantRegistrationResponse} */
   CreateOpenBankExternalSubMerchantRegistration(data: CreateOpenBankExternalSubMerchantRegistrationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankExternalSubMerchantRegistrationResponse>;
-  /** {@link CreateOpenBankGlobalPaymentOrder 云企付-跨境支付下单}({@link CreateOpenBankGlobalPaymentOrderRequest 请求参数}): {@link CreateOpenBankGlobalPaymentOrderResponse 返回参数} */
+  /** 云企付-跨境支付下单 {@link CreateOpenBankGlobalPaymentOrderRequest} {@link CreateOpenBankGlobalPaymentOrderResponse} */
   CreateOpenBankGlobalPaymentOrder(data: CreateOpenBankGlobalPaymentOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankGlobalPaymentOrderResponse>;
-  /** {@link CreateOpenBankMerchant 云企付-创建商户}({@link CreateOpenBankMerchantRequest 请求参数}): {@link CreateOpenBankMerchantResponse 返回参数} */
+  /** 云企付-创建商户 {@link CreateOpenBankMerchantRequest} {@link CreateOpenBankMerchantResponse} */
   CreateOpenBankMerchant(data: CreateOpenBankMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankMerchantResponse>;
-  /** {@link CreateOpenBankPaymentOrder 云企付-创建支付订单}({@link CreateOpenBankPaymentOrderRequest 请求参数}): {@link CreateOpenBankPaymentOrderResponse 返回参数} */
+  /** 云企付-创建支付订单 {@link CreateOpenBankPaymentOrderRequest} {@link CreateOpenBankPaymentOrderResponse} */
   CreateOpenBankPaymentOrder(data: CreateOpenBankPaymentOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankPaymentOrderResponse>;
-  /** {@link CreateOpenBankRechargeOrder 云企付-创建充值订单}({@link CreateOpenBankRechargeOrderRequest 请求参数}): {@link CreateOpenBankRechargeOrderResponse 返回参数} */
+  /** 云企付-创建充值订单 {@link CreateOpenBankRechargeOrderRequest} {@link CreateOpenBankRechargeOrderResponse} */
   CreateOpenBankRechargeOrder(data: CreateOpenBankRechargeOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankRechargeOrderResponse>;
-  /** {@link CreateOpenBankSubMerchantRateConfigure 云企付-子商户费率配置}({@link CreateOpenBankSubMerchantRateConfigureRequest 请求参数}): {@link CreateOpenBankSubMerchantRateConfigureResponse 返回参数} */
+  /** 云企付-子商户费率配置 {@link CreateOpenBankSubMerchantRateConfigureRequest} {@link CreateOpenBankSubMerchantRateConfigureResponse} */
   CreateOpenBankSubMerchantRateConfigure(data: CreateOpenBankSubMerchantRateConfigureRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankSubMerchantRateConfigureResponse>;
-  /** {@link CreateOpenBankUnifiedOrder 云企付-聚合下单}({@link CreateOpenBankUnifiedOrderRequest 请求参数}): {@link CreateOpenBankUnifiedOrderResponse 返回参数} */
+  /** 云企付-聚合下单 {@link CreateOpenBankUnifiedOrderRequest} {@link CreateOpenBankUnifiedOrderResponse} */
   CreateOpenBankUnifiedOrder(data: CreateOpenBankUnifiedOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankUnifiedOrderResponse>;
-  /** {@link CreateOpenBankVerificationOrder 云企付-创建核销申请}({@link CreateOpenBankVerificationOrderRequest 请求参数}): {@link CreateOpenBankVerificationOrderResponse 返回参数} */
+  /** 云企付-创建核销申请 {@link CreateOpenBankVerificationOrderRequest} {@link CreateOpenBankVerificationOrderResponse} */
   CreateOpenBankVerificationOrder(data: CreateOpenBankVerificationOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpenBankVerificationOrderResponse>;
-  /** {@link CreateOrder 云鉴-消费订单发起接口}({@link CreateOrderRequest 请求参数}): {@link CreateOrderResponse 返回参数} */
+  /** 云鉴-消费订单发起接口 {@link CreateOrderRequest} {@link CreateOrderResponse} */
   CreateOrder(data: CreateOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrderResponse>;
-  /** {@link CreatePayMerchant 云鉴-商户新增接口}({@link CreatePayMerchantRequest 请求参数}): {@link CreatePayMerchantResponse 返回参数} */
+  /** 云鉴-商户新增接口 {@link CreatePayMerchantRequest} {@link CreatePayMerchantResponse} */
   CreatePayMerchant(data: CreatePayMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePayMerchantResponse>;
-  /** {@link CreatePayRollPreOrder 务工卡-核身预下单}({@link CreatePayRollPreOrderRequest 请求参数}): {@link CreatePayRollPreOrderResponse 返回参数} */
+  /** 务工卡-核身预下单 {@link CreatePayRollPreOrderRequest} {@link CreatePayRollPreOrderResponse} */
   CreatePayRollPreOrder(data: CreatePayRollPreOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePayRollPreOrderResponse>;
-  /** {@link CreatePayRollPreOrderWithAuth 务工卡-核身预下单带授权}({@link CreatePayRollPreOrderWithAuthRequest 请求参数}): {@link CreatePayRollPreOrderWithAuthResponse 返回参数} */
+  /** 务工卡-核身预下单带授权 {@link CreatePayRollPreOrderWithAuthRequest} {@link CreatePayRollPreOrderWithAuthResponse} */
   CreatePayRollPreOrderWithAuth(data: CreatePayRollPreOrderWithAuthRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePayRollPreOrderWithAuthResponse>;
-  /** {@link CreatePayRollToken 务工卡-生成授权令牌}({@link CreatePayRollTokenRequest 请求参数}): {@link CreatePayRollTokenResponse 返回参数} */
+  /** 务工卡-生成授权令牌 {@link CreatePayRollTokenRequest} {@link CreatePayRollTokenResponse} */
   CreatePayRollToken(data: CreatePayRollTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePayRollTokenResponse>;
-  /** {@link CreateRedInvoice 智慧零售-发票红冲}({@link CreateRedInvoiceRequest 请求参数}): {@link CreateRedInvoiceResponse 返回参数} */
+  /** 智慧零售-发票红冲 {@link CreateRedInvoiceRequest} {@link CreateRedInvoiceResponse} */
   CreateRedInvoice(data: CreateRedInvoiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRedInvoiceResponse>;
-  /** {@link CreateRedInvoiceV2 智慧零售-发票红冲V2}({@link CreateRedInvoiceV2Request 请求参数}): {@link CreateRedInvoiceV2Response 返回参数} */
+  /** 智慧零售-发票红冲V2 {@link CreateRedInvoiceV2Request} {@link CreateRedInvoiceV2Response} */
   CreateRedInvoiceV2(data: CreateRedInvoiceV2Request, config?: AxiosRequestConfig): AxiosPromise<CreateRedInvoiceV2Response>;
-  /** {@link CreateSinglePayment 灵云-单笔主播转账接口}({@link CreateSinglePaymentRequest 请求参数}): {@link CreateSinglePaymentResponse 返回参数} */
+  /** 灵云-单笔主播转账接口 {@link CreateSinglePaymentRequest} {@link CreateSinglePaymentResponse} */
   CreateSinglePayment(data: CreateSinglePaymentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSinglePaymentResponse>;
-  /** {@link CreateTransferBatch 智慧薪酬-发起批量转账}({@link CreateTransferBatchRequest 请求参数}): {@link CreateTransferBatchResponse 返回参数} */
+  /** 智慧薪酬-发起批量转账 {@link CreateTransferBatchRequest} {@link CreateTransferBatchResponse} */
   CreateTransferBatch(data: CreateTransferBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTransferBatchResponse>;
-  /** {@link DeduceQuota 直播平台-扣减额度}({@link DeduceQuotaRequest 请求参数}): {@link DeduceQuotaResponse 返回参数} */
+  /** 直播平台-扣减额度 {@link DeduceQuotaRequest} {@link DeduceQuotaResponse} */
   DeduceQuota(data: DeduceQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DeduceQuotaResponse>;
-  /** {@link DeleteAgentTaxPaymentInfo 直播平台-删除代理商完税信息}({@link DeleteAgentTaxPaymentInfoRequest 请求参数}): {@link DeleteAgentTaxPaymentInfoResponse 返回参数} */
+  /** 直播平台-删除代理商完税信息 {@link DeleteAgentTaxPaymentInfoRequest} {@link DeleteAgentTaxPaymentInfoResponse} */
   DeleteAgentTaxPaymentInfo(data: DeleteAgentTaxPaymentInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentTaxPaymentInfoResponse>;
-  /** {@link DeleteAgentTaxPaymentInfos 直播平台-删除代理商完税信息}({@link DeleteAgentTaxPaymentInfosRequest 请求参数}): {@link DeleteAgentTaxPaymentInfosResponse 返回参数} */
+  /** 直播平台-删除代理商完税信息 {@link DeleteAgentTaxPaymentInfosRequest} {@link DeleteAgentTaxPaymentInfosResponse} */
   DeleteAgentTaxPaymentInfos(data: DeleteAgentTaxPaymentInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentTaxPaymentInfosResponse>;
-  /** {@link DescribeChargeDetail 查询充值明细接口}({@link DescribeChargeDetailRequest 请求参数}): {@link DescribeChargeDetailResponse 返回参数} */
+  /** 查询充值明细接口 {@link DescribeChargeDetailRequest} {@link DescribeChargeDetailResponse} */
   DescribeChargeDetail(data: DescribeChargeDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChargeDetailResponse>;
-  /** {@link DescribeOrderStatus 查询单笔订单交易状态}({@link DescribeOrderStatusRequest 请求参数}): {@link DescribeOrderStatusResponse 返回参数} */
+  /** 查询单笔订单交易状态 {@link DescribeOrderStatusRequest} {@link DescribeOrderStatusResponse} */
   DescribeOrderStatus(data: DescribeOrderStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrderStatusResponse>;
-  /** {@link DistributeAccreditQuery 云支付-分账授权申请查询接口}({@link DistributeAccreditQueryRequest 请求参数}): {@link DistributeAccreditQueryResponse 返回参数} */
+  /** 云支付-分账授权申请查询接口 {@link DistributeAccreditQueryRequest} {@link DistributeAccreditQueryResponse} */
   DistributeAccreditQuery(data: DistributeAccreditQueryRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeAccreditQueryResponse>;
-  /** {@link DistributeAccreditTlinx 云支付-分账授权申请接口}({@link DistributeAccreditTlinxRequest 请求参数}): {@link DistributeAccreditTlinxResponse 返回参数} */
+  /** 云支付-分账授权申请接口 {@link DistributeAccreditTlinxRequest} {@link DistributeAccreditTlinxResponse} */
   DistributeAccreditTlinx(data: DistributeAccreditTlinxRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeAccreditTlinxResponse>;
-  /** {@link DistributeAddReceiver 云支付-分账添加分账接收方接口}({@link DistributeAddReceiverRequest 请求参数}): {@link DistributeAddReceiverResponse 返回参数} */
+  /** 云支付-分账添加分账接收方接口 {@link DistributeAddReceiverRequest} {@link DistributeAddReceiverResponse} */
   DistributeAddReceiver(data: DistributeAddReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeAddReceiverResponse>;
-  /** {@link DistributeApply 云支付-分账请求接口}({@link DistributeApplyRequest 请求参数}): {@link DistributeApplyResponse 返回参数} */
+  /** 云支付-分账请求接口 {@link DistributeApplyRequest} {@link DistributeApplyResponse} */
   DistributeApply(data: DistributeApplyRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeApplyResponse>;
-  /** {@link DistributeCancel 云支付-分账撤销接口}({@link DistributeCancelRequest 请求参数}): {@link DistributeCancelResponse 返回参数} */
+  /** 云支付-分账撤销接口 {@link DistributeCancelRequest} {@link DistributeCancelResponse} */
   DistributeCancel(data: DistributeCancelRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeCancelResponse>;
-  /** {@link DistributeQuery 云支付-分账结果查询接口}({@link DistributeQueryRequest 请求参数}): {@link DistributeQueryResponse 返回参数} */
+  /** 云支付-分账结果查询接口 {@link DistributeQueryRequest} {@link DistributeQueryResponse} */
   DistributeQuery(data: DistributeQueryRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeQueryResponse>;
-  /** {@link DistributeQueryReceiver 云支付-查询已添加分账接收方接口}({@link DistributeQueryReceiverRequest 请求参数}): {@link DistributeQueryReceiverResponse 返回参数} */
+  /** 云支付-查询已添加分账接收方接口 {@link DistributeQueryReceiverRequest} {@link DistributeQueryReceiverResponse} */
   DistributeQueryReceiver(data: DistributeQueryReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeQueryReceiverResponse>;
-  /** {@link DistributeRemoveReceiver 云支付-分账解除分账接收方接口}({@link DistributeRemoveReceiverRequest 请求参数}): {@link DistributeRemoveReceiverResponse 返回参数} */
+  /** 云支付-分账解除分账接收方接口 {@link DistributeRemoveReceiverRequest} {@link DistributeRemoveReceiverResponse} */
   DistributeRemoveReceiver(data: DistributeRemoveReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeRemoveReceiverResponse>;
-  /** {@link DownloadBill 聚鑫-账单下载}({@link DownloadBillRequest 请求参数}): {@link DownloadBillResponse 返回参数} */
+  /** 聚鑫-账单下载 {@link DownloadBillRequest} {@link DownloadBillResponse} */
   DownloadBill(data: DownloadBillRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadBillResponse>;
-  /** {@link DownloadOrgFile 云支付-下载机构文件接口}({@link DownloadOrgFileRequest 请求参数}): {@link DownloadOrgFileResponse 返回参数} */
+  /** 云支付-下载机构文件接口 {@link DownloadOrgFileRequest} {@link DownloadOrgFileResponse} */
   DownloadOrgFile(data: DownloadOrgFileRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadOrgFileResponse>;
-  /** {@link DownloadReconciliationUrl 灵云-对账中心账单下载接口}({@link DownloadReconciliationUrlRequest 请求参数}): {@link DownloadReconciliationUrlResponse 返回参数} */
+  /** 灵云-对账中心账单下载接口 {@link DownloadReconciliationUrlRequest} {@link DownloadReconciliationUrlResponse} */
   DownloadReconciliationUrl(data: DownloadReconciliationUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadReconciliationUrlResponse>;
-  /** {@link ExecuteMemberTransaction 会员间交易接口}({@link ExecuteMemberTransactionRequest 请求参数}): {@link ExecuteMemberTransactionResponse 返回参数} */
+  /** 会员间交易接口 {@link ExecuteMemberTransactionRequest} {@link ExecuteMemberTransactionResponse} */
   ExecuteMemberTransaction(data: ExecuteMemberTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteMemberTransactionResponse>;
-  /** {@link FreezeFlexBalance 灵云V2-冻结余额}({@link FreezeFlexBalanceRequest 请求参数}): {@link FreezeFlexBalanceResponse 返回参数} */
+  /** 灵云V2-冻结余额 {@link FreezeFlexBalanceRequest} {@link FreezeFlexBalanceResponse} */
   FreezeFlexBalance(data: FreezeFlexBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<FreezeFlexBalanceResponse>;
-  /** {@link GetBillDownloadUrl 云支付-获取机构账单文件下载地址}({@link GetBillDownloadUrlRequest 请求参数}): {@link GetBillDownloadUrlResponse 返回参数} */
+  /** 云支付-获取机构账单文件下载地址 {@link GetBillDownloadUrlRequest} {@link GetBillDownloadUrlResponse} */
   GetBillDownloadUrl(data: GetBillDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetBillDownloadUrlResponse>;
-  /** {@link GetDistributeBillDownloadUrl 云支付-获取机构分账账单文件下载地址}({@link GetDistributeBillDownloadUrlRequest 请求参数}): {@link GetDistributeBillDownloadUrlResponse 返回参数} */
+  /** 云支付-获取机构分账账单文件下载地址 {@link GetDistributeBillDownloadUrlRequest} {@link GetDistributeBillDownloadUrlResponse} */
   GetDistributeBillDownloadUrl(data: GetDistributeBillDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetDistributeBillDownloadUrlResponse>;
-  /** {@link GetPayRollAuth 务工卡-查询授权关系}({@link GetPayRollAuthRequest 请求参数}): {@link GetPayRollAuthResponse 返回参数} */
+  /** 务工卡-查询授权关系 {@link GetPayRollAuthRequest} {@link GetPayRollAuthResponse} */
   GetPayRollAuth(data: GetPayRollAuthRequest, config?: AxiosRequestConfig): AxiosPromise<GetPayRollAuthResponse>;
-  /** {@link GetPayRollAuthList 务工卡-查询核身记录}({@link GetPayRollAuthListRequest 请求参数}): {@link GetPayRollAuthListResponse 返回参数} */
+  /** 务工卡-查询核身记录 {@link GetPayRollAuthListRequest} {@link GetPayRollAuthListResponse} */
   GetPayRollAuthList(data: GetPayRollAuthListRequest, config?: AxiosRequestConfig): AxiosPromise<GetPayRollAuthListResponse>;
-  /** {@link GetPayRollAuthResult 务工卡-获取核身结果}({@link GetPayRollAuthResultRequest 请求参数}): {@link GetPayRollAuthResultResponse 返回参数} */
+  /** 务工卡-获取核身结果 {@link GetPayRollAuthResultRequest} {@link GetPayRollAuthResultResponse} */
   GetPayRollAuthResult(data: GetPayRollAuthResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetPayRollAuthResultResponse>;
-  /** {@link MigrateOrderRefund 智慧零售-系统迁移存量订单退款}({@link MigrateOrderRefundRequest 请求参数}): {@link MigrateOrderRefundResponse 返回参数} */
+  /** 智慧零售-系统迁移存量订单退款 {@link MigrateOrderRefundRequest} {@link MigrateOrderRefundResponse} */
   MigrateOrderRefund(data: MigrateOrderRefundRequest, config?: AxiosRequestConfig): AxiosPromise<MigrateOrderRefundResponse>;
-  /** {@link MigrateOrderRefundQuery 智慧零售-系统迁移存量订单退款查询}({@link MigrateOrderRefundQueryRequest 请求参数}): {@link MigrateOrderRefundQueryResponse 返回参数} */
+  /** 智慧零售-系统迁移存量订单退款查询 {@link MigrateOrderRefundQueryRequest} {@link MigrateOrderRefundQueryResponse} */
   MigrateOrderRefundQuery(data: MigrateOrderRefundQueryRequest, config?: AxiosRequestConfig): AxiosPromise<MigrateOrderRefundQueryResponse>;
-  /** {@link ModifyAgentTaxPaymentInfo 直播平台-修改代理商完税信息}({@link ModifyAgentTaxPaymentInfoRequest 请求参数}): {@link ModifyAgentTaxPaymentInfoResponse 返回参数} */
+  /** 直播平台-修改代理商完税信息 {@link ModifyAgentTaxPaymentInfoRequest} {@link ModifyAgentTaxPaymentInfoResponse} */
   ModifyAgentTaxPaymentInfo(data: ModifyAgentTaxPaymentInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAgentTaxPaymentInfoResponse>;
-  /** {@link ModifyBindedAccount 灵云-重新绑定账号}({@link ModifyBindedAccountRequest 请求参数}): {@link ModifyBindedAccountResponse 返回参数} */
+  /** 灵云-重新绑定账号 {@link ModifyBindedAccountRequest} {@link ModifyBindedAccountResponse} */
   ModifyBindedAccount(data: ModifyBindedAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBindedAccountResponse>;
-  /** {@link ModifyFlexFundingAccount 灵云V2-修改收款用户资金账号信息}({@link ModifyFlexFundingAccountRequest 请求参数}): {@link ModifyFlexFundingAccountResponse 返回参数} */
+  /** 灵云V2-修改收款用户资金账号信息 {@link ModifyFlexFundingAccountRequest} {@link ModifyFlexFundingAccountResponse} */
   ModifyFlexFundingAccount(data: ModifyFlexFundingAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFlexFundingAccountResponse>;
-  /** {@link ModifyFlexPayeeAccountRightStatus 灵云V2-收款用户账户权益状态修改}({@link ModifyFlexPayeeAccountRightStatusRequest 请求参数}): {@link ModifyFlexPayeeAccountRightStatusResponse 返回参数} */
+  /** 灵云V2-收款用户账户权益状态修改 {@link ModifyFlexPayeeAccountRightStatusRequest} {@link ModifyFlexPayeeAccountRightStatusResponse} */
   ModifyFlexPayeeAccountRightStatus(data: ModifyFlexPayeeAccountRightStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFlexPayeeAccountRightStatusResponse>;
-  /** {@link ModifyMerchant 云鉴-商户信息修改接口}({@link ModifyMerchantRequest 请求参数}): {@link ModifyMerchantResponse 返回参数} */
+  /** 云鉴-商户信息修改接口 {@link ModifyMerchantRequest} {@link ModifyMerchantResponse} */
   ModifyMerchant(data: ModifyMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMerchantResponse>;
-  /** {@link ModifyMntMbrBindRelateAcctBankCode 云鉴-维护会员绑定提现账户联行号}({@link ModifyMntMbrBindRelateAcctBankCodeRequest 请求参数}): {@link ModifyMntMbrBindRelateAcctBankCodeResponse 返回参数} */
+  /** 云鉴-维护会员绑定提现账户联行号 {@link ModifyMntMbrBindRelateAcctBankCodeRequest} {@link ModifyMntMbrBindRelateAcctBankCodeResponse} */
   ModifyMntMbrBindRelateAcctBankCode(data: ModifyMntMbrBindRelateAcctBankCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMntMbrBindRelateAcctBankCodeResponse>;
-  /** {@link QueryAcctBinding 聚鑫-查询子账户绑定银行卡}({@link QueryAcctBindingRequest 请求参数}): {@link QueryAcctBindingResponse 返回参数} */
+  /** 聚鑫-查询子账户绑定银行卡 {@link QueryAcctBindingRequest} {@link QueryAcctBindingResponse} */
   QueryAcctBinding(data: QueryAcctBindingRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAcctBindingResponse>;
-  /** {@link QueryAcctInfo 聚鑫-开户查询}({@link QueryAcctInfoRequest 请求参数}): {@link QueryAcctInfoResponse 返回参数} */
+  /** 聚鑫-开户查询 {@link QueryAcctInfoRequest} {@link QueryAcctInfoResponse} */
   QueryAcctInfo(data: QueryAcctInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAcctInfoResponse>;
-  /** {@link QueryAcctInfoList 聚鑫-开户列表查询}({@link QueryAcctInfoListRequest 请求参数}): {@link QueryAcctInfoListResponse 返回参数} */
+  /** 聚鑫-开户列表查询 {@link QueryAcctInfoListRequest} {@link QueryAcctInfoListResponse} */
   QueryAcctInfoList(data: QueryAcctInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAcctInfoListResponse>;
-  /** {@link QueryAgentStatements 直播平台-查询代理商结算单链接}({@link QueryAgentStatementsRequest 请求参数}): {@link QueryAgentStatementsResponse 返回参数} */
+  /** 直播平台-查询代理商结算单链接 {@link QueryAgentStatementsRequest} {@link QueryAgentStatementsResponse} */
   QueryAgentStatements(data: QueryAgentStatementsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAgentStatementsResponse>;
-  /** {@link QueryAgentTaxPaymentBatch 直播平台-查询批次信息}({@link QueryAgentTaxPaymentBatchRequest 请求参数}): {@link QueryAgentTaxPaymentBatchResponse 返回参数} */
+  /** 直播平台-查询批次信息 {@link QueryAgentTaxPaymentBatchRequest} {@link QueryAgentTaxPaymentBatchResponse} */
   QueryAgentTaxPaymentBatch(data: QueryAgentTaxPaymentBatchRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAgentTaxPaymentBatchResponse>;
-  /** {@link QueryAnchorContractInfo 直播平台-查询主播签约信息}({@link QueryAnchorContractInfoRequest 请求参数}): {@link QueryAnchorContractInfoResponse 返回参数} */
+  /** 直播平台-查询主播签约信息 {@link QueryAnchorContractInfoRequest} {@link QueryAnchorContractInfoResponse} */
   QueryAnchorContractInfo(data: QueryAnchorContractInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAnchorContractInfoResponse>;
-  /** {@link QueryApplicationMaterial 跨境-成功申报材料查询}({@link QueryApplicationMaterialRequest 请求参数}): {@link QueryApplicationMaterialResponse 返回参数} */
+  /** 跨境-成功申报材料查询 {@link QueryApplicationMaterialRequest} {@link QueryApplicationMaterialResponse} */
   QueryApplicationMaterial(data: QueryApplicationMaterialRequest, config?: AxiosRequestConfig): AxiosPromise<QueryApplicationMaterialResponse>;
-  /** {@link QueryAssignment 直播平台-查询分配关系}({@link QueryAssignmentRequest 请求参数}): {@link QueryAssignmentResponse 返回参数} */
+  /** 直播平台-查询分配关系 {@link QueryAssignmentRequest} {@link QueryAssignmentResponse} */
   QueryAssignment(data: QueryAssignmentRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAssignmentResponse>;
-  /** {@link QueryBalance 聚鑫-余额查询}({@link QueryBalanceRequest 请求参数}): {@link QueryBalanceResponse 返回参数} */
+  /** 聚鑫-余额查询 {@link QueryBalanceRequest} {@link QueryBalanceResponse} */
   QueryBalance(data: QueryBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBalanceResponse>;
-  /** {@link QueryBankClear 云鉴-查询银行在途清算结果}({@link QueryBankClearRequest 请求参数}): {@link QueryBankClearResponse 返回参数} */
+  /** 云鉴-查询银行在途清算结果 {@link QueryBankClearRequest} {@link QueryBankClearResponse} */
   QueryBankClear(data: QueryBankClearRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBankClearResponse>;
-  /** {@link QueryBankTransactionDetails 云鉴-查询银行时间段内交易明细}({@link QueryBankTransactionDetailsRequest 请求参数}): {@link QueryBankTransactionDetailsResponse 返回参数} */
+  /** 云鉴-查询银行时间段内交易明细 {@link QueryBankTransactionDetailsRequest} {@link QueryBankTransactionDetailsResponse} */
   QueryBankTransactionDetails(data: QueryBankTransactionDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBankTransactionDetailsResponse>;
-  /** {@link QueryBankWithdrawCashDetails 云鉴-查询银行时间段内清分提现明细}({@link QueryBankWithdrawCashDetailsRequest 请求参数}): {@link QueryBankWithdrawCashDetailsResponse 返回参数} */
+  /** 云鉴-查询银行时间段内清分提现明细 {@link QueryBankWithdrawCashDetailsRequest} {@link QueryBankWithdrawCashDetailsResponse} */
   QueryBankWithdrawCashDetails(data: QueryBankWithdrawCashDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBankWithdrawCashDetailsResponse>;
-  /** {@link QueryBatchPaymentResult 灵云-批量转账结果查询}({@link QueryBatchPaymentResultRequest 请求参数}): {@link QueryBatchPaymentResultResponse 返回参数} */
+  /** 灵云-批量转账结果查询 {@link QueryBatchPaymentResultRequest} {@link QueryBatchPaymentResultResponse} */
   QueryBatchPaymentResult(data: QueryBatchPaymentResultRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBatchPaymentResultResponse>;
-  /** {@link QueryBillDownloadURL 智能代发-单笔代发转账对账单下载接口}({@link QueryBillDownloadURLRequest 请求参数}): {@link QueryBillDownloadURLResponse 返回参数} */
+  /** 智能代发-单笔代发转账对账单下载接口 {@link QueryBillDownloadURLRequest} {@link QueryBillDownloadURLResponse} */
   QueryBillDownloadURL(data: QueryBillDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBillDownloadURLResponse>;
-  /** {@link QueryCityCode 云支付-查询城市编码接口}({@link QueryCityCodeRequest 请求参数}): {@link QueryCityCodeResponse 返回参数} */
+  /** 云支付-查询城市编码接口 {@link QueryCityCodeRequest} {@link QueryCityCodeResponse} */
   QueryCityCode(data: QueryCityCodeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCityCodeResponse>;
-  /** {@link QueryCloudChannelData 聚鑫V2-查询第三方渠道数据}({@link QueryCloudChannelDataRequest 请求参数}): {@link QueryCloudChannelDataResponse 返回参数} */
+  /** 聚鑫V2-查询第三方渠道数据 {@link QueryCloudChannelDataRequest} {@link QueryCloudChannelDataResponse} */
   QueryCloudChannelData(data: QueryCloudChannelDataRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCloudChannelDataResponse>;
-  /** {@link QueryCloudOrder 聚鑫V2-查询订单}({@link QueryCloudOrderRequest 请求参数}): {@link QueryCloudOrderResponse 返回参数} */
+  /** 聚鑫V2-查询订单 {@link QueryCloudOrderRequest} {@link QueryCloudOrderResponse} */
   QueryCloudOrder(data: QueryCloudOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCloudOrderResponse>;
-  /** {@link QueryCloudRefundOrder 聚鑫V2-查询退款}({@link QueryCloudRefundOrderRequest 请求参数}): {@link QueryCloudRefundOrderResponse 返回参数} */
+  /** 聚鑫V2-查询退款 {@link QueryCloudRefundOrderRequest} {@link QueryCloudRefundOrderResponse} */
   QueryCloudRefundOrder(data: QueryCloudRefundOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCloudRefundOrderResponse>;
-  /** {@link QueryCommonTransferRecharge 云鉴-查询普通转账充值明细}({@link QueryCommonTransferRechargeRequest 请求参数}): {@link QueryCommonTransferRechargeResponse 返回参数} */
+  /** 云鉴-查询普通转账充值明细 {@link QueryCommonTransferRechargeRequest} {@link QueryCommonTransferRechargeResponse} */
   QueryCommonTransferRecharge(data: QueryCommonTransferRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCommonTransferRechargeResponse>;
-  /** {@link QueryCompanyTitle 智慧零售-查询公司抬头}({@link QueryCompanyTitleRequest 请求参数}): {@link QueryCompanyTitleResponse 返回参数} */
+  /** 智慧零售-查询公司抬头 {@link QueryCompanyTitleRequest} {@link QueryCompanyTitleResponse} */
   QueryCompanyTitle(data: QueryCompanyTitleRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCompanyTitleResponse>;
-  /** {@link QueryContract 查询签约数据接口}({@link QueryContractRequest 请求参数}): {@link QueryContractResponse 返回参数} */
+  /** 查询签约数据接口 {@link QueryContractRequest} {@link QueryContractResponse} */
   QueryContract(data: QueryContractRequest, config?: AxiosRequestConfig): AxiosPromise<QueryContractResponse>;
-  /** {@link QueryContractPayFee 云支付-查询支付方式费率及自定义表单项接口}({@link QueryContractPayFeeRequest 请求参数}): {@link QueryContractPayFeeResponse 返回参数} */
+  /** 云支付-查询支付方式费率及自定义表单项接口 {@link QueryContractPayFeeRequest} {@link QueryContractPayFeeResponse} */
   QueryContractPayFee(data: QueryContractPayFeeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryContractPayFeeResponse>;
-  /** {@link QueryContractPayWayList 云支付-查询合同支付方式列表接口}({@link QueryContractPayWayListRequest 请求参数}): {@link QueryContractPayWayListResponse 返回参数} */
+  /** 云支付-查询合同支付方式列表接口 {@link QueryContractPayWayListRequest} {@link QueryContractPayWayListResponse} */
   QueryContractPayWayList(data: QueryContractPayWayListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryContractPayWayListResponse>;
-  /** {@link QueryContractRelateShop 云支付-查询合同可关联门店接口}({@link QueryContractRelateShopRequest 请求参数}): {@link QueryContractRelateShopResponse 返回参数} */
+  /** 云支付-查询合同可关联门店接口 {@link QueryContractRelateShopRequest} {@link QueryContractRelateShopResponse} */
   QueryContractRelateShop(data: QueryContractRelateShopRequest, config?: AxiosRequestConfig): AxiosPromise<QueryContractRelateShopResponse>;
-  /** {@link QueryCustAcctIdBalance 云鉴-查询银行子账户余额}({@link QueryCustAcctIdBalanceRequest 请求参数}): {@link QueryCustAcctIdBalanceResponse 返回参数} */
+  /** 云鉴-查询银行子账户余额 {@link QueryCustAcctIdBalanceRequest} {@link QueryCustAcctIdBalanceResponse} */
   QueryCustAcctIdBalance(data: QueryCustAcctIdBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCustAcctIdBalanceResponse>;
-  /** {@link QueryDownloadBillURL 云鉴-查询对账单下载地址接口}({@link QueryDownloadBillURLRequest 请求参数}): {@link QueryDownloadBillURLResponse 返回参数} */
+  /** 云鉴-查询对账单下载地址接口 {@link QueryDownloadBillURLRequest} {@link QueryDownloadBillURLResponse} */
   QueryDownloadBillURL(data: QueryDownloadBillURLRequest, config?: AxiosRequestConfig): AxiosPromise<QueryDownloadBillURLResponse>;
-  /** {@link QueryExceedingInfo 灵云-查询超额信息}({@link QueryExceedingInfoRequest 请求参数}): {@link QueryExceedingInfoResponse 返回参数} */
+  /** 灵云-查询超额信息 {@link QueryExceedingInfoRequest} {@link QueryExceedingInfoResponse} */
   QueryExceedingInfo(data: QueryExceedingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExceedingInfoResponse>;
-  /** {@link QueryExchangeRate 跨境-查询汇率}({@link QueryExchangeRateRequest 请求参数}): {@link QueryExchangeRateResponse 返回参数} */
+  /** 跨境-查询汇率 {@link QueryExchangeRateRequest} {@link QueryExchangeRateResponse} */
   QueryExchangeRate(data: QueryExchangeRateRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExchangeRateResponse>;
-  /** {@link QueryFinancialDataUrl 财税-查询金融数据文件下载链接}({@link QueryFinancialDataUrlRequest 请求参数}): {@link QueryFinancialDataUrlResponse 返回参数} */
+  /** 财税-查询金融数据文件下载链接 {@link QueryFinancialDataUrlRequest} {@link QueryFinancialDataUrlResponse} */
   QueryFinancialDataUrl(data: QueryFinancialDataUrlRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFinancialDataUrlResponse>;
-  /** {@link QueryFlexAmountBeforeTax 灵云V2-查询税前金额}({@link QueryFlexAmountBeforeTaxRequest 请求参数}): {@link QueryFlexAmountBeforeTaxResponse 返回参数} */
+  /** 灵云V2-查询税前金额 {@link QueryFlexAmountBeforeTaxRequest} {@link QueryFlexAmountBeforeTaxResponse} */
   QueryFlexAmountBeforeTax(data: QueryFlexAmountBeforeTaxRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexAmountBeforeTaxResponse>;
-  /** {@link QueryFlexBillDownloadUrl 灵云V2-查询对账单文件下载链接}({@link QueryFlexBillDownloadUrlRequest 请求参数}): {@link QueryFlexBillDownloadUrlResponse 返回参数} */
+  /** 灵云V2-查询对账单文件下载链接 {@link QueryFlexBillDownloadUrlRequest} {@link QueryFlexBillDownloadUrlResponse} */
   QueryFlexBillDownloadUrl(data: QueryFlexBillDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexBillDownloadUrlResponse>;
-  /** {@link QueryFlexFreezeOrderList 灵云V2-查询冻结订单列表}({@link QueryFlexFreezeOrderListRequest 请求参数}): {@link QueryFlexFreezeOrderListResponse 返回参数} */
+  /** 灵云V2-查询冻结订单列表 {@link QueryFlexFreezeOrderListRequest} {@link QueryFlexFreezeOrderListResponse} */
   QueryFlexFreezeOrderList(data: QueryFlexFreezeOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexFreezeOrderListResponse>;
-  /** {@link QueryFlexOrderSummaryList 灵云V2-订单汇总列表查询}({@link QueryFlexOrderSummaryListRequest 请求参数}): {@link QueryFlexOrderSummaryListResponse 返回参数} */
+  /** 灵云V2-订单汇总列表查询 {@link QueryFlexOrderSummaryListRequest} {@link QueryFlexOrderSummaryListResponse} */
   QueryFlexOrderSummaryList(data: QueryFlexOrderSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexOrderSummaryListResponse>;
-  /** {@link QueryFlexPayeeAccountBalance 灵云V2-收款用户账户余额查询}({@link QueryFlexPayeeAccountBalanceRequest 请求参数}): {@link QueryFlexPayeeAccountBalanceResponse 返回参数} */
+  /** 灵云V2-收款用户账户余额查询 {@link QueryFlexPayeeAccountBalanceRequest} {@link QueryFlexPayeeAccountBalanceResponse} */
   QueryFlexPayeeAccountBalance(data: QueryFlexPayeeAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPayeeAccountBalanceResponse>;
-  /** {@link QueryFlexPayeeAccountInfo 灵云V2-收款用户账户信息查询}({@link QueryFlexPayeeAccountInfoRequest 请求参数}): {@link QueryFlexPayeeAccountInfoResponse 返回参数} */
+  /** 灵云V2-收款用户账户信息查询 {@link QueryFlexPayeeAccountInfoRequest} {@link QueryFlexPayeeAccountInfoResponse} */
   QueryFlexPayeeAccountInfo(data?: QueryFlexPayeeAccountInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPayeeAccountInfoResponse>;
-  /** {@link QueryFlexPayeeAccountList 灵云V2-收款用户账户列表查询}({@link QueryFlexPayeeAccountListRequest 请求参数}): {@link QueryFlexPayeeAccountListResponse 返回参数} */
+  /** 灵云V2-收款用户账户列表查询 {@link QueryFlexPayeeAccountListRequest} {@link QueryFlexPayeeAccountListResponse} */
   QueryFlexPayeeAccountList(data: QueryFlexPayeeAccountListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPayeeAccountListResponse>;
-  /** {@link QueryFlexPayeeInfo 灵云V2-收款用户信息查询}({@link QueryFlexPayeeInfoRequest 请求参数}): {@link QueryFlexPayeeInfoResponse 返回参数} */
+  /** 灵云V2-收款用户信息查询 {@link QueryFlexPayeeInfoRequest} {@link QueryFlexPayeeInfoResponse} */
   QueryFlexPayeeInfo(data?: QueryFlexPayeeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPayeeInfoResponse>;
-  /** {@link QueryFlexPaymentOrderList 灵云V2-查询付款订单列表}({@link QueryFlexPaymentOrderListRequest 请求参数}): {@link QueryFlexPaymentOrderListResponse 返回参数} */
+  /** 灵云V2-查询付款订单列表 {@link QueryFlexPaymentOrderListRequest} {@link QueryFlexPaymentOrderListResponse} */
   QueryFlexPaymentOrderList(data: QueryFlexPaymentOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPaymentOrderListResponse>;
-  /** {@link QueryFlexPaymentOrderStatus 灵云V2-查询付款订单状态}({@link QueryFlexPaymentOrderStatusRequest 请求参数}): {@link QueryFlexPaymentOrderStatusResponse 返回参数} */
+  /** 灵云V2-查询付款订单状态 {@link QueryFlexPaymentOrderStatusRequest} {@link QueryFlexPaymentOrderStatusResponse} */
   QueryFlexPaymentOrderStatus(data?: QueryFlexPaymentOrderStatusRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPaymentOrderStatusResponse>;
-  /** {@link QueryFlexPlatformAccountBalance 灵云V2-平台账户余额查询}({@link QueryFlexPlatformAccountBalanceRequest 请求参数}): {@link QueryFlexPlatformAccountBalanceResponse 返回参数} */
+  /** 灵云V2-平台账户余额查询 {@link QueryFlexPlatformAccountBalanceRequest} {@link QueryFlexPlatformAccountBalanceResponse} */
   QueryFlexPlatformAccountBalance(data: QueryFlexPlatformAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexPlatformAccountBalanceResponse>;
-  /** {@link QueryFlexServiceProviderAccountBalance 灵云V2-查询服务商账户余额}({@link QueryFlexServiceProviderAccountBalanceRequest 请求参数}): {@link QueryFlexServiceProviderAccountBalanceResponse 返回参数} */
+  /** 灵云V2-查询服务商账户余额 {@link QueryFlexServiceProviderAccountBalanceRequest} {@link QueryFlexServiceProviderAccountBalanceResponse} */
   QueryFlexServiceProviderAccountBalance(data: QueryFlexServiceProviderAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexServiceProviderAccountBalanceResponse>;
-  /** {@link QueryFlexSettlementOrderList 灵云V2-查询结算订单列表}({@link QueryFlexSettlementOrderListRequest 请求参数}): {@link QueryFlexSettlementOrderListResponse 返回参数} */
+  /** 灵云V2-查询结算订单列表 {@link QueryFlexSettlementOrderListRequest} {@link QueryFlexSettlementOrderListResponse} */
   QueryFlexSettlementOrderList(data: QueryFlexSettlementOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFlexSettlementOrderListResponse>;
-  /** {@link QueryFundsTransactionDetails 聚鑫-查询会员资金交易信息列表}({@link QueryFundsTransactionDetailsRequest 请求参数}): {@link QueryFundsTransactionDetailsResponse 返回参数} */
+  /** 聚鑫-查询会员资金交易信息列表 {@link QueryFundsTransactionDetailsRequest} {@link QueryFundsTransactionDetailsResponse} */
   QueryFundsTransactionDetails(data: QueryFundsTransactionDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFundsTransactionDetailsResponse>;
-  /** {@link QueryInvoice 智慧零售-发票查询}({@link QueryInvoiceRequest 请求参数}): {@link QueryInvoiceResponse 返回参数} */
+  /** 智慧零售-发票查询 {@link QueryInvoiceRequest} {@link QueryInvoiceResponse} */
   QueryInvoice(data: QueryInvoiceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryInvoiceResponse>;
-  /** {@link QueryInvoiceV2 智慧零售-发票查询V2}({@link QueryInvoiceV2Request 请求参数}): {@link QueryInvoiceV2Response 返回参数} */
+  /** 智慧零售-发票查询V2 {@link QueryInvoiceV2Request} {@link QueryInvoiceV2Response} */
   QueryInvoiceV2(data: QueryInvoiceV2Request, config?: AxiosRequestConfig): AxiosPromise<QueryInvoiceV2Response>;
-  /** {@link QueryMaliciousRegistration 商户恶意注册接口}({@link QueryMaliciousRegistrationRequest 请求参数}): {@link QueryMaliciousRegistrationResponse 返回参数} */
+  /** 商户恶意注册接口 {@link QueryMaliciousRegistrationRequest} {@link QueryMaliciousRegistrationResponse} */
   QueryMaliciousRegistration(data: QueryMaliciousRegistrationRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMaliciousRegistrationResponse>;
-  /** {@link QueryMemberBind 云鉴-会员绑定信息查询}({@link QueryMemberBindRequest 请求参数}): {@link QueryMemberBindResponse 返回参数} */
+  /** 云鉴-会员绑定信息查询 {@link QueryMemberBindRequest} {@link QueryMemberBindResponse} */
   QueryMemberBind(data: QueryMemberBindRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMemberBindResponse>;
-  /** {@link QueryMemberTransaction 云鉴-会员间交易-不验证}({@link QueryMemberTransactionRequest 请求参数}): {@link QueryMemberTransactionResponse 返回参数} */
+  /** 云鉴-会员间交易-不验证 {@link QueryMemberTransactionRequest} {@link QueryMemberTransactionResponse} */
   QueryMemberTransaction(data: QueryMemberTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMemberTransactionResponse>;
-  /** {@link QueryMemberTransactionDetails 聚鑫-查询会员间交易信息列表}({@link QueryMemberTransactionDetailsRequest 请求参数}): {@link QueryMemberTransactionDetailsResponse 返回参数} */
+  /** 聚鑫-查询会员间交易信息列表 {@link QueryMemberTransactionDetailsRequest} {@link QueryMemberTransactionDetailsResponse} */
   QueryMemberTransactionDetails(data: QueryMemberTransactionDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMemberTransactionDetailsResponse>;
-  /** {@link QueryMerchant 云鉴-商户信息查询接口}({@link QueryMerchantRequest 请求参数}): {@link QueryMerchantResponse 返回参数} */
+  /** 云鉴-商户信息查询接口 {@link QueryMerchantRequest} {@link QueryMerchantResponse} */
   QueryMerchant(data: QueryMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMerchantResponse>;
-  /** {@link QueryMerchantBalance 跨境-对接方账户余额查询}({@link QueryMerchantBalanceRequest 请求参数}): {@link QueryMerchantBalanceResponse 返回参数} */
+  /** 跨境-对接方账户余额查询 {@link QueryMerchantBalanceRequest} {@link QueryMerchantBalanceResponse} */
   QueryMerchantBalance(data: QueryMerchantBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMerchantBalanceResponse>;
-  /** {@link QueryMerchantClassification 云支付-查询商户分类接口}({@link QueryMerchantClassificationRequest 请求参数}): {@link QueryMerchantClassificationResponse 返回参数} */
+  /** 云支付-查询商户分类接口 {@link QueryMerchantClassificationRequest} {@link QueryMerchantClassificationResponse} */
   QueryMerchantClassification(data: QueryMerchantClassificationRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMerchantClassificationResponse>;
-  /** {@link QueryMerchantInfoForManagement 智慧零售-查询管理端商户}({@link QueryMerchantInfoForManagementRequest 请求参数}): {@link QueryMerchantInfoForManagementResponse 返回参数} */
+  /** 智慧零售-查询管理端商户 {@link QueryMerchantInfoForManagementRequest} {@link QueryMerchantInfoForManagementResponse} */
   QueryMerchantInfoForManagement(data: QueryMerchantInfoForManagementRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMerchantInfoForManagementResponse>;
-  /** {@link QueryMerchantOrder 云鉴-消费订单查询接口}({@link QueryMerchantOrderRequest 请求参数}): {@link QueryMerchantOrderResponse 返回参数} */
+  /** 云鉴-消费订单查询接口 {@link QueryMerchantOrderRequest} {@link QueryMerchantOrderResponse} */
   QueryMerchantOrder(data: QueryMerchantOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMerchantOrderResponse>;
-  /** {@link QueryMerchantPayWayList 云支付-查询商户支付方式列表}({@link QueryMerchantPayWayListRequest 请求参数}): {@link QueryMerchantPayWayListResponse 返回参数} */
+  /** 云支付-查询商户支付方式列表 {@link QueryMerchantPayWayListRequest} {@link QueryMerchantPayWayListResponse} */
   QueryMerchantPayWayList(data: QueryMerchantPayWayListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMerchantPayWayListResponse>;
-  /** {@link QueryOpenBankBankAccountBalance 云企付-子商户银行卡余额查询}({@link QueryOpenBankBankAccountBalanceRequest 请求参数}): {@link QueryOpenBankBankAccountBalanceResponse 返回参数} */
+  /** 云企付-子商户银行卡余额查询 {@link QueryOpenBankBankAccountBalanceRequest} {@link QueryOpenBankBankAccountBalanceResponse} */
   QueryOpenBankBankAccountBalance(data: QueryOpenBankBankAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankBankAccountBalanceResponse>;
-  /** {@link QueryOpenBankBankBranchList 云企付-查询联行号}({@link QueryOpenBankBankBranchListRequest 请求参数}): {@link QueryOpenBankBankBranchListResponse 返回参数} */
+  /** 云企付-查询联行号 {@link QueryOpenBankBankBranchListRequest} {@link QueryOpenBankBankBranchListResponse} */
   QueryOpenBankBankBranchList(data: QueryOpenBankBankBranchListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankBankBranchListResponse>;
-  /** {@link QueryOpenBankBillDataPage 云企付-分页查询对账单数据}({@link QueryOpenBankBillDataPageRequest 请求参数}): {@link QueryOpenBankBillDataPageResponse 返回参数} */
+  /** 云企付-分页查询对账单数据 {@link QueryOpenBankBillDataPageRequest} {@link QueryOpenBankBillDataPageResponse} */
   QueryOpenBankBillDataPage(data: QueryOpenBankBillDataPageRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankBillDataPageResponse>;
-  /** {@link QueryOpenBankBindExternalSubMerchantBankAccount 云企付-子商户银行卡绑定结果查询}({@link QueryOpenBankBindExternalSubMerchantBankAccountRequest 请求参数}): {@link QueryOpenBankBindExternalSubMerchantBankAccountResponse 返回参数} */
+  /** 云企付-子商户银行卡绑定结果查询 {@link QueryOpenBankBindExternalSubMerchantBankAccountRequest} {@link QueryOpenBankBindExternalSubMerchantBankAccountResponse} */
   QueryOpenBankBindExternalSubMerchantBankAccount(data: QueryOpenBankBindExternalSubMerchantBankAccountRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankBindExternalSubMerchantBankAccountResponse>;
-  /** {@link QueryOpenBankDailyReceiptDownloadUrl 云企付-按日期批量查询回单下载地址}({@link QueryOpenBankDailyReceiptDownloadUrlRequest 请求参数}): {@link QueryOpenBankDailyReceiptDownloadUrlResponse 返回参数} */
+  /** 云企付-按日期批量查询回单下载地址 {@link QueryOpenBankDailyReceiptDownloadUrlRequest} {@link QueryOpenBankDailyReceiptDownloadUrlResponse} */
   QueryOpenBankDailyReceiptDownloadUrl(data: QueryOpenBankDailyReceiptDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankDailyReceiptDownloadUrlResponse>;
-  /** {@link QueryOpenBankDownLoadUrl 云企付-查询对账单下载地址}({@link QueryOpenBankDownLoadUrlRequest 请求参数}): {@link QueryOpenBankDownLoadUrlResponse 返回参数} */
+  /** 云企付-查询对账单下载地址 {@link QueryOpenBankDownLoadUrlRequest} {@link QueryOpenBankDownLoadUrlResponse} */
   QueryOpenBankDownLoadUrl(data: QueryOpenBankDownLoadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankDownLoadUrlResponse>;
-  /** {@link QueryOpenBankExternalSubAccountBookBalance 云企付-子商户电子记账本余额查询}({@link QueryOpenBankExternalSubAccountBookBalanceRequest 请求参数}): {@link QueryOpenBankExternalSubAccountBookBalanceResponse 返回参数} */
+  /** 云企付-子商户电子记账本余额查询 {@link QueryOpenBankExternalSubAccountBookBalanceRequest} {@link QueryOpenBankExternalSubAccountBookBalanceResponse} */
   QueryOpenBankExternalSubAccountBookBalance(data: QueryOpenBankExternalSubAccountBookBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankExternalSubAccountBookBalanceResponse>;
-  /** {@link QueryOpenBankExternalSubMerchantBankAccount 云企付-子商户银行卡列表查询}({@link QueryOpenBankExternalSubMerchantBankAccountRequest 请求参数}): {@link QueryOpenBankExternalSubMerchantBankAccountResponse 返回参数} */
+  /** 云企付-子商户银行卡列表查询 {@link QueryOpenBankExternalSubMerchantBankAccountRequest} {@link QueryOpenBankExternalSubMerchantBankAccountResponse} */
   QueryOpenBankExternalSubMerchantBankAccount(data: QueryOpenBankExternalSubMerchantBankAccountRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankExternalSubMerchantBankAccountResponse>;
-  /** {@link QueryOpenBankExternalSubMerchantRegistration 云企付-子商户进件结果查询}({@link QueryOpenBankExternalSubMerchantRegistrationRequest 请求参数}): {@link QueryOpenBankExternalSubMerchantRegistrationResponse 返回参数} */
+  /** 云企付-子商户进件结果查询 {@link QueryOpenBankExternalSubMerchantRegistrationRequest} {@link QueryOpenBankExternalSubMerchantRegistrationResponse} */
   QueryOpenBankExternalSubMerchantRegistration(data: QueryOpenBankExternalSubMerchantRegistrationRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankExternalSubMerchantRegistrationResponse>;
-  /** {@link QueryOpenBankOrderDetailReceiptInfo 云企付-单笔交易回单申请结果查询}({@link QueryOpenBankOrderDetailReceiptInfoRequest 请求参数}): {@link QueryOpenBankOrderDetailReceiptInfoResponse 返回参数} */
+  /** 云企付-单笔交易回单申请结果查询 {@link QueryOpenBankOrderDetailReceiptInfoRequest} {@link QueryOpenBankOrderDetailReceiptInfoResponse} */
   QueryOpenBankOrderDetailReceiptInfo(data: QueryOpenBankOrderDetailReceiptInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankOrderDetailReceiptInfoResponse>;
-  /** {@link QueryOpenBankPaymentOrder 云企付-查询订单支付结果}({@link QueryOpenBankPaymentOrderRequest 请求参数}): {@link QueryOpenBankPaymentOrderResponse 返回参数} */
+  /** 云企付-查询订单支付结果 {@link QueryOpenBankPaymentOrderRequest} {@link QueryOpenBankPaymentOrderResponse} */
   QueryOpenBankPaymentOrder(data: QueryOpenBankPaymentOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankPaymentOrderResponse>;
-  /** {@link QueryOpenBankProfitSharePayee 云企付-绑定分账收款方查询}({@link QueryOpenBankProfitSharePayeeRequest 请求参数}): {@link QueryOpenBankProfitSharePayeeResponse 返回参数} */
+  /** 云企付-绑定分账收款方查询 {@link QueryOpenBankProfitSharePayeeRequest} {@link QueryOpenBankProfitSharePayeeResponse} */
   QueryOpenBankProfitSharePayee(data: QueryOpenBankProfitSharePayeeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankProfitSharePayeeResponse>;
-  /** {@link QueryOpenBankRefundOrder 云企付-退款结果查询}({@link QueryOpenBankRefundOrderRequest 请求参数}): {@link QueryOpenBankRefundOrderResponse 返回参数} */
+  /** 云企付-退款结果查询 {@link QueryOpenBankRefundOrderRequest} {@link QueryOpenBankRefundOrderResponse} */
   QueryOpenBankRefundOrder(data: QueryOpenBankRefundOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankRefundOrderResponse>;
-  /** {@link QueryOpenBankSettleOrder 云企付-结算单查询结果}({@link QueryOpenBankSettleOrderRequest 请求参数}): {@link QueryOpenBankSettleOrderResponse 返回参数} */
+  /** 云企付-结算单查询结果 {@link QueryOpenBankSettleOrderRequest} {@link QueryOpenBankSettleOrderResponse} */
   QueryOpenBankSettleOrder(data: QueryOpenBankSettleOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankSettleOrderResponse>;
-  /** {@link QueryOpenBankSubMerchantCredential 云企付-子商户资质文件查询}({@link QueryOpenBankSubMerchantCredentialRequest 请求参数}): {@link QueryOpenBankSubMerchantCredentialResponse 返回参数} */
+  /** 云企付-子商户资质文件查询 {@link QueryOpenBankSubMerchantCredentialRequest} {@link QueryOpenBankSubMerchantCredentialResponse} */
   QueryOpenBankSubMerchantCredential(data: QueryOpenBankSubMerchantCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankSubMerchantCredentialResponse>;
-  /** {@link QueryOpenBankSubMerchantRateConfigure 云企付-子商户费率配置结果查询}({@link QueryOpenBankSubMerchantRateConfigureRequest 请求参数}): {@link QueryOpenBankSubMerchantRateConfigureResponse 返回参数} */
+  /** 云企付-子商户费率配置结果查询 {@link QueryOpenBankSubMerchantRateConfigureRequest} {@link QueryOpenBankSubMerchantRateConfigureResponse} */
   QueryOpenBankSubMerchantRateConfigure(data: QueryOpenBankSubMerchantRateConfigureRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankSubMerchantRateConfigureResponse>;
-  /** {@link QueryOpenBankSubMerchantSignOnline 云企付-子商户在线签约查询}({@link QueryOpenBankSubMerchantSignOnlineRequest 请求参数}): {@link QueryOpenBankSubMerchantSignOnlineResponse 返回参数} */
+  /** 云企付-子商户在线签约查询 {@link QueryOpenBankSubMerchantSignOnlineRequest} {@link QueryOpenBankSubMerchantSignOnlineResponse} */
   QueryOpenBankSubMerchantSignOnline(data: QueryOpenBankSubMerchantSignOnlineRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankSubMerchantSignOnlineResponse>;
-  /** {@link QueryOpenBankSupportBankList 云企付-查询支持银行列表}({@link QueryOpenBankSupportBankListRequest 请求参数}): {@link QueryOpenBankSupportBankListResponse 返回参数} */
+  /** 云企付-查询支持银行列表 {@link QueryOpenBankSupportBankListRequest} {@link QueryOpenBankSupportBankListResponse} */
   QueryOpenBankSupportBankList(data: QueryOpenBankSupportBankListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankSupportBankListResponse>;
-  /** {@link QueryOpenBankUnbindExternalSubMerchantBankAccount 云企付-子商户银行卡解绑结果查询}({@link QueryOpenBankUnbindExternalSubMerchantBankAccountRequest 请求参数}): {@link QueryOpenBankUnbindExternalSubMerchantBankAccountResponse 返回参数} */
+  /** 云企付-子商户银行卡解绑结果查询 {@link QueryOpenBankUnbindExternalSubMerchantBankAccountRequest} {@link QueryOpenBankUnbindExternalSubMerchantBankAccountResponse} */
   QueryOpenBankUnbindExternalSubMerchantBankAccount(data: QueryOpenBankUnbindExternalSubMerchantBankAccountRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankUnbindExternalSubMerchantBankAccountResponse>;
-  /** {@link QueryOpenBankVerificationOrder 云企付-查询核销订单状态}({@link QueryOpenBankVerificationOrderRequest 请求参数}): {@link QueryOpenBankVerificationOrderResponse 返回参数} */
+  /** 云企付-查询核销订单状态 {@link QueryOpenBankVerificationOrderRequest} {@link QueryOpenBankVerificationOrderResponse} */
   QueryOpenBankVerificationOrder(data: QueryOpenBankVerificationOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOpenBankVerificationOrderResponse>;
-  /** {@link QueryOrder 聚鑫-查询订单接口}({@link QueryOrderRequest 请求参数}): {@link QueryOrderResponse 返回参数} */
+  /** 聚鑫-查询订单接口 {@link QueryOrderRequest} {@link QueryOrderResponse} */
   QueryOrder(data: QueryOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOrderResponse>;
-  /** {@link QueryOrderStatus 云支付-查询订单付款状态}({@link QueryOrderStatusRequest 请求参数}): {@link QueryOrderStatusResponse 返回参数} */
+  /** 云支付-查询订单付款状态 {@link QueryOrderStatusRequest} {@link QueryOrderStatusResponse} */
   QueryOrderStatus(data: QueryOrderStatusRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOrderStatusResponse>;
-  /** {@link QueryOutwardOrder 跨境-查询汇出结果}({@link QueryOutwardOrderRequest 请求参数}): {@link QueryOutwardOrderResponse 返回参数} */
+  /** 跨境-查询汇出结果 {@link QueryOutwardOrderRequest} {@link QueryOutwardOrderResponse} */
   QueryOutwardOrder(data: QueryOutwardOrderRequest, config?: AxiosRequestConfig): AxiosPromise<QueryOutwardOrderResponse>;
-  /** {@link QueryPayerInfo 跨境-付款人查询}({@link QueryPayerInfoRequest 请求参数}): {@link QueryPayerInfoResponse 返回参数} */
+  /** 跨境-付款人查询 {@link QueryPayerInfoRequest} {@link QueryPayerInfoResponse} */
   QueryPayerInfo(data: QueryPayerInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryPayerInfoResponse>;
-  /** {@link QueryReconciliationDocument 云鉴-查询对账文件信息}({@link QueryReconciliationDocumentRequest 请求参数}): {@link QueryReconciliationDocumentResponse 返回参数} */
+  /** 云鉴-查询对账文件信息 {@link QueryReconciliationDocumentRequest} {@link QueryReconciliationDocumentResponse} */
   QueryReconciliationDocument(data: QueryReconciliationDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<QueryReconciliationDocumentResponse>;
-  /** {@link QueryReconciliationFileApplyInfo 聚鑫-查询对账文件申请结果}({@link QueryReconciliationFileApplyInfoRequest 请求参数}): {@link QueryReconciliationFileApplyInfoResponse 返回参数} */
+  /** 聚鑫-查询对账文件申请结果 {@link QueryReconciliationFileApplyInfoRequest} {@link QueryReconciliationFileApplyInfoResponse} */
   QueryReconciliationFileApplyInfo(data: QueryReconciliationFileApplyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryReconciliationFileApplyInfoResponse>;
-  /** {@link QueryRefund 聚鑫-查询退款接口}({@link QueryRefundRequest 请求参数}): {@link QueryRefundResponse 返回参数} */
+  /** 聚鑫-查询退款接口 {@link QueryRefundRequest} {@link QueryRefundResponse} */
   QueryRefund(data: QueryRefundRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRefundResponse>;
-  /** {@link QueryShopOpenId 云支付-获取门店OpenId接口}({@link QueryShopOpenIdRequest 请求参数}): {@link QueryShopOpenIdResponse 返回参数} */
+  /** 云支付-获取门店OpenId接口 {@link QueryShopOpenIdRequest} {@link QueryShopOpenIdResponse} */
   QueryShopOpenId(data: QueryShopOpenIdRequest, config?: AxiosRequestConfig): AxiosPromise<QueryShopOpenIdResponse>;
-  /** {@link QuerySinglePaymentResult 灵云-单笔转账结果查询}({@link QuerySinglePaymentResultRequest 请求参数}): {@link QuerySinglePaymentResultResponse 返回参数} */
+  /** 灵云-单笔转账结果查询 {@link QuerySinglePaymentResultRequest} {@link QuerySinglePaymentResultResponse} */
   QuerySinglePaymentResult(data: QuerySinglePaymentResultRequest, config?: AxiosRequestConfig): AxiosPromise<QuerySinglePaymentResultResponse>;
-  /** {@link QuerySingleTransactionStatus 云鉴-查询银行单笔交易状态}({@link QuerySingleTransactionStatusRequest 请求参数}): {@link QuerySingleTransactionStatusResponse 返回参数} */
+  /** 云鉴-查询银行单笔交易状态 {@link QuerySingleTransactionStatusRequest} {@link QuerySingleTransactionStatusResponse} */
   QuerySingleTransactionStatus(data: QuerySingleTransactionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<QuerySingleTransactionStatusResponse>;
-  /** {@link QuerySmallAmountTransfer 云鉴-查询小额鉴权转账结果}({@link QuerySmallAmountTransferRequest 请求参数}): {@link QuerySmallAmountTransferResponse 返回参数} */
+  /** 云鉴-查询小额鉴权转账结果 {@link QuerySmallAmountTransferRequest} {@link QuerySmallAmountTransferResponse} */
   QuerySmallAmountTransfer(data: QuerySmallAmountTransferRequest, config?: AxiosRequestConfig): AxiosPromise<QuerySmallAmountTransferResponse>;
-  /** {@link QueryTrade 跨境-贸易材料明细查询}({@link QueryTradeRequest 请求参数}): {@link QueryTradeResponse 返回参数} */
+  /** 跨境-贸易材料明细查询 {@link QueryTradeRequest} {@link QueryTradeResponse} */
   QueryTrade(data: QueryTradeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTradeResponse>;
-  /** {@link QueryTransferBatch 智慧薪酬-通过商家或者微信批次号查询批次单}({@link QueryTransferBatchRequest 请求参数}): {@link QueryTransferBatchResponse 返回参数} */
+  /** 智慧薪酬-通过商家或者微信批次号查询批次单 {@link QueryTransferBatchRequest} {@link QueryTransferBatchResponse} */
   QueryTransferBatch(data: QueryTransferBatchRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTransferBatchResponse>;
-  /** {@link QueryTransferDetail 智慧薪酬-通过明细单号查询批明细单}({@link QueryTransferDetailRequest 请求参数}): {@link QueryTransferDetailResponse 返回参数} */
+  /** 智慧薪酬-通过明细单号查询批明细单 {@link QueryTransferDetailRequest} {@link QueryTransferDetailResponse} */
   QueryTransferDetail(data: QueryTransferDetailRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTransferDetailResponse>;
-  /** {@link QueryTransferResult 智能代发-单笔代发转账查询接口}({@link QueryTransferResultRequest 请求参数}): {@link QueryTransferResultResponse 返回参数} */
+  /** 智能代发-单笔代发转账查询接口 {@link QueryTransferResultRequest} {@link QueryTransferResultResponse} */
   QueryTransferResult(data: QueryTransferResultRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTransferResultResponse>;
-  /** {@link RechargeByThirdPay 会员在途充值(经第三方支付渠道)接口}({@link RechargeByThirdPayRequest 请求参数}): {@link RechargeByThirdPayResponse 返回参数} */
+  /** 会员在途充值(经第三方支付渠道)接口 {@link RechargeByThirdPayRequest} {@link RechargeByThirdPayResponse} */
   RechargeByThirdPay(data: RechargeByThirdPayRequest, config?: AxiosRequestConfig): AxiosPromise<RechargeByThirdPayResponse>;
-  /** {@link RechargeMemberThirdPay 云鉴-会员在途充值(经第三方支付渠道)}({@link RechargeMemberThirdPayRequest 请求参数}): {@link RechargeMemberThirdPayResponse 返回参数} */
+  /** 云鉴-会员在途充值(经第三方支付渠道) {@link RechargeMemberThirdPayRequest} {@link RechargeMemberThirdPayResponse} */
   RechargeMemberThirdPay(data: RechargeMemberThirdPayRequest, config?: AxiosRequestConfig): AxiosPromise<RechargeMemberThirdPayResponse>;
-  /** {@link Refund 聚鑫-退款接口}({@link RefundRequest 请求参数}): {@link RefundResponse 返回参数} */
+  /** 聚鑫-退款接口 {@link RefundRequest} {@link RefundResponse} */
   Refund(data: RefundRequest, config?: AxiosRequestConfig): AxiosPromise<RefundResponse>;
-  /** {@link RefundCloudOrder 聚鑫V2-退款申请}({@link RefundCloudOrderRequest 请求参数}): {@link RefundCloudOrderResponse 返回参数} */
+  /** 聚鑫V2-退款申请 {@link RefundCloudOrderRequest} {@link RefundCloudOrderResponse} */
   RefundCloudOrder(data: RefundCloudOrderRequest, config?: AxiosRequestConfig): AxiosPromise<RefundCloudOrderResponse>;
-  /** {@link RefundMemberTransaction 会员间交易退款}({@link RefundMemberTransactionRequest 请求参数}): {@link RefundMemberTransactionResponse 返回参数} */
+  /** 会员间交易退款 {@link RefundMemberTransactionRequest} {@link RefundMemberTransactionResponse} */
   RefundMemberTransaction(data: RefundMemberTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<RefundMemberTransactionResponse>;
-  /** {@link RefundOpenBankOrder 云企付-退款申请}({@link RefundOpenBankOrderRequest 请求参数}): {@link RefundOpenBankOrderResponse 返回参数} */
+  /** 云企付-退款申请 {@link RefundOpenBankOrderRequest} {@link RefundOpenBankOrderResponse} */
   RefundOpenBankOrder(data: RefundOpenBankOrderRequest, config?: AxiosRequestConfig): AxiosPromise<RefundOpenBankOrderResponse>;
-  /** {@link RefundOrder 云鉴-消费订单退款接口}({@link RefundOrderRequest 请求参数}): {@link RefundOrderResponse 返回参数} */
+  /** 云鉴-消费订单退款接口 {@link RefundOrderRequest} {@link RefundOrderResponse} */
   RefundOrder(data: RefundOrderRequest, config?: AxiosRequestConfig): AxiosPromise<RefundOrderResponse>;
-  /** {@link RefundTlinxOrder 云支付-订单退款接口}({@link RefundTlinxOrderRequest 请求参数}): {@link RefundTlinxOrderResponse 返回参数} */
+  /** 云支付-订单退款接口 {@link RefundTlinxOrderRequest} {@link RefundTlinxOrderResponse} */
   RefundTlinxOrder(data: RefundTlinxOrderRequest, config?: AxiosRequestConfig): AxiosPromise<RefundTlinxOrderResponse>;
-  /** {@link RegisterBehavior 聚鑫-签约行为上报}({@link RegisterBehaviorRequest 请求参数}): {@link RegisterBehaviorResponse 返回参数} */
+  /** 聚鑫-签约行为上报 {@link RegisterBehaviorRequest} {@link RegisterBehaviorResponse} */
   RegisterBehavior(data: RegisterBehaviorRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterBehaviorResponse>;
-  /** {@link RegisterBill 登记挂账(支持撤销)}({@link RegisterBillRequest 请求参数}): {@link RegisterBillResponse 返回参数} */
+  /** 登记挂账(支持撤销) {@link RegisterBillRequest} {@link RegisterBillResponse} */
   RegisterBill(data: RegisterBillRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterBillResponse>;
-  /** {@link RegisterBillSupportWithdraw 云鉴-登记挂账}({@link RegisterBillSupportWithdrawRequest 请求参数}): {@link RegisterBillSupportWithdrawResponse 返回参数} */
+  /** 云鉴-登记挂账 {@link RegisterBillSupportWithdrawRequest} {@link RegisterBillSupportWithdrawResponse} */
   RegisterBillSupportWithdraw(data: RegisterBillSupportWithdrawRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterBillSupportWithdrawResponse>;
-  /** {@link RevResigterBillSupportWithdraw 云鉴-登记挂账撤销}({@link RevResigterBillSupportWithdrawRequest 请求参数}): {@link RevResigterBillSupportWithdrawResponse 返回参数} */
+  /** 云鉴-登记挂账撤销 {@link RevResigterBillSupportWithdrawRequest} {@link RevResigterBillSupportWithdrawResponse} */
   RevResigterBillSupportWithdraw(data: RevResigterBillSupportWithdrawRequest, config?: AxiosRequestConfig): AxiosPromise<RevResigterBillSupportWithdrawResponse>;
-  /** {@link ReviseMbrProperty 云鉴-修改会员属性-普通商户子账户}({@link ReviseMbrPropertyRequest 请求参数}): {@link ReviseMbrPropertyResponse 返回参数} */
+  /** 云鉴-修改会员属性-普通商户子账户 {@link ReviseMbrPropertyRequest} {@link ReviseMbrPropertyResponse} */
   ReviseMbrProperty(data: ReviseMbrPropertyRequest, config?: AxiosRequestConfig): AxiosPromise<ReviseMbrPropertyResponse>;
-  /** {@link RevokeMemberRechargeThirdPay 云鉴-撤销会员在途充值(经第三方支付渠道)}({@link RevokeMemberRechargeThirdPayRequest 请求参数}): {@link RevokeMemberRechargeThirdPayResponse 返回参数} */
+  /** 云鉴-撤销会员在途充值(经第三方支付渠道) {@link RevokeMemberRechargeThirdPayRequest} {@link RevokeMemberRechargeThirdPayResponse} */
   RevokeMemberRechargeThirdPay(data: RevokeMemberRechargeThirdPayRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeMemberRechargeThirdPayResponse>;
-  /** {@link RevokeRechargeByThirdPay 撤销会员在途充值(经第三方支付渠道)接口}({@link RevokeRechargeByThirdPayRequest 请求参数}): {@link RevokeRechargeByThirdPayResponse 返回参数} */
+  /** 撤销会员在途充值(经第三方支付渠道)接口 {@link RevokeRechargeByThirdPayRequest} {@link RevokeRechargeByThirdPayResponse} */
   RevokeRechargeByThirdPay(data: RevokeRechargeByThirdPayRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeRechargeByThirdPayResponse>;
-  /** {@link SyncContractData 签约状态同步接口}({@link SyncContractDataRequest 请求参数}): {@link SyncContractDataResponse 返回参数} */
+  /** 签约状态同步接口 {@link SyncContractDataRequest} {@link SyncContractDataResponse} */
   SyncContractData(data: SyncContractDataRequest, config?: AxiosRequestConfig): AxiosPromise<SyncContractDataResponse>;
-  /** {@link TerminateContract 解除签约关系接口}({@link TerminateContractRequest 请求参数}): {@link TerminateContractResponse 返回参数} */
+  /** 解除签约关系接口 {@link TerminateContractRequest} {@link TerminateContractResponse} */
   TerminateContract(data: TerminateContractRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateContractResponse>;
-  /** {@link TransferSinglePay 智能代发-单笔代发转账接口}({@link TransferSinglePayRequest 请求参数}): {@link TransferSinglePayResponse 返回参数} */
+  /** 智能代发-单笔代发转账接口 {@link TransferSinglePayRequest} {@link TransferSinglePayResponse} */
   TransferSinglePay(data: TransferSinglePayRequest, config?: AxiosRequestConfig): AxiosPromise<TransferSinglePayResponse>;
-  /** {@link UnBindAcct 聚鑫-解绑银行卡}({@link UnBindAcctRequest 请求参数}): {@link UnBindAcctResponse 返回参数} */
+  /** 聚鑫-解绑银行卡 {@link UnBindAcctRequest} {@link UnBindAcctResponse} */
   UnBindAcct(data: UnBindAcctRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindAcctResponse>;
-  /** {@link UnbindOpenBankExternalSubMerchantBankAccount 云企付-子商户银行卡解绑}({@link UnbindOpenBankExternalSubMerchantBankAccountRequest 请求参数}): {@link UnbindOpenBankExternalSubMerchantBankAccountResponse 返回参数} */
+  /** 云企付-子商户银行卡解绑 {@link UnbindOpenBankExternalSubMerchantBankAccountRequest} {@link UnbindOpenBankExternalSubMerchantBankAccountResponse} */
   UnbindOpenBankExternalSubMerchantBankAccount(data: UnbindOpenBankExternalSubMerchantBankAccountRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindOpenBankExternalSubMerchantBankAccountResponse>;
-  /** {@link UnbindRelateAcct 云鉴-会员解绑提现账户}({@link UnbindRelateAcctRequest 请求参数}): {@link UnbindRelateAcctResponse 返回参数} */
+  /** 云鉴-会员解绑提现账户 {@link UnbindRelateAcctRequest} {@link UnbindRelateAcctResponse} */
   UnbindRelateAcct(data: UnbindRelateAcctRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindRelateAcctResponse>;
-  /** {@link UnifiedCloudOrder 聚鑫V2-统一下单}({@link UnifiedCloudOrderRequest 请求参数}): {@link UnifiedCloudOrderResponse 返回参数} */
+  /** 聚鑫V2-统一下单 {@link UnifiedCloudOrderRequest} {@link UnifiedCloudOrderResponse} */
   UnifiedCloudOrder(data: UnifiedCloudOrderRequest, config?: AxiosRequestConfig): AxiosPromise<UnifiedCloudOrderResponse>;
-  /** {@link UnifiedOrder 聚鑫-统一下单接口}({@link UnifiedOrderRequest 请求参数}): {@link UnifiedOrderResponse 返回参数} */
+  /** 聚鑫-统一下单接口 {@link UnifiedOrderRequest} {@link UnifiedOrderResponse} */
   UnifiedOrder(data: UnifiedOrderRequest, config?: AxiosRequestConfig): AxiosPromise<UnifiedOrderResponse>;
-  /** {@link UnifiedTlinxOrder 云支付-统一下单接口}({@link UnifiedTlinxOrderRequest 请求参数}): {@link UnifiedTlinxOrderResponse 返回参数} */
+  /** 云支付-统一下单接口 {@link UnifiedTlinxOrderRequest} {@link UnifiedTlinxOrderResponse} */
   UnifiedTlinxOrder(data: UnifiedTlinxOrderRequest, config?: AxiosRequestConfig): AxiosPromise<UnifiedTlinxOrderResponse>;
-  /** {@link UploadExternalAnchorInfo 灵云-上传主播信息}({@link UploadExternalAnchorInfoRequest 请求参数}): {@link UploadExternalAnchorInfoResponse 返回参数} */
+  /** 灵云-上传主播信息 {@link UploadExternalAnchorInfoRequest} {@link UploadExternalAnchorInfoResponse} */
   UploadExternalAnchorInfo(data: UploadExternalAnchorInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UploadExternalAnchorInfoResponse>;
-  /** {@link UploadFile 直播平台-文件上传}({@link UploadFileRequest 请求参数}): {@link UploadFileResponse 返回参数} */
+  /** 直播平台-文件上传 {@link UploadFileRequest} {@link UploadFileResponse} */
   UploadFile(data: UploadFileRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFileResponse>;
-  /** {@link UploadOpenBankSubMerchantCredential 云企付-子商户资质文件上传}({@link UploadOpenBankSubMerchantCredentialRequest 请求参数}): {@link UploadOpenBankSubMerchantCredentialResponse 返回参数} */
+  /** 云企付-子商户资质文件上传 {@link UploadOpenBankSubMerchantCredentialRequest} {@link UploadOpenBankSubMerchantCredentialResponse} */
   UploadOpenBankSubMerchantCredential(data: UploadOpenBankSubMerchantCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<UploadOpenBankSubMerchantCredentialResponse>;
-  /** {@link UploadOrgFile 云支付-上传机构文件接口}({@link UploadOrgFileRequest 请求参数}): {@link UploadOrgFileResponse 返回参数} */
+  /** 云支付-上传机构文件接口 {@link UploadOrgFileRequest} {@link UploadOrgFileResponse} */
   UploadOrgFile(data: UploadOrgFileRequest, config?: AxiosRequestConfig): AxiosPromise<UploadOrgFileResponse>;
-  /** {@link UploadTaxList 直播平台-上传代理商完税列表}({@link UploadTaxListRequest 请求参数}): {@link UploadTaxListResponse 返回参数} */
+  /** 直播平台-上传代理商完税列表 {@link UploadTaxListRequest} {@link UploadTaxListResponse} */
   UploadTaxList(data: UploadTaxListRequest, config?: AxiosRequestConfig): AxiosPromise<UploadTaxListResponse>;
-  /** {@link UploadTaxPayment 直播平台-上传代理商完税证明}({@link UploadTaxPaymentRequest 请求参数}): {@link UploadTaxPaymentResponse 返回参数} */
+  /** 直播平台-上传代理商完税证明 {@link UploadTaxPaymentRequest} {@link UploadTaxPaymentResponse} */
   UploadTaxPayment(data: UploadTaxPaymentRequest, config?: AxiosRequestConfig): AxiosPromise<UploadTaxPaymentResponse>;
-  /** {@link VerifyOpenBankAccount 云企付-子商户银行卡打款验证}({@link VerifyOpenBankAccountRequest 请求参数}): {@link VerifyOpenBankAccountResponse 返回参数} */
+  /** 云企付-子商户银行卡打款验证 {@link VerifyOpenBankAccountRequest} {@link VerifyOpenBankAccountResponse} */
   VerifyOpenBankAccount(data: VerifyOpenBankAccountRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyOpenBankAccountResponse>;
-  /** {@link ViewContract 云支付-查询合同明细接口}({@link ViewContractRequest 请求参数}): {@link ViewContractResponse 返回参数} */
+  /** 云支付-查询合同明细接口 {@link ViewContractRequest} {@link ViewContractResponse} */
   ViewContract(data: ViewContractRequest, config?: AxiosRequestConfig): AxiosPromise<ViewContractResponse>;
-  /** {@link ViewMerchant 云支付-查询商户明细接口}({@link ViewMerchantRequest 请求参数}): {@link ViewMerchantResponse 返回参数} */
+  /** 云支付-查询商户明细接口 {@link ViewMerchantRequest} {@link ViewMerchantResponse} */
   ViewMerchant(data: ViewMerchantRequest, config?: AxiosRequestConfig): AxiosPromise<ViewMerchantResponse>;
-  /** {@link ViewShop 云支付-查询门店明细接口}({@link ViewShopRequest 请求参数}): {@link ViewShopResponse 返回参数} */
+  /** 云支付-查询门店明细接口 {@link ViewShopRequest} {@link ViewShopResponse} */
   ViewShop(data: ViewShopRequest, config?: AxiosRequestConfig): AxiosPromise<ViewShopResponse>;
-  /** {@link WithdrawCashMembership 云鉴-会员提现-不验证}({@link WithdrawCashMembershipRequest 请求参数}): {@link WithdrawCashMembershipResponse 返回参数} */
+  /** 云鉴-会员提现-不验证 {@link WithdrawCashMembershipRequest} {@link WithdrawCashMembershipResponse} */
   WithdrawCashMembership(data: WithdrawCashMembershipRequest, config?: AxiosRequestConfig): AxiosPromise<WithdrawCashMembershipResponse>;
 }
 

@@ -14,7 +14,7 @@ declare interface GetLocalEngineResponse {
   Info?: string;
   /** 本地引擎下载地址 */
   Data?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -32,7 +32,7 @@ declare interface GetScanResultResponse {
   Info?: string;
   /** 实际结果信息，包括md5、scan_status、virus_name三个字段；virus_name报毒名："torjan.**":黑样本的报毒名、".":样本不报毒、"" :样本无检出信息，需上传扫描；scan_status样本状态：-1无检出信息需上传扫描、0样本扫描中、1样本扫描结束且不报毒、2样本扫描结束且报黑、3样本下载失败； */
   Data?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -54,7 +54,7 @@ declare interface ScanFileHashResponse {
   Info?: string;
   /** 云查实际结果信息，包括md5、return_state、virus_state、virus_name字符逗号间隔； return_state查询状态：-1/0代表失败、1/2代表成功；virus_state文状件态：0文件不存在、1白、2黑、3未知、4感染性、5低可信白； */
   Data?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -74,20 +74,20 @@ declare interface ScanFileResponse {
   Info?: string;
   /** 异步扫描任务提交成功返回success */
   Data?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tav 文件检测} */
 declare interface Tav {
   (): Versions;
-  /** {@link GetLocalEngine 本地引擎下载地址获取}({@link GetLocalEngineRequest 请求参数}): {@link GetLocalEngineResponse 返回参数} */
+  /** 本地引擎下载地址获取 {@link GetLocalEngineRequest} {@link GetLocalEngineResponse} */
   GetLocalEngine(data: GetLocalEngineRequest, config?: AxiosRequestConfig): AxiosPromise<GetLocalEngineResponse>;
-  /** {@link GetScanResult 文件上传扫描结果查询}({@link GetScanResultRequest 请求参数}): {@link GetScanResultResponse 返回参数} */
+  /** 文件上传扫描结果查询 {@link GetScanResultRequest} {@link GetScanResultResponse} */
   GetScanResult(data: GetScanResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetScanResultResponse>;
-  /** {@link ScanFile 文件上传扫描}({@link ScanFileRequest 请求参数}): {@link ScanFileResponse 返回参数} */
+  /** 文件上传扫描 {@link ScanFileRequest} {@link ScanFileResponse} */
   ScanFile(data: ScanFileRequest, config?: AxiosRequestConfig): AxiosPromise<ScanFileResponse>;
-  /** {@link ScanFileHash 公有云查}({@link ScanFileHashRequest 请求参数}): {@link ScanFileHashResponse 返回参数} */
+  /** 公有云查 {@link ScanFileHashRequest} {@link ScanFileHashResponse} */
   ScanFileHash(data: ScanFileHashRequest, config?: AxiosRequestConfig): AxiosPromise<ScanFileHashResponse>;
 }
 

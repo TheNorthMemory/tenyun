@@ -38,7 +38,7 @@ declare interface DescribeFraudBaseResponse {
   RiskInfos: RiskInfo[];
   /** 离线风险信息 */
   HistRiskInfos: RiskInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -72,7 +72,7 @@ declare interface DescribeFraudPremiumResponse {
   HistRiskInfos: RiskInfo[];
   /** 设备匿名标识 */
   Openid: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -126,7 +126,7 @@ declare interface DescribeFraudUltimateResponse {
   SceneRiskInfos: RiskInfo[];
   /** 建议等级。1-极差，2-较差，3-中等，4-良好，5-优秀 */
   SuggestionLevel: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -156,20 +156,20 @@ declare interface DescribeTrustedIDResponse {
   SystemVersion: string;
   /** SDK版本号 */
   SdkBuildNo: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tds 设备安全} */
 declare interface Tds {
   (): Versions;
-  /** {@link DescribeFraudBase 查询设备风险}({@link DescribeFraudBaseRequest 请求参数}): {@link DescribeFraudBaseResponse 返回参数} */
+  /** 查询设备风险 {@link DescribeFraudBaseRequest} {@link DescribeFraudBaseResponse} */
   DescribeFraudBase(data: DescribeFraudBaseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFraudBaseResponse>;
-  /** {@link DescribeFraudPremium 查询设备标识及风险}({@link DescribeFraudPremiumRequest 请求参数}): {@link DescribeFraudPremiumResponse 返回参数} */
+  /** 查询设备标识及风险 {@link DescribeFraudPremiumRequest} {@link DescribeFraudPremiumResponse} */
   DescribeFraudPremium(data: DescribeFraudPremiumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFraudPremiumResponse>;
-  /** {@link DescribeFraudUltimate 查询设备标识及风险（旗舰版）}({@link DescribeFraudUltimateRequest 请求参数}): {@link DescribeFraudUltimateResponse 返回参数} */
+  /** 查询设备标识及风险（旗舰版） {@link DescribeFraudUltimateRequest} {@link DescribeFraudUltimateResponse} */
   DescribeFraudUltimate(data: DescribeFraudUltimateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFraudUltimateResponse>;
-  /** {@link DescribeTrustedID 查询设备标识}({@link DescribeTrustedIDRequest 请求参数}): {@link DescribeTrustedIDResponse 返回参数} */
+  /** 查询设备标识 {@link DescribeTrustedIDRequest} {@link DescribeTrustedIDResponse} */
   DescribeTrustedID(data: DescribeTrustedIDRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrustedIDResponse>;
 }
 

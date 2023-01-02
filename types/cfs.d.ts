@@ -318,7 +318,7 @@ declare interface BindAutoSnapshotPolicyRequest {
 declare interface BindAutoSnapshotPolicyResponse {
   /** 快照策略ID */
   AutoSnapshotPolicyId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -336,7 +336,7 @@ declare interface CreateAutoSnapshotPolicyRequest {
 declare interface CreateAutoSnapshotPolicyResponse {
   /** 快照策略ID */
   AutoSnapshotPolicyId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -388,7 +388,7 @@ declare interface CreateCfsFileSystemResponse {
   FsName: string;
   /** 文件系统是否加密 */
   Encrypted: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -410,7 +410,7 @@ declare interface CreateCfsPGroupResponse {
   BindCfsNum: number;
   /** 权限组创建时间 */
   CDate: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -440,7 +440,7 @@ declare interface CreateCfsRuleResponse {
   UserPermission: string;
   /** 优先级 */
   Priority: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -456,7 +456,7 @@ declare interface CreateCfsSnapshotRequest {
 declare interface CreateCfsSnapshotResponse {
   /** 文件系统快照id */
   SnapshotId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -468,7 +468,7 @@ declare interface DeleteAutoSnapshotPolicyRequest {
 declare interface DeleteAutoSnapshotPolicyResponse {
   /** 快照策略ID */
   AutoSnapshotPolicyId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -478,7 +478,7 @@ declare interface DeleteCfsFileSystemRequest {
 }
 
 declare interface DeleteCfsFileSystemResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -492,7 +492,7 @@ declare interface DeleteCfsPGroupResponse {
   PGroupId: string;
   /** 用户 ID */
   AppId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -508,7 +508,7 @@ declare interface DeleteCfsRuleResponse {
   RuleId: string;
   /** 权限组 ID */
   PGroupId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -522,7 +522,7 @@ declare interface DeleteCfsSnapshotRequest {
 declare interface DeleteCfsSnapshotResponse {
   /** 文件系统ID */
   SnapshotId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -534,7 +534,7 @@ declare interface DeleteMountTargetRequest {
 }
 
 declare interface DeleteMountTargetResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -548,7 +548,7 @@ declare interface DeleteUserQuotaRequest {
 }
 
 declare interface DeleteUserQuotaResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -572,7 +572,7 @@ declare interface DescribeAutoSnapshotPoliciesResponse {
   TotalCount: number;
   /** 快照策略信息 */
   AutoSnapshotPolicies: AutoSnapshotPolicyInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -582,7 +582,7 @@ declare interface DescribeAvailableZoneInfoRequest {
 declare interface DescribeAvailableZoneInfoResponse {
   /** 各可用区的资源售卖情况以及支持的存储类型、存储协议等信息 */
   RegionZones: AvailableRegion[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -594,7 +594,7 @@ declare interface DescribeCfsFileSystemClientsRequest {
 declare interface DescribeCfsFileSystemClientsResponse {
   /** 客户端列表 */
   ClientList: FileSystemClient[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -612,7 +612,7 @@ declare interface DescribeCfsFileSystemsResponse {
   FileSystems: FileSystemInfo[];
   /** 文件系统总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -622,7 +622,7 @@ declare interface DescribeCfsPGroupsRequest {
 declare interface DescribeCfsPGroupsResponse {
   /** 权限组信息列表 */
   PGroupList: PGroupInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -634,7 +634,7 @@ declare interface DescribeCfsRulesRequest {
 declare interface DescribeCfsRulesResponse {
   /** 权限组规则列表 */
   RuleList: PGroupRuleInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -644,7 +644,7 @@ declare interface DescribeCfsServiceStatusRequest {
 declare interface DescribeCfsServiceStatusResponse {
   /** 该用户当前 CFS 服务的状态，none 为未开通，creating 为开通中，created 为已开通 */
   CfsServiceStatus: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -654,7 +654,7 @@ declare interface DescribeCfsSnapshotOverviewRequest {
 declare interface DescribeCfsSnapshotOverviewResponse {
   /** 统计信息 */
   StatisticsList: SnapshotStatistics[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -682,7 +682,7 @@ declare interface DescribeCfsSnapshotsResponse {
   Snapshots: SnapshotInfo[];
   /** 快照列表快照汇总 */
   TotalSize: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -696,7 +696,7 @@ declare interface DescribeMountTargetsResponse {
   MountTargets: MountInfo[];
   /** 挂载点数量 */
   NumberOfMountTargets: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -714,7 +714,7 @@ declare interface DescribeSnapshotOperationLogsResponse {
   SnapshotId: string;
   /** 操作日志 */
   SnapshotOperates: SnapshotOperateLog[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -734,7 +734,7 @@ declare interface DescribeUserQuotaResponse {
   TotalCount: number;
   /** UserQuota条目 */
   UserQuotaInfo: UserQuota[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -752,7 +752,7 @@ declare interface SetUserQuotaRequest {
 }
 
 declare interface SetUserQuotaResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -762,7 +762,7 @@ declare interface SignUpCfsServiceRequest {
 declare interface SignUpCfsServiceResponse {
   /** 该用户当前 CFS 服务的状态，creating 是开通中，created 是已开通 */
   CfsServiceStatus: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -776,7 +776,7 @@ declare interface UnbindAutoSnapshotPolicyRequest {
 declare interface UnbindAutoSnapshotPolicyResponse {
   /** 快照策略ID */
   AutoSnapshotPolicyId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -798,7 +798,7 @@ declare interface UpdateAutoSnapshotPolicyRequest {
 declare interface UpdateAutoSnapshotPolicyResponse {
   /** 快照策略ID */
   AutoSnapshotPolicyId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -816,7 +816,7 @@ declare interface UpdateCfsFileSystemNameResponse {
   FileSystemId: string;
   /** 用户自定义文件系统名称 */
   FsName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -832,7 +832,7 @@ declare interface UpdateCfsFileSystemPGroupResponse {
   PGroupId: string;
   /** 文件系统 ID */
   FileSystemId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -844,7 +844,7 @@ declare interface UpdateCfsFileSystemSizeLimitRequest {
 }
 
 declare interface UpdateCfsFileSystemSizeLimitResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -864,7 +864,7 @@ declare interface UpdateCfsPGroupResponse {
   Name: string;
   /** 描述信息 */
   DescInfo: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -896,7 +896,7 @@ declare interface UpdateCfsRuleResponse {
   UserPermission: string;
   /** 优先级 */
   Priority: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -912,82 +912,82 @@ declare interface UpdateCfsSnapshotAttributeRequest {
 declare interface UpdateCfsSnapshotAttributeResponse {
   /** 文件系统快照ID */
   SnapshotId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cfs 文件存储} */
 declare interface Cfs {
   (): Versions;
-  /** {@link BindAutoSnapshotPolicy 文件系统绑定快照策略}({@link BindAutoSnapshotPolicyRequest 请求参数}): {@link BindAutoSnapshotPolicyResponse 返回参数} */
+  /** 文件系统绑定快照策略 {@link BindAutoSnapshotPolicyRequest} {@link BindAutoSnapshotPolicyResponse} */
   BindAutoSnapshotPolicy(data: BindAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<BindAutoSnapshotPolicyResponse>;
-  /** {@link CreateAutoSnapshotPolicy 创建定期快照策略}({@link CreateAutoSnapshotPolicyRequest 请求参数}): {@link CreateAutoSnapshotPolicyResponse 返回参数} */
+  /** 创建定期快照策略 {@link CreateAutoSnapshotPolicyRequest} {@link CreateAutoSnapshotPolicyResponse} */
   CreateAutoSnapshotPolicy(data: CreateAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoSnapshotPolicyResponse>;
-  /** {@link CreateCfsFileSystem 创建文件系统}({@link CreateCfsFileSystemRequest 请求参数}): {@link CreateCfsFileSystemResponse 返回参数} */
+  /** 创建文件系统 {@link CreateCfsFileSystemRequest} {@link CreateCfsFileSystemResponse} */
   CreateCfsFileSystem(data: CreateCfsFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCfsFileSystemResponse>;
-  /** {@link CreateCfsPGroup 创建权限组}({@link CreateCfsPGroupRequest 请求参数}): {@link CreateCfsPGroupResponse 返回参数} */
+  /** 创建权限组 {@link CreateCfsPGroupRequest} {@link CreateCfsPGroupResponse} */
   CreateCfsPGroup(data: CreateCfsPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCfsPGroupResponse>;
-  /** {@link CreateCfsRule 创建权限组规则}({@link CreateCfsRuleRequest 请求参数}): {@link CreateCfsRuleResponse 返回参数} */
+  /** 创建权限组规则 {@link CreateCfsRuleRequest} {@link CreateCfsRuleResponse} */
   CreateCfsRule(data: CreateCfsRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCfsRuleResponse>;
-  /** {@link CreateCfsSnapshot 创建文件系统快照}({@link CreateCfsSnapshotRequest 请求参数}): {@link CreateCfsSnapshotResponse 返回参数} */
+  /** 创建文件系统快照 {@link CreateCfsSnapshotRequest} {@link CreateCfsSnapshotResponse} */
   CreateCfsSnapshot(data: CreateCfsSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCfsSnapshotResponse>;
-  /** {@link DeleteAutoSnapshotPolicy 删除快照策略}({@link DeleteAutoSnapshotPolicyRequest 请求参数}): {@link DeleteAutoSnapshotPolicyResponse 返回参数} */
+  /** 删除快照策略 {@link DeleteAutoSnapshotPolicyRequest} {@link DeleteAutoSnapshotPolicyResponse} */
   DeleteAutoSnapshotPolicy(data: DeleteAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoSnapshotPolicyResponse>;
-  /** {@link DeleteCfsFileSystem 删除文件系统}({@link DeleteCfsFileSystemRequest 请求参数}): {@link DeleteCfsFileSystemResponse 返回参数} */
+  /** 删除文件系统 {@link DeleteCfsFileSystemRequest} {@link DeleteCfsFileSystemResponse} */
   DeleteCfsFileSystem(data: DeleteCfsFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCfsFileSystemResponse>;
-  /** {@link DeleteCfsPGroup 删除权限组}({@link DeleteCfsPGroupRequest 请求参数}): {@link DeleteCfsPGroupResponse 返回参数} */
+  /** 删除权限组 {@link DeleteCfsPGroupRequest} {@link DeleteCfsPGroupResponse} */
   DeleteCfsPGroup(data: DeleteCfsPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCfsPGroupResponse>;
-  /** {@link DeleteCfsRule 删除权限组规则}({@link DeleteCfsRuleRequest 请求参数}): {@link DeleteCfsRuleResponse 返回参数} */
+  /** 删除权限组规则 {@link DeleteCfsRuleRequest} {@link DeleteCfsRuleResponse} */
   DeleteCfsRule(data: DeleteCfsRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCfsRuleResponse>;
-  /** {@link DeleteCfsSnapshot 删除文件系统快照}({@link DeleteCfsSnapshotRequest 请求参数}): {@link DeleteCfsSnapshotResponse 返回参数} */
+  /** 删除文件系统快照 {@link DeleteCfsSnapshotRequest} {@link DeleteCfsSnapshotResponse} */
   DeleteCfsSnapshot(data?: DeleteCfsSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCfsSnapshotResponse>;
-  /** {@link DeleteMountTarget 删除挂载点}({@link DeleteMountTargetRequest 请求参数}): {@link DeleteMountTargetResponse 返回参数} */
+  /** 删除挂载点 {@link DeleteMountTargetRequest} {@link DeleteMountTargetResponse} */
   DeleteMountTarget(data: DeleteMountTargetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMountTargetResponse>;
-  /** {@link DeleteUserQuota 删除文件系统配额}({@link DeleteUserQuotaRequest 请求参数}): {@link DeleteUserQuotaResponse 返回参数} */
+  /** 删除文件系统配额 {@link DeleteUserQuotaRequest} {@link DeleteUserQuotaResponse} */
   DeleteUserQuota(data: DeleteUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserQuotaResponse>;
-  /** {@link DescribeAutoSnapshotPolicies 查询文件系统快照策略列表信息}({@link DescribeAutoSnapshotPoliciesRequest 请求参数}): {@link DescribeAutoSnapshotPoliciesResponse 返回参数} */
+  /** 查询文件系统快照策略列表信息 {@link DescribeAutoSnapshotPoliciesRequest} {@link DescribeAutoSnapshotPoliciesResponse} */
   DescribeAutoSnapshotPolicies(data?: DescribeAutoSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoSnapshotPoliciesResponse>;
-  /** {@link DescribeAvailableZoneInfo 查询区域可用情况}({@link DescribeAvailableZoneInfoRequest 请求参数}): {@link DescribeAvailableZoneInfoResponse 返回参数} */
+  /** 查询区域可用情况 {@link DescribeAvailableZoneInfoRequest} {@link DescribeAvailableZoneInfoResponse} */
   DescribeAvailableZoneInfo(data?: DescribeAvailableZoneInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableZoneInfoResponse>;
-  /** {@link DescribeCfsFileSystemClients 查询文件系统客户端}({@link DescribeCfsFileSystemClientsRequest 请求参数}): {@link DescribeCfsFileSystemClientsResponse 返回参数} */
+  /** 查询文件系统客户端 {@link DescribeCfsFileSystemClientsRequest} {@link DescribeCfsFileSystemClientsResponse} */
   DescribeCfsFileSystemClients(data: DescribeCfsFileSystemClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsFileSystemClientsResponse>;
-  /** {@link DescribeCfsFileSystems 查询文件系统}({@link DescribeCfsFileSystemsRequest 请求参数}): {@link DescribeCfsFileSystemsResponse 返回参数} */
+  /** 查询文件系统 {@link DescribeCfsFileSystemsRequest} {@link DescribeCfsFileSystemsResponse} */
   DescribeCfsFileSystems(data?: DescribeCfsFileSystemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsFileSystemsResponse>;
-  /** {@link DescribeCfsPGroups 查询权限组列表}({@link DescribeCfsPGroupsRequest 请求参数}): {@link DescribeCfsPGroupsResponse 返回参数} */
+  /** 查询权限组列表 {@link DescribeCfsPGroupsRequest} {@link DescribeCfsPGroupsResponse} */
   DescribeCfsPGroups(data?: DescribeCfsPGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsPGroupsResponse>;
-  /** {@link DescribeCfsRules 查询权限组规则}({@link DescribeCfsRulesRequest 请求参数}): {@link DescribeCfsRulesResponse 返回参数} */
+  /** 查询权限组规则 {@link DescribeCfsRulesRequest} {@link DescribeCfsRulesResponse} */
   DescribeCfsRules(data: DescribeCfsRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsRulesResponse>;
-  /** {@link DescribeCfsServiceStatus 查询CFS服务状态}({@link DescribeCfsServiceStatusRequest 请求参数}): {@link DescribeCfsServiceStatusResponse 返回参数} */
+  /** 查询CFS服务状态 {@link DescribeCfsServiceStatusRequest} {@link DescribeCfsServiceStatusResponse} */
   DescribeCfsServiceStatus(data?: DescribeCfsServiceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsServiceStatusResponse>;
-  /** {@link DescribeCfsSnapshotOverview 文件系统快照概览}({@link DescribeCfsSnapshotOverviewRequest 请求参数}): {@link DescribeCfsSnapshotOverviewResponse 返回参数} */
+  /** 文件系统快照概览 {@link DescribeCfsSnapshotOverviewRequest} {@link DescribeCfsSnapshotOverviewResponse} */
   DescribeCfsSnapshotOverview(data?: DescribeCfsSnapshotOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsSnapshotOverviewResponse>;
-  /** {@link DescribeCfsSnapshots 查询快照列表}({@link DescribeCfsSnapshotsRequest 请求参数}): {@link DescribeCfsSnapshotsResponse 返回参数} */
+  /** 查询快照列表 {@link DescribeCfsSnapshotsRequest} {@link DescribeCfsSnapshotsResponse} */
   DescribeCfsSnapshots(data?: DescribeCfsSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsSnapshotsResponse>;
-  /** {@link DescribeMountTargets 查询文件系统挂载点}({@link DescribeMountTargetsRequest 请求参数}): {@link DescribeMountTargetsResponse 返回参数} */
+  /** 查询文件系统挂载点 {@link DescribeMountTargetsRequest} {@link DescribeMountTargetsResponse} */
   DescribeMountTargets(data: DescribeMountTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMountTargetsResponse>;
-  /** {@link DescribeSnapshotOperationLogs 查询快照操作日志}({@link DescribeSnapshotOperationLogsRequest 请求参数}): {@link DescribeSnapshotOperationLogsResponse 返回参数} */
+  /** 查询快照操作日志 {@link DescribeSnapshotOperationLogsRequest} {@link DescribeSnapshotOperationLogsResponse} */
   DescribeSnapshotOperationLogs(data: DescribeSnapshotOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotOperationLogsResponse>;
-  /** {@link DescribeUserQuota 查询文件系统配额}({@link DescribeUserQuotaRequest 请求参数}): {@link DescribeUserQuotaResponse 返回参数} */
+  /** 查询文件系统配额 {@link DescribeUserQuotaRequest} {@link DescribeUserQuotaResponse} */
   DescribeUserQuota(data: DescribeUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotaResponse>;
-  /** {@link SetUserQuota 设置文件系统配额}({@link SetUserQuotaRequest 请求参数}): {@link SetUserQuotaResponse 返回参数} */
+  /** 设置文件系统配额 {@link SetUserQuotaRequest} {@link SetUserQuotaResponse} */
   SetUserQuota(data: SetUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<SetUserQuotaResponse>;
-  /** {@link SignUpCfsService 开通CFS服务}({@link SignUpCfsServiceRequest 请求参数}): {@link SignUpCfsServiceResponse 返回参数} */
+  /** 开通CFS服务 {@link SignUpCfsServiceRequest} {@link SignUpCfsServiceResponse} */
   SignUpCfsService(data?: SignUpCfsServiceRequest, config?: AxiosRequestConfig): AxiosPromise<SignUpCfsServiceResponse>;
-  /** {@link UnbindAutoSnapshotPolicy 解绑快照策略}({@link UnbindAutoSnapshotPolicyRequest 请求参数}): {@link UnbindAutoSnapshotPolicyResponse 返回参数} */
+  /** 解绑快照策略 {@link UnbindAutoSnapshotPolicyRequest} {@link UnbindAutoSnapshotPolicyResponse} */
   UnbindAutoSnapshotPolicy(data: UnbindAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindAutoSnapshotPolicyResponse>;
-  /** {@link UpdateAutoSnapshotPolicy 更新定期快照策略}({@link UpdateAutoSnapshotPolicyRequest 请求参数}): {@link UpdateAutoSnapshotPolicyResponse 返回参数} */
+  /** 更新定期快照策略 {@link UpdateAutoSnapshotPolicyRequest} {@link UpdateAutoSnapshotPolicyResponse} */
   UpdateAutoSnapshotPolicy(data: UpdateAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAutoSnapshotPolicyResponse>;
-  /** {@link UpdateCfsFileSystemName 更新文件系统名}({@link UpdateCfsFileSystemNameRequest 请求参数}): {@link UpdateCfsFileSystemNameResponse 返回参数} */
+  /** 更新文件系统名 {@link UpdateCfsFileSystemNameRequest} {@link UpdateCfsFileSystemNameResponse} */
   UpdateCfsFileSystemName(data: UpdateCfsFileSystemNameRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCfsFileSystemNameResponse>;
-  /** {@link UpdateCfsFileSystemPGroup 更新文件系统的权限组}({@link UpdateCfsFileSystemPGroupRequest 请求参数}): {@link UpdateCfsFileSystemPGroupResponse 返回参数} */
+  /** 更新文件系统的权限组 {@link UpdateCfsFileSystemPGroupRequest} {@link UpdateCfsFileSystemPGroupResponse} */
   UpdateCfsFileSystemPGroup(data: UpdateCfsFileSystemPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCfsFileSystemPGroupResponse>;
-  /** {@link UpdateCfsFileSystemSizeLimit 更新文件系统存储容量限制}({@link UpdateCfsFileSystemSizeLimitRequest 请求参数}): {@link UpdateCfsFileSystemSizeLimitResponse 返回参数} */
+  /** 更新文件系统存储容量限制 {@link UpdateCfsFileSystemSizeLimitRequest} {@link UpdateCfsFileSystemSizeLimitResponse} */
   UpdateCfsFileSystemSizeLimit(data: UpdateCfsFileSystemSizeLimitRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCfsFileSystemSizeLimitResponse>;
-  /** {@link UpdateCfsPGroup 更新权限组信息}({@link UpdateCfsPGroupRequest 请求参数}): {@link UpdateCfsPGroupResponse 返回参数} */
+  /** 更新权限组信息 {@link UpdateCfsPGroupRequest} {@link UpdateCfsPGroupResponse} */
   UpdateCfsPGroup(data: UpdateCfsPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCfsPGroupResponse>;
-  /** {@link UpdateCfsRule 更新权限组规则}({@link UpdateCfsRuleRequest 请求参数}): {@link UpdateCfsRuleResponse 返回参数} */
+  /** 更新权限组规则 {@link UpdateCfsRuleRequest} {@link UpdateCfsRuleResponse} */
   UpdateCfsRule(data: UpdateCfsRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCfsRuleResponse>;
-  /** {@link UpdateCfsSnapshotAttribute 更新文件系统快照信息}({@link UpdateCfsSnapshotAttributeRequest 请求参数}): {@link UpdateCfsSnapshotAttributeResponse 返回参数} */
+  /** 更新文件系统快照信息 {@link UpdateCfsSnapshotAttributeRequest} {@link UpdateCfsSnapshotAttributeResponse} */
   UpdateCfsSnapshotAttribute(data: UpdateCfsSnapshotAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCfsSnapshotAttributeResponse>;
 }
 

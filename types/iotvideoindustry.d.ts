@@ -518,7 +518,7 @@ declare interface BindGroupDevicesRequest {
 }
 
 declare interface BindGroupDevicesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -534,7 +534,7 @@ declare interface ControlChannelLocalRecordRequest {
 }
 
 declare interface ControlChannelLocalRecordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -548,7 +548,7 @@ declare interface ControlChannelPTZRequest {
 }
 
 declare interface ControlChannelPTZResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -562,7 +562,7 @@ declare interface ControlDevicePTZRequest {
 }
 
 declare interface ControlDevicePTZResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -580,7 +580,7 @@ declare interface ControlHomePositionRequest {
 }
 
 declare interface ControlHomePositionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -596,7 +596,7 @@ declare interface ControlPresetRequest {
 }
 
 declare interface ControlPresetResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -612,7 +612,7 @@ declare interface ControlRecordStreamRequest {
 }
 
 declare interface ControlRecordStreamResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -630,7 +630,7 @@ declare interface CreateDeviceGroupResponse {
   Status: string | null;
   /** 分组ID */
   GroupId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -652,7 +652,7 @@ declare interface CreateDeviceResponse {
   DeviceId: string | null;
   /** 设备虚拟组信息，仅在创建NVR时返回该值 */
   VirtualGroupId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -668,7 +668,7 @@ declare interface CreateLiveChannelResponse {
   LiveChannelId: string | null;
   /** 直播频道推流地址 */
   PushStreamAddress: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -688,7 +688,7 @@ declare interface CreateLiveRecordPlanRequest {
 declare interface CreateLiveRecordPlanResponse {
   /** 录制计划名称 */
   PlanId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -712,7 +712,7 @@ declare interface CreateMessageForwardRequest {
 declare interface CreateMessageForwardResponse {
   /** 配置ID */
   IntId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -732,7 +732,7 @@ declare interface CreateRecordPlanRequest {
 declare interface CreateRecordPlanResponse {
   /** 录制计划ID */
   PlanId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -750,7 +750,7 @@ declare interface CreateRecordingPlanRequest {
 declare interface CreateRecordingPlanResponse {
   /** 录制计划ID */
   PlanId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -772,7 +772,7 @@ declare interface CreateSceneRequest {
 declare interface CreateSceneResponse {
   /** 场景ID */
   IntId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -788,7 +788,7 @@ declare interface CreateTimeTemplateRequest {
 declare interface CreateTimeTemplateResponse {
   /** 时间模板ID */
   TemplateId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -800,7 +800,7 @@ declare interface DeleteChannelRequest {
 }
 
 declare interface DeleteChannelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -812,7 +812,7 @@ declare interface DeleteDeviceGroupRequest {
 declare interface DeleteDeviceGroupResponse {
   /** 响应结果 */
   Status: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -824,7 +824,7 @@ declare interface DeleteDeviceRequest {
 declare interface DeleteDeviceResponse {
   /** 操作结果 OK-成功； 其他-失败 */
   Status: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -834,7 +834,7 @@ declare interface DeleteLiveChannelRequest {
 }
 
 declare interface DeleteLiveChannelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -846,7 +846,7 @@ declare interface DeleteLiveRecordPlanRequest {
 declare interface DeleteLiveRecordPlanResponse {
   /** 删除状态描述 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -856,7 +856,7 @@ declare interface DeleteLiveVideoListRequest {
 }
 
 declare interface DeleteLiveVideoListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -866,7 +866,7 @@ declare interface DeleteMessageForwardRequest {
 }
 
 declare interface DeleteMessageForwardResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -878,7 +878,7 @@ declare interface DeleteRecordPlanRequest {
 declare interface DeleteRecordPlanResponse {
   /** 操作结果，OK：成功，其他：失败 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -890,7 +890,7 @@ declare interface DeleteRecordingPlanRequest {
 declare interface DeleteRecordingPlanResponse {
   /** 操作结果，OK：成功，其他：失败 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -900,7 +900,7 @@ declare interface DeleteSceneRequest {
 }
 
 declare interface DeleteSceneResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -912,7 +912,7 @@ declare interface DeleteTimeTemplateRequest {
 declare interface DeleteTimeTemplateResponse {
   /** 操作结果，OK：成功，其他：失败 */
   Status: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -922,7 +922,7 @@ declare interface DeleteVideoListRequest {
 }
 
 declare interface DeleteVideoListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -934,7 +934,7 @@ declare interface DeleteWarningRequest {
 }
 
 declare interface DeleteWarningResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -948,7 +948,7 @@ declare interface DescribeAbnormalEventsRequest {
 declare interface DescribeAbnormalEventsResponse {
   /** 异动事件走势列表 */
   Data: AbnormalEvents[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -970,7 +970,7 @@ declare interface DescribeAllDeviceListResponse {
   TotalCount: number | null;
   /** 设备详细信息列表 */
   Devices: AllDeviceInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -988,7 +988,7 @@ declare interface DescribeBindSceneChannelsResponse {
   Total: number | null;
   /** 通道列表 */
   List: ChannelItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1006,7 +1006,7 @@ declare interface DescribeBindSceneDevicesResponse {
   Total: number | null;
   /** 设备列表 */
   List: DeviceItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1020,7 +1020,7 @@ declare interface DescribeChannelLiveStreamURLRequest {
 declare interface DescribeChannelLiveStreamURLResponse {
   /** 设备实时流地址列表 */
   Data: DescribeDeviceStreamsData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1042,7 +1042,7 @@ declare interface DescribeChannelLocalRecordURLRequest {
 declare interface DescribeChannelLocalRecordURLResponse {
   /** 结果 */
   Data: DescribeRecordStreamData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1058,7 +1058,7 @@ declare interface DescribeChannelStreamURLRequest {
 declare interface DescribeChannelStreamURLResponse {
   /** 设备实时流地址列表 */
   Data: DescribeDeviceStreamsData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1076,7 +1076,7 @@ declare interface DescribeChannelsByLiveRecordPlanResponse {
   TotalCount: number | null;
   /** 通道详情数组 */
   LiveChannels: LiveChannelItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1100,7 +1100,7 @@ declare interface DescribeChannelsResponse {
   TotalCount: number | null;
   /** 通道详情列表 */
   Channels: ChannelDetail[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1118,7 +1118,7 @@ declare interface DescribeCurrentDeviceDataResponse {
   OnlineDevices: number;
   /** 正在录制通道数 */
   RecordingChannels: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1142,7 +1142,7 @@ declare interface DescribeDeviceEventResponse {
   TotalCount: number | null;
   /** 事件列表 */
   Events: Events[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1154,7 +1154,7 @@ declare interface DescribeDeviceGroupRequest {
 declare interface DescribeDeviceGroupResponse {
   /** 设备所在分组信息 */
   DevGroups: DevGroupInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1174,7 +1174,7 @@ declare interface DescribeDeviceListResponse {
   TotalCount: number | null;
   /** 设备详细信息列表 */
   Devices: AllDeviceInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1192,7 +1192,7 @@ declare interface DescribeDeviceMonitorDataRequest {
 declare interface DescribeDeviceMonitorDataResponse {
   /** 查询设备统计monitor信息列表 */
   Data: DeviceMonitorValue[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1204,7 +1204,7 @@ declare interface DescribeDevicePassWordRequest {
 declare interface DescribeDevicePassWordResponse {
   /** 设备密码 */
   PassWord: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1216,7 +1216,7 @@ declare interface DescribeDeviceRequest {
 declare interface DescribeDeviceResponse {
   /** 设备详情信息 */
   Device: AllDeviceInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1232,7 +1232,7 @@ declare interface DescribeDeviceStreamsRequest {
 declare interface DescribeDeviceStreamsResponse {
   /** 设备实时流地址列表 */
   Data: DescribeDeviceStreamsData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1244,7 +1244,7 @@ declare interface DescribeGroupByIdRequest {
 declare interface DescribeGroupByIdResponse {
   /** 分组信息详情 */
   Group: GroupItem | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1256,7 +1256,7 @@ declare interface DescribeGroupByPathRequest {
 declare interface DescribeGroupByPathResponse {
   /** 分组信息详情 */
   Group: GroupItem | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1280,7 +1280,7 @@ declare interface DescribeGroupDevicesResponse {
   TotalCount: number | null;
   /** 设备详情列表 */
   DeviceList: GroupDeviceItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1292,7 +1292,7 @@ declare interface DescribeGroupsRequest {
 declare interface DescribeGroupsResponse {
   /** 分组详细信息列表 */
   Groups: GroupInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1312,7 +1312,7 @@ declare interface DescribeIPCChannelsResponse {
   TotalCount: number | null;
   /** 通道详情列表 */
   DeviceList: GroupDeviceItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1334,7 +1334,7 @@ declare interface DescribeLiveChannelListResponse {
   Total: number | null;
   /** 频道信息数组 */
   LiveChannels: LiveChannelInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1358,7 +1358,7 @@ declare interface DescribeLiveChannelResponse {
   CreateTime: string[] | null;
   /** 修改时间 */
   UpdateTime: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1378,7 +1378,7 @@ declare interface DescribeLiveRecordPlanByIdResponse {
   RecordStorageTime: number;
   /** 计划类型 */
   PlanType: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1396,7 +1396,7 @@ declare interface DescribeLiveRecordPlanIdsResponse {
   TotalCount: number;
   /** 计划数组 */
   Plans: LiveRecordPlanItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1410,7 +1410,7 @@ declare interface DescribeLiveStreamRequest {
 declare interface DescribeLiveStreamResponse {
   /** 拉流地址，只有在推流情况下才有 */
   Data: StreamAddress | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1442,7 +1442,7 @@ declare interface DescribeLiveVideoListResponse {
   Total: number | null;
   /** 录制任务详情数组 */
   RecordList: LiveRecordItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1472,7 +1472,7 @@ declare interface DescribeMessageForwardResponse {
   Uin: string | null;
   /** kafka topic 名称 */
   TopicName: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1488,7 +1488,7 @@ declare interface DescribeMessageForwardsResponse {
   Total: number | null;
   /** 配置列表 */
   List: MessageForward[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1502,7 +1502,7 @@ declare interface DescribeMonitorDataByDateRequest {
 declare interface DescribeMonitorDataByDateResponse {
   /** 统计数据列表 */
   Data: RecordStatistic[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1516,7 +1516,7 @@ declare interface DescribePresetListRequest {
 declare interface DescribePresetListResponse {
   /** 预置列表 */
   Data: PresetItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1536,7 +1536,7 @@ declare interface DescribeRecordDatesByChannelRequest {
 declare interface DescribeRecordDatesByChannelResponse {
   /** 含有录像文件的日期列表 */
   Dates: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1552,7 +1552,7 @@ declare interface DescribeRecordDatesByLiveRequest {
 declare interface DescribeRecordDatesByLiveResponse {
   /** 录制日期数组 */
   Dates: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1574,7 +1574,7 @@ declare interface DescribeRecordStreamRequest {
 declare interface DescribeRecordStreamResponse {
   /** 结果 */
   Data: DescribeRecordStreamData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1586,7 +1586,7 @@ declare interface DescribeRecordingPlanByIdRequest {
 declare interface DescribeRecordingPlanByIdResponse {
   /** 录制计划详情 */
   Plan: RecordPlanDetail | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1598,7 +1598,7 @@ declare interface DescribeRecordingPlansResponse {
   Plans: RecordPlanDetail[] | null;
   /** 录制计划总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1608,7 +1608,7 @@ declare interface DescribeSIPServerRequest {
 declare interface DescribeSIPServerResponse {
   /** SIP服务器相关配置项 */
   Data: ServerConfiguration;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1634,7 +1634,7 @@ declare interface DescribeSceneResponse {
   UpdateTime: string | null;
   /** 用户Uin */
   Uin: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1650,7 +1650,7 @@ declare interface DescribeScenesResponse {
   Total: number | null;
   /** 场景列表 */
   List: SceneItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1666,7 +1666,7 @@ declare interface DescribeStatisticDetailsRequest {
 declare interface DescribeStatisticDetailsResponse {
   /** 统计详情列表 */
   Data: StatisticItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1690,7 +1690,7 @@ declare interface DescribeStatisticSummaryResponse {
   P2PPeakValue: number | null;
   /** RTMP推流路数 ( 直播推流) */
   LivePushTotal: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1712,7 +1712,7 @@ declare interface DescribeSubGroupsResponse {
   GroupList: GroupItem[] | null;
   /** 子分组总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1724,7 +1724,7 @@ declare interface DescribeSubscriptionStatusRequest {
 declare interface DescribeSubscriptionStatusResponse {
   /** 设备GB28181报警订阅状态 1：未开启订阅；2：已开启订阅 */
   AlarmStatus: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1748,7 +1748,7 @@ declare interface DescribeVideoListByChannelResponse {
   VideoList: RecordTaskItem[] | null;
   /** 录像总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1796,7 +1796,7 @@ declare interface DescribeVideoListResponse {
   VideoList: RecordTaskItem;
   /** 录像详情列表 */
   RecordList: RecordTaskItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1806,7 +1806,7 @@ declare interface DescribeWarnModRequest {
 declare interface DescribeWarnModResponse {
   /** 告警类型 */
   Data: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1834,7 +1834,7 @@ declare interface DescribeWarningsResponse {
   Total: number | null;
   /** 告警列表 */
   Data: WarningsData[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1852,7 +1852,7 @@ declare interface DescribeXP2PDataRequest {
 declare interface DescribeXP2PDataResponse {
   /** [log_time,cdn_bytes , p2p_bytes, online_people, stuck_times, stuck_people,request,request_success,request_fail,play_fail][时间戳,cdn流量(字节) , p2p流量(字节), 在线人数, 卡播次数, 卡播人数,起播请求次数,起播成功次数,起播失败次数,播放失败次数, pcdn cdn流量（字节), pcdn路由流量(字节), 上传流量(字节)][1481016480, 46118502414, 75144943171, 61691, 3853, 0,0,0,0,0, 0, 0, 0] */
   Data: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1872,7 +1872,7 @@ declare interface GetRecordDatesByDevRequest {
 declare interface GetRecordDatesByDevResponse {
   /** 含有录像文件的日期列表 */
   Dates: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1884,7 +1884,7 @@ declare interface GetRecordPlanByDevRequest {
 declare interface GetRecordPlanByDevResponse {
   /** 录制计划详情 */
   Plan: RecordPlanItem | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1896,7 +1896,7 @@ declare interface GetRecordPlanByIdRequest {
 declare interface GetRecordPlanByIdResponse {
   /** 录制计划详情 */
   Plan: RecordPlanItem | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1908,7 +1908,7 @@ declare interface GetRecordPlansResponse {
   Plans: RecordPlanItem[] | null;
   /** 录制计划总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1920,7 +1920,7 @@ declare interface GetTimeTemplateByIdRequest {
 declare interface GetTimeTemplateByIdResponse {
   /** 时间模板详情 */
   Template: TimeTemplateItem | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1932,7 +1932,7 @@ declare interface GetTimeTemplatesResponse {
   Templates: TimeTemplateItem[] | null;
   /** 时间模板总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1958,7 +1958,7 @@ declare interface GetVideoListByConResponse {
   VideoList: RecordTaskItem[] | null;
   /** 录像总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1972,7 +1972,7 @@ declare interface ModifyBindPlanLiveChannelRequest {
 }
 
 declare interface ModifyBindPlanLiveChannelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1986,7 +1986,7 @@ declare interface ModifyBindRecordingPlanRequest {
 }
 
 declare interface ModifyBindRecordingPlanResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2000,7 +2000,7 @@ declare interface ModifyBindSceneChannelsRequest {
 }
 
 declare interface ModifyBindSceneChannelsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2014,7 +2014,7 @@ declare interface ModifyBindSceneDeviceRequest {
 }
 
 declare interface ModifyBindSceneDeviceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2028,7 +2028,7 @@ declare interface ModifyDeviceDataRequest {
 declare interface ModifyDeviceDataResponse {
   /** 操作结果,“OK”表示成功，其他表示失败。 */
   Status: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2040,7 +2040,7 @@ declare interface ModifyLiveChannelRequest {
 }
 
 declare interface ModifyLiveChannelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2054,7 +2054,7 @@ declare interface ModifyLiveRecordPlanRequest {
 }
 
 declare interface ModifyLiveRecordPlanResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2066,7 +2066,7 @@ declare interface ModifyLiveVideoRequest {
 }
 
 declare interface ModifyLiveVideoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2078,7 +2078,7 @@ declare interface ModifyMessageForwardRequest {
 }
 
 declare interface ModifyMessageForwardResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2094,7 +2094,7 @@ declare interface ModifyPresetRequest {
 }
 
 declare interface ModifyPresetResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2110,7 +2110,7 @@ declare interface ModifyRecordingPlanRequest {
 declare interface ModifyRecordingPlanResponse {
   /** 操作结果 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2126,7 +2126,7 @@ declare interface ModifySceneRequest {
 }
 
 declare interface ModifySceneResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2140,7 +2140,7 @@ declare interface ModifySubscriptionStatusRequest {
 }
 
 declare interface ModifySubscriptionStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2152,7 +2152,7 @@ declare interface ModifyVideoInfoRequest {
 }
 
 declare interface ModifyVideoInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2164,7 +2164,7 @@ declare interface ResetWarningRequest {
 }
 
 declare interface ResetWarningResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2180,7 +2180,7 @@ declare interface UpdateDeviceGroupRequest {
 }
 
 declare interface UpdateDeviceGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2194,7 +2194,7 @@ declare interface UpdateDevicePassWordRequest {
 declare interface UpdateDevicePassWordResponse {
   /** 操作结果，“OK”表示成功，其他表示失败。 */
   Status: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2216,7 +2216,7 @@ declare interface UpdateRecordPlanRequest {
 declare interface UpdateRecordPlanResponse {
   /** 操作结果 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2234,220 +2234,220 @@ declare interface UpdateTimeTemplateRequest {
 declare interface UpdateTimeTemplateResponse {
   /** 操作结果，“OK”表示成功，其他表示失败。 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Iotvideoindustry 物联网智能视频服务（行业版）} */
 declare interface Iotvideoindustry {
   (): Versions;
-  /** {@link BindGroupDevices 绑定设备到分组}({@link BindGroupDevicesRequest 请求参数}): {@link BindGroupDevicesResponse 返回参数} */
+  /** 绑定设备到分组 {@link BindGroupDevicesRequest} {@link BindGroupDevicesResponse} */
   BindGroupDevices(data: BindGroupDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<BindGroupDevicesResponse>;
-  /** {@link ControlChannelLocalRecord 控制通道本地回放流}({@link ControlChannelLocalRecordRequest 请求参数}): {@link ControlChannelLocalRecordResponse 返回参数} */
+  /** 控制通道本地回放流 {@link ControlChannelLocalRecordRequest} {@link ControlChannelLocalRecordResponse} */
   ControlChannelLocalRecord(data: ControlChannelLocalRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ControlChannelLocalRecordResponse>;
-  /** {@link ControlChannelPTZ 远程PTZ控制设备通道}({@link ControlChannelPTZRequest 请求参数}): {@link ControlChannelPTZResponse 返回参数} */
+  /** 远程PTZ控制设备通道 {@link ControlChannelPTZRequest} {@link ControlChannelPTZResponse} */
   ControlChannelPTZ(data: ControlChannelPTZRequest, config?: AxiosRequestConfig): AxiosPromise<ControlChannelPTZResponse>;
-  /** {@link ControlDevicePTZ 远程PTZ控制设备通道（旧）}({@link ControlDevicePTZRequest 请求参数}): {@link ControlDevicePTZResponse 返回参数} */
+  /** 远程PTZ控制设备通道（旧） {@link ControlDevicePTZRequest} {@link ControlDevicePTZResponse} */
   ControlDevicePTZ(data: ControlDevicePTZRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDevicePTZResponse>;
-  /** {@link ControlHomePosition 看守位控制}({@link ControlHomePositionRequest 请求参数}): {@link ControlHomePositionResponse 返回参数} */
+  /** 看守位控制 {@link ControlHomePositionRequest} {@link ControlHomePositionResponse} */
   ControlHomePosition(data: ControlHomePositionRequest, config?: AxiosRequestConfig): AxiosPromise<ControlHomePositionResponse>;
-  /** {@link ControlPreset 预置位控制}({@link ControlPresetRequest 请求参数}): {@link ControlPresetResponse 返回参数} */
+  /** 预置位控制 {@link ControlPresetRequest} {@link ControlPresetResponse} */
   ControlPreset(data: ControlPresetRequest, config?: AxiosRequestConfig): AxiosPromise<ControlPresetResponse>;
-  /** {@link ControlRecordStream 控制通道本地回放流（旧）}({@link ControlRecordStreamRequest 请求参数}): {@link ControlRecordStreamResponse 返回参数} */
+  /** 控制通道本地回放流（旧） {@link ControlRecordStreamRequest} {@link ControlRecordStreamResponse} */
   ControlRecordStream(data: ControlRecordStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ControlRecordStreamResponse>;
-  /** {@link CreateDevice 创建设备}({@link CreateDeviceRequest 请求参数}): {@link CreateDeviceResponse 返回参数} */
+  /** 创建设备 {@link CreateDeviceRequest} {@link CreateDeviceResponse} */
   CreateDevice(data: CreateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceResponse>;
-  /** {@link CreateDeviceGroup 创建分组}({@link CreateDeviceGroupRequest 请求参数}): {@link CreateDeviceGroupResponse 返回参数} */
+  /** 创建分组 {@link CreateDeviceGroupRequest} {@link CreateDeviceGroupResponse} */
   CreateDeviceGroup(data: CreateDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceGroupResponse>;
-  /** {@link CreateLiveChannel 创建直播频道}({@link CreateLiveChannelRequest 请求参数}): {@link CreateLiveChannelResponse 返回参数} */
+  /** 创建直播频道 {@link CreateLiveChannelRequest} {@link CreateLiveChannelResponse} */
   CreateLiveChannel(data: CreateLiveChannelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveChannelResponse>;
-  /** {@link CreateLiveRecordPlan 创建直播录制计划}({@link CreateLiveRecordPlanRequest 请求参数}): {@link CreateLiveRecordPlanResponse 返回参数} */
+  /** 创建直播录制计划 {@link CreateLiveRecordPlanRequest} {@link CreateLiveRecordPlanResponse} */
   CreateLiveRecordPlan(data: CreateLiveRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveRecordPlanResponse>;
-  /** {@link CreateMessageForward 创建消息转发配置}({@link CreateMessageForwardRequest 请求参数}): {@link CreateMessageForwardResponse 返回参数} */
+  /** 创建消息转发配置 {@link CreateMessageForwardRequest} {@link CreateMessageForwardResponse} */
   CreateMessageForward(data: CreateMessageForwardRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMessageForwardResponse>;
-  /** {@link CreateRecordPlan 创建录制计划（旧）}({@link CreateRecordPlanRequest 请求参数}): {@link CreateRecordPlanResponse 返回参数} */
+  /** 创建录制计划（旧） {@link CreateRecordPlanRequest} {@link CreateRecordPlanResponse} */
   CreateRecordPlan(data: CreateRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordPlanResponse>;
-  /** {@link CreateRecordingPlan 创建录制计划}({@link CreateRecordingPlanRequest 请求参数}): {@link CreateRecordingPlanResponse 返回参数} */
+  /** 创建录制计划 {@link CreateRecordingPlanRequest} {@link CreateRecordingPlanResponse} */
   CreateRecordingPlan(data: CreateRecordingPlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordingPlanResponse>;
-  /** {@link CreateScene 创建场景}({@link CreateSceneRequest 请求参数}): {@link CreateSceneResponse 返回参数} */
+  /** 创建场景 {@link CreateSceneRequest} {@link CreateSceneResponse} */
   CreateScene(data: CreateSceneRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSceneResponse>;
-  /** {@link CreateTimeTemplate 创建时间模板}({@link CreateTimeTemplateRequest 请求参数}): {@link CreateTimeTemplateResponse 返回参数} */
+  /** 创建时间模板 {@link CreateTimeTemplateRequest} {@link CreateTimeTemplateResponse} */
   CreateTimeTemplate(data: CreateTimeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTimeTemplateResponse>;
-  /** {@link DeleteChannel 删除指定设备下通道}({@link DeleteChannelRequest 请求参数}): {@link DeleteChannelResponse 返回参数} */
+  /** 删除指定设备下通道 {@link DeleteChannelRequest} {@link DeleteChannelResponse} */
   DeleteChannel(data: DeleteChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteChannelResponse>;
-  /** {@link DeleteDevice 删除设备}({@link DeleteDeviceRequest 请求参数}): {@link DeleteDeviceResponse 返回参数} */
+  /** 删除设备 {@link DeleteDeviceRequest} {@link DeleteDeviceResponse} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
-  /** {@link DeleteDeviceGroup 删除分组}({@link DeleteDeviceGroupRequest 请求参数}): {@link DeleteDeviceGroupResponse 返回参数} */
+  /** 删除分组 {@link DeleteDeviceGroupRequest} {@link DeleteDeviceGroupResponse} */
   DeleteDeviceGroup(data: DeleteDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceGroupResponse>;
-  /** {@link DeleteLiveChannel 删除直播接口}({@link DeleteLiveChannelRequest 请求参数}): {@link DeleteLiveChannelResponse 返回参数} */
+  /** 删除直播接口 {@link DeleteLiveChannelRequest} {@link DeleteLiveChannelResponse} */
   DeleteLiveChannel(data: DeleteLiveChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveChannelResponse>;
-  /** {@link DeleteLiveRecordPlan 删除直播录制计划}({@link DeleteLiveRecordPlanRequest 请求参数}): {@link DeleteLiveRecordPlanResponse 返回参数} */
+  /** 删除直播录制计划 {@link DeleteLiveRecordPlanRequest} {@link DeleteLiveRecordPlanResponse} */
   DeleteLiveRecordPlan(data: DeleteLiveRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveRecordPlanResponse>;
-  /** {@link DeleteLiveVideoList 直播录像删除}({@link DeleteLiveVideoListRequest 请求参数}): {@link DeleteLiveVideoListResponse 返回参数} */
+  /** 直播录像删除 {@link DeleteLiveVideoListRequest} {@link DeleteLiveVideoListResponse} */
   DeleteLiveVideoList(data: DeleteLiveVideoListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveVideoListResponse>;
-  /** {@link DeleteMessageForward 删除消息转发配置}({@link DeleteMessageForwardRequest 请求参数}): {@link DeleteMessageForwardResponse 返回参数} */
+  /** 删除消息转发配置 {@link DeleteMessageForwardRequest} {@link DeleteMessageForwardResponse} */
   DeleteMessageForward(data: DeleteMessageForwardRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMessageForwardResponse>;
-  /** {@link DeleteRecordPlan 删除录制计划（旧）}({@link DeleteRecordPlanRequest 请求参数}): {@link DeleteRecordPlanResponse 返回参数} */
+  /** 删除录制计划（旧） {@link DeleteRecordPlanRequest} {@link DeleteRecordPlanResponse} */
   DeleteRecordPlan(data: DeleteRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordPlanResponse>;
-  /** {@link DeleteRecordingPlan 删除录制计划}({@link DeleteRecordingPlanRequest 请求参数}): {@link DeleteRecordingPlanResponse 返回参数} */
+  /** 删除录制计划 {@link DeleteRecordingPlanRequest} {@link DeleteRecordingPlanResponse} */
   DeleteRecordingPlan(data: DeleteRecordingPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordingPlanResponse>;
-  /** {@link DeleteScene 删除场景}({@link DeleteSceneRequest 请求参数}): {@link DeleteSceneResponse 返回参数} */
+  /** 删除场景 {@link DeleteSceneRequest} {@link DeleteSceneResponse} */
   DeleteScene(data: DeleteSceneRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSceneResponse>;
-  /** {@link DeleteTimeTemplate 删除时间模板}({@link DeleteTimeTemplateRequest 请求参数}): {@link DeleteTimeTemplateResponse 返回参数} */
+  /** 删除时间模板 {@link DeleteTimeTemplateRequest} {@link DeleteTimeTemplateResponse} */
   DeleteTimeTemplate(data: DeleteTimeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTimeTemplateResponse>;
-  /** {@link DeleteVideoList 删除录像存储列表}({@link DeleteVideoListRequest 请求参数}): {@link DeleteVideoListResponse 返回参数} */
+  /** 删除录像存储列表 {@link DeleteVideoListRequest} {@link DeleteVideoListResponse} */
   DeleteVideoList(data: DeleteVideoListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVideoListResponse>;
-  /** {@link DeleteWarning 设备告警-删除告警}({@link DeleteWarningRequest 请求参数}): {@link DeleteWarningResponse 返回参数} */
+  /** 设备告警-删除告警 {@link DeleteWarningRequest} {@link DeleteWarningResponse} */
   DeleteWarning(data?: DeleteWarningRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWarningResponse>;
-  /** {@link DescribeAbnormalEvents 获取异常事件统计}({@link DescribeAbnormalEventsRequest 请求参数}): {@link DescribeAbnormalEventsResponse 返回参数} */
+  /** 获取异常事件统计 {@link DescribeAbnormalEventsRequest} {@link DescribeAbnormalEventsResponse} */
   DescribeAbnormalEvents(data: DescribeAbnormalEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalEventsResponse>;
-  /** {@link DescribeAllDeviceList 获取设备列表（旧）}({@link DescribeAllDeviceListRequest 请求参数}): {@link DescribeAllDeviceListResponse 返回参数} */
+  /** 获取设备列表（旧） {@link DescribeAllDeviceListRequest} {@link DescribeAllDeviceListResponse} */
   DescribeAllDeviceList(data?: DescribeAllDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllDeviceListResponse>;
-  /** {@link DescribeBindSceneChannels 获取场景绑定通道列表}({@link DescribeBindSceneChannelsRequest 请求参数}): {@link DescribeBindSceneChannelsResponse 返回参数} */
+  /** 获取场景绑定通道列表 {@link DescribeBindSceneChannelsRequest} {@link DescribeBindSceneChannelsResponse} */
   DescribeBindSceneChannels(data: DescribeBindSceneChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindSceneChannelsResponse>;
-  /** {@link DescribeBindSceneDevices 获取场景绑定设备列表(旧)}({@link DescribeBindSceneDevicesRequest 请求参数}): {@link DescribeBindSceneDevicesResponse 返回参数} */
+  /** 获取场景绑定设备列表(旧) {@link DescribeBindSceneDevicesRequest} {@link DescribeBindSceneDevicesResponse} */
   DescribeBindSceneDevices(data?: DescribeBindSceneDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindSceneDevicesResponse>;
-  /** {@link DescribeChannelLiveStreamURL 获取设备通道实时流地址}({@link DescribeChannelLiveStreamURLRequest 请求参数}): {@link DescribeChannelLiveStreamURLResponse 返回参数} */
+  /** 获取设备通道实时流地址 {@link DescribeChannelLiveStreamURLRequest} {@link DescribeChannelLiveStreamURLResponse} */
   DescribeChannelLiveStreamURL(data: DescribeChannelLiveStreamURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelLiveStreamURLResponse>;
-  /** {@link DescribeChannelLocalRecordURL 获取通道本地回放流地址}({@link DescribeChannelLocalRecordURLRequest 请求参数}): {@link DescribeChannelLocalRecordURLResponse 返回参数} */
+  /** 获取通道本地回放流地址 {@link DescribeChannelLocalRecordURLRequest} {@link DescribeChannelLocalRecordURLResponse} */
   DescribeChannelLocalRecordURL(data: DescribeChannelLocalRecordURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelLocalRecordURLResponse>;
-  /** {@link DescribeChannelStreamURL 获取设备通道实时流地址（旧）}({@link DescribeChannelStreamURLRequest 请求参数}): {@link DescribeChannelStreamURLResponse 返回参数} */
+  /** 获取设备通道实时流地址（旧） {@link DescribeChannelStreamURLRequest} {@link DescribeChannelStreamURLResponse} */
   DescribeChannelStreamURL(data: DescribeChannelStreamURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelStreamURLResponse>;
-  /** {@link DescribeChannels 获取设备下属通道列表}({@link DescribeChannelsRequest 请求参数}): {@link DescribeChannelsResponse 返回参数} */
+  /** 获取设备下属通道列表 {@link DescribeChannelsRequest} {@link DescribeChannelsResponse} */
   DescribeChannels(data: DescribeChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelsResponse>;
-  /** {@link DescribeChannelsByLiveRecordPlan 根据直播录制计划获取频道列表}({@link DescribeChannelsByLiveRecordPlanRequest 请求参数}): {@link DescribeChannelsByLiveRecordPlanResponse 返回参数} */
+  /** 根据直播录制计划获取频道列表 {@link DescribeChannelsByLiveRecordPlanRequest} {@link DescribeChannelsByLiveRecordPlanResponse} */
   DescribeChannelsByLiveRecordPlan(data: DescribeChannelsByLiveRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelsByLiveRecordPlanResponse>;
-  /** {@link DescribeCurrentDeviceData 查询设备统计当前信息}({@link DescribeCurrentDeviceDataRequest 请求参数}): {@link DescribeCurrentDeviceDataResponse 返回参数} */
+  /** 查询设备统计当前信息 {@link DescribeCurrentDeviceDataRequest} {@link DescribeCurrentDeviceDataResponse} */
   DescribeCurrentDeviceData(data?: DescribeCurrentDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCurrentDeviceDataResponse>;
-  /** {@link DescribeDevice 获取设备详情}({@link DescribeDeviceRequest 请求参数}): {@link DescribeDeviceResponse 返回参数} */
+  /** 获取设备详情 {@link DescribeDeviceRequest} {@link DescribeDeviceResponse} */
   DescribeDevice(data: DescribeDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceResponse>;
-  /** {@link DescribeDeviceEvent 获取设备事件}({@link DescribeDeviceEventRequest 请求参数}): {@link DescribeDeviceEventResponse 返回参数} */
+  /** 获取设备事件 {@link DescribeDeviceEventRequest} {@link DescribeDeviceEventResponse} */
   DescribeDeviceEvent(data: DescribeDeviceEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceEventResponse>;
-  /** {@link DescribeDeviceGroup 查询设备分组信息}({@link DescribeDeviceGroupRequest 请求参数}): {@link DescribeDeviceGroupResponse 返回参数} */
+  /** 查询设备分组信息 {@link DescribeDeviceGroupRequest} {@link DescribeDeviceGroupResponse} */
   DescribeDeviceGroup(data?: DescribeDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceGroupResponse>;
-  /** {@link DescribeDeviceList 获取设备列表}({@link DescribeDeviceListRequest 请求参数}): {@link DescribeDeviceListResponse 返回参数} */
+  /** 获取设备列表 {@link DescribeDeviceListRequest} {@link DescribeDeviceListResponse} */
   DescribeDeviceList(data?: DescribeDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceListResponse>;
-  /** {@link DescribeDeviceMonitorData 查询设备统计monitor信息}({@link DescribeDeviceMonitorDataRequest 请求参数}): {@link DescribeDeviceMonitorDataResponse 返回参数} */
+  /** 查询设备统计monitor信息 {@link DescribeDeviceMonitorDataRequest} {@link DescribeDeviceMonitorDataResponse} */
   DescribeDeviceMonitorData(data: DescribeDeviceMonitorDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceMonitorDataResponse>;
-  /** {@link DescribeDevicePassWord 查询设备密码}({@link DescribeDevicePassWordRequest 请求参数}): {@link DescribeDevicePassWordResponse 返回参数} */
+  /** 查询设备密码 {@link DescribeDevicePassWordRequest} {@link DescribeDevicePassWordResponse} */
   DescribeDevicePassWord(data: DescribeDevicePassWordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePassWordResponse>;
-  /** {@link DescribeDeviceStreams 获取设备实时流地址（旧）}({@link DescribeDeviceStreamsRequest 请求参数}): {@link DescribeDeviceStreamsResponse 返回参数} */
+  /** 获取设备实时流地址（旧） {@link DescribeDeviceStreamsRequest} {@link DescribeDeviceStreamsResponse} */
   DescribeDeviceStreams(data: DescribeDeviceStreamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceStreamsResponse>;
-  /** {@link DescribeGroupById 根据分组ID查询分组}({@link DescribeGroupByIdRequest 请求参数}): {@link DescribeGroupByIdResponse 返回参数} */
+  /** 根据分组ID查询分组 {@link DescribeGroupByIdRequest} {@link DescribeGroupByIdResponse} */
   DescribeGroupById(data: DescribeGroupByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupByIdResponse>;
-  /** {@link DescribeGroupByPath 根据分组路径查询分组}({@link DescribeGroupByPathRequest 请求参数}): {@link DescribeGroupByPathResponse 返回参数} */
+  /** 根据分组路径查询分组 {@link DescribeGroupByPathRequest} {@link DescribeGroupByPathResponse} */
   DescribeGroupByPath(data: DescribeGroupByPathRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupByPathResponse>;
-  /** {@link DescribeGroupDevices 查询分组下的设备}({@link DescribeGroupDevicesRequest 请求参数}): {@link DescribeGroupDevicesResponse 返回参数} */
+  /** 查询分组下的设备 {@link DescribeGroupDevicesRequest} {@link DescribeGroupDevicesResponse} */
   DescribeGroupDevices(data: DescribeGroupDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupDevicesResponse>;
-  /** {@link DescribeGroups 批量查询分组信息}({@link DescribeGroupsRequest 请求参数}): {@link DescribeGroupsResponse 返回参数} */
+  /** 批量查询分组信息 {@link DescribeGroupsRequest} {@link DescribeGroupsResponse} */
   DescribeGroups(data?: DescribeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsResponse>;
-  /** {@link DescribeIPCChannels 获取IPC设备下属通道（旧）}({@link DescribeIPCChannelsRequest 请求参数}): {@link DescribeIPCChannelsResponse 返回参数} */
+  /** 获取IPC设备下属通道（旧） {@link DescribeIPCChannelsRequest} {@link DescribeIPCChannelsResponse} */
   DescribeIPCChannels(data?: DescribeIPCChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPCChannelsResponse>;
-  /** {@link DescribeLiveChannel 直播详情接口}({@link DescribeLiveChannelRequest 请求参数}): {@link DescribeLiveChannelResponse 返回参数} */
+  /** 直播详情接口 {@link DescribeLiveChannelRequest} {@link DescribeLiveChannelResponse} */
   DescribeLiveChannel(data: DescribeLiveChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveChannelResponse>;
-  /** {@link DescribeLiveChannelList 直播列表接口}({@link DescribeLiveChannelListRequest 请求参数}): {@link DescribeLiveChannelListResponse 返回参数} */
+  /** 直播列表接口 {@link DescribeLiveChannelListRequest} {@link DescribeLiveChannelListResponse} */
   DescribeLiveChannelList(data: DescribeLiveChannelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveChannelListResponse>;
-  /** {@link DescribeLiveRecordPlanById 获取直播录制计划详情}({@link DescribeLiveRecordPlanByIdRequest 请求参数}): {@link DescribeLiveRecordPlanByIdResponse 返回参数} */
+  /** 获取直播录制计划详情 {@link DescribeLiveRecordPlanByIdRequest} {@link DescribeLiveRecordPlanByIdResponse} */
   DescribeLiveRecordPlanById(data: DescribeLiveRecordPlanByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordPlanByIdResponse>;
-  /** {@link DescribeLiveRecordPlanIds 获取直播录制计划列表}({@link DescribeLiveRecordPlanIdsRequest 请求参数}): {@link DescribeLiveRecordPlanIdsResponse 返回参数} */
+  /** 获取直播录制计划列表 {@link DescribeLiveRecordPlanIdsRequest} {@link DescribeLiveRecordPlanIdsResponse} */
   DescribeLiveRecordPlanIds(data?: DescribeLiveRecordPlanIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordPlanIdsResponse>;
-  /** {@link DescribeLiveStream 直播拉流接口}({@link DescribeLiveStreamRequest 请求参数}): {@link DescribeLiveStreamResponse 返回参数} */
+  /** 直播拉流接口 {@link DescribeLiveStreamRequest} {@link DescribeLiveStreamResponse} */
   DescribeLiveStream(data: DescribeLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamResponse>;
-  /** {@link DescribeLiveVideoList 直播录像回放列表}({@link DescribeLiveVideoListRequest 请求参数}): {@link DescribeLiveVideoListResponse 返回参数} */
+  /** 直播录像回放列表 {@link DescribeLiveVideoListRequest} {@link DescribeLiveVideoListResponse} */
   DescribeLiveVideoList(data: DescribeLiveVideoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveVideoListResponse>;
-  /** {@link DescribeMessageForward 查看消息转发配置详情}({@link DescribeMessageForwardRequest 请求参数}): {@link DescribeMessageForwardResponse 返回参数} */
+  /** 查看消息转发配置详情 {@link DescribeMessageForwardRequest} {@link DescribeMessageForwardResponse} */
   DescribeMessageForward(data: DescribeMessageForwardRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageForwardResponse>;
-  /** {@link DescribeMessageForwards 查看消息转发配置列表}({@link DescribeMessageForwardsRequest 请求参数}): {@link DescribeMessageForwardsResponse 返回参数} */
+  /** 查看消息转发配置列表 {@link DescribeMessageForwardsRequest} {@link DescribeMessageForwardsResponse} */
   DescribeMessageForwards(data: DescribeMessageForwardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageForwardsResponse>;
-  /** {@link DescribeMonitorDataByDate 运营中心-设备录像存储统计}({@link DescribeMonitorDataByDateRequest 请求参数}): {@link DescribeMonitorDataByDateResponse 返回参数} */
+  /** 运营中心-设备录像存储统计 {@link DescribeMonitorDataByDateRequest} {@link DescribeMonitorDataByDateResponse} */
   DescribeMonitorDataByDate(data: DescribeMonitorDataByDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorDataByDateResponse>;
-  /** {@link DescribePresetList 获取预置位列表}({@link DescribePresetListRequest 请求参数}): {@link DescribePresetListResponse 返回参数} */
+  /** 获取预置位列表 {@link DescribePresetListRequest} {@link DescribePresetListResponse} */
   DescribePresetList(data: DescribePresetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePresetListResponse>;
-  /** {@link DescribeRecordDatesByChannel 获取设备录像日期列表}({@link DescribeRecordDatesByChannelRequest 请求参数}): {@link DescribeRecordDatesByChannelResponse 返回参数} */
+  /** 获取设备录像日期列表 {@link DescribeRecordDatesByChannelRequest} {@link DescribeRecordDatesByChannelResponse} */
   DescribeRecordDatesByChannel(data: DescribeRecordDatesByChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordDatesByChannelResponse>;
-  /** {@link DescribeRecordDatesByLive 直播录像存储日期列表}({@link DescribeRecordDatesByLiveRequest 请求参数}): {@link DescribeRecordDatesByLiveResponse 返回参数} */
+  /** 直播录像存储日期列表 {@link DescribeRecordDatesByLiveRequest} {@link DescribeRecordDatesByLiveResponse} */
   DescribeRecordDatesByLive(data: DescribeRecordDatesByLiveRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordDatesByLiveResponse>;
-  /** {@link DescribeRecordStream 获取通道本地回放流地址（旧）}({@link DescribeRecordStreamRequest 请求参数}): {@link DescribeRecordStreamResponse 返回参数} */
+  /** 获取通道本地回放流地址（旧） {@link DescribeRecordStreamRequest} {@link DescribeRecordStreamResponse} */
   DescribeRecordStream(data: DescribeRecordStreamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordStreamResponse>;
-  /** {@link DescribeRecordingPlanById 获取录制计划}({@link DescribeRecordingPlanByIdRequest 请求参数}): {@link DescribeRecordingPlanByIdResponse 返回参数} */
+  /** 获取录制计划 {@link DescribeRecordingPlanByIdRequest} {@link DescribeRecordingPlanByIdResponse} */
   DescribeRecordingPlanById(data: DescribeRecordingPlanByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordingPlanByIdResponse>;
-  /** {@link DescribeRecordingPlans 获取全部录制计划}({@link DescribeRecordingPlansRequest 请求参数}): {@link DescribeRecordingPlansResponse 返回参数} */
+  /** 获取全部录制计划 {@link DescribeRecordingPlansRequest} {@link DescribeRecordingPlansResponse} */
   DescribeRecordingPlans(data?: DescribeRecordingPlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordingPlansResponse>;
-  /** {@link DescribeSIPServer 获取SIP服务器配置}({@link DescribeSIPServerRequest 请求参数}): {@link DescribeSIPServerResponse 返回参数} */
+  /** 获取SIP服务器配置 {@link DescribeSIPServerRequest} {@link DescribeSIPServerResponse} */
   DescribeSIPServer(data?: DescribeSIPServerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSIPServerResponse>;
-  /** {@link DescribeScene 场景详情}({@link DescribeSceneRequest 请求参数}): {@link DescribeSceneResponse 返回参数} */
+  /** 场景详情 {@link DescribeSceneRequest} {@link DescribeSceneResponse} */
   DescribeScene(data: DescribeSceneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSceneResponse>;
-  /** {@link DescribeScenes 获取场景列表}({@link DescribeScenesRequest 请求参数}): {@link DescribeScenesResponse 返回参数} */
+  /** 获取场景列表 {@link DescribeScenesRequest} {@link DescribeScenesResponse} */
   DescribeScenes(data: DescribeScenesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScenesResponse>;
-  /** {@link DescribeStatisticDetails 查询指定统计项详情}({@link DescribeStatisticDetailsRequest 请求参数}): {@link DescribeStatisticDetailsResponse 返回参数} */
+  /** 查询指定统计项详情 {@link DescribeStatisticDetailsRequest} {@link DescribeStatisticDetailsResponse} */
   DescribeStatisticDetails(data: DescribeStatisticDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStatisticDetailsResponse>;
-  /** {@link DescribeStatisticSummary 查询统计指标概览数据}({@link DescribeStatisticSummaryRequest 请求参数}): {@link DescribeStatisticSummaryResponse 返回参数} */
+  /** 查询统计指标概览数据 {@link DescribeStatisticSummaryRequest} {@link DescribeStatisticSummaryResponse} */
   DescribeStatisticSummary(data: DescribeStatisticSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStatisticSummaryResponse>;
-  /** {@link DescribeSubGroups 查询子分组列表}({@link DescribeSubGroupsRequest 请求参数}): {@link DescribeSubGroupsResponse 返回参数} */
+  /** 查询子分组列表 {@link DescribeSubGroupsRequest} {@link DescribeSubGroupsResponse} */
   DescribeSubGroups(data?: DescribeSubGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubGroupsResponse>;
-  /** {@link DescribeSubscriptionStatus 查询主设备订阅状态}({@link DescribeSubscriptionStatusRequest 请求参数}): {@link DescribeSubscriptionStatusResponse 返回参数} */
+  /** 查询主设备订阅状态 {@link DescribeSubscriptionStatusRequest} {@link DescribeSubscriptionStatusResponse} */
   DescribeSubscriptionStatus(data: DescribeSubscriptionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscriptionStatusResponse>;
-  /** {@link DescribeVideoList 获取云端录制文件列表}({@link DescribeVideoListRequest 请求参数}): {@link DescribeVideoListResponse 返回参数} */
+  /** 获取云端录制文件列表 {@link DescribeVideoListRequest} {@link DescribeVideoListResponse} */
   DescribeVideoList(data: DescribeVideoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoListResponse>;
-  /** {@link DescribeVideoListByChannel 获取通道录制文件列表}({@link DescribeVideoListByChannelRequest 请求参数}): {@link DescribeVideoListByChannelResponse 返回参数} */
+  /** 获取通道录制文件列表 {@link DescribeVideoListByChannelRequest} {@link DescribeVideoListByChannelResponse} */
   DescribeVideoListByChannel(data: DescribeVideoListByChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoListByChannelResponse>;
-  /** {@link DescribeWarnMod 告警等级列表}({@link DescribeWarnModRequest 请求参数}): {@link DescribeWarnModResponse 返回参数} */
+  /** 告警等级列表 {@link DescribeWarnModRequest} {@link DescribeWarnModResponse} */
   DescribeWarnMod(data?: DescribeWarnModRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWarnModResponse>;
-  /** {@link DescribeWarnings 获取告警列表}({@link DescribeWarningsRequest 请求参数}): {@link DescribeWarningsResponse 返回参数} */
+  /** 获取告警列表 {@link DescribeWarningsRequest} {@link DescribeWarningsResponse} */
   DescribeWarnings(data: DescribeWarningsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWarningsResponse>;
-  /** {@link DescribeXP2PData 获取X-P2P的统计数据}({@link DescribeXP2PDataRequest 请求参数}): {@link DescribeXP2PDataResponse 返回参数} */
+  /** 获取X-P2P的统计数据 {@link DescribeXP2PDataRequest} {@link DescribeXP2PDataResponse} */
   DescribeXP2PData(data: DescribeXP2PDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeXP2PDataResponse>;
-  /** {@link GetRecordDatesByDev 获取设备录像日期列表（旧）}({@link GetRecordDatesByDevRequest 请求参数}): {@link GetRecordDatesByDevResponse 返回参数} */
+  /** 获取设备录像日期列表（旧） {@link GetRecordDatesByDevRequest} {@link GetRecordDatesByDevResponse} */
   GetRecordDatesByDev(data: GetRecordDatesByDevRequest, config?: AxiosRequestConfig): AxiosPromise<GetRecordDatesByDevResponse>;
-  /** {@link GetRecordPlanByDev 获取设备绑定的录制计划}({@link GetRecordPlanByDevRequest 请求参数}): {@link GetRecordPlanByDevResponse 返回参数} */
+  /** 获取设备绑定的录制计划 {@link GetRecordPlanByDevRequest} {@link GetRecordPlanByDevResponse} */
   GetRecordPlanByDev(data: GetRecordPlanByDevRequest, config?: AxiosRequestConfig): AxiosPromise<GetRecordPlanByDevResponse>;
-  /** {@link GetRecordPlanById 获取录制计划（旧）}({@link GetRecordPlanByIdRequest 请求参数}): {@link GetRecordPlanByIdResponse 返回参数} */
+  /** 获取录制计划（旧） {@link GetRecordPlanByIdRequest} {@link GetRecordPlanByIdResponse} */
   GetRecordPlanById(data: GetRecordPlanByIdRequest, config?: AxiosRequestConfig): AxiosPromise<GetRecordPlanByIdResponse>;
-  /** {@link GetRecordPlans 获取全部录制计划（旧）}({@link GetRecordPlansRequest 请求参数}): {@link GetRecordPlansResponse 返回参数} */
+  /** 获取全部录制计划（旧） {@link GetRecordPlansRequest} {@link GetRecordPlansResponse} */
   GetRecordPlans(data?: GetRecordPlansRequest, config?: AxiosRequestConfig): AxiosPromise<GetRecordPlansResponse>;
-  /** {@link GetTimeTemplateById 根据模板ID获取时间模板}({@link GetTimeTemplateByIdRequest 请求参数}): {@link GetTimeTemplateByIdResponse 返回参数} */
+  /** 根据模板ID获取时间模板 {@link GetTimeTemplateByIdRequest} {@link GetTimeTemplateByIdResponse} */
   GetTimeTemplateById(data: GetTimeTemplateByIdRequest, config?: AxiosRequestConfig): AxiosPromise<GetTimeTemplateByIdResponse>;
-  /** {@link GetTimeTemplates 获取时间模板列表}({@link GetTimeTemplatesRequest 请求参数}): {@link GetTimeTemplatesResponse 返回参数} */
+  /** 获取时间模板列表 {@link GetTimeTemplatesRequest} {@link GetTimeTemplatesResponse} */
   GetTimeTemplates(data?: GetTimeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<GetTimeTemplatesResponse>;
-  /** {@link GetVideoListByCon 获取通道录制文件列表（旧）}({@link GetVideoListByConRequest 请求参数}): {@link GetVideoListByConResponse 返回参数} */
+  /** 获取通道录制文件列表（旧） {@link GetVideoListByConRequest} {@link GetVideoListByConResponse} */
   GetVideoListByCon(data: GetVideoListByConRequest, config?: AxiosRequestConfig): AxiosPromise<GetVideoListByConResponse>;
-  /** {@link ModifyBindPlanLiveChannel 直播录制计划绑定解绑直播频道}({@link ModifyBindPlanLiveChannelRequest 请求参数}): {@link ModifyBindPlanLiveChannelResponse 返回参数} */
+  /** 直播录制计划绑定解绑直播频道 {@link ModifyBindPlanLiveChannelRequest} {@link ModifyBindPlanLiveChannelResponse} */
   ModifyBindPlanLiveChannel(data: ModifyBindPlanLiveChannelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBindPlanLiveChannelResponse>;
-  /** {@link ModifyBindRecordingPlan 更新录制计划绑定的通道}({@link ModifyBindRecordingPlanRequest 请求参数}): {@link ModifyBindRecordingPlanResponse 返回参数} */
+  /** 更新录制计划绑定的通道 {@link ModifyBindRecordingPlanRequest} {@link ModifyBindRecordingPlanResponse} */
   ModifyBindRecordingPlan(data: ModifyBindRecordingPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBindRecordingPlanResponse>;
-  /** {@link ModifyBindSceneChannels 场景绑定解绑通道接口}({@link ModifyBindSceneChannelsRequest 请求参数}): {@link ModifyBindSceneChannelsResponse 返回参数} */
+  /** 场景绑定解绑通道接口 {@link ModifyBindSceneChannelsRequest} {@link ModifyBindSceneChannelsResponse} */
   ModifyBindSceneChannels(data: ModifyBindSceneChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBindSceneChannelsResponse>;
-  /** {@link ModifyBindSceneDevice 场景绑定解绑通道接口(旧)}({@link ModifyBindSceneDeviceRequest 请求参数}): {@link ModifyBindSceneDeviceResponse 返回参数} */
+  /** 场景绑定解绑通道接口(旧) {@link ModifyBindSceneDeviceRequest} {@link ModifyBindSceneDeviceResponse} */
   ModifyBindSceneDevice(data: ModifyBindSceneDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBindSceneDeviceResponse>;
-  /** {@link ModifyDeviceData 编辑设备信息}({@link ModifyDeviceDataRequest 请求参数}): {@link ModifyDeviceDataResponse 返回参数} */
+  /** 编辑设备信息 {@link ModifyDeviceDataRequest} {@link ModifyDeviceDataResponse} */
   ModifyDeviceData(data: ModifyDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceDataResponse>;
-  /** {@link ModifyLiveChannel 编辑直播接口}({@link ModifyLiveChannelRequest 请求参数}): {@link ModifyLiveChannelResponse 返回参数} */
+  /** 编辑直播接口 {@link ModifyLiveChannelRequest} {@link ModifyLiveChannelResponse} */
   ModifyLiveChannel(data: ModifyLiveChannelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveChannelResponse>;
-  /** {@link ModifyLiveRecordPlan 编辑直播录制计划}({@link ModifyLiveRecordPlanRequest 请求参数}): {@link ModifyLiveRecordPlanResponse 返回参数} */
+  /** 编辑直播录制计划 {@link ModifyLiveRecordPlanRequest} {@link ModifyLiveRecordPlanResponse} */
   ModifyLiveRecordPlan(data: ModifyLiveRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveRecordPlanResponse>;
-  /** {@link ModifyLiveVideo 直播录像编辑}({@link ModifyLiveVideoRequest 请求参数}): {@link ModifyLiveVideoResponse 返回参数} */
+  /** 直播录像编辑 {@link ModifyLiveVideoRequest} {@link ModifyLiveVideoResponse} */
   ModifyLiveVideo(data: ModifyLiveVideoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveVideoResponse>;
-  /** {@link ModifyMessageForward 修改消息转发配置}({@link ModifyMessageForwardRequest 请求参数}): {@link ModifyMessageForwardResponse 返回参数} */
+  /** 修改消息转发配置 {@link ModifyMessageForwardRequest} {@link ModifyMessageForwardResponse} */
   ModifyMessageForward(data: ModifyMessageForwardRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMessageForwardResponse>;
-  /** {@link ModifyPreset 编辑预置位信息}({@link ModifyPresetRequest 请求参数}): {@link ModifyPresetResponse 返回参数} */
+  /** 编辑预置位信息 {@link ModifyPresetRequest} {@link ModifyPresetResponse} */
   ModifyPreset(data: ModifyPresetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPresetResponse>;
-  /** {@link ModifyRecordingPlan 更新录制计划}({@link ModifyRecordingPlanRequest 请求参数}): {@link ModifyRecordingPlanResponse 返回参数} */
+  /** 更新录制计划 {@link ModifyRecordingPlanRequest} {@link ModifyRecordingPlanResponse} */
   ModifyRecordingPlan(data: ModifyRecordingPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordingPlanResponse>;
-  /** {@link ModifyScene 修改场景}({@link ModifySceneRequest 请求参数}): {@link ModifySceneResponse 返回参数} */
+  /** 修改场景 {@link ModifySceneRequest} {@link ModifySceneResponse} */
   ModifyScene(data: ModifySceneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySceneResponse>;
-  /** {@link ModifySubscriptionStatus 编辑设备订阅状态}({@link ModifySubscriptionStatusRequest 请求参数}): {@link ModifySubscriptionStatusResponse 返回参数} */
+  /** 编辑设备订阅状态 {@link ModifySubscriptionStatusRequest} {@link ModifySubscriptionStatusResponse} */
   ModifySubscriptionStatus(data: ModifySubscriptionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubscriptionStatusResponse>;
-  /** {@link ModifyVideoInfo 修改录像存储列表}({@link ModifyVideoInfoRequest 请求参数}): {@link ModifyVideoInfoResponse 返回参数} */
+  /** 修改录像存储列表 {@link ModifyVideoInfoRequest} {@link ModifyVideoInfoResponse} */
   ModifyVideoInfo(data: ModifyVideoInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVideoInfoResponse>;
-  /** {@link ResetWarning 重置设备告警}({@link ResetWarningRequest 请求参数}): {@link ResetWarningResponse 返回参数} */
+  /** 重置设备告警 {@link ResetWarningRequest} {@link ResetWarningResponse} */
   ResetWarning(data?: ResetWarningRequest, config?: AxiosRequestConfig): AxiosPromise<ResetWarningResponse>;
-  /** {@link UpdateDeviceGroup 修改分组信息}({@link UpdateDeviceGroupRequest 请求参数}): {@link UpdateDeviceGroupResponse 返回参数} */
+  /** 修改分组信息 {@link UpdateDeviceGroupRequest} {@link UpdateDeviceGroupResponse} */
   UpdateDeviceGroup(data: UpdateDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceGroupResponse>;
-  /** {@link UpdateDevicePassWord 修改设备密码}({@link UpdateDevicePassWordRequest 请求参数}): {@link UpdateDevicePassWordResponse 返回参数} */
+  /** 修改设备密码 {@link UpdateDevicePassWordRequest} {@link UpdateDevicePassWordResponse} */
   UpdateDevicePassWord(data: UpdateDevicePassWordRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDevicePassWordResponse>;
-  /** {@link UpdateRecordPlan 更新录制计划（旧）}({@link UpdateRecordPlanRequest 请求参数}): {@link UpdateRecordPlanResponse 返回参数} */
+  /** 更新录制计划（旧） {@link UpdateRecordPlanRequest} {@link UpdateRecordPlanResponse} */
   UpdateRecordPlan(data: UpdateRecordPlanRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRecordPlanResponse>;
-  /** {@link UpdateTimeTemplate 更新时间模板}({@link UpdateTimeTemplateRequest 请求参数}): {@link UpdateTimeTemplateResponse 返回参数} */
+  /** 更新时间模板 {@link UpdateTimeTemplateRequest} {@link UpdateTimeTemplateResponse} */
   UpdateTimeTemplate(data: UpdateTimeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTimeTemplateResponse>;
 }
 

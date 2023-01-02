@@ -470,7 +470,7 @@ declare interface CreateFileSampleRequest {
 declare interface CreateFileSampleResponse {
   /** 任务状态1：已完成2：处理中 */
   Progress?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -490,7 +490,7 @@ declare interface CreateTextSampleResponse {
   ErrMsg?: string;
   /** 任务状态1：已完成2：处理中 */
   Progress?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -502,7 +502,7 @@ declare interface DeleteFileSampleRequest {
 declare interface DeleteFileSampleResponse {
   /** 任务状态1：已完成2：处理中 */
   Progress?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -514,7 +514,7 @@ declare interface DeleteTextSampleRequest {
 declare interface DeleteTextSampleResponse {
   /** 任务状态1：已完成2：处理中 */
   Progress?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -536,7 +536,7 @@ declare interface DescribeFileSampleResponse {
   FileSampleSet?: FileSampleInfo[];
   /** 符合要求的样本的数量 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -558,7 +558,7 @@ declare interface DescribeTextSampleResponse {
   TextSampleSet?: TextSample[];
   /** 符合要求的样本的数量 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -576,7 +576,7 @@ declare interface ImageModerationResponse {
   Data?: ImageData;
   /** 业务返回码 */
   BusinessCode?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -588,7 +588,7 @@ declare interface ManualReviewRequest {
 declare interface ManualReviewResponse {
   /** 人审接口同步响应结果 */
   Data?: ManualReviewData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -612,30 +612,30 @@ declare interface TextModerationResponse {
   Data?: TextData;
   /** 业务返回码 */
   BusinessCode?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cms 内容安全} */
 declare interface Cms {
   (): Versions;
-  /** {@link CreateFileSample 新增图片样本库}({@link CreateFileSampleRequest 请求参数}): {@link CreateFileSampleResponse 返回参数} */
+  /** 新增图片样本库 {@link CreateFileSampleRequest} {@link CreateFileSampleResponse} */
   CreateFileSample(data: CreateFileSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileSampleResponse>;
-  /** {@link CreateTextSample 新增文本样本库}({@link CreateTextSampleRequest 请求参数}): {@link CreateTextSampleResponse 返回参数} */
+  /** 新增文本样本库 {@link CreateTextSampleRequest} {@link CreateTextSampleResponse} */
   CreateTextSample(data: CreateTextSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTextSampleResponse>;
-  /** {@link DeleteFileSample 删除图片样本库}({@link DeleteFileSampleRequest 请求参数}): {@link DeleteFileSampleResponse 返回参数} */
+  /** 删除图片样本库 {@link DeleteFileSampleRequest} {@link DeleteFileSampleResponse} */
   DeleteFileSample(data: DeleteFileSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFileSampleResponse>;
-  /** {@link DeleteTextSample 删除文本样本库}({@link DeleteTextSampleRequest 请求参数}): {@link DeleteTextSampleResponse 返回参数} */
+  /** 删除文本样本库 {@link DeleteTextSampleRequest} {@link DeleteTextSampleResponse} */
   DeleteTextSample(data: DeleteTextSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTextSampleResponse>;
-  /** {@link DescribeFileSample 查询图片样本库}({@link DescribeFileSampleRequest 请求参数}): {@link DescribeFileSampleResponse 返回参数} */
+  /** 查询图片样本库 {@link DescribeFileSampleRequest} {@link DescribeFileSampleResponse} */
   DescribeFileSample(data?: DescribeFileSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileSampleResponse>;
-  /** {@link DescribeTextSample 查询文本样本库}({@link DescribeTextSampleRequest 请求参数}): {@link DescribeTextSampleResponse 返回参数} */
+  /** 查询文本样本库 {@link DescribeTextSampleRequest} {@link DescribeTextSampleResponse} */
   DescribeTextSample(data?: DescribeTextSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTextSampleResponse>;
-  /** {@link ImageModeration 图片内容检测}({@link ImageModerationRequest 请求参数}): {@link ImageModerationResponse 返回参数} */
+  /** 图片内容检测 {@link ImageModerationRequest} {@link ImageModerationResponse} */
   ImageModeration(data?: ImageModerationRequest, config?: AxiosRequestConfig): AxiosPromise<ImageModerationResponse>;
-  /** {@link ManualReview 人工审核对外接口}({@link ManualReviewRequest 请求参数}): {@link ManualReviewResponse 返回参数} */
+  /** 人工审核对外接口 {@link ManualReviewRequest} {@link ManualReviewResponse} */
   ManualReview(data: ManualReviewRequest, config?: AxiosRequestConfig): AxiosPromise<ManualReviewResponse>;
-  /** {@link TextModeration 文本内容检测}({@link TextModerationRequest 请求参数}): {@link TextModerationResponse 返回参数} */
+  /** 文本内容检测 {@link TextModerationRequest} {@link TextModerationResponse} */
   TextModeration(data: TextModerationRequest, config?: AxiosRequestConfig): AxiosPromise<TextModerationResponse>;
 }
 

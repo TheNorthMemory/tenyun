@@ -226,7 +226,7 @@ declare interface DescribeRiskAssessmentRequest {
 }
 
 declare interface DescribeRiskAssessmentResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -238,7 +238,7 @@ declare interface DescribeRiskTrendsRequest {
 declare interface DescribeRiskTrendsResponse {
   /** 业务出参 */
   Data?: OutputFrontRiskData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -252,18 +252,18 @@ declare interface ManageMarketingRiskRequest {
 declare interface ManageMarketingRiskResponse {
   /** 业务出参 */
   Data: OutputManageMarketingRisk;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Rce 全栈式风控引擎} */
 declare interface Rce {
   (): Versions;
-  /** {@link DescribeRiskAssessment 查询风险评估结果}({@link DescribeRiskAssessmentRequest 请求参数}): {@link DescribeRiskAssessmentResponse 返回参数} */
+  /** 查询风险评估结果 {@link DescribeRiskAssessmentRequest} {@link DescribeRiskAssessmentResponse} */
   DescribeRiskAssessment(data?: DescribeRiskAssessmentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskAssessmentResponse>;
-  /** {@link DescribeRiskTrends 风险趋势统计}({@link DescribeRiskTrendsRequest 请求参数}): {@link DescribeRiskTrendsResponse 返回参数} */
+  /** 风险趋势统计 {@link DescribeRiskTrendsRequest} {@link DescribeRiskTrendsResponse} */
   DescribeRiskTrends(data: DescribeRiskTrendsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskTrendsResponse>;
-  /** {@link ManageMarketingRisk 全栈式风控引擎}({@link ManageMarketingRiskRequest 请求参数}): {@link ManageMarketingRiskResponse 返回参数} */
+  /** 全栈式风控引擎 {@link ManageMarketingRiskRequest} {@link ManageMarketingRiskResponse} */
   ManageMarketingRisk(data?: ManageMarketingRiskRequest, config?: AxiosRequestConfig): AxiosPromise<ManageMarketingRiskResponse>;
 }
 

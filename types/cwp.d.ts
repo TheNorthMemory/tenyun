@@ -2892,7 +2892,7 @@ declare interface CancelIgnoreVulRequest {
 }
 
 declare interface CancelIgnoreVulResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2906,7 +2906,7 @@ declare interface ChangeRuleEventsIgnoreStatusRequest {
 }
 
 declare interface ChangeRuleEventsIgnoreStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2928,7 +2928,7 @@ declare interface CheckBashRuleParamsResponse {
   ErrCode: number;
   /** 校验信息 */
   ErrMsg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2952,7 +2952,7 @@ declare interface CreateBaselineStrategyRequest {
 }
 
 declare interface CreateBaselineStrategyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2964,7 +2964,7 @@ declare interface CreateEmergencyVulScanRequest {
 }
 
 declare interface CreateEmergencyVulScanResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2996,7 +2996,7 @@ declare interface CreateLicenseOrderResponse {
   ResourceIds: string[];
   /** 大订单号 , 后付费该字段空值 */
   BigDealId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3008,7 +3008,7 @@ declare interface CreateProtectServerRequest {
 }
 
 declare interface CreateProtectServerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3028,7 +3028,7 @@ declare interface CreateScanMalwareSettingRequest {
 }
 
 declare interface CreateScanMalwareSettingResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3040,7 +3040,7 @@ declare interface CreateSearchLogRequest {
 declare interface CreateSearchLogResponse {
   /** 0：成功，非0：失败 */
   Status: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3052,7 +3052,7 @@ declare interface CreateSearchTemplateRequest {
 declare interface CreateSearchTemplateResponse {
   /** 0：成功，非0：失败 */
   Status: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3062,7 +3062,7 @@ declare interface DeleteAttackLogsRequest {
 }
 
 declare interface DeleteAttackLogsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3072,7 +3072,7 @@ declare interface DeleteBaselinePolicyRequest {
 }
 
 declare interface DeleteBaselinePolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3082,7 +3082,7 @@ declare interface DeleteBaselineStrategyRequest {
 }
 
 declare interface DeleteBaselineStrategyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3092,7 +3092,7 @@ declare interface DeleteBashEventsRequest {
 }
 
 declare interface DeleteBashEventsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3102,7 +3102,7 @@ declare interface DeleteBashRulesRequest {
 }
 
 declare interface DeleteBashRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3112,7 +3112,7 @@ declare interface DeleteBruteAttacksRequest {
 }
 
 declare interface DeleteBruteAttacksResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3126,7 +3126,7 @@ declare interface DeleteLicenseRecordRequest {
 }
 
 declare interface DeleteLicenseRecordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3136,7 +3136,7 @@ declare interface DeleteLoginWhiteListRequest {
 }
 
 declare interface DeleteLoginWhiteListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3146,7 +3146,7 @@ declare interface DeleteMachineRequest {
 }
 
 declare interface DeleteMachineResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3156,7 +3156,7 @@ declare interface DeleteMachineTagRequest {
 }
 
 declare interface DeleteMachineTagResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3166,7 +3166,7 @@ declare interface DeleteMaliciousRequestsRequest {
 }
 
 declare interface DeleteMaliciousRequestsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3174,7 +3174,7 @@ declare interface DeleteMalwareScanTaskRequest {
 }
 
 declare interface DeleteMalwareScanTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3184,7 +3184,7 @@ declare interface DeleteMalwaresRequest {
 }
 
 declare interface DeleteMalwaresResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3200,7 +3200,7 @@ declare interface DeleteNonlocalLoginPlacesRequest {
 }
 
 declare interface DeleteNonlocalLoginPlacesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3210,7 +3210,7 @@ declare interface DeletePrivilegeEventsRequest {
 }
 
 declare interface DeletePrivilegeEventsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3220,7 +3220,7 @@ declare interface DeletePrivilegeRulesRequest {
 }
 
 declare interface DeletePrivilegeRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3230,7 +3230,7 @@ declare interface DeleteProtectDirRequest {
 }
 
 declare interface DeleteProtectDirResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3240,7 +3240,7 @@ declare interface DeleteReverseShellEventsRequest {
 }
 
 declare interface DeleteReverseShellEventsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3250,7 +3250,7 @@ declare interface DeleteReverseShellRulesRequest {
 }
 
 declare interface DeleteReverseShellRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3264,7 +3264,7 @@ declare interface DeleteScanTaskRequest {
 }
 
 declare interface DeleteScanTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3276,7 +3276,7 @@ declare interface DeleteSearchTemplateRequest {
 declare interface DeleteSearchTemplateResponse {
   /** 0：成功，非0：失败 */
   Status: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3286,7 +3286,7 @@ declare interface DeleteTagsRequest {
 }
 
 declare interface DeleteTagsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3294,7 +3294,7 @@ declare interface DeleteWebPageEventLogRequest {
 }
 
 declare interface DeleteWebPageEventLogResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3312,7 +3312,7 @@ declare interface DescribeAccountStatisticsResponse {
   TotalCount: number;
   /** 帐号统计列表。 */
   AccountStatistics: AccountStatistics[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3336,7 +3336,7 @@ declare interface DescribeAssetAppListResponse {
   Apps: AssetAppBaseInfo[] | null;
   /** 总数量 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3358,7 +3358,7 @@ declare interface DescribeAssetAppProcessListResponse {
   Process: AssetAppProcessInfo[] | null;
   /** 分区总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3374,7 +3374,7 @@ declare interface DescribeAssetCoreModuleInfoRequest {
 declare interface DescribeAssetCoreModuleInfoResponse {
   /** 内核模块详情 */
   Module: AssetCoreModuleDetail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3400,7 +3400,7 @@ declare interface DescribeAssetCoreModuleListResponse {
   Modules: AssetCoreModuleBaseInfo[] | null;
   /** 总数量 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3416,7 +3416,7 @@ declare interface DescribeAssetDatabaseInfoRequest {
 declare interface DescribeAssetDatabaseInfoResponse {
   /** 数据库详情 */
   Database: AssetDatabaseDetail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3440,7 +3440,7 @@ declare interface DescribeAssetDatabaseListResponse {
   Databases: AssetDatabaseBaseInfo[] | null;
   /** 总数量 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3468,7 +3468,7 @@ declare interface DescribeAssetEnvListResponse {
   Envs: AssetEnvBaseInfo[] | null;
   /** 总数量 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3482,7 +3482,7 @@ declare interface DescribeAssetHostTotalCountRequest {
 declare interface DescribeAssetHostTotalCountResponse {
   /** 各项资源数量system : 资源监控account: 账号port: 端口process: 进程app: 应用软件database:数据库webapp: Web应用webframe: Web框架webservice: Web服务weblocation: Web站点systempackage: 系统安装包jar: jar包initservice:启动服务env: 环境变量coremodule: 内核模块 */
   Types: AssetKeyVal[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3530,7 +3530,7 @@ declare interface DescribeAssetInfoResponse {
   WebLocationNewCount: number;
   /** 主机今日新增 */
   MachineNewCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3556,7 +3556,7 @@ declare interface DescribeAssetInitServiceListResponse {
   Services: AssetInitServiceBaseInfo[] | null;
   /** 总数量 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3572,7 +3572,7 @@ declare interface DescribeAssetJarInfoRequest {
 declare interface DescribeAssetJarInfoResponse {
   /** Jar包详情 */
   Jar: AssetJarDetail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3598,7 +3598,7 @@ declare interface DescribeAssetJarListResponse {
   Jars: AssetJarBaseInfo[] | null;
   /** 总数量 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3612,7 +3612,7 @@ declare interface DescribeAssetMachineDetailRequest {
 declare interface DescribeAssetMachineDetailResponse {
   /** 主机详情 */
   MachineDetail: AssetMachineDetail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3634,7 +3634,7 @@ declare interface DescribeAssetMachineListResponse {
   Total: number;
   /** 记录列表 */
   Machines: AssetMachineBaseInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3660,7 +3660,7 @@ declare interface DescribeAssetPlanTaskListResponse {
   Tasks: AssetPlanTask[] | null;
   /** 总数量 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3684,7 +3684,7 @@ declare interface DescribeAssetPortInfoListResponse {
   Total: number;
   /** 列表 */
   Ports: AssetPortBaseInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3708,7 +3708,7 @@ declare interface DescribeAssetProcessInfoListResponse {
   Total: number;
   /** 列表 */
   Process: AssetProcessBaseInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3728,7 +3728,7 @@ declare interface DescribeAssetRecentMachineInfoResponse {
   OfflineList: AssetKeyVal[] | null;
   /** 风险数量列表 */
   RiskList: AssetKeyVal[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3754,7 +3754,7 @@ declare interface DescribeAssetSystemPackageListResponse {
   Total: number;
   /** 列表 */
   Packages: AssetSystemPackageInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3770,7 +3770,7 @@ declare interface DescribeAssetUserInfoRequest {
 declare interface DescribeAssetUserInfoResponse {
   /** 用户详细信息 */
   User: AssetUserDetail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3794,7 +3794,7 @@ declare interface DescribeAssetUserListResponse {
   Total: number;
   /** 账号列表 */
   Users: AssetUserBaseInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3818,7 +3818,7 @@ declare interface DescribeAssetWebAppListResponse {
   Total: number;
   /** 列表 */
   WebApps: AssetWebAppBaseInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3840,7 +3840,7 @@ declare interface DescribeAssetWebAppPluginListResponse {
   Plugins: AssetWebAppPluginInfo[] | null;
   /** 分区总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3864,7 +3864,7 @@ declare interface DescribeAssetWebFrameListResponse {
   Total: number;
   /** 列表 */
   WebFrames: AssetWebFrameBaseInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3880,7 +3880,7 @@ declare interface DescribeAssetWebLocationInfoRequest {
 declare interface DescribeAssetWebLocationInfoResponse {
   /** 站点信息 */
   WebLocation: AssetWebLocationInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3904,7 +3904,7 @@ declare interface DescribeAssetWebLocationListResponse {
   Total: number;
   /** 站点列表 */
   Locations: AssetWebLocationBaseInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3928,7 +3928,7 @@ declare interface DescribeAssetWebServiceInfoListResponse {
   WebServices: AssetWebServiceBaseInfo[] | null;
   /** 总数量 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3950,7 +3950,7 @@ declare interface DescribeAssetWebServiceProcessListResponse {
   Process: AssetAppProcessInfo[] | null;
   /** 总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3992,7 +3992,7 @@ declare interface DescribeAttackLogInfoResponse {
   CreatedAt: string;
   /** 攻击内容 */
   HttpContent: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4014,7 +4014,7 @@ declare interface DescribeAttackLogsResponse {
   AttackLogs: DefendAttackLog[] | null;
   /** 总条数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4024,7 +4024,7 @@ declare interface DescribeAttackVulTypeListRequest {
 declare interface DescribeAttackVulTypeListResponse {
   /** 威胁类型列表 */
   List: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4044,7 +4044,7 @@ declare interface DescribeAvailableExpertServiceDetailResponse {
   EmergencyResponseBuy: boolean;
   /** 是否购买过旗舰护网 */
   ProtectNetBuy: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4056,7 +4056,7 @@ declare interface DescribeBanModeResponse {
   Mode: string;
   /** 标准阻断模式的配置 */
   StandardModeConfig: StandardModeConfig;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4068,7 +4068,7 @@ declare interface DescribeBanRegionsRequest {
 declare interface DescribeBanRegionsResponse {
   /** 地域信息列表 */
   RegionSet: RegionSet[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4080,7 +4080,7 @@ declare interface DescribeBanStatusResponse {
   Status: number;
   /** 是否弹窗提示信息 false: 关闭，true: 开启 */
   ShowTips: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4098,7 +4098,7 @@ declare interface DescribeBanWhiteListResponse {
   TotalCount: number;
   /** 白名单列表 */
   WhiteList: BanWhiteListDetail[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4118,7 +4118,7 @@ declare interface DescribeBaselineAnalysisDataResponse {
   ScanRuleCount: number | null;
   /** 是否是第一次检测 1是 0不是 */
   IfFirstScan: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4130,7 +4130,7 @@ declare interface DescribeBaselineBasicInfoRequest {
 declare interface DescribeBaselineBasicInfoResponse {
   /** 基线基础信息列表 */
   BaselineBasicInfoList: BaselineBasicInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4142,7 +4142,7 @@ declare interface DescribeBaselineDetailRequest {
 declare interface DescribeBaselineDetailResponse {
   /** 基线详情 */
   BaselineDetail: BaselineDetail | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4166,7 +4166,7 @@ declare interface DescribeBaselineEffectHostListResponse {
   TotalCount: number | null;
   /** 影响服务器列表 */
   EffectHostList: BaselineEffectHost[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4188,7 +4188,7 @@ declare interface DescribeBaselineHostDetectListResponse {
   List: BaselineHostDetect[];
   /** 总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4202,7 +4202,7 @@ declare interface DescribeBaselineHostTopRequest {
 declare interface DescribeBaselineHostTopResponse {
   /** 主机基线策略事件Top */
   BaselineHostTopList: BaselineHostTopList[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4224,7 +4224,7 @@ declare interface DescribeBaselineItemDetectListResponse {
   Total: number;
   /** 无 */
   List: BaselineItemDetect[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4246,7 +4246,7 @@ declare interface DescribeBaselineItemListResponse {
   List: BaselineItem[];
   /** 总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4264,7 +4264,7 @@ declare interface DescribeBaselineListResponse {
   BaselineList: BaselineInfo[] | null;
   /** 分页查询记录总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4286,7 +4286,7 @@ declare interface DescribeBaselinePolicyListResponse {
   List: BaselinePolicy[];
   /** 总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4314,7 +4314,7 @@ declare interface DescribeBaselineRuleResponse {
   BaselineRuleList: BaselineRuleInfo[] | null;
   /** 是否显示说明列：true-是，false-否 */
   ShowRuleRemark: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4326,7 +4326,7 @@ declare interface DescribeBaselineScanScheduleRequest {
 declare interface DescribeBaselineScanScheduleResponse {
   /** 检测进度(百分比) */
   Schedule: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4356,7 +4356,7 @@ declare interface DescribeBaselineStrategyDetailResponse {
   CategoryIds: string[] | null;
   /** 1 表示扫描过, 0没扫描过 */
   IfScanned: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4374,7 +4374,7 @@ declare interface DescribeBaselineStrategyListResponse {
   TotalCount: number | null;
   /** 用户策略信息列表 */
   StrategyList: Strategy[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4388,7 +4388,7 @@ declare interface DescribeBaselineTopRequest {
 declare interface DescribeBaselineTopResponse {
   /** 检测项Top列表 */
   RuleTopList: BaselineRuleTopInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4410,7 +4410,7 @@ declare interface DescribeBashEventsResponse {
   TotalCount: number;
   /** 高危命令事件列表 */
   List: BashEvent[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4430,7 +4430,7 @@ declare interface DescribeBashRulesResponse {
   List: BashRule[];
   /** 总条数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4452,7 +4452,7 @@ declare interface DescribeBruteAttackListResponse {
   TotalCount: number | null;
   /** 密码破解列表 */
   BruteAttackList: BruteAttackInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4462,7 +4462,7 @@ declare interface DescribeBruteAttackRulesRequest {
 declare interface DescribeBruteAttackRulesResponse {
   /** 爆破阻断规则列表 */
   Rules: BruteAttackRuleList[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4484,7 +4484,7 @@ declare interface DescribeClientExceptionResponse {
   TotalCount: number;
   /** 事件详情 */
   Records: RecordInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4502,7 +4502,7 @@ declare interface DescribeComponentStatisticsResponse {
   TotalCount: number;
   /** 组件统计列表数据数组。 */
   ComponentStatistics: ComponentStatistics[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4514,7 +4514,7 @@ declare interface DescribeESAggregationsRequest {
 declare interface DescribeESAggregationsResponse {
   /** ES聚合结果JSON */
   Data: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4536,7 +4536,7 @@ declare interface DescribeEmergencyResponseListResponse {
   TotalCount: number;
   /** 应急响应列表 */
   List: EmergencyResponseInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4560,7 +4560,7 @@ declare interface DescribeEmergencyVulListResponse {
   TotalCount: number | null;
   /** 是否存在风险 */
   ExistsRisk: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4582,7 +4582,7 @@ declare interface DescribeExpertServiceListResponse {
   TotalCount: number;
   /** 安全管家数据 */
   List: SecurityButlerInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4600,7 +4600,7 @@ declare interface DescribeExpertServiceOrderListResponse {
   TotalCount: number;
   /** 订单列表 */
   List: ExpertServiceOrderInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4622,7 +4622,7 @@ declare interface DescribeExportMachinesRequest {
 declare interface DescribeExportMachinesResponse {
   /** 任务id */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4662,7 +4662,7 @@ declare interface DescribeGeneralStatResponse {
   ProtectDays: number | null;
   /** 15天内新增的主机数 */
   AddedOnTheFifteen: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4682,7 +4682,7 @@ declare interface DescribeHistoryAccountsResponse {
   TotalCount: number;
   /** 帐号变更历史数据数组。 */
   HistoryAccounts: HistoryAccount[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4704,7 +4704,7 @@ declare interface DescribeHistoryServiceResponse {
   Status: number;
   /** 开始时间 */
   StartTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4726,7 +4726,7 @@ declare interface DescribeHostLoginListResponse {
   TotalCount: number;
   /** 登录审计列表 */
   HostLoginList: HostLoginList[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4744,7 +4744,7 @@ declare interface DescribeIgnoreBaselineRuleResponse {
   IgnoreBaselineRuleList: IgnoreBaselineRule[] | null;
   /** 分页查询记录总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4766,7 +4766,7 @@ declare interface DescribeIgnoreRuleEffectHostListResponse {
   IgnoreRuleEffectHostList: IgnoreRuleEffectHostInfo[] | null;
   /** 分页查询记录总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4786,7 +4786,7 @@ declare interface DescribeImportMachineInfoResponse {
   EffectiveMachineInfoList: EffectiveMachineInfo[] | null;
   /** 用户批量导入失败的机器列表（例如机器不存在等...） */
   InvalidMachineList: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4796,7 +4796,7 @@ declare interface DescribeIndexListRequest {
 declare interface DescribeIndexListResponse {
   /** ES 索引信息 */
   Data: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4814,7 +4814,7 @@ declare interface DescribeJavaMemShellListResponse {
   List: JavaMemShellInfo[] | null;
   /** 总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4838,7 +4838,7 @@ declare interface DescribeLicenseBindListResponse {
   TotalCount: number;
   /** 绑定机器列表信息 */
   List: LicenseBindDetail[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4860,7 +4860,7 @@ declare interface DescribeLicenseBindScheduleResponse {
   List: LicenseBindTaskDetail[];
   /** 总条数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4902,7 +4902,7 @@ declare interface DescribeLicenseGeneralResponse {
   AutoRepurchaseSwitch: boolean;
   /** 自动加购订单是否自动续费 ,true 开启, false 关闭 */
   AutoRepurchaseRenewSwitch: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4922,7 +4922,7 @@ declare interface DescribeLicenseListResponse {
   TotalCount: number;
   /** 授权数列表信息 */
   List: LicenseDetail[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4934,7 +4934,7 @@ declare interface DescribeLogStorageStatisticResponse {
   TotalSize: number;
   /** 已使用容量（单位：GB） */
   UsedSize: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4952,7 +4952,7 @@ declare interface DescribeLoginWhiteCombinedListResponse {
   TotalCount: number;
   /** 合并后的白名单列表 */
   LoginWhiteCombinedInfos: LoginWhiteCombinedInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4970,7 +4970,7 @@ declare interface DescribeLoginWhiteListResponse {
   TotalCount: number;
   /** 异地登录白名单数组 */
   LoginWhiteLists: LoginWhiteLists[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5022,7 +5022,7 @@ declare interface DescribeMachineInfoResponse {
   HasAssetScan: number;
   /** 防护版本 BASIC_VERSION 基础版, PRO_VERSION 专业版 Flagship 旗舰版. */
   ProtectType: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5044,7 +5044,7 @@ declare interface DescribeMachineListResponse {
   Machines: Machine[];
   /** 主机数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5054,7 +5054,7 @@ declare interface DescribeMachineOsListRequest {
 declare interface DescribeMachineOsListResponse {
   /** 操作系统列表 */
   List: OsName[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5074,7 +5074,7 @@ declare interface DescribeMachineRegionsResponse {
   Other: RegionInfo[];
   /** 所有地域列表(包含以上所有地域) */
   ALL: RegionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5098,7 +5098,7 @@ declare interface DescribeMachinesResponse {
   Machines: Machine[];
   /** 主机数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5120,7 +5120,7 @@ declare interface DescribeMalWareListResponse {
   MalWareList: MalWareList[] | null;
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5138,7 +5138,7 @@ declare interface DescribeMaliciousRequestWhiteListResponse {
   List: MaliciousRequestWhiteListInfo[] | null;
   /** 分页查询记录总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5150,7 +5150,7 @@ declare interface DescribeMalwareFileRequest {
 declare interface DescribeMalwareFileResponse {
   /** 木马文件下载地址 */
   FileUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5162,7 +5162,7 @@ declare interface DescribeMalwareInfoRequest {
 declare interface DescribeMalwareInfoResponse {
   /** 恶意文件详情信息 */
   MalwareInfo: MalwareInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5178,7 +5178,7 @@ declare interface DescribeMalwareRiskWarningResponse {
   IsPop: boolean;
   /** 异常进程列表信息 */
   ProcessList: MalwareRisk[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5218,7 +5218,7 @@ declare interface DescribeMalwareTimingScanSettingResponse {
   EnableInspiredEngine: number;
   /** 是否开启恶意进程查杀[0:未开启,1:开启] */
   EnableMemShellScan: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5234,7 +5234,7 @@ declare interface DescribeMonthInspectionReportResponse {
   TotalCount: number;
   /** 巡检报告列表 */
   List: MonthInspectionReport[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5252,7 +5252,7 @@ declare interface DescribeOpenPortStatisticsResponse {
   TotalCount: number;
   /** 端口统计数据列表 */
   OpenPortStatistics: OpenPortStatistics[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5274,7 +5274,7 @@ declare interface DescribeOverviewStatisticsResponse {
   VulNum: number;
   /** 安全基线数。 */
   BaseLineNum: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5296,7 +5296,7 @@ declare interface DescribePrivilegeEventsResponse {
   List: PrivilegeEscalationProcess[];
   /** 总条数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5314,7 +5314,7 @@ declare interface DescribePrivilegeRulesResponse {
   List: PrivilegeRule[];
   /** 总条数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5328,7 +5328,7 @@ declare interface DescribeProVersionInfoResponse {
   IsAutoOpenProVersion: boolean;
   /** 开通专业版主机数 */
   ProVersionNum: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5338,7 +5338,7 @@ declare interface DescribeProVersionStatusRequest {
 }
 
 declare interface DescribeProVersionStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5356,7 +5356,7 @@ declare interface DescribeProcessStatisticsResponse {
   TotalCount: number;
   /** 进程统计列表数据数组。 */
   ProcessStatistics: ProcessStatistics[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5378,7 +5378,7 @@ declare interface DescribeProtectDirListResponse {
   TotalCount: number;
   /** 防护目录列表信息 */
   List: ProtectDirInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5404,7 +5404,7 @@ declare interface DescribeProtectDirRelatedServerResponse {
   TotalCount: number;
   /** 已开启防护总数 */
   ProtectServerCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5426,7 +5426,7 @@ declare interface DescribeProtectNetListResponse {
   TotalCount: number;
   /** 安全管家数据 */
   List: ProtectNetInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5448,7 +5448,7 @@ declare interface DescribeReverseShellEventsResponse {
   List: ReverseShell[];
   /** 总条数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5466,7 +5466,7 @@ declare interface DescribeReverseShellRulesResponse {
   List: ReverseShellRule[];
   /** 总条数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5488,7 +5488,7 @@ declare interface DescribeRiskDnsListResponse {
   RiskDnsList: RiskDnsList[] | null;
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5498,7 +5498,7 @@ declare interface DescribeSaveOrUpdateWarningsRequest {
 }
 
 declare interface DescribeSaveOrUpdateWarningsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5514,7 +5514,7 @@ declare interface DescribeScanMalwareScheduleResponse {
   IsSchedule: boolean;
   /** 0 从未扫描过、 1 扫描中、 2扫描完成、 3停止中、 4停止完成 */
   ScanStatus: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5526,7 +5526,7 @@ declare interface DescribeScanScheduleRequest {
 declare interface DescribeScanScheduleResponse {
   /** 检测进度 */
   Schedule: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5554,7 +5554,7 @@ declare interface DescribeScanStateResponse {
   RiskEventCount: number | null;
   /** 扫描结束时间 */
   ScanEndTime: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5602,7 +5602,7 @@ declare interface DescribeScanTaskDetailsResponse {
   StoppingAll: boolean | null;
   /** 扫描出漏洞个数 */
   VulCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5614,7 +5614,7 @@ declare interface DescribeScanTaskStatusRequest {
 declare interface DescribeScanTaskStatusResponse {
   /** 任务扫描状态列表 */
   State: TaskStatus;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5640,7 +5640,7 @@ declare interface DescribeScanVulSettingResponse {
   EndTime: string;
   /** 一键扫描超时时长，如：1800秒（s） */
   ClickTimeout: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5654,7 +5654,7 @@ declare interface DescribeSearchExportListResponse {
   TaskId: number;
   /** 下载地址 */
   DownloadUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5664,7 +5664,7 @@ declare interface DescribeSearchLogsRequest {
 declare interface DescribeSearchLogsResponse {
   /** 历史搜索记录 保留最新的10条 */
   Data: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5680,7 +5680,7 @@ declare interface DescribeSearchTemplatesResponse {
   TotalCount: number;
   /** 模板列表 */
   List: SearchTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5696,7 +5696,7 @@ declare interface DescribeSecurityDynamicsResponse {
   SecurityDynamics: SecurityDynamic[];
   /** 记录总数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5752,7 +5752,7 @@ declare interface DescribeSecurityEventStatResponse {
   VulStat: EventStat;
   /** 安全得分 */
   Score: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5792,7 +5792,7 @@ declare interface DescribeSecurityEventsCntResponse {
   WindowVul: SecurityEventInfo | null;
   /** linux系统漏洞事件总数 */
   LinuxVul: SecurityEventInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5824,7 +5824,7 @@ declare interface DescribeSecurityTrendsResponse {
   PrivilegeEscalations: SecurityTrend[];
   /** 网络攻击统计数据数组。 */
   CyberAttacks: SecurityTrend[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5846,7 +5846,7 @@ declare interface DescribeServerRelatedDirInfoResponse {
   ProtectTamperNum: number;
   /** 防护软链数量 */
   ProtectLinkNum: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5864,7 +5864,7 @@ declare interface DescribeServersAndRiskAndFirstInfoResponse {
   IsFirstCheck: boolean;
   /** 木马最近检测时间 */
   ScanTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5876,7 +5876,7 @@ declare interface DescribeStrategyExistRequest {
 declare interface DescribeStrategyExistResponse {
   /** 策略是否存在, 1是 0否 */
   IfExist: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5888,7 +5888,7 @@ declare interface DescribeTagMachinesRequest {
 declare interface DescribeTagMachinesResponse {
   /** 列表数据 */
   List: TagMachine[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5904,7 +5904,7 @@ declare interface DescribeTagsRequest {
 declare interface DescribeTagsResponse {
   /** 列表信息 */
   List: Tag[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5922,7 +5922,7 @@ declare interface DescribeUndoVulCountsResponse {
   UndoHostCount: number | null;
   /** 普通版主机数 */
   NotProfessionCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5934,7 +5934,7 @@ declare interface DescribeUsualLoginPlacesRequest {
 declare interface DescribeUsualLoginPlacesResponse {
   /** 常用登录地数组 */
   UsualLoginPlaces: UsualPlace[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5948,7 +5948,7 @@ declare interface DescribeVersionStatisticsResponse {
   ProVersionNum: number;
   /** 旗舰版数量 */
   UltimateVersionNum: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5966,7 +5966,7 @@ declare interface DescribeVulCountByDatesResponse {
   VulCount: number[] | null;
   /** 批量获得对应天数的主机数量 */
   HostCount: number[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5986,7 +5986,7 @@ declare interface DescribeVulEffectHostListResponse {
   TotalCount: number;
   /** 影响主机列表 */
   VulEffectHostList: VulEffectHostList[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6008,7 +6008,7 @@ declare interface DescribeVulHostCountScanTimeResponse {
   LastFixTime: string;
   /** 是否有支持自动修复的漏洞事件 */
   hadAutoFixVul: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6024,7 +6024,7 @@ declare interface DescribeVulHostTopRequest {
 declare interface DescribeVulHostTopResponse {
   /** 服务器风险top列表 */
   VulHostTopList: VulHostTopInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6068,7 +6068,7 @@ declare interface DescribeVulInfoCvssResponse {
   SuccessFixCount: number | null;
   /** 修复是否支持：0-windows/linux均不支持修复 ;1-windows/linux 均支持修复 ;2-仅linux支持修复;3-仅windows支持修复 */
   FixSwitch: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6082,7 +6082,7 @@ declare interface DescribeVulLevelCountRequest {
 declare interface DescribeVulLevelCountResponse {
   /** 统计结果 */
   VulLevelList: VulLevelInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6106,7 +6106,7 @@ declare interface DescribeVulListResponse {
   TotalCount: number | null;
   /** 重点关注漏洞总数 */
   FollowVulCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6122,7 +6122,7 @@ declare interface DescribeVulTopRequest {
 declare interface DescribeVulTopResponse {
   /** 漏洞top列表 */
   VulTopList: VulTopInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6132,7 +6132,7 @@ declare interface DescribeWarningListRequest {
 declare interface DescribeWarningListResponse {
   /** 获取告警列表 */
   WarningInfoList: WarningInfoObj[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6154,7 +6154,7 @@ declare interface DescribeWebPageEventListResponse {
   List: ProtectEventLists[];
   /** 总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6176,7 +6176,7 @@ declare interface DescribeWebPageGeneralizeResponse {
   ProtectToday: number;
   /** 防护主机数 */
   ProtectHostNum: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6188,7 +6188,7 @@ declare interface DescribeWebPageProtectStatResponse {
   FileTamperNum: ProtectStat[];
   /** 防护文件分类信息 */
   ProtectFileType: ProtectStat[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6214,7 +6214,7 @@ declare interface DescribeWebPageServiceInfoResponse {
   ExpiredNum: number;
   /** 防护目录数 */
   ProtectDirNum: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6226,7 +6226,7 @@ declare interface DestroyOrderRequest {
 }
 
 declare interface DestroyOrderResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6254,7 +6254,7 @@ declare interface EditBashRulesRequest {
 }
 
 declare interface EditBashRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6268,7 +6268,7 @@ declare interface EditTagsRequest {
 }
 
 declare interface EditTagsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6288,7 +6288,7 @@ declare interface ExportAssetCoreModuleListRequest {
 declare interface ExportAssetCoreModuleListResponse {
   /** 异步下载任务ID，需要配合ExportTasks接口使用 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6306,7 +6306,7 @@ declare interface ExportAssetWebServiceInfoListRequest {
 declare interface ExportAssetWebServiceInfoListResponse {
   /** 异步下载任务ID，需要配合ExportTasks接口使用 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6324,7 +6324,7 @@ declare interface ExportAttackLogsResponse {
   DownloadUrl: string;
   /** 导出任务ID 可通过ExportTasks接口下载 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6346,7 +6346,7 @@ declare interface ExportBaselineEffectHostListResponse {
   DownloadUrl: string | null;
   /** 导出任务id 可通过 ExportTasks接口下载 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6362,7 +6362,7 @@ declare interface ExportBaselineListResponse {
   DownloadUrl: string | null;
   /** 导出文件Id 可通过ExportTasks接口下载 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6376,7 +6376,7 @@ declare interface ExportBashEventsResponse {
   DownloadUrl: string;
   /** 导出任务ID */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6390,7 +6390,7 @@ declare interface ExportBruteAttacksResponse {
   DownloadUrl: string;
   /** 导出任务ID */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6404,7 +6404,7 @@ declare interface ExportIgnoreBaselineRuleResponse {
   DownloadUrl: string;
   /** 导出任务Id , 可通过ExportTasks 接口下载 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6420,7 +6420,7 @@ declare interface ExportIgnoreRuleEffectHostListResponse {
   DownloadUrl: string;
   /** 导出任务Id , 可通过ExportTasks 接口下载 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6440,7 +6440,7 @@ declare interface ExportLicenseDetailResponse {
   DownloadUrl: string;
   /** 任务ID,可通过任务ID去查下载任务 */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6454,7 +6454,7 @@ declare interface ExportMaliciousRequestsResponse {
   DownloadUrl: string;
   /** 导出任务Id , 可通过ExportTasks 接口下载 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6476,7 +6476,7 @@ declare interface ExportMalwaresResponse {
   DownloadUrl: string;
   /** 任务id */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6490,7 +6490,7 @@ declare interface ExportNonlocalLoginPlacesResponse {
   DownloadUrl: string;
   /** 导出任务ID */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6504,7 +6504,7 @@ declare interface ExportPrivilegeEventsResponse {
   DownloadUrl: string;
   /** 导出任务ID */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6520,7 +6520,7 @@ declare interface ExportProtectDirListRequest {
 declare interface ExportProtectDirListResponse {
   /** 任务ID */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6534,7 +6534,7 @@ declare interface ExportReverseShellEventsResponse {
   DownloadUrl: string;
   /** 任务id */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6550,7 +6550,7 @@ declare interface ExportScanTaskDetailsRequest {
 declare interface ExportScanTaskDetailsResponse {
   /** 导出本次检测Excel的任务Id（不同于入参的本次检测任务id） */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6564,7 +6564,7 @@ declare interface ExportSecurityTrendsRequest {
 declare interface ExportSecurityTrendsResponse {
   /** 导出文件下载链接地址。 */
   DownloadUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6578,7 +6578,7 @@ declare interface ExportTasksResponse {
   Status: string;
   /** 下载链接 */
   DownloadUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6592,7 +6592,7 @@ declare interface ExportVulDetectionExcelResponse {
   DownloadUrl: string;
   /** 导出本次漏洞检测Excel的任务Id（不同于入参的本次漏洞检测任务id） */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6612,7 +6612,7 @@ declare interface ExportVulDetectionReportResponse {
   DownloadUrl: string;
   /** 导出检测报告的任务Id（不同于入参的漏洞扫描任务id） */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6628,7 +6628,7 @@ declare interface ExportVulEffectHostListResponse {
   DownloadUrl: string | null;
   /** 导出任务Id , 可通过ExportTasks 接口下载 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6644,7 +6644,7 @@ declare interface ExportVulListResponse {
   DownloadUrl: string | null;
   /** 导出文件Id 可通过ExportTasks接口下载 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6660,7 +6660,7 @@ declare interface ExportWebPageEventListRequest {
 declare interface ExportWebPageEventListResponse {
   /** 任务id 可通过 ExportTasks接口下载 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6670,7 +6670,7 @@ declare interface IgnoreImpactedHostsRequest {
 }
 
 declare interface IgnoreImpactedHostsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6684,7 +6684,7 @@ declare interface ModifyAutoOpenProVersionConfigRequest {
 }
 
 declare interface ModifyAutoOpenProVersionConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6696,7 +6696,7 @@ declare interface ModifyBanModeRequest {
 }
 
 declare interface ModifyBanModeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6706,7 +6706,7 @@ declare interface ModifyBanStatusRequest {
 }
 
 declare interface ModifyBanStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6720,7 +6720,7 @@ declare interface ModifyBaselinePolicyRequest {
 }
 
 declare interface ModifyBaselinePolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6730,7 +6730,7 @@ declare interface ModifyBruteAttackRulesRequest {
 }
 
 declare interface ModifyBruteAttackRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6748,7 +6748,7 @@ declare interface ModifyLicenseBindsRequest {
 declare interface ModifyLicenseBindsResponse {
   /** 任务ID */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6766,7 +6766,7 @@ declare interface ModifyLicenseUnBindsRequest {
 declare interface ModifyLicenseUnBindsResponse {
   /** 只有解绑失败的才有该值. */
   ErrMsg: LicenseUnBindRsp[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6802,7 +6802,7 @@ declare interface ModifyMalwareTimingScanSettingsRequest {
 }
 
 declare interface ModifyMalwareTimingScanSettingsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6818,7 +6818,7 @@ declare interface ModifyOrderAttributeRequest {
 }
 
 declare interface ModifyOrderAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6828,7 +6828,7 @@ declare interface ModifyWarningSettingRequest {
 }
 
 declare interface ModifyWarningSettingResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6844,7 +6844,7 @@ declare interface ModifyWebPageProtectDirRequest {
 }
 
 declare interface ModifyWebPageProtectDirResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6858,7 +6858,7 @@ declare interface ModifyWebPageProtectSettingRequest {
 }
 
 declare interface ModifyWebPageProtectSettingResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6872,7 +6872,7 @@ declare interface ModifyWebPageProtectSwitchRequest {
 }
 
 declare interface ModifyWebPageProtectSwitchResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6886,7 +6886,7 @@ declare interface RecoverMalwaresResponse {
   SuccessIds: number[];
   /** 恢复失败id数组，若无则返回空数组 */
   FailedIds: number[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6900,7 +6900,7 @@ declare interface ScanAssetRequest {
 declare interface ScanAssetResponse {
   /** 任务id */
   TaskId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6912,7 +6912,7 @@ declare interface ScanVulAgainRequest {
 }
 
 declare interface ScanVulAgainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6936,7 +6936,7 @@ declare interface ScanVulRequest {
 declare interface ScanVulResponse {
   /** 任务id */
   TaskId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6960,7 +6960,7 @@ declare interface ScanVulSettingRequest {
 }
 
 declare interface ScanVulSettingResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6976,7 +6976,7 @@ declare interface SeparateMalwaresResponse {
   SuccessIds: number[];
   /** 隔离失败的id数组，若无则返回空数组 */
   FailedIds: number[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6988,7 +6988,7 @@ declare interface SetBashEventsStatusRequest {
 }
 
 declare interface SetBashEventsStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7000,7 +7000,7 @@ declare interface StartBaselineDetectRequest {
 declare interface StartBaselineDetectResponse {
   /** 扫描任务ID */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7010,7 +7010,7 @@ declare interface StopBaselineDetectRequest {
 }
 
 declare interface StopBaselineDetectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7018,7 +7018,7 @@ declare interface StopNoticeBanTipsRequest {
 }
 
 declare interface StopNoticeBanTipsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7030,7 +7030,7 @@ declare interface SwitchBashRulesRequest {
 }
 
 declare interface SwitchBashRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7048,7 +7048,7 @@ declare interface SyncAssetScanResponse {
   LatestEndTime: string;
   /** 任务ID */
   TaskId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7072,7 +7072,7 @@ declare interface SyncBaselineDetectSummaryResponse {
   DetectingTaskIds: number[];
   /** 扫描中剩余时间(分钟) */
   LeftMins: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7082,7 +7082,7 @@ declare interface TrustMalwaresRequest {
 }
 
 declare interface TrustMalwaresResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7092,7 +7092,7 @@ declare interface UntrustMalwaresRequest {
 }
 
 declare interface UntrustMalwaresResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7118,7 +7118,7 @@ declare interface UpdateBaselineStrategyRequest {
 }
 
 declare interface UpdateBaselineStrategyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7134,474 +7134,474 @@ declare interface UpdateMachineTagsRequest {
 }
 
 declare interface UpdateMachineTagsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cwp 主机安全} */
 declare interface Cwp {
   (): Versions;
-  /** {@link CancelIgnoreVul 取消漏洞忽略}({@link CancelIgnoreVulRequest 请求参数}): {@link CancelIgnoreVulResponse 返回参数} */
+  /** 取消漏洞忽略 {@link CancelIgnoreVulRequest} {@link CancelIgnoreVulResponse} */
   CancelIgnoreVul(data: CancelIgnoreVulRequest, config?: AxiosRequestConfig): AxiosPromise<CancelIgnoreVulResponse>;
-  /** {@link ChangeRuleEventsIgnoreStatus 修改事件忽略状态}({@link ChangeRuleEventsIgnoreStatusRequest 请求参数}): {@link ChangeRuleEventsIgnoreStatusResponse 返回参数} */
+  /** 修改事件忽略状态 {@link ChangeRuleEventsIgnoreStatusRequest} {@link ChangeRuleEventsIgnoreStatusResponse} */
   ChangeRuleEventsIgnoreStatus(data: ChangeRuleEventsIgnoreStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeRuleEventsIgnoreStatusResponse>;
-  /** {@link CheckBashRuleParams 校验高危命新增用户规则参数}({@link CheckBashRuleParamsRequest 请求参数}): {@link CheckBashRuleParamsResponse 返回参数} */
+  /** 校验高危命新增用户规则参数 {@link CheckBashRuleParamsRequest} {@link CheckBashRuleParamsResponse} */
   CheckBashRuleParams(data: CheckBashRuleParamsRequest, config?: AxiosRequestConfig): AxiosPromise<CheckBashRuleParamsResponse>;
-  /** {@link CreateBaselineStrategy 创建基线策略}({@link CreateBaselineStrategyRequest 请求参数}): {@link CreateBaselineStrategyResponse 返回参数} */
+  /** 创建基线策略 {@link CreateBaselineStrategyRequest} {@link CreateBaselineStrategyResponse} */
   CreateBaselineStrategy(data: CreateBaselineStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBaselineStrategyResponse>;
-  /** {@link CreateEmergencyVulScan 应急漏洞扫描}({@link CreateEmergencyVulScanRequest 请求参数}): {@link CreateEmergencyVulScanResponse 返回参数} */
+  /** 应急漏洞扫描 {@link CreateEmergencyVulScanRequest} {@link CreateEmergencyVulScanResponse} */
   CreateEmergencyVulScan(data: CreateEmergencyVulScanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmergencyVulScanResponse>;
-  /** {@link CreateLicenseOrder 创建授权订单}({@link CreateLicenseOrderRequest 请求参数}): {@link CreateLicenseOrderResponse 返回参数} */
+  /** 创建授权订单 {@link CreateLicenseOrderRequest} {@link CreateLicenseOrderResponse} */
   CreateLicenseOrder(data?: CreateLicenseOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLicenseOrderResponse>;
-  /** {@link CreateProtectServer 添加网站防护服务器}({@link CreateProtectServerRequest 请求参数}): {@link CreateProtectServerResponse 返回参数} */
+  /** 添加网站防护服务器 {@link CreateProtectServerRequest} {@link CreateProtectServerResponse} */
   CreateProtectServer(data: CreateProtectServerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProtectServerResponse>;
-  /** {@link CreateScanMalwareSetting 文件查杀检测}({@link CreateScanMalwareSettingRequest 请求参数}): {@link CreateScanMalwareSettingResponse 返回参数} */
+  /** 文件查杀检测 {@link CreateScanMalwareSettingRequest} {@link CreateScanMalwareSettingResponse} */
   CreateScanMalwareSetting(data: CreateScanMalwareSettingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScanMalwareSettingResponse>;
-  /** {@link CreateSearchLog 添加历史搜索记录}({@link CreateSearchLogRequest 请求参数}): {@link CreateSearchLogResponse 返回参数} */
+  /** 添加历史搜索记录 {@link CreateSearchLogRequest} {@link CreateSearchLogResponse} */
   CreateSearchLog(data: CreateSearchLogRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSearchLogResponse>;
-  /** {@link CreateSearchTemplate 添加检索模板}({@link CreateSearchTemplateRequest 请求参数}): {@link CreateSearchTemplateResponse 返回参数} */
+  /** 添加检索模板 {@link CreateSearchTemplateRequest} {@link CreateSearchTemplateResponse} */
   CreateSearchTemplate(data: CreateSearchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSearchTemplateResponse>;
-  /** {@link DeleteAttackLogs 删除网络攻击日志}({@link DeleteAttackLogsRequest 请求参数}): {@link DeleteAttackLogsResponse 返回参数} */
+  /** 删除网络攻击日志 {@link DeleteAttackLogsRequest} {@link DeleteAttackLogsResponse} */
   DeleteAttackLogs(data: DeleteAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackLogsResponse>;
-  /** {@link DeleteBaselinePolicy 删除基线策略配置}({@link DeleteBaselinePolicyRequest 请求参数}): {@link DeleteBaselinePolicyResponse 返回参数} */
+  /** 删除基线策略配置 {@link DeleteBaselinePolicyRequest} {@link DeleteBaselinePolicyResponse} */
   DeleteBaselinePolicy(data: DeleteBaselinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBaselinePolicyResponse>;
-  /** {@link DeleteBaselineStrategy 删除基线策略}({@link DeleteBaselineStrategyRequest 请求参数}): {@link DeleteBaselineStrategyResponse 返回参数} */
+  /** 删除基线策略 {@link DeleteBaselineStrategyRequest} {@link DeleteBaselineStrategyResponse} */
   DeleteBaselineStrategy(data: DeleteBaselineStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBaselineStrategyResponse>;
-  /** {@link DeleteBashEvents 删除高危命令事件}({@link DeleteBashEventsRequest 请求参数}): {@link DeleteBashEventsResponse 返回参数} */
+  /** 删除高危命令事件 {@link DeleteBashEventsRequest} {@link DeleteBashEventsResponse} */
   DeleteBashEvents(data: DeleteBashEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBashEventsResponse>;
-  /** {@link DeleteBashRules 删除高危命令规则}({@link DeleteBashRulesRequest 请求参数}): {@link DeleteBashRulesResponse 返回参数} */
+  /** 删除高危命令规则 {@link DeleteBashRulesRequest} {@link DeleteBashRulesResponse} */
   DeleteBashRules(data: DeleteBashRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBashRulesResponse>;
-  /** {@link DeleteBruteAttacks 删除暴力破解记录}({@link DeleteBruteAttacksRequest 请求参数}): {@link DeleteBruteAttacksResponse 返回参数} */
+  /** 删除暴力破解记录 {@link DeleteBruteAttacksRequest} {@link DeleteBruteAttacksResponse} */
   DeleteBruteAttacks(data: DeleteBruteAttacksRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBruteAttacksResponse>;
-  /** {@link DeleteLicenseRecord 删除授权记录}({@link DeleteLicenseRecordRequest 请求参数}): {@link DeleteLicenseRecordResponse 返回参数} */
+  /** 删除授权记录 {@link DeleteLicenseRecordRequest} {@link DeleteLicenseRecordResponse} */
   DeleteLicenseRecord(data: DeleteLicenseRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLicenseRecordResponse>;
-  /** {@link DeleteLoginWhiteList 删除异地登录白名单规则}({@link DeleteLoginWhiteListRequest 请求参数}): {@link DeleteLoginWhiteListResponse 返回参数} */
+  /** 删除异地登录白名单规则 {@link DeleteLoginWhiteListRequest} {@link DeleteLoginWhiteListResponse} */
   DeleteLoginWhiteList(data: DeleteLoginWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoginWhiteListResponse>;
-  /** {@link DeleteMachine 卸载云镜客户端}({@link DeleteMachineRequest 请求参数}): {@link DeleteMachineResponse 返回参数} */
+  /** 卸载云镜客户端 {@link DeleteMachineRequest} {@link DeleteMachineResponse} */
   DeleteMachine(data: DeleteMachineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineResponse>;
-  /** {@link DeleteMachineTag 删除服务器关联的标签}({@link DeleteMachineTagRequest 请求参数}): {@link DeleteMachineTagResponse 返回参数} */
+  /** 删除服务器关联的标签 {@link DeleteMachineTagRequest} {@link DeleteMachineTagResponse} */
   DeleteMachineTag(data: DeleteMachineTagRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineTagResponse>;
-  /** {@link DeleteMaliciousRequests 删除恶意请求记录}({@link DeleteMaliciousRequestsRequest 请求参数}): {@link DeleteMaliciousRequestsResponse 返回参数} */
+  /** 删除恶意请求记录 {@link DeleteMaliciousRequestsRequest} {@link DeleteMaliciousRequestsResponse} */
   DeleteMaliciousRequests(data: DeleteMaliciousRequestsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMaliciousRequestsResponse>;
-  /** {@link DeleteMalwareScanTask 入侵管理-终止扫描任务}({@link DeleteMalwareScanTaskRequest 请求参数}): {@link DeleteMalwareScanTaskResponse 返回参数} */
+  /** 入侵管理-终止扫描任务 {@link DeleteMalwareScanTaskRequest} {@link DeleteMalwareScanTaskResponse} */
   DeleteMalwareScanTask(data?: DeleteMalwareScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMalwareScanTaskResponse>;
-  /** {@link DeleteMalwares 删除木马记录}({@link DeleteMalwaresRequest 请求参数}): {@link DeleteMalwaresResponse 返回参数} */
+  /** 删除木马记录 {@link DeleteMalwaresRequest} {@link DeleteMalwaresResponse} */
   DeleteMalwares(data: DeleteMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMalwaresResponse>;
-  /** {@link DeleteNonlocalLoginPlaces 删除异地登录记录}({@link DeleteNonlocalLoginPlacesRequest 请求参数}): {@link DeleteNonlocalLoginPlacesResponse 返回参数} */
+  /** 删除异地登录记录 {@link DeleteNonlocalLoginPlacesRequest} {@link DeleteNonlocalLoginPlacesResponse} */
   DeleteNonlocalLoginPlaces(data?: DeleteNonlocalLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNonlocalLoginPlacesResponse>;
-  /** {@link DeletePrivilegeEvents 删除本地提权事件}({@link DeletePrivilegeEventsRequest 请求参数}): {@link DeletePrivilegeEventsResponse 返回参数} */
+  /** 删除本地提权事件 {@link DeletePrivilegeEventsRequest} {@link DeletePrivilegeEventsResponse} */
   DeletePrivilegeEvents(data: DeletePrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivilegeEventsResponse>;
-  /** {@link DeletePrivilegeRules 删除本地提权规则}({@link DeletePrivilegeRulesRequest 请求参数}): {@link DeletePrivilegeRulesResponse 返回参数} */
+  /** 删除本地提权规则 {@link DeletePrivilegeRulesRequest} {@link DeletePrivilegeRulesResponse} */
   DeletePrivilegeRules(data: DeletePrivilegeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivilegeRulesResponse>;
-  /** {@link DeleteProtectDir 删除防护网站}({@link DeleteProtectDirRequest 请求参数}): {@link DeleteProtectDirResponse 返回参数} */
+  /** 删除防护网站 {@link DeleteProtectDirRequest} {@link DeleteProtectDirResponse} */
   DeleteProtectDir(data: DeleteProtectDirRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProtectDirResponse>;
-  /** {@link DeleteReverseShellEvents 删除反弹Shell事件}({@link DeleteReverseShellEventsRequest 请求参数}): {@link DeleteReverseShellEventsResponse 返回参数} */
+  /** 删除反弹Shell事件 {@link DeleteReverseShellEventsRequest} {@link DeleteReverseShellEventsResponse} */
   DeleteReverseShellEvents(data: DeleteReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReverseShellEventsResponse>;
-  /** {@link DeleteReverseShellRules 删除反弹Shell规则}({@link DeleteReverseShellRulesRequest 请求参数}): {@link DeleteReverseShellRulesResponse 返回参数} */
+  /** 删除反弹Shell规则 {@link DeleteReverseShellRulesRequest} {@link DeleteReverseShellRulesResponse} */
   DeleteReverseShellRules(data: DeleteReverseShellRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReverseShellRulesResponse>;
-  /** {@link DeleteScanTask 停止扫描任务}({@link DeleteScanTaskRequest 请求参数}): {@link DeleteScanTaskResponse 返回参数} */
+  /** 停止扫描任务 {@link DeleteScanTaskRequest} {@link DeleteScanTaskResponse} */
   DeleteScanTask(data: DeleteScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScanTaskResponse>;
-  /** {@link DeleteSearchTemplate 删除检索模板}({@link DeleteSearchTemplateRequest 请求参数}): {@link DeleteSearchTemplateResponse 返回参数} */
+  /** 删除检索模板 {@link DeleteSearchTemplateRequest} {@link DeleteSearchTemplateResponse} */
   DeleteSearchTemplate(data: DeleteSearchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSearchTemplateResponse>;
-  /** {@link DeleteTags 删除标签}({@link DeleteTagsRequest 请求参数}): {@link DeleteTagsResponse 返回参数} */
+  /** 删除标签 {@link DeleteTagsRequest} {@link DeleteTagsResponse} */
   DeleteTags(data: DeleteTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTagsResponse>;
-  /** {@link DeleteWebPageEventLog 删除事件记录}({@link DeleteWebPageEventLogRequest 请求参数}): {@link DeleteWebPageEventLogResponse 返回参数} */
+  /** 删除事件记录 {@link DeleteWebPageEventLogRequest} {@link DeleteWebPageEventLogResponse} */
   DeleteWebPageEventLog(data?: DeleteWebPageEventLogRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWebPageEventLogResponse>;
-  /** {@link DescribeAccountStatistics 获取帐号统计列表数据}({@link DescribeAccountStatisticsRequest 请求参数}): {@link DescribeAccountStatisticsResponse 返回参数} */
+  /** 获取帐号统计列表数据 {@link DescribeAccountStatisticsRequest} {@link DescribeAccountStatisticsResponse} */
   DescribeAccountStatistics(data?: DescribeAccountStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountStatisticsResponse>;
-  /** {@link DescribeAssetAppList 查询应用列表}({@link DescribeAssetAppListRequest 请求参数}): {@link DescribeAssetAppListResponse 返回参数} */
+  /** 查询应用列表 {@link DescribeAssetAppListRequest} {@link DescribeAssetAppListResponse} */
   DescribeAssetAppList(data?: DescribeAssetAppListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetAppListResponse>;
-  /** {@link DescribeAssetAppProcessList 获取软件关联进程列表}({@link DescribeAssetAppProcessListRequest 请求参数}): {@link DescribeAssetAppProcessListResponse 返回参数} */
+  /** 获取软件关联进程列表 {@link DescribeAssetAppProcessListRequest} {@link DescribeAssetAppProcessListResponse} */
   DescribeAssetAppProcessList(data: DescribeAssetAppProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetAppProcessListResponse>;
-  /** {@link DescribeAssetCoreModuleInfo 获取内核模块详情}({@link DescribeAssetCoreModuleInfoRequest 请求参数}): {@link DescribeAssetCoreModuleInfoResponse 返回参数} */
+  /** 获取内核模块详情 {@link DescribeAssetCoreModuleInfoRequest} {@link DescribeAssetCoreModuleInfoResponse} */
   DescribeAssetCoreModuleInfo(data: DescribeAssetCoreModuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetCoreModuleInfoResponse>;
-  /** {@link DescribeAssetCoreModuleList 查询资产管理内核模块列表}({@link DescribeAssetCoreModuleListRequest 请求参数}): {@link DescribeAssetCoreModuleListResponse 返回参数} */
+  /** 查询资产管理内核模块列表 {@link DescribeAssetCoreModuleListRequest} {@link DescribeAssetCoreModuleListResponse} */
   DescribeAssetCoreModuleList(data?: DescribeAssetCoreModuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetCoreModuleListResponse>;
-  /** {@link DescribeAssetDatabaseInfo 获取资产管理数据库详情}({@link DescribeAssetDatabaseInfoRequest 请求参数}): {@link DescribeAssetDatabaseInfoResponse 返回参数} */
+  /** 获取资产管理数据库详情 {@link DescribeAssetDatabaseInfoRequest} {@link DescribeAssetDatabaseInfoResponse} */
   DescribeAssetDatabaseInfo(data: DescribeAssetDatabaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDatabaseInfoResponse>;
-  /** {@link DescribeAssetDatabaseList 查询资产管理数据库列表}({@link DescribeAssetDatabaseListRequest 请求参数}): {@link DescribeAssetDatabaseListResponse 返回参数} */
+  /** 查询资产管理数据库列表 {@link DescribeAssetDatabaseListRequest} {@link DescribeAssetDatabaseListResponse} */
   DescribeAssetDatabaseList(data?: DescribeAssetDatabaseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDatabaseListResponse>;
-  /** {@link DescribeAssetEnvList 查询资产管理环境变量列表}({@link DescribeAssetEnvListRequest 请求参数}): {@link DescribeAssetEnvListResponse 返回参数} */
+  /** 查询资产管理环境变量列表 {@link DescribeAssetEnvListRequest} {@link DescribeAssetEnvListResponse} */
   DescribeAssetEnvList(data?: DescribeAssetEnvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetEnvListResponse>;
-  /** {@link DescribeAssetHostTotalCount 获取主机所有资源数量}({@link DescribeAssetHostTotalCountRequest 请求参数}): {@link DescribeAssetHostTotalCountResponse 返回参数} */
+  /** 获取主机所有资源数量 {@link DescribeAssetHostTotalCountRequest} {@link DescribeAssetHostTotalCountResponse} */
   DescribeAssetHostTotalCount(data: DescribeAssetHostTotalCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetHostTotalCountResponse>;
-  /** {@link DescribeAssetInfo 获取资产数量概况}({@link DescribeAssetInfoRequest 请求参数}): {@link DescribeAssetInfoResponse 返回参数} */
+  /** 获取资产数量概况 {@link DescribeAssetInfoRequest} {@link DescribeAssetInfoResponse} */
   DescribeAssetInfo(data?: DescribeAssetInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetInfoResponse>;
-  /** {@link DescribeAssetInitServiceList 查询资产管理启动服务列表}({@link DescribeAssetInitServiceListRequest 请求参数}): {@link DescribeAssetInitServiceListResponse 返回参数} */
+  /** 查询资产管理启动服务列表 {@link DescribeAssetInitServiceListRequest} {@link DescribeAssetInitServiceListResponse} */
   DescribeAssetInitServiceList(data?: DescribeAssetInitServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetInitServiceListResponse>;
-  /** {@link DescribeAssetJarInfo 获取Jar包详情}({@link DescribeAssetJarInfoRequest 请求参数}): {@link DescribeAssetJarInfoResponse 返回参数} */
+  /** 获取Jar包详情 {@link DescribeAssetJarInfoRequest} {@link DescribeAssetJarInfoResponse} */
   DescribeAssetJarInfo(data: DescribeAssetJarInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetJarInfoResponse>;
-  /** {@link DescribeAssetJarList 查询Jar包列表}({@link DescribeAssetJarListRequest 请求参数}): {@link DescribeAssetJarListResponse 返回参数} */
+  /** 查询Jar包列表 {@link DescribeAssetJarListRequest} {@link DescribeAssetJarListResponse} */
   DescribeAssetJarList(data?: DescribeAssetJarListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetJarListResponse>;
-  /** {@link DescribeAssetMachineDetail 获取资产管理主机资源详细信息}({@link DescribeAssetMachineDetailRequest 请求参数}): {@link DescribeAssetMachineDetailResponse 返回参数} */
+  /** 获取资产管理主机资源详细信息 {@link DescribeAssetMachineDetailRequest} {@link DescribeAssetMachineDetailResponse} */
   DescribeAssetMachineDetail(data: DescribeAssetMachineDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetMachineDetailResponse>;
-  /** {@link DescribeAssetMachineList 获取资源监控列表}({@link DescribeAssetMachineListRequest 请求参数}): {@link DescribeAssetMachineListResponse 返回参数} */
+  /** 获取资源监控列表 {@link DescribeAssetMachineListRequest} {@link DescribeAssetMachineListResponse} */
   DescribeAssetMachineList(data?: DescribeAssetMachineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetMachineListResponse>;
-  /** {@link DescribeAssetPlanTaskList 查询资产管理计划任务列表}({@link DescribeAssetPlanTaskListRequest 请求参数}): {@link DescribeAssetPlanTaskListResponse 返回参数} */
+  /** 查询资产管理计划任务列表 {@link DescribeAssetPlanTaskListRequest} {@link DescribeAssetPlanTaskListResponse} */
   DescribeAssetPlanTaskList(data?: DescribeAssetPlanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetPlanTaskListResponse>;
-  /** {@link DescribeAssetPortInfoList 获取资产管理端口列表}({@link DescribeAssetPortInfoListRequest 请求参数}): {@link DescribeAssetPortInfoListResponse 返回参数} */
+  /** 获取资产管理端口列表 {@link DescribeAssetPortInfoListRequest} {@link DescribeAssetPortInfoListResponse} */
   DescribeAssetPortInfoList(data?: DescribeAssetPortInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetPortInfoListResponse>;
-  /** {@link DescribeAssetProcessInfoList 获取资产管理进程列表}({@link DescribeAssetProcessInfoListRequest 请求参数}): {@link DescribeAssetProcessInfoListResponse 返回参数} */
+  /** 获取资产管理进程列表 {@link DescribeAssetProcessInfoListRequest} {@link DescribeAssetProcessInfoListResponse} */
   DescribeAssetProcessInfoList(data?: DescribeAssetProcessInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetProcessInfoListResponse>;
-  /** {@link DescribeAssetRecentMachineInfo 获取主机概况趋势}({@link DescribeAssetRecentMachineInfoRequest 请求参数}): {@link DescribeAssetRecentMachineInfoResponse 返回参数} */
+  /** 获取主机概况趋势 {@link DescribeAssetRecentMachineInfoRequest} {@link DescribeAssetRecentMachineInfoResponse} */
   DescribeAssetRecentMachineInfo(data: DescribeAssetRecentMachineInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetRecentMachineInfoResponse>;
-  /** {@link DescribeAssetSystemPackageList 获取资产管理系统安装包列表}({@link DescribeAssetSystemPackageListRequest 请求参数}): {@link DescribeAssetSystemPackageListResponse 返回参数} */
+  /** 获取资产管理系统安装包列表 {@link DescribeAssetSystemPackageListRequest} {@link DescribeAssetSystemPackageListResponse} */
   DescribeAssetSystemPackageList(data: DescribeAssetSystemPackageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSystemPackageListResponse>;
-  /** {@link DescribeAssetUserInfo 获取主机账号详情}({@link DescribeAssetUserInfoRequest 请求参数}): {@link DescribeAssetUserInfoResponse 返回参数} */
+  /** 获取主机账号详情 {@link DescribeAssetUserInfoRequest} {@link DescribeAssetUserInfoResponse} */
   DescribeAssetUserInfo(data: DescribeAssetUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetUserInfoResponse>;
-  /** {@link DescribeAssetUserList 获取账号列表}({@link DescribeAssetUserListRequest 请求参数}): {@link DescribeAssetUserListResponse 返回参数} */
+  /** 获取账号列表 {@link DescribeAssetUserListRequest} {@link DescribeAssetUserListResponse} */
   DescribeAssetUserList(data?: DescribeAssetUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetUserListResponse>;
-  /** {@link DescribeAssetWebAppList 获取资产管理Web应用列表}({@link DescribeAssetWebAppListRequest 请求参数}): {@link DescribeAssetWebAppListResponse 返回参数} */
+  /** 获取资产管理Web应用列表 {@link DescribeAssetWebAppListRequest} {@link DescribeAssetWebAppListResponse} */
   DescribeAssetWebAppList(data?: DescribeAssetWebAppListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebAppListResponse>;
-  /** {@link DescribeAssetWebAppPluginList 获取资产管理Web应用插件列表}({@link DescribeAssetWebAppPluginListRequest 请求参数}): {@link DescribeAssetWebAppPluginListResponse 返回参数} */
+  /** 获取资产管理Web应用插件列表 {@link DescribeAssetWebAppPluginListRequest} {@link DescribeAssetWebAppPluginListResponse} */
   DescribeAssetWebAppPluginList(data: DescribeAssetWebAppPluginListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebAppPluginListResponse>;
-  /** {@link DescribeAssetWebFrameList 获取资产管理Web框架列表}({@link DescribeAssetWebFrameListRequest 请求参数}): {@link DescribeAssetWebFrameListResponse 返回参数} */
+  /** 获取资产管理Web框架列表 {@link DescribeAssetWebFrameListRequest} {@link DescribeAssetWebFrameListResponse} */
   DescribeAssetWebFrameList(data?: DescribeAssetWebFrameListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebFrameListResponse>;
-  /** {@link DescribeAssetWebLocationInfo 获取Web站点详情}({@link DescribeAssetWebLocationInfoRequest 请求参数}): {@link DescribeAssetWebLocationInfoResponse 返回参数} */
+  /** 获取Web站点详情 {@link DescribeAssetWebLocationInfoRequest} {@link DescribeAssetWebLocationInfoResponse} */
   DescribeAssetWebLocationInfo(data: DescribeAssetWebLocationInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebLocationInfoResponse>;
-  /** {@link DescribeAssetWebLocationList 获取Web站点列表}({@link DescribeAssetWebLocationListRequest 请求参数}): {@link DescribeAssetWebLocationListResponse 返回参数} */
+  /** 获取Web站点列表 {@link DescribeAssetWebLocationListRequest} {@link DescribeAssetWebLocationListResponse} */
   DescribeAssetWebLocationList(data?: DescribeAssetWebLocationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebLocationListResponse>;
-  /** {@link DescribeAssetWebServiceInfoList 查询资产管理Web服务列表}({@link DescribeAssetWebServiceInfoListRequest 请求参数}): {@link DescribeAssetWebServiceInfoListResponse 返回参数} */
+  /** 查询资产管理Web服务列表 {@link DescribeAssetWebServiceInfoListRequest} {@link DescribeAssetWebServiceInfoListResponse} */
   DescribeAssetWebServiceInfoList(data?: DescribeAssetWebServiceInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebServiceInfoListResponse>;
-  /** {@link DescribeAssetWebServiceProcessList 获取Web服务关联进程列表}({@link DescribeAssetWebServiceProcessListRequest 请求参数}): {@link DescribeAssetWebServiceProcessListResponse 返回参数} */
+  /** 获取Web服务关联进程列表 {@link DescribeAssetWebServiceProcessListRequest} {@link DescribeAssetWebServiceProcessListResponse} */
   DescribeAssetWebServiceProcessList(data: DescribeAssetWebServiceProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebServiceProcessListResponse>;
-  /** {@link DescribeAttackLogInfo 网络攻击日志详情}({@link DescribeAttackLogInfoRequest 请求参数}): {@link DescribeAttackLogInfoResponse 返回参数} */
+  /** 网络攻击日志详情 {@link DescribeAttackLogInfoRequest} {@link DescribeAttackLogInfoResponse} */
   DescribeAttackLogInfo(data: DescribeAttackLogInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogInfoResponse>;
-  /** {@link DescribeAttackLogs 网络攻击日志列表}({@link DescribeAttackLogsRequest 请求参数}): {@link DescribeAttackLogsResponse 返回参数} */
+  /** 网络攻击日志列表 {@link DescribeAttackLogsRequest} {@link DescribeAttackLogsResponse} */
   DescribeAttackLogs(data?: DescribeAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogsResponse>;
-  /** {@link DescribeAttackVulTypeList 获取网络攻击威胁类型列表}({@link DescribeAttackVulTypeListRequest 请求参数}): {@link DescribeAttackVulTypeListResponse 返回参数} */
+  /** 获取网络攻击威胁类型列表 {@link DescribeAttackVulTypeListRequest} {@link DescribeAttackVulTypeListResponse} */
   DescribeAttackVulTypeList(data?: DescribeAttackVulTypeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackVulTypeListResponse>;
-  /** {@link DescribeAvailableExpertServiceDetail 可用订单详情}({@link DescribeAvailableExpertServiceDetailRequest 请求参数}): {@link DescribeAvailableExpertServiceDetailResponse 返回参数} */
+  /** 可用订单详情 {@link DescribeAvailableExpertServiceDetailRequest} {@link DescribeAvailableExpertServiceDetailResponse} */
   DescribeAvailableExpertServiceDetail(data?: DescribeAvailableExpertServiceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableExpertServiceDetailResponse>;
-  /** {@link DescribeBanMode 获取爆破阻断模式}({@link DescribeBanModeRequest 请求参数}): {@link DescribeBanModeResponse 返回参数} */
+  /** 获取爆破阻断模式 {@link DescribeBanModeRequest} {@link DescribeBanModeResponse} */
   DescribeBanMode(data?: DescribeBanModeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBanModeResponse>;
-  /** {@link DescribeBanRegions 获取阻断地域}({@link DescribeBanRegionsRequest 请求参数}): {@link DescribeBanRegionsResponse 返回参数} */
+  /** 获取阻断地域 {@link DescribeBanRegionsRequest} {@link DescribeBanRegionsResponse} */
   DescribeBanRegions(data: DescribeBanRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBanRegionsResponse>;
-  /** {@link DescribeBanStatus 获取阻断按钮状态}({@link DescribeBanStatusRequest 请求参数}): {@link DescribeBanStatusResponse 返回参数} */
+  /** 获取阻断按钮状态 {@link DescribeBanStatusRequest} {@link DescribeBanStatusResponse} */
   DescribeBanStatus(data?: DescribeBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBanStatusResponse>;
-  /** {@link DescribeBanWhiteList 获取阻断白名单列表}({@link DescribeBanWhiteListRequest 请求参数}): {@link DescribeBanWhiteListResponse 返回参数} */
+  /** 获取阻断白名单列表 {@link DescribeBanWhiteListRequest} {@link DescribeBanWhiteListResponse} */
   DescribeBanWhiteList(data?: DescribeBanWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBanWhiteListResponse>;
-  /** {@link DescribeBaselineAnalysisData 基线策略概览统计数据查询}({@link DescribeBaselineAnalysisDataRequest 请求参数}): {@link DescribeBaselineAnalysisDataResponse 返回参数} */
+  /** 基线策略概览统计数据查询 {@link DescribeBaselineAnalysisDataRequest} {@link DescribeBaselineAnalysisDataResponse} */
   DescribeBaselineAnalysisData(data: DescribeBaselineAnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineAnalysisDataResponse>;
-  /** {@link DescribeBaselineBasicInfo 查询基线基础信息}({@link DescribeBaselineBasicInfoRequest 请求参数}): {@link DescribeBaselineBasicInfoResponse 返回参数} */
+  /** 查询基线基础信息 {@link DescribeBaselineBasicInfoRequest} {@link DescribeBaselineBasicInfoResponse} */
   DescribeBaselineBasicInfo(data?: DescribeBaselineBasicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineBasicInfoResponse>;
-  /** {@link DescribeBaselineDetail 查询基线详情}({@link DescribeBaselineDetailRequest 请求参数}): {@link DescribeBaselineDetailResponse 返回参数} */
+  /** 查询基线详情 {@link DescribeBaselineDetailRequest} {@link DescribeBaselineDetailResponse} */
   DescribeBaselineDetail(data: DescribeBaselineDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineDetailResponse>;
-  /** {@link DescribeBaselineEffectHostList 基线影响主机列表}({@link DescribeBaselineEffectHostListRequest 请求参数}): {@link DescribeBaselineEffectHostListResponse 返回参数} */
+  /** 基线影响主机列表 {@link DescribeBaselineEffectHostListRequest} {@link DescribeBaselineEffectHostListResponse} */
   DescribeBaselineEffectHostList(data: DescribeBaselineEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineEffectHostListResponse>;
-  /** {@link DescribeBaselineHostDetectList 获取基线检测主机列表}({@link DescribeBaselineHostDetectListRequest 请求参数}): {@link DescribeBaselineHostDetectListResponse 返回参数} */
+  /** 获取基线检测主机列表 {@link DescribeBaselineHostDetectListRequest} {@link DescribeBaselineHostDetectListResponse} */
   DescribeBaselineHostDetectList(data?: DescribeBaselineHostDetectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineHostDetectListResponse>;
-  /** {@link DescribeBaselineHostTop 服务器风险top接口}({@link DescribeBaselineHostTopRequest 请求参数}): {@link DescribeBaselineHostTopResponse 返回参数} */
+  /** 服务器风险top接口 {@link DescribeBaselineHostTopRequest} {@link DescribeBaselineHostTopResponse} */
   DescribeBaselineHostTop(data: DescribeBaselineHostTopRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineHostTopResponse>;
-  /** {@link DescribeBaselineItemDetectList 获取基线检测项的列表}({@link DescribeBaselineItemDetectListRequest 请求参数}): {@link DescribeBaselineItemDetectListResponse 返回参数} */
+  /** 获取基线检测项的列表 {@link DescribeBaselineItemDetectListRequest} {@link DescribeBaselineItemDetectListResponse} */
   DescribeBaselineItemDetectList(data?: DescribeBaselineItemDetectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineItemDetectListResponse>;
-  /** {@link DescribeBaselineItemList 获取基线项检测结果列表}({@link DescribeBaselineItemListRequest 请求参数}): {@link DescribeBaselineItemListResponse 返回参数} */
+  /** 获取基线项检测结果列表 {@link DescribeBaselineItemListRequest} {@link DescribeBaselineItemListResponse} */
   DescribeBaselineItemList(data?: DescribeBaselineItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineItemListResponse>;
-  /** {@link DescribeBaselineList 查询基线列表}({@link DescribeBaselineListRequest 请求参数}): {@link DescribeBaselineListResponse 返回参数} */
+  /** 查询基线列表 {@link DescribeBaselineListRequest} {@link DescribeBaselineListResponse} */
   DescribeBaselineList(data: DescribeBaselineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineListResponse>;
-  /** {@link DescribeBaselinePolicyList 获取基线策略列表}({@link DescribeBaselinePolicyListRequest 请求参数}): {@link DescribeBaselinePolicyListResponse 返回参数} */
+  /** 获取基线策略列表 {@link DescribeBaselinePolicyListRequest} {@link DescribeBaselinePolicyListResponse} */
   DescribeBaselinePolicyList(data?: DescribeBaselinePolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselinePolicyListResponse>;
-  /** {@link DescribeBaselineRule 查询基线检测项信息}({@link DescribeBaselineRuleRequest 请求参数}): {@link DescribeBaselineRuleResponse 返回参数} */
+  /** 查询基线检测项信息 {@link DescribeBaselineRuleRequest} {@link DescribeBaselineRuleResponse} */
   DescribeBaselineRule(data: DescribeBaselineRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineRuleResponse>;
-  /** {@link DescribeBaselineScanSchedule 基线检测进度查询}({@link DescribeBaselineScanScheduleRequest 请求参数}): {@link DescribeBaselineScanScheduleResponse 返回参数} */
+  /** 基线检测进度查询 {@link DescribeBaselineScanScheduleRequest} {@link DescribeBaselineScanScheduleResponse} */
   DescribeBaselineScanSchedule(data: DescribeBaselineScanScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineScanScheduleResponse>;
-  /** {@link DescribeBaselineStrategyDetail 查询基线策略详情}({@link DescribeBaselineStrategyDetailRequest 请求参数}): {@link DescribeBaselineStrategyDetailResponse 返回参数} */
+  /** 查询基线策略详情 {@link DescribeBaselineStrategyDetailRequest} {@link DescribeBaselineStrategyDetailResponse} */
   DescribeBaselineStrategyDetail(data: DescribeBaselineStrategyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineStrategyDetailResponse>;
-  /** {@link DescribeBaselineStrategyList 用户基线策略列表查询}({@link DescribeBaselineStrategyListRequest 请求参数}): {@link DescribeBaselineStrategyListResponse 返回参数} */
+  /** 用户基线策略列表查询 {@link DescribeBaselineStrategyListRequest} {@link DescribeBaselineStrategyListResponse} */
   DescribeBaselineStrategyList(data: DescribeBaselineStrategyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineStrategyListResponse>;
-  /** {@link DescribeBaselineTop 基线检测项TOP}({@link DescribeBaselineTopRequest 请求参数}): {@link DescribeBaselineTopResponse 返回参数} */
+  /** 基线检测项TOP {@link DescribeBaselineTopRequest} {@link DescribeBaselineTopResponse} */
   DescribeBaselineTop(data: DescribeBaselineTopRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineTopResponse>;
-  /** {@link DescribeBashEvents 获取高危命令列表}({@link DescribeBashEventsRequest 请求参数}): {@link DescribeBashEventsResponse 返回参数} */
+  /** 获取高危命令列表 {@link DescribeBashEventsRequest} {@link DescribeBashEventsResponse} */
   DescribeBashEvents(data?: DescribeBashEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashEventsResponse>;
-  /** {@link DescribeBashRules 获取高危命令规则列表}({@link DescribeBashRulesRequest 请求参数}): {@link DescribeBashRulesResponse 返回参数} */
+  /** 获取高危命令规则列表 {@link DescribeBashRulesRequest} {@link DescribeBashRulesResponse} */
   DescribeBashRules(data: DescribeBashRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashRulesResponse>;
-  /** {@link DescribeBruteAttackList 获取密码破解列表}({@link DescribeBruteAttackListRequest 请求参数}): {@link DescribeBruteAttackListResponse 返回参数} */
+  /** 获取密码破解列表 {@link DescribeBruteAttackListRequest} {@link DescribeBruteAttackListResponse} */
   DescribeBruteAttackList(data?: DescribeBruteAttackListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBruteAttackListResponse>;
-  /** {@link DescribeBruteAttackRules 获取爆破破解规则}({@link DescribeBruteAttackRulesRequest 请求参数}): {@link DescribeBruteAttackRulesResponse 返回参数} */
+  /** 获取爆破破解规则 {@link DescribeBruteAttackRulesRequest} {@link DescribeBruteAttackRulesResponse} */
   DescribeBruteAttackRules(data?: DescribeBruteAttackRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBruteAttackRulesResponse>;
-  /** {@link DescribeClientException 获取客户端异常事件}({@link DescribeClientExceptionRequest 请求参数}): {@link DescribeClientExceptionResponse 返回参数} */
+  /** 获取客户端异常事件 {@link DescribeClientExceptionRequest} {@link DescribeClientExceptionResponse} */
   DescribeClientException(data: DescribeClientExceptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientExceptionResponse>;
-  /** {@link DescribeComponentStatistics 获取组件统计列表}({@link DescribeComponentStatisticsRequest 请求参数}): {@link DescribeComponentStatisticsResponse 返回参数} */
+  /** 获取组件统计列表 {@link DescribeComponentStatisticsRequest} {@link DescribeComponentStatisticsResponse} */
   DescribeComponentStatistics(data?: DescribeComponentStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComponentStatisticsResponse>;
-  /** {@link DescribeESAggregations 获取ES字段聚合结果}({@link DescribeESAggregationsRequest 请求参数}): {@link DescribeESAggregationsResponse 返回参数} */
+  /** 获取ES字段聚合结果 {@link DescribeESAggregationsRequest} {@link DescribeESAggregationsResponse} */
   DescribeESAggregations(data: DescribeESAggregationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeESAggregationsResponse>;
-  /** {@link DescribeEmergencyResponseList 应急响应列表}({@link DescribeEmergencyResponseListRequest 请求参数}): {@link DescribeEmergencyResponseListResponse 返回参数} */
+  /** 应急响应列表 {@link DescribeEmergencyResponseListRequest} {@link DescribeEmergencyResponseListResponse} */
   DescribeEmergencyResponseList(data?: DescribeEmergencyResponseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmergencyResponseListResponse>;
-  /** {@link DescribeEmergencyVulList 应急漏洞列表}({@link DescribeEmergencyVulListRequest 请求参数}): {@link DescribeEmergencyVulListResponse 返回参数} */
+  /** 应急漏洞列表 {@link DescribeEmergencyVulListRequest} {@link DescribeEmergencyVulListResponse} */
   DescribeEmergencyVulList(data?: DescribeEmergencyVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmergencyVulListResponse>;
-  /** {@link DescribeExpertServiceList 安全管家列表}({@link DescribeExpertServiceListRequest 请求参数}): {@link DescribeExpertServiceListResponse 返回参数} */
+  /** 安全管家列表 {@link DescribeExpertServiceListRequest} {@link DescribeExpertServiceListResponse} */
   DescribeExpertServiceList(data?: DescribeExpertServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExpertServiceListResponse>;
-  /** {@link DescribeExpertServiceOrderList 专家服务订单列表}({@link DescribeExpertServiceOrderListRequest 请求参数}): {@link DescribeExpertServiceOrderListResponse 返回参数} */
+  /** 专家服务订单列表 {@link DescribeExpertServiceOrderListRequest} {@link DescribeExpertServiceOrderListResponse} */
   DescribeExpertServiceOrderList(data?: DescribeExpertServiceOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExpertServiceOrderListResponse>;
-  /** {@link DescribeExportMachines 导出区域主机列表}({@link DescribeExportMachinesRequest 请求参数}): {@link DescribeExportMachinesResponse 返回参数} */
+  /** 导出区域主机列表 {@link DescribeExportMachinesRequest} {@link DescribeExportMachinesResponse} */
   DescribeExportMachines(data: DescribeExportMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportMachinesResponse>;
-  /** {@link DescribeGeneralStat 获取主机相关统计}({@link DescribeGeneralStatRequest 请求参数}): {@link DescribeGeneralStatResponse 返回参数} */
+  /** 获取主机相关统计 {@link DescribeGeneralStatRequest} {@link DescribeGeneralStatResponse} */
   DescribeGeneralStat(data?: DescribeGeneralStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralStatResponse>;
-  /** {@link DescribeHistoryAccounts 获取帐号变更历史列表}({@link DescribeHistoryAccountsRequest 请求参数}): {@link DescribeHistoryAccountsResponse 返回参数} */
+  /** 获取帐号变更历史列表 {@link DescribeHistoryAccountsRequest} {@link DescribeHistoryAccountsResponse} */
   DescribeHistoryAccounts(data: DescribeHistoryAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHistoryAccountsResponse>;
-  /** {@link DescribeHistoryService 查询日志检索服务信息}({@link DescribeHistoryServiceRequest 请求参数}): {@link DescribeHistoryServiceResponse 返回参数} */
+  /** 查询日志检索服务信息 {@link DescribeHistoryServiceRequest} {@link DescribeHistoryServiceResponse} */
   DescribeHistoryService(data?: DescribeHistoryServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHistoryServiceResponse>;
-  /** {@link DescribeHostLoginList 获取登录审计列表}({@link DescribeHostLoginListRequest 请求参数}): {@link DescribeHostLoginListResponse 返回参数} */
+  /** 获取登录审计列表 {@link DescribeHostLoginListRequest} {@link DescribeHostLoginListResponse} */
   DescribeHostLoginList(data?: DescribeHostLoginListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostLoginListResponse>;
-  /** {@link DescribeIgnoreBaselineRule 查询忽略检测项信息}({@link DescribeIgnoreBaselineRuleRequest 请求参数}): {@link DescribeIgnoreBaselineRuleResponse 返回参数} */
+  /** 查询忽略检测项信息 {@link DescribeIgnoreBaselineRuleRequest} {@link DescribeIgnoreBaselineRuleResponse} */
   DescribeIgnoreBaselineRule(data: DescribeIgnoreBaselineRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIgnoreBaselineRuleResponse>;
-  /** {@link DescribeIgnoreRuleEffectHostList 查询忽略检测项影响主机列表}({@link DescribeIgnoreRuleEffectHostListRequest 请求参数}): {@link DescribeIgnoreRuleEffectHostListResponse 返回参数} */
+  /** 查询忽略检测项影响主机列表 {@link DescribeIgnoreRuleEffectHostListRequest} {@link DescribeIgnoreRuleEffectHostListResponse} */
   DescribeIgnoreRuleEffectHostList(data: DescribeIgnoreRuleEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIgnoreRuleEffectHostListResponse>;
-  /** {@link DescribeImportMachineInfo 查询批量导入机器信息}({@link DescribeImportMachineInfoRequest 请求参数}): {@link DescribeImportMachineInfoResponse 返回参数} */
+  /** 查询批量导入机器信息 {@link DescribeImportMachineInfoRequest} {@link DescribeImportMachineInfoResponse} */
   DescribeImportMachineInfo(data: DescribeImportMachineInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImportMachineInfoResponse>;
-  /** {@link DescribeIndexList 获取索引列表}({@link DescribeIndexListRequest 请求参数}): {@link DescribeIndexListResponse 返回参数} */
+  /** 获取索引列表 {@link DescribeIndexListRequest} {@link DescribeIndexListResponse} */
   DescribeIndexList(data?: DescribeIndexListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexListResponse>;
-  /** {@link DescribeJavaMemShellList 查询java内存马事件列表}({@link DescribeJavaMemShellListRequest 请求参数}): {@link DescribeJavaMemShellListResponse 返回参数} */
+  /** 查询java内存马事件列表 {@link DescribeJavaMemShellListRequest} {@link DescribeJavaMemShellListResponse} */
   DescribeJavaMemShellList(data?: DescribeJavaMemShellListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJavaMemShellListResponse>;
-  /** {@link DescribeLicenseBindList 查看授权绑定列表}({@link DescribeLicenseBindListRequest 请求参数}): {@link DescribeLicenseBindListResponse 返回参数} */
+  /** 查看授权绑定列表 {@link DescribeLicenseBindListRequest} {@link DescribeLicenseBindListResponse} */
   DescribeLicenseBindList(data: DescribeLicenseBindListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseBindListResponse>;
-  /** {@link DescribeLicenseBindSchedule 查询授权绑定进度}({@link DescribeLicenseBindScheduleRequest 请求参数}): {@link DescribeLicenseBindScheduleResponse 返回参数} */
+  /** 查询授权绑定进度 {@link DescribeLicenseBindScheduleRequest} {@link DescribeLicenseBindScheduleResponse} */
   DescribeLicenseBindSchedule(data: DescribeLicenseBindScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseBindScheduleResponse>;
-  /** {@link DescribeLicenseGeneral 授权概览信息}({@link DescribeLicenseGeneralRequest 请求参数}): {@link DescribeLicenseGeneralResponse 返回参数} */
+  /** 授权概览信息 {@link DescribeLicenseGeneralRequest} {@link DescribeLicenseGeneralResponse} */
   DescribeLicenseGeneral(data?: DescribeLicenseGeneralRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseGeneralResponse>;
-  /** {@link DescribeLicenseList 获取授权订单列表}({@link DescribeLicenseListRequest 请求参数}): {@link DescribeLicenseListResponse 返回参数} */
+  /** 获取授权订单列表 {@link DescribeLicenseListRequest} {@link DescribeLicenseListResponse} */
   DescribeLicenseList(data?: DescribeLicenseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseListResponse>;
-  /** {@link DescribeLogStorageStatistic 获取日志检索容量使用统计}({@link DescribeLogStorageStatisticRequest 请求参数}): {@link DescribeLogStorageStatisticResponse 返回参数} */
+  /** 获取日志检索容量使用统计 {@link DescribeLogStorageStatisticRequest} {@link DescribeLogStorageStatisticResponse} */
   DescribeLogStorageStatistic(data?: DescribeLogStorageStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageStatisticResponse>;
-  /** {@link DescribeLoginWhiteCombinedList 获取异地登录白名单合并后列表}({@link DescribeLoginWhiteCombinedListRequest 请求参数}): {@link DescribeLoginWhiteCombinedListResponse 返回参数} */
+  /** 获取异地登录白名单合并后列表 {@link DescribeLoginWhiteCombinedListRequest} {@link DescribeLoginWhiteCombinedListResponse} */
   DescribeLoginWhiteCombinedList(data?: DescribeLoginWhiteCombinedListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginWhiteCombinedListResponse>;
-  /** {@link DescribeLoginWhiteList 获取异地登录白名单列表}({@link DescribeLoginWhiteListRequest 请求参数}): {@link DescribeLoginWhiteListResponse 返回参数} */
+  /** 获取异地登录白名单列表 {@link DescribeLoginWhiteListRequest} {@link DescribeLoginWhiteListResponse} */
   DescribeLoginWhiteList(data?: DescribeLoginWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginWhiteListResponse>;
-  /** {@link DescribeMachineInfo 获取机器详情}({@link DescribeMachineInfoRequest 请求参数}): {@link DescribeMachineInfoResponse 返回参数} */
+  /** 获取机器详情 {@link DescribeMachineInfoRequest} {@link DescribeMachineInfoResponse} */
   DescribeMachineInfo(data?: DescribeMachineInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineInfoResponse>;
-  /** {@link DescribeMachineList 网页防篡改获取区域主机列表}({@link DescribeMachineListRequest 请求参数}): {@link DescribeMachineListResponse 返回参数} */
+  /** 网页防篡改获取区域主机列表 {@link DescribeMachineListRequest} {@link DescribeMachineListResponse} */
   DescribeMachineList(data: DescribeMachineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineListResponse>;
-  /** {@link DescribeMachineOsList 查询机器操作系统列表}({@link DescribeMachineOsListRequest 请求参数}): {@link DescribeMachineOsListResponse 返回参数} */
+  /** 查询机器操作系统列表 {@link DescribeMachineOsListRequest} {@link DescribeMachineOsListResponse} */
   DescribeMachineOsList(data?: DescribeMachineOsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineOsListResponse>;
-  /** {@link DescribeMachineRegions 获取机器地域列表}({@link DescribeMachineRegionsRequest 请求参数}): {@link DescribeMachineRegionsResponse 返回参数} */
+  /** 获取机器地域列表 {@link DescribeMachineRegionsRequest} {@link DescribeMachineRegionsResponse} */
   DescribeMachineRegions(data?: DescribeMachineRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineRegionsResponse>;
-  /** {@link DescribeMachines 获取区域主机列表}({@link DescribeMachinesRequest 请求参数}): {@link DescribeMachinesResponse 返回参数} */
+  /** 获取区域主机列表 {@link DescribeMachinesRequest} {@link DescribeMachinesResponse} */
   DescribeMachines(data: DescribeMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachinesResponse>;
-  /** {@link DescribeMalWareList 获取木马列表}({@link DescribeMalWareListRequest 请求参数}): {@link DescribeMalWareListResponse 返回参数} */
+  /** 获取木马列表 {@link DescribeMalWareListRequest} {@link DescribeMalWareListResponse} */
   DescribeMalWareList(data?: DescribeMalWareListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalWareListResponse>;
-  /** {@link DescribeMaliciousRequestWhiteList 查询恶意请求白名单列表}({@link DescribeMaliciousRequestWhiteListRequest 请求参数}): {@link DescribeMaliciousRequestWhiteListResponse 返回参数} */
+  /** 查询恶意请求白名单列表 {@link DescribeMaliciousRequestWhiteListRequest} {@link DescribeMaliciousRequestWhiteListResponse} */
   DescribeMaliciousRequestWhiteList(data: DescribeMaliciousRequestWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaliciousRequestWhiteListResponse>;
-  /** {@link DescribeMalwareFile 获取木马文件下载地址}({@link DescribeMalwareFileRequest 请求参数}): {@link DescribeMalwareFileResponse 返回参数} */
+  /** 获取木马文件下载地址 {@link DescribeMalwareFileRequest} {@link DescribeMalwareFileResponse} */
   DescribeMalwareFile(data: DescribeMalwareFileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalwareFileResponse>;
-  /** {@link DescribeMalwareInfo 查看恶意文件详情}({@link DescribeMalwareInfoRequest 请求参数}): {@link DescribeMalwareInfoResponse 返回参数} */
+  /** 查看恶意文件详情 {@link DescribeMalwareInfoRequest} {@link DescribeMalwareInfoResponse} */
   DescribeMalwareInfo(data: DescribeMalwareInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalwareInfoResponse>;
-  /** {@link DescribeMalwareRiskWarning 风险预警提示}({@link DescribeMalwareRiskWarningRequest 请求参数}): {@link DescribeMalwareRiskWarningResponse 返回参数} */
+  /** 风险预警提示 {@link DescribeMalwareRiskWarningRequest} {@link DescribeMalwareRiskWarningResponse} */
   DescribeMalwareRiskWarning(data?: DescribeMalwareRiskWarningRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalwareRiskWarningResponse>;
-  /** {@link DescribeMalwareTimingScanSetting 查询定时扫描配置}({@link DescribeMalwareTimingScanSettingRequest 请求参数}): {@link DescribeMalwareTimingScanSettingResponse 返回参数} */
+  /** 查询定时扫描配置 {@link DescribeMalwareTimingScanSettingRequest} {@link DescribeMalwareTimingScanSettingResponse} */
   DescribeMalwareTimingScanSetting(data?: DescribeMalwareTimingScanSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalwareTimingScanSettingResponse>;
-  /** {@link DescribeMonthInspectionReport 安全管家月巡检报告下载}({@link DescribeMonthInspectionReportRequest 请求参数}): {@link DescribeMonthInspectionReportResponse 返回参数} */
+  /** 安全管家月巡检报告下载 {@link DescribeMonthInspectionReportRequest} {@link DescribeMonthInspectionReportResponse} */
   DescribeMonthInspectionReport(data: DescribeMonthInspectionReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonthInspectionReportResponse>;
-  /** {@link DescribeOpenPortStatistics 获取端口统计列表}({@link DescribeOpenPortStatisticsRequest 请求参数}): {@link DescribeOpenPortStatisticsResponse 返回参数} */
+  /** 获取端口统计列表 {@link DescribeOpenPortStatisticsRequest} {@link DescribeOpenPortStatisticsResponse} */
   DescribeOpenPortStatistics(data?: DescribeOpenPortStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOpenPortStatisticsResponse>;
-  /** {@link DescribeOverviewStatistics 获取概览统计数据}({@link DescribeOverviewStatisticsRequest 请求参数}): {@link DescribeOverviewStatisticsResponse 返回参数} */
+  /** 获取概览统计数据 {@link DescribeOverviewStatisticsRequest} {@link DescribeOverviewStatisticsResponse} */
   DescribeOverviewStatistics(data?: DescribeOverviewStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewStatisticsResponse>;
-  /** {@link DescribePrivilegeEvents 获取本地提权事件列表}({@link DescribePrivilegeEventsRequest 请求参数}): {@link DescribePrivilegeEventsResponse 返回参数} */
+  /** 获取本地提权事件列表 {@link DescribePrivilegeEventsRequest} {@link DescribePrivilegeEventsResponse} */
   DescribePrivilegeEvents(data?: DescribePrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivilegeEventsResponse>;
-  /** {@link DescribePrivilegeRules 获取本地提权规则列表}({@link DescribePrivilegeRulesRequest 请求参数}): {@link DescribePrivilegeRulesResponse 返回参数} */
+  /** 获取本地提权规则列表 {@link DescribePrivilegeRulesRequest} {@link DescribePrivilegeRulesResponse} */
   DescribePrivilegeRules(data?: DescribePrivilegeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivilegeRulesResponse>;
-  /** {@link DescribeProVersionInfo 获取专业版概览信息}({@link DescribeProVersionInfoRequest 请求参数}): {@link DescribeProVersionInfoResponse 返回参数} */
+  /** 获取专业版概览信息 {@link DescribeProVersionInfoRequest} {@link DescribeProVersionInfoResponse} */
   DescribeProVersionInfo(data?: DescribeProVersionInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProVersionInfoResponse>;
-  /** {@link DescribeProVersionStatus 获取专业版状态}({@link DescribeProVersionStatusRequest 请求参数}): {@link DescribeProVersionStatusResponse 返回参数} */
+  /** 获取专业版状态 {@link DescribeProVersionStatusRequest} {@link DescribeProVersionStatusResponse} */
   DescribeProVersionStatus(data: DescribeProVersionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProVersionStatusResponse>;
-  /** {@link DescribeProcessStatistics 获取进程统计列表}({@link DescribeProcessStatisticsRequest 请求参数}): {@link DescribeProcessStatisticsResponse 返回参数} */
+  /** 获取进程统计列表 {@link DescribeProcessStatisticsRequest} {@link DescribeProcessStatisticsResponse} */
   DescribeProcessStatistics(data?: DescribeProcessStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcessStatisticsResponse>;
-  /** {@link DescribeProtectDirList 防护目录列表}({@link DescribeProtectDirListRequest 请求参数}): {@link DescribeProtectDirListResponse 返回参数} */
+  /** 防护目录列表 {@link DescribeProtectDirListRequest} {@link DescribeProtectDirListResponse} */
   DescribeProtectDirList(data: DescribeProtectDirListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectDirListResponse>;
-  /** {@link DescribeProtectDirRelatedServer 查询防护目录关联服务器}({@link DescribeProtectDirRelatedServerRequest 请求参数}): {@link DescribeProtectDirRelatedServerResponse 返回参数} */
+  /** 查询防护目录关联服务器 {@link DescribeProtectDirRelatedServerRequest} {@link DescribeProtectDirRelatedServerResponse} */
   DescribeProtectDirRelatedServer(data: DescribeProtectDirRelatedServerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectDirRelatedServerResponse>;
-  /** {@link DescribeProtectNetList 旗舰重保列表}({@link DescribeProtectNetListRequest 请求参数}): {@link DescribeProtectNetListResponse 返回参数} */
+  /** 旗舰重保列表 {@link DescribeProtectNetListRequest} {@link DescribeProtectNetListResponse} */
   DescribeProtectNetList(data?: DescribeProtectNetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectNetListResponse>;
-  /** {@link DescribeReverseShellEvents 获取反弹Shell列表}({@link DescribeReverseShellEventsRequest 请求参数}): {@link DescribeReverseShellEventsResponse 返回参数} */
+  /** 获取反弹Shell列表 {@link DescribeReverseShellEventsRequest} {@link DescribeReverseShellEventsResponse} */
   DescribeReverseShellEvents(data?: DescribeReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsResponse>;
-  /** {@link DescribeReverseShellRules 获取反弹Shell规则列表}({@link DescribeReverseShellRulesRequest 请求参数}): {@link DescribeReverseShellRulesResponse 返回参数} */
+  /** 获取反弹Shell规则列表 {@link DescribeReverseShellRulesRequest} {@link DescribeReverseShellRulesResponse} */
   DescribeReverseShellRules(data?: DescribeReverseShellRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellRulesResponse>;
-  /** {@link DescribeRiskDnsList 获取恶意请求列表}({@link DescribeRiskDnsListRequest 请求参数}): {@link DescribeRiskDnsListResponse 返回参数} */
+  /** 获取恶意请求列表 {@link DescribeRiskDnsListRequest} {@link DescribeRiskDnsListResponse} */
   DescribeRiskDnsList(data?: DescribeRiskDnsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskDnsListResponse>;
-  /** {@link DescribeSaveOrUpdateWarnings 更新用户告警设置}({@link DescribeSaveOrUpdateWarningsRequest 请求参数}): {@link DescribeSaveOrUpdateWarningsResponse 返回参数} */
+  /** 更新用户告警设置 {@link DescribeSaveOrUpdateWarningsRequest} {@link DescribeSaveOrUpdateWarningsResponse} */
   DescribeSaveOrUpdateWarnings(data?: DescribeSaveOrUpdateWarningsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSaveOrUpdateWarningsResponse>;
-  /** {@link DescribeScanMalwareSchedule 查询木马扫描进度}({@link DescribeScanMalwareScheduleRequest 请求参数}): {@link DescribeScanMalwareScheduleResponse 返回参数} */
+  /** 查询木马扫描进度 {@link DescribeScanMalwareScheduleRequest} {@link DescribeScanMalwareScheduleResponse} */
   DescribeScanMalwareSchedule(data?: DescribeScanMalwareScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanMalwareScheduleResponse>;
-  /** {@link DescribeScanSchedule 查询检测进度}({@link DescribeScanScheduleRequest 请求参数}): {@link DescribeScanScheduleResponse 返回参数} */
+  /** 查询检测进度 {@link DescribeScanScheduleRequest} {@link DescribeScanScheduleResponse} */
   DescribeScanSchedule(data: DescribeScanScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanScheduleResponse>;
-  /** {@link DescribeScanState 查询扫描状态}({@link DescribeScanStateRequest 请求参数}): {@link DescribeScanStateResponse 返回参数} */
+  /** 查询扫描状态 {@link DescribeScanStateRequest} {@link DescribeScanStateResponse} */
   DescribeScanState(data: DescribeScanStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanStateResponse>;
-  /** {@link DescribeScanTaskDetails 查询扫描任务详情}({@link DescribeScanTaskDetailsRequest 请求参数}): {@link DescribeScanTaskDetailsResponse 返回参数} */
+  /** 查询扫描任务详情 {@link DescribeScanTaskDetailsRequest} {@link DescribeScanTaskDetailsResponse} */
   DescribeScanTaskDetails(data: DescribeScanTaskDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskDetailsResponse>;
-  /** {@link DescribeScanTaskStatus 查询机器扫描状态列表}({@link DescribeScanTaskStatusRequest 请求参数}): {@link DescribeScanTaskStatusResponse 返回参数} */
+  /** 查询机器扫描状态列表 {@link DescribeScanTaskStatusRequest} {@link DescribeScanTaskStatusResponse} */
   DescribeScanTaskStatus(data: DescribeScanTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskStatusResponse>;
-  /** {@link DescribeScanVulSetting 定期检测配置查询}({@link DescribeScanVulSettingRequest 请求参数}): {@link DescribeScanVulSettingResponse 返回参数} */
+  /** 定期检测配置查询 {@link DescribeScanVulSettingRequest} {@link DescribeScanVulSettingResponse} */
   DescribeScanVulSetting(data?: DescribeScanVulSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanVulSettingResponse>;
-  /** {@link DescribeSearchExportList 导出ES查询文档列表}({@link DescribeSearchExportListRequest 请求参数}): {@link DescribeSearchExportListResponse 返回参数} */
+  /** 导出ES查询文档列表 {@link DescribeSearchExportListRequest} {@link DescribeSearchExportListResponse} */
   DescribeSearchExportList(data: DescribeSearchExportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchExportListResponse>;
-  /** {@link DescribeSearchLogs 获取历史搜索记录}({@link DescribeSearchLogsRequest 请求参数}): {@link DescribeSearchLogsResponse 返回参数} */
+  /** 获取历史搜索记录 {@link DescribeSearchLogsRequest} {@link DescribeSearchLogsResponse} */
   DescribeSearchLogs(data?: DescribeSearchLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchLogsResponse>;
-  /** {@link DescribeSearchTemplates 获取快速检索列表}({@link DescribeSearchTemplatesRequest 请求参数}): {@link DescribeSearchTemplatesResponse 返回参数} */
+  /** 获取快速检索列表 {@link DescribeSearchTemplatesRequest} {@link DescribeSearchTemplatesResponse} */
   DescribeSearchTemplates(data?: DescribeSearchTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchTemplatesResponse>;
-  /** {@link DescribeSecurityDynamics 获取安全事件动态消息}({@link DescribeSecurityDynamicsRequest 请求参数}): {@link DescribeSecurityDynamicsResponse 返回参数} */
+  /** 获取安全事件动态消息 {@link DescribeSecurityDynamicsRequest} {@link DescribeSecurityDynamicsResponse} */
   DescribeSecurityDynamics(data?: DescribeSecurityDynamicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityDynamicsResponse>;
-  /** {@link DescribeSecurityEventStat 获取安全事件统计}({@link DescribeSecurityEventStatRequest 请求参数}): {@link DescribeSecurityEventStatResponse 返回参数} */
+  /** 获取安全事件统计 {@link DescribeSecurityEventStatRequest} {@link DescribeSecurityEventStatResponse} */
   DescribeSecurityEventStat(data?: DescribeSecurityEventStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityEventStatResponse>;
-  /** {@link DescribeSecurityEventsCnt 获取安全事件数统计数据}({@link DescribeSecurityEventsCntRequest 请求参数}): {@link DescribeSecurityEventsCntResponse 返回参数} */
+  /** 获取安全事件数统计数据 {@link DescribeSecurityEventsCntRequest} {@link DescribeSecurityEventsCntResponse} */
   DescribeSecurityEventsCnt(data?: DescribeSecurityEventsCntRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityEventsCntResponse>;
-  /** {@link DescribeSecurityTrends 获取安全事件统计数据}({@link DescribeSecurityTrendsRequest 请求参数}): {@link DescribeSecurityTrendsResponse 返回参数} */
+  /** 获取安全事件统计数据 {@link DescribeSecurityTrendsRequest} {@link DescribeSecurityTrendsResponse} */
   DescribeSecurityTrends(data: DescribeSecurityTrendsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityTrendsResponse>;
-  /** {@link DescribeServerRelatedDirInfo 查询服务器关联目录详情}({@link DescribeServerRelatedDirInfoRequest 请求参数}): {@link DescribeServerRelatedDirInfoResponse 返回参数} */
+  /** 查询服务器关联目录详情 {@link DescribeServerRelatedDirInfoRequest} {@link DescribeServerRelatedDirInfoResponse} */
   DescribeServerRelatedDirInfo(data: DescribeServerRelatedDirInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerRelatedDirInfoResponse>;
-  /** {@link DescribeServersAndRiskAndFirstInfo 获文件查杀概览信息}({@link DescribeServersAndRiskAndFirstInfoRequest 请求参数}): {@link DescribeServersAndRiskAndFirstInfoResponse 返回参数} */
+  /** 获文件查杀概览信息 {@link DescribeServersAndRiskAndFirstInfoRequest} {@link DescribeServersAndRiskAndFirstInfoResponse} */
   DescribeServersAndRiskAndFirstInfo(data?: DescribeServersAndRiskAndFirstInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServersAndRiskAndFirstInfoResponse>;
-  /** {@link DescribeStrategyExist 根据策略名查询策略是否存在}({@link DescribeStrategyExistRequest 请求参数}): {@link DescribeStrategyExistResponse 返回参数} */
+  /** 根据策略名查询策略是否存在 {@link DescribeStrategyExistRequest} {@link DescribeStrategyExistResponse} */
   DescribeStrategyExist(data: DescribeStrategyExistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStrategyExistResponse>;
-  /** {@link DescribeTagMachines 获取指定标签关联的服务器信息}({@link DescribeTagMachinesRequest 请求参数}): {@link DescribeTagMachinesResponse 返回参数} */
+  /** 获取指定标签关联的服务器信息 {@link DescribeTagMachinesRequest} {@link DescribeTagMachinesResponse} */
   DescribeTagMachines(data: DescribeTagMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagMachinesResponse>;
-  /** {@link DescribeTags 获取所有主机标签}({@link DescribeTagsRequest 请求参数}): {@link DescribeTagsResponse 返回参数} */
+  /** 获取所有主机标签 {@link DescribeTagsRequest} {@link DescribeTagsResponse} */
   DescribeTags(data?: DescribeTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagsResponse>;
-  /** {@link DescribeUndoVulCounts 获取指定漏洞分类统计数}({@link DescribeUndoVulCountsRequest 请求参数}): {@link DescribeUndoVulCountsResponse 返回参数} */
+  /** 获取指定漏洞分类统计数 {@link DescribeUndoVulCountsRequest} {@link DescribeUndoVulCountsResponse} */
   DescribeUndoVulCounts(data?: DescribeUndoVulCountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUndoVulCountsResponse>;
-  /** {@link DescribeUsualLoginPlaces 查询常用登录地}({@link DescribeUsualLoginPlacesRequest 请求参数}): {@link DescribeUsualLoginPlacesResponse 返回参数} */
+  /** 查询常用登录地 {@link DescribeUsualLoginPlacesRequest} {@link DescribeUsualLoginPlacesResponse} */
   DescribeUsualLoginPlaces(data: DescribeUsualLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsualLoginPlacesResponse>;
-  /** {@link DescribeVersionStatistics 获取专业版和基础版机器数}({@link DescribeVersionStatisticsRequest 请求参数}): {@link DescribeVersionStatisticsResponse 返回参数} */
+  /** 获取专业版和基础版机器数 {@link DescribeVersionStatisticsRequest} {@link DescribeVersionStatisticsResponse} */
   DescribeVersionStatistics(data?: DescribeVersionStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVersionStatisticsResponse>;
-  /** {@link DescribeVulCountByDates 获取近日指定类型的漏洞数量和主机数量}({@link DescribeVulCountByDatesRequest 请求参数}): {@link DescribeVulCountByDatesResponse 返回参数} */
+  /** 获取近日指定类型的漏洞数量和主机数量 {@link DescribeVulCountByDatesRequest} {@link DescribeVulCountByDatesResponse} */
   DescribeVulCountByDates(data?: DescribeVulCountByDatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulCountByDatesResponse>;
-  /** {@link DescribeVulEffectHostList 漏洞影响主机列表}({@link DescribeVulEffectHostListRequest 请求参数}): {@link DescribeVulEffectHostListResponse 返回参数} */
+  /** 漏洞影响主机列表 {@link DescribeVulEffectHostListRequest} {@link DescribeVulEffectHostListResponse} */
   DescribeVulEffectHostList(data: DescribeVulEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulEffectHostListResponse>;
-  /** {@link DescribeVulHostCountScanTime 获取待处理漏洞数+影响主机数}({@link DescribeVulHostCountScanTimeRequest 请求参数}): {@link DescribeVulHostCountScanTimeResponse 返回参数} */
+  /** 获取待处理漏洞数+影响主机数 {@link DescribeVulHostCountScanTimeRequest} {@link DescribeVulHostCountScanTimeResponse} */
   DescribeVulHostCountScanTime(data?: DescribeVulHostCountScanTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulHostCountScanTimeResponse>;
-  /** {@link DescribeVulHostTop 获取服务器风险top列表}({@link DescribeVulHostTopRequest 请求参数}): {@link DescribeVulHostTopResponse 返回参数} */
+  /** 获取服务器风险top列表 {@link DescribeVulHostTopRequest} {@link DescribeVulHostTopResponse} */
   DescribeVulHostTop(data: DescribeVulHostTopRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulHostTopResponse>;
-  /** {@link DescribeVulInfoCvss 漏洞详情}({@link DescribeVulInfoCvssRequest 请求参数}): {@link DescribeVulInfoCvssResponse 返回参数} */
+  /** 漏洞详情 {@link DescribeVulInfoCvssRequest} {@link DescribeVulInfoCvssResponse} */
   DescribeVulInfoCvss(data: DescribeVulInfoCvssRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulInfoCvssResponse>;
-  /** {@link DescribeVulLevelCount 查询漏洞数量等级分布统计}({@link DescribeVulLevelCountRequest 请求参数}): {@link DescribeVulLevelCountResponse 返回参数} */
+  /** 查询漏洞数量等级分布统计 {@link DescribeVulLevelCountRequest} {@link DescribeVulLevelCountResponse} */
   DescribeVulLevelCount(data?: DescribeVulLevelCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulLevelCountResponse>;
-  /** {@link DescribeVulList 漏洞列表}({@link DescribeVulListRequest 请求参数}): {@link DescribeVulListResponse 返回参数} */
+  /** 漏洞列表 {@link DescribeVulListRequest} {@link DescribeVulListResponse} */
   DescribeVulList(data?: DescribeVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulListResponse>;
-  /** {@link DescribeVulTop 获取漏洞top统计}({@link DescribeVulTopRequest 请求参数}): {@link DescribeVulTopResponse 返回参数} */
+  /** 获取漏洞top统计 {@link DescribeVulTopRequest} {@link DescribeVulTopResponse} */
   DescribeVulTop(data: DescribeVulTopRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulTopResponse>;
-  /** {@link DescribeWarningList 获取当前用户告警列表}({@link DescribeWarningListRequest 请求参数}): {@link DescribeWarningListResponse 返回参数} */
+  /** 获取当前用户告警列表 {@link DescribeWarningListRequest} {@link DescribeWarningListResponse} */
   DescribeWarningList(data?: DescribeWarningListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWarningListResponse>;
-  /** {@link DescribeWebPageEventList 查询篡改事件列表}({@link DescribeWebPageEventListRequest 请求参数}): {@link DescribeWebPageEventListResponse 返回参数} */
+  /** 查询篡改事件列表 {@link DescribeWebPageEventListRequest} {@link DescribeWebPageEventListResponse} */
   DescribeWebPageEventList(data?: DescribeWebPageEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebPageEventListResponse>;
-  /** {@link DescribeWebPageGeneralize 查询网页防篡改概览信息}({@link DescribeWebPageGeneralizeRequest 请求参数}): {@link DescribeWebPageGeneralizeResponse 返回参数} */
+  /** 查询网页防篡改概览信息 {@link DescribeWebPageGeneralizeRequest} {@link DescribeWebPageGeneralizeResponse} */
   DescribeWebPageGeneralize(data?: DescribeWebPageGeneralizeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebPageGeneralizeResponse>;
-  /** {@link DescribeWebPageProtectStat 查询网页防篡改防护统计}({@link DescribeWebPageProtectStatRequest 请求参数}): {@link DescribeWebPageProtectStatResponse 返回参数} */
+  /** 查询网页防篡改防护统计 {@link DescribeWebPageProtectStatRequest} {@link DescribeWebPageProtectStatResponse} */
   DescribeWebPageProtectStat(data?: DescribeWebPageProtectStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebPageProtectStatResponse>;
-  /** {@link DescribeWebPageServiceInfo 查询网站防篡改服务信息}({@link DescribeWebPageServiceInfoRequest 请求参数}): {@link DescribeWebPageServiceInfoResponse 返回参数} */
+  /** 查询网站防篡改服务信息 {@link DescribeWebPageServiceInfoRequest} {@link DescribeWebPageServiceInfoResponse} */
   DescribeWebPageServiceInfo(data?: DescribeWebPageServiceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebPageServiceInfoResponse>;
-  /** {@link DestroyOrder 销毁订单}({@link DestroyOrderRequest 请求参数}): {@link DestroyOrderResponse 返回参数} */
+  /** 销毁订单 {@link DestroyOrderRequest} {@link DestroyOrderResponse} */
   DestroyOrder(data: DestroyOrderRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyOrderResponse>;
-  /** {@link EditBashRules 新增或修改高危命令规则（支持多服务器选择）}({@link EditBashRulesRequest 请求参数}): {@link EditBashRulesResponse 返回参数} */
+  /** 新增或修改高危命令规则（支持多服务器选择） {@link EditBashRulesRequest} {@link EditBashRulesResponse} */
   EditBashRules(data?: EditBashRulesRequest, config?: AxiosRequestConfig): AxiosPromise<EditBashRulesResponse>;
-  /** {@link EditTags 新增或编辑标签}({@link EditTagsRequest 请求参数}): {@link EditTagsResponse 返回参数} */
+  /** 新增或编辑标签 {@link EditTagsRequest} {@link EditTagsResponse} */
   EditTags(data: EditTagsRequest, config?: AxiosRequestConfig): AxiosPromise<EditTagsResponse>;
-  /** {@link ExportAssetCoreModuleList 导出资产管理内核模块列表}({@link ExportAssetCoreModuleListRequest 请求参数}): {@link ExportAssetCoreModuleListResponse 返回参数} */
+  /** 导出资产管理内核模块列表 {@link ExportAssetCoreModuleListRequest} {@link ExportAssetCoreModuleListResponse} */
   ExportAssetCoreModuleList(data?: ExportAssetCoreModuleListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAssetCoreModuleListResponse>;
-  /** {@link ExportAssetWebServiceInfoList 导出资产管理Web服务列表}({@link ExportAssetWebServiceInfoListRequest 请求参数}): {@link ExportAssetWebServiceInfoListResponse 返回参数} */
+  /** 导出资产管理Web服务列表 {@link ExportAssetWebServiceInfoListRequest} {@link ExportAssetWebServiceInfoListResponse} */
   ExportAssetWebServiceInfoList(data?: ExportAssetWebServiceInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAssetWebServiceInfoListResponse>;
-  /** {@link ExportAttackLogs 导出网络攻击日志}({@link ExportAttackLogsRequest 请求参数}): {@link ExportAttackLogsResponse 返回参数} */
+  /** 导出网络攻击日志 {@link ExportAttackLogsRequest} {@link ExportAttackLogsResponse} */
   ExportAttackLogs(data?: ExportAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAttackLogsResponse>;
-  /** {@link ExportBaselineEffectHostList 基线影响主机列表导出}({@link ExportBaselineEffectHostListRequest 请求参数}): {@link ExportBaselineEffectHostListResponse 返回参数} */
+  /** 基线影响主机列表导出 {@link ExportBaselineEffectHostListRequest} {@link ExportBaselineEffectHostListResponse} */
   ExportBaselineEffectHostList(data: ExportBaselineEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBaselineEffectHostListResponse>;
-  /** {@link ExportBaselineList 导出基线列表}({@link ExportBaselineListRequest 请求参数}): {@link ExportBaselineListResponse 返回参数} */
+  /** 导出基线列表 {@link ExportBaselineListRequest} {@link ExportBaselineListResponse} */
   ExportBaselineList(data?: ExportBaselineListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBaselineListResponse>;
-  /** {@link ExportBashEvents 导出高危命令事件}({@link ExportBashEventsRequest 请求参数}): {@link ExportBashEventsResponse 返回参数} */
+  /** 导出高危命令事件 {@link ExportBashEventsRequest} {@link ExportBashEventsResponse} */
   ExportBashEvents(data?: ExportBashEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBashEventsResponse>;
-  /** {@link ExportBruteAttacks 导出密码破解记录}({@link ExportBruteAttacksRequest 请求参数}): {@link ExportBruteAttacksResponse 返回参数} */
+  /** 导出密码破解记录 {@link ExportBruteAttacksRequest} {@link ExportBruteAttacksResponse} */
   ExportBruteAttacks(data?: ExportBruteAttacksRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBruteAttacksResponse>;
-  /** {@link ExportIgnoreBaselineRule 已忽略基线检测项导出}({@link ExportIgnoreBaselineRuleRequest 请求参数}): {@link ExportIgnoreBaselineRuleResponse 返回参数} */
+  /** 已忽略基线检测项导出 {@link ExportIgnoreBaselineRuleRequest} {@link ExportIgnoreBaselineRuleResponse} */
   ExportIgnoreBaselineRule(data?: ExportIgnoreBaselineRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ExportIgnoreBaselineRuleResponse>;
-  /** {@link ExportIgnoreRuleEffectHostList 忽略检测项影响主机列表导出}({@link ExportIgnoreRuleEffectHostListRequest 请求参数}): {@link ExportIgnoreRuleEffectHostListResponse 返回参数} */
+  /** 忽略检测项影响主机列表导出 {@link ExportIgnoreRuleEffectHostListRequest} {@link ExportIgnoreRuleEffectHostListResponse} */
   ExportIgnoreRuleEffectHostList(data: ExportIgnoreRuleEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportIgnoreRuleEffectHostListResponse>;
-  /** {@link ExportLicenseDetail 导出授权详情}({@link ExportLicenseDetailRequest 请求参数}): {@link ExportLicenseDetailResponse 返回参数} */
+  /** 导出授权详情 {@link ExportLicenseDetailRequest} {@link ExportLicenseDetailResponse} */
   ExportLicenseDetail(data?: ExportLicenseDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ExportLicenseDetailResponse>;
-  /** {@link ExportMaliciousRequests 导出下载恶意请求文件}({@link ExportMaliciousRequestsRequest 请求参数}): {@link ExportMaliciousRequestsResponse 返回参数} */
+  /** 导出下载恶意请求文件 {@link ExportMaliciousRequestsRequest} {@link ExportMaliciousRequestsResponse} */
   ExportMaliciousRequests(data?: ExportMaliciousRequestsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportMaliciousRequestsResponse>;
-  /** {@link ExportMalwares 导出木马记录}({@link ExportMalwaresRequest 请求参数}): {@link ExportMalwaresResponse 返回参数} */
+  /** 导出木马记录 {@link ExportMalwaresRequest} {@link ExportMalwaresResponse} */
   ExportMalwares(data?: ExportMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<ExportMalwaresResponse>;
-  /** {@link ExportNonlocalLoginPlaces 导出异地登录记录}({@link ExportNonlocalLoginPlacesRequest 请求参数}): {@link ExportNonlocalLoginPlacesResponse 返回参数} */
+  /** 导出异地登录记录 {@link ExportNonlocalLoginPlacesRequest} {@link ExportNonlocalLoginPlacesResponse} */
   ExportNonlocalLoginPlaces(data?: ExportNonlocalLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<ExportNonlocalLoginPlacesResponse>;
-  /** {@link ExportPrivilegeEvents 导出本地提权事件}({@link ExportPrivilegeEventsRequest 请求参数}): {@link ExportPrivilegeEventsResponse 返回参数} */
+  /** 导出本地提权事件 {@link ExportPrivilegeEventsRequest} {@link ExportPrivilegeEventsResponse} */
   ExportPrivilegeEvents(data?: ExportPrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportPrivilegeEventsResponse>;
-  /** {@link ExportProtectDirList 导出防护目录列表}({@link ExportProtectDirListRequest 请求参数}): {@link ExportProtectDirListResponse 返回参数} */
+  /** 导出防护目录列表 {@link ExportProtectDirListRequest} {@link ExportProtectDirListResponse} */
   ExportProtectDirList(data?: ExportProtectDirListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportProtectDirListResponse>;
-  /** {@link ExportReverseShellEvents 导出反弹Shell事件}({@link ExportReverseShellEventsRequest 请求参数}): {@link ExportReverseShellEventsResponse 返回参数} */
+  /** 导出反弹Shell事件 {@link ExportReverseShellEventsRequest} {@link ExportReverseShellEventsResponse} */
   ExportReverseShellEvents(data?: ExportReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportReverseShellEventsResponse>;
-  /** {@link ExportScanTaskDetails 导出扫描任务详情}({@link ExportScanTaskDetailsRequest 请求参数}): {@link ExportScanTaskDetailsResponse 返回参数} */
+  /** 导出扫描任务详情 {@link ExportScanTaskDetailsRequest} {@link ExportScanTaskDetailsResponse} */
   ExportScanTaskDetails(data: ExportScanTaskDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportScanTaskDetailsResponse>;
-  /** {@link ExportSecurityTrends 导出风险趋势}({@link ExportSecurityTrendsRequest 请求参数}): {@link ExportSecurityTrendsResponse 返回参数} */
+  /** 导出风险趋势 {@link ExportSecurityTrendsRequest} {@link ExportSecurityTrendsResponse} */
   ExportSecurityTrends(data: ExportSecurityTrendsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportSecurityTrendsResponse>;
-  /** {@link ExportTasks 异步导出任务}({@link ExportTasksRequest 请求参数}): {@link ExportTasksResponse 返回参数} */
+  /** 异步导出任务 {@link ExportTasksRequest} {@link ExportTasksResponse} */
   ExportTasks(data: ExportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ExportTasksResponse>;
-  /** {@link ExportVulDetectionExcel 导出本次漏洞检测Excel}({@link ExportVulDetectionExcelRequest 请求参数}): {@link ExportVulDetectionExcelResponse 返回参数} */
+  /** 导出本次漏洞检测Excel {@link ExportVulDetectionExcelRequest} {@link ExportVulDetectionExcelResponse} */
   ExportVulDetectionExcel(data: ExportVulDetectionExcelRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVulDetectionExcelResponse>;
-  /** {@link ExportVulDetectionReport 导出漏洞检测报告}({@link ExportVulDetectionReportRequest 请求参数}): {@link ExportVulDetectionReportResponse 返回参数} */
+  /** 导出漏洞检测报告 {@link ExportVulDetectionReportRequest} {@link ExportVulDetectionReportResponse} */
   ExportVulDetectionReport(data: ExportVulDetectionReportRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVulDetectionReportResponse>;
-  /** {@link ExportVulEffectHostList 导出漏洞影响主机列表}({@link ExportVulEffectHostListRequest 请求参数}): {@link ExportVulEffectHostListResponse 返回参数} */
+  /** 导出漏洞影响主机列表 {@link ExportVulEffectHostListRequest} {@link ExportVulEffectHostListResponse} */
   ExportVulEffectHostList(data: ExportVulEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVulEffectHostListResponse>;
-  /** {@link ExportVulList 漏洞管理-导出漏洞列表}({@link ExportVulListRequest 请求参数}): {@link ExportVulListResponse 返回参数} */
+  /** 漏洞管理-导出漏洞列表 {@link ExportVulListRequest} {@link ExportVulListResponse} */
   ExportVulList(data?: ExportVulListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVulListResponse>;
-  /** {@link ExportWebPageEventList 导出篡改事件列表}({@link ExportWebPageEventListRequest 请求参数}): {@link ExportWebPageEventListResponse 返回参数} */
+  /** 导出篡改事件列表 {@link ExportWebPageEventListRequest} {@link ExportWebPageEventListResponse} */
   ExportWebPageEventList(data?: ExportWebPageEventListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportWebPageEventListResponse>;
-  /** {@link IgnoreImpactedHosts 忽略漏洞}({@link IgnoreImpactedHostsRequest 请求参数}): {@link IgnoreImpactedHostsResponse 返回参数} */
+  /** 忽略漏洞 {@link IgnoreImpactedHostsRequest} {@link IgnoreImpactedHostsResponse} */
   IgnoreImpactedHosts(data: IgnoreImpactedHostsRequest, config?: AxiosRequestConfig): AxiosPromise<IgnoreImpactedHostsResponse>;
-  /** {@link ModifyAutoOpenProVersionConfig 设置自动开通配置}({@link ModifyAutoOpenProVersionConfigRequest 请求参数}): {@link ModifyAutoOpenProVersionConfigResponse 返回参数} */
+  /** 设置自动开通配置 {@link ModifyAutoOpenProVersionConfigRequest} {@link ModifyAutoOpenProVersionConfigResponse} */
   ModifyAutoOpenProVersionConfig(data: ModifyAutoOpenProVersionConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoOpenProVersionConfigResponse>;
-  /** {@link ModifyBanMode 修改爆破阻断模式}({@link ModifyBanModeRequest 请求参数}): {@link ModifyBanModeResponse 返回参数} */
+  /** 修改爆破阻断模式 {@link ModifyBanModeRequest} {@link ModifyBanModeResponse} */
   ModifyBanMode(data: ModifyBanModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBanModeResponse>;
-  /** {@link ModifyBanStatus 设置阻断开关状态}({@link ModifyBanStatusRequest 请求参数}): {@link ModifyBanStatusResponse 返回参数} */
+  /** 设置阻断开关状态 {@link ModifyBanStatusRequest} {@link ModifyBanStatusResponse} */
   ModifyBanStatus(data: ModifyBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBanStatusResponse>;
-  /** {@link ModifyBaselinePolicy 更改基线策略设置}({@link ModifyBaselinePolicyRequest 请求参数}): {@link ModifyBaselinePolicyResponse 返回参数} */
+  /** 更改基线策略设置 {@link ModifyBaselinePolicyRequest} {@link ModifyBaselinePolicyResponse} */
   ModifyBaselinePolicy(data: ModifyBaselinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBaselinePolicyResponse>;
-  /** {@link ModifyBruteAttackRules 修改暴力破解规则}({@link ModifyBruteAttackRulesRequest 请求参数}): {@link ModifyBruteAttackRulesResponse 返回参数} */
+  /** 修改暴力破解规则 {@link ModifyBruteAttackRulesRequest} {@link ModifyBruteAttackRulesResponse} */
   ModifyBruteAttackRules(data: ModifyBruteAttackRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBruteAttackRulesResponse>;
-  /** {@link ModifyLicenseBinds 授权批量绑定}({@link ModifyLicenseBindsRequest 请求参数}): {@link ModifyLicenseBindsResponse 返回参数} */
+  /** 授权批量绑定 {@link ModifyLicenseBindsRequest} {@link ModifyLicenseBindsResponse} */
   ModifyLicenseBinds(data: ModifyLicenseBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLicenseBindsResponse>;
-  /** {@link ModifyLicenseUnBinds 授权批量解绑}({@link ModifyLicenseUnBindsRequest 请求参数}): {@link ModifyLicenseUnBindsResponse 返回参数} */
+  /** 授权批量解绑 {@link ModifyLicenseUnBindsRequest} {@link ModifyLicenseUnBindsResponse} */
   ModifyLicenseUnBinds(data: ModifyLicenseUnBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLicenseUnBindsResponse>;
-  /** {@link ModifyMalwareTimingScanSettings 定时扫描设置}({@link ModifyMalwareTimingScanSettingsRequest 请求参数}): {@link ModifyMalwareTimingScanSettingsResponse 返回参数} */
+  /** 定时扫描设置 {@link ModifyMalwareTimingScanSettingsRequest} {@link ModifyMalwareTimingScanSettingsResponse} */
   ModifyMalwareTimingScanSettings(data: ModifyMalwareTimingScanSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMalwareTimingScanSettingsResponse>;
-  /** {@link ModifyOrderAttribute 编辑订单属性}({@link ModifyOrderAttributeRequest 请求参数}): {@link ModifyOrderAttributeResponse 返回参数} */
+  /** 编辑订单属性 {@link ModifyOrderAttributeRequest} {@link ModifyOrderAttributeResponse} */
   ModifyOrderAttribute(data: ModifyOrderAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOrderAttributeResponse>;
-  /** {@link ModifyWarningSetting 修改告警设置}({@link ModifyWarningSettingRequest 请求参数}): {@link ModifyWarningSettingResponse 返回参数} */
+  /** 修改告警设置 {@link ModifyWarningSettingRequest} {@link ModifyWarningSettingResponse} */
   ModifyWarningSetting(data: ModifyWarningSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWarningSettingResponse>;
-  /** {@link ModifyWebPageProtectDir 创建网站防护目录}({@link ModifyWebPageProtectDirRequest 请求参数}): {@link ModifyWebPageProtectDirResponse 返回参数} */
+  /** 创建网站防护目录 {@link ModifyWebPageProtectDirRequest} {@link ModifyWebPageProtectDirResponse} */
   ModifyWebPageProtectDir(data: ModifyWebPageProtectDirRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebPageProtectDirResponse>;
-  /** {@link ModifyWebPageProtectSetting 修改网站防护设置}({@link ModifyWebPageProtectSettingRequest 请求参数}): {@link ModifyWebPageProtectSettingResponse 返回参数} */
+  /** 修改网站防护设置 {@link ModifyWebPageProtectSettingRequest} {@link ModifyWebPageProtectSettingResponse} */
   ModifyWebPageProtectSetting(data: ModifyWebPageProtectSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebPageProtectSettingResponse>;
-  /** {@link ModifyWebPageProtectSwitch 网站防护设置开关}({@link ModifyWebPageProtectSwitchRequest 请求参数}): {@link ModifyWebPageProtectSwitchResponse 返回参数} */
+  /** 网站防护设置开关 {@link ModifyWebPageProtectSwitchRequest} {@link ModifyWebPageProtectSwitchResponse} */
   ModifyWebPageProtectSwitch(data: ModifyWebPageProtectSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebPageProtectSwitchResponse>;
-  /** {@link RecoverMalwares 恢复木马文件}({@link RecoverMalwaresRequest 请求参数}): {@link RecoverMalwaresResponse 返回参数} */
+  /** 恢复木马文件 {@link RecoverMalwaresRequest} {@link RecoverMalwaresResponse} */
   RecoverMalwares(data: RecoverMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverMalwaresResponse>;
-  /** {@link ScanAsset 资产指纹启动扫描}({@link ScanAssetRequest 请求参数}): {@link ScanAssetResponse 返回参数} */
+  /** 资产指纹启动扫描 {@link ScanAssetRequest} {@link ScanAssetResponse} */
   ScanAsset(data?: ScanAssetRequest, config?: AxiosRequestConfig): AxiosPromise<ScanAssetResponse>;
-  /** {@link ScanVul 一键检测}({@link ScanVulRequest 请求参数}): {@link ScanVulResponse 返回参数} */
+  /** 一键检测 {@link ScanVulRequest} {@link ScanVulResponse} */
   ScanVul(data: ScanVulRequest, config?: AxiosRequestConfig): AxiosPromise<ScanVulResponse>;
-  /** {@link ScanVulAgain 漏洞管理-重新检测接口}({@link ScanVulAgainRequest 请求参数}): {@link ScanVulAgainResponse 返回参数} */
+  /** 漏洞管理-重新检测接口 {@link ScanVulAgainRequest} {@link ScanVulAgainResponse} */
   ScanVulAgain(data: ScanVulAgainRequest, config?: AxiosRequestConfig): AxiosPromise<ScanVulAgainResponse>;
-  /** {@link ScanVulSetting 定期扫描漏洞设置}({@link ScanVulSettingRequest 请求参数}): {@link ScanVulSettingResponse 返回参数} */
+  /** 定期扫描漏洞设置 {@link ScanVulSettingRequest} {@link ScanVulSettingResponse} */
   ScanVulSetting(data: ScanVulSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ScanVulSettingResponse>;
-  /** {@link SeparateMalwares 隔离木马}({@link SeparateMalwaresRequest 请求参数}): {@link SeparateMalwaresResponse 返回参数} */
+  /** 隔离木马 {@link SeparateMalwaresRequest} {@link SeparateMalwaresResponse} */
   SeparateMalwares(data: SeparateMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<SeparateMalwaresResponse>;
-  /** {@link SetBashEventsStatus 设置高危命令事件状态}({@link SetBashEventsStatusRequest 请求参数}): {@link SetBashEventsStatusResponse 返回参数} */
+  /** 设置高危命令事件状态 {@link SetBashEventsStatusRequest} {@link SetBashEventsStatusResponse} */
   SetBashEventsStatus(data: SetBashEventsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<SetBashEventsStatusResponse>;
-  /** {@link StartBaselineDetect 检测基线}({@link StartBaselineDetectRequest 请求参数}): {@link StartBaselineDetectResponse 返回参数} */
+  /** 检测基线 {@link StartBaselineDetectRequest} {@link StartBaselineDetectResponse} */
   StartBaselineDetect(data: StartBaselineDetectRequest, config?: AxiosRequestConfig): AxiosPromise<StartBaselineDetectResponse>;
-  /** {@link StopBaselineDetect 停止基线检测}({@link StopBaselineDetectRequest 请求参数}): {@link StopBaselineDetectResponse 返回参数} */
+  /** 停止基线检测 {@link StopBaselineDetectRequest} {@link StopBaselineDetectResponse} */
   StopBaselineDetect(data: StopBaselineDetectRequest, config?: AxiosRequestConfig): AxiosPromise<StopBaselineDetectResponse>;
-  /** {@link StopNoticeBanTips 不再提醒爆破阻断提示弹窗}({@link StopNoticeBanTipsRequest 请求参数}): {@link StopNoticeBanTipsResponse 返回参数} */
+  /** 不再提醒爆破阻断提示弹窗 {@link StopNoticeBanTipsRequest} {@link StopNoticeBanTipsResponse} */
   StopNoticeBanTips(data?: StopNoticeBanTipsRequest, config?: AxiosRequestConfig): AxiosPromise<StopNoticeBanTipsResponse>;
-  /** {@link SwitchBashRules 切换高危命令规则状态}({@link SwitchBashRulesRequest 请求参数}): {@link SwitchBashRulesResponse 返回参数} */
+  /** 切换高危命令规则状态 {@link SwitchBashRulesRequest} {@link SwitchBashRulesResponse} */
   SwitchBashRules(data: SwitchBashRulesRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchBashRulesResponse>;
-  /** {@link SyncAssetScan 同步资产扫描信息}({@link SyncAssetScanRequest 请求参数}): {@link SyncAssetScanResponse 返回参数} */
+  /** 同步资产扫描信息 {@link SyncAssetScanRequest} {@link SyncAssetScanResponse} */
   SyncAssetScan(data: SyncAssetScanRequest, config?: AxiosRequestConfig): AxiosPromise<SyncAssetScanResponse>;
-  /** {@link SyncBaselineDetectSummary 同步基线检测进度概要}({@link SyncBaselineDetectSummaryRequest 请求参数}): {@link SyncBaselineDetectSummaryResponse 返回参数} */
+  /** 同步基线检测进度概要 {@link SyncBaselineDetectSummaryRequest} {@link SyncBaselineDetectSummaryResponse} */
   SyncBaselineDetectSummary(data?: SyncBaselineDetectSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<SyncBaselineDetectSummaryResponse>;
-  /** {@link TrustMalwares 信任木马文件}({@link TrustMalwaresRequest 请求参数}): {@link TrustMalwaresResponse 返回参数} */
+  /** 信任木马文件 {@link TrustMalwaresRequest} {@link TrustMalwaresResponse} */
   TrustMalwares(data: TrustMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<TrustMalwaresResponse>;
-  /** {@link UntrustMalwares 取消信任木马}({@link UntrustMalwaresRequest 请求参数}): {@link UntrustMalwaresResponse 返回参数} */
+  /** 取消信任木马 {@link UntrustMalwaresRequest} {@link UntrustMalwaresResponse} */
   UntrustMalwares(data: UntrustMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<UntrustMalwaresResponse>;
-  /** {@link UpdateBaselineStrategy 更新基线策略信息}({@link UpdateBaselineStrategyRequest 请求参数}): {@link UpdateBaselineStrategyResponse 返回参数} */
+  /** 更新基线策略信息 {@link UpdateBaselineStrategyRequest} {@link UpdateBaselineStrategyResponse} */
   UpdateBaselineStrategy(data: UpdateBaselineStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateBaselineStrategyResponse>;
-  /** {@link UpdateMachineTags 关联机器标签列表}({@link UpdateMachineTagsRequest 请求参数}): {@link UpdateMachineTagsResponse 返回参数} */
+  /** 关联机器标签列表 {@link UpdateMachineTagsRequest} {@link UpdateMachineTagsResponse} */
   UpdateMachineTags(data: UpdateMachineTagsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateMachineTagsResponse>;
 }
 

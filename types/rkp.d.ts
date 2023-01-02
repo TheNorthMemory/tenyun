@@ -48,7 +48,7 @@ declare interface GetOpenIdResponse {
   OpenId?: string | null;
   /** 设备风险 */
   RiskInfo?: RiskInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -72,7 +72,7 @@ declare interface GetTokenResponse {
   Token?: string;
   /** 过期时间 */
   ExpireTime?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -134,18 +134,18 @@ declare interface QueryDevAndRiskResponse {
   AllCnt?: number | null;
   /** 匹配到的设备信息 */
   Matches?: DevInfoQ[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Rkp 风险探针} */
 declare interface Rkp {
   (): Versions;
-  /** {@link GetOpenId RPopenID查询}({@link GetOpenIdRequest 请求参数}): {@link GetOpenIdResponse 返回参数} */
+  /** RPopenID查询 {@link GetOpenIdRequest} {@link GetOpenIdResponse} */
   GetOpenId(data: GetOpenIdRequest, config?: AxiosRequestConfig): AxiosPromise<GetOpenIdResponse>;
-  /** {@link GetToken 获取token}({@link GetTokenRequest 请求参数}): {@link GetTokenResponse 返回参数} */
+  /** 获取token {@link GetTokenRequest} {@link GetTokenResponse} */
   GetToken(data: GetTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetTokenResponse>;
-  /** {@link QueryDevAndRisk Devid及风险查询}({@link QueryDevAndRiskRequest 请求参数}): {@link QueryDevAndRiskResponse 返回参数} */
+  /** Devid及风险查询 {@link QueryDevAndRiskRequest} {@link QueryDevAndRiskResponse} */
   QueryDevAndRisk(data: QueryDevAndRiskRequest, config?: AxiosRequestConfig): AxiosPromise<QueryDevAndRiskResponse>;
 }
 

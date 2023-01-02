@@ -126,7 +126,7 @@ declare interface RecognizeCustomizedAudienceRequest {
 declare interface RecognizeCustomizedAudienceResponse {
   /** 业务出参 */
   Data?: OutputRecognizeTargetAudience | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -138,7 +138,7 @@ declare interface RecognizePreciseTargetAudienceRequest {
 declare interface RecognizePreciseTargetAudienceResponse {
   /** 回包数据 */
   Data?: OutputRecognizeTargetAudience | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -152,18 +152,18 @@ declare interface RecognizeTargetAudienceRequest {
 declare interface RecognizeTargetAudienceResponse {
   /** 回包数据 */
   Data: OutputRecognizeTargetAudience | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Taf 流量反欺诈} */
 declare interface Taf {
   (): Versions;
-  /** {@link RecognizeCustomizedAudience 流量反欺诈-流量验准定制版}({@link RecognizeCustomizedAudienceRequest 请求参数}): {@link RecognizeCustomizedAudienceResponse 返回参数} */
+  /** 流量反欺诈-流量验准定制版 {@link RecognizeCustomizedAudienceRequest} {@link RecognizeCustomizedAudienceResponse} */
   RecognizeCustomizedAudience(data: RecognizeCustomizedAudienceRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeCustomizedAudienceResponse>;
-  /** {@link RecognizePreciseTargetAudience 流量反欺诈-流量验准高级版}({@link RecognizePreciseTargetAudienceRequest 请求参数}): {@link RecognizePreciseTargetAudienceResponse 返回参数} */
+  /** 流量反欺诈-流量验准高级版 {@link RecognizePreciseTargetAudienceRequest} {@link RecognizePreciseTargetAudienceResponse} */
   RecognizePreciseTargetAudience(data: RecognizePreciseTargetAudienceRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePreciseTargetAudienceResponse>;
-  /** {@link RecognizeTargetAudience 流量反欺诈-流量验准}({@link RecognizeTargetAudienceRequest 请求参数}): {@link RecognizeTargetAudienceResponse 返回参数} */
+  /** 流量反欺诈-流量验准 {@link RecognizeTargetAudienceRequest} {@link RecognizeTargetAudienceResponse} */
   RecognizeTargetAudience(data: RecognizeTargetAudienceRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTargetAudienceResponse>;
 }
 

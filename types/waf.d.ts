@@ -604,7 +604,7 @@ declare interface AddCustomRuleResponse {
   Success: ResponseCode;
   /** 添加成功的规则ID */
   RuleId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -624,7 +624,7 @@ declare interface AddDomainWhiteRuleRequest {
 declare interface AddDomainWhiteRuleResponse {
   /** 规则id */
   Id?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -692,7 +692,7 @@ declare interface AddSpartaProtectionRequest {
 }
 
 declare interface AddSpartaProtectionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -716,7 +716,7 @@ declare interface CreateAccessExportRequest {
 declare interface CreateAccessExportResponse {
   /** 日志导出ID。 */
   ExportId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -728,7 +728,7 @@ declare interface DeleteAccessExportRequest {
 }
 
 declare interface DeleteAccessExportResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -738,7 +738,7 @@ declare interface DeleteAttackDownloadRecordRequest {
 }
 
 declare interface DeleteAttackDownloadRecordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -752,7 +752,7 @@ declare interface DeleteDomainWhiteRulesRequest {
 declare interface DeleteDomainWhiteRulesResponse {
   /** 出参 */
   Data?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -762,7 +762,7 @@ declare interface DeleteDownloadRecordRequest {
 }
 
 declare interface DeleteDownloadRecordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -782,7 +782,7 @@ declare interface DeleteIpAccessControlResponse {
   FailedItems: string | null;
   /** 删除失败的条目数 */
   FailedCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -796,7 +796,7 @@ declare interface DeleteSessionRequest {
 declare interface DeleteSessionResponse {
   /** 结果 */
   Data: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -814,7 +814,7 @@ declare interface DescribeAccessExportsResponse {
   TotalCount: number;
   /** 日志导出列表 */
   Exports: ExportAccessInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -832,7 +832,7 @@ declare interface DescribeAccessFastAnalysisRequest {
 }
 
 declare interface DescribeAccessFastAnalysisResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -846,7 +846,7 @@ declare interface DescribeAccessIndexResponse {
   Rule: AccessRuleInfo | null;
   /** 索引修改时间，初始值为索引创建时间。 */
   ModifyTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -880,7 +880,7 @@ declare interface DescribeAutoDenyIPRequest {
 declare interface DescribeAutoDenyIPResponse {
   /** 查询IP封禁状态返回结果 */
   Data?: IpHitItemsData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -896,7 +896,7 @@ declare interface DescribeDomainDetailsSaasRequest {
 declare interface DescribeDomainDetailsSaasResponse {
   /** 域名详情 */
   DomainsPartInfo: DomainsPartInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -920,7 +920,7 @@ declare interface DescribeDomainWhiteRulesResponse {
   RuleList: RuleList[];
   /** 规则的数量 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -938,7 +938,7 @@ declare interface DescribeDomainsResponse {
   Total: number;
   /** domain列表 */
   Domains: DomainInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -954,7 +954,7 @@ declare interface DescribeFlowTrendRequest {
 declare interface DescribeFlowTrendResponse {
   /** 流量趋势数据 */
   Data: BotStatPointItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -972,7 +972,7 @@ declare interface DescribeInstancesResponse {
   Total: number;
   /** instance列表 */
   Instances: InstanceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1006,7 +1006,7 @@ declare interface DescribeIpAccessControlRequest {
 declare interface DescribeIpAccessControlResponse {
   /** 输出 */
   Data?: IpAccessControlData | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1040,7 +1040,7 @@ declare interface DescribeIpHitItemsRequest {
 declare interface DescribeIpHitItemsResponse {
   /** 结果 */
   Data?: IpHitItemsData | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1050,7 +1050,7 @@ declare interface DescribeUserCdcClbWafRegionsRequest {
 declare interface DescribeUserCdcClbWafRegionsResponse {
   /** CdcRegion的类型描述 */
   Data: CdcRegion[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1060,7 +1060,7 @@ declare interface DescribeUserClbWafRegionsRequest {
 declare interface DescribeUserClbWafRegionsResponse {
   /** 地域（标准的ap-格式）列表 */
   Data: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1078,7 +1078,7 @@ declare interface DescribeWafAutoDenyRulesResponse {
   DenyTimeThreshold: number;
   /** 自动封禁状态 */
   DefenseStatus: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1088,7 +1088,7 @@ declare interface DescribeWafAutoDenyStatusRequest {
 declare interface DescribeWafAutoDenyStatusResponse {
   /** WAF 自动封禁详情 */
   WafAutoDenyDetails?: AutoDenyDetail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1098,7 +1098,7 @@ declare interface DescribeWafThreatenIntelligenceRequest {
 declare interface DescribeWafThreatenIntelligenceResponse {
   /** WAF 威胁情报封禁信息 */
   WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1108,7 +1108,7 @@ declare interface GetAttackDownloadRecordsRequest {
 declare interface GetAttackDownloadRecordsResponse {
   /** 下载攻击日志记录数组 */
   Records: DownloadAttackRecordInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1120,7 +1120,7 @@ declare interface ModifyAccessPeriodRequest {
 }
 
 declare interface ModifyAccessPeriodResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1138,7 +1138,7 @@ declare interface ModifyCustomRuleStatusRequest {
 declare interface ModifyCustomRuleStatusResponse {
   /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
   Success: ResponseCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1158,7 +1158,7 @@ declare interface ModifyDomainWhiteRuleRequest {
 }
 
 declare interface ModifyDomainWhiteRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1178,7 +1178,7 @@ declare interface ModifyWafAutoDenyRulesRequest {
 declare interface ModifyWafAutoDenyRulesResponse {
   /** 成功的状态码，需要JSON解码后再使用，返回的格式是{"域名":"状态"}，成功的状态码为Success，其它的为失败的状态码（yunapi定义的错误码） */
   Success: ResponseCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1190,7 +1190,7 @@ declare interface ModifyWafAutoDenyStatusRequest {
 declare interface ModifyWafAutoDenyStatusResponse {
   /** WAF 自动封禁配置项 */
   WafAutoDenyDetails?: AutoDenyDetail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1202,7 +1202,7 @@ declare interface ModifyWafThreatenIntelligenceRequest {
 declare interface ModifyWafThreatenIntelligenceResponse {
   /** 当前WAF威胁情报封禁模块详情 */
   WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1224,7 +1224,7 @@ declare interface PostAttackDownloadTaskRequest {
 declare interface PostAttackDownloadTaskResponse {
   /** 任务task id */
   Flow?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1258,7 +1258,7 @@ declare interface SearchAccessLogResponse {
   Results: AccessLogInfo[] | null;
   /** 日志分析结果；当Analysis为False时，可能返回为null注意：此字段可能返回 null，表示取不到有效值 */
   AnalysisResults: AccessLogItems[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1278,84 +1278,84 @@ declare interface UpsertIpAccessControlResponse {
   FailedItems: string | null;
   /** 添加或修改失败的数目 */
   FailedCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Waf Web 应用防火墙} */
 declare interface Waf {
   (): Versions;
-  /** {@link AddCustomRule 增加自定义策略}({@link AddCustomRuleRequest 请求参数}): {@link AddCustomRuleResponse 返回参数} */
+  /** 增加自定义策略 {@link AddCustomRuleRequest} {@link AddCustomRuleResponse} */
   AddCustomRule(data: AddCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomRuleResponse>;
-  /** {@link AddDomainWhiteRule 增加域名规则白名单}({@link AddDomainWhiteRuleRequest 请求参数}): {@link AddDomainWhiteRuleResponse 返回参数} */
+  /** 增加域名规则白名单 {@link AddDomainWhiteRuleRequest} {@link AddDomainWhiteRuleResponse} */
   AddDomainWhiteRule(data: AddDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddDomainWhiteRuleResponse>;
-  /** {@link AddSpartaProtection 添加Spart防护域名}({@link AddSpartaProtectionRequest 请求参数}): {@link AddSpartaProtectionResponse 返回参数} */
+  /** 添加Spart防护域名 {@link AddSpartaProtectionRequest} {@link AddSpartaProtectionResponse} */
   AddSpartaProtection(data: AddSpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpartaProtectionResponse>;
-  /** {@link CreateAccessExport 创建访问日志导出}({@link CreateAccessExportRequest 请求参数}): {@link CreateAccessExportResponse 返回参数} */
+  /** 创建访问日志导出 {@link CreateAccessExportRequest} {@link CreateAccessExportResponse} */
   CreateAccessExport(data: CreateAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessExportResponse>;
-  /** {@link DeleteAccessExport 删除访问日志导出}({@link DeleteAccessExportRequest 请求参数}): {@link DeleteAccessExportResponse 返回参数} */
+  /** 删除访问日志导出 {@link DeleteAccessExportRequest} {@link DeleteAccessExportResponse} */
   DeleteAccessExport(data: DeleteAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessExportResponse>;
-  /** {@link DeleteAttackDownloadRecord 删除攻击日志下载任务记录}({@link DeleteAttackDownloadRecordRequest 请求参数}): {@link DeleteAttackDownloadRecordResponse 返回参数} */
+  /** 删除攻击日志下载任务记录 {@link DeleteAttackDownloadRecordRequest} {@link DeleteAttackDownloadRecordResponse} */
   DeleteAttackDownloadRecord(data: DeleteAttackDownloadRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackDownloadRecordResponse>;
-  /** {@link DeleteDomainWhiteRules 删除域名规则白名单}({@link DeleteDomainWhiteRulesRequest 请求参数}): {@link DeleteDomainWhiteRulesResponse 返回参数} */
+  /** 删除域名规则白名单 {@link DeleteDomainWhiteRulesRequest} {@link DeleteDomainWhiteRulesResponse} */
   DeleteDomainWhiteRules(data: DeleteDomainWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainWhiteRulesResponse>;
-  /** {@link DeleteDownloadRecord 删除访问日志下载记录}({@link DeleteDownloadRecordRequest 请求参数}): {@link DeleteDownloadRecordResponse 返回参数} */
+  /** 删除访问日志下载记录 {@link DeleteDownloadRecordRequest} {@link DeleteDownloadRecordResponse} */
   DeleteDownloadRecord(data: DeleteDownloadRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDownloadRecordResponse>;
-  /** {@link DeleteIpAccessControl Waf IP黑白名单Delete接口}({@link DeleteIpAccessControlRequest 请求参数}): {@link DeleteIpAccessControlResponse 返回参数} */
+  /** Waf IP黑白名单Delete接口 {@link DeleteIpAccessControlRequest} {@link DeleteIpAccessControlResponse} */
   DeleteIpAccessControl(data: DeleteIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIpAccessControlResponse>;
-  /** {@link DeleteSession 删除CC攻击的session设置}({@link DeleteSessionRequest 请求参数}): {@link DeleteSessionResponse 返回参数} */
+  /** 删除CC攻击的session设置 {@link DeleteSessionRequest} {@link DeleteSessionResponse} */
   DeleteSession(data: DeleteSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSessionResponse>;
-  /** {@link DescribeAccessExports 获取访问日志导出列表}({@link DescribeAccessExportsRequest 请求参数}): {@link DescribeAccessExportsResponse 返回参数} */
+  /** 获取访问日志导出列表 {@link DescribeAccessExportsRequest} {@link DescribeAccessExportsResponse} */
   DescribeAccessExports(data: DescribeAccessExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessExportsResponse>;
-  /** {@link DescribeAccessFastAnalysis 访问日志快速分析统计}({@link DescribeAccessFastAnalysisRequest 请求参数}): {@link DescribeAccessFastAnalysisResponse 返回参数} */
+  /** 访问日志快速分析统计 {@link DescribeAccessFastAnalysisRequest} {@link DescribeAccessFastAnalysisResponse} */
   DescribeAccessFastAnalysis(data: DescribeAccessFastAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessFastAnalysisResponse>;
-  /** {@link DescribeAccessIndex 获取访问日志索引配置信息}({@link DescribeAccessIndexRequest 请求参数}): {@link DescribeAccessIndexResponse 返回参数} */
+  /** 获取访问日志索引配置信息 {@link DescribeAccessIndexRequest} {@link DescribeAccessIndexResponse} */
   DescribeAccessIndex(data?: DescribeAccessIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessIndexResponse>;
-  /** {@link DescribeAutoDenyIP 描述WAF自动封禁IP详情}({@link DescribeAutoDenyIPRequest 请求参数}): {@link DescribeAutoDenyIPResponse 返回参数} */
+  /** 描述WAF自动封禁IP详情 {@link DescribeAutoDenyIPRequest} {@link DescribeAutoDenyIPResponse} */
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
-  /** {@link DescribeDomainDetailsSaas 查询单个saas域名详情}({@link DescribeDomainDetailsSaasRequest 请求参数}): {@link DescribeDomainDetailsSaasResponse 返回参数} */
+  /** 查询单个saas域名详情 {@link DescribeDomainDetailsSaasRequest} {@link DescribeDomainDetailsSaasResponse} */
   DescribeDomainDetailsSaas(data: DescribeDomainDetailsSaasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainDetailsSaasResponse>;
-  /** {@link DescribeDomainWhiteRules 获取域名的规则白名单}({@link DescribeDomainWhiteRulesRequest 请求参数}): {@link DescribeDomainWhiteRulesResponse 返回参数} */
+  /** 获取域名的规则白名单 {@link DescribeDomainWhiteRulesRequest} {@link DescribeDomainWhiteRulesResponse} */
   DescribeDomainWhiteRules(data: DescribeDomainWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainWhiteRulesResponse>;
-  /** {@link DescribeDomains 查询用户所有域名的详细信息}({@link DescribeDomainsRequest 请求参数}): {@link DescribeDomainsResponse 返回参数} */
+  /** 查询用户所有域名的详细信息 {@link DescribeDomainsRequest} {@link DescribeDomainsResponse} */
   DescribeDomains(data: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
-  /** {@link DescribeFlowTrend 获取waf流量访问趋势}({@link DescribeFlowTrendRequest 请求参数}): {@link DescribeFlowTrendResponse 返回参数} */
+  /** 获取waf流量访问趋势 {@link DescribeFlowTrendRequest} {@link DescribeFlowTrendResponse} */
   DescribeFlowTrend(data: DescribeFlowTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTrendResponse>;
-  /** {@link DescribeInstances 查询用户所有实例的详细信息}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
+  /** 查询用户所有实例的详细信息 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** {@link DescribeIpAccessControl Waf ip黑白名单查询}({@link DescribeIpAccessControlRequest 请求参数}): {@link DescribeIpAccessControlResponse 返回参数} */
+  /** Waf ip黑白名单查询 {@link DescribeIpAccessControlRequest} {@link DescribeIpAccessControlResponse} */
   DescribeIpAccessControl(data: DescribeIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpAccessControlResponse>;
-  /** {@link DescribeIpHitItems Waf IP封堵状态查询}({@link DescribeIpHitItemsRequest 请求参数}): {@link DescribeIpHitItemsResponse 返回参数} */
+  /** Waf IP封堵状态查询 {@link DescribeIpHitItemsRequest} {@link DescribeIpHitItemsResponse} */
   DescribeIpHitItems(data: DescribeIpHitItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpHitItemsResponse>;
-  /** {@link DescribeUserCdcClbWafRegions 获取CDC场景下对客户已经开放的负载均衡型WAF(cdc-clb-waf)的地域}({@link DescribeUserCdcClbWafRegionsRequest 请求参数}): {@link DescribeUserCdcClbWafRegionsResponse 返回参数} */
+  /** 获取CDC场景下对客户已经开放的负载均衡型WAF(cdc-clb-waf)的地域 {@link DescribeUserCdcClbWafRegionsRequest} {@link DescribeUserCdcClbWafRegionsResponse} */
   DescribeUserCdcClbWafRegions(data?: DescribeUserCdcClbWafRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCdcClbWafRegionsResponse>;
-  /** {@link DescribeUserClbWafRegions 获取对客户已经开放的负载均衡型WAF(clb-waf)的地域}({@link DescribeUserClbWafRegionsRequest 请求参数}): {@link DescribeUserClbWafRegionsResponse 返回参数} */
+  /** 获取对客户已经开放的负载均衡型WAF(clb-waf)的地域 {@link DescribeUserClbWafRegionsRequest} {@link DescribeUserClbWafRegionsResponse} */
   DescribeUserClbWafRegions(data?: DescribeUserClbWafRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserClbWafRegionsResponse>;
-  /** {@link DescribeWafAutoDenyRules 查询ip惩罚规则}({@link DescribeWafAutoDenyRulesRequest 请求参数}): {@link DescribeWafAutoDenyRulesResponse 返回参数} */
+  /** 查询ip惩罚规则 {@link DescribeWafAutoDenyRulesRequest} {@link DescribeWafAutoDenyRulesResponse} */
   DescribeWafAutoDenyRules(data: DescribeWafAutoDenyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafAutoDenyRulesResponse>;
-  /** {@link DescribeWafAutoDenyStatus 描述WAF自动封禁模块详情}({@link DescribeWafAutoDenyStatusRequest 请求参数}): {@link DescribeWafAutoDenyStatusResponse 返回参数} */
+  /** 描述WAF自动封禁模块详情 {@link DescribeWafAutoDenyStatusRequest} {@link DescribeWafAutoDenyStatusResponse} */
   DescribeWafAutoDenyStatus(data?: DescribeWafAutoDenyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafAutoDenyStatusResponse>;
-  /** {@link DescribeWafThreatenIntelligence 描述WAF威胁情报封禁模块配置详情}({@link DescribeWafThreatenIntelligenceRequest 请求参数}): {@link DescribeWafThreatenIntelligenceResponse 返回参数} */
+  /** 描述WAF威胁情报封禁模块配置详情 {@link DescribeWafThreatenIntelligenceRequest} {@link DescribeWafThreatenIntelligenceResponse} */
   DescribeWafThreatenIntelligence(data?: DescribeWafThreatenIntelligenceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafThreatenIntelligenceResponse>;
-  /** {@link GetAttackDownloadRecords 查询下载攻击日志任务记录列表}({@link GetAttackDownloadRecordsRequest 请求参数}): {@link GetAttackDownloadRecordsResponse 返回参数} */
+  /** 查询下载攻击日志任务记录列表 {@link GetAttackDownloadRecordsRequest} {@link GetAttackDownloadRecordsResponse} */
   GetAttackDownloadRecords(data?: GetAttackDownloadRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackDownloadRecordsResponse>;
-  /** {@link ModifyAccessPeriod 修改访问日志保存期限}({@link ModifyAccessPeriodRequest 请求参数}): {@link ModifyAccessPeriodResponse 返回参数} */
+  /** 修改访问日志保存期限 {@link ModifyAccessPeriodRequest} {@link ModifyAccessPeriodResponse} */
   ModifyAccessPeriod(data: ModifyAccessPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessPeriodResponse>;
-  /** {@link ModifyCustomRuleStatus 开启或禁用自定义策略}({@link ModifyCustomRuleStatusRequest 请求参数}): {@link ModifyCustomRuleStatusResponse 返回参数} */
+  /** 开启或禁用自定义策略 {@link ModifyCustomRuleStatusRequest} {@link ModifyCustomRuleStatusResponse} */
   ModifyCustomRuleStatus(data: ModifyCustomRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomRuleStatusResponse>;
-  /** {@link ModifyDomainWhiteRule 更改某一条规则}({@link ModifyDomainWhiteRuleRequest 请求参数}): {@link ModifyDomainWhiteRuleResponse 返回参数} */
+  /** 更改某一条规则 {@link ModifyDomainWhiteRuleRequest} {@link ModifyDomainWhiteRuleResponse} */
   ModifyDomainWhiteRule(data: ModifyDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainWhiteRuleResponse>;
-  /** {@link ModifyWafAutoDenyRules 修改ip惩罚规则}({@link ModifyWafAutoDenyRulesRequest 请求参数}): {@link ModifyWafAutoDenyRulesResponse 返回参数} */
+  /** 修改ip惩罚规则 {@link ModifyWafAutoDenyRulesRequest} {@link ModifyWafAutoDenyRulesResponse} */
   ModifyWafAutoDenyRules(data: ModifyWafAutoDenyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafAutoDenyRulesResponse>;
-  /** {@link ModifyWafAutoDenyStatus 配置WAF自动封禁模块状态}({@link ModifyWafAutoDenyStatusRequest 请求参数}): {@link ModifyWafAutoDenyStatusResponse 返回参数} */
+  /** 配置WAF自动封禁模块状态 {@link ModifyWafAutoDenyStatusRequest} {@link ModifyWafAutoDenyStatusResponse} */
   ModifyWafAutoDenyStatus(data: ModifyWafAutoDenyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafAutoDenyStatusResponse>;
-  /** {@link ModifyWafThreatenIntelligence 配置WAF威胁情报封禁模块详情}({@link ModifyWafThreatenIntelligenceRequest 请求参数}): {@link ModifyWafThreatenIntelligenceResponse 返回参数} */
+  /** 配置WAF威胁情报封禁模块详情 {@link ModifyWafThreatenIntelligenceRequest} {@link ModifyWafThreatenIntelligenceResponse} */
   ModifyWafThreatenIntelligence(data: ModifyWafThreatenIntelligenceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWafThreatenIntelligenceResponse>;
-  /** {@link PostAttackDownloadTask 创建搜索下载攻击日志任务}({@link PostAttackDownloadTaskRequest 请求参数}): {@link PostAttackDownloadTaskResponse 返回参数} */
+  /** 创建搜索下载攻击日志任务 {@link PostAttackDownloadTaskRequest} {@link PostAttackDownloadTaskResponse} */
   PostAttackDownloadTask(data: PostAttackDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<PostAttackDownloadTaskResponse>;
-  /** {@link SearchAccessLog 搜索访问日志}({@link SearchAccessLogRequest 请求参数}): {@link SearchAccessLogResponse 返回参数} */
+  /** 搜索访问日志 {@link SearchAccessLogRequest} {@link SearchAccessLogResponse} */
   SearchAccessLog(data: SearchAccessLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchAccessLogResponse>;
-  /** {@link UpsertIpAccessControl Waf IP黑白名单Upsert接口}({@link UpsertIpAccessControlRequest 请求参数}): {@link UpsertIpAccessControlResponse 返回参数} */
+  /** Waf IP黑白名单Upsert接口 {@link UpsertIpAccessControlRequest} {@link UpsertIpAccessControlResponse} */
   UpsertIpAccessControl(data: UpsertIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertIpAccessControlResponse>;
 }
 

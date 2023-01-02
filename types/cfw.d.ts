@@ -602,7 +602,7 @@ declare interface AddAcRuleResponse {
   ReturnCode: number;
   /** success代表成功，failed代表失败 */
   ReturnMsg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -620,7 +620,7 @@ declare interface AddEnterpriseSecurityGroupRulesRequest {
 declare interface AddEnterpriseSecurityGroupRulesResponse {
   /** 状态值，0：添加成功，非0：添加失败 */
   Status: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -648,7 +648,7 @@ declare interface CreateAcRulesResponse {
   Status: number;
   /** 返回多余的信息 */
   Info: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -660,7 +660,7 @@ declare interface CreateChooseVpcsRequest {
 }
 
 declare interface CreateChooseVpcsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -672,7 +672,7 @@ declare interface CreateDatabaseWhiteListRulesRequest {
 declare interface CreateDatabaseWhiteListRulesResponse {
   /** 状态值，0:添加成功，非0：添加失败 */
   Status: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -698,7 +698,7 @@ declare interface CreateNatFwInstanceRequest {
 declare interface CreateNatFwInstanceResponse {
   /** 防火墙实例id */
   CfwInsId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -728,7 +728,7 @@ declare interface CreateNatFwInstanceWithDomainRequest {
 declare interface CreateNatFwInstanceWithDomainResponse {
   /** nat实例信息 */
   CfwInsId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -746,7 +746,7 @@ declare interface CreateSecurityGroupRulesRequest {
 declare interface CreateSecurityGroupRulesResponse {
   /** 状态值，0：添加成功，非0：添加失败 */
   Status: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -766,7 +766,7 @@ declare interface DeleteAcRuleResponse {
   Status: number;
   /** 返回多余的信息 */
   Info: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -784,7 +784,7 @@ declare interface DeleteAllAccessControlRuleResponse {
   Status: number;
   /** 删除了几条访问控制规则 */
   Info: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -794,7 +794,7 @@ declare interface DeleteNatFwInstanceRequest {
 }
 
 declare interface DeleteNatFwInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -804,7 +804,7 @@ declare interface DeleteResourceGroupRequest {
 }
 
 declare interface DeleteResourceGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -824,7 +824,7 @@ declare interface DeleteSecurityGroupRuleResponse {
   Status: number;
   /** 返回多余的信息 */
   Info: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -832,7 +832,7 @@ declare interface DeleteVpcInstanceRequest {
 }
 
 declare interface DeleteVpcInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -868,7 +868,7 @@ declare interface DescribeAcListsResponse {
   AllTotal: number;
   /** 访问控制规则全部启用/全部停用 */
   Enable: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -896,7 +896,7 @@ declare interface DescribeAssociatedInstanceListResponse {
   Total: number | null;
   /** 实例列表 */
   Data: AssociatedInstanceInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -922,7 +922,7 @@ declare interface DescribeBlockByIpTimesListRequest {
 declare interface DescribeBlockByIpTimesListResponse {
   /** 返回数据 */
   Data: IpStatic[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -942,7 +942,7 @@ declare interface DescribeBlockStaticListRequest {
 declare interface DescribeBlockStaticListResponse {
   /** 无 */
   Data: StaticInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -958,7 +958,7 @@ declare interface DescribeCfwEipsRequest {
 declare interface DescribeCfwEipsResponse {
   /** 返回值信息 */
   NatFwEipList: NatFwEipsInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -980,7 +980,7 @@ declare interface DescribeDefenseSwitchResponse {
   ReturnCode: number;
   /** 状态信息，success：查询成功，fail：查询失败 */
   ReturnMsg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1016,7 +1016,7 @@ declare interface DescribeEnterpriseSecurityGroupRuleResponse {
   Rules: SecurityGroupRule[];
   /** 访问控制策略的总数量。 */
   TotalCount: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1026,7 +1026,7 @@ declare interface DescribeGuideScanInfoRequest {
 declare interface DescribeGuideScanInfoResponse {
   /** 扫描信息 */
   Data: ScanInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1042,7 +1042,7 @@ declare interface DescribeIPStatusListResponse {
   ReturnCode: number;
   /** 状态信息 */
   ReturnMsg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1058,7 +1058,7 @@ declare interface DescribeNatFwInfoCountResponse {
   SubnetCount: number | null;
   /** 打开开关个数 */
   OpenSwitchCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1068,7 +1068,7 @@ declare interface DescribeNatFwInstanceRequest {
 declare interface DescribeNatFwInstanceResponse {
   /** 实例数组 */
   NatinsLst: NatFwInstance[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1078,7 +1078,7 @@ declare interface DescribeNatFwInstanceWithRegionRequest {
 declare interface DescribeNatFwInstanceWithRegionResponse {
   /** 实例数组 */
   NatinsLst: NatFwInstance[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1096,7 +1096,7 @@ declare interface DescribeNatFwInstancesInfoResponse {
   NatinsLst: NatInstanceInfo[] | null;
   /** nat 防火墙个数 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1118,7 +1118,7 @@ declare interface DescribeNatFwVpcDnsLstResponse {
   ReturnMsg: string | null;
   /** 开关总条数 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1140,7 +1140,7 @@ declare interface DescribeResourceGroupNewResponse {
   ReturnMsg: string;
   /** 返回码；0为请求成功 */
   ReturnCode: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1154,7 +1154,7 @@ declare interface DescribeResourceGroupRequest {
 declare interface DescribeResourceGroupResponse {
   /** 返回树形结构 */
   Data: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1174,7 +1174,7 @@ declare interface DescribeRuleOverviewResponse {
   StopRuleNum: number | null;
   /** 剩余配额 */
   RemainingNum: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1204,7 +1204,7 @@ declare interface DescribeSecurityGroupListResponse {
   AllTotal: number;
   /** 访问控制规则全部启用/全部停用 */
   Enable: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1230,7 +1230,7 @@ declare interface DescribeSourceAssetResponse {
   Data: InstanceInfo[];
   /** 返回数据总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1264,7 +1264,7 @@ declare interface DescribeSwitchListsResponse {
   OnNum: number | null;
   /** 关闭个数 */
   OffNum: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1282,7 +1282,7 @@ declare interface DescribeTLogInfoRequest {
 declare interface DescribeTLogInfoResponse {
   /** 无 */
   Data: TLogInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1302,7 +1302,7 @@ declare interface DescribeTLogIpListRequest {
 declare interface DescribeTLogIpListResponse {
   /** 数据集合 */
   Data: StaticInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1320,7 +1320,7 @@ declare interface DescribeTableStatusRequest {
 declare interface DescribeTableStatusResponse {
   /** 0：正常，其它：不正常 */
   Status: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1340,7 +1340,7 @@ declare interface DescribeUnHandleEventTabListResponse {
   ReturnCode: number;
   /** 返回信息 success成功 */
   ReturnMsg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1354,7 +1354,7 @@ declare interface ExpandCfwVerticalRequest {
 }
 
 declare interface ExpandCfwVerticalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1374,7 +1374,7 @@ declare interface ModifyAcRuleResponse {
   Status: number;
   /** 返回多余的信息 */
   Info: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1390,7 +1390,7 @@ declare interface ModifyAllPublicIPSwitchStatusResponse {
   ReturnMsg: string | null;
   /** 接口返回错误码，0请求成功 非0失败 */
   ReturnCode: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1408,7 +1408,7 @@ declare interface ModifyAllRuleStatusRequest {
 declare interface ModifyAllRuleStatusResponse {
   /** 0: 修改成功, 其他: 修改失败 */
   Status: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1420,7 +1420,7 @@ declare interface ModifyAllVPCSwitchStatusRequest {
 }
 
 declare interface ModifyAllVPCSwitchStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1446,7 +1446,7 @@ declare interface ModifyAssetScanResponse {
   ReturnCode: number | null;
   /** 状态值 0：成功，1 执行扫描中,其他：失败 */
   Status: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1468,7 +1468,7 @@ declare interface ModifyBlockIgnoreListResponse {
   ReturnMsg: string;
   /** 接口返回错误码，0请求成功 非0失败 */
   ReturnCode: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1480,7 +1480,7 @@ declare interface ModifyBlockTopRequest {
 }
 
 declare interface ModifyBlockTopResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1496,7 +1496,7 @@ declare interface ModifyNatFwReSelectRequest {
 }
 
 declare interface ModifyNatFwReSelectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1512,7 +1512,7 @@ declare interface ModifyNatFwSwitchRequest {
 }
 
 declare interface ModifyNatFwSwitchResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1526,7 +1526,7 @@ declare interface ModifyNatFwVpcDnsSwitchRequest {
 declare interface ModifyNatFwVpcDnsSwitchResponse {
   /** 修改成功 */
   ReturnMsg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1542,7 +1542,7 @@ declare interface ModifyPublicIPSwitchStatusResponse {
   ReturnMsg: string | null;
   /** 接口返回错误码，0请求成功 非0失败 */
   ReturnCode: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1556,7 +1556,7 @@ declare interface ModifyResourceGroupRequest {
 }
 
 declare interface ModifyResourceGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1568,7 +1568,7 @@ declare interface ModifyRunSyncAssetRequest {
 declare interface ModifyRunSyncAssetResponse {
   /** 0：同步成功，1：资产更新中，2：后台同步调用失败 */
   Status: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1584,7 +1584,7 @@ declare interface ModifySecurityGroupItemRuleStatusRequest {
 declare interface ModifySecurityGroupItemRuleStatusResponse {
   /** 状态值，0：修改成功，非0：修改失败 */
   Status: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1604,7 +1604,7 @@ declare interface ModifySecurityGroupRuleResponse {
   Status: number;
   /** 编辑后新生成规则的Id */
   NewRuleId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1618,7 +1618,7 @@ declare interface ModifySecurityGroupSequenceRulesRequest {
 declare interface ModifySecurityGroupSequenceRulesResponse {
   /** 状态值，0：修改成功，非0：修改失败 */
   Status: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1636,7 +1636,7 @@ declare interface ModifySequenceRulesRequest {
 declare interface ModifySequenceRulesResponse {
   /** 0: 修改成功, 非0: 修改失败 */
   Status: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1654,7 +1654,7 @@ declare interface ModifyTableStatusRequest {
 declare interface ModifyTableStatusResponse {
   /** 0：正常，-1：不正常 */
   Status: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1670,7 +1670,7 @@ declare interface RemoveAcRuleResponse {
   ReturnCode: number | null;
   /** success代表成功，failed代表失败 */
   ReturnMsg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1686,7 +1686,7 @@ declare interface RemoveEnterpriseSecurityGroupRuleResponse {
   RuleUuid: number;
   /** 0代表成功，-1代表失败 */
   Status: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1706,7 +1706,7 @@ declare interface SetNatFwDnatRuleRequest {
 }
 
 declare interface SetNatFwDnatRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1720,7 +1720,7 @@ declare interface SetNatFwEipRequest {
 }
 
 declare interface SetNatFwEipResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1732,136 +1732,136 @@ declare interface StopSecurityGroupRuleDispatchRequest {
 declare interface StopSecurityGroupRuleDispatchResponse {
   /** true代表成功，false代表错误 */
   Status: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cfw 云防火墙} */
 declare interface Cfw {
   (): Versions;
-  /** {@link AddAcRule 添加互联网边界规则}({@link AddAcRuleRequest 请求参数}): {@link AddAcRuleResponse 返回参数} */
+  /** 添加互联网边界规则 {@link AddAcRuleRequest} {@link AddAcRuleResponse} */
   AddAcRule(data: AddAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddAcRuleResponse>;
-  /** {@link AddEnterpriseSecurityGroupRules 创建新企业安全组规则}({@link AddEnterpriseSecurityGroupRulesRequest 请求参数}): {@link AddEnterpriseSecurityGroupRulesResponse 返回参数} */
+  /** 创建新企业安全组规则 {@link AddEnterpriseSecurityGroupRulesRequest} {@link AddEnterpriseSecurityGroupRulesResponse} */
   AddEnterpriseSecurityGroupRules(data: AddEnterpriseSecurityGroupRulesRequest, config?: AxiosRequestConfig): AxiosPromise<AddEnterpriseSecurityGroupRulesResponse>;
-  /** {@link CreateAcRules 创建访问控制规则}({@link CreateAcRulesRequest 请求参数}): {@link CreateAcRulesResponse 返回参数} */
+  /** 创建访问控制规则 {@link CreateAcRulesRequest} {@link CreateAcRulesResponse} */
   CreateAcRules(data: CreateAcRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAcRulesResponse>;
-  /** {@link CreateChooseVpcs 创建、选择vpc}({@link CreateChooseVpcsRequest 请求参数}): {@link CreateChooseVpcsResponse 返回参数} */
+  /** 创建、选择vpc {@link CreateChooseVpcsRequest} {@link CreateChooseVpcsResponse} */
   CreateChooseVpcs(data: CreateChooseVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChooseVpcsResponse>;
-  /** {@link CreateDatabaseWhiteListRules 创建暴露数据库白名单规则}({@link CreateDatabaseWhiteListRulesRequest 请求参数}): {@link CreateDatabaseWhiteListRulesResponse 返回参数} */
+  /** 创建暴露数据库白名单规则 {@link CreateDatabaseWhiteListRulesRequest} {@link CreateDatabaseWhiteListRulesResponse} */
   CreateDatabaseWhiteListRules(data: CreateDatabaseWhiteListRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatabaseWhiteListRulesResponse>;
-  /** {@link CreateNatFwInstance 创建NAT防火墙实例（Region参数必填）}({@link CreateNatFwInstanceRequest 请求参数}): {@link CreateNatFwInstanceResponse 返回参数} */
+  /** 创建NAT防火墙实例（Region参数必填） {@link CreateNatFwInstanceRequest} {@link CreateNatFwInstanceResponse} */
   CreateNatFwInstance(data: CreateNatFwInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNatFwInstanceResponse>;
-  /** {@link CreateNatFwInstanceWithDomain 创建防火墙实例和接入域名（Region参数必填）}({@link CreateNatFwInstanceWithDomainRequest 请求参数}): {@link CreateNatFwInstanceWithDomainResponse 返回参数} */
+  /** 创建防火墙实例和接入域名（Region参数必填） {@link CreateNatFwInstanceWithDomainRequest} {@link CreateNatFwInstanceWithDomainResponse} */
   CreateNatFwInstanceWithDomain(data: CreateNatFwInstanceWithDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNatFwInstanceWithDomainResponse>;
-  /** {@link CreateSecurityGroupRules 创建企业安全组规则}({@link CreateSecurityGroupRulesRequest 请求参数}): {@link CreateSecurityGroupRulesResponse 返回参数} */
+  /** 创建企业安全组规则 {@link CreateSecurityGroupRulesRequest} {@link CreateSecurityGroupRulesResponse} */
   CreateSecurityGroupRules(data: CreateSecurityGroupRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityGroupRulesResponse>;
-  /** {@link DeleteAcRule 删除规则}({@link DeleteAcRuleRequest 请求参数}): {@link DeleteAcRuleResponse 返回参数} */
+  /** 删除规则 {@link DeleteAcRuleRequest} {@link DeleteAcRuleResponse} */
   DeleteAcRule(data: DeleteAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAcRuleResponse>;
-  /** {@link DeleteAllAccessControlRule 全部删除规则}({@link DeleteAllAccessControlRuleRequest 请求参数}): {@link DeleteAllAccessControlRuleResponse 返回参数} */
+  /** 全部删除规则 {@link DeleteAllAccessControlRuleRequest} {@link DeleteAllAccessControlRuleResponse} */
   DeleteAllAccessControlRule(data?: DeleteAllAccessControlRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllAccessControlRuleResponse>;
-  /** {@link DeleteNatFwInstance 销毁防火墙实例}({@link DeleteNatFwInstanceRequest 请求参数}): {@link DeleteNatFwInstanceResponse 返回参数} */
+  /** 销毁防火墙实例 {@link DeleteNatFwInstanceRequest} {@link DeleteNatFwInstanceResponse} */
   DeleteNatFwInstance(data: DeleteNatFwInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNatFwInstanceResponse>;
-  /** {@link DeleteResourceGroup 资产中心资产组删除}({@link DeleteResourceGroupRequest 请求参数}): {@link DeleteResourceGroupResponse 返回参数} */
+  /** 资产中心资产组删除 {@link DeleteResourceGroupRequest} {@link DeleteResourceGroupResponse} */
   DeleteResourceGroup(data: DeleteResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceGroupResponse>;
-  /** {@link DeleteSecurityGroupRule 删除安全组规则}({@link DeleteSecurityGroupRuleRequest 请求参数}): {@link DeleteSecurityGroupRuleResponse 返回参数} */
+  /** 删除安全组规则 {@link DeleteSecurityGroupRuleRequest} {@link DeleteSecurityGroupRuleResponse} */
   DeleteSecurityGroupRule(data: DeleteSecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityGroupRuleResponse>;
-  /** {@link DeleteVpcInstance 删除防火墙实例}({@link DeleteVpcInstanceRequest 请求参数}): {@link DeleteVpcInstanceResponse 返回参数} */
+  /** 删除防火墙实例 {@link DeleteVpcInstanceRequest} {@link DeleteVpcInstanceResponse} */
   DeleteVpcInstance(data?: DeleteVpcInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcInstanceResponse>;
-  /** {@link DescribeAcLists 访问控制列表}({@link DescribeAcListsRequest 请求参数}): {@link DescribeAcListsResponse 返回参数} */
+  /** 访问控制列表 {@link DescribeAcListsRequest} {@link DescribeAcListsResponse} */
   DescribeAcLists(data?: DescribeAcListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAcListsResponse>;
-  /** {@link DescribeAssociatedInstanceList 获取安全组关联实例列表}({@link DescribeAssociatedInstanceListRequest 请求参数}): {@link DescribeAssociatedInstanceListResponse 返回参数} */
+  /** 获取安全组关联实例列表 {@link DescribeAssociatedInstanceListRequest} {@link DescribeAssociatedInstanceListResponse} */
   DescribeAssociatedInstanceList(data: DescribeAssociatedInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssociatedInstanceListResponse>;
-  /** {@link DescribeBlockByIpTimesList 告警中心阻断IP折线图}({@link DescribeBlockByIpTimesListRequest 请求参数}): {@link DescribeBlockByIpTimesListResponse 返回参数} */
+  /** 告警中心阻断IP折线图 {@link DescribeBlockByIpTimesListRequest} {@link DescribeBlockByIpTimesListResponse} */
   DescribeBlockByIpTimesList(data: DescribeBlockByIpTimesListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockByIpTimesListResponse>;
-  /** {@link DescribeBlockStaticList 告警中心柱形图}({@link DescribeBlockStaticListRequest 请求参数}): {@link DescribeBlockStaticListResponse 返回参数} */
+  /** 告警中心柱形图 {@link DescribeBlockStaticListRequest} {@link DescribeBlockStaticListResponse} */
   DescribeBlockStaticList(data: DescribeBlockStaticListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockStaticListResponse>;
-  /** {@link DescribeCfwEips 查询防火墙弹性公网IP}({@link DescribeCfwEipsRequest 请求参数}): {@link DescribeCfwEipsResponse 返回参数} */
+  /** 查询防火墙弹性公网IP {@link DescribeCfwEipsRequest} {@link DescribeCfwEipsResponse} */
   DescribeCfwEips(data: DescribeCfwEipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwEipsResponse>;
-  /** {@link DescribeDefenseSwitch 获取入侵防御按钮列表}({@link DescribeDefenseSwitchRequest 请求参数}): {@link DescribeDefenseSwitchResponse 返回参数} */
+  /** 获取入侵防御按钮列表 {@link DescribeDefenseSwitchRequest} {@link DescribeDefenseSwitchResponse} */
   DescribeDefenseSwitch(data?: DescribeDefenseSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefenseSwitchResponse>;
-  /** {@link DescribeEnterpriseSecurityGroupRule 查询新企业安全组规则}({@link DescribeEnterpriseSecurityGroupRuleRequest 请求参数}): {@link DescribeEnterpriseSecurityGroupRuleResponse 返回参数} */
+  /** 查询新企业安全组规则 {@link DescribeEnterpriseSecurityGroupRuleRequest} {@link DescribeEnterpriseSecurityGroupRuleResponse} */
   DescribeEnterpriseSecurityGroupRule(data: DescribeEnterpriseSecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnterpriseSecurityGroupRuleResponse>;
-  /** {@link DescribeGuideScanInfo 新手引导扫描接口信息}({@link DescribeGuideScanInfoRequest 请求参数}): {@link DescribeGuideScanInfoResponse 返回参数} */
+  /** 新手引导扫描接口信息 {@link DescribeGuideScanInfoRequest} {@link DescribeGuideScanInfoResponse} */
   DescribeGuideScanInfo(data?: DescribeGuideScanInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGuideScanInfoResponse>;
-  /** {@link DescribeIPStatusList ip防护状态查询}({@link DescribeIPStatusListRequest 请求参数}): {@link DescribeIPStatusListResponse 返回参数} */
+  /** ip防护状态查询 {@link DescribeIPStatusListRequest} {@link DescribeIPStatusListResponse} */
   DescribeIPStatusList(data: DescribeIPStatusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStatusListResponse>;
-  /** {@link DescribeNatFwInfoCount 获取当前用户接入nat防火墙的所有子网数及natfw实例个数}({@link DescribeNatFwInfoCountRequest 请求参数}): {@link DescribeNatFwInfoCountResponse 返回参数} */
+  /** 获取当前用户接入nat防火墙的所有子网数及natfw实例个数 {@link DescribeNatFwInfoCountRequest} {@link DescribeNatFwInfoCountResponse} */
   DescribeNatFwInfoCount(data?: DescribeNatFwInfoCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwInfoCountResponse>;
-  /** {@link DescribeNatFwInstance 获取租户所有NAT实例}({@link DescribeNatFwInstanceRequest 请求参数}): {@link DescribeNatFwInstanceResponse 返回参数} */
+  /** 获取租户所有NAT实例 {@link DescribeNatFwInstanceRequest} {@link DescribeNatFwInstanceResponse} */
   DescribeNatFwInstance(data?: DescribeNatFwInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwInstanceResponse>;
-  /** {@link DescribeNatFwInstanceWithRegion 获取租户可运维NAT实例}({@link DescribeNatFwInstanceWithRegionRequest 请求参数}): {@link DescribeNatFwInstanceWithRegionResponse 返回参数} */
+  /** 获取租户可运维NAT实例 {@link DescribeNatFwInstanceWithRegionRequest} {@link DescribeNatFwInstanceWithRegionResponse} */
   DescribeNatFwInstanceWithRegion(data?: DescribeNatFwInstanceWithRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwInstanceWithRegionResponse>;
-  /** {@link DescribeNatFwInstancesInfo 获取租户所有NAT实例卡片信息}({@link DescribeNatFwInstancesInfoRequest 请求参数}): {@link DescribeNatFwInstancesInfoResponse 返回参数} */
+  /** 获取租户所有NAT实例卡片信息 {@link DescribeNatFwInstancesInfoRequest} {@link DescribeNatFwInstancesInfoResponse} */
   DescribeNatFwInstancesInfo(data?: DescribeNatFwInstancesInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwInstancesInfoResponse>;
-  /** {@link DescribeNatFwVpcDnsLst 展示当前natfw 实例对应的vpc dns开关}({@link DescribeNatFwVpcDnsLstRequest 请求参数}): {@link DescribeNatFwVpcDnsLstResponse 返回参数} */
+  /** 展示当前natfw 实例对应的vpc dns开关 {@link DescribeNatFwVpcDnsLstRequest} {@link DescribeNatFwVpcDnsLstResponse} */
   DescribeNatFwVpcDnsLst(data: DescribeNatFwVpcDnsLstRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwVpcDnsLstResponse>;
-  /** {@link DescribeResourceGroup 资产中心资产树信息查询}({@link DescribeResourceGroupRequest 请求参数}): {@link DescribeResourceGroupResponse 返回参数} */
+  /** 资产中心资产树信息查询 {@link DescribeResourceGroupRequest} {@link DescribeResourceGroupResponse} */
   DescribeResourceGroup(data: DescribeResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGroupResponse>;
-  /** {@link DescribeResourceGroupNew 资产中心资产树信息查询new}({@link DescribeResourceGroupNewRequest 请求参数}): {@link DescribeResourceGroupNewResponse 返回参数} */
+  /** 资产中心资产树信息查询new {@link DescribeResourceGroupNewRequest} {@link DescribeResourceGroupNewResponse} */
   DescribeResourceGroupNew(data: DescribeResourceGroupNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGroupNewResponse>;
-  /** {@link DescribeRuleOverview 查询规则列表概况}({@link DescribeRuleOverviewRequest 请求参数}): {@link DescribeRuleOverviewResponse 返回参数} */
+  /** 查询规则列表概况 {@link DescribeRuleOverviewRequest} {@link DescribeRuleOverviewResponse} */
   DescribeRuleOverview(data?: DescribeRuleOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleOverviewResponse>;
-  /** {@link DescribeSecurityGroupList 查询安全组规则列表}({@link DescribeSecurityGroupListRequest 请求参数}): {@link DescribeSecurityGroupListResponse 返回参数} */
+  /** 查询安全组规则列表 {@link DescribeSecurityGroupListRequest} {@link DescribeSecurityGroupListResponse} */
   DescribeSecurityGroupList(data: DescribeSecurityGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupListResponse>;
-  /** {@link DescribeSourceAsset 查询资产组全部资产信息}({@link DescribeSourceAssetRequest 请求参数}): {@link DescribeSourceAssetResponse 返回参数} */
+  /** 查询资产组全部资产信息 {@link DescribeSourceAssetRequest} {@link DescribeSourceAssetResponse} */
   DescribeSourceAsset(data?: DescribeSourceAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceAssetResponse>;
-  /** {@link DescribeSwitchLists 防火墙开关列表}({@link DescribeSwitchListsRequest 请求参数}): {@link DescribeSwitchListsResponse 返回参数} */
+  /** 防火墙开关列表 {@link DescribeSwitchListsRequest} {@link DescribeSwitchListsResponse} */
   DescribeSwitchLists(data?: DescribeSwitchListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSwitchListsResponse>;
-  /** {@link DescribeTLogInfo 告警中心概况}({@link DescribeTLogInfoRequest 请求参数}): {@link DescribeTLogInfoResponse 返回参数} */
+  /** 告警中心概况 {@link DescribeTLogInfoRequest} {@link DescribeTLogInfoResponse} */
   DescribeTLogInfo(data: DescribeTLogInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTLogInfoResponse>;
-  /** {@link DescribeTLogIpList 告警中心IP柱形图}({@link DescribeTLogIpListRequest 请求参数}): {@link DescribeTLogIpListResponse 返回参数} */
+  /** 告警中心IP柱形图 {@link DescribeTLogIpListRequest} {@link DescribeTLogIpListResponse} */
   DescribeTLogIpList(data: DescribeTLogIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTLogIpListResponse>;
-  /** {@link DescribeTableStatus 查询规则表状态}({@link DescribeTableStatusRequest 请求参数}): {@link DescribeTableStatusResponse 返回参数} */
+  /** 查询规则表状态 {@link DescribeTableStatusRequest} {@link DescribeTableStatusResponse} */
   DescribeTableStatus(data?: DescribeTableStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableStatusResponse>;
-  /** {@link DescribeUnHandleEventTabList 告警中心伪攻击链事件未处置接口}({@link DescribeUnHandleEventTabListRequest 请求参数}): {@link DescribeUnHandleEventTabListResponse 返回参数} */
+  /** 告警中心伪攻击链事件未处置接口 {@link DescribeUnHandleEventTabListRequest} {@link DescribeUnHandleEventTabListResponse} */
   DescribeUnHandleEventTabList(data: DescribeUnHandleEventTabListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnHandleEventTabListResponse>;
-  /** {@link ExpandCfwVertical 防火墙垂直扩容}({@link ExpandCfwVerticalRequest 请求参数}): {@link ExpandCfwVerticalResponse 返回参数} */
+  /** 防火墙垂直扩容 {@link ExpandCfwVerticalRequest} {@link ExpandCfwVerticalResponse} */
   ExpandCfwVertical(data: ExpandCfwVerticalRequest, config?: AxiosRequestConfig): AxiosPromise<ExpandCfwVerticalResponse>;
-  /** {@link ModifyAcRule 修改规则}({@link ModifyAcRuleRequest 请求参数}): {@link ModifyAcRuleResponse 返回参数} */
+  /** 修改规则 {@link ModifyAcRuleRequest} {@link ModifyAcRuleResponse} */
   ModifyAcRule(data: ModifyAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAcRuleResponse>;
-  /** {@link ModifyAllPublicIPSwitchStatus 互联网边界防火墙一键开关}({@link ModifyAllPublicIPSwitchStatusRequest 请求参数}): {@link ModifyAllPublicIPSwitchStatusResponse 返回参数} */
+  /** 互联网边界防火墙一键开关 {@link ModifyAllPublicIPSwitchStatusRequest} {@link ModifyAllPublicIPSwitchStatusResponse} */
   ModifyAllPublicIPSwitchStatus(data: ModifyAllPublicIPSwitchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllPublicIPSwitchStatusResponse>;
-  /** {@link ModifyAllRuleStatus 启用停用全部规则}({@link ModifyAllRuleStatusRequest 请求参数}): {@link ModifyAllRuleStatusResponse 返回参数} */
+  /** 启用停用全部规则 {@link ModifyAllRuleStatusRequest} {@link ModifyAllRuleStatusResponse} */
   ModifyAllRuleStatus(data: ModifyAllRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllRuleStatusResponse>;
-  /** {@link ModifyAllVPCSwitchStatus VPC防火墙一键开关}({@link ModifyAllVPCSwitchStatusRequest 请求参数}): {@link ModifyAllVPCSwitchStatusResponse 返回参数} */
+  /** VPC防火墙一键开关 {@link ModifyAllVPCSwitchStatusRequest} {@link ModifyAllVPCSwitchStatusResponse} */
   ModifyAllVPCSwitchStatus(data: ModifyAllVPCSwitchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllVPCSwitchStatusResponse>;
-  /** {@link ModifyAssetScan 资产扫描}({@link ModifyAssetScanRequest 请求参数}): {@link ModifyAssetScanResponse 返回参数} */
+  /** 资产扫描 {@link ModifyAssetScanRequest} {@link ModifyAssetScanResponse} */
   ModifyAssetScan(data: ModifyAssetScanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetScanResponse>;
-  /** {@link ModifyBlockIgnoreList 封禁列表和放通列表批量操作接口}({@link ModifyBlockIgnoreListRequest 请求参数}): {@link ModifyBlockIgnoreListResponse 返回参数} */
+  /** 封禁列表和放通列表批量操作接口 {@link ModifyBlockIgnoreListRequest} {@link ModifyBlockIgnoreListResponse} */
   ModifyBlockIgnoreList(data: ModifyBlockIgnoreListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockIgnoreListResponse>;
-  /** {@link ModifyBlockTop 取消阻断记录置顶接口}({@link ModifyBlockTopRequest 请求参数}): {@link ModifyBlockTopResponse 返回参数} */
+  /** 取消阻断记录置顶接口 {@link ModifyBlockTopRequest} {@link ModifyBlockTopResponse} */
   ModifyBlockTop(data: ModifyBlockTopRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockTopResponse>;
-  /** {@link ModifyNatFwReSelect 防火墙实例重新选择vpc或nat}({@link ModifyNatFwReSelectRequest 请求参数}): {@link ModifyNatFwReSelectResponse 返回参数} */
+  /** 防火墙实例重新选择vpc或nat {@link ModifyNatFwReSelectRequest} {@link ModifyNatFwReSelectResponse} */
   ModifyNatFwReSelect(data: ModifyNatFwReSelectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatFwReSelectResponse>;
-  /** {@link ModifyNatFwSwitch 修改NAT防火墙开关}({@link ModifyNatFwSwitchRequest 请求参数}): {@link ModifyNatFwSwitchResponse 返回参数} */
+  /** 修改NAT防火墙开关 {@link ModifyNatFwSwitchRequest} {@link ModifyNatFwSwitchResponse} */
   ModifyNatFwSwitch(data: ModifyNatFwSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatFwSwitchResponse>;
-  /** {@link ModifyNatFwVpcDnsSwitch nat 防火墙VPC DNS 开关切换}({@link ModifyNatFwVpcDnsSwitchRequest 请求参数}): {@link ModifyNatFwVpcDnsSwitchResponse 返回参数} */
+  /** nat 防火墙VPC DNS 开关切换 {@link ModifyNatFwVpcDnsSwitchRequest} {@link ModifyNatFwVpcDnsSwitchResponse} */
   ModifyNatFwVpcDnsSwitch(data: ModifyNatFwVpcDnsSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatFwVpcDnsSwitchResponse>;
-  /** {@link ModifyPublicIPSwitchStatus 单个修改互联网边界防火墙开关}({@link ModifyPublicIPSwitchStatusRequest 请求参数}): {@link ModifyPublicIPSwitchStatusResponse 返回参数} */
+  /** 单个修改互联网边界防火墙开关 {@link ModifyPublicIPSwitchStatusRequest} {@link ModifyPublicIPSwitchStatusResponse} */
   ModifyPublicIPSwitchStatus(data: ModifyPublicIPSwitchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPublicIPSwitchStatusResponse>;
-  /** {@link ModifyResourceGroup 资产中心资产组信息修改}({@link ModifyResourceGroupRequest 请求参数}): {@link ModifyResourceGroupResponse 返回参数} */
+  /** 资产中心资产组信息修改 {@link ModifyResourceGroupRequest} {@link ModifyResourceGroupResponse} */
   ModifyResourceGroup(data: ModifyResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceGroupResponse>;
-  /** {@link ModifyRunSyncAsset 同步资产-互联网&VPC（新）}({@link ModifyRunSyncAssetRequest 请求参数}): {@link ModifyRunSyncAssetResponse 返回参数} */
+  /** 同步资产-互联网&VPC（新） {@link ModifyRunSyncAssetRequest} {@link ModifyRunSyncAssetResponse} */
   ModifyRunSyncAsset(data?: ModifyRunSyncAssetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRunSyncAssetResponse>;
-  /** {@link ModifySecurityGroupItemRuleStatus 启用停用单条企业安全组规则}({@link ModifySecurityGroupItemRuleStatusRequest 请求参数}): {@link ModifySecurityGroupItemRuleStatusResponse 返回参数} */
+  /** 启用停用单条企业安全组规则 {@link ModifySecurityGroupItemRuleStatusRequest} {@link ModifySecurityGroupItemRuleStatusResponse} */
   ModifySecurityGroupItemRuleStatus(data: ModifySecurityGroupItemRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityGroupItemRuleStatusResponse>;
-  /** {@link ModifySecurityGroupRule 编辑单条安全组规则}({@link ModifySecurityGroupRuleRequest 请求参数}): {@link ModifySecurityGroupRuleResponse 返回参数} */
+  /** 编辑单条安全组规则 {@link ModifySecurityGroupRuleRequest} {@link ModifySecurityGroupRuleResponse} */
   ModifySecurityGroupRule(data: ModifySecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityGroupRuleResponse>;
-  /** {@link ModifySecurityGroupSequenceRules 企业安全组规则快速排序}({@link ModifySecurityGroupSequenceRulesRequest 请求参数}): {@link ModifySecurityGroupSequenceRulesResponse 返回参数} */
+  /** 企业安全组规则快速排序 {@link ModifySecurityGroupSequenceRulesRequest} {@link ModifySecurityGroupSequenceRulesResponse} */
   ModifySecurityGroupSequenceRules(data: ModifySecurityGroupSequenceRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityGroupSequenceRulesResponse>;
-  /** {@link ModifySequenceRules 修改规则执行顺序}({@link ModifySequenceRulesRequest 请求参数}): {@link ModifySequenceRulesResponse 返回参数} */
+  /** 修改规则执行顺序 {@link ModifySequenceRulesRequest} {@link ModifySequenceRulesResponse} */
   ModifySequenceRules(data?: ModifySequenceRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySequenceRulesResponse>;
-  /** {@link ModifyTableStatus 修改规则表状态}({@link ModifyTableStatusRequest 请求参数}): {@link ModifyTableStatusResponse 返回参数} */
+  /** 修改规则表状态 {@link ModifyTableStatusRequest} {@link ModifyTableStatusResponse} */
   ModifyTableStatus(data?: ModifyTableStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTableStatusResponse>;
-  /** {@link RemoveAcRule 删除互联网边界规则}({@link RemoveAcRuleRequest 请求参数}): {@link RemoveAcRuleResponse 返回参数} */
+  /** 删除互联网边界规则 {@link RemoveAcRuleRequest} {@link RemoveAcRuleResponse} */
   RemoveAcRule(data: RemoveAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveAcRuleResponse>;
-  /** {@link RemoveEnterpriseSecurityGroupRule 删除新企业安全组规则}({@link RemoveEnterpriseSecurityGroupRuleRequest 请求参数}): {@link RemoveEnterpriseSecurityGroupRuleResponse 返回参数} */
+  /** 删除新企业安全组规则 {@link RemoveEnterpriseSecurityGroupRuleRequest} {@link RemoveEnterpriseSecurityGroupRuleResponse} */
   RemoveEnterpriseSecurityGroupRule(data: RemoveEnterpriseSecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveEnterpriseSecurityGroupRuleResponse>;
-  /** {@link SetNatFwDnatRule 配置防火墙Dnat规则}({@link SetNatFwDnatRuleRequest 请求参数}): {@link SetNatFwDnatRuleResponse 返回参数} */
+  /** 配置防火墙Dnat规则 {@link SetNatFwDnatRuleRequest} {@link SetNatFwDnatRuleResponse} */
   SetNatFwDnatRule(data: SetNatFwDnatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SetNatFwDnatRuleResponse>;
-  /** {@link SetNatFwEip 设置防火墙实例弹性公网ip}({@link SetNatFwEipRequest 请求参数}): {@link SetNatFwEipResponse 返回参数} */
+  /** 设置防火墙实例弹性公网ip {@link SetNatFwEipRequest} {@link SetNatFwEipResponse} */
   SetNatFwEip(data: SetNatFwEipRequest, config?: AxiosRequestConfig): AxiosPromise<SetNatFwEipResponse>;
-  /** {@link StopSecurityGroupRuleDispatch 中止安全组规则下发}({@link StopSecurityGroupRuleDispatchRequest 请求参数}): {@link StopSecurityGroupRuleDispatchResponse 返回参数} */
+  /** 中止安全组规则下发 {@link StopSecurityGroupRuleDispatchRequest} {@link StopSecurityGroupRuleDispatchResponse} */
   StopSecurityGroupRuleDispatch(data?: StopSecurityGroupRuleDispatchRequest, config?: AxiosRequestConfig): AxiosPromise<StopSecurityGroupRuleDispatchResponse>;
 }
 

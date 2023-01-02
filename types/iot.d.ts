@@ -406,7 +406,7 @@ declare interface ActivateRuleRequest {
 }
 
 declare interface ActivateRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -420,7 +420,7 @@ declare interface AddDeviceRequest {
 declare interface AddDeviceResponse {
   /** 设备信息 */
   Device?: Device;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -444,7 +444,7 @@ declare interface AddProductRequest {
 declare interface AddProductResponse {
   /** 产品信息 */
   Product?: Product;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -464,7 +464,7 @@ declare interface AddRuleRequest {
 declare interface AddRuleResponse {
   /** 规则 */
   Rule?: Rule;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -478,7 +478,7 @@ declare interface AddTopicRequest {
 declare interface AddTopicResponse {
   /** Topic信息 */
   Topic?: Topic;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -492,7 +492,7 @@ declare interface AppAddUserRequest {
 declare interface AppAddUserResponse {
   /** 应用用户 */
   AppUser?: AppUser;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -506,7 +506,7 @@ declare interface AppDeleteDeviceRequest {
 }
 
 declare interface AppDeleteDeviceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -522,7 +522,7 @@ declare interface AppGetDeviceDataRequest {
 declare interface AppGetDeviceDataResponse {
   /** 设备数据。 */
   DeviceData?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -538,7 +538,7 @@ declare interface AppGetDeviceRequest {
 declare interface AppGetDeviceResponse {
   /** 绑定设备详情 */
   AppDevice?: AppDeviceDetail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -552,7 +552,7 @@ declare interface AppGetDeviceStatusesRequest {
 declare interface AppGetDeviceStatusesResponse {
   /** 设备状态 */
   DeviceStatuses?: DeviceStatus[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -564,7 +564,7 @@ declare interface AppGetDevicesRequest {
 declare interface AppGetDevicesResponse {
   /** 绑定设备列表 */
   Devices?: AppDevice[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -580,7 +580,7 @@ declare interface AppGetTokenRequest {
 declare interface AppGetTokenResponse {
   /** 访问Token */
   AccessToken?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -592,7 +592,7 @@ declare interface AppGetUserRequest {
 declare interface AppGetUserResponse {
   /** 用户信息 */
   AppUser?: AppUser;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -610,7 +610,7 @@ declare interface AppIssueDeviceControlRequest {
 }
 
 declare interface AppIssueDeviceControlResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -624,7 +624,7 @@ declare interface AppResetPasswordRequest {
 }
 
 declare interface AppResetPasswordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -638,7 +638,7 @@ declare interface AppSecureAddDeviceRequest {
 declare interface AppSecureAddDeviceResponse {
   /** 绑定设备信息 */
   AppDevice?: AppDevice;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -656,7 +656,7 @@ declare interface AppUpdateDeviceRequest {
 declare interface AppUpdateDeviceResponse {
   /** 设备信息 */
   AppDevice?: AppDevice;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -670,7 +670,7 @@ declare interface AppUpdateUserRequest {
 declare interface AppUpdateUserResponse {
   /** 应用用户 */
   AppUser?: AppUser;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -682,7 +682,7 @@ declare interface AssociateSubDeviceToGatewayProductRequest {
 }
 
 declare interface AssociateSubDeviceToGatewayProductResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -692,7 +692,7 @@ declare interface DeactivateRuleRequest {
 }
 
 declare interface DeactivateRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -704,7 +704,7 @@ declare interface DeleteDeviceRequest {
 }
 
 declare interface DeleteDeviceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -714,7 +714,7 @@ declare interface DeleteProductRequest {
 }
 
 declare interface DeleteProductResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -724,7 +724,7 @@ declare interface DeleteRuleRequest {
 }
 
 declare interface DeleteRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -736,7 +736,7 @@ declare interface DeleteTopicRequest {
 }
 
 declare interface DeleteTopicResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -764,7 +764,7 @@ declare interface GetDataHistoryResponse {
   ScrollId?: string;
   /** 查询游标超时 */
   ScrollTimeout?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -794,7 +794,7 @@ declare interface GetDebugLogResponse {
   ScrollId?: string;
   /** 游标超时 */
   ScrollTimeout?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -808,7 +808,7 @@ declare interface GetDeviceDataRequest {
 declare interface GetDeviceDataResponse {
   /** 设备数据 */
   DeviceData?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -838,7 +838,7 @@ declare interface GetDeviceLogResponse {
   ScrollId?: string;
   /** 游标超时 */
   ScrollTimeout?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -852,7 +852,7 @@ declare interface GetDeviceRequest {
 declare interface GetDeviceResponse {
   /** 设备信息 */
   Device?: Device;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -868,7 +868,7 @@ declare interface GetDeviceSignaturesRequest {
 declare interface GetDeviceSignaturesResponse {
   /** 设备绑定签名列表 */
   DeviceSignatures?: DeviceSignature[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -884,7 +884,7 @@ declare interface GetDeviceStatisticsRequest {
 declare interface GetDeviceStatisticsResponse {
   /** 统计数据 */
   DeviceStatistics?: DeviceStatData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -898,7 +898,7 @@ declare interface GetDeviceStatusesRequest {
 declare interface GetDeviceStatusesResponse {
   /** 设备状态列表 */
   DeviceStatuses?: DeviceStatus[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -918,7 +918,7 @@ declare interface GetDevicesResponse {
   Devices?: DeviceEntry[];
   /** 设备总数 */
   Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -930,7 +930,7 @@ declare interface GetProductRequest {
 declare interface GetProductResponse {
   /** 产品信息 */
   Product?: Product;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -946,7 +946,7 @@ declare interface GetProductsResponse {
   Products?: ProductEntry[];
   /** Product总数 */
   Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -958,7 +958,7 @@ declare interface GetRuleRequest {
 declare interface GetRuleResponse {
   /** 规则 */
   Rule?: Rule;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -974,7 +974,7 @@ declare interface GetRulesResponse {
   Rules?: Rule[];
   /** 规则总数 */
   Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -988,7 +988,7 @@ declare interface GetTopicRequest {
 declare interface GetTopicResponse {
   /** Topic信息 */
   Topic?: Topic;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1006,7 +1006,7 @@ declare interface GetTopicsResponse {
   Topics?: Topic[];
   /** Topic总数 */
   Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1022,7 +1022,7 @@ declare interface IssueDeviceControlRequest {
 }
 
 declare interface IssueDeviceControlResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1036,7 +1036,7 @@ declare interface PublishMsgRequest {
 }
 
 declare interface PublishMsgResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1050,7 +1050,7 @@ declare interface ResetDeviceRequest {
 declare interface ResetDeviceResponse {
   /** 设备信息 */
   Device?: Device;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1062,7 +1062,7 @@ declare interface UnassociateSubDeviceFromGatewayProductRequest {
 }
 
 declare interface UnassociateSubDeviceFromGatewayProductResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1080,7 +1080,7 @@ declare interface UpdateProductRequest {
 declare interface UpdateProductResponse {
   /** 更新后的产品信息 */
   Product?: Product;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1102,102 +1102,102 @@ declare interface UpdateRuleRequest {
 declare interface UpdateRuleResponse {
   /** 规则 */
   Rule?: Rule;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Iot 加速物联网套件} */
 declare interface Iot {
   (): Versions;
-  /** {@link ActivateRule 启用规则}({@link ActivateRuleRequest 请求参数}): {@link ActivateRuleResponse 返回参数} */
+  /** 启用规则 {@link ActivateRuleRequest} {@link ActivateRuleResponse} */
   ActivateRule(data: ActivateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateRuleResponse>;
-  /** {@link AddDevice 新增设备}({@link AddDeviceRequest 请求参数}): {@link AddDeviceResponse 返回参数} */
+  /** 新增设备 {@link AddDeviceRequest} {@link AddDeviceResponse} */
   AddDevice(data: AddDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AddDeviceResponse>;
-  /** {@link AddProduct 新增产品}({@link AddProductRequest 请求参数}): {@link AddProductResponse 返回参数} */
+  /** 新增产品 {@link AddProductRequest} {@link AddProductResponse} */
   AddProduct(data: AddProductRequest, config?: AxiosRequestConfig): AxiosPromise<AddProductResponse>;
-  /** {@link AddRule 新增规则}({@link AddRuleRequest 请求参数}): {@link AddRuleResponse 返回参数} */
+  /** 新增规则 {@link AddRuleRequest} {@link AddRuleResponse} */
   AddRule(data: AddRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddRuleResponse>;
-  /** {@link AddTopic 新增Topic}({@link AddTopicRequest 请求参数}): {@link AddTopicResponse 返回参数} */
+  /** 新增Topic {@link AddTopicRequest} {@link AddTopicResponse} */
   AddTopic(data: AddTopicRequest, config?: AxiosRequestConfig): AxiosPromise<AddTopicResponse>;
-  /** {@link AppAddUser 用户注册}({@link AppAddUserRequest 请求参数}): {@link AppAddUserResponse 返回参数} */
+  /** 用户注册 {@link AppAddUserRequest} {@link AppAddUserResponse} */
   AppAddUser(data: AppAddUserRequest, config?: AxiosRequestConfig): AxiosPromise<AppAddUserResponse>;
-  /** {@link AppDeleteDevice 用户解绑设备}({@link AppDeleteDeviceRequest 请求参数}): {@link AppDeleteDeviceResponse 返回参数} */
+  /** 用户解绑设备 {@link AppDeleteDeviceRequest} {@link AppDeleteDeviceResponse} */
   AppDeleteDevice(data: AppDeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AppDeleteDeviceResponse>;
-  /** {@link AppGetDevice 获取绑定设备信息}({@link AppGetDeviceRequest 请求参数}): {@link AppGetDeviceResponse 返回参数} */
+  /** 获取绑定设备信息 {@link AppGetDeviceRequest} {@link AppGetDeviceResponse} */
   AppGetDevice(data: AppGetDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AppGetDeviceResponse>;
-  /** {@link AppGetDeviceData 获取绑定设备数据}({@link AppGetDeviceDataRequest 请求参数}): {@link AppGetDeviceDataResponse 返回参数} */
+  /** 获取绑定设备数据 {@link AppGetDeviceDataRequest} {@link AppGetDeviceDataResponse} */
   AppGetDeviceData(data: AppGetDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<AppGetDeviceDataResponse>;
-  /** {@link AppGetDeviceStatuses 获取绑定设备状态}({@link AppGetDeviceStatusesRequest 请求参数}): {@link AppGetDeviceStatusesResponse 返回参数} */
+  /** 获取绑定设备状态 {@link AppGetDeviceStatusesRequest} {@link AppGetDeviceStatusesResponse} */
   AppGetDeviceStatuses(data: AppGetDeviceStatusesRequest, config?: AxiosRequestConfig): AxiosPromise<AppGetDeviceStatusesResponse>;
-  /** {@link AppGetDevices 获取绑定设备列表}({@link AppGetDevicesRequest 请求参数}): {@link AppGetDevicesResponse 返回参数} */
+  /** 获取绑定设备列表 {@link AppGetDevicesRequest} {@link AppGetDevicesResponse} */
   AppGetDevices(data: AppGetDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<AppGetDevicesResponse>;
-  /** {@link AppGetToken 获取用户token}({@link AppGetTokenRequest 请求参数}): {@link AppGetTokenResponse 返回参数} */
+  /** 获取用户token {@link AppGetTokenRequest} {@link AppGetTokenResponse} */
   AppGetToken(data: AppGetTokenRequest, config?: AxiosRequestConfig): AxiosPromise<AppGetTokenResponse>;
-  /** {@link AppGetUser 获取用户信息}({@link AppGetUserRequest 请求参数}): {@link AppGetUserResponse 返回参数} */
+  /** 获取用户信息 {@link AppGetUserRequest} {@link AppGetUserResponse} */
   AppGetUser(data: AppGetUserRequest, config?: AxiosRequestConfig): AxiosPromise<AppGetUserResponse>;
-  /** {@link AppIssueDeviceControl 用户控制设备}({@link AppIssueDeviceControlRequest 请求参数}): {@link AppIssueDeviceControlResponse 返回参数} */
+  /** 用户控制设备 {@link AppIssueDeviceControlRequest} {@link AppIssueDeviceControlResponse} */
   AppIssueDeviceControl(data: AppIssueDeviceControlRequest, config?: AxiosRequestConfig): AxiosPromise<AppIssueDeviceControlResponse>;
-  /** {@link AppResetPassword 重置用户密码}({@link AppResetPasswordRequest 请求参数}): {@link AppResetPasswordResponse 返回参数} */
+  /** 重置用户密码 {@link AppResetPasswordRequest} {@link AppResetPasswordResponse} */
   AppResetPassword(data: AppResetPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<AppResetPasswordResponse>;
-  /** {@link AppSecureAddDevice 用户绑定设备}({@link AppSecureAddDeviceRequest 请求参数}): {@link AppSecureAddDeviceResponse 返回参数} */
+  /** 用户绑定设备 {@link AppSecureAddDeviceRequest} {@link AppSecureAddDeviceResponse} */
   AppSecureAddDevice(data: AppSecureAddDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AppSecureAddDeviceResponse>;
-  /** {@link AppUpdateDevice 修改设备别名}({@link AppUpdateDeviceRequest 请求参数}): {@link AppUpdateDeviceResponse 返回参数} */
+  /** 修改设备别名 {@link AppUpdateDeviceRequest} {@link AppUpdateDeviceResponse} */
   AppUpdateDevice(data: AppUpdateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AppUpdateDeviceResponse>;
-  /** {@link AppUpdateUser 用户信息修改}({@link AppUpdateUserRequest 请求参数}): {@link AppUpdateUserResponse 返回参数} */
+  /** 用户信息修改 {@link AppUpdateUserRequest} {@link AppUpdateUserResponse} */
   AppUpdateUser(data: AppUpdateUserRequest, config?: AxiosRequestConfig): AxiosPromise<AppUpdateUserResponse>;
-  /** {@link AssociateSubDeviceToGatewayProduct 关联子设备产品和网关产品}({@link AssociateSubDeviceToGatewayProductRequest 请求参数}): {@link AssociateSubDeviceToGatewayProductResponse 返回参数} */
+  /** 关联子设备产品和网关产品 {@link AssociateSubDeviceToGatewayProductRequest} {@link AssociateSubDeviceToGatewayProductResponse} */
   AssociateSubDeviceToGatewayProduct(data: AssociateSubDeviceToGatewayProductRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSubDeviceToGatewayProductResponse>;
-  /** {@link DeactivateRule 禁用规则}({@link DeactivateRuleRequest 请求参数}): {@link DeactivateRuleResponse 返回参数} */
+  /** 禁用规则 {@link DeactivateRuleRequest} {@link DeactivateRuleResponse} */
   DeactivateRule(data: DeactivateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeactivateRuleResponse>;
-  /** {@link DeleteDevice 删除设备}({@link DeleteDeviceRequest 请求参数}): {@link DeleteDeviceResponse 返回参数} */
+  /** 删除设备 {@link DeleteDeviceRequest} {@link DeleteDeviceResponse} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
-  /** {@link DeleteProduct 删除产品}({@link DeleteProductRequest 请求参数}): {@link DeleteProductResponse 返回参数} */
+  /** 删除产品 {@link DeleteProductRequest} {@link DeleteProductResponse} */
   DeleteProduct(data: DeleteProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProductResponse>;
-  /** {@link DeleteRule 删除规则}({@link DeleteRuleRequest 请求参数}): {@link DeleteRuleResponse 返回参数} */
+  /** 删除规则 {@link DeleteRuleRequest} {@link DeleteRuleResponse} */
   DeleteRule(data: DeleteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleResponse>;
-  /** {@link DeleteTopic 删除Topic}({@link DeleteTopicRequest 请求参数}): {@link DeleteTopicResponse 返回参数} */
+  /** 删除Topic {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
-  /** {@link GetDataHistory 获取设备历史数据}({@link GetDataHistoryRequest 请求参数}): {@link GetDataHistoryResponse 返回参数} */
+  /** 获取设备历史数据 {@link GetDataHistoryRequest} {@link GetDataHistoryResponse} */
   GetDataHistory(data: GetDataHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<GetDataHistoryResponse>;
-  /** {@link GetDebugLog 获取调试日志}({@link GetDebugLogRequest 请求参数}): {@link GetDebugLogResponse 返回参数} */
+  /** 获取调试日志 {@link GetDebugLogRequest} {@link GetDebugLogResponse} */
   GetDebugLog(data: GetDebugLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetDebugLogResponse>;
-  /** {@link GetDevice 获取设备信息}({@link GetDeviceRequest 请求参数}): {@link GetDeviceResponse 返回参数} */
+  /** 获取设备信息 {@link GetDeviceRequest} {@link GetDeviceResponse} */
   GetDevice(data: GetDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceResponse>;
-  /** {@link GetDeviceData 获取设备数据}({@link GetDeviceDataRequest 请求参数}): {@link GetDeviceDataResponse 返回参数} */
+  /** 获取设备数据 {@link GetDeviceDataRequest} {@link GetDeviceDataResponse} */
   GetDeviceData(data: GetDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceDataResponse>;
-  /** {@link GetDeviceLog 获取设备日志}({@link GetDeviceLogRequest 请求参数}): {@link GetDeviceLogResponse 返回参数} */
+  /** 获取设备日志 {@link GetDeviceLogRequest} {@link GetDeviceLogResponse} */
   GetDeviceLog(data: GetDeviceLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceLogResponse>;
-  /** {@link GetDeviceSignatures 获取设备绑定签名}({@link GetDeviceSignaturesRequest 请求参数}): {@link GetDeviceSignaturesResponse 返回参数} */
+  /** 获取设备绑定签名 {@link GetDeviceSignaturesRequest} {@link GetDeviceSignaturesResponse} */
   GetDeviceSignatures(data: GetDeviceSignaturesRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceSignaturesResponse>;
-  /** {@link GetDeviceStatistics 获取设备统计指标}({@link GetDeviceStatisticsRequest 请求参数}): {@link GetDeviceStatisticsResponse 返回参数} */
+  /** 获取设备统计指标 {@link GetDeviceStatisticsRequest} {@link GetDeviceStatisticsResponse} */
   GetDeviceStatistics(data?: GetDeviceStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceStatisticsResponse>;
-  /** {@link GetDeviceStatuses 批量获取设备状态}({@link GetDeviceStatusesRequest 请求参数}): {@link GetDeviceStatusesResponse 返回参数} */
+  /** 批量获取设备状态 {@link GetDeviceStatusesRequest} {@link GetDeviceStatusesResponse} */
   GetDeviceStatuses(data: GetDeviceStatusesRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceStatusesResponse>;
-  /** {@link GetDevices 获取设备列表}({@link GetDevicesRequest 请求参数}): {@link GetDevicesResponse 返回参数} */
+  /** 获取设备列表 {@link GetDevicesRequest} {@link GetDevicesResponse} */
   GetDevices(data: GetDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<GetDevicesResponse>;
-  /** {@link GetProduct 获取产品信息}({@link GetProductRequest 请求参数}): {@link GetProductResponse 返回参数} */
+  /** 获取产品信息 {@link GetProductRequest} {@link GetProductResponse} */
   GetProduct(data: GetProductRequest, config?: AxiosRequestConfig): AxiosPromise<GetProductResponse>;
-  /** {@link GetProducts 获取产品列表}({@link GetProductsRequest 请求参数}): {@link GetProductsResponse 返回参数} */
+  /** 获取产品列表 {@link GetProductsRequest} {@link GetProductsResponse} */
   GetProducts(data?: GetProductsRequest, config?: AxiosRequestConfig): AxiosPromise<GetProductsResponse>;
-  /** {@link GetRule 获取转发规则信息}({@link GetRuleRequest 请求参数}): {@link GetRuleResponse 返回参数} */
+  /** 获取转发规则信息 {@link GetRuleRequest} {@link GetRuleResponse} */
   GetRule(data: GetRuleRequest, config?: AxiosRequestConfig): AxiosPromise<GetRuleResponse>;
-  /** {@link GetRules 获取转发规则列表}({@link GetRulesRequest 请求参数}): {@link GetRulesResponse 返回参数} */
+  /** 获取转发规则列表 {@link GetRulesRequest} {@link GetRulesResponse} */
   GetRules(data?: GetRulesRequest, config?: AxiosRequestConfig): AxiosPromise<GetRulesResponse>;
-  /** {@link GetTopic 获取Topic信息}({@link GetTopicRequest 请求参数}): {@link GetTopicResponse 返回参数} */
+  /** 获取Topic信息 {@link GetTopicRequest} {@link GetTopicResponse} */
   GetTopic(data: GetTopicRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicResponse>;
-  /** {@link GetTopics 获取Topic列表}({@link GetTopicsRequest 请求参数}): {@link GetTopicsResponse 返回参数} */
+  /** 获取Topic列表 {@link GetTopicsRequest} {@link GetTopicsResponse} */
   GetTopics(data: GetTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicsResponse>;
-  /** {@link IssueDeviceControl 下发设备控制指令}({@link IssueDeviceControlRequest 请求参数}): {@link IssueDeviceControlResponse 返回参数} */
+  /** 下发设备控制指令 {@link IssueDeviceControlRequest} {@link IssueDeviceControlResponse} */
   IssueDeviceControl(data: IssueDeviceControlRequest, config?: AxiosRequestConfig): AxiosPromise<IssueDeviceControlResponse>;
-  /** {@link PublishMsg 向Topic发布消息}({@link PublishMsgRequest 请求参数}): {@link PublishMsgResponse 返回参数} */
+  /** 向Topic发布消息 {@link PublishMsgRequest} {@link PublishMsgResponse} */
   PublishMsg(data: PublishMsgRequest, config?: AxiosRequestConfig): AxiosPromise<PublishMsgResponse>;
-  /** {@link ResetDevice 重置设备}({@link ResetDeviceRequest 请求参数}): {@link ResetDeviceResponse 返回参数} */
+  /** 重置设备 {@link ResetDeviceRequest} {@link ResetDeviceResponse} */
   ResetDevice(data: ResetDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDeviceResponse>;
-  /** {@link UnassociateSubDeviceFromGatewayProduct 取消子设备产品与网关设备产品的关联}({@link UnassociateSubDeviceFromGatewayProductRequest 请求参数}): {@link UnassociateSubDeviceFromGatewayProductResponse 返回参数} */
+  /** 取消子设备产品与网关设备产品的关联 {@link UnassociateSubDeviceFromGatewayProductRequest} {@link UnassociateSubDeviceFromGatewayProductResponse} */
   UnassociateSubDeviceFromGatewayProduct(data: UnassociateSubDeviceFromGatewayProductRequest, config?: AxiosRequestConfig): AxiosPromise<UnassociateSubDeviceFromGatewayProductResponse>;
-  /** {@link UpdateProduct 更新产品信息}({@link UpdateProductRequest 请求参数}): {@link UpdateProductResponse 返回参数} */
+  /** 更新产品信息 {@link UpdateProductRequest} {@link UpdateProductResponse} */
   UpdateProduct(data: UpdateProductRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProductResponse>;
-  /** {@link UpdateRule 更新规则}({@link UpdateRuleRequest 请求参数}): {@link UpdateRuleResponse 返回参数} */
+  /** 更新规则 {@link UpdateRuleRequest} {@link UpdateRuleResponse} */
   UpdateRule(data: UpdateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRuleResponse>;
 }
 

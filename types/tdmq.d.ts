@@ -974,7 +974,7 @@ declare interface AcknowledgeMessageRequest {
 declare interface AcknowledgeMessageResponse {
   /** 如果为“”，则说明没有错误返回 */
   ErrorMsg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -984,7 +984,7 @@ declare interface ClearCmqQueueRequest {
 }
 
 declare interface ClearCmqQueueResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -996,7 +996,7 @@ declare interface ClearCmqSubscriptionFilterTagsRequest {
 }
 
 declare interface ClearCmqSubscriptionFilterTagsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1010,7 +1010,7 @@ declare interface CreateAMQPClusterRequest {
 declare interface CreateAMQPClusterResponse {
   /** 集群ID */
   ClusterId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1032,7 +1032,7 @@ declare interface CreateAMQPExchangeRequest {
 }
 
 declare interface CreateAMQPExchangeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1054,7 +1054,7 @@ declare interface CreateAMQPQueueRequest {
 }
 
 declare interface CreateAMQPQueueResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1076,7 +1076,7 @@ declare interface CreateAMQPRouteRelationRequest {
 }
 
 declare interface CreateAMQPRouteRelationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1092,7 +1092,7 @@ declare interface CreateAMQPVHostRequest {
 }
 
 declare interface CreateAMQPVHostResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1112,7 +1112,7 @@ declare interface CreateClusterRequest {
 declare interface CreateClusterResponse {
   /** 集群ID */
   ClusterId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1156,7 +1156,7 @@ declare interface CreateCmqQueueRequest {
 declare interface CreateCmqQueueResponse {
   /** 创建成功的queueId */
   QueueId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1182,7 +1182,7 @@ declare interface CreateCmqSubscribeRequest {
 declare interface CreateCmqSubscribeResponse {
   /** 订阅id */
   SubscriptionId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1204,7 +1204,7 @@ declare interface CreateCmqTopicRequest {
 declare interface CreateCmqTopicResponse {
   /** 主题id */
   TopicId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1230,7 +1230,7 @@ declare interface CreateEnvironmentResponse {
   Remark: string | null;
   /** 命名空间ID */
   NamespaceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1246,7 +1246,7 @@ declare interface CreateEnvironmentRoleRequest {
 }
 
 declare interface CreateEnvironmentRoleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1260,7 +1260,7 @@ declare interface CreateRocketMQClusterRequest {
 declare interface CreateRocketMQClusterResponse {
   /** 集群ID */
   ClusterId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1284,7 +1284,7 @@ declare interface CreateRocketMQGroupRequest {
 }
 
 declare interface CreateRocketMQGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1302,7 +1302,7 @@ declare interface CreateRocketMQNamespaceRequest {
 }
 
 declare interface CreateRocketMQNamespaceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1322,7 +1322,7 @@ declare interface CreateRocketMQTopicRequest {
 }
 
 declare interface CreateRocketMQTopicResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1342,7 +1342,7 @@ declare interface CreateRoleResponse {
   Token: string;
   /** 备注说明 */
   Remark: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1368,7 +1368,7 @@ declare interface CreateSubscriptionRequest {
 declare interface CreateSubscriptionResponse {
   /** 创建结果。 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1400,7 +1400,7 @@ declare interface CreateTopicResponse {
   Remark: string | null;
   /** 0： 普通消息；1 ：全局顺序消息；2 ：局部顺序消息；3 ：重试队列；4 ：死信队列； */
   TopicType: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1410,7 +1410,7 @@ declare interface DeleteAMQPClusterRequest {
 }
 
 declare interface DeleteAMQPClusterResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1424,7 +1424,7 @@ declare interface DeleteAMQPExchangeRequest {
 }
 
 declare interface DeleteAMQPExchangeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1438,7 +1438,7 @@ declare interface DeleteAMQPQueueRequest {
 }
 
 declare interface DeleteAMQPQueueResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1452,7 +1452,7 @@ declare interface DeleteAMQPRouteRelationRequest {
 }
 
 declare interface DeleteAMQPRouteRelationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1464,7 +1464,7 @@ declare interface DeleteAMQPVHostRequest {
 }
 
 declare interface DeleteAMQPVHostResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1476,7 +1476,7 @@ declare interface DeleteClusterRequest {
 declare interface DeleteClusterResponse {
   /** 集群的ID */
   ClusterId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1486,7 +1486,7 @@ declare interface DeleteCmqQueueRequest {
 }
 
 declare interface DeleteCmqQueueResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1498,7 +1498,7 @@ declare interface DeleteCmqSubscribeRequest {
 }
 
 declare interface DeleteCmqSubscribeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1508,7 +1508,7 @@ declare interface DeleteCmqTopicRequest {
 }
 
 declare interface DeleteCmqTopicResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1522,7 +1522,7 @@ declare interface DeleteEnvironmentRolesRequest {
 }
 
 declare interface DeleteEnvironmentRolesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1536,7 +1536,7 @@ declare interface DeleteEnvironmentsRequest {
 declare interface DeleteEnvironmentsResponse {
   /** 成功删除的环境（命名空间）数组。 */
   EnvironmentIds: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1546,7 +1546,7 @@ declare interface DeleteRocketMQClusterRequest {
 }
 
 declare interface DeleteRocketMQClusterResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1560,7 +1560,7 @@ declare interface DeleteRocketMQGroupRequest {
 }
 
 declare interface DeleteRocketMQGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1572,7 +1572,7 @@ declare interface DeleteRocketMQNamespaceRequest {
 }
 
 declare interface DeleteRocketMQNamespaceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1586,7 +1586,7 @@ declare interface DeleteRocketMQTopicRequest {
 }
 
 declare interface DeleteRocketMQTopicResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1600,7 +1600,7 @@ declare interface DeleteRolesRequest {
 declare interface DeleteRolesResponse {
   /** 成功删除的角色名称数组。 */
   RoleNames: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1618,7 +1618,7 @@ declare interface DeleteSubscriptionsRequest {
 declare interface DeleteSubscriptionsResponse {
   /** 成功删除的订阅关系数组。 */
   SubscriptionTopicSets: SubscriptionTopic[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1636,7 +1636,7 @@ declare interface DeleteTopicsRequest {
 declare interface DeleteTopicsResponse {
   /** 被删除的主题数组。 */
   TopicSets: TopicRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1652,7 +1652,7 @@ declare interface DescribeAMQPClusterResponse {
   ClusterConfig: AMQPClusterConfig;
   /** 集群最近使用量 */
   ClusterStats: AMQPClusterRecentStats | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1678,7 +1678,7 @@ declare interface DescribeAMQPClustersResponse {
   ClusterList: AMQPClusterDetail[] | null;
   /** 总条数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1696,7 +1696,7 @@ declare interface DescribeAMQPCreateQuotaResponse {
   QueueCapacity: number;
   /** 单Vhost TPS */
   MaxTpsPerVHost: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1722,7 +1722,7 @@ declare interface DescribeAMQPExchangesResponse {
   TotalCount: number;
   /** 主题信息列表 */
   Exchanges: AMQPExchange[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1750,7 +1750,7 @@ declare interface DescribeAMQPQueuesResponse {
   TotalCount: number;
   /** 队列信息列表 */
   Queues: AMQPQueueDetail[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1776,7 +1776,7 @@ declare interface DescribeAMQPRouteRelationsResponse {
   TotalCount: number;
   /** 路由关系列表 */
   RouteRelations: AMQPRouteRelation[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1798,7 +1798,7 @@ declare interface DescribeAMQPVHostsResponse {
   VHosts: AMQPVHost[];
   /** 总条数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1826,7 +1826,7 @@ declare interface DescribeAllTenantsResponse {
   TotalCount: number;
   /** 虚拟集群列表 */
   Tenants: InternalTenant[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1838,7 +1838,7 @@ declare interface DescribeBindClustersResponse {
   TotalCount: number;
   /** 专享集群的列表 */
   ClusterSet: BindCluster[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1856,7 +1856,7 @@ declare interface DescribeBindVpcsResponse {
   TotalCount?: number;
   /** Vpc集合。 */
   VpcSets?: VpcBindRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1868,7 +1868,7 @@ declare interface DescribeClusterDetailRequest {
 declare interface DescribeClusterDetailResponse {
   /** 集群的详细信息 */
   ClusterSet: Cluster;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1890,7 +1890,7 @@ declare interface DescribeClustersResponse {
   TotalCount: number;
   /** 集群信息列表 */
   ClusterSet: Cluster[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1910,7 +1910,7 @@ declare interface DescribeCmqDeadLetterSourceQueuesResponse {
   TotalCount: number;
   /** 死信队列源队列 */
   QueueSet: CmqDeadLetterSource[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1922,7 +1922,7 @@ declare interface DescribeCmqQueueDetailRequest {
 declare interface DescribeCmqQueueDetailResponse {
   /** 队列详情列表。 */
   QueueDescribe: CmqQueue;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1946,7 +1946,7 @@ declare interface DescribeCmqQueuesResponse {
   TotalCount: number;
   /** 队列列表 */
   QueueList: CmqQueue[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1966,7 +1966,7 @@ declare interface DescribeCmqSubscriptionDetailResponse {
   TotalCount: number;
   /** Subscription属性集合 */
   SubscriptionSet: CmqSubscription[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1978,7 +1978,7 @@ declare interface DescribeCmqTopicDetailRequest {
 declare interface DescribeCmqTopicDetailResponse {
   /** 主题详情 */
   TopicDescribe: CmqTopic;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2002,7 +2002,7 @@ declare interface DescribeCmqTopicsResponse {
   TopicList: CmqTopic[] | null;
   /** 全量主题数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2030,7 +2030,7 @@ declare interface DescribeEnvironmentAttributesResponse {
   Replicas: number;
   /** 备注。 */
   Remark: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2054,7 +2054,7 @@ declare interface DescribeEnvironmentRolesResponse {
   TotalCount: number;
   /** 命名空间角色集合。 */
   EnvironmentRoleSets: EnvironmentRole[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2076,7 +2076,7 @@ declare interface DescribeEnvironmentsResponse {
   TotalCount: number;
   /** 命名空间集合数组。 */
   EnvironmentSet: Environment[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2100,7 +2100,7 @@ declare interface DescribeNamespaceBundlesOptResponse {
   TotalCount: number;
   /** bundle列表 */
   BundleSet: BundleSetOpt[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2114,7 +2114,7 @@ declare interface DescribeNodeHealthOptResponse {
   NodeState: number;
   /** 最近一次健康检查的时间 */
   LatestHealthCheckTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2136,7 +2136,7 @@ declare interface DescribePublisherSummaryResponse {
   PublisherCount: number | null;
   /** 消息存储大小，以字节为单位 */
   StorageSize: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2162,7 +2162,7 @@ declare interface DescribePublishersResponse {
   TotalCount: number;
   /** 生产者信息列表 */
   Publishers: Publisher[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2180,7 +2180,7 @@ declare interface DescribeRabbitMQNodeListResponse {
   TotalCount: number;
   /** 集群列表 */
   NodeList: RabbitMQPrivateNode[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2198,7 +2198,7 @@ declare interface DescribeRabbitMQVipInstancesResponse {
   TotalCount: number;
   /** 实例信息列表 */
   Instances: RabbitMQVipInstance[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2214,7 +2214,7 @@ declare interface DescribeRocketMQClusterResponse {
   ClusterConfig: RocketMQClusterConfig;
   /** 集群最近使用量 */
   ClusterStats: RocketMQClusterRecentStats | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2240,7 +2240,7 @@ declare interface DescribeRocketMQClustersResponse {
   ClusterList: RocketMQClusterDetail[] | null;
   /** 总条数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2272,7 +2272,7 @@ declare interface DescribeRocketMQGroupsResponse {
   TotalCount?: number;
   /** 订阅组列表 */
   Groups?: RocketMQGroup[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2292,7 +2292,7 @@ declare interface DescribeRocketMQNamespacesResponse {
   Namespaces: RocketMQNamespace[];
   /** 总条数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2316,7 +2316,7 @@ declare interface DescribeRocketMQTopicsResponse {
   TotalCount: number;
   /** 主题信息列表 */
   Topics: RocketMQTopic[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2334,7 +2334,7 @@ declare interface DescribeRocketMQVipInstancesResponse {
   TotalCount: number;
   /** 实例信息列表 */
   Instances: RocketMQVipInstance[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2356,7 +2356,7 @@ declare interface DescribeRolesResponse {
   TotalCount: number;
   /** 角色数组。 */
   RoleSets: Role[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2382,7 +2382,7 @@ declare interface DescribeSubscriptionsResponse {
   SubscriptionSets: Subscription[];
   /** 数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2410,7 +2410,7 @@ declare interface DescribeTopicsResponse {
   TopicSets: Topic[];
   /** 主题数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2424,7 +2424,7 @@ declare interface ModifyAMQPClusterRequest {
 }
 
 declare interface ModifyAMQPClusterResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2440,7 +2440,7 @@ declare interface ModifyAMQPExchangeRequest {
 }
 
 declare interface ModifyAMQPExchangeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2462,7 +2462,7 @@ declare interface ModifyAMQPQueueRequest {
 }
 
 declare interface ModifyAMQPQueueResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2478,7 +2478,7 @@ declare interface ModifyAMQPVHostRequest {
 }
 
 declare interface ModifyAMQPVHostResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2496,7 +2496,7 @@ declare interface ModifyClusterRequest {
 declare interface ModifyClusterResponse {
   /** Pulsar 集群的ID */
   ClusterId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2536,7 +2536,7 @@ declare interface ModifyCmqQueueAttributeRequest {
 }
 
 declare interface ModifyCmqQueueAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2556,7 +2556,7 @@ declare interface ModifyCmqSubscriptionAttributeRequest {
 }
 
 declare interface ModifyCmqSubscriptionAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2572,7 +2572,7 @@ declare interface ModifyCmqTopicAttributeRequest {
 }
 
 declare interface ModifyCmqTopicAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2598,7 +2598,7 @@ declare interface ModifyEnvironmentAttributesResponse {
   Remark: string | null;
   /** 命名空间ID */
   NamespaceId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2614,7 +2614,7 @@ declare interface ModifyEnvironmentRoleRequest {
 }
 
 declare interface ModifyEnvironmentRoleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2628,7 +2628,7 @@ declare interface ModifyRocketMQClusterRequest {
 }
 
 declare interface ModifyRocketMQClusterResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2650,7 +2650,7 @@ declare interface ModifyRocketMQGroupRequest {
 }
 
 declare interface ModifyRocketMQGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2668,7 +2668,7 @@ declare interface ModifyRocketMQNamespaceRequest {
 }
 
 declare interface ModifyRocketMQNamespaceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2686,7 +2686,7 @@ declare interface ModifyRocketMQTopicRequest {
 }
 
 declare interface ModifyRocketMQTopicResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2704,7 +2704,7 @@ declare interface ModifyRoleResponse {
   RoleName: string;
   /** 备注说明 */
   Remark: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2726,7 +2726,7 @@ declare interface ModifyTopicResponse {
   Partitions: number;
   /** 备注，128字符以内。 */
   Remark: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2744,7 +2744,7 @@ declare interface PublishCmqMsgResponse {
   Result: boolean;
   /** 消息id */
   MsgId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2780,7 +2780,7 @@ declare interface ReceiveMessageResponse {
   MessageIDList: string | null;
   /** BatchReceivePolicy 一次性返回的多条消息的消息内容，用 ‘###’ 来区分不同的消息内容 */
   MessagesPayload: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2800,7 +2800,7 @@ declare interface ResetMsgSubOffsetByTimestampRequest {
 declare interface ResetMsgSubOffsetByTimestampResponse {
   /** 结果。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2820,7 +2820,7 @@ declare interface ResetRocketMQConsumerOffSetRequest {
 }
 
 declare interface ResetRocketMQConsumerOffSetResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2832,7 +2832,7 @@ declare interface RewindCmqQueueRequest {
 }
 
 declare interface RewindCmqQueueResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2862,7 +2862,7 @@ declare interface SendBatchMessagesResponse {
   MessageId: string | null;
   /** 错误消息，返回为 ""，代表没有错误 */
   ErrorMsg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2880,7 +2880,7 @@ declare interface SendCmqMsgResponse {
   Result: boolean;
   /** 消息id */
   MsgId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2904,7 +2904,7 @@ declare interface SendMessagesResponse {
   MessageId: string | null;
   /** 返回的错误消息，如果返回为 “”，说明没有错误 */
   ErrorMsg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2920,7 +2920,7 @@ declare interface SendMsgRequest {
 }
 
 declare interface SendMsgResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2930,214 +2930,214 @@ declare interface UnbindCmqDeadLetterRequest {
 }
 
 declare interface UnbindCmqDeadLetterResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tdmq 消息队列 TDMQ} */
 declare interface Tdmq {
   (): Versions;
-  /** {@link AcknowledgeMessage 确认消息}({@link AcknowledgeMessageRequest 请求参数}): {@link AcknowledgeMessageResponse 返回参数} */
+  /** 确认消息 {@link AcknowledgeMessageRequest} {@link AcknowledgeMessageResponse} */
   AcknowledgeMessage(data: AcknowledgeMessageRequest, config?: AxiosRequestConfig): AxiosPromise<AcknowledgeMessageResponse>;
-  /** {@link ClearCmqQueue 清空cmq消息队列中的消息}({@link ClearCmqQueueRequest 请求参数}): {@link ClearCmqQueueResponse 返回参数} */
+  /** 清空cmq消息队列中的消息 {@link ClearCmqQueueRequest} {@link ClearCmqQueueResponse} */
   ClearCmqQueue(data: ClearCmqQueueRequest, config?: AxiosRequestConfig): AxiosPromise<ClearCmqQueueResponse>;
-  /** {@link ClearCmqSubscriptionFilterTags 清空cmq订阅者消息标签}({@link ClearCmqSubscriptionFilterTagsRequest 请求参数}): {@link ClearCmqSubscriptionFilterTagsResponse 返回参数} */
+  /** 清空cmq订阅者消息标签 {@link ClearCmqSubscriptionFilterTagsRequest} {@link ClearCmqSubscriptionFilterTagsResponse} */
   ClearCmqSubscriptionFilterTags(data: ClearCmqSubscriptionFilterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ClearCmqSubscriptionFilterTagsResponse>;
-  /** {@link CreateAMQPCluster 创建AMQP集群}({@link CreateAMQPClusterRequest 请求参数}): {@link CreateAMQPClusterResponse 返回参数} */
+  /** 创建AMQP集群 {@link CreateAMQPClusterRequest} {@link CreateAMQPClusterResponse} */
   CreateAMQPCluster(data: CreateAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPClusterResponse>;
-  /** {@link CreateAMQPExchange 创建AMQP Exchange}({@link CreateAMQPExchangeRequest 请求参数}): {@link CreateAMQPExchangeResponse 返回参数} */
+  /** 创建AMQP Exchange {@link CreateAMQPExchangeRequest} {@link CreateAMQPExchangeResponse} */
   CreateAMQPExchange(data: CreateAMQPExchangeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPExchangeResponse>;
-  /** {@link CreateAMQPQueue 创建AMQP队列}({@link CreateAMQPQueueRequest 请求参数}): {@link CreateAMQPQueueResponse 返回参数} */
+  /** 创建AMQP队列 {@link CreateAMQPQueueRequest} {@link CreateAMQPQueueResponse} */
   CreateAMQPQueue(data: CreateAMQPQueueRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPQueueResponse>;
-  /** {@link CreateAMQPRouteRelation 创建AMQP路由关系}({@link CreateAMQPRouteRelationRequest 请求参数}): {@link CreateAMQPRouteRelationResponse 返回参数} */
+  /** 创建AMQP路由关系 {@link CreateAMQPRouteRelationRequest} {@link CreateAMQPRouteRelationResponse} */
   CreateAMQPRouteRelation(data: CreateAMQPRouteRelationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPRouteRelationResponse>;
-  /** {@link CreateAMQPVHost 创建Amqp Vhost}({@link CreateAMQPVHostRequest 请求参数}): {@link CreateAMQPVHostResponse 返回参数} */
+  /** 创建Amqp Vhost {@link CreateAMQPVHostRequest} {@link CreateAMQPVHostResponse} */
   CreateAMQPVHost(data: CreateAMQPVHostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPVHostResponse>;
-  /** {@link CreateCluster 创建集群}({@link CreateClusterRequest 请求参数}): {@link CreateClusterResponse 返回参数} */
+  /** 创建集群 {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
-  /** {@link CreateCmqQueue 创建cmq队列接口}({@link CreateCmqQueueRequest 请求参数}): {@link CreateCmqQueueResponse 返回参数} */
+  /** 创建cmq队列接口 {@link CreateCmqQueueRequest} {@link CreateCmqQueueResponse} */
   CreateCmqQueue(data: CreateCmqQueueRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCmqQueueResponse>;
-  /** {@link CreateCmqSubscribe 创建cmq订阅接口}({@link CreateCmqSubscribeRequest 请求参数}): {@link CreateCmqSubscribeResponse 返回参数} */
+  /** 创建cmq订阅接口 {@link CreateCmqSubscribeRequest} {@link CreateCmqSubscribeResponse} */
   CreateCmqSubscribe(data: CreateCmqSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCmqSubscribeResponse>;
-  /** {@link CreateCmqTopic 创建cmq主题}({@link CreateCmqTopicRequest 请求参数}): {@link CreateCmqTopicResponse 返回参数} */
+  /** 创建cmq主题 {@link CreateCmqTopicRequest} {@link CreateCmqTopicResponse} */
   CreateCmqTopic(data: CreateCmqTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCmqTopicResponse>;
-  /** {@link CreateEnvironment 创建命名空间}({@link CreateEnvironmentRequest 请求参数}): {@link CreateEnvironmentResponse 返回参数} */
+  /** 创建命名空间 {@link CreateEnvironmentRequest} {@link CreateEnvironmentResponse} */
   CreateEnvironment(data: CreateEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentResponse>;
-  /** {@link CreateEnvironmentRole 创建环境角色授权}({@link CreateEnvironmentRoleRequest 请求参数}): {@link CreateEnvironmentRoleResponse 返回参数} */
+  /** 创建环境角色授权 {@link CreateEnvironmentRoleRequest} {@link CreateEnvironmentRoleResponse} */
   CreateEnvironmentRole(data: CreateEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentRoleResponse>;
-  /** {@link CreateRocketMQCluster 创建RocketMQ集群}({@link CreateRocketMQClusterRequest 请求参数}): {@link CreateRocketMQClusterResponse 返回参数} */
+  /** 创建RocketMQ集群 {@link CreateRocketMQClusterRequest} {@link CreateRocketMQClusterResponse} */
   CreateRocketMQCluster(data: CreateRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQClusterResponse>;
-  /** {@link CreateRocketMQGroup 创建RocketMQ消费组}({@link CreateRocketMQGroupRequest 请求参数}): {@link CreateRocketMQGroupResponse 返回参数} */
+  /** 创建RocketMQ消费组 {@link CreateRocketMQGroupRequest} {@link CreateRocketMQGroupResponse} */
   CreateRocketMQGroup(data: CreateRocketMQGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQGroupResponse>;
-  /** {@link CreateRocketMQNamespace 创建RocketMQ命名空间}({@link CreateRocketMQNamespaceRequest 请求参数}): {@link CreateRocketMQNamespaceResponse 返回参数} */
+  /** 创建RocketMQ命名空间 {@link CreateRocketMQNamespaceRequest} {@link CreateRocketMQNamespaceResponse} */
   CreateRocketMQNamespace(data: CreateRocketMQNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQNamespaceResponse>;
-  /** {@link CreateRocketMQTopic 创建RocketMQ主题}({@link CreateRocketMQTopicRequest 请求参数}): {@link CreateRocketMQTopicResponse 返回参数} */
+  /** 创建RocketMQ主题 {@link CreateRocketMQTopicRequest} {@link CreateRocketMQTopicResponse} */
   CreateRocketMQTopic(data: CreateRocketMQTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQTopicResponse>;
-  /** {@link CreateRole 创建角色}({@link CreateRoleRequest 请求参数}): {@link CreateRoleResponse 返回参数} */
+  /** 创建角色 {@link CreateRoleRequest} {@link CreateRoleResponse} */
   CreateRole(data: CreateRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleResponse>;
-  /** {@link CreateSubscription 创建订阅关系}({@link CreateSubscriptionRequest 请求参数}): {@link CreateSubscriptionResponse 返回参数} */
+  /** 创建订阅关系 {@link CreateSubscriptionRequest} {@link CreateSubscriptionResponse} */
   CreateSubscription(data: CreateSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubscriptionResponse>;
-  /** {@link CreateTopic 新增主题}({@link CreateTopicRequest 请求参数}): {@link CreateTopicResponse 返回参数} */
+  /** 新增主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
-  /** {@link DeleteAMQPCluster 删除AMQP集群}({@link DeleteAMQPClusterRequest 请求参数}): {@link DeleteAMQPClusterResponse 返回参数} */
+  /** 删除AMQP集群 {@link DeleteAMQPClusterRequest} {@link DeleteAMQPClusterResponse} */
   DeleteAMQPCluster(data: DeleteAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPClusterResponse>;
-  /** {@link DeleteAMQPExchange 删除Amqp交换机}({@link DeleteAMQPExchangeRequest 请求参数}): {@link DeleteAMQPExchangeResponse 返回参数} */
+  /** 删除Amqp交换机 {@link DeleteAMQPExchangeRequest} {@link DeleteAMQPExchangeResponse} */
   DeleteAMQPExchange(data: DeleteAMQPExchangeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPExchangeResponse>;
-  /** {@link DeleteAMQPQueue 删除Amqp队列}({@link DeleteAMQPQueueRequest 请求参数}): {@link DeleteAMQPQueueResponse 返回参数} */
+  /** 删除Amqp队列 {@link DeleteAMQPQueueRequest} {@link DeleteAMQPQueueResponse} */
   DeleteAMQPQueue(data: DeleteAMQPQueueRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPQueueResponse>;
-  /** {@link DeleteAMQPRouteRelation 删除Amqp路由关系}({@link DeleteAMQPRouteRelationRequest 请求参数}): {@link DeleteAMQPRouteRelationResponse 返回参数} */
+  /** 删除Amqp路由关系 {@link DeleteAMQPRouteRelationRequest} {@link DeleteAMQPRouteRelationResponse} */
   DeleteAMQPRouteRelation(data: DeleteAMQPRouteRelationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPRouteRelationResponse>;
-  /** {@link DeleteAMQPVHost 删除Vhost}({@link DeleteAMQPVHostRequest 请求参数}): {@link DeleteAMQPVHostResponse 返回参数} */
+  /** 删除Vhost {@link DeleteAMQPVHostRequest} {@link DeleteAMQPVHostResponse} */
   DeleteAMQPVHost(data: DeleteAMQPVHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPVHostResponse>;
-  /** {@link DeleteCluster 删除集群}({@link DeleteClusterRequest 请求参数}): {@link DeleteClusterResponse 返回参数} */
+  /** 删除集群 {@link DeleteClusterRequest} {@link DeleteClusterResponse} */
   DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
-  /** {@link DeleteCmqQueue 删除cmq队列}({@link DeleteCmqQueueRequest 请求参数}): {@link DeleteCmqQueueResponse 返回参数} */
+  /** 删除cmq队列 {@link DeleteCmqQueueRequest} {@link DeleteCmqQueueResponse} */
   DeleteCmqQueue(data: DeleteCmqQueueRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCmqQueueResponse>;
-  /** {@link DeleteCmqSubscribe 删除cmq订阅}({@link DeleteCmqSubscribeRequest 请求参数}): {@link DeleteCmqSubscribeResponse 返回参数} */
+  /** 删除cmq订阅 {@link DeleteCmqSubscribeRequest} {@link DeleteCmqSubscribeResponse} */
   DeleteCmqSubscribe(data: DeleteCmqSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCmqSubscribeResponse>;
-  /** {@link DeleteCmqTopic 删除cmq主题}({@link DeleteCmqTopicRequest 请求参数}): {@link DeleteCmqTopicResponse 返回参数} */
+  /** 删除cmq主题 {@link DeleteCmqTopicRequest} {@link DeleteCmqTopicResponse} */
   DeleteCmqTopic(data: DeleteCmqTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCmqTopicResponse>;
-  /** {@link DeleteEnvironmentRoles 删除环境角色授权}({@link DeleteEnvironmentRolesRequest 请求参数}): {@link DeleteEnvironmentRolesResponse 返回参数} */
+  /** 删除环境角色授权 {@link DeleteEnvironmentRolesRequest} {@link DeleteEnvironmentRolesResponse} */
   DeleteEnvironmentRoles(data: DeleteEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentRolesResponse>;
-  /** {@link DeleteEnvironments 删除命名空间}({@link DeleteEnvironmentsRequest 请求参数}): {@link DeleteEnvironmentsResponse 返回参数} */
+  /** 删除命名空间 {@link DeleteEnvironmentsRequest} {@link DeleteEnvironmentsResponse} */
   DeleteEnvironments(data: DeleteEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentsResponse>;
-  /** {@link DeleteRocketMQCluster 删除RocketMQ集群}({@link DeleteRocketMQClusterRequest 请求参数}): {@link DeleteRocketMQClusterResponse 返回参数} */
+  /** 删除RocketMQ集群 {@link DeleteRocketMQClusterRequest} {@link DeleteRocketMQClusterResponse} */
   DeleteRocketMQCluster(data: DeleteRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQClusterResponse>;
-  /** {@link DeleteRocketMQGroup 删除RocketMQ消费组}({@link DeleteRocketMQGroupRequest 请求参数}): {@link DeleteRocketMQGroupResponse 返回参数} */
+  /** 删除RocketMQ消费组 {@link DeleteRocketMQGroupRequest} {@link DeleteRocketMQGroupResponse} */
   DeleteRocketMQGroup(data: DeleteRocketMQGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQGroupResponse>;
-  /** {@link DeleteRocketMQNamespace 删除RocketMQ命名空间}({@link DeleteRocketMQNamespaceRequest 请求参数}): {@link DeleteRocketMQNamespaceResponse 返回参数} */
+  /** 删除RocketMQ命名空间 {@link DeleteRocketMQNamespaceRequest} {@link DeleteRocketMQNamespaceResponse} */
   DeleteRocketMQNamespace(data: DeleteRocketMQNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQNamespaceResponse>;
-  /** {@link DeleteRocketMQTopic 删除RocketMQ主题}({@link DeleteRocketMQTopicRequest 请求参数}): {@link DeleteRocketMQTopicResponse 返回参数} */
+  /** 删除RocketMQ主题 {@link DeleteRocketMQTopicRequest} {@link DeleteRocketMQTopicResponse} */
   DeleteRocketMQTopic(data: DeleteRocketMQTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQTopicResponse>;
-  /** {@link DeleteRoles 删除角色}({@link DeleteRolesRequest 请求参数}): {@link DeleteRolesResponse 返回参数} */
+  /** 删除角色 {@link DeleteRolesRequest} {@link DeleteRolesResponse} */
   DeleteRoles(data: DeleteRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRolesResponse>;
-  /** {@link DeleteSubscriptions 删除订阅关系}({@link DeleteSubscriptionsRequest 请求参数}): {@link DeleteSubscriptionsResponse 返回参数} */
+  /** 删除订阅关系 {@link DeleteSubscriptionsRequest} {@link DeleteSubscriptionsResponse} */
   DeleteSubscriptions(data: DeleteSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubscriptionsResponse>;
-  /** {@link DeleteTopics 删除主题}({@link DeleteTopicsRequest 请求参数}): {@link DeleteTopicsResponse 返回参数} */
+  /** 删除主题 {@link DeleteTopicsRequest} {@link DeleteTopicsResponse} */
   DeleteTopics(data: DeleteTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicsResponse>;
-  /** {@link DescribeAMQPCluster 获取单个Amqp集群信息}({@link DescribeAMQPClusterRequest 请求参数}): {@link DescribeAMQPClusterResponse 返回参数} */
+  /** 获取单个Amqp集群信息 {@link DescribeAMQPClusterRequest} {@link DescribeAMQPClusterResponse} */
   DescribeAMQPCluster(data: DescribeAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPClusterResponse>;
-  /** {@link DescribeAMQPClusters 获取amqp集群列表}({@link DescribeAMQPClustersRequest 请求参数}): {@link DescribeAMQPClustersResponse 返回参数} */
+  /** 获取amqp集群列表 {@link DescribeAMQPClustersRequest} {@link DescribeAMQPClustersResponse} */
   DescribeAMQPClusters(data: DescribeAMQPClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPClustersResponse>;
-  /** {@link DescribeAMQPCreateQuota 获取用户配额}({@link DescribeAMQPCreateQuotaRequest 请求参数}): {@link DescribeAMQPCreateQuotaResponse 返回参数} */
+  /** 获取用户配额 {@link DescribeAMQPCreateQuotaRequest} {@link DescribeAMQPCreateQuotaResponse} */
   DescribeAMQPCreateQuota(data?: DescribeAMQPCreateQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPCreateQuotaResponse>;
-  /** {@link DescribeAMQPExchanges 获取AMQP Exchange列表}({@link DescribeAMQPExchangesRequest 请求参数}): {@link DescribeAMQPExchangesResponse 返回参数} */
+  /** 获取AMQP Exchange列表 {@link DescribeAMQPExchangesRequest} {@link DescribeAMQPExchangesResponse} */
   DescribeAMQPExchanges(data: DescribeAMQPExchangesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPExchangesResponse>;
-  /** {@link DescribeAMQPQueues 获取Amqp队列列表}({@link DescribeAMQPQueuesRequest 请求参数}): {@link DescribeAMQPQueuesResponse 返回参数} */
+  /** 获取Amqp队列列表 {@link DescribeAMQPQueuesRequest} {@link DescribeAMQPQueuesResponse} */
   DescribeAMQPQueues(data: DescribeAMQPQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPQueuesResponse>;
-  /** {@link DescribeAMQPRouteRelations 获取Amqp路由关系列表}({@link DescribeAMQPRouteRelationsRequest 请求参数}): {@link DescribeAMQPRouteRelationsResponse 返回参数} */
+  /** 获取Amqp路由关系列表 {@link DescribeAMQPRouteRelationsRequest} {@link DescribeAMQPRouteRelationsResponse} */
   DescribeAMQPRouteRelations(data: DescribeAMQPRouteRelationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPRouteRelationsResponse>;
-  /** {@link DescribeAMQPVHosts 获取Amqp Vhost列表}({@link DescribeAMQPVHostsRequest 请求参数}): {@link DescribeAMQPVHostsResponse 返回参数} */
+  /** 获取Amqp Vhost列表 {@link DescribeAMQPVHostsRequest} {@link DescribeAMQPVHostsResponse} */
   DescribeAMQPVHosts(data: DescribeAMQPVHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPVHostsResponse>;
-  /** {@link DescribeAllTenants 获取某个租户的虚拟集群列表}({@link DescribeAllTenantsRequest 请求参数}): {@link DescribeAllTenantsResponse 返回参数} */
+  /** 获取某个租户的虚拟集群列表 {@link DescribeAllTenantsRequest} {@link DescribeAllTenantsResponse} */
   DescribeAllTenants(data: DescribeAllTenantsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllTenantsResponse>;
-  /** {@link DescribeBindClusters 获取专享集群列表}({@link DescribeBindClustersRequest 请求参数}): {@link DescribeBindClustersResponse 返回参数} */
+  /** 获取专享集群列表 {@link DescribeBindClustersRequest} {@link DescribeBindClustersResponse} */
   DescribeBindClusters(data?: DescribeBindClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindClustersResponse>;
-  /** {@link DescribeBindVpcs 获取租户VPC绑定关系}({@link DescribeBindVpcsRequest 请求参数}): {@link DescribeBindVpcsResponse 返回参数} */
+  /** 获取租户VPC绑定关系 {@link DescribeBindVpcsRequest} {@link DescribeBindVpcsResponse} */
   DescribeBindVpcs(data?: DescribeBindVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindVpcsResponse>;
-  /** {@link DescribeClusterDetail 获取集群详情}({@link DescribeClusterDetailRequest 请求参数}): {@link DescribeClusterDetailResponse 返回参数} */
+  /** 获取集群详情 {@link DescribeClusterDetailRequest} {@link DescribeClusterDetailResponse} */
   DescribeClusterDetail(data: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
-  /** {@link DescribeClusters 获取集群列表}({@link DescribeClustersRequest 请求参数}): {@link DescribeClustersResponse 返回参数} */
+  /** 获取集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
-  /** {@link DescribeCmqDeadLetterSourceQueues 枚举cmq死信队列源队列}({@link DescribeCmqDeadLetterSourceQueuesRequest 请求参数}): {@link DescribeCmqDeadLetterSourceQueuesResponse 返回参数} */
+  /** 枚举cmq死信队列源队列 {@link DescribeCmqDeadLetterSourceQueuesRequest} {@link DescribeCmqDeadLetterSourceQueuesResponse} */
   DescribeCmqDeadLetterSourceQueues(data: DescribeCmqDeadLetterSourceQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqDeadLetterSourceQueuesResponse>;
-  /** {@link DescribeCmqQueueDetail 查询cmq队列详情}({@link DescribeCmqQueueDetailRequest 请求参数}): {@link DescribeCmqQueueDetailResponse 返回参数} */
+  /** 查询cmq队列详情 {@link DescribeCmqQueueDetailRequest} {@link DescribeCmqQueueDetailResponse} */
   DescribeCmqQueueDetail(data: DescribeCmqQueueDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqQueueDetailResponse>;
-  /** {@link DescribeCmqQueues 查询cmq全量队列}({@link DescribeCmqQueuesRequest 请求参数}): {@link DescribeCmqQueuesResponse 返回参数} */
+  /** 查询cmq全量队列 {@link DescribeCmqQueuesRequest} {@link DescribeCmqQueuesResponse} */
   DescribeCmqQueues(data?: DescribeCmqQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqQueuesResponse>;
-  /** {@link DescribeCmqSubscriptionDetail 查询cmq订阅详情}({@link DescribeCmqSubscriptionDetailRequest 请求参数}): {@link DescribeCmqSubscriptionDetailResponse 返回参数} */
+  /** 查询cmq订阅详情 {@link DescribeCmqSubscriptionDetailRequest} {@link DescribeCmqSubscriptionDetailResponse} */
   DescribeCmqSubscriptionDetail(data: DescribeCmqSubscriptionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqSubscriptionDetailResponse>;
-  /** {@link DescribeCmqTopicDetail 查询cmq主题详情}({@link DescribeCmqTopicDetailRequest 请求参数}): {@link DescribeCmqTopicDetailResponse 返回参数} */
+  /** 查询cmq主题详情 {@link DescribeCmqTopicDetailRequest} {@link DescribeCmqTopicDetailResponse} */
   DescribeCmqTopicDetail(data?: DescribeCmqTopicDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqTopicDetailResponse>;
-  /** {@link DescribeCmqTopics 枚举cmq全量主题}({@link DescribeCmqTopicsRequest 请求参数}): {@link DescribeCmqTopicsResponse 返回参数} */
+  /** 枚举cmq全量主题 {@link DescribeCmqTopicsRequest} {@link DescribeCmqTopicsResponse} */
   DescribeCmqTopics(data?: DescribeCmqTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqTopicsResponse>;
-  /** {@link DescribeEnvironmentAttributes 获取命名空间属性}({@link DescribeEnvironmentAttributesRequest 请求参数}): {@link DescribeEnvironmentAttributesResponse 返回参数} */
+  /** 获取命名空间属性 {@link DescribeEnvironmentAttributesRequest} {@link DescribeEnvironmentAttributesResponse} */
   DescribeEnvironmentAttributes(data: DescribeEnvironmentAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentAttributesResponse>;
-  /** {@link DescribeEnvironmentRoles 获取命名空间角色列表}({@link DescribeEnvironmentRolesRequest 请求参数}): {@link DescribeEnvironmentRolesResponse 返回参数} */
+  /** 获取命名空间角色列表 {@link DescribeEnvironmentRolesRequest} {@link DescribeEnvironmentRolesResponse} */
   DescribeEnvironmentRoles(data?: DescribeEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentRolesResponse>;
-  /** {@link DescribeEnvironments 获取命名空间列表}({@link DescribeEnvironmentsRequest 请求参数}): {@link DescribeEnvironmentsResponse 返回参数} */
+  /** 获取命名空间列表 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */
   DescribeEnvironments(data?: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
-  /** {@link DescribeNamespaceBundlesOpt 运营端获取命名空间bundle列表}({@link DescribeNamespaceBundlesOptRequest 请求参数}): {@link DescribeNamespaceBundlesOptResponse 返回参数} */
+  /** 运营端获取命名空间bundle列表 {@link DescribeNamespaceBundlesOptRequest} {@link DescribeNamespaceBundlesOptResponse} */
   DescribeNamespaceBundlesOpt(data: DescribeNamespaceBundlesOptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNamespaceBundlesOptResponse>;
-  /** {@link DescribeNodeHealthOpt 运营端获节点健康状态}({@link DescribeNodeHealthOptRequest 请求参数}): {@link DescribeNodeHealthOptResponse 返回参数} */
+  /** 运营端获节点健康状态 {@link DescribeNodeHealthOptRequest} {@link DescribeNodeHealthOptResponse} */
   DescribeNodeHealthOpt(data: DescribeNodeHealthOptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeHealthOptResponse>;
-  /** {@link DescribePublisherSummary 获取消息生产概览}({@link DescribePublisherSummaryRequest 请求参数}): {@link DescribePublisherSummaryResponse 返回参数} */
+  /** 获取消息生产概览 {@link DescribePublisherSummaryRequest} {@link DescribePublisherSummaryResponse} */
   DescribePublisherSummary(data: DescribePublisherSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublisherSummaryResponse>;
-  /** {@link DescribePublishers 获取生产者信息}({@link DescribePublishersRequest 请求参数}): {@link DescribePublishersResponse 返回参数} */
+  /** 获取生产者信息 {@link DescribePublishersRequest} {@link DescribePublishersResponse} */
   DescribePublishers(data: DescribePublishersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublishersResponse>;
-  /** {@link DescribeRabbitMQNodeList RabbitMQ专享版查询节点列表}({@link DescribeRabbitMQNodeListRequest 请求参数}): {@link DescribeRabbitMQNodeListResponse 返回参数} */
+  /** RabbitMQ专享版查询节点列表 {@link DescribeRabbitMQNodeListRequest} {@link DescribeRabbitMQNodeListResponse} */
   DescribeRabbitMQNodeList(data: DescribeRabbitMQNodeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQNodeListResponse>;
-  /** {@link DescribeRabbitMQVipInstances 查询RabbitMQ专享实例列表}({@link DescribeRabbitMQVipInstancesRequest 请求参数}): {@link DescribeRabbitMQVipInstancesResponse 返回参数} */
+  /** 查询RabbitMQ专享实例列表 {@link DescribeRabbitMQVipInstancesRequest} {@link DescribeRabbitMQVipInstancesResponse} */
   DescribeRabbitMQVipInstances(data?: DescribeRabbitMQVipInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVipInstancesResponse>;
-  /** {@link DescribeRocketMQCluster 获取单个RocketMQ集群信息}({@link DescribeRocketMQClusterRequest 请求参数}): {@link DescribeRocketMQClusterResponse 返回参数} */
+  /** 获取单个RocketMQ集群信息 {@link DescribeRocketMQClusterRequest} {@link DescribeRocketMQClusterResponse} */
   DescribeRocketMQCluster(data: DescribeRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQClusterResponse>;
-  /** {@link DescribeRocketMQClusters 获取RocketMQ集群列表}({@link DescribeRocketMQClustersRequest 请求参数}): {@link DescribeRocketMQClustersResponse 返回参数} */
+  /** 获取RocketMQ集群列表 {@link DescribeRocketMQClustersRequest} {@link DescribeRocketMQClustersResponse} */
   DescribeRocketMQClusters(data: DescribeRocketMQClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQClustersResponse>;
-  /** {@link DescribeRocketMQGroups 获取RocketMQ消费组列表}({@link DescribeRocketMQGroupsRequest 请求参数}): {@link DescribeRocketMQGroupsResponse 返回参数} */
+  /** 获取RocketMQ消费组列表 {@link DescribeRocketMQGroupsRequest} {@link DescribeRocketMQGroupsResponse} */
   DescribeRocketMQGroups(data: DescribeRocketMQGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQGroupsResponse>;
-  /** {@link DescribeRocketMQNamespaces 获取RocketMQ命名空间列表}({@link DescribeRocketMQNamespacesRequest 请求参数}): {@link DescribeRocketMQNamespacesResponse 返回参数} */
+  /** 获取RocketMQ命名空间列表 {@link DescribeRocketMQNamespacesRequest} {@link DescribeRocketMQNamespacesResponse} */
   DescribeRocketMQNamespaces(data: DescribeRocketMQNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQNamespacesResponse>;
-  /** {@link DescribeRocketMQTopics 获取RocketMQ主题列表}({@link DescribeRocketMQTopicsRequest 请求参数}): {@link DescribeRocketMQTopicsResponse 返回参数} */
+  /** 获取RocketMQ主题列表 {@link DescribeRocketMQTopicsRequest} {@link DescribeRocketMQTopicsResponse} */
   DescribeRocketMQTopics(data: DescribeRocketMQTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopicsResponse>;
-  /** {@link DescribeRocketMQVipInstances 查询RocketMQ专享实例列表}({@link DescribeRocketMQVipInstancesRequest 请求参数}): {@link DescribeRocketMQVipInstancesResponse 返回参数} */
+  /** 查询RocketMQ专享实例列表 {@link DescribeRocketMQVipInstancesRequest} {@link DescribeRocketMQVipInstancesResponse} */
   DescribeRocketMQVipInstances(data?: DescribeRocketMQVipInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQVipInstancesResponse>;
-  /** {@link DescribeRoles 获取角色列表}({@link DescribeRolesRequest 请求参数}): {@link DescribeRolesResponse 返回参数} */
+  /** 获取角色列表 {@link DescribeRolesRequest} {@link DescribeRolesResponse} */
   DescribeRoles(data?: DescribeRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRolesResponse>;
-  /** {@link DescribeSubscriptions 获取消费订阅列表}({@link DescribeSubscriptionsRequest 请求参数}): {@link DescribeSubscriptionsResponse 返回参数} */
+  /** 获取消费订阅列表 {@link DescribeSubscriptionsRequest} {@link DescribeSubscriptionsResponse} */
   DescribeSubscriptions(data: DescribeSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscriptionsResponse>;
-  /** {@link DescribeTopics 查询主题列表}({@link DescribeTopicsRequest 请求参数}): {@link DescribeTopicsResponse 返回参数} */
+  /** 查询主题列表 {@link DescribeTopicsRequest} {@link DescribeTopicsResponse} */
   DescribeTopics(data: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
-  /** {@link ModifyAMQPCluster 更新Amqp集群信息}({@link ModifyAMQPClusterRequest 请求参数}): {@link ModifyAMQPClusterResponse 返回参数} */
+  /** 更新Amqp集群信息 {@link ModifyAMQPClusterRequest} {@link ModifyAMQPClusterResponse} */
   ModifyAMQPCluster(data: ModifyAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPClusterResponse>;
-  /** {@link ModifyAMQPExchange 更新Amqp交换机}({@link ModifyAMQPExchangeRequest 请求参数}): {@link ModifyAMQPExchangeResponse 返回参数} */
+  /** 更新Amqp交换机 {@link ModifyAMQPExchangeRequest} {@link ModifyAMQPExchangeResponse} */
   ModifyAMQPExchange(data: ModifyAMQPExchangeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPExchangeResponse>;
-  /** {@link ModifyAMQPQueue 更新Amqp队列}({@link ModifyAMQPQueueRequest 请求参数}): {@link ModifyAMQPQueueResponse 返回参数} */
+  /** 更新Amqp队列 {@link ModifyAMQPQueueRequest} {@link ModifyAMQPQueueResponse} */
   ModifyAMQPQueue(data: ModifyAMQPQueueRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPQueueResponse>;
-  /** {@link ModifyAMQPVHost 更新Vhost}({@link ModifyAMQPVHostRequest 请求参数}): {@link ModifyAMQPVHostResponse 返回参数} */
+  /** 更新Vhost {@link ModifyAMQPVHostRequest} {@link ModifyAMQPVHostResponse} */
   ModifyAMQPVHost(data: ModifyAMQPVHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPVHostResponse>;
-  /** {@link ModifyCluster 更新集群信息}({@link ModifyClusterRequest 请求参数}): {@link ModifyClusterResponse 返回参数} */
+  /** 更新集群信息 {@link ModifyClusterRequest} {@link ModifyClusterResponse} */
   ModifyCluster(data: ModifyClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterResponse>;
-  /** {@link ModifyCmqQueueAttribute 修改cmq队列属性}({@link ModifyCmqQueueAttributeRequest 请求参数}): {@link ModifyCmqQueueAttributeResponse 返回参数} */
+  /** 修改cmq队列属性 {@link ModifyCmqQueueAttributeRequest} {@link ModifyCmqQueueAttributeResponse} */
   ModifyCmqQueueAttribute(data: ModifyCmqQueueAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCmqQueueAttributeResponse>;
-  /** {@link ModifyCmqSubscriptionAttribute 修改cmq订阅属性}({@link ModifyCmqSubscriptionAttributeRequest 请求参数}): {@link ModifyCmqSubscriptionAttributeResponse 返回参数} */
+  /** 修改cmq订阅属性 {@link ModifyCmqSubscriptionAttributeRequest} {@link ModifyCmqSubscriptionAttributeResponse} */
   ModifyCmqSubscriptionAttribute(data: ModifyCmqSubscriptionAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCmqSubscriptionAttributeResponse>;
-  /** {@link ModifyCmqTopicAttribute 修改cmq主题属性}({@link ModifyCmqTopicAttributeRequest 请求参数}): {@link ModifyCmqTopicAttributeResponse 返回参数} */
+  /** 修改cmq主题属性 {@link ModifyCmqTopicAttributeRequest} {@link ModifyCmqTopicAttributeResponse} */
   ModifyCmqTopicAttribute(data: ModifyCmqTopicAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCmqTopicAttributeResponse>;
-  /** {@link ModifyEnvironmentAttributes 修改命名空间属性}({@link ModifyEnvironmentAttributesRequest 请求参数}): {@link ModifyEnvironmentAttributesResponse 返回参数} */
+  /** 修改命名空间属性 {@link ModifyEnvironmentAttributesRequest} {@link ModifyEnvironmentAttributesResponse} */
   ModifyEnvironmentAttributes(data: ModifyEnvironmentAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvironmentAttributesResponse>;
-  /** {@link ModifyEnvironmentRole 修改环境角色授权}({@link ModifyEnvironmentRoleRequest 请求参数}): {@link ModifyEnvironmentRoleResponse 返回参数} */
+  /** 修改环境角色授权 {@link ModifyEnvironmentRoleRequest} {@link ModifyEnvironmentRoleResponse} */
   ModifyEnvironmentRole(data: ModifyEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvironmentRoleResponse>;
-  /** {@link ModifyRocketMQCluster 更新RocketMQ集群信息}({@link ModifyRocketMQClusterRequest 请求参数}): {@link ModifyRocketMQClusterResponse 返回参数} */
+  /** 更新RocketMQ集群信息 {@link ModifyRocketMQClusterRequest} {@link ModifyRocketMQClusterResponse} */
   ModifyRocketMQCluster(data: ModifyRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQClusterResponse>;
-  /** {@link ModifyRocketMQGroup 更新RocketMQ消费组信息}({@link ModifyRocketMQGroupRequest 请求参数}): {@link ModifyRocketMQGroupResponse 返回参数} */
+  /** 更新RocketMQ消费组信息 {@link ModifyRocketMQGroupRequest} {@link ModifyRocketMQGroupResponse} */
   ModifyRocketMQGroup(data: ModifyRocketMQGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQGroupResponse>;
-  /** {@link ModifyRocketMQNamespace 更新RocketMQ命名空间}({@link ModifyRocketMQNamespaceRequest 请求参数}): {@link ModifyRocketMQNamespaceResponse 返回参数} */
+  /** 更新RocketMQ命名空间 {@link ModifyRocketMQNamespaceRequest} {@link ModifyRocketMQNamespaceResponse} */
   ModifyRocketMQNamespace(data: ModifyRocketMQNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQNamespaceResponse>;
-  /** {@link ModifyRocketMQTopic 更新RocketMQ主题信息}({@link ModifyRocketMQTopicRequest 请求参数}): {@link ModifyRocketMQTopicResponse 返回参数} */
+  /** 更新RocketMQ主题信息 {@link ModifyRocketMQTopicRequest} {@link ModifyRocketMQTopicResponse} */
   ModifyRocketMQTopic(data: ModifyRocketMQTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQTopicResponse>;
-  /** {@link ModifyRole 角色修改}({@link ModifyRoleRequest 请求参数}): {@link ModifyRoleResponse 返回参数} */
+  /** 角色修改 {@link ModifyRoleRequest} {@link ModifyRoleResponse} */
   ModifyRole(data: ModifyRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoleResponse>;
-  /** {@link ModifyTopic 修改主题}({@link ModifyTopicRequest 请求参数}): {@link ModifyTopicResponse 返回参数} */
+  /** 修改主题 {@link ModifyTopicRequest} {@link ModifyTopicResponse} */
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
-  /** {@link PublishCmqMsg 发送cmq主题消息}({@link PublishCmqMsgRequest 请求参数}): {@link PublishCmqMsgResponse 返回参数} */
+  /** 发送cmq主题消息 {@link PublishCmqMsgRequest} {@link PublishCmqMsgResponse} */
   PublishCmqMsg(data: PublishCmqMsgRequest, config?: AxiosRequestConfig): AxiosPromise<PublishCmqMsgResponse>;
-  /** {@link ReceiveMessage 接收消息}({@link ReceiveMessageRequest 请求参数}): {@link ReceiveMessageResponse 返回参数} */
+  /** 接收消息 {@link ReceiveMessageRequest} {@link ReceiveMessageResponse} */
   ReceiveMessage(data: ReceiveMessageRequest, config?: AxiosRequestConfig): AxiosPromise<ReceiveMessageResponse>;
-  /** {@link ResetMsgSubOffsetByTimestamp 消息回溯}({@link ResetMsgSubOffsetByTimestampRequest 请求参数}): {@link ResetMsgSubOffsetByTimestampResponse 返回参数} */
+  /** 消息回溯 {@link ResetMsgSubOffsetByTimestampRequest} {@link ResetMsgSubOffsetByTimestampResponse} */
   ResetMsgSubOffsetByTimestamp(data: ResetMsgSubOffsetByTimestampRequest, config?: AxiosRequestConfig): AxiosPromise<ResetMsgSubOffsetByTimestampResponse>;
-  /** {@link ResetRocketMQConsumerOffSet 重置RocketMQ消费位点}({@link ResetRocketMQConsumerOffSetRequest 请求参数}): {@link ResetRocketMQConsumerOffSetResponse 返回参数} */
+  /** 重置RocketMQ消费位点 {@link ResetRocketMQConsumerOffSetRequest} {@link ResetRocketMQConsumerOffSetResponse} */
   ResetRocketMQConsumerOffSet(data: ResetRocketMQConsumerOffSetRequest, config?: AxiosRequestConfig): AxiosPromise<ResetRocketMQConsumerOffSetResponse>;
-  /** {@link RewindCmqQueue 回溯cmq队列}({@link RewindCmqQueueRequest 请求参数}): {@link RewindCmqQueueResponse 返回参数} */
+  /** 回溯cmq队列 {@link RewindCmqQueueRequest} {@link RewindCmqQueueResponse} */
   RewindCmqQueue(data: RewindCmqQueueRequest, config?: AxiosRequestConfig): AxiosPromise<RewindCmqQueueResponse>;
-  /** {@link SendBatchMessages 批量发送消息}({@link SendBatchMessagesRequest 请求参数}): {@link SendBatchMessagesResponse 返回参数} */
+  /** 批量发送消息 {@link SendBatchMessagesRequest} {@link SendBatchMessagesResponse} */
   SendBatchMessages(data: SendBatchMessagesRequest, config?: AxiosRequestConfig): AxiosPromise<SendBatchMessagesResponse>;
-  /** {@link SendCmqMsg 发送cmq消息}({@link SendCmqMsgRequest 请求参数}): {@link SendCmqMsgResponse 返回参数} */
+  /** 发送cmq消息 {@link SendCmqMsgRequest} {@link SendCmqMsgResponse} */
   SendCmqMsg(data: SendCmqMsgRequest, config?: AxiosRequestConfig): AxiosPromise<SendCmqMsgResponse>;
-  /** {@link SendMessages 发送单条消息}({@link SendMessagesRequest 请求参数}): {@link SendMessagesResponse 返回参数} */
+  /** 发送单条消息 {@link SendMessagesRequest} {@link SendMessagesResponse} */
   SendMessages(data: SendMessagesRequest, config?: AxiosRequestConfig): AxiosPromise<SendMessagesResponse>;
-  /** {@link SendMsg 发送消息}({@link SendMsgRequest 请求参数}): {@link SendMsgResponse 返回参数} */
+  /** 发送消息 {@link SendMsgRequest} {@link SendMsgResponse} */
   SendMsg(data: SendMsgRequest, config?: AxiosRequestConfig): AxiosPromise<SendMsgResponse>;
-  /** {@link UnbindCmqDeadLetter 解绑cmq死信队列}({@link UnbindCmqDeadLetterRequest 请求参数}): {@link UnbindCmqDeadLetterResponse 返回参数} */
+  /** 解绑cmq死信队列 {@link UnbindCmqDeadLetterRequest} {@link UnbindCmqDeadLetterResponse} */
   UnbindCmqDeadLetter(data: UnbindCmqDeadLetterRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindCmqDeadLetterResponse>;
 }
 

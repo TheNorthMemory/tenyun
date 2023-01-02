@@ -474,7 +474,7 @@ declare interface CreateJobRequest {
 declare interface CreateJobResponse {
   /** 任务 */
   Job?: Job;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -498,7 +498,7 @@ declare interface CreateRsgAsGroupRequest {
 declare interface CreateRsgAsGroupResponse {
   /** 所创建的资源组的伸缩组 */
   RsgAsGroup?: RsgAsGroup;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -518,7 +518,7 @@ declare interface CreateRuntimeRequest {
 declare interface CreateRuntimeResponse {
   /** 运行环境 */
   Runtime?: Runtime;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -536,7 +536,7 @@ declare interface CreateServiceConfigRequest {
 declare interface CreateServiceConfigResponse {
   /** 服务配置 */
   ServiceConfig?: Config;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -574,7 +574,7 @@ declare interface CreateServiceRequest {
 declare interface CreateServiceResponse {
   /** 服务 */
   Service?: ModelService;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -584,7 +584,7 @@ declare interface DeleteInstanceRequest {
 }
 
 declare interface DeleteInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -594,7 +594,7 @@ declare interface DeleteJobRequest {
 }
 
 declare interface DeleteJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -604,7 +604,7 @@ declare interface DeleteResourceGroupRequest {
 }
 
 declare interface DeleteResourceGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -614,7 +614,7 @@ declare interface DeleteRsgAsGroupRequest {
 }
 
 declare interface DeleteRsgAsGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -624,7 +624,7 @@ declare interface DeleteRuntimeRequest {
 }
 
 declare interface DeleteRuntimeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -636,7 +636,7 @@ declare interface DeleteServiceConfigRequest {
 }
 
 declare interface DeleteServiceConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -646,7 +646,7 @@ declare interface DeleteServiceRequest {
 }
 
 declare interface DeleteServiceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -670,7 +670,7 @@ declare interface DescribeInstancesResponse {
   TotalCount?: number;
   /** 资源组下节点列表 */
   Instances?: Instance[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -692,7 +692,7 @@ declare interface DescribeResourceGroupsResponse {
   TotalCount?: number;
   /** 资源组列表 */
   ResourceGroups?: ResourceGroup[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -720,7 +720,7 @@ declare interface DescribeRsgAsGroupActivitiesResponse {
   RsgAsGroupActivitySet?: RsgAsGroupActivity[] | null;
   /** 所查询的伸缩组活动总数目 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -742,7 +742,7 @@ declare interface DescribeRsgAsGroupsResponse {
   RsgAsGroupSet?: RsgAsGroup[];
   /** 伸缩组数组总数目 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -754,7 +754,7 @@ declare interface DescribeRuntimesResponse {
   Runtimes?: Runtime[];
   /** 用户对runtime对权限 */
   UserAccess?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -778,7 +778,7 @@ declare interface DescribeServiceConfigsResponse {
   ServiceConfigs?: Config[];
   /** 服务配置总数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -800,7 +800,7 @@ declare interface DescribeServicesResponse {
   Services?: ModelService[];
   /** 服务总数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -810,7 +810,7 @@ declare interface DisableRsgAsGroupRequest {
 }
 
 declare interface DisableRsgAsGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -820,7 +820,7 @@ declare interface EnableRsgAsGroupRequest {
 }
 
 declare interface EnableRsgAsGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -838,7 +838,7 @@ declare interface ExposeServiceRequest {
 declare interface ExposeServiceResponse {
   /** 暴露方式 */
   Expose?: ExposeInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -854,7 +854,7 @@ declare interface UpdateJobRequest {
 declare interface UpdateJobResponse {
   /** 任务 */
   Job?: Job | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -874,7 +874,7 @@ declare interface UpdateRsgAsGroupRequest {
 declare interface UpdateRsgAsGroupResponse {
   /** 资源组的伸缩组 */
   RsgAsGroup?: RsgAsGroup;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -906,62 +906,62 @@ declare interface UpdateServiceRequest {
 declare interface UpdateServiceResponse {
   /** 服务 */
   Service?: ModelService;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tiems 腾讯云 TI 平台 TI-EMS} */
 declare interface Tiems {
   (): Versions;
-  /** {@link CreateJob 创建任务}({@link CreateJobRequest 请求参数}): {@link CreateJobResponse 返回参数} */
+  /** 创建任务 {@link CreateJobRequest} {@link CreateJobResponse} */
   CreateJob(data: CreateJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobResponse>;
-  /** {@link CreateRsgAsGroup 创建资源组的伸缩组}({@link CreateRsgAsGroupRequest 请求参数}): {@link CreateRsgAsGroupResponse 返回参数} */
+  /** 创建资源组的伸缩组 {@link CreateRsgAsGroupRequest} {@link CreateRsgAsGroupResponse} */
   CreateRsgAsGroup(data: CreateRsgAsGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRsgAsGroupResponse>;
-  /** {@link CreateRuntime 创建运行环境}({@link CreateRuntimeRequest 请求参数}): {@link CreateRuntimeResponse 返回参数} */
+  /** 创建运行环境 {@link CreateRuntimeRequest} {@link CreateRuntimeResponse} */
   CreateRuntime(data: CreateRuntimeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuntimeResponse>;
-  /** {@link CreateService 创建服务}({@link CreateServiceRequest 请求参数}): {@link CreateServiceResponse 返回参数} */
+  /** 创建服务 {@link CreateServiceRequest} {@link CreateServiceResponse} */
   CreateService(data: CreateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceResponse>;
-  /** {@link CreateServiceConfig 创建服务配置}({@link CreateServiceConfigRequest 请求参数}): {@link CreateServiceConfigResponse 返回参数} */
+  /** 创建服务配置 {@link CreateServiceConfigRequest} {@link CreateServiceConfigResponse} */
   CreateServiceConfig(data: CreateServiceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceConfigResponse>;
-  /** {@link DeleteInstance 删除节点}({@link DeleteInstanceRequest 请求参数}): {@link DeleteInstanceResponse 返回参数} */
+  /** 删除节点 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
-  /** {@link DeleteJob 删除任务}({@link DeleteJobRequest 请求参数}): {@link DeleteJobResponse 返回参数} */
+  /** 删除任务 {@link DeleteJobRequest} {@link DeleteJobResponse} */
   DeleteJob(data: DeleteJobRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJobResponse>;
-  /** {@link DeleteResourceGroup 删除资源组}({@link DeleteResourceGroupRequest 请求参数}): {@link DeleteResourceGroupResponse 返回参数} */
+  /** 删除资源组 {@link DeleteResourceGroupRequest} {@link DeleteResourceGroupResponse} */
   DeleteResourceGroup(data: DeleteResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceGroupResponse>;
-  /** {@link DeleteRsgAsGroup 删除资源组的伸缩组}({@link DeleteRsgAsGroupRequest 请求参数}): {@link DeleteRsgAsGroupResponse 返回参数} */
+  /** 删除资源组的伸缩组 {@link DeleteRsgAsGroupRequest} {@link DeleteRsgAsGroupResponse} */
   DeleteRsgAsGroup(data: DeleteRsgAsGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRsgAsGroupResponse>;
-  /** {@link DeleteRuntime 删除运行环境}({@link DeleteRuntimeRequest 请求参数}): {@link DeleteRuntimeResponse 返回参数} */
+  /** 删除运行环境 {@link DeleteRuntimeRequest} {@link DeleteRuntimeResponse} */
   DeleteRuntime(data: DeleteRuntimeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuntimeResponse>;
-  /** {@link DeleteService 删除服务}({@link DeleteServiceRequest 请求参数}): {@link DeleteServiceResponse 返回参数} */
+  /** 删除服务 {@link DeleteServiceRequest} {@link DeleteServiceResponse} */
   DeleteService(data: DeleteServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceResponse>;
-  /** {@link DeleteServiceConfig 删除服务配置}({@link DeleteServiceConfigRequest 请求参数}): {@link DeleteServiceConfigResponse 返回参数} */
+  /** 删除服务配置 {@link DeleteServiceConfigRequest} {@link DeleteServiceConfigResponse} */
   DeleteServiceConfig(data?: DeleteServiceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceConfigResponse>;
-  /** {@link DescribeInstances 获取节点列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
+  /** 获取节点列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** {@link DescribeResourceGroups 获取资源组列表}({@link DescribeResourceGroupsRequest 请求参数}): {@link DescribeResourceGroupsResponse 返回参数} */
+  /** 获取资源组列表 {@link DescribeResourceGroupsRequest} {@link DescribeResourceGroupsResponse} */
   DescribeResourceGroups(data?: DescribeResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGroupsResponse>;
-  /** {@link DescribeRsgAsGroupActivities 查询伸缩组活动}({@link DescribeRsgAsGroupActivitiesRequest 请求参数}): {@link DescribeRsgAsGroupActivitiesResponse 返回参数} */
+  /** 查询伸缩组活动 {@link DescribeRsgAsGroupActivitiesRequest} {@link DescribeRsgAsGroupActivitiesResponse} */
   DescribeRsgAsGroupActivities(data: DescribeRsgAsGroupActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRsgAsGroupActivitiesResponse>;
-  /** {@link DescribeRsgAsGroups 查询资源组的伸缩组信息}({@link DescribeRsgAsGroupsRequest 请求参数}): {@link DescribeRsgAsGroupsResponse 返回参数} */
+  /** 查询资源组的伸缩组信息 {@link DescribeRsgAsGroupsRequest} {@link DescribeRsgAsGroupsResponse} */
   DescribeRsgAsGroups(data?: DescribeRsgAsGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRsgAsGroupsResponse>;
-  /** {@link DescribeRuntimes 描述服务运行环境}({@link DescribeRuntimesRequest 请求参数}): {@link DescribeRuntimesResponse 返回参数} */
+  /** 描述服务运行环境 {@link DescribeRuntimesRequest} {@link DescribeRuntimesResponse} */
   DescribeRuntimes(data?: DescribeRuntimesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuntimesResponse>;
-  /** {@link DescribeServiceConfigs 描述服务配置}({@link DescribeServiceConfigsRequest 请求参数}): {@link DescribeServiceConfigsResponse 返回参数} */
+  /** 描述服务配置 {@link DescribeServiceConfigsRequest} {@link DescribeServiceConfigsResponse} */
   DescribeServiceConfigs(data?: DescribeServiceConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceConfigsResponse>;
-  /** {@link DescribeServices 描述服务}({@link DescribeServicesRequest 请求参数}): {@link DescribeServicesResponse 返回参数} */
+  /** 描述服务 {@link DescribeServicesRequest} {@link DescribeServicesResponse} */
   DescribeServices(data?: DescribeServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServicesResponse>;
-  /** {@link DisableRsgAsGroup 停用资源组的伸缩组}({@link DisableRsgAsGroupRequest 请求参数}): {@link DisableRsgAsGroupResponse 返回参数} */
+  /** 停用资源组的伸缩组 {@link DisableRsgAsGroupRequest} {@link DisableRsgAsGroupResponse} */
   DisableRsgAsGroup(data: DisableRsgAsGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DisableRsgAsGroupResponse>;
-  /** {@link EnableRsgAsGroup 启用资源组的伸缩组}({@link EnableRsgAsGroupRequest 请求参数}): {@link EnableRsgAsGroupResponse 返回参数} */
+  /** 启用资源组的伸缩组 {@link EnableRsgAsGroupRequest} {@link EnableRsgAsGroupResponse} */
   EnableRsgAsGroup(data: EnableRsgAsGroupRequest, config?: AxiosRequestConfig): AxiosPromise<EnableRsgAsGroupResponse>;
-  /** {@link ExposeService 暴露服务}({@link ExposeServiceRequest 请求参数}): {@link ExposeServiceResponse 返回参数} */
+  /** 暴露服务 {@link ExposeServiceRequest} {@link ExposeServiceResponse} */
   ExposeService(data: ExposeServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ExposeServiceResponse>;
-  /** {@link UpdateJob 更新任务}({@link UpdateJobRequest 请求参数}): {@link UpdateJobResponse 返回参数} */
+  /** 更新任务 {@link UpdateJobRequest} {@link UpdateJobResponse} */
   UpdateJob(data: UpdateJobRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateJobResponse>;
-  /** {@link UpdateRsgAsGroup 更新资源组的伸缩组}({@link UpdateRsgAsGroupRequest 请求参数}): {@link UpdateRsgAsGroupResponse 返回参数} */
+  /** 更新资源组的伸缩组 {@link UpdateRsgAsGroupRequest} {@link UpdateRsgAsGroupResponse} */
   UpdateRsgAsGroup(data: UpdateRsgAsGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRsgAsGroupResponse>;
-  /** {@link UpdateService 更新服务}({@link UpdateServiceRequest 请求参数}): {@link UpdateServiceResponse 返回参数} */
+  /** 更新服务 {@link UpdateServiceRequest} {@link UpdateServiceResponse} */
   UpdateService(data: UpdateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateServiceResponse>;
 }
 

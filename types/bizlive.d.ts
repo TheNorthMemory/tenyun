@@ -44,7 +44,7 @@ declare interface CreateSessionRequest {
 declare interface CreateSessionResponse {
   /** 服务端session信息，返回给JSSDK */
   ServerSession?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -62,7 +62,7 @@ declare interface DescribeStreamPlayInfoListRequest {
 declare interface DescribeStreamPlayInfoListResponse {
   /** 统计信息列表。 */
   DataInfoList?: DayStreamPlayInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -76,7 +76,7 @@ declare interface DescribeWorkersResponse {
   Idle?: number;
   /** 区域个数 */
   RegionNum?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -92,7 +92,7 @@ declare interface ForbidLiveStreamRequest {
 }
 
 declare interface ForbidLiveStreamResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -110,7 +110,7 @@ declare interface RegisterIMRequest {
 declare interface RegisterIMResponse {
   /** 用来传递给插件的关键字段 */
   UserKey?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -120,24 +120,24 @@ declare interface StopGameRequest {
 }
 
 declare interface StopGameResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Bizlive 商业直播} */
 declare interface Bizlive {
   (): Versions;
-  /** {@link CreateSession 创建会话}({@link CreateSessionRequest 请求参数}): {@link CreateSessionResponse 返回参数} */
+  /** 创建会话 {@link CreateSessionRequest} {@link CreateSessionResponse} */
   CreateSession(data: CreateSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSessionResponse>;
-  /** {@link DescribeStreamPlayInfoList 查询流的播放信息列表}({@link DescribeStreamPlayInfoListRequest 请求参数}): {@link DescribeStreamPlayInfoListResponse 返回参数} */
+  /** 查询流的播放信息列表 {@link DescribeStreamPlayInfoListRequest} {@link DescribeStreamPlayInfoListResponse} */
   DescribeStreamPlayInfoList(data: DescribeStreamPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPlayInfoListResponse>;
-  /** {@link DescribeWorkers 查询空闲机器数量}({@link DescribeWorkersRequest 请求参数}): {@link DescribeWorkersResponse 返回参数} */
+  /** 查询空闲机器数量 {@link DescribeWorkersRequest} {@link DescribeWorkersResponse} */
   DescribeWorkers(data?: DescribeWorkersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkersResponse>;
-  /** {@link ForbidLiveStream 禁播直播流}({@link ForbidLiveStreamRequest 请求参数}): {@link ForbidLiveStreamResponse 返回参数} */
+  /** 禁播直播流 {@link ForbidLiveStreamRequest} {@link ForbidLiveStreamResponse} */
   ForbidLiveStream(data: ForbidLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidLiveStreamResponse>;
-  /** {@link RegisterIM 注册聊天室}({@link RegisterIMRequest 请求参数}): {@link RegisterIMResponse 返回参数} */
+  /** 注册聊天室 {@link RegisterIMRequest} {@link RegisterIMResponse} */
   RegisterIM(data: RegisterIMRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterIMResponse>;
-  /** {@link StopGame 强制退出游戏}({@link StopGameRequest 请求参数}): {@link StopGameResponse 返回参数} */
+  /** 强制退出游戏 {@link StopGameRequest} {@link StopGameResponse} */
   StopGame(data: StopGameRequest, config?: AxiosRequestConfig): AxiosPromise<StopGameResponse>;
 }
 

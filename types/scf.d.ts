@@ -674,7 +674,7 @@ declare interface CopyFunctionRequest {
 }
 
 declare interface CopyFunctionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -694,7 +694,7 @@ declare interface CreateAliasRequest {
 }
 
 declare interface CreateAliasResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -756,7 +756,7 @@ declare interface CreateFunctionRequest {
 }
 
 declare interface CreateFunctionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -768,7 +768,7 @@ declare interface CreateNamespaceRequest {
 }
 
 declare interface CreateNamespaceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -794,7 +794,7 @@ declare interface CreateTriggerRequest {
 declare interface CreateTriggerResponse {
   /** 触发器信息 */
   TriggerInfo: Trigger;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -808,7 +808,7 @@ declare interface DeleteAliasRequest {
 }
 
 declare interface DeleteAliasResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -822,7 +822,7 @@ declare interface DeleteFunctionRequest {
 }
 
 declare interface DeleteFunctionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -834,7 +834,7 @@ declare interface DeleteLayerVersionRequest {
 }
 
 declare interface DeleteLayerVersionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -844,7 +844,7 @@ declare interface DeleteNamespaceRequest {
 }
 
 declare interface DeleteNamespaceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -858,7 +858,7 @@ declare interface DeleteProvisionedConcurrencyConfigRequest {
 }
 
 declare interface DeleteProvisionedConcurrencyConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -870,7 +870,7 @@ declare interface DeleteReservedConcurrencyConfigRequest {
 }
 
 declare interface DeleteReservedConcurrencyConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -890,7 +890,7 @@ declare interface DeleteTriggerRequest {
 }
 
 declare interface DeleteTriggerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -902,7 +902,7 @@ declare interface GetAccountResponse {
   AccountUsage: UsageInfo;
   /** 命名空间限制的信息 */
   AccountLimit: LimitsInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -928,7 +928,7 @@ declare interface GetAliasResponse {
   AddTime: string | null;
   /** 更新时间 */
   ModTime: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -940,7 +940,7 @@ declare interface GetAsyncEventStatusRequest {
 declare interface GetAsyncEventStatusResponse {
   /** 异步事件状态 */
   Result: AsyncEventStatus;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -958,7 +958,7 @@ declare interface GetFunctionAddressResponse {
   Url: string;
   /** 函数的SHA256编码 */
   CodeSha256: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -974,7 +974,7 @@ declare interface GetFunctionEventInvokeConfigRequest {
 declare interface GetFunctionEventInvokeConfigResponse {
   /** 异步重试配置信息 */
   AsyncTriggerConfig: AsyncTriggerConfig;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1012,7 +1012,7 @@ declare interface GetFunctionLogsResponse {
   Data: FunctionLog[];
   /** 该字段已下线 */
   SearchContext: LogSearchContext;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1116,7 +1116,7 @@ declare interface GetFunctionResponse {
   ProtocolType: string | null;
   /** HTTP函数配置ProtocolType访问协议，当前协议配置的参数 */
   ProtocolParams: ProtocolParams | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1146,7 +1146,7 @@ declare interface GetLayerVersionResponse {
   LayerName?: string;
   /** 层的具体版本当前状态，可能取值：Active 正常Publishing 发布中PublishFailed 发布失败Deleted 已删除 */
   Status?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1164,7 +1164,7 @@ declare interface GetProvisionedConcurrencyConfigResponse {
   UnallocatedConcurrencyNum: number;
   /** 函数已预置的并发配置详情。 */
   Allocated: VersionProvisionedConcurrencyInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1186,7 +1186,7 @@ declare interface GetRequestStatusResponse {
   TotalCount: number | null;
   /** 函数运行状态数组 */
   Data: RequestStatus[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1200,7 +1200,7 @@ declare interface GetReservedConcurrencyConfigRequest {
 declare interface GetReservedConcurrencyConfigResponse {
   /** 该函数的最大独占配额。 */
   ReservedMem: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1222,7 +1222,7 @@ declare interface InvokeFunctionRequest {
 declare interface InvokeFunctionResponse {
   /** 函数执行结果 */
   Result: Result;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1246,7 +1246,7 @@ declare interface InvokeRequest {
 declare interface InvokeResponse {
   /** 函数执行结果 */
   Result: Result;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1268,7 +1268,7 @@ declare interface ListAliasesResponse {
   Aliases: Alias[];
   /** 别名总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1304,7 +1304,7 @@ declare interface ListAsyncEventsResponse {
   TotalCount: number;
   /** 异步事件列表 */
   EventList: AsyncEvent[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1332,7 +1332,7 @@ declare interface ListFunctionsResponse {
   Functions: Function[];
   /** 总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1346,7 +1346,7 @@ declare interface ListLayerVersionsRequest {
 declare interface ListLayerVersionsResponse {
   /** 层版本列表 */
   LayerVersions?: LayerVersionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1366,7 +1366,7 @@ declare interface ListLayersResponse {
   Layers: LayerVersionInfo[];
   /** 层总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1388,7 +1388,7 @@ declare interface ListNamespacesResponse {
   Namespaces: Namespace[];
   /** 返回的namespace数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1414,7 +1414,7 @@ declare interface ListTriggersResponse {
   TotalCount?: number;
   /** 触发器列表 */
   Triggers?: TriggerInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1440,7 +1440,7 @@ declare interface ListVersionByFunctionResponse {
   Versions: FunctionVersion[] | null;
   /** 函数版本总数。 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1460,7 +1460,7 @@ declare interface PublishLayerVersionRequest {
 declare interface PublishLayerVersionResponse {
   /** 本次创建的层的版本号 */
   LayerVersion: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1490,7 +1490,7 @@ declare interface PublishVersionResponse {
   Runtime: string;
   /** 函数的命名空间 */
   Namespace: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1516,7 +1516,7 @@ declare interface PutProvisionedConcurrencyConfigRequest {
 }
 
 declare interface PutProvisionedConcurrencyConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1530,7 +1530,7 @@ declare interface PutReservedConcurrencyConfigRequest {
 }
 
 declare interface PutReservedConcurrencyConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1542,7 +1542,7 @@ declare interface PutTotalConcurrencyConfigRequest {
 }
 
 declare interface PutTotalConcurrencyConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1558,7 +1558,7 @@ declare interface TerminateAsyncEventRequest {
 }
 
 declare interface TerminateAsyncEventResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1578,7 +1578,7 @@ declare interface UpdateAliasRequest {
 }
 
 declare interface UpdateAliasResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1610,7 +1610,7 @@ declare interface UpdateFunctionCodeRequest {
 }
 
 declare interface UpdateFunctionCodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1660,7 +1660,7 @@ declare interface UpdateFunctionConfigurationRequest {
 }
 
 declare interface UpdateFunctionConfigurationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1674,7 +1674,7 @@ declare interface UpdateFunctionEventInvokeConfigRequest {
 }
 
 declare interface UpdateFunctionEventInvokeConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1686,100 +1686,100 @@ declare interface UpdateNamespaceRequest {
 }
 
 declare interface UpdateNamespaceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Scf 云函数} */
 declare interface Scf {
   (): Versions;
-  /** {@link CopyFunction 复制函数}({@link CopyFunctionRequest 请求参数}): {@link CopyFunctionResponse 返回参数} */
+  /** 复制函数 {@link CopyFunctionRequest} {@link CopyFunctionResponse} */
   CopyFunction(data: CopyFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CopyFunctionResponse>;
-  /** {@link CreateAlias 创建函数版本别名}({@link CreateAliasRequest 请求参数}): {@link CreateAliasResponse 返回参数} */
+  /** 创建函数版本别名 {@link CreateAliasRequest} {@link CreateAliasResponse} */
   CreateAlias(data: CreateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAliasResponse>;
-  /** {@link CreateFunction 创建函数}({@link CreateFunctionRequest 请求参数}): {@link CreateFunctionResponse 返回参数} */
+  /** 创建函数 {@link CreateFunctionRequest} {@link CreateFunctionResponse} */
   CreateFunction(data: CreateFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFunctionResponse>;
-  /** {@link CreateNamespace 创建命名空间}({@link CreateNamespaceRequest 请求参数}): {@link CreateNamespaceResponse 返回参数} */
+  /** 创建命名空间 {@link CreateNamespaceRequest} {@link CreateNamespaceResponse} */
   CreateNamespace(data: CreateNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNamespaceResponse>;
-  /** {@link CreateTrigger 设置函数触发方式}({@link CreateTriggerRequest 请求参数}): {@link CreateTriggerResponse 返回参数} */
+  /** 设置函数触发方式 {@link CreateTriggerRequest} {@link CreateTriggerResponse} */
   CreateTrigger(data: CreateTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTriggerResponse>;
-  /** {@link DeleteAlias 删除别名}({@link DeleteAliasRequest 请求参数}): {@link DeleteAliasResponse 返回参数} */
+  /** 删除别名 {@link DeleteAliasRequest} {@link DeleteAliasResponse} */
   DeleteAlias(data: DeleteAliasRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAliasResponse>;
-  /** {@link DeleteFunction 删除函数}({@link DeleteFunctionRequest 请求参数}): {@link DeleteFunctionResponse 返回参数} */
+  /** 删除函数 {@link DeleteFunctionRequest} {@link DeleteFunctionResponse} */
   DeleteFunction(data: DeleteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionResponse>;
-  /** {@link DeleteLayerVersion 删除层版本}({@link DeleteLayerVersionRequest 请求参数}): {@link DeleteLayerVersionResponse 返回参数} */
+  /** 删除层版本 {@link DeleteLayerVersionRequest} {@link DeleteLayerVersionResponse} */
   DeleteLayerVersion(data: DeleteLayerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLayerVersionResponse>;
-  /** {@link DeleteNamespace 删除命名空间}({@link DeleteNamespaceRequest 请求参数}): {@link DeleteNamespaceResponse 返回参数} */
+  /** 删除命名空间 {@link DeleteNamespaceRequest} {@link DeleteNamespaceResponse} */
   DeleteNamespace(data: DeleteNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNamespaceResponse>;
-  /** {@link DeleteProvisionedConcurrencyConfig 删除预置并发}({@link DeleteProvisionedConcurrencyConfigRequest 请求参数}): {@link DeleteProvisionedConcurrencyConfigResponse 返回参数} */
+  /** 删除预置并发 {@link DeleteProvisionedConcurrencyConfigRequest} {@link DeleteProvisionedConcurrencyConfigResponse} */
   DeleteProvisionedConcurrencyConfig(data: DeleteProvisionedConcurrencyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProvisionedConcurrencyConfigResponse>;
-  /** {@link DeleteReservedConcurrencyConfig 删除函数最大独占配额}({@link DeleteReservedConcurrencyConfigRequest 请求参数}): {@link DeleteReservedConcurrencyConfigResponse 返回参数} */
+  /** 删除函数最大独占配额 {@link DeleteReservedConcurrencyConfigRequest} {@link DeleteReservedConcurrencyConfigResponse} */
   DeleteReservedConcurrencyConfig(data: DeleteReservedConcurrencyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReservedConcurrencyConfigResponse>;
-  /** {@link DeleteTrigger 删除触发器}({@link DeleteTriggerRequest 请求参数}): {@link DeleteTriggerResponse 返回参数} */
+  /** 删除触发器 {@link DeleteTriggerRequest} {@link DeleteTriggerResponse} */
   DeleteTrigger(data: DeleteTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTriggerResponse>;
-  /** {@link GetAccount 获取账户信息}({@link GetAccountRequest 请求参数}): {@link GetAccountResponse 返回参数} */
+  /** 获取账户信息 {@link GetAccountRequest} {@link GetAccountResponse} */
   GetAccount(data?: GetAccountRequest, config?: AxiosRequestConfig): AxiosPromise<GetAccountResponse>;
-  /** {@link GetAlias 获取别名详细信息}({@link GetAliasRequest 请求参数}): {@link GetAliasResponse 返回参数} */
+  /** 获取别名详细信息 {@link GetAliasRequest} {@link GetAliasResponse} */
   GetAlias(data: GetAliasRequest, config?: AxiosRequestConfig): AxiosPromise<GetAliasResponse>;
-  /** {@link GetAsyncEventStatus 获取函数异步事件状态}({@link GetAsyncEventStatusRequest 请求参数}): {@link GetAsyncEventStatusResponse 返回参数} */
+  /** 获取函数异步事件状态 {@link GetAsyncEventStatusRequest} {@link GetAsyncEventStatusResponse} */
   GetAsyncEventStatus(data: GetAsyncEventStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetAsyncEventStatusResponse>;
-  /** {@link GetFunction 获取函数详细信息}({@link GetFunctionRequest 请求参数}): {@link GetFunctionResponse 返回参数} */
+  /** 获取函数详细信息 {@link GetFunctionRequest} {@link GetFunctionResponse} */
   GetFunction(data: GetFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<GetFunctionResponse>;
-  /** {@link GetFunctionAddress 获取函数代码下载地址}({@link GetFunctionAddressRequest 请求参数}): {@link GetFunctionAddressResponse 返回参数} */
+  /** 获取函数代码下载地址 {@link GetFunctionAddressRequest} {@link GetFunctionAddressResponse} */
   GetFunctionAddress(data: GetFunctionAddressRequest, config?: AxiosRequestConfig): AxiosPromise<GetFunctionAddressResponse>;
-  /** {@link GetFunctionEventInvokeConfig 获取函数异步重试配置}({@link GetFunctionEventInvokeConfigRequest 请求参数}): {@link GetFunctionEventInvokeConfigResponse 返回参数} */
+  /** 获取函数异步重试配置 {@link GetFunctionEventInvokeConfigRequest} {@link GetFunctionEventInvokeConfigResponse} */
   GetFunctionEventInvokeConfig(data: GetFunctionEventInvokeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<GetFunctionEventInvokeConfigResponse>;
-  /** {@link GetFunctionLogs 获取函数运行日志}({@link GetFunctionLogsRequest 请求参数}): {@link GetFunctionLogsResponse 返回参数} */
+  /** 获取函数运行日志 {@link GetFunctionLogsRequest} {@link GetFunctionLogsResponse} */
   GetFunctionLogs(data?: GetFunctionLogsRequest, config?: AxiosRequestConfig): AxiosPromise<GetFunctionLogsResponse>;
-  /** {@link GetLayerVersion 获取层版本详细信息}({@link GetLayerVersionRequest 请求参数}): {@link GetLayerVersionResponse 返回参数} */
+  /** 获取层版本详细信息 {@link GetLayerVersionRequest} {@link GetLayerVersionResponse} */
   GetLayerVersion(data: GetLayerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<GetLayerVersionResponse>;
-  /** {@link GetProvisionedConcurrencyConfig 获取函数预置并发详情}({@link GetProvisionedConcurrencyConfigRequest 请求参数}): {@link GetProvisionedConcurrencyConfigResponse 返回参数} */
+  /** 获取函数预置并发详情 {@link GetProvisionedConcurrencyConfigRequest} {@link GetProvisionedConcurrencyConfigResponse} */
   GetProvisionedConcurrencyConfig(data: GetProvisionedConcurrencyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<GetProvisionedConcurrencyConfigResponse>;
-  /** {@link GetRequestStatus 获取函数单个请求运行状态}({@link GetRequestStatusRequest 请求参数}): {@link GetRequestStatusResponse 返回参数} */
+  /** 获取函数单个请求运行状态 {@link GetRequestStatusRequest} {@link GetRequestStatusResponse} */
   GetRequestStatus(data: GetRequestStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetRequestStatusResponse>;
-  /** {@link GetReservedConcurrencyConfig 获取函数最大独占配额详情}({@link GetReservedConcurrencyConfigRequest 请求参数}): {@link GetReservedConcurrencyConfigResponse 返回参数} */
+  /** 获取函数最大独占配额详情 {@link GetReservedConcurrencyConfigRequest} {@link GetReservedConcurrencyConfigResponse} */
   GetReservedConcurrencyConfig(data: GetReservedConcurrencyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<GetReservedConcurrencyConfigResponse>;
-  /** {@link Invoke 运行函数}({@link InvokeRequest 请求参数}): {@link InvokeResponse 返回参数} */
+  /** 运行函数 {@link InvokeRequest} {@link InvokeResponse} */
   Invoke(data: InvokeRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeResponse>;
-  /** {@link InvokeFunction 同步Invoke调用接口}({@link InvokeFunctionRequest 请求参数}): {@link InvokeFunctionResponse 返回参数} */
+  /** 同步Invoke调用接口 {@link InvokeFunctionRequest} {@link InvokeFunctionResponse} */
   InvokeFunction(data: InvokeFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeFunctionResponse>;
-  /** {@link ListAliases 获取别名列表}({@link ListAliasesRequest 请求参数}): {@link ListAliasesResponse 返回参数} */
+  /** 获取别名列表 {@link ListAliasesRequest} {@link ListAliasesResponse} */
   ListAliases(data: ListAliasesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAliasesResponse>;
-  /** {@link ListAsyncEvents 拉取函数异步事件列表}({@link ListAsyncEventsRequest 请求参数}): {@link ListAsyncEventsResponse 返回参数} */
+  /** 拉取函数异步事件列表 {@link ListAsyncEventsRequest} {@link ListAsyncEventsResponse} */
   ListAsyncEvents(data: ListAsyncEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAsyncEventsResponse>;
-  /** {@link ListFunctions 获取函数列表}({@link ListFunctionsRequest 请求参数}): {@link ListFunctionsResponse 返回参数} */
+  /** 获取函数列表 {@link ListFunctionsRequest} {@link ListFunctionsResponse} */
   ListFunctions(data?: ListFunctionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListFunctionsResponse>;
-  /** {@link ListLayerVersions 获取层版本列表}({@link ListLayerVersionsRequest 请求参数}): {@link ListLayerVersionsResponse 返回参数} */
+  /** 获取层版本列表 {@link ListLayerVersionsRequest} {@link ListLayerVersionsResponse} */
   ListLayerVersions(data: ListLayerVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListLayerVersionsResponse>;
-  /** {@link ListLayers 返回层列表}({@link ListLayersRequest 请求参数}): {@link ListLayersResponse 返回参数} */
+  /** 返回层列表 {@link ListLayersRequest} {@link ListLayersResponse} */
   ListLayers(data?: ListLayersRequest, config?: AxiosRequestConfig): AxiosPromise<ListLayersResponse>;
-  /** {@link ListNamespaces 列出命名空间列表}({@link ListNamespacesRequest 请求参数}): {@link ListNamespacesResponse 返回参数} */
+  /** 列出命名空间列表 {@link ListNamespacesRequest} {@link ListNamespacesResponse} */
   ListNamespaces(data?: ListNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<ListNamespacesResponse>;
-  /** {@link ListTriggers 获取函数触发器列表}({@link ListTriggersRequest 请求参数}): {@link ListTriggersResponse 返回参数} */
+  /** 获取函数触发器列表 {@link ListTriggersRequest} {@link ListTriggersResponse} */
   ListTriggers(data: ListTriggersRequest, config?: AxiosRequestConfig): AxiosPromise<ListTriggersResponse>;
-  /** {@link ListVersionByFunction 查询函数版本}({@link ListVersionByFunctionRequest 请求参数}): {@link ListVersionByFunctionResponse 返回参数} */
+  /** 查询函数版本 {@link ListVersionByFunctionRequest} {@link ListVersionByFunctionResponse} */
   ListVersionByFunction(data: ListVersionByFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<ListVersionByFunctionResponse>;
-  /** {@link PublishLayerVersion 发布层版本}({@link PublishLayerVersionRequest 请求参数}): {@link PublishLayerVersionResponse 返回参数} */
+  /** 发布层版本 {@link PublishLayerVersionRequest} {@link PublishLayerVersionResponse} */
   PublishLayerVersion(data: PublishLayerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<PublishLayerVersionResponse>;
-  /** {@link PublishVersion 发布新版本}({@link PublishVersionRequest 请求参数}): {@link PublishVersionResponse 返回参数} */
+  /** 发布新版本 {@link PublishVersionRequest} {@link PublishVersionResponse} */
   PublishVersion(data: PublishVersionRequest, config?: AxiosRequestConfig): AxiosPromise<PublishVersionResponse>;
-  /** {@link PutProvisionedConcurrencyConfig 设置预置并发}({@link PutProvisionedConcurrencyConfigRequest 请求参数}): {@link PutProvisionedConcurrencyConfigResponse 返回参数} */
+  /** 设置预置并发 {@link PutProvisionedConcurrencyConfigRequest} {@link PutProvisionedConcurrencyConfigResponse} */
   PutProvisionedConcurrencyConfig(data: PutProvisionedConcurrencyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<PutProvisionedConcurrencyConfigResponse>;
-  /** {@link PutReservedConcurrencyConfig 设置最大独占配额}({@link PutReservedConcurrencyConfigRequest 请求参数}): {@link PutReservedConcurrencyConfigResponse 返回参数} */
+  /** 设置最大独占配额 {@link PutReservedConcurrencyConfigRequest} {@link PutReservedConcurrencyConfigResponse} */
   PutReservedConcurrencyConfig(data: PutReservedConcurrencyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<PutReservedConcurrencyConfigResponse>;
-  /** {@link PutTotalConcurrencyConfig 修改账号并发限制配额}({@link PutTotalConcurrencyConfigRequest 请求参数}): {@link PutTotalConcurrencyConfigResponse 返回参数} */
+  /** 修改账号并发限制配额 {@link PutTotalConcurrencyConfigRequest} {@link PutTotalConcurrencyConfigResponse} */
   PutTotalConcurrencyConfig(data: PutTotalConcurrencyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<PutTotalConcurrencyConfigResponse>;
-  /** {@link TerminateAsyncEvent 终止函数异步事件}({@link TerminateAsyncEventRequest 请求参数}): {@link TerminateAsyncEventResponse 返回参数} */
+  /** 终止函数异步事件 {@link TerminateAsyncEventRequest} {@link TerminateAsyncEventResponse} */
   TerminateAsyncEvent(data: TerminateAsyncEventRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateAsyncEventResponse>;
-  /** {@link UpdateAlias 更新别名的配置}({@link UpdateAliasRequest 请求参数}): {@link UpdateAliasResponse 返回参数} */
+  /** 更新别名的配置 {@link UpdateAliasRequest} {@link UpdateAliasResponse} */
   UpdateAlias(data: UpdateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAliasResponse>;
-  /** {@link UpdateFunctionCode 更新函数代码}({@link UpdateFunctionCodeRequest 请求参数}): {@link UpdateFunctionCodeResponse 返回参数} */
+  /** 更新函数代码 {@link UpdateFunctionCodeRequest} {@link UpdateFunctionCodeResponse} */
   UpdateFunctionCode(data: UpdateFunctionCodeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFunctionCodeResponse>;
-  /** {@link UpdateFunctionConfiguration 更新函数配置}({@link UpdateFunctionConfigurationRequest 请求参数}): {@link UpdateFunctionConfigurationResponse 返回参数} */
+  /** 更新函数配置 {@link UpdateFunctionConfigurationRequest} {@link UpdateFunctionConfigurationResponse} */
   UpdateFunctionConfiguration(data: UpdateFunctionConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFunctionConfigurationResponse>;
-  /** {@link UpdateFunctionEventInvokeConfig 更新函数异步重试配置}({@link UpdateFunctionEventInvokeConfigRequest 请求参数}): {@link UpdateFunctionEventInvokeConfigResponse 返回参数} */
+  /** 更新函数异步重试配置 {@link UpdateFunctionEventInvokeConfigRequest} {@link UpdateFunctionEventInvokeConfigResponse} */
   UpdateFunctionEventInvokeConfig(data: UpdateFunctionEventInvokeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFunctionEventInvokeConfigResponse>;
-  /** {@link UpdateNamespace 更新命名空间}({@link UpdateNamespaceRequest 请求参数}): {@link UpdateNamespaceResponse 返回参数} */
+  /** 更新命名空间 {@link UpdateNamespaceRequest} {@link UpdateNamespaceResponse} */
   UpdateNamespace(data: UpdateNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateNamespaceResponse>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   BatchCreateTrigger(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;

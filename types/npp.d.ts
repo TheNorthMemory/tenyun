@@ -146,7 +146,7 @@ declare interface CreateCallBackResponse {
   ErrorCode?: string;
   /** 错误原因 */
   Msg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -168,7 +168,7 @@ declare interface DelVirtualNumResponse {
   BindId?: string | null;
   /** 中间号还剩引用计数，如果计数为 0 会解绑 */
   RefLeftNum?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -188,7 +188,7 @@ declare interface DeleteCallBackResponse {
   Msg?: string | null;
   /** 话单id */
   CallId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -214,7 +214,7 @@ declare interface DescribeCallBackCdrResponse {
   ErrorCode?: string | null;
   /** 错误原因 */
   Msg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -246,7 +246,7 @@ declare interface DescribeCallBackStatusResponse {
   Dst?: string;
   /** 通话最后状态：0：未知状态 1：主叫响铃中 2：主叫接听 3：被叫响铃中 4：正常通话中 5：通话结束 */
   CallStatus?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -264,7 +264,7 @@ declare interface DescribeCallerDisplayListResponse {
   ErrorCode?: string;
   /** 错误原因 */
   Msg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -290,7 +290,7 @@ declare interface Get400CdrResponse {
   Offset?: string | null;
   /** 话单列表 */
   Cdr?: VirturalNumCdr[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -334,28 +334,28 @@ declare interface GetVirtualNumResponse {
   VirtualNum?: string | null;
   /** 错误原因 */
   Msg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Npp 号码保护} */
 declare interface Npp {
   (): Versions;
-  /** {@link CreateCallBack 回拨呼叫请求}({@link CreateCallBackRequest 请求参数}): {@link CreateCallBackResponse 返回参数} */
+  /** 回拨呼叫请求 {@link CreateCallBackRequest} {@link CreateCallBackResponse} */
   CreateCallBack(data: CreateCallBackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCallBackResponse>;
-  /** {@link DelVirtualNum 直拨解绑中间号}({@link DelVirtualNumRequest 请求参数}): {@link DelVirtualNumResponse 返回参数} */
+  /** 直拨解绑中间号 {@link DelVirtualNumRequest} {@link DelVirtualNumResponse} */
   DelVirtualNum(data: DelVirtualNumRequest, config?: AxiosRequestConfig): AxiosPromise<DelVirtualNumResponse>;
-  /** {@link DeleteCallBack 回拨呼叫取消}({@link DeleteCallBackRequest 请求参数}): {@link DeleteCallBackResponse 返回参数} */
+  /** 回拨呼叫取消 {@link DeleteCallBackRequest} {@link DeleteCallBackResponse} */
   DeleteCallBack(data: DeleteCallBackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCallBackResponse>;
-  /** {@link DescribeCallBackCdr 回拨话单获取接口}({@link DescribeCallBackCdrRequest 请求参数}): {@link DescribeCallBackCdrResponse 返回参数} */
+  /** 回拨话单获取接口 {@link DescribeCallBackCdrRequest} {@link DescribeCallBackCdrResponse} */
   DescribeCallBackCdr(data: DescribeCallBackCdrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallBackCdrResponse>;
-  /** {@link DescribeCallBackStatus 回拨通话状态获取}({@link DescribeCallBackStatusRequest 请求参数}): {@link DescribeCallBackStatusResponse 返回参数} */
+  /** 回拨通话状态获取 {@link DescribeCallBackStatusRequest} {@link DescribeCallBackStatusResponse} */
   DescribeCallBackStatus(data: DescribeCallBackStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallBackStatusResponse>;
-  /** {@link DescribeCallerDisplayList 回拨拉取主叫显号号码集合}({@link DescribeCallerDisplayListRequest 请求参数}): {@link DescribeCallerDisplayListResponse 返回参数} */
+  /** 回拨拉取主叫显号号码集合 {@link DescribeCallerDisplayListRequest} {@link DescribeCallerDisplayListResponse} */
   DescribeCallerDisplayList(data: DescribeCallerDisplayListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallerDisplayListResponse>;
-  /** {@link Get400Cdr 直拨话单获取接口}({@link Get400CdrRequest 请求参数}): {@link Get400CdrResponse 返回参数} */
+  /** 直拨话单获取接口 {@link Get400CdrRequest} {@link Get400CdrResponse} */
   Get400Cdr(data: Get400CdrRequest, config?: AxiosRequestConfig): AxiosPromise<Get400CdrResponse>;
-  /** {@link GetVirtualNum 直拨获取中间号}({@link GetVirtualNumRequest 请求参数}): {@link GetVirtualNumResponse 返回参数} */
+  /** 直拨获取中间号 {@link GetVirtualNumRequest} {@link GetVirtualNumResponse} */
   GetVirtualNum(data: GetVirtualNumRequest, config?: AxiosRequestConfig): AxiosPromise<GetVirtualNumResponse>;
 }
 

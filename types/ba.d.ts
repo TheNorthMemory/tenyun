@@ -10,7 +10,7 @@ declare interface CreateWeappQRUrlRequest {
 declare interface CreateWeappQRUrlResponse {
   /** 渠道备案小程序二维码 */
   Url?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -24,7 +24,7 @@ declare interface DescribeGetAuthInfoResponse {
   IsAuthenticated: string;
   /** 认证类型，个人0，企业1 */
   Type: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -42,18 +42,18 @@ declare interface SyncIcpOrderWebInfoRequest {
 }
 
 declare interface SyncIcpOrderWebInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ba 网站备案} */
 declare interface Ba {
   (): Versions;
-  /** {@link CreateWeappQRUrl 创建渠道备案小程序二维码}({@link CreateWeappQRUrlRequest 请求参数}): {@link CreateWeappQRUrlResponse 返回参数} */
+  /** 创建渠道备案小程序二维码 {@link CreateWeappQRUrlRequest} {@link CreateWeappQRUrlResponse} */
   CreateWeappQRUrl(data: CreateWeappQRUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWeappQRUrlResponse>;
-  /** {@link DescribeGetAuthInfo 获取实名认证信息}({@link DescribeGetAuthInfoRequest 请求参数}): {@link DescribeGetAuthInfoResponse 返回参数} */
+  /** 获取实名认证信息 {@link DescribeGetAuthInfoRequest} {@link DescribeGetAuthInfoResponse} */
   DescribeGetAuthInfo(data?: DescribeGetAuthInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGetAuthInfoResponse>;
-  /** {@link SyncIcpOrderWebInfo 同步备案ICP订单网站信息}({@link SyncIcpOrderWebInfoRequest 请求参数}): {@link SyncIcpOrderWebInfoResponse 返回参数} */
+  /** 同步备案ICP订单网站信息 {@link SyncIcpOrderWebInfoRequest} {@link SyncIcpOrderWebInfoResponse} */
   SyncIcpOrderWebInfo(data: SyncIcpOrderWebInfoRequest, config?: AxiosRequestConfig): AxiosPromise<SyncIcpOrderWebInfoResponse>;
 }
 

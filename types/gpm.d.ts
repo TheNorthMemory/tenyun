@@ -238,7 +238,7 @@ declare interface CancelMatchingRequest {
 declare interface CancelMatchingResponse {
   /** 错误码 */
   ErrCode?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -274,7 +274,7 @@ declare interface CreateMatchRequest {
 declare interface CreateMatchResponse {
   /** 匹配信息 */
   MatchInfo?: MatchInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -292,7 +292,7 @@ declare interface CreateRuleRequest {
 declare interface CreateRuleResponse {
   /** 规则信息 */
   RuleInfo?: RuleInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -302,7 +302,7 @@ declare interface DeleteMatchRequest {
 }
 
 declare interface DeleteMatchResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -312,7 +312,7 @@ declare interface DeleteRuleRequest {
 }
 
 declare interface DeleteRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -332,7 +332,7 @@ declare interface DescribeDataResponse {
   OverviewData?: ReportOverviewData | null;
   /** 匹配请求次数趋势数据 */
   TrendData?: ReportTrendData | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -350,7 +350,7 @@ declare interface DescribeMatchCodesResponse {
   MatchCodes?: MatchCodeAttr[] | null;
   /** 总数 */
   TotalCount?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -362,7 +362,7 @@ declare interface DescribeMatchRequest {
 declare interface DescribeMatchResponse {
   /** 匹配信息 */
   MatchInfo?: MatchInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -392,7 +392,7 @@ declare interface DescribeMatchesResponse {
   SearchType?: string;
   /** 查询关键词（可选） */
   Keyword?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -406,7 +406,7 @@ declare interface DescribeMatchingProgressResponse {
   MatchTickets: MatchTicket[] | null;
   /** 错误码 */
   ErrCode: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -418,7 +418,7 @@ declare interface DescribeRuleRequest {
 declare interface DescribeRuleResponse {
   /** 规则信息 */
   RuleInfo?: RuleInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -448,7 +448,7 @@ declare interface DescribeRulesResponse {
   SearchType?: string;
   /** 查询关键词（可选） */
   Keyword?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -462,7 +462,7 @@ declare interface DescribeTokenResponse {
   MatchToken?: string | null;
   /** 当Token被替换后，GPM将兼容推送原始Token的时间（秒）。 */
   CompatibleSpan?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -500,7 +500,7 @@ declare interface ModifyMatchRequest {
 declare interface ModifyMatchResponse {
   /** 匹配信息 */
   MatchInfo?: MatchInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -518,7 +518,7 @@ declare interface ModifyRuleRequest {
 declare interface ModifyRuleResponse {
   /** 规则信息 */
   RuleInfo?: RuleInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -536,7 +536,7 @@ declare interface ModifyTokenResponse {
   MatchToken?: string;
   /** 当前Token被替换后，GPM将持续推送原Token的时间。 */
   CompatibleSpan?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -554,7 +554,7 @@ declare interface StartMatchingBackfillRequest {
 declare interface StartMatchingBackfillResponse {
   /** 匹配票据 */
   MatchTicket: MatchTicket | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -572,48 +572,48 @@ declare interface StartMatchingResponse {
   ErrCode?: number;
   /** 匹配票据 ID长度 128。 */
   MatchTicketId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Gpm 游戏玩家匹配} */
 declare interface Gpm {
   (): Versions;
-  /** {@link CancelMatching 取消匹配}({@link CancelMatchingRequest 请求参数}): {@link CancelMatchingResponse 返回参数} */
+  /** 取消匹配 {@link CancelMatchingRequest} {@link CancelMatchingResponse} */
   CancelMatching(data: CancelMatchingRequest, config?: AxiosRequestConfig): AxiosPromise<CancelMatchingResponse>;
-  /** {@link CreateMatch 创建匹配}({@link CreateMatchRequest 请求参数}): {@link CreateMatchResponse 返回参数} */
+  /** 创建匹配 {@link CreateMatchRequest} {@link CreateMatchResponse} */
   CreateMatch(data: CreateMatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMatchResponse>;
-  /** {@link CreateRule 创建规则}({@link CreateRuleRequest 请求参数}): {@link CreateRuleResponse 返回参数} */
+  /** 创建规则 {@link CreateRuleRequest} {@link CreateRuleResponse} */
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
-  /** {@link DeleteMatch 删除匹配}({@link DeleteMatchRequest 请求参数}): {@link DeleteMatchResponse 返回参数} */
+  /** 删除匹配 {@link DeleteMatchRequest} {@link DeleteMatchResponse} */
   DeleteMatch(data: DeleteMatchRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMatchResponse>;
-  /** {@link DeleteRule 删除规则}({@link DeleteRuleRequest 请求参数}): {@link DeleteRuleResponse 返回参数} */
+  /** 删除规则 {@link DeleteRuleRequest} {@link DeleteRuleResponse} */
   DeleteRule(data: DeleteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleResponse>;
-  /** {@link DescribeData 统计数据}({@link DescribeDataRequest 请求参数}): {@link DescribeDataResponse 返回参数} */
+  /** 统计数据 {@link DescribeDataRequest} {@link DescribeDataResponse} */
   DescribeData(data: DescribeDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataResponse>;
-  /** {@link DescribeMatch 查询匹配详情}({@link DescribeMatchRequest 请求参数}): {@link DescribeMatchResponse 返回参数} */
+  /** 查询匹配详情 {@link DescribeMatchRequest} {@link DescribeMatchResponse} */
   DescribeMatch(data: DescribeMatchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMatchResponse>;
-  /** {@link DescribeMatchCodes 分页查询匹配Code}({@link DescribeMatchCodesRequest 请求参数}): {@link DescribeMatchCodesResponse 返回参数} */
+  /** 分页查询匹配Code {@link DescribeMatchCodesRequest} {@link DescribeMatchCodesResponse} */
   DescribeMatchCodes(data: DescribeMatchCodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMatchCodesResponse>;
-  /** {@link DescribeMatches 分页查询匹配列表}({@link DescribeMatchesRequest 请求参数}): {@link DescribeMatchesResponse 返回参数} */
+  /** 分页查询匹配列表 {@link DescribeMatchesRequest} {@link DescribeMatchesResponse} */
   DescribeMatches(data?: DescribeMatchesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMatchesResponse>;
-  /** {@link DescribeMatchingProgress 查询匹配进度}({@link DescribeMatchingProgressRequest 请求参数}): {@link DescribeMatchingProgressResponse 返回参数} */
+  /** 查询匹配进度 {@link DescribeMatchingProgressRequest} {@link DescribeMatchingProgressResponse} */
   DescribeMatchingProgress(data: DescribeMatchingProgressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMatchingProgressResponse>;
-  /** {@link DescribeRule 查询规则详情}({@link DescribeRuleRequest 请求参数}): {@link DescribeRuleResponse 返回参数} */
+  /** 查询规则详情 {@link DescribeRuleRequest} {@link DescribeRuleResponse} */
   DescribeRule(data: DescribeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleResponse>;
-  /** {@link DescribeRules 分页查询规则集列表}({@link DescribeRulesRequest 请求参数}): {@link DescribeRulesResponse 返回参数} */
+  /** 分页查询规则集列表 {@link DescribeRulesRequest} {@link DescribeRulesResponse} */
   DescribeRules(data?: DescribeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesResponse>;
-  /** {@link DescribeToken 查询匹配Token}({@link DescribeTokenRequest 请求参数}): {@link DescribeTokenResponse 返回参数} */
+  /** 查询匹配Token {@link DescribeTokenRequest} {@link DescribeTokenResponse} */
   DescribeToken(data: DescribeTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenResponse>;
-  /** {@link ModifyMatch 修改匹配}({@link ModifyMatchRequest 请求参数}): {@link ModifyMatchResponse 返回参数} */
+  /** 修改匹配 {@link ModifyMatchRequest} {@link ModifyMatchResponse} */
   ModifyMatch(data: ModifyMatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMatchResponse>;
-  /** {@link ModifyRule 修改规则}({@link ModifyRuleRequest 请求参数}): {@link ModifyRuleResponse 返回参数} */
+  /** 修改规则 {@link ModifyRuleRequest} {@link ModifyRuleResponse} */
   ModifyRule(data: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
-  /** {@link ModifyToken 修改匹配Token}({@link ModifyTokenRequest 请求参数}): {@link ModifyTokenResponse 返回参数} */
+  /** 修改匹配Token {@link ModifyTokenRequest} {@link ModifyTokenResponse} */
   ModifyToken(data: ModifyTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTokenResponse>;
-  /** {@link StartMatching 发起匹配}({@link StartMatchingRequest 请求参数}): {@link StartMatchingResponse 返回参数} */
+  /** 发起匹配 {@link StartMatchingRequest} {@link StartMatchingResponse} */
   StartMatching(data: StartMatchingRequest, config?: AxiosRequestConfig): AxiosPromise<StartMatchingResponse>;
-  /** {@link StartMatchingBackfill 发起回填匹配}({@link StartMatchingBackfillRequest 请求参数}): {@link StartMatchingBackfillResponse 返回参数} */
+  /** 发起回填匹配 {@link StartMatchingBackfillRequest} {@link StartMatchingBackfillResponse} */
   StartMatchingBackfill(data: StartMatchingBackfillRequest, config?: AxiosRequestConfig): AxiosPromise<StartMatchingBackfillResponse>;
 }
 

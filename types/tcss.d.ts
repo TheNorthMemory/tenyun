@@ -3096,7 +3096,7 @@ declare interface AddAndPublishNetworkFirewallPolicyDetailResponse {
   TaskId: number;
   /** 创建任务的结果，"Succ"为成功，"Failed"为失败 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3116,7 +3116,7 @@ declare interface AddAndPublishNetworkFirewallPolicyYamlDetailResponse {
   TaskId: number;
   /** 创建任务的结果，"Succ"为成功，"Failed"为失败 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3150,7 +3150,7 @@ declare interface AddAssetImageRegistryRegistryDetailResponse {
   NameRepeatErr: string | null;
   /** 仓库唯一id */
   RegistryId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3160,7 +3160,7 @@ declare interface AddComplianceAssetPolicySetToWhitelistRequest {
 }
 
 declare interface AddComplianceAssetPolicySetToWhitelistResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3172,7 +3172,7 @@ declare interface AddCompliancePolicyAssetSetToWhitelistRequest {
 }
 
 declare interface AddCompliancePolicyAssetSetToWhitelistResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3182,7 +3182,7 @@ declare interface AddCompliancePolicyItemToWhitelistRequest {
 }
 
 declare interface AddCompliancePolicyItemToWhitelistResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3194,7 +3194,7 @@ declare interface AddEditAbnormalProcessRuleRequest {
 }
 
 declare interface AddEditAbnormalProcessRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3206,7 +3206,7 @@ declare interface AddEditAccessControlRuleRequest {
 }
 
 declare interface AddEditAccessControlRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3228,7 +3228,7 @@ declare interface AddEditImageAutoAuthorizedRuleRequest {
 }
 
 declare interface AddEditImageAutoAuthorizedRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3240,7 +3240,7 @@ declare interface AddEditReverseShellWhiteListRequest {
 }
 
 declare interface AddEditReverseShellWhiteListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3252,7 +3252,7 @@ declare interface AddEditRiskSyscallWhiteListRequest {
 }
 
 declare interface AddEditRiskSyscallWhiteListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3262,7 +3262,7 @@ declare interface AddEditWarningRulesRequest {
 }
 
 declare interface AddEditWarningRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3274,7 +3274,7 @@ declare interface AddEscapeWhiteListRequest {
 }
 
 declare interface AddEscapeWhiteListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3284,7 +3284,7 @@ declare interface AddIgnoreVulRequest {
 }
 
 declare interface AddIgnoreVulResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3312,7 +3312,7 @@ declare interface AddNetworkFirewallPolicyDetailResponse {
   TaskId: number;
   /** 创建任务的结果，"Succ"为成功，"Failed"为失败 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3332,7 +3332,7 @@ declare interface AddNetworkFirewallPolicyYamlDetailResponse {
   TaskId: number;
   /** 创建任务的结果，"Succ"为成功，"Failed"为失败 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3352,7 +3352,7 @@ declare interface CheckNetworkFirewallPolicyYamlResponse {
   TaskId: number;
   /** 创建任务的结果，"Succ"为成功，"Failed"为失败 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3364,7 +3364,7 @@ declare interface CheckRepeatAssetImageRegistryRequest {
 declare interface CheckRepeatAssetImageRegistryResponse {
   /** 是否重复 */
   IsRepeat: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3380,7 +3380,7 @@ declare interface ConfirmNetworkFirewallPolicyResponse {
   TaskId: number;
   /** 创建确认任务的结果，"Succ"为成功，"Failed"为失败 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3398,7 +3398,7 @@ declare interface CreateAbnormalProcessRulesExportJobRequest {
 declare interface CreateAbnormalProcessRulesExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3416,7 +3416,7 @@ declare interface CreateAccessControlsRuleExportJobRequest {
 declare interface CreateAccessControlsRuleExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3432,7 +3432,7 @@ declare interface CreateAssetImageRegistryScanTaskOneKeyRequest {
 }
 
 declare interface CreateAssetImageRegistryScanTaskOneKeyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3454,7 +3454,7 @@ declare interface CreateAssetImageRegistryScanTaskRequest {
 }
 
 declare interface CreateAssetImageRegistryScanTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3478,7 +3478,7 @@ declare interface CreateAssetImageScanSettingRequest {
 }
 
 declare interface CreateAssetImageScanSettingResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3502,7 +3502,7 @@ declare interface CreateAssetImageScanTaskRequest {
 declare interface CreateAssetImageScanTaskResponse {
   /** 任务id */
   TaskID: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3526,7 +3526,7 @@ declare interface CreateAssetImageVirusExportJobRequest {
 declare interface CreateAssetImageVirusExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3538,7 +3538,7 @@ declare interface CreateCheckComponentRequest {
 declare interface CreateCheckComponentResponse {
   /** "InstallSucc"表示安装成功，"InstallFailed"表示安装失败 */
   InstallResult: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3552,7 +3552,7 @@ declare interface CreateClusterCheckTaskResponse {
   TaskId: number;
   /** 创建检查任务的结果，"Succ"为成功，其他的为失败原因 */
   CreateResult: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3568,7 +3568,7 @@ declare interface CreateComplianceTaskRequest {
 declare interface CreateComplianceTaskResponse {
   /** 返回创建的合规检查任务的ID。 */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3592,7 +3592,7 @@ declare interface CreateComponentExportJobRequest {
 declare interface CreateComponentExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3612,7 +3612,7 @@ declare interface CreateDefenceVulExportJobRequest {
 declare interface CreateDefenceVulExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3632,7 +3632,7 @@ declare interface CreateEmergencyVulExportJobRequest {
 declare interface CreateEmergencyVulExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3654,7 +3654,7 @@ declare interface CreateEscapeEventsExportJobRequest {
 declare interface CreateEscapeEventsExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3674,7 +3674,7 @@ declare interface CreateEscapeWhiteListExportJobRequest {
 declare interface CreateEscapeWhiteListExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3692,7 +3692,7 @@ declare interface CreateExportComplianceStatusListJobRequest {
 declare interface CreateExportComplianceStatusListJobResponse {
   /** 返回创建的导出任务的ID */
   JobId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3714,7 +3714,7 @@ declare interface CreateHostExportJobRequest {
 declare interface CreateHostExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3738,7 +3738,7 @@ declare interface CreateImageExportJobResponse {
   JobId: string;
   /** excel文件下载地址 */
   DownloadUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3756,7 +3756,7 @@ declare interface CreateK8sApiAbnormalEventExportJobRequest {
 declare interface CreateK8sApiAbnormalEventExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3774,7 +3774,7 @@ declare interface CreateK8sApiAbnormalRuleExportJobRequest {
 declare interface CreateK8sApiAbnormalRuleExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3790,7 +3790,7 @@ declare interface CreateK8sApiAbnormalRuleInfoRequest {
 declare interface CreateK8sApiAbnormalRuleInfoResponse {
   /** 规则ID */
   RuleID: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3802,7 +3802,7 @@ declare interface CreateNetworkFirewallClusterRefreshResponse {
   TaskId: number;
   /** 创建检查任务的结果，"Succ"为成功，"Failed"为失败 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3816,7 +3816,7 @@ declare interface CreateNetworkFirewallPolicyDiscoverResponse {
   TaskId: number;
   /** 创建检查任务的结果，"Succ"为成功，"Failed"为失败 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3832,7 +3832,7 @@ declare interface CreateNetworkFirewallPublishResponse {
   TaskId: number;
   /** 创建任务的结果，"Succ"为成功，"Failed"为失败 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3848,7 +3848,7 @@ declare interface CreateNetworkFirewallUndoPublishResponse {
   TaskId: number;
   /** 创建任务的结果，"Succ"为成功，"Failed"为失败 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3858,7 +3858,7 @@ declare interface CreateOrModifyPostPayCoresRequest {
 }
 
 declare interface CreateOrModifyPostPayCoresResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3880,7 +3880,7 @@ declare interface CreateProcessEventsExportJobRequest {
 declare interface CreateProcessEventsExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3892,7 +3892,7 @@ declare interface CreateRefreshTaskResponse {
   TaskId: number;
   /** 创建检查任务的结果，"Succ"为成功，"Failed"为失败 */
   CreateResult: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3912,7 +3912,7 @@ declare interface CreateRiskDnsEventExportJobRequest {
 declare interface CreateRiskDnsEventExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3922,7 +3922,7 @@ declare interface CreateSearchTemplateRequest {
 }
 
 declare interface CreateSearchTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3942,7 +3942,7 @@ declare interface CreateSystemVulExportJobRequest {
 declare interface CreateSystemVulExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3958,7 +3958,7 @@ declare interface CreateVirusScanAgainRequest {
 }
 
 declare interface CreateVirusScanAgainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3982,7 +3982,7 @@ declare interface CreateVirusScanTaskRequest {
 declare interface CreateVirusScanTaskResponse {
   /** 任务id */
   TaskID: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4000,7 +4000,7 @@ declare interface CreateVulContainerExportJobRequest {
 declare interface CreateVulContainerExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4020,7 +4020,7 @@ declare interface CreateVulDefenceEventExportJobRequest {
 declare interface CreateVulDefenceEventExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4040,7 +4040,7 @@ declare interface CreateVulDefenceHostExportJobRequest {
 declare interface CreateVulDefenceHostExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4064,7 +4064,7 @@ declare interface CreateVulExportJobRequest {
 declare interface CreateVulExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4086,7 +4086,7 @@ declare interface CreateVulImageExportJobRequest {
 declare interface CreateVulImageExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4110,7 +4110,7 @@ declare interface CreateVulScanTaskResponse {
   LocalTaskID: number;
   /** 仓库镜像重新漏洞扫描时的任务ID */
   RegistryTaskID: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4130,7 +4130,7 @@ declare interface CreateWebVulExportJobRequest {
 declare interface CreateWebVulExportJobResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4140,7 +4140,7 @@ declare interface DeleteAbnormalProcessRulesRequest {
 }
 
 declare interface DeleteAbnormalProcessRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4150,7 +4150,7 @@ declare interface DeleteAccessControlRulesRequest {
 }
 
 declare interface DeleteAccessControlRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4162,7 +4162,7 @@ declare interface DeleteComplianceAssetPolicySetFromWhitelistRequest {
 }
 
 declare interface DeleteComplianceAssetPolicySetFromWhitelistResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4172,7 +4172,7 @@ declare interface DeleteCompliancePolicyAssetSetFromWhitelistRequest {
 }
 
 declare interface DeleteCompliancePolicyAssetSetFromWhitelistResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4182,7 +4182,7 @@ declare interface DeleteCompliancePolicyItemFromWhitelistRequest {
 }
 
 declare interface DeleteCompliancePolicyItemFromWhitelistResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4192,7 +4192,7 @@ declare interface DeleteEscapeWhiteListRequest {
 }
 
 declare interface DeleteEscapeWhiteListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4202,7 +4202,7 @@ declare interface DeleteIgnoreVulRequest {
 }
 
 declare interface DeleteIgnoreVulResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4212,7 +4212,7 @@ declare interface DeleteK8sApiAbnormalRuleRequest {
 }
 
 declare interface DeleteK8sApiAbnormalRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4222,7 +4222,7 @@ declare interface DeleteMachineRequest {
 }
 
 declare interface DeleteMachineResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4238,7 +4238,7 @@ declare interface DeleteNetworkFirewallPolicyDetailResponse {
   TaskId: number;
   /** 创建删除任务的结果，"Succ"为成功，"Failed"为失败 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4248,7 +4248,7 @@ declare interface DeleteReverseShellEventsRequest {
 }
 
 declare interface DeleteReverseShellEventsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4258,7 +4258,7 @@ declare interface DeleteReverseShellWhiteListsRequest {
 }
 
 declare interface DeleteReverseShellWhiteListsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4268,7 +4268,7 @@ declare interface DeleteRiskSyscallEventsRequest {
 }
 
 declare interface DeleteRiskSyscallEventsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4278,7 +4278,7 @@ declare interface DeleteRiskSyscallWhiteListsRequest {
 }
 
 declare interface DeleteRiskSyscallWhiteListsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4288,7 +4288,7 @@ declare interface DeleteSearchTemplateRequest {
 }
 
 declare interface DeleteSearchTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4300,7 +4300,7 @@ declare interface DescribeABTestConfigRequest {
 declare interface DescribeABTestConfigResponse {
   /** 灰度项目配置 */
   Config: ABTestConfig[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4320,7 +4320,7 @@ declare interface DescribeAbnormalProcessDetailResponse {
   EventDetail: AbnormalProcessEventDescription;
   /** 祖先进程信息 */
   AncestorProcessInfo: ProcessBaseInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4334,7 +4334,7 @@ declare interface DescribeAbnormalProcessEventTendencyRequest {
 declare interface DescribeAbnormalProcessEventTendencyResponse {
   /** 待处理异常进程事件趋势 */
   List: AbnormalProcessEventTendencyInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4356,7 +4356,7 @@ declare interface DescribeAbnormalProcessEventsExportRequest {
 declare interface DescribeAbnormalProcessEventsExportResponse {
   /** execle下载地址 */
   DownloadUrl: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4378,7 +4378,7 @@ declare interface DescribeAbnormalProcessEventsResponse {
   TotalCount: number;
   /** 异常进程数组 */
   EventSet: AbnormalProcessEventInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4392,7 +4392,7 @@ declare interface DescribeAbnormalProcessLevelSummaryResponse {
   MediumLevelEventCount: number;
   /** 异常进程低危待处理事件数 */
   LowLevelEventCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4410,7 +4410,7 @@ declare interface DescribeAbnormalProcessRuleDetailRequest {
 declare interface DescribeAbnormalProcessRuleDetailResponse {
   /** 异常进程策略详细信息 */
   RuleDetail: AbnormalProcessRuleInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4432,7 +4432,7 @@ declare interface DescribeAbnormalProcessRulesExportRequest {
 declare interface DescribeAbnormalProcessRulesExportResponse {
   /** execle下载地址 */
   DownloadUrl: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4454,7 +4454,7 @@ declare interface DescribeAbnormalProcessRulesResponse {
   TotalCount: number;
   /** 异常进程策略信息列表 */
   RuleSet: RuleBaseInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4476,7 +4476,7 @@ declare interface DescribeAccessControlDetailResponse {
   ParentProcessInfo: ProcessBaseInfo;
   /** 祖先进程信息 */
   AncestorProcessInfo: ProcessBaseInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4500,7 +4500,7 @@ declare interface DescribeAccessControlEventsExportResponse {
   DownloadUrl: string | null;
   /** 任务id */
   JobId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4522,7 +4522,7 @@ declare interface DescribeAccessControlEventsResponse {
   TotalCount: number;
   /** 访问控制事件数组 */
   EventSet: AccessControlEventInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4540,7 +4540,7 @@ declare interface DescribeAccessControlRuleDetailRequest {
 declare interface DescribeAccessControlRuleDetailResponse {
   /** 运行时策略详细信息 */
   RuleDetail: AccessControlRuleInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4562,7 +4562,7 @@ declare interface DescribeAccessControlRulesExportRequest {
 declare interface DescribeAccessControlRulesExportResponse {
   /** execle下载地址 */
   DownloadUrl: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4584,7 +4584,7 @@ declare interface DescribeAccessControlRulesResponse {
   TotalCount: number;
   /** 访问控制策略信息列表 */
   RuleSet: RuleBaseInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4600,7 +4600,7 @@ declare interface DescribeAffectedClusterCountResponse {
   MiddleRiskClusterCount: number;
   /** 低危风险的集群数量 */
   HintRiskClusterCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4624,7 +4624,7 @@ declare interface DescribeAffectedNodeListResponse {
   TotalCount: number;
   /** 受影响的节点列表 */
   AffectedNodeList: AffectedNodeItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4648,7 +4648,7 @@ declare interface DescribeAffectedWorkloadListResponse {
   TotalCount: number;
   /** 受影响的workload列表 */
   AffectedWorkloadList: AffectedWorkloadItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4668,7 +4668,7 @@ declare interface DescribeAgentDaemonSetCmdRequest {
 declare interface DescribeAgentDaemonSetCmdResponse {
   /** 安装命令 */
   Command: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4698,7 +4698,7 @@ declare interface DescribeAgentInstallCommandResponse {
   WindowsStepTwo: string;
   /** windows版agent下载链接 */
   WindowsDownloadUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4716,7 +4716,7 @@ declare interface DescribeAssetAppServiceListResponse {
   List: ServiceInfo[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4738,7 +4738,7 @@ declare interface DescribeAssetClusterListResponse {
   List: AssetClusterListItem[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4758,7 +4758,7 @@ declare interface DescribeAssetComponentListResponse {
   List: ComponentInfo[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4822,7 +4822,7 @@ declare interface DescribeAssetContainerDetailResponse {
   IsolateSource: string | null;
   /** 隔离时间 */
   IsolateTime: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4844,7 +4844,7 @@ declare interface DescribeAssetContainerListResponse {
   List: ContainerInfo[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4862,7 +4862,7 @@ declare interface DescribeAssetDBServiceListResponse {
   List: ServiceInfo[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4924,7 +4924,7 @@ declare interface DescribeAssetHostDetailResponse {
   Project: ProjectInfo;
   /** 标签 */
   Tags: TagInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4946,7 +4946,7 @@ declare interface DescribeAssetHostListResponse {
   List: HostInfo[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4968,7 +4968,7 @@ declare interface DescribeAssetImageBindRuleInfoResponse {
   TotalCount: number;
   /** 镜像绑定规则列表 */
   ImageBindRuleSet: ImagesBindRuleInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5034,7 +5034,7 @@ declare interface DescribeAssetImageDetailResponse {
   RemainScanTime: number | null;
   /** 授权为：1，未授权为：0 */
   IsAuthorized: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5048,7 +5048,7 @@ declare interface DescribeAssetImageHostListResponse {
   List: ImageHost[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5070,7 +5070,7 @@ declare interface DescribeAssetImageListExportRequest {
 declare interface DescribeAssetImageListExportResponse {
   /** excel文件下载地址 */
   DownloadUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5092,7 +5092,7 @@ declare interface DescribeAssetImageListResponse {
   List: ImagesInfo[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5104,7 +5104,7 @@ declare interface DescribeAssetImageRegistryAssetStatusResponse {
   Status: string;
   /** 错误信息 */
   Err: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5180,7 +5180,7 @@ declare interface DescribeAssetImageRegistryDetailResponse {
   RegistryRegion: string | null;
   /** 镜像创建的时间 */
   ImageCreateTime: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5204,7 +5204,7 @@ declare interface DescribeAssetImageRegistryListExportRequest {
 declare interface DescribeAssetImageRegistryListExportResponse {
   /** excel文件下载地址 */
   DownloadUrl: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5228,7 +5228,7 @@ declare interface DescribeAssetImageRegistryListResponse {
   List: ImageRepoInfo[] | null;
   /** 总数量 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5258,7 +5258,7 @@ declare interface DescribeAssetImageRegistryRegistryDetailResponse {
   SpeedLimit: number | null;
   /** 安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1 */
   Insecure: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5266,7 +5266,7 @@ declare interface DescribeAssetImageRegistryRegistryListRequest {
 }
 
 declare interface DescribeAssetImageRegistryRegistryListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5292,7 +5292,7 @@ declare interface DescribeAssetImageRegistryRiskInfoListResponse {
   List: ImageRisk[] | null;
   /** 总数量 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5314,7 +5314,7 @@ declare interface DescribeAssetImageRegistryRiskListExportRequest {
 declare interface DescribeAssetImageRegistryRiskListExportResponse {
   /** excel文件下载地址 */
   DownloadUrl: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5344,7 +5344,7 @@ declare interface DescribeAssetImageRegistryScanStatusOneKeyResponse {
   Status: string;
   /** 扫描剩余时间 */
   ScanRemainTime: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5352,7 +5352,7 @@ declare interface DescribeAssetImageRegistrySummaryRequest {
 }
 
 declare interface DescribeAssetImageRegistrySummaryResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5374,7 +5374,7 @@ declare interface DescribeAssetImageRegistryVirusListExportRequest {
 declare interface DescribeAssetImageRegistryVirusListExportResponse {
   /** excel文件下载地址 */
   DownloadUrl: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5396,7 +5396,7 @@ declare interface DescribeAssetImageRegistryVirusListResponse {
   List: ImageVirus[] | null;
   /** 总数量 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5418,7 +5418,7 @@ declare interface DescribeAssetImageRegistryVulListExportRequest {
 declare interface DescribeAssetImageRegistryVulListExportResponse {
   /** excel文件下载地址 */
   DownloadUrl: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5440,7 +5440,7 @@ declare interface DescribeAssetImageRegistryVulListResponse {
   List: ImageVul[] | null;
   /** 总数量 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5456,7 +5456,7 @@ declare interface DescribeAssetImageRiskListExportRequest {
 declare interface DescribeAssetImageRiskListExportResponse {
   /** excel文件下载地址 */
   DownloadUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5480,7 +5480,7 @@ declare interface DescribeAssetImageRiskListResponse {
   List: ImageRiskInfo[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5504,7 +5504,7 @@ declare interface DescribeAssetImageScanSettingResponse {
   All: boolean;
   /** 自定义扫描镜像 */
   Images: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5528,7 +5528,7 @@ declare interface DescribeAssetImageScanStatusResponse {
   RiskCount: number;
   /** 剩余扫描时间 */
   LeftSeconds: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5538,7 +5538,7 @@ declare interface DescribeAssetImageScanTaskRequest {
 declare interface DescribeAssetImageScanTaskResponse {
   /** 任务id */
   TaskID: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5560,7 +5560,7 @@ declare interface DescribeAssetImageSimpleListResponse {
   List: AssetSimpleImageInfo[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5578,7 +5578,7 @@ declare interface DescribeAssetImageVirusListExportResponse {
   DownloadUrl: string;
   /** 任务ID */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5604,7 +5604,7 @@ declare interface DescribeAssetImageVirusListResponse {
   TotalCount: number;
   /** 病毒扫描状态0:未扫描1:扫描中2:扫描完成3:扫描出错4:扫描取消 */
   VirusScanStatus: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5624,7 +5624,7 @@ declare interface DescribeAssetImageVulListExportRequest {
 declare interface DescribeAssetImageVulListExportResponse {
   /** excel文件下载地址 */
   DownloadUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5648,7 +5648,7 @@ declare interface DescribeAssetImageVulListResponse {
   List: ImagesVul[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5666,7 +5666,7 @@ declare interface DescribeAssetPortListResponse {
   List: PortInfo[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5684,7 +5684,7 @@ declare interface DescribeAssetProcessListResponse {
   List: ProcessInfo[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5732,7 +5732,7 @@ declare interface DescribeAssetSummaryResponse {
   ImageUnsafeCnt: number;
   /** 主机未安装agent数量 */
   HostUnInstallCnt: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5742,7 +5742,7 @@ declare interface DescribeAssetSyncLastTimeRequest {
 declare interface DescribeAssetSyncLastTimeResponse {
   /** 资产最近同步时间 */
   AssetSyncLastTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5760,7 +5760,7 @@ declare interface DescribeAssetWebServiceListResponse {
   List: ServiceInfo[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5782,7 +5782,7 @@ declare interface DescribeAutoAuthorizedRuleHostResponse {
   List: AutoAuthorizedRuleHostInfo[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5800,7 +5800,7 @@ declare interface DescribeCheckItemListResponse {
   ClusterCheckItems: ClusterCheckItem[];
   /** 检查项总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5858,7 +5858,7 @@ declare interface DescribeClusterDetailResponse {
   ServiceCount: number;
   /** Ingress数量 */
   IngressCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5886,7 +5886,7 @@ declare interface DescribeClusterSummaryResponse {
   ManualCheckClusterCount: number;
   /** 检查失败集群数 */
   FailedClusterCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5906,7 +5906,7 @@ declare interface DescribeComplianceAssetDetailInfoResponse {
   HostDetailInfo: ComplianceHostDetailInfo | null;
   /** 当资产为K8S时，返回此字段。 */
   K8SDetailInfo: ComplianceK8SDetailInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5926,7 +5926,7 @@ declare interface DescribeComplianceAssetListResponse {
   TotalCount: number;
   /** 返回各类资产的列表。 */
   AssetInfoList: ComplianceAssetInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5946,7 +5946,7 @@ declare interface DescribeComplianceAssetPolicyItemListResponse {
   TotalCount: number;
   /** 返回某个资产下的检测项的列表。 */
   AssetPolicyItemList: ComplianceAssetPolicyItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5964,7 +5964,7 @@ declare interface DescribeCompliancePeriodTaskListResponse {
   TotalCount?: number;
   /** 定时任务信息的列表 */
   PeriodTaskSet?: CompliancePeriodTask[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5984,7 +5984,7 @@ declare interface DescribeCompliancePolicyItemAffectedAssetListResponse {
   AffectedAssetList: ComplianceAffectedAsset[];
   /** 检测项影响的资产的总数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5996,7 +5996,7 @@ declare interface DescribeCompliancePolicyItemAffectedSummaryRequest {
 declare interface DescribeCompliancePolicyItemAffectedSummaryResponse {
   /** 返回各检测项影响的资产的汇总信息。 */
   PolicyItemSummary: CompliancePolicyItemSummary;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6016,7 +6016,7 @@ declare interface DescribeComplianceScanFailedAssetListResponse {
   TotalCount: number;
   /** 返回各类检测失败的资产的汇总信息的列表。 */
   ScanFailedAssetList: ComplianceScanFailedAsset[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6030,7 +6030,7 @@ declare interface DescribeComplianceTaskAssetSummaryResponse {
   Status: string;
   /** 返回各类资产的汇总信息的列表。 */
   AssetSummaryList: ComplianceAssetSummary[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6052,7 +6052,7 @@ declare interface DescribeComplianceTaskPolicyItemSummaryListResponse {
   TotalCount: number;
   /** 返回各检测项对应的汇总信息的列表。 */
   PolicyItemSummaryList: CompliancePolicyItemSummary[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6076,7 +6076,7 @@ declare interface DescribeComplianceWhitelistItemListResponse {
   WhitelistItemSet: ComplianceWhitelistItem[];
   /** 白名单项的总数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6106,7 +6106,7 @@ declare interface DescribeContainerAssetSummaryResponse {
   ImageTotalCnt: number;
   /** 主机未安装agent数量 */
   HostUnInstallCnt: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6130,7 +6130,7 @@ declare interface DescribeContainerSecEventSummaryResponse {
   UnhandledMaliciousConnectionEventCnt: number;
   /** 未处理k8sApi事件 */
   UnhandledK8sApiEventCnt: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6142,7 +6142,7 @@ declare interface DescribeESAggregationsRequest {
 declare interface DescribeESAggregationsResponse {
   /** ES聚合结果JSON */
   Data: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6158,7 +6158,7 @@ declare interface DescribeESHitsRequest {
 declare interface DescribeESHitsResponse {
   /** ES查询结果JSON */
   Data: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6180,7 +6180,7 @@ declare interface DescribeEmergencyVulListResponse {
   TotalCount: number;
   /** 漏洞列表 */
   List: EmergencyVulInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6200,7 +6200,7 @@ declare interface DescribeEscapeEventDetailResponse {
   ParentProcessInfo: ProcessBaseInfo;
   /** 祖先进程信息 */
   AncestorProcessInfo: ProcessBaseInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6222,7 +6222,7 @@ declare interface DescribeEscapeEventInfoResponse {
   EventSet: EscapeEventInfo[];
   /** 事件总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6236,7 +6236,7 @@ declare interface DescribeEscapeEventTendencyRequest {
 declare interface DescribeEscapeEventTendencyResponse {
   /** 待处理逃逸事件趋势 */
   List: EscapeEventTendencyInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6252,7 +6252,7 @@ declare interface DescribeEscapeEventTypeSummaryResponse {
   RiskContainerEventCount: number;
   /** 逃逸事件待处理数 */
   PendingEscapeEventCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6274,7 +6274,7 @@ declare interface DescribeEscapeEventsExportRequest {
 declare interface DescribeEscapeEventsExportResponse {
   /** execle下载地址 */
   DownloadUrl: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6284,7 +6284,7 @@ declare interface DescribeEscapeRuleInfoRequest {
 declare interface DescribeEscapeRuleInfoResponse {
   /** 规则信息 */
   RuleSet: EscapeRule[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6294,7 +6294,7 @@ declare interface DescribeEscapeSafeStateRequest {
 declare interface DescribeEscapeSafeStateResponse {
   /** Unsafe：存在风险，Safe：暂无风险,UnKnown:未知风险 */
   IsSafe: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6316,7 +6316,7 @@ declare interface DescribeEscapeWhiteListResponse {
   TotalCount: number;
   /** 逃逸白名单列表 */
   List: EscapeWhiteListInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6328,7 +6328,7 @@ declare interface DescribeExportJobDownloadURLRequest {
 declare interface DescribeExportJobDownloadURLResponse {
   /** 下载链接 */
   DownloadURL: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6350,7 +6350,7 @@ declare interface DescribeExportJobManageListResponse {
   TotalCount: number;
   /** 任务列表 */
   List: ExportJobInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6368,7 +6368,7 @@ declare interface DescribeExportJobResultResponse {
   ExportProgress: number | null;
   /** 失败原因 */
   FailureMsg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6386,7 +6386,7 @@ declare interface DescribeImageAuthorizedInfoResponse {
   NotScannedImageCnt: number;
   /** 本地未开启扫描镜像数 */
   NotScannedLocalImageCnt: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6410,7 +6410,7 @@ declare interface DescribeImageAutoAuthorizedLogListResponse {
   TotalCount: number;
   /** 自动授权结果镜像列表 */
   List: AutoAuthorizedImageInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6428,7 +6428,7 @@ declare interface DescribeImageAutoAuthorizedRuleResponse {
   MaxDailyCount: number | null;
   /** 规则id，用未设置时为0 */
   RuleId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6450,7 +6450,7 @@ declare interface DescribeImageAutoAuthorizedTaskListResponse {
   List: ImageAutoAuthorizedTask[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6474,7 +6474,7 @@ declare interface DescribeImageComponentListResponse {
   TotalCount: number;
   /** 镜像组件列表 */
   List: ImageComponent[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6492,7 +6492,7 @@ declare interface DescribeImageRegistryNamespaceListResponse {
   TotalCount: number;
   /** 返回的项目空间列表 */
   NamespaceList: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6514,7 +6514,7 @@ declare interface DescribeImageRegistryTimingScanTaskResponse {
   Images: ImageInfo[] | null;
   /** 自动以扫描镜像Id */
   Id: number[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6528,7 +6528,7 @@ declare interface DescribeImageRiskSummaryResponse {
   MalwareVirusCnt: RunTimeRiskInfo[];
   /** 敏感信息 */
   RiskCnt: RunTimeRiskInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6542,7 +6542,7 @@ declare interface DescribeImageRiskTendencyRequest {
 declare interface DescribeImageRiskTendencyResponse {
   /** 本地镜像新增风险趋势信息列表 */
   ImageRiskTendencySet: ImageRiskTendencyInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6564,7 +6564,7 @@ declare interface DescribeImageSimpleListResponse {
   ImageList: ImageSimpleInfo[];
   /** 镜像数 */
   ImageCnt: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6574,7 +6574,7 @@ declare interface DescribeIndexListRequest {
 declare interface DescribeIndexListResponse {
   /** ES 索引信息 */
   Data: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6586,7 +6586,7 @@ declare interface DescribeInspectionReportResponse {
   ReportName: string;
   /** 下载链接 */
   ReportUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6598,7 +6598,7 @@ declare interface DescribeK8sApiAbnormalEventInfoRequest {
 declare interface DescribeK8sApiAbnormalEventInfoResponse {
   /** 事件详情 */
   Info: K8sApiAbnormalEventInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6620,7 +6620,7 @@ declare interface DescribeK8sApiAbnormalEventListResponse {
   List: K8sApiAbnormalEventListItem[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6632,7 +6632,7 @@ declare interface DescribeK8sApiAbnormalRuleInfoRequest {
 declare interface DescribeK8sApiAbnormalRuleInfoResponse {
   /** 规则详情 */
   Info: K8sApiAbnormalRuleInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6654,7 +6654,7 @@ declare interface DescribeK8sApiAbnormalRuleListResponse {
   List: K8sApiAbnormalRuleListItem[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6674,7 +6674,7 @@ declare interface DescribeK8sApiAbnormalRuleScopeListResponse {
   TotalCount: number;
   /** 列表 */
   List: K8sApiAbnormalRuleScopeInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6692,7 +6692,7 @@ declare interface DescribeK8sApiAbnormalSummaryResponse {
   UnhandleLowLevelEventCount: number;
   /** 待处理提示级别事件个数 */
   UnhandleNoticeLevelEventCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6704,7 +6704,7 @@ declare interface DescribeK8sApiAbnormalTendencyRequest {
 declare interface DescribeK8sApiAbnormalTendencyResponse {
   /** 趋势列表 */
   List: K8sApiAbnormalTendencyItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6716,7 +6716,7 @@ declare interface DescribeLogStorageStatisticResponse {
   TotalSize: number;
   /** 已使用容量（单位：B） */
   UsedSize: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6738,7 +6738,7 @@ declare interface DescribeNetworkFirewallAuditRecordResponse {
   TotalCount: number;
   /** 集群的审计详细信息 */
   AuditList: NetworkAuditRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6760,7 +6760,7 @@ declare interface DescribeNetworkFirewallClusterListResponse {
   TotalCount: number;
   /** 集群的详细信息 */
   ClusterInfoList: NetworkClusterInfoItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6772,7 +6772,7 @@ declare interface DescribeNetworkFirewallClusterRefreshStatusRequest {
 declare interface DescribeNetworkFirewallClusterRefreshStatusResponse {
   /** 任务状态，可能为：Task_Running,Task_Succ,Task_Error,Task_NoExist */
   TaskStatus: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6796,7 +6796,7 @@ declare interface DescribeNetworkFirewallNamespaceLabelListResponse {
   TotalCount: number;
   /** 集群空间标签详细信息 */
   ClusterNamespaceLabelList: NetworkClusterNamespaceLabelInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6820,7 +6820,7 @@ declare interface DescribeNetworkFirewallNamespaceListResponse {
   TotalCount: number;
   /** 集群的详细信息 */
   ClusterNamespaceList: NetworkClusterNamespaceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6844,7 +6844,7 @@ declare interface DescribeNetworkFirewallPodLabelsListResponse {
   TotalCount: number;
   /** 集群pod详细信息 */
   PodList: NetworkClusterPodInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6880,7 +6880,7 @@ declare interface DescribeNetworkFirewallPolicyDetailResponse {
   PublishStatus: string;
   /** 网络发布结果 */
   PublishResult: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6892,7 +6892,7 @@ declare interface DescribeNetworkFirewallPolicyDiscoverRequest {
 declare interface DescribeNetworkFirewallPolicyDiscoverResponse {
   /** 任务状态，可能为：Task_Running,Task_Succ,Task_Error,Task_NoExist */
   TaskStatus: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6916,7 +6916,7 @@ declare interface DescribeNetworkFirewallPolicyListResponse {
   TotalCount: number;
   /** 集群的详细信息 */
   NetPolicy: NetworkPolicyInfoItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6930,7 +6930,7 @@ declare interface DescribeNetworkFirewallPolicyStatusResponse {
   TaskStatus: string;
   /** NameRepeat,K8sRuleIngressPortError等 */
   TaskResult: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6958,7 +6958,7 @@ declare interface DescribeNetworkFirewallPolicyYamlDetailResponse {
   PublishStatus: string;
   /** 网络发布结果 */
   PublishResult: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6976,7 +6976,7 @@ declare interface DescribeNewestVulResponse {
   Status: string;
   /** 漏洞CVEID */
   CVEID: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6990,7 +6990,7 @@ declare interface DescribePostPayDetailRequest {
 declare interface DescribePostPayDetailResponse {
   /** 弹性计费扣费详情 */
   SoftQuotaDayDetail: SoftQuotaDayInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7012,7 +7012,7 @@ declare interface DescribeProVersionInfoResponse {
   BuyStatus: string;
   /** 是否曾经购买过(false:未曾 true:曾经购买过) */
   IsPurchased: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7024,7 +7024,7 @@ declare interface DescribePromotionActivityRequest {
 declare interface DescribePromotionActivityResponse {
   /** 促销活动内容 */
   List: PromotionActivityContent[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7034,7 +7034,7 @@ declare interface DescribePublicKeyRequest {
 declare interface DescribePublicKeyResponse {
   /** 公钥 */
   PublicKey: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7064,7 +7064,7 @@ declare interface DescribePurchaseStateInfoResponse {
   BeginTime: string | null;
   /** 子状态(具体意义依据State字段而定)State为4时，有效值为: ISOLATE(隔离) DESTROED(已销毁) */
   SubState: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7076,7 +7076,7 @@ declare interface DescribeRefreshTaskRequest {
 declare interface DescribeRefreshTaskResponse {
   /** 刷新任务状态，可能为：Task_New,Task_Running,Task_Finish,Task_Error,Task_NoExist */
   TaskStatus: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7096,7 +7096,7 @@ declare interface DescribeReverseShellDetailResponse {
   EventDetail: ReverseShellEventDescription;
   /** 祖先进程信息 */
   AncestorProcessInfo: ProcessBaseInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7120,7 +7120,7 @@ declare interface DescribeReverseShellEventsExportResponse {
   DownloadUrl: string | null;
   /** 任务ID */
   JobId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7142,7 +7142,7 @@ declare interface DescribeReverseShellEventsResponse {
   TotalCount: number;
   /** 反弹shell数组 */
   EventSet: ReverseShellEventInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7154,7 +7154,7 @@ declare interface DescribeReverseShellWhiteListDetailRequest {
 declare interface DescribeReverseShellWhiteListDetailResponse {
   /** 事件基本信息 */
   WhiteListDetailInfo: ReverseShellWhiteListInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7176,7 +7176,7 @@ declare interface DescribeReverseShellWhiteListsResponse {
   TotalCount: number;
   /** 白名单信息列表 */
   WhiteListSet: ReverseShellWhiteListBaseInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7200,7 +7200,7 @@ declare interface DescribeRiskListResponse {
   ClusterRiskItems: ClusterRiskItem[];
   /** 风险项的总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7220,7 +7220,7 @@ declare interface DescribeRiskSyscallDetailResponse {
   EventDetail: RiskSyscallEventDescription;
   /** 祖先进程信息 */
   AncestorProcessInfo: ProcessBaseInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7244,7 +7244,7 @@ declare interface DescribeRiskSyscallEventsExportResponse {
   DownloadUrl: string | null;
   /** 任务Id */
   JobId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7266,7 +7266,7 @@ declare interface DescribeRiskSyscallEventsResponse {
   TotalCount: number;
   /** 高危系统调用数组 */
   EventSet: RiskSyscallEventInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7278,7 +7278,7 @@ declare interface DescribeRiskSyscallNamesResponse {
   TotalCount: number;
   /** 系统调用名称列表 */
   SyscallNames: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7290,7 +7290,7 @@ declare interface DescribeRiskSyscallWhiteListDetailRequest {
 declare interface DescribeRiskSyscallWhiteListDetailResponse {
   /** 白名单基本信息 */
   WhiteListDetailInfo: RiskSyscallWhiteListInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7312,7 +7312,7 @@ declare interface DescribeRiskSyscallWhiteListsResponse {
   TotalCount: number;
   /** 白名单信息列表 */
   WhiteListSet: RiskSyscallWhiteListBaseInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7334,7 +7334,7 @@ declare interface DescribeScanIgnoreVulListResponse {
   TotalCount: number;
   /** 漏洞列表 */
   List: ScanIgnoreVul[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7346,7 +7346,7 @@ declare interface DescribeSearchExportListRequest {
 declare interface DescribeSearchExportListResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7356,7 +7356,7 @@ declare interface DescribeSearchLogsRequest {
 declare interface DescribeSearchLogsResponse {
   /** 历史搜索记录 保留最新的10条 */
   Data: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7372,7 +7372,7 @@ declare interface DescribeSearchTemplatesResponse {
   TotalCount: number;
   /** 模板列表 */
   List: SearchTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7386,7 +7386,7 @@ declare interface DescribeSecEventsTendencyRequest {
 declare interface DescribeSecEventsTendencyResponse {
   /** 运行时安全事件趋势信息列表 */
   EventTendencySet: SecTendencyEventInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7398,7 +7398,7 @@ declare interface DescribeSecLogAlertMsgRequest {
 declare interface DescribeSecLogAlertMsgResponse {
   /** 告警消息队列 */
   List: SecLogAlertMsgInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7412,7 +7412,7 @@ declare interface DescribeSecLogCleanSettingInfoResponse {
   ReservesDeadline: number;
   /** 触发清理的存储天数 */
   DayLimit: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7426,7 +7426,7 @@ declare interface DescribeSecLogDeliveryClsOptionsResponse {
   LogSetList: ClsLogsetInfo[];
   /** 可选地域列表(仅当入参ClsRegion为空时返回) */
   RegionList: RegionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7436,7 +7436,7 @@ declare interface DescribeSecLogDeliveryClsSettingRequest {
 declare interface DescribeSecLogDeliveryClsSettingResponse {
   /** 日志类型列表 */
   LogTypeList: SecLogDeliveryClsSettingInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7450,7 +7450,7 @@ declare interface DescribeSecLogDeliveryKafkaOptionsResponse {
   InstanceList: CKafkaInstanceInfo[];
   /** 地域列表 */
   RegionList: RegionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7470,7 +7470,7 @@ declare interface DescribeSecLogDeliveryKafkaSettingResponse {
   User: string | null;
   /** 地域ID */
   RegionID: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7494,7 +7494,7 @@ declare interface DescribeSecLogJoinObjectListResponse {
   TotalCount: number;
   /** 接入对象列表 */
   List: SecLogJoinObjectInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7504,7 +7504,7 @@ declare interface DescribeSecLogJoinTypeListRequest {
 declare interface DescribeSecLogJoinTypeListResponse {
   /** 接入日志列表 */
   List: SecLogJoinInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7516,7 +7516,7 @@ declare interface DescribeSecLogKafkaUINResponse {
   DstUIN: string | null;
   /** 授权状态 */
   Status: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7540,7 +7540,7 @@ declare interface DescribeSecLogVasInfoResponse {
   IsPurchased: boolean;
   /** 试用存储容量(GB) */
   TrialCapacity: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7562,7 +7562,7 @@ declare interface DescribeSupportDefenceVulResponse {
   List: SupportDefenceVul[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7584,7 +7584,7 @@ declare interface DescribeSystemVulListResponse {
   TotalCount: number;
   /** 漏洞列表 */
   List: VulInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7600,7 +7600,7 @@ declare interface DescribeTaskResultSummaryResponse {
   MiddleRiskNodeCount: number[];
   /** 提示风险检查项的节点数量,返回7天数据 */
   HintRiskNodeCount: number[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7652,7 +7652,7 @@ declare interface DescribeTcssSummaryResponse {
   ScanVulStatus: boolean;
   /** 漏洞影响镜像数 */
   VulRiskImageCnt: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7662,7 +7662,7 @@ declare interface DescribeUnauthorizedCoresTendencyRequest {
 declare interface DescribeUnauthorizedCoresTendencyResponse {
   /** 未授权核数趋势 */
   List: UnauthorizedCoresTendency[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7674,7 +7674,7 @@ declare interface DescribeUnfinishRefreshTaskResponse {
   TaskId: number;
   /** 任务状态，为Task_New,Task_Running,Task_Finish,Task_Error,Task_NoExist.Task_New,Task_Running表示有任务存在，不允许新下发 */
   TaskStatus: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7696,7 +7696,7 @@ declare interface DescribeUserClusterResponse {
   TotalCount: number;
   /** 集群的详细信息 */
   ClusterInfoList: ClusterInfoItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7710,7 +7710,7 @@ declare interface DescribeValueAddedSrvInfoResponse {
   LocalImageCnt: number;
   /** 未使用的镜像安全扫描授权数 */
   UnusedAuthorizedCnt: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7738,7 +7738,7 @@ declare interface DescribeVirusAutoIsolateSampleDetailResponse {
   SuggestScheme: string | null;
   /** 参考链接 */
   ReferenceLink: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7750,7 +7750,7 @@ declare interface DescribeVirusAutoIsolateSampleDownloadURLRequest {
 declare interface DescribeVirusAutoIsolateSampleDownloadURLResponse {
   /** 样本下载链接 */
   FileUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7772,7 +7772,7 @@ declare interface DescribeVirusAutoIsolateSampleListResponse {
   TotalCount: number;
   /** 木马自动隔离样本列表 */
   List: VirusAutoIsolateSampleInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7784,7 +7784,7 @@ declare interface DescribeVirusAutoIsolateSettingResponse {
   AutoIsolateSwitch: boolean;
   /** 是否中断隔离文件关联的进程(true:是 false:否) */
   IsKillProgress: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7888,7 +7888,7 @@ declare interface DescribeVirusDetailResponse {
   ContainerIsolateOperationSrc: string | null;
   /** 检测平台1: 云查杀引擎2: tav3: binaryAi4: 异常行为5: 威胁情报 */
   CheckPlatform: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7900,7 +7900,7 @@ declare interface DescribeVirusEventTendencyRequest {
 declare interface DescribeVirusEventTendencyResponse {
   /** 趋势列表 */
   List: VirusTendencyInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7922,7 +7922,7 @@ declare interface DescribeVirusListResponse {
   List: VirusInfo[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7940,7 +7940,7 @@ declare interface DescribeVirusManualScanEstimateTimeoutResponse {
   Timeout: number;
   /** 单台主机并行扫描容器数 */
   ContainerScanConcurrencyCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7956,7 +7956,7 @@ declare interface DescribeVirusMonitorSettingResponse {
   ScanPathType: number | null;
   /** 自选排除或扫描的地址 */
   ScanPath: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7968,7 +7968,7 @@ declare interface DescribeVirusSampleDownloadUrlRequest {
 declare interface DescribeVirusSampleDownloadUrlResponse {
   /** 样本下载地址 */
   FileUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7998,7 +7998,7 @@ declare interface DescribeVirusScanSettingResponse {
   ScanPath: string[];
   /** 一键检测的超时设置 */
   ClickTimeout: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8028,7 +8028,7 @@ declare interface DescribeVirusScanTaskStatusResponse {
   EndTime: string;
   /** 扫描类型，"CYCLE"：周期扫描， "MANUAL"：手动扫描 */
   ScanType: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8040,7 +8040,7 @@ declare interface DescribeVirusScanTimeoutSettingRequest {
 declare interface DescribeVirusScanTimeoutSettingResponse {
   /** 超时时长单位小时 */
   Timeout: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8064,7 +8064,7 @@ declare interface DescribeVirusSummaryResponse {
   IsolateIncrease: number | null;
   /** 隔离事件总数 */
   IsolateCnt: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8088,7 +8088,7 @@ declare interface DescribeVirusTaskListResponse {
   List: VirusTaskInfo[];
   /** 总数量(容器任务数量) */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8108,7 +8108,7 @@ declare interface DescribeVulContainerListResponse {
   List: VulAffectedContainerInfo[];
   /** 容器总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8120,7 +8120,7 @@ declare interface DescribeVulDefenceEventDetailRequest {
 declare interface DescribeVulDefenceEventDetailResponse {
   /** 漏洞防御事件详细 */
   EventDetail: VulDefenceEventDetail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8142,7 +8142,7 @@ declare interface DescribeVulDefenceEventResponse {
   List: VulDefenceEvent[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8158,7 +8158,7 @@ declare interface DescribeVulDefenceEventTendencyResponse {
   DefendedList: VulDefenceEventTendency[];
   /** 漏洞攻击事件趋势 */
   AttackList: VulDefenceEventTendency[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8180,7 +8180,7 @@ declare interface DescribeVulDefenceHostResponse {
   TotalCount: number;
   /** 漏洞防御的主机列表 */
   List: VulDefenceHost[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8200,7 +8200,7 @@ declare interface DescribeVulDefencePluginResponse {
   TotalCount: number;
   /** 漏洞防御插件列表 */
   List: VulDefencePlugin[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8222,7 +8222,7 @@ declare interface DescribeVulDefenceSettingResponse {
   HostTotalCount: number | null;
   /** 支持防御的漏洞数 */
   SupportDefenseVulCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8234,7 +8234,7 @@ declare interface DescribeVulDetailRequest {
 declare interface DescribeVulDetailResponse {
   /** 漏洞详情信息 */
   VulInfo: VulDetailInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8256,7 +8256,7 @@ declare interface DescribeVulIgnoreLocalImageListResponse {
   TotalCount: number;
   /** 镜像列表 */
   List: VulIgnoreLocalImage[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8274,7 +8274,7 @@ declare interface DescribeVulIgnoreRegistryImageListResponse {
   TotalCount: number;
   /** 镜像列表 */
   List: VulIgnoreRegistryImage[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8298,7 +8298,7 @@ declare interface DescribeVulImageListResponse {
   List: VulAffectedImageInfo[];
   /** 镜像总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8324,7 +8324,7 @@ declare interface DescribeVulImageSummaryResponse {
   SupportVulTotalCount: number;
   /** 漏洞库更新时间 */
   VulLibraryUpdateTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8352,7 +8352,7 @@ declare interface DescribeVulLevelImageSummaryResponse {
   LowLevelVulRegistryImagePercent: number;
   /** 严重漏洞最新仓库镜像占比 */
   CriticalLevelVulRegistryImagePercent: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8370,7 +8370,7 @@ declare interface DescribeVulLevelSummaryResponse {
   LowLevelVulCount: number;
   /** 严重漏洞数 */
   CriticalLevelVulCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8382,7 +8382,7 @@ declare interface DescribeVulScanAuthorizedImageSummaryResponse {
   AllAuthorizedImageCount: number;
   /** 已授权未扫描的本地镜像数 */
   UnScanAuthorizedImageCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8420,7 +8420,7 @@ declare interface DescribeVulScanInfoResponse {
   RegistryTaskID: number;
   /** 仓库发现漏洞数量 */
   RegistryFoundVulCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8444,7 +8444,7 @@ declare interface DescribeVulScanLocalImageListResponse {
   TotalCount: number;
   /** 镜像列表 */
   List: VulScanImageInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8466,7 +8466,7 @@ declare interface DescribeVulSummaryResponse {
   RemoteExpLevelVulCount: number;
   /** 受严重或高危漏洞影响的最新版本镜像数 */
   SeriousVulNewestImageCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8482,7 +8482,7 @@ declare interface DescribeVulTendencyRequest {
 declare interface DescribeVulTendencyResponse {
   /** 漏洞趋势列表 */
   VulTendencySet: VulTendencyInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8494,7 +8494,7 @@ declare interface DescribeVulTopRankingRequest {
 declare interface DescribeVulTopRankingResponse {
   /** 漏洞Top排名信息列表 */
   List: VulTopRankingInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8504,7 +8504,7 @@ declare interface DescribeWarningRulesRequest {
 declare interface DescribeWarningRulesResponse {
   /** 告警策略列表 */
   WarningRules: WarningRule[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8526,7 +8526,7 @@ declare interface DescribeWebVulListResponse {
   TotalCount: number;
   /** 漏洞列表 */
   List: VulInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8544,7 +8544,7 @@ declare interface ExportVirusListRequest {
 declare interface ExportVirusListResponse {
   /** 导出任务ID，前端拿着任务ID查询任务进度 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8552,7 +8552,7 @@ declare interface InitializeUserComplianceEnvironmentRequest {
 }
 
 declare interface InitializeUserComplianceEnvironmentResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8564,7 +8564,7 @@ declare interface ModifyAbnormalProcessRuleStatusRequest {
 }
 
 declare interface ModifyAbnormalProcessRuleStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8578,7 +8578,7 @@ declare interface ModifyAbnormalProcessStatusRequest {
 }
 
 declare interface ModifyAbnormalProcessStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8590,7 +8590,7 @@ declare interface ModifyAccessControlRuleStatusRequest {
 }
 
 declare interface ModifyAccessControlRuleStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8604,7 +8604,7 @@ declare interface ModifyAccessControlStatusRequest {
 }
 
 declare interface ModifyAccessControlStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8618,7 +8618,7 @@ declare interface ModifyAssetImageRegistryScanStopOneKeyRequest {
 }
 
 declare interface ModifyAssetImageRegistryScanStopOneKeyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8638,7 +8638,7 @@ declare interface ModifyAssetImageRegistryScanStopRequest {
 }
 
 declare interface ModifyAssetImageRegistryScanStopResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8656,7 +8656,7 @@ declare interface ModifyAssetImageScanStopRequest {
 declare interface ModifyAssetImageScanStopResponse {
   /** 停止状态 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8670,7 +8670,7 @@ declare interface ModifyAssetRequest {
 declare interface ModifyAssetResponse {
   /** 同步任务发送结果 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8684,7 +8684,7 @@ declare interface ModifyCompliancePeriodTaskRequest {
 }
 
 declare interface ModifyCompliancePeriodTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8696,7 +8696,7 @@ declare interface ModifyContainerNetStatusRequest {
 }
 
 declare interface ModifyContainerNetStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8714,7 +8714,7 @@ declare interface ModifyEscapeEventStatusRequest {
 }
 
 declare interface ModifyEscapeEventStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8724,7 +8724,7 @@ declare interface ModifyEscapeRuleRequest {
 }
 
 declare interface ModifyEscapeRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8736,7 +8736,7 @@ declare interface ModifyEscapeWhiteListRequest {
 }
 
 declare interface ModifyEscapeWhiteListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8768,7 +8768,7 @@ declare interface ModifyImageAuthorizedRequest {
 }
 
 declare interface ModifyImageAuthorizedResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8782,7 +8782,7 @@ declare interface ModifyK8sApiAbnormalEventStatusRequest {
 }
 
 declare interface ModifyK8sApiAbnormalEventStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8792,7 +8792,7 @@ declare interface ModifyK8sApiAbnormalRuleInfoRequest {
 }
 
 declare interface ModifyK8sApiAbnormalRuleInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8804,7 +8804,7 @@ declare interface ModifyK8sApiAbnormalRuleStatusRequest {
 }
 
 declare interface ModifyK8sApiAbnormalRuleStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8818,7 +8818,7 @@ declare interface ModifyReverseShellStatusRequest {
 }
 
 declare interface ModifyReverseShellStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8832,7 +8832,7 @@ declare interface ModifyRiskSyscallStatusRequest {
 }
 
 declare interface ModifyRiskSyscallStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8846,7 +8846,7 @@ declare interface ModifySecLogCleanSettingInfoRequest {
 }
 
 declare interface ModifySecLogCleanSettingInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8856,7 +8856,7 @@ declare interface ModifySecLogDeliveryClsSettingRequest {
 }
 
 declare interface ModifySecLogDeliveryClsSettingResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8882,7 +8882,7 @@ declare interface ModifySecLogDeliveryKafkaSettingRequest {
 }
 
 declare interface ModifySecLogDeliveryKafkaSettingResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8896,7 +8896,7 @@ declare interface ModifySecLogJoinObjectsRequest {
 }
 
 declare interface ModifySecLogJoinObjectsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8908,7 +8908,7 @@ declare interface ModifySecLogJoinStateRequest {
 }
 
 declare interface ModifySecLogJoinStateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8918,7 +8918,7 @@ declare interface ModifySecLogKafkaUINRequest {
 }
 
 declare interface ModifySecLogKafkaUINResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8930,7 +8930,7 @@ declare interface ModifyVirusAutoIsolateExampleSwitchRequest {
 }
 
 declare interface ModifyVirusAutoIsolateExampleSwitchResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8942,7 +8942,7 @@ declare interface ModifyVirusAutoIsolateSettingRequest {
 }
 
 declare interface ModifyVirusAutoIsolateSettingResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8958,7 +8958,7 @@ declare interface ModifyVirusFileStatusRequest {
 }
 
 declare interface ModifyVirusFileStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -8974,7 +8974,7 @@ declare interface ModifyVirusMonitorSettingRequest {
 }
 
 declare interface ModifyVirusMonitorSettingResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9002,7 +9002,7 @@ declare interface ModifyVirusScanSettingRequest {
 }
 
 declare interface ModifyVirusScanSettingResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9014,7 +9014,7 @@ declare interface ModifyVirusScanTimeoutSettingRequest {
 }
 
 declare interface ModifyVirusScanTimeoutSettingResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9028,7 +9028,7 @@ declare interface ModifyVulDefenceEventStatusRequest {
 }
 
 declare interface ModifyVulDefenceEventStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9042,7 +9042,7 @@ declare interface ModifyVulDefenceSettingRequest {
 }
 
 declare interface ModifyVulDefenceSettingResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9054,7 +9054,7 @@ declare interface OpenTcssTrialResponse {
   EndTime: string;
   /** 试用开通开始时间 */
   StartTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9064,7 +9064,7 @@ declare interface RemoveAssetImageRegistryRegistryDetailRequest {
 }
 
 declare interface RemoveAssetImageRegistryRegistryDetailResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9076,7 +9076,7 @@ declare interface RenewImageAuthorizeStateRequest {
 }
 
 declare interface RenewImageAuthorizeStateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9088,7 +9088,7 @@ declare interface ResetSecLogTopicConfigRequest {
 }
 
 declare interface ResetSecLogTopicConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9102,7 +9102,7 @@ declare interface ScanComplianceAssetsByPolicyItemRequest {
 declare interface ScanComplianceAssetsByPolicyItemResponse {
   /** 返回重新检测任务的ID。 */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9114,7 +9114,7 @@ declare interface ScanComplianceAssetsRequest {
 declare interface ScanComplianceAssetsResponse {
   /** 返回重新检测任务的ID。 */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9126,7 +9126,7 @@ declare interface ScanCompliancePolicyItemsRequest {
 declare interface ScanCompliancePolicyItemsResponse {
   /** 返回重新检测任务的ID。 */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9138,7 +9138,7 @@ declare interface ScanComplianceScanFailedAssetsRequest {
 declare interface ScanComplianceScanFailedAssetsResponse {
   /** 返回重新检测任务的ID。 */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9154,7 +9154,7 @@ declare interface SetCheckModeRequest {
 declare interface SetCheckModeResponse {
   /** "Succ"表示设置成功，"Failed"表示设置失败 */
   SetCheckResult: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9166,7 +9166,7 @@ declare interface StopVirusScanTaskRequest {
 }
 
 declare interface StopVirusScanTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9182,7 +9182,7 @@ declare interface StopVulScanTaskRequest {
 }
 
 declare interface StopVulScanTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9194,7 +9194,7 @@ declare interface SwitchImageAutoAuthorizedRuleRequest {
 }
 
 declare interface SwitchImageAutoAuthorizedRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9202,7 +9202,7 @@ declare interface SyncAssetImageRegistryAssetRequest {
 }
 
 declare interface SyncAssetImageRegistryAssetResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9230,7 +9230,7 @@ declare interface UpdateAndPublishNetworkFirewallPolicyDetailResponse {
   TaskId: number;
   /** 创建任务的结果，"Succ"为成功，"Failed"为失败 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9250,7 +9250,7 @@ declare interface UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse {
   TaskId: number;
   /** 创建任务的结果，"Succ"为成功，"Failed"为失败 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9284,7 +9284,7 @@ declare interface UpdateAssetImageRegistryRegistryDetailResponse {
   NameRepeatErr: string | null;
   /** 仓库唯一id */
   RegistryId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9306,7 +9306,7 @@ declare interface UpdateImageRegistryTimingScanTaskRequest {
 }
 
 declare interface UpdateImageRegistryTimingScanTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9334,7 +9334,7 @@ declare interface UpdateNetworkFirewallPolicyDetailResponse {
   TaskId: number;
   /** 创建任务的结果，"Succ"为成功，"Failed"为失败 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -9354,672 +9354,672 @@ declare interface UpdateNetworkFirewallPolicyYamlDetailResponse {
   TaskId: number;
   /** 创建任务的结果，"Succ"为成功，"Failed"为失败 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tcss 容器安全服务} */
 declare interface Tcss {
   (): Versions;
-  /** {@link AddAndPublishNetworkFirewallPolicyDetail 容器网络创建网络策略添加并发布任务}({@link AddAndPublishNetworkFirewallPolicyDetailRequest 请求参数}): {@link AddAndPublishNetworkFirewallPolicyDetailResponse 返回参数} */
+  /** 容器网络创建网络策略添加并发布任务 {@link AddAndPublishNetworkFirewallPolicyDetailRequest} {@link AddAndPublishNetworkFirewallPolicyDetailResponse} */
   AddAndPublishNetworkFirewallPolicyDetail(data: AddAndPublishNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddAndPublishNetworkFirewallPolicyDetailResponse>;
-  /** {@link AddAndPublishNetworkFirewallPolicyYamlDetail 容器网络创建Yaml网络策略并发布任务}({@link AddAndPublishNetworkFirewallPolicyYamlDetailRequest 请求参数}): {@link AddAndPublishNetworkFirewallPolicyYamlDetailResponse 返回参数} */
+  /** 容器网络创建Yaml网络策略并发布任务 {@link AddAndPublishNetworkFirewallPolicyYamlDetailRequest} {@link AddAndPublishNetworkFirewallPolicyYamlDetailResponse} */
   AddAndPublishNetworkFirewallPolicyYamlDetail(data: AddAndPublishNetworkFirewallPolicyYamlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddAndPublishNetworkFirewallPolicyYamlDetailResponse>;
-  /** {@link AddAssetImageRegistryRegistryDetail 新增单个镜像仓库详细信息}({@link AddAssetImageRegistryRegistryDetailRequest 请求参数}): {@link AddAssetImageRegistryRegistryDetailResponse 返回参数} */
+  /** 新增单个镜像仓库详细信息 {@link AddAssetImageRegistryRegistryDetailRequest} {@link AddAssetImageRegistryRegistryDetailResponse} */
   AddAssetImageRegistryRegistryDetail(data: AddAssetImageRegistryRegistryDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddAssetImageRegistryRegistryDetailResponse>;
-  /** {@link AddComplianceAssetPolicySetToWhitelist 安全合规忽略资产+检测项列表}({@link AddComplianceAssetPolicySetToWhitelistRequest 请求参数}): {@link AddComplianceAssetPolicySetToWhitelistResponse 返回参数} */
+  /** 安全合规忽略资产+检测项列表 {@link AddComplianceAssetPolicySetToWhitelistRequest} {@link AddComplianceAssetPolicySetToWhitelistResponse} */
   AddComplianceAssetPolicySetToWhitelist(data: AddComplianceAssetPolicySetToWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<AddComplianceAssetPolicySetToWhitelistResponse>;
-  /** {@link AddCompliancePolicyAssetSetToWhitelist 安全合规忽略检测项+资产列表}({@link AddCompliancePolicyAssetSetToWhitelistRequest 请求参数}): {@link AddCompliancePolicyAssetSetToWhitelistResponse 返回参数} */
+  /** 安全合规忽略检测项+资产列表 {@link AddCompliancePolicyAssetSetToWhitelistRequest} {@link AddCompliancePolicyAssetSetToWhitelistResponse} */
   AddCompliancePolicyAssetSetToWhitelist(data: AddCompliancePolicyAssetSetToWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<AddCompliancePolicyAssetSetToWhitelistResponse>;
-  /** {@link AddCompliancePolicyItemToWhitelist 安全合规忽略检测项列表}({@link AddCompliancePolicyItemToWhitelistRequest 请求参数}): {@link AddCompliancePolicyItemToWhitelistResponse 返回参数} */
+  /** 安全合规忽略检测项列表 {@link AddCompliancePolicyItemToWhitelistRequest} {@link AddCompliancePolicyItemToWhitelistResponse} */
   AddCompliancePolicyItemToWhitelist(data: AddCompliancePolicyItemToWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<AddCompliancePolicyItemToWhitelistResponse>;
-  /** {@link AddEditAbnormalProcessRule 添加编辑异常进程策略}({@link AddEditAbnormalProcessRuleRequest 请求参数}): {@link AddEditAbnormalProcessRuleResponse 返回参数} */
+  /** 添加编辑异常进程策略 {@link AddEditAbnormalProcessRuleRequest} {@link AddEditAbnormalProcessRuleResponse} */
   AddEditAbnormalProcessRule(data: AddEditAbnormalProcessRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddEditAbnormalProcessRuleResponse>;
-  /** {@link AddEditAccessControlRule 添加编辑运行访问控制策略}({@link AddEditAccessControlRuleRequest 请求参数}): {@link AddEditAccessControlRuleResponse 返回参数} */
+  /** 添加编辑运行访问控制策略 {@link AddEditAccessControlRuleRequest} {@link AddEditAccessControlRuleResponse} */
   AddEditAccessControlRule(data: AddEditAccessControlRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddEditAccessControlRuleResponse>;
-  /** {@link AddEditImageAutoAuthorizedRule 新增或编辑本地镜像自动授权规则}({@link AddEditImageAutoAuthorizedRuleRequest 请求参数}): {@link AddEditImageAutoAuthorizedRuleResponse 返回参数} */
+  /** 新增或编辑本地镜像自动授权规则 {@link AddEditImageAutoAuthorizedRuleRequest} {@link AddEditImageAutoAuthorizedRuleResponse} */
   AddEditImageAutoAuthorizedRule(data: AddEditImageAutoAuthorizedRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddEditImageAutoAuthorizedRuleResponse>;
-  /** {@link AddEditReverseShellWhiteList 添加编辑反弹shell白名单}({@link AddEditReverseShellWhiteListRequest 请求参数}): {@link AddEditReverseShellWhiteListResponse 返回参数} */
+  /** 添加编辑反弹shell白名单 {@link AddEditReverseShellWhiteListRequest} {@link AddEditReverseShellWhiteListResponse} */
   AddEditReverseShellWhiteList(data: AddEditReverseShellWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<AddEditReverseShellWhiteListResponse>;
-  /** {@link AddEditRiskSyscallWhiteList 添加编辑高危系统调用白名单}({@link AddEditRiskSyscallWhiteListRequest 请求参数}): {@link AddEditRiskSyscallWhiteListResponse 返回参数} */
+  /** 添加编辑高危系统调用白名单 {@link AddEditRiskSyscallWhiteListRequest} {@link AddEditRiskSyscallWhiteListResponse} */
   AddEditRiskSyscallWhiteList(data?: AddEditRiskSyscallWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<AddEditRiskSyscallWhiteListResponse>;
-  /** {@link AddEditWarningRules 添加编辑告警策略}({@link AddEditWarningRulesRequest 请求参数}): {@link AddEditWarningRulesResponse 返回参数} */
+  /** 添加编辑告警策略 {@link AddEditWarningRulesRequest} {@link AddEditWarningRulesResponse} */
   AddEditWarningRules(data: AddEditWarningRulesRequest, config?: AxiosRequestConfig): AxiosPromise<AddEditWarningRulesResponse>;
-  /** {@link AddEscapeWhiteList 新增逃逸白名单}({@link AddEscapeWhiteListRequest 请求参数}): {@link AddEscapeWhiteListResponse 返回参数} */
+  /** 新增逃逸白名单 {@link AddEscapeWhiteListRequest} {@link AddEscapeWhiteListResponse} */
   AddEscapeWhiteList(data: AddEscapeWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<AddEscapeWhiteListResponse>;
-  /** {@link AddIgnoreVul 新增漏洞扫描忽略漏洞}({@link AddIgnoreVulRequest 请求参数}): {@link AddIgnoreVulResponse 返回参数} */
+  /** 新增漏洞扫描忽略漏洞 {@link AddIgnoreVulRequest} {@link AddIgnoreVulResponse} */
   AddIgnoreVul(data: AddIgnoreVulRequest, config?: AxiosRequestConfig): AxiosPromise<AddIgnoreVulResponse>;
-  /** {@link AddNetworkFirewallPolicyDetail 容器网络创建网络策略添加任务}({@link AddNetworkFirewallPolicyDetailRequest 请求参数}): {@link AddNetworkFirewallPolicyDetailResponse 返回参数} */
+  /** 容器网络创建网络策略添加任务 {@link AddNetworkFirewallPolicyDetailRequest} {@link AddNetworkFirewallPolicyDetailResponse} */
   AddNetworkFirewallPolicyDetail(data: AddNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddNetworkFirewallPolicyDetailResponse>;
-  /** {@link AddNetworkFirewallPolicyYamlDetail 容器网络创建Yaml网络策略添加任务}({@link AddNetworkFirewallPolicyYamlDetailRequest 请求参数}): {@link AddNetworkFirewallPolicyYamlDetailResponse 返回参数} */
+  /** 容器网络创建Yaml网络策略添加任务 {@link AddNetworkFirewallPolicyYamlDetailRequest} {@link AddNetworkFirewallPolicyYamlDetailResponse} */
   AddNetworkFirewallPolicyYamlDetail(data: AddNetworkFirewallPolicyYamlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddNetworkFirewallPolicyYamlDetailResponse>;
-  /** {@link CheckNetworkFirewallPolicyYaml 容器网络创建检查Yaml网络策略任务}({@link CheckNetworkFirewallPolicyYamlRequest 请求参数}): {@link CheckNetworkFirewallPolicyYamlResponse 返回参数} */
+  /** 容器网络创建检查Yaml网络策略任务 {@link CheckNetworkFirewallPolicyYamlRequest} {@link CheckNetworkFirewallPolicyYamlResponse} */
   CheckNetworkFirewallPolicyYaml(data: CheckNetworkFirewallPolicyYamlRequest, config?: AxiosRequestConfig): AxiosPromise<CheckNetworkFirewallPolicyYamlResponse>;
-  /** {@link CheckRepeatAssetImageRegistry 检查单个镜像仓库名是否重复}({@link CheckRepeatAssetImageRegistryRequest 请求参数}): {@link CheckRepeatAssetImageRegistryResponse 返回参数} */
+  /** 检查单个镜像仓库名是否重复 {@link CheckRepeatAssetImageRegistryRequest} {@link CheckRepeatAssetImageRegistryResponse} */
   CheckRepeatAssetImageRegistry(data: CheckRepeatAssetImageRegistryRequest, config?: AxiosRequestConfig): AxiosPromise<CheckRepeatAssetImageRegistryResponse>;
-  /** {@link ConfirmNetworkFirewallPolicy 容器网络创建网络策略确认任务}({@link ConfirmNetworkFirewallPolicyRequest 请求参数}): {@link ConfirmNetworkFirewallPolicyResponse 返回参数} */
+  /** 容器网络创建网络策略确认任务 {@link ConfirmNetworkFirewallPolicyRequest} {@link ConfirmNetworkFirewallPolicyResponse} */
   ConfirmNetworkFirewallPolicy(data: ConfirmNetworkFirewallPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmNetworkFirewallPolicyResponse>;
-  /** {@link CreateAbnormalProcessRulesExportJob 创建异常进程规则导出任务}({@link CreateAbnormalProcessRulesExportJobRequest 请求参数}): {@link CreateAbnormalProcessRulesExportJobResponse 返回参数} */
+  /** 创建异常进程规则导出任务 {@link CreateAbnormalProcessRulesExportJobRequest} {@link CreateAbnormalProcessRulesExportJobResponse} */
   CreateAbnormalProcessRulesExportJob(data?: CreateAbnormalProcessRulesExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAbnormalProcessRulesExportJobResponse>;
-  /** {@link CreateAccessControlsRuleExportJob 创建文件篡改规则导出任务}({@link CreateAccessControlsRuleExportJobRequest 请求参数}): {@link CreateAccessControlsRuleExportJobResponse 返回参数} */
+  /** 创建文件篡改规则导出任务 {@link CreateAccessControlsRuleExportJobRequest} {@link CreateAccessControlsRuleExportJobResponse} */
   CreateAccessControlsRuleExportJob(data?: CreateAccessControlsRuleExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessControlsRuleExportJobResponse>;
-  /** {@link CreateAssetImageRegistryScanTask 镜像仓库创建镜像扫描任务}({@link CreateAssetImageRegistryScanTaskRequest 请求参数}): {@link CreateAssetImageRegistryScanTaskResponse 返回参数} */
+  /** 镜像仓库创建镜像扫描任务 {@link CreateAssetImageRegistryScanTaskRequest} {@link CreateAssetImageRegistryScanTaskResponse} */
   CreateAssetImageRegistryScanTask(data?: CreateAssetImageRegistryScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageRegistryScanTaskResponse>;
-  /** {@link CreateAssetImageRegistryScanTaskOneKey 镜像仓库创建镜像一键扫描任务}({@link CreateAssetImageRegistryScanTaskOneKeyRequest 请求参数}): {@link CreateAssetImageRegistryScanTaskOneKeyResponse 返回参数} */
+  /** 镜像仓库创建镜像一键扫描任务 {@link CreateAssetImageRegistryScanTaskOneKeyRequest} {@link CreateAssetImageRegistryScanTaskOneKeyResponse} */
   CreateAssetImageRegistryScanTaskOneKey(data?: CreateAssetImageRegistryScanTaskOneKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageRegistryScanTaskOneKeyResponse>;
-  /** {@link CreateAssetImageScanSetting 添加容器安全镜像扫描设置}({@link CreateAssetImageScanSettingRequest 请求参数}): {@link CreateAssetImageScanSettingResponse 返回参数} */
+  /** 添加容器安全镜像扫描设置 {@link CreateAssetImageScanSettingRequest} {@link CreateAssetImageScanSettingResponse} */
   CreateAssetImageScanSetting(data: CreateAssetImageScanSettingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageScanSettingResponse>;
-  /** {@link CreateAssetImageScanTask 创建镜像扫描任务}({@link CreateAssetImageScanTaskRequest 请求参数}): {@link CreateAssetImageScanTaskResponse 返回参数} */
+  /** 创建镜像扫描任务 {@link CreateAssetImageScanTaskRequest} {@link CreateAssetImageScanTaskResponse} */
   CreateAssetImageScanTask(data?: CreateAssetImageScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageScanTaskResponse>;
-  /** {@link CreateAssetImageVirusExportJob 创建本地镜像木马列表导出任务}({@link CreateAssetImageVirusExportJobRequest 请求参数}): {@link CreateAssetImageVirusExportJobResponse 返回参数} */
+  /** 创建本地镜像木马列表导出任务 {@link CreateAssetImageVirusExportJobRequest} {@link CreateAssetImageVirusExportJobResponse} */
   CreateAssetImageVirusExportJob(data: CreateAssetImageVirusExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageVirusExportJobResponse>;
-  /** {@link CreateCheckComponent 安装检查组件}({@link CreateCheckComponentRequest 请求参数}): {@link CreateCheckComponentResponse 返回参数} */
+  /** 安装检查组件 {@link CreateCheckComponentRequest} {@link CreateCheckComponentResponse} */
   CreateCheckComponent(data: CreateCheckComponentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCheckComponentResponse>;
-  /** {@link CreateClusterCheckTask 创建集群检查任务}({@link CreateClusterCheckTaskRequest 请求参数}): {@link CreateClusterCheckTaskResponse 返回参数} */
+  /** 创建集群检查任务 {@link CreateClusterCheckTaskRequest} {@link CreateClusterCheckTaskResponse} */
   CreateClusterCheckTask(data: CreateClusterCheckTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterCheckTaskResponse>;
-  /** {@link CreateComplianceTask 安全合规创建合规检查任务}({@link CreateComplianceTaskRequest 请求参数}): {@link CreateComplianceTaskResponse 返回参数} */
+  /** 安全合规创建合规检查任务 {@link CreateComplianceTaskRequest} {@link CreateComplianceTaskResponse} */
   CreateComplianceTask(data?: CreateComplianceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateComplianceTaskResponse>;
-  /** {@link CreateComponentExportJob 查询本地镜像组件列表导出}({@link CreateComponentExportJobRequest 请求参数}): {@link CreateComponentExportJobResponse 返回参数} */
+  /** 查询本地镜像组件列表导出 {@link CreateComponentExportJobRequest} {@link CreateComponentExportJobResponse} */
   CreateComponentExportJob(data: CreateComponentExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateComponentExportJobResponse>;
-  /** {@link CreateDefenceVulExportJob 创建支持防御的漏洞导出任务}({@link CreateDefenceVulExportJobRequest 请求参数}): {@link CreateDefenceVulExportJobResponse 返回参数} */
+  /** 创建支持防御的漏洞导出任务 {@link CreateDefenceVulExportJobRequest} {@link CreateDefenceVulExportJobResponse} */
   CreateDefenceVulExportJob(data?: CreateDefenceVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDefenceVulExportJobResponse>;
-  /** {@link CreateEmergencyVulExportJob 创建应急漏洞导出任务}({@link CreateEmergencyVulExportJobRequest 请求参数}): {@link CreateEmergencyVulExportJobResponse 返回参数} */
+  /** 创建应急漏洞导出任务 {@link CreateEmergencyVulExportJobRequest} {@link CreateEmergencyVulExportJobResponse} */
   CreateEmergencyVulExportJob(data?: CreateEmergencyVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmergencyVulExportJobResponse>;
-  /** {@link CreateEscapeEventsExportJob 创建逃逸事件导出异步任务}({@link CreateEscapeEventsExportJobRequest 请求参数}): {@link CreateEscapeEventsExportJobResponse 返回参数} */
+  /** 创建逃逸事件导出异步任务 {@link CreateEscapeEventsExportJobRequest} {@link CreateEscapeEventsExportJobResponse} */
   CreateEscapeEventsExportJob(data?: CreateEscapeEventsExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEscapeEventsExportJobResponse>;
-  /** {@link CreateEscapeWhiteListExportJob 创建逃逸白名单导出任务}({@link CreateEscapeWhiteListExportJobRequest 请求参数}): {@link CreateEscapeWhiteListExportJobResponse 返回参数} */
+  /** 创建逃逸白名单导出任务 {@link CreateEscapeWhiteListExportJobRequest} {@link CreateEscapeWhiteListExportJobResponse} */
   CreateEscapeWhiteListExportJob(data?: CreateEscapeWhiteListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEscapeWhiteListExportJobResponse>;
-  /** {@link CreateExportComplianceStatusListJob 创建一个导出安全合规信息的任务}({@link CreateExportComplianceStatusListJobRequest 请求参数}): {@link CreateExportComplianceStatusListJobResponse 返回参数} */
+  /** 创建一个导出安全合规信息的任务 {@link CreateExportComplianceStatusListJobRequest} {@link CreateExportComplianceStatusListJobResponse} */
   CreateExportComplianceStatusListJob(data: CreateExportComplianceStatusListJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportComplianceStatusListJobResponse>;
-  /** {@link CreateHostExportJob 创建主机列表导出任务}({@link CreateHostExportJobRequest 请求参数}): {@link CreateHostExportJobResponse 返回参数} */
+  /** 创建主机列表导出任务 {@link CreateHostExportJobRequest} {@link CreateHostExportJobResponse} */
   CreateHostExportJob(data?: CreateHostExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostExportJobResponse>;
-  /** {@link CreateImageExportJob 创建镜像导出任务}({@link CreateImageExportJobRequest 请求参数}): {@link CreateImageExportJobResponse 返回参数} */
+  /** 创建镜像导出任务 {@link CreateImageExportJobRequest} {@link CreateImageExportJobResponse} */
   CreateImageExportJob(data?: CreateImageExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageExportJobResponse>;
-  /** {@link CreateK8sApiAbnormalEventExportJob 创建k8s api异常事件导出任务}({@link CreateK8sApiAbnormalEventExportJobRequest 请求参数}): {@link CreateK8sApiAbnormalEventExportJobResponse 返回参数} */
+  /** 创建k8s api异常事件导出任务 {@link CreateK8sApiAbnormalEventExportJobRequest} {@link CreateK8sApiAbnormalEventExportJobResponse} */
   CreateK8sApiAbnormalEventExportJob(data?: CreateK8sApiAbnormalEventExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateK8sApiAbnormalEventExportJobResponse>;
-  /** {@link CreateK8sApiAbnormalRuleExportJob 创建k8sApi异常规则导出任务}({@link CreateK8sApiAbnormalRuleExportJobRequest 请求参数}): {@link CreateK8sApiAbnormalRuleExportJobResponse 返回参数} */
+  /** 创建k8sApi异常规则导出任务 {@link CreateK8sApiAbnormalRuleExportJobRequest} {@link CreateK8sApiAbnormalRuleExportJobResponse} */
   CreateK8sApiAbnormalRuleExportJob(data?: CreateK8sApiAbnormalRuleExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateK8sApiAbnormalRuleExportJobResponse>;
-  /** {@link CreateK8sApiAbnormalRuleInfo 创建k8sapi异常事件规则}({@link CreateK8sApiAbnormalRuleInfoRequest 请求参数}): {@link CreateK8sApiAbnormalRuleInfoResponse 返回参数} */
+  /** 创建k8sapi异常事件规则 {@link CreateK8sApiAbnormalRuleInfoRequest} {@link CreateK8sApiAbnormalRuleInfoResponse} */
   CreateK8sApiAbnormalRuleInfo(data: CreateK8sApiAbnormalRuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<CreateK8sApiAbnormalRuleInfoResponse>;
-  /** {@link CreateNetworkFirewallClusterRefresh 容器网络集群下发刷新任务}({@link CreateNetworkFirewallClusterRefreshRequest 请求参数}): {@link CreateNetworkFirewallClusterRefreshResponse 返回参数} */
+  /** 容器网络集群下发刷新任务 {@link CreateNetworkFirewallClusterRefreshRequest} {@link CreateNetworkFirewallClusterRefreshResponse} */
   CreateNetworkFirewallClusterRefresh(data?: CreateNetworkFirewallClusterRefreshRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkFirewallClusterRefreshResponse>;
-  /** {@link CreateNetworkFirewallPolicyDiscover 容器网络集群网络策略创建自动发现任务}({@link CreateNetworkFirewallPolicyDiscoverRequest 请求参数}): {@link CreateNetworkFirewallPolicyDiscoverResponse 返回参数} */
+  /** 容器网络集群网络策略创建自动发现任务 {@link CreateNetworkFirewallPolicyDiscoverRequest} {@link CreateNetworkFirewallPolicyDiscoverResponse} */
   CreateNetworkFirewallPolicyDiscover(data: CreateNetworkFirewallPolicyDiscoverRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkFirewallPolicyDiscoverResponse>;
-  /** {@link CreateNetworkFirewallPublish 容器网络创建网络策略发布任务}({@link CreateNetworkFirewallPublishRequest 请求参数}): {@link CreateNetworkFirewallPublishResponse 返回参数} */
+  /** 容器网络创建网络策略发布任务 {@link CreateNetworkFirewallPublishRequest} {@link CreateNetworkFirewallPublishResponse} */
   CreateNetworkFirewallPublish(data: CreateNetworkFirewallPublishRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkFirewallPublishResponse>;
-  /** {@link CreateNetworkFirewallUndoPublish 容器网络创建网络策略撤销任务}({@link CreateNetworkFirewallUndoPublishRequest 请求参数}): {@link CreateNetworkFirewallUndoPublishResponse 返回参数} */
+  /** 容器网络创建网络策略撤销任务 {@link CreateNetworkFirewallUndoPublishRequest} {@link CreateNetworkFirewallUndoPublishResponse} */
   CreateNetworkFirewallUndoPublish(data: CreateNetworkFirewallUndoPublishRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkFirewallUndoPublishResponse>;
-  /** {@link CreateOrModifyPostPayCores 创建或者编辑弹性计费上限}({@link CreateOrModifyPostPayCoresRequest 请求参数}): {@link CreateOrModifyPostPayCoresResponse 返回参数} */
+  /** 创建或者编辑弹性计费上限 {@link CreateOrModifyPostPayCoresRequest} {@link CreateOrModifyPostPayCoresResponse} */
   CreateOrModifyPostPayCores(data: CreateOrModifyPostPayCoresRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrModifyPostPayCoresResponse>;
-  /** {@link CreateProcessEventsExportJob 创建异常进程事件导出异步任务}({@link CreateProcessEventsExportJobRequest 请求参数}): {@link CreateProcessEventsExportJobResponse 返回参数} */
+  /** 创建异常进程事件导出异步任务 {@link CreateProcessEventsExportJobRequest} {@link CreateProcessEventsExportJobResponse} */
   CreateProcessEventsExportJob(data?: CreateProcessEventsExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProcessEventsExportJobResponse>;
-  /** {@link CreateRefreshTask 下发刷新任务}({@link CreateRefreshTaskRequest 请求参数}): {@link CreateRefreshTaskResponse 返回参数} */
+  /** 下发刷新任务 {@link CreateRefreshTaskRequest} {@link CreateRefreshTaskResponse} */
   CreateRefreshTask(data?: CreateRefreshTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRefreshTaskResponse>;
-  /** {@link CreateRiskDnsEventExportJob 创建恶意请求事件导出任务}({@link CreateRiskDnsEventExportJobRequest 请求参数}): {@link CreateRiskDnsEventExportJobResponse 返回参数} */
+  /** 创建恶意请求事件导出任务 {@link CreateRiskDnsEventExportJobRequest} {@link CreateRiskDnsEventExportJobResponse} */
   CreateRiskDnsEventExportJob(data?: CreateRiskDnsEventExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRiskDnsEventExportJobResponse>;
-  /** {@link CreateSearchTemplate 添加检索模板}({@link CreateSearchTemplateRequest 请求参数}): {@link CreateSearchTemplateResponse 返回参数} */
+  /** 添加检索模板 {@link CreateSearchTemplateRequest} {@link CreateSearchTemplateResponse} */
   CreateSearchTemplate(data: CreateSearchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSearchTemplateResponse>;
-  /** {@link CreateSystemVulExportJob 创建系统漏洞导出任务}({@link CreateSystemVulExportJobRequest 请求参数}): {@link CreateSystemVulExportJobResponse 返回参数} */
+  /** 创建系统漏洞导出任务 {@link CreateSystemVulExportJobRequest} {@link CreateSystemVulExportJobResponse} */
   CreateSystemVulExportJob(data?: CreateSystemVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSystemVulExportJobResponse>;
-  /** {@link CreateVirusScanAgain 运行时文件查杀重新检测}({@link CreateVirusScanAgainRequest 请求参数}): {@link CreateVirusScanAgainResponse 返回参数} */
+  /** 运行时文件查杀重新检测 {@link CreateVirusScanAgainRequest} {@link CreateVirusScanAgainResponse} */
   CreateVirusScanAgain(data: CreateVirusScanAgainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVirusScanAgainResponse>;
-  /** {@link CreateVirusScanTask 运行时文件查杀一键扫描}({@link CreateVirusScanTaskRequest 请求参数}): {@link CreateVirusScanTaskResponse 返回参数} */
+  /** 运行时文件查杀一键扫描 {@link CreateVirusScanTaskRequest} {@link CreateVirusScanTaskResponse} */
   CreateVirusScanTask(data: CreateVirusScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVirusScanTaskResponse>;
-  /** {@link CreateVulContainerExportJob 创建受漏洞影响的容器导出任务}({@link CreateVulContainerExportJobRequest 请求参数}): {@link CreateVulContainerExportJobResponse 返回参数} */
+  /** 创建受漏洞影响的容器导出任务 {@link CreateVulContainerExportJobRequest} {@link CreateVulContainerExportJobResponse} */
   CreateVulContainerExportJob(data: CreateVulContainerExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulContainerExportJobResponse>;
-  /** {@link CreateVulDefenceEventExportJob 创建漏洞防御导出任务}({@link CreateVulDefenceEventExportJobRequest 请求参数}): {@link CreateVulDefenceEventExportJobResponse 返回参数} */
+  /** 创建漏洞防御导出任务 {@link CreateVulDefenceEventExportJobRequest} {@link CreateVulDefenceEventExportJobResponse} */
   CreateVulDefenceEventExportJob(data?: CreateVulDefenceEventExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulDefenceEventExportJobResponse>;
-  /** {@link CreateVulDefenceHostExportJob 创建漏洞防御主机导出任务}({@link CreateVulDefenceHostExportJobRequest 请求参数}): {@link CreateVulDefenceHostExportJobResponse 返回参数} */
+  /** 创建漏洞防御主机导出任务 {@link CreateVulDefenceHostExportJobRequest} {@link CreateVulDefenceHostExportJobResponse} */
   CreateVulDefenceHostExportJob(data?: CreateVulDefenceHostExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulDefenceHostExportJobResponse>;
-  /** {@link CreateVulExportJob 查询本地镜像漏洞列表导出}({@link CreateVulExportJobRequest 请求参数}): {@link CreateVulExportJobResponse 返回参数} */
+  /** 查询本地镜像漏洞列表导出 {@link CreateVulExportJobRequest} {@link CreateVulExportJobResponse} */
   CreateVulExportJob(data: CreateVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulExportJobResponse>;
-  /** {@link CreateVulImageExportJob 创建导出受漏洞影响的镜像任务}({@link CreateVulImageExportJobRequest 请求参数}): {@link CreateVulImageExportJobResponse 返回参数} */
+  /** 创建导出受漏洞影响的镜像任务 {@link CreateVulImageExportJobRequest} {@link CreateVulImageExportJobResponse} */
   CreateVulImageExportJob(data: CreateVulImageExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulImageExportJobResponse>;
-  /** {@link CreateVulScanTask 创建漏洞扫描任务}({@link CreateVulScanTaskRequest 请求参数}): {@link CreateVulScanTaskResponse 返回参数} */
+  /** 创建漏洞扫描任务 {@link CreateVulScanTaskRequest} {@link CreateVulScanTaskResponse} */
   CreateVulScanTask(data?: CreateVulScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulScanTaskResponse>;
-  /** {@link CreateWebVulExportJob 创建web漏洞导出任务}({@link CreateWebVulExportJobRequest 请求参数}): {@link CreateWebVulExportJobResponse 返回参数} */
+  /** 创建web漏洞导出任务 {@link CreateWebVulExportJobRequest} {@link CreateWebVulExportJobResponse} */
   CreateWebVulExportJob(data?: CreateWebVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebVulExportJobResponse>;
-  /** {@link DeleteAbnormalProcessRules 删除运行时异常进程策略}({@link DeleteAbnormalProcessRulesRequest 请求参数}): {@link DeleteAbnormalProcessRulesResponse 返回参数} */
+  /** 删除运行时异常进程策略 {@link DeleteAbnormalProcessRulesRequest} {@link DeleteAbnormalProcessRulesResponse} */
   DeleteAbnormalProcessRules(data: DeleteAbnormalProcessRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAbnormalProcessRulesResponse>;
-  /** {@link DeleteAccessControlRules 删除运行时访问控制策略}({@link DeleteAccessControlRulesRequest 请求参数}): {@link DeleteAccessControlRulesResponse 返回参数} */
+  /** 删除运行时访问控制策略 {@link DeleteAccessControlRulesRequest} {@link DeleteAccessControlRulesResponse} */
   DeleteAccessControlRules(data: DeleteAccessControlRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessControlRulesResponse>;
-  /** {@link DeleteComplianceAssetPolicySetFromWhitelist 删除安全合规忽略项， 资产+检测项列表}({@link DeleteComplianceAssetPolicySetFromWhitelistRequest 请求参数}): {@link DeleteComplianceAssetPolicySetFromWhitelistResponse 返回参数} */
+  /** 删除安全合规忽略项， 资产+检测项列表 {@link DeleteComplianceAssetPolicySetFromWhitelistRequest} {@link DeleteComplianceAssetPolicySetFromWhitelistResponse} */
   DeleteComplianceAssetPolicySetFromWhitelist(data: DeleteComplianceAssetPolicySetFromWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteComplianceAssetPolicySetFromWhitelistResponse>;
-  /** {@link DeleteCompliancePolicyAssetSetFromWhitelist 删除检测项+资产列表的白名单策略}({@link DeleteCompliancePolicyAssetSetFromWhitelistRequest 请求参数}): {@link DeleteCompliancePolicyAssetSetFromWhitelistResponse 返回参数} */
+  /** 删除检测项+资产列表的白名单策略 {@link DeleteCompliancePolicyAssetSetFromWhitelistRequest} {@link DeleteCompliancePolicyAssetSetFromWhitelistResponse} */
   DeleteCompliancePolicyAssetSetFromWhitelist(data: DeleteCompliancePolicyAssetSetFromWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCompliancePolicyAssetSetFromWhitelistResponse>;
-  /** {@link DeleteCompliancePolicyItemFromWhitelist 安全合规取消忽略检测项列表}({@link DeleteCompliancePolicyItemFromWhitelistRequest 请求参数}): {@link DeleteCompliancePolicyItemFromWhitelistResponse 返回参数} */
+  /** 安全合规取消忽略检测项列表 {@link DeleteCompliancePolicyItemFromWhitelistRequest} {@link DeleteCompliancePolicyItemFromWhitelistResponse} */
   DeleteCompliancePolicyItemFromWhitelist(data: DeleteCompliancePolicyItemFromWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCompliancePolicyItemFromWhitelistResponse>;
-  /** {@link DeleteEscapeWhiteList 删除逃逸白名单}({@link DeleteEscapeWhiteListRequest 请求参数}): {@link DeleteEscapeWhiteListResponse 返回参数} */
+  /** 删除逃逸白名单 {@link DeleteEscapeWhiteListRequest} {@link DeleteEscapeWhiteListResponse} */
   DeleteEscapeWhiteList(data: DeleteEscapeWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEscapeWhiteListResponse>;
-  /** {@link DeleteIgnoreVul 取消漏洞扫描忽略漏洞}({@link DeleteIgnoreVulRequest 请求参数}): {@link DeleteIgnoreVulResponse 返回参数} */
+  /** 取消漏洞扫描忽略漏洞 {@link DeleteIgnoreVulRequest} {@link DeleteIgnoreVulResponse} */
   DeleteIgnoreVul(data: DeleteIgnoreVulRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIgnoreVulResponse>;
-  /** {@link DeleteK8sApiAbnormalRule 删除k8sapi异常事件规则}({@link DeleteK8sApiAbnormalRuleRequest 请求参数}): {@link DeleteK8sApiAbnormalRuleResponse 返回参数} */
+  /** 删除k8sapi异常事件规则 {@link DeleteK8sApiAbnormalRuleRequest} {@link DeleteK8sApiAbnormalRuleResponse} */
   DeleteK8sApiAbnormalRule(data: DeleteK8sApiAbnormalRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteK8sApiAbnormalRuleResponse>;
-  /** {@link DeleteMachine 卸载Agent客户端}({@link DeleteMachineRequest 请求参数}): {@link DeleteMachineResponse 返回参数} */
+  /** 卸载Agent客户端 {@link DeleteMachineRequest} {@link DeleteMachineResponse} */
   DeleteMachine(data: DeleteMachineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineResponse>;
-  /** {@link DeleteNetworkFirewallPolicyDetail 容器网络创建网络策略删除任务}({@link DeleteNetworkFirewallPolicyDetailRequest 请求参数}): {@link DeleteNetworkFirewallPolicyDetailResponse 返回参数} */
+  /** 容器网络创建网络策略删除任务 {@link DeleteNetworkFirewallPolicyDetailRequest} {@link DeleteNetworkFirewallPolicyDetailResponse} */
   DeleteNetworkFirewallPolicyDetail(data: DeleteNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNetworkFirewallPolicyDetailResponse>;
-  /** {@link DeleteReverseShellEvents 删除运行时反弹shell事件}({@link DeleteReverseShellEventsRequest 请求参数}): {@link DeleteReverseShellEventsResponse 返回参数} */
+  /** 删除运行时反弹shell事件 {@link DeleteReverseShellEventsRequest} {@link DeleteReverseShellEventsResponse} */
   DeleteReverseShellEvents(data: DeleteReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReverseShellEventsResponse>;
-  /** {@link DeleteReverseShellWhiteLists 删除运行时反弹shell白名单}({@link DeleteReverseShellWhiteListsRequest 请求参数}): {@link DeleteReverseShellWhiteListsResponse 返回参数} */
+  /** 删除运行时反弹shell白名单 {@link DeleteReverseShellWhiteListsRequest} {@link DeleteReverseShellWhiteListsResponse} */
   DeleteReverseShellWhiteLists(data: DeleteReverseShellWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReverseShellWhiteListsResponse>;
-  /** {@link DeleteRiskSyscallEvents 删除运行时高危系统调用事件}({@link DeleteRiskSyscallEventsRequest 请求参数}): {@link DeleteRiskSyscallEventsResponse 返回参数} */
+  /** 删除运行时高危系统调用事件 {@link DeleteRiskSyscallEventsRequest} {@link DeleteRiskSyscallEventsResponse} */
   DeleteRiskSyscallEvents(data: DeleteRiskSyscallEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskSyscallEventsResponse>;
-  /** {@link DeleteRiskSyscallWhiteLists 删除运行时高危系统调用白名单}({@link DeleteRiskSyscallWhiteListsRequest 请求参数}): {@link DeleteRiskSyscallWhiteListsResponse 返回参数} */
+  /** 删除运行时高危系统调用白名单 {@link DeleteRiskSyscallWhiteListsRequest} {@link DeleteRiskSyscallWhiteListsResponse} */
   DeleteRiskSyscallWhiteLists(data: DeleteRiskSyscallWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskSyscallWhiteListsResponse>;
-  /** {@link DeleteSearchTemplate 删除检索模板}({@link DeleteSearchTemplateRequest 请求参数}): {@link DeleteSearchTemplateResponse 返回参数} */
+  /** 删除检索模板 {@link DeleteSearchTemplateRequest} {@link DeleteSearchTemplateResponse} */
   DeleteSearchTemplate(data: DeleteSearchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSearchTemplateResponse>;
-  /** {@link DescribeABTestConfig 获取用户当前灰度配置}({@link DescribeABTestConfigRequest 请求参数}): {@link DescribeABTestConfigResponse 返回参数} */
+  /** 获取用户当前灰度配置 {@link DescribeABTestConfigRequest} {@link DescribeABTestConfigResponse} */
   DescribeABTestConfig(data?: DescribeABTestConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeABTestConfigResponse>;
-  /** {@link DescribeAbnormalProcessDetail 运行时异常进程事件详细信息}({@link DescribeAbnormalProcessDetailRequest 请求参数}): {@link DescribeAbnormalProcessDetailResponse 返回参数} */
+  /** 运行时异常进程事件详细信息 {@link DescribeAbnormalProcessDetailRequest} {@link DescribeAbnormalProcessDetailResponse} */
   DescribeAbnormalProcessDetail(data: DescribeAbnormalProcessDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessDetailResponse>;
-  /** {@link DescribeAbnormalProcessEventTendency 查询待处理异常进程事件趋势}({@link DescribeAbnormalProcessEventTendencyRequest 请求参数}): {@link DescribeAbnormalProcessEventTendencyResponse 返回参数} */
+  /** 查询待处理异常进程事件趋势 {@link DescribeAbnormalProcessEventTendencyRequest} {@link DescribeAbnormalProcessEventTendencyResponse} */
   DescribeAbnormalProcessEventTendency(data: DescribeAbnormalProcessEventTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessEventTendencyResponse>;
-  /** {@link DescribeAbnormalProcessEvents 运行时异常进程列表}({@link DescribeAbnormalProcessEventsRequest 请求参数}): {@link DescribeAbnormalProcessEventsResponse 返回参数} */
+  /** 运行时异常进程列表 {@link DescribeAbnormalProcessEventsRequest} {@link DescribeAbnormalProcessEventsResponse} */
   DescribeAbnormalProcessEvents(data?: DescribeAbnormalProcessEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessEventsResponse>;
-  /** {@link DescribeAbnormalProcessEventsExport 运行时异常进程列表导出}({@link DescribeAbnormalProcessEventsExportRequest 请求参数}): {@link DescribeAbnormalProcessEventsExportResponse 返回参数} */
+  /** 运行时异常进程列表导出 {@link DescribeAbnormalProcessEventsExportRequest} {@link DescribeAbnormalProcessEventsExportResponse} */
   DescribeAbnormalProcessEventsExport(data: DescribeAbnormalProcessEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessEventsExportResponse>;
-  /** {@link DescribeAbnormalProcessLevelSummary 统计异常进程各威胁等级待处理事件数}({@link DescribeAbnormalProcessLevelSummaryRequest 请求参数}): {@link DescribeAbnormalProcessLevelSummaryResponse 返回参数} */
+  /** 统计异常进程各威胁等级待处理事件数 {@link DescribeAbnormalProcessLevelSummaryRequest} {@link DescribeAbnormalProcessLevelSummaryResponse} */
   DescribeAbnormalProcessLevelSummary(data?: DescribeAbnormalProcessLevelSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessLevelSummaryResponse>;
-  /** {@link DescribeAbnormalProcessRuleDetail 查询运行时异常进程策略详细信息}({@link DescribeAbnormalProcessRuleDetailRequest 请求参数}): {@link DescribeAbnormalProcessRuleDetailResponse 返回参数} */
+  /** 查询运行时异常进程策略详细信息 {@link DescribeAbnormalProcessRuleDetailRequest} {@link DescribeAbnormalProcessRuleDetailResponse} */
   DescribeAbnormalProcessRuleDetail(data?: DescribeAbnormalProcessRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessRuleDetailResponse>;
-  /** {@link DescribeAbnormalProcessRules 运行时异常进程策略列表}({@link DescribeAbnormalProcessRulesRequest 请求参数}): {@link DescribeAbnormalProcessRulesResponse 返回参数} */
+  /** 运行时异常进程策略列表 {@link DescribeAbnormalProcessRulesRequest} {@link DescribeAbnormalProcessRulesResponse} */
   DescribeAbnormalProcessRules(data?: DescribeAbnormalProcessRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessRulesResponse>;
-  /** {@link DescribeAbnormalProcessRulesExport 运行时异常进程策略列表导出}({@link DescribeAbnormalProcessRulesExportRequest 请求参数}): {@link DescribeAbnormalProcessRulesExportResponse 返回参数} */
+  /** 运行时异常进程策略列表导出 {@link DescribeAbnormalProcessRulesExportRequest} {@link DescribeAbnormalProcessRulesExportResponse} */
   DescribeAbnormalProcessRulesExport(data: DescribeAbnormalProcessRulesExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalProcessRulesExportResponse>;
-  /** {@link DescribeAccessControlDetail 运行时访问控制事件详细信息}({@link DescribeAccessControlDetailRequest 请求参数}): {@link DescribeAccessControlDetailResponse 返回参数} */
+  /** 运行时访问控制事件详细信息 {@link DescribeAccessControlDetailRequest} {@link DescribeAccessControlDetailResponse} */
   DescribeAccessControlDetail(data: DescribeAccessControlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlDetailResponse>;
-  /** {@link DescribeAccessControlEvents 运行时访问控制事件列表}({@link DescribeAccessControlEventsRequest 请求参数}): {@link DescribeAccessControlEventsResponse 返回参数} */
+  /** 运行时访问控制事件列表 {@link DescribeAccessControlEventsRequest} {@link DescribeAccessControlEventsResponse} */
   DescribeAccessControlEvents(data?: DescribeAccessControlEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlEventsResponse>;
-  /** {@link DescribeAccessControlEventsExport 运行时访问控制事件列表导出}({@link DescribeAccessControlEventsExportRequest 请求参数}): {@link DescribeAccessControlEventsExportResponse 返回参数} */
+  /** 运行时访问控制事件列表导出 {@link DescribeAccessControlEventsExportRequest} {@link DescribeAccessControlEventsExportResponse} */
   DescribeAccessControlEventsExport(data?: DescribeAccessControlEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlEventsExportResponse>;
-  /** {@link DescribeAccessControlRuleDetail 查询运行时访问控制策略详细信息}({@link DescribeAccessControlRuleDetailRequest 请求参数}): {@link DescribeAccessControlRuleDetailResponse 返回参数} */
+  /** 查询运行时访问控制策略详细信息 {@link DescribeAccessControlRuleDetailRequest} {@link DescribeAccessControlRuleDetailResponse} */
   DescribeAccessControlRuleDetail(data?: DescribeAccessControlRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlRuleDetailResponse>;
-  /** {@link DescribeAccessControlRules 运行时访问控制策略列表}({@link DescribeAccessControlRulesRequest 请求参数}): {@link DescribeAccessControlRulesResponse 返回参数} */
+  /** 运行时访问控制策略列表 {@link DescribeAccessControlRulesRequest} {@link DescribeAccessControlRulesResponse} */
   DescribeAccessControlRules(data?: DescribeAccessControlRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlRulesResponse>;
-  /** {@link DescribeAccessControlRulesExport 运行时访问控制策略列表导出}({@link DescribeAccessControlRulesExportRequest 请求参数}): {@link DescribeAccessControlRulesExportResponse 返回参数} */
+  /** 运行时访问控制策略列表导出 {@link DescribeAccessControlRulesExportRequest} {@link DescribeAccessControlRulesExportResponse} */
   DescribeAccessControlRulesExport(data: DescribeAccessControlRulesExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessControlRulesExportResponse>;
-  /** {@link DescribeAffectedClusterCount 获取受影响的集群数量}({@link DescribeAffectedClusterCountRequest 请求参数}): {@link DescribeAffectedClusterCountResponse 返回参数} */
+  /** 获取受影响的集群数量 {@link DescribeAffectedClusterCountRequest} {@link DescribeAffectedClusterCountResponse} */
   DescribeAffectedClusterCount(data?: DescribeAffectedClusterCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAffectedClusterCountResponse>;
-  /** {@link DescribeAffectedNodeList 查询节点类型的影响范围}({@link DescribeAffectedNodeListRequest 请求参数}): {@link DescribeAffectedNodeListResponse 返回参数} */
+  /** 查询节点类型的影响范围 {@link DescribeAffectedNodeListRequest} {@link DescribeAffectedNodeListResponse} */
   DescribeAffectedNodeList(data: DescribeAffectedNodeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAffectedNodeListResponse>;
-  /** {@link DescribeAffectedWorkloadList 查询workload类型的影响范围}({@link DescribeAffectedWorkloadListRequest 请求参数}): {@link DescribeAffectedWorkloadListResponse 返回参数} */
+  /** 查询workload类型的影响范围 {@link DescribeAffectedWorkloadListRequest} {@link DescribeAffectedWorkloadListResponse} */
   DescribeAffectedWorkloadList(data: DescribeAffectedWorkloadListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAffectedWorkloadListResponse>;
-  /** {@link DescribeAgentDaemonSetCmd 查询平行容器安装命令}({@link DescribeAgentDaemonSetCmdRequest 请求参数}): {@link DescribeAgentDaemonSetCmdResponse 返回参数} */
+  /** 查询平行容器安装命令 {@link DescribeAgentDaemonSetCmdRequest} {@link DescribeAgentDaemonSetCmdResponse} */
   DescribeAgentDaemonSetCmd(data: DescribeAgentDaemonSetCmdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDaemonSetCmdResponse>;
-  /** {@link DescribeAgentInstallCommand 查询agent安装命令}({@link DescribeAgentInstallCommandRequest 请求参数}): {@link DescribeAgentInstallCommandResponse 返回参数} */
+  /** 查询agent安装命令 {@link DescribeAgentInstallCommandRequest} {@link DescribeAgentInstallCommandResponse} */
   DescribeAgentInstallCommand(data: DescribeAgentInstallCommandRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentInstallCommandResponse>;
-  /** {@link DescribeAssetAppServiceList 查询app服务列表}({@link DescribeAssetAppServiceListRequest 请求参数}): {@link DescribeAssetAppServiceListResponse 返回参数} */
+  /** 查询app服务列表 {@link DescribeAssetAppServiceListRequest} {@link DescribeAssetAppServiceListResponse} */
   DescribeAssetAppServiceList(data?: DescribeAssetAppServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetAppServiceListResponse>;
-  /** {@link DescribeAssetClusterList 查询集群列表}({@link DescribeAssetClusterListRequest 请求参数}): {@link DescribeAssetClusterListResponse 返回参数} */
+  /** 查询集群列表 {@link DescribeAssetClusterListRequest} {@link DescribeAssetClusterListResponse} */
   DescribeAssetClusterList(data?: DescribeAssetClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetClusterListResponse>;
-  /** {@link DescribeAssetComponentList 查询容器组件列表}({@link DescribeAssetComponentListRequest 请求参数}): {@link DescribeAssetComponentListResponse 返回参数} */
+  /** 查询容器组件列表 {@link DescribeAssetComponentListRequest} {@link DescribeAssetComponentListResponse} */
   DescribeAssetComponentList(data: DescribeAssetComponentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetComponentListResponse>;
-  /** {@link DescribeAssetContainerDetail 查询容器信息}({@link DescribeAssetContainerDetailRequest 请求参数}): {@link DescribeAssetContainerDetailResponse 返回参数} */
+  /** 查询容器信息 {@link DescribeAssetContainerDetailRequest} {@link DescribeAssetContainerDetailResponse} */
   DescribeAssetContainerDetail(data: DescribeAssetContainerDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetContainerDetailResponse>;
-  /** {@link DescribeAssetContainerList 查询容器列表}({@link DescribeAssetContainerListRequest 请求参数}): {@link DescribeAssetContainerListResponse 返回参数} */
+  /** 查询容器列表 {@link DescribeAssetContainerListRequest} {@link DescribeAssetContainerListResponse} */
   DescribeAssetContainerList(data?: DescribeAssetContainerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetContainerListResponse>;
-  /** {@link DescribeAssetDBServiceList 查询db服务列表}({@link DescribeAssetDBServiceListRequest 请求参数}): {@link DescribeAssetDBServiceListResponse 返回参数} */
+  /** 查询db服务列表 {@link DescribeAssetDBServiceListRequest} {@link DescribeAssetDBServiceListResponse} */
   DescribeAssetDBServiceList(data?: DescribeAssetDBServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDBServiceListResponse>;
-  /** {@link DescribeAssetHostDetail 查询主机信息}({@link DescribeAssetHostDetailRequest 请求参数}): {@link DescribeAssetHostDetailResponse 返回参数} */
+  /** 查询主机信息 {@link DescribeAssetHostDetailRequest} {@link DescribeAssetHostDetailResponse} */
   DescribeAssetHostDetail(data: DescribeAssetHostDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetHostDetailResponse>;
-  /** {@link DescribeAssetHostList 查询主机列表}({@link DescribeAssetHostListRequest 请求参数}): {@link DescribeAssetHostListResponse 返回参数} */
+  /** 查询主机列表 {@link DescribeAssetHostListRequest} {@link DescribeAssetHostListResponse} */
   DescribeAssetHostList(data?: DescribeAssetHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetHostListResponse>;
-  /** {@link DescribeAssetImageBindRuleInfo 镜像绑定规则列表}({@link DescribeAssetImageBindRuleInfoRequest 请求参数}): {@link DescribeAssetImageBindRuleInfoResponse 返回参数} */
+  /** 镜像绑定规则列表 {@link DescribeAssetImageBindRuleInfoRequest} {@link DescribeAssetImageBindRuleInfoResponse} */
   DescribeAssetImageBindRuleInfo(data?: DescribeAssetImageBindRuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageBindRuleInfoResponse>;
-  /** {@link DescribeAssetImageDetail 查询镜像信息}({@link DescribeAssetImageDetailRequest 请求参数}): {@link DescribeAssetImageDetailResponse 返回参数} */
+  /** 查询镜像信息 {@link DescribeAssetImageDetailRequest} {@link DescribeAssetImageDetailResponse} */
   DescribeAssetImageDetail(data: DescribeAssetImageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageDetailResponse>;
-  /** {@link DescribeAssetImageHostList 查询镜像关联主机}({@link DescribeAssetImageHostListRequest 请求参数}): {@link DescribeAssetImageHostListResponse 返回参数} */
+  /** 查询镜像关联主机 {@link DescribeAssetImageHostListRequest} {@link DescribeAssetImageHostListResponse} */
   DescribeAssetImageHostList(data?: DescribeAssetImageHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageHostListResponse>;
-  /** {@link DescribeAssetImageList 查询镜像列表}({@link DescribeAssetImageListRequest 请求参数}): {@link DescribeAssetImageListResponse 返回参数} */
+  /** 查询镜像列表 {@link DescribeAssetImageListRequest} {@link DescribeAssetImageListResponse} */
   DescribeAssetImageList(data?: DescribeAssetImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageListResponse>;
-  /** {@link DescribeAssetImageListExport 查询镜像列表导出}({@link DescribeAssetImageListExportRequest 请求参数}): {@link DescribeAssetImageListExportResponse 返回参数} */
+  /** 查询镜像列表导出 {@link DescribeAssetImageListExportRequest} {@link DescribeAssetImageListExportResponse} */
   DescribeAssetImageListExport(data: DescribeAssetImageListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageListExportResponse>;
-  /** {@link DescribeAssetImageRegistryAssetStatus 查看镜像仓库资产更新进度状态}({@link DescribeAssetImageRegistryAssetStatusRequest 请求参数}): {@link DescribeAssetImageRegistryAssetStatusResponse 返回参数} */
+  /** 查看镜像仓库资产更新进度状态 {@link DescribeAssetImageRegistryAssetStatusRequest} {@link DescribeAssetImageRegistryAssetStatusResponse} */
   DescribeAssetImageRegistryAssetStatus(data?: DescribeAssetImageRegistryAssetStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryAssetStatusResponse>;
-  /** {@link DescribeAssetImageRegistryDetail 镜像仓库查询镜像仓库详情}({@link DescribeAssetImageRegistryDetailRequest 请求参数}): {@link DescribeAssetImageRegistryDetailResponse 返回参数} */
+  /** 镜像仓库查询镜像仓库详情 {@link DescribeAssetImageRegistryDetailRequest} {@link DescribeAssetImageRegistryDetailResponse} */
   DescribeAssetImageRegistryDetail(data?: DescribeAssetImageRegistryDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryDetailResponse>;
-  /** {@link DescribeAssetImageRegistryList 镜像仓库查询镜像仓库列表}({@link DescribeAssetImageRegistryListRequest 请求参数}): {@link DescribeAssetImageRegistryListResponse 返回参数} */
+  /** 镜像仓库查询镜像仓库列表 {@link DescribeAssetImageRegistryListRequest} {@link DescribeAssetImageRegistryListResponse} */
   DescribeAssetImageRegistryList(data?: DescribeAssetImageRegistryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryListResponse>;
-  /** {@link DescribeAssetImageRegistryListExport 镜像仓库镜像列表导出}({@link DescribeAssetImageRegistryListExportRequest 请求参数}): {@link DescribeAssetImageRegistryListExportResponse 返回参数} */
+  /** 镜像仓库镜像列表导出 {@link DescribeAssetImageRegistryListExportRequest} {@link DescribeAssetImageRegistryListExportResponse} */
   DescribeAssetImageRegistryListExport(data: DescribeAssetImageRegistryListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryListExportResponse>;
-  /** {@link DescribeAssetImageRegistryRegistryDetail 查看单个镜像仓库详细信息}({@link DescribeAssetImageRegistryRegistryDetailRequest 请求参数}): {@link DescribeAssetImageRegistryRegistryDetailResponse 返回参数} */
+  /** 查看单个镜像仓库详细信息 {@link DescribeAssetImageRegistryRegistryDetailRequest} {@link DescribeAssetImageRegistryRegistryDetailResponse} */
   DescribeAssetImageRegistryRegistryDetail(data: DescribeAssetImageRegistryRegistryDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryRegistryDetailResponse>;
-  /** {@link DescribeAssetImageRegistryRegistryList 镜像仓库仓库列表}({@link DescribeAssetImageRegistryRegistryListRequest 请求参数}): {@link DescribeAssetImageRegistryRegistryListResponse 返回参数} */
+  /** 镜像仓库仓库列表 {@link DescribeAssetImageRegistryRegistryListRequest} {@link DescribeAssetImageRegistryRegistryListResponse} */
   DescribeAssetImageRegistryRegistryList(data?: DescribeAssetImageRegistryRegistryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryRegistryListResponse>;
-  /** {@link DescribeAssetImageRegistryRiskInfoList 镜像仓库查询镜像高危行为列表}({@link DescribeAssetImageRegistryRiskInfoListRequest 请求参数}): {@link DescribeAssetImageRegistryRiskInfoListResponse 返回参数} */
+  /** 镜像仓库查询镜像高危行为列表 {@link DescribeAssetImageRegistryRiskInfoListRequest} {@link DescribeAssetImageRegistryRiskInfoListResponse} */
   DescribeAssetImageRegistryRiskInfoList(data?: DescribeAssetImageRegistryRiskInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryRiskInfoListResponse>;
-  /** {@link DescribeAssetImageRegistryRiskListExport 镜像仓库敏感信息列表导出}({@link DescribeAssetImageRegistryRiskListExportRequest 请求参数}): {@link DescribeAssetImageRegistryRiskListExportResponse 返回参数} */
+  /** 镜像仓库敏感信息列表导出 {@link DescribeAssetImageRegistryRiskListExportRequest} {@link DescribeAssetImageRegistryRiskListExportResponse} */
   DescribeAssetImageRegistryRiskListExport(data: DescribeAssetImageRegistryRiskListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryRiskListExportResponse>;
-  /** {@link DescribeAssetImageRegistryScanStatusOneKey 镜像仓库查询一键镜像扫描状态}({@link DescribeAssetImageRegistryScanStatusOneKeyRequest 请求参数}): {@link DescribeAssetImageRegistryScanStatusOneKeyResponse 返回参数} */
+  /** 镜像仓库查询一键镜像扫描状态 {@link DescribeAssetImageRegistryScanStatusOneKeyRequest} {@link DescribeAssetImageRegistryScanStatusOneKeyResponse} */
   DescribeAssetImageRegistryScanStatusOneKey(data?: DescribeAssetImageRegistryScanStatusOneKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryScanStatusOneKeyResponse>;
-  /** {@link DescribeAssetImageRegistrySummary 镜像仓库查询镜像统计信息}({@link DescribeAssetImageRegistrySummaryRequest 请求参数}): {@link DescribeAssetImageRegistrySummaryResponse 返回参数} */
+  /** 镜像仓库查询镜像统计信息 {@link DescribeAssetImageRegistrySummaryRequest} {@link DescribeAssetImageRegistrySummaryResponse} */
   DescribeAssetImageRegistrySummary(data?: DescribeAssetImageRegistrySummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistrySummaryResponse>;
-  /** {@link DescribeAssetImageRegistryVirusList 镜像仓库查询木马病毒列表}({@link DescribeAssetImageRegistryVirusListRequest 请求参数}): {@link DescribeAssetImageRegistryVirusListResponse 返回参数} */
+  /** 镜像仓库查询木马病毒列表 {@link DescribeAssetImageRegistryVirusListRequest} {@link DescribeAssetImageRegistryVirusListResponse} */
   DescribeAssetImageRegistryVirusList(data?: DescribeAssetImageRegistryVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVirusListResponse>;
-  /** {@link DescribeAssetImageRegistryVirusListExport 镜像仓库木马信息列表导出}({@link DescribeAssetImageRegistryVirusListExportRequest 请求参数}): {@link DescribeAssetImageRegistryVirusListExportResponse 返回参数} */
+  /** 镜像仓库木马信息列表导出 {@link DescribeAssetImageRegistryVirusListExportRequest} {@link DescribeAssetImageRegistryVirusListExportResponse} */
   DescribeAssetImageRegistryVirusListExport(data: DescribeAssetImageRegistryVirusListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVirusListExportResponse>;
-  /** {@link DescribeAssetImageRegistryVulList 镜像仓库查询镜像漏洞列表}({@link DescribeAssetImageRegistryVulListRequest 请求参数}): {@link DescribeAssetImageRegistryVulListResponse 返回参数} */
+  /** 镜像仓库查询镜像漏洞列表 {@link DescribeAssetImageRegistryVulListRequest} {@link DescribeAssetImageRegistryVulListResponse} */
   DescribeAssetImageRegistryVulList(data?: DescribeAssetImageRegistryVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVulListResponse>;
-  /** {@link DescribeAssetImageRegistryVulListExport 镜像仓库漏洞列表导出}({@link DescribeAssetImageRegistryVulListExportRequest 请求参数}): {@link DescribeAssetImageRegistryVulListExportResponse 返回参数} */
+  /** 镜像仓库漏洞列表导出 {@link DescribeAssetImageRegistryVulListExportRequest} {@link DescribeAssetImageRegistryVulListExportResponse} */
   DescribeAssetImageRegistryVulListExport(data: DescribeAssetImageRegistryVulListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVulListExportResponse>;
-  /** {@link DescribeAssetImageRiskList 查询镜像风险列表}({@link DescribeAssetImageRiskListRequest 请求参数}): {@link DescribeAssetImageRiskListResponse 返回参数} */
+  /** 查询镜像风险列表 {@link DescribeAssetImageRiskListRequest} {@link DescribeAssetImageRiskListResponse} */
   DescribeAssetImageRiskList(data: DescribeAssetImageRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRiskListResponse>;
-  /** {@link DescribeAssetImageRiskListExport 镜像风险列表导出}({@link DescribeAssetImageRiskListExportRequest 请求参数}): {@link DescribeAssetImageRiskListExportResponse 返回参数} */
+  /** 镜像风险列表导出 {@link DescribeAssetImageRiskListExportRequest} {@link DescribeAssetImageRiskListExportResponse} */
   DescribeAssetImageRiskListExport(data: DescribeAssetImageRiskListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRiskListExportResponse>;
-  /** {@link DescribeAssetImageScanSetting 获取镜像扫描设置信息}({@link DescribeAssetImageScanSettingRequest 请求参数}): {@link DescribeAssetImageScanSettingResponse 返回参数} */
+  /** 获取镜像扫描设置信息 {@link DescribeAssetImageScanSettingRequest} {@link DescribeAssetImageScanSettingResponse} */
   DescribeAssetImageScanSetting(data?: DescribeAssetImageScanSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageScanSettingResponse>;
-  /** {@link DescribeAssetImageScanStatus 查询镜像扫描状态}({@link DescribeAssetImageScanStatusRequest 请求参数}): {@link DescribeAssetImageScanStatusResponse 返回参数} */
+  /** 查询镜像扫描状态 {@link DescribeAssetImageScanStatusRequest} {@link DescribeAssetImageScanStatusResponse} */
   DescribeAssetImageScanStatus(data?: DescribeAssetImageScanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageScanStatusResponse>;
-  /** {@link DescribeAssetImageScanTask 查询正在一键扫描的镜像扫描taskid}({@link DescribeAssetImageScanTaskRequest 请求参数}): {@link DescribeAssetImageScanTaskResponse 返回参数} */
+  /** 查询正在一键扫描的镜像扫描taskid {@link DescribeAssetImageScanTaskRequest} {@link DescribeAssetImageScanTaskResponse} */
   DescribeAssetImageScanTask(data?: DescribeAssetImageScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageScanTaskResponse>;
-  /** {@link DescribeAssetImageSimpleList 查询镜像简略信息列表}({@link DescribeAssetImageSimpleListRequest 请求参数}): {@link DescribeAssetImageSimpleListResponse 返回参数} */
+  /** 查询镜像简略信息列表 {@link DescribeAssetImageSimpleListRequest} {@link DescribeAssetImageSimpleListResponse} */
   DescribeAssetImageSimpleList(data?: DescribeAssetImageSimpleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageSimpleListResponse>;
-  /** {@link DescribeAssetImageVirusList 查询镜像病毒列表}({@link DescribeAssetImageVirusListRequest 请求参数}): {@link DescribeAssetImageVirusListResponse 返回参数} */
+  /** 查询镜像病毒列表 {@link DescribeAssetImageVirusListRequest} {@link DescribeAssetImageVirusListResponse} */
   DescribeAssetImageVirusList(data: DescribeAssetImageVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageVirusListResponse>;
-  /** {@link DescribeAssetImageVirusListExport 镜像木马列表导出}({@link DescribeAssetImageVirusListExportRequest 请求参数}): {@link DescribeAssetImageVirusListExportResponse 返回参数} */
+  /** 镜像木马列表导出 {@link DescribeAssetImageVirusListExportRequest} {@link DescribeAssetImageVirusListExportResponse} */
   DescribeAssetImageVirusListExport(data: DescribeAssetImageVirusListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageVirusListExportResponse>;
-  /** {@link DescribeAssetImageVulList 查询镜像漏洞列表}({@link DescribeAssetImageVulListRequest 请求参数}): {@link DescribeAssetImageVulListResponse 返回参数} */
+  /** 查询镜像漏洞列表 {@link DescribeAssetImageVulListRequest} {@link DescribeAssetImageVulListResponse} */
   DescribeAssetImageVulList(data: DescribeAssetImageVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageVulListResponse>;
-  /** {@link DescribeAssetImageVulListExport 镜像漏洞列表导出}({@link DescribeAssetImageVulListExportRequest 请求参数}): {@link DescribeAssetImageVulListExportResponse 返回参数} */
+  /** 镜像漏洞列表导出 {@link DescribeAssetImageVulListExportRequest} {@link DescribeAssetImageVulListExportResponse} */
   DescribeAssetImageVulListExport(data: DescribeAssetImageVulListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageVulListExportResponse>;
-  /** {@link DescribeAssetPortList 查询端口占用列表}({@link DescribeAssetPortListRequest 请求参数}): {@link DescribeAssetPortListResponse 返回参数} */
+  /** 查询端口占用列表 {@link DescribeAssetPortListRequest} {@link DescribeAssetPortListResponse} */
   DescribeAssetPortList(data?: DescribeAssetPortListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetPortListResponse>;
-  /** {@link DescribeAssetProcessList 查询进程列表}({@link DescribeAssetProcessListRequest 请求参数}): {@link DescribeAssetProcessListResponse 返回参数} */
+  /** 查询进程列表 {@link DescribeAssetProcessListRequest} {@link DescribeAssetProcessListResponse} */
   DescribeAssetProcessList(data?: DescribeAssetProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetProcessListResponse>;
-  /** {@link DescribeAssetSummary 查询账户容器、镜像等统计信息}({@link DescribeAssetSummaryRequest 请求参数}): {@link DescribeAssetSummaryResponse 返回参数} */
+  /** 查询账户容器、镜像等统计信息 {@link DescribeAssetSummaryRequest} {@link DescribeAssetSummaryResponse} */
   DescribeAssetSummary(data?: DescribeAssetSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSummaryResponse>;
-  /** {@link DescribeAssetSyncLastTime 查询资产同步最近时间}({@link DescribeAssetSyncLastTimeRequest 请求参数}): {@link DescribeAssetSyncLastTimeResponse 返回参数} */
+  /** 查询资产同步最近时间 {@link DescribeAssetSyncLastTimeRequest} {@link DescribeAssetSyncLastTimeResponse} */
   DescribeAssetSyncLastTime(data?: DescribeAssetSyncLastTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSyncLastTimeResponse>;
-  /** {@link DescribeAssetWebServiceList 查询web服务列表}({@link DescribeAssetWebServiceListRequest 请求参数}): {@link DescribeAssetWebServiceListResponse 返回参数} */
+  /** 查询web服务列表 {@link DescribeAssetWebServiceListRequest} {@link DescribeAssetWebServiceListResponse} */
   DescribeAssetWebServiceList(data?: DescribeAssetWebServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetWebServiceListResponse>;
-  /** {@link DescribeAutoAuthorizedRuleHost 查询自动授权规则授权范围主机信息}({@link DescribeAutoAuthorizedRuleHostRequest 请求参数}): {@link DescribeAutoAuthorizedRuleHostResponse 返回参数} */
+  /** 查询自动授权规则授权范围主机信息 {@link DescribeAutoAuthorizedRuleHostRequest} {@link DescribeAutoAuthorizedRuleHostResponse} */
   DescribeAutoAuthorizedRuleHost(data: DescribeAutoAuthorizedRuleHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoAuthorizedRuleHostResponse>;
-  /** {@link DescribeCheckItemList 查询所有检查项接口}({@link DescribeCheckItemListRequest 请求参数}): {@link DescribeCheckItemListResponse 返回参数} */
+  /** 查询所有检查项接口 {@link DescribeCheckItemListRequest} {@link DescribeCheckItemListResponse} */
   DescribeCheckItemList(data?: DescribeCheckItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckItemListResponse>;
-  /** {@link DescribeClusterDetail 查询单个集群的详细信息}({@link DescribeClusterDetailRequest 请求参数}): {@link DescribeClusterDetailResponse 返回参数} */
+  /** 查询单个集群的详细信息 {@link DescribeClusterDetailRequest} {@link DescribeClusterDetailResponse} */
   DescribeClusterDetail(data: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
-  /** {@link DescribeClusterSummary 查询用户集群资产总览}({@link DescribeClusterSummaryRequest 请求参数}): {@link DescribeClusterSummaryResponse 返回参数} */
+  /** 查询用户集群资产总览 {@link DescribeClusterSummaryRequest} {@link DescribeClusterSummaryResponse} */
   DescribeClusterSummary(data?: DescribeClusterSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterSummaryResponse>;
-  /** {@link DescribeComplianceAssetDetailInfo 安全合规查询某个资产的详情}({@link DescribeComplianceAssetDetailInfoRequest 请求参数}): {@link DescribeComplianceAssetDetailInfoResponse 返回参数} */
+  /** 安全合规查询某个资产的详情 {@link DescribeComplianceAssetDetailInfoRequest} {@link DescribeComplianceAssetDetailInfoResponse} */
   DescribeComplianceAssetDetailInfo(data: DescribeComplianceAssetDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceAssetDetailInfoResponse>;
-  /** {@link DescribeComplianceAssetList 安全合规查询某类资产的列表}({@link DescribeComplianceAssetListRequest 请求参数}): {@link DescribeComplianceAssetListResponse 返回参数} */
+  /** 安全合规查询某类资产的列表 {@link DescribeComplianceAssetListRequest} {@link DescribeComplianceAssetListResponse} */
   DescribeComplianceAssetList(data?: DescribeComplianceAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceAssetListResponse>;
-  /** {@link DescribeComplianceAssetPolicyItemList 安全合规查询某资产下的检测项列表}({@link DescribeComplianceAssetPolicyItemListRequest 请求参数}): {@link DescribeComplianceAssetPolicyItemListResponse 返回参数} */
+  /** 安全合规查询某资产下的检测项列表 {@link DescribeComplianceAssetPolicyItemListRequest} {@link DescribeComplianceAssetPolicyItemListResponse} */
   DescribeComplianceAssetPolicyItemList(data: DescribeComplianceAssetPolicyItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceAssetPolicyItemListResponse>;
-  /** {@link DescribeCompliancePeriodTaskList 安全合规查询定时任务列表}({@link DescribeCompliancePeriodTaskListRequest 请求参数}): {@link DescribeCompliancePeriodTaskListResponse 返回参数} */
+  /** 安全合规查询定时任务列表 {@link DescribeCompliancePeriodTaskListRequest} {@link DescribeCompliancePeriodTaskListResponse} */
   DescribeCompliancePeriodTaskList(data?: DescribeCompliancePeriodTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompliancePeriodTaskListResponse>;
-  /** {@link DescribeCompliancePolicyItemAffectedAssetList 安全合规查询检测项影响的资产列表}({@link DescribeCompliancePolicyItemAffectedAssetListRequest 请求参数}): {@link DescribeCompliancePolicyItemAffectedAssetListResponse 返回参数} */
+  /** 安全合规查询检测项影响的资产列表 {@link DescribeCompliancePolicyItemAffectedAssetListRequest} {@link DescribeCompliancePolicyItemAffectedAssetListResponse} */
   DescribeCompliancePolicyItemAffectedAssetList(data: DescribeCompliancePolicyItemAffectedAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompliancePolicyItemAffectedAssetListResponse>;
-  /** {@link DescribeCompliancePolicyItemAffectedSummary 安全合规查询某检测项影响的信息}({@link DescribeCompliancePolicyItemAffectedSummaryRequest 请求参数}): {@link DescribeCompliancePolicyItemAffectedSummaryResponse 返回参数} */
+  /** 安全合规查询某检测项影响的信息 {@link DescribeCompliancePolicyItemAffectedSummaryRequest} {@link DescribeCompliancePolicyItemAffectedSummaryResponse} */
   DescribeCompliancePolicyItemAffectedSummary(data: DescribeCompliancePolicyItemAffectedSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompliancePolicyItemAffectedSummaryResponse>;
-  /** {@link DescribeComplianceScanFailedAssetList 安全合规查询上次检测失败的资产的列表}({@link DescribeComplianceScanFailedAssetListRequest 请求参数}): {@link DescribeComplianceScanFailedAssetListResponse 返回参数} */
+  /** 安全合规查询上次检测失败的资产的列表 {@link DescribeComplianceScanFailedAssetListRequest} {@link DescribeComplianceScanFailedAssetListResponse} */
   DescribeComplianceScanFailedAssetList(data?: DescribeComplianceScanFailedAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceScanFailedAssetListResponse>;
-  /** {@link DescribeComplianceTaskAssetSummary 安全合规查询上次任务的资产通过率汇总信息}({@link DescribeComplianceTaskAssetSummaryRequest 请求参数}): {@link DescribeComplianceTaskAssetSummaryResponse 返回参数} */
+  /** 安全合规查询上次任务的资产通过率汇总信息 {@link DescribeComplianceTaskAssetSummaryRequest} {@link DescribeComplianceTaskAssetSummaryResponse} */
   DescribeComplianceTaskAssetSummary(data: DescribeComplianceTaskAssetSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceTaskAssetSummaryResponse>;
-  /** {@link DescribeComplianceTaskPolicyItemSummaryList 安全合规查询上次任务的检测项的汇总信息列表}({@link DescribeComplianceTaskPolicyItemSummaryListRequest 请求参数}): {@link DescribeComplianceTaskPolicyItemSummaryListResponse 返回参数} */
+  /** 安全合规查询上次任务的检测项的汇总信息列表 {@link DescribeComplianceTaskPolicyItemSummaryListRequest} {@link DescribeComplianceTaskPolicyItemSummaryListResponse} */
   DescribeComplianceTaskPolicyItemSummaryList(data?: DescribeComplianceTaskPolicyItemSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceTaskPolicyItemSummaryListResponse>;
-  /** {@link DescribeComplianceWhitelistItemList 安全合规查询白名单列表}({@link DescribeComplianceWhitelistItemListRequest 请求参数}): {@link DescribeComplianceWhitelistItemListResponse 返回参数} */
+  /** 安全合规查询白名单列表 {@link DescribeComplianceWhitelistItemListRequest} {@link DescribeComplianceWhitelistItemListResponse} */
   DescribeComplianceWhitelistItemList(data?: DescribeComplianceWhitelistItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComplianceWhitelistItemListResponse>;
-  /** {@link DescribeContainerAssetSummary 查询容器安全资产概览}({@link DescribeContainerAssetSummaryRequest 请求参数}): {@link DescribeContainerAssetSummaryResponse 返回参数} */
+  /** 查询容器安全资产概览 {@link DescribeContainerAssetSummaryRequest} {@link DescribeContainerAssetSummaryResponse} */
   DescribeContainerAssetSummary(data?: DescribeContainerAssetSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerAssetSummaryResponse>;
-  /** {@link DescribeContainerSecEventSummary 查询容器安全未处理事件概览}({@link DescribeContainerSecEventSummaryRequest 请求参数}): {@link DescribeContainerSecEventSummaryResponse 返回参数} */
+  /** 查询容器安全未处理事件概览 {@link DescribeContainerSecEventSummaryRequest} {@link DescribeContainerSecEventSummaryResponse} */
   DescribeContainerSecEventSummary(data?: DescribeContainerSecEventSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerSecEventSummaryResponse>;
-  /** {@link DescribeESAggregations 获取ES字段聚合结果}({@link DescribeESAggregationsRequest 请求参数}): {@link DescribeESAggregationsResponse 返回参数} */
+  /** 获取ES字段聚合结果 {@link DescribeESAggregationsRequest} {@link DescribeESAggregationsResponse} */
   DescribeESAggregations(data: DescribeESAggregationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeESAggregationsResponse>;
-  /** {@link DescribeESHits 获取ES查询文档列表}({@link DescribeESHitsRequest 请求参数}): {@link DescribeESHitsResponse 返回参数} */
+  /** 获取ES查询文档列表 {@link DescribeESHitsRequest} {@link DescribeESHitsResponse} */
   DescribeESHits(data: DescribeESHitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeESHitsResponse>;
-  /** {@link DescribeEmergencyVulList 查询应急漏洞列表}({@link DescribeEmergencyVulListRequest 请求参数}): {@link DescribeEmergencyVulListResponse 返回参数} */
+  /** 查询应急漏洞列表 {@link DescribeEmergencyVulListRequest} {@link DescribeEmergencyVulListResponse} */
   DescribeEmergencyVulList(data?: DescribeEmergencyVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmergencyVulListResponse>;
-  /** {@link DescribeEscapeEventDetail 查询容器逃逸事件详情}({@link DescribeEscapeEventDetailRequest 请求参数}): {@link DescribeEscapeEventDetailResponse 返回参数} */
+  /** 查询容器逃逸事件详情 {@link DescribeEscapeEventDetailRequest} {@link DescribeEscapeEventDetailResponse} */
   DescribeEscapeEventDetail(data: DescribeEscapeEventDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeEventDetailResponse>;
-  /** {@link DescribeEscapeEventInfo 查询容器逃逸事件列表}({@link DescribeEscapeEventInfoRequest 请求参数}): {@link DescribeEscapeEventInfoResponse 返回参数} */
+  /** 查询容器逃逸事件列表 {@link DescribeEscapeEventInfoRequest} {@link DescribeEscapeEventInfoResponse} */
   DescribeEscapeEventInfo(data?: DescribeEscapeEventInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeEventInfoResponse>;
-  /** {@link DescribeEscapeEventTendency 查询待处理逃逸事件趋势}({@link DescribeEscapeEventTendencyRequest 请求参数}): {@link DescribeEscapeEventTendencyResponse 返回参数} */
+  /** 查询待处理逃逸事件趋势 {@link DescribeEscapeEventTendencyRequest} {@link DescribeEscapeEventTendencyResponse} */
   DescribeEscapeEventTendency(data: DescribeEscapeEventTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeEventTendencyResponse>;
-  /** {@link DescribeEscapeEventTypeSummary 统计容器逃逸各事件类型和待处理事件数}({@link DescribeEscapeEventTypeSummaryRequest 请求参数}): {@link DescribeEscapeEventTypeSummaryResponse 返回参数} */
+  /** 统计容器逃逸各事件类型和待处理事件数 {@link DescribeEscapeEventTypeSummaryRequest} {@link DescribeEscapeEventTypeSummaryResponse} */
   DescribeEscapeEventTypeSummary(data?: DescribeEscapeEventTypeSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeEventTypeSummaryResponse>;
-  /** {@link DescribeEscapeEventsExport 查询容器逃逸事件列表导出}({@link DescribeEscapeEventsExportRequest 请求参数}): {@link DescribeEscapeEventsExportResponse 返回参数} */
+  /** 查询容器逃逸事件列表导出 {@link DescribeEscapeEventsExportRequest} {@link DescribeEscapeEventsExportResponse} */
   DescribeEscapeEventsExport(data: DescribeEscapeEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeEventsExportResponse>;
-  /** {@link DescribeEscapeRuleInfo 查询容器逃逸扫描规则信息}({@link DescribeEscapeRuleInfoRequest 请求参数}): {@link DescribeEscapeRuleInfoResponse 返回参数} */
+  /** 查询容器逃逸扫描规则信息 {@link DescribeEscapeRuleInfoRequest} {@link DescribeEscapeRuleInfoResponse} */
   DescribeEscapeRuleInfo(data?: DescribeEscapeRuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeRuleInfoResponse>;
-  /** {@link DescribeEscapeSafeState 查询容器逃逸安全状态}({@link DescribeEscapeSafeStateRequest 请求参数}): {@link DescribeEscapeSafeStateResponse 返回参数} */
+  /** 查询容器逃逸安全状态 {@link DescribeEscapeSafeStateRequest} {@link DescribeEscapeSafeStateResponse} */
   DescribeEscapeSafeState(data?: DescribeEscapeSafeStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeSafeStateResponse>;
-  /** {@link DescribeEscapeWhiteList 查询逃逸白名单}({@link DescribeEscapeWhiteListRequest 请求参数}): {@link DescribeEscapeWhiteListResponse 返回参数} */
+  /** 查询逃逸白名单 {@link DescribeEscapeWhiteListRequest} {@link DescribeEscapeWhiteListResponse} */
   DescribeEscapeWhiteList(data?: DescribeEscapeWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEscapeWhiteListResponse>;
-  /** {@link DescribeExportJobDownloadURL 查询导出任务下载URL}({@link DescribeExportJobDownloadURLRequest 请求参数}): {@link DescribeExportJobDownloadURLResponse 返回参数} */
+  /** 查询导出任务下载URL {@link DescribeExportJobDownloadURLRequest} {@link DescribeExportJobDownloadURLResponse} */
   DescribeExportJobDownloadURL(data: DescribeExportJobDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportJobDownloadURLResponse>;
-  /** {@link DescribeExportJobManageList 查询导出任务管理列表}({@link DescribeExportJobManageListRequest 请求参数}): {@link DescribeExportJobManageListResponse 返回参数} */
+  /** 查询导出任务管理列表 {@link DescribeExportJobManageListRequest} {@link DescribeExportJobManageListResponse} */
   DescribeExportJobManageList(data?: DescribeExportJobManageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportJobManageListResponse>;
-  /** {@link DescribeExportJobResult 查询导出任务的结果}({@link DescribeExportJobResultRequest 请求参数}): {@link DescribeExportJobResultResponse 返回参数} */
+  /** 查询导出任务的结果 {@link DescribeExportJobResultRequest} {@link DescribeExportJobResultResponse} */
   DescribeExportJobResult(data: DescribeExportJobResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportJobResultResponse>;
-  /** {@link DescribeImageAuthorizedInfo 查询镜像授权信息}({@link DescribeImageAuthorizedInfoRequest 请求参数}): {@link DescribeImageAuthorizedInfoResponse 返回参数} */
+  /** 查询镜像授权信息 {@link DescribeImageAuthorizedInfoRequest} {@link DescribeImageAuthorizedInfoResponse} */
   DescribeImageAuthorizedInfo(data?: DescribeImageAuthorizedInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAuthorizedInfoResponse>;
-  /** {@link DescribeImageAutoAuthorizedLogList 查询镜像自动授权结果列表}({@link DescribeImageAutoAuthorizedLogListRequest 请求参数}): {@link DescribeImageAutoAuthorizedLogListResponse 返回参数} */
+  /** 查询镜像自动授权结果列表 {@link DescribeImageAutoAuthorizedLogListRequest} {@link DescribeImageAutoAuthorizedLogListResponse} */
   DescribeImageAutoAuthorizedLogList(data: DescribeImageAutoAuthorizedLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAutoAuthorizedLogListResponse>;
-  /** {@link DescribeImageAutoAuthorizedRule 查询本地镜像自动授权规则}({@link DescribeImageAutoAuthorizedRuleRequest 请求参数}): {@link DescribeImageAutoAuthorizedRuleResponse 返回参数} */
+  /** 查询本地镜像自动授权规则 {@link DescribeImageAutoAuthorizedRuleRequest} {@link DescribeImageAutoAuthorizedRuleResponse} */
   DescribeImageAutoAuthorizedRule(data?: DescribeImageAutoAuthorizedRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAutoAuthorizedRuleResponse>;
-  /** {@link DescribeImageAutoAuthorizedTaskList 查询镜像自动授权任务列表}({@link DescribeImageAutoAuthorizedTaskListRequest 请求参数}): {@link DescribeImageAutoAuthorizedTaskListResponse 返回参数} */
+  /** 查询镜像自动授权任务列表 {@link DescribeImageAutoAuthorizedTaskListRequest} {@link DescribeImageAutoAuthorizedTaskListResponse} */
   DescribeImageAutoAuthorizedTaskList(data: DescribeImageAutoAuthorizedTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAutoAuthorizedTaskListResponse>;
-  /** {@link DescribeImageComponentList 查询本地镜像组件列表}({@link DescribeImageComponentListRequest 请求参数}): {@link DescribeImageComponentListResponse 返回参数} */
+  /** 查询本地镜像组件列表 {@link DescribeImageComponentListRequest} {@link DescribeImageComponentListResponse} */
   DescribeImageComponentList(data: DescribeImageComponentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageComponentListResponse>;
-  /** {@link DescribeImageRegistryNamespaceList 查询用户镜像仓库下的项目名称列表}({@link DescribeImageRegistryNamespaceListRequest 请求参数}): {@link DescribeImageRegistryNamespaceListResponse 返回参数} */
+  /** 查询用户镜像仓库下的项目名称列表 {@link DescribeImageRegistryNamespaceListRequest} {@link DescribeImageRegistryNamespaceListResponse} */
   DescribeImageRegistryNamespaceList(data?: DescribeImageRegistryNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryNamespaceListResponse>;
-  /** {@link DescribeImageRegistryTimingScanTask 镜像仓库查看定时任务}({@link DescribeImageRegistryTimingScanTaskRequest 请求参数}): {@link DescribeImageRegistryTimingScanTaskResponse 返回参数} */
+  /** 镜像仓库查看定时任务 {@link DescribeImageRegistryTimingScanTaskRequest} {@link DescribeImageRegistryTimingScanTaskResponse} */
   DescribeImageRegistryTimingScanTask(data?: DescribeImageRegistryTimingScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryTimingScanTaskResponse>;
-  /** {@link DescribeImageRiskSummary 查询本地镜像风险概览}({@link DescribeImageRiskSummaryRequest 请求参数}): {@link DescribeImageRiskSummaryResponse 返回参数} */
+  /** 查询本地镜像风险概览 {@link DescribeImageRiskSummaryRequest} {@link DescribeImageRiskSummaryResponse} */
   DescribeImageRiskSummary(data?: DescribeImageRiskSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRiskSummaryResponse>;
-  /** {@link DescribeImageRiskTendency 查询容器安全本地镜像风险趋势}({@link DescribeImageRiskTendencyRequest 请求参数}): {@link DescribeImageRiskTendencyResponse 返回参数} */
+  /** 查询容器安全本地镜像风险趋势 {@link DescribeImageRiskTendencyRequest} {@link DescribeImageRiskTendencyResponse} */
   DescribeImageRiskTendency(data: DescribeImageRiskTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRiskTendencyResponse>;
-  /** {@link DescribeImageSimpleList 查询全部镜像列表}({@link DescribeImageSimpleListRequest 请求参数}): {@link DescribeImageSimpleListResponse 返回参数} */
+  /** 查询全部镜像列表 {@link DescribeImageSimpleListRequest} {@link DescribeImageSimpleListResponse} */
   DescribeImageSimpleList(data?: DescribeImageSimpleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSimpleListResponse>;
-  /** {@link DescribeIndexList 获取索引列表}({@link DescribeIndexListRequest 请求参数}): {@link DescribeIndexListResponse 返回参数} */
+  /** 获取索引列表 {@link DescribeIndexListRequest} {@link DescribeIndexListResponse} */
   DescribeIndexList(data?: DescribeIndexListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexListResponse>;
-  /** {@link DescribeInspectionReport 查询检查报告}({@link DescribeInspectionReportRequest 请求参数}): {@link DescribeInspectionReportResponse 返回参数} */
+  /** 查询检查报告 {@link DescribeInspectionReportRequest} {@link DescribeInspectionReportResponse} */
   DescribeInspectionReport(data?: DescribeInspectionReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInspectionReportResponse>;
-  /** {@link DescribeK8sApiAbnormalEventInfo 查询k8s api 异常事件详情}({@link DescribeK8sApiAbnormalEventInfoRequest 请求参数}): {@link DescribeK8sApiAbnormalEventInfoResponse 返回参数} */
+  /** 查询k8s api 异常事件详情 {@link DescribeK8sApiAbnormalEventInfoRequest} {@link DescribeK8sApiAbnormalEventInfoResponse} */
   DescribeK8sApiAbnormalEventInfo(data: DescribeK8sApiAbnormalEventInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalEventInfoResponse>;
-  /** {@link DescribeK8sApiAbnormalEventList 查询k8s api异常事件列表}({@link DescribeK8sApiAbnormalEventListRequest 请求参数}): {@link DescribeK8sApiAbnormalEventListResponse 返回参数} */
+  /** 查询k8s api异常事件列表 {@link DescribeK8sApiAbnormalEventListRequest} {@link DescribeK8sApiAbnormalEventListResponse} */
   DescribeK8sApiAbnormalEventList(data?: DescribeK8sApiAbnormalEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalEventListResponse>;
-  /** {@link DescribeK8sApiAbnormalRuleInfo 查询k8sapi异常请求规则详情}({@link DescribeK8sApiAbnormalRuleInfoRequest 请求参数}): {@link DescribeK8sApiAbnormalRuleInfoResponse 返回参数} */
+  /** 查询k8sapi异常请求规则详情 {@link DescribeK8sApiAbnormalRuleInfoRequest} {@link DescribeK8sApiAbnormalRuleInfoResponse} */
   DescribeK8sApiAbnormalRuleInfo(data: DescribeK8sApiAbnormalRuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalRuleInfoResponse>;
-  /** {@link DescribeK8sApiAbnormalRuleList 查询k8sapi异常请求规则列表}({@link DescribeK8sApiAbnormalRuleListRequest 请求参数}): {@link DescribeK8sApiAbnormalRuleListResponse 返回参数} */
+  /** 查询k8sapi异常请求规则列表 {@link DescribeK8sApiAbnormalRuleListRequest} {@link DescribeK8sApiAbnormalRuleListResponse} */
   DescribeK8sApiAbnormalRuleList(data?: DescribeK8sApiAbnormalRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalRuleListResponse>;
-  /** {@link DescribeK8sApiAbnormalRuleScopeList 查询k8sapi 异常规则中范围列表}({@link DescribeK8sApiAbnormalRuleScopeListRequest 请求参数}): {@link DescribeK8sApiAbnormalRuleScopeListResponse 返回参数} */
+  /** 查询k8sapi 异常规则中范围列表 {@link DescribeK8sApiAbnormalRuleScopeListRequest} {@link DescribeK8sApiAbnormalRuleScopeListResponse} */
   DescribeK8sApiAbnormalRuleScopeList(data: DescribeK8sApiAbnormalRuleScopeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalRuleScopeListResponse>;
-  /** {@link DescribeK8sApiAbnormalSummary 查询k8sapi异常事件统计}({@link DescribeK8sApiAbnormalSummaryRequest 请求参数}): {@link DescribeK8sApiAbnormalSummaryResponse 返回参数} */
+  /** 查询k8sapi异常事件统计 {@link DescribeK8sApiAbnormalSummaryRequest} {@link DescribeK8sApiAbnormalSummaryResponse} */
   DescribeK8sApiAbnormalSummary(data?: DescribeK8sApiAbnormalSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalSummaryResponse>;
-  /** {@link DescribeK8sApiAbnormalTendency 查询k8sapi异常事件趋势}({@link DescribeK8sApiAbnormalTendencyRequest 请求参数}): {@link DescribeK8sApiAbnormalTendencyResponse 返回参数} */
+  /** 查询k8sapi异常事件趋势 {@link DescribeK8sApiAbnormalTendencyRequest} {@link DescribeK8sApiAbnormalTendencyResponse} */
   DescribeK8sApiAbnormalTendency(data: DescribeK8sApiAbnormalTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalTendencyResponse>;
-  /** {@link DescribeLogStorageStatistic 获取日志检索容量使用统计}({@link DescribeLogStorageStatisticRequest 请求参数}): {@link DescribeLogStorageStatisticResponse 返回参数} */
+  /** 获取日志检索容量使用统计 {@link DescribeLogStorageStatisticRequest} {@link DescribeLogStorageStatisticResponse} */
   DescribeLogStorageStatistic(data?: DescribeLogStorageStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageStatisticResponse>;
-  /** {@link DescribeNetworkFirewallAuditRecord 查询集群策略审计列表}({@link DescribeNetworkFirewallAuditRecordRequest 请求参数}): {@link DescribeNetworkFirewallAuditRecordResponse 返回参数} */
+  /** 查询集群策略审计列表 {@link DescribeNetworkFirewallAuditRecordRequest} {@link DescribeNetworkFirewallAuditRecordResponse} */
   DescribeNetworkFirewallAuditRecord(data?: DescribeNetworkFirewallAuditRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallAuditRecordResponse>;
-  /** {@link DescribeNetworkFirewallClusterList 查询集群策略列表}({@link DescribeNetworkFirewallClusterListRequest 请求参数}): {@link DescribeNetworkFirewallClusterListResponse 返回参数} */
+  /** 查询集群策略列表 {@link DescribeNetworkFirewallClusterListRequest} {@link DescribeNetworkFirewallClusterListResponse} */
   DescribeNetworkFirewallClusterList(data?: DescribeNetworkFirewallClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallClusterListResponse>;
-  /** {@link DescribeNetworkFirewallClusterRefreshStatus 容器网络查询资产任务进度}({@link DescribeNetworkFirewallClusterRefreshStatusRequest 请求参数}): {@link DescribeNetworkFirewallClusterRefreshStatusResponse 返回参数} */
+  /** 容器网络查询资产任务进度 {@link DescribeNetworkFirewallClusterRefreshStatusRequest} {@link DescribeNetworkFirewallClusterRefreshStatusResponse} */
   DescribeNetworkFirewallClusterRefreshStatus(data: DescribeNetworkFirewallClusterRefreshStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallClusterRefreshStatusResponse>;
-  /** {@link DescribeNetworkFirewallNamespaceLabelList 查询集群网络空间标签列表}({@link DescribeNetworkFirewallNamespaceLabelListRequest 请求参数}): {@link DescribeNetworkFirewallNamespaceLabelListResponse 返回参数} */
+  /** 查询集群网络空间标签列表 {@link DescribeNetworkFirewallNamespaceLabelListRequest} {@link DescribeNetworkFirewallNamespaceLabelListResponse} */
   DescribeNetworkFirewallNamespaceLabelList(data: DescribeNetworkFirewallNamespaceLabelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallNamespaceLabelListResponse>;
-  /** {@link DescribeNetworkFirewallNamespaceList 查询集群网络空间列表}({@link DescribeNetworkFirewallNamespaceListRequest 请求参数}): {@link DescribeNetworkFirewallNamespaceListResponse 返回参数} */
+  /** 查询集群网络空间列表 {@link DescribeNetworkFirewallNamespaceListRequest} {@link DescribeNetworkFirewallNamespaceListResponse} */
   DescribeNetworkFirewallNamespaceList(data: DescribeNetworkFirewallNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallNamespaceListResponse>;
-  /** {@link DescribeNetworkFirewallPodLabelsList 查询集群网络pod标签}({@link DescribeNetworkFirewallPodLabelsListRequest 请求参数}): {@link DescribeNetworkFirewallPodLabelsListResponse 返回参数} */
+  /** 查询集群网络pod标签 {@link DescribeNetworkFirewallPodLabelsListRequest} {@link DescribeNetworkFirewallPodLabelsListResponse} */
   DescribeNetworkFirewallPodLabelsList(data: DescribeNetworkFirewallPodLabelsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPodLabelsListResponse>;
-  /** {@link DescribeNetworkFirewallPolicyDetail 容器网络集群查看策略详情}({@link DescribeNetworkFirewallPolicyDetailRequest 请求参数}): {@link DescribeNetworkFirewallPolicyDetailResponse 返回参数} */
+  /** 容器网络集群查看策略详情 {@link DescribeNetworkFirewallPolicyDetailRequest} {@link DescribeNetworkFirewallPolicyDetailResponse} */
   DescribeNetworkFirewallPolicyDetail(data: DescribeNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPolicyDetailResponse>;
-  /** {@link DescribeNetworkFirewallPolicyDiscover 容器网络查询网络策略自动发现任务进度}({@link DescribeNetworkFirewallPolicyDiscoverRequest 请求参数}): {@link DescribeNetworkFirewallPolicyDiscoverResponse 返回参数} */
+  /** 容器网络查询网络策略自动发现任务进度 {@link DescribeNetworkFirewallPolicyDiscoverRequest} {@link DescribeNetworkFirewallPolicyDiscoverResponse} */
   DescribeNetworkFirewallPolicyDiscover(data: DescribeNetworkFirewallPolicyDiscoverRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPolicyDiscoverResponse>;
-  /** {@link DescribeNetworkFirewallPolicyList 查询集群网络策略列表}({@link DescribeNetworkFirewallPolicyListRequest 请求参数}): {@link DescribeNetworkFirewallPolicyListResponse 返回参数} */
+  /** 查询集群网络策略列表 {@link DescribeNetworkFirewallPolicyListRequest} {@link DescribeNetworkFirewallPolicyListResponse} */
   DescribeNetworkFirewallPolicyList(data: DescribeNetworkFirewallPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPolicyListResponse>;
-  /** {@link DescribeNetworkFirewallPolicyStatus 容器网络查询网络策略策略执行状态}({@link DescribeNetworkFirewallPolicyStatusRequest 请求参数}): {@link DescribeNetworkFirewallPolicyStatusResponse 返回参数} */
+  /** 容器网络查询网络策略策略执行状态 {@link DescribeNetworkFirewallPolicyStatusRequest} {@link DescribeNetworkFirewallPolicyStatusResponse} */
   DescribeNetworkFirewallPolicyStatus(data: DescribeNetworkFirewallPolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPolicyStatusResponse>;
-  /** {@link DescribeNetworkFirewallPolicyYamlDetail 容器网络集群查看Yaml网络策略详情}({@link DescribeNetworkFirewallPolicyYamlDetailRequest 请求参数}): {@link DescribeNetworkFirewallPolicyYamlDetailResponse 返回参数} */
+  /** 容器网络集群查看Yaml网络策略详情 {@link DescribeNetworkFirewallPolicyYamlDetailRequest} {@link DescribeNetworkFirewallPolicyYamlDetailResponse} */
   DescribeNetworkFirewallPolicyYamlDetail(data: DescribeNetworkFirewallPolicyYamlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPolicyYamlDetailResponse>;
-  /** {@link DescribeNewestVul 查询最新披露漏洞列表}({@link DescribeNewestVulRequest 请求参数}): {@link DescribeNewestVulResponse 返回参数} */
+  /** 查询最新披露漏洞列表 {@link DescribeNewestVulRequest} {@link DescribeNewestVulResponse} */
   DescribeNewestVul(data?: DescribeNewestVulRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNewestVulResponse>;
-  /** {@link DescribePostPayDetail 查询后付费详情}({@link DescribePostPayDetailRequest 请求参数}): {@link DescribePostPayDetailResponse 返回参数} */
+  /** 查询后付费详情 {@link DescribePostPayDetailRequest} {@link DescribePostPayDetailResponse} */
   DescribePostPayDetail(data?: DescribePostPayDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostPayDetailResponse>;
-  /** {@link DescribeProVersionInfo 查询专业版需购买信息}({@link DescribeProVersionInfoRequest 请求参数}): {@link DescribeProVersionInfoResponse 返回参数} */
+  /** 查询专业版需购买信息 {@link DescribeProVersionInfoRequest} {@link DescribeProVersionInfoResponse} */
   DescribeProVersionInfo(data?: DescribeProVersionInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProVersionInfoResponse>;
-  /** {@link DescribePromotionActivity 查询促销活动}({@link DescribePromotionActivityRequest 请求参数}): {@link DescribePromotionActivityResponse 返回参数} */
+  /** 查询促销活动 {@link DescribePromotionActivityRequest} {@link DescribePromotionActivityResponse} */
   DescribePromotionActivity(data: DescribePromotionActivityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePromotionActivityResponse>;
-  /** {@link DescribePublicKey 获取公钥}({@link DescribePublicKeyRequest 请求参数}): {@link DescribePublicKeyResponse 返回参数} */
+  /** 获取公钥 {@link DescribePublicKeyRequest} {@link DescribePublicKeyResponse} */
   DescribePublicKey(data?: DescribePublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicKeyResponse>;
-  /** {@link DescribePurchaseStateInfo 查询容器安全服务已购买信息}({@link DescribePurchaseStateInfoRequest 请求参数}): {@link DescribePurchaseStateInfoResponse 返回参数} */
+  /** 查询容器安全服务已购买信息 {@link DescribePurchaseStateInfoRequest} {@link DescribePurchaseStateInfoResponse} */
   DescribePurchaseStateInfo(data?: DescribePurchaseStateInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurchaseStateInfoResponse>;
-  /** {@link DescribeRefreshTask 查询刷新任务}({@link DescribeRefreshTaskRequest 请求参数}): {@link DescribeRefreshTaskResponse 返回参数} */
+  /** 查询刷新任务 {@link DescribeRefreshTaskRequest} {@link DescribeRefreshTaskResponse} */
   DescribeRefreshTask(data: DescribeRefreshTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRefreshTaskResponse>;
-  /** {@link DescribeReverseShellDetail 运行时反弹shell事件详细信息}({@link DescribeReverseShellDetailRequest 请求参数}): {@link DescribeReverseShellDetailResponse 返回参数} */
+  /** 运行时反弹shell事件详细信息 {@link DescribeReverseShellDetailRequest} {@link DescribeReverseShellDetailResponse} */
   DescribeReverseShellDetail(data: DescribeReverseShellDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellDetailResponse>;
-  /** {@link DescribeReverseShellEvents 运行时反弹shell列表}({@link DescribeReverseShellEventsRequest 请求参数}): {@link DescribeReverseShellEventsResponse 返回参数} */
+  /** 运行时反弹shell列表 {@link DescribeReverseShellEventsRequest} {@link DescribeReverseShellEventsResponse} */
   DescribeReverseShellEvents(data?: DescribeReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsResponse>;
-  /** {@link DescribeReverseShellEventsExport 运行时反弹shell列表导出}({@link DescribeReverseShellEventsExportRequest 请求参数}): {@link DescribeReverseShellEventsExportResponse 返回参数} */
+  /** 运行时反弹shell列表导出 {@link DescribeReverseShellEventsExportRequest} {@link DescribeReverseShellEventsExportResponse} */
   DescribeReverseShellEventsExport(data?: DescribeReverseShellEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsExportResponse>;
-  /** {@link DescribeReverseShellWhiteListDetail 运行时反弹shell白名单详细信息}({@link DescribeReverseShellWhiteListDetailRequest 请求参数}): {@link DescribeReverseShellWhiteListDetailResponse 返回参数} */
+  /** 运行时反弹shell白名单详细信息 {@link DescribeReverseShellWhiteListDetailRequest} {@link DescribeReverseShellWhiteListDetailResponse} */
   DescribeReverseShellWhiteListDetail(data: DescribeReverseShellWhiteListDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellWhiteListDetailResponse>;
-  /** {@link DescribeReverseShellWhiteLists 运行时反弹shell白名单列表}({@link DescribeReverseShellWhiteListsRequest 请求参数}): {@link DescribeReverseShellWhiteListsResponse 返回参数} */
+  /** 运行时反弹shell白名单列表 {@link DescribeReverseShellWhiteListsRequest} {@link DescribeReverseShellWhiteListsResponse} */
   DescribeReverseShellWhiteLists(data?: DescribeReverseShellWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellWhiteListsResponse>;
-  /** {@link DescribeRiskList 查询集群风险项列表}({@link DescribeRiskListRequest 请求参数}): {@link DescribeRiskListResponse 返回参数} */
+  /** 查询集群风险项列表 {@link DescribeRiskListRequest} {@link DescribeRiskListResponse} */
   DescribeRiskList(data?: DescribeRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskListResponse>;
-  /** {@link DescribeRiskSyscallDetail 运行时高危系统调用事件详细信息}({@link DescribeRiskSyscallDetailRequest 请求参数}): {@link DescribeRiskSyscallDetailResponse 返回参数} */
+  /** 运行时高危系统调用事件详细信息 {@link DescribeRiskSyscallDetailRequest} {@link DescribeRiskSyscallDetailResponse} */
   DescribeRiskSyscallDetail(data: DescribeRiskSyscallDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallDetailResponse>;
-  /** {@link DescribeRiskSyscallEvents 运行时高危系统调用列表}({@link DescribeRiskSyscallEventsRequest 请求参数}): {@link DescribeRiskSyscallEventsResponse 返回参数} */
+  /** 运行时高危系统调用列表 {@link DescribeRiskSyscallEventsRequest} {@link DescribeRiskSyscallEventsResponse} */
   DescribeRiskSyscallEvents(data?: DescribeRiskSyscallEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallEventsResponse>;
-  /** {@link DescribeRiskSyscallEventsExport 运行时高危系统调用列表导出}({@link DescribeRiskSyscallEventsExportRequest 请求参数}): {@link DescribeRiskSyscallEventsExportResponse 返回参数} */
+  /** 运行时高危系统调用列表导出 {@link DescribeRiskSyscallEventsExportRequest} {@link DescribeRiskSyscallEventsExportResponse} */
   DescribeRiskSyscallEventsExport(data?: DescribeRiskSyscallEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallEventsExportResponse>;
-  /** {@link DescribeRiskSyscallNames 运行时高危系统调用系统名称列表}({@link DescribeRiskSyscallNamesRequest 请求参数}): {@link DescribeRiskSyscallNamesResponse 返回参数} */
+  /** 运行时高危系统调用系统名称列表 {@link DescribeRiskSyscallNamesRequest} {@link DescribeRiskSyscallNamesResponse} */
   DescribeRiskSyscallNames(data?: DescribeRiskSyscallNamesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallNamesResponse>;
-  /** {@link DescribeRiskSyscallWhiteListDetail 运行时高危系统调用白名单详细信息}({@link DescribeRiskSyscallWhiteListDetailRequest 请求参数}): {@link DescribeRiskSyscallWhiteListDetailResponse 返回参数} */
+  /** 运行时高危系统调用白名单详细信息 {@link DescribeRiskSyscallWhiteListDetailRequest} {@link DescribeRiskSyscallWhiteListDetailResponse} */
   DescribeRiskSyscallWhiteListDetail(data: DescribeRiskSyscallWhiteListDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallWhiteListDetailResponse>;
-  /** {@link DescribeRiskSyscallWhiteLists 运行时高危系统调用白名单列表}({@link DescribeRiskSyscallWhiteListsRequest 请求参数}): {@link DescribeRiskSyscallWhiteListsResponse 返回参数} */
+  /** 运行时高危系统调用白名单列表 {@link DescribeRiskSyscallWhiteListsRequest} {@link DescribeRiskSyscallWhiteListsResponse} */
   DescribeRiskSyscallWhiteLists(data?: DescribeRiskSyscallWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskSyscallWhiteListsResponse>;
-  /** {@link DescribeScanIgnoreVulList 查询扫描忽略的漏洞列表}({@link DescribeScanIgnoreVulListRequest 请求参数}): {@link DescribeScanIgnoreVulListResponse 返回参数} */
+  /** 查询扫描忽略的漏洞列表 {@link DescribeScanIgnoreVulListRequest} {@link DescribeScanIgnoreVulListResponse} */
   DescribeScanIgnoreVulList(data?: DescribeScanIgnoreVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanIgnoreVulListResponse>;
-  /** {@link DescribeSearchExportList 导出ES查询文档列表}({@link DescribeSearchExportListRequest 请求参数}): {@link DescribeSearchExportListResponse 返回参数} */
+  /** 导出ES查询文档列表 {@link DescribeSearchExportListRequest} {@link DescribeSearchExportListResponse} */
   DescribeSearchExportList(data: DescribeSearchExportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchExportListResponse>;
-  /** {@link DescribeSearchLogs 获取历史搜索记录}({@link DescribeSearchLogsRequest 请求参数}): {@link DescribeSearchLogsResponse 返回参数} */
+  /** 获取历史搜索记录 {@link DescribeSearchLogsRequest} {@link DescribeSearchLogsResponse} */
   DescribeSearchLogs(data?: DescribeSearchLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchLogsResponse>;
-  /** {@link DescribeSearchTemplates 获取快速检索列表}({@link DescribeSearchTemplatesRequest 请求参数}): {@link DescribeSearchTemplatesResponse 返回参数} */
+  /** 获取快速检索列表 {@link DescribeSearchTemplatesRequest} {@link DescribeSearchTemplatesResponse} */
   DescribeSearchTemplates(data?: DescribeSearchTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchTemplatesResponse>;
-  /** {@link DescribeSecEventsTendency 查询容器运行时安全时间趋势}({@link DescribeSecEventsTendencyRequest 请求参数}): {@link DescribeSecEventsTendencyResponse 返回参数} */
+  /** 查询容器运行时安全时间趋势 {@link DescribeSecEventsTendencyRequest} {@link DescribeSecEventsTendencyResponse} */
   DescribeSecEventsTendency(data: DescribeSecEventsTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecEventsTendencyResponse>;
-  /** {@link DescribeSecLogAlertMsg 查询安全日志告警信息}({@link DescribeSecLogAlertMsgRequest 请求参数}): {@link DescribeSecLogAlertMsgResponse 返回参数} */
+  /** 查询安全日志告警信息 {@link DescribeSecLogAlertMsgRequest} {@link DescribeSecLogAlertMsgResponse} */
   DescribeSecLogAlertMsg(data?: DescribeSecLogAlertMsgRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogAlertMsgResponse>;
-  /** {@link DescribeSecLogCleanSettingInfo 查询安全日志清理设置详情}({@link DescribeSecLogCleanSettingInfoRequest 请求参数}): {@link DescribeSecLogCleanSettingInfoResponse 返回参数} */
+  /** 查询安全日志清理设置详情 {@link DescribeSecLogCleanSettingInfoRequest} {@link DescribeSecLogCleanSettingInfoResponse} */
   DescribeSecLogCleanSettingInfo(data?: DescribeSecLogCleanSettingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogCleanSettingInfoResponse>;
-  /** {@link DescribeSecLogDeliveryClsOptions 查询安全日志投递cls可选项}({@link DescribeSecLogDeliveryClsOptionsRequest 请求参数}): {@link DescribeSecLogDeliveryClsOptionsResponse 返回参数} */
+  /** 查询安全日志投递cls可选项 {@link DescribeSecLogDeliveryClsOptionsRequest} {@link DescribeSecLogDeliveryClsOptionsResponse} */
   DescribeSecLogDeliveryClsOptions(data?: DescribeSecLogDeliveryClsOptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryClsOptionsResponse>;
-  /** {@link DescribeSecLogDeliveryClsSetting 查询安全日志投递Cls配置}({@link DescribeSecLogDeliveryClsSettingRequest 请求参数}): {@link DescribeSecLogDeliveryClsSettingResponse 返回参数} */
+  /** 查询安全日志投递Cls配置 {@link DescribeSecLogDeliveryClsSettingRequest} {@link DescribeSecLogDeliveryClsSettingResponse} */
   DescribeSecLogDeliveryClsSetting(data?: DescribeSecLogDeliveryClsSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryClsSettingResponse>;
-  /** {@link DescribeSecLogDeliveryKafkaOptions 查询安全日志投递kafka可选项}({@link DescribeSecLogDeliveryKafkaOptionsRequest 请求参数}): {@link DescribeSecLogDeliveryKafkaOptionsResponse 返回参数} */
+  /** 查询安全日志投递kafka可选项 {@link DescribeSecLogDeliveryKafkaOptionsRequest} {@link DescribeSecLogDeliveryKafkaOptionsResponse} */
   DescribeSecLogDeliveryKafkaOptions(data?: DescribeSecLogDeliveryKafkaOptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryKafkaOptionsResponse>;
-  /** {@link DescribeSecLogDeliveryKafkaSetting 查询安全日志投递kafka配置}({@link DescribeSecLogDeliveryKafkaSettingRequest 请求参数}): {@link DescribeSecLogDeliveryKafkaSettingResponse 返回参数} */
+  /** 查询安全日志投递kafka配置 {@link DescribeSecLogDeliveryKafkaSettingRequest} {@link DescribeSecLogDeliveryKafkaSettingResponse} */
   DescribeSecLogDeliveryKafkaSetting(data?: DescribeSecLogDeliveryKafkaSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogDeliveryKafkaSettingResponse>;
-  /** {@link DescribeSecLogJoinObjectList 查询安全日志接入对象列表}({@link DescribeSecLogJoinObjectListRequest 请求参数}): {@link DescribeSecLogJoinObjectListResponse 返回参数} */
+  /** 查询安全日志接入对象列表 {@link DescribeSecLogJoinObjectListRequest} {@link DescribeSecLogJoinObjectListResponse} */
   DescribeSecLogJoinObjectList(data: DescribeSecLogJoinObjectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogJoinObjectListResponse>;
-  /** {@link DescribeSecLogJoinTypeList 查询安全日志接入列表}({@link DescribeSecLogJoinTypeListRequest 请求参数}): {@link DescribeSecLogJoinTypeListResponse 返回参数} */
+  /** 查询安全日志接入列表 {@link DescribeSecLogJoinTypeListRequest} {@link DescribeSecLogJoinTypeListResponse} */
   DescribeSecLogJoinTypeList(data?: DescribeSecLogJoinTypeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogJoinTypeListResponse>;
-  /** {@link DescribeSecLogKafkaUIN 查询安全日志KafkaUIN}({@link DescribeSecLogKafkaUINRequest 请求参数}): {@link DescribeSecLogKafkaUINResponse 返回参数} */
+  /** 查询安全日志KafkaUIN {@link DescribeSecLogKafkaUINRequest} {@link DescribeSecLogKafkaUINResponse} */
   DescribeSecLogKafkaUIN(data?: DescribeSecLogKafkaUINRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogKafkaUINResponse>;
-  /** {@link DescribeSecLogVasInfo 查询安全日志商品信息}({@link DescribeSecLogVasInfoRequest 请求参数}): {@link DescribeSecLogVasInfoResponse 返回参数} */
+  /** 查询安全日志商品信息 {@link DescribeSecLogVasInfoRequest} {@link DescribeSecLogVasInfoResponse} */
   DescribeSecLogVasInfo(data?: DescribeSecLogVasInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecLogVasInfoResponse>;
-  /** {@link DescribeSupportDefenceVul 查询支持防御的漏洞列表}({@link DescribeSupportDefenceVulRequest 请求参数}): {@link DescribeSupportDefenceVulResponse 返回参数} */
+  /** 查询支持防御的漏洞列表 {@link DescribeSupportDefenceVulRequest} {@link DescribeSupportDefenceVulResponse} */
   DescribeSupportDefenceVul(data?: DescribeSupportDefenceVulRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportDefenceVulResponse>;
-  /** {@link DescribeSystemVulList 查询系统漏洞列表}({@link DescribeSystemVulListRequest 请求参数}): {@link DescribeSystemVulListResponse 返回参数} */
+  /** 查询系统漏洞列表 {@link DescribeSystemVulListRequest} {@link DescribeSystemVulListResponse} */
   DescribeSystemVulList(data?: DescribeSystemVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSystemVulListResponse>;
-  /** {@link DescribeTaskResultSummary 查询检查结果总览}({@link DescribeTaskResultSummaryRequest 请求参数}): {@link DescribeTaskResultSummaryResponse 返回参数} */
+  /** 查询检查结果总览 {@link DescribeTaskResultSummaryRequest} {@link DescribeTaskResultSummaryResponse} */
   DescribeTaskResultSummary(data?: DescribeTaskResultSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultSummaryResponse>;
-  /** {@link DescribeTcssSummary 查询容器安全概览信息}({@link DescribeTcssSummaryRequest 请求参数}): {@link DescribeTcssSummaryResponse 返回参数} */
+  /** 查询容器安全概览信息 {@link DescribeTcssSummaryRequest} {@link DescribeTcssSummaryResponse} */
   DescribeTcssSummary(data?: DescribeTcssSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTcssSummaryResponse>;
-  /** {@link DescribeUnauthorizedCoresTendency 查询当天未授权核数趋势}({@link DescribeUnauthorizedCoresTendencyRequest 请求参数}): {@link DescribeUnauthorizedCoresTendencyResponse 返回参数} */
+  /** 查询当天未授权核数趋势 {@link DescribeUnauthorizedCoresTendencyRequest} {@link DescribeUnauthorizedCoresTendencyResponse} */
   DescribeUnauthorizedCoresTendency(data?: DescribeUnauthorizedCoresTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnauthorizedCoresTendencyResponse>;
-  /** {@link DescribeUnfinishRefreshTask 查询未完成的刷新资产任务信息}({@link DescribeUnfinishRefreshTaskRequest 请求参数}): {@link DescribeUnfinishRefreshTaskResponse 返回参数} */
+  /** 查询未完成的刷新资产任务信息 {@link DescribeUnfinishRefreshTaskRequest} {@link DescribeUnfinishRefreshTaskResponse} */
   DescribeUnfinishRefreshTask(data?: DescribeUnfinishRefreshTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnfinishRefreshTaskResponse>;
-  /** {@link DescribeUserCluster 用户集群资产查询}({@link DescribeUserClusterRequest 请求参数}): {@link DescribeUserClusterResponse 返回参数} */
+  /** 用户集群资产查询 {@link DescribeUserClusterRequest} {@link DescribeUserClusterResponse} */
   DescribeUserCluster(data?: DescribeUserClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserClusterResponse>;
-  /** {@link DescribeValueAddedSrvInfo 查询增值服务需购买信息}({@link DescribeValueAddedSrvInfoRequest 请求参数}): {@link DescribeValueAddedSrvInfoResponse 返回参数} */
+  /** 查询增值服务需购买信息 {@link DescribeValueAddedSrvInfoRequest} {@link DescribeValueAddedSrvInfoResponse} */
   DescribeValueAddedSrvInfo(data?: DescribeValueAddedSrvInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeValueAddedSrvInfoResponse>;
-  /** {@link DescribeVirusAutoIsolateSampleDetail 查询木马自动隔离样本详情}({@link DescribeVirusAutoIsolateSampleDetailRequest 请求参数}): {@link DescribeVirusAutoIsolateSampleDetailResponse 返回参数} */
+  /** 查询木马自动隔离样本详情 {@link DescribeVirusAutoIsolateSampleDetailRequest} {@link DescribeVirusAutoIsolateSampleDetailResponse} */
   DescribeVirusAutoIsolateSampleDetail(data: DescribeVirusAutoIsolateSampleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusAutoIsolateSampleDetailResponse>;
-  /** {@link DescribeVirusAutoIsolateSampleDownloadURL 查询木马自动隔离样本下载链接}({@link DescribeVirusAutoIsolateSampleDownloadURLRequest 请求参数}): {@link DescribeVirusAutoIsolateSampleDownloadURLResponse 返回参数} */
+  /** 查询木马自动隔离样本下载链接 {@link DescribeVirusAutoIsolateSampleDownloadURLRequest} {@link DescribeVirusAutoIsolateSampleDownloadURLResponse} */
   DescribeVirusAutoIsolateSampleDownloadURL(data: DescribeVirusAutoIsolateSampleDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusAutoIsolateSampleDownloadURLResponse>;
-  /** {@link DescribeVirusAutoIsolateSampleList 查询木马自动隔离样本列表}({@link DescribeVirusAutoIsolateSampleListRequest 请求参数}): {@link DescribeVirusAutoIsolateSampleListResponse 返回参数} */
+  /** 查询木马自动隔离样本列表 {@link DescribeVirusAutoIsolateSampleListRequest} {@link DescribeVirusAutoIsolateSampleListResponse} */
   DescribeVirusAutoIsolateSampleList(data?: DescribeVirusAutoIsolateSampleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusAutoIsolateSampleListResponse>;
-  /** {@link DescribeVirusAutoIsolateSetting 查询木马自动隔离设置}({@link DescribeVirusAutoIsolateSettingRequest 请求参数}): {@link DescribeVirusAutoIsolateSettingResponse 返回参数} */
+  /** 查询木马自动隔离设置 {@link DescribeVirusAutoIsolateSettingRequest} {@link DescribeVirusAutoIsolateSettingResponse} */
   DescribeVirusAutoIsolateSetting(data?: DescribeVirusAutoIsolateSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusAutoIsolateSettingResponse>;
-  /** {@link DescribeVirusDetail 运行时查询木马文件信息}({@link DescribeVirusDetailRequest 请求参数}): {@link DescribeVirusDetailResponse 返回参数} */
+  /** 运行时查询木马文件信息 {@link DescribeVirusDetailRequest} {@link DescribeVirusDetailResponse} */
   DescribeVirusDetail(data: DescribeVirusDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusDetailResponse>;
-  /** {@link DescribeVirusEventTendency 查询木马事件趋势}({@link DescribeVirusEventTendencyRequest 请求参数}): {@link DescribeVirusEventTendencyResponse 返回参数} */
+  /** 查询木马事件趋势 {@link DescribeVirusEventTendencyRequest} {@link DescribeVirusEventTendencyResponse} */
   DescribeVirusEventTendency(data: DescribeVirusEventTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusEventTendencyResponse>;
-  /** {@link DescribeVirusList 查询运行时文件查杀事件列表}({@link DescribeVirusListRequest 请求参数}): {@link DescribeVirusListResponse 返回参数} */
+  /** 查询运行时文件查杀事件列表 {@link DescribeVirusListRequest} {@link DescribeVirusListResponse} */
   DescribeVirusList(data?: DescribeVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusListResponse>;
-  /** {@link DescribeVirusManualScanEstimateTimeout 查询木马一键检测预估超时时间}({@link DescribeVirusManualScanEstimateTimeoutRequest 请求参数}): {@link DescribeVirusManualScanEstimateTimeoutResponse 返回参数} */
+  /** 查询木马一键检测预估超时时间 {@link DescribeVirusManualScanEstimateTimeoutRequest} {@link DescribeVirusManualScanEstimateTimeoutResponse} */
   DescribeVirusManualScanEstimateTimeout(data: DescribeVirusManualScanEstimateTimeoutRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusManualScanEstimateTimeoutResponse>;
-  /** {@link DescribeVirusMonitorSetting 运行时查询文件查杀实时监控设置}({@link DescribeVirusMonitorSettingRequest 请求参数}): {@link DescribeVirusMonitorSettingResponse 返回参数} */
+  /** 运行时查询文件查杀实时监控设置 {@link DescribeVirusMonitorSettingRequest} {@link DescribeVirusMonitorSettingResponse} */
   DescribeVirusMonitorSetting(data?: DescribeVirusMonitorSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusMonitorSettingResponse>;
-  /** {@link DescribeVirusSampleDownloadUrl 查询木马样本下载url}({@link DescribeVirusSampleDownloadUrlRequest 请求参数}): {@link DescribeVirusSampleDownloadUrlResponse 返回参数} */
+  /** 查询木马样本下载url {@link DescribeVirusSampleDownloadUrlRequest} {@link DescribeVirusSampleDownloadUrlResponse} */
   DescribeVirusSampleDownloadUrl(data: DescribeVirusSampleDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusSampleDownloadUrlResponse>;
-  /** {@link DescribeVirusScanSetting 运行时查询文件查杀设置}({@link DescribeVirusScanSettingRequest 请求参数}): {@link DescribeVirusScanSettingResponse 返回参数} */
+  /** 运行时查询文件查杀设置 {@link DescribeVirusScanSettingRequest} {@link DescribeVirusScanSettingResponse} */
   DescribeVirusScanSetting(data?: DescribeVirusScanSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusScanSettingResponse>;
-  /** {@link DescribeVirusScanTaskStatus 运行时查询文件查杀任务状态}({@link DescribeVirusScanTaskStatusRequest 请求参数}): {@link DescribeVirusScanTaskStatusResponse 返回参数} */
+  /** 运行时查询文件查杀任务状态 {@link DescribeVirusScanTaskStatusRequest} {@link DescribeVirusScanTaskStatusResponse} */
   DescribeVirusScanTaskStatus(data?: DescribeVirusScanTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusScanTaskStatusResponse>;
-  /** {@link DescribeVirusScanTimeoutSetting 运行时文件扫描超时设置查询}({@link DescribeVirusScanTimeoutSettingRequest 请求参数}): {@link DescribeVirusScanTimeoutSettingResponse 返回参数} */
+  /** 运行时文件扫描超时设置查询 {@link DescribeVirusScanTimeoutSettingRequest} {@link DescribeVirusScanTimeoutSettingResponse} */
   DescribeVirusScanTimeoutSetting(data: DescribeVirusScanTimeoutSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusScanTimeoutSettingResponse>;
-  /** {@link DescribeVirusSummary 运行时查询木马概览信息}({@link DescribeVirusSummaryRequest 请求参数}): {@link DescribeVirusSummaryResponse 返回参数} */
+  /** 运行时查询木马概览信息 {@link DescribeVirusSummaryRequest} {@link DescribeVirusSummaryResponse} */
   DescribeVirusSummary(data?: DescribeVirusSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusSummaryResponse>;
-  /** {@link DescribeVirusTaskList 运行时查询文件查杀任务列表}({@link DescribeVirusTaskListRequest 请求参数}): {@link DescribeVirusTaskListResponse 返回参数} */
+  /** 运行时查询文件查杀任务列表 {@link DescribeVirusTaskListRequest} {@link DescribeVirusTaskListResponse} */
   DescribeVirusTaskList(data: DescribeVirusTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusTaskListResponse>;
-  /** {@link DescribeVulContainerList 查询受漏洞的容器列表}({@link DescribeVulContainerListRequest 请求参数}): {@link DescribeVulContainerListResponse 返回参数} */
+  /** 查询受漏洞的容器列表 {@link DescribeVulContainerListRequest} {@link DescribeVulContainerListResponse} */
   DescribeVulContainerList(data: DescribeVulContainerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulContainerListResponse>;
-  /** {@link DescribeVulDefenceEvent 查询漏洞防御事件列表}({@link DescribeVulDefenceEventRequest 请求参数}): {@link DescribeVulDefenceEventResponse 返回参数} */
+  /** 查询漏洞防御事件列表 {@link DescribeVulDefenceEventRequest} {@link DescribeVulDefenceEventResponse} */
   DescribeVulDefenceEvent(data?: DescribeVulDefenceEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceEventResponse>;
-  /** {@link DescribeVulDefenceEventDetail 查询漏洞防御事件详情}({@link DescribeVulDefenceEventDetailRequest 请求参数}): {@link DescribeVulDefenceEventDetailResponse 返回参数} */
+  /** 查询漏洞防御事件详情 {@link DescribeVulDefenceEventDetailRequest} {@link DescribeVulDefenceEventDetailResponse} */
   DescribeVulDefenceEventDetail(data: DescribeVulDefenceEventDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceEventDetailResponse>;
-  /** {@link DescribeVulDefenceEventTendency 查询漏洞防御攻击事件趋势}({@link DescribeVulDefenceEventTendencyRequest 请求参数}): {@link DescribeVulDefenceEventTendencyResponse 返回参数} */
+  /** 查询漏洞防御攻击事件趋势 {@link DescribeVulDefenceEventTendencyRequest} {@link DescribeVulDefenceEventTendencyResponse} */
   DescribeVulDefenceEventTendency(data: DescribeVulDefenceEventTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceEventTendencyResponse>;
-  /** {@link DescribeVulDefenceHost 查询漏洞防御的主机列表}({@link DescribeVulDefenceHostRequest 请求参数}): {@link DescribeVulDefenceHostResponse 返回参数} */
+  /** 查询漏洞防御的主机列表 {@link DescribeVulDefenceHostRequest} {@link DescribeVulDefenceHostResponse} */
   DescribeVulDefenceHost(data?: DescribeVulDefenceHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceHostResponse>;
-  /** {@link DescribeVulDefencePlugin 查询漏洞防御插件列表}({@link DescribeVulDefencePluginRequest 请求参数}): {@link DescribeVulDefencePluginResponse 返回参数} */
+  /** 查询漏洞防御插件列表 {@link DescribeVulDefencePluginRequest} {@link DescribeVulDefencePluginResponse} */
   DescribeVulDefencePlugin(data?: DescribeVulDefencePluginRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefencePluginResponse>;
-  /** {@link DescribeVulDefenceSetting 查询漏洞防御设置信息}({@link DescribeVulDefenceSettingRequest 请求参数}): {@link DescribeVulDefenceSettingResponse 返回参数} */
+  /** 查询漏洞防御设置信息 {@link DescribeVulDefenceSettingRequest} {@link DescribeVulDefenceSettingResponse} */
   DescribeVulDefenceSetting(data?: DescribeVulDefenceSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceSettingResponse>;
-  /** {@link DescribeVulDetail 查询漏洞详情}({@link DescribeVulDetailRequest 请求参数}): {@link DescribeVulDetailResponse 返回参数} */
+  /** 查询漏洞详情 {@link DescribeVulDetailRequest} {@link DescribeVulDetailResponse} */
   DescribeVulDetail(data: DescribeVulDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDetailResponse>;
-  /** {@link DescribeVulIgnoreLocalImageList 查询漏洞扫描忽略的本地镜像列表}({@link DescribeVulIgnoreLocalImageListRequest 请求参数}): {@link DescribeVulIgnoreLocalImageListResponse 返回参数} */
+  /** 查询漏洞扫描忽略的本地镜像列表 {@link DescribeVulIgnoreLocalImageListRequest} {@link DescribeVulIgnoreLocalImageListResponse} */
   DescribeVulIgnoreLocalImageList(data: DescribeVulIgnoreLocalImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulIgnoreLocalImageListResponse>;
-  /** {@link DescribeVulIgnoreRegistryImageList 查询漏洞扫描忽略的仓库镜像列表}({@link DescribeVulIgnoreRegistryImageListRequest 请求参数}): {@link DescribeVulIgnoreRegistryImageListResponse 返回参数} */
+  /** 查询漏洞扫描忽略的仓库镜像列表 {@link DescribeVulIgnoreRegistryImageListRequest} {@link DescribeVulIgnoreRegistryImageListResponse} */
   DescribeVulIgnoreRegistryImageList(data: DescribeVulIgnoreRegistryImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulIgnoreRegistryImageListResponse>;
-  /** {@link DescribeVulImageList 查询漏洞影响的镜像列表}({@link DescribeVulImageListRequest 请求参数}): {@link DescribeVulImageListResponse 返回参数} */
+  /** 查询漏洞影响的镜像列表 {@link DescribeVulImageListRequest} {@link DescribeVulImageListResponse} */
   DescribeVulImageList(data: DescribeVulImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulImageListResponse>;
-  /** {@link DescribeVulImageSummary 查询漏洞镜像统计}({@link DescribeVulImageSummaryRequest 请求参数}): {@link DescribeVulImageSummaryResponse 返回参数} */
+  /** 查询漏洞镜像统计 {@link DescribeVulImageSummaryRequest} {@link DescribeVulImageSummaryResponse} */
   DescribeVulImageSummary(data?: DescribeVulImageSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulImageSummaryResponse>;
-  /** {@link DescribeVulLevelImageSummary 查询应急漏洞各威胁等级统计镜像数}({@link DescribeVulLevelImageSummaryRequest 请求参数}): {@link DescribeVulLevelImageSummaryResponse 返回参数} */
+  /** 查询应急漏洞各威胁等级统计镜像数 {@link DescribeVulLevelImageSummaryRequest} {@link DescribeVulLevelImageSummaryResponse} */
   DescribeVulLevelImageSummary(data?: DescribeVulLevelImageSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulLevelImageSummaryResponse>;
-  /** {@link DescribeVulLevelSummary 查询漏洞各威胁等级统计数}({@link DescribeVulLevelSummaryRequest 请求参数}): {@link DescribeVulLevelSummaryResponse 返回参数} */
+  /** 查询漏洞各威胁等级统计数 {@link DescribeVulLevelSummaryRequest} {@link DescribeVulLevelSummaryResponse} */
   DescribeVulLevelSummary(data: DescribeVulLevelSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulLevelSummaryResponse>;
-  /** {@link DescribeVulScanAuthorizedImageSummary 统计漏洞扫描页已授权和未扫描镜像数}({@link DescribeVulScanAuthorizedImageSummaryRequest 请求参数}): {@link DescribeVulScanAuthorizedImageSummaryResponse 返回参数} */
+  /** 统计漏洞扫描页已授权和未扫描镜像数 {@link DescribeVulScanAuthorizedImageSummaryRequest} {@link DescribeVulScanAuthorizedImageSummaryResponse} */
   DescribeVulScanAuthorizedImageSummary(data?: DescribeVulScanAuthorizedImageSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulScanAuthorizedImageSummaryResponse>;
-  /** {@link DescribeVulScanInfo 查询漏洞扫描任务信息}({@link DescribeVulScanInfoRequest 请求参数}): {@link DescribeVulScanInfoResponse 返回参数} */
+  /** 查询漏洞扫描任务信息 {@link DescribeVulScanInfoRequest} {@link DescribeVulScanInfoResponse} */
   DescribeVulScanInfo(data?: DescribeVulScanInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulScanInfoResponse>;
-  /** {@link DescribeVulScanLocalImageList 查询漏洞扫描任务的本地镜像列表}({@link DescribeVulScanLocalImageListRequest 请求参数}): {@link DescribeVulScanLocalImageListResponse 返回参数} */
+  /** 查询漏洞扫描任务的本地镜像列表 {@link DescribeVulScanLocalImageListRequest} {@link DescribeVulScanLocalImageListResponse} */
   DescribeVulScanLocalImageList(data: DescribeVulScanLocalImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulScanLocalImageListResponse>;
-  /** {@link DescribeVulSummary 查询漏洞风险统计概览}({@link DescribeVulSummaryRequest 请求参数}): {@link DescribeVulSummaryResponse 返回参数} */
+  /** 查询漏洞风险统计概览 {@link DescribeVulSummaryRequest} {@link DescribeVulSummaryResponse} */
   DescribeVulSummary(data?: DescribeVulSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulSummaryResponse>;
-  /** {@link DescribeVulTendency 查询漏洞风险趋势}({@link DescribeVulTendencyRequest 请求参数}): {@link DescribeVulTendencyResponse 返回参数} */
+  /** 查询漏洞风险趋势 {@link DescribeVulTendencyRequest} {@link DescribeVulTendencyResponse} */
   DescribeVulTendency(data: DescribeVulTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulTendencyResponse>;
-  /** {@link DescribeVulTopRanking 查询漏洞Top排名列表}({@link DescribeVulTopRankingRequest 请求参数}): {@link DescribeVulTopRankingResponse 返回参数} */
+  /** 查询漏洞Top排名列表 {@link DescribeVulTopRankingRequest} {@link DescribeVulTopRankingResponse} */
   DescribeVulTopRanking(data: DescribeVulTopRankingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulTopRankingResponse>;
-  /** {@link DescribeWarningRules 获取告警策略列表}({@link DescribeWarningRulesRequest 请求参数}): {@link DescribeWarningRulesResponse 返回参数} */
+  /** 获取告警策略列表 {@link DescribeWarningRulesRequest} {@link DescribeWarningRulesResponse} */
   DescribeWarningRules(data?: DescribeWarningRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWarningRulesResponse>;
-  /** {@link DescribeWebVulList 查询web应用漏洞列表}({@link DescribeWebVulListRequest 请求参数}): {@link DescribeWebVulListResponse 返回参数} */
+  /** 查询web应用漏洞列表 {@link DescribeWebVulListRequest} {@link DescribeWebVulListResponse} */
   DescribeWebVulList(data?: DescribeWebVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebVulListResponse>;
-  /** {@link ExportVirusList 运行时文件查杀事件列表导出}({@link ExportVirusListRequest 请求参数}): {@link ExportVirusListResponse 返回参数} */
+  /** 运行时文件查杀事件列表导出 {@link ExportVirusListRequest} {@link ExportVirusListResponse} */
   ExportVirusList(data?: ExportVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVirusListResponse>;
-  /** {@link InitializeUserComplianceEnvironment 安全合规初始化用户的合规基线检测环境}({@link InitializeUserComplianceEnvironmentRequest 请求参数}): {@link InitializeUserComplianceEnvironmentResponse 返回参数} */
+  /** 安全合规初始化用户的合规基线检测环境 {@link InitializeUserComplianceEnvironmentRequest} {@link InitializeUserComplianceEnvironmentResponse} */
   InitializeUserComplianceEnvironment(data?: InitializeUserComplianceEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeUserComplianceEnvironmentResponse>;
-  /** {@link ModifyAbnormalProcessRuleStatus 修改运行时异常进程策略状态}({@link ModifyAbnormalProcessRuleStatusRequest 请求参数}): {@link ModifyAbnormalProcessRuleStatusResponse 返回参数} */
+  /** 修改运行时异常进程策略状态 {@link ModifyAbnormalProcessRuleStatusRequest} {@link ModifyAbnormalProcessRuleStatusResponse} */
   ModifyAbnormalProcessRuleStatus(data: ModifyAbnormalProcessRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAbnormalProcessRuleStatusResponse>;
-  /** {@link ModifyAbnormalProcessStatus 修改异常进程事件状态}({@link ModifyAbnormalProcessStatusRequest 请求参数}): {@link ModifyAbnormalProcessStatusResponse 返回参数} */
+  /** 修改异常进程事件状态 {@link ModifyAbnormalProcessStatusRequest} {@link ModifyAbnormalProcessStatusResponse} */
   ModifyAbnormalProcessStatus(data: ModifyAbnormalProcessStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAbnormalProcessStatusResponse>;
-  /** {@link ModifyAccessControlRuleStatus 修改运行时访问控制策略状态}({@link ModifyAccessControlRuleStatusRequest 请求参数}): {@link ModifyAccessControlRuleStatusResponse 返回参数} */
+  /** 修改运行时访问控制策略状态 {@link ModifyAccessControlRuleStatusRequest} {@link ModifyAccessControlRuleStatusResponse} */
   ModifyAccessControlRuleStatus(data: ModifyAccessControlRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessControlRuleStatusResponse>;
-  /** {@link ModifyAccessControlStatus 修改运行时访问控制事件状态}({@link ModifyAccessControlStatusRequest 请求参数}): {@link ModifyAccessControlStatusResponse 返回参数} */
+  /** 修改运行时访问控制事件状态 {@link ModifyAccessControlStatusRequest} {@link ModifyAccessControlStatusResponse} */
   ModifyAccessControlStatus(data: ModifyAccessControlStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessControlStatusResponse>;
-  /** {@link ModifyAsset 主机资产刷新}({@link ModifyAssetRequest 请求参数}): {@link ModifyAssetResponse 返回参数} */
+  /** 主机资产刷新 {@link ModifyAssetRequest} {@link ModifyAssetResponse} */
   ModifyAsset(data?: ModifyAssetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetResponse>;
-  /** {@link ModifyAssetImageRegistryScanStop 镜像仓库停止镜像扫描任务}({@link ModifyAssetImageRegistryScanStopRequest 请求参数}): {@link ModifyAssetImageRegistryScanStopResponse 返回参数} */
+  /** 镜像仓库停止镜像扫描任务 {@link ModifyAssetImageRegistryScanStopRequest} {@link ModifyAssetImageRegistryScanStopResponse} */
   ModifyAssetImageRegistryScanStop(data?: ModifyAssetImageRegistryScanStopRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetImageRegistryScanStopResponse>;
-  /** {@link ModifyAssetImageRegistryScanStopOneKey 镜像仓库停止镜像一键扫描任务}({@link ModifyAssetImageRegistryScanStopOneKeyRequest 请求参数}): {@link ModifyAssetImageRegistryScanStopOneKeyResponse 返回参数} */
+  /** 镜像仓库停止镜像一键扫描任务 {@link ModifyAssetImageRegistryScanStopOneKeyRequest} {@link ModifyAssetImageRegistryScanStopOneKeyResponse} */
   ModifyAssetImageRegistryScanStopOneKey(data?: ModifyAssetImageRegistryScanStopOneKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetImageRegistryScanStopOneKeyResponse>;
-  /** {@link ModifyAssetImageScanStop 停止镜像扫描}({@link ModifyAssetImageScanStopRequest 请求参数}): {@link ModifyAssetImageScanStopResponse 返回参数} */
+  /** 停止镜像扫描 {@link ModifyAssetImageScanStopRequest} {@link ModifyAssetImageScanStopResponse} */
   ModifyAssetImageScanStop(data?: ModifyAssetImageScanStopRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetImageScanStopResponse>;
-  /** {@link ModifyCompliancePeriodTask 安全合规编辑定时任务}({@link ModifyCompliancePeriodTaskRequest 请求参数}): {@link ModifyCompliancePeriodTaskResponse 返回参数} */
+  /** 安全合规编辑定时任务 {@link ModifyCompliancePeriodTaskRequest} {@link ModifyCompliancePeriodTaskResponse} */
   ModifyCompliancePeriodTask(data: ModifyCompliancePeriodTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCompliancePeriodTaskResponse>;
-  /** {@link ModifyContainerNetStatus 隔离容器网络状态}({@link ModifyContainerNetStatusRequest 请求参数}): {@link ModifyContainerNetStatusResponse 返回参数} */
+  /** 隔离容器网络状态 {@link ModifyContainerNetStatusRequest} {@link ModifyContainerNetStatusResponse} */
   ModifyContainerNetStatus(data: ModifyContainerNetStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContainerNetStatusResponse>;
-  /** {@link ModifyEscapeEventStatus 修改容器逃逸扫描事件状态}({@link ModifyEscapeEventStatusRequest 请求参数}): {@link ModifyEscapeEventStatusResponse 返回参数} */
+  /** 修改容器逃逸扫描事件状态 {@link ModifyEscapeEventStatusRequest} {@link ModifyEscapeEventStatusResponse} */
   ModifyEscapeEventStatus(data: ModifyEscapeEventStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEscapeEventStatusResponse>;
-  /** {@link ModifyEscapeRule 修改容器逃逸扫描规则信息}({@link ModifyEscapeRuleRequest 请求参数}): {@link ModifyEscapeRuleResponse 返回参数} */
+  /** 修改容器逃逸扫描规则信息 {@link ModifyEscapeRuleRequest} {@link ModifyEscapeRuleResponse} */
   ModifyEscapeRule(data: ModifyEscapeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEscapeRuleResponse>;
-  /** {@link ModifyEscapeWhiteList 修改逃逸白名单}({@link ModifyEscapeWhiteListRequest 请求参数}): {@link ModifyEscapeWhiteListResponse 返回参数} */
+  /** 修改逃逸白名单 {@link ModifyEscapeWhiteListRequest} {@link ModifyEscapeWhiteListResponse} */
   ModifyEscapeWhiteList(data: ModifyEscapeWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEscapeWhiteListResponse>;
-  /** {@link ModifyImageAuthorized 批量授权镜像扫描V2.0}({@link ModifyImageAuthorizedRequest 请求参数}): {@link ModifyImageAuthorizedResponse 返回参数} */
+  /** 批量授权镜像扫描V2.0 {@link ModifyImageAuthorizedRequest} {@link ModifyImageAuthorizedResponse} */
   ModifyImageAuthorized(data: ModifyImageAuthorizedRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageAuthorizedResponse>;
-  /** {@link ModifyK8sApiAbnormalEventStatus 修改k8sapi异常事件状态}({@link ModifyK8sApiAbnormalEventStatusRequest 请求参数}): {@link ModifyK8sApiAbnormalEventStatusResponse 返回参数} */
+  /** 修改k8sapi异常事件状态 {@link ModifyK8sApiAbnormalEventStatusRequest} {@link ModifyK8sApiAbnormalEventStatusResponse} */
   ModifyK8sApiAbnormalEventStatus(data: ModifyK8sApiAbnormalEventStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyK8sApiAbnormalEventStatusResponse>;
-  /** {@link ModifyK8sApiAbnormalRuleInfo 修改k8sapi异常规则信息}({@link ModifyK8sApiAbnormalRuleInfoRequest 请求参数}): {@link ModifyK8sApiAbnormalRuleInfoResponse 返回参数} */
+  /** 修改k8sapi异常规则信息 {@link ModifyK8sApiAbnormalRuleInfoRequest} {@link ModifyK8sApiAbnormalRuleInfoResponse} */
   ModifyK8sApiAbnormalRuleInfo(data: ModifyK8sApiAbnormalRuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyK8sApiAbnormalRuleInfoResponse>;
-  /** {@link ModifyK8sApiAbnormalRuleStatus 修改k8sapi异常事件规则状态}({@link ModifyK8sApiAbnormalRuleStatusRequest 请求参数}): {@link ModifyK8sApiAbnormalRuleStatusResponse 返回参数} */
+  /** 修改k8sapi异常事件规则状态 {@link ModifyK8sApiAbnormalRuleStatusRequest} {@link ModifyK8sApiAbnormalRuleStatusResponse} */
   ModifyK8sApiAbnormalRuleStatus(data: ModifyK8sApiAbnormalRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyK8sApiAbnormalRuleStatusResponse>;
-  /** {@link ModifyReverseShellStatus 修改反弹shell事件状态}({@link ModifyReverseShellStatusRequest 请求参数}): {@link ModifyReverseShellStatusResponse 返回参数} */
+  /** 修改反弹shell事件状态 {@link ModifyReverseShellStatusRequest} {@link ModifyReverseShellStatusResponse} */
   ModifyReverseShellStatus(data: ModifyReverseShellStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReverseShellStatusResponse>;
-  /** {@link ModifyRiskSyscallStatus 修改高危系统调用事件状态}({@link ModifyRiskSyscallStatusRequest 请求参数}): {@link ModifyRiskSyscallStatusResponse 返回参数} */
+  /** 修改高危系统调用事件状态 {@link ModifyRiskSyscallStatusRequest} {@link ModifyRiskSyscallStatusResponse} */
   ModifyRiskSyscallStatus(data: ModifyRiskSyscallStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskSyscallStatusResponse>;
-  /** {@link ModifySecLogCleanSettingInfo 修改安全日志清理设置信息}({@link ModifySecLogCleanSettingInfoRequest 请求参数}): {@link ModifySecLogCleanSettingInfoResponse 返回参数} */
+  /** 修改安全日志清理设置信息 {@link ModifySecLogCleanSettingInfoRequest} {@link ModifySecLogCleanSettingInfoResponse} */
   ModifySecLogCleanSettingInfo(data: ModifySecLogCleanSettingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogCleanSettingInfoResponse>;
-  /** {@link ModifySecLogDeliveryClsSetting 更新安全日志-日志投递cls配置}({@link ModifySecLogDeliveryClsSettingRequest 请求参数}): {@link ModifySecLogDeliveryClsSettingResponse 返回参数} */
+  /** 更新安全日志-日志投递cls配置 {@link ModifySecLogDeliveryClsSettingRequest} {@link ModifySecLogDeliveryClsSettingResponse} */
   ModifySecLogDeliveryClsSetting(data: ModifySecLogDeliveryClsSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogDeliveryClsSettingResponse>;
-  /** {@link ModifySecLogDeliveryKafkaSetting 更新安全日志投递kafka设置}({@link ModifySecLogDeliveryKafkaSettingRequest 请求参数}): {@link ModifySecLogDeliveryKafkaSettingResponse 返回参数} */
+  /** 更新安全日志投递kafka设置 {@link ModifySecLogDeliveryKafkaSettingRequest} {@link ModifySecLogDeliveryKafkaSettingResponse} */
   ModifySecLogDeliveryKafkaSetting(data?: ModifySecLogDeliveryKafkaSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogDeliveryKafkaSettingResponse>;
-  /** {@link ModifySecLogJoinObjects 修改安全日志接入对象}({@link ModifySecLogJoinObjectsRequest 请求参数}): {@link ModifySecLogJoinObjectsResponse 返回参数} */
+  /** 修改安全日志接入对象 {@link ModifySecLogJoinObjectsRequest} {@link ModifySecLogJoinObjectsResponse} */
   ModifySecLogJoinObjects(data: ModifySecLogJoinObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogJoinObjectsResponse>;
-  /** {@link ModifySecLogJoinState 修改安全日志接入状态}({@link ModifySecLogJoinStateRequest 请求参数}): {@link ModifySecLogJoinStateResponse 返回参数} */
+  /** 修改安全日志接入状态 {@link ModifySecLogJoinStateRequest} {@link ModifySecLogJoinStateResponse} */
   ModifySecLogJoinState(data: ModifySecLogJoinStateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogJoinStateResponse>;
-  /** {@link ModifySecLogKafkaUIN 修改安全日志kafkaUIN}({@link ModifySecLogKafkaUINRequest 请求参数}): {@link ModifySecLogKafkaUINResponse 返回参数} */
+  /** 修改安全日志kafkaUIN {@link ModifySecLogKafkaUINRequest} {@link ModifySecLogKafkaUINResponse} */
   ModifySecLogKafkaUIN(data?: ModifySecLogKafkaUINRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecLogKafkaUINResponse>;
-  /** {@link ModifyVirusAutoIsolateExampleSwitch 修改木马自动隔离样本开关}({@link ModifyVirusAutoIsolateExampleSwitchRequest 请求参数}): {@link ModifyVirusAutoIsolateExampleSwitchResponse 返回参数} */
+  /** 修改木马自动隔离样本开关 {@link ModifyVirusAutoIsolateExampleSwitchRequest} {@link ModifyVirusAutoIsolateExampleSwitchResponse} */
   ModifyVirusAutoIsolateExampleSwitch(data: ModifyVirusAutoIsolateExampleSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirusAutoIsolateExampleSwitchResponse>;
-  /** {@link ModifyVirusAutoIsolateSetting 修改木马自动隔离设置}({@link ModifyVirusAutoIsolateSettingRequest 请求参数}): {@link ModifyVirusAutoIsolateSettingResponse 返回参数} */
+  /** 修改木马自动隔离设置 {@link ModifyVirusAutoIsolateSettingRequest} {@link ModifyVirusAutoIsolateSettingResponse} */
   ModifyVirusAutoIsolateSetting(data: ModifyVirusAutoIsolateSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirusAutoIsolateSettingResponse>;
-  /** {@link ModifyVirusFileStatus 运行时更新木马文件事件状态}({@link ModifyVirusFileStatusRequest 请求参数}): {@link ModifyVirusFileStatusResponse 返回参数} */
+  /** 运行时更新木马文件事件状态 {@link ModifyVirusFileStatusRequest} {@link ModifyVirusFileStatusResponse} */
   ModifyVirusFileStatus(data: ModifyVirusFileStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirusFileStatusResponse>;
-  /** {@link ModifyVirusMonitorSetting 运行时更新文件查杀实时监控设置}({@link ModifyVirusMonitorSettingRequest 请求参数}): {@link ModifyVirusMonitorSettingResponse 返回参数} */
+  /** 运行时更新文件查杀实时监控设置 {@link ModifyVirusMonitorSettingRequest} {@link ModifyVirusMonitorSettingResponse} */
   ModifyVirusMonitorSetting(data: ModifyVirusMonitorSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirusMonitorSettingResponse>;
-  /** {@link ModifyVirusScanSetting 运行时更新文件查杀设置}({@link ModifyVirusScanSettingRequest 请求参数}): {@link ModifyVirusScanSettingResponse 返回参数} */
+  /** 运行时更新文件查杀设置 {@link ModifyVirusScanSettingRequest} {@link ModifyVirusScanSettingResponse} */
   ModifyVirusScanSetting(data: ModifyVirusScanSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirusScanSettingResponse>;
-  /** {@link ModifyVirusScanTimeoutSetting 运行时文件扫描超时设置}({@link ModifyVirusScanTimeoutSettingRequest 请求参数}): {@link ModifyVirusScanTimeoutSettingResponse 返回参数} */
+  /** 运行时文件扫描超时设置 {@link ModifyVirusScanTimeoutSettingRequest} {@link ModifyVirusScanTimeoutSettingResponse} */
   ModifyVirusScanTimeoutSetting(data: ModifyVirusScanTimeoutSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirusScanTimeoutSettingResponse>;
-  /** {@link ModifyVulDefenceEventStatus 修改漏洞防御事件状态}({@link ModifyVulDefenceEventStatusRequest 请求参数}): {@link ModifyVulDefenceEventStatusResponse 返回参数} */
+  /** 修改漏洞防御事件状态 {@link ModifyVulDefenceEventStatusRequest} {@link ModifyVulDefenceEventStatusResponse} */
   ModifyVulDefenceEventStatus(data: ModifyVulDefenceEventStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVulDefenceEventStatusResponse>;
-  /** {@link ModifyVulDefenceSetting 编辑漏洞防御设置}({@link ModifyVulDefenceSettingRequest 请求参数}): {@link ModifyVulDefenceSettingResponse 返回参数} */
+  /** 编辑漏洞防御设置 {@link ModifyVulDefenceSettingRequest} {@link ModifyVulDefenceSettingResponse} */
   ModifyVulDefenceSetting(data: ModifyVulDefenceSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVulDefenceSettingResponse>;
-  /** {@link OpenTcssTrial 开通容器安全服务试用}({@link OpenTcssTrialRequest 请求参数}): {@link OpenTcssTrialResponse 返回参数} */
+  /** 开通容器安全服务试用 {@link OpenTcssTrialRequest} {@link OpenTcssTrialResponse} */
   OpenTcssTrial(data?: OpenTcssTrialRequest, config?: AxiosRequestConfig): AxiosPromise<OpenTcssTrialResponse>;
-  /** {@link RemoveAssetImageRegistryRegistryDetail 删除单个镜像仓库详细信息}({@link RemoveAssetImageRegistryRegistryDetailRequest 请求参数}): {@link RemoveAssetImageRegistryRegistryDetailResponse 返回参数} */
+  /** 删除单个镜像仓库详细信息 {@link RemoveAssetImageRegistryRegistryDetailRequest} {@link RemoveAssetImageRegistryRegistryDetailResponse} */
   RemoveAssetImageRegistryRegistryDetail(data: RemoveAssetImageRegistryRegistryDetailRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveAssetImageRegistryRegistryDetailResponse>;
-  /** {@link RenewImageAuthorizeState 授权镜像扫描}({@link RenewImageAuthorizeStateRequest 请求参数}): {@link RenewImageAuthorizeStateResponse 返回参数} */
+  /** 授权镜像扫描 {@link RenewImageAuthorizeStateRequest} {@link RenewImageAuthorizeStateResponse} */
   RenewImageAuthorizeState(data: RenewImageAuthorizeStateRequest, config?: AxiosRequestConfig): AxiosPromise<RenewImageAuthorizeStateResponse>;
-  /** {@link ResetSecLogTopicConfig 重置安全日志主题设置}({@link ResetSecLogTopicConfigRequest 请求参数}): {@link ResetSecLogTopicConfigResponse 返回参数} */
+  /** 重置安全日志主题设置 {@link ResetSecLogTopicConfigRequest} {@link ResetSecLogTopicConfigResponse} */
   ResetSecLogTopicConfig(data: ResetSecLogTopicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ResetSecLogTopicConfigResponse>;
-  /** {@link ScanComplianceAssets 安全合规重新检测选定的资产}({@link ScanComplianceAssetsRequest 请求参数}): {@link ScanComplianceAssetsResponse 返回参数} */
+  /** 安全合规重新检测选定的资产 {@link ScanComplianceAssetsRequest} {@link ScanComplianceAssetsResponse} */
   ScanComplianceAssets(data: ScanComplianceAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<ScanComplianceAssetsResponse>;
-  /** {@link ScanComplianceAssetsByPolicyItem 安全合规用指定的检测项重新检测选定的资产}({@link ScanComplianceAssetsByPolicyItemRequest 请求参数}): {@link ScanComplianceAssetsByPolicyItemResponse 返回参数} */
+  /** 安全合规用指定的检测项重新检测选定的资产 {@link ScanComplianceAssetsByPolicyItemRequest} {@link ScanComplianceAssetsByPolicyItemResponse} */
   ScanComplianceAssetsByPolicyItem(data: ScanComplianceAssetsByPolicyItemRequest, config?: AxiosRequestConfig): AxiosPromise<ScanComplianceAssetsByPolicyItemResponse>;
-  /** {@link ScanCompliancePolicyItems 安全合规重新检测选定的检测项}({@link ScanCompliancePolicyItemsRequest 请求参数}): {@link ScanCompliancePolicyItemsResponse 返回参数} */
+  /** 安全合规重新检测选定的检测项 {@link ScanCompliancePolicyItemsRequest} {@link ScanCompliancePolicyItemsResponse} */
   ScanCompliancePolicyItems(data: ScanCompliancePolicyItemsRequest, config?: AxiosRequestConfig): AxiosPromise<ScanCompliancePolicyItemsResponse>;
-  /** {@link ScanComplianceScanFailedAssets 安全合规重新检测上次检测失败的资产}({@link ScanComplianceScanFailedAssetsRequest 请求参数}): {@link ScanComplianceScanFailedAssetsResponse 返回参数} */
+  /** 安全合规重新检测上次检测失败的资产 {@link ScanComplianceScanFailedAssetsRequest} {@link ScanComplianceScanFailedAssetsResponse} */
   ScanComplianceScanFailedAssets(data: ScanComplianceScanFailedAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<ScanComplianceScanFailedAssetsResponse>;
-  /** {@link SetCheckMode 设置检测模式和自动检查}({@link SetCheckModeRequest 请求参数}): {@link SetCheckModeResponse 返回参数} */
+  /** 设置检测模式和自动检查 {@link SetCheckModeRequest} {@link SetCheckModeResponse} */
   SetCheckMode(data: SetCheckModeRequest, config?: AxiosRequestConfig): AxiosPromise<SetCheckModeResponse>;
-  /** {@link StopVirusScanTask 运行时停止木马查杀任务}({@link StopVirusScanTaskRequest 请求参数}): {@link StopVirusScanTaskResponse 返回参数} */
+  /** 运行时停止木马查杀任务 {@link StopVirusScanTaskRequest} {@link StopVirusScanTaskResponse} */
   StopVirusScanTask(data: StopVirusScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopVirusScanTaskResponse>;
-  /** {@link StopVulScanTask 停止漏洞扫描任务}({@link StopVulScanTaskRequest 请求参数}): {@link StopVulScanTaskResponse 返回参数} */
+  /** 停止漏洞扫描任务 {@link StopVulScanTaskRequest} {@link StopVulScanTaskResponse} */
   StopVulScanTask(data?: StopVulScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopVulScanTaskResponse>;
-  /** {@link SwitchImageAutoAuthorizedRule 编辑本地镜像自动授权开关}({@link SwitchImageAutoAuthorizedRuleRequest 请求参数}): {@link SwitchImageAutoAuthorizedRuleResponse 返回参数} */
+  /** 编辑本地镜像自动授权开关 {@link SwitchImageAutoAuthorizedRuleRequest} {@link SwitchImageAutoAuthorizedRuleResponse} */
   SwitchImageAutoAuthorizedRule(data: SwitchImageAutoAuthorizedRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchImageAutoAuthorizedRuleResponse>;
-  /** {@link SyncAssetImageRegistryAsset 镜像仓库资产刷新}({@link SyncAssetImageRegistryAssetRequest 请求参数}): {@link SyncAssetImageRegistryAssetResponse 返回参数} */
+  /** 镜像仓库资产刷新 {@link SyncAssetImageRegistryAssetRequest} {@link SyncAssetImageRegistryAssetResponse} */
   SyncAssetImageRegistryAsset(data?: SyncAssetImageRegistryAssetRequest, config?: AxiosRequestConfig): AxiosPromise<SyncAssetImageRegistryAssetResponse>;
-  /** {@link UpdateAndPublishNetworkFirewallPolicyDetail 容器网络创建网络策略更新并发布任务}({@link UpdateAndPublishNetworkFirewallPolicyDetailRequest 请求参数}): {@link UpdateAndPublishNetworkFirewallPolicyDetailResponse 返回参数} */
+  /** 容器网络创建网络策略更新并发布任务 {@link UpdateAndPublishNetworkFirewallPolicyDetailRequest} {@link UpdateAndPublishNetworkFirewallPolicyDetailResponse} */
   UpdateAndPublishNetworkFirewallPolicyDetail(data: UpdateAndPublishNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAndPublishNetworkFirewallPolicyDetailResponse>;
-  /** {@link UpdateAndPublishNetworkFirewallPolicyYamlDetail 容器网络更新Yaml网络策略并发布任务}({@link UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest 请求参数}): {@link UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse 返回参数} */
+  /** 容器网络更新Yaml网络策略并发布任务 {@link UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest} {@link UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse} */
   UpdateAndPublishNetworkFirewallPolicyYamlDetail(data: UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse>;
-  /** {@link UpdateAssetImageRegistryRegistryDetail 更新单个镜像仓库详细信息}({@link UpdateAssetImageRegistryRegistryDetailRequest 请求参数}): {@link UpdateAssetImageRegistryRegistryDetailResponse 返回参数} */
+  /** 更新单个镜像仓库详细信息 {@link UpdateAssetImageRegistryRegistryDetailRequest} {@link UpdateAssetImageRegistryRegistryDetailResponse} */
   UpdateAssetImageRegistryRegistryDetail(data: UpdateAssetImageRegistryRegistryDetailRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAssetImageRegistryRegistryDetailResponse>;
-  /** {@link UpdateImageRegistryTimingScanTask 镜像仓库更新定时任务}({@link UpdateImageRegistryTimingScanTaskRequest 请求参数}): {@link UpdateImageRegistryTimingScanTaskResponse 返回参数} */
+  /** 镜像仓库更新定时任务 {@link UpdateImageRegistryTimingScanTaskRequest} {@link UpdateImageRegistryTimingScanTaskResponse} */
   UpdateImageRegistryTimingScanTask(data: UpdateImageRegistryTimingScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateImageRegistryTimingScanTaskResponse>;
-  /** {@link UpdateNetworkFirewallPolicyDetail 容器网络创建网络策略更新任务}({@link UpdateNetworkFirewallPolicyDetailRequest 请求参数}): {@link UpdateNetworkFirewallPolicyDetailResponse 返回参数} */
+  /** 容器网络创建网络策略更新任务 {@link UpdateNetworkFirewallPolicyDetailRequest} {@link UpdateNetworkFirewallPolicyDetailResponse} */
   UpdateNetworkFirewallPolicyDetail(data: UpdateNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateNetworkFirewallPolicyDetailResponse>;
-  /** {@link UpdateNetworkFirewallPolicyYamlDetail 容器网络更新Yaml网络策略任务}({@link UpdateNetworkFirewallPolicyYamlDetailRequest 请求参数}): {@link UpdateNetworkFirewallPolicyYamlDetailResponse 返回参数} */
+  /** 容器网络更新Yaml网络策略任务 {@link UpdateNetworkFirewallPolicyYamlDetailRequest} {@link UpdateNetworkFirewallPolicyYamlDetailResponse} */
   UpdateNetworkFirewallPolicyYamlDetail(data: UpdateNetworkFirewallPolicyYamlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateNetworkFirewallPolicyYamlDetailResponse>;
 }
 

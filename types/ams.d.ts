@@ -282,7 +282,7 @@ declare interface CancelTaskRequest {
 }
 
 declare interface CancelTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -328,7 +328,7 @@ declare interface CreateAudioModerationSyncTaskResponse {
   RecognitionResults: RecognitionResult[] | null;
   /** 识别音频时长，单位为毫秒； */
   Duration: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -348,7 +348,7 @@ declare interface CreateAudioModerationTaskRequest {
 declare interface CreateAudioModerationTaskResponse {
   /** 该字段用于返回任务创建的结果，具体输出内容请参见TaskResult数据结构的详细描述。 */
   Results: TaskResult[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -392,7 +392,7 @@ declare interface DescribeTaskDetailResponse {
   UpdatedAt: string | null;
   /** 该字段用于返回检测结果所对应的标签。如果未命中恶意，返回Normal，如果命中恶意，则返回Labels中优先级最高的标签 */
   Label: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -416,7 +416,7 @@ declare interface DescribeTasksResponse {
   Data: TaskData[] | null;
   /** 该字段用于返回翻页时使用的Token信息，由系统自动生成，并在翻页时向下一个生成的页面传递此参数，以方便快速翻页功能的实现。当到最后一页时，该字段为空。 */
   PageToken: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -797,7 +797,7 @@ declare namespace V20200608 {
   }
 
   interface CancelTaskResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -817,7 +817,7 @@ declare namespace V20200608 {
   interface CreateAudioModerationTaskResponse {
     /** 任务创建结果 */
     Results?: TaskResult[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -833,7 +833,7 @@ declare namespace V20200608 {
   }
 
   interface CreateBizConfigResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -855,7 +855,7 @@ declare namespace V20200608 {
     Total?: number;
     /** 分页 token */
     PageToken?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -873,7 +873,7 @@ declare namespace V20200608 {
     TrendCount?: TrendCount[];
     /** 违规数据分布 */
     EvilCount?: EvilCount[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -895,7 +895,7 @@ declare namespace V20200608 {
     CreatedAt?: string;
     /** 更新时间 */
     UpdatedAt?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -939,7 +939,7 @@ declare namespace V20200608 {
     ImageSegments?: ImageSegments[] | null;
     /** 音频识别总文本 */
     AudioText?: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -947,29 +947,29 @@ declare namespace V20200608 {
 /** {@link Ams 音频内容安全} */
 declare interface Ams {
   (): Versions;
-  /** {@link CancelTask 取消任务}({@link CancelTaskRequest 请求参数}): {@link CancelTaskResponse 返回参数} */
+  /** 取消任务 {@link CancelTaskRequest} {@link CancelTaskResponse} */
   CancelTask(data: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
-  /** {@link CreateAudioModerationSyncTask 短音频审核同步接口}({@link CreateAudioModerationSyncTaskRequest 请求参数}): {@link CreateAudioModerationSyncTaskResponse 返回参数} */
+  /** 短音频审核同步接口 {@link CreateAudioModerationSyncTaskRequest} {@link CreateAudioModerationSyncTaskResponse} */
   CreateAudioModerationSyncTask(data: CreateAudioModerationSyncTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAudioModerationSyncTaskResponse>;
-  /** {@link CreateAudioModerationTask 创建音频审核任务}({@link CreateAudioModerationTaskRequest 请求参数}): {@link CreateAudioModerationTaskResponse 返回参数} */
+  /** 创建音频审核任务 {@link CreateAudioModerationTaskRequest} {@link CreateAudioModerationTaskResponse} */
   CreateAudioModerationTask(data: CreateAudioModerationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAudioModerationTaskResponse>;
-  /** {@link DescribeTaskDetail 查看任务详情}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
+  /** 查看任务详情 {@link DescribeTaskDetailRequest} {@link DescribeTaskDetailResponse} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** {@link DescribeTasks 查看审核任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
+  /** 查看审核任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** {@link V20200608.CancelTask 取消任务}({@link V20200608.CancelTaskRequest 请求参数}): {@link V20200608.CancelTaskResponse 返回参数} */
+  /** 取消任务 {@link V20200608.CancelTaskRequest} {@link V20200608.CancelTaskResponse} */
   CancelTask(data: V20200608.CancelTaskRequest, config: AxiosRequestConfig & V20200608.VersionHeader): AxiosPromise<V20200608.CancelTaskResponse>;
-  /** {@link V20200608.CreateAudioModerationTask 创建音频审核任务}({@link V20200608.CreateAudioModerationTaskRequest 请求参数}): {@link V20200608.CreateAudioModerationTaskResponse 返回参数} */
+  /** 创建音频审核任务 {@link V20200608.CreateAudioModerationTaskRequest} {@link V20200608.CreateAudioModerationTaskResponse} */
   CreateAudioModerationTask(data: V20200608.CreateAudioModerationTaskRequest, config: AxiosRequestConfig & V20200608.VersionHeader): AxiosPromise<V20200608.CreateAudioModerationTaskResponse>;
-  /** {@link V20200608.CreateBizConfig 创建业务配置}({@link V20200608.CreateBizConfigRequest 请求参数}): {@link V20200608.CreateBizConfigResponse 返回参数} */
+  /** 创建业务配置 {@link V20200608.CreateBizConfigRequest} {@link V20200608.CreateBizConfigResponse} */
   CreateBizConfig(data: V20200608.CreateBizConfigRequest, config: AxiosRequestConfig & V20200608.VersionHeader): AxiosPromise<V20200608.CreateBizConfigResponse>;
-  /** {@link V20200608.DescribeAmsList 获取音频审核明细数据}({@link V20200608.DescribeAmsListRequest 请求参数}): {@link V20200608.DescribeAmsListResponse 返回参数} */
+  /** 获取音频审核明细数据 {@link V20200608.DescribeAmsListRequest} {@link V20200608.DescribeAmsListResponse} */
   DescribeAmsList(data: V20200608.DescribeAmsListRequest, config: AxiosRequestConfig & V20200608.VersionHeader): AxiosPromise<V20200608.DescribeAmsListResponse>;
-  /** {@link V20200608.DescribeAudioStat 识别统计}({@link V20200608.DescribeAudioStatRequest 请求参数}): {@link V20200608.DescribeAudioStatResponse 返回参数} */
+  /** 识别统计 {@link V20200608.DescribeAudioStatRequest} {@link V20200608.DescribeAudioStatResponse} */
   DescribeAudioStat(data: V20200608.DescribeAudioStatRequest, config: AxiosRequestConfig & V20200608.VersionHeader): AxiosPromise<V20200608.DescribeAudioStatResponse>;
-  /** {@link V20200608.DescribeBizConfig 查看单个配置}({@link V20200608.DescribeBizConfigRequest 请求参数}): {@link V20200608.DescribeBizConfigResponse 返回参数} */
+  /** 查看单个配置 {@link V20200608.DescribeBizConfigRequest} {@link V20200608.DescribeBizConfigResponse} */
   DescribeBizConfig(data: V20200608.DescribeBizConfigRequest, config: AxiosRequestConfig & V20200608.VersionHeader): AxiosPromise<V20200608.DescribeBizConfigResponse>;
-  /** {@link V20200608.DescribeTaskDetail 查看任务详情}({@link V20200608.DescribeTaskDetailRequest 请求参数}): {@link V20200608.DescribeTaskDetailResponse 返回参数} */
+  /** 查看任务详情 {@link V20200608.DescribeTaskDetailRequest} {@link V20200608.DescribeTaskDetailResponse} */
   DescribeTaskDetail(data: V20200608.DescribeTaskDetailRequest, config: AxiosRequestConfig & V20200608.VersionHeader): AxiosPromise<V20200608.DescribeTaskDetailResponse>;
 }
 

@@ -170,7 +170,7 @@ declare interface CreateAuditRequest {
 declare interface CreateAuditResponse {
   /** 是否创建成功。 */
   IsSuccess: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -194,7 +194,7 @@ declare interface CreateAuditTrackRequest {
 declare interface CreateAuditTrackResponse {
   /** 跟踪集 ID */
   TrackId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -206,7 +206,7 @@ declare interface DeleteAuditRequest {
 declare interface DeleteAuditResponse {
   /** 是否删除成功 */
   IsSuccess: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -216,7 +216,7 @@ declare interface DeleteAuditTrackRequest {
 }
 
 declare interface DeleteAuditTrackResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -252,7 +252,7 @@ declare interface DescribeAuditResponse {
   CmqRegion: string;
   /** 日志前缀。 */
   LogFilePrefix: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -278,7 +278,7 @@ declare interface DescribeAuditTrackResponse {
   CreateTime: string;
   /** 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号 */
   TrackForAllMembers: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -294,7 +294,7 @@ declare interface DescribeAuditTracksResponse {
   Tracks: Tracks[];
   /** 总数目 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -322,7 +322,7 @@ declare interface DescribeEventsResponse {
   Events: Event[] | null;
   /** 此字段已经废弃。翻页请使用ListOver配合NextToken，在ListOver为false进行下一页数据读取。 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -334,7 +334,7 @@ declare interface GetAttributeKeyRequest {
 declare interface GetAttributeKeyResponse {
   /** AttributeKey的有效取值范围 */
   AttributeKeyDetails: AttributeKeyDetail[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -344,7 +344,7 @@ declare interface InquireAuditCreditRequest {
 declare interface InquireAuditCreditResponse {
   /** 可创建跟踪集的数量 */
   AuditAmount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -354,7 +354,7 @@ declare interface ListAuditsRequest {
 declare interface ListAuditsResponse {
   /** 查询跟踪集概要集合 */
   AuditSummarys: AuditSummary[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -366,7 +366,7 @@ declare interface ListCmqEnableRegionRequest {
 declare interface ListCmqEnableRegionResponse {
   /** 云审计支持的cmq的可用区 */
   EnableRegions: CmqRegionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -378,7 +378,7 @@ declare interface ListCosEnableRegionRequest {
 declare interface ListCosEnableRegionResponse {
   /** 云审计支持的cos可用区 */
   EnableRegions: CosRegionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -396,7 +396,7 @@ declare interface ListKeyAliasByRegionResponse {
   TotalCount: number;
   /** 密钥别名 */
   KeyMetadatas: KeyMetadata[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -422,7 +422,7 @@ declare interface LookUpEventsResponse {
   Events: Event[] | null;
   /** 日志集合是否结束 */
   ListOver: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -446,7 +446,7 @@ declare interface ModifyAuditTrackRequest {
 }
 
 declare interface ModifyAuditTrackResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -458,7 +458,7 @@ declare interface StartLoggingRequest {
 declare interface StartLoggingResponse {
   /** 是否开启成功 */
   IsSuccess: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -470,7 +470,7 @@ declare interface StopLoggingRequest {
 declare interface StopLoggingResponse {
   /** 是否关闭成功 */
   IsSuccess: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -506,50 +506,50 @@ declare interface UpdateAuditRequest {
 declare interface UpdateAuditResponse {
   /** 是否更新成功 */
   IsSuccess: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cloudaudit 云审计} */
 declare interface Cloudaudit {
   (): Versions;
-  /** {@link CreateAudit 创建跟踪集}({@link CreateAuditRequest 请求参数}): {@link CreateAuditResponse 返回参数} */
+  /** 创建跟踪集 {@link CreateAuditRequest} {@link CreateAuditResponse} */
   CreateAudit(data: CreateAuditRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditResponse>;
-  /** {@link CreateAuditTrack 创建云审计跟踪集}({@link CreateAuditTrackRequest 请求参数}): {@link CreateAuditTrackResponse 返回参数} */
+  /** 创建云审计跟踪集 {@link CreateAuditTrackRequest} {@link CreateAuditTrackResponse} */
   CreateAuditTrack(data: CreateAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditTrackResponse>;
-  /** {@link DeleteAudit 删除跟踪集}({@link DeleteAuditRequest 请求参数}): {@link DeleteAuditResponse 返回参数} */
+  /** 删除跟踪集 {@link DeleteAuditRequest} {@link DeleteAuditResponse} */
   DeleteAudit(data: DeleteAuditRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditResponse>;
-  /** {@link DeleteAuditTrack 删除云审计跟踪集}({@link DeleteAuditTrackRequest 请求参数}): {@link DeleteAuditTrackResponse 返回参数} */
+  /** 删除云审计跟踪集 {@link DeleteAuditTrackRequest} {@link DeleteAuditTrackResponse} */
   DeleteAuditTrack(data: DeleteAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditTrackResponse>;
-  /** {@link DescribeAudit 查询跟踪集详情}({@link DescribeAuditRequest 请求参数}): {@link DescribeAuditResponse 返回参数} */
+  /** 查询跟踪集详情 {@link DescribeAuditRequest} {@link DescribeAuditResponse} */
   DescribeAudit(data: DescribeAuditRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditResponse>;
-  /** {@link DescribeAuditTrack 查询云审计跟踪集详情}({@link DescribeAuditTrackRequest 请求参数}): {@link DescribeAuditTrackResponse 返回参数} */
+  /** 查询云审计跟踪集详情 {@link DescribeAuditTrackRequest} {@link DescribeAuditTrackResponse} */
   DescribeAuditTrack(data: DescribeAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditTrackResponse>;
-  /** {@link DescribeAuditTracks 查询云审计跟踪集列表}({@link DescribeAuditTracksRequest 请求参数}): {@link DescribeAuditTracksResponse 返回参数} */
+  /** 查询云审计跟踪集列表 {@link DescribeAuditTracksRequest} {@link DescribeAuditTracksResponse} */
   DescribeAuditTracks(data: DescribeAuditTracksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditTracksResponse>;
-  /** {@link DescribeEvents 查询云审计日志}({@link DescribeEventsRequest 请求参数}): {@link DescribeEventsResponse 返回参数} */
+  /** 查询云审计日志 {@link DescribeEventsRequest} {@link DescribeEventsResponse} */
   DescribeEvents(data: DescribeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsResponse>;
-  /** {@link GetAttributeKey 查询AttributeKey的有效取值范围}({@link GetAttributeKeyRequest 请求参数}): {@link GetAttributeKeyResponse 返回参数} */
+  /** 查询AttributeKey的有效取值范围 {@link GetAttributeKeyRequest} {@link GetAttributeKeyResponse} */
   GetAttributeKey(data?: GetAttributeKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttributeKeyResponse>;
-  /** {@link InquireAuditCredit 查询用户可创建跟踪集的数量}({@link InquireAuditCreditRequest 请求参数}): {@link InquireAuditCreditResponse 返回参数} */
+  /** 查询用户可创建跟踪集的数量 {@link InquireAuditCreditRequest} {@link InquireAuditCreditResponse} */
   InquireAuditCredit(data?: InquireAuditCreditRequest, config?: AxiosRequestConfig): AxiosPromise<InquireAuditCreditResponse>;
-  /** {@link ListAudits 查询跟踪集概要}({@link ListAuditsRequest 请求参数}): {@link ListAuditsResponse 返回参数} */
+  /** 查询跟踪集概要 {@link ListAuditsRequest} {@link ListAuditsResponse} */
   ListAudits(data?: ListAuditsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAuditsResponse>;
-  /** {@link ListCmqEnableRegion 查询云审计支持的cmq的可用区}({@link ListCmqEnableRegionRequest 请求参数}): {@link ListCmqEnableRegionResponse 返回参数} */
+  /** 查询云审计支持的cmq的可用区 {@link ListCmqEnableRegionRequest} {@link ListCmqEnableRegionResponse} */
   ListCmqEnableRegion(data?: ListCmqEnableRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ListCmqEnableRegionResponse>;
-  /** {@link ListCosEnableRegion 查询云审计支持的cos可用区}({@link ListCosEnableRegionRequest 请求参数}): {@link ListCosEnableRegionResponse 返回参数} */
+  /** 查询云审计支持的cos可用区 {@link ListCosEnableRegionRequest} {@link ListCosEnableRegionResponse} */
   ListCosEnableRegion(data?: ListCosEnableRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ListCosEnableRegionResponse>;
-  /** {@link ListKeyAliasByRegion 根据地域获取KMS密钥别名}({@link ListKeyAliasByRegionRequest 请求参数}): {@link ListKeyAliasByRegionResponse 返回参数} */
+  /** 根据地域获取KMS密钥别名 {@link ListKeyAliasByRegionRequest} {@link ListKeyAliasByRegionResponse} */
   ListKeyAliasByRegion(data: ListKeyAliasByRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ListKeyAliasByRegionResponse>;
-  /** {@link LookUpEvents 检索日志}({@link LookUpEventsRequest 请求参数}): {@link LookUpEventsResponse 返回参数} */
+  /** 检索日志 {@link LookUpEventsRequest} {@link LookUpEventsResponse} */
   LookUpEvents(data: LookUpEventsRequest, config?: AxiosRequestConfig): AxiosPromise<LookUpEventsResponse>;
-  /** {@link ModifyAuditTrack 修改云审计跟踪}({@link ModifyAuditTrackRequest 请求参数}): {@link ModifyAuditTrackResponse 返回参数} */
+  /** 修改云审计跟踪 {@link ModifyAuditTrackRequest} {@link ModifyAuditTrackResponse} */
   ModifyAuditTrack(data: ModifyAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditTrackResponse>;
-  /** {@link StartLogging 开启跟踪集}({@link StartLoggingRequest 请求参数}): {@link StartLoggingResponse 返回参数} */
+  /** 开启跟踪集 {@link StartLoggingRequest} {@link StartLoggingResponse} */
   StartLogging(data: StartLoggingRequest, config?: AxiosRequestConfig): AxiosPromise<StartLoggingResponse>;
-  /** {@link StopLogging 关闭跟踪集}({@link StopLoggingRequest 请求参数}): {@link StopLoggingResponse 返回参数} */
+  /** 关闭跟踪集 {@link StopLoggingRequest} {@link StopLoggingResponse} */
   StopLogging(data: StopLoggingRequest, config?: AxiosRequestConfig): AxiosPromise<StopLoggingResponse>;
-  /** {@link UpdateAudit 更新跟踪集}({@link UpdateAuditRequest 请求参数}): {@link UpdateAuditResponse 返回参数} */
+  /** 更新跟踪集 {@link UpdateAuditRequest} {@link UpdateAuditResponse} */
   UpdateAudit(data: UpdateAuditRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAuditResponse>;
 }
 

@@ -802,7 +802,7 @@ declare interface BatchDeleteImagePersonalRequest {
 }
 
 declare interface BatchDeleteImagePersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -812,7 +812,7 @@ declare interface BatchDeleteRepositoryPersonalRequest {
 }
 
 declare interface BatchDeleteRepositoryPersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -824,7 +824,7 @@ declare interface CheckInstanceNameRequest {
 declare interface CheckInstanceNameResponse {
   /** 检查结果，true为合法，false为非法 */
   IsValidated?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -838,7 +838,7 @@ declare interface CheckInstanceResponse {
   IsValidated: boolean;
   /** 实例所在的RegionId */
   RegionId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -866,7 +866,7 @@ declare interface CreateApplicationTriggerPersonalRequest {
 }
 
 declare interface CreateApplicationTriggerPersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -890,7 +890,7 @@ declare interface CreateImageAccelerationServiceRequest {
 declare interface CreateImageAccelerationServiceResponse {
   /** 实例Id */
   RegistryId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -904,7 +904,7 @@ declare interface CreateImageLifecyclePersonalRequest {
 }
 
 declare interface CreateImageLifecyclePersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -918,7 +918,7 @@ declare interface CreateImmutableTagRulesRequest {
 }
 
 declare interface CreateImmutableTagRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -932,7 +932,7 @@ declare interface CreateInstanceCustomizedDomainRequest {
 }
 
 declare interface CreateInstanceCustomizedDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -952,7 +952,7 @@ declare interface CreateInstanceRequest {
 declare interface CreateInstanceResponse {
   /** 企业版实例Id */
   RegistryId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -974,7 +974,7 @@ declare interface CreateInstanceTokenResponse {
   ExpTime: number;
   /** 长期凭证的TokenId，短期凭证没有TokenId */
   TokenId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -994,7 +994,7 @@ declare interface CreateInternalEndpointDnsRequest {
 }
 
 declare interface CreateInternalEndpointDnsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1008,7 +1008,7 @@ declare interface CreateMultipleSecurityPolicyRequest {
 declare interface CreateMultipleSecurityPolicyResponse {
   /** 实例Id */
   RegistryId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1018,7 +1018,7 @@ declare interface CreateNamespacePersonalRequest {
 }
 
 declare interface CreateNamespacePersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1034,7 +1034,7 @@ declare interface CreateNamespaceRequest {
 }
 
 declare interface CreateNamespaceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1052,7 +1052,7 @@ declare interface CreateReplicationInstanceRequest {
 declare interface CreateReplicationInstanceResponse {
   /** 企业版复制实例Id */
   ReplicationRegistryId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1066,7 +1066,7 @@ declare interface CreateRepositoryPersonalRequest {
 }
 
 declare interface CreateRepositoryPersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1084,7 +1084,7 @@ declare interface CreateRepositoryRequest {
 }
 
 declare interface CreateRepositoryResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1100,7 +1100,7 @@ declare interface CreateSecurityPolicyRequest {
 declare interface CreateSecurityPolicyResponse {
   /** 实例Id */
   RegistryId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1122,7 +1122,7 @@ declare interface CreateSignaturePolicyRequest {
 }
 
 declare interface CreateSignaturePolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1138,7 +1138,7 @@ declare interface CreateSignatureRequest {
 }
 
 declare interface CreateSignatureResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1152,7 +1152,7 @@ declare interface CreateTagRetentionExecutionRequest {
 }
 
 declare interface CreateTagRetentionExecutionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1170,7 +1170,7 @@ declare interface CreateTagRetentionRuleRequest {
 }
 
 declare interface CreateTagRetentionRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1180,7 +1180,7 @@ declare interface CreateUserPersonalRequest {
 }
 
 declare interface CreateUserPersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1196,7 +1196,7 @@ declare interface CreateWebhookTriggerRequest {
 declare interface CreateWebhookTriggerResponse {
   /** 新建的触发器 */
   Trigger?: WebhookTrigger;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1206,7 +1206,7 @@ declare interface DeleteApplicationTriggerPersonalRequest {
 }
 
 declare interface DeleteApplicationTriggerPersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1216,7 +1216,7 @@ declare interface DeleteImageAccelerateServiceRequest {
 }
 
 declare interface DeleteImageAccelerateServiceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1224,7 +1224,7 @@ declare interface DeleteImageLifecycleGlobalPersonalRequest {
 }
 
 declare interface DeleteImageLifecycleGlobalPersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1234,7 +1234,7 @@ declare interface DeleteImageLifecyclePersonalRequest {
 }
 
 declare interface DeleteImageLifecyclePersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1246,7 +1246,7 @@ declare interface DeleteImagePersonalRequest {
 }
 
 declare interface DeleteImagePersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1262,7 +1262,7 @@ declare interface DeleteImageRequest {
 }
 
 declare interface DeleteImageResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1276,7 +1276,7 @@ declare interface DeleteImmutableTagRulesRequest {
 }
 
 declare interface DeleteImmutableTagRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1290,7 +1290,7 @@ declare interface DeleteInstanceCustomizedDomainRequest {
 }
 
 declare interface DeleteInstanceCustomizedDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1304,7 +1304,7 @@ declare interface DeleteInstanceRequest {
 }
 
 declare interface DeleteInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1316,7 +1316,7 @@ declare interface DeleteInstanceTokenRequest {
 }
 
 declare interface DeleteInstanceTokenResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1334,7 +1334,7 @@ declare interface DeleteInternalEndpointDnsRequest {
 }
 
 declare interface DeleteInternalEndpointDnsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1348,7 +1348,7 @@ declare interface DeleteMultipleSecurityPolicyRequest {
 declare interface DeleteMultipleSecurityPolicyResponse {
   /** 实例Id */
   RegistryId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1358,7 +1358,7 @@ declare interface DeleteNamespacePersonalRequest {
 }
 
 declare interface DeleteNamespacePersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1370,7 +1370,7 @@ declare interface DeleteNamespaceRequest {
 }
 
 declare interface DeleteNamespaceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1384,7 +1384,7 @@ declare interface DeleteReplicationInstanceRequest {
 }
 
 declare interface DeleteReplicationInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1394,7 +1394,7 @@ declare interface DeleteRepositoryPersonalRequest {
 }
 
 declare interface DeleteRepositoryPersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1408,7 +1408,7 @@ declare interface DeleteRepositoryRequest {
 }
 
 declare interface DeleteRepositoryResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1424,7 +1424,7 @@ declare interface DeleteRepositoryTagsRequest {
 }
 
 declare interface DeleteRepositoryTagsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1440,7 +1440,7 @@ declare interface DeleteSecurityPolicyRequest {
 declare interface DeleteSecurityPolicyResponse {
   /** 实例Id */
   RegistryId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1452,7 +1452,7 @@ declare interface DeleteSignaturePolicyRequest {
 }
 
 declare interface DeleteSignaturePolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1464,7 +1464,7 @@ declare interface DeleteTagRetentionRuleRequest {
 }
 
 declare interface DeleteTagRetentionRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1478,7 +1478,7 @@ declare interface DeleteWebhookTriggerRequest {
 }
 
 declare interface DeleteWebhookTriggerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1498,7 +1498,7 @@ declare interface DescribeApplicationTriggerLogPersonalRequest {
 declare interface DescribeApplicationTriggerLogPersonalResponse {
   /** 触发日志返回值 */
   Data?: DescribeApplicationTriggerLogPersonalResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1516,7 +1516,7 @@ declare interface DescribeApplicationTriggerPersonalRequest {
 declare interface DescribeApplicationTriggerPersonalResponse {
   /** 触发器列表返回值 */
   Data?: DescribeApplicationTriggerPersonalResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1534,7 +1534,7 @@ declare interface DescribeChartDownloadInfoRequest {
 declare interface DescribeChartDownloadInfoResponse {
   /** 用于下载的url的预签名地址 */
   PreSignedDownloadURL: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1548,7 +1548,7 @@ declare interface DescribeExternalEndpointStatusResponse {
   Status: string;
   /** 原因 */
   Reason: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1564,7 +1564,7 @@ declare interface DescribeFavorRepositoryPersonalRequest {
 declare interface DescribeFavorRepositoryPersonalResponse {
   /** 个人收藏仓库列表返回信息 */
   Data?: FavorResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1576,7 +1576,7 @@ declare interface DescribeGCJobsRequest {
 declare interface DescribeGCJobsResponse {
   /** GC Job 列表 */
   Jobs: GCJobInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1592,7 +1592,7 @@ declare interface DescribeImageAccelerateServiceResponse {
   CFSVIP?: string;
   /** 是否开通 */
   IsEnable?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1606,7 +1606,7 @@ declare interface DescribeImageFilterPersonalRequest {
 declare interface DescribeImageFilterPersonalResponse {
   /** 返回tag镜像内容相同的tag列表 */
   Data: SameImagesResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1616,7 +1616,7 @@ declare interface DescribeImageLifecycleGlobalPersonalRequest {
 declare interface DescribeImageLifecycleGlobalPersonalResponse {
   /** 全局自动删除策略信息 */
   Data?: AutoDelStrategyInfoResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1628,7 +1628,7 @@ declare interface DescribeImageLifecyclePersonalRequest {
 declare interface DescribeImageLifecyclePersonalResponse {
   /** 自动删除策略信息 */
   Data?: AutoDelStrategyInfoResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1648,7 +1648,7 @@ declare interface DescribeImageManifestsResponse {
   Manifest?: string;
   /** 镜像的配置信息 */
   Config?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1666,7 +1666,7 @@ declare interface DescribeImagePersonalRequest {
 declare interface DescribeImagePersonalResponse {
   /** 镜像tag信息 */
   Data?: TagInfoResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1694,7 +1694,7 @@ declare interface DescribeImagesResponse {
   ImageInfoList: TcrImageInfo[];
   /** 容器镜像总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1710,7 +1710,7 @@ declare interface DescribeImmutableTagRulesResponse {
   EmptyNs: string[] | null;
   /** 规则总量 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1722,7 +1722,7 @@ declare interface DescribeInstanceAllNamespacesRequest {
 }
 
 declare interface DescribeInstanceAllNamespacesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1744,7 +1744,7 @@ declare interface DescribeInstanceAllResponse {
   TotalCount: number;
   /** 实例信息列表 */
   Registries: Registry[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1762,7 +1762,7 @@ declare interface DescribeInstanceCustomizedDomainResponse {
   DomainInfoList: CustomizedDomainInfo[] | null;
   /** 总个数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1774,7 +1774,7 @@ declare interface DescribeInstanceStatusRequest {
 declare interface DescribeInstanceStatusResponse {
   /** 实例的状态列表 */
   RegistryStatusSet?: RegistryStatus[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1792,7 +1792,7 @@ declare interface DescribeInstanceTokenResponse {
   TotalCount?: number;
   /** 长期访问凭证列表 */
   Tokens?: TcrInstanceToken[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1814,7 +1814,7 @@ declare interface DescribeInstancesResponse {
   TotalCount?: number;
   /** 实例信息列表 */
   Registries?: Registry[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1826,7 +1826,7 @@ declare interface DescribeInternalEndpointDnsStatusRequest {
 declare interface DescribeInternalEndpointDnsStatusResponse {
   /** vpc私有域名解析状态列表 */
   VpcSet: VpcPrivateDomainStatus[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1840,7 +1840,7 @@ declare interface DescribeInternalEndpointsResponse {
   AccessVpcSet: AccessVpc[] | null;
   /** 内网接入总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1856,7 +1856,7 @@ declare interface DescribeNamespacePersonalRequest {
 declare interface DescribeNamespacePersonalResponse {
   /** 用户命名空间返回信息 */
   Data?: NamespaceInfoResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1882,7 +1882,7 @@ declare interface DescribeNamespacesResponse {
   NamespaceList: TcrNamespaceInfo[];
   /** 总个数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1894,7 +1894,7 @@ declare interface DescribeRegionsResponse {
   TotalCount?: number;
   /** 地域信息列表 */
   Regions?: Region[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1910,7 +1910,7 @@ declare interface DescribeReplicationInstanceCreateTasksResponse {
   TaskDetail: TaskDetail[];
   /** 整体任务状态 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1936,7 +1936,7 @@ declare interface DescribeReplicationInstanceSyncStatusResponse {
   ReplicationTime: string;
   /** 同步日志 */
   ReplicationLog: ReplicationLog | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1954,7 +1954,7 @@ declare interface DescribeReplicationInstancesResponse {
   TotalCount: number;
   /** 同步实例列表 */
   ReplicationRegistries: ReplicationRegistry[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1978,7 +1978,7 @@ declare interface DescribeRepositoriesResponse {
   RepositoryList?: TcrRepositoryInfo[];
   /** 总个数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1998,7 +1998,7 @@ declare interface DescribeRepositoryFilterPersonalRequest {
 declare interface DescribeRepositoryFilterPersonalResponse {
   /** 仓库信息 */
   Data?: SearchUserRepositoryResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2014,7 +2014,7 @@ declare interface DescribeRepositoryOwnerPersonalRequest {
 declare interface DescribeRepositoryOwnerPersonalResponse {
   /** 仓库信息 */
   Data?: RepoInfoResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2026,7 +2026,7 @@ declare interface DescribeRepositoryPersonalRequest {
 declare interface DescribeRepositoryPersonalResponse {
   /** 仓库信息 */
   Data?: RepositoryInfoResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2038,7 +2038,7 @@ declare interface DescribeSecurityPoliciesRequest {
 declare interface DescribeSecurityPoliciesResponse {
   /** 实例安全策略组 */
   SecurityPolicySet: SecurityPolicy[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2058,7 +2058,7 @@ declare interface DescribeTagRetentionExecutionResponse {
   RetentionExecutionList: RetentionExecution[];
   /** 版本保留执行记录总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2080,7 +2080,7 @@ declare interface DescribeTagRetentionExecutionTaskResponse {
   RetentionTaskList: RetentionTask[];
   /** 版本保留执行任务总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2100,7 +2100,7 @@ declare interface DescribeTagRetentionRulesResponse {
   RetentionPolicyList: RetentionPolicy[];
   /** 版本保留策略总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2110,7 +2110,7 @@ declare interface DescribeUserQuotaPersonalRequest {
 declare interface DescribeUserQuotaPersonalResponse {
   /** 配额返回信息 */
   Data?: RespLimit;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2132,7 +2132,7 @@ declare interface DescribeWebhookTriggerLogResponse {
   TotalCount?: number;
   /** 日志列表 */
   Logs?: WebhookTriggerLog[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2152,7 +2152,7 @@ declare interface DescribeWebhookTriggerResponse {
   TotalCount: number;
   /** 触发器列表 */
   Triggers: WebhookTrigger[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2184,7 +2184,7 @@ declare interface DownloadHelmChartResponse {
   StartTime: number;
   /** token过期时间时间戳 */
   ExpiredTime: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2198,7 +2198,7 @@ declare interface DuplicateImagePersonalRequest {
 declare interface DuplicateImagePersonalResponse {
   /** 复制镜像返回值 */
   Data: DupImageTagResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2212,7 +2212,7 @@ declare interface ManageExternalEndpointRequest {
 declare interface ManageExternalEndpointResponse {
   /** 实例Id */
   RegistryId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2224,7 +2224,7 @@ declare interface ManageImageLifecycleGlobalPersonalRequest {
 }
 
 declare interface ManageImageLifecycleGlobalPersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2246,7 +2246,7 @@ declare interface ManageInternalEndpointRequest {
 declare interface ManageInternalEndpointResponse {
   /** 实例Id */
   RegistryId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2266,7 +2266,7 @@ declare interface ManageReplicationRequest {
 }
 
 declare interface ManageReplicationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2296,7 +2296,7 @@ declare interface ModifyApplicationTriggerPersonalRequest {
 }
 
 declare interface ModifyApplicationTriggerPersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2312,7 +2312,7 @@ declare interface ModifyImmutableTagRulesRequest {
 }
 
 declare interface ModifyImmutableTagRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2324,7 +2324,7 @@ declare interface ModifyInstanceRequest {
 }
 
 declare interface ModifyInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2342,7 +2342,7 @@ declare interface ModifyInstanceTokenRequest {
 }
 
 declare interface ModifyInstanceTokenResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2356,7 +2356,7 @@ declare interface ModifyNamespaceRequest {
 }
 
 declare interface ModifyNamespaceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2368,7 +2368,7 @@ declare interface ModifyRepositoryAccessPersonalRequest {
 }
 
 declare interface ModifyRepositoryAccessPersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2380,7 +2380,7 @@ declare interface ModifyRepositoryInfoPersonalRequest {
 }
 
 declare interface ModifyRepositoryInfoPersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2398,7 +2398,7 @@ declare interface ModifyRepositoryRequest {
 }
 
 declare interface ModifyRepositoryResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2416,7 +2416,7 @@ declare interface ModifySecurityPolicyRequest {
 declare interface ModifySecurityPolicyResponse {
   /** 实例Id */
   RegistryId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2436,7 +2436,7 @@ declare interface ModifyTagRetentionRuleRequest {
 }
 
 declare interface ModifyTagRetentionRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2446,7 +2446,7 @@ declare interface ModifyUserPasswordPersonalRequest {
 }
 
 declare interface ModifyUserPasswordPersonalResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2460,7 +2460,7 @@ declare interface ModifyWebhookTriggerRequest {
 }
 
 declare interface ModifyWebhookTriggerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2476,7 +2476,7 @@ declare interface RenewInstanceRequest {
 declare interface RenewInstanceResponse {
   /** 企业版实例Id */
   RegistryId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2488,7 +2488,7 @@ declare interface ValidateNamespaceExistPersonalRequest {
 declare interface ValidateNamespaceExistPersonalResponse {
   /** 验证命名空间是否存在返回信息 */
   Data: NamespaceIsExistsResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2500,226 +2500,226 @@ declare interface ValidateRepositoryExistPersonalRequest {
 declare interface ValidateRepositoryExistPersonalResponse {
   /** 验证个人版仓库是否存在返回信息 */
   Data: RepoIsExistResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tcr 容器镜像服务} */
 declare interface Tcr {
   (): Versions;
-  /** {@link BatchDeleteImagePersonal 个人版镜像仓库批量删除Tag}({@link BatchDeleteImagePersonalRequest 请求参数}): {@link BatchDeleteImagePersonalResponse 返回参数} */
+  /** 个人版镜像仓库批量删除Tag {@link BatchDeleteImagePersonalRequest} {@link BatchDeleteImagePersonalResponse} */
   BatchDeleteImagePersonal(data: BatchDeleteImagePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteImagePersonalResponse>;
-  /** {@link BatchDeleteRepositoryPersonal 批量删除个人版仓库}({@link BatchDeleteRepositoryPersonalRequest 请求参数}): {@link BatchDeleteRepositoryPersonalResponse 返回参数} */
+  /** 批量删除个人版仓库 {@link BatchDeleteRepositoryPersonalRequest} {@link BatchDeleteRepositoryPersonalResponse} */
   BatchDeleteRepositoryPersonal(data: BatchDeleteRepositoryPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteRepositoryPersonalResponse>;
-  /** {@link CheckInstance 校验实例信息}({@link CheckInstanceRequest 请求参数}): {@link CheckInstanceResponse 返回参数} */
+  /** 校验实例信息 {@link CheckInstanceRequest} {@link CheckInstanceResponse} */
   CheckInstance(data: CheckInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CheckInstanceResponse>;
-  /** {@link CheckInstanceName 检查待创建的实例名称是否符合规范}({@link CheckInstanceNameRequest 请求参数}): {@link CheckInstanceNameResponse 返回参数} */
+  /** 检查待创建的实例名称是否符合规范 {@link CheckInstanceNameRequest} {@link CheckInstanceNameResponse} */
   CheckInstanceName(data: CheckInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckInstanceNameResponse>;
-  /** {@link CreateApplicationTriggerPersonal 创建应用更新触发器}({@link CreateApplicationTriggerPersonalRequest 请求参数}): {@link CreateApplicationTriggerPersonalResponse 返回参数} */
+  /** 创建应用更新触发器 {@link CreateApplicationTriggerPersonalRequest} {@link CreateApplicationTriggerPersonalResponse} */
   CreateApplicationTriggerPersonal(data: CreateApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationTriggerPersonalResponse>;
-  /** {@link CreateImageAccelerationService 创建镜像加速服务}({@link CreateImageAccelerationServiceRequest 请求参数}): {@link CreateImageAccelerationServiceResponse 返回参数} */
+  /** 创建镜像加速服务 {@link CreateImageAccelerationServiceRequest} {@link CreateImageAccelerationServiceResponse} */
   CreateImageAccelerationService(data: CreateImageAccelerationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageAccelerationServiceResponse>;
-  /** {@link CreateImageLifecyclePersonal 创建个人版镜像版本清理策略}({@link CreateImageLifecyclePersonalRequest 请求参数}): {@link CreateImageLifecyclePersonalResponse 返回参数} */
+  /** 创建个人版镜像版本清理策略 {@link CreateImageLifecyclePersonalRequest} {@link CreateImageLifecyclePersonalResponse} */
   CreateImageLifecyclePersonal(data: CreateImageLifecyclePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageLifecyclePersonalResponse>;
-  /** {@link CreateImmutableTagRules 创建镜像不可变规则}({@link CreateImmutableTagRulesRequest 请求参数}): {@link CreateImmutableTagRulesResponse 返回参数} */
+  /** 创建镜像不可变规则 {@link CreateImmutableTagRulesRequest} {@link CreateImmutableTagRulesResponse} */
   CreateImmutableTagRules(data: CreateImmutableTagRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImmutableTagRulesResponse>;
-  /** {@link CreateInstance 创建实例}({@link CreateInstanceRequest 请求参数}): {@link CreateInstanceResponse 返回参数} */
+  /** 创建实例 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
-  /** {@link CreateInstanceCustomizedDomain 创建自定义域名}({@link CreateInstanceCustomizedDomainRequest 请求参数}): {@link CreateInstanceCustomizedDomainResponse 返回参数} */
+  /** 创建自定义域名 {@link CreateInstanceCustomizedDomainRequest} {@link CreateInstanceCustomizedDomainResponse} */
   CreateInstanceCustomizedDomain(data: CreateInstanceCustomizedDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceCustomizedDomainResponse>;
-  /** {@link CreateInstanceToken 创建实例访问凭证}({@link CreateInstanceTokenRequest 请求参数}): {@link CreateInstanceTokenResponse 返回参数} */
+  /** 创建实例访问凭证 {@link CreateInstanceTokenRequest} {@link CreateInstanceTokenResponse} */
   CreateInstanceToken(data: CreateInstanceTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceTokenResponse>;
-  /** {@link CreateInternalEndpointDns 创建私有域名解析}({@link CreateInternalEndpointDnsRequest 请求参数}): {@link CreateInternalEndpointDnsResponse 返回参数} */
+  /** 创建私有域名解析 {@link CreateInternalEndpointDnsRequest} {@link CreateInternalEndpointDnsResponse} */
   CreateInternalEndpointDns(data: CreateInternalEndpointDnsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInternalEndpointDnsResponse>;
-  /** {@link CreateMultipleSecurityPolicy 创建实例公网访问多白名单策略}({@link CreateMultipleSecurityPolicyRequest 请求参数}): {@link CreateMultipleSecurityPolicyResponse 返回参数} */
+  /** 创建实例公网访问多白名单策略 {@link CreateMultipleSecurityPolicyRequest} {@link CreateMultipleSecurityPolicyResponse} */
   CreateMultipleSecurityPolicy(data: CreateMultipleSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultipleSecurityPolicyResponse>;
-  /** {@link CreateNamespace 创建命名空间}({@link CreateNamespaceRequest 请求参数}): {@link CreateNamespaceResponse 返回参数} */
+  /** 创建命名空间 {@link CreateNamespaceRequest} {@link CreateNamespaceResponse} */
   CreateNamespace(data: CreateNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNamespaceResponse>;
-  /** {@link CreateNamespacePersonal 创建个人版命名空间}({@link CreateNamespacePersonalRequest 请求参数}): {@link CreateNamespacePersonalResponse 返回参数} */
+  /** 创建个人版命名空间 {@link CreateNamespacePersonalRequest} {@link CreateNamespacePersonalResponse} */
   CreateNamespacePersonal(data: CreateNamespacePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNamespacePersonalResponse>;
-  /** {@link CreateReplicationInstance 创建从实例}({@link CreateReplicationInstanceRequest 请求参数}): {@link CreateReplicationInstanceResponse 返回参数} */
+  /** 创建从实例 {@link CreateReplicationInstanceRequest} {@link CreateReplicationInstanceResponse} */
   CreateReplicationInstance(data: CreateReplicationInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReplicationInstanceResponse>;
-  /** {@link CreateRepository 创建镜像仓库}({@link CreateRepositoryRequest 请求参数}): {@link CreateRepositoryResponse 返回参数} */
+  /** 创建镜像仓库 {@link CreateRepositoryRequest} {@link CreateRepositoryResponse} */
   CreateRepository(data: CreateRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRepositoryResponse>;
-  /** {@link CreateRepositoryPersonal 创建个人版镜像仓库}({@link CreateRepositoryPersonalRequest 请求参数}): {@link CreateRepositoryPersonalResponse 返回参数} */
+  /** 创建个人版镜像仓库 {@link CreateRepositoryPersonalRequest} {@link CreateRepositoryPersonalResponse} */
   CreateRepositoryPersonal(data: CreateRepositoryPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRepositoryPersonalResponse>;
-  /** {@link CreateSecurityPolicy 创建实例公网访问白名单策略}({@link CreateSecurityPolicyRequest 请求参数}): {@link CreateSecurityPolicyResponse 返回参数} */
+  /** 创建实例公网访问白名单策略 {@link CreateSecurityPolicyRequest} {@link CreateSecurityPolicyResponse} */
   CreateSecurityPolicy(data: CreateSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityPolicyResponse>;
-  /** {@link CreateSignature 创建镜像签名}({@link CreateSignatureRequest 请求参数}): {@link CreateSignatureResponse 返回参数} */
+  /** 创建镜像签名 {@link CreateSignatureRequest} {@link CreateSignatureResponse} */
   CreateSignature(data: CreateSignatureRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignatureResponse>;
-  /** {@link CreateSignaturePolicy 创建签名策略}({@link CreateSignaturePolicyRequest 请求参数}): {@link CreateSignaturePolicyResponse 返回参数} */
+  /** 创建签名策略 {@link CreateSignaturePolicyRequest} {@link CreateSignaturePolicyResponse} */
   CreateSignaturePolicy(data: CreateSignaturePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignaturePolicyResponse>;
-  /** {@link CreateTagRetentionExecution 手动执行版本保留}({@link CreateTagRetentionExecutionRequest 请求参数}): {@link CreateTagRetentionExecutionResponse 返回参数} */
+  /** 手动执行版本保留 {@link CreateTagRetentionExecutionRequest} {@link CreateTagRetentionExecutionResponse} */
   CreateTagRetentionExecution(data: CreateTagRetentionExecutionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTagRetentionExecutionResponse>;
-  /** {@link CreateTagRetentionRule 创建版本保留规则}({@link CreateTagRetentionRuleRequest 请求参数}): {@link CreateTagRetentionRuleResponse 返回参数} */
+  /** 创建版本保留规则 {@link CreateTagRetentionRuleRequest} {@link CreateTagRetentionRuleResponse} */
   CreateTagRetentionRule(data: CreateTagRetentionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTagRetentionRuleResponse>;
-  /** {@link CreateUserPersonal 创建个人用户}({@link CreateUserPersonalRequest 请求参数}): {@link CreateUserPersonalResponse 返回参数} */
+  /** 创建个人用户 {@link CreateUserPersonalRequest} {@link CreateUserPersonalResponse} */
   CreateUserPersonal(data: CreateUserPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserPersonalResponse>;
-  /** {@link CreateWebhookTrigger 创建触发器}({@link CreateWebhookTriggerRequest 请求参数}): {@link CreateWebhookTriggerResponse 返回参数} */
+  /** 创建触发器 {@link CreateWebhookTriggerRequest} {@link CreateWebhookTriggerResponse} */
   CreateWebhookTrigger(data: CreateWebhookTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebhookTriggerResponse>;
-  /** {@link DeleteApplicationTriggerPersonal 删除应用更新触发器}({@link DeleteApplicationTriggerPersonalRequest 请求参数}): {@link DeleteApplicationTriggerPersonalResponse 返回参数} */
+  /** 删除应用更新触发器 {@link DeleteApplicationTriggerPersonalRequest} {@link DeleteApplicationTriggerPersonalResponse} */
   DeleteApplicationTriggerPersonal(data: DeleteApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationTriggerPersonalResponse>;
-  /** {@link DeleteImage 删除指定镜像}({@link DeleteImageRequest 请求参数}): {@link DeleteImageResponse 返回参数} */
+  /** 删除指定镜像 {@link DeleteImageRequest} {@link DeleteImageResponse} */
   DeleteImage(data: DeleteImageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageResponse>;
-  /** {@link DeleteImageAccelerateService 删除镜像加速服务}({@link DeleteImageAccelerateServiceRequest 请求参数}): {@link DeleteImageAccelerateServiceResponse 返回参数} */
+  /** 删除镜像加速服务 {@link DeleteImageAccelerateServiceRequest} {@link DeleteImageAccelerateServiceResponse} */
   DeleteImageAccelerateService(data: DeleteImageAccelerateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageAccelerateServiceResponse>;
-  /** {@link DeleteImageLifecycleGlobalPersonal 删除个人版全局镜像版本自动清理策略}({@link DeleteImageLifecycleGlobalPersonalRequest 请求参数}): {@link DeleteImageLifecycleGlobalPersonalResponse 返回参数} */
+  /** 删除个人版全局镜像版本自动清理策略 {@link DeleteImageLifecycleGlobalPersonalRequest} {@link DeleteImageLifecycleGlobalPersonalResponse} */
   DeleteImageLifecycleGlobalPersonal(data?: DeleteImageLifecycleGlobalPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageLifecycleGlobalPersonalResponse>;
-  /** {@link DeleteImageLifecyclePersonal 删除个人版镜像仓库Tag自动清理策略}({@link DeleteImageLifecyclePersonalRequest 请求参数}): {@link DeleteImageLifecyclePersonalResponse 返回参数} */
+  /** 删除个人版镜像仓库Tag自动清理策略 {@link DeleteImageLifecyclePersonalRequest} {@link DeleteImageLifecyclePersonalResponse} */
   DeleteImageLifecyclePersonal(data: DeleteImageLifecyclePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageLifecyclePersonalResponse>;
-  /** {@link DeleteImagePersonal 删除个人版仓库tag}({@link DeleteImagePersonalRequest 请求参数}): {@link DeleteImagePersonalResponse 返回参数} */
+  /** 删除个人版仓库tag {@link DeleteImagePersonalRequest} {@link DeleteImagePersonalResponse} */
   DeleteImagePersonal(data: DeleteImagePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImagePersonalResponse>;
-  /** {@link DeleteImmutableTagRules 删除镜像不可变规则}({@link DeleteImmutableTagRulesRequest 请求参数}): {@link DeleteImmutableTagRulesResponse 返回参数} */
+  /** 删除镜像不可变规则 {@link DeleteImmutableTagRulesRequest} {@link DeleteImmutableTagRulesResponse} */
   DeleteImmutableTagRules(data: DeleteImmutableTagRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImmutableTagRulesResponse>;
-  /** {@link DeleteInstance 删除实例}({@link DeleteInstanceRequest 请求参数}): {@link DeleteInstanceResponse 返回参数} */
+  /** 删除实例 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
-  /** {@link DeleteInstanceCustomizedDomain 删除自定义域名}({@link DeleteInstanceCustomizedDomainRequest 请求参数}): {@link DeleteInstanceCustomizedDomainResponse 返回参数} */
+  /** 删除自定义域名 {@link DeleteInstanceCustomizedDomainRequest} {@link DeleteInstanceCustomizedDomainResponse} */
   DeleteInstanceCustomizedDomain(data: DeleteInstanceCustomizedDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceCustomizedDomainResponse>;
-  /** {@link DeleteInstanceToken 删除长期访问凭证}({@link DeleteInstanceTokenRequest 请求参数}): {@link DeleteInstanceTokenResponse 返回参数} */
+  /** 删除长期访问凭证 {@link DeleteInstanceTokenRequest} {@link DeleteInstanceTokenResponse} */
   DeleteInstanceToken(data: DeleteInstanceTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceTokenResponse>;
-  /** {@link DeleteInternalEndpointDns 删除私有域名解析}({@link DeleteInternalEndpointDnsRequest 请求参数}): {@link DeleteInternalEndpointDnsResponse 返回参数} */
+  /** 删除私有域名解析 {@link DeleteInternalEndpointDnsRequest} {@link DeleteInternalEndpointDnsResponse} */
   DeleteInternalEndpointDns(data: DeleteInternalEndpointDnsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInternalEndpointDnsResponse>;
-  /** {@link DeleteMultipleSecurityPolicy 删除实例公网访问多白名单策略}({@link DeleteMultipleSecurityPolicyRequest 请求参数}): {@link DeleteMultipleSecurityPolicyResponse 返回参数} */
+  /** 删除实例公网访问多白名单策略 {@link DeleteMultipleSecurityPolicyRequest} {@link DeleteMultipleSecurityPolicyResponse} */
   DeleteMultipleSecurityPolicy(data: DeleteMultipleSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMultipleSecurityPolicyResponse>;
-  /** {@link DeleteNamespace 删除命名空间}({@link DeleteNamespaceRequest 请求参数}): {@link DeleteNamespaceResponse 返回参数} */
+  /** 删除命名空间 {@link DeleteNamespaceRequest} {@link DeleteNamespaceResponse} */
   DeleteNamespace(data: DeleteNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNamespaceResponse>;
-  /** {@link DeleteNamespacePersonal 删除个人版命名空间}({@link DeleteNamespacePersonalRequest 请求参数}): {@link DeleteNamespacePersonalResponse 返回参数} */
+  /** 删除个人版命名空间 {@link DeleteNamespacePersonalRequest} {@link DeleteNamespacePersonalResponse} */
   DeleteNamespacePersonal(data: DeleteNamespacePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNamespacePersonalResponse>;
-  /** {@link DeleteReplicationInstance 删除从实例}({@link DeleteReplicationInstanceRequest 请求参数}): {@link DeleteReplicationInstanceResponse 返回参数} */
+  /** 删除从实例 {@link DeleteReplicationInstanceRequest} {@link DeleteReplicationInstanceResponse} */
   DeleteReplicationInstance(data: DeleteReplicationInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReplicationInstanceResponse>;
-  /** {@link DeleteRepository 删除镜像仓库}({@link DeleteRepositoryRequest 请求参数}): {@link DeleteRepositoryResponse 返回参数} */
+  /** 删除镜像仓库 {@link DeleteRepositoryRequest} {@link DeleteRepositoryResponse} */
   DeleteRepository(data: DeleteRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRepositoryResponse>;
-  /** {@link DeleteRepositoryPersonal 删除个人版镜像仓库}({@link DeleteRepositoryPersonalRequest 请求参数}): {@link DeleteRepositoryPersonalResponse 返回参数} */
+  /** 删除个人版镜像仓库 {@link DeleteRepositoryPersonalRequest} {@link DeleteRepositoryPersonalResponse} */
   DeleteRepositoryPersonal(data: DeleteRepositoryPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRepositoryPersonalResponse>;
-  /** {@link DeleteRepositoryTags 批量删除Repository Tag}({@link DeleteRepositoryTagsRequest 请求参数}): {@link DeleteRepositoryTagsResponse 返回参数} */
+  /** 批量删除Repository Tag {@link DeleteRepositoryTagsRequest} {@link DeleteRepositoryTagsResponse} */
   DeleteRepositoryTags(data: DeleteRepositoryTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRepositoryTagsResponse>;
-  /** {@link DeleteSecurityPolicy 删除实例公网访问白名单策略}({@link DeleteSecurityPolicyRequest 请求参数}): {@link DeleteSecurityPolicyResponse 返回参数} */
+  /** 删除实例公网访问白名单策略 {@link DeleteSecurityPolicyRequest} {@link DeleteSecurityPolicyResponse} */
   DeleteSecurityPolicy(data: DeleteSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityPolicyResponse>;
-  /** {@link DeleteSignaturePolicy 删除命名空间加签策略}({@link DeleteSignaturePolicyRequest 请求参数}): {@link DeleteSignaturePolicyResponse 返回参数} */
+  /** 删除命名空间加签策略 {@link DeleteSignaturePolicyRequest} {@link DeleteSignaturePolicyResponse} */
   DeleteSignaturePolicy(data: DeleteSignaturePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSignaturePolicyResponse>;
-  /** {@link DeleteTagRetentionRule 删除版本保留规则}({@link DeleteTagRetentionRuleRequest 请求参数}): {@link DeleteTagRetentionRuleResponse 返回参数} */
+  /** 删除版本保留规则 {@link DeleteTagRetentionRuleRequest} {@link DeleteTagRetentionRuleResponse} */
   DeleteTagRetentionRule(data: DeleteTagRetentionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTagRetentionRuleResponse>;
-  /** {@link DeleteWebhookTrigger 删除触发器}({@link DeleteWebhookTriggerRequest 请求参数}): {@link DeleteWebhookTriggerResponse 返回参数} */
+  /** 删除触发器 {@link DeleteWebhookTriggerRequest} {@link DeleteWebhookTriggerResponse} */
   DeleteWebhookTrigger(data: DeleteWebhookTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWebhookTriggerResponse>;
-  /** {@link DescribeApplicationTriggerLogPersonal 查询应用更新触发器触发日志}({@link DescribeApplicationTriggerLogPersonalRequest 请求参数}): {@link DescribeApplicationTriggerLogPersonalResponse 返回参数} */
+  /** 查询应用更新触发器触发日志 {@link DescribeApplicationTriggerLogPersonalRequest} {@link DescribeApplicationTriggerLogPersonalResponse} */
   DescribeApplicationTriggerLogPersonal(data?: DescribeApplicationTriggerLogPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationTriggerLogPersonalResponse>;
-  /** {@link DescribeApplicationTriggerPersonal 查询应用更新触发器}({@link DescribeApplicationTriggerPersonalRequest 请求参数}): {@link DescribeApplicationTriggerPersonalResponse 返回参数} */
+  /** 查询应用更新触发器 {@link DescribeApplicationTriggerPersonalRequest} {@link DescribeApplicationTriggerPersonalResponse} */
   DescribeApplicationTriggerPersonal(data?: DescribeApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationTriggerPersonalResponse>;
-  /** {@link DescribeChartDownloadInfo 查询Chart包下载信息}({@link DescribeChartDownloadInfoRequest 请求参数}): {@link DescribeChartDownloadInfoResponse 返回参数} */
+  /** 查询Chart包下载信息 {@link DescribeChartDownloadInfoRequest} {@link DescribeChartDownloadInfoResponse} */
   DescribeChartDownloadInfo(data: DescribeChartDownloadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChartDownloadInfoResponse>;
-  /** {@link DescribeExternalEndpointStatus 查询实例公网访问入口状态}({@link DescribeExternalEndpointStatusRequest 请求参数}): {@link DescribeExternalEndpointStatusResponse 返回参数} */
+  /** 查询实例公网访问入口状态 {@link DescribeExternalEndpointStatusRequest} {@link DescribeExternalEndpointStatusResponse} */
   DescribeExternalEndpointStatus(data: DescribeExternalEndpointStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExternalEndpointStatusResponse>;
-  /** {@link DescribeFavorRepositoryPersonal 查询个人收藏仓库}({@link DescribeFavorRepositoryPersonalRequest 请求参数}): {@link DescribeFavorRepositoryPersonalResponse 返回参数} */
+  /** 查询个人收藏仓库 {@link DescribeFavorRepositoryPersonalRequest} {@link DescribeFavorRepositoryPersonalResponse} */
   DescribeFavorRepositoryPersonal(data: DescribeFavorRepositoryPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFavorRepositoryPersonalResponse>;
-  /** {@link DescribeGCJobs GC 历史}({@link DescribeGCJobsRequest 请求参数}): {@link DescribeGCJobsResponse 返回参数} */
+  /** GC 历史 {@link DescribeGCJobsRequest} {@link DescribeGCJobsResponse} */
   DescribeGCJobs(data: DescribeGCJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGCJobsResponse>;
-  /** {@link DescribeImageAccelerateService 查询镜像加速服务状态}({@link DescribeImageAccelerateServiceRequest 请求参数}): {@link DescribeImageAccelerateServiceResponse 返回参数} */
+  /** 查询镜像加速服务状态 {@link DescribeImageAccelerateServiceRequest} {@link DescribeImageAccelerateServiceResponse} */
   DescribeImageAccelerateService(data: DescribeImageAccelerateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAccelerateServiceResponse>;
-  /** {@link DescribeImageFilterPersonal 查询个人版中与指定tag镜像内容相同的tag列表}({@link DescribeImageFilterPersonalRequest 请求参数}): {@link DescribeImageFilterPersonalResponse 返回参数} */
+  /** 查询个人版中与指定tag镜像内容相同的tag列表 {@link DescribeImageFilterPersonalRequest} {@link DescribeImageFilterPersonalResponse} */
   DescribeImageFilterPersonal(data: DescribeImageFilterPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageFilterPersonalResponse>;
-  /** {@link DescribeImageLifecycleGlobalPersonal 获取个人版全局镜像版本自动清理策略}({@link DescribeImageLifecycleGlobalPersonalRequest 请求参数}): {@link DescribeImageLifecycleGlobalPersonalResponse 返回参数} */
+  /** 获取个人版全局镜像版本自动清理策略 {@link DescribeImageLifecycleGlobalPersonalRequest} {@link DescribeImageLifecycleGlobalPersonalResponse} */
   DescribeImageLifecycleGlobalPersonal(data?: DescribeImageLifecycleGlobalPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageLifecycleGlobalPersonalResponse>;
-  /** {@link DescribeImageLifecyclePersonal 获取个人版仓库自动清理策略}({@link DescribeImageLifecyclePersonalRequest 请求参数}): {@link DescribeImageLifecyclePersonalResponse 返回参数} */
+  /** 获取个人版仓库自动清理策略 {@link DescribeImageLifecyclePersonalRequest} {@link DescribeImageLifecyclePersonalResponse} */
   DescribeImageLifecyclePersonal(data: DescribeImageLifecyclePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageLifecyclePersonalResponse>;
-  /** {@link DescribeImageManifests 查询容器镜像Manifest信息}({@link DescribeImageManifestsRequest 请求参数}): {@link DescribeImageManifestsResponse 返回参数} */
+  /** 查询容器镜像Manifest信息 {@link DescribeImageManifestsRequest} {@link DescribeImageManifestsResponse} */
   DescribeImageManifests(data: DescribeImageManifestsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageManifestsResponse>;
-  /** {@link DescribeImagePersonal 获取个人版镜像仓库tag列表}({@link DescribeImagePersonalRequest 请求参数}): {@link DescribeImagePersonalResponse 返回参数} */
+  /** 获取个人版镜像仓库tag列表 {@link DescribeImagePersonalRequest} {@link DescribeImagePersonalResponse} */
   DescribeImagePersonal(data: DescribeImagePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagePersonalResponse>;
-  /** {@link DescribeImages 查询容器镜像信息}({@link DescribeImagesRequest 请求参数}): {@link DescribeImagesResponse 返回参数} */
+  /** 查询容器镜像信息 {@link DescribeImagesRequest} {@link DescribeImagesResponse} */
   DescribeImages(data: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
-  /** {@link DescribeImmutableTagRules 列出镜像不可变规则}({@link DescribeImmutableTagRulesRequest 请求参数}): {@link DescribeImmutableTagRulesResponse 返回参数} */
+  /** 列出镜像不可变规则 {@link DescribeImmutableTagRulesRequest} {@link DescribeImmutableTagRulesResponse} */
   DescribeImmutableTagRules(data: DescribeImmutableTagRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImmutableTagRulesResponse>;
-  /** {@link DescribeInstanceAll 查询全部实例信息}({@link DescribeInstanceAllRequest 请求参数}): {@link DescribeInstanceAllResponse 返回参数} */
+  /** 查询全部实例信息 {@link DescribeInstanceAllRequest} {@link DescribeInstanceAllResponse} */
   DescribeInstanceAll(data?: DescribeInstanceAllRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAllResponse>;
-  /** {@link DescribeInstanceAllNamespaces 查询所有实例命名空间}({@link DescribeInstanceAllNamespacesRequest 请求参数}): {@link DescribeInstanceAllNamespacesResponse 返回参数} */
+  /** 查询所有实例命名空间 {@link DescribeInstanceAllNamespacesRequest} {@link DescribeInstanceAllNamespacesResponse} */
   DescribeInstanceAllNamespaces(data?: DescribeInstanceAllNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAllNamespacesResponse>;
-  /** {@link DescribeInstanceCustomizedDomain 查询实例自定义域名列表}({@link DescribeInstanceCustomizedDomainRequest 请求参数}): {@link DescribeInstanceCustomizedDomainResponse 返回参数} */
+  /** 查询实例自定义域名列表 {@link DescribeInstanceCustomizedDomainRequest} {@link DescribeInstanceCustomizedDomainResponse} */
   DescribeInstanceCustomizedDomain(data: DescribeInstanceCustomizedDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceCustomizedDomainResponse>;
-  /** {@link DescribeInstanceStatus 查询实例状态}({@link DescribeInstanceStatusRequest 请求参数}): {@link DescribeInstanceStatusResponse 返回参数} */
+  /** 查询实例状态 {@link DescribeInstanceStatusRequest} {@link DescribeInstanceStatusResponse} */
   DescribeInstanceStatus(data: DescribeInstanceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceStatusResponse>;
-  /** {@link DescribeInstanceToken 查询长期访问凭证信息}({@link DescribeInstanceTokenRequest 请求参数}): {@link DescribeInstanceTokenResponse 返回参数} */
+  /** 查询长期访问凭证信息 {@link DescribeInstanceTokenRequest} {@link DescribeInstanceTokenResponse} */
   DescribeInstanceToken(data: DescribeInstanceTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceTokenResponse>;
-  /** {@link DescribeInstances 查询实例信息}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
+  /** 查询实例信息 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** {@link DescribeInternalEndpointDnsStatus 查询私有域名解析状态}({@link DescribeInternalEndpointDnsStatusRequest 请求参数}): {@link DescribeInternalEndpointDnsStatusResponse 返回参数} */
+  /** 查询私有域名解析状态 {@link DescribeInternalEndpointDnsStatusRequest} {@link DescribeInternalEndpointDnsStatusResponse} */
   DescribeInternalEndpointDnsStatus(data: DescribeInternalEndpointDnsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInternalEndpointDnsStatusResponse>;
-  /** {@link DescribeInternalEndpoints 查询实例内网访问VPC链接}({@link DescribeInternalEndpointsRequest 请求参数}): {@link DescribeInternalEndpointsResponse 返回参数} */
+  /** 查询实例内网访问VPC链接 {@link DescribeInternalEndpointsRequest} {@link DescribeInternalEndpointsResponse} */
   DescribeInternalEndpoints(data: DescribeInternalEndpointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInternalEndpointsResponse>;
-  /** {@link DescribeNamespacePersonal 查询个人版命名空间信息}({@link DescribeNamespacePersonalRequest 请求参数}): {@link DescribeNamespacePersonalResponse 返回参数} */
+  /** 查询个人版命名空间信息 {@link DescribeNamespacePersonalRequest} {@link DescribeNamespacePersonalResponse} */
   DescribeNamespacePersonal(data: DescribeNamespacePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNamespacePersonalResponse>;
-  /** {@link DescribeNamespaces 查询命名空间信息}({@link DescribeNamespacesRequest 请求参数}): {@link DescribeNamespacesResponse 返回参数} */
+  /** 查询命名空间信息 {@link DescribeNamespacesRequest} {@link DescribeNamespacesResponse} */
   DescribeNamespaces(data: DescribeNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNamespacesResponse>;
-  /** {@link DescribeRegions 列出TCR可用区域}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
+  /** 列出TCR可用区域 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** {@link DescribeReplicationInstanceCreateTasks 查询创建从实例任务状态}({@link DescribeReplicationInstanceCreateTasksRequest 请求参数}): {@link DescribeReplicationInstanceCreateTasksResponse 返回参数} */
+  /** 查询创建从实例任务状态 {@link DescribeReplicationInstanceCreateTasksRequest} {@link DescribeReplicationInstanceCreateTasksResponse} */
   DescribeReplicationInstanceCreateTasks(data: DescribeReplicationInstanceCreateTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationInstanceCreateTasksResponse>;
-  /** {@link DescribeReplicationInstanceSyncStatus 查询从实例同步状态}({@link DescribeReplicationInstanceSyncStatusRequest 请求参数}): {@link DescribeReplicationInstanceSyncStatusResponse 返回参数} */
+  /** 查询从实例同步状态 {@link DescribeReplicationInstanceSyncStatusRequest} {@link DescribeReplicationInstanceSyncStatusResponse} */
   DescribeReplicationInstanceSyncStatus(data: DescribeReplicationInstanceSyncStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationInstanceSyncStatusResponse>;
-  /** {@link DescribeReplicationInstances 查询从实例列表}({@link DescribeReplicationInstancesRequest 请求参数}): {@link DescribeReplicationInstancesResponse 返回参数} */
+  /** 查询从实例列表 {@link DescribeReplicationInstancesRequest} {@link DescribeReplicationInstancesResponse} */
   DescribeReplicationInstances(data: DescribeReplicationInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationInstancesResponse>;
-  /** {@link DescribeRepositories 查询镜像仓库信息}({@link DescribeRepositoriesRequest 请求参数}): {@link DescribeRepositoriesResponse 返回参数} */
+  /** 查询镜像仓库信息 {@link DescribeRepositoriesRequest} {@link DescribeRepositoriesResponse} */
   DescribeRepositories(data: DescribeRepositoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoriesResponse>;
-  /** {@link DescribeRepositoryFilterPersonal 获取满足输入搜索条件的个人版镜像仓库}({@link DescribeRepositoryFilterPersonalRequest 请求参数}): {@link DescribeRepositoryFilterPersonalResponse 返回参数} */
+  /** 获取满足输入搜索条件的个人版镜像仓库 {@link DescribeRepositoryFilterPersonalRequest} {@link DescribeRepositoryFilterPersonalResponse} */
   DescribeRepositoryFilterPersonal(data?: DescribeRepositoryFilterPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryFilterPersonalResponse>;
-  /** {@link DescribeRepositoryOwnerPersonal 查询个人版所有仓库}({@link DescribeRepositoryOwnerPersonalRequest 请求参数}): {@link DescribeRepositoryOwnerPersonalResponse 返回参数} */
+  /** 查询个人版所有仓库 {@link DescribeRepositoryOwnerPersonalRequest} {@link DescribeRepositoryOwnerPersonalResponse} */
   DescribeRepositoryOwnerPersonal(data?: DescribeRepositoryOwnerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryOwnerPersonalResponse>;
-  /** {@link DescribeRepositoryPersonal 查询个人版仓库信息}({@link DescribeRepositoryPersonalRequest 请求参数}): {@link DescribeRepositoryPersonalResponse 返回参数} */
+  /** 查询个人版仓库信息 {@link DescribeRepositoryPersonalRequest} {@link DescribeRepositoryPersonalResponse} */
   DescribeRepositoryPersonal(data: DescribeRepositoryPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryPersonalResponse>;
-  /** {@link DescribeSecurityPolicies 查询实例公网访问白名单策略}({@link DescribeSecurityPoliciesRequest 请求参数}): {@link DescribeSecurityPoliciesResponse 返回参数} */
+  /** 查询实例公网访问白名单策略 {@link DescribeSecurityPoliciesRequest} {@link DescribeSecurityPoliciesResponse} */
   DescribeSecurityPolicies(data: DescribeSecurityPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPoliciesResponse>;
-  /** {@link DescribeTagRetentionExecution 查询版本保留执行记录}({@link DescribeTagRetentionExecutionRequest 请求参数}): {@link DescribeTagRetentionExecutionResponse 返回参数} */
+  /** 查询版本保留执行记录 {@link DescribeTagRetentionExecutionRequest} {@link DescribeTagRetentionExecutionResponse} */
   DescribeTagRetentionExecution(data: DescribeTagRetentionExecutionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagRetentionExecutionResponse>;
-  /** {@link DescribeTagRetentionExecutionTask 查询版本保留执行任务}({@link DescribeTagRetentionExecutionTaskRequest 请求参数}): {@link DescribeTagRetentionExecutionTaskResponse 返回参数} */
+  /** 查询版本保留执行任务 {@link DescribeTagRetentionExecutionTaskRequest} {@link DescribeTagRetentionExecutionTaskResponse} */
   DescribeTagRetentionExecutionTask(data: DescribeTagRetentionExecutionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagRetentionExecutionTaskResponse>;
-  /** {@link DescribeTagRetentionRules 查询版本保留规则}({@link DescribeTagRetentionRulesRequest 请求参数}): {@link DescribeTagRetentionRulesResponse 返回参数} */
+  /** 查询版本保留规则 {@link DescribeTagRetentionRulesRequest} {@link DescribeTagRetentionRulesResponse} */
   DescribeTagRetentionRules(data: DescribeTagRetentionRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagRetentionRulesResponse>;
-  /** {@link DescribeUserQuotaPersonal 查询个人用户配额}({@link DescribeUserQuotaPersonalRequest 请求参数}): {@link DescribeUserQuotaPersonalResponse 返回参数} */
+  /** 查询个人用户配额 {@link DescribeUserQuotaPersonalRequest} {@link DescribeUserQuotaPersonalResponse} */
   DescribeUserQuotaPersonal(data?: DescribeUserQuotaPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotaPersonalResponse>;
-  /** {@link DescribeWebhookTrigger 查询触发器}({@link DescribeWebhookTriggerRequest 请求参数}): {@link DescribeWebhookTriggerResponse 返回参数} */
+  /** 查询触发器 {@link DescribeWebhookTriggerRequest} {@link DescribeWebhookTriggerResponse} */
   DescribeWebhookTrigger(data: DescribeWebhookTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebhookTriggerResponse>;
-  /** {@link DescribeWebhookTriggerLog 获取触发器日志}({@link DescribeWebhookTriggerLogRequest 请求参数}): {@link DescribeWebhookTriggerLogResponse 返回参数} */
+  /** 获取触发器日志 {@link DescribeWebhookTriggerLogRequest} {@link DescribeWebhookTriggerLogResponse} */
   DescribeWebhookTriggerLog(data: DescribeWebhookTriggerLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebhookTriggerLogResponse>;
-  /** {@link DownloadHelmChart 下载Helm Chart}({@link DownloadHelmChartRequest 请求参数}): {@link DownloadHelmChartResponse 返回参数} */
+  /** 下载Helm Chart {@link DownloadHelmChartRequest} {@link DownloadHelmChartResponse} */
   DownloadHelmChart(data: DownloadHelmChartRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadHelmChartResponse>;
-  /** {@link DuplicateImagePersonal 复制个人版仓库镜像版本}({@link DuplicateImagePersonalRequest 请求参数}): {@link DuplicateImagePersonalResponse 返回参数} */
+  /** 复制个人版仓库镜像版本 {@link DuplicateImagePersonalRequest} {@link DuplicateImagePersonalResponse} */
   DuplicateImagePersonal(data: DuplicateImagePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DuplicateImagePersonalResponse>;
-  /** {@link ManageExternalEndpoint 管理实例公网访问}({@link ManageExternalEndpointRequest 请求参数}): {@link ManageExternalEndpointResponse 返回参数} */
+  /** 管理实例公网访问 {@link ManageExternalEndpointRequest} {@link ManageExternalEndpointResponse} */
   ManageExternalEndpoint(data: ManageExternalEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<ManageExternalEndpointResponse>;
-  /** {@link ManageImageLifecycleGlobalPersonal 设置个人版全局镜像版本自动清理策略}({@link ManageImageLifecycleGlobalPersonalRequest 请求参数}): {@link ManageImageLifecycleGlobalPersonalResponse 返回参数} */
+  /** 设置个人版全局镜像版本自动清理策略 {@link ManageImageLifecycleGlobalPersonalRequest} {@link ManageImageLifecycleGlobalPersonalResponse} */
   ManageImageLifecycleGlobalPersonal(data: ManageImageLifecycleGlobalPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ManageImageLifecycleGlobalPersonalResponse>;
-  /** {@link ManageInternalEndpoint 管理实例内网访问VPC链接}({@link ManageInternalEndpointRequest 请求参数}): {@link ManageInternalEndpointResponse 返回参数} */
+  /** 管理实例内网访问VPC链接 {@link ManageInternalEndpointRequest} {@link ManageInternalEndpointResponse} */
   ManageInternalEndpoint(data: ManageInternalEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<ManageInternalEndpointResponse>;
-  /** {@link ManageReplication 管理实例同步}({@link ManageReplicationRequest 请求参数}): {@link ManageReplicationResponse 返回参数} */
+  /** 管理实例同步 {@link ManageReplicationRequest} {@link ManageReplicationResponse} */
   ManageReplication(data: ManageReplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ManageReplicationResponse>;
-  /** {@link ModifyApplicationTriggerPersonal 修改应用更新触发器}({@link ModifyApplicationTriggerPersonalRequest 请求参数}): {@link ModifyApplicationTriggerPersonalResponse 返回参数} */
+  /** 修改应用更新触发器 {@link ModifyApplicationTriggerPersonalRequest} {@link ModifyApplicationTriggerPersonalResponse} */
   ModifyApplicationTriggerPersonal(data?: ModifyApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationTriggerPersonalResponse>;
-  /** {@link ModifyImmutableTagRules 更新镜像不可变规则}({@link ModifyImmutableTagRulesRequest 请求参数}): {@link ModifyImmutableTagRulesResponse 返回参数} */
+  /** 更新镜像不可变规则 {@link ModifyImmutableTagRulesRequest} {@link ModifyImmutableTagRulesResponse} */
   ModifyImmutableTagRules(data: ModifyImmutableTagRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImmutableTagRulesResponse>;
-  /** {@link ModifyInstance 更新实例信息}({@link ModifyInstanceRequest 请求参数}): {@link ModifyInstanceResponse 返回参数} */
+  /** 更新实例信息 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
-  /** {@link ModifyInstanceToken 更新实例长期访问凭证}({@link ModifyInstanceTokenRequest 请求参数}): {@link ModifyInstanceTokenResponse 返回参数} */
+  /** 更新实例长期访问凭证 {@link ModifyInstanceTokenRequest} {@link ModifyInstanceTokenResponse} */
   ModifyInstanceToken(data: ModifyInstanceTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceTokenResponse>;
-  /** {@link ModifyNamespace 更新命名空间信息}({@link ModifyNamespaceRequest 请求参数}): {@link ModifyNamespaceResponse 返回参数} */
+  /** 更新命名空间信息 {@link ModifyNamespaceRequest} {@link ModifyNamespaceResponse} */
   ModifyNamespace(data: ModifyNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNamespaceResponse>;
-  /** {@link ModifyRepository 更新镜像仓库信息}({@link ModifyRepositoryRequest 请求参数}): {@link ModifyRepositoryResponse 返回参数} */
+  /** 更新镜像仓库信息 {@link ModifyRepositoryRequest} {@link ModifyRepositoryResponse} */
   ModifyRepository(data: ModifyRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRepositoryResponse>;
-  /** {@link ModifyRepositoryAccessPersonal 更新个人版仓库访问属性}({@link ModifyRepositoryAccessPersonalRequest 请求参数}): {@link ModifyRepositoryAccessPersonalResponse 返回参数} */
+  /** 更新个人版仓库访问属性 {@link ModifyRepositoryAccessPersonalRequest} {@link ModifyRepositoryAccessPersonalResponse} */
   ModifyRepositoryAccessPersonal(data: ModifyRepositoryAccessPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRepositoryAccessPersonalResponse>;
-  /** {@link ModifyRepositoryInfoPersonal 更新个人版镜像仓库描述}({@link ModifyRepositoryInfoPersonalRequest 请求参数}): {@link ModifyRepositoryInfoPersonalResponse 返回参数} */
+  /** 更新个人版镜像仓库描述 {@link ModifyRepositoryInfoPersonalRequest} {@link ModifyRepositoryInfoPersonalResponse} */
   ModifyRepositoryInfoPersonal(data: ModifyRepositoryInfoPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRepositoryInfoPersonalResponse>;
-  /** {@link ModifySecurityPolicy 更新实例公网访问白名单}({@link ModifySecurityPolicyRequest 请求参数}): {@link ModifySecurityPolicyResponse 返回参数} */
+  /** 更新实例公网访问白名单 {@link ModifySecurityPolicyRequest} {@link ModifySecurityPolicyResponse} */
   ModifySecurityPolicy(data: ModifySecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityPolicyResponse>;
-  /** {@link ModifyTagRetentionRule 更新版本保留规则}({@link ModifyTagRetentionRuleRequest 请求参数}): {@link ModifyTagRetentionRuleResponse 返回参数} */
+  /** 更新版本保留规则 {@link ModifyTagRetentionRuleRequest} {@link ModifyTagRetentionRuleResponse} */
   ModifyTagRetentionRule(data: ModifyTagRetentionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTagRetentionRuleResponse>;
-  /** {@link ModifyUserPasswordPersonal 修改个人用户登录密码}({@link ModifyUserPasswordPersonalRequest 请求参数}): {@link ModifyUserPasswordPersonalResponse 返回参数} */
+  /** 修改个人用户登录密码 {@link ModifyUserPasswordPersonalRequest} {@link ModifyUserPasswordPersonalResponse} */
   ModifyUserPasswordPersonal(data: ModifyUserPasswordPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserPasswordPersonalResponse>;
-  /** {@link ModifyWebhookTrigger 更新触发器}({@link ModifyWebhookTriggerRequest 请求参数}): {@link ModifyWebhookTriggerResponse 返回参数} */
+  /** 更新触发器 {@link ModifyWebhookTriggerRequest} {@link ModifyWebhookTriggerResponse} */
   ModifyWebhookTrigger(data: ModifyWebhookTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebhookTriggerResponse>;
-  /** {@link RenewInstance 续费实例}({@link RenewInstanceRequest 请求参数}): {@link RenewInstanceResponse 返回参数} */
+  /** 续费实例 {@link RenewInstanceRequest} {@link RenewInstanceResponse} */
   RenewInstance(data: RenewInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenewInstanceResponse>;
-  /** {@link ValidateNamespaceExistPersonal 验证个人版命名空间是否存在}({@link ValidateNamespaceExistPersonalRequest 请求参数}): {@link ValidateNamespaceExistPersonalResponse 返回参数} */
+  /** 验证个人版命名空间是否存在 {@link ValidateNamespaceExistPersonalRequest} {@link ValidateNamespaceExistPersonalResponse} */
   ValidateNamespaceExistPersonal(data: ValidateNamespaceExistPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ValidateNamespaceExistPersonalResponse>;
-  /** {@link ValidateRepositoryExistPersonal 验证个人版仓库是否存在}({@link ValidateRepositoryExistPersonalRequest 请求参数}): {@link ValidateRepositoryExistPersonalResponse 返回参数} */
+  /** 验证个人版仓库是否存在 {@link ValidateRepositoryExistPersonalRequest} {@link ValidateRepositoryExistPersonalResponse} */
   ValidateRepositoryExistPersonal(data: ValidateRepositoryExistPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ValidateRepositoryExistPersonalResponse>;
 }
 

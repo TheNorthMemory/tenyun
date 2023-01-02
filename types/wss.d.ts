@@ -82,7 +82,7 @@ declare interface DeleteCertRequest {
 }
 
 declare interface DeleteCertResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -110,7 +110,7 @@ declare interface DescribeCertListResponse {
   TotalCount?: number;
   /** 列表。 */
   CertificateSet?: SSLCertificate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -132,18 +132,18 @@ declare interface UploadCertRequest {
 declare interface UploadCertResponse {
   /** 证书ID。 */
   Id?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Wss SSL证书管理服务} */
 declare interface Wss {
   (): Versions;
-  /** {@link DeleteCert 删除证书}({@link DeleteCertRequest 请求参数}): {@link DeleteCertResponse 返回参数} */
+  /** 删除证书 {@link DeleteCertRequest} {@link DeleteCertResponse} */
   DeleteCert(data: DeleteCertRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCertResponse>;
-  /** {@link DescribeCertList 获取证书列表}({@link DescribeCertListRequest 请求参数}): {@link DescribeCertListResponse 返回参数} */
+  /** 获取证书列表 {@link DescribeCertListRequest} {@link DescribeCertListResponse} */
   DescribeCertList(data: DescribeCertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertListResponse>;
-  /** {@link UploadCert 上传证书}({@link UploadCertRequest 请求参数}): {@link UploadCertResponse 返回参数} */
+  /** 上传证书 {@link UploadCertRequest} {@link UploadCertResponse} */
   UploadCert(data: UploadCertRequest, config?: AxiosRequestConfig): AxiosPromise<UploadCertResponse>;
 }
 

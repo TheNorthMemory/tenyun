@@ -56,14 +56,14 @@ declare interface RecognizeProductResponse {
   RegionDetected?: RegionDetected[];
   /** 图像识别出的商品的详细信息。 当图像中检测到多个物品时，会对显著性最高的进行识别。 */
   ProductInfo?: ProductInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Iir 智能识图} */
 declare interface Iir {
   (): Versions;
-  /** {@link RecognizeProduct 商品识别}({@link RecognizeProductRequest 请求参数}): {@link RecognizeProductResponse 返回参数} */
+  /** 商品识别 {@link RecognizeProductRequest} {@link RecognizeProductResponse} */
   RecognizeProduct(data?: RecognizeProductRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeProductResponse>;
 }
 

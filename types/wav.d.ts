@@ -504,7 +504,7 @@ declare interface CreateChannelCodeRequest {
 }
 
 declare interface CreateChannelCodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -520,7 +520,7 @@ declare interface CreateCorpTagRequest {
 declare interface CreateCorpTagResponse {
   /** 标签组信息 */
   TagGroup: TagGroup;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -562,7 +562,7 @@ declare interface CreateLeadResponse {
   BusinessCode: number;
   /** 线索处理结果描述 */
   BusinessMsg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -580,7 +580,7 @@ declare interface QueryActivityJoinListResponse {
   NextCursor: string | null;
   /** 活码列表响应参数 */
   PageData: ActivityJoinDetail[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -596,7 +596,7 @@ declare interface QueryActivityListResponse {
   NextCursor: string | null;
   /** 活码列表响应参数 */
   PageData: ActivityDetail[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -612,7 +612,7 @@ declare interface QueryActivityLiveCodeListResponse {
   NextCursor: string | null;
   /** 活码列表响应参数 */
   PageData: LiveCodeDetail[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -628,7 +628,7 @@ declare interface QueryChannelCodeListResponse {
   NextCursor: string | null;
   /** 活码列表响应参数 */
   PageData: ChannelCodeInnerDetail[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -644,7 +644,7 @@ declare interface QueryChatArchivingListResponse {
   NextCursor: string | null;
   /** 会话存档列表响应参数 */
   PageData: ChatArchivingDetail[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -662,7 +662,7 @@ declare interface QueryClueInfoListResponse {
   NextCursor: string | null;
   /** 是否还有更多数据。0-否；1-是。 */
   HasMore: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -686,7 +686,7 @@ declare interface QueryCrmStatisticsResponse {
   NextCursor: string | null;
   /** CRM统计响应数据 */
   PageData: CrmStatisticsData[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -706,7 +706,7 @@ declare interface QueryCustomerEventDetailStatisticsResponse {
   NextCursor: string | null;
   /** 外部联系人SaaS使用明细统计响应数据 */
   PageData: CustomerActionEventDetail[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -724,7 +724,7 @@ declare interface QueryDealerInfoListResponse {
   NextCursor: string | null;
   /** 是否还有更多数据。0-否；1-是。 */
   HasMore: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -744,7 +744,7 @@ declare interface QueryExternalContactDetailResponse {
   Customer: ExternalContact | null;
   /** 添加了此外部联系人的企业成员信息 */
   FollowUser: FollowUser[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -760,7 +760,7 @@ declare interface QueryExternalContactListResponse {
   PageData: ExternalContactSimpleInfo[] | null;
   /** 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空 */
   NextCursor: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -780,7 +780,7 @@ declare interface QueryExternalUserEventListResponse {
   NextCursor: string | null;
   /** 外部联系人事件信息响应数据 */
   PageData: ExternalUserEventInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -792,7 +792,7 @@ declare interface QueryExternalUserMappingInfoRequest {
 declare interface QueryExternalUserMappingInfoResponse {
   /** 外部联系人映射信息, 只返回映射成功的记录 */
   ExternalUserIdMapping: ExternalUserMappingInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -804,7 +804,7 @@ declare interface QueryLicenseInfoRequest {
 declare interface QueryLicenseInfoResponse {
   /** license响应信息 */
   LicenseInfo: LicenseInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -822,7 +822,7 @@ declare interface QueryMaterialListResponse {
   NextCursor: string | null;
   /** 企业素材列表响应数据 */
   PageData: MaterialInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -838,7 +838,7 @@ declare interface QueryMiniAppCodeListResponse {
   NextCursor: string | null;
   /** 小程序码列表响应数据 */
   PageData: MiniAppCodeInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -858,7 +858,7 @@ declare interface QueryStaffEventDetailStatisticsResponse {
   NextCursor: string | null;
   /** 企业成员SaaS使用明细统计响应数据 */
   PageData: SalesActionEventDetail[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -874,7 +874,7 @@ declare interface QueryUserInfoListResponse {
   NextCursor: string | null;
   /** 企业成员信息列表响应数据 */
   PageData: CorpUserInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -892,56 +892,56 @@ declare interface QueryVehicleInfoListResponse {
   NextCursor: string | null;
   /** 是否还有更多数据。0-否；1-是。 */
   HasMore: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Wav 企业微信汽车行业版} */
 declare interface Wav {
   (): Versions;
-  /** {@link CreateChannelCode 新增渠道活码接口}({@link CreateChannelCodeRequest 请求参数}): {@link CreateChannelCodeResponse 返回参数} */
+  /** 新增渠道活码接口 {@link CreateChannelCodeRequest} {@link CreateChannelCodeResponse} */
   CreateChannelCode(data: CreateChannelCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelCodeResponse>;
-  /** {@link CreateCorpTag 新增标签库接口}({@link CreateCorpTagRequest 请求参数}): {@link CreateCorpTagResponse 返回参数} */
+  /** 新增标签库接口 {@link CreateCorpTagRequest} {@link CreateCorpTagResponse} */
   CreateCorpTag(data: CreateCorpTagRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCorpTagResponse>;
-  /** {@link CreateLead 线索回收接口}({@link CreateLeadRequest 请求参数}): {@link CreateLeadResponse 返回参数} */
+  /** 线索回收接口 {@link CreateLeadRequest} {@link CreateLeadResponse} */
   CreateLead(data: CreateLeadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLeadResponse>;
-  /** {@link QueryActivityJoinList 查询活动参与明细列表接口}({@link QueryActivityJoinListRequest 请求参数}): {@link QueryActivityJoinListResponse 返回参数} */
+  /** 查询活动参与明细列表接口 {@link QueryActivityJoinListRequest} {@link QueryActivityJoinListResponse} */
   QueryActivityJoinList(data: QueryActivityJoinListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryActivityJoinListResponse>;
-  /** {@link QueryActivityList 查询活动列表接口}({@link QueryActivityListRequest 请求参数}): {@link QueryActivityListResponse 返回参数} */
+  /** 查询活动列表接口 {@link QueryActivityListRequest} {@link QueryActivityListResponse} */
   QueryActivityList(data?: QueryActivityListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryActivityListResponse>;
-  /** {@link QueryActivityLiveCodeList 查询活动活码列表接口}({@link QueryActivityLiveCodeListRequest 请求参数}): {@link QueryActivityLiveCodeListResponse 返回参数} */
+  /** 查询活动活码列表接口 {@link QueryActivityLiveCodeListRequest} {@link QueryActivityLiveCodeListResponse} */
   QueryActivityLiveCodeList(data?: QueryActivityLiveCodeListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryActivityLiveCodeListResponse>;
-  /** {@link QueryChannelCodeList 查询渠道活码列表接口}({@link QueryChannelCodeListRequest 请求参数}): {@link QueryChannelCodeListResponse 返回参数} */
+  /** 查询渠道活码列表接口 {@link QueryChannelCodeListRequest} {@link QueryChannelCodeListResponse} */
   QueryChannelCodeList(data?: QueryChannelCodeListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChannelCodeListResponse>;
-  /** {@link QueryChatArchivingList 查询会话存档列表接口}({@link QueryChatArchivingListRequest 请求参数}): {@link QueryChatArchivingListResponse 返回参数} */
+  /** 查询会话存档列表接口 {@link QueryChatArchivingListRequest} {@link QueryChatArchivingListResponse} */
   QueryChatArchivingList(data?: QueryChatArchivingListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChatArchivingListResponse>;
-  /** {@link QueryClueInfoList 查询线索列表接口}({@link QueryClueInfoListRequest 请求参数}): {@link QueryClueInfoListResponse 返回参数} */
+  /** 查询线索列表接口 {@link QueryClueInfoListRequest} {@link QueryClueInfoListResponse} */
   QueryClueInfoList(data?: QueryClueInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryClueInfoListResponse>;
-  /** {@link QueryCrmStatistics 查询CRM统计数据接口}({@link QueryCrmStatisticsRequest 请求参数}): {@link QueryCrmStatisticsResponse 返回参数} */
+  /** 查询CRM统计数据接口 {@link QueryCrmStatisticsRequest} {@link QueryCrmStatisticsResponse} */
   QueryCrmStatistics(data: QueryCrmStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCrmStatisticsResponse>;
-  /** {@link QueryCustomerEventDetailStatistics 查询外部联系人SaaS使用明细数据接口}({@link QueryCustomerEventDetailStatisticsRequest 请求参数}): {@link QueryCustomerEventDetailStatisticsResponse 返回参数} */
+  /** 查询外部联系人SaaS使用明细数据接口 {@link QueryCustomerEventDetailStatisticsRequest} {@link QueryCustomerEventDetailStatisticsResponse} */
   QueryCustomerEventDetailStatistics(data: QueryCustomerEventDetailStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCustomerEventDetailStatisticsResponse>;
-  /** {@link QueryDealerInfoList 查询经销商信息列表接口}({@link QueryDealerInfoListRequest 请求参数}): {@link QueryDealerInfoListResponse 返回参数} */
+  /** 查询经销商信息列表接口 {@link QueryDealerInfoListRequest} {@link QueryDealerInfoListResponse} */
   QueryDealerInfoList(data?: QueryDealerInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryDealerInfoListResponse>;
-  /** {@link QueryExternalContactDetail 查询外部联系人详情接口}({@link QueryExternalContactDetailRequest 请求参数}): {@link QueryExternalContactDetailResponse 返回参数} */
+  /** 查询外部联系人详情接口 {@link QueryExternalContactDetailRequest} {@link QueryExternalContactDetailResponse} */
   QueryExternalContactDetail(data: QueryExternalContactDetailRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExternalContactDetailResponse>;
-  /** {@link QueryExternalContactList 查询外部联系人列表接口}({@link QueryExternalContactListRequest 请求参数}): {@link QueryExternalContactListResponse 返回参数} */
+  /** 查询外部联系人列表接口 {@link QueryExternalContactListRequest} {@link QueryExternalContactListResponse} */
   QueryExternalContactList(data?: QueryExternalContactListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExternalContactListResponse>;
-  /** {@link QueryExternalUserEventList 查询外部联系人事件明细列表接口}({@link QueryExternalUserEventListRequest 请求参数}): {@link QueryExternalUserEventListResponse 返回参数} */
+  /** 查询外部联系人事件明细列表接口 {@link QueryExternalUserEventListRequest} {@link QueryExternalUserEventListResponse} */
   QueryExternalUserEventList(data: QueryExternalUserEventListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExternalUserEventListResponse>;
-  /** {@link QueryExternalUserMappingInfo 外部联系人转换接口}({@link QueryExternalUserMappingInfoRequest 请求参数}): {@link QueryExternalUserMappingInfoResponse 返回参数} */
+  /** 外部联系人转换接口 {@link QueryExternalUserMappingInfoRequest} {@link QueryExternalUserMappingInfoResponse} */
   QueryExternalUserMappingInfo(data: QueryExternalUserMappingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExternalUserMappingInfoResponse>;
-  /** {@link QueryLicenseInfo 查询license信息接口}({@link QueryLicenseInfoRequest 请求参数}): {@link QueryLicenseInfoResponse 返回参数} */
+  /** 查询license信息接口 {@link QueryLicenseInfoRequest} {@link QueryLicenseInfoResponse} */
   QueryLicenseInfo(data: QueryLicenseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryLicenseInfoResponse>;
-  /** {@link QueryMaterialList 获取企业素材列表接口}({@link QueryMaterialListRequest 请求参数}): {@link QueryMaterialListResponse 返回参数} */
+  /** 获取企业素材列表接口 {@link QueryMaterialListRequest} {@link QueryMaterialListResponse} */
   QueryMaterialList(data: QueryMaterialListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMaterialListResponse>;
-  /** {@link QueryMiniAppCodeList 查询小程序码列表接口}({@link QueryMiniAppCodeListRequest 请求参数}): {@link QueryMiniAppCodeListResponse 返回参数} */
+  /** 查询小程序码列表接口 {@link QueryMiniAppCodeListRequest} {@link QueryMiniAppCodeListResponse} */
   QueryMiniAppCodeList(data?: QueryMiniAppCodeListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMiniAppCodeListResponse>;
-  /** {@link QueryStaffEventDetailStatistics 企业成员SaaS使用明细数据接口}({@link QueryStaffEventDetailStatisticsRequest 请求参数}): {@link QueryStaffEventDetailStatisticsResponse 返回参数} */
+  /** 企业成员SaaS使用明细数据接口 {@link QueryStaffEventDetailStatisticsRequest} {@link QueryStaffEventDetailStatisticsResponse} */
   QueryStaffEventDetailStatistics(data: QueryStaffEventDetailStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryStaffEventDetailStatisticsResponse>;
-  /** {@link QueryUserInfoList 查询企业成员信息列表接口}({@link QueryUserInfoListRequest 请求参数}): {@link QueryUserInfoListResponse 返回参数} */
+  /** 查询企业成员信息列表接口 {@link QueryUserInfoListRequest} {@link QueryUserInfoListResponse} */
   QueryUserInfoList(data?: QueryUserInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryUserInfoListResponse>;
-  /** {@link QueryVehicleInfoList 查询车系车型信息列表接口}({@link QueryVehicleInfoListRequest 请求参数}): {@link QueryVehicleInfoListResponse 返回参数} */
+  /** 查询车系车型信息列表接口 {@link QueryVehicleInfoListRequest} {@link QueryVehicleInfoListResponse} */
   QueryVehicleInfoList(data?: QueryVehicleInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryVehicleInfoListResponse>;
 }
 

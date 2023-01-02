@@ -1044,7 +1044,7 @@ declare interface CreateApplicationAutoscalerRequest {
 declare interface CreateApplicationAutoscalerResponse {
   /** 弹性伸缩策略组合ID */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1082,7 +1082,7 @@ declare interface CreateApplicationRequest {
 declare interface CreateApplicationResponse {
   /** 服务code */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1100,7 +1100,7 @@ declare interface CreateApplicationServiceRequest {
 declare interface CreateApplicationServiceResponse {
   /** 是否成功 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1118,7 +1118,7 @@ declare interface CreateConfigDataRequest {
 declare interface CreateConfigDataResponse {
   /** 创建是否成功 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1138,7 +1138,7 @@ declare interface CreateCosTokenRequest {
 declare interface CreateCosTokenResponse {
   /** 成功时为CosToken对象，失败为null */
   Result: CosToken | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1168,7 +1168,7 @@ declare interface CreateEnvironmentRequest {
 declare interface CreateEnvironmentResponse {
   /** 成功时为环境ID，失败为null */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1200,7 +1200,7 @@ declare interface CreateLogConfigRequest {
 declare interface CreateLogConfigResponse {
   /** 创建是否成功 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1222,7 +1222,7 @@ declare interface CreateResourceRequest {
 declare interface CreateResourceResponse {
   /** 成功与否 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1240,7 +1240,7 @@ declare interface DeleteApplicationAutoscalerRequest {
 declare interface DeleteApplicationAutoscalerResponse {
   /** 是否成功 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1258,7 +1258,7 @@ declare interface DeleteApplicationRequest {
 declare interface DeleteApplicationResponse {
   /** 返回结果 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1276,7 +1276,7 @@ declare interface DeleteApplicationServiceRequest {
 declare interface DeleteApplicationServiceResponse {
   /** 是否成功 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1294,7 +1294,7 @@ declare interface DeleteIngressRequest {
 declare interface DeleteIngressResponse {
   /** 是否删除成功 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1394,7 +1394,7 @@ declare interface DeployApplicationRequest {
 declare interface DeployApplicationResponse {
   /** 版本ID（前端可忽略） */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1410,7 +1410,7 @@ declare interface DescribeApplicationAutoscalerListRequest {
 declare interface DescribeApplicationAutoscalerListResponse {
   /** 弹性伸缩策略组合 */
   Result: Autoscaler[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1426,7 +1426,7 @@ declare interface DescribeApplicationInfoRequest {
 declare interface DescribeApplicationInfoResponse {
   /** 返回结果 */
   Result: TemServiceVersionInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1450,7 +1450,7 @@ declare interface DescribeApplicationPodsRequest {
 declare interface DescribeApplicationPodsResponse {
   /** 返回结果 */
   Result: DescribeRunPodPage;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1466,7 +1466,7 @@ declare interface DescribeApplicationServiceListRequest {
 declare interface DescribeApplicationServiceListResponse {
   /** 应用 EKS Service 列表 */
   Result: EksService;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1492,7 +1492,7 @@ declare interface DescribeApplicationsRequest {
 declare interface DescribeApplicationsResponse {
   /** 返回结果 */
   Result: ServicePage;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1506,7 +1506,7 @@ declare interface DescribeApplicationsStatusRequest {
 declare interface DescribeApplicationsStatusResponse {
   /** 返回结果 */
   Result: ServiceVersionBrief[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1524,7 +1524,7 @@ declare interface DescribeConfigDataListRequest {
 declare interface DescribeConfigDataListResponse {
   /** 配置列表 */
   Result: DescribeConfigDataListPage;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1540,7 +1540,7 @@ declare interface DescribeConfigDataRequest {
 declare interface DescribeConfigDataResponse {
   /** 配置 */
   Result: ConfigData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1556,7 +1556,7 @@ declare interface DescribeDeployApplicationDetailRequest {
 declare interface DescribeDeployApplicationDetailResponse {
   /** 分批发布结果详情 */
   Result: TemDeployApplicationDetailInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1570,7 +1570,7 @@ declare interface DescribeEnvironmentRequest {
 declare interface DescribeEnvironmentResponse {
   /** 环境信息 */
   Result: NamespaceInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1584,7 +1584,7 @@ declare interface DescribeEnvironmentStatusRequest {
 declare interface DescribeEnvironmentStatusResponse {
   /** 返回状态列表 */
   Result: NamespaceStatusInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1606,7 +1606,7 @@ declare interface DescribeEnvironmentsRequest {
 declare interface DescribeEnvironmentsResponse {
   /** 返回结果 */
   Result: NamespacePage;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1624,7 +1624,7 @@ declare interface DescribeIngressRequest {
 declare interface DescribeIngressResponse {
   /** Ingress 规则配置 */
   Result: IngressInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1642,7 +1642,7 @@ declare interface DescribeIngressesRequest {
 declare interface DescribeIngressesResponse {
   /** ingress 数组 */
   Result: IngressInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1658,7 +1658,7 @@ declare interface DescribeLogConfigRequest {
 declare interface DescribeLogConfigResponse {
   /** 配置 */
   Result: LogConfig;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1680,7 +1680,7 @@ declare interface DescribePagedLogConfigListRequest {
 declare interface DescribePagedLogConfigListResponse {
   /** 日志收集配置列表 */
   Result: LogConfigListPage;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1698,7 +1698,7 @@ declare interface DescribeRelatedIngressesRequest {
 declare interface DescribeRelatedIngressesResponse {
   /** ingress 数组 */
   Result: IngressInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1714,7 +1714,7 @@ declare interface DestroyConfigDataRequest {
 declare interface DestroyConfigDataResponse {
   /** 返回结果 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1728,7 +1728,7 @@ declare interface DestroyEnvironmentRequest {
 declare interface DestroyEnvironmentResponse {
   /** 返回结果 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1744,7 +1744,7 @@ declare interface DestroyLogConfigRequest {
 declare interface DestroyLogConfigResponse {
   /** 返回结果 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1762,7 +1762,7 @@ declare interface DisableApplicationAutoscalerRequest {
 declare interface DisableApplicationAutoscalerResponse {
   /** 是否成功 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1780,7 +1780,7 @@ declare interface EnableApplicationAutoscalerRequest {
 declare interface EnableApplicationAutoscalerResponse {
   /** 是否成功 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1798,7 +1798,7 @@ declare interface GenerateApplicationPackageDownloadUrlRequest {
 declare interface GenerateApplicationPackageDownloadUrlResponse {
   /** 包下载临时链接 */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1818,7 +1818,7 @@ declare interface ModifyApplicationAutoscalerRequest {
 declare interface ModifyApplicationAutoscalerResponse {
   /** 是否成功 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1836,7 +1836,7 @@ declare interface ModifyApplicationInfoRequest {
 declare interface ModifyApplicationInfoResponse {
   /** 成功与否 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1854,7 +1854,7 @@ declare interface ModifyApplicationReplicasRequest {
 declare interface ModifyApplicationReplicasResponse {
   /** 是否成功 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1874,7 +1874,7 @@ declare interface ModifyApplicationServiceRequest {
 declare interface ModifyApplicationServiceResponse {
   /** 是否成功 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1892,7 +1892,7 @@ declare interface ModifyConfigDataRequest {
 declare interface ModifyConfigDataResponse {
   /** 编辑是否成功 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1916,7 +1916,7 @@ declare interface ModifyEnvironmentRequest {
 declare interface ModifyEnvironmentResponse {
   /** 成功时为环境ID，失败为null */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1930,7 +1930,7 @@ declare interface ModifyIngressRequest {
 declare interface ModifyIngressResponse {
   /** 创建成功 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1948,7 +1948,7 @@ declare interface ModifyLogConfigRequest {
 declare interface ModifyLogConfigResponse {
   /** 编辑是否成功 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1972,7 +1972,7 @@ declare interface RestartApplicationPodRequest {
 declare interface RestartApplicationPodResponse {
   /** 返回结果 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1988,7 +1988,7 @@ declare interface RestartApplicationRequest {
 declare interface RestartApplicationResponse {
   /** 返回结果 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2002,7 +2002,7 @@ declare interface ResumeDeployApplicationRequest {
 declare interface ResumeDeployApplicationResponse {
   /** 是否成功 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2016,7 +2016,7 @@ declare interface RevertDeployApplicationRequest {
 declare interface RevertDeployApplicationResponse {
   /** 是否成功 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2046,7 +2046,7 @@ declare interface RollingUpdateApplicationByVersionRequest {
 declare interface RollingUpdateApplicationByVersionResponse {
   /** 版本ID */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2062,7 +2062,7 @@ declare interface StopApplicationRequest {
 declare interface StopApplicationResponse {
   /** 返回结果 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2391,7 +2391,7 @@ declare namespace V20201221 {
   interface CreateCosTokenResponse {
     /** 成功时为CosToken对象，失败为null */
     Result: CosToken | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2411,7 +2411,7 @@ declare namespace V20201221 {
   interface CreateCosTokenV2Response {
     /** 成功时为CosToken对象，失败为null */
     Result: CosToken | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2435,7 +2435,7 @@ declare namespace V20201221 {
   interface CreateNamespaceResponse {
     /** 成功时为命名空间ID，失败为null */
     Result: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2453,7 +2453,7 @@ declare namespace V20201221 {
   interface CreateResourceResponse {
     /** 成功与否 */
     Result: boolean | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2485,7 +2485,7 @@ declare namespace V20201221 {
   interface CreateServiceV2Response {
     /** 服务code */
     Result: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2503,7 +2503,7 @@ declare namespace V20201221 {
   interface DeleteIngressResponse {
     /** 是否删除成功 */
     Result: boolean;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2581,7 +2581,7 @@ declare namespace V20201221 {
   interface DeployServiceV2Response {
     /** 版本ID（前端可忽略） */
     Result: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2599,7 +2599,7 @@ declare namespace V20201221 {
   interface DescribeIngressResponse {
     /** Ingress 规则配置 */
     Result: IngressInfo;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2617,7 +2617,7 @@ declare namespace V20201221 {
   interface DescribeIngressesResponse {
     /** ingress 数组 */
     Result: IngressInfo[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2633,7 +2633,7 @@ declare namespace V20201221 {
   interface DescribeNamespacesResponse {
     /** 返回结果 */
     Result: NamespacePage;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2651,7 +2651,7 @@ declare namespace V20201221 {
   interface DescribeRelatedIngressesResponse {
     /** ingress 数组 */
     Result: IngressInfo[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2675,7 +2675,7 @@ declare namespace V20201221 {
   interface DescribeServiceRunPodListV2Response {
     /** 返回结果 */
     Result: DescribeRunPodPage;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2693,7 +2693,7 @@ declare namespace V20201221 {
   interface GenerateDownloadUrlResponse {
     /** 包下载临时链接 */
     Result: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2707,7 +2707,7 @@ declare namespace V20201221 {
   interface ModifyIngressResponse {
     /** 创建成功 */
     Result: boolean | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2729,7 +2729,7 @@ declare namespace V20201221 {
   interface ModifyNamespaceResponse {
     /** 成功时为命名空间ID，失败为null */
     Result: boolean | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2745,7 +2745,7 @@ declare namespace V20201221 {
   interface ModifyServiceInfoResponse {
     /** 成功与否 */
     Result: boolean | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2769,7 +2769,7 @@ declare namespace V20201221 {
   interface RestartServiceRunPodResponse {
     /** 返回结果 */
     Result: boolean | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -2777,139 +2777,139 @@ declare namespace V20201221 {
 /** {@link Tem 弹性微服务 TEM} */
 declare interface Tem {
   (): Versions;
-  /** {@link CreateApplication 创建应用}({@link CreateApplicationRequest 请求参数}): {@link CreateApplicationResponse 返回参数} */
+  /** 创建应用 {@link CreateApplicationRequest} {@link CreateApplicationResponse} */
   CreateApplication(data: CreateApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationResponse>;
-  /** {@link CreateApplicationAutoscaler 创建弹性伸缩策略组合}({@link CreateApplicationAutoscalerRequest 请求参数}): {@link CreateApplicationAutoscalerResponse 返回参数} */
+  /** 创建弹性伸缩策略组合 {@link CreateApplicationAutoscalerRequest} {@link CreateApplicationAutoscalerResponse} */
   CreateApplicationAutoscaler(data: CreateApplicationAutoscalerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationAutoscalerResponse>;
-  /** {@link CreateApplicationService 新增访问方式}({@link CreateApplicationServiceRequest 请求参数}): {@link CreateApplicationServiceResponse 返回参数} */
+  /** 新增访问方式 {@link CreateApplicationServiceRequest} {@link CreateApplicationServiceResponse} */
   CreateApplicationService(data: CreateApplicationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationServiceResponse>;
-  /** {@link CreateConfigData 创建配置}({@link CreateConfigDataRequest 请求参数}): {@link CreateConfigDataResponse 返回参数} */
+  /** 创建配置 {@link CreateConfigDataRequest} {@link CreateConfigDataResponse} */
   CreateConfigData(data: CreateConfigDataRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigDataResponse>;
-  /** {@link CreateCosToken 生成Cos临时秘钥}({@link CreateCosTokenRequest 请求参数}): {@link CreateCosTokenResponse 返回参数} */
+  /** 生成Cos临时秘钥 {@link CreateCosTokenRequest} {@link CreateCosTokenResponse} */
   CreateCosToken(data: CreateCosTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosTokenResponse>;
-  /** {@link CreateEnvironment 创建环境}({@link CreateEnvironmentRequest 请求参数}): {@link CreateEnvironmentResponse 返回参数} */
+  /** 创建环境 {@link CreateEnvironmentRequest} {@link CreateEnvironmentResponse} */
   CreateEnvironment(data: CreateEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentResponse>;
-  /** {@link CreateLogConfig 创建日志收集配置}({@link CreateLogConfigRequest 请求参数}): {@link CreateLogConfigResponse 返回参数} */
+  /** 创建日志收集配置 {@link CreateLogConfigRequest} {@link CreateLogConfigResponse} */
   CreateLogConfig(data: CreateLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogConfigResponse>;
-  /** {@link CreateResource 绑定云资源}({@link CreateResourceRequest 请求参数}): {@link CreateResourceResponse 返回参数} */
+  /** 绑定云资源 {@link CreateResourceRequest} {@link CreateResourceResponse} */
   CreateResource(data: CreateResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceResponse>;
-  /** {@link DeleteApplication 服务删除}({@link DeleteApplicationRequest 请求参数}): {@link DeleteApplicationResponse 返回参数} */
+  /** 服务删除 {@link DeleteApplicationRequest} {@link DeleteApplicationResponse} */
   DeleteApplication(data: DeleteApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationResponse>;
-  /** {@link DeleteApplicationAutoscaler 删除应用弹性策略组合}({@link DeleteApplicationAutoscalerRequest 请求参数}): {@link DeleteApplicationAutoscalerResponse 返回参数} */
+  /** 删除应用弹性策略组合 {@link DeleteApplicationAutoscalerRequest} {@link DeleteApplicationAutoscalerResponse} */
   DeleteApplicationAutoscaler(data: DeleteApplicationAutoscalerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationAutoscalerResponse>;
-  /** {@link DeleteApplicationService 删除一条访问方式}({@link DeleteApplicationServiceRequest 请求参数}): {@link DeleteApplicationServiceResponse 返回参数} */
+  /** 删除一条访问方式 {@link DeleteApplicationServiceRequest} {@link DeleteApplicationServiceResponse} */
   DeleteApplicationService(data?: DeleteApplicationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationServiceResponse>;
-  /** {@link DeleteIngress 删除 Ingress 规则}({@link DeleteIngressRequest 请求参数}): {@link DeleteIngressResponse 返回参数} */
+  /** 删除 Ingress 规则 {@link DeleteIngressRequest} {@link DeleteIngressResponse} */
   DeleteIngress(data: DeleteIngressRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIngressResponse>;
-  /** {@link DeployApplication 应用部署}({@link DeployApplicationRequest 请求参数}): {@link DeployApplicationResponse 返回参数} */
+  /** 应用部署 {@link DeployApplicationRequest} {@link DeployApplicationResponse} */
   DeployApplication(data: DeployApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DeployApplicationResponse>;
-  /** {@link DescribeApplicationAutoscalerList 获取应用弹性策略组合}({@link DescribeApplicationAutoscalerListRequest 请求参数}): {@link DescribeApplicationAutoscalerListResponse 返回参数} */
+  /** 获取应用弹性策略组合 {@link DescribeApplicationAutoscalerListRequest} {@link DescribeApplicationAutoscalerListResponse} */
   DescribeApplicationAutoscalerList(data: DescribeApplicationAutoscalerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationAutoscalerListResponse>;
-  /** {@link DescribeApplicationInfo 服务基本信息查看}({@link DescribeApplicationInfoRequest 请求参数}): {@link DescribeApplicationInfoResponse 返回参数} */
+  /** 服务基本信息查看 {@link DescribeApplicationInfoRequest} {@link DescribeApplicationInfoResponse} */
   DescribeApplicationInfo(data: DescribeApplicationInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationInfoResponse>;
-  /** {@link DescribeApplicationPods 获取应用实例列表}({@link DescribeApplicationPodsRequest 请求参数}): {@link DescribeApplicationPodsResponse 返回参数} */
+  /** 获取应用实例列表 {@link DescribeApplicationPodsRequest} {@link DescribeApplicationPodsResponse} */
   DescribeApplicationPods(data: DescribeApplicationPodsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationPodsResponse>;
-  /** {@link DescribeApplicationServiceList 查询应用访问方式列表}({@link DescribeApplicationServiceListRequest 请求参数}): {@link DescribeApplicationServiceListResponse 返回参数} */
+  /** 查询应用访问方式列表 {@link DescribeApplicationServiceListRequest} {@link DescribeApplicationServiceListResponse} */
   DescribeApplicationServiceList(data: DescribeApplicationServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationServiceListResponse>;
-  /** {@link DescribeApplications 获取运行服务列表}({@link DescribeApplicationsRequest 请求参数}): {@link DescribeApplicationsResponse 返回参数} */
+  /** 获取运行服务列表 {@link DescribeApplicationsRequest} {@link DescribeApplicationsResponse} */
   DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
-  /** {@link DescribeApplicationsStatus 单环境下所有应用状态查看}({@link DescribeApplicationsStatusRequest 请求参数}): {@link DescribeApplicationsStatusResponse 返回参数} */
+  /** 单环境下所有应用状态查看 {@link DescribeApplicationsStatusRequest} {@link DescribeApplicationsStatusResponse} */
   DescribeApplicationsStatus(data?: DescribeApplicationsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsStatusResponse>;
-  /** {@link DescribeConfigData 查询配置详情}({@link DescribeConfigDataRequest 请求参数}): {@link DescribeConfigDataResponse 返回参数} */
+  /** 查询配置详情 {@link DescribeConfigDataRequest} {@link DescribeConfigDataResponse} */
   DescribeConfigData(data: DescribeConfigDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigDataResponse>;
-  /** {@link DescribeConfigDataList 查询配置列表}({@link DescribeConfigDataListRequest 请求参数}): {@link DescribeConfigDataListResponse 返回参数} */
+  /** 查询配置列表 {@link DescribeConfigDataListRequest} {@link DescribeConfigDataListResponse} */
   DescribeConfigDataList(data: DescribeConfigDataListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigDataListResponse>;
-  /** {@link DescribeDeployApplicationDetail 获取分批发布详情}({@link DescribeDeployApplicationDetailRequest 请求参数}): {@link DescribeDeployApplicationDetailResponse 返回参数} */
+  /** 获取分批发布详情 {@link DescribeDeployApplicationDetailRequest} {@link DescribeDeployApplicationDetailResponse} */
   DescribeDeployApplicationDetail(data?: DescribeDeployApplicationDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployApplicationDetailResponse>;
-  /** {@link DescribeEnvironment 获取环境基础信息}({@link DescribeEnvironmentRequest 请求参数}): {@link DescribeEnvironmentResponse 返回参数} */
+  /** 获取环境基础信息 {@link DescribeEnvironmentRequest} {@link DescribeEnvironmentResponse} */
   DescribeEnvironment(data: DescribeEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentResponse>;
-  /** {@link DescribeEnvironmentStatus 获取环境状态}({@link DescribeEnvironmentStatusRequest 请求参数}): {@link DescribeEnvironmentStatusResponse 返回参数} */
+  /** 获取环境状态 {@link DescribeEnvironmentStatusRequest} {@link DescribeEnvironmentStatusResponse} */
   DescribeEnvironmentStatus(data: DescribeEnvironmentStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentStatusResponse>;
-  /** {@link DescribeEnvironments 获取环境列表}({@link DescribeEnvironmentsRequest 请求参数}): {@link DescribeEnvironmentsResponse 返回参数} */
+  /** 获取环境列表 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */
   DescribeEnvironments(data?: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
-  /** {@link DescribeIngress 查询 Ingress 规则}({@link DescribeIngressRequest 请求参数}): {@link DescribeIngressResponse 返回参数} */
+  /** 查询 Ingress 规则 {@link DescribeIngressRequest} {@link DescribeIngressResponse} */
   DescribeIngress(data: DescribeIngressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIngressResponse>;
-  /** {@link DescribeIngresses 查询 Ingress 规则列表}({@link DescribeIngressesRequest 请求参数}): {@link DescribeIngressesResponse 返回参数} */
+  /** 查询 Ingress 规则列表 {@link DescribeIngressesRequest} {@link DescribeIngressesResponse} */
   DescribeIngresses(data?: DescribeIngressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIngressesResponse>;
-  /** {@link DescribeLogConfig 查询日志收集配置详情}({@link DescribeLogConfigRequest 请求参数}): {@link DescribeLogConfigResponse 返回参数} */
+  /** 查询日志收集配置详情 {@link DescribeLogConfigRequest} {@link DescribeLogConfigResponse} */
   DescribeLogConfig(data: DescribeLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogConfigResponse>;
-  /** {@link DescribePagedLogConfigList 查询分页的日志收集配置列表}({@link DescribePagedLogConfigListRequest 请求参数}): {@link DescribePagedLogConfigListResponse 返回参数} */
+  /** 查询分页的日志收集配置列表 {@link DescribePagedLogConfigListRequest} {@link DescribePagedLogConfigListResponse} */
   DescribePagedLogConfigList(data: DescribePagedLogConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePagedLogConfigListResponse>;
-  /** {@link DescribeRelatedIngresses 查询应用关联的 Ingress 规则列表}({@link DescribeRelatedIngressesRequest 请求参数}): {@link DescribeRelatedIngressesResponse 返回参数} */
+  /** 查询应用关联的 Ingress 规则列表 {@link DescribeRelatedIngressesRequest} {@link DescribeRelatedIngressesResponse} */
   DescribeRelatedIngresses(data?: DescribeRelatedIngressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelatedIngressesResponse>;
-  /** {@link DestroyConfigData 销毁配置}({@link DestroyConfigDataRequest 请求参数}): {@link DestroyConfigDataResponse 返回参数} */
+  /** 销毁配置 {@link DestroyConfigDataRequest} {@link DestroyConfigDataResponse} */
   DestroyConfigData(data: DestroyConfigDataRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyConfigDataResponse>;
-  /** {@link DestroyEnvironment 销毁环境}({@link DestroyEnvironmentRequest 请求参数}): {@link DestroyEnvironmentResponse 返回参数} */
+  /** 销毁环境 {@link DestroyEnvironmentRequest} {@link DestroyEnvironmentResponse} */
   DestroyEnvironment(data: DestroyEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyEnvironmentResponse>;
-  /** {@link DestroyLogConfig 销毁日志收集配置}({@link DestroyLogConfigRequest 请求参数}): {@link DestroyLogConfigResponse 返回参数} */
+  /** 销毁日志收集配置 {@link DestroyLogConfigRequest} {@link DestroyLogConfigResponse} */
   DestroyLogConfig(data: DestroyLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyLogConfigResponse>;
-  /** {@link DisableApplicationAutoscaler 关闭应用弹性策略组合}({@link DisableApplicationAutoscalerRequest 请求参数}): {@link DisableApplicationAutoscalerResponse 返回参数} */
+  /** 关闭应用弹性策略组合 {@link DisableApplicationAutoscalerRequest} {@link DisableApplicationAutoscalerResponse} */
   DisableApplicationAutoscaler(data: DisableApplicationAutoscalerRequest, config?: AxiosRequestConfig): AxiosPromise<DisableApplicationAutoscalerResponse>;
-  /** {@link EnableApplicationAutoscaler 启用应用弹性策略组合}({@link EnableApplicationAutoscalerRequest 请求参数}): {@link EnableApplicationAutoscalerResponse 返回参数} */
+  /** 启用应用弹性策略组合 {@link EnableApplicationAutoscalerRequest} {@link EnableApplicationAutoscalerResponse} */
   EnableApplicationAutoscaler(data: EnableApplicationAutoscalerRequest, config?: AxiosRequestConfig): AxiosPromise<EnableApplicationAutoscalerResponse>;
-  /** {@link GenerateApplicationPackageDownloadUrl 生成应用程序包预签名下载链接}({@link GenerateApplicationPackageDownloadUrlRequest 请求参数}): {@link GenerateApplicationPackageDownloadUrlResponse 返回参数} */
+  /** 生成应用程序包预签名下载链接 {@link GenerateApplicationPackageDownloadUrlRequest} {@link GenerateApplicationPackageDownloadUrlResponse} */
   GenerateApplicationPackageDownloadUrl(data: GenerateApplicationPackageDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateApplicationPackageDownloadUrlResponse>;
-  /** {@link ModifyApplicationAutoscaler 修改弹性伸缩策略组合}({@link ModifyApplicationAutoscalerRequest 请求参数}): {@link ModifyApplicationAutoscalerResponse 返回参数} */
+  /** 修改弹性伸缩策略组合 {@link ModifyApplicationAutoscalerRequest} {@link ModifyApplicationAutoscalerResponse} */
   ModifyApplicationAutoscaler(data: ModifyApplicationAutoscalerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationAutoscalerResponse>;
-  /** {@link ModifyApplicationInfo 修改应用基本信息}({@link ModifyApplicationInfoRequest 请求参数}): {@link ModifyApplicationInfoResponse 返回参数} */
+  /** 修改应用基本信息 {@link ModifyApplicationInfoRequest} {@link ModifyApplicationInfoResponse} */
   ModifyApplicationInfo(data: ModifyApplicationInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationInfoResponse>;
-  /** {@link ModifyApplicationReplicas 修改应用实例数量}({@link ModifyApplicationReplicasRequest 请求参数}): {@link ModifyApplicationReplicasResponse 返回参数} */
+  /** 修改应用实例数量 {@link ModifyApplicationReplicasRequest} {@link ModifyApplicationReplicasResponse} */
   ModifyApplicationReplicas(data: ModifyApplicationReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationReplicasResponse>;
-  /** {@link ModifyApplicationService 修改服务访问方式列表}({@link ModifyApplicationServiceRequest 请求参数}): {@link ModifyApplicationServiceResponse 返回参数} */
+  /** 修改服务访问方式列表 {@link ModifyApplicationServiceRequest} {@link ModifyApplicationServiceResponse} */
   ModifyApplicationService(data: ModifyApplicationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationServiceResponse>;
-  /** {@link ModifyConfigData 编辑配置}({@link ModifyConfigDataRequest 请求参数}): {@link ModifyConfigDataResponse 返回参数} */
+  /** 编辑配置 {@link ModifyConfigDataRequest} {@link ModifyConfigDataResponse} */
   ModifyConfigData(data: ModifyConfigDataRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigDataResponse>;
-  /** {@link ModifyEnvironment 编辑环境}({@link ModifyEnvironmentRequest 请求参数}): {@link ModifyEnvironmentResponse 返回参数} */
+  /** 编辑环境 {@link ModifyEnvironmentRequest} {@link ModifyEnvironmentResponse} */
   ModifyEnvironment(data: ModifyEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvironmentResponse>;
-  /** {@link ModifyIngress 创建或者更新 Ingress 规则}({@link ModifyIngressRequest 请求参数}): {@link ModifyIngressResponse 返回参数} */
+  /** 创建或者更新 Ingress 规则 {@link ModifyIngressRequest} {@link ModifyIngressResponse} */
   ModifyIngress(data: ModifyIngressRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIngressResponse>;
-  /** {@link ModifyLogConfig 编辑日志收集配置}({@link ModifyLogConfigRequest 请求参数}): {@link ModifyLogConfigResponse 返回参数} */
+  /** 编辑日志收集配置 {@link ModifyLogConfigRequest} {@link ModifyLogConfigResponse} */
   ModifyLogConfig(data: ModifyLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogConfigResponse>;
-  /** {@link RestartApplication 服务重启}({@link RestartApplicationRequest 请求参数}): {@link RestartApplicationResponse 返回参数} */
+  /** 服务重启 {@link RestartApplicationRequest} {@link RestartApplicationResponse} */
   RestartApplication(data: RestartApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<RestartApplicationResponse>;
-  /** {@link RestartApplicationPod 重启应用实例}({@link RestartApplicationPodRequest 请求参数}): {@link RestartApplicationPodResponse 返回参数} */
+  /** 重启应用实例 {@link RestartApplicationPodRequest} {@link RestartApplicationPodResponse} */
   RestartApplicationPod(data: RestartApplicationPodRequest, config?: AxiosRequestConfig): AxiosPromise<RestartApplicationPodResponse>;
-  /** {@link ResumeDeployApplication 开始下一批次发布}({@link ResumeDeployApplicationRequest 请求参数}): {@link ResumeDeployApplicationResponse 返回参数} */
+  /** 开始下一批次发布 {@link ResumeDeployApplicationRequest} {@link ResumeDeployApplicationResponse} */
   ResumeDeployApplication(data?: ResumeDeployApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeDeployApplicationResponse>;
-  /** {@link RevertDeployApplication 回滚分批发布}({@link RevertDeployApplicationRequest 请求参数}): {@link RevertDeployApplicationResponse 返回参数} */
+  /** 回滚分批发布 {@link RevertDeployApplicationRequest} {@link RevertDeployApplicationResponse} */
   RevertDeployApplication(data?: RevertDeployApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<RevertDeployApplicationResponse>;
-  /** {@link RollingUpdateApplicationByVersion 更新应用部署版本}({@link RollingUpdateApplicationByVersionRequest 请求参数}): {@link RollingUpdateApplicationByVersionResponse 返回参数} */
+  /** 更新应用部署版本 {@link RollingUpdateApplicationByVersionRequest} {@link RollingUpdateApplicationByVersionResponse} */
   RollingUpdateApplicationByVersion(data: RollingUpdateApplicationByVersionRequest, config?: AxiosRequestConfig): AxiosPromise<RollingUpdateApplicationByVersionResponse>;
-  /** {@link StopApplication 服务停止}({@link StopApplicationRequest 请求参数}): {@link StopApplicationResponse 返回参数} */
+  /** 服务停止 {@link StopApplicationRequest} {@link StopApplicationResponse} */
   StopApplication(data: StopApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<StopApplicationResponse>;
-  /** {@link V20201221.CreateCosToken 生成Cos临时秘钥}({@link V20201221.CreateCosTokenRequest 请求参数}): {@link V20201221.CreateCosTokenResponse 返回参数} */
+  /** 生成Cos临时秘钥 {@link V20201221.CreateCosTokenRequest} {@link V20201221.CreateCosTokenResponse} */
   CreateCosToken(data: V20201221.CreateCosTokenRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.CreateCosTokenResponse>;
-  /** {@link V20201221.CreateCosTokenV2 生成Cos临时秘钥V2}({@link V20201221.CreateCosTokenV2Request 请求参数}): {@link V20201221.CreateCosTokenV2Response 返回参数} */
+  /** 生成Cos临时秘钥V2 {@link V20201221.CreateCosTokenV2Request} {@link V20201221.CreateCosTokenV2Response} */
   CreateCosTokenV2(data: V20201221.CreateCosTokenV2Request, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.CreateCosTokenV2Response>;
-  /** {@link V20201221.CreateNamespace 创建命名空间}({@link V20201221.CreateNamespaceRequest 请求参数}): {@link V20201221.CreateNamespaceResponse 返回参数} */
+  /** 创建命名空间 {@link V20201221.CreateNamespaceRequest} {@link V20201221.CreateNamespaceResponse} */
   CreateNamespace(data: V20201221.CreateNamespaceRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.CreateNamespaceResponse>;
-  /** {@link V20201221.CreateResource 绑定云资源}({@link V20201221.CreateResourceRequest 请求参数}): {@link V20201221.CreateResourceResponse 返回参数} */
+  /** 绑定云资源 {@link V20201221.CreateResourceRequest} {@link V20201221.CreateResourceResponse} */
   CreateResource(data: V20201221.CreateResourceRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.CreateResourceResponse>;
-  /** {@link V20201221.CreateServiceV2 创建服务}({@link V20201221.CreateServiceV2Request 请求参数}): {@link V20201221.CreateServiceV2Response 返回参数} */
+  /** 创建服务 {@link V20201221.CreateServiceV2Request} {@link V20201221.CreateServiceV2Response} */
   CreateServiceV2(data: V20201221.CreateServiceV2Request, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.CreateServiceV2Response>;
-  /** {@link V20201221.DeleteIngress 删除 Ingress 规则}({@link V20201221.DeleteIngressRequest 请求参数}): {@link V20201221.DeleteIngressResponse 返回参数} */
+  /** 删除 Ingress 规则 {@link V20201221.DeleteIngressRequest} {@link V20201221.DeleteIngressResponse} */
   DeleteIngress(data: V20201221.DeleteIngressRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.DeleteIngressResponse>;
-  /** {@link V20201221.DeployServiceV2 服务部署}({@link V20201221.DeployServiceV2Request 请求参数}): {@link V20201221.DeployServiceV2Response 返回参数} */
+  /** 服务部署 {@link V20201221.DeployServiceV2Request} {@link V20201221.DeployServiceV2Response} */
   DeployServiceV2(data: V20201221.DeployServiceV2Request, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.DeployServiceV2Response>;
-  /** {@link V20201221.DescribeIngress 查询 Ingress 规则}({@link V20201221.DescribeIngressRequest 请求参数}): {@link V20201221.DescribeIngressResponse 返回参数} */
+  /** 查询 Ingress 规则 {@link V20201221.DescribeIngressRequest} {@link V20201221.DescribeIngressResponse} */
   DescribeIngress(data: V20201221.DescribeIngressRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.DescribeIngressResponse>;
-  /** {@link V20201221.DescribeIngresses 查询 Ingress 规则列表}({@link V20201221.DescribeIngressesRequest 请求参数}): {@link V20201221.DescribeIngressesResponse 返回参数} */
+  /** 查询 Ingress 规则列表 {@link V20201221.DescribeIngressesRequest} {@link V20201221.DescribeIngressesResponse} */
   DescribeIngresses(data: V20201221.DescribeIngressesRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.DescribeIngressesResponse>;
-  /** {@link V20201221.DescribeNamespaces 获取租户命名空间列表}({@link V20201221.DescribeNamespacesRequest 请求参数}): {@link V20201221.DescribeNamespacesResponse 返回参数} */
+  /** 获取租户命名空间列表 {@link V20201221.DescribeNamespacesRequest} {@link V20201221.DescribeNamespacesResponse} */
   DescribeNamespaces(data: V20201221.DescribeNamespacesRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.DescribeNamespacesResponse>;
-  /** {@link V20201221.DescribeRelatedIngresses 查询服务关联的 Ingress 规则列表}({@link V20201221.DescribeRelatedIngressesRequest 请求参数}): {@link V20201221.DescribeRelatedIngressesResponse 返回参数} */
+  /** 查询服务关联的 Ingress 规则列表 {@link V20201221.DescribeRelatedIngressesRequest} {@link V20201221.DescribeRelatedIngressesResponse} */
   DescribeRelatedIngresses(data: V20201221.DescribeRelatedIngressesRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.DescribeRelatedIngressesResponse>;
-  /** {@link V20201221.DescribeServiceRunPodListV2 获取服务下面运行pod列表}({@link V20201221.DescribeServiceRunPodListV2Request 请求参数}): {@link V20201221.DescribeServiceRunPodListV2Response 返回参数} */
+  /** 获取服务下面运行pod列表 {@link V20201221.DescribeServiceRunPodListV2Request} {@link V20201221.DescribeServiceRunPodListV2Response} */
   DescribeServiceRunPodListV2(data: V20201221.DescribeServiceRunPodListV2Request, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.DescribeServiceRunPodListV2Response>;
-  /** {@link V20201221.GenerateDownloadUrl 生成包预签名下载链接}({@link V20201221.GenerateDownloadUrlRequest 请求参数}): {@link V20201221.GenerateDownloadUrlResponse 返回参数} */
+  /** 生成包预签名下载链接 {@link V20201221.GenerateDownloadUrlRequest} {@link V20201221.GenerateDownloadUrlResponse} */
   GenerateDownloadUrl(data: V20201221.GenerateDownloadUrlRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.GenerateDownloadUrlResponse>;
-  /** {@link V20201221.ModifyIngress 创建或者更新 Ingress 规则}({@link V20201221.ModifyIngressRequest 请求参数}): {@link V20201221.ModifyIngressResponse 返回参数} */
+  /** 创建或者更新 Ingress 规则 {@link V20201221.ModifyIngressRequest} {@link V20201221.ModifyIngressResponse} */
   ModifyIngress(data: V20201221.ModifyIngressRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.ModifyIngressResponse>;
-  /** {@link V20201221.ModifyNamespace 编辑命名空间}({@link V20201221.ModifyNamespaceRequest 请求参数}): {@link V20201221.ModifyNamespaceResponse 返回参数} */
+  /** 编辑命名空间 {@link V20201221.ModifyNamespaceRequest} {@link V20201221.ModifyNamespaceResponse} */
   ModifyNamespace(data: V20201221.ModifyNamespaceRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.ModifyNamespaceResponse>;
-  /** {@link V20201221.ModifyServiceInfo 修改服务基本信息}({@link V20201221.ModifyServiceInfoRequest 请求参数}): {@link V20201221.ModifyServiceInfoResponse 返回参数} */
+  /** 修改服务基本信息 {@link V20201221.ModifyServiceInfoRequest} {@link V20201221.ModifyServiceInfoResponse} */
   ModifyServiceInfo(data: V20201221.ModifyServiceInfoRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.ModifyServiceInfoResponse>;
-  /** {@link V20201221.RestartServiceRunPod 重启实例}({@link V20201221.RestartServiceRunPodRequest 请求参数}): {@link V20201221.RestartServiceRunPodResponse 返回参数} */
+  /** 重启实例 {@link V20201221.RestartServiceRunPodRequest} {@link V20201221.RestartServiceRunPodResponse} */
   RestartServiceRunPod(data: V20201221.RestartServiceRunPodRequest, config: AxiosRequestConfig & V20201221.VersionHeader): AxiosPromise<V20201221.RestartServiceRunPodResponse>;
 }
 

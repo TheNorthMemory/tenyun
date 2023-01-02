@@ -2498,7 +2498,7 @@ declare interface AddCLSTopicDomainsRequest {
 }
 
 declare interface AddCLSTopicDomainsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2582,7 +2582,7 @@ declare interface AddCdnDomainRequest {
 }
 
 declare interface AddCdnDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2600,7 +2600,7 @@ declare interface CreateClsLogTopicRequest {
 declare interface CreateClsLogTopicResponse {
   /** 主题ID */
   TopicId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2614,7 +2614,7 @@ declare interface CreateDiagnoseUrlRequest {
 declare interface CreateDiagnoseUrlResponse {
   /** 系统生成的诊断链接，一个诊断链接最多可访问10次，有效期为24h。 */
   DiagnoseLink: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2630,7 +2630,7 @@ declare interface CreateEdgePackTaskRequest {
 }
 
 declare interface CreateEdgePackTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2652,7 +2652,7 @@ declare interface CreateScdnDomainRequest {
 declare interface CreateScdnDomainResponse {
   /** 创建结果，Success表示成功 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2666,7 +2666,7 @@ declare interface CreateScdnFailedLogTaskRequest {
 declare interface CreateScdnFailedLogTaskResponse {
   /** 创建结果, "0" -> 创建成功 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2700,7 +2700,7 @@ declare interface CreateScdnLogTaskRequest {
 declare interface CreateScdnLogTaskResponse {
   /** 创建结果, "0" -> 创建成功 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2722,7 +2722,7 @@ declare interface CreateVerifyRecordResponse {
   FileVerifyDomains: string[] | null;
   /** 文件校验文件名 */
   FileVerifyName: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2732,7 +2732,7 @@ declare interface DeleteCdnDomainRequest {
 }
 
 declare interface DeleteCdnDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2746,7 +2746,7 @@ declare interface DeleteClsLogTopicRequest {
 }
 
 declare interface DeleteClsLogTopicResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2758,7 +2758,7 @@ declare interface DeleteScdnDomainRequest {
 declare interface DeleteScdnDomainResponse {
   /** 创建结果，Success表示成功 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2790,7 +2790,7 @@ declare interface DescribeBillingDataResponse {
   Interval: string;
   /** 数据明细 */
   Data: ResourceBillingData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2824,7 +2824,7 @@ declare interface DescribeCcDataResponse {
   RedirectQpsData: TimestampData[] | null;
   /** 执行动作为观察类型QPS统计数据 */
   ObserveQpsData: TimestampData[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2868,7 +2868,7 @@ declare interface DescribeCdnDataResponse {
   Interval: string;
   /** 指定条件查询得到的数据明细 */
   Data: ResourceData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2894,7 +2894,7 @@ declare interface DescribeCdnDomainLogsResponse {
   DomainLogs: DomainLog[];
   /** 查询到的总条数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2906,7 +2906,7 @@ declare interface DescribeCdnIpRequest {
 declare interface DescribeCdnIpResponse {
   /** 查询的节点归属详情。 */
   Ips: CdnIp[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2918,7 +2918,7 @@ declare interface DescribeCdnOriginIpResponse {
   Ips: OriginIp[];
   /** 回源节点IP总个数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2936,7 +2936,7 @@ declare interface DescribeCertDomainsResponse {
   Domains: string[] | null;
   /** 已配置证书的CDN域名列表 */
   CertifiedDomains: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2956,7 +2956,7 @@ declare interface DescribeDDoSDataResponse {
   Interval: string;
   /** DDoS统计攻击带宽峰值数组 */
   AttackBandwidthData: DDoSAttackBandwidthData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2984,7 +2984,7 @@ declare interface DescribeDiagnoseReportResponse {
   OriginInfo: DiagnoseData;
   /** 刷新检测信息 */
   PurgeInfo: DiagnoseData | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3012,7 +3012,7 @@ declare interface DescribeDistrictIspDataRequest {
 declare interface DescribeDistrictIspDataResponse {
   /** 地区运营商数据明细 */
   Data: DistrictIspInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3032,7 +3032,7 @@ declare interface DescribeDomainsConfigResponse {
   Domains: DetailDomain[];
   /** 符合查询条件的域名总数用于分页查询 */
   TotalNumber: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3050,7 +3050,7 @@ declare interface DescribeDomainsResponse {
   Domains: BriefDomain[];
   /** 符合查询条件的域名总数用于分页查询 */
   TotalNumber: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3076,7 +3076,7 @@ declare interface DescribeEventLogDataRequest {
 declare interface DescribeEventLogDataResponse {
   /** 统计曲线结果 */
   Results: EventLogStatsData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3094,7 +3094,7 @@ declare interface DescribeImageConfigResponse {
   GuetzliAdapter: GuetzliAdapter | null;
   /** AvifAdapter配置项 */
   AvifAdapter: AvifAdapter | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3118,7 +3118,7 @@ declare interface DescribeIpStatusResponse {
   Ips: IpStatus[];
   /** 节点总个数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3140,7 +3140,7 @@ declare interface DescribeIpVisitResponse {
   Interval: string;
   /** 各个资源的回源数据详情。 */
   Data: ResourceData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3156,7 +3156,7 @@ declare interface DescribeMapInfoResponse {
   ServerRegionRelation: RegionMapRelation[] | null;
   /** 客户端区域id和子区域id的映射关系。 */
   ClientRegionRelation: RegionMapRelation[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3186,7 +3186,7 @@ declare interface DescribeOriginDataResponse {
   Interval: string;
   /** 各个资源的回源数据详情。 */
   Data: ResourceOriginData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3208,7 +3208,7 @@ declare interface DescribePayTypeResponse {
   RegionType: string;
   /** 当前生效计费类型：flux：流量计费bandwidth：带宽计费request：请求数计费flux_sep：动静分离流量计费bandwidth_sep：动静分离带宽计费 */
   CurrentPayType: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3220,7 +3220,7 @@ declare interface DescribePurgeQuotaResponse {
   UrlPurge: Quota[];
   /** 目录刷新用量及配额。 */
   PathPurge: Quota[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3250,7 +3250,7 @@ declare interface DescribePurgeTasksResponse {
   PurgeLogs: PurgeTask[] | null;
   /** 任务总数，用于分页 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3260,7 +3260,7 @@ declare interface DescribePushQuotaRequest {
 declare interface DescribePushQuotaResponse {
   /** Url预热用量及配额。 */
   UrlPush: Quota[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3288,7 +3288,7 @@ declare interface DescribePushTasksResponse {
   PushLogs: PushTask[] | null;
   /** 任务总数，用于分页 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3314,7 +3314,7 @@ declare interface DescribeReportDataResponse {
   DomainReport: ReportData[];
   /** 项目维度数据详情 */
   ProjectReport: ReportData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3336,7 +3336,7 @@ declare interface DescribeScdnBotDataResponse {
   Data: BotStats[];
   /** 当前返回数据的粒度，取值："2min"或者"hour"，分别表示2分钟或者1小时粒度 */
   Interval: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3372,7 +3372,7 @@ declare interface DescribeScdnBotRecordsResponse {
   Data: BotRecord[];
   /** 记录数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3394,7 +3394,7 @@ declare interface DescribeScdnConfigResponse {
   Bot: ScdnBotConfig;
   /** 当前状态，取值online | offline */
   Status: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3416,7 +3416,7 @@ declare interface DescribeScdnIpStrategyResponse {
   IpStrategyList?: ScdnIpStrategy[] | null;
   /** 配置的策略条数 */
   TotalCount?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3448,7 +3448,7 @@ declare interface DescribeScdnTopDataResponse {
   Mode?: string;
   /** TOP URL 统计 */
   TopUrlData?: ScdnTopUrlData[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3476,7 +3476,7 @@ declare interface DescribeTopDataRequest {
 declare interface DescribeTopDataResponse {
   /** 各个资源的Top 访问数据详情。 */
   Data: TopDataMore[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3500,7 +3500,7 @@ declare interface DescribeTrafficPackagesResponse {
   EnabledCount: number;
   /** 付费流量包个数 */
   PaidCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3518,7 +3518,7 @@ declare interface DescribeUrlViolationsResponse {
   UrlRecordList: ViolationUrl[] | null;
   /** 记录总数，用于分页 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3548,7 +3548,7 @@ declare interface DescribeWafDataResponse {
   Data: TimestampData[];
   /** 粒度 */
   Interval: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3562,7 +3562,7 @@ declare interface DisableCachesResponse {
   CacheOptResult: CacheOptResult | null;
   /** 任务ID */
   TaskId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3576,7 +3576,7 @@ declare interface DisableClsLogTopicRequest {
 }
 
 declare interface DisableClsLogTopicResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3588,7 +3588,7 @@ declare interface DuplicateDomainConfigRequest {
 }
 
 declare interface DuplicateDomainConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3604,7 +3604,7 @@ declare interface EnableCachesResponse {
   CacheOptResult: CacheOptResult | null;
   /** 任务ID */
   TaskId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3618,7 +3618,7 @@ declare interface EnableClsLogTopicRequest {
 }
 
 declare interface EnableClsLogTopicResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3644,7 +3644,7 @@ declare interface GetDisableRecordsResponse {
   UrlRecordList: UrlRecord[] | null;
   /** 任务总数，用于分页 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3660,7 +3660,7 @@ declare interface ListClsLogTopicsResponse {
   Topics: TopicInfo[] | null;
   /** 其他区域日志集信息列表 */
   ExtraLogset: ExtraLogset[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3688,7 +3688,7 @@ declare interface ListClsTopicDomainsResponse {
   TopicName: string;
   /** 日志主题最近更新时间 */
   UpdateTime: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3704,7 +3704,7 @@ declare interface ListDiagnoseReportRequest {
 declare interface ListDiagnoseReportResponse {
   /** 诊断信息。 */
   Data: DiagnoseInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3722,7 +3722,7 @@ declare interface ListScdnDomainsResponse {
   DomainList?: ScdnDomain[] | null;
   /** 域名的总条数。 */
   TotalCount?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3738,7 +3738,7 @@ declare interface ListScdnLogTasksResponse {
   TaskList: ScdnLogTaskDetail[];
   /** 查询到的下载任务的总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3760,7 +3760,7 @@ declare interface ListScdnTopBotDataRequest {
 declare interface ListScdnTopBotDataResponse {
   /** 域名BOT次数列表 */
   Data: BotStatisticsCount[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3782,7 +3782,7 @@ declare interface ListTopBotDataRequest {
 declare interface ListTopBotDataResponse {
   /** 域名BOT次数列表 */
   Data: DomainBotCount[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3808,7 +3808,7 @@ declare interface ListTopCcDataRequest {
 declare interface ListTopCcDataResponse {
   /** Top数据 */
   Data: CcTopData[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3840,7 +3840,7 @@ declare interface ListTopClsLogDataResponse {
   TotalCount: number;
   /** 获取到的不重复IP条数 */
   IpCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3860,7 +3860,7 @@ declare interface ListTopDDoSDataResponse {
   Data: DDoSTopData[];
   /** ddos攻击ip的top数据，Metric=AttackIP的时候返回IPData，Data为空 */
   IPData: DDoSAttackIPTopData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3894,7 +3894,7 @@ declare interface ListTopDataRequest {
 declare interface ListTopDataResponse {
   /** 各个资源的Top 访问数据详情。 */
   Data: TopData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3928,7 +3928,7 @@ declare interface ListTopWafDataResponse {
   TopUrlData: ScdnTopUrlData[];
   /** 域名统计 */
   TopDomainData: ScdnTopDomainData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3944,7 +3944,7 @@ declare interface ManageClsTopicDomainsRequest {
 }
 
 declare interface ManageClsTopicDomainsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3960,7 +3960,7 @@ declare interface ModifyPurgeFetchTaskStatusRequest {
 }
 
 declare interface ModifyPurgeFetchTaskStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3978,7 +3978,7 @@ declare interface PurgePathCacheRequest {
 declare interface PurgePathCacheResponse {
   /** 刷新任务 ID，同一批次提交的目录共用一个任务 ID */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3994,7 +3994,7 @@ declare interface PurgeUrlsCacheRequest {
 declare interface PurgeUrlsCacheResponse {
   /** 刷新任务 ID，同一批次提交的 URL 共用一个任务 ID */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4020,7 +4020,7 @@ declare interface PushUrlsCacheRequest {
 declare interface PushUrlsCacheResponse {
   /** 此批提交的任务 ID */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4048,7 +4048,7 @@ declare interface SearchClsLogRequest {
 declare interface SearchClsLogResponse {
   /** 查询结果 */
   Logs: ClsSearchLogs;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4058,7 +4058,7 @@ declare interface StartCdnDomainRequest {
 }
 
 declare interface StartCdnDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4070,7 +4070,7 @@ declare interface StartScdnDomainRequest {
 declare interface StartScdnDomainResponse {
   /** 开启结果，Success表示成功 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4080,7 +4080,7 @@ declare interface StopCdnDomainRequest {
 }
 
 declare interface StopCdnDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4092,7 +4092,7 @@ declare interface StopScdnDomainRequest {
 declare interface StopScdnDomainResponse {
   /** 关闭结果，Success表示成功 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4194,7 +4194,7 @@ declare interface UpdateDomainConfigRequest {
 }
 
 declare interface UpdateDomainConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4212,7 +4212,7 @@ declare interface UpdateImageConfigRequest {
 }
 
 declare interface UpdateImageConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4224,7 +4224,7 @@ declare interface UpdatePayTypeRequest {
 }
 
 declare interface UpdatePayTypeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4246,7 +4246,7 @@ declare interface UpdateScdnDomainRequest {
 declare interface UpdateScdnDomainResponse {
   /** 提交结果，Success表示成功 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4260,168 +4260,168 @@ declare interface VerifyDomainRecordRequest {
 declare interface VerifyDomainRecordResponse {
   /** 是否验证成功 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cdn 内容分发网络 CDN} */
 declare interface Cdn {
   (): Versions;
-  /** {@link AddCLSTopicDomains 新增日志主题下绑定的域名}({@link AddCLSTopicDomainsRequest 请求参数}): {@link AddCLSTopicDomainsResponse 返回参数} */
+  /** 新增日志主题下绑定的域名 {@link AddCLSTopicDomainsRequest} {@link AddCLSTopicDomainsResponse} */
   AddCLSTopicDomains(data: AddCLSTopicDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<AddCLSTopicDomainsResponse>;
-  /** {@link AddCdnDomain 新增加速域名}({@link AddCdnDomainRequest 请求参数}): {@link AddCdnDomainResponse 返回参数} */
+  /** 新增加速域名 {@link AddCdnDomainRequest} {@link AddCdnDomainResponse} */
   AddCdnDomain(data: AddCdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<AddCdnDomainResponse>;
-  /** {@link CreateClsLogTopic 创建日志主题}({@link CreateClsLogTopicRequest 请求参数}): {@link CreateClsLogTopicResponse 返回参数} */
+  /** 创建日志主题 {@link CreateClsLogTopicRequest} {@link CreateClsLogTopicResponse} */
   CreateClsLogTopic(data: CreateClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClsLogTopicResponse>;
-  /** {@link CreateDiagnoseUrl 添加诊断URL}({@link CreateDiagnoseUrlRequest 请求参数}): {@link CreateDiagnoseUrlResponse 返回参数} */
+  /** 添加诊断URL {@link CreateDiagnoseUrlRequest} {@link CreateDiagnoseUrlResponse} */
   CreateDiagnoseUrl(data: CreateDiagnoseUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDiagnoseUrlResponse>;
-  /** {@link CreateEdgePackTask 动态打包任务提交}({@link CreateEdgePackTaskRequest 请求参数}): {@link CreateEdgePackTaskResponse 返回参数} */
+  /** 动态打包任务提交 {@link CreateEdgePackTaskRequest} {@link CreateEdgePackTaskResponse} */
   CreateEdgePackTask(data: CreateEdgePackTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgePackTaskResponse>;
-  /** {@link CreateScdnDomain 创建SCDN域名}({@link CreateScdnDomainRequest 请求参数}): {@link CreateScdnDomainResponse 返回参数} */
+  /** 创建SCDN域名 {@link CreateScdnDomainRequest} {@link CreateScdnDomainResponse} */
   CreateScdnDomain(data: CreateScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScdnDomainResponse>;
-  /** {@link CreateScdnFailedLogTask 重试创建事件日志任务}({@link CreateScdnFailedLogTaskRequest 请求参数}): {@link CreateScdnFailedLogTaskResponse 返回参数} */
+  /** 重试创建事件日志任务 {@link CreateScdnFailedLogTaskRequest} {@link CreateScdnFailedLogTaskResponse} */
   CreateScdnFailedLogTask(data: CreateScdnFailedLogTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScdnFailedLogTaskResponse>;
-  /** {@link CreateScdnLogTask 创建事件日志任务}({@link CreateScdnLogTaskRequest 请求参数}): {@link CreateScdnLogTaskResponse 返回参数} */
+  /** 创建事件日志任务 {@link CreateScdnLogTaskRequest} {@link CreateScdnLogTaskResponse} */
   CreateScdnLogTask(data: CreateScdnLogTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScdnLogTaskResponse>;
-  /** {@link CreateVerifyRecord 生成解析记录}({@link CreateVerifyRecordRequest 请求参数}): {@link CreateVerifyRecordResponse 返回参数} */
+  /** 生成解析记录 {@link CreateVerifyRecordRequest} {@link CreateVerifyRecordResponse} */
   CreateVerifyRecord(data: CreateVerifyRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVerifyRecordResponse>;
-  /** {@link DeleteCdnDomain 删除加速域名}({@link DeleteCdnDomainRequest 请求参数}): {@link DeleteCdnDomainResponse 返回参数} */
+  /** 删除加速域名 {@link DeleteCdnDomainRequest} {@link DeleteCdnDomainResponse} */
   DeleteCdnDomain(data: DeleteCdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCdnDomainResponse>;
-  /** {@link DeleteClsLogTopic 删除日志主题}({@link DeleteClsLogTopicRequest 请求参数}): {@link DeleteClsLogTopicResponse 返回参数} */
+  /** 删除日志主题 {@link DeleteClsLogTopicRequest} {@link DeleteClsLogTopicResponse} */
   DeleteClsLogTopic(data: DeleteClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClsLogTopicResponse>;
-  /** {@link DeleteScdnDomain 删除SCDN域名}({@link DeleteScdnDomainRequest 请求参数}): {@link DeleteScdnDomainResponse 返回参数} */
+  /** 删除SCDN域名 {@link DeleteScdnDomainRequest} {@link DeleteScdnDomainResponse} */
   DeleteScdnDomain(data: DeleteScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScdnDomainResponse>;
-  /** {@link DescribeBillingData 计费数据查询}({@link DescribeBillingDataRequest 请求参数}): {@link DescribeBillingDataResponse 返回参数} */
+  /** 计费数据查询 {@link DescribeBillingDataRequest} {@link DescribeBillingDataResponse} */
   DescribeBillingData(data: DescribeBillingDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingDataResponse>;
-  /** {@link DescribeCcData CC统计数据查询}({@link DescribeCcDataRequest 请求参数}): {@link DescribeCcDataResponse 返回参数} */
+  /** CC统计数据查询 {@link DescribeCcDataRequest} {@link DescribeCcDataResponse} */
   DescribeCcData(data: DescribeCcDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcDataResponse>;
-  /** {@link DescribeCdnData 访问数据查询}({@link DescribeCdnDataRequest 请求参数}): {@link DescribeCdnDataResponse 返回参数} */
+  /** 访问数据查询 {@link DescribeCdnDataRequest} {@link DescribeCdnDataResponse} */
   DescribeCdnData(data: DescribeCdnDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnDataResponse>;
-  /** {@link DescribeCdnDomainLogs 日志下载链接查询}({@link DescribeCdnDomainLogsRequest 请求参数}): {@link DescribeCdnDomainLogsResponse 返回参数} */
+  /** 日志下载链接查询 {@link DescribeCdnDomainLogsRequest} {@link DescribeCdnDomainLogsResponse} */
   DescribeCdnDomainLogs(data: DescribeCdnDomainLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnDomainLogsResponse>;
-  /** {@link DescribeCdnIp IP 归属查询}({@link DescribeCdnIpRequest 请求参数}): {@link DescribeCdnIpResponse 返回参数} */
+  /** IP 归属查询 {@link DescribeCdnIpRequest} {@link DescribeCdnIpResponse} */
   DescribeCdnIp(data: DescribeCdnIpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnIpResponse>;
-  /** {@link DescribeCdnOriginIp 查询回源节点}({@link DescribeCdnOriginIpRequest 请求参数}): {@link DescribeCdnOriginIpResponse 返回参数} */
+  /** 查询回源节点 {@link DescribeCdnOriginIpRequest} {@link DescribeCdnOriginIpResponse} */
   DescribeCdnOriginIp(data?: DescribeCdnOriginIpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnOriginIpResponse>;
-  /** {@link DescribeCertDomains 获取SSL证书中的可用域名}({@link DescribeCertDomainsRequest 请求参数}): {@link DescribeCertDomainsResponse 返回参数} */
+  /** 获取SSL证书中的可用域名 {@link DescribeCertDomainsRequest} {@link DescribeCertDomainsResponse} */
   DescribeCertDomains(data?: DescribeCertDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertDomainsResponse>;
-  /** {@link DescribeDDoSData DDoS统计数据查询}({@link DescribeDDoSDataRequest 请求参数}): {@link DescribeDDoSDataResponse 返回参数} */
+  /** DDoS统计数据查询 {@link DescribeDDoSDataRequest} {@link DescribeDDoSDataResponse} */
   DescribeDDoSData(data: DescribeDDoSDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSDataResponse>;
-  /** {@link DescribeDiagnoseReport 获取诊断报告}({@link DescribeDiagnoseReportRequest 请求参数}): {@link DescribeDiagnoseReportResponse 返回参数} */
+  /** 获取诊断报告 {@link DescribeDiagnoseReportRequest} {@link DescribeDiagnoseReportResponse} */
   DescribeDiagnoseReport(data: DescribeDiagnoseReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiagnoseReportResponse>;
-  /** {@link DescribeDistrictIspData 地区运营商明细查询}({@link DescribeDistrictIspDataRequest 请求参数}): {@link DescribeDistrictIspDataResponse 返回参数} */
+  /** 地区运营商明细查询 {@link DescribeDistrictIspDataRequest} {@link DescribeDistrictIspDataResponse} */
   DescribeDistrictIspData(data: DescribeDistrictIspDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDistrictIspDataResponse>;
-  /** {@link DescribeDomains 查询域名基本信息}({@link DescribeDomainsRequest 请求参数}): {@link DescribeDomainsResponse 返回参数} */
+  /** 查询域名基本信息 {@link DescribeDomainsRequest} {@link DescribeDomainsResponse} */
   DescribeDomains(data?: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
-  /** {@link DescribeDomainsConfig 查询域名详细配置}({@link DescribeDomainsConfigRequest 请求参数}): {@link DescribeDomainsConfigResponse 返回参数} */
+  /** 查询域名详细配置 {@link DescribeDomainsConfigRequest} {@link DescribeDomainsConfigResponse} */
   DescribeDomainsConfig(data?: DescribeDomainsConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsConfigResponse>;
-  /** {@link DescribeEventLogData 查询事件日志统计曲线}({@link DescribeEventLogDataRequest 请求参数}): {@link DescribeEventLogDataResponse 返回参数} */
+  /** 查询事件日志统计曲线 {@link DescribeEventLogDataRequest} {@link DescribeEventLogDataResponse} */
   DescribeEventLogData(data: DescribeEventLogDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventLogDataResponse>;
-  /** {@link DescribeImageConfig 获取图片优化的配置}({@link DescribeImageConfigRequest 请求参数}): {@link DescribeImageConfigResponse 返回参数} */
+  /** 获取图片优化的配置 {@link DescribeImageConfigRequest} {@link DescribeImageConfigResponse} */
   DescribeImageConfig(data: DescribeImageConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageConfigResponse>;
-  /** {@link DescribeIpStatus 查询域名节点状态}({@link DescribeIpStatusRequest 请求参数}): {@link DescribeIpStatusResponse 返回参数} */
+  /** 查询域名节点状态 {@link DescribeIpStatusRequest} {@link DescribeIpStatusResponse} */
   DescribeIpStatus(data: DescribeIpStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpStatusResponse>;
-  /** {@link DescribeIpVisit 活跃用户查询}({@link DescribeIpVisitRequest 请求参数}): {@link DescribeIpVisitResponse 返回参数} */
+  /** 活跃用户查询 {@link DescribeIpVisitRequest} {@link DescribeIpVisitResponse} */
   DescribeIpVisit(data: DescribeIpVisitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpVisitResponse>;
-  /** {@link DescribeMapInfo 省份运营商映射查询}({@link DescribeMapInfoRequest 请求参数}): {@link DescribeMapInfoResponse 返回参数} */
+  /** 省份运营商映射查询 {@link DescribeMapInfoRequest} {@link DescribeMapInfoResponse} */
   DescribeMapInfo(data: DescribeMapInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMapInfoResponse>;
-  /** {@link DescribeOriginData 回源数据查询}({@link DescribeOriginDataRequest 请求参数}): {@link DescribeOriginDataResponse 返回参数} */
+  /** 回源数据查询 {@link DescribeOriginDataRequest} {@link DescribeOriginDataResponse} */
   DescribeOriginData(data: DescribeOriginDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginDataResponse>;
-  /** {@link DescribePayType 查询计费方式}({@link DescribePayTypeRequest 请求参数}): {@link DescribePayTypeResponse 返回参数} */
+  /** 查询计费方式 {@link DescribePayTypeRequest} {@link DescribePayTypeResponse} */
   DescribePayType(data?: DescribePayTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePayTypeResponse>;
-  /** {@link DescribePurgeQuota 查询刷新用量配额}({@link DescribePurgeQuotaRequest 请求参数}): {@link DescribePurgeQuotaResponse 返回参数} */
+  /** 查询刷新用量配额 {@link DescribePurgeQuotaRequest} {@link DescribePurgeQuotaResponse} */
   DescribePurgeQuota(data?: DescribePurgeQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeQuotaResponse>;
-  /** {@link DescribePurgeTasks 刷新历史查询}({@link DescribePurgeTasksRequest 请求参数}): {@link DescribePurgeTasksResponse 返回参数} */
+  /** 刷新历史查询 {@link DescribePurgeTasksRequest} {@link DescribePurgeTasksResponse} */
   DescribePurgeTasks(data?: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;
-  /** {@link DescribePushQuota 查询预热用量配额}({@link DescribePushQuotaRequest 请求参数}): {@link DescribePushQuotaResponse 返回参数} */
+  /** 查询预热用量配额 {@link DescribePushQuotaRequest} {@link DescribePushQuotaResponse} */
   DescribePushQuota(data?: DescribePushQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushQuotaResponse>;
-  /** {@link DescribePushTasks 预热历史查询}({@link DescribePushTasksRequest 请求参数}): {@link DescribePushTasksResponse 返回参数} */
+  /** 预热历史查询 {@link DescribePushTasksRequest} {@link DescribePushTasksResponse} */
   DescribePushTasks(data?: DescribePushTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushTasksResponse>;
-  /** {@link DescribeReportData 查询报表数据}({@link DescribeReportDataRequest 请求参数}): {@link DescribeReportDataResponse 返回参数} */
+  /** 查询报表数据 {@link DescribeReportDataRequest} {@link DescribeReportDataResponse} */
   DescribeReportData(data: DescribeReportDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportDataResponse>;
-  /** {@link DescribeScdnBotData 获取BOT统计数据列表}({@link DescribeScdnBotDataRequest 请求参数}): {@link DescribeScdnBotDataResponse 返回参数} */
+  /** 获取BOT统计数据列表 {@link DescribeScdnBotDataRequest} {@link DescribeScdnBotDataResponse} */
   DescribeScdnBotData(data: DescribeScdnBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnBotDataResponse>;
-  /** {@link DescribeScdnBotRecords 查询BOT会话记录列表}({@link DescribeScdnBotRecordsRequest 请求参数}): {@link DescribeScdnBotRecordsResponse 返回参数} */
+  /** 查询BOT会话记录列表 {@link DescribeScdnBotRecordsRequest} {@link DescribeScdnBotRecordsResponse} */
   DescribeScdnBotRecords(data: DescribeScdnBotRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnBotRecordsResponse>;
-  /** {@link DescribeScdnConfig SCDN域名配置}({@link DescribeScdnConfigRequest 请求参数}): {@link DescribeScdnConfigResponse 返回参数} */
+  /** SCDN域名配置 {@link DescribeScdnConfigRequest} {@link DescribeScdnConfigResponse} */
   DescribeScdnConfig(data: DescribeScdnConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnConfigResponse>;
-  /** {@link DescribeScdnIpStrategy 查询SCDN安全防护IP白名单}({@link DescribeScdnIpStrategyRequest 请求参数}): {@link DescribeScdnIpStrategyResponse 返回参数} */
+  /** 查询SCDN安全防护IP白名单 {@link DescribeScdnIpStrategyRequest} {@link DescribeScdnIpStrategyResponse} */
   DescribeScdnIpStrategy(data?: DescribeScdnIpStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnIpStrategyResponse>;
-  /** {@link DescribeScdnTopData 获取SCDN的Top数据}({@link DescribeScdnTopDataRequest 请求参数}): {@link DescribeScdnTopDataResponse 返回参数} */
+  /** 获取SCDN的Top数据 {@link DescribeScdnTopDataRequest} {@link DescribeScdnTopDataResponse} */
   DescribeScdnTopData(data: DescribeScdnTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnTopDataResponse>;
-  /** {@link DescribeTopData TOP 新版数据查询（beta版）}({@link DescribeTopDataRequest 请求参数}): {@link DescribeTopDataResponse 返回参数} */
+  /** TOP 新版数据查询（beta版） {@link DescribeTopDataRequest} {@link DescribeTopDataResponse} */
   DescribeTopData(data: DescribeTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopDataResponse>;
-  /** {@link DescribeTrafficPackages 流量包查询}({@link DescribeTrafficPackagesRequest 请求参数}): {@link DescribeTrafficPackagesResponse 返回参数} */
+  /** 流量包查询 {@link DescribeTrafficPackagesRequest} {@link DescribeTrafficPackagesResponse} */
   DescribeTrafficPackages(data?: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;
-  /** {@link DescribeUrlViolations 违规历史查询}({@link DescribeUrlViolationsRequest 请求参数}): {@link DescribeUrlViolationsResponse 返回参数} */
+  /** 违规历史查询 {@link DescribeUrlViolationsRequest} {@link DescribeUrlViolationsResponse} */
   DescribeUrlViolations(data?: DescribeUrlViolationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUrlViolationsResponse>;
-  /** {@link DescribeWafData Waf统计数据查询}({@link DescribeWafDataRequest 请求参数}): {@link DescribeWafDataResponse 返回参数} */
+  /** Waf统计数据查询 {@link DescribeWafDataRequest} {@link DescribeWafDataResponse} */
   DescribeWafData(data: DescribeWafDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafDataResponse>;
-  /** {@link DisableCaches 禁用 URL}({@link DisableCachesRequest 请求参数}): {@link DisableCachesResponse 返回参数} */
+  /** 禁用 URL {@link DisableCachesRequest} {@link DisableCachesResponse} */
   DisableCaches(data: DisableCachesRequest, config?: AxiosRequestConfig): AxiosPromise<DisableCachesResponse>;
-  /** {@link DisableClsLogTopic 停止日志主题投递}({@link DisableClsLogTopicRequest 请求参数}): {@link DisableClsLogTopicResponse 返回参数} */
+  /** 停止日志主题投递 {@link DisableClsLogTopicRequest} {@link DisableClsLogTopicResponse} */
   DisableClsLogTopic(data: DisableClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DisableClsLogTopicResponse>;
-  /** {@link DuplicateDomainConfig 拷贝域名}({@link DuplicateDomainConfigRequest 请求参数}): {@link DuplicateDomainConfigResponse 返回参数} */
+  /** 拷贝域名 {@link DuplicateDomainConfigRequest} {@link DuplicateDomainConfigResponse} */
   DuplicateDomainConfig(data: DuplicateDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DuplicateDomainConfigResponse>;
-  /** {@link EnableCaches 解禁 URL}({@link EnableCachesRequest 请求参数}): {@link EnableCachesResponse 返回参数} */
+  /** 解禁 URL {@link EnableCachesRequest} {@link EnableCachesResponse} */
   EnableCaches(data: EnableCachesRequest, config?: AxiosRequestConfig): AxiosPromise<EnableCachesResponse>;
-  /** {@link EnableClsLogTopic 启动日志主题投递}({@link EnableClsLogTopicRequest 请求参数}): {@link EnableClsLogTopicResponse 返回参数} */
+  /** 启动日志主题投递 {@link EnableClsLogTopicRequest} {@link EnableClsLogTopicResponse} */
   EnableClsLogTopic(data: EnableClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<EnableClsLogTopicResponse>;
-  /** {@link GetDisableRecords 禁用历史查询}({@link GetDisableRecordsRequest 请求参数}): {@link GetDisableRecordsResponse 返回参数} */
+  /** 禁用历史查询 {@link GetDisableRecordsRequest} {@link GetDisableRecordsResponse} */
   GetDisableRecords(data?: GetDisableRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<GetDisableRecordsResponse>;
-  /** {@link ListClsLogTopics 显示日志主题列表}({@link ListClsLogTopicsRequest 请求参数}): {@link ListClsLogTopicsResponse 返回参数} */
+  /** 显示日志主题列表 {@link ListClsLogTopicsRequest} {@link ListClsLogTopicsResponse} */
   ListClsLogTopics(data?: ListClsLogTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClsLogTopicsResponse>;
-  /** {@link ListClsTopicDomains 获取日志主题下绑定的域名}({@link ListClsTopicDomainsRequest 请求参数}): {@link ListClsTopicDomainsResponse 返回参数} */
+  /** 获取日志主题下绑定的域名 {@link ListClsTopicDomainsRequest} {@link ListClsTopicDomainsResponse} */
   ListClsTopicDomains(data: ListClsTopicDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClsTopicDomainsResponse>;
-  /** {@link ListDiagnoseReport 获取诊断任务列表}({@link ListDiagnoseReportRequest 请求参数}): {@link ListDiagnoseReportResponse 返回参数} */
+  /** 获取诊断任务列表 {@link ListDiagnoseReportRequest} {@link ListDiagnoseReportResponse} */
   ListDiagnoseReport(data?: ListDiagnoseReportRequest, config?: AxiosRequestConfig): AxiosPromise<ListDiagnoseReportResponse>;
-  /** {@link ListScdnDomains 查询SCDN域名列表}({@link ListScdnDomainsRequest 请求参数}): {@link ListScdnDomainsResponse 返回参数} */
+  /** 查询SCDN域名列表 {@link ListScdnDomainsRequest} {@link ListScdnDomainsResponse} */
   ListScdnDomains(data?: ListScdnDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnDomainsResponse>;
-  /** {@link ListScdnLogTasks 查询SCDN日志下载任务列表}({@link ListScdnLogTasksRequest 请求参数}): {@link ListScdnLogTasksResponse 返回参数} */
+  /** 查询SCDN日志下载任务列表 {@link ListScdnLogTasksRequest} {@link ListScdnLogTasksResponse} */
   ListScdnLogTasks(data?: ListScdnLogTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnLogTasksResponse>;
-  /** {@link ListScdnTopBotData 获取Bot攻击的Top数据列表}({@link ListScdnTopBotDataRequest 请求参数}): {@link ListScdnTopBotDataResponse 返回参数} */
+  /** 获取Bot攻击的Top数据列表 {@link ListScdnTopBotDataRequest} {@link ListScdnTopBotDataResponse} */
   ListScdnTopBotData(data: ListScdnTopBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnTopBotDataResponse>;
-  /** {@link ListTopBotData 获取Bot攻击的Top信息}({@link ListTopBotDataRequest 请求参数}): {@link ListTopBotDataResponse 返回参数} */
+  /** 获取Bot攻击的Top信息 {@link ListTopBotDataRequest} {@link ListTopBotDataResponse} */
   ListTopBotData(data: ListTopBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopBotDataResponse>;
-  /** {@link ListTopCcData 获取CC攻击Top数据}({@link ListTopCcDataRequest 请求参数}): {@link ListTopCcDataResponse 返回参数} */
+  /** 获取CC攻击Top数据 {@link ListTopCcDataRequest} {@link ListTopCcDataResponse} */
   ListTopCcData(data: ListTopCcDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopCcDataResponse>;
-  /** {@link ListTopClsLogData 通过CLS日志计算Top信息}({@link ListTopClsLogDataRequest 请求参数}): {@link ListTopClsLogDataResponse 返回参数} */
+  /** 通过CLS日志计算Top信息 {@link ListTopClsLogDataRequest} {@link ListTopClsLogDataResponse} */
   ListTopClsLogData(data: ListTopClsLogDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopClsLogDataResponse>;
-  /** {@link ListTopDDoSData 获取DDoS攻击Top数据}({@link ListTopDDoSDataRequest 请求参数}): {@link ListTopDDoSDataResponse 返回参数} */
+  /** 获取DDoS攻击Top数据 {@link ListTopDDoSDataRequest} {@link ListTopDDoSDataResponse} */
   ListTopDDoSData(data: ListTopDDoSDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopDDoSDataResponse>;
-  /** {@link ListTopData TOP 数据查询}({@link ListTopDataRequest 请求参数}): {@link ListTopDataResponse 返回参数} */
+  /** TOP 数据查询 {@link ListTopDataRequest} {@link ListTopDataResponse} */
   ListTopData(data: ListTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopDataResponse>;
-  /** {@link ListTopWafData 获取Waf攻击Top数据}({@link ListTopWafDataRequest 请求参数}): {@link ListTopWafDataResponse 返回参数} */
+  /** 获取Waf攻击Top数据 {@link ListTopWafDataRequest} {@link ListTopWafDataResponse} */
   ListTopWafData(data: ListTopWafDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopWafDataResponse>;
-  /** {@link ManageClsTopicDomains 管理日志主题下绑定的域名}({@link ManageClsTopicDomainsRequest 请求参数}): {@link ManageClsTopicDomainsResponse 返回参数} */
+  /** 管理日志主题下绑定的域名 {@link ManageClsTopicDomainsRequest} {@link ManageClsTopicDomainsResponse} */
   ManageClsTopicDomains(data: ManageClsTopicDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ManageClsTopicDomainsResponse>;
-  /** {@link ModifyPurgeFetchTaskStatus 上报定时刷新预热任务执行状态}({@link ModifyPurgeFetchTaskStatusRequest 请求参数}): {@link ModifyPurgeFetchTaskStatusResponse 返回参数} */
+  /** 上报定时刷新预热任务执行状态 {@link ModifyPurgeFetchTaskStatusRequest} {@link ModifyPurgeFetchTaskStatusResponse} */
   ModifyPurgeFetchTaskStatus(data: ModifyPurgeFetchTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPurgeFetchTaskStatusResponse>;
-  /** {@link PurgePathCache 刷新目录}({@link PurgePathCacheRequest 请求参数}): {@link PurgePathCacheResponse 返回参数} */
+  /** 刷新目录 {@link PurgePathCacheRequest} {@link PurgePathCacheResponse} */
   PurgePathCache(data: PurgePathCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PurgePathCacheResponse>;
-  /** {@link PurgeUrlsCache 刷新 URL}({@link PurgeUrlsCacheRequest 请求参数}): {@link PurgeUrlsCacheResponse 返回参数} */
+  /** 刷新 URL {@link PurgeUrlsCacheRequest} {@link PurgeUrlsCacheResponse} */
   PurgeUrlsCache(data: PurgeUrlsCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PurgeUrlsCacheResponse>;
-  /** {@link PushUrlsCache 预热 URL}({@link PushUrlsCacheRequest 请求参数}): {@link PushUrlsCacheResponse 返回参数} */
+  /** 预热 URL {@link PushUrlsCacheRequest} {@link PushUrlsCacheResponse} */
   PushUrlsCache(data: PushUrlsCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PushUrlsCacheResponse>;
-  /** {@link SearchClsLog 搜索CLS日志}({@link SearchClsLogRequest 请求参数}): {@link SearchClsLogResponse 返回参数} */
+  /** 搜索CLS日志 {@link SearchClsLogRequest} {@link SearchClsLogResponse} */
   SearchClsLog(data: SearchClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClsLogResponse>;
-  /** {@link StartCdnDomain 启用加速域名}({@link StartCdnDomainRequest 请求参数}): {@link StartCdnDomainResponse 返回参数} */
+  /** 启用加速域名 {@link StartCdnDomainRequest} {@link StartCdnDomainResponse} */
   StartCdnDomain(data: StartCdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StartCdnDomainResponse>;
-  /** {@link StartScdnDomain 启动SCDN域名安全防护}({@link StartScdnDomainRequest 请求参数}): {@link StartScdnDomainResponse 返回参数} */
+  /** 启动SCDN域名安全防护 {@link StartScdnDomainRequest} {@link StartScdnDomainResponse} */
   StartScdnDomain(data: StartScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StartScdnDomainResponse>;
-  /** {@link StopCdnDomain 停用加速域名}({@link StopCdnDomainRequest 请求参数}): {@link StopCdnDomainResponse 返回参数} */
+  /** 停用加速域名 {@link StopCdnDomainRequest} {@link StopCdnDomainResponse} */
   StopCdnDomain(data: StopCdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StopCdnDomainResponse>;
-  /** {@link StopScdnDomain 停止SCDN域名安全防护}({@link StopScdnDomainRequest 请求参数}): {@link StopScdnDomainResponse 返回参数} */
+  /** 停止SCDN域名安全防护 {@link StopScdnDomainRequest} {@link StopScdnDomainResponse} */
   StopScdnDomain(data: StopScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StopScdnDomainResponse>;
-  /** {@link UpdateDomainConfig 更新加速域名配置}({@link UpdateDomainConfigRequest 请求参数}): {@link UpdateDomainConfigResponse 返回参数} */
+  /** 更新加速域名配置 {@link UpdateDomainConfigRequest} {@link UpdateDomainConfigResponse} */
   UpdateDomainConfig(data: UpdateDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDomainConfigResponse>;
-  /** {@link UpdateImageConfig 更新图片优化配置}({@link UpdateImageConfigRequest 请求参数}): {@link UpdateImageConfigResponse 返回参数} */
+  /** 更新图片优化配置 {@link UpdateImageConfigRequest} {@link UpdateImageConfigResponse} */
   UpdateImageConfig(data: UpdateImageConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateImageConfigResponse>;
-  /** {@link UpdatePayType 修改计费类型}({@link UpdatePayTypeRequest 请求参数}): {@link UpdatePayTypeResponse 返回参数} */
+  /** 修改计费类型 {@link UpdatePayTypeRequest} {@link UpdatePayTypeResponse} */
   UpdatePayType(data: UpdatePayTypeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePayTypeResponse>;
-  /** {@link UpdateScdnDomain 更新SCDN域名配置}({@link UpdateScdnDomainRequest 请求参数}): {@link UpdateScdnDomainResponse 返回参数} */
+  /** 更新SCDN域名配置 {@link UpdateScdnDomainRequest} {@link UpdateScdnDomainResponse} */
   UpdateScdnDomain(data: UpdateScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateScdnDomainResponse>;
-  /** {@link VerifyDomainRecord 验证域名解析}({@link VerifyDomainRecordRequest 请求参数}): {@link VerifyDomainRecordResponse 返回参数} */
+  /** 验证域名解析 {@link VerifyDomainRecordRequest} {@link VerifyDomainRecordResponse} */
   VerifyDomainRecord(data: VerifyDomainRecordRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyDomainRecordResponse>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   TcbCheckResource(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;

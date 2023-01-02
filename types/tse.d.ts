@@ -318,7 +318,7 @@ declare interface CreateEngineRequest {
 declare interface CreateEngineResponse {
   /** 引擎实例 ID */
   InstanceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -328,7 +328,7 @@ declare interface DeleteEngineRequest {
 }
 
 declare interface DeleteEngineResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -346,7 +346,7 @@ declare interface DescribeCloudNativeAPIGatewayNodesRequest {
 declare interface DescribeCloudNativeAPIGatewayNodesResponse {
   /** 获取云原生网关节点列表结果。 */
   Result: DescribeCloudNativeAPIGatewayNodesResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -364,7 +364,7 @@ declare interface DescribeNacosReplicasResponse {
   Replicas: NacosReplica[];
   /** 副本个数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -382,7 +382,7 @@ declare interface DescribeNacosServerInterfacesResponse {
   TotalCount: number;
   /** 接口列表 */
   Content: NacosServerInterface[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -416,7 +416,7 @@ declare interface DescribeSREInstanceAccessAddressResponse {
   ConsoleInternetBandWidth: number | null;
   /** 北极星限流server节点接入IP */
   LimiterAddressInfos: PolarisLimiterAddress[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -438,7 +438,7 @@ declare interface DescribeSREInstancesResponse {
   TotalCount: number;
   /** 实例记录 */
   Content: SREInstance[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -456,7 +456,7 @@ declare interface DescribeZookeeperReplicasResponse {
   Replicas: ZookeeperReplica[];
   /** 副本个数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -474,7 +474,7 @@ declare interface DescribeZookeeperServerInterfacesResponse {
   TotalCount: number;
   /** 接口列表 */
   Content: ZookeeperServerInterface[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -488,32 +488,32 @@ declare interface UpdateEngineInternetAccessRequest {
 }
 
 declare interface UpdateEngineInternetAccessResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tse 微服务引擎 TSE} */
 declare interface Tse {
   (): Versions;
-  /** {@link CreateEngine 创建引擎实例}({@link CreateEngineRequest 请求参数}): {@link CreateEngineResponse 返回参数} */
+  /** 创建引擎实例 {@link CreateEngineRequest} {@link CreateEngineResponse} */
   CreateEngine(data: CreateEngineRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEngineResponse>;
-  /** {@link DeleteEngine 删除引擎实例}({@link DeleteEngineRequest 请求参数}): {@link DeleteEngineResponse 返回参数} */
+  /** 删除引擎实例 {@link DeleteEngineRequest} {@link DeleteEngineResponse} */
   DeleteEngine(data: DeleteEngineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEngineResponse>;
-  /** {@link DescribeCloudNativeAPIGatewayNodes 获取云原生网关节点列表}({@link DescribeCloudNativeAPIGatewayNodesRequest 请求参数}): {@link DescribeCloudNativeAPIGatewayNodesResponse 返回参数} */
+  /** 获取云原生网关节点列表 {@link DescribeCloudNativeAPIGatewayNodesRequest} {@link DescribeCloudNativeAPIGatewayNodesResponse} */
   DescribeCloudNativeAPIGatewayNodes(data: DescribeCloudNativeAPIGatewayNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayNodesResponse>;
-  /** {@link DescribeNacosReplicas 查询Nacos类型引擎实例副本信息}({@link DescribeNacosReplicasRequest 请求参数}): {@link DescribeNacosReplicasResponse 返回参数} */
+  /** 查询Nacos类型引擎实例副本信息 {@link DescribeNacosReplicasRequest} {@link DescribeNacosReplicasResponse} */
   DescribeNacosReplicas(data: DescribeNacosReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNacosReplicasResponse>;
-  /** {@link DescribeNacosServerInterfaces 查询nacos服务接口列表}({@link DescribeNacosServerInterfacesRequest 请求参数}): {@link DescribeNacosServerInterfacesResponse 返回参数} */
+  /** 查询nacos服务接口列表 {@link DescribeNacosServerInterfacesRequest} {@link DescribeNacosServerInterfacesResponse} */
   DescribeNacosServerInterfaces(data?: DescribeNacosServerInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNacosServerInterfacesResponse>;
-  /** {@link DescribeSREInstanceAccessAddress 查询引擎实例访问地址}({@link DescribeSREInstanceAccessAddressRequest 请求参数}): {@link DescribeSREInstanceAccessAddressResponse 返回参数} */
+  /** 查询引擎实例访问地址 {@link DescribeSREInstanceAccessAddressRequest} {@link DescribeSREInstanceAccessAddressResponse} */
   DescribeSREInstanceAccessAddress(data?: DescribeSREInstanceAccessAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSREInstanceAccessAddressResponse>;
-  /** {@link DescribeSREInstances 查询引擎实例列表}({@link DescribeSREInstancesRequest 请求参数}): {@link DescribeSREInstancesResponse 返回参数} */
+  /** 查询引擎实例列表 {@link DescribeSREInstancesRequest} {@link DescribeSREInstancesResponse} */
   DescribeSREInstances(data?: DescribeSREInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSREInstancesResponse>;
-  /** {@link DescribeZookeeperReplicas 查询Zookeeper类型注册引擎实例副本信息}({@link DescribeZookeeperReplicasRequest 请求参数}): {@link DescribeZookeeperReplicasResponse 返回参数} */
+  /** 查询Zookeeper类型注册引擎实例副本信息 {@link DescribeZookeeperReplicasRequest} {@link DescribeZookeeperReplicasResponse} */
   DescribeZookeeperReplicas(data: DescribeZookeeperReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZookeeperReplicasResponse>;
-  /** {@link DescribeZookeeperServerInterfaces 查询zookeeper服务接口列表}({@link DescribeZookeeperServerInterfacesRequest 请求参数}): {@link DescribeZookeeperServerInterfacesResponse 返回参数} */
+  /** 查询zookeeper服务接口列表 {@link DescribeZookeeperServerInterfacesRequest} {@link DescribeZookeeperServerInterfacesResponse} */
   DescribeZookeeperServerInterfaces(data?: DescribeZookeeperServerInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZookeeperServerInterfacesResponse>;
-  /** {@link UpdateEngineInternetAccess 修改引擎公网访问配置}({@link UpdateEngineInternetAccessRequest 请求参数}): {@link UpdateEngineInternetAccessResponse 返回参数} */
+  /** 修改引擎公网访问配置 {@link UpdateEngineInternetAccessRequest} {@link UpdateEngineInternetAccessResponse} */
   UpdateEngineInternetAccess(data: UpdateEngineInternetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEngineInternetAccessResponse>;
 }
 

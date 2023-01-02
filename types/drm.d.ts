@@ -94,7 +94,7 @@ declare interface AddFairPlayPemResponse {
   FairPlayPemId?: number | null;
   /** 私钥的优先级，优先级数值越高，优先级越高。 */
   Priority?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -110,7 +110,7 @@ declare interface CreateEncryptKeysRequest {
 }
 
 declare interface CreateEncryptKeysResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -132,7 +132,7 @@ declare interface CreateLicenseResponse {
   License?: string;
   /** 加密内容的内容ID */
   ContentId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -144,7 +144,7 @@ declare interface DeleteFairPlayPemRequest {
 }
 
 declare interface DeleteFairPlayPemResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -166,7 +166,7 @@ declare interface DescribeAllKeysResponse {
   SessionKey?: string | null;
   /** 内容ID */
   ContentId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -180,7 +180,7 @@ declare interface DescribeFairPlayPemRequest {
 declare interface DescribeFairPlayPemResponse {
   /** 该账户下，所有设置的FairPlay私钥摘要信息 */
   FairPlayPems?: FairPlayPemDigestInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -206,7 +206,7 @@ declare interface DescribeKeysResponse {
   ContentId?: string;
   /** Widevine方案的Pssh数据，Base64编码。Fairplay方案无该值。 */
   Pssh?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -230,7 +230,7 @@ declare interface ModifyFairPlayPemResponse {
   FairPlayPemId?: number | null;
   /** 私钥的优先级，优先级数值越高，优先级越高。 */
   Priority?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -250,30 +250,30 @@ declare interface StartEncryptionRequest {
 }
 
 declare interface StartEncryptionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Drm 数字版权管理} */
 declare interface Drm {
   (): Versions;
-  /** {@link AddFairPlayPem 新设置fairplay方案所需私钥}({@link AddFairPlayPemRequest 请求参数}): {@link AddFairPlayPemResponse 返回参数} */
+  /** 新设置fairplay方案所需私钥 {@link AddFairPlayPemRequest} {@link AddFairPlayPemResponse} */
   AddFairPlayPem(data: AddFairPlayPemRequest, config?: AxiosRequestConfig): AxiosPromise<AddFairPlayPemResponse>;
-  /** {@link CreateEncryptKeys 设置加密密钥}({@link CreateEncryptKeysRequest 请求参数}): {@link CreateEncryptKeysResponse 返回参数} */
+  /** 设置加密密钥 {@link CreateEncryptKeysRequest} {@link CreateEncryptKeysResponse} */
   CreateEncryptKeys(data: CreateEncryptKeysRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEncryptKeysResponse>;
-  /** {@link CreateLicense 生成DRM的播放许可证}({@link CreateLicenseRequest 请求参数}): {@link CreateLicenseResponse 返回参数} */
+  /** 生成DRM的播放许可证 {@link CreateLicenseRequest} {@link CreateLicenseResponse} */
   CreateLicense(data: CreateLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLicenseResponse>;
-  /** {@link DeleteFairPlayPem 删除Fairplay方案的私钥、ask}({@link DeleteFairPlayPemRequest 请求参数}): {@link DeleteFairPlayPemResponse 返回参数} */
+  /** 删除Fairplay方案的私钥、ask {@link DeleteFairPlayPemRequest} {@link DeleteFairPlayPemResponse} */
   DeleteFairPlayPem(data?: DeleteFairPlayPemRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFairPlayPemResponse>;
-  /** {@link DescribeAllKeys 查询所有加密密钥列表}({@link DescribeAllKeysRequest 请求参数}): {@link DescribeAllKeysResponse 返回参数} */
+  /** 查询所有加密密钥列表 {@link DescribeAllKeysRequest} {@link DescribeAllKeysResponse} */
   DescribeAllKeys(data: DescribeAllKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllKeysResponse>;
-  /** {@link DescribeFairPlayPem 查询所设置的FairPlay私钥}({@link DescribeFairPlayPemRequest 请求参数}): {@link DescribeFairPlayPemResponse 返回参数} */
+  /** 查询所设置的FairPlay私钥 {@link DescribeFairPlayPemRequest} {@link DescribeFairPlayPemResponse} */
   DescribeFairPlayPem(data?: DescribeFairPlayPemRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFairPlayPemResponse>;
-  /** {@link DescribeKeys 查询加密密钥列表}({@link DescribeKeysRequest 请求参数}): {@link DescribeKeysResponse 返回参数} */
+  /** 查询加密密钥列表 {@link DescribeKeysRequest} {@link DescribeKeysResponse} */
   DescribeKeys(data: DescribeKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeysResponse>;
-  /** {@link ModifyFairPlayPem 设置fairplay方案所需私钥}({@link ModifyFairPlayPemRequest 请求参数}): {@link ModifyFairPlayPemResponse 返回参数} */
+  /** 设置fairplay方案所需私钥 {@link ModifyFairPlayPemRequest} {@link ModifyFairPlayPemResponse} */
   ModifyFairPlayPem(data: ModifyFairPlayPemRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFairPlayPemResponse>;
-  /** {@link StartEncryption 启动DRM加密(该接口已下线)}({@link StartEncryptionRequest 请求参数}): {@link StartEncryptionResponse 返回参数} */
+  /** 启动DRM加密(该接口已下线) {@link StartEncryptionRequest} {@link StartEncryptionResponse} */
   StartEncryption(data: StartEncryptionRequest, config?: AxiosRequestConfig): AxiosPromise<StartEncryptionResponse>;
 }
 

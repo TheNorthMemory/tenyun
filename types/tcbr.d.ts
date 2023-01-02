@@ -370,7 +370,7 @@ declare interface CreateCloudRunEnvResponse {
   EnvId: string;
   /** 后付费订单号 */
   TranId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -388,7 +388,7 @@ declare interface CreateCloudRunServerRequest {
 declare interface CreateCloudRunServerResponse {
   /** 一键部署任务Id，微信云托管，暂时用不到 */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -404,7 +404,7 @@ declare interface DescribeCloudRunEnvsRequest {
 declare interface DescribeCloudRunEnvsResponse {
   /** 环境信息列表 */
   EnvList: EnvInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -422,7 +422,7 @@ declare interface DescribeCloudRunServerDetailResponse {
   ServerConfig: ServerBaseConfig | null;
   /** 在线版本信息 */
   OnlineVersionInfos: OnlineVersionInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -440,7 +440,7 @@ declare interface DescribeCloudRunServersResponse {
   ServerList: ServerBaseInfo[];
   /** 服务总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -452,7 +452,7 @@ declare interface DescribeEnvBaseInfoRequest {
 declare interface DescribeEnvBaseInfoResponse {
   /** 环境基础信息 */
   EnvBaseInfo: EnvBaseInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -472,7 +472,7 @@ declare interface DescribeServerManageTaskResponse {
   IsExist: boolean;
   /** 任务信息 */
   Task: ServerManageTaskInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -490,7 +490,7 @@ declare interface OperateServerManageRequest {
 }
 
 declare interface OperateServerManageResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -512,7 +512,7 @@ declare interface ReleaseGrayRequest {
 }
 
 declare interface ReleaseGrayResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -532,32 +532,32 @@ declare interface UpdateCloudRunServerResponse {
   EnvId: string;
   /** 一键部署任务Id，暂时用不到 */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tcbr 云托管 CloudBase Run} */
 declare interface Tcbr {
   (): Versions;
-  /** {@link CreateCloudRunEnv 创建环境}({@link CreateCloudRunEnvRequest 请求参数}): {@link CreateCloudRunEnvResponse 返回参数} */
+  /** 创建环境 {@link CreateCloudRunEnvRequest} {@link CreateCloudRunEnvResponse} */
   CreateCloudRunEnv(data: CreateCloudRunEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudRunEnvResponse>;
-  /** {@link CreateCloudRunServer 创建云托管服务}({@link CreateCloudRunServerRequest 请求参数}): {@link CreateCloudRunServerResponse 返回参数} */
+  /** 创建云托管服务 {@link CreateCloudRunServerRequest} {@link CreateCloudRunServerResponse} */
   CreateCloudRunServer(data: CreateCloudRunServerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudRunServerResponse>;
-  /** {@link DescribeCloudRunEnvs 查询环境列表}({@link DescribeCloudRunEnvsRequest 请求参数}): {@link DescribeCloudRunEnvsResponse 返回参数} */
+  /** 查询环境列表 {@link DescribeCloudRunEnvsRequest} {@link DescribeCloudRunEnvsResponse} */
   DescribeCloudRunEnvs(data?: DescribeCloudRunEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRunEnvsResponse>;
-  /** {@link DescribeCloudRunServerDetail 查询云托管服务详情}({@link DescribeCloudRunServerDetailRequest 请求参数}): {@link DescribeCloudRunServerDetailResponse 返回参数} */
+  /** 查询云托管服务详情 {@link DescribeCloudRunServerDetailRequest} {@link DescribeCloudRunServerDetailResponse} */
   DescribeCloudRunServerDetail(data: DescribeCloudRunServerDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRunServerDetailResponse>;
-  /** {@link DescribeCloudRunServers 查询云托管服务列表}({@link DescribeCloudRunServersRequest 请求参数}): {@link DescribeCloudRunServersResponse 返回参数} */
+  /** 查询云托管服务列表 {@link DescribeCloudRunServersRequest} {@link DescribeCloudRunServersResponse} */
   DescribeCloudRunServers(data: DescribeCloudRunServersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRunServersResponse>;
-  /** {@link DescribeEnvBaseInfo 查询环境基础信息}({@link DescribeEnvBaseInfoRequest 请求参数}): {@link DescribeEnvBaseInfoResponse 返回参数} */
+  /** 查询环境基础信息 {@link DescribeEnvBaseInfoRequest} {@link DescribeEnvBaseInfoResponse} */
   DescribeEnvBaseInfo(data: DescribeEnvBaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvBaseInfoResponse>;
-  /** {@link DescribeServerManageTask 查询服务管理任务信息}({@link DescribeServerManageTaskRequest 请求参数}): {@link DescribeServerManageTaskResponse 返回参数} */
+  /** 查询服务管理任务信息 {@link DescribeServerManageTaskRequest} {@link DescribeServerManageTaskResponse} */
   DescribeServerManageTask(data: DescribeServerManageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerManageTaskResponse>;
-  /** {@link OperateServerManage 操作发布单}({@link OperateServerManageRequest 请求参数}): {@link OperateServerManageResponse 返回参数} */
+  /** 操作发布单 {@link OperateServerManageRequest} {@link OperateServerManageResponse} */
   OperateServerManage(data: OperateServerManageRequest, config?: AxiosRequestConfig): AxiosPromise<OperateServerManageResponse>;
-  /** {@link ReleaseGray 灰度发布}({@link ReleaseGrayRequest 请求参数}): {@link ReleaseGrayResponse 返回参数} */
+  /** 灰度发布 {@link ReleaseGrayRequest} {@link ReleaseGrayResponse} */
   ReleaseGray(data: ReleaseGrayRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseGrayResponse>;
-  /** {@link UpdateCloudRunServer 更新云托管服务}({@link UpdateCloudRunServerRequest 请求参数}): {@link UpdateCloudRunServerResponse 返回参数} */
+  /** 更新云托管服务 {@link UpdateCloudRunServerRequest} {@link UpdateCloudRunServerResponse} */
   UpdateCloudRunServer(data: UpdateCloudRunServerRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCloudRunServerResponse>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DeleteCloudRunServer(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;

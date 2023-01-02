@@ -414,7 +414,7 @@ declare interface ApplyDiskBackupRequest {
 }
 
 declare interface ApplyDiskBackupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -430,7 +430,7 @@ declare interface ApplySnapshotRequest {
 }
 
 declare interface ApplySnapshotResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -446,7 +446,7 @@ declare interface AttachDisksRequest {
 }
 
 declare interface AttachDisksResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -458,7 +458,7 @@ declare interface BindAutoSnapshotPolicyRequest {
 }
 
 declare interface BindAutoSnapshotPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -474,7 +474,7 @@ declare interface CopySnapshotCrossRegionsRequest {
 declare interface CopySnapshotCrossRegionsResponse {
   /** 快照跨地域复制的结果，如果请求下发成功，则返回相应地地域的新快照ID，否则返回Error。 */
   SnapshotCopyResultSet: SnapshotCopyResult[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -498,7 +498,7 @@ declare interface CreateAutoSnapshotPolicyResponse {
   AutoSnapshotPolicyId: string;
   /** 首次开始备份的时间。 */
   NextTriggerTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -512,7 +512,7 @@ declare interface CreateDiskBackupRequest {
 declare interface CreateDiskBackupResponse {
   /** 云硬盘备份点的ID。 */
   DiskBackupId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -554,7 +554,7 @@ declare interface CreateDisksRequest {
 declare interface CreateDisksResponse {
   /** 创建的云硬盘ID列表。 */
   DiskIdSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -574,7 +574,7 @@ declare interface CreateSnapshotRequest {
 declare interface CreateSnapshotResponse {
   /** 新创建的快照ID。 */
   SnapshotId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -584,7 +584,7 @@ declare interface DeleteAutoSnapshotPoliciesRequest {
 }
 
 declare interface DeleteAutoSnapshotPoliciesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -594,7 +594,7 @@ declare interface DeleteDiskBackupsRequest {
 }
 
 declare interface DeleteDiskBackupsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -606,7 +606,7 @@ declare interface DeleteSnapshotsRequest {
 }
 
 declare interface DeleteSnapshotsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -630,7 +630,7 @@ declare interface DescribeAutoSnapshotPoliciesResponse {
   TotalCount?: number;
   /** 定期快照策略列表。 */
   AutoSnapshotPolicySet?: AutoSnapshotPolicy[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -644,7 +644,7 @@ declare interface DescribeDiskAssociatedAutoSnapshotPolicyResponse {
   TotalCount?: number;
   /** 云盘绑定的定期快照列表。 */
   AutoSnapshotPolicySet?: AutoSnapshotPolicy[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -668,7 +668,7 @@ declare interface DescribeDiskBackupsResponse {
   TotalCount: number;
   /** 云硬盘备份点的详细信息列表。 */
   DiskBackupSet: DiskBackup[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -694,7 +694,7 @@ declare interface DescribeDiskConfigQuotaRequest {
 declare interface DescribeDiskConfigQuotaResponse {
   /** 云盘配置列表。 */
   DiskConfigSet: DiskConfig[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -710,7 +710,7 @@ declare interface DescribeDiskOperationLogsRequest {
 declare interface DescribeDiskOperationLogsResponse {
   /** 云盘的操作日志列表。 */
   DiskOperationLogSet: DiskOperationLog[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -730,7 +730,7 @@ declare interface DescribeDiskStoragePoolResponse {
   TotalCount: number;
   /** 独享集群的详细信息列表 */
   DiskStoragePoolSet: Cdc[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -756,7 +756,7 @@ declare interface DescribeDisksResponse {
   TotalCount: number;
   /** 云硬盘的详细信息列表。 */
   DiskSet: Disk[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -768,7 +768,7 @@ declare interface DescribeInstancesDiskNumRequest {
 declare interface DescribeInstancesDiskNumResponse {
   /** 各个云服务器已挂载和可挂载弹性云盘的数量。 */
   AttachDetail: AttachDetail[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -784,7 +784,7 @@ declare interface DescribeSnapshotOperationLogsRequest {
 declare interface DescribeSnapshotOperationLogsResponse {
   /** 快照操作日志列表。 */
   SnapshotOperationLogSet: SnapshotOperationLog[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -796,7 +796,7 @@ declare interface DescribeSnapshotSharePermissionRequest {
 declare interface DescribeSnapshotSharePermissionResponse {
   /** 快照的分享信息的集合 */
   SharePermissionSet?: SharePermission[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -820,7 +820,7 @@ declare interface DescribeSnapshotsResponse {
   TotalCount?: number;
   /** 快照的详情列表。 */
   SnapshotSet?: Snapshot[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -832,7 +832,7 @@ declare interface DetachDisksRequest {
 }
 
 declare interface DetachDisksResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -848,7 +848,7 @@ declare interface GetSnapOverviewResponse {
   FreeQuota?: number;
   /** 快照总个数 */
   TotalNums?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -858,7 +858,7 @@ declare interface InitializeDisksRequest {
 }
 
 declare interface InitializeDisksResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -872,7 +872,7 @@ declare interface InquirePriceModifyDiskBackupQuotaRequest {
 declare interface InquirePriceModifyDiskBackupQuotaResponse {
   /** 描述了修改云硬盘备份点之后的云盘价格。 */
   DiskPrice: Price;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -886,7 +886,7 @@ declare interface InquirePriceModifyDiskExtraPerformanceRequest {
 declare interface InquirePriceModifyDiskExtraPerformanceResponse {
   /** 描述了调整云盘额外性能时对应的价格。 */
   DiskPrice?: Price;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -912,7 +912,7 @@ declare interface InquiryPriceCreateDisksRequest {
 declare interface InquiryPriceCreateDisksResponse {
   /** 描述了新购云盘的价格。 */
   DiskPrice: Price;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -930,7 +930,7 @@ declare interface InquiryPriceRenewDisksRequest {
 declare interface InquiryPriceRenewDisksResponse {
   /** 描述了续费云盘的价格。 */
   DiskPrice: PrepayPrice;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -946,7 +946,7 @@ declare interface InquiryPriceResizeDiskRequest {
 declare interface InquiryPriceResizeDiskResponse {
   /** 描述了扩容云盘的价格。 */
   DiskPrice?: PrepayPrice;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -966,7 +966,7 @@ declare interface ModifyAutoSnapshotPolicyAttributeRequest {
 }
 
 declare interface ModifyAutoSnapshotPolicyAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -986,7 +986,7 @@ declare interface ModifyDiskAttributesRequest {
 }
 
 declare interface ModifyDiskAttributesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -998,7 +998,7 @@ declare interface ModifyDiskBackupQuotaRequest {
 }
 
 declare interface ModifyDiskBackupQuotaResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1010,7 +1010,7 @@ declare interface ModifyDiskExtraPerformanceRequest {
 }
 
 declare interface ModifyDiskExtraPerformanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1024,7 +1024,7 @@ declare interface ModifyDisksChargeTypeRequest {
 }
 
 declare interface ModifyDisksChargeTypeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1036,7 +1036,7 @@ declare interface ModifyDisksRenewFlagRequest {
 }
 
 declare interface ModifyDisksRenewFlagResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1052,7 +1052,7 @@ declare interface ModifySnapshotAttributeRequest {
 }
 
 declare interface ModifySnapshotAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1066,7 +1066,7 @@ declare interface ModifySnapshotsSharePermissionRequest {
 }
 
 declare interface ModifySnapshotsSharePermissionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1078,7 +1078,7 @@ declare interface RenewDiskRequest {
 }
 
 declare interface RenewDiskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1090,7 +1090,7 @@ declare interface ResizeDiskRequest {
 }
 
 declare interface ResizeDiskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1102,7 +1102,7 @@ declare interface TerminateDisksRequest {
 }
 
 declare interface TerminateDisksResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1114,98 +1114,98 @@ declare interface UnbindAutoSnapshotPolicyRequest {
 }
 
 declare interface UnbindAutoSnapshotPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cbs 云硬盘} */
 declare interface Cbs {
   (): Versions;
-  /** {@link ApplyDiskBackup 回滚备份点}({@link ApplyDiskBackupRequest 请求参数}): {@link ApplyDiskBackupResponse 返回参数} */
+  /** 回滚备份点 {@link ApplyDiskBackupRequest} {@link ApplyDiskBackupResponse} */
   ApplyDiskBackup(data: ApplyDiskBackupRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyDiskBackupResponse>;
-  /** {@link ApplySnapshot 回滚快照}({@link ApplySnapshotRequest 请求参数}): {@link ApplySnapshotResponse 返回参数} */
+  /** 回滚快照 {@link ApplySnapshotRequest} {@link ApplySnapshotResponse} */
   ApplySnapshot(data: ApplySnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<ApplySnapshotResponse>;
-  /** {@link AttachDisks 挂载云硬盘}({@link AttachDisksRequest 请求参数}): {@link AttachDisksResponse 返回参数} */
+  /** 挂载云硬盘 {@link AttachDisksRequest} {@link AttachDisksResponse} */
   AttachDisks(data: AttachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<AttachDisksResponse>;
-  /** {@link BindAutoSnapshotPolicy 绑定定期快照策略}({@link BindAutoSnapshotPolicyRequest 请求参数}): {@link BindAutoSnapshotPolicyResponse 返回参数} */
+  /** 绑定定期快照策略 {@link BindAutoSnapshotPolicyRequest} {@link BindAutoSnapshotPolicyResponse} */
   BindAutoSnapshotPolicy(data: BindAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<BindAutoSnapshotPolicyResponse>;
-  /** {@link CopySnapshotCrossRegions 快照跨地域复制}({@link CopySnapshotCrossRegionsRequest 请求参数}): {@link CopySnapshotCrossRegionsResponse 返回参数} */
+  /** 快照跨地域复制 {@link CopySnapshotCrossRegionsRequest} {@link CopySnapshotCrossRegionsResponse} */
   CopySnapshotCrossRegions(data: CopySnapshotCrossRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<CopySnapshotCrossRegionsResponse>;
-  /** {@link CreateAutoSnapshotPolicy 创建定期快照策略}({@link CreateAutoSnapshotPolicyRequest 请求参数}): {@link CreateAutoSnapshotPolicyResponse 返回参数} */
+  /** 创建定期快照策略 {@link CreateAutoSnapshotPolicyRequest} {@link CreateAutoSnapshotPolicyResponse} */
   CreateAutoSnapshotPolicy(data: CreateAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoSnapshotPolicyResponse>;
-  /** {@link CreateDiskBackup 创建云硬盘备份点}({@link CreateDiskBackupRequest 请求参数}): {@link CreateDiskBackupResponse 返回参数} */
+  /** 创建云硬盘备份点 {@link CreateDiskBackupRequest} {@link CreateDiskBackupResponse} */
   CreateDiskBackup(data: CreateDiskBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDiskBackupResponse>;
-  /** {@link CreateDisks 创建云硬盘}({@link CreateDisksRequest 请求参数}): {@link CreateDisksResponse 返回参数} */
+  /** 创建云硬盘 {@link CreateDisksRequest} {@link CreateDisksResponse} */
   CreateDisks(data: CreateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDisksResponse>;
-  /** {@link CreateSnapshot 创建快照}({@link CreateSnapshotRequest 请求参数}): {@link CreateSnapshotResponse 返回参数} */
+  /** 创建快照 {@link CreateSnapshotRequest} {@link CreateSnapshotResponse} */
   CreateSnapshot(data: CreateSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotResponse>;
-  /** {@link DeleteAutoSnapshotPolicies 删除定期快照策略}({@link DeleteAutoSnapshotPoliciesRequest 请求参数}): {@link DeleteAutoSnapshotPoliciesResponse 返回参数} */
+  /** 删除定期快照策略 {@link DeleteAutoSnapshotPoliciesRequest} {@link DeleteAutoSnapshotPoliciesResponse} */
   DeleteAutoSnapshotPolicies(data: DeleteAutoSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoSnapshotPoliciesResponse>;
-  /** {@link DeleteDiskBackups 删除云硬盘备份点}({@link DeleteDiskBackupsRequest 请求参数}): {@link DeleteDiskBackupsResponse 返回参数} */
+  /** 删除云硬盘备份点 {@link DeleteDiskBackupsRequest} {@link DeleteDiskBackupsResponse} */
   DeleteDiskBackups(data: DeleteDiskBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDiskBackupsResponse>;
-  /** {@link DeleteSnapshots 删除快照}({@link DeleteSnapshotsRequest 请求参数}): {@link DeleteSnapshotsResponse 返回参数} */
+  /** 删除快照 {@link DeleteSnapshotsRequest} {@link DeleteSnapshotsResponse} */
   DeleteSnapshots(data: DeleteSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotsResponse>;
-  /** {@link DescribeAutoSnapshotPolicies 查询定期快照策略}({@link DescribeAutoSnapshotPoliciesRequest 请求参数}): {@link DescribeAutoSnapshotPoliciesResponse 返回参数} */
+  /** 查询定期快照策略 {@link DescribeAutoSnapshotPoliciesRequest} {@link DescribeAutoSnapshotPoliciesResponse} */
   DescribeAutoSnapshotPolicies(data?: DescribeAutoSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoSnapshotPoliciesResponse>;
-  /** {@link DescribeDiskAssociatedAutoSnapshotPolicy 查询云硬盘关联定期快照策略}({@link DescribeDiskAssociatedAutoSnapshotPolicyRequest 请求参数}): {@link DescribeDiskAssociatedAutoSnapshotPolicyResponse 返回参数} */
+  /** 查询云硬盘关联定期快照策略 {@link DescribeDiskAssociatedAutoSnapshotPolicyRequest} {@link DescribeDiskAssociatedAutoSnapshotPolicyResponse} */
   DescribeDiskAssociatedAutoSnapshotPolicy(data: DescribeDiskAssociatedAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskAssociatedAutoSnapshotPolicyResponse>;
-  /** {@link DescribeDiskBackups 查询备份点列表}({@link DescribeDiskBackupsRequest 请求参数}): {@link DescribeDiskBackupsResponse 返回参数} */
+  /** 查询备份点列表 {@link DescribeDiskBackupsRequest} {@link DescribeDiskBackupsResponse} */
   DescribeDiskBackups(data?: DescribeDiskBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskBackupsResponse>;
-  /** {@link DescribeDiskConfigQuota 查询云硬盘配额}({@link DescribeDiskConfigQuotaRequest 请求参数}): {@link DescribeDiskConfigQuotaResponse 返回参数} */
+  /** 查询云硬盘配额 {@link DescribeDiskConfigQuotaRequest} {@link DescribeDiskConfigQuotaResponse} */
   DescribeDiskConfigQuota(data: DescribeDiskConfigQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskConfigQuotaResponse>;
-  /** {@link DescribeDiskOperationLogs 查询云盘操作日志列表}({@link DescribeDiskOperationLogsRequest 请求参数}): {@link DescribeDiskOperationLogsResponse 返回参数} */
+  /** 查询云盘操作日志列表 {@link DescribeDiskOperationLogsRequest} {@link DescribeDiskOperationLogsResponse} */
   DescribeDiskOperationLogs(data: DescribeDiskOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskOperationLogsResponse>;
-  /** {@link DescribeDiskStoragePool 查询云硬盘独享集群列表}({@link DescribeDiskStoragePoolRequest 请求参数}): {@link DescribeDiskStoragePoolResponse 返回参数} */
+  /** 查询云硬盘独享集群列表 {@link DescribeDiskStoragePoolRequest} {@link DescribeDiskStoragePoolResponse} */
   DescribeDiskStoragePool(data?: DescribeDiskStoragePoolRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskStoragePoolResponse>;
-  /** {@link DescribeDisks 查询云硬盘列表}({@link DescribeDisksRequest 请求参数}): {@link DescribeDisksResponse 返回参数} */
+  /** 查询云硬盘列表 {@link DescribeDisksRequest} {@link DescribeDisksResponse} */
   DescribeDisks(data?: DescribeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksResponse>;
-  /** {@link DescribeInstancesDiskNum 查询实例关联的云硬盘数量}({@link DescribeInstancesDiskNumRequest 请求参数}): {@link DescribeInstancesDiskNumResponse 返回参数} */
+  /** 查询实例关联的云硬盘数量 {@link DescribeInstancesDiskNumRequest} {@link DescribeInstancesDiskNumResponse} */
   DescribeInstancesDiskNum(data: DescribeInstancesDiskNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDiskNumResponse>;
-  /** {@link DescribeSnapshotOperationLogs 查询快照操作日志列表}({@link DescribeSnapshotOperationLogsRequest 请求参数}): {@link DescribeSnapshotOperationLogsResponse 返回参数} */
+  /** 查询快照操作日志列表 {@link DescribeSnapshotOperationLogsRequest} {@link DescribeSnapshotOperationLogsResponse} */
   DescribeSnapshotOperationLogs(data: DescribeSnapshotOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotOperationLogsResponse>;
-  /** {@link DescribeSnapshotSharePermission 查看快照分享信息}({@link DescribeSnapshotSharePermissionRequest 请求参数}): {@link DescribeSnapshotSharePermissionResponse 返回参数} */
+  /** 查看快照分享信息 {@link DescribeSnapshotSharePermissionRequest} {@link DescribeSnapshotSharePermissionResponse} */
   DescribeSnapshotSharePermission(data: DescribeSnapshotSharePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotSharePermissionResponse>;
-  /** {@link DescribeSnapshots 查询快照列表}({@link DescribeSnapshotsRequest 请求参数}): {@link DescribeSnapshotsResponse 返回参数} */
+  /** 查询快照列表 {@link DescribeSnapshotsRequest} {@link DescribeSnapshotsResponse} */
   DescribeSnapshots(data?: DescribeSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsResponse>;
-  /** {@link DetachDisks 卸载云硬盘}({@link DetachDisksRequest 请求参数}): {@link DetachDisksResponse 返回参数} */
+  /** 卸载云硬盘 {@link DetachDisksRequest} {@link DetachDisksResponse} */
   DetachDisks(data: DetachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DetachDisksResponse>;
-  /** {@link GetSnapOverview 获取快照概览信息}({@link GetSnapOverviewRequest 请求参数}): {@link GetSnapOverviewResponse 返回参数} */
+  /** 获取快照概览信息 {@link GetSnapOverviewRequest} {@link GetSnapOverviewResponse} */
   GetSnapOverview(data?: GetSnapOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<GetSnapOverviewResponse>;
-  /** {@link InitializeDisks 重新初始化云硬盘}({@link InitializeDisksRequest 请求参数}): {@link InitializeDisksResponse 返回参数} */
+  /** 重新初始化云硬盘 {@link InitializeDisksRequest} {@link InitializeDisksResponse} */
   InitializeDisks(data: InitializeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeDisksResponse>;
-  /** {@link InquirePriceModifyDiskBackupQuota 修改云硬盘备份点配额询价}({@link InquirePriceModifyDiskBackupQuotaRequest 请求参数}): {@link InquirePriceModifyDiskBackupQuotaResponse 返回参数} */
+  /** 修改云硬盘备份点配额询价 {@link InquirePriceModifyDiskBackupQuotaRequest} {@link InquirePriceModifyDiskBackupQuotaResponse} */
   InquirePriceModifyDiskBackupQuota(data: InquirePriceModifyDiskBackupQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceModifyDiskBackupQuotaResponse>;
-  /** {@link InquirePriceModifyDiskExtraPerformance 调整云硬盘额外性能询价}({@link InquirePriceModifyDiskExtraPerformanceRequest 请求参数}): {@link InquirePriceModifyDiskExtraPerformanceResponse 返回参数} */
+  /** 调整云硬盘额外性能询价 {@link InquirePriceModifyDiskExtraPerformanceRequest} {@link InquirePriceModifyDiskExtraPerformanceResponse} */
   InquirePriceModifyDiskExtraPerformance(data: InquirePriceModifyDiskExtraPerformanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceModifyDiskExtraPerformanceResponse>;
-  /** {@link InquiryPriceCreateDisks 创建云硬盘询价}({@link InquiryPriceCreateDisksRequest 请求参数}): {@link InquiryPriceCreateDisksResponse 返回参数} */
+  /** 创建云硬盘询价 {@link InquiryPriceCreateDisksRequest} {@link InquiryPriceCreateDisksResponse} */
   InquiryPriceCreateDisks(data: InquiryPriceCreateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateDisksResponse>;
-  /** {@link InquiryPriceRenewDisks 续费云硬盘询价}({@link InquiryPriceRenewDisksRequest 请求参数}): {@link InquiryPriceRenewDisksResponse 返回参数} */
+  /** 续费云硬盘询价 {@link InquiryPriceRenewDisksRequest} {@link InquiryPriceRenewDisksResponse} */
   InquiryPriceRenewDisks(data: InquiryPriceRenewDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewDisksResponse>;
-  /** {@link InquiryPriceResizeDisk 扩容云硬盘询价}({@link InquiryPriceResizeDiskRequest 请求参数}): {@link InquiryPriceResizeDiskResponse 返回参数} */
+  /** 扩容云硬盘询价 {@link InquiryPriceResizeDiskRequest} {@link InquiryPriceResizeDiskResponse} */
   InquiryPriceResizeDisk(data: InquiryPriceResizeDiskRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceResizeDiskResponse>;
-  /** {@link ModifyAutoSnapshotPolicyAttribute 修改定期快照策略信息}({@link ModifyAutoSnapshotPolicyAttributeRequest 请求参数}): {@link ModifyAutoSnapshotPolicyAttributeResponse 返回参数} */
+  /** 修改定期快照策略信息 {@link ModifyAutoSnapshotPolicyAttributeRequest} {@link ModifyAutoSnapshotPolicyAttributeResponse} */
   ModifyAutoSnapshotPolicyAttribute(data: ModifyAutoSnapshotPolicyAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoSnapshotPolicyAttributeResponse>;
-  /** {@link ModifyDiskAttributes 修改云硬盘属性}({@link ModifyDiskAttributesRequest 请求参数}): {@link ModifyDiskAttributesResponse 返回参数} */
+  /** 修改云硬盘属性 {@link ModifyDiskAttributesRequest} {@link ModifyDiskAttributesResponse} */
   ModifyDiskAttributes(data: ModifyDiskAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDiskAttributesResponse>;
-  /** {@link ModifyDiskBackupQuota 调整云硬盘备份点配额}({@link ModifyDiskBackupQuotaRequest 请求参数}): {@link ModifyDiskBackupQuotaResponse 返回参数} */
+  /** 调整云硬盘备份点配额 {@link ModifyDiskBackupQuotaRequest} {@link ModifyDiskBackupQuotaResponse} */
   ModifyDiskBackupQuota(data: ModifyDiskBackupQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDiskBackupQuotaResponse>;
-  /** {@link ModifyDiskExtraPerformance 调整云硬盘额外性能}({@link ModifyDiskExtraPerformanceRequest 请求参数}): {@link ModifyDiskExtraPerformanceResponse 返回参数} */
+  /** 调整云硬盘额外性能 {@link ModifyDiskExtraPerformanceRequest} {@link ModifyDiskExtraPerformanceResponse} */
   ModifyDiskExtraPerformance(data: ModifyDiskExtraPerformanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDiskExtraPerformanceResponse>;
-  /** {@link ModifyDisksChargeType 修改弹性云盘计费模式}({@link ModifyDisksChargeTypeRequest 请求参数}): {@link ModifyDisksChargeTypeResponse 返回参数} */
+  /** 修改弹性云盘计费模式 {@link ModifyDisksChargeTypeRequest} {@link ModifyDisksChargeTypeResponse} */
   ModifyDisksChargeType(data: ModifyDisksChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisksChargeTypeResponse>;
-  /** {@link ModifyDisksRenewFlag 修改云硬盘续费标识}({@link ModifyDisksRenewFlagRequest 请求参数}): {@link ModifyDisksRenewFlagResponse 返回参数} */
+  /** 修改云硬盘续费标识 {@link ModifyDisksRenewFlagRequest} {@link ModifyDisksRenewFlagResponse} */
   ModifyDisksRenewFlag(data: ModifyDisksRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisksRenewFlagResponse>;
-  /** {@link ModifySnapshotAttribute 修改快照信息}({@link ModifySnapshotAttributeRequest 请求参数}): {@link ModifySnapshotAttributeResponse 返回参数} */
+  /** 修改快照信息 {@link ModifySnapshotAttributeRequest} {@link ModifySnapshotAttributeResponse} */
   ModifySnapshotAttribute(data: ModifySnapshotAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotAttributeResponse>;
-  /** {@link ModifySnapshotsSharePermission 修改快照分享信息}({@link ModifySnapshotsSharePermissionRequest 请求参数}): {@link ModifySnapshotsSharePermissionResponse 返回参数} */
+  /** 修改快照分享信息 {@link ModifySnapshotsSharePermissionRequest} {@link ModifySnapshotsSharePermissionResponse} */
   ModifySnapshotsSharePermission(data: ModifySnapshotsSharePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotsSharePermissionResponse>;
-  /** {@link RenewDisk 续费云硬盘}({@link RenewDiskRequest 请求参数}): {@link RenewDiskResponse 返回参数} */
+  /** 续费云硬盘 {@link RenewDiskRequest} {@link RenewDiskResponse} */
   RenewDisk(data: RenewDiskRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDiskResponse>;
-  /** {@link ResizeDisk 扩容云硬盘}({@link ResizeDiskRequest 请求参数}): {@link ResizeDiskResponse 返回参数} */
+  /** 扩容云硬盘 {@link ResizeDiskRequest} {@link ResizeDiskResponse} */
   ResizeDisk(data: ResizeDiskRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeDiskResponse>;
-  /** {@link TerminateDisks 退还云硬盘}({@link TerminateDisksRequest 请求参数}): {@link TerminateDisksResponse 返回参数} */
+  /** 退还云硬盘 {@link TerminateDisksRequest} {@link TerminateDisksResponse} */
   TerminateDisks(data: TerminateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDisksResponse>;
-  /** {@link UnbindAutoSnapshotPolicy 解绑定期快照策略}({@link UnbindAutoSnapshotPolicyRequest 请求参数}): {@link UnbindAutoSnapshotPolicyResponse 返回参数} */
+  /** 解绑定期快照策略 {@link UnbindAutoSnapshotPolicyRequest} {@link UnbindAutoSnapshotPolicyResponse} */
   UnbindAutoSnapshotPolicy(data: UnbindAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindAutoSnapshotPolicyResponse>;
 }
 

@@ -136,14 +136,14 @@ declare interface DescribeDataSourceListRequest {
 declare interface DescribeDataSourceListResponse {
   /** data 数据 */
   Data: DataSourceDetailItems;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Lowcode 云开发低码} */
 declare interface Lowcode {
   (): Versions;
-  /** {@link DescribeDataSourceList 获取数据源详情列表}({@link DescribeDataSourceListRequest 请求参数}): {@link DescribeDataSourceListResponse 返回参数} */
+  /** 获取数据源详情列表 {@link DescribeDataSourceListRequest} {@link DescribeDataSourceListResponse} */
   DescribeDataSourceList(data: DescribeDataSourceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSourceListResponse>;
 }
 

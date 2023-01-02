@@ -254,7 +254,7 @@ declare interface CancelInvocationRequest {
 }
 
 declare interface CancelInvocationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -288,7 +288,7 @@ declare interface CreateCommandRequest {
 declare interface CreateCommandResponse {
   /** 命令ID。 */
   CommandId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -312,7 +312,7 @@ declare interface CreateInvokerRequest {
 declare interface CreateInvokerResponse {
   /** 执行器ID。 */
   InvokerId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -322,7 +322,7 @@ declare interface DeleteCommandRequest {
 }
 
 declare interface DeleteCommandResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -332,7 +332,7 @@ declare interface DeleteInvokerRequest {
 }
 
 declare interface DeleteInvokerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -352,7 +352,7 @@ declare interface DescribeAutomationAgentStatusResponse {
   AutomationAgentSet: AutomationAgentInfo[];
   /** 符合条件的 Agent 总数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -372,7 +372,7 @@ declare interface DescribeCommandsResponse {
   TotalCount: number;
   /** 命令详情列表。 */
   CommandSet: Command[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -394,7 +394,7 @@ declare interface DescribeInvocationTasksResponse {
   TotalCount: number;
   /** 执行任务列表。 */
   InvocationTaskSet: InvocationTask[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -414,7 +414,7 @@ declare interface DescribeInvocationsResponse {
   TotalCount: number;
   /** 执行活动列表。 */
   InvocationSet: Invocation[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -432,7 +432,7 @@ declare interface DescribeInvokerRecordsResponse {
   TotalCount: number;
   /** 执行器执行历史记录。 */
   InvokerRecordSet: InvokerRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -452,7 +452,7 @@ declare interface DescribeInvokersResponse {
   TotalCount: number;
   /** 执行器信息。 */
   InvokerSet: Invoker[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -464,7 +464,7 @@ declare interface DescribeRegionsResponse {
   TotalCount: number;
   /** 地域信息列表 */
   RegionSet: RegionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -474,7 +474,7 @@ declare interface DisableInvokerRequest {
 }
 
 declare interface DisableInvokerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -484,7 +484,7 @@ declare interface EnableInvokerRequest {
 }
 
 declare interface EnableInvokerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -510,7 +510,7 @@ declare interface InvokeCommandRequest {
 declare interface InvokeCommandResponse {
   /** 执行活动ID。 */
   InvocationId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -540,7 +540,7 @@ declare interface ModifyCommandRequest {
 }
 
 declare interface ModifyCommandResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -564,7 +564,7 @@ declare interface ModifyInvokerRequest {
 }
 
 declare interface ModifyInvokerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -580,7 +580,7 @@ declare interface PreviewReplacedCommandContentRequest {
 declare interface PreviewReplacedCommandContentResponse {
   /** 自定义参数替换后的，经Base64编码的命令内容。 */
   ReplacedContent: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -622,50 +622,50 @@ declare interface RunCommandResponse {
   CommandId: string;
   /** 执行活动ID。 */
   InvocationId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tat 自动化助手} */
 declare interface Tat {
   (): Versions;
-  /** {@link CancelInvocation 取消命令执行}({@link CancelInvocationRequest 请求参数}): {@link CancelInvocationResponse 返回参数} */
+  /** 取消命令执行 {@link CancelInvocationRequest} {@link CancelInvocationResponse} */
   CancelInvocation(data: CancelInvocationRequest, config?: AxiosRequestConfig): AxiosPromise<CancelInvocationResponse>;
-  /** {@link CreateCommand 创建命令}({@link CreateCommandRequest 请求参数}): {@link CreateCommandResponse 返回参数} */
+  /** 创建命令 {@link CreateCommandRequest} {@link CreateCommandResponse} */
   CreateCommand(data: CreateCommandRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCommandResponse>;
-  /** {@link CreateInvoker 创建执行器}({@link CreateInvokerRequest 请求参数}): {@link CreateInvokerResponse 返回参数} */
+  /** 创建执行器 {@link CreateInvokerRequest} {@link CreateInvokerResponse} */
   CreateInvoker(data: CreateInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInvokerResponse>;
-  /** {@link DeleteCommand 删除命令}({@link DeleteCommandRequest 请求参数}): {@link DeleteCommandResponse 返回参数} */
+  /** 删除命令 {@link DeleteCommandRequest} {@link DeleteCommandResponse} */
   DeleteCommand(data: DeleteCommandRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCommandResponse>;
-  /** {@link DeleteInvoker 删除执行器}({@link DeleteInvokerRequest 请求参数}): {@link DeleteInvokerResponse 返回参数} */
+  /** 删除执行器 {@link DeleteInvokerRequest} {@link DeleteInvokerResponse} */
   DeleteInvoker(data: DeleteInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInvokerResponse>;
-  /** {@link DescribeAutomationAgentStatus 查询客户端状态}({@link DescribeAutomationAgentStatusRequest 请求参数}): {@link DescribeAutomationAgentStatusResponse 返回参数} */
+  /** 查询客户端状态 {@link DescribeAutomationAgentStatusRequest} {@link DescribeAutomationAgentStatusResponse} */
   DescribeAutomationAgentStatus(data?: DescribeAutomationAgentStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutomationAgentStatusResponse>;
-  /** {@link DescribeCommands 查询命令详情}({@link DescribeCommandsRequest 请求参数}): {@link DescribeCommandsResponse 返回参数} */
+  /** 查询命令详情 {@link DescribeCommandsRequest} {@link DescribeCommandsResponse} */
   DescribeCommands(data?: DescribeCommandsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCommandsResponse>;
-  /** {@link DescribeInvocationTasks 查询执行任务}({@link DescribeInvocationTasksRequest 请求参数}): {@link DescribeInvocationTasksResponse 返回参数} */
+  /** 查询执行任务 {@link DescribeInvocationTasksRequest} {@link DescribeInvocationTasksResponse} */
   DescribeInvocationTasks(data?: DescribeInvocationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationTasksResponse>;
-  /** {@link DescribeInvocations 查询执行活动}({@link DescribeInvocationsRequest 请求参数}): {@link DescribeInvocationsResponse 返回参数} */
+  /** 查询执行活动 {@link DescribeInvocationsRequest} {@link DescribeInvocationsResponse} */
   DescribeInvocations(data?: DescribeInvocationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationsResponse>;
-  /** {@link DescribeInvokerRecords 查询执行器执行记录}({@link DescribeInvokerRecordsRequest 请求参数}): {@link DescribeInvokerRecordsResponse 返回参数} */
+  /** 查询执行器执行记录 {@link DescribeInvokerRecordsRequest} {@link DescribeInvokerRecordsResponse} */
   DescribeInvokerRecords(data?: DescribeInvokerRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvokerRecordsResponse>;
-  /** {@link DescribeInvokers 查询执行器}({@link DescribeInvokersRequest 请求参数}): {@link DescribeInvokersResponse 返回参数} */
+  /** 查询执行器 {@link DescribeInvokersRequest} {@link DescribeInvokersResponse} */
   DescribeInvokers(data?: DescribeInvokersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvokersResponse>;
-  /** {@link DescribeRegions 查询地域列表}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
+  /** 查询地域列表 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** {@link DisableInvoker 停用执行器}({@link DisableInvokerRequest 请求参数}): {@link DisableInvokerResponse 返回参数} */
+  /** 停用执行器 {@link DisableInvokerRequest} {@link DisableInvokerResponse} */
   DisableInvoker(data: DisableInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<DisableInvokerResponse>;
-  /** {@link EnableInvoker 启用执行器}({@link EnableInvokerRequest 请求参数}): {@link EnableInvokerResponse 返回参数} */
+  /** 启用执行器 {@link EnableInvokerRequest} {@link EnableInvokerResponse} */
   EnableInvoker(data: EnableInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<EnableInvokerResponse>;
-  /** {@link InvokeCommand 触发命令}({@link InvokeCommandRequest 请求参数}): {@link InvokeCommandResponse 返回参数} */
+  /** 触发命令 {@link InvokeCommandRequest} {@link InvokeCommandResponse} */
   InvokeCommand(data: InvokeCommandRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeCommandResponse>;
-  /** {@link ModifyCommand 修改命令}({@link ModifyCommandRequest 请求参数}): {@link ModifyCommandResponse 返回参数} */
+  /** 修改命令 {@link ModifyCommandRequest} {@link ModifyCommandResponse} */
   ModifyCommand(data: ModifyCommandRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCommandResponse>;
-  /** {@link ModifyInvoker 修改执行器}({@link ModifyInvokerRequest 请求参数}): {@link ModifyInvokerResponse 返回参数} */
+  /** 修改执行器 {@link ModifyInvokerRequest} {@link ModifyInvokerResponse} */
   ModifyInvoker(data: ModifyInvokerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInvokerResponse>;
-  /** {@link PreviewReplacedCommandContent 命令预览}({@link PreviewReplacedCommandContentRequest 请求参数}): {@link PreviewReplacedCommandContentResponse 返回参数} */
+  /** 命令预览 {@link PreviewReplacedCommandContentRequest} {@link PreviewReplacedCommandContentResponse} */
   PreviewReplacedCommandContent(data?: PreviewReplacedCommandContentRequest, config?: AxiosRequestConfig): AxiosPromise<PreviewReplacedCommandContentResponse>;
-  /** {@link RunCommand 执行命令}({@link RunCommandRequest 请求参数}): {@link RunCommandResponse 返回参数} */
+  /** 执行命令 {@link RunCommandRequest} {@link RunCommandResponse} */
   RunCommand(data: RunCommandRequest, config?: AxiosRequestConfig): AxiosPromise<RunCommandResponse>;
 }
 

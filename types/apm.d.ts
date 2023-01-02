@@ -184,7 +184,7 @@ declare interface CreateApmInstanceRequest {
 declare interface CreateApmInstanceResponse {
   /** 实例ID */
   InstanceId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -204,7 +204,7 @@ declare interface DescribeApmAgentRequest {
 declare interface DescribeApmAgentResponse {
   /** Agent信息 */
   ApmAgent: ApmAgentInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -222,7 +222,7 @@ declare interface DescribeApmInstancesRequest {
 declare interface DescribeApmInstancesResponse {
   /** apm实例列表 */
   Instances: ApmInstanceDetail[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -252,7 +252,7 @@ declare interface DescribeGeneralMetricDataRequest {
 declare interface DescribeGeneralMetricDataResponse {
   /** 指标结果集 */
   Records: Line[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -288,7 +288,7 @@ declare interface DescribeMetricRecordsResponse {
   Records: ApmMetricRecord[] | null;
   /** 查询指标结果集条数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -316,24 +316,24 @@ declare interface DescribeServiceOverviewRequest {
 declare interface DescribeServiceOverviewResponse {
   /** 指标结果集 */
   Records: ApmMetricRecord[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Apm 应用性能观测} */
 declare interface Apm {
   (): Versions;
-  /** {@link CreateApmInstance 创建Apm实例}({@link CreateApmInstanceRequest 请求参数}): {@link CreateApmInstanceResponse 返回参数} */
+  /** 创建Apm实例 {@link CreateApmInstanceRequest} {@link CreateApmInstanceResponse} */
   CreateApmInstance(data: CreateApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApmInstanceResponse>;
-  /** {@link DescribeApmAgent 获取Apm Agent信息}({@link DescribeApmAgentRequest 请求参数}): {@link DescribeApmAgentResponse 返回参数} */
+  /** 获取Apm Agent信息 {@link DescribeApmAgentRequest} {@link DescribeApmAgentResponse} */
   DescribeApmAgent(data: DescribeApmAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmAgentResponse>;
-  /** {@link DescribeApmInstances 拉取APM实例列表}({@link DescribeApmInstancesRequest 请求参数}): {@link DescribeApmInstancesResponse 返回参数} */
+  /** 拉取APM实例列表 {@link DescribeApmInstancesRequest} {@link DescribeApmInstancesResponse} */
   DescribeApmInstances(data?: DescribeApmInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmInstancesResponse>;
-  /** {@link DescribeGeneralMetricData 获取指标数据通用接口}({@link DescribeGeneralMetricDataRequest 请求参数}): {@link DescribeGeneralMetricDataResponse 返回参数} */
+  /** 获取指标数据通用接口 {@link DescribeGeneralMetricDataRequest} {@link DescribeGeneralMetricDataResponse} */
   DescribeGeneralMetricData(data: DescribeGeneralMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralMetricDataResponse>;
-  /** {@link DescribeMetricRecords 通用指标列表接口}({@link DescribeMetricRecordsRequest 请求参数}): {@link DescribeMetricRecordsResponse 返回参数} */
+  /** 通用指标列表接口 {@link DescribeMetricRecordsRequest} {@link DescribeMetricRecordsResponse} */
   DescribeMetricRecords(data: DescribeMetricRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricRecordsResponse>;
-  /** {@link DescribeServiceOverview 获取服务概览数据}({@link DescribeServiceOverviewRequest 请求参数}): {@link DescribeServiceOverviewResponse 返回参数} */
+  /** 获取服务概览数据 {@link DescribeServiceOverviewRequest} {@link DescribeServiceOverviewResponse} */
   DescribeServiceOverview(data: DescribeServiceOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceOverviewResponse>;
 }
 

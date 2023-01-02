@@ -250,7 +250,7 @@ declare interface CreateSnapshotTaskRequest {
 declare interface CreateSnapshotTaskResponse {
   /** 白板板书生成任务ID，只有任务创建成功的时候才会返回此字段 */
   TaskID: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -280,7 +280,7 @@ declare interface CreateTranscodeRequest {
 declare interface CreateTranscodeResponse {
   /** 文档转码任务的唯一标识Id，用于查询该任务的进度以及转码结果 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -304,7 +304,7 @@ declare interface CreateVideoGenerationTaskRequest {
 declare interface CreateVideoGenerationTaskResponse {
   /** 视频生成的任务Id */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -318,7 +318,7 @@ declare interface DescribeOnlineRecordCallbackResponse {
   Callback: string;
   /** 实时录制回调鉴权密钥 */
   CallbackKey: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -358,7 +358,7 @@ declare interface DescribeOnlineRecordResponse {
   ReplayUrl: string | null;
   /** 视频流在录制过程中断流次数 */
   Interrupts: Interrupt[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -380,7 +380,7 @@ declare interface DescribeQualityMetricsResponse {
   Metric: string;
   /** 时间序列 */
   Content: TimeValue[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -402,7 +402,7 @@ declare interface DescribeSnapshotTaskResponse {
   FinishTime: number | null;
   /** 任务结果信息 */
   Result: SnapshotResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -420,7 +420,7 @@ declare interface DescribeTIWDailyUsageRequest {
 declare interface DescribeTIWDailyUsageResponse {
   /** 指定区间指定产品的用量汇总 */
   Usages: UsageDataItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -446,7 +446,7 @@ declare interface DescribeTIWRoomDailyUsageResponse {
   Usages: RoomUsageDataItem[];
   /** 用量列表总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -460,7 +460,7 @@ declare interface DescribeTranscodeCallbackResponse {
   Callback: string;
   /** 文档转码回调鉴权密钥 */
   CallbackKey: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -492,7 +492,7 @@ declare interface DescribeTranscodeResponse {
   ThumbnailResolution?: string;
   /** 转码压缩文件下载的URL，如果发起文档转码请求参数中`CompressFileType`为空或者不是支持的压缩格式，该参数为空字符串 */
   CompressFileUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -506,7 +506,7 @@ declare interface DescribeVideoGenerationTaskCallbackResponse {
   Callback?: string;
   /** 录制视频生成回调鉴权密钥 */
   CallbackKey?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -534,7 +534,7 @@ declare interface DescribeVideoGenerationTaskResponse {
   VideoInfos?: VideoInfo;
   /** 录制视频生成视频列表 */
   VideoInfoList?: VideoInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -548,7 +548,7 @@ declare interface DescribeWhiteboardPushCallbackResponse {
   Callback: string;
   /** 白板推流回调鉴权密钥 */
   CallbackKey: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -582,7 +582,7 @@ declare interface DescribeWhiteboardPushResponse {
   IMSyncTime?: number;
   /** 备份推流任务结果信息 */
   Backup?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -594,7 +594,7 @@ declare interface PauseOnlineRecordRequest {
 }
 
 declare interface PauseOnlineRecordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -606,7 +606,7 @@ declare interface ResumeOnlineRecordRequest {
 }
 
 declare interface ResumeOnlineRecordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -618,7 +618,7 @@ declare interface SetOnlineRecordCallbackKeyRequest {
 }
 
 declare interface SetOnlineRecordCallbackKeyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -630,7 +630,7 @@ declare interface SetOnlineRecordCallbackRequest {
 }
 
 declare interface SetOnlineRecordCallbackResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -642,7 +642,7 @@ declare interface SetTranscodeCallbackKeyRequest {
 }
 
 declare interface SetTranscodeCallbackKeyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -654,7 +654,7 @@ declare interface SetTranscodeCallbackRequest {
 }
 
 declare interface SetTranscodeCallbackResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -666,7 +666,7 @@ declare interface SetVideoGenerationTaskCallbackKeyRequest {
 }
 
 declare interface SetVideoGenerationTaskCallbackKeyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -678,7 +678,7 @@ declare interface SetVideoGenerationTaskCallbackRequest {
 }
 
 declare interface SetVideoGenerationTaskCallbackResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -690,7 +690,7 @@ declare interface SetWhiteboardPushCallbackKeyRequest {
 }
 
 declare interface SetWhiteboardPushCallbackKeyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -702,7 +702,7 @@ declare interface SetWhiteboardPushCallbackRequest {
 }
 
 declare interface SetWhiteboardPushCallbackResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -742,7 +742,7 @@ declare interface StartOnlineRecordRequest {
 declare interface StartOnlineRecordResponse {
   /** 录制任务Id */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -794,7 +794,7 @@ declare interface StartWhiteboardPushResponse {
   TaskId: string;
   /** 备份任务结果参数 */
   Backup: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -806,7 +806,7 @@ declare interface StopOnlineRecordRequest {
 }
 
 declare interface StopOnlineRecordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -820,70 +820,70 @@ declare interface StopWhiteboardPushRequest {
 declare interface StopWhiteboardPushResponse {
   /** 备份任务相关参数 */
   Backup?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tiw 互动白板} */
 declare interface Tiw {
   (): Versions;
-  /** {@link CreateSnapshotTask 创建白板板书生成任务}({@link CreateSnapshotTaskRequest 请求参数}): {@link CreateSnapshotTaskResponse 返回参数} */
+  /** 创建白板板书生成任务 {@link CreateSnapshotTaskRequest} {@link CreateSnapshotTaskResponse} */
   CreateSnapshotTask(data: CreateSnapshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotTaskResponse>;
-  /** {@link CreateTranscode 创建文档转码任务}({@link CreateTranscodeRequest 请求参数}): {@link CreateTranscodeResponse 返回参数} */
+  /** 创建文档转码任务 {@link CreateTranscodeRequest} {@link CreateTranscodeResponse} */
   CreateTranscode(data: CreateTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTranscodeResponse>;
-  /** {@link CreateVideoGenerationTask 创建录制视频生成任务}({@link CreateVideoGenerationTaskRequest 请求参数}): {@link CreateVideoGenerationTaskResponse 返回参数} */
+  /** 创建录制视频生成任务 {@link CreateVideoGenerationTaskRequest} {@link CreateVideoGenerationTaskResponse} */
   CreateVideoGenerationTask(data: CreateVideoGenerationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoGenerationTaskResponse>;
-  /** {@link DescribeOnlineRecord 查询实时录制任务}({@link DescribeOnlineRecordRequest 请求参数}): {@link DescribeOnlineRecordResponse 返回参数} */
+  /** 查询实时录制任务 {@link DescribeOnlineRecordRequest} {@link DescribeOnlineRecordResponse} */
   DescribeOnlineRecord(data: DescribeOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOnlineRecordResponse>;
-  /** {@link DescribeOnlineRecordCallback 查询实时录制回调地址}({@link DescribeOnlineRecordCallbackRequest 请求参数}): {@link DescribeOnlineRecordCallbackResponse 返回参数} */
+  /** 查询实时录制回调地址 {@link DescribeOnlineRecordCallbackRequest} {@link DescribeOnlineRecordCallbackResponse} */
   DescribeOnlineRecordCallback(data: DescribeOnlineRecordCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOnlineRecordCallbackResponse>;
-  /** {@link DescribeQualityMetrics 查询质量数据}({@link DescribeQualityMetricsRequest 请求参数}): {@link DescribeQualityMetricsResponse 返回参数} */
+  /** 查询质量数据 {@link DescribeQualityMetricsRequest} {@link DescribeQualityMetricsResponse} */
   DescribeQualityMetrics(data: DescribeQualityMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQualityMetricsResponse>;
-  /** {@link DescribeSnapshotTask 获取白板板书生成任务信息}({@link DescribeSnapshotTaskRequest 请求参数}): {@link DescribeSnapshotTaskResponse 返回参数} */
+  /** 获取白板板书生成任务信息 {@link DescribeSnapshotTaskRequest} {@link DescribeSnapshotTaskResponse} */
   DescribeSnapshotTask(data: DescribeSnapshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotTaskResponse>;
-  /** {@link DescribeTIWDailyUsage 查询天维度计费用量}({@link DescribeTIWDailyUsageRequest 请求参数}): {@link DescribeTIWDailyUsageResponse 返回参数} */
+  /** 查询天维度计费用量 {@link DescribeTIWDailyUsageRequest} {@link DescribeTIWDailyUsageResponse} */
   DescribeTIWDailyUsage(data: DescribeTIWDailyUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTIWDailyUsageResponse>;
-  /** {@link DescribeTIWRoomDailyUsage 查询房间维度每天计费用量}({@link DescribeTIWRoomDailyUsageRequest 请求参数}): {@link DescribeTIWRoomDailyUsageResponse 返回参数} */
+  /** 查询房间维度每天计费用量 {@link DescribeTIWRoomDailyUsageRequest} {@link DescribeTIWRoomDailyUsageResponse} */
   DescribeTIWRoomDailyUsage(data: DescribeTIWRoomDailyUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTIWRoomDailyUsageResponse>;
-  /** {@link DescribeTranscode 查询文档转码任务}({@link DescribeTranscodeRequest 请求参数}): {@link DescribeTranscodeResponse 返回参数} */
+  /** 查询文档转码任务 {@link DescribeTranscodeRequest} {@link DescribeTranscodeResponse} */
   DescribeTranscode(data: DescribeTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeResponse>;
-  /** {@link DescribeTranscodeCallback 查询文档转码回调地址}({@link DescribeTranscodeCallbackRequest 请求参数}): {@link DescribeTranscodeCallbackResponse 返回参数} */
+  /** 查询文档转码回调地址 {@link DescribeTranscodeCallbackRequest} {@link DescribeTranscodeCallbackResponse} */
   DescribeTranscodeCallback(data: DescribeTranscodeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeCallbackResponse>;
-  /** {@link DescribeVideoGenerationTask 查询录制视频生成任务}({@link DescribeVideoGenerationTaskRequest 请求参数}): {@link DescribeVideoGenerationTaskResponse 返回参数} */
+  /** 查询录制视频生成任务 {@link DescribeVideoGenerationTaskRequest} {@link DescribeVideoGenerationTaskResponse} */
   DescribeVideoGenerationTask(data: DescribeVideoGenerationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoGenerationTaskResponse>;
-  /** {@link DescribeVideoGenerationTaskCallback 查询录制视频生成回调地址}({@link DescribeVideoGenerationTaskCallbackRequest 请求参数}): {@link DescribeVideoGenerationTaskCallbackResponse 返回参数} */
+  /** 查询录制视频生成回调地址 {@link DescribeVideoGenerationTaskCallbackRequest} {@link DescribeVideoGenerationTaskCallbackResponse} */
   DescribeVideoGenerationTaskCallback(data: DescribeVideoGenerationTaskCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoGenerationTaskCallbackResponse>;
-  /** {@link DescribeWhiteboardPush 查询白板推流任务}({@link DescribeWhiteboardPushRequest 请求参数}): {@link DescribeWhiteboardPushResponse 返回参数} */
+  /** 查询白板推流任务 {@link DescribeWhiteboardPushRequest} {@link DescribeWhiteboardPushResponse} */
   DescribeWhiteboardPush(data: DescribeWhiteboardPushRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteboardPushResponse>;
-  /** {@link DescribeWhiteboardPushCallback 查询白板推流回调地址}({@link DescribeWhiteboardPushCallbackRequest 请求参数}): {@link DescribeWhiteboardPushCallbackResponse 返回参数} */
+  /** 查询白板推流回调地址 {@link DescribeWhiteboardPushCallbackRequest} {@link DescribeWhiteboardPushCallbackResponse} */
   DescribeWhiteboardPushCallback(data: DescribeWhiteboardPushCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteboardPushCallbackResponse>;
-  /** {@link PauseOnlineRecord 暂停实时录制}({@link PauseOnlineRecordRequest 请求参数}): {@link PauseOnlineRecordResponse 返回参数} */
+  /** 暂停实时录制 {@link PauseOnlineRecordRequest} {@link PauseOnlineRecordResponse} */
   PauseOnlineRecord(data: PauseOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<PauseOnlineRecordResponse>;
-  /** {@link ResumeOnlineRecord 恢复实时录制}({@link ResumeOnlineRecordRequest 请求参数}): {@link ResumeOnlineRecordResponse 返回参数} */
+  /** 恢复实时录制 {@link ResumeOnlineRecordRequest} {@link ResumeOnlineRecordResponse} */
   ResumeOnlineRecord(data: ResumeOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeOnlineRecordResponse>;
-  /** {@link SetOnlineRecordCallback 设置实时录制回调地址}({@link SetOnlineRecordCallbackRequest 请求参数}): {@link SetOnlineRecordCallbackResponse 返回参数} */
+  /** 设置实时录制回调地址 {@link SetOnlineRecordCallbackRequest} {@link SetOnlineRecordCallbackResponse} */
   SetOnlineRecordCallback(data: SetOnlineRecordCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetOnlineRecordCallbackResponse>;
-  /** {@link SetOnlineRecordCallbackKey 设置实时录制回调密钥}({@link SetOnlineRecordCallbackKeyRequest 请求参数}): {@link SetOnlineRecordCallbackKeyResponse 返回参数} */
+  /** 设置实时录制回调密钥 {@link SetOnlineRecordCallbackKeyRequest} {@link SetOnlineRecordCallbackKeyResponse} */
   SetOnlineRecordCallbackKey(data: SetOnlineRecordCallbackKeyRequest, config?: AxiosRequestConfig): AxiosPromise<SetOnlineRecordCallbackKeyResponse>;
-  /** {@link SetTranscodeCallback 设置文档转码回调地址}({@link SetTranscodeCallbackRequest 请求参数}): {@link SetTranscodeCallbackResponse 返回参数} */
+  /** 设置文档转码回调地址 {@link SetTranscodeCallbackRequest} {@link SetTranscodeCallbackResponse} */
   SetTranscodeCallback(data: SetTranscodeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetTranscodeCallbackResponse>;
-  /** {@link SetTranscodeCallbackKey 设置文档转码回调密钥}({@link SetTranscodeCallbackKeyRequest 请求参数}): {@link SetTranscodeCallbackKeyResponse 返回参数} */
+  /** 设置文档转码回调密钥 {@link SetTranscodeCallbackKeyRequest} {@link SetTranscodeCallbackKeyResponse} */
   SetTranscodeCallbackKey(data: SetTranscodeCallbackKeyRequest, config?: AxiosRequestConfig): AxiosPromise<SetTranscodeCallbackKeyResponse>;
-  /** {@link SetVideoGenerationTaskCallback 设置录制视频生成回调地址}({@link SetVideoGenerationTaskCallbackRequest 请求参数}): {@link SetVideoGenerationTaskCallbackResponse 返回参数} */
+  /** 设置录制视频生成回调地址 {@link SetVideoGenerationTaskCallbackRequest} {@link SetVideoGenerationTaskCallbackResponse} */
   SetVideoGenerationTaskCallback(data: SetVideoGenerationTaskCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetVideoGenerationTaskCallbackResponse>;
-  /** {@link SetVideoGenerationTaskCallbackKey 设置录制视频生成回调密钥}({@link SetVideoGenerationTaskCallbackKeyRequest 请求参数}): {@link SetVideoGenerationTaskCallbackKeyResponse 返回参数} */
+  /** 设置录制视频生成回调密钥 {@link SetVideoGenerationTaskCallbackKeyRequest} {@link SetVideoGenerationTaskCallbackKeyResponse} */
   SetVideoGenerationTaskCallbackKey(data: SetVideoGenerationTaskCallbackKeyRequest, config?: AxiosRequestConfig): AxiosPromise<SetVideoGenerationTaskCallbackKeyResponse>;
-  /** {@link SetWhiteboardPushCallback 设置白板推流回调地址}({@link SetWhiteboardPushCallbackRequest 请求参数}): {@link SetWhiteboardPushCallbackResponse 返回参数} */
+  /** 设置白板推流回调地址 {@link SetWhiteboardPushCallbackRequest} {@link SetWhiteboardPushCallbackResponse} */
   SetWhiteboardPushCallback(data: SetWhiteboardPushCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetWhiteboardPushCallbackResponse>;
-  /** {@link SetWhiteboardPushCallbackKey 设置白板推流回调密钥}({@link SetWhiteboardPushCallbackKeyRequest 请求参数}): {@link SetWhiteboardPushCallbackKeyResponse 返回参数} */
+  /** 设置白板推流回调密钥 {@link SetWhiteboardPushCallbackKeyRequest} {@link SetWhiteboardPushCallbackKeyResponse} */
   SetWhiteboardPushCallbackKey(data: SetWhiteboardPushCallbackKeyRequest, config?: AxiosRequestConfig): AxiosPromise<SetWhiteboardPushCallbackKeyResponse>;
-  /** {@link StartOnlineRecord 开始实时录制}({@link StartOnlineRecordRequest 请求参数}): {@link StartOnlineRecordResponse 返回参数} */
+  /** 开始实时录制 {@link StartOnlineRecordRequest} {@link StartOnlineRecordResponse} */
   StartOnlineRecord(data: StartOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StartOnlineRecordResponse>;
-  /** {@link StartWhiteboardPush 开始白板推流}({@link StartWhiteboardPushRequest 请求参数}): {@link StartWhiteboardPushResponse 返回参数} */
+  /** 开始白板推流 {@link StartWhiteboardPushRequest} {@link StartWhiteboardPushResponse} */
   StartWhiteboardPush(data: StartWhiteboardPushRequest, config?: AxiosRequestConfig): AxiosPromise<StartWhiteboardPushResponse>;
-  /** {@link StopOnlineRecord 停止实时录制}({@link StopOnlineRecordRequest 请求参数}): {@link StopOnlineRecordResponse 返回参数} */
+  /** 停止实时录制 {@link StopOnlineRecordRequest} {@link StopOnlineRecordResponse} */
   StopOnlineRecord(data: StopOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopOnlineRecordResponse>;
-  /** {@link StopWhiteboardPush 结束白板推流}({@link StopWhiteboardPushRequest 请求参数}): {@link StopWhiteboardPushResponse 返回参数} */
+  /** 结束白板推流 {@link StopWhiteboardPushRequest} {@link StopWhiteboardPushResponse} */
   StopWhiteboardPush(data: StopWhiteboardPushRequest, config?: AxiosRequestConfig): AxiosPromise<StopWhiteboardPushResponse>;
 }
 

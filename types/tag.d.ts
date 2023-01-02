@@ -116,7 +116,7 @@ declare interface AddProjectResponse {
   ProjectId?: number;
   /** 是否为新项目 */
   IsNew?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -130,7 +130,7 @@ declare interface AddResourceTagRequest {
 }
 
 declare interface AddResourceTagResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -150,7 +150,7 @@ declare interface AttachResourcesTagRequest {
 }
 
 declare interface AttachResourcesTagResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -162,7 +162,7 @@ declare interface CreateTagRequest {
 }
 
 declare interface CreateTagResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -172,7 +172,7 @@ declare interface CreateTagsRequest {
 }
 
 declare interface CreateTagsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -184,7 +184,7 @@ declare interface DeleteResourceTagRequest {
 }
 
 declare interface DeleteResourceTagResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -196,7 +196,7 @@ declare interface DeleteTagRequest {
 }
 
 declare interface DeleteTagResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -206,7 +206,7 @@ declare interface DeleteTagsRequest {
 }
 
 declare interface DeleteTagsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -224,7 +224,7 @@ declare interface DescribeProjectsResponse {
   Total: number;
   /** 项目列表 */
   Projects: Project[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -252,7 +252,7 @@ declare interface DescribeResourceTagsByResourceIdsResponse {
   Limit?: number;
   /** 标签列表 */
   Tags?: TagResource[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -280,7 +280,7 @@ declare interface DescribeResourceTagsByResourceIdsSeqResponse {
   Limit?: number;
   /** 标签列表 */
   Tags?: TagResource[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -310,7 +310,7 @@ declare interface DescribeResourceTagsByTagKeysResponse {
   Limit?: number;
   /** 资源标签 */
   Rows?: ResourceIdTag[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -342,7 +342,7 @@ declare interface DescribeResourceTagsResponse {
   Limit?: number | null;
   /** 资源标签 */
   Rows?: TagResource[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -374,7 +374,7 @@ declare interface DescribeResourcesByTagsResponse {
   Limit: number | null;
   /** 资源标签 */
   Rows: ResourceTag[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -406,7 +406,7 @@ declare interface DescribeResourcesByTagsUnionResponse {
   Limit?: number;
   /** 资源标签 */
   Rows?: ResourceTag[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -430,7 +430,7 @@ declare interface DescribeTagKeysResponse {
   Limit?: number;
   /** 标签列表 */
   Tags?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -454,7 +454,7 @@ declare interface DescribeTagValuesResponse {
   Limit?: number;
   /** 标签列表 */
   Tags?: TagInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -478,7 +478,7 @@ declare interface DescribeTagValuesSeqResponse {
   Limit?: number;
   /** 标签列表 */
   Tags?: TagInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -508,7 +508,7 @@ declare interface DescribeTagsResponse {
   Limit: number;
   /** 标签列表 */
   Tags: TagWithDelete[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -538,7 +538,7 @@ declare interface DescribeTagsSeqResponse {
   Limit?: number;
   /** 标签列表 */
   Tags?: TagWithDelete[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -556,7 +556,7 @@ declare interface DetachResourcesTagRequest {
 }
 
 declare interface DetachResourcesTagResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -576,7 +576,7 @@ declare interface GetResourcesResponse {
   PaginationToken: string;
   /** 资源及关联的标签(键和值)列表 */
   ResourceTagMappingList: ResourceTagMapping[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -592,7 +592,7 @@ declare interface GetTagKeysResponse {
   PaginationToken: string;
   /** 标签键信息。 */
   TagKeys: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -610,7 +610,7 @@ declare interface GetTagValuesResponse {
   PaginationToken: string;
   /** 标签列表。 */
   Tags: TagInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -628,7 +628,7 @@ declare interface GetTagsResponse {
   PaginationToken: string;
   /** 标签列表。 */
   Tags: TagInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -642,7 +642,7 @@ declare interface ModifyResourceTagsRequest {
 }
 
 declare interface ModifyResourceTagsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -662,7 +662,7 @@ declare interface ModifyResourcesTagValueRequest {
 }
 
 declare interface ModifyResourcesTagValueResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -676,7 +676,7 @@ declare interface TagResourcesRequest {
 declare interface TagResourcesResponse {
   /** 失败资源信息。创建并绑定标签成功时，返回的FailedResources为空。创建并绑定标签失败或部分失败时，返回的FailedResources会显示失败资源的详细信息。 */
   FailedResources: FailedResource[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -690,7 +690,7 @@ declare interface UnTagResourcesRequest {
 declare interface UnTagResourcesResponse {
   /** 失败资源信息。解绑标签成功时，返回的FailedResources为空。解绑标签失败或部分失败时，返回的FailedResources会显示失败资源的详细信息。 */
   FailedResources: FailedResource[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -706,7 +706,7 @@ declare interface UpdateProjectRequest {
 }
 
 declare interface UpdateProjectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -720,74 +720,74 @@ declare interface UpdateResourceTagValueRequest {
 }
 
 declare interface UpdateResourceTagValueResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tag 标签} */
 declare interface Tag {
   (): Versions;
-  /** {@link AddProject 创建项目}({@link AddProjectRequest 请求参数}): {@link AddProjectResponse 返回参数} */
+  /** 创建项目 {@link AddProjectRequest} {@link AddProjectResponse} */
   AddProject(data: AddProjectRequest, config?: AxiosRequestConfig): AxiosPromise<AddProjectResponse>;
-  /** {@link AddResourceTag 标签关联资源}({@link AddResourceTagRequest 请求参数}): {@link AddResourceTagResponse 返回参数} */
+  /** 标签关联资源 {@link AddResourceTagRequest} {@link AddResourceTagResponse} */
   AddResourceTag(data: AddResourceTagRequest, config?: AxiosRequestConfig): AxiosPromise<AddResourceTagResponse>;
-  /** {@link AttachResourcesTag 标签关联批量资源}({@link AttachResourcesTagRequest 请求参数}): {@link AttachResourcesTagResponse 返回参数} */
+  /** 标签关联批量资源 {@link AttachResourcesTagRequest} {@link AttachResourcesTagResponse} */
   AttachResourcesTag(data: AttachResourcesTagRequest, config?: AxiosRequestConfig): AxiosPromise<AttachResourcesTagResponse>;
-  /** {@link CreateTag 创建标签}({@link CreateTagRequest 请求参数}): {@link CreateTagResponse 返回参数} */
+  /** 创建标签 {@link CreateTagRequest} {@link CreateTagResponse} */
   CreateTag(data: CreateTagRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTagResponse>;
-  /** {@link CreateTags 批量创建标签}({@link CreateTagsRequest 请求参数}): {@link CreateTagsResponse 返回参数} */
+  /** 批量创建标签 {@link CreateTagsRequest} {@link CreateTagsResponse} */
   CreateTags(data?: CreateTagsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTagsResponse>;
-  /** {@link DeleteResourceTag 标签解绑资源}({@link DeleteResourceTagRequest 请求参数}): {@link DeleteResourceTagResponse 返回参数} */
+  /** 标签解绑资源 {@link DeleteResourceTagRequest} {@link DeleteResourceTagResponse} */
   DeleteResourceTag(data: DeleteResourceTagRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceTagResponse>;
-  /** {@link DeleteTag 删除标签}({@link DeleteTagRequest 请求参数}): {@link DeleteTagResponse 返回参数} */
+  /** 删除标签 {@link DeleteTagRequest} {@link DeleteTagResponse} */
   DeleteTag(data: DeleteTagRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTagResponse>;
-  /** {@link DeleteTags 批量删除标签}({@link DeleteTagsRequest 请求参数}): {@link DeleteTagsResponse 返回参数} */
+  /** 批量删除标签 {@link DeleteTagsRequest} {@link DeleteTagsResponse} */
   DeleteTags(data: DeleteTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTagsResponse>;
-  /** {@link DescribeProjects 获取项目列表}({@link DescribeProjectsRequest 请求参数}): {@link DescribeProjectsResponse 返回参数} */
+  /** 获取项目列表 {@link DescribeProjectsRequest} {@link DescribeProjectsResponse} */
   DescribeProjects(data: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
-  /** {@link DescribeResourceTags 查询资源关联标签}({@link DescribeResourceTagsRequest 请求参数}): {@link DescribeResourceTagsResponse 返回参数} */
+  /** 查询资源关联标签 {@link DescribeResourceTagsRequest} {@link DescribeResourceTagsResponse} */
   DescribeResourceTags(data?: DescribeResourceTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTagsResponse>;
-  /** {@link DescribeResourceTagsByResourceIds 批量查看资源关联的标签}({@link DescribeResourceTagsByResourceIdsRequest 请求参数}): {@link DescribeResourceTagsByResourceIdsResponse 返回参数} */
+  /** 批量查看资源关联的标签 {@link DescribeResourceTagsByResourceIdsRequest} {@link DescribeResourceTagsByResourceIdsResponse} */
   DescribeResourceTagsByResourceIds(data: DescribeResourceTagsByResourceIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTagsByResourceIdsResponse>;
-  /** {@link DescribeResourceTagsByResourceIdsSeq 按顺序查看资源关联的标签}({@link DescribeResourceTagsByResourceIdsSeqRequest 请求参数}): {@link DescribeResourceTagsByResourceIdsSeqResponse 返回参数} */
+  /** 按顺序查看资源关联的标签 {@link DescribeResourceTagsByResourceIdsSeqRequest} {@link DescribeResourceTagsByResourceIdsSeqResponse} */
   DescribeResourceTagsByResourceIdsSeq(data: DescribeResourceTagsByResourceIdsSeqRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTagsByResourceIdsSeqResponse>;
-  /** {@link DescribeResourceTagsByTagKeys 根据标签键获取资源标签}({@link DescribeResourceTagsByTagKeysRequest 请求参数}): {@link DescribeResourceTagsByTagKeysResponse 返回参数} */
+  /** 根据标签键获取资源标签 {@link DescribeResourceTagsByTagKeysRequest} {@link DescribeResourceTagsByTagKeysResponse} */
   DescribeResourceTagsByTagKeys(data: DescribeResourceTagsByTagKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTagsByTagKeysResponse>;
-  /** {@link DescribeResourcesByTags 通过标签查询资源列表}({@link DescribeResourcesByTagsRequest 请求参数}): {@link DescribeResourcesByTagsResponse 返回参数} */
+  /** 通过标签查询资源列表 {@link DescribeResourcesByTagsRequest} {@link DescribeResourcesByTagsResponse} */
   DescribeResourcesByTags(data: DescribeResourcesByTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesByTagsResponse>;
-  /** {@link DescribeResourcesByTagsUnion 通过标签查询资源列表并集}({@link DescribeResourcesByTagsUnionRequest 请求参数}): {@link DescribeResourcesByTagsUnionResponse 返回参数} */
+  /** 通过标签查询资源列表并集 {@link DescribeResourcesByTagsUnionRequest} {@link DescribeResourcesByTagsUnionResponse} */
   DescribeResourcesByTagsUnion(data: DescribeResourcesByTagsUnionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesByTagsUnionResponse>;
-  /** {@link DescribeTagKeys 查询标签键}({@link DescribeTagKeysRequest 请求参数}): {@link DescribeTagKeysResponse 返回参数} */
+  /** 查询标签键 {@link DescribeTagKeysRequest} {@link DescribeTagKeysResponse} */
   DescribeTagKeys(data?: DescribeTagKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagKeysResponse>;
-  /** {@link DescribeTagValues 查询标签值}({@link DescribeTagValuesRequest 请求参数}): {@link DescribeTagValuesResponse 返回参数} */
+  /** 查询标签值 {@link DescribeTagValuesRequest} {@link DescribeTagValuesResponse} */
   DescribeTagValues(data: DescribeTagValuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagValuesResponse>;
-  /** {@link DescribeTagValuesSeq 按顺序查询标签值}({@link DescribeTagValuesSeqRequest 请求参数}): {@link DescribeTagValuesSeqResponse 返回参数} */
+  /** 按顺序查询标签值 {@link DescribeTagValuesSeqRequest} {@link DescribeTagValuesSeqResponse} */
   DescribeTagValuesSeq(data: DescribeTagValuesSeqRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagValuesSeqResponse>;
-  /** {@link DescribeTags 查询标签列表}({@link DescribeTagsRequest 请求参数}): {@link DescribeTagsResponse 返回参数} */
+  /** 查询标签列表 {@link DescribeTagsRequest} {@link DescribeTagsResponse} */
   DescribeTags(data?: DescribeTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagsResponse>;
-  /** {@link DescribeTagsSeq 按顺序查询标签列表}({@link DescribeTagsSeqRequest 请求参数}): {@link DescribeTagsSeqResponse 返回参数} */
+  /** 按顺序查询标签列表 {@link DescribeTagsSeqRequest} {@link DescribeTagsSeqResponse} */
   DescribeTagsSeq(data?: DescribeTagsSeqRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagsSeqResponse>;
-  /** {@link DetachResourcesTag 标签解绑批量资源}({@link DetachResourcesTagRequest 请求参数}): {@link DetachResourcesTagResponse 返回参数} */
+  /** 标签解绑批量资源 {@link DetachResourcesTagRequest} {@link DetachResourcesTagResponse} */
   DetachResourcesTag(data: DetachResourcesTagRequest, config?: AxiosRequestConfig): AxiosPromise<DetachResourcesTagResponse>;
-  /** {@link GetResources 查询资源标签列表}({@link GetResourcesRequest 请求参数}): {@link GetResourcesResponse 返回参数} */
+  /** 查询资源标签列表 {@link GetResourcesRequest} {@link GetResourcesResponse} */
   GetResources(data?: GetResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<GetResourcesResponse>;
-  /** {@link GetTagKeys 查询标签键列表}({@link GetTagKeysRequest 请求参数}): {@link GetTagKeysResponse 返回参数} */
+  /** 查询标签键列表 {@link GetTagKeysRequest} {@link GetTagKeysResponse} */
   GetTagKeys(data?: GetTagKeysRequest, config?: AxiosRequestConfig): AxiosPromise<GetTagKeysResponse>;
-  /** {@link GetTagValues 查询标签值列表}({@link GetTagValuesRequest 请求参数}): {@link GetTagValuesResponse 返回参数} */
+  /** 查询标签值列表 {@link GetTagValuesRequest} {@link GetTagValuesResponse} */
   GetTagValues(data: GetTagValuesRequest, config?: AxiosRequestConfig): AxiosPromise<GetTagValuesResponse>;
-  /** {@link GetTags 获取标签列表}({@link GetTagsRequest 请求参数}): {@link GetTagsResponse 返回参数} */
+  /** 获取标签列表 {@link GetTagsRequest} {@link GetTagsResponse} */
   GetTags(data?: GetTagsRequest, config?: AxiosRequestConfig): AxiosPromise<GetTagsResponse>;
-  /** {@link ModifyResourceTags 批量修改资源关联的标签}({@link ModifyResourceTagsRequest 请求参数}): {@link ModifyResourceTagsResponse 返回参数} */
+  /** 批量修改资源关联的标签 {@link ModifyResourceTagsRequest} {@link ModifyResourceTagsResponse} */
   ModifyResourceTags(data: ModifyResourceTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceTagsResponse>;
-  /** {@link ModifyResourcesTagValue 修改批量资源关联的标签值}({@link ModifyResourcesTagValueRequest 请求参数}): {@link ModifyResourcesTagValueResponse 返回参数} */
+  /** 修改批量资源关联的标签值 {@link ModifyResourcesTagValueRequest} {@link ModifyResourcesTagValueResponse} */
   ModifyResourcesTagValue(data: ModifyResourcesTagValueRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcesTagValueResponse>;
-  /** {@link TagResources 为资源绑定标签}({@link TagResourcesRequest 请求参数}): {@link TagResourcesResponse 返回参数} */
+  /** 为资源绑定标签 {@link TagResourcesRequest} {@link TagResourcesResponse} */
   TagResources(data: TagResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<TagResourcesResponse>;
-  /** {@link UnTagResources 为资源解绑标签}({@link UnTagResourcesRequest 请求参数}): {@link UnTagResourcesResponse 返回参数} */
+  /** 为资源解绑标签 {@link UnTagResourcesRequest} {@link UnTagResourcesResponse} */
   UnTagResources(data: UnTagResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<UnTagResourcesResponse>;
-  /** {@link UpdateProject 修改项目}({@link UpdateProjectRequest 请求参数}): {@link UpdateProjectResponse 返回参数} */
+  /** 修改项目 {@link UpdateProjectRequest} {@link UpdateProjectResponse} */
   UpdateProject(data: UpdateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProjectResponse>;
-  /** {@link UpdateResourceTagValue 修改资源标签值}({@link UpdateResourceTagValueRequest 请求参数}): {@link UpdateResourceTagValueResponse 返回参数} */
+  /** 修改资源标签值 {@link UpdateResourceTagValueRequest} {@link UpdateResourceTagValueResponse} */
   UpdateResourceTagValue(data: UpdateResourceTagValueRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateResourceTagValueResponse>;
 }
 

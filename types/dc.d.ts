@@ -366,7 +366,7 @@ declare interface AcceptDirectConnectTunnelRequest {
 }
 
 declare interface AcceptDirectConnectTunnelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -382,7 +382,7 @@ declare interface ApplyInternetAddressRequest {
 declare interface ApplyInternetAddressResponse {
   /** 互联网公网地址ID */
   InstanceId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -426,7 +426,7 @@ declare interface CreateDirectConnectRequest {
 declare interface CreateDirectConnectResponse {
   /** 物理专线的ID。 */
   DirectConnectIdSet?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -476,7 +476,7 @@ declare interface CreateDirectConnectTunnelRequest {
 declare interface CreateDirectConnectTunnelResponse {
   /** 专用通道ID */
   DirectConnectTunnelIdSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -486,7 +486,7 @@ declare interface DeleteDirectConnectRequest {
 }
 
 declare interface DeleteDirectConnectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -496,7 +496,7 @@ declare interface DeleteDirectConnectTunnelRequest {
 }
 
 declare interface DeleteDirectConnectTunnelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -514,7 +514,7 @@ declare interface DescribeAccessPointsResponse {
   AccessPointSet?: AccessPoint[];
   /** 符合接入点数量。 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -526,7 +526,7 @@ declare interface DescribeDirectConnectTunnelExtraRequest {
 declare interface DescribeDirectConnectTunnelExtraResponse {
   /** 专用通道扩展信息 */
   DirectConnectTunnelExtra?: DirectConnectTunnelExtra;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -546,7 +546,7 @@ declare interface DescribeDirectConnectTunnelsResponse {
   DirectConnectTunnelSet?: DirectConnectTunnel[];
   /** 符合专用通道数量。 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -568,7 +568,7 @@ declare interface DescribeDirectConnectsResponse {
   TotalCount?: number;
   /** 用户名下物理专线是否都签署了用户协议 */
   AllSignLaw?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -586,7 +586,7 @@ declare interface DescribeInternetAddressQuotaResponse {
   Ipv4BgpNum?: number | null;
   /** 非BGP类型互联网地址已使用数量 */
   Ipv4OtherNum?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -604,7 +604,7 @@ declare interface DescribeInternetAddressResponse {
   TotalCount?: number;
   /** 互联网公网地址列表 */
   Subnets?: InternetAddressDetail[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -616,7 +616,7 @@ declare interface DescribeInternetAddressStatisticsResponse {
   TotalCount?: number;
   /** 互联网公网地址统计信息列表 */
   InternetAddressStatistics?: InternetAddressStatistics[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -636,7 +636,7 @@ declare interface DescribePublicDirectConnectTunnelRoutesResponse {
   Routes?: DirectConnectTunnelRoute[];
   /** 记录总数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -646,7 +646,7 @@ declare interface DisableInternetAddressRequest {
 }
 
 declare interface DisableInternetAddressResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -656,7 +656,7 @@ declare interface EnableInternetAddressRequest {
 }
 
 declare interface EnableInternetAddressResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -690,7 +690,7 @@ declare interface ModifyDirectConnectAttributeRequest {
 }
 
 declare interface ModifyDirectConnectAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -714,7 +714,7 @@ declare interface ModifyDirectConnectTunnelAttributeRequest {
 }
 
 declare interface ModifyDirectConnectTunnelAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -754,7 +754,7 @@ declare interface ModifyDirectConnectTunnelExtraRequest {
 }
 
 declare interface ModifyDirectConnectTunnelExtraResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -764,7 +764,7 @@ declare interface RejectDirectConnectTunnelRequest {
 }
 
 declare interface RejectDirectConnectTunnelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -774,54 +774,54 @@ declare interface ReleaseInternetAddressRequest {
 }
 
 declare interface ReleaseInternetAddressResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Dc 专线接入} */
 declare interface Dc {
   (): Versions;
-  /** {@link AcceptDirectConnectTunnel 接受专用通道申请}({@link AcceptDirectConnectTunnelRequest 请求参数}): {@link AcceptDirectConnectTunnelResponse 返回参数} */
+  /** 接受专用通道申请 {@link AcceptDirectConnectTunnelRequest} {@link AcceptDirectConnectTunnelResponse} */
   AcceptDirectConnectTunnel(data: AcceptDirectConnectTunnelRequest, config?: AxiosRequestConfig): AxiosPromise<AcceptDirectConnectTunnelResponse>;
-  /** {@link ApplyInternetAddress 申请互联网地址}({@link ApplyInternetAddressRequest 请求参数}): {@link ApplyInternetAddressResponse 返回参数} */
+  /** 申请互联网地址 {@link ApplyInternetAddressRequest} {@link ApplyInternetAddressResponse} */
   ApplyInternetAddress(data: ApplyInternetAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyInternetAddressResponse>;
-  /** {@link CreateDirectConnect 申请物理专线}({@link CreateDirectConnectRequest 请求参数}): {@link CreateDirectConnectResponse 返回参数} */
+  /** 申请物理专线 {@link CreateDirectConnectRequest} {@link CreateDirectConnectResponse} */
   CreateDirectConnect(data: CreateDirectConnectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDirectConnectResponse>;
-  /** {@link CreateDirectConnectTunnel 创建专用通道}({@link CreateDirectConnectTunnelRequest 请求参数}): {@link CreateDirectConnectTunnelResponse 返回参数} */
+  /** 创建专用通道 {@link CreateDirectConnectTunnelRequest} {@link CreateDirectConnectTunnelResponse} */
   CreateDirectConnectTunnel(data: CreateDirectConnectTunnelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDirectConnectTunnelResponse>;
-  /** {@link DeleteDirectConnect 删除物理专线}({@link DeleteDirectConnectRequest 请求参数}): {@link DeleteDirectConnectResponse 返回参数} */
+  /** 删除物理专线 {@link DeleteDirectConnectRequest} {@link DeleteDirectConnectResponse} */
   DeleteDirectConnect(data: DeleteDirectConnectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDirectConnectResponse>;
-  /** {@link DeleteDirectConnectTunnel 删除专用通道}({@link DeleteDirectConnectTunnelRequest 请求参数}): {@link DeleteDirectConnectTunnelResponse 返回参数} */
+  /** 删除专用通道 {@link DeleteDirectConnectTunnelRequest} {@link DeleteDirectConnectTunnelResponse} */
   DeleteDirectConnectTunnel(data: DeleteDirectConnectTunnelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDirectConnectTunnelResponse>;
-  /** {@link DescribeAccessPoints 查询物理专线接入点}({@link DescribeAccessPointsRequest 请求参数}): {@link DescribeAccessPointsResponse 返回参数} */
+  /** 查询物理专线接入点 {@link DescribeAccessPointsRequest} {@link DescribeAccessPointsResponse} */
   DescribeAccessPoints(data?: DescribeAccessPointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessPointsResponse>;
-  /** {@link DescribeDirectConnectTunnelExtra 查询专用通道扩展信息}({@link DescribeDirectConnectTunnelExtraRequest 请求参数}): {@link DescribeDirectConnectTunnelExtraResponse 返回参数} */
+  /** 查询专用通道扩展信息 {@link DescribeDirectConnectTunnelExtraRequest} {@link DescribeDirectConnectTunnelExtraResponse} */
   DescribeDirectConnectTunnelExtra(data: DescribeDirectConnectTunnelExtraRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectTunnelExtraResponse>;
-  /** {@link DescribeDirectConnectTunnels 查询专用通道列表}({@link DescribeDirectConnectTunnelsRequest 请求参数}): {@link DescribeDirectConnectTunnelsResponse 返回参数} */
+  /** 查询专用通道列表 {@link DescribeDirectConnectTunnelsRequest} {@link DescribeDirectConnectTunnelsResponse} */
   DescribeDirectConnectTunnels(data?: DescribeDirectConnectTunnelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectTunnelsResponse>;
-  /** {@link DescribeDirectConnects 查询物理专线列表}({@link DescribeDirectConnectsRequest 请求参数}): {@link DescribeDirectConnectsResponse 返回参数} */
+  /** 查询物理专线列表 {@link DescribeDirectConnectsRequest} {@link DescribeDirectConnectsResponse} */
   DescribeDirectConnects(data?: DescribeDirectConnectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectsResponse>;
-  /** {@link DescribeInternetAddress 获取用户互联网公网地址信息}({@link DescribeInternetAddressRequest 请求参数}): {@link DescribeInternetAddressResponse 返回参数} */
+  /** 获取用户互联网公网地址信息 {@link DescribeInternetAddressRequest} {@link DescribeInternetAddressResponse} */
   DescribeInternetAddress(data?: DescribeInternetAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInternetAddressResponse>;
-  /** {@link DescribeInternetAddressQuota 获取互联网公网地址配额}({@link DescribeInternetAddressQuotaRequest 请求参数}): {@link DescribeInternetAddressQuotaResponse 返回参数} */
+  /** 获取互联网公网地址配额 {@link DescribeInternetAddressQuotaRequest} {@link DescribeInternetAddressQuotaResponse} */
   DescribeInternetAddressQuota(data?: DescribeInternetAddressQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInternetAddressQuotaResponse>;
-  /** {@link DescribeInternetAddressStatistics 获取用户互联网公网地址统计信息}({@link DescribeInternetAddressStatisticsRequest 请求参数}): {@link DescribeInternetAddressStatisticsResponse 返回参数} */
+  /** 获取用户互联网公网地址统计信息 {@link DescribeInternetAddressStatisticsRequest} {@link DescribeInternetAddressStatisticsResponse} */
   DescribeInternetAddressStatistics(data?: DescribeInternetAddressStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInternetAddressStatisticsResponse>;
-  /** {@link DescribePublicDirectConnectTunnelRoutes 查询互联网通道路由列表}({@link DescribePublicDirectConnectTunnelRoutesRequest 请求参数}): {@link DescribePublicDirectConnectTunnelRoutesResponse 返回参数} */
+  /** 查询互联网通道路由列表 {@link DescribePublicDirectConnectTunnelRoutesRequest} {@link DescribePublicDirectConnectTunnelRoutesResponse} */
   DescribePublicDirectConnectTunnelRoutes(data: DescribePublicDirectConnectTunnelRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicDirectConnectTunnelRoutesResponse>;
-  /** {@link DisableInternetAddress 停用公网互联网地址}({@link DisableInternetAddressRequest 请求参数}): {@link DisableInternetAddressResponse 返回参数} */
+  /** 停用公网互联网地址 {@link DisableInternetAddressRequest} {@link DisableInternetAddressResponse} */
   DisableInternetAddress(data: DisableInternetAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DisableInternetAddressResponse>;
-  /** {@link EnableInternetAddress 启用互联网公网地址}({@link EnableInternetAddressRequest 请求参数}): {@link EnableInternetAddressResponse 返回参数} */
+  /** 启用互联网公网地址 {@link EnableInternetAddressRequest} {@link EnableInternetAddressResponse} */
   EnableInternetAddress(data: EnableInternetAddressRequest, config?: AxiosRequestConfig): AxiosPromise<EnableInternetAddressResponse>;
-  /** {@link ModifyDirectConnectAttribute 修改物理专线属性}({@link ModifyDirectConnectAttributeRequest 请求参数}): {@link ModifyDirectConnectAttributeResponse 返回参数} */
+  /** 修改物理专线属性 {@link ModifyDirectConnectAttributeRequest} {@link ModifyDirectConnectAttributeResponse} */
   ModifyDirectConnectAttribute(data: ModifyDirectConnectAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDirectConnectAttributeResponse>;
-  /** {@link ModifyDirectConnectTunnelAttribute 修改专用通道属性}({@link ModifyDirectConnectTunnelAttributeRequest 请求参数}): {@link ModifyDirectConnectTunnelAttributeResponse 返回参数} */
+  /** 修改专用通道属性 {@link ModifyDirectConnectTunnelAttributeRequest} {@link ModifyDirectConnectTunnelAttributeResponse} */
   ModifyDirectConnectTunnelAttribute(data: ModifyDirectConnectTunnelAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDirectConnectTunnelAttributeResponse>;
-  /** {@link ModifyDirectConnectTunnelExtra 修改专用通道扩展信息}({@link ModifyDirectConnectTunnelExtraRequest 请求参数}): {@link ModifyDirectConnectTunnelExtraResponse 返回参数} */
+  /** 修改专用通道扩展信息 {@link ModifyDirectConnectTunnelExtraRequest} {@link ModifyDirectConnectTunnelExtraResponse} */
   ModifyDirectConnectTunnelExtra(data: ModifyDirectConnectTunnelExtraRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDirectConnectTunnelExtraResponse>;
-  /** {@link RejectDirectConnectTunnel 拒绝专用通道申请}({@link RejectDirectConnectTunnelRequest 请求参数}): {@link RejectDirectConnectTunnelResponse 返回参数} */
+  /** 拒绝专用通道申请 {@link RejectDirectConnectTunnelRequest} {@link RejectDirectConnectTunnelResponse} */
   RejectDirectConnectTunnel(data: RejectDirectConnectTunnelRequest, config?: AxiosRequestConfig): AxiosPromise<RejectDirectConnectTunnelResponse>;
-  /** {@link ReleaseInternetAddress 释放互联网地址}({@link ReleaseInternetAddressRequest 请求参数}): {@link ReleaseInternetAddressResponse 返回参数} */
+  /** 释放互联网地址 {@link ReleaseInternetAddressRequest} {@link ReleaseInternetAddressResponse} */
   ReleaseInternetAddress(data: ReleaseInternetAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseInternetAddressResponse>;
 }
 

@@ -148,14 +148,14 @@ declare interface GetIndustryV1HomeMembersResponse {
   Metadata: RspMetadata | null;
   /** 无 */
   Payload: GetIndustryV1HomeMembersRespPayload | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Icr 对话机器人} */
 declare interface Icr {
   (): Versions;
-  /** {@link GetIndustryV1HomeMembers 获取成员列表}({@link GetIndustryV1HomeMembersRequest 请求参数}): {@link GetIndustryV1HomeMembersResponse 返回参数} */
+  /** 获取成员列表 {@link GetIndustryV1HomeMembersRequest} {@link GetIndustryV1HomeMembersResponse} */
   GetIndustryV1HomeMembers(data: GetIndustryV1HomeMembersRequest, config?: AxiosRequestConfig): AxiosPromise<GetIndustryV1HomeMembersResponse>;
 }
 

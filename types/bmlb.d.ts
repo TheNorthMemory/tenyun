@@ -866,7 +866,7 @@ declare interface BindL4BackendsRequest {
 declare interface BindL4BackendsResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -888,7 +888,7 @@ declare interface BindL7BackendsRequest {
 declare interface BindL7BackendsResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -902,7 +902,7 @@ declare interface BindTrafficMirrorListenersRequest {
 declare interface BindTrafficMirrorListenersResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -916,7 +916,7 @@ declare interface BindTrafficMirrorReceiversRequest {
 declare interface BindTrafficMirrorReceiversResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -930,7 +930,7 @@ declare interface CreateL4ListenersRequest {
 declare interface CreateL4ListenersResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -944,7 +944,7 @@ declare interface CreateL7ListenersRequest {
 declare interface CreateL7ListenersResponse {
   /** 新建的负载均衡七层监听器的唯一ID列表。 */
   ListenerIds?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -960,7 +960,7 @@ declare interface CreateL7RulesRequest {
 declare interface CreateL7RulesResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -994,7 +994,7 @@ declare interface CreateLoadBalancersResponse {
   LoadBalancerIds?: string[];
   /** 创建负载均衡的异步任务ID。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1008,7 +1008,7 @@ declare interface CreateTrafficMirrorRequest {
 declare interface CreateTrafficMirrorResponse {
   /** 流量镜像实例ID */
   TrafficMirrorId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1024,7 +1024,7 @@ declare interface DeleteL7DomainsRequest {
 declare interface DeleteL7DomainsResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1042,7 +1042,7 @@ declare interface DeleteL7RulesRequest {
 declare interface DeleteL7RulesResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1056,7 +1056,7 @@ declare interface DeleteListenersRequest {
 declare interface DeleteListenersResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1068,7 +1068,7 @@ declare interface DeleteLoadBalancerRequest {
 declare interface DeleteLoadBalancerResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1080,7 +1080,7 @@ declare interface DeleteTrafficMirrorRequest {
 declare interface DeleteTrafficMirrorResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1110,7 +1110,7 @@ declare interface DescribeCertDetailResponse {
   CertEndTime?: string;
   /** 该证书关联的黑石负载均衡对象列表。 */
   CertLoadBalancerSet?: CertDetailLoadBalancer[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1124,7 +1124,7 @@ declare interface DescribeDevicesBindInfoRequest {
 declare interface DescribeDevicesBindInfoResponse {
   /** 返回的负载均衡绑定信息。 */
   LoadBalancerSet?: DevicesBindInfoLoadBalancer[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1140,7 +1140,7 @@ declare interface DescribeL4BackendsRequest {
 declare interface DescribeL4BackendsResponse {
   /** 返回的绑定关系列表。 */
   BackendSet?: L4Backend[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1156,7 +1156,7 @@ declare interface DescribeL4ListenerInfoRequest {
 declare interface DescribeL4ListenerInfoResponse {
   /** 返回的四层监听器列表。 */
   ListenerSet?: L4ListenerInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1170,7 +1170,7 @@ declare interface DescribeL4ListenersRequest {
 declare interface DescribeL4ListenersResponse {
   /** 监听器信息数组。 */
   ListenerSet?: L4Listener[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1190,7 +1190,7 @@ declare interface DescribeL7BackendsRequest {
 declare interface DescribeL7BackendsResponse {
   /** 返回的绑定关系列表。 */
   BackendSet?: L7Backend[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1208,7 +1208,7 @@ declare interface DescribeL7ListenerInfoRequest {
 declare interface DescribeL7ListenerInfoResponse {
   /** 返回的七层监听器列表。 */
   ListenerSet?: L7ListenerInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1230,7 +1230,7 @@ declare interface DescribeL7ListenersExResponse {
   TotalCount?: number;
   /** 符合条件的监听器。 */
   ListenerSet?: L7ExListener[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1244,7 +1244,7 @@ declare interface DescribeL7ListenersRequest {
 declare interface DescribeL7ListenersResponse {
   /** 返回的七层监听器列表。 */
   ListenerSet?: L7Listener[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1260,7 +1260,7 @@ declare interface DescribeL7RulesRequest {
 declare interface DescribeL7RulesResponse {
   /** 返回的转发规则列表。 */
   RuleSet?: L7Rule[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1272,7 +1272,7 @@ declare interface DescribeLoadBalancerPortInfoRequest {
 declare interface DescribeLoadBalancerPortInfoResponse {
   /** 返回的监听器列表（四层和七层）。 */
   ListenerSet?: LoadBalancerPortInfoListener[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1284,7 +1284,7 @@ declare interface DescribeLoadBalancerTaskResultRequest {
 declare interface DescribeLoadBalancerTaskResultResponse {
   /** 任务当前状态。0：成功，1：失败，2：进行中。 */
   Status?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1328,7 +1328,7 @@ declare interface DescribeLoadBalancersResponse {
   LoadBalancerSet?: LoadBalancer[];
   /** 符合条件的负载均衡总数。 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1360,7 +1360,7 @@ declare interface DescribeTrafficMirrorListenersResponse {
   ListenerSet?: TrafficMirrorListener[];
   /** 监听器总数。 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1374,7 +1374,7 @@ declare interface DescribeTrafficMirrorReceiverHealthStatusRequest {
 declare interface DescribeTrafficMirrorReceiverHealthStatusResponse {
   /** 内网IP和端口对应的状态。 */
   ReceiversStatusSet?: TrafficMirrorReciversStatus[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1402,7 +1402,7 @@ declare interface DescribeTrafficMirrorReceiversResponse {
   ReceiverSet?: TrafficMirrorReceiver[];
   /** 接收机总数。 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1430,7 +1430,7 @@ declare interface DescribeTrafficMirrorsResponse {
   TotalCount?: number;
   /** 对象数组。数组元素为流量镜像信息，具体结构描述如list结构所示。 */
   TrafficMirrorSet?: TrafficMirror[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1452,7 +1452,7 @@ declare interface ModifyL4BackendPortRequest {
 declare interface ModifyL4BackendPortResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1474,7 +1474,7 @@ declare interface ModifyL4BackendProbePortRequest {
 declare interface ModifyL4BackendProbePortResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1496,7 +1496,7 @@ declare interface ModifyL4BackendWeightRequest {
 declare interface ModifyL4BackendWeightResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1540,7 +1540,7 @@ declare interface ModifyL4ListenerRequest {
 declare interface ModifyL4ListenerResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1566,7 +1566,7 @@ declare interface ModifyL7BackendPortRequest {
 declare interface ModifyL7BackendPortResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1592,7 +1592,7 @@ declare interface ModifyL7BackendWeightRequest {
 declare interface ModifyL7BackendWeightResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1628,7 +1628,7 @@ declare interface ModifyL7ListenerRequest {
 declare interface ModifyL7ListenerResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用[DescribeLoadBalancerTaskResult](/document/product/386/9308)接口来查询任务操作结果 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1644,7 +1644,7 @@ declare interface ModifyL7LocationsRequest {
 declare interface ModifyL7LocationsResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1658,7 +1658,7 @@ declare interface ModifyLoadBalancerChargeModeRequest {
 }
 
 declare interface ModifyLoadBalancerChargeModeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1674,7 +1674,7 @@ declare interface ModifyLoadBalancerRequest {
 declare interface ModifyLoadBalancerResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1696,7 +1696,7 @@ declare interface ReplaceCertResponse {
   NewCertId?: string;
   /** 旧证书ID。 */
   OldCertId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1708,7 +1708,7 @@ declare interface SetTrafficMirrorAliasRequest {
 }
 
 declare interface SetTrafficMirrorAliasResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1734,7 +1734,7 @@ declare interface SetTrafficMirrorHealthSwitchRequest {
 declare interface SetTrafficMirrorHealthSwitchResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1752,7 +1752,7 @@ declare interface UnbindL4BackendsRequest {
 declare interface UnbindL4BackendsResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1774,7 +1774,7 @@ declare interface UnbindL7BackendsRequest {
 declare interface UnbindL7BackendsResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1788,7 +1788,7 @@ declare interface UnbindTrafficMirrorListenersRequest {
 declare interface UnbindTrafficMirrorListenersResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1802,7 +1802,7 @@ declare interface UnbindTrafficMirrorReceiversRequest {
 declare interface UnbindTrafficMirrorReceiversResponse {
   /** 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1820,110 +1820,110 @@ declare interface UploadCertRequest {
 declare interface UploadCertResponse {
   /** 新建的证书ID。 */
   CertId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Bmlb 黑石负载均衡} */
 declare interface Bmlb {
   (): Versions;
-  /** {@link BindL4Backends 绑定黑石服务器到四层监听器}({@link BindL4BackendsRequest 请求参数}): {@link BindL4BackendsResponse 返回参数} */
+  /** 绑定黑石服务器到四层监听器 {@link BindL4BackendsRequest} {@link BindL4BackendsResponse} */
   BindL4Backends(data: BindL4BackendsRequest, config?: AxiosRequestConfig): AxiosPromise<BindL4BackendsResponse>;
-  /** {@link BindL7Backends 绑定黑石物理服务器或半托管服务器到七层转发路径}({@link BindL7BackendsRequest 请求参数}): {@link BindL7BackendsResponse 返回参数} */
+  /** 绑定黑石物理服务器或半托管服务器到七层转发路径 {@link BindL7BackendsRequest} {@link BindL7BackendsResponse} */
   BindL7Backends(data: BindL7BackendsRequest, config?: AxiosRequestConfig): AxiosPromise<BindL7BackendsResponse>;
-  /** {@link BindTrafficMirrorListeners 绑定黑石服务器七层监听器到流量镜像实例}({@link BindTrafficMirrorListenersRequest 请求参数}): {@link BindTrafficMirrorListenersResponse 返回参数} */
+  /** 绑定黑石服务器七层监听器到流量镜像实例 {@link BindTrafficMirrorListenersRequest} {@link BindTrafficMirrorListenersResponse} */
   BindTrafficMirrorListeners(data: BindTrafficMirrorListenersRequest, config?: AxiosRequestConfig): AxiosPromise<BindTrafficMirrorListenersResponse>;
-  /** {@link BindTrafficMirrorReceivers 绑定黑石物理服务器成为流量镜像接收机}({@link BindTrafficMirrorReceiversRequest 请求参数}): {@link BindTrafficMirrorReceiversResponse 返回参数} */
+  /** 绑定黑石物理服务器成为流量镜像接收机 {@link BindTrafficMirrorReceiversRequest} {@link BindTrafficMirrorReceiversResponse} */
   BindTrafficMirrorReceivers(data: BindTrafficMirrorReceiversRequest, config?: AxiosRequestConfig): AxiosPromise<BindTrafficMirrorReceiversResponse>;
-  /** {@link CreateL4Listeners 创建黑石四层负载均衡监听器}({@link CreateL4ListenersRequest 请求参数}): {@link CreateL4ListenersResponse 返回参数} */
+  /** 创建黑石四层负载均衡监听器 {@link CreateL4ListenersRequest} {@link CreateL4ListenersResponse} */
   CreateL4Listeners(data: CreateL4ListenersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL4ListenersResponse>;
-  /** {@link CreateL7Listeners 创建黑石负载均衡七层监听器}({@link CreateL7ListenersRequest 请求参数}): {@link CreateL7ListenersResponse 返回参数} */
+  /** 创建黑石负载均衡七层监听器 {@link CreateL7ListenersRequest} {@link CreateL7ListenersResponse} */
   CreateL7Listeners(data: CreateL7ListenersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL7ListenersResponse>;
-  /** {@link CreateL7Rules 创建黑石负载均衡七层转发规则}({@link CreateL7RulesRequest 请求参数}): {@link CreateL7RulesResponse 返回参数} */
+  /** 创建黑石负载均衡七层转发规则 {@link CreateL7RulesRequest} {@link CreateL7RulesResponse} */
   CreateL7Rules(data: CreateL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL7RulesResponse>;
-  /** {@link CreateLoadBalancers 创建黑石负载均衡实例}({@link CreateLoadBalancersRequest 请求参数}): {@link CreateLoadBalancersResponse 返回参数} */
+  /** 创建黑石负载均衡实例 {@link CreateLoadBalancersRequest} {@link CreateLoadBalancersResponse} */
   CreateLoadBalancers(data: CreateLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadBalancersResponse>;
-  /** {@link CreateTrafficMirror 创建流量镜像实例}({@link CreateTrafficMirrorRequest 请求参数}): {@link CreateTrafficMirrorResponse 返回参数} */
+  /** 创建流量镜像实例 {@link CreateTrafficMirrorRequest} {@link CreateTrafficMirrorResponse} */
   CreateTrafficMirror(data: CreateTrafficMirrorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrafficMirrorResponse>;
-  /** {@link DeleteL7Domains 删除黑石负载均衡七层转发域名}({@link DeleteL7DomainsRequest 请求参数}): {@link DeleteL7DomainsResponse 返回参数} */
+  /** 删除黑石负载均衡七层转发域名 {@link DeleteL7DomainsRequest} {@link DeleteL7DomainsResponse} */
   DeleteL7Domains(data: DeleteL7DomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL7DomainsResponse>;
-  /** {@link DeleteL7Rules 删除黑石负载均衡七层转发规则}({@link DeleteL7RulesRequest 请求参数}): {@link DeleteL7RulesResponse 返回参数} */
+  /** 删除黑石负载均衡七层转发规则 {@link DeleteL7RulesRequest} {@link DeleteL7RulesResponse} */
   DeleteL7Rules(data: DeleteL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL7RulesResponse>;
-  /** {@link DeleteListeners 删除黑石负载均衡监听器}({@link DeleteListenersRequest 请求参数}): {@link DeleteListenersResponse 返回参数} */
+  /** 删除黑石负载均衡监听器 {@link DeleteListenersRequest} {@link DeleteListenersResponse} */
   DeleteListeners(data: DeleteListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteListenersResponse>;
-  /** {@link DeleteLoadBalancer 删除用户指定的黑石负载均衡实例}({@link DeleteLoadBalancerRequest 请求参数}): {@link DeleteLoadBalancerResponse 返回参数} */
+  /** 删除用户指定的黑石负载均衡实例 {@link DeleteLoadBalancerRequest} {@link DeleteLoadBalancerResponse} */
   DeleteLoadBalancer(data: DeleteLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerResponse>;
-  /** {@link DeleteTrafficMirror 删除流量镜像实例}({@link DeleteTrafficMirrorRequest 请求参数}): {@link DeleteTrafficMirrorResponse 返回参数} */
+  /** 删除流量镜像实例 {@link DeleteTrafficMirrorRequest} {@link DeleteTrafficMirrorResponse} */
   DeleteTrafficMirror(data: DeleteTrafficMirrorRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrafficMirrorResponse>;
-  /** {@link DescribeCertDetail 获取黑石负载均衡证书详情}({@link DescribeCertDetailRequest 请求参数}): {@link DescribeCertDetailResponse 返回参数} */
+  /** 获取黑石负载均衡证书详情 {@link DescribeCertDetailRequest} {@link DescribeCertDetailResponse} */
   DescribeCertDetail(data: DescribeCertDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertDetailResponse>;
-  /** {@link DescribeDevicesBindInfo 查询黑石物理机和虚机以及托管服务器绑定的黑石负载均衡详情}({@link DescribeDevicesBindInfoRequest 请求参数}): {@link DescribeDevicesBindInfoResponse 返回参数} */
+  /** 查询黑石物理机和虚机以及托管服务器绑定的黑石负载均衡详情 {@link DescribeDevicesBindInfoRequest} {@link DescribeDevicesBindInfoResponse} */
   DescribeDevicesBindInfo(data: DescribeDevicesBindInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesBindInfoResponse>;
-  /** {@link DescribeL4Backends 获取黑石负载均衡四层监听器绑定的主机列表}({@link DescribeL4BackendsRequest 请求参数}): {@link DescribeL4BackendsResponse 返回参数} */
+  /** 获取黑石负载均衡四层监听器绑定的主机列表 {@link DescribeL4BackendsRequest} {@link DescribeL4BackendsResponse} */
   DescribeL4Backends(data: DescribeL4BackendsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL4BackendsResponse>;
-  /** {@link DescribeL4ListenerInfo 查找绑定了某主机或者指定监听器名称的黑石负载均衡四层监听器}({@link DescribeL4ListenerInfoRequest 请求参数}): {@link DescribeL4ListenerInfoResponse 返回参数} */
+  /** 查找绑定了某主机或者指定监听器名称的黑石负载均衡四层监听器 {@link DescribeL4ListenerInfoRequest} {@link DescribeL4ListenerInfoResponse} */
   DescribeL4ListenerInfo(data: DescribeL4ListenerInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL4ListenerInfoResponse>;
-  /** {@link DescribeL4Listeners 获取黑石负载均衡四层监听器}({@link DescribeL4ListenersRequest 请求参数}): {@link DescribeL4ListenersResponse 返回参数} */
+  /** 获取黑石负载均衡四层监听器 {@link DescribeL4ListenersRequest} {@link DescribeL4ListenersResponse} */
   DescribeL4Listeners(data: DescribeL4ListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL4ListenersResponse>;
-  /** {@link DescribeL7Backends 获取黑石负载均衡七层转发路径绑定的主机列表}({@link DescribeL7BackendsRequest 请求参数}): {@link DescribeL7BackendsResponse 返回参数} */
+  /** 获取黑石负载均衡七层转发路径绑定的主机列表 {@link DescribeL7BackendsRequest} {@link DescribeL7BackendsResponse} */
   DescribeL7Backends(data: DescribeL7BackendsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL7BackendsResponse>;
-  /** {@link DescribeL7ListenerInfo 查找绑定了某主机或者有某转发域名黑石负载均衡七层监听器}({@link DescribeL7ListenerInfoRequest 请求参数}): {@link DescribeL7ListenerInfoResponse 返回参数} */
+  /** 查找绑定了某主机或者有某转发域名黑石负载均衡七层监听器 {@link DescribeL7ListenerInfoRequest} {@link DescribeL7ListenerInfoResponse} */
   DescribeL7ListenerInfo(data: DescribeL7ListenerInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL7ListenerInfoResponse>;
-  /** {@link DescribeL7Listeners 获取黑石负载均衡七层监听器列表信息}({@link DescribeL7ListenersRequest 请求参数}): {@link DescribeL7ListenersResponse 返回参数} */
+  /** 获取黑石负载均衡七层监听器列表信息 {@link DescribeL7ListenersRequest} {@link DescribeL7ListenersResponse} */
   DescribeL7Listeners(data: DescribeL7ListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL7ListenersResponse>;
-  /** {@link DescribeL7ListenersEx 获取指定VPC下的7层监听器}({@link DescribeL7ListenersExRequest 请求参数}): {@link DescribeL7ListenersExResponse 返回参数} */
+  /** 获取指定VPC下的7层监听器 {@link DescribeL7ListenersExRequest} {@link DescribeL7ListenersExResponse} */
   DescribeL7ListenersEx(data: DescribeL7ListenersExRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL7ListenersExResponse>;
-  /** {@link DescribeL7Rules 获取黑石负载均衡七层转发规则}({@link DescribeL7RulesRequest 请求参数}): {@link DescribeL7RulesResponse 返回参数} */
+  /** 获取黑石负载均衡七层转发规则 {@link DescribeL7RulesRequest} {@link DescribeL7RulesResponse} */
   DescribeL7Rules(data: DescribeL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL7RulesResponse>;
-  /** {@link DescribeLoadBalancerPortInfo 获取黑石负载均衡端口相关信息}({@link DescribeLoadBalancerPortInfoRequest 请求参数}): {@link DescribeLoadBalancerPortInfoResponse 返回参数} */
+  /** 获取黑石负载均衡端口相关信息 {@link DescribeLoadBalancerPortInfoRequest} {@link DescribeLoadBalancerPortInfoResponse} */
   DescribeLoadBalancerPortInfo(data: DescribeLoadBalancerPortInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerPortInfoResponse>;
-  /** {@link DescribeLoadBalancerTaskResult 查询负载均衡实例异步任务的执行情况}({@link DescribeLoadBalancerTaskResultRequest 请求参数}): {@link DescribeLoadBalancerTaskResultResponse 返回参数} */
+  /** 查询负载均衡实例异步任务的执行情况 {@link DescribeLoadBalancerTaskResultRequest} {@link DescribeLoadBalancerTaskResultResponse} */
   DescribeLoadBalancerTaskResult(data: DescribeLoadBalancerTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerTaskResultResponse>;
-  /** {@link DescribeLoadBalancers 获取黑石负载均衡实例列表}({@link DescribeLoadBalancersRequest 请求参数}): {@link DescribeLoadBalancersResponse 返回参数} */
+  /** 获取黑石负载均衡实例列表 {@link DescribeLoadBalancersRequest} {@link DescribeLoadBalancersResponse} */
   DescribeLoadBalancers(data?: DescribeLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersResponse>;
-  /** {@link DescribeTrafficMirrorListeners 获取流量镜像的监听器列表信息}({@link DescribeTrafficMirrorListenersRequest 请求参数}): {@link DescribeTrafficMirrorListenersResponse 返回参数} */
+  /** 获取流量镜像的监听器列表信息 {@link DescribeTrafficMirrorListenersRequest} {@link DescribeTrafficMirrorListenersResponse} */
   DescribeTrafficMirrorListeners(data: DescribeTrafficMirrorListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficMirrorListenersResponse>;
-  /** {@link DescribeTrafficMirrorReceiverHealthStatus 获取流量镜像接收机健康状态}({@link DescribeTrafficMirrorReceiverHealthStatusRequest 请求参数}): {@link DescribeTrafficMirrorReceiverHealthStatusResponse 返回参数} */
+  /** 获取流量镜像接收机健康状态 {@link DescribeTrafficMirrorReceiverHealthStatusRequest} {@link DescribeTrafficMirrorReceiverHealthStatusResponse} */
   DescribeTrafficMirrorReceiverHealthStatus(data: DescribeTrafficMirrorReceiverHealthStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficMirrorReceiverHealthStatusResponse>;
-  /** {@link DescribeTrafficMirrorReceivers 获取指定流量镜像实例的接收机信息}({@link DescribeTrafficMirrorReceiversRequest 请求参数}): {@link DescribeTrafficMirrorReceiversResponse 返回参数} */
+  /** 获取指定流量镜像实例的接收机信息 {@link DescribeTrafficMirrorReceiversRequest} {@link DescribeTrafficMirrorReceiversResponse} */
   DescribeTrafficMirrorReceivers(data: DescribeTrafficMirrorReceiversRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficMirrorReceiversResponse>;
-  /** {@link DescribeTrafficMirrors 获取流量镜像实例的列表信息}({@link DescribeTrafficMirrorsRequest 请求参数}): {@link DescribeTrafficMirrorsResponse 返回参数} */
+  /** 获取流量镜像实例的列表信息 {@link DescribeTrafficMirrorsRequest} {@link DescribeTrafficMirrorsResponse} */
   DescribeTrafficMirrors(data?: DescribeTrafficMirrorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficMirrorsResponse>;
-  /** {@link ModifyL4BackendPort 修改黑石负载均衡四层监听器后端实例端口}({@link ModifyL4BackendPortRequest 请求参数}): {@link ModifyL4BackendPortResponse 返回参数} */
+  /** 修改黑石负载均衡四层监听器后端实例端口 {@link ModifyL4BackendPortRequest} {@link ModifyL4BackendPortResponse} */
   ModifyL4BackendPort(data: ModifyL4BackendPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4BackendPortResponse>;
-  /** {@link ModifyL4BackendProbePort 修改黑石负载均衡四层监听器后端探测端口}({@link ModifyL4BackendProbePortRequest 请求参数}): {@link ModifyL4BackendProbePortResponse 返回参数} */
+  /** 修改黑石负载均衡四层监听器后端探测端口 {@link ModifyL4BackendProbePortRequest} {@link ModifyL4BackendProbePortResponse} */
   ModifyL4BackendProbePort(data: ModifyL4BackendProbePortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4BackendProbePortResponse>;
-  /** {@link ModifyL4BackendWeight 修改黑石负载均衡四层监听器后端实例权重}({@link ModifyL4BackendWeightRequest 请求参数}): {@link ModifyL4BackendWeightResponse 返回参数} */
+  /** 修改黑石负载均衡四层监听器后端实例权重 {@link ModifyL4BackendWeightRequest} {@link ModifyL4BackendWeightResponse} */
   ModifyL4BackendWeight(data: ModifyL4BackendWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4BackendWeightResponse>;
-  /** {@link ModifyL4Listener 修改黑石负载均衡四层监听器}({@link ModifyL4ListenerRequest 请求参数}): {@link ModifyL4ListenerResponse 返回参数} */
+  /** 修改黑石负载均衡四层监听器 {@link ModifyL4ListenerRequest} {@link ModifyL4ListenerResponse} */
   ModifyL4Listener(data: ModifyL4ListenerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4ListenerResponse>;
-  /** {@link ModifyL7BackendPort 修改黑石负载均衡七层转发路径后端实例端口}({@link ModifyL7BackendPortRequest 请求参数}): {@link ModifyL7BackendPortResponse 返回参数} */
+  /** 修改黑石负载均衡七层转发路径后端实例端口 {@link ModifyL7BackendPortRequest} {@link ModifyL7BackendPortResponse} */
   ModifyL7BackendPort(data: ModifyL7BackendPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL7BackendPortResponse>;
-  /** {@link ModifyL7BackendWeight 修改黑石负载均衡七层转发路径后端实例权重}({@link ModifyL7BackendWeightRequest 请求参数}): {@link ModifyL7BackendWeightResponse 返回参数} */
+  /** 修改黑石负载均衡七层转发路径后端实例权重 {@link ModifyL7BackendWeightRequest} {@link ModifyL7BackendWeightResponse} */
   ModifyL7BackendWeight(data: ModifyL7BackendWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL7BackendWeightResponse>;
-  /** {@link ModifyL7Listener 修改黑石负载均衡七层监听器}({@link ModifyL7ListenerRequest 请求参数}): {@link ModifyL7ListenerResponse 返回参数} */
+  /** 修改黑石负载均衡七层监听器 {@link ModifyL7ListenerRequest} {@link ModifyL7ListenerResponse} */
   ModifyL7Listener(data: ModifyL7ListenerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL7ListenerResponse>;
-  /** {@link ModifyL7Locations 修改黑石负载均衡七层转发路径}({@link ModifyL7LocationsRequest 请求参数}): {@link ModifyL7LocationsResponse 返回参数} */
+  /** 修改黑石负载均衡七层转发路径 {@link ModifyL7LocationsRequest} {@link ModifyL7LocationsResponse} */
   ModifyL7Locations(data: ModifyL7LocationsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL7LocationsResponse>;
-  /** {@link ModifyLoadBalancer 修改黑石负载均衡实例的基本配置信息}({@link ModifyLoadBalancerRequest 请求参数}): {@link ModifyLoadBalancerResponse 返回参数} */
+  /** 修改黑石负载均衡实例的基本配置信息 {@link ModifyLoadBalancerRequest} {@link ModifyLoadBalancerResponse} */
   ModifyLoadBalancer(data: ModifyLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerResponse>;
-  /** {@link ModifyLoadBalancerChargeMode 更改黑石负载均衡的计费方式}({@link ModifyLoadBalancerChargeModeRequest 请求参数}): {@link ModifyLoadBalancerChargeModeResponse 返回参数} */
+  /** 更改黑石负载均衡的计费方式 {@link ModifyLoadBalancerChargeModeRequest} {@link ModifyLoadBalancerChargeModeResponse} */
   ModifyLoadBalancerChargeMode(data: ModifyLoadBalancerChargeModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerChargeModeResponse>;
-  /** {@link ReplaceCert 更新黑石负载均衡证书}({@link ReplaceCertRequest 请求参数}): {@link ReplaceCertResponse 返回参数} */
+  /** 更新黑石负载均衡证书 {@link ReplaceCertRequest} {@link ReplaceCertResponse} */
   ReplaceCert(data: ReplaceCertRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceCertResponse>;
-  /** {@link SetTrafficMirrorAlias 设置流量镜像的别名}({@link SetTrafficMirrorAliasRequest 请求参数}): {@link SetTrafficMirrorAliasResponse 返回参数} */
+  /** 设置流量镜像的别名 {@link SetTrafficMirrorAliasRequest} {@link SetTrafficMirrorAliasResponse} */
   SetTrafficMirrorAlias(data: SetTrafficMirrorAliasRequest, config?: AxiosRequestConfig): AxiosPromise<SetTrafficMirrorAliasResponse>;
-  /** {@link SetTrafficMirrorHealthSwitch 设置流量镜像的健康检查参数}({@link SetTrafficMirrorHealthSwitchRequest 请求参数}): {@link SetTrafficMirrorHealthSwitchResponse 返回参数} */
+  /** 设置流量镜像的健康检查参数 {@link SetTrafficMirrorHealthSwitchRequest} {@link SetTrafficMirrorHealthSwitchResponse} */
   SetTrafficMirrorHealthSwitch(data: SetTrafficMirrorHealthSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<SetTrafficMirrorHealthSwitchResponse>;
-  /** {@link UnbindL4Backends 解绑黑石负载均衡四层监听器物理服务器}({@link UnbindL4BackendsRequest 请求参数}): {@link UnbindL4BackendsResponse 返回参数} */
+  /** 解绑黑石负载均衡四层监听器物理服务器 {@link UnbindL4BackendsRequest} {@link UnbindL4BackendsResponse} */
   UnbindL4Backends(data: UnbindL4BackendsRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindL4BackendsResponse>;
-  /** {@link UnbindL7Backends 解绑黑石物理服务器或者托管服务器到七层转发路径}({@link UnbindL7BackendsRequest 请求参数}): {@link UnbindL7BackendsResponse 返回参数} */
+  /** 解绑黑石物理服务器或者托管服务器到七层转发路径 {@link UnbindL7BackendsRequest} {@link UnbindL7BackendsResponse} */
   UnbindL7Backends(data: UnbindL7BackendsRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindL7BackendsResponse>;
-  /** {@link UnbindTrafficMirrorListeners 解绑流量镜像监听器}({@link UnbindTrafficMirrorListenersRequest 请求参数}): {@link UnbindTrafficMirrorListenersResponse 返回参数} */
+  /** 解绑流量镜像监听器 {@link UnbindTrafficMirrorListenersRequest} {@link UnbindTrafficMirrorListenersResponse} */
   UnbindTrafficMirrorListeners(data: UnbindTrafficMirrorListenersRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindTrafficMirrorListenersResponse>;
-  /** {@link UnbindTrafficMirrorReceivers 解绑流量镜像接收机}({@link UnbindTrafficMirrorReceiversRequest 请求参数}): {@link UnbindTrafficMirrorReceiversResponse 返回参数} */
+  /** 解绑流量镜像接收机 {@link UnbindTrafficMirrorReceiversRequest} {@link UnbindTrafficMirrorReceiversResponse} */
   UnbindTrafficMirrorReceivers(data: UnbindTrafficMirrorReceiversRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindTrafficMirrorReceiversResponse>;
-  /** {@link UploadCert 创建黑石负载均衡证书}({@link UploadCertRequest 请求参数}): {@link UploadCertResponse 返回参数} */
+  /** 创建黑石负载均衡证书 {@link UploadCertRequest} {@link UploadCertResponse} */
   UploadCert(data: UploadCertRequest, config?: AxiosRequestConfig): AxiosPromise<UploadCertResponse>;
 }
 

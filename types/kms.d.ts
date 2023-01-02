@@ -110,7 +110,7 @@ declare interface ArchiveKeyRequest {
 }
 
 declare interface ArchiveKeyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -128,7 +128,7 @@ declare interface AsymmetricRsaDecryptResponse {
   KeyId: string;
   /** 解密后的明文，base64编码 */
   Plaintext: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -144,7 +144,7 @@ declare interface AsymmetricSm2DecryptResponse {
   KeyId: string;
   /** 解密后的明文，base64编码 */
   Plaintext: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -158,7 +158,7 @@ declare interface BindCloudResourceRequest {
 }
 
 declare interface BindCloudResourceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -168,7 +168,7 @@ declare interface CancelKeyArchiveRequest {
 }
 
 declare interface CancelKeyArchiveResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -180,7 +180,7 @@ declare interface CancelKeyDeletionRequest {
 declare interface CancelKeyDeletionResponse {
   /** 唯一标志被取消删除的CMK。 */
   KeyId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -218,7 +218,7 @@ declare interface CreateKeyResponse {
   TagMsg: string | null;
   /** HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效） */
   HsmClusterId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -244,7 +244,7 @@ declare interface CreateWhiteBoxKeyResponse {
   TagCode: number | null;
   /** 标签操作的返回信息 */
   TagMsg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -264,7 +264,7 @@ declare interface DecryptResponse {
   KeyId: string;
   /** 若调用时未提供 EncryptionPublicKey，该字段值为 Base64 编码的明文，需进行 Base64 解码以获取明文。若调用时提供了 EncryptionPublicKey，则该字段值为使用 EncryptionPublicKey 公钥进行非对称加密后的 Base64 编码的密文。需在 Base64 解码后，使用用户上传的公钥对应的私钥进行进一步解密，以获取明文。 */
   Plaintext: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -274,7 +274,7 @@ declare interface DeleteImportedKeyMaterialRequest {
 }
 
 declare interface DeleteImportedKeyMaterialResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -284,7 +284,7 @@ declare interface DeleteWhiteBoxKeyRequest {
 }
 
 declare interface DeleteWhiteBoxKeyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -296,7 +296,7 @@ declare interface DescribeKeyRequest {
 declare interface DescribeKeyResponse {
   /** 密钥属性信息 */
   KeyMetadata: KeyMetadata | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -308,7 +308,7 @@ declare interface DescribeKeysRequest {
 declare interface DescribeKeysResponse {
   /** 返回的属性信息列表 */
   KeyMetadatas: KeyMetadata[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -320,7 +320,7 @@ declare interface DescribeWhiteBoxDecryptKeyRequest {
 declare interface DescribeWhiteBoxDecryptKeyResponse {
   /** 白盒解密密钥，base64编码 */
   DecryptKey: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -332,7 +332,7 @@ declare interface DescribeWhiteBoxDeviceFingerprintsRequest {
 declare interface DescribeWhiteBoxDeviceFingerprintsResponse {
   /** 设备指纹列表 */
   DeviceFingerprints: DeviceFingerprint[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -352,7 +352,7 @@ declare interface DescribeWhiteBoxKeyDetailsResponse {
   KeyInfos: WhiteboxKeyInfo[];
   /** 白盒密钥总数。 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -364,7 +364,7 @@ declare interface DescribeWhiteBoxKeyRequest {
 declare interface DescribeWhiteBoxKeyResponse {
   /** 白盒密钥信息 */
   KeyInfo: WhiteboxKeyInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -374,7 +374,7 @@ declare interface DescribeWhiteBoxServiceStatusRequest {
 declare interface DescribeWhiteBoxServiceStatusResponse {
   /** 用户的白盒密钥服务是否可用 */
   ServiceEnabled: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -384,7 +384,7 @@ declare interface DisableKeyRequest {
 }
 
 declare interface DisableKeyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -394,7 +394,7 @@ declare interface DisableKeyRotationRequest {
 }
 
 declare interface DisableKeyRotationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -404,7 +404,7 @@ declare interface DisableKeysRequest {
 }
 
 declare interface DisableKeysResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -414,7 +414,7 @@ declare interface DisableWhiteBoxKeyRequest {
 }
 
 declare interface DisableWhiteBoxKeyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -424,7 +424,7 @@ declare interface DisableWhiteBoxKeysRequest {
 }
 
 declare interface DisableWhiteBoxKeysResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -434,7 +434,7 @@ declare interface EnableKeyRequest {
 }
 
 declare interface EnableKeyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -446,7 +446,7 @@ declare interface EnableKeyRotationRequest {
 }
 
 declare interface EnableKeyRotationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -456,7 +456,7 @@ declare interface EnableKeysRequest {
 }
 
 declare interface EnableKeysResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -466,7 +466,7 @@ declare interface EnableWhiteBoxKeyRequest {
 }
 
 declare interface EnableWhiteBoxKeyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -476,7 +476,7 @@ declare interface EnableWhiteBoxKeysRequest {
 }
 
 declare interface EnableWhiteBoxKeysResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -494,7 +494,7 @@ declare interface EncryptByWhiteBoxResponse {
   InitializationVector: string;
   /** 加密后的密文，base64编码 */
   CipherText: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -512,7 +512,7 @@ declare interface EncryptResponse {
   CiphertextBlob: string;
   /** 加密使用的CMK的全局唯一标识 */
   KeyId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -538,7 +538,7 @@ declare interface GenerateDataKeyResponse {
   Plaintext: string;
   /** 数据密钥DataKey加密后的密文，用户需要自行保存该密文，KMS不托管用户的数据密钥。可以通过Decrypt接口从CiphertextBlob中获取数据密钥DataKey明文 */
   CiphertextBlob: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -550,7 +550,7 @@ declare interface GenerateRandomRequest {
 declare interface GenerateRandomResponse {
   /** 生成的随机数的明文，该明文使用base64编码，用户需要使用base64解码得到明文。 */
   Plaintext: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -562,7 +562,7 @@ declare interface GetKeyRotationStatusRequest {
 declare interface GetKeyRotationStatusResponse {
   /** 密钥轮换是否开启 */
   KeyRotationEnabled: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -584,7 +584,7 @@ declare interface GetParametersForImportResponse {
   PublicKey: string;
   /** 该导出token和公钥的有效期，超过该时间后无法导入，需要重新调用GetParametersForImport获取。 */
   ParametersValidTo: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -600,7 +600,7 @@ declare interface GetPublicKeyResponse {
   PublicKey: string;
   /** PEM格式的公钥内容。 */
   PublicKeyPem: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -610,7 +610,7 @@ declare interface GetRegionsRequest {
 declare interface GetRegionsResponse {
   /** 可用region列表 */
   Regions: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -634,7 +634,7 @@ declare interface GetServiceStatusResponse {
   ExclusiveVSMEnabled: boolean | null;
   /** 是否开通 KMS 独享版 */
   ExclusiveHSMEnabled: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -650,7 +650,7 @@ declare interface ImportKeyMaterialRequest {
 }
 
 declare interface ImportKeyMaterialResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -664,7 +664,7 @@ declare interface ListAlgorithmsResponse {
   AsymmetricAlgorithms: AlgorithmInfo[];
   /** 本地区支持的非对称签名验签算法 */
   AsymmetricSignVerifyAlgorithms: AlgorithmInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -696,7 +696,7 @@ declare interface ListKeyDetailResponse {
   TotalCount: number;
   /** 返回的属性信息列表。 */
   KeyMetadatas: KeyMetadata[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -716,7 +716,7 @@ declare interface ListKeysResponse {
   Keys: Key[] | null;
   /** CMK的总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -728,7 +728,7 @@ declare interface OverwriteWhiteBoxDeviceFingerprintsRequest {
 }
 
 declare interface OverwriteWhiteBoxDeviceFingerprintsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -752,7 +752,7 @@ declare interface ReEncryptResponse {
   SourceKeyId: string;
   /** true表示密文已经重新加密。同一个CMK进行重加密，在密钥没有发生轮换的情况下不会进行实际重新加密操作，返回原密文 */
   ReEncrypted: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -768,7 +768,7 @@ declare interface ScheduleKeyDeletionResponse {
   DeletionDate: number;
   /** 唯一标志被计划删除的CMK */
   KeyId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -786,7 +786,7 @@ declare interface SignByAsymmetricKeyRequest {
 declare interface SignByAsymmetricKeyResponse {
   /** 签名，Base64编码 */
   Signature: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -800,7 +800,7 @@ declare interface UnbindCloudResourceRequest {
 }
 
 declare interface UnbindCloudResourceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -812,7 +812,7 @@ declare interface UpdateAliasRequest {
 }
 
 declare interface UpdateAliasResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -824,7 +824,7 @@ declare interface UpdateKeyDescriptionRequest {
 }
 
 declare interface UpdateKeyDescriptionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -844,110 +844,110 @@ declare interface VerifyByAsymmetricKeyRequest {
 declare interface VerifyByAsymmetricKeyResponse {
   /** 签名是否有效。true：签名有效，false：签名无效。 */
   SignatureValid: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Kms 密钥管理系统} */
 declare interface Kms {
   (): Versions;
-  /** {@link ArchiveKey 密钥归档}({@link ArchiveKeyRequest 请求参数}): {@link ArchiveKeyResponse 返回参数} */
+  /** 密钥归档 {@link ArchiveKeyRequest} {@link ArchiveKeyResponse} */
   ArchiveKey(data: ArchiveKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ArchiveKeyResponse>;
-  /** {@link AsymmetricRsaDecrypt 非对称密钥RSA解密}({@link AsymmetricRsaDecryptRequest 请求参数}): {@link AsymmetricRsaDecryptResponse 返回参数} */
+  /** 非对称密钥RSA解密 {@link AsymmetricRsaDecryptRequest} {@link AsymmetricRsaDecryptResponse} */
   AsymmetricRsaDecrypt(data: AsymmetricRsaDecryptRequest, config?: AxiosRequestConfig): AxiosPromise<AsymmetricRsaDecryptResponse>;
-  /** {@link AsymmetricSm2Decrypt 非对称密钥Sm2解密}({@link AsymmetricSm2DecryptRequest 请求参数}): {@link AsymmetricSm2DecryptResponse 返回参数} */
+  /** 非对称密钥Sm2解密 {@link AsymmetricSm2DecryptRequest} {@link AsymmetricSm2DecryptResponse} */
   AsymmetricSm2Decrypt(data: AsymmetricSm2DecryptRequest, config?: AxiosRequestConfig): AxiosPromise<AsymmetricSm2DecryptResponse>;
-  /** {@link BindCloudResource 绑定密钥和云产品资源的使用关系}({@link BindCloudResourceRequest 请求参数}): {@link BindCloudResourceResponse 返回参数} */
+  /** 绑定密钥和云产品资源的使用关系 {@link BindCloudResourceRequest} {@link BindCloudResourceResponse} */
   BindCloudResource(data: BindCloudResourceRequest, config?: AxiosRequestConfig): AxiosPromise<BindCloudResourceResponse>;
-  /** {@link CancelKeyArchive 取消密钥归档}({@link CancelKeyArchiveRequest 请求参数}): {@link CancelKeyArchiveResponse 返回参数} */
+  /** 取消密钥归档 {@link CancelKeyArchiveRequest} {@link CancelKeyArchiveResponse} */
   CancelKeyArchive(data: CancelKeyArchiveRequest, config?: AxiosRequestConfig): AxiosPromise<CancelKeyArchiveResponse>;
-  /** {@link CancelKeyDeletion 取消CMK计划删除操作}({@link CancelKeyDeletionRequest 请求参数}): {@link CancelKeyDeletionResponse 返回参数} */
+  /** 取消CMK计划删除操作 {@link CancelKeyDeletionRequest} {@link CancelKeyDeletionResponse} */
   CancelKeyDeletion(data: CancelKeyDeletionRequest, config?: AxiosRequestConfig): AxiosPromise<CancelKeyDeletionResponse>;
-  /** {@link CreateKey 创建主密钥}({@link CreateKeyRequest 请求参数}): {@link CreateKeyResponse 返回参数} */
+  /** 创建主密钥 {@link CreateKeyRequest} {@link CreateKeyResponse} */
   CreateKey(data: CreateKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKeyResponse>;
-  /** {@link CreateWhiteBoxKey 创建白盒密钥}({@link CreateWhiteBoxKeyRequest 请求参数}): {@link CreateWhiteBoxKeyResponse 返回参数} */
+  /** 创建白盒密钥 {@link CreateWhiteBoxKeyRequest} {@link CreateWhiteBoxKeyResponse} */
   CreateWhiteBoxKey(data: CreateWhiteBoxKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWhiteBoxKeyResponse>;
-  /** {@link Decrypt 解密}({@link DecryptRequest 请求参数}): {@link DecryptResponse 返回参数} */
+  /** 解密 {@link DecryptRequest} {@link DecryptResponse} */
   Decrypt(data: DecryptRequest, config?: AxiosRequestConfig): AxiosPromise<DecryptResponse>;
-  /** {@link DeleteImportedKeyMaterial 删除导入的密钥材料}({@link DeleteImportedKeyMaterialRequest 请求参数}): {@link DeleteImportedKeyMaterialResponse 返回参数} */
+  /** 删除导入的密钥材料 {@link DeleteImportedKeyMaterialRequest} {@link DeleteImportedKeyMaterialResponse} */
   DeleteImportedKeyMaterial(data: DeleteImportedKeyMaterialRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImportedKeyMaterialResponse>;
-  /** {@link DeleteWhiteBoxKey 删除白盒密钥}({@link DeleteWhiteBoxKeyRequest 请求参数}): {@link DeleteWhiteBoxKeyResponse 返回参数} */
+  /** 删除白盒密钥 {@link DeleteWhiteBoxKeyRequest} {@link DeleteWhiteBoxKeyResponse} */
   DeleteWhiteBoxKey(data: DeleteWhiteBoxKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWhiteBoxKeyResponse>;
-  /** {@link DescribeKey 获取主密钥属性}({@link DescribeKeyRequest 请求参数}): {@link DescribeKeyResponse 返回参数} */
+  /** 获取主密钥属性 {@link DescribeKeyRequest} {@link DescribeKeyResponse} */
   DescribeKey(data: DescribeKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeyResponse>;
-  /** {@link DescribeKeys 获取多个主密钥属性}({@link DescribeKeysRequest 请求参数}): {@link DescribeKeysResponse 返回参数} */
+  /** 获取多个主密钥属性 {@link DescribeKeysRequest} {@link DescribeKeysResponse} */
   DescribeKeys(data: DescribeKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeysResponse>;
-  /** {@link DescribeWhiteBoxDecryptKey 获取白盒解密密钥}({@link DescribeWhiteBoxDecryptKeyRequest 请求参数}): {@link DescribeWhiteBoxDecryptKeyResponse 返回参数} */
+  /** 获取白盒解密密钥 {@link DescribeWhiteBoxDecryptKeyRequest} {@link DescribeWhiteBoxDecryptKeyResponse} */
   DescribeWhiteBoxDecryptKey(data: DescribeWhiteBoxDecryptKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteBoxDecryptKeyResponse>;
-  /** {@link DescribeWhiteBoxDeviceFingerprints 获取指定密钥的设备指纹列表}({@link DescribeWhiteBoxDeviceFingerprintsRequest 请求参数}): {@link DescribeWhiteBoxDeviceFingerprintsResponse 返回参数} */
+  /** 获取指定密钥的设备指纹列表 {@link DescribeWhiteBoxDeviceFingerprintsRequest} {@link DescribeWhiteBoxDeviceFingerprintsResponse} */
   DescribeWhiteBoxDeviceFingerprints(data: DescribeWhiteBoxDeviceFingerprintsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteBoxDeviceFingerprintsResponse>;
-  /** {@link DescribeWhiteBoxKey 展示白盒密钥的信息}({@link DescribeWhiteBoxKeyRequest 请求参数}): {@link DescribeWhiteBoxKeyResponse 返回参数} */
+  /** 展示白盒密钥的信息 {@link DescribeWhiteBoxKeyRequest} {@link DescribeWhiteBoxKeyResponse} */
   DescribeWhiteBoxKey(data: DescribeWhiteBoxKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteBoxKeyResponse>;
-  /** {@link DescribeWhiteBoxKeyDetails 获取白盒密钥列表}({@link DescribeWhiteBoxKeyDetailsRequest 请求参数}): {@link DescribeWhiteBoxKeyDetailsResponse 返回参数} */
+  /** 获取白盒密钥列表 {@link DescribeWhiteBoxKeyDetailsRequest} {@link DescribeWhiteBoxKeyDetailsResponse} */
   DescribeWhiteBoxKeyDetails(data?: DescribeWhiteBoxKeyDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteBoxKeyDetailsResponse>;
-  /** {@link DescribeWhiteBoxServiceStatus 获取白盒密钥服务状态}({@link DescribeWhiteBoxServiceStatusRequest 请求参数}): {@link DescribeWhiteBoxServiceStatusResponse 返回参数} */
+  /** 获取白盒密钥服务状态 {@link DescribeWhiteBoxServiceStatusRequest} {@link DescribeWhiteBoxServiceStatusResponse} */
   DescribeWhiteBoxServiceStatus(data?: DescribeWhiteBoxServiceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteBoxServiceStatusResponse>;
-  /** {@link DisableKey 禁用主密钥}({@link DisableKeyRequest 请求参数}): {@link DisableKeyResponse 返回参数} */
+  /** 禁用主密钥 {@link DisableKeyRequest} {@link DisableKeyResponse} */
   DisableKey(data: DisableKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DisableKeyResponse>;
-  /** {@link DisableKeyRotation 禁止密钥轮换}({@link DisableKeyRotationRequest 请求参数}): {@link DisableKeyRotationResponse 返回参数} */
+  /** 禁止密钥轮换 {@link DisableKeyRotationRequest} {@link DisableKeyRotationResponse} */
   DisableKeyRotation(data: DisableKeyRotationRequest, config?: AxiosRequestConfig): AxiosPromise<DisableKeyRotationResponse>;
-  /** {@link DisableKeys 批量禁用主密钥}({@link DisableKeysRequest 请求参数}): {@link DisableKeysResponse 返回参数} */
+  /** 批量禁用主密钥 {@link DisableKeysRequest} {@link DisableKeysResponse} */
   DisableKeys(data: DisableKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DisableKeysResponse>;
-  /** {@link DisableWhiteBoxKey 禁用白盒密钥}({@link DisableWhiteBoxKeyRequest 请求参数}): {@link DisableWhiteBoxKeyResponse 返回参数} */
+  /** 禁用白盒密钥 {@link DisableWhiteBoxKeyRequest} {@link DisableWhiteBoxKeyResponse} */
   DisableWhiteBoxKey(data: DisableWhiteBoxKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DisableWhiteBoxKeyResponse>;
-  /** {@link DisableWhiteBoxKeys 批量禁用白盒密钥}({@link DisableWhiteBoxKeysRequest 请求参数}): {@link DisableWhiteBoxKeysResponse 返回参数} */
+  /** 批量禁用白盒密钥 {@link DisableWhiteBoxKeysRequest} {@link DisableWhiteBoxKeysResponse} */
   DisableWhiteBoxKeys(data: DisableWhiteBoxKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DisableWhiteBoxKeysResponse>;
-  /** {@link EnableKey 启用主密钥}({@link EnableKeyRequest 请求参数}): {@link EnableKeyResponse 返回参数} */
+  /** 启用主密钥 {@link EnableKeyRequest} {@link EnableKeyResponse} */
   EnableKey(data: EnableKeyRequest, config?: AxiosRequestConfig): AxiosPromise<EnableKeyResponse>;
-  /** {@link EnableKeyRotation 开启密钥轮换}({@link EnableKeyRotationRequest 请求参数}): {@link EnableKeyRotationResponse 返回参数} */
+  /** 开启密钥轮换 {@link EnableKeyRotationRequest} {@link EnableKeyRotationResponse} */
   EnableKeyRotation(data: EnableKeyRotationRequest, config?: AxiosRequestConfig): AxiosPromise<EnableKeyRotationResponse>;
-  /** {@link EnableKeys 批量启动主密钥}({@link EnableKeysRequest 请求参数}): {@link EnableKeysResponse 返回参数} */
+  /** 批量启动主密钥 {@link EnableKeysRequest} {@link EnableKeysResponse} */
   EnableKeys(data: EnableKeysRequest, config?: AxiosRequestConfig): AxiosPromise<EnableKeysResponse>;
-  /** {@link EnableWhiteBoxKey 启用白盒密钥}({@link EnableWhiteBoxKeyRequest 请求参数}): {@link EnableWhiteBoxKeyResponse 返回参数} */
+  /** 启用白盒密钥 {@link EnableWhiteBoxKeyRequest} {@link EnableWhiteBoxKeyResponse} */
   EnableWhiteBoxKey(data: EnableWhiteBoxKeyRequest, config?: AxiosRequestConfig): AxiosPromise<EnableWhiteBoxKeyResponse>;
-  /** {@link EnableWhiteBoxKeys 批量启用白盒密钥}({@link EnableWhiteBoxKeysRequest 请求参数}): {@link EnableWhiteBoxKeysResponse 返回参数} */
+  /** 批量启用白盒密钥 {@link EnableWhiteBoxKeysRequest} {@link EnableWhiteBoxKeysResponse} */
   EnableWhiteBoxKeys(data: EnableWhiteBoxKeysRequest, config?: AxiosRequestConfig): AxiosPromise<EnableWhiteBoxKeysResponse>;
-  /** {@link Encrypt 加密}({@link EncryptRequest 请求参数}): {@link EncryptResponse 返回参数} */
+  /** 加密 {@link EncryptRequest} {@link EncryptResponse} */
   Encrypt(data: EncryptRequest, config?: AxiosRequestConfig): AxiosPromise<EncryptResponse>;
-  /** {@link EncryptByWhiteBox 使用白盒密钥进行加密}({@link EncryptByWhiteBoxRequest 请求参数}): {@link EncryptByWhiteBoxResponse 返回参数} */
+  /** 使用白盒密钥进行加密 {@link EncryptByWhiteBoxRequest} {@link EncryptByWhiteBoxResponse} */
   EncryptByWhiteBox(data: EncryptByWhiteBoxRequest, config?: AxiosRequestConfig): AxiosPromise<EncryptByWhiteBoxResponse>;
-  /** {@link GenerateDataKey 生成数据密钥}({@link GenerateDataKeyRequest 请求参数}): {@link GenerateDataKeyResponse 返回参数} */
+  /** 生成数据密钥 {@link GenerateDataKeyRequest} {@link GenerateDataKeyResponse} */
   GenerateDataKey(data: GenerateDataKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateDataKeyResponse>;
-  /** {@link GenerateRandom 随机数生成接口}({@link GenerateRandomRequest 请求参数}): {@link GenerateRandomResponse 返回参数} */
+  /** 随机数生成接口 {@link GenerateRandomRequest} {@link GenerateRandomResponse} */
   GenerateRandom(data: GenerateRandomRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateRandomResponse>;
-  /** {@link GetKeyRotationStatus 查询密钥轮换状态}({@link GetKeyRotationStatusRequest 请求参数}): {@link GetKeyRotationStatusResponse 返回参数} */
+  /** 查询密钥轮换状态 {@link GetKeyRotationStatusRequest} {@link GetKeyRotationStatusResponse} */
   GetKeyRotationStatus(data: GetKeyRotationStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetKeyRotationStatusResponse>;
-  /** {@link GetParametersForImport 获取导入主密钥（CMK）材料的参数}({@link GetParametersForImportRequest 请求参数}): {@link GetParametersForImportResponse 返回参数} */
+  /** 获取导入主密钥（CMK）材料的参数 {@link GetParametersForImportRequest} {@link GetParametersForImportResponse} */
   GetParametersForImport(data: GetParametersForImportRequest, config?: AxiosRequestConfig): AxiosPromise<GetParametersForImportResponse>;
-  /** {@link GetPublicKey 获取非对称密钥的公钥}({@link GetPublicKeyRequest 请求参数}): {@link GetPublicKeyResponse 返回参数} */
+  /** 获取非对称密钥的公钥 {@link GetPublicKeyRequest} {@link GetPublicKeyResponse} */
   GetPublicKey(data: GetPublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GetPublicKeyResponse>;
-  /** {@link GetRegions 获取可以提供KMS服务的地域列表}({@link GetRegionsRequest 请求参数}): {@link GetRegionsResponse 返回参数} */
+  /** 获取可以提供KMS服务的地域列表 {@link GetRegionsRequest} {@link GetRegionsResponse} */
   GetRegions(data?: GetRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRegionsResponse>;
-  /** {@link GetServiceStatus 查询服务状态}({@link GetServiceStatusRequest 请求参数}): {@link GetServiceStatusResponse 返回参数} */
+  /** 查询服务状态 {@link GetServiceStatusRequest} {@link GetServiceStatusResponse} */
   GetServiceStatus(data?: GetServiceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetServiceStatusResponse>;
-  /** {@link ImportKeyMaterial 导入密钥材料}({@link ImportKeyMaterialRequest 请求参数}): {@link ImportKeyMaterialResponse 返回参数} */
+  /** 导入密钥材料 {@link ImportKeyMaterialRequest} {@link ImportKeyMaterialResponse} */
   ImportKeyMaterial(data: ImportKeyMaterialRequest, config?: AxiosRequestConfig): AxiosPromise<ImportKeyMaterialResponse>;
-  /** {@link ListAlgorithms 列出当前Region支持的加密方式}({@link ListAlgorithmsRequest 请求参数}): {@link ListAlgorithmsResponse 返回参数} */
+  /** 列出当前Region支持的加密方式 {@link ListAlgorithmsRequest} {@link ListAlgorithmsResponse} */
   ListAlgorithms(data?: ListAlgorithmsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAlgorithmsResponse>;
-  /** {@link ListKeyDetail 获取主密钥列表详情}({@link ListKeyDetailRequest 请求参数}): {@link ListKeyDetailResponse 返回参数} */
+  /** 获取主密钥列表详情 {@link ListKeyDetailRequest} {@link ListKeyDetailResponse} */
   ListKeyDetail(data?: ListKeyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListKeyDetailResponse>;
-  /** {@link ListKeys 获取主密钥列表}({@link ListKeysRequest 请求参数}): {@link ListKeysResponse 返回参数} */
+  /** 获取主密钥列表 {@link ListKeysRequest} {@link ListKeysResponse} */
   ListKeys(data?: ListKeysRequest, config?: AxiosRequestConfig): AxiosPromise<ListKeysResponse>;
-  /** {@link OverwriteWhiteBoxDeviceFingerprints 覆盖指定密钥的设备指纹信息}({@link OverwriteWhiteBoxDeviceFingerprintsRequest 请求参数}): {@link OverwriteWhiteBoxDeviceFingerprintsResponse 返回参数} */
+  /** 覆盖指定密钥的设备指纹信息 {@link OverwriteWhiteBoxDeviceFingerprintsRequest} {@link OverwriteWhiteBoxDeviceFingerprintsResponse} */
   OverwriteWhiteBoxDeviceFingerprints(data: OverwriteWhiteBoxDeviceFingerprintsRequest, config?: AxiosRequestConfig): AxiosPromise<OverwriteWhiteBoxDeviceFingerprintsResponse>;
-  /** {@link ReEncrypt 密文刷新}({@link ReEncryptRequest 请求参数}): {@link ReEncryptResponse 返回参数} */
+  /** 密文刷新 {@link ReEncryptRequest} {@link ReEncryptResponse} */
   ReEncrypt(data: ReEncryptRequest, config?: AxiosRequestConfig): AxiosPromise<ReEncryptResponse>;
-  /** {@link ScheduleKeyDeletion CMK计划删除接口}({@link ScheduleKeyDeletionRequest 请求参数}): {@link ScheduleKeyDeletionResponse 返回参数} */
+  /** CMK计划删除接口 {@link ScheduleKeyDeletionRequest} {@link ScheduleKeyDeletionResponse} */
   ScheduleKeyDeletion(data: ScheduleKeyDeletionRequest, config?: AxiosRequestConfig): AxiosPromise<ScheduleKeyDeletionResponse>;
-  /** {@link SignByAsymmetricKey 签名}({@link SignByAsymmetricKeyRequest 请求参数}): {@link SignByAsymmetricKeyResponse 返回参数} */
+  /** 签名 {@link SignByAsymmetricKeyRequest} {@link SignByAsymmetricKeyResponse} */
   SignByAsymmetricKey(data: SignByAsymmetricKeyRequest, config?: AxiosRequestConfig): AxiosPromise<SignByAsymmetricKeyResponse>;
-  /** {@link UnbindCloudResource 解绑CMK和云资源的关联关系}({@link UnbindCloudResourceRequest 请求参数}): {@link UnbindCloudResourceResponse 返回参数} */
+  /** 解绑CMK和云资源的关联关系 {@link UnbindCloudResourceRequest} {@link UnbindCloudResourceResponse} */
   UnbindCloudResource(data: UnbindCloudResourceRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindCloudResourceResponse>;
-  /** {@link UpdateAlias 修改别名}({@link UpdateAliasRequest 请求参数}): {@link UpdateAliasResponse 返回参数} */
+  /** 修改别名 {@link UpdateAliasRequest} {@link UpdateAliasResponse} */
   UpdateAlias(data: UpdateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAliasResponse>;
-  /** {@link UpdateKeyDescription 修改主密钥描述信息}({@link UpdateKeyDescriptionRequest 请求参数}): {@link UpdateKeyDescriptionResponse 返回参数} */
+  /** 修改主密钥描述信息 {@link UpdateKeyDescriptionRequest} {@link UpdateKeyDescriptionResponse} */
   UpdateKeyDescription(data: UpdateKeyDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateKeyDescriptionResponse>;
-  /** {@link VerifyByAsymmetricKey 验证签名}({@link VerifyByAsymmetricKeyRequest 请求参数}): {@link VerifyByAsymmetricKeyResponse 返回参数} */
+  /** 验证签名 {@link VerifyByAsymmetricKeyRequest} {@link VerifyByAsymmetricKeyResponse} */
   VerifyByAsymmetricKey(data: VerifyByAsymmetricKeyRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyByAsymmetricKeyResponse>;
 }
 

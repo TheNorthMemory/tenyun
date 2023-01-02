@@ -262,7 +262,7 @@ declare interface DescribeDBInstancesResponse {
   Instances: DBInstanceDetail[];
   /** 独享集群内的DB实例总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -282,7 +282,7 @@ declare interface DescribeHostListResponse {
   TotalCount: number;
   /** 主机详情 */
   Hosts: HostDetail[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -344,7 +344,7 @@ declare interface DescribeInstanceDetailResponse {
   FenceId: string | null;
   /** 所属集群ID(默认集群为空) */
   ClusterId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -376,7 +376,7 @@ declare interface DescribeInstanceListResponse {
   Instances: DescribeInstanceDetail[];
   /** 独享集群实例总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -408,7 +408,7 @@ declare interface DescribeInstancesResponse {
   TotalCount?: number;
   /** 集群扩展信息 */
   Instances?: InstanceExpand[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -420,24 +420,24 @@ declare interface ModifyInstanceNameRequest {
 }
 
 declare interface ModifyInstanceNameResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Dbdc 云数据库独享集群} */
 declare interface Dbdc {
   (): Versions;
-  /** {@link DescribeDBInstances 查询独享集群内的DB实例列表}({@link DescribeDBInstancesRequest 请求参数}): {@link DescribeDBInstancesResponse 返回参数} */
+  /** 查询独享集群内的DB实例列表 {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */
   DescribeDBInstances(data: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
-  /** {@link DescribeHostList 查询主机列表}({@link DescribeHostListRequest 请求参数}): {@link DescribeHostListResponse 返回参数} */
+  /** 查询主机列表 {@link DescribeHostListRequest} {@link DescribeHostListResponse} */
   DescribeHostList(data: DescribeHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostListResponse>;
-  /** {@link DescribeInstanceDetail 查询独享集群详情}({@link DescribeInstanceDetailRequest 请求参数}): {@link DescribeInstanceDetailResponse 返回参数} */
+  /** 查询独享集群详情 {@link DescribeInstanceDetailRequest} {@link DescribeInstanceDetailResponse} */
   DescribeInstanceDetail(data: DescribeInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDetailResponse>;
-  /** {@link DescribeInstanceList 查询独享集群实例列表}({@link DescribeInstanceListRequest 请求参数}): {@link DescribeInstanceListResponse 返回参数} */
+  /** 查询独享集群实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
   DescribeInstanceList(data?: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
-  /** {@link DescribeInstances 查询独享集群列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
+  /** 查询独享集群列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** {@link ModifyInstanceName 修改独享集群名称}({@link ModifyInstanceNameRequest 请求参数}): {@link ModifyInstanceNameResponse 返回参数} */
+  /** 修改独享集群名称 {@link ModifyInstanceNameRequest} {@link ModifyInstanceNameResponse} */
   ModifyInstanceName(data: ModifyInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNameResponse>;
 }
 

@@ -52,7 +52,7 @@ declare interface BindDocumentToRoomRequest {
 }
 
 declare interface BindDocumentToRoomResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -78,7 +78,7 @@ declare interface CreateDocumentRequest {
 declare interface CreateDocumentResponse {
   /** 文档ID。 */
   DocumentId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -114,7 +114,7 @@ declare interface CreateRoomRequest {
 declare interface CreateRoomResponse {
   /** 房间ID。 */
   RoomId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -122,7 +122,7 @@ declare interface CreateSupervisorRequest {
 }
 
 declare interface CreateSupervisorResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -132,7 +132,7 @@ declare interface DeleteRoomRequest {
 }
 
 declare interface DeleteRoomResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -168,7 +168,7 @@ declare interface DescribeRoomResponse {
   Assistants?: string[] | null;
   /** 录制地址。仅在房间结束后存在。 */
   RecordUrl?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -190,7 +190,7 @@ declare interface DescribeRoomStatisticsResponse {
   Total: number;
   /** 成员记录列表。 */
   MemberRecords: MemberRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -208,7 +208,7 @@ declare interface DescribeUserResponse {
   Name: string;
   /** 用户头像Url。 */
   Avatar: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -224,7 +224,7 @@ declare interface LoginOriginIdResponse {
   UserId: string;
   /** 登录/注册成功后返回登录态token。有效期7天。 */
   Token: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -238,7 +238,7 @@ declare interface LoginUserResponse {
   UserId: string;
   /** 登录/注册成功后返回登录态token。有效期7天。 */
   Token: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -250,7 +250,7 @@ declare interface ModifyAppRequest {
 }
 
 declare interface ModifyAppResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -270,7 +270,7 @@ declare interface RegisterUserResponse {
   UserId: string;
   /** 登录/注册成功后返回登录态token。有效期7天。 */
   Token: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -282,7 +282,7 @@ declare interface SetAppCustomContentRequest {
 }
 
 declare interface SetAppCustomContentResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -294,40 +294,40 @@ declare interface UnbindDocumentFromRoomRequest {
 }
 
 declare interface UnbindDocumentFromRoomResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Lcic 低代码互动课堂} */
 declare interface Lcic {
   (): Versions;
-  /** {@link BindDocumentToRoom 绑定文档到房间}({@link BindDocumentToRoomRequest 请求参数}): {@link BindDocumentToRoomResponse 返回参数} */
+  /** 绑定文档到房间 {@link BindDocumentToRoomRequest} {@link BindDocumentToRoomResponse} */
   BindDocumentToRoom(data: BindDocumentToRoomRequest, config?: AxiosRequestConfig): AxiosPromise<BindDocumentToRoomResponse>;
-  /** {@link CreateDocument 创建文档}({@link CreateDocumentRequest 请求参数}): {@link CreateDocumentResponse 返回参数} */
+  /** 创建文档 {@link CreateDocumentRequest} {@link CreateDocumentResponse} */
   CreateDocument(data: CreateDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocumentResponse>;
-  /** {@link CreateRoom 创建房间}({@link CreateRoomRequest 请求参数}): {@link CreateRoomResponse 返回参数} */
+  /** 创建房间 {@link CreateRoomRequest} {@link CreateRoomResponse} */
   CreateRoom(data: CreateRoomRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoomResponse>;
-  /** {@link CreateSupervisor 创建巡课}({@link CreateSupervisorRequest 请求参数}): {@link CreateSupervisorResponse 返回参数} */
+  /** 创建巡课 {@link CreateSupervisorRequest} {@link CreateSupervisorResponse} */
   CreateSupervisor(data?: CreateSupervisorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSupervisorResponse>;
-  /** {@link DeleteRoom 删除房间}({@link DeleteRoomRequest 请求参数}): {@link DeleteRoomResponse 返回参数} */
+  /** 删除房间 {@link DeleteRoomRequest} {@link DeleteRoomResponse} */
   DeleteRoom(data: DeleteRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoomResponse>;
-  /** {@link DescribeRoom 房间信息}({@link DescribeRoomRequest 请求参数}): {@link DescribeRoomResponse 返回参数} */
+  /** 房间信息 {@link DescribeRoomRequest} {@link DescribeRoomResponse} */
   DescribeRoom(data: DescribeRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomResponse>;
-  /** {@link DescribeRoomStatistics 获取房间统计信息}({@link DescribeRoomStatisticsRequest 请求参数}): {@link DescribeRoomStatisticsResponse 返回参数} */
+  /** 获取房间统计信息 {@link DescribeRoomStatisticsRequest} {@link DescribeRoomStatisticsResponse} */
   DescribeRoomStatistics(data: DescribeRoomStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomStatisticsResponse>;
-  /** {@link DescribeUser 获取用户信息}({@link DescribeUserRequest 请求参数}): {@link DescribeUserResponse 返回参数} */
+  /** 获取用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
   DescribeUser(data: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
-  /** {@link LoginOriginId 源账号登录}({@link LoginOriginIdRequest 请求参数}): {@link LoginOriginIdResponse 返回参数} */
+  /** 源账号登录 {@link LoginOriginIdRequest} {@link LoginOriginIdResponse} */
   LoginOriginId(data: LoginOriginIdRequest, config?: AxiosRequestConfig): AxiosPromise<LoginOriginIdResponse>;
-  /** {@link LoginUser 登录}({@link LoginUserRequest 请求参数}): {@link LoginUserResponse 返回参数} */
+  /** 登录 {@link LoginUserRequest} {@link LoginUserResponse} */
   LoginUser(data: LoginUserRequest, config?: AxiosRequestConfig): AxiosPromise<LoginUserResponse>;
-  /** {@link ModifyApp 修改应用}({@link ModifyAppRequest 请求参数}): {@link ModifyAppResponse 返回参数} */
+  /** 修改应用 {@link ModifyAppRequest} {@link ModifyAppResponse} */
   ModifyApp(data: ModifyAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppResponse>;
-  /** {@link RegisterUser 注册用户}({@link RegisterUserRequest 请求参数}): {@link RegisterUserResponse 返回参数} */
+  /** 注册用户 {@link RegisterUserRequest} {@link RegisterUserResponse} */
   RegisterUser(data: RegisterUserRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterUserResponse>;
-  /** {@link SetAppCustomContent 设置应用自定义内容}({@link SetAppCustomContentRequest 请求参数}): {@link SetAppCustomContentResponse 返回参数} */
+  /** 设置应用自定义内容 {@link SetAppCustomContentRequest} {@link SetAppCustomContentResponse} */
   SetAppCustomContent(data: SetAppCustomContentRequest, config?: AxiosRequestConfig): AxiosPromise<SetAppCustomContentResponse>;
-  /** {@link UnbindDocumentFromRoom 文档从房间解绑}({@link UnbindDocumentFromRoomRequest 请求参数}): {@link UnbindDocumentFromRoomResponse 返回参数} */
+  /** 文档从房间解绑 {@link UnbindDocumentFromRoomRequest} {@link UnbindDocumentFromRoomResponse} */
   UnbindDocumentFromRoom(data: UnbindDocumentFromRoomRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDocumentFromRoomResponse>;
 }
 

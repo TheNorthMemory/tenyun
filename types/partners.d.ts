@@ -306,7 +306,7 @@ declare interface AgentPayDealsRequest {
 }
 
 declare interface AgentPayDealsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -318,7 +318,7 @@ declare interface AgentTransferMoneyRequest {
 }
 
 declare interface AgentTransferMoneyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -340,7 +340,7 @@ declare interface AuditApplyClientResponse {
   AuditResult: string;
   /** 关联时间对应的时间戳 */
   AgentTime: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -350,7 +350,7 @@ declare interface CreatePayRelationForClientRequest {
 }
 
 declare interface CreatePayRelationForClientResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -388,7 +388,7 @@ declare interface DescribeAgentAuditedClientsResponse {
   AgentClientSet: AgentAuditedClient[];
   /** 符合条件的代客总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -414,7 +414,7 @@ declare interface DescribeAgentBillsResponse {
   TotalCount: number;
   /** 业务明细列表 */
   AgentBillSet: AgentBillElem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -432,7 +432,7 @@ declare interface DescribeAgentClientGradeResponse {
   ClientGrade: string;
   /** 客户类型：1，个人；2，企业；3，其他 */
   ClientType: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -460,7 +460,7 @@ declare interface DescribeAgentClientsResponse {
   AgentClientSet: AgentClientElem[];
   /** 符合条件的代客总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -492,7 +492,7 @@ declare interface DescribeAgentDealsByCacheResponse {
   AgentDealSet: AgentDealNewElem[];
   /** 符合条件的订单总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -522,7 +522,7 @@ declare interface DescribeAgentDealsCacheResponse {
   AgentDealSet: AgentDealElem[];
   /** 符合条件的订单总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -550,7 +550,7 @@ declare interface DescribeAgentPayDealsResponse {
   AgentPayDealSet: AgentDealElem[];
   /** 符合条件的订单总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -580,7 +580,7 @@ declare interface DescribeAgentPayDealsV2Response {
   AgentPayDealSet: AgentDealNewElem[];
   /** 符合条件的订单总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -608,7 +608,7 @@ declare interface DescribeAgentSelfPayDealsResponse {
   AgentPayDealSet: AgentDealElem[];
   /** 符合条件的订单总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -638,7 +638,7 @@ declare interface DescribeAgentSelfPayDealsV2Response {
   AgentPayDealSet: AgentDealNewElem[];
   /** 符合条件的订单总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -652,7 +652,7 @@ declare interface DescribeClientBalanceNewResponse {
   Balance: number;
   /** 账户现金余额，单位分 */
   Cash: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -666,7 +666,7 @@ declare interface DescribeClientBalanceResponse {
   Balance: number;
   /** 账户现金余额，单位分 */
   Cash: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -684,7 +684,7 @@ declare interface DescribeRebateInfosNewResponse {
   RebateInfoSet: RebateInfoElemNew[];
   /** 符合查询条件返佣信息数目 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -702,7 +702,7 @@ declare interface DescribeRebateInfosResponse {
   RebateInfoSet: RebateInfoElem[];
   /** 符合查询条件返佣信息数目 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -724,7 +724,7 @@ declare interface DescribeSalesmansResponse {
   AgentSalesmanSet: AgentSalesmanElem[];
   /** 符合条件的代客总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -750,7 +750,7 @@ declare interface DescribeUnbindClientListResponse {
   TotalCount: number;
   /** 符合条件的解绑客户列表 */
   UnbindClientList: UnbindClientElem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -762,7 +762,7 @@ declare interface ModifyClientRemarkRequest {
 }
 
 declare interface ModifyClientRemarkResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -772,56 +772,56 @@ declare interface RemovePayRelationForClientRequest {
 }
 
 declare interface RemovePayRelationForClientResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Partners 渠道合作伙伴} */
 declare interface Partners {
   (): Versions;
-  /** {@link AgentPayDeals 支付订单（合作伙伴使用）}({@link AgentPayDealsRequest 请求参数}): {@link AgentPayDealsResponse 返回参数} */
+  /** 支付订单（合作伙伴使用） {@link AgentPayDealsRequest} {@link AgentPayDealsResponse} */
   AgentPayDeals(data: AgentPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<AgentPayDealsResponse>;
-  /** {@link AgentTransferMoney 给客户转账}({@link AgentTransferMoneyRequest 请求参数}): {@link AgentTransferMoneyResponse 返回参数} */
+  /** 给客户转账 {@link AgentTransferMoneyRequest} {@link AgentTransferMoneyResponse} */
   AgentTransferMoney(data: AgentTransferMoneyRequest, config?: AxiosRequestConfig): AxiosPromise<AgentTransferMoneyResponse>;
-  /** {@link AuditApplyClient 审核客户}({@link AuditApplyClientRequest 请求参数}): {@link AuditApplyClientResponse 返回参数} */
+  /** 审核客户 {@link AuditApplyClientRequest} {@link AuditApplyClientResponse} */
   AuditApplyClient(data: AuditApplyClientRequest, config?: AxiosRequestConfig): AxiosPromise<AuditApplyClientResponse>;
-  /** {@link CreatePayRelationForClient 合作伙伴为客户创建强代付关系}({@link CreatePayRelationForClientRequest 请求参数}): {@link CreatePayRelationForClientResponse 返回参数} */
+  /** 合作伙伴为客户创建强代付关系 {@link CreatePayRelationForClientRequest} {@link CreatePayRelationForClientResponse} */
   CreatePayRelationForClient(data: CreatePayRelationForClientRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePayRelationForClientResponse>;
-  /** {@link DescribeAgentAuditedClients 查询已审核客户列表}({@link DescribeAgentAuditedClientsRequest 请求参数}): {@link DescribeAgentAuditedClientsResponse 返回参数} */
+  /** 查询已审核客户列表 {@link DescribeAgentAuditedClientsRequest} {@link DescribeAgentAuditedClientsResponse} */
   DescribeAgentAuditedClients(data?: DescribeAgentAuditedClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentAuditedClientsResponse>;
-  /** {@link DescribeAgentBills 查询业务明细}({@link DescribeAgentBillsRequest 请求参数}): {@link DescribeAgentBillsResponse 返回参数} */
+  /** 查询业务明细 {@link DescribeAgentBillsRequest} {@link DescribeAgentBillsResponse} */
   DescribeAgentBills(data: DescribeAgentBillsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentBillsResponse>;
-  /** {@link DescribeAgentClientGrade 查询客户级别}({@link DescribeAgentClientGradeRequest 请求参数}): {@link DescribeAgentClientGradeResponse 返回参数} */
+  /** 查询客户级别 {@link DescribeAgentClientGradeRequest} {@link DescribeAgentClientGradeResponse} */
   DescribeAgentClientGrade(data: DescribeAgentClientGradeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentClientGradeResponse>;
-  /** {@link DescribeAgentClients 查询待审核客户列表}({@link DescribeAgentClientsRequest 请求参数}): {@link DescribeAgentClientsResponse 返回参数} */
+  /** 查询待审核客户列表 {@link DescribeAgentClientsRequest} {@link DescribeAgentClientsResponse} */
   DescribeAgentClients(data?: DescribeAgentClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentClientsResponse>;
-  /** {@link DescribeAgentDealsByCache 代理商缓存订单查询接口（预付费）}({@link DescribeAgentDealsByCacheRequest 请求参数}): {@link DescribeAgentDealsByCacheResponse 返回参数} */
+  /** 代理商缓存订单查询接口（预付费） {@link DescribeAgentDealsByCacheRequest} {@link DescribeAgentDealsByCacheResponse} */
   DescribeAgentDealsByCache(data: DescribeAgentDealsByCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsByCacheResponse>;
-  /** {@link DescribeAgentDealsCache 代理商缓存订单查询接口（禁止接入）}({@link DescribeAgentDealsCacheRequest 请求参数}): {@link DescribeAgentDealsCacheResponse 返回参数} */
+  /** 代理商缓存订单查询接口（禁止接入） {@link DescribeAgentDealsCacheRequest} {@link DescribeAgentDealsCacheResponse} */
   DescribeAgentDealsCache(data: DescribeAgentDealsCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsCacheResponse>;
-  /** {@link DescribeAgentPayDeals 代理商代付订单查询接口（禁止接入）}({@link DescribeAgentPayDealsRequest 请求参数}): {@link DescribeAgentPayDealsResponse 返回参数} */
+  /** 代理商代付订单查询接口（禁止接入） {@link DescribeAgentPayDealsRequest} {@link DescribeAgentPayDealsResponse} */
   DescribeAgentPayDeals(data: DescribeAgentPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentPayDealsResponse>;
-  /** {@link DescribeAgentPayDealsV2 代理商代付订单查询接口（预付费）}({@link DescribeAgentPayDealsV2Request 请求参数}): {@link DescribeAgentPayDealsV2Response 返回参数} */
+  /** 代理商代付订单查询接口（预付费） {@link DescribeAgentPayDealsV2Request} {@link DescribeAgentPayDealsV2Response} */
   DescribeAgentPayDealsV2(data: DescribeAgentPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentPayDealsV2Response>;
-  /** {@link DescribeAgentSelfPayDeals 代理商自付订单查询接口（禁止接入）}({@link DescribeAgentSelfPayDealsRequest 请求参数}): {@link DescribeAgentSelfPayDealsResponse 返回参数} */
+  /** 代理商自付订单查询接口（禁止接入） {@link DescribeAgentSelfPayDealsRequest} {@link DescribeAgentSelfPayDealsResponse} */
   DescribeAgentSelfPayDeals(data: DescribeAgentSelfPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsResponse>;
-  /** {@link DescribeAgentSelfPayDealsV2 代理商自付订单查询接口（预付费）}({@link DescribeAgentSelfPayDealsV2Request 请求参数}): {@link DescribeAgentSelfPayDealsV2Response 返回参数} */
+  /** 代理商自付订单查询接口（预付费） {@link DescribeAgentSelfPayDealsV2Request} {@link DescribeAgentSelfPayDealsV2Response} */
   DescribeAgentSelfPayDealsV2(data: DescribeAgentSelfPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsV2Response>;
-  /** {@link DescribeClientBalance 查询客户余额}({@link DescribeClientBalanceRequest 请求参数}): {@link DescribeClientBalanceResponse 返回参数} */
+  /** 查询客户余额 {@link DescribeClientBalanceRequest} {@link DescribeClientBalanceResponse} */
   DescribeClientBalance(data: DescribeClientBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientBalanceResponse>;
-  /** {@link DescribeClientBalanceNew 查询客户余额（新）}({@link DescribeClientBalanceNewRequest 请求参数}): {@link DescribeClientBalanceNewResponse 返回参数} */
+  /** 查询客户余额（新） {@link DescribeClientBalanceNewRequest} {@link DescribeClientBalanceNewResponse} */
   DescribeClientBalanceNew(data: DescribeClientBalanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientBalanceNewResponse>;
-  /** {@link DescribeRebateInfos 查询代理商返佣信息（禁止接入）}({@link DescribeRebateInfosRequest 请求参数}): {@link DescribeRebateInfosResponse 返回参数} */
+  /** 查询代理商返佣信息（禁止接入） {@link DescribeRebateInfosRequest} {@link DescribeRebateInfosResponse} */
   DescribeRebateInfos(data?: DescribeRebateInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebateInfosResponse>;
-  /** {@link DescribeRebateInfosNew 查询代理商返佣信息V2}({@link DescribeRebateInfosNewRequest 请求参数}): {@link DescribeRebateInfosNewResponse 返回参数} */
+  /** 查询代理商返佣信息V2 {@link DescribeRebateInfosNewRequest} {@link DescribeRebateInfosNewResponse} */
   DescribeRebateInfosNew(data?: DescribeRebateInfosNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebateInfosNewResponse>;
-  /** {@link DescribeSalesmans 代理商业务员查询接口}({@link DescribeSalesmansRequest 请求参数}): {@link DescribeSalesmansResponse 返回参数} */
+  /** 代理商业务员查询接口 {@link DescribeSalesmansRequest} {@link DescribeSalesmansResponse} */
   DescribeSalesmans(data: DescribeSalesmansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSalesmansResponse>;
-  /** {@link DescribeUnbindClientList 代理商名下客户解绑记录查询接口}({@link DescribeUnbindClientListRequest 请求参数}): {@link DescribeUnbindClientListResponse 返回参数} */
+  /** 代理商名下客户解绑记录查询接口 {@link DescribeUnbindClientListRequest} {@link DescribeUnbindClientListResponse} */
   DescribeUnbindClientList(data: DescribeUnbindClientListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnbindClientListResponse>;
-  /** {@link ModifyClientRemark 修改客户备注}({@link ModifyClientRemarkRequest 请求参数}): {@link ModifyClientRemarkResponse 返回参数} */
+  /** 修改客户备注 {@link ModifyClientRemarkRequest} {@link ModifyClientRemarkResponse} */
   ModifyClientRemark(data: ModifyClientRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClientRemarkResponse>;
-  /** {@link RemovePayRelationForClient 合作伙伴为客户消除强代付关系}({@link RemovePayRelationForClientRequest 请求参数}): {@link RemovePayRelationForClientResponse 返回参数} */
+  /** 合作伙伴为客户消除强代付关系 {@link RemovePayRelationForClientRequest} {@link RemovePayRelationForClientResponse} */
   RemovePayRelationForClient(data: RemovePayRelationForClientRequest, config?: AxiosRequestConfig): AxiosPromise<RemovePayRelationForClientResponse>;
 }
 

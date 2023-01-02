@@ -32,14 +32,14 @@ declare interface MarketingValueJudgementRequest {
 declare interface MarketingValueJudgementResponse {
   /** 返回数据 */
   Data?: Data;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Mvj 营销价值判断} */
 declare interface Mvj {
   (): Versions;
-  /** {@link MarketingValueJudgement 营销价值判断}({@link MarketingValueJudgementRequest 请求参数}): {@link MarketingValueJudgementResponse 返回参数} */
+  /** 营销价值判断 {@link MarketingValueJudgementRequest} {@link MarketingValueJudgementResponse} */
   MarketingValueJudgement(data: MarketingValueJudgementRequest, config?: AxiosRequestConfig): AxiosPromise<MarketingValueJudgementResponse>;
 }
 

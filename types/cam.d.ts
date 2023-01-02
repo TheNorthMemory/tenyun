@@ -468,7 +468,7 @@ declare interface AddUserResponse {
   SecretKey: string;
   /** 子用户 UID */
   Uid: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -478,7 +478,7 @@ declare interface AddUserToGroupRequest {
 }
 
 declare interface AddUserToGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -490,7 +490,7 @@ declare interface AttachGroupPolicyRequest {
 }
 
 declare interface AttachGroupPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -506,7 +506,7 @@ declare interface AttachRolePolicyRequest {
 }
 
 declare interface AttachRolePolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -518,7 +518,7 @@ declare interface AttachUserPolicyRequest {
 }
 
 declare interface AttachUserPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -528,7 +528,7 @@ declare interface ConsumeCustomMFATokenRequest {
 }
 
 declare interface ConsumeCustomMFATokenResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -540,7 +540,7 @@ declare interface CreateAccessKeyRequest {
 declare interface CreateAccessKeyResponse {
   /** 访问密钥 */
   AccessKey: AccessKeyDetail | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -554,7 +554,7 @@ declare interface CreateGroupRequest {
 declare interface CreateGroupResponse {
   /** 用户组 ID */
   GroupId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -572,7 +572,7 @@ declare interface CreateOIDCConfigRequest {
 }
 
 declare interface CreateOIDCConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -588,7 +588,7 @@ declare interface CreatePolicyRequest {
 declare interface CreatePolicyResponse {
   /** 新增策略ID */
   PolicyId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -604,7 +604,7 @@ declare interface CreatePolicyVersionRequest {
 declare interface CreatePolicyVersionResponse {
   /** 策略版本号 */
   VersionId?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -626,7 +626,7 @@ declare interface CreateRoleRequest {
 declare interface CreateRoleResponse {
   /** 角色ID */
   RoleId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -642,7 +642,7 @@ declare interface CreateSAMLProviderRequest {
 declare interface CreateSAMLProviderResponse {
   /** SAML身份提供商资源描述符 */
   ProviderArn: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -660,7 +660,7 @@ declare interface CreateServiceLinkedRoleRequest {
 declare interface CreateServiceLinkedRoleResponse {
   /** 角色ID */
   RoleId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -686,7 +686,7 @@ declare interface CreateUserOIDCConfigRequest {
 }
 
 declare interface CreateUserOIDCConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -696,7 +696,7 @@ declare interface CreateUserSAMLConfigRequest {
 }
 
 declare interface CreateUserSAMLConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -708,7 +708,7 @@ declare interface DeleteAccessKeyRequest {
 }
 
 declare interface DeleteAccessKeyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -718,7 +718,7 @@ declare interface DeleteGroupRequest {
 }
 
 declare interface DeleteGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -728,7 +728,7 @@ declare interface DeleteOIDCConfigRequest {
 }
 
 declare interface DeleteOIDCConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -738,7 +738,7 @@ declare interface DeletePolicyRequest {
 }
 
 declare interface DeletePolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -750,7 +750,7 @@ declare interface DeletePolicyVersionRequest {
 }
 
 declare interface DeletePolicyVersionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -762,7 +762,7 @@ declare interface DeleteRolePermissionsBoundaryRequest {
 }
 
 declare interface DeleteRolePermissionsBoundaryResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -774,7 +774,7 @@ declare interface DeleteRoleRequest {
 }
 
 declare interface DeleteRoleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -784,7 +784,7 @@ declare interface DeleteSAMLProviderRequest {
 }
 
 declare interface DeleteSAMLProviderResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -796,7 +796,7 @@ declare interface DeleteServiceLinkedRoleRequest {
 declare interface DeleteServiceLinkedRoleResponse {
   /** 删除任务ID，可用于检查删除服务相关角色状态。 */
   DeletionTaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -806,7 +806,7 @@ declare interface DeleteUserPermissionsBoundaryRequest {
 }
 
 declare interface DeleteUserPermissionsBoundaryResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -818,7 +818,7 @@ declare interface DeleteUserRequest {
 }
 
 declare interface DeleteUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -842,7 +842,7 @@ declare interface DescribeOIDCConfigResponse {
   Description: string;
   /** 名称 */
   Name: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -860,7 +860,7 @@ declare interface DescribeRoleListResponse {
   List: RoleInfo[] | null;
   /** 角色总数 */
   TotalNum: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -876,7 +876,7 @@ declare interface DescribeSafeAuthFlagCollResponse {
   ActionFlag: LoginActionFlag;
   /** 异地登录保护设置 */
   OffsiteFlag: OffsiteFlag;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -890,7 +890,7 @@ declare interface DescribeSafeAuthFlagIntlResponse {
   ActionFlag: LoginActionFlagIntl;
   /** 异地登录保护设置 */
   OffsiteFlag: OffsiteFlag;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -906,7 +906,7 @@ declare interface DescribeSafeAuthFlagResponse {
   OffsiteFlag: OffsiteFlag;
   /** 1: 提示7天信任设备 0: 不提示 */
   PromptTrust: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -918,7 +918,7 @@ declare interface DescribeSubAccountsRequest {
 declare interface DescribeSubAccountsResponse {
   /** 子用户列表 */
   SubAccounts: SubAccountUser[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -948,7 +948,7 @@ declare interface DescribeUserOIDCConfigResponse {
   MappingFiled: string;
   /** 描述 */
   Description: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -960,7 +960,7 @@ declare interface DescribeUserSAMLConfigResponse {
   SAMLMetadata: string;
   /** 状态：0:未设置，1:已开启，2:已禁用 */
   Status: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -972,7 +972,7 @@ declare interface DetachGroupPolicyRequest {
 }
 
 declare interface DetachGroupPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -988,7 +988,7 @@ declare interface DetachRolePolicyRequest {
 }
 
 declare interface DetachRolePolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1000,7 +1000,7 @@ declare interface DetachUserPolicyRequest {
 }
 
 declare interface DetachUserPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1008,7 +1008,7 @@ declare interface DisableUserSSORequest {
 }
 
 declare interface DisableUserSSOResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1028,7 +1028,7 @@ declare interface GetAccountSummaryResponse {
   Group: number;
   /** 分组用户总数 */
   Member: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1040,7 +1040,7 @@ declare interface GetCustomMFATokenInfoRequest {
 declare interface GetCustomMFATokenInfoResponse {
   /** 自定义多因子验证Token对应的帐号Id */
   Uin?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1062,7 +1062,7 @@ declare interface GetGroupResponse {
   CreateTime?: string;
   /** 用户组成员信息 */
   UserInfo?: GroupMemberInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1088,7 +1088,7 @@ declare interface GetPolicyResponse {
   PresetAlias?: string | null;
   /** 是否服务相关策略 */
   IsServiceLinkedRolePolicy?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1102,7 +1102,7 @@ declare interface GetPolicyVersionRequest {
 declare interface GetPolicyVersionResponse {
   /** 策略版本详情 */
   PolicyVersion: PolicyVersionDetail | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1122,7 +1122,7 @@ declare interface GetRolePermissionBoundaryResponse {
   PolicyType?: number | null;
   /** 创建方式：1.按产品功能或项目权限创建，2.按策略语法创建，3.按策略生成器创建，4.按标签授权创建，5.按权限边界规则创建 */
   CreateMode?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1136,7 +1136,7 @@ declare interface GetRoleRequest {
 declare interface GetRoleResponse {
   /** 角色详情 */
   RoleInfo: RoleInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1156,7 +1156,7 @@ declare interface GetSAMLProviderResponse {
   ModifyTime: string;
   /** SAML身份提供商元数据文档 */
   SAMLMetadata: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1168,7 +1168,7 @@ declare interface GetSecurityLastUsedRequest {
 declare interface GetSecurityLastUsedResponse {
   /** 密钥ID最近访问列表 */
   SecretIdLastUsedRows: SecretIdLastUsed[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1186,7 +1186,7 @@ declare interface GetServiceLinkedRoleDeletionStatusResponse {
   ServiceType?: string | null;
   /** 服务名称 */
   ServiceName?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1200,7 +1200,7 @@ declare interface GetUserAppIdResponse {
   OwnerUin?: string;
   /** 当前账号AppId */
   AppId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1220,7 +1220,7 @@ declare interface GetUserPermissionBoundaryResponse {
   PolicyType?: number | null;
   /** 创建方式：1.按产品功能或项目权限创建，2.按策略语法创建，3.按策略生成器创建，4.按标签授权创建，5.按权限边界规则创建 */
   CreateMode?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1246,7 +1246,7 @@ declare interface GetUserResponse {
   CountryCode: string;
   /** 邮箱 */
   Email: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1258,7 +1258,7 @@ declare interface ListAccessKeysRequest {
 declare interface ListAccessKeysResponse {
   /** 访问密钥列表 */
   AccessKeys: AccessKey[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1278,7 +1278,7 @@ declare interface ListAttachedGroupPoliciesResponse {
   TotalNum: number;
   /** 策略列表 */
   List: AttachPolicyInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1302,7 +1302,7 @@ declare interface ListAttachedRolePoliciesResponse {
   List: AttachedPolicyOfRole[];
   /** 角色关联的策略总数 */
   TotalNum: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1326,7 +1326,7 @@ declare interface ListAttachedUserAllPoliciesResponse {
   PolicyList: AttachedUserPolicy[];
   /** 策略总数 */
   TotalNum: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1344,7 +1344,7 @@ declare interface ListAttachedUserPoliciesResponse {
   TotalNum: number;
   /** 策略列表 */
   List: AttachPolicyInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1360,7 +1360,7 @@ declare interface ListCollaboratorsResponse {
   TotalNum: number;
   /** 协作者信息 */
   Data: SubAccountInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1380,7 +1380,7 @@ declare interface ListEntitiesForPolicyResponse {
   TotalNum: number | null;
   /** 实体列表 */
   List: AttachEntityOfPolicy[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1400,7 +1400,7 @@ declare interface ListGroupsForUserResponse {
   TotalNum: number;
   /** 用户组信息 */
   GroupInfo: GroupInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1418,7 +1418,7 @@ declare interface ListGroupsResponse {
   TotalNum?: number;
   /** 用户组数组信息。 */
   GroupInfo?: GroupInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1436,7 +1436,7 @@ declare interface ListPoliciesGrantingServiceAccessRequest {
 declare interface ListPoliciesGrantingServiceAccessResponse {
   /** 列表 */
   List: ListGrantServiceAccessNode[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1458,7 +1458,7 @@ declare interface ListPoliciesResponse {
   List: StrategyInfo[];
   /** 保留字段 */
   ServiceTypeList: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1470,7 +1470,7 @@ declare interface ListPolicyVersionsRequest {
 declare interface ListPolicyVersionsResponse {
   /** 策略版本列表 */
   Versions?: PolicyVersionItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1482,7 +1482,7 @@ declare interface ListSAMLProvidersResponse {
   TotalCount?: number;
   /** SAML身份提供商列表 */
   SAMLProviderSet?: SAMLProviderInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1500,7 +1500,7 @@ declare interface ListUsersForGroupResponse {
   TotalNum?: number;
   /** 子用户信息。 */
   UserInfo?: GroupMemberInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1510,7 +1510,7 @@ declare interface ListUsersRequest {
 declare interface ListUsersResponse {
   /** 子用户信息 */
   Data: SubAccountInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1526,7 +1526,7 @@ declare interface ListWeChatWorkSubAccountsResponse {
   Data?: WeChatWorkSubAccount[];
   /** 总数目。 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1540,7 +1540,7 @@ declare interface PutRolePermissionsBoundaryRequest {
 }
 
 declare interface PutRolePermissionsBoundaryResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1552,7 +1552,7 @@ declare interface PutUserPermissionsBoundaryRequest {
 }
 
 declare interface PutUserPermissionsBoundaryResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1562,7 +1562,7 @@ declare interface RemoveUserFromGroupRequest {
 }
 
 declare interface RemoveUserFromGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1574,7 +1574,7 @@ declare interface SetDefaultPolicyVersionRequest {
 }
 
 declare interface SetDefaultPolicyVersionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1588,7 +1588,7 @@ declare interface SetMfaFlagRequest {
 }
 
 declare interface SetMfaFlagResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1602,7 +1602,7 @@ declare interface TagRoleRequest {
 }
 
 declare interface TagRoleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1616,7 +1616,7 @@ declare interface UntagRoleRequest {
 }
 
 declare interface UntagRoleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1630,7 +1630,7 @@ declare interface UpdateAccessKeyRequest {
 }
 
 declare interface UpdateAccessKeyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1644,7 +1644,7 @@ declare interface UpdateAssumeRolePolicyRequest {
 }
 
 declare interface UpdateAssumeRolePolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1658,7 +1658,7 @@ declare interface UpdateGroupRequest {
 }
 
 declare interface UpdateGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1676,7 +1676,7 @@ declare interface UpdateOIDCConfigRequest {
 }
 
 declare interface UpdateOIDCConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1696,7 +1696,7 @@ declare interface UpdatePolicyRequest {
 declare interface UpdatePolicyResponse {
   /** 策略id，入参是PolicyName时，才会返回 */
   PolicyId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1710,7 +1710,7 @@ declare interface UpdateRoleConsoleLoginRequest {
 }
 
 declare interface UpdateRoleConsoleLoginResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1724,7 +1724,7 @@ declare interface UpdateRoleDescriptionRequest {
 }
 
 declare interface UpdateRoleDescriptionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1738,7 +1738,7 @@ declare interface UpdateSAMLProviderRequest {
 }
 
 declare interface UpdateSAMLProviderResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1764,7 +1764,7 @@ declare interface UpdateUserOIDCConfigRequest {
 }
 
 declare interface UpdateUserOIDCConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1788,7 +1788,7 @@ declare interface UpdateUserRequest {
 }
 
 declare interface UpdateUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1800,184 +1800,184 @@ declare interface UpdateUserSAMLConfigRequest {
 }
 
 declare interface UpdateUserSAMLConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cam 访问管理} */
 declare interface Cam {
   (): Versions;
-  /** {@link AddUser 创建子用户}({@link AddUserRequest 请求参数}): {@link AddUserResponse 返回参数} */
+  /** 创建子用户 {@link AddUserRequest} {@link AddUserResponse} */
   AddUser(data: AddUserRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserResponse>;
-  /** {@link AddUserToGroup 用户加入到用户组}({@link AddUserToGroupRequest 请求参数}): {@link AddUserToGroupResponse 返回参数} */
+  /** 用户加入到用户组 {@link AddUserToGroupRequest} {@link AddUserToGroupResponse} */
   AddUserToGroup(data: AddUserToGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserToGroupResponse>;
-  /** {@link AttachGroupPolicy 绑定策略到用户组}({@link AttachGroupPolicyRequest 请求参数}): {@link AttachGroupPolicyResponse 返回参数} */
+  /** 绑定策略到用户组 {@link AttachGroupPolicyRequest} {@link AttachGroupPolicyResponse} */
   AttachGroupPolicy(data: AttachGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachGroupPolicyResponse>;
-  /** {@link AttachRolePolicy 绑定权限策略到角色}({@link AttachRolePolicyRequest 请求参数}): {@link AttachRolePolicyResponse 返回参数} */
+  /** 绑定权限策略到角色 {@link AttachRolePolicyRequest} {@link AttachRolePolicyResponse} */
   AttachRolePolicy(data?: AttachRolePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachRolePolicyResponse>;
-  /** {@link AttachUserPolicy 绑定策略到用户}({@link AttachUserPolicyRequest 请求参数}): {@link AttachUserPolicyResponse 返回参数} */
+  /** 绑定策略到用户 {@link AttachUserPolicyRequest} {@link AttachUserPolicyResponse} */
   AttachUserPolicy(data: AttachUserPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachUserPolicyResponse>;
-  /** {@link ConsumeCustomMFAToken 验证自定义多因子Token}({@link ConsumeCustomMFATokenRequest 请求参数}): {@link ConsumeCustomMFATokenResponse 返回参数} */
+  /** 验证自定义多因子Token {@link ConsumeCustomMFATokenRequest} {@link ConsumeCustomMFATokenResponse} */
   ConsumeCustomMFAToken(data: ConsumeCustomMFATokenRequest, config?: AxiosRequestConfig): AxiosPromise<ConsumeCustomMFATokenResponse>;
-  /** {@link CreateAccessKey 创建访问密钥}({@link CreateAccessKeyRequest 请求参数}): {@link CreateAccessKeyResponse 返回参数} */
+  /** 创建访问密钥 {@link CreateAccessKeyRequest} {@link CreateAccessKeyResponse} */
   CreateAccessKey(data?: CreateAccessKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessKeyResponse>;
-  /** {@link CreateGroup 创建用户组}({@link CreateGroupRequest 请求参数}): {@link CreateGroupResponse 返回参数} */
+  /** 创建用户组 {@link CreateGroupRequest} {@link CreateGroupResponse} */
   CreateGroup(data: CreateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupResponse>;
-  /** {@link CreateOIDCConfig 创建角色OIDC配置}({@link CreateOIDCConfigRequest 请求参数}): {@link CreateOIDCConfigResponse 返回参数} */
+  /** 创建角色OIDC配置 {@link CreateOIDCConfigRequest} {@link CreateOIDCConfigResponse} */
   CreateOIDCConfig(data: CreateOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOIDCConfigResponse>;
-  /** {@link CreatePolicy 创建策略}({@link CreatePolicyRequest 请求参数}): {@link CreatePolicyResponse 返回参数} */
+  /** 创建策略 {@link CreatePolicyRequest} {@link CreatePolicyResponse} */
   CreatePolicy(data: CreatePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePolicyResponse>;
-  /** {@link CreatePolicyVersion 新增策略版本接口}({@link CreatePolicyVersionRequest 请求参数}): {@link CreatePolicyVersionResponse 返回参数} */
+  /** 新增策略版本接口 {@link CreatePolicyVersionRequest} {@link CreatePolicyVersionResponse} */
   CreatePolicyVersion(data: CreatePolicyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePolicyVersionResponse>;
-  /** {@link CreateRole 创建角色}({@link CreateRoleRequest 请求参数}): {@link CreateRoleResponse 返回参数} */
+  /** 创建角色 {@link CreateRoleRequest} {@link CreateRoleResponse} */
   CreateRole(data: CreateRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleResponse>;
-  /** {@link CreateSAMLProvider 创建SAML身份提供商}({@link CreateSAMLProviderRequest 请求参数}): {@link CreateSAMLProviderResponse 返回参数} */
+  /** 创建SAML身份提供商 {@link CreateSAMLProviderRequest} {@link CreateSAMLProviderResponse} */
   CreateSAMLProvider(data: CreateSAMLProviderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSAMLProviderResponse>;
-  /** {@link CreateServiceLinkedRole 创建服务相关角色}({@link CreateServiceLinkedRoleRequest 请求参数}): {@link CreateServiceLinkedRoleResponse 返回参数} */
+  /** 创建服务相关角色 {@link CreateServiceLinkedRoleRequest} {@link CreateServiceLinkedRoleResponse} */
   CreateServiceLinkedRole(data: CreateServiceLinkedRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceLinkedRoleResponse>;
-  /** {@link CreateUserOIDCConfig 创建用户OIDC配置}({@link CreateUserOIDCConfigRequest 请求参数}): {@link CreateUserOIDCConfigResponse 返回参数} */
+  /** 创建用户OIDC配置 {@link CreateUserOIDCConfigRequest} {@link CreateUserOIDCConfigResponse} */
   CreateUserOIDCConfig(data: CreateUserOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserOIDCConfigResponse>;
-  /** {@link CreateUserSAMLConfig 创建用户SAML配置}({@link CreateUserSAMLConfigRequest 请求参数}): {@link CreateUserSAMLConfigResponse 返回参数} */
+  /** 创建用户SAML配置 {@link CreateUserSAMLConfigRequest} {@link CreateUserSAMLConfigResponse} */
   CreateUserSAMLConfig(data: CreateUserSAMLConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserSAMLConfigResponse>;
-  /** {@link DeleteAccessKey 删除访问密钥}({@link DeleteAccessKeyRequest 请求参数}): {@link DeleteAccessKeyResponse 返回参数} */
+  /** 删除访问密钥 {@link DeleteAccessKeyRequest} {@link DeleteAccessKeyResponse} */
   DeleteAccessKey(data: DeleteAccessKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessKeyResponse>;
-  /** {@link DeleteGroup 删除用户组}({@link DeleteGroupRequest 请求参数}): {@link DeleteGroupResponse 返回参数} */
+  /** 删除用户组 {@link DeleteGroupRequest} {@link DeleteGroupResponse} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
-  /** {@link DeleteOIDCConfig 删除OIDC身份提供商}({@link DeleteOIDCConfigRequest 请求参数}): {@link DeleteOIDCConfigResponse 返回参数} */
+  /** 删除OIDC身份提供商 {@link DeleteOIDCConfigRequest} {@link DeleteOIDCConfigResponse} */
   DeleteOIDCConfig(data: DeleteOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOIDCConfigResponse>;
-  /** {@link DeletePolicy 删除策略}({@link DeletePolicyRequest 请求参数}): {@link DeletePolicyResponse 返回参数} */
+  /** 删除策略 {@link DeletePolicyRequest} {@link DeletePolicyResponse} */
   DeletePolicy(data: DeletePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePolicyResponse>;
-  /** {@link DeletePolicyVersion 删除策略的策略版本}({@link DeletePolicyVersionRequest 请求参数}): {@link DeletePolicyVersionResponse 返回参数} */
+  /** 删除策略的策略版本 {@link DeletePolicyVersionRequest} {@link DeletePolicyVersionResponse} */
   DeletePolicyVersion(data: DeletePolicyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePolicyVersionResponse>;
-  /** {@link DeleteRole 删除角色}({@link DeleteRoleRequest 请求参数}): {@link DeleteRoleResponse 返回参数} */
+  /** 删除角色 {@link DeleteRoleRequest} {@link DeleteRoleResponse} */
   DeleteRole(data?: DeleteRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleResponse>;
-  /** {@link DeleteRolePermissionsBoundary 删除角色权限边界}({@link DeleteRolePermissionsBoundaryRequest 请求参数}): {@link DeleteRolePermissionsBoundaryResponse 返回参数} */
+  /** 删除角色权限边界 {@link DeleteRolePermissionsBoundaryRequest} {@link DeleteRolePermissionsBoundaryResponse} */
   DeleteRolePermissionsBoundary(data?: DeleteRolePermissionsBoundaryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRolePermissionsBoundaryResponse>;
-  /** {@link DeleteSAMLProvider 删除SAML身份提供商}({@link DeleteSAMLProviderRequest 请求参数}): {@link DeleteSAMLProviderResponse 返回参数} */
+  /** 删除SAML身份提供商 {@link DeleteSAMLProviderRequest} {@link DeleteSAMLProviderResponse} */
   DeleteSAMLProvider(data: DeleteSAMLProviderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSAMLProviderResponse>;
-  /** {@link DeleteServiceLinkedRole 删除服务相关角色}({@link DeleteServiceLinkedRoleRequest 请求参数}): {@link DeleteServiceLinkedRoleResponse 返回参数} */
+  /** 删除服务相关角色 {@link DeleteServiceLinkedRoleRequest} {@link DeleteServiceLinkedRoleResponse} */
   DeleteServiceLinkedRole(data: DeleteServiceLinkedRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceLinkedRoleResponse>;
-  /** {@link DeleteUser 删除子用户}({@link DeleteUserRequest 请求参数}): {@link DeleteUserResponse 返回参数} */
+  /** 删除子用户 {@link DeleteUserRequest} {@link DeleteUserResponse} */
   DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
-  /** {@link DeleteUserPermissionsBoundary 删除用户权限边界}({@link DeleteUserPermissionsBoundaryRequest 请求参数}): {@link DeleteUserPermissionsBoundaryResponse 返回参数} */
+  /** 删除用户权限边界 {@link DeleteUserPermissionsBoundaryRequest} {@link DeleteUserPermissionsBoundaryResponse} */
   DeleteUserPermissionsBoundary(data: DeleteUserPermissionsBoundaryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserPermissionsBoundaryResponse>;
-  /** {@link DescribeOIDCConfig 查询角色OIDC配置}({@link DescribeOIDCConfigRequest 请求参数}): {@link DescribeOIDCConfigResponse 返回参数} */
+  /** 查询角色OIDC配置 {@link DescribeOIDCConfigRequest} {@link DescribeOIDCConfigResponse} */
   DescribeOIDCConfig(data: DescribeOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOIDCConfigResponse>;
-  /** {@link DescribeRoleList 获取角色列表}({@link DescribeRoleListRequest 请求参数}): {@link DescribeRoleListResponse 返回参数} */
+  /** 获取角色列表 {@link DescribeRoleListRequest} {@link DescribeRoleListResponse} */
   DescribeRoleList(data: DescribeRoleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoleListResponse>;
-  /** {@link DescribeSafeAuthFlag 查询用户安全设置}({@link DescribeSafeAuthFlagRequest 请求参数}): {@link DescribeSafeAuthFlagResponse 返回参数} */
+  /** 查询用户安全设置 {@link DescribeSafeAuthFlagRequest} {@link DescribeSafeAuthFlagResponse} */
   DescribeSafeAuthFlag(data?: DescribeSafeAuthFlagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSafeAuthFlagResponse>;
-  /** {@link DescribeSafeAuthFlagColl 查询安全设置}({@link DescribeSafeAuthFlagCollRequest 请求参数}): {@link DescribeSafeAuthFlagCollResponse 返回参数} */
+  /** 查询安全设置 {@link DescribeSafeAuthFlagCollRequest} {@link DescribeSafeAuthFlagCollResponse} */
   DescribeSafeAuthFlagColl(data: DescribeSafeAuthFlagCollRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSafeAuthFlagCollResponse>;
-  /** {@link DescribeSafeAuthFlagIntl 查询安全设置(国际站)}({@link DescribeSafeAuthFlagIntlRequest 请求参数}): {@link DescribeSafeAuthFlagIntlResponse 返回参数} */
+  /** 查询安全设置(国际站) {@link DescribeSafeAuthFlagIntlRequest} {@link DescribeSafeAuthFlagIntlResponse} */
   DescribeSafeAuthFlagIntl(data?: DescribeSafeAuthFlagIntlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSafeAuthFlagIntlResponse>;
-  /** {@link DescribeSubAccounts 通过子用户UIN列表查询子用户}({@link DescribeSubAccountsRequest 请求参数}): {@link DescribeSubAccountsResponse 返回参数} */
+  /** 通过子用户UIN列表查询子用户 {@link DescribeSubAccountsRequest} {@link DescribeSubAccountsResponse} */
   DescribeSubAccounts(data: DescribeSubAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubAccountsResponse>;
-  /** {@link DescribeUserOIDCConfig 查询用户OIDC配置}({@link DescribeUserOIDCConfigRequest 请求参数}): {@link DescribeUserOIDCConfigResponse 返回参数} */
+  /** 查询用户OIDC配置 {@link DescribeUserOIDCConfigRequest} {@link DescribeUserOIDCConfigResponse} */
   DescribeUserOIDCConfig(data?: DescribeUserOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserOIDCConfigResponse>;
-  /** {@link DescribeUserSAMLConfig 查询用户SAML配置}({@link DescribeUserSAMLConfigRequest 请求参数}): {@link DescribeUserSAMLConfigResponse 返回参数} */
+  /** 查询用户SAML配置 {@link DescribeUserSAMLConfigRequest} {@link DescribeUserSAMLConfigResponse} */
   DescribeUserSAMLConfig(data?: DescribeUserSAMLConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserSAMLConfigResponse>;
-  /** {@link DetachGroupPolicy 解除绑定到用户组的策略}({@link DetachGroupPolicyRequest 请求参数}): {@link DetachGroupPolicyResponse 返回参数} */
+  /** 解除绑定到用户组的策略 {@link DetachGroupPolicyRequest} {@link DetachGroupPolicyResponse} */
   DetachGroupPolicy(data: DetachGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DetachGroupPolicyResponse>;
-  /** {@link DetachRolePolicy 解绑角色的策略}({@link DetachRolePolicyRequest 请求参数}): {@link DetachRolePolicyResponse 返回参数} */
+  /** 解绑角色的策略 {@link DetachRolePolicyRequest} {@link DetachRolePolicyResponse} */
   DetachRolePolicy(data?: DetachRolePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DetachRolePolicyResponse>;
-  /** {@link DetachUserPolicy 解除绑定到用户的策略}({@link DetachUserPolicyRequest 请求参数}): {@link DetachUserPolicyResponse 返回参数} */
+  /** 解除绑定到用户的策略 {@link DetachUserPolicyRequest} {@link DetachUserPolicyResponse} */
   DetachUserPolicy(data: DetachUserPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DetachUserPolicyResponse>;
-  /** {@link DisableUserSSO 禁用用户SSO}({@link DisableUserSSORequest 请求参数}): {@link DisableUserSSOResponse 返回参数} */
+  /** 禁用用户SSO {@link DisableUserSSORequest} {@link DisableUserSSOResponse} */
   DisableUserSSO(data?: DisableUserSSORequest, config?: AxiosRequestConfig): AxiosPromise<DisableUserSSOResponse>;
-  /** {@link GetAccountSummary 查询账户摘要}({@link GetAccountSummaryRequest 请求参数}): {@link GetAccountSummaryResponse 返回参数} */
+  /** 查询账户摘要 {@link GetAccountSummaryRequest} {@link GetAccountSummaryResponse} */
   GetAccountSummary(data?: GetAccountSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<GetAccountSummaryResponse>;
-  /** {@link GetCustomMFATokenInfo 获取自定义多因子Token关联信息}({@link GetCustomMFATokenInfoRequest 请求参数}): {@link GetCustomMFATokenInfoResponse 返回参数} */
+  /** 获取自定义多因子Token关联信息 {@link GetCustomMFATokenInfoRequest} {@link GetCustomMFATokenInfoResponse} */
   GetCustomMFATokenInfo(data: GetCustomMFATokenInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetCustomMFATokenInfoResponse>;
-  /** {@link GetGroup 查询用户组详情}({@link GetGroupRequest 请求参数}): {@link GetGroupResponse 返回参数} */
+  /** 查询用户组详情 {@link GetGroupRequest} {@link GetGroupResponse} */
   GetGroup(data: GetGroupRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupResponse>;
-  /** {@link GetPolicy 查看策略详情}({@link GetPolicyRequest 请求参数}): {@link GetPolicyResponse 返回参数} */
+  /** 查看策略详情 {@link GetPolicyRequest} {@link GetPolicyResponse} */
   GetPolicy(data: GetPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<GetPolicyResponse>;
-  /** {@link GetPolicyVersion 查询策略版本详情}({@link GetPolicyVersionRequest 请求参数}): {@link GetPolicyVersionResponse 返回参数} */
+  /** 查询策略版本详情 {@link GetPolicyVersionRequest} {@link GetPolicyVersionResponse} */
   GetPolicyVersion(data: GetPolicyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<GetPolicyVersionResponse>;
-  /** {@link GetRole 获取角色详情}({@link GetRoleRequest 请求参数}): {@link GetRoleResponse 返回参数} */
+  /** 获取角色详情 {@link GetRoleRequest} {@link GetRoleResponse} */
   GetRole(data?: GetRoleRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoleResponse>;
-  /** {@link GetRolePermissionBoundary 获取角色权限边界}({@link GetRolePermissionBoundaryRequest 请求参数}): {@link GetRolePermissionBoundaryResponse 返回参数} */
+  /** 获取角色权限边界 {@link GetRolePermissionBoundaryRequest} {@link GetRolePermissionBoundaryResponse} */
   GetRolePermissionBoundary(data: GetRolePermissionBoundaryRequest, config?: AxiosRequestConfig): AxiosPromise<GetRolePermissionBoundaryResponse>;
-  /** {@link GetSAMLProvider 查询SAML身份提供商详情}({@link GetSAMLProviderRequest 请求参数}): {@link GetSAMLProviderResponse 返回参数} */
+  /** 查询SAML身份提供商详情 {@link GetSAMLProviderRequest} {@link GetSAMLProviderResponse} */
   GetSAMLProvider(data: GetSAMLProviderRequest, config?: AxiosRequestConfig): AxiosPromise<GetSAMLProviderResponse>;
-  /** {@link GetSecurityLastUsed 获取密钥最近使用情况}({@link GetSecurityLastUsedRequest 请求参数}): {@link GetSecurityLastUsedResponse 返回参数} */
+  /** 获取密钥最近使用情况 {@link GetSecurityLastUsedRequest} {@link GetSecurityLastUsedResponse} */
   GetSecurityLastUsed(data: GetSecurityLastUsedRequest, config?: AxiosRequestConfig): AxiosPromise<GetSecurityLastUsedResponse>;
-  /** {@link GetServiceLinkedRoleDeletionStatus 获取服务相关角色删除状态}({@link GetServiceLinkedRoleDeletionStatusRequest 请求参数}): {@link GetServiceLinkedRoleDeletionStatusResponse 返回参数} */
+  /** 获取服务相关角色删除状态 {@link GetServiceLinkedRoleDeletionStatusRequest} {@link GetServiceLinkedRoleDeletionStatusResponse} */
   GetServiceLinkedRoleDeletionStatus(data: GetServiceLinkedRoleDeletionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetServiceLinkedRoleDeletionStatusResponse>;
-  /** {@link GetUser 查询子用户}({@link GetUserRequest 请求参数}): {@link GetUserResponse 返回参数} */
+  /** 查询子用户 {@link GetUserRequest} {@link GetUserResponse} */
   GetUser(data: GetUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetUserResponse>;
-  /** {@link GetUserAppId 获取用户AppId}({@link GetUserAppIdRequest 请求参数}): {@link GetUserAppIdResponse 返回参数} */
+  /** 获取用户AppId {@link GetUserAppIdRequest} {@link GetUserAppIdResponse} */
   GetUserAppId(data?: GetUserAppIdRequest, config?: AxiosRequestConfig): AxiosPromise<GetUserAppIdResponse>;
-  /** {@link GetUserPermissionBoundary 获取用户权限边界}({@link GetUserPermissionBoundaryRequest 请求参数}): {@link GetUserPermissionBoundaryResponse 返回参数} */
+  /** 获取用户权限边界 {@link GetUserPermissionBoundaryRequest} {@link GetUserPermissionBoundaryResponse} */
   GetUserPermissionBoundary(data: GetUserPermissionBoundaryRequest, config?: AxiosRequestConfig): AxiosPromise<GetUserPermissionBoundaryResponse>;
-  /** {@link ListAccessKeys 列出访问密钥}({@link ListAccessKeysRequest 请求参数}): {@link ListAccessKeysResponse 返回参数} */
+  /** 列出访问密钥 {@link ListAccessKeysRequest} {@link ListAccessKeysResponse} */
   ListAccessKeys(data?: ListAccessKeysRequest, config?: AxiosRequestConfig): AxiosPromise<ListAccessKeysResponse>;
-  /** {@link ListAttachedGroupPolicies 查询用户组关联的策略列表}({@link ListAttachedGroupPoliciesRequest 请求参数}): {@link ListAttachedGroupPoliciesResponse 返回参数} */
+  /** 查询用户组关联的策略列表 {@link ListAttachedGroupPoliciesRequest} {@link ListAttachedGroupPoliciesResponse} */
   ListAttachedGroupPolicies(data: ListAttachedGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAttachedGroupPoliciesResponse>;
-  /** {@link ListAttachedRolePolicies 获取角色绑定的策略列表}({@link ListAttachedRolePoliciesRequest 请求参数}): {@link ListAttachedRolePoliciesResponse 返回参数} */
+  /** 获取角色绑定的策略列表 {@link ListAttachedRolePoliciesRequest} {@link ListAttachedRolePoliciesResponse} */
   ListAttachedRolePolicies(data: ListAttachedRolePoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAttachedRolePoliciesResponse>;
-  /** {@link ListAttachedUserAllPolicies 列出用户关联的策略（包括随组关联）}({@link ListAttachedUserAllPoliciesRequest 请求参数}): {@link ListAttachedUserAllPoliciesResponse 返回参数} */
+  /** 列出用户关联的策略（包括随组关联） {@link ListAttachedUserAllPoliciesRequest} {@link ListAttachedUserAllPoliciesResponse} */
   ListAttachedUserAllPolicies(data: ListAttachedUserAllPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAttachedUserAllPoliciesResponse>;
-  /** {@link ListAttachedUserPolicies 查询子账号关联的策略列表}({@link ListAttachedUserPoliciesRequest 请求参数}): {@link ListAttachedUserPoliciesResponse 返回参数} */
+  /** 查询子账号关联的策略列表 {@link ListAttachedUserPoliciesRequest} {@link ListAttachedUserPoliciesResponse} */
   ListAttachedUserPolicies(data: ListAttachedUserPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAttachedUserPoliciesResponse>;
-  /** {@link ListCollaborators 获取协作者列表}({@link ListCollaboratorsRequest 请求参数}): {@link ListCollaboratorsResponse 返回参数} */
+  /** 获取协作者列表 {@link ListCollaboratorsRequest} {@link ListCollaboratorsResponse} */
   ListCollaborators(data?: ListCollaboratorsRequest, config?: AxiosRequestConfig): AxiosPromise<ListCollaboratorsResponse>;
-  /** {@link ListEntitiesForPolicy 查询策略关联的实体列表}({@link ListEntitiesForPolicyRequest 请求参数}): {@link ListEntitiesForPolicyResponse 返回参数} */
+  /** 查询策略关联的实体列表 {@link ListEntitiesForPolicyRequest} {@link ListEntitiesForPolicyResponse} */
   ListEntitiesForPolicy(data: ListEntitiesForPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ListEntitiesForPolicyResponse>;
-  /** {@link ListGroups 查询用户组列表}({@link ListGroupsRequest 请求参数}): {@link ListGroupsResponse 返回参数} */
+  /** 查询用户组列表 {@link ListGroupsRequest} {@link ListGroupsResponse} */
   ListGroups(data?: ListGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListGroupsResponse>;
-  /** {@link ListGroupsForUser 列出用户关联的用户组}({@link ListGroupsForUserRequest 请求参数}): {@link ListGroupsForUserResponse 返回参数} */
+  /** 列出用户关联的用户组 {@link ListGroupsForUserRequest} {@link ListGroupsForUserResponse} */
   ListGroupsForUser(data?: ListGroupsForUserRequest, config?: AxiosRequestConfig): AxiosPromise<ListGroupsForUserResponse>;
-  /** {@link ListPolicies 查询策略列表}({@link ListPoliciesRequest 请求参数}): {@link ListPoliciesResponse 返回参数} */
+  /** 查询策略列表 {@link ListPoliciesRequest} {@link ListPoliciesResponse} */
   ListPolicies(data?: ListPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ListPoliciesResponse>;
-  /** {@link ListPoliciesGrantingServiceAccess 获取所有已授权服务}({@link ListPoliciesGrantingServiceAccessRequest 请求参数}): {@link ListPoliciesGrantingServiceAccessResponse 返回参数} */
+  /** 获取所有已授权服务 {@link ListPoliciesGrantingServiceAccessRequest} {@link ListPoliciesGrantingServiceAccessResponse} */
   ListPoliciesGrantingServiceAccess(data?: ListPoliciesGrantingServiceAccessRequest, config?: AxiosRequestConfig): AxiosPromise<ListPoliciesGrantingServiceAccessResponse>;
-  /** {@link ListPolicyVersions 获取策略版本列表}({@link ListPolicyVersionsRequest 请求参数}): {@link ListPolicyVersionsResponse 返回参数} */
+  /** 获取策略版本列表 {@link ListPolicyVersionsRequest} {@link ListPolicyVersionsResponse} */
   ListPolicyVersions(data: ListPolicyVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListPolicyVersionsResponse>;
-  /** {@link ListSAMLProviders 查询SAML身份提供商列表}({@link ListSAMLProvidersRequest 请求参数}): {@link ListSAMLProvidersResponse 返回参数} */
+  /** 查询SAML身份提供商列表 {@link ListSAMLProvidersRequest} {@link ListSAMLProvidersResponse} */
   ListSAMLProviders(data?: ListSAMLProvidersRequest, config?: AxiosRequestConfig): AxiosPromise<ListSAMLProvidersResponse>;
-  /** {@link ListUsers 拉取子用户}({@link ListUsersRequest 请求参数}): {@link ListUsersResponse 返回参数} */
+  /** 拉取子用户 {@link ListUsersRequest} {@link ListUsersResponse} */
   ListUsers(data?: ListUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsersResponse>;
-  /** {@link ListUsersForGroup 查询用户组关联的用户列表}({@link ListUsersForGroupRequest 请求参数}): {@link ListUsersForGroupResponse 返回参数} */
+  /** 查询用户组关联的用户列表 {@link ListUsersForGroupRequest} {@link ListUsersForGroupResponse} */
   ListUsersForGroup(data: ListUsersForGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsersForGroupResponse>;
-  /** {@link ListWeChatWorkSubAccounts 获取企业微信子用户列表}({@link ListWeChatWorkSubAccountsRequest 请求参数}): {@link ListWeChatWorkSubAccountsResponse 返回参数} */
+  /** 获取企业微信子用户列表 {@link ListWeChatWorkSubAccountsRequest} {@link ListWeChatWorkSubAccountsResponse} */
   ListWeChatWorkSubAccounts(data: ListWeChatWorkSubAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWeChatWorkSubAccountsResponse>;
-  /** {@link PutRolePermissionsBoundary 设置角色权限边界}({@link PutRolePermissionsBoundaryRequest 请求参数}): {@link PutRolePermissionsBoundaryResponse 返回参数} */
+  /** 设置角色权限边界 {@link PutRolePermissionsBoundaryRequest} {@link PutRolePermissionsBoundaryResponse} */
   PutRolePermissionsBoundary(data: PutRolePermissionsBoundaryRequest, config?: AxiosRequestConfig): AxiosPromise<PutRolePermissionsBoundaryResponse>;
-  /** {@link PutUserPermissionsBoundary 设置用户权限边界}({@link PutUserPermissionsBoundaryRequest 请求参数}): {@link PutUserPermissionsBoundaryResponse 返回参数} */
+  /** 设置用户权限边界 {@link PutUserPermissionsBoundaryRequest} {@link PutUserPermissionsBoundaryResponse} */
   PutUserPermissionsBoundary(data: PutUserPermissionsBoundaryRequest, config?: AxiosRequestConfig): AxiosPromise<PutUserPermissionsBoundaryResponse>;
-  /** {@link RemoveUserFromGroup 从用户组删除用户}({@link RemoveUserFromGroupRequest 请求参数}): {@link RemoveUserFromGroupResponse 返回参数} */
+  /** 从用户组删除用户 {@link RemoveUserFromGroupRequest} {@link RemoveUserFromGroupResponse} */
   RemoveUserFromGroup(data: RemoveUserFromGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserFromGroupResponse>;
-  /** {@link SetDefaultPolicyVersion 设置生效的策略版本}({@link SetDefaultPolicyVersionRequest 请求参数}): {@link SetDefaultPolicyVersionResponse 返回参数} */
+  /** 设置生效的策略版本 {@link SetDefaultPolicyVersionRequest} {@link SetDefaultPolicyVersionResponse} */
   SetDefaultPolicyVersion(data: SetDefaultPolicyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<SetDefaultPolicyVersionResponse>;
-  /** {@link SetMfaFlag 设置子用户的登录保护和敏感操作校验方式}({@link SetMfaFlagRequest 请求参数}): {@link SetMfaFlagResponse 返回参数} */
+  /** 设置子用户的登录保护和敏感操作校验方式 {@link SetMfaFlagRequest} {@link SetMfaFlagResponse} */
   SetMfaFlag(data?: SetMfaFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetMfaFlagResponse>;
-  /** {@link TagRole 角色绑定标签}({@link TagRoleRequest 请求参数}): {@link TagRoleResponse 返回参数} */
+  /** 角色绑定标签 {@link TagRoleRequest} {@link TagRoleResponse} */
   TagRole(data: TagRoleRequest, config?: AxiosRequestConfig): AxiosPromise<TagRoleResponse>;
-  /** {@link UntagRole 角色解绑标签}({@link UntagRoleRequest 请求参数}): {@link UntagRoleResponse 返回参数} */
+  /** 角色解绑标签 {@link UntagRoleRequest} {@link UntagRoleResponse} */
   UntagRole(data: UntagRoleRequest, config?: AxiosRequestConfig): AxiosPromise<UntagRoleResponse>;
-  /** {@link UpdateAccessKey 更新访问密钥}({@link UpdateAccessKeyRequest 请求参数}): {@link UpdateAccessKeyResponse 返回参数} */
+  /** 更新访问密钥 {@link UpdateAccessKeyRequest} {@link UpdateAccessKeyResponse} */
   UpdateAccessKey(data: UpdateAccessKeyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAccessKeyResponse>;
-  /** {@link UpdateAssumeRolePolicy 修改角色信任策略}({@link UpdateAssumeRolePolicyRequest 请求参数}): {@link UpdateAssumeRolePolicyResponse 返回参数} */
+  /** 修改角色信任策略 {@link UpdateAssumeRolePolicyRequest} {@link UpdateAssumeRolePolicyResponse} */
   UpdateAssumeRolePolicy(data: UpdateAssumeRolePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAssumeRolePolicyResponse>;
-  /** {@link UpdateGroup 更新用户组}({@link UpdateGroupRequest 请求参数}): {@link UpdateGroupResponse 返回参数} */
+  /** 更新用户组 {@link UpdateGroupRequest} {@link UpdateGroupResponse} */
   UpdateGroup(data: UpdateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGroupResponse>;
-  /** {@link UpdateOIDCConfig 修改角色OIDC配置}({@link UpdateOIDCConfigRequest 请求参数}): {@link UpdateOIDCConfigResponse 返回参数} */
+  /** 修改角色OIDC配置 {@link UpdateOIDCConfigRequest} {@link UpdateOIDCConfigResponse} */
   UpdateOIDCConfig(data: UpdateOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOIDCConfigResponse>;
-  /** {@link UpdatePolicy 更新策略信息}({@link UpdatePolicyRequest 请求参数}): {@link UpdatePolicyResponse 返回参数} */
+  /** 更新策略信息 {@link UpdatePolicyRequest} {@link UpdatePolicyResponse} */
   UpdatePolicy(data?: UpdatePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePolicyResponse>;
-  /** {@link UpdateRoleConsoleLogin 修改角色是否可登录}({@link UpdateRoleConsoleLoginRequest 请求参数}): {@link UpdateRoleConsoleLoginResponse 返回参数} */
+  /** 修改角色是否可登录 {@link UpdateRoleConsoleLoginRequest} {@link UpdateRoleConsoleLoginResponse} */
   UpdateRoleConsoleLogin(data: UpdateRoleConsoleLoginRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRoleConsoleLoginResponse>;
-  /** {@link UpdateRoleDescription 修改角色描述信息}({@link UpdateRoleDescriptionRequest 请求参数}): {@link UpdateRoleDescriptionResponse 返回参数} */
+  /** 修改角色描述信息 {@link UpdateRoleDescriptionRequest} {@link UpdateRoleDescriptionResponse} */
   UpdateRoleDescription(data: UpdateRoleDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRoleDescriptionResponse>;
-  /** {@link UpdateSAMLProvider 更新SAML身份提供商信息}({@link UpdateSAMLProviderRequest 请求参数}): {@link UpdateSAMLProviderResponse 返回参数} */
+  /** 更新SAML身份提供商信息 {@link UpdateSAMLProviderRequest} {@link UpdateSAMLProviderResponse} */
   UpdateSAMLProvider(data: UpdateSAMLProviderRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSAMLProviderResponse>;
-  /** {@link UpdateUser 更新子用户}({@link UpdateUserRequest 请求参数}): {@link UpdateUserResponse 返回参数} */
+  /** 更新子用户 {@link UpdateUserRequest} {@link UpdateUserResponse} */
   UpdateUser(data: UpdateUserRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserResponse>;
-  /** {@link UpdateUserOIDCConfig 修改用户OIDC配置}({@link UpdateUserOIDCConfigRequest 请求参数}): {@link UpdateUserOIDCConfigResponse 返回参数} */
+  /** 修改用户OIDC配置 {@link UpdateUserOIDCConfigRequest} {@link UpdateUserOIDCConfigResponse} */
   UpdateUserOIDCConfig(data: UpdateUserOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserOIDCConfigResponse>;
-  /** {@link UpdateUserSAMLConfig 修改用户SAML配置}({@link UpdateUserSAMLConfigRequest 请求参数}): {@link UpdateUserSAMLConfigResponse 返回参数} */
+  /** 修改用户SAML配置 {@link UpdateUserSAMLConfigRequest} {@link UpdateUserSAMLConfigResponse} */
   UpdateUserSAMLConfig(data: UpdateUserSAMLConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserSAMLConfigResponse>;
 }
 

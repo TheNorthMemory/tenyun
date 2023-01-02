@@ -628,7 +628,7 @@ declare interface AttachCamRoleRequest {
 }
 
 declare interface AttachCamRoleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -642,7 +642,7 @@ declare interface BindPsaTagRequest {
 }
 
 declare interface BindPsaTagResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -732,7 +732,7 @@ declare interface BuyDevicesRequest {
 declare interface BuyDevicesResponse {
   /** 购买的物理机实例ID列表 */
   InstanceIds?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -750,7 +750,7 @@ declare interface CreateCustomImageResponse {
   TaskId: number;
   /** 镜像ID */
   ImageId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -768,7 +768,7 @@ declare interface CreatePsaRegulationRequest {
 declare interface CreatePsaRegulationResponse {
   /** 创建的预授权规则ID */
   PsaId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -798,7 +798,7 @@ declare interface CreateSpotDeviceResponse {
   ResourceIds?: string[];
   /** 任务ID */
   FlowId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -814,7 +814,7 @@ declare interface CreateUserCmdRequest {
 declare interface CreateUserCmdResponse {
   /** 脚本ID */
   CmdId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -826,7 +826,7 @@ declare interface DeleteCustomImagesRequest {
 declare interface DeleteCustomImagesResponse {
   /** 黑石异步任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -836,7 +836,7 @@ declare interface DeletePsaRegulationRequest {
 }
 
 declare interface DeletePsaRegulationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -846,7 +846,7 @@ declare interface DeleteUserCmdsRequest {
 }
 
 declare interface DeleteUserCmdsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -858,7 +858,7 @@ declare interface DescribeCustomImageProcessRequest {
 declare interface DescribeCustomImageProcessResponse {
   /** 镜像制作进度 */
   CustomImageProcessSet?: CustomImageProcess[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -884,7 +884,7 @@ declare interface DescribeCustomImagesResponse {
   TotalCount?: number;
   /** 镜像信息列表 */
   CustomImageSet?: CustomImage[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -912,7 +912,7 @@ declare interface DescribeDeviceClassPartitionRequest {
 declare interface DescribeDeviceClassPartitionResponse {
   /** 支持的RAID格式列表 */
   DeviceClassPartitionInfoSet?: DeviceClassPartitionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -926,7 +926,7 @@ declare interface DescribeDeviceClassRequest {
 declare interface DescribeDeviceClassResponse {
   /** 物理机设备类型列表 */
   DeviceClassSet?: DeviceClass[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -938,7 +938,7 @@ declare interface DescribeDeviceHardwareInfoRequest {
 declare interface DescribeDeviceHardwareInfoResponse {
   /** 设备硬件配置信息 */
   DeviceHardwareInfoSet?: DeviceHardwareInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -970,7 +970,7 @@ declare interface DescribeDeviceInventoryRequest {
 declare interface DescribeDeviceInventoryResponse {
   /** 库存设备数量 */
   DeviceCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -992,7 +992,7 @@ declare interface DescribeDeviceOperationLogResponse {
   DeviceOperationLogSet?: DeviceOperationLog[];
   /** 返回数目 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1004,7 +1004,7 @@ declare interface DescribeDevicePartitionRequest {
 declare interface DescribeDevicePartitionResponse {
   /** 物理机分区格式 */
   DevicePartition?: DevicePartition;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1028,7 +1028,7 @@ declare interface DescribeDevicePositionResponse {
   TotalCount?: number;
   /** 设备所在机架信息 */
   DevicePositionInfoSet?: DevicePositionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1044,7 +1044,7 @@ declare interface DescribeDevicePriceInfoRequest {
 declare interface DescribeDevicePriceInfoResponse {
   /** 服务器价格信息列表 */
   DevicePriceInfoSet?: DevicePriceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1094,7 +1094,7 @@ declare interface DescribeDevicesResponse {
   TotalCount: number;
   /** 物理机信息列表 */
   DeviceInfoSet: DeviceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1108,7 +1108,7 @@ declare interface DescribeHardwareSpecificationResponse {
   MemSet?: number[];
   /** 硬盘型号列表 */
   DiskInfoSet?: DiskInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1122,7 +1122,7 @@ declare interface DescribeHostedDeviceOutBandInfoRequest {
 declare interface DescribeHostedDeviceOutBandInfoResponse {
   /** 托管设备带外信息 */
   HostedDeviceOutBandInfoSet?: HostedDeviceOutBandInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1136,7 +1136,7 @@ declare interface DescribeOperationResultResponse {
   TaskStatus?: number;
   /** 各实例对应任务的状态ID */
   SubtaskStatusSet?: SubtaskStatus[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1148,7 +1148,7 @@ declare interface DescribeOsInfoRequest {
 declare interface DescribeOsInfoResponse {
   /** 操作系统信息列表 */
   OsInfoSet?: OsInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1174,7 +1174,7 @@ declare interface DescribePsaRegulationsResponse {
   TotalCount?: number;
   /** 返回规则列表 */
   PsaRegulations?: PsaRegulation[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1186,7 +1186,7 @@ declare interface DescribeRegionsRequest {
 declare interface DescribeRegionsResponse {
   /** 地域信息 */
   RegionInfoSet?: RegionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1196,7 +1196,7 @@ declare interface DescribeRepairTaskConstantRequest {
 declare interface DescribeRepairTaskConstantResponse {
   /** 故障类型ID与对应中文名列表 */
   TaskTypeSet?: TaskType[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1230,7 +1230,7 @@ declare interface DescribeTaskInfoResponse {
   TotalCount: number;
   /** 任务信息列表 */
   TaskInfoSet: TaskInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1248,7 +1248,7 @@ declare interface DescribeTaskOperationLogResponse {
   TaskOperationLogSet?: TaskOperationLog[];
   /** 日志条数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1272,7 +1272,7 @@ declare interface DescribeUserCmdTaskInfoResponse {
   TotalCount?: number;
   /** 自定义脚本任务详细信息列表 */
   UserCmdTaskInfoSet?: UserCmdTaskInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1292,7 +1292,7 @@ declare interface DescribeUserCmdTasksResponse {
   TotalCount?: number;
   /** 脚本任务信息列表 */
   UserCmdTasks?: UserCmdTask[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1316,7 +1316,7 @@ declare interface DescribeUserCmdsResponse {
   TotalCount?: number;
   /** 脚本信息列表 */
   UserCmds?: UserCmd[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1326,7 +1326,7 @@ declare interface DetachCamRoleRequest {
 }
 
 declare interface DetachCamRoleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1340,7 +1340,7 @@ declare interface ModifyCustomImageAttributeRequest {
 }
 
 declare interface ModifyCustomImageAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1350,7 +1350,7 @@ declare interface ModifyDeviceAliasesRequest {
 }
 
 declare interface ModifyDeviceAliasesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1362,7 +1362,7 @@ declare interface ModifyDeviceAutoRenewFlagRequest {
 }
 
 declare interface ModifyDeviceAutoRenewFlagResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1382,7 +1382,7 @@ declare interface ModifyLanIpRequest {
 declare interface ModifyLanIpResponse {
   /** 黑石异步任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1392,7 +1392,7 @@ declare interface ModifyPayModePre2PostRequest {
 }
 
 declare interface ModifyPayModePre2PostResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1410,7 +1410,7 @@ declare interface ModifyPsaRegulationRequest {
 }
 
 declare interface ModifyPsaRegulationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1426,7 +1426,7 @@ declare interface ModifyUserCmdRequest {
 }
 
 declare interface ModifyUserCmdResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1438,7 +1438,7 @@ declare interface OfflineDevicesRequest {
 declare interface OfflineDevicesResponse {
   /** 黑石异步任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1450,7 +1450,7 @@ declare interface RebootDevicesRequest {
 declare interface RebootDevicesResponse {
   /** 异步任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1462,7 +1462,7 @@ declare interface RecoverDevicesRequest {
 declare interface RecoverDevicesResponse {
   /** 黑石异步任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1512,7 +1512,7 @@ declare interface ReloadDeviceOsRequest {
 declare interface ReloadDeviceOsResponse {
   /** 黑石异步任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1528,7 +1528,7 @@ declare interface RepairTaskControlRequest {
 declare interface RepairTaskControlResponse {
   /** 出参TaskId是黑石异步任务ID，不同于入参TaskId字段。此字段可作为DescriptionOperationResult查询异步任务状态接口的入参，查询异步任务执行结果。 */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1542,7 +1542,7 @@ declare interface ResetDevicePasswordRequest {
 declare interface ResetDevicePasswordResponse {
   /** 黑石异步任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1554,7 +1554,7 @@ declare interface ReturnDevicesRequest {
 declare interface ReturnDevicesResponse {
   /** 黑石异步任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1576,7 +1576,7 @@ declare interface RunUserCmdResponse {
   SuccessTaskInfoSet?: SuccessTaskInfo[];
   /** 运行失败的任务信息列表 */
   FailedTaskInfoSet?: FailedTaskInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1588,7 +1588,7 @@ declare interface SetOutBandVpnAuthPasswordRequest {
 }
 
 declare interface SetOutBandVpnAuthPasswordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1600,7 +1600,7 @@ declare interface ShutdownDevicesRequest {
 declare interface ShutdownDevicesResponse {
   /** 异步任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1612,7 +1612,7 @@ declare interface StartDevicesRequest {
 declare interface StartDevicesResponse {
   /** 异步任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1626,118 +1626,118 @@ declare interface UnbindPsaTagRequest {
 }
 
 declare interface UnbindPsaTagResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Bm 黑石物理服务器1.0} */
 declare interface Bm {
   (): Versions;
-  /** {@link AttachCamRole 服务器绑定CAM角色}({@link AttachCamRoleRequest 请求参数}): {@link AttachCamRoleResponse 返回参数} */
+  /** 服务器绑定CAM角色 {@link AttachCamRoleRequest} {@link AttachCamRoleResponse} */
   AttachCamRole(data: AttachCamRoleRequest, config?: AxiosRequestConfig): AxiosPromise<AttachCamRoleResponse>;
-  /** {@link BindPsaTag 为预授权规则绑定标签}({@link BindPsaTagRequest 请求参数}): {@link BindPsaTagResponse 返回参数} */
+  /** 为预授权规则绑定标签 {@link BindPsaTagRequest} {@link BindPsaTagResponse} */
   BindPsaTag(data: BindPsaTagRequest, config?: AxiosRequestConfig): AxiosPromise<BindPsaTagResponse>;
-  /** {@link BuyDevices 购买物理机}({@link BuyDevicesRequest 请求参数}): {@link BuyDevicesResponse 返回参数} */
+  /** 购买物理机 {@link BuyDevicesRequest} {@link BuyDevicesResponse} */
   BuyDevices(data: BuyDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<BuyDevicesResponse>;
-  /** {@link CreateCustomImage 创建自定义镜像}({@link CreateCustomImageRequest 请求参数}): {@link CreateCustomImageResponse 返回参数} */
+  /** 创建自定义镜像 {@link CreateCustomImageRequest} {@link CreateCustomImageResponse} */
   CreateCustomImage(data: CreateCustomImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomImageResponse>;
-  /** {@link CreatePsaRegulation 创建预授权规则}({@link CreatePsaRegulationRequest 请求参数}): {@link CreatePsaRegulationResponse 返回参数} */
+  /** 创建预授权规则 {@link CreatePsaRegulationRequest} {@link CreatePsaRegulationResponse} */
   CreatePsaRegulation(data: CreatePsaRegulationRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePsaRegulationResponse>;
-  /** {@link CreateSpotDevice 创建黑石竞价实例}({@link CreateSpotDeviceRequest 请求参数}): {@link CreateSpotDeviceResponse 返回参数} */
+  /** 创建黑石竞价实例 {@link CreateSpotDeviceRequest} {@link CreateSpotDeviceResponse} */
   CreateSpotDevice(data: CreateSpotDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSpotDeviceResponse>;
-  /** {@link CreateUserCmd 创建自定义脚本}({@link CreateUserCmdRequest 请求参数}): {@link CreateUserCmdResponse 返回参数} */
+  /** 创建自定义脚本 {@link CreateUserCmdRequest} {@link CreateUserCmdResponse} */
   CreateUserCmd(data: CreateUserCmdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserCmdResponse>;
-  /** {@link DeleteCustomImages 删除自定义镜像}({@link DeleteCustomImagesRequest 请求参数}): {@link DeleteCustomImagesResponse 返回参数} */
+  /** 删除自定义镜像 {@link DeleteCustomImagesRequest} {@link DeleteCustomImagesResponse} */
   DeleteCustomImages(data: DeleteCustomImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomImagesResponse>;
-  /** {@link DeletePsaRegulation 删除预授权规则}({@link DeletePsaRegulationRequest 请求参数}): {@link DeletePsaRegulationResponse 返回参数} */
+  /** 删除预授权规则 {@link DeletePsaRegulationRequest} {@link DeletePsaRegulationResponse} */
   DeletePsaRegulation(data: DeletePsaRegulationRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePsaRegulationResponse>;
-  /** {@link DeleteUserCmds 删除自定义脚本}({@link DeleteUserCmdsRequest 请求参数}): {@link DeleteUserCmdsResponse 返回参数} */
+  /** 删除自定义脚本 {@link DeleteUserCmdsRequest} {@link DeleteUserCmdsResponse} */
   DeleteUserCmds(data: DeleteUserCmdsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserCmdsResponse>;
-  /** {@link DescribeCustomImageProcess 查询自定义镜像制作进度}({@link DescribeCustomImageProcessRequest 请求参数}): {@link DescribeCustomImageProcessResponse 返回参数} */
+  /** 查询自定义镜像制作进度 {@link DescribeCustomImageProcessRequest} {@link DescribeCustomImageProcessResponse} */
   DescribeCustomImageProcess(data: DescribeCustomImageProcessRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomImageProcessResponse>;
-  /** {@link DescribeCustomImages 查看自定义镜像列表}({@link DescribeCustomImagesRequest 请求参数}): {@link DescribeCustomImagesResponse 返回参数} */
+  /** 查看自定义镜像列表 {@link DescribeCustomImagesRequest} {@link DescribeCustomImagesResponse} */
   DescribeCustomImages(data: DescribeCustomImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomImagesResponse>;
-  /** {@link DescribeDeviceClass 查询设备型号}({@link DescribeDeviceClassRequest 请求参数}): {@link DescribeDeviceClassResponse 返回参数} */
+  /** 查询设备型号 {@link DescribeDeviceClassRequest} {@link DescribeDeviceClassResponse} */
   DescribeDeviceClass(data?: DescribeDeviceClassRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceClassResponse>;
-  /** {@link DescribeDeviceClassPartition 查询机型RAID方式以及系统盘大小}({@link DescribeDeviceClassPartitionRequest 请求参数}): {@link DescribeDeviceClassPartitionResponse 返回参数} */
+  /** 查询机型RAID方式以及系统盘大小 {@link DescribeDeviceClassPartitionRequest} {@link DescribeDeviceClassPartitionResponse} */
   DescribeDeviceClassPartition(data?: DescribeDeviceClassPartitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceClassPartitionResponse>;
-  /** {@link DescribeDeviceHardwareInfo 查询设备硬件配置信息}({@link DescribeDeviceHardwareInfoRequest 请求参数}): {@link DescribeDeviceHardwareInfoResponse 返回参数} */
+  /** 查询设备硬件配置信息 {@link DescribeDeviceHardwareInfoRequest} {@link DescribeDeviceHardwareInfoResponse} */
   DescribeDeviceHardwareInfo(data: DescribeDeviceHardwareInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceHardwareInfoResponse>;
-  /** {@link DescribeDeviceInventory 查询设备库存}({@link DescribeDeviceInventoryRequest 请求参数}): {@link DescribeDeviceInventoryResponse 返回参数} */
+  /** 查询设备库存 {@link DescribeDeviceInventoryRequest} {@link DescribeDeviceInventoryResponse} */
   DescribeDeviceInventory(data: DescribeDeviceInventoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceInventoryResponse>;
-  /** {@link DescribeDeviceOperationLog 查询设备操作日志}({@link DescribeDeviceOperationLogRequest 请求参数}): {@link DescribeDeviceOperationLogResponse 返回参数} */
+  /** 查询设备操作日志 {@link DescribeDeviceOperationLogRequest} {@link DescribeDeviceOperationLogResponse} */
   DescribeDeviceOperationLog(data: DescribeDeviceOperationLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceOperationLogResponse>;
-  /** {@link DescribeDevicePartition 获取物理机的分区格式}({@link DescribeDevicePartitionRequest 请求参数}): {@link DescribeDevicePartitionResponse 返回参数} */
+  /** 获取物理机的分区格式 {@link DescribeDevicePartitionRequest} {@link DescribeDevicePartitionResponse} */
   DescribeDevicePartition(data: DescribeDevicePartitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePartitionResponse>;
-  /** {@link DescribeDevicePosition 查询设备位置信息}({@link DescribeDevicePositionRequest 请求参数}): {@link DescribeDevicePositionResponse 返回参数} */
+  /** 查询设备位置信息 {@link DescribeDevicePositionRequest} {@link DescribeDevicePositionResponse} */
   DescribeDevicePosition(data?: DescribeDevicePositionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePositionResponse>;
-  /** {@link DescribeDevicePriceInfo 查询服务器价格信息}({@link DescribeDevicePriceInfoRequest 请求参数}): {@link DescribeDevicePriceInfoResponse 返回参数} */
+  /** 查询服务器价格信息 {@link DescribeDevicePriceInfoRequest} {@link DescribeDevicePriceInfoResponse} */
   DescribeDevicePriceInfo(data: DescribeDevicePriceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePriceInfoResponse>;
-  /** {@link DescribeDevices 查询物理机信息}({@link DescribeDevicesRequest 请求参数}): {@link DescribeDevicesResponse 返回参数} */
+  /** 查询物理机信息 {@link DescribeDevicesRequest} {@link DescribeDevicesResponse} */
   DescribeDevices(data: DescribeDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesResponse>;
-  /** {@link DescribeHardwareSpecification 查询自定义机型部件信息}({@link DescribeHardwareSpecificationRequest 请求参数}): {@link DescribeHardwareSpecificationResponse 返回参数} */
+  /** 查询自定义机型部件信息 {@link DescribeHardwareSpecificationRequest} {@link DescribeHardwareSpecificationResponse} */
   DescribeHardwareSpecification(data?: DescribeHardwareSpecificationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHardwareSpecificationResponse>;
-  /** {@link DescribeHostedDeviceOutBandInfo 查询托管设备带外信息}({@link DescribeHostedDeviceOutBandInfoRequest 请求参数}): {@link DescribeHostedDeviceOutBandInfoResponse 返回参数} */
+  /** 查询托管设备带外信息 {@link DescribeHostedDeviceOutBandInfoRequest} {@link DescribeHostedDeviceOutBandInfoResponse} */
   DescribeHostedDeviceOutBandInfo(data: DescribeHostedDeviceOutBandInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostedDeviceOutBandInfoResponse>;
-  /** {@link DescribeOperationResult 查询异步任务状态}({@link DescribeOperationResultRequest 请求参数}): {@link DescribeOperationResultResponse 返回参数} */
+  /** 查询异步任务状态 {@link DescribeOperationResultRequest} {@link DescribeOperationResultResponse} */
   DescribeOperationResult(data: DescribeOperationResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOperationResultResponse>;
-  /** {@link DescribeOsInfo 查询操作系统信息}({@link DescribeOsInfoRequest 请求参数}): {@link DescribeOsInfoResponse 返回参数} */
+  /** 查询操作系统信息 {@link DescribeOsInfoRequest} {@link DescribeOsInfoResponse} */
   DescribeOsInfo(data?: DescribeOsInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOsInfoResponse>;
-  /** {@link DescribePsaRegulations 获取预授权规则列表}({@link DescribePsaRegulationsRequest 请求参数}): {@link DescribePsaRegulationsResponse 返回参数} */
+  /** 获取预授权规则列表 {@link DescribePsaRegulationsRequest} {@link DescribePsaRegulationsResponse} */
   DescribePsaRegulations(data: DescribePsaRegulationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePsaRegulationsResponse>;
-  /** {@link DescribeRegions 查询地域以及可用区}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
+  /** 查询地域以及可用区 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** {@link DescribeRepairTaskConstant 维修任务配置获取}({@link DescribeRepairTaskConstantRequest 请求参数}): {@link DescribeRepairTaskConstantResponse 返回参数} */
+  /** 维修任务配置获取 {@link DescribeRepairTaskConstantRequest} {@link DescribeRepairTaskConstantResponse} */
   DescribeRepairTaskConstant(data?: DescribeRepairTaskConstantRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepairTaskConstantResponse>;
-  /** {@link DescribeTaskInfo 维修任务信息获取}({@link DescribeTaskInfoRequest 请求参数}): {@link DescribeTaskInfoResponse 返回参数} */
+  /** 维修任务信息获取 {@link DescribeTaskInfoRequest} {@link DescribeTaskInfoResponse} */
   DescribeTaskInfo(data: DescribeTaskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskInfoResponse>;
-  /** {@link DescribeTaskOperationLog 维修任务操作日志获取}({@link DescribeTaskOperationLogRequest 请求参数}): {@link DescribeTaskOperationLogResponse 返回参数} */
+  /** 维修任务操作日志获取 {@link DescribeTaskOperationLogRequest} {@link DescribeTaskOperationLogResponse} */
   DescribeTaskOperationLog(data: DescribeTaskOperationLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskOperationLogResponse>;
-  /** {@link DescribeUserCmdTaskInfo 获取自定义脚本任务详细信息}({@link DescribeUserCmdTaskInfoRequest 请求参数}): {@link DescribeUserCmdTaskInfoResponse 返回参数} */
+  /** 获取自定义脚本任务详细信息 {@link DescribeUserCmdTaskInfoRequest} {@link DescribeUserCmdTaskInfoResponse} */
   DescribeUserCmdTaskInfo(data: DescribeUserCmdTaskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCmdTaskInfoResponse>;
-  /** {@link DescribeUserCmdTasks 获取自定义脚本任务列表}({@link DescribeUserCmdTasksRequest 请求参数}): {@link DescribeUserCmdTasksResponse 返回参数} */
+  /** 获取自定义脚本任务列表 {@link DescribeUserCmdTasksRequest} {@link DescribeUserCmdTasksResponse} */
   DescribeUserCmdTasks(data: DescribeUserCmdTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCmdTasksResponse>;
-  /** {@link DescribeUserCmds 获取自定义脚本信息列表}({@link DescribeUserCmdsRequest 请求参数}): {@link DescribeUserCmdsResponse 返回参数} */
+  /** 获取自定义脚本信息列表 {@link DescribeUserCmdsRequest} {@link DescribeUserCmdsResponse} */
   DescribeUserCmds(data: DescribeUserCmdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCmdsResponse>;
-  /** {@link DetachCamRole 服务器解绑CAM角色}({@link DetachCamRoleRequest 请求参数}): {@link DetachCamRoleResponse 返回参数} */
+  /** 服务器解绑CAM角色 {@link DetachCamRoleRequest} {@link DetachCamRoleResponse} */
   DetachCamRole(data: DetachCamRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DetachCamRoleResponse>;
-  /** {@link ModifyCustomImageAttribute 修改自定义镜像属性}({@link ModifyCustomImageAttributeRequest 请求参数}): {@link ModifyCustomImageAttributeResponse 返回参数} */
+  /** 修改自定义镜像属性 {@link ModifyCustomImageAttributeRequest} {@link ModifyCustomImageAttributeResponse} */
   ModifyCustomImageAttribute(data: ModifyCustomImageAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomImageAttributeResponse>;
-  /** {@link ModifyDeviceAliases 修改服务器名称}({@link ModifyDeviceAliasesRequest 请求参数}): {@link ModifyDeviceAliasesResponse 返回参数} */
+  /** 修改服务器名称 {@link ModifyDeviceAliasesRequest} {@link ModifyDeviceAliasesResponse} */
   ModifyDeviceAliases(data: ModifyDeviceAliasesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceAliasesResponse>;
-  /** {@link ModifyDeviceAutoRenewFlag 修改物理机服务器自动续费标志}({@link ModifyDeviceAutoRenewFlagRequest 请求参数}): {@link ModifyDeviceAutoRenewFlagResponse 返回参数} */
+  /** 修改物理机服务器自动续费标志 {@link ModifyDeviceAutoRenewFlagRequest} {@link ModifyDeviceAutoRenewFlagResponse} */
   ModifyDeviceAutoRenewFlag(data: ModifyDeviceAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceAutoRenewFlagResponse>;
-  /** {@link ModifyLanIp 修改物理机内网IP（不重装系统）}({@link ModifyLanIpRequest 请求参数}): {@link ModifyLanIpResponse 返回参数} */
+  /** 修改物理机内网IP（不重装系统） {@link ModifyLanIpRequest} {@link ModifyLanIpResponse} */
   ModifyLanIp(data: ModifyLanIpRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLanIpResponse>;
-  /** {@link ModifyPayModePre2Post 将设备从预付费转换为后付费}({@link ModifyPayModePre2PostRequest 请求参数}): {@link ModifyPayModePre2PostResponse 返回参数} */
+  /** 将设备从预付费转换为后付费 {@link ModifyPayModePre2PostRequest} {@link ModifyPayModePre2PostResponse} */
   ModifyPayModePre2Post(data: ModifyPayModePre2PostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPayModePre2PostResponse>;
-  /** {@link ModifyPsaRegulation 修改预授权规则}({@link ModifyPsaRegulationRequest 请求参数}): {@link ModifyPsaRegulationResponse 返回参数} */
+  /** 修改预授权规则 {@link ModifyPsaRegulationRequest} {@link ModifyPsaRegulationResponse} */
   ModifyPsaRegulation(data: ModifyPsaRegulationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPsaRegulationResponse>;
-  /** {@link ModifyUserCmd 修改自定义脚本}({@link ModifyUserCmdRequest 请求参数}): {@link ModifyUserCmdResponse 返回参数} */
+  /** 修改自定义脚本 {@link ModifyUserCmdRequest} {@link ModifyUserCmdResponse} */
   ModifyUserCmd(data: ModifyUserCmdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserCmdResponse>;
-  /** {@link OfflineDevices 退还服务器}({@link OfflineDevicesRequest 请求参数}): {@link OfflineDevicesResponse 返回参数} */
+  /** 退还服务器 {@link OfflineDevicesRequest} {@link OfflineDevicesResponse} */
   OfflineDevices(data: OfflineDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineDevicesResponse>;
-  /** {@link RebootDevices 重启机器}({@link RebootDevicesRequest 请求参数}): {@link RebootDevicesResponse 返回参数} */
+  /** 重启机器 {@link RebootDevicesRequest} {@link RebootDevicesResponse} */
   RebootDevices(data: RebootDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootDevicesResponse>;
-  /** {@link RecoverDevices 恢复物理机}({@link RecoverDevicesRequest 请求参数}): {@link RecoverDevicesResponse 返回参数} */
+  /** 恢复物理机 {@link RecoverDevicesRequest} {@link RecoverDevicesResponse} */
   RecoverDevices(data: RecoverDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverDevicesResponse>;
-  /** {@link ReloadDeviceOs 重装操作系统}({@link ReloadDeviceOsRequest 请求参数}): {@link ReloadDeviceOsResponse 返回参数} */
+  /** 重装操作系统 {@link ReloadDeviceOsRequest} {@link ReloadDeviceOsResponse} */
   ReloadDeviceOs(data: ReloadDeviceOsRequest, config?: AxiosRequestConfig): AxiosPromise<ReloadDeviceOsResponse>;
-  /** {@link RepairTaskControl 维修任务管理}({@link RepairTaskControlRequest 请求参数}): {@link RepairTaskControlResponse 返回参数} */
+  /** 维修任务管理 {@link RepairTaskControlRequest} {@link RepairTaskControlResponse} */
   RepairTaskControl(data: RepairTaskControlRequest, config?: AxiosRequestConfig): AxiosPromise<RepairTaskControlResponse>;
-  /** {@link ResetDevicePassword 重置密码}({@link ResetDevicePasswordRequest 请求参数}): {@link ResetDevicePasswordResponse 返回参数} */
+  /** 重置密码 {@link ResetDevicePasswordRequest} {@link ResetDevicePasswordResponse} */
   ResetDevicePassword(data: ResetDevicePasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDevicePasswordResponse>;
-  /** {@link ReturnDevices 退回物理机}({@link ReturnDevicesRequest 请求参数}): {@link ReturnDevicesResponse 返回参数} */
+  /** 退回物理机 {@link ReturnDevicesRequest} {@link ReturnDevicesResponse} */
   ReturnDevices(data: ReturnDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<ReturnDevicesResponse>;
-  /** {@link RunUserCmd 运行自定义脚本}({@link RunUserCmdRequest 请求参数}): {@link RunUserCmdResponse 返回参数} */
+  /** 运行自定义脚本 {@link RunUserCmdRequest} {@link RunUserCmdResponse} */
   RunUserCmd(data: RunUserCmdRequest, config?: AxiosRequestConfig): AxiosPromise<RunUserCmdResponse>;
-  /** {@link SetOutBandVpnAuthPassword 设置带外VPN认证用户密码}({@link SetOutBandVpnAuthPasswordRequest 请求参数}): {@link SetOutBandVpnAuthPasswordResponse 返回参数} */
+  /** 设置带外VPN认证用户密码 {@link SetOutBandVpnAuthPasswordRequest} {@link SetOutBandVpnAuthPasswordResponse} */
   SetOutBandVpnAuthPassword(data: SetOutBandVpnAuthPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<SetOutBandVpnAuthPasswordResponse>;
-  /** {@link ShutdownDevices 关闭服务器}({@link ShutdownDevicesRequest 请求参数}): {@link ShutdownDevicesResponse 返回参数} */
+  /** 关闭服务器 {@link ShutdownDevicesRequest} {@link ShutdownDevicesResponse} */
   ShutdownDevices(data: ShutdownDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<ShutdownDevicesResponse>;
-  /** {@link StartDevices 开启服务器}({@link StartDevicesRequest 请求参数}): {@link StartDevicesResponse 返回参数} */
+  /** 开启服务器 {@link StartDevicesRequest} {@link StartDevicesResponse} */
   StartDevices(data: StartDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<StartDevicesResponse>;
-  /** {@link UnbindPsaTag 解除标签与预授权规则的绑定}({@link UnbindPsaTagRequest 请求参数}): {@link UnbindPsaTagResponse 返回参数} */
+  /** 解除标签与预授权规则的绑定 {@link UnbindPsaTagRequest} {@link UnbindPsaTagResponse} */
   UnbindPsaTag(data: UnbindPsaTagRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindPsaTagResponse>;
 }
 

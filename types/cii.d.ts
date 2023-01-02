@@ -260,7 +260,7 @@ declare interface AddSubStructureTasksRequest {
 declare interface AddSubStructureTasksResponse {
   /** 增量子任务id数组 */
   SubTaskIds: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -282,7 +282,7 @@ declare interface CreateAutoClassifyStructureTaskRequest {
 declare interface CreateAutoClassifyStructureTaskResponse {
   /** 创建的主任务号，用于查询结果 */
   MainTaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -304,7 +304,7 @@ declare interface CreateStructureTaskRequest {
 declare interface CreateStructureTaskResponse {
   /** 创建的主任务号，用于查询结果 */
   MainTaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -318,7 +318,7 @@ declare interface CreateUnderwriteTaskByIdRequest {
 declare interface CreateUnderwriteTaskByIdResponse {
   /** 核保任务ID数据 */
   UnderwriteTaskIds: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -342,7 +342,7 @@ declare interface DescribeMachineUnderwriteResponse {
   Status: number;
   /** 机器核保结果 */
   UnderwriteResults: MachineUnderwriteOutput[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -354,7 +354,7 @@ declare interface DescribeQualityScoreRequest {
 declare interface DescribeQualityScoreResponse {
   /** 质量分 */
   QualityScore: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -368,7 +368,7 @@ declare interface DescribeReportClassifyRequest {
 declare interface DescribeReportClassifyResponse {
   /** 报告分类结果 */
   Reports: ClassifiedReports[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -406,7 +406,7 @@ declare interface DescribeStructCompareDataResponse {
   AllTasks: ReviewDataTaskInfo[];
   /** 任务类型 */
   TaskType: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -424,7 +424,7 @@ declare interface DescribeStructureDifferenceResponse {
   Status: number | null;
   /** 差异的结果数组 */
   Results: PerStructDifference[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -440,7 +440,7 @@ declare interface DescribeStructureResultResponse {
   Results: StructureResultObject[];
   /** 主任务ID */
   MainTaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -454,7 +454,7 @@ declare interface DescribeStructureTaskResultResponse {
   Status: number;
   /** 结构化识别结果数组，每个数组元素对应一个图片的结构化结果，顺序和输入参数的ImageList或FileList对应。 */
   Results: ResultObject[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -478,7 +478,7 @@ declare interface DescribeUnderwriteTaskResponse {
   Status: number;
   /** 核保结果 */
   UnderwriteResults: UnderwriteOutput[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -492,7 +492,7 @@ declare interface UploadMedicalFileRequest {
 declare interface UploadMedicalFileResponse {
   /** 文件存储的key，可以用来创建结构化任务。 */
   FileKey: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -545,7 +545,7 @@ declare namespace V20201210 {
   interface CreateStructureTaskResponse {
     /** 本次结构化任务的ID */
     TaskId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -575,7 +575,7 @@ declare namespace V20201210 {
     NewItems?: string;
     /** 修改项 */
     ModifyItems?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -589,7 +589,7 @@ declare namespace V20201210 {
     Status: number;
     /** 结构化识别结果数组，每个数组元素对应一个图片的结构化结果，顺序和输入参数的ImageList或FileList对应。 */
     Results: ResultObject[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -597,37 +597,37 @@ declare namespace V20201210 {
 /** {@link Cii 智能保险助手} */
 declare interface Cii {
   (): Versions;
-  /** {@link AddSubStructureTasks 结构化增量子任务}({@link AddSubStructureTasksRequest 请求参数}): {@link AddSubStructureTasksResponse 返回参数} */
+  /** 结构化增量子任务 {@link AddSubStructureTasksRequest} {@link AddSubStructureTasksResponse} */
   AddSubStructureTasks(data: AddSubStructureTasksRequest, config?: AxiosRequestConfig): AxiosPromise<AddSubStructureTasksResponse>;
-  /** {@link CreateAutoClassifyStructureTask 新建自动分类结构化任务}({@link CreateAutoClassifyStructureTaskRequest 请求参数}): {@link CreateAutoClassifyStructureTaskResponse 返回参数} */
+  /** 新建自动分类结构化任务 {@link CreateAutoClassifyStructureTaskRequest} {@link CreateAutoClassifyStructureTaskResponse} */
   CreateAutoClassifyStructureTask(data: CreateAutoClassifyStructureTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoClassifyStructureTaskResponse>;
-  /** {@link CreateStructureTask 新建结构化任务}({@link CreateStructureTaskRequest 请求参数}): {@link CreateStructureTaskResponse 返回参数} */
+  /** 新建结构化任务 {@link CreateStructureTaskRequest} {@link CreateStructureTaskResponse} */
   CreateStructureTask(data: CreateStructureTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStructureTaskResponse>;
-  /** {@link CreateUnderwriteTaskById 根据结构化任务ID创建核保任务}({@link CreateUnderwriteTaskByIdRequest 请求参数}): {@link CreateUnderwriteTaskByIdResponse 返回参数} */
+  /** 根据结构化任务ID创建核保任务 {@link CreateUnderwriteTaskByIdRequest} {@link CreateUnderwriteTaskByIdResponse} */
   CreateUnderwriteTaskById(data: CreateUnderwriteTaskByIdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUnderwriteTaskByIdResponse>;
-  /** {@link DescribeMachineUnderwrite 查询机器核保任务数据}({@link DescribeMachineUnderwriteRequest 请求参数}): {@link DescribeMachineUnderwriteResponse 返回参数} */
+  /** 查询机器核保任务数据 {@link DescribeMachineUnderwriteRequest} {@link DescribeMachineUnderwriteResponse} */
   DescribeMachineUnderwrite(data: DescribeMachineUnderwriteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineUnderwriteResponse>;
-  /** {@link DescribeQualityScore 获取图片质量分}({@link DescribeQualityScoreRequest 请求参数}): {@link DescribeQualityScoreResponse 返回参数} */
+  /** 获取图片质量分 {@link DescribeQualityScoreRequest} {@link DescribeQualityScoreResponse} */
   DescribeQualityScore(data: DescribeQualityScoreRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQualityScoreResponse>;
-  /** {@link DescribeReportClassify 报告自动分类}({@link DescribeReportClassifyRequest 请求参数}): {@link DescribeReportClassifyResponse 返回参数} */
+  /** 报告自动分类 {@link DescribeReportClassifyRequest} {@link DescribeReportClassifyResponse} */
   DescribeReportClassify(data: DescribeReportClassifyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportClassifyResponse>;
-  /** {@link DescribeStructCompareData 结构化对比查询}({@link DescribeStructCompareDataRequest 请求参数}): {@link DescribeStructCompareDataResponse 返回参数} */
+  /** 结构化对比查询 {@link DescribeStructCompareDataRequest} {@link DescribeStructCompareDataResponse} */
   DescribeStructCompareData(data?: DescribeStructCompareDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStructCompareDataResponse>;
-  /** {@link DescribeStructureDifference 结构化复核差异查询}({@link DescribeStructureDifferenceRequest 请求参数}): {@link DescribeStructureDifferenceResponse 返回参数} */
+  /** 结构化复核差异查询 {@link DescribeStructureDifferenceRequest} {@link DescribeStructureDifferenceResponse} */
   DescribeStructureDifference(data?: DescribeStructureDifferenceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStructureDifferenceResponse>;
-  /** {@link DescribeStructureResult 查询结构化结果接口}({@link DescribeStructureResultRequest 请求参数}): {@link DescribeStructureResultResponse 返回参数} */
+  /** 查询结构化结果接口 {@link DescribeStructureResultRequest} {@link DescribeStructureResultResponse} */
   DescribeStructureResult(data: DescribeStructureResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStructureResultResponse>;
-  /** {@link DescribeStructureTaskResult 获取结构化结果接口}({@link DescribeStructureTaskResultRequest 请求参数}): {@link DescribeStructureTaskResultResponse 返回参数} */
+  /** 获取结构化结果接口 {@link DescribeStructureTaskResultRequest} {@link DescribeStructureTaskResultResponse} */
   DescribeStructureTaskResult(data: DescribeStructureTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStructureTaskResultResponse>;
-  /** {@link DescribeUnderwriteTask 查询核保任务数据}({@link DescribeUnderwriteTaskRequest 请求参数}): {@link DescribeUnderwriteTaskResponse 返回参数} */
+  /** 查询核保任务数据 {@link DescribeUnderwriteTaskRequest} {@link DescribeUnderwriteTaskResponse} */
   DescribeUnderwriteTask(data?: DescribeUnderwriteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnderwriteTaskResponse>;
-  /** {@link UploadMedicalFile 上传医疗影像文件}({@link UploadMedicalFileRequest 请求参数}): {@link UploadMedicalFileResponse 返回参数} */
+  /** 上传医疗影像文件 {@link UploadMedicalFileRequest} {@link UploadMedicalFileResponse} */
   UploadMedicalFile(data?: UploadMedicalFileRequest, config?: AxiosRequestConfig): AxiosPromise<UploadMedicalFileResponse>;
-  /** {@link V20201210.CreateStructureTask 新建结构化任务}({@link V20201210.CreateStructureTaskRequest 请求参数}): {@link V20201210.CreateStructureTaskResponse 返回参数} */
+  /** 新建结构化任务 {@link V20201210.CreateStructureTaskRequest} {@link V20201210.CreateStructureTaskResponse} */
   CreateStructureTask(data: V20201210.CreateStructureTaskRequest, config: AxiosRequestConfig & V20201210.VersionHeader): AxiosPromise<V20201210.CreateStructureTaskResponse>;
-  /** {@link V20201210.DescribeStructCompareData 结构化对比查询}({@link V20201210.DescribeStructCompareDataRequest 请求参数}): {@link V20201210.DescribeStructCompareDataResponse 返回参数} */
+  /** 结构化对比查询 {@link V20201210.DescribeStructCompareDataRequest} {@link V20201210.DescribeStructCompareDataResponse} */
   DescribeStructCompareData(data: V20201210.DescribeStructCompareDataRequest, config: AxiosRequestConfig & V20201210.VersionHeader): AxiosPromise<V20201210.DescribeStructCompareDataResponse>;
-  /** {@link V20201210.DescribeStructureTaskResult 获取结构化结果接口}({@link V20201210.DescribeStructureTaskResultRequest 请求参数}): {@link V20201210.DescribeStructureTaskResultResponse 返回参数} */
+  /** 获取结构化结果接口 {@link V20201210.DescribeStructureTaskResultRequest} {@link V20201210.DescribeStructureTaskResultResponse} */
   DescribeStructureTaskResult(data: V20201210.DescribeStructureTaskResultRequest, config: AxiosRequestConfig & V20201210.VersionHeader): AxiosPromise<V20201210.DescribeStructureTaskResultResponse>;
 }
 

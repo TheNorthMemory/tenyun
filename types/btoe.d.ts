@@ -24,7 +24,7 @@ declare interface CreateAudioDepositResponse {
   BusinessId: string | null;
   /** 请求成功，返回存证编码,用于查询存证后续业务数据 */
   EvidenceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -46,7 +46,7 @@ declare interface CreateDataDepositResponse {
   BusinessId: string | null;
   /** 请求成功，返回存证编码,用于查询存证后续业务数据 */
   EvidenceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -72,7 +72,7 @@ declare interface CreateDocDepositResponse {
   BusinessId: string | null;
   /** 请求成功，返回存证编码,用于查询存证后续业务数据 */
   EvidenceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -90,7 +90,7 @@ declare interface CreateHashDepositNoCertResponse {
   BusinessId: string | null;
   /** 存证编码 */
   EvidenceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -108,7 +108,7 @@ declare interface CreateHashDepositNoSealResponse {
   BusinessId: string | null;
   /** 存证编码 */
   EvidenceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -128,7 +128,7 @@ declare interface CreateHashDepositResponse {
   BusinessId: string | null;
   /** 存证编码 */
   EvidenceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -154,7 +154,7 @@ declare interface CreateImageDepositResponse {
   BusinessId: string | null;
   /** 请求成功，返回存证编码,用于查询存证后续业务数据 */
   EvidenceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -180,7 +180,7 @@ declare interface CreateVideoDepositResponse {
   BusinessId: string | null;
   /** 请求成功，返回存证编码,用于查询存证后续业务数据 */
   EvidenceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -194,7 +194,7 @@ declare interface GetDepositCertResponse {
   EvidenceId: string;
   /** 存证证书文件临时链接 */
   EvidenceCert: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -208,7 +208,7 @@ declare interface GetDepositFileResponse {
   EvidenceId: string;
   /** 存证文件临时链接 */
   EvidenceFile: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -224,7 +224,7 @@ declare interface GetDepositInfoResponse {
   EvidenceTime: string;
   /** 区块链交易哈希 */
   EvidenceTxHash: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -240,7 +240,7 @@ declare interface VerifyEvidenceBlockChainTxHashResponse {
   EvidenceTime: string | null;
   /** 存证编码，仅当核验结果为true时返回 */
   EvidenceId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -252,7 +252,7 @@ declare interface VerifyEvidenceHashRequest {
 declare interface VerifyEvidenceHashResponse {
   /** 核验结果，true为核验成功，false为核验失败 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -283,7 +283,7 @@ declare namespace V20210303 {
     BusinessId: string | null;
     /** 请求成功，返回存证编码,用于查询存证后续业务数据 */
     EvidenceId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -307,7 +307,7 @@ declare namespace V20210303 {
     BusinessId: string | null;
     /** 请求成功，返回存证编码,用于查询存证后续业务数据 */
     EvidenceId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -335,7 +335,7 @@ declare namespace V20210303 {
     BusinessId: string | null;
     /** 请求成功，返回存证编码,用于查询存证后续业务数据 */
     EvidenceId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -361,7 +361,7 @@ declare namespace V20210303 {
     EvidenceTxHash: string;
     /** 区块高度 */
     BlockchainHeight: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -387,7 +387,7 @@ declare namespace V20210303 {
     EvidenceTxHash: string;
     /** 区块高度 */
     BlockchainHeight: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -409,7 +409,7 @@ declare namespace V20210303 {
     BusinessId: string | null;
     /** 存证编码 */
     EvidenceId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -437,7 +437,7 @@ declare namespace V20210303 {
     BusinessId: string | null;
     /** 请求成功，返回存证编码,用于查询存证后续业务数据 */
     EvidenceId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -465,7 +465,7 @@ declare namespace V20210303 {
     BusinessId: string | null;
     /** 请求成功，返回存证编码,用于查询存证后续业务数据 */
     EvidenceId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -487,7 +487,7 @@ declare namespace V20210303 {
     BusinessId: string | null;
     /** 请求成功，返回存证编码,用于查询存证后续业务数据 */
     EvidenceId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -501,7 +501,7 @@ declare namespace V20210303 {
     EvidenceId: string;
     /** 存证证书文件临时链接 */
     EvidenceCert: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -515,7 +515,7 @@ declare namespace V20210303 {
     EvidenceId: string;
     /** 存证文件临时链接 */
     EvidenceFile: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -533,7 +533,7 @@ declare namespace V20210303 {
     EvidenceTxHash: string;
     /** 区块高度 */
     BlockchainHeight: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -541,55 +541,55 @@ declare namespace V20210303 {
 /** {@link Btoe 区块链可信取证} */
 declare interface Btoe {
   (): Versions;
-  /** {@link CreateAudioDeposit 音频文件存证}({@link CreateAudioDepositRequest 请求参数}): {@link CreateAudioDepositResponse 返回参数} */
+  /** 音频文件存证 {@link CreateAudioDepositRequest} {@link CreateAudioDepositResponse} */
   CreateAudioDeposit(data: CreateAudioDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAudioDepositResponse>;
-  /** {@link CreateDataDeposit 业务数据明文存证}({@link CreateDataDepositRequest 请求参数}): {@link CreateDataDepositResponse 返回参数} */
+  /** 业务数据明文存证 {@link CreateDataDepositRequest} {@link CreateDataDepositResponse} */
   CreateDataDeposit(data: CreateDataDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataDepositResponse>;
-  /** {@link CreateDocDeposit 文档存证}({@link CreateDocDepositRequest 请求参数}): {@link CreateDocDepositResponse 返回参数} */
+  /** 文档存证 {@link CreateDocDepositRequest} {@link CreateDocDepositResponse} */
   CreateDocDeposit(data: CreateDocDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocDepositResponse>;
-  /** {@link CreateHashDeposit 哈希上链存证}({@link CreateHashDepositRequest 请求参数}): {@link CreateHashDepositResponse 返回参数} */
+  /** 哈希上链存证 {@link CreateHashDepositRequest} {@link CreateHashDepositResponse} */
   CreateHashDeposit(data: CreateHashDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHashDepositResponse>;
-  /** {@link CreateHashDepositNoCert 哈希上链存证(无证书)}({@link CreateHashDepositNoCertRequest 请求参数}): {@link CreateHashDepositNoCertResponse 返回参数} */
+  /** 哈希上链存证(无证书) {@link CreateHashDepositNoCertRequest} {@link CreateHashDepositNoCertResponse} */
   CreateHashDepositNoCert(data: CreateHashDepositNoCertRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHashDepositNoCertResponse>;
-  /** {@link CreateHashDepositNoSeal 哈希上链存证(有证书，无签章)}({@link CreateHashDepositNoSealRequest 请求参数}): {@link CreateHashDepositNoSealResponse 返回参数} */
+  /** 哈希上链存证(有证书，无签章) {@link CreateHashDepositNoSealRequest} {@link CreateHashDepositNoSealResponse} */
   CreateHashDepositNoSeal(data: CreateHashDepositNoSealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHashDepositNoSealResponse>;
-  /** {@link CreateImageDeposit 图片文件存证}({@link CreateImageDepositRequest 请求参数}): {@link CreateImageDepositResponse 返回参数} */
+  /** 图片文件存证 {@link CreateImageDepositRequest} {@link CreateImageDepositResponse} */
   CreateImageDeposit(data: CreateImageDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageDepositResponse>;
-  /** {@link CreateVideoDeposit 视频文件存证}({@link CreateVideoDepositRequest 请求参数}): {@link CreateVideoDepositResponse 返回参数} */
+  /** 视频文件存证 {@link CreateVideoDepositRequest} {@link CreateVideoDepositResponse} */
   CreateVideoDeposit(data: CreateVideoDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoDepositResponse>;
-  /** {@link GetDepositCert BTOE存证电子凭证查询}({@link GetDepositCertRequest 请求参数}): {@link GetDepositCertResponse 返回参数} */
+  /** BTOE存证电子凭证查询 {@link GetDepositCertRequest} {@link GetDepositCertResponse} */
   GetDepositCert(data: GetDepositCertRequest, config?: AxiosRequestConfig): AxiosPromise<GetDepositCertResponse>;
-  /** {@link GetDepositFile 存证文件查询}({@link GetDepositFileRequest 请求参数}): {@link GetDepositFileResponse 返回参数} */
+  /** 存证文件查询 {@link GetDepositFileRequest} {@link GetDepositFileResponse} */
   GetDepositFile(data: GetDepositFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetDepositFileResponse>;
-  /** {@link GetDepositInfo 存证基本信息查询}({@link GetDepositInfoRequest 请求参数}): {@link GetDepositInfoResponse 返回参数} */
+  /** 存证基本信息查询 {@link GetDepositInfoRequest} {@link GetDepositInfoResponse} */
   GetDepositInfo(data: GetDepositInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetDepositInfoResponse>;
-  /** {@link VerifyEvidenceBlockChainTxHash 区块链交易hash核验接口}({@link VerifyEvidenceBlockChainTxHashRequest 请求参数}): {@link VerifyEvidenceBlockChainTxHashResponse 返回参数} */
+  /** 区块链交易hash核验接口 {@link VerifyEvidenceBlockChainTxHashRequest} {@link VerifyEvidenceBlockChainTxHashResponse} */
   VerifyEvidenceBlockChainTxHash(data: VerifyEvidenceBlockChainTxHashRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyEvidenceBlockChainTxHashResponse>;
-  /** {@link VerifyEvidenceHash 核验存证内容hash}({@link VerifyEvidenceHashRequest 请求参数}): {@link VerifyEvidenceHashResponse 返回参数} */
+  /** 核验存证内容hash {@link VerifyEvidenceHashRequest} {@link VerifyEvidenceHashResponse} */
   VerifyEvidenceHash(data: VerifyEvidenceHashRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyEvidenceHashResponse>;
-  /** {@link V20210303.CreateAudioDeposit 音频文件存证}({@link V20210303.CreateAudioDepositRequest 请求参数}): {@link V20210303.CreateAudioDepositResponse 返回参数} */
+  /** 音频文件存证 {@link V20210303.CreateAudioDepositRequest} {@link V20210303.CreateAudioDepositResponse} */
   CreateAudioDeposit(data: V20210303.CreateAudioDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateAudioDepositResponse>;
-  /** {@link V20210303.CreateDataDeposit 业务数据明文存证}({@link V20210303.CreateDataDepositRequest 请求参数}): {@link V20210303.CreateDataDepositResponse 返回参数} */
+  /** 业务数据明文存证 {@link V20210303.CreateDataDepositRequest} {@link V20210303.CreateDataDepositResponse} */
   CreateDataDeposit(data: V20210303.CreateDataDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateDataDepositResponse>;
-  /** {@link V20210303.CreateDocDeposit 文档存证}({@link V20210303.CreateDocDepositRequest 请求参数}): {@link V20210303.CreateDocDepositResponse 返回参数} */
+  /** 文档存证 {@link V20210303.CreateDocDepositRequest} {@link V20210303.CreateDocDepositResponse} */
   CreateDocDeposit(data: V20210303.CreateDocDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateDocDepositResponse>;
-  /** {@link V20210303.CreateHashDeposit 哈希上链存证}({@link V20210303.CreateHashDepositRequest 请求参数}): {@link V20210303.CreateHashDepositResponse 返回参数} */
+  /** 哈希上链存证 {@link V20210303.CreateHashDepositRequest} {@link V20210303.CreateHashDepositResponse} */
   CreateHashDeposit(data: V20210303.CreateHashDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateHashDepositResponse>;
-  /** {@link V20210303.CreateHashDepositNoCert 哈希上链存证(无证书)}({@link V20210303.CreateHashDepositNoCertRequest 请求参数}): {@link V20210303.CreateHashDepositNoCertResponse 返回参数} */
+  /** 哈希上链存证(无证书) {@link V20210303.CreateHashDepositNoCertRequest} {@link V20210303.CreateHashDepositNoCertResponse} */
   CreateHashDepositNoCert(data: V20210303.CreateHashDepositNoCertRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateHashDepositNoCertResponse>;
-  /** {@link V20210303.CreateHashDepositNoSeal 哈希上链存证(有证书，无签章)}({@link V20210303.CreateHashDepositNoSealRequest 请求参数}): {@link V20210303.CreateHashDepositNoSealResponse 返回参数} */
+  /** 哈希上链存证(有证书，无签章) {@link V20210303.CreateHashDepositNoSealRequest} {@link V20210303.CreateHashDepositNoSealResponse} */
   CreateHashDepositNoSeal(data: V20210303.CreateHashDepositNoSealRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateHashDepositNoSealResponse>;
-  /** {@link V20210303.CreateImageDeposit 图片文件存证}({@link V20210303.CreateImageDepositRequest 请求参数}): {@link V20210303.CreateImageDepositResponse 返回参数} */
+  /** 图片文件存证 {@link V20210303.CreateImageDepositRequest} {@link V20210303.CreateImageDepositResponse} */
   CreateImageDeposit(data: V20210303.CreateImageDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateImageDepositResponse>;
-  /** {@link V20210303.CreateVideoDeposit 视频文件存证}({@link V20210303.CreateVideoDepositRequest 请求参数}): {@link V20210303.CreateVideoDepositResponse 返回参数} */
+  /** 视频文件存证 {@link V20210303.CreateVideoDepositRequest} {@link V20210303.CreateVideoDepositResponse} */
   CreateVideoDeposit(data: V20210303.CreateVideoDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateVideoDepositResponse>;
-  /** {@link V20210303.CreateWebpageDeposit 网页快照存证}({@link V20210303.CreateWebpageDepositRequest 请求参数}): {@link V20210303.CreateWebpageDepositResponse 返回参数} */
+  /** 网页快照存证 {@link V20210303.CreateWebpageDepositRequest} {@link V20210303.CreateWebpageDepositResponse} */
   CreateWebpageDeposit(data: V20210303.CreateWebpageDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateWebpageDepositResponse>;
-  /** {@link V20210303.GetDepositCert BTOE存证电子凭证查询}({@link V20210303.GetDepositCertRequest 请求参数}): {@link V20210303.GetDepositCertResponse 返回参数} */
+  /** BTOE存证电子凭证查询 {@link V20210303.GetDepositCertRequest} {@link V20210303.GetDepositCertResponse} */
   GetDepositCert(data: V20210303.GetDepositCertRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.GetDepositCertResponse>;
-  /** {@link V20210303.GetDepositFile 存证文件查询}({@link V20210303.GetDepositFileRequest 请求参数}): {@link V20210303.GetDepositFileResponse 返回参数} */
+  /** 存证文件查询 {@link V20210303.GetDepositFileRequest} {@link V20210303.GetDepositFileResponse} */
   GetDepositFile(data: V20210303.GetDepositFileRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.GetDepositFileResponse>;
-  /** {@link V20210303.GetDepositInfo 存证基本信息查询}({@link V20210303.GetDepositInfoRequest 请求参数}): {@link V20210303.GetDepositInfoResponse 返回参数} */
+  /** 存证基本信息查询 {@link V20210303.GetDepositInfoRequest} {@link V20210303.GetDepositInfoResponse} */
   GetDepositInfo(data: V20210303.GetDepositInfoRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.GetDepositInfoResponse>;
 }
 

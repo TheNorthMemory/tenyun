@@ -4730,7 +4730,7 @@ declare interface ApplyUploadResponse {
   CoverStoragePath: string;
   /** 临时凭证，用于上传接口的权限验证。 */
   TempCertificate: TempCertificate;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4748,7 +4748,7 @@ declare interface AttachMediaSubtitlesRequest {
 }
 
 declare interface AttachMediaSubtitlesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4766,7 +4766,7 @@ declare interface CommitUploadResponse {
   MediaUrl: string;
   /** 媒体封面地址。 */
   CoverUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4788,7 +4788,7 @@ declare interface ComposeMediaRequest {
 declare interface ComposeMediaResponse {
   /** 制作媒体文件的任务 ID，可以通过该 ID 查询制作任务（任务类型为 MakeMedia）的状态。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4802,7 +4802,7 @@ declare interface ConfirmEventsRequest {
 }
 
 declare interface ConfirmEventsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4828,7 +4828,7 @@ declare interface CreateAIAnalysisTemplateRequest {
 declare interface CreateAIAnalysisTemplateResponse {
   /** 音视频内容分析模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4862,7 +4862,7 @@ declare interface CreateAIRecognitionTemplateRequest {
 declare interface CreateAIRecognitionTemplateResponse {
   /** 音视频内容识别模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4892,7 +4892,7 @@ declare interface CreateAdaptiveDynamicStreamingTemplateRequest {
 declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
   /** 自适应转码模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4920,7 +4920,7 @@ declare interface CreateAnimatedGraphicsTemplateRequest {
 declare interface CreateAnimatedGraphicsTemplateResponse {
   /** 转动图模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4936,7 +4936,7 @@ declare interface CreateClassRequest {
 declare interface CreateClassResponse {
   /** 分类 ID */
   ClassId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4966,7 +4966,7 @@ declare interface CreateContentReviewTemplateRequest {
 declare interface CreateContentReviewTemplateResponse {
   /** 音视频内容审核模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4988,7 +4988,7 @@ declare interface CreateHeadTailTemplateRequest {
 declare interface CreateHeadTailTemplateResponse {
   /** 片头片尾模板号。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5006,7 +5006,7 @@ declare interface CreateImageProcessingTemplateRequest {
 declare interface CreateImageProcessingTemplateResponse {
   /** 图片处理模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5040,7 +5040,7 @@ declare interface CreateImageSpriteTemplateRequest {
 declare interface CreateImageSpriteTemplateResponse {
   /** 雪碧图模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5064,7 +5064,7 @@ declare interface CreatePersonSampleResponse {
   Person: AiSamplePerson;
   /** 处理失败的五官定位信息。 */
   FailFaceInfoSet: AiSampleFailFaceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5088,7 +5088,7 @@ declare interface CreateProcedureTemplateRequest {
 }
 
 declare interface CreateProcedureTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5106,7 +5106,7 @@ declare interface CreateReviewTemplateRequest {
 declare interface CreateReviewTemplateResponse {
   /** 审核模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5136,7 +5136,7 @@ declare interface CreateSampleSnapshotTemplateRequest {
 declare interface CreateSampleSnapshotTemplateResponse {
   /** 采样截图模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5162,7 +5162,7 @@ declare interface CreateSnapshotByTimeOffsetTemplateRequest {
 declare interface CreateSnapshotByTimeOffsetTemplateResponse {
   /** 时间点截图模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5174,7 +5174,7 @@ declare interface CreateStorageRegionRequest {
 }
 
 declare interface CreateStorageRegionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5188,7 +5188,7 @@ declare interface CreateSubAppIdRequest {
 declare interface CreateSubAppIdResponse {
   /** 新创建的子应用 ID。 */
   SubAppId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5220,7 +5220,7 @@ declare interface CreateSuperPlayerConfigRequest {
 }
 
 declare interface CreateSuperPlayerConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5250,7 +5250,7 @@ declare interface CreateTranscodeTemplateRequest {
 declare interface CreateTranscodeTemplateResponse {
   /** 转码模板唯一标识。 */
   Definition: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5264,7 +5264,7 @@ declare interface CreateVodDomainRequest {
 }
 
 declare interface CreateVodDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5296,7 +5296,7 @@ declare interface CreateWatermarkTemplateResponse {
   Definition: number;
   /** 水印图片地址，仅当 Type 为 image，该字段有效。 */
   ImageUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5310,7 +5310,7 @@ declare interface CreateWordSamplesRequest {
 }
 
 declare interface CreateWordSamplesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5322,7 +5322,7 @@ declare interface DeleteAIAnalysisTemplateRequest {
 }
 
 declare interface DeleteAIAnalysisTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5334,7 +5334,7 @@ declare interface DeleteAIRecognitionTemplateRequest {
 }
 
 declare interface DeleteAIRecognitionTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5346,7 +5346,7 @@ declare interface DeleteAdaptiveDynamicStreamingTemplateRequest {
 }
 
 declare interface DeleteAdaptiveDynamicStreamingTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5358,7 +5358,7 @@ declare interface DeleteAnimatedGraphicsTemplateRequest {
 }
 
 declare interface DeleteAnimatedGraphicsTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5370,7 +5370,7 @@ declare interface DeleteClassRequest {
 }
 
 declare interface DeleteClassResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5382,7 +5382,7 @@ declare interface DeleteContentReviewTemplateRequest {
 }
 
 declare interface DeleteContentReviewTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5394,7 +5394,7 @@ declare interface DeleteHeadTailTemplateRequest {
 }
 
 declare interface DeleteHeadTailTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5406,7 +5406,7 @@ declare interface DeleteImageProcessingTemplateRequest {
 }
 
 declare interface DeleteImageProcessingTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5418,7 +5418,7 @@ declare interface DeleteImageSpriteTemplateRequest {
 }
 
 declare interface DeleteImageSpriteTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5432,7 +5432,7 @@ declare interface DeleteMediaRequest {
 }
 
 declare interface DeleteMediaResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5444,7 +5444,7 @@ declare interface DeletePersonSampleRequest {
 }
 
 declare interface DeletePersonSampleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5456,7 +5456,7 @@ declare interface DeleteProcedureTemplateRequest {
 }
 
 declare interface DeleteProcedureTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5468,7 +5468,7 @@ declare interface DeleteReviewTemplateRequest {
 }
 
 declare interface DeleteReviewTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5480,7 +5480,7 @@ declare interface DeleteSampleSnapshotTemplateRequest {
 }
 
 declare interface DeleteSampleSnapshotTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5492,7 +5492,7 @@ declare interface DeleteSnapshotByTimeOffsetTemplateRequest {
 }
 
 declare interface DeleteSnapshotByTimeOffsetTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5504,7 +5504,7 @@ declare interface DeleteSuperPlayerConfigRequest {
 }
 
 declare interface DeleteSuperPlayerConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5516,7 +5516,7 @@ declare interface DeleteTranscodeTemplateRequest {
 }
 
 declare interface DeleteTranscodeTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5528,7 +5528,7 @@ declare interface DeleteVodDomainRequest {
 }
 
 declare interface DeleteVodDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5540,7 +5540,7 @@ declare interface DeleteWatermarkTemplateRequest {
 }
 
 declare interface DeleteWatermarkTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5552,7 +5552,7 @@ declare interface DeleteWordSamplesRequest {
 }
 
 declare interface DeleteWordSamplesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5572,7 +5572,7 @@ declare interface DescribeAIAnalysisTemplatesResponse {
   TotalCount: number;
   /** 音视频内容分析模板详情列表。 */
   AIAnalysisTemplateSet: AIAnalysisTemplateItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5592,7 +5592,7 @@ declare interface DescribeAIRecognitionTemplatesResponse {
   TotalCount: number;
   /** 音视频内容识别模板详情列表。 */
   AIRecognitionTemplateSet: AIRecognitionTemplateItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5614,7 +5614,7 @@ declare interface DescribeAdaptiveDynamicStreamingTemplatesResponse {
   TotalCount: number;
   /** 转自适应码流模板详情列表。 */
   AdaptiveDynamicStreamingTemplateSet: AdaptiveDynamicStreamingTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5626,7 +5626,7 @@ declare interface DescribeAllClassRequest {
 declare interface DescribeAllClassResponse {
   /** 分类信息集合 */
   ClassInfoSet: MediaClassInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5648,7 +5648,7 @@ declare interface DescribeAnimatedGraphicsTemplatesResponse {
   TotalCount: number;
   /** 转动图模板详情列表。 */
   AnimatedGraphicsTemplateSet: AnimatedGraphicsTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5678,7 +5678,7 @@ declare interface DescribeCDNStatDetailsResponse {
   DataInterval: number;
   /** CDN 用量数据。 */
   Data: StatDataItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5702,7 +5702,7 @@ declare interface DescribeCDNUsageDataResponse {
   DataInterval: number;
   /** CDN 统计数据。 */
   Data: StatDataItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5728,7 +5728,7 @@ declare interface DescribeCdnLogsResponse {
   OverseaCdnLogs: CdnLogInfo[] | null;
   /** 国内CDN节点的日志下载列表。 */
   DomesticCdnLogs: CdnLogInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5746,7 +5746,7 @@ declare interface DescribeClientUploadAccelerationUsageDataRequest {
 declare interface DescribeClientUploadAccelerationUsageDataResponse {
   /** 客户端上传加速统计数据。 */
   ClientUploadAccelerationUsageDataSet: StatDataItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5766,7 +5766,7 @@ declare interface DescribeContentReviewTemplatesResponse {
   TotalCount: number;
   /** 内容审核模板详情列表。 */
   ContentReviewTemplateSet: ContentReviewTemplateItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5784,7 +5784,7 @@ declare interface DescribeDailyMediaPlayStatRequest {
 declare interface DescribeDailyMediaPlayStatResponse {
   /** 播放统计数据。 */
   DailyPlayStatInfoSet: DailyPlayStatInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5802,7 +5802,7 @@ declare interface DescribeDailyMostPlayedStatRequest {
 declare interface DescribeDailyMostPlayedStatResponse {
   /** 媒体文件播放统计信息。 */
   DailyPlayStatInfoSet: DailyPlayStatInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5818,7 +5818,7 @@ declare interface DescribeDailyPlayStatFileListRequest {
 declare interface DescribeDailyPlayStatFileListResponse {
   /** 播放统计文件列表。 */
   PlayStatFileSet: PlayStatFileInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5832,7 +5832,7 @@ declare interface DescribeDrmDataKeyRequest {
 declare interface DescribeDrmDataKeyResponse {
   /** 密钥列表，包含加密的数据密钥。 */
   KeyList: SimpleAesEdkPair[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5844,7 +5844,7 @@ declare interface DescribeDrmKeyProviderInfoRequest {
 declare interface DescribeDrmKeyProviderInfoResponse {
   /** 华曦达（SDMC）相关的 DRM 密钥提供商信息。 */
   SDMCInfo: SDMCDrmKeyProviderInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5862,7 +5862,7 @@ declare interface DescribeEventConfigResponse {
   UploadMediaCompleteEventSwitch: string;
   /** 是否接收 [视频删除完成](https://cloud.tencent.com/document/product/266/13434) 事件通知，"OFF" 为忽略该事件通知，"ON" 为接收事件通知。 */
   DeleteMediaCompleteEventSwitch: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5874,7 +5874,7 @@ declare interface DescribeEventsStateRequest {
 declare interface DescribeEventsStateResponse {
   /** 待进行拉取的事件通知数，为近似值，约5秒延迟。 */
   CountOfEventsToPull: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5896,7 +5896,7 @@ declare interface DescribeFileAttributesRequest {
 declare interface DescribeFileAttributesResponse {
   /** 任务 ID 。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5916,7 +5916,7 @@ declare interface DescribeHeadTailTemplatesResponse {
   TotalCount: number;
   /** 片头片尾模板详情列表。 */
   HeadTailTemplateSet: HeadTailTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5938,7 +5938,7 @@ declare interface DescribeImageProcessingTemplatesResponse {
   TotalCount: number;
   /** 图片处理模板详情列表。 */
   ImageProcessingTemplateSet: ImageProcessingTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5954,7 +5954,7 @@ declare interface DescribeImageReviewUsageDataRequest {
 declare interface DescribeImageReviewUsageDataResponse {
   /** 图片审核次数统计数据，展示查询时间范围内的图片审核次数的概览数据。 */
   ImageReviewUsageDataSet: ImageReviewUsageDataItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5976,7 +5976,7 @@ declare interface DescribeImageSpriteTemplatesResponse {
   TotalCount: number;
   /** 雪碧图模板详情列表。 */
   ImageSpriteTemplateSet: ImageSpriteTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5994,7 +5994,7 @@ declare interface DescribeLicenseUsageDataRequest {
 declare interface DescribeLicenseUsageDataResponse {
   /** License 查询次数统计数据，展示所查询 License 次数的明细数据。 */
   LicenseUsageDataSet: LicenseUsageDataItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6012,7 +6012,7 @@ declare interface DescribeMediaInfosResponse {
   MediaInfoSet: MediaInfo[];
   /** 不存在的文件 ID 列表。 */
   NotExistFileIdSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6032,7 +6032,7 @@ declare interface DescribeMediaPlayStatDetailsRequest {
 declare interface DescribeMediaPlayStatDetailsResponse {
   /** 播放统计数据。 */
   PlayStatInfoSet: PlayStatInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6050,7 +6050,7 @@ declare interface DescribeMediaProcessUsageDataRequest {
 declare interface DescribeMediaProcessUsageDataResponse {
   /** 视频处理统计数据概览，展示所查询任务的概览以及详细数据。 */
   MediaProcessDataSet: TaskStatData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6076,7 +6076,7 @@ declare interface DescribePersonSamplesResponse {
   TotalCount: number;
   /** 人物信息。 */
   PersonSet: AiSamplePerson[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6086,7 +6086,7 @@ declare interface DescribePrepaidProductsRequest {
 declare interface DescribePrepaidProductsResponse {
   /** 购买的预付费商品实例列表。 */
   ProductInstanceSet: ProductInstance[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6108,7 +6108,7 @@ declare interface DescribeProcedureTemplatesResponse {
   TotalCount?: number;
   /** 任务流模板详情列表。 */
   ProcedureTemplateSet?: ProcedureTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6128,7 +6128,7 @@ declare interface DescribeReviewDetailsResponse {
   TotalDuration: number;
   /** 内容智能识别时长统计数据，每天一个数据。 */
   Data: StatDataItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6150,7 +6150,7 @@ declare interface DescribeReviewTemplatesResponse {
   TotalCount: number;
   /** 审核模板详情列表。 */
   ReviewTemplateSet: ReviewTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6172,7 +6172,7 @@ declare interface DescribeSampleSnapshotTemplatesResponse {
   TotalCount: number;
   /** 采样截图模板详情列表。 */
   SampleSnapshotTemplateSet: SampleSnapshotTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6194,7 +6194,7 @@ declare interface DescribeSnapshotByTimeOffsetTemplatesResponse {
   TotalCount: number;
   /** 指定时间点截图模板详情列表。 */
   SnapshotByTimeOffsetTemplateSet: SnapshotByTimeOffsetTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6218,7 +6218,7 @@ declare interface DescribeStorageDataResponse {
   DeepArchiveStorage: number;
   /** 各计费区域的存储用量。 */
   StorageStat: StorageStatData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6240,7 +6240,7 @@ declare interface DescribeStorageDetailsRequest {
 declare interface DescribeStorageDetailsResponse {
   /** 存储统计数据，每5分钟或每天一条数据。 */
   Data: StatDataItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6252,7 +6252,7 @@ declare interface DescribeStorageRegionsRequest {
 declare interface DescribeStorageRegionsResponse {
   /** 存储地域信息列表。 */
   StorageRegionInfos: StorageRegionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6272,7 +6272,7 @@ declare interface DescribeSubAppIdsResponse {
   SubAppIdInfoSet: SubAppIdInfo[];
   /** 子应用总数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6294,7 +6294,7 @@ declare interface DescribeSuperPlayerConfigsResponse {
   TotalCount: number;
   /** 播放器配置数组。 */
   PlayerConfigSet: PlayerConfig[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6350,7 +6350,7 @@ declare interface DescribeTaskDetailResponse {
   ReduceMediaBitrateTask: ReduceMediaBitrateTask | null;
   /** 获取文件属性任务信息，仅当 TaskType 为 DescribeFileAttributes，该字段有值。 */
   DescribeFileAttributesTask: DescribeFileAttributesTask | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6378,7 +6378,7 @@ declare interface DescribeTasksResponse {
   TaskSet: TaskSimpleInfo[];
   /** 翻页标识，当请求未返回所有数据，该字段表示下一条记录的 ID。当该字段为空，说明已无更多数据。 */
   ScrollToken: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6404,7 +6404,7 @@ declare interface DescribeTranscodeTemplatesResponse {
   TotalCount: number;
   /** 转码模板详情列表。 */
   TranscodeTemplateSet: TranscodeTemplate[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6424,7 +6424,7 @@ declare interface DescribeVodDomainsResponse {
   TotalCount: number;
   /** 域名信息列表。 */
   DomainSet: DomainDetailInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6446,7 +6446,7 @@ declare interface DescribeWatermarkTemplatesResponse {
   TotalCount: number;
   /** 水印模板详情列表。 */
   WatermarkTemplateSet: WatermarkTemplate[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6470,7 +6470,7 @@ declare interface DescribeWordSamplesResponse {
   TotalCount: number;
   /** 关键词信息。 */
   WordSet: AiSampleWord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6502,7 +6502,7 @@ declare interface EditMediaRequest {
 declare interface EditMediaResponse {
   /** 编辑视频的任务 ID，可以通过该 ID 查询编辑任务（任务类型为 EditMedia）的状态。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6524,7 +6524,7 @@ declare interface ExecuteFunctionRequest {
 declare interface ExecuteFunctionResponse {
   /** 处理结果打包后的字符串，具体与后台一同协调。 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6546,7 +6546,7 @@ declare interface ExtractTraceWatermarkRequest {
 declare interface ExtractTraceWatermarkResponse {
   /** 任务 ID。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6562,7 +6562,7 @@ declare interface ForbidMediaDistributionRequest {
 declare interface ForbidMediaDistributionResponse {
   /** 不存在的文件 ID 列表。 */
   NotExistFileIdSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6608,7 +6608,7 @@ declare interface LiveRealTimeClipResponse {
   MetaData: MediaMetaData | null;
   /** 剪辑后的视频片段信息。 */
   SegmentSet: LiveRealTimeClipMediaSegmentInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6622,7 +6622,7 @@ declare interface ManageTaskRequest {
 }
 
 declare interface ManageTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6648,7 +6648,7 @@ declare interface ModifyAIAnalysisTemplateRequest {
 }
 
 declare interface ModifyAIAnalysisTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6682,7 +6682,7 @@ declare interface ModifyAIRecognitionTemplateRequest {
 }
 
 declare interface ModifyAIRecognitionTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6708,7 +6708,7 @@ declare interface ModifyAdaptiveDynamicStreamingTemplateRequest {
 }
 
 declare interface ModifyAdaptiveDynamicStreamingTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6736,7 +6736,7 @@ declare interface ModifyAnimatedGraphicsTemplateRequest {
 }
 
 declare interface ModifyAnimatedGraphicsTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6750,7 +6750,7 @@ declare interface ModifyClassRequest {
 }
 
 declare interface ModifyClassResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6780,7 +6780,7 @@ declare interface ModifyContentReviewTemplateRequest {
 }
 
 declare interface ModifyContentReviewTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6792,7 +6792,7 @@ declare interface ModifyDefaultStorageRegionRequest {
 }
 
 declare interface ModifyDefaultStorageRegionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6810,7 +6810,7 @@ declare interface ModifyEventConfigRequest {
 }
 
 declare interface ModifyEventConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6832,7 +6832,7 @@ declare interface ModifyHeadTailTemplateRequest {
 }
 
 declare interface ModifyHeadTailTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6866,7 +6866,7 @@ declare interface ModifyImageSpriteTemplateRequest {
 }
 
 declare interface ModifyImageSpriteTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6910,7 +6910,7 @@ declare interface ModifyMediaInfoResponse {
   CoverUrl: string;
   /** 新增的字幕信息。 */
   AddedSubtitleSet: MediaSubtitleItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6926,7 +6926,7 @@ declare interface ModifyMediaStorageClassRequest {
 }
 
 declare interface ModifyMediaStorageClassResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6952,7 +6952,7 @@ declare interface ModifyPersonSampleResponse {
   Person: AiSamplePerson;
   /** 处理失败的五官信息。 */
   FailFaceInfoSet: AiSampleFailFaceInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6970,7 +6970,7 @@ declare interface ModifyReviewTemplateRequest {
 }
 
 declare interface ModifyReviewTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7000,7 +7000,7 @@ declare interface ModifySampleSnapshotTemplateRequest {
 }
 
 declare interface ModifySampleSnapshotTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7026,7 +7026,7 @@ declare interface ModifySnapshotByTimeOffsetTemplateRequest {
 }
 
 declare interface ModifySnapshotByTimeOffsetTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7040,7 +7040,7 @@ declare interface ModifySubAppIdInfoRequest {
 }
 
 declare interface ModifySubAppIdInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7052,7 +7052,7 @@ declare interface ModifySubAppIdStatusRequest {
 }
 
 declare interface ModifySubAppIdStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7084,7 +7084,7 @@ declare interface ModifySuperPlayerConfigRequest {
 }
 
 declare interface ModifySuperPlayerConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7114,7 +7114,7 @@ declare interface ModifyTranscodeTemplateRequest {
 }
 
 declare interface ModifyTranscodeTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7130,7 +7130,7 @@ declare interface ModifyVodDomainAccelerateConfigRequest {
 }
 
 declare interface ModifyVodDomainAccelerateConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7146,7 +7146,7 @@ declare interface ModifyVodDomainConfigRequest {
 }
 
 declare interface ModifyVodDomainConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7176,7 +7176,7 @@ declare interface ModifyWatermarkTemplateRequest {
 declare interface ModifyWatermarkTemplateResponse {
   /** 图片水印地址，仅当 ImageTemplate.ImageContent 非空，该字段有值。 */
   ImageUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7192,7 +7192,7 @@ declare interface ModifyWordSampleRequest {
 }
 
 declare interface ModifyWordSampleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7206,7 +7206,7 @@ declare interface ParseStreamingManifestRequest {
 declare interface ParseStreamingManifestResponse {
   /** 分片文件列表。 */
   MediaSegmentSet?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7224,7 +7224,7 @@ declare interface ProcessImageRequest {
 declare interface ProcessImageResponse {
   /** 图片内容智能识别任务结果。 */
   ContentReviewResultSet: ContentReviewResult[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7250,7 +7250,7 @@ declare interface ProcessMediaByProcedureRequest {
 declare interface ProcessMediaByProcedureResponse {
   /** 任务 ID。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7280,7 +7280,7 @@ declare interface ProcessMediaByUrlRequest {
 declare interface ProcessMediaByUrlResponse {
   /** 任务 ID */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7312,7 +7312,7 @@ declare interface ProcessMediaRequest {
 declare interface ProcessMediaResponse {
   /** 任务 ID */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7326,7 +7326,7 @@ declare interface PullEventsRequest {
 declare interface PullEventsResponse {
   /** 事件列表。 */
   EventSet: EventContent[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7360,7 +7360,7 @@ declare interface PullUploadRequest {
 declare interface PullUploadResponse {
   /** 拉取上传视频的任务 ID，可以通过该 ID 查询拉取上传任务的状态。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7372,7 +7372,7 @@ declare interface PushUrlCacheRequest {
 }
 
 declare interface PushUrlCacheResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7384,7 +7384,7 @@ declare interface RefreshUrlCacheRequest {
 }
 
 declare interface RefreshUrlCacheResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7406,7 +7406,7 @@ declare interface RemoveWatermarkRequest {
 declare interface RemoveWatermarkResponse {
   /** 任务 ID 。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7430,7 +7430,7 @@ declare interface ResetProcedureTemplateRequest {
 }
 
 declare interface ResetProcedureTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7446,7 +7446,7 @@ declare interface RestoreMediaRequest {
 }
 
 declare interface RestoreMediaResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7470,7 +7470,7 @@ declare interface ReviewAudioVideoRequest {
 declare interface ReviewAudioVideoResponse {
   /** 任务 ID */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7488,7 +7488,7 @@ declare interface ReviewImageResponse {
   ReviewResultSet?: ContentReviewResult[];
   /** 图片审核任务结果。 */
   MediaReviewResult?: ReviewImageResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7554,7 +7554,7 @@ declare interface SearchMediaResponse {
   TotalCount: number;
   /** 媒体文件信息列表。 */
   MediaInfoSet: MediaInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7566,7 +7566,7 @@ declare interface SetDrmKeyProviderInfoRequest {
 }
 
 declare interface SetDrmKeyProviderInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7602,7 +7602,7 @@ declare interface SimpleHlsClipResponse {
   FileId: string;
   /** 剪辑固化后的视频任务流 ID。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7624,7 +7624,7 @@ declare interface SplitMediaRequest {
 declare interface SplitMediaResponse {
   /** 视频拆条的任务 ID，可以通过该 ID 查询拆条任务（任务类型为 SplitMedia）的状态。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -7640,290 +7640,290 @@ declare interface WeChatMiniProgramPublishRequest {
 declare interface WeChatMiniProgramPublishResponse {
   /** 任务 ID。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Vod 云点播} */
 declare interface Vod {
   (): Versions;
-  /** {@link ApplyUpload 申请上传}({@link ApplyUploadRequest 请求参数}): {@link ApplyUploadResponse 返回参数} */
+  /** 申请上传 {@link ApplyUploadRequest} {@link ApplyUploadResponse} */
   ApplyUpload(data: ApplyUploadRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyUploadResponse>;
-  /** {@link AttachMediaSubtitles 关联媒体字幕}({@link AttachMediaSubtitlesRequest 请求参数}): {@link AttachMediaSubtitlesResponse 返回参数} */
+  /** 关联媒体字幕 {@link AttachMediaSubtitlesRequest} {@link AttachMediaSubtitlesResponse} */
   AttachMediaSubtitles(data: AttachMediaSubtitlesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachMediaSubtitlesResponse>;
-  /** {@link CommitUpload 确认上传}({@link CommitUploadRequest 请求参数}): {@link CommitUploadResponse 返回参数} */
+  /** 确认上传 {@link CommitUploadRequest} {@link CommitUploadResponse} */
   CommitUpload(data: CommitUploadRequest, config?: AxiosRequestConfig): AxiosPromise<CommitUploadResponse>;
-  /** {@link ComposeMedia 视频合成}({@link ComposeMediaRequest 请求参数}): {@link ComposeMediaResponse 返回参数} */
+  /** 视频合成 {@link ComposeMediaRequest} {@link ComposeMediaResponse} */
   ComposeMedia(data: ComposeMediaRequest, config?: AxiosRequestConfig): AxiosPromise<ComposeMediaResponse>;
-  /** {@link ConfirmEvents 确认事件通知}({@link ConfirmEventsRequest 请求参数}): {@link ConfirmEventsResponse 返回参数} */
+  /** 确认事件通知 {@link ConfirmEventsRequest} {@link ConfirmEventsResponse} */
   ConfirmEvents(data: ConfirmEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmEventsResponse>;
-  /** {@link CreateAIAnalysisTemplate 创建音视频内容分析模板}({@link CreateAIAnalysisTemplateRequest 请求参数}): {@link CreateAIAnalysisTemplateResponse 返回参数} */
+  /** 创建音视频内容分析模板 {@link CreateAIAnalysisTemplateRequest} {@link CreateAIAnalysisTemplateResponse} */
   CreateAIAnalysisTemplate(data?: CreateAIAnalysisTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIAnalysisTemplateResponse>;
-  /** {@link CreateAIRecognitionTemplate 创建音视频内容识别模板}({@link CreateAIRecognitionTemplateRequest 请求参数}): {@link CreateAIRecognitionTemplateResponse 返回参数} */
+  /** 创建音视频内容识别模板 {@link CreateAIRecognitionTemplateRequest} {@link CreateAIRecognitionTemplateResponse} */
   CreateAIRecognitionTemplate(data?: CreateAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIRecognitionTemplateResponse>;
-  /** {@link CreateAdaptiveDynamicStreamingTemplate 创建转自适应码流模板}({@link CreateAdaptiveDynamicStreamingTemplateRequest 请求参数}): {@link CreateAdaptiveDynamicStreamingTemplateResponse 返回参数} */
+  /** 创建转自适应码流模板 {@link CreateAdaptiveDynamicStreamingTemplateRequest} {@link CreateAdaptiveDynamicStreamingTemplateResponse} */
   CreateAdaptiveDynamicStreamingTemplate(data: CreateAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdaptiveDynamicStreamingTemplateResponse>;
-  /** {@link CreateAnimatedGraphicsTemplate 创建转动图模板}({@link CreateAnimatedGraphicsTemplateRequest 请求参数}): {@link CreateAnimatedGraphicsTemplateResponse 返回参数} */
+  /** 创建转动图模板 {@link CreateAnimatedGraphicsTemplateRequest} {@link CreateAnimatedGraphicsTemplateResponse} */
   CreateAnimatedGraphicsTemplate(data: CreateAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAnimatedGraphicsTemplateResponse>;
-  /** {@link CreateClass 创建分类}({@link CreateClassRequest 请求参数}): {@link CreateClassResponse 返回参数} */
+  /** 创建分类 {@link CreateClassRequest} {@link CreateClassResponse} */
   CreateClass(data: CreateClassRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClassResponse>;
-  /** {@link CreateContentReviewTemplate 创建音视频内容审核模板}({@link CreateContentReviewTemplateRequest 请求参数}): {@link CreateContentReviewTemplateResponse 返回参数} */
+  /** 创建音视频内容审核模板 {@link CreateContentReviewTemplateRequest} {@link CreateContentReviewTemplateResponse} */
   CreateContentReviewTemplate(data: CreateContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContentReviewTemplateResponse>;
-  /** {@link CreateHeadTailTemplate 创建片头片尾模板}({@link CreateHeadTailTemplateRequest 请求参数}): {@link CreateHeadTailTemplateResponse 返回参数} */
+  /** 创建片头片尾模板 {@link CreateHeadTailTemplateRequest} {@link CreateHeadTailTemplateResponse} */
   CreateHeadTailTemplate(data: CreateHeadTailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHeadTailTemplateResponse>;
-  /** {@link CreateImageProcessingTemplate 创建图片即时处理模板}({@link CreateImageProcessingTemplateRequest 请求参数}): {@link CreateImageProcessingTemplateResponse 返回参数} */
+  /** 创建图片即时处理模板 {@link CreateImageProcessingTemplateRequest} {@link CreateImageProcessingTemplateResponse} */
   CreateImageProcessingTemplate(data: CreateImageProcessingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageProcessingTemplateResponse>;
-  /** {@link CreateImageSpriteTemplate 创建雪碧图模板}({@link CreateImageSpriteTemplateRequest 请求参数}): {@link CreateImageSpriteTemplateResponse 返回参数} */
+  /** 创建雪碧图模板 {@link CreateImageSpriteTemplateRequest} {@link CreateImageSpriteTemplateResponse} */
   CreateImageSpriteTemplate(data: CreateImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageSpriteTemplateResponse>;
-  /** {@link CreatePersonSample 创建素材样本}({@link CreatePersonSampleRequest 请求参数}): {@link CreatePersonSampleResponse 返回参数} */
+  /** 创建素材样本 {@link CreatePersonSampleRequest} {@link CreatePersonSampleResponse} */
   CreatePersonSample(data: CreatePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonSampleResponse>;
-  /** {@link CreateProcedureTemplate 创建任务流模板}({@link CreateProcedureTemplateRequest 请求参数}): {@link CreateProcedureTemplateResponse 返回参数} */
+  /** 创建任务流模板 {@link CreateProcedureTemplateRequest} {@link CreateProcedureTemplateResponse} */
   CreateProcedureTemplate(data: CreateProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProcedureTemplateResponse>;
-  /** {@link CreateReviewTemplate 创建审核模板}({@link CreateReviewTemplateRequest 请求参数}): {@link CreateReviewTemplateResponse 返回参数} */
+  /** 创建审核模板 {@link CreateReviewTemplateRequest} {@link CreateReviewTemplateResponse} */
   CreateReviewTemplate(data: CreateReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReviewTemplateResponse>;
-  /** {@link CreateSampleSnapshotTemplate 创建采样截图模板}({@link CreateSampleSnapshotTemplateRequest 请求参数}): {@link CreateSampleSnapshotTemplateResponse 返回参数} */
+  /** 创建采样截图模板 {@link CreateSampleSnapshotTemplateRequest} {@link CreateSampleSnapshotTemplateResponse} */
   CreateSampleSnapshotTemplate(data: CreateSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSampleSnapshotTemplateResponse>;
-  /** {@link CreateSnapshotByTimeOffsetTemplate 创建指定时间点截图模板}({@link CreateSnapshotByTimeOffsetTemplateRequest 请求参数}): {@link CreateSnapshotByTimeOffsetTemplateResponse 返回参数} */
+  /** 创建指定时间点截图模板 {@link CreateSnapshotByTimeOffsetTemplateRequest} {@link CreateSnapshotByTimeOffsetTemplateResponse} */
   CreateSnapshotByTimeOffsetTemplate(data?: CreateSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotByTimeOffsetTemplateResponse>;
-  /** {@link CreateStorageRegion 开通某地域的存储}({@link CreateStorageRegionRequest 请求参数}): {@link CreateStorageRegionResponse 返回参数} */
+  /** 开通某地域的存储 {@link CreateStorageRegionRequest} {@link CreateStorageRegionResponse} */
   CreateStorageRegion(data: CreateStorageRegionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStorageRegionResponse>;
-  /** {@link CreateSubAppId 创建子应用}({@link CreateSubAppIdRequest 请求参数}): {@link CreateSubAppIdResponse 返回参数} */
+  /** 创建子应用 {@link CreateSubAppIdRequest} {@link CreateSubAppIdResponse} */
   CreateSubAppId(data: CreateSubAppIdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubAppIdResponse>;
-  /** {@link CreateSuperPlayerConfig 创建播放器配置}({@link CreateSuperPlayerConfigRequest 请求参数}): {@link CreateSuperPlayerConfigResponse 返回参数} */
+  /** 创建播放器配置 {@link CreateSuperPlayerConfigRequest} {@link CreateSuperPlayerConfigResponse} */
   CreateSuperPlayerConfig(data: CreateSuperPlayerConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSuperPlayerConfigResponse>;
-  /** {@link CreateTranscodeTemplate 创建转码模板}({@link CreateTranscodeTemplateRequest 请求参数}): {@link CreateTranscodeTemplateResponse 返回参数} */
+  /** 创建转码模板 {@link CreateTranscodeTemplateRequest} {@link CreateTranscodeTemplateResponse} */
   CreateTranscodeTemplate(data: CreateTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTranscodeTemplateResponse>;
-  /** {@link CreateVodDomain 添加点播加速域名}({@link CreateVodDomainRequest 请求参数}): {@link CreateVodDomainResponse 返回参数} */
+  /** 添加点播加速域名 {@link CreateVodDomainRequest} {@link CreateVodDomainResponse} */
   CreateVodDomain(data: CreateVodDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVodDomainResponse>;
-  /** {@link CreateWatermarkTemplate 创建水印模板}({@link CreateWatermarkTemplateRequest 请求参数}): {@link CreateWatermarkTemplateResponse 返回参数} */
+  /** 创建水印模板 {@link CreateWatermarkTemplateRequest} {@link CreateWatermarkTemplateResponse} */
   CreateWatermarkTemplate(data: CreateWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWatermarkTemplateResponse>;
-  /** {@link CreateWordSamples 创建关键词样本}({@link CreateWordSamplesRequest 请求参数}): {@link CreateWordSamplesResponse 返回参数} */
+  /** 创建关键词样本 {@link CreateWordSamplesRequest} {@link CreateWordSamplesResponse} */
   CreateWordSamples(data: CreateWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWordSamplesResponse>;
-  /** {@link DeleteAIAnalysisTemplate 删除音视频内容分析模板}({@link DeleteAIAnalysisTemplateRequest 请求参数}): {@link DeleteAIAnalysisTemplateResponse 返回参数} */
+  /** 删除音视频内容分析模板 {@link DeleteAIAnalysisTemplateRequest} {@link DeleteAIAnalysisTemplateResponse} */
   DeleteAIAnalysisTemplate(data: DeleteAIAnalysisTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAIAnalysisTemplateResponse>;
-  /** {@link DeleteAIRecognitionTemplate 删除音视频内容识别模板}({@link DeleteAIRecognitionTemplateRequest 请求参数}): {@link DeleteAIRecognitionTemplateResponse 返回参数} */
+  /** 删除音视频内容识别模板 {@link DeleteAIRecognitionTemplateRequest} {@link DeleteAIRecognitionTemplateResponse} */
   DeleteAIRecognitionTemplate(data: DeleteAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAIRecognitionTemplateResponse>;
-  /** {@link DeleteAdaptiveDynamicStreamingTemplate 删除转自适应码流模板}({@link DeleteAdaptiveDynamicStreamingTemplateRequest 请求参数}): {@link DeleteAdaptiveDynamicStreamingTemplateResponse 返回参数} */
+  /** 删除转自适应码流模板 {@link DeleteAdaptiveDynamicStreamingTemplateRequest} {@link DeleteAdaptiveDynamicStreamingTemplateResponse} */
   DeleteAdaptiveDynamicStreamingTemplate(data: DeleteAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAdaptiveDynamicStreamingTemplateResponse>;
-  /** {@link DeleteAnimatedGraphicsTemplate 删除转动图模板}({@link DeleteAnimatedGraphicsTemplateRequest 请求参数}): {@link DeleteAnimatedGraphicsTemplateResponse 返回参数} */
+  /** 删除转动图模板 {@link DeleteAnimatedGraphicsTemplateRequest} {@link DeleteAnimatedGraphicsTemplateResponse} */
   DeleteAnimatedGraphicsTemplate(data: DeleteAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAnimatedGraphicsTemplateResponse>;
-  /** {@link DeleteClass 删除分类}({@link DeleteClassRequest 请求参数}): {@link DeleteClassResponse 返回参数} */
+  /** 删除分类 {@link DeleteClassRequest} {@link DeleteClassResponse} */
   DeleteClass(data: DeleteClassRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClassResponse>;
-  /** {@link DeleteContentReviewTemplate 删除音视频内容审核模板}({@link DeleteContentReviewTemplateRequest 请求参数}): {@link DeleteContentReviewTemplateResponse 返回参数} */
+  /** 删除音视频内容审核模板 {@link DeleteContentReviewTemplateRequest} {@link DeleteContentReviewTemplateResponse} */
   DeleteContentReviewTemplate(data: DeleteContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteContentReviewTemplateResponse>;
-  /** {@link DeleteHeadTailTemplate 删除片头片尾模板}({@link DeleteHeadTailTemplateRequest 请求参数}): {@link DeleteHeadTailTemplateResponse 返回参数} */
+  /** 删除片头片尾模板 {@link DeleteHeadTailTemplateRequest} {@link DeleteHeadTailTemplateResponse} */
   DeleteHeadTailTemplate(data: DeleteHeadTailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHeadTailTemplateResponse>;
-  /** {@link DeleteImageProcessingTemplate 删除图片即时处理模板}({@link DeleteImageProcessingTemplateRequest 请求参数}): {@link DeleteImageProcessingTemplateResponse 返回参数} */
+  /** 删除图片即时处理模板 {@link DeleteImageProcessingTemplateRequest} {@link DeleteImageProcessingTemplateResponse} */
   DeleteImageProcessingTemplate(data: DeleteImageProcessingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageProcessingTemplateResponse>;
-  /** {@link DeleteImageSpriteTemplate 删除雪碧图模板}({@link DeleteImageSpriteTemplateRequest 请求参数}): {@link DeleteImageSpriteTemplateResponse 返回参数} */
+  /** 删除雪碧图模板 {@link DeleteImageSpriteTemplateRequest} {@link DeleteImageSpriteTemplateResponse} */
   DeleteImageSpriteTemplate(data: DeleteImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageSpriteTemplateResponse>;
-  /** {@link DeleteMedia 删除媒体}({@link DeleteMediaRequest 请求参数}): {@link DeleteMediaResponse 返回参数} */
+  /** 删除媒体 {@link DeleteMediaRequest} {@link DeleteMediaResponse} */
   DeleteMedia(data: DeleteMediaRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMediaResponse>;
-  /** {@link DeletePersonSample 删除素材样本}({@link DeletePersonSampleRequest 请求参数}): {@link DeletePersonSampleResponse 返回参数} */
+  /** 删除素材样本 {@link DeletePersonSampleRequest} {@link DeletePersonSampleResponse} */
   DeletePersonSample(data: DeletePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonSampleResponse>;
-  /** {@link DeleteProcedureTemplate 删除任务流模板}({@link DeleteProcedureTemplateRequest 请求参数}): {@link DeleteProcedureTemplateResponse 返回参数} */
+  /** 删除任务流模板 {@link DeleteProcedureTemplateRequest} {@link DeleteProcedureTemplateResponse} */
   DeleteProcedureTemplate(data: DeleteProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProcedureTemplateResponse>;
-  /** {@link DeleteReviewTemplate 删除审核模板}({@link DeleteReviewTemplateRequest 请求参数}): {@link DeleteReviewTemplateResponse 返回参数} */
+  /** 删除审核模板 {@link DeleteReviewTemplateRequest} {@link DeleteReviewTemplateResponse} */
   DeleteReviewTemplate(data: DeleteReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReviewTemplateResponse>;
-  /** {@link DeleteSampleSnapshotTemplate 删除采样截图模板}({@link DeleteSampleSnapshotTemplateRequest 请求参数}): {@link DeleteSampleSnapshotTemplateResponse 返回参数} */
+  /** 删除采样截图模板 {@link DeleteSampleSnapshotTemplateRequest} {@link DeleteSampleSnapshotTemplateResponse} */
   DeleteSampleSnapshotTemplate(data: DeleteSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSampleSnapshotTemplateResponse>;
-  /** {@link DeleteSnapshotByTimeOffsetTemplate 删除指定时间点截图模板}({@link DeleteSnapshotByTimeOffsetTemplateRequest 请求参数}): {@link DeleteSnapshotByTimeOffsetTemplateResponse 返回参数} */
+  /** 删除指定时间点截图模板 {@link DeleteSnapshotByTimeOffsetTemplateRequest} {@link DeleteSnapshotByTimeOffsetTemplateResponse} */
   DeleteSnapshotByTimeOffsetTemplate(data: DeleteSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotByTimeOffsetTemplateResponse>;
-  /** {@link DeleteSuperPlayerConfig 删除播放器配置}({@link DeleteSuperPlayerConfigRequest 请求参数}): {@link DeleteSuperPlayerConfigResponse 返回参数} */
+  /** 删除播放器配置 {@link DeleteSuperPlayerConfigRequest} {@link DeleteSuperPlayerConfigResponse} */
   DeleteSuperPlayerConfig(data: DeleteSuperPlayerConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSuperPlayerConfigResponse>;
-  /** {@link DeleteTranscodeTemplate 删除转码模板}({@link DeleteTranscodeTemplateRequest 请求参数}): {@link DeleteTranscodeTemplateResponse 返回参数} */
+  /** 删除转码模板 {@link DeleteTranscodeTemplateRequest} {@link DeleteTranscodeTemplateResponse} */
   DeleteTranscodeTemplate(data: DeleteTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTranscodeTemplateResponse>;
-  /** {@link DeleteVodDomain 删除点播加速域名}({@link DeleteVodDomainRequest 请求参数}): {@link DeleteVodDomainResponse 返回参数} */
+  /** 删除点播加速域名 {@link DeleteVodDomainRequest} {@link DeleteVodDomainResponse} */
   DeleteVodDomain(data: DeleteVodDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVodDomainResponse>;
-  /** {@link DeleteWatermarkTemplate 删除水印模板}({@link DeleteWatermarkTemplateRequest 请求参数}): {@link DeleteWatermarkTemplateResponse 返回参数} */
+  /** 删除水印模板 {@link DeleteWatermarkTemplateRequest} {@link DeleteWatermarkTemplateResponse} */
   DeleteWatermarkTemplate(data: DeleteWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWatermarkTemplateResponse>;
-  /** {@link DeleteWordSamples 删除关键词样本}({@link DeleteWordSamplesRequest 请求参数}): {@link DeleteWordSamplesResponse 返回参数} */
+  /** 删除关键词样本 {@link DeleteWordSamplesRequest} {@link DeleteWordSamplesResponse} */
   DeleteWordSamples(data: DeleteWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWordSamplesResponse>;
-  /** {@link DescribeAIAnalysisTemplates 获取音视频内容分析模板列表}({@link DescribeAIAnalysisTemplatesRequest 请求参数}): {@link DescribeAIAnalysisTemplatesResponse 返回参数} */
+  /** 获取音视频内容分析模板列表 {@link DescribeAIAnalysisTemplatesRequest} {@link DescribeAIAnalysisTemplatesResponse} */
   DescribeAIAnalysisTemplates(data?: DescribeAIAnalysisTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAnalysisTemplatesResponse>;
-  /** {@link DescribeAIRecognitionTemplates 获取音视频内容识别模板列表}({@link DescribeAIRecognitionTemplatesRequest 请求参数}): {@link DescribeAIRecognitionTemplatesResponse 返回参数} */
+  /** 获取音视频内容识别模板列表 {@link DescribeAIRecognitionTemplatesRequest} {@link DescribeAIRecognitionTemplatesResponse} */
   DescribeAIRecognitionTemplates(data?: DescribeAIRecognitionTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIRecognitionTemplatesResponse>;
-  /** {@link DescribeAdaptiveDynamicStreamingTemplates 获取转自适应码流模板列表}({@link DescribeAdaptiveDynamicStreamingTemplatesRequest 请求参数}): {@link DescribeAdaptiveDynamicStreamingTemplatesResponse 返回参数} */
+  /** 获取转自适应码流模板列表 {@link DescribeAdaptiveDynamicStreamingTemplatesRequest} {@link DescribeAdaptiveDynamicStreamingTemplatesResponse} */
   DescribeAdaptiveDynamicStreamingTemplates(data?: DescribeAdaptiveDynamicStreamingTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAdaptiveDynamicStreamingTemplatesResponse>;
-  /** {@link DescribeAllClass 获取所有分类}({@link DescribeAllClassRequest 请求参数}): {@link DescribeAllClassResponse 返回参数} */
+  /** 获取所有分类 {@link DescribeAllClassRequest} {@link DescribeAllClassResponse} */
   DescribeAllClass(data?: DescribeAllClassRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllClassResponse>;
-  /** {@link DescribeAnimatedGraphicsTemplates 获取转动图模板列表}({@link DescribeAnimatedGraphicsTemplatesRequest 请求参数}): {@link DescribeAnimatedGraphicsTemplatesResponse 返回参数} */
+  /** 获取转动图模板列表 {@link DescribeAnimatedGraphicsTemplatesRequest} {@link DescribeAnimatedGraphicsTemplatesResponse} */
   DescribeAnimatedGraphicsTemplates(data?: DescribeAnimatedGraphicsTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnimatedGraphicsTemplatesResponse>;
-  /** {@link DescribeCDNStatDetails 查询点播域名的 CDN 统计数据}({@link DescribeCDNStatDetailsRequest 请求参数}): {@link DescribeCDNStatDetailsResponse 返回参数} */
+  /** 查询点播域名的 CDN 统计数据 {@link DescribeCDNStatDetailsRequest} {@link DescribeCDNStatDetailsResponse} */
   DescribeCDNStatDetails(data: DescribeCDNStatDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCDNStatDetailsResponse>;
-  /** {@link DescribeCDNUsageData 查询点播 CDN 用量数据}({@link DescribeCDNUsageDataRequest 请求参数}): {@link DescribeCDNUsageDataResponse 返回参数} */
+  /** 查询点播 CDN 用量数据 {@link DescribeCDNUsageDataRequest} {@link DescribeCDNUsageDataResponse} */
   DescribeCDNUsageData(data: DescribeCDNUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCDNUsageDataResponse>;
-  /** {@link DescribeCdnLogs 查询 CDN 日志下载链接列表}({@link DescribeCdnLogsRequest 请求参数}): {@link DescribeCdnLogsResponse 返回参数} */
+  /** 查询 CDN 日志下载链接列表 {@link DescribeCdnLogsRequest} {@link DescribeCdnLogsResponse} */
   DescribeCdnLogs(data: DescribeCdnLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnLogsResponse>;
-  /** {@link DescribeClientUploadAccelerationUsageData 查询客户端上传加速统计数据}({@link DescribeClientUploadAccelerationUsageDataRequest 请求参数}): {@link DescribeClientUploadAccelerationUsageDataResponse 返回参数} */
+  /** 查询客户端上传加速统计数据 {@link DescribeClientUploadAccelerationUsageDataRequest} {@link DescribeClientUploadAccelerationUsageDataResponse} */
   DescribeClientUploadAccelerationUsageData(data: DescribeClientUploadAccelerationUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientUploadAccelerationUsageDataResponse>;
-  /** {@link DescribeContentReviewTemplates 获取音视频内容审核模板列表}({@link DescribeContentReviewTemplatesRequest 请求参数}): {@link DescribeContentReviewTemplatesResponse 返回参数} */
+  /** 获取音视频内容审核模板列表 {@link DescribeContentReviewTemplatesRequest} {@link DescribeContentReviewTemplatesResponse} */
   DescribeContentReviewTemplates(data?: DescribeContentReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentReviewTemplatesResponse>;
-  /** {@link DescribeDailyMediaPlayStat 查询媒体文件的播放统计数据}({@link DescribeDailyMediaPlayStatRequest 请求参数}): {@link DescribeDailyMediaPlayStatResponse 返回参数} */
+  /** 查询媒体文件的播放统计数据 {@link DescribeDailyMediaPlayStatRequest} {@link DescribeDailyMediaPlayStatResponse} */
   DescribeDailyMediaPlayStat(data: DescribeDailyMediaPlayStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDailyMediaPlayStatResponse>;
-  /** {@link DescribeDailyMostPlayedStat 查询每日播放 Top100的媒体文件的播放统计数据}({@link DescribeDailyMostPlayedStatRequest 请求参数}): {@link DescribeDailyMostPlayedStatResponse 返回参数} */
+  /** 查询每日播放 Top100的媒体文件的播放统计数据 {@link DescribeDailyMostPlayedStatRequest} {@link DescribeDailyMostPlayedStatResponse} */
   DescribeDailyMostPlayedStat(data: DescribeDailyMostPlayedStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDailyMostPlayedStatResponse>;
-  /** {@link DescribeDailyPlayStatFileList 查询播放统计文件下载列表}({@link DescribeDailyPlayStatFileListRequest 请求参数}): {@link DescribeDailyPlayStatFileListResponse 返回参数} */
+  /** 查询播放统计文件下载列表 {@link DescribeDailyPlayStatFileListRequest} {@link DescribeDailyPlayStatFileListResponse} */
   DescribeDailyPlayStatFileList(data: DescribeDailyPlayStatFileListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDailyPlayStatFileListResponse>;
-  /** {@link DescribeDrmDataKey 获取视频解密密钥}({@link DescribeDrmDataKeyRequest 请求参数}): {@link DescribeDrmDataKeyResponse 返回参数} */
+  /** 获取视频解密密钥 {@link DescribeDrmDataKeyRequest} {@link DescribeDrmDataKeyResponse} */
   DescribeDrmDataKey(data: DescribeDrmDataKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDrmDataKeyResponse>;
-  /** {@link DescribeDrmKeyProviderInfo 查询 DRM 密钥提供商信息}({@link DescribeDrmKeyProviderInfoRequest 请求参数}): {@link DescribeDrmKeyProviderInfoResponse 返回参数} */
+  /** 查询 DRM 密钥提供商信息 {@link DescribeDrmKeyProviderInfoRequest} {@link DescribeDrmKeyProviderInfoResponse} */
   DescribeDrmKeyProviderInfo(data?: DescribeDrmKeyProviderInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDrmKeyProviderInfoResponse>;
-  /** {@link DescribeEventConfig 查询事件通知配置}({@link DescribeEventConfigRequest 请求参数}): {@link DescribeEventConfigResponse 返回参数} */
+  /** 查询事件通知配置 {@link DescribeEventConfigRequest} {@link DescribeEventConfigResponse} */
   DescribeEventConfig(data?: DescribeEventConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventConfigResponse>;
-  /** {@link DescribeEventsState 获取事件通知状态}({@link DescribeEventsStateRequest 请求参数}): {@link DescribeEventsStateResponse 返回参数} */
+  /** 获取事件通知状态 {@link DescribeEventsStateRequest} {@link DescribeEventsStateResponse} */
   DescribeEventsState(data?: DescribeEventsStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsStateResponse>;
-  /** {@link DescribeFileAttributes 获取文件属性}({@link DescribeFileAttributesRequest 请求参数}): {@link DescribeFileAttributesResponse 返回参数} */
+  /** 获取文件属性 {@link DescribeFileAttributesRequest} {@link DescribeFileAttributesResponse} */
   DescribeFileAttributes(data: DescribeFileAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileAttributesResponse>;
-  /** {@link DescribeHeadTailTemplates 获取片头片尾模板列表}({@link DescribeHeadTailTemplatesRequest 请求参数}): {@link DescribeHeadTailTemplatesResponse 返回参数} */
+  /** 获取片头片尾模板列表 {@link DescribeHeadTailTemplatesRequest} {@link DescribeHeadTailTemplatesResponse} */
   DescribeHeadTailTemplates(data?: DescribeHeadTailTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHeadTailTemplatesResponse>;
-  /** {@link DescribeImageProcessingTemplates 获取图片即时处理模板列表}({@link DescribeImageProcessingTemplatesRequest 请求参数}): {@link DescribeImageProcessingTemplatesResponse 返回参数} */
+  /** 获取图片即时处理模板列表 {@link DescribeImageProcessingTemplatesRequest} {@link DescribeImageProcessingTemplatesResponse} */
   DescribeImageProcessingTemplates(data?: DescribeImageProcessingTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageProcessingTemplatesResponse>;
-  /** {@link DescribeImageReviewUsageData 查询图片审核用量统计数据}({@link DescribeImageReviewUsageDataRequest 请求参数}): {@link DescribeImageReviewUsageDataResponse 返回参数} */
+  /** 查询图片审核用量统计数据 {@link DescribeImageReviewUsageDataRequest} {@link DescribeImageReviewUsageDataResponse} */
   DescribeImageReviewUsageData(data: DescribeImageReviewUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageReviewUsageDataResponse>;
-  /** {@link DescribeImageSpriteTemplates 获取雪碧图模板列表}({@link DescribeImageSpriteTemplatesRequest 请求参数}): {@link DescribeImageSpriteTemplatesResponse 返回参数} */
+  /** 获取雪碧图模板列表 {@link DescribeImageSpriteTemplatesRequest} {@link DescribeImageSpriteTemplatesResponse} */
   DescribeImageSpriteTemplates(data?: DescribeImageSpriteTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSpriteTemplatesResponse>;
-  /** {@link DescribeLicenseUsageData 查询 License 请求数统计数据}({@link DescribeLicenseUsageDataRequest 请求参数}): {@link DescribeLicenseUsageDataResponse 返回参数} */
+  /** 查询 License 请求数统计数据 {@link DescribeLicenseUsageDataRequest} {@link DescribeLicenseUsageDataResponse} */
   DescribeLicenseUsageData(data: DescribeLicenseUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseUsageDataResponse>;
-  /** {@link DescribeMediaInfos 获取媒体详细信息}({@link DescribeMediaInfosRequest 请求参数}): {@link DescribeMediaInfosResponse 返回参数} */
+  /** 获取媒体详细信息 {@link DescribeMediaInfosRequest} {@link DescribeMediaInfosResponse} */
   DescribeMediaInfos(data: DescribeMediaInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaInfosResponse>;
-  /** {@link DescribeMediaPlayStatDetails 查询媒体文件按指定时间粒度统计的播放数据}({@link DescribeMediaPlayStatDetailsRequest 请求参数}): {@link DescribeMediaPlayStatDetailsResponse 返回参数} */
+  /** 查询媒体文件按指定时间粒度统计的播放数据 {@link DescribeMediaPlayStatDetailsRequest} {@link DescribeMediaPlayStatDetailsResponse} */
   DescribeMediaPlayStatDetails(data: DescribeMediaPlayStatDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaPlayStatDetailsResponse>;
-  /** {@link DescribeMediaProcessUsageData 查询视频处理用量统计数据}({@link DescribeMediaProcessUsageDataRequest 请求参数}): {@link DescribeMediaProcessUsageDataResponse 返回参数} */
+  /** 查询视频处理用量统计数据 {@link DescribeMediaProcessUsageDataRequest} {@link DescribeMediaProcessUsageDataResponse} */
   DescribeMediaProcessUsageData(data: DescribeMediaProcessUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaProcessUsageDataResponse>;
-  /** {@link DescribePersonSamples 获取素材样本列表}({@link DescribePersonSamplesRequest 请求参数}): {@link DescribePersonSamplesResponse 返回参数} */
+  /** 获取素材样本列表 {@link DescribePersonSamplesRequest} {@link DescribePersonSamplesResponse} */
   DescribePersonSamples(data?: DescribePersonSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonSamplesResponse>;
-  /** {@link DescribePrepaidProducts 查询购买的预付费商品列表}({@link DescribePrepaidProductsRequest 请求参数}): {@link DescribePrepaidProductsResponse 返回参数} */
+  /** 查询购买的预付费商品列表 {@link DescribePrepaidProductsRequest} {@link DescribePrepaidProductsResponse} */
   DescribePrepaidProducts(data?: DescribePrepaidProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrepaidProductsResponse>;
-  /** {@link DescribeProcedureTemplates 获取任务流模板列表}({@link DescribeProcedureTemplatesRequest 请求参数}): {@link DescribeProcedureTemplatesResponse 返回参数} */
+  /** 获取任务流模板列表 {@link DescribeProcedureTemplatesRequest} {@link DescribeProcedureTemplatesResponse} */
   DescribeProcedureTemplates(data?: DescribeProcedureTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcedureTemplatesResponse>;
-  /** {@link DescribeReviewDetails 查询内容智能识别详情}({@link DescribeReviewDetailsRequest 请求参数}): {@link DescribeReviewDetailsResponse 返回参数} */
+  /** 查询内容智能识别详情 {@link DescribeReviewDetailsRequest} {@link DescribeReviewDetailsResponse} */
   DescribeReviewDetails(data: DescribeReviewDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReviewDetailsResponse>;
-  /** {@link DescribeReviewTemplates 获取审核模板列表}({@link DescribeReviewTemplatesRequest 请求参数}): {@link DescribeReviewTemplatesResponse 返回参数} */
+  /** 获取审核模板列表 {@link DescribeReviewTemplatesRequest} {@link DescribeReviewTemplatesResponse} */
   DescribeReviewTemplates(data?: DescribeReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReviewTemplatesResponse>;
-  /** {@link DescribeSampleSnapshotTemplates 获取采样截图模板列表}({@link DescribeSampleSnapshotTemplatesRequest 请求参数}): {@link DescribeSampleSnapshotTemplatesResponse 返回参数} */
+  /** 获取采样截图模板列表 {@link DescribeSampleSnapshotTemplatesRequest} {@link DescribeSampleSnapshotTemplatesResponse} */
   DescribeSampleSnapshotTemplates(data?: DescribeSampleSnapshotTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleSnapshotTemplatesResponse>;
-  /** {@link DescribeSnapshotByTimeOffsetTemplates 获取指定时间点截图模板列表}({@link DescribeSnapshotByTimeOffsetTemplatesRequest 请求参数}): {@link DescribeSnapshotByTimeOffsetTemplatesResponse 返回参数} */
+  /** 获取指定时间点截图模板列表 {@link DescribeSnapshotByTimeOffsetTemplatesRequest} {@link DescribeSnapshotByTimeOffsetTemplatesResponse} */
   DescribeSnapshotByTimeOffsetTemplates(data?: DescribeSnapshotByTimeOffsetTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotByTimeOffsetTemplatesResponse>;
-  /** {@link DescribeStorageData 查询当前存储情况}({@link DescribeStorageDataRequest 请求参数}): {@link DescribeStorageDataResponse 返回参数} */
+  /** 查询当前存储情况 {@link DescribeStorageDataRequest} {@link DescribeStorageDataResponse} */
   DescribeStorageData(data?: DescribeStorageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageDataResponse>;
-  /** {@link DescribeStorageDetails 查询存储空间数据详情}({@link DescribeStorageDetailsRequest 请求参数}): {@link DescribeStorageDetailsResponse 返回参数} */
+  /** 查询存储空间数据详情 {@link DescribeStorageDetailsRequest} {@link DescribeStorageDetailsResponse} */
   DescribeStorageDetails(data: DescribeStorageDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageDetailsResponse>;
-  /** {@link DescribeStorageRegions 查询存储地域列表}({@link DescribeStorageRegionsRequest 请求参数}): {@link DescribeStorageRegionsResponse 返回参数} */
+  /** 查询存储地域列表 {@link DescribeStorageRegionsRequest} {@link DescribeStorageRegionsResponse} */
   DescribeStorageRegions(data?: DescribeStorageRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageRegionsResponse>;
-  /** {@link DescribeSubAppIds 查询子应用列表}({@link DescribeSubAppIdsRequest 请求参数}): {@link DescribeSubAppIdsResponse 返回参数} */
+  /** 查询子应用列表 {@link DescribeSubAppIdsRequest} {@link DescribeSubAppIdsResponse} */
   DescribeSubAppIds(data?: DescribeSubAppIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubAppIdsResponse>;
-  /** {@link DescribeSuperPlayerConfigs 获取播放器配置列表}({@link DescribeSuperPlayerConfigsRequest 请求参数}): {@link DescribeSuperPlayerConfigsResponse 返回参数} */
+  /** 获取播放器配置列表 {@link DescribeSuperPlayerConfigsRequest} {@link DescribeSuperPlayerConfigsResponse} */
   DescribeSuperPlayerConfigs(data?: DescribeSuperPlayerConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSuperPlayerConfigsResponse>;
-  /** {@link DescribeTaskDetail 查询任务详情}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
+  /** 查询任务详情 {@link DescribeTaskDetailRequest} {@link DescribeTaskDetailResponse} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** {@link DescribeTasks 获取任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
+  /** 获取任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** {@link DescribeTranscodeTemplates 获取转码模板列表}({@link DescribeTranscodeTemplatesRequest 请求参数}): {@link DescribeTranscodeTemplatesResponse 返回参数} */
+  /** 获取转码模板列表 {@link DescribeTranscodeTemplatesRequest} {@link DescribeTranscodeTemplatesResponse} */
   DescribeTranscodeTemplates(data?: DescribeTranscodeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeTemplatesResponse>;
-  /** {@link DescribeVodDomains 查询点播域名列表}({@link DescribeVodDomainsRequest 请求参数}): {@link DescribeVodDomainsResponse 返回参数} */
+  /** 查询点播域名列表 {@link DescribeVodDomainsRequest} {@link DescribeVodDomainsResponse} */
   DescribeVodDomains(data?: DescribeVodDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVodDomainsResponse>;
-  /** {@link DescribeWatermarkTemplates 获取水印模板列表}({@link DescribeWatermarkTemplatesRequest 请求参数}): {@link DescribeWatermarkTemplatesResponse 返回参数} */
+  /** 获取水印模板列表 {@link DescribeWatermarkTemplatesRequest} {@link DescribeWatermarkTemplatesResponse} */
   DescribeWatermarkTemplates(data?: DescribeWatermarkTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWatermarkTemplatesResponse>;
-  /** {@link DescribeWordSamples 获取关键词样本列表}({@link DescribeWordSamplesRequest 请求参数}): {@link DescribeWordSamplesResponse 返回参数} */
+  /** 获取关键词样本列表 {@link DescribeWordSamplesRequest} {@link DescribeWordSamplesResponse} */
   DescribeWordSamples(data?: DescribeWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWordSamplesResponse>;
-  /** {@link EditMedia 编辑视频}({@link EditMediaRequest 请求参数}): {@link EditMediaResponse 返回参数} */
+  /** 编辑视频 {@link EditMediaRequest} {@link EditMediaResponse} */
   EditMedia(data: EditMediaRequest, config?: AxiosRequestConfig): AxiosPromise<EditMediaResponse>;
-  /** {@link ExecuteFunction 执行定制 API}({@link ExecuteFunctionRequest 请求参数}): {@link ExecuteFunctionResponse 返回参数} */
+  /** 执行定制 API {@link ExecuteFunctionRequest} {@link ExecuteFunctionResponse} */
   ExecuteFunction(data: ExecuteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteFunctionResponse>;
-  /** {@link ExtractTraceWatermark 提取溯源水印}({@link ExtractTraceWatermarkRequest 请求参数}): {@link ExtractTraceWatermarkResponse 返回参数} */
+  /** 提取溯源水印 {@link ExtractTraceWatermarkRequest} {@link ExtractTraceWatermarkResponse} */
   ExtractTraceWatermark(data: ExtractTraceWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<ExtractTraceWatermarkResponse>;
-  /** {@link ForbidMediaDistribution 禁播媒体}({@link ForbidMediaDistributionRequest 请求参数}): {@link ForbidMediaDistributionResponse 返回参数} */
+  /** 禁播媒体 {@link ForbidMediaDistributionRequest} {@link ForbidMediaDistributionResponse} */
   ForbidMediaDistribution(data: ForbidMediaDistributionRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidMediaDistributionResponse>;
-  /** {@link LiveRealTimeClip 直播即时剪辑}({@link LiveRealTimeClipRequest 请求参数}): {@link LiveRealTimeClipResponse 返回参数} */
+  /** 直播即时剪辑 {@link LiveRealTimeClipRequest} {@link LiveRealTimeClipResponse} */
   LiveRealTimeClip(data: LiveRealTimeClipRequest, config?: AxiosRequestConfig): AxiosPromise<LiveRealTimeClipResponse>;
-  /** {@link ManageTask 任务管理}({@link ManageTaskRequest 请求参数}): {@link ManageTaskResponse 返回参数} */
+  /** 任务管理 {@link ManageTaskRequest} {@link ManageTaskResponse} */
   ManageTask(data: ManageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ManageTaskResponse>;
-  /** {@link ModifyAIAnalysisTemplate 修改音视频内容分析模板}({@link ModifyAIAnalysisTemplateRequest 请求参数}): {@link ModifyAIAnalysisTemplateResponse 返回参数} */
+  /** 修改音视频内容分析模板 {@link ModifyAIAnalysisTemplateRequest} {@link ModifyAIAnalysisTemplateResponse} */
   ModifyAIAnalysisTemplate(data: ModifyAIAnalysisTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAIAnalysisTemplateResponse>;
-  /** {@link ModifyAIRecognitionTemplate 修改音视频内容识别模板}({@link ModifyAIRecognitionTemplateRequest 请求参数}): {@link ModifyAIRecognitionTemplateResponse 返回参数} */
+  /** 修改音视频内容识别模板 {@link ModifyAIRecognitionTemplateRequest} {@link ModifyAIRecognitionTemplateResponse} */
   ModifyAIRecognitionTemplate(data: ModifyAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAIRecognitionTemplateResponse>;
-  /** {@link ModifyAdaptiveDynamicStreamingTemplate 修改转自适应码流模板}({@link ModifyAdaptiveDynamicStreamingTemplateRequest 请求参数}): {@link ModifyAdaptiveDynamicStreamingTemplateResponse 返回参数} */
+  /** 修改转自适应码流模板 {@link ModifyAdaptiveDynamicStreamingTemplateRequest} {@link ModifyAdaptiveDynamicStreamingTemplateResponse} */
   ModifyAdaptiveDynamicStreamingTemplate(data: ModifyAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAdaptiveDynamicStreamingTemplateResponse>;
-  /** {@link ModifyAnimatedGraphicsTemplate 修改转动图模板}({@link ModifyAnimatedGraphicsTemplateRequest 请求参数}): {@link ModifyAnimatedGraphicsTemplateResponse 返回参数} */
+  /** 修改转动图模板 {@link ModifyAnimatedGraphicsTemplateRequest} {@link ModifyAnimatedGraphicsTemplateResponse} */
   ModifyAnimatedGraphicsTemplate(data: ModifyAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAnimatedGraphicsTemplateResponse>;
-  /** {@link ModifyClass 修改分类}({@link ModifyClassRequest 请求参数}): {@link ModifyClassResponse 返回参数} */
+  /** 修改分类 {@link ModifyClassRequest} {@link ModifyClassResponse} */
   ModifyClass(data: ModifyClassRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClassResponse>;
-  /** {@link ModifyContentReviewTemplate 修改音视频内容审核模板}({@link ModifyContentReviewTemplateRequest 请求参数}): {@link ModifyContentReviewTemplateResponse 返回参数} */
+  /** 修改音视频内容审核模板 {@link ModifyContentReviewTemplateRequest} {@link ModifyContentReviewTemplateResponse} */
   ModifyContentReviewTemplate(data: ModifyContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContentReviewTemplateResponse>;
-  /** {@link ModifyDefaultStorageRegion 设置默认的存储地域}({@link ModifyDefaultStorageRegionRequest 请求参数}): {@link ModifyDefaultStorageRegionResponse 返回参数} */
+  /** 设置默认的存储地域 {@link ModifyDefaultStorageRegionRequest} {@link ModifyDefaultStorageRegionResponse} */
   ModifyDefaultStorageRegion(data: ModifyDefaultStorageRegionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDefaultStorageRegionResponse>;
-  /** {@link ModifyEventConfig 修改事件通知配置}({@link ModifyEventConfigRequest 请求参数}): {@link ModifyEventConfigResponse 返回参数} */
+  /** 修改事件通知配置 {@link ModifyEventConfigRequest} {@link ModifyEventConfigResponse} */
   ModifyEventConfig(data?: ModifyEventConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEventConfigResponse>;
-  /** {@link ModifyHeadTailTemplate 修改片头片尾模板}({@link ModifyHeadTailTemplateRequest 请求参数}): {@link ModifyHeadTailTemplateResponse 返回参数} */
+  /** 修改片头片尾模板 {@link ModifyHeadTailTemplateRequest} {@link ModifyHeadTailTemplateResponse} */
   ModifyHeadTailTemplate(data: ModifyHeadTailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHeadTailTemplateResponse>;
-  /** {@link ModifyImageSpriteTemplate 修改雪碧图模板}({@link ModifyImageSpriteTemplateRequest 请求参数}): {@link ModifyImageSpriteTemplateResponse 返回参数} */
+  /** 修改雪碧图模板 {@link ModifyImageSpriteTemplateRequest} {@link ModifyImageSpriteTemplateResponse} */
   ModifyImageSpriteTemplate(data: ModifyImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageSpriteTemplateResponse>;
-  /** {@link ModifyMediaInfo 修改媒体文件属性}({@link ModifyMediaInfoRequest 请求参数}): {@link ModifyMediaInfoResponse 返回参数} */
+  /** 修改媒体文件属性 {@link ModifyMediaInfoRequest} {@link ModifyMediaInfoResponse} */
   ModifyMediaInfo(data: ModifyMediaInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMediaInfoResponse>;
-  /** {@link ModifyMediaStorageClass 修改媒体文件存储类型}({@link ModifyMediaStorageClassRequest 请求参数}): {@link ModifyMediaStorageClassResponse 返回参数} */
+  /** 修改媒体文件存储类型 {@link ModifyMediaStorageClassRequest} {@link ModifyMediaStorageClassResponse} */
   ModifyMediaStorageClass(data: ModifyMediaStorageClassRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMediaStorageClassResponse>;
-  /** {@link ModifyPersonSample 修改素材样本}({@link ModifyPersonSampleRequest 请求参数}): {@link ModifyPersonSampleResponse 返回参数} */
+  /** 修改素材样本 {@link ModifyPersonSampleRequest} {@link ModifyPersonSampleResponse} */
   ModifyPersonSample(data: ModifyPersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonSampleResponse>;
-  /** {@link ModifyReviewTemplate 修改审核模板}({@link ModifyReviewTemplateRequest 请求参数}): {@link ModifyReviewTemplateResponse 返回参数} */
+  /** 修改审核模板 {@link ModifyReviewTemplateRequest} {@link ModifyReviewTemplateResponse} */
   ModifyReviewTemplate(data: ModifyReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReviewTemplateResponse>;
-  /** {@link ModifySampleSnapshotTemplate 修改采样截图模板}({@link ModifySampleSnapshotTemplateRequest 请求参数}): {@link ModifySampleSnapshotTemplateResponse 返回参数} */
+  /** 修改采样截图模板 {@link ModifySampleSnapshotTemplateRequest} {@link ModifySampleSnapshotTemplateResponse} */
   ModifySampleSnapshotTemplate(data: ModifySampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySampleSnapshotTemplateResponse>;
-  /** {@link ModifySnapshotByTimeOffsetTemplate 修改指定时间点截图模板}({@link ModifySnapshotByTimeOffsetTemplateRequest 请求参数}): {@link ModifySnapshotByTimeOffsetTemplateResponse 返回参数} */
+  /** 修改指定时间点截图模板 {@link ModifySnapshotByTimeOffsetTemplateRequest} {@link ModifySnapshotByTimeOffsetTemplateResponse} */
   ModifySnapshotByTimeOffsetTemplate(data: ModifySnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotByTimeOffsetTemplateResponse>;
-  /** {@link ModifySubAppIdInfo 修改子应用信息}({@link ModifySubAppIdInfoRequest 请求参数}): {@link ModifySubAppIdInfoResponse 返回参数} */
+  /** 修改子应用信息 {@link ModifySubAppIdInfoRequest} {@link ModifySubAppIdInfoResponse} */
   ModifySubAppIdInfo(data: ModifySubAppIdInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubAppIdInfoResponse>;
-  /** {@link ModifySubAppIdStatus 修改子应用状态}({@link ModifySubAppIdStatusRequest 请求参数}): {@link ModifySubAppIdStatusResponse 返回参数} */
+  /** 修改子应用状态 {@link ModifySubAppIdStatusRequest} {@link ModifySubAppIdStatusResponse} */
   ModifySubAppIdStatus(data: ModifySubAppIdStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubAppIdStatusResponse>;
-  /** {@link ModifySuperPlayerConfig 修改播放器配置}({@link ModifySuperPlayerConfigRequest 请求参数}): {@link ModifySuperPlayerConfigResponse 返回参数} */
+  /** 修改播放器配置 {@link ModifySuperPlayerConfigRequest} {@link ModifySuperPlayerConfigResponse} */
   ModifySuperPlayerConfig(data: ModifySuperPlayerConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySuperPlayerConfigResponse>;
-  /** {@link ModifyTranscodeTemplate 修改转码模板}({@link ModifyTranscodeTemplateRequest 请求参数}): {@link ModifyTranscodeTemplateResponse 返回参数} */
+  /** 修改转码模板 {@link ModifyTranscodeTemplateRequest} {@link ModifyTranscodeTemplateResponse} */
   ModifyTranscodeTemplate(data: ModifyTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTranscodeTemplateResponse>;
-  /** {@link ModifyVodDomainAccelerateConfig 开启或者关闭点播域名加速地域}({@link ModifyVodDomainAccelerateConfigRequest 请求参数}): {@link ModifyVodDomainAccelerateConfigResponse 返回参数} */
+  /** 开启或者关闭点播域名加速地域 {@link ModifyVodDomainAccelerateConfigRequest} {@link ModifyVodDomainAccelerateConfigResponse} */
   ModifyVodDomainAccelerateConfig(data: ModifyVodDomainAccelerateConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVodDomainAccelerateConfigResponse>;
-  /** {@link ModifyVodDomainConfig 修改域名配置}({@link ModifyVodDomainConfigRequest 请求参数}): {@link ModifyVodDomainConfigResponse 返回参数} */
+  /** 修改域名配置 {@link ModifyVodDomainConfigRequest} {@link ModifyVodDomainConfigResponse} */
   ModifyVodDomainConfig(data: ModifyVodDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVodDomainConfigResponse>;
-  /** {@link ModifyWatermarkTemplate 修改水印模板}({@link ModifyWatermarkTemplateRequest 请求参数}): {@link ModifyWatermarkTemplateResponse 返回参数} */
+  /** 修改水印模板 {@link ModifyWatermarkTemplateRequest} {@link ModifyWatermarkTemplateResponse} */
   ModifyWatermarkTemplate(data: ModifyWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWatermarkTemplateResponse>;
-  /** {@link ModifyWordSample 修改关键词样本}({@link ModifyWordSampleRequest 请求参数}): {@link ModifyWordSampleResponse 返回参数} */
+  /** 修改关键词样本 {@link ModifyWordSampleRequest} {@link ModifyWordSampleResponse} */
   ModifyWordSample(data: ModifyWordSampleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWordSampleResponse>;
-  /** {@link ParseStreamingManifest 解析视频索引文件}({@link ParseStreamingManifestRequest 请求参数}): {@link ParseStreamingManifestResponse 返回参数} */
+  /** 解析视频索引文件 {@link ParseStreamingManifestRequest} {@link ParseStreamingManifestResponse} */
   ParseStreamingManifest(data: ParseStreamingManifestRequest, config?: AxiosRequestConfig): AxiosPromise<ParseStreamingManifestResponse>;
-  /** {@link ProcessImage 图片处理}({@link ProcessImageRequest 请求参数}): {@link ProcessImageResponse 返回参数} */
+  /** 图片处理 {@link ProcessImageRequest} {@link ProcessImageResponse} */
   ProcessImage(data: ProcessImageRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessImageResponse>;
-  /** {@link ProcessMedia 视频处理}({@link ProcessMediaRequest 请求参数}): {@link ProcessMediaResponse 返回参数} */
+  /** 视频处理 {@link ProcessMediaRequest} {@link ProcessMediaResponse} */
   ProcessMedia(data: ProcessMediaRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessMediaResponse>;
-  /** {@link ProcessMediaByProcedure 使用任务流模板进行视频处理}({@link ProcessMediaByProcedureRequest 请求参数}): {@link ProcessMediaByProcedureResponse 返回参数} */
+  /** 使用任务流模板进行视频处理 {@link ProcessMediaByProcedureRequest} {@link ProcessMediaByProcedureResponse} */
   ProcessMediaByProcedure(data: ProcessMediaByProcedureRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessMediaByProcedureResponse>;
-  /** {@link ProcessMediaByUrl 对指定 URL 的视频发起视频处理}({@link ProcessMediaByUrlRequest 请求参数}): {@link ProcessMediaByUrlResponse 返回参数} */
+  /** 对指定 URL 的视频发起视频处理 {@link ProcessMediaByUrlRequest} {@link ProcessMediaByUrlResponse} */
   ProcessMediaByUrl(data?: ProcessMediaByUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessMediaByUrlResponse>;
-  /** {@link PullEvents 拉取事件通知}({@link PullEventsRequest 请求参数}): {@link PullEventsResponse 返回参数} */
+  /** 拉取事件通知 {@link PullEventsRequest} {@link PullEventsResponse} */
   PullEvents(data?: PullEventsRequest, config?: AxiosRequestConfig): AxiosPromise<PullEventsResponse>;
-  /** {@link PullUpload 拉取上传}({@link PullUploadRequest 请求参数}): {@link PullUploadResponse 返回参数} */
+  /** 拉取上传 {@link PullUploadRequest} {@link PullUploadResponse} */
   PullUpload(data: PullUploadRequest, config?: AxiosRequestConfig): AxiosPromise<PullUploadResponse>;
-  /** {@link PushUrlCache 预热URL}({@link PushUrlCacheRequest 请求参数}): {@link PushUrlCacheResponse 返回参数} */
+  /** 预热URL {@link PushUrlCacheRequest} {@link PushUrlCacheResponse} */
   PushUrlCache(data: PushUrlCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PushUrlCacheResponse>;
-  /** {@link RefreshUrlCache 刷新URL}({@link RefreshUrlCacheRequest 请求参数}): {@link RefreshUrlCacheResponse 返回参数} */
+  /** 刷新URL {@link RefreshUrlCacheRequest} {@link RefreshUrlCacheResponse} */
   RefreshUrlCache(data: RefreshUrlCacheRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshUrlCacheResponse>;
-  /** {@link RemoveWatermark 智能去除水印}({@link RemoveWatermarkRequest 请求参数}): {@link RemoveWatermarkResponse 返回参数} */
+  /** 智能去除水印 {@link RemoveWatermarkRequest} {@link RemoveWatermarkResponse} */
   RemoveWatermark(data: RemoveWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveWatermarkResponse>;
-  /** {@link ResetProcedureTemplate 重设任务流模板}({@link ResetProcedureTemplateRequest 请求参数}): {@link ResetProcedureTemplateResponse 返回参数} */
+  /** 重设任务流模板 {@link ResetProcedureTemplateRequest} {@link ResetProcedureTemplateResponse} */
   ResetProcedureTemplate(data: ResetProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ResetProcedureTemplateResponse>;
-  /** {@link RestoreMedia 解冻媒体文件}({@link RestoreMediaRequest 请求参数}): {@link RestoreMediaResponse 返回参数} */
+  /** 解冻媒体文件 {@link RestoreMediaRequest} {@link RestoreMediaResponse} */
   RestoreMedia(data: RestoreMediaRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreMediaResponse>;
-  /** {@link ReviewAudioVideo 音视频审核}({@link ReviewAudioVideoRequest 请求参数}): {@link ReviewAudioVideoResponse 返回参数} */
+  /** 音视频审核 {@link ReviewAudioVideoRequest} {@link ReviewAudioVideoResponse} */
   ReviewAudioVideo(data: ReviewAudioVideoRequest, config?: AxiosRequestConfig): AxiosPromise<ReviewAudioVideoResponse>;
-  /** {@link ReviewImage 图片审核}({@link ReviewImageRequest 请求参数}): {@link ReviewImageResponse 返回参数} */
+  /** 图片审核 {@link ReviewImageRequest} {@link ReviewImageResponse} */
   ReviewImage(data: ReviewImageRequest, config?: AxiosRequestConfig): AxiosPromise<ReviewImageResponse>;
-  /** {@link SearchMedia 搜索媒体信息}({@link SearchMediaRequest 请求参数}): {@link SearchMediaResponse 返回参数} */
+  /** 搜索媒体信息 {@link SearchMediaRequest} {@link SearchMediaResponse} */
   SearchMedia(data?: SearchMediaRequest, config?: AxiosRequestConfig): AxiosPromise<SearchMediaResponse>;
-  /** {@link SetDrmKeyProviderInfo 设置 DRM 密钥提供商信息}({@link SetDrmKeyProviderInfoRequest 请求参数}): {@link SetDrmKeyProviderInfoResponse 返回参数} */
+  /** 设置 DRM 密钥提供商信息 {@link SetDrmKeyProviderInfoRequest} {@link SetDrmKeyProviderInfoResponse} */
   SetDrmKeyProviderInfo(data?: SetDrmKeyProviderInfoRequest, config?: AxiosRequestConfig): AxiosPromise<SetDrmKeyProviderInfoResponse>;
-  /** {@link SimpleHlsClip 简单 HLS 剪辑}({@link SimpleHlsClipRequest 请求参数}): {@link SimpleHlsClipResponse 返回参数} */
+  /** 简单 HLS 剪辑 {@link SimpleHlsClipRequest} {@link SimpleHlsClipResponse} */
   SimpleHlsClip(data: SimpleHlsClipRequest, config?: AxiosRequestConfig): AxiosPromise<SimpleHlsClipResponse>;
-  /** {@link SplitMedia 视频拆条}({@link SplitMediaRequest 请求参数}): {@link SplitMediaResponse 返回参数} */
+  /** 视频拆条 {@link SplitMediaRequest} {@link SplitMediaResponse} */
   SplitMedia(data: SplitMediaRequest, config?: AxiosRequestConfig): AxiosPromise<SplitMediaResponse>;
-  /** {@link WeChatMiniProgramPublish 微信小程序视频发布}({@link WeChatMiniProgramPublishRequest 请求参数}): {@link WeChatMiniProgramPublishResponse 返回参数} */
+  /** 微信小程序视频发布 {@link WeChatMiniProgramPublishRequest} {@link WeChatMiniProgramPublishResponse} */
   WeChatMiniProgramPublish(data: WeChatMiniProgramPublishRequest, config?: AxiosRequestConfig): AxiosPromise<WeChatMiniProgramPublishResponse>;
 }
 

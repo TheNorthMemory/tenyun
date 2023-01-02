@@ -84,7 +84,7 @@ declare interface CreateFlowServiceResponse {
   FlowServiceResource: string;
   /** 生成日期 */
   CreateDate: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -96,7 +96,7 @@ declare interface DescribeExecutionHistoryRequest {
 declare interface DescribeExecutionHistoryResponse {
   /** 执行的事件列表 */
   Events: ExecutionEvent[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -124,7 +124,7 @@ declare interface DescribeExecutionResponse {
   Output?: string | null;
   /** 启动执行时，状态机的定义 */
   ExecutionDefinition?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -142,7 +142,7 @@ declare interface DescribeExecutionsRequest {
 }
 
 declare interface DescribeExecutionsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -174,7 +174,7 @@ declare interface DescribeFlowServiceDetailResponse {
   CLSUrl: string | null;
   /** 工作流提示输入 */
   FlowInput: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -192,7 +192,7 @@ declare interface DescribeFlowServicesResponse {
   FlowServiceSet?: StateMachine[];
   /** 用户的状态机总数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -222,7 +222,7 @@ declare interface ModifyFlowServiceResponse {
   FlowServiceResource: string;
   /** 更新时间 */
   UpdateDate: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -240,7 +240,7 @@ declare interface StartExecutionResponse {
   ExecutionResourceName: string;
   /** 执行开始时间 */
   StartDate: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -250,30 +250,30 @@ declare interface StopExecutionRequest {
 }
 
 declare interface StopExecutionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Asw 应用与服务编排工作流} */
 declare interface Asw {
   (): Versions;
-  /** {@link CreateFlowService 创建状态机}({@link CreateFlowServiceRequest 请求参数}): {@link CreateFlowServiceResponse 返回参数} */
+  /** 创建状态机 {@link CreateFlowServiceRequest} {@link CreateFlowServiceResponse} */
   CreateFlowService(data: CreateFlowServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowServiceResponse>;
-  /** {@link DescribeExecution 查询执行详细信息}({@link DescribeExecutionRequest 请求参数}): {@link DescribeExecutionResponse 返回参数} */
+  /** 查询执行详细信息 {@link DescribeExecutionRequest} {@link DescribeExecutionResponse} */
   DescribeExecution(data: DescribeExecutionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExecutionResponse>;
-  /** {@link DescribeExecutionHistory 查询执行的事件历史}({@link DescribeExecutionHistoryRequest 请求参数}): {@link DescribeExecutionHistoryResponse 返回参数} */
+  /** 查询执行的事件历史 {@link DescribeExecutionHistoryRequest} {@link DescribeExecutionHistoryResponse} */
   DescribeExecutionHistory(data: DescribeExecutionHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExecutionHistoryResponse>;
-  /** {@link DescribeExecutions 查询状态机执行列表}({@link DescribeExecutionsRequest 请求参数}): {@link DescribeExecutionsResponse 返回参数} */
+  /** 查询状态机执行列表 {@link DescribeExecutionsRequest} {@link DescribeExecutionsResponse} */
   DescribeExecutions(data: DescribeExecutionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExecutionsResponse>;
-  /** {@link DescribeFlowServiceDetail 查询状态机详情}({@link DescribeFlowServiceDetailRequest 请求参数}): {@link DescribeFlowServiceDetailResponse 返回参数} */
+  /** 查询状态机详情 {@link DescribeFlowServiceDetailRequest} {@link DescribeFlowServiceDetailResponse} */
   DescribeFlowServiceDetail(data: DescribeFlowServiceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowServiceDetailResponse>;
-  /** {@link DescribeFlowServices 查询状态机列表}({@link DescribeFlowServicesRequest 请求参数}): {@link DescribeFlowServicesResponse 返回参数} */
+  /** 查询状态机列表 {@link DescribeFlowServicesRequest} {@link DescribeFlowServicesResponse} */
   DescribeFlowServices(data?: DescribeFlowServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowServicesResponse>;
-  /** {@link ModifyFlowService 修改状态机}({@link ModifyFlowServiceRequest 请求参数}): {@link ModifyFlowServiceResponse 返回参数} */
+  /** 修改状态机 {@link ModifyFlowServiceRequest} {@link ModifyFlowServiceResponse} */
   ModifyFlowService(data: ModifyFlowServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFlowServiceResponse>;
-  /** {@link StartExecution 启动执行}({@link StartExecutionRequest 请求参数}): {@link StartExecutionResponse 返回参数} */
+  /** 启动执行 {@link StartExecutionRequest} {@link StartExecutionResponse} */
   StartExecution(data: StartExecutionRequest, config?: AxiosRequestConfig): AxiosPromise<StartExecutionResponse>;
-  /** {@link StopExecution 停止状态机}({@link StopExecutionRequest 请求参数}): {@link StopExecutionResponse 返回参数} */
+  /** 停止状态机 {@link StopExecutionRequest} {@link StopExecutionResponse} */
   StopExecution(data: StopExecutionRequest, config?: AxiosRequestConfig): AxiosPromise<StopExecutionResponse>;
 }
 

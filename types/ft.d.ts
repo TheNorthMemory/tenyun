@@ -54,7 +54,7 @@ declare interface CancelFaceMorphJobRequest {
 }
 
 declare interface CancelFaceMorphJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -74,7 +74,7 @@ declare interface ChangeAgePicResponse {
   ResultImage?: string;
   /** RspImgType 为 url 时，返回处理后的图片 url 数据。 */
   ResultUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -94,7 +94,7 @@ declare interface FaceCartoonPicResponse {
   ResultImage: string;
   /** RspImgType 为 url 时，返回处理后的图片 url 数据。(默认为base64) */
   ResultUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -120,7 +120,7 @@ declare interface MorphFaceResponse {
   JobId: string;
   /** 预估处理时间，粒度为秒 */
   EstimatedProcessTime: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -136,7 +136,7 @@ declare interface QueryFaceMorphJobResponse {
   FaceMorphOutput: FaceMorphOutput | null;
   /** 当前任务状态码：1：排队中、3: 处理中、5: 处理失败、7:处理完成 */
   JobStatusCode: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -156,24 +156,24 @@ declare interface SwapGenderPicResponse {
   ResultImage?: string;
   /** RspImgType 为 url 时，返回处理后的图片 url 数据。 */
   ResultUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ft 人像变换} */
 declare interface Ft {
   (): Versions;
-  /** {@link CancelFaceMorphJob 撤销人像渐变任务}({@link CancelFaceMorphJobRequest 请求参数}): {@link CancelFaceMorphJobResponse 返回参数} */
+  /** 撤销人像渐变任务 {@link CancelFaceMorphJobRequest} {@link CancelFaceMorphJobResponse} */
   CancelFaceMorphJob(data: CancelFaceMorphJobRequest, config?: AxiosRequestConfig): AxiosPromise<CancelFaceMorphJobResponse>;
-  /** {@link ChangeAgePic 人脸年龄变化}({@link ChangeAgePicRequest 请求参数}): {@link ChangeAgePicResponse 返回参数} */
+  /** 人脸年龄变化 {@link ChangeAgePicRequest} {@link ChangeAgePicResponse} */
   ChangeAgePic(data: ChangeAgePicRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeAgePicResponse>;
-  /** {@link FaceCartoonPic 人像动漫化}({@link FaceCartoonPicRequest 请求参数}): {@link FaceCartoonPicResponse 返回参数} */
+  /** 人像动漫化 {@link FaceCartoonPicRequest} {@link FaceCartoonPicResponse} */
   FaceCartoonPic(data?: FaceCartoonPicRequest, config?: AxiosRequestConfig): AxiosPromise<FaceCartoonPicResponse>;
-  /** {@link MorphFace 人像渐变}({@link MorphFaceRequest 请求参数}): {@link MorphFaceResponse 返回参数} */
+  /** 人像渐变 {@link MorphFaceRequest} {@link MorphFaceResponse} */
   MorphFace(data?: MorphFaceRequest, config?: AxiosRequestConfig): AxiosPromise<MorphFaceResponse>;
-  /** {@link QueryFaceMorphJob 查询人像渐变任务}({@link QueryFaceMorphJobRequest 请求参数}): {@link QueryFaceMorphJobResponse 返回参数} */
+  /** 查询人像渐变任务 {@link QueryFaceMorphJobRequest} {@link QueryFaceMorphJobResponse} */
   QueryFaceMorphJob(data: QueryFaceMorphJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryFaceMorphJobResponse>;
-  /** {@link SwapGenderPic 人脸性别转换}({@link SwapGenderPicRequest 请求参数}): {@link SwapGenderPicResponse 返回参数} */
+  /** 人脸性别转换 {@link SwapGenderPicRequest} {@link SwapGenderPicResponse} */
   SwapGenderPic(data: SwapGenderPicRequest, config?: AxiosRequestConfig): AxiosPromise<SwapGenderPicResponse>;
 }
 

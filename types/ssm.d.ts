@@ -112,7 +112,7 @@ declare interface CreateProductSecretResponse {
   TagMsg: string;
   /** 创建云产品凭据异步任务ID号。 */
   FlowID: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -142,7 +142,7 @@ declare interface CreateSSHKeyPairSecretResponse {
   TagCode: number;
   /** 标签操作的返回信息。 */
   TagMsg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -172,7 +172,7 @@ declare interface CreateSecretResponse {
   TagCode: number | null;
   /** 标签操作的返回信息 */
   TagMsg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -190,7 +190,7 @@ declare interface DeleteSecretResponse {
   SecretName: string;
   /** 凭据删除的日期，unix时间戳。 */
   DeleteTime: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -206,7 +206,7 @@ declare interface DeleteSecretVersionResponse {
   SecretName: string;
   /** 凭据版本号。 */
   VersionId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -220,7 +220,7 @@ declare interface DescribeAsyncRequestInfoResponse {
   TaskStatus: number;
   /** 任务描述信息。 */
   Description: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -238,7 +238,7 @@ declare interface DescribeRotationDetailResponse {
   LatestRotateTime: string | null;
   /** 下一次开始轮转的时间，显式可见的时间字符串，格式 2006-01-02 15:04:05。 */
   NextRotateBeginTime: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -252,7 +252,7 @@ declare interface DescribeRotationHistoryResponse {
   VersionIDs: string[];
   /** 版本号个数，可以给用户展示的版本号个数上限为10个。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -294,7 +294,7 @@ declare interface DescribeSecretResponse {
   AssociatedInstanceIDs: string[] | null;
   /** 当凭据类型为云API密钥对凭据时，此字段有效，用于表示此云API密钥对所属的用户UIN。 */
   TargetUin: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -306,7 +306,7 @@ declare interface DescribeSupportedProductsResponse {
   Products: string[];
   /** 支持的产品个数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -318,7 +318,7 @@ declare interface DisableSecretRequest {
 declare interface DisableSecretResponse {
   /** 停用的凭据名称。 */
   SecretName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -330,7 +330,7 @@ declare interface EnableSecretRequest {
 declare interface EnableSecretResponse {
   /** 启用的凭据名称。 */
   SecretName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -340,7 +340,7 @@ declare interface GetRegionsRequest {
 declare interface GetRegionsResponse {
   /** region列表。 */
   Regions: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -364,7 +364,7 @@ declare interface GetSSHKeyPairValueResponse {
   SSHKeyDescription: string;
   /** SSH密钥对的名称。用户可以在CVM侧控制台对密钥对的名称进行修改。 */
   SSHKeyName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -384,7 +384,7 @@ declare interface GetSecretValueResponse {
   SecretBinary: string;
   /** 在创建凭据(CreateSecret)时，如果指定的是普通文本数据，则该字段为返回结果。SecretBinary和SecretString只有一个不为空。 */
   SecretString: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -398,7 +398,7 @@ declare interface GetServiceStatusResponse {
   InvalidType: number;
   /** true表示用户已经可以使用密钥安全托管功能，false表示用户暂时不能使用密钥安全托管功能。 */
   AccessKeyEscrowEnabled: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -412,7 +412,7 @@ declare interface ListSecretVersionIdsResponse {
   SecretName: string;
   /** VersionId列表。 */
   Versions: VersionInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -440,7 +440,7 @@ declare interface ListSecretsResponse {
   TotalCount: number;
   /** 返回凭据信息列表。 */
   SecretMetadatas: SecretMetadata[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -460,7 +460,7 @@ declare interface PutSecretValueResponse {
   SecretName: string;
   /** 新增加的版本号。 */
   VersionId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -472,7 +472,7 @@ declare interface RestoreSecretRequest {
 declare interface RestoreSecretResponse {
   /** 凭据名称。 */
   SecretName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -484,7 +484,7 @@ declare interface RotateProductSecretRequest {
 declare interface RotateProductSecretResponse {
   /** 当凭据类型为云产品凭据时（即SecretType为1，如MySQL、Tdsql等托管凭据）此字段有效，返回轮转异步任务ID号。 */
   FlowID: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -498,7 +498,7 @@ declare interface UpdateDescriptionRequest {
 declare interface UpdateDescriptionResponse {
   /** 凭据名称。 */
   SecretName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -514,7 +514,7 @@ declare interface UpdateRotationStatusRequest {
 }
 
 declare interface UpdateRotationStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -534,60 +534,60 @@ declare interface UpdateSecretResponse {
   SecretName: string;
   /** 凭据版本号。 */
   VersionId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ssm 凭据管理系统} */
 declare interface Ssm {
   (): Versions;
-  /** {@link CreateProductSecret 创建云产品凭据}({@link CreateProductSecretRequest 请求参数}): {@link CreateProductSecretResponse 返回参数} */
+  /** 创建云产品凭据 {@link CreateProductSecretRequest} {@link CreateProductSecretResponse} */
   CreateProductSecret(data: CreateProductSecretRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProductSecretResponse>;
-  /** {@link CreateSSHKeyPairSecret 创建SSH密钥对凭据}({@link CreateSSHKeyPairSecretRequest 请求参数}): {@link CreateSSHKeyPairSecretResponse 返回参数} */
+  /** 创建SSH密钥对凭据 {@link CreateSSHKeyPairSecretRequest} {@link CreateSSHKeyPairSecretResponse} */
   CreateSSHKeyPairSecret(data: CreateSSHKeyPairSecretRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSSHKeyPairSecretResponse>;
-  /** {@link CreateSecret 创建凭据}({@link CreateSecretRequest 请求参数}): {@link CreateSecretResponse 返回参数} */
+  /** 创建凭据 {@link CreateSecretRequest} {@link CreateSecretResponse} */
   CreateSecret(data: CreateSecretRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecretResponse>;
-  /** {@link DeleteSecret 删除凭据信息}({@link DeleteSecretRequest 请求参数}): {@link DeleteSecretResponse 返回参数} */
+  /** 删除凭据信息 {@link DeleteSecretRequest} {@link DeleteSecretResponse} */
   DeleteSecret(data: DeleteSecretRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecretResponse>;
-  /** {@link DeleteSecretVersion 删除指定版本的凭据}({@link DeleteSecretVersionRequest 请求参数}): {@link DeleteSecretVersionResponse 返回参数} */
+  /** 删除指定版本的凭据 {@link DeleteSecretVersionRequest} {@link DeleteSecretVersionResponse} */
   DeleteSecretVersion(data: DeleteSecretVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecretVersionResponse>;
-  /** {@link DescribeAsyncRequestInfo 查询异步任务的执行结果}({@link DescribeAsyncRequestInfoRequest 请求参数}): {@link DescribeAsyncRequestInfoResponse 返回参数} */
+  /** 查询异步任务的执行结果 {@link DescribeAsyncRequestInfoRequest} {@link DescribeAsyncRequestInfoResponse} */
   DescribeAsyncRequestInfo(data: DescribeAsyncRequestInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsyncRequestInfoResponse>;
-  /** {@link DescribeRotationDetail 查询凭据轮转详情}({@link DescribeRotationDetailRequest 请求参数}): {@link DescribeRotationDetailResponse 返回参数} */
+  /** 查询凭据轮转详情 {@link DescribeRotationDetailRequest} {@link DescribeRotationDetailResponse} */
   DescribeRotationDetail(data: DescribeRotationDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRotationDetailResponse>;
-  /** {@link DescribeRotationHistory 查询凭据轮转历史版本}({@link DescribeRotationHistoryRequest 请求参数}): {@link DescribeRotationHistoryResponse 返回参数} */
+  /** 查询凭据轮转历史版本 {@link DescribeRotationHistoryRequest} {@link DescribeRotationHistoryResponse} */
   DescribeRotationHistory(data: DescribeRotationHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRotationHistoryResponse>;
-  /** {@link DescribeSecret 获取凭据详细信息}({@link DescribeSecretRequest 请求参数}): {@link DescribeSecretResponse 返回参数} */
+  /** 获取凭据详细信息 {@link DescribeSecretRequest} {@link DescribeSecretResponse} */
   DescribeSecret(data: DescribeSecretRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecretResponse>;
-  /** {@link DescribeSupportedProducts 查询支持的云产品列表}({@link DescribeSupportedProductsRequest 请求参数}): {@link DescribeSupportedProductsResponse 返回参数} */
+  /** 查询支持的云产品列表 {@link DescribeSupportedProductsRequest} {@link DescribeSupportedProductsResponse} */
   DescribeSupportedProducts(data?: DescribeSupportedProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportedProductsResponse>;
-  /** {@link DisableSecret 停用凭据}({@link DisableSecretRequest 请求参数}): {@link DisableSecretResponse 返回参数} */
+  /** 停用凭据 {@link DisableSecretRequest} {@link DisableSecretResponse} */
   DisableSecret(data: DisableSecretRequest, config?: AxiosRequestConfig): AxiosPromise<DisableSecretResponse>;
-  /** {@link EnableSecret 启用凭据}({@link EnableSecretRequest 请求参数}): {@link EnableSecretResponse 返回参数} */
+  /** 启用凭据 {@link EnableSecretRequest} {@link EnableSecretResponse} */
   EnableSecret(data: EnableSecretRequest, config?: AxiosRequestConfig): AxiosPromise<EnableSecretResponse>;
-  /** {@link GetRegions 获取控制台展示region列表}({@link GetRegionsRequest 请求参数}): {@link GetRegionsResponse 返回参数} */
+  /** 获取控制台展示region列表 {@link GetRegionsRequest} {@link GetRegionsResponse} */
   GetRegions(data?: GetRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRegionsResponse>;
-  /** {@link GetSSHKeyPairValue 获取SSH密钥对凭据明文}({@link GetSSHKeyPairValueRequest 请求参数}): {@link GetSSHKeyPairValueResponse 返回参数} */
+  /** 获取SSH密钥对凭据明文 {@link GetSSHKeyPairValueRequest} {@link GetSSHKeyPairValueResponse} */
   GetSSHKeyPairValue(data?: GetSSHKeyPairValueRequest, config?: AxiosRequestConfig): AxiosPromise<GetSSHKeyPairValueResponse>;
-  /** {@link GetSecretValue 获取凭据明文}({@link GetSecretValueRequest 请求参数}): {@link GetSecretValueResponse 返回参数} */
+  /** 获取凭据明文 {@link GetSecretValueRequest} {@link GetSecretValueResponse} */
   GetSecretValue(data: GetSecretValueRequest, config?: AxiosRequestConfig): AxiosPromise<GetSecretValueResponse>;
-  /** {@link GetServiceStatus 获取用户服务开通状态}({@link GetServiceStatusRequest 请求参数}): {@link GetServiceStatusResponse 返回参数} */
+  /** 获取用户服务开通状态 {@link GetServiceStatusRequest} {@link GetServiceStatusResponse} */
   GetServiceStatus(data?: GetServiceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetServiceStatusResponse>;
-  /** {@link ListSecretVersionIds 获取指定凭据下的版本列表信息。}({@link ListSecretVersionIdsRequest 请求参数}): {@link ListSecretVersionIdsResponse 返回参数} */
+  /** 获取指定凭据下的版本列表信息。 {@link ListSecretVersionIdsRequest} {@link ListSecretVersionIdsResponse} */
   ListSecretVersionIds(data: ListSecretVersionIdsRequest, config?: AxiosRequestConfig): AxiosPromise<ListSecretVersionIdsResponse>;
-  /** {@link ListSecrets 获取凭据的详细信息列表}({@link ListSecretsRequest 请求参数}): {@link ListSecretsResponse 返回参数} */
+  /** 获取凭据的详细信息列表 {@link ListSecretsRequest} {@link ListSecretsResponse} */
   ListSecrets(data?: ListSecretsRequest, config?: AxiosRequestConfig): AxiosPromise<ListSecretsResponse>;
-  /** {@link PutSecretValue 增加新版本凭据}({@link PutSecretValueRequest 请求参数}): {@link PutSecretValueResponse 返回参数} */
+  /** 增加新版本凭据 {@link PutSecretValueRequest} {@link PutSecretValueResponse} */
   PutSecretValue(data: PutSecretValueRequest, config?: AxiosRequestConfig): AxiosPromise<PutSecretValueResponse>;
-  /** {@link RestoreSecret 恢复计划删除中的凭据}({@link RestoreSecretRequest 请求参数}): {@link RestoreSecretResponse 返回参数} */
+  /** 恢复计划删除中的凭据 {@link RestoreSecretRequest} {@link RestoreSecretResponse} */
   RestoreSecret(data: RestoreSecretRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreSecretResponse>;
-  /** {@link RotateProductSecret 轮转云产品凭据}({@link RotateProductSecretRequest 请求参数}): {@link RotateProductSecretResponse 返回参数} */
+  /** 轮转云产品凭据 {@link RotateProductSecretRequest} {@link RotateProductSecretResponse} */
   RotateProductSecret(data: RotateProductSecretRequest, config?: AxiosRequestConfig): AxiosPromise<RotateProductSecretResponse>;
-  /** {@link UpdateDescription 更新凭据描述信息}({@link UpdateDescriptionRequest 请求参数}): {@link UpdateDescriptionResponse 返回参数} */
+  /** 更新凭据描述信息 {@link UpdateDescriptionRequest} {@link UpdateDescriptionResponse} */
   UpdateDescription(data: UpdateDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDescriptionResponse>;
-  /** {@link UpdateRotationStatus 设置云产品凭据轮转策略}({@link UpdateRotationStatusRequest 请求参数}): {@link UpdateRotationStatusResponse 返回参数} */
+  /** 设置云产品凭据轮转策略 {@link UpdateRotationStatusRequest} {@link UpdateRotationStatusResponse} */
   UpdateRotationStatus(data: UpdateRotationStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRotationStatusResponse>;
-  /** {@link UpdateSecret 更新凭据内容}({@link UpdateSecretRequest 请求参数}): {@link UpdateSecretResponse 返回参数} */
+  /** 更新凭据内容 {@link UpdateSecretRequest} {@link UpdateSecretResponse} */
   UpdateSecret(data: UpdateSecretRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSecretResponse>;
 }
 

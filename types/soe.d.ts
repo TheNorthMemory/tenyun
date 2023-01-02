@@ -130,7 +130,7 @@ declare interface InitOralProcessRequest {
 declare interface InitOralProcessResponse {
   /** 语音段唯一标识，一个完整语音一个SessionId */
   SessionId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -160,7 +160,7 @@ declare interface KeywordEvaluateResponse {
   KeywordScores: KeywordScore[];
   /** 语音段唯一标识，一段完整语音使用一个SessionId，不同语音段的评测需要使用不同的SessionId。一般使用uuid(通用唯一识别码)来作为它的值，要尽量保证SessionId的唯一性。 */
   SessionId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -210,7 +210,7 @@ declare interface TransmitOralProcessResponse {
   KeyWordHits: number[] | null;
   /** 负向主题词命中标志，0表示没命中，1表示命中 */
   UnKeyWordHits: number[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -278,20 +278,20 @@ declare interface TransmitOralProcessWithInitResponse {
   KeyWordHits: number[] | null;
   /** 负向主题词命中标志，0表示没命中，1表示命中 */
   UnKeyWordHits: number[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Soe 智聆口语评测} */
 declare interface Soe {
   (): Versions;
-  /** {@link InitOralProcess 发音评估初始化}({@link InitOralProcessRequest 请求参数}): {@link InitOralProcessResponse 返回参数} */
+  /** 发音评估初始化 {@link InitOralProcessRequest} {@link InitOralProcessResponse} */
   InitOralProcess(data: InitOralProcessRequest, config?: AxiosRequestConfig): AxiosPromise<InitOralProcessResponse>;
-  /** {@link KeywordEvaluate 关键词评测}({@link KeywordEvaluateRequest 请求参数}): {@link KeywordEvaluateResponse 返回参数} */
+  /** 关键词评测 {@link KeywordEvaluateRequest} {@link KeywordEvaluateResponse} */
   KeywordEvaluate(data: KeywordEvaluateRequest, config?: AxiosRequestConfig): AxiosPromise<KeywordEvaluateResponse>;
-  /** {@link TransmitOralProcess 发音数据传输接口}({@link TransmitOralProcessRequest 请求参数}): {@link TransmitOralProcessResponse 返回参数} */
+  /** 发音数据传输接口 {@link TransmitOralProcessRequest} {@link TransmitOralProcessResponse} */
   TransmitOralProcess(data: TransmitOralProcessRequest, config?: AxiosRequestConfig): AxiosPromise<TransmitOralProcessResponse>;
-  /** {@link TransmitOralProcessWithInit 发音数据传输接口附带初始化过程（常用实践）}({@link TransmitOralProcessWithInitRequest 请求参数}): {@link TransmitOralProcessWithInitResponse 返回参数} */
+  /** 发音数据传输接口附带初始化过程（常用实践） {@link TransmitOralProcessWithInitRequest} {@link TransmitOralProcessWithInitResponse} */
   TransmitOralProcessWithInit(data: TransmitOralProcessWithInitRequest, config?: AxiosRequestConfig): AxiosPromise<TransmitOralProcessWithInitResponse>;
 }
 

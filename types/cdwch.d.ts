@@ -200,7 +200,7 @@ declare interface ActionAlterCkUserRequest {
 declare interface ActionAlterCkUserResponse {
   /** 错误信息 */
   ErrMsg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -216,7 +216,7 @@ declare interface CreateBackUpScheduleRequest {
 }
 
 declare interface CreateBackUpScheduleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -258,7 +258,7 @@ declare interface CreateInstanceNewResponse {
   InstanceId: string | null;
   /** 错误信息 */
   ErrorMsg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -276,7 +276,7 @@ declare interface DescribeCkSqlApisRequest {
 declare interface DescribeCkSqlApisResponse {
   /** 返回的查询数据，大部分情况是list，也可能是bool */
   ReturnData: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -288,7 +288,7 @@ declare interface DescribeInstanceRequest {
 declare interface DescribeInstanceResponse {
   /** 实例描述信息 */
   InstanceInfo: InstanceInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -300,7 +300,7 @@ declare interface DescribeInstanceShardsRequest {
 declare interface DescribeInstanceShardsResponse {
   /** 实例shard信息 */
   InstanceShardsList: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -320,7 +320,7 @@ declare interface DescribeSpecResponse {
   DataSpec: ResourceSpec[];
   /** 云盘列表 */
   AttachCBSSpec: DiskSpec[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -338,7 +338,7 @@ declare interface ModifyClusterConfigsResponse {
   FlowId: number;
   /** 错误信息 */
   ErrorMsg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -346,7 +346,7 @@ declare interface ModifyUserNewPrivilegeRequest {
 }
 
 declare interface ModifyUserNewPrivilegeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -360,32 +360,32 @@ declare interface OpenBackUpRequest {
 }
 
 declare interface OpenBackUpResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cdwch 云数据仓库 ClickHouse} */
 declare interface Cdwch {
   (): Versions;
-  /** {@link ActionAlterCkUser 新增、修改ck用户接口}({@link ActionAlterCkUserRequest 请求参数}): {@link ActionAlterCkUserResponse 返回参数} */
+  /** 新增、修改ck用户接口 {@link ActionAlterCkUserRequest} {@link ActionAlterCkUserResponse} */
   ActionAlterCkUser(data: ActionAlterCkUserRequest, config?: AxiosRequestConfig): AxiosPromise<ActionAlterCkUserResponse>;
-  /** {@link CreateBackUpSchedule 创建或者修改备份策略}({@link CreateBackUpScheduleRequest 请求参数}): {@link CreateBackUpScheduleResponse 返回参数} */
+  /** 创建或者修改备份策略 {@link CreateBackUpScheduleRequest} {@link CreateBackUpScheduleResponse} */
   CreateBackUpSchedule(data?: CreateBackUpScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackUpScheduleResponse>;
-  /** {@link CreateInstanceNew 创建集群openApi}({@link CreateInstanceNewRequest 请求参数}): {@link CreateInstanceNewResponse 返回参数} */
+  /** 创建集群openApi {@link CreateInstanceNewRequest} {@link CreateInstanceNewResponse} */
   CreateInstanceNew(data: CreateInstanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceNewResponse>;
-  /** {@link DescribeCkSqlApis 查询集群用户相关信息}({@link DescribeCkSqlApisRequest 请求参数}): {@link DescribeCkSqlApisResponse 返回参数} */
+  /** 查询集群用户相关信息 {@link DescribeCkSqlApisRequest} {@link DescribeCkSqlApisResponse} */
   DescribeCkSqlApis(data: DescribeCkSqlApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCkSqlApisResponse>;
-  /** {@link DescribeInstance 描述实例信息}({@link DescribeInstanceRequest 请求参数}): {@link DescribeInstanceResponse 返回参数} */
+  /** 描述实例信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
-  /** {@link DescribeInstanceShards 获取实例shard信息列表}({@link DescribeInstanceShardsRequest 请求参数}): {@link DescribeInstanceShardsResponse 返回参数} */
+  /** 获取实例shard信息列表 {@link DescribeInstanceShardsRequest} {@link DescribeInstanceShardsResponse} */
   DescribeInstanceShards(data: DescribeInstanceShardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceShardsResponse>;
-  /** {@link DescribeSpec 获取集群规格}({@link DescribeSpecRequest 请求参数}): {@link DescribeSpecResponse 返回参数} */
+  /** 获取集群规格 {@link DescribeSpecRequest} {@link DescribeSpecResponse} */
   DescribeSpec(data: DescribeSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecResponse>;
-  /** {@link ModifyClusterConfigs 修改集群配置文件接口}({@link ModifyClusterConfigsRequest 请求参数}): {@link ModifyClusterConfigsResponse 返回参数} */
+  /** 修改集群配置文件接口 {@link ModifyClusterConfigsRequest} {@link ModifyClusterConfigsResponse} */
   ModifyClusterConfigs(data: ModifyClusterConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterConfigsResponse>;
-  /** {@link ModifyUserNewPrivilege 新增、修改ck账号cluster权限（新版）}({@link ModifyUserNewPrivilegeRequest 请求参数}): {@link ModifyUserNewPrivilegeResponse 返回参数} */
+  /** 新增、修改ck账号cluster权限（新版） {@link ModifyUserNewPrivilegeRequest} {@link ModifyUserNewPrivilegeResponse} */
   ModifyUserNewPrivilege(data?: ModifyUserNewPrivilegeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserNewPrivilegeResponse>;
-  /** {@link OpenBackUp 开启或者关闭策略}({@link OpenBackUpRequest 请求参数}): {@link OpenBackUpResponse 返回参数} */
+  /** 开启或者关闭策略 {@link OpenBackUpRequest} {@link OpenBackUpResponse} */
   OpenBackUp(data: OpenBackUpRequest, config?: AxiosRequestConfig): AxiosPromise<OpenBackUpResponse>;
 }
 

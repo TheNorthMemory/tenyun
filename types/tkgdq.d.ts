@@ -52,7 +52,7 @@ declare interface DescribeEntityRequest {
 declare interface DescribeEntityResponse {
   /** 返回查询实体相关信息 */
   Content?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -66,7 +66,7 @@ declare interface DescribeRelationRequest {
 declare interface DescribeRelationResponse {
   /** 返回查询实体间的关系 */
   Content?: EntityRelationContent[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -78,18 +78,18 @@ declare interface DescribeTripleRequest {
 declare interface DescribeTripleResponse {
   /** 返回三元组信息 */
   Content?: TripleContent[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tkgdq 腾讯知识图谱数据查询} */
 declare interface Tkgdq {
   (): Versions;
-  /** {@link DescribeEntity 实体信息查询}({@link DescribeEntityRequest 请求参数}): {@link DescribeEntityResponse 返回参数} */
+  /** 实体信息查询 {@link DescribeEntityRequest} {@link DescribeEntityResponse} */
   DescribeEntity(data: DescribeEntityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEntityResponse>;
-  /** {@link DescribeRelation 实体关系查询}({@link DescribeRelationRequest 请求参数}): {@link DescribeRelationResponse 返回参数} */
+  /** 实体关系查询 {@link DescribeRelationRequest} {@link DescribeRelationResponse} */
   DescribeRelation(data: DescribeRelationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelationResponse>;
-  /** {@link DescribeTriple 三元组查询}({@link DescribeTripleRequest 请求参数}): {@link DescribeTripleResponse 返回参数} */
+  /** 三元组查询 {@link DescribeTripleRequest} {@link DescribeTripleResponse} */
   DescribeTriple(data: DescribeTripleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTripleResponse>;
 }
 

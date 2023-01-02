@@ -246,7 +246,7 @@ declare interface CreateLogExportRequest {
 declare interface CreateLogExportResponse {
   /** 日志导出ID */
   ExportID: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -260,7 +260,7 @@ declare interface CreateOfflineLogConfigRequest {
 declare interface CreateOfflineLogConfigResponse {
   /** 接口返回信息 */
   Msg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -288,7 +288,7 @@ declare interface CreateProjectResponse {
   ID: number;
   /** 项目唯一key */
   Key: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -302,7 +302,7 @@ declare interface CreateReleaseFileRequest {
 declare interface CreateReleaseFileResponse {
   /** 调用结果 */
   Msg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -316,7 +316,7 @@ declare interface CreateStarProjectRequest {
 declare interface CreateStarProjectResponse {
   /** 接口返回信息 */
   Msg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -350,7 +350,7 @@ declare interface CreateTawInstanceResponse {
   InstanceId: string;
   /** 预付费订单 id */
   DealName: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -370,7 +370,7 @@ declare interface CreateWhitelistResponse {
   Msg: string;
   /** 白名单ID */
   ID: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -380,7 +380,7 @@ declare interface DeleteInstanceRequest {
 }
 
 declare interface DeleteInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -394,7 +394,7 @@ declare interface DeleteLogExportRequest {
 declare interface DeleteLogExportResponse {
   /** 是否成功，成功则为success；失败则直接返回Error，不返回该参数 */
   Msg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -408,7 +408,7 @@ declare interface DeleteOfflineLogConfigRequest {
 declare interface DeleteOfflineLogConfigResponse {
   /** 接口调用信息 */
   Msg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -422,7 +422,7 @@ declare interface DeleteOfflineLogRecordRequest {
 declare interface DeleteOfflineLogRecordResponse {
   /** 接口调用信息 */
   Msg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -434,7 +434,7 @@ declare interface DeleteProjectRequest {
 declare interface DeleteProjectResponse {
   /** 操作信息 */
   Msg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -446,7 +446,7 @@ declare interface DeleteReleaseFileRequest {
 declare interface DeleteReleaseFileResponse {
   /** 接口请求返回字符串 */
   Msg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -460,7 +460,7 @@ declare interface DeleteStarProjectRequest {
 declare interface DeleteStarProjectResponse {
   /** 返回消息 */
   Msg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -474,7 +474,7 @@ declare interface DeleteWhitelistRequest {
 declare interface DeleteWhitelistResponse {
   /** 消息success */
   Msg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -530,7 +530,7 @@ declare interface DescribeDataCustomUrlRequest {
 declare interface DescribeDataCustomUrlResponse {
   /** 返回值 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -584,7 +584,7 @@ declare interface DescribeDataEventUrlRequest {
 declare interface DescribeDataEventUrlResponse {
   /** 返回值 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -644,7 +644,7 @@ declare interface DescribeDataFetchProjectRequest {
 declare interface DescribeDataFetchProjectResponse {
   /** 返回值 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -700,7 +700,7 @@ declare interface DescribeDataFetchUrlInfoRequest {
 declare interface DescribeDataFetchUrlInfoResponse {
   /** 返回值 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -762,7 +762,7 @@ declare interface DescribeDataFetchUrlRequest {
 declare interface DescribeDataFetchUrlResponse {
   /** 返回值 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -778,7 +778,7 @@ declare interface DescribeDataLogUrlInfoRequest {
 declare interface DescribeDataLogUrlInfoResponse {
   /** 返回字符串 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -830,7 +830,7 @@ declare interface DescribeDataLogUrlStatisticsRequest {
 declare interface DescribeDataLogUrlStatisticsResponse {
   /** 返回值 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -886,7 +886,7 @@ declare interface DescribeDataPerformancePageRequest {
 declare interface DescribeDataPerformancePageResponse {
   /** 返回值 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -940,7 +940,7 @@ declare interface DescribeDataPerformanceProjectRequest {
 declare interface DescribeDataPerformanceProjectResponse {
   /** 返回值 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -992,7 +992,7 @@ declare interface DescribeDataPvUrlInfoRequest {
 declare interface DescribeDataPvUrlInfoResponse {
   /** 返回值 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1044,7 +1044,7 @@ declare interface DescribeDataPvUrlStatisticsRequest {
 declare interface DescribeDataPvUrlStatisticsResponse {
   /** 返回值 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1064,7 +1064,7 @@ declare interface DescribeDataReportCountRequest {
 declare interface DescribeDataReportCountResponse {
   /** 返回值 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1078,7 +1078,7 @@ declare interface DescribeDataRequest {
 declare interface DescribeDataResponse {
   /** 返回字符串 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1134,7 +1134,7 @@ declare interface DescribeDataSetUrlStatisticsRequest {
 declare interface DescribeDataSetUrlStatisticsResponse {
   /** 返回值 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1190,7 +1190,7 @@ declare interface DescribeDataStaticProjectRequest {
 declare interface DescribeDataStaticProjectResponse {
   /** 返回值 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1246,7 +1246,7 @@ declare interface DescribeDataStaticResourceRequest {
 declare interface DescribeDataStaticResourceResponse {
   /** 返回值 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1302,7 +1302,7 @@ declare interface DescribeDataStaticUrlRequest {
 declare interface DescribeDataStaticUrlResponse {
   /** 返回值 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1356,7 +1356,7 @@ declare interface DescribeDataWebVitalsPageRequest {
 declare interface DescribeDataWebVitalsPageResponse {
   /** 返回值 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1374,7 +1374,7 @@ declare interface DescribeErrorResponse {
   ID: number;
   /** 时间 */
   CreateTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1386,7 +1386,7 @@ declare interface DescribeLogExportsRequest {
 declare interface DescribeLogExportsResponse {
   /** 日志导出记录列表 */
   LogExportSet: LogExport[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1412,7 +1412,7 @@ declare interface DescribeLogListRequest {
 declare interface DescribeLogListResponse {
   /** 返回字符串 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1426,7 +1426,7 @@ declare interface DescribeOfflineLogConfigsResponse {
   Msg: string;
   /** 用户唯一标示数组 */
   UniqueIDSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1440,7 +1440,7 @@ declare interface DescribeOfflineLogRecordsResponse {
   Msg: string;
   /** 记录 ID 数组 */
   RecordSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1456,7 +1456,7 @@ declare interface DescribeOfflineLogsResponse {
   Msg: string;
   /** 日志列表 */
   LogSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1468,7 +1468,7 @@ declare interface DescribeProjectLimitsRequest {
 declare interface DescribeProjectLimitsResponse {
   /** 上报率数组列表 */
   ProjectLimitSet: ProjectLimit[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1488,7 +1488,7 @@ declare interface DescribeProjectsResponse {
   TotalCount: number;
   /** 项目列表 */
   ProjectSet: RumProject[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1506,7 +1506,7 @@ declare interface DescribePvListRequest {
 declare interface DescribePvListResponse {
   /** pv列表 */
   ProjectPvSet: RumPvInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1526,7 +1526,7 @@ declare interface DescribeReleaseFileSignResponse {
   StartTime: number;
   /** 过期时间戳 */
   ExpiredTime: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1540,7 +1540,7 @@ declare interface DescribeReleaseFilesRequest {
 declare interface DescribeReleaseFilesResponse {
   /** 文件信息列表 */
   Files: ReleaseFile[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1564,7 +1564,7 @@ declare interface DescribeRumLogListRequest {
 declare interface DescribeRumLogListResponse {
   /** 返回字符串 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1584,7 +1584,7 @@ declare interface DescribeRumStatsLogListRequest {
 declare interface DescribeRumStatsLogListResponse {
   /** 返回字符串 */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1602,7 +1602,7 @@ declare interface DescribeScoresRequest {
 declare interface DescribeScoresResponse {
   /** 数组 */
   ScoreSet: ScoreInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1624,7 +1624,7 @@ declare interface DescribeTawAreasResponse {
   TotalCount: number;
   /** 片区列表 */
   AreaSet: RumAreaInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1654,7 +1654,7 @@ declare interface DescribeTawInstancesResponse {
   InstanceSet: RumInstanceInfo[];
   /** 实例总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1672,7 +1672,7 @@ declare interface DescribeUvListRequest {
 declare interface DescribeUvListResponse {
   /** uv列表 */
   ProjectUvSet: RumUvInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1684,7 +1684,7 @@ declare interface DescribeWhitelistsRequest {
 declare interface DescribeWhitelistsResponse {
   /** 白名单列表 */
   WhitelistSet: Whitelist[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1698,7 +1698,7 @@ declare interface ModifyInstanceRequest {
 }
 
 declare interface ModifyInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1718,7 +1718,7 @@ declare interface ModifyProjectLimitRequest {
 declare interface ModifyProjectLimitResponse {
   /** 返回信息 */
   Msg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1748,7 +1748,7 @@ declare interface ModifyProjectResponse {
   Msg: string;
   /** 项目id */
   ID: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1758,7 +1758,7 @@ declare interface ResumeInstanceRequest {
 }
 
 declare interface ResumeInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1768,7 +1768,7 @@ declare interface StopInstanceRequest {
 }
 
 declare interface StopInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1778,126 +1778,126 @@ declare interface StopProjectRequest {
 }
 
 declare interface StopProjectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Rum 前端性能监控} */
 declare interface Rum {
   (): Versions;
-  /** {@link CreateLogExport 创建日志下载任务}({@link CreateLogExportRequest 请求参数}): {@link CreateLogExportResponse 返回参数} */
+  /** 创建日志下载任务 {@link CreateLogExportRequest} {@link CreateLogExportResponse} */
   CreateLogExport(data: CreateLogExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogExportResponse>;
-  /** {@link CreateOfflineLogConfig 创建离线日志监听}({@link CreateOfflineLogConfigRequest 请求参数}): {@link CreateOfflineLogConfigResponse 返回参数} */
+  /** 创建离线日志监听 {@link CreateOfflineLogConfigRequest} {@link CreateOfflineLogConfigResponse} */
   CreateOfflineLogConfig(data: CreateOfflineLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOfflineLogConfigResponse>;
-  /** {@link CreateProject 创建项目}({@link CreateProjectRequest 请求参数}): {@link CreateProjectResponse 返回参数} */
+  /** 创建项目 {@link CreateProjectRequest} {@link CreateProjectResponse} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
-  /** {@link CreateReleaseFile 创建发布文件记录}({@link CreateReleaseFileRequest 请求参数}): {@link CreateReleaseFileResponse 返回参数} */
+  /** 创建发布文件记录 {@link CreateReleaseFileRequest} {@link CreateReleaseFileResponse} */
   CreateReleaseFile(data: CreateReleaseFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseFileResponse>;
-  /** {@link CreateStarProject 添加星标项目}({@link CreateStarProjectRequest 请求参数}): {@link CreateStarProjectResponse 返回参数} */
+  /** 添加星标项目 {@link CreateStarProjectRequest} {@link CreateStarProjectResponse} */
   CreateStarProject(data: CreateStarProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStarProjectResponse>;
-  /** {@link CreateTawInstance 创建Rum实例}({@link CreateTawInstanceRequest 请求参数}): {@link CreateTawInstanceResponse 返回参数} */
+  /** 创建Rum实例 {@link CreateTawInstanceRequest} {@link CreateTawInstanceResponse} */
   CreateTawInstance(data: CreateTawInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTawInstanceResponse>;
-  /** {@link CreateWhitelist 创建白名单}({@link CreateWhitelistRequest 请求参数}): {@link CreateWhitelistResponse 返回参数} */
+  /** 创建白名单 {@link CreateWhitelistRequest} {@link CreateWhitelistResponse} */
   CreateWhitelist(data: CreateWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWhitelistResponse>;
-  /** {@link DeleteInstance 删除实例}({@link DeleteInstanceRequest 请求参数}): {@link DeleteInstanceResponse 返回参数} */
+  /** 删除实例 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
-  /** {@link DeleteLogExport 删除日志下载任务}({@link DeleteLogExportRequest 请求参数}): {@link DeleteLogExportResponse 返回参数} */
+  /** 删除日志下载任务 {@link DeleteLogExportRequest} {@link DeleteLogExportResponse} */
   DeleteLogExport(data: DeleteLogExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogExportResponse>;
-  /** {@link DeleteOfflineLogConfig 删除 rum 离线日志监听}({@link DeleteOfflineLogConfigRequest 请求参数}): {@link DeleteOfflineLogConfigResponse 返回参数} */
+  /** 删除 rum 离线日志监听 {@link DeleteOfflineLogConfigRequest} {@link DeleteOfflineLogConfigResponse} */
   DeleteOfflineLogConfig(data: DeleteOfflineLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOfflineLogConfigResponse>;
-  /** {@link DeleteOfflineLogRecord 删除离线日志记录}({@link DeleteOfflineLogRecordRequest 请求参数}): {@link DeleteOfflineLogRecordResponse 返回参数} */
+  /** 删除离线日志记录 {@link DeleteOfflineLogRecordRequest} {@link DeleteOfflineLogRecordResponse} */
   DeleteOfflineLogRecord(data: DeleteOfflineLogRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOfflineLogRecordResponse>;
-  /** {@link DeleteProject 删除 rum 项目}({@link DeleteProjectRequest 请求参数}): {@link DeleteProjectResponse 返回参数} */
+  /** 删除 rum 项目 {@link DeleteProjectRequest} {@link DeleteProjectResponse} */
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
-  /** {@link DeleteReleaseFile 删除发布文件}({@link DeleteReleaseFileRequest 请求参数}): {@link DeleteReleaseFileResponse 返回参数} */
+  /** 删除发布文件 {@link DeleteReleaseFileRequest} {@link DeleteReleaseFileResponse} */
   DeleteReleaseFile(data: DeleteReleaseFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReleaseFileResponse>;
-  /** {@link DeleteStarProject 删除星标项目}({@link DeleteStarProjectRequest 请求参数}): {@link DeleteStarProjectResponse 返回参数} */
+  /** 删除星标项目 {@link DeleteStarProjectRequest} {@link DeleteStarProjectResponse} */
   DeleteStarProject(data: DeleteStarProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStarProjectResponse>;
-  /** {@link DeleteWhitelist 删除白名单}({@link DeleteWhitelistRequest 请求参数}): {@link DeleteWhitelistResponse 返回参数} */
+  /** 删除白名单 {@link DeleteWhitelistRequest} {@link DeleteWhitelistResponse} */
   DeleteWhitelist(data: DeleteWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWhitelistResponse>;
-  /** {@link DescribeData 获取QueryData}({@link DescribeDataRequest 请求参数}): {@link DescribeDataResponse 返回参数} */
+  /** 获取QueryData {@link DescribeDataRequest} {@link DescribeDataResponse} */
   DescribeData(data: DescribeDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataResponse>;
-  /** {@link DescribeDataCustomUrl 获取DescribeDataCustomUrl信息}({@link DescribeDataCustomUrlRequest 请求参数}): {@link DescribeDataCustomUrlResponse 返回参数} */
+  /** 获取DescribeDataCustomUrl信息 {@link DescribeDataCustomUrlRequest} {@link DescribeDataCustomUrlResponse} */
   DescribeDataCustomUrl(data: DescribeDataCustomUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataCustomUrlResponse>;
-  /** {@link DescribeDataEventUrl 获取DescribeDataEventUrl信息}({@link DescribeDataEventUrlRequest 请求参数}): {@link DescribeDataEventUrlResponse 返回参数} */
+  /** 获取DescribeDataEventUrl信息 {@link DescribeDataEventUrlRequest} {@link DescribeDataEventUrlResponse} */
   DescribeDataEventUrl(data: DescribeDataEventUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEventUrlResponse>;
-  /** {@link DescribeDataFetchProject 获取DescribeDataFetchProject信息（已下线，请使用DescribeDataFetchUrl）}({@link DescribeDataFetchProjectRequest 请求参数}): {@link DescribeDataFetchProjectResponse 返回参数} */
+  /** 获取DescribeDataFetchProject信息（已下线，请使用DescribeDataFetchUrl） {@link DescribeDataFetchProjectRequest} {@link DescribeDataFetchProjectResponse} */
   DescribeDataFetchProject(data: DescribeDataFetchProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataFetchProjectResponse>;
-  /** {@link DescribeDataFetchUrl 获取DescribeDataFetchUrl信息}({@link DescribeDataFetchUrlRequest 请求参数}): {@link DescribeDataFetchUrlResponse 返回参数} */
+  /** 获取DescribeDataFetchUrl信息 {@link DescribeDataFetchUrlRequest} {@link DescribeDataFetchUrlResponse} */
   DescribeDataFetchUrl(data: DescribeDataFetchUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataFetchUrlResponse>;
-  /** {@link DescribeDataFetchUrlInfo 获取DescribeDataFetchUrlInfo信息}({@link DescribeDataFetchUrlInfoRequest 请求参数}): {@link DescribeDataFetchUrlInfoResponse 返回参数} */
+  /** 获取DescribeDataFetchUrlInfo信息 {@link DescribeDataFetchUrlInfoRequest} {@link DescribeDataFetchUrlInfoResponse} */
   DescribeDataFetchUrlInfo(data: DescribeDataFetchUrlInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataFetchUrlInfoResponse>;
-  /** {@link DescribeDataLogUrlInfo 获取dataloginfo信息}({@link DescribeDataLogUrlInfoRequest 请求参数}): {@link DescribeDataLogUrlInfoResponse 返回参数} */
+  /** 获取dataloginfo信息 {@link DescribeDataLogUrlInfoRequest} {@link DescribeDataLogUrlInfoResponse} */
   DescribeDataLogUrlInfo(data: DescribeDataLogUrlInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataLogUrlInfoResponse>;
-  /** {@link DescribeDataLogUrlStatistics 获取LogUrlStatistics信息}({@link DescribeDataLogUrlStatisticsRequest 请求参数}): {@link DescribeDataLogUrlStatisticsResponse 返回参数} */
+  /** 获取LogUrlStatistics信息 {@link DescribeDataLogUrlStatisticsRequest} {@link DescribeDataLogUrlStatisticsResponse} */
   DescribeDataLogUrlStatistics(data: DescribeDataLogUrlStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataLogUrlStatisticsResponse>;
-  /** {@link DescribeDataPerformancePage 获取PerformancePage信息}({@link DescribeDataPerformancePageRequest 请求参数}): {@link DescribeDataPerformancePageResponse 返回参数} */
+  /** 获取PerformancePage信息 {@link DescribeDataPerformancePageRequest} {@link DescribeDataPerformancePageResponse} */
   DescribeDataPerformancePage(data: DescribeDataPerformancePageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataPerformancePageResponse>;
-  /** {@link DescribeDataPerformanceProject 获取PerformanceProject信息（已停用，请使用DescribeDataPerformancePage）}({@link DescribeDataPerformanceProjectRequest 请求参数}): {@link DescribeDataPerformanceProjectResponse 返回参数} */
+  /** 获取PerformanceProject信息（已停用，请使用DescribeDataPerformancePage） {@link DescribeDataPerformanceProjectRequest} {@link DescribeDataPerformanceProjectResponse} */
   DescribeDataPerformanceProject(data: DescribeDataPerformanceProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataPerformanceProjectResponse>;
-  /** {@link DescribeDataPvUrlInfo 获取PvUrlInfo信息}({@link DescribeDataPvUrlInfoRequest 请求参数}): {@link DescribeDataPvUrlInfoResponse 返回参数} */
+  /** 获取PvUrlInfo信息 {@link DescribeDataPvUrlInfoRequest} {@link DescribeDataPvUrlInfoResponse} */
   DescribeDataPvUrlInfo(data: DescribeDataPvUrlInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataPvUrlInfoResponse>;
-  /** {@link DescribeDataPvUrlStatistics 获取DescribeDataPvUrlStatistics信息}({@link DescribeDataPvUrlStatisticsRequest 请求参数}): {@link DescribeDataPvUrlStatisticsResponse 返回参数} */
+  /** 获取DescribeDataPvUrlStatistics信息 {@link DescribeDataPvUrlStatisticsRequest} {@link DescribeDataPvUrlStatisticsResponse} */
   DescribeDataPvUrlStatistics(data: DescribeDataPvUrlStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataPvUrlStatisticsResponse>;
-  /** {@link DescribeDataReportCount 获取上报量}({@link DescribeDataReportCountRequest 请求参数}): {@link DescribeDataReportCountResponse 返回参数} */
+  /** 获取上报量 {@link DescribeDataReportCountRequest} {@link DescribeDataReportCountResponse} */
   DescribeDataReportCount(data: DescribeDataReportCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataReportCountResponse>;
-  /** {@link DescribeDataSetUrlStatistics 获取DescribeDataSetUrlStatistics信息}({@link DescribeDataSetUrlStatisticsRequest 请求参数}): {@link DescribeDataSetUrlStatisticsResponse 返回参数} */
+  /** 获取DescribeDataSetUrlStatistics信息 {@link DescribeDataSetUrlStatisticsRequest} {@link DescribeDataSetUrlStatisticsResponse} */
   DescribeDataSetUrlStatistics(data: DescribeDataSetUrlStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSetUrlStatisticsResponse>;
-  /** {@link DescribeDataStaticProject 获取DescribeDataStaticProject信息}({@link DescribeDataStaticProjectRequest 请求参数}): {@link DescribeDataStaticProjectResponse 返回参数} */
+  /** 获取DescribeDataStaticProject信息 {@link DescribeDataStaticProjectRequest} {@link DescribeDataStaticProjectResponse} */
   DescribeDataStaticProject(data: DescribeDataStaticProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataStaticProjectResponse>;
-  /** {@link DescribeDataStaticResource 获取DescribeDataStaticResource信息}({@link DescribeDataStaticResourceRequest 请求参数}): {@link DescribeDataStaticResourceResponse 返回参数} */
+  /** 获取DescribeDataStaticResource信息 {@link DescribeDataStaticResourceRequest} {@link DescribeDataStaticResourceResponse} */
   DescribeDataStaticResource(data: DescribeDataStaticResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataStaticResourceResponse>;
-  /** {@link DescribeDataStaticUrl 获取DescribeDataStaticUrl信息}({@link DescribeDataStaticUrlRequest 请求参数}): {@link DescribeDataStaticUrlResponse 返回参数} */
+  /** 获取DescribeDataStaticUrl信息 {@link DescribeDataStaticUrlRequest} {@link DescribeDataStaticUrlResponse} */
   DescribeDataStaticUrl(data: DescribeDataStaticUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataStaticUrlResponse>;
-  /** {@link DescribeDataWebVitalsPage 获取DescribeDataWebVitalsPage信息}({@link DescribeDataWebVitalsPageRequest 请求参数}): {@link DescribeDataWebVitalsPageResponse 返回参数} */
+  /** 获取DescribeDataWebVitalsPage信息 {@link DescribeDataWebVitalsPageRequest} {@link DescribeDataWebVitalsPageResponse} */
   DescribeDataWebVitalsPage(data: DescribeDataWebVitalsPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataWebVitalsPageResponse>;
-  /** {@link DescribeError 获取首页错误信息}({@link DescribeErrorRequest 请求参数}): {@link DescribeErrorResponse 返回参数} */
+  /** 获取首页错误信息 {@link DescribeErrorRequest} {@link DescribeErrorResponse} */
   DescribeError(data: DescribeErrorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeErrorResponse>;
-  /** {@link DescribeLogExports 获取日志下载任务列表}({@link DescribeLogExportsRequest 请求参数}): {@link DescribeLogExportsResponse 返回参数} */
+  /** 获取日志下载任务列表 {@link DescribeLogExportsRequest} {@link DescribeLogExportsResponse} */
   DescribeLogExports(data: DescribeLogExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogExportsResponse>;
-  /** {@link DescribeLogList 获取日志列表}({@link DescribeLogListRequest 请求参数}): {@link DescribeLogListResponse 返回参数} */
+  /** 获取日志列表 {@link DescribeLogListRequest} {@link DescribeLogListResponse} */
   DescribeLogList(data: DescribeLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogListResponse>;
-  /** {@link DescribeOfflineLogConfigs 获取设置的离线日志监听配置}({@link DescribeOfflineLogConfigsRequest 请求参数}): {@link DescribeOfflineLogConfigsResponse 返回参数} */
+  /** 获取设置的离线日志监听配置 {@link DescribeOfflineLogConfigsRequest} {@link DescribeOfflineLogConfigsResponse} */
   DescribeOfflineLogConfigs(data: DescribeOfflineLogConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineLogConfigsResponse>;
-  /** {@link DescribeOfflineLogRecords 获取所有离线日志记录(最多100条)}({@link DescribeOfflineLogRecordsRequest 请求参数}): {@link DescribeOfflineLogRecordsResponse 返回参数} */
+  /** 获取所有离线日志记录(最多100条) {@link DescribeOfflineLogRecordsRequest} {@link DescribeOfflineLogRecordsResponse} */
   DescribeOfflineLogRecords(data: DescribeOfflineLogRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineLogRecordsResponse>;
-  /** {@link DescribeOfflineLogs 获取对应离线日志}({@link DescribeOfflineLogsRequest 请求参数}): {@link DescribeOfflineLogsResponse 返回参数} */
+  /** 获取对应离线日志 {@link DescribeOfflineLogsRequest} {@link DescribeOfflineLogsResponse} */
   DescribeOfflineLogs(data: DescribeOfflineLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineLogsResponse>;
-  /** {@link DescribeProjectLimits 获取项目上报率列表}({@link DescribeProjectLimitsRequest 请求参数}): {@link DescribeProjectLimitsResponse 返回参数} */
+  /** 获取项目上报率列表 {@link DescribeProjectLimitsRequest} {@link DescribeProjectLimitsResponse} */
   DescribeProjectLimits(data: DescribeProjectLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectLimitsResponse>;
-  /** {@link DescribeProjects 获取项目列表}({@link DescribeProjectsRequest 请求参数}): {@link DescribeProjectsResponse 返回参数} */
+  /** 获取项目列表 {@link DescribeProjectsRequest} {@link DescribeProjectsResponse} */
   DescribeProjects(data: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
-  /** {@link DescribePvList 获取PV列表}({@link DescribePvListRequest 请求参数}): {@link DescribePvListResponse 返回参数} */
+  /** 获取PV列表 {@link DescribePvListRequest} {@link DescribePvListResponse} */
   DescribePvList(data: DescribePvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePvListResponse>;
-  /** {@link DescribeReleaseFileSign 获取存储临时密钥}({@link DescribeReleaseFileSignRequest 请求参数}): {@link DescribeReleaseFileSignResponse 返回参数} */
+  /** 获取存储临时密钥 {@link DescribeReleaseFileSignRequest} {@link DescribeReleaseFileSignResponse} */
   DescribeReleaseFileSign(data?: DescribeReleaseFileSignRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseFileSignResponse>;
-  /** {@link DescribeReleaseFiles 获取项目对应sourcemap文件列表}({@link DescribeReleaseFilesRequest 请求参数}): {@link DescribeReleaseFilesResponse 返回参数} */
+  /** 获取项目对应sourcemap文件列表 {@link DescribeReleaseFilesRequest} {@link DescribeReleaseFilesResponse} */
   DescribeReleaseFiles(data: DescribeReleaseFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseFilesResponse>;
-  /** {@link DescribeRumLogList 获取Rum日志列表}({@link DescribeRumLogListRequest 请求参数}): {@link DescribeRumLogListResponse 返回参数} */
+  /** 获取Rum日志列表 {@link DescribeRumLogListRequest} {@link DescribeRumLogListResponse} */
   DescribeRumLogList(data: DescribeRumLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogListResponse>;
-  /** {@link DescribeRumStatsLogList 获取Rum分钟级日志列表}({@link DescribeRumStatsLogListRequest 请求参数}): {@link DescribeRumStatsLogListResponse 返回参数} */
+  /** 获取Rum分钟级日志列表 {@link DescribeRumStatsLogListRequest} {@link DescribeRumStatsLogListResponse} */
   DescribeRumStatsLogList(data: DescribeRumStatsLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumStatsLogListResponse>;
-  /** {@link DescribeScores 获取首页分数列表}({@link DescribeScoresRequest 请求参数}): {@link DescribeScoresResponse 返回参数} */
+  /** 获取首页分数列表 {@link DescribeScoresRequest} {@link DescribeScoresResponse} */
   DescribeScores(data: DescribeScoresRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScoresResponse>;
-  /** {@link DescribeTawAreas 查询片区信息}({@link DescribeTawAreasRequest 请求参数}): {@link DescribeTawAreasResponse 返回参数} */
+  /** 查询片区信息 {@link DescribeTawAreasRequest} {@link DescribeTawAreasResponse} */
   DescribeTawAreas(data?: DescribeTawAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTawAreasResponse>;
-  /** {@link DescribeTawInstances 查询实例信息}({@link DescribeTawInstancesRequest 请求参数}): {@link DescribeTawInstancesResponse 返回参数} */
+  /** 查询实例信息 {@link DescribeTawInstancesRequest} {@link DescribeTawInstancesResponse} */
   DescribeTawInstances(data?: DescribeTawInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTawInstancesResponse>;
-  /** {@link DescribeUvList 获取UV列表}({@link DescribeUvListRequest 请求参数}): {@link DescribeUvListResponse 返回参数} */
+  /** 获取UV列表 {@link DescribeUvListRequest} {@link DescribeUvListResponse} */
   DescribeUvList(data: DescribeUvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUvListResponse>;
-  /** {@link DescribeWhitelists 获取白名单列表}({@link DescribeWhitelistsRequest 请求参数}): {@link DescribeWhitelistsResponse 返回参数} */
+  /** 获取白名单列表 {@link DescribeWhitelistsRequest} {@link DescribeWhitelistsResponse} */
   DescribeWhitelists(data: DescribeWhitelistsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhitelistsResponse>;
-  /** {@link ModifyInstance 修改实例信息}({@link ModifyInstanceRequest 请求参数}): {@link ModifyInstanceResponse 返回参数} */
+  /** 修改实例信息 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
-  /** {@link ModifyProject 修改项目}({@link ModifyProjectRequest 请求参数}): {@link ModifyProjectResponse 返回参数} */
+  /** 修改项目 {@link ModifyProjectRequest} {@link ModifyProjectResponse} */
   ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
-  /** {@link ModifyProjectLimit 新增修改限流}({@link ModifyProjectLimitRequest 请求参数}): {@link ModifyProjectLimitResponse 返回参数} */
+  /** 新增修改限流 {@link ModifyProjectLimitRequest} {@link ModifyProjectLimitResponse} */
   ModifyProjectLimit(data: ModifyProjectLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectLimitResponse>;
-  /** {@link ResumeInstance 恢复实例}({@link ResumeInstanceRequest 请求参数}): {@link ResumeInstanceResponse 返回参数} */
+  /** 恢复实例 {@link ResumeInstanceRequest} {@link ResumeInstanceResponse} */
   ResumeInstance(data: ResumeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeInstanceResponse>;
-  /** {@link StopInstance 停止实例}({@link StopInstanceRequest 请求参数}): {@link StopInstanceResponse 返回参数} */
+  /** 停止实例 {@link StopInstanceRequest} {@link StopInstanceResponse} */
   StopInstance(data: StopInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstanceResponse>;
-  /** {@link StopProject 停止项目上报}({@link StopProjectRequest 请求参数}): {@link StopProjectResponse 返回参数} */
+  /** 停止项目上报 {@link StopProjectRequest} {@link StopProjectResponse} */
   StopProject(data: StopProjectRequest, config?: AxiosRequestConfig): AxiosPromise<StopProjectResponse>;
 }
 

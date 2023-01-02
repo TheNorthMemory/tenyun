@@ -404,7 +404,7 @@ declare interface AddEcdnDomainRequest {
 }
 
 declare interface AddEcdnDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -420,7 +420,7 @@ declare interface CreateVerifyRecordResponse {
   Record: string;
   /** 解析类型 */
   RecordType: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -430,7 +430,7 @@ declare interface DeleteEcdnDomainRequest {
 }
 
 declare interface DeleteEcdnDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -450,7 +450,7 @@ declare interface DescribeDomainsConfigResponse {
   Domains: DomainDetailInfo[];
   /** 符合查询条件的域名总数，用于分页查询。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -468,7 +468,7 @@ declare interface DescribeDomainsResponse {
   Domains: DomainBriefInfo[];
   /** 域名总个数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -490,7 +490,7 @@ declare interface DescribeEcdnDomainLogsResponse {
   DomainLogs: DomainLogs[] | null;
   /** 日志链接总条数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -518,7 +518,7 @@ declare interface DescribeEcdnDomainStatisticsResponse {
   Data: DomainData[];
   /** 数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -542,7 +542,7 @@ declare interface DescribeEcdnStatisticsRequest {
 declare interface DescribeEcdnStatisticsResponse {
   /** 指定条件查询得到的数据明细 */
   Data: ResourceData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -558,7 +558,7 @@ declare interface DescribeIpStatusResponse {
   Ips: IpStatus[];
   /** 节点总个数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -570,7 +570,7 @@ declare interface DescribePurgeQuotaResponse {
   UrlPurge: Quota;
   /** 目录刷新用量及配额。 */
   PathPurge: Quota;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -598,7 +598,7 @@ declare interface DescribePurgeTasksResponse {
   PurgeLogs: PurgeTask[];
   /** 任务总数，用于分页。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -612,7 +612,7 @@ declare interface PurgePathCacheRequest {
 declare interface PurgePathCacheResponse {
   /** 刷新任务Id。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -624,7 +624,7 @@ declare interface PurgeUrlsCacheRequest {
 declare interface PurgeUrlsCacheResponse {
   /** 刷新任务Id。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -634,7 +634,7 @@ declare interface StartEcdnDomainRequest {
 }
 
 declare interface StartEcdnDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -644,7 +644,7 @@ declare interface StopEcdnDomainRequest {
 }
 
 declare interface StopEcdnDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -676,44 +676,44 @@ declare interface UpdateDomainConfigRequest {
 }
 
 declare interface UpdateDomainConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ecdn 全站加速网络} */
 declare interface Ecdn {
   (): Versions;
-  /** {@link AddEcdnDomain 新增加速域名}({@link AddEcdnDomainRequest 请求参数}): {@link AddEcdnDomainResponse 返回参数} */
+  /** 新增加速域名 {@link AddEcdnDomainRequest} {@link AddEcdnDomainResponse} */
   AddEcdnDomain(data: AddEcdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<AddEcdnDomainResponse>;
-  /** {@link CreateVerifyRecord 生成解析记录}({@link CreateVerifyRecordRequest 请求参数}): {@link CreateVerifyRecordResponse 返回参数} */
+  /** 生成解析记录 {@link CreateVerifyRecordRequest} {@link CreateVerifyRecordResponse} */
   CreateVerifyRecord(data: CreateVerifyRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVerifyRecordResponse>;
-  /** {@link DeleteEcdnDomain 删除加速域名}({@link DeleteEcdnDomainRequest 请求参数}): {@link DeleteEcdnDomainResponse 返回参数} */
+  /** 删除加速域名 {@link DeleteEcdnDomainRequest} {@link DeleteEcdnDomainResponse} */
   DeleteEcdnDomain(data: DeleteEcdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEcdnDomainResponse>;
-  /** {@link DescribeDomains 查询域名基本信息}({@link DescribeDomainsRequest 请求参数}): {@link DescribeDomainsResponse 返回参数} */
+  /** 查询域名基本信息 {@link DescribeDomainsRequest} {@link DescribeDomainsResponse} */
   DescribeDomains(data?: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
-  /** {@link DescribeDomainsConfig 查询域名详细配置}({@link DescribeDomainsConfigRequest 请求参数}): {@link DescribeDomainsConfigResponse 返回参数} */
+  /** 查询域名详细配置 {@link DescribeDomainsConfigRequest} {@link DescribeDomainsConfigResponse} */
   DescribeDomainsConfig(data?: DescribeDomainsConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsConfigResponse>;
-  /** {@link DescribeEcdnDomainLogs 查询域名日志下载链接}({@link DescribeEcdnDomainLogsRequest 请求参数}): {@link DescribeEcdnDomainLogsResponse 返回参数} */
+  /** 查询域名日志下载链接 {@link DescribeEcdnDomainLogsRequest} {@link DescribeEcdnDomainLogsResponse} */
   DescribeEcdnDomainLogs(data: DescribeEcdnDomainLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEcdnDomainLogsResponse>;
-  /** {@link DescribeEcdnDomainStatistics 域名统计指标查询}({@link DescribeEcdnDomainStatisticsRequest 请求参数}): {@link DescribeEcdnDomainStatisticsResponse 返回参数} */
+  /** 域名统计指标查询 {@link DescribeEcdnDomainStatisticsRequest} {@link DescribeEcdnDomainStatisticsResponse} */
   DescribeEcdnDomainStatistics(data: DescribeEcdnDomainStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEcdnDomainStatisticsResponse>;
-  /** {@link DescribeEcdnStatistics 访问数据查询}({@link DescribeEcdnStatisticsRequest 请求参数}): {@link DescribeEcdnStatisticsResponse 返回参数} */
+  /** 访问数据查询 {@link DescribeEcdnStatisticsRequest} {@link DescribeEcdnStatisticsResponse} */
   DescribeEcdnStatistics(data: DescribeEcdnStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEcdnStatisticsResponse>;
-  /** {@link DescribeIpStatus 查询平台服务节点IP}({@link DescribeIpStatusRequest 请求参数}): {@link DescribeIpStatusResponse 返回参数} */
+  /** 查询平台服务节点IP {@link DescribeIpStatusRequest} {@link DescribeIpStatusResponse} */
   DescribeIpStatus(data: DescribeIpStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpStatusResponse>;
-  /** {@link DescribePurgeQuota 查询刷新用量配额}({@link DescribePurgeQuotaRequest 请求参数}): {@link DescribePurgeQuotaResponse 返回参数} */
+  /** 查询刷新用量配额 {@link DescribePurgeQuotaRequest} {@link DescribePurgeQuotaResponse} */
   DescribePurgeQuota(data?: DescribePurgeQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeQuotaResponse>;
-  /** {@link DescribePurgeTasks 刷新历史查询}({@link DescribePurgeTasksRequest 请求参数}): {@link DescribePurgeTasksResponse 返回参数} */
+  /** 刷新历史查询 {@link DescribePurgeTasksRequest} {@link DescribePurgeTasksResponse} */
   DescribePurgeTasks(data?: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;
-  /** {@link PurgePathCache 刷新目录}({@link PurgePathCacheRequest 请求参数}): {@link PurgePathCacheResponse 返回参数} */
+  /** 刷新目录 {@link PurgePathCacheRequest} {@link PurgePathCacheResponse} */
   PurgePathCache(data: PurgePathCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PurgePathCacheResponse>;
-  /** {@link PurgeUrlsCache 刷新 URL}({@link PurgeUrlsCacheRequest 请求参数}): {@link PurgeUrlsCacheResponse 返回参数} */
+  /** 刷新 URL {@link PurgeUrlsCacheRequest} {@link PurgeUrlsCacheResponse} */
   PurgeUrlsCache(data: PurgeUrlsCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PurgeUrlsCacheResponse>;
-  /** {@link StartEcdnDomain 启用加速域名}({@link StartEcdnDomainRequest 请求参数}): {@link StartEcdnDomainResponse 返回参数} */
+  /** 启用加速域名 {@link StartEcdnDomainRequest} {@link StartEcdnDomainResponse} */
   StartEcdnDomain(data: StartEcdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StartEcdnDomainResponse>;
-  /** {@link StopEcdnDomain 停用加速域名}({@link StopEcdnDomainRequest 请求参数}): {@link StopEcdnDomainResponse 返回参数} */
+  /** 停用加速域名 {@link StopEcdnDomainRequest} {@link StopEcdnDomainResponse} */
   StopEcdnDomain(data: StopEcdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StopEcdnDomainResponse>;
-  /** {@link UpdateDomainConfig 更新域名配置}({@link UpdateDomainConfigRequest 请求参数}): {@link UpdateDomainConfigResponse 返回参数} */
+  /** 更新域名配置 {@link UpdateDomainConfigRequest} {@link UpdateDomainConfigResponse} */
   UpdateDomainConfig(data: UpdateDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDomainConfigResponse>;
 }
 

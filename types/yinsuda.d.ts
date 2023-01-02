@@ -278,7 +278,7 @@ declare interface BatchDescribeKTVMusicDetailsResponse {
   KTVMusicDetailInfoSet: KTVMusicDetailInfo[];
   /** 不存在歌曲Id列表。 */
   NotExistMusicIdSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -298,7 +298,7 @@ declare interface CreateKTVRobotRequest {
 declare interface CreateKTVRobotResponse {
   /** 机器人Id。 */
   RobotId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -316,7 +316,7 @@ declare interface DescribeKTVMatchMusicsResponse {
   MatchMusicSet: KTVMatchMusic[];
   /** 未匹配的规则列表。 */
   NotMatchRuleSet: KTVMatchRule[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -340,7 +340,7 @@ declare interface DescribeKTVMusicsByTagResponse {
   KTVMusicInfoSet: KTVMusicBaseInfo[];
   /** 滚动标记，用于设置下次请求的 ScrollToken 参数。 */
   ScrollToken: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -364,7 +364,7 @@ declare interface DescribeKTVPlaylistDetailResponse {
   KTVMusicInfoSet: KTVMusicBaseInfo[];
   /** 滚动标记，用于设置下次请求的 ScrollToken 参数。 */
   ScrollToken: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -386,7 +386,7 @@ declare interface DescribeKTVPlaylistsResponse {
   PlaylistBaseInfoSet: KTVPlaylistBaseInfo[];
   /** 歌单总数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -412,7 +412,7 @@ declare interface DescribeKTVRobotsResponse {
   TotalCount: number;
   /** 机器人信息集合。 */
   KTVRobotInfoSet: KTVRobotInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -428,7 +428,7 @@ declare interface DescribeKTVSuggestionsRequest {
 declare interface DescribeKTVSuggestionsResponse {
   /** 联想词信息列表。 */
   KTVSuggestionInfoSet: KTVSuggestionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -442,7 +442,7 @@ declare interface DescribeKTVTagsRequest {
 declare interface DescribeKTVTagsResponse {
   /** 标签分组列表。 */
   TagGroupInfoSet: KTVTagGroupInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -456,7 +456,7 @@ declare interface DestroyKTVRobotRequest {
 }
 
 declare interface DestroyKTVRobotResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -480,7 +480,7 @@ declare interface SearchKTVMusicsResponse {
   KTVMusicInfoSet: KTVMusicBaseInfo[];
   /** 滚动标记，用于设置下次请求的 ScrollToken 参数。 */
   ScrollToken: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -496,36 +496,36 @@ declare interface SyncKTVRobotCommandRequest {
 }
 
 declare interface SyncKTVRobotCommandResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Yinsuda 音速达直播音乐版权引擎} */
 declare interface Yinsuda {
   (): Versions;
-  /** {@link BatchDescribeKTVMusicDetails 批量获取歌曲详情}({@link BatchDescribeKTVMusicDetailsRequest 请求参数}): {@link BatchDescribeKTVMusicDetailsResponse 返回参数} */
+  /** 批量获取歌曲详情 {@link BatchDescribeKTVMusicDetailsRequest} {@link BatchDescribeKTVMusicDetailsResponse} */
   BatchDescribeKTVMusicDetails(data: BatchDescribeKTVMusicDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDescribeKTVMusicDetailsResponse>;
-  /** {@link CreateKTVRobot 创建机器人}({@link CreateKTVRobotRequest 请求参数}): {@link CreateKTVRobotResponse 返回参数} */
+  /** 创建机器人 {@link CreateKTVRobotRequest} {@link CreateKTVRobotResponse} */
   CreateKTVRobot(data: CreateKTVRobotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKTVRobotResponse>;
-  /** {@link DescribeKTVMatchMusics 匹配歌曲}({@link DescribeKTVMatchMusicsRequest 请求参数}): {@link DescribeKTVMatchMusicsResponse 返回参数} */
+  /** 匹配歌曲 {@link DescribeKTVMatchMusicsRequest} {@link DescribeKTVMatchMusicsResponse} */
   DescribeKTVMatchMusics(data: DescribeKTVMatchMusicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVMatchMusicsResponse>;
-  /** {@link DescribeKTVMusicsByTag 获取标签歌曲}({@link DescribeKTVMusicsByTagRequest 请求参数}): {@link DescribeKTVMusicsByTagResponse 返回参数} */
+  /** 获取标签歌曲 {@link DescribeKTVMusicsByTagRequest} {@link DescribeKTVMusicsByTagResponse} */
   DescribeKTVMusicsByTag(data: DescribeKTVMusicsByTagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVMusicsByTagResponse>;
-  /** {@link DescribeKTVPlaylistDetail 获取歌单详情}({@link DescribeKTVPlaylistDetailRequest 请求参数}): {@link DescribeKTVPlaylistDetailResponse 返回参数} */
+  /** 获取歌单详情 {@link DescribeKTVPlaylistDetailRequest} {@link DescribeKTVPlaylistDetailResponse} */
   DescribeKTVPlaylistDetail(data: DescribeKTVPlaylistDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVPlaylistDetailResponse>;
-  /** {@link DescribeKTVPlaylists 获取推荐歌单列表}({@link DescribeKTVPlaylistsRequest 请求参数}): {@link DescribeKTVPlaylistsResponse 返回参数} */
+  /** 获取推荐歌单列表 {@link DescribeKTVPlaylistsRequest} {@link DescribeKTVPlaylistsResponse} */
   DescribeKTVPlaylists(data: DescribeKTVPlaylistsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVPlaylistsResponse>;
-  /** {@link DescribeKTVRobots 获取机器人信息}({@link DescribeKTVRobotsRequest 请求参数}): {@link DescribeKTVRobotsResponse 返回参数} */
+  /** 获取机器人信息 {@link DescribeKTVRobotsRequest} {@link DescribeKTVRobotsResponse} */
   DescribeKTVRobots(data: DescribeKTVRobotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVRobotsResponse>;
-  /** {@link DescribeKTVSuggestions 获取联想词}({@link DescribeKTVSuggestionsRequest 请求参数}): {@link DescribeKTVSuggestionsResponse 返回参数} */
+  /** 获取联想词 {@link DescribeKTVSuggestionsRequest} {@link DescribeKTVSuggestionsResponse} */
   DescribeKTVSuggestions(data: DescribeKTVSuggestionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVSuggestionsResponse>;
-  /** {@link DescribeKTVTags 获取标签列表}({@link DescribeKTVTagsRequest 请求参数}): {@link DescribeKTVTagsResponse 返回参数} */
+  /** 获取标签列表 {@link DescribeKTVTagsRequest} {@link DescribeKTVTagsResponse} */
   DescribeKTVTags(data: DescribeKTVTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVTagsResponse>;
-  /** {@link DestroyKTVRobot 销毁机器人}({@link DestroyKTVRobotRequest 请求参数}): {@link DestroyKTVRobotResponse 返回参数} */
+  /** 销毁机器人 {@link DestroyKTVRobotRequest} {@link DestroyKTVRobotResponse} */
   DestroyKTVRobot(data: DestroyKTVRobotRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyKTVRobotResponse>;
-  /** {@link SearchKTVMusics 搜索歌曲}({@link SearchKTVMusicsRequest 请求参数}): {@link SearchKTVMusicsResponse 返回参数} */
+  /** 搜索歌曲 {@link SearchKTVMusicsRequest} {@link SearchKTVMusicsResponse} */
   SearchKTVMusics(data: SearchKTVMusicsRequest, config?: AxiosRequestConfig): AxiosPromise<SearchKTVMusicsResponse>;
-  /** {@link SyncKTVRobotCommand 同步机器人指令}({@link SyncKTVRobotCommandRequest 请求参数}): {@link SyncKTVRobotCommandResponse 返回参数} */
+  /** 同步机器人指令 {@link SyncKTVRobotCommandRequest} {@link SyncKTVRobotCommandResponse} */
   SyncKTVRobotCommand(data: SyncKTVRobotCommandRequest, config?: AxiosRequestConfig): AxiosPromise<SyncKTVRobotCommandResponse>;
 }
 

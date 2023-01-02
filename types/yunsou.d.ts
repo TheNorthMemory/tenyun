@@ -78,7 +78,7 @@ declare interface DataManipulationRequest {
 declare interface DataManipulationResponse {
   /** 数据操作结果 */
   Data?: DataManipulationResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -134,7 +134,7 @@ declare interface DataSearchRequest {
 declare interface DataSearchResponse {
   /** 检索结果 */
   Data?: SearchResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -155,7 +155,7 @@ declare namespace V20180504 {
   interface DataManipulationResponse {
     /** 返回信息 */
     RetMsg?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -211,7 +211,7 @@ declare namespace V20180504 {
   interface DataSearchResponse {
     /** 数据返回信息 */
     RetMsg?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -219,13 +219,13 @@ declare namespace V20180504 {
 /** {@link Yunsou 腾讯云搜TCS} */
 declare interface Yunsou {
   (): Versions;
-  /** {@link DataManipulation 云搜数据上传}({@link DataManipulationRequest 请求参数}): {@link DataManipulationResponse 返回参数} */
+  /** 云搜数据上传 {@link DataManipulationRequest} {@link DataManipulationResponse} */
   DataManipulation(data: DataManipulationRequest, config?: AxiosRequestConfig): AxiosPromise<DataManipulationResponse>;
-  /** {@link DataSearch 数据检索接口}({@link DataSearchRequest 请求参数}): {@link DataSearchResponse 返回参数} */
+  /** 数据检索接口 {@link DataSearchRequest} {@link DataSearchResponse} */
   DataSearch(data: DataSearchRequest, config?: AxiosRequestConfig): AxiosPromise<DataSearchResponse>;
-  /** {@link V20180504.DataManipulation 云搜数据上传}({@link V20180504.DataManipulationRequest 请求参数}): {@link V20180504.DataManipulationResponse 返回参数} */
+  /** 云搜数据上传 {@link V20180504.DataManipulationRequest} {@link V20180504.DataManipulationResponse} */
   DataManipulation(data: V20180504.DataManipulationRequest, config: AxiosRequestConfig & V20180504.VersionHeader): AxiosPromise<V20180504.DataManipulationResponse>;
-  /** {@link V20180504.DataSearch 数据检索接口}({@link V20180504.DataSearchRequest 请求参数}): {@link V20180504.DataSearchResponse 返回参数} */
+  /** 数据检索接口 {@link V20180504.DataSearchRequest} {@link V20180504.DataSearchResponse} */
   DataSearch(data: V20180504.DataSearchRequest, config: AxiosRequestConfig & V20180504.VersionHeader): AxiosPromise<V20180504.DataSearchResponse>;
 }
 

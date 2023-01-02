@@ -62,7 +62,7 @@ declare interface DescribeStrategiesRequest {
 declare interface DescribeStrategiesResponse {
   /** 评估项列表 */
   Strategies: DescribeStrategie[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -90,16 +90,16 @@ declare interface DescribeTaskStrategyRisksResponse {
   Risks: string | null;
   /** 巡检资源数 */
   ResourceCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Advisor 云顾问} */
 declare interface Advisor {
   (): Versions;
-  /** {@link DescribeStrategies 查询评估项信息}({@link DescribeStrategiesRequest 请求参数}): {@link DescribeStrategiesResponse 返回参数} */
+  /** 查询评估项信息 {@link DescribeStrategiesRequest} {@link DescribeStrategiesResponse} */
   DescribeStrategies(data?: DescribeStrategiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStrategiesResponse>;
-  /** {@link DescribeTaskStrategyRisks 查询评估项风险实例列表}({@link DescribeTaskStrategyRisksRequest 请求参数}): {@link DescribeTaskStrategyRisksResponse 返回参数} */
+  /** 查询评估项风险实例列表 {@link DescribeTaskStrategyRisksRequest} {@link DescribeTaskStrategyRisksResponse} */
   DescribeTaskStrategyRisks(data: DescribeTaskStrategyRisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStrategyRisksResponse>;
 }
 

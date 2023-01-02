@@ -228,7 +228,7 @@ declare interface AddDeviceGroupMembersRequest {
 }
 
 declare interface AddDeviceGroupMembersResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -240,7 +240,7 @@ declare interface AddUserGroupMembersRequest {
 }
 
 declare interface AddUserGroupMembersResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -252,7 +252,7 @@ declare interface BindDeviceResourceRequest {
 }
 
 declare interface BindDeviceResourceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -312,7 +312,7 @@ declare interface CreateAclRequest {
 declare interface CreateAclResponse {
   /** 新建成功的访问权限ID */
   Id: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -326,7 +326,7 @@ declare interface CreateDeviceGroupRequest {
 declare interface CreateDeviceGroupResponse {
   /** 新建成功的资产组ID */
   Id: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -340,7 +340,7 @@ declare interface CreateUserGroupRequest {
 declare interface CreateUserGroupResponse {
   /** 新建成功的用户组ID */
   Id: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -370,7 +370,7 @@ declare interface CreateUserRequest {
 declare interface CreateUserResponse {
   /** 新建用户的ID */
   Id: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -380,7 +380,7 @@ declare interface DeleteAclsRequest {
 }
 
 declare interface DeleteAclsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -392,7 +392,7 @@ declare interface DeleteDeviceGroupMembersRequest {
 }
 
 declare interface DeleteDeviceGroupMembersResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -402,7 +402,7 @@ declare interface DeleteDeviceGroupsRequest {
 }
 
 declare interface DeleteDeviceGroupsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -414,7 +414,7 @@ declare interface DeleteUserGroupMembersRequest {
 }
 
 declare interface DeleteUserGroupMembersResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -424,7 +424,7 @@ declare interface DeleteUserGroupsRequest {
 }
 
 declare interface DeleteUserGroupsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -434,7 +434,7 @@ declare interface DeleteUsersRequest {
 }
 
 declare interface DeleteUsersResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -464,7 +464,7 @@ declare interface DescribeAclsResponse {
   TotalCount: number;
   /** 访问权限列表 */
   AclSet: Acl[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -476,7 +476,7 @@ declare interface DescribeDasbImageIdsResponse {
   BaseImageId?: string;
   /** AI镜像ID */
   AiImageId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -504,7 +504,7 @@ declare interface DescribeDeviceGroupMembersResponse {
   TotalCount: number;
   /** 资产组成员列表 */
   DeviceSet: Device[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -526,7 +526,7 @@ declare interface DescribeDeviceGroupsResponse {
   TotalCount: number;
   /** 资产组列表 */
   GroupSet: Group[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -562,7 +562,7 @@ declare interface DescribeDevicesResponse {
   TotalCount: number;
   /** 资产信息列表 */
   DeviceSet: Device[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -578,7 +578,7 @@ declare interface DescribeResourcesRequest {
 declare interface DescribeResourcesResponse {
   /** 堡垒机资源列表 */
   ResourceSet: Resource[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -602,7 +602,7 @@ declare interface DescribeUserGroupMembersResponse {
   TotalCount: number;
   /** 用户组成员列表 */
   UserSet: User[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -624,7 +624,7 @@ declare interface DescribeUserGroupsResponse {
   TotalCount: number;
   /** 用户组列表 */
   GroupSet: Group[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -654,7 +654,7 @@ declare interface DescribeUsersResponse {
   TotalCount: number;
   /** 用户列表 */
   UserSet: User[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -714,7 +714,7 @@ declare interface ModifyAclRequest {
 }
 
 declare interface ModifyAclResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -742,60 +742,60 @@ declare interface ModifyUserRequest {
 }
 
 declare interface ModifyUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Dasb T-Sec-堡垒机（BH）} */
 declare interface Dasb {
   (): Versions;
-  /** {@link AddDeviceGroupMembers 添加资产组成员}({@link AddDeviceGroupMembersRequest 请求参数}): {@link AddDeviceGroupMembersResponse 返回参数} */
+  /** 添加资产组成员 {@link AddDeviceGroupMembersRequest} {@link AddDeviceGroupMembersResponse} */
   AddDeviceGroupMembers(data: AddDeviceGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<AddDeviceGroupMembersResponse>;
-  /** {@link AddUserGroupMembers 添加用户组成员}({@link AddUserGroupMembersRequest 请求参数}): {@link AddUserGroupMembersResponse 返回参数} */
+  /** 添加用户组成员 {@link AddUserGroupMembersRequest} {@link AddUserGroupMembersResponse} */
   AddUserGroupMembers(data: AddUserGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserGroupMembersResponse>;
-  /** {@link BindDeviceResource 修改资产绑定的堡垒机服务}({@link BindDeviceResourceRequest 请求参数}): {@link BindDeviceResourceResponse 返回参数} */
+  /** 修改资产绑定的堡垒机服务 {@link BindDeviceResourceRequest} {@link BindDeviceResourceResponse} */
   BindDeviceResource(data: BindDeviceResourceRequest, config?: AxiosRequestConfig): AxiosPromise<BindDeviceResourceResponse>;
-  /** {@link CreateAcl 新建访问权限}({@link CreateAclRequest 请求参数}): {@link CreateAclResponse 返回参数} */
+  /** 新建访问权限 {@link CreateAclRequest} {@link CreateAclResponse} */
   CreateAcl(data: CreateAclRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAclResponse>;
-  /** {@link CreateDeviceGroup 新建资产组}({@link CreateDeviceGroupRequest 请求参数}): {@link CreateDeviceGroupResponse 返回参数} */
+  /** 新建资产组 {@link CreateDeviceGroupRequest} {@link CreateDeviceGroupResponse} */
   CreateDeviceGroup(data: CreateDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceGroupResponse>;
-  /** {@link CreateUser 新建用户}({@link CreateUserRequest 请求参数}): {@link CreateUserResponse 返回参数} */
+  /** 新建用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
-  /** {@link CreateUserGroup 新建用户组}({@link CreateUserGroupRequest 请求参数}): {@link CreateUserGroupResponse 返回参数} */
+  /** 新建用户组 {@link CreateUserGroupRequest} {@link CreateUserGroupResponse} */
   CreateUserGroup(data: CreateUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserGroupResponse>;
-  /** {@link DeleteAcls 删除访问权限}({@link DeleteAclsRequest 请求参数}): {@link DeleteAclsResponse 返回参数} */
+  /** 删除访问权限 {@link DeleteAclsRequest} {@link DeleteAclsResponse} */
   DeleteAcls(data: DeleteAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAclsResponse>;
-  /** {@link DeleteDeviceGroupMembers 删除资产组成员}({@link DeleteDeviceGroupMembersRequest 请求参数}): {@link DeleteDeviceGroupMembersResponse 返回参数} */
+  /** 删除资产组成员 {@link DeleteDeviceGroupMembersRequest} {@link DeleteDeviceGroupMembersResponse} */
   DeleteDeviceGroupMembers(data: DeleteDeviceGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceGroupMembersResponse>;
-  /** {@link DeleteDeviceGroups 删除资产组}({@link DeleteDeviceGroupsRequest 请求参数}): {@link DeleteDeviceGroupsResponse 返回参数} */
+  /** 删除资产组 {@link DeleteDeviceGroupsRequest} {@link DeleteDeviceGroupsResponse} */
   DeleteDeviceGroups(data: DeleteDeviceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceGroupsResponse>;
-  /** {@link DeleteUserGroupMembers 删除用户组成员}({@link DeleteUserGroupMembersRequest 请求参数}): {@link DeleteUserGroupMembersResponse 返回参数} */
+  /** 删除用户组成员 {@link DeleteUserGroupMembersRequest} {@link DeleteUserGroupMembersResponse} */
   DeleteUserGroupMembers(data: DeleteUserGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserGroupMembersResponse>;
-  /** {@link DeleteUserGroups 删除用户组}({@link DeleteUserGroupsRequest 请求参数}): {@link DeleteUserGroupsResponse 返回参数} */
+  /** 删除用户组 {@link DeleteUserGroupsRequest} {@link DeleteUserGroupsResponse} */
   DeleteUserGroups(data: DeleteUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserGroupsResponse>;
-  /** {@link DeleteUsers 删除用户}({@link DeleteUsersRequest 请求参数}): {@link DeleteUsersResponse 返回参数} */
+  /** 删除用户 {@link DeleteUsersRequest} {@link DeleteUsersResponse} */
   DeleteUsers(data: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
-  /** {@link DescribeAcls 查询访问权限列表}({@link DescribeAclsRequest 请求参数}): {@link DescribeAclsResponse 返回参数} */
+  /** 查询访问权限列表 {@link DescribeAclsRequest} {@link DescribeAclsResponse} */
   DescribeAcls(data?: DescribeAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAclsResponse>;
-  /** {@link DescribeDasbImageIds 数盾-DASB-获取镜像列表}({@link DescribeDasbImageIdsRequest 请求参数}): {@link DescribeDasbImageIdsResponse 返回参数} */
+  /** 数盾-DASB-获取镜像列表 {@link DescribeDasbImageIdsRequest} {@link DescribeDasbImageIdsResponse} */
   DescribeDasbImageIds(data?: DescribeDasbImageIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDasbImageIdsResponse>;
-  /** {@link DescribeDeviceGroupMembers 查询资产组成员列表}({@link DescribeDeviceGroupMembersRequest 请求参数}): {@link DescribeDeviceGroupMembersResponse 返回参数} */
+  /** 查询资产组成员列表 {@link DescribeDeviceGroupMembersRequest} {@link DescribeDeviceGroupMembersResponse} */
   DescribeDeviceGroupMembers(data: DescribeDeviceGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceGroupMembersResponse>;
-  /** {@link DescribeDeviceGroups 查询资产组列表}({@link DescribeDeviceGroupsRequest 请求参数}): {@link DescribeDeviceGroupsResponse 返回参数} */
+  /** 查询资产组列表 {@link DescribeDeviceGroupsRequest} {@link DescribeDeviceGroupsResponse} */
   DescribeDeviceGroups(data?: DescribeDeviceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceGroupsResponse>;
-  /** {@link DescribeDevices 查询资产列表}({@link DescribeDevicesRequest 请求参数}): {@link DescribeDevicesResponse 返回参数} */
+  /** 查询资产列表 {@link DescribeDevicesRequest} {@link DescribeDevicesResponse} */
   DescribeDevices(data?: DescribeDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesResponse>;
-  /** {@link DescribeResources 查询堡垒机服务信息}({@link DescribeResourcesRequest 请求参数}): {@link DescribeResourcesResponse 返回参数} */
+  /** 查询堡垒机服务信息 {@link DescribeResourcesRequest} {@link DescribeResourcesResponse} */
   DescribeResources(data?: DescribeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesResponse>;
-  /** {@link DescribeUserGroupMembers 查询用户组成员列表}({@link DescribeUserGroupMembersRequest 请求参数}): {@link DescribeUserGroupMembersResponse 返回参数} */
+  /** 查询用户组成员列表 {@link DescribeUserGroupMembersRequest} {@link DescribeUserGroupMembersResponse} */
   DescribeUserGroupMembers(data: DescribeUserGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupMembersResponse>;
-  /** {@link DescribeUserGroups 查询用户组列表}({@link DescribeUserGroupsRequest 请求参数}): {@link DescribeUserGroupsResponse 返回参数} */
+  /** 查询用户组列表 {@link DescribeUserGroupsRequest} {@link DescribeUserGroupsResponse} */
   DescribeUserGroups(data?: DescribeUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupsResponse>;
-  /** {@link DescribeUsers 查询用户列表}({@link DescribeUsersRequest 请求参数}): {@link DescribeUsersResponse 返回参数} */
+  /** 查询用户列表 {@link DescribeUsersRequest} {@link DescribeUsersResponse} */
   DescribeUsers(data?: DescribeUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersResponse>;
-  /** {@link ModifyAcl 修改访问权限}({@link ModifyAclRequest 请求参数}): {@link ModifyAclResponse 返回参数} */
+  /** 修改访问权限 {@link ModifyAclRequest} {@link ModifyAclResponse} */
   ModifyAcl(data: ModifyAclRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAclResponse>;
-  /** {@link ModifyUser 修改用户信息}({@link ModifyUserRequest 请求参数}): {@link ModifyUserResponse 返回参数} */
+  /** 修改用户信息 {@link ModifyUserRequest} {@link ModifyUserResponse} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
 }
 

@@ -162,7 +162,7 @@ declare interface CheckStaffChUserRequest {
 }
 
 declare interface CheckStaffChUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -176,7 +176,7 @@ declare interface CopyActivityChannelRequest {
 }
 
 declare interface CopyActivityChannelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -196,7 +196,7 @@ declare interface CreateProjectRequest {
 declare interface CreateProjectResponse {
   /** 项目ID */
   ProjectId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -210,7 +210,7 @@ declare interface CreateSubProjectRequest {
 declare interface CreateSubProjectResponse {
   /** 子项目id */
   SubProjectId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -220,7 +220,7 @@ declare interface DeleteProjectRequest {
 }
 
 declare interface DeleteProjectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -288,7 +288,7 @@ declare interface DescribeCustomerResponse {
   WxNickname?: string | null;
   /** 省份 */
   WxProvince?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -326,7 +326,7 @@ declare interface DescribeCustomersResponse {
   TotalCount?: number;
   /** 数据列表 */
   UserList?: CustomerInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -352,7 +352,7 @@ declare interface DescribeProjectResponse {
   ProjectStatus?: string;
   /** 项目机构Id */
   ProjectOrgId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -364,7 +364,7 @@ declare interface DescribeProjectStockRequest {
 declare interface DescribeProjectStockResponse {
   /** 项目库存列表 */
   ProjectStocks?: ProjectStock[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -386,7 +386,7 @@ declare interface DescribeProjectsResponse {
   ProjectList?: ProjectInfo[];
   /** 项目数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -400,7 +400,7 @@ declare interface DescribeResourceTemplateHeadersResponse {
   TotalCount?: number;
   /** 模板列表 */
   TmplList?: ResourceTemplateHeader[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -428,7 +428,7 @@ declare interface DescribeSubProjectResponse {
   ShareAppId?: string | null;
   /** 分享公众号的wsId */
   ShareWsId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -438,7 +438,7 @@ declare interface ExpireFlowRequest {
 }
 
 declare interface ExpireFlowResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -458,7 +458,7 @@ declare interface ModifyProjectRequest {
 }
 
 declare interface ModifyProjectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -468,7 +468,7 @@ declare interface OffLineProjectRequest {
 }
 
 declare interface OffLineProjectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -486,7 +486,7 @@ declare interface ReplenishProjectStockRequest {
 }
 
 declare interface ReplenishProjectStockResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -518,46 +518,46 @@ declare interface SendWxTouchTaskRequest {
 }
 
 declare interface SendWxTouchTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Solar 智汇零售} */
 declare interface Solar {
   (): Versions;
-  /** {@link CheckStaffChUser 员工渠道更改员工状态}({@link CheckStaffChUserRequest 请求参数}): {@link CheckStaffChUserResponse 返回参数} */
+  /** 员工渠道更改员工状态 {@link CheckStaffChUserRequest} {@link CheckStaffChUserResponse} */
   CheckStaffChUser(data: CheckStaffChUserRequest, config?: AxiosRequestConfig): AxiosPromise<CheckStaffChUserResponse>;
-  /** {@link CopyActivityChannel 复制活动渠道的策略}({@link CopyActivityChannelRequest 请求参数}): {@link CopyActivityChannelResponse 返回参数} */
+  /** 复制活动渠道的策略 {@link CopyActivityChannelRequest} {@link CopyActivityChannelResponse} */
   CopyActivityChannel(data: CopyActivityChannelRequest, config?: AxiosRequestConfig): AxiosPromise<CopyActivityChannelResponse>;
-  /** {@link CreateProject 创建项目}({@link CreateProjectRequest 请求参数}): {@link CreateProjectResponse 返回参数} */
+  /** 创建项目 {@link CreateProjectRequest} {@link CreateProjectResponse} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
-  /** {@link CreateSubProject 创建子项目}({@link CreateSubProjectRequest 请求参数}): {@link CreateSubProjectResponse 返回参数} */
+  /** 创建子项目 {@link CreateSubProjectRequest} {@link CreateSubProjectResponse} */
   CreateSubProject(data: CreateSubProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubProjectResponse>;
-  /** {@link DeleteProject 删除项目}({@link DeleteProjectRequest 请求参数}): {@link DeleteProjectResponse 返回参数} */
+  /** 删除项目 {@link DeleteProjectRequest} {@link DeleteProjectResponse} */
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
-  /** {@link DescribeCustomer 客户档案查询客户详情}({@link DescribeCustomerRequest 请求参数}): {@link DescribeCustomerResponse 返回参数} */
+  /** 客户档案查询客户详情 {@link DescribeCustomerRequest} {@link DescribeCustomerResponse} */
   DescribeCustomer(data: DescribeCustomerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomerResponse>;
-  /** {@link DescribeCustomers 查询客户档案列表}({@link DescribeCustomersRequest 请求参数}): {@link DescribeCustomersResponse 返回参数} */
+  /** 查询客户档案列表 {@link DescribeCustomersRequest} {@link DescribeCustomersResponse} */
   DescribeCustomers(data: DescribeCustomersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomersResponse>;
-  /** {@link DescribeProject 项目详情展示}({@link DescribeProjectRequest 请求参数}): {@link DescribeProjectResponse 返回参数} */
+  /** 项目详情展示 {@link DescribeProjectRequest} {@link DescribeProjectResponse} */
   DescribeProject(data: DescribeProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectResponse>;
-  /** {@link DescribeProjectStock 项目库存详情}({@link DescribeProjectStockRequest 请求参数}): {@link DescribeProjectStockResponse 返回参数} */
+  /** 项目库存详情 {@link DescribeProjectStockRequest} {@link DescribeProjectStockResponse} */
   DescribeProjectStock(data: DescribeProjectStockRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectStockResponse>;
-  /** {@link DescribeProjects 项目列表展示}({@link DescribeProjectsRequest 请求参数}): {@link DescribeProjectsResponse 返回参数} */
+  /** 项目列表展示 {@link DescribeProjectsRequest} {@link DescribeProjectsResponse} */
   DescribeProjects(data: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
-  /** {@link DescribeResourceTemplateHeaders 素材查询服务号模板标题的列表}({@link DescribeResourceTemplateHeadersRequest 请求参数}): {@link DescribeResourceTemplateHeadersResponse 返回参数} */
+  /** 素材查询服务号模板标题的列表 {@link DescribeResourceTemplateHeadersRequest} {@link DescribeResourceTemplateHeadersResponse} */
   DescribeResourceTemplateHeaders(data?: DescribeResourceTemplateHeadersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTemplateHeadersResponse>;
-  /** {@link DescribeSubProject 子项目详情}({@link DescribeSubProjectRequest 请求参数}): {@link DescribeSubProjectResponse 返回参数} */
+  /** 子项目详情 {@link DescribeSubProjectRequest} {@link DescribeSubProjectResponse} */
   DescribeSubProject(data: DescribeSubProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubProjectResponse>;
-  /** {@link ExpireFlow 工单失效接口}({@link ExpireFlowRequest 请求参数}): {@link ExpireFlowResponse 返回参数} */
+  /** 工单失效接口 {@link ExpireFlowRequest} {@link ExpireFlowResponse} */
   ExpireFlow(data: ExpireFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ExpireFlowResponse>;
-  /** {@link ModifyProject 修改项目}({@link ModifyProjectRequest 请求参数}): {@link ModifyProjectResponse 返回参数} */
+  /** 修改项目 {@link ModifyProjectRequest} {@link ModifyProjectResponse} */
   ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
-  /** {@link OffLineProject 下线项目}({@link OffLineProjectRequest 请求参数}): {@link OffLineProjectResponse 返回参数} */
+  /** 下线项目 {@link OffLineProjectRequest} {@link OffLineProjectResponse} */
   OffLineProject(data: OffLineProjectRequest, config?: AxiosRequestConfig): AxiosPromise<OffLineProjectResponse>;
-  /** {@link ReplenishProjectStock 补充（子）项目库存}({@link ReplenishProjectStockRequest 请求参数}): {@link ReplenishProjectStockResponse 返回参数} */
+  /** 补充（子）项目库存 {@link ReplenishProjectStockRequest} {@link ReplenishProjectStockResponse} */
   ReplenishProjectStock(data: ReplenishProjectStockRequest, config?: AxiosRequestConfig): AxiosPromise<ReplenishProjectStockResponse>;
-  /** {@link SendWxTouchTask 发送微信触达任务}({@link SendWxTouchTaskRequest 请求参数}): {@link SendWxTouchTaskResponse 返回参数} */
+  /** 发送微信触达任务 {@link SendWxTouchTaskRequest} {@link SendWxTouchTaskResponse} */
   SendWxTouchTask(data: SendWxTouchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SendWxTouchTaskResponse>;
 }
 

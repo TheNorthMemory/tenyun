@@ -12,14 +12,14 @@ declare interface CreateBlockNodeRecordsRequest {
 }
 
 declare interface CreateBlockNodeRecordsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tan 碳引擎} */
 declare interface Tan {
   (): Versions;
-  /** {@link CreateBlockNodeRecords 推送节点数据}({@link CreateBlockNodeRecordsRequest 请求参数}): {@link CreateBlockNodeRecordsResponse 返回参数} */
+  /** 推送节点数据 {@link CreateBlockNodeRecordsRequest} {@link CreateBlockNodeRecordsResponse} */
   CreateBlockNodeRecords(data: CreateBlockNodeRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlockNodeRecordsResponse>;
 }
 

@@ -110,7 +110,7 @@ declare interface CreateAppScanTaskRepeatResponse {
   Result: number;
   /** 任务id */
   TaskID: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -160,7 +160,7 @@ declare interface CreateAppScanTaskResponse {
   Result: number;
   /** 任务ID */
   TaskID: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -180,7 +180,7 @@ declare interface DescribeFileTicketResponse {
   UploadSign: string | null;
   /** 上传文件ID(任务来源为1时提交诊断任务需要) */
   FildID: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -200,7 +200,7 @@ declare interface DescribeResourceUsageInfoResponse {
   Result: number;
   /** 资源使用信息 */
   Data: ResourceUsageInfoData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -232,7 +232,7 @@ declare interface DescribeScanTaskListResponse {
   Total: number;
   /** 诊断任务数据列表 */
   Data: AppTaskData[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -258,7 +258,7 @@ declare interface DescribeScanTaskReportUrlResponse {
   ReportTitle: string | null;
   /** 诊断json结果内容 */
   ReportResult: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -282,26 +282,26 @@ declare interface DescribeScanTaskStatusResponse {
   ErrMsg: string | null;
   /** 任务流详情 */
   FlowSteps: TaskFlowStepsInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Acp 应用合规平台} */
 declare interface Acp {
   (): Versions;
-  /** {@link CreateAppScanTask 创建应用合规隐私诊断任务}({@link CreateAppScanTaskRequest 请求参数}): {@link CreateAppScanTaskResponse 返回参数} */
+  /** 创建应用合规隐私诊断任务 {@link CreateAppScanTaskRequest} {@link CreateAppScanTaskResponse} */
   CreateAppScanTask(data: CreateAppScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppScanTaskResponse>;
-  /** {@link CreateAppScanTaskRepeat 应用合规隐私诊断重试任务}({@link CreateAppScanTaskRepeatRequest 请求参数}): {@link CreateAppScanTaskRepeatResponse 返回参数} */
+  /** 应用合规隐私诊断重试任务 {@link CreateAppScanTaskRepeatRequest} {@link CreateAppScanTaskRepeatResponse} */
   CreateAppScanTaskRepeat(data: CreateAppScanTaskRepeatRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppScanTaskRepeatResponse>;
-  /** {@link DescribeFileTicket 获取应用合规文件上传凭证接口}({@link DescribeFileTicketRequest 请求参数}): {@link DescribeFileTicketResponse 返回参数} */
+  /** 获取应用合规文件上传凭证接口 {@link DescribeFileTicketRequest} {@link DescribeFileTicketResponse} */
   DescribeFileTicket(data: DescribeFileTicketRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileTicketResponse>;
-  /** {@link DescribeResourceUsageInfo 查询应用合规资源使用情况}({@link DescribeResourceUsageInfoRequest 请求参数}): {@link DescribeResourceUsageInfoResponse 返回参数} */
+  /** 查询应用合规资源使用情况 {@link DescribeResourceUsageInfoRequest} {@link DescribeResourceUsageInfoResponse} */
   DescribeResourceUsageInfo(data?: DescribeResourceUsageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceUsageInfoResponse>;
-  /** {@link DescribeScanTaskList 获取应用合规隐私诊断任务列表}({@link DescribeScanTaskListRequest 请求参数}): {@link DescribeScanTaskListResponse 返回参数} */
+  /** 获取应用合规隐私诊断任务列表 {@link DescribeScanTaskListRequest} {@link DescribeScanTaskListResponse} */
   DescribeScanTaskList(data: DescribeScanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskListResponse>;
-  /** {@link DescribeScanTaskReportUrl 获取应用合规隐私诊断任务报告url}({@link DescribeScanTaskReportUrlRequest 请求参数}): {@link DescribeScanTaskReportUrlResponse 返回参数} */
+  /** 获取应用合规隐私诊断任务报告url {@link DescribeScanTaskReportUrlRequest} {@link DescribeScanTaskReportUrlResponse} */
   DescribeScanTaskReportUrl(data: DescribeScanTaskReportUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskReportUrlResponse>;
-  /** {@link DescribeScanTaskStatus 查询应用合规隐私诊断任务状态}({@link DescribeScanTaskStatusRequest 请求参数}): {@link DescribeScanTaskStatusResponse 返回参数} */
+  /** 查询应用合规隐私诊断任务状态 {@link DescribeScanTaskStatusRequest} {@link DescribeScanTaskStatusResponse} */
   DescribeScanTaskStatus(data: DescribeScanTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskStatusResponse>;
 }
 

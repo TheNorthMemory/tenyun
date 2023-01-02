@@ -146,7 +146,7 @@ declare interface GetAntiFraudVipRequest {
 declare interface GetAntiFraudVipResponse {
   /** 反欺诈评分接口结果 */
   Data: AntiFraudVipRecord;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -208,7 +208,7 @@ declare interface QueryAntiFraudVipResponse {
   RiskInfo?: RiskDetail[] | null;
   /** 业务侧错误码。成功时返回Success，错误时返回具体业务错误原因。 */
   CodeDesc?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -220,18 +220,18 @@ declare interface TransportGeneralInterfaceRequest {
 declare interface TransportGeneralInterfaceResponse {
   /** 业务出参 */
   Data: TransportGeneralInterfaceOutput | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Afc 定制建模} */
 declare interface Afc {
   (): Versions;
-  /** {@link GetAntiFraudVip 反欺诈VIP评分接口}({@link GetAntiFraudVipRequest 请求参数}): {@link GetAntiFraudVipResponse 返回参数} */
+  /** 反欺诈VIP评分接口 {@link GetAntiFraudVipRequest} {@link GetAntiFraudVipResponse} */
   GetAntiFraudVip(data?: GetAntiFraudVipRequest, config?: AxiosRequestConfig): AxiosPromise<GetAntiFraudVipResponse>;
-  /** {@link QueryAntiFraudVip 定制建模}({@link QueryAntiFraudVipRequest 请求参数}): {@link QueryAntiFraudVipResponse 返回参数} */
+  /** 定制建模 {@link QueryAntiFraudVipRequest} {@link QueryAntiFraudVipResponse} */
   QueryAntiFraudVip(data?: QueryAntiFraudVipRequest, config?: AxiosRequestConfig): AxiosPromise<QueryAntiFraudVipResponse>;
-  /** {@link TransportGeneralInterface 信鸽取数平台接口}({@link TransportGeneralInterfaceRequest 请求参数}): {@link TransportGeneralInterfaceResponse 返回参数} */
+  /** 信鸽取数平台接口 {@link TransportGeneralInterfaceRequest} {@link TransportGeneralInterfaceResponse} */
   TransportGeneralInterface(data?: TransportGeneralInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<TransportGeneralInterfaceResponse>;
 }
 

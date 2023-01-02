@@ -1100,7 +1100,7 @@ declare interface AllocateHostsRequest {
 declare interface AllocateHostsResponse {
   /** 新创建云子机的实例ID列表。 */
   HostIdSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1114,7 +1114,7 @@ declare interface AssociateInstancesKeyPairsRequest {
 }
 
 declare interface AssociateInstancesKeyPairsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1126,7 +1126,7 @@ declare interface AssociateSecurityGroupsRequest {
 }
 
 declare interface AssociateSecurityGroupsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1144,7 +1144,7 @@ declare interface ConfigureChcAssistVpcRequest {
 }
 
 declare interface ConfigureChcAssistVpcResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1158,7 +1158,7 @@ declare interface ConfigureChcDeployVpcRequest {
 }
 
 declare interface ConfigureChcDeployVpcResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1184,7 +1184,7 @@ declare interface CreateDisasterRecoverGroupResponse {
   CurrentNum: number;
   /** 置放群组创建时间。 */
   CreateTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1200,7 +1200,7 @@ declare interface CreateHpcClusterRequest {
 declare interface CreateHpcClusterResponse {
   /** 高性能计算集群信息。 */
   HpcClusterSet?: HpcClusterInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1228,7 +1228,7 @@ declare interface CreateImageRequest {
 declare interface CreateImageResponse {
   /** 镜像ID */
   ImageId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1244,7 +1244,7 @@ declare interface CreateKeyPairRequest {
 declare interface CreateKeyPairResponse {
   /** 密钥对信息。 */
   KeyPair?: KeyPair;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1308,7 +1308,7 @@ declare interface CreateLaunchTemplateRequest {
 declare interface CreateLaunchTemplateResponse {
   /** 当通过本接口来创建实例启动模板时会返回该参数，表示创建成功的实例启动模板`ID`。 */
   LaunchTemplateId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1374,7 +1374,7 @@ declare interface CreateLaunchTemplateVersionRequest {
 declare interface CreateLaunchTemplateVersionResponse {
   /** 新创建的实例启动模板版本号。 */
   LaunchTemplateVersionNumber: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1384,7 +1384,7 @@ declare interface DeleteDisasterRecoverGroupsRequest {
 }
 
 declare interface DeleteDisasterRecoverGroupsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1394,7 +1394,7 @@ declare interface DeleteHpcClustersRequest {
 }
 
 declare interface DeleteHpcClustersResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1408,7 +1408,7 @@ declare interface DeleteImagesRequest {
 }
 
 declare interface DeleteImagesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1418,7 +1418,7 @@ declare interface DeleteKeyPairsRequest {
 }
 
 declare interface DeleteKeyPairsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1428,7 +1428,7 @@ declare interface DeleteLaunchTemplateRequest {
 }
 
 declare interface DeleteLaunchTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1440,7 +1440,7 @@ declare interface DeleteLaunchTemplateVersionsRequest {
 }
 
 declare interface DeleteLaunchTemplateVersionsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1454,7 +1454,7 @@ declare interface DescribeAccountQuotaResponse {
   AppId: string;
   /** 配额数据 */
   AccountQuotaOverview: AccountQuotaOverview;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1466,7 +1466,7 @@ declare interface DescribeChcDeniedActionsRequest {
 declare interface DescribeChcDeniedActionsResponse {
   /** CHC实例禁止操作信息 */
   ChcHostDeniedActionSet: ChcHostDeniedActions[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1486,7 +1486,7 @@ declare interface DescribeChcHostsResponse {
   TotalCount: number;
   /** 返回的实例列表 */
   ChcHostSet: ChcHost[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1504,7 +1504,7 @@ declare interface DescribeDisasterRecoverGroupQuotaResponse {
   CvmInSwGroupQuota: number;
   /** 机架类型容灾组内实例的配额数。 */
   CvmInRackGroupQuota: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1524,7 +1524,7 @@ declare interface DescribeDisasterRecoverGroupsResponse {
   DisasterRecoverGroupSet: DisasterRecoverGroup[];
   /** 用户置放群组总量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1542,7 +1542,7 @@ declare interface DescribeHostsResponse {
   TotalCount: number;
   /** cdh实例详细信息列表 */
   HostSet: HostItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1564,7 +1564,7 @@ declare interface DescribeHpcClustersResponse {
   HpcClusterSet?: HpcClusterInfo[];
   /** 高性能计算集群总数。 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1574,7 +1574,7 @@ declare interface DescribeImageQuotaRequest {
 declare interface DescribeImageQuotaResponse {
   /** 账户的镜像配额 */
   ImageNumQuota?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1586,7 +1586,7 @@ declare interface DescribeImageSharePermissionRequest {
 declare interface DescribeImageSharePermissionResponse {
   /** 镜像共享信息 */
   SharePermissionSet: SharePermission[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1608,7 +1608,7 @@ declare interface DescribeImagesResponse {
   ImageSet: Image[];
   /** 符合要求的镜像数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1620,7 +1620,7 @@ declare interface DescribeImportImageOsResponse {
   ImportImageOsListSupported?: ImageOsList;
   /** 支持的导入镜像的操作系统版本。 */
   ImportImageOsVersionSet?: OsVersion[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1630,7 +1630,7 @@ declare interface DescribeInstanceFamilyConfigsRequest {
 declare interface DescribeInstanceFamilyConfigsResponse {
   /** 实例机型组配置的列表信息 */
   InstanceFamilyConfigSet?: InstanceFamilyConfig[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1642,7 +1642,7 @@ declare interface DescribeInstanceInternetBandwidthConfigsRequest {
 declare interface DescribeInstanceInternetBandwidthConfigsResponse {
   /** 带宽配置信息列表。 */
   InternetBandwidthConfigSet: InternetBandwidthConfig[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1654,7 +1654,7 @@ declare interface DescribeInstanceTypeConfigsRequest {
 declare interface DescribeInstanceTypeConfigsResponse {
   /** 实例机型配置列表。 */
   InstanceTypeConfigSet: InstanceTypeConfig[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1666,7 +1666,7 @@ declare interface DescribeInstanceVncUrlRequest {
 declare interface DescribeInstanceVncUrlResponse {
   /** 实例的管理终端地址。 */
   InstanceVncUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1682,7 +1682,7 @@ declare interface DescribeInstancesModificationResponse {
   TotalCount: number;
   /** 实例支持调整的机型配置列表。 */
   InstanceTypeConfigStatusSet: InstanceTypeConfigStatus[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1696,7 +1696,7 @@ declare interface DescribeInstancesOperationLimitRequest {
 declare interface DescribeInstancesOperationLimitResponse {
   /** 该参数表示调整配置操作（降配）限制次数查询。 */
   InstanceOperationLimitSet?: OperationCountLimit[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1716,7 +1716,7 @@ declare interface DescribeInstancesResponse {
   TotalCount: number;
   /** 实例详细信息列表。 */
   InstanceSet: Instance[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1734,7 +1734,7 @@ declare interface DescribeInstancesStatusResponse {
   TotalCount: number;
   /** [实例状态](https://cloud.tencent.com/document/api/213/15753) 列表。 */
   InstanceStatusSet: InstanceStatus[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1744,7 +1744,7 @@ declare interface DescribeInternetChargeTypeConfigsRequest {
 declare interface DescribeInternetChargeTypeConfigsResponse {
   /** 网络计费类型配置。 */
   InternetChargeTypeConfigSet?: InternetChargeTypeConfig[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1764,7 +1764,7 @@ declare interface DescribeKeyPairsResponse {
   TotalCount: number;
   /** 密钥对详细信息列表。 */
   KeyPairSet: KeyPair[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1790,7 +1790,7 @@ declare interface DescribeLaunchTemplateVersionsResponse {
   TotalCount: number;
   /** 实例启动模板版本集合。 */
   LaunchTemplateVersionSet: LaunchTemplateVersionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1810,7 +1810,7 @@ declare interface DescribeLaunchTemplatesResponse {
   TotalCount: number | null;
   /** 实例详细信息列表。 */
   LaunchTemplateSet: LaunchTemplateInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1822,7 +1822,7 @@ declare interface DescribeRegionsResponse {
   TotalCount: number;
   /** 地域列表信息。 */
   RegionSet: RegionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1834,7 +1834,7 @@ declare interface DescribeReservedInstancesConfigInfosRequest {
 declare interface DescribeReservedInstancesConfigInfosResponse {
   /** 预留实例静态配置信息列表。 */
   ReservedInstanceConfigInfos?: ReservedInstanceConfigInfoItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1858,7 +1858,7 @@ declare interface DescribeReservedInstancesOfferingsResponse {
   TotalCount?: number;
   /** 符合条件的预留实例计费列表。 */
   ReservedInstancesOfferingsSet?: ReservedInstancesOffering[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1878,7 +1878,7 @@ declare interface DescribeReservedInstancesResponse {
   TotalCount: number;
   /** 符合条件的预留实例计费列表。 */
   ReservedInstancesSet: ReservedInstances[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1890,7 +1890,7 @@ declare interface DescribeZoneInstanceConfigInfosRequest {
 declare interface DescribeZoneInstanceConfigInfosResponse {
   /** 可用区机型配置列表。 */
   InstanceTypeQuotaSet: InstanceTypeQuotaItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1902,7 +1902,7 @@ declare interface DescribeZonesResponse {
   TotalCount?: number;
   /** 可用区列表信息。 */
   ZoneSet?: ZoneInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1916,7 +1916,7 @@ declare interface DisassociateInstancesKeyPairsRequest {
 }
 
 declare interface DisassociateInstancesKeyPairsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1928,7 +1928,7 @@ declare interface DisassociateSecurityGroupsRequest {
 }
 
 declare interface DisassociateSecurityGroupsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1954,7 +1954,7 @@ declare interface ExportImagesResponse {
   TaskId?: number;
   /** 导出镜像的COS文件名列表 */
   CosPaths?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1982,7 +1982,7 @@ declare interface ImportImageRequest {
 }
 
 declare interface ImportImageResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2000,7 +2000,7 @@ declare interface ImportKeyPairRequest {
 declare interface ImportKeyPairResponse {
   /** 密钥对ID。 */
   KeyId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2020,7 +2020,7 @@ declare interface InquirePricePurchaseReservedInstancesOfferingRequest {
 declare interface InquirePricePurchaseReservedInstancesOfferingResponse {
   /** 该参数表示对应配置预留实例的价格。 */
   Price?: ReservedInstancePrice;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2038,7 +2038,7 @@ declare interface InquiryPriceModifyInstancesChargeTypeRequest {
 declare interface InquiryPriceModifyInstancesChargeTypeResponse {
   /** 该参数表示对应配置实例转换计费模式的价格。 */
   Price: Price;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2054,7 +2054,7 @@ declare interface InquiryPriceRenewHostsRequest {
 declare interface InquiryPriceRenewHostsResponse {
   /** CDH实例续费价格信息 */
   Price?: HostPriceInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2072,7 +2072,7 @@ declare interface InquiryPriceRenewInstancesRequest {
 declare interface InquiryPriceRenewInstancesResponse {
   /** 该参数表示对应配置实例的价格。 */
   Price?: Price;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2092,7 +2092,7 @@ declare interface InquiryPriceResetInstanceRequest {
 declare interface InquiryPriceResetInstanceResponse {
   /** 该参数表示重装成对应配置实例的价格。 */
   Price?: Price;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2110,7 +2110,7 @@ declare interface InquiryPriceResetInstancesInternetMaxBandwidthRequest {
 declare interface InquiryPriceResetInstancesInternetMaxBandwidthResponse {
   /** 该参数表示带宽调整为对应大小之后的价格。 */
   Price?: Price;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2124,7 +2124,7 @@ declare interface InquiryPriceResetInstancesTypeRequest {
 declare interface InquiryPriceResetInstancesTypeResponse {
   /** 该参数表示调整成对应机型实例的价格。 */
   Price: Price;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2140,7 +2140,7 @@ declare interface InquiryPriceResizeInstanceDisksRequest {
 declare interface InquiryPriceResizeInstanceDisksResponse {
   /** 该参数表示磁盘扩容成对应配置的价格。 */
   Price: Price;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2188,7 +2188,7 @@ declare interface InquiryPriceRunInstancesRequest {
 declare interface InquiryPriceRunInstancesResponse {
   /** 该参数表示对应配置实例的价格。 */
   Price: Price;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2200,7 +2200,7 @@ declare interface InquiryPriceTerminateInstancesRequest {
 declare interface InquiryPriceTerminateInstancesResponse {
   /** 退款详情。 */
   InstanceRefundsSet?: InstanceRefund[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2227,7 +2227,7 @@ declare interface ModifyChcAttributeRequest {
 }
 
 declare interface ModifyChcAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2239,7 +2239,7 @@ declare interface ModifyDisasterRecoverGroupAttributeRequest {
 }
 
 declare interface ModifyDisasterRecoverGroupAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2255,7 +2255,7 @@ declare interface ModifyHostsAttributeRequest {
 }
 
 declare interface ModifyHostsAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2269,7 +2269,7 @@ declare interface ModifyHpcClusterAttributeRequest {
 }
 
 declare interface ModifyHpcClusterAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2283,7 +2283,7 @@ declare interface ModifyImageAttributeRequest {
 }
 
 declare interface ModifyImageAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2297,7 +2297,7 @@ declare interface ModifyImageSharePermissionRequest {
 }
 
 declare interface ModifyImageSharePermissionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2311,7 +2311,7 @@ declare interface ModifyInstanceDiskTypeRequest {
 }
 
 declare interface ModifyInstanceDiskTypeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2333,7 +2333,7 @@ declare interface ModifyInstancesAttributeRequest {
 }
 
 declare interface ModifyInstancesAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2349,7 +2349,7 @@ declare interface ModifyInstancesChargeTypeRequest {
 }
 
 declare interface ModifyInstancesChargeTypeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2361,7 +2361,7 @@ declare interface ModifyInstancesProjectRequest {
 }
 
 declare interface ModifyInstancesProjectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2373,7 +2373,7 @@ declare interface ModifyInstancesRenewFlagRequest {
 }
 
 declare interface ModifyInstancesRenewFlagResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2389,7 +2389,7 @@ declare interface ModifyInstancesVpcAttributeRequest {
 }
 
 declare interface ModifyInstancesVpcAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2403,7 +2403,7 @@ declare interface ModifyKeyPairAttributeRequest {
 }
 
 declare interface ModifyKeyPairAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2415,7 +2415,7 @@ declare interface ModifyLaunchTemplateDefaultVersionRequest {
 }
 
 declare interface ModifyLaunchTemplateDefaultVersionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2431,7 +2431,7 @@ declare interface ProgramFpgaImageRequest {
 }
 
 declare interface ProgramFpgaImageResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2451,7 +2451,7 @@ declare interface PurchaseReservedInstancesOfferingRequest {
 declare interface PurchaseReservedInstancesOfferingResponse {
   /** 已购买预留实例计费ID */
   ReservedInstanceId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2465,7 +2465,7 @@ declare interface RebootInstancesRequest {
 }
 
 declare interface RebootInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2475,7 +2475,7 @@ declare interface RemoveChcAssistVpcRequest {
 }
 
 declare interface RemoveChcAssistVpcResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2485,7 +2485,7 @@ declare interface RemoveChcDeployVpcRequest {
 }
 
 declare interface RemoveChcDeployVpcResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2497,7 +2497,7 @@ declare interface RenewHostsRequest {
 }
 
 declare interface RenewHostsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2511,7 +2511,7 @@ declare interface RenewInstancesRequest {
 }
 
 declare interface RenewInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2533,7 +2533,7 @@ declare interface ResetInstanceRequest {
 }
 
 declare interface ResetInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2549,7 +2549,7 @@ declare interface ResetInstancesInternetMaxBandwidthRequest {
 }
 
 declare interface ResetInstancesInternetMaxBandwidthResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2565,7 +2565,7 @@ declare interface ResetInstancesPasswordRequest {
 }
 
 declare interface ResetInstancesPasswordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2579,7 +2579,7 @@ declare interface ResetInstancesTypeRequest {
 }
 
 declare interface ResetInstancesTypeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2597,7 +2597,7 @@ declare interface ResizeInstanceDisksRequest {
 }
 
 declare interface ResizeInstanceDisksResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2663,7 +2663,7 @@ declare interface RunInstancesRequest {
 declare interface RunInstancesResponse {
   /** 当通过本接口来创建实例时会返回该参数，表示一个或多个实例`ID`。返回实例`ID`列表并不代表实例创建成功，可根据 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口查询返回的InstancesSet中对应实例的`ID`的状态来判断创建是否完成；如果实例状态由“PENDING(创建中)”变为“RUNNING(运行中)”，则为创建成功。 */
   InstanceIdSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2673,7 +2673,7 @@ declare interface StartInstancesRequest {
 }
 
 declare interface StartInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2689,7 +2689,7 @@ declare interface StopInstancesRequest {
 }
 
 declare interface StopInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2709,7 +2709,7 @@ declare interface SyncImagesRequest {
 declare interface SyncImagesResponse {
   /** 目的地域的镜像ID信息。 */
   ImageSet?: SyncImage[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2719,196 +2719,196 @@ declare interface TerminateInstancesRequest {
 }
 
 declare interface TerminateInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cvm 云服务器} */
 declare interface Cvm {
   (): Versions;
-  /** {@link AllocateHosts 创建CDH实例}({@link AllocateHostsRequest 请求参数}): {@link AllocateHostsResponse 返回参数} */
+  /** 创建CDH实例 {@link AllocateHostsRequest} {@link AllocateHostsResponse} */
   AllocateHosts(data: AllocateHostsRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateHostsResponse>;
-  /** {@link AssociateInstancesKeyPairs 绑定密钥对}({@link AssociateInstancesKeyPairsRequest 请求参数}): {@link AssociateInstancesKeyPairsResponse 返回参数} */
+  /** 绑定密钥对 {@link AssociateInstancesKeyPairsRequest} {@link AssociateInstancesKeyPairsResponse} */
   AssociateInstancesKeyPairs(data: AssociateInstancesKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateInstancesKeyPairsResponse>;
-  /** {@link AssociateSecurityGroups 绑定安全组}({@link AssociateSecurityGroupsRequest 请求参数}): {@link AssociateSecurityGroupsResponse 返回参数} */
+  /** 绑定安全组 {@link AssociateSecurityGroupsRequest} {@link AssociateSecurityGroupsResponse} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
-  /** {@link ConfigureChcAssistVpc 配置CHC物理服务器的带外和部署网络}({@link ConfigureChcAssistVpcRequest 请求参数}): {@link ConfigureChcAssistVpcResponse 返回参数} */
+  /** 配置CHC物理服务器的带外和部署网络 {@link ConfigureChcAssistVpcRequest} {@link ConfigureChcAssistVpcResponse} */
   ConfigureChcAssistVpc(data: ConfigureChcAssistVpcRequest, config?: AxiosRequestConfig): AxiosPromise<ConfigureChcAssistVpcResponse>;
-  /** {@link ConfigureChcDeployVpc 配置CHC物理服务器部署网络}({@link ConfigureChcDeployVpcRequest 请求参数}): {@link ConfigureChcDeployVpcResponse 返回参数} */
+  /** 配置CHC物理服务器部署网络 {@link ConfigureChcDeployVpcRequest} {@link ConfigureChcDeployVpcResponse} */
   ConfigureChcDeployVpc(data: ConfigureChcDeployVpcRequest, config?: AxiosRequestConfig): AxiosPromise<ConfigureChcDeployVpcResponse>;
-  /** {@link CreateDisasterRecoverGroup 创建分散置放群组}({@link CreateDisasterRecoverGroupRequest 请求参数}): {@link CreateDisasterRecoverGroupResponse 返回参数} */
+  /** 创建分散置放群组 {@link CreateDisasterRecoverGroupRequest} {@link CreateDisasterRecoverGroupResponse} */
   CreateDisasterRecoverGroup(data: CreateDisasterRecoverGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDisasterRecoverGroupResponse>;
-  /** {@link CreateHpcCluster 创建高性能计算集群}({@link CreateHpcClusterRequest 请求参数}): {@link CreateHpcClusterResponse 返回参数} */
+  /** 创建高性能计算集群 {@link CreateHpcClusterRequest} {@link CreateHpcClusterResponse} */
   CreateHpcCluster(data: CreateHpcClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHpcClusterResponse>;
-  /** {@link CreateImage 创建镜像}({@link CreateImageRequest 请求参数}): {@link CreateImageResponse 返回参数} */
+  /** 创建镜像 {@link CreateImageRequest} {@link CreateImageResponse} */
   CreateImage(data: CreateImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageResponse>;
-  /** {@link CreateKeyPair 创建密钥对}({@link CreateKeyPairRequest 请求参数}): {@link CreateKeyPairResponse 返回参数} */
+  /** 创建密钥对 {@link CreateKeyPairRequest} {@link CreateKeyPairResponse} */
   CreateKeyPair(data: CreateKeyPairRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKeyPairResponse>;
-  /** {@link CreateLaunchTemplate 创建实例启动模板}({@link CreateLaunchTemplateRequest 请求参数}): {@link CreateLaunchTemplateResponse 返回参数} */
+  /** 创建实例启动模板 {@link CreateLaunchTemplateRequest} {@link CreateLaunchTemplateResponse} */
   CreateLaunchTemplate(data: CreateLaunchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLaunchTemplateResponse>;
-  /** {@link CreateLaunchTemplateVersion 创建实例启动模板新版本}({@link CreateLaunchTemplateVersionRequest 请求参数}): {@link CreateLaunchTemplateVersionResponse 返回参数} */
+  /** 创建实例启动模板新版本 {@link CreateLaunchTemplateVersionRequest} {@link CreateLaunchTemplateVersionResponse} */
   CreateLaunchTemplateVersion(data: CreateLaunchTemplateVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLaunchTemplateVersionResponse>;
-  /** {@link DeleteDisasterRecoverGroups 删除分散置放群组}({@link DeleteDisasterRecoverGroupsRequest 请求参数}): {@link DeleteDisasterRecoverGroupsResponse 返回参数} */
+  /** 删除分散置放群组 {@link DeleteDisasterRecoverGroupsRequest} {@link DeleteDisasterRecoverGroupsResponse} */
   DeleteDisasterRecoverGroups(data: DeleteDisasterRecoverGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDisasterRecoverGroupsResponse>;
-  /** {@link DeleteHpcClusters 删除高性能计算集群}({@link DeleteHpcClustersRequest 请求参数}): {@link DeleteHpcClustersResponse 返回参数} */
+  /** 删除高性能计算集群 {@link DeleteHpcClustersRequest} {@link DeleteHpcClustersResponse} */
   DeleteHpcClusters(data: DeleteHpcClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHpcClustersResponse>;
-  /** {@link DeleteImages 删除镜像}({@link DeleteImagesRequest 请求参数}): {@link DeleteImagesResponse 返回参数} */
+  /** 删除镜像 {@link DeleteImagesRequest} {@link DeleteImagesResponse} */
   DeleteImages(data: DeleteImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImagesResponse>;
-  /** {@link DeleteKeyPairs 删除密钥对}({@link DeleteKeyPairsRequest 请求参数}): {@link DeleteKeyPairsResponse 返回参数} */
+  /** 删除密钥对 {@link DeleteKeyPairsRequest} {@link DeleteKeyPairsResponse} */
   DeleteKeyPairs(data: DeleteKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKeyPairsResponse>;
-  /** {@link DeleteLaunchTemplate 删除实例启动模板}({@link DeleteLaunchTemplateRequest 请求参数}): {@link DeleteLaunchTemplateResponse 返回参数} */
+  /** 删除实例启动模板 {@link DeleteLaunchTemplateRequest} {@link DeleteLaunchTemplateResponse} */
   DeleteLaunchTemplate(data: DeleteLaunchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLaunchTemplateResponse>;
-  /** {@link DeleteLaunchTemplateVersions 删除实例启动模板版本}({@link DeleteLaunchTemplateVersionsRequest 请求参数}): {@link DeleteLaunchTemplateVersionsResponse 返回参数} */
+  /** 删除实例启动模板版本 {@link DeleteLaunchTemplateVersionsRequest} {@link DeleteLaunchTemplateVersionsResponse} */
   DeleteLaunchTemplateVersions(data: DeleteLaunchTemplateVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLaunchTemplateVersionsResponse>;
-  /** {@link DescribeAccountQuota 查询用户配额详情}({@link DescribeAccountQuotaRequest 请求参数}): {@link DescribeAccountQuotaResponse 返回参数} */
+  /** 查询用户配额详情 {@link DescribeAccountQuotaRequest} {@link DescribeAccountQuotaResponse} */
   DescribeAccountQuota(data?: DescribeAccountQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountQuotaResponse>;
-  /** {@link DescribeChcDeniedActions 查询CHC物理服务器禁止做的操作}({@link DescribeChcDeniedActionsRequest 请求参数}): {@link DescribeChcDeniedActionsResponse 返回参数} */
+  /** 查询CHC物理服务器禁止做的操作 {@link DescribeChcDeniedActionsRequest} {@link DescribeChcDeniedActionsResponse} */
   DescribeChcDeniedActions(data: DescribeChcDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChcDeniedActionsResponse>;
-  /** {@link DescribeChcHosts 查询CHC物理服务器}({@link DescribeChcHostsRequest 请求参数}): {@link DescribeChcHostsResponse 返回参数} */
+  /** 查询CHC物理服务器 {@link DescribeChcHostsRequest} {@link DescribeChcHostsResponse} */
   DescribeChcHosts(data?: DescribeChcHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChcHostsResponse>;
-  /** {@link DescribeDisasterRecoverGroupQuota 查询置放群组配额}({@link DescribeDisasterRecoverGroupQuotaRequest 请求参数}): {@link DescribeDisasterRecoverGroupQuotaResponse 返回参数} */
+  /** 查询置放群组配额 {@link DescribeDisasterRecoverGroupQuotaRequest} {@link DescribeDisasterRecoverGroupQuotaResponse} */
   DescribeDisasterRecoverGroupQuota(data?: DescribeDisasterRecoverGroupQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisasterRecoverGroupQuotaResponse>;
-  /** {@link DescribeDisasterRecoverGroups 查询分散置放群组信息}({@link DescribeDisasterRecoverGroupsRequest 请求参数}): {@link DescribeDisasterRecoverGroupsResponse 返回参数} */
+  /** 查询分散置放群组信息 {@link DescribeDisasterRecoverGroupsRequest} {@link DescribeDisasterRecoverGroupsResponse} */
   DescribeDisasterRecoverGroups(data?: DescribeDisasterRecoverGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisasterRecoverGroupsResponse>;
-  /** {@link DescribeHosts 查看CDH实例列表}({@link DescribeHostsRequest 请求参数}): {@link DescribeHostsResponse 返回参数} */
+  /** 查看CDH实例列表 {@link DescribeHostsRequest} {@link DescribeHostsResponse} */
   DescribeHosts(data?: DescribeHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostsResponse>;
-  /** {@link DescribeHpcClusters 查询高性能集群信息}({@link DescribeHpcClustersRequest 请求参数}): {@link DescribeHpcClustersResponse 返回参数} */
+  /** 查询高性能集群信息 {@link DescribeHpcClustersRequest} {@link DescribeHpcClustersResponse} */
   DescribeHpcClusters(data?: DescribeHpcClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHpcClustersResponse>;
-  /** {@link DescribeImageQuota 查询镜像配额上限}({@link DescribeImageQuotaRequest 请求参数}): {@link DescribeImageQuotaResponse 返回参数} */
+  /** 查询镜像配额上限 {@link DescribeImageQuotaRequest} {@link DescribeImageQuotaResponse} */
   DescribeImageQuota(data?: DescribeImageQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageQuotaResponse>;
-  /** {@link DescribeImageSharePermission 查看镜像分享信息}({@link DescribeImageSharePermissionRequest 请求参数}): {@link DescribeImageSharePermissionResponse 返回参数} */
+  /** 查看镜像分享信息 {@link DescribeImageSharePermissionRequest} {@link DescribeImageSharePermissionResponse} */
   DescribeImageSharePermission(data: DescribeImageSharePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSharePermissionResponse>;
-  /** {@link DescribeImages 查看镜像列表}({@link DescribeImagesRequest 请求参数}): {@link DescribeImagesResponse 返回参数} */
+  /** 查看镜像列表 {@link DescribeImagesRequest} {@link DescribeImagesResponse} */
   DescribeImages(data?: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
-  /** {@link DescribeImportImageOs 查询外部导入镜像支持的OS列表}({@link DescribeImportImageOsRequest 请求参数}): {@link DescribeImportImageOsResponse 返回参数} */
+  /** 查询外部导入镜像支持的OS列表 {@link DescribeImportImageOsRequest} {@link DescribeImportImageOsResponse} */
   DescribeImportImageOs(data?: DescribeImportImageOsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImportImageOsResponse>;
-  /** {@link DescribeInstanceFamilyConfigs 查询所支持的实例机型族信息}({@link DescribeInstanceFamilyConfigsRequest 请求参数}): {@link DescribeInstanceFamilyConfigsResponse 返回参数} */
+  /** 查询所支持的实例机型族信息 {@link DescribeInstanceFamilyConfigsRequest} {@link DescribeInstanceFamilyConfigsResponse} */
   DescribeInstanceFamilyConfigs(data?: DescribeInstanceFamilyConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceFamilyConfigsResponse>;
-  /** {@link DescribeInstanceInternetBandwidthConfigs 查询实例带宽配置}({@link DescribeInstanceInternetBandwidthConfigsRequest 请求参数}): {@link DescribeInstanceInternetBandwidthConfigsResponse 返回参数} */
+  /** 查询实例带宽配置 {@link DescribeInstanceInternetBandwidthConfigsRequest} {@link DescribeInstanceInternetBandwidthConfigsResponse} */
   DescribeInstanceInternetBandwidthConfigs(data: DescribeInstanceInternetBandwidthConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceInternetBandwidthConfigsResponse>;
-  /** {@link DescribeInstanceTypeConfigs 查询实例机型列表}({@link DescribeInstanceTypeConfigsRequest 请求参数}): {@link DescribeInstanceTypeConfigsResponse 返回参数} */
+  /** 查询实例机型列表 {@link DescribeInstanceTypeConfigsRequest} {@link DescribeInstanceTypeConfigsResponse} */
   DescribeInstanceTypeConfigs(data?: DescribeInstanceTypeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceTypeConfigsResponse>;
-  /** {@link DescribeInstanceVncUrl 查询实例管理终端地址}({@link DescribeInstanceVncUrlRequest 请求参数}): {@link DescribeInstanceVncUrlResponse 返回参数} */
+  /** 查询实例管理终端地址 {@link DescribeInstanceVncUrlRequest} {@link DescribeInstanceVncUrlResponse} */
   DescribeInstanceVncUrl(data: DescribeInstanceVncUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceVncUrlResponse>;
-  /** {@link DescribeInstances 查看实例列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
+  /** 查看实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** {@link DescribeInstancesModification 查询实例可调整配置}({@link DescribeInstancesModificationRequest 请求参数}): {@link DescribeInstancesModificationResponse 返回参数} */
+  /** 查询实例可调整配置 {@link DescribeInstancesModificationRequest} {@link DescribeInstancesModificationResponse} */
   DescribeInstancesModification(data: DescribeInstancesModificationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesModificationResponse>;
-  /** {@link DescribeInstancesOperationLimit 查询实例操作限制}({@link DescribeInstancesOperationLimitRequest 请求参数}): {@link DescribeInstancesOperationLimitResponse 返回参数} */
+  /** 查询实例操作限制 {@link DescribeInstancesOperationLimitRequest} {@link DescribeInstancesOperationLimitResponse} */
   DescribeInstancesOperationLimit(data: DescribeInstancesOperationLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesOperationLimitResponse>;
-  /** {@link DescribeInstancesStatus 查看实例状态列表}({@link DescribeInstancesStatusRequest 请求参数}): {@link DescribeInstancesStatusResponse 返回参数} */
+  /** 查看实例状态列表 {@link DescribeInstancesStatusRequest} {@link DescribeInstancesStatusResponse} */
   DescribeInstancesStatus(data?: DescribeInstancesStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesStatusResponse>;
-  /** {@link DescribeInternetChargeTypeConfigs 查询网络计费类型}({@link DescribeInternetChargeTypeConfigsRequest 请求参数}): {@link DescribeInternetChargeTypeConfigsResponse 返回参数} */
+  /** 查询网络计费类型 {@link DescribeInternetChargeTypeConfigsRequest} {@link DescribeInternetChargeTypeConfigsResponse} */
   DescribeInternetChargeTypeConfigs(data?: DescribeInternetChargeTypeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInternetChargeTypeConfigsResponse>;
-  /** {@link DescribeKeyPairs 查询密钥对列表}({@link DescribeKeyPairsRequest 请求参数}): {@link DescribeKeyPairsResponse 返回参数} */
+  /** 查询密钥对列表 {@link DescribeKeyPairsRequest} {@link DescribeKeyPairsResponse} */
   DescribeKeyPairs(data?: DescribeKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeyPairsResponse>;
-  /** {@link DescribeLaunchTemplateVersions 查询实例模板版本信息}({@link DescribeLaunchTemplateVersionsRequest 请求参数}): {@link DescribeLaunchTemplateVersionsResponse 返回参数} */
+  /** 查询实例模板版本信息 {@link DescribeLaunchTemplateVersionsRequest} {@link DescribeLaunchTemplateVersionsResponse} */
   DescribeLaunchTemplateVersions(data: DescribeLaunchTemplateVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaunchTemplateVersionsResponse>;
-  /** {@link DescribeLaunchTemplates 查询实例启动模板}({@link DescribeLaunchTemplatesRequest 请求参数}): {@link DescribeLaunchTemplatesResponse 返回参数} */
+  /** 查询实例启动模板 {@link DescribeLaunchTemplatesRequest} {@link DescribeLaunchTemplatesResponse} */
   DescribeLaunchTemplates(data?: DescribeLaunchTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaunchTemplatesResponse>;
-  /** {@link DescribeRegions 查询地域列表}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
+  /** 查询地域列表 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** {@link DescribeReservedInstances 列出已购买的预留实例}({@link DescribeReservedInstancesRequest 请求参数}): {@link DescribeReservedInstancesResponse 返回参数} */
+  /** 列出已购买的预留实例 {@link DescribeReservedInstancesRequest} {@link DescribeReservedInstancesResponse} */
   DescribeReservedInstances(data?: DescribeReservedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesResponse>;
-  /** {@link DescribeReservedInstancesConfigInfos 查询预留实例机型配置}({@link DescribeReservedInstancesConfigInfosRequest 请求参数}): {@link DescribeReservedInstancesConfigInfosResponse 返回参数} */
+  /** 查询预留实例机型配置 {@link DescribeReservedInstancesConfigInfosRequest} {@link DescribeReservedInstancesConfigInfosResponse} */
   DescribeReservedInstancesConfigInfos(data?: DescribeReservedInstancesConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesConfigInfosResponse>;
-  /** {@link DescribeReservedInstancesOfferings 列出可购买的预留实例配置}({@link DescribeReservedInstancesOfferingsRequest 请求参数}): {@link DescribeReservedInstancesOfferingsResponse 返回参数} */
+  /** 列出可购买的预留实例配置 {@link DescribeReservedInstancesOfferingsRequest} {@link DescribeReservedInstancesOfferingsResponse} */
   DescribeReservedInstancesOfferings(data?: DescribeReservedInstancesOfferingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesOfferingsResponse>;
-  /** {@link DescribeZoneInstanceConfigInfos 获取可用区机型配置信息}({@link DescribeZoneInstanceConfigInfosRequest 请求参数}): {@link DescribeZoneInstanceConfigInfosResponse 返回参数} */
+  /** 获取可用区机型配置信息 {@link DescribeZoneInstanceConfigInfosRequest} {@link DescribeZoneInstanceConfigInfosResponse} */
   DescribeZoneInstanceConfigInfos(data?: DescribeZoneInstanceConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneInstanceConfigInfosResponse>;
-  /** {@link DescribeZones 查询可用区列表}({@link DescribeZonesRequest 请求参数}): {@link DescribeZonesResponse 返回参数} */
+  /** 查询可用区列表 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
-  /** {@link DisassociateInstancesKeyPairs 解绑密钥对}({@link DisassociateInstancesKeyPairsRequest 请求参数}): {@link DisassociateInstancesKeyPairsResponse 返回参数} */
+  /** 解绑密钥对 {@link DisassociateInstancesKeyPairsRequest} {@link DisassociateInstancesKeyPairsResponse} */
   DisassociateInstancesKeyPairs(data: DisassociateInstancesKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateInstancesKeyPairsResponse>;
-  /** {@link DisassociateSecurityGroups 解绑安全组}({@link DisassociateSecurityGroupsRequest 请求参数}): {@link DisassociateSecurityGroupsResponse 返回参数} */
+  /** 解绑安全组 {@link DisassociateSecurityGroupsRequest} {@link DisassociateSecurityGroupsResponse} */
   DisassociateSecurityGroups(data: DisassociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupsResponse>;
-  /** {@link ExportImages 导出自定义镜像}({@link ExportImagesRequest 请求参数}): {@link ExportImagesResponse 返回参数} */
+  /** 导出自定义镜像 {@link ExportImagesRequest} {@link ExportImagesResponse} */
   ExportImages(data: ExportImagesRequest, config?: AxiosRequestConfig): AxiosPromise<ExportImagesResponse>;
-  /** {@link ImportImage 外部镜像导入}({@link ImportImageRequest 请求参数}): {@link ImportImageResponse 返回参数} */
+  /** 外部镜像导入 {@link ImportImageRequest} {@link ImportImageResponse} */
   ImportImage(data: ImportImageRequest, config?: AxiosRequestConfig): AxiosPromise<ImportImageResponse>;
-  /** {@link ImportKeyPair 导入密钥对}({@link ImportKeyPairRequest 请求参数}): {@link ImportKeyPairResponse 返回参数} */
+  /** 导入密钥对 {@link ImportKeyPairRequest} {@link ImportKeyPairResponse} */
   ImportKeyPair(data: ImportKeyPairRequest, config?: AxiosRequestConfig): AxiosPromise<ImportKeyPairResponse>;
-  /** {@link InquirePricePurchaseReservedInstancesOffering 创建预留实例询价}({@link InquirePricePurchaseReservedInstancesOfferingRequest 请求参数}): {@link InquirePricePurchaseReservedInstancesOfferingResponse 返回参数} */
+  /** 创建预留实例询价 {@link InquirePricePurchaseReservedInstancesOfferingRequest} {@link InquirePricePurchaseReservedInstancesOfferingResponse} */
   InquirePricePurchaseReservedInstancesOffering(data: InquirePricePurchaseReservedInstancesOfferingRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePricePurchaseReservedInstancesOfferingResponse>;
-  /** {@link InquiryPriceModifyInstancesChargeType 修改实例计费模式询价}({@link InquiryPriceModifyInstancesChargeTypeRequest 请求参数}): {@link InquiryPriceModifyInstancesChargeTypeResponse 返回参数} */
+  /** 修改实例计费模式询价 {@link InquiryPriceModifyInstancesChargeTypeRequest} {@link InquiryPriceModifyInstancesChargeTypeResponse} */
   InquiryPriceModifyInstancesChargeType(data: InquiryPriceModifyInstancesChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceModifyInstancesChargeTypeResponse>;
-  /** {@link InquiryPriceRenewHosts 续费CDH实例询价}({@link InquiryPriceRenewHostsRequest 请求参数}): {@link InquiryPriceRenewHostsResponse 返回参数} */
+  /** 续费CDH实例询价 {@link InquiryPriceRenewHostsRequest} {@link InquiryPriceRenewHostsResponse} */
   InquiryPriceRenewHosts(data: InquiryPriceRenewHostsRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewHostsResponse>;
-  /** {@link InquiryPriceRenewInstances 续费实例询价}({@link InquiryPriceRenewInstancesRequest 请求参数}): {@link InquiryPriceRenewInstancesResponse 返回参数} */
+  /** 续费实例询价 {@link InquiryPriceRenewInstancesRequest} {@link InquiryPriceRenewInstancesResponse} */
   InquiryPriceRenewInstances(data: InquiryPriceRenewInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewInstancesResponse>;
-  /** {@link InquiryPriceResetInstance 重装实例询价}({@link InquiryPriceResetInstanceRequest 请求参数}): {@link InquiryPriceResetInstanceResponse 返回参数} */
+  /** 重装实例询价 {@link InquiryPriceResetInstanceRequest} {@link InquiryPriceResetInstanceResponse} */
   InquiryPriceResetInstance(data: InquiryPriceResetInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceResetInstanceResponse>;
-  /** {@link InquiryPriceResetInstancesInternetMaxBandwidth 调整实例带宽上限询价}({@link InquiryPriceResetInstancesInternetMaxBandwidthRequest 请求参数}): {@link InquiryPriceResetInstancesInternetMaxBandwidthResponse 返回参数} */
+  /** 调整实例带宽上限询价 {@link InquiryPriceResetInstancesInternetMaxBandwidthRequest} {@link InquiryPriceResetInstancesInternetMaxBandwidthResponse} */
   InquiryPriceResetInstancesInternetMaxBandwidth(data: InquiryPriceResetInstancesInternetMaxBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceResetInstancesInternetMaxBandwidthResponse>;
-  /** {@link InquiryPriceResetInstancesType 调整实例配置询价}({@link InquiryPriceResetInstancesTypeRequest 请求参数}): {@link InquiryPriceResetInstancesTypeResponse 返回参数} */
+  /** 调整实例配置询价 {@link InquiryPriceResetInstancesTypeRequest} {@link InquiryPriceResetInstancesTypeResponse} */
   InquiryPriceResetInstancesType(data: InquiryPriceResetInstancesTypeRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceResetInstancesTypeResponse>;
-  /** {@link InquiryPriceResizeInstanceDisks 扩容实例磁盘询价}({@link InquiryPriceResizeInstanceDisksRequest 请求参数}): {@link InquiryPriceResizeInstanceDisksResponse 返回参数} */
+  /** 扩容实例磁盘询价 {@link InquiryPriceResizeInstanceDisksRequest} {@link InquiryPriceResizeInstanceDisksResponse} */
   InquiryPriceResizeInstanceDisks(data: InquiryPriceResizeInstanceDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceResizeInstanceDisksResponse>;
-  /** {@link InquiryPriceRunInstances 创建实例询价}({@link InquiryPriceRunInstancesRequest 请求参数}): {@link InquiryPriceRunInstancesResponse 返回参数} */
+  /** 创建实例询价 {@link InquiryPriceRunInstancesRequest} {@link InquiryPriceRunInstancesResponse} */
   InquiryPriceRunInstances(data: InquiryPriceRunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRunInstancesResponse>;
-  /** {@link InquiryPriceTerminateInstances 退还实例询价}({@link InquiryPriceTerminateInstancesRequest 请求参数}): {@link InquiryPriceTerminateInstancesResponse 返回参数} */
+  /** 退还实例询价 {@link InquiryPriceTerminateInstancesRequest} {@link InquiryPriceTerminateInstancesResponse} */
   InquiryPriceTerminateInstances(data: InquiryPriceTerminateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceTerminateInstancesResponse>;
-  /** {@link ModifyChcAttribute 修改CHC物理服务器的属性}({@link ModifyChcAttributeRequest 请求参数}): {@link ModifyChcAttributeResponse 返回参数} */
+  /** 修改CHC物理服务器的属性 {@link ModifyChcAttributeRequest} {@link ModifyChcAttributeResponse} */
   ModifyChcAttribute(data: ModifyChcAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyChcAttributeResponse>;
-  /** {@link ModifyDisasterRecoverGroupAttribute 修改分散置放群组属性}({@link ModifyDisasterRecoverGroupAttributeRequest 请求参数}): {@link ModifyDisasterRecoverGroupAttributeResponse 返回参数} */
+  /** 修改分散置放群组属性 {@link ModifyDisasterRecoverGroupAttributeRequest} {@link ModifyDisasterRecoverGroupAttributeResponse} */
   ModifyDisasterRecoverGroupAttribute(data: ModifyDisasterRecoverGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisasterRecoverGroupAttributeResponse>;
-  /** {@link ModifyHostsAttribute 修改CDH实例的属性}({@link ModifyHostsAttributeRequest 请求参数}): {@link ModifyHostsAttributeResponse 返回参数} */
+  /** 修改CDH实例的属性 {@link ModifyHostsAttributeRequest} {@link ModifyHostsAttributeResponse} */
   ModifyHostsAttribute(data: ModifyHostsAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostsAttributeResponse>;
-  /** {@link ModifyHpcClusterAttribute 修改高性能计算集群属性}({@link ModifyHpcClusterAttributeRequest 请求参数}): {@link ModifyHpcClusterAttributeResponse 返回参数} */
+  /** 修改高性能计算集群属性 {@link ModifyHpcClusterAttributeRequest} {@link ModifyHpcClusterAttributeResponse} */
   ModifyHpcClusterAttribute(data: ModifyHpcClusterAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHpcClusterAttributeResponse>;
-  /** {@link ModifyImageAttribute 修改镜像属性}({@link ModifyImageAttributeRequest 请求参数}): {@link ModifyImageAttributeResponse 返回参数} */
+  /** 修改镜像属性 {@link ModifyImageAttributeRequest} {@link ModifyImageAttributeResponse} */
   ModifyImageAttribute(data: ModifyImageAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageAttributeResponse>;
-  /** {@link ModifyImageSharePermission 修改镜像分享信息}({@link ModifyImageSharePermissionRequest 请求参数}): {@link ModifyImageSharePermissionResponse 返回参数} */
+  /** 修改镜像分享信息 {@link ModifyImageSharePermissionRequest} {@link ModifyImageSharePermissionResponse} */
   ModifyImageSharePermission(data: ModifyImageSharePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageSharePermissionResponse>;
-  /** {@link ModifyInstanceDiskType 修改实例的硬盘介质}({@link ModifyInstanceDiskTypeRequest 请求参数}): {@link ModifyInstanceDiskTypeResponse 返回参数} */
+  /** 修改实例的硬盘介质 {@link ModifyInstanceDiskTypeRequest} {@link ModifyInstanceDiskTypeResponse} */
   ModifyInstanceDiskType(data: ModifyInstanceDiskTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceDiskTypeResponse>;
-  /** {@link ModifyInstancesAttribute 修改实例的属性}({@link ModifyInstancesAttributeRequest 请求参数}): {@link ModifyInstancesAttributeResponse 返回参数} */
+  /** 修改实例的属性 {@link ModifyInstancesAttributeRequest} {@link ModifyInstancesAttributeResponse} */
   ModifyInstancesAttribute(data: ModifyInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesAttributeResponse>;
-  /** {@link ModifyInstancesChargeType 修改实例计费模式}({@link ModifyInstancesChargeTypeRequest 请求参数}): {@link ModifyInstancesChargeTypeResponse 返回参数} */
+  /** 修改实例计费模式 {@link ModifyInstancesChargeTypeRequest} {@link ModifyInstancesChargeTypeResponse} */
   ModifyInstancesChargeType(data: ModifyInstancesChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesChargeTypeResponse>;
-  /** {@link ModifyInstancesProject 修改实例所属项目}({@link ModifyInstancesProjectRequest 请求参数}): {@link ModifyInstancesProjectResponse 返回参数} */
+  /** 修改实例所属项目 {@link ModifyInstancesProjectRequest} {@link ModifyInstancesProjectResponse} */
   ModifyInstancesProject(data: ModifyInstancesProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesProjectResponse>;
-  /** {@link ModifyInstancesRenewFlag 修改实例续费标识}({@link ModifyInstancesRenewFlagRequest 请求参数}): {@link ModifyInstancesRenewFlagResponse 返回参数} */
+  /** 修改实例续费标识 {@link ModifyInstancesRenewFlagRequest} {@link ModifyInstancesRenewFlagResponse} */
   ModifyInstancesRenewFlag(data: ModifyInstancesRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesRenewFlagResponse>;
-  /** {@link ModifyInstancesVpcAttribute 修改实例vpc属性}({@link ModifyInstancesVpcAttributeRequest 请求参数}): {@link ModifyInstancesVpcAttributeResponse 返回参数} */
+  /** 修改实例vpc属性 {@link ModifyInstancesVpcAttributeRequest} {@link ModifyInstancesVpcAttributeResponse} */
   ModifyInstancesVpcAttribute(data: ModifyInstancesVpcAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesVpcAttributeResponse>;
-  /** {@link ModifyKeyPairAttribute 修改密钥对属性}({@link ModifyKeyPairAttributeRequest 请求参数}): {@link ModifyKeyPairAttributeResponse 返回参数} */
+  /** 修改密钥对属性 {@link ModifyKeyPairAttributeRequest} {@link ModifyKeyPairAttributeResponse} */
   ModifyKeyPairAttribute(data: ModifyKeyPairAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKeyPairAttributeResponse>;
-  /** {@link ModifyLaunchTemplateDefaultVersion 修改实例启动模板默认版本}({@link ModifyLaunchTemplateDefaultVersionRequest 请求参数}): {@link ModifyLaunchTemplateDefaultVersionResponse 返回参数} */
+  /** 修改实例启动模板默认版本 {@link ModifyLaunchTemplateDefaultVersionRequest} {@link ModifyLaunchTemplateDefaultVersionResponse} */
   ModifyLaunchTemplateDefaultVersion(data: ModifyLaunchTemplateDefaultVersionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLaunchTemplateDefaultVersionResponse>;
-  /** {@link ProgramFpgaImage 在线烧录FPGA镜像}({@link ProgramFpgaImageRequest 请求参数}): {@link ProgramFpgaImageResponse 返回参数} */
+  /** 在线烧录FPGA镜像 {@link ProgramFpgaImageRequest} {@link ProgramFpgaImageResponse} */
   ProgramFpgaImage(data: ProgramFpgaImageRequest, config?: AxiosRequestConfig): AxiosPromise<ProgramFpgaImageResponse>;
-  /** {@link PurchaseReservedInstancesOffering 购买预留实例}({@link PurchaseReservedInstancesOfferingRequest 请求参数}): {@link PurchaseReservedInstancesOfferingResponse 返回参数} */
+  /** 购买预留实例 {@link PurchaseReservedInstancesOfferingRequest} {@link PurchaseReservedInstancesOfferingResponse} */
   PurchaseReservedInstancesOffering(data: PurchaseReservedInstancesOfferingRequest, config?: AxiosRequestConfig): AxiosPromise<PurchaseReservedInstancesOfferingResponse>;
-  /** {@link RebootInstances 重启实例}({@link RebootInstancesRequest 请求参数}): {@link RebootInstancesResponse 返回参数} */
+  /** 重启实例 {@link RebootInstancesRequest} {@link RebootInstancesResponse} */
   RebootInstances(data: RebootInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootInstancesResponse>;
-  /** {@link RemoveChcAssistVpc 清理CHC物理服务器的带外网络和部署网络}({@link RemoveChcAssistVpcRequest 请求参数}): {@link RemoveChcAssistVpcResponse 返回参数} */
+  /** 清理CHC物理服务器的带外网络和部署网络 {@link RemoveChcAssistVpcRequest} {@link RemoveChcAssistVpcResponse} */
   RemoveChcAssistVpc(data: RemoveChcAssistVpcRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveChcAssistVpcResponse>;
-  /** {@link RemoveChcDeployVpc 清理CHC物理服务器的部署网络}({@link RemoveChcDeployVpcRequest 请求参数}): {@link RemoveChcDeployVpcResponse 返回参数} */
+  /** 清理CHC物理服务器的部署网络 {@link RemoveChcDeployVpcRequest} {@link RemoveChcDeployVpcResponse} */
   RemoveChcDeployVpc(data: RemoveChcDeployVpcRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveChcDeployVpcResponse>;
-  /** {@link RenewHosts 续费CDH实例}({@link RenewHostsRequest 请求参数}): {@link RenewHostsResponse 返回参数} */
+  /** 续费CDH实例 {@link RenewHostsRequest} {@link RenewHostsResponse} */
   RenewHosts(data: RenewHostsRequest, config?: AxiosRequestConfig): AxiosPromise<RenewHostsResponse>;
-  /** {@link RenewInstances 续费实例}({@link RenewInstancesRequest 请求参数}): {@link RenewInstancesResponse 返回参数} */
+  /** 续费实例 {@link RenewInstancesRequest} {@link RenewInstancesResponse} */
   RenewInstances(data: RenewInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RenewInstancesResponse>;
-  /** {@link ResetInstance 重装实例}({@link ResetInstanceRequest 请求参数}): {@link ResetInstanceResponse 返回参数} */
+  /** 重装实例 {@link ResetInstanceRequest} {@link ResetInstanceResponse} */
   ResetInstance(data: ResetInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstanceResponse>;
-  /** {@link ResetInstancesInternetMaxBandwidth 调整实例带宽上限}({@link ResetInstancesInternetMaxBandwidthRequest 请求参数}): {@link ResetInstancesInternetMaxBandwidthResponse 返回参数} */
+  /** 调整实例带宽上限 {@link ResetInstancesInternetMaxBandwidthRequest} {@link ResetInstancesInternetMaxBandwidthResponse} */
   ResetInstancesInternetMaxBandwidth(data: ResetInstancesInternetMaxBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstancesInternetMaxBandwidthResponse>;
-  /** {@link ResetInstancesPassword 重置实例密码}({@link ResetInstancesPasswordRequest 请求参数}): {@link ResetInstancesPasswordResponse 返回参数} */
+  /** 重置实例密码 {@link ResetInstancesPasswordRequest} {@link ResetInstancesPasswordResponse} */
   ResetInstancesPassword(data: ResetInstancesPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstancesPasswordResponse>;
-  /** {@link ResetInstancesType 调整实例配置}({@link ResetInstancesTypeRequest 请求参数}): {@link ResetInstancesTypeResponse 返回参数} */
+  /** 调整实例配置 {@link ResetInstancesTypeRequest} {@link ResetInstancesTypeResponse} */
   ResetInstancesType(data: ResetInstancesTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstancesTypeResponse>;
-  /** {@link ResizeInstanceDisks 扩容实例磁盘}({@link ResizeInstanceDisksRequest 请求参数}): {@link ResizeInstanceDisksResponse 返回参数} */
+  /** 扩容实例磁盘 {@link ResizeInstanceDisksRequest} {@link ResizeInstanceDisksResponse} */
   ResizeInstanceDisks(data: ResizeInstanceDisksRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeInstanceDisksResponse>;
-  /** {@link RunInstances 创建实例}({@link RunInstancesRequest 请求参数}): {@link RunInstancesResponse 返回参数} */
+  /** 创建实例 {@link RunInstancesRequest} {@link RunInstancesResponse} */
   RunInstances(data?: RunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RunInstancesResponse>;
-  /** {@link StartInstances 启动实例}({@link StartInstancesRequest 请求参数}): {@link StartInstancesResponse 返回参数} */
+  /** 启动实例 {@link StartInstancesRequest} {@link StartInstancesResponse} */
   StartInstances(data: StartInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StartInstancesResponse>;
-  /** {@link StopInstances 关闭实例}({@link StopInstancesRequest 请求参数}): {@link StopInstancesResponse 返回参数} */
+  /** 关闭实例 {@link StopInstancesRequest} {@link StopInstancesResponse} */
   StopInstances(data: StopInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstancesResponse>;
-  /** {@link SyncImages 同步镜像}({@link SyncImagesRequest 请求参数}): {@link SyncImagesResponse 返回参数} */
+  /** 同步镜像 {@link SyncImagesRequest} {@link SyncImagesResponse} */
   SyncImages(data: SyncImagesRequest, config?: AxiosRequestConfig): AxiosPromise<SyncImagesResponse>;
-  /** {@link TerminateInstances 退还实例}({@link TerminateInstancesRequest 请求参数}): {@link TerminateInstancesResponse 返回参数} */
+  /** 退还实例 {@link TerminateInstancesRequest} {@link TerminateInstancesResponse} */
   TerminateInstances(data: TerminateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstancesResponse>;
 }
 

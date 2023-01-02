@@ -26,7 +26,7 @@ declare interface AuthTestTidRequest {
 declare interface AuthTestTidResponse {
   /** 认证结果 */
   Pass?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -40,7 +40,7 @@ declare interface BurnTidNotifyRequest {
 declare interface BurnTidNotifyResponse {
   /** 接收回执成功的TID */
   Tid?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -58,7 +58,7 @@ declare interface DeliverTidNotifyResponse {
   Tid?: string;
   /** 产品公钥 */
   ProductKey?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -74,7 +74,7 @@ declare interface DeliverTidsResponse {
   TidSet?: TidKeysInfo[] | null;
   /** 产品公钥 */
   ProductKey?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -86,7 +86,7 @@ declare interface DescribeAvailableLibCountRequest {
 declare interface DescribeAvailableLibCountResponse {
   /** 可空发的白盒密钥数量 */
   Quantity?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -100,7 +100,7 @@ declare interface DescribePermissionResponse {
   DownloadPermission?: string;
   /** 使用控制台权限 */
   UsePermission?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -114,7 +114,7 @@ declare interface DownloadTidsRequest {
 declare interface DownloadTidsResponse {
   /** 下载的TID信息列表 */
   TidSet?: TidKeysInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -134,7 +134,7 @@ declare interface UploadDeviceUniqueCodeResponse {
   LeftQuantity?: number;
   /** 错误的硬件唯一标识码 */
   IllegalCodeSet?: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -150,30 +150,30 @@ declare interface VerifyChipBurnInfoResponse {
   VerifiedTimes?: number;
   /** 剩余验证次数 */
   LeftTimes?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Iottid 物联网设备身份认证} */
 declare interface Iottid {
   (): Versions;
-  /** {@link AuthTestTid 单向认证测试TID}({@link AuthTestTidRequest 请求参数}): {@link AuthTestTidResponse 返回参数} */
+  /** 单向认证测试TID {@link AuthTestTidRequest} {@link AuthTestTidResponse} */
   AuthTestTid(data: AuthTestTidRequest, config?: AxiosRequestConfig): AxiosPromise<AuthTestTidResponse>;
-  /** {@link BurnTidNotify 安全芯片TID烧录回执}({@link BurnTidNotifyRequest 请求参数}): {@link BurnTidNotifyResponse 返回参数} */
+  /** 安全芯片TID烧录回执 {@link BurnTidNotifyRequest} {@link BurnTidNotifyResponse} */
   BurnTidNotify(data: BurnTidNotifyRequest, config?: AxiosRequestConfig): AxiosPromise<BurnTidNotifyResponse>;
-  /** {@link DeliverTidNotify 安全芯片TID空发回执}({@link DeliverTidNotifyRequest 请求参数}): {@link DeliverTidNotifyResponse 返回参数} */
+  /** 安全芯片TID空发回执 {@link DeliverTidNotifyRequest} {@link DeliverTidNotifyResponse} */
   DeliverTidNotify(data: DeliverTidNotifyRequest, config?: AxiosRequestConfig): AxiosPromise<DeliverTidNotifyResponse>;
-  /** {@link DeliverTids 请求空发TID信息}({@link DeliverTidsRequest 请求参数}): {@link DeliverTidsResponse 返回参数} */
+  /** 请求空发TID信息 {@link DeliverTidsRequest} {@link DeliverTidsResponse} */
   DeliverTids(data: DeliverTidsRequest, config?: AxiosRequestConfig): AxiosPromise<DeliverTidsResponse>;
-  /** {@link DescribeAvailableLibCount 查询可空发的白盒密钥数量}({@link DescribeAvailableLibCountRequest 请求参数}): {@link DescribeAvailableLibCountResponse 返回参数} */
+  /** 查询可空发的白盒密钥数量 {@link DescribeAvailableLibCountRequest} {@link DescribeAvailableLibCountResponse} */
   DescribeAvailableLibCount(data: DescribeAvailableLibCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableLibCountResponse>;
-  /** {@link DescribePermission 查询权限}({@link DescribePermissionRequest 请求参数}): {@link DescribePermissionResponse 返回参数} */
+  /** 查询权限 {@link DescribePermissionRequest} {@link DescribePermissionResponse} */
   DescribePermission(data?: DescribePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePermissionResponse>;
-  /** {@link DownloadTids 下载芯片订单的TID}({@link DownloadTidsRequest 请求参数}): {@link DownloadTidsResponse 返回参数} */
+  /** 下载芯片订单的TID {@link DownloadTidsRequest} {@link DownloadTidsResponse} */
   DownloadTids(data: DownloadTidsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadTidsResponse>;
-  /** {@link UploadDeviceUniqueCode 上传硬件唯一标识码}({@link UploadDeviceUniqueCodeRequest 请求参数}): {@link UploadDeviceUniqueCodeResponse 返回参数} */
+  /** 上传硬件唯一标识码 {@link UploadDeviceUniqueCodeRequest} {@link UploadDeviceUniqueCodeResponse} */
   UploadDeviceUniqueCode(data: UploadDeviceUniqueCodeRequest, config?: AxiosRequestConfig): AxiosPromise<UploadDeviceUniqueCodeResponse>;
-  /** {@link VerifyChipBurnInfo 验证芯片烧录TID信息}({@link VerifyChipBurnInfoRequest 请求参数}): {@link VerifyChipBurnInfoResponse 返回参数} */
+  /** 验证芯片烧录TID信息 {@link VerifyChipBurnInfoRequest} {@link VerifyChipBurnInfoResponse} */
   VerifyChipBurnInfo(data: VerifyChipBurnInfoRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyChipBurnInfoResponse>;
 }
 

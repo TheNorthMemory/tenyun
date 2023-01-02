@@ -842,7 +842,7 @@ declare interface CompleteMigrateJobRequest {
 }
 
 declare interface CompleteMigrateJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -874,7 +874,7 @@ declare interface ConfigureSyncJobRequest {
 }
 
 declare interface ConfigureSyncJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -884,7 +884,7 @@ declare interface CreateCheckSyncJobRequest {
 }
 
 declare interface CreateCheckSyncJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -902,7 +902,7 @@ declare interface CreateCompareTaskRequest {
 declare interface CreateCompareTaskResponse {
   /** 数据对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9 */
   CompareTaskId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -912,7 +912,7 @@ declare interface CreateMigrateCheckJobRequest {
 }
 
 declare interface CreateMigrateCheckJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -938,7 +938,7 @@ declare interface CreateMigrationServiceRequest {
 declare interface CreateMigrationServiceResponse {
   /** 下单成功随机生成的迁移任务id列表，形如：dts-c1f6rs21 */
   JobIds: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -972,7 +972,7 @@ declare interface CreateSyncJobRequest {
 declare interface CreateSyncJobResponse {
   /** 同步任务ids */
   JobIds: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -984,7 +984,7 @@ declare interface DeleteCompareTaskRequest {
 }
 
 declare interface DeleteCompareTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1004,7 +1004,7 @@ declare interface DescribeCheckSyncJobResultResponse {
   Progress: number | null;
   /** 步骤信息 */
   StepInfos: StepInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1036,7 +1036,7 @@ declare interface DescribeCompareReportResponse {
   Abstract: CompareAbstractInfo | null;
   /** 一致性校验详细信息 */
   Detail: CompareDetailInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1054,7 +1054,7 @@ declare interface DescribeCompareTasksResponse {
   TotalCount: number | null;
   /** 一致性校验列表 */
   Items: CompareTaskItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1086,7 +1086,7 @@ declare interface DescribeMigrateDBInstancesResponse {
   TotalCount: number | null;
   /** 实例列表 */
   Instances: MigrateDBItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1104,7 +1104,7 @@ declare interface DescribeMigrationCheckJobResponse {
   StepInfo: CheckStep[] | null;
   /** 校验结果，如：checkPass(校验通过)、checkNotPass(校验未通过) */
   CheckFlag: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1154,7 +1154,7 @@ declare interface DescribeMigrationDetailResponse {
   TradeInfo: TradeInfo | null;
   /** 任务错误信息 */
   ErrorInfo: ErrorInfoItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1198,7 +1198,7 @@ declare interface DescribeMigrationJobsResponse {
   TotalCount: number | null;
   /** 迁移任务列表 */
   JobList: JobItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1232,7 +1232,7 @@ declare interface DescribeSyncJobsResponse {
   TotalCount: number | null;
   /** 任务详情数组 */
   JobList: SyncJobInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1242,7 +1242,7 @@ declare interface DestroyMigrateJobRequest {
 }
 
 declare interface DestroyMigrateJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1252,7 +1252,7 @@ declare interface DestroySyncJobRequest {
 }
 
 declare interface DestroySyncJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1262,7 +1262,7 @@ declare interface IsolateMigrateJobRequest {
 }
 
 declare interface IsolateMigrateJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1272,7 +1272,7 @@ declare interface IsolateSyncJobRequest {
 }
 
 declare interface IsolateSyncJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1286,7 +1286,7 @@ declare interface ModifyCompareTaskNameRequest {
 }
 
 declare interface ModifyCompareTaskNameResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1304,7 +1304,7 @@ declare interface ModifyCompareTaskRequest {
 }
 
 declare interface ModifyCompareTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1316,7 +1316,7 @@ declare interface ModifyMigrateJobSpecRequest {
 }
 
 declare interface ModifyMigrateJobSpecResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1328,7 +1328,7 @@ declare interface ModifyMigrateNameRequest {
 }
 
 declare interface ModifyMigrateNameResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1354,7 +1354,7 @@ declare interface ModifyMigrationJobRequest {
 }
 
 declare interface ModifyMigrationJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1364,7 +1364,7 @@ declare interface RecoverMigrateJobRequest {
 }
 
 declare interface RecoverMigrateJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1374,7 +1374,7 @@ declare interface RecoverSyncJobRequest {
 }
 
 declare interface RecoverSyncJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1386,7 +1386,7 @@ declare interface ResizeSyncJobRequest {
 }
 
 declare interface ResizeSyncJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1398,7 +1398,7 @@ declare interface ResumeMigrateJobRequest {
 }
 
 declare interface ResumeMigrateJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1408,7 +1408,7 @@ declare interface ResumeSyncJobRequest {
 }
 
 declare interface ResumeSyncJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1420,7 +1420,7 @@ declare interface SkipCheckItemRequest {
 }
 
 declare interface SkipCheckItemResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1432,7 +1432,7 @@ declare interface SkipSyncCheckItemRequest {
 }
 
 declare interface SkipSyncCheckItemResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1444,7 +1444,7 @@ declare interface StartCompareRequest {
 }
 
 declare interface StartCompareResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1454,7 +1454,7 @@ declare interface StartMigrateJobRequest {
 }
 
 declare interface StartMigrateJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1464,7 +1464,7 @@ declare interface StartSyncJobRequest {
 }
 
 declare interface StartSyncJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1476,7 +1476,7 @@ declare interface StopCompareRequest {
 }
 
 declare interface StopCompareResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1486,7 +1486,7 @@ declare interface StopMigrateJobRequest {
 }
 
 declare interface StopMigrateJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1496,7 +1496,7 @@ declare interface StopSyncJobRequest {
 }
 
 declare interface StopSyncJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1783,7 +1783,7 @@ declare namespace V20180330 {
   interface ActivateSubscribeResponse {
     /** 配置数据订阅任务ID。 */
     AsyncRequestId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1795,7 +1795,7 @@ declare namespace V20180330 {
   }
 
   interface CompleteMigrateJobResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1805,7 +1805,7 @@ declare namespace V20180330 {
   }
 
   interface CreateMigrateCheckJobResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1839,7 +1839,7 @@ declare namespace V20180330 {
   interface CreateMigrateJobResponse {
     /** 数据迁移任务ID */
     JobId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1863,7 +1863,7 @@ declare namespace V20180330 {
   interface CreateSubscribeResponse {
     /** 数据订阅实例的ID数组 */
     SubscribeIds: string[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1873,7 +1873,7 @@ declare namespace V20180330 {
   }
 
   interface DeleteMigrateJobResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1887,7 +1887,7 @@ declare namespace V20180330 {
     Info?: string;
     /** 任务执行状态，可能的值有：success，failed，running */
     Status?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1907,7 +1907,7 @@ declare namespace V20180330 {
     Progress: string;
     /** 校验是否通过,0-未通过，1-校验通过, 3-未校验 */
     CheckFlag: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1933,7 +1933,7 @@ declare namespace V20180330 {
     TotalCount: number;
     /** 任务详情数组 */
     JobList: MigrateJobInfo[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1945,7 +1945,7 @@ declare namespace V20180330 {
     TotalCount?: number;
     /** 可售卖地域详情 */
     Items?: SubscribeRegionConf[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2011,7 +2011,7 @@ declare namespace V20180330 {
     SubscribeVersion: string;
     /** 错误信息 */
     Errors: SubsErr[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2049,7 +2049,7 @@ declare namespace V20180330 {
     TotalCount: number;
     /** 数据订阅实例的信息列表 */
     Items: SubscribeInfo[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2059,7 +2059,7 @@ declare namespace V20180330 {
   }
 
   interface IsolateSubscribeResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2087,7 +2087,7 @@ declare namespace V20180330 {
   }
 
   interface ModifyMigrateJobResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2099,7 +2099,7 @@ declare namespace V20180330 {
   }
 
   interface ModifySubscribeAutoRenewFlagResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2111,7 +2111,7 @@ declare namespace V20180330 {
   }
 
   interface ModifySubscribeConsumeTimeResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2123,7 +2123,7 @@ declare namespace V20180330 {
   }
 
   interface ModifySubscribeNameResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2139,7 +2139,7 @@ declare namespace V20180330 {
   interface ModifySubscribeObjectsResponse {
     /** 异步任务的ID */
     AsyncRequestId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2155,7 +2155,7 @@ declare namespace V20180330 {
   }
 
   interface ModifySubscribeVipVportResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2165,7 +2165,7 @@ declare namespace V20180330 {
   }
 
   interface OfflineIsolatedSubscribeResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2175,7 +2175,7 @@ declare namespace V20180330 {
   }
 
   interface ResetSubscribeResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2185,7 +2185,7 @@ declare namespace V20180330 {
   }
 
   interface StartMigrateJobResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2195,7 +2195,7 @@ declare namespace V20180330 {
   }
 
   interface StopMigrateJobResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -2203,127 +2203,127 @@ declare namespace V20180330 {
 /** {@link Dts 数据传输服务} */
 declare interface Dts {
   (): Versions;
-  /** {@link CompleteMigrateJob 完成数据迁移任务}({@link CompleteMigrateJobRequest 请求参数}): {@link CompleteMigrateJobResponse 返回参数} */
+  /** 完成数据迁移任务 {@link CompleteMigrateJobRequest} {@link CompleteMigrateJobResponse} */
   CompleteMigrateJob(data: CompleteMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<CompleteMigrateJobResponse>;
-  /** {@link ConfigureSyncJob 配置同步任务}({@link ConfigureSyncJobRequest 请求参数}): {@link ConfigureSyncJobResponse 返回参数} */
+  /** 配置同步任务 {@link ConfigureSyncJobRequest} {@link ConfigureSyncJobResponse} */
   ConfigureSyncJob(data: ConfigureSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<ConfigureSyncJobResponse>;
-  /** {@link CreateCheckSyncJob 校验同步任务}({@link CreateCheckSyncJobRequest 请求参数}): {@link CreateCheckSyncJobResponse 返回参数} */
+  /** 校验同步任务 {@link CreateCheckSyncJobRequest} {@link CreateCheckSyncJobResponse} */
   CreateCheckSyncJob(data: CreateCheckSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCheckSyncJobResponse>;
-  /** {@link CreateCompareTask 创建一致性校验任务}({@link CreateCompareTaskRequest 请求参数}): {@link CreateCompareTaskResponse 返回参数} */
+  /** 创建一致性校验任务 {@link CreateCompareTaskRequest} {@link CreateCompareTaskResponse} */
   CreateCompareTask(data: CreateCompareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCompareTaskResponse>;
-  /** {@link CreateMigrateCheckJob 校验迁移任务}({@link CreateMigrateCheckJobRequest 请求参数}): {@link CreateMigrateCheckJobResponse 返回参数} */
+  /** 校验迁移任务 {@link CreateMigrateCheckJobRequest} {@link CreateMigrateCheckJobResponse} */
   CreateMigrateCheckJob(data: CreateMigrateCheckJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMigrateCheckJobResponse>;
-  /** {@link CreateMigrationService 购买迁移任务}({@link CreateMigrationServiceRequest 请求参数}): {@link CreateMigrationServiceResponse 返回参数} */
+  /** 购买迁移任务 {@link CreateMigrationServiceRequest} {@link CreateMigrationServiceResponse} */
   CreateMigrationService(data: CreateMigrationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMigrationServiceResponse>;
-  /** {@link CreateSyncJob 创建同步任务}({@link CreateSyncJobRequest 请求参数}): {@link CreateSyncJobResponse 返回参数} */
+  /** 创建同步任务 {@link CreateSyncJobRequest} {@link CreateSyncJobResponse} */
   CreateSyncJob(data: CreateSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSyncJobResponse>;
-  /** {@link DeleteCompareTask 删除一致性校验任务}({@link DeleteCompareTaskRequest 请求参数}): {@link DeleteCompareTaskResponse 返回参数} */
+  /** 删除一致性校验任务 {@link DeleteCompareTaskRequest} {@link DeleteCompareTaskResponse} */
   DeleteCompareTask(data: DeleteCompareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCompareTaskResponse>;
-  /** {@link DescribeCheckSyncJobResult 查询同步校验任务结果}({@link DescribeCheckSyncJobResultRequest 请求参数}): {@link DescribeCheckSyncJobResultResponse 返回参数} */
+  /** 查询同步校验任务结果 {@link DescribeCheckSyncJobResultRequest} {@link DescribeCheckSyncJobResultResponse} */
   DescribeCheckSyncJobResult(data?: DescribeCheckSyncJobResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckSyncJobResultResponse>;
-  /** {@link DescribeCompareReport 查询一致性校验任务详情}({@link DescribeCompareReportRequest 请求参数}): {@link DescribeCompareReportResponse 返回参数} */
+  /** 查询一致性校验任务详情 {@link DescribeCompareReportRequest} {@link DescribeCompareReportResponse} */
   DescribeCompareReport(data: DescribeCompareReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompareReportResponse>;
-  /** {@link DescribeCompareTasks 查询一致性校验任务列表}({@link DescribeCompareTasksRequest 请求参数}): {@link DescribeCompareTasksResponse 返回参数} */
+  /** 查询一致性校验任务列表 {@link DescribeCompareTasksRequest} {@link DescribeCompareTasksResponse} */
   DescribeCompareTasks(data: DescribeCompareTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompareTasksResponse>;
-  /** {@link DescribeMigrateDBInstances 查询可迁移的实例列表}({@link DescribeMigrateDBInstancesRequest 请求参数}): {@link DescribeMigrateDBInstancesResponse 返回参数} */
+  /** 查询可迁移的实例列表 {@link DescribeMigrateDBInstancesRequest} {@link DescribeMigrateDBInstancesResponse} */
   DescribeMigrateDBInstances(data: DescribeMigrateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrateDBInstancesResponse>;
-  /** {@link DescribeMigrationCheckJob 查询迁移校验任务结果}({@link DescribeMigrationCheckJobRequest 请求参数}): {@link DescribeMigrationCheckJobResponse 返回参数} */
+  /** 查询迁移校验任务结果 {@link DescribeMigrationCheckJobRequest} {@link DescribeMigrationCheckJobResponse} */
   DescribeMigrationCheckJob(data: DescribeMigrationCheckJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationCheckJobResponse>;
-  /** {@link DescribeMigrationDetail 查询某个迁移任务详情}({@link DescribeMigrationDetailRequest 请求参数}): {@link DescribeMigrationDetailResponse 返回参数} */
+  /** 查询某个迁移任务详情 {@link DescribeMigrationDetailRequest} {@link DescribeMigrationDetailResponse} */
   DescribeMigrationDetail(data: DescribeMigrationDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationDetailResponse>;
-  /** {@link DescribeMigrationJobs 查询数据迁移任务列表}({@link DescribeMigrationJobsRequest 请求参数}): {@link DescribeMigrationJobsResponse 返回参数} */
+  /** 查询数据迁移任务列表 {@link DescribeMigrationJobsRequest} {@link DescribeMigrationJobsResponse} */
   DescribeMigrationJobs(data?: DescribeMigrationJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationJobsResponse>;
-  /** {@link DescribeSyncJobs 查询同步任务信息}({@link DescribeSyncJobsRequest 请求参数}): {@link DescribeSyncJobsResponse 返回参数} */
+  /** 查询同步任务信息 {@link DescribeSyncJobsRequest} {@link DescribeSyncJobsResponse} */
   DescribeSyncJobs(data?: DescribeSyncJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSyncJobsResponse>;
-  /** {@link DestroyMigrateJob 下线数据迁移任务}({@link DestroyMigrateJobRequest 请求参数}): {@link DestroyMigrateJobResponse 返回参数} */
+  /** 下线数据迁移任务 {@link DestroyMigrateJobRequest} {@link DestroyMigrateJobResponse} */
   DestroyMigrateJob(data?: DestroyMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyMigrateJobResponse>;
-  /** {@link DestroySyncJob 下线同步任务}({@link DestroySyncJobRequest 请求参数}): {@link DestroySyncJobResponse 返回参数} */
+  /** 下线同步任务 {@link DestroySyncJobRequest} {@link DestroySyncJobResponse} */
   DestroySyncJob(data: DestroySyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<DestroySyncJobResponse>;
-  /** {@link IsolateMigrateJob 隔离数据迁移任务}({@link IsolateMigrateJobRequest 请求参数}): {@link IsolateMigrateJobResponse 返回参数} */
+  /** 隔离数据迁移任务 {@link IsolateMigrateJobRequest} {@link IsolateMigrateJobResponse} */
   IsolateMigrateJob(data: IsolateMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateMigrateJobResponse>;
-  /** {@link IsolateSyncJob 隔离同步任务}({@link IsolateSyncJobRequest 请求参数}): {@link IsolateSyncJobResponse 返回参数} */
+  /** 隔离同步任务 {@link IsolateSyncJobRequest} {@link IsolateSyncJobResponse} */
   IsolateSyncJob(data: IsolateSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateSyncJobResponse>;
-  /** {@link ModifyCompareTask 修改一致性校验任务}({@link ModifyCompareTaskRequest 请求参数}): {@link ModifyCompareTaskResponse 返回参数} */
+  /** 修改一致性校验任务 {@link ModifyCompareTaskRequest} {@link ModifyCompareTaskResponse} */
   ModifyCompareTask(data: ModifyCompareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCompareTaskResponse>;
-  /** {@link ModifyCompareTaskName 修改一致性校验任务名称}({@link ModifyCompareTaskNameRequest 请求参数}): {@link ModifyCompareTaskNameResponse 返回参数} */
+  /** 修改一致性校验任务名称 {@link ModifyCompareTaskNameRequest} {@link ModifyCompareTaskNameResponse} */
   ModifyCompareTaskName(data: ModifyCompareTaskNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCompareTaskNameResponse>;
-  /** {@link ModifyMigrateJobSpec 调整实例规格}({@link ModifyMigrateJobSpecRequest 请求参数}): {@link ModifyMigrateJobSpecResponse 返回参数} */
+  /** 调整实例规格 {@link ModifyMigrateJobSpecRequest} {@link ModifyMigrateJobSpecResponse} */
   ModifyMigrateJobSpec(data: ModifyMigrateJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrateJobSpecResponse>;
-  /** {@link ModifyMigrateName 修改迁移名称}({@link ModifyMigrateNameRequest 请求参数}): {@link ModifyMigrateNameResponse 返回参数} */
+  /** 修改迁移名称 {@link ModifyMigrateNameRequest} {@link ModifyMigrateNameResponse} */
   ModifyMigrateName(data: ModifyMigrateNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrateNameResponse>;
-  /** {@link ModifyMigrationJob 配置迁移服务}({@link ModifyMigrationJobRequest 请求参数}): {@link ModifyMigrationJobResponse 返回参数} */
+  /** 配置迁移服务 {@link ModifyMigrationJobRequest} {@link ModifyMigrationJobResponse} */
   ModifyMigrationJob(data: ModifyMigrationJobRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrationJobResponse>;
-  /** {@link RecoverMigrateJob 解除隔离数据迁移任务}({@link RecoverMigrateJobRequest 请求参数}): {@link RecoverMigrateJobResponse 返回参数} */
+  /** 解除隔离数据迁移任务 {@link RecoverMigrateJobRequest} {@link RecoverMigrateJobResponse} */
   RecoverMigrateJob(data: RecoverMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverMigrateJobResponse>;
-  /** {@link RecoverSyncJob 解除隔离同步任务}({@link RecoverSyncJobRequest 请求参数}): {@link RecoverSyncJobResponse 返回参数} */
+  /** 解除隔离同步任务 {@link RecoverSyncJobRequest} {@link RecoverSyncJobResponse} */
   RecoverSyncJob(data: RecoverSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverSyncJobResponse>;
-  /** {@link ResizeSyncJob 调整同步任务规格}({@link ResizeSyncJobRequest 请求参数}): {@link ResizeSyncJobResponse 返回参数} */
+  /** 调整同步任务规格 {@link ResizeSyncJobRequest} {@link ResizeSyncJobResponse} */
   ResizeSyncJob(data: ResizeSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeSyncJobResponse>;
-  /** {@link ResumeMigrateJob 重试迁移任务}({@link ResumeMigrateJobRequest 请求参数}): {@link ResumeMigrateJobResponse 返回参数} */
+  /** 重试迁移任务 {@link ResumeMigrateJobRequest} {@link ResumeMigrateJobResponse} */
   ResumeMigrateJob(data: ResumeMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeMigrateJobResponse>;
-  /** {@link ResumeSyncJob 重试同步任务}({@link ResumeSyncJobRequest 请求参数}): {@link ResumeSyncJobResponse 返回参数} */
+  /** 重试同步任务 {@link ResumeSyncJobRequest} {@link ResumeSyncJobResponse} */
   ResumeSyncJob(data: ResumeSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeSyncJobResponse>;
-  /** {@link SkipCheckItem 跳过迁移校验检查项}({@link SkipCheckItemRequest 请求参数}): {@link SkipCheckItemResponse 返回参数} */
+  /** 跳过迁移校验检查项 {@link SkipCheckItemRequest} {@link SkipCheckItemResponse} */
   SkipCheckItem(data: SkipCheckItemRequest, config?: AxiosRequestConfig): AxiosPromise<SkipCheckItemResponse>;
-  /** {@link SkipSyncCheckItem 跳过同步校验检查项}({@link SkipSyncCheckItemRequest 请求参数}): {@link SkipSyncCheckItemResponse 返回参数} */
+  /** 跳过同步校验检查项 {@link SkipSyncCheckItemRequest} {@link SkipSyncCheckItemResponse} */
   SkipSyncCheckItem(data: SkipSyncCheckItemRequest, config?: AxiosRequestConfig): AxiosPromise<SkipSyncCheckItemResponse>;
-  /** {@link StartCompare 启动一致性校验任务}({@link StartCompareRequest 请求参数}): {@link StartCompareResponse 返回参数} */
+  /** 启动一致性校验任务 {@link StartCompareRequest} {@link StartCompareResponse} */
   StartCompare(data: StartCompareRequest, config?: AxiosRequestConfig): AxiosPromise<StartCompareResponse>;
-  /** {@link StartMigrateJob 启动数据迁移任务}({@link StartMigrateJobRequest 请求参数}): {@link StartMigrateJobResponse 返回参数} */
+  /** 启动数据迁移任务 {@link StartMigrateJobRequest} {@link StartMigrateJobResponse} */
   StartMigrateJob(data: StartMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<StartMigrateJobResponse>;
-  /** {@link StartSyncJob 启动同步任务}({@link StartSyncJobRequest 请求参数}): {@link StartSyncJobResponse 返回参数} */
+  /** 启动同步任务 {@link StartSyncJobRequest} {@link StartSyncJobResponse} */
   StartSyncJob(data?: StartSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<StartSyncJobResponse>;
-  /** {@link StopCompare 终止一致性校验任务}({@link StopCompareRequest 请求参数}): {@link StopCompareResponse 返回参数} */
+  /** 终止一致性校验任务 {@link StopCompareRequest} {@link StopCompareResponse} */
   StopCompare(data: StopCompareRequest, config?: AxiosRequestConfig): AxiosPromise<StopCompareResponse>;
-  /** {@link StopMigrateJob 终止数据迁移任务}({@link StopMigrateJobRequest 请求参数}): {@link StopMigrateJobResponse 返回参数} */
+  /** 终止数据迁移任务 {@link StopMigrateJobRequest} {@link StopMigrateJobResponse} */
   StopMigrateJob(data: StopMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<StopMigrateJobResponse>;
-  /** {@link StopSyncJob 结束同步任务}({@link StopSyncJobRequest 请求参数}): {@link StopSyncJobResponse 返回参数} */
+  /** 结束同步任务 {@link StopSyncJobRequest} {@link StopSyncJobResponse} */
   StopSyncJob(data: StopSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<StopSyncJobResponse>;
-  /** {@link V20180330.ActivateSubscribe 配置数据订阅通道}({@link V20180330.ActivateSubscribeRequest 请求参数}): {@link V20180330.ActivateSubscribeResponse 返回参数} */
+  /** 配置数据订阅通道 {@link V20180330.ActivateSubscribeRequest} {@link V20180330.ActivateSubscribeResponse} */
   ActivateSubscribe(data: V20180330.ActivateSubscribeRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.ActivateSubscribeResponse>;
-  /** {@link V20180330.CompleteMigrateJob 完成数据迁移任务}({@link V20180330.CompleteMigrateJobRequest 请求参数}): {@link V20180330.CompleteMigrateJobResponse 返回参数} */
+  /** 完成数据迁移任务 {@link V20180330.CompleteMigrateJobRequest} {@link V20180330.CompleteMigrateJobResponse} */
   CompleteMigrateJob(data: V20180330.CompleteMigrateJobRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.CompleteMigrateJobResponse>;
-  /** {@link V20180330.CreateMigrateCheckJob 创建校验迁移任务}({@link V20180330.CreateMigrateCheckJobRequest 请求参数}): {@link V20180330.CreateMigrateCheckJobResponse 返回参数} */
+  /** 创建校验迁移任务 {@link V20180330.CreateMigrateCheckJobRequest} {@link V20180330.CreateMigrateCheckJobResponse} */
   CreateMigrateCheckJob(data: V20180330.CreateMigrateCheckJobRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.CreateMigrateCheckJobResponse>;
-  /** {@link V20180330.CreateMigrateJob 创建数据迁移任务}({@link V20180330.CreateMigrateJobRequest 请求参数}): {@link V20180330.CreateMigrateJobResponse 返回参数} */
+  /** 创建数据迁移任务 {@link V20180330.CreateMigrateJobRequest} {@link V20180330.CreateMigrateJobResponse} */
   CreateMigrateJob(data: V20180330.CreateMigrateJobRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.CreateMigrateJobResponse>;
-  /** {@link V20180330.CreateSubscribe 创建订阅对象}({@link V20180330.CreateSubscribeRequest 请求参数}): {@link V20180330.CreateSubscribeResponse 返回参数} */
+  /** 创建订阅对象 {@link V20180330.CreateSubscribeRequest} {@link V20180330.CreateSubscribeResponse} */
   CreateSubscribe(data: V20180330.CreateSubscribeRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.CreateSubscribeResponse>;
-  /** {@link V20180330.DeleteMigrateJob 删除数据迁移任务}({@link V20180330.DeleteMigrateJobRequest 请求参数}): {@link V20180330.DeleteMigrateJobResponse 返回参数} */
+  /** 删除数据迁移任务 {@link V20180330.DeleteMigrateJobRequest} {@link V20180330.DeleteMigrateJobResponse} */
   DeleteMigrateJob(data: V20180330.DeleteMigrateJobRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.DeleteMigrateJobResponse>;
-  /** {@link V20180330.DescribeAsyncRequestInfo 查询任务执行结果}({@link V20180330.DescribeAsyncRequestInfoRequest 请求参数}): {@link V20180330.DescribeAsyncRequestInfoResponse 返回参数} */
+  /** 查询任务执行结果 {@link V20180330.DescribeAsyncRequestInfoRequest} {@link V20180330.DescribeAsyncRequestInfoResponse} */
   DescribeAsyncRequestInfo(data: V20180330.DescribeAsyncRequestInfoRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.DescribeAsyncRequestInfoResponse>;
-  /** {@link V20180330.DescribeMigrateCheckJob 获取迁移校验结果}({@link V20180330.DescribeMigrateCheckJobRequest 请求参数}): {@link V20180330.DescribeMigrateCheckJobResponse 返回参数} */
+  /** 获取迁移校验结果 {@link V20180330.DescribeMigrateCheckJobRequest} {@link V20180330.DescribeMigrateCheckJobResponse} */
   DescribeMigrateCheckJob(data: V20180330.DescribeMigrateCheckJobRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.DescribeMigrateCheckJobResponse>;
-  /** {@link V20180330.DescribeMigrateJobs 查询数据迁移任务}({@link V20180330.DescribeMigrateJobsRequest 请求参数}): {@link V20180330.DescribeMigrateJobsResponse 返回参数} */
+  /** 查询数据迁移任务 {@link V20180330.DescribeMigrateJobsRequest} {@link V20180330.DescribeMigrateJobsResponse} */
   DescribeMigrateJobs(data: V20180330.DescribeMigrateJobsRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.DescribeMigrateJobsResponse>;
-  /** {@link V20180330.DescribeRegionConf 查询可售卖订阅地域}({@link V20180330.DescribeRegionConfRequest 请求参数}): {@link V20180330.DescribeRegionConfResponse 返回参数} */
+  /** 查询可售卖订阅地域 {@link V20180330.DescribeRegionConfRequest} {@link V20180330.DescribeRegionConfResponse} */
   DescribeRegionConf(data: V20180330.DescribeRegionConfRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.DescribeRegionConfResponse>;
-  /** {@link V20180330.DescribeSubscribeConf 查询订阅实例配置}({@link V20180330.DescribeSubscribeConfRequest 请求参数}): {@link V20180330.DescribeSubscribeConfResponse 返回参数} */
+  /** 查询订阅实例配置 {@link V20180330.DescribeSubscribeConfRequest} {@link V20180330.DescribeSubscribeConfResponse} */
   DescribeSubscribeConf(data: V20180330.DescribeSubscribeConfRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.DescribeSubscribeConfResponse>;
-  /** {@link V20180330.DescribeSubscribes 获取数据订阅实例列表}({@link V20180330.DescribeSubscribesRequest 请求参数}): {@link V20180330.DescribeSubscribesResponse 返回参数} */
+  /** 获取数据订阅实例列表 {@link V20180330.DescribeSubscribesRequest} {@link V20180330.DescribeSubscribesResponse} */
   DescribeSubscribes(data: V20180330.DescribeSubscribesRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.DescribeSubscribesResponse>;
-  /** {@link V20180330.IsolateSubscribe 隔离订阅实例}({@link V20180330.IsolateSubscribeRequest 请求参数}): {@link V20180330.IsolateSubscribeResponse 返回参数} */
+  /** 隔离订阅实例 {@link V20180330.IsolateSubscribeRequest} {@link V20180330.IsolateSubscribeResponse} */
   IsolateSubscribe(data: V20180330.IsolateSubscribeRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.IsolateSubscribeResponse>;
-  /** {@link V20180330.ModifyMigrateJob 修改数据迁移任务}({@link V20180330.ModifyMigrateJobRequest 请求参数}): {@link V20180330.ModifyMigrateJobResponse 返回参数} */
+  /** 修改数据迁移任务 {@link V20180330.ModifyMigrateJobRequest} {@link V20180330.ModifyMigrateJobResponse} */
   ModifyMigrateJob(data: V20180330.ModifyMigrateJobRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.ModifyMigrateJobResponse>;
-  /** {@link V20180330.ModifySubscribeAutoRenewFlag 修改订阅实例自动续费标识}({@link V20180330.ModifySubscribeAutoRenewFlagRequest 请求参数}): {@link V20180330.ModifySubscribeAutoRenewFlagResponse 返回参数} */
+  /** 修改订阅实例自动续费标识 {@link V20180330.ModifySubscribeAutoRenewFlagRequest} {@link V20180330.ModifySubscribeAutoRenewFlagResponse} */
   ModifySubscribeAutoRenewFlag(data: V20180330.ModifySubscribeAutoRenewFlagRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.ModifySubscribeAutoRenewFlagResponse>;
-  /** {@link V20180330.ModifySubscribeConsumeTime 修改数据订阅实例通道的消费时间点}({@link V20180330.ModifySubscribeConsumeTimeRequest 请求参数}): {@link V20180330.ModifySubscribeConsumeTimeResponse 返回参数} */
+  /** 修改数据订阅实例通道的消费时间点 {@link V20180330.ModifySubscribeConsumeTimeRequest} {@link V20180330.ModifySubscribeConsumeTimeResponse} */
   ModifySubscribeConsumeTime(data: V20180330.ModifySubscribeConsumeTimeRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.ModifySubscribeConsumeTimeResponse>;
-  /** {@link V20180330.ModifySubscribeName 修改数据订阅实例的名称}({@link V20180330.ModifySubscribeNameRequest 请求参数}): {@link V20180330.ModifySubscribeNameResponse 返回参数} */
+  /** 修改数据订阅实例的名称 {@link V20180330.ModifySubscribeNameRequest} {@link V20180330.ModifySubscribeNameResponse} */
   ModifySubscribeName(data: V20180330.ModifySubscribeNameRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.ModifySubscribeNameResponse>;
-  /** {@link V20180330.ModifySubscribeObjects 修改数据订阅通道的订阅规则}({@link V20180330.ModifySubscribeObjectsRequest 请求参数}): {@link V20180330.ModifySubscribeObjectsResponse 返回参数} */
+  /** 修改数据订阅通道的订阅规则 {@link V20180330.ModifySubscribeObjectsRequest} {@link V20180330.ModifySubscribeObjectsResponse} */
   ModifySubscribeObjects(data: V20180330.ModifySubscribeObjectsRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.ModifySubscribeObjectsResponse>;
-  /** {@link V20180330.ModifySubscribeVipVport 修改数据订阅实例的IP和端口号}({@link V20180330.ModifySubscribeVipVportRequest 请求参数}): {@link V20180330.ModifySubscribeVipVportResponse 返回参数} */
+  /** 修改数据订阅实例的IP和端口号 {@link V20180330.ModifySubscribeVipVportRequest} {@link V20180330.ModifySubscribeVipVportResponse} */
   ModifySubscribeVipVport(data: V20180330.ModifySubscribeVipVportRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.ModifySubscribeVipVportResponse>;
-  /** {@link V20180330.OfflineIsolatedSubscribe 下线已隔离的数据订阅实例}({@link V20180330.OfflineIsolatedSubscribeRequest 请求参数}): {@link V20180330.OfflineIsolatedSubscribeResponse 返回参数} */
+  /** 下线已隔离的数据订阅实例 {@link V20180330.OfflineIsolatedSubscribeRequest} {@link V20180330.OfflineIsolatedSubscribeResponse} */
   OfflineIsolatedSubscribe(data: V20180330.OfflineIsolatedSubscribeRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.OfflineIsolatedSubscribeResponse>;
-  /** {@link V20180330.ResetSubscribe 重置数据订阅实例}({@link V20180330.ResetSubscribeRequest 请求参数}): {@link V20180330.ResetSubscribeResponse 返回参数} */
+  /** 重置数据订阅实例 {@link V20180330.ResetSubscribeRequest} {@link V20180330.ResetSubscribeResponse} */
   ResetSubscribe(data: V20180330.ResetSubscribeRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.ResetSubscribeResponse>;
-  /** {@link V20180330.StartMigrateJob 启动数据迁移任务}({@link V20180330.StartMigrateJobRequest 请求参数}): {@link V20180330.StartMigrateJobResponse 返回参数} */
+  /** 启动数据迁移任务 {@link V20180330.StartMigrateJobRequest} {@link V20180330.StartMigrateJobResponse} */
   StartMigrateJob(data: V20180330.StartMigrateJobRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.StartMigrateJobResponse>;
-  /** {@link V20180330.StopMigrateJob 撤销数据迁移任务}({@link V20180330.StopMigrateJobRequest 请求参数}): {@link V20180330.StopMigrateJobResponse 返回参数} */
+  /** 撤销数据迁移任务 {@link V20180330.StopMigrateJobRequest} {@link V20180330.StopMigrateJobResponse} */
   StopMigrateJob(data: V20180330.StopMigrateJobRequest, config: AxiosRequestConfig & V20180330.VersionHeader): AxiosPromise<V20180330.StopMigrateJobResponse>;
 }
 

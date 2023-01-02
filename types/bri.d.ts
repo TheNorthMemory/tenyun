@@ -50,14 +50,14 @@ declare interface DescribeBRIRequest {
 declare interface DescribeBRIResponse {
   /** 业务风险情报响应体 */
   ResponseData?: BRIResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Bri 业务风险情报} */
 declare interface Bri {
   (): Versions;
-  /** {@link DescribeBRI 获取业务风险情报}({@link DescribeBRIRequest 请求参数}): {@link DescribeBRIResponse 返回参数} */
+  /** 获取业务风险情报 {@link DescribeBRIRequest} {@link DescribeBRIResponse} */
   DescribeBRI(data: DescribeBRIRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBRIResponse>;
 }
 

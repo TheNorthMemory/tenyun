@@ -2116,7 +2116,7 @@ declare interface AuthorizeTokenRequest {
 declare interface AuthorizeTokenResponse {
   /** 0 成功 */
   Result: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2134,7 +2134,7 @@ declare interface BatchCreateAclRequest {
 declare interface BatchCreateAclResponse {
   /** 状态码 */
   Result: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2152,7 +2152,7 @@ declare interface BatchModifyGroupOffsetsRequest {
 declare interface BatchModifyGroupOffsetsResponse {
   /** 返回结果 */
   Result: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2166,7 +2166,7 @@ declare interface BatchModifyTopicAttributesRequest {
 declare interface BatchModifyTopicAttributesResponse {
   /** 返回结果 */
   Result: BatchModifyTopicResultDTO[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2182,7 +2182,7 @@ declare interface CancelAuthorizationTokenRequest {
 declare interface CancelAuthorizationTokenResponse {
   /** 0 成功 */
   Result: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2199,7 +2199,7 @@ declare interface CheckCdcClusterRequest {
 declare interface CheckCdcClusterResponse {
   /** 返回结果状态Success */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2244,7 +2244,7 @@ declare interface CreateAclRequest {
 declare interface CreateAclResponse {
   /** 返回结果 */
   Result: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2270,7 +2270,7 @@ declare interface CreateCdcClusterRequest {
 declare interface CreateCdcClusterResponse {
   /** 无 */
   Result: CdcClusterResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2304,7 +2304,7 @@ declare interface CreateConnectResourceRequest {
 declare interface CreateConnectResourceResponse {
   /** 连接源的Id */
   Result: ConnectResourceResourceIdResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2322,7 +2322,7 @@ declare interface CreateConsumerRequest {
 declare interface CreateConsumerResponse {
   /** 创建group描述 */
   Result: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2352,7 +2352,7 @@ declare interface CreateDatahubTaskRequest {
 declare interface CreateDatahubTaskResponse {
   /** 任务id */
   Result: CreateDatahubTaskRes;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2376,7 +2376,7 @@ declare interface CreateInstancePostRequest {
 declare interface CreateInstancePostResponse {
   /** 返回结果 */
   Result?: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2422,7 +2422,7 @@ declare interface CreateInstancePreRequest {
 declare interface CreateInstancePreResponse {
   /** 返回结果 */
   Result: CreateInstancePreResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2438,7 +2438,7 @@ declare interface CreatePartitionRequest {
 declare interface CreatePartitionResponse {
   /** 返回的结果集 */
   Result?: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2466,7 +2466,7 @@ declare interface CreateRouteRequest {
 declare interface CreateRouteResponse {
   /** 返回结果 */
   Result: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2480,7 +2480,7 @@ declare interface CreateTokenRequest {
 declare interface CreateTokenResponse {
   /** token串 */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2496,7 +2496,7 @@ declare interface CreateTopicIpWhiteListRequest {
 declare interface CreateTopicIpWhiteListResponse {
   /** 删除主题IP白名单结果 */
   Result?: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2540,7 +2540,7 @@ declare interface CreateTopicRequest {
 declare interface CreateTopicResponse {
   /** 返回创建结果 */
   Result: CreateTopicResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2556,7 +2556,7 @@ declare interface CreateUserRequest {
 declare interface CreateUserResponse {
   /** 返回的结果 */
   Result?: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2580,7 +2580,7 @@ declare interface DeleteAclRequest {
 declare interface DeleteAclResponse {
   /** 返回结果 */
   Result: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2594,7 +2594,7 @@ declare interface DeleteAclRuleRequest {
 declare interface DeleteAclRuleResponse {
   /** 返回被删除的规则的ID */
   Result: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2606,7 +2606,7 @@ declare interface DeleteConnectResourceRequest {
 declare interface DeleteConnectResourceResponse {
   /** 连接源的Id */
   Result: ConnectResourceResourceIdResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2618,7 +2618,7 @@ declare interface DeleteDatahubTaskRequest {
 declare interface DeleteDatahubTaskResponse {
   /** 任务id */
   Result: DatahubTaskIdRes | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2630,7 +2630,7 @@ declare interface DeleteDatahubTopicRequest {
 declare interface DeleteDatahubTopicResponse {
   /** 返回的结果集 */
   Result: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2644,7 +2644,7 @@ declare interface DeleteGroupRequest {
 declare interface DeleteGroupResponse {
   /** 返回结果 */
   Result: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2656,7 +2656,7 @@ declare interface DeleteInstancePreRequest {
 declare interface DeleteInstancePreResponse {
   /** 返回结果 */
   Result: CreateInstancePreResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2674,7 +2674,7 @@ declare interface DeleteRouteRequest {
 declare interface DeleteRouteResponse {
   /** 返回结果 */
   Result: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2684,7 +2684,7 @@ declare interface DeleteRouteTriggerTimeRequest {
 }
 
 declare interface DeleteRouteTriggerTimeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2700,7 +2700,7 @@ declare interface DeleteTopicIpWhiteListRequest {
 declare interface DeleteTopicIpWhiteListResponse {
   /** 删除主题IP白名单结果 */
   Result?: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2714,7 +2714,7 @@ declare interface DeleteTopicRequest {
 declare interface DeleteTopicResponse {
   /** 返回的结果集 */
   Result?: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2728,7 +2728,7 @@ declare interface DeleteUserRequest {
 declare interface DeleteUserResponse {
   /** 返回结果 */
   Result?: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2750,7 +2750,7 @@ declare interface DescribeACLRequest {
 declare interface DescribeACLResponse {
   /** 返回的ACL结果集对象 */
   Result: AclResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2764,7 +2764,7 @@ declare interface DescribeAppInfoRequest {
 declare interface DescribeAppInfoResponse {
   /** 返回的符合要求的App Id列表 */
   Result?: AppIdResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2776,7 +2776,7 @@ declare interface DescribeCkafkaZoneRequest {
 declare interface DescribeCkafkaZoneResponse {
   /** 查询结果复杂对象实体 */
   Result: ZoneResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2788,7 +2788,7 @@ declare interface DescribeConnectResourceRequest {
 declare interface DescribeConnectResourceResponse {
   /** 连接源的Id */
   Result: DescribeConnectResourceResp | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2806,7 +2806,7 @@ declare interface DescribeConnectResourcesRequest {
 declare interface DescribeConnectResourcesResponse {
   /** 连接源列表 */
   Result: DescribeConnectResourcesResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2826,7 +2826,7 @@ declare interface DescribeConsumerGroupRequest {
 declare interface DescribeConsumerGroupResponse {
   /** 返回的消费分组信息 */
   Result?: ConsumerGroupResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2846,7 +2846,7 @@ declare interface DescribeDatahubGroupOffsetsRequest {
 declare interface DescribeDatahubGroupOffsetsResponse {
   /** 返回的结果对象 */
   Result: GroupOffsetResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2858,7 +2858,7 @@ declare interface DescribeDatahubTaskRequest {
 declare interface DescribeDatahubTaskResponse {
   /** 返回结果 */
   Result: DescribeDatahubTaskRes;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2882,7 +2882,7 @@ declare interface DescribeDatahubTasksRequest {
 declare interface DescribeDatahubTasksResponse {
   /** 返回任务查询结果 */
   Result: DescribeDatahubTasksRes;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2896,7 +2896,7 @@ declare interface DescribeGroupInfoRequest {
 declare interface DescribeGroupInfoResponse {
   /** 返回的结果 */
   Result?: GroupInfoResponse[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2918,7 +2918,7 @@ declare interface DescribeGroupOffsetsRequest {
 declare interface DescribeGroupOffsetsResponse {
   /** 返回的结果对象 */
   Result?: GroupOffsetResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2936,7 +2936,7 @@ declare interface DescribeGroupRequest {
 declare interface DescribeGroupResponse {
   /** 返回结果集列表 */
   Result?: GroupResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2948,7 +2948,7 @@ declare interface DescribeInstanceAttributesRequest {
 declare interface DescribeInstanceAttributesResponse {
   /** 实例属性返回结果对象。 */
   Result: InstanceAttributesResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2976,7 +2976,7 @@ declare interface DescribeInstancesDetailRequest {
 declare interface DescribeInstancesDetailResponse {
   /** 返回的实例详情结果对象 */
   Result: InstanceDetailResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3000,7 +3000,7 @@ declare interface DescribeInstancesRequest {
 declare interface DescribeInstancesResponse {
   /** 返回的结果 */
   Result: InstanceResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3018,7 +3018,7 @@ declare interface DescribeRegionRequest {
 declare interface DescribeRegionResponse {
   /** 返回地域枚举结果列表 */
   Result: Region[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3030,7 +3030,7 @@ declare interface DescribeRouteRequest {
 declare interface DescribeRouteResponse {
   /** 返回的路由信息结果集 */
   Result: RouteResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3044,7 +3044,7 @@ declare interface DescribeTopicAttributesRequest {
 declare interface DescribeTopicAttributesResponse {
   /** 返回的结果对象 */
   Result: TopicAttributesResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3064,7 +3064,7 @@ declare interface DescribeTopicDetailRequest {
 declare interface DescribeTopicDetailResponse {
   /** 返回的主题详情实体 */
   Result: TopicDetailResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3084,7 +3084,7 @@ declare interface DescribeTopicRequest {
 declare interface DescribeTopicResponse {
   /** 返回的结果 */
   Result: TopicResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3102,7 +3102,7 @@ declare interface DescribeTopicSubscribeGroupRequest {
 declare interface DescribeTopicSubscribeGroupResponse {
   /** 返回结果 */
   Result: TopicSubscribeGroup;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3122,7 +3122,7 @@ declare interface DescribeTopicSyncReplicaRequest {
 declare interface DescribeTopicSyncReplicaResponse {
   /** 返回topic 副本详情 */
   Result: TopicInSyncReplicaResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3140,7 +3140,7 @@ declare interface DescribeUserRequest {
 declare interface DescribeUserResponse {
   /** 返回结果列表 */
   Result?: UserResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3156,7 +3156,7 @@ declare interface FetchDatahubMessageByOffsetRequest {
 declare interface FetchDatahubMessageByOffsetResponse {
   /** 返回结果 */
   Result: ConsumerRecord;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3174,7 +3174,7 @@ declare interface FetchLatestDatahubMessageListRequest {
 declare interface FetchLatestDatahubMessageListResponse {
   /** 返回结果。 */
   Result: ConsumerRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3192,7 +3192,7 @@ declare interface FetchMessageByOffsetRequest {
 declare interface FetchMessageByOffsetResponse {
   /** 返回结果 */
   Result: ConsumerRecord;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3212,7 +3212,7 @@ declare interface FetchMessageListByOffsetRequest {
 declare interface FetchMessageListByOffsetResponse {
   /** 返回结果。注意，列表中不返回具体的消息内容（key、value），如果需要查询具体消息内容，请使用FetchMessageByOffset接口 */
   Result?: ConsumerRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3277,7 +3277,7 @@ declare interface InquireCkafkaPriceRequest {
 declare interface InquireCkafkaPriceResponse {
   /** 出参 */
   Result: InquireCkafkaPriceResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3411,7 +3411,7 @@ declare interface ModifyConnectResourceRequest {
 declare interface ModifyConnectResourceResponse {
   /** 连接源的Id */
   Result: ConnectResourceResourceIdResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3425,7 +3425,7 @@ declare interface ModifyDatahubTaskRequest {
 declare interface ModifyDatahubTaskResponse {
   /** 任务id */
   Result: DatahubTaskIdRes | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3451,7 +3451,7 @@ declare interface ModifyGroupOffsetsRequest {
 declare interface ModifyGroupOffsetsResponse {
   /** 返回结果 */
   Result?: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3479,7 +3479,7 @@ declare interface ModifyInstanceAttributesRequest {
 declare interface ModifyInstanceAttributesResponse {
   /** 返回结果 */
   Result: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3497,7 +3497,7 @@ declare interface ModifyInstancePreRequest {
 declare interface ModifyInstancePreResponse {
   /** 变更预付费实例配置返回结构 */
   Result: CreateInstancePreResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3515,7 +3515,7 @@ declare interface ModifyPasswordRequest {
 declare interface ModifyPasswordResponse {
   /** 返回结果 */
   Result?: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3561,7 +3561,7 @@ declare interface ModifyTopicAttributesRequest {
 declare interface ModifyTopicAttributesResponse {
   /** 返回结果集 */
   Result: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3580,7 +3580,7 @@ declare interface SendMessageRequest {
 declare interface SendMessageResponse {
   /** 消息ID列表 */
   MessageId: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3653,139 +3653,139 @@ declare interface ZoneResponse {
 /** {@link Ckafka 消息队列 CKafka} */
 declare interface Ckafka {
   (): Versions;
-  /** {@link AuthorizeToken 实例授权token}({@link AuthorizeTokenRequest 请求参数}): {@link AuthorizeTokenResponse 返回参数} */
+  /** 实例授权token {@link AuthorizeTokenRequest} {@link AuthorizeTokenResponse} */
   AuthorizeToken(data: AuthorizeTokenRequest, config?: AxiosRequestConfig): AxiosPromise<AuthorizeTokenResponse>;
-  /** {@link BatchCreateAcl 批量添加 ACL 策略}({@link BatchCreateAclRequest 请求参数}): {@link BatchCreateAclResponse 返回参数} */
+  /** 批量添加 ACL 策略 {@link BatchCreateAclRequest} {@link BatchCreateAclResponse} */
   BatchCreateAcl(data: BatchCreateAclRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateAclResponse>;
-  /** {@link BatchModifyGroupOffsets 批量修改消费组offset}({@link BatchModifyGroupOffsetsRequest 请求参数}): {@link BatchModifyGroupOffsetsResponse 返回参数} */
+  /** 批量修改消费组offset {@link BatchModifyGroupOffsetsRequest} {@link BatchModifyGroupOffsetsResponse} */
   BatchModifyGroupOffsets(data: BatchModifyGroupOffsetsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyGroupOffsetsResponse>;
-  /** {@link BatchModifyTopicAttributes 批量设置主题属性}({@link BatchModifyTopicAttributesRequest 请求参数}): {@link BatchModifyTopicAttributesResponse 返回参数} */
+  /** 批量设置主题属性 {@link BatchModifyTopicAttributesRequest} {@link BatchModifyTopicAttributesResponse} */
   BatchModifyTopicAttributes(data: BatchModifyTopicAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyTopicAttributesResponse>;
-  /** {@link CancelAuthorizationToken 取消授权token}({@link CancelAuthorizationTokenRequest 请求参数}): {@link CancelAuthorizationTokenResponse 返回参数} */
+  /** 取消授权token {@link CancelAuthorizationTokenRequest} {@link CancelAuthorizationTokenResponse} */
   CancelAuthorizationToken(data: CancelAuthorizationTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAuthorizationTokenResponse>;
-  /** {@link CheckCdcCluster 查询cdc任务接口}({@link CheckCdcClusterRequest 请求参数}): {@link CheckCdcClusterResponse 返回参数} */
+  /** 查询cdc任务接口 {@link CheckCdcClusterRequest} {@link CheckCdcClusterResponse} */
   CheckCdcCluster(data: CheckCdcClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCdcClusterResponse>;
-  /** {@link CreateAcl 添加 ACL 策略}({@link CreateAclRequest 请求参数}): {@link CreateAclResponse 返回参数} */
+  /** 添加 ACL 策略 {@link CreateAclRequest} {@link CreateAclResponse} */
   CreateAcl(data: CreateAclRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAclResponse>;
-  /** {@link CreateCdcCluster 创建cdc-ckafka集群}({@link CreateCdcClusterRequest 请求参数}): {@link CreateCdcClusterResponse 返回参数} */
+  /** 创建cdc-ckafka集群 {@link CreateCdcClusterRequest} {@link CreateCdcClusterResponse} */
   CreateCdcCluster(data: CreateCdcClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCdcClusterResponse>;
-  /** {@link CreateConnectResource 创建Datahub连接源}({@link CreateConnectResourceRequest 请求参数}): {@link CreateConnectResourceResponse 返回参数} */
+  /** 创建Datahub连接源 {@link CreateConnectResourceRequest} {@link CreateConnectResourceResponse} */
   CreateConnectResource(data: CreateConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConnectResourceResponse>;
-  /** {@link CreateConsumer 创建消费者组}({@link CreateConsumerRequest 请求参数}): {@link CreateConsumerResponse 返回参数} */
+  /** 创建消费者组 {@link CreateConsumerRequest} {@link CreateConsumerResponse} */
   CreateConsumer(data: CreateConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerResponse>;
-  /** {@link CreateDatahubTask 创建DIP转储任务}({@link CreateDatahubTaskRequest 请求参数}): {@link CreateDatahubTaskResponse 返回参数} */
+  /** 创建DIP转储任务 {@link CreateDatahubTaskRequest} {@link CreateDatahubTaskResponse} */
   CreateDatahubTask(data: CreateDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatahubTaskResponse>;
-  /** {@link CreateInstancePost 创建按量计费实例}({@link CreateInstancePostRequest 请求参数}): {@link CreateInstancePostResponse 返回参数} */
+  /** 创建按量计费实例 {@link CreateInstancePostRequest} {@link CreateInstancePostResponse} */
   CreateInstancePost(data: CreateInstancePostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancePostResponse>;
-  /** {@link CreateInstancePre 创建实例(预付费包年包月)}({@link CreateInstancePreRequest 请求参数}): {@link CreateInstancePreResponse 返回参数} */
+  /** 创建实例(预付费包年包月) {@link CreateInstancePreRequest} {@link CreateInstancePreResponse} */
   CreateInstancePre(data: CreateInstancePreRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancePreResponse>;
-  /** {@link CreatePartition 增加主题分区}({@link CreatePartitionRequest 请求参数}): {@link CreatePartitionResponse 返回参数} */
+  /** 增加主题分区 {@link CreatePartitionRequest} {@link CreatePartitionResponse} */
   CreatePartition(data: CreatePartitionRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePartitionResponse>;
-  /** {@link CreateRoute 添加实例路由}({@link CreateRouteRequest 请求参数}): {@link CreateRouteResponse 返回参数} */
+  /** 添加实例路由 {@link CreateRouteRequest} {@link CreateRouteResponse} */
   CreateRoute(data: CreateRouteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRouteResponse>;
-  /** {@link CreateToken 创建token}({@link CreateTokenRequest 请求参数}): {@link CreateTokenResponse 返回参数} */
+  /** 创建token {@link CreateTokenRequest} {@link CreateTokenResponse} */
   CreateToken(data: CreateTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTokenResponse>;
-  /** {@link CreateTopic 创建主题}({@link CreateTopicRequest 请求参数}): {@link CreateTopicResponse 返回参数} */
+  /** 创建主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
-  /** {@link CreateTopicIpWhiteList 创建主题IP白名单}({@link CreateTopicIpWhiteListRequest 请求参数}): {@link CreateTopicIpWhiteListResponse 返回参数} */
+  /** 创建主题IP白名单 {@link CreateTopicIpWhiteListRequest} {@link CreateTopicIpWhiteListResponse} */
   CreateTopicIpWhiteList(data: CreateTopicIpWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicIpWhiteListResponse>;
-  /** {@link CreateUser 添加用户}({@link CreateUserRequest 请求参数}): {@link CreateUserResponse 返回参数} */
+  /** 添加用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
-  /** {@link DeleteAcl 删除ACL}({@link DeleteAclRequest 请求参数}): {@link DeleteAclResponse 返回参数} */
+  /** 删除ACL {@link DeleteAclRequest} {@link DeleteAclResponse} */
   DeleteAcl(data: DeleteAclRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAclResponse>;
-  /** {@link DeleteAclRule 删除ACL规则}({@link DeleteAclRuleRequest 请求参数}): {@link DeleteAclRuleResponse 返回参数} */
+  /** 删除ACL规则 {@link DeleteAclRuleRequest} {@link DeleteAclRuleResponse} */
   DeleteAclRule(data: DeleteAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAclRuleResponse>;
-  /** {@link DeleteConnectResource 删除Datahub连接源}({@link DeleteConnectResourceRequest 请求参数}): {@link DeleteConnectResourceResponse 返回参数} */
+  /** 删除Datahub连接源 {@link DeleteConnectResourceRequest} {@link DeleteConnectResourceResponse} */
   DeleteConnectResource(data: DeleteConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConnectResourceResponse>;
-  /** {@link DeleteDatahubTask 删除Datahub任务}({@link DeleteDatahubTaskRequest 请求参数}): {@link DeleteDatahubTaskResponse 返回参数} */
+  /** 删除Datahub任务 {@link DeleteDatahubTaskRequest} {@link DeleteDatahubTaskResponse} */
   DeleteDatahubTask(data: DeleteDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatahubTaskResponse>;
-  /** {@link DeleteDatahubTopic 删除Datahub主题}({@link DeleteDatahubTopicRequest 请求参数}): {@link DeleteDatahubTopicResponse 返回参数} */
+  /** 删除Datahub主题 {@link DeleteDatahubTopicRequest} {@link DeleteDatahubTopicResponse} */
   DeleteDatahubTopic(data: DeleteDatahubTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatahubTopicResponse>;
-  /** {@link DeleteGroup 删除消费组}({@link DeleteGroupRequest 请求参数}): {@link DeleteGroupResponse 返回参数} */
+  /** 删除消费组 {@link DeleteGroupRequest} {@link DeleteGroupResponse} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
-  /** {@link DeleteInstancePre 删除预付费实例}({@link DeleteInstancePreRequest 请求参数}): {@link DeleteInstancePreResponse 返回参数} */
+  /** 删除预付费实例 {@link DeleteInstancePreRequest} {@link DeleteInstancePreResponse} */
   DeleteInstancePre(data: DeleteInstancePreRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstancePreResponse>;
-  /** {@link DeleteRoute 删除路由}({@link DeleteRouteRequest 请求参数}): {@link DeleteRouteResponse 返回参数} */
+  /** 删除路由 {@link DeleteRouteRequest} {@link DeleteRouteResponse} */
   DeleteRoute(data: DeleteRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRouteResponse>;
-  /** {@link DeleteRouteTriggerTime 修改路由触发时间}({@link DeleteRouteTriggerTimeRequest 请求参数}): {@link DeleteRouteTriggerTimeResponse 返回参数} */
+  /** 修改路由触发时间 {@link DeleteRouteTriggerTimeRequest} {@link DeleteRouteTriggerTimeResponse} */
   DeleteRouteTriggerTime(data: DeleteRouteTriggerTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRouteTriggerTimeResponse>;
-  /** {@link DeleteTopic 删除主题}({@link DeleteTopicRequest 请求参数}): {@link DeleteTopicResponse 返回参数} */
+  /** 删除主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
-  /** {@link DeleteTopicIpWhiteList 删除主题IP白名单}({@link DeleteTopicIpWhiteListRequest 请求参数}): {@link DeleteTopicIpWhiteListResponse 返回参数} */
+  /** 删除主题IP白名单 {@link DeleteTopicIpWhiteListRequest} {@link DeleteTopicIpWhiteListResponse} */
   DeleteTopicIpWhiteList(data: DeleteTopicIpWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicIpWhiteListResponse>;
-  /** {@link DeleteUser 删除用户}({@link DeleteUserRequest 请求参数}): {@link DeleteUserResponse 返回参数} */
+  /** 删除用户 {@link DeleteUserRequest} {@link DeleteUserResponse} */
   DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
-  /** {@link DescribeACL 枚举ACL}({@link DescribeACLRequest 请求参数}): {@link DescribeACLResponse 返回参数} */
+  /** 枚举ACL {@link DescribeACLRequest} {@link DescribeACLResponse} */
   DescribeACL(data: DescribeACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeACLResponse>;
-  /** {@link DescribeAppInfo 查询用户列表}({@link DescribeAppInfoRequest 请求参数}): {@link DescribeAppInfoResponse 返回参数} */
+  /** 查询用户列表 {@link DescribeAppInfoRequest} {@link DescribeAppInfoResponse} */
   DescribeAppInfo(data?: DescribeAppInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppInfoResponse>;
-  /** {@link DescribeCkafkaZone 查看可用区列表}({@link DescribeCkafkaZoneRequest 请求参数}): {@link DescribeCkafkaZoneResponse 返回参数} */
+  /** 查看可用区列表 {@link DescribeCkafkaZoneRequest} {@link DescribeCkafkaZoneResponse} */
   DescribeCkafkaZone(data?: DescribeCkafkaZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCkafkaZoneResponse>;
-  /** {@link DescribeConnectResource 查询Datahub连接源}({@link DescribeConnectResourceRequest 请求参数}): {@link DescribeConnectResourceResponse 返回参数} */
+  /** 查询Datahub连接源 {@link DescribeConnectResourceRequest} {@link DescribeConnectResourceResponse} */
   DescribeConnectResource(data: DescribeConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConnectResourceResponse>;
-  /** {@link DescribeConnectResources 查询Datahub连接源列表}({@link DescribeConnectResourcesRequest 请求参数}): {@link DescribeConnectResourcesResponse 返回参数} */
+  /** 查询Datahub连接源列表 {@link DescribeConnectResourcesRequest} {@link DescribeConnectResourcesResponse} */
   DescribeConnectResources(data?: DescribeConnectResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConnectResourcesResponse>;
-  /** {@link DescribeConsumerGroup 查询消费分组信息}({@link DescribeConsumerGroupRequest 请求参数}): {@link DescribeConsumerGroupResponse 返回参数} */
+  /** 查询消费分组信息 {@link DescribeConsumerGroupRequest} {@link DescribeConsumerGroupResponse} */
   DescribeConsumerGroup(data: DescribeConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupResponse>;
-  /** {@link DescribeDatahubGroupOffsets 获取Datahub消费分组offset}({@link DescribeDatahubGroupOffsetsRequest 请求参数}): {@link DescribeDatahubGroupOffsetsResponse 返回参数} */
+  /** 获取Datahub消费分组offset {@link DescribeDatahubGroupOffsetsRequest} {@link DescribeDatahubGroupOffsetsResponse} */
   DescribeDatahubGroupOffsets(data: DescribeDatahubGroupOffsetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubGroupOffsetsResponse>;
-  /** {@link DescribeDatahubTask 查询Datahub任务信息}({@link DescribeDatahubTaskRequest 请求参数}): {@link DescribeDatahubTaskResponse 返回参数} */
+  /** 查询Datahub任务信息 {@link DescribeDatahubTaskRequest} {@link DescribeDatahubTaskResponse} */
   DescribeDatahubTask(data: DescribeDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTaskResponse>;
-  /** {@link DescribeDatahubTasks 查询Datahub任务列表}({@link DescribeDatahubTasksRequest 请求参数}): {@link DescribeDatahubTasksResponse 返回参数} */
+  /** 查询Datahub任务列表 {@link DescribeDatahubTasksRequest} {@link DescribeDatahubTasksResponse} */
   DescribeDatahubTasks(data?: DescribeDatahubTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTasksResponse>;
-  /** {@link DescribeGroup 枚举消费分组(精简版)}({@link DescribeGroupRequest 请求参数}): {@link DescribeGroupResponse 返回参数} */
+  /** 枚举消费分组(精简版) {@link DescribeGroupRequest} {@link DescribeGroupResponse} */
   DescribeGroup(data: DescribeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupResponse>;
-  /** {@link DescribeGroupInfo 获取消费分组信息}({@link DescribeGroupInfoRequest 请求参数}): {@link DescribeGroupInfoResponse 返回参数} */
+  /** 获取消费分组信息 {@link DescribeGroupInfoRequest} {@link DescribeGroupInfoResponse} */
   DescribeGroupInfo(data: DescribeGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupInfoResponse>;
-  /** {@link DescribeGroupOffsets 获取消费分组offset}({@link DescribeGroupOffsetsRequest 请求参数}): {@link DescribeGroupOffsetsResponse 返回参数} */
+  /** 获取消费分组offset {@link DescribeGroupOffsetsRequest} {@link DescribeGroupOffsetsResponse} */
   DescribeGroupOffsets(data: DescribeGroupOffsetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupOffsetsResponse>;
-  /** {@link DescribeInstanceAttributes 获取实例属性}({@link DescribeInstanceAttributesRequest 请求参数}): {@link DescribeInstanceAttributesResponse 返回参数} */
+  /** 获取实例属性 {@link DescribeInstanceAttributesRequest} {@link DescribeInstanceAttributesResponse} */
   DescribeInstanceAttributes(data: DescribeInstanceAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAttributesResponse>;
-  /** {@link DescribeInstances 获取实例列表信息}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
+  /** 获取实例列表信息 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** {@link DescribeInstancesDetail 获取实例列表详情}({@link DescribeInstancesDetailRequest 请求参数}): {@link DescribeInstancesDetailResponse 返回参数} */
+  /** 获取实例列表详情 {@link DescribeInstancesDetailRequest} {@link DescribeInstancesDetailResponse} */
   DescribeInstancesDetail(data?: DescribeInstancesDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDetailResponse>;
-  /** {@link DescribeRegion 枚举地域}({@link DescribeRegionRequest 请求参数}): {@link DescribeRegionResponse 返回参数} */
+  /** 枚举地域 {@link DescribeRegionRequest} {@link DescribeRegionResponse} */
   DescribeRegion(data?: DescribeRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionResponse>;
-  /** {@link DescribeRoute 查看路由信息}({@link DescribeRouteRequest 请求参数}): {@link DescribeRouteResponse 返回参数} */
+  /** 查看路由信息 {@link DescribeRouteRequest} {@link DescribeRouteResponse} */
   DescribeRoute(data: DescribeRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteResponse>;
-  /** {@link DescribeTopic 获取主题列表}({@link DescribeTopicRequest 请求参数}): {@link DescribeTopicResponse 返回参数} */
+  /** 获取主题列表 {@link DescribeTopicRequest} {@link DescribeTopicResponse} */
   DescribeTopic(data: DescribeTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicResponse>;
-  /** {@link DescribeTopicAttributes 获取主题属性}({@link DescribeTopicAttributesRequest 请求参数}): {@link DescribeTopicAttributesResponse 返回参数} */
+  /** 获取主题属性 {@link DescribeTopicAttributesRequest} {@link DescribeTopicAttributesResponse} */
   DescribeTopicAttributes(data: DescribeTopicAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicAttributesResponse>;
-  /** {@link DescribeTopicDetail 获取主题列表详情}({@link DescribeTopicDetailRequest 请求参数}): {@link DescribeTopicDetailResponse 返回参数} */
+  /** 获取主题列表详情 {@link DescribeTopicDetailRequest} {@link DescribeTopicDetailResponse} */
   DescribeTopicDetail(data: DescribeTopicDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicDetailResponse>;
-  /** {@link DescribeTopicSubscribeGroup 查询订阅某主题消息分组信息}({@link DescribeTopicSubscribeGroupRequest 请求参数}): {@link DescribeTopicSubscribeGroupResponse 返回参数} */
+  /** 查询订阅某主题消息分组信息 {@link DescribeTopicSubscribeGroupRequest} {@link DescribeTopicSubscribeGroupResponse} */
   DescribeTopicSubscribeGroup(data: DescribeTopicSubscribeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicSubscribeGroupResponse>;
-  /** {@link DescribeTopicSyncReplica 获取Topic 同步副本信息}({@link DescribeTopicSyncReplicaRequest 请求参数}): {@link DescribeTopicSyncReplicaResponse 返回参数} */
+  /** 获取Topic 同步副本信息 {@link DescribeTopicSyncReplicaRequest} {@link DescribeTopicSyncReplicaResponse} */
   DescribeTopicSyncReplica(data: DescribeTopicSyncReplicaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicSyncReplicaResponse>;
-  /** {@link DescribeUser 查询用户信息}({@link DescribeUserRequest 请求参数}): {@link DescribeUserResponse 返回参数} */
+  /** 查询用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
   DescribeUser(data: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
-  /** {@link FetchDatahubMessageByOffset 查询Datahub Topic消息}({@link FetchDatahubMessageByOffsetRequest 请求参数}): {@link FetchDatahubMessageByOffsetResponse 返回参数} */
+  /** 查询Datahub Topic消息 {@link FetchDatahubMessageByOffsetRequest} {@link FetchDatahubMessageByOffsetResponse} */
   FetchDatahubMessageByOffset(data: FetchDatahubMessageByOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<FetchDatahubMessageByOffsetResponse>;
-  /** {@link FetchLatestDatahubMessageList 查询Datahub Topic最新消息列表}({@link FetchLatestDatahubMessageListRequest 请求参数}): {@link FetchLatestDatahubMessageListResponse 返回参数} */
+  /** 查询Datahub Topic最新消息列表 {@link FetchLatestDatahubMessageListRequest} {@link FetchLatestDatahubMessageListResponse} */
   FetchLatestDatahubMessageList(data: FetchLatestDatahubMessageListRequest, config?: AxiosRequestConfig): AxiosPromise<FetchLatestDatahubMessageListResponse>;
-  /** {@link FetchMessageByOffset 查询消息}({@link FetchMessageByOffsetRequest 请求参数}): {@link FetchMessageByOffsetResponse 返回参数} */
+  /** 查询消息 {@link FetchMessageByOffsetRequest} {@link FetchMessageByOffsetResponse} */
   FetchMessageByOffset(data: FetchMessageByOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<FetchMessageByOffsetResponse>;
-  /** {@link FetchMessageListByOffset 根据位点查询消息列表}({@link FetchMessageListByOffsetRequest 请求参数}): {@link FetchMessageListByOffsetResponse 返回参数} */
+  /** 根据位点查询消息列表 {@link FetchMessageListByOffsetRequest} {@link FetchMessageListByOffsetResponse} */
   FetchMessageListByOffset(data: FetchMessageListByOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<FetchMessageListByOffsetResponse>;
-  /** {@link InquireCkafkaPrice Ckafka询价}({@link InquireCkafkaPriceRequest 请求参数}): {@link InquireCkafkaPriceResponse 返回参数} */
+  /** Ckafka询价 {@link InquireCkafkaPriceRequest} {@link InquireCkafkaPriceResponse} */
   InquireCkafkaPrice(data: InquireCkafkaPriceRequest, config?: AxiosRequestConfig): AxiosPromise<InquireCkafkaPriceResponse>;
-  /** {@link ModifyConnectResource 编辑Datahub连接源}({@link ModifyConnectResourceRequest 请求参数}): {@link ModifyConnectResourceResponse 返回参数} */
+  /** 编辑Datahub连接源 {@link ModifyConnectResourceRequest} {@link ModifyConnectResourceResponse} */
   ModifyConnectResource(data: ModifyConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConnectResourceResponse>;
-  /** {@link ModifyDatahubTask 修改Datahub任务}({@link ModifyDatahubTaskRequest 请求参数}): {@link ModifyDatahubTaskResponse 返回参数} */
+  /** 修改Datahub任务 {@link ModifyDatahubTaskRequest} {@link ModifyDatahubTaskResponse} */
   ModifyDatahubTask(data: ModifyDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatahubTaskResponse>;
-  /** {@link ModifyGroupOffsets 设置Groups 消费分组offset}({@link ModifyGroupOffsetsRequest 请求参数}): {@link ModifyGroupOffsetsResponse 返回参数} */
+  /** 设置Groups 消费分组offset {@link ModifyGroupOffsetsRequest} {@link ModifyGroupOffsetsResponse} */
   ModifyGroupOffsets(data: ModifyGroupOffsetsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGroupOffsetsResponse>;
-  /** {@link ModifyInstanceAttributes 设置实例属性}({@link ModifyInstanceAttributesRequest 请求参数}): {@link ModifyInstanceAttributesResponse 返回参数} */
+  /** 设置实例属性 {@link ModifyInstanceAttributesRequest} {@link ModifyInstanceAttributesResponse} */
   ModifyInstanceAttributes(data: ModifyInstanceAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAttributesResponse>;
-  /** {@link ModifyInstancePre 预付费实例变配接口}({@link ModifyInstancePreRequest 请求参数}): {@link ModifyInstancePreResponse 返回参数} */
+  /** 预付费实例变配接口 {@link ModifyInstancePreRequest} {@link ModifyInstancePreResponse} */
   ModifyInstancePre(data: ModifyInstancePreRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancePreResponse>;
-  /** {@link ModifyPassword 修改密码}({@link ModifyPasswordRequest 请求参数}): {@link ModifyPasswordResponse 返回参数} */
+  /** 修改密码 {@link ModifyPasswordRequest} {@link ModifyPasswordResponse} */
   ModifyPassword(data: ModifyPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPasswordResponse>;
-  /** {@link ModifyTopicAttributes 设置主题属性}({@link ModifyTopicAttributesRequest 请求参数}): {@link ModifyTopicAttributesResponse 返回参数} */
+  /** 设置主题属性 {@link ModifyTopicAttributesRequest} {@link ModifyTopicAttributesResponse} */
   ModifyTopicAttributes(data: ModifyTopicAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicAttributesResponse>;
-  /** {@link SendMessage HTTP发送消息}({@link SendMessageRequest 请求参数}): {@link SendMessageResponse 返回参数} */
+  /** HTTP发送消息 {@link SendMessageRequest} {@link SendMessageResponse} */
   SendMessage(data: SendMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendMessageResponse>;
 }
 

@@ -48,7 +48,7 @@ declare interface CreateSessionResponse {
   RoleNumber: string;
   /** 【互动云游】角色；Player表示玩家；Viewer表示观察者 */
   Role: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -68,7 +68,7 @@ declare interface DescribeInstancesCountResponse {
   Total?: number;
   /** 客户的实例运行数 */
   Running?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -80,7 +80,7 @@ declare interface SaveGameArchiveRequest {
 }
 
 declare interface SaveGameArchiveResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -92,7 +92,7 @@ declare interface StartPublishStreamRequest {
 }
 
 declare interface StartPublishStreamResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -104,7 +104,7 @@ declare interface StopGameRequest {
 }
 
 declare interface StopGameResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -114,7 +114,7 @@ declare interface StopPublishStreamRequest {
 }
 
 declare interface StopPublishStreamResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -130,7 +130,7 @@ declare interface SwitchGameArchiveRequest {
 }
 
 declare interface SwitchGameArchiveResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -150,28 +150,28 @@ declare interface TrylockWorkerRequest {
 }
 
 declare interface TrylockWorkerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Gs 云游戏} */
 declare interface Gs {
   (): Versions;
-  /** {@link CreateSession 创建会话}({@link CreateSessionRequest 请求参数}): {@link CreateSessionResponse 返回参数} */
+  /** 创建会话 {@link CreateSessionRequest} {@link CreateSessionResponse} */
   CreateSession(data: CreateSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSessionResponse>;
-  /** {@link DescribeInstancesCount 获取并发总数和运行数}({@link DescribeInstancesCountRequest 请求参数}): {@link DescribeInstancesCountResponse 返回参数} */
+  /** 获取并发总数和运行数 {@link DescribeInstancesCountRequest} {@link DescribeInstancesCountResponse} */
   DescribeInstancesCount(data?: DescribeInstancesCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesCountResponse>;
-  /** {@link SaveGameArchive 保存游戏存档}({@link SaveGameArchiveRequest 请求参数}): {@link SaveGameArchiveResponse 返回参数} */
+  /** 保存游戏存档 {@link SaveGameArchiveRequest} {@link SaveGameArchiveResponse} */
   SaveGameArchive(data: SaveGameArchiveRequest, config?: AxiosRequestConfig): AxiosPromise<SaveGameArchiveResponse>;
-  /** {@link StartPublishStream 开始云端推流}({@link StartPublishStreamRequest 请求参数}): {@link StartPublishStreamResponse 返回参数} */
+  /** 开始云端推流 {@link StartPublishStreamRequest} {@link StartPublishStreamResponse} */
   StartPublishStream(data: StartPublishStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StartPublishStreamResponse>;
-  /** {@link StopGame 强制退出游戏}({@link StopGameRequest 请求参数}): {@link StopGameResponse 返回参数} */
+  /** 强制退出游戏 {@link StopGameRequest} {@link StopGameResponse} */
   StopGame(data: StopGameRequest, config?: AxiosRequestConfig): AxiosPromise<StopGameResponse>;
-  /** {@link StopPublishStream 停止云端推流}({@link StopPublishStreamRequest 请求参数}): {@link StopPublishStreamResponse 返回参数} */
+  /** 停止云端推流 {@link StopPublishStreamRequest} {@link StopPublishStreamResponse} */
   StopPublishStream(data: StopPublishStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StopPublishStreamResponse>;
-  /** {@link SwitchGameArchive 切换游戏存档}({@link SwitchGameArchiveRequest 请求参数}): {@link SwitchGameArchiveResponse 返回参数} */
+  /** 切换游戏存档 {@link SwitchGameArchiveRequest} {@link SwitchGameArchiveResponse} */
   SwitchGameArchive(data: SwitchGameArchiveRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchGameArchiveResponse>;
-  /** {@link TrylockWorker 尝试锁定机器}({@link TrylockWorkerRequest 请求参数}): {@link TrylockWorkerResponse 返回参数} */
+  /** 尝试锁定机器 {@link TrylockWorkerRequest} {@link TrylockWorkerResponse} */
   TrylockWorker(data: TrylockWorkerRequest, config?: AxiosRequestConfig): AxiosPromise<TrylockWorkerResponse>;
 }
 

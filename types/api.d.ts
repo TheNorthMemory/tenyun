@@ -42,7 +42,7 @@ declare interface DescribeProductsResponse {
   Products: RegionProduct[];
   /** 产品总数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -56,7 +56,7 @@ declare interface DescribeRegionsResponse {
   TotalCount: number;
   /** 地域列表信息 */
   RegionSet: RegionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -70,18 +70,18 @@ declare interface DescribeZonesResponse {
   TotalCount: number;
   /** 可用区列表信息。 */
   ZoneSet: ZoneInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Api 云 API} */
 declare interface Api {
   (): Versions;
-  /** {@link DescribeProducts 查询支持地域列表查询的产品}({@link DescribeProductsRequest 请求参数}): {@link DescribeProductsResponse 返回参数} */
+  /** 查询支持地域列表查询的产品 {@link DescribeProductsRequest} {@link DescribeProductsResponse} */
   DescribeProducts(data?: DescribeProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductsResponse>;
-  /** {@link DescribeRegions 查询产品支持的地域列表}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
+  /** 查询产品支持的地域列表 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** {@link DescribeZones 查询产品可用区列表}({@link DescribeZonesRequest 请求参数}): {@link DescribeZonesResponse 返回参数} */
+  /** 查询产品可用区列表 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
   DescribeZones(data: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
 }
 

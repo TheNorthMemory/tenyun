@@ -844,7 +844,7 @@ declare interface AddDMSPartitionsResponse {
   Total: number;
   /** 分区值 */
   Partitions: DMSPartition[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -854,7 +854,7 @@ declare interface AddUsersToWorkGroupRequest {
 }
 
 declare interface AddUsersToWorkGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -870,7 +870,7 @@ declare interface AlterDMSDatabaseRequest {
 }
 
 declare interface AlterDMSDatabaseResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -886,7 +886,7 @@ declare interface AlterDMSPartitionRequest {
 }
 
 declare interface AlterDMSPartitionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -930,7 +930,7 @@ declare interface AlterDMSTableRequest {
 }
 
 declare interface AlterDMSTableResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -942,7 +942,7 @@ declare interface AttachUserPolicyRequest {
 }
 
 declare interface AttachUserPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -954,7 +954,7 @@ declare interface AttachWorkGroupPolicyRequest {
 }
 
 declare interface AttachWorkGroupPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -964,7 +964,7 @@ declare interface BindWorkGroupsToUserRequest {
 }
 
 declare interface BindWorkGroupsToUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -974,7 +974,7 @@ declare interface CancelTaskRequest {
 }
 
 declare interface CancelTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -994,7 +994,7 @@ declare interface CheckLockMetaDataResponse {
   LockId: number;
   /** 锁状态：ACQUIRED、WAITING、ABORT、NOT_ACQUIRED */
   LockState: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1010,7 +1010,7 @@ declare interface CreateDMSDatabaseRequest {
 }
 
 declare interface CreateDMSDatabaseResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1050,7 +1050,7 @@ declare interface CreateDMSTableRequest {
 }
 
 declare interface CreateDMSTableResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1064,7 +1064,7 @@ declare interface CreateDatabaseRequest {
 declare interface CreateDatabaseResponse {
   /** 生成的建库执行语句对象。 */
   Execution: Execution;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1082,7 +1082,7 @@ declare interface CreateExportTaskRequest {
 declare interface CreateExportTaskResponse {
   /** 任务id */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1100,7 +1100,7 @@ declare interface CreateImportTaskRequest {
 declare interface CreateImportTaskResponse {
   /** 任务id */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1116,7 +1116,7 @@ declare interface CreateResultDownloadRequest {
 declare interface CreateResultDownloadResponse {
   /** 下载任务Id */
   DownloadId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1132,7 +1132,7 @@ declare interface CreateScriptRequest {
 }
 
 declare interface CreateScriptResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1186,7 +1186,7 @@ declare interface CreateSparkAppRequest {
 }
 
 declare interface CreateSparkAppResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1202,7 +1202,7 @@ declare interface CreateSparkAppTaskResponse {
   BatchId: string;
   /** 任务Id */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1212,7 +1212,7 @@ declare interface CreateStoreLocationRequest {
 }
 
 declare interface CreateStoreLocationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1224,7 +1224,7 @@ declare interface CreateTableRequest {
 declare interface CreateTableResponse {
   /** 生成的建表执行语句对象。 */
   Execution: Execution;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1242,7 +1242,7 @@ declare interface CreateTaskRequest {
 declare interface CreateTaskResponse {
   /** 任务ID */
   TaskId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1260,7 +1260,7 @@ declare interface CreateTasksInOrderResponse {
   BatchId: string;
   /** 任务Id集合，按照执行顺序排列 */
   TaskIdSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1280,7 +1280,7 @@ declare interface CreateTasksResponse {
   BatchId: string;
   /** 任务Id集合，按照执行顺序排列 */
   TaskIdSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1300,7 +1300,7 @@ declare interface CreateUserRequest {
 }
 
 declare interface CreateUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1318,7 +1318,7 @@ declare interface CreateWorkGroupRequest {
 declare interface CreateWorkGroupResponse {
   /** 工作组Id，全局唯一 */
   WorkGroupId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1330,7 +1330,7 @@ declare interface DeleteScriptRequest {
 declare interface DeleteScriptResponse {
   /** 删除的脚本数量 */
   ScriptsAffected: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1340,7 +1340,7 @@ declare interface DeleteSparkAppRequest {
 }
 
 declare interface DeleteSparkAppResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1350,7 +1350,7 @@ declare interface DeleteUserRequest {
 }
 
 declare interface DeleteUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1360,7 +1360,7 @@ declare interface DeleteUsersFromWorkGroupRequest {
 }
 
 declare interface DeleteUsersFromWorkGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1370,7 +1370,7 @@ declare interface DeleteWorkGroupRequest {
 }
 
 declare interface DeleteWorkGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1392,7 +1392,7 @@ declare interface DescribeDMSDatabaseResponse {
   Location: string | null;
   /** 数据对象 */
   Asset: Asset | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1428,7 +1428,7 @@ declare interface DescribeDMSPartitionsResponse {
   Partitions: DMSPartition[];
   /** 总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1486,7 +1486,7 @@ declare interface DescribeDMSTableResponse {
   Columns: DMSColumn[] | null;
   /** 表名称 */
   Name: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1524,7 +1524,7 @@ declare interface DescribeDMSTablesResponse {
   TableList: DMSTableInfo[] | null;
   /** 统计值 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1548,7 +1548,7 @@ declare interface DescribeDatabasesResponse {
   DatabaseList: DatabaseResponseInfo[];
   /** 实例总数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1570,7 +1570,7 @@ declare interface DescribeResultDownloadResponse {
   SecretKey: string | null;
   /** 临时Token */
   Token: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1592,7 +1592,7 @@ declare interface DescribeScriptsResponse {
   Scripts: Script[] | null;
   /** 实例总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1608,7 +1608,7 @@ declare interface DescribeSparkAppJobResponse {
   Job: SparkJobInfo | null;
   /** 查询的spark作业是否存在 */
   IsExists: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1634,7 +1634,7 @@ declare interface DescribeSparkAppJobsResponse {
   SparkAppJobs: SparkJobInfo[];
   /** spark作业总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1662,7 +1662,7 @@ declare interface DescribeSparkAppTasksResponse {
   TotalCount: number;
   /** 任务结果列表 */
   SparkAppTasks: TaskResponseInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1672,7 +1672,7 @@ declare interface DescribeStoreLocationRequest {
 declare interface DescribeStoreLocationResponse {
   /** 返回用户设置的结果存储位置路径，如果未设置则返回空字符串："" */
   StoreLocation: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1688,7 +1688,7 @@ declare interface DescribeTableRequest {
 declare interface DescribeTableResponse {
   /** 数据表对象 */
   Table: TableResponseInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1722,7 +1722,7 @@ declare interface DescribeTablesResponse {
   TableList: TableResponseInfo[];
   /** 实例总数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1738,7 +1738,7 @@ declare interface DescribeTaskResultRequest {
 declare interface DescribeTaskResultResponse {
   /** 查询的任务信息，返回为空表示输入任务ID对应的任务不存在。只有当任务状态为成功（2）的时候，才会返回任务的结果。 */
   TaskInfo: TaskResultInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1768,7 +1768,7 @@ declare interface DescribeTasksResponse {
   TotalCount: number;
   /** 任务概览信息 */
   TasksOverview: TasksOverview | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1792,7 +1792,7 @@ declare interface DescribeUsersResponse {
   TotalCount: number;
   /** 查询到的授权用户信息集合 */
   UserSet: UserInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1822,7 +1822,7 @@ declare interface DescribeViewsResponse {
   ViewList: ViewResponseInfo[];
   /** 实例总数。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1846,7 +1846,7 @@ declare interface DescribeWorkGroupsResponse {
   TotalCount: number;
   /** 工作组信息集合 */
   WorkGroupSet: WorkGroupInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1858,7 +1858,7 @@ declare interface DetachUserPolicyRequest {
 }
 
 declare interface DetachUserPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1870,7 +1870,7 @@ declare interface DetachWorkGroupPolicyRequest {
 }
 
 declare interface DetachWorkGroupPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1884,7 +1884,7 @@ declare interface DropDMSDatabaseRequest {
 }
 
 declare interface DropDMSDatabaseResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1906,7 +1906,7 @@ declare interface DropDMSPartitionsRequest {
 declare interface DropDMSPartitionsResponse {
   /** 状态 */
   Status: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1922,7 +1922,7 @@ declare interface DropDMSTableRequest {
 }
 
 declare interface DropDMSTableResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1950,7 +1950,7 @@ declare interface ListTaskJobLogDetailResponse {
   ListOver: boolean | null;
   /** 日志详情 */
   Results: JobLogResult[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1972,7 +1972,7 @@ declare interface LockMetaDataResponse {
   LockId: number;
   /** 锁状态：ACQUIRED、WAITING、ABORT、NOT_ACQUIRED */
   LockState: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2028,7 +2028,7 @@ declare interface ModifySparkAppRequest {
 }
 
 declare interface ModifySparkAppResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2040,7 +2040,7 @@ declare interface ModifyUserRequest {
 }
 
 declare interface ModifyUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2052,7 +2052,7 @@ declare interface ModifyWorkGroupRequest {
 }
 
 declare interface ModifyWorkGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2066,7 +2066,7 @@ declare interface ReportHeartbeatMetaDataRequest {
 }
 
 declare interface ReportHeartbeatMetaDataResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2076,7 +2076,7 @@ declare interface UnbindWorkGroupsFromUserRequest {
 }
 
 declare interface UnbindWorkGroupsFromUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2088,136 +2088,136 @@ declare interface UnlockMetaDataRequest {
 }
 
 declare interface UnlockMetaDataResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Dlc 数据湖计算 DLC} */
 declare interface Dlc {
   (): Versions;
-  /** {@link AddDMSPartitions DMS元数据新增分区}({@link AddDMSPartitionsRequest 请求参数}): {@link AddDMSPartitionsResponse 返回参数} */
+  /** DMS元数据新增分区 {@link AddDMSPartitionsRequest} {@link AddDMSPartitionsResponse} */
   AddDMSPartitions(data?: AddDMSPartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<AddDMSPartitionsResponse>;
-  /** {@link AddUsersToWorkGroup 添加用户到工作组}({@link AddUsersToWorkGroupRequest 请求参数}): {@link AddUsersToWorkGroupResponse 返回参数} */
+  /** 添加用户到工作组 {@link AddUsersToWorkGroupRequest} {@link AddUsersToWorkGroupResponse} */
   AddUsersToWorkGroup(data: AddUsersToWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddUsersToWorkGroupResponse>;
-  /** {@link AlterDMSDatabase DMS元数据更新库}({@link AlterDMSDatabaseRequest 请求参数}): {@link AlterDMSDatabaseResponse 返回参数} */
+  /** DMS元数据更新库 {@link AlterDMSDatabaseRequest} {@link AlterDMSDatabaseResponse} */
   AlterDMSDatabase(data?: AlterDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<AlterDMSDatabaseResponse>;
-  /** {@link AlterDMSPartition DMS元数据更新分区}({@link AlterDMSPartitionRequest 请求参数}): {@link AlterDMSPartitionResponse 返回参数} */
+  /** DMS元数据更新分区 {@link AlterDMSPartitionRequest} {@link AlterDMSPartitionResponse} */
   AlterDMSPartition(data: AlterDMSPartitionRequest, config?: AxiosRequestConfig): AxiosPromise<AlterDMSPartitionResponse>;
-  /** {@link AlterDMSTable DMS元数据更新表}({@link AlterDMSTableRequest 请求参数}): {@link AlterDMSTableResponse 返回参数} */
+  /** DMS元数据更新表 {@link AlterDMSTableRequest} {@link AlterDMSTableResponse} */
   AlterDMSTable(data: AlterDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<AlterDMSTableResponse>;
-  /** {@link AttachUserPolicy 绑定鉴权策略到用户}({@link AttachUserPolicyRequest 请求参数}): {@link AttachUserPolicyResponse 返回参数} */
+  /** 绑定鉴权策略到用户 {@link AttachUserPolicyRequest} {@link AttachUserPolicyResponse} */
   AttachUserPolicy(data: AttachUserPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachUserPolicyResponse>;
-  /** {@link AttachWorkGroupPolicy 绑定鉴权策略到工作组}({@link AttachWorkGroupPolicyRequest 请求参数}): {@link AttachWorkGroupPolicyResponse 返回参数} */
+  /** 绑定鉴权策略到工作组 {@link AttachWorkGroupPolicyRequest} {@link AttachWorkGroupPolicyResponse} */
   AttachWorkGroupPolicy(data: AttachWorkGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachWorkGroupPolicyResponse>;
-  /** {@link BindWorkGroupsToUser 绑定工作组到用户}({@link BindWorkGroupsToUserRequest 请求参数}): {@link BindWorkGroupsToUserResponse 返回参数} */
+  /** 绑定工作组到用户 {@link BindWorkGroupsToUserRequest} {@link BindWorkGroupsToUserResponse} */
   BindWorkGroupsToUser(data: BindWorkGroupsToUserRequest, config?: AxiosRequestConfig): AxiosPromise<BindWorkGroupsToUserResponse>;
-  /** {@link CancelTask 取消任务执行}({@link CancelTaskRequest 请求参数}): {@link CancelTaskResponse 返回参数} */
+  /** 取消任务执行 {@link CancelTaskRequest} {@link CancelTaskResponse} */
   CancelTask(data: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
-  /** {@link CheckLockMetaData 元数据锁检查}({@link CheckLockMetaDataRequest 请求参数}): {@link CheckLockMetaDataResponse 返回参数} */
+  /** 元数据锁检查 {@link CheckLockMetaDataRequest} {@link CheckLockMetaDataResponse} */
   CheckLockMetaData(data: CheckLockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<CheckLockMetaDataResponse>;
-  /** {@link CreateDMSDatabase DMS元数据创建库}({@link CreateDMSDatabaseRequest 请求参数}): {@link CreateDMSDatabaseResponse 返回参数} */
+  /** DMS元数据创建库 {@link CreateDMSDatabaseRequest} {@link CreateDMSDatabaseResponse} */
   CreateDMSDatabase(data?: CreateDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDMSDatabaseResponse>;
-  /** {@link CreateDMSTable DMS元数据创建表}({@link CreateDMSTableRequest 请求参数}): {@link CreateDMSTableResponse 返回参数} */
+  /** DMS元数据创建表 {@link CreateDMSTableRequest} {@link CreateDMSTableResponse} */
   CreateDMSTable(data?: CreateDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDMSTableResponse>;
-  /** {@link CreateDatabase 生成建库SQL语句}({@link CreateDatabaseRequest 请求参数}): {@link CreateDatabaseResponse 返回参数} */
+  /** 生成建库SQL语句 {@link CreateDatabaseRequest} {@link CreateDatabaseResponse} */
   CreateDatabase(data: CreateDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatabaseResponse>;
-  /** {@link CreateExportTask 创建导出任务}({@link CreateExportTaskRequest 请求参数}): {@link CreateExportTaskResponse 返回参数} */
+  /** 创建导出任务 {@link CreateExportTaskRequest} {@link CreateExportTaskResponse} */
   CreateExportTask(data: CreateExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportTaskResponse>;
-  /** {@link CreateImportTask 创建导入任务}({@link CreateImportTaskRequest 请求参数}): {@link CreateImportTaskResponse 返回参数} */
+  /** 创建导入任务 {@link CreateImportTaskRequest} {@link CreateImportTaskResponse} */
   CreateImportTask(data: CreateImportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImportTaskResponse>;
-  /** {@link CreateResultDownload 创建查询结果下载任务}({@link CreateResultDownloadRequest 请求参数}): {@link CreateResultDownloadResponse 返回参数} */
+  /** 创建查询结果下载任务 {@link CreateResultDownloadRequest} {@link CreateResultDownloadResponse} */
   CreateResultDownload(data: CreateResultDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResultDownloadResponse>;
-  /** {@link CreateScript 创建sql脚本}({@link CreateScriptRequest 请求参数}): {@link CreateScriptResponse 返回参数} */
+  /** 创建sql脚本 {@link CreateScriptRequest} {@link CreateScriptResponse} */
   CreateScript(data: CreateScriptRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScriptResponse>;
-  /** {@link CreateSparkApp 创建spark应用}({@link CreateSparkAppRequest 请求参数}): {@link CreateSparkAppResponse 返回参数} */
+  /** 创建spark应用 {@link CreateSparkAppRequest} {@link CreateSparkAppResponse} */
   CreateSparkApp(data: CreateSparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSparkAppResponse>;
-  /** {@link CreateSparkAppTask 创建spark任务}({@link CreateSparkAppTaskRequest 请求参数}): {@link CreateSparkAppTaskResponse 返回参数} */
+  /** 创建spark任务 {@link CreateSparkAppTaskRequest} {@link CreateSparkAppTaskResponse} */
   CreateSparkAppTask(data: CreateSparkAppTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSparkAppTaskResponse>;
-  /** {@link CreateStoreLocation 修改结果存储位置}({@link CreateStoreLocationRequest 请求参数}): {@link CreateStoreLocationResponse 返回参数} */
+  /** 修改结果存储位置 {@link CreateStoreLocationRequest} {@link CreateStoreLocationResponse} */
   CreateStoreLocation(data: CreateStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStoreLocationResponse>;
-  /** {@link CreateTable 生成建表SQL}({@link CreateTableRequest 请求参数}): {@link CreateTableResponse 返回参数} */
+  /** 生成建表SQL {@link CreateTableRequest} {@link CreateTableResponse} */
   CreateTable(data: CreateTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTableResponse>;
-  /** {@link CreateTask 任务创建}({@link CreateTaskRequest 请求参数}): {@link CreateTaskResponse 返回参数} */
+  /** 任务创建 {@link CreateTaskRequest} {@link CreateTaskResponse} */
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
-  /** {@link CreateTasks 批量创建任务}({@link CreateTasksRequest 请求参数}): {@link CreateTasksResponse 返回参数} */
+  /** 批量创建任务 {@link CreateTasksRequest} {@link CreateTasksResponse} */
   CreateTasks(data: CreateTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTasksResponse>;
-  /** {@link CreateTasksInOrder 按顺序创建任务}({@link CreateTasksInOrderRequest 请求参数}): {@link CreateTasksInOrderResponse 返回参数} */
+  /** 按顺序创建任务 {@link CreateTasksInOrderRequest} {@link CreateTasksInOrderResponse} */
   CreateTasksInOrder(data: CreateTasksInOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTasksInOrderResponse>;
-  /** {@link CreateUser 创建用户}({@link CreateUserRequest 请求参数}): {@link CreateUserResponse 返回参数} */
+  /** 创建用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
-  /** {@link CreateWorkGroup 创建工作组}({@link CreateWorkGroupRequest 请求参数}): {@link CreateWorkGroupResponse 返回参数} */
+  /** 创建工作组 {@link CreateWorkGroupRequest} {@link CreateWorkGroupResponse} */
   CreateWorkGroup(data: CreateWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkGroupResponse>;
-  /** {@link DeleteScript 删除sql脚本}({@link DeleteScriptRequest 请求参数}): {@link DeleteScriptResponse 返回参数} */
+  /** 删除sql脚本 {@link DeleteScriptRequest} {@link DeleteScriptResponse} */
   DeleteScript(data: DeleteScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScriptResponse>;
-  /** {@link DeleteSparkApp 删除spark应用}({@link DeleteSparkAppRequest 请求参数}): {@link DeleteSparkAppResponse 返回参数} */
+  /** 删除spark应用 {@link DeleteSparkAppRequest} {@link DeleteSparkAppResponse} */
   DeleteSparkApp(data: DeleteSparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSparkAppResponse>;
-  /** {@link DeleteUser 删除用户}({@link DeleteUserRequest 请求参数}): {@link DeleteUserResponse 返回参数} */
+  /** 删除用户 {@link DeleteUserRequest} {@link DeleteUserResponse} */
   DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
-  /** {@link DeleteUsersFromWorkGroup 从工作组中删除用户}({@link DeleteUsersFromWorkGroupRequest 请求参数}): {@link DeleteUsersFromWorkGroupResponse 返回参数} */
+  /** 从工作组中删除用户 {@link DeleteUsersFromWorkGroupRequest} {@link DeleteUsersFromWorkGroupResponse} */
   DeleteUsersFromWorkGroup(data: DeleteUsersFromWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersFromWorkGroupResponse>;
-  /** {@link DeleteWorkGroup 删除工作组}({@link DeleteWorkGroupRequest 请求参数}): {@link DeleteWorkGroupResponse 返回参数} */
+  /** 删除工作组 {@link DeleteWorkGroupRequest} {@link DeleteWorkGroupResponse} */
   DeleteWorkGroup(data: DeleteWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkGroupResponse>;
-  /** {@link DescribeDMSDatabase DMS元数据获取库}({@link DescribeDMSDatabaseRequest 请求参数}): {@link DescribeDMSDatabaseResponse 返回参数} */
+  /** DMS元数据获取库 {@link DescribeDMSDatabaseRequest} {@link DescribeDMSDatabaseResponse} */
   DescribeDMSDatabase(data?: DescribeDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSDatabaseResponse>;
-  /** {@link DescribeDMSPartitions DMS元数据获取分区}({@link DescribeDMSPartitionsRequest 请求参数}): {@link DescribeDMSPartitionsResponse 返回参数} */
+  /** DMS元数据获取分区 {@link DescribeDMSPartitionsRequest} {@link DescribeDMSPartitionsResponse} */
   DescribeDMSPartitions(data: DescribeDMSPartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSPartitionsResponse>;
-  /** {@link DescribeDMSTable DMS元数据获取表}({@link DescribeDMSTableRequest 请求参数}): {@link DescribeDMSTableResponse 返回参数} */
+  /** DMS元数据获取表 {@link DescribeDMSTableRequest} {@link DescribeDMSTableResponse} */
   DescribeDMSTable(data?: DescribeDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSTableResponse>;
-  /** {@link DescribeDMSTables DMS元数据获取表列表}({@link DescribeDMSTablesRequest 请求参数}): {@link DescribeDMSTablesResponse 返回参数} */
+  /** DMS元数据获取表列表 {@link DescribeDMSTablesRequest} {@link DescribeDMSTablesResponse} */
   DescribeDMSTables(data?: DescribeDMSTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSTablesResponse>;
-  /** {@link DescribeDatabases 查询数据库列表}({@link DescribeDatabasesRequest 请求参数}): {@link DescribeDatabasesResponse 返回参数} */
+  /** 查询数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
   DescribeDatabases(data?: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
-  /** {@link DescribeResultDownload 查询结果下载任务}({@link DescribeResultDownloadRequest 请求参数}): {@link DescribeResultDownloadResponse 返回参数} */
+  /** 查询结果下载任务 {@link DescribeResultDownloadRequest} {@link DescribeResultDownloadResponse} */
   DescribeResultDownload(data: DescribeResultDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResultDownloadResponse>;
-  /** {@link DescribeScripts 查询script列表}({@link DescribeScriptsRequest 请求参数}): {@link DescribeScriptsResponse 返回参数} */
+  /** 查询script列表 {@link DescribeScriptsRequest} {@link DescribeScriptsResponse} */
   DescribeScripts(data?: DescribeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScriptsResponse>;
-  /** {@link DescribeSparkAppJob 查询具体的spark应用}({@link DescribeSparkAppJobRequest 请求参数}): {@link DescribeSparkAppJobResponse 返回参数} */
+  /** 查询具体的spark应用 {@link DescribeSparkAppJobRequest} {@link DescribeSparkAppJobResponse} */
   DescribeSparkAppJob(data?: DescribeSparkAppJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppJobResponse>;
-  /** {@link DescribeSparkAppJobs 获取spark应用列表}({@link DescribeSparkAppJobsRequest 请求参数}): {@link DescribeSparkAppJobsResponse 返回参数} */
+  /** 获取spark应用列表 {@link DescribeSparkAppJobsRequest} {@link DescribeSparkAppJobsResponse} */
   DescribeSparkAppJobs(data?: DescribeSparkAppJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppJobsResponse>;
-  /** {@link DescribeSparkAppTasks 查询spark应用的运行任务实例列表}({@link DescribeSparkAppTasksRequest 请求参数}): {@link DescribeSparkAppTasksResponse 返回参数} */
+  /** 查询spark应用的运行任务实例列表 {@link DescribeSparkAppTasksRequest} {@link DescribeSparkAppTasksResponse} */
   DescribeSparkAppTasks(data: DescribeSparkAppTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppTasksResponse>;
-  /** {@link DescribeStoreLocation 查询结果存储位置}({@link DescribeStoreLocationRequest 请求参数}): {@link DescribeStoreLocationResponse 返回参数} */
+  /** 查询结果存储位置 {@link DescribeStoreLocationRequest} {@link DescribeStoreLocationResponse} */
   DescribeStoreLocation(data?: DescribeStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStoreLocationResponse>;
-  /** {@link DescribeTable 查询表详情}({@link DescribeTableRequest 请求参数}): {@link DescribeTableResponse 返回参数} */
+  /** 查询表详情 {@link DescribeTableRequest} {@link DescribeTableResponse} */
   DescribeTable(data: DescribeTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableResponse>;
-  /** {@link DescribeTables 查询数据表列表}({@link DescribeTablesRequest 请求参数}): {@link DescribeTablesResponse 返回参数} */
+  /** 查询数据表列表 {@link DescribeTablesRequest} {@link DescribeTablesResponse} */
   DescribeTables(data: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
-  /** {@link DescribeTaskResult 查询任务结果}({@link DescribeTaskResultRequest 请求参数}): {@link DescribeTaskResultResponse 返回参数} */
+  /** 查询任务结果 {@link DescribeTaskResultRequest} {@link DescribeTaskResultResponse} */
   DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
-  /** {@link DescribeTasks 查询任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
+  /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** {@link DescribeUsers 获取用户列表信息}({@link DescribeUsersRequest 请求参数}): {@link DescribeUsersResponse 返回参数} */
+  /** 获取用户列表信息 {@link DescribeUsersRequest} {@link DescribeUsersResponse} */
   DescribeUsers(data?: DescribeUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersResponse>;
-  /** {@link DescribeViews 查询视图列表}({@link DescribeViewsRequest 请求参数}): {@link DescribeViewsResponse 返回参数} */
+  /** 查询视图列表 {@link DescribeViewsRequest} {@link DescribeViewsResponse} */
   DescribeViews(data: DescribeViewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeViewsResponse>;
-  /** {@link DescribeWorkGroups 获取工作组列表}({@link DescribeWorkGroupsRequest 请求参数}): {@link DescribeWorkGroupsResponse 返回参数} */
+  /** 获取工作组列表 {@link DescribeWorkGroupsRequest} {@link DescribeWorkGroupsResponse} */
   DescribeWorkGroups(data?: DescribeWorkGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkGroupsResponse>;
-  /** {@link DetachUserPolicy 解绑用户鉴权策略}({@link DetachUserPolicyRequest 请求参数}): {@link DetachUserPolicyResponse 返回参数} */
+  /** 解绑用户鉴权策略 {@link DetachUserPolicyRequest} {@link DetachUserPolicyResponse} */
   DetachUserPolicy(data: DetachUserPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DetachUserPolicyResponse>;
-  /** {@link DetachWorkGroupPolicy 解绑工作组鉴权策略}({@link DetachWorkGroupPolicyRequest 请求参数}): {@link DetachWorkGroupPolicyResponse 返回参数} */
+  /** 解绑工作组鉴权策略 {@link DetachWorkGroupPolicyRequest} {@link DetachWorkGroupPolicyResponse} */
   DetachWorkGroupPolicy(data: DetachWorkGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DetachWorkGroupPolicyResponse>;
-  /** {@link DropDMSDatabase DMS元数据删除库}({@link DropDMSDatabaseRequest 请求参数}): {@link DropDMSDatabaseResponse 返回参数} */
+  /** DMS元数据删除库 {@link DropDMSDatabaseRequest} {@link DropDMSDatabaseResponse} */
   DropDMSDatabase(data: DropDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DropDMSDatabaseResponse>;
-  /** {@link DropDMSPartitions DMS元数据删除分区}({@link DropDMSPartitionsRequest 请求参数}): {@link DropDMSPartitionsResponse 返回参数} */
+  /** DMS元数据删除分区 {@link DropDMSPartitionsRequest} {@link DropDMSPartitionsResponse} */
   DropDMSPartitions(data?: DropDMSPartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DropDMSPartitionsResponse>;
-  /** {@link DropDMSTable DMS元数据删除表}({@link DropDMSTableRequest 请求参数}): {@link DropDMSTableResponse 返回参数} */
+  /** DMS元数据删除表 {@link DropDMSTableRequest} {@link DropDMSTableResponse} */
   DropDMSTable(data?: DropDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<DropDMSTableResponse>;
-  /** {@link ListTaskJobLogDetail 日志列表}({@link ListTaskJobLogDetailRequest 请求参数}): {@link ListTaskJobLogDetailResponse 返回参数} */
+  /** 日志列表 {@link ListTaskJobLogDetailRequest} {@link ListTaskJobLogDetailResponse} */
   ListTaskJobLogDetail(data: ListTaskJobLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskJobLogDetailResponse>;
-  /** {@link LockMetaData 元数据锁}({@link LockMetaDataRequest 请求参数}): {@link LockMetaDataResponse 返回参数} */
+  /** 元数据锁 {@link LockMetaDataRequest} {@link LockMetaDataResponse} */
   LockMetaData(data: LockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<LockMetaDataResponse>;
-  /** {@link ModifySparkApp 更新spark应用}({@link ModifySparkAppRequest 请求参数}): {@link ModifySparkAppResponse 返回参数} */
+  /** 更新spark应用 {@link ModifySparkAppRequest} {@link ModifySparkAppResponse} */
   ModifySparkApp(data: ModifySparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySparkAppResponse>;
-  /** {@link ModifyUser 修改用户信息}({@link ModifyUserRequest 请求参数}): {@link ModifyUserResponse 返回参数} */
+  /** 修改用户信息 {@link ModifyUserRequest} {@link ModifyUserResponse} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
-  /** {@link ModifyWorkGroup 修改工作组信息}({@link ModifyWorkGroupRequest 请求参数}): {@link ModifyWorkGroupResponse 返回参数} */
+  /** 修改工作组信息 {@link ModifyWorkGroupRequest} {@link ModifyWorkGroupResponse} */
   ModifyWorkGroup(data: ModifyWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkGroupResponse>;
-  /** {@link ReportHeartbeatMetaData 上报元数据心跳}({@link ReportHeartbeatMetaDataRequest 请求参数}): {@link ReportHeartbeatMetaDataResponse 返回参数} */
+  /** 上报元数据心跳 {@link ReportHeartbeatMetaDataRequest} {@link ReportHeartbeatMetaDataResponse} */
   ReportHeartbeatMetaData(data?: ReportHeartbeatMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<ReportHeartbeatMetaDataResponse>;
-  /** {@link UnbindWorkGroupsFromUser 解绑用户上的用户组}({@link UnbindWorkGroupsFromUserRequest 请求参数}): {@link UnbindWorkGroupsFromUserResponse 返回参数} */
+  /** 解绑用户上的用户组 {@link UnbindWorkGroupsFromUserRequest} {@link UnbindWorkGroupsFromUserResponse} */
   UnbindWorkGroupsFromUser(data: UnbindWorkGroupsFromUserRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindWorkGroupsFromUserResponse>;
-  /** {@link UnlockMetaData 元数据解锁}({@link UnlockMetaDataRequest 请求参数}): {@link UnlockMetaDataResponse 返回参数} */
+  /** 元数据解锁 {@link UnlockMetaDataRequest} {@link UnlockMetaDataResponse} */
   UnlockMetaData(data: UnlockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockMetaDataResponse>;
 }
 

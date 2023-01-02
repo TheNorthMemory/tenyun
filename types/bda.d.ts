@@ -328,7 +328,7 @@ declare interface CreateGroupRequest {
 }
 
 declare interface CreateGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -352,7 +352,7 @@ declare interface CreatePersonResponse {
   InputRetCode: number;
   /** 输入的人体动作轨迹图片中的合法性校验结果详情。 -1101:图片无效，-1102:url不合法。-1103:图片过大。-1104:图片下载失败。-1105:图片解码失败。-1109:图片分辨率过高。-2023:动作轨迹中有非同人图片。-2024: 动作轨迹提取失败。-2025: 人体检测失败。RetCode 的顺序和入参中Images 或 Urls 的顺序一致。 */
   InputRetCodeDetails: number[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -370,7 +370,7 @@ declare interface CreateSegmentationTaskResponse {
   TaskID: string;
   /** 预估处理时间，单位为秒 */
   EstimatedProcessingTime: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -390,7 +390,7 @@ declare interface CreateTraceResponse {
   InputRetCode: number;
   /** 输入的人体动作轨迹图片中的合法性校验结果详情。 -1101:图片无效，-1102:url不合法。-1103:图片过大。-1104:图片下载失败。-1105:图片解码失败。-1109:图片分辨率过高。-2023:动作轨迹中有非同人图片。-2024: 动作轨迹提取失败。-2025: 人体检测失败。 */
   InputRetCodeDetails: number[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -400,7 +400,7 @@ declare interface DeleteGroupRequest {
 }
 
 declare interface DeleteGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -410,7 +410,7 @@ declare interface DeletePersonRequest {
 }
 
 declare interface DeletePersonResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -430,7 +430,7 @@ declare interface DescribeSegmentationTaskResponse {
   VideoBasicInformation?: VideoBasicInformation | null;
   /** 分割任务错误信息 */
   ErrorMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -446,7 +446,7 @@ declare interface DetectBodyJointsRequest {
 declare interface DetectBodyJointsResponse {
   /** 图中检测出的人体框和人体关键点， 包含14个人体关键点的坐标，建议根据人体框置信度筛选出合格的人体； */
   BodyJointsResults: BodyJointsResult[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -466,7 +466,7 @@ declare interface DetectBodyResponse {
   BodyDetectResults: BodyDetectResult[];
   /** 人体识别所用的算法模型版本。 */
   BodyModelVersion: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -482,7 +482,7 @@ declare interface GetGroupListResponse {
   GroupInfos: GroupInfo[];
   /** 人体库总数量。 */
   GroupNum: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -502,7 +502,7 @@ declare interface GetPersonListResponse {
   PersonNum?: number;
   /** 人体识别所用的算法模型版本。 */
   BodyModelVersion?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -516,7 +516,7 @@ declare interface GetSummaryInfoResponse {
   PersonCount: number;
   /** 人员轨迹总数量 */
   TraceCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -530,7 +530,7 @@ declare interface ModifyGroupRequest {
 }
 
 declare interface ModifyGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -542,7 +542,7 @@ declare interface ModifyPersonInfoRequest {
 }
 
 declare interface ModifyPersonInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -566,7 +566,7 @@ declare interface SearchTraceResponse {
   InputRetCodeDetails: number[];
   /** 人体识别所用的算法模型版本。 */
   BodyModelVersion: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -586,7 +586,7 @@ declare interface SegmentCustomizedPortraitPicResponse {
   MaskImage?: string;
   /** 坐标信息。 */
   ImageRects?: ImageRect[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -612,7 +612,7 @@ declare interface SegmentPortraitPicResponse {
   ResultImageUrl: string | null;
   /** 一个通过 base64 编码的文件，解码后文件由 Float 型浮点数组成。支持以Url形式的返回值；Url有效期为30分钟。 */
   ResultMaskUrl: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -622,48 +622,48 @@ declare interface TerminateSegmentationTaskRequest {
 }
 
 declare interface TerminateSegmentationTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Bda 人体分析} */
 declare interface Bda {
   (): Versions;
-  /** {@link CreateGroup 创建人体库}({@link CreateGroupRequest 请求参数}): {@link CreateGroupResponse 返回参数} */
+  /** 创建人体库 {@link CreateGroupRequest} {@link CreateGroupResponse} */
   CreateGroup(data: CreateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupResponse>;
-  /** {@link CreatePerson 创建人员}({@link CreatePersonRequest 请求参数}): {@link CreatePersonResponse 返回参数} */
+  /** 创建人员 {@link CreatePersonRequest} {@link CreatePersonResponse} */
   CreatePerson(data: CreatePersonRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonResponse>;
-  /** {@link CreateSegmentationTask 创建视频人像分割处理任务}({@link CreateSegmentationTaskRequest 请求参数}): {@link CreateSegmentationTaskResponse 返回参数} */
+  /** 创建视频人像分割处理任务 {@link CreateSegmentationTaskRequest} {@link CreateSegmentationTaskResponse} */
   CreateSegmentationTask(data: CreateSegmentationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSegmentationTaskResponse>;
-  /** {@link CreateTrace 增加人员动作轨迹}({@link CreateTraceRequest 请求参数}): {@link CreateTraceResponse 返回参数} */
+  /** 增加人员动作轨迹 {@link CreateTraceRequest} {@link CreateTraceResponse} */
   CreateTrace(data: CreateTraceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTraceResponse>;
-  /** {@link DeleteGroup 删除人体库}({@link DeleteGroupRequest 请求参数}): {@link DeleteGroupResponse 返回参数} */
+  /** 删除人体库 {@link DeleteGroupRequest} {@link DeleteGroupResponse} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
-  /** {@link DeletePerson 删除人员}({@link DeletePersonRequest 请求参数}): {@link DeletePersonResponse 返回参数} */
+  /** 删除人员 {@link DeletePersonRequest} {@link DeletePersonResponse} */
   DeletePerson(data: DeletePersonRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonResponse>;
-  /** {@link DescribeSegmentationTask 查看视频人像分割处理任务信息}({@link DescribeSegmentationTaskRequest 请求参数}): {@link DescribeSegmentationTaskResponse 返回参数} */
+  /** 查看视频人像分割处理任务信息 {@link DescribeSegmentationTaskRequest} {@link DescribeSegmentationTaskResponse} */
   DescribeSegmentationTask(data: DescribeSegmentationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSegmentationTaskResponse>;
-  /** {@link DetectBody 人体检测与属性分析}({@link DetectBodyRequest 请求参数}): {@link DetectBodyResponse 返回参数} */
+  /** 人体检测与属性分析 {@link DetectBodyRequest} {@link DetectBodyResponse} */
   DetectBody(data?: DetectBodyRequest, config?: AxiosRequestConfig): AxiosPromise<DetectBodyResponse>;
-  /** {@link DetectBodyJoints 人体关键点分析}({@link DetectBodyJointsRequest 请求参数}): {@link DetectBodyJointsResponse 返回参数} */
+  /** 人体关键点分析 {@link DetectBodyJointsRequest} {@link DetectBodyJointsResponse} */
   DetectBodyJoints(data?: DetectBodyJointsRequest, config?: AxiosRequestConfig): AxiosPromise<DetectBodyJointsResponse>;
-  /** {@link GetGroupList 获取人体库列表}({@link GetGroupListRequest 请求参数}): {@link GetGroupListResponse 返回参数} */
+  /** 获取人体库列表 {@link GetGroupListRequest} {@link GetGroupListResponse} */
   GetGroupList(data?: GetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupListResponse>;
-  /** {@link GetPersonList 获取人员列表}({@link GetPersonListRequest 请求参数}): {@link GetPersonListResponse 返回参数} */
+  /** 获取人员列表 {@link GetPersonListRequest} {@link GetPersonListResponse} */
   GetPersonList(data: GetPersonListRequest, config?: AxiosRequestConfig): AxiosPromise<GetPersonListResponse>;
-  /** {@link GetSummaryInfo 获取人体库汇总信息}({@link GetSummaryInfoRequest 请求参数}): {@link GetSummaryInfoResponse 返回参数} */
+  /** 获取人体库汇总信息 {@link GetSummaryInfoRequest} {@link GetSummaryInfoResponse} */
   GetSummaryInfo(data?: GetSummaryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetSummaryInfoResponse>;
-  /** {@link ModifyGroup 修改人体库}({@link ModifyGroupRequest 请求参数}): {@link ModifyGroupResponse 返回参数} */
+  /** 修改人体库 {@link ModifyGroupRequest} {@link ModifyGroupResponse} */
   ModifyGroup(data: ModifyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGroupResponse>;
-  /** {@link ModifyPersonInfo 修改人员信息}({@link ModifyPersonInfoRequest 请求参数}): {@link ModifyPersonInfoResponse 返回参数} */
+  /** 修改人员信息 {@link ModifyPersonInfoRequest} {@link ModifyPersonInfoResponse} */
   ModifyPersonInfo(data: ModifyPersonInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonInfoResponse>;
-  /** {@link SearchTrace 人体搜索}({@link SearchTraceRequest 请求参数}): {@link SearchTraceResponse 返回参数} */
+  /** 人体搜索 {@link SearchTraceRequest} {@link SearchTraceResponse} */
   SearchTrace(data: SearchTraceRequest, config?: AxiosRequestConfig): AxiosPromise<SearchTraceResponse>;
-  /** {@link SegmentCustomizedPortraitPic 自定义人像分割}({@link SegmentCustomizedPortraitPicRequest 请求参数}): {@link SegmentCustomizedPortraitPicResponse 返回参数} */
+  /** 自定义人像分割 {@link SegmentCustomizedPortraitPicRequest} {@link SegmentCustomizedPortraitPicResponse} */
   SegmentCustomizedPortraitPic(data: SegmentCustomizedPortraitPicRequest, config?: AxiosRequestConfig): AxiosPromise<SegmentCustomizedPortraitPicResponse>;
-  /** {@link SegmentPortraitPic 人像分割}({@link SegmentPortraitPicRequest 请求参数}): {@link SegmentPortraitPicResponse 返回参数} */
+  /** 人像分割 {@link SegmentPortraitPicRequest} {@link SegmentPortraitPicResponse} */
   SegmentPortraitPic(data?: SegmentPortraitPicRequest, config?: AxiosRequestConfig): AxiosPromise<SegmentPortraitPicResponse>;
-  /** {@link TerminateSegmentationTask 终止视频人像分割处理任务}({@link TerminateSegmentationTaskRequest 请求参数}): {@link TerminateSegmentationTaskResponse 返回参数} */
+  /** 终止视频人像分割处理任务 {@link TerminateSegmentationTaskRequest} {@link TerminateSegmentationTaskResponse} */
   TerminateSegmentationTask(data: TerminateSegmentationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateSegmentationTaskResponse>;
 }
 

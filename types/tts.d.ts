@@ -64,7 +64,7 @@ declare interface CreateTtsTaskRequest {
 declare interface CreateTtsTaskResponse {
   /** 任务 id */
   Data: CreateTtsTaskRespData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -76,7 +76,7 @@ declare interface DescribeTtsTaskStatusRequest {
 declare interface DescribeTtsTaskStatusResponse {
   /** 任务状态返回 */
   Data: DescribeTtsTaskStatusRespData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -114,18 +114,18 @@ declare interface TextToVoiceResponse {
   SessionId: string;
   /** 时间戳信息，若未开启时间戳，则返回空数组。 */
   Subtitles: Subtitle[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tts 语音合成} */
 declare interface Tts {
   (): Versions;
-  /** {@link CreateTtsTask 长文本语音合成请求}({@link CreateTtsTaskRequest 请求参数}): {@link CreateTtsTaskResponse 返回参数} */
+  /** 长文本语音合成请求 {@link CreateTtsTaskRequest} {@link CreateTtsTaskResponse} */
   CreateTtsTask(data: CreateTtsTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTtsTaskResponse>;
-  /** {@link DescribeTtsTaskStatus 长文本语音合成结果查询}({@link DescribeTtsTaskStatusRequest 请求参数}): {@link DescribeTtsTaskStatusResponse 返回参数} */
+  /** 长文本语音合成结果查询 {@link DescribeTtsTaskStatusRequest} {@link DescribeTtsTaskStatusResponse} */
   DescribeTtsTaskStatus(data: DescribeTtsTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTtsTaskStatusResponse>;
-  /** {@link TextToVoice 基础语音合成}({@link TextToVoiceRequest 请求参数}): {@link TextToVoiceResponse 返回参数} */
+  /** 基础语音合成 {@link TextToVoiceRequest} {@link TextToVoiceResponse} */
   TextToVoice(data: TextToVoiceRequest, config?: AxiosRequestConfig): AxiosPromise<TextToVoiceResponse>;
 }
 

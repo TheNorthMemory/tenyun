@@ -222,7 +222,7 @@ declare interface DescribeCaptchaAppIdInfoResponse {
   CaptchaCode?: number;
   /** 返回操作信息 */
   CaptchaMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -244,7 +244,7 @@ declare interface DescribeCaptchaDataResponse {
   Data?: CaptchaQueryData[] | null;
   /** 返回信息描述 */
   CaptchaMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -276,7 +276,7 @@ declare interface DescribeCaptchaDataSumResponse {
   TicketThroughputSum: number;
   /** 票据验证拦截量 */
   TicketInterceptSum: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -298,7 +298,7 @@ declare interface DescribeCaptchaMiniDataResponse {
   Data: CaptchaQueryData[] | null;
   /** 返回信息描述 */
   CaptchaMsg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -330,7 +330,7 @@ declare interface DescribeCaptchaMiniDataSumResponse {
   TicketThroughputSum?: number | null;
   /** 票据验证拦截量 */
   TicketInterceptSum?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -352,7 +352,7 @@ declare interface DescribeCaptchaMiniOperDataResponse {
   CaptchaMsg: string | null;
   /** 用户操作数据 */
   Data: CaptchaOperDataRes | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -382,7 +382,7 @@ declare interface DescribeCaptchaMiniResultResponse {
   CaptchaCode: number;
   /** 状态描述及验证错误信息 */
   CaptchaMsg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -418,7 +418,7 @@ declare interface DescribeCaptchaMiniRiskResultResponse {
   CaptchaMsg: string | null;
   /** 拦截策略返回信息 */
   ManageMarketingRiskValue: OutputManageMarketingRiskValue | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -440,7 +440,7 @@ declare interface DescribeCaptchaOperDataResponse {
   CaptchaMsg: string | null;
   /** 用户操作数据 */
   Data: CaptchaOperDataRes | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -478,7 +478,7 @@ declare interface DescribeCaptchaResultResponse {
   EvilLevel: number | null;
   /** 前端获取验证码时间，时间戳格式 */
   GetCaptchaTime: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -498,7 +498,7 @@ declare interface DescribeCaptchaTicketDataResponse {
   CaptchaMsg: string | null;
   /** 验证码票据信息 */
   Data: CaptchaTicketDataRes | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -512,7 +512,7 @@ declare interface DescribeCaptchaUserAllAppIdResponse {
   CaptchaCode?: number;
   /** 返回操作信息 */
   CaptchaMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -534,7 +534,7 @@ declare interface GetTicketStatisticsResponse {
   CaptchaCode: number;
   /** 验证码返回信息 */
   CaptchaMsg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -554,7 +554,7 @@ declare interface GetTotalTicketStatisticsResponse {
   CaptchaCode: number;
   /** 返回信息 */
   CaptchaMsg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -592,42 +592,42 @@ declare interface UpdateCaptchaAppIdInfoResponse {
   CaptchaCode?: number;
   /** 返回操作信息 */
   CaptchaMsg?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Captcha 验证码} */
 declare interface Captcha {
   (): Versions;
-  /** {@link DescribeCaptchaAppIdInfo 查询安全验证码应用APPId信息}({@link DescribeCaptchaAppIdInfoRequest 请求参数}): {@link DescribeCaptchaAppIdInfoResponse 返回参数} */
+  /** 查询安全验证码应用APPId信息 {@link DescribeCaptchaAppIdInfoRequest} {@link DescribeCaptchaAppIdInfoResponse} */
   DescribeCaptchaAppIdInfo(data: DescribeCaptchaAppIdInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaAppIdInfoResponse>;
-  /** {@link DescribeCaptchaData 安全验证码分类查询数据接口}({@link DescribeCaptchaDataRequest 请求参数}): {@link DescribeCaptchaDataResponse 返回参数} */
+  /** 安全验证码分类查询数据接口 {@link DescribeCaptchaDataRequest} {@link DescribeCaptchaDataResponse} */
   DescribeCaptchaData(data: DescribeCaptchaDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaDataResponse>;
-  /** {@link DescribeCaptchaDataSum 安全验证码查询请求数据概况}({@link DescribeCaptchaDataSumRequest 请求参数}): {@link DescribeCaptchaDataSumResponse 返回参数} */
+  /** 安全验证码查询请求数据概况 {@link DescribeCaptchaDataSumRequest} {@link DescribeCaptchaDataSumResponse} */
   DescribeCaptchaDataSum(data: DescribeCaptchaDataSumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaDataSumResponse>;
-  /** {@link DescribeCaptchaMiniData 安全验证码小程序插件分类查询数据接口}({@link DescribeCaptchaMiniDataRequest 请求参数}): {@link DescribeCaptchaMiniDataResponse 返回参数} */
+  /** 安全验证码小程序插件分类查询数据接口 {@link DescribeCaptchaMiniDataRequest} {@link DescribeCaptchaMiniDataResponse} */
   DescribeCaptchaMiniData(data: DescribeCaptchaMiniDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniDataResponse>;
-  /** {@link DescribeCaptchaMiniDataSum 安全验证码小程序插件查询请求数据概况}({@link DescribeCaptchaMiniDataSumRequest 请求参数}): {@link DescribeCaptchaMiniDataSumResponse 返回参数} */
+  /** 安全验证码小程序插件查询请求数据概况 {@link DescribeCaptchaMiniDataSumRequest} {@link DescribeCaptchaMiniDataSumResponse} */
   DescribeCaptchaMiniDataSum(data: DescribeCaptchaMiniDataSumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniDataSumResponse>;
-  /** {@link DescribeCaptchaMiniOperData 安全验证码小程序插件用户操作数据查询}({@link DescribeCaptchaMiniOperDataRequest 请求参数}): {@link DescribeCaptchaMiniOperDataResponse 返回参数} */
+  /** 安全验证码小程序插件用户操作数据查询 {@link DescribeCaptchaMiniOperDataRequest} {@link DescribeCaptchaMiniOperDataResponse} */
   DescribeCaptchaMiniOperData(data: DescribeCaptchaMiniOperDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniOperDataResponse>;
-  /** {@link DescribeCaptchaMiniResult 核查验证码票据结果(小程序插件)}({@link DescribeCaptchaMiniResultRequest 请求参数}): {@link DescribeCaptchaMiniResultResponse 返回参数} */
+  /** 核查验证码票据结果(小程序插件) {@link DescribeCaptchaMiniResultRequest} {@link DescribeCaptchaMiniResultResponse} */
   DescribeCaptchaMiniResult(data: DescribeCaptchaMiniResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniResultResponse>;
-  /** {@link DescribeCaptchaMiniRiskResult 核查验证码小程序插件票据接入风控结果(已停用)}({@link DescribeCaptchaMiniRiskResultRequest 请求参数}): {@link DescribeCaptchaMiniRiskResultResponse 返回参数} */
+  /** 核查验证码小程序插件票据接入风控结果(已停用) {@link DescribeCaptchaMiniRiskResultRequest} {@link DescribeCaptchaMiniRiskResultResponse} */
   DescribeCaptchaMiniRiskResult(data: DescribeCaptchaMiniRiskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniRiskResultResponse>;
-  /** {@link DescribeCaptchaOperData 安全验证码用户操作数据查询}({@link DescribeCaptchaOperDataRequest 请求参数}): {@link DescribeCaptchaOperDataResponse 返回参数} */
+  /** 安全验证码用户操作数据查询 {@link DescribeCaptchaOperDataRequest} {@link DescribeCaptchaOperDataResponse} */
   DescribeCaptchaOperData(data: DescribeCaptchaOperDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaOperDataResponse>;
-  /** {@link DescribeCaptchaResult 核查验证码票据结果(Web及APP)}({@link DescribeCaptchaResultRequest 请求参数}): {@link DescribeCaptchaResultResponse 返回参数} */
+  /** 核查验证码票据结果(Web及APP) {@link DescribeCaptchaResultRequest} {@link DescribeCaptchaResultResponse} */
   DescribeCaptchaResult(data: DescribeCaptchaResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaResultResponse>;
-  /** {@link DescribeCaptchaTicketData 安全验证码用户操作票据数据查询}({@link DescribeCaptchaTicketDataRequest 请求参数}): {@link DescribeCaptchaTicketDataResponse 返回参数} */
+  /** 安全验证码用户操作票据数据查询 {@link DescribeCaptchaTicketDataRequest} {@link DescribeCaptchaTicketDataResponse} */
   DescribeCaptchaTicketData(data: DescribeCaptchaTicketDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaTicketDataResponse>;
-  /** {@link DescribeCaptchaUserAllAppId 安全验证码获取用户注册所有APPId和应用名称}({@link DescribeCaptchaUserAllAppIdRequest 请求参数}): {@link DescribeCaptchaUserAllAppIdResponse 返回参数} */
+  /** 安全验证码获取用户注册所有APPId和应用名称 {@link DescribeCaptchaUserAllAppIdRequest} {@link DescribeCaptchaUserAllAppIdResponse} */
   DescribeCaptchaUserAllAppId(data?: DescribeCaptchaUserAllAppIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaUserAllAppIdResponse>;
-  /** {@link GetTicketStatistics 查询单个CaptchaAppID票据校验数据}({@link GetTicketStatisticsRequest 请求参数}): {@link GetTicketStatisticsResponse 返回参数} */
+  /** 查询单个CaptchaAppID票据校验数据 {@link GetTicketStatisticsRequest} {@link GetTicketStatisticsResponse} */
   GetTicketStatistics(data: GetTicketStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<GetTicketStatisticsResponse>;
-  /** {@link GetTotalTicketStatistics 查询全部票据校验统计数据}({@link GetTotalTicketStatisticsRequest 请求参数}): {@link GetTotalTicketStatisticsResponse 返回参数} */
+  /** 查询全部票据校验统计数据 {@link GetTotalTicketStatisticsRequest} {@link GetTotalTicketStatisticsResponse} */
   GetTotalTicketStatistics(data: GetTotalTicketStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<GetTotalTicketStatisticsResponse>;
-  /** {@link UpdateCaptchaAppIdInfo 更新验证码应用APPId信息}({@link UpdateCaptchaAppIdInfoRequest 请求参数}): {@link UpdateCaptchaAppIdInfoResponse 返回参数} */
+  /** 更新验证码应用APPId信息 {@link UpdateCaptchaAppIdInfoRequest} {@link UpdateCaptchaAppIdInfoResponse} */
   UpdateCaptchaAppIdInfo(data: UpdateCaptchaAppIdInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCaptchaAppIdInfoResponse>;
 }
 

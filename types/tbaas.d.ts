@@ -184,7 +184,7 @@ declare interface ApplyChainMakerBatchUserCertRequest {
 declare interface ApplyChainMakerBatchUserCertResponse {
   /** 成功生成的用户证书的base64编码字符串列表，与SignUserCsrList一一对应 */
   SignUserCrtList: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -214,7 +214,7 @@ declare interface ApplyUserCertResponse {
   CertId?: number;
   /** 证书DN */
   CertDn?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -240,7 +240,7 @@ declare interface CreateChaincodeAndInstallForUserRequest {
 }
 
 declare interface CreateChaincodeAndInstallForUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -262,7 +262,7 @@ declare interface DeployDynamicBcosContractRequest {
 declare interface DeployDynamicBcosContractResponse {
   /** 部署成功返回的合约地址 */
   ContractAddress: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -286,7 +286,7 @@ declare interface DownloadUserCertResponse {
   CertName?: string;
   /** 证书内容 */
   CertCtx?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -302,7 +302,7 @@ declare interface GetBcosBlockByNumberRequest {
 declare interface GetBcosBlockByNumberResponse {
   /** 返回区块json字符串 */
   BlockJson: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -326,7 +326,7 @@ declare interface GetBcosBlockListResponse {
   TotalCount: number;
   /** 返回数据列表 */
   List: BcosBlockObj[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -342,7 +342,7 @@ declare interface GetBcosTransByHashRequest {
 declare interface GetBcosTransByHashResponse {
   /** 交易信息json字符串 */
   TransactionJson: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -366,7 +366,7 @@ declare interface GetBcosTransListResponse {
   TotalCount: number;
   /** 返回数据列表 */
   List: BcosTransInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -396,7 +396,7 @@ declare interface GetBlockListResponse {
   TotalCount?: number;
   /** 区块列表 */
   BlockList?: Block[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -424,7 +424,7 @@ declare interface GetBlockTransactionListForUserResponse {
   TotalCount?: number;
   /** 交易列表 */
   TransactionList?: TransactionItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -454,7 +454,7 @@ declare interface GetChaincodeCompileLogForUserResponse {
   TotalCount?: number;
   /** 日志列表 */
   CompileLogList?: LogDetailForUser[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -482,7 +482,7 @@ declare interface GetChaincodeInitializeResultForUserResponse {
   InitResult?: number;
   /** 实例化信息 */
   InitMessage?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -512,7 +512,7 @@ declare interface GetChaincodeLogForUserResponse {
   TotalCount: number;
   /** 日志列表 */
   ChaincodeLogList: LogDetailForUser[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -536,7 +536,7 @@ declare interface GetChannelListForUserResponse {
   TotalCount?: number;
   /** 通道列表 */
   ChannelList?: ChannelDetailForUser[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -556,7 +556,7 @@ declare interface GetClusterListForUserResponse {
   TotalCount?: number;
   /** 网络列表 */
   ClusterList?: ClusterDetailForUser[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -604,7 +604,7 @@ declare interface GetClusterSummaryResponse {
   PeerCertCount?: number;
   /** 当前组织业务证书数量 */
   ClientCertCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -634,7 +634,7 @@ declare interface GetInvokeTxResponse {
   TxValidationMsg: string;
   /** 交易所在区块ID */
   BlockId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -666,7 +666,7 @@ declare interface GetLatesdTransactionListResponse {
   TotalCount?: number;
   /** 交易列表 */
   TransactionList?: TransactionItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -692,7 +692,7 @@ declare interface GetPeerLogForUserResponse {
   TotalCount: number;
   /** 日志列表 */
   PeerLogList: LogDetailForUser[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -740,7 +740,7 @@ declare interface GetTransactionDetailForUserResponse {
   ContractName?: string;
   /** 背书组织列表 */
   EndorserOrgList?: EndorserGroup[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -768,7 +768,7 @@ declare interface InitializeChaincodeForUserRequest {
 declare interface InitializeChaincodeForUserResponse {
   /** 实例化任务ID，用于查询实例化结果 */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -792,7 +792,7 @@ declare interface InvokeBcosTransRequest {
 declare interface InvokeBcosTransResponse {
   /** 交易结果json字符串 */
   TransactionRsp: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -814,7 +814,7 @@ declare interface InvokeChainMakerContractRequest {
 declare interface InvokeChainMakerContractResponse {
   /** 交易结果 */
   Result: ChainMakerContractResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -836,7 +836,7 @@ declare interface InvokeChainMakerDemoContractRequest {
 declare interface InvokeChainMakerDemoContractResponse {
   /** 交易结果 */
   Result: ChainMakerContractResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -868,7 +868,7 @@ declare interface InvokeResponse {
   Txid: string;
   /** 交易执行结果 */
   Events: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -890,7 +890,7 @@ declare interface QueryChainMakerBlockTransactionResponse {
   TxCount: number | null;
   /** 区块时间戳，单位是秒 */
   BlockTimestamp: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -910,7 +910,7 @@ declare interface QueryChainMakerContractRequest {
 declare interface QueryChainMakerContractResponse {
   /** 交易结果 */
   Result: ChainMakerContractResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -932,7 +932,7 @@ declare interface QueryChainMakerDemoBlockTransactionResponse {
   TxCount: number | null;
   /** 区块时间戳，单位是秒 */
   BlockTimestamp: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -952,7 +952,7 @@ declare interface QueryChainMakerDemoContractRequest {
 declare interface QueryChainMakerDemoContractResponse {
   /** 交易结果 */
   Result: ChainMakerContractResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -968,7 +968,7 @@ declare interface QueryChainMakerDemoTransactionRequest {
 declare interface QueryChainMakerDemoTransactionResponse {
   /** 交易结果 */
   Result: ChainMakerTransactionResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -984,7 +984,7 @@ declare interface QueryChainMakerTransactionRequest {
 declare interface QueryChainMakerTransactionResponse {
   /** 交易结果 */
   Result: ChainMakerTransactionResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1012,7 +1012,7 @@ declare interface QueryRequest {
 declare interface QueryResponse {
   /** 查询结果数据 */
   Data: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1032,80 +1032,80 @@ declare interface SrvInvokeResponse {
   RetMsg?: string;
   /** 返回数据 */
   Data?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tbaas 腾讯云区块链服务平台 TBaaS} */
 declare interface Tbaas {
   (): Versions;
-  /** {@link ApplyChainMakerBatchUserCert 批量申请长安链用户签名证书}({@link ApplyChainMakerBatchUserCertRequest 请求参数}): {@link ApplyChainMakerBatchUserCertResponse 返回参数} */
+  /** 批量申请长安链用户签名证书 {@link ApplyChainMakerBatchUserCertRequest} {@link ApplyChainMakerBatchUserCertResponse} */
   ApplyChainMakerBatchUserCert(data: ApplyChainMakerBatchUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyChainMakerBatchUserCertResponse>;
-  /** {@link ApplyUserCert 申请用户证书}({@link ApplyUserCertRequest 请求参数}): {@link ApplyUserCertResponse 返回参数} */
+  /** 申请用户证书 {@link ApplyUserCertRequest} {@link ApplyUserCertResponse} */
   ApplyUserCert(data: ApplyUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyUserCertResponse>;
-  /** {@link CreateChaincodeAndInstallForUser 创建并安装合约}({@link CreateChaincodeAndInstallForUserRequest 请求参数}): {@link CreateChaincodeAndInstallForUserResponse 返回参数} */
+  /** 创建并安装合约 {@link CreateChaincodeAndInstallForUserRequest} {@link CreateChaincodeAndInstallForUserResponse} */
   CreateChaincodeAndInstallForUser(data: CreateChaincodeAndInstallForUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChaincodeAndInstallForUserResponse>;
-  /** {@link DeployDynamicBcosContract 动态部署并发布Bcos合约}({@link DeployDynamicBcosContractRequest 请求参数}): {@link DeployDynamicBcosContractResponse 返回参数} */
+  /** 动态部署并发布Bcos合约 {@link DeployDynamicBcosContractRequest} {@link DeployDynamicBcosContractResponse} */
   DeployDynamicBcosContract(data: DeployDynamicBcosContractRequest, config?: AxiosRequestConfig): AxiosPromise<DeployDynamicBcosContractResponse>;
-  /** {@link DownloadUserCert 下载用户证书}({@link DownloadUserCertRequest 请求参数}): {@link DownloadUserCertResponse 返回参数} */
+  /** 下载用户证书 {@link DownloadUserCertRequest} {@link DownloadUserCertResponse} */
   DownloadUserCert(data: DownloadUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadUserCertResponse>;
-  /** {@link GetBcosBlockByNumber 使用块高查询区块信息}({@link GetBcosBlockByNumberRequest 请求参数}): {@link GetBcosBlockByNumberResponse 返回参数} */
+  /** 使用块高查询区块信息 {@link GetBcosBlockByNumberRequest} {@link GetBcosBlockByNumberResponse} */
   GetBcosBlockByNumber(data: GetBcosBlockByNumberRequest, config?: AxiosRequestConfig): AxiosPromise<GetBcosBlockByNumberResponse>;
-  /** {@link GetBcosBlockList 分页查询Bcos区块列表}({@link GetBcosBlockListRequest 请求参数}): {@link GetBcosBlockListResponse 返回参数} */
+  /** 分页查询Bcos区块列表 {@link GetBcosBlockListRequest} {@link GetBcosBlockListResponse} */
   GetBcosBlockList(data: GetBcosBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBcosBlockListResponse>;
-  /** {@link GetBcosTransByHash 使用交易哈希查询Bcos交易信息}({@link GetBcosTransByHashRequest 请求参数}): {@link GetBcosTransByHashResponse 返回参数} */
+  /** 使用交易哈希查询Bcos交易信息 {@link GetBcosTransByHashRequest} {@link GetBcosTransByHashResponse} */
   GetBcosTransByHash(data: GetBcosTransByHashRequest, config?: AxiosRequestConfig): AxiosPromise<GetBcosTransByHashResponse>;
-  /** {@link GetBcosTransList 分页查询Bcos交易列表}({@link GetBcosTransListRequest 请求参数}): {@link GetBcosTransListResponse 返回参数} */
+  /** 分页查询Bcos交易列表 {@link GetBcosTransListRequest} {@link GetBcosTransListResponse} */
   GetBcosTransList(data: GetBcosTransListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBcosTransListResponse>;
-  /** {@link GetBlockList 查询区块列表}({@link GetBlockListRequest 请求参数}): {@link GetBlockListResponse 返回参数} */
+  /** 查询区块列表 {@link GetBlockListRequest} {@link GetBlockListResponse} */
   GetBlockList(data: GetBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBlockListResponse>;
-  /** {@link GetBlockTransactionListForUser 获取区块内的交易列表}({@link GetBlockTransactionListForUserRequest 请求参数}): {@link GetBlockTransactionListForUserResponse 返回参数} */
+  /** 获取区块内的交易列表 {@link GetBlockTransactionListForUserRequest} {@link GetBlockTransactionListForUserResponse} */
   GetBlockTransactionListForUser(data: GetBlockTransactionListForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetBlockTransactionListForUserResponse>;
-  /** {@link GetChaincodeCompileLogForUser 获取合约编译日志}({@link GetChaincodeCompileLogForUserRequest 请求参数}): {@link GetChaincodeCompileLogForUserResponse 返回参数} */
+  /** 获取合约编译日志 {@link GetChaincodeCompileLogForUserRequest} {@link GetChaincodeCompileLogForUserResponse} */
   GetChaincodeCompileLogForUser(data: GetChaincodeCompileLogForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetChaincodeCompileLogForUserResponse>;
-  /** {@link GetChaincodeInitializeResultForUser 实例化结果查询}({@link GetChaincodeInitializeResultForUserRequest 请求参数}): {@link GetChaincodeInitializeResultForUserResponse 返回参数} */
+  /** 实例化结果查询 {@link GetChaincodeInitializeResultForUserRequest} {@link GetChaincodeInitializeResultForUserResponse} */
   GetChaincodeInitializeResultForUser(data: GetChaincodeInitializeResultForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetChaincodeInitializeResultForUserResponse>;
-  /** {@link GetChaincodeLogForUser 获取合约容器日志}({@link GetChaincodeLogForUserRequest 请求参数}): {@link GetChaincodeLogForUserResponse 返回参数} */
+  /** 获取合约容器日志 {@link GetChaincodeLogForUserRequest} {@link GetChaincodeLogForUserResponse} */
   GetChaincodeLogForUser(data: GetChaincodeLogForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetChaincodeLogForUserResponse>;
-  /** {@link GetChannelListForUser 获取通道列表}({@link GetChannelListForUserRequest 请求参数}): {@link GetChannelListForUserResponse 返回参数} */
+  /** 获取通道列表 {@link GetChannelListForUserRequest} {@link GetChannelListForUserResponse} */
   GetChannelListForUser(data: GetChannelListForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetChannelListForUserResponse>;
-  /** {@link GetClusterListForUser 获取网络列表}({@link GetClusterListForUserRequest 请求参数}): {@link GetClusterListForUserResponse 返回参数} */
+  /** 获取网络列表 {@link GetClusterListForUserRequest} {@link GetClusterListForUserResponse} */
   GetClusterListForUser(data: GetClusterListForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetClusterListForUserResponse>;
-  /** {@link GetClusterSummary 获取区块链网络概要}({@link GetClusterSummaryRequest 请求参数}): {@link GetClusterSummaryResponse 返回参数} */
+  /** 获取区块链网络概要 {@link GetClusterSummaryRequest} {@link GetClusterSummaryResponse} */
   GetClusterSummary(data: GetClusterSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<GetClusterSummaryResponse>;
-  /** {@link GetInvokeTx Invoke异步调用结果查询}({@link GetInvokeTxRequest 请求参数}): {@link GetInvokeTxResponse 返回参数} */
+  /** Invoke异步调用结果查询 {@link GetInvokeTxRequest} {@link GetInvokeTxResponse} */
   GetInvokeTx(data: GetInvokeTxRequest, config?: AxiosRequestConfig): AxiosPromise<GetInvokeTxResponse>;
-  /** {@link GetLatesdTransactionList 获取最新交易列表}({@link GetLatesdTransactionListRequest 请求参数}): {@link GetLatesdTransactionListResponse 返回参数} */
+  /** 获取最新交易列表 {@link GetLatesdTransactionListRequest} {@link GetLatesdTransactionListResponse} */
   GetLatesdTransactionList(data: GetLatesdTransactionListRequest, config?: AxiosRequestConfig): AxiosPromise<GetLatesdTransactionListResponse>;
-  /** {@link GetPeerLogForUser 获取节点日志}({@link GetPeerLogForUserRequest 请求参数}): {@link GetPeerLogForUserResponse 返回参数} */
+  /** 获取节点日志 {@link GetPeerLogForUserRequest} {@link GetPeerLogForUserResponse} */
   GetPeerLogForUser(data: GetPeerLogForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetPeerLogForUserResponse>;
-  /** {@link GetTransactionDetailForUser 获取交易详情}({@link GetTransactionDetailForUserRequest 请求参数}): {@link GetTransactionDetailForUserResponse 返回参数} */
+  /** 获取交易详情 {@link GetTransactionDetailForUserRequest} {@link GetTransactionDetailForUserResponse} */
   GetTransactionDetailForUser(data: GetTransactionDetailForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetTransactionDetailForUserResponse>;
-  /** {@link InitializeChaincodeForUser 实例化合约}({@link InitializeChaincodeForUserRequest 请求参数}): {@link InitializeChaincodeForUserResponse 返回参数} */
+  /** 实例化合约 {@link InitializeChaincodeForUserRequest} {@link InitializeChaincodeForUserResponse} */
   InitializeChaincodeForUser(data: InitializeChaincodeForUserRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeChaincodeForUserResponse>;
-  /** {@link Invoke 新增交易}({@link InvokeRequest 请求参数}): {@link InvokeResponse 返回参数} */
+  /** 新增交易 {@link InvokeRequest} {@link InvokeResponse} */
   Invoke(data: InvokeRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeResponse>;
-  /** {@link InvokeBcosTrans 执行Bcos交易}({@link InvokeBcosTransRequest 请求参数}): {@link InvokeBcosTransResponse 返回参数} */
+  /** 执行Bcos交易 {@link InvokeBcosTransRequest} {@link InvokeBcosTransResponse} */
   InvokeBcosTrans(data: InvokeBcosTransRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeBcosTransResponse>;
-  /** {@link InvokeChainMakerContract 调用长安链合约执行交易}({@link InvokeChainMakerContractRequest 请求参数}): {@link InvokeChainMakerContractResponse 返回参数} */
+  /** 调用长安链合约执行交易 {@link InvokeChainMakerContractRequest} {@link InvokeChainMakerContractResponse} */
   InvokeChainMakerContract(data: InvokeChainMakerContractRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeChainMakerContractResponse>;
-  /** {@link InvokeChainMakerDemoContract 调用长安链体验网络合约执行交易}({@link InvokeChainMakerDemoContractRequest 请求参数}): {@link InvokeChainMakerDemoContractResponse 返回参数} */
+  /** 调用长安链体验网络合约执行交易 {@link InvokeChainMakerDemoContractRequest} {@link InvokeChainMakerDemoContractResponse} */
   InvokeChainMakerDemoContract(data: InvokeChainMakerDemoContractRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeChainMakerDemoContractResponse>;
-  /** {@link Query 查询交易}({@link QueryRequest 请求参数}): {@link QueryResponse 返回参数} */
+  /** 查询交易 {@link QueryRequest} {@link QueryResponse} */
   Query(data: QueryRequest, config?: AxiosRequestConfig): AxiosPromise<QueryResponse>;
-  /** {@link QueryChainMakerBlockTransaction 查询长安链指定高度区块的交易}({@link QueryChainMakerBlockTransactionRequest 请求参数}): {@link QueryChainMakerBlockTransactionResponse 返回参数} */
+  /** 查询长安链指定高度区块的交易 {@link QueryChainMakerBlockTransactionRequest} {@link QueryChainMakerBlockTransactionResponse} */
   QueryChainMakerBlockTransaction(data: QueryChainMakerBlockTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChainMakerBlockTransactionResponse>;
-  /** {@link QueryChainMakerContract 调用长安链合约查询}({@link QueryChainMakerContractRequest 请求参数}): {@link QueryChainMakerContractResponse 返回参数} */
+  /** 调用长安链合约查询 {@link QueryChainMakerContractRequest} {@link QueryChainMakerContractResponse} */
   QueryChainMakerContract(data: QueryChainMakerContractRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChainMakerContractResponse>;
-  /** {@link QueryChainMakerDemoBlockTransaction 查询长安链体验网络指定高度区块的交易}({@link QueryChainMakerDemoBlockTransactionRequest 请求参数}): {@link QueryChainMakerDemoBlockTransactionResponse 返回参数} */
+  /** 查询长安链体验网络指定高度区块的交易 {@link QueryChainMakerDemoBlockTransactionRequest} {@link QueryChainMakerDemoBlockTransactionResponse} */
   QueryChainMakerDemoBlockTransaction(data: QueryChainMakerDemoBlockTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChainMakerDemoBlockTransactionResponse>;
-  /** {@link QueryChainMakerDemoContract 调用长安链体验网络合约查询}({@link QueryChainMakerDemoContractRequest 请求参数}): {@link QueryChainMakerDemoContractResponse 返回参数} */
+  /** 调用长安链体验网络合约查询 {@link QueryChainMakerDemoContractRequest} {@link QueryChainMakerDemoContractResponse} */
   QueryChainMakerDemoContract(data: QueryChainMakerDemoContractRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChainMakerDemoContractResponse>;
-  /** {@link QueryChainMakerDemoTransaction 通过交易ID查询长安链体验网络交易}({@link QueryChainMakerDemoTransactionRequest 请求参数}): {@link QueryChainMakerDemoTransactionResponse 返回参数} */
+  /** 通过交易ID查询长安链体验网络交易 {@link QueryChainMakerDemoTransactionRequest} {@link QueryChainMakerDemoTransactionResponse} */
   QueryChainMakerDemoTransaction(data: QueryChainMakerDemoTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChainMakerDemoTransactionResponse>;
-  /** {@link QueryChainMakerTransaction 通过交易ID查询长安链交易}({@link QueryChainMakerTransactionRequest 请求参数}): {@link QueryChainMakerTransactionResponse 返回参数} */
+  /** 通过交易ID查询长安链交易 {@link QueryChainMakerTransactionRequest} {@link QueryChainMakerTransactionResponse} */
   QueryChainMakerTransaction(data: QueryChainMakerTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChainMakerTransactionResponse>;
-  /** {@link SrvInvoke trustsql服务统一接口}({@link SrvInvokeRequest 请求参数}): {@link SrvInvokeResponse 返回参数} */
+  /** trustsql服务统一接口 {@link SrvInvokeRequest} {@link SrvInvokeResponse} */
   SrvInvoke(data: SrvInvokeRequest, config?: AxiosRequestConfig): AxiosPromise<SrvInvokeResponse>;
 }
 

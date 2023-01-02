@@ -20,14 +20,14 @@ declare interface SendMessageRequest {
 declare interface SendMessageResponse {
   /** 消息ID */
   MessageId: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Dataintegration 数据接入平台} */
 declare interface Dataintegration {
   (): Versions;
-  /** {@link SendMessage 数据上报}({@link SendMessageRequest 请求参数}): {@link SendMessageResponse 返回参数} */
+  /** 数据上报 {@link SendMessageRequest} {@link SendMessageResponse} */
   SendMessage(data: SendMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendMessageResponse>;
 }
 

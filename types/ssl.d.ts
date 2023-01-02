@@ -412,7 +412,7 @@ declare interface ApplyCertificateRequest {
 declare interface ApplyCertificateResponse {
   /** 证书 ID。 */
   CertificateId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -424,7 +424,7 @@ declare interface CancelCertificateOrderRequest {
 declare interface CancelCertificateOrderResponse {
   /** 取消订单成功的证书 ID。 */
   CertificateId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -440,7 +440,7 @@ declare interface CheckCertificateChainResponse {
   IsTrustedCA?: boolean;
   /** 包含证书链中每一段证书的通用名称。 */
   Chains?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -454,7 +454,7 @@ declare interface CommitCertificateInformationResponse {
   OrderId?: string;
   /** 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函，13 = 免费证书待提交资料。 */
   Status?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -466,7 +466,7 @@ declare interface CompleteCertificateRequest {
 declare interface CompleteCertificateResponse {
   /** 证书ID */
   CertificateId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -484,7 +484,7 @@ declare interface CreateCertificateResponse {
   CertificateIds: string[];
   /** 订单号列表 */
   DealIds: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -496,7 +496,7 @@ declare interface DeleteCertificateRequest {
 declare interface DeleteCertificateResponse {
   /** 删除结果（true：删除成功，false：删除失败） */
   DeleteResult?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -508,7 +508,7 @@ declare interface DeleteManagerRequest {
 declare interface DeleteManagerResponse {
   /** 管理人ID */
   ManagerId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -598,7 +598,7 @@ declare interface DescribeCertificateDetailResponse {
   EncryptCertFingerprint: string | null;
   /** 证书算法 */
   EncryptAlgorithm: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -620,7 +620,7 @@ declare interface DescribeCertificateOperateLogsResponse {
   TotalCount?: number;
   /** 证书操作日志列表。 */
   OperateLogs?: OperationLog[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -694,7 +694,7 @@ declare interface DescribeCertificateResponse {
   Deployable: boolean | null;
   /** 标签列表 */
   Tags: Tags[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -732,7 +732,7 @@ declare interface DescribeCertificatesResponse {
   TotalCount: number | null;
   /** 列表。 */
   Certificates: Certificates[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -746,7 +746,7 @@ declare interface DescribeDeployedResourcesRequest {
 declare interface DescribeDeployedResourcesResponse {
   /** 资源详情 */
   DeployedResources: DeployedResources[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -796,7 +796,7 @@ declare interface DescribeManagerDetailResponse {
   CompanyId: number;
   /** 管理人ID */
   ManagerId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -822,7 +822,7 @@ declare interface DescribeManagersResponse {
   Managers: ManagerInfo[];
   /** 公司管理人总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -850,7 +850,7 @@ declare interface DescribePackagesResponse {
   TotalCount: number;
   /** 权益点总余额。 */
   TotalBalance: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -864,7 +864,7 @@ declare interface DownloadCertificateResponse {
   Content?: string | null;
   /** MIME 类型：application/zip = ZIP 压缩文件。 */
   ContentType?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -878,7 +878,7 @@ declare interface HostCertificateRequest {
 declare interface HostCertificateResponse {
   /** 云资源配置详情 */
   CertHostingInfo: CertHostingInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -892,7 +892,7 @@ declare interface ModifyCertificateAliasRequest {
 declare interface ModifyCertificateAliasResponse {
   /** 修改成功的证书 ID。 */
   CertificateId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -908,7 +908,7 @@ declare interface ModifyCertificateProjectResponse {
   SuccessCertificates?: string[] | null;
   /** 修改所属项目失败的证书集合。 */
   FailCertificates?: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -922,7 +922,7 @@ declare interface ModifyCertificatesExpiringNotificationSwitchRequest {
 declare interface ModifyCertificatesExpiringNotificationSwitchResponse {
   /** 证书ID列表 */
   CertificateIds: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -944,7 +944,7 @@ declare interface ReplaceCertificateRequest {
 declare interface ReplaceCertificateResponse {
   /** 证书 ID。 */
   CertificateId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -958,7 +958,7 @@ declare interface RevokeCertificateRequest {
 declare interface RevokeCertificateResponse {
   /** 吊销证书域名验证信息。 */
   RevokeDomainValidateAuths?: RevokeDomainValidateAuths[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -970,7 +970,7 @@ declare interface SubmitAuditManagerRequest {
 declare interface SubmitAuditManagerResponse {
   /** 管理人ID */
   ManagerId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1032,7 +1032,7 @@ declare interface SubmitCertificateInformationRequest {
 declare interface SubmitCertificateInformationResponse {
   /** 证书 ID。 */
   CertificateId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1054,7 +1054,7 @@ declare interface UploadCertificateRequest {
 declare interface UploadCertificateResponse {
   /** 证书 ID。 */
   CertificateId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1070,7 +1070,7 @@ declare interface UploadConfirmLetterResponse {
   CertificateId?: string;
   /** 是否成功 */
   IsSuccess?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1086,7 +1086,7 @@ declare interface UploadRevokeLetterResponse {
   CertificateId: string;
   /** 是否成功。 */
   IsSuccess: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1098,70 +1098,70 @@ declare interface VerifyManagerRequest {
 declare interface VerifyManagerResponse {
   /** 管理人ID */
   ManagerId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ssl SSL 证书} */
 declare interface Ssl {
   (): Versions;
-  /** {@link ApplyCertificate 免费证书申请}({@link ApplyCertificateRequest 请求参数}): {@link ApplyCertificateResponse 返回参数} */
+  /** 免费证书申请 {@link ApplyCertificateRequest} {@link ApplyCertificateResponse} */
   ApplyCertificate(data: ApplyCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyCertificateResponse>;
-  /** {@link CancelCertificateOrder 取消证书订单}({@link CancelCertificateOrderRequest 请求参数}): {@link CancelCertificateOrderResponse 返回参数} */
+  /** 取消证书订单 {@link CancelCertificateOrderRequest} {@link CancelCertificateOrderResponse} */
   CancelCertificateOrder(data: CancelCertificateOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CancelCertificateOrderResponse>;
-  /** {@link CheckCertificateChain 检查证书链完整性}({@link CheckCertificateChainRequest 请求参数}): {@link CheckCertificateChainResponse 返回参数} */
+  /** 检查证书链完整性 {@link CheckCertificateChainRequest} {@link CheckCertificateChainResponse} */
   CheckCertificateChain(data: CheckCertificateChainRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCertificateChainResponse>;
-  /** {@link CommitCertificateInformation 提交证书订单}({@link CommitCertificateInformationRequest 请求参数}): {@link CommitCertificateInformationResponse 返回参数} */
+  /** 提交证书订单 {@link CommitCertificateInformationRequest} {@link CommitCertificateInformationResponse} */
   CommitCertificateInformation(data: CommitCertificateInformationRequest, config?: AxiosRequestConfig): AxiosPromise<CommitCertificateInformationResponse>;
-  /** {@link CompleteCertificate 主动触发证书验证}({@link CompleteCertificateRequest 请求参数}): {@link CompleteCertificateResponse 返回参数} */
+  /** 主动触发证书验证 {@link CompleteCertificateRequest} {@link CompleteCertificateResponse} */
   CompleteCertificate(data: CompleteCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CompleteCertificateResponse>;
-  /** {@link CreateCertificate 创建付费证书}({@link CreateCertificateRequest 请求参数}): {@link CreateCertificateResponse 返回参数} */
+  /** 创建付费证书 {@link CreateCertificateRequest} {@link CreateCertificateResponse} */
   CreateCertificate(data: CreateCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCertificateResponse>;
-  /** {@link DeleteCertificate 删除证书}({@link DeleteCertificateRequest 请求参数}): {@link DeleteCertificateResponse 返回参数} */
+  /** 删除证书 {@link DeleteCertificateRequest} {@link DeleteCertificateResponse} */
   DeleteCertificate(data: DeleteCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCertificateResponse>;
-  /** {@link DeleteManager 删除管理人}({@link DeleteManagerRequest 请求参数}): {@link DeleteManagerResponse 返回参数} */
+  /** 删除管理人 {@link DeleteManagerRequest} {@link DeleteManagerResponse} */
   DeleteManager(data: DeleteManagerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteManagerResponse>;
-  /** {@link DescribeCertificate 获取证书信息}({@link DescribeCertificateRequest 请求参数}): {@link DescribeCertificateResponse 返回参数} */
+  /** 获取证书信息 {@link DescribeCertificateRequest} {@link DescribeCertificateResponse} */
   DescribeCertificate(data: DescribeCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateResponse>;
-  /** {@link DescribeCertificateDetail 获取证书详情}({@link DescribeCertificateDetailRequest 请求参数}): {@link DescribeCertificateDetailResponse 返回参数} */
+  /** 获取证书详情 {@link DescribeCertificateDetailRequest} {@link DescribeCertificateDetailResponse} */
   DescribeCertificateDetail(data: DescribeCertificateDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateDetailResponse>;
-  /** {@link DescribeCertificateOperateLogs 获取证书操作日志}({@link DescribeCertificateOperateLogsRequest 请求参数}): {@link DescribeCertificateOperateLogsResponse 返回参数} */
+  /** 获取证书操作日志 {@link DescribeCertificateOperateLogsRequest} {@link DescribeCertificateOperateLogsResponse} */
   DescribeCertificateOperateLogs(data?: DescribeCertificateOperateLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateOperateLogsResponse>;
-  /** {@link DescribeCertificates 获取证书列表}({@link DescribeCertificatesRequest 请求参数}): {@link DescribeCertificatesResponse 返回参数} */
+  /** 获取证书列表 {@link DescribeCertificatesRequest} {@link DescribeCertificatesResponse} */
   DescribeCertificates(data?: DescribeCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificatesResponse>;
-  /** {@link DescribeDeployedResources 证书查询关联资源}({@link DescribeDeployedResourcesRequest 请求参数}): {@link DescribeDeployedResourcesResponse 返回参数} */
+  /** 证书查询关联资源 {@link DescribeDeployedResourcesRequest} {@link DescribeDeployedResourcesResponse} */
   DescribeDeployedResources(data: DescribeDeployedResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployedResourcesResponse>;
-  /** {@link DescribeManagerDetail 查询管理人详情}({@link DescribeManagerDetailRequest 请求参数}): {@link DescribeManagerDetailResponse 返回参数} */
+  /** 查询管理人详情 {@link DescribeManagerDetailRequest} {@link DescribeManagerDetailResponse} */
   DescribeManagerDetail(data: DescribeManagerDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeManagerDetailResponse>;
-  /** {@link DescribeManagers 查询管理人列表}({@link DescribeManagersRequest 请求参数}): {@link DescribeManagersResponse 返回参数} */
+  /** 查询管理人列表 {@link DescribeManagersRequest} {@link DescribeManagersResponse} */
   DescribeManagers(data: DescribeManagersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeManagersResponse>;
-  /** {@link DescribePackages 获得权益包列表}({@link DescribePackagesRequest 请求参数}): {@link DescribePackagesResponse 返回参数} */
+  /** 获得权益包列表 {@link DescribePackagesRequest} {@link DescribePackagesResponse} */
   DescribePackages(data?: DescribePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackagesResponse>;
-  /** {@link DownloadCertificate 下载证书}({@link DownloadCertificateRequest 请求参数}): {@link DownloadCertificateResponse 返回参数} */
+  /** 下载证书 {@link DownloadCertificateRequest} {@link DownloadCertificateResponse} */
   DownloadCertificate(data: DownloadCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadCertificateResponse>;
-  /** {@link HostCertificate 云资源托管}({@link HostCertificateRequest 请求参数}): {@link HostCertificateResponse 返回参数} */
+  /** 云资源托管 {@link HostCertificateRequest} {@link HostCertificateResponse} */
   HostCertificate(data: HostCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<HostCertificateResponse>;
-  /** {@link ModifyCertificateAlias 修改证书备注}({@link ModifyCertificateAliasRequest 请求参数}): {@link ModifyCertificateAliasResponse 返回参数} */
+  /** 修改证书备注 {@link ModifyCertificateAliasRequest} {@link ModifyCertificateAliasResponse} */
   ModifyCertificateAlias(data: ModifyCertificateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCertificateAliasResponse>;
-  /** {@link ModifyCertificateProject 修改证书所属项目}({@link ModifyCertificateProjectRequest 请求参数}): {@link ModifyCertificateProjectResponse 返回参数} */
+  /** 修改证书所属项目 {@link ModifyCertificateProjectRequest} {@link ModifyCertificateProjectResponse} */
   ModifyCertificateProject(data: ModifyCertificateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCertificateProjectResponse>;
-  /** {@link ModifyCertificatesExpiringNotificationSwitch 修改是否忽略证书到期通知}({@link ModifyCertificatesExpiringNotificationSwitchRequest 请求参数}): {@link ModifyCertificatesExpiringNotificationSwitchResponse 返回参数} */
+  /** 修改是否忽略证书到期通知 {@link ModifyCertificatesExpiringNotificationSwitchRequest} {@link ModifyCertificatesExpiringNotificationSwitchResponse} */
   ModifyCertificatesExpiringNotificationSwitch(data: ModifyCertificatesExpiringNotificationSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCertificatesExpiringNotificationSwitchResponse>;
-  /** {@link ReplaceCertificate 重颁发证书}({@link ReplaceCertificateRequest 请求参数}): {@link ReplaceCertificateResponse 返回参数} */
+  /** 重颁发证书 {@link ReplaceCertificateRequest} {@link ReplaceCertificateResponse} */
   ReplaceCertificate(data: ReplaceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceCertificateResponse>;
-  /** {@link RevokeCertificate 吊销证书}({@link RevokeCertificateRequest 请求参数}): {@link RevokeCertificateResponse 返回参数} */
+  /** 吊销证书 {@link RevokeCertificateRequest} {@link RevokeCertificateResponse} */
   RevokeCertificate(data: RevokeCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeCertificateResponse>;
-  /** {@link SubmitAuditManager 重新提交审核管理人}({@link SubmitAuditManagerRequest 请求参数}): {@link SubmitAuditManagerResponse 返回参数} */
+  /** 重新提交审核管理人 {@link SubmitAuditManagerRequest} {@link SubmitAuditManagerResponse} */
   SubmitAuditManager(data: SubmitAuditManagerRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitAuditManagerResponse>;
-  /** {@link SubmitCertificateInformation 提交证书资料}({@link SubmitCertificateInformationRequest 请求参数}): {@link SubmitCertificateInformationResponse 返回参数} */
+  /** 提交证书资料 {@link SubmitCertificateInformationRequest} {@link SubmitCertificateInformationResponse} */
   SubmitCertificateInformation(data: SubmitCertificateInformationRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitCertificateInformationResponse>;
-  /** {@link UploadCertificate 上传证书}({@link UploadCertificateRequest 请求参数}): {@link UploadCertificateResponse 返回参数} */
+  /** 上传证书 {@link UploadCertificateRequest} {@link UploadCertificateResponse} */
   UploadCertificate(data: UploadCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<UploadCertificateResponse>;
-  /** {@link UploadConfirmLetter 上传证书确认函}({@link UploadConfirmLetterRequest 请求参数}): {@link UploadConfirmLetterResponse 返回参数} */
+  /** 上传证书确认函 {@link UploadConfirmLetterRequest} {@link UploadConfirmLetterResponse} */
   UploadConfirmLetter(data: UploadConfirmLetterRequest, config?: AxiosRequestConfig): AxiosPromise<UploadConfirmLetterResponse>;
-  /** {@link UploadRevokeLetter 上传证书吊销确认函}({@link UploadRevokeLetterRequest 请求参数}): {@link UploadRevokeLetterResponse 返回参数} */
+  /** 上传证书吊销确认函 {@link UploadRevokeLetterRequest} {@link UploadRevokeLetterResponse} */
   UploadRevokeLetter(data: UploadRevokeLetterRequest, config?: AxiosRequestConfig): AxiosPromise<UploadRevokeLetterResponse>;
-  /** {@link VerifyManager 重新核验管理人}({@link VerifyManagerRequest 请求参数}): {@link VerifyManagerResponse 返回参数} */
+  /** 重新核验管理人 {@link VerifyManagerRequest} {@link VerifyManagerResponse} */
   VerifyManager(data: VerifyManagerRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyManagerResponse>;
 }
 

@@ -316,7 +316,7 @@ declare interface CreateApiImportUserJobRequest {
 declare interface CreateApiImportUserJobResponse {
   /** 数据流任务 */
   Job: Job;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -334,7 +334,7 @@ declare interface CreateFileExportUserJobRequest {
 declare interface CreateFileExportUserJobResponse {
   /** 数据流任务 */
   Job: Job;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -374,7 +374,7 @@ declare interface CreateUserRequest {
 declare interface CreateUserResponse {
   /** 创建的用户信息 */
   User: User | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -386,7 +386,7 @@ declare interface DeleteUsersRequest {
 }
 
 declare interface DeleteUsersResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -402,7 +402,7 @@ declare interface DescribeUserByIdRequest {
 declare interface DescribeUserByIdResponse {
   /** 用户信息 */
   User: User | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -426,7 +426,7 @@ declare interface DescribeUserResponse {
   Pageable: Pageable | null;
   /** 用户列表 */
   Content: User[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -442,7 +442,7 @@ declare interface LinkAccountRequest {
 }
 
 declare interface LinkAccountResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -456,7 +456,7 @@ declare interface ListJobsRequest {
 declare interface ListJobsResponse {
   /** 任务列表 */
   JobSet: Job[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -478,7 +478,7 @@ declare interface ListLogMessageByConditionResponse {
   Pageable: Pageable;
   /** 日志列表 */
   Content: LogMessage[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -496,7 +496,7 @@ declare interface ListUserByPropertyRequest {
 declare interface ListUserByPropertyResponse {
   /** 用户列表 */
   Users: User[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -518,7 +518,7 @@ declare interface ListUserResponse {
   Pageable: Pageable | null;
   /** 用户列表 */
   Content: User[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -532,7 +532,7 @@ declare interface ResetPasswordRequest {
 declare interface ResetPasswordResponse {
   /** 重置后的用户密码 */
   Password: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -546,7 +546,7 @@ declare interface SetPasswordRequest {
 }
 
 declare interface SetPasswordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -586,7 +586,7 @@ declare interface UpdateUserRequest {
 declare interface UpdateUserResponse {
   /** 更新之后的用户信息 */
   User: User | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -600,42 +600,42 @@ declare interface UpdateUserStatusRequest {
 }
 
 declare interface UpdateUserStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ciam 账号风控平台} */
 declare interface Ciam {
   (): Versions;
-  /** {@link CreateApiImportUserJob 新建接口导入用户任务}({@link CreateApiImportUserJobRequest 请求参数}): {@link CreateApiImportUserJobResponse 返回参数} */
+  /** 新建接口导入用户任务 {@link CreateApiImportUserJobRequest} {@link CreateApiImportUserJobResponse} */
   CreateApiImportUserJob(data: CreateApiImportUserJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiImportUserJobResponse>;
-  /** {@link CreateFileExportUserJob 新建文件导出用户任务}({@link CreateFileExportUserJobRequest 请求参数}): {@link CreateFileExportUserJobResponse 返回参数} */
+  /** 新建文件导出用户任务 {@link CreateFileExportUserJobRequest} {@link CreateFileExportUserJobResponse} */
   CreateFileExportUserJob(data: CreateFileExportUserJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileExportUserJobResponse>;
-  /** {@link CreateUser 创建用户}({@link CreateUserRequest 请求参数}): {@link CreateUserResponse 返回参数} */
+  /** 创建用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
-  /** {@link DeleteUsers 批量删除用户}({@link DeleteUsersRequest 请求参数}): {@link DeleteUsersResponse 返回参数} */
+  /** 批量删除用户 {@link DeleteUsersRequest} {@link DeleteUsersResponse} */
   DeleteUsers(data: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
-  /** {@link DescribeUser 查询用户信息}({@link DescribeUserRequest 请求参数}): {@link DescribeUserResponse 返回参数} */
+  /** 查询用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
   DescribeUser(data: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
-  /** {@link DescribeUserById 根据ID查询用户信息}({@link DescribeUserByIdRequest 请求参数}): {@link DescribeUserByIdResponse 返回参数} */
+  /** 根据ID查询用户信息 {@link DescribeUserByIdRequest} {@link DescribeUserByIdResponse} */
   DescribeUserById(data: DescribeUserByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserByIdResponse>;
-  /** {@link LinkAccount 账号融合}({@link LinkAccountRequest 请求参数}): {@link LinkAccountResponse 返回参数} */
+  /** 账号融合 {@link LinkAccountRequest} {@link LinkAccountResponse} */
   LinkAccount(data: LinkAccountRequest, config?: AxiosRequestConfig): AxiosPromise<LinkAccountResponse>;
-  /** {@link ListJobs 查询任务详情}({@link ListJobsRequest 请求参数}): {@link ListJobsResponse 返回参数} */
+  /** 查询任务详情 {@link ListJobsRequest} {@link ListJobsResponse} */
   ListJobs(data: ListJobsRequest, config?: AxiosRequestConfig): AxiosPromise<ListJobsResponse>;
-  /** {@link ListLogMessageByCondition 查询日志信息}({@link ListLogMessageByConditionRequest 请求参数}): {@link ListLogMessageByConditionResponse 返回参数} */
+  /** 查询日志信息 {@link ListLogMessageByConditionRequest} {@link ListLogMessageByConditionResponse} */
   ListLogMessageByCondition(data: ListLogMessageByConditionRequest, config?: AxiosRequestConfig): AxiosPromise<ListLogMessageByConditionResponse>;
-  /** {@link ListUser 查询用户列表}({@link ListUserRequest 请求参数}): {@link ListUserResponse 返回参数} */
+  /** 查询用户列表 {@link ListUserRequest} {@link ListUserResponse} */
   ListUser(data: ListUserRequest, config?: AxiosRequestConfig): AxiosPromise<ListUserResponse>;
-  /** {@link ListUserByProperty 根据属性查询用户列表}({@link ListUserByPropertyRequest 请求参数}): {@link ListUserByPropertyResponse 返回参数} */
+  /** 根据属性查询用户列表 {@link ListUserByPropertyRequest} {@link ListUserByPropertyResponse} */
   ListUserByProperty(data: ListUserByPropertyRequest, config?: AxiosRequestConfig): AxiosPromise<ListUserByPropertyResponse>;
-  /** {@link ResetPassword 重置用户密码}({@link ResetPasswordRequest 请求参数}): {@link ResetPasswordResponse 返回参数} */
+  /** 重置用户密码 {@link ResetPasswordRequest} {@link ResetPasswordResponse} */
   ResetPassword(data: ResetPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetPasswordResponse>;
-  /** {@link SetPassword 设置用户密码}({@link SetPasswordRequest 请求参数}): {@link SetPasswordResponse 返回参数} */
+  /** 设置用户密码 {@link SetPasswordRequest} {@link SetPasswordResponse} */
   SetPassword(data: SetPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<SetPasswordResponse>;
-  /** {@link UpdateUser 更新用户}({@link UpdateUserRequest 请求参数}): {@link UpdateUserResponse 返回参数} */
+  /** 更新用户 {@link UpdateUserRequest} {@link UpdateUserResponse} */
   UpdateUser(data: UpdateUserRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserResponse>;
-  /** {@link UpdateUserStatus 更新用户状态}({@link UpdateUserStatusRequest 请求参数}): {@link UpdateUserStatusResponse 返回参数} */
+  /** 更新用户状态 {@link UpdateUserStatusRequest} {@link UpdateUserStatusResponse} */
   UpdateUserStatus(data: UpdateUserStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserStatusResponse>;
 }
 

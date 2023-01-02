@@ -2420,7 +2420,7 @@ declare interface BatchCreateIntegrationTaskAlarmsResponse {
   FailedCount: number | null;
   /** 任务总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2440,7 +2440,7 @@ declare interface BatchDeleteIntegrationTasksResponse {
   FailedCount: number | null;
   /** 任务总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2458,7 +2458,7 @@ declare interface BatchDeleteTasksNewRequest {
 declare interface BatchDeleteTasksNewResponse {
   /** 返回批量操作成功个数、失败个数、操作总数 */
   Data: BatchOperateResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2476,7 +2476,7 @@ declare interface BatchForceSuccessIntegrationTaskInstancesResponse {
   FailedCount: number;
   /** 任务总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2494,7 +2494,7 @@ declare interface BatchKillIntegrationTaskInstancesResponse {
   FailedCount: number;
   /** 任务总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2518,7 +2518,7 @@ declare interface BatchMakeUpIntegrationTasksResponse {
   FailedCount: number;
   /** 任务总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2534,7 +2534,7 @@ declare interface BatchModifyOwnersNewRequest {
 declare interface BatchModifyOwnersNewResponse {
   /** 返回批量操作成功个数、失败个数、操作总数 */
   Data: BatchOperateResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2552,7 +2552,7 @@ declare interface BatchRerunIntegrationTaskInstancesResponse {
   FailedCount: number;
   /** 任务总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2572,7 +2572,7 @@ declare interface BatchResumeIntegrationTasksResponse {
   FailedCount: number;
   /** 任务总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2592,7 +2592,7 @@ declare interface BatchStartIntegrationTasksResponse {
   FailedCount: number;
   /** 任务总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2612,7 +2612,7 @@ declare interface BatchStopIntegrationTasksResponse {
   FailedCount: number;
   /** 任务总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2626,7 +2626,7 @@ declare interface BatchStopTasksNewRequest {
 declare interface BatchStopTasksNewResponse {
   /** 返回批量操作成功个数、失败个数、操作总数 */
   Data: BatchOperateResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2646,7 +2646,7 @@ declare interface BatchSuspendIntegrationTasksResponse {
   FailedCount: number;
   /** 任务总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2668,7 +2668,7 @@ declare interface BatchUpdateIntegrationTasksResponse {
   FailedCount: number;
   /** 任务总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2686,7 +2686,7 @@ declare interface CheckAlarmRegularNameExistRequest {
 declare interface CheckAlarmRegularNameExistResponse {
   /** 是否重名 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2704,7 +2704,7 @@ declare interface CheckDuplicateRuleNameRequest {
 declare interface CheckDuplicateRuleNameResponse {
   /** 规则名称是否重复 */
   Data: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2720,7 +2720,7 @@ declare interface CheckDuplicateTemplateNameRequest {
 declare interface CheckDuplicateTemplateNameResponse {
   /** 是否重名 */
   Data: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2738,7 +2738,7 @@ declare interface CheckIntegrationNodeNameExistsRequest {
 declare interface CheckIntegrationNodeNameExistsResponse {
   /** 返回true代表存在，返回false代表不存在 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2758,7 +2758,7 @@ declare interface CheckIntegrationTaskNameExistsResponse {
   Data: boolean;
   /** 任务名重复类型（0:未重复, 1:开发态重复, 2:生产态重复） */
   ExistsType: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2774,7 +2774,7 @@ declare interface CheckTaskNameExistRequest {
 declare interface CheckTaskNameExistResponse {
   /** 结果 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2794,7 +2794,7 @@ declare interface CommitExportTaskRequest {
 declare interface CommitExportTaskResponse {
   /** 提交结果 */
   Data: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2812,7 +2812,7 @@ declare interface CommitIntegrationTaskRequest {
 declare interface CommitIntegrationTaskResponse {
   /** 操作成功与否标识 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2830,7 +2830,7 @@ declare interface CommitRuleGroupExecResultRequest {
 declare interface CommitRuleGroupExecResultResponse {
   /** 无 */
   Data: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2850,7 +2850,7 @@ declare interface CommitRuleGroupTaskRequest {
 declare interface CommitRuleGroupTaskResponse {
   /** 规则组执行id */
   Data: RuleGroupExecResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2874,7 +2874,7 @@ declare interface CreateCustomFunctionResponse {
   FunctionId: string | null;
   /** 无 */
   ErrorMessage: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2918,7 +2918,7 @@ declare interface CreateDataSourceRequest {
 declare interface CreateDataSourceResponse {
   /** 主键ID */
   Data: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2934,7 +2934,7 @@ declare interface CreateFolderRequest {
 declare interface CreateFolderResponse {
   /** 文件夹Id，null则创建失败 */
   Data: CommonId | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2958,7 +2958,7 @@ declare interface CreateHiveTableByDDLRequest {
 declare interface CreateHiveTableByDDLResponse {
   /** 表名称 */
   Data: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2980,7 +2980,7 @@ declare interface CreateHiveTableRequest {
 declare interface CreateHiveTableResponse {
   /** 建表是否成功 */
   IsSuccess: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3002,7 +3002,7 @@ declare interface CreateInLongAgentRequest {
 declare interface CreateInLongAgentResponse {
   /** 采集器ID */
   AgentId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3020,7 +3020,7 @@ declare interface CreateIntegrationNodeResponse {
   Id: string;
   /** 当前任务id */
   TaskId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3034,7 +3034,7 @@ declare interface CreateIntegrationTaskRequest {
 declare interface CreateIntegrationTaskResponse {
   /** 任务id */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3064,7 +3064,7 @@ declare interface CreateOfflineTaskRequest {
 declare interface CreateOfflineTaskResponse {
   /** 结果 */
   Data: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3088,7 +3088,7 @@ declare interface CreateOrUpdateResourceRequest {
 declare interface CreateOrUpdateResourceResponse {
   /** 响应数据 */
   Data: UserFileDTO[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3104,7 +3104,7 @@ declare interface CreateResourcePathRequest {
 declare interface CreateResourcePathResponse {
   /** 新建成功 */
   Data: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3160,7 +3160,7 @@ declare interface CreateRuleRequest {
 declare interface CreateRuleResponse {
   /** 规则 */
   Data: Rule | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3190,7 +3190,7 @@ declare interface CreateRuleTemplateRequest {
 declare interface CreateRuleTemplateResponse {
   /** 模板Id */
   Data: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3204,7 +3204,7 @@ declare interface CreateTaskAlarmRegularRequest {
 declare interface CreateTaskAlarmRegularResponse {
   /** 告警ID */
   AlarmId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3224,7 +3224,7 @@ declare interface CreateTaskRequest {
 declare interface CreateTaskResponse {
   /** 返回任务Id */
   Data: CommonId | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3240,7 +3240,7 @@ declare interface CreateWorkflowRequest {
 declare interface CreateWorkflowResponse {
   /** 返回工作流Id */
   Data: CommonId | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3258,7 +3258,7 @@ declare interface DeleteCustomFunctionResponse {
   FunctionId: string | null;
   /** 无 */
   ErrorMessage: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3270,7 +3270,7 @@ declare interface DeleteDataSourcesRequest {
 declare interface DeleteDataSourcesResponse {
   /** 是否删除成功 */
   Data: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3284,7 +3284,7 @@ declare interface DeleteFolderRequest {
 declare interface DeleteFolderResponse {
   /** true代表删除成功，false代表删除失败 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3296,7 +3296,7 @@ declare interface DeleteInLongAgentRequest {
 }
 
 declare interface DeleteInLongAgentResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3310,7 +3310,7 @@ declare interface DeleteIntegrationNodeRequest {
 declare interface DeleteIntegrationNodeResponse {
   /** 删除返回是否成功标识 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3324,7 +3324,7 @@ declare interface DeleteIntegrationTaskRequest {
 declare interface DeleteIntegrationTaskResponse {
   /** 任务删除成功与否标识 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3342,7 +3342,7 @@ declare interface DeleteOfflineTaskRequest {
 declare interface DeleteOfflineTaskResponse {
   /** 结果 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3356,7 +3356,7 @@ declare interface DeleteResourceRequest {
 declare interface DeleteResourceResponse {
   /** 是否成功 */
   Data: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3370,7 +3370,7 @@ declare interface DeleteRuleRequest {
 declare interface DeleteRuleResponse {
   /** 是否删除成功 */
   Data: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3384,7 +3384,7 @@ declare interface DeleteRuleTemplateRequest {
 declare interface DeleteRuleTemplateResponse {
   /** 删除成功 */
   Data: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3402,7 +3402,7 @@ declare interface DeleteTaskAlarmRegularRequest {
 declare interface DeleteTaskAlarmRegularResponse {
   /** 删除结果(true表示删除成功，false表示删除失败) */
   Data: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3420,7 +3420,7 @@ declare interface DeleteWorkflowNewRequest {
 declare interface DeleteWorkflowNewResponse {
   /** 返回删除结果 */
   Data: OperateResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3448,7 +3448,7 @@ declare interface DescribeAlarmEventsResponse {
   AlarmEventInfoList: AlarmEventInfo[] | null;
   /** 总记录数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3478,7 +3478,7 @@ declare interface DescribeAlarmReceiverResponse {
   AlarmReceiverInfoList: AlarmReceiverInfo[] | null;
   /** 总记录数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3492,7 +3492,7 @@ declare interface DescribeClusterNamespaceListRequest {
 declare interface DescribeClusterNamespaceListResponse {
   /** 命名空间 */
   Namespaces: Namespace[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3508,7 +3508,7 @@ declare interface DescribeDataBasesRequest {
 declare interface DescribeDataBasesResponse {
   /** 数据来源数据数据库列表 */
   Data: DatabaseInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3524,7 +3524,7 @@ declare interface DescribeDataCheckStatRequest {
 declare interface DescribeDataCheckStatResponse {
   /** 结果 */
   Data: DataCheckStat;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3542,7 +3542,7 @@ declare interface DescribeDataObjectsRequest {
 declare interface DescribeDataObjectsResponse {
   /** 数据对象列表 */
   Data: SourceObject[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3568,7 +3568,7 @@ declare interface DescribeDataSourceInfoListResponse {
   TotalCount: number;
   /** 数据源信息列表。 */
   DatasourceSet: DatasourceBaseInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3586,7 +3586,7 @@ declare interface DescribeDataSourceListRequest {
 declare interface DescribeDataSourceListResponse {
   /** 数据源列表 */
   Data: DataSourceInfoPage | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3600,7 +3600,7 @@ declare interface DescribeDataSourceWithoutInfoRequest {
 declare interface DescribeDataSourceWithoutInfoResponse {
   /** 1 */
   Data: DataSourceInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3614,7 +3614,7 @@ declare interface DescribeDataTypesRequest {
 declare interface DescribeDataTypesResponse {
   /** 字段类型列表。 */
   TypeInfoSet: Label[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3624,7 +3624,7 @@ declare interface DescribeDatabaseInfoListRequest {
 }
 
 declare interface DescribeDatabaseInfoListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3636,7 +3636,7 @@ declare interface DescribeDatasourceRequest {
 declare interface DescribeDatasourceResponse {
   /** 数据源对象 */
   Data: DataSourceInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3656,7 +3656,7 @@ declare interface DescribeDependTasksNewRequest {
 declare interface DescribeDependTasksNewResponse {
   /** 画布任务和链接信息 */
   Data: CanvasInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3672,7 +3672,7 @@ declare interface DescribeDimensionScoreRequest {
 declare interface DescribeDimensionScoreResponse {
   /** 维度评分 */
   Data: DimensionScore | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3686,7 +3686,7 @@ declare interface DescribeExecStrategyRequest {
 declare interface DescribeExecStrategyResponse {
   /** 规则组执行策略 */
   Data: RuleGroupExecStrategy | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3706,7 +3706,7 @@ declare interface DescribeFolderListRequest {
 declare interface DescribeFolderListResponse {
   /** 无 */
   Data: DescribeFolderListData | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3726,7 +3726,7 @@ declare interface DescribeFolderWorkflowListRequest {
 declare interface DescribeFolderWorkflowListResponse {
   /** 无 */
   Data: DescribeFolderWorkflowListData | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3738,7 +3738,7 @@ declare interface DescribeFunctionKindsResponse {
   Kinds: FunctionTypeOrKind[] | null;
   /** 无 */
   ErrorMessage: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3750,7 +3750,7 @@ declare interface DescribeFunctionTypesResponse {
   Types: FunctionTypeOrKind[] | null;
   /** 无 */
   ErrorMessage: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3788,7 +3788,7 @@ declare interface DescribeInLongAgentListResponse {
   TotalCount: number;
   /** 总页数 */
   TotalPage: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3802,7 +3802,7 @@ declare interface DescribeInLongAgentTaskListRequest {
 declare interface DescribeInLongAgentTaskListResponse {
   /** 采集器关联的集成任务列表 */
   Items: InLongAgentTask[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3814,7 +3814,7 @@ declare interface DescribeInLongAgentVpcListRequest {
 declare interface DescribeInLongAgentVpcListResponse {
   /** VPC列表 */
   VpcList: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3848,7 +3848,7 @@ declare interface DescribeInLongTkeClusterListResponse {
   TotalCount: number;
   /** 总页数 */
   TotalPage: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3862,7 +3862,7 @@ declare interface DescribeInstanceLastLogRequest {
 declare interface DescribeInstanceLastLogResponse {
   /** 日志 */
   Data: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3894,7 +3894,7 @@ declare interface DescribeInstanceListRequest {
 declare interface DescribeInstanceListResponse {
   /** 结果 */
   Data: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3908,7 +3908,7 @@ declare interface DescribeInstanceLogListRequest {
 declare interface DescribeInstanceLogListResponse {
   /** 日志列表 */
   Data: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3926,7 +3926,7 @@ declare interface DescribeInstanceLogRequest {
 declare interface DescribeInstanceLogResponse {
   /** 返回结果 */
   Data: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3942,7 +3942,7 @@ declare interface DescribeInstanceLogsRequest {
 declare interface DescribeInstanceLogsResponse {
   /** 返回日志列表 */
   Data: InstanceLog[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3960,7 +3960,7 @@ declare interface DescribeInstancesRequest {
 declare interface DescribeInstancesResponse {
   /** Json 结果 */
   Data: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3978,7 +3978,7 @@ declare interface DescribeIntegrationNodeResponse {
   NodeInfo: IntegrationNodeInfo | null;
   /** 上游节点是否已经修改。true 已修改，需要提示；false 没有修改 */
   SourceCheckFlag: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3996,7 +3996,7 @@ declare interface DescribeIntegrationStatisticsAgentStatusRequest {
 declare interface DescribeIntegrationStatisticsAgentStatusResponse {
   /** 统计结果 */
   StatusData: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4014,7 +4014,7 @@ declare interface DescribeIntegrationStatisticsInstanceTrendRequest {
 declare interface DescribeIntegrationStatisticsInstanceTrendResponse {
   /** 统计结果 */
   TrendsData: IntegrationStatisticsTrendResult[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4030,7 +4030,7 @@ declare interface DescribeIntegrationStatisticsRecordsTrendRequest {
 declare interface DescribeIntegrationStatisticsRecordsTrendResponse {
   /** 统计结果 */
   TrendsData: IntegrationStatisticsTrendResult[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4068,7 +4068,7 @@ declare interface DescribeIntegrationStatisticsResponse {
   IncreaseAlarmEvent: number | null;
   /** 告警事件统计 */
   AlarmEvent: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4086,7 +4086,7 @@ declare interface DescribeIntegrationStatisticsTaskStatusRequest {
 declare interface DescribeIntegrationStatisticsTaskStatusResponse {
   /** 统计结果 */
   StatusData: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4104,7 +4104,7 @@ declare interface DescribeIntegrationStatisticsTaskStatusTrendRequest {
 declare interface DescribeIntegrationStatisticsTaskStatusTrendResponse {
   /** 统计结果 */
   TrendsData: IntegrationStatisticsTrendResult[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4120,7 +4120,7 @@ declare interface DescribeIntegrationTaskRequest {
 declare interface DescribeIntegrationTaskResponse {
   /** 任务信息 */
   TaskInfo: IntegrationTaskInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4146,7 +4146,7 @@ declare interface DescribeIntegrationTasksRequest {
 declare interface DescribeIntegrationTasksResponse {
   /** 任务列表 */
   TaskInfoSet: IntegrationTaskInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4168,7 +4168,7 @@ declare interface DescribeIntegrationVersionNodesInfoResponse {
   Mappings: IntegrationNodeMapping[] | null;
   /** 任务id */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4180,7 +4180,7 @@ declare interface DescribeKafkaTopicInfoRequest {
 }
 
 declare interface DescribeKafkaTopicInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4200,7 +4200,7 @@ declare interface DescribeMonitorsByPageRequest {
 declare interface DescribeMonitorsByPageResponse {
   /** 分页查询结果 */
   Data: RuleGroupMonitorPage | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4210,7 +4210,7 @@ declare interface DescribeOfflineTaskTokenRequest {
 declare interface DescribeOfflineTaskTokenResponse {
   /** 长连接临时token */
   Token: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4230,7 +4230,7 @@ declare interface DescribeOrganizationalFunctionsResponse {
   Content: OrganizationalFunction[] | null;
   /** 无 */
   ErrorMessage: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4248,7 +4248,7 @@ declare interface DescribeProdTasksRequest {
 declare interface DescribeProdTasksResponse {
   /** 生产调度任务列表 */
   Data: ProdSchedulerTask[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4270,7 +4270,7 @@ declare interface DescribeProjectRequest {
 }
 
 declare interface DescribeProjectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4286,7 +4286,7 @@ declare interface DescribeQualityScoreRequest {
 declare interface DescribeQualityScoreResponse {
   /** 质量评分 */
   Data: QualityScore | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4304,7 +4304,7 @@ declare interface DescribeQualityScoreTrendRequest {
 declare interface DescribeQualityScoreTrendResponse {
   /** 质量评分趋势视图 */
   Data: QualityScoreTrend | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4318,7 +4318,7 @@ declare interface DescribeRealTimeTaskInstanceNodeInfoRequest {
 declare interface DescribeRealTimeTaskInstanceNodeInfoResponse {
   /** 实时任务实例节点相关信息 */
   RealTimeTaskInstanceNodeInfo: RealTimeTaskInstanceNodeInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4348,7 +4348,7 @@ declare interface DescribeRealTimeTaskMetricOverviewResponse {
   BeginRunTime: string;
   /** 目前运行到的时间 */
   EndRunTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4370,7 +4370,7 @@ declare interface DescribeRealTimeTaskSpeedResponse {
   RecordsSpeedList: RecordsSpeed[];
   /** 同步速度字节/s列表 */
   BytesSpeedList: BytesSpeed[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4392,7 +4392,7 @@ declare interface DescribeRelatedInstancesRequest {
 declare interface DescribeRelatedInstancesResponse {
   /** 无 */
   Data: DescribeTaskInstancesData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4412,7 +4412,7 @@ declare interface DescribeResourceManagePathTreesRequest {
 declare interface DescribeResourceManagePathTreesResponse {
   /** 响应数据 */
   Data: ResourcePathTree[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4428,7 +4428,7 @@ declare interface DescribeRuleDataSourcesRequest {
 declare interface DescribeRuleDataSourcesResponse {
   /** 数据源列表 */
   Data: DatabaseInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4444,7 +4444,7 @@ declare interface DescribeRuleDimStatRequest {
 declare interface DescribeRuleDimStatResponse {
   /** 结果 */
   Data: RuleDimStat;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4458,7 +4458,7 @@ declare interface DescribeRuleExecDetailRequest {
 declare interface DescribeRuleExecDetailResponse {
   /** 规则执行结果详情 */
   Data: RuleExecResultDetail | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4472,7 +4472,7 @@ declare interface DescribeRuleExecExportResultRequest {
 declare interface DescribeRuleExecExportResultResponse {
   /** 导出结果 */
   Data: RuleExecExportResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4486,7 +4486,7 @@ declare interface DescribeRuleExecHistoryRequest {
 declare interface DescribeRuleExecHistoryResponse {
   /** 规则执行结果列表 */
   Data: RuleExecResult[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4502,7 +4502,7 @@ declare interface DescribeRuleExecLogRequest {
 declare interface DescribeRuleExecLogResponse {
   /** 规则执行日志 */
   Data: RuleExecLog | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4518,7 +4518,7 @@ declare interface DescribeRuleExecResultsByPageRequest {
 declare interface DescribeRuleExecResultsByPageResponse {
   /** results */
   Data: RuleExecResultPage | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4532,7 +4532,7 @@ declare interface DescribeRuleExecResultsRequest {
 declare interface DescribeRuleExecResultsResponse {
   /** 规则执行结果列表 */
   Data: RuleExecResultPage | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4548,7 +4548,7 @@ declare interface DescribeRuleExecStatRequest {
 declare interface DescribeRuleExecStatResponse {
   /** 结果 */
   Data: RuleExecStat;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4568,7 +4568,7 @@ declare interface DescribeRuleGroupExecResultsByPageRequest {
 declare interface DescribeRuleGroupExecResultsByPageResponse {
   /** 规则组执行结果列表 */
   Data: RuleGroupExecResultPage | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4588,7 +4588,7 @@ declare interface DescribeRuleGroupExecResultsByPageWithoutAuthRequest {
 declare interface DescribeRuleGroupExecResultsByPageWithoutAuthResponse {
   /** 规则组执行结果列表 */
   Data: RuleGroupExecResultPage | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4608,7 +4608,7 @@ declare interface DescribeRuleGroupRequest {
 declare interface DescribeRuleGroupResponse {
   /** 数据质量规则组详情 */
   Data: RuleGroup | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4622,7 +4622,7 @@ declare interface DescribeRuleGroupSubscriptionRequest {
 declare interface DescribeRuleGroupSubscriptionResponse {
   /** 规则组订阅信息 */
   Data?: RuleGroupSubscribe | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4634,7 +4634,7 @@ declare interface DescribeRuleGroupTableRequest {
 declare interface DescribeRuleGroupTableResponse {
   /** 数据 */
   Data: RuleGroupTable | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4654,7 +4654,7 @@ declare interface DescribeRuleGroupsByPageRequest {
 declare interface DescribeRuleGroupsByPageResponse {
   /** 规则组列表 */
   Data: RuleGroupPage | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4672,7 +4672,7 @@ declare interface DescribeRuleHistoryByPageRequest {
 declare interface DescribeRuleHistoryByPageResponse {
   /** 规则组操作历史列表 */
   Data: RuleHistoryPage | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4686,7 +4686,7 @@ declare interface DescribeRuleRequest {
 declare interface DescribeRuleResponse {
   /** 规则详情 */
   Data: Rule | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4706,7 +4706,7 @@ declare interface DescribeRuleTablesByPageRequest {
 declare interface DescribeRuleTablesByPageResponse {
   /** 表列表 */
   Data: RuleGroupPage | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4720,7 +4720,7 @@ declare interface DescribeRuleTemplateRequest {
 declare interface DescribeRuleTemplateResponse {
   /** 模板详情 */
   Data: RuleTemplate | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4740,7 +4740,7 @@ declare interface DescribeRuleTemplatesByPageRequest {
 declare interface DescribeRuleTemplatesByPageResponse {
   /** 结果 */
   Data: RuleTemplatePage;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4758,7 +4758,7 @@ declare interface DescribeRuleTemplatesRequest {
 declare interface DescribeRuleTemplatesResponse {
   /** 规则模版列表 */
   Data: RuleTemplate[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4778,7 +4778,7 @@ declare interface DescribeRulesByPageRequest {
 declare interface DescribeRulesByPageResponse {
   /** 规则质量列表 */
   Data: RulePage | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4792,7 +4792,7 @@ declare interface DescribeRulesRequest {
 declare interface DescribeRulesResponse {
   /** 规则列表 */
   Data: Rule[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4806,7 +4806,7 @@ declare interface DescribeStandardRuleDetailInfoListRequest {
 declare interface DescribeStandardRuleDetailInfoListResponse {
   /** 返回值 */
   StandardRuleDetailList: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4836,7 +4836,7 @@ declare interface DescribeStreamTaskLogListResponse {
   ListOver: boolean | null;
   /** 日志集合 */
   LogContentList: LogContentInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4852,7 +4852,7 @@ declare interface DescribeTableInfoListRequest {
 declare interface DescribeTableInfoListResponse {
   /** 表信息 */
   TableInfo: TableInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4876,7 +4876,7 @@ declare interface DescribeTableQualityDetailsRequest {
 declare interface DescribeTableQualityDetailsResponse {
   /** 表质量分详情结果 */
   Data: TableQualityDetailPage | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4898,7 +4898,7 @@ declare interface DescribeTableSchemaInfoRequest {
 declare interface DescribeTableSchemaInfoResponse {
   /** 123 */
   SchemaInfoList: SchemaDetail[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4916,7 +4916,7 @@ declare interface DescribeTableScoreTrendRequest {
 declare interface DescribeTableScoreTrendResponse {
   /** 表得分趋势 */
   Data: QualityScoreTrend | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4942,7 +4942,7 @@ declare interface DescribeTaskAlarmRegulationsResponse {
   TaskAlarmInfos: TaskAlarmInfo[] | null;
   /** 总记录数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4958,7 +4958,7 @@ declare interface DescribeTaskDetailRequest {
 declare interface DescribeTaskDetailResponse {
   /** 任务详情1 */
   Data: TaskInfoData | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4980,7 +4980,7 @@ declare interface DescribeTaskInstanceReportDetailResponse {
   ReadNode: InstanceReportReadNode;
   /** 任务实例写入节点运行指标 */
   WriteNode: InstanceReportWriteNode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4998,7 +4998,7 @@ declare interface DescribeTaskInstanceRequest {
 declare interface DescribeTaskInstanceResponse {
   /** 任务实例详情 */
   TaskInstanceDetail: TaskInstanceDetail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5038,7 +5038,7 @@ declare interface DescribeTaskInstancesRequest {
 declare interface DescribeTaskInstancesResponse {
   /** 无 */
   Data: DescribeTaskInstancesData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5054,7 +5054,7 @@ declare interface DescribeTaskLockStatusRequest {
 declare interface DescribeTaskLockStatusResponse {
   /** 任务锁状态信息 */
   TaskLockStatus: TaskLockStatus;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5090,7 +5090,7 @@ declare interface DescribeTaskReportDetailListResponse {
   TotalPage: number;
   /** 任务运行指标 */
   Items: TaskReportDetail[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5116,7 +5116,7 @@ declare interface DescribeTaskReportResponse {
   TotalWriteBytes: number;
   /** 总脏数据条数 */
   TotalErrorRecords: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5130,7 +5130,7 @@ declare interface DescribeTaskScriptRequest {
 declare interface DescribeTaskScriptResponse {
   /** 任务脚本内容 */
   Data: TaskScriptContent | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5148,7 +5148,7 @@ declare interface DescribeTasksByPageRequest {
 declare interface DescribeTasksByPageResponse {
   /** 无1 */
   Data: TaskInfoDataPage | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5162,7 +5162,7 @@ declare interface DescribeTemplateDimCountRequest {
 declare interface DescribeTemplateDimCountResponse {
   /** 维度统计结果 */
   Data: DimensionCount[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5180,7 +5180,7 @@ declare interface DescribeTemplateHistoryRequest {
 declare interface DescribeTemplateHistoryResponse {
   /** 分页记录 */
   Data: RuleTemplateHistoryPage | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5196,7 +5196,7 @@ declare interface DescribeTopTableStatRequest {
 declare interface DescribeTopTableStatResponse {
   /** 结果 */
   Data: TopTableStat;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5212,7 +5212,7 @@ declare interface DescribeTrendStatRequest {
 declare interface DescribeTrendStatResponse {
   /** 结果 */
   Data: RuleExecDateStat[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5238,7 +5238,7 @@ declare interface DryRunDIOfflineTaskResponse {
   TaskId: string;
   /** 任务实例唯一key */
   TaskInstanceKey: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5252,7 +5252,7 @@ declare interface ForceSucInstancesRequest {
 declare interface ForceSucInstancesResponse {
   /** 返回实例批量终止结果 */
   Data: OperateResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5264,7 +5264,7 @@ declare interface FreezeTasksByMultiWorkflowRequest {
 declare interface FreezeTasksByMultiWorkflowResponse {
   /** 操作结果 */
   Data: OperateResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5278,7 +5278,7 @@ declare interface FreezeTasksRequest {
 declare interface FreezeTasksResponse {
   /** 操作结果 */
   Data: OperateResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5308,7 +5308,7 @@ declare interface GenHiveTableDDLSqlRequest {
 declare interface GenHiveTableDDLSqlResponse {
   /** 生成的ddl语句 */
   DDLSql: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5322,7 +5322,7 @@ declare interface GetIntegrationNodeColumnSchemaRequest {
 declare interface GetIntegrationNodeColumnSchemaResponse {
   /** 字段列表 */
   Schemas: IntegrationNodeSchema[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5342,7 +5342,7 @@ declare interface GetOfflineDIInstanceListResponse {
   Total: number;
   /** 实例详情 */
   List: OfflineInstance[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5362,7 +5362,7 @@ declare interface GetOfflineInstanceListResponse {
   Total: number;
   /** 实例详情 */
   List: OfflineInstance[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5376,7 +5376,7 @@ declare interface KillInstancesRequest {
 declare interface KillInstancesResponse {
   /** 返回实例批量终止结果 */
   Data: OperateResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5390,7 +5390,7 @@ declare interface LockIntegrationTaskRequest {
 declare interface LockIntegrationTaskResponse {
   /** 操作成功与否标识 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5412,7 +5412,7 @@ declare interface MakeUpTasksNewRequest {
 declare interface MakeUpTasksNewResponse {
   /** 返回批量操作成功个数、失败个数、操作总数 */
   Data: BatchOperateResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5430,7 +5430,7 @@ declare interface MakeUpWorkflowNewRequest {
 declare interface MakeUpWorkflowNewResponse {
   /** 返回补录成功或失败的任务数 */
   Data: BatchOperateResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5476,7 +5476,7 @@ declare interface ModifyDataSourceRequest {
 declare interface ModifyDataSourceResponse {
   /** 是否成功 */
   Data: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5492,7 +5492,7 @@ declare interface ModifyDimensionWeightRequest {
 declare interface ModifyDimensionWeightResponse {
   /** 更新权重是否成功 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5534,7 +5534,7 @@ declare interface ModifyExecStrategyRequest {
 declare interface ModifyExecStrategyResponse {
   /** 规则组ID */
   Data: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5552,7 +5552,7 @@ declare interface ModifyFolderRequest {
 declare interface ModifyFolderResponse {
   /** true代表成功，false代表失败 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5572,7 +5572,7 @@ declare interface ModifyIntegrationNodeResponse {
   Id: string;
   /** 任务id */
   TaskId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5588,7 +5588,7 @@ declare interface ModifyIntegrationTaskRequest {
 declare interface ModifyIntegrationTaskResponse {
   /** 任务id */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5604,7 +5604,7 @@ declare interface ModifyMonitorStatusRequest {
 declare interface ModifyMonitorStatusResponse {
   /** 监控状态修改成功 */
   Data: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5630,7 +5630,7 @@ declare interface ModifyRuleGroupSubscriptionRequest {
 declare interface ModifyRuleGroupSubscriptionResponse {
   /** 规则组ID */
   Data?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5684,7 +5684,7 @@ declare interface ModifyRuleRequest {
 declare interface ModifyRuleResponse {
   /** 是否更新成功 */
   Data: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5716,7 +5716,7 @@ declare interface ModifyRuleTemplateRequest {
 declare interface ModifyRuleTemplateResponse {
   /** 修改成功 */
   Data: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5732,7 +5732,7 @@ declare interface ModifyTaskAlarmRegularRequest {
 declare interface ModifyTaskAlarmRegularResponse {
   /** 判断是否修改成功 */
   Data: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5800,7 +5800,7 @@ declare interface ModifyTaskInfoRequest {
 declare interface ModifyTaskInfoResponse {
   /** 执行结果 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5822,7 +5822,7 @@ declare interface ModifyTaskLinksRequest {
 declare interface ModifyTaskLinksResponse {
   /** 成功或者失败 */
   Data: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5840,7 +5840,7 @@ declare interface ModifyTaskNameRequest {
 declare interface ModifyTaskNameResponse {
   /** 结果 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5858,7 +5858,7 @@ declare interface ModifyTaskScriptRequest {
 declare interface ModifyTaskScriptResponse {
   /** 详情 */
   Data: CommonContent | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5890,7 +5890,7 @@ declare interface ModifyWorkflowInfoRequest {
 declare interface ModifyWorkflowInfoResponse {
   /** true代表成功，false代表失败 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5928,7 +5928,7 @@ declare interface ModifyWorkflowScheduleRequest {
 declare interface ModifyWorkflowScheduleResponse {
   /** 执行结果 */
   Data: BatchResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5948,7 +5948,7 @@ declare interface RegisterEventListenerRequest {
 declare interface RegisterEventListenerResponse {
   /** 成功或者失败 */
   Data: BatchReturn | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5978,7 +5978,7 @@ declare interface RegisterEventRequest {
 declare interface RegisterEventResponse {
   /** 成功或者失败 */
   Data: BatchReturn | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6002,7 +6002,7 @@ declare interface RerunInstancesRequest {
 declare interface RerunInstancesResponse {
   /** 返回实例批量终止结果 */
   Data: OperateResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6014,7 +6014,7 @@ declare interface RestartInLongAgentRequest {
 }
 
 declare interface RestartInLongAgentResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6028,7 +6028,7 @@ declare interface ResumeIntegrationTaskRequest {
 declare interface ResumeIntegrationTaskResponse {
   /** 操作成功与否标识 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6044,7 +6044,7 @@ declare interface RobAndLockIntegrationTaskRequest {
 declare interface RobAndLockIntegrationTaskResponse {
   /** 抢锁状态 */
   RobLockState: RobLockState;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6058,7 +6058,7 @@ declare interface RunTaskRequest {
 declare interface RunTaskResponse {
   /** 运行成功或者失败 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6090,7 +6090,7 @@ declare interface SaveCustomFunctionResponse {
   FunctionId: string | null;
   /** 无 */
   ErrorMessage: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6104,7 +6104,7 @@ declare interface SetTaskAlarmNewRequest {
 declare interface SetTaskAlarmNewResponse {
   /** 返回批量操作成功个数、失败个数、操作总数 */
   Data: BatchOperateResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6118,7 +6118,7 @@ declare interface StartIntegrationTaskRequest {
 declare interface StartIntegrationTaskResponse {
   /** 操作成功与否标识 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6132,7 +6132,7 @@ declare interface StopIntegrationTaskRequest {
 declare interface StopIntegrationTaskResponse {
   /** 操作成功与否标识 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6152,7 +6152,7 @@ declare interface SubmitCustomFunctionResponse {
   FunctionId: string | null;
   /** 无 */
   ErrorMessage: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6170,7 +6170,7 @@ declare interface SubmitTaskRequest {
 declare interface SubmitTaskResponse {
   /** 成功或者失败 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6188,7 +6188,7 @@ declare interface SubmitWorkflowRequest {
 declare interface SubmitWorkflowResponse {
   /** 执行结果 */
   Data: SubmitWorkflow;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6202,7 +6202,7 @@ declare interface SuspendIntegrationTaskRequest {
 declare interface SuspendIntegrationTaskResponse {
   /** 操作成功与否标识 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6226,7 +6226,7 @@ declare interface TaskLogRequest {
 declare interface TaskLogResponse {
   /** 详细日志 */
   LogContentList: LogContent[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6244,7 +6244,7 @@ declare interface TriggerEventRequest {
 declare interface TriggerEventResponse {
   /** 成功或者失败 */
   Data: BatchReturn | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6258,7 +6258,7 @@ declare interface UnlockIntegrationTaskRequest {
 declare interface UnlockIntegrationTaskResponse {
   /** 操作成功与否标识 */
   Data: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6274,402 +6274,402 @@ declare interface UpdateInLongAgentRequest {
 }
 
 declare interface UpdateInLongAgentResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Wedata 数据开发治理平台 WeData} */
 declare interface Wedata {
   (): Versions;
-  /** {@link BatchCreateIntegrationTaskAlarms 批量创建任务告警规则}({@link BatchCreateIntegrationTaskAlarmsRequest 请求参数}): {@link BatchCreateIntegrationTaskAlarmsResponse 返回参数} */
+  /** 批量创建任务告警规则 {@link BatchCreateIntegrationTaskAlarmsRequest} {@link BatchCreateIntegrationTaskAlarmsResponse} */
   BatchCreateIntegrationTaskAlarms(data: BatchCreateIntegrationTaskAlarmsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateIntegrationTaskAlarmsResponse>;
-  /** {@link BatchDeleteIntegrationTasks 批量删除集成任务}({@link BatchDeleteIntegrationTasksRequest 请求参数}): {@link BatchDeleteIntegrationTasksResponse 返回参数} */
+  /** 批量删除集成任务 {@link BatchDeleteIntegrationTasksRequest} {@link BatchDeleteIntegrationTasksResponse} */
   BatchDeleteIntegrationTasks(data: BatchDeleteIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteIntegrationTasksResponse>;
-  /** {@link BatchDeleteTasksNew 批量删除任务【Beta版本】}({@link BatchDeleteTasksNewRequest 请求参数}): {@link BatchDeleteTasksNewResponse 返回参数} */
+  /** 批量删除任务【Beta版本】 {@link BatchDeleteTasksNewRequest} {@link BatchDeleteTasksNewResponse} */
   BatchDeleteTasksNew(data: BatchDeleteTasksNewRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteTasksNewResponse>;
-  /** {@link BatchForceSuccessIntegrationTaskInstances 批量置成功集成任务实例}({@link BatchForceSuccessIntegrationTaskInstancesRequest 请求参数}): {@link BatchForceSuccessIntegrationTaskInstancesResponse 返回参数} */
+  /** 批量置成功集成任务实例 {@link BatchForceSuccessIntegrationTaskInstancesRequest} {@link BatchForceSuccessIntegrationTaskInstancesResponse} */
   BatchForceSuccessIntegrationTaskInstances(data: BatchForceSuccessIntegrationTaskInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<BatchForceSuccessIntegrationTaskInstancesResponse>;
-  /** {@link BatchKillIntegrationTaskInstances 批量终止集成任务实例}({@link BatchKillIntegrationTaskInstancesRequest 请求参数}): {@link BatchKillIntegrationTaskInstancesResponse 返回参数} */
+  /** 批量终止集成任务实例 {@link BatchKillIntegrationTaskInstancesRequest} {@link BatchKillIntegrationTaskInstancesResponse} */
   BatchKillIntegrationTaskInstances(data: BatchKillIntegrationTaskInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<BatchKillIntegrationTaskInstancesResponse>;
-  /** {@link BatchMakeUpIntegrationTasks 批量补数据}({@link BatchMakeUpIntegrationTasksRequest 请求参数}): {@link BatchMakeUpIntegrationTasksResponse 返回参数} */
+  /** 批量补数据 {@link BatchMakeUpIntegrationTasksRequest} {@link BatchMakeUpIntegrationTasksResponse} */
   BatchMakeUpIntegrationTasks(data: BatchMakeUpIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<BatchMakeUpIntegrationTasksResponse>;
-  /** {@link BatchModifyOwnersNew 批量修改任务责任人【Beta版本】}({@link BatchModifyOwnersNewRequest 请求参数}): {@link BatchModifyOwnersNewResponse 返回参数} */
+  /** 批量修改任务责任人【Beta版本】 {@link BatchModifyOwnersNewRequest} {@link BatchModifyOwnersNewResponse} */
   BatchModifyOwnersNew(data: BatchModifyOwnersNewRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyOwnersNewResponse>;
-  /** {@link BatchRerunIntegrationTaskInstances 批量重跑集成任务实例}({@link BatchRerunIntegrationTaskInstancesRequest 请求参数}): {@link BatchRerunIntegrationTaskInstancesResponse 返回参数} */
+  /** 批量重跑集成任务实例 {@link BatchRerunIntegrationTaskInstancesRequest} {@link BatchRerunIntegrationTaskInstancesResponse} */
   BatchRerunIntegrationTaskInstances(data: BatchRerunIntegrationTaskInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<BatchRerunIntegrationTaskInstancesResponse>;
-  /** {@link BatchResumeIntegrationTasks 批量继续执行集成任务}({@link BatchResumeIntegrationTasksRequest 请求参数}): {@link BatchResumeIntegrationTasksResponse 返回参数} */
+  /** 批量继续执行集成任务 {@link BatchResumeIntegrationTasksRequest} {@link BatchResumeIntegrationTasksResponse} */
   BatchResumeIntegrationTasks(data: BatchResumeIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<BatchResumeIntegrationTasksResponse>;
-  /** {@link BatchStartIntegrationTasks 批量运行集成任务}({@link BatchStartIntegrationTasksRequest 请求参数}): {@link BatchStartIntegrationTasksResponse 返回参数} */
+  /** 批量运行集成任务 {@link BatchStartIntegrationTasksRequest} {@link BatchStartIntegrationTasksResponse} */
   BatchStartIntegrationTasks(data: BatchStartIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<BatchStartIntegrationTasksResponse>;
-  /** {@link BatchStopIntegrationTasks 批量停止集成任务}({@link BatchStopIntegrationTasksRequest 请求参数}): {@link BatchStopIntegrationTasksResponse 返回参数} */
+  /** 批量停止集成任务 {@link BatchStopIntegrationTasksRequest} {@link BatchStopIntegrationTasksResponse} */
   BatchStopIntegrationTasks(data: BatchStopIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<BatchStopIntegrationTasksResponse>;
-  /** {@link BatchStopTasksNew 批量停止任务【Beta版本】}({@link BatchStopTasksNewRequest 请求参数}): {@link BatchStopTasksNewResponse 返回参数} */
+  /** 批量停止任务【Beta版本】 {@link BatchStopTasksNewRequest} {@link BatchStopTasksNewResponse} */
   BatchStopTasksNew(data: BatchStopTasksNewRequest, config?: AxiosRequestConfig): AxiosPromise<BatchStopTasksNewResponse>;
-  /** {@link BatchSuspendIntegrationTasks 批量暂停集成任务}({@link BatchSuspendIntegrationTasksRequest 请求参数}): {@link BatchSuspendIntegrationTasksResponse 返回参数} */
+  /** 批量暂停集成任务 {@link BatchSuspendIntegrationTasksRequest} {@link BatchSuspendIntegrationTasksResponse} */
   BatchSuspendIntegrationTasks(data: BatchSuspendIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<BatchSuspendIntegrationTasksResponse>;
-  /** {@link BatchUpdateIntegrationTasks 批量更新集成任务}({@link BatchUpdateIntegrationTasksRequest 请求参数}): {@link BatchUpdateIntegrationTasksResponse 返回参数} */
+  /** 批量更新集成任务 {@link BatchUpdateIntegrationTasksRequest} {@link BatchUpdateIntegrationTasksResponse} */
   BatchUpdateIntegrationTasks(data: BatchUpdateIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<BatchUpdateIntegrationTasksResponse>;
-  /** {@link CheckAlarmRegularNameExist 判断告警规则重名}({@link CheckAlarmRegularNameExistRequest 请求参数}): {@link CheckAlarmRegularNameExistResponse 返回参数} */
+  /** 判断告警规则重名 {@link CheckAlarmRegularNameExistRequest} {@link CheckAlarmRegularNameExistResponse} */
   CheckAlarmRegularNameExist(data: CheckAlarmRegularNameExistRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAlarmRegularNameExistResponse>;
-  /** {@link CheckDuplicateRuleName 检查规则名称是否重复}({@link CheckDuplicateRuleNameRequest 请求参数}): {@link CheckDuplicateRuleNameResponse 返回参数} */
+  /** 检查规则名称是否重复 {@link CheckDuplicateRuleNameRequest} {@link CheckDuplicateRuleNameResponse} */
   CheckDuplicateRuleName(data?: CheckDuplicateRuleNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDuplicateRuleNameResponse>;
-  /** {@link CheckDuplicateTemplateName 检查规则模板名称是否重复}({@link CheckDuplicateTemplateNameRequest 请求参数}): {@link CheckDuplicateTemplateNameResponse 返回参数} */
+  /** 检查规则模板名称是否重复 {@link CheckDuplicateTemplateNameRequest} {@link CheckDuplicateTemplateNameResponse} */
   CheckDuplicateTemplateName(data?: CheckDuplicateTemplateNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDuplicateTemplateNameResponse>;
-  /** {@link CheckIntegrationNodeNameExists 判断集成节点名称是否存在}({@link CheckIntegrationNodeNameExistsRequest 请求参数}): {@link CheckIntegrationNodeNameExistsResponse 返回参数} */
+  /** 判断集成节点名称是否存在 {@link CheckIntegrationNodeNameExistsRequest} {@link CheckIntegrationNodeNameExistsResponse} */
   CheckIntegrationNodeNameExists(data: CheckIntegrationNodeNameExistsRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIntegrationNodeNameExistsResponse>;
-  /** {@link CheckIntegrationTaskNameExists 判断集成任务名称是否存在}({@link CheckIntegrationTaskNameExistsRequest 请求参数}): {@link CheckIntegrationTaskNameExistsResponse 返回参数} */
+  /** 判断集成任务名称是否存在 {@link CheckIntegrationTaskNameExistsRequest} {@link CheckIntegrationTaskNameExistsResponse} */
   CheckIntegrationTaskNameExists(data: CheckIntegrationTaskNameExistsRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIntegrationTaskNameExistsResponse>;
-  /** {@link CheckTaskNameExist 离线任务重名校验}({@link CheckTaskNameExistRequest 请求参数}): {@link CheckTaskNameExistResponse 返回参数} */
+  /** 离线任务重名校验 {@link CheckTaskNameExistRequest} {@link CheckTaskNameExistResponse} */
   CheckTaskNameExist(data: CheckTaskNameExistRequest, config?: AxiosRequestConfig): AxiosPromise<CheckTaskNameExistResponse>;
-  /** {@link CommitExportTask 提交数据导出任务}({@link CommitExportTaskRequest 请求参数}): {@link CommitExportTaskResponse 返回参数} */
+  /** 提交数据导出任务 {@link CommitExportTaskRequest} {@link CommitExportTaskResponse} */
   CommitExportTask(data?: CommitExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CommitExportTaskResponse>;
-  /** {@link CommitIntegrationTask 提交集成任务}({@link CommitIntegrationTaskRequest 请求参数}): {@link CommitIntegrationTaskResponse 返回参数} */
+  /** 提交集成任务 {@link CommitIntegrationTaskRequest} {@link CommitIntegrationTaskResponse} */
   CommitIntegrationTask(data: CommitIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CommitIntegrationTaskResponse>;
-  /** {@link CommitRuleGroupExecResult 规则检测结果上报}({@link CommitRuleGroupExecResultRequest 请求参数}): {@link CommitRuleGroupExecResultResponse 返回参数} */
+  /** 规则检测结果上报 {@link CommitRuleGroupExecResultRequest} {@link CommitRuleGroupExecResultResponse} */
   CommitRuleGroupExecResult(data: CommitRuleGroupExecResultRequest, config?: AxiosRequestConfig): AxiosPromise<CommitRuleGroupExecResultResponse>;
-  /** {@link CommitRuleGroupTask 提交规则组运行任务接口}({@link CommitRuleGroupTaskRequest 请求参数}): {@link CommitRuleGroupTaskResponse 返回参数} */
+  /** 提交规则组运行任务接口 {@link CommitRuleGroupTaskRequest} {@link CommitRuleGroupTaskResponse} */
   CommitRuleGroupTask(data?: CommitRuleGroupTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CommitRuleGroupTaskResponse>;
-  /** {@link CreateCustomFunction 创建用户自定义函数}({@link CreateCustomFunctionRequest 请求参数}): {@link CreateCustomFunctionResponse 返回参数} */
+  /** 创建用户自定义函数 {@link CreateCustomFunctionRequest} {@link CreateCustomFunctionResponse} */
   CreateCustomFunction(data: CreateCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomFunctionResponse>;
-  /** {@link CreateDataSource 数据源管理-创建数据源【Beta版本】}({@link CreateDataSourceRequest 请求参数}): {@link CreateDataSourceResponse 返回参数} */
+  /** 数据源管理-创建数据源【Beta版本】 {@link CreateDataSourceRequest} {@link CreateDataSourceResponse} */
   CreateDataSource(data: CreateDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataSourceResponse>;
-  /** {@link CreateFolder 创建文件夹【Beta版本】}({@link CreateFolderRequest 请求参数}): {@link CreateFolderResponse 返回参数} */
+  /** 创建文件夹【Beta版本】 {@link CreateFolderRequest} {@link CreateFolderResponse} */
   CreateFolder(data: CreateFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFolderResponse>;
-  /** {@link CreateHiveTable 建hive表}({@link CreateHiveTableRequest 请求参数}): {@link CreateHiveTableResponse 返回参数} */
+  /** 建hive表 {@link CreateHiveTableRequest} {@link CreateHiveTableResponse} */
   CreateHiveTable(data: CreateHiveTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHiveTableResponse>;
-  /** {@link CreateHiveTableByDDL 创建hive表}({@link CreateHiveTableByDDLRequest 请求参数}): {@link CreateHiveTableByDDLResponse 返回参数} */
+  /** 创建hive表 {@link CreateHiveTableByDDLRequest} {@link CreateHiveTableByDDLResponse} */
   CreateHiveTableByDDL(data: CreateHiveTableByDDLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHiveTableByDDLResponse>;
-  /** {@link CreateInLongAgent 注册采集器}({@link CreateInLongAgentRequest 请求参数}): {@link CreateInLongAgentResponse 返回参数} */
+  /** 注册采集器 {@link CreateInLongAgentRequest} {@link CreateInLongAgentResponse} */
   CreateInLongAgent(data: CreateInLongAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInLongAgentResponse>;
-  /** {@link CreateIntegrationNode 创建集成节点}({@link CreateIntegrationNodeRequest 请求参数}): {@link CreateIntegrationNodeResponse 返回参数} */
+  /** 创建集成节点 {@link CreateIntegrationNodeRequest} {@link CreateIntegrationNodeResponse} */
   CreateIntegrationNode(data: CreateIntegrationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationNodeResponse>;
-  /** {@link CreateIntegrationTask 创建集成任务}({@link CreateIntegrationTaskRequest 请求参数}): {@link CreateIntegrationTaskResponse 返回参数} */
+  /** 创建集成任务 {@link CreateIntegrationTaskRequest} {@link CreateIntegrationTaskResponse} */
   CreateIntegrationTask(data: CreateIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationTaskResponse>;
-  /** {@link CreateOfflineTask 创建离线任务}({@link CreateOfflineTaskRequest 请求参数}): {@link CreateOfflineTaskResponse 返回参数} */
+  /** 创建离线任务 {@link CreateOfflineTaskRequest} {@link CreateOfflineTaskResponse} */
   CreateOfflineTask(data: CreateOfflineTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOfflineTaskResponse>;
-  /** {@link CreateOrUpdateResource 资源管理将cos资源绑定到wedata}({@link CreateOrUpdateResourceRequest 请求参数}): {@link CreateOrUpdateResourceResponse 返回参数} */
+  /** 资源管理将cos资源绑定到wedata {@link CreateOrUpdateResourceRequest} {@link CreateOrUpdateResourceResponse} */
   CreateOrUpdateResource(data?: CreateOrUpdateResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrUpdateResourceResponse>;
-  /** {@link CreateResourcePath 资源管理创建文件路径}({@link CreateResourcePathRequest 请求参数}): {@link CreateResourcePathResponse 返回参数} */
+  /** 资源管理创建文件路径 {@link CreateResourcePathRequest} {@link CreateResourcePathResponse} */
   CreateResourcePath(data: CreateResourcePathRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourcePathResponse>;
-  /** {@link CreateRule 创建质量规则接口}({@link CreateRuleRequest 请求参数}): {@link CreateRuleResponse 返回参数} */
+  /** 创建质量规则接口 {@link CreateRuleRequest} {@link CreateRuleResponse} */
   CreateRule(data?: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
-  /** {@link CreateRuleTemplate 创建规则模版}({@link CreateRuleTemplateRequest 请求参数}): {@link CreateRuleTemplateResponse 返回参数} */
+  /** 创建规则模版 {@link CreateRuleTemplateRequest} {@link CreateRuleTemplateResponse} */
   CreateRuleTemplate(data?: CreateRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleTemplateResponse>;
-  /** {@link CreateTask 创建任务【Beta版本】}({@link CreateTaskRequest 请求参数}): {@link CreateTaskResponse 返回参数} */
+  /** 创建任务【Beta版本】 {@link CreateTaskRequest} {@link CreateTaskResponse} */
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
-  /** {@link CreateTaskAlarmRegular 创建任务告警规则}({@link CreateTaskAlarmRegularRequest 请求参数}): {@link CreateTaskAlarmRegularResponse 返回参数} */
+  /** 创建任务告警规则 {@link CreateTaskAlarmRegularRequest} {@link CreateTaskAlarmRegularResponse} */
   CreateTaskAlarmRegular(data: CreateTaskAlarmRegularRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskAlarmRegularResponse>;
-  /** {@link CreateWorkflow 创建工作流【Beta版本】}({@link CreateWorkflowRequest 请求参数}): {@link CreateWorkflowResponse 返回参数} */
+  /** 创建工作流【Beta版本】 {@link CreateWorkflowRequest} {@link CreateWorkflowResponse} */
   CreateWorkflow(data: CreateWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowResponse>;
-  /** {@link DeleteCustomFunction 删除用户自定义函数}({@link DeleteCustomFunctionRequest 请求参数}): {@link DeleteCustomFunctionResponse 返回参数} */
+  /** 删除用户自定义函数 {@link DeleteCustomFunctionRequest} {@link DeleteCustomFunctionResponse} */
   DeleteCustomFunction(data: DeleteCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomFunctionResponse>;
-  /** {@link DeleteDataSources 数据源管理-删除数据源【Beta版本】}({@link DeleteDataSourcesRequest 请求参数}): {@link DeleteDataSourcesResponse 返回参数} */
+  /** 数据源管理-删除数据源【Beta版本】 {@link DeleteDataSourcesRequest} {@link DeleteDataSourcesResponse} */
   DeleteDataSources(data: DeleteDataSourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataSourcesResponse>;
-  /** {@link DeleteFolder 删除文件夹【Beta版本】}({@link DeleteFolderRequest 请求参数}): {@link DeleteFolderResponse 返回参数} */
+  /** 删除文件夹【Beta版本】 {@link DeleteFolderRequest} {@link DeleteFolderResponse} */
   DeleteFolder(data: DeleteFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFolderResponse>;
-  /** {@link DeleteInLongAgent 删除采集器}({@link DeleteInLongAgentRequest 请求参数}): {@link DeleteInLongAgentResponse 返回参数} */
+  /** 删除采集器 {@link DeleteInLongAgentRequest} {@link DeleteInLongAgentResponse} */
   DeleteInLongAgent(data: DeleteInLongAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInLongAgentResponse>;
-  /** {@link DeleteIntegrationNode 删除集成节点}({@link DeleteIntegrationNodeRequest 请求参数}): {@link DeleteIntegrationNodeResponse 返回参数} */
+  /** 删除集成节点 {@link DeleteIntegrationNodeRequest} {@link DeleteIntegrationNodeResponse} */
   DeleteIntegrationNode(data: DeleteIntegrationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationNodeResponse>;
-  /** {@link DeleteIntegrationTask 删除集成任务}({@link DeleteIntegrationTaskRequest 请求参数}): {@link DeleteIntegrationTaskResponse 返回参数} */
+  /** 删除集成任务 {@link DeleteIntegrationTaskRequest} {@link DeleteIntegrationTaskResponse} */
   DeleteIntegrationTask(data: DeleteIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationTaskResponse>;
-  /** {@link DeleteOfflineTask 删除任务}({@link DeleteOfflineTaskRequest 请求参数}): {@link DeleteOfflineTaskResponse 返回参数} */
+  /** 删除任务 {@link DeleteOfflineTaskRequest} {@link DeleteOfflineTaskResponse} */
   DeleteOfflineTask(data: DeleteOfflineTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOfflineTaskResponse>;
-  /** {@link DeleteResource 删除资源}({@link DeleteResourceRequest 请求参数}): {@link DeleteResourceResponse 返回参数} */
+  /** 删除资源 {@link DeleteResourceRequest} {@link DeleteResourceResponse} */
   DeleteResource(data?: DeleteResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceResponse>;
-  /** {@link DeleteRule 删除质量规则接口}({@link DeleteRuleRequest 请求参数}): {@link DeleteRuleResponse 返回参数} */
+  /** 删除质量规则接口 {@link DeleteRuleRequest} {@link DeleteRuleResponse} */
   DeleteRule(data?: DeleteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleResponse>;
-  /** {@link DeleteRuleTemplate 删除规则模版}({@link DeleteRuleTemplateRequest 请求参数}): {@link DeleteRuleTemplateResponse 返回参数} */
+  /** 删除规则模版 {@link DeleteRuleTemplateRequest} {@link DeleteRuleTemplateResponse} */
   DeleteRuleTemplate(data?: DeleteRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleTemplateResponse>;
-  /** {@link DeleteTaskAlarmRegular 删除任务告警规则}({@link DeleteTaskAlarmRegularRequest 请求参数}): {@link DeleteTaskAlarmRegularResponse 返回参数} */
+  /** 删除任务告警规则 {@link DeleteTaskAlarmRegularRequest} {@link DeleteTaskAlarmRegularResponse} */
   DeleteTaskAlarmRegular(data: DeleteTaskAlarmRegularRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskAlarmRegularResponse>;
-  /** {@link DeleteWorkflowNew 删除工作流【Beta版本】}({@link DeleteWorkflowNewRequest 请求参数}): {@link DeleteWorkflowNewResponse 返回参数} */
+  /** 删除工作流【Beta版本】 {@link DeleteWorkflowNewRequest} {@link DeleteWorkflowNewResponse} */
   DeleteWorkflowNew(data: DeleteWorkflowNewRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkflowNewResponse>;
-  /** {@link DescribeAlarmEvents 告警事件列表}({@link DescribeAlarmEventsRequest 请求参数}): {@link DescribeAlarmEventsResponse 返回参数} */
+  /** 告警事件列表 {@link DescribeAlarmEventsRequest} {@link DescribeAlarmEventsResponse} */
   DescribeAlarmEvents(data: DescribeAlarmEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmEventsResponse>;
-  /** {@link DescribeAlarmReceiver 告警接收人详情}({@link DescribeAlarmReceiverRequest 请求参数}): {@link DescribeAlarmReceiverResponse 返回参数} */
+  /** 告警接收人详情 {@link DescribeAlarmReceiverRequest} {@link DescribeAlarmReceiverResponse} */
   DescribeAlarmReceiver(data: DescribeAlarmReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmReceiverResponse>;
-  /** {@link DescribeClusterNamespaceList 获取集群命名空间列表}({@link DescribeClusterNamespaceListRequest 请求参数}): {@link DescribeClusterNamespaceListResponse 返回参数} */
+  /** 获取集群命名空间列表 {@link DescribeClusterNamespaceListRequest} {@link DescribeClusterNamespaceListResponse} */
   DescribeClusterNamespaceList(data: DescribeClusterNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNamespaceListResponse>;
-  /** {@link DescribeDataBases 查询数据来源列表}({@link DescribeDataBasesRequest 请求参数}): {@link DescribeDataBasesResponse 返回参数} */
+  /** 查询数据来源列表 {@link DescribeDataBasesRequest} {@link DescribeDataBasesResponse} */
   DescribeDataBases(data?: DescribeDataBasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataBasesResponse>;
-  /** {@link DescribeDataCheckStat 数据质量数据监测情况接口}({@link DescribeDataCheckStatRequest 请求参数}): {@link DescribeDataCheckStatResponse 返回参数} */
+  /** 数据质量数据监测情况接口 {@link DescribeDataCheckStatRequest} {@link DescribeDataCheckStatResponse} */
   DescribeDataCheckStat(data: DescribeDataCheckStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataCheckStatResponse>;
-  /** {@link DescribeDataObjects 查询规则组数据对象列表}({@link DescribeDataObjectsRequest 请求参数}): {@link DescribeDataObjectsResponse 返回参数} */
+  /** 查询规则组数据对象列表 {@link DescribeDataObjectsRequest} {@link DescribeDataObjectsResponse} */
   DescribeDataObjects(data?: DescribeDataObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataObjectsResponse>;
-  /** {@link DescribeDataSourceInfoList 获取数据源信息}({@link DescribeDataSourceInfoListRequest 请求参数}): {@link DescribeDataSourceInfoListResponse 返回参数} */
+  /** 获取数据源信息 {@link DescribeDataSourceInfoListRequest} {@link DescribeDataSourceInfoListResponse} */
   DescribeDataSourceInfoList(data: DescribeDataSourceInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSourceInfoListResponse>;
-  /** {@link DescribeDataSourceList 数据源管理-查询数据源分页列表【Beta版本】}({@link DescribeDataSourceListRequest 请求参数}): {@link DescribeDataSourceListResponse 返回参数} */
+  /** 数据源管理-查询数据源分页列表【Beta版本】 {@link DescribeDataSourceListRequest} {@link DescribeDataSourceListResponse} */
   DescribeDataSourceList(data?: DescribeDataSourceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSourceListResponse>;
-  /** {@link DescribeDataSourceWithoutInfo 查看数据源列表不带额外信息【Beta版本】}({@link DescribeDataSourceWithoutInfoRequest 请求参数}): {@link DescribeDataSourceWithoutInfoResponse 返回参数} */
+  /** 查看数据源列表不带额外信息【Beta版本】 {@link DescribeDataSourceWithoutInfoRequest} {@link DescribeDataSourceWithoutInfoResponse} */
   DescribeDataSourceWithoutInfo(data?: DescribeDataSourceWithoutInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSourceWithoutInfoResponse>;
-  /** {@link DescribeDataTypes 获取字段类型列表}({@link DescribeDataTypesRequest 请求参数}): {@link DescribeDataTypesResponse 返回参数} */
+  /** 获取字段类型列表 {@link DescribeDataTypesRequest} {@link DescribeDataTypesResponse} */
   DescribeDataTypes(data: DescribeDataTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataTypesResponse>;
-  /** {@link DescribeDatabaseInfoList 获取数据库信息}({@link DescribeDatabaseInfoListRequest 请求参数}): {@link DescribeDatabaseInfoListResponse 返回参数} */
+  /** 获取数据库信息 {@link DescribeDatabaseInfoListRequest} {@link DescribeDatabaseInfoListResponse} */
   DescribeDatabaseInfoList(data: DescribeDatabaseInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseInfoListResponse>;
-  /** {@link DescribeDatasource 数据源管理-数据源详情【Beta版本】}({@link DescribeDatasourceRequest 请求参数}): {@link DescribeDatasourceResponse 返回参数} */
+  /** 数据源管理-数据源详情【Beta版本】 {@link DescribeDatasourceRequest} {@link DescribeDatasourceResponse} */
   DescribeDatasource(data: DescribeDatasourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasourceResponse>;
-  /** {@link DescribeDependTasksNew 任务运维-根据层级查找上-下游任务节点【Beta版本】}({@link DescribeDependTasksNewRequest 请求参数}): {@link DescribeDependTasksNewResponse 返回参数} */
+  /** 任务运维-根据层级查找上-下游任务节点【Beta版本】 {@link DescribeDependTasksNewRequest} {@link DescribeDependTasksNewResponse} */
   DescribeDependTasksNew(data: DescribeDependTasksNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDependTasksNewResponse>;
-  /** {@link DescribeDimensionScore 查询维度评分}({@link DescribeDimensionScoreRequest 请求参数}): {@link DescribeDimensionScoreResponse 返回参数} */
+  /** 查询维度评分 {@link DescribeDimensionScoreRequest} {@link DescribeDimensionScoreResponse} */
   DescribeDimensionScore(data: DescribeDimensionScoreRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDimensionScoreResponse>;
-  /** {@link DescribeExecStrategy 查询规则组执行策略}({@link DescribeExecStrategyRequest 请求参数}): {@link DescribeExecStrategyResponse 返回参数} */
+  /** 查询规则组执行策略 {@link DescribeExecStrategyRequest} {@link DescribeExecStrategyResponse} */
   DescribeExecStrategy(data?: DescribeExecStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExecStrategyResponse>;
-  /** {@link DescribeFolderList 拉取文件夹目录【Beta版本】}({@link DescribeFolderListRequest 请求参数}): {@link DescribeFolderListResponse 返回参数} */
+  /** 拉取文件夹目录【Beta版本】 {@link DescribeFolderListRequest} {@link DescribeFolderListResponse} */
   DescribeFolderList(data: DescribeFolderListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFolderListResponse>;
-  /** {@link DescribeFolderWorkflowList 拉取文件夹下的工作流【Beta版本】}({@link DescribeFolderWorkflowListRequest 请求参数}): {@link DescribeFolderWorkflowListResponse 返回参数} */
+  /** 拉取文件夹下的工作流【Beta版本】 {@link DescribeFolderWorkflowListRequest} {@link DescribeFolderWorkflowListResponse} */
   DescribeFolderWorkflowList(data: DescribeFolderWorkflowListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFolderWorkflowListResponse>;
-  /** {@link DescribeFunctionKinds 查询函数分类}({@link DescribeFunctionKindsRequest 请求参数}): {@link DescribeFunctionKindsResponse 返回参数} */
+  /** 查询函数分类 {@link DescribeFunctionKindsRequest} {@link DescribeFunctionKindsResponse} */
   DescribeFunctionKinds(data?: DescribeFunctionKindsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionKindsResponse>;
-  /** {@link DescribeFunctionTypes 查询函数类型}({@link DescribeFunctionTypesRequest 请求参数}): {@link DescribeFunctionTypesResponse 返回参数} */
+  /** 查询函数类型 {@link DescribeFunctionTypesRequest} {@link DescribeFunctionTypesResponse} */
   DescribeFunctionTypes(data?: DescribeFunctionTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionTypesResponse>;
-  /** {@link DescribeInLongAgentList 获取采集器列表}({@link DescribeInLongAgentListRequest 请求参数}): {@link DescribeInLongAgentListResponse 返回参数} */
+  /** 获取采集器列表 {@link DescribeInLongAgentListRequest} {@link DescribeInLongAgentListResponse} */
   DescribeInLongAgentList(data: DescribeInLongAgentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInLongAgentListResponse>;
-  /** {@link DescribeInLongAgentTaskList 查询采集器关联的任务列表}({@link DescribeInLongAgentTaskListRequest 请求参数}): {@link DescribeInLongAgentTaskListResponse 返回参数} */
+  /** 查询采集器关联的任务列表 {@link DescribeInLongAgentTaskListRequest} {@link DescribeInLongAgentTaskListResponse} */
   DescribeInLongAgentTaskList(data: DescribeInLongAgentTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInLongAgentTaskListResponse>;
-  /** {@link DescribeInLongAgentVpcList 获取采集器所在集群的VPC列表}({@link DescribeInLongAgentVpcListRequest 请求参数}): {@link DescribeInLongAgentVpcListResponse 返回参数} */
+  /** 获取采集器所在集群的VPC列表 {@link DescribeInLongAgentVpcListRequest} {@link DescribeInLongAgentVpcListResponse} */
   DescribeInLongAgentVpcList(data: DescribeInLongAgentVpcListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInLongAgentVpcListResponse>;
-  /** {@link DescribeInLongTkeClusterList 获取TKE集群列表}({@link DescribeInLongTkeClusterListRequest 请求参数}): {@link DescribeInLongTkeClusterListResponse 返回参数} */
+  /** 获取TKE集群列表 {@link DescribeInLongTkeClusterListRequest} {@link DescribeInLongTkeClusterListResponse} */
   DescribeInLongTkeClusterList(data: DescribeInLongTkeClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInLongTkeClusterListResponse>;
-  /** {@link DescribeInstanceLastLog 日志获取详情页面}({@link DescribeInstanceLastLogRequest 请求参数}): {@link DescribeInstanceLastLogResponse 返回参数} */
+  /** 日志获取详情页面 {@link DescribeInstanceLastLogRequest} {@link DescribeInstanceLastLogResponse} */
   DescribeInstanceLastLog(data: DescribeInstanceLastLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLastLogResponse>;
-  /** {@link DescribeInstanceList 获取实例列表}({@link DescribeInstanceListRequest 请求参数}): {@link DescribeInstanceListResponse 返回参数} */
+  /** 获取实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
   DescribeInstanceList(data: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
-  /** {@link DescribeInstanceLog 获取实例运行日志}({@link DescribeInstanceLogRequest 请求参数}): {@link DescribeInstanceLogResponse 返回参数} */
+  /** 获取实例运行日志 {@link DescribeInstanceLogRequest} {@link DescribeInstanceLogResponse} */
   DescribeInstanceLog(data: DescribeInstanceLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLogResponse>;
-  /** {@link DescribeInstanceLogList 获取离线任务实例运行日志列表}({@link DescribeInstanceLogListRequest 请求参数}): {@link DescribeInstanceLogListResponse 返回参数} */
+  /** 获取离线任务实例运行日志列表 {@link DescribeInstanceLogListRequest} {@link DescribeInstanceLogListResponse} */
   DescribeInstanceLogList(data: DescribeInstanceLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLogListResponse>;
-  /** {@link DescribeInstanceLogs 获取实例日志列表【Beta版本】}({@link DescribeInstanceLogsRequest 请求参数}): {@link DescribeInstanceLogsResponse 返回参数} */
+  /** 获取实例日志列表【Beta版本】 {@link DescribeInstanceLogsRequest} {@link DescribeInstanceLogsResponse} */
   DescribeInstanceLogs(data: DescribeInstanceLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLogsResponse>;
-  /** {@link DescribeInstances 数据质量-查询实例列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
+  /** 数据质量-查询实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** {@link DescribeIntegrationNode 查询集成节点}({@link DescribeIntegrationNodeRequest 请求参数}): {@link DescribeIntegrationNodeResponse 返回参数} */
+  /** 查询集成节点 {@link DescribeIntegrationNodeRequest} {@link DescribeIntegrationNodeResponse} */
   DescribeIntegrationNode(data: DescribeIntegrationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationNodeResponse>;
-  /** {@link DescribeIntegrationStatistics 数据集成大屏概览}({@link DescribeIntegrationStatisticsRequest 请求参数}): {@link DescribeIntegrationStatisticsResponse 返回参数} */
+  /** 数据集成大屏概览 {@link DescribeIntegrationStatisticsRequest} {@link DescribeIntegrationStatisticsResponse} */
   DescribeIntegrationStatistics(data: DescribeIntegrationStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationStatisticsResponse>;
-  /** {@link DescribeIntegrationStatisticsAgentStatus 数据集成大屏采集器状态分布统计}({@link DescribeIntegrationStatisticsAgentStatusRequest 请求参数}): {@link DescribeIntegrationStatisticsAgentStatusResponse 返回参数} */
+  /** 数据集成大屏采集器状态分布统计 {@link DescribeIntegrationStatisticsAgentStatusRequest} {@link DescribeIntegrationStatisticsAgentStatusResponse} */
   DescribeIntegrationStatisticsAgentStatus(data: DescribeIntegrationStatisticsAgentStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationStatisticsAgentStatusResponse>;
-  /** {@link DescribeIntegrationStatisticsInstanceTrend 数据集成大屏实例状态统计趋势}({@link DescribeIntegrationStatisticsInstanceTrendRequest 请求参数}): {@link DescribeIntegrationStatisticsInstanceTrendResponse 返回参数} */
+  /** 数据集成大屏实例状态统计趋势 {@link DescribeIntegrationStatisticsInstanceTrendRequest} {@link DescribeIntegrationStatisticsInstanceTrendResponse} */
   DescribeIntegrationStatisticsInstanceTrend(data: DescribeIntegrationStatisticsInstanceTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationStatisticsInstanceTrendResponse>;
-  /** {@link DescribeIntegrationStatisticsRecordsTrend 数据集成大屏同步条数统计趋势}({@link DescribeIntegrationStatisticsRecordsTrendRequest 请求参数}): {@link DescribeIntegrationStatisticsRecordsTrendResponse 返回参数} */
+  /** 数据集成大屏同步条数统计趋势 {@link DescribeIntegrationStatisticsRecordsTrendRequest} {@link DescribeIntegrationStatisticsRecordsTrendResponse} */
   DescribeIntegrationStatisticsRecordsTrend(data: DescribeIntegrationStatisticsRecordsTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationStatisticsRecordsTrendResponse>;
-  /** {@link DescribeIntegrationStatisticsTaskStatus 数据集成大屏任务状态分布统计}({@link DescribeIntegrationStatisticsTaskStatusRequest 请求参数}): {@link DescribeIntegrationStatisticsTaskStatusResponse 返回参数} */
+  /** 数据集成大屏任务状态分布统计 {@link DescribeIntegrationStatisticsTaskStatusRequest} {@link DescribeIntegrationStatisticsTaskStatusResponse} */
   DescribeIntegrationStatisticsTaskStatus(data: DescribeIntegrationStatisticsTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationStatisticsTaskStatusResponse>;
-  /** {@link DescribeIntegrationStatisticsTaskStatusTrend 数据集成大屏任务状态统计趋势}({@link DescribeIntegrationStatisticsTaskStatusTrendRequest 请求参数}): {@link DescribeIntegrationStatisticsTaskStatusTrendResponse 返回参数} */
+  /** 数据集成大屏任务状态统计趋势 {@link DescribeIntegrationStatisticsTaskStatusTrendRequest} {@link DescribeIntegrationStatisticsTaskStatusTrendResponse} */
   DescribeIntegrationStatisticsTaskStatusTrend(data: DescribeIntegrationStatisticsTaskStatusTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationStatisticsTaskStatusTrendResponse>;
-  /** {@link DescribeIntegrationTask 查询集成任务}({@link DescribeIntegrationTaskRequest 请求参数}): {@link DescribeIntegrationTaskResponse 返回参数} */
+  /** 查询集成任务 {@link DescribeIntegrationTaskRequest} {@link DescribeIntegrationTaskResponse} */
   DescribeIntegrationTask(data: DescribeIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationTaskResponse>;
-  /** {@link DescribeIntegrationTasks 查询集成任务列表}({@link DescribeIntegrationTasksRequest 请求参数}): {@link DescribeIntegrationTasksResponse 返回参数} */
+  /** 查询集成任务列表 {@link DescribeIntegrationTasksRequest} {@link DescribeIntegrationTasksResponse} */
   DescribeIntegrationTasks(data: DescribeIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationTasksResponse>;
-  /** {@link DescribeIntegrationVersionNodesInfo 查询集成任务版本节点信息}({@link DescribeIntegrationVersionNodesInfoRequest 请求参数}): {@link DescribeIntegrationVersionNodesInfoResponse 返回参数} */
+  /** 查询集成任务版本节点信息 {@link DescribeIntegrationVersionNodesInfoRequest} {@link DescribeIntegrationVersionNodesInfoResponse} */
   DescribeIntegrationVersionNodesInfo(data: DescribeIntegrationVersionNodesInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationVersionNodesInfoResponse>;
-  /** {@link DescribeKafkaTopicInfo 获取kafka的topic信息}({@link DescribeKafkaTopicInfoRequest 请求参数}): {@link DescribeKafkaTopicInfoResponse 返回参数} */
+  /** 获取kafka的topic信息 {@link DescribeKafkaTopicInfoRequest} {@link DescribeKafkaTopicInfoResponse} */
   DescribeKafkaTopicInfo(data: DescribeKafkaTopicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaTopicInfoResponse>;
-  /** {@link DescribeMonitorsByPage 分页查询质量监控组}({@link DescribeMonitorsByPageRequest 请求参数}): {@link DescribeMonitorsByPageResponse 返回参数} */
+  /** 分页查询质量监控组 {@link DescribeMonitorsByPageRequest} {@link DescribeMonitorsByPageResponse} */
   DescribeMonitorsByPage(data?: DescribeMonitorsByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorsByPageResponse>;
-  /** {@link DescribeOfflineTaskToken 获取离线任务长连接Token}({@link DescribeOfflineTaskTokenRequest 请求参数}): {@link DescribeOfflineTaskTokenResponse 返回参数} */
+  /** 获取离线任务长连接Token {@link DescribeOfflineTaskTokenRequest} {@link DescribeOfflineTaskTokenResponse} */
   DescribeOfflineTaskToken(data?: DescribeOfflineTaskTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineTaskTokenResponse>;
-  /** {@link DescribeOrganizationalFunctions 查询全量函数（层级化）接口}({@link DescribeOrganizationalFunctionsRequest 请求参数}): {@link DescribeOrganizationalFunctionsResponse 返回参数} */
+  /** 查询全量函数（层级化）接口 {@link DescribeOrganizationalFunctionsRequest} {@link DescribeOrganizationalFunctionsResponse} */
   DescribeOrganizationalFunctions(data: DescribeOrganizationalFunctionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationalFunctionsResponse>;
-  /** {@link DescribeProdTasks 获取生产调度任务列表}({@link DescribeProdTasksRequest 请求参数}): {@link DescribeProdTasksResponse 返回参数} */
+  /** 获取生产调度任务列表 {@link DescribeProdTasksRequest} {@link DescribeProdTasksResponse} */
   DescribeProdTasks(data?: DescribeProdTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProdTasksResponse>;
-  /** {@link DescribeProject 获取项目信息}({@link DescribeProjectRequest 请求参数}): {@link DescribeProjectResponse 返回参数} */
+  /** 获取项目信息 {@link DescribeProjectRequest} {@link DescribeProjectResponse} */
   DescribeProject(data?: DescribeProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectResponse>;
-  /** {@link DescribeQualityScore 查询质量评分}({@link DescribeQualityScoreRequest 请求参数}): {@link DescribeQualityScoreResponse 返回参数} */
+  /** 查询质量评分 {@link DescribeQualityScoreRequest} {@link DescribeQualityScoreResponse} */
   DescribeQualityScore(data: DescribeQualityScoreRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQualityScoreResponse>;
-  /** {@link DescribeQualityScoreTrend 查询质量分趋势}({@link DescribeQualityScoreTrendRequest 请求参数}): {@link DescribeQualityScoreTrendResponse 返回参数} */
+  /** 查询质量分趋势 {@link DescribeQualityScoreTrendRequest} {@link DescribeQualityScoreTrendResponse} */
   DescribeQualityScoreTrend(data: DescribeQualityScoreTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQualityScoreTrendResponse>;
-  /** {@link DescribeRealTimeTaskInstanceNodeInfo 查询实时任务实例节点信息}({@link DescribeRealTimeTaskInstanceNodeInfoRequest 请求参数}): {@link DescribeRealTimeTaskInstanceNodeInfoResponse 返回参数} */
+  /** 查询实时任务实例节点信息 {@link DescribeRealTimeTaskInstanceNodeInfoRequest} {@link DescribeRealTimeTaskInstanceNodeInfoResponse} */
   DescribeRealTimeTaskInstanceNodeInfo(data: DescribeRealTimeTaskInstanceNodeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealTimeTaskInstanceNodeInfoResponse>;
-  /** {@link DescribeRealTimeTaskMetricOverview 实时任务运行指标概览}({@link DescribeRealTimeTaskMetricOverviewRequest 请求参数}): {@link DescribeRealTimeTaskMetricOverviewResponse 返回参数} */
+  /** 实时任务运行指标概览 {@link DescribeRealTimeTaskMetricOverviewRequest} {@link DescribeRealTimeTaskMetricOverviewResponse} */
   DescribeRealTimeTaskMetricOverview(data: DescribeRealTimeTaskMetricOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealTimeTaskMetricOverviewResponse>;
-  /** {@link DescribeRealTimeTaskSpeed 实时任务同步速度趋势}({@link DescribeRealTimeTaskSpeedRequest 请求参数}): {@link DescribeRealTimeTaskSpeedResponse 返回参数} */
+  /** 实时任务同步速度趋势 {@link DescribeRealTimeTaskSpeedRequest} {@link DescribeRealTimeTaskSpeedResponse} */
   DescribeRealTimeTaskSpeed(data: DescribeRealTimeTaskSpeedRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealTimeTaskSpeedResponse>;
-  /** {@link DescribeRelatedInstances 查询任务实例的关联实例列表}({@link DescribeRelatedInstancesRequest 请求参数}): {@link DescribeRelatedInstancesResponse 返回参数} */
+  /** 查询任务实例的关联实例列表 {@link DescribeRelatedInstancesRequest} {@link DescribeRelatedInstancesResponse} */
   DescribeRelatedInstances(data: DescribeRelatedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelatedInstancesResponse>;
-  /** {@link DescribeResourceManagePathTrees 获取资源管理目录树}({@link DescribeResourceManagePathTreesRequest 请求参数}): {@link DescribeResourceManagePathTreesResponse 返回参数} */
+  /** 获取资源管理目录树 {@link DescribeResourceManagePathTreesRequest} {@link DescribeResourceManagePathTreesResponse} */
   DescribeResourceManagePathTrees(data?: DescribeResourceManagePathTreesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceManagePathTreesResponse>;
-  /** {@link DescribeRule 查询规则详情}({@link DescribeRuleRequest 请求参数}): {@link DescribeRuleResponse 返回参数} */
+  /** 查询规则详情 {@link DescribeRuleRequest} {@link DescribeRuleResponse} */
   DescribeRule(data?: DescribeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleResponse>;
-  /** {@link DescribeRuleDataSources 查询质量规则数据源}({@link DescribeRuleDataSourcesRequest 请求参数}): {@link DescribeRuleDataSourcesResponse 返回参数} */
+  /** 查询质量规则数据源 {@link DescribeRuleDataSourcesRequest} {@link DescribeRuleDataSourcesResponse} */
   DescribeRuleDataSources(data?: DescribeRuleDataSourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleDataSourcesResponse>;
-  /** {@link DescribeRuleDimStat 数据质量触发维度分布统计接口}({@link DescribeRuleDimStatRequest 请求参数}): {@link DescribeRuleDimStatResponse 返回参数} */
+  /** 数据质量触发维度分布统计接口 {@link DescribeRuleDimStatRequest} {@link DescribeRuleDimStatResponse} */
   DescribeRuleDimStat(data: DescribeRuleDimStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleDimStatResponse>;
-  /** {@link DescribeRuleExecDetail 查询规则执行结果详情}({@link DescribeRuleExecDetailRequest 请求参数}): {@link DescribeRuleExecDetailResponse 返回参数} */
+  /** 查询规则执行结果详情 {@link DescribeRuleExecDetailRequest} {@link DescribeRuleExecDetailResponse} */
   DescribeRuleExecDetail(data?: DescribeRuleExecDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleExecDetailResponse>;
-  /** {@link DescribeRuleExecExportResult 查询规则执行导出结果}({@link DescribeRuleExecExportResultRequest 请求参数}): {@link DescribeRuleExecExportResultResponse 返回参数} */
+  /** 查询规则执行导出结果 {@link DescribeRuleExecExportResultRequest} {@link DescribeRuleExecExportResultResponse} */
   DescribeRuleExecExportResult(data?: DescribeRuleExecExportResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleExecExportResultResponse>;
-  /** {@link DescribeRuleExecHistory 查询规则执行历史， 最近30条}({@link DescribeRuleExecHistoryRequest 请求参数}): {@link DescribeRuleExecHistoryResponse 返回参数} */
+  /** 查询规则执行历史， 最近30条 {@link DescribeRuleExecHistoryRequest} {@link DescribeRuleExecHistoryResponse} */
   DescribeRuleExecHistory(data?: DescribeRuleExecHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleExecHistoryResponse>;
-  /** {@link DescribeRuleExecLog 规则执行日志查询}({@link DescribeRuleExecLogRequest 请求参数}): {@link DescribeRuleExecLogResponse 返回参数} */
+  /** 规则执行日志查询 {@link DescribeRuleExecLogRequest} {@link DescribeRuleExecLogResponse} */
   DescribeRuleExecLog(data: DescribeRuleExecLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleExecLogResponse>;
-  /** {@link DescribeRuleExecResults 规则执行结果列表查询}({@link DescribeRuleExecResultsRequest 请求参数}): {@link DescribeRuleExecResultsResponse 返回参数} */
+  /** 规则执行结果列表查询 {@link DescribeRuleExecResultsRequest} {@link DescribeRuleExecResultsResponse} */
   DescribeRuleExecResults(data?: DescribeRuleExecResultsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleExecResultsResponse>;
-  /** {@link DescribeRuleExecResultsByPage 分页查询规则执行结果列表}({@link DescribeRuleExecResultsByPageRequest 请求参数}): {@link DescribeRuleExecResultsByPageResponse 返回参数} */
+  /** 分页查询规则执行结果列表 {@link DescribeRuleExecResultsByPageRequest} {@link DescribeRuleExecResultsByPageResponse} */
   DescribeRuleExecResultsByPage(data?: DescribeRuleExecResultsByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleExecResultsByPageResponse>;
-  /** {@link DescribeRuleExecStat 数据质量规则运行情况接口}({@link DescribeRuleExecStatRequest 请求参数}): {@link DescribeRuleExecStatResponse 返回参数} */
+  /** 数据质量规则运行情况接口 {@link DescribeRuleExecStatRequest} {@link DescribeRuleExecStatResponse} */
   DescribeRuleExecStat(data: DescribeRuleExecStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleExecStatResponse>;
-  /** {@link DescribeRuleGroup 查询规则组详情接口}({@link DescribeRuleGroupRequest 请求参数}): {@link DescribeRuleGroupResponse 返回参数} */
+  /** 查询规则组详情接口 {@link DescribeRuleGroupRequest} {@link DescribeRuleGroupResponse} */
   DescribeRuleGroup(data?: DescribeRuleGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleGroupResponse>;
-  /** {@link DescribeRuleGroupExecResultsByPage 规则组执行结果分页查询接口}({@link DescribeRuleGroupExecResultsByPageRequest 请求参数}): {@link DescribeRuleGroupExecResultsByPageResponse 返回参数} */
+  /** 规则组执行结果分页查询接口 {@link DescribeRuleGroupExecResultsByPageRequest} {@link DescribeRuleGroupExecResultsByPageResponse} */
   DescribeRuleGroupExecResultsByPage(data?: DescribeRuleGroupExecResultsByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleGroupExecResultsByPageResponse>;
-  /** {@link DescribeRuleGroupExecResultsByPageWithoutAuth 规则组执行结果分页查询接口不带鉴权}({@link DescribeRuleGroupExecResultsByPageWithoutAuthRequest 请求参数}): {@link DescribeRuleGroupExecResultsByPageWithoutAuthResponse 返回参数} */
+  /** 规则组执行结果分页查询接口不带鉴权 {@link DescribeRuleGroupExecResultsByPageWithoutAuthRequest} {@link DescribeRuleGroupExecResultsByPageWithoutAuthResponse} */
   DescribeRuleGroupExecResultsByPageWithoutAuth(data?: DescribeRuleGroupExecResultsByPageWithoutAuthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleGroupExecResultsByPageWithoutAuthResponse>;
-  /** {@link DescribeRuleGroupSubscription 查询规则组订阅信息}({@link DescribeRuleGroupSubscriptionRequest 请求参数}): {@link DescribeRuleGroupSubscriptionResponse 返回参数} */
+  /** 查询规则组订阅信息 {@link DescribeRuleGroupSubscriptionRequest} {@link DescribeRuleGroupSubscriptionResponse} */
   DescribeRuleGroupSubscription(data?: DescribeRuleGroupSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleGroupSubscriptionResponse>;
-  /** {@link DescribeRuleGroupTable 查询表绑定执行规则组信息}({@link DescribeRuleGroupTableRequest 请求参数}): {@link DescribeRuleGroupTableResponse 返回参数} */
+  /** 查询表绑定执行规则组信息 {@link DescribeRuleGroupTableRequest} {@link DescribeRuleGroupTableResponse} */
   DescribeRuleGroupTable(data: DescribeRuleGroupTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleGroupTableResponse>;
-  /** {@link DescribeRuleGroupsByPage 分页查询规则组接口}({@link DescribeRuleGroupsByPageRequest 请求参数}): {@link DescribeRuleGroupsByPageResponse 返回参数} */
+  /** 分页查询规则组接口 {@link DescribeRuleGroupsByPageRequest} {@link DescribeRuleGroupsByPageResponse} */
   DescribeRuleGroupsByPage(data?: DescribeRuleGroupsByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleGroupsByPageResponse>;
-  /** {@link DescribeRuleHistoryByPage 分页查询规则操作记录接口}({@link DescribeRuleHistoryByPageRequest 请求参数}): {@link DescribeRuleHistoryByPageResponse 返回参数} */
+  /** 分页查询规则操作记录接口 {@link DescribeRuleHistoryByPageRequest} {@link DescribeRuleHistoryByPageResponse} */
   DescribeRuleHistoryByPage(data?: DescribeRuleHistoryByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleHistoryByPageResponse>;
-  /** {@link DescribeRuleTablesByPage 获取表列表}({@link DescribeRuleTablesByPageRequest 请求参数}): {@link DescribeRuleTablesByPageResponse 返回参数} */
+  /** 获取表列表 {@link DescribeRuleTablesByPageRequest} {@link DescribeRuleTablesByPageResponse} */
   DescribeRuleTablesByPage(data?: DescribeRuleTablesByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleTablesByPageResponse>;
-  /** {@link DescribeRuleTemplate 查询模板详情}({@link DescribeRuleTemplateRequest 请求参数}): {@link DescribeRuleTemplateResponse 返回参数} */
+  /** 查询模板详情 {@link DescribeRuleTemplateRequest} {@link DescribeRuleTemplateResponse} */
   DescribeRuleTemplate(data?: DescribeRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleTemplateResponse>;
-  /** {@link DescribeRuleTemplates 查询规则模版列表}({@link DescribeRuleTemplatesRequest 请求参数}): {@link DescribeRuleTemplatesResponse 返回参数} */
+  /** 查询规则模版列表 {@link DescribeRuleTemplatesRequest} {@link DescribeRuleTemplatesResponse} */
   DescribeRuleTemplates(data?: DescribeRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleTemplatesResponse>;
-  /** {@link DescribeRuleTemplatesByPage 规则模版查询接口}({@link DescribeRuleTemplatesByPageRequest 请求参数}): {@link DescribeRuleTemplatesByPageResponse 返回参数} */
+  /** 规则模版查询接口 {@link DescribeRuleTemplatesByPageRequest} {@link DescribeRuleTemplatesByPageResponse} */
   DescribeRuleTemplatesByPage(data: DescribeRuleTemplatesByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleTemplatesByPageResponse>;
-  /** {@link DescribeRules 查询质量规则列表}({@link DescribeRulesRequest 请求参数}): {@link DescribeRulesResponse 返回参数} */
+  /** 查询质量规则列表 {@link DescribeRulesRequest} {@link DescribeRulesResponse} */
   DescribeRules(data?: DescribeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesResponse>;
-  /** {@link DescribeRulesByPage 分页查询质量规则}({@link DescribeRulesByPageRequest 请求参数}): {@link DescribeRulesByPageResponse 返回参数} */
+  /** 分页查询质量规则 {@link DescribeRulesByPageRequest} {@link DescribeRulesByPageResponse} */
   DescribeRulesByPage(data?: DescribeRulesByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesByPageResponse>;
-  /** {@link DescribeStandardRuleDetailInfoList 获取数据标准规则详情}({@link DescribeStandardRuleDetailInfoListRequest 请求参数}): {@link DescribeStandardRuleDetailInfoListResponse 返回参数} */
+  /** 获取数据标准规则详情 {@link DescribeStandardRuleDetailInfoListRequest} {@link DescribeStandardRuleDetailInfoListResponse} */
   DescribeStandardRuleDetailInfoList(data: DescribeStandardRuleDetailInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStandardRuleDetailInfoListResponse>;
-  /** {@link DescribeStreamTaskLogList 查询实时任务日志列表}({@link DescribeStreamTaskLogListRequest 请求参数}): {@link DescribeStreamTaskLogListResponse 返回参数} */
+  /** 查询实时任务日志列表 {@link DescribeStreamTaskLogListRequest} {@link DescribeStreamTaskLogListResponse} */
   DescribeStreamTaskLogList(data: DescribeStreamTaskLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamTaskLogListResponse>;
-  /** {@link DescribeTableInfoList 获取数据表信息}({@link DescribeTableInfoListRequest 请求参数}): {@link DescribeTableInfoListResponse 返回参数} */
+  /** 获取数据表信息 {@link DescribeTableInfoListRequest} {@link DescribeTableInfoListResponse} */
   DescribeTableInfoList(data: DescribeTableInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableInfoListResponse>;
-  /** {@link DescribeTableQualityDetails 查询表质量详情}({@link DescribeTableQualityDetailsRequest 请求参数}): {@link DescribeTableQualityDetailsResponse 返回参数} */
+  /** 查询表质量详情 {@link DescribeTableQualityDetailsRequest} {@link DescribeTableQualityDetailsResponse} */
   DescribeTableQualityDetails(data: DescribeTableQualityDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableQualityDetailsResponse>;
-  /** {@link DescribeTableSchemaInfo 获取表schema信息}({@link DescribeTableSchemaInfoRequest 请求参数}): {@link DescribeTableSchemaInfoResponse 返回参数} */
+  /** 获取表schema信息 {@link DescribeTableSchemaInfoRequest} {@link DescribeTableSchemaInfoResponse} */
   DescribeTableSchemaInfo(data: DescribeTableSchemaInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableSchemaInfoResponse>;
-  /** {@link DescribeTableScoreTrend 查询表得分趋势}({@link DescribeTableScoreTrendRequest 请求参数}): {@link DescribeTableScoreTrendResponse 返回参数} */
+  /** 查询表得分趋势 {@link DescribeTableScoreTrendRequest} {@link DescribeTableScoreTrendResponse} */
   DescribeTableScoreTrend(data: DescribeTableScoreTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableScoreTrendResponse>;
-  /** {@link DescribeTaskAlarmRegulations 查询任务告警规则列表}({@link DescribeTaskAlarmRegulationsRequest 请求参数}): {@link DescribeTaskAlarmRegulationsResponse 返回参数} */
+  /** 查询任务告警规则列表 {@link DescribeTaskAlarmRegulationsRequest} {@link DescribeTaskAlarmRegulationsResponse} */
   DescribeTaskAlarmRegulations(data: DescribeTaskAlarmRegulationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskAlarmRegulationsResponse>;
-  /** {@link DescribeTaskDetail 查询任务具体详情【Beta版本】}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
+  /** 查询任务具体详情【Beta版本】 {@link DescribeTaskDetailRequest} {@link DescribeTaskDetailResponse} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** {@link DescribeTaskInstance 离线任务实例详情}({@link DescribeTaskInstanceRequest 请求参数}): {@link DescribeTaskInstanceResponse 返回参数} */
+  /** 离线任务实例详情 {@link DescribeTaskInstanceRequest} {@link DescribeTaskInstanceResponse} */
   DescribeTaskInstance(data: DescribeTaskInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskInstanceResponse>;
-  /** {@link DescribeTaskInstanceReportDetail 离线任务实例统计明细}({@link DescribeTaskInstanceReportDetailRequest 请求参数}): {@link DescribeTaskInstanceReportDetailResponse 返回参数} */
+  /** 离线任务实例统计明细 {@link DescribeTaskInstanceReportDetailRequest} {@link DescribeTaskInstanceReportDetailResponse} */
   DescribeTaskInstanceReportDetail(data: DescribeTaskInstanceReportDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskInstanceReportDetailResponse>;
-  /** {@link DescribeTaskInstances 查询任务实例列表}({@link DescribeTaskInstancesRequest 请求参数}): {@link DescribeTaskInstancesResponse 返回参数} */
+  /** 查询任务实例列表 {@link DescribeTaskInstancesRequest} {@link DescribeTaskInstancesResponse} */
   DescribeTaskInstances(data: DescribeTaskInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskInstancesResponse>;
-  /** {@link DescribeTaskLockStatus 查看任务锁状态信息}({@link DescribeTaskLockStatusRequest 请求参数}): {@link DescribeTaskLockStatusResponse 返回参数} */
+  /** 查看任务锁状态信息 {@link DescribeTaskLockStatusRequest} {@link DescribeTaskLockStatusResponse} */
   DescribeTaskLockStatus(data: DescribeTaskLockStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLockStatusResponse>;
-  /** {@link DescribeTaskReport 离线任务周期统计总览}({@link DescribeTaskReportRequest 请求参数}): {@link DescribeTaskReportResponse 返回参数} */
+  /** 离线任务周期统计总览 {@link DescribeTaskReportRequest} {@link DescribeTaskReportResponse} */
   DescribeTaskReport(data: DescribeTaskReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskReportResponse>;
-  /** {@link DescribeTaskReportDetailList 离线任务周期统计明细}({@link DescribeTaskReportDetailListRequest 请求参数}): {@link DescribeTaskReportDetailListResponse 返回参数} */
+  /** 离线任务周期统计明细 {@link DescribeTaskReportDetailListRequest} {@link DescribeTaskReportDetailListResponse} */
   DescribeTaskReportDetailList(data: DescribeTaskReportDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskReportDetailListResponse>;
-  /** {@link DescribeTaskScript 查询任务脚本【Beta版本】}({@link DescribeTaskScriptRequest 请求参数}): {@link DescribeTaskScriptResponse 返回参数} */
+  /** 查询任务脚本【Beta版本】 {@link DescribeTaskScriptRequest} {@link DescribeTaskScriptResponse} */
   DescribeTaskScript(data: DescribeTaskScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskScriptResponse>;
-  /** {@link DescribeTasksByPage 根据工作流分页查询任务【Beta版本】}({@link DescribeTasksByPageRequest 请求参数}): {@link DescribeTasksByPageResponse 返回参数} */
+  /** 根据工作流分页查询任务【Beta版本】 {@link DescribeTasksByPageRequest} {@link DescribeTasksByPageResponse} */
   DescribeTasksByPage(data: DescribeTasksByPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksByPageResponse>;
-  /** {@link DescribeTemplateDimCount 查询规则模版维度分布情况}({@link DescribeTemplateDimCountRequest 请求参数}): {@link DescribeTemplateDimCountResponse 返回参数} */
+  /** 查询规则模版维度分布情况 {@link DescribeTemplateDimCountRequest} {@link DescribeTemplateDimCountResponse} */
   DescribeTemplateDimCount(data?: DescribeTemplateDimCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateDimCountResponse>;
-  /** {@link DescribeTemplateHistory 查询规则模版操作记录}({@link DescribeTemplateHistoryRequest 请求参数}): {@link DescribeTemplateHistoryResponse 返回参数} */
+  /** 查询规则模版操作记录 {@link DescribeTemplateHistoryRequest} {@link DescribeTemplateHistoryResponse} */
   DescribeTemplateHistory(data?: DescribeTemplateHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateHistoryResponse>;
-  /** {@link DescribeTopTableStat 数据质量表排行接口}({@link DescribeTopTableStatRequest 请求参数}): {@link DescribeTopTableStatResponse 返回参数} */
+  /** 数据质量表排行接口 {@link DescribeTopTableStatRequest} {@link DescribeTopTableStatResponse} */
   DescribeTopTableStat(data: DescribeTopTableStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopTableStatResponse>;
-  /** {@link DescribeTrendStat 数据质量概览页面趋势接口}({@link DescribeTrendStatRequest 请求参数}): {@link DescribeTrendStatResponse 返回参数} */
+  /** 数据质量概览页面趋势接口 {@link DescribeTrendStatRequest} {@link DescribeTrendStatResponse} */
   DescribeTrendStat(data: DescribeTrendStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrendStatResponse>;
-  /** {@link DryRunDIOfflineTask 调试运行集成任务}({@link DryRunDIOfflineTaskRequest 请求参数}): {@link DryRunDIOfflineTaskResponse 返回参数} */
+  /** 调试运行集成任务 {@link DryRunDIOfflineTaskRequest} {@link DryRunDIOfflineTaskResponse} */
   DryRunDIOfflineTask(data: DryRunDIOfflineTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DryRunDIOfflineTaskResponse>;
-  /** {@link ForceSucInstances 实例批量置成功【Beta版本】}({@link ForceSucInstancesRequest 请求参数}): {@link ForceSucInstancesResponse 返回参数} */
+  /** 实例批量置成功【Beta版本】 {@link ForceSucInstancesRequest} {@link ForceSucInstancesResponse} */
   ForceSucInstances(data: ForceSucInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ForceSucInstancesResponse>;
-  /** {@link FreezeTasks 批量冻结任务【Beta版本】}({@link FreezeTasksRequest 请求参数}): {@link FreezeTasksResponse 返回参数} */
+  /** 批量冻结任务【Beta版本】 {@link FreezeTasksRequest} {@link FreezeTasksResponse} */
   FreezeTasks(data: FreezeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<FreezeTasksResponse>;
-  /** {@link FreezeTasksByMultiWorkflow 基于多个工作流进行批量冻结任务操作【Beta版本】}({@link FreezeTasksByMultiWorkflowRequest 请求参数}): {@link FreezeTasksByMultiWorkflowResponse 返回参数} */
+  /** 基于多个工作流进行批量冻结任务操作【Beta版本】 {@link FreezeTasksByMultiWorkflowRequest} {@link FreezeTasksByMultiWorkflowResponse} */
   FreezeTasksByMultiWorkflow(data: FreezeTasksByMultiWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<FreezeTasksByMultiWorkflowResponse>;
-  /** {@link GenHiveTableDDLSql 生成建hive表的sql}({@link GenHiveTableDDLSqlRequest 请求参数}): {@link GenHiveTableDDLSqlResponse 返回参数} */
+  /** 生成建hive表的sql {@link GenHiveTableDDLSqlRequest} {@link GenHiveTableDDLSqlResponse} */
   GenHiveTableDDLSql(data: GenHiveTableDDLSqlRequest, config?: AxiosRequestConfig): AxiosPromise<GenHiveTableDDLSqlResponse>;
-  /** {@link GetIntegrationNodeColumnSchema 提取数据集成节点字段Schema}({@link GetIntegrationNodeColumnSchemaRequest 请求参数}): {@link GetIntegrationNodeColumnSchemaResponse 返回参数} */
+  /** 提取数据集成节点字段Schema {@link GetIntegrationNodeColumnSchemaRequest} {@link GetIntegrationNodeColumnSchemaResponse} */
   GetIntegrationNodeColumnSchema(data?: GetIntegrationNodeColumnSchemaRequest, config?: AxiosRequestConfig): AxiosPromise<GetIntegrationNodeColumnSchemaResponse>;
-  /** {@link GetOfflineDIInstanceList 获取离线任务实例列表(新)}({@link GetOfflineDIInstanceListRequest 请求参数}): {@link GetOfflineDIInstanceListResponse 返回参数} */
+  /** 获取离线任务实例列表(新) {@link GetOfflineDIInstanceListRequest} {@link GetOfflineDIInstanceListResponse} */
   GetOfflineDIInstanceList(data: GetOfflineDIInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetOfflineDIInstanceListResponse>;
-  /** {@link GetOfflineInstanceList 获取离线任务实例}({@link GetOfflineInstanceListRequest 请求参数}): {@link GetOfflineInstanceListResponse 返回参数} */
+  /** 获取离线任务实例 {@link GetOfflineInstanceListRequest} {@link GetOfflineInstanceListResponse} */
   GetOfflineInstanceList(data: GetOfflineInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetOfflineInstanceListResponse>;
-  /** {@link KillInstances 实例批量终止操作【Beta版本】}({@link KillInstancesRequest 请求参数}): {@link KillInstancesResponse 返回参数} */
+  /** 实例批量终止操作【Beta版本】 {@link KillInstancesRequest} {@link KillInstancesResponse} */
   KillInstances(data: KillInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<KillInstancesResponse>;
-  /** {@link LockIntegrationTask 锁定集成任务}({@link LockIntegrationTaskRequest 请求参数}): {@link LockIntegrationTaskResponse 返回参数} */
+  /** 锁定集成任务 {@link LockIntegrationTaskRequest} {@link LockIntegrationTaskResponse} */
   LockIntegrationTask(data: LockIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<LockIntegrationTaskResponse>;
-  /** {@link MakeUpTasksNew 批量补录任务【Beta版本】}({@link MakeUpTasksNewRequest 请求参数}): {@link MakeUpTasksNewResponse 返回参数} */
+  /** 批量补录任务【Beta版本】 {@link MakeUpTasksNewRequest} {@link MakeUpTasksNewResponse} */
   MakeUpTasksNew(data: MakeUpTasksNewRequest, config?: AxiosRequestConfig): AxiosPromise<MakeUpTasksNewResponse>;
-  /** {@link MakeUpWorkflowNew 工作流任务补录【Beta版本】}({@link MakeUpWorkflowNewRequest 请求参数}): {@link MakeUpWorkflowNewResponse 返回参数} */
+  /** 工作流任务补录【Beta版本】 {@link MakeUpWorkflowNewRequest} {@link MakeUpWorkflowNewResponse} */
   MakeUpWorkflowNew(data: MakeUpWorkflowNewRequest, config?: AxiosRequestConfig): AxiosPromise<MakeUpWorkflowNewResponse>;
-  /** {@link ModifyDataSource 数据源管理-修改数据源【Beta版本】}({@link ModifyDataSourceRequest 请求参数}): {@link ModifyDataSourceResponse 返回参数} */
+  /** 数据源管理-修改数据源【Beta版本】 {@link ModifyDataSourceRequest} {@link ModifyDataSourceResponse} */
   ModifyDataSource(data: ModifyDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataSourceResponse>;
-  /** {@link ModifyDimensionWeight 修改维度权重}({@link ModifyDimensionWeightRequest 请求参数}): {@link ModifyDimensionWeightResponse 返回参数} */
+  /** 修改维度权重 {@link ModifyDimensionWeightRequest} {@link ModifyDimensionWeightResponse} */
   ModifyDimensionWeight(data: ModifyDimensionWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDimensionWeightResponse>;
-  /** {@link ModifyExecStrategy 更新规则组执行策略}({@link ModifyExecStrategyRequest 请求参数}): {@link ModifyExecStrategyResponse 返回参数} */
+  /** 更新规则组执行策略 {@link ModifyExecStrategyRequest} {@link ModifyExecStrategyResponse} */
   ModifyExecStrategy(data?: ModifyExecStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExecStrategyResponse>;
-  /** {@link ModifyFolder 文件夹更新【Beta版本】}({@link ModifyFolderRequest 请求参数}): {@link ModifyFolderResponse 返回参数} */
+  /** 文件夹更新【Beta版本】 {@link ModifyFolderRequest} {@link ModifyFolderResponse} */
   ModifyFolder(data: ModifyFolderRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFolderResponse>;
-  /** {@link ModifyIntegrationNode 更新集成节点}({@link ModifyIntegrationNodeRequest 请求参数}): {@link ModifyIntegrationNodeResponse 返回参数} */
+  /** 更新集成节点 {@link ModifyIntegrationNodeRequest} {@link ModifyIntegrationNodeResponse} */
   ModifyIntegrationNode(data: ModifyIntegrationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntegrationNodeResponse>;
-  /** {@link ModifyIntegrationTask 更新集成任务}({@link ModifyIntegrationTaskRequest 请求参数}): {@link ModifyIntegrationTaskResponse 返回参数} */
+  /** 更新集成任务 {@link ModifyIntegrationTaskRequest} {@link ModifyIntegrationTaskResponse} */
   ModifyIntegrationTask(data: ModifyIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntegrationTaskResponse>;
-  /** {@link ModifyMonitorStatus 更新监控状态}({@link ModifyMonitorStatusRequest 请求参数}): {@link ModifyMonitorStatusResponse 返回参数} */
+  /** 更新监控状态 {@link ModifyMonitorStatusRequest} {@link ModifyMonitorStatusResponse} */
   ModifyMonitorStatus(data?: ModifyMonitorStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMonitorStatusResponse>;
-  /** {@link ModifyRule 更新质量规则接口}({@link ModifyRuleRequest 请求参数}): {@link ModifyRuleResponse 返回参数} */
+  /** 更新质量规则接口 {@link ModifyRuleRequest} {@link ModifyRuleResponse} */
   ModifyRule(data?: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
-  /** {@link ModifyRuleGroupSubscription 更新规则组订阅信息}({@link ModifyRuleGroupSubscriptionRequest 请求参数}): {@link ModifyRuleGroupSubscriptionResponse 返回参数} */
+  /** 更新规则组订阅信息 {@link ModifyRuleGroupSubscriptionRequest} {@link ModifyRuleGroupSubscriptionResponse} */
   ModifyRuleGroupSubscription(data?: ModifyRuleGroupSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleGroupSubscriptionResponse>;
-  /** {@link ModifyRuleTemplate 编辑规则模版}({@link ModifyRuleTemplateRequest 请求参数}): {@link ModifyRuleTemplateResponse 返回参数} */
+  /** 编辑规则模版 {@link ModifyRuleTemplateRequest} {@link ModifyRuleTemplateResponse} */
   ModifyRuleTemplate(data?: ModifyRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleTemplateResponse>;
-  /** {@link ModifyTaskAlarmRegular 修改任务告警规则}({@link ModifyTaskAlarmRegularRequest 请求参数}): {@link ModifyTaskAlarmRegularResponse 返回参数} */
+  /** 修改任务告警规则 {@link ModifyTaskAlarmRegularRequest} {@link ModifyTaskAlarmRegularResponse} */
   ModifyTaskAlarmRegular(data: ModifyTaskAlarmRegularRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskAlarmRegularResponse>;
-  /** {@link ModifyTaskInfo 更新任务【Beta版本】}({@link ModifyTaskInfoRequest 请求参数}): {@link ModifyTaskInfoResponse 返回参数} */
+  /** 更新任务【Beta版本】 {@link ModifyTaskInfoRequest} {@link ModifyTaskInfoResponse} */
   ModifyTaskInfo(data: ModifyTaskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskInfoResponse>;
-  /** {@link ModifyTaskLinks 添加父任务依赖【Beta版本】}({@link ModifyTaskLinksRequest 请求参数}): {@link ModifyTaskLinksResponse 返回参数} */
+  /** 添加父任务依赖【Beta版本】 {@link ModifyTaskLinksRequest} {@link ModifyTaskLinksResponse} */
   ModifyTaskLinks(data: ModifyTaskLinksRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskLinksResponse>;
-  /** {@link ModifyTaskName 重命名任务（任务编辑）}({@link ModifyTaskNameRequest 请求参数}): {@link ModifyTaskNameResponse 返回参数} */
+  /** 重命名任务（任务编辑） {@link ModifyTaskNameRequest} {@link ModifyTaskNameResponse} */
   ModifyTaskName(data: ModifyTaskNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskNameResponse>;
-  /** {@link ModifyTaskScript 修改任务脚本【Beta版本】}({@link ModifyTaskScriptRequest 请求参数}): {@link ModifyTaskScriptResponse 返回参数} */
+  /** 修改任务脚本【Beta版本】 {@link ModifyTaskScriptRequest} {@link ModifyTaskScriptResponse} */
   ModifyTaskScript(data: ModifyTaskScriptRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskScriptResponse>;
-  /** {@link ModifyWorkflowInfo 更新工作流【Beta版本】}({@link ModifyWorkflowInfoRequest 请求参数}): {@link ModifyWorkflowInfoResponse 返回参数} */
+  /** 更新工作流【Beta版本】 {@link ModifyWorkflowInfoRequest} {@link ModifyWorkflowInfoResponse} */
   ModifyWorkflowInfo(data: ModifyWorkflowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkflowInfoResponse>;
-  /** {@link ModifyWorkflowSchedule 更新工作流调度【Beta版本】}({@link ModifyWorkflowScheduleRequest 请求参数}): {@link ModifyWorkflowScheduleResponse 返回参数} */
+  /** 更新工作流调度【Beta版本】 {@link ModifyWorkflowScheduleRequest} {@link ModifyWorkflowScheduleResponse} */
   ModifyWorkflowSchedule(data: ModifyWorkflowScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkflowScheduleResponse>;
-  /** {@link RegisterEvent 注册事件【Beta版本】}({@link RegisterEventRequest 请求参数}): {@link RegisterEventResponse 返回参数} */
+  /** 注册事件【Beta版本】 {@link RegisterEventRequest} {@link RegisterEventResponse} */
   RegisterEvent(data: RegisterEventRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterEventResponse>;
-  /** {@link RegisterEventListener 注册事件监听器【Beta版本】}({@link RegisterEventListenerRequest 请求参数}): {@link RegisterEventListenerResponse 返回参数} */
+  /** 注册事件监听器【Beta版本】 {@link RegisterEventListenerRequest} {@link RegisterEventListenerResponse} */
   RegisterEventListener(data: RegisterEventListenerRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterEventListenerResponse>;
-  /** {@link RerunInstances 实例批量重跑【Beta版本】}({@link RerunInstancesRequest 请求参数}): {@link RerunInstancesResponse 返回参数} */
+  /** 实例批量重跑【Beta版本】 {@link RerunInstancesRequest} {@link RerunInstancesResponse} */
   RerunInstances(data: RerunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RerunInstancesResponse>;
-  /** {@link RestartInLongAgent 重启采集器}({@link RestartInLongAgentRequest 请求参数}): {@link RestartInLongAgentResponse 返回参数} */
+  /** 重启采集器 {@link RestartInLongAgentRequest} {@link RestartInLongAgentResponse} */
   RestartInLongAgent(data: RestartInLongAgentRequest, config?: AxiosRequestConfig): AxiosPromise<RestartInLongAgentResponse>;
-  /** {@link ResumeIntegrationTask 继续集成任务}({@link ResumeIntegrationTaskRequest 请求参数}): {@link ResumeIntegrationTaskResponse 返回参数} */
+  /** 继续集成任务 {@link ResumeIntegrationTaskRequest} {@link ResumeIntegrationTaskResponse} */
   ResumeIntegrationTask(data: ResumeIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeIntegrationTaskResponse>;
-  /** {@link RobAndLockIntegrationTask 抢占锁定集成任务}({@link RobAndLockIntegrationTaskRequest 请求参数}): {@link RobAndLockIntegrationTaskResponse 返回参数} */
+  /** 抢占锁定集成任务 {@link RobAndLockIntegrationTaskRequest} {@link RobAndLockIntegrationTaskResponse} */
   RobAndLockIntegrationTask(data: RobAndLockIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RobAndLockIntegrationTaskResponse>;
-  /** {@link RunTask 运行任务【Beta版本】}({@link RunTaskRequest 请求参数}): {@link RunTaskResponse 返回参数} */
+  /** 运行任务【Beta版本】 {@link RunTaskRequest} {@link RunTaskResponse} */
   RunTask(data: RunTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RunTaskResponse>;
-  /** {@link SaveCustomFunction 保存用户自定义函数}({@link SaveCustomFunctionRequest 请求参数}): {@link SaveCustomFunctionResponse 返回参数} */
+  /** 保存用户自定义函数 {@link SaveCustomFunctionRequest} {@link SaveCustomFunctionResponse} */
   SaveCustomFunction(data: SaveCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<SaveCustomFunctionResponse>;
-  /** {@link SetTaskAlarmNew 设置任务告警【Beta版本】}({@link SetTaskAlarmNewRequest 请求参数}): {@link SetTaskAlarmNewResponse 返回参数} */
+  /** 设置任务告警【Beta版本】 {@link SetTaskAlarmNewRequest} {@link SetTaskAlarmNewResponse} */
   SetTaskAlarmNew(data: SetTaskAlarmNewRequest, config?: AxiosRequestConfig): AxiosPromise<SetTaskAlarmNewResponse>;
-  /** {@link StartIntegrationTask 启动集成任务}({@link StartIntegrationTaskRequest 请求参数}): {@link StartIntegrationTaskResponse 返回参数} */
+  /** 启动集成任务 {@link StartIntegrationTaskRequest} {@link StartIntegrationTaskResponse} */
   StartIntegrationTask(data: StartIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StartIntegrationTaskResponse>;
-  /** {@link StopIntegrationTask 停止集成任务}({@link StopIntegrationTaskRequest 请求参数}): {@link StopIntegrationTaskResponse 返回参数} */
+  /** 停止集成任务 {@link StopIntegrationTaskRequest} {@link StopIntegrationTaskResponse} */
   StopIntegrationTask(data: StopIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopIntegrationTaskResponse>;
-  /** {@link SubmitCustomFunction 提交自定义函数}({@link SubmitCustomFunctionRequest 请求参数}): {@link SubmitCustomFunctionResponse 返回参数} */
+  /** 提交自定义函数 {@link SubmitCustomFunctionRequest} {@link SubmitCustomFunctionResponse} */
   SubmitCustomFunction(data: SubmitCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitCustomFunctionResponse>;
-  /** {@link SubmitTask 提交任务【Beta版本】}({@link SubmitTaskRequest 请求参数}): {@link SubmitTaskResponse 返回参数} */
+  /** 提交任务【Beta版本】 {@link SubmitTaskRequest} {@link SubmitTaskResponse} */
   SubmitTask(data: SubmitTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTaskResponse>;
-  /** {@link SubmitWorkflow 提交工作流【Beta版本】}({@link SubmitWorkflowRequest 请求参数}): {@link SubmitWorkflowResponse 返回参数} */
+  /** 提交工作流【Beta版本】 {@link SubmitWorkflowRequest} {@link SubmitWorkflowResponse} */
   SubmitWorkflow(data: SubmitWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitWorkflowResponse>;
-  /** {@link SuspendIntegrationTask 暂停集成任务}({@link SuspendIntegrationTaskRequest 请求参数}): {@link SuspendIntegrationTaskResponse 返回参数} */
+  /** 暂停集成任务 {@link SuspendIntegrationTaskRequest} {@link SuspendIntegrationTaskResponse} */
   SuspendIntegrationTask(data: SuspendIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SuspendIntegrationTaskResponse>;
-  /** {@link TaskLog 管控日志接口}({@link TaskLogRequest 请求参数}): {@link TaskLogResponse 返回参数} */
+  /** 管控日志接口 {@link TaskLogRequest} {@link TaskLogResponse} */
   TaskLog(data: TaskLogRequest, config?: AxiosRequestConfig): AxiosPromise<TaskLogResponse>;
-  /** {@link TriggerEvent 触发事件【Beta版本】}({@link TriggerEventRequest 请求参数}): {@link TriggerEventResponse 返回参数} */
+  /** 触发事件【Beta版本】 {@link TriggerEventRequest} {@link TriggerEventResponse} */
   TriggerEvent(data: TriggerEventRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerEventResponse>;
-  /** {@link UnlockIntegrationTask 解锁集成任务}({@link UnlockIntegrationTaskRequest 请求参数}): {@link UnlockIntegrationTaskResponse 返回参数} */
+  /** 解锁集成任务 {@link UnlockIntegrationTaskRequest} {@link UnlockIntegrationTaskResponse} */
   UnlockIntegrationTask(data: UnlockIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockIntegrationTaskResponse>;
-  /** {@link UpdateInLongAgent 更新采集器}({@link UpdateInLongAgentRequest 请求参数}): {@link UpdateInLongAgentResponse 返回参数} */
+  /** 更新采集器 {@link UpdateInLongAgentRequest} {@link UpdateInLongAgentResponse} */
   UpdateInLongAgent(data: UpdateInLongAgentRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateInLongAgentResponse>;
 }
 

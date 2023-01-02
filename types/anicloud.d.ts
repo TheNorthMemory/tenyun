@@ -72,7 +72,7 @@ declare interface CheckAppidExistResponse {
   HasError: boolean;
   /** 出错消息 */
   Msg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -84,7 +84,7 @@ declare interface QueryResourceInfoRequest {
 declare interface QueryResourceInfoResponse {
   /** 资源信息 */
   Resource: Resource | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -102,18 +102,18 @@ declare interface QueryResourceResponse {
   Resources: Resource[] | null;
   /** 总量 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Anicloud 动效素材服务} */
 declare interface Anicloud {
   (): Versions;
-  /** {@link CheckAppidExist 查看appid是否存在}({@link CheckAppidExistRequest 请求参数}): {@link CheckAppidExistResponse 返回参数} */
+  /** 查看appid是否存在 {@link CheckAppidExistRequest} {@link CheckAppidExistResponse} */
   CheckAppidExist(data: CheckAppidExistRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAppidExistResponse>;
-  /** {@link QueryResource 查询购买资源}({@link QueryResourceRequest 请求参数}): {@link QueryResourceResponse 返回参数} */
+  /** 查询购买资源 {@link QueryResourceRequest} {@link QueryResourceResponse} */
   QueryResource(data: QueryResourceRequest, config?: AxiosRequestConfig): AxiosPromise<QueryResourceResponse>;
-  /** {@link QueryResourceInfo 查询资源信息}({@link QueryResourceInfoRequest 请求参数}): {@link QueryResourceInfoResponse 返回参数} */
+  /** 查询资源信息 {@link QueryResourceInfoRequest} {@link QueryResourceInfoResponse} */
   QueryResourceInfo(data: QueryResourceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryResourceInfoResponse>;
 }
 

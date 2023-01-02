@@ -152,7 +152,7 @@ declare interface CreateAppScanTaskRepeatResponse {
   Result: number;
   /** 任务id */
   TaskID: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -186,7 +186,7 @@ declare interface CreateAppScanTaskResponse {
   Result: number;
   /** 任务id */
   TaskID: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -210,7 +210,7 @@ declare interface CreateFlySecMiniAppProfessionalScanTaskRequest {
 declare interface CreateFlySecMiniAppProfessionalScanTaskResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
   Ret: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -234,7 +234,7 @@ declare interface CreateFlySecMiniAppScanTaskRepeatResponse {
   Ret: number;
   /** 任务id */
   TaskID: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -266,7 +266,7 @@ declare interface CreateFlySecMiniAppScanTaskResponse {
   Ret: number;
   /** 任务id */
   TaskID: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -284,7 +284,7 @@ declare interface DescribeBasicDiagnosisResourceUsageInfoResponse {
   Total: number;
   /** 资源未使用次数 */
   UnusedCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -304,7 +304,7 @@ declare interface DescribeFlySecMiniAppReportUrlResponse {
   Ret: number;
   /** 诊断报告下载链接 */
   Url: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -328,7 +328,7 @@ declare interface DescribeFlySecMiniAppScanReportListResponse {
   Data: FlySecMiniAppReportData[] | null;
   /** 诊断任务数 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -350,7 +350,7 @@ declare interface DescribeFlySecMiniAppScanTaskListResponse {
   Data: FlySecMiniAppTaskData[] | null;
   /** 诊断任务数 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -372,7 +372,7 @@ declare interface DescribeFlySecMiniAppScanTaskParamResponse {
   MiniAppTestPwd: string | null;
   /** 诊断扫描版本 0:正式版 1:体验版 */
   ScanVersion: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -392,7 +392,7 @@ declare interface DescribeFlySecMiniAppScanTaskStatusResponse {
   MiniAppName: string | null;
   /** 小程序版本 */
   MiniAppVersion: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -406,7 +406,7 @@ declare interface DescribeResourceUsageInfoResponse {
   Data: ResourceUsageInfoData[];
   /** 安全资源数量 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -438,7 +438,7 @@ declare interface DescribeScanTaskListResponse {
   Data: AppTaskData[] | null;
   /** 任务总数量 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -464,7 +464,7 @@ declare interface DescribeScanTaskReportUrlResponse {
   ReportTitle: string | null;
   /** 诊断json结果内容 */
   ReportResult: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -488,42 +488,42 @@ declare interface DescribeScanTaskStatusResponse {
   ErrMsg: string | null;
   /** 任务流详情 */
   FlowSteps: TaskFlowStepsInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Mmps 小程序安全} */
 declare interface Mmps {
   (): Versions;
-  /** {@link CreateAppScanTask 创建小程序隐私合规诊断任务}({@link CreateAppScanTaskRequest 请求参数}): {@link CreateAppScanTaskResponse 返回参数} */
+  /** 创建小程序隐私合规诊断任务 {@link CreateAppScanTaskRequest} {@link CreateAppScanTaskResponse} */
   CreateAppScanTask(data: CreateAppScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppScanTaskResponse>;
-  /** {@link CreateAppScanTaskRepeat 隐私合规诊断重试任务}({@link CreateAppScanTaskRepeatRequest 请求参数}): {@link CreateAppScanTaskRepeatResponse 返回参数} */
+  /** 隐私合规诊断重试任务 {@link CreateAppScanTaskRepeatRequest} {@link CreateAppScanTaskRepeatResponse} */
   CreateAppScanTaskRepeat(data: CreateAppScanTaskRepeatRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppScanTaskRepeatResponse>;
-  /** {@link CreateFlySecMiniAppProfessionalScanTask 提交深度诊断任务}({@link CreateFlySecMiniAppProfessionalScanTaskRequest 请求参数}): {@link CreateFlySecMiniAppProfessionalScanTaskResponse 返回参数} */
+  /** 提交深度诊断任务 {@link CreateFlySecMiniAppProfessionalScanTaskRequest} {@link CreateFlySecMiniAppProfessionalScanTaskResponse} */
   CreateFlySecMiniAppProfessionalScanTask(data: CreateFlySecMiniAppProfessionalScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlySecMiniAppProfessionalScanTaskResponse>;
-  /** {@link CreateFlySecMiniAppScanTask 创建小程序翼扬安全诊断任务}({@link CreateFlySecMiniAppScanTaskRequest 请求参数}): {@link CreateFlySecMiniAppScanTaskResponse 返回参数} */
+  /** 创建小程序翼扬安全诊断任务 {@link CreateFlySecMiniAppScanTaskRequest} {@link CreateFlySecMiniAppScanTaskResponse} */
   CreateFlySecMiniAppScanTask(data: CreateFlySecMiniAppScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlySecMiniAppScanTaskResponse>;
-  /** {@link CreateFlySecMiniAppScanTaskRepeat 重新提交诊断任务}({@link CreateFlySecMiniAppScanTaskRepeatRequest 请求参数}): {@link CreateFlySecMiniAppScanTaskRepeatResponse 返回参数} */
+  /** 重新提交诊断任务 {@link CreateFlySecMiniAppScanTaskRepeatRequest} {@link CreateFlySecMiniAppScanTaskRepeatResponse} */
   CreateFlySecMiniAppScanTaskRepeat(data: CreateFlySecMiniAppScanTaskRepeatRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlySecMiniAppScanTaskRepeatResponse>;
-  /** {@link DescribeBasicDiagnosisResourceUsageInfo 查询基础诊断资源使用情况}({@link DescribeBasicDiagnosisResourceUsageInfoRequest 请求参数}): {@link DescribeBasicDiagnosisResourceUsageInfoResponse 返回参数} */
+  /** 查询基础诊断资源使用情况 {@link DescribeBasicDiagnosisResourceUsageInfoRequest} {@link DescribeBasicDiagnosisResourceUsageInfoResponse} */
   DescribeBasicDiagnosisResourceUsageInfo(data: DescribeBasicDiagnosisResourceUsageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicDiagnosisResourceUsageInfoResponse>;
-  /** {@link DescribeFlySecMiniAppReportUrl 获取诊断任务报告链接}({@link DescribeFlySecMiniAppReportUrlRequest 请求参数}): {@link DescribeFlySecMiniAppReportUrlResponse 返回参数} */
+  /** 获取诊断任务报告链接 {@link DescribeFlySecMiniAppReportUrlRequest} {@link DescribeFlySecMiniAppReportUrlResponse} */
   DescribeFlySecMiniAppReportUrl(data: DescribeFlySecMiniAppReportUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlySecMiniAppReportUrlResponse>;
-  /** {@link DescribeFlySecMiniAppScanReportList 查询指定小程序版本的安全得分}({@link DescribeFlySecMiniAppScanReportListRequest 请求参数}): {@link DescribeFlySecMiniAppScanReportListResponse 返回参数} */
+  /** 查询指定小程序版本的安全得分 {@link DescribeFlySecMiniAppScanReportListRequest} {@link DescribeFlySecMiniAppScanReportListResponse} */
   DescribeFlySecMiniAppScanReportList(data: DescribeFlySecMiniAppScanReportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlySecMiniAppScanReportListResponse>;
-  /** {@link DescribeFlySecMiniAppScanTaskList 获取诊断任务列表}({@link DescribeFlySecMiniAppScanTaskListRequest 请求参数}): {@link DescribeFlySecMiniAppScanTaskListResponse 返回参数} */
+  /** 获取诊断任务列表 {@link DescribeFlySecMiniAppScanTaskListRequest} {@link DescribeFlySecMiniAppScanTaskListResponse} */
   DescribeFlySecMiniAppScanTaskList(data: DescribeFlySecMiniAppScanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlySecMiniAppScanTaskListResponse>;
-  /** {@link DescribeFlySecMiniAppScanTaskParam 获取诊断任务参数信息}({@link DescribeFlySecMiniAppScanTaskParamRequest 请求参数}): {@link DescribeFlySecMiniAppScanTaskParamResponse 返回参数} */
+  /** 获取诊断任务参数信息 {@link DescribeFlySecMiniAppScanTaskParamRequest} {@link DescribeFlySecMiniAppScanTaskParamResponse} */
   DescribeFlySecMiniAppScanTaskParam(data: DescribeFlySecMiniAppScanTaskParamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlySecMiniAppScanTaskParamResponse>;
-  /** {@link DescribeFlySecMiniAppScanTaskStatus 查询诊断任务状态}({@link DescribeFlySecMiniAppScanTaskStatusRequest 请求参数}): {@link DescribeFlySecMiniAppScanTaskStatusResponse 返回参数} */
+  /** 查询诊断任务状态 {@link DescribeFlySecMiniAppScanTaskStatusRequest} {@link DescribeFlySecMiniAppScanTaskStatusResponse} */
   DescribeFlySecMiniAppScanTaskStatus(data: DescribeFlySecMiniAppScanTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlySecMiniAppScanTaskStatusResponse>;
-  /** {@link DescribeResourceUsageInfo 查询安全资源使用情况}({@link DescribeResourceUsageInfoRequest 请求参数}): {@link DescribeResourceUsageInfoResponse 返回参数} */
+  /** 查询安全资源使用情况 {@link DescribeResourceUsageInfoRequest} {@link DescribeResourceUsageInfoResponse} */
   DescribeResourceUsageInfo(data?: DescribeResourceUsageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceUsageInfoResponse>;
-  /** {@link DescribeScanTaskList 获取隐私合规诊断任务列表}({@link DescribeScanTaskListRequest 请求参数}): {@link DescribeScanTaskListResponse 返回参数} */
+  /** 获取隐私合规诊断任务列表 {@link DescribeScanTaskListRequest} {@link DescribeScanTaskListResponse} */
   DescribeScanTaskList(data: DescribeScanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskListResponse>;
-  /** {@link DescribeScanTaskReportUrl 获取合规诊断任务报告url}({@link DescribeScanTaskReportUrlRequest 请求参数}): {@link DescribeScanTaskReportUrlResponse 返回参数} */
+  /** 获取合规诊断任务报告url {@link DescribeScanTaskReportUrlRequest} {@link DescribeScanTaskReportUrlResponse} */
   DescribeScanTaskReportUrl(data: DescribeScanTaskReportUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskReportUrlResponse>;
-  /** {@link DescribeScanTaskStatus 查询隐私合规诊断任务状态}({@link DescribeScanTaskStatusRequest 请求参数}): {@link DescribeScanTaskStatusResponse 返回参数} */
+  /** 查询隐私合规诊断任务状态 {@link DescribeScanTaskStatusRequest} {@link DescribeScanTaskStatusResponse} */
   DescribeScanTaskStatus(data: DescribeScanTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskStatusResponse>;
 }
 

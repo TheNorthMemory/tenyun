@@ -132,7 +132,7 @@ declare interface CreateLibraryRequest {
 declare interface CreateLibraryResponse {
   /** 媒体库 ID */
   LibraryId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -142,7 +142,7 @@ declare interface DeleteLibraryRequest {
 }
 
 declare interface DeleteLibraryResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -160,7 +160,7 @@ declare interface DescribeLibrariesResponse {
   List: Library[];
   /** 总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -174,7 +174,7 @@ declare interface DescribeLibrarySecretResponse {
   LibraryId: string;
   /** 查询到的媒体库密钥 */
   LibrarySecret: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -202,7 +202,7 @@ declare interface DescribeOfficialInstancesResponse {
   List: Instance[];
   /** 总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -218,7 +218,7 @@ declare interface DescribeOfficialOverviewResponse {
   UserCount: number;
   /** 本月外网下行流量，单位为 Bytes，由于数字类型精度限制，该字段为 String 类型。 */
   InternetTraffic: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -242,7 +242,7 @@ declare interface DescribeTrafficPackagesResponse {
   List: TrafficPackage[];
   /** 总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -258,7 +258,7 @@ declare interface ModifyLibraryRequest {
 }
 
 declare interface ModifyLibraryResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -274,7 +274,7 @@ declare interface SendSmsCodeRequest {
 }
 
 declare interface SendSmsCodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -292,32 +292,32 @@ declare interface VerifySmsCodeRequest {
 }
 
 declare interface VerifySmsCodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Smh 智能媒资托管} */
 declare interface Smh {
   (): Versions;
-  /** {@link CreateLibrary 创建媒体库}({@link CreateLibraryRequest 请求参数}): {@link CreateLibraryResponse 返回参数} */
+  /** 创建媒体库 {@link CreateLibraryRequest} {@link CreateLibraryResponse} */
   CreateLibrary(data: CreateLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLibraryResponse>;
-  /** {@link DeleteLibrary 删除媒体库}({@link DeleteLibraryRequest 请求参数}): {@link DeleteLibraryResponse 返回参数} */
+  /** 删除媒体库 {@link DeleteLibraryRequest} {@link DeleteLibraryResponse} */
   DeleteLibrary(data: DeleteLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLibraryResponse>;
-  /** {@link DescribeLibraries 查询媒体库}({@link DescribeLibrariesRequest 请求参数}): {@link DescribeLibrariesResponse 返回参数} */
+  /** 查询媒体库 {@link DescribeLibrariesRequest} {@link DescribeLibrariesResponse} */
   DescribeLibraries(data?: DescribeLibrariesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibrariesResponse>;
-  /** {@link DescribeLibrarySecret 查询媒体库密钥}({@link DescribeLibrarySecretRequest 请求参数}): {@link DescribeLibrarySecretResponse 返回参数} */
+  /** 查询媒体库密钥 {@link DescribeLibrarySecretRequest} {@link DescribeLibrarySecretResponse} */
   DescribeLibrarySecret(data: DescribeLibrarySecretRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibrarySecretResponse>;
-  /** {@link DescribeOfficialInstances 查询官方实例}({@link DescribeOfficialInstancesRequest 请求参数}): {@link DescribeOfficialInstancesResponse 返回参数} */
+  /** 查询官方实例 {@link DescribeOfficialInstancesRequest} {@link DescribeOfficialInstancesResponse} */
   DescribeOfficialInstances(data?: DescribeOfficialInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfficialInstancesResponse>;
-  /** {@link DescribeOfficialOverview 查询官方实例概览数据}({@link DescribeOfficialOverviewRequest 请求参数}): {@link DescribeOfficialOverviewResponse 返回参数} */
+  /** 查询官方实例概览数据 {@link DescribeOfficialOverviewRequest} {@link DescribeOfficialOverviewResponse} */
   DescribeOfficialOverview(data?: DescribeOfficialOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfficialOverviewResponse>;
-  /** {@link DescribeTrafficPackages 查询流量包}({@link DescribeTrafficPackagesRequest 请求参数}): {@link DescribeTrafficPackagesResponse 返回参数} */
+  /** 查询流量包 {@link DescribeTrafficPackagesRequest} {@link DescribeTrafficPackagesResponse} */
   DescribeTrafficPackages(data?: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;
-  /** {@link ModifyLibrary 修改媒体库配置项}({@link ModifyLibraryRequest 请求参数}): {@link ModifyLibraryResponse 返回参数} */
+  /** 修改媒体库配置项 {@link ModifyLibraryRequest} {@link ModifyLibraryResponse} */
   ModifyLibrary(data: ModifyLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLibraryResponse>;
-  /** {@link SendSmsCode 发送短信验证码}({@link SendSmsCodeRequest 请求参数}): {@link SendSmsCodeResponse 返回参数} */
+  /** 发送短信验证码 {@link SendSmsCodeRequest} {@link SendSmsCodeResponse} */
   SendSmsCode(data: SendSmsCodeRequest, config?: AxiosRequestConfig): AxiosPromise<SendSmsCodeResponse>;
-  /** {@link VerifySmsCode 验证短信验证码}({@link VerifySmsCodeRequest 请求参数}): {@link VerifySmsCodeResponse 返回参数} */
+  /** 验证短信验证码 {@link VerifySmsCodeRequest} {@link VerifySmsCodeResponse} */
   VerifySmsCode(data: VerifySmsCodeRequest, config?: AxiosRequestConfig): AxiosPromise<VerifySmsCodeResponse>;
 }
 

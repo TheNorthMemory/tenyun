@@ -270,7 +270,7 @@ declare interface CreateMonitorsRequest {
 }
 
 declare interface CreateMonitorsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -286,7 +286,7 @@ declare interface CreateSitesResponse {
   Number?: number;
   /** 站点数组 */
   Sites?: MiniSite[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -300,7 +300,7 @@ declare interface CreateSitesScansRequest {
 }
 
 declare interface CreateSitesScansResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -310,7 +310,7 @@ declare interface CreateVulsMisinformationRequest {
 }
 
 declare interface CreateVulsMisinformationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -324,7 +324,7 @@ declare interface CreateVulsReportRequest {
 declare interface CreateVulsReportResponse {
   /** 报告下载地址 */
   ReportFileUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -334,7 +334,7 @@ declare interface DeleteMonitorsRequest {
 }
 
 declare interface DeleteMonitorsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -344,7 +344,7 @@ declare interface DeleteSitesRequest {
 }
 
 declare interface DeleteSitesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -364,7 +364,7 @@ declare interface DescribeConfigResponse {
   Appid?: number;
   /** 内容检测通知等级-1:通知,0-不通知 */
   ContentLevel?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -384,7 +384,7 @@ declare interface DescribeMonitorsResponse {
   Monitors?: MonitorsDetail[];
   /** 监控任务数量。 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -398,7 +398,7 @@ declare interface DescribeSiteQuotaResponse {
   Used?: number;
   /** 剩余可用的扫描次数。 */
   Available?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -418,7 +418,7 @@ declare interface DescribeSitesResponse {
   TotalCount?: number;
   /** 站点信息列表。 */
   Sites?: Site[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -432,7 +432,7 @@ declare interface DescribeSitesVerificationResponse {
   TotalCount?: number;
   /** 验证信息列表。 */
   SitesVerification?: SitesVerification[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -458,7 +458,7 @@ declare interface DescribeVulsNumberResponse {
   Sites?: MonitorMiniSite[];
   /** 受影响的网站列表。 */
   ImpactSites?: MonitorMiniSite[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -470,7 +470,7 @@ declare interface DescribeVulsNumberTimelineResponse {
   TotalCount?: number;
   /** 用户漏洞数随时间变化统计数据。 */
   VulsTimeline?: VulsTimeline[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -492,7 +492,7 @@ declare interface DescribeVulsResponse {
   TotalCount?: number;
   /** 漏洞信息列表。 */
   Vuls?: Vul[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -502,7 +502,7 @@ declare interface ModifyConfigAttributeRequest {
 }
 
 declare interface ModifyConfigAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -526,7 +526,7 @@ declare interface ModifyMonitorAttributeRequest {
 }
 
 declare interface ModifyMonitorAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -548,7 +548,7 @@ declare interface ModifySiteAttributeRequest {
 }
 
 declare interface ModifySiteAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -562,50 +562,50 @@ declare interface VerifySitesResponse {
   SuccessNumber?: number;
   /** 验证失败的根域名数量。 */
   FailNumber?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cws 漏洞扫描服务} */
 declare interface Cws {
   (): Versions;
-  /** {@link CreateMonitors 新增监测任务}({@link CreateMonitorsRequest 请求参数}): {@link CreateMonitorsResponse 返回参数} */
+  /** 新增监测任务 {@link CreateMonitorsRequest} {@link CreateMonitorsResponse} */
   CreateMonitors(data: CreateMonitorsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMonitorsResponse>;
-  /** {@link CreateSites 新增站点}({@link CreateSitesRequest 请求参数}): {@link CreateSitesResponse 返回参数} */
+  /** 新增站点 {@link CreateSitesRequest} {@link CreateSitesResponse} */
   CreateSites(data: CreateSitesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSitesResponse>;
-  /** {@link CreateSitesScans 新增站点扫描任务}({@link CreateSitesScansRequest 请求参数}): {@link CreateSitesScansResponse 返回参数} */
+  /** 新增站点扫描任务 {@link CreateSitesScansRequest} {@link CreateSitesScansResponse} */
   CreateSitesScans(data: CreateSitesScansRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSitesScansResponse>;
-  /** {@link CreateVulsMisinformation 新增漏洞误报信息}({@link CreateVulsMisinformationRequest 请求参数}): {@link CreateVulsMisinformationResponse 返回参数} */
+  /** 新增漏洞误报信息 {@link CreateVulsMisinformationRequest} {@link CreateVulsMisinformationResponse} */
   CreateVulsMisinformation(data: CreateVulsMisinformationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulsMisinformationResponse>;
-  /** {@link CreateVulsReport 生成漏洞报告}({@link CreateVulsReportRequest 请求参数}): {@link CreateVulsReportResponse 返回参数} */
+  /** 生成漏洞报告 {@link CreateVulsReportRequest} {@link CreateVulsReportResponse} */
   CreateVulsReport(data?: CreateVulsReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulsReportResponse>;
-  /** {@link DeleteMonitors 删除监控任务}({@link DeleteMonitorsRequest 请求参数}): {@link DeleteMonitorsResponse 返回参数} */
+  /** 删除监控任务 {@link DeleteMonitorsRequest} {@link DeleteMonitorsResponse} */
   DeleteMonitors(data: DeleteMonitorsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMonitorsResponse>;
-  /** {@link DeleteSites 删除站点}({@link DeleteSitesRequest 请求参数}): {@link DeleteSitesResponse 返回参数} */
+  /** 删除站点 {@link DeleteSitesRequest} {@link DeleteSitesResponse} */
   DeleteSites(data: DeleteSitesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSitesResponse>;
-  /** {@link DescribeConfig 查看用户配置列表}({@link DescribeConfigRequest 请求参数}): {@link DescribeConfigResponse 返回参数} */
+  /** 查看用户配置列表 {@link DescribeConfigRequest} {@link DescribeConfigResponse} */
   DescribeConfig(data?: DescribeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigResponse>;
-  /** {@link DescribeMonitors 查看监控任务}({@link DescribeMonitorsRequest 请求参数}): {@link DescribeMonitorsResponse 返回参数} */
+  /** 查看监控任务 {@link DescribeMonitorsRequest} {@link DescribeMonitorsResponse} */
   DescribeMonitors(data?: DescribeMonitorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorsResponse>;
-  /** {@link DescribeSiteQuota 查看站点购买配额}({@link DescribeSiteQuotaRequest 请求参数}): {@link DescribeSiteQuotaResponse 返回参数} */
+  /** 查看站点购买配额 {@link DescribeSiteQuotaRequest} {@link DescribeSiteQuotaResponse} */
   DescribeSiteQuota(data?: DescribeSiteQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSiteQuotaResponse>;
-  /** {@link DescribeSites 查看站点列表}({@link DescribeSitesRequest 请求参数}): {@link DescribeSitesResponse 返回参数} */
+  /** 查看站点列表 {@link DescribeSitesRequest} {@link DescribeSitesResponse} */
   DescribeSites(data?: DescribeSitesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSitesResponse>;
-  /** {@link DescribeSitesVerification 查看站点列表的验证信息列表}({@link DescribeSitesVerificationRequest 请求参数}): {@link DescribeSitesVerificationResponse 返回参数} */
+  /** 查看站点列表的验证信息列表 {@link DescribeSitesVerificationRequest} {@link DescribeSitesVerificationResponse} */
   DescribeSitesVerification(data: DescribeSitesVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSitesVerificationResponse>;
-  /** {@link DescribeVuls 查看漏洞列表}({@link DescribeVulsRequest 请求参数}): {@link DescribeVulsResponse 返回参数} */
+  /** 查看漏洞列表 {@link DescribeVulsRequest} {@link DescribeVulsResponse} */
   DescribeVuls(data?: DescribeVulsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulsResponse>;
-  /** {@link DescribeVulsNumber 查看当前漏洞总计数量}({@link DescribeVulsNumberRequest 请求参数}): {@link DescribeVulsNumberResponse 返回参数} */
+  /** 查看当前漏洞总计数量 {@link DescribeVulsNumberRequest} {@link DescribeVulsNumberResponse} */
   DescribeVulsNumber(data?: DescribeVulsNumberRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulsNumberResponse>;
-  /** {@link DescribeVulsNumberTimeline 查看漏洞数随时间变化统计信息}({@link DescribeVulsNumberTimelineRequest 请求参数}): {@link DescribeVulsNumberTimelineResponse 返回参数} */
+  /** 查看漏洞数随时间变化统计信息 {@link DescribeVulsNumberTimelineRequest} {@link DescribeVulsNumberTimelineResponse} */
   DescribeVulsNumberTimeline(data?: DescribeVulsNumberTimelineRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulsNumberTimelineResponse>;
-  /** {@link ModifyConfigAttribute 修改用户配置的属性}({@link ModifyConfigAttributeRequest 请求参数}): {@link ModifyConfigAttributeResponse 返回参数} */
+  /** 修改用户配置的属性 {@link ModifyConfigAttributeRequest} {@link ModifyConfigAttributeResponse} */
   ModifyConfigAttribute(data?: ModifyConfigAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigAttributeResponse>;
-  /** {@link ModifyMonitorAttribute 修改监测任务的属性}({@link ModifyMonitorAttributeRequest 请求参数}): {@link ModifyMonitorAttributeResponse 返回参数} */
+  /** 修改监测任务的属性 {@link ModifyMonitorAttributeRequest} {@link ModifyMonitorAttributeResponse} */
   ModifyMonitorAttribute(data: ModifyMonitorAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMonitorAttributeResponse>;
-  /** {@link ModifySiteAttribute 修改站点的属性}({@link ModifySiteAttributeRequest 请求参数}): {@link ModifySiteAttributeResponse 返回参数} */
+  /** 修改站点的属性 {@link ModifySiteAttributeRequest} {@link ModifySiteAttributeResponse} */
   ModifySiteAttribute(data: ModifySiteAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySiteAttributeResponse>;
-  /** {@link VerifySites 验证站点}({@link VerifySitesRequest 请求参数}): {@link VerifySitesResponse 返回参数} */
+  /** 验证站点 {@link VerifySitesRequest} {@link VerifySitesResponse} */
   VerifySites(data: VerifySitesRequest, config?: AxiosRequestConfig): AxiosPromise<VerifySitesResponse>;
 }
 

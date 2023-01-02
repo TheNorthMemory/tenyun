@@ -16,7 +16,7 @@ declare interface DescribeStatusResponse {
   Info?: string;
   /** 成功时返回样本日志下载地址，该地址10分钟内有效 */
   Data?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -36,15 +36,15 @@ declare interface StartAnalyseResponse {
   Info?: string;
   /** 保留字段 */
   Data?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface Habo {
   (): Versions;
-  /** {@link DescribeStatus 获取分析结果}({@link DescribeStatusRequest 请求参数}): {@link DescribeStatusResponse 返回参数} */
+  /** 获取分析结果 {@link DescribeStatusRequest} {@link DescribeStatusResponse} */
   DescribeStatus(data: DescribeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStatusResponse>;
-  /** {@link StartAnalyse 分析样本}({@link StartAnalyseRequest 请求参数}): {@link StartAnalyseResponse 返回参数} */
+  /** 分析样本 {@link StartAnalyseRequest} {@link StartAnalyseResponse} */
   StartAnalyse(data: StartAnalyseRequest, config?: AxiosRequestConfig): AxiosPromise<StartAnalyseResponse>;
 }
 

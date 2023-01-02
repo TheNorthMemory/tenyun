@@ -122,7 +122,7 @@ declare interface CorrectMultiImageRequest {
 declare interface CorrectMultiImageResponse {
   /** 接口返回数据 */
   Data?: CompostionContext;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -140,7 +140,7 @@ declare interface DescribeTaskResponse {
   CorrectData?: CorrectData | null;
   /** 任务状态，“Progressing”: 处理中（此时无结果返回）、“Finished”: 处理完成 */
   Status?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -170,7 +170,7 @@ declare interface ECCResponse {
   Data?: CorrectData | null;
   /** 任务 id，用于查询接口 */
   TaskId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -202,20 +202,20 @@ declare interface EHOCRRequest {
 declare interface EHOCRResponse {
   /** 接口返回数据 */
   Data?: CompostionContext;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ecc 英文作文批改} */
 declare interface Ecc {
   (): Versions;
-  /** {@link CorrectMultiImage 多图像识别批改}({@link CorrectMultiImageRequest 请求参数}): {@link CorrectMultiImageResponse 返回参数} */
+  /** 多图像识别批改 {@link CorrectMultiImageRequest} {@link CorrectMultiImageResponse} */
   CorrectMultiImage(data: CorrectMultiImageRequest, config?: AxiosRequestConfig): AxiosPromise<CorrectMultiImageResponse>;
-  /** {@link DescribeTask 查询异步任务结果}({@link DescribeTaskRequest 请求参数}): {@link DescribeTaskResponse 返回参数} */
+  /** 查询异步任务结果 {@link DescribeTaskRequest} {@link DescribeTaskResponse} */
   DescribeTask(data: DescribeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResponse>;
-  /** {@link ECC 纯文本英语作文批改}({@link ECCRequest 请求参数}): {@link ECCResponse 返回参数} */
+  /** 纯文本英语作文批改 {@link ECCRequest} {@link ECCResponse} */
   ECC(data: ECCRequest, config?: AxiosRequestConfig): AxiosPromise<ECCResponse>;
-  /** {@link EHOCR 图像识别批改}({@link EHOCRRequest 请求参数}): {@link EHOCRResponse 返回参数} */
+  /** 图像识别批改 {@link EHOCRRequest} {@link EHOCRResponse} */
   EHOCR(data: EHOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EHOCRResponse>;
 }
 

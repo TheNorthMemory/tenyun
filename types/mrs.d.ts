@@ -1046,7 +1046,7 @@ declare interface ImageToClassRequest {
 declare interface ImageToClassResponse {
   /** 分类结果 */
   TextTypeList: TextType[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1068,7 +1068,7 @@ declare interface ImageToObjectResponse {
   Template: Template | null;
   /** 多级分类结果 */
   TextTypeList: TextType[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1082,7 +1082,7 @@ declare interface TextToClassRequest {
 declare interface TextToClassResponse {
   /** 分类结果 */
   TextTypeList: TextType[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1100,20 +1100,20 @@ declare interface TextToObjectRequest {
 declare interface TextToObjectResponse {
   /** 报告结构化结果 */
   Template: Template;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Mrs 医疗报告结构化} */
 declare interface Mrs {
   (): Versions;
-  /** {@link ImageToClass 图片分类接口}({@link ImageToClassRequest 请求参数}): {@link ImageToClassResponse 返回参数} */
+  /** 图片分类接口 {@link ImageToClassRequest} {@link ImageToClassResponse} */
   ImageToClass(data: ImageToClassRequest, config?: AxiosRequestConfig): AxiosPromise<ImageToClassResponse>;
-  /** {@link ImageToObject 图片结构化接口}({@link ImageToObjectRequest 请求参数}): {@link ImageToObjectResponse 返回参数} */
+  /** 图片结构化接口 {@link ImageToObjectRequest} {@link ImageToObjectResponse} */
   ImageToObject(data: ImageToObjectRequest, config?: AxiosRequestConfig): AxiosPromise<ImageToObjectResponse>;
-  /** {@link TextToClass 文本分类接口}({@link TextToClassRequest 请求参数}): {@link TextToClassResponse 返回参数} */
+  /** 文本分类接口 {@link TextToClassRequest} {@link TextToClassResponse} */
   TextToClass(data: TextToClassRequest, config?: AxiosRequestConfig): AxiosPromise<TextToClassResponse>;
-  /** {@link TextToObject 文本结构化接口}({@link TextToObjectRequest 请求参数}): {@link TextToObjectResponse 返回参数} */
+  /** 文本结构化接口 {@link TextToObjectRequest} {@link TextToObjectResponse} */
   TextToObject(data: TextToObjectRequest, config?: AxiosRequestConfig): AxiosPromise<TextToObjectResponse>;
 }
 

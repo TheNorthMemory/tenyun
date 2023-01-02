@@ -590,7 +590,7 @@ declare interface CancelFlowRequest {
 }
 
 declare interface CancelFlowResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -604,7 +604,7 @@ declare interface CancelMultiFlowSignQRCodeRequest {
 }
 
 declare interface CancelMultiFlowSignQRCodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -622,7 +622,7 @@ declare interface CreateBatchCancelFlowUrlResponse {
   FailMessages: string[];
   /** 签署连接过期时间字符串：年月日-时分秒 */
   UrlExpireOn: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -644,7 +644,7 @@ declare interface CreateConvertTaskApiRequest {
 declare interface CreateConvertTaskApiResponse {
   /** 转换任务Id */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -674,7 +674,7 @@ declare interface CreateDocumentResponse {
   DocumentId: string;
   /** 签署流程文件的预览地址, 5分钟内有效。仅当NeedPreview为true 时返回 */
   PreviewFileUrl: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -688,7 +688,7 @@ declare interface CreateFlowApproversRequest {
 }
 
 declare interface CreateFlowApproversResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -736,7 +736,7 @@ declare interface CreateFlowByFilesResponse {
   FlowId: string;
   /** 合同预览链接。注：如入参 是否需要预览 NeedPreview 设置为 true，会开启“预览模式”，此处会返回预览链接；如入参 是否需要预览 NeedPreview 设置为 false，此处不会有值返回。 */
   PreviewUrl: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -754,7 +754,7 @@ declare interface CreateFlowEvidenceReportResponse {
   Status: string;
   /** 废除，字段无效 */
   ReportUrl: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -792,7 +792,7 @@ declare interface CreateFlowRequest {
 declare interface CreateFlowResponse {
   /** 签署流程编号 */
   FlowId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -810,7 +810,7 @@ declare interface CreateFlowSignReviewRequest {
 }
 
 declare interface CreateFlowSignReviewResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -824,7 +824,7 @@ declare interface CreateIntegrationEmployeesRequest {
 declare interface CreateIntegrationEmployeesResponse {
   /** 创建员工的结果 */
   CreateEmployeeResult: CreateStaffResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -856,7 +856,7 @@ declare interface CreateMultiFlowSignQRCodeResponse {
   QrCode: SignQrCode;
   /** 签署链接对象 */
   SignUrls: SignUrl;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -882,7 +882,7 @@ declare interface CreatePrepareFlowRequest {
 declare interface CreatePrepareFlowResponse {
   /** 快速发起预览链接 */
   Url: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -910,7 +910,7 @@ declare interface CreateSchemeUrlRequest {
 declare interface CreateSchemeUrlResponse {
   /** 小程序链接地址 */
   SchemeUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -924,7 +924,7 @@ declare interface DeleteIntegrationEmployeesRequest {
 declare interface DeleteIntegrationEmployeesResponse {
   /** 员工删除数据 */
   DeleteEmployeeResult: DeleteStaffsResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -958,7 +958,7 @@ declare interface DescribeFileUrlsResponse {
   FileUrls: FileUrl[];
   /** URL数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -974,7 +974,7 @@ declare interface DescribeFlowBriefsRequest {
 declare interface DescribeFlowBriefsResponse {
   /** 流程列表 */
   FlowBriefs: FlowBrief[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -990,7 +990,7 @@ declare interface DescribeFlowEvidenceReportResponse {
   ReportUrl: string | null;
   /** 执行中：EvidenceStatusExecuting成功：EvidenceStatusSuccess失败：EvidenceStatusFailed */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1004,7 +1004,7 @@ declare interface DescribeFlowInfoRequest {
 declare interface DescribeFlowInfoResponse {
   /** 签署流程信息 */
   FlowDetailInfos: FlowDetailInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1036,7 +1036,7 @@ declare interface DescribeFlowTemplatesResponse {
   Templates: TemplateInfo[];
   /** 查询到的总个数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1060,7 +1060,7 @@ declare interface DescribeIntegrationEmployeesResponse {
   Limit: number;
   /** 符合条件的员工数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1082,7 +1082,7 @@ declare interface DescribeOrganizationSealsResponse {
   TotalCount: number;
   /** 查询到的印章结果数组 */
   Seals: OccupiedSeal[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1094,7 +1094,7 @@ declare interface DescribeThirdPartyAuthCodeRequest {
 declare interface DescribeThirdPartyAuthCodeResponse {
   /** 用户是否实名，VERIFIED 为实名，UNVERIFIED 未实名 */
   VerifyStatus: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1118,7 +1118,7 @@ declare interface GetTaskResultApiResponse {
   TaskMessage: string;
   /** 资源Id，也是FileId，用于文件发起使用 */
   ResourceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1136,7 +1136,7 @@ declare interface StartFlowRequest {
 declare interface StartFlowResponse {
   /** 返回描述，START-发起成功， REVIEW-提交审核成功，EXECUTING-已提交发起任务 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1162,7 +1162,7 @@ declare interface UploadFilesResponse {
   FileIds: string[];
   /** 上传成功文件数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1178,66 +1178,66 @@ declare interface VerifyPdfResponse {
   VerifyResult: number;
   /** 验签结果详情,内部状态1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域；5-文件签名格式错误 */
   PdfVerifyResults: PdfVerifyResult[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ess 腾讯电子签企业版} */
 declare interface Ess {
   (): Versions;
-  /** {@link CancelFlow 撤销签署流程}({@link CancelFlowRequest 请求参数}): {@link CancelFlowResponse 返回参数} */
+  /** 撤销签署流程 {@link CancelFlowRequest} {@link CancelFlowResponse} */
   CancelFlow(data: CancelFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CancelFlowResponse>;
-  /** {@link CancelMultiFlowSignQRCode 取消一码多扫二维码}({@link CancelMultiFlowSignQRCodeRequest 请求参数}): {@link CancelMultiFlowSignQRCodeResponse 返回参数} */
+  /** 取消一码多扫二维码 {@link CancelMultiFlowSignQRCodeRequest} {@link CancelMultiFlowSignQRCodeResponse} */
   CancelMultiFlowSignQRCode(data: CancelMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CancelMultiFlowSignQRCodeResponse>;
-  /** {@link CreateBatchCancelFlowUrl 获取批量撤销签署流程链接}({@link CreateBatchCancelFlowUrlRequest 请求参数}): {@link CreateBatchCancelFlowUrlResponse 返回参数} */
+  /** 获取批量撤销签署流程链接 {@link CreateBatchCancelFlowUrlRequest} {@link CreateBatchCancelFlowUrlResponse} */
   CreateBatchCancelFlowUrl(data: CreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchCancelFlowUrlResponse>;
-  /** {@link CreateConvertTaskApi 创建文件转换任务}({@link CreateConvertTaskApiRequest 请求参数}): {@link CreateConvertTaskApiResponse 返回参数} */
+  /** 创建文件转换任务 {@link CreateConvertTaskApiRequest} {@link CreateConvertTaskApiResponse} */
   CreateConvertTaskApi(data: CreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConvertTaskApiResponse>;
-  /** {@link CreateDocument 创建电子文档}({@link CreateDocumentRequest 请求参数}): {@link CreateDocumentResponse 返回参数} */
+  /** 创建电子文档 {@link CreateDocumentRequest} {@link CreateDocumentResponse} */
   CreateDocument(data: CreateDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocumentResponse>;
-  /** {@link CreateFlow 创建签署流程}({@link CreateFlowRequest 请求参数}): {@link CreateFlowResponse 返回参数} */
+  /** 创建签署流程 {@link CreateFlowRequest} {@link CreateFlowResponse} */
   CreateFlow(data: CreateFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowResponse>;
-  /** {@link CreateFlowApprovers 补充签署流程本企业签署人信息}({@link CreateFlowApproversRequest 请求参数}): {@link CreateFlowApproversResponse 返回参数} */
+  /** 补充签署流程本企业签署人信息 {@link CreateFlowApproversRequest} {@link CreateFlowApproversResponse} */
   CreateFlowApprovers(data: CreateFlowApproversRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowApproversResponse>;
-  /** {@link CreateFlowByFiles 用PDF文件创建签署流程}({@link CreateFlowByFilesRequest 请求参数}): {@link CreateFlowByFilesResponse 返回参数} */
+  /** 用PDF文件创建签署流程 {@link CreateFlowByFilesRequest} {@link CreateFlowByFilesResponse} */
   CreateFlowByFiles(data: CreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowByFilesResponse>;
-  /** {@link CreateFlowEvidenceReport 创建并返回出证报告}({@link CreateFlowEvidenceReportRequest 请求参数}): {@link CreateFlowEvidenceReportResponse 返回参数} */
+  /** 创建并返回出证报告 {@link CreateFlowEvidenceReportRequest} {@link CreateFlowEvidenceReportResponse} */
   CreateFlowEvidenceReport(data: CreateFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowEvidenceReportResponse>;
-  /** {@link CreateFlowSignReview 提交企业签署流程审批结果}({@link CreateFlowSignReviewRequest 请求参数}): {@link CreateFlowSignReviewResponse 返回参数} */
+  /** 提交企业签署流程审批结果 {@link CreateFlowSignReviewRequest} {@link CreateFlowSignReviewResponse} */
   CreateFlowSignReview(data: CreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignReviewResponse>;
-  /** {@link CreateIntegrationEmployees 创建员工}({@link CreateIntegrationEmployeesRequest 请求参数}): {@link CreateIntegrationEmployeesResponse 返回参数} */
+  /** 创建员工 {@link CreateIntegrationEmployeesRequest} {@link CreateIntegrationEmployeesResponse} */
   CreateIntegrationEmployees(data: CreateIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationEmployeesResponse>;
-  /** {@link CreateMultiFlowSignQRCode 创建一码多扫流程签署二维码}({@link CreateMultiFlowSignQRCodeRequest 请求参数}): {@link CreateMultiFlowSignQRCodeResponse 返回参数} */
+  /** 创建一码多扫流程签署二维码 {@link CreateMultiFlowSignQRCodeRequest} {@link CreateMultiFlowSignQRCodeResponse} */
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
-  /** {@link CreatePrepareFlow 创建快速发起流程}({@link CreatePrepareFlowRequest 请求参数}): {@link CreatePrepareFlowResponse 返回参数} */
+  /** 创建快速发起流程 {@link CreatePrepareFlowRequest} {@link CreatePrepareFlowResponse} */
   CreatePrepareFlow(data: CreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrepareFlowResponse>;
-  /** {@link CreateSchemeUrl 获取小程序跳转链接}({@link CreateSchemeUrlRequest 请求参数}): {@link CreateSchemeUrlResponse 返回参数} */
+  /** 获取小程序跳转链接 {@link CreateSchemeUrlRequest} {@link CreateSchemeUrlResponse} */
   CreateSchemeUrl(data: CreateSchemeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchemeUrlResponse>;
-  /** {@link DeleteIntegrationEmployees 移除员工}({@link DeleteIntegrationEmployeesRequest 请求参数}): {@link DeleteIntegrationEmployeesResponse 返回参数} */
+  /** 移除员工 {@link DeleteIntegrationEmployeesRequest} {@link DeleteIntegrationEmployeesResponse} */
   DeleteIntegrationEmployees(data: DeleteIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationEmployeesResponse>;
-  /** {@link DescribeFileUrls 查询文件下载URL}({@link DescribeFileUrlsRequest 请求参数}): {@link DescribeFileUrlsResponse 返回参数} */
+  /** 查询文件下载URL {@link DescribeFileUrlsRequest} {@link DescribeFileUrlsResponse} */
   DescribeFileUrls(data: DescribeFileUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileUrlsResponse>;
-  /** {@link DescribeFlowBriefs 查询流程摘要}({@link DescribeFlowBriefsRequest 请求参数}): {@link DescribeFlowBriefsResponse 返回参数} */
+  /** 查询流程摘要 {@link DescribeFlowBriefsRequest} {@link DescribeFlowBriefsResponse} */
   DescribeFlowBriefs(data: DescribeFlowBriefsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowBriefsResponse>;
-  /** {@link DescribeFlowEvidenceReport 查询出证报告}({@link DescribeFlowEvidenceReportRequest 请求参数}): {@link DescribeFlowEvidenceReportResponse 返回参数} */
+  /** 查询出证报告 {@link DescribeFlowEvidenceReportRequest} {@link DescribeFlowEvidenceReportResponse} */
   DescribeFlowEvidenceReport(data: DescribeFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowEvidenceReportResponse>;
-  /** {@link DescribeFlowInfo 查询合同详情}({@link DescribeFlowInfoRequest 请求参数}): {@link DescribeFlowInfoResponse 返回参数} */
+  /** 查询合同详情 {@link DescribeFlowInfoRequest} {@link DescribeFlowInfoResponse} */
   DescribeFlowInfo(data: DescribeFlowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowInfoResponse>;
-  /** {@link DescribeFlowTemplates 查询模板}({@link DescribeFlowTemplatesRequest 请求参数}): {@link DescribeFlowTemplatesResponse 返回参数} */
+  /** 查询模板 {@link DescribeFlowTemplatesRequest} {@link DescribeFlowTemplatesResponse} */
   DescribeFlowTemplates(data: DescribeFlowTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTemplatesResponse>;
-  /** {@link DescribeIntegrationEmployees 查询员工信息}({@link DescribeIntegrationEmployeesRequest 请求参数}): {@link DescribeIntegrationEmployeesResponse 返回参数} */
+  /** 查询员工信息 {@link DescribeIntegrationEmployeesRequest} {@link DescribeIntegrationEmployeesResponse} */
   DescribeIntegrationEmployees(data: DescribeIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationEmployeesResponse>;
-  /** {@link DescribeOrganizationSeals 查询企业电子印章}({@link DescribeOrganizationSealsRequest 请求参数}): {@link DescribeOrganizationSealsResponse 返回参数} */
+  /** 查询企业电子印章 {@link DescribeOrganizationSealsRequest} {@link DescribeOrganizationSealsResponse} */
   DescribeOrganizationSeals(data: DescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationSealsResponse>;
-  /** {@link DescribeThirdPartyAuthCode 通过AuthCode查询用户是否实名}({@link DescribeThirdPartyAuthCodeRequest 请求参数}): {@link DescribeThirdPartyAuthCodeResponse 返回参数} */
+  /** 通过AuthCode查询用户是否实名 {@link DescribeThirdPartyAuthCodeRequest} {@link DescribeThirdPartyAuthCodeResponse} */
   DescribeThirdPartyAuthCode(data: DescribeThirdPartyAuthCodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThirdPartyAuthCodeResponse>;
-  /** {@link GetTaskResultApi 查询转换任务状态}({@link GetTaskResultApiRequest 请求参数}): {@link GetTaskResultApiResponse 返回参数} */
+  /** 查询转换任务状态 {@link GetTaskResultApiRequest} {@link GetTaskResultApiResponse} */
   GetTaskResultApi(data: GetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskResultApiResponse>;
-  /** {@link StartFlow 发起流程}({@link StartFlowRequest 请求参数}): {@link StartFlowResponse 返回参数} */
+  /** 发起流程 {@link StartFlowRequest} {@link StartFlowResponse} */
   StartFlow(data: StartFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StartFlowResponse>;
-  /** {@link UploadFiles 多文件上传}({@link UploadFilesRequest 请求参数}): {@link UploadFilesResponse 返回参数} */
+  /** 多文件上传 {@link UploadFilesRequest} {@link UploadFilesResponse} */
   UploadFiles(data: UploadFilesRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFilesResponse>;
-  /** {@link VerifyPdf 合同文件验签}({@link VerifyPdfRequest 请求参数}): {@link VerifyPdfResponse 返回参数} */
+  /** 合同文件验签 {@link VerifyPdfRequest} {@link VerifyPdfResponse} */
   VerifyPdf(data: VerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyPdfResponse>;
 }
 

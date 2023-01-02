@@ -130,7 +130,7 @@ declare interface GetBpaasApproveDetailResponse {
   Nodes: StatusNode[] | null;
   /** 正在审批的节点id */
   ApprovingNodeId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -144,16 +144,16 @@ declare interface OutApproveBpaasApplicationRequest {
 }
 
 declare interface OutApproveBpaasApplicationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Bpaas 商业流程服务} */
 declare interface Bpaas {
   (): Versions;
-  /** {@link GetBpaasApproveDetail 查看审批详情}({@link GetBpaasApproveDetailRequest 请求参数}): {@link GetBpaasApproveDetailResponse 返回参数} */
+  /** 查看审批详情 {@link GetBpaasApproveDetailRequest} {@link GetBpaasApproveDetailResponse} */
   GetBpaasApproveDetail(data: GetBpaasApproveDetailRequest, config?: AxiosRequestConfig): AxiosPromise<GetBpaasApproveDetailResponse>;
-  /** {@link OutApproveBpaasApplication 外部审批申请单}({@link OutApproveBpaasApplicationRequest 请求参数}): {@link OutApproveBpaasApplicationResponse 返回参数} */
+  /** 外部审批申请单 {@link OutApproveBpaasApplicationRequest} {@link OutApproveBpaasApplicationResponse} */
   OutApproveBpaasApplication(data: OutApproveBpaasApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<OutApproveBpaasApplicationResponse>;
 }
 

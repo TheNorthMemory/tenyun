@@ -412,7 +412,7 @@ declare interface AnalyzeDenseLandmarksResponse {
   DenseFaceShapeSet?: DenseFaceShape[];
   /** 人脸识别服务所用的算法模型版本。本接口仅支持 “3.0“ 输入。 */
   FaceModelVersion?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -438,7 +438,7 @@ declare interface AnalyzeFaceResponse {
   FaceShapeSet: FaceShape[];
   /** 人脸识别所用的算法模型版本。 */
   FaceModelVersion: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -464,7 +464,7 @@ declare interface CompareFaceResponse {
   Score: number;
   /** 人脸识别所用的算法模型版本。 */
   FaceModelVersion: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -488,7 +488,7 @@ declare interface CompareMaskFaceResponse {
   Score: number;
   /** 人脸识别所用的算法模型版本。 */
   FaceModelVersion: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -504,7 +504,7 @@ declare interface CopyPersonResponse {
   SucGroupNum?: number;
   /** 成功加入的人员库列表 */
   SucGroupIds?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -536,7 +536,7 @@ declare interface CreateFaceResponse {
   SucFaceRects: FaceRect[];
   /** 人脸识别所用的算法模型版本。 */
   FaceModelVersion: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -556,7 +556,7 @@ declare interface CreateGroupRequest {
 declare interface CreateGroupResponse {
   /** 人脸识别所用的算法模型版本。 */
   FaceModelVersion: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -592,7 +592,7 @@ declare interface CreatePersonResponse {
   SimilarPersonId: string;
   /** 人脸识别所用的算法模型版本。 */
   FaceModelVersion: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -608,7 +608,7 @@ declare interface DeleteFaceResponse {
   SucDeletedNum?: number;
   /** 删除成功的人脸ID列表 */
   SucFaceIds?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -618,7 +618,7 @@ declare interface DeleteGroupRequest {
 }
 
 declare interface DeleteGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -630,7 +630,7 @@ declare interface DeletePersonFromGroupRequest {
 }
 
 declare interface DeletePersonFromGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -640,7 +640,7 @@ declare interface DeletePersonRequest {
 }
 
 declare interface DeletePersonResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -668,7 +668,7 @@ declare interface DetectFaceAttributesResponse {
   FaceDetailInfos: FaceDetailInfo[];
   /** 人脸识别所用的算法模型版本。 */
   FaceModelVersion: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -700,7 +700,7 @@ declare interface DetectFaceResponse {
   FaceInfos: FaceInfo[];
   /** 人脸识别所用的算法模型版本。 */
   FaceModelVersion: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -718,7 +718,7 @@ declare interface DetectLiveFaceAccurateResponse {
   Score: number;
   /** 人脸识别所用的算法模型版本。 */
   FaceModelVersion: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -738,7 +738,7 @@ declare interface DetectLiveFaceResponse {
   FaceModelVersion: string;
   /** 活体检测是否通过。本字段只有FaceModelVersion为3.0时才具备参考意义。 */
   IsLiveness: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -760,7 +760,7 @@ declare interface GetGroupInfoResponse {
   FaceModelVersion?: string;
   /** Group的创建时间和日期 CreationTimestamp。CreationTimestamp 的值是自 Unix 纪元时间到Group创建时间的毫秒数。 */
   CreationTimestamp?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -776,7 +776,7 @@ declare interface GetGroupListResponse {
   GroupInfos: GroupInfo[];
   /** 人员库总数量 */
   GroupNum: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -792,7 +792,7 @@ declare interface GetPersonBaseInfoResponse {
   Gender?: number;
   /** 包含的人脸 ID 列表 */
   FaceIds?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -812,7 +812,7 @@ declare interface GetPersonGroupInfoResponse {
   GroupNum?: number | null;
   /** 人脸识别服务所用的算法模型版本。 */
   FaceModelVersion?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -826,7 +826,7 @@ declare interface GetPersonListNumResponse {
   PersonNum?: number;
   /** 人脸数量 */
   FaceNum?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -848,7 +848,7 @@ declare interface GetPersonListResponse {
   FaceNum?: number | null;
   /** 人脸识别所用的算法模型版本。 */
   FaceModelVersion?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -864,7 +864,7 @@ declare interface GetUpgradeGroupFaceModelVersionJobListResponse {
   JobInfos?: UpgradeJobInfo[];
   /** 升级任务总数量。 */
   JobNum?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -890,7 +890,7 @@ declare interface GetUpgradeGroupFaceModelVersionResultResponse {
   GroupId: string;
   /** 无法升级的人脸Id信息，文件格式为json。内容参见下方示例。url有效期为半小时。 */
   FailedFacesUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -906,7 +906,7 @@ declare interface ModifyGroupRequest {
 }
 
 declare interface ModifyGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -920,7 +920,7 @@ declare interface ModifyPersonBaseInfoRequest {
 }
 
 declare interface ModifyPersonBaseInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -934,7 +934,7 @@ declare interface ModifyPersonGroupInfoRequest {
 }
 
 declare interface ModifyPersonGroupInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -944,7 +944,7 @@ declare interface RevertGroupFaceModelVersionRequest {
 }
 
 declare interface RevertGroupFaceModelVersionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -978,7 +978,7 @@ declare interface SearchFacesResponse {
   FaceNum: number;
   /** 人脸识别所用的算法模型版本。 */
   FaceModelVersion: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1012,7 +1012,7 @@ declare interface SearchFacesReturnsByGroupResponse {
   ResultsReturnsByGroup: ResultsReturnsByGroup[];
   /** 人脸识别所用的算法模型版本。 */
   FaceModelVersion: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1046,7 +1046,7 @@ declare interface SearchPersonsResponse {
   PersonNum: number;
   /** 人脸识别所用的算法模型版本。 */
   FaceModelVersion: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1080,7 +1080,7 @@ declare interface SearchPersonsReturnsByGroupResponse {
   ResultsReturnsByGroup?: ResultsReturnsByGroup[];
   /** 人脸识别所用的算法模型版本。 */
   FaceModelVersion?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1094,7 +1094,7 @@ declare interface UpgradeGroupFaceModelVersionRequest {
 declare interface UpgradeGroupFaceModelVersionResponse {
   /** 升级任务ID，用于查询、获取升级的进度和结果。 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1118,7 +1118,7 @@ declare interface VerifyFaceResponse {
   IsMatch: boolean;
   /** 人脸识别所用的算法模型版本，是该 Person 所在的人员库的算法模型版本。在创建人员库时设置，详情可参考[算法模型版本](https://cloud.tencent.com/document/product/867/40042) */
   FaceModelVersion: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1142,7 +1142,7 @@ declare interface VerifyPersonResponse {
   IsMatch?: boolean;
   /** 人脸识别所用的算法模型版本，是该 Person 所在的人员库的算法模型版本。在创建人员库时设置，详情可参考[算法模型版本](https://cloud.tencent.com/document/product/867/40042) */
   FaceModelVersion?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1559,7 +1559,7 @@ declare namespace V20180301 {
     DenseFaceShapeSet?: DenseFaceShape[];
     /** 人脸识别服务所用的算法模型版本。本接口仅支持 “3.0“ 输入。 */
     FaceModelVersion?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1585,7 +1585,7 @@ declare namespace V20180301 {
     FaceShapeSet: FaceShape[];
     /** 人脸识别所用的算法模型版本。 */
     FaceModelVersion: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1611,7 +1611,7 @@ declare namespace V20180301 {
     Score: number;
     /** 人脸识别所用的算法模型版本。 */
     FaceModelVersion: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1627,7 +1627,7 @@ declare namespace V20180301 {
     SucGroupNum?: number;
     /** 成功加入的人员库列表 */
     SucGroupIds?: string[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1659,7 +1659,7 @@ declare namespace V20180301 {
     SucFaceRects: FaceRect[];
     /** 人脸识别所用的算法模型版本。 */
     FaceModelVersion: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1679,7 +1679,7 @@ declare namespace V20180301 {
   interface CreateGroupResponse {
     /** 人脸识别所用的算法模型版本。 */
     FaceModelVersion: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1715,7 +1715,7 @@ declare namespace V20180301 {
     SimilarPersonId?: string;
     /** 人脸识别所用的算法模型版本。 */
     FaceModelVersion?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1731,7 +1731,7 @@ declare namespace V20180301 {
     SucDeletedNum?: number;
     /** 删除成功的人脸ID列表 */
     SucFaceIds?: string[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1741,7 +1741,7 @@ declare namespace V20180301 {
   }
 
   interface DeleteGroupResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1753,7 +1753,7 @@ declare namespace V20180301 {
   }
 
   interface DeletePersonFromGroupResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1763,7 +1763,7 @@ declare namespace V20180301 {
   }
 
   interface DeletePersonResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1791,7 +1791,7 @@ declare namespace V20180301 {
     FaceDetailInfos: FaceDetailInfo[];
     /** 人脸识别所用的算法模型版本。 */
     FaceModelVersion: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1823,7 +1823,7 @@ declare namespace V20180301 {
     FaceInfos: FaceInfo[];
     /** 人脸识别服务所用的算法模型版本。目前入参支持 “2.0”和“3.0“ 两个输入。2020年4月2日开始，默认为“3.0”，之前使用过本接口的账号若未填写本参数默认为“2.0”。2020年11月26日后开通服务的账号仅支持输入“3.0”。不同算法模型版本对应的人脸识别算法不同，新版本的整体效果会优于旧版本，建议使用“3.0”版本。 */
     FaceModelVersion: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1843,7 +1843,7 @@ declare namespace V20180301 {
     FaceModelVersion: string;
     /** 活体检测是否通过。本字段只有FaceModelVersion为3.0时才具备参考意义。 */
     IsLiveness: boolean;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1865,7 +1865,7 @@ declare namespace V20180301 {
     FaceModelVersion?: string;
     /** Group的创建时间和日期 CreationTimestamp。CreationTimestamp 的值是自 Unix 纪元时间到Group创建时间的毫秒数。 */
     CreationTimestamp?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1881,7 +1881,7 @@ declare namespace V20180301 {
     GroupInfos: GroupInfo[];
     /** 人员库总数量 */
     GroupNum: number | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1897,7 +1897,7 @@ declare namespace V20180301 {
     Gender?: number;
     /** 包含的人脸 ID 列表 */
     FaceIds?: string[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1917,7 +1917,7 @@ declare namespace V20180301 {
     GroupNum?: number | null;
     /** 人脸识别服务所用的算法模型版本。 */
     FaceModelVersion?: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1931,7 +1931,7 @@ declare namespace V20180301 {
     PersonNum?: number;
     /** 人脸数量 */
     FaceNum?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1953,7 +1953,7 @@ declare namespace V20180301 {
     FaceNum?: number | null;
     /** 人脸识别所用的算法模型版本。 */
     FaceModelVersion?: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1969,7 +1969,7 @@ declare namespace V20180301 {
     JobInfos?: UpgradeJobInfo[];
     /** 升级任务总数量。 */
     JobNum?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1995,7 +1995,7 @@ declare namespace V20180301 {
     GroupId: string;
     /** 无法升级的人脸Id信息，文件格式为json。半小时有效 */
     FailedFacesUrl: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2011,7 +2011,7 @@ declare namespace V20180301 {
   }
 
   interface ModifyGroupResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2025,7 +2025,7 @@ declare namespace V20180301 {
   }
 
   interface ModifyPersonBaseInfoResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2039,7 +2039,7 @@ declare namespace V20180301 {
   }
 
   interface ModifyPersonGroupInfoResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2049,7 +2049,7 @@ declare namespace V20180301 {
   }
 
   interface RevertGroupFaceModelVersionResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2083,7 +2083,7 @@ declare namespace V20180301 {
     FaceNum: number;
     /** 人脸识别所用的算法模型版本。 */
     FaceModelVersion: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2117,7 +2117,7 @@ declare namespace V20180301 {
     ResultsReturnsByGroup: ResultsReturnsByGroup[];
     /** 人脸识别所用的算法模型版本。 */
     FaceModelVersion: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2151,7 +2151,7 @@ declare namespace V20180301 {
     PersonNum: number;
     /** 人脸识别所用的算法模型版本。 */
     FaceModelVersion: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2185,7 +2185,7 @@ declare namespace V20180301 {
     ResultsReturnsByGroup?: ResultsReturnsByGroup[];
     /** 人脸识别所用的算法模型版本。 */
     FaceModelVersion?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2199,7 +2199,7 @@ declare namespace V20180301 {
   interface UpgradeGroupFaceModelVersionResponse {
     /** 升级任务ID，用于查询、获取升级的进度和结果。 */
     JobId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2223,7 +2223,7 @@ declare namespace V20180301 {
     IsMatch: boolean;
     /** 人脸识别所用的算法模型版本。 */
     FaceModelVersion: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2247,7 +2247,7 @@ declare namespace V20180301 {
     IsMatch?: boolean;
     /** 人脸识别所用的算法模型版本。 */
     FaceModelVersion?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -2255,141 +2255,141 @@ declare namespace V20180301 {
 /** {@link Iai 人脸识别} */
 declare interface Iai {
   (): Versions;
-  /** {@link AnalyzeDenseLandmarks 稠密关键点}({@link AnalyzeDenseLandmarksRequest 请求参数}): {@link AnalyzeDenseLandmarksResponse 返回参数} */
+  /** 稠密关键点 {@link AnalyzeDenseLandmarksRequest} {@link AnalyzeDenseLandmarksResponse} */
   AnalyzeDenseLandmarks(data?: AnalyzeDenseLandmarksRequest, config?: AxiosRequestConfig): AxiosPromise<AnalyzeDenseLandmarksResponse>;
-  /** {@link AnalyzeFace 五官定位}({@link AnalyzeFaceRequest 请求参数}): {@link AnalyzeFaceResponse 返回参数} */
+  /** 五官定位 {@link AnalyzeFaceRequest} {@link AnalyzeFaceResponse} */
   AnalyzeFace(data?: AnalyzeFaceRequest, config?: AxiosRequestConfig): AxiosPromise<AnalyzeFaceResponse>;
-  /** {@link CompareFace 人脸比对}({@link CompareFaceRequest 请求参数}): {@link CompareFaceResponse 返回参数} */
+  /** 人脸比对 {@link CompareFaceRequest} {@link CompareFaceResponse} */
   CompareFace(data?: CompareFaceRequest, config?: AxiosRequestConfig): AxiosPromise<CompareFaceResponse>;
-  /** {@link CompareMaskFace 防疫场景人脸比对}({@link CompareMaskFaceRequest 请求参数}): {@link CompareMaskFaceResponse 返回参数} */
+  /** 防疫场景人脸比对 {@link CompareMaskFaceRequest} {@link CompareMaskFaceResponse} */
   CompareMaskFace(data?: CompareMaskFaceRequest, config?: AxiosRequestConfig): AxiosPromise<CompareMaskFaceResponse>;
-  /** {@link CopyPerson 复制人员}({@link CopyPersonRequest 请求参数}): {@link CopyPersonResponse 返回参数} */
+  /** 复制人员 {@link CopyPersonRequest} {@link CopyPersonResponse} */
   CopyPerson(data: CopyPersonRequest, config?: AxiosRequestConfig): AxiosPromise<CopyPersonResponse>;
-  /** {@link CreateFace 增加人脸}({@link CreateFaceRequest 请求参数}): {@link CreateFaceResponse 返回参数} */
+  /** 增加人脸 {@link CreateFaceRequest} {@link CreateFaceResponse} */
   CreateFace(data: CreateFaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFaceResponse>;
-  /** {@link CreateGroup 创建人员库}({@link CreateGroupRequest 请求参数}): {@link CreateGroupResponse 返回参数} */
+  /** 创建人员库 {@link CreateGroupRequest} {@link CreateGroupResponse} */
   CreateGroup(data: CreateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupResponse>;
-  /** {@link CreatePerson 创建人员}({@link CreatePersonRequest 请求参数}): {@link CreatePersonResponse 返回参数} */
+  /** 创建人员 {@link CreatePersonRequest} {@link CreatePersonResponse} */
   CreatePerson(data: CreatePersonRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonResponse>;
-  /** {@link DeleteFace 删除人脸}({@link DeleteFaceRequest 请求参数}): {@link DeleteFaceResponse 返回参数} */
+  /** 删除人脸 {@link DeleteFaceRequest} {@link DeleteFaceResponse} */
   DeleteFace(data: DeleteFaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFaceResponse>;
-  /** {@link DeleteGroup 删除人员库}({@link DeleteGroupRequest 请求参数}): {@link DeleteGroupResponse 返回参数} */
+  /** 删除人员库 {@link DeleteGroupRequest} {@link DeleteGroupResponse} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
-  /** {@link DeletePerson 删除人员}({@link DeletePersonRequest 请求参数}): {@link DeletePersonResponse 返回参数} */
+  /** 删除人员 {@link DeletePersonRequest} {@link DeletePersonResponse} */
   DeletePerson(data: DeletePersonRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonResponse>;
-  /** {@link DeletePersonFromGroup 人员库删除人员}({@link DeletePersonFromGroupRequest 请求参数}): {@link DeletePersonFromGroupResponse 返回参数} */
+  /** 人员库删除人员 {@link DeletePersonFromGroupRequest} {@link DeletePersonFromGroupResponse} */
   DeletePersonFromGroup(data: DeletePersonFromGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonFromGroupResponse>;
-  /** {@link DetectFace 人脸检测与分析}({@link DetectFaceRequest 请求参数}): {@link DetectFaceResponse 返回参数} */
+  /** 人脸检测与分析 {@link DetectFaceRequest} {@link DetectFaceResponse} */
   DetectFace(data?: DetectFaceRequest, config?: AxiosRequestConfig): AxiosPromise<DetectFaceResponse>;
-  /** {@link DetectFaceAttributes 人脸检测与属性分析}({@link DetectFaceAttributesRequest 请求参数}): {@link DetectFaceAttributesResponse 返回参数} */
+  /** 人脸检测与属性分析 {@link DetectFaceAttributesRequest} {@link DetectFaceAttributesResponse} */
   DetectFaceAttributes(data?: DetectFaceAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DetectFaceAttributesResponse>;
-  /** {@link DetectLiveFace 人脸静态活体检测}({@link DetectLiveFaceRequest 请求参数}): {@link DetectLiveFaceResponse 返回参数} */
+  /** 人脸静态活体检测 {@link DetectLiveFaceRequest} {@link DetectLiveFaceResponse} */
   DetectLiveFace(data?: DetectLiveFaceRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLiveFaceResponse>;
-  /** {@link DetectLiveFaceAccurate 人脸静态活体检测（高精度版）}({@link DetectLiveFaceAccurateRequest 请求参数}): {@link DetectLiveFaceAccurateResponse 返回参数} */
+  /** 人脸静态活体检测（高精度版） {@link DetectLiveFaceAccurateRequest} {@link DetectLiveFaceAccurateResponse} */
   DetectLiveFaceAccurate(data?: DetectLiveFaceAccurateRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLiveFaceAccurateResponse>;
-  /** {@link GetGroupInfo 获取人员库信息}({@link GetGroupInfoRequest 请求参数}): {@link GetGroupInfoResponse 返回参数} */
+  /** 获取人员库信息 {@link GetGroupInfoRequest} {@link GetGroupInfoResponse} */
   GetGroupInfo(data: GetGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupInfoResponse>;
-  /** {@link GetGroupList 获取人员库列表}({@link GetGroupListRequest 请求参数}): {@link GetGroupListResponse 返回参数} */
+  /** 获取人员库列表 {@link GetGroupListRequest} {@link GetGroupListResponse} */
   GetGroupList(data?: GetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupListResponse>;
-  /** {@link GetPersonBaseInfo 获取人员基础信息}({@link GetPersonBaseInfoRequest 请求参数}): {@link GetPersonBaseInfoResponse 返回参数} */
+  /** 获取人员基础信息 {@link GetPersonBaseInfoRequest} {@link GetPersonBaseInfoResponse} */
   GetPersonBaseInfo(data: GetPersonBaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetPersonBaseInfoResponse>;
-  /** {@link GetPersonGroupInfo 获取人员归属信息}({@link GetPersonGroupInfoRequest 请求参数}): {@link GetPersonGroupInfoResponse 返回参数} */
+  /** 获取人员归属信息 {@link GetPersonGroupInfoRequest} {@link GetPersonGroupInfoResponse} */
   GetPersonGroupInfo(data: GetPersonGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetPersonGroupInfoResponse>;
-  /** {@link GetPersonList 获取人员列表}({@link GetPersonListRequest 请求参数}): {@link GetPersonListResponse 返回参数} */
+  /** 获取人员列表 {@link GetPersonListRequest} {@link GetPersonListResponse} */
   GetPersonList(data: GetPersonListRequest, config?: AxiosRequestConfig): AxiosPromise<GetPersonListResponse>;
-  /** {@link GetPersonListNum 获取人员列表长度}({@link GetPersonListNumRequest 请求参数}): {@link GetPersonListNumResponse 返回参数} */
+  /** 获取人员列表长度 {@link GetPersonListNumRequest} {@link GetPersonListNumResponse} */
   GetPersonListNum(data: GetPersonListNumRequest, config?: AxiosRequestConfig): AxiosPromise<GetPersonListNumResponse>;
-  /** {@link GetUpgradeGroupFaceModelVersionJobList 获取人员库升级任务列表}({@link GetUpgradeGroupFaceModelVersionJobListRequest 请求参数}): {@link GetUpgradeGroupFaceModelVersionJobListResponse 返回参数} */
+  /** 获取人员库升级任务列表 {@link GetUpgradeGroupFaceModelVersionJobListRequest} {@link GetUpgradeGroupFaceModelVersionJobListResponse} */
   GetUpgradeGroupFaceModelVersionJobList(data?: GetUpgradeGroupFaceModelVersionJobListRequest, config?: AxiosRequestConfig): AxiosPromise<GetUpgradeGroupFaceModelVersionJobListResponse>;
-  /** {@link GetUpgradeGroupFaceModelVersionResult 人员库升级结果查询}({@link GetUpgradeGroupFaceModelVersionResultRequest 请求参数}): {@link GetUpgradeGroupFaceModelVersionResultResponse 返回参数} */
+  /** 人员库升级结果查询 {@link GetUpgradeGroupFaceModelVersionResultRequest} {@link GetUpgradeGroupFaceModelVersionResultResponse} */
   GetUpgradeGroupFaceModelVersionResult(data: GetUpgradeGroupFaceModelVersionResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetUpgradeGroupFaceModelVersionResultResponse>;
-  /** {@link ModifyGroup 修改人员库}({@link ModifyGroupRequest 请求参数}): {@link ModifyGroupResponse 返回参数} */
+  /** 修改人员库 {@link ModifyGroupRequest} {@link ModifyGroupResponse} */
   ModifyGroup(data: ModifyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGroupResponse>;
-  /** {@link ModifyPersonBaseInfo 修改人员基础信息}({@link ModifyPersonBaseInfoRequest 请求参数}): {@link ModifyPersonBaseInfoResponse 返回参数} */
+  /** 修改人员基础信息 {@link ModifyPersonBaseInfoRequest} {@link ModifyPersonBaseInfoResponse} */
   ModifyPersonBaseInfo(data: ModifyPersonBaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonBaseInfoResponse>;
-  /** {@link ModifyPersonGroupInfo 修改人员描述信息}({@link ModifyPersonGroupInfoRequest 请求参数}): {@link ModifyPersonGroupInfoResponse 返回参数} */
+  /** 修改人员描述信息 {@link ModifyPersonGroupInfoRequest} {@link ModifyPersonGroupInfoResponse} */
   ModifyPersonGroupInfo(data: ModifyPersonGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonGroupInfoResponse>;
-  /** {@link RevertGroupFaceModelVersion 人员库版本回滚}({@link RevertGroupFaceModelVersionRequest 请求参数}): {@link RevertGroupFaceModelVersionResponse 返回参数} */
+  /** 人员库版本回滚 {@link RevertGroupFaceModelVersionRequest} {@link RevertGroupFaceModelVersionResponse} */
   RevertGroupFaceModelVersion(data: RevertGroupFaceModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<RevertGroupFaceModelVersionResponse>;
-  /** {@link SearchFaces 人脸搜索}({@link SearchFacesRequest 请求参数}): {@link SearchFacesResponse 返回参数} */
+  /** 人脸搜索 {@link SearchFacesRequest} {@link SearchFacesResponse} */
   SearchFaces(data: SearchFacesRequest, config?: AxiosRequestConfig): AxiosPromise<SearchFacesResponse>;
-  /** {@link SearchFacesReturnsByGroup 人脸搜索分库返回}({@link SearchFacesReturnsByGroupRequest 请求参数}): {@link SearchFacesReturnsByGroupResponse 返回参数} */
+  /** 人脸搜索分库返回 {@link SearchFacesReturnsByGroupRequest} {@link SearchFacesReturnsByGroupResponse} */
   SearchFacesReturnsByGroup(data: SearchFacesReturnsByGroupRequest, config?: AxiosRequestConfig): AxiosPromise<SearchFacesReturnsByGroupResponse>;
-  /** {@link SearchPersons 人员搜索}({@link SearchPersonsRequest 请求参数}): {@link SearchPersonsResponse 返回参数} */
+  /** 人员搜索 {@link SearchPersonsRequest} {@link SearchPersonsResponse} */
   SearchPersons(data: SearchPersonsRequest, config?: AxiosRequestConfig): AxiosPromise<SearchPersonsResponse>;
-  /** {@link SearchPersonsReturnsByGroup 人员搜索按库返回}({@link SearchPersonsReturnsByGroupRequest 请求参数}): {@link SearchPersonsReturnsByGroupResponse 返回参数} */
+  /** 人员搜索按库返回 {@link SearchPersonsReturnsByGroupRequest} {@link SearchPersonsReturnsByGroupResponse} */
   SearchPersonsReturnsByGroup(data: SearchPersonsReturnsByGroupRequest, config?: AxiosRequestConfig): AxiosPromise<SearchPersonsReturnsByGroupResponse>;
-  /** {@link UpgradeGroupFaceModelVersion 人员库升级}({@link UpgradeGroupFaceModelVersionRequest 请求参数}): {@link UpgradeGroupFaceModelVersionResponse 返回参数} */
+  /** 人员库升级 {@link UpgradeGroupFaceModelVersionRequest} {@link UpgradeGroupFaceModelVersionResponse} */
   UpgradeGroupFaceModelVersion(data: UpgradeGroupFaceModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeGroupFaceModelVersionResponse>;
-  /** {@link VerifyFace 人脸验证}({@link VerifyFaceRequest 请求参数}): {@link VerifyFaceResponse 返回参数} */
+  /** 人脸验证 {@link VerifyFaceRequest} {@link VerifyFaceResponse} */
   VerifyFace(data: VerifyFaceRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyFaceResponse>;
-  /** {@link VerifyPerson 人员验证}({@link VerifyPersonRequest 请求参数}): {@link VerifyPersonResponse 返回参数} */
+  /** 人员验证 {@link VerifyPersonRequest} {@link VerifyPersonResponse} */
   VerifyPerson(data: VerifyPersonRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyPersonResponse>;
-  /** {@link V20180301.AnalyzeDenseLandmarks 稠密关键点}({@link V20180301.AnalyzeDenseLandmarksRequest 请求参数}): {@link V20180301.AnalyzeDenseLandmarksResponse 返回参数} */
+  /** 稠密关键点 {@link V20180301.AnalyzeDenseLandmarksRequest} {@link V20180301.AnalyzeDenseLandmarksResponse} */
   AnalyzeDenseLandmarks(data: V20180301.AnalyzeDenseLandmarksRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.AnalyzeDenseLandmarksResponse>;
-  /** {@link V20180301.AnalyzeFace 五官定位}({@link V20180301.AnalyzeFaceRequest 请求参数}): {@link V20180301.AnalyzeFaceResponse 返回参数} */
+  /** 五官定位 {@link V20180301.AnalyzeFaceRequest} {@link V20180301.AnalyzeFaceResponse} */
   AnalyzeFace(data: V20180301.AnalyzeFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.AnalyzeFaceResponse>;
-  /** {@link V20180301.CompareFace 人脸比对}({@link V20180301.CompareFaceRequest 请求参数}): {@link V20180301.CompareFaceResponse 返回参数} */
+  /** 人脸比对 {@link V20180301.CompareFaceRequest} {@link V20180301.CompareFaceResponse} */
   CompareFace(data: V20180301.CompareFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.CompareFaceResponse>;
-  /** {@link V20180301.CopyPerson 复制人员}({@link V20180301.CopyPersonRequest 请求参数}): {@link V20180301.CopyPersonResponse 返回参数} */
+  /** 复制人员 {@link V20180301.CopyPersonRequest} {@link V20180301.CopyPersonResponse} */
   CopyPerson(data: V20180301.CopyPersonRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.CopyPersonResponse>;
-  /** {@link V20180301.CreateFace 增加人脸}({@link V20180301.CreateFaceRequest 请求参数}): {@link V20180301.CreateFaceResponse 返回参数} */
+  /** 增加人脸 {@link V20180301.CreateFaceRequest} {@link V20180301.CreateFaceResponse} */
   CreateFace(data: V20180301.CreateFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.CreateFaceResponse>;
-  /** {@link V20180301.CreateGroup 创建人员库}({@link V20180301.CreateGroupRequest 请求参数}): {@link V20180301.CreateGroupResponse 返回参数} */
+  /** 创建人员库 {@link V20180301.CreateGroupRequest} {@link V20180301.CreateGroupResponse} */
   CreateGroup(data: V20180301.CreateGroupRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.CreateGroupResponse>;
-  /** {@link V20180301.CreatePerson 创建人员}({@link V20180301.CreatePersonRequest 请求参数}): {@link V20180301.CreatePersonResponse 返回参数} */
+  /** 创建人员 {@link V20180301.CreatePersonRequest} {@link V20180301.CreatePersonResponse} */
   CreatePerson(data: V20180301.CreatePersonRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.CreatePersonResponse>;
-  /** {@link V20180301.DeleteFace 删除人脸}({@link V20180301.DeleteFaceRequest 请求参数}): {@link V20180301.DeleteFaceResponse 返回参数} */
+  /** 删除人脸 {@link V20180301.DeleteFaceRequest} {@link V20180301.DeleteFaceResponse} */
   DeleteFace(data: V20180301.DeleteFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DeleteFaceResponse>;
-  /** {@link V20180301.DeleteGroup 删除人员库}({@link V20180301.DeleteGroupRequest 请求参数}): {@link V20180301.DeleteGroupResponse 返回参数} */
+  /** 删除人员库 {@link V20180301.DeleteGroupRequest} {@link V20180301.DeleteGroupResponse} */
   DeleteGroup(data: V20180301.DeleteGroupRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DeleteGroupResponse>;
-  /** {@link V20180301.DeletePerson 删除人员}({@link V20180301.DeletePersonRequest 请求参数}): {@link V20180301.DeletePersonResponse 返回参数} */
+  /** 删除人员 {@link V20180301.DeletePersonRequest} {@link V20180301.DeletePersonResponse} */
   DeletePerson(data: V20180301.DeletePersonRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DeletePersonResponse>;
-  /** {@link V20180301.DeletePersonFromGroup 人员库删除人员}({@link V20180301.DeletePersonFromGroupRequest 请求参数}): {@link V20180301.DeletePersonFromGroupResponse 返回参数} */
+  /** 人员库删除人员 {@link V20180301.DeletePersonFromGroupRequest} {@link V20180301.DeletePersonFromGroupResponse} */
   DeletePersonFromGroup(data: V20180301.DeletePersonFromGroupRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DeletePersonFromGroupResponse>;
-  /** {@link V20180301.DetectFace 人脸检测与分析}({@link V20180301.DetectFaceRequest 请求参数}): {@link V20180301.DetectFaceResponse 返回参数} */
+  /** 人脸检测与分析 {@link V20180301.DetectFaceRequest} {@link V20180301.DetectFaceResponse} */
   DetectFace(data: V20180301.DetectFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DetectFaceResponse>;
-  /** {@link V20180301.DetectFaceAttributes 人脸检测与属性分析}({@link V20180301.DetectFaceAttributesRequest 请求参数}): {@link V20180301.DetectFaceAttributesResponse 返回参数} */
+  /** 人脸检测与属性分析 {@link V20180301.DetectFaceAttributesRequest} {@link V20180301.DetectFaceAttributesResponse} */
   DetectFaceAttributes(data: V20180301.DetectFaceAttributesRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DetectFaceAttributesResponse>;
-  /** {@link V20180301.DetectLiveFace 人脸静态活体检测}({@link V20180301.DetectLiveFaceRequest 请求参数}): {@link V20180301.DetectLiveFaceResponse 返回参数} */
+  /** 人脸静态活体检测 {@link V20180301.DetectLiveFaceRequest} {@link V20180301.DetectLiveFaceResponse} */
   DetectLiveFace(data: V20180301.DetectLiveFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DetectLiveFaceResponse>;
-  /** {@link V20180301.GetGroupInfo 获取人员库信息}({@link V20180301.GetGroupInfoRequest 请求参数}): {@link V20180301.GetGroupInfoResponse 返回参数} */
+  /** 获取人员库信息 {@link V20180301.GetGroupInfoRequest} {@link V20180301.GetGroupInfoResponse} */
   GetGroupInfo(data: V20180301.GetGroupInfoRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetGroupInfoResponse>;
-  /** {@link V20180301.GetGroupList 获取人员库列表}({@link V20180301.GetGroupListRequest 请求参数}): {@link V20180301.GetGroupListResponse 返回参数} */
+  /** 获取人员库列表 {@link V20180301.GetGroupListRequest} {@link V20180301.GetGroupListResponse} */
   GetGroupList(data: V20180301.GetGroupListRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetGroupListResponse>;
-  /** {@link V20180301.GetPersonBaseInfo 获取人员基础信息}({@link V20180301.GetPersonBaseInfoRequest 请求参数}): {@link V20180301.GetPersonBaseInfoResponse 返回参数} */
+  /** 获取人员基础信息 {@link V20180301.GetPersonBaseInfoRequest} {@link V20180301.GetPersonBaseInfoResponse} */
   GetPersonBaseInfo(data: V20180301.GetPersonBaseInfoRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetPersonBaseInfoResponse>;
-  /** {@link V20180301.GetPersonGroupInfo 获取人员归属信息}({@link V20180301.GetPersonGroupInfoRequest 请求参数}): {@link V20180301.GetPersonGroupInfoResponse 返回参数} */
+  /** 获取人员归属信息 {@link V20180301.GetPersonGroupInfoRequest} {@link V20180301.GetPersonGroupInfoResponse} */
   GetPersonGroupInfo(data: V20180301.GetPersonGroupInfoRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetPersonGroupInfoResponse>;
-  /** {@link V20180301.GetPersonList 获取人员列表}({@link V20180301.GetPersonListRequest 请求参数}): {@link V20180301.GetPersonListResponse 返回参数} */
+  /** 获取人员列表 {@link V20180301.GetPersonListRequest} {@link V20180301.GetPersonListResponse} */
   GetPersonList(data: V20180301.GetPersonListRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetPersonListResponse>;
-  /** {@link V20180301.GetPersonListNum 获取人员列表长度}({@link V20180301.GetPersonListNumRequest 请求参数}): {@link V20180301.GetPersonListNumResponse 返回参数} */
+  /** 获取人员列表长度 {@link V20180301.GetPersonListNumRequest} {@link V20180301.GetPersonListNumResponse} */
   GetPersonListNum(data: V20180301.GetPersonListNumRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetPersonListNumResponse>;
-  /** {@link V20180301.GetUpgradeGroupFaceModelVersionJobList 获取人员库升级任务列表}({@link V20180301.GetUpgradeGroupFaceModelVersionJobListRequest 请求参数}): {@link V20180301.GetUpgradeGroupFaceModelVersionJobListResponse 返回参数} */
+  /** 获取人员库升级任务列表 {@link V20180301.GetUpgradeGroupFaceModelVersionJobListRequest} {@link V20180301.GetUpgradeGroupFaceModelVersionJobListResponse} */
   GetUpgradeGroupFaceModelVersionJobList(data: V20180301.GetUpgradeGroupFaceModelVersionJobListRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetUpgradeGroupFaceModelVersionJobListResponse>;
-  /** {@link V20180301.GetUpgradeGroupFaceModelVersionResult 人员库升级结果查询}({@link V20180301.GetUpgradeGroupFaceModelVersionResultRequest 请求参数}): {@link V20180301.GetUpgradeGroupFaceModelVersionResultResponse 返回参数} */
+  /** 人员库升级结果查询 {@link V20180301.GetUpgradeGroupFaceModelVersionResultRequest} {@link V20180301.GetUpgradeGroupFaceModelVersionResultResponse} */
   GetUpgradeGroupFaceModelVersionResult(data: V20180301.GetUpgradeGroupFaceModelVersionResultRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetUpgradeGroupFaceModelVersionResultResponse>;
-  /** {@link V20180301.ModifyGroup 修改人员库}({@link V20180301.ModifyGroupRequest 请求参数}): {@link V20180301.ModifyGroupResponse 返回参数} */
+  /** 修改人员库 {@link V20180301.ModifyGroupRequest} {@link V20180301.ModifyGroupResponse} */
   ModifyGroup(data: V20180301.ModifyGroupRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.ModifyGroupResponse>;
-  /** {@link V20180301.ModifyPersonBaseInfo 修改人员基础信息}({@link V20180301.ModifyPersonBaseInfoRequest 请求参数}): {@link V20180301.ModifyPersonBaseInfoResponse 返回参数} */
+  /** 修改人员基础信息 {@link V20180301.ModifyPersonBaseInfoRequest} {@link V20180301.ModifyPersonBaseInfoResponse} */
   ModifyPersonBaseInfo(data: V20180301.ModifyPersonBaseInfoRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.ModifyPersonBaseInfoResponse>;
-  /** {@link V20180301.ModifyPersonGroupInfo 修改人员描述信息}({@link V20180301.ModifyPersonGroupInfoRequest 请求参数}): {@link V20180301.ModifyPersonGroupInfoResponse 返回参数} */
+  /** 修改人员描述信息 {@link V20180301.ModifyPersonGroupInfoRequest} {@link V20180301.ModifyPersonGroupInfoResponse} */
   ModifyPersonGroupInfo(data: V20180301.ModifyPersonGroupInfoRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.ModifyPersonGroupInfoResponse>;
-  /** {@link V20180301.RevertGroupFaceModelVersion 人员库版本回滚}({@link V20180301.RevertGroupFaceModelVersionRequest 请求参数}): {@link V20180301.RevertGroupFaceModelVersionResponse 返回参数} */
+  /** 人员库版本回滚 {@link V20180301.RevertGroupFaceModelVersionRequest} {@link V20180301.RevertGroupFaceModelVersionResponse} */
   RevertGroupFaceModelVersion(data: V20180301.RevertGroupFaceModelVersionRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.RevertGroupFaceModelVersionResponse>;
-  /** {@link V20180301.SearchFaces 人脸搜索}({@link V20180301.SearchFacesRequest 请求参数}): {@link V20180301.SearchFacesResponse 返回参数} */
+  /** 人脸搜索 {@link V20180301.SearchFacesRequest} {@link V20180301.SearchFacesResponse} */
   SearchFaces(data: V20180301.SearchFacesRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.SearchFacesResponse>;
-  /** {@link V20180301.SearchFacesReturnsByGroup 人脸搜索分库返回}({@link V20180301.SearchFacesReturnsByGroupRequest 请求参数}): {@link V20180301.SearchFacesReturnsByGroupResponse 返回参数} */
+  /** 人脸搜索分库返回 {@link V20180301.SearchFacesReturnsByGroupRequest} {@link V20180301.SearchFacesReturnsByGroupResponse} */
   SearchFacesReturnsByGroup(data: V20180301.SearchFacesReturnsByGroupRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.SearchFacesReturnsByGroupResponse>;
-  /** {@link V20180301.SearchPersons 人员搜索}({@link V20180301.SearchPersonsRequest 请求参数}): {@link V20180301.SearchPersonsResponse 返回参数} */
+  /** 人员搜索 {@link V20180301.SearchPersonsRequest} {@link V20180301.SearchPersonsResponse} */
   SearchPersons(data: V20180301.SearchPersonsRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.SearchPersonsResponse>;
-  /** {@link V20180301.SearchPersonsReturnsByGroup 人员搜索按库返回}({@link V20180301.SearchPersonsReturnsByGroupRequest 请求参数}): {@link V20180301.SearchPersonsReturnsByGroupResponse 返回参数} */
+  /** 人员搜索按库返回 {@link V20180301.SearchPersonsReturnsByGroupRequest} {@link V20180301.SearchPersonsReturnsByGroupResponse} */
   SearchPersonsReturnsByGroup(data: V20180301.SearchPersonsReturnsByGroupRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.SearchPersonsReturnsByGroupResponse>;
-  /** {@link V20180301.UpgradeGroupFaceModelVersion 人员库升级}({@link V20180301.UpgradeGroupFaceModelVersionRequest 请求参数}): {@link V20180301.UpgradeGroupFaceModelVersionResponse 返回参数} */
+  /** 人员库升级 {@link V20180301.UpgradeGroupFaceModelVersionRequest} {@link V20180301.UpgradeGroupFaceModelVersionResponse} */
   UpgradeGroupFaceModelVersion(data: V20180301.UpgradeGroupFaceModelVersionRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.UpgradeGroupFaceModelVersionResponse>;
-  /** {@link V20180301.VerifyFace 人脸验证}({@link V20180301.VerifyFaceRequest 请求参数}): {@link V20180301.VerifyFaceResponse 返回参数} */
+  /** 人脸验证 {@link V20180301.VerifyFaceRequest} {@link V20180301.VerifyFaceResponse} */
   VerifyFace(data: V20180301.VerifyFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.VerifyFaceResponse>;
-  /** {@link V20180301.VerifyPerson 人员验证}({@link V20180301.VerifyPersonRequest 请求参数}): {@link V20180301.VerifyPersonResponse 返回参数} */
+  /** 人员验证 {@link V20180301.VerifyPersonRequest} {@link V20180301.VerifyPersonResponse} */
   VerifyPerson(data: V20180301.VerifyPersonRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.VerifyPersonResponse>;
 }
 

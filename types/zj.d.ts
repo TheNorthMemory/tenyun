@@ -276,7 +276,7 @@ declare interface AddCrowdPackInfoRequest {
 declare interface AddCrowdPackInfoResponse {
   /** 接口返回 */
   Data?: SmsAddCrowdPackInfoResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -300,7 +300,7 @@ declare interface AddSmsSignRequest {
 declare interface AddSmsSignResponse {
   /** 签名id数组 */
   Data?: PaasCreateSignResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -330,7 +330,7 @@ declare interface AddSmsTemplateRequest {
 declare interface AddSmsTemplateResponse {
   /** 短信模板创建接口返回 */
   Data?: AddSmsTemplateDataStruct;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -344,7 +344,7 @@ declare interface CancelCampaignRequest {
 declare interface CancelCampaignResponse {
   /** 处理结果 */
   Data?: CancelActivityData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -368,7 +368,7 @@ declare interface CreateCampaignRequest {
 declare interface CreateCampaignResponse {
   /** 活动信息 */
   Data?: SmsCreateCampaignResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -396,7 +396,7 @@ declare interface CreateMmsInstanceRequest {
 declare interface CreateMmsInstanceResponse {
   /** 创建样例返回信息 */
   Data?: CreateMmsInstanceResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -410,7 +410,7 @@ declare interface DelCrowdPackRequest {
 declare interface DelCrowdPackResponse {
   /** 接口返回 */
   Data?: SmsSuccessResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -424,7 +424,7 @@ declare interface DelTemplateRequest {
 declare interface DelTemplateResponse {
   /** 接口返回 */
   Data?: SmsSuccessResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -438,7 +438,7 @@ declare interface DeleteMmsInstanceRequest {
 declare interface DeleteMmsInstanceResponse {
   /** 删除信息返回 */
   Data?: DelMmsInstanceData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -452,7 +452,7 @@ declare interface DescribeMmsInstanceInfoRequest {
 declare interface DescribeMmsInstanceInfoResponse {
   /** 彩信实例信息 */
   Data?: MmsInstanceInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -472,7 +472,7 @@ declare interface DescribeMmsInstanceListRequest {
 declare interface DescribeMmsInstanceListResponse {
   /** 彩信实例信息列表返回 */
   Data?: MmsInstanceInfoList;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -486,7 +486,7 @@ declare interface DescribeSmsCampaignStatisticsRequest {
 declare interface DescribeSmsCampaignStatisticsResponse {
   /** 响应数据 */
   Data?: SmsCampaignStatisticsData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -502,7 +502,7 @@ declare interface DescribeSmsSignListRequest {
 declare interface DescribeSmsSignListResponse {
   /** 返回数据 */
   Data?: DescribeSmsSignListDataStruct[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -518,7 +518,7 @@ declare interface DescribeSmsTemplateListRequest {
 declare interface DescribeSmsTemplateListResponse {
   /** 返回数据信息 */
   Data?: DescribeSmsTemplateListDataStruct[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -538,7 +538,7 @@ declare interface GetCrowdPackListRequest {
 declare interface GetCrowdPackListResponse {
   /** 人群包信息列表 */
   Data?: SmsGetCrowdPackListResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -552,7 +552,7 @@ declare interface GetCrowdUploadInfoRequest {
 declare interface GetCrowdUploadInfoResponse {
   /** 返回信息 */
   Data?: SmsGetCrowdUploadInfoResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -564,7 +564,7 @@ declare interface GetSmsAmountInfoRequest {
 declare interface GetSmsAmountInfoResponse {
   /** 短信账号额度接口 */
   Data?: SmsAmountDataStruct;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -578,7 +578,7 @@ declare interface GetSmsCampaignStatusRequest {
 declare interface GetSmsCampaignStatusResponse {
   /** 活动状态 */
   Data?: PaasSmsCampaignStatusResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -610,7 +610,7 @@ declare interface ModifySmsTemplateRequest {
 declare interface ModifySmsTemplateResponse {
   /** 返回 */
   Data?: ModifySmsTemplateDataStruct;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -632,7 +632,7 @@ declare interface PushMmsContentRequest {
 declare interface PushMmsContentResponse {
   /** 推送短信返回信息 */
   Data?: PushMmsContentResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -660,7 +660,7 @@ declare interface SendSmsRequest {
 declare interface SendSmsResponse {
   /** 出参数据 */
   Data?: SendSmsPaasDataStruct[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -702,47 +702,47 @@ declare interface SmsSuccessResponse {
 /** {@link Zj 珠玑} */
 declare interface Zj {
   (): Versions;
-  /** {@link AddCrowdPackInfo 添加短信人群包信息}({@link AddCrowdPackInfoRequest 请求参数}): {@link AddCrowdPackInfoResponse 返回参数} */
+  /** 添加短信人群包信息 {@link AddCrowdPackInfoRequest} {@link AddCrowdPackInfoResponse} */
   AddCrowdPackInfo(data: AddCrowdPackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddCrowdPackInfoResponse>;
-  /** {@link AddSmsSign 短信签名创建接口}({@link AddSmsSignRequest 请求参数}): {@link AddSmsSignResponse 返回参数} */
+  /** 短信签名创建接口 {@link AddSmsSignRequest} {@link AddSmsSignResponse} */
   AddSmsSign(data: AddSmsSignRequest, config?: AxiosRequestConfig): AxiosPromise<AddSmsSignResponse>;
-  /** {@link AddSmsTemplate 短信模板创建接口}({@link AddSmsTemplateRequest 请求参数}): {@link AddSmsTemplateResponse 返回参数} */
+  /** 短信模板创建接口 {@link AddSmsTemplateRequest} {@link AddSmsTemplateResponse} */
   AddSmsTemplate(data: AddSmsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<AddSmsTemplateResponse>;
-  /** {@link CancelCampaign 取消短信活动}({@link CancelCampaignRequest 请求参数}): {@link CancelCampaignResponse 返回参数} */
+  /** 取消短信活动 {@link CancelCampaignRequest} {@link CancelCampaignResponse} */
   CancelCampaign(data: CancelCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<CancelCampaignResponse>;
-  /** {@link CreateCampaign 创建短信活动}({@link CreateCampaignRequest 请求参数}): {@link CreateCampaignResponse 返回参数} */
+  /** 创建短信活动 {@link CreateCampaignRequest} {@link CreateCampaignResponse} */
   CreateCampaign(data: CreateCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCampaignResponse>;
-  /** {@link CreateMmsInstance 创建超级短信素材样例}({@link CreateMmsInstanceRequest 请求参数}): {@link CreateMmsInstanceResponse 返回参数} */
+  /** 创建超级短信素材样例 {@link CreateMmsInstanceRequest} {@link CreateMmsInstanceResponse} */
   CreateMmsInstance(data: CreateMmsInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMmsInstanceResponse>;
-  /** {@link DelCrowdPack 删除人群包}({@link DelCrowdPackRequest 请求参数}): {@link DelCrowdPackResponse 返回参数} */
+  /** 删除人群包 {@link DelCrowdPackRequest} {@link DelCrowdPackResponse} */
   DelCrowdPack(data: DelCrowdPackRequest, config?: AxiosRequestConfig): AxiosPromise<DelCrowdPackResponse>;
-  /** {@link DelTemplate 删除短信模板}({@link DelTemplateRequest 请求参数}): {@link DelTemplateResponse 返回参数} */
+  /** 删除短信模板 {@link DelTemplateRequest} {@link DelTemplateResponse} */
   DelTemplate(data: DelTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DelTemplateResponse>;
-  /** {@link DeleteMmsInstance 删除超级短信样例}({@link DeleteMmsInstanceRequest 请求参数}): {@link DeleteMmsInstanceResponse 返回参数} */
+  /** 删除超级短信样例 {@link DeleteMmsInstanceRequest} {@link DeleteMmsInstanceResponse} */
   DeleteMmsInstance(data: DeleteMmsInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMmsInstanceResponse>;
-  /** {@link DescribeMmsInstanceInfo 获取彩信实例信息}({@link DescribeMmsInstanceInfoRequest 请求参数}): {@link DescribeMmsInstanceInfoResponse 返回参数} */
+  /** 获取彩信实例信息 {@link DescribeMmsInstanceInfoRequest} {@link DescribeMmsInstanceInfoResponse} */
   DescribeMmsInstanceInfo(data: DescribeMmsInstanceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMmsInstanceInfoResponse>;
-  /** {@link DescribeMmsInstanceList 获取彩信实例列表}({@link DescribeMmsInstanceListRequest 请求参数}): {@link DescribeMmsInstanceListResponse 返回参数} */
+  /** 获取彩信实例列表 {@link DescribeMmsInstanceListRequest} {@link DescribeMmsInstanceListResponse} */
   DescribeMmsInstanceList(data: DescribeMmsInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMmsInstanceListResponse>;
-  /** {@link DescribeSmsCampaignStatistics 获取短信超短活动统计数据}({@link DescribeSmsCampaignStatisticsRequest 请求参数}): {@link DescribeSmsCampaignStatisticsResponse 返回参数} */
+  /** 获取短信超短活动统计数据 {@link DescribeSmsCampaignStatisticsRequest} {@link DescribeSmsCampaignStatisticsResponse} */
   DescribeSmsCampaignStatistics(data: DescribeSmsCampaignStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmsCampaignStatisticsResponse>;
-  /** {@link DescribeSmsSignList 短信签名查询接口}({@link DescribeSmsSignListRequest 请求参数}): {@link DescribeSmsSignListResponse 返回参数} */
+  /** 短信签名查询接口 {@link DescribeSmsSignListRequest} {@link DescribeSmsSignListResponse} */
   DescribeSmsSignList(data: DescribeSmsSignListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmsSignListResponse>;
-  /** {@link DescribeSmsTemplateList 短信模板查询接口}({@link DescribeSmsTemplateListRequest 请求参数}): {@link DescribeSmsTemplateListResponse 返回参数} */
+  /** 短信模板查询接口 {@link DescribeSmsTemplateListRequest} {@link DescribeSmsTemplateListResponse} */
   DescribeSmsTemplateList(data: DescribeSmsTemplateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmsTemplateListResponse>;
-  /** {@link GetCrowdPackList 获取人群包列表}({@link GetCrowdPackListRequest 请求参数}): {@link GetCrowdPackListResponse 返回参数} */
+  /** 获取人群包列表 {@link GetCrowdPackListRequest} {@link GetCrowdPackListResponse} */
   GetCrowdPackList(data: GetCrowdPackListRequest, config?: AxiosRequestConfig): AxiosPromise<GetCrowdPackListResponse>;
-  /** {@link GetCrowdUploadInfo 获取短信人群包cos上传信息}({@link GetCrowdUploadInfoRequest 请求参数}): {@link GetCrowdUploadInfoResponse 返回参数} */
+  /** 获取短信人群包cos上传信息 {@link GetCrowdUploadInfoRequest} {@link GetCrowdUploadInfoResponse} */
   GetCrowdUploadInfo(data: GetCrowdUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetCrowdUploadInfoResponse>;
-  /** {@link GetSmsAmountInfo 获取账号短信额度配置信息}({@link GetSmsAmountInfoRequest 请求参数}): {@link GetSmsAmountInfoResponse 返回参数} */
+  /** 获取账号短信额度配置信息 {@link GetSmsAmountInfoRequest} {@link GetSmsAmountInfoResponse} */
   GetSmsAmountInfo(data: GetSmsAmountInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetSmsAmountInfoResponse>;
-  /** {@link GetSmsCampaignStatus 获取短信活动状态}({@link GetSmsCampaignStatusRequest 请求参数}): {@link GetSmsCampaignStatusResponse 返回参数} */
+  /** 获取短信活动状态 {@link GetSmsCampaignStatusRequest} {@link GetSmsCampaignStatusResponse} */
   GetSmsCampaignStatus(data: GetSmsCampaignStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetSmsCampaignStatusResponse>;
-  /** {@link ModifySmsTemplate 短信模板编辑接口}({@link ModifySmsTemplateRequest 请求参数}): {@link ModifySmsTemplateResponse 返回参数} */
+  /** 短信模板编辑接口 {@link ModifySmsTemplateRequest} {@link ModifySmsTemplateResponse} */
   ModifySmsTemplate(data: ModifySmsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySmsTemplateResponse>;
-  /** {@link PushMmsContent 推送超级短信内容}({@link PushMmsContentRequest 请求参数}): {@link PushMmsContentResponse 返回参数} */
+  /** 推送超级短信内容 {@link PushMmsContentRequest} {@link PushMmsContentResponse} */
   PushMmsContent(data: PushMmsContentRequest, config?: AxiosRequestConfig): AxiosPromise<PushMmsContentResponse>;
-  /** {@link SendSms 发送短信}({@link SendSmsRequest 请求参数}): {@link SendSmsResponse 返回参数} */
+  /** 发送短信 {@link SendSmsRequest} {@link SendSmsResponse} */
   SendSms(data: SendSmsRequest, config?: AxiosRequestConfig): AxiosPromise<SendSmsResponse>;
 }
 

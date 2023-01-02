@@ -750,7 +750,7 @@ declare interface AttachCcnInstancesRequest {
 }
 
 declare interface AttachCcnInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -802,7 +802,7 @@ declare interface CopyFleetResponse {
   FleetAttributes: FleetAttributes[] | null;
   /** 服务器舰队数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -820,7 +820,7 @@ declare interface CreateAliasRequest {
 declare interface CreateAliasResponse {
   /** 别名对象 */
   Alias?: Alias;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -846,7 +846,7 @@ declare interface CreateAssetResponse {
   AssetId: string;
   /** 生成包的全局唯一资源标识符 */
   AssetArn: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -876,7 +876,7 @@ declare interface CreateAssetWithImageResponse {
   AssetId?: string;
   /** 生成包的全局唯一资源标识符 */
   AssetArn?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -920,7 +920,7 @@ declare interface CreateFleetRequest {
 declare interface CreateFleetResponse {
   /** 服务器舰队属性 */
   FleetAttributes: FleetAttributes | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -940,7 +940,7 @@ declare interface CreateGameServerSessionQueueRequest {
 declare interface CreateGameServerSessionQueueResponse {
   /** 游戏服务器会话队列 */
   GameServerSessionQueue: GameServerSessionQueue;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -968,7 +968,7 @@ declare interface CreateGameServerSessionRequest {
 declare interface CreateGameServerSessionResponse {
   /** 游戏服务器会话 */
   GameServerSession?: GameServerSession | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -978,7 +978,7 @@ declare interface DeleteAliasRequest {
 }
 
 declare interface DeleteAliasResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -988,7 +988,7 @@ declare interface DeleteAssetRequest {
 }
 
 declare interface DeleteAssetResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -998,7 +998,7 @@ declare interface DeleteFleetRequest {
 }
 
 declare interface DeleteFleetResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1008,7 +1008,7 @@ declare interface DeleteGameServerSessionQueueRequest {
 }
 
 declare interface DeleteGameServerSessionQueueResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1020,7 +1020,7 @@ declare interface DeleteScalingPolicyRequest {
 }
 
 declare interface DeleteScalingPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1034,7 +1034,7 @@ declare interface DeleteTimerScalingPolicyRequest {
 }
 
 declare interface DeleteTimerScalingPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1046,7 +1046,7 @@ declare interface DescribeAliasRequest {
 declare interface DescribeAliasResponse {
   /** 别名对象 */
   Alias?: Alias | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1058,7 +1058,7 @@ declare interface DescribeAssetRequest {
 declare interface DescribeAssetResponse {
   /** 生成包信息 */
   Asset?: Asset;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1072,7 +1072,7 @@ declare interface DescribeAssetSystemsRequest {
 declare interface DescribeAssetSystemsResponse {
   /** 生成包支持的操作系统类型列表 */
   AssetSupportSys?: AssetSupportSys[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1094,7 +1094,7 @@ declare interface DescribeAssetsResponse {
   TotalCount?: number;
   /** 生成包列表 */
   Assets?: Asset[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1108,7 +1108,7 @@ declare interface DescribeCcnInstancesResponse {
   CcnInstanceSets: CcnInstanceSets[] | null;
   /** 云联网实例个数，最小值为0 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1126,7 +1126,7 @@ declare interface DescribeFleetAttributesResponse {
   FleetAttributes: FleetAttributes[] | null;
   /** 服务器舰队总数，最小值0 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1144,7 +1144,7 @@ declare interface DescribeFleetCapacityResponse {
   FleetCapacity: FleetCapacity[] | null;
   /** 结果返回最大数量 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1168,7 +1168,7 @@ declare interface DescribeFleetEventsResponse {
   Events: Event[];
   /** 返回的事件总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1180,7 +1180,7 @@ declare interface DescribeFleetPortSettingsRequest {
 declare interface DescribeFleetPortSettingsResponse {
   /** 安全组信息 */
   InboundPermissions?: InboundPermission[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1192,7 +1192,7 @@ declare interface DescribeFleetRelatedResourcesRequest {
 declare interface DescribeFleetRelatedResourcesResponse {
   /** 与服务器舰队关联的资源信息 */
   Resources: FleetRelatedResource[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1216,7 +1216,7 @@ declare interface DescribeFleetStatisticDetailsResponse {
   TotalCount: number | null;
   /** 统计时间类型 */
   TimeType: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1242,7 +1242,7 @@ declare interface DescribeFleetStatisticFlowsResponse {
   TotalCount: number | null;
   /** 统计时间类型，取值：小时和天 */
   TimeType: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1260,7 +1260,7 @@ declare interface DescribeFleetStatisticSummaryResponse {
   TotalUsedTimeSeconds: string | null;
   /** 总流量，单位MB */
   TotalUsedFlowMegaBytes: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1274,7 +1274,7 @@ declare interface DescribeFleetUtilizationResponse {
   FleetUtilization: FleetUtilization[] | null;
   /** 总数，最小值0 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1298,7 +1298,7 @@ declare interface DescribeGameServerSessionDetailsResponse {
   GameServerSessionDetails?: GameServerSessionDetail[] | null;
   /** 页偏移，用于查询下一页，最小长度不小于1个ASCII字符，最大长度不超过1024个ASCII字符 */
   NextToken?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1310,7 +1310,7 @@ declare interface DescribeGameServerSessionPlacementRequest {
 declare interface DescribeGameServerSessionPlacementResponse {
   /** 游戏服务器会话放置 */
   GameServerSessionPlacement?: GameServerSessionPlacement;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1330,7 +1330,7 @@ declare interface DescribeGameServerSessionQueuesResponse {
   GameServerSessionQueues?: GameServerSessionQueue[] | null;
   /** 游戏服务器会话队列总数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1354,7 +1354,7 @@ declare interface DescribeGameServerSessionsResponse {
   GameServerSessions?: GameServerSession[] | null;
   /** 页偏移，用于查询下一页，最小长度不小于1个ASCII字符，最大长度不超过1024个ASCII字符 */
   NextToken?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1366,7 +1366,7 @@ declare interface DescribeInstanceLimitResponse {
   Limit?: number;
   /** 详细信息 */
   ExtraInfos?: ExtraInfos[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1376,7 +1376,7 @@ declare interface DescribeInstanceTypesRequest {
 declare interface DescribeInstanceTypesResponse {
   /** 服务器实例类型列表 */
   InstanceTypeList?: InstanceTypeInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1396,7 +1396,7 @@ declare interface DescribeInstancesExtendResponse {
   Instances: InstanceExtend[] | null;
   /** 梳理信息总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1418,7 +1418,7 @@ declare interface DescribeInstancesResponse {
   Instances: Instance[] | null;
   /** 结果返回最大数量 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1442,7 +1442,7 @@ declare interface DescribePlayerSessionsResponse {
   PlayerSessions?: PlayerSession[] | null;
   /** 页偏移，用于查询下一页，最小长度不小于1个ASCII字符，最大长度不超过1024个ASCII字符 */
   NextToken?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1454,7 +1454,7 @@ declare interface DescribeRuntimeConfigurationRequest {
 declare interface DescribeRuntimeConfigurationResponse {
   /** 服务器舰队运行配置信息 */
   RuntimeConfiguration?: RuntimeConfiguration | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1474,7 +1474,7 @@ declare interface DescribeScalingPoliciesResponse {
   ScalingPolicies?: ScalingPolicy[] | null;
   /** 动态扩缩容配置策略总数 */
   TotalCount?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1498,7 +1498,7 @@ declare interface DescribeTimerScalingPoliciesResponse {
   TimerScalingPolicies: TimerScalingPolicy[] | null;
   /** 定时器总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1510,7 +1510,7 @@ declare interface DescribeUserQuotaRequest {
 declare interface DescribeUserQuotaResponse {
   /** 配额资源信息 */
   QuotaResource?: QuotaResource | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1522,7 +1522,7 @@ declare interface DescribeUserQuotasResponse {
   QuotaResource?: QuotaResource[] | null;
   /** 配额信息列表总数，最小值0 */
   Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1532,7 +1532,7 @@ declare interface DetachCcnInstancesRequest {
 }
 
 declare interface DetachCcnInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1546,7 +1546,7 @@ declare interface EndGameServerSessionAndProcessRequest {
 }
 
 declare interface EndGameServerSessionAndProcessResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1570,7 +1570,7 @@ declare interface GetGameServerInstanceLogUrlResponse {
   Total: number;
   /** 是否还有没拉取完的 */
   HasNext: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1582,7 +1582,7 @@ declare interface GetGameServerSessionLogUrlRequest {
 declare interface GetGameServerSessionLogUrlResponse {
   /** 日志下载URL，最小长度不小于1个ASCII字符，最大长度不超过1024个ASCII字符 */
   PreSignedUrl?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1596,7 +1596,7 @@ declare interface GetInstanceAccessRequest {
 declare interface GetInstanceAccessResponse {
   /** 实例登录所需要的凭据 */
   InstanceAccess?: InstanceAccess;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1614,7 +1614,7 @@ declare interface GetUploadCredentialsResponse {
   BucketName?: string;
   /** 生成包所在地域 */
   AssetRegion?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1626,7 +1626,7 @@ declare interface GetUploadFederationTokenResponse {
   ExpiredTime?: number;
   /** 临时证书 */
   AssetCredentials?: AssetCredentials;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1642,7 +1642,7 @@ declare interface JoinGameServerSessionBatchRequest {
 declare interface JoinGameServerSessionBatchResponse {
   /** 玩家会话列表，最大25组 */
   PlayerSessions?: PlayerSession[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1658,7 +1658,7 @@ declare interface JoinGameServerSessionRequest {
 declare interface JoinGameServerSessionResponse {
   /** 玩家会话 */
   PlayerSession?: PlayerSession | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1684,7 +1684,7 @@ declare interface ListAliasesResponse {
   Aliases?: Alias[] | null;
   /** 总数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1704,7 +1704,7 @@ declare interface ListFleetsResponse {
   FleetIds?: string[] | null;
   /** 服务器舰队 Id 总数，最小值0 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1734,7 +1734,7 @@ declare interface PutScalingPolicyRequest {
 declare interface PutScalingPolicyResponse {
   /** 规则名称 */
   Name?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1744,7 +1744,7 @@ declare interface PutTimerScalingPolicyRequest {
 }
 
 declare interface PutTimerScalingPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1756,7 +1756,7 @@ declare interface ResolveAliasRequest {
 declare interface ResolveAliasResponse {
   /** 别名指向的fleet的唯一标识符 */
   FleetId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1780,7 +1780,7 @@ declare interface SearchGameServerSessionsResponse {
   GameServerSessions?: GameServerSession[] | null;
   /** 页偏移，用于查询下一页，最小长度不小于1个ASCII字符，最大长度不超过1024个ASCII字符 */
   NextToken?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1794,7 +1794,7 @@ declare interface SetServerReservedRequest {
 }
 
 declare interface SetServerReservedResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1808,7 +1808,7 @@ declare interface SetServerWeightRequest {
 }
 
 declare interface SetServerWeightResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1822,7 +1822,7 @@ declare interface StartFleetActionsRequest {
 declare interface StartFleetActionsResponse {
   /** 服务器舰队 Id */
   FleetId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1848,7 +1848,7 @@ declare interface StartGameServerSessionPlacementRequest {
 declare interface StartGameServerSessionPlacementResponse {
   /** 游戏服务器会话放置 */
   GameServerSessionPlacement?: GameServerSessionPlacement;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1862,7 +1862,7 @@ declare interface StopFleetActionsRequest {
 declare interface StopFleetActionsResponse {
   /** 服务器舰队 Id */
   FleetId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1874,7 +1874,7 @@ declare interface StopGameServerSessionPlacementRequest {
 declare interface StopGameServerSessionPlacementResponse {
   /** 游戏服务器会话放置 */
   GameServerSessionPlacement?: GameServerSessionPlacement;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1892,7 +1892,7 @@ declare interface UpdateAliasRequest {
 declare interface UpdateAliasResponse {
   /** 别名对象 */
   Alias?: Alias | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1906,7 +1906,7 @@ declare interface UpdateAssetRequest {
 }
 
 declare interface UpdateAssetResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1916,7 +1916,7 @@ declare interface UpdateBucketAccelerateOptRequest {
 }
 
 declare interface UpdateBucketAccelerateOptResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1934,7 +1934,7 @@ declare interface UpdateBucketCORSOptRequest {
 }
 
 declare interface UpdateBucketCORSOptResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1956,7 +1956,7 @@ declare interface UpdateFleetAttributesRequest {
 declare interface UpdateFleetAttributesResponse {
   /** 服务器舰队Id */
   FleetId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1976,7 +1976,7 @@ declare interface UpdateFleetCapacityRequest {
 declare interface UpdateFleetCapacityResponse {
   /** 服务器舰队ID */
   FleetId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1988,7 +1988,7 @@ declare interface UpdateFleetNameRequest {
 }
 
 declare interface UpdateFleetNameResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2004,7 +2004,7 @@ declare interface UpdateFleetPortSettingsRequest {
 declare interface UpdateFleetPortSettingsResponse {
   /** 服务部署 Id */
   FleetId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2022,7 +2022,7 @@ declare interface UpdateGameServerSessionQueueRequest {
 declare interface UpdateGameServerSessionQueueResponse {
   /** 部署服务组对象 */
   GameServerSessionQueue?: GameServerSessionQueue;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2042,7 +2042,7 @@ declare interface UpdateGameServerSessionRequest {
 declare interface UpdateGameServerSessionResponse {
   /** 更新后的游戏会话 */
   GameServerSession?: GameServerSession;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2056,160 +2056,160 @@ declare interface UpdateRuntimeConfigurationRequest {
 declare interface UpdateRuntimeConfigurationResponse {
   /** 服务器舰队配置 */
   RuntimeConfiguration?: RuntimeConfiguration | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Gse 游戏服务器伸缩} */
 declare interface Gse {
   (): Versions;
-  /** {@link AttachCcnInstances 关联云联网实例}({@link AttachCcnInstancesRequest 请求参数}): {@link AttachCcnInstancesResponse 返回参数} */
+  /** 关联云联网实例 {@link AttachCcnInstancesRequest} {@link AttachCcnInstancesResponse} */
   AttachCcnInstances(data?: AttachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachCcnInstancesResponse>;
-  /** {@link CopyFleet 复制服务器舰队}({@link CopyFleetRequest 请求参数}): {@link CopyFleetResponse 返回参数} */
+  /** 复制服务器舰队 {@link CopyFleetRequest} {@link CopyFleetResponse} */
   CopyFleet(data: CopyFleetRequest, config?: AxiosRequestConfig): AxiosPromise<CopyFleetResponse>;
-  /** {@link CreateAlias 创建别名}({@link CreateAliasRequest 请求参数}): {@link CreateAliasResponse 返回参数} */
+  /** 创建别名 {@link CreateAliasRequest} {@link CreateAliasResponse} */
   CreateAlias(data: CreateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAliasResponse>;
-  /** {@link CreateAsset 创建生成包}({@link CreateAssetRequest 请求参数}): {@link CreateAssetResponse 返回参数} */
+  /** 创建生成包 {@link CreateAssetRequest} {@link CreateAssetResponse} */
   CreateAsset(data: CreateAssetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetResponse>;
-  /** {@link CreateAssetWithImage 创建生成包镜像信息}({@link CreateAssetWithImageRequest 请求参数}): {@link CreateAssetWithImageResponse 返回参数} */
+  /** 创建生成包镜像信息 {@link CreateAssetWithImageRequest} {@link CreateAssetWithImageResponse} */
   CreateAssetWithImage(data: CreateAssetWithImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetWithImageResponse>;
-  /** {@link CreateFleet 创建服务器舰队}({@link CreateFleetRequest 请求参数}): {@link CreateFleetResponse 返回参数} */
+  /** 创建服务器舰队 {@link CreateFleetRequest} {@link CreateFleetResponse} */
   CreateFleet(data?: CreateFleetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFleetResponse>;
-  /** {@link CreateGameServerSession 创建游戏服务器会话}({@link CreateGameServerSessionRequest 请求参数}): {@link CreateGameServerSessionResponse 返回参数} */
+  /** 创建游戏服务器会话 {@link CreateGameServerSessionRequest} {@link CreateGameServerSessionResponse} */
   CreateGameServerSession(data: CreateGameServerSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGameServerSessionResponse>;
-  /** {@link CreateGameServerSessionQueue 创建游戏服务器会话队列}({@link CreateGameServerSessionQueueRequest 请求参数}): {@link CreateGameServerSessionQueueResponse 返回参数} */
+  /** 创建游戏服务器会话队列 {@link CreateGameServerSessionQueueRequest} {@link CreateGameServerSessionQueueResponse} */
   CreateGameServerSessionQueue(data: CreateGameServerSessionQueueRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGameServerSessionQueueResponse>;
-  /** {@link DeleteAlias 删除别名}({@link DeleteAliasRequest 请求参数}): {@link DeleteAliasResponse 返回参数} */
+  /** 删除别名 {@link DeleteAliasRequest} {@link DeleteAliasResponse} */
   DeleteAlias(data: DeleteAliasRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAliasResponse>;
-  /** {@link DeleteAsset 删除生成包}({@link DeleteAssetRequest 请求参数}): {@link DeleteAssetResponse 返回参数} */
+  /** 删除生成包 {@link DeleteAssetRequest} {@link DeleteAssetResponse} */
   DeleteAsset(data: DeleteAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAssetResponse>;
-  /** {@link DeleteFleet 删除服务器舰队}({@link DeleteFleetRequest 请求参数}): {@link DeleteFleetResponse 返回参数} */
+  /** 删除服务器舰队 {@link DeleteFleetRequest} {@link DeleteFleetResponse} */
   DeleteFleet(data: DeleteFleetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFleetResponse>;
-  /** {@link DeleteGameServerSessionQueue 删除游戏服务器会话队列}({@link DeleteGameServerSessionQueueRequest 请求参数}): {@link DeleteGameServerSessionQueueResponse 返回参数} */
+  /** 删除游戏服务器会话队列 {@link DeleteGameServerSessionQueueRequest} {@link DeleteGameServerSessionQueueResponse} */
   DeleteGameServerSessionQueue(data: DeleteGameServerSessionQueueRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGameServerSessionQueueResponse>;
-  /** {@link DeleteScalingPolicy 删除扩缩容配置}({@link DeleteScalingPolicyRequest 请求参数}): {@link DeleteScalingPolicyResponse 返回参数} */
+  /** 删除扩缩容配置 {@link DeleteScalingPolicyRequest} {@link DeleteScalingPolicyResponse} */
   DeleteScalingPolicy(data: DeleteScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScalingPolicyResponse>;
-  /** {@link DeleteTimerScalingPolicy 删除定时器}({@link DeleteTimerScalingPolicyRequest 请求参数}): {@link DeleteTimerScalingPolicyResponse 返回参数} */
+  /** 删除定时器 {@link DeleteTimerScalingPolicyRequest} {@link DeleteTimerScalingPolicyResponse} */
   DeleteTimerScalingPolicy(data?: DeleteTimerScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTimerScalingPolicyResponse>;
-  /** {@link DescribeAlias 获取别名详情}({@link DescribeAliasRequest 请求参数}): {@link DescribeAliasResponse 返回参数} */
+  /** 获取别名详情 {@link DescribeAliasRequest} {@link DescribeAliasResponse} */
   DescribeAlias(data: DescribeAliasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAliasResponse>;
-  /** {@link DescribeAsset 获取生成包信息}({@link DescribeAssetRequest 请求参数}): {@link DescribeAssetResponse 返回参数} */
+  /** 获取生成包信息 {@link DescribeAssetRequest} {@link DescribeAssetResponse} */
   DescribeAsset(data: DescribeAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetResponse>;
-  /** {@link DescribeAssetSystems 获取生成包支持的操作系统列表}({@link DescribeAssetSystemsRequest 请求参数}): {@link DescribeAssetSystemsResponse 返回参数} */
+  /** 获取生成包支持的操作系统列表 {@link DescribeAssetSystemsRequest} {@link DescribeAssetSystemsResponse} */
   DescribeAssetSystems(data?: DescribeAssetSystemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSystemsResponse>;
-  /** {@link DescribeAssets 拉取生成包列表}({@link DescribeAssetsRequest 请求参数}): {@link DescribeAssetsResponse 返回参数} */
+  /** 拉取生成包列表 {@link DescribeAssetsRequest} {@link DescribeAssetsResponse} */
   DescribeAssets(data: DescribeAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetsResponse>;
-  /** {@link DescribeCcnInstances 查询云联网实例}({@link DescribeCcnInstancesRequest 请求参数}): {@link DescribeCcnInstancesResponse 返回参数} */
+  /** 查询云联网实例 {@link DescribeCcnInstancesRequest} {@link DescribeCcnInstancesResponse} */
   DescribeCcnInstances(data?: DescribeCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnInstancesResponse>;
-  /** {@link DescribeFleetAttributes 获取服务器舰队属性}({@link DescribeFleetAttributesRequest 请求参数}): {@link DescribeFleetAttributesResponse 返回参数} */
+  /** 获取服务器舰队属性 {@link DescribeFleetAttributesRequest} {@link DescribeFleetAttributesResponse} */
   DescribeFleetAttributes(data?: DescribeFleetAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetAttributesResponse>;
-  /** {@link DescribeFleetCapacity 查询游戏服务器舰队容量配置}({@link DescribeFleetCapacityRequest 请求参数}): {@link DescribeFleetCapacityResponse 返回参数} */
+  /** 查询游戏服务器舰队容量配置 {@link DescribeFleetCapacityRequest} {@link DescribeFleetCapacityResponse} */
   DescribeFleetCapacity(data: DescribeFleetCapacityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetCapacityResponse>;
-  /** {@link DescribeFleetEvents 查询服务器舰队的事件列表}({@link DescribeFleetEventsRequest 请求参数}): {@link DescribeFleetEventsResponse 返回参数} */
+  /** 查询服务器舰队的事件列表 {@link DescribeFleetEventsRequest} {@link DescribeFleetEventsResponse} */
   DescribeFleetEvents(data: DescribeFleetEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetEventsResponse>;
-  /** {@link DescribeFleetPortSettings 服务器舰队安全组信息查询}({@link DescribeFleetPortSettingsRequest 请求参数}): {@link DescribeFleetPortSettingsResponse 返回参数} */
+  /** 服务器舰队安全组信息查询 {@link DescribeFleetPortSettingsRequest} {@link DescribeFleetPortSettingsResponse} */
   DescribeFleetPortSettings(data: DescribeFleetPortSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetPortSettingsResponse>;
-  /** {@link DescribeFleetRelatedResources 获取与游戏服务器舰队关联的资源信息}({@link DescribeFleetRelatedResourcesRequest 请求参数}): {@link DescribeFleetRelatedResourcesResponse 返回参数} */
+  /** 获取与游戏服务器舰队关联的资源信息 {@link DescribeFleetRelatedResourcesRequest} {@link DescribeFleetRelatedResourcesResponse} */
   DescribeFleetRelatedResources(data: DescribeFleetRelatedResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetRelatedResourcesResponse>;
-  /** {@link DescribeFleetStatisticDetails 查询服务部署统计详情}({@link DescribeFleetStatisticDetailsRequest 请求参数}): {@link DescribeFleetStatisticDetailsResponse 返回参数} */
+  /** 查询服务部署统计详情 {@link DescribeFleetStatisticDetailsRequest} {@link DescribeFleetStatisticDetailsResponse} */
   DescribeFleetStatisticDetails(data?: DescribeFleetStatisticDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetStatisticDetailsResponse>;
-  /** {@link DescribeFleetStatisticFlows 查询服务部署统计用量}({@link DescribeFleetStatisticFlowsRequest 请求参数}): {@link DescribeFleetStatisticFlowsResponse 返回参数} */
+  /** 查询服务部署统计用量 {@link DescribeFleetStatisticFlowsRequest} {@link DescribeFleetStatisticFlowsResponse} */
   DescribeFleetStatisticFlows(data?: DescribeFleetStatisticFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetStatisticFlowsResponse>;
-  /** {@link DescribeFleetStatisticSummary 查询服务部署统计汇总信息}({@link DescribeFleetStatisticSummaryRequest 请求参数}): {@link DescribeFleetStatisticSummaryResponse 返回参数} */
+  /** 查询服务部署统计汇总信息 {@link DescribeFleetStatisticSummaryRequest} {@link DescribeFleetStatisticSummaryResponse} */
   DescribeFleetStatisticSummary(data?: DescribeFleetStatisticSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetStatisticSummaryResponse>;
-  /** {@link DescribeFleetUtilization 查询服务器舰队的利用率信息}({@link DescribeFleetUtilizationRequest 请求参数}): {@link DescribeFleetUtilizationResponse 返回参数} */
+  /** 查询服务器舰队的利用率信息 {@link DescribeFleetUtilizationRequest} {@link DescribeFleetUtilizationResponse} */
   DescribeFleetUtilization(data: DescribeFleetUtilizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetUtilizationResponse>;
-  /** {@link DescribeGameServerSessionDetails 查询游戏服务器会话详情列表}({@link DescribeGameServerSessionDetailsRequest 请求参数}): {@link DescribeGameServerSessionDetailsResponse 返回参数} */
+  /** 查询游戏服务器会话详情列表 {@link DescribeGameServerSessionDetailsRequest} {@link DescribeGameServerSessionDetailsResponse} */
   DescribeGameServerSessionDetails(data?: DescribeGameServerSessionDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGameServerSessionDetailsResponse>;
-  /** {@link DescribeGameServerSessionPlacement 查询游戏服务器会话的放置}({@link DescribeGameServerSessionPlacementRequest 请求参数}): {@link DescribeGameServerSessionPlacementResponse 返回参数} */
+  /** 查询游戏服务器会话的放置 {@link DescribeGameServerSessionPlacementRequest} {@link DescribeGameServerSessionPlacementResponse} */
   DescribeGameServerSessionPlacement(data: DescribeGameServerSessionPlacementRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGameServerSessionPlacementResponse>;
-  /** {@link DescribeGameServerSessionQueues 查询游戏服务器会话队列}({@link DescribeGameServerSessionQueuesRequest 请求参数}): {@link DescribeGameServerSessionQueuesResponse 返回参数} */
+  /** 查询游戏服务器会话队列 {@link DescribeGameServerSessionQueuesRequest} {@link DescribeGameServerSessionQueuesResponse} */
   DescribeGameServerSessionQueues(data?: DescribeGameServerSessionQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGameServerSessionQueuesResponse>;
-  /** {@link DescribeGameServerSessions 查询游戏服务器会话列表}({@link DescribeGameServerSessionsRequest 请求参数}): {@link DescribeGameServerSessionsResponse 返回参数} */
+  /** 查询游戏服务器会话列表 {@link DescribeGameServerSessionsRequest} {@link DescribeGameServerSessionsResponse} */
   DescribeGameServerSessions(data?: DescribeGameServerSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGameServerSessionsResponse>;
-  /** {@link DescribeInstanceLimit 查询用户实例数限额}({@link DescribeInstanceLimitRequest 请求参数}): {@link DescribeInstanceLimitResponse 返回参数} */
+  /** 查询用户实例数限额 {@link DescribeInstanceLimitRequest} {@link DescribeInstanceLimitResponse} */
   DescribeInstanceLimit(data?: DescribeInstanceLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLimitResponse>;
-  /** {@link DescribeInstanceTypes 获取服务器实例类型列表}({@link DescribeInstanceTypesRequest 请求参数}): {@link DescribeInstanceTypesResponse 返回参数} */
+  /** 获取服务器实例类型列表 {@link DescribeInstanceTypesRequest} {@link DescribeInstanceTypesResponse} */
   DescribeInstanceTypes(data?: DescribeInstanceTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceTypesResponse>;
-  /** {@link DescribeInstances 查询服务器实例列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
+  /** 查询服务器实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** {@link DescribeInstancesExtend 查询实例扩展信息列表}({@link DescribeInstancesExtendRequest 请求参数}): {@link DescribeInstancesExtendResponse 返回参数} */
+  /** 查询实例扩展信息列表 {@link DescribeInstancesExtendRequest} {@link DescribeInstancesExtendResponse} */
   DescribeInstancesExtend(data: DescribeInstancesExtendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesExtendResponse>;
-  /** {@link DescribePlayerSessions 查询玩家会话列表}({@link DescribePlayerSessionsRequest 请求参数}): {@link DescribePlayerSessionsResponse 返回参数} */
+  /** 查询玩家会话列表 {@link DescribePlayerSessionsRequest} {@link DescribePlayerSessionsResponse} */
   DescribePlayerSessions(data?: DescribePlayerSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlayerSessionsResponse>;
-  /** {@link DescribeRuntimeConfiguration 获取服务器舰队运行配置}({@link DescribeRuntimeConfigurationRequest 请求参数}): {@link DescribeRuntimeConfigurationResponse 返回参数} */
+  /** 获取服务器舰队运行配置 {@link DescribeRuntimeConfigurationRequest} {@link DescribeRuntimeConfigurationResponse} */
   DescribeRuntimeConfiguration(data: DescribeRuntimeConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuntimeConfigurationResponse>;
-  /** {@link DescribeScalingPolicies 查询扩缩容配置}({@link DescribeScalingPoliciesRequest 请求参数}): {@link DescribeScalingPoliciesResponse 返回参数} */
+  /** 查询扩缩容配置 {@link DescribeScalingPoliciesRequest} {@link DescribeScalingPoliciesResponse} */
   DescribeScalingPolicies(data?: DescribeScalingPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScalingPoliciesResponse>;
-  /** {@link DescribeTimerScalingPolicies 查询定时器列表}({@link DescribeTimerScalingPoliciesRequest 请求参数}): {@link DescribeTimerScalingPoliciesResponse 返回参数} */
+  /** 查询定时器列表 {@link DescribeTimerScalingPoliciesRequest} {@link DescribeTimerScalingPoliciesResponse} */
   DescribeTimerScalingPolicies(data?: DescribeTimerScalingPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimerScalingPoliciesResponse>;
-  /** {@link DescribeUserQuota 获取用户单个模块配额}({@link DescribeUserQuotaRequest 请求参数}): {@link DescribeUserQuotaResponse 返回参数} */
+  /** 获取用户单个模块配额 {@link DescribeUserQuotaRequest} {@link DescribeUserQuotaResponse} */
   DescribeUserQuota(data?: DescribeUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotaResponse>;
-  /** {@link DescribeUserQuotas 获取用户配额}({@link DescribeUserQuotasRequest 请求参数}): {@link DescribeUserQuotasResponse 返回参数} */
+  /** 获取用户配额 {@link DescribeUserQuotasRequest} {@link DescribeUserQuotasResponse} */
   DescribeUserQuotas(data?: DescribeUserQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotasResponse>;
-  /** {@link DetachCcnInstances 解关联云联网实例}({@link DetachCcnInstancesRequest 请求参数}): {@link DetachCcnInstancesResponse 返回参数} */
+  /** 解关联云联网实例 {@link DetachCcnInstancesRequest} {@link DetachCcnInstancesResponse} */
   DetachCcnInstances(data?: DetachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachCcnInstancesResponse>;
-  /** {@link EndGameServerSessionAndProcess 终止游戏服务器会话和对应的进程}({@link EndGameServerSessionAndProcessRequest 请求参数}): {@link EndGameServerSessionAndProcessResponse 返回参数} */
+  /** 终止游戏服务器会话和对应的进程 {@link EndGameServerSessionAndProcessRequest} {@link EndGameServerSessionAndProcessResponse} */
   EndGameServerSessionAndProcess(data?: EndGameServerSessionAndProcessRequest, config?: AxiosRequestConfig): AxiosPromise<EndGameServerSessionAndProcessResponse>;
-  /** {@link GetGameServerInstanceLogUrl 获取游戏服务器实例的日志URL}({@link GetGameServerInstanceLogUrlRequest 请求参数}): {@link GetGameServerInstanceLogUrlResponse 返回参数} */
+  /** 获取游戏服务器实例的日志URL {@link GetGameServerInstanceLogUrlRequest} {@link GetGameServerInstanceLogUrlResponse} */
   GetGameServerInstanceLogUrl(data: GetGameServerInstanceLogUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetGameServerInstanceLogUrlResponse>;
-  /** {@link GetGameServerSessionLogUrl 获取游戏服务器会话的日志URL}({@link GetGameServerSessionLogUrlRequest 请求参数}): {@link GetGameServerSessionLogUrlResponse 返回参数} */
+  /** 获取游戏服务器会话的日志URL {@link GetGameServerSessionLogUrlRequest} {@link GetGameServerSessionLogUrlResponse} */
   GetGameServerSessionLogUrl(data: GetGameServerSessionLogUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetGameServerSessionLogUrlResponse>;
-  /** {@link GetInstanceAccess 获取实例登录所需要的凭据}({@link GetInstanceAccessRequest 请求参数}): {@link GetInstanceAccessResponse 返回参数} */
+  /** 获取实例登录所需要的凭据 {@link GetInstanceAccessRequest} {@link GetInstanceAccessResponse} */
   GetInstanceAccess(data: GetInstanceAccessRequest, config?: AxiosRequestConfig): AxiosPromise<GetInstanceAccessResponse>;
-  /** {@link GetUploadCredentials 获取上传文件授权信息}({@link GetUploadCredentialsRequest 请求参数}): {@link GetUploadCredentialsResponse 返回参数} */
+  /** 获取上传文件授权信息 {@link GetUploadCredentialsRequest} {@link GetUploadCredentialsResponse} */
   GetUploadCredentials(data: GetUploadCredentialsRequest, config?: AxiosRequestConfig): AxiosPromise<GetUploadCredentialsResponse>;
-  /** {@link GetUploadFederationToken 获取上传的临时密钥}({@link GetUploadFederationTokenRequest 请求参数}): {@link GetUploadFederationTokenResponse 返回参数} */
+  /** 获取上传的临时密钥 {@link GetUploadFederationTokenRequest} {@link GetUploadFederationTokenResponse} */
   GetUploadFederationToken(data?: GetUploadFederationTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetUploadFederationTokenResponse>;
-  /** {@link JoinGameServerSession 加入游戏服务器会话}({@link JoinGameServerSessionRequest 请求参数}): {@link JoinGameServerSessionResponse 返回参数} */
+  /** 加入游戏服务器会话 {@link JoinGameServerSessionRequest} {@link JoinGameServerSessionResponse} */
   JoinGameServerSession(data: JoinGameServerSessionRequest, config?: AxiosRequestConfig): AxiosPromise<JoinGameServerSessionResponse>;
-  /** {@link JoinGameServerSessionBatch 批量加入游戏服务器会话}({@link JoinGameServerSessionBatchRequest 请求参数}): {@link JoinGameServerSessionBatchResponse 返回参数} */
+  /** 批量加入游戏服务器会话 {@link JoinGameServerSessionBatchRequest} {@link JoinGameServerSessionBatchResponse} */
   JoinGameServerSessionBatch(data: JoinGameServerSessionBatchRequest, config?: AxiosRequestConfig): AxiosPromise<JoinGameServerSessionBatchResponse>;
-  /** {@link ListAliases 检索帐户下的所有别名}({@link ListAliasesRequest 请求参数}): {@link ListAliasesResponse 返回参数} */
+  /** 检索帐户下的所有别名 {@link ListAliasesRequest} {@link ListAliasesResponse} */
   ListAliases(data?: ListAliasesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAliasesResponse>;
-  /** {@link ListFleets 获取服务器舰队列表}({@link ListFleetsRequest 请求参数}): {@link ListFleetsResponse 返回参数} */
+  /** 获取服务器舰队列表 {@link ListFleetsRequest} {@link ListFleetsResponse} */
   ListFleets(data?: ListFleetsRequest, config?: AxiosRequestConfig): AxiosPromise<ListFleetsResponse>;
-  /** {@link PutScalingPolicy 设置扩缩容策略}({@link PutScalingPolicyRequest 请求参数}): {@link PutScalingPolicyResponse 返回参数} */
+  /** 设置扩缩容策略 {@link PutScalingPolicyRequest} {@link PutScalingPolicyResponse} */
   PutScalingPolicy(data: PutScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<PutScalingPolicyResponse>;
-  /** {@link PutTimerScalingPolicy 创建或更新定时器}({@link PutTimerScalingPolicyRequest 请求参数}): {@link PutTimerScalingPolicyResponse 返回参数} */
+  /** 创建或更新定时器 {@link PutTimerScalingPolicyRequest} {@link PutTimerScalingPolicyResponse} */
   PutTimerScalingPolicy(data?: PutTimerScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<PutTimerScalingPolicyResponse>;
-  /** {@link ResolveAlias 获取别名当前指向的fleetId}({@link ResolveAliasRequest 请求参数}): {@link ResolveAliasResponse 返回参数} */
+  /** 获取别名当前指向的fleetId {@link ResolveAliasRequest} {@link ResolveAliasResponse} */
   ResolveAlias(data: ResolveAliasRequest, config?: AxiosRequestConfig): AxiosPromise<ResolveAliasResponse>;
-  /** {@link SearchGameServerSessions 搜索游戏服务器会话列表}({@link SearchGameServerSessionsRequest 请求参数}): {@link SearchGameServerSessionsResponse 返回参数} */
+  /** 搜索游戏服务器会话列表 {@link SearchGameServerSessionsRequest} {@link SearchGameServerSessionsResponse} */
   SearchGameServerSessions(data?: SearchGameServerSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<SearchGameServerSessionsResponse>;
-  /** {@link SetServerReserved 设置实例保留}({@link SetServerReservedRequest 请求参数}): {@link SetServerReservedResponse 返回参数} */
+  /** 设置实例保留 {@link SetServerReservedRequest} {@link SetServerReservedResponse} */
   SetServerReserved(data: SetServerReservedRequest, config?: AxiosRequestConfig): AxiosPromise<SetServerReservedResponse>;
-  /** {@link SetServerWeight 设置服务器权重}({@link SetServerWeightRequest 请求参数}): {@link SetServerWeightResponse 返回参数} */
+  /** 设置服务器权重 {@link SetServerWeightRequest} {@link SetServerWeightResponse} */
   SetServerWeight(data: SetServerWeightRequest, config?: AxiosRequestConfig): AxiosPromise<SetServerWeightResponse>;
-  /** {@link StartFleetActions 启用服务器舰队自动扩缩容}({@link StartFleetActionsRequest 请求参数}): {@link StartFleetActionsResponse 返回参数} */
+  /** 启用服务器舰队自动扩缩容 {@link StartFleetActionsRequest} {@link StartFleetActionsResponse} */
   StartFleetActions(data: StartFleetActionsRequest, config?: AxiosRequestConfig): AxiosPromise<StartFleetActionsResponse>;
-  /** {@link StartGameServerSessionPlacement 开始放置游戏服务器会话}({@link StartGameServerSessionPlacementRequest 请求参数}): {@link StartGameServerSessionPlacementResponse 返回参数} */
+  /** 开始放置游戏服务器会话 {@link StartGameServerSessionPlacementRequest} {@link StartGameServerSessionPlacementResponse} */
   StartGameServerSessionPlacement(data: StartGameServerSessionPlacementRequest, config?: AxiosRequestConfig): AxiosPromise<StartGameServerSessionPlacementResponse>;
-  /** {@link StopFleetActions 停止服务器舰队自动扩缩容}({@link StopFleetActionsRequest 请求参数}): {@link StopFleetActionsResponse 返回参数} */
+  /** 停止服务器舰队自动扩缩容 {@link StopFleetActionsRequest} {@link StopFleetActionsResponse} */
   StopFleetActions(data: StopFleetActionsRequest, config?: AxiosRequestConfig): AxiosPromise<StopFleetActionsResponse>;
-  /** {@link StopGameServerSessionPlacement 停止放置游戏服务器会话}({@link StopGameServerSessionPlacementRequest 请求参数}): {@link StopGameServerSessionPlacementResponse 返回参数} */
+  /** 停止放置游戏服务器会话 {@link StopGameServerSessionPlacementRequest} {@link StopGameServerSessionPlacementResponse} */
   StopGameServerSessionPlacement(data: StopGameServerSessionPlacementRequest, config?: AxiosRequestConfig): AxiosPromise<StopGameServerSessionPlacementResponse>;
-  /** {@link UpdateAlias 更新别名的属性}({@link UpdateAliasRequest 请求参数}): {@link UpdateAliasResponse 返回参数} */
+  /** 更新别名的属性 {@link UpdateAliasRequest} {@link UpdateAliasResponse} */
   UpdateAlias(data: UpdateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAliasResponse>;
-  /** {@link UpdateAsset 修改生成包信息}({@link UpdateAssetRequest 请求参数}): {@link UpdateAssetResponse 返回参数} */
+  /** 修改生成包信息 {@link UpdateAssetRequest} {@link UpdateAssetResponse} */
   UpdateAsset(data: UpdateAssetRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAssetResponse>;
-  /** {@link UpdateBucketAccelerateOpt cos设置全球加速}({@link UpdateBucketAccelerateOptRequest 请求参数}): {@link UpdateBucketAccelerateOptResponse 返回参数} */
+  /** cos设置全球加速 {@link UpdateBucketAccelerateOptRequest} {@link UpdateBucketAccelerateOptResponse} */
   UpdateBucketAccelerateOpt(data: UpdateBucketAccelerateOptRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateBucketAccelerateOptResponse>;
-  /** {@link UpdateBucketCORSOpt 设置cos跨域访问}({@link UpdateBucketCORSOptRequest 请求参数}): {@link UpdateBucketCORSOptResponse 返回参数} */
+  /** 设置cos跨域访问 {@link UpdateBucketCORSOptRequest} {@link UpdateBucketCORSOptResponse} */
   UpdateBucketCORSOpt(data: UpdateBucketCORSOptRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateBucketCORSOptResponse>;
-  /** {@link UpdateFleetAttributes 更新服务器舰队属性}({@link UpdateFleetAttributesRequest 请求参数}): {@link UpdateFleetAttributesResponse 返回参数} */
+  /** 更新服务器舰队属性 {@link UpdateFleetAttributesRequest} {@link UpdateFleetAttributesResponse} */
   UpdateFleetAttributes(data: UpdateFleetAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFleetAttributesResponse>;
-  /** {@link UpdateFleetCapacity 更新服务器舰队容量配置}({@link UpdateFleetCapacityRequest 请求参数}): {@link UpdateFleetCapacityResponse 返回参数} */
+  /** 更新服务器舰队容量配置 {@link UpdateFleetCapacityRequest} {@link UpdateFleetCapacityResponse} */
   UpdateFleetCapacity(data: UpdateFleetCapacityRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFleetCapacityResponse>;
-  /** {@link UpdateFleetName 更新服务器舰队名称}({@link UpdateFleetNameRequest 请求参数}): {@link UpdateFleetNameResponse 返回参数} */
+  /** 更新服务器舰队名称 {@link UpdateFleetNameRequest} {@link UpdateFleetNameResponse} */
   UpdateFleetName(data: UpdateFleetNameRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFleetNameResponse>;
-  /** {@link UpdateFleetPortSettings 更新服务器舰队安全组}({@link UpdateFleetPortSettingsRequest 请求参数}): {@link UpdateFleetPortSettingsResponse 返回参数} */
+  /** 更新服务器舰队安全组 {@link UpdateFleetPortSettingsRequest} {@link UpdateFleetPortSettingsResponse} */
   UpdateFleetPortSettings(data: UpdateFleetPortSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFleetPortSettingsResponse>;
-  /** {@link UpdateGameServerSession 更新游戏服务器会话}({@link UpdateGameServerSessionRequest 请求参数}): {@link UpdateGameServerSessionResponse 返回参数} */
+  /** 更新游戏服务器会话 {@link UpdateGameServerSessionRequest} {@link UpdateGameServerSessionResponse} */
   UpdateGameServerSession(data: UpdateGameServerSessionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGameServerSessionResponse>;
-  /** {@link UpdateGameServerSessionQueue 修改游戏服务器会话队列}({@link UpdateGameServerSessionQueueRequest 请求参数}): {@link UpdateGameServerSessionQueueResponse 返回参数} */
+  /** 修改游戏服务器会话队列 {@link UpdateGameServerSessionQueueRequest} {@link UpdateGameServerSessionQueueResponse} */
   UpdateGameServerSessionQueue(data: UpdateGameServerSessionQueueRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGameServerSessionQueueResponse>;
-  /** {@link UpdateRuntimeConfiguration 更新服务器舰队配置}({@link UpdateRuntimeConfigurationRequest 请求参数}): {@link UpdateRuntimeConfigurationResponse 返回参数} */
+  /** 更新服务器舰队配置 {@link UpdateRuntimeConfigurationRequest} {@link UpdateRuntimeConfigurationResponse} */
   UpdateRuntimeConfiguration(data: UpdateRuntimeConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRuntimeConfigurationResponse>;
 }
 

@@ -1442,7 +1442,7 @@ declare interface AttachPluginRequest {
 declare interface AttachPluginResponse {
   /** 绑定操作是否成功。 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1460,7 +1460,7 @@ declare interface BindApiAppRequest {
 declare interface BindApiAppResponse {
   /** 绑定操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1480,7 +1480,7 @@ declare interface BindEnvironmentRequest {
 declare interface BindEnvironmentResponse {
   /** 绑定操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1498,7 +1498,7 @@ declare interface BindIPStrategyRequest {
 declare interface BindIPStrategyResponse {
   /** 绑定操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1512,7 +1512,7 @@ declare interface BindSecretIdsRequest {
 declare interface BindSecretIdsResponse {
   /** 绑定操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1540,7 +1540,7 @@ declare interface BindSubDomainRequest {
 declare interface BindSubDomainResponse {
   /** 绑定操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1552,7 +1552,7 @@ declare interface BuildAPIDocRequest {
 declare interface BuildAPIDocResponse {
   /** 操作是否成功 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1570,7 +1570,7 @@ declare interface CreateAPIDocRequest {
 declare interface CreateAPIDocResponse {
   /** API文档基本信息 */
   Result: APIDoc;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1584,7 +1584,7 @@ declare interface CreateApiAppRequest {
 declare interface CreateApiAppResponse {
   /** 新增的应用详情。 */
   Result: ApiAppInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1602,7 +1602,7 @@ declare interface CreateApiKeyRequest {
 declare interface CreateApiKeyResponse {
   /** 新增的密钥详情。 */
   Result: ApiKey | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1718,7 +1718,7 @@ declare interface CreateApiRequest {
 declare interface CreateApiResponse {
   /** api信息 */
   Result: CreateApiRsp | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1736,7 +1736,7 @@ declare interface CreateIPStrategyRequest {
 declare interface CreateIPStrategyResponse {
   /** 新建的IP策略详情。 */
   Result: IPStrategy | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1756,7 +1756,7 @@ declare interface CreatePluginRequest {
 declare interface CreatePluginResponse {
   /** 新建的插件详情。 */
   Result: Plugin;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1802,7 +1802,7 @@ declare interface CreateServiceResponse {
   NetTypes: string[];
   /** IP版本号。 */
   IpVersion: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1836,7 +1836,7 @@ declare interface CreateUpstreamRequest {
 declare interface CreateUpstreamResponse {
   /** 创建返回的唯一ID */
   UpstreamId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1854,7 +1854,7 @@ declare interface CreateUsagePlanRequest {
 declare interface CreateUsagePlanResponse {
   /** 使用计划详情。 */
   Result: UsagePlanInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1866,7 +1866,7 @@ declare interface DeleteAPIDocRequest {
 declare interface DeleteAPIDocResponse {
   /** 操作是否成功 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1878,7 +1878,7 @@ declare interface DeleteApiAppRequest {
 declare interface DeleteApiAppResponse {
   /** 删除操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1890,7 +1890,7 @@ declare interface DeleteApiKeyRequest {
 declare interface DeleteApiKeyResponse {
   /** 删除操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1904,7 +1904,7 @@ declare interface DeleteApiRequest {
 declare interface DeleteApiResponse {
   /** 删除操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1918,7 +1918,7 @@ declare interface DeleteIPStrategyRequest {
 declare interface DeleteIPStrategyResponse {
   /** 删除操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1930,7 +1930,7 @@ declare interface DeletePluginRequest {
 declare interface DeletePluginResponse {
   /** 删除操作是否成功。 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1944,7 +1944,7 @@ declare interface DeleteServiceRequest {
 declare interface DeleteServiceResponse {
   /** 删除操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1960,7 +1960,7 @@ declare interface DeleteServiceSubDomainMappingRequest {
 declare interface DeleteServiceSubDomainMappingResponse {
   /** 删除自定义域名的路径映射操作是否成功。 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1972,7 +1972,7 @@ declare interface DeleteUpstreamRequest {
 declare interface DeleteUpstreamResponse {
   /** 成功删除的后端通道ID */
   UpstreamId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1984,7 +1984,7 @@ declare interface DeleteUsagePlanRequest {
 declare interface DeleteUsagePlanResponse {
   /** 删除操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2000,7 +2000,7 @@ declare interface DemoteServiceUsagePlanRequest {
 declare interface DemoteServiceUsagePlanResponse {
   /** 降级操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2012,7 +2012,7 @@ declare interface DescribeAPIDocDetailRequest {
 declare interface DescribeAPIDocDetailResponse {
   /** API文档详细信息 */
   Result: APIDocInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2026,7 +2026,7 @@ declare interface DescribeAPIDocsRequest {
 declare interface DescribeAPIDocsResponse {
   /** API文档列表信息 */
   Result: APIDocs;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2046,7 +2046,7 @@ declare interface DescribeAllPluginApisRequest {
 declare interface DescribeAllPluginApisResponse {
   /** 插件相关API的列表。 */
   Result: ApiInfoSummary;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2064,7 +2064,7 @@ declare interface DescribeApiAppBindApisStatusRequest {
 declare interface DescribeApiAppBindApisStatusResponse {
   /** 应用绑定的Api列表。 */
   Result: ApiAppApiInfos | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2076,7 +2076,7 @@ declare interface DescribeApiAppRequest {
 declare interface DescribeApiAppResponse {
   /** 应用详情。 */
   Result: ApiAppInfos | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2092,7 +2092,7 @@ declare interface DescribeApiAppsStatusRequest {
 declare interface DescribeApiAppsStatusResponse {
   /** 应用列表。 */
   Result: ApiAppInfos | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2112,7 +2112,7 @@ declare interface DescribeApiBindApiAppsStatusRequest {
 declare interface DescribeApiBindApiAppsStatusResponse {
   /** 应用绑定的Api列表。 */
   Result: ApiAppApiInfos | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2132,7 +2132,7 @@ declare interface DescribeApiEnvironmentStrategyRequest {
 declare interface DescribeApiEnvironmentStrategyResponse {
   /** api绑定策略详情 */
   Result: ApiEnvironmentStrategyStataus | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2148,7 +2148,7 @@ declare interface DescribeApiForApiAppRequest {
 declare interface DescribeApiForApiAppResponse {
   /** API 详情。 */
   Result: ApiInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2160,7 +2160,7 @@ declare interface DescribeApiKeyRequest {
 declare interface DescribeApiKeyResponse {
   /** 密钥详情。 */
   Result: ApiKey | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2176,7 +2176,7 @@ declare interface DescribeApiKeysStatusRequest {
 declare interface DescribeApiKeysStatusResponse {
   /** 密钥列表。 */
   Result: ApiKeysStatus | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2190,7 +2190,7 @@ declare interface DescribeApiRequest {
 declare interface DescribeApiResponse {
   /** API 详情。 */
   Result: ApiInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2206,7 +2206,7 @@ declare interface DescribeApiUsagePlanRequest {
 declare interface DescribeApiUsagePlanResponse {
   /** api绑定使用计划列表。 */
   Result: ApiUsagePlanSet | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2224,7 +2224,7 @@ declare interface DescribeApisStatusRequest {
 declare interface DescribeApisStatusResponse {
   /** API 详情列表。 */
   Result: ApisStatus;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2236,7 +2236,7 @@ declare interface DescribeExclusiveInstanceDetailRequest {
 declare interface DescribeExclusiveInstanceDetailResponse {
   /** 独享实例详情 */
   Result: InstanceDetail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2252,7 +2252,7 @@ declare interface DescribeExclusiveInstancesRequest {
 declare interface DescribeExclusiveInstancesResponse {
   /** 独享实例列表查询结果 */
   Result: InstanceInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2268,7 +2268,7 @@ declare interface DescribeExclusiveInstancesStatusRequest {
 declare interface DescribeExclusiveInstancesStatusResponse {
   /** 独享实例列表查询结果 */
   Result: InstanceSummary;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2290,7 +2290,7 @@ declare interface DescribeIPStrategyApisStatusRequest {
 declare interface DescribeIPStrategyApisStatusResponse {
   /** 环境绑定API列表。 */
   Result: IPStrategyApiStatus | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2312,7 +2312,7 @@ declare interface DescribeIPStrategyRequest {
 declare interface DescribeIPStrategyResponse {
   /** IP策略详情。 */
   Result: IPStrategy | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2326,7 +2326,7 @@ declare interface DescribeIPStrategysStatusRequest {
 declare interface DescribeIPStrategysStatusResponse {
   /** 符合条件的策略列表。 */
   Result: IPStrategysStatus | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2358,7 +2358,7 @@ declare interface DescribeLogSearchResponse {
   LogSet: string[];
   /** 单次搜索返回的日志条数，TotalCount <= Limit */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2374,7 +2374,7 @@ declare interface DescribePluginApisRequest {
 declare interface DescribePluginApisResponse {
   /** 插件绑定的API列表信息。 */
   Result: AttachedApiSummary;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2390,7 +2390,7 @@ declare interface DescribePluginRequest {
 declare interface DescribePluginResponse {
   /** 插件详情。 */
   Result: Plugin;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2410,7 +2410,7 @@ declare interface DescribePluginsByApiRequest {
 declare interface DescribePluginsByApiResponse {
   /** 插件可绑定的API列表信息。 */
   Result: AttachedPluginSummary;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2432,7 +2432,7 @@ declare interface DescribePluginsRequest {
 declare interface DescribePluginsResponse {
   /** 插件详情。 */
   Result: PluginSummary;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2448,7 +2448,7 @@ declare interface DescribeServiceEnvironmentListRequest {
 declare interface DescribeServiceEnvironmentListResponse {
   /** 服务绑定环境详情。 */
   Result: ServiceEnvironmentSet | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2466,7 +2466,7 @@ declare interface DescribeServiceEnvironmentReleaseHistoryRequest {
 declare interface DescribeServiceEnvironmentReleaseHistoryResponse {
   /** 服务发布历史。 */
   Result: ServiceReleaseHistory | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2482,7 +2482,7 @@ declare interface DescribeServiceEnvironmentStrategyRequest {
 declare interface DescribeServiceEnvironmentStrategyResponse {
   /** 限流策略列表。 */
   Result: ServiceEnvironmentStrategyStatus | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2536,7 +2536,7 @@ declare interface DescribeServiceForApiAppResponse {
   SetId: number | null;
   /** 服务绑定的标签。 */
   Tags: Tag[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2552,7 +2552,7 @@ declare interface DescribeServiceReleaseVersionRequest {
 declare interface DescribeServiceReleaseVersionResponse {
   /** 服务发布版本列表。 */
   Result: ServiceReleaseVersion | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2614,7 +2614,7 @@ declare interface DescribeServiceResponse {
   DeploymentType: string | null;
   /** 特殊用途, NULL和DEFAULT表示无特殊用途，其他用途如HTTP_DNS等 */
   SpecialUse: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2628,7 +2628,7 @@ declare interface DescribeServiceSubDomainMappingsRequest {
 declare interface DescribeServiceSubDomainMappingsResponse {
   /** 自定义路径映射列表。 */
   Result: ServiceSubDomainMappings;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2644,7 +2644,7 @@ declare interface DescribeServiceSubDomainsRequest {
 declare interface DescribeServiceSubDomainsResponse {
   /** 查询服务自定义域名列表。 */
   Result: DomainSets;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2660,7 +2660,7 @@ declare interface DescribeServiceUsagePlanRequest {
 declare interface DescribeServiceUsagePlanResponse {
   /** 服务绑定使用计划列表。 */
   Result: ServiceUsagePlanSet | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2676,7 +2676,7 @@ declare interface DescribeServicesStatusRequest {
 declare interface DescribeServicesStatusResponse {
   /** 服务列表查询结果。 */
   Result: ServicesStatus | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2694,7 +2694,7 @@ declare interface DescribeUpstreamBindApisRequest {
 declare interface DescribeUpstreamBindApisResponse {
   /** 查询结果 */
   Result: DescribeUpstreamBindApis;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2710,7 +2710,7 @@ declare interface DescribeUpstreamsRequest {
 declare interface DescribeUpstreamsResponse {
   /** 查询结果 */
   Result: DescribeUpstreamInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2728,7 +2728,7 @@ declare interface DescribeUsagePlanEnvironmentsRequest {
 declare interface DescribeUsagePlanEnvironmentsResponse {
   /** 使用计划绑定详情。 */
   Result: UsagePlanEnvironmentStatus | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2740,7 +2740,7 @@ declare interface DescribeUsagePlanRequest {
 declare interface DescribeUsagePlanResponse {
   /** 使用计划详情。 */
   Result: UsagePlanInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2756,7 +2756,7 @@ declare interface DescribeUsagePlanSecretIdsRequest {
 declare interface DescribeUsagePlanSecretIdsResponse {
   /** 使用计划绑定的密钥列表。 */
   Result: UsagePlanBindSecretStatus | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2772,7 +2772,7 @@ declare interface DescribeUsagePlansStatusRequest {
 declare interface DescribeUsagePlansStatusResponse {
   /** 使用计划列表。 */
   Result: UsagePlansStatus | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2790,7 +2790,7 @@ declare interface DetachPluginRequest {
 declare interface DetachPluginResponse {
   /** 解绑操作是否成功。 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2802,7 +2802,7 @@ declare interface DisableApiKeyRequest {
 declare interface DisableApiKeyResponse {
   /** 禁用密钥操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2814,7 +2814,7 @@ declare interface EnableApiKeyRequest {
 declare interface EnableApiKeyResponse {
   /** 启动密钥操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2830,7 +2830,7 @@ declare interface GenerateApiDocumentRequest {
 declare interface GenerateApiDocumentResponse {
   /** api文档&sdk链接。 */
   Result: DocumentSDK;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2848,7 +2848,7 @@ declare interface ImportOpenApiRequest {
 declare interface ImportOpenApiResponse {
   /** 导入OpenApi返回参数。 */
   Result: CreateApiRspSet;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2868,7 +2868,7 @@ declare interface ModifyAPIDocRequest {
 declare interface ModifyAPIDocResponse {
   /** API文档基本信息 */
   Result: APIDoc;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2884,7 +2884,7 @@ declare interface ModifyApiAppRequest {
 declare interface ModifyApiAppResponse {
   /** 修改操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2902,7 +2902,7 @@ declare interface ModifyApiEnvironmentStrategyRequest {
 declare interface ModifyApiEnvironmentStrategyResponse {
   /** 修改操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2920,7 +2920,7 @@ declare interface ModifyApiIncrementRequest {
 }
 
 declare interface ModifyApiIncrementResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3036,7 +3036,7 @@ declare interface ModifyApiRequest {
 }
 
 declare interface ModifyApiResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3054,7 +3054,7 @@ declare interface ModifyExclusiveInstanceRequest {
 declare interface ModifyExclusiveInstanceResponse {
   /** 独享实例详情信息 */
   Result: InstanceDetail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3070,7 +3070,7 @@ declare interface ModifyIPStrategyRequest {
 declare interface ModifyIPStrategyResponse {
   /** 修改操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3088,7 +3088,7 @@ declare interface ModifyPluginRequest {
 declare interface ModifyPluginResponse {
   /** 修改操作是否成功。 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3104,7 +3104,7 @@ declare interface ModifyServiceEnvironmentStrategyRequest {
 declare interface ModifyServiceEnvironmentStrategyResponse {
   /** 修改操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3122,7 +3122,7 @@ declare interface ModifyServiceRequest {
 }
 
 declare interface ModifyServiceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3148,7 +3148,7 @@ declare interface ModifySubDomainRequest {
 declare interface ModifySubDomainResponse {
   /** 修改自定义域名操作是否成功。 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3182,7 +3182,7 @@ declare interface ModifyUpstreamRequest {
 declare interface ModifyUpstreamResponse {
   /** 返回修改后的后端通道信息 */
   Result: UpstreamInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3202,7 +3202,7 @@ declare interface ModifyUsagePlanRequest {
 declare interface ModifyUsagePlanResponse {
   /** 使用计划详情。 */
   Result: UsagePlanInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3220,7 +3220,7 @@ declare interface ReleaseServiceRequest {
 declare interface ReleaseServiceResponse {
   /** 发布信息。 */
   Result: ReleaseService;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3232,7 +3232,7 @@ declare interface ResetAPIDocPasswordRequest {
 declare interface ResetAPIDocPasswordResponse {
   /** API文档基本信息 */
   Result: APIDoc;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3252,7 +3252,7 @@ declare interface UnBindEnvironmentRequest {
 declare interface UnBindEnvironmentResponse {
   /** 解绑操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3270,7 +3270,7 @@ declare interface UnBindIPStrategyRequest {
 declare interface UnBindIPStrategyResponse {
   /** 解绑操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3284,7 +3284,7 @@ declare interface UnBindSecretIdsRequest {
 declare interface UnBindSecretIdsResponse {
   /** 解绑操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3298,7 +3298,7 @@ declare interface UnBindSubDomainRequest {
 declare interface UnBindSubDomainResponse {
   /** 解绑自定义域名操作是否成功。 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3314,7 +3314,7 @@ declare interface UnReleaseServiceRequest {
 declare interface UnReleaseServiceResponse {
   /** 下线操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3332,7 +3332,7 @@ declare interface UnbindApiAppRequest {
 declare interface UnbindApiAppResponse {
   /** 解除绑定操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3348,7 +3348,7 @@ declare interface UpdateApiAppKeyRequest {
 declare interface UpdateApiAppKeyResponse {
   /** 更新操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3362,7 +3362,7 @@ declare interface UpdateApiKeyRequest {
 declare interface UpdateApiKeyResponse {
   /** 更换后的密钥详情。 */
   Result: ApiKey | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3380,206 +3380,206 @@ declare interface UpdateServiceRequest {
 declare interface UpdateServiceResponse {
   /** 切换版本操作是否成功。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Apigateway API 网关} */
 declare interface Apigateway {
   (): Versions;
-  /** {@link AttachPlugin 插件绑定API}({@link AttachPluginRequest 请求参数}): {@link AttachPluginResponse 返回参数} */
+  /** 插件绑定API {@link AttachPluginRequest} {@link AttachPluginResponse} */
   AttachPlugin(data: AttachPluginRequest, config?: AxiosRequestConfig): AxiosPromise<AttachPluginResponse>;
-  /** {@link BindApiApp 绑定应用到API}({@link BindApiAppRequest 请求参数}): {@link BindApiAppResponse 返回参数} */
+  /** 绑定应用到API {@link BindApiAppRequest} {@link BindApiAppResponse} */
   BindApiApp(data: BindApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<BindApiAppResponse>;
-  /** {@link BindEnvironment 绑定使用计划到服务或API}({@link BindEnvironmentRequest 请求参数}): {@link BindEnvironmentResponse 返回参数} */
+  /** 绑定使用计划到服务或API {@link BindEnvironmentRequest} {@link BindEnvironmentResponse} */
   BindEnvironment(data: BindEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<BindEnvironmentResponse>;
-  /** {@link BindIPStrategy API绑定IP策略}({@link BindIPStrategyRequest 请求参数}): {@link BindIPStrategyResponse 返回参数} */
+  /** API绑定IP策略 {@link BindIPStrategyRequest} {@link BindIPStrategyResponse} */
   BindIPStrategy(data: BindIPStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<BindIPStrategyResponse>;
-  /** {@link BindSecretIds 使用计划绑定密钥}({@link BindSecretIdsRequest 请求参数}): {@link BindSecretIdsResponse 返回参数} */
+  /** 使用计划绑定密钥 {@link BindSecretIdsRequest} {@link BindSecretIdsResponse} */
   BindSecretIds(data: BindSecretIdsRequest, config?: AxiosRequestConfig): AxiosPromise<BindSecretIdsResponse>;
-  /** {@link BindSubDomain 服务绑定自定义域名}({@link BindSubDomainRequest 请求参数}): {@link BindSubDomainResponse 返回参数} */
+  /** 服务绑定自定义域名 {@link BindSubDomainRequest} {@link BindSubDomainResponse} */
   BindSubDomain(data: BindSubDomainRequest, config?: AxiosRequestConfig): AxiosPromise<BindSubDomainResponse>;
-  /** {@link BuildAPIDoc 构建 API 文档}({@link BuildAPIDocRequest 请求参数}): {@link BuildAPIDocResponse 返回参数} */
+  /** 构建 API 文档 {@link BuildAPIDocRequest} {@link BuildAPIDocResponse} */
   BuildAPIDoc(data: BuildAPIDocRequest, config?: AxiosRequestConfig): AxiosPromise<BuildAPIDocResponse>;
-  /** {@link CreateAPIDoc 创建 API 文档}({@link CreateAPIDocRequest 请求参数}): {@link CreateAPIDocResponse 返回参数} */
+  /** 创建 API 文档 {@link CreateAPIDocRequest} {@link CreateAPIDocResponse} */
   CreateAPIDoc(data: CreateAPIDocRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAPIDocResponse>;
-  /** {@link CreateApi 创建API}({@link CreateApiRequest 请求参数}): {@link CreateApiResponse 返回参数} */
+  /** 创建API {@link CreateApiRequest} {@link CreateApiResponse} */
   CreateApi(data: CreateApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiResponse>;
-  /** {@link CreateApiApp 创建应用}({@link CreateApiAppRequest 请求参数}): {@link CreateApiAppResponse 返回参数} */
+  /** 创建应用 {@link CreateApiAppRequest} {@link CreateApiAppResponse} */
   CreateApiApp(data: CreateApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiAppResponse>;
-  /** {@link CreateApiKey 创建密钥}({@link CreateApiKeyRequest 请求参数}): {@link CreateApiKeyResponse 返回参数} */
+  /** 创建密钥 {@link CreateApiKeyRequest} {@link CreateApiKeyResponse} */
   CreateApiKey(data: CreateApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiKeyResponse>;
-  /** {@link CreateIPStrategy 创建服务IP策略}({@link CreateIPStrategyRequest 请求参数}): {@link CreateIPStrategyResponse 返回参数} */
+  /** 创建服务IP策略 {@link CreateIPStrategyRequest} {@link CreateIPStrategyResponse} */
   CreateIPStrategy(data: CreateIPStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIPStrategyResponse>;
-  /** {@link CreatePlugin 创建插件}({@link CreatePluginRequest 请求参数}): {@link CreatePluginResponse 返回参数} */
+  /** 创建插件 {@link CreatePluginRequest} {@link CreatePluginResponse} */
   CreatePlugin(data: CreatePluginRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePluginResponse>;
-  /** {@link CreateService 创建服务}({@link CreateServiceRequest 请求参数}): {@link CreateServiceResponse 返回参数} */
+  /** 创建服务 {@link CreateServiceRequest} {@link CreateServiceResponse} */
   CreateService(data: CreateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceResponse>;
-  /** {@link CreateUpstream 创建后端通道}({@link CreateUpstreamRequest 请求参数}): {@link CreateUpstreamResponse 返回参数} */
+  /** 创建后端通道 {@link CreateUpstreamRequest} {@link CreateUpstreamResponse} */
   CreateUpstream(data: CreateUpstreamRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUpstreamResponse>;
-  /** {@link CreateUsagePlan 创建使用计划}({@link CreateUsagePlanRequest 请求参数}): {@link CreateUsagePlanResponse 返回参数} */
+  /** 创建使用计划 {@link CreateUsagePlanRequest} {@link CreateUsagePlanResponse} */
   CreateUsagePlan(data: CreateUsagePlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUsagePlanResponse>;
-  /** {@link DeleteAPIDoc 删除 API 文档}({@link DeleteAPIDocRequest 请求参数}): {@link DeleteAPIDocResponse 返回参数} */
+  /** 删除 API 文档 {@link DeleteAPIDocRequest} {@link DeleteAPIDocResponse} */
   DeleteAPIDoc(data: DeleteAPIDocRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAPIDocResponse>;
-  /** {@link DeleteApi 删除API}({@link DeleteApiRequest 请求参数}): {@link DeleteApiResponse 返回参数} */
+  /** 删除API {@link DeleteApiRequest} {@link DeleteApiResponse} */
   DeleteApi(data: DeleteApiRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiResponse>;
-  /** {@link DeleteApiApp 删除应用}({@link DeleteApiAppRequest 请求参数}): {@link DeleteApiAppResponse 返回参数} */
+  /** 删除应用 {@link DeleteApiAppRequest} {@link DeleteApiAppResponse} */
   DeleteApiApp(data: DeleteApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiAppResponse>;
-  /** {@link DeleteApiKey 删除密钥}({@link DeleteApiKeyRequest 请求参数}): {@link DeleteApiKeyResponse 返回参数} */
+  /** 删除密钥 {@link DeleteApiKeyRequest} {@link DeleteApiKeyResponse} */
   DeleteApiKey(data: DeleteApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiKeyResponse>;
-  /** {@link DeleteIPStrategy 删除服务IP策略}({@link DeleteIPStrategyRequest 请求参数}): {@link DeleteIPStrategyResponse 返回参数} */
+  /** 删除服务IP策略 {@link DeleteIPStrategyRequest} {@link DeleteIPStrategyResponse} */
   DeleteIPStrategy(data: DeleteIPStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIPStrategyResponse>;
-  /** {@link DeletePlugin 删除插件}({@link DeletePluginRequest 请求参数}): {@link DeletePluginResponse 返回参数} */
+  /** 删除插件 {@link DeletePluginRequest} {@link DeletePluginResponse} */
   DeletePlugin(data: DeletePluginRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePluginResponse>;
-  /** {@link DeleteService 删除服务}({@link DeleteServiceRequest 请求参数}): {@link DeleteServiceResponse 返回参数} */
+  /** 删除服务 {@link DeleteServiceRequest} {@link DeleteServiceResponse} */
   DeleteService(data: DeleteServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceResponse>;
-  /** {@link DeleteServiceSubDomainMapping 删除自定义域名的路径映射}({@link DeleteServiceSubDomainMappingRequest 请求参数}): {@link DeleteServiceSubDomainMappingResponse 返回参数} */
+  /** 删除自定义域名的路径映射 {@link DeleteServiceSubDomainMappingRequest} {@link DeleteServiceSubDomainMappingResponse} */
   DeleteServiceSubDomainMapping(data: DeleteServiceSubDomainMappingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceSubDomainMappingResponse>;
-  /** {@link DeleteUpstream 删除后端通道}({@link DeleteUpstreamRequest 请求参数}): {@link DeleteUpstreamResponse 返回参数} */
+  /** 删除后端通道 {@link DeleteUpstreamRequest} {@link DeleteUpstreamResponse} */
   DeleteUpstream(data: DeleteUpstreamRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUpstreamResponse>;
-  /** {@link DeleteUsagePlan 删除使用计划}({@link DeleteUsagePlanRequest 请求参数}): {@link DeleteUsagePlanResponse 返回参数} */
+  /** 删除使用计划 {@link DeleteUsagePlanRequest} {@link DeleteUsagePlanResponse} */
   DeleteUsagePlan(data: DeleteUsagePlanRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsagePlanResponse>;
-  /** {@link DemoteServiceUsagePlan 服务级别使用计划降级}({@link DemoteServiceUsagePlanRequest 请求参数}): {@link DemoteServiceUsagePlanResponse 返回参数} */
+  /** 服务级别使用计划降级 {@link DemoteServiceUsagePlanRequest} {@link DemoteServiceUsagePlanResponse} */
   DemoteServiceUsagePlan(data: DemoteServiceUsagePlanRequest, config?: AxiosRequestConfig): AxiosPromise<DemoteServiceUsagePlanResponse>;
-  /** {@link DescribeAPIDocDetail 查询 API 文档详情}({@link DescribeAPIDocDetailRequest 请求参数}): {@link DescribeAPIDocDetailResponse 返回参数} */
+  /** 查询 API 文档详情 {@link DescribeAPIDocDetailRequest} {@link DescribeAPIDocDetailResponse} */
   DescribeAPIDocDetail(data: DescribeAPIDocDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAPIDocDetailResponse>;
-  /** {@link DescribeAPIDocs 查询 API 文档列表}({@link DescribeAPIDocsRequest 请求参数}): {@link DescribeAPIDocsResponse 返回参数} */
+  /** 查询 API 文档列表 {@link DescribeAPIDocsRequest} {@link DescribeAPIDocsResponse} */
   DescribeAPIDocs(data?: DescribeAPIDocsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAPIDocsResponse>;
-  /** {@link DescribeAllPluginApis 展示插件相关的API列表}({@link DescribeAllPluginApisRequest 请求参数}): {@link DescribeAllPluginApisResponse 返回参数} */
+  /** 展示插件相关的API列表 {@link DescribeAllPluginApisRequest} {@link DescribeAllPluginApisResponse} */
   DescribeAllPluginApis(data: DescribeAllPluginApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllPluginApisResponse>;
-  /** {@link DescribeApi 查询API详情}({@link DescribeApiRequest 请求参数}): {@link DescribeApiResponse 返回参数} */
+  /** 查询API详情 {@link DescribeApiRequest} {@link DescribeApiResponse} */
   DescribeApi(data: DescribeApiRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiResponse>;
-  /** {@link DescribeApiApp 搜索应用}({@link DescribeApiAppRequest 请求参数}): {@link DescribeApiAppResponse 返回参数} */
+  /** 搜索应用 {@link DescribeApiAppRequest} {@link DescribeApiAppResponse} */
   DescribeApiApp(data: DescribeApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiAppResponse>;
-  /** {@link DescribeApiAppBindApisStatus 查询应用绑定的Api列表}({@link DescribeApiAppBindApisStatusRequest 请求参数}): {@link DescribeApiAppBindApisStatusResponse 返回参数} */
+  /** 查询应用绑定的Api列表 {@link DescribeApiAppBindApisStatusRequest} {@link DescribeApiAppBindApisStatusResponse} */
   DescribeApiAppBindApisStatus(data: DescribeApiAppBindApisStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiAppBindApisStatusResponse>;
-  /** {@link DescribeApiAppsStatus 查询应用列表}({@link DescribeApiAppsStatusRequest 请求参数}): {@link DescribeApiAppsStatusResponse 返回参数} */
+  /** 查询应用列表 {@link DescribeApiAppsStatusRequest} {@link DescribeApiAppsStatusResponse} */
   DescribeApiAppsStatus(data?: DescribeApiAppsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiAppsStatusResponse>;
-  /** {@link DescribeApiBindApiAppsStatus 查询Api绑定的应用列表}({@link DescribeApiBindApiAppsStatusRequest 请求参数}): {@link DescribeApiBindApiAppsStatusResponse 返回参数} */
+  /** 查询Api绑定的应用列表 {@link DescribeApiBindApiAppsStatusRequest} {@link DescribeApiBindApiAppsStatusResponse} */
   DescribeApiBindApiAppsStatus(data: DescribeApiBindApiAppsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiBindApiAppsStatusResponse>;
-  /** {@link DescribeApiEnvironmentStrategy 展示API绑定的限流策略}({@link DescribeApiEnvironmentStrategyRequest 请求参数}): {@link DescribeApiEnvironmentStrategyResponse 返回参数} */
+  /** 展示API绑定的限流策略 {@link DescribeApiEnvironmentStrategyRequest} {@link DescribeApiEnvironmentStrategyResponse} */
   DescribeApiEnvironmentStrategy(data: DescribeApiEnvironmentStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiEnvironmentStrategyResponse>;
-  /** {@link DescribeApiForApiApp 应用使用者查询API详情}({@link DescribeApiForApiAppRequest 请求参数}): {@link DescribeApiForApiAppResponse 返回参数} */
+  /** 应用使用者查询API详情 {@link DescribeApiForApiAppRequest} {@link DescribeApiForApiAppResponse} */
   DescribeApiForApiApp(data: DescribeApiForApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiForApiAppResponse>;
-  /** {@link DescribeApiKey 查询密钥详情}({@link DescribeApiKeyRequest 请求参数}): {@link DescribeApiKeyResponse 返回参数} */
+  /** 查询密钥详情 {@link DescribeApiKeyRequest} {@link DescribeApiKeyResponse} */
   DescribeApiKey(data: DescribeApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiKeyResponse>;
-  /** {@link DescribeApiKeysStatus 查询密钥列表}({@link DescribeApiKeysStatusRequest 请求参数}): {@link DescribeApiKeysStatusResponse 返回参数} */
+  /** 查询密钥列表 {@link DescribeApiKeysStatusRequest} {@link DescribeApiKeysStatusResponse} */
   DescribeApiKeysStatus(data?: DescribeApiKeysStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiKeysStatusResponse>;
-  /** {@link DescribeApiUsagePlan 查询 API 使用计划详情}({@link DescribeApiUsagePlanRequest 请求参数}): {@link DescribeApiUsagePlanResponse 返回参数} */
+  /** 查询 API 使用计划详情 {@link DescribeApiUsagePlanRequest} {@link DescribeApiUsagePlanResponse} */
   DescribeApiUsagePlan(data: DescribeApiUsagePlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiUsagePlanResponse>;
-  /** {@link DescribeApisStatus 查询 API 接口列表}({@link DescribeApisStatusRequest 请求参数}): {@link DescribeApisStatusResponse 返回参数} */
+  /** 查询 API 接口列表 {@link DescribeApisStatusRequest} {@link DescribeApisStatusResponse} */
   DescribeApisStatus(data: DescribeApisStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApisStatusResponse>;
-  /** {@link DescribeExclusiveInstanceDetail 查询独享实例详情}({@link DescribeExclusiveInstanceDetailRequest 请求参数}): {@link DescribeExclusiveInstanceDetailResponse 返回参数} */
+  /** 查询独享实例详情 {@link DescribeExclusiveInstanceDetailRequest} {@link DescribeExclusiveInstanceDetailResponse} */
   DescribeExclusiveInstanceDetail(data: DescribeExclusiveInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExclusiveInstanceDetailResponse>;
-  /** {@link DescribeExclusiveInstances 查询独享实例列表}({@link DescribeExclusiveInstancesRequest 请求参数}): {@link DescribeExclusiveInstancesResponse 返回参数} */
+  /** 查询独享实例列表 {@link DescribeExclusiveInstancesRequest} {@link DescribeExclusiveInstancesResponse} */
   DescribeExclusiveInstances(data: DescribeExclusiveInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExclusiveInstancesResponse>;
-  /** {@link DescribeExclusiveInstancesStatus 查询专享实例列表（新）}({@link DescribeExclusiveInstancesStatusRequest 请求参数}): {@link DescribeExclusiveInstancesStatusResponse 返回参数} */
+  /** 查询专享实例列表（新） {@link DescribeExclusiveInstancesStatusRequest} {@link DescribeExclusiveInstancesStatusResponse} */
   DescribeExclusiveInstancesStatus(data: DescribeExclusiveInstancesStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExclusiveInstancesStatusResponse>;
-  /** {@link DescribeIPStrategy 查询IP策略详情}({@link DescribeIPStrategyRequest 请求参数}): {@link DescribeIPStrategyResponse 返回参数} */
+  /** 查询IP策略详情 {@link DescribeIPStrategyRequest} {@link DescribeIPStrategyResponse} */
   DescribeIPStrategy(data: DescribeIPStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStrategyResponse>;
-  /** {@link DescribeIPStrategyApisStatus 查询IP策略绑定的API列表}({@link DescribeIPStrategyApisStatusRequest 请求参数}): {@link DescribeIPStrategyApisStatusResponse 返回参数} */
+  /** 查询IP策略绑定的API列表 {@link DescribeIPStrategyApisStatusRequest} {@link DescribeIPStrategyApisStatusResponse} */
   DescribeIPStrategyApisStatus(data: DescribeIPStrategyApisStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStrategyApisStatusResponse>;
-  /** {@link DescribeIPStrategysStatus 查询服务IP策略列表}({@link DescribeIPStrategysStatusRequest 请求参数}): {@link DescribeIPStrategysStatusResponse 返回参数} */
+  /** 查询服务IP策略列表 {@link DescribeIPStrategysStatusRequest} {@link DescribeIPStrategysStatusResponse} */
   DescribeIPStrategysStatus(data: DescribeIPStrategysStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStrategysStatusResponse>;
-  /** {@link DescribeLogSearch 日志搜索服务}({@link DescribeLogSearchRequest 请求参数}): {@link DescribeLogSearchResponse 返回参数} */
+  /** 日志搜索服务 {@link DescribeLogSearchRequest} {@link DescribeLogSearchResponse} */
   DescribeLogSearch(data: DescribeLogSearchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogSearchResponse>;
-  /** {@link DescribePlugin 查询插件详情}({@link DescribePluginRequest 请求参数}): {@link DescribePluginResponse 返回参数} */
+  /** 查询插件详情 {@link DescribePluginRequest} {@link DescribePluginResponse} */
   DescribePlugin(data: DescribePluginRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginResponse>;
-  /** {@link DescribePluginApis 查询插件绑定的API列表}({@link DescribePluginApisRequest 请求参数}): {@link DescribePluginApisResponse 返回参数} */
+  /** 查询插件绑定的API列表 {@link DescribePluginApisRequest} {@link DescribePluginApisResponse} */
   DescribePluginApis(data: DescribePluginApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginApisResponse>;
-  /** {@link DescribePlugins 查询插件列表和详情}({@link DescribePluginsRequest 请求参数}): {@link DescribePluginsResponse 返回参数} */
+  /** 查询插件列表和详情 {@link DescribePluginsRequest} {@link DescribePluginsResponse} */
   DescribePlugins(data?: DescribePluginsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginsResponse>;
-  /** {@link DescribePluginsByApi API上已绑定的插件}({@link DescribePluginsByApiRequest 请求参数}): {@link DescribePluginsByApiResponse 返回参数} */
+  /** API上已绑定的插件 {@link DescribePluginsByApiRequest} {@link DescribePluginsByApiResponse} */
   DescribePluginsByApi(data: DescribePluginsByApiRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginsByApiResponse>;
-  /** {@link DescribeService 查询服务详情}({@link DescribeServiceRequest 请求参数}): {@link DescribeServiceResponse 返回参数} */
+  /** 查询服务详情 {@link DescribeServiceRequest} {@link DescribeServiceResponse} */
   DescribeService(data: DescribeServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceResponse>;
-  /** {@link DescribeServiceEnvironmentList 查询服务环境列表}({@link DescribeServiceEnvironmentListRequest 请求参数}): {@link DescribeServiceEnvironmentListResponse 返回参数} */
+  /** 查询服务环境列表 {@link DescribeServiceEnvironmentListRequest} {@link DescribeServiceEnvironmentListResponse} */
   DescribeServiceEnvironmentList(data: DescribeServiceEnvironmentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceEnvironmentListResponse>;
-  /** {@link DescribeServiceEnvironmentReleaseHistory 查询服务环境的发布历史}({@link DescribeServiceEnvironmentReleaseHistoryRequest 请求参数}): {@link DescribeServiceEnvironmentReleaseHistoryResponse 返回参数} */
+  /** 查询服务环境的发布历史 {@link DescribeServiceEnvironmentReleaseHistoryRequest} {@link DescribeServiceEnvironmentReleaseHistoryResponse} */
   DescribeServiceEnvironmentReleaseHistory(data: DescribeServiceEnvironmentReleaseHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceEnvironmentReleaseHistoryResponse>;
-  /** {@link DescribeServiceEnvironmentStrategy 展示服务限流策略}({@link DescribeServiceEnvironmentStrategyRequest 请求参数}): {@link DescribeServiceEnvironmentStrategyResponse 返回参数} */
+  /** 展示服务限流策略 {@link DescribeServiceEnvironmentStrategyRequest} {@link DescribeServiceEnvironmentStrategyResponse} */
   DescribeServiceEnvironmentStrategy(data: DescribeServiceEnvironmentStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceEnvironmentStrategyResponse>;
-  /** {@link DescribeServiceForApiApp 应用使用者查询服务详情}({@link DescribeServiceForApiAppRequest 请求参数}): {@link DescribeServiceForApiAppResponse 返回参数} */
+  /** 应用使用者查询服务详情 {@link DescribeServiceForApiAppRequest} {@link DescribeServiceForApiAppResponse} */
   DescribeServiceForApiApp(data: DescribeServiceForApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceForApiAppResponse>;
-  /** {@link DescribeServiceReleaseVersion 查询服务已发布的版本}({@link DescribeServiceReleaseVersionRequest 请求参数}): {@link DescribeServiceReleaseVersionResponse 返回参数} */
+  /** 查询服务已发布的版本 {@link DescribeServiceReleaseVersionRequest} {@link DescribeServiceReleaseVersionResponse} */
   DescribeServiceReleaseVersion(data: DescribeServiceReleaseVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceReleaseVersionResponse>;
-  /** {@link DescribeServiceSubDomainMappings 查询自定义域名的路径映射}({@link DescribeServiceSubDomainMappingsRequest 请求参数}): {@link DescribeServiceSubDomainMappingsResponse 返回参数} */
+  /** 查询自定义域名的路径映射 {@link DescribeServiceSubDomainMappingsRequest} {@link DescribeServiceSubDomainMappingsResponse} */
   DescribeServiceSubDomainMappings(data: DescribeServiceSubDomainMappingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceSubDomainMappingsResponse>;
-  /** {@link DescribeServiceSubDomains 查询自定义域名列表}({@link DescribeServiceSubDomainsRequest 请求参数}): {@link DescribeServiceSubDomainsResponse 返回参数} */
+  /** 查询自定义域名列表 {@link DescribeServiceSubDomainsRequest} {@link DescribeServiceSubDomainsResponse} */
   DescribeServiceSubDomains(data: DescribeServiceSubDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceSubDomainsResponse>;
-  /** {@link DescribeServiceUsagePlan 查询服务使用计划详情}({@link DescribeServiceUsagePlanRequest 请求参数}): {@link DescribeServiceUsagePlanResponse 返回参数} */
+  /** 查询服务使用计划详情 {@link DescribeServiceUsagePlanRequest} {@link DescribeServiceUsagePlanResponse} */
   DescribeServiceUsagePlan(data: DescribeServiceUsagePlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceUsagePlanResponse>;
-  /** {@link DescribeServicesStatus 查询服务列表状态}({@link DescribeServicesStatusRequest 请求参数}): {@link DescribeServicesStatusResponse 返回参数} */
+  /** 查询服务列表状态 {@link DescribeServicesStatusRequest} {@link DescribeServicesStatusResponse} */
   DescribeServicesStatus(data?: DescribeServicesStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServicesStatusResponse>;
-  /** {@link DescribeUpstreamBindApis 查询后端通道所绑定的API列表}({@link DescribeUpstreamBindApisRequest 请求参数}): {@link DescribeUpstreamBindApisResponse 返回参数} */
+  /** 查询后端通道所绑定的API列表 {@link DescribeUpstreamBindApisRequest} {@link DescribeUpstreamBindApisResponse} */
   DescribeUpstreamBindApis(data: DescribeUpstreamBindApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUpstreamBindApisResponse>;
-  /** {@link DescribeUpstreams 查询后端通道列表详情}({@link DescribeUpstreamsRequest 请求参数}): {@link DescribeUpstreamsResponse 返回参数} */
+  /** 查询后端通道列表详情 {@link DescribeUpstreamsRequest} {@link DescribeUpstreamsResponse} */
   DescribeUpstreams(data: DescribeUpstreamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUpstreamsResponse>;
-  /** {@link DescribeUsagePlan 查询使用计划详情}({@link DescribeUsagePlanRequest 请求参数}): {@link DescribeUsagePlanResponse 返回参数} */
+  /** 查询使用计划详情 {@link DescribeUsagePlanRequest} {@link DescribeUsagePlanResponse} */
   DescribeUsagePlan(data: DescribeUsagePlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsagePlanResponse>;
-  /** {@link DescribeUsagePlanEnvironments 查询使用计划绑定环境列表}({@link DescribeUsagePlanEnvironmentsRequest 请求参数}): {@link DescribeUsagePlanEnvironmentsResponse 返回参数} */
+  /** 查询使用计划绑定环境列表 {@link DescribeUsagePlanEnvironmentsRequest} {@link DescribeUsagePlanEnvironmentsResponse} */
   DescribeUsagePlanEnvironments(data: DescribeUsagePlanEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsagePlanEnvironmentsResponse>;
-  /** {@link DescribeUsagePlanSecretIds 查询使用计划绑定密钥列表}({@link DescribeUsagePlanSecretIdsRequest 请求参数}): {@link DescribeUsagePlanSecretIdsResponse 返回参数} */
+  /** 查询使用计划绑定密钥列表 {@link DescribeUsagePlanSecretIdsRequest} {@link DescribeUsagePlanSecretIdsResponse} */
   DescribeUsagePlanSecretIds(data: DescribeUsagePlanSecretIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsagePlanSecretIdsResponse>;
-  /** {@link DescribeUsagePlansStatus 查询使用计划列表}({@link DescribeUsagePlansStatusRequest 请求参数}): {@link DescribeUsagePlansStatusResponse 返回参数} */
+  /** 查询使用计划列表 {@link DescribeUsagePlansStatusRequest} {@link DescribeUsagePlansStatusResponse} */
   DescribeUsagePlansStatus(data?: DescribeUsagePlansStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsagePlansStatusResponse>;
-  /** {@link DetachPlugin 插件解绑API}({@link DetachPluginRequest 请求参数}): {@link DetachPluginResponse 返回参数} */
+  /** 插件解绑API {@link DetachPluginRequest} {@link DetachPluginResponse} */
   DetachPlugin(data: DetachPluginRequest, config?: AxiosRequestConfig): AxiosPromise<DetachPluginResponse>;
-  /** {@link DisableApiKey 禁用密钥}({@link DisableApiKeyRequest 请求参数}): {@link DisableApiKeyResponse 返回参数} */
+  /** 禁用密钥 {@link DisableApiKeyRequest} {@link DisableApiKeyResponse} */
   DisableApiKey(data: DisableApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DisableApiKeyResponse>;
-  /** {@link EnableApiKey 启用密钥}({@link EnableApiKeyRequest 请求参数}): {@link EnableApiKeyResponse 返回参数} */
+  /** 启用密钥 {@link EnableApiKeyRequest} {@link EnableApiKeyResponse} */
   EnableApiKey(data: EnableApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<EnableApiKeyResponse>;
-  /** {@link GenerateApiDocument 生成文档和 SDK}({@link GenerateApiDocumentRequest 请求参数}): {@link GenerateApiDocumentResponse 返回参数} */
+  /** 生成文档和 SDK {@link GenerateApiDocumentRequest} {@link GenerateApiDocumentResponse} */
   GenerateApiDocument(data: GenerateApiDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateApiDocumentResponse>;
-  /** {@link ImportOpenApi 导入OpenAPI}({@link ImportOpenApiRequest 请求参数}): {@link ImportOpenApiResponse 返回参数} */
+  /** 导入OpenAPI {@link ImportOpenApiRequest} {@link ImportOpenApiResponse} */
   ImportOpenApi(data: ImportOpenApiRequest, config?: AxiosRequestConfig): AxiosPromise<ImportOpenApiResponse>;
-  /** {@link ModifyAPIDoc 修改 API 文档}({@link ModifyAPIDocRequest 请求参数}): {@link ModifyAPIDocResponse 返回参数} */
+  /** 修改 API 文档 {@link ModifyAPIDocRequest} {@link ModifyAPIDocResponse} */
   ModifyAPIDoc(data: ModifyAPIDocRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAPIDocResponse>;
-  /** {@link ModifyApi 修改API}({@link ModifyApiRequest 请求参数}): {@link ModifyApiResponse 返回参数} */
+  /** 修改API {@link ModifyApiRequest} {@link ModifyApiResponse} */
   ModifyApi(data: ModifyApiRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiResponse>;
-  /** {@link ModifyApiApp 修改应用}({@link ModifyApiAppRequest 请求参数}): {@link ModifyApiAppResponse 返回参数} */
+  /** 修改应用 {@link ModifyApiAppRequest} {@link ModifyApiAppResponse} */
   ModifyApiApp(data: ModifyApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiAppResponse>;
-  /** {@link ModifyApiEnvironmentStrategy 修改API限流策略}({@link ModifyApiEnvironmentStrategyRequest 请求参数}): {@link ModifyApiEnvironmentStrategyResponse 返回参数} */
+  /** 修改API限流策略 {@link ModifyApiEnvironmentStrategyRequest} {@link ModifyApiEnvironmentStrategyResponse} */
   ModifyApiEnvironmentStrategy(data: ModifyApiEnvironmentStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiEnvironmentStrategyResponse>;
-  /** {@link ModifyApiIncrement 增量更新API接口}({@link ModifyApiIncrementRequest 请求参数}): {@link ModifyApiIncrementResponse 返回参数} */
+  /** 增量更新API接口 {@link ModifyApiIncrementRequest} {@link ModifyApiIncrementResponse} */
   ModifyApiIncrement(data: ModifyApiIncrementRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiIncrementResponse>;
-  /** {@link ModifyExclusiveInstance 修改独享实例}({@link ModifyExclusiveInstanceRequest 请求参数}): {@link ModifyExclusiveInstanceResponse 返回参数} */
+  /** 修改独享实例 {@link ModifyExclusiveInstanceRequest} {@link ModifyExclusiveInstanceResponse} */
   ModifyExclusiveInstance(data: ModifyExclusiveInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExclusiveInstanceResponse>;
-  /** {@link ModifyIPStrategy 修改服务IP策略}({@link ModifyIPStrategyRequest 请求参数}): {@link ModifyIPStrategyResponse 返回参数} */
+  /** 修改服务IP策略 {@link ModifyIPStrategyRequest} {@link ModifyIPStrategyResponse} */
   ModifyIPStrategy(data: ModifyIPStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIPStrategyResponse>;
-  /** {@link ModifyPlugin 修改插件}({@link ModifyPluginRequest 请求参数}): {@link ModifyPluginResponse 返回参数} */
+  /** 修改插件 {@link ModifyPluginRequest} {@link ModifyPluginResponse} */
   ModifyPlugin(data: ModifyPluginRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPluginResponse>;
-  /** {@link ModifyService 修改服务}({@link ModifyServiceRequest 请求参数}): {@link ModifyServiceResponse 返回参数} */
+  /** 修改服务 {@link ModifyServiceRequest} {@link ModifyServiceResponse} */
   ModifyService(data: ModifyServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceResponse>;
-  /** {@link ModifyServiceEnvironmentStrategy 修改服务限流策略}({@link ModifyServiceEnvironmentStrategyRequest 请求参数}): {@link ModifyServiceEnvironmentStrategyResponse 返回参数} */
+  /** 修改服务限流策略 {@link ModifyServiceEnvironmentStrategyRequest} {@link ModifyServiceEnvironmentStrategyResponse} */
   ModifyServiceEnvironmentStrategy(data: ModifyServiceEnvironmentStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceEnvironmentStrategyResponse>;
-  /** {@link ModifySubDomain 服务修改自定义域名}({@link ModifySubDomainRequest 请求参数}): {@link ModifySubDomainResponse 返回参数} */
+  /** 服务修改自定义域名 {@link ModifySubDomainRequest} {@link ModifySubDomainResponse} */
   ModifySubDomain(data: ModifySubDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubDomainResponse>;
-  /** {@link ModifyUpstream 修改后端通道}({@link ModifyUpstreamRequest 请求参数}): {@link ModifyUpstreamResponse 返回参数} */
+  /** 修改后端通道 {@link ModifyUpstreamRequest} {@link ModifyUpstreamResponse} */
   ModifyUpstream(data: ModifyUpstreamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUpstreamResponse>;
-  /** {@link ModifyUsagePlan 修改使用计划}({@link ModifyUsagePlanRequest 请求参数}): {@link ModifyUsagePlanResponse 返回参数} */
+  /** 修改使用计划 {@link ModifyUsagePlanRequest} {@link ModifyUsagePlanResponse} */
   ModifyUsagePlan(data: ModifyUsagePlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUsagePlanResponse>;
-  /** {@link ReleaseService 发布服务}({@link ReleaseServiceRequest 请求参数}): {@link ReleaseServiceResponse 返回参数} */
+  /** 发布服务 {@link ReleaseServiceRequest} {@link ReleaseServiceResponse} */
   ReleaseService(data: ReleaseServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseServiceResponse>;
-  /** {@link ResetAPIDocPassword 重置API文档密码}({@link ResetAPIDocPasswordRequest 请求参数}): {@link ResetAPIDocPasswordResponse 返回参数} */
+  /** 重置API文档密码 {@link ResetAPIDocPasswordRequest} {@link ResetAPIDocPasswordResponse} */
   ResetAPIDocPassword(data: ResetAPIDocPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAPIDocPasswordResponse>;
-  /** {@link UnBindEnvironment 从服务环境解绑使用计划}({@link UnBindEnvironmentRequest 请求参数}): {@link UnBindEnvironmentResponse 返回参数} */
+  /** 从服务环境解绑使用计划 {@link UnBindEnvironmentRequest} {@link UnBindEnvironmentResponse} */
   UnBindEnvironment(data: UnBindEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindEnvironmentResponse>;
-  /** {@link UnBindIPStrategy 服务解绑IP策略}({@link UnBindIPStrategyRequest 请求参数}): {@link UnBindIPStrategyResponse 返回参数} */
+  /** 服务解绑IP策略 {@link UnBindIPStrategyRequest} {@link UnBindIPStrategyResponse} */
   UnBindIPStrategy(data: UnBindIPStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindIPStrategyResponse>;
-  /** {@link UnBindSecretIds 使用计划解绑密钥}({@link UnBindSecretIdsRequest 请求参数}): {@link UnBindSecretIdsResponse 返回参数} */
+  /** 使用计划解绑密钥 {@link UnBindSecretIdsRequest} {@link UnBindSecretIdsResponse} */
   UnBindSecretIds(data: UnBindSecretIdsRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindSecretIdsResponse>;
-  /** {@link UnBindSubDomain 服务解绑自定义域名}({@link UnBindSubDomainRequest 请求参数}): {@link UnBindSubDomainResponse 返回参数} */
+  /** 服务解绑自定义域名 {@link UnBindSubDomainRequest} {@link UnBindSubDomainResponse} */
   UnBindSubDomain(data: UnBindSubDomainRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindSubDomainResponse>;
-  /** {@link UnReleaseService 下线服务}({@link UnReleaseServiceRequest 请求参数}): {@link UnReleaseServiceResponse 返回参数} */
+  /** 下线服务 {@link UnReleaseServiceRequest} {@link UnReleaseServiceResponse} */
   UnReleaseService(data: UnReleaseServiceRequest, config?: AxiosRequestConfig): AxiosPromise<UnReleaseServiceResponse>;
-  /** {@link UnbindApiApp 解除应用和API绑定关系}({@link UnbindApiAppRequest 请求参数}): {@link UnbindApiAppResponse 返回参数} */
+  /** 解除应用和API绑定关系 {@link UnbindApiAppRequest} {@link UnbindApiAppResponse} */
   UnbindApiApp(data: UnbindApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindApiAppResponse>;
-  /** {@link UpdateApiAppKey 更新应用密钥}({@link UpdateApiAppKeyRequest 请求参数}): {@link UpdateApiAppKeyResponse 返回参数} */
+  /** 更新应用密钥 {@link UpdateApiAppKeyRequest} {@link UpdateApiAppKeyResponse} */
   UpdateApiAppKey(data: UpdateApiAppKeyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApiAppKeyResponse>;
-  /** {@link UpdateApiKey 更换密钥}({@link UpdateApiKeyRequest 请求参数}): {@link UpdateApiKeyResponse 返回参数} */
+  /** 更换密钥 {@link UpdateApiKeyRequest} {@link UpdateApiKeyResponse} */
   UpdateApiKey(data: UpdateApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApiKeyResponse>;
-  /** {@link UpdateService 更新服务版本}({@link UpdateServiceRequest 请求参数}): {@link UpdateServiceResponse 返回参数} */
+  /** 更新服务版本 {@link UpdateServiceRequest} {@link UpdateServiceResponse} */
   UpdateService(data: UpdateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateServiceResponse>;
 }
 

@@ -152,7 +152,7 @@ declare interface DescribeAppRequest {
 declare interface DescribeAppResponse {
   /** 应用信息详情 */
   Data: AppInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -166,7 +166,7 @@ declare interface DescribeCardRequest {
 declare interface DescribeCardResponse {
   /** 卡片详细信息 */
   Data: CardInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -182,7 +182,7 @@ declare interface DescribeCardsRequest {
 declare interface DescribeCardsResponse {
   /** 卡片列表信息 */
   Data: CardList;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -210,7 +210,7 @@ declare interface DescribeSmsResponse {
   Total?: number | null;
   /** 短信列表 */
   List?: ResSms[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -224,7 +224,7 @@ declare interface ModifyUserCardRemarkRequest {
 }
 
 declare interface ModifyUserCardRemarkResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -240,7 +240,7 @@ declare interface PayForExtendDataRequest {
 declare interface PayForExtendDataResponse {
   /** 订单号 */
   Data: ResOrderIds;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -256,7 +256,7 @@ declare interface RenewCardsRequest {
 declare interface RenewCardsResponse {
   /** 续费成功的订单id */
   Data: ResRenew | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -272,7 +272,7 @@ declare interface SendMultiSmsRequest {
 declare interface SendMultiSmsResponse {
   /** 短信流水数组 */
   Data?: SmsRet[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -288,30 +288,30 @@ declare interface SendSmsRequest {
 declare interface SendSmsResponse {
   /** 短信流水信息 */
   Data?: SmsSid | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ic 物联网卡} */
 declare interface Ic {
   (): Versions;
-  /** {@link DescribeApp 查询应用详情}({@link DescribeAppRequest 请求参数}): {@link DescribeAppResponse 返回参数} */
+  /** 查询应用详情 {@link DescribeAppRequest} {@link DescribeAppResponse} */
   DescribeApp(data: DescribeAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppResponse>;
-  /** {@link DescribeCard 查询卡片详情}({@link DescribeCardRequest 请求参数}): {@link DescribeCardResponse 返回参数} */
+  /** 查询卡片详情 {@link DescribeCardRequest} {@link DescribeCardResponse} */
   DescribeCard(data: DescribeCardRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCardResponse>;
-  /** {@link DescribeCards 查询卡片列表}({@link DescribeCardsRequest 请求参数}): {@link DescribeCardsResponse 返回参数} */
+  /** 查询卡片列表 {@link DescribeCardsRequest} {@link DescribeCardsResponse} */
   DescribeCards(data: DescribeCardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCardsResponse>;
-  /** {@link DescribeSms 查询短信列表}({@link DescribeSmsRequest 请求参数}): {@link DescribeSmsResponse 返回参数} */
+  /** 查询短信列表 {@link DescribeSmsRequest} {@link DescribeSmsResponse} */
   DescribeSms(data: DescribeSmsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmsResponse>;
-  /** {@link ModifyUserCardRemark 编辑卡片备注}({@link ModifyUserCardRemarkRequest 请求参数}): {@link ModifyUserCardRemarkResponse 返回参数} */
+  /** 编辑卡片备注 {@link ModifyUserCardRemarkRequest} {@link ModifyUserCardRemarkResponse} */
   ModifyUserCardRemark(data: ModifyUserCardRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserCardRemarkResponse>;
-  /** {@link PayForExtendData 购买套外流量包}({@link PayForExtendDataRequest 请求参数}): {@link PayForExtendDataResponse 返回参数} */
+  /** 购买套外流量包 {@link PayForExtendDataRequest} {@link PayForExtendDataResponse} */
   PayForExtendData(data: PayForExtendDataRequest, config?: AxiosRequestConfig): AxiosPromise<PayForExtendDataResponse>;
-  /** {@link RenewCards 卡片续费}({@link RenewCardsRequest 请求参数}): {@link RenewCardsResponse 返回参数} */
+  /** 卡片续费 {@link RenewCardsRequest} {@link RenewCardsResponse} */
   RenewCards(data: RenewCardsRequest, config?: AxiosRequestConfig): AxiosPromise<RenewCardsResponse>;
-  /** {@link SendMultiSms 群发短信接口}({@link SendMultiSmsRequest 请求参数}): {@link SendMultiSmsResponse 返回参数} */
+  /** 群发短信接口 {@link SendMultiSmsRequest} {@link SendMultiSmsResponse} */
   SendMultiSms(data: SendMultiSmsRequest, config?: AxiosRequestConfig): AxiosPromise<SendMultiSmsResponse>;
-  /** {@link SendSms 发送短信息接口}({@link SendSmsRequest 请求参数}): {@link SendSmsResponse 返回参数} */
+  /** 发送短信息接口 {@link SendSmsRequest} {@link SendSmsResponse} */
   SendSms(data: SendSmsRequest, config?: AxiosRequestConfig): AxiosPromise<SendSmsResponse>;
 }
 

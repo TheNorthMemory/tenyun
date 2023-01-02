@@ -210,7 +210,7 @@ declare interface CreatePrivateDNSAccountRequest {
 }
 
 declare interface CreatePrivateDNSAccountResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -234,7 +234,7 @@ declare interface CreatePrivateZoneRecordRequest {
 declare interface CreatePrivateZoneRecordResponse {
   /** 记录Id */
   RecordId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -262,7 +262,7 @@ declare interface CreatePrivateZoneResponse {
   ZoneId: string;
   /** 私有域名 */
   Domain: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -272,7 +272,7 @@ declare interface DeletePrivateDNSAccountRequest {
 }
 
 declare interface DeletePrivateDNSAccountResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -286,7 +286,7 @@ declare interface DeletePrivateZoneRecordRequest {
 }
 
 declare interface DeletePrivateZoneRecordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -298,7 +298,7 @@ declare interface DeletePrivateZoneRequest {
 }
 
 declare interface DeletePrivateZoneResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -318,7 +318,7 @@ declare interface DescribeAccountVpcListResponse {
   TotalCount: number;
   /** VPC 列表 */
   VpcSet: AccountVpcInfoOut[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -338,7 +338,7 @@ declare interface DescribeAuditLogRequest {
 declare interface DescribeAuditLogResponse {
   /** 操作日志列表 */
   Data: AuditLog[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -354,7 +354,7 @@ declare interface DescribeDashboardResponse {
   RequestTotalCount: number;
   /** 流量包用量 */
   FlowUsage: FlowUsage[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -372,7 +372,7 @@ declare interface DescribePrivateDNSAccountListResponse {
   TotalCount: number;
   /** 私有域解析账号列表 */
   AccountSet: PrivateDNSAccount[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -390,7 +390,7 @@ declare interface DescribePrivateZoneListResponse {
   TotalCount: number;
   /** 私有域列表 */
   PrivateZoneSet: PrivateZone[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -410,7 +410,7 @@ declare interface DescribePrivateZoneRecordListResponse {
   TotalCount: number;
   /** 解析记录列表 */
   RecordSet: PrivateZoneRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -422,7 +422,7 @@ declare interface DescribePrivateZoneRequest {
 declare interface DescribePrivateZoneResponse {
   /** 私有域详情 */
   PrivateZone: PrivateZone;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -432,7 +432,7 @@ declare interface DescribePrivateZoneServiceRequest {
 declare interface DescribePrivateZoneServiceResponse {
   /** 私有域解析服务开通状态。ENABLED已开通，DISABLED未开通 */
   ServiceStatus: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -442,7 +442,7 @@ declare interface DescribeQuotaUsageRequest {
 declare interface DescribeQuotaUsageResponse {
   /** Tld额度使用情况 */
   TldQuota: TldQuota;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -460,7 +460,7 @@ declare interface DescribeRequestDataResponse {
   Data: MetricData[];
   /** 请求量单位时间: Day：天，Hour：小时 */
   Interval: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -484,7 +484,7 @@ declare interface ModifyPrivateZoneRecordRequest {
 }
 
 declare interface ModifyPrivateZoneRecordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -500,7 +500,7 @@ declare interface ModifyPrivateZoneRequest {
 }
 
 declare interface ModifyPrivateZoneResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -520,7 +520,7 @@ declare interface ModifyPrivateZoneVpcResponse {
   VpcSet: VpcInfo[];
   /** 私有域账号关联的全部VPC列表 */
   AccountVpcSet: AccountVpcInfoOutput[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -540,7 +540,7 @@ declare interface ModifyRecordsStatusResponse {
   RecordIds: number[];
   /** enabled：生效，disabled：失效 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -550,54 +550,54 @@ declare interface SubscribePrivateZoneServiceRequest {
 declare interface SubscribePrivateZoneServiceResponse {
   /** 私有域解析服务开通状态 */
   ServiceStatus: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Privatedns 私有域解析 Private DNS} */
 declare interface Privatedns {
   (): Versions;
-  /** {@link CreatePrivateDNSAccount 创建私有域解析账号}({@link CreatePrivateDNSAccountRequest 请求参数}): {@link CreatePrivateDNSAccountResponse 返回参数} */
+  /** 创建私有域解析账号 {@link CreatePrivateDNSAccountRequest} {@link CreatePrivateDNSAccountResponse} */
   CreatePrivateDNSAccount(data: CreatePrivateDNSAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateDNSAccountResponse>;
-  /** {@link CreatePrivateZone 创建私有域}({@link CreatePrivateZoneRequest 请求参数}): {@link CreatePrivateZoneResponse 返回参数} */
+  /** 创建私有域 {@link CreatePrivateZoneRequest} {@link CreatePrivateZoneResponse} */
   CreatePrivateZone(data: CreatePrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateZoneResponse>;
-  /** {@link CreatePrivateZoneRecord 添加私有域解析记录}({@link CreatePrivateZoneRecordRequest 请求参数}): {@link CreatePrivateZoneRecordResponse 返回参数} */
+  /** 添加私有域解析记录 {@link CreatePrivateZoneRecordRequest} {@link CreatePrivateZoneRecordResponse} */
   CreatePrivateZoneRecord(data: CreatePrivateZoneRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateZoneRecordResponse>;
-  /** {@link DeletePrivateDNSAccount 删除私有域解析账号}({@link DeletePrivateDNSAccountRequest 请求参数}): {@link DeletePrivateDNSAccountResponse 返回参数} */
+  /** 删除私有域解析账号 {@link DeletePrivateDNSAccountRequest} {@link DeletePrivateDNSAccountResponse} */
   DeletePrivateDNSAccount(data: DeletePrivateDNSAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateDNSAccountResponse>;
-  /** {@link DeletePrivateZone 删除私有域}({@link DeletePrivateZoneRequest 请求参数}): {@link DeletePrivateZoneResponse 返回参数} */
+  /** 删除私有域 {@link DeletePrivateZoneRequest} {@link DeletePrivateZoneResponse} */
   DeletePrivateZone(data?: DeletePrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateZoneResponse>;
-  /** {@link DeletePrivateZoneRecord 删除私有域解析记录}({@link DeletePrivateZoneRecordRequest 请求参数}): {@link DeletePrivateZoneRecordResponse 返回参数} */
+  /** 删除私有域解析记录 {@link DeletePrivateZoneRecordRequest} {@link DeletePrivateZoneRecordResponse} */
   DeletePrivateZoneRecord(data?: DeletePrivateZoneRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateZoneRecordResponse>;
-  /** {@link DescribeAccountVpcList 获取私有域解析账号的VPC列表}({@link DescribeAccountVpcListRequest 请求参数}): {@link DescribeAccountVpcListResponse 返回参数} */
+  /** 获取私有域解析账号的VPC列表 {@link DescribeAccountVpcListRequest} {@link DescribeAccountVpcListResponse} */
   DescribeAccountVpcList(data: DescribeAccountVpcListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountVpcListResponse>;
-  /** {@link DescribeAuditLog 获取操作日志列表}({@link DescribeAuditLogRequest 请求参数}): {@link DescribeAuditLogResponse 返回参数} */
+  /** 获取操作日志列表 {@link DescribeAuditLogRequest} {@link DescribeAuditLogResponse} */
   DescribeAuditLog(data: DescribeAuditLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogResponse>;
-  /** {@link DescribeDashboard 获取私有域解析概览}({@link DescribeDashboardRequest 请求参数}): {@link DescribeDashboardResponse 返回参数} */
+  /** 获取私有域解析概览 {@link DescribeDashboardRequest} {@link DescribeDashboardResponse} */
   DescribeDashboard(data?: DescribeDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDashboardResponse>;
-  /** {@link DescribePrivateDNSAccountList 获取私有域解析账号列表}({@link DescribePrivateDNSAccountListRequest 请求参数}): {@link DescribePrivateDNSAccountListResponse 返回参数} */
+  /** 获取私有域解析账号列表 {@link DescribePrivateDNSAccountListRequest} {@link DescribePrivateDNSAccountListResponse} */
   DescribePrivateDNSAccountList(data?: DescribePrivateDNSAccountListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateDNSAccountListResponse>;
-  /** {@link DescribePrivateZone 获取私有域信息}({@link DescribePrivateZoneRequest 请求参数}): {@link DescribePrivateZoneResponse 返回参数} */
+  /** 获取私有域信息 {@link DescribePrivateZoneRequest} {@link DescribePrivateZoneResponse} */
   DescribePrivateZone(data: DescribePrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateZoneResponse>;
-  /** {@link DescribePrivateZoneList 获取私有域列表}({@link DescribePrivateZoneListRequest 请求参数}): {@link DescribePrivateZoneListResponse 返回参数} */
+  /** 获取私有域列表 {@link DescribePrivateZoneListRequest} {@link DescribePrivateZoneListResponse} */
   DescribePrivateZoneList(data?: DescribePrivateZoneListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateZoneListResponse>;
-  /** {@link DescribePrivateZoneRecordList 获取私有域记录列表}({@link DescribePrivateZoneRecordListRequest 请求参数}): {@link DescribePrivateZoneRecordListResponse 返回参数} */
+  /** 获取私有域记录列表 {@link DescribePrivateZoneRecordListRequest} {@link DescribePrivateZoneRecordListResponse} */
   DescribePrivateZoneRecordList(data: DescribePrivateZoneRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateZoneRecordListResponse>;
-  /** {@link DescribePrivateZoneService 查询私有域解析开通状态}({@link DescribePrivateZoneServiceRequest 请求参数}): {@link DescribePrivateZoneServiceResponse 返回参数} */
+  /** 查询私有域解析开通状态 {@link DescribePrivateZoneServiceRequest} {@link DescribePrivateZoneServiceResponse} */
   DescribePrivateZoneService(data?: DescribePrivateZoneServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateZoneServiceResponse>;
-  /** {@link DescribeQuotaUsage 查询额度使用情况}({@link DescribeQuotaUsageRequest 请求参数}): {@link DescribeQuotaUsageResponse 返回参数} */
+  /** 查询额度使用情况 {@link DescribeQuotaUsageRequest} {@link DescribeQuotaUsageResponse} */
   DescribeQuotaUsage(data?: DescribeQuotaUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuotaUsageResponse>;
-  /** {@link DescribeRequestData 获取私有域解析请求量}({@link DescribeRequestDataRequest 请求参数}): {@link DescribeRequestDataResponse 返回参数} */
+  /** 获取私有域解析请求量 {@link DescribeRequestDataRequest} {@link DescribeRequestDataResponse} */
   DescribeRequestData(data: DescribeRequestDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRequestDataResponse>;
-  /** {@link ModifyPrivateZone 修改私有域}({@link ModifyPrivateZoneRequest 请求参数}): {@link ModifyPrivateZoneResponse 返回参数} */
+  /** 修改私有域 {@link ModifyPrivateZoneRequest} {@link ModifyPrivateZoneResponse} */
   ModifyPrivateZone(data: ModifyPrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateZoneResponse>;
-  /** {@link ModifyPrivateZoneRecord 修改私有域解析记录}({@link ModifyPrivateZoneRecordRequest 请求参数}): {@link ModifyPrivateZoneRecordResponse 返回参数} */
+  /** 修改私有域解析记录 {@link ModifyPrivateZoneRecordRequest} {@link ModifyPrivateZoneRecordResponse} */
   ModifyPrivateZoneRecord(data: ModifyPrivateZoneRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateZoneRecordResponse>;
-  /** {@link ModifyPrivateZoneVpc 修改私有域关联的VPC}({@link ModifyPrivateZoneVpcRequest 请求参数}): {@link ModifyPrivateZoneVpcResponse 返回参数} */
+  /** 修改私有域关联的VPC {@link ModifyPrivateZoneVpcRequest} {@link ModifyPrivateZoneVpcResponse} */
   ModifyPrivateZoneVpc(data: ModifyPrivateZoneVpcRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateZoneVpcResponse>;
-  /** {@link ModifyRecordsStatus 修改解析记录状态}({@link ModifyRecordsStatusRequest 请求参数}): {@link ModifyRecordsStatusResponse 返回参数} */
+  /** 修改解析记录状态 {@link ModifyRecordsStatusRequest} {@link ModifyRecordsStatusResponse} */
   ModifyRecordsStatus(data: ModifyRecordsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordsStatusResponse>;
-  /** {@link SubscribePrivateZoneService 开通私有域解析}({@link SubscribePrivateZoneServiceRequest 请求参数}): {@link SubscribePrivateZoneServiceResponse 返回参数} */
+  /** 开通私有域解析 {@link SubscribePrivateZoneServiceRequest} {@link SubscribePrivateZoneServiceResponse} */
   SubscribePrivateZoneService(data?: SubscribePrivateZoneServiceRequest, config?: AxiosRequestConfig): AxiosPromise<SubscribePrivateZoneServiceResponse>;
 }
 

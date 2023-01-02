@@ -54,7 +54,7 @@ declare interface ApplyEmbedIntervalResponse {
   Data: ApplyEmbedTokenInfo | null;
   /** 结果描述 */
   Msg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -78,16 +78,16 @@ declare interface CreateEmbedTokenResponse {
   Data: EmbedTokenInfo | null;
   /** 结果描述 */
   Msg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Bi 商业智能分析 BI} */
 declare interface Bi {
   (): Versions;
-  /** {@link ApplyEmbedInterval 申请延长Token可用时间接口}({@link ApplyEmbedIntervalRequest 请求参数}): {@link ApplyEmbedIntervalResponse 返回参数} */
+  /** 申请延长Token可用时间接口 {@link ApplyEmbedIntervalRequest} {@link ApplyEmbedIntervalResponse} */
   ApplyEmbedInterval(data?: ApplyEmbedIntervalRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyEmbedIntervalResponse>;
-  /** {@link CreateEmbedToken 创建嵌出报表Token}({@link CreateEmbedTokenRequest 请求参数}): {@link CreateEmbedTokenResponse 返回参数} */
+  /** 创建嵌出报表Token {@link CreateEmbedTokenRequest} {@link CreateEmbedTokenResponse} */
   CreateEmbedToken(data?: CreateEmbedTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmbedTokenResponse>;
 }
 

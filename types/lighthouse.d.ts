@@ -776,7 +776,7 @@ declare interface ApplyDiskBackupRequest {
 }
 
 declare interface ApplyDiskBackupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -788,7 +788,7 @@ declare interface ApplyInstanceSnapshotRequest {
 }
 
 declare interface ApplyInstanceSnapshotResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -800,7 +800,7 @@ declare interface AssociateInstancesKeyPairsRequest {
 }
 
 declare interface AssociateInstancesKeyPairsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -810,7 +810,7 @@ declare interface AttachCcnRequest {
 }
 
 declare interface AttachCcnResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -824,7 +824,7 @@ declare interface AttachDisksRequest {
 }
 
 declare interface AttachDisksResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -840,7 +840,7 @@ declare interface CreateBlueprintRequest {
 declare interface CreateBlueprintResponse {
   /** 自定义镜像ID。 */
   BlueprintId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -854,7 +854,7 @@ declare interface CreateDiskBackupRequest {
 declare interface CreateDiskBackupResponse {
   /** 备份点ID。 */
   DiskBackupId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -868,7 +868,7 @@ declare interface CreateFirewallRulesRequest {
 }
 
 declare interface CreateFirewallRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -882,7 +882,7 @@ declare interface CreateInstanceSnapshotRequest {
 declare interface CreateInstanceSnapshotResponse {
   /** 快照 ID。 */
   SnapshotId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -914,7 +914,7 @@ declare interface CreateInstancesRequest {
 declare interface CreateInstancesResponse {
   /** 当通过本接口来创建实例时会返回该参数，表示一个或多个实例ID。返回实例ID列表并不代表实例创建成功。可根据 DescribeInstances 接口查询返回的InstancesSet中对应实例的ID的状态来判断创建是否完成；如果实例状态由“启动中”变为“运行中”，则为创建成功。 */
   InstanceIdSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -926,7 +926,7 @@ declare interface CreateKeyPairRequest {
 declare interface CreateKeyPairResponse {
   /** 密钥对信息。 */
   KeyPair: KeyPair;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -936,7 +936,7 @@ declare interface DeleteBlueprintsRequest {
 }
 
 declare interface DeleteBlueprintsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -946,7 +946,7 @@ declare interface DeleteDiskBackupsRequest {
 }
 
 declare interface DeleteDiskBackupsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -960,7 +960,7 @@ declare interface DeleteFirewallRulesRequest {
 }
 
 declare interface DeleteFirewallRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -970,7 +970,7 @@ declare interface DeleteKeyPairsRequest {
 }
 
 declare interface DeleteKeyPairsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -980,7 +980,7 @@ declare interface DeleteSnapshotsRequest {
 }
 
 declare interface DeleteSnapshotsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -998,7 +998,7 @@ declare interface DescribeAllScenesResponse {
   SceneInfoSet: SceneInfo[];
   /** 使用场景详细信息总数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1012,7 +1012,7 @@ declare interface DescribeBlueprintInstancesResponse {
   TotalCount: number;
   /** 镜像实例列表信息。 */
   BlueprintInstanceSet: BlueprintInstance[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1032,7 +1032,7 @@ declare interface DescribeBlueprintsResponse {
   TotalCount: number;
   /** 镜像详细信息列表。 */
   BlueprintSet: Blueprint[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1046,7 +1046,7 @@ declare interface DescribeBundleDiscountResponse {
   Currency?: string;
   /** 折扣梯度详情，每个梯度包含的信息有：时长，折扣数，总价，折扣价，折扣详情（用户折扣、官网折扣、最终折扣）。 */
   DiscountDetail?: DiscountDetail[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1068,7 +1068,7 @@ declare interface DescribeBundlesResponse {
   BundleSet: Bundle[];
   /** 符合要求的套餐总数，用于分页展示。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1078,7 +1078,7 @@ declare interface DescribeCcnAttachedInstancesRequest {
 declare interface DescribeCcnAttachedInstancesResponse {
   /** 云联网关联的实例列表。 */
   CcnAttachedInstanceSet: CcnAttachedInstance[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1090,7 +1090,7 @@ declare interface DescribeDiskBackupsDeniedActionsRequest {
 declare interface DescribeDiskBackupsDeniedActionsResponse {
   /** 云硬盘备份点操作限制列表详细信息。 */
   DiskBackupDeniedActionSet: DiskBackupDeniedActions[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1110,7 +1110,7 @@ declare interface DescribeDiskBackupsResponse {
   TotalCount: number;
   /** 云硬盘备份点信息列表。 */
   DiskBackupSet: DiskBackup[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1122,7 +1122,7 @@ declare interface DescribeDiskConfigsRequest {
 declare interface DescribeDiskConfigsResponse {
   /** 云硬盘配置列表。 */
   DiskConfigSet: DiskConfig[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1140,7 +1140,7 @@ declare interface DescribeDiskDiscountResponse {
   Currency?: string;
   /** 折扣梯度详情，每个梯度包含的信息有：时长，折扣数，总价，折扣价，折扣详情（用户折扣、官网折扣、最终折扣）。 */
   DiscountDetail?: DiscountDetail[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1152,7 +1152,7 @@ declare interface DescribeDisksDeniedActionsRequest {
 declare interface DescribeDisksDeniedActionsResponse {
   /** 云硬盘操作限制列表详细信息。 */
   DiskDeniedActionSet: DiskDeniedActions[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1176,7 +1176,7 @@ declare interface DescribeDisksResponse {
   DiskSet: Disk[];
   /** 符合条件的云硬盘信息数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1194,7 +1194,7 @@ declare interface DescribeDisksReturnableResponse {
   DiskReturnableSet: DiskReturnable[];
   /** 符合条件的云硬盘数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1214,7 +1214,7 @@ declare interface DescribeFirewallRulesResponse {
   FirewallRuleSet: FirewallRuleInfo[];
   /** 防火墙版本号。 */
   FirewallVersion: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1226,7 +1226,7 @@ declare interface DescribeFirewallRulesTemplateResponse {
   TotalCount: number;
   /** 防火墙规则详细信息列表。 */
   FirewallRuleSet: FirewallRuleInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1238,7 +1238,7 @@ declare interface DescribeGeneralResourceQuotasRequest {
 declare interface DescribeGeneralResourceQuotasResponse {
   /** 通用资源配额详细信息列表。 */
   GeneralResourceQuotaSet: GeneralResourceQuota[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1250,7 +1250,7 @@ declare interface DescribeInstanceLoginKeyPairAttributeRequest {
 declare interface DescribeInstanceLoginKeyPairAttributeResponse {
   /** 是否允许使用默认密钥对登录，YES：允许登录 NO：禁止登录。 */
   PermitLogin: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1262,7 +1262,7 @@ declare interface DescribeInstanceVncUrlRequest {
 declare interface DescribeInstanceVncUrlResponse {
   /** 实例的管理终端地址。 */
   InstanceVncUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1274,7 +1274,7 @@ declare interface DescribeInstancesDeniedActionsRequest {
 declare interface DescribeInstancesDeniedActionsResponse {
   /** 实例操作限制列表详细信息。 */
   InstanceDeniedActionSet: InstanceDeniedActions[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1288,7 +1288,7 @@ declare interface DescribeInstancesDiskNumResponse {
   AttachDetailSet: AttachDetail[];
   /** 挂载信息数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1308,7 +1308,7 @@ declare interface DescribeInstancesResponse {
   TotalCount: number;
   /** 实例详细信息列表。 */
   InstanceSet: Instance[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1326,7 +1326,7 @@ declare interface DescribeInstancesReturnableResponse {
   TotalCount: number;
   /** 可退还实例详细信息列表。 */
   InstanceReturnableSet: InstanceReturnable[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1344,7 +1344,7 @@ declare interface DescribeInstancesTrafficPackagesResponse {
   TotalCount: number;
   /** 实例流量包详情列表。 */
   InstanceTrafficPackageSet: InstanceTrafficPackage[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1364,7 +1364,7 @@ declare interface DescribeKeyPairsResponse {
   TotalCount: number;
   /** 密钥对详细信息列表。 */
   KeyPairSet: KeyPair[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1384,7 +1384,7 @@ declare interface DescribeModifyInstanceBundlesResponse {
   TotalCount: number;
   /** 变更套餐详细信息。 */
   ModifyBundleSet: ModifyBundle[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1396,7 +1396,7 @@ declare interface DescribeRegionsResponse {
   TotalCount: number;
   /** 地域信息列表。 */
   RegionSet: RegionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1416,7 +1416,7 @@ declare interface DescribeResetInstanceBlueprintsResponse {
   TotalCount: number;
   /** 镜像重置信息列表 */
   ResetInstanceBlueprintSet: ResetInstanceBlueprint[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1434,7 +1434,7 @@ declare interface DescribeScenesResponse {
   SceneSet: Scene[];
   /** 使用场景总数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1446,7 +1446,7 @@ declare interface DescribeSnapshotsDeniedActionsRequest {
 declare interface DescribeSnapshotsDeniedActionsResponse {
   /** 快照操作限制列表详细信息。 */
   SnapshotDeniedActionSet: SnapshotDeniedActions[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1466,7 +1466,7 @@ declare interface DescribeSnapshotsResponse {
   TotalCount: number;
   /** 快照的详情列表。 */
   SnapshotSet: Snapshot[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1482,7 +1482,7 @@ declare interface DescribeZonesResponse {
   TotalCount: number;
   /** 可用区详细信息列表 */
   ZoneInfoSet: ZoneInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1492,7 +1492,7 @@ declare interface DetachCcnRequest {
 }
 
 declare interface DetachCcnResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1502,7 +1502,7 @@ declare interface DetachDisksRequest {
 }
 
 declare interface DetachDisksResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1514,7 +1514,7 @@ declare interface DisassociateInstancesKeyPairsRequest {
 }
 
 declare interface DisassociateInstancesKeyPairsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1528,7 +1528,7 @@ declare interface ImportKeyPairRequest {
 declare interface ImportKeyPairResponse {
   /** 密钥对 ID。 */
   KeyId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1540,7 +1540,7 @@ declare interface InquirePriceCreateBlueprintRequest {
 declare interface InquirePriceCreateBlueprintResponse {
   /** 自定义镜像的价格参数。 */
   BlueprintPrice: BlueprintPrice;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1560,7 +1560,7 @@ declare interface InquirePriceCreateDisksRequest {
 declare interface InquirePriceCreateDisksResponse {
   /** 云硬盘价格。 */
   DiskPrice: DiskPrice;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1578,7 +1578,7 @@ declare interface InquirePriceCreateInstancesRequest {
 declare interface InquirePriceCreateInstancesResponse {
   /** 询价信息。 */
   Price: Price;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1592,7 +1592,7 @@ declare interface InquirePriceRenewDisksRequest {
 declare interface InquirePriceRenewDisksResponse {
   /** 云硬盘价格。 */
   DiskPrice: DiskPrice;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1616,7 +1616,7 @@ declare interface InquirePriceRenewInstancesResponse {
   InstancePriceDetailSet?: InstancePriceDetail[] | null;
   /** 总计价格。 */
   TotalPrice?: TotalPrice;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1628,7 +1628,7 @@ declare interface IsolateInstancesRequest {
 }
 
 declare interface IsolateInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1642,7 +1642,7 @@ declare interface ModifyBlueprintAttributeRequest {
 }
 
 declare interface ModifyBlueprintAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1654,7 +1654,7 @@ declare interface ModifyDiskBackupsAttributeRequest {
 }
 
 declare interface ModifyDiskBackupsAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1666,7 +1666,7 @@ declare interface ModifyDisksAttributeRequest {
 }
 
 declare interface ModifyDisksAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1678,7 +1678,7 @@ declare interface ModifyDisksRenewFlagRequest {
 }
 
 declare interface ModifyDisksRenewFlagResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1692,7 +1692,7 @@ declare interface ModifyFirewallRuleDescriptionRequest {
 }
 
 declare interface ModifyFirewallRuleDescriptionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1706,7 +1706,7 @@ declare interface ModifyFirewallRulesRequest {
 }
 
 declare interface ModifyFirewallRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1718,7 +1718,7 @@ declare interface ModifyInstancesAttributeRequest {
 }
 
 declare interface ModifyInstancesAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1732,7 +1732,7 @@ declare interface ModifyInstancesBundleRequest {
 }
 
 declare interface ModifyInstancesBundleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1744,7 +1744,7 @@ declare interface ModifyInstancesLoginKeyPairAttributeRequest {
 }
 
 declare interface ModifyInstancesLoginKeyPairAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1756,7 +1756,7 @@ declare interface ModifyInstancesRenewFlagRequest {
 }
 
 declare interface ModifyInstancesRenewFlagResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1768,7 +1768,7 @@ declare interface ModifySnapshotAttributeRequest {
 }
 
 declare interface ModifySnapshotAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1778,7 +1778,7 @@ declare interface RebootInstancesRequest {
 }
 
 declare interface RebootInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1794,7 +1794,7 @@ declare interface RenewInstancesRequest {
 }
 
 declare interface RenewInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1804,7 +1804,7 @@ declare interface ResetAttachCcnRequest {
 }
 
 declare interface ResetAttachCcnResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1816,7 +1816,7 @@ declare interface ResetInstanceRequest {
 }
 
 declare interface ResetInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1830,7 +1830,7 @@ declare interface ResetInstancesPasswordRequest {
 }
 
 declare interface ResetInstancesPasswordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1840,7 +1840,7 @@ declare interface StartInstancesRequest {
 }
 
 declare interface StartInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1850,7 +1850,7 @@ declare interface StopInstancesRequest {
 }
 
 declare interface StopInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1860,7 +1860,7 @@ declare interface TerminateDisksRequest {
 }
 
 declare interface TerminateDisksResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1870,166 +1870,166 @@ declare interface TerminateInstancesRequest {
 }
 
 declare interface TerminateInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Lighthouse 轻量应用服务器} */
 declare interface Lighthouse {
   (): Versions;
-  /** {@link ApplyDiskBackup 回滚云硬盘备份点}({@link ApplyDiskBackupRequest 请求参数}): {@link ApplyDiskBackupResponse 返回参数} */
+  /** 回滚云硬盘备份点 {@link ApplyDiskBackupRequest} {@link ApplyDiskBackupResponse} */
   ApplyDiskBackup(data: ApplyDiskBackupRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyDiskBackupResponse>;
-  /** {@link ApplyInstanceSnapshot 回滚实例快照}({@link ApplyInstanceSnapshotRequest 请求参数}): {@link ApplyInstanceSnapshotResponse 返回参数} */
+  /** 回滚实例快照 {@link ApplyInstanceSnapshotRequest} {@link ApplyInstanceSnapshotResponse} */
   ApplyInstanceSnapshot(data: ApplyInstanceSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyInstanceSnapshotResponse>;
-  /** {@link AssociateInstancesKeyPairs 绑定密钥对}({@link AssociateInstancesKeyPairsRequest 请求参数}): {@link AssociateInstancesKeyPairsResponse 返回参数} */
+  /** 绑定密钥对 {@link AssociateInstancesKeyPairsRequest} {@link AssociateInstancesKeyPairsResponse} */
   AssociateInstancesKeyPairs(data: AssociateInstancesKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateInstancesKeyPairsResponse>;
-  /** {@link AttachCcn 关联云联网}({@link AttachCcnRequest 请求参数}): {@link AttachCcnResponse 返回参数} */
+  /** 关联云联网 {@link AttachCcnRequest} {@link AttachCcnResponse} */
   AttachCcn(data: AttachCcnRequest, config?: AxiosRequestConfig): AxiosPromise<AttachCcnResponse>;
-  /** {@link AttachDisks 挂载云硬盘}({@link AttachDisksRequest 请求参数}): {@link AttachDisksResponse 返回参数} */
+  /** 挂载云硬盘 {@link AttachDisksRequest} {@link AttachDisksResponse} */
   AttachDisks(data: AttachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<AttachDisksResponse>;
-  /** {@link CreateBlueprint 创建镜像}({@link CreateBlueprintRequest 请求参数}): {@link CreateBlueprintResponse 返回参数} */
+  /** 创建镜像 {@link CreateBlueprintRequest} {@link CreateBlueprintResponse} */
   CreateBlueprint(data: CreateBlueprintRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlueprintResponse>;
-  /** {@link CreateDiskBackup 创建云硬盘备份点}({@link CreateDiskBackupRequest 请求参数}): {@link CreateDiskBackupResponse 返回参数} */
+  /** 创建云硬盘备份点 {@link CreateDiskBackupRequest} {@link CreateDiskBackupResponse} */
   CreateDiskBackup(data: CreateDiskBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDiskBackupResponse>;
-  /** {@link CreateFirewallRules 添加防火墙规则}({@link CreateFirewallRulesRequest 请求参数}): {@link CreateFirewallRulesResponse 返回参数} */
+  /** 添加防火墙规则 {@link CreateFirewallRulesRequest} {@link CreateFirewallRulesResponse} */
   CreateFirewallRules(data: CreateFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFirewallRulesResponse>;
-  /** {@link CreateInstanceSnapshot 创建实例快照}({@link CreateInstanceSnapshotRequest 请求参数}): {@link CreateInstanceSnapshotResponse 返回参数} */
+  /** 创建实例快照 {@link CreateInstanceSnapshotRequest} {@link CreateInstanceSnapshotResponse} */
   CreateInstanceSnapshot(data: CreateInstanceSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceSnapshotResponse>;
-  /** {@link CreateInstances 创建实例}({@link CreateInstancesRequest 请求参数}): {@link CreateInstancesResponse 返回参数} */
+  /** 创建实例 {@link CreateInstancesRequest} {@link CreateInstancesResponse} */
   CreateInstances(data: CreateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancesResponse>;
-  /** {@link CreateKeyPair 创建密钥对}({@link CreateKeyPairRequest 请求参数}): {@link CreateKeyPairResponse 返回参数} */
+  /** 创建密钥对 {@link CreateKeyPairRequest} {@link CreateKeyPairResponse} */
   CreateKeyPair(data: CreateKeyPairRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKeyPairResponse>;
-  /** {@link DeleteBlueprints 删除镜像}({@link DeleteBlueprintsRequest 请求参数}): {@link DeleteBlueprintsResponse 返回参数} */
+  /** 删除镜像 {@link DeleteBlueprintsRequest} {@link DeleteBlueprintsResponse} */
   DeleteBlueprints(data: DeleteBlueprintsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlueprintsResponse>;
-  /** {@link DeleteDiskBackups 删除云硬盘备份点}({@link DeleteDiskBackupsRequest 请求参数}): {@link DeleteDiskBackupsResponse 返回参数} */
+  /** 删除云硬盘备份点 {@link DeleteDiskBackupsRequest} {@link DeleteDiskBackupsResponse} */
   DeleteDiskBackups(data: DeleteDiskBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDiskBackupsResponse>;
-  /** {@link DeleteFirewallRules 删除防火墙规则}({@link DeleteFirewallRulesRequest 请求参数}): {@link DeleteFirewallRulesResponse 返回参数} */
+  /** 删除防火墙规则 {@link DeleteFirewallRulesRequest} {@link DeleteFirewallRulesResponse} */
   DeleteFirewallRules(data: DeleteFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFirewallRulesResponse>;
-  /** {@link DeleteKeyPairs 删除密钥对}({@link DeleteKeyPairsRequest 请求参数}): {@link DeleteKeyPairsResponse 返回参数} */
+  /** 删除密钥对 {@link DeleteKeyPairsRequest} {@link DeleteKeyPairsResponse} */
   DeleteKeyPairs(data: DeleteKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKeyPairsResponse>;
-  /** {@link DeleteSnapshots 删除快照}({@link DeleteSnapshotsRequest 请求参数}): {@link DeleteSnapshotsResponse 返回参数} */
+  /** 删除快照 {@link DeleteSnapshotsRequest} {@link DeleteSnapshotsResponse} */
   DeleteSnapshots(data: DeleteSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotsResponse>;
-  /** {@link DescribeAllScenes 查询全地域使用场景列表}({@link DescribeAllScenesRequest 请求参数}): {@link DescribeAllScenesResponse 返回参数} */
+  /** 查询全地域使用场景列表 {@link DescribeAllScenesRequest} {@link DescribeAllScenesResponse} */
   DescribeAllScenes(data?: DescribeAllScenesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllScenesResponse>;
-  /** {@link DescribeBlueprintInstances 查询镜像实例信息}({@link DescribeBlueprintInstancesRequest 请求参数}): {@link DescribeBlueprintInstancesResponse 返回参数} */
+  /** 查询镜像实例信息 {@link DescribeBlueprintInstancesRequest} {@link DescribeBlueprintInstancesResponse} */
   DescribeBlueprintInstances(data: DescribeBlueprintInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlueprintInstancesResponse>;
-  /** {@link DescribeBlueprints 查询镜像信息}({@link DescribeBlueprintsRequest 请求参数}): {@link DescribeBlueprintsResponse 返回参数} */
+  /** 查询镜像信息 {@link DescribeBlueprintsRequest} {@link DescribeBlueprintsResponse} */
   DescribeBlueprints(data?: DescribeBlueprintsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlueprintsResponse>;
-  /** {@link DescribeBundleDiscount 查询套餐折扣}({@link DescribeBundleDiscountRequest 请求参数}): {@link DescribeBundleDiscountResponse 返回参数} */
+  /** 查询套餐折扣 {@link DescribeBundleDiscountRequest} {@link DescribeBundleDiscountResponse} */
   DescribeBundleDiscount(data: DescribeBundleDiscountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBundleDiscountResponse>;
-  /** {@link DescribeBundles 查询套餐}({@link DescribeBundlesRequest 请求参数}): {@link DescribeBundlesResponse 返回参数} */
+  /** 查询套餐 {@link DescribeBundlesRequest} {@link DescribeBundlesResponse} */
   DescribeBundles(data?: DescribeBundlesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBundlesResponse>;
-  /** {@link DescribeCcnAttachedInstances 查询云联网关联的实例信息}({@link DescribeCcnAttachedInstancesRequest 请求参数}): {@link DescribeCcnAttachedInstancesResponse 返回参数} */
+  /** 查询云联网关联的实例信息 {@link DescribeCcnAttachedInstancesRequest} {@link DescribeCcnAttachedInstancesResponse} */
   DescribeCcnAttachedInstances(data?: DescribeCcnAttachedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnAttachedInstancesResponse>;
-  /** {@link DescribeDiskBackups 查看云硬盘备份点列表}({@link DescribeDiskBackupsRequest 请求参数}): {@link DescribeDiskBackupsResponse 返回参数} */
+  /** 查看云硬盘备份点列表 {@link DescribeDiskBackupsRequest} {@link DescribeDiskBackupsResponse} */
   DescribeDiskBackups(data?: DescribeDiskBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskBackupsResponse>;
-  /** {@link DescribeDiskBackupsDeniedActions 查看云硬盘备份点操作限制列表}({@link DescribeDiskBackupsDeniedActionsRequest 请求参数}): {@link DescribeDiskBackupsDeniedActionsResponse 返回参数} */
+  /** 查看云硬盘备份点操作限制列表 {@link DescribeDiskBackupsDeniedActionsRequest} {@link DescribeDiskBackupsDeniedActionsResponse} */
   DescribeDiskBackupsDeniedActions(data: DescribeDiskBackupsDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskBackupsDeniedActionsResponse>;
-  /** {@link DescribeDiskConfigs 查看云硬盘配置}({@link DescribeDiskConfigsRequest 请求参数}): {@link DescribeDiskConfigsResponse 返回参数} */
+  /** 查看云硬盘配置 {@link DescribeDiskConfigsRequest} {@link DescribeDiskConfigsResponse} */
   DescribeDiskConfigs(data?: DescribeDiskConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskConfigsResponse>;
-  /** {@link DescribeDiskDiscount 查询云硬盘折扣信息}({@link DescribeDiskDiscountRequest 请求参数}): {@link DescribeDiskDiscountResponse 返回参数} */
+  /** 查询云硬盘折扣信息 {@link DescribeDiskDiscountRequest} {@link DescribeDiskDiscountResponse} */
   DescribeDiskDiscount(data: DescribeDiskDiscountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskDiscountResponse>;
-  /** {@link DescribeDisks 查询云硬盘}({@link DescribeDisksRequest 请求参数}): {@link DescribeDisksResponse 返回参数} */
+  /** 查询云硬盘 {@link DescribeDisksRequest} {@link DescribeDisksResponse} */
   DescribeDisks(data?: DescribeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksResponse>;
-  /** {@link DescribeDisksDeniedActions 查询云硬盘操作限制列表信息}({@link DescribeDisksDeniedActionsRequest 请求参数}): {@link DescribeDisksDeniedActionsResponse 返回参数} */
+  /** 查询云硬盘操作限制列表信息 {@link DescribeDisksDeniedActionsRequest} {@link DescribeDisksDeniedActionsResponse} */
   DescribeDisksDeniedActions(data: DescribeDisksDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksDeniedActionsResponse>;
-  /** {@link DescribeDisksReturnable 查看云硬盘是否可退还}({@link DescribeDisksReturnableRequest 请求参数}): {@link DescribeDisksReturnableResponse 返回参数} */
+  /** 查看云硬盘是否可退还 {@link DescribeDisksReturnableRequest} {@link DescribeDisksReturnableResponse} */
   DescribeDisksReturnable(data?: DescribeDisksReturnableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksReturnableResponse>;
-  /** {@link DescribeFirewallRules 查询防火墙规则}({@link DescribeFirewallRulesRequest 请求参数}): {@link DescribeFirewallRulesResponse 返回参数} */
+  /** 查询防火墙规则 {@link DescribeFirewallRulesRequest} {@link DescribeFirewallRulesResponse} */
   DescribeFirewallRules(data: DescribeFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirewallRulesResponse>;
-  /** {@link DescribeFirewallRulesTemplate 查询防火墙规则模板}({@link DescribeFirewallRulesTemplateRequest 请求参数}): {@link DescribeFirewallRulesTemplateResponse 返回参数} */
+  /** 查询防火墙规则模板 {@link DescribeFirewallRulesTemplateRequest} {@link DescribeFirewallRulesTemplateResponse} */
   DescribeFirewallRulesTemplate(data?: DescribeFirewallRulesTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirewallRulesTemplateResponse>;
-  /** {@link DescribeGeneralResourceQuotas 查询通用资源配额信息}({@link DescribeGeneralResourceQuotasRequest 请求参数}): {@link DescribeGeneralResourceQuotasResponse 返回参数} */
+  /** 查询通用资源配额信息 {@link DescribeGeneralResourceQuotasRequest} {@link DescribeGeneralResourceQuotasResponse} */
   DescribeGeneralResourceQuotas(data: DescribeGeneralResourceQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralResourceQuotasResponse>;
-  /** {@link DescribeInstanceLoginKeyPairAttribute 查询实例默认登录密钥属性}({@link DescribeInstanceLoginKeyPairAttributeRequest 请求参数}): {@link DescribeInstanceLoginKeyPairAttributeResponse 返回参数} */
+  /** 查询实例默认登录密钥属性 {@link DescribeInstanceLoginKeyPairAttributeRequest} {@link DescribeInstanceLoginKeyPairAttributeResponse} */
   DescribeInstanceLoginKeyPairAttribute(data: DescribeInstanceLoginKeyPairAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLoginKeyPairAttributeResponse>;
-  /** {@link DescribeInstanceVncUrl 查询实例管理终端地址}({@link DescribeInstanceVncUrlRequest 请求参数}): {@link DescribeInstanceVncUrlResponse 返回参数} */
+  /** 查询实例管理终端地址 {@link DescribeInstanceVncUrlRequest} {@link DescribeInstanceVncUrlResponse} */
   DescribeInstanceVncUrl(data: DescribeInstanceVncUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceVncUrlResponse>;
-  /** {@link DescribeInstances 查看实例列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
+  /** 查看实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** {@link DescribeInstancesDeniedActions 查看实例操作限制列表}({@link DescribeInstancesDeniedActionsRequest 请求参数}): {@link DescribeInstancesDeniedActionsResponse 返回参数} */
+  /** 查看实例操作限制列表 {@link DescribeInstancesDeniedActionsRequest} {@link DescribeInstancesDeniedActionsResponse} */
   DescribeInstancesDeniedActions(data: DescribeInstancesDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDeniedActionsResponse>;
-  /** {@link DescribeInstancesDiskNum 查询实例挂载云硬盘数量}({@link DescribeInstancesDiskNumRequest 请求参数}): {@link DescribeInstancesDiskNumResponse 返回参数} */
+  /** 查询实例挂载云硬盘数量 {@link DescribeInstancesDiskNumRequest} {@link DescribeInstancesDiskNumResponse} */
   DescribeInstancesDiskNum(data: DescribeInstancesDiskNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDiskNumResponse>;
-  /** {@link DescribeInstancesReturnable 查询实例是否可退还}({@link DescribeInstancesReturnableRequest 请求参数}): {@link DescribeInstancesReturnableResponse 返回参数} */
+  /** 查询实例是否可退还 {@link DescribeInstancesReturnableRequest} {@link DescribeInstancesReturnableResponse} */
   DescribeInstancesReturnable(data?: DescribeInstancesReturnableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesReturnableResponse>;
-  /** {@link DescribeInstancesTrafficPackages 查看实例流量包详情}({@link DescribeInstancesTrafficPackagesRequest 请求参数}): {@link DescribeInstancesTrafficPackagesResponse 返回参数} */
+  /** 查看实例流量包详情 {@link DescribeInstancesTrafficPackagesRequest} {@link DescribeInstancesTrafficPackagesResponse} */
   DescribeInstancesTrafficPackages(data?: DescribeInstancesTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesTrafficPackagesResponse>;
-  /** {@link DescribeKeyPairs 查询用户密钥对列表}({@link DescribeKeyPairsRequest 请求参数}): {@link DescribeKeyPairsResponse 返回参数} */
+  /** 查询用户密钥对列表 {@link DescribeKeyPairsRequest} {@link DescribeKeyPairsResponse} */
   DescribeKeyPairs(data?: DescribeKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeyPairsResponse>;
-  /** {@link DescribeModifyInstanceBundles 查询实例可变更套餐列表}({@link DescribeModifyInstanceBundlesRequest 请求参数}): {@link DescribeModifyInstanceBundlesResponse 返回参数} */
+  /** 查询实例可变更套餐列表 {@link DescribeModifyInstanceBundlesRequest} {@link DescribeModifyInstanceBundlesResponse} */
   DescribeModifyInstanceBundles(data: DescribeModifyInstanceBundlesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModifyInstanceBundlesResponse>;
-  /** {@link DescribeRegions 查询地域列表}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
+  /** 查询地域列表 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** {@link DescribeResetInstanceBlueprints 查询重置实例的镜像信息}({@link DescribeResetInstanceBlueprintsRequest 请求参数}): {@link DescribeResetInstanceBlueprintsResponse 返回参数} */
+  /** 查询重置实例的镜像信息 {@link DescribeResetInstanceBlueprintsRequest} {@link DescribeResetInstanceBlueprintsResponse} */
   DescribeResetInstanceBlueprints(data: DescribeResetInstanceBlueprintsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResetInstanceBlueprintsResponse>;
-  /** {@link DescribeScenes 查看使用场景列表}({@link DescribeScenesRequest 请求参数}): {@link DescribeScenesResponse 返回参数} */
+  /** 查看使用场景列表 {@link DescribeScenesRequest} {@link DescribeScenesResponse} */
   DescribeScenes(data?: DescribeScenesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScenesResponse>;
-  /** {@link DescribeSnapshots 查看快照列表}({@link DescribeSnapshotsRequest 请求参数}): {@link DescribeSnapshotsResponse 返回参数} */
+  /** 查看快照列表 {@link DescribeSnapshotsRequest} {@link DescribeSnapshotsResponse} */
   DescribeSnapshots(data?: DescribeSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsResponse>;
-  /** {@link DescribeSnapshotsDeniedActions 查看快照操作限制列表}({@link DescribeSnapshotsDeniedActionsRequest 请求参数}): {@link DescribeSnapshotsDeniedActionsResponse 返回参数} */
+  /** 查看快照操作限制列表 {@link DescribeSnapshotsDeniedActionsRequest} {@link DescribeSnapshotsDeniedActionsResponse} */
   DescribeSnapshotsDeniedActions(data: DescribeSnapshotsDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsDeniedActionsResponse>;
-  /** {@link DescribeZones 查询可用区列表}({@link DescribeZonesRequest 请求参数}): {@link DescribeZonesResponse 返回参数} */
+  /** 查询可用区列表 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
-  /** {@link DetachCcn 解关联云联网}({@link DetachCcnRequest 请求参数}): {@link DetachCcnResponse 返回参数} */
+  /** 解关联云联网 {@link DetachCcnRequest} {@link DetachCcnResponse} */
   DetachCcn(data: DetachCcnRequest, config?: AxiosRequestConfig): AxiosPromise<DetachCcnResponse>;
-  /** {@link DetachDisks 卸载云硬盘}({@link DetachDisksRequest 请求参数}): {@link DetachDisksResponse 返回参数} */
+  /** 卸载云硬盘 {@link DetachDisksRequest} {@link DetachDisksResponse} */
   DetachDisks(data: DetachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DetachDisksResponse>;
-  /** {@link DisassociateInstancesKeyPairs 解绑密钥对}({@link DisassociateInstancesKeyPairsRequest 请求参数}): {@link DisassociateInstancesKeyPairsResponse 返回参数} */
+  /** 解绑密钥对 {@link DisassociateInstancesKeyPairsRequest} {@link DisassociateInstancesKeyPairsResponse} */
   DisassociateInstancesKeyPairs(data: DisassociateInstancesKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateInstancesKeyPairsResponse>;
-  /** {@link ImportKeyPair 导入密钥对}({@link ImportKeyPairRequest 请求参数}): {@link ImportKeyPairResponse 返回参数} */
+  /** 导入密钥对 {@link ImportKeyPairRequest} {@link ImportKeyPairResponse} */
   ImportKeyPair(data: ImportKeyPairRequest, config?: AxiosRequestConfig): AxiosPromise<ImportKeyPairResponse>;
-  /** {@link InquirePriceCreateBlueprint 创建镜像询价}({@link InquirePriceCreateBlueprintRequest 请求参数}): {@link InquirePriceCreateBlueprintResponse 返回参数} */
+  /** 创建镜像询价 {@link InquirePriceCreateBlueprintRequest} {@link InquirePriceCreateBlueprintResponse} */
   InquirePriceCreateBlueprint(data?: InquirePriceCreateBlueprintRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateBlueprintResponse>;
-  /** {@link InquirePriceCreateDisks 新购云硬盘询价}({@link InquirePriceCreateDisksRequest 请求参数}): {@link InquirePriceCreateDisksResponse 返回参数} */
+  /** 新购云硬盘询价 {@link InquirePriceCreateDisksRequest} {@link InquirePriceCreateDisksResponse} */
   InquirePriceCreateDisks(data: InquirePriceCreateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateDisksResponse>;
-  /** {@link InquirePriceCreateInstances 创建实例询价}({@link InquirePriceCreateInstancesRequest 请求参数}): {@link InquirePriceCreateInstancesResponse 返回参数} */
+  /** 创建实例询价 {@link InquirePriceCreateInstancesRequest} {@link InquirePriceCreateInstancesResponse} */
   InquirePriceCreateInstances(data: InquirePriceCreateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateInstancesResponse>;
-  /** {@link InquirePriceRenewDisks 续费云硬盘询价}({@link InquirePriceRenewDisksRequest 请求参数}): {@link InquirePriceRenewDisksResponse 返回参数} */
+  /** 续费云硬盘询价 {@link InquirePriceRenewDisksRequest} {@link InquirePriceRenewDisksResponse} */
   InquirePriceRenewDisks(data: InquirePriceRenewDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewDisksResponse>;
-  /** {@link InquirePriceRenewInstances 续费实例询价}({@link InquirePriceRenewInstancesRequest 请求参数}): {@link InquirePriceRenewInstancesResponse 返回参数} */
+  /** 续费实例询价 {@link InquirePriceRenewInstancesRequest} {@link InquirePriceRenewInstancesResponse} */
   InquirePriceRenewInstances(data: InquirePriceRenewInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewInstancesResponse>;
-  /** {@link IsolateInstances 隔离实例}({@link IsolateInstancesRequest 请求参数}): {@link IsolateInstancesResponse 返回参数} */
+  /** 隔离实例 {@link IsolateInstancesRequest} {@link IsolateInstancesResponse} */
   IsolateInstances(data: IsolateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateInstancesResponse>;
-  /** {@link ModifyBlueprintAttribute 修改镜像属性}({@link ModifyBlueprintAttributeRequest 请求参数}): {@link ModifyBlueprintAttributeResponse 返回参数} */
+  /** 修改镜像属性 {@link ModifyBlueprintAttributeRequest} {@link ModifyBlueprintAttributeResponse} */
   ModifyBlueprintAttribute(data: ModifyBlueprintAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlueprintAttributeResponse>;
-  /** {@link ModifyDiskBackupsAttribute 修改云硬盘备份点属性}({@link ModifyDiskBackupsAttributeRequest 请求参数}): {@link ModifyDiskBackupsAttributeResponse 返回参数} */
+  /** 修改云硬盘备份点属性 {@link ModifyDiskBackupsAttributeRequest} {@link ModifyDiskBackupsAttributeResponse} */
   ModifyDiskBackupsAttribute(data: ModifyDiskBackupsAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDiskBackupsAttributeResponse>;
-  /** {@link ModifyDisksAttribute 修改云硬盘属性}({@link ModifyDisksAttributeRequest 请求参数}): {@link ModifyDisksAttributeResponse 返回参数} */
+  /** 修改云硬盘属性 {@link ModifyDisksAttributeRequest} {@link ModifyDisksAttributeResponse} */
   ModifyDisksAttribute(data: ModifyDisksAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisksAttributeResponse>;
-  /** {@link ModifyDisksRenewFlag 修改云硬盘续费标识}({@link ModifyDisksRenewFlagRequest 请求参数}): {@link ModifyDisksRenewFlagResponse 返回参数} */
+  /** 修改云硬盘续费标识 {@link ModifyDisksRenewFlagRequest} {@link ModifyDisksRenewFlagResponse} */
   ModifyDisksRenewFlag(data: ModifyDisksRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisksRenewFlagResponse>;
-  /** {@link ModifyFirewallRuleDescription 修改防火墙规则描述}({@link ModifyFirewallRuleDescriptionRequest 请求参数}): {@link ModifyFirewallRuleDescriptionResponse 返回参数} */
+  /** 修改防火墙规则描述 {@link ModifyFirewallRuleDescriptionRequest} {@link ModifyFirewallRuleDescriptionResponse} */
   ModifyFirewallRuleDescription(data: ModifyFirewallRuleDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFirewallRuleDescriptionResponse>;
-  /** {@link ModifyFirewallRules 修改防火墙规则}({@link ModifyFirewallRulesRequest 请求参数}): {@link ModifyFirewallRulesResponse 返回参数} */
+  /** 修改防火墙规则 {@link ModifyFirewallRulesRequest} {@link ModifyFirewallRulesResponse} */
   ModifyFirewallRules(data: ModifyFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFirewallRulesResponse>;
-  /** {@link ModifyInstancesAttribute 修改实例的属性}({@link ModifyInstancesAttributeRequest 请求参数}): {@link ModifyInstancesAttributeResponse 返回参数} */
+  /** 修改实例的属性 {@link ModifyInstancesAttributeRequest} {@link ModifyInstancesAttributeResponse} */
   ModifyInstancesAttribute(data: ModifyInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesAttributeResponse>;
-  /** {@link ModifyInstancesBundle 变更实例套餐}({@link ModifyInstancesBundleRequest 请求参数}): {@link ModifyInstancesBundleResponse 返回参数} */
+  /** 变更实例套餐 {@link ModifyInstancesBundleRequest} {@link ModifyInstancesBundleResponse} */
   ModifyInstancesBundle(data: ModifyInstancesBundleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesBundleResponse>;
-  /** {@link ModifyInstancesLoginKeyPairAttribute 修改实例默认登录密钥对属性}({@link ModifyInstancesLoginKeyPairAttributeRequest 请求参数}): {@link ModifyInstancesLoginKeyPairAttributeResponse 返回参数} */
+  /** 修改实例默认登录密钥对属性 {@link ModifyInstancesLoginKeyPairAttributeRequest} {@link ModifyInstancesLoginKeyPairAttributeResponse} */
   ModifyInstancesLoginKeyPairAttribute(data: ModifyInstancesLoginKeyPairAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesLoginKeyPairAttributeResponse>;
-  /** {@link ModifyInstancesRenewFlag 修改实例续费标识}({@link ModifyInstancesRenewFlagRequest 请求参数}): {@link ModifyInstancesRenewFlagResponse 返回参数} */
+  /** 修改实例续费标识 {@link ModifyInstancesRenewFlagRequest} {@link ModifyInstancesRenewFlagResponse} */
   ModifyInstancesRenewFlag(data: ModifyInstancesRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesRenewFlagResponse>;
-  /** {@link ModifySnapshotAttribute 修改快照信息}({@link ModifySnapshotAttributeRequest 请求参数}): {@link ModifySnapshotAttributeResponse 返回参数} */
+  /** 修改快照信息 {@link ModifySnapshotAttributeRequest} {@link ModifySnapshotAttributeResponse} */
   ModifySnapshotAttribute(data: ModifySnapshotAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotAttributeResponse>;
-  /** {@link RebootInstances 重启实例}({@link RebootInstancesRequest 请求参数}): {@link RebootInstancesResponse 返回参数} */
+  /** 重启实例 {@link RebootInstancesRequest} {@link RebootInstancesResponse} */
   RebootInstances(data: RebootInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootInstancesResponse>;
-  /** {@link RenewInstances 续费实例}({@link RenewInstancesRequest 请求参数}): {@link RenewInstancesResponse 返回参数} */
+  /** 续费实例 {@link RenewInstancesRequest} {@link RenewInstancesResponse} */
   RenewInstances(data: RenewInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RenewInstancesResponse>;
-  /** {@link ResetAttachCcn 重新申请关联云联网}({@link ResetAttachCcnRequest 请求参数}): {@link ResetAttachCcnResponse 返回参数} */
+  /** 重新申请关联云联网 {@link ResetAttachCcnRequest} {@link ResetAttachCcnResponse} */
   ResetAttachCcn(data: ResetAttachCcnRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAttachCcnResponse>;
-  /** {@link ResetInstance 重装系统}({@link ResetInstanceRequest 请求参数}): {@link ResetInstanceResponse 返回参数} */
+  /** 重装系统 {@link ResetInstanceRequest} {@link ResetInstanceResponse} */
   ResetInstance(data: ResetInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstanceResponse>;
-  /** {@link ResetInstancesPassword 重置实例密码}({@link ResetInstancesPasswordRequest 请求参数}): {@link ResetInstancesPasswordResponse 返回参数} */
+  /** 重置实例密码 {@link ResetInstancesPasswordRequest} {@link ResetInstancesPasswordResponse} */
   ResetInstancesPassword(data: ResetInstancesPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstancesPasswordResponse>;
-  /** {@link StartInstances 启动实例}({@link StartInstancesRequest 请求参数}): {@link StartInstancesResponse 返回参数} */
+  /** 启动实例 {@link StartInstancesRequest} {@link StartInstancesResponse} */
   StartInstances(data: StartInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StartInstancesResponse>;
-  /** {@link StopInstances 关闭实例}({@link StopInstancesRequest 请求参数}): {@link StopInstancesResponse 返回参数} */
+  /** 关闭实例 {@link StopInstancesRequest} {@link StopInstancesResponse} */
   StopInstances(data: StopInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstancesResponse>;
-  /** {@link TerminateDisks 销毁云硬盘}({@link TerminateDisksRequest 请求参数}): {@link TerminateDisksResponse 返回参数} */
+  /** 销毁云硬盘 {@link TerminateDisksRequest} {@link TerminateDisksResponse} */
   TerminateDisks(data: TerminateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDisksResponse>;
-  /** {@link TerminateInstances 销毁实例}({@link TerminateInstancesRequest 请求参数}): {@link TerminateInstancesResponse 返回参数} */
+  /** 销毁实例 {@link TerminateInstancesRequest} {@link TerminateInstancesResponse} */
   TerminateInstances(data: TerminateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstancesResponse>;
 }
 

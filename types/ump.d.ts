@@ -276,7 +276,7 @@ declare interface CreateCameraAlertsRequest {
 }
 
 declare interface CreateCameraAlertsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -290,7 +290,7 @@ declare interface CreateCameraStateRequest {
 }
 
 declare interface CreateCameraStateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -302,7 +302,7 @@ declare interface CreateCaptureRequest {
 declare interface CreateCaptureResponse {
   /** 原始应答报文 */
   RspData?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -326,7 +326,7 @@ declare interface CreateMultiBizAlertRequest {
 }
 
 declare interface CreateMultiBizAlertResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -340,7 +340,7 @@ declare interface CreateProgramStateRequest {
 }
 
 declare interface CreateProgramStateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -356,7 +356,7 @@ declare interface CreateServerStateRequest {
 }
 
 declare interface CreateServerStateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -376,7 +376,7 @@ declare interface DeleteMultiBizAlertRequest {
 }
 
 declare interface DeleteMultiBizAlertResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -390,7 +390,7 @@ declare interface DeleteTaskRequest {
 }
 
 declare interface DeleteTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -404,7 +404,7 @@ declare interface DescribeCamerasRequest {
 declare interface DescribeCamerasResponse {
   /** 摄像头列表 */
   Cameras?: CameraZones[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -432,7 +432,7 @@ declare interface DescribeConfigResponse {
   Version?: number;
   /** 摄像头列表 */
   Cameras?: CameraConfig[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -448,7 +448,7 @@ declare interface DescribeImageRequest {
 declare interface DescribeImageResponse {
   /** cos 临时 url，异步上传图片，client需要轮询 */
   ImageUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -466,7 +466,7 @@ declare interface DescribeMultiBizBaseImageRequest {
 declare interface DescribeMultiBizBaseImageResponse {
   /** cos 临时 url */
   ImageUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -482,7 +482,7 @@ declare interface DescribeTasksRequest {
 declare interface DescribeTasksResponse {
   /** 任务列表 */
   Tasks?: Task[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -496,7 +496,7 @@ declare interface DescribeZonesRequest {
 declare interface DescribeZonesResponse {
   /** 点位列表 */
   Zones?: ZoneConfig[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -514,7 +514,7 @@ declare interface ModifyMultiBizConfigRequest {
 }
 
 declare interface ModifyMultiBizConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -534,7 +534,7 @@ declare interface ReportServiceRegisterRequest {
 }
 
 declare interface ReportServiceRegisterResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -554,46 +554,46 @@ declare interface SearchImageResponse {
   FaceId?: string;
   /** 搜索结果列表 */
   Results?: SearchResult[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ump 客流数字化平台} */
 declare interface Ump {
   (): Versions;
-  /** {@link CreateCameraAlerts 上报相机告警信息}({@link CreateCameraAlertsRequest 请求参数}): {@link CreateCameraAlertsResponse 返回参数} */
+  /** 上报相机告警信息 {@link CreateCameraAlertsRequest} {@link CreateCameraAlertsResponse} */
   CreateCameraAlerts(data?: CreateCameraAlertsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCameraAlertsResponse>;
-  /** {@link CreateCameraState 相机状态上报接口}({@link CreateCameraStateRequest 请求参数}): {@link CreateCameraStateResponse 返回参数} */
+  /** 相机状态上报接口 {@link CreateCameraStateRequest} {@link CreateCameraStateResponse} */
   CreateCameraState(data: CreateCameraStateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCameraStateResponse>;
-  /** {@link CreateCapture 抓拍上报接口}({@link CreateCaptureRequest 请求参数}): {@link CreateCaptureResponse 返回参数} */
+  /** 抓拍上报接口 {@link CreateCaptureRequest} {@link CreateCaptureResponse} */
   CreateCapture(data: CreateCaptureRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCaptureResponse>;
-  /** {@link CreateMultiBizAlert 多经点位告警}({@link CreateMultiBizAlertRequest 请求参数}): {@link CreateMultiBizAlertResponse 返回参数} */
+  /** 多经点位告警 {@link CreateMultiBizAlertRequest} {@link CreateMultiBizAlertResponse} */
   CreateMultiBizAlert(data: CreateMultiBizAlertRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiBizAlertResponse>;
-  /** {@link CreateProgramState 进程监控信息上报}({@link CreateProgramStateRequest 请求参数}): {@link CreateProgramStateResponse 返回参数} */
+  /** 进程监控信息上报 {@link CreateProgramStateRequest} {@link CreateProgramStateResponse} */
   CreateProgramState(data: CreateProgramStateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProgramStateResponse>;
-  /** {@link CreateServerState 服务器监控信息上报}({@link CreateServerStateRequest 请求参数}): {@link CreateServerStateResponse 返回参数} */
+  /** 服务器监控信息上报 {@link CreateServerStateRequest} {@link CreateServerStateResponse} */
   CreateServerState(data: CreateServerStateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServerStateResponse>;
-  /** {@link DeleteMultiBizAlert 多经点位消警}({@link DeleteMultiBizAlertRequest 请求参数}): {@link DeleteMultiBizAlertResponse 返回参数} */
+  /** 多经点位消警 {@link DeleteMultiBizAlertRequest} {@link DeleteMultiBizAlertResponse} */
   DeleteMultiBizAlert(data: DeleteMultiBizAlertRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMultiBizAlertResponse>;
-  /** {@link DeleteTask 删除任务}({@link DeleteTaskRequest 请求参数}): {@link DeleteTaskResponse 返回参数} */
+  /** 删除任务 {@link DeleteTaskRequest} {@link DeleteTaskResponse} */
   DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;
-  /** {@link DescribeCameras 获取摄像头状态列表}({@link DescribeCamerasRequest 请求参数}): {@link DescribeCamerasResponse 返回参数} */
+  /** 获取摄像头状态列表 {@link DescribeCamerasRequest} {@link DescribeCamerasResponse} */
   DescribeCameras(data: DescribeCamerasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCamerasResponse>;
-  /** {@link DescribeConfig 获取摄像头配置信息}({@link DescribeConfigRequest 请求参数}): {@link DescribeConfigResponse 返回参数} */
+  /** 获取摄像头配置信息 {@link DescribeConfigRequest} {@link DescribeConfigResponse} */
   DescribeConfig(data: DescribeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigResponse>;
-  /** {@link DescribeImage 获取底图}({@link DescribeImageRequest 请求参数}): {@link DescribeImageResponse 返回参数} */
+  /** 获取底图 {@link DescribeImageRequest} {@link DescribeImageResponse} */
   DescribeImage(data: DescribeImageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageResponse>;
-  /** {@link DescribeMultiBizBaseImage 获取多经点位底图}({@link DescribeMultiBizBaseImageRequest 请求参数}): {@link DescribeMultiBizBaseImageResponse 返回参数} */
+  /** 获取多经点位底图 {@link DescribeMultiBizBaseImageRequest} {@link DescribeMultiBizBaseImageResponse} */
   DescribeMultiBizBaseImage(data: DescribeMultiBizBaseImageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMultiBizBaseImageResponse>;
-  /** {@link DescribeTasks 查询任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
+  /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** {@link DescribeZones 获取点位列表}({@link DescribeZonesRequest 请求参数}): {@link DescribeZonesResponse 返回参数} */
+  /** 获取点位列表 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
   DescribeZones(data: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
-  /** {@link ModifyMultiBizConfig 多经点位配置更新}({@link ModifyMultiBizConfigRequest 请求参数}): {@link ModifyMultiBizConfigResponse 返回参数} */
+  /** 多经点位配置更新 {@link ModifyMultiBizConfigRequest} {@link ModifyMultiBizConfigResponse} */
   ModifyMultiBizConfig(data: ModifyMultiBizConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMultiBizConfigResponse>;
-  /** {@link ReportServiceRegister 上报服务注册}({@link ReportServiceRegisterRequest 请求参数}): {@link ReportServiceRegisterResponse 返回参数} */
+  /** 上报服务注册 {@link ReportServiceRegisterRequest} {@link ReportServiceRegisterResponse} */
   ReportServiceRegister(data: ReportServiceRegisterRequest, config?: AxiosRequestConfig): AxiosPromise<ReportServiceRegisterResponse>;
-  /** {@link SearchImage 以图搜图}({@link SearchImageRequest 请求参数}): {@link SearchImageResponse 返回参数} */
+  /** 以图搜图 {@link SearchImageRequest} {@link SearchImageResponse} */
   SearchImage(data: SearchImageRequest, config?: AxiosRequestConfig): AxiosPromise<SearchImageResponse>;
 }
 

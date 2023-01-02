@@ -456,7 +456,7 @@ declare interface CheckSavepointResponse {
   SerialId: string;
   /** 1=可用，2=不可用 */
   SavepointStatus: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -474,7 +474,7 @@ declare interface CopyJobsResponse {
   FailCount: number | null;
   /** 结果列表 */
   CopyJobsResults: CopyJobResult[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -492,7 +492,7 @@ declare interface CreateFolderRequest {
 declare interface CreateFolderResponse {
   /** 新建文件夹的唯一ID */
   FolderId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -540,7 +540,7 @@ declare interface CreateJobConfigRequest {
 declare interface CreateJobConfigResponse {
   /** 作业配置版本号 */
   Version: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -568,7 +568,7 @@ declare interface CreateJobRequest {
 declare interface CreateJobResponse {
   /** 作业Id */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -588,7 +588,7 @@ declare interface CreateResourceConfigRequest {
 declare interface CreateResourceConfigResponse {
   /** 资源版本ID */
   Version: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -614,7 +614,7 @@ declare interface CreateResourceResponse {
   ResourceId: string;
   /** 资源版本 */
   Version: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -626,7 +626,7 @@ declare interface DeleteJobsRequest {
 }
 
 declare interface DeleteJobsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -640,7 +640,7 @@ declare interface DeleteResourceConfigsRequest {
 }
 
 declare interface DeleteResourceConfigsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -652,7 +652,7 @@ declare interface DeleteResourcesRequest {
 }
 
 declare interface DeleteResourcesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -668,7 +668,7 @@ declare interface DeleteTableConfigRequest {
 }
 
 declare interface DeleteTableConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -692,7 +692,7 @@ declare interface DescribeClustersResponse {
   TotalCount: number;
   /** 集群列表 */
   ClusterSet: Cluster[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -718,7 +718,7 @@ declare interface DescribeJobConfigsResponse {
   TotalCount: number;
   /** 作业配置列表 */
   JobConfigSet: JobConfig[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -742,7 +742,7 @@ declare interface DescribeJobSavepointResponse {
   RunningSavepoint: Savepoint[] | null;
   /** 进行中的快照列表总数 */
   RunningTotalNumber: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -764,7 +764,7 @@ declare interface DescribeJobsResponse {
   TotalCount: number;
   /** 作业列表 */
   JobSet: JobV1[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -790,7 +790,7 @@ declare interface DescribeResourceConfigsResponse {
   ResourceConfigSet: ResourceConfigItem[];
   /** 资源配置数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -814,7 +814,7 @@ declare interface DescribeResourceRelatedJobsResponse {
   TotalCount: number;
   /** 关联作业信息 */
   RefJobInfos: ResourceRefJobInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -836,7 +836,7 @@ declare interface DescribeResourcesResponse {
   ResourceSet: ResourceItem[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -860,7 +860,7 @@ declare interface DescribeSystemResourcesResponse {
   ResourceSet: SystemResourceItem[];
   /** 总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -870,7 +870,7 @@ declare interface DescribeTreeJobsRequest {
 }
 
 declare interface DescribeTreeJobsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -880,7 +880,7 @@ declare interface DescribeTreeResourcesRequest {
 }
 
 declare interface DescribeTreeResourcesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -898,7 +898,7 @@ declare interface ModifyJobRequest {
 }
 
 declare interface ModifyJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -910,7 +910,7 @@ declare interface RunJobsRequest {
 }
 
 declare interface RunJobsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -922,7 +922,7 @@ declare interface StopJobsRequest {
 }
 
 declare interface StopJobsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -944,62 +944,62 @@ declare interface TriggerJobSavepointResponse {
   FinalSavepointPath: string | null;
   /** 快照 ID */
   SavepointId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Oceanus 流计算 Oceanus} */
 declare interface Oceanus {
   (): Versions;
-  /** {@link CheckSavepoint 检查快照是否可用}({@link CheckSavepointRequest 请求参数}): {@link CheckSavepointResponse 返回参数} */
+  /** 检查快照是否可用 {@link CheckSavepointRequest} {@link CheckSavepointResponse} */
   CheckSavepoint(data: CheckSavepointRequest, config?: AxiosRequestConfig): AxiosPromise<CheckSavepointResponse>;
-  /** {@link CopyJobs 复制作业}({@link CopyJobsRequest 请求参数}): {@link CopyJobsResponse 返回参数} */
+  /** 复制作业 {@link CopyJobsRequest} {@link CopyJobsResponse} */
   CopyJobs(data: CopyJobsRequest, config?: AxiosRequestConfig): AxiosPromise<CopyJobsResponse>;
-  /** {@link CreateFolder 创建文件夹}({@link CreateFolderRequest 请求参数}): {@link CreateFolderResponse 返回参数} */
+  /** 创建文件夹 {@link CreateFolderRequest} {@link CreateFolderResponse} */
   CreateFolder(data: CreateFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFolderResponse>;
-  /** {@link CreateJob 新建作业}({@link CreateJobRequest 请求参数}): {@link CreateJobResponse 返回参数} */
+  /** 新建作业 {@link CreateJobRequest} {@link CreateJobResponse} */
   CreateJob(data: CreateJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobResponse>;
-  /** {@link CreateJobConfig 创建作业配置}({@link CreateJobConfigRequest 请求参数}): {@link CreateJobConfigResponse 返回参数} */
+  /** 创建作业配置 {@link CreateJobConfigRequest} {@link CreateJobConfigResponse} */
   CreateJobConfig(data: CreateJobConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobConfigResponse>;
-  /** {@link CreateResource 创建资源接口}({@link CreateResourceRequest 请求参数}): {@link CreateResourceResponse 返回参数} */
+  /** 创建资源接口 {@link CreateResourceRequest} {@link CreateResourceResponse} */
   CreateResource(data: CreateResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceResponse>;
-  /** {@link CreateResourceConfig 创建资源配置接口}({@link CreateResourceConfigRequest 请求参数}): {@link CreateResourceConfigResponse 返回参数} */
+  /** 创建资源配置接口 {@link CreateResourceConfigRequest} {@link CreateResourceConfigResponse} */
   CreateResourceConfig(data: CreateResourceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceConfigResponse>;
-  /** {@link DeleteJobs 删除作业}({@link DeleteJobsRequest 请求参数}): {@link DeleteJobsResponse 返回参数} */
+  /** 删除作业 {@link DeleteJobsRequest} {@link DeleteJobsResponse} */
   DeleteJobs(data: DeleteJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJobsResponse>;
-  /** {@link DeleteResourceConfigs 删除资源版本}({@link DeleteResourceConfigsRequest 请求参数}): {@link DeleteResourceConfigsResponse 返回参数} */
+  /** 删除资源版本 {@link DeleteResourceConfigsRequest} {@link DeleteResourceConfigsResponse} */
   DeleteResourceConfigs(data: DeleteResourceConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceConfigsResponse>;
-  /** {@link DeleteResources 删除资源接口}({@link DeleteResourcesRequest 请求参数}): {@link DeleteResourcesResponse 返回参数} */
+  /** 删除资源接口 {@link DeleteResourcesRequest} {@link DeleteResourcesResponse} */
   DeleteResources(data: DeleteResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourcesResponse>;
-  /** {@link DeleteTableConfig 删除作业表配置}({@link DeleteTableConfigRequest 请求参数}): {@link DeleteTableConfigResponse 返回参数} */
+  /** 删除作业表配置 {@link DeleteTableConfigRequest} {@link DeleteTableConfigResponse} */
   DeleteTableConfig(data: DeleteTableConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableConfigResponse>;
-  /** {@link DescribeClusters 查询集群}({@link DescribeClustersRequest 请求参数}): {@link DescribeClustersResponse 返回参数} */
+  /** 查询集群 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
-  /** {@link DescribeJobConfigs 查询作业配置}({@link DescribeJobConfigsRequest 请求参数}): {@link DescribeJobConfigsResponse 返回参数} */
+  /** 查询作业配置 {@link DescribeJobConfigsRequest} {@link DescribeJobConfigsResponse} */
   DescribeJobConfigs(data: DescribeJobConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobConfigsResponse>;
-  /** {@link DescribeJobSavepoint 查找Savepoint列表}({@link DescribeJobSavepointRequest 请求参数}): {@link DescribeJobSavepointResponse 返回参数} */
+  /** 查找Savepoint列表 {@link DescribeJobSavepointRequest} {@link DescribeJobSavepointResponse} */
   DescribeJobSavepoint(data: DescribeJobSavepointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobSavepointResponse>;
-  /** {@link DescribeJobs 查询作业}({@link DescribeJobsRequest 请求参数}): {@link DescribeJobsResponse 返回参数} */
+  /** 查询作业 {@link DescribeJobsRequest} {@link DescribeJobsResponse} */
   DescribeJobs(data?: DescribeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobsResponse>;
-  /** {@link DescribeResourceConfigs 描述资源配置接口}({@link DescribeResourceConfigsRequest 请求参数}): {@link DescribeResourceConfigsResponse 返回参数} */
+  /** 描述资源配置接口 {@link DescribeResourceConfigsRequest} {@link DescribeResourceConfigsResponse} */
   DescribeResourceConfigs(data?: DescribeResourceConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceConfigsResponse>;
-  /** {@link DescribeResourceRelatedJobs 获取资源关联作业信息}({@link DescribeResourceRelatedJobsRequest 请求参数}): {@link DescribeResourceRelatedJobsResponse 返回参数} */
+  /** 获取资源关联作业信息 {@link DescribeResourceRelatedJobsRequest} {@link DescribeResourceRelatedJobsResponse} */
   DescribeResourceRelatedJobs(data: DescribeResourceRelatedJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceRelatedJobsResponse>;
-  /** {@link DescribeResources 描述资源接口}({@link DescribeResourcesRequest 请求参数}): {@link DescribeResourcesResponse 返回参数} */
+  /** 描述资源接口 {@link DescribeResourcesRequest} {@link DescribeResourcesResponse} */
   DescribeResources(data?: DescribeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesResponse>;
-  /** {@link DescribeSystemResources 描述系统资源接口}({@link DescribeSystemResourcesRequest 请求参数}): {@link DescribeSystemResourcesResponse 返回参数} */
+  /** 描述系统资源接口 {@link DescribeSystemResourcesRequest} {@link DescribeSystemResourcesResponse} */
   DescribeSystemResources(data?: DescribeSystemResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSystemResourcesResponse>;
-  /** {@link DescribeTreeJobs 自定义树状结构}({@link DescribeTreeJobsRequest 请求参数}): {@link DescribeTreeJobsResponse 返回参数} */
+  /** 自定义树状结构 {@link DescribeTreeJobsRequest} {@link DescribeTreeJobsResponse} */
   DescribeTreeJobs(data?: DescribeTreeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTreeJobsResponse>;
-  /** {@link DescribeTreeResources 查询树状结构资源列表}({@link DescribeTreeResourcesRequest 请求参数}): {@link DescribeTreeResourcesResponse 返回参数} */
+  /** 查询树状结构资源列表 {@link DescribeTreeResourcesRequest} {@link DescribeTreeResourcesResponse} */
   DescribeTreeResources(data?: DescribeTreeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTreeResourcesResponse>;
-  /** {@link ModifyJob 更新作业}({@link ModifyJobRequest 请求参数}): {@link ModifyJobResponse 返回参数} */
+  /** 更新作业 {@link ModifyJobRequest} {@link ModifyJobResponse} */
   ModifyJob(data: ModifyJobRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyJobResponse>;
-  /** {@link RunJobs 运行作业}({@link RunJobsRequest 请求参数}): {@link RunJobsResponse 返回参数} */
+  /** 运行作业 {@link RunJobsRequest} {@link RunJobsResponse} */
   RunJobs(data: RunJobsRequest, config?: AxiosRequestConfig): AxiosPromise<RunJobsResponse>;
-  /** {@link StopJobs 停止作业}({@link StopJobsRequest 请求参数}): {@link StopJobsResponse 返回参数} */
+  /** 停止作业 {@link StopJobsRequest} {@link StopJobsResponse} */
   StopJobs(data: StopJobsRequest, config?: AxiosRequestConfig): AxiosPromise<StopJobsResponse>;
-  /** {@link TriggerJobSavepoint 触发Savepoint}({@link TriggerJobSavepointRequest 请求参数}): {@link TriggerJobSavepointResponse 返回参数} */
+  /** 触发Savepoint {@link TriggerJobSavepointRequest} {@link TriggerJobSavepointResponse} */
   TriggerJobSavepoint(data: TriggerJobSavepointRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerJobSavepointResponse>;
 }
 

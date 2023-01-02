@@ -436,7 +436,7 @@ declare interface BatchUpdateFirmwareRequest {
 declare interface BatchUpdateFirmwareResponse {
   /** 任务ID */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -454,7 +454,7 @@ declare interface BindDevicesRequest {
 }
 
 declare interface BindDevicesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -470,7 +470,7 @@ declare interface CancelDeviceFirmwareTaskRequest {
 }
 
 declare interface CancelDeviceFirmwareTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -516,7 +516,7 @@ declare interface CreateDeviceResponse {
   LoraAppKey: string;
   /** LoRa设备的NwkKey，当设备是LoRa设备时，会返回该字段 */
   LoraNwkKey: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -538,7 +538,7 @@ declare interface CreateMultiDevicesTaskRequest {
 declare interface CreateMultiDevicesTaskResponse {
   /** 任务ID */
   Id: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -552,7 +552,7 @@ declare interface CreatePrivateCARequest {
 }
 
 declare interface CreatePrivateCAResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -572,7 +572,7 @@ declare interface CreateProductResponse {
   ProductId: string;
   /** 产品属性 */
   ProductProperties: ProductProperties;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -586,7 +586,7 @@ declare interface CreateTaskFileUrlResponse {
   Url: string;
   /** 任务文件名 */
   FileName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -602,7 +602,7 @@ declare interface CreateTopicPolicyRequest {
 }
 
 declare interface CreateTopicPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -614,7 +614,7 @@ declare interface CreateTopicRuleRequest {
 }
 
 declare interface CreateTopicRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -637,12 +637,12 @@ declare interface DeleteDeviceResourceRequest {
 }
 
 declare interface DeleteDeviceResourceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DeleteDeviceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -654,7 +654,7 @@ declare interface DeleteDeviceShadowRequest {
 }
 
 declare interface DeleteDeviceShadowResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -664,7 +664,7 @@ declare interface DeletePrivateCARequest {
 }
 
 declare interface DeletePrivateCAResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -674,7 +674,7 @@ declare interface DeleteProductPrivateCARequest {
 }
 
 declare interface DeleteProductPrivateCAResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -686,7 +686,7 @@ declare interface DeleteProductRequest {
 }
 
 declare interface DeleteProductResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -696,7 +696,7 @@ declare interface DeleteTopicRuleRequest {
 }
 
 declare interface DeleteTopicRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -710,7 +710,7 @@ declare interface DescribeDeviceClientKeyRequest {
 declare interface DescribeDeviceClientKeyResponse {
   /** 设备的私钥 */
   ClientKey: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -733,7 +733,7 @@ declare interface DescribeDeviceResourceRequest {
 declare interface DescribeDeviceResourceResponse {
   /** 设备资源详情 */
   Result: DeviceResourceInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -757,7 +757,7 @@ declare interface DescribeDeviceResourcesResponse {
   TotalCount: number;
   /** 资源列表 */
   Result: DeviceResourceInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -812,7 +812,7 @@ declare interface DescribeDeviceResponse {
   FirmwareUpdateTime: number | null;
   /** 创建者账号ID */
   CreateUserId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -826,7 +826,7 @@ declare interface DescribeDeviceShadowRequest {
 declare interface DescribeDeviceShadowResponse {
   /** 设备影子数据 */
   Data: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -850,7 +850,7 @@ declare interface DescribeDevicesResponse {
   TotalCount: number;
   /** 设备详细信息列表 */
   Devices: DeviceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -878,7 +878,7 @@ declare interface DescribeFirmwareResponse {
   ProductName: string;
   /** 固件类型。选项：mcu、module */
   FwType: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -900,7 +900,7 @@ declare interface DescribeFirmwareTaskDevicesResponse {
   Total: number | null;
   /** 固件升级任务的设备列表 */
   Devices: DeviceUpdateStatus[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -916,7 +916,7 @@ declare interface DescribeFirmwareTaskDistributionRequest {
 declare interface DescribeFirmwareTaskDistributionResponse {
   /** 固件升级任务状态分布信息 */
   StatusInfos: StatusStatistic[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -946,7 +946,7 @@ declare interface DescribeFirmwareTaskResponse {
   ProductId: string | null;
   /** 升级前版本号 */
   OriginalVersion: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -964,7 +964,7 @@ declare interface DescribeFirmwareTaskStatisticsResponse {
   FailureTotal: number | null;
   /** 正在升级的设备总数 */
   UpgradingTotal: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -986,7 +986,7 @@ declare interface DescribeFirmwareTasksResponse {
   TaskInfos: FirmwareTaskInfo[] | null;
   /** 固件升级任务总数 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1010,7 +1010,7 @@ declare interface DescribeGatewayBindDevicesResponse {
   Devices: BindDeviceInfo[];
   /** 子设备所属的产品名 */
   ProductName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1026,7 +1026,7 @@ declare interface DescribePrivateCABindedProductsRequest {
 declare interface DescribePrivateCABindedProductsResponse {
   /** 私有CA绑定的产品列表 */
   Products: BindProductInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1038,7 +1038,7 @@ declare interface DescribePrivateCARequest {
 declare interface DescribePrivateCAResponse {
   /** 私有化CA详情 */
   CA: CertInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1048,7 +1048,7 @@ declare interface DescribePrivateCAsRequest {
 declare interface DescribePrivateCAsResponse {
   /** 私有CA证书列表 */
   CAs: CertInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1060,7 +1060,7 @@ declare interface DescribeProductCARequest {
 declare interface DescribeProductCAResponse {
   /** CA证书列表 */
   CAs: CertInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1079,7 +1079,7 @@ declare interface DescribeProductResourceRequest {
 declare interface DescribeProductResourceResponse {
   /** 资源详情 */
   Result: ProductResourceInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1099,7 +1099,7 @@ declare interface DescribeProductResourcesResponse {
   TotalCount: number;
   /** 资源详情 */
   Result: ProductResourceInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1112,7 +1112,7 @@ declare interface DescribeProductResponse {
   ProductMetadata: ProductMetadata;
   /** 产品属性 */
   ProductProperties: ProductProperties;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1126,7 +1126,7 @@ declare interface DescribeProductTaskRequest {
 declare interface DescribeProductTaskResponse {
   /** 产品任务详细信息 */
   TaskInfo: ProductTaskInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1144,7 +1144,7 @@ declare interface DescribeProductTasksResponse {
   TotalCount: number;
   /** 任务详细信息列表 */
   TaskInfos: ProductTaskInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1160,7 +1160,7 @@ declare interface DescribeProductsResponse {
   TotalCount: number;
   /** 产品详细信息列表 */
   Products: ProductInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1178,7 +1178,7 @@ declare interface DescribePushResourceTaskStatisticsResponse {
   FailureTotal: number | null;
   /** 正在推送的设备总数 */
   UpgradingTotal: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1200,7 +1200,7 @@ declare interface DescribeResourceTasksResponse {
   TaskInfos: FirmwareTaskInfo[] | null;
   /** 资源任务总数 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1210,7 +1210,7 @@ declare interface DisableTopicRuleRequest {
 }
 
 declare interface DisableTopicRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1226,7 +1226,7 @@ declare interface DownloadDeviceResourceRequest {
 declare interface DownloadDeviceResourceResponse {
   /** 设备资源的cos链接 */
   Url: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1242,7 +1242,7 @@ declare interface EditFirmwareRequest {
 }
 
 declare interface EditFirmwareResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1252,7 +1252,7 @@ declare interface EnableTopicRuleRequest {
 }
 
 declare interface EnableTopicRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1264,7 +1264,7 @@ declare interface GetAllVersionRequest {
 declare interface GetAllVersionResponse {
   /** 版本号列表 */
   Version: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1280,7 +1280,7 @@ declare interface GetCOSURLRequest {
 declare interface GetCOSURLResponse {
   /** 固件URL */
   Url: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1292,7 +1292,7 @@ declare interface GetUserResourceInfoResponse {
   UsedSize: number;
   /** 可以使用资源的总大小 */
   Limit: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1312,7 +1312,7 @@ declare interface ListFirmwaresResponse {
   TotalCount: number;
   /** 固件列表 */
   Firmwares: FirmwareInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1336,7 +1336,7 @@ declare interface ListLogPayloadResponse {
   Listover: boolean;
   /** 日志列表 */
   Results: PayloadLogItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1362,7 +1362,7 @@ declare interface ListLogResponse {
   Results: CLSLogItem[];
   /** 日志总条数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1386,7 +1386,7 @@ declare interface ListSDKLogResponse {
   Listover: boolean;
   /** 日志列表 */
   Results: SDKLogItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1402,7 +1402,7 @@ declare interface ListTopicRulesResponse {
   TotalCnt: number;
   /** 规则列表 */
   Rules: TopicRuleInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1420,7 +1420,7 @@ declare interface PublishBroadcastMessageRequest {
 declare interface PublishBroadcastMessageResponse {
   /** 广播消息任务ID */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1440,7 +1440,7 @@ declare interface PublishMessageRequest {
 }
 
 declare interface PublishMessageResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1458,7 +1458,7 @@ declare interface PublishRRPCMessageResponse {
   MessageId: number;
   /** 设备回复的消息内容，采用base64编码 */
   PayloadBase64: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1470,7 +1470,7 @@ declare interface ReplaceTopicRuleRequest {
 }
 
 declare interface ReplaceTopicRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1486,7 +1486,7 @@ declare interface ResetDeviceStateResponse {
   SuccessCount: number;
   /** 批量重置设备结果 */
   ResetDeviceResults: ResetDeviceResult[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1502,7 +1502,7 @@ declare interface RetryDeviceFirmwareTaskRequest {
 }
 
 declare interface RetryDeviceFirmwareTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1514,7 +1514,7 @@ declare interface SetProductsForbiddenStatusRequest {
 }
 
 declare interface SetProductsForbiddenStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1532,7 +1532,7 @@ declare interface UnbindDevicesRequest {
 }
 
 declare interface UnbindDevicesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1546,7 +1546,7 @@ declare interface UpdateDeviceAvailableStateRequest {
 }
 
 declare interface UpdateDeviceAvailableStateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1560,7 +1560,7 @@ declare interface UpdateDeviceLogLevelRequest {
 }
 
 declare interface UpdateDeviceLogLevelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1574,7 +1574,7 @@ declare interface UpdateDevicePSKRequest {
 }
 
 declare interface UpdateDevicePSKResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1592,7 +1592,7 @@ declare interface UpdateDeviceShadowRequest {
 declare interface UpdateDeviceShadowResponse {
   /** 设备影子数据，JSON字符串格式 */
   Data: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1606,7 +1606,7 @@ declare interface UpdateDevicesEnableStateRequest {
 }
 
 declare interface UpdateDevicesEnableStateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1620,7 +1620,7 @@ declare interface UpdatePrivateCARequest {
 }
 
 declare interface UpdatePrivateCAResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1640,7 +1640,7 @@ declare interface UpdateProductDynamicRegisterResponse {
   ProductSecret: string;
   /** 动态注册设备上限 */
   RegisterLimit: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1652,7 +1652,7 @@ declare interface UpdateProductPrivateCARequest {
 }
 
 declare interface UpdateProductPrivateCAResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1670,7 +1670,7 @@ declare interface UpdateTopicPolicyRequest {
 }
 
 declare interface UpdateTopicPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1690,7 +1690,7 @@ declare interface UploadFirmwareRequest {
 }
 
 declare interface UploadFirmwareResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2123,7 +2123,7 @@ declare namespace V20180614 {
   interface BatchUpdateFirmwareResponse {
     /** 任务ID */
     TaskId: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2141,7 +2141,7 @@ declare namespace V20180614 {
   }
 
   interface BindDevicesResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2157,7 +2157,7 @@ declare namespace V20180614 {
   }
 
   interface CancelDeviceFirmwareTaskResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2167,7 +2167,7 @@ declare namespace V20180614 {
   }
 
   interface CancelTaskResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2211,7 +2211,7 @@ declare namespace V20180614 {
     LoraAppKey?: string;
     /** LoRa设备的NwkKey，当设备是LoRa设备时，会返回该字段 */
     LoraNwkKey?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2243,7 +2243,7 @@ declare namespace V20180614 {
     ClassType?: string;
     /** 设备名称 */
     DeviceName?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2257,7 +2257,7 @@ declare namespace V20180614 {
   interface CreateMultiDeviceResponse {
     /** 任务ID，腾讯云生成全局唯一的任务 ID，有效期一个月，一个月之后任务失效。可以调用获取创建多设备任务状态接口获取该任务的执行状态，当状态为成功时，可以调用获取创建多设备任务结果接口获取该任务的结果 */
     TaskId?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2279,7 +2279,7 @@ declare namespace V20180614 {
   interface CreateMultiDevicesTaskResponse {
     /** 任务ID */
     Id?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2299,7 +2299,7 @@ declare namespace V20180614 {
     ProductId?: string;
     /** 产品属性 */
     ProductProperties?: ProductProperties;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2313,7 +2313,7 @@ declare namespace V20180614 {
     Url?: string;
     /** 任务文件名 */
     FileName?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2335,7 +2335,7 @@ declare namespace V20180614 {
   interface CreateTaskResponse {
     /** 创建的任务ID */
     TaskId?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2351,7 +2351,7 @@ declare namespace V20180614 {
   }
 
   interface CreateTopicPolicyResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2363,7 +2363,7 @@ declare namespace V20180614 {
   }
 
   interface CreateTopicRuleResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2386,12 +2386,12 @@ declare namespace V20180614 {
   }
 
   interface DeleteDeviceResourceResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
   interface DeleteDeviceResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2403,7 +2403,7 @@ declare namespace V20180614 {
   }
 
   interface DeleteLoraDeviceResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2415,7 +2415,7 @@ declare namespace V20180614 {
   }
 
   interface DeleteProductResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2425,7 +2425,7 @@ declare namespace V20180614 {
   }
 
   interface DeleteTopicRuleResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2441,7 +2441,7 @@ declare namespace V20180614 {
     TotalCount?: number;
     /** 查询的设备列表信息。 */
     Devices?: DeviceProperty[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2455,7 +2455,7 @@ declare namespace V20180614 {
   interface DescribeDeviceClientKeyResponse {
     /** 设备的私钥 */
     ClientKey?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2478,7 +2478,7 @@ declare namespace V20180614 {
   interface DescribeDeviceResourceResponse {
     /** 设备资源详情 */
     Result: DeviceResourceInfo;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2502,7 +2502,7 @@ declare namespace V20180614 {
     TotalCount: number;
     /** 资源列表 */
     Result: DeviceResourceInfo[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2555,7 +2555,7 @@ declare namespace V20180614 {
     ClientIP?: string | null;
     /** 设备固件更新时间 */
     FirmwareUpdateTime?: number | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2569,7 +2569,7 @@ declare namespace V20180614 {
   interface DescribeDeviceShadowResponse {
     /** 设备影子数据 */
     Data?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2593,7 +2593,7 @@ declare namespace V20180614 {
     TotalCount?: number;
     /** 设备详细信息列表 */
     Devices?: DeviceInfo[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2621,7 +2621,7 @@ declare namespace V20180614 {
     ProductName: string;
     /** 固件类型。选项：mcu、module */
     FwType: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2643,7 +2643,7 @@ declare namespace V20180614 {
     Total?: number | null;
     /** 固件升级任务的设备列表 */
     Devices?: DeviceUpdateStatus[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2659,7 +2659,7 @@ declare namespace V20180614 {
   interface DescribeFirmwareTaskDistributionResponse {
     /** 固件升级任务状态分布信息 */
     StatusInfos?: StatusStatistic[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2687,7 +2687,7 @@ declare namespace V20180614 {
     UpgradeMode?: string | null;
     /** 产品ID */
     ProductId?: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2705,7 +2705,7 @@ declare namespace V20180614 {
     FailureTotal?: number | null;
     /** 正在升级的设备总数 */
     UpgradingTotal?: number | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2727,7 +2727,7 @@ declare namespace V20180614 {
     TaskInfos?: FirmwareTaskInfo[] | null;
     /** 固件升级任务总数 */
     Total?: number | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2751,7 +2751,7 @@ declare namespace V20180614 {
     ClassType: string;
     /** 设备所属产品id */
     ProductId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2767,7 +2767,7 @@ declare namespace V20180614 {
     TaskId?: string;
     /** 任务是否完成。0 代表任务未开始，1 代表任务正在执行，2 代表任务已完成 */
     TaskStatus?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2789,7 +2789,7 @@ declare namespace V20180614 {
     DevicesInfo?: MultiDevicesInfo[];
     /** 该任务创建设备的总数 */
     TotalDevNum?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2808,7 +2808,7 @@ declare namespace V20180614 {
   interface DescribeProductResourceResponse {
     /** 资源详情 */
     Result: ProductResourceInfo | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2828,7 +2828,7 @@ declare namespace V20180614 {
     TotalCount: number;
     /** 资源详情 */
     Result: ProductResourceInfo[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2841,7 +2841,7 @@ declare namespace V20180614 {
     ProductMetadata?: ProductMetadata;
     /** 产品属性 */
     ProductProperties?: ProductProperties;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2855,7 +2855,7 @@ declare namespace V20180614 {
   interface DescribeProductTaskResponse {
     /** 产品任务详细信息 */
     TaskInfo?: ProductTaskInfo;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2873,7 +2873,7 @@ declare namespace V20180614 {
     TotalCount?: number;
     /** 任务详细信息列表 */
     TaskInfos?: ProductTaskInfo[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2889,7 +2889,7 @@ declare namespace V20180614 {
     TotalCount?: number;
     /** 产品详细信息列表 */
     Products?: ProductInfo[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2907,7 +2907,7 @@ declare namespace V20180614 {
     FailureTotal: number | null;
     /** 正在推送的设备总数 */
     UpgradingTotal: number | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2929,7 +2929,7 @@ declare namespace V20180614 {
     TaskInfos: FirmwareTaskInfo[] | null;
     /** 资源任务总数 */
     Total: number | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2965,7 +2965,7 @@ declare namespace V20180614 {
     AllDeviceCnt?: number;
     /** 已完成任务的设备数目 */
     DoneDeviceCnt?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2981,7 +2981,7 @@ declare namespace V20180614 {
     TotalCount?: number;
     /** 此页任务对象的数组，按创建时间排序 */
     Tasks?: TaskInfo[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2991,7 +2991,7 @@ declare namespace V20180614 {
   }
 
   interface DisableTopicRuleResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3007,7 +3007,7 @@ declare namespace V20180614 {
   interface DownloadDeviceResourceResponse {
     /** 设备资源的cos链接 */
     Url: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3025,7 +3025,7 @@ declare namespace V20180614 {
   }
 
   interface EditFirmwareResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3035,7 +3035,7 @@ declare namespace V20180614 {
   }
 
   interface EnableTopicRuleResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3049,7 +3049,7 @@ declare namespace V20180614 {
   interface GetCOSURLResponse {
     /** 固件URL */
     Url: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3061,7 +3061,7 @@ declare namespace V20180614 {
     UsedSize: number;
     /** 可以使用资源的总大小 */
     Limit: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3085,7 +3085,7 @@ declare namespace V20180614 {
     Listover: boolean;
     /** 日志列表 */
     Results: PayloadLogItem[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3111,7 +3111,7 @@ declare namespace V20180614 {
     Results: CLSLogItem[];
     /** 日志总条数 */
     TotalCount: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3135,7 +3135,7 @@ declare namespace V20180614 {
     Listover?: boolean;
     /** 日志列表 */
     Results?: SDKLogItem[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3151,7 +3151,7 @@ declare namespace V20180614 {
   }
 
   interface PublishAsDeviceResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3169,7 +3169,7 @@ declare namespace V20180614 {
   interface PublishBroadcastMessageResponse {
     /** 广播消息任务ID */
     TaskId: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3189,7 +3189,7 @@ declare namespace V20180614 {
   }
 
   interface PublishMessageResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3207,7 +3207,7 @@ declare namespace V20180614 {
     MessageId?: number;
     /** 设备回复的消息内容，采用base64编码 */
     PayloadBase64?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3223,7 +3223,7 @@ declare namespace V20180614 {
   }
 
   interface PublishToDeviceResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3239,7 +3239,7 @@ declare namespace V20180614 {
   }
 
   interface ReplaceTopicRuleResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3255,7 +3255,7 @@ declare namespace V20180614 {
     SuccessCount?: number;
     /** 批量重置设备结果 */
     ResetDeviceResults?: ResetDeviceResult[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3271,7 +3271,7 @@ declare namespace V20180614 {
   }
 
   interface RetryDeviceFirmwareTaskResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3283,7 +3283,7 @@ declare namespace V20180614 {
   }
 
   interface SetProductsForbiddenStatusResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3301,7 +3301,7 @@ declare namespace V20180614 {
   }
 
   interface UnbindDevicesResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3315,7 +3315,7 @@ declare namespace V20180614 {
   }
 
   interface UpdateDeviceAvailableStateResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3335,7 +3335,7 @@ declare namespace V20180614 {
   interface UpdateDeviceShadowResponse {
     /** 设备影子数据，JSON字符串格式 */
     Data?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3349,7 +3349,7 @@ declare namespace V20180614 {
   }
 
   interface UpdateDevicesEnableStateResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3369,7 +3369,7 @@ declare namespace V20180614 {
     ProductSecret: string;
     /** 动态注册设备上限 */
     RegisterLimit: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3387,7 +3387,7 @@ declare namespace V20180614 {
   }
 
   interface UpdateTopicPolicyResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3409,7 +3409,7 @@ declare namespace V20180614 {
   }
 
   interface UploadFirmwareResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -3417,287 +3417,287 @@ declare namespace V20180614 {
 /** {@link Iotcloud 物联网通信} */
 declare interface Iotcloud {
   (): Versions;
-  /** {@link BatchUpdateFirmware 批量更新固件}({@link BatchUpdateFirmwareRequest 请求参数}): {@link BatchUpdateFirmwareResponse 返回参数} */
+  /** 批量更新固件 {@link BatchUpdateFirmwareRequest} {@link BatchUpdateFirmwareResponse} */
   BatchUpdateFirmware(data: BatchUpdateFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<BatchUpdateFirmwareResponse>;
-  /** {@link BindDevices 批量绑定子设备}({@link BindDevicesRequest 请求参数}): {@link BindDevicesResponse 返回参数} */
+  /** 批量绑定子设备 {@link BindDevicesRequest} {@link BindDevicesResponse} */
   BindDevices(data: BindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<BindDevicesResponse>;
-  /** {@link CancelDeviceFirmwareTask 取消设备升级任务}({@link CancelDeviceFirmwareTaskRequest 请求参数}): {@link CancelDeviceFirmwareTaskResponse 返回参数} */
+  /** 取消设备升级任务 {@link CancelDeviceFirmwareTaskRequest} {@link CancelDeviceFirmwareTaskResponse} */
   CancelDeviceFirmwareTask(data: CancelDeviceFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelDeviceFirmwareTaskResponse>;
-  /** {@link CreateDevice 创建设备}({@link CreateDeviceRequest 请求参数}): {@link CreateDeviceResponse 返回参数} */
+  /** 创建设备 {@link CreateDeviceRequest} {@link CreateDeviceResponse} */
   CreateDevice(data: CreateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceResponse>;
-  /** {@link CreateMultiDevicesTask 创建批量创建设备任务}({@link CreateMultiDevicesTaskRequest 请求参数}): {@link CreateMultiDevicesTaskResponse 返回参数} */
+  /** 创建批量创建设备任务 {@link CreateMultiDevicesTaskRequest} {@link CreateMultiDevicesTaskResponse} */
   CreateMultiDevicesTask(data: CreateMultiDevicesTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiDevicesTaskResponse>;
-  /** {@link CreatePrivateCA 创建私有CA证书}({@link CreatePrivateCARequest 请求参数}): {@link CreatePrivateCAResponse 返回参数} */
+  /** 创建私有CA证书 {@link CreatePrivateCARequest} {@link CreatePrivateCAResponse} */
   CreatePrivateCA(data: CreatePrivateCARequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateCAResponse>;
-  /** {@link CreateProduct 创建产品}({@link CreateProductRequest 请求参数}): {@link CreateProductResponse 返回参数} */
+  /** 创建产品 {@link CreateProductRequest} {@link CreateProductResponse} */
   CreateProduct(data: CreateProductRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProductResponse>;
-  /** {@link CreateTaskFileUrl 获取任务文件上传链接}({@link CreateTaskFileUrlRequest 请求参数}): {@link CreateTaskFileUrlResponse 返回参数} */
+  /** 获取任务文件上传链接 {@link CreateTaskFileUrlRequest} {@link CreateTaskFileUrlResponse} */
   CreateTaskFileUrl(data: CreateTaskFileUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFileUrlResponse>;
-  /** {@link CreateTopicPolicy 创建Topic}({@link CreateTopicPolicyRequest 请求参数}): {@link CreateTopicPolicyResponse 返回参数} */
+  /** 创建Topic {@link CreateTopicPolicyRequest} {@link CreateTopicPolicyResponse} */
   CreateTopicPolicy(data: CreateTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicPolicyResponse>;
-  /** {@link CreateTopicRule 创建规则}({@link CreateTopicRuleRequest 请求参数}): {@link CreateTopicRuleResponse 返回参数} */
+  /** 创建规则 {@link CreateTopicRuleRequest} {@link CreateTopicRuleResponse} */
   CreateTopicRule(data: CreateTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicRuleResponse>;
-  /** {@link DeleteDevice 删除设备}({@link DeleteDeviceRequest 请求参数}): {@link DeleteDeviceResponse 返回参数} */
+  /** 删除设备 {@link DeleteDeviceRequest} {@link DeleteDeviceResponse} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
-  /** {@link DeleteDeviceResource 删除设备资源}({@link DeleteDeviceResourceRequest 请求参数}): {@link DeleteDeviceResourceResponse 返回参数} */
+  /** 删除设备资源 {@link DeleteDeviceResourceRequest} {@link DeleteDeviceResourceResponse} */
   DeleteDeviceResource(data: DeleteDeviceResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResourceResponse>;
-  /** {@link DeleteDeviceShadow 删除设备影子}({@link DeleteDeviceShadowRequest 请求参数}): {@link DeleteDeviceShadowResponse 返回参数} */
+  /** 删除设备影子 {@link DeleteDeviceShadowRequest} {@link DeleteDeviceShadowResponse} */
   DeleteDeviceShadow(data: DeleteDeviceShadowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceShadowResponse>;
-  /** {@link DeletePrivateCA 删除私有CA证书}({@link DeletePrivateCARequest 请求参数}): {@link DeletePrivateCAResponse 返回参数} */
+  /** 删除私有CA证书 {@link DeletePrivateCARequest} {@link DeletePrivateCAResponse} */
   DeletePrivateCA(data: DeletePrivateCARequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateCAResponse>;
-  /** {@link DeleteProduct 删除产品}({@link DeleteProductRequest 请求参数}): {@link DeleteProductResponse 返回参数} */
+  /** 删除产品 {@link DeleteProductRequest} {@link DeleteProductResponse} */
   DeleteProduct(data: DeleteProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProductResponse>;
-  /** {@link DeleteProductPrivateCA 删除产品的私有CA证书}({@link DeleteProductPrivateCARequest 请求参数}): {@link DeleteProductPrivateCAResponse 返回参数} */
+  /** 删除产品的私有CA证书 {@link DeleteProductPrivateCARequest} {@link DeleteProductPrivateCAResponse} */
   DeleteProductPrivateCA(data: DeleteProductPrivateCARequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProductPrivateCAResponse>;
-  /** {@link DeleteTopicRule 删除规则}({@link DeleteTopicRuleRequest 请求参数}): {@link DeleteTopicRuleResponse 返回参数} */
+  /** 删除规则 {@link DeleteTopicRuleRequest} {@link DeleteTopicRuleResponse} */
   DeleteTopicRule(data: DeleteTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicRuleResponse>;
-  /** {@link DescribeDevice 查看设备详情}({@link DescribeDeviceRequest 请求参数}): {@link DescribeDeviceResponse 返回参数} */
+  /** 查看设备详情 {@link DescribeDeviceRequest} {@link DescribeDeviceResponse} */
   DescribeDevice(data: DescribeDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceResponse>;
-  /** {@link DescribeDeviceClientKey 获取设备私钥}({@link DescribeDeviceClientKeyRequest 请求参数}): {@link DescribeDeviceClientKeyResponse 返回参数} */
+  /** 获取设备私钥 {@link DescribeDeviceClientKeyRequest} {@link DescribeDeviceClientKeyResponse} */
   DescribeDeviceClientKey(data: DescribeDeviceClientKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceClientKeyResponse>;
-  /** {@link DescribeDeviceResource 查询设备资源详情}({@link DescribeDeviceResourceRequest 请求参数}): {@link DescribeDeviceResourceResponse 返回参数} */
+  /** 查询设备资源详情 {@link DescribeDeviceResourceRequest} {@link DescribeDeviceResourceResponse} */
   DescribeDeviceResource(data: DescribeDeviceResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceResourceResponse>;
-  /** {@link DescribeDeviceResources 获取设备资源列表}({@link DescribeDeviceResourcesRequest 请求参数}): {@link DescribeDeviceResourcesResponse 返回参数} */
+  /** 获取设备资源列表 {@link DescribeDeviceResourcesRequest} {@link DescribeDeviceResourcesResponse} */
   DescribeDeviceResources(data: DescribeDeviceResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceResourcesResponse>;
-  /** {@link DescribeDeviceShadow 获取设备影子}({@link DescribeDeviceShadowRequest 请求参数}): {@link DescribeDeviceShadowResponse 返回参数} */
+  /** 获取设备影子 {@link DescribeDeviceShadowRequest} {@link DescribeDeviceShadowResponse} */
   DescribeDeviceShadow(data: DescribeDeviceShadowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceShadowResponse>;
-  /** {@link DescribeDevices 获取设备列表}({@link DescribeDevicesRequest 请求参数}): {@link DescribeDevicesResponse 返回参数} */
+  /** 获取设备列表 {@link DescribeDevicesRequest} {@link DescribeDevicesResponse} */
   DescribeDevices(data: DescribeDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesResponse>;
-  /** {@link DescribeFirmware 查询固件信息}({@link DescribeFirmwareRequest 请求参数}): {@link DescribeFirmwareResponse 返回参数} */
+  /** 查询固件信息 {@link DescribeFirmwareRequest} {@link DescribeFirmwareResponse} */
   DescribeFirmware(data: DescribeFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareResponse>;
-  /** {@link DescribeFirmwareTask 查询固件升级任务详情}({@link DescribeFirmwareTaskRequest 请求参数}): {@link DescribeFirmwareTaskResponse 返回参数} */
+  /** 查询固件升级任务详情 {@link DescribeFirmwareTaskRequest} {@link DescribeFirmwareTaskResponse} */
   DescribeFirmwareTask(data: DescribeFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskResponse>;
-  /** {@link DescribeFirmwareTaskDevices 查询固件升级任务的设备列表}({@link DescribeFirmwareTaskDevicesRequest 请求参数}): {@link DescribeFirmwareTaskDevicesResponse 返回参数} */
+  /** 查询固件升级任务的设备列表 {@link DescribeFirmwareTaskDevicesRequest} {@link DescribeFirmwareTaskDevicesResponse} */
   DescribeFirmwareTaskDevices(data: DescribeFirmwareTaskDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskDevicesResponse>;
-  /** {@link DescribeFirmwareTaskDistribution 查询固件升级任务状态分布}({@link DescribeFirmwareTaskDistributionRequest 请求参数}): {@link DescribeFirmwareTaskDistributionResponse 返回参数} */
+  /** 查询固件升级任务状态分布 {@link DescribeFirmwareTaskDistributionRequest} {@link DescribeFirmwareTaskDistributionResponse} */
   DescribeFirmwareTaskDistribution(data: DescribeFirmwareTaskDistributionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskDistributionResponse>;
-  /** {@link DescribeFirmwareTaskStatistics 查询固件升级任务统计信息}({@link DescribeFirmwareTaskStatisticsRequest 请求参数}): {@link DescribeFirmwareTaskStatisticsResponse 返回参数} */
+  /** 查询固件升级任务统计信息 {@link DescribeFirmwareTaskStatisticsRequest} {@link DescribeFirmwareTaskStatisticsResponse} */
   DescribeFirmwareTaskStatistics(data: DescribeFirmwareTaskStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskStatisticsResponse>;
-  /** {@link DescribeFirmwareTasks 查询固件升级任务列表}({@link DescribeFirmwareTasksRequest 请求参数}): {@link DescribeFirmwareTasksResponse 返回参数} */
+  /** 查询固件升级任务列表 {@link DescribeFirmwareTasksRequest} {@link DescribeFirmwareTasksResponse} */
   DescribeFirmwareTasks(data: DescribeFirmwareTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTasksResponse>;
-  /** {@link DescribeGatewayBindDevices 获取网关绑定的子设备列表}({@link DescribeGatewayBindDevicesRequest 请求参数}): {@link DescribeGatewayBindDevicesResponse 返回参数} */
+  /** 获取网关绑定的子设备列表 {@link DescribeGatewayBindDevicesRequest} {@link DescribeGatewayBindDevicesResponse} */
   DescribeGatewayBindDevices(data: DescribeGatewayBindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayBindDevicesResponse>;
-  /** {@link DescribePrivateCA 查询私有化CA信息}({@link DescribePrivateCARequest 请求参数}): {@link DescribePrivateCAResponse 返回参数} */
+  /** 查询私有化CA信息 {@link DescribePrivateCARequest} {@link DescribePrivateCAResponse} */
   DescribePrivateCA(data: DescribePrivateCARequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateCAResponse>;
-  /** {@link DescribePrivateCABindedProducts 查询私有CA绑定的产品列表}({@link DescribePrivateCABindedProductsRequest 请求参数}): {@link DescribePrivateCABindedProductsResponse 返回参数} */
+  /** 查询私有CA绑定的产品列表 {@link DescribePrivateCABindedProductsRequest} {@link DescribePrivateCABindedProductsResponse} */
   DescribePrivateCABindedProducts(data: DescribePrivateCABindedProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateCABindedProductsResponse>;
-  /** {@link DescribePrivateCAs 查询私有CA证书列表}({@link DescribePrivateCAsRequest 请求参数}): {@link DescribePrivateCAsResponse 返回参数} */
+  /** 查询私有CA证书列表 {@link DescribePrivateCAsRequest} {@link DescribePrivateCAsResponse} */
   DescribePrivateCAs(data?: DescribePrivateCAsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateCAsResponse>;
-  /** {@link DescribeProduct 查看产品详情}({@link DescribeProductRequest 请求参数}): {@link DescribeProductResponse 返回参数} */
+  /** 查看产品详情 {@link DescribeProductRequest} {@link DescribeProductResponse} */
   DescribeProduct(data: DescribeProductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductResponse>;
-  /** {@link DescribeProductCA 查询产品绑定的CA证书}({@link DescribeProductCARequest 请求参数}): {@link DescribeProductCAResponse 返回参数} */
+  /** 查询产品绑定的CA证书 {@link DescribeProductCARequest} {@link DescribeProductCAResponse} */
   DescribeProductCA(data: DescribeProductCARequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductCAResponse>;
-  /** {@link DescribeProductResource 查询产品资源详情}({@link DescribeProductResourceRequest 请求参数}): {@link DescribeProductResourceResponse 返回参数} */
+  /** 查询产品资源详情 {@link DescribeProductResourceRequest} {@link DescribeProductResourceResponse} */
   DescribeProductResource(data?: DescribeProductResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductResourceResponse>;
-  /** {@link DescribeProductResources 获取产品资源列表}({@link DescribeProductResourcesRequest 请求参数}): {@link DescribeProductResourcesResponse 返回参数} */
+  /** 获取产品资源列表 {@link DescribeProductResourcesRequest} {@link DescribeProductResourcesResponse} */
   DescribeProductResources(data: DescribeProductResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductResourcesResponse>;
-  /** {@link DescribeProductTask 查看产品任务详情}({@link DescribeProductTaskRequest 请求参数}): {@link DescribeProductTaskResponse 返回参数} */
+  /** 查看产品任务详情 {@link DescribeProductTaskRequest} {@link DescribeProductTaskResponse} */
   DescribeProductTask(data: DescribeProductTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductTaskResponse>;
-  /** {@link DescribeProductTasks 获取产品级任务列表}({@link DescribeProductTasksRequest 请求参数}): {@link DescribeProductTasksResponse 返回参数} */
+  /** 获取产品级任务列表 {@link DescribeProductTasksRequest} {@link DescribeProductTasksResponse} */
   DescribeProductTasks(data: DescribeProductTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductTasksResponse>;
-  /** {@link DescribeProducts 获取产品列表}({@link DescribeProductsRequest 请求参数}): {@link DescribeProductsResponse 返回参数} */
+  /** 获取产品列表 {@link DescribeProductsRequest} {@link DescribeProductsResponse} */
   DescribeProducts(data: DescribeProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductsResponse>;
-  /** {@link DescribePushResourceTaskStatistics 查询推送资源任务统计信息}({@link DescribePushResourceTaskStatisticsRequest 请求参数}): {@link DescribePushResourceTaskStatisticsResponse 返回参数} */
+  /** 查询推送资源任务统计信息 {@link DescribePushResourceTaskStatisticsRequest} {@link DescribePushResourceTaskStatisticsResponse} */
   DescribePushResourceTaskStatistics(data: DescribePushResourceTaskStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushResourceTaskStatisticsResponse>;
-  /** {@link DescribeResourceTasks 查询资源推送任务列表}({@link DescribeResourceTasksRequest 请求参数}): {@link DescribeResourceTasksResponse 返回参数} */
+  /** 查询资源推送任务列表 {@link DescribeResourceTasksRequest} {@link DescribeResourceTasksResponse} */
   DescribeResourceTasks(data: DescribeResourceTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTasksResponse>;
-  /** {@link DisableTopicRule 禁用规则}({@link DisableTopicRuleRequest 请求参数}): {@link DisableTopicRuleResponse 返回参数} */
+  /** 禁用规则 {@link DisableTopicRuleRequest} {@link DisableTopicRuleResponse} */
   DisableTopicRule(data: DisableTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DisableTopicRuleResponse>;
-  /** {@link DownloadDeviceResource 下载设备资源}({@link DownloadDeviceResourceRequest 请求参数}): {@link DownloadDeviceResourceResponse 返回参数} */
+  /** 下载设备资源 {@link DownloadDeviceResourceRequest} {@link DownloadDeviceResourceResponse} */
   DownloadDeviceResource(data: DownloadDeviceResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadDeviceResourceResponse>;
-  /** {@link EditFirmware 编辑固件信息}({@link EditFirmwareRequest 请求参数}): {@link EditFirmwareResponse 返回参数} */
+  /** 编辑固件信息 {@link EditFirmwareRequest} {@link EditFirmwareResponse} */
   EditFirmware(data: EditFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<EditFirmwareResponse>;
-  /** {@link EnableTopicRule 启用规则}({@link EnableTopicRuleRequest 请求参数}): {@link EnableTopicRuleResponse 返回参数} */
+  /** 启用规则 {@link EnableTopicRuleRequest} {@link EnableTopicRuleResponse} */
   EnableTopicRule(data: EnableTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTopicRuleResponse>;
-  /** {@link GetAllVersion 获取所有版本列表}({@link GetAllVersionRequest 请求参数}): {@link GetAllVersionResponse 返回参数} */
+  /** 获取所有版本列表 {@link GetAllVersionRequest} {@link GetAllVersionResponse} */
   GetAllVersion(data: GetAllVersionRequest, config?: AxiosRequestConfig): AxiosPromise<GetAllVersionResponse>;
-  /** {@link GetCOSURL 获取固件下载地址}({@link GetCOSURLRequest 请求参数}): {@link GetCOSURLResponse 返回参数} */
+  /** 获取固件下载地址 {@link GetCOSURLRequest} {@link GetCOSURLResponse} */
   GetCOSURL(data: GetCOSURLRequest, config?: AxiosRequestConfig): AxiosPromise<GetCOSURLResponse>;
-  /** {@link GetUserResourceInfo 获取用户资源信息}({@link GetUserResourceInfoRequest 请求参数}): {@link GetUserResourceInfoResponse 返回参数} */
+  /** 获取用户资源信息 {@link GetUserResourceInfoRequest} {@link GetUserResourceInfoResponse} */
   GetUserResourceInfo(data?: GetUserResourceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetUserResourceInfoResponse>;
-  /** {@link ListFirmwares 获取固件列表}({@link ListFirmwaresRequest 请求参数}): {@link ListFirmwaresResponse 返回参数} */
+  /** 获取固件列表 {@link ListFirmwaresRequest} {@link ListFirmwaresResponse} */
   ListFirmwares(data: ListFirmwaresRequest, config?: AxiosRequestConfig): AxiosPromise<ListFirmwaresResponse>;
-  /** {@link ListLog 查询日志}({@link ListLogRequest 请求参数}): {@link ListLogResponse 返回参数} */
+  /** 查询日志 {@link ListLogRequest} {@link ListLogResponse} */
   ListLog(data: ListLogRequest, config?: AxiosRequestConfig): AxiosPromise<ListLogResponse>;
-  /** {@link ListLogPayload 获取日志内容列表}({@link ListLogPayloadRequest 请求参数}): {@link ListLogPayloadResponse 返回参数} */
+  /** 获取日志内容列表 {@link ListLogPayloadRequest} {@link ListLogPayloadResponse} */
   ListLogPayload(data: ListLogPayloadRequest, config?: AxiosRequestConfig): AxiosPromise<ListLogPayloadResponse>;
-  /** {@link ListSDKLog 获取设备sdk日志}({@link ListSDKLogRequest 请求参数}): {@link ListSDKLogResponse 返回参数} */
+  /** 获取设备sdk日志 {@link ListSDKLogRequest} {@link ListSDKLogResponse} */
   ListSDKLog(data: ListSDKLogRequest, config?: AxiosRequestConfig): AxiosPromise<ListSDKLogResponse>;
-  /** {@link ListTopicRules 获取规则列表}({@link ListTopicRulesRequest 请求参数}): {@link ListTopicRulesResponse 返回参数} */
+  /** 获取规则列表 {@link ListTopicRulesRequest} {@link ListTopicRulesResponse} */
   ListTopicRules(data: ListTopicRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopicRulesResponse>;
-  /** {@link PublishBroadcastMessage 发布广播消息}({@link PublishBroadcastMessageRequest 请求参数}): {@link PublishBroadcastMessageResponse 返回参数} */
+  /** 发布广播消息 {@link PublishBroadcastMessageRequest} {@link PublishBroadcastMessageResponse} */
   PublishBroadcastMessage(data: PublishBroadcastMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishBroadcastMessageResponse>;
-  /** {@link PublishMessage 发布消息}({@link PublishMessageRequest 请求参数}): {@link PublishMessageResponse 返回参数} */
+  /** 发布消息 {@link PublishMessageRequest} {@link PublishMessageResponse} */
   PublishMessage(data: PublishMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishMessageResponse>;
-  /** {@link PublishRRPCMessage 发布RRPC消息}({@link PublishRRPCMessageRequest 请求参数}): {@link PublishRRPCMessageResponse 返回参数} */
+  /** 发布RRPC消息 {@link PublishRRPCMessageRequest} {@link PublishRRPCMessageResponse} */
   PublishRRPCMessage(data: PublishRRPCMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishRRPCMessageResponse>;
-  /** {@link ReplaceTopicRule 替换规则}({@link ReplaceTopicRuleRequest 请求参数}): {@link ReplaceTopicRuleResponse 返回参数} */
+  /** 替换规则 {@link ReplaceTopicRuleRequest} {@link ReplaceTopicRuleResponse} */
   ReplaceTopicRule(data: ReplaceTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceTopicRuleResponse>;
-  /** {@link ResetDeviceState 重置设备状态}({@link ResetDeviceStateRequest 请求参数}): {@link ResetDeviceStateResponse 返回参数} */
+  /** 重置设备状态 {@link ResetDeviceStateRequest} {@link ResetDeviceStateResponse} */
   ResetDeviceState(data: ResetDeviceStateRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDeviceStateResponse>;
-  /** {@link RetryDeviceFirmwareTask 重试设备升级任务}({@link RetryDeviceFirmwareTaskRequest 请求参数}): {@link RetryDeviceFirmwareTaskResponse 返回参数} */
+  /** 重试设备升级任务 {@link RetryDeviceFirmwareTaskRequest} {@link RetryDeviceFirmwareTaskResponse} */
   RetryDeviceFirmwareTask(data: RetryDeviceFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RetryDeviceFirmwareTaskResponse>;
-  /** {@link SetProductsForbiddenStatus 批量设置产品禁用状态}({@link SetProductsForbiddenStatusRequest 请求参数}): {@link SetProductsForbiddenStatusResponse 返回参数} */
+  /** 批量设置产品禁用状态 {@link SetProductsForbiddenStatusRequest} {@link SetProductsForbiddenStatusResponse} */
   SetProductsForbiddenStatus(data: SetProductsForbiddenStatusRequest, config?: AxiosRequestConfig): AxiosPromise<SetProductsForbiddenStatusResponse>;
-  /** {@link UnbindDevices 批量解绑子设备}({@link UnbindDevicesRequest 请求参数}): {@link UnbindDevicesResponse 返回参数} */
+  /** 批量解绑子设备 {@link UnbindDevicesRequest} {@link UnbindDevicesResponse} */
   UnbindDevices(data: UnbindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDevicesResponse>;
-  /** {@link UpdateDeviceAvailableState 切换设备可用状态}({@link UpdateDeviceAvailableStateRequest 请求参数}): {@link UpdateDeviceAvailableStateResponse 返回参数} */
+  /** 切换设备可用状态 {@link UpdateDeviceAvailableStateRequest} {@link UpdateDeviceAvailableStateResponse} */
   UpdateDeviceAvailableState(data: UpdateDeviceAvailableStateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceAvailableStateResponse>;
-  /** {@link UpdateDeviceLogLevel 更新设备日志级别}({@link UpdateDeviceLogLevelRequest 请求参数}): {@link UpdateDeviceLogLevelResponse 返回参数} */
+  /** 更新设备日志级别 {@link UpdateDeviceLogLevelRequest} {@link UpdateDeviceLogLevelResponse} */
   UpdateDeviceLogLevel(data: UpdateDeviceLogLevelRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceLogLevelResponse>;
-  /** {@link UpdateDevicePSK 更新设备PSK}({@link UpdateDevicePSKRequest 请求参数}): {@link UpdateDevicePSKResponse 返回参数} */
+  /** 更新设备PSK {@link UpdateDevicePSKRequest} {@link UpdateDevicePSKResponse} */
   UpdateDevicePSK(data: UpdateDevicePSKRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDevicePSKResponse>;
-  /** {@link UpdateDeviceShadow 更新设备影子}({@link UpdateDeviceShadowRequest 请求参数}): {@link UpdateDeviceShadowResponse 返回参数} */
+  /** 更新设备影子 {@link UpdateDeviceShadowRequest} {@link UpdateDeviceShadowResponse} */
   UpdateDeviceShadow(data: UpdateDeviceShadowRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceShadowResponse>;
-  /** {@link UpdateDevicesEnableState 批量切换设备可用状态}({@link UpdateDevicesEnableStateRequest 请求参数}): {@link UpdateDevicesEnableStateResponse 返回参数} */
+  /** 批量切换设备可用状态 {@link UpdateDevicesEnableStateRequest} {@link UpdateDevicesEnableStateResponse} */
   UpdateDevicesEnableState(data: UpdateDevicesEnableStateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDevicesEnableStateResponse>;
-  /** {@link UpdatePrivateCA 更新私有CA证书}({@link UpdatePrivateCARequest 请求参数}): {@link UpdatePrivateCAResponse 返回参数} */
+  /** 更新私有CA证书 {@link UpdatePrivateCARequest} {@link UpdatePrivateCAResponse} */
   UpdatePrivateCA(data: UpdatePrivateCARequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePrivateCAResponse>;
-  /** {@link UpdateProductDynamicRegister 更新产品动态注册}({@link UpdateProductDynamicRegisterRequest 请求参数}): {@link UpdateProductDynamicRegisterResponse 返回参数} */
+  /** 更新产品动态注册 {@link UpdateProductDynamicRegisterRequest} {@link UpdateProductDynamicRegisterResponse} */
   UpdateProductDynamicRegister(data: UpdateProductDynamicRegisterRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProductDynamicRegisterResponse>;
-  /** {@link UpdateProductPrivateCA 更新产品的私有CA}({@link UpdateProductPrivateCARequest 请求参数}): {@link UpdateProductPrivateCAResponse 返回参数} */
+  /** 更新产品的私有CA {@link UpdateProductPrivateCARequest} {@link UpdateProductPrivateCAResponse} */
   UpdateProductPrivateCA(data: UpdateProductPrivateCARequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProductPrivateCAResponse>;
-  /** {@link UpdateTopicPolicy 更新Topic}({@link UpdateTopicPolicyRequest 请求参数}): {@link UpdateTopicPolicyResponse 返回参数} */
+  /** 更新Topic {@link UpdateTopicPolicyRequest} {@link UpdateTopicPolicyResponse} */
   UpdateTopicPolicy(data: UpdateTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTopicPolicyResponse>;
-  /** {@link UploadFirmware 上传固件信息}({@link UploadFirmwareRequest 请求参数}): {@link UploadFirmwareResponse 返回参数} */
+  /** 上传固件信息 {@link UploadFirmwareRequest} {@link UploadFirmwareResponse} */
   UploadFirmware(data: UploadFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFirmwareResponse>;
-  /** {@link V20180614.BatchUpdateFirmware 批量更新固件}({@link V20180614.BatchUpdateFirmwareRequest 请求参数}): {@link V20180614.BatchUpdateFirmwareResponse 返回参数} */
+  /** 批量更新固件 {@link V20180614.BatchUpdateFirmwareRequest} {@link V20180614.BatchUpdateFirmwareResponse} */
   BatchUpdateFirmware(data: V20180614.BatchUpdateFirmwareRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.BatchUpdateFirmwareResponse>;
-  /** {@link V20180614.BindDevices 批量绑定子设备}({@link V20180614.BindDevicesRequest 请求参数}): {@link V20180614.BindDevicesResponse 返回参数} */
+  /** 批量绑定子设备 {@link V20180614.BindDevicesRequest} {@link V20180614.BindDevicesResponse} */
   BindDevices(data: V20180614.BindDevicesRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.BindDevicesResponse>;
-  /** {@link V20180614.CancelDeviceFirmwareTask 取消设备升级任务}({@link V20180614.CancelDeviceFirmwareTaskRequest 请求参数}): {@link V20180614.CancelDeviceFirmwareTaskResponse 返回参数} */
+  /** 取消设备升级任务 {@link V20180614.CancelDeviceFirmwareTaskRequest} {@link V20180614.CancelDeviceFirmwareTaskResponse} */
   CancelDeviceFirmwareTask(data: V20180614.CancelDeviceFirmwareTaskRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.CancelDeviceFirmwareTaskResponse>;
-  /** {@link V20180614.CancelTask 取消任务}({@link V20180614.CancelTaskRequest 请求参数}): {@link V20180614.CancelTaskResponse 返回参数} */
+  /** 取消任务 {@link V20180614.CancelTaskRequest} {@link V20180614.CancelTaskResponse} */
   CancelTask(data: V20180614.CancelTaskRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.CancelTaskResponse>;
-  /** {@link V20180614.CreateDevice 创建设备}({@link V20180614.CreateDeviceRequest 请求参数}): {@link V20180614.CreateDeviceResponse 返回参数} */
+  /** 创建设备 {@link V20180614.CreateDeviceRequest} {@link V20180614.CreateDeviceResponse} */
   CreateDevice(data: V20180614.CreateDeviceRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.CreateDeviceResponse>;
-  /** {@link V20180614.CreateLoraDevice 创建lora设备}({@link V20180614.CreateLoraDeviceRequest 请求参数}): {@link V20180614.CreateLoraDeviceResponse 返回参数} */
+  /** 创建lora设备 {@link V20180614.CreateLoraDeviceRequest} {@link V20180614.CreateLoraDeviceResponse} */
   CreateLoraDevice(data: V20180614.CreateLoraDeviceRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.CreateLoraDeviceResponse>;
-  /** {@link V20180614.CreateMultiDevice 创建多个设备}({@link V20180614.CreateMultiDeviceRequest 请求参数}): {@link V20180614.CreateMultiDeviceResponse 返回参数} */
+  /** 创建多个设备 {@link V20180614.CreateMultiDeviceRequest} {@link V20180614.CreateMultiDeviceResponse} */
   CreateMultiDevice(data: V20180614.CreateMultiDeviceRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.CreateMultiDeviceResponse>;
-  /** {@link V20180614.CreateMultiDevicesTask 创建批量创建设备任务}({@link V20180614.CreateMultiDevicesTaskRequest 请求参数}): {@link V20180614.CreateMultiDevicesTaskResponse 返回参数} */
+  /** 创建批量创建设备任务 {@link V20180614.CreateMultiDevicesTaskRequest} {@link V20180614.CreateMultiDevicesTaskResponse} */
   CreateMultiDevicesTask(data: V20180614.CreateMultiDevicesTaskRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.CreateMultiDevicesTaskResponse>;
-  /** {@link V20180614.CreateProduct 创建产品}({@link V20180614.CreateProductRequest 请求参数}): {@link V20180614.CreateProductResponse 返回参数} */
+  /** 创建产品 {@link V20180614.CreateProductRequest} {@link V20180614.CreateProductResponse} */
   CreateProduct(data: V20180614.CreateProductRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.CreateProductResponse>;
-  /** {@link V20180614.CreateTask 创建任务}({@link V20180614.CreateTaskRequest 请求参数}): {@link V20180614.CreateTaskResponse 返回参数} */
+  /** 创建任务 {@link V20180614.CreateTaskRequest} {@link V20180614.CreateTaskResponse} */
   CreateTask(data: V20180614.CreateTaskRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.CreateTaskResponse>;
-  /** {@link V20180614.CreateTaskFileUrl 获取任务文件上传链接}({@link V20180614.CreateTaskFileUrlRequest 请求参数}): {@link V20180614.CreateTaskFileUrlResponse 返回参数} */
+  /** 获取任务文件上传链接 {@link V20180614.CreateTaskFileUrlRequest} {@link V20180614.CreateTaskFileUrlResponse} */
   CreateTaskFileUrl(data: V20180614.CreateTaskFileUrlRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.CreateTaskFileUrlResponse>;
-  /** {@link V20180614.CreateTopicPolicy 创建Topic}({@link V20180614.CreateTopicPolicyRequest 请求参数}): {@link V20180614.CreateTopicPolicyResponse 返回参数} */
+  /** 创建Topic {@link V20180614.CreateTopicPolicyRequest} {@link V20180614.CreateTopicPolicyResponse} */
   CreateTopicPolicy(data: V20180614.CreateTopicPolicyRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.CreateTopicPolicyResponse>;
-  /** {@link V20180614.CreateTopicRule 创建规则}({@link V20180614.CreateTopicRuleRequest 请求参数}): {@link V20180614.CreateTopicRuleResponse 返回参数} */
+  /** 创建规则 {@link V20180614.CreateTopicRuleRequest} {@link V20180614.CreateTopicRuleResponse} */
   CreateTopicRule(data: V20180614.CreateTopicRuleRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.CreateTopicRuleResponse>;
-  /** {@link V20180614.DeleteDevice 删除设备}({@link V20180614.DeleteDeviceRequest 请求参数}): {@link V20180614.DeleteDeviceResponse 返回参数} */
+  /** 删除设备 {@link V20180614.DeleteDeviceRequest} {@link V20180614.DeleteDeviceResponse} */
   DeleteDevice(data: V20180614.DeleteDeviceRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DeleteDeviceResponse>;
-  /** {@link V20180614.DeleteDeviceResource 删除设备资源}({@link V20180614.DeleteDeviceResourceRequest 请求参数}): {@link V20180614.DeleteDeviceResourceResponse 返回参数} */
+  /** 删除设备资源 {@link V20180614.DeleteDeviceResourceRequest} {@link V20180614.DeleteDeviceResourceResponse} */
   DeleteDeviceResource(data: V20180614.DeleteDeviceResourceRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DeleteDeviceResourceResponse>;
-  /** {@link V20180614.DeleteLoraDevice 删除lora设备}({@link V20180614.DeleteLoraDeviceRequest 请求参数}): {@link V20180614.DeleteLoraDeviceResponse 返回参数} */
+  /** 删除lora设备 {@link V20180614.DeleteLoraDeviceRequest} {@link V20180614.DeleteLoraDeviceResponse} */
   DeleteLoraDevice(data: V20180614.DeleteLoraDeviceRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DeleteLoraDeviceResponse>;
-  /** {@link V20180614.DeleteProduct 删除产品}({@link V20180614.DeleteProductRequest 请求参数}): {@link V20180614.DeleteProductResponse 返回参数} */
+  /** 删除产品 {@link V20180614.DeleteProductRequest} {@link V20180614.DeleteProductResponse} */
   DeleteProduct(data: V20180614.DeleteProductRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DeleteProductResponse>;
-  /** {@link V20180614.DeleteTopicRule 删除规则}({@link V20180614.DeleteTopicRuleRequest 请求参数}): {@link V20180614.DeleteTopicRuleResponse 返回参数} */
+  /** 删除规则 {@link V20180614.DeleteTopicRuleRequest} {@link V20180614.DeleteTopicRuleResponse} */
   DeleteTopicRule(data: V20180614.DeleteTopicRuleRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DeleteTopicRuleResponse>;
-  /** {@link V20180614.DescribeAllDevices 查询所有设备列表}({@link V20180614.DescribeAllDevicesRequest 请求参数}): {@link V20180614.DescribeAllDevicesResponse 返回参数} */
+  /** 查询所有设备列表 {@link V20180614.DescribeAllDevicesRequest} {@link V20180614.DescribeAllDevicesResponse} */
   DescribeAllDevices(data: V20180614.DescribeAllDevicesRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeAllDevicesResponse>;
-  /** {@link V20180614.DescribeDevice 查看设备详情}({@link V20180614.DescribeDeviceRequest 请求参数}): {@link V20180614.DescribeDeviceResponse 返回参数} */
+  /** 查看设备详情 {@link V20180614.DescribeDeviceRequest} {@link V20180614.DescribeDeviceResponse} */
   DescribeDevice(data: V20180614.DescribeDeviceRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeDeviceResponse>;
-  /** {@link V20180614.DescribeDeviceClientKey 获取设备私钥}({@link V20180614.DescribeDeviceClientKeyRequest 请求参数}): {@link V20180614.DescribeDeviceClientKeyResponse 返回参数} */
+  /** 获取设备私钥 {@link V20180614.DescribeDeviceClientKeyRequest} {@link V20180614.DescribeDeviceClientKeyResponse} */
   DescribeDeviceClientKey(data: V20180614.DescribeDeviceClientKeyRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeDeviceClientKeyResponse>;
-  /** {@link V20180614.DescribeDeviceResource 查询设备资源详情}({@link V20180614.DescribeDeviceResourceRequest 请求参数}): {@link V20180614.DescribeDeviceResourceResponse 返回参数} */
+  /** 查询设备资源详情 {@link V20180614.DescribeDeviceResourceRequest} {@link V20180614.DescribeDeviceResourceResponse} */
   DescribeDeviceResource(data: V20180614.DescribeDeviceResourceRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeDeviceResourceResponse>;
-  /** {@link V20180614.DescribeDeviceResources 获取设备资源列表}({@link V20180614.DescribeDeviceResourcesRequest 请求参数}): {@link V20180614.DescribeDeviceResourcesResponse 返回参数} */
+  /** 获取设备资源列表 {@link V20180614.DescribeDeviceResourcesRequest} {@link V20180614.DescribeDeviceResourcesResponse} */
   DescribeDeviceResources(data: V20180614.DescribeDeviceResourcesRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeDeviceResourcesResponse>;
-  /** {@link V20180614.DescribeDeviceShadow 获取设备影子}({@link V20180614.DescribeDeviceShadowRequest 请求参数}): {@link V20180614.DescribeDeviceShadowResponse 返回参数} */
+  /** 获取设备影子 {@link V20180614.DescribeDeviceShadowRequest} {@link V20180614.DescribeDeviceShadowResponse} */
   DescribeDeviceShadow(data: V20180614.DescribeDeviceShadowRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeDeviceShadowResponse>;
-  /** {@link V20180614.DescribeDevices 获取设备列表}({@link V20180614.DescribeDevicesRequest 请求参数}): {@link V20180614.DescribeDevicesResponse 返回参数} */
+  /** 获取设备列表 {@link V20180614.DescribeDevicesRequest} {@link V20180614.DescribeDevicesResponse} */
   DescribeDevices(data: V20180614.DescribeDevicesRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeDevicesResponse>;
-  /** {@link V20180614.DescribeFirmware 查询固件信息}({@link V20180614.DescribeFirmwareRequest 请求参数}): {@link V20180614.DescribeFirmwareResponse 返回参数} */
+  /** 查询固件信息 {@link V20180614.DescribeFirmwareRequest} {@link V20180614.DescribeFirmwareResponse} */
   DescribeFirmware(data: V20180614.DescribeFirmwareRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeFirmwareResponse>;
-  /** {@link V20180614.DescribeFirmwareTask 查询固件升级任务详情}({@link V20180614.DescribeFirmwareTaskRequest 请求参数}): {@link V20180614.DescribeFirmwareTaskResponse 返回参数} */
+  /** 查询固件升级任务详情 {@link V20180614.DescribeFirmwareTaskRequest} {@link V20180614.DescribeFirmwareTaskResponse} */
   DescribeFirmwareTask(data: V20180614.DescribeFirmwareTaskRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeFirmwareTaskResponse>;
-  /** {@link V20180614.DescribeFirmwareTaskDevices 查询固件升级任务的设备列表}({@link V20180614.DescribeFirmwareTaskDevicesRequest 请求参数}): {@link V20180614.DescribeFirmwareTaskDevicesResponse 返回参数} */
+  /** 查询固件升级任务的设备列表 {@link V20180614.DescribeFirmwareTaskDevicesRequest} {@link V20180614.DescribeFirmwareTaskDevicesResponse} */
   DescribeFirmwareTaskDevices(data: V20180614.DescribeFirmwareTaskDevicesRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeFirmwareTaskDevicesResponse>;
-  /** {@link V20180614.DescribeFirmwareTaskDistribution 查询固件升级任务状态分布}({@link V20180614.DescribeFirmwareTaskDistributionRequest 请求参数}): {@link V20180614.DescribeFirmwareTaskDistributionResponse 返回参数} */
+  /** 查询固件升级任务状态分布 {@link V20180614.DescribeFirmwareTaskDistributionRequest} {@link V20180614.DescribeFirmwareTaskDistributionResponse} */
   DescribeFirmwareTaskDistribution(data: V20180614.DescribeFirmwareTaskDistributionRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeFirmwareTaskDistributionResponse>;
-  /** {@link V20180614.DescribeFirmwareTaskStatistics 查询固件升级任务统计信息}({@link V20180614.DescribeFirmwareTaskStatisticsRequest 请求参数}): {@link V20180614.DescribeFirmwareTaskStatisticsResponse 返回参数} */
+  /** 查询固件升级任务统计信息 {@link V20180614.DescribeFirmwareTaskStatisticsRequest} {@link V20180614.DescribeFirmwareTaskStatisticsResponse} */
   DescribeFirmwareTaskStatistics(data: V20180614.DescribeFirmwareTaskStatisticsRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeFirmwareTaskStatisticsResponse>;
-  /** {@link V20180614.DescribeFirmwareTasks 查询固件升级任务列表}({@link V20180614.DescribeFirmwareTasksRequest 请求参数}): {@link V20180614.DescribeFirmwareTasksResponse 返回参数} */
+  /** 查询固件升级任务列表 {@link V20180614.DescribeFirmwareTasksRequest} {@link V20180614.DescribeFirmwareTasksResponse} */
   DescribeFirmwareTasks(data: V20180614.DescribeFirmwareTasksRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeFirmwareTasksResponse>;
-  /** {@link V20180614.DescribeLoraDevice 获取lora设备详情}({@link V20180614.DescribeLoraDeviceRequest 请求参数}): {@link V20180614.DescribeLoraDeviceResponse 返回参数} */
+  /** 获取lora设备详情 {@link V20180614.DescribeLoraDeviceRequest} {@link V20180614.DescribeLoraDeviceResponse} */
   DescribeLoraDevice(data: V20180614.DescribeLoraDeviceRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeLoraDeviceResponse>;
-  /** {@link V20180614.DescribeMultiDevTask 获取创建多设备任务状态}({@link V20180614.DescribeMultiDevTaskRequest 请求参数}): {@link V20180614.DescribeMultiDevTaskResponse 返回参数} */
+  /** 获取创建多设备任务状态 {@link V20180614.DescribeMultiDevTaskRequest} {@link V20180614.DescribeMultiDevTaskResponse} */
   DescribeMultiDevTask(data: V20180614.DescribeMultiDevTaskRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeMultiDevTaskResponse>;
-  /** {@link V20180614.DescribeMultiDevices 获取创建多设备结果}({@link V20180614.DescribeMultiDevicesRequest 请求参数}): {@link V20180614.DescribeMultiDevicesResponse 返回参数} */
+  /** 获取创建多设备结果 {@link V20180614.DescribeMultiDevicesRequest} {@link V20180614.DescribeMultiDevicesResponse} */
   DescribeMultiDevices(data: V20180614.DescribeMultiDevicesRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeMultiDevicesResponse>;
-  /** {@link V20180614.DescribeProduct 查看产品详情}({@link V20180614.DescribeProductRequest 请求参数}): {@link V20180614.DescribeProductResponse 返回参数} */
+  /** 查看产品详情 {@link V20180614.DescribeProductRequest} {@link V20180614.DescribeProductResponse} */
   DescribeProduct(data: V20180614.DescribeProductRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeProductResponse>;
-  /** {@link V20180614.DescribeProductResource 查询产品资源详情}({@link V20180614.DescribeProductResourceRequest 请求参数}): {@link V20180614.DescribeProductResourceResponse 返回参数} */
+  /** 查询产品资源详情 {@link V20180614.DescribeProductResourceRequest} {@link V20180614.DescribeProductResourceResponse} */
   DescribeProductResource(data: V20180614.DescribeProductResourceRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeProductResourceResponse>;
-  /** {@link V20180614.DescribeProductResources 获取产品资源列表}({@link V20180614.DescribeProductResourcesRequest 请求参数}): {@link V20180614.DescribeProductResourcesResponse 返回参数} */
+  /** 获取产品资源列表 {@link V20180614.DescribeProductResourcesRequest} {@link V20180614.DescribeProductResourcesResponse} */
   DescribeProductResources(data: V20180614.DescribeProductResourcesRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeProductResourcesResponse>;
-  /** {@link V20180614.DescribeProductTask 查看产品任务详情}({@link V20180614.DescribeProductTaskRequest 请求参数}): {@link V20180614.DescribeProductTaskResponse 返回参数} */
+  /** 查看产品任务详情 {@link V20180614.DescribeProductTaskRequest} {@link V20180614.DescribeProductTaskResponse} */
   DescribeProductTask(data: V20180614.DescribeProductTaskRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeProductTaskResponse>;
-  /** {@link V20180614.DescribeProductTasks 获取产品级任务列表}({@link V20180614.DescribeProductTasksRequest 请求参数}): {@link V20180614.DescribeProductTasksResponse 返回参数} */
+  /** 获取产品级任务列表 {@link V20180614.DescribeProductTasksRequest} {@link V20180614.DescribeProductTasksResponse} */
   DescribeProductTasks(data: V20180614.DescribeProductTasksRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeProductTasksResponse>;
-  /** {@link V20180614.DescribeProducts 获取产品列表}({@link V20180614.DescribeProductsRequest 请求参数}): {@link V20180614.DescribeProductsResponse 返回参数} */
+  /** 获取产品列表 {@link V20180614.DescribeProductsRequest} {@link V20180614.DescribeProductsResponse} */
   DescribeProducts(data: V20180614.DescribeProductsRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeProductsResponse>;
-  /** {@link V20180614.DescribePushResourceTaskStatistics 查询推送资源任务统计信息}({@link V20180614.DescribePushResourceTaskStatisticsRequest 请求参数}): {@link V20180614.DescribePushResourceTaskStatisticsResponse 返回参数} */
+  /** 查询推送资源任务统计信息 {@link V20180614.DescribePushResourceTaskStatisticsRequest} {@link V20180614.DescribePushResourceTaskStatisticsResponse} */
   DescribePushResourceTaskStatistics(data: V20180614.DescribePushResourceTaskStatisticsRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribePushResourceTaskStatisticsResponse>;
-  /** {@link V20180614.DescribeResourceTasks 查询资源推送任务列表}({@link V20180614.DescribeResourceTasksRequest 请求参数}): {@link V20180614.DescribeResourceTasksResponse 返回参数} */
+  /** 查询资源推送任务列表 {@link V20180614.DescribeResourceTasksRequest} {@link V20180614.DescribeResourceTasksResponse} */
   DescribeResourceTasks(data: V20180614.DescribeResourceTasksRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeResourceTasksResponse>;
-  /** {@link V20180614.DescribeTask 获取任务详情}({@link V20180614.DescribeTaskRequest 请求参数}): {@link V20180614.DescribeTaskResponse 返回参数} */
+  /** 获取任务详情 {@link V20180614.DescribeTaskRequest} {@link V20180614.DescribeTaskResponse} */
   DescribeTask(data: V20180614.DescribeTaskRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeTaskResponse>;
-  /** {@link V20180614.DescribeTasks 获取任务列表}({@link V20180614.DescribeTasksRequest 请求参数}): {@link V20180614.DescribeTasksResponse 返回参数} */
+  /** 获取任务列表 {@link V20180614.DescribeTasksRequest} {@link V20180614.DescribeTasksResponse} */
   DescribeTasks(data: V20180614.DescribeTasksRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DescribeTasksResponse>;
-  /** {@link V20180614.DisableTopicRule 禁用规则}({@link V20180614.DisableTopicRuleRequest 请求参数}): {@link V20180614.DisableTopicRuleResponse 返回参数} */
+  /** 禁用规则 {@link V20180614.DisableTopicRuleRequest} {@link V20180614.DisableTopicRuleResponse} */
   DisableTopicRule(data: V20180614.DisableTopicRuleRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DisableTopicRuleResponse>;
-  /** {@link V20180614.DownloadDeviceResource 下载设备资源}({@link V20180614.DownloadDeviceResourceRequest 请求参数}): {@link V20180614.DownloadDeviceResourceResponse 返回参数} */
+  /** 下载设备资源 {@link V20180614.DownloadDeviceResourceRequest} {@link V20180614.DownloadDeviceResourceResponse} */
   DownloadDeviceResource(data: V20180614.DownloadDeviceResourceRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.DownloadDeviceResourceResponse>;
-  /** {@link V20180614.EditFirmware 编辑固件信息}({@link V20180614.EditFirmwareRequest 请求参数}): {@link V20180614.EditFirmwareResponse 返回参数} */
+  /** 编辑固件信息 {@link V20180614.EditFirmwareRequest} {@link V20180614.EditFirmwareResponse} */
   EditFirmware(data: V20180614.EditFirmwareRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.EditFirmwareResponse>;
-  /** {@link V20180614.EnableTopicRule 启用规则}({@link V20180614.EnableTopicRuleRequest 请求参数}): {@link V20180614.EnableTopicRuleResponse 返回参数} */
+  /** 启用规则 {@link V20180614.EnableTopicRuleRequest} {@link V20180614.EnableTopicRuleResponse} */
   EnableTopicRule(data: V20180614.EnableTopicRuleRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.EnableTopicRuleResponse>;
-  /** {@link V20180614.GetCOSURL 获取固件下载地址}({@link V20180614.GetCOSURLRequest 请求参数}): {@link V20180614.GetCOSURLResponse 返回参数} */
+  /** 获取固件下载地址 {@link V20180614.GetCOSURLRequest} {@link V20180614.GetCOSURLResponse} */
   GetCOSURL(data: V20180614.GetCOSURLRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.GetCOSURLResponse>;
-  /** {@link V20180614.GetUserResourceInfo 获取用户资源信息}({@link V20180614.GetUserResourceInfoRequest 请求参数}): {@link V20180614.GetUserResourceInfoResponse 返回参数} */
+  /** 获取用户资源信息 {@link V20180614.GetUserResourceInfoRequest} {@link V20180614.GetUserResourceInfoResponse} */
   GetUserResourceInfo(data: V20180614.GetUserResourceInfoRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.GetUserResourceInfoResponse>;
-  /** {@link V20180614.ListLog 查询日志}({@link V20180614.ListLogRequest 请求参数}): {@link V20180614.ListLogResponse 返回参数} */
+  /** 查询日志 {@link V20180614.ListLogRequest} {@link V20180614.ListLogResponse} */
   ListLog(data: V20180614.ListLogRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.ListLogResponse>;
-  /** {@link V20180614.ListLogPayload 获取日志内容列表}({@link V20180614.ListLogPayloadRequest 请求参数}): {@link V20180614.ListLogPayloadResponse 返回参数} */
+  /** 获取日志内容列表 {@link V20180614.ListLogPayloadRequest} {@link V20180614.ListLogPayloadResponse} */
   ListLogPayload(data: V20180614.ListLogPayloadRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.ListLogPayloadResponse>;
-  /** {@link V20180614.ListSDKLog 获取设备sdk日志}({@link V20180614.ListSDKLogRequest 请求参数}): {@link V20180614.ListSDKLogResponse 返回参数} */
+  /** 获取设备sdk日志 {@link V20180614.ListSDKLogRequest} {@link V20180614.ListSDKLogResponse} */
   ListSDKLog(data: V20180614.ListSDKLogRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.ListSDKLogResponse>;
-  /** {@link V20180614.PublishAsDevice 模拟lora设备发送消息}({@link V20180614.PublishAsDeviceRequest 请求参数}): {@link V20180614.PublishAsDeviceResponse 返回参数} */
+  /** 模拟lora设备发送消息 {@link V20180614.PublishAsDeviceRequest} {@link V20180614.PublishAsDeviceResponse} */
   PublishAsDevice(data: V20180614.PublishAsDeviceRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.PublishAsDeviceResponse>;
-  /** {@link V20180614.PublishBroadcastMessage 发布广播消息}({@link V20180614.PublishBroadcastMessageRequest 请求参数}): {@link V20180614.PublishBroadcastMessageResponse 返回参数} */
+  /** 发布广播消息 {@link V20180614.PublishBroadcastMessageRequest} {@link V20180614.PublishBroadcastMessageResponse} */
   PublishBroadcastMessage(data: V20180614.PublishBroadcastMessageRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.PublishBroadcastMessageResponse>;
-  /** {@link V20180614.PublishMessage 发布消息}({@link V20180614.PublishMessageRequest 请求参数}): {@link V20180614.PublishMessageResponse 返回参数} */
+  /** 发布消息 {@link V20180614.PublishMessageRequest} {@link V20180614.PublishMessageResponse} */
   PublishMessage(data: V20180614.PublishMessageRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.PublishMessageResponse>;
-  /** {@link V20180614.PublishRRPCMessage 发布RRPC消息}({@link V20180614.PublishRRPCMessageRequest 请求参数}): {@link V20180614.PublishRRPCMessageResponse 返回参数} */
+  /** 发布RRPC消息 {@link V20180614.PublishRRPCMessageRequest} {@link V20180614.PublishRRPCMessageResponse} */
   PublishRRPCMessage(data: V20180614.PublishRRPCMessageRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.PublishRRPCMessageResponse>;
-  /** {@link V20180614.PublishToDevice 服务下发消息到lora设备}({@link V20180614.PublishToDeviceRequest 请求参数}): {@link V20180614.PublishToDeviceResponse 返回参数} */
+  /** 服务下发消息到lora设备 {@link V20180614.PublishToDeviceRequest} {@link V20180614.PublishToDeviceResponse} */
   PublishToDevice(data: V20180614.PublishToDeviceRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.PublishToDeviceResponse>;
-  /** {@link V20180614.ReplaceTopicRule 替换规则}({@link V20180614.ReplaceTopicRuleRequest 请求参数}): {@link V20180614.ReplaceTopicRuleResponse 返回参数} */
+  /** 替换规则 {@link V20180614.ReplaceTopicRuleRequest} {@link V20180614.ReplaceTopicRuleResponse} */
   ReplaceTopicRule(data: V20180614.ReplaceTopicRuleRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.ReplaceTopicRuleResponse>;
-  /** {@link V20180614.ResetDeviceState 重置设备状态}({@link V20180614.ResetDeviceStateRequest 请求参数}): {@link V20180614.ResetDeviceStateResponse 返回参数} */
+  /** 重置设备状态 {@link V20180614.ResetDeviceStateRequest} {@link V20180614.ResetDeviceStateResponse} */
   ResetDeviceState(data: V20180614.ResetDeviceStateRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.ResetDeviceStateResponse>;
-  /** {@link V20180614.RetryDeviceFirmwareTask 重试设备升级任务}({@link V20180614.RetryDeviceFirmwareTaskRequest 请求参数}): {@link V20180614.RetryDeviceFirmwareTaskResponse 返回参数} */
+  /** 重试设备升级任务 {@link V20180614.RetryDeviceFirmwareTaskRequest} {@link V20180614.RetryDeviceFirmwareTaskResponse} */
   RetryDeviceFirmwareTask(data: V20180614.RetryDeviceFirmwareTaskRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.RetryDeviceFirmwareTaskResponse>;
-  /** {@link V20180614.SetProductsForbiddenStatus 批量设置产品禁用状态}({@link V20180614.SetProductsForbiddenStatusRequest 请求参数}): {@link V20180614.SetProductsForbiddenStatusResponse 返回参数} */
+  /** 批量设置产品禁用状态 {@link V20180614.SetProductsForbiddenStatusRequest} {@link V20180614.SetProductsForbiddenStatusResponse} */
   SetProductsForbiddenStatus(data: V20180614.SetProductsForbiddenStatusRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.SetProductsForbiddenStatusResponse>;
-  /** {@link V20180614.UnbindDevices 批量解绑子设备}({@link V20180614.UnbindDevicesRequest 请求参数}): {@link V20180614.UnbindDevicesResponse 返回参数} */
+  /** 批量解绑子设备 {@link V20180614.UnbindDevicesRequest} {@link V20180614.UnbindDevicesResponse} */
   UnbindDevices(data: V20180614.UnbindDevicesRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.UnbindDevicesResponse>;
-  /** {@link V20180614.UpdateDeviceAvailableState 切换设备可用状态}({@link V20180614.UpdateDeviceAvailableStateRequest 请求参数}): {@link V20180614.UpdateDeviceAvailableStateResponse 返回参数} */
+  /** 切换设备可用状态 {@link V20180614.UpdateDeviceAvailableStateRequest} {@link V20180614.UpdateDeviceAvailableStateResponse} */
   UpdateDeviceAvailableState(data: V20180614.UpdateDeviceAvailableStateRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.UpdateDeviceAvailableStateResponse>;
-  /** {@link V20180614.UpdateDeviceShadow 更新设备影子}({@link V20180614.UpdateDeviceShadowRequest 请求参数}): {@link V20180614.UpdateDeviceShadowResponse 返回参数} */
+  /** 更新设备影子 {@link V20180614.UpdateDeviceShadowRequest} {@link V20180614.UpdateDeviceShadowResponse} */
   UpdateDeviceShadow(data: V20180614.UpdateDeviceShadowRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.UpdateDeviceShadowResponse>;
-  /** {@link V20180614.UpdateDevicesEnableState 批量切换设备可用状态}({@link V20180614.UpdateDevicesEnableStateRequest 请求参数}): {@link V20180614.UpdateDevicesEnableStateResponse 返回参数} */
+  /** 批量切换设备可用状态 {@link V20180614.UpdateDevicesEnableStateRequest} {@link V20180614.UpdateDevicesEnableStateResponse} */
   UpdateDevicesEnableState(data: V20180614.UpdateDevicesEnableStateRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.UpdateDevicesEnableStateResponse>;
-  /** {@link V20180614.UpdateProductDynamicRegister 更新产品动态注册}({@link V20180614.UpdateProductDynamicRegisterRequest 请求参数}): {@link V20180614.UpdateProductDynamicRegisterResponse 返回参数} */
+  /** 更新产品动态注册 {@link V20180614.UpdateProductDynamicRegisterRequest} {@link V20180614.UpdateProductDynamicRegisterResponse} */
   UpdateProductDynamicRegister(data: V20180614.UpdateProductDynamicRegisterRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.UpdateProductDynamicRegisterResponse>;
-  /** {@link V20180614.UpdateTopicPolicy 更新Topic}({@link V20180614.UpdateTopicPolicyRequest 请求参数}): {@link V20180614.UpdateTopicPolicyResponse 返回参数} */
+  /** 更新Topic {@link V20180614.UpdateTopicPolicyRequest} {@link V20180614.UpdateTopicPolicyResponse} */
   UpdateTopicPolicy(data: V20180614.UpdateTopicPolicyRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.UpdateTopicPolicyResponse>;
-  /** {@link V20180614.UploadFirmware 上传固件信息}({@link V20180614.UploadFirmwareRequest 请求参数}): {@link V20180614.UploadFirmwareResponse 返回参数} */
+  /** 上传固件信息 {@link V20180614.UploadFirmwareRequest} {@link V20180614.UploadFirmwareResponse} */
   UploadFirmware(data: V20180614.UploadFirmwareRequest, config: AxiosRequestConfig & V20180614.VersionHeader): AxiosPromise<V20180614.UploadFirmwareResponse>;
 }
 

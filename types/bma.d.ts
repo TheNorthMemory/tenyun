@@ -228,7 +228,7 @@ declare interface CreateBPFakeURLRequest {
 }
 
 declare interface CreateBPFakeURLResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -238,7 +238,7 @@ declare interface CreateBPFalseTicketRequest {
 }
 
 declare interface CreateBPFalseTicketResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -254,7 +254,7 @@ declare interface CreateBPOfflineAttachmentRequest {
 }
 
 declare interface CreateBPOfflineAttachmentResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -264,7 +264,7 @@ declare interface CreateBPOfflineTicketRequest {
 }
 
 declare interface CreateBPOfflineTicketResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -282,7 +282,7 @@ declare interface CreateBPProtectURLsRequest {
 }
 
 declare interface CreateBPProtectURLsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -326,7 +326,7 @@ declare interface CreateCRBlockResponse {
   TortId: number;
   /** 该字段已废弃 */
   TortNum: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -354,7 +354,7 @@ declare interface CreateCRCompanyVerifyResponse {
   Status: number;
   /** 认证状态说明，包括认证失败的原因 */
   Note: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -366,7 +366,7 @@ declare interface CreateCRDesktopCodeRequest {
 }
 
 declare interface CreateCRDesktopCodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -396,7 +396,7 @@ declare interface CreateCRObtainResponse {
   TortId: number;
   /** xxx */
   TortNum: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -410,7 +410,7 @@ declare interface CreateCRRightFileRequest {
 declare interface CreateCRRightFileResponse {
   /** 权属文件Id，按提交顺序排序 */
   FileIds: number[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -458,7 +458,7 @@ declare interface CreateCRRightResponse {
   TortId: number;
   /** 该字段已废弃 */
   TortNum: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -488,7 +488,7 @@ declare interface CreateCRTortResponse {
   TortDomain: string;
   /** 侵权主体 */
   TortBodyName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -510,7 +510,7 @@ declare interface CreateCRUserVerifyResponse {
   Status: number;
   /** 认证状态说明，包括认证失败原因等 */
   Note: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -584,7 +584,7 @@ declare interface CreateCRWorkResponse {
   WorkId: number;
   /** 存证ID，忽略该字段 */
   EvidenceId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -612,7 +612,7 @@ declare interface DescribeBPCompanyInfoResponse {
   BrandDatas: BrandData[];
   /** 企业ID */
   CompanyId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -632,7 +632,7 @@ declare interface DescribeBPFakeURLsResponse {
   TotalCount: number;
   /** 导出量 */
   ExportURL: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -648,7 +648,7 @@ declare interface DescribeBPProtectURLsResponse {
   ProtectURLInfos: ProtectURLInfo[];
   /** 总量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -666,7 +666,7 @@ declare interface DescribeBPReportFakeURLsResponse {
   ReportFakeURLInfos: ReportFakeURLInfo[];
   /** 总量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -690,7 +690,7 @@ declare interface DescribeCRMonitorDetailResponse {
   MonitorStatus: number;
   /** 导出地址 */
   ExportURL: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -710,7 +710,7 @@ declare interface DescribeCRMonitorsResponse {
   TotalCount: number;
   /** 导出地址 */
   ExportURL: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -752,7 +752,7 @@ declare interface DescribeCRObtainDetailResponse {
   ObtainName: string;
   /** 取证公证信息 */
   DepositPdfCert: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -806,7 +806,7 @@ declare interface DescribeCRWorkInfoResponse {
   EvidenceStartTime: string;
   /** 存证证书截止日期 */
   EvidenceEndTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -824,7 +824,7 @@ declare interface ModifyBPOfflineAttachmentRequest {
 }
 
 declare interface ModifyBPOfflineAttachmentResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -836,7 +836,7 @@ declare interface ModifyCRBlockStatusRequest {
 }
 
 declare interface ModifyCRBlockStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -850,7 +850,7 @@ declare interface ModifyCRMonitorRequest {
 }
 
 declare interface ModifyCRMonitorResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -866,7 +866,7 @@ declare interface ModifyCRObtainStatusRequest {
 }
 
 declare interface ModifyCRObtainStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -878,7 +878,7 @@ declare interface ModifyCRRightStatusRequest {
 }
 
 declare interface ModifyCRRightStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -900,7 +900,7 @@ declare interface ModifyCRWhiteListRequest {
 }
 
 declare interface ModifyCRWhiteListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -920,70 +920,70 @@ declare interface UpdateCRWorkResponse {
   WorkId: number;
   /** 存证ID */
   EvidenceId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Bma 品牌经营管家} */
 declare interface Bma {
   (): Versions;
-  /** {@link CreateBPFakeURL 添加仿冒链接（举报）}({@link CreateBPFakeURLRequest 请求参数}): {@link CreateBPFakeURLResponse 返回参数} */
+  /** 添加仿冒链接（举报） {@link CreateBPFakeURLRequest} {@link CreateBPFakeURLResponse} */
   CreateBPFakeURL(data?: CreateBPFakeURLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPFakeURLResponse>;
-  /** {@link CreateBPFalseTicket 添加误报工单}({@link CreateBPFalseTicketRequest 请求参数}): {@link CreateBPFalseTicketResponse 返回参数} */
+  /** 添加误报工单 {@link CreateBPFalseTicketRequest} {@link CreateBPFalseTicketResponse} */
   CreateBPFalseTicket(data?: CreateBPFalseTicketRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPFalseTicketResponse>;
-  /** {@link CreateBPOfflineAttachment 添加下线材料}({@link CreateBPOfflineAttachmentRequest 请求参数}): {@link CreateBPOfflineAttachmentResponse 返回参数} */
+  /** 添加下线材料 {@link CreateBPOfflineAttachmentRequest} {@link CreateBPOfflineAttachmentResponse} */
   CreateBPOfflineAttachment(data?: CreateBPOfflineAttachmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPOfflineAttachmentResponse>;
-  /** {@link CreateBPOfflineTicket 添加下线工单}({@link CreateBPOfflineTicketRequest 请求参数}): {@link CreateBPOfflineTicketResponse 返回参数} */
+  /** 添加下线工单 {@link CreateBPOfflineTicketRequest} {@link CreateBPOfflineTicketResponse} */
   CreateBPOfflineTicket(data?: CreateBPOfflineTicketRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPOfflineTicketResponse>;
-  /** {@link CreateBPProtectURLs 添加保护网站}({@link CreateBPProtectURLsRequest 请求参数}): {@link CreateBPProtectURLsResponse 返回参数} */
+  /** 添加保护网站 {@link CreateBPProtectURLsRequest} {@link CreateBPProtectURLsResponse} */
   CreateBPProtectURLs(data?: CreateBPProtectURLsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPProtectURLsResponse>;
-  /** {@link CreateCRBlock 新建协查处置}({@link CreateCRBlockRequest 请求参数}): {@link CreateCRBlockResponse 返回参数} */
+  /** 新建协查处置 {@link CreateCRBlockRequest} {@link CreateCRBlockResponse} */
   CreateCRBlock(data: CreateCRBlockRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRBlockResponse>;
-  /** {@link CreateCRCompanyVerify 企业认证}({@link CreateCRCompanyVerifyRequest 请求参数}): {@link CreateCRCompanyVerifyResponse 返回参数} */
+  /** 企业认证 {@link CreateCRCompanyVerifyRequest} {@link CreateCRCompanyVerifyResponse} */
   CreateCRCompanyVerify(data: CreateCRCompanyVerifyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRCompanyVerifyResponse>;
-  /** {@link CreateCRDesktopCode 新建过程取证码}({@link CreateCRDesktopCodeRequest 请求参数}): {@link CreateCRDesktopCodeResponse 返回参数} */
+  /** 新建过程取证码 {@link CreateCRDesktopCodeRequest} {@link CreateCRDesktopCodeResponse} */
   CreateCRDesktopCode(data: CreateCRDesktopCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRDesktopCodeResponse>;
-  /** {@link CreateCRObtain 新建取证}({@link CreateCRObtainRequest 请求参数}): {@link CreateCRObtainResponse 返回参数} */
+  /** 新建取证 {@link CreateCRObtainRequest} {@link CreateCRObtainResponse} */
   CreateCRObtain(data: CreateCRObtainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRObtainResponse>;
-  /** {@link CreateCRRight 新建发函}({@link CreateCRRightRequest 请求参数}): {@link CreateCRRightResponse 返回参数} */
+  /** 新建发函 {@link CreateCRRightRequest} {@link CreateCRRightResponse} */
   CreateCRRight(data: CreateCRRightRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRRightResponse>;
-  /** {@link CreateCRRightFile 权属文件添加}({@link CreateCRRightFileRequest 请求参数}): {@link CreateCRRightFileResponse 返回参数} */
+  /** 权属文件添加 {@link CreateCRRightFileRequest} {@link CreateCRRightFileResponse} */
   CreateCRRightFile(data: CreateCRRightFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRRightFileResponse>;
-  /** {@link CreateCRTort 举报侵权链接}({@link CreateCRTortRequest 请求参数}): {@link CreateCRTortResponse 返回参数} */
+  /** 举报侵权链接 {@link CreateCRTortRequest} {@link CreateCRTortResponse} */
   CreateCRTort(data: CreateCRTortRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRTortResponse>;
-  /** {@link CreateCRUserVerify 个人认证}({@link CreateCRUserVerifyRequest 请求参数}): {@link CreateCRUserVerifyResponse 返回参数} */
+  /** 个人认证 {@link CreateCRUserVerifyRequest} {@link CreateCRUserVerifyResponse} */
   CreateCRUserVerify(data: CreateCRUserVerifyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRUserVerifyResponse>;
-  /** {@link CreateCRWork 新建作品}({@link CreateCRWorkRequest 请求参数}): {@link CreateCRWorkResponse 返回参数} */
+  /** 新建作品 {@link CreateCRWorkRequest} {@link CreateCRWorkResponse} */
   CreateCRWork(data: CreateCRWorkRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCRWorkResponse>;
-  /** {@link DescribeBPCompanyInfo 查询企业信息}({@link DescribeBPCompanyInfoRequest 请求参数}): {@link DescribeBPCompanyInfoResponse 返回参数} */
+  /** 查询企业信息 {@link DescribeBPCompanyInfoRequest} {@link DescribeBPCompanyInfoResponse} */
   DescribeBPCompanyInfo(data?: DescribeBPCompanyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPCompanyInfoResponse>;
-  /** {@link DescribeBPFakeURLs 查询仿冒链接}({@link DescribeBPFakeURLsRequest 请求参数}): {@link DescribeBPFakeURLsResponse 返回参数} */
+  /** 查询仿冒链接 {@link DescribeBPFakeURLsRequest} {@link DescribeBPFakeURLsResponse} */
   DescribeBPFakeURLs(data?: DescribeBPFakeURLsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPFakeURLsResponse>;
-  /** {@link DescribeBPProtectURLs 查询保护网站}({@link DescribeBPProtectURLsRequest 请求参数}): {@link DescribeBPProtectURLsResponse 返回参数} */
+  /** 查询保护网站 {@link DescribeBPProtectURLsRequest} {@link DescribeBPProtectURLsResponse} */
   DescribeBPProtectURLs(data?: DescribeBPProtectURLsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPProtectURLsResponse>;
-  /** {@link DescribeBPReportFakeURLs 查询举报列表}({@link DescribeBPReportFakeURLsRequest 请求参数}): {@link DescribeBPReportFakeURLsResponse 返回参数} */
+  /** 查询举报列表 {@link DescribeBPReportFakeURLsRequest} {@link DescribeBPReportFakeURLsResponse} */
   DescribeBPReportFakeURLs(data?: DescribeBPReportFakeURLsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPReportFakeURLsResponse>;
-  /** {@link DescribeCRMonitorDetail 查询作品监测详情}({@link DescribeCRMonitorDetailRequest 请求参数}): {@link DescribeCRMonitorDetailResponse 返回参数} */
+  /** 查询作品监测详情 {@link DescribeCRMonitorDetailRequest} {@link DescribeCRMonitorDetailResponse} */
   DescribeCRMonitorDetail(data: DescribeCRMonitorDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCRMonitorDetailResponse>;
-  /** {@link DescribeCRMonitors 查询监测列表}({@link DescribeCRMonitorsRequest 请求参数}): {@link DescribeCRMonitorsResponse 返回参数} */
+  /** 查询监测列表 {@link DescribeCRMonitorsRequest} {@link DescribeCRMonitorsResponse} */
   DescribeCRMonitors(data?: DescribeCRMonitorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCRMonitorsResponse>;
-  /** {@link DescribeCRObtainDetail 查询取证详情}({@link DescribeCRObtainDetailRequest 请求参数}): {@link DescribeCRObtainDetailResponse 返回参数} */
+  /** 查询取证详情 {@link DescribeCRObtainDetailRequest} {@link DescribeCRObtainDetailResponse} */
   DescribeCRObtainDetail(data: DescribeCRObtainDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCRObtainDetailResponse>;
-  /** {@link DescribeCRWorkInfo 查询作品基本信息}({@link DescribeCRWorkInfoRequest 请求参数}): {@link DescribeCRWorkInfoResponse 返回参数} */
+  /** 查询作品基本信息 {@link DescribeCRWorkInfoRequest} {@link DescribeCRWorkInfoResponse} */
   DescribeCRWorkInfo(data: DescribeCRWorkInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCRWorkInfoResponse>;
-  /** {@link ModifyBPOfflineAttachment 修改下线材料}({@link ModifyBPOfflineAttachmentRequest 请求参数}): {@link ModifyBPOfflineAttachmentResponse 返回参数} */
+  /** 修改下线材料 {@link ModifyBPOfflineAttachmentRequest} {@link ModifyBPOfflineAttachmentResponse} */
   ModifyBPOfflineAttachment(data?: ModifyBPOfflineAttachmentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBPOfflineAttachmentResponse>;
-  /** {@link ModifyCRBlockStatus 协查处置申请}({@link ModifyCRBlockStatusRequest 请求参数}): {@link ModifyCRBlockStatusResponse 返回参数} */
+  /** 协查处置申请 {@link ModifyCRBlockStatusRequest} {@link ModifyCRBlockStatusResponse} */
   ModifyCRBlockStatus(data: ModifyCRBlockStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCRBlockStatusResponse>;
-  /** {@link ModifyCRMonitor 开启或关闭监测}({@link ModifyCRMonitorRequest 请求参数}): {@link ModifyCRMonitorResponse 返回参数} */
+  /** 开启或关闭监测 {@link ModifyCRMonitorRequest} {@link ModifyCRMonitorResponse} */
   ModifyCRMonitor(data: ModifyCRMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCRMonitorResponse>;
-  /** {@link ModifyCRObtainStatus 取证申请}({@link ModifyCRObtainStatusRequest 请求参数}): {@link ModifyCRObtainStatusResponse 返回参数} */
+  /** 取证申请 {@link ModifyCRObtainStatusRequest} {@link ModifyCRObtainStatusResponse} */
   ModifyCRObtainStatus(data: ModifyCRObtainStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCRObtainStatusResponse>;
-  /** {@link ModifyCRRightStatus 发函申请}({@link ModifyCRRightStatusRequest 请求参数}): {@link ModifyCRRightStatusResponse 返回参数} */
+  /** 发函申请 {@link ModifyCRRightStatusRequest} {@link ModifyCRRightStatusResponse} */
   ModifyCRRightStatus(data: ModifyCRRightStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCRRightStatusResponse>;
-  /** {@link ModifyCRWhiteList 修改白名单列表}({@link ModifyCRWhiteListRequest 请求参数}): {@link ModifyCRWhiteListResponse 返回参数} */
+  /** 修改白名单列表 {@link ModifyCRWhiteListRequest} {@link ModifyCRWhiteListResponse} */
   ModifyCRWhiteList(data?: ModifyCRWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCRWhiteListResponse>;
-  /** {@link UpdateCRWork 更新作品}({@link UpdateCRWorkRequest 请求参数}): {@link UpdateCRWorkResponse 返回参数} */
+  /** 更新作品 {@link UpdateCRWorkRequest} {@link UpdateCRWorkResponse} */
   UpdateCRWork(data: UpdateCRWorkRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCRWorkResponse>;
 }
 

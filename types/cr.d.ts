@@ -194,7 +194,7 @@ declare interface ApplyBlackListDataRequest {
 }
 
 declare interface ApplyBlackListDataResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -210,7 +210,7 @@ declare interface ApplyBlackListRequest {
 }
 
 declare interface ApplyBlackListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -234,7 +234,7 @@ declare interface ApplyCreditAuditRequest {
 declare interface ApplyCreditAuditResponse {
   /** 请求日期 */
   RequestDate?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -256,7 +256,7 @@ declare interface ChangeBotCallStatusRequest {
 }
 
 declare interface ChangeBotCallStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -274,7 +274,7 @@ declare interface ChangeBotTaskStatusRequest {
 }
 
 declare interface ChangeBotTaskStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -320,7 +320,7 @@ declare interface CreateBotTaskRequest {
 declare interface CreateBotTaskResponse {
   /** 机器人任务Id */
   BotId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -338,7 +338,7 @@ declare interface DescribeBotFlowResponse {
   SmsSignList?: SmsSign[] | null;
   /** 短信模板列表 */
   SmsTemplateList?: SmsTemplate[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -370,7 +370,7 @@ declare interface DescribeCreditResultResponse {
   AnswerDuration?: number;
   /** JSON格式的扩展信息字段，ResultCode为NON时才有。 */
   ContextValue?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -390,7 +390,7 @@ declare interface DescribeFileModelRequest {
 declare interface DescribeFileModelResponse {
   /** 模板下载链接 */
   CosUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -422,7 +422,7 @@ declare interface DescribeRecordsResponse {
   RecordList?: SingleRecord[] | null;
   /** 录音总量。 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -444,7 +444,7 @@ declare interface DescribeTaskStatusResponse {
   TaskType?: string;
   /** 过滤文件下载链接，有过滤数据时才存在。 */
   TaskFileUrl?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -462,7 +462,7 @@ declare interface DownloadBotRecordResponse {
   RecordCosUrl?: string;
   /** 文本地址。请求后30分钟内有效 */
   TextCosUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -480,7 +480,7 @@ declare interface DownloadDialogueTextRequest {
 declare interface DownloadDialogueTextResponse {
   /** 对话文本下载地址 */
   TextReportUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -498,7 +498,7 @@ declare interface DownloadRecordListRequest {
 declare interface DownloadRecordListResponse {
   /** 录音列表下载地址 */
   RecordListUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -526,7 +526,7 @@ declare interface DownloadReportResponse {
   CallbackResultReportUrl?: string | null;
   /** 回访明细下载地址 */
   CallbackDetailReportUrl?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -546,7 +546,7 @@ declare interface ExportBotDataRequest {
 declare interface ExportBotDataResponse {
   /** 导出文件列表 */
   Data?: BotFileData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -572,7 +572,7 @@ declare interface QueryBlackListDataResponse {
   TotalCount: number;
   /** 黑名单列表 */
   Data: BlackListData[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -586,7 +586,7 @@ declare interface QueryBotListRequest {
 declare interface QueryBotListResponse {
   /** 任务列表。 */
   BotList?: BotInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -608,7 +608,7 @@ declare interface QueryCallListRequest {
 declare interface QueryCallListResponse {
   /** 任务作业状态 */
   CallList: CallInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -632,7 +632,7 @@ declare interface QueryInstantDataResponse {
   TotalCount?: number | null;
   /** 返回内容 */
   Data?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -648,7 +648,7 @@ declare interface QueryProductsRequest {
 declare interface QueryProductsResponse {
   /** 产品信息。 */
   ProductList?: ProductQueryInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -678,7 +678,7 @@ declare interface QueryRecordListResponse {
   RecordList?: RecordInfo[];
   /** 总数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -716,7 +716,7 @@ declare interface UpdateBotTaskRequest {
 }
 
 declare interface UpdateBotTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -734,7 +734,7 @@ declare interface UploadBotDataRequest {
 }
 
 declare interface UploadBotDataResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -756,7 +756,7 @@ declare interface UploadBotFileRequest {
 }
 
 declare interface UploadBotFileResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -780,7 +780,7 @@ declare interface UploadDataFileRequest {
 declare interface UploadDataFileResponse {
   /** 数据ID */
   DataResId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -800,7 +800,7 @@ declare interface UploadDataJsonRequest {
 declare interface UploadDataJsonResponse {
   /** 响应报文信息 */
   Data?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -820,68 +820,68 @@ declare interface UploadFileRequest {
 declare interface UploadFileResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cr 金融联络机器人} */
 declare interface Cr {
   (): Versions;
-  /** {@link ApplyBlackList 提交黑名单申请}({@link ApplyBlackListRequest 请求参数}): {@link ApplyBlackListResponse 返回参数} */
+  /** 提交黑名单申请 {@link ApplyBlackListRequest} {@link ApplyBlackListResponse} */
   ApplyBlackList(data: ApplyBlackListRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyBlackListResponse>;
-  /** {@link ApplyBlackListData 提交机器人黑名单申请}({@link ApplyBlackListDataRequest 请求参数}): {@link ApplyBlackListDataResponse 返回参数} */
+  /** 提交机器人黑名单申请 {@link ApplyBlackListDataRequest} {@link ApplyBlackListDataResponse} */
   ApplyBlackListData(data: ApplyBlackListDataRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyBlackListDataResponse>;
-  /** {@link ApplyCreditAudit 提交信审申请}({@link ApplyCreditAuditRequest 请求参数}): {@link ApplyCreditAuditResponse 返回参数} */
+  /** 提交信审申请 {@link ApplyCreditAuditRequest} {@link ApplyCreditAuditResponse} */
   ApplyCreditAudit(data: ApplyCreditAuditRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyCreditAuditResponse>;
-  /** {@link ChangeBotCallStatus 更新机器人任务作业状态}({@link ChangeBotCallStatusRequest 请求参数}): {@link ChangeBotCallStatusResponse 返回参数} */
+  /** 更新机器人任务作业状态 {@link ChangeBotCallStatusRequest} {@link ChangeBotCallStatusResponse} */
   ChangeBotCallStatus(data: ChangeBotCallStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeBotCallStatusResponse>;
-  /** {@link ChangeBotTaskStatus 更新机器人任务状态}({@link ChangeBotTaskStatusRequest 请求参数}): {@link ChangeBotTaskStatusResponse 返回参数} */
+  /** 更新机器人任务状态 {@link ChangeBotTaskStatusRequest} {@link ChangeBotTaskStatusResponse} */
   ChangeBotTaskStatus(data: ChangeBotTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeBotTaskStatusResponse>;
-  /** {@link CreateBotTask 创建机器人任务}({@link CreateBotTaskRequest 请求参数}): {@link CreateBotTaskResponse 返回参数} */
+  /** 创建机器人任务 {@link CreateBotTaskRequest} {@link CreateBotTaskResponse} */
   CreateBotTask(data: CreateBotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBotTaskResponse>;
-  /** {@link DescribeBotFlow 查询机器人对话流}({@link DescribeBotFlowRequest 请求参数}): {@link DescribeBotFlowResponse 返回参数} */
+  /** 查询机器人对话流 {@link DescribeBotFlowRequest} {@link DescribeBotFlowResponse} */
   DescribeBotFlow(data: DescribeBotFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotFlowResponse>;
-  /** {@link DescribeCreditResult 获取信审结果}({@link DescribeCreditResultRequest 请求参数}): {@link DescribeCreditResultResponse 返回参数} */
+  /** 获取信审结果 {@link DescribeCreditResultRequest} {@link DescribeCreditResultResponse} */
   DescribeCreditResult(data: DescribeCreditResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCreditResultResponse>;
-  /** {@link DescribeFileModel 查询机器人文件模板}({@link DescribeFileModelRequest 请求参数}): {@link DescribeFileModelResponse 返回参数} */
+  /** 查询机器人文件模板 {@link DescribeFileModelRequest} {@link DescribeFileModelResponse} */
   DescribeFileModel(data: DescribeFileModelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileModelResponse>;
-  /** {@link DescribeRecords 录音查询（接口）}({@link DescribeRecordsRequest 请求参数}): {@link DescribeRecordsResponse 返回参数} */
+  /** 录音查询（接口） {@link DescribeRecordsRequest} {@link DescribeRecordsResponse} */
   DescribeRecords(data: DescribeRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordsResponse>;
-  /** {@link DescribeTaskStatus 获取任务状态}({@link DescribeTaskStatusRequest 请求参数}): {@link DescribeTaskStatusResponse 返回参数} */
+  /** 获取任务状态 {@link DescribeTaskStatusRequest} {@link DescribeTaskStatusResponse} */
   DescribeTaskStatus(data: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
-  /** {@link DownloadBotRecord 下载任务录音与文本}({@link DownloadBotRecordRequest 请求参数}): {@link DownloadBotRecordResponse 返回参数} */
+  /** 下载任务录音与文本 {@link DownloadBotRecordRequest} {@link DownloadBotRecordResponse} */
   DownloadBotRecord(data: DownloadBotRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadBotRecordResponse>;
-  /** {@link DownloadDialogueText 对话文本下载}({@link DownloadDialogueTextRequest 请求参数}): {@link DownloadDialogueTextResponse 返回参数} */
+  /** 对话文本下载 {@link DownloadDialogueTextRequest} {@link DownloadDialogueTextResponse} */
   DownloadDialogueText(data: DownloadDialogueTextRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadDialogueTextResponse>;
-  /** {@link DownloadRecordList 录音查询（文件）}({@link DownloadRecordListRequest 请求参数}): {@link DownloadRecordListResponse 返回参数} */
+  /** 录音查询（文件） {@link DownloadRecordListRequest} {@link DownloadRecordListResponse} */
   DownloadRecordList(data: DownloadRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadRecordListResponse>;
-  /** {@link DownloadReport 报告下载}({@link DownloadReportRequest 请求参数}): {@link DownloadReportResponse 返回参数} */
+  /** 报告下载 {@link DownloadReportRequest} {@link DownloadReportResponse} */
   DownloadReport(data: DownloadReportRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadReportResponse>;
-  /** {@link ExportBotData 导出机器人数据}({@link ExportBotDataRequest 请求参数}): {@link ExportBotDataResponse 返回参数} */
+  /** 导出机器人数据 {@link ExportBotDataRequest} {@link ExportBotDataResponse} */
   ExportBotData(data: ExportBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<ExportBotDataResponse>;
-  /** {@link QueryBlackListData 查看黑名单数据列表}({@link QueryBlackListDataRequest 请求参数}): {@link QueryBlackListDataResponse 返回参数} */
+  /** 查看黑名单数据列表 {@link QueryBlackListDataRequest} {@link QueryBlackListDataResponse} */
   QueryBlackListData(data: QueryBlackListDataRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBlackListDataResponse>;
-  /** {@link QueryBotList 查询机器人任务状态列表}({@link QueryBotListRequest 请求参数}): {@link QueryBotListResponse 返回参数} */
+  /** 查询机器人任务状态列表 {@link QueryBotListRequest} {@link QueryBotListResponse} */
   QueryBotList(data: QueryBotListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBotListResponse>;
-  /** {@link QueryCallList 机器人任务查询}({@link QueryCallListRequest 请求参数}): {@link QueryCallListResponse 返回参数} */
+  /** 机器人任务查询 {@link QueryCallListRequest} {@link QueryCallListResponse} */
   QueryCallList(data: QueryCallListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCallListResponse>;
-  /** {@link QueryInstantData 实时数据查询}({@link QueryInstantDataRequest 请求参数}): {@link QueryInstantDataResponse 返回参数} */
+  /** 实时数据查询 {@link QueryInstantDataRequest} {@link QueryInstantDataResponse} */
   QueryInstantData(data: QueryInstantDataRequest, config?: AxiosRequestConfig): AxiosPromise<QueryInstantDataResponse>;
-  /** {@link QueryProducts 查询产品列表}({@link QueryProductsRequest 请求参数}): {@link QueryProductsResponse 返回参数} */
+  /** 查询产品列表 {@link QueryProductsRequest} {@link QueryProductsResponse} */
   QueryProducts(data: QueryProductsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryProductsResponse>;
-  /** {@link QueryRecordList 查询录音列表}({@link QueryRecordListRequest 请求参数}): {@link QueryRecordListResponse 返回参数} */
+  /** 查询录音列表 {@link QueryRecordListRequest} {@link QueryRecordListResponse} */
   QueryRecordList(data: QueryRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRecordListResponse>;
-  /** {@link UpdateBotTask 更新机器人任务}({@link UpdateBotTaskRequest 请求参数}): {@link UpdateBotTaskResponse 返回参数} */
+  /** 更新机器人任务 {@link UpdateBotTaskRequest} {@link UpdateBotTaskResponse} */
   UpdateBotTask(data: UpdateBotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateBotTaskResponse>;
-  /** {@link UploadBotData 上传机器人任务数据}({@link UploadBotDataRequest 请求参数}): {@link UploadBotDataResponse 返回参数} */
+  /** 上传机器人任务数据 {@link UploadBotDataRequest} {@link UploadBotDataResponse} */
   UploadBotData(data: UploadBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<UploadBotDataResponse>;
-  /** {@link UploadBotFile 上传机器人文件}({@link UploadBotFileRequest 请求参数}): {@link UploadBotFileResponse 返回参数} */
+  /** 上传机器人文件 {@link UploadBotFileRequest} {@link UploadBotFileResponse} */
   UploadBotFile(data: UploadBotFileRequest, config?: AxiosRequestConfig): AxiosPromise<UploadBotFileResponse>;
-  /** {@link UploadDataFile 上传文件}({@link UploadDataFileRequest 请求参数}): {@link UploadDataFileResponse 返回参数} */
+  /** 上传文件 {@link UploadDataFileRequest} {@link UploadDataFileResponse} */
   UploadDataFile(data: UploadDataFileRequest, config?: AxiosRequestConfig): AxiosPromise<UploadDataFileResponse>;
-  /** {@link UploadDataJson 上传Json格式数据}({@link UploadDataJsonRequest 请求参数}): {@link UploadDataJsonResponse 返回参数} */
+  /** 上传Json格式数据 {@link UploadDataJsonRequest} {@link UploadDataJsonResponse} */
   UploadDataJson(data: UploadDataJsonRequest, config?: AxiosRequestConfig): AxiosPromise<UploadDataJsonResponse>;
-  /** {@link UploadFile 上传数据文件}({@link UploadFileRequest 请求参数}): {@link UploadFileResponse 返回参数} */
+  /** 上传数据文件 {@link UploadFileRequest} {@link UploadFileResponse} */
   UploadFile(data: UploadFileRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFileResponse>;
 }
 

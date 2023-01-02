@@ -116,7 +116,7 @@ declare interface GetTaskDetailRequest {
 declare interface GetTaskDetailResponse {
   /** 画像洞察任务TAG详细数据列表 */
   TaskDetailDataList: TaskDetailData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -138,7 +138,7 @@ declare interface GetTaskListRequest {
 declare interface GetTaskListResponse {
   /** 任务列表对象 */
   TaskListData: TaskListData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -152,7 +152,7 @@ declare interface PredictRatingRequest {
 declare interface PredictRatingResponse {
   /** 意向评级 */
   RatingData: RatingData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -172,7 +172,7 @@ declare interface QueryCallDetailsRequest {
 declare interface QueryCallDetailsResponse {
   /** 调用明细 */
   CallDetails: CallDetails;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -188,7 +188,7 @@ declare interface QueryCallStatRequest {
 declare interface QueryCallStatResponse {
   /** 调用量数组 */
   CallSet: CallStatItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -200,7 +200,7 @@ declare interface QueryGeneralStatRequest {
 declare interface QueryGeneralStatResponse {
   /** 调用量信息 */
   GeneralStat: GeneralStat;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -216,26 +216,26 @@ declare interface UploadIdRequest {
 declare interface UploadIdResponse {
   /** 画像洞察任务ID等信息 */
   TaskData: TaskData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Apcas 汽车精准获客服务} */
 declare interface Apcas {
   (): Versions;
-  /** {@link GetTaskDetail 查询画像洞察任务详情}({@link GetTaskDetailRequest 请求参数}): {@link GetTaskDetailResponse 返回参数} */
+  /** 查询画像洞察任务详情 {@link GetTaskDetailRequest} {@link GetTaskDetailResponse} */
   GetTaskDetail(data: GetTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskDetailResponse>;
-  /** {@link GetTaskList 查询画像洞察任务列表}({@link GetTaskListRequest 请求参数}): {@link GetTaskListResponse 返回参数} */
+  /** 查询画像洞察任务列表 {@link GetTaskListRequest} {@link GetTaskListResponse} */
   GetTaskList(data: GetTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskListResponse>;
-  /** {@link PredictRating 购车意向评级接口}({@link PredictRatingRequest 请求参数}): {@link PredictRatingResponse 返回参数} */
+  /** 购车意向评级接口 {@link PredictRatingRequest} {@link PredictRatingResponse} */
   PredictRating(data: PredictRatingRequest, config?: AxiosRequestConfig): AxiosPromise<PredictRatingResponse>;
-  /** {@link QueryCallDetails 查询调用明细}({@link QueryCallDetailsRequest 请求参数}): {@link QueryCallDetailsResponse 返回参数} */
+  /** 查询调用明细 {@link QueryCallDetailsRequest} {@link QueryCallDetailsResponse} */
   QueryCallDetails(data: QueryCallDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCallDetailsResponse>;
-  /** {@link QueryCallStat 获取调用量统计}({@link QueryCallStatRequest 请求参数}): {@link QueryCallStatResponse 返回参数} */
+  /** 获取调用量统计 {@link QueryCallStatRequest} {@link QueryCallStatResponse} */
   QueryCallStat(data: QueryCallStatRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCallStatResponse>;
-  /** {@link QueryGeneralStat 总统计数据}({@link QueryGeneralStatRequest 请求参数}): {@link QueryGeneralStatResponse 返回参数} */
+  /** 总统计数据 {@link QueryGeneralStatRequest} {@link QueryGeneralStatResponse} */
   QueryGeneralStat(data: QueryGeneralStatRequest, config?: AxiosRequestConfig): AxiosPromise<QueryGeneralStatResponse>;
-  /** {@link UploadId 上传群体画像的ID列表}({@link UploadIdRequest 请求参数}): {@link UploadIdResponse 返回参数} */
+  /** 上传群体画像的ID列表 {@link UploadIdRequest} {@link UploadIdResponse} */
   UploadId(data: UploadIdRequest, config?: AxiosRequestConfig): AxiosPromise<UploadIdResponse>;
 }
 

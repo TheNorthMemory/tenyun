@@ -210,7 +210,7 @@ declare interface CloneClusterToPointInTimeRequest {
 declare interface CloneClusterToPointInTimeResponse {
   /** 订单号 */
   DealNameSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -230,7 +230,7 @@ declare interface CreateClusterInstancesRequest {
 declare interface CreateClusterInstancesResponse {
   /** 订单号 */
   DealNameSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -276,7 +276,7 @@ declare interface CreateClusterRequest {
 declare interface CreateClusterResponse {
   /** 订单号 */
   DealNameSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -288,7 +288,7 @@ declare interface DeleteClusterInstancesRequest {
 }
 
 declare interface DeleteClusterInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -298,7 +298,7 @@ declare interface DeleteClusterRequest {
 }
 
 declare interface DeleteClusterResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -312,7 +312,7 @@ declare interface DescribeAccountsResponse {
   TotalCount: number;
   /** 账号信息列表 */
   AccountSet: Account[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -330,7 +330,7 @@ declare interface DescribeClusterBackupsResponse {
   TotalCount: number;
   /** 备份列表信息 */
   BackupSet: Backup[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -344,7 +344,7 @@ declare interface DescribeClusterEndpointsResponse {
   TotalCount: number;
   /** 接入点列表 */
   EndpointSet: Endpoint[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -368,7 +368,7 @@ declare interface DescribeClusterInstancesResponse {
   TotalCount: number;
   /** 实例列表信息 */
   InstanceSet: Instance[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -382,7 +382,7 @@ declare interface DescribeClusterRecoveryTimeRangeRequest {
 declare interface DescribeClusterRecoveryTimeRangeResponse {
   /** 可回档时间范围列表 */
   AvailableRecoveryTimeRangeSet: AvailableRecoveryTimeRange[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -404,7 +404,7 @@ declare interface DescribeClustersResponse {
   TotalCount: number;
   /** 集群列表信息 */
   ClusterSet: Cluster[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -416,7 +416,7 @@ declare interface DescribeResourcesByDealNameRequest {
 declare interface DescribeResourcesByDealNameResponse {
   /** 资源ID信息列表 */
   ResourceIdInfoSet: ResourceIdInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -428,7 +428,7 @@ declare interface IsolateClusterInstancesRequest {
 }
 
 declare interface IsolateClusterInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -438,7 +438,7 @@ declare interface IsolateClusterRequest {
 }
 
 declare interface IsolateClusterResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -452,7 +452,7 @@ declare interface ModifyAccountDescriptionRequest {
 }
 
 declare interface ModifyAccountDescriptionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -466,7 +466,7 @@ declare interface ModifyClusterEndpointWanStatusRequest {
 }
 
 declare interface ModifyClusterEndpointWanStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -484,7 +484,7 @@ declare interface ModifyClusterInstancesSpecRequest {
 }
 
 declare interface ModifyClusterInstancesSpecResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -496,7 +496,7 @@ declare interface ModifyClusterNameRequest {
 }
 
 declare interface ModifyClusterNameResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -508,7 +508,7 @@ declare interface ModifyClustersAutoRenewFlagRequest {
 }
 
 declare interface ModifyClustersAutoRenewFlagResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -522,7 +522,7 @@ declare interface RecoverClusterInstancesRequest {
 }
 
 declare interface RecoverClusterInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -534,7 +534,7 @@ declare interface RecoverClusterRequest {
 }
 
 declare interface RecoverClusterResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -546,7 +546,7 @@ declare interface RenewClusterRequest {
 }
 
 declare interface RenewClusterResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -560,7 +560,7 @@ declare interface ResetAccountPasswordRequest {
 }
 
 declare interface ResetAccountPasswordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -572,7 +572,7 @@ declare interface RestartClusterInstancesRequest {
 }
 
 declare interface RestartClusterInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -588,62 +588,62 @@ declare interface TransformClusterPayModeRequest {
 }
 
 declare interface TransformClusterPayModeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tdcpg TDSQL-C PostgreSQL 版} */
 declare interface Tdcpg {
   (): Versions;
-  /** {@link CloneClusterToPointInTime 克隆集群}({@link CloneClusterToPointInTimeRequest 请求参数}): {@link CloneClusterToPointInTimeResponse 返回参数} */
+  /** 克隆集群 {@link CloneClusterToPointInTimeRequest} {@link CloneClusterToPointInTimeResponse} */
   CloneClusterToPointInTime(data: CloneClusterToPointInTimeRequest, config?: AxiosRequestConfig): AxiosPromise<CloneClusterToPointInTimeResponse>;
-  /** {@link CreateCluster 创建集群}({@link CreateClusterRequest 请求参数}): {@link CreateClusterResponse 返回参数} */
+  /** 创建集群 {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
-  /** {@link CreateClusterInstances 创建实例}({@link CreateClusterInstancesRequest 请求参数}): {@link CreateClusterInstancesResponse 返回参数} */
+  /** 创建实例 {@link CreateClusterInstancesRequest} {@link CreateClusterInstancesResponse} */
   CreateClusterInstances(data: CreateClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterInstancesResponse>;
-  /** {@link DeleteCluster 删除集群}({@link DeleteClusterRequest 请求参数}): {@link DeleteClusterResponse 返回参数} */
+  /** 删除集群 {@link DeleteClusterRequest} {@link DeleteClusterResponse} */
   DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
-  /** {@link DeleteClusterInstances 删除实例}({@link DeleteClusterInstancesRequest 请求参数}): {@link DeleteClusterInstancesResponse 返回参数} */
+  /** 删除实例 {@link DeleteClusterInstancesRequest} {@link DeleteClusterInstancesResponse} */
   DeleteClusterInstances(data: DeleteClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterInstancesResponse>;
-  /** {@link DescribeAccounts 查询数据库账号信息}({@link DescribeAccountsRequest 请求参数}): {@link DescribeAccountsResponse 返回参数} */
+  /** 查询数据库账号信息 {@link DescribeAccountsRequest} {@link DescribeAccountsResponse} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
-  /** {@link DescribeClusterBackups 查询集群的备份集}({@link DescribeClusterBackupsRequest 请求参数}): {@link DescribeClusterBackupsResponse 返回参数} */
+  /** 查询集群的备份集 {@link DescribeClusterBackupsRequest} {@link DescribeClusterBackupsResponse} */
   DescribeClusterBackups(data: DescribeClusterBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterBackupsResponse>;
-  /** {@link DescribeClusterEndpoints 查询集群接入点}({@link DescribeClusterEndpointsRequest 请求参数}): {@link DescribeClusterEndpointsResponse 返回参数} */
+  /** 查询集群接入点 {@link DescribeClusterEndpointsRequest} {@link DescribeClusterEndpointsResponse} */
   DescribeClusterEndpoints(data: DescribeClusterEndpointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterEndpointsResponse>;
-  /** {@link DescribeClusterInstances 查询实例}({@link DescribeClusterInstancesRequest 请求参数}): {@link DescribeClusterInstancesResponse 返回参数} */
+  /** 查询实例 {@link DescribeClusterInstancesRequest} {@link DescribeClusterInstancesResponse} */
   DescribeClusterInstances(data: DescribeClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstancesResponse>;
-  /** {@link DescribeClusterRecoveryTimeRange 查询集群可回档时间范围}({@link DescribeClusterRecoveryTimeRangeRequest 请求参数}): {@link DescribeClusterRecoveryTimeRangeResponse 返回参数} */
+  /** 查询集群可回档时间范围 {@link DescribeClusterRecoveryTimeRangeRequest} {@link DescribeClusterRecoveryTimeRangeResponse} */
   DescribeClusterRecoveryTimeRange(data: DescribeClusterRecoveryTimeRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterRecoveryTimeRangeResponse>;
-  /** {@link DescribeClusters 查询集群}({@link DescribeClustersRequest 请求参数}): {@link DescribeClustersResponse 返回参数} */
+  /** 查询集群 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
-  /** {@link DescribeResourcesByDealName 根据订单号获取资源信息}({@link DescribeResourcesByDealNameRequest 请求参数}): {@link DescribeResourcesByDealNameResponse 返回参数} */
+  /** 根据订单号获取资源信息 {@link DescribeResourcesByDealNameRequest} {@link DescribeResourcesByDealNameResponse} */
   DescribeResourcesByDealName(data: DescribeResourcesByDealNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesByDealNameResponse>;
-  /** {@link IsolateCluster 隔离集群}({@link IsolateClusterRequest 请求参数}): {@link IsolateClusterResponse 返回参数} */
+  /** 隔离集群 {@link IsolateClusterRequest} {@link IsolateClusterResponse} */
   IsolateCluster(data: IsolateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateClusterResponse>;
-  /** {@link IsolateClusterInstances 隔离实例}({@link IsolateClusterInstancesRequest 请求参数}): {@link IsolateClusterInstancesResponse 返回参数} */
+  /** 隔离实例 {@link IsolateClusterInstancesRequest} {@link IsolateClusterInstancesResponse} */
   IsolateClusterInstances(data: IsolateClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateClusterInstancesResponse>;
-  /** {@link ModifyAccountDescription 修改数据库账号描述}({@link ModifyAccountDescriptionRequest 请求参数}): {@link ModifyAccountDescriptionResponse 返回参数} */
+  /** 修改数据库账号描述 {@link ModifyAccountDescriptionRequest} {@link ModifyAccountDescriptionResponse} */
   ModifyAccountDescription(data: ModifyAccountDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountDescriptionResponse>;
-  /** {@link ModifyClusterEndpointWanStatus 修改接入点外网状态}({@link ModifyClusterEndpointWanStatusRequest 请求参数}): {@link ModifyClusterEndpointWanStatusResponse 返回参数} */
+  /** 修改接入点外网状态 {@link ModifyClusterEndpointWanStatusRequest} {@link ModifyClusterEndpointWanStatusResponse} */
   ModifyClusterEndpointWanStatus(data: ModifyClusterEndpointWanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterEndpointWanStatusResponse>;
-  /** {@link ModifyClusterInstancesSpec 修改实例规格}({@link ModifyClusterInstancesSpecRequest 请求参数}): {@link ModifyClusterInstancesSpecResponse 返回参数} */
+  /** 修改实例规格 {@link ModifyClusterInstancesSpecRequest} {@link ModifyClusterInstancesSpecResponse} */
   ModifyClusterInstancesSpec(data: ModifyClusterInstancesSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterInstancesSpecResponse>;
-  /** {@link ModifyClusterName 修改集群名字}({@link ModifyClusterNameRequest 请求参数}): {@link ModifyClusterNameResponse 返回参数} */
+  /** 修改集群名字 {@link ModifyClusterNameRequest} {@link ModifyClusterNameResponse} */
   ModifyClusterName(data: ModifyClusterNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterNameResponse>;
-  /** {@link ModifyClustersAutoRenewFlag 修改集群自动续费}({@link ModifyClustersAutoRenewFlagRequest 请求参数}): {@link ModifyClustersAutoRenewFlagResponse 返回参数} */
+  /** 修改集群自动续费 {@link ModifyClustersAutoRenewFlagRequest} {@link ModifyClustersAutoRenewFlagResponse} */
   ModifyClustersAutoRenewFlag(data: ModifyClustersAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClustersAutoRenewFlagResponse>;
-  /** {@link RecoverCluster 恢复集群}({@link RecoverClusterRequest 请求参数}): {@link RecoverClusterResponse 返回参数} */
+  /** 恢复集群 {@link RecoverClusterRequest} {@link RecoverClusterResponse} */
   RecoverCluster(data: RecoverClusterRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverClusterResponse>;
-  /** {@link RecoverClusterInstances 恢复实例}({@link RecoverClusterInstancesRequest 请求参数}): {@link RecoverClusterInstancesResponse 返回参数} */
+  /** 恢复实例 {@link RecoverClusterInstancesRequest} {@link RecoverClusterInstancesResponse} */
   RecoverClusterInstances(data: RecoverClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverClusterInstancesResponse>;
-  /** {@link RenewCluster 续费集群}({@link RenewClusterRequest 请求参数}): {@link RenewClusterResponse 返回参数} */
+  /** 续费集群 {@link RenewClusterRequest} {@link RenewClusterResponse} */
   RenewCluster(data: RenewClusterRequest, config?: AxiosRequestConfig): AxiosPromise<RenewClusterResponse>;
-  /** {@link ResetAccountPassword 重置数据库账号密码}({@link ResetAccountPasswordRequest 请求参数}): {@link ResetAccountPasswordResponse 返回参数} */
+  /** 重置数据库账号密码 {@link ResetAccountPasswordRequest} {@link ResetAccountPasswordResponse} */
   ResetAccountPassword(data: ResetAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAccountPasswordResponse>;
-  /** {@link RestartClusterInstances 重启实例}({@link RestartClusterInstancesRequest 请求参数}): {@link RestartClusterInstancesResponse 返回参数} */
+  /** 重启实例 {@link RestartClusterInstancesRequest} {@link RestartClusterInstancesResponse} */
   RestartClusterInstances(data: RestartClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RestartClusterInstancesResponse>;
-  /** {@link TransformClusterPayMode 转换集群付费模式}({@link TransformClusterPayModeRequest 请求参数}): {@link TransformClusterPayModeResponse 返回参数} */
+  /** 转换集群付费模式 {@link TransformClusterPayModeRequest} {@link TransformClusterPayModeResponse} */
   TransformClusterPayMode(data: TransformClusterPayModeRequest, config?: AxiosRequestConfig): AxiosPromise<TransformClusterPayModeResponse>;
 }
 

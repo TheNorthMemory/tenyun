@@ -78,14 +78,14 @@ declare interface QueryRegisterProtectionResponse {
   Level?: number;
   /** 风险类型。 */
   RiskType?: number[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Rp 注册保护} */
 declare interface Rp {
   (): Versions;
-  /** {@link QueryRegisterProtection 注册保护}({@link QueryRegisterProtectionRequest 请求参数}): {@link QueryRegisterProtectionResponse 返回参数} */
+  /** 注册保护 {@link QueryRegisterProtectionRequest} {@link QueryRegisterProtectionResponse} */
   QueryRegisterProtection(data: QueryRegisterProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRegisterProtectionResponse>;
 }
 

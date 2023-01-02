@@ -192,7 +192,7 @@ declare interface FeedRecommendRequest {
 declare interface FeedRecommendResponse {
   /** 推荐返回的内容信息列表 */
   DataList: RecItemData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -204,7 +204,7 @@ declare interface ReportFeedBehaviorRequest {
 }
 
 declare interface ReportFeedBehaviorResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -216,7 +216,7 @@ declare interface ReportFeedItemRequest {
 }
 
 declare interface ReportFeedItemResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -228,7 +228,7 @@ declare interface ReportFeedUserRequest {
 }
 
 declare interface ReportFeedUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -491,7 +491,7 @@ declare namespace V20220324 {
     RecTraceId: string;
     /** 标识具体的物料信息 */
     DataList: RecItemData[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -503,7 +503,7 @@ declare namespace V20220324 {
   }
 
   interface ReportActionResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -515,7 +515,7 @@ declare namespace V20220324 {
   }
 
   interface ReportMaterialResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -527,7 +527,7 @@ declare namespace V20220324 {
   }
 
   interface ReportPortraitResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -535,21 +535,21 @@ declare namespace V20220324 {
 /** {@link Irp 智能推荐平台} */
 declare interface Irp {
   (): Versions;
-  /** {@link FeedRecommend 获取信息流推荐结果}({@link FeedRecommendRequest 请求参数}): {@link FeedRecommendResponse 返回参数} */
+  /** 获取信息流推荐结果 {@link FeedRecommendRequest} {@link FeedRecommendResponse} */
   FeedRecommend(data: FeedRecommendRequest, config?: AxiosRequestConfig): AxiosPromise<FeedRecommendResponse>;
-  /** {@link ReportFeedBehavior 上报信息流行为数据}({@link ReportFeedBehaviorRequest 请求参数}): {@link ReportFeedBehaviorResponse 返回参数} */
+  /** 上报信息流行为数据 {@link ReportFeedBehaviorRequest} {@link ReportFeedBehaviorResponse} */
   ReportFeedBehavior(data: ReportFeedBehaviorRequest, config?: AxiosRequestConfig): AxiosPromise<ReportFeedBehaviorResponse>;
-  /** {@link ReportFeedItem 上报信息流内容信息}({@link ReportFeedItemRequest 请求参数}): {@link ReportFeedItemResponse 返回参数} */
+  /** 上报信息流内容信息 {@link ReportFeedItemRequest} {@link ReportFeedItemResponse} */
   ReportFeedItem(data: ReportFeedItemRequest, config?: AxiosRequestConfig): AxiosPromise<ReportFeedItemResponse>;
-  /** {@link ReportFeedUser 上报信息流用户信息}({@link ReportFeedUserRequest 请求参数}): {@link ReportFeedUserResponse 返回参数} */
+  /** 上报信息流用户信息 {@link ReportFeedUserRequest} {@link ReportFeedUserResponse} */
   ReportFeedUser(data: ReportFeedUserRequest, config?: AxiosRequestConfig): AxiosPromise<ReportFeedUserResponse>;
-  /** {@link V20220324.RecommendContent 获取推荐结果}({@link V20220324.RecommendContentRequest 请求参数}): {@link V20220324.RecommendContentResponse 返回参数} */
+  /** 获取推荐结果 {@link V20220324.RecommendContentRequest} {@link V20220324.RecommendContentResponse} */
   RecommendContent(data: V20220324.RecommendContentRequest, config: AxiosRequestConfig & V20220324.VersionHeader): AxiosPromise<V20220324.RecommendContentResponse>;
-  /** {@link V20220324.ReportAction 上报行为}({@link V20220324.ReportActionRequest 请求参数}): {@link V20220324.ReportActionResponse 返回参数} */
+  /** 上报行为 {@link V20220324.ReportActionRequest} {@link V20220324.ReportActionResponse} */
   ReportAction(data: V20220324.ReportActionRequest, config: AxiosRequestConfig & V20220324.VersionHeader): AxiosPromise<V20220324.ReportActionResponse>;
-  /** {@link V20220324.ReportMaterial 上报物料}({@link V20220324.ReportMaterialRequest 请求参数}): {@link V20220324.ReportMaterialResponse 返回参数} */
+  /** 上报物料 {@link V20220324.ReportMaterialRequest} {@link V20220324.ReportMaterialResponse} */
   ReportMaterial(data: V20220324.ReportMaterialRequest, config: AxiosRequestConfig & V20220324.VersionHeader): AxiosPromise<V20220324.ReportMaterialResponse>;
-  /** {@link V20220324.ReportPortrait 上报用户画像}({@link V20220324.ReportPortraitRequest 请求参数}): {@link V20220324.ReportPortraitResponse 返回参数} */
+  /** 上报用户画像 {@link V20220324.ReportPortraitRequest} {@link V20220324.ReportPortraitResponse} */
   ReportPortrait(data: V20220324.ReportPortraitRequest, config: AxiosRequestConfig & V20220324.VersionHeader): AxiosPromise<V20220324.ReportPortraitResponse>;
 }
 

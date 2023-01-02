@@ -134,7 +134,7 @@ declare interface AutoSummarizationRequest {
 declare interface AutoSummarizationResponse {
   /** 文本摘要结果 */
   Summary: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -152,7 +152,7 @@ declare interface ChatBotResponse {
   Reply: string;
   /** 对于当前输出回复的自信度 */
   Confidence: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -166,7 +166,7 @@ declare interface CreateDictRequest {
 declare interface CreateDictResponse {
   /** 创建的自定义词库ID。 */
   DictId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -178,7 +178,7 @@ declare interface CreateWordItemsRequest {
 }
 
 declare interface CreateWordItemsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -188,7 +188,7 @@ declare interface DeleteDictRequest {
 }
 
 declare interface DeleteDictResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -200,7 +200,7 @@ declare interface DeleteWordItemsRequest {
 }
 
 declare interface DeleteWordItemsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -212,7 +212,7 @@ declare interface DependencyParsingRequest {
 declare interface DependencyParsingResponse {
   /** 句法依存分析结果，其中句法依存关系的类型包括：主谓关系，eg: 我送她一束花 (我 <-- 送)动宾关系，eg: 我送她一束花 (送 --> 花)间宾关系，eg: 我送她一束花 (送 --> 她)前置宾语，eg: 他什么书都读 (书 <-- 读)兼语，eg: 他请我吃饭 (请 --> 我)定中关系，eg: 红苹果 (红 <-- 苹果)状中结构，eg: 非常美丽 (非常 <-- 美丽)动补结构，eg: 做完了作业 (做 --> 完)并列关系，eg: 大山和大海 (大山 --> 大海)介宾关系，eg: 在贸易区内 (在 --> 内)左附加关系，eg: 大山和大海 (和 <-- 大海)右附加关系，eg: 孩子们 (孩子 --> 们)独立结构，eg: 两个单句在结构上彼此独立标点符号，eg: 。核心关系，eg: 整个句子的核心 */
   DpTokens?: DpToken[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -226,7 +226,7 @@ declare interface DescribeDictRequest {
 declare interface DescribeDictResponse {
   /** 查询到的词库信息列表。 */
   Dicts?: DictInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -242,7 +242,7 @@ declare interface DescribeDictsResponse {
   TotalCount?: number;
   /** 自定义词库信息列表。 */
   Dicts?: DictInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -262,7 +262,7 @@ declare interface DescribeWordItemsResponse {
   TotalCount?: number;
   /** 词条信息列表。 */
   WordItems?: WordItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -280,7 +280,7 @@ declare interface GenerateCoupletResponse {
   Content: string[];
   /** 当对联随机生成时，展示随机生成原因。 */
   RandomCause: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -298,7 +298,7 @@ declare interface GeneratePoetryResponse {
   Title: string;
   /** 诗的内容。 */
   Content: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -312,7 +312,7 @@ declare interface KeywordsExtractionRequest {
 declare interface KeywordsExtractionResponse {
   /** 关键词提取结果 */
   Keywords: Keyword[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -330,7 +330,7 @@ declare interface LexicalAnalysisResponse {
   NerTokens?: NerToken[] | null;
   /** 分词&词性标注结果（词性表请参见附录） */
   PosTokens?: PosToken[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -344,7 +344,7 @@ declare interface SearchWordItemsRequest {
 declare interface SearchWordItemsResponse {
   /** 词条检索结果集合。 */
   Results: SearchResult[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -358,7 +358,7 @@ declare interface SentenceEmbeddingResponse {
   Vector?: number[];
   /** 句向量的维度 */
   Dimension?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -380,7 +380,7 @@ declare interface SentimentAnalysisResponse {
   Negative: number;
   /** 情感分类结果：1、positive，表示正面情感2、negative，表示负面情感3、neutral，表示中性、无情感 */
   Sentiment: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -394,7 +394,7 @@ declare interface SimilarWordsRequest {
 declare interface SimilarWordsResponse {
   /** 相似词数组 */
   SimilarWords?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -408,7 +408,7 @@ declare interface TextClassificationRequest {
 declare interface TextClassificationResponse {
   /** 文本分类结果（文本分类映射表请参见附录） */
   Classes: ClassificationResult[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -422,7 +422,7 @@ declare interface TextCorrectionProResponse {
   CCITokens: CCIToken[] | null;
   /** 纠错后的文本 */
   ResultText: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -436,7 +436,7 @@ declare interface TextCorrectionResponse {
   CCITokens: CCIToken[] | null;
   /** 纠错后的文本 */
   ResultText: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -450,7 +450,7 @@ declare interface TextSimilarityProRequest {
 declare interface TextSimilarityProResponse {
   /** 每个目标句子与源句子的相似度分值，按照分值降序排列 */
   Similarity: Similarity[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -464,7 +464,7 @@ declare interface TextSimilarityRequest {
 declare interface TextSimilarityResponse {
   /** 每个目标句子与源句子的相似度分值，按照分值降序排列 */
   Similarity: Similarity[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -478,7 +478,7 @@ declare interface UpdateDictRequest {
 }
 
 declare interface UpdateDictResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -492,7 +492,7 @@ declare interface WordEmbeddingResponse {
   Vector?: number[];
   /** 词向量的维度 */
   Dimension?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -506,64 +506,64 @@ declare interface WordSimilarityRequest {
 declare interface WordSimilarityResponse {
   /** 两个词语的相似度 */
   Similarity?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Nlp 自然语言处理} */
 declare interface Nlp {
   (): Versions;
-  /** {@link AutoSummarization 自动摘要}({@link AutoSummarizationRequest 请求参数}): {@link AutoSummarizationResponse 返回参数} */
+  /** 自动摘要 {@link AutoSummarizationRequest} {@link AutoSummarizationResponse} */
   AutoSummarization(data: AutoSummarizationRequest, config?: AxiosRequestConfig): AxiosPromise<AutoSummarizationResponse>;
-  /** {@link ChatBot 闲聊}({@link ChatBotRequest 请求参数}): {@link ChatBotResponse 返回参数} */
+  /** 闲聊 {@link ChatBotRequest} {@link ChatBotResponse} */
   ChatBot(data: ChatBotRequest, config?: AxiosRequestConfig): AxiosPromise<ChatBotResponse>;
-  /** {@link CreateDict 创建自定义词库}({@link CreateDictRequest 请求参数}): {@link CreateDictResponse 返回参数} */
+  /** 创建自定义词库 {@link CreateDictRequest} {@link CreateDictResponse} */
   CreateDict(data: CreateDictRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDictResponse>;
-  /** {@link CreateWordItems 新增自定义词库词条}({@link CreateWordItemsRequest 请求参数}): {@link CreateWordItemsResponse 返回参数} */
+  /** 新增自定义词库词条 {@link CreateWordItemsRequest} {@link CreateWordItemsResponse} */
   CreateWordItems(data: CreateWordItemsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWordItemsResponse>;
-  /** {@link DeleteDict 删除自定义词库}({@link DeleteDictRequest 请求参数}): {@link DeleteDictResponse 返回参数} */
+  /** 删除自定义词库 {@link DeleteDictRequest} {@link DeleteDictResponse} */
   DeleteDict(data: DeleteDictRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDictResponse>;
-  /** {@link DeleteWordItems 删除词条}({@link DeleteWordItemsRequest 请求参数}): {@link DeleteWordItemsResponse 返回参数} */
+  /** 删除词条 {@link DeleteWordItemsRequest} {@link DeleteWordItemsResponse} */
   DeleteWordItems(data: DeleteWordItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWordItemsResponse>;
-  /** {@link DependencyParsing 句法依存分析}({@link DependencyParsingRequest 请求参数}): {@link DependencyParsingResponse 返回参数} */
+  /** 句法依存分析 {@link DependencyParsingRequest} {@link DependencyParsingResponse} */
   DependencyParsing(data: DependencyParsingRequest, config?: AxiosRequestConfig): AxiosPromise<DependencyParsingResponse>;
-  /** {@link DescribeDict 查询词库信息}({@link DescribeDictRequest 请求参数}): {@link DescribeDictResponse 返回参数} */
+  /** 查询词库信息 {@link DescribeDictRequest} {@link DescribeDictResponse} */
   DescribeDict(data?: DescribeDictRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDictResponse>;
-  /** {@link DescribeDicts 查询词库列表}({@link DescribeDictsRequest 请求参数}): {@link DescribeDictsResponse 返回参数} */
+  /** 查询词库列表 {@link DescribeDictsRequest} {@link DescribeDictsResponse} */
   DescribeDicts(data?: DescribeDictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDictsResponse>;
-  /** {@link DescribeWordItems 查询指定词库的词条信息}({@link DescribeWordItemsRequest 请求参数}): {@link DescribeWordItemsResponse 返回参数} */
+  /** 查询指定词库的词条信息 {@link DescribeWordItemsRequest} {@link DescribeWordItemsResponse} */
   DescribeWordItems(data: DescribeWordItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWordItemsResponse>;
-  /** {@link GenerateCouplet 智能春联}({@link GenerateCoupletRequest 请求参数}): {@link GenerateCoupletResponse 返回参数} */
+  /** 智能春联 {@link GenerateCoupletRequest} {@link GenerateCoupletResponse} */
   GenerateCouplet(data: GenerateCoupletRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateCoupletResponse>;
-  /** {@link GeneratePoetry 智能写诗}({@link GeneratePoetryRequest 请求参数}): {@link GeneratePoetryResponse 返回参数} */
+  /** 智能写诗 {@link GeneratePoetryRequest} {@link GeneratePoetryResponse} */
   GeneratePoetry(data: GeneratePoetryRequest, config?: AxiosRequestConfig): AxiosPromise<GeneratePoetryResponse>;
-  /** {@link KeywordsExtraction 关键词提取}({@link KeywordsExtractionRequest 请求参数}): {@link KeywordsExtractionResponse 返回参数} */
+  /** 关键词提取 {@link KeywordsExtractionRequest} {@link KeywordsExtractionResponse} */
   KeywordsExtraction(data: KeywordsExtractionRequest, config?: AxiosRequestConfig): AxiosPromise<KeywordsExtractionResponse>;
-  /** {@link LexicalAnalysis 词法分析}({@link LexicalAnalysisRequest 请求参数}): {@link LexicalAnalysisResponse 返回参数} */
+  /** 词法分析 {@link LexicalAnalysisRequest} {@link LexicalAnalysisResponse} */
   LexicalAnalysis(data: LexicalAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<LexicalAnalysisResponse>;
-  /** {@link SearchWordItems 检索词条}({@link SearchWordItemsRequest 请求参数}): {@link SearchWordItemsResponse 返回参数} */
+  /** 检索词条 {@link SearchWordItemsRequest} {@link SearchWordItemsResponse} */
   SearchWordItems(data: SearchWordItemsRequest, config?: AxiosRequestConfig): AxiosPromise<SearchWordItemsResponse>;
-  /** {@link SentenceEmbedding 句向量}({@link SentenceEmbeddingRequest 请求参数}): {@link SentenceEmbeddingResponse 返回参数} */
+  /** 句向量 {@link SentenceEmbeddingRequest} {@link SentenceEmbeddingResponse} */
   SentenceEmbedding(data: SentenceEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<SentenceEmbeddingResponse>;
-  /** {@link SentimentAnalysis 情感分析}({@link SentimentAnalysisRequest 请求参数}): {@link SentimentAnalysisResponse 返回参数} */
+  /** 情感分析 {@link SentimentAnalysisRequest} {@link SentimentAnalysisResponse} */
   SentimentAnalysis(data: SentimentAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<SentimentAnalysisResponse>;
-  /** {@link SimilarWords 相似词}({@link SimilarWordsRequest 请求参数}): {@link SimilarWordsResponse 返回参数} */
+  /** 相似词 {@link SimilarWordsRequest} {@link SimilarWordsResponse} */
   SimilarWords(data: SimilarWordsRequest, config?: AxiosRequestConfig): AxiosPromise<SimilarWordsResponse>;
-  /** {@link TextClassification 文本分类}({@link TextClassificationRequest 请求参数}): {@link TextClassificationResponse 返回参数} */
+  /** 文本分类 {@link TextClassificationRequest} {@link TextClassificationResponse} */
   TextClassification(data: TextClassificationRequest, config?: AxiosRequestConfig): AxiosPromise<TextClassificationResponse>;
-  /** {@link TextCorrection 文本纠错}({@link TextCorrectionRequest 请求参数}): {@link TextCorrectionResponse 返回参数} */
+  /** 文本纠错 {@link TextCorrectionRequest} {@link TextCorrectionResponse} */
   TextCorrection(data: TextCorrectionRequest, config?: AxiosRequestConfig): AxiosPromise<TextCorrectionResponse>;
-  /** {@link TextCorrectionPro 文本纠错高级版}({@link TextCorrectionProRequest 请求参数}): {@link TextCorrectionProResponse 返回参数} */
+  /** 文本纠错高级版 {@link TextCorrectionProRequest} {@link TextCorrectionProResponse} */
   TextCorrectionPro(data: TextCorrectionProRequest, config?: AxiosRequestConfig): AxiosPromise<TextCorrectionProResponse>;
-  /** {@link TextSimilarity 句子相似度}({@link TextSimilarityRequest 请求参数}): {@link TextSimilarityResponse 返回参数} */
+  /** 句子相似度 {@link TextSimilarityRequest} {@link TextSimilarityResponse} */
   TextSimilarity(data: TextSimilarityRequest, config?: AxiosRequestConfig): AxiosPromise<TextSimilarityResponse>;
-  /** {@link TextSimilarityPro 句子相似度高级版}({@link TextSimilarityProRequest 请求参数}): {@link TextSimilarityProResponse 返回参数} */
+  /** 句子相似度高级版 {@link TextSimilarityProRequest} {@link TextSimilarityProResponse} */
   TextSimilarityPro(data: TextSimilarityProRequest, config?: AxiosRequestConfig): AxiosPromise<TextSimilarityProResponse>;
-  /** {@link UpdateDict 修改自定义词库}({@link UpdateDictRequest 请求参数}): {@link UpdateDictResponse 返回参数} */
+  /** 修改自定义词库 {@link UpdateDictRequest} {@link UpdateDictResponse} */
   UpdateDict(data: UpdateDictRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDictResponse>;
-  /** {@link WordEmbedding 词向量}({@link WordEmbeddingRequest 请求参数}): {@link WordEmbeddingResponse 返回参数} */
+  /** 词向量 {@link WordEmbeddingRequest} {@link WordEmbeddingResponse} */
   WordEmbedding(data: WordEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<WordEmbeddingResponse>;
-  /** {@link WordSimilarity 词相似度}({@link WordSimilarityRequest 请求参数}): {@link WordSimilarityResponse 返回参数} */
+  /** 词相似度 {@link WordSimilarityRequest} {@link WordSimilarityResponse} */
   WordSimilarity(data: WordSimilarityRequest, config?: AxiosRequestConfig): AxiosPromise<WordSimilarityResponse>;
 }
 

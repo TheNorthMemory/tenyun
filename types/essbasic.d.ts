@@ -634,7 +634,7 @@ declare interface ChannelBatchCancelFlowsRequest {
 declare interface ChannelBatchCancelFlowsResponse {
   /** 签署流程批量撤销失败原因，错误信息与流程Id一一对应，成功为“”,失败则对应失败消息 */
   FailMessages: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -652,7 +652,7 @@ declare interface ChannelCancelFlowRequest {
 }
 
 declare interface ChannelCancelFlowResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -666,7 +666,7 @@ declare interface ChannelCancelMultiFlowSignQRCodeRequest {
 }
 
 declare interface ChannelCancelMultiFlowSignQRCodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -686,7 +686,7 @@ declare interface ChannelCreateBatchCancelFlowUrlResponse {
   FailMessages: string[];
   /** 签署撤销url过期时间-年月日-时分秒 */
   UrlExpireOn: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -700,7 +700,7 @@ declare interface ChannelCreateBoundFlowsRequest {
 }
 
 declare interface ChannelCreateBoundFlowsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -722,7 +722,7 @@ declare interface ChannelCreateConvertTaskApiRequest {
 declare interface ChannelCreateConvertTaskApiResponse {
   /** 任务id */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -764,7 +764,7 @@ declare interface ChannelCreateFlowByFilesRequest {
 declare interface ChannelCreateFlowByFilesResponse {
   /** 合同签署流程ID */
   FlowId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -786,7 +786,7 @@ declare interface ChannelCreateFlowGroupByFilesResponse {
   FlowGroupId: string | null;
   /** 子合同ID列表 */
   FlowIds: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -804,7 +804,7 @@ declare interface ChannelCreateFlowSignReviewRequest {
 }
 
 declare interface ChannelCreateFlowSignReviewResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -836,7 +836,7 @@ declare interface ChannelCreateMultiFlowSignQRCodeResponse {
   QrCode: SignQrCode;
   /** 签署链接对象 */
   SignUrls: SignUrl;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -860,7 +860,7 @@ declare interface ChannelCreateReleaseFlowRequest {
 declare interface ChannelCreateReleaseFlowResponse {
   /** 解除协议流程编号 */
   FlowId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -886,7 +886,7 @@ declare interface ChannelDescribeEmployeesResponse {
   Limit: number;
   /** 符合条件的员工数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -908,7 +908,7 @@ declare interface ChannelDescribeOrganizationSealsResponse {
   TotalCount: number;
   /** 查询到的印章结果数组 */
   Seals: OccupiedSeal[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -934,7 +934,7 @@ declare interface ChannelGetTaskResultApiResponse {
   ResourceId: string;
   /** 预览文件Url，有效期30分钟 */
   PreviewUrl: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -952,7 +952,7 @@ declare interface ChannelVerifyPdfResponse {
   VerifyResult: number;
   /** 验签结果详情,内部状态1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域；5-文件签名格式错误 */
   PdfVerifyResults: PdfVerifyResult[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -972,7 +972,7 @@ declare interface CreateChannelFlowEvidenceReportResponse {
   Status: string;
   /** 废除，字段无效 */
   ReportUrl: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1008,7 +1008,7 @@ declare interface CreateConsoleLoginUrlResponse {
   IsActivated: boolean;
   /** 当前经办人是否已认证（false:未认证 true:已认证） */
   ProxyOperatorIsVerified: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1036,7 +1036,7 @@ declare interface CreateFlowsByTemplatesResponse {
   PreviewUrls: string[];
   /** 复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情； */
   TaskInfos: TaskInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1054,7 +1054,7 @@ declare interface CreateSealByImageRequest {
 declare interface CreateSealByImageResponse {
   /** 印章id */
   SealId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1092,7 +1092,7 @@ declare interface CreateSignUrlsResponse {
   SignUrlInfos: SignUrlInfo[];
   /** 生成失败时的错误信息，成功返回”“，顺序和出参SignUrlInfos保持一致 */
   ErrorMessages: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1110,7 +1110,7 @@ declare interface DescribeChannelFlowEvidenceReportResponse {
   ReportUrl: string | null;
   /** 执行中：EvidenceStatusExecuting成功：EvidenceStatusSuccess失败：EvidenceStatusFailed */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1136,7 +1136,7 @@ declare interface DescribeFlowDetailInfoResponse {
   FlowGroupId: string | null;
   /** 合同组名称 */
   FlowGroupName: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1154,7 +1154,7 @@ declare interface DescribeResourceUrlsByFlowsResponse {
   FlowResourceUrlInfos: FlowResourceUrlInfo[];
   /** 创建消息，对应多个合同ID，成功为“”,创建失败则对应失败消息 */
   ErrorMessages: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1192,7 +1192,7 @@ declare interface DescribeTemplatesResponse {
   Limit: number;
   /** 查询起始偏移 */
   Offset: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1218,7 +1218,7 @@ declare interface DescribeUsageResponse {
   Total: number;
   /** 用量明细 */
   Details: UsageDetail[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1234,7 +1234,7 @@ declare interface GetDownloadFlowUrlRequest {
 declare interface GetDownloadFlowUrlResponse {
   /** 合同（流程）下载地址 */
   DownLoadUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1266,7 +1266,7 @@ declare interface OperateChannelTemplateResponse {
   ProxyOrganizationOpenIds: string[] | null;
   /** 操作失败信息数组 */
   FailMessageList: AuthFailMessage[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1284,7 +1284,7 @@ declare interface PrepareFlowsRequest {
 declare interface PrepareFlowsResponse {
   /** 待发起文件确认页 */
   ConfirmUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1304,7 +1304,7 @@ declare interface SyncProxyOrganizationOperatorsResponse {
   Status: number | null;
   /** 同步失败经办人及其失败原因 */
   FailedList: SyncFailReason[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1324,7 +1324,7 @@ declare interface SyncProxyOrganizationRequest {
 }
 
 declare interface SyncProxyOrganizationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1346,7 +1346,7 @@ declare interface UploadFilesResponse {
   TotalCount: number;
   /** 文件Url */
   FileUrls: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1707,7 +1707,7 @@ declare namespace V20201222 {
   }
 
   interface ArchiveFlowResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1721,7 +1721,7 @@ declare namespace V20201222 {
   }
 
   interface CancelFlowResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1739,7 +1739,7 @@ declare namespace V20201222 {
     Result?: number;
     /** 结果描述; 未通过时必选 */
     Description?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1761,7 +1761,7 @@ declare namespace V20201222 {
     Result?: number;
     /** 结果描述; 未通过时必选 */
     Description?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1785,7 +1785,7 @@ declare namespace V20201222 {
     Result?: number;
     /** 结果描述; 未通过时必选 */
     Description?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1809,7 +1809,7 @@ declare namespace V20201222 {
     Result?: number;
     /** 结果描述; 未通过时必选 */
     Description?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1845,7 +1845,7 @@ declare namespace V20201222 {
     PhotoFileName?: string | null;
     /** 核身照片内容base64(文件格式见文件名后缀,一般为jpg) */
     PhotoFileData?: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1865,7 +1865,7 @@ declare namespace V20201222 {
     Result?: number;
     /** 结果描述; 未通过时必选 */
     Description?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1883,7 +1883,7 @@ declare namespace V20201222 {
     Result?: number;
     /** 结果描述; 未通过时必选 */
     Description?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1905,7 +1905,7 @@ declare namespace V20201222 {
     Result?: number;
     /** 结果描述; 未通过时必选 */
     Description?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1927,7 +1927,7 @@ declare namespace V20201222 {
     Result: number;
     /** 结果描述 */
     Description: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1941,7 +1941,7 @@ declare namespace V20201222 {
   interface CreateFaceIdSignResponse {
     /** 慧眼API签名 */
     Sign?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1959,7 +1959,7 @@ declare namespace V20201222 {
   interface CreateFlowByFilesResponse {
     /** 流程ID */
     FlowId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1987,7 +1987,7 @@ declare namespace V20201222 {
   interface CreateH5FaceIdUrlResponse {
     /** 跳转到人脸核身页面的链接 */
     Url?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2007,7 +2007,7 @@ declare namespace V20201222 {
   interface CreatePreviewSignUrlResponse {
     /** 合同预览URL */
     PreviewSignUrl: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2033,7 +2033,7 @@ declare namespace V20201222 {
   interface CreateSealResponse {
     /** 电子印章Id */
     SealId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2051,7 +2051,7 @@ declare namespace V20201222 {
   interface CreateServerFlowSignResponse {
     /** 任务状态：0：失败1：成功 */
     SignStatus: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2075,7 +2075,7 @@ declare namespace V20201222 {
   interface CreateSignUrlResponse {
     /** 合同签署链接 */
     SignUrl: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2131,7 +2131,7 @@ declare namespace V20201222 {
     SubOrganizationId: string;
     /** 电子印章ID */
     SealId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2179,7 +2179,7 @@ declare namespace V20201222 {
   interface CreateSubOrganizationResponse {
     /** 子机构ID */
     SubOrganizationId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2211,7 +2211,7 @@ declare namespace V20201222 {
     UserId: string;
     /** 默认印章ID */
     SealId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2237,7 +2237,7 @@ declare namespace V20201222 {
   interface CreateUserResponse {
     /** 用户ID，按应用号隔离 */
     UserId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2253,7 +2253,7 @@ declare namespace V20201222 {
   }
 
   interface DeleteSealResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2269,7 +2269,7 @@ declare namespace V20201222 {
   interface DescribeCatalogApproversResponse {
     /** 参与者列表 */
     Approvers: CatalogApprovers[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2283,7 +2283,7 @@ declare namespace V20201222 {
   interface DescribeCatalogSignComponentsResponse {
     /** 签署区列表 */
     SignComponents: CatalogComponents[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2297,7 +2297,7 @@ declare namespace V20201222 {
   interface DescribeCustomFlowIdsByFlowIdResponse {
     /** 自定义流程 id 映射列表 */
     CustomIdList: CustomFlowIdMap[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2311,7 +2311,7 @@ declare namespace V20201222 {
   interface DescribeCustomFlowIdsResponse {
     /** 自定义流程 id 映射列表 */
     CustomIdList: CustomFlowIdMap[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2327,7 +2327,7 @@ declare namespace V20201222 {
   interface DescribeFaceIdPhotosResponse {
     /** 照片信息列表 */
     Photos?: FaceIdPhoto[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2345,7 +2345,7 @@ declare namespace V20201222 {
   interface DescribeFaceIdResultsResponse {
     /** 核身结果列表 */
     Results?: FaceIdResult[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2359,7 +2359,7 @@ declare namespace V20201222 {
   interface DescribeFileIdsByCustomIdsResponse {
     /** <自定义Id,文件id>数组 */
     CustomIdList: CustomFileIdMap[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2385,7 +2385,7 @@ declare namespace V20201222 {
     FileUrls: FileUrl[];
     /** URL数量 */
     TotalCount: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2405,7 +2405,7 @@ declare namespace V20201222 {
     FlowId: string;
     /** 流程参与者信息 */
     Approvers: FlowApproverInfo[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2421,7 +2421,7 @@ declare namespace V20201222 {
     FlowId?: string;
     /** 流程文件列表 */
     FlowFileInfos?: FlowFileInfo[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2455,7 +2455,7 @@ declare namespace V20201222 {
     CallbackUrl: string;
     /** 流程中止原因 */
     FlowMessage: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2471,7 +2471,7 @@ declare namespace V20201222 {
   interface DescribeSealsResponse {
     /** 印章信息 */
     Seals: Seal[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2485,7 +2485,7 @@ declare namespace V20201222 {
   interface DescribeSubOrganizationsResponse {
     /** 子机构信息列表 */
     SubOrganizationInfos: SubOrganizationDetail[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2499,7 +2499,7 @@ declare namespace V20201222 {
   interface DescribeUsersResponse {
     /** 用户信息查询结果 */
     Users: UserDescribe[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2511,7 +2511,7 @@ declare namespace V20201222 {
   }
 
   interface DestroyFlowFileResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2533,7 +2533,7 @@ declare namespace V20201222 {
   interface GenerateOrganizationSealResponse {
     /** 电子印章Id */
     SealId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2553,7 +2553,7 @@ declare namespace V20201222 {
   interface GenerateUserSealResponse {
     /** 电子印章Id */
     SealId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2567,7 +2567,7 @@ declare namespace V20201222 {
   }
 
   interface ModifyOrganizationDefaultSealResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2589,7 +2589,7 @@ declare namespace V20201222 {
   }
 
   interface ModifySealResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2625,7 +2625,7 @@ declare namespace V20201222 {
   interface ModifySubOrganizationInfoResponse {
     /** 子机构ID */
     SubOrganizationId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2641,7 +2641,7 @@ declare namespace V20201222 {
   }
 
   interface ModifyUserDefaultSealResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2663,7 +2663,7 @@ declare namespace V20201222 {
   interface ModifyUserResponse {
     /** 腾讯电子签平台用户唯一标识 */
     UserId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2685,7 +2685,7 @@ declare namespace V20201222 {
   }
 
   interface RejectFlowResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2725,7 +2725,7 @@ declare namespace V20201222 {
   interface SendFlowResponse {
     /** 签署任务ID，标识每一次的流程发送 */
     SignId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2767,7 +2767,7 @@ declare namespace V20201222 {
     SignId: string;
     /** 签署链接 */
     SignUrl?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2793,7 +2793,7 @@ declare namespace V20201222 {
   interface SendSignInnerVerifyCodeResponse {
     /** true: 验证码正确，false: 验证码错误 */
     Result: boolean;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2819,7 +2819,7 @@ declare namespace V20201222 {
   interface SignFlowResponse {
     /** 签署任务状态。签署成功 - SUCCESS、提交审核 - REVIEW */
     Status: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2845,7 +2845,7 @@ declare namespace V20201222 {
     FileIds: string[];
     /** 上传成功文件数量 */
     TotalCount: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2859,7 +2859,7 @@ declare namespace V20201222 {
   interface VerifySubOrganizationResponse {
     /** 子机构ID */
     SubOrganizationId: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2875,7 +2875,7 @@ declare namespace V20201222 {
   interface VerifyUserResponse {
     /** 电子签平台用户ID */
     UserId?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -2883,173 +2883,173 @@ declare namespace V20201222 {
 /** {@link Essbasic 腾讯电子签（基础版）} */
 declare interface Essbasic {
   (): Versions;
-  /** {@link ChannelBatchCancelFlows 电子签渠道版-根据签署流程id批量撤销合同}({@link ChannelBatchCancelFlowsRequest 请求参数}): {@link ChannelBatchCancelFlowsResponse 返回参数} */
+  /** 电子签渠道版-根据签署流程id批量撤销合同 {@link ChannelBatchCancelFlowsRequest} {@link ChannelBatchCancelFlowsResponse} */
   ChannelBatchCancelFlows(data: ChannelBatchCancelFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelBatchCancelFlowsResponse>;
-  /** {@link ChannelCancelFlow 渠道版撤销签署流程}({@link ChannelCancelFlowRequest 请求参数}): {@link ChannelCancelFlowResponse 返回参数} */
+  /** 渠道版撤销签署流程 {@link ChannelCancelFlowRequest} {@link ChannelCancelFlowResponse} */
   ChannelCancelFlow(data: ChannelCancelFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelFlowResponse>;
-  /** {@link ChannelCancelMultiFlowSignQRCode 取消一码多扫二维码}({@link ChannelCancelMultiFlowSignQRCodeRequest 请求参数}): {@link ChannelCancelMultiFlowSignQRCodeResponse 返回参数} */
+  /** 取消一码多扫二维码 {@link ChannelCancelMultiFlowSignQRCodeRequest} {@link ChannelCancelMultiFlowSignQRCodeResponse} */
   ChannelCancelMultiFlowSignQRCode(data: ChannelCancelMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelMultiFlowSignQRCodeResponse>;
-  /** {@link ChannelCreateBatchCancelFlowUrl 电子签渠道版-根据签署流程id创建批量撤销url}({@link ChannelCreateBatchCancelFlowUrlRequest 请求参数}): {@link ChannelCreateBatchCancelFlowUrlResponse 返回参数} */
+  /** 电子签渠道版-根据签署流程id创建批量撤销url {@link ChannelCreateBatchCancelFlowUrlRequest} {@link ChannelCreateBatchCancelFlowUrlResponse} */
   ChannelCreateBatchCancelFlowUrl(data: ChannelCreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBatchCancelFlowUrlResponse>;
-  /** {@link ChannelCreateBoundFlows 渠道版领取合同}({@link ChannelCreateBoundFlowsRequest 请求参数}): {@link ChannelCreateBoundFlowsResponse 返回参数} */
+  /** 渠道版领取合同 {@link ChannelCreateBoundFlowsRequest} {@link ChannelCreateBoundFlowsResponse} */
   ChannelCreateBoundFlows(data: ChannelCreateBoundFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBoundFlowsResponse>;
-  /** {@link ChannelCreateConvertTaskApi 渠道创建文件转换任务}({@link ChannelCreateConvertTaskApiRequest 请求参数}): {@link ChannelCreateConvertTaskApiResponse 返回参数} */
+  /** 渠道创建文件转换任务 {@link ChannelCreateConvertTaskApiRequest} {@link ChannelCreateConvertTaskApiResponse} */
   ChannelCreateConvertTaskApi(data: ChannelCreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateConvertTaskApiResponse>;
-  /** {@link ChannelCreateFlowByFiles 渠道版通过文件创建签署流程}({@link ChannelCreateFlowByFilesRequest 请求参数}): {@link ChannelCreateFlowByFilesResponse 返回参数} */
+  /** 渠道版通过文件创建签署流程 {@link ChannelCreateFlowByFilesRequest} {@link ChannelCreateFlowByFilesResponse} */
   ChannelCreateFlowByFiles(data?: ChannelCreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowByFilesResponse>;
-  /** {@link ChannelCreateFlowGroupByFiles 通过多文件创建合同组签署流程}({@link ChannelCreateFlowGroupByFilesRequest 请求参数}): {@link ChannelCreateFlowGroupByFilesResponse 返回参数} */
+  /** 通过多文件创建合同组签署流程 {@link ChannelCreateFlowGroupByFilesRequest} {@link ChannelCreateFlowGroupByFilesResponse} */
   ChannelCreateFlowGroupByFiles(data: ChannelCreateFlowGroupByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowGroupByFilesResponse>;
-  /** {@link ChannelCreateFlowSignReview 提交企业签署流程审批结果}({@link ChannelCreateFlowSignReviewRequest 请求参数}): {@link ChannelCreateFlowSignReviewResponse 返回参数} */
+  /** 提交企业签署流程审批结果 {@link ChannelCreateFlowSignReviewRequest} {@link ChannelCreateFlowSignReviewResponse} */
   ChannelCreateFlowSignReview(data: ChannelCreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowSignReviewResponse>;
-  /** {@link ChannelCreateMultiFlowSignQRCode 创建一码多扫签署流程二维码}({@link ChannelCreateMultiFlowSignQRCodeRequest 请求参数}): {@link ChannelCreateMultiFlowSignQRCodeResponse 返回参数} */
+  /** 创建一码多扫签署流程二维码 {@link ChannelCreateMultiFlowSignQRCodeRequest} {@link ChannelCreateMultiFlowSignQRCodeResponse} */
   ChannelCreateMultiFlowSignQRCode(data: ChannelCreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateMultiFlowSignQRCodeResponse>;
-  /** {@link ChannelCreateReleaseFlow 发起解除协议}({@link ChannelCreateReleaseFlowRequest 请求参数}): {@link ChannelCreateReleaseFlowResponse 返回参数} */
+  /** 发起解除协议 {@link ChannelCreateReleaseFlowRequest} {@link ChannelCreateReleaseFlowResponse} */
   ChannelCreateReleaseFlow(data: ChannelCreateReleaseFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateReleaseFlowResponse>;
-  /** {@link ChannelDescribeEmployees 查询企业员工}({@link ChannelDescribeEmployeesRequest 请求参数}): {@link ChannelDescribeEmployeesResponse 返回参数} */
+  /** 查询企业员工 {@link ChannelDescribeEmployeesRequest} {@link ChannelDescribeEmployeesResponse} */
   ChannelDescribeEmployees(data: ChannelDescribeEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeEmployeesResponse>;
-  /** {@link ChannelDescribeOrganizationSeals 查询渠道子客企业电子印章}({@link ChannelDescribeOrganizationSealsRequest 请求参数}): {@link ChannelDescribeOrganizationSealsResponse 返回参数} */
+  /** 查询渠道子客企业电子印章 {@link ChannelDescribeOrganizationSealsRequest} {@link ChannelDescribeOrganizationSealsResponse} */
   ChannelDescribeOrganizationSeals(data: ChannelDescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeOrganizationSealsResponse>;
-  /** {@link ChannelGetTaskResultApi 渠道版查询转换任务状态}({@link ChannelGetTaskResultApiRequest 请求参数}): {@link ChannelGetTaskResultApiResponse 返回参数} */
+  /** 渠道版查询转换任务状态 {@link ChannelGetTaskResultApiRequest} {@link ChannelGetTaskResultApiResponse} */
   ChannelGetTaskResultApi(data: ChannelGetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelGetTaskResultApiResponse>;
-  /** {@link ChannelVerifyPdf 合同文件验签}({@link ChannelVerifyPdfRequest 请求参数}): {@link ChannelVerifyPdfResponse 返回参数} */
+  /** 合同文件验签 {@link ChannelVerifyPdfRequest} {@link ChannelVerifyPdfResponse} */
   ChannelVerifyPdf(data: ChannelVerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelVerifyPdfResponse>;
-  /** {@link CreateChannelFlowEvidenceReport 创建并返回出证报告}({@link CreateChannelFlowEvidenceReportRequest 请求参数}): {@link CreateChannelFlowEvidenceReportResponse 返回参数} */
+  /** 创建并返回出证报告 {@link CreateChannelFlowEvidenceReportRequest} {@link CreateChannelFlowEvidenceReportResponse} */
   CreateChannelFlowEvidenceReport(data: CreateChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelFlowEvidenceReportResponse>;
-  /** {@link CreateConsoleLoginUrl 生成控制台、移动端链接}({@link CreateConsoleLoginUrlRequest 请求参数}): {@link CreateConsoleLoginUrlResponse 返回参数} */
+  /** 生成控制台、移动端链接 {@link CreateConsoleLoginUrlRequest} {@link CreateConsoleLoginUrlResponse} */
   CreateConsoleLoginUrl(data: CreateConsoleLoginUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleLoginUrlResponse>;
-  /** {@link CreateFlowsByTemplates 使用多个模板批量创建签署流程}({@link CreateFlowsByTemplatesRequest 请求参数}): {@link CreateFlowsByTemplatesResponse 返回参数} */
+  /** 使用多个模板批量创建签署流程 {@link CreateFlowsByTemplatesRequest} {@link CreateFlowsByTemplatesResponse} */
   CreateFlowsByTemplates(data: CreateFlowsByTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowsByTemplatesResponse>;
-  /** {@link CreateSealByImage 渠道通过图片为子客代创建印章}({@link CreateSealByImageRequest 请求参数}): {@link CreateSealByImageResponse 返回参数} */
+  /** 渠道通过图片为子客代创建印章 {@link CreateSealByImageRequest} {@link CreateSealByImageResponse} */
   CreateSealByImage(data: CreateSealByImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealByImageResponse>;
-  /** {@link CreateSignUrls 获取跳转小程序查看或签署链接}({@link CreateSignUrlsRequest 请求参数}): {@link CreateSignUrlsResponse 返回参数} */
+  /** 获取跳转小程序查看或签署链接 {@link CreateSignUrlsRequest} {@link CreateSignUrlsResponse} */
   CreateSignUrls(data: CreateSignUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignUrlsResponse>;
-  /** {@link DescribeChannelFlowEvidenceReport 查询出证报告}({@link DescribeChannelFlowEvidenceReportRequest 请求参数}): {@link DescribeChannelFlowEvidenceReportResponse 返回参数} */
+  /** 查询出证报告 {@link DescribeChannelFlowEvidenceReportRequest} {@link DescribeChannelFlowEvidenceReportResponse} */
   DescribeChannelFlowEvidenceReport(data: DescribeChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelFlowEvidenceReportResponse>;
-  /** {@link DescribeFlowDetailInfo 查询合同(签署流程)的详细信息}({@link DescribeFlowDetailInfoRequest 请求参数}): {@link DescribeFlowDetailInfoResponse 返回参数} */
+  /** 查询合同(签署流程)的详细信息 {@link DescribeFlowDetailInfoRequest} {@link DescribeFlowDetailInfoResponse} */
   DescribeFlowDetailInfo(data: DescribeFlowDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowDetailInfoResponse>;
-  /** {@link DescribeResourceUrlsByFlows 根据签署流程信息批量获取资源下载链接}({@link DescribeResourceUrlsByFlowsRequest 请求参数}): {@link DescribeResourceUrlsByFlowsResponse 返回参数} */
+  /** 根据签署流程信息批量获取资源下载链接 {@link DescribeResourceUrlsByFlowsRequest} {@link DescribeResourceUrlsByFlowsResponse} */
   DescribeResourceUrlsByFlows(data: DescribeResourceUrlsByFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceUrlsByFlowsResponse>;
-  /** {@link DescribeTemplates 查询模板信息列表}({@link DescribeTemplatesRequest 请求参数}): {@link DescribeTemplatesResponse 返回参数} */
+  /** 查询模板信息列表 {@link DescribeTemplatesRequest} {@link DescribeTemplatesResponse} */
   DescribeTemplates(data: DescribeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplatesResponse>;
-  /** {@link DescribeUsage 渠道用量查询}({@link DescribeUsageRequest 请求参数}): {@link DescribeUsageResponse 返回参数} */
+  /** 渠道用量查询 {@link DescribeUsageRequest} {@link DescribeUsageResponse} */
   DescribeUsage(data: DescribeUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageResponse>;
-  /** {@link GetDownloadFlowUrl 获取合同（流程）批量下载链接}({@link GetDownloadFlowUrlRequest 请求参数}): {@link GetDownloadFlowUrlResponse 返回参数} */
+  /** 获取合同（流程）批量下载链接 {@link GetDownloadFlowUrlRequest} {@link GetDownloadFlowUrlResponse} */
   GetDownloadFlowUrl(data: GetDownloadFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetDownloadFlowUrlResponse>;
-  /** {@link OperateChannelTemplate 操作渠道模板}({@link OperateChannelTemplateRequest 请求参数}): {@link OperateChannelTemplateResponse 返回参数} */
+  /** 操作渠道模板 {@link OperateChannelTemplateRequest} {@link OperateChannelTemplateResponse} */
   OperateChannelTemplate(data: OperateChannelTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<OperateChannelTemplateResponse>;
-  /** {@link PrepareFlows 准备待发起文件}({@link PrepareFlowsRequest 请求参数}): {@link PrepareFlowsResponse 返回参数} */
+  /** 准备待发起文件 {@link PrepareFlowsRequest} {@link PrepareFlowsResponse} */
   PrepareFlows(data: PrepareFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<PrepareFlowsResponse>;
-  /** {@link SyncProxyOrganization 同步企业信息}({@link SyncProxyOrganizationRequest 请求参数}): {@link SyncProxyOrganizationResponse 返回参数} */
+  /** 同步企业信息 {@link SyncProxyOrganizationRequest} {@link SyncProxyOrganizationResponse} */
   SyncProxyOrganization(data: SyncProxyOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<SyncProxyOrganizationResponse>;
-  /** {@link SyncProxyOrganizationOperators 同步企业经办人列表}({@link SyncProxyOrganizationOperatorsRequest 请求参数}): {@link SyncProxyOrganizationOperatorsResponse 返回参数} */
+  /** 同步企业经办人列表 {@link SyncProxyOrganizationOperatorsRequest} {@link SyncProxyOrganizationOperatorsResponse} */
   SyncProxyOrganizationOperators(data: SyncProxyOrganizationOperatorsRequest, config?: AxiosRequestConfig): AxiosPromise<SyncProxyOrganizationOperatorsResponse>;
-  /** {@link UploadFiles 文件上传}({@link UploadFilesRequest 请求参数}): {@link UploadFilesResponse 返回参数} */
+  /** 文件上传 {@link UploadFilesRequest} {@link UploadFilesResponse} */
   UploadFiles(data: UploadFilesRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFilesResponse>;
-  /** {@link V20201222.ArchiveFlow 归档流程}({@link V20201222.ArchiveFlowRequest 请求参数}): {@link V20201222.ArchiveFlowResponse 返回参数} */
+  /** 归档流程 {@link V20201222.ArchiveFlowRequest} {@link V20201222.ArchiveFlowResponse} */
   ArchiveFlow(data: V20201222.ArchiveFlowRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.ArchiveFlowResponse>;
-  /** {@link V20201222.CancelFlow 撤销流程}({@link V20201222.CancelFlowRequest 请求参数}): {@link V20201222.CancelFlowResponse 返回参数} */
+  /** 撤销流程 {@link V20201222.CancelFlowRequest} {@link V20201222.CancelFlowResponse} */
   CancelFlow(data: V20201222.CancelFlowRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CancelFlowResponse>;
-  /** {@link V20201222.CheckBankCard2EVerification 银行卡二要素检测}({@link V20201222.CheckBankCard2EVerificationRequest 请求参数}): {@link V20201222.CheckBankCard2EVerificationResponse 返回参数} */
+  /** 银行卡二要素检测 {@link V20201222.CheckBankCard2EVerificationRequest} {@link V20201222.CheckBankCard2EVerificationResponse} */
   CheckBankCard2EVerification(data: V20201222.CheckBankCard2EVerificationRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckBankCard2EVerificationResponse>;
-  /** {@link V20201222.CheckBankCard3EVerification 银行卡三要素检测}({@link V20201222.CheckBankCard3EVerificationRequest 请求参数}): {@link V20201222.CheckBankCard3EVerificationResponse 返回参数} */
+  /** 银行卡三要素检测 {@link V20201222.CheckBankCard3EVerificationRequest} {@link V20201222.CheckBankCard3EVerificationResponse} */
   CheckBankCard3EVerification(data: V20201222.CheckBankCard3EVerificationRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckBankCard3EVerificationResponse>;
-  /** {@link V20201222.CheckBankCard4EVerification 银行卡四要素检测}({@link V20201222.CheckBankCard4EVerificationRequest 请求参数}): {@link V20201222.CheckBankCard4EVerificationResponse 返回参数} */
+  /** 银行卡四要素检测 {@link V20201222.CheckBankCard4EVerificationRequest} {@link V20201222.CheckBankCard4EVerificationResponse} */
   CheckBankCard4EVerification(data: V20201222.CheckBankCard4EVerificationRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckBankCard4EVerificationResponse>;
-  /** {@link V20201222.CheckBankCardVerification 银行卡二三四要素检测}({@link V20201222.CheckBankCardVerificationRequest 请求参数}): {@link V20201222.CheckBankCardVerificationResponse 返回参数} */
+  /** 银行卡二三四要素检测 {@link V20201222.CheckBankCardVerificationRequest} {@link V20201222.CheckBankCardVerificationResponse} */
   CheckBankCardVerification(data: V20201222.CheckBankCardVerificationRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckBankCardVerificationResponse>;
-  /** {@link V20201222.CheckFaceIdentify 检测人脸核身结果}({@link V20201222.CheckFaceIdentifyRequest 请求参数}): {@link V20201222.CheckFaceIdentifyResponse 返回参数} */
+  /** 检测人脸核身结果 {@link V20201222.CheckFaceIdentifyRequest} {@link V20201222.CheckFaceIdentifyResponse} */
   CheckFaceIdentify(data: V20201222.CheckFaceIdentifyRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckFaceIdentifyResponse>;
-  /** {@link V20201222.CheckIdCardVerification 身份证核验}({@link V20201222.CheckIdCardVerificationRequest 请求参数}): {@link V20201222.CheckIdCardVerificationResponse 返回参数} */
+  /** 身份证核验 {@link V20201222.CheckIdCardVerificationRequest} {@link V20201222.CheckIdCardVerificationResponse} */
   CheckIdCardVerification(data: V20201222.CheckIdCardVerificationRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckIdCardVerificationResponse>;
-  /** {@link V20201222.CheckMobileAndName 手机号二要素核验}({@link V20201222.CheckMobileAndNameRequest 请求参数}): {@link V20201222.CheckMobileAndNameResponse 返回参数} */
+  /** 手机号二要素核验 {@link V20201222.CheckMobileAndNameRequest} {@link V20201222.CheckMobileAndNameResponse} */
   CheckMobileAndName(data: V20201222.CheckMobileAndNameRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckMobileAndNameResponse>;
-  /** {@link V20201222.CheckMobileVerification 手机号三要素核验}({@link V20201222.CheckMobileVerificationRequest 请求参数}): {@link V20201222.CheckMobileVerificationResponse 返回参数} */
+  /** 手机号三要素核验 {@link V20201222.CheckMobileVerificationRequest} {@link V20201222.CheckMobileVerificationResponse} */
   CheckMobileVerification(data: V20201222.CheckMobileVerificationRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckMobileVerificationResponse>;
-  /** {@link V20201222.CheckVerifyCodeMatchFlowId 确认验证码}({@link V20201222.CheckVerifyCodeMatchFlowIdRequest 请求参数}): {@link V20201222.CheckVerifyCodeMatchFlowIdResponse 返回参数} */
+  /** 确认验证码 {@link V20201222.CheckVerifyCodeMatchFlowIdRequest} {@link V20201222.CheckVerifyCodeMatchFlowIdResponse} */
   CheckVerifyCodeMatchFlowId(data: V20201222.CheckVerifyCodeMatchFlowIdRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CheckVerifyCodeMatchFlowIdResponse>;
-  /** {@link V20201222.CreateFaceIdSign 生成慧眼API签名}({@link V20201222.CreateFaceIdSignRequest 请求参数}): {@link V20201222.CreateFaceIdSignResponse 返回参数} */
+  /** 生成慧眼API签名 {@link V20201222.CreateFaceIdSignRequest} {@link V20201222.CreateFaceIdSignResponse} */
   CreateFaceIdSign(data: V20201222.CreateFaceIdSignRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateFaceIdSignResponse>;
-  /** {@link V20201222.CreateFlowByFiles 用PDF文件创建流程}({@link V20201222.CreateFlowByFilesRequest 请求参数}): {@link V20201222.CreateFlowByFilesResponse 返回参数} */
+  /** 用PDF文件创建流程 {@link V20201222.CreateFlowByFilesRequest} {@link V20201222.CreateFlowByFilesResponse} */
   CreateFlowByFiles(data: V20201222.CreateFlowByFilesRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateFlowByFilesResponse>;
-  /** {@link V20201222.CreateH5FaceIdUrl 获取慧眼H5人脸核身Url}({@link V20201222.CreateH5FaceIdUrlRequest 请求参数}): {@link V20201222.CreateH5FaceIdUrlResponse 返回参数} */
+  /** 获取慧眼H5人脸核身Url {@link V20201222.CreateH5FaceIdUrlRequest} {@link V20201222.CreateH5FaceIdUrlResponse} */
   CreateH5FaceIdUrl(data: V20201222.CreateH5FaceIdUrlRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateH5FaceIdUrlResponse>;
-  /** {@link V20201222.CreatePreviewSignUrl 生成预览签署URL}({@link V20201222.CreatePreviewSignUrlRequest 请求参数}): {@link V20201222.CreatePreviewSignUrlResponse 返回参数} */
+  /** 生成预览签署URL {@link V20201222.CreatePreviewSignUrlRequest} {@link V20201222.CreatePreviewSignUrlResponse} */
   CreatePreviewSignUrl(data: V20201222.CreatePreviewSignUrlRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreatePreviewSignUrlResponse>;
-  /** {@link V20201222.CreateSeal 创建印章}({@link V20201222.CreateSealRequest 请求参数}): {@link V20201222.CreateSealResponse 返回参数} */
+  /** 创建印章 {@link V20201222.CreateSealRequest} {@link V20201222.CreateSealResponse} */
   CreateSeal(data: V20201222.CreateSealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateSealResponse>;
-  /** {@link V20201222.CreateServerFlowSign 流程静默签署}({@link V20201222.CreateServerFlowSignRequest 请求参数}): {@link V20201222.CreateServerFlowSignResponse 返回参数} */
+  /** 流程静默签署 {@link V20201222.CreateServerFlowSignRequest} {@link V20201222.CreateServerFlowSignResponse} */
   CreateServerFlowSign(data: V20201222.CreateServerFlowSignRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateServerFlowSignResponse>;
-  /** {@link V20201222.CreateSignUrl 生成签署URL}({@link V20201222.CreateSignUrlRequest 请求参数}): {@link V20201222.CreateSignUrlResponse 返回参数} */
+  /** 生成签署URL {@link V20201222.CreateSignUrlRequest} {@link V20201222.CreateSignUrlResponse} */
   CreateSignUrl(data: V20201222.CreateSignUrlRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateSignUrlResponse>;
-  /** {@link V20201222.CreateSubOrganization 注册子机构}({@link V20201222.CreateSubOrganizationRequest 请求参数}): {@link V20201222.CreateSubOrganizationResponse 返回参数} */
+  /** 注册子机构 {@link V20201222.CreateSubOrganizationRequest} {@link V20201222.CreateSubOrganizationResponse} */
   CreateSubOrganization(data: V20201222.CreateSubOrganizationRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateSubOrganizationResponse>;
-  /** {@link V20201222.CreateSubOrganizationAndSeal 注册实名子机构并生成印章}({@link V20201222.CreateSubOrganizationAndSealRequest 请求参数}): {@link V20201222.CreateSubOrganizationAndSealResponse 返回参数} */
+  /** 注册实名子机构并生成印章 {@link V20201222.CreateSubOrganizationAndSealRequest} {@link V20201222.CreateSubOrganizationAndSealResponse} */
   CreateSubOrganizationAndSeal(data: V20201222.CreateSubOrganizationAndSealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateSubOrganizationAndSealResponse>;
-  /** {@link V20201222.CreateUser 注册个人用户}({@link V20201222.CreateUserRequest 请求参数}): {@link V20201222.CreateUserResponse 返回参数} */
+  /** 注册个人用户 {@link V20201222.CreateUserRequest} {@link V20201222.CreateUserResponse} */
   CreateUser(data: V20201222.CreateUserRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateUserResponse>;
-  /** {@link V20201222.CreateUserAndSeal 注册实名个人用户并生成签名}({@link V20201222.CreateUserAndSealRequest 请求参数}): {@link V20201222.CreateUserAndSealResponse 返回参数} */
+  /** 注册实名个人用户并生成签名 {@link V20201222.CreateUserAndSealRequest} {@link V20201222.CreateUserAndSealResponse} */
   CreateUserAndSeal(data: V20201222.CreateUserAndSealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.CreateUserAndSealResponse>;
-  /** {@link V20201222.DeleteSeal 删除印章}({@link V20201222.DeleteSealRequest 请求参数}): {@link V20201222.DeleteSealResponse 返回参数} */
+  /** 删除印章 {@link V20201222.DeleteSealRequest} {@link V20201222.DeleteSealResponse} */
   DeleteSeal(data: V20201222.DeleteSealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DeleteSealResponse>;
-  /** {@link V20201222.DescribeCatalogApprovers 拉取流程目录参与者的信息}({@link V20201222.DescribeCatalogApproversRequest 请求参数}): {@link V20201222.DescribeCatalogApproversResponse 返回参数} */
+  /** 拉取流程目录参与者的信息 {@link V20201222.DescribeCatalogApproversRequest} {@link V20201222.DescribeCatalogApproversResponse} */
   DescribeCatalogApprovers(data: V20201222.DescribeCatalogApproversRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeCatalogApproversResponse>;
-  /** {@link V20201222.DescribeCatalogSignComponents 拉取目录签署区}({@link V20201222.DescribeCatalogSignComponentsRequest 请求参数}): {@link V20201222.DescribeCatalogSignComponentsResponse 返回参数} */
+  /** 拉取目录签署区 {@link V20201222.DescribeCatalogSignComponentsRequest} {@link V20201222.DescribeCatalogSignComponentsResponse} */
   DescribeCatalogSignComponents(data: V20201222.DescribeCatalogSignComponentsRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeCatalogSignComponentsResponse>;
-  /** {@link V20201222.DescribeCustomFlowIds 根据用户自定义id查询流程id}({@link V20201222.DescribeCustomFlowIdsRequest 请求参数}): {@link V20201222.DescribeCustomFlowIdsResponse 返回参数} */
+  /** 根据用户自定义id查询流程id {@link V20201222.DescribeCustomFlowIdsRequest} {@link V20201222.DescribeCustomFlowIdsResponse} */
   DescribeCustomFlowIds(data: V20201222.DescribeCustomFlowIdsRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeCustomFlowIdsResponse>;
-  /** {@link V20201222.DescribeCustomFlowIdsByFlowId 根据流程id反查自定义流程id}({@link V20201222.DescribeCustomFlowIdsByFlowIdRequest 请求参数}): {@link V20201222.DescribeCustomFlowIdsByFlowIdResponse 返回参数} */
+  /** 根据流程id反查自定义流程id {@link V20201222.DescribeCustomFlowIdsByFlowIdRequest} {@link V20201222.DescribeCustomFlowIdsByFlowIdResponse} */
   DescribeCustomFlowIdsByFlowId(data: V20201222.DescribeCustomFlowIdsByFlowIdRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeCustomFlowIdsByFlowIdResponse>;
-  /** {@link V20201222.DescribeFaceIdPhotos 查询慧眼人脸核身照片}({@link V20201222.DescribeFaceIdPhotosRequest 请求参数}): {@link V20201222.DescribeFaceIdPhotosResponse 返回参数} */
+  /** 查询慧眼人脸核身照片 {@link V20201222.DescribeFaceIdPhotosRequest} {@link V20201222.DescribeFaceIdPhotosResponse} */
   DescribeFaceIdPhotos(data: V20201222.DescribeFaceIdPhotosRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeFaceIdPhotosResponse>;
-  /** {@link V20201222.DescribeFaceIdResults 获取慧眼人脸核身结果}({@link V20201222.DescribeFaceIdResultsRequest 请求参数}): {@link V20201222.DescribeFaceIdResultsResponse 返回参数} */
+  /** 获取慧眼人脸核身结果 {@link V20201222.DescribeFaceIdResultsRequest} {@link V20201222.DescribeFaceIdResultsResponse} */
   DescribeFaceIdResults(data: V20201222.DescribeFaceIdResultsRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeFaceIdResultsResponse>;
-  /** {@link V20201222.DescribeFileIdsByCustomIds 根据用户自定义id查询文件id}({@link V20201222.DescribeFileIdsByCustomIdsRequest 请求参数}): {@link V20201222.DescribeFileIdsByCustomIdsResponse 返回参数} */
+  /** 根据用户自定义id查询文件id {@link V20201222.DescribeFileIdsByCustomIdsRequest} {@link V20201222.DescribeFileIdsByCustomIdsResponse} */
   DescribeFileIdsByCustomIds(data: V20201222.DescribeFileIdsByCustomIdsRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeFileIdsByCustomIdsResponse>;
-  /** {@link V20201222.DescribeFileUrls 查询文件下载链接}({@link V20201222.DescribeFileUrlsRequest 请求参数}): {@link V20201222.DescribeFileUrlsResponse 返回参数} */
+  /** 查询文件下载链接 {@link V20201222.DescribeFileUrlsRequest} {@link V20201222.DescribeFileUrlsResponse} */
   DescribeFileUrls(data: V20201222.DescribeFileUrlsRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeFileUrlsResponse>;
-  /** {@link V20201222.DescribeFlow 查询流程信息}({@link V20201222.DescribeFlowRequest 请求参数}): {@link V20201222.DescribeFlowResponse 返回参数} */
+  /** 查询流程信息 {@link V20201222.DescribeFlowRequest} {@link V20201222.DescribeFlowResponse} */
   DescribeFlow(data: V20201222.DescribeFlowRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeFlowResponse>;
-  /** {@link V20201222.DescribeFlowApprovers 查询流程参与者信息}({@link V20201222.DescribeFlowApproversRequest 请求参数}): {@link V20201222.DescribeFlowApproversResponse 返回参数} */
+  /** 查询流程参与者信息 {@link V20201222.DescribeFlowApproversRequest} {@link V20201222.DescribeFlowApproversResponse} */
   DescribeFlowApprovers(data: V20201222.DescribeFlowApproversRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeFlowApproversResponse>;
-  /** {@link V20201222.DescribeFlowFiles 查询流程文件}({@link V20201222.DescribeFlowFilesRequest 请求参数}): {@link V20201222.DescribeFlowFilesResponse 返回参数} */
+  /** 查询流程文件 {@link V20201222.DescribeFlowFilesRequest} {@link V20201222.DescribeFlowFilesResponse} */
   DescribeFlowFiles(data: V20201222.DescribeFlowFilesRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeFlowFilesResponse>;
-  /** {@link V20201222.DescribeSeals 查询电子印章}({@link V20201222.DescribeSealsRequest 请求参数}): {@link V20201222.DescribeSealsResponse 返回参数} */
+  /** 查询电子印章 {@link V20201222.DescribeSealsRequest} {@link V20201222.DescribeSealsResponse} */
   DescribeSeals(data: V20201222.DescribeSealsRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeSealsResponse>;
-  /** {@link V20201222.DescribeSubOrganizations 查询子机构信息}({@link V20201222.DescribeSubOrganizationsRequest 请求参数}): {@link V20201222.DescribeSubOrganizationsResponse 返回参数} */
+  /** 查询子机构信息 {@link V20201222.DescribeSubOrganizationsRequest} {@link V20201222.DescribeSubOrganizationsResponse} */
   DescribeSubOrganizations(data: V20201222.DescribeSubOrganizationsRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeSubOrganizationsResponse>;
-  /** {@link V20201222.DescribeUsers 查询个人用户信息}({@link V20201222.DescribeUsersRequest 请求参数}): {@link V20201222.DescribeUsersResponse 返回参数} */
+  /** 查询个人用户信息 {@link V20201222.DescribeUsersRequest} {@link V20201222.DescribeUsersResponse} */
   DescribeUsers(data: V20201222.DescribeUsersRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DescribeUsersResponse>;
-  /** {@link V20201222.DestroyFlowFile 销毁流程文件}({@link V20201222.DestroyFlowFileRequest 请求参数}): {@link V20201222.DestroyFlowFileResponse 返回参数} */
+  /** 销毁流程文件 {@link V20201222.DestroyFlowFileRequest} {@link V20201222.DestroyFlowFileResponse} */
   DestroyFlowFile(data: V20201222.DestroyFlowFileRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.DestroyFlowFileResponse>;
-  /** {@link V20201222.GenerateOrganizationSeal 生成企业电子印章}({@link V20201222.GenerateOrganizationSealRequest 请求参数}): {@link V20201222.GenerateOrganizationSealResponse 返回参数} */
+  /** 生成企业电子印章 {@link V20201222.GenerateOrganizationSealRequest} {@link V20201222.GenerateOrganizationSealResponse} */
   GenerateOrganizationSeal(data: V20201222.GenerateOrganizationSealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.GenerateOrganizationSealResponse>;
-  /** {@link V20201222.GenerateUserSeal 生成个人电子签名}({@link V20201222.GenerateUserSealRequest 请求参数}): {@link V20201222.GenerateUserSealResponse 返回参数} */
+  /** 生成个人电子签名 {@link V20201222.GenerateUserSealRequest} {@link V20201222.GenerateUserSealResponse} */
   GenerateUserSeal(data: V20201222.GenerateUserSealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.GenerateUserSealResponse>;
-  /** {@link V20201222.ModifyOrganizationDefaultSeal 修改企业默认印章}({@link V20201222.ModifyOrganizationDefaultSealRequest 请求参数}): {@link V20201222.ModifyOrganizationDefaultSealResponse 返回参数} */
+  /** 修改企业默认印章 {@link V20201222.ModifyOrganizationDefaultSealRequest} {@link V20201222.ModifyOrganizationDefaultSealResponse} */
   ModifyOrganizationDefaultSeal(data: V20201222.ModifyOrganizationDefaultSealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.ModifyOrganizationDefaultSealResponse>;
-  /** {@link V20201222.ModifySeal 更新电子印章}({@link V20201222.ModifySealRequest 请求参数}): {@link V20201222.ModifySealResponse 返回参数} */
+  /** 更新电子印章 {@link V20201222.ModifySealRequest} {@link V20201222.ModifySealResponse} */
   ModifySeal(data: V20201222.ModifySealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.ModifySealResponse>;
-  /** {@link V20201222.ModifySubOrganizationInfo 更新子机构信息}({@link V20201222.ModifySubOrganizationInfoRequest 请求参数}): {@link V20201222.ModifySubOrganizationInfoResponse 返回参数} */
+  /** 更新子机构信息 {@link V20201222.ModifySubOrganizationInfoRequest} {@link V20201222.ModifySubOrganizationInfoResponse} */
   ModifySubOrganizationInfo(data: V20201222.ModifySubOrganizationInfoRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.ModifySubOrganizationInfoResponse>;
-  /** {@link V20201222.ModifyUser 更新个人用户信息}({@link V20201222.ModifyUserRequest 请求参数}): {@link V20201222.ModifyUserResponse 返回参数} */
+  /** 更新个人用户信息 {@link V20201222.ModifyUserRequest} {@link V20201222.ModifyUserResponse} */
   ModifyUser(data: V20201222.ModifyUserRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.ModifyUserResponse>;
-  /** {@link V20201222.ModifyUserDefaultSeal 修改个人默认印章}({@link V20201222.ModifyUserDefaultSealRequest 请求参数}): {@link V20201222.ModifyUserDefaultSealResponse 返回参数} */
+  /** 修改个人默认印章 {@link V20201222.ModifyUserDefaultSealRequest} {@link V20201222.ModifyUserDefaultSealResponse} */
   ModifyUserDefaultSeal(data: V20201222.ModifyUserDefaultSealRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.ModifyUserDefaultSealResponse>;
-  /** {@link V20201222.RejectFlow 拒签流程}({@link V20201222.RejectFlowRequest 请求参数}): {@link V20201222.RejectFlowResponse 返回参数} */
+  /** 拒签流程 {@link V20201222.RejectFlowRequest} {@link V20201222.RejectFlowResponse} */
   RejectFlow(data: V20201222.RejectFlowRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.RejectFlowResponse>;
-  /** {@link V20201222.SendFlow 发送流程}({@link V20201222.SendFlowRequest 请求参数}): {@link V20201222.SendFlowResponse 返回参数} */
+  /** 发送流程 {@link V20201222.SendFlowRequest} {@link V20201222.SendFlowResponse} */
   SendFlow(data: V20201222.SendFlowRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.SendFlowResponse>;
-  /** {@link V20201222.SendFlowUrl 发送流程并生成签署URL}({@link V20201222.SendFlowUrlRequest 请求参数}): {@link V20201222.SendFlowUrlResponse 返回参数} */
+  /** 发送流程并生成签署URL {@link V20201222.SendFlowUrlRequest} {@link V20201222.SendFlowUrlResponse} */
   SendFlowUrl(data: V20201222.SendFlowUrlRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.SendFlowUrlResponse>;
-  /** {@link V20201222.SendSignInnerVerifyCode 发送签署验证码}({@link V20201222.SendSignInnerVerifyCodeRequest 请求参数}): {@link V20201222.SendSignInnerVerifyCodeResponse 返回参数} */
+  /** 发送签署验证码 {@link V20201222.SendSignInnerVerifyCodeRequest} {@link V20201222.SendSignInnerVerifyCodeResponse} */
   SendSignInnerVerifyCode(data: V20201222.SendSignInnerVerifyCodeRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.SendSignInnerVerifyCodeResponse>;
-  /** {@link V20201222.SignFlow 签署流程}({@link V20201222.SignFlowRequest 请求参数}): {@link V20201222.SignFlowResponse 返回参数} */
+  /** 签署流程 {@link V20201222.SignFlowRequest} {@link V20201222.SignFlowResponse} */
   SignFlow(data: V20201222.SignFlowRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.SignFlowResponse>;
-  /** {@link V20201222.UploadFiles 文件上传}({@link V20201222.UploadFilesRequest 请求参数}): {@link V20201222.UploadFilesResponse 返回参数} */
+  /** 文件上传 {@link V20201222.UploadFilesRequest} {@link V20201222.UploadFilesResponse} */
   UploadFiles(data: V20201222.UploadFilesRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.UploadFilesResponse>;
-  /** {@link V20201222.VerifySubOrganization 子机构通过实名认证}({@link V20201222.VerifySubOrganizationRequest 请求参数}): {@link V20201222.VerifySubOrganizationResponse 返回参数} */
+  /** 子机构通过实名认证 {@link V20201222.VerifySubOrganizationRequest} {@link V20201222.VerifySubOrganizationResponse} */
   VerifySubOrganization(data: V20201222.VerifySubOrganizationRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.VerifySubOrganizationResponse>;
-  /** {@link V20201222.VerifyUser 个人用户通过实名认证}({@link V20201222.VerifyUserRequest 请求参数}): {@link V20201222.VerifyUserResponse 返回参数} */
+  /** 个人用户通过实名认证 {@link V20201222.VerifyUserRequest} {@link V20201222.VerifyUserResponse} */
   VerifyUser(data: V20201222.VerifyUserRequest, config: AxiosRequestConfig & V20201222.VersionHeader): AxiosPromise<V20201222.VerifyUserResponse>;
 }
 

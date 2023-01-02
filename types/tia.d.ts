@@ -138,7 +138,7 @@ declare interface CreateJobRequest {
 declare interface CreateJobResponse {
   /** 训练任务信息 */
   Job?: Job;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -166,7 +166,7 @@ declare interface CreateModelRequest {
 declare interface CreateModelResponse {
   /** 模型的详细信息 */
   Model?: Model;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -178,7 +178,7 @@ declare interface DeleteJobRequest {
 }
 
 declare interface DeleteJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -192,7 +192,7 @@ declare interface DeleteModelRequest {
 }
 
 declare interface DeleteModelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -206,7 +206,7 @@ declare interface DescribeJobRequest {
 declare interface DescribeJobResponse {
   /** 训练任务信息 */
   Job?: Job;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -222,7 +222,7 @@ declare interface DescribeModelRequest {
 declare interface DescribeModelResponse {
   /** 模型信息 */
   Model?: Model;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -238,7 +238,7 @@ declare interface InstallAgentRequest {
 declare interface InstallAgentResponse {
   /** Agent版本, 用于私有集群的agent安装 */
   TiaVersion?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -254,7 +254,7 @@ declare interface ListJobsRequest {
 declare interface ListJobsResponse {
   /** 训练任务列表 */
   Jobs?: Job[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -272,7 +272,7 @@ declare interface ListModelsRequest {
 declare interface ListModelsResponse {
   /** Model 数组，用以显示所有模型的信息 */
   Models?: Model[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -298,32 +298,32 @@ declare interface QueryLogsResponse {
   Logs?: Log[];
   /** 是否已经返回所有符合条件的日志 */
   Listover?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tia 智能钛机器学习} */
 declare interface Tia {
   (): Versions;
-  /** {@link CreateJob 创建Job}({@link CreateJobRequest 请求参数}): {@link CreateJobResponse 返回参数} */
+  /** 创建Job {@link CreateJobRequest} {@link CreateJobResponse} */
   CreateJob(data: CreateJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobResponse>;
-  /** {@link CreateModel 创建Model}({@link CreateModelRequest 请求参数}): {@link CreateModelResponse 返回参数} */
+  /** 创建Model {@link CreateModelRequest} {@link CreateModelResponse} */
   CreateModel(data: CreateModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelResponse>;
-  /** {@link DeleteJob 删除Job}({@link DeleteJobRequest 请求参数}): {@link DeleteJobResponse 返回参数} */
+  /** 删除Job {@link DeleteJobRequest} {@link DeleteJobResponse} */
   DeleteJob(data: DeleteJobRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJobResponse>;
-  /** {@link DeleteModel 删除Model}({@link DeleteModelRequest 请求参数}): {@link DeleteModelResponse 返回参数} */
+  /** 删除Model {@link DeleteModelRequest} {@link DeleteModelResponse} */
   DeleteModel(data: DeleteModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelResponse>;
-  /** {@link DescribeJob 获取Job详情}({@link DescribeJobRequest 请求参数}): {@link DescribeJobResponse 返回参数} */
+  /** 获取Job详情 {@link DescribeJobRequest} {@link DescribeJobResponse} */
   DescribeJob(data: DescribeJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobResponse>;
-  /** {@link DescribeModel 描述Model}({@link DescribeModelRequest 请求参数}): {@link DescribeModelResponse 返回参数} */
+  /** 描述Model {@link DescribeModelRequest} {@link DescribeModelResponse} */
   DescribeModel(data: DescribeModelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelResponse>;
-  /** {@link InstallAgent 安装agent}({@link InstallAgentRequest 请求参数}): {@link InstallAgentResponse 返回参数} */
+  /** 安装agent {@link InstallAgentRequest} {@link InstallAgentResponse} */
   InstallAgent(data: InstallAgentRequest, config?: AxiosRequestConfig): AxiosPromise<InstallAgentResponse>;
-  /** {@link ListJobs 列举Job}({@link ListJobsRequest 请求参数}): {@link ListJobsResponse 返回参数} */
+  /** 列举Job {@link ListJobsRequest} {@link ListJobsResponse} */
   ListJobs(data: ListJobsRequest, config?: AxiosRequestConfig): AxiosPromise<ListJobsResponse>;
-  /** {@link ListModels 列举Model}({@link ListModelsRequest 请求参数}): {@link ListModelsResponse 返回参数} */
+  /** 列举Model {@link ListModelsRequest} {@link ListModelsResponse} */
   ListModels(data?: ListModelsRequest, config?: AxiosRequestConfig): AxiosPromise<ListModelsResponse>;
-  /** {@link QueryLogs 查询日志}({@link QueryLogsRequest 请求参数}): {@link QueryLogsResponse 返回参数} */
+  /** 查询日志 {@link QueryLogsRequest} {@link QueryLogsResponse} */
   QueryLogs(data: QueryLogsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryLogsResponse>;
 }
 

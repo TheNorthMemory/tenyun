@@ -266,7 +266,7 @@ declare interface CheckRuleRequest {
 }
 
 declare interface CheckRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -280,7 +280,7 @@ declare interface CheckTransformationRequest {
 declare interface CheckTransformationResponse {
   /** 经过Transformations处理之后的数据 */
   Output: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -302,7 +302,7 @@ declare interface CreateConnectionRequest {
 declare interface CreateConnectionResponse {
   /** 连接器ID */
   ConnectionId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -316,7 +316,7 @@ declare interface CreateEventBusRequest {
 declare interface CreateEventBusResponse {
   /** 事件集ID */
   EventBusId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -336,7 +336,7 @@ declare interface CreateRuleRequest {
 declare interface CreateRuleResponse {
   /** 事件规则ID */
   RuleId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -354,7 +354,7 @@ declare interface CreateTargetRequest {
 declare interface CreateTargetResponse {
   /** 目标ID */
   TargetId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -370,7 +370,7 @@ declare interface CreateTransformationRequest {
 declare interface CreateTransformationResponse {
   /** 生成的转换器id */
   TransformationId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -382,7 +382,7 @@ declare interface DeleteConnectionRequest {
 }
 
 declare interface DeleteConnectionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -392,7 +392,7 @@ declare interface DeleteEventBusRequest {
 }
 
 declare interface DeleteEventBusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -404,7 +404,7 @@ declare interface DeleteRuleRequest {
 }
 
 declare interface DeleteRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -418,7 +418,7 @@ declare interface DeleteTargetRequest {
 }
 
 declare interface DeleteTargetResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -432,7 +432,7 @@ declare interface DeleteTransformationRequest {
 }
 
 declare interface DeleteTransformationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -458,7 +458,7 @@ declare interface GetEventBusResponse {
   EventBusId: string;
   /** （已废弃）事件集类型 */
   Type: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -488,7 +488,7 @@ declare interface GetRuleResponse {
   AddTime: string;
   /** 更新时间 */
   ModTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -504,7 +504,7 @@ declare interface GetTransformationRequest {
 declare interface GetTransformationResponse {
   /** 转换规则列表 */
   Transformations: Transformation[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -526,7 +526,7 @@ declare interface ListConnectionsResponse {
   Connections: Connection[];
   /** 连接器总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -548,7 +548,7 @@ declare interface ListEventBusesResponse {
   EventBuses: EventBus[];
   /** 事件集总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -570,7 +570,7 @@ declare interface ListRulesResponse {
   Rules: Rule[];
   /** 事件规则总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -594,7 +594,7 @@ declare interface ListTargetsResponse {
   TotalCount: number;
   /** 目标信息 */
   Targets: Target[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -606,7 +606,7 @@ declare interface PublishEventRequest {
 }
 
 declare interface PublishEventResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -618,7 +618,7 @@ declare interface PutEventsRequest {
 }
 
 declare interface PutEventsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -636,7 +636,7 @@ declare interface UpdateConnectionRequest {
 }
 
 declare interface UpdateConnectionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -650,7 +650,7 @@ declare interface UpdateEventBusRequest {
 }
 
 declare interface UpdateEventBusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -670,7 +670,7 @@ declare interface UpdateRuleRequest {
 }
 
 declare interface UpdateRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -690,7 +690,7 @@ declare interface UpdateTargetRequest {
 }
 
 declare interface UpdateTargetResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -706,64 +706,64 @@ declare interface UpdateTransformationRequest {
 }
 
 declare interface UpdateTransformationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Eb 事件总线} */
 declare interface Eb {
   (): Versions;
-  /** {@link CheckRule 检验规则}({@link CheckRuleRequest 请求参数}): {@link CheckRuleResponse 返回参数} */
+  /** 检验规则 {@link CheckRuleRequest} {@link CheckRuleResponse} */
   CheckRule(data?: CheckRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CheckRuleResponse>;
-  /** {@link CheckTransformation 检查转换器}({@link CheckTransformationRequest 请求参数}): {@link CheckTransformationResponse 返回参数} */
+  /** 检查转换器 {@link CheckTransformationRequest} {@link CheckTransformationResponse} */
   CheckTransformation(data: CheckTransformationRequest, config?: AxiosRequestConfig): AxiosPromise<CheckTransformationResponse>;
-  /** {@link CreateConnection 创建事件连接器}({@link CreateConnectionRequest 请求参数}): {@link CreateConnectionResponse 返回参数} */
+  /** 创建事件连接器 {@link CreateConnectionRequest} {@link CreateConnectionResponse} */
   CreateConnection(data: CreateConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConnectionResponse>;
-  /** {@link CreateEventBus 创建事件集}({@link CreateEventBusRequest 请求参数}): {@link CreateEventBusResponse 返回参数} */
+  /** 创建事件集 {@link CreateEventBusRequest} {@link CreateEventBusResponse} */
   CreateEventBus(data: CreateEventBusRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEventBusResponse>;
-  /** {@link CreateRule 创建事件规则}({@link CreateRuleRequest 请求参数}): {@link CreateRuleResponse 返回参数} */
+  /** 创建事件规则 {@link CreateRuleRequest} {@link CreateRuleResponse} */
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
-  /** {@link CreateTarget 创建事件目标}({@link CreateTargetRequest 请求参数}): {@link CreateTargetResponse 返回参数} */
+  /** 创建事件目标 {@link CreateTargetRequest} {@link CreateTargetResponse} */
   CreateTarget(data: CreateTargetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTargetResponse>;
-  /** {@link CreateTransformation 创建转换器}({@link CreateTransformationRequest 请求参数}): {@link CreateTransformationResponse 返回参数} */
+  /** 创建转换器 {@link CreateTransformationRequest} {@link CreateTransformationResponse} */
   CreateTransformation(data: CreateTransformationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTransformationResponse>;
-  /** {@link DeleteConnection 删除事件连接器}({@link DeleteConnectionRequest 请求参数}): {@link DeleteConnectionResponse 返回参数} */
+  /** 删除事件连接器 {@link DeleteConnectionRequest} {@link DeleteConnectionResponse} */
   DeleteConnection(data: DeleteConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConnectionResponse>;
-  /** {@link DeleteEventBus 删除事件集}({@link DeleteEventBusRequest 请求参数}): {@link DeleteEventBusResponse 返回参数} */
+  /** 删除事件集 {@link DeleteEventBusRequest} {@link DeleteEventBusResponse} */
   DeleteEventBus(data: DeleteEventBusRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEventBusResponse>;
-  /** {@link DeleteRule 删除事件规则}({@link DeleteRuleRequest 请求参数}): {@link DeleteRuleResponse 返回参数} */
+  /** 删除事件规则 {@link DeleteRuleRequest} {@link DeleteRuleResponse} */
   DeleteRule(data: DeleteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleResponse>;
-  /** {@link DeleteTarget 删除事件目标}({@link DeleteTargetRequest 请求参数}): {@link DeleteTargetResponse 返回参数} */
+  /** 删除事件目标 {@link DeleteTargetRequest} {@link DeleteTargetResponse} */
   DeleteTarget(data: DeleteTargetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTargetResponse>;
-  /** {@link DeleteTransformation 删除转换器}({@link DeleteTransformationRequest 请求参数}): {@link DeleteTransformationResponse 返回参数} */
+  /** 删除转换器 {@link DeleteTransformationRequest} {@link DeleteTransformationResponse} */
   DeleteTransformation(data: DeleteTransformationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTransformationResponse>;
-  /** {@link GetEventBus 获取事件集详情}({@link GetEventBusRequest 请求参数}): {@link GetEventBusResponse 返回参数} */
+  /** 获取事件集详情 {@link GetEventBusRequest} {@link GetEventBusResponse} */
   GetEventBus(data: GetEventBusRequest, config?: AxiosRequestConfig): AxiosPromise<GetEventBusResponse>;
-  /** {@link GetRule 获取事件规则详情}({@link GetRuleRequest 请求参数}): {@link GetRuleResponse 返回参数} */
+  /** 获取事件规则详情 {@link GetRuleRequest} {@link GetRuleResponse} */
   GetRule(data: GetRuleRequest, config?: AxiosRequestConfig): AxiosPromise<GetRuleResponse>;
-  /** {@link GetTransformation 获取转换器详情}({@link GetTransformationRequest 请求参数}): {@link GetTransformationResponse 返回参数} */
+  /** 获取转换器详情 {@link GetTransformationRequest} {@link GetTransformationResponse} */
   GetTransformation(data: GetTransformationRequest, config?: AxiosRequestConfig): AxiosPromise<GetTransformationResponse>;
-  /** {@link ListConnections 获取事件连接器列表}({@link ListConnectionsRequest 请求参数}): {@link ListConnectionsResponse 返回参数} */
+  /** 获取事件连接器列表 {@link ListConnectionsRequest} {@link ListConnectionsResponse} */
   ListConnections(data: ListConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListConnectionsResponse>;
-  /** {@link ListEventBuses 获取事件集列表}({@link ListEventBusesRequest 请求参数}): {@link ListEventBusesResponse 返回参数} */
+  /** 获取事件集列表 {@link ListEventBusesRequest} {@link ListEventBusesResponse} */
   ListEventBuses(data?: ListEventBusesRequest, config?: AxiosRequestConfig): AxiosPromise<ListEventBusesResponse>;
-  /** {@link ListRules 获取事件规则列表}({@link ListRulesRequest 请求参数}): {@link ListRulesResponse 返回参数} */
+  /** 获取事件规则列表 {@link ListRulesRequest} {@link ListRulesResponse} */
   ListRules(data: ListRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListRulesResponse>;
-  /** {@link ListTargets 获取事件目标列表}({@link ListTargetsRequest 请求参数}): {@link ListTargetsResponse 返回参数} */
+  /** 获取事件目标列表 {@link ListTargetsRequest} {@link ListTargetsResponse} */
   ListTargets(data: ListTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<ListTargetsResponse>;
-  /** {@link PublishEvent Event事件投递}({@link PublishEventRequest 请求参数}): {@link PublishEventResponse 返回参数} */
+  /** Event事件投递 {@link PublishEventRequest} {@link PublishEventResponse} */
   PublishEvent(data: PublishEventRequest, config?: AxiosRequestConfig): AxiosPromise<PublishEventResponse>;
-  /** {@link PutEvents 事件投递}({@link PutEventsRequest 请求参数}): {@link PutEventsResponse 返回参数} */
+  /** 事件投递 {@link PutEventsRequest} {@link PutEventsResponse} */
   PutEvents(data: PutEventsRequest, config?: AxiosRequestConfig): AxiosPromise<PutEventsResponse>;
-  /** {@link UpdateConnection 更新事件连接器}({@link UpdateConnectionRequest 请求参数}): {@link UpdateConnectionResponse 返回参数} */
+  /** 更新事件连接器 {@link UpdateConnectionRequest} {@link UpdateConnectionResponse} */
   UpdateConnection(data: UpdateConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateConnectionResponse>;
-  /** {@link UpdateEventBus 更新事件集}({@link UpdateEventBusRequest 请求参数}): {@link UpdateEventBusResponse 返回参数} */
+  /** 更新事件集 {@link UpdateEventBusRequest} {@link UpdateEventBusResponse} */
   UpdateEventBus(data: UpdateEventBusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEventBusResponse>;
-  /** {@link UpdateRule 更新事件规则}({@link UpdateRuleRequest 请求参数}): {@link UpdateRuleResponse 返回参数} */
+  /** 更新事件规则 {@link UpdateRuleRequest} {@link UpdateRuleResponse} */
   UpdateRule(data: UpdateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRuleResponse>;
-  /** {@link UpdateTarget 更新事件目标}({@link UpdateTargetRequest 请求参数}): {@link UpdateTargetResponse 返回参数} */
+  /** 更新事件目标 {@link UpdateTargetRequest} {@link UpdateTargetResponse} */
   UpdateTarget(data: UpdateTargetRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTargetResponse>;
-  /** {@link UpdateTransformation 更新转换器}({@link UpdateTransformationRequest 请求参数}): {@link UpdateTransformationResponse 返回参数} */
+  /** 更新转换器 {@link UpdateTransformationRequest} {@link UpdateTransformationResponse} */
   UpdateTransformation(data: UpdateTransformationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTransformationResponse>;
 }
 

@@ -2908,7 +2908,7 @@ declare interface AddClusterInstancesRequest {
 declare interface AddClusterInstancesResponse {
   /** 添加云主机的返回列表 */
   Result: AddInstanceResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2934,7 +2934,7 @@ declare interface AddInstancesRequest {
 declare interface AddInstancesResponse {
   /** 添加云主机是否成功 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2965,7 +2965,7 @@ declare interface AssociateBusinessLogConfigRequest {
 declare interface AssociateBusinessLogConfigResponse {
   /** 操作结果 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2987,7 +2987,7 @@ declare interface AssociateConfigWithGroupRequest {
 declare interface AssociateConfigWithGroupResponse {
   /** 绑定是否成功 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2999,7 +2999,7 @@ declare interface BindApiGroupRequest {
 declare interface BindApiGroupResponse {
   /** 返回结果，成功失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3011,7 +3011,7 @@ declare interface BindPluginRequest {
 declare interface BindPluginResponse {
   /** 返回结果，成功失败 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3025,7 +3025,7 @@ declare interface ChangeApiUsableStatusRequest {
 declare interface ChangeApiUsableStatusResponse {
   /** API 信息 */
   Result?: ApiDetailInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3037,7 +3037,7 @@ declare interface ContinueRunFailedTaskBatchRequest {
 declare interface ContinueRunFailedTaskBatchResponse {
   /** 成功或失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3051,7 +3051,7 @@ declare interface CreateAllGatewayApiAsyncRequest {
 declare interface CreateAllGatewayApiAsyncResponse {
   /** 是否成功 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3081,7 +3081,7 @@ declare interface CreateApiGroupRequest {
 declare interface CreateApiGroupResponse {
   /** API分组ID */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3097,7 +3097,7 @@ declare interface CreateApiRateLimitRuleRequest {
 declare interface CreateApiRateLimitRuleResponse {
   /** 是否成功 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3129,7 +3129,7 @@ declare interface CreateApplicationRequest {
 declare interface CreateApplicationResponse {
   /** 应用ID */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3171,7 +3171,7 @@ declare interface CreateClusterRequest {
 declare interface CreateClusterResponse {
   /** 集群ID */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3197,7 +3197,7 @@ declare interface CreateConfigRequest {
 declare interface CreateConfigResponse {
   /** true：创建成功；false：创建失败 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3255,7 +3255,7 @@ declare interface CreateContainGroupRequest {
 declare interface CreateContainGroupResponse {
   /** 返回创建成功的部署组ID，返回null表示失败 */
   Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3287,7 +3287,7 @@ declare interface CreateFileConfigRequest {
 declare interface CreateFileConfigResponse {
   /** true：创建成功；false：创建失败 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3303,7 +3303,7 @@ declare interface CreateGatewayApiRequest {
 declare interface CreateGatewayApiResponse {
   /** 是否成功 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3327,7 +3327,7 @@ declare interface CreateGroupRequest {
 declare interface CreateGroupResponse {
   /** groupId， null表示创建失败 */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3345,7 +3345,7 @@ declare interface CreateLaneRequest {
 declare interface CreateLaneResponse {
   /** 泳道ID */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3367,7 +3367,7 @@ declare interface CreateLaneRuleRequest {
 declare interface CreateLaneRuleResponse {
   /** 泳道规则Id */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3383,7 +3383,7 @@ declare interface CreateMicroserviceRequest {
 declare interface CreateMicroserviceResponse {
   /** 新增微服务是否成功。true：操作成功。false：操作失败。 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3411,7 +3411,7 @@ declare interface CreateNamespaceRequest {
 declare interface CreateNamespaceResponse {
   /** 成功时为命名空间ID，失败为null */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3423,7 +3423,7 @@ declare interface CreatePathRewritesRequest {
 declare interface CreatePathRewritesResponse {
   /** true/false */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3447,7 +3447,7 @@ declare interface CreatePublicConfigRequest {
 declare interface CreatePublicConfigResponse {
   /** true：创建成功；false：创建失败 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3469,7 +3469,7 @@ declare interface CreateRepositoryRequest {
 declare interface CreateRepositoryResponse {
   /** 创建仓库是否成功 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3489,7 +3489,7 @@ declare interface CreateTaskFlowRequest {
 declare interface CreateTaskFlowResponse {
   /** 工作流 ID */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3531,7 +3531,7 @@ declare interface CreateTaskRequest {
 declare interface CreateTaskResponse {
   /** 任务ID */
   Result: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3549,7 +3549,7 @@ declare interface CreateUnitRuleRequest {
 declare interface CreateUnitRuleResponse {
   /** 是否成功 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3561,7 +3561,7 @@ declare interface DeleteApiGroupRequest {
 declare interface DeleteApiGroupResponse {
   /** 成功失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3573,7 +3573,7 @@ declare interface DeleteApplicationRequest {
 declare interface DeleteApplicationResponse {
   /** 删除应用操作是否成功。true：操作成功。false：操作失败。 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3585,7 +3585,7 @@ declare interface DeleteConfigRequest {
 declare interface DeleteConfigResponse {
   /** true：删除成功；false：删除失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3597,7 +3597,7 @@ declare interface DeleteContainerGroupRequest {
 declare interface DeleteContainerGroupResponse {
   /** 删除操作是否成功：true：成功false：失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3609,7 +3609,7 @@ declare interface DeleteGroupRequest {
 declare interface DeleteGroupResponse {
   /** 删除部署组操作是否成功。true：操作成功。false：操作失败。 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3623,7 +3623,7 @@ declare interface DeleteImageTagsRequest {
 declare interface DeleteImageTagsResponse {
   /** 批量删除操作是否成功。true：成功。false：失败。 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3635,7 +3635,7 @@ declare interface DeleteLaneRequest {
 declare interface DeleteLaneResponse {
   /** true / false */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3647,7 +3647,7 @@ declare interface DeleteLaneRuleRequest {
 declare interface DeleteLaneRuleResponse {
   /** 操作状态 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3659,7 +3659,7 @@ declare interface DeleteMicroserviceRequest {
 declare interface DeleteMicroserviceResponse {
   /** 删除微服务是否成功。true：操作成功。false：操作失败。 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3673,7 +3673,7 @@ declare interface DeleteNamespaceRequest {
 declare interface DeleteNamespaceResponse {
   /** 删除命名空间是否成功。true：删除成功。false：删除失败。 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3685,7 +3685,7 @@ declare interface DeletePathRewritesRequest {
 declare interface DeletePathRewritesResponse {
   /** true/false */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3701,7 +3701,7 @@ declare interface DeletePkgsRequest {
 }
 
 declare interface DeletePkgsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3713,7 +3713,7 @@ declare interface DeletePublicConfigRequest {
 declare interface DeletePublicConfigResponse {
   /** true：删除成功；false：删除失败 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3725,7 +3725,7 @@ declare interface DeleteRepositoryRequest {
 declare interface DeleteRepositoryResponse {
   /** 删除仓库是否成功 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3737,7 +3737,7 @@ declare interface DeleteServerlessGroupRequest {
 declare interface DeleteServerlessGroupResponse {
   /** 结果true：成功；false：失败。 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3749,7 +3749,7 @@ declare interface DeleteTaskRequest {
 declare interface DeleteTaskResponse {
   /** 删除成功or失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3763,7 +3763,7 @@ declare interface DeleteUnitNamespacesRequest {
 declare interface DeleteUnitNamespacesResponse {
   /** 是否成功 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3775,7 +3775,7 @@ declare interface DeleteUnitRuleRequest {
 declare interface DeleteUnitRuleResponse {
   /** 是否成功 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3861,7 +3861,7 @@ declare interface DeployContainerGroupRequest {
 declare interface DeployContainerGroupResponse {
   /** 部署容器应用是否成功。true：成功。false：失败。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3909,7 +3909,7 @@ declare interface DeployGroupRequest {
 declare interface DeployGroupResponse {
   /** 任务ID */
   Result: TaskId | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3929,7 +3929,7 @@ declare interface DescribeApiDetailRequest {
 declare interface DescribeApiDetailResponse {
   /** API 详情 */
   Result?: ApiDetailResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3941,7 +3941,7 @@ declare interface DescribeApiGroupRequest {
 declare interface DescribeApiGroupResponse {
   /** API分组信息 */
   Result: ApiGroupInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3969,7 +3969,7 @@ declare interface DescribeApiGroupsRequest {
 declare interface DescribeApiGroupsResponse {
   /** 翻页结构体 */
   Result: TsfPageApiGroupInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3981,7 +3981,7 @@ declare interface DescribeApiRateLimitRulesRequest {
 declare interface DescribeApiRateLimitRulesResponse {
   /** 限流结果 */
   Result?: ApiRateLimitRule[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3999,7 +3999,7 @@ declare interface DescribeApiUseDetailRequest {
 declare interface DescribeApiUseDetailResponse {
   /** 日使用统计对象 */
   Result?: GroupApiUseStatistics;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4015,7 +4015,7 @@ declare interface DescribeApiVersionsRequest {
 declare interface DescribeApiVersionsResponse {
   /** API版本列表 */
   Result?: ApiVersionArray[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4027,7 +4027,7 @@ declare interface DescribeApplicationAttributeRequest {
 declare interface DescribeApplicationAttributeResponse {
   /** 应用列表其它字段返回参数 */
   Result?: ApplicationAttribute;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4037,7 +4037,7 @@ declare interface DescribeApplicationBusinessLogConfigRequest {
 }
 
 declare interface DescribeApplicationBusinessLogConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4049,7 +4049,7 @@ declare interface DescribeApplicationRequest {
 declare interface DescribeApplicationResponse {
   /** 应用信息 */
   Result?: ApplicationForPage | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4077,7 +4077,7 @@ declare interface DescribeApplicationsRequest {
 declare interface DescribeApplicationsResponse {
   /** 应用分页列表信息 */
   Result?: TsfPageApplication | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4089,7 +4089,7 @@ declare interface DescribeBasicResourceUsageRequest {
 declare interface DescribeBasicResourceUsageResponse {
   /** TSF基本资源信息 */
   Result: OverviewBasicResourceUsage | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4101,7 +4101,7 @@ declare interface DescribeBusinessLogConfigRequest {
 declare interface DescribeBusinessLogConfigResponse {
   /** 日志配置项 */
   Result?: BusinessLogConfig | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4121,7 +4121,7 @@ declare interface DescribeBusinessLogConfigsRequest {
 declare interface DescribeBusinessLogConfigsResponse {
   /** 业务日志配置列表 */
   Result: TsfPageBusinessLogConfig | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4143,7 +4143,7 @@ declare interface DescribeClusterInstancesRequest {
 declare interface DescribeClusterInstancesResponse {
   /** 集群机器实例分页信息 */
   Result: TsfPageInstance | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4165,7 +4165,7 @@ declare interface DescribeConfigReleaseLogsRequest {
 declare interface DescribeConfigReleaseLogsResponse {
   /** 分页的配置项发布历史列表 */
   Result?: TsfPageConfigReleaseLog | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4191,7 +4191,7 @@ declare interface DescribeConfigReleasesRequest {
 declare interface DescribeConfigReleasesResponse {
   /** 分页的配置发布信息 */
   Result?: TsfPageConfigRelease | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4203,7 +4203,7 @@ declare interface DescribeConfigRequest {
 declare interface DescribeConfigResponse {
   /** 配置项 */
   Result?: Config | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4231,7 +4231,7 @@ declare interface DescribeConfigSummaryRequest {
 declare interface DescribeConfigSummaryResponse {
   /** 配置项分页对象 */
   Result: TsfPageConfig;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4255,7 +4255,7 @@ declare interface DescribeConfigsRequest {
 declare interface DescribeConfigsResponse {
   /** 分页后的配置项列表 */
   Result: TsfPageConfig | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4275,7 +4275,7 @@ declare interface DescribeContainerEventsRequest {
 declare interface DescribeContainerEventsResponse {
   /** events 分页列表 */
   Result: TsfPageContainerEvent | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4287,7 +4287,7 @@ declare interface DescribeContainerGroupDeployInfoRequest {
 declare interface DescribeContainerGroupDeployInfoResponse {
   /** 获取部署组 */
   Result: ContainerGroupDeploy | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4299,7 +4299,7 @@ declare interface DescribeContainerGroupDetailRequest {
 declare interface DescribeContainerGroupDetailResponse {
   /** 容器部署组详情 */
   Result: ContainerGroupDetail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4325,7 +4325,7 @@ declare interface DescribeContainerGroupsRequest {
 declare interface DescribeContainerGroupsResponse {
   /** 查询的权限数据对象 */
   Result?: ContainGroupResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4339,7 +4339,7 @@ declare interface DescribeCreateGatewayApiStatusRequest {
 declare interface DescribeCreateGatewayApiStatusResponse {
   /** 是否已完成导入任务 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4351,7 +4351,7 @@ declare interface DescribeDeliveryConfigByGroupIdRequest {
 declare interface DescribeDeliveryConfigByGroupIdResponse {
   /** 投递kafak配置项 */
   Result?: SimpleKafkaDeliveryConfig;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4363,7 +4363,7 @@ declare interface DescribeDeliveryConfigRequest {
 declare interface DescribeDeliveryConfigResponse {
   /** 投递kafka配置 */
   Result?: KafkaDeliveryConfig;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4379,7 +4379,7 @@ declare interface DescribeDeliveryConfigsRequest {
 declare interface DescribeDeliveryConfigsResponse {
   /** 投递项关联部署组信息 */
   Result?: DeliveryConfigBindGroups | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4397,7 +4397,7 @@ declare interface DescribeDownloadInfoRequest {
 declare interface DescribeDownloadInfoResponse {
   /** COS鉴权信息 */
   Result?: CosDownloadInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4409,7 +4409,7 @@ declare interface DescribeEnabledUnitRuleRequest {
 declare interface DescribeEnabledUnitRuleResponse {
   /** 单元化规则对象 */
   Result?: UnitRule | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4433,7 +4433,7 @@ declare interface DescribeFileConfigsRequest {
 declare interface DescribeFileConfigsResponse {
   /** 文件配置项列表 */
   Result: TsfPageFileConfig | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4445,7 +4445,7 @@ declare interface DescribeFlowLastBatchStateRequest {
 declare interface DescribeFlowLastBatchStateResponse {
   /** 工作流批次最新状态 */
   Result?: TaskFlowLastBatchState;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4459,7 +4459,7 @@ declare interface DescribeGatewayAllGroupApisRequest {
 declare interface DescribeGatewayAllGroupApisResponse {
   /** 网关分组和API列表信息 */
   Result?: GatewayVo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4479,7 +4479,7 @@ declare interface DescribeGatewayApisRequest {
 declare interface DescribeGatewayApisResponse {
   /** 翻页结构 */
   Result: TsfPageApiDetailInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4491,7 +4491,7 @@ declare interface DescribeGatewayMonitorOverviewRequest {
 declare interface DescribeGatewayMonitorOverviewResponse {
   /** 监控概览对象 */
   Result?: MonitorOverview;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4503,7 +4503,7 @@ declare interface DescribeGroupAttributeRequest {
 declare interface DescribeGroupAttributeResponse {
   /** 虚拟机部署组信息 */
   Result?: VmGroupOther | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4521,7 +4521,7 @@ declare interface DescribeGroupBindedGatewaysRequest {
 declare interface DescribeGroupBindedGatewaysResponse {
   /** 翻页结构体 */
   Result: TsfPageGatewayDeployGroup;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4533,7 +4533,7 @@ declare interface DescribeGroupBusinessLogConfigsRequest {
 declare interface DescribeGroupBusinessLogConfigsResponse {
   /** 业务日志配置列表 */
   Result?: TsfPageBusinessLogConfig | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4551,7 +4551,7 @@ declare interface DescribeGroupGatewaysRequest {
 declare interface DescribeGroupGatewaysResponse {
   /** API分组信息 */
   Result?: TsfPageApiGroupInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4573,7 +4573,7 @@ declare interface DescribeGroupInstancesRequest {
 declare interface DescribeGroupInstancesResponse {
   /** 部署组机器信息 */
   Result?: TsfPageInstance | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4585,7 +4585,7 @@ declare interface DescribeGroupReleaseRequest {
 declare interface DescribeGroupReleaseResponse {
   /** 部署组发布的相关信息 */
   Result: GroupRelease | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4597,7 +4597,7 @@ declare interface DescribeGroupRequest {
 declare interface DescribeGroupResponse {
   /** 虚拟机部署组详情 */
   Result: VmGroup | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4617,7 +4617,7 @@ declare interface DescribeGroupUseDetailRequest {
 declare interface DescribeGroupUseDetailResponse {
   /** 日使用统计对象 */
   Result?: GroupDailyUseStatistics;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4649,7 +4649,7 @@ declare interface DescribeGroupsRequest {
 declare interface DescribeGroupsResponse {
   /** 虚拟机部署组分页信息 */
   Result: TsfPageVmGroup | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4671,7 +4671,7 @@ declare interface DescribeGroupsWithPluginRequest {
 declare interface DescribeGroupsWithPluginResponse {
   /** API分组信息列表 */
   Result: TsfPageApiGroupInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4693,7 +4693,7 @@ declare interface DescribeImageRepositoryRequest {
 declare interface DescribeImageRepositoryResponse {
   /** 查询的权限数据对象 */
   Result: ImageRepositoryResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4717,7 +4717,7 @@ declare interface DescribeImageTagsRequest {
 declare interface DescribeImageTagsResponse {
   /** 查询的权限数据对象 */
   Result: ImageTagsResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4751,7 +4751,7 @@ declare interface DescribeInovcationIndicatorsRequest {
 declare interface DescribeInovcationIndicatorsResponse {
   /** 服务调用监控指标 */
   Result?: InvocationIndicator | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4767,7 +4767,7 @@ declare interface DescribeInstancesRequest {
 declare interface DescribeInstancesResponse {
   /** 机器列表信息 */
   Result?: InstanceEnrichedInfoPage | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4791,7 +4791,7 @@ declare interface DescribeInvocationMetricDataCurveRequest {
 declare interface DescribeInvocationMetricDataCurveResponse {
   /** 指标监控数据曲线集合 */
   Result: MetricDataCurve[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4815,7 +4815,7 @@ declare interface DescribeInvocationMetricDataDimensionRequest {
 declare interface DescribeInvocationMetricDataDimensionResponse {
   /** 维度 */
   Result: TsfPageDimension;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4835,7 +4835,7 @@ declare interface DescribeInvocationMetricDataPointRequest {
 declare interface DescribeInvocationMetricDataPointResponse {
   /** 单值指标列表 */
   Result: MetricDataSingleValue[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4857,7 +4857,7 @@ declare interface DescribeInvocationMetricScatterPlotRequest {
 declare interface DescribeInvocationMetricScatterPlotResponse {
   /** 多值时间抽统计指标 */
   Result: InvocationMetricScatterPlot | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4881,7 +4881,7 @@ declare interface DescribeJvmMonitorRequest {
 declare interface DescribeJvmMonitorResponse {
   /** Java实例jvm监控数据 */
   Result?: JvmMonitorData | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4901,7 +4901,7 @@ declare interface DescribeLaneRulesRequest {
 declare interface DescribeLaneRulesResponse {
   /** 泳道规则列表 */
   Result: LaneRules | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4921,7 +4921,7 @@ declare interface DescribeLanesRequest {
 declare interface DescribeLanesResponse {
   /** 泳道列表 */
   Result: LaneInfos | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4941,7 +4941,7 @@ declare interface DescribeMicroserviceRequest {
 declare interface DescribeMicroserviceResponse {
   /** 微服务详情实例列表 */
   Result: TsfPageMsInstance | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4969,7 +4969,7 @@ declare interface DescribeMicroservicesRequest {
 declare interface DescribeMicroservicesResponse {
   /** 微服务分页列表信息 */
   Result: TsfPageMicroservice | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -4987,7 +4987,7 @@ declare interface DescribeMsApiListRequest {
 declare interface DescribeMsApiListResponse {
   /** 相应结果 */
   Result?: TsfApiListResponse;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5007,7 +5007,7 @@ declare interface DescribeOverviewInvocationRequest {
 declare interface DescribeOverviewInvocationResponse {
   /** 监控统计数据列表 */
   Result: MetricDataPoint[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5019,7 +5019,7 @@ declare interface DescribePathRewriteRequest {
 declare interface DescribePathRewriteResponse {
   /** 路径重写规则对象 */
   Result?: PathRewrite;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5037,7 +5037,7 @@ declare interface DescribePathRewritesRequest {
 declare interface DescribePathRewritesResponse {
   /** 路径重写翻页对象 */
   Result?: PathRewritePage;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5065,7 +5065,7 @@ declare interface DescribePkgsRequest {
 declare interface DescribePkgsResponse {
   /** 符合查询程序包信息列表 */
   Result: PkgList;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5087,7 +5087,7 @@ declare interface DescribePluginInstancesRequest {
 declare interface DescribePluginInstancesResponse {
   /** 插件信息列表 */
   Result: TsfPageGatewayPlugin;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5105,7 +5105,7 @@ declare interface DescribePodInstancesRequest {
 declare interface DescribePodInstancesResponse {
   /** 查询的权限数据对象 */
   Result: GroupPodResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5121,7 +5121,7 @@ declare interface DescribeProgramsRequest {
 declare interface DescribeProgramsResponse {
   /** 数据集列表 */
   Result?: PagedProgram;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5137,7 +5137,7 @@ declare interface DescribePublicConfigReleaseLogsRequest {
 declare interface DescribePublicConfigReleaseLogsResponse {
   /** 分页后的公共配置项发布历史列表 */
   Result?: TsfPageConfigReleaseLog | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5157,7 +5157,7 @@ declare interface DescribePublicConfigReleasesRequest {
 declare interface DescribePublicConfigReleasesResponse {
   /** 公共配置发布信息 */
   Result?: TsfPageConfigRelease | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5169,7 +5169,7 @@ declare interface DescribePublicConfigRequest {
 declare interface DescribePublicConfigResponse {
   /** 全局配置 */
   Result?: Config | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5195,7 +5195,7 @@ declare interface DescribePublicConfigSummaryRequest {
 declare interface DescribePublicConfigSummaryResponse {
   /** 分页的全局配置统计信息列表 */
   Result: TsfPageConfig | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5217,7 +5217,7 @@ declare interface DescribePublicConfigsRequest {
 declare interface DescribePublicConfigsResponse {
   /** 分页后的全局配置项列表 */
   Result: TsfPageConfig | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5229,7 +5229,7 @@ declare interface DescribeReleasedConfigRequest {
 declare interface DescribeReleasedConfigResponse {
   /** 已发布的配置内容 */
   Result?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5247,7 +5247,7 @@ declare interface DescribeRepositoriesRequest {
 declare interface DescribeRepositoriesResponse {
   /** 符合查询仓库信息列表 */
   Result?: RepositoryList;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5259,7 +5259,7 @@ declare interface DescribeRepositoryRequest {
 declare interface DescribeRepositoryResponse {
   /** 查询的仓库信息 */
   Result?: RepositoryInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5285,7 +5285,7 @@ declare interface DescribeSimpleApplicationsRequest {
 declare interface DescribeSimpleApplicationsResponse {
   /** 简单应用分页对象 */
   Result: TsfPageSimpleApplication | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5307,7 +5307,7 @@ declare interface DescribeSimpleClustersRequest {
 declare interface DescribeSimpleClustersResponse {
   /** TSF集群分页对象 */
   Result: TsfPageCluster | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5335,7 +5335,7 @@ declare interface DescribeSimpleGroupsRequest {
 declare interface DescribeSimpleGroupsResponse {
   /** 简单部署组列表 */
   Result?: TsfPageSimpleGroup | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5367,7 +5367,7 @@ declare interface DescribeSimpleNamespacesRequest {
 declare interface DescribeSimpleNamespacesResponse {
   /** 命名空间分页列表 */
   Result: TsfPageNamespace | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5407,7 +5407,7 @@ declare interface DescribeStatisticsRequest {
 declare interface DescribeStatisticsResponse {
   /** 查询服务统计结果 */
   Result: ServiceStatisticsResults | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5421,7 +5421,7 @@ declare interface DescribeTaskDetailRequest {
 declare interface DescribeTaskDetailResponse {
   /** 任务详情 */
   Result: TaskRecord;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5433,7 +5433,7 @@ declare interface DescribeTaskLastStatusRequest {
 declare interface DescribeTaskLastStatusResponse {
   /** 任务上一次执行状态 */
   Result?: TaskLastExecuteStatus;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5459,7 +5459,7 @@ declare interface DescribeTaskRecordsRequest {
 declare interface DescribeTaskRecordsResponse {
   /** 任务记录列表 */
   Result: TaskRecordPage | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5487,7 +5487,7 @@ declare interface DescribeUnitApiUseDetailRequest {
 declare interface DescribeUnitApiUseDetailResponse {
   /** 单元化使用统计对象 */
   Result: GroupUnitApiUseStatistics;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5505,7 +5505,7 @@ declare interface DescribeUnitNamespacesRequest {
 declare interface DescribeUnitNamespacesResponse {
   /** 单元化命名空间对象列表 */
   Result?: TsfPageUnitNamespace | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5517,7 +5517,7 @@ declare interface DescribeUnitRuleRequest {
 declare interface DescribeUnitRuleResponse {
   /** 单元化规则对象 */
   Result: UnitRule | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5537,7 +5537,7 @@ declare interface DescribeUnitRulesRequest {
 declare interface DescribeUnitRulesResponse {
   /** 分页列表信息 */
   Result?: TsfPageUnitRule[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5561,7 +5561,7 @@ declare interface DescribeUploadInfoRequest {
 declare interface DescribeUploadInfoResponse {
   /** COS上传信息 */
   Result?: CosUploadInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5577,7 +5577,7 @@ declare interface DescribeUsableUnitNamespacesRequest {
 declare interface DescribeUsableUnitNamespacesResponse {
   /** 单元化命名空间对象列表 */
   Result?: TsfPageUnitNamespace | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5589,7 +5589,7 @@ declare interface DisableTaskFlowRequest {
 declare interface DisableTaskFlowResponse {
   /** true成功，false: 失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5601,7 +5601,7 @@ declare interface DisableTaskRequest {
 declare interface DisableTaskResponse {
   /** 操作成功 or 失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5613,7 +5613,7 @@ declare interface DisableUnitRouteRequest {
 declare interface DisableUnitRouteResponse {
   /** 返回结果，成功失败 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5625,7 +5625,7 @@ declare interface DisableUnitRuleRequest {
 declare interface DisableUnitRuleResponse {
   /** 是否成功 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5639,7 +5639,7 @@ declare interface DisassociateBusinessLogConfigRequest {
 declare interface DisassociateBusinessLogConfigResponse {
   /** 操作结果 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5653,7 +5653,7 @@ declare interface DisassociateKafkaConfigRequest {
 declare interface DisassociateKafkaConfigResponse {
   /** 解除绑定是否成功 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5665,7 +5665,7 @@ declare interface DraftApiGroupRequest {
 declare interface DraftApiGroupResponse {
   /** true: 成功, false: 失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5677,7 +5677,7 @@ declare interface EnableTaskFlowRequest {
 declare interface EnableTaskFlowResponse {
   /** true成功，false: 失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5689,7 +5689,7 @@ declare interface EnableTaskRequest {
 declare interface EnableTaskResponse {
   /** 操作成功or失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5701,7 +5701,7 @@ declare interface EnableUnitRouteRequest {
 declare interface EnableUnitRouteResponse {
   /** 返回结果，成功失败 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5713,7 +5713,7 @@ declare interface EnableUnitRuleRequest {
 declare interface EnableUnitRuleResponse {
   /** 是否成功 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5725,7 +5725,7 @@ declare interface ExecuteTaskFlowRequest {
 declare interface ExecuteTaskFlowResponse {
   /** 工作流批次ID */
   Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5737,7 +5737,7 @@ declare interface ExecuteTaskRequest {
 declare interface ExecuteTaskResponse {
   /** 成功/失败 */
   Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5751,7 +5751,7 @@ declare interface ExpandGroupRequest {
 declare interface ExpandGroupResponse {
   /** 任务ID */
   Result?: TaskId | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5775,7 +5775,7 @@ declare interface ModifyContainerGroupRequest {
 declare interface ModifyContainerGroupResponse {
   /** 更新部署组是否成功。true：成功。false：失败。 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5789,7 +5789,7 @@ declare interface ModifyContainerReplicasRequest {
 declare interface ModifyContainerReplicasResponse {
   /** 结果true：成功；false：失败； */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5805,7 +5805,7 @@ declare interface ModifyLaneRequest {
 declare interface ModifyLaneResponse {
   /** 操作状态 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5829,7 +5829,7 @@ declare interface ModifyLaneRuleRequest {
 declare interface ModifyLaneRuleResponse {
   /** 操作状态 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5843,7 +5843,7 @@ declare interface ModifyMicroserviceRequest {
 declare interface ModifyMicroserviceResponse {
   /** 修改微服务详情是否成功。true：操作成功。false：操作失败。 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5863,7 +5863,7 @@ declare interface ModifyPathRewriteRequest {
 declare interface ModifyPathRewriteResponse {
   /** true/false */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5907,7 +5907,7 @@ declare interface ModifyTaskRequest {
 declare interface ModifyTaskResponse {
   /** 更新是否成功 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5929,7 +5929,7 @@ declare interface ModifyUploadInfoRequest {
 }
 
 declare interface ModifyUploadInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5945,7 +5945,7 @@ declare interface OperateApplicationTcrBindingRequest {
 declare interface OperateApplicationTcrBindingResponse {
   /** 是否成功 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5961,7 +5961,7 @@ declare interface ReassociateBusinessLogConfigRequest {
 }
 
 declare interface ReassociateBusinessLogConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5975,7 +5975,7 @@ declare interface RedoTaskBatchRequest {
 declare interface RedoTaskBatchResponse {
   /** 批次ID */
   Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -5991,7 +5991,7 @@ declare interface RedoTaskExecuteRequest {
 declare interface RedoTaskExecuteResponse {
   /** 成功失败 */
   Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6003,7 +6003,7 @@ declare interface RedoTaskFlowBatchRequest {
 declare interface RedoTaskFlowBatchResponse {
   /** 工作流批次历史 ID */
   Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6015,7 +6015,7 @@ declare interface RedoTaskRequest {
 declare interface RedoTaskResponse {
   /** 操作成功or失败 */
   Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6027,7 +6027,7 @@ declare interface ReleaseApiGroupRequest {
 declare interface ReleaseApiGroupResponse {
   /** 成功/失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6043,7 +6043,7 @@ declare interface ReleaseConfigRequest {
 declare interface ReleaseConfigResponse {
   /** true：发布成功；false：发布失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6059,7 +6059,7 @@ declare interface ReleaseFileConfigRequest {
 declare interface ReleaseFileConfigResponse {
   /** 发布结果 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6075,7 +6075,7 @@ declare interface ReleasePublicConfigRequest {
 declare interface ReleasePublicConfigResponse {
   /** true：发布成功；false：发布失败 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6089,7 +6089,7 @@ declare interface RemoveInstancesRequest {
 declare interface RemoveInstancesResponse {
   /** 集群移除机器是否成功 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6101,7 +6101,7 @@ declare interface RevocationConfigRequest {
 declare interface RevocationConfigResponse {
   /** true：回滚成功；false：回滚失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6113,7 +6113,7 @@ declare interface RevocationPublicConfigRequest {
 declare interface RevocationPublicConfigResponse {
   /** true：撤销成功；false：撤销失败 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6127,7 +6127,7 @@ declare interface RollbackConfigRequest {
 declare interface RollbackConfigResponse {
   /** true：回滚成功；false：回滚失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6163,7 +6163,7 @@ declare interface SearchBusinessLogRequest {
 declare interface SearchBusinessLogResponse {
   /** 业务日志列表 */
   Result: TsfPageBusinessLogV2 | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6197,7 +6197,7 @@ declare interface SearchStdoutLogRequest {
 declare interface SearchStdoutLogResponse {
   /** 标准输出日志列表 */
   Result: TsfPageStdoutLogV2 | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6209,7 +6209,7 @@ declare interface ShrinkGroupRequest {
 declare interface ShrinkGroupResponse {
   /** 任务ID */
   Result?: TaskId | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6223,7 +6223,7 @@ declare interface ShrinkInstancesRequest {
 declare interface ShrinkInstancesResponse {
   /** 任务ID */
   Result?: TaskId;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6235,7 +6235,7 @@ declare interface StartContainerGroupRequest {
 declare interface StartContainerGroupResponse {
   /** 启动操作是否成功。true：启动成功false：启动失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6247,7 +6247,7 @@ declare interface StartGroupRequest {
 declare interface StartGroupResponse {
   /** 任务ID */
   Result?: TaskId | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6259,7 +6259,7 @@ declare interface StopContainerGroupRequest {
 declare interface StopContainerGroupResponse {
   /** 停止操作是否成功。true：停止成功false：停止失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6271,7 +6271,7 @@ declare interface StopGroupRequest {
 declare interface StopGroupResponse {
   /** 任务ID */
   Result?: TaskId | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6285,7 +6285,7 @@ declare interface StopTaskBatchRequest {
 declare interface StopTaskBatchResponse {
   /** 操作成功 or 失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6301,7 +6301,7 @@ declare interface StopTaskExecuteRequest {
 declare interface StopTaskExecuteResponse {
   /** 操作成功 or 失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6313,7 +6313,7 @@ declare interface TerminateTaskFlowBatchRequest {
 declare interface TerminateTaskFlowBatchResponse {
   /** 是否停止成功 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6332,7 +6332,7 @@ declare interface UnbindApiGroupRequest {
 declare interface UnbindApiGroupResponse {
   /** 返回结果，成功失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6360,7 +6360,7 @@ declare interface UpdateApiGroupRequest {
 declare interface UpdateApiGroupResponse {
   /** 返回结果，true: 成功, false: 失败 */
   Result: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6376,7 +6376,7 @@ declare interface UpdateApiRateLimitRuleRequest {
 declare interface UpdateApiRateLimitRuleResponse {
   /** 是否成功 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6392,7 +6392,7 @@ declare interface UpdateApiRateLimitRulesRequest {
 declare interface UpdateApiRateLimitRulesResponse {
   /** 是否成功 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6408,7 +6408,7 @@ declare interface UpdateApiTimeoutsRequest {
 declare interface UpdateApiTimeoutsResponse {
   /** 是否成功 */
   Result: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6430,7 +6430,7 @@ declare interface UpdateGatewayApiRequest {
 declare interface UpdateGatewayApiResponse {
   /** 返回结果，成功失败 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6446,7 +6446,7 @@ declare interface UpdateHealthCheckSettingsRequest {
 declare interface UpdateHealthCheckSettingsResponse {
   /** 更新健康检查配置操作是否成功。true：操作成功。false：操作失败。 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6460,7 +6460,7 @@ declare interface UpdateRepositoryRequest {
 declare interface UpdateRepositoryResponse {
   /** 更新仓库是否成功 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -6478,394 +6478,394 @@ declare interface UpdateUnitRuleRequest {
 declare interface UpdateUnitRuleResponse {
   /** 是否成功 */
   Result?: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tsf 微服务平台 TSF} */
 declare interface Tsf {
   (): Versions;
-  /** {@link AddClusterInstances 集群添加云主机}({@link AddClusterInstancesRequest 请求参数}): {@link AddClusterInstancesResponse 返回参数} */
+  /** 集群添加云主机 {@link AddClusterInstancesRequest} {@link AddClusterInstancesResponse} */
   AddClusterInstances(data: AddClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AddClusterInstancesResponse>;
-  /** {@link AddInstances 集群导入云主机}({@link AddInstancesRequest 请求参数}): {@link AddInstancesResponse 返回参数} */
+  /** 集群导入云主机 {@link AddInstancesRequest} {@link AddInstancesResponse} */
   AddInstances(data: AddInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AddInstancesResponse>;
-  /** {@link AssociateBusinessLogConfig 关联日志配置项到应用}({@link AssociateBusinessLogConfigRequest 请求参数}): {@link AssociateBusinessLogConfigResponse 返回参数} */
+  /** 关联日志配置项到应用 {@link AssociateBusinessLogConfigRequest} {@link AssociateBusinessLogConfigResponse} */
   AssociateBusinessLogConfig(data: AssociateBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateBusinessLogConfigResponse>;
-  /** {@link AssociateConfigWithGroup 关联投递配置到部署组}({@link AssociateConfigWithGroupRequest 请求参数}): {@link AssociateConfigWithGroupResponse 返回参数} */
+  /** 关联投递配置到部署组 {@link AssociateConfigWithGroupRequest} {@link AssociateConfigWithGroupResponse} */
   AssociateConfigWithGroup(data: AssociateConfigWithGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateConfigWithGroupResponse>;
-  /** {@link BindApiGroup 网关与API分组批量绑定}({@link BindApiGroupRequest 请求参数}): {@link BindApiGroupResponse 返回参数} */
+  /** 网关与API分组批量绑定 {@link BindApiGroupRequest} {@link BindApiGroupResponse} */
   BindApiGroup(data: BindApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<BindApiGroupResponse>;
-  /** {@link BindPlugin 批量绑定插件}({@link BindPluginRequest 请求参数}): {@link BindPluginResponse 返回参数} */
+  /** 批量绑定插件 {@link BindPluginRequest} {@link BindPluginResponse} */
   BindPlugin(data: BindPluginRequest, config?: AxiosRequestConfig): AxiosPromise<BindPluginResponse>;
-  /** {@link ChangeApiUsableStatus 启用或禁用API}({@link ChangeApiUsableStatusRequest 请求参数}): {@link ChangeApiUsableStatusResponse 返回参数} */
+  /** 启用或禁用API {@link ChangeApiUsableStatusRequest} {@link ChangeApiUsableStatusResponse} */
   ChangeApiUsableStatus(data: ChangeApiUsableStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeApiUsableStatusResponse>;
-  /** {@link ContinueRunFailedTaskBatch 续跑任务批次}({@link ContinueRunFailedTaskBatchRequest 请求参数}): {@link ContinueRunFailedTaskBatchResponse 返回参数} */
+  /** 续跑任务批次 {@link ContinueRunFailedTaskBatchRequest} {@link ContinueRunFailedTaskBatchResponse} */
   ContinueRunFailedTaskBatch(data: ContinueRunFailedTaskBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ContinueRunFailedTaskBatchResponse>;
-  /** {@link CreateAllGatewayApiAsync 一键导入API分组}({@link CreateAllGatewayApiAsyncRequest 请求参数}): {@link CreateAllGatewayApiAsyncResponse 返回参数} */
+  /** 一键导入API分组 {@link CreateAllGatewayApiAsyncRequest} {@link CreateAllGatewayApiAsyncResponse} */
   CreateAllGatewayApiAsync(data: CreateAllGatewayApiAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAllGatewayApiAsyncResponse>;
-  /** {@link CreateApiGroup 创建API分组}({@link CreateApiGroupRequest 请求参数}): {@link CreateApiGroupResponse 返回参数} */
+  /** 创建API分组 {@link CreateApiGroupRequest} {@link CreateApiGroupResponse} */
   CreateApiGroup(data: CreateApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiGroupResponse>;
-  /** {@link CreateApiRateLimitRule 创建API限流规则}({@link CreateApiRateLimitRuleRequest 请求参数}): {@link CreateApiRateLimitRuleResponse 返回参数} */
+  /** 创建API限流规则 {@link CreateApiRateLimitRuleRequest} {@link CreateApiRateLimitRuleResponse} */
   CreateApiRateLimitRule(data: CreateApiRateLimitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiRateLimitRuleResponse>;
-  /** {@link CreateApplication 创建应用}({@link CreateApplicationRequest 请求参数}): {@link CreateApplicationResponse 返回参数} */
+  /** 创建应用 {@link CreateApplicationRequest} {@link CreateApplicationResponse} */
   CreateApplication(data: CreateApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationResponse>;
-  /** {@link CreateCluster 创建集群}({@link CreateClusterRequest 请求参数}): {@link CreateClusterResponse 返回参数} */
+  /** 创建集群 {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
-  /** {@link CreateConfig 创建配置项}({@link CreateConfigRequest 请求参数}): {@link CreateConfigResponse 返回参数} */
+  /** 创建配置项 {@link CreateConfigRequest} {@link CreateConfigResponse} */
   CreateConfig(data: CreateConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigResponse>;
-  /** {@link CreateContainGroup 创建容器部署组}({@link CreateContainGroupRequest 请求参数}): {@link CreateContainGroupResponse 返回参数} */
+  /** 创建容器部署组 {@link CreateContainGroupRequest} {@link CreateContainGroupResponse} */
   CreateContainGroup(data: CreateContainGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContainGroupResponse>;
-  /** {@link CreateFileConfig 创建文件配置项}({@link CreateFileConfigRequest 请求参数}): {@link CreateFileConfigResponse 返回参数} */
+  /** 创建文件配置项 {@link CreateFileConfigRequest} {@link CreateFileConfigResponse} */
   CreateFileConfig(data: CreateFileConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileConfigResponse>;
-  /** {@link CreateGatewayApi 批量导入API至api分组}({@link CreateGatewayApiRequest 请求参数}): {@link CreateGatewayApiResponse 返回参数} */
+  /** 批量导入API至api分组 {@link CreateGatewayApiRequest} {@link CreateGatewayApiResponse} */
   CreateGatewayApi(data: CreateGatewayApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGatewayApiResponse>;
-  /** {@link CreateGroup 创建部署组}({@link CreateGroupRequest 请求参数}): {@link CreateGroupResponse 返回参数} */
+  /** 创建部署组 {@link CreateGroupRequest} {@link CreateGroupResponse} */
   CreateGroup(data: CreateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupResponse>;
-  /** {@link CreateLane 创建泳道}({@link CreateLaneRequest 请求参数}): {@link CreateLaneResponse 返回参数} */
+  /** 创建泳道 {@link CreateLaneRequest} {@link CreateLaneResponse} */
   CreateLane(data: CreateLaneRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLaneResponse>;
-  /** {@link CreateLaneRule 创建泳道规则}({@link CreateLaneRuleRequest 请求参数}): {@link CreateLaneRuleResponse 返回参数} */
+  /** 创建泳道规则 {@link CreateLaneRuleRequest} {@link CreateLaneRuleResponse} */
   CreateLaneRule(data: CreateLaneRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLaneRuleResponse>;
-  /** {@link CreateMicroservice 新增微服务}({@link CreateMicroserviceRequest 请求参数}): {@link CreateMicroserviceResponse 返回参数} */
+  /** 新增微服务 {@link CreateMicroserviceRequest} {@link CreateMicroserviceResponse} */
   CreateMicroservice(data: CreateMicroserviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMicroserviceResponse>;
-  /** {@link CreateNamespace 创建命名空间}({@link CreateNamespaceRequest 请求参数}): {@link CreateNamespaceResponse 返回参数} */
+  /** 创建命名空间 {@link CreateNamespaceRequest} {@link CreateNamespaceResponse} */
   CreateNamespace(data: CreateNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNamespaceResponse>;
-  /** {@link CreatePathRewrites 创建路径重写}({@link CreatePathRewritesRequest 请求参数}): {@link CreatePathRewritesResponse 返回参数} */
+  /** 创建路径重写 {@link CreatePathRewritesRequest} {@link CreatePathRewritesResponse} */
   CreatePathRewrites(data: CreatePathRewritesRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePathRewritesResponse>;
-  /** {@link CreatePublicConfig 创建公共配置项}({@link CreatePublicConfigRequest 请求参数}): {@link CreatePublicConfigResponse 返回参数} */
+  /** 创建公共配置项 {@link CreatePublicConfigRequest} {@link CreatePublicConfigResponse} */
   CreatePublicConfig(data: CreatePublicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePublicConfigResponse>;
-  /** {@link CreateRepository 创建仓库}({@link CreateRepositoryRequest 请求参数}): {@link CreateRepositoryResponse 返回参数} */
+  /** 创建仓库 {@link CreateRepositoryRequest} {@link CreateRepositoryResponse} */
   CreateRepository(data: CreateRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRepositoryResponse>;
-  /** {@link CreateTask 创建任务}({@link CreateTaskRequest 请求参数}): {@link CreateTaskResponse 返回参数} */
+  /** 创建任务 {@link CreateTaskRequest} {@link CreateTaskResponse} */
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
-  /** {@link CreateTaskFlow 创建工作流}({@link CreateTaskFlowRequest 请求参数}): {@link CreateTaskFlowResponse 返回参数} */
+  /** 创建工作流 {@link CreateTaskFlowRequest} {@link CreateTaskFlowResponse} */
   CreateTaskFlow(data: CreateTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFlowResponse>;
-  /** {@link CreateUnitRule 创建单元化规则}({@link CreateUnitRuleRequest 请求参数}): {@link CreateUnitRuleResponse 返回参数} */
+  /** 创建单元化规则 {@link CreateUnitRuleRequest} {@link CreateUnitRuleResponse} */
   CreateUnitRule(data: CreateUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUnitRuleResponse>;
-  /** {@link DeleteApiGroup 删除Api分组}({@link DeleteApiGroupRequest 请求参数}): {@link DeleteApiGroupResponse 返回参数} */
+  /** 删除Api分组 {@link DeleteApiGroupRequest} {@link DeleteApiGroupResponse} */
   DeleteApiGroup(data: DeleteApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiGroupResponse>;
-  /** {@link DeleteApplication 删除应用}({@link DeleteApplicationRequest 请求参数}): {@link DeleteApplicationResponse 返回参数} */
+  /** 删除应用 {@link DeleteApplicationRequest} {@link DeleteApplicationResponse} */
   DeleteApplication(data: DeleteApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationResponse>;
-  /** {@link DeleteConfig 删除配置项}({@link DeleteConfigRequest 请求参数}): {@link DeleteConfigResponse 返回参数} */
+  /** 删除配置项 {@link DeleteConfigRequest} {@link DeleteConfigResponse} */
   DeleteConfig(data: DeleteConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigResponse>;
-  /** {@link DeleteContainerGroup 删除容器部署组}({@link DeleteContainerGroupRequest 请求参数}): {@link DeleteContainerGroupResponse 返回参数} */
+  /** 删除容器部署组 {@link DeleteContainerGroupRequest} {@link DeleteContainerGroupResponse} */
   DeleteContainerGroup(data: DeleteContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteContainerGroupResponse>;
-  /** {@link DeleteGroup 删除虚拟机部署组}({@link DeleteGroupRequest 请求参数}): {@link DeleteGroupResponse 返回参数} */
+  /** 删除虚拟机部署组 {@link DeleteGroupRequest} {@link DeleteGroupResponse} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
-  /** {@link DeleteImageTags 批量删除镜像版本}({@link DeleteImageTagsRequest 请求参数}): {@link DeleteImageTagsResponse 返回参数} */
+  /** 批量删除镜像版本 {@link DeleteImageTagsRequest} {@link DeleteImageTagsResponse} */
   DeleteImageTags(data: DeleteImageTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageTagsResponse>;
-  /** {@link DeleteLane 删除泳道}({@link DeleteLaneRequest 请求参数}): {@link DeleteLaneResponse 返回参数} */
+  /** 删除泳道 {@link DeleteLaneRequest} {@link DeleteLaneResponse} */
   DeleteLane(data: DeleteLaneRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLaneResponse>;
-  /** {@link DeleteLaneRule 删除泳道规则}({@link DeleteLaneRuleRequest 请求参数}): {@link DeleteLaneRuleResponse 返回参数} */
+  /** 删除泳道规则 {@link DeleteLaneRuleRequest} {@link DeleteLaneRuleResponse} */
   DeleteLaneRule(data: DeleteLaneRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLaneRuleResponse>;
-  /** {@link DeleteMicroservice 删除微服务}({@link DeleteMicroserviceRequest 请求参数}): {@link DeleteMicroserviceResponse 返回参数} */
+  /** 删除微服务 {@link DeleteMicroserviceRequest} {@link DeleteMicroserviceResponse} */
   DeleteMicroservice(data: DeleteMicroserviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMicroserviceResponse>;
-  /** {@link DeleteNamespace 删除命名空间}({@link DeleteNamespaceRequest 请求参数}): {@link DeleteNamespaceResponse 返回参数} */
+  /** 删除命名空间 {@link DeleteNamespaceRequest} {@link DeleteNamespaceResponse} */
   DeleteNamespace(data: DeleteNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNamespaceResponse>;
-  /** {@link DeletePathRewrites 删除路径重写}({@link DeletePathRewritesRequest 请求参数}): {@link DeletePathRewritesResponse 返回参数} */
+  /** 删除路径重写 {@link DeletePathRewritesRequest} {@link DeletePathRewritesResponse} */
   DeletePathRewrites(data: DeletePathRewritesRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePathRewritesResponse>;
-  /** {@link DeletePkgs 批量删除包}({@link DeletePkgsRequest 请求参数}): {@link DeletePkgsResponse 返回参数} */
+  /** 批量删除包 {@link DeletePkgsRequest} {@link DeletePkgsResponse} */
   DeletePkgs(data: DeletePkgsRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePkgsResponse>;
-  /** {@link DeletePublicConfig 删除公共配置项}({@link DeletePublicConfigRequest 请求参数}): {@link DeletePublicConfigResponse 返回参数} */
+  /** 删除公共配置项 {@link DeletePublicConfigRequest} {@link DeletePublicConfigResponse} */
   DeletePublicConfig(data: DeletePublicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePublicConfigResponse>;
-  /** {@link DeleteRepository 删除仓库}({@link DeleteRepositoryRequest 请求参数}): {@link DeleteRepositoryResponse 返回参数} */
+  /** 删除仓库 {@link DeleteRepositoryRequest} {@link DeleteRepositoryResponse} */
   DeleteRepository(data: DeleteRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRepositoryResponse>;
-  /** {@link DeleteServerlessGroup 删除部署组}({@link DeleteServerlessGroupRequest 请求参数}): {@link DeleteServerlessGroupResponse 返回参数} */
+  /** 删除部署组 {@link DeleteServerlessGroupRequest} {@link DeleteServerlessGroupResponse} */
   DeleteServerlessGroup(data: DeleteServerlessGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessGroupResponse>;
-  /** {@link DeleteTask 删除任务}({@link DeleteTaskRequest 请求参数}): {@link DeleteTaskResponse 返回参数} */
+  /** 删除任务 {@link DeleteTaskRequest} {@link DeleteTaskResponse} */
   DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;
-  /** {@link DeleteUnitNamespaces 删除单元化命名空间}({@link DeleteUnitNamespacesRequest 请求参数}): {@link DeleteUnitNamespacesResponse 返回参数} */
+  /** 删除单元化命名空间 {@link DeleteUnitNamespacesRequest} {@link DeleteUnitNamespacesResponse} */
   DeleteUnitNamespaces(data: DeleteUnitNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUnitNamespacesResponse>;
-  /** {@link DeleteUnitRule 删除单元化规则}({@link DeleteUnitRuleRequest 请求参数}): {@link DeleteUnitRuleResponse 返回参数} */
+  /** 删除单元化规则 {@link DeleteUnitRuleRequest} {@link DeleteUnitRuleResponse} */
   DeleteUnitRule(data: DeleteUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUnitRuleResponse>;
-  /** {@link DeployContainerGroup 部署容器应用}({@link DeployContainerGroupRequest 请求参数}): {@link DeployContainerGroupResponse 返回参数} */
+  /** 部署容器应用 {@link DeployContainerGroupRequest} {@link DeployContainerGroupResponse} */
   DeployContainerGroup(data: DeployContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeployContainerGroupResponse>;
-  /** {@link DeployGroup 部署虚拟机部署组应用}({@link DeployGroupRequest 请求参数}): {@link DeployGroupResponse 返回参数} */
+  /** 部署虚拟机部署组应用 {@link DeployGroupRequest} {@link DeployGroupResponse} */
   DeployGroup(data: DeployGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeployGroupResponse>;
-  /** {@link DescribeApiDetail 查询API详情}({@link DescribeApiDetailRequest 请求参数}): {@link DescribeApiDetailResponse 返回参数} */
+  /** 查询API详情 {@link DescribeApiDetailRequest} {@link DescribeApiDetailResponse} */
   DescribeApiDetail(data: DescribeApiDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiDetailResponse>;
-  /** {@link DescribeApiGroup 查询API分组}({@link DescribeApiGroupRequest 请求参数}): {@link DescribeApiGroupResponse 返回参数} */
+  /** 查询API分组 {@link DescribeApiGroupRequest} {@link DescribeApiGroupResponse} */
   DescribeApiGroup(data: DescribeApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiGroupResponse>;
-  /** {@link DescribeApiGroups 查询API 分组信息列表}({@link DescribeApiGroupsRequest 请求参数}): {@link DescribeApiGroupsResponse 返回参数} */
+  /** 查询API 分组信息列表 {@link DescribeApiGroupsRequest} {@link DescribeApiGroupsResponse} */
   DescribeApiGroups(data?: DescribeApiGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiGroupsResponse>;
-  /** {@link DescribeApiRateLimitRules 查询API限流规则}({@link DescribeApiRateLimitRulesRequest 请求参数}): {@link DescribeApiRateLimitRulesResponse 返回参数} */
+  /** 查询API限流规则 {@link DescribeApiRateLimitRulesRequest} {@link DescribeApiRateLimitRulesResponse} */
   DescribeApiRateLimitRules(data: DescribeApiRateLimitRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiRateLimitRulesResponse>;
-  /** {@link DescribeApiUseDetail 查询网关API监控明细数据}({@link DescribeApiUseDetailRequest 请求参数}): {@link DescribeApiUseDetailResponse 返回参数} */
+  /** 查询网关API监控明细数据 {@link DescribeApiUseDetailRequest} {@link DescribeApiUseDetailResponse} */
   DescribeApiUseDetail(data: DescribeApiUseDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiUseDetailResponse>;
-  /** {@link DescribeApiVersions 查询API版本}({@link DescribeApiVersionsRequest 请求参数}): {@link DescribeApiVersionsResponse 返回参数} */
+  /** 查询API版本 {@link DescribeApiVersionsRequest} {@link DescribeApiVersionsResponse} */
   DescribeApiVersions(data: DescribeApiVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiVersionsResponse>;
-  /** {@link DescribeApplication 获取应用详情}({@link DescribeApplicationRequest 请求参数}): {@link DescribeApplicationResponse 返回参数} */
+  /** 获取应用详情 {@link DescribeApplicationRequest} {@link DescribeApplicationResponse} */
   DescribeApplication(data: DescribeApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationResponse>;
-  /** {@link DescribeApplicationAttribute 获取应用列表其它字段}({@link DescribeApplicationAttributeRequest 请求参数}): {@link DescribeApplicationAttributeResponse 返回参数} */
+  /** 获取应用列表其它字段 {@link DescribeApplicationAttributeRequest} {@link DescribeApplicationAttributeResponse} */
   DescribeApplicationAttribute(data: DescribeApplicationAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationAttributeResponse>;
-  /** {@link DescribeApplicationBusinessLogConfig 查询应用关联日志配置项信息}({@link DescribeApplicationBusinessLogConfigRequest 请求参数}): {@link DescribeApplicationBusinessLogConfigResponse 返回参数} */
+  /** 查询应用关联日志配置项信息 {@link DescribeApplicationBusinessLogConfigRequest} {@link DescribeApplicationBusinessLogConfigResponse} */
   DescribeApplicationBusinessLogConfig(data: DescribeApplicationBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationBusinessLogConfigResponse>;
-  /** {@link DescribeApplications 获取应用列表}({@link DescribeApplicationsRequest 请求参数}): {@link DescribeApplicationsResponse 返回参数} */
+  /** 获取应用列表 {@link DescribeApplicationsRequest} {@link DescribeApplicationsResponse} */
   DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
-  /** {@link DescribeBasicResourceUsage TSF基本资源信息概览}({@link DescribeBasicResourceUsageRequest 请求参数}): {@link DescribeBasicResourceUsageResponse 返回参数} */
+  /** TSF基本资源信息概览 {@link DescribeBasicResourceUsageRequest} {@link DescribeBasicResourceUsageResponse} */
   DescribeBasicResourceUsage(data?: DescribeBasicResourceUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicResourceUsageResponse>;
-  /** {@link DescribeBusinessLogConfig 查询业务日志配置项信息}({@link DescribeBusinessLogConfigRequest 请求参数}): {@link DescribeBusinessLogConfigResponse 返回参数} */
+  /** 查询业务日志配置项信息 {@link DescribeBusinessLogConfigRequest} {@link DescribeBusinessLogConfigResponse} */
   DescribeBusinessLogConfig(data: DescribeBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBusinessLogConfigResponse>;
-  /** {@link DescribeBusinessLogConfigs 查询日志配置项列表}({@link DescribeBusinessLogConfigsRequest 请求参数}): {@link DescribeBusinessLogConfigsResponse 返回参数} */
+  /** 查询日志配置项列表 {@link DescribeBusinessLogConfigsRequest} {@link DescribeBusinessLogConfigsResponse} */
   DescribeBusinessLogConfigs(data?: DescribeBusinessLogConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBusinessLogConfigsResponse>;
-  /** {@link DescribeClusterInstances 查询集群实例}({@link DescribeClusterInstancesRequest 请求参数}): {@link DescribeClusterInstancesResponse 返回参数} */
+  /** 查询集群实例 {@link DescribeClusterInstancesRequest} {@link DescribeClusterInstancesResponse} */
   DescribeClusterInstances(data: DescribeClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstancesResponse>;
-  /** {@link DescribeConfig 查询配置}({@link DescribeConfigRequest 请求参数}): {@link DescribeConfigResponse 返回参数} */
+  /** 查询配置 {@link DescribeConfigRequest} {@link DescribeConfigResponse} */
   DescribeConfig(data: DescribeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigResponse>;
-  /** {@link DescribeConfigReleaseLogs 查询配置发布历史}({@link DescribeConfigReleaseLogsRequest 请求参数}): {@link DescribeConfigReleaseLogsResponse 返回参数} */
+  /** 查询配置发布历史 {@link DescribeConfigReleaseLogsRequest} {@link DescribeConfigReleaseLogsResponse} */
   DescribeConfigReleaseLogs(data?: DescribeConfigReleaseLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigReleaseLogsResponse>;
-  /** {@link DescribeConfigReleases 查询配置发布信息}({@link DescribeConfigReleasesRequest 请求参数}): {@link DescribeConfigReleasesResponse 返回参数} */
+  /** 查询配置发布信息 {@link DescribeConfigReleasesRequest} {@link DescribeConfigReleasesResponse} */
   DescribeConfigReleases(data?: DescribeConfigReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigReleasesResponse>;
-  /** {@link DescribeConfigSummary 查询配置汇总列表}({@link DescribeConfigSummaryRequest 请求参数}): {@link DescribeConfigSummaryResponse 返回参数} */
+  /** 查询配置汇总列表 {@link DescribeConfigSummaryRequest} {@link DescribeConfigSummaryResponse} */
   DescribeConfigSummary(data?: DescribeConfigSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigSummaryResponse>;
-  /** {@link DescribeConfigs 查询配置项列表}({@link DescribeConfigsRequest 请求参数}): {@link DescribeConfigsResponse 返回参数} */
+  /** 查询配置项列表 {@link DescribeConfigsRequest} {@link DescribeConfigsResponse} */
   DescribeConfigs(data?: DescribeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigsResponse>;
-  /** {@link DescribeContainerEvents 获取容器事件列表}({@link DescribeContainerEventsRequest 请求参数}): {@link DescribeContainerEventsResponse 返回参数} */
+  /** 获取容器事件列表 {@link DescribeContainerEventsRequest} {@link DescribeContainerEventsResponse} */
   DescribeContainerEvents(data: DescribeContainerEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerEventsResponse>;
-  /** {@link DescribeContainerGroupDeployInfo 获取部署组详情}({@link DescribeContainerGroupDeployInfoRequest 请求参数}): {@link DescribeContainerGroupDeployInfoResponse 返回参数} */
+  /** 获取部署组详情 {@link DescribeContainerGroupDeployInfoRequest} {@link DescribeContainerGroupDeployInfoResponse} */
   DescribeContainerGroupDeployInfo(data: DescribeContainerGroupDeployInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerGroupDeployInfoResponse>;
-  /** {@link DescribeContainerGroupDetail 查询容器部署组详情}({@link DescribeContainerGroupDetailRequest 请求参数}): {@link DescribeContainerGroupDetailResponse 返回参数} */
+  /** 查询容器部署组详情 {@link DescribeContainerGroupDetailRequest} {@link DescribeContainerGroupDetailResponse} */
   DescribeContainerGroupDetail(data: DescribeContainerGroupDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerGroupDetailResponse>;
-  /** {@link DescribeContainerGroups 容器部署组列表}({@link DescribeContainerGroupsRequest 请求参数}): {@link DescribeContainerGroupsResponse 返回参数} */
+  /** 容器部署组列表 {@link DescribeContainerGroupsRequest} {@link DescribeContainerGroupsResponse} */
   DescribeContainerGroups(data?: DescribeContainerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerGroupsResponse>;
-  /** {@link DescribeCreateGatewayApiStatus 查询一键导入API分组任务的状态}({@link DescribeCreateGatewayApiStatusRequest 请求参数}): {@link DescribeCreateGatewayApiStatusResponse 返回参数} */
+  /** 查询一键导入API分组任务的状态 {@link DescribeCreateGatewayApiStatusRequest} {@link DescribeCreateGatewayApiStatusResponse} */
   DescribeCreateGatewayApiStatus(data?: DescribeCreateGatewayApiStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCreateGatewayApiStatusResponse>;
-  /** {@link DescribeDeliveryConfig 获取单个投递项配置}({@link DescribeDeliveryConfigRequest 请求参数}): {@link DescribeDeliveryConfigResponse 返回参数} */
+  /** 获取单个投递项配置 {@link DescribeDeliveryConfigRequest} {@link DescribeDeliveryConfigResponse} */
   DescribeDeliveryConfig(data: DescribeDeliveryConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliveryConfigResponse>;
-  /** {@link DescribeDeliveryConfigByGroupId 用部署组id获取绑定信息}({@link DescribeDeliveryConfigByGroupIdRequest 请求参数}): {@link DescribeDeliveryConfigByGroupIdResponse 返回参数} */
+  /** 用部署组id获取绑定信息 {@link DescribeDeliveryConfigByGroupIdRequest} {@link DescribeDeliveryConfigByGroupIdResponse} */
   DescribeDeliveryConfigByGroupId(data: DescribeDeliveryConfigByGroupIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliveryConfigByGroupIdResponse>;
-  /** {@link DescribeDeliveryConfigs 获取多个投递项配置}({@link DescribeDeliveryConfigsRequest 请求参数}): {@link DescribeDeliveryConfigsResponse 返回参数} */
+  /** 获取多个投递项配置 {@link DescribeDeliveryConfigsRequest} {@link DescribeDeliveryConfigsResponse} */
   DescribeDeliveryConfigs(data?: DescribeDeliveryConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliveryConfigsResponse>;
-  /** {@link DescribeDownloadInfo 获取下载程序包信息}({@link DescribeDownloadInfoRequest 请求参数}): {@link DescribeDownloadInfoResponse 返回参数} */
+  /** 获取下载程序包信息 {@link DescribeDownloadInfoRequest} {@link DescribeDownloadInfoResponse} */
   DescribeDownloadInfo(data: DescribeDownloadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDownloadInfoResponse>;
-  /** {@link DescribeEnabledUnitRule 查询生效的单元化规则}({@link DescribeEnabledUnitRuleRequest 请求参数}): {@link DescribeEnabledUnitRuleResponse 返回参数} */
+  /** 查询生效的单元化规则 {@link DescribeEnabledUnitRuleRequest} {@link DescribeEnabledUnitRuleResponse} */
   DescribeEnabledUnitRule(data: DescribeEnabledUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnabledUnitRuleResponse>;
-  /** {@link DescribeFileConfigs 查询文件配置项列表}({@link DescribeFileConfigsRequest 请求参数}): {@link DescribeFileConfigsResponse 返回参数} */
+  /** 查询文件配置项列表 {@link DescribeFileConfigsRequest} {@link DescribeFileConfigsResponse} */
   DescribeFileConfigs(data?: DescribeFileConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileConfigsResponse>;
-  /** {@link DescribeFlowLastBatchState 查询工作流最近一个批次的执行状态}({@link DescribeFlowLastBatchStateRequest 请求参数}): {@link DescribeFlowLastBatchStateResponse 返回参数} */
+  /** 查询工作流最近一个批次的执行状态 {@link DescribeFlowLastBatchStateRequest} {@link DescribeFlowLastBatchStateResponse} */
   DescribeFlowLastBatchState(data: DescribeFlowLastBatchStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowLastBatchStateResponse>;
-  /** {@link DescribeGatewayAllGroupApis 查询网关所有分组下Api列表}({@link DescribeGatewayAllGroupApisRequest 请求参数}): {@link DescribeGatewayAllGroupApisResponse 返回参数} */
+  /** 查询网关所有分组下Api列表 {@link DescribeGatewayAllGroupApisRequest} {@link DescribeGatewayAllGroupApisResponse} */
   DescribeGatewayAllGroupApis(data: DescribeGatewayAllGroupApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayAllGroupApisResponse>;
-  /** {@link DescribeGatewayApis 查询API分组下的Api列表信息}({@link DescribeGatewayApisRequest 请求参数}): {@link DescribeGatewayApisResponse 返回参数} */
+  /** 查询API分组下的Api列表信息 {@link DescribeGatewayApisRequest} {@link DescribeGatewayApisResponse} */
   DescribeGatewayApis(data: DescribeGatewayApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayApisResponse>;
-  /** {@link DescribeGatewayMonitorOverview 查询网关监控概览}({@link DescribeGatewayMonitorOverviewRequest 请求参数}): {@link DescribeGatewayMonitorOverviewResponse 返回参数} */
+  /** 查询网关监控概览 {@link DescribeGatewayMonitorOverviewRequest} {@link DescribeGatewayMonitorOverviewResponse} */
   DescribeGatewayMonitorOverview(data: DescribeGatewayMonitorOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayMonitorOverviewResponse>;
-  /** {@link DescribeGroup 查询虚拟机部署组详情}({@link DescribeGroupRequest 请求参数}): {@link DescribeGroupResponse 返回参数} */
+  /** 查询虚拟机部署组详情 {@link DescribeGroupRequest} {@link DescribeGroupResponse} */
   DescribeGroup(data: DescribeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupResponse>;
-  /** {@link DescribeGroupAttribute 获取部署组其他属性}({@link DescribeGroupAttributeRequest 请求参数}): {@link DescribeGroupAttributeResponse 返回参数} */
+  /** 获取部署组其他属性 {@link DescribeGroupAttributeRequest} {@link DescribeGroupAttributeResponse} */
   DescribeGroupAttribute(data: DescribeGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupAttributeResponse>;
-  /** {@link DescribeGroupBindedGateways 查询某个API分组已绑定的网关部署组信息列表}({@link DescribeGroupBindedGatewaysRequest 请求参数}): {@link DescribeGroupBindedGatewaysResponse 返回参数} */
+  /** 查询某个API分组已绑定的网关部署组信息列表 {@link DescribeGroupBindedGatewaysRequest} {@link DescribeGroupBindedGatewaysResponse} */
   DescribeGroupBindedGateways(data: DescribeGroupBindedGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupBindedGatewaysResponse>;
-  /** {@link DescribeGroupBusinessLogConfigs 查询分组管理日志配置列表}({@link DescribeGroupBusinessLogConfigsRequest 请求参数}): {@link DescribeGroupBusinessLogConfigsResponse 返回参数} */
+  /** 查询分组管理日志配置列表 {@link DescribeGroupBusinessLogConfigsRequest} {@link DescribeGroupBusinessLogConfigsResponse} */
   DescribeGroupBusinessLogConfigs(data: DescribeGroupBusinessLogConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupBusinessLogConfigsResponse>;
-  /** {@link DescribeGroupGateways 查询某个网关绑定的API 分组信息列表}({@link DescribeGroupGatewaysRequest 请求参数}): {@link DescribeGroupGatewaysResponse 返回参数} */
+  /** 查询某个网关绑定的API 分组信息列表 {@link DescribeGroupGatewaysRequest} {@link DescribeGroupGatewaysResponse} */
   DescribeGroupGateways(data: DescribeGroupGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupGatewaysResponse>;
-  /** {@link DescribeGroupInstances 查询虚拟机部署组云主机列表}({@link DescribeGroupInstancesRequest 请求参数}): {@link DescribeGroupInstancesResponse 返回参数} */
+  /** 查询虚拟机部署组云主机列表 {@link DescribeGroupInstancesRequest} {@link DescribeGroupInstancesResponse} */
   DescribeGroupInstances(data: DescribeGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupInstancesResponse>;
-  /** {@link DescribeGroupRelease 查询部署组发布信息}({@link DescribeGroupReleaseRequest 请求参数}): {@link DescribeGroupReleaseResponse 返回参数} */
+  /** 查询部署组发布信息 {@link DescribeGroupReleaseRequest} {@link DescribeGroupReleaseResponse} */
   DescribeGroupRelease(data: DescribeGroupReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupReleaseResponse>;
-  /** {@link DescribeGroupUseDetail 查询网关分组监控明细数据}({@link DescribeGroupUseDetailRequest 请求参数}): {@link DescribeGroupUseDetailResponse 返回参数} */
+  /** 查询网关分组监控明细数据 {@link DescribeGroupUseDetailRequest} {@link DescribeGroupUseDetailResponse} */
   DescribeGroupUseDetail(data: DescribeGroupUseDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupUseDetailResponse>;
-  /** {@link DescribeGroups 获取虚拟机部署组列表}({@link DescribeGroupsRequest 请求参数}): {@link DescribeGroupsResponse 返回参数} */
+  /** 获取虚拟机部署组列表 {@link DescribeGroupsRequest} {@link DescribeGroupsResponse} */
   DescribeGroups(data?: DescribeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsResponse>;
-  /** {@link DescribeGroupsWithPlugin 查询某个插件下绑定或未绑定的API分组}({@link DescribeGroupsWithPluginRequest 请求参数}): {@link DescribeGroupsWithPluginResponse 返回参数} */
+  /** 查询某个插件下绑定或未绑定的API分组 {@link DescribeGroupsWithPluginRequest} {@link DescribeGroupsWithPluginResponse} */
   DescribeGroupsWithPlugin(data: DescribeGroupsWithPluginRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsWithPluginResponse>;
-  /** {@link DescribeImageRepository 镜像仓库列表}({@link DescribeImageRepositoryRequest 请求参数}): {@link DescribeImageRepositoryResponse 返回参数} */
+  /** 镜像仓库列表 {@link DescribeImageRepositoryRequest} {@link DescribeImageRepositoryResponse} */
   DescribeImageRepository(data?: DescribeImageRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRepositoryResponse>;
-  /** {@link DescribeImageTags 镜像版本列表}({@link DescribeImageTagsRequest 请求参数}): {@link DescribeImageTagsResponse 返回参数} */
+  /** 镜像版本列表 {@link DescribeImageTagsRequest} {@link DescribeImageTagsResponse} */
   DescribeImageTags(data: DescribeImageTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageTagsResponse>;
-  /** {@link DescribeInovcationIndicators 查询调用监控指标}({@link DescribeInovcationIndicatorsRequest 请求参数}): {@link DescribeInovcationIndicatorsResponse 返回参数} */
+  /** 查询调用监控指标 {@link DescribeInovcationIndicatorsRequest} {@link DescribeInovcationIndicatorsResponse} */
   DescribeInovcationIndicators(data: DescribeInovcationIndicatorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInovcationIndicatorsResponse>;
-  /** {@link DescribeInstances 查询机器列表}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
+  /** 查询机器列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** {@link DescribeInvocationMetricDataCurve 查询调用指标数据变化曲线}({@link DescribeInvocationMetricDataCurveRequest 请求参数}): {@link DescribeInvocationMetricDataCurveResponse 返回参数} */
+  /** 查询调用指标数据变化曲线 {@link DescribeInvocationMetricDataCurveRequest} {@link DescribeInvocationMetricDataCurveResponse} */
   DescribeInvocationMetricDataCurve(data?: DescribeInvocationMetricDataCurveRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationMetricDataCurveResponse>;
-  /** {@link DescribeInvocationMetricDataDimension 查询维度}({@link DescribeInvocationMetricDataDimensionRequest 请求参数}): {@link DescribeInvocationMetricDataDimensionResponse 返回参数} */
+  /** 查询维度 {@link DescribeInvocationMetricDataDimensionRequest} {@link DescribeInvocationMetricDataDimensionResponse} */
   DescribeInvocationMetricDataDimension(data: DescribeInvocationMetricDataDimensionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationMetricDataDimensionResponse>;
-  /** {@link DescribeInvocationMetricDataPoint 查询单值指标维度}({@link DescribeInvocationMetricDataPointRequest 请求参数}): {@link DescribeInvocationMetricDataPointResponse 返回参数} */
+  /** 查询单值指标维度 {@link DescribeInvocationMetricDataPointRequest} {@link DescribeInvocationMetricDataPointResponse} */
   DescribeInvocationMetricDataPoint(data: DescribeInvocationMetricDataPointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationMetricDataPointResponse>;
-  /** {@link DescribeInvocationMetricScatterPlot 查询调用指标数据散点图}({@link DescribeInvocationMetricScatterPlotRequest 请求参数}): {@link DescribeInvocationMetricScatterPlotResponse 返回参数} */
+  /** 查询调用指标数据散点图 {@link DescribeInvocationMetricScatterPlotRequest} {@link DescribeInvocationMetricScatterPlotResponse} */
   DescribeInvocationMetricScatterPlot(data?: DescribeInvocationMetricScatterPlotRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInvocationMetricScatterPlotResponse>;
-  /** {@link DescribeJvmMonitor 查询java实例jvm监控数据}({@link DescribeJvmMonitorRequest 请求参数}): {@link DescribeJvmMonitorResponse 返回参数} */
+  /** 查询java实例jvm监控数据 {@link DescribeJvmMonitorRequest} {@link DescribeJvmMonitorResponse} */
   DescribeJvmMonitor(data: DescribeJvmMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJvmMonitorResponse>;
-  /** {@link DescribeLaneRules 查询泳道规则列表}({@link DescribeLaneRulesRequest 请求参数}): {@link DescribeLaneRulesResponse 返回参数} */
+  /** 查询泳道规则列表 {@link DescribeLaneRulesRequest} {@link DescribeLaneRulesResponse} */
   DescribeLaneRules(data: DescribeLaneRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaneRulesResponse>;
-  /** {@link DescribeLanes 查询泳道列表}({@link DescribeLanesRequest 请求参数}): {@link DescribeLanesResponse 返回参数} */
+  /** 查询泳道列表 {@link DescribeLanesRequest} {@link DescribeLanesResponse} */
   DescribeLanes(data?: DescribeLanesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLanesResponse>;
-  /** {@link DescribeMicroservice 查询微服务详情}({@link DescribeMicroserviceRequest 请求参数}): {@link DescribeMicroserviceResponse 返回参数} */
+  /** 查询微服务详情 {@link DescribeMicroserviceRequest} {@link DescribeMicroserviceResponse} */
   DescribeMicroservice(data: DescribeMicroserviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMicroserviceResponse>;
-  /** {@link DescribeMicroservices 获取微服务列表}({@link DescribeMicroservicesRequest 请求参数}): {@link DescribeMicroservicesResponse 返回参数} */
+  /** 获取微服务列表 {@link DescribeMicroservicesRequest} {@link DescribeMicroservicesResponse} */
   DescribeMicroservices(data: DescribeMicroservicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMicroservicesResponse>;
-  /** {@link DescribeMsApiList 查询服务API列表}({@link DescribeMsApiListRequest 请求参数}): {@link DescribeMsApiListResponse 返回参数} */
+  /** 查询服务API列表 {@link DescribeMsApiListRequest} {@link DescribeMsApiListResponse} */
   DescribeMsApiList(data: DescribeMsApiListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMsApiListResponse>;
-  /** {@link DescribeOverviewInvocation 服务调用监控统计概览}({@link DescribeOverviewInvocationRequest 请求参数}): {@link DescribeOverviewInvocationResponse 返回参数} */
+  /** 服务调用监控统计概览 {@link DescribeOverviewInvocationRequest} {@link DescribeOverviewInvocationResponse} */
   DescribeOverviewInvocation(data?: DescribeOverviewInvocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewInvocationResponse>;
-  /** {@link DescribePathRewrite 查询路径重写}({@link DescribePathRewriteRequest 请求参数}): {@link DescribePathRewriteResponse 返回参数} */
+  /** 查询路径重写 {@link DescribePathRewriteRequest} {@link DescribePathRewriteResponse} */
   DescribePathRewrite(data: DescribePathRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePathRewriteResponse>;
-  /** {@link DescribePathRewrites 查询路径重写列表}({@link DescribePathRewritesRequest 请求参数}): {@link DescribePathRewritesResponse 返回参数} */
+  /** 查询路径重写列表 {@link DescribePathRewritesRequest} {@link DescribePathRewritesResponse} */
   DescribePathRewrites(data: DescribePathRewritesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePathRewritesResponse>;
-  /** {@link DescribePkgs 获取某个应用的程序包信息列表}({@link DescribePkgsRequest 请求参数}): {@link DescribePkgsResponse 返回参数} */
+  /** 获取某个应用的程序包信息列表 {@link DescribePkgsRequest} {@link DescribePkgsResponse} */
   DescribePkgs(data: DescribePkgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePkgsResponse>;
-  /** {@link DescribePluginInstances 查询网关分组或API绑定（或未绑定）的插件列表}({@link DescribePluginInstancesRequest 请求参数}): {@link DescribePluginInstancesResponse 返回参数} */
+  /** 查询网关分组或API绑定（或未绑定）的插件列表 {@link DescribePluginInstancesRequest} {@link DescribePluginInstancesResponse} */
   DescribePluginInstances(data: DescribePluginInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginInstancesResponse>;
-  /** {@link DescribePodInstances 获取部署组实例列表}({@link DescribePodInstancesRequest 请求参数}): {@link DescribePodInstancesResponse 返回参数} */
+  /** 获取部署组实例列表 {@link DescribePodInstancesRequest} {@link DescribePodInstancesResponse} */
   DescribePodInstances(data: DescribePodInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePodInstancesResponse>;
-  /** {@link DescribePrograms 查询数据集列表}({@link DescribeProgramsRequest 请求参数}): {@link DescribeProgramsResponse 返回参数} */
+  /** 查询数据集列表 {@link DescribeProgramsRequest} {@link DescribeProgramsResponse} */
   DescribePrograms(data?: DescribeProgramsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProgramsResponse>;
-  /** {@link DescribePublicConfig 查询公共配置（单条）}({@link DescribePublicConfigRequest 请求参数}): {@link DescribePublicConfigResponse 返回参数} */
+  /** 查询公共配置（单条） {@link DescribePublicConfigRequest} {@link DescribePublicConfigResponse} */
   DescribePublicConfig(data: DescribePublicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigResponse>;
-  /** {@link DescribePublicConfigReleaseLogs 查询公共配置发布历史}({@link DescribePublicConfigReleaseLogsRequest 请求参数}): {@link DescribePublicConfigReleaseLogsResponse 返回参数} */
+  /** 查询公共配置发布历史 {@link DescribePublicConfigReleaseLogsRequest} {@link DescribePublicConfigReleaseLogsResponse} */
   DescribePublicConfigReleaseLogs(data?: DescribePublicConfigReleaseLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigReleaseLogsResponse>;
-  /** {@link DescribePublicConfigReleases 查询公共配置发布信息}({@link DescribePublicConfigReleasesRequest 请求参数}): {@link DescribePublicConfigReleasesResponse 返回参数} */
+  /** 查询公共配置发布信息 {@link DescribePublicConfigReleasesRequest} {@link DescribePublicConfigReleasesResponse} */
   DescribePublicConfigReleases(data?: DescribePublicConfigReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigReleasesResponse>;
-  /** {@link DescribePublicConfigSummary 查询公共配置汇总列表}({@link DescribePublicConfigSummaryRequest 请求参数}): {@link DescribePublicConfigSummaryResponse 返回参数} */
+  /** 查询公共配置汇总列表 {@link DescribePublicConfigSummaryRequest} {@link DescribePublicConfigSummaryResponse} */
   DescribePublicConfigSummary(data?: DescribePublicConfigSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigSummaryResponse>;
-  /** {@link DescribePublicConfigs 查询公共配置项列表}({@link DescribePublicConfigsRequest 请求参数}): {@link DescribePublicConfigsResponse 返回参数} */
+  /** 查询公共配置项列表 {@link DescribePublicConfigsRequest} {@link DescribePublicConfigsResponse} */
   DescribePublicConfigs(data?: DescribePublicConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicConfigsResponse>;
-  /** {@link DescribeReleasedConfig 查询group发布的配置}({@link DescribeReleasedConfigRequest 请求参数}): {@link DescribeReleasedConfigResponse 返回参数} */
+  /** 查询group发布的配置 {@link DescribeReleasedConfigRequest} {@link DescribeReleasedConfigResponse} */
   DescribeReleasedConfig(data: DescribeReleasedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleasedConfigResponse>;
-  /** {@link DescribeRepositories 查询仓库列表}({@link DescribeRepositoriesRequest 请求参数}): {@link DescribeRepositoriesResponse 返回参数} */
+  /** 查询仓库列表 {@link DescribeRepositoriesRequest} {@link DescribeRepositoriesResponse} */
   DescribeRepositories(data?: DescribeRepositoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoriesResponse>;
-  /** {@link DescribeRepository 查询仓库信息}({@link DescribeRepositoryRequest 请求参数}): {@link DescribeRepositoryResponse 返回参数} */
+  /** 查询仓库信息 {@link DescribeRepositoryRequest} {@link DescribeRepositoryResponse} */
   DescribeRepository(data: DescribeRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryResponse>;
-  /** {@link DescribeSimpleApplications 查询简单应用列表}({@link DescribeSimpleApplicationsRequest 请求参数}): {@link DescribeSimpleApplicationsResponse 返回参数} */
+  /** 查询简单应用列表 {@link DescribeSimpleApplicationsRequest} {@link DescribeSimpleApplicationsResponse} */
   DescribeSimpleApplications(data?: DescribeSimpleApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleApplicationsResponse>;
-  /** {@link DescribeSimpleClusters 查询简单集群列表}({@link DescribeSimpleClustersRequest 请求参数}): {@link DescribeSimpleClustersResponse 返回参数} */
+  /** 查询简单集群列表 {@link DescribeSimpleClustersRequest} {@link DescribeSimpleClustersResponse} */
   DescribeSimpleClusters(data?: DescribeSimpleClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleClustersResponse>;
-  /** {@link DescribeSimpleGroups 查询简单部署组列表}({@link DescribeSimpleGroupsRequest 请求参数}): {@link DescribeSimpleGroupsResponse 返回参数} */
+  /** 查询简单部署组列表 {@link DescribeSimpleGroupsRequest} {@link DescribeSimpleGroupsResponse} */
   DescribeSimpleGroups(data?: DescribeSimpleGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleGroupsResponse>;
-  /** {@link DescribeSimpleNamespaces 查询简单命名空间列表}({@link DescribeSimpleNamespacesRequest 请求参数}): {@link DescribeSimpleNamespacesResponse 返回参数} */
+  /** 查询简单命名空间列表 {@link DescribeSimpleNamespacesRequest} {@link DescribeSimpleNamespacesResponse} */
   DescribeSimpleNamespaces(data?: DescribeSimpleNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleNamespacesResponse>;
-  /** {@link DescribeStatistics 服务统计}({@link DescribeStatisticsRequest 请求参数}): {@link DescribeStatisticsResponse 返回参数} */
+  /** 服务统计 {@link DescribeStatisticsRequest} {@link DescribeStatisticsResponse} */
   DescribeStatistics(data: DescribeStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStatisticsResponse>;
-  /** {@link DescribeTaskDetail 查询任务详情}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
+  /** 查询任务详情 {@link DescribeTaskDetailRequest} {@link DescribeTaskDetailResponse} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** {@link DescribeTaskLastStatus 查看任务最近执行批次状态}({@link DescribeTaskLastStatusRequest 请求参数}): {@link DescribeTaskLastStatusResponse 返回参数} */
+  /** 查看任务最近执行批次状态 {@link DescribeTaskLastStatusRequest} {@link DescribeTaskLastStatusResponse} */
   DescribeTaskLastStatus(data: DescribeTaskLastStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLastStatusResponse>;
-  /** {@link DescribeTaskRecords 查询任务列表}({@link DescribeTaskRecordsRequest 请求参数}): {@link DescribeTaskRecordsResponse 返回参数} */
+  /** 查询任务列表 {@link DescribeTaskRecordsRequest} {@link DescribeTaskRecordsResponse} */
   DescribeTaskRecords(data?: DescribeTaskRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskRecordsResponse>;
-  /** {@link DescribeUnitApiUseDetail 查询单元化网关API监控明细数据}({@link DescribeUnitApiUseDetailRequest 请求参数}): {@link DescribeUnitApiUseDetailResponse 返回参数} */
+  /** 查询单元化网关API监控明细数据 {@link DescribeUnitApiUseDetailRequest} {@link DescribeUnitApiUseDetailResponse} */
   DescribeUnitApiUseDetail(data: DescribeUnitApiUseDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnitApiUseDetailResponse>;
-  /** {@link DescribeUnitNamespaces 查询单元化命名空间列表}({@link DescribeUnitNamespacesRequest 请求参数}): {@link DescribeUnitNamespacesResponse 返回参数} */
+  /** 查询单元化命名空间列表 {@link DescribeUnitNamespacesRequest} {@link DescribeUnitNamespacesResponse} */
   DescribeUnitNamespaces(data: DescribeUnitNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnitNamespacesResponse>;
-  /** {@link DescribeUnitRule 查询单元化规则详情}({@link DescribeUnitRuleRequest 请求参数}): {@link DescribeUnitRuleResponse 返回参数} */
+  /** 查询单元化规则详情 {@link DescribeUnitRuleRequest} {@link DescribeUnitRuleResponse} */
   DescribeUnitRule(data: DescribeUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnitRuleResponse>;
-  /** {@link DescribeUnitRules 查询单元化规则列表}({@link DescribeUnitRulesRequest 请求参数}): {@link DescribeUnitRulesResponse 返回参数} */
+  /** 查询单元化规则列表 {@link DescribeUnitRulesRequest} {@link DescribeUnitRulesResponse} */
   DescribeUnitRules(data: DescribeUnitRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnitRulesResponse>;
-  /** {@link DescribeUploadInfo 获取上传程序包信息}({@link DescribeUploadInfoRequest 请求参数}): {@link DescribeUploadInfoResponse 返回参数} */
+  /** 获取上传程序包信息 {@link DescribeUploadInfoRequest} {@link DescribeUploadInfoResponse} */
   DescribeUploadInfo(data: DescribeUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUploadInfoResponse>;
-  /** {@link DescribeUsableUnitNamespaces 查询可用于被导入的命名空间列表}({@link DescribeUsableUnitNamespacesRequest 请求参数}): {@link DescribeUsableUnitNamespacesResponse 返回参数} */
+  /** 查询可用于被导入的命名空间列表 {@link DescribeUsableUnitNamespacesRequest} {@link DescribeUsableUnitNamespacesResponse} */
   DescribeUsableUnitNamespaces(data?: DescribeUsableUnitNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsableUnitNamespacesResponse>;
-  /** {@link DisableTask 停用任务}({@link DisableTaskRequest 请求参数}): {@link DisableTaskResponse 返回参数} */
+  /** 停用任务 {@link DisableTaskRequest} {@link DisableTaskResponse} */
   DisableTask(data: DisableTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DisableTaskResponse>;
-  /** {@link DisableTaskFlow 停用工作流}({@link DisableTaskFlowRequest 请求参数}): {@link DisableTaskFlowResponse 返回参数} */
+  /** 停用工作流 {@link DisableTaskFlowRequest} {@link DisableTaskFlowResponse} */
   DisableTaskFlow(data: DisableTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DisableTaskFlowResponse>;
-  /** {@link DisableUnitRoute 禁用单元化路由}({@link DisableUnitRouteRequest 请求参数}): {@link DisableUnitRouteResponse 返回参数} */
+  /** 禁用单元化路由 {@link DisableUnitRouteRequest} {@link DisableUnitRouteResponse} */
   DisableUnitRoute(data: DisableUnitRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DisableUnitRouteResponse>;
-  /** {@link DisableUnitRule 禁用单元化规则}({@link DisableUnitRuleRequest 请求参数}): {@link DisableUnitRuleResponse 返回参数} */
+  /** 禁用单元化规则 {@link DisableUnitRuleRequest} {@link DisableUnitRuleResponse} */
   DisableUnitRule(data: DisableUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DisableUnitRuleResponse>;
-  /** {@link DisassociateBusinessLogConfig 取消关联业务日志配置项和应用}({@link DisassociateBusinessLogConfigRequest 请求参数}): {@link DisassociateBusinessLogConfigResponse 返回参数} */
+  /** 取消关联业务日志配置项和应用 {@link DisassociateBusinessLogConfigRequest} {@link DisassociateBusinessLogConfigResponse} */
   DisassociateBusinessLogConfig(data: DisassociateBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateBusinessLogConfigResponse>;
-  /** {@link DisassociateKafkaConfig 取消关联投递信息和部署组}({@link DisassociateKafkaConfigRequest 请求参数}): {@link DisassociateKafkaConfigResponse 返回参数} */
+  /** 取消关联投递信息和部署组 {@link DisassociateKafkaConfigRequest} {@link DisassociateKafkaConfigResponse} */
   DisassociateKafkaConfig(data: DisassociateKafkaConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateKafkaConfigResponse>;
-  /** {@link DraftApiGroup 下线Api分组}({@link DraftApiGroupRequest 请求参数}): {@link DraftApiGroupResponse 返回参数} */
+  /** 下线Api分组 {@link DraftApiGroupRequest} {@link DraftApiGroupResponse} */
   DraftApiGroup(data: DraftApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DraftApiGroupResponse>;
-  /** {@link EnableTask 启用任务}({@link EnableTaskRequest 请求参数}): {@link EnableTaskResponse 返回参数} */
+  /** 启用任务 {@link EnableTaskRequest} {@link EnableTaskResponse} */
   EnableTask(data: EnableTaskRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTaskResponse>;
-  /** {@link EnableTaskFlow 启用工作流}({@link EnableTaskFlowRequest 请求参数}): {@link EnableTaskFlowResponse 返回参数} */
+  /** 启用工作流 {@link EnableTaskFlowRequest} {@link EnableTaskFlowResponse} */
   EnableTaskFlow(data: EnableTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTaskFlowResponse>;
-  /** {@link EnableUnitRoute 启用单元化路由}({@link EnableUnitRouteRequest 请求参数}): {@link EnableUnitRouteResponse 返回参数} */
+  /** 启用单元化路由 {@link EnableUnitRouteRequest} {@link EnableUnitRouteResponse} */
   EnableUnitRoute(data: EnableUnitRouteRequest, config?: AxiosRequestConfig): AxiosPromise<EnableUnitRouteResponse>;
-  /** {@link EnableUnitRule 启用单元化规则}({@link EnableUnitRuleRequest 请求参数}): {@link EnableUnitRuleResponse 返回参数} */
+  /** 启用单元化规则 {@link EnableUnitRuleRequest} {@link EnableUnitRuleResponse} */
   EnableUnitRule(data: EnableUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EnableUnitRuleResponse>;
-  /** {@link ExecuteTask 手动执行一次任务。}({@link ExecuteTaskRequest 请求参数}): {@link ExecuteTaskResponse 返回参数} */
+  /** 手动执行一次任务。 {@link ExecuteTaskRequest} {@link ExecuteTaskResponse} */
   ExecuteTask(data: ExecuteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskResponse>;
-  /** {@link ExecuteTaskFlow 执行一次工作流}({@link ExecuteTaskFlowRequest 请求参数}): {@link ExecuteTaskFlowResponse 返回参数} */
+  /** 执行一次工作流 {@link ExecuteTaskFlowRequest} {@link ExecuteTaskFlowResponse} */
   ExecuteTaskFlow(data?: ExecuteTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskFlowResponse>;
-  /** {@link ExpandGroup 虚拟机部署组添加实例}({@link ExpandGroupRequest 请求参数}): {@link ExpandGroupResponse 返回参数} */
+  /** 虚拟机部署组添加实例 {@link ExpandGroupRequest} {@link ExpandGroupResponse} */
   ExpandGroup(data: ExpandGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ExpandGroupResponse>;
-  /** {@link ModifyContainerGroup 修改容器部署组}({@link ModifyContainerGroupRequest 请求参数}): {@link ModifyContainerGroupResponse 返回参数} */
+  /** 修改容器部署组 {@link ModifyContainerGroupRequest} {@link ModifyContainerGroupResponse} */
   ModifyContainerGroup(data?: ModifyContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContainerGroupResponse>;
-  /** {@link ModifyContainerReplicas 修改容器部署组实例数}({@link ModifyContainerReplicasRequest 请求参数}): {@link ModifyContainerReplicasResponse 返回参数} */
+  /** 修改容器部署组实例数 {@link ModifyContainerReplicasRequest} {@link ModifyContainerReplicasResponse} */
   ModifyContainerReplicas(data: ModifyContainerReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContainerReplicasResponse>;
-  /** {@link ModifyLane 更新泳道信息}({@link ModifyLaneRequest 请求参数}): {@link ModifyLaneResponse 返回参数} */
+  /** 更新泳道信息 {@link ModifyLaneRequest} {@link ModifyLaneResponse} */
   ModifyLane(data: ModifyLaneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLaneResponse>;
-  /** {@link ModifyLaneRule 更新泳道规则}({@link ModifyLaneRuleRequest 请求参数}): {@link ModifyLaneRuleResponse 返回参数} */
+  /** 更新泳道规则 {@link ModifyLaneRuleRequest} {@link ModifyLaneRuleResponse} */
   ModifyLaneRule(data: ModifyLaneRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLaneRuleResponse>;
-  /** {@link ModifyMicroservice 修改微服务详情}({@link ModifyMicroserviceRequest 请求参数}): {@link ModifyMicroserviceResponse 返回参数} */
+  /** 修改微服务详情 {@link ModifyMicroserviceRequest} {@link ModifyMicroserviceResponse} */
   ModifyMicroservice(data: ModifyMicroserviceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMicroserviceResponse>;
-  /** {@link ModifyPathRewrite 修改路径重写}({@link ModifyPathRewriteRequest 请求参数}): {@link ModifyPathRewriteResponse 返回参数} */
+  /** 修改路径重写 {@link ModifyPathRewriteRequest} {@link ModifyPathRewriteResponse} */
   ModifyPathRewrite(data: ModifyPathRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPathRewriteResponse>;
-  /** {@link ModifyTask 修改任务}({@link ModifyTaskRequest 请求参数}): {@link ModifyTaskResponse 返回参数} */
+  /** 修改任务 {@link ModifyTaskRequest} {@link ModifyTaskResponse} */
   ModifyTask(data: ModifyTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskResponse>;
-  /** {@link ModifyUploadInfo 更新上传程序包信息}({@link ModifyUploadInfoRequest 请求参数}): {@link ModifyUploadInfoResponse 返回参数} */
+  /** 更新上传程序包信息 {@link ModifyUploadInfoRequest} {@link ModifyUploadInfoResponse} */
   ModifyUploadInfo(data: ModifyUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUploadInfoResponse>;
-  /** {@link OperateApplicationTcrBinding 绑定解绑tcr仓库}({@link OperateApplicationTcrBindingRequest 请求参数}): {@link OperateApplicationTcrBindingResponse 返回参数} */
+  /** 绑定解绑tcr仓库 {@link OperateApplicationTcrBindingRequest} {@link OperateApplicationTcrBindingResponse} */
   OperateApplicationTcrBinding(data?: OperateApplicationTcrBindingRequest, config?: AxiosRequestConfig): AxiosPromise<OperateApplicationTcrBindingResponse>;
-  /** {@link ReassociateBusinessLogConfig 重关联业务日志配置}({@link ReassociateBusinessLogConfigRequest 请求参数}): {@link ReassociateBusinessLogConfigResponse 返回参数} */
+  /** 重关联业务日志配置 {@link ReassociateBusinessLogConfigRequest} {@link ReassociateBusinessLogConfigResponse} */
   ReassociateBusinessLogConfig(data: ReassociateBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ReassociateBusinessLogConfigResponse>;
-  /** {@link RedoTask 重新执行任务}({@link RedoTaskRequest 请求参数}): {@link RedoTaskResponse 返回参数} */
+  /** 重新执行任务 {@link RedoTaskRequest} {@link RedoTaskResponse} */
   RedoTask(data: RedoTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RedoTaskResponse>;
-  /** {@link RedoTaskBatch 重新执行任务批次}({@link RedoTaskBatchRequest 请求参数}): {@link RedoTaskBatchResponse 返回参数} */
+  /** 重新执行任务批次 {@link RedoTaskBatchRequest} {@link RedoTaskBatchResponse} */
   RedoTaskBatch(data: RedoTaskBatchRequest, config?: AxiosRequestConfig): AxiosPromise<RedoTaskBatchResponse>;
-  /** {@link RedoTaskExecute 重新执行任务的一次执行}({@link RedoTaskExecuteRequest 请求参数}): {@link RedoTaskExecuteResponse 返回参数} */
+  /** 重新执行任务的一次执行 {@link RedoTaskExecuteRequest} {@link RedoTaskExecuteResponse} */
   RedoTaskExecute(data: RedoTaskExecuteRequest, config?: AxiosRequestConfig): AxiosPromise<RedoTaskExecuteResponse>;
-  /** {@link RedoTaskFlowBatch 重新执行工作流批次}({@link RedoTaskFlowBatchRequest 请求参数}): {@link RedoTaskFlowBatchResponse 返回参数} */
+  /** 重新执行工作流批次 {@link RedoTaskFlowBatchRequest} {@link RedoTaskFlowBatchResponse} */
   RedoTaskFlowBatch(data: RedoTaskFlowBatchRequest, config?: AxiosRequestConfig): AxiosPromise<RedoTaskFlowBatchResponse>;
-  /** {@link ReleaseApiGroup 发布Api分组}({@link ReleaseApiGroupRequest 请求参数}): {@link ReleaseApiGroupResponse 返回参数} */
+  /** 发布Api分组 {@link ReleaseApiGroupRequest} {@link ReleaseApiGroupResponse} */
   ReleaseApiGroup(data: ReleaseApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseApiGroupResponse>;
-  /** {@link ReleaseConfig 发布配置}({@link ReleaseConfigRequest 请求参数}): {@link ReleaseConfigResponse 返回参数} */
+  /** 发布配置 {@link ReleaseConfigRequest} {@link ReleaseConfigResponse} */
   ReleaseConfig(data: ReleaseConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseConfigResponse>;
-  /** {@link ReleaseFileConfig 发布文件配置}({@link ReleaseFileConfigRequest 请求参数}): {@link ReleaseFileConfigResponse 返回参数} */
+  /** 发布文件配置 {@link ReleaseFileConfigRequest} {@link ReleaseFileConfigResponse} */
   ReleaseFileConfig(data: ReleaseFileConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseFileConfigResponse>;
-  /** {@link ReleasePublicConfig 发布公共配置}({@link ReleasePublicConfigRequest 请求参数}): {@link ReleasePublicConfigResponse 返回参数} */
+  /** 发布公共配置 {@link ReleasePublicConfigRequest} {@link ReleasePublicConfigResponse} */
   ReleasePublicConfig(data: ReleasePublicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ReleasePublicConfigResponse>;
-  /** {@link RemoveInstances 移除云主机}({@link RemoveInstancesRequest 请求参数}): {@link RemoveInstancesResponse 返回参数} */
+  /** 移除云主机 {@link RemoveInstancesRequest} {@link RemoveInstancesResponse} */
   RemoveInstances(data: RemoveInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveInstancesResponse>;
-  /** {@link RevocationConfig 撤回已发布的配置}({@link RevocationConfigRequest 请求参数}): {@link RevocationConfigResponse 返回参数} */
+  /** 撤回已发布的配置 {@link RevocationConfigRequest} {@link RevocationConfigResponse} */
   RevocationConfig(data: RevocationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<RevocationConfigResponse>;
-  /** {@link RevocationPublicConfig 撤回已发布的公共配置}({@link RevocationPublicConfigRequest 请求参数}): {@link RevocationPublicConfigResponse 返回参数} */
+  /** 撤回已发布的公共配置 {@link RevocationPublicConfigRequest} {@link RevocationPublicConfigResponse} */
   RevocationPublicConfig(data: RevocationPublicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<RevocationPublicConfigResponse>;
-  /** {@link RollbackConfig 回滚配置}({@link RollbackConfigRequest 请求参数}): {@link RollbackConfigResponse 返回参数} */
+  /** 回滚配置 {@link RollbackConfigRequest} {@link RollbackConfigResponse} */
   RollbackConfig(data: RollbackConfigRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackConfigResponse>;
-  /** {@link SearchBusinessLog 业务日志搜索}({@link SearchBusinessLogRequest 请求参数}): {@link SearchBusinessLogResponse 返回参数} */
+  /** 业务日志搜索 {@link SearchBusinessLogRequest} {@link SearchBusinessLogResponse} */
   SearchBusinessLog(data: SearchBusinessLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchBusinessLogResponse>;
-  /** {@link SearchStdoutLog 标准输出日志搜索}({@link SearchStdoutLogRequest 请求参数}): {@link SearchStdoutLogResponse 返回参数} */
+  /** 标准输出日志搜索 {@link SearchStdoutLogRequest} {@link SearchStdoutLogResponse} */
   SearchStdoutLog(data?: SearchStdoutLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchStdoutLogResponse>;
-  /** {@link ShrinkGroup 缩容虚拟机部署组}({@link ShrinkGroupRequest 请求参数}): {@link ShrinkGroupResponse 返回参数} */
+  /** 缩容虚拟机部署组 {@link ShrinkGroupRequest} {@link ShrinkGroupResponse} */
   ShrinkGroup(data: ShrinkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ShrinkGroupResponse>;
-  /** {@link ShrinkInstances 虚拟机部署组下线实例}({@link ShrinkInstancesRequest 请求参数}): {@link ShrinkInstancesResponse 返回参数} */
+  /** 虚拟机部署组下线实例 {@link ShrinkInstancesRequest} {@link ShrinkInstancesResponse} */
   ShrinkInstances(data: ShrinkInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ShrinkInstancesResponse>;
-  /** {@link StartContainerGroup 启动容器部署组}({@link StartContainerGroupRequest 请求参数}): {@link StartContainerGroupResponse 返回参数} */
+  /** 启动容器部署组 {@link StartContainerGroupRequest} {@link StartContainerGroupResponse} */
   StartContainerGroup(data: StartContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<StartContainerGroupResponse>;
-  /** {@link StartGroup 启动虚拟机部署组}({@link StartGroupRequest 请求参数}): {@link StartGroupResponse 返回参数} */
+  /** 启动虚拟机部署组 {@link StartGroupRequest} {@link StartGroupResponse} */
   StartGroup(data: StartGroupRequest, config?: AxiosRequestConfig): AxiosPromise<StartGroupResponse>;
-  /** {@link StopContainerGroup 停止容器部署组}({@link StopContainerGroupRequest 请求参数}): {@link StopContainerGroupResponse 返回参数} */
+  /** 停止容器部署组 {@link StopContainerGroupRequest} {@link StopContainerGroupResponse} */
   StopContainerGroup(data: StopContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<StopContainerGroupResponse>;
-  /** {@link StopGroup 停止虚拟机部署组}({@link StopGroupRequest 请求参数}): {@link StopGroupResponse 返回参数} */
+  /** 停止虚拟机部署组 {@link StopGroupRequest} {@link StopGroupResponse} */
   StopGroup(data: StopGroupRequest, config?: AxiosRequestConfig): AxiosPromise<StopGroupResponse>;
-  /** {@link StopTaskBatch 停止执行中的任务批次}({@link StopTaskBatchRequest 请求参数}): {@link StopTaskBatchResponse 返回参数} */
+  /** 停止执行中的任务批次 {@link StopTaskBatchRequest} {@link StopTaskBatchResponse} */
   StopTaskBatch(data: StopTaskBatchRequest, config?: AxiosRequestConfig): AxiosPromise<StopTaskBatchResponse>;
-  /** {@link StopTaskExecute 停止正在执行的任务}({@link StopTaskExecuteRequest 请求参数}): {@link StopTaskExecuteResponse 返回参数} */
+  /** 停止正在执行的任务 {@link StopTaskExecuteRequest} {@link StopTaskExecuteResponse} */
   StopTaskExecute(data: StopTaskExecuteRequest, config?: AxiosRequestConfig): AxiosPromise<StopTaskExecuteResponse>;
-  /** {@link TerminateTaskFlowBatch 停止一个工作流批次}({@link TerminateTaskFlowBatchRequest 请求参数}): {@link TerminateTaskFlowBatchResponse 返回参数} */
+  /** 停止一个工作流批次 {@link TerminateTaskFlowBatchRequest} {@link TerminateTaskFlowBatchResponse} */
   TerminateTaskFlowBatch(data: TerminateTaskFlowBatchRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateTaskFlowBatchResponse>;
-  /** {@link UnbindApiGroup API分组批量与网关解绑}({@link UnbindApiGroupRequest 请求参数}): {@link UnbindApiGroupResponse 返回参数} */
+  /** API分组批量与网关解绑 {@link UnbindApiGroupRequest} {@link UnbindApiGroupResponse} */
   UnbindApiGroup(data: UnbindApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindApiGroupResponse>;
-  /** {@link UpdateApiGroup 更新Api分组}({@link UpdateApiGroupRequest 请求参数}): {@link UpdateApiGroupResponse 返回参数} */
+  /** 更新Api分组 {@link UpdateApiGroupRequest} {@link UpdateApiGroupResponse} */
   UpdateApiGroup(data: UpdateApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApiGroupResponse>;
-  /** {@link UpdateApiRateLimitRule 更新API限流规则}({@link UpdateApiRateLimitRuleRequest 请求参数}): {@link UpdateApiRateLimitRuleResponse 返回参数} */
+  /** 更新API限流规则 {@link UpdateApiRateLimitRuleRequest} {@link UpdateApiRateLimitRuleResponse} */
   UpdateApiRateLimitRule(data: UpdateApiRateLimitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApiRateLimitRuleResponse>;
-  /** {@link UpdateApiRateLimitRules 批量更新API限流规则}({@link UpdateApiRateLimitRulesRequest 请求参数}): {@link UpdateApiRateLimitRulesResponse 返回参数} */
+  /** 批量更新API限流规则 {@link UpdateApiRateLimitRulesRequest} {@link UpdateApiRateLimitRulesResponse} */
   UpdateApiRateLimitRules(data: UpdateApiRateLimitRulesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApiRateLimitRulesResponse>;
-  /** {@link UpdateApiTimeouts 更新API超时}({@link UpdateApiTimeoutsRequest 请求参数}): {@link UpdateApiTimeoutsResponse 返回参数} */
+  /** 更新API超时 {@link UpdateApiTimeoutsRequest} {@link UpdateApiTimeoutsResponse} */
   UpdateApiTimeouts(data: UpdateApiTimeoutsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApiTimeoutsResponse>;
-  /** {@link UpdateGatewayApi 更新API}({@link UpdateGatewayApiRequest 请求参数}): {@link UpdateGatewayApiResponse 返回参数} */
+  /** 更新API {@link UpdateGatewayApiRequest} {@link UpdateGatewayApiResponse} */
   UpdateGatewayApi(data: UpdateGatewayApiRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGatewayApiResponse>;
-  /** {@link UpdateHealthCheckSettings 更新健康检查配置}({@link UpdateHealthCheckSettingsRequest 请求参数}): {@link UpdateHealthCheckSettingsResponse 返回参数} */
+  /** 更新健康检查配置 {@link UpdateHealthCheckSettingsRequest} {@link UpdateHealthCheckSettingsResponse} */
   UpdateHealthCheckSettings(data: UpdateHealthCheckSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateHealthCheckSettingsResponse>;
-  /** {@link UpdateRepository 更新仓库信息}({@link UpdateRepositoryRequest 请求参数}): {@link UpdateRepositoryResponse 返回参数} */
+  /** 更新仓库信息 {@link UpdateRepositoryRequest} {@link UpdateRepositoryResponse} */
   UpdateRepository(data: UpdateRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRepositoryResponse>;
-  /** {@link UpdateUnitRule 更新单元化规则}({@link UpdateUnitRuleRequest 请求参数}): {@link UpdateUnitRuleResponse 返回参数} */
+  /** 更新单元化规则 {@link UpdateUnitRuleRequest} {@link UpdateUnitRuleResponse} */
   UpdateUnitRule(data: UpdateUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUnitRuleResponse>;
 }
 

@@ -720,7 +720,7 @@ declare interface AddDBInstanceToReadOnlyGroupRequest {
 declare interface AddDBInstanceToReadOnlyGroupResponse {
   /** 流程ID */
   FlowId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -770,7 +770,7 @@ declare interface CloneDBInstanceResponse {
   BillId: string | null;
   /** 克隆出的新实例ID，当前只支持后付费返回该值。 */
   DBInstanceId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -784,7 +784,7 @@ declare interface CloseDBExtranetAccessRequest {
 declare interface CloseDBExtranetAccessResponse {
   /** 异步任务流程ID */
   FlowId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -796,7 +796,7 @@ declare interface CloseServerlessDBExtranetAccessRequest {
 }
 
 declare interface CloseServerlessDBExtranetAccessResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -816,7 +816,7 @@ declare interface CreateDBInstanceNetworkAccessRequest {
 declare interface CreateDBInstanceNetworkAccessResponse {
   /** 流程ID。 */
   FlowId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -870,7 +870,7 @@ declare interface CreateDBInstancesResponse {
   BillId: string;
   /** 创建成功的实例ID集合，只在后付费情景下有返回值 */
   DBInstanceIdSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -942,7 +942,7 @@ declare interface CreateInstancesResponse {
   BillId: string;
   /** 创建成功的实例ID集合，只在后付费情景下有返回值。 */
   DBInstanceIdSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -960,7 +960,7 @@ declare interface CreateParameterTemplateRequest {
 declare interface CreateParameterTemplateResponse {
   /** 参数模板ID，用于唯一确认参数模板 */
   TemplateId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1014,7 +1014,7 @@ declare interface CreateReadOnlyDBInstanceResponse {
   BillId: string;
   /** 创建成功的实例ID集合，只在后付费情景下有返回值 */
   DBInstanceIdSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1034,7 +1034,7 @@ declare interface CreateReadOnlyGroupNetworkAccessRequest {
 declare interface CreateReadOnlyGroupNetworkAccessResponse {
   /** 流程ID。 */
   FlowId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1068,7 +1068,7 @@ declare interface CreateReadOnlyGroupResponse {
   ReadOnlyGroupId: string;
   /** 流程ID */
   FlowId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1094,7 +1094,7 @@ declare interface CreateServerlessDBInstanceRequest {
 declare interface CreateServerlessDBInstanceResponse {
   /** 实例ID，该ID全局唯一，如：postgres-xxxxx */
   DBInstanceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1112,7 +1112,7 @@ declare interface DeleteDBInstanceNetworkAccessRequest {
 declare interface DeleteDBInstanceNetworkAccessResponse {
   /** 流程ID。 */
   FlowId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1122,7 +1122,7 @@ declare interface DeleteParameterTemplateRequest {
 }
 
 declare interface DeleteParameterTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1140,7 +1140,7 @@ declare interface DeleteReadOnlyGroupNetworkAccessRequest {
 declare interface DeleteReadOnlyGroupNetworkAccessResponse {
   /** 流程ID。 */
   FlowId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1152,7 +1152,7 @@ declare interface DeleteReadOnlyGroupRequest {
 declare interface DeleteReadOnlyGroupResponse {
   /** 流程ID */
   FlowId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1164,7 +1164,7 @@ declare interface DeleteServerlessDBInstanceRequest {
 }
 
 declare interface DeleteServerlessDBInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1186,7 +1186,7 @@ declare interface DescribeAccountsResponse {
   TotalCount: number;
   /** 帐号列表详细信息。 */
   Details: AccountInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1200,7 +1200,7 @@ declare interface DescribeAvailableRecoveryTimeResponse {
   RecoveryBeginTime: string;
   /** 可恢复的最晚时间，时区为东八区（UTC+8）。 */
   RecoveryEndTime: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1212,7 +1212,7 @@ declare interface DescribeBackupPlansRequest {
 declare interface DescribeBackupPlansResponse {
   /** 实例的备份计划集 */
   Plans: BackupPlan[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1230,7 +1230,7 @@ declare interface DescribeCloneDBInstanceSpecResponse {
   MinSpecCode: string;
   /** 可购买的最小磁盘容量，单位GB。 */
   MinStorage: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1254,7 +1254,7 @@ declare interface DescribeDBBackupsResponse {
   TotalCount: number;
   /** 备份列表 */
   BackupList: DBBackup[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1280,7 +1280,7 @@ declare interface DescribeDBErrlogsResponse {
   TotalCount: number;
   /** 错误日志列表 */
   Details: ErrLogDetail[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1292,7 +1292,7 @@ declare interface DescribeDBInstanceAttributeRequest {
 declare interface DescribeDBInstanceAttributeResponse {
   /** 实例详细信息。 */
   DBInstance: DBInstance;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1308,7 +1308,7 @@ declare interface DescribeDBInstanceParametersResponse {
   TotalCount: number;
   /** 参数列表返回详情 */
   Detail: ParamInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1322,7 +1322,7 @@ declare interface DescribeDBInstanceSecurityGroupsRequest {
 declare interface DescribeDBInstanceSecurityGroupsResponse {
   /** 安全组信息数组 */
   SecurityGroupSet: SecurityGroup[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1344,7 +1344,7 @@ declare interface DescribeDBInstancesResponse {
   TotalCount: number;
   /** 实例详细信息集合。 */
   DBInstanceSet: DBInstance[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1372,7 +1372,7 @@ declare interface DescribeDBSlowlogsResponse {
   TotalCount: number;
   /** 慢查询日志详情 */
   Detail: SlowlogDetail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1394,7 +1394,7 @@ declare interface DescribeDBXlogsResponse {
   TotalCount: number;
   /** Xlog列表 */
   XlogList: Xlog[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1406,7 +1406,7 @@ declare interface DescribeDatabasesRequest {
 declare interface DescribeDatabasesResponse {
   /** 数据库信息 */
   Items: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1422,7 +1422,7 @@ declare interface DescribeDefaultParametersResponse {
   TotalCount: number;
   /** 参数信息 */
   ParamInfoSet: ParamInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1434,7 +1434,7 @@ declare interface DescribeEncryptionKeysRequest {
 declare interface DescribeEncryptionKeysResponse {
   /** 实例密钥信息列表。 */
   EncryptionKeys: EncryptionKey[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1448,7 +1448,7 @@ declare interface DescribeOrdersResponse {
   TotalCount: number;
   /** 订单数组 */
   Deals: PgDeal[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1472,7 +1472,7 @@ declare interface DescribeParameterTemplateAttributesResponse {
   DBEngine: string | null;
   /** 参数模板描述 */
   TemplateDescription: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1494,7 +1494,7 @@ declare interface DescribeParameterTemplatesResponse {
   TotalCount: number;
   /** 参数模板列表 */
   ParameterTemplateSet: ParameterTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1508,7 +1508,7 @@ declare interface DescribeParamsEventResponse {
   TotalCount: number;
   /** 实例参数修改事件详情 */
   EventItems: EventItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1522,7 +1522,7 @@ declare interface DescribeProductConfigRequest {
 declare interface DescribeProductConfigResponse {
   /** 售卖规格列表。 */
   SpecInfoList: SpecInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1542,7 +1542,7 @@ declare interface DescribeReadOnlyGroupsRequest {
 declare interface DescribeReadOnlyGroupsResponse {
   /** 只读组列表 */
   ReadOnlyGroupList: ReadOnlyGroup[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1554,7 +1554,7 @@ declare interface DescribeRegionsResponse {
   TotalCount: number;
   /** 地域信息集合。 */
   RegionSet: RegionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1576,7 +1576,7 @@ declare interface DescribeServerlessDBInstancesResponse {
   TotalCount: number;
   /** 查询结果 */
   DBInstanceSet: ServerlessDBInstance[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1604,7 +1604,7 @@ declare interface DescribeSlowQueryAnalysisResponse {
   TotalCount: number;
   /** 慢SQL统计分析接口返回详情。 */
   Detail: Detail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1634,7 +1634,7 @@ declare interface DescribeSlowQueryListResponse {
   DurationAnalysis: DurationAnalysis[] | null;
   /** 指定时间范围内 慢SQL流水。 */
   RawSlowQueryList: RawSlowQuery[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1646,7 +1646,7 @@ declare interface DescribeZonesResponse {
   TotalCount: number;
   /** 可用区信息集合。 */
   ZoneSet: ZoneInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1656,7 +1656,7 @@ declare interface DestroyDBInstanceRequest {
 }
 
 declare interface DestroyDBInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1672,7 +1672,7 @@ declare interface DisIsolateDBInstancesRequest {
 }
 
 declare interface DisIsolateDBInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1690,7 +1690,7 @@ declare interface InitDBInstancesRequest {
 declare interface InitDBInstancesResponse {
   /** 实例ID集合。 */
   DBInstanceIdSet: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1722,7 +1722,7 @@ declare interface InquiryPriceCreateDBInstancesResponse {
   Price: number;
   /** 币种。例如，CNY：人民币。 */
   Currency: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1740,7 +1740,7 @@ declare interface InquiryPriceRenewDBInstanceResponse {
   Price: number;
   /** 币种。例如，CNY：人民币。 */
   Currency: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1762,7 +1762,7 @@ declare interface InquiryPriceUpgradeDBInstanceResponse {
   Price: number;
   /** 币种。例如，CNY：人民币。 */
   Currency: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1772,7 +1772,7 @@ declare interface IsolateDBInstancesRequest {
 }
 
 declare interface IsolateDBInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1786,7 +1786,7 @@ declare interface ModifyAccountRemarkRequest {
 }
 
 declare interface ModifyAccountRemarkResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1804,7 +1804,7 @@ declare interface ModifyBackupPlanRequest {
 }
 
 declare interface ModifyBackupPlanResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1822,7 +1822,7 @@ declare interface ModifyDBInstanceDeploymentRequest {
 }
 
 declare interface ModifyDBInstanceDeploymentResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1834,7 +1834,7 @@ declare interface ModifyDBInstanceNameRequest {
 }
 
 declare interface ModifyDBInstanceNameResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1846,7 +1846,7 @@ declare interface ModifyDBInstanceParametersRequest {
 }
 
 declare interface ModifyDBInstanceParametersResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1862,7 +1862,7 @@ declare interface ModifyDBInstanceReadOnlyGroupRequest {
 declare interface ModifyDBInstanceReadOnlyGroupResponse {
   /** 流程ID */
   FlowId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1876,7 +1876,7 @@ declare interface ModifyDBInstanceSecurityGroupsRequest {
 }
 
 declare interface ModifyDBInstanceSecurityGroupsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1906,7 +1906,7 @@ declare interface ModifyDBInstanceSpecResponse {
   DealName: string;
   /** 冻结流水号。 */
   BillId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1920,7 +1920,7 @@ declare interface ModifyDBInstancesProjectRequest {
 declare interface ModifyDBInstancesProjectResponse {
   /** 转移项目成功的实例个数 */
   Count: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1938,7 +1938,7 @@ declare interface ModifyParameterTemplateRequest {
 }
 
 declare interface ModifyParameterTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1962,7 +1962,7 @@ declare interface ModifyReadOnlyGroupConfigRequest {
 }
 
 declare interface ModifyReadOnlyGroupConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1974,7 +1974,7 @@ declare interface ModifySwitchTimePeriodRequest {
 }
 
 declare interface ModifySwitchTimePeriodResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1988,7 +1988,7 @@ declare interface OpenDBExtranetAccessRequest {
 declare interface OpenDBExtranetAccessResponse {
   /** 异步任务流程ID */
   FlowId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2000,7 +2000,7 @@ declare interface OpenServerlessDBExtranetAccessRequest {
 }
 
 declare interface OpenServerlessDBExtranetAccessResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2010,7 +2010,7 @@ declare interface RebalanceReadOnlyGroupRequest {
 }
 
 declare interface RebalanceReadOnlyGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2024,7 +2024,7 @@ declare interface RemoveDBInstanceFromReadOnlyGroupRequest {
 declare interface RemoveDBInstanceFromReadOnlyGroupResponse {
   /** 流程ID */
   FlowId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2042,7 +2042,7 @@ declare interface RenewInstanceRequest {
 declare interface RenewInstanceResponse {
   /** 订单名 */
   DealName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2056,7 +2056,7 @@ declare interface ResetAccountPasswordRequest {
 }
 
 declare interface ResetAccountPasswordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2068,7 +2068,7 @@ declare interface RestartDBInstanceRequest {
 declare interface RestartDBInstanceResponse {
   /** 异步流程ID */
   FlowId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2082,7 +2082,7 @@ declare interface SetAutoRenewFlagRequest {
 declare interface SetAutoRenewFlagResponse {
   /** 设置成功的实例个数 */
   Count: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2112,154 +2112,154 @@ declare interface UpgradeDBInstanceResponse {
   DealName: string;
   /** 冻结流水号 */
   BillId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Postgres 云数据库 PostgreSQL} */
 declare interface Postgres {
   (): Versions;
-  /** {@link AddDBInstanceToReadOnlyGroup 添加只读实例到只读组}({@link AddDBInstanceToReadOnlyGroupRequest 请求参数}): {@link AddDBInstanceToReadOnlyGroupResponse 返回参数} */
+  /** 添加只读实例到只读组 {@link AddDBInstanceToReadOnlyGroupRequest} {@link AddDBInstanceToReadOnlyGroupResponse} */
   AddDBInstanceToReadOnlyGroup(data: AddDBInstanceToReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddDBInstanceToReadOnlyGroupResponse>;
-  /** {@link CloneDBInstance 克隆实例}({@link CloneDBInstanceRequest 请求参数}): {@link CloneDBInstanceResponse 返回参数} */
+  /** 克隆实例 {@link CloneDBInstanceRequest} {@link CloneDBInstanceResponse} */
   CloneDBInstance(data: CloneDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CloneDBInstanceResponse>;
-  /** {@link CloseDBExtranetAccess 关闭实例外网链接}({@link CloseDBExtranetAccessRequest 请求参数}): {@link CloseDBExtranetAccessResponse 返回参数} */
+  /** 关闭实例外网链接 {@link CloseDBExtranetAccessRequest} {@link CloseDBExtranetAccessResponse} */
   CloseDBExtranetAccess(data: CloseDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseDBExtranetAccessResponse>;
-  /** {@link CloseServerlessDBExtranetAccess 关闭serverlessDB实例外网}({@link CloseServerlessDBExtranetAccessRequest 请求参数}): {@link CloseServerlessDBExtranetAccessResponse 返回参数} */
+  /** 关闭serverlessDB实例外网 {@link CloseServerlessDBExtranetAccessRequest} {@link CloseServerlessDBExtranetAccessResponse} */
   CloseServerlessDBExtranetAccess(data?: CloseServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseServerlessDBExtranetAccessResponse>;
-  /** {@link CreateDBInstanceNetworkAccess 添加实例网络}({@link CreateDBInstanceNetworkAccessRequest 请求参数}): {@link CreateDBInstanceNetworkAccessResponse 返回参数} */
+  /** 添加实例网络 {@link CreateDBInstanceNetworkAccessRequest} {@link CreateDBInstanceNetworkAccessResponse} */
   CreateDBInstanceNetworkAccess(data: CreateDBInstanceNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceNetworkAccessResponse>;
-  /** {@link CreateDBInstances 创建实例(旧)}({@link CreateDBInstancesRequest 请求参数}): {@link CreateDBInstancesResponse 返回参数} */
+  /** 创建实例(旧) {@link CreateDBInstancesRequest} {@link CreateDBInstancesResponse} */
   CreateDBInstances(data: CreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstancesResponse>;
-  /** {@link CreateInstances 创建实例(新)}({@link CreateInstancesRequest 请求参数}): {@link CreateInstancesResponse 返回参数} */
+  /** 创建实例(新) {@link CreateInstancesRequest} {@link CreateInstancesResponse} */
   CreateInstances(data: CreateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancesResponse>;
-  /** {@link CreateParameterTemplate 创建参数模板}({@link CreateParameterTemplateRequest 请求参数}): {@link CreateParameterTemplateResponse 返回参数} */
+  /** 创建参数模板 {@link CreateParameterTemplateRequest} {@link CreateParameterTemplateResponse} */
   CreateParameterTemplate(data: CreateParameterTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateParameterTemplateResponse>;
-  /** {@link CreateReadOnlyDBInstance 创建只读实例}({@link CreateReadOnlyDBInstanceRequest 请求参数}): {@link CreateReadOnlyDBInstanceResponse 返回参数} */
+  /** 创建只读实例 {@link CreateReadOnlyDBInstanceRequest} {@link CreateReadOnlyDBInstanceResponse} */
   CreateReadOnlyDBInstance(data: CreateReadOnlyDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyDBInstanceResponse>;
-  /** {@link CreateReadOnlyGroup 创建只读组}({@link CreateReadOnlyGroupRequest 请求参数}): {@link CreateReadOnlyGroupResponse 返回参数} */
+  /** 创建只读组 {@link CreateReadOnlyGroupRequest} {@link CreateReadOnlyGroupResponse} */
   CreateReadOnlyGroup(data: CreateReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyGroupResponse>;
-  /** {@link CreateReadOnlyGroupNetworkAccess 添加RO组网络}({@link CreateReadOnlyGroupNetworkAccessRequest 请求参数}): {@link CreateReadOnlyGroupNetworkAccessResponse 返回参数} */
+  /** 添加RO组网络 {@link CreateReadOnlyGroupNetworkAccessRequest} {@link CreateReadOnlyGroupNetworkAccessResponse} */
   CreateReadOnlyGroupNetworkAccess(data: CreateReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyGroupNetworkAccessResponse>;
-  /** {@link CreateServerlessDBInstance 创建ServerlessDB实例}({@link CreateServerlessDBInstanceRequest 请求参数}): {@link CreateServerlessDBInstanceResponse 返回参数} */
+  /** 创建ServerlessDB实例 {@link CreateServerlessDBInstanceRequest} {@link CreateServerlessDBInstanceResponse} */
   CreateServerlessDBInstance(data: CreateServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServerlessDBInstanceResponse>;
-  /** {@link DeleteDBInstanceNetworkAccess 删除实例网络}({@link DeleteDBInstanceNetworkAccessRequest 请求参数}): {@link DeleteDBInstanceNetworkAccessResponse 返回参数} */
+  /** 删除实例网络 {@link DeleteDBInstanceNetworkAccessRequest} {@link DeleteDBInstanceNetworkAccessResponse} */
   DeleteDBInstanceNetworkAccess(data: DeleteDBInstanceNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBInstanceNetworkAccessResponse>;
-  /** {@link DeleteParameterTemplate 删除参数模板}({@link DeleteParameterTemplateRequest 请求参数}): {@link DeleteParameterTemplateResponse 返回参数} */
+  /** 删除参数模板 {@link DeleteParameterTemplateRequest} {@link DeleteParameterTemplateResponse} */
   DeleteParameterTemplate(data: DeleteParameterTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteParameterTemplateResponse>;
-  /** {@link DeleteReadOnlyGroup 删除只读组}({@link DeleteReadOnlyGroupRequest 请求参数}): {@link DeleteReadOnlyGroupResponse 返回参数} */
+  /** 删除只读组 {@link DeleteReadOnlyGroupRequest} {@link DeleteReadOnlyGroupResponse} */
   DeleteReadOnlyGroup(data: DeleteReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReadOnlyGroupResponse>;
-  /** {@link DeleteReadOnlyGroupNetworkAccess 删除RO组网络}({@link DeleteReadOnlyGroupNetworkAccessRequest 请求参数}): {@link DeleteReadOnlyGroupNetworkAccessResponse 返回参数} */
+  /** 删除RO组网络 {@link DeleteReadOnlyGroupNetworkAccessRequest} {@link DeleteReadOnlyGroupNetworkAccessResponse} */
   DeleteReadOnlyGroupNetworkAccess(data: DeleteReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReadOnlyGroupNetworkAccessResponse>;
-  /** {@link DeleteServerlessDBInstance 删除ServerlessDB实例}({@link DeleteServerlessDBInstanceRequest 请求参数}): {@link DeleteServerlessDBInstanceResponse 返回参数} */
+  /** 删除ServerlessDB实例 {@link DeleteServerlessDBInstanceRequest} {@link DeleteServerlessDBInstanceResponse} */
   DeleteServerlessDBInstance(data?: DeleteServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessDBInstanceResponse>;
-  /** {@link DescribeAccounts 获取实例用户列表}({@link DescribeAccountsRequest 请求参数}): {@link DescribeAccountsResponse 返回参数} */
+  /** 获取实例用户列表 {@link DescribeAccountsRequest} {@link DescribeAccountsResponse} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
-  /** {@link DescribeAvailableRecoveryTime 查询实例可恢复的时间范围}({@link DescribeAvailableRecoveryTimeRequest 请求参数}): {@link DescribeAvailableRecoveryTimeResponse 返回参数} */
+  /** 查询实例可恢复的时间范围 {@link DescribeAvailableRecoveryTimeRequest} {@link DescribeAvailableRecoveryTimeResponse} */
   DescribeAvailableRecoveryTime(data: DescribeAvailableRecoveryTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableRecoveryTimeResponse>;
-  /** {@link DescribeBackupPlans 查询备份计划}({@link DescribeBackupPlansRequest 请求参数}): {@link DescribeBackupPlansResponse 返回参数} */
+  /** 查询备份计划 {@link DescribeBackupPlansRequest} {@link DescribeBackupPlansResponse} */
   DescribeBackupPlans(data: DescribeBackupPlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupPlansResponse>;
-  /** {@link DescribeCloneDBInstanceSpec 查询克隆实例购买规格}({@link DescribeCloneDBInstanceSpecRequest 请求参数}): {@link DescribeCloneDBInstanceSpecResponse 返回参数} */
+  /** 查询克隆实例购买规格 {@link DescribeCloneDBInstanceSpecRequest} {@link DescribeCloneDBInstanceSpecResponse} */
   DescribeCloneDBInstanceSpec(data: DescribeCloneDBInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloneDBInstanceSpecResponse>;
-  /** {@link DescribeDBBackups 查询实例备份列表}({@link DescribeDBBackupsRequest 请求参数}): {@link DescribeDBBackupsResponse 返回参数} */
+  /** 查询实例备份列表 {@link DescribeDBBackupsRequest} {@link DescribeDBBackupsResponse} */
   DescribeDBBackups(data: DescribeDBBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBBackupsResponse>;
-  /** {@link DescribeDBErrlogs 获取错误日志}({@link DescribeDBErrlogsRequest 请求参数}): {@link DescribeDBErrlogsResponse 返回参数} */
+  /** 获取错误日志 {@link DescribeDBErrlogsRequest} {@link DescribeDBErrlogsResponse} */
   DescribeDBErrlogs(data: DescribeDBErrlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBErrlogsResponse>;
-  /** {@link DescribeDBInstanceAttribute 查询实例详情}({@link DescribeDBInstanceAttributeRequest 请求参数}): {@link DescribeDBInstanceAttributeResponse 返回参数} */
+  /** 查询实例详情 {@link DescribeDBInstanceAttributeRequest} {@link DescribeDBInstanceAttributeResponse} */
   DescribeDBInstanceAttribute(data: DescribeDBInstanceAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceAttributeResponse>;
-  /** {@link DescribeDBInstanceParameters 获取实例可修改参数列表}({@link DescribeDBInstanceParametersRequest 请求参数}): {@link DescribeDBInstanceParametersResponse 返回参数} */
+  /** 获取实例可修改参数列表 {@link DescribeDBInstanceParametersRequest} {@link DescribeDBInstanceParametersResponse} */
   DescribeDBInstanceParameters(data: DescribeDBInstanceParametersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceParametersResponse>;
-  /** {@link DescribeDBInstanceSecurityGroups 查询实例安全组信息}({@link DescribeDBInstanceSecurityGroupsRequest 请求参数}): {@link DescribeDBInstanceSecurityGroupsResponse 返回参数} */
+  /** 查询实例安全组信息 {@link DescribeDBInstanceSecurityGroupsRequest} {@link DescribeDBInstanceSecurityGroupsResponse} */
   DescribeDBInstanceSecurityGroups(data?: DescribeDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceSecurityGroupsResponse>;
-  /** {@link DescribeDBInstances 查询实例列表}({@link DescribeDBInstancesRequest 请求参数}): {@link DescribeDBInstancesResponse 返回参数} */
+  /** 查询实例列表 {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
-  /** {@link DescribeDBSlowlogs 获取慢查询日志 （废弃）}({@link DescribeDBSlowlogsRequest 请求参数}): {@link DescribeDBSlowlogsResponse 返回参数} */
+  /** 获取慢查询日志 （废弃） {@link DescribeDBSlowlogsRequest} {@link DescribeDBSlowlogsResponse} */
   DescribeDBSlowlogs(data: DescribeDBSlowlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSlowlogsResponse>;
-  /** {@link DescribeDBXlogs 获取实例Xlog列表}({@link DescribeDBXlogsRequest 请求参数}): {@link DescribeDBXlogsResponse 返回参数} */
+  /** 获取实例Xlog列表 {@link DescribeDBXlogsRequest} {@link DescribeDBXlogsResponse} */
   DescribeDBXlogs(data: DescribeDBXlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBXlogsResponse>;
-  /** {@link DescribeDatabases 拉取数据库列表}({@link DescribeDatabasesRequest 请求参数}): {@link DescribeDatabasesResponse 返回参数} */
+  /** 拉取数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
   DescribeDatabases(data: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
-  /** {@link DescribeDefaultParameters 查询默认参数列表}({@link DescribeDefaultParametersRequest 请求参数}): {@link DescribeDefaultParametersResponse 返回参数} */
+  /** 查询默认参数列表 {@link DescribeDefaultParametersRequest} {@link DescribeDefaultParametersResponse} */
   DescribeDefaultParameters(data: DescribeDefaultParametersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultParametersResponse>;
-  /** {@link DescribeEncryptionKeys 实例密钥信息列表}({@link DescribeEncryptionKeysRequest 请求参数}): {@link DescribeEncryptionKeysResponse 返回参数} */
+  /** 实例密钥信息列表 {@link DescribeEncryptionKeysRequest} {@link DescribeEncryptionKeysResponse} */
   DescribeEncryptionKeys(data: DescribeEncryptionKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEncryptionKeysResponse>;
-  /** {@link DescribeOrders 获取订单信息}({@link DescribeOrdersRequest 请求参数}): {@link DescribeOrdersResponse 返回参数} */
+  /** 获取订单信息 {@link DescribeOrdersRequest} {@link DescribeOrdersResponse} */
   DescribeOrders(data: DescribeOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrdersResponse>;
-  /** {@link DescribeParameterTemplateAttributes 查询参数模板详情}({@link DescribeParameterTemplateAttributesRequest 请求参数}): {@link DescribeParameterTemplateAttributesResponse 返回参数} */
+  /** 查询参数模板详情 {@link DescribeParameterTemplateAttributesRequest} {@link DescribeParameterTemplateAttributesResponse} */
   DescribeParameterTemplateAttributes(data: DescribeParameterTemplateAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParameterTemplateAttributesResponse>;
-  /** {@link DescribeParameterTemplates 查询参数模板列表}({@link DescribeParameterTemplatesRequest 请求参数}): {@link DescribeParameterTemplatesResponse 返回参数} */
+  /** 查询参数模板列表 {@link DescribeParameterTemplatesRequest} {@link DescribeParameterTemplatesResponse} */
   DescribeParameterTemplates(data?: DescribeParameterTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParameterTemplatesResponse>;
-  /** {@link DescribeParamsEvent 获取参数修改事件详情}({@link DescribeParamsEventRequest 请求参数}): {@link DescribeParamsEventResponse 返回参数} */
+  /** 获取参数修改事件详情 {@link DescribeParamsEventRequest} {@link DescribeParamsEventResponse} */
   DescribeParamsEvent(data: DescribeParamsEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamsEventResponse>;
-  /** {@link DescribeProductConfig 查询售卖规格配置}({@link DescribeProductConfigRequest 请求参数}): {@link DescribeProductConfigResponse 返回参数} */
+  /** 查询售卖规格配置 {@link DescribeProductConfigRequest} {@link DescribeProductConfigResponse} */
   DescribeProductConfig(data?: DescribeProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductConfigResponse>;
-  /** {@link DescribeReadOnlyGroups 查询只读组信息}({@link DescribeReadOnlyGroupsRequest 请求参数}): {@link DescribeReadOnlyGroupsResponse 返回参数} */
+  /** 查询只读组信息 {@link DescribeReadOnlyGroupsRequest} {@link DescribeReadOnlyGroupsResponse} */
   DescribeReadOnlyGroups(data?: DescribeReadOnlyGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReadOnlyGroupsResponse>;
-  /** {@link DescribeRegions 查询售卖地域}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
+  /** 查询售卖地域 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** {@link DescribeServerlessDBInstances 查询ServerlessDB实例列表}({@link DescribeServerlessDBInstancesRequest 请求参数}): {@link DescribeServerlessDBInstancesResponse 返回参数} */
+  /** 查询ServerlessDB实例列表 {@link DescribeServerlessDBInstancesRequest} {@link DescribeServerlessDBInstancesResponse} */
   DescribeServerlessDBInstances(data?: DescribeServerlessDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessDBInstancesResponse>;
-  /** {@link DescribeSlowQueryAnalysis 获取慢查询统计分析列表}({@link DescribeSlowQueryAnalysisRequest 请求参数}): {@link DescribeSlowQueryAnalysisResponse 返回参数} */
+  /** 获取慢查询统计分析列表 {@link DescribeSlowQueryAnalysisRequest} {@link DescribeSlowQueryAnalysisResponse} */
   DescribeSlowQueryAnalysis(data: DescribeSlowQueryAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowQueryAnalysisResponse>;
-  /** {@link DescribeSlowQueryList 获取慢查询列表}({@link DescribeSlowQueryListRequest 请求参数}): {@link DescribeSlowQueryListResponse 返回参数} */
+  /** 获取慢查询列表 {@link DescribeSlowQueryListRequest} {@link DescribeSlowQueryListResponse} */
   DescribeSlowQueryList(data: DescribeSlowQueryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowQueryListResponse>;
-  /** {@link DescribeZones 查询售卖可用区}({@link DescribeZonesRequest 请求参数}): {@link DescribeZonesResponse 返回参数} */
+  /** 查询售卖可用区 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
-  /** {@link DestroyDBInstance 销毁实例}({@link DestroyDBInstanceRequest 请求参数}): {@link DestroyDBInstanceResponse 返回参数} */
+  /** 销毁实例 {@link DestroyDBInstanceRequest} {@link DestroyDBInstanceResponse} */
   DestroyDBInstance(data: DestroyDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyDBInstanceResponse>;
-  /** {@link DisIsolateDBInstances 解隔离实例}({@link DisIsolateDBInstancesRequest 请求参数}): {@link DisIsolateDBInstancesResponse 返回参数} */
+  /** 解隔离实例 {@link DisIsolateDBInstancesRequest} {@link DisIsolateDBInstancesResponse} */
   DisIsolateDBInstances(data: DisIsolateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DisIsolateDBInstancesResponse>;
-  /** {@link InitDBInstances 初始化实例}({@link InitDBInstancesRequest 请求参数}): {@link InitDBInstancesResponse 返回参数} */
+  /** 初始化实例 {@link InitDBInstancesRequest} {@link InitDBInstancesResponse} */
   InitDBInstances(data: InitDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InitDBInstancesResponse>;
-  /** {@link InquiryPriceCreateDBInstances 查询售卖价格}({@link InquiryPriceCreateDBInstancesRequest 请求参数}): {@link InquiryPriceCreateDBInstancesResponse 返回参数} */
+  /** 查询售卖价格 {@link InquiryPriceCreateDBInstancesRequest} {@link InquiryPriceCreateDBInstancesResponse} */
   InquiryPriceCreateDBInstances(data: InquiryPriceCreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateDBInstancesResponse>;
-  /** {@link InquiryPriceRenewDBInstance 查询实例续费价格}({@link InquiryPriceRenewDBInstanceRequest 请求参数}): {@link InquiryPriceRenewDBInstanceResponse 返回参数} */
+  /** 查询实例续费价格 {@link InquiryPriceRenewDBInstanceRequest} {@link InquiryPriceRenewDBInstanceResponse} */
   InquiryPriceRenewDBInstance(data: InquiryPriceRenewDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewDBInstanceResponse>;
-  /** {@link InquiryPriceUpgradeDBInstance 查询升级实例价格}({@link InquiryPriceUpgradeDBInstanceRequest 请求参数}): {@link InquiryPriceUpgradeDBInstanceResponse 返回参数} */
+  /** 查询升级实例价格 {@link InquiryPriceUpgradeDBInstanceRequest} {@link InquiryPriceUpgradeDBInstanceResponse} */
   InquiryPriceUpgradeDBInstance(data: InquiryPriceUpgradeDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceUpgradeDBInstanceResponse>;
-  /** {@link IsolateDBInstances 隔离实例}({@link IsolateDBInstancesRequest 请求参数}): {@link IsolateDBInstancesResponse 返回参数} */
+  /** 隔离实例 {@link IsolateDBInstancesRequest} {@link IsolateDBInstancesResponse} */
   IsolateDBInstances(data: IsolateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBInstancesResponse>;
-  /** {@link ModifyAccountRemark 修改帐号备注}({@link ModifyAccountRemarkRequest 请求参数}): {@link ModifyAccountRemarkResponse 返回参数} */
+  /** 修改帐号备注 {@link ModifyAccountRemarkRequest} {@link ModifyAccountRemarkResponse} */
   ModifyAccountRemark(data: ModifyAccountRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountRemarkResponse>;
-  /** {@link ModifyBackupPlan 修改备份计划}({@link ModifyBackupPlanRequest 请求参数}): {@link ModifyBackupPlanResponse 返回参数} */
+  /** 修改备份计划 {@link ModifyBackupPlanRequest} {@link ModifyBackupPlanResponse} */
   ModifyBackupPlan(data: ModifyBackupPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupPlanResponse>;
-  /** {@link ModifyDBInstanceDeployment 修改实例部署方式}({@link ModifyDBInstanceDeploymentRequest 请求参数}): {@link ModifyDBInstanceDeploymentResponse 返回参数} */
+  /** 修改实例部署方式 {@link ModifyDBInstanceDeploymentRequest} {@link ModifyDBInstanceDeploymentResponse} */
   ModifyDBInstanceDeployment(data: ModifyDBInstanceDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceDeploymentResponse>;
-  /** {@link ModifyDBInstanceName 修改实例名字}({@link ModifyDBInstanceNameRequest 请求参数}): {@link ModifyDBInstanceNameResponse 返回参数} */
+  /** 修改实例名字 {@link ModifyDBInstanceNameRequest} {@link ModifyDBInstanceNameResponse} */
   ModifyDBInstanceName(data: ModifyDBInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNameResponse>;
-  /** {@link ModifyDBInstanceParameters 批量修改参数}({@link ModifyDBInstanceParametersRequest 请求参数}): {@link ModifyDBInstanceParametersResponse 返回参数} */
+  /** 批量修改参数 {@link ModifyDBInstanceParametersRequest} {@link ModifyDBInstanceParametersResponse} */
   ModifyDBInstanceParameters(data: ModifyDBInstanceParametersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceParametersResponse>;
-  /** {@link ModifyDBInstanceReadOnlyGroup 修改实例所属的只读组}({@link ModifyDBInstanceReadOnlyGroupRequest 请求参数}): {@link ModifyDBInstanceReadOnlyGroupResponse 返回参数} */
+  /** 修改实例所属的只读组 {@link ModifyDBInstanceReadOnlyGroupRequest} {@link ModifyDBInstanceReadOnlyGroupResponse} */
   ModifyDBInstanceReadOnlyGroup(data: ModifyDBInstanceReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceReadOnlyGroupResponse>;
-  /** {@link ModifyDBInstanceSecurityGroups 修改实例的安全组}({@link ModifyDBInstanceSecurityGroupsRequest 请求参数}): {@link ModifyDBInstanceSecurityGroupsResponse 返回参数} */
+  /** 修改实例的安全组 {@link ModifyDBInstanceSecurityGroupsRequest} {@link ModifyDBInstanceSecurityGroupsResponse} */
   ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
-  /** {@link ModifyDBInstanceSpec 调整实例规格（新）}({@link ModifyDBInstanceSpecRequest 请求参数}): {@link ModifyDBInstanceSpecResponse 返回参数} */
+  /** 调整实例规格（新） {@link ModifyDBInstanceSpecRequest} {@link ModifyDBInstanceSpecResponse} */
   ModifyDBInstanceSpec(data: ModifyDBInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSpecResponse>;
-  /** {@link ModifyDBInstancesProject 将实例转至其他项目}({@link ModifyDBInstancesProjectRequest 请求参数}): {@link ModifyDBInstancesProjectResponse 返回参数} */
+  /** 将实例转至其他项目 {@link ModifyDBInstancesProjectRequest} {@link ModifyDBInstancesProjectResponse} */
   ModifyDBInstancesProject(data: ModifyDBInstancesProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstancesProjectResponse>;
-  /** {@link ModifyParameterTemplate 修改参数模板信息}({@link ModifyParameterTemplateRequest 请求参数}): {@link ModifyParameterTemplateResponse 返回参数} */
+  /** 修改参数模板信息 {@link ModifyParameterTemplateRequest} {@link ModifyParameterTemplateResponse} */
   ModifyParameterTemplate(data: ModifyParameterTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyParameterTemplateResponse>;
-  /** {@link ModifyReadOnlyGroupConfig 修改只读组配置}({@link ModifyReadOnlyGroupConfigRequest 请求参数}): {@link ModifyReadOnlyGroupConfigResponse 返回参数} */
+  /** 修改只读组配置 {@link ModifyReadOnlyGroupConfigRequest} {@link ModifyReadOnlyGroupConfigResponse} */
   ModifyReadOnlyGroupConfig(data: ModifyReadOnlyGroupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReadOnlyGroupConfigResponse>;
-  /** {@link ModifySwitchTimePeriod 修改变更配置切换时间}({@link ModifySwitchTimePeriodRequest 请求参数}): {@link ModifySwitchTimePeriodResponse 返回参数} */
+  /** 修改变更配置切换时间 {@link ModifySwitchTimePeriodRequest} {@link ModifySwitchTimePeriodResponse} */
   ModifySwitchTimePeriod(data: ModifySwitchTimePeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySwitchTimePeriodResponse>;
-  /** {@link OpenDBExtranetAccess 开通外网}({@link OpenDBExtranetAccessRequest 请求参数}): {@link OpenDBExtranetAccessResponse 返回参数} */
+  /** 开通外网 {@link OpenDBExtranetAccessRequest} {@link OpenDBExtranetAccessResponse} */
   OpenDBExtranetAccess(data: OpenDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenDBExtranetAccessResponse>;
-  /** {@link OpenServerlessDBExtranetAccess 开通serverlessDB实例外网}({@link OpenServerlessDBExtranetAccessRequest 请求参数}): {@link OpenServerlessDBExtranetAccessResponse 返回参数} */
+  /** 开通serverlessDB实例外网 {@link OpenServerlessDBExtranetAccessRequest} {@link OpenServerlessDBExtranetAccessResponse} */
   OpenServerlessDBExtranetAccess(data?: OpenServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenServerlessDBExtranetAccessResponse>;
-  /** {@link RebalanceReadOnlyGroup 均衡只读组内实例的负载}({@link RebalanceReadOnlyGroupRequest 请求参数}): {@link RebalanceReadOnlyGroupResponse 返回参数} */
+  /** 均衡只读组内实例的负载 {@link RebalanceReadOnlyGroupRequest} {@link RebalanceReadOnlyGroupResponse} */
   RebalanceReadOnlyGroup(data: RebalanceReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RebalanceReadOnlyGroupResponse>;
-  /** {@link RemoveDBInstanceFromReadOnlyGroup 将只读实例从只读组中移除}({@link RemoveDBInstanceFromReadOnlyGroupRequest 请求参数}): {@link RemoveDBInstanceFromReadOnlyGroupResponse 返回参数} */
+  /** 将只读实例从只读组中移除 {@link RemoveDBInstanceFromReadOnlyGroupRequest} {@link RemoveDBInstanceFromReadOnlyGroupResponse} */
   RemoveDBInstanceFromReadOnlyGroup(data: RemoveDBInstanceFromReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveDBInstanceFromReadOnlyGroupResponse>;
-  /** {@link RenewInstance 续费实例}({@link RenewInstanceRequest 请求参数}): {@link RenewInstanceResponse 返回参数} */
+  /** 续费实例 {@link RenewInstanceRequest} {@link RenewInstanceResponse} */
   RenewInstance(data: RenewInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenewInstanceResponse>;
-  /** {@link ResetAccountPassword 重置账户密码}({@link ResetAccountPasswordRequest 请求参数}): {@link ResetAccountPasswordResponse 返回参数} */
+  /** 重置账户密码 {@link ResetAccountPasswordRequest} {@link ResetAccountPasswordResponse} */
   ResetAccountPassword(data: ResetAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAccountPasswordResponse>;
-  /** {@link RestartDBInstance 重启实例}({@link RestartDBInstanceRequest 请求参数}): {@link RestartDBInstanceResponse 返回参数} */
+  /** 重启实例 {@link RestartDBInstanceRequest} {@link RestartDBInstanceResponse} */
   RestartDBInstance(data: RestartDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDBInstanceResponse>;
-  /** {@link SetAutoRenewFlag 设置自动续费}({@link SetAutoRenewFlagRequest 请求参数}): {@link SetAutoRenewFlagResponse 返回参数} */
+  /** 设置自动续费 {@link SetAutoRenewFlagRequest} {@link SetAutoRenewFlagResponse} */
   SetAutoRenewFlag(data: SetAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetAutoRenewFlagResponse>;
-  /** {@link UpgradeDBInstance 升级实例配置（废弃）}({@link UpgradeDBInstanceRequest 请求参数}): {@link UpgradeDBInstanceResponse 返回参数} */
+  /** 升级实例配置（废弃） {@link UpgradeDBInstanceRequest} {@link UpgradeDBInstanceResponse} */
   UpgradeDBInstance(data: UpgradeDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceResponse>;
 }
 

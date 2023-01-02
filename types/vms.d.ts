@@ -26,7 +26,7 @@ declare interface SendCodeVoiceRequest {
 declare interface SendCodeVoiceResponse {
   /** 语音验证码发送状态。 */
   SendStatus: SendStatus;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -48,16 +48,16 @@ declare interface SendTtsVoiceRequest {
 declare interface SendTtsVoiceResponse {
   /** 语音通知发送状态。 */
   SendStatus: SendStatus;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Vms 语音消息} */
 declare interface Vms {
   (): Versions;
-  /** {@link SendCodeVoice 发送语音验证码}({@link SendCodeVoiceRequest 请求参数}): {@link SendCodeVoiceResponse 返回参数} */
+  /** 发送语音验证码 {@link SendCodeVoiceRequest} {@link SendCodeVoiceResponse} */
   SendCodeVoice(data: SendCodeVoiceRequest, config?: AxiosRequestConfig): AxiosPromise<SendCodeVoiceResponse>;
-  /** {@link SendTtsVoice 指定模板发送语音通知}({@link SendTtsVoiceRequest 请求参数}): {@link SendTtsVoiceResponse 返回参数} */
+  /** 指定模板发送语音通知 {@link SendTtsVoiceRequest} {@link SendTtsVoiceResponse} */
   SendTtsVoice(data: SendTtsVoiceRequest, config?: AxiosRequestConfig): AxiosPromise<SendTtsVoiceResponse>;
 }
 

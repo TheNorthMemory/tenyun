@@ -750,7 +750,7 @@ declare interface CreateBasicDDoSAlarmThresholdResponse {
   AlarmThreshold?: number;
   /** 告警阈值类型，1-入流量，2-清洗流量；当AlarmThreshold大于0时有效； */
   AlarmType?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -770,7 +770,7 @@ declare interface CreateBoundIPRequest {
 declare interface CreateBoundIPResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -802,7 +802,7 @@ declare interface CreateCCFrequencyRulesRequest {
 declare interface CreateCCFrequencyRulesResponse {
   /** CC防护的访问频率控制规则ID */
   CCFrequencyRuleId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -818,7 +818,7 @@ declare interface CreateCCSelfDefinePolicyRequest {
 declare interface CreateCCSelfDefinePolicyResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -876,7 +876,7 @@ declare interface CreateDDoSPolicyCaseRequest {
 declare interface CreateDDoSPolicyCaseResponse {
   /** 策略场景ID */
   SceneId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -900,7 +900,7 @@ declare interface CreateDDoSPolicyRequest {
 declare interface CreateDDoSPolicyResponse {
   /** 策略ID */
   PolicyId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -916,7 +916,7 @@ declare interface CreateInstanceNameRequest {
 declare interface CreateInstanceNameResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -932,7 +932,7 @@ declare interface CreateL4HealthConfigRequest {
 declare interface CreateL4HealthConfigResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -948,7 +948,7 @@ declare interface CreateL4RulesRequest {
 declare interface CreateL4RulesResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -968,7 +968,7 @@ declare interface CreateL7CCRuleRequest {
 declare interface CreateL7CCRuleResponse {
   /** 7层CC自定义规则参数，当没有开启CC自定义规则时，返回空数组 */
   RuleConfig?: CCRuleConfig[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -984,7 +984,7 @@ declare interface CreateL7HealthConfigRequest {
 declare interface CreateL7HealthConfigResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1008,7 +1008,7 @@ declare interface CreateL7RuleCertRequest {
 declare interface CreateL7RuleCertResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1024,7 +1024,7 @@ declare interface CreateL7RulesRequest {
 declare interface CreateL7RulesResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1040,7 +1040,7 @@ declare interface CreateL7RulesUploadRequest {
 declare interface CreateL7RulesUploadResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1052,7 +1052,7 @@ declare interface CreateNetReturnRequest {
 }
 
 declare interface CreateNetReturnResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1070,7 +1070,7 @@ declare interface CreateNewL4RulesRequest {
 declare interface CreateNewL4RulesResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1088,7 +1088,7 @@ declare interface CreateNewL7RulesRequest {
 declare interface CreateNewL7RulesResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1106,7 +1106,7 @@ declare interface CreateNewL7RulesUploadRequest {
 declare interface CreateNewL7RulesUploadResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1124,7 +1124,7 @@ declare interface CreateUnblockIpResponse {
   ActionType?: string;
   /** 解封时间（预计解封时间） */
   UnblockTime?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1138,7 +1138,7 @@ declare interface DeleteCCFrequencyRulesRequest {
 declare interface DeleteCCFrequencyRulesResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1154,7 +1154,7 @@ declare interface DeleteCCSelfDefinePolicyRequest {
 declare interface DeleteCCSelfDefinePolicyResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1168,7 +1168,7 @@ declare interface DeleteDDoSPolicyCaseRequest {
 declare interface DeleteDDoSPolicyCaseResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1182,7 +1182,7 @@ declare interface DeleteDDoSPolicyRequest {
 declare interface DeleteDDoSPolicyResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1198,7 +1198,7 @@ declare interface DeleteL4RulesRequest {
 declare interface DeleteL4RulesResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1214,7 +1214,7 @@ declare interface DeleteL7RulesRequest {
 declare interface DeleteL7RulesResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1228,7 +1228,7 @@ declare interface DeleteNewL4RulesRequest {
 declare interface DeleteNewL4RulesResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1242,7 +1242,7 @@ declare interface DeleteNewL7RulesRequest {
 declare interface DeleteNewL7RulesResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1266,7 +1266,7 @@ declare interface DescribeActionLogResponse {
   TotalCount?: number;
   /** 记录数组 */
   Data?: KeyValueRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1280,7 +1280,7 @@ declare interface DescribeBGPIPL7RuleMaxCntRequest {
 declare interface DescribeBGPIPL7RuleMaxCntResponse {
   /** 高防IP最多可添加的7层规则数量 */
   Count?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1308,7 +1308,7 @@ declare interface DescribeBaradDataRequest {
 declare interface DescribeBaradDataResponse {
   /** 返回指标的值 */
   DataList?: BaradData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1332,7 +1332,7 @@ declare interface DescribeBasicCCThresholdResponse {
   CCEnable?: number;
   /** CC防护阈值 */
   CCThreshold?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1356,7 +1356,7 @@ declare interface DescribeBasicDeviceThresholdRequest {
 declare interface DescribeBasicDeviceThresholdResponse {
   /** 返回黑洞封堵值 */
   Threshold?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1382,7 +1382,7 @@ declare interface DescribeBizHttpStatusRequest {
 declare interface DescribeBizHttpStatusResponse {
   /** 业务流量http状态码统计数据 */
   HttpStatusMap: HttpStatusMap;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1412,7 +1412,7 @@ declare interface DescribeBizTrendResponse {
   DataList?: number[];
   /** 统计纬度 */
   MetricName?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1426,7 +1426,7 @@ declare interface DescribeCCAlarmThresholdRequest {
 declare interface DescribeCCAlarmThresholdResponse {
   /** CC告警阈值 */
   CCAlarmThreshold?: CCAlarmThreshold;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1462,7 +1462,7 @@ declare interface DescribeCCEvListResponse {
   Data?: CCEventRecord[];
   /** 总记录数 */
   Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1480,7 +1480,7 @@ declare interface DescribeCCFrequencyRulesResponse {
   CCFrequencyRuleList?: CCFrequencyRule[];
   /** 访问频率控制规则开关状态，取值[on(开启)，off(关闭)] */
   CCFrequencyRuleStatus?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1506,7 +1506,7 @@ declare interface DescribeCCIpAllowDenyResponse {
   Total?: number;
   /** 返回黑/白名单的记录，"Key":"ip"时，"Value":值表示ip;"Key":"domain"时， "Value":值表示域名;"Key":"type"时，"Value":值表示黑白名单类型(white为白名单，block为黑名单);"Key":"protocol"时，"Value":值表示CC防护的协议(http或https); */
   RecordList?: KeyValueRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1526,7 +1526,7 @@ declare interface DescribeCCSelfDefinePolicyResponse {
   Total?: number;
   /** 策略列表 */
   Policys?: CCPolicy[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1568,7 +1568,7 @@ declare interface DescribeCCTrendResponse {
   Data?: number[];
   /** 值个数 */
   Count?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1594,7 +1594,7 @@ declare interface DescribeCCUrlAllowResponse {
   Total?: number;
   /** 返回黑/白名单的记录，"Key":"url"时，"Value":值表示URL;"Key":"domain"时， "Value":值表示域名;"Key":"type"时，"Value":值表示黑白名单类型(white为白名单，block为黑名单);"Key":"protocol"时，"Value":值表示CC的防护类型(HTTP防护或HTTPS域名防护); */
   RecordList?: KeyValueRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1608,7 +1608,7 @@ declare interface DescribeDDoSAlarmThresholdRequest {
 declare interface DescribeDDoSAlarmThresholdResponse {
   /** DDoS告警阈值 */
   DDoSAlarmThreshold?: DDoSAlarmThreshold;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1630,7 +1630,7 @@ declare interface DescribeDDoSAttackIPRegionMapResponse {
   NationCount?: KeyValueRecord[];
   /** 国内省份地域分布数据 */
   ProvinceCount?: KeyValueRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1656,7 +1656,7 @@ declare interface DescribeDDoSAttackSourceResponse {
   Total?: number;
   /** 攻击源列表 */
   AttackSourceList?: DDoSAttackSourceRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1690,7 +1690,7 @@ declare interface DescribeDDoSCountResponse {
   MetricName?: string;
   /** Key-Value值数组，Key说明如下，当MetricName为traffic时：key为"TcpKBSum"，表示TCP报文流量，单位KBkey为"UdpKBSum"，表示UDP报文流量，单位KBkey为"IcmpKBSum"，表示ICMP报文流量，单位KBkey为"OtherKBSum"，表示其他报文流量，单位KB当MetricName为pkg时：key为"TcpPacketSum"，表示TCP报文个数，单位个key为"UdpPacketSum"，表示UDP报文个数，单位个key为"IcmpPacketSum"，表示ICMP报文个数，单位个key为"OtherPacketSum"，表示其他报文个数，单位个当MetricName为classnum时：key的值表示攻击事件类型，其中Key为"UNKNOWNFLOOD"，表示未知的攻击事件 */
   Data?: KeyValue[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1718,7 +1718,7 @@ declare interface DescribeDDoSDefendStatusResponse {
   UndefendExpire?: string | null;
   /** 控制台功能展示字段，为1表示控制台功能展示，为0表示控制台功能隐藏 */
   ShowFlag?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1770,7 +1770,7 @@ declare interface DescribeDDoSEvInfoResponse {
   Pps?: number;
   /** PCAP文件下载链接 */
   PcapUrl?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1808,7 +1808,7 @@ declare interface DescribeDDoSEvListResponse {
   Data?: DDoSEventRecord[];
   /** 总记录数 */
   Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1838,7 +1838,7 @@ declare interface DescribeDDoSIpLogResponse {
   EndTime?: string;
   /** IP攻击日志，KeyValue数组，Key-Value取值说明：Key为"LogTime"时，Value值为IP日志时间Key为"LogMessage"时，Value值为Ip日志内容 */
   Data?: KeyValueRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1868,7 +1868,7 @@ declare interface DescribeDDoSNetCountResponse {
   MetricName?: string;
   /** Key-Value值数组，Key说明如下，当MetricName为traffic时：key为"TcpKBSum"，表示TCP报文流量，单位KBkey为"UdpKBSum"，表示UDP报文流量，单位KBkey为"IcmpKBSum"，表示ICMP报文流量，单位KBkey为"OtherKBSum"，表示其他报文流量，单位KB当MetricName为pkg时：key为"TcpPacketSum"，表示TCP报文个数，单位个key为"UdpPacketSum"，表示UDP报文个数，单位个key为"IcmpPacketSum"，表示ICMP报文个数，单位个key为"OtherPacketSum"，表示其他报文个数，单位个当MetricName为classnum时：key的值表示攻击事件类型，其中Key为"UNKNOWNFLOOD"，表示未知的攻击事件 */
   Data?: KeyValue[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1916,7 +1916,7 @@ declare interface DescribeDDoSNetEvInfoResponse {
   Pps?: number;
   /** PCAP文件下载链接 */
   PcapUrl?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1948,7 +1948,7 @@ declare interface DescribeDDoSNetEvListResponse {
   Data?: DDoSEventRecord[];
   /** 总记录数 */
   Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1974,7 +1974,7 @@ declare interface DescribeDDoSNetIpLogResponse {
   EndTime?: string;
   /** IP攻击日志，KeyValue数组，Key-Value取值说明：Key为"LogTime"时，Value值为IP日志时间Key为"LogMessage"时，Value值为Ip日志内容 */
   Data?: KeyValueRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2010,7 +2010,7 @@ declare interface DescribeDDoSNetTrendResponse {
   Data?: number[];
   /** 值个数 */
   Count?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2024,7 +2024,7 @@ declare interface DescribeDDoSPolicyRequest {
 declare interface DescribeDDoSPolicyResponse {
   /** DDoS高级策略列表 */
   DDosPolicyList?: DDosPolicy[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2064,7 +2064,7 @@ declare interface DescribeDDoSTrendResponse {
   Data?: number[];
   /** 值个数 */
   Count?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2076,7 +2076,7 @@ declare interface DescribeDDoSUsedStatisRequest {
 declare interface DescribeDDoSUsedStatisResponse {
   /** 字段值，如下：Days：高防资源使用天数Attacks：DDoS防护次数 */
   Data?: KeyValue[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2090,7 +2090,7 @@ declare interface DescribeIPProductInfoRequest {
 declare interface DescribeIPProductInfoResponse {
   /** 云产品信息列表，如果没有查询到则返回空数组，值说明如下：Key为ProductName时，value表示云产品实例的名称；Key为ProductInstanceId时，value表示云产品实例的ID；Key为ProductType时，value表示的是云产品的类型（cvm表示云主机、clb表示负载均衡）;Key为IP时，value表示云产品实例的IP； */
   Data?: KeyValueRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2102,7 +2102,7 @@ declare interface DescribeInsurePacksRequest {
 declare interface DescribeInsurePacksResponse {
   /** 保险包套餐列表 */
   InsurePacks?: KeyValueRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2112,7 +2112,7 @@ declare interface DescribeIpBlockListRequest {
 declare interface DescribeIpBlockListResponse {
   /** IP封堵列表 */
   List?: IpBlockData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2140,7 +2140,7 @@ declare interface DescribeIpUnBlockListResponse {
   List?: IpUnBlockData[];
   /** 总记录数 */
   Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2156,7 +2156,7 @@ declare interface DescribeL4HealthConfigRequest {
 declare interface DescribeL4HealthConfigResponse {
   /** 四层健康检查配置数组 */
   HealthConfig?: L4HealthConfig[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2174,7 +2174,7 @@ declare interface DescribeL4RulesErrHealthResponse {
   ErrHealths?: KeyValue[];
   /** 异常规则列表(提供更多的错误相关信息)，返回值说明:Key值为RuleId时，Value值为规则ID；Key值为Protocol时，Value值为规则的转发协议；Key值为VirtualPort时，Value值为规则的转发端口；Key值为ErrMessage时，Value值为健康检查异常信息；健康检查异常信息的格式为"SourceIp:1.1.1.1|SourcePort:1234|AbnormalStatTime:1570689065|AbnormalReason:connection time out|Interval:20|CheckNum:6|FailNum:6" 多个源IP的错误信息用，分割,SourceIp表示源站IP，SourcePort表示源站端口，AbnormalStatTime表示异常时间，AbnormalReason表示异常原因，Interval表示检查周期，CheckNum表示检查次数，FailNum表示失败次数； */
   ExtErrHealths?: KeyValueRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2190,7 +2190,7 @@ declare interface DescribeL7HealthConfigRequest {
 declare interface DescribeL7HealthConfigResponse {
   /** 七层健康检查配置数组 */
   HealthConfig?: L7HealthConfig[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2206,7 +2206,7 @@ declare interface DescribeNewL4RulesErrHealthResponse {
   Total?: number;
   /** 异常规则列表，返回值说明: Key值为规则ID，Value值为异常IP，多个IP用","分割 */
   ErrHealths?: KeyValue[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2230,7 +2230,7 @@ declare interface DescribeNewL4RulesResponse {
   Total?: number;
   /** 四层健康检查配置列表 */
   Healths?: L4RuleHealth[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2246,7 +2246,7 @@ declare interface DescribeNewL7RulesErrHealthResponse {
   Total?: number;
   /** 异常规则列表，返回值说明: Key值为规则ID，Value值为异常IP及错误信息，多个IP用","分割 */
   ErrHealths?: KeyValue[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2258,7 +2258,7 @@ declare interface DescribePackIndexRequest {
 declare interface DescribePackIndexResponse {
   /** 字段值，如下：TotalPackCount：资源数AttackPackCount：清洗中的资源数BlockPackCount：封堵中的资源数ExpiredPackCount：过期的资源数ExpireingPackCount：即将过期的资源数IsolatePackCount：隔离中的资源数 */
   Data?: KeyValue[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2278,7 +2278,7 @@ declare interface DescribePcapRequest {
 declare interface DescribePcapResponse {
   /** pcap包的下载链接列表，无pcap包时为空数组； */
   PcapUrlList?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2292,7 +2292,7 @@ declare interface DescribePolicyCaseRequest {
 declare interface DescribePolicyCaseResponse {
   /** 策略场景列表 */
   CaseList?: KeyValueRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2306,7 +2306,7 @@ declare interface DescribeResIpListRequest {
 declare interface DescribeResIpListResponse {
   /** 资源的IP列表 */
   Resource?: ResourceIp[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2346,7 +2346,7 @@ declare interface DescribeResourceListResponse {
   ServicePacks: KeyValueRecord[];
   /** 大禹子产品代号（bgp表示独享包；bgp-multip表示共享包；bgpip表示高防IP；net表示高防IP专业版） */
   Business: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2362,7 +2362,7 @@ declare interface DescribeRuleSetsResponse {
   L4RuleSets?: KeyValueRecord[];
   /** 规则记录数数组，取值说明:Key值为"Id"时，Value表示资源IDKey值为"RuleIdList"时，Value值表示资源的规则ID，多个规则ID用","分割Key值为"RuleNameList"时，Value值表示资源的规则名，多个规则名用","分割Key值为"RuleNum"时，Value值表示资源的规则数 */
   L7RuleSets?: KeyValueRecord[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2380,7 +2380,7 @@ declare interface DescribeSchedulingDomainListResponse {
   Total?: number;
   /** 调度域名列表信息 */
   DomainList?: SchedulingDomain[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2394,7 +2394,7 @@ declare interface DescribeSecIndexResponse {
   BeginDate?: string;
   /** 本月结束时间 */
   EndDate?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2408,7 +2408,7 @@ declare interface DescribeSourceIpSegmentRequest {
 declare interface DescribeSourceIpSegmentResponse {
   /** 回源IP段，多个用"；"分隔 */
   Data?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2436,7 +2436,7 @@ declare interface DescribeTransmitStatisResponse {
   OutDataList?: number[];
   /** 指标名：traffic表示流量带宽；pkg表示包速率； */
   MetricName?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2452,7 +2452,7 @@ declare interface DescribeUnBlockStatisResponse {
   BeginTime?: string;
   /** 统计结束时间 */
   EndTime?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2476,7 +2476,7 @@ declare interface DescribleL4RulesResponse {
   Total?: number;
   /** 健康检查配置列表 */
   Healths?: L4RuleHealth[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2506,7 +2506,7 @@ declare interface DescribleL7RulesResponse {
   Total?: number;
   /** 健康检查配置列表 */
   Healths?: L7RuleHealth[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2534,7 +2534,7 @@ declare interface DescribleNewL7RulesResponse {
   Total?: number;
   /** 健康检查配置列表 */
   Healths?: L7RuleHealth[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2548,7 +2548,7 @@ declare interface DescribleRegionCountRequest {
 declare interface DescribleRegionCountResponse {
   /** 地域资源实例数 */
   RegionList?: RegionInstanceCount[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2566,7 +2566,7 @@ declare interface ModifyCCAlarmThresholdRequest {
 declare interface ModifyCCAlarmThresholdResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2596,7 +2596,7 @@ declare interface ModifyCCFrequencyRulesRequest {
 declare interface ModifyCCFrequencyRulesResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2614,7 +2614,7 @@ declare interface ModifyCCFrequencyRulesStatusRequest {
 declare interface ModifyCCFrequencyRulesStatusResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2632,7 +2632,7 @@ declare interface ModifyCCHostProtectionRequest {
 declare interface ModifyCCHostProtectionResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2658,7 +2658,7 @@ declare interface ModifyCCIpAllowDenyRequest {
 declare interface ModifyCCIpAllowDenyResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2678,7 +2678,7 @@ declare interface ModifyCCLevelRequest {
 declare interface ModifyCCLevelResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2696,7 +2696,7 @@ declare interface ModifyCCPolicySwitchRequest {
 declare interface ModifyCCPolicySwitchResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2714,7 +2714,7 @@ declare interface ModifyCCSelfDefinePolicyRequest {
 declare interface ModifyCCSelfDefinePolicyResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2748,7 +2748,7 @@ declare interface ModifyCCThresholdRequest {
 declare interface ModifyCCThresholdResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2774,7 +2774,7 @@ declare interface ModifyCCUrlAllowRequest {
 declare interface ModifyCCUrlAllowResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2794,7 +2794,7 @@ declare interface ModifyDDoSAIStatusResponse {
   DDoSAI?: string;
   /** 资源ID */
   Id?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2814,7 +2814,7 @@ declare interface ModifyDDoSAlarmThresholdRequest {
 declare interface ModifyDDoSAlarmThresholdResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2842,7 +2842,7 @@ declare interface ModifyDDoSDefendStatusRequest {
 declare interface ModifyDDoSDefendStatusResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2862,7 +2862,7 @@ declare interface ModifyDDoSLevelResponse {
   Id?: string;
   /** 防护等级，取值[low,middle,high] */
   DDoSLevel?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2920,7 +2920,7 @@ declare interface ModifyDDoSPolicyCaseRequest {
 declare interface ModifyDDoSPolicyCaseResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2936,7 +2936,7 @@ declare interface ModifyDDoSPolicyNameRequest {
 declare interface ModifyDDoSPolicyNameResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2960,7 +2960,7 @@ declare interface ModifyDDoSPolicyRequest {
 declare interface ModifyDDoSPolicyResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2986,7 +2986,7 @@ declare interface ModifyDDoSSwitchRequest {
 declare interface ModifyDDoSSwitchResponse {
   /** 当前防护状态值，取值[0（关闭），1（开启）] */
   Status?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3002,7 +3002,7 @@ declare interface ModifyDDoSThresholdRequest {
 declare interface ModifyDDoSThresholdResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3020,7 +3020,7 @@ declare interface ModifyDDoSWaterKeyRequest {
 declare interface ModifyDDoSWaterKeyResponse {
   /** 水印密钥列表 */
   KeyList?: WaterPrintKey[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3036,7 +3036,7 @@ declare interface ModifyElasticLimitRequest {
 declare interface ModifyElasticLimitResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3052,7 +3052,7 @@ declare interface ModifyL4HealthRequest {
 declare interface ModifyL4HealthResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3072,7 +3072,7 @@ declare interface ModifyL4KeepTimeRequest {
 declare interface ModifyL4KeepTimeResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3088,7 +3088,7 @@ declare interface ModifyL4RulesRequest {
 declare interface ModifyL4RulesResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3104,7 +3104,7 @@ declare interface ModifyL7RulesRequest {
 declare interface ModifyL7RulesResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3120,7 +3120,7 @@ declare interface ModifyNetReturnSwitchRequest {
 }
 
 declare interface ModifyNetReturnSwitchResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3136,7 +3136,7 @@ declare interface ModifyNewDomainRulesRequest {
 declare interface ModifyNewDomainRulesResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3152,7 +3152,7 @@ declare interface ModifyNewL4RuleRequest {
 declare interface ModifyNewL4RuleResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3170,7 +3170,7 @@ declare interface ModifyResBindDDoSPolicyRequest {
 declare interface ModifyResBindDDoSPolicyResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3186,236 +3186,236 @@ declare interface ModifyResourceRenewFlagRequest {
 declare interface ModifyResourceRenewFlagResponse {
   /** 成功码 */
   Success?: SuccessCode;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Dayu DDoS 高防包} */
 declare interface Dayu {
   (): Versions;
-  /** {@link CreateBasicDDoSAlarmThreshold 设置基础防护的DDoS告警阈值}({@link CreateBasicDDoSAlarmThresholdRequest 请求参数}): {@link CreateBasicDDoSAlarmThresholdResponse 返回参数} */
+  /** 设置基础防护的DDoS告警阈值 {@link CreateBasicDDoSAlarmThresholdRequest} {@link CreateBasicDDoSAlarmThresholdResponse} */
   CreateBasicDDoSAlarmThreshold(data: CreateBasicDDoSAlarmThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBasicDDoSAlarmThresholdResponse>;
-  /** {@link CreateBoundIP 绑定IP到高防包实例}({@link CreateBoundIPRequest 请求参数}): {@link CreateBoundIPResponse 返回参数} */
+  /** 绑定IP到高防包实例 {@link CreateBoundIPRequest} {@link CreateBoundIPResponse} */
   CreateBoundIP(data: CreateBoundIPRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBoundIPResponse>;
-  /** {@link CreateCCFrequencyRules 添加CC防护的访问频率控制规则}({@link CreateCCFrequencyRulesRequest 请求参数}): {@link CreateCCFrequencyRulesResponse 返回参数} */
+  /** 添加CC防护的访问频率控制规则 {@link CreateCCFrequencyRulesRequest} {@link CreateCCFrequencyRulesResponse} */
   CreateCCFrequencyRules(data: CreateCCFrequencyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCCFrequencyRulesResponse>;
-  /** {@link CreateCCSelfDefinePolicy 创建CC自定义策略}({@link CreateCCSelfDefinePolicyRequest 请求参数}): {@link CreateCCSelfDefinePolicyResponse 返回参数} */
+  /** 创建CC自定义策略 {@link CreateCCSelfDefinePolicyRequest} {@link CreateCCSelfDefinePolicyResponse} */
   CreateCCSelfDefinePolicy(data: CreateCCSelfDefinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCCSelfDefinePolicyResponse>;
-  /** {@link CreateDDoSPolicy 添加DDoS高级策略}({@link CreateDDoSPolicyRequest 请求参数}): {@link CreateDDoSPolicyResponse 返回参数} */
+  /** 添加DDoS高级策略 {@link CreateDDoSPolicyRequest} {@link CreateDDoSPolicyResponse} */
   CreateDDoSPolicy(data: CreateDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDDoSPolicyResponse>;
-  /** {@link CreateDDoSPolicyCase 添加策略场景}({@link CreateDDoSPolicyCaseRequest 请求参数}): {@link CreateDDoSPolicyCaseResponse 返回参数} */
+  /** 添加策略场景 {@link CreateDDoSPolicyCaseRequest} {@link CreateDDoSPolicyCaseResponse} */
   CreateDDoSPolicyCase(data: CreateDDoSPolicyCaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDDoSPolicyCaseResponse>;
-  /** {@link CreateInstanceName 资源实例重命名}({@link CreateInstanceNameRequest 请求参数}): {@link CreateInstanceNameResponse 返回参数} */
+  /** 资源实例重命名 {@link CreateInstanceNameRequest} {@link CreateInstanceNameResponse} */
   CreateInstanceName(data: CreateInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceNameResponse>;
-  /** {@link CreateL4HealthConfig 上传四层健康检查配置}({@link CreateL4HealthConfigRequest 请求参数}): {@link CreateL4HealthConfigResponse 返回参数} */
+  /** 上传四层健康检查配置 {@link CreateL4HealthConfigRequest} {@link CreateL4HealthConfigResponse} */
   CreateL4HealthConfig(data: CreateL4HealthConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL4HealthConfigResponse>;
-  /** {@link CreateL4Rules 添加L4转发规则}({@link CreateL4RulesRequest 请求参数}): {@link CreateL4RulesResponse 返回参数} */
+  /** 添加L4转发规则 {@link CreateL4RulesRequest} {@link CreateL4RulesResponse} */
   CreateL4Rules(data: CreateL4RulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL4RulesResponse>;
-  /** {@link CreateL7CCRule 创建7层CC自定义规则}({@link CreateL7CCRuleRequest 请求参数}): {@link CreateL7CCRuleResponse 返回参数} */
+  /** 创建7层CC自定义规则 {@link CreateL7CCRuleRequest} {@link CreateL7CCRuleResponse} */
   CreateL7CCRule(data: CreateL7CCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL7CCRuleResponse>;
-  /** {@link CreateL7HealthConfig 上传七层健康检查配置}({@link CreateL7HealthConfigRequest 请求参数}): {@link CreateL7HealthConfigResponse 返回参数} */
+  /** 上传七层健康检查配置 {@link CreateL7HealthConfigRequest} {@link CreateL7HealthConfigResponse} */
   CreateL7HealthConfig(data: CreateL7HealthConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL7HealthConfigResponse>;
-  /** {@link CreateL7RuleCert 配置L7转发规则的证书}({@link CreateL7RuleCertRequest 请求参数}): {@link CreateL7RuleCertResponse 返回参数} */
+  /** 配置L7转发规则的证书 {@link CreateL7RuleCertRequest} {@link CreateL7RuleCertResponse} */
   CreateL7RuleCert(data: CreateL7RuleCertRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL7RuleCertResponse>;
-  /** {@link CreateL7Rules 添加L7转发规则}({@link CreateL7RulesRequest 请求参数}): {@link CreateL7RulesResponse 返回参数} */
+  /** 添加L7转发规则 {@link CreateL7RulesRequest} {@link CreateL7RulesResponse} */
   CreateL7Rules(data: CreateL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL7RulesResponse>;
-  /** {@link CreateL7RulesUpload 批量上传L7转发规则}({@link CreateL7RulesUploadRequest 请求参数}): {@link CreateL7RulesUploadResponse 返回参数} */
+  /** 批量上传L7转发规则 {@link CreateL7RulesUploadRequest} {@link CreateL7RulesUploadResponse} */
   CreateL7RulesUpload(data: CreateL7RulesUploadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL7RulesUploadResponse>;
-  /** {@link CreateNetReturn 一键切回}({@link CreateNetReturnRequest 请求参数}): {@link CreateNetReturnResponse 返回参数} */
+  /** 一键切回 {@link CreateNetReturnRequest} {@link CreateNetReturnResponse} */
   CreateNetReturn(data: CreateNetReturnRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetReturnResponse>;
-  /** {@link CreateNewL4Rules 添加四层转发规则}({@link CreateNewL4RulesRequest 请求参数}): {@link CreateNewL4RulesResponse 返回参数} */
+  /** 添加四层转发规则 {@link CreateNewL4RulesRequest} {@link CreateNewL4RulesResponse} */
   CreateNewL4Rules(data: CreateNewL4RulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNewL4RulesResponse>;
-  /** {@link CreateNewL7Rules 添加7层转发规则}({@link CreateNewL7RulesRequest 请求参数}): {@link CreateNewL7RulesResponse 返回参数} */
+  /** 添加7层转发规则 {@link CreateNewL7RulesRequest} {@link CreateNewL7RulesResponse} */
   CreateNewL7Rules(data: CreateNewL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNewL7RulesResponse>;
-  /** {@link CreateNewL7RulesUpload 批量上传7层转发规则}({@link CreateNewL7RulesUploadRequest 请求参数}): {@link CreateNewL7RulesUploadResponse 返回参数} */
+  /** 批量上传7层转发规则 {@link CreateNewL7RulesUploadRequest} {@link CreateNewL7RulesUploadResponse} */
   CreateNewL7RulesUpload(data: CreateNewL7RulesUploadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNewL7RulesUploadResponse>;
-  /** {@link CreateUnblockIp IP解封操作}({@link CreateUnblockIpRequest 请求参数}): {@link CreateUnblockIpResponse 返回参数} */
+  /** IP解封操作 {@link CreateUnblockIpRequest} {@link CreateUnblockIpResponse} */
   CreateUnblockIp(data: CreateUnblockIpRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUnblockIpResponse>;
-  /** {@link DeleteCCFrequencyRules 删除CC防护的访问频率控制规则}({@link DeleteCCFrequencyRulesRequest 请求参数}): {@link DeleteCCFrequencyRulesResponse 返回参数} */
+  /** 删除CC防护的访问频率控制规则 {@link DeleteCCFrequencyRulesRequest} {@link DeleteCCFrequencyRulesResponse} */
   DeleteCCFrequencyRules(data: DeleteCCFrequencyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCCFrequencyRulesResponse>;
-  /** {@link DeleteCCSelfDefinePolicy 删除CC自定义策略}({@link DeleteCCSelfDefinePolicyRequest 请求参数}): {@link DeleteCCSelfDefinePolicyResponse 返回参数} */
+  /** 删除CC自定义策略 {@link DeleteCCSelfDefinePolicyRequest} {@link DeleteCCSelfDefinePolicyResponse} */
   DeleteCCSelfDefinePolicy(data: DeleteCCSelfDefinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCCSelfDefinePolicyResponse>;
-  /** {@link DeleteDDoSPolicy 删除DDoS高级策略}({@link DeleteDDoSPolicyRequest 请求参数}): {@link DeleteDDoSPolicyResponse 返回参数} */
+  /** 删除DDoS高级策略 {@link DeleteDDoSPolicyRequest} {@link DeleteDDoSPolicyResponse} */
   DeleteDDoSPolicy(data: DeleteDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDDoSPolicyResponse>;
-  /** {@link DeleteDDoSPolicyCase 删除策略场景}({@link DeleteDDoSPolicyCaseRequest 请求参数}): {@link DeleteDDoSPolicyCaseResponse 返回参数} */
+  /** 删除策略场景 {@link DeleteDDoSPolicyCaseRequest} {@link DeleteDDoSPolicyCaseResponse} */
   DeleteDDoSPolicyCase(data: DeleteDDoSPolicyCaseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDDoSPolicyCaseResponse>;
-  /** {@link DeleteL4Rules 删除L4转发规则}({@link DeleteL4RulesRequest 请求参数}): {@link DeleteL4RulesResponse 返回参数} */
+  /** 删除L4转发规则 {@link DeleteL4RulesRequest} {@link DeleteL4RulesResponse} */
   DeleteL4Rules(data: DeleteL4RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL4RulesResponse>;
-  /** {@link DeleteL7Rules 删除L7转发规则}({@link DeleteL7RulesRequest 请求参数}): {@link DeleteL7RulesResponse 返回参数} */
+  /** 删除L7转发规则 {@link DeleteL7RulesRequest} {@link DeleteL7RulesResponse} */
   DeleteL7Rules(data: DeleteL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL7RulesResponse>;
-  /** {@link DeleteNewL4Rules 删除四层转发规则}({@link DeleteNewL4RulesRequest 请求参数}): {@link DeleteNewL4RulesResponse 返回参数} */
+  /** 删除四层转发规则 {@link DeleteNewL4RulesRequest} {@link DeleteNewL4RulesResponse} */
   DeleteNewL4Rules(data: DeleteNewL4RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNewL4RulesResponse>;
-  /** {@link DeleteNewL7Rules 删除七层转发规则}({@link DeleteNewL7RulesRequest 请求参数}): {@link DeleteNewL7RulesResponse 返回参数} */
+  /** 删除七层转发规则 {@link DeleteNewL7RulesRequest} {@link DeleteNewL7RulesResponse} */
   DeleteNewL7Rules(data: DeleteNewL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNewL7RulesResponse>;
-  /** {@link DescribeActionLog 获取操作日志}({@link DescribeActionLogRequest 请求参数}): {@link DescribeActionLogResponse 返回参数} */
+  /** 获取操作日志 {@link DescribeActionLogRequest} {@link DescribeActionLogResponse} */
   DescribeActionLog(data: DescribeActionLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActionLogResponse>;
-  /** {@link DescribeBGPIPL7RuleMaxCnt 获取高防IP可添加的最多7层规则数量}({@link DescribeBGPIPL7RuleMaxCntRequest 请求参数}): {@link DescribeBGPIPL7RuleMaxCntResponse 返回参数} */
+  /** 获取高防IP可添加的最多7层规则数量 {@link DescribeBGPIPL7RuleMaxCntRequest} {@link DescribeBGPIPL7RuleMaxCntResponse} */
   DescribeBGPIPL7RuleMaxCnt(data: DescribeBGPIPL7RuleMaxCntRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBGPIPL7RuleMaxCntResponse>;
-  /** {@link DescribeBaradData 获取转发报表数据}({@link DescribeBaradDataRequest 请求参数}): {@link DescribeBaradDataResponse 返回参数} */
+  /** 获取转发报表数据 {@link DescribeBaradDataRequest} {@link DescribeBaradDataResponse} */
   DescribeBaradData(data: DescribeBaradDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaradDataResponse>;
-  /** {@link DescribeBasicCCThreshold 获取基础防护CC防护阈值}({@link DescribeBasicCCThresholdRequest 请求参数}): {@link DescribeBasicCCThresholdResponse 返回参数} */
+  /** 获取基础防护CC防护阈值 {@link DescribeBasicCCThresholdRequest} {@link DescribeBasicCCThresholdResponse} */
   DescribeBasicCCThreshold(data: DescribeBasicCCThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicCCThresholdResponse>;
-  /** {@link DescribeBasicDeviceThreshold 获取基础防护黑洞阈值}({@link DescribeBasicDeviceThresholdRequest 请求参数}): {@link DescribeBasicDeviceThresholdResponse 返回参数} */
+  /** 获取基础防护黑洞阈值 {@link DescribeBasicDeviceThresholdRequest} {@link DescribeBasicDeviceThresholdResponse} */
   DescribeBasicDeviceThreshold(data: DescribeBasicDeviceThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicDeviceThresholdResponse>;
-  /** {@link DescribeBizHttpStatus 获取业务流量状态码统计}({@link DescribeBizHttpStatusRequest 请求参数}): {@link DescribeBizHttpStatusResponse 返回参数} */
+  /** 获取业务流量状态码统计 {@link DescribeBizHttpStatusRequest} {@link DescribeBizHttpStatusResponse} */
   DescribeBizHttpStatus(data: DescribeBizHttpStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBizHttpStatusResponse>;
-  /** {@link DescribeBizTrend 获取业务流量曲线}({@link DescribeBizTrendRequest 请求参数}): {@link DescribeBizTrendResponse 返回参数} */
+  /** 获取业务流量曲线 {@link DescribeBizTrendRequest} {@link DescribeBizTrendResponse} */
   DescribeBizTrend(data: DescribeBizTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBizTrendResponse>;
-  /** {@link DescribeCCAlarmThreshold 获取CC告警通知阈值}({@link DescribeCCAlarmThresholdRequest 请求参数}): {@link DescribeCCAlarmThresholdResponse 返回参数} */
+  /** 获取CC告警通知阈值 {@link DescribeCCAlarmThresholdRequest} {@link DescribeCCAlarmThresholdResponse} */
   DescribeCCAlarmThreshold(data: DescribeCCAlarmThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCAlarmThresholdResponse>;
-  /** {@link DescribeCCEvList 获取CC攻击事件列表}({@link DescribeCCEvListRequest 请求参数}): {@link DescribeCCEvListResponse 返回参数} */
+  /** 获取CC攻击事件列表 {@link DescribeCCEvListRequest} {@link DescribeCCEvListResponse} */
   DescribeCCEvList(data: DescribeCCEvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCEvListResponse>;
-  /** {@link DescribeCCFrequencyRules 获取CC防护的访问频率控制规则}({@link DescribeCCFrequencyRulesRequest 请求参数}): {@link DescribeCCFrequencyRulesResponse 返回参数} */
+  /** 获取CC防护的访问频率控制规则 {@link DescribeCCFrequencyRulesRequest} {@link DescribeCCFrequencyRulesResponse} */
   DescribeCCFrequencyRules(data: DescribeCCFrequencyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCFrequencyRulesResponse>;
-  /** {@link DescribeCCIpAllowDeny 获取CC的IP黑白名单}({@link DescribeCCIpAllowDenyRequest 请求参数}): {@link DescribeCCIpAllowDenyResponse 返回参数} */
+  /** 获取CC的IP黑白名单 {@link DescribeCCIpAllowDenyRequest} {@link DescribeCCIpAllowDenyResponse} */
   DescribeCCIpAllowDeny(data: DescribeCCIpAllowDenyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCIpAllowDenyResponse>;
-  /** {@link DescribeCCSelfDefinePolicy 获取CC自定义策略}({@link DescribeCCSelfDefinePolicyRequest 请求参数}): {@link DescribeCCSelfDefinePolicyResponse 返回参数} */
+  /** 获取CC自定义策略 {@link DescribeCCSelfDefinePolicyRequest} {@link DescribeCCSelfDefinePolicyResponse} */
   DescribeCCSelfDefinePolicy(data: DescribeCCSelfDefinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCSelfDefinePolicyResponse>;
-  /** {@link DescribeCCTrend 获取CC攻击指标数据}({@link DescribeCCTrendRequest 请求参数}): {@link DescribeCCTrendResponse 返回参数} */
+  /** 获取CC攻击指标数据 {@link DescribeCCTrendRequest} {@link DescribeCCTrendResponse} */
   DescribeCCTrend(data: DescribeCCTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCTrendResponse>;
-  /** {@link DescribeCCUrlAllow 获取CC的Url白名单}({@link DescribeCCUrlAllowRequest 请求参数}): {@link DescribeCCUrlAllowResponse 返回参数} */
+  /** 获取CC的Url白名单 {@link DescribeCCUrlAllowRequest} {@link DescribeCCUrlAllowResponse} */
   DescribeCCUrlAllow(data: DescribeCCUrlAllowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCUrlAllowResponse>;
-  /** {@link DescribeDDoSAlarmThreshold 获取DDoS告警通知阈值}({@link DescribeDDoSAlarmThresholdRequest 请求参数}): {@link DescribeDDoSAlarmThresholdResponse 返回参数} */
+  /** 获取DDoS告警通知阈值 {@link DescribeDDoSAlarmThresholdRequest} {@link DescribeDDoSAlarmThresholdResponse} */
   DescribeDDoSAlarmThreshold(data: DescribeDDoSAlarmThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAlarmThresholdResponse>;
-  /** {@link DescribeDDoSAttackIPRegionMap DDoS攻击源IP地域分布图}({@link DescribeDDoSAttackIPRegionMapRequest 请求参数}): {@link DescribeDDoSAttackIPRegionMapResponse 返回参数} */
+  /** DDoS攻击源IP地域分布图 {@link DescribeDDoSAttackIPRegionMapRequest} {@link DescribeDDoSAttackIPRegionMapResponse} */
   DescribeDDoSAttackIPRegionMap(data: DescribeDDoSAttackIPRegionMapRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackIPRegionMapResponse>;
-  /** {@link DescribeDDoSAttackSource 获取DDoS攻击源列表}({@link DescribeDDoSAttackSourceRequest 请求参数}): {@link DescribeDDoSAttackSourceResponse 返回参数} */
+  /** 获取DDoS攻击源列表 {@link DescribeDDoSAttackSourceRequest} {@link DescribeDDoSAttackSourceResponse} */
   DescribeDDoSAttackSource(data: DescribeDDoSAttackSourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackSourceResponse>;
-  /** {@link DescribeDDoSCount 获取DDoS攻击占比分析}({@link DescribeDDoSCountRequest 请求参数}): {@link DescribeDDoSCountResponse 返回参数} */
+  /** 获取DDoS攻击占比分析 {@link DescribeDDoSCountRequest} {@link DescribeDDoSCountResponse} */
   DescribeDDoSCount(data: DescribeDDoSCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSCountResponse>;
-  /** {@link DescribeDDoSDefendStatus 获取DDoS防护状态}({@link DescribeDDoSDefendStatusRequest 请求参数}): {@link DescribeDDoSDefendStatusResponse 返回参数} */
+  /** 获取DDoS防护状态 {@link DescribeDDoSDefendStatusRequest} {@link DescribeDDoSDefendStatusResponse} */
   DescribeDDoSDefendStatus(data: DescribeDDoSDefendStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSDefendStatusResponse>;
-  /** {@link DescribeDDoSEvInfo 获取DDoS攻击事件详情}({@link DescribeDDoSEvInfoRequest 请求参数}): {@link DescribeDDoSEvInfoResponse 返回参数} */
+  /** 获取DDoS攻击事件详情 {@link DescribeDDoSEvInfoRequest} {@link DescribeDDoSEvInfoResponse} */
   DescribeDDoSEvInfo(data: DescribeDDoSEvInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSEvInfoResponse>;
-  /** {@link DescribeDDoSEvList 获取DDoS攻击事件列表}({@link DescribeDDoSEvListRequest 请求参数}): {@link DescribeDDoSEvListResponse 返回参数} */
+  /** 获取DDoS攻击事件列表 {@link DescribeDDoSEvListRequest} {@link DescribeDDoSEvListResponse} */
   DescribeDDoSEvList(data: DescribeDDoSEvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSEvListResponse>;
-  /** {@link DescribeDDoSIpLog 获取DDoSIP攻击日志}({@link DescribeDDoSIpLogRequest 请求参数}): {@link DescribeDDoSIpLogResponse 返回参数} */
+  /** 获取DDoSIP攻击日志 {@link DescribeDDoSIpLogRequest} {@link DescribeDDoSIpLogResponse} */
   DescribeDDoSIpLog(data: DescribeDDoSIpLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSIpLogResponse>;
-  /** {@link DescribeDDoSNetCount 获取高防IP专业版资源的DDoS攻击占比分析}({@link DescribeDDoSNetCountRequest 请求参数}): {@link DescribeDDoSNetCountResponse 返回参数} */
+  /** 获取高防IP专业版资源的DDoS攻击占比分析 {@link DescribeDDoSNetCountRequest} {@link DescribeDDoSNetCountResponse} */
   DescribeDDoSNetCount(data: DescribeDDoSNetCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSNetCountResponse>;
-  /** {@link DescribeDDoSNetEvInfo 获取高防IP专业版资源的DDoS攻击事件详情}({@link DescribeDDoSNetEvInfoRequest 请求参数}): {@link DescribeDDoSNetEvInfoResponse 返回参数} */
+  /** 获取高防IP专业版资源的DDoS攻击事件详情 {@link DescribeDDoSNetEvInfoRequest} {@link DescribeDDoSNetEvInfoResponse} */
   DescribeDDoSNetEvInfo(data: DescribeDDoSNetEvInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSNetEvInfoResponse>;
-  /** {@link DescribeDDoSNetEvList 获取高防IP专业版资源的DDoS攻击事件列表}({@link DescribeDDoSNetEvListRequest 请求参数}): {@link DescribeDDoSNetEvListResponse 返回参数} */
+  /** 获取高防IP专业版资源的DDoS攻击事件列表 {@link DescribeDDoSNetEvListRequest} {@link DescribeDDoSNetEvListResponse} */
   DescribeDDoSNetEvList(data: DescribeDDoSNetEvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSNetEvListResponse>;
-  /** {@link DescribeDDoSNetIpLog 获取高防IP专业版资源的DDoSIP攻击日志}({@link DescribeDDoSNetIpLogRequest 请求参数}): {@link DescribeDDoSNetIpLogResponse 返回参数} */
+  /** 获取高防IP专业版资源的DDoSIP攻击日志 {@link DescribeDDoSNetIpLogRequest} {@link DescribeDDoSNetIpLogResponse} */
   DescribeDDoSNetIpLog(data: DescribeDDoSNetIpLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSNetIpLogResponse>;
-  /** {@link DescribeDDoSNetTrend 获取高防IP专业版资源的DDoS攻击指标数据}({@link DescribeDDoSNetTrendRequest 请求参数}): {@link DescribeDDoSNetTrendResponse 返回参数} */
+  /** 获取高防IP专业版资源的DDoS攻击指标数据 {@link DescribeDDoSNetTrendRequest} {@link DescribeDDoSNetTrendResponse} */
   DescribeDDoSNetTrend(data: DescribeDDoSNetTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSNetTrendResponse>;
-  /** {@link DescribeDDoSPolicy 获取DDoS高级策略}({@link DescribeDDoSPolicyRequest 请求参数}): {@link DescribeDDoSPolicyResponse 返回参数} */
+  /** 获取DDoS高级策略 {@link DescribeDDoSPolicyRequest} {@link DescribeDDoSPolicyResponse} */
   DescribeDDoSPolicy(data: DescribeDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSPolicyResponse>;
-  /** {@link DescribeDDoSTrend 获取DDoS攻击指标数据}({@link DescribeDDoSTrendRequest 请求参数}): {@link DescribeDDoSTrendResponse 返回参数} */
+  /** 获取DDoS攻击指标数据 {@link DescribeDDoSTrendRequest} {@link DescribeDDoSTrendResponse} */
   DescribeDDoSTrend(data: DescribeDDoSTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSTrendResponse>;
-  /** {@link DescribeDDoSUsedStatis 获取DDoS防护使用统计}({@link DescribeDDoSUsedStatisRequest 请求参数}): {@link DescribeDDoSUsedStatisResponse 返回参数} */
+  /** 获取DDoS防护使用统计 {@link DescribeDDoSUsedStatisRequest} {@link DescribeDDoSUsedStatisResponse} */
   DescribeDDoSUsedStatis(data: DescribeDDoSUsedStatisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSUsedStatisResponse>;
-  /** {@link DescribeIPProductInfo 获取独享包或共享包IP对应的云资产信息}({@link DescribeIPProductInfoRequest 请求参数}): {@link DescribeIPProductInfoResponse 返回参数} */
+  /** 获取独享包或共享包IP对应的云资产信息 {@link DescribeIPProductInfoRequest} {@link DescribeIPProductInfoResponse} */
   DescribeIPProductInfo(data: DescribeIPProductInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPProductInfoResponse>;
-  /** {@link DescribeInsurePacks 获取保险包套餐列表}({@link DescribeInsurePacksRequest 请求参数}): {@link DescribeInsurePacksResponse 返回参数} */
+  /** 获取保险包套餐列表 {@link DescribeInsurePacksRequest} {@link DescribeInsurePacksResponse} */
   DescribeInsurePacks(data?: DescribeInsurePacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInsurePacksResponse>;
-  /** {@link DescribeIpBlockList 获取IP封堵列表}({@link DescribeIpBlockListRequest 请求参数}): {@link DescribeIpBlockListResponse 返回参数} */
+  /** 获取IP封堵列表 {@link DescribeIpBlockListRequest} {@link DescribeIpBlockListResponse} */
   DescribeIpBlockList(data?: DescribeIpBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpBlockListResponse>;
-  /** {@link DescribeIpUnBlockList 获取IP解封记录}({@link DescribeIpUnBlockListRequest 请求参数}): {@link DescribeIpUnBlockListResponse 返回参数} */
+  /** 获取IP解封记录 {@link DescribeIpUnBlockListRequest} {@link DescribeIpUnBlockListResponse} */
   DescribeIpUnBlockList(data: DescribeIpUnBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpUnBlockListResponse>;
-  /** {@link DescribeL4HealthConfig 导出四层健康检查配置}({@link DescribeL4HealthConfigRequest 请求参数}): {@link DescribeL4HealthConfigResponse 返回参数} */
+  /** 导出四层健康检查配置 {@link DescribeL4HealthConfigRequest} {@link DescribeL4HealthConfigResponse} */
   DescribeL4HealthConfig(data: DescribeL4HealthConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL4HealthConfigResponse>;
-  /** {@link DescribeL4RulesErrHealth 获取L4转发规则健康检查异常结果}({@link DescribeL4RulesErrHealthRequest 请求参数}): {@link DescribeL4RulesErrHealthResponse 返回参数} */
+  /** 获取L4转发规则健康检查异常结果 {@link DescribeL4RulesErrHealthRequest} {@link DescribeL4RulesErrHealthResponse} */
   DescribeL4RulesErrHealth(data: DescribeL4RulesErrHealthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL4RulesErrHealthResponse>;
-  /** {@link DescribeL7HealthConfig 导出七层健康检查配置}({@link DescribeL7HealthConfigRequest 请求参数}): {@link DescribeL7HealthConfigResponse 返回参数} */
+  /** 导出七层健康检查配置 {@link DescribeL7HealthConfigRequest} {@link DescribeL7HealthConfigResponse} */
   DescribeL7HealthConfig(data: DescribeL7HealthConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL7HealthConfigResponse>;
-  /** {@link DescribeNewL4Rules 获取四层转发规则}({@link DescribeNewL4RulesRequest 请求参数}): {@link DescribeNewL4RulesResponse 返回参数} */
+  /** 获取四层转发规则 {@link DescribeNewL4RulesRequest} {@link DescribeNewL4RulesResponse} */
   DescribeNewL4Rules(data: DescribeNewL4RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNewL4RulesResponse>;
-  /** {@link DescribeNewL4RulesErrHealth 获取四层转发规则健康检查异常结果}({@link DescribeNewL4RulesErrHealthRequest 请求参数}): {@link DescribeNewL4RulesErrHealthResponse 返回参数} */
+  /** 获取四层转发规则健康检查异常结果 {@link DescribeNewL4RulesErrHealthRequest} {@link DescribeNewL4RulesErrHealthResponse} */
   DescribeNewL4RulesErrHealth(data: DescribeNewL4RulesErrHealthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNewL4RulesErrHealthResponse>;
-  /** {@link DescribeNewL7RulesErrHealth 获取L7转发规则健康检查异常结果}({@link DescribeNewL7RulesErrHealthRequest 请求参数}): {@link DescribeNewL7RulesErrHealthResponse 返回参数} */
+  /** 获取L7转发规则健康检查异常结果 {@link DescribeNewL7RulesErrHealthRequest} {@link DescribeNewL7RulesErrHealthResponse} */
   DescribeNewL7RulesErrHealth(data: DescribeNewL7RulesErrHealthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNewL7RulesErrHealthResponse>;
-  /** {@link DescribePackIndex 获取产品总览}({@link DescribePackIndexRequest 请求参数}): {@link DescribePackIndexResponse 返回参数} */
+  /** 获取产品总览 {@link DescribePackIndexRequest} {@link DescribePackIndexResponse} */
   DescribePackIndex(data: DescribePackIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackIndexResponse>;
-  /** {@link DescribePcap 下载攻击事件的pcap包}({@link DescribePcapRequest 请求参数}): {@link DescribePcapResponse 返回参数} */
+  /** 下载攻击事件的pcap包 {@link DescribePcapRequest} {@link DescribePcapResponse} */
   DescribePcap(data: DescribePcapRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePcapResponse>;
-  /** {@link DescribePolicyCase 获取策略场景}({@link DescribePolicyCaseRequest 请求参数}): {@link DescribePolicyCaseResponse 返回参数} */
+  /** 获取策略场景 {@link DescribePolicyCaseRequest} {@link DescribePolicyCaseResponse} */
   DescribePolicyCase(data: DescribePolicyCaseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyCaseResponse>;
-  /** {@link DescribeResIpList 获取资源的IP列表}({@link DescribeResIpListRequest 请求参数}): {@link DescribeResIpListResponse 返回参数} */
+  /** 获取资源的IP列表 {@link DescribeResIpListRequest} {@link DescribeResIpListResponse} */
   DescribeResIpList(data: DescribeResIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResIpListResponse>;
-  /** {@link DescribeResourceList 获取资源列表}({@link DescribeResourceListRequest 请求参数}): {@link DescribeResourceListResponse 返回参数} */
+  /** 获取资源列表 {@link DescribeResourceListRequest} {@link DescribeResourceListResponse} */
   DescribeResourceList(data: DescribeResourceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceListResponse>;
-  /** {@link DescribeRuleSets 获取资源的规则数}({@link DescribeRuleSetsRequest 请求参数}): {@link DescribeRuleSetsResponse 返回参数} */
+  /** 获取资源的规则数 {@link DescribeRuleSetsRequest} {@link DescribeRuleSetsResponse} */
   DescribeRuleSets(data: DescribeRuleSetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleSetsResponse>;
-  /** {@link DescribeSchedulingDomainList 获取调度域名列表}({@link DescribeSchedulingDomainListRequest 请求参数}): {@link DescribeSchedulingDomainListResponse 返回参数} */
+  /** 获取调度域名列表 {@link DescribeSchedulingDomainListRequest} {@link DescribeSchedulingDomainListResponse} */
   DescribeSchedulingDomainList(data: DescribeSchedulingDomainListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSchedulingDomainListResponse>;
-  /** {@link DescribeSecIndex 获取安全统计}({@link DescribeSecIndexRequest 请求参数}): {@link DescribeSecIndexResponse 返回参数} */
+  /** 获取安全统计 {@link DescribeSecIndexRequest} {@link DescribeSecIndexResponse} */
   DescribeSecIndex(data?: DescribeSecIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecIndexResponse>;
-  /** {@link DescribeSourceIpSegment 获取回源IP段}({@link DescribeSourceIpSegmentRequest 请求参数}): {@link DescribeSourceIpSegmentResponse 返回参数} */
+  /** 获取回源IP段 {@link DescribeSourceIpSegmentRequest} {@link DescribeSourceIpSegmentResponse} */
   DescribeSourceIpSegment(data: DescribeSourceIpSegmentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceIpSegmentResponse>;
-  /** {@link DescribeTransmitStatis 获取业务转发统计数据}({@link DescribeTransmitStatisRequest 请求参数}): {@link DescribeTransmitStatisResponse 返回参数} */
+  /** 获取业务转发统计数据 {@link DescribeTransmitStatisRequest} {@link DescribeTransmitStatisResponse} */
   DescribeTransmitStatis(data: DescribeTransmitStatisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTransmitStatisResponse>;
-  /** {@link DescribeUnBlockStatis 获取黑洞解封次数}({@link DescribeUnBlockStatisRequest 请求参数}): {@link DescribeUnBlockStatisResponse 返回参数} */
+  /** 获取黑洞解封次数 {@link DescribeUnBlockStatisRequest} {@link DescribeUnBlockStatisResponse} */
   DescribeUnBlockStatis(data?: DescribeUnBlockStatisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnBlockStatisResponse>;
-  /** {@link DescribleL4Rules 获取L4转发规则}({@link DescribleL4RulesRequest 请求参数}): {@link DescribleL4RulesResponse 返回参数} */
+  /** 获取L4转发规则 {@link DescribleL4RulesRequest} {@link DescribleL4RulesResponse} */
   DescribleL4Rules(data: DescribleL4RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribleL4RulesResponse>;
-  /** {@link DescribleL7Rules 获取L7转发规则}({@link DescribleL7RulesRequest 请求参数}): {@link DescribleL7RulesResponse 返回参数} */
+  /** 获取L7转发规则 {@link DescribleL7RulesRequest} {@link DescribleL7RulesResponse} */
   DescribleL7Rules(data: DescribleL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribleL7RulesResponse>;
-  /** {@link DescribleNewL7Rules 获取7层规则}({@link DescribleNewL7RulesRequest 请求参数}): {@link DescribleNewL7RulesResponse 返回参数} */
+  /** 获取7层规则 {@link DescribleNewL7RulesRequest} {@link DescribleNewL7RulesResponse} */
   DescribleNewL7Rules(data: DescribleNewL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribleNewL7RulesResponse>;
-  /** {@link DescribleRegionCount 获取地域的资源实例数}({@link DescribleRegionCountRequest 请求参数}): {@link DescribleRegionCountResponse 返回参数} */
+  /** 获取地域的资源实例数 {@link DescribleRegionCountRequest} {@link DescribleRegionCountResponse} */
   DescribleRegionCount(data: DescribleRegionCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribleRegionCountResponse>;
-  /** {@link ModifyCCAlarmThreshold 设置CC告警通知阈值}({@link ModifyCCAlarmThresholdRequest 请求参数}): {@link ModifyCCAlarmThresholdResponse 返回参数} */
+  /** 设置CC告警通知阈值 {@link ModifyCCAlarmThresholdRequest} {@link ModifyCCAlarmThresholdResponse} */
   ModifyCCAlarmThreshold(data: ModifyCCAlarmThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCAlarmThresholdResponse>;
-  /** {@link ModifyCCFrequencyRules 修改CC防护的访问频率控制规则}({@link ModifyCCFrequencyRulesRequest 请求参数}): {@link ModifyCCFrequencyRulesResponse 返回参数} */
+  /** 修改CC防护的访问频率控制规则 {@link ModifyCCFrequencyRulesRequest} {@link ModifyCCFrequencyRulesResponse} */
   ModifyCCFrequencyRules(data: ModifyCCFrequencyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCFrequencyRulesResponse>;
-  /** {@link ModifyCCFrequencyRulesStatus 开启或关闭CC防护的访问频率控制规则}({@link ModifyCCFrequencyRulesStatusRequest 请求参数}): {@link ModifyCCFrequencyRulesStatusResponse 返回参数} */
+  /** 开启或关闭CC防护的访问频率控制规则 {@link ModifyCCFrequencyRulesStatusRequest} {@link ModifyCCFrequencyRulesStatusResponse} */
   ModifyCCFrequencyRulesStatus(data: ModifyCCFrequencyRulesStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCFrequencyRulesStatusResponse>;
-  /** {@link ModifyCCHostProtection 开启或关闭CC域名防护}({@link ModifyCCHostProtectionRequest 请求参数}): {@link ModifyCCHostProtectionResponse 返回参数} */
+  /** 开启或关闭CC域名防护 {@link ModifyCCHostProtectionRequest} {@link ModifyCCHostProtectionResponse} */
   ModifyCCHostProtection(data: ModifyCCHostProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCHostProtectionResponse>;
-  /** {@link ModifyCCIpAllowDeny 添加或删除CC的IP黑白名单}({@link ModifyCCIpAllowDenyRequest 请求参数}): {@link ModifyCCIpAllowDenyResponse 返回参数} */
+  /** 添加或删除CC的IP黑白名单 {@link ModifyCCIpAllowDenyRequest} {@link ModifyCCIpAllowDenyResponse} */
   ModifyCCIpAllowDeny(data: ModifyCCIpAllowDenyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCIpAllowDenyResponse>;
-  /** {@link ModifyCCLevel 修改CC防护等级}({@link ModifyCCLevelRequest 请求参数}): {@link ModifyCCLevelResponse 返回参数} */
+  /** 修改CC防护等级 {@link ModifyCCLevelRequest} {@link ModifyCCLevelResponse} */
   ModifyCCLevel(data: ModifyCCLevelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCLevelResponse>;
-  /** {@link ModifyCCPolicySwitch 修改CC自定义策略开关}({@link ModifyCCPolicySwitchRequest 请求参数}): {@link ModifyCCPolicySwitchResponse 返回参数} */
+  /** 修改CC自定义策略开关 {@link ModifyCCPolicySwitchRequest} {@link ModifyCCPolicySwitchResponse} */
   ModifyCCPolicySwitch(data: ModifyCCPolicySwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCPolicySwitchResponse>;
-  /** {@link ModifyCCSelfDefinePolicy 修改CC自定义策略}({@link ModifyCCSelfDefinePolicyRequest 请求参数}): {@link ModifyCCSelfDefinePolicyResponse 返回参数} */
+  /** 修改CC自定义策略 {@link ModifyCCSelfDefinePolicyRequest} {@link ModifyCCSelfDefinePolicyResponse} */
   ModifyCCSelfDefinePolicy(data: ModifyCCSelfDefinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCSelfDefinePolicyResponse>;
-  /** {@link ModifyCCThreshold 修改CC的防护阈值}({@link ModifyCCThresholdRequest 请求参数}): {@link ModifyCCThresholdResponse 返回参数} */
+  /** 修改CC的防护阈值 {@link ModifyCCThresholdRequest} {@link ModifyCCThresholdResponse} */
   ModifyCCThreshold(data: ModifyCCThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCThresholdResponse>;
-  /** {@link ModifyCCUrlAllow 添加或删除CC的URL白名单}({@link ModifyCCUrlAllowRequest 请求参数}): {@link ModifyCCUrlAllowResponse 返回参数} */
+  /** 添加或删除CC的URL白名单 {@link ModifyCCUrlAllowRequest} {@link ModifyCCUrlAllowResponse} */
   ModifyCCUrlAllow(data: ModifyCCUrlAllowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCCUrlAllowResponse>;
-  /** {@link ModifyDDoSAIStatus 修改DDoS的AI防护状态}({@link ModifyDDoSAIStatusRequest 请求参数}): {@link ModifyDDoSAIStatusResponse 返回参数} */
+  /** 修改DDoS的AI防护状态 {@link ModifyDDoSAIStatusRequest} {@link ModifyDDoSAIStatusResponse} */
   ModifyDDoSAIStatus(data: ModifyDDoSAIStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSAIStatusResponse>;
-  /** {@link ModifyDDoSAlarmThreshold 设置DDoS告警通知阈值}({@link ModifyDDoSAlarmThresholdRequest 请求参数}): {@link ModifyDDoSAlarmThresholdResponse 返回参数} */
+  /** 设置DDoS告警通知阈值 {@link ModifyDDoSAlarmThresholdRequest} {@link ModifyDDoSAlarmThresholdResponse} */
   ModifyDDoSAlarmThreshold(data: ModifyDDoSAlarmThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSAlarmThresholdResponse>;
-  /** {@link ModifyDDoSDefendStatus 修改DDoS防护状态}({@link ModifyDDoSDefendStatusRequest 请求参数}): {@link ModifyDDoSDefendStatusResponse 返回参数} */
+  /** 修改DDoS防护状态 {@link ModifyDDoSDefendStatusRequest} {@link ModifyDDoSDefendStatusResponse} */
   ModifyDDoSDefendStatus(data: ModifyDDoSDefendStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSDefendStatusResponse>;
-  /** {@link ModifyDDoSLevel 修改DDoSIP防护等级}({@link ModifyDDoSLevelRequest 请求参数}): {@link ModifyDDoSLevelResponse 返回参数} */
+  /** 修改DDoSIP防护等级 {@link ModifyDDoSLevelRequest} {@link ModifyDDoSLevelResponse} */
   ModifyDDoSLevel(data: ModifyDDoSLevelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSLevelResponse>;
-  /** {@link ModifyDDoSPolicy 修改DDoS高级策略}({@link ModifyDDoSPolicyRequest 请求参数}): {@link ModifyDDoSPolicyResponse 返回参数} */
+  /** 修改DDoS高级策略 {@link ModifyDDoSPolicyRequest} {@link ModifyDDoSPolicyResponse} */
   ModifyDDoSPolicy(data: ModifyDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSPolicyResponse>;
-  /** {@link ModifyDDoSPolicyCase 修改策略场景}({@link ModifyDDoSPolicyCaseRequest 请求参数}): {@link ModifyDDoSPolicyCaseResponse 返回参数} */
+  /** 修改策略场景 {@link ModifyDDoSPolicyCaseRequest} {@link ModifyDDoSPolicyCaseResponse} */
   ModifyDDoSPolicyCase(data: ModifyDDoSPolicyCaseRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSPolicyCaseResponse>;
-  /** {@link ModifyDDoSPolicyName 修改DDoS高级策略名称}({@link ModifyDDoSPolicyNameRequest 请求参数}): {@link ModifyDDoSPolicyNameResponse 返回参数} */
+  /** 修改DDoS高级策略名称 {@link ModifyDDoSPolicyNameRequest} {@link ModifyDDoSPolicyNameResponse} */
   ModifyDDoSPolicyName(data: ModifyDDoSPolicyNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSPolicyNameResponse>;
-  /** {@link ModifyDDoSSwitch 开启或关闭DDoS防护}({@link ModifyDDoSSwitchRequest 请求参数}): {@link ModifyDDoSSwitchResponse 返回参数} */
+  /** 开启或关闭DDoS防护 {@link ModifyDDoSSwitchRequest} {@link ModifyDDoSSwitchResponse} */
   ModifyDDoSSwitch(data: ModifyDDoSSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSSwitchResponse>;
-  /** {@link ModifyDDoSThreshold 修改DDoS清洗阈值}({@link ModifyDDoSThresholdRequest 请求参数}): {@link ModifyDDoSThresholdResponse 返回参数} */
+  /** 修改DDoS清洗阈值 {@link ModifyDDoSThresholdRequest} {@link ModifyDDoSThresholdResponse} */
   ModifyDDoSThreshold(data: ModifyDDoSThresholdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSThresholdResponse>;
-  /** {@link ModifyDDoSWaterKey 修改水印密钥}({@link ModifyDDoSWaterKeyRequest 请求参数}): {@link ModifyDDoSWaterKeyResponse 返回参数} */
+  /** 修改水印密钥 {@link ModifyDDoSWaterKeyRequest} {@link ModifyDDoSWaterKeyResponse} */
   ModifyDDoSWaterKey(data: ModifyDDoSWaterKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSWaterKeyResponse>;
-  /** {@link ModifyElasticLimit 修改弹性防护阈值}({@link ModifyElasticLimitRequest 请求参数}): {@link ModifyElasticLimitResponse 返回参数} */
+  /** 修改弹性防护阈值 {@link ModifyElasticLimitRequest} {@link ModifyElasticLimitResponse} */
   ModifyElasticLimit(data: ModifyElasticLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyElasticLimitResponse>;
-  /** {@link ModifyL4Health 修改L4转发规则健康检查参数}({@link ModifyL4HealthRequest 请求参数}): {@link ModifyL4HealthResponse 返回参数} */
+  /** 修改L4转发规则健康检查参数 {@link ModifyL4HealthRequest} {@link ModifyL4HealthResponse} */
   ModifyL4Health(data: ModifyL4HealthRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4HealthResponse>;
-  /** {@link ModifyL4KeepTime 修改L4转发规则的会话保持}({@link ModifyL4KeepTimeRequest 请求参数}): {@link ModifyL4KeepTimeResponse 返回参数} */
+  /** 修改L4转发规则的会话保持 {@link ModifyL4KeepTimeRequest} {@link ModifyL4KeepTimeResponse} */
   ModifyL4KeepTime(data: ModifyL4KeepTimeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4KeepTimeResponse>;
-  /** {@link ModifyL4Rules 修改L4转发规则}({@link ModifyL4RulesRequest 请求参数}): {@link ModifyL4RulesResponse 返回参数} */
+  /** 修改L4转发规则 {@link ModifyL4RulesRequest} {@link ModifyL4RulesResponse} */
   ModifyL4Rules(data: ModifyL4RulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4RulesResponse>;
-  /** {@link ModifyL7Rules 修改L7转发规则}({@link ModifyL7RulesRequest 请求参数}): {@link ModifyL7RulesResponse 返回参数} */
+  /** 修改L7转发规则 {@link ModifyL7RulesRequest} {@link ModifyL7RulesResponse} */
   ModifyL7Rules(data: ModifyL7RulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL7RulesResponse>;
-  /** {@link ModifyNetReturnSwitch 设置自动切回}({@link ModifyNetReturnSwitchRequest 请求参数}): {@link ModifyNetReturnSwitchResponse 返回参数} */
+  /** 设置自动切回 {@link ModifyNetReturnSwitchRequest} {@link ModifyNetReturnSwitchResponse} */
   ModifyNetReturnSwitch(data: ModifyNetReturnSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetReturnSwitchResponse>;
-  /** {@link ModifyNewDomainRules 修改7层转发规则}({@link ModifyNewDomainRulesRequest 请求参数}): {@link ModifyNewDomainRulesResponse 返回参数} */
+  /** 修改7层转发规则 {@link ModifyNewDomainRulesRequest} {@link ModifyNewDomainRulesResponse} */
   ModifyNewDomainRules(data: ModifyNewDomainRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNewDomainRulesResponse>;
-  /** {@link ModifyNewL4Rule 修改4层转发规则}({@link ModifyNewL4RuleRequest 请求参数}): {@link ModifyNewL4RuleResponse 返回参数} */
+  /** 修改4层转发规则 {@link ModifyNewL4RuleRequest} {@link ModifyNewL4RuleResponse} */
   ModifyNewL4Rule(data: ModifyNewL4RuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNewL4RuleResponse>;
-  /** {@link ModifyResBindDDoSPolicy 资源绑定DDoS高级策略}({@link ModifyResBindDDoSPolicyRequest 请求参数}): {@link ModifyResBindDDoSPolicyResponse 返回参数} */
+  /** 资源绑定DDoS高级策略 {@link ModifyResBindDDoSPolicyRequest} {@link ModifyResBindDDoSPolicyResponse} */
   ModifyResBindDDoSPolicy(data: ModifyResBindDDoSPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResBindDDoSPolicyResponse>;
-  /** {@link ModifyResourceRenewFlag 修改资源自动续费标记}({@link ModifyResourceRenewFlagRequest 请求参数}): {@link ModifyResourceRenewFlagResponse 返回参数} */
+  /** 修改资源自动续费标记 {@link ModifyResourceRenewFlagRequest} {@link ModifyResourceRenewFlagResponse} */
   ModifyResourceRenewFlag(data: ModifyResourceRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceRenewFlagResponse>;
 }
 

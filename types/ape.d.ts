@@ -110,7 +110,7 @@ declare interface BatchDescribeOrderCertificateRequest {
 declare interface BatchDescribeOrderCertificateResponse {
   /** 授权书的下载地址 */
   CertificateUrls?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -122,7 +122,7 @@ declare interface BatchDescribeOrderImageRequest {
 declare interface BatchDescribeOrderImageResponse {
   /** 图片的下载地址 */
   ImageUrls?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -136,7 +136,7 @@ declare interface CreateOrderAndDownloadsResponse {
   DownloadInfos: DownloadInfo[] | null;
   /** 可下载图片数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -152,7 +152,7 @@ declare interface CreateOrderAndPayRequest {
 declare interface CreateOrderAndPayResponse {
   /** 订单ID */
   OrderId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -170,7 +170,7 @@ declare interface DescribeAuthUsersResponse {
   TotalCount?: number;
   /** 是否是老策略用户 */
   OldUser?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -192,7 +192,7 @@ declare interface DescribeDownloadInfosResponse {
   DownloadInfos: DownloadInfo[] | null;
   /** 总记录数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -230,7 +230,7 @@ declare interface DescribeImageResponse {
   LayeredGalleryId: number;
   /** 构图方式：horizontal:横图、vertical:竖图、square:方图 */
   Orientation: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -260,28 +260,28 @@ declare interface DescribeImagesResponse {
   HaveMore: boolean;
   /** 图片信息数组 */
   Items: ImageItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ape 正版图库直通车} */
 declare interface Ape {
   (): Versions;
-  /** {@link BatchDescribeOrderCertificate 批量获取授权书下载地址}({@link BatchDescribeOrderCertificateRequest 请求参数}): {@link BatchDescribeOrderCertificateResponse 返回参数} */
+  /** 批量获取授权书下载地址 {@link BatchDescribeOrderCertificateRequest} {@link BatchDescribeOrderCertificateResponse} */
   BatchDescribeOrderCertificate(data: BatchDescribeOrderCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDescribeOrderCertificateResponse>;
-  /** {@link BatchDescribeOrderImage 批量获取图片下载地址}({@link BatchDescribeOrderImageRequest 请求参数}): {@link BatchDescribeOrderImageResponse 返回参数} */
+  /** 批量获取图片下载地址 {@link BatchDescribeOrderImageRequest} {@link BatchDescribeOrderImageResponse} */
   BatchDescribeOrderImage(data: BatchDescribeOrderImageRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDescribeOrderImageResponse>;
-  /** {@link CreateOrderAndDownloads 获取图片下载地址}({@link CreateOrderAndDownloadsRequest 请求参数}): {@link CreateOrderAndDownloadsResponse 返回参数} */
+  /** 获取图片下载地址 {@link CreateOrderAndDownloadsRequest} {@link CreateOrderAndDownloadsResponse} */
   CreateOrderAndDownloads(data: CreateOrderAndDownloadsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrderAndDownloadsResponse>;
-  /** {@link CreateOrderAndPay 创建订单并支付}({@link CreateOrderAndPayRequest 请求参数}): {@link CreateOrderAndPayResponse 返回参数} */
+  /** 创建订单并支付 {@link CreateOrderAndPayRequest} {@link CreateOrderAndPayResponse} */
   CreateOrderAndPay(data: CreateOrderAndPayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrderAndPayResponse>;
-  /** {@link DescribeAuthUsers 查询授权人列表}({@link DescribeAuthUsersRequest 请求参数}): {@link DescribeAuthUsersResponse 返回参数} */
+  /** 查询授权人列表 {@link DescribeAuthUsersRequest} {@link DescribeAuthUsersResponse} */
   DescribeAuthUsers(data: DescribeAuthUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthUsersResponse>;
-  /** {@link DescribeDownloadInfos 获取图片下载记录}({@link DescribeDownloadInfosRequest 请求参数}): {@link DescribeDownloadInfosResponse 返回参数} */
+  /** 获取图片下载记录 {@link DescribeDownloadInfosRequest} {@link DescribeDownloadInfosResponse} */
   DescribeDownloadInfos(data?: DescribeDownloadInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDownloadInfosResponse>;
-  /** {@link DescribeImage 查询图片详情}({@link DescribeImageRequest 请求参数}): {@link DescribeImageResponse 返回参数} */
+  /** 查询图片详情 {@link DescribeImageRequest} {@link DescribeImageResponse} */
   DescribeImage(data: DescribeImageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageResponse>;
-  /** {@link DescribeImages 查询图片列表}({@link DescribeImagesRequest 请求参数}): {@link DescribeImagesResponse 返回参数} */
+  /** 查询图片列表 {@link DescribeImagesRequest} {@link DescribeImagesResponse} */
   DescribeImages(data: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
 }
 

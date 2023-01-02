@@ -162,7 +162,7 @@ declare interface AddDeviceResponse {
   DeviceId: string;
   /** 签名字符串 */
   Signature: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -172,7 +172,7 @@ declare interface CreateEncryptedKeyRequest {
 declare interface CreateEncryptedKeyResponse {
   /** 预置密钥 */
   EncryptedKey: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -204,7 +204,7 @@ declare interface CreateQosResponse {
   SessionId: string;
   /** 当前加速剩余时长（单位秒） */
   Duration: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -214,7 +214,7 @@ declare interface DeleteDeviceRequest {
 }
 
 declare interface DeleteDeviceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -228,7 +228,7 @@ declare interface DeleteQosResponse {
   SessionId: string;
   /** 本次加速会话持续时间（单位秒） */
   Duration: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -248,7 +248,7 @@ declare interface DescribeQosResponse {
   Duration: number | null;
   /** 加速套餐类型，仅匹配时返回 */
   QosMenu: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -260,7 +260,7 @@ declare interface GetDeviceRequest {
 declare interface GetDeviceResponse {
   /** 设备详细信息 */
   DeviceDetails: DeviceDetails;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -280,7 +280,7 @@ declare interface GetDevicesResponse {
   Length: number;
   /** 总页数 */
   TotalPage: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -306,7 +306,7 @@ declare interface GetFlowStatisticResponse {
   AvgValue: number;
   /** 查找时间段流量使用总量（单位：bit） */
   TotalValue: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -316,7 +316,7 @@ declare interface GetPublicKeyRequest {
 declare interface GetPublicKeyResponse {
   /** 非对称公钥 */
   PublicKey: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -334,7 +334,7 @@ declare interface GetStatisticDataRequest {
 declare interface GetStatisticDataResponse {
   /** 文件地址url */
   FilePath: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -350,36 +350,36 @@ declare interface UpdateDeviceRequest {
 }
 
 declare interface UpdateDeviceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Mna 移动网络加速} */
 declare interface Mna {
   (): Versions;
-  /** {@link AddDevice 新建设备}({@link AddDeviceRequest 请求参数}): {@link AddDeviceResponse 返回参数} */
+  /** 新建设备 {@link AddDeviceRequest} {@link AddDeviceResponse} */
   AddDevice(data: AddDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AddDeviceResponse>;
-  /** {@link CreateEncryptedKey 设置或更新密钥}({@link CreateEncryptedKeyRequest 请求参数}): {@link CreateEncryptedKeyResponse 返回参数} */
+  /** 设置或更新密钥 {@link CreateEncryptedKeyRequest} {@link CreateEncryptedKeyResponse} */
   CreateEncryptedKey(data?: CreateEncryptedKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEncryptedKeyResponse>;
-  /** {@link CreateQos 发起Qos加速过程}({@link CreateQosRequest 请求参数}): {@link CreateQosResponse 返回参数} */
+  /** 发起Qos加速过程 {@link CreateQosRequest} {@link CreateQosResponse} */
   CreateQos(data: CreateQosRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQosResponse>;
-  /** {@link DeleteDevice 删除设备}({@link DeleteDeviceRequest 请求参数}): {@link DeleteDeviceResponse 返回参数} */
+  /** 删除设备 {@link DeleteDeviceRequest} {@link DeleteDeviceResponse} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
-  /** {@link DeleteQos 停止Qos加速过程}({@link DeleteQosRequest 请求参数}): {@link DeleteQosResponse 返回参数} */
+  /** 停止Qos加速过程 {@link DeleteQosRequest} {@link DeleteQosResponse} */
   DeleteQos(data: DeleteQosRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQosResponse>;
-  /** {@link DescribeQos 获取Qos加速状态}({@link DescribeQosRequest 请求参数}): {@link DescribeQosResponse 返回参数} */
+  /** 获取Qos加速状态 {@link DescribeQosRequest} {@link DescribeQosResponse} */
   DescribeQos(data: DescribeQosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQosResponse>;
-  /** {@link GetDevice 获取设备详细信息}({@link GetDeviceRequest 请求参数}): {@link GetDeviceResponse 返回参数} */
+  /** 获取设备详细信息 {@link GetDeviceRequest} {@link GetDeviceResponse} */
   GetDevice(data: GetDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceResponse>;
-  /** {@link GetDevices 设备信息列表}({@link GetDevicesRequest 请求参数}): {@link GetDevicesResponse 返回参数} */
+  /** 设备信息列表 {@link GetDevicesRequest} {@link GetDevicesResponse} */
   GetDevices(data: GetDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<GetDevicesResponse>;
-  /** {@link GetFlowStatistic 获取数据流量统计数据}({@link GetFlowStatisticRequest 请求参数}): {@link GetFlowStatisticResponse 返回参数} */
+  /** 获取数据流量统计数据 {@link GetFlowStatisticRequest} {@link GetFlowStatisticResponse} */
   GetFlowStatistic(data: GetFlowStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticResponse>;
-  /** {@link GetPublicKey 获取公钥}({@link GetPublicKeyRequest 请求参数}): {@link GetPublicKeyResponse 返回参数} */
+  /** 获取公钥 {@link GetPublicKeyRequest} {@link GetPublicKeyResponse} */
   GetPublicKey(data?: GetPublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GetPublicKeyResponse>;
-  /** {@link GetStatisticData 下载用量统计数据}({@link GetStatisticDataRequest 请求参数}): {@link GetStatisticDataResponse 返回参数} */
+  /** 下载用量统计数据 {@link GetStatisticDataRequest} {@link GetStatisticDataResponse} */
   GetStatisticData(data: GetStatisticDataRequest, config?: AxiosRequestConfig): AxiosPromise<GetStatisticDataResponse>;
-  /** {@link UpdateDevice 更新设备}({@link UpdateDeviceRequest 请求参数}): {@link UpdateDeviceResponse 返回参数} */
+  /** 更新设备 {@link UpdateDeviceRequest} {@link UpdateDeviceResponse} */
   UpdateDevice(data: UpdateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceResponse>;
 }
 

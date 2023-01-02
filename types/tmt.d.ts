@@ -66,7 +66,7 @@ declare interface FileTranslateRequest {
 declare interface FileTranslateResponse {
   /** 文件翻译的请求返回结果，包含结果查询需要的TaskId */
   Data: Task;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -78,7 +78,7 @@ declare interface GetFileTranslateRequest {
 declare interface GetFileTranslateResponse {
   /** 任务id */
   Data: GetFileTranslateData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -106,7 +106,7 @@ declare interface ImageTranslateResponse {
   Target: string;
   /** 图片翻译结果，翻译结果按识别的文本每一行独立翻译，后续会推出按段落划分并翻译的版本 */
   ImageRecord: ImageRecord;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -120,7 +120,7 @@ declare interface LanguageDetectRequest {
 declare interface LanguageDetectResponse {
   /** 识别出的语言种类，参考语言列表 zh : 中文 en : 英文 jp : 日语 kr : 韩语 de : 德语 fr : 法语 es : 西班牙文 it : 意大利文 tr : 土耳其文 ru : 俄文 pt : 葡萄牙文 vi : 越南文 id : 印度尼西亚文 ms : 马来西亚文 th : 泰文 */
   Lang?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -164,7 +164,7 @@ declare interface SpeechTranslateResponse {
   Target: string;
   /** 当请求的Mode参数填写bvad是，启动VadSeq。此时Seq会被设置为后台vad（静音检测）后的新序号，而VadSeq代表客户端原始Seq值 */
   VadSeq: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -186,7 +186,7 @@ declare interface TextTranslateBatchResponse {
   Target: string;
   /** 翻译后的文本列表 */
   TargetTextList: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -210,26 +210,26 @@ declare interface TextTranslateResponse {
   Source: string;
   /** 目标语言，详见入参Target */
   Target: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tmt 机器翻译} */
 declare interface Tmt {
   (): Versions;
-  /** {@link FileTranslate 文件翻译请求}({@link FileTranslateRequest 请求参数}): {@link FileTranslateResponse 返回参数} */
+  /** 文件翻译请求 {@link FileTranslateRequest} {@link FileTranslateResponse} */
   FileTranslate(data: FileTranslateRequest, config?: AxiosRequestConfig): AxiosPromise<FileTranslateResponse>;
-  /** {@link GetFileTranslate 文件翻译结果查询}({@link GetFileTranslateRequest 请求参数}): {@link GetFileTranslateResponse 返回参数} */
+  /** 文件翻译结果查询 {@link GetFileTranslateRequest} {@link GetFileTranslateResponse} */
   GetFileTranslate(data: GetFileTranslateRequest, config?: AxiosRequestConfig): AxiosPromise<GetFileTranslateResponse>;
-  /** {@link ImageTranslate 图片翻译}({@link ImageTranslateRequest 请求参数}): {@link ImageTranslateResponse 返回参数} */
+  /** 图片翻译 {@link ImageTranslateRequest} {@link ImageTranslateResponse} */
   ImageTranslate(data: ImageTranslateRequest, config?: AxiosRequestConfig): AxiosPromise<ImageTranslateResponse>;
-  /** {@link LanguageDetect 语种识别}({@link LanguageDetectRequest 请求参数}): {@link LanguageDetectResponse 返回参数} */
+  /** 语种识别 {@link LanguageDetectRequest} {@link LanguageDetectResponse} */
   LanguageDetect(data: LanguageDetectRequest, config?: AxiosRequestConfig): AxiosPromise<LanguageDetectResponse>;
-  /** {@link SpeechTranslate 语音翻译}({@link SpeechTranslateRequest 请求参数}): {@link SpeechTranslateResponse 返回参数} */
+  /** 语音翻译 {@link SpeechTranslateRequest} {@link SpeechTranslateResponse} */
   SpeechTranslate(data: SpeechTranslateRequest, config?: AxiosRequestConfig): AxiosPromise<SpeechTranslateResponse>;
-  /** {@link TextTranslate 文本翻译}({@link TextTranslateRequest 请求参数}): {@link TextTranslateResponse 返回参数} */
+  /** 文本翻译 {@link TextTranslateRequest} {@link TextTranslateResponse} */
   TextTranslate(data: TextTranslateRequest, config?: AxiosRequestConfig): AxiosPromise<TextTranslateResponse>;
-  /** {@link TextTranslateBatch 批量文本翻译}({@link TextTranslateBatchRequest 请求参数}): {@link TextTranslateBatchResponse 返回参数} */
+  /** 批量文本翻译 {@link TextTranslateBatchRequest} {@link TextTranslateBatchResponse} */
   TextTranslateBatch(data: TextTranslateBatchRequest, config?: AxiosRequestConfig): AxiosPromise<TextTranslateBatchResponse>;
 }
 

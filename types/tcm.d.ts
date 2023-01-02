@@ -548,7 +548,7 @@ declare interface CreateMeshRequest {
 declare interface CreateMeshResponse {
   /** 创建的Mesh的Id */
   MeshId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -566,7 +566,7 @@ declare interface DeleteMeshRequest {
 }
 
 declare interface DeleteMeshResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -596,7 +596,7 @@ declare interface DescribeAccessLogConfigResponse {
   EnableStdout: boolean;
   /** 是否启用访问日志采集 */
   Enable: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -614,7 +614,7 @@ declare interface DescribeMeshListResponse {
   MeshList: Mesh[] | null;
   /** 总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -626,7 +626,7 @@ declare interface DescribeMeshRequest {
 declare interface DescribeMeshResponse {
   /** Mesh详细信息 */
   Mesh: Mesh;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -638,7 +638,7 @@ declare interface LinkClusterListRequest {
 }
 
 declare interface LinkClusterListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -650,7 +650,7 @@ declare interface LinkPrometheusRequest {
 }
 
 declare interface LinkPrometheusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -678,7 +678,7 @@ declare interface ModifyAccessLogConfigRequest {
 }
 
 declare interface ModifyAccessLogConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -694,7 +694,7 @@ declare interface ModifyMeshRequest {
 }
 
 declare interface ModifyMeshResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -712,7 +712,7 @@ declare interface ModifyTracingConfigRequest {
 }
 
 declare interface ModifyTracingConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -724,7 +724,7 @@ declare interface UnlinkClusterRequest {
 }
 
 declare interface UnlinkClusterResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -734,36 +734,36 @@ declare interface UnlinkPrometheusRequest {
 }
 
 declare interface UnlinkPrometheusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tcm 服务网格} */
 declare interface Tcm {
   (): Versions;
-  /** {@link CreateMesh 创建网格}({@link CreateMeshRequest 请求参数}): {@link CreateMeshResponse 返回参数} */
+  /** 创建网格 {@link CreateMeshRequest} {@link CreateMeshResponse} */
   CreateMesh(data: CreateMeshRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMeshResponse>;
-  /** {@link DeleteMesh 删除网格}({@link DeleteMeshRequest 请求参数}): {@link DeleteMeshResponse 返回参数} */
+  /** 删除网格 {@link DeleteMeshRequest} {@link DeleteMeshResponse} */
   DeleteMesh(data: DeleteMeshRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMeshResponse>;
-  /** {@link DescribeAccessLogConfig 获取AccessLog配置}({@link DescribeAccessLogConfigRequest 请求参数}): {@link DescribeAccessLogConfigResponse 返回参数} */
+  /** 获取AccessLog配置 {@link DescribeAccessLogConfigRequest} {@link DescribeAccessLogConfigResponse} */
   DescribeAccessLogConfig(data: DescribeAccessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessLogConfigResponse>;
-  /** {@link DescribeMesh 查询网格详情}({@link DescribeMeshRequest 请求参数}): {@link DescribeMeshResponse 返回参数} */
+  /** 查询网格详情 {@link DescribeMeshRequest} {@link DescribeMeshResponse} */
   DescribeMesh(data: DescribeMeshRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMeshResponse>;
-  /** {@link DescribeMeshList 查询网格列表}({@link DescribeMeshListRequest 请求参数}): {@link DescribeMeshListResponse 返回参数} */
+  /** 查询网格列表 {@link DescribeMeshListRequest} {@link DescribeMeshListResponse} */
   DescribeMeshList(data?: DescribeMeshListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMeshListResponse>;
-  /** {@link LinkClusterList 关联集群}({@link LinkClusterListRequest 请求参数}): {@link LinkClusterListResponse 返回参数} */
+  /** 关联集群 {@link LinkClusterListRequest} {@link LinkClusterListResponse} */
   LinkClusterList(data: LinkClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<LinkClusterListResponse>;
-  /** {@link LinkPrometheus 关联Prometheus}({@link LinkPrometheusRequest 请求参数}): {@link LinkPrometheusResponse 返回参数} */
+  /** 关联Prometheus {@link LinkPrometheusRequest} {@link LinkPrometheusResponse} */
   LinkPrometheus(data: LinkPrometheusRequest, config?: AxiosRequestConfig): AxiosPromise<LinkPrometheusResponse>;
-  /** {@link ModifyAccessLogConfig 修改访问日志配置}({@link ModifyAccessLogConfigRequest 请求参数}): {@link ModifyAccessLogConfigResponse 返回参数} */
+  /** 修改访问日志配置 {@link ModifyAccessLogConfigRequest} {@link ModifyAccessLogConfigResponse} */
   ModifyAccessLogConfig(data: ModifyAccessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessLogConfigResponse>;
-  /** {@link ModifyMesh 修改网格}({@link ModifyMeshRequest 请求参数}): {@link ModifyMeshResponse 返回参数} */
+  /** 修改网格 {@link ModifyMeshRequest} {@link ModifyMeshResponse} */
   ModifyMesh(data: ModifyMeshRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMeshResponse>;
-  /** {@link ModifyTracingConfig 修改 Tracing 配置}({@link ModifyTracingConfigRequest 请求参数}): {@link ModifyTracingConfigResponse 返回参数} */
+  /** 修改 Tracing 配置 {@link ModifyTracingConfigRequest} {@link ModifyTracingConfigResponse} */
   ModifyTracingConfig(data: ModifyTracingConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTracingConfigResponse>;
-  /** {@link UnlinkCluster 解关联集群}({@link UnlinkClusterRequest 请求参数}): {@link UnlinkClusterResponse 返回参数} */
+  /** 解关联集群 {@link UnlinkClusterRequest} {@link UnlinkClusterResponse} */
   UnlinkCluster(data: UnlinkClusterRequest, config?: AxiosRequestConfig): AxiosPromise<UnlinkClusterResponse>;
-  /** {@link UnlinkPrometheus 解除关联Prometheus}({@link UnlinkPrometheusRequest 请求参数}): {@link UnlinkPrometheusResponse 返回参数} */
+  /** 解除关联Prometheus {@link UnlinkPrometheusRequest} {@link UnlinkPrometheusResponse} */
   UnlinkPrometheus(data: UnlinkPrometheusRequest, config?: AxiosRequestConfig): AxiosPromise<UnlinkPrometheusResponse>;
 }
 

@@ -500,7 +500,7 @@ declare interface AddCustomPersonImageResponse {
   PersonId: string;
   /** 自定义人脸图片信息 */
   ImageInfo: PersonImageInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -514,7 +514,7 @@ declare interface CreateCustomCategoryRequest {
 declare interface CreateCustomCategoryResponse {
   /** 自定义分类信息ID */
   CategoryId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -524,7 +524,7 @@ declare interface CreateCustomGroupRequest {
 }
 
 declare interface CreateCustomGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -546,7 +546,7 @@ declare interface CreateCustomPersonResponse {
   PersonId: string;
   /** 自定义人脸信息 */
   ImageInfo: PersonImageInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -554,7 +554,7 @@ declare interface CreateDefaultCategoriesRequest {
 }
 
 declare interface CreateDefaultCategoriesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -576,7 +576,7 @@ declare interface CreateTaskRequest {
 declare interface CreateTaskResponse {
   /** 智能标签视频分析任务ID */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -588,7 +588,7 @@ declare interface DeleteCustomCategoryRequest {
 declare interface DeleteCustomCategoryResponse {
   /** 123 */
   CategoryId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -604,7 +604,7 @@ declare interface DeleteCustomPersonImageResponse {
   PersonId: string;
   /** 已删除的人物图片Id */
   ImageId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -616,7 +616,7 @@ declare interface DeleteCustomPersonRequest {
 declare interface DeleteCustomPersonResponse {
   /** 已删除的自定义人物Id */
   PersonId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -626,7 +626,7 @@ declare interface DeleteMediaRequest {
 }
 
 declare interface DeleteMediaResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -636,7 +636,7 @@ declare interface DeleteTaskRequest {
 }
 
 declare interface DeleteTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -646,7 +646,7 @@ declare interface DescribeCustomCategoriesRequest {
 declare interface DescribeCustomCategoriesResponse {
   /** 自定义人物类型数组 */
   CategorySet: CustomCategory[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -658,7 +658,7 @@ declare interface DescribeCustomGroupResponse {
   GroupSize: number;
   /** 自定义人物库图片后续所在的存储桶 */
   Bucket: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -672,7 +672,7 @@ declare interface DescribeCustomPersonDetailResponse {
   PersonInfo: CustomPersonInfo;
   /** 出现该自定义人物的所有分析人物Id */
   TaskIdSet: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -692,7 +692,7 @@ declare interface DescribeCustomPersonsResponse {
   TotalCount: number;
   /** 自定义人物信息 */
   PersonInfoSet: CustomPersonInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -704,7 +704,7 @@ declare interface DescribeMediaRequest {
 declare interface DescribeMediaResponse {
   /** 媒资信息 */
   MediaInfo: MediaInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -724,7 +724,7 @@ declare interface DescribeMediasResponse {
   TotalCount: number;
   /** 满足过滤条件的媒资信息 */
   MediaInfoSet: MediaInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -744,7 +744,7 @@ declare interface DescribeTaskDetailResponse {
   AudioTaskData: AudioData | null;
   /** 文本任务结果数据，只在文本任务结束时返回 */
   TextTaskData: TextData | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -756,7 +756,7 @@ declare interface DescribeTaskRequest {
 declare interface DescribeTaskResponse {
   /** 任务信息，详情参见TaskInfo的定义 */
   TaskInfo: TaskInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -776,7 +776,7 @@ declare interface DescribeTasksResponse {
   TotalCount: number;
   /** 满足过滤条件的任务数组 */
   TaskInfoSet: TaskInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -800,7 +800,7 @@ declare interface ImportMediaRequest {
 declare interface ImportMediaResponse {
   /** 媒资文件在系统中的ID */
   MediaId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -812,7 +812,7 @@ declare interface ModifyCallbackRequest {
 }
 
 declare interface ModifyCallbackResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -824,7 +824,7 @@ declare interface QueryCallbackResponse {
   TaskFinishNotifyURL: string;
   /** 媒体导入完成后回调地址 */
   MediaFinishNotifyURL: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -840,7 +840,7 @@ declare interface UpdateCustomCategoryRequest {
 declare interface UpdateCustomCategoryResponse {
   /** 成功更新的自定义人物类型Id */
   CategoryId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -858,62 +858,62 @@ declare interface UpdateCustomPersonRequest {
 declare interface UpdateCustomPersonResponse {
   /** 成功更新的自定义人物Id */
   PersonId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ivld 媒体智能标签} */
 declare interface Ivld {
   (): Versions;
-  /** {@link AddCustomPersonImage 增加自定义人脸图片}({@link AddCustomPersonImageRequest 请求参数}): {@link AddCustomPersonImageResponse 返回参数} */
+  /** 增加自定义人脸图片 {@link AddCustomPersonImageRequest} {@link AddCustomPersonImageResponse} */
   AddCustomPersonImage(data: AddCustomPersonImageRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomPersonImageResponse>;
-  /** {@link CreateCustomCategory 创建自定义人物分类}({@link CreateCustomCategoryRequest 请求参数}): {@link CreateCustomCategoryResponse 返回参数} */
+  /** 创建自定义人物分类 {@link CreateCustomCategoryRequest} {@link CreateCustomCategoryResponse} */
   CreateCustomCategory(data: CreateCustomCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomCategoryResponse>;
-  /** {@link CreateCustomGroup 创建自定义人物库}({@link CreateCustomGroupRequest 请求参数}): {@link CreateCustomGroupResponse 返回参数} */
+  /** 创建自定义人物库 {@link CreateCustomGroupRequest} {@link CreateCustomGroupResponse} */
   CreateCustomGroup(data: CreateCustomGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomGroupResponse>;
-  /** {@link CreateCustomPerson 创建自定义人物}({@link CreateCustomPersonRequest 请求参数}): {@link CreateCustomPersonResponse 返回参数} */
+  /** 创建自定义人物 {@link CreateCustomPersonRequest} {@link CreateCustomPersonResponse} */
   CreateCustomPerson(data: CreateCustomPersonRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomPersonResponse>;
-  /** {@link CreateDefaultCategories 创建默认自定义人物类型}({@link CreateDefaultCategoriesRequest 请求参数}): {@link CreateDefaultCategoriesResponse 返回参数} */
+  /** 创建默认自定义人物类型 {@link CreateDefaultCategoriesRequest} {@link CreateDefaultCategoriesResponse} */
   CreateDefaultCategories(data?: CreateDefaultCategoriesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDefaultCategoriesResponse>;
-  /** {@link CreateTask 创建任务}({@link CreateTaskRequest 请求参数}): {@link CreateTaskResponse 返回参数} */
+  /** 创建任务 {@link CreateTaskRequest} {@link CreateTaskResponse} */
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
-  /** {@link DeleteCustomCategory 删除自定义分类}({@link DeleteCustomCategoryRequest 请求参数}): {@link DeleteCustomCategoryResponse 返回参数} */
+  /** 删除自定义分类 {@link DeleteCustomCategoryRequest} {@link DeleteCustomCategoryResponse} */
   DeleteCustomCategory(data: DeleteCustomCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomCategoryResponse>;
-  /** {@link DeleteCustomPerson 删除自定义人物}({@link DeleteCustomPersonRequest 请求参数}): {@link DeleteCustomPersonResponse 返回参数} */
+  /** 删除自定义人物 {@link DeleteCustomPersonRequest} {@link DeleteCustomPersonResponse} */
   DeleteCustomPerson(data: DeleteCustomPersonRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomPersonResponse>;
-  /** {@link DeleteCustomPersonImage 删除自定义人脸}({@link DeleteCustomPersonImageRequest 请求参数}): {@link DeleteCustomPersonImageResponse 返回参数} */
+  /** 删除自定义人脸 {@link DeleteCustomPersonImageRequest} {@link DeleteCustomPersonImageResponse} */
   DeleteCustomPersonImage(data: DeleteCustomPersonImageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomPersonImageResponse>;
-  /** {@link DeleteMedia 删除媒资文件}({@link DeleteMediaRequest 请求参数}): {@link DeleteMediaResponse 返回参数} */
+  /** 删除媒资文件 {@link DeleteMediaRequest} {@link DeleteMediaResponse} */
   DeleteMedia(data: DeleteMediaRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMediaResponse>;
-  /** {@link DeleteTask 删除任务}({@link DeleteTaskRequest 请求参数}): {@link DeleteTaskResponse 返回参数} */
+  /** 删除任务 {@link DeleteTaskRequest} {@link DeleteTaskResponse} */
   DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;
-  /** {@link DescribeCustomCategories 批量描述自定义人物分类}({@link DescribeCustomCategoriesRequest 请求参数}): {@link DescribeCustomCategoriesResponse 返回参数} */
+  /** 批量描述自定义人物分类 {@link DescribeCustomCategoriesRequest} {@link DescribeCustomCategoriesResponse} */
   DescribeCustomCategories(data?: DescribeCustomCategoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomCategoriesResponse>;
-  /** {@link DescribeCustomGroup 描述自定义人物库}({@link DescribeCustomGroupRequest 请求参数}): {@link DescribeCustomGroupResponse 返回参数} */
+  /** 描述自定义人物库 {@link DescribeCustomGroupRequest} {@link DescribeCustomGroupResponse} */
   DescribeCustomGroup(data?: DescribeCustomGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomGroupResponse>;
-  /** {@link DescribeCustomPersonDetail 描述自定义人物详细信息}({@link DescribeCustomPersonDetailRequest 请求参数}): {@link DescribeCustomPersonDetailResponse 返回参数} */
+  /** 描述自定义人物详细信息 {@link DescribeCustomPersonDetailRequest} {@link DescribeCustomPersonDetailResponse} */
   DescribeCustomPersonDetail(data: DescribeCustomPersonDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomPersonDetailResponse>;
-  /** {@link DescribeCustomPersons 批量描述自定义人物}({@link DescribeCustomPersonsRequest 请求参数}): {@link DescribeCustomPersonsResponse 返回参数} */
+  /** 批量描述自定义人物 {@link DescribeCustomPersonsRequest} {@link DescribeCustomPersonsResponse} */
   DescribeCustomPersons(data: DescribeCustomPersonsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomPersonsResponse>;
-  /** {@link DescribeMedia 描述媒资文件}({@link DescribeMediaRequest 请求参数}): {@link DescribeMediaResponse 返回参数} */
+  /** 描述媒资文件 {@link DescribeMediaRequest} {@link DescribeMediaResponse} */
   DescribeMedia(data: DescribeMediaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaResponse>;
-  /** {@link DescribeMedias 批量描述媒资文件}({@link DescribeMediasRequest 请求参数}): {@link DescribeMediasResponse 返回参数} */
+  /** 批量描述媒资文件 {@link DescribeMediasRequest} {@link DescribeMediasResponse} */
   DescribeMedias(data: DescribeMediasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediasResponse>;
-  /** {@link DescribeTask 描述任务}({@link DescribeTaskRequest 请求参数}): {@link DescribeTaskResponse 返回参数} */
+  /** 描述任务 {@link DescribeTaskRequest} {@link DescribeTaskResponse} */
   DescribeTask(data: DescribeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResponse>;
-  /** {@link DescribeTaskDetail 描述任务与任务结果}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
+  /** 描述任务与任务结果 {@link DescribeTaskDetailRequest} {@link DescribeTaskDetailResponse} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** {@link DescribeTasks 批量描述任务}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
+  /** 批量描述任务 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** {@link ImportMedia 导入媒资文件}({@link ImportMediaRequest 请求参数}): {@link ImportMediaResponse 返回参数} */
+  /** 导入媒资文件 {@link ImportMediaRequest} {@link ImportMediaResponse} */
   ImportMedia(data: ImportMediaRequest, config?: AxiosRequestConfig): AxiosPromise<ImportMediaResponse>;
-  /** {@link ModifyCallback 编辑回调地址}({@link ModifyCallbackRequest 请求参数}): {@link ModifyCallbackResponse 返回参数} */
+  /** 编辑回调地址 {@link ModifyCallbackRequest} {@link ModifyCallbackResponse} */
   ModifyCallback(data: ModifyCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCallbackResponse>;
-  /** {@link QueryCallback 查询回调设置}({@link QueryCallbackRequest 请求参数}): {@link QueryCallbackResponse 返回参数} */
+  /** 查询回调设置 {@link QueryCallbackRequest} {@link QueryCallbackResponse} */
   QueryCallback(data?: QueryCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCallbackResponse>;
-  /** {@link UpdateCustomCategory 更新自定义人物分类}({@link UpdateCustomCategoryRequest 请求参数}): {@link UpdateCustomCategoryResponse 返回参数} */
+  /** 更新自定义人物分类 {@link UpdateCustomCategoryRequest} {@link UpdateCustomCategoryResponse} */
   UpdateCustomCategory(data: UpdateCustomCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCustomCategoryResponse>;
-  /** {@link UpdateCustomPerson 更新自定义人物信息}({@link UpdateCustomPersonRequest 请求参数}): {@link UpdateCustomPersonResponse 返回参数} */
+  /** 更新自定义人物信息 {@link UpdateCustomPersonRequest} {@link UpdateCustomPersonResponse} */
   UpdateCustomPerson(data: UpdateCustomPersonRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCustomPersonResponse>;
 }
 

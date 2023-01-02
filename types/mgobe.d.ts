@@ -82,7 +82,7 @@ declare interface ChangeRoomPlayerProfileRequest {
 declare interface ChangeRoomPlayerProfileResponse {
   /** 房间信息。 */
   Room?: Room;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -98,7 +98,7 @@ declare interface ChangeRoomPlayerStatusRequest {
 declare interface ChangeRoomPlayerStatusResponse {
   /** 房间信息 */
   Room?: Room;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -114,7 +114,7 @@ declare interface DescribePlayerRequest {
 declare interface DescribePlayerResponse {
   /** 玩家信息。 */
   Player: Player;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -130,7 +130,7 @@ declare interface DescribeRoomRequest {
 declare interface DescribeRoomResponse {
   /** 房间信息。 */
   Room: Room;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -142,7 +142,7 @@ declare interface DismissRoomRequest {
 }
 
 declare interface DismissRoomResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -174,7 +174,7 @@ declare interface ModifyRoomRequest {
 declare interface ModifyRoomResponse {
   /** 房间信息 */
   Room?: Room;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -188,7 +188,7 @@ declare interface RemoveRoomPlayerRequest {
 declare interface RemoveRoomPlayerResponse {
   /** 房间信息 */
   Room?: Room;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -203,7 +203,7 @@ declare namespace V20190929 {
   }
 
   interface DismissRoomResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -211,21 +211,21 @@ declare namespace V20190929 {
 /** {@link Mgobe 游戏联机对战引擎} */
 declare interface Mgobe {
   (): Versions;
-  /** {@link ChangeRoomPlayerProfile 修改房间玩家自定义属性}({@link ChangeRoomPlayerProfileRequest 请求参数}): {@link ChangeRoomPlayerProfileResponse 返回参数} */
+  /** 修改房间玩家自定义属性 {@link ChangeRoomPlayerProfileRequest} {@link ChangeRoomPlayerProfileResponse} */
   ChangeRoomPlayerProfile(data: ChangeRoomPlayerProfileRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeRoomPlayerProfileResponse>;
-  /** {@link ChangeRoomPlayerStatus 修改玩家自定义状态}({@link ChangeRoomPlayerStatusRequest 请求参数}): {@link ChangeRoomPlayerStatusResponse 返回参数} */
+  /** 修改玩家自定义状态 {@link ChangeRoomPlayerStatusRequest} {@link ChangeRoomPlayerStatusResponse} */
   ChangeRoomPlayerStatus(data: ChangeRoomPlayerStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeRoomPlayerStatusResponse>;
-  /** {@link DescribePlayer 查询玩家信息}({@link DescribePlayerRequest 请求参数}): {@link DescribePlayerResponse 返回参数} */
+  /** 查询玩家信息 {@link DescribePlayerRequest} {@link DescribePlayerResponse} */
   DescribePlayer(data: DescribePlayerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlayerResponse>;
-  /** {@link DescribeRoom 查询房间信息}({@link DescribeRoomRequest 请求参数}): {@link DescribeRoomResponse 返回参数} */
+  /** 查询房间信息 {@link DescribeRoomRequest} {@link DescribeRoomResponse} */
   DescribeRoom(data: DescribeRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomResponse>;
-  /** {@link DismissRoom 解散房间}({@link DismissRoomRequest 请求参数}): {@link DismissRoomResponse 返回参数} */
+  /** 解散房间 {@link DismissRoomRequest} {@link DismissRoomResponse} */
   DismissRoom(data: DismissRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DismissRoomResponse>;
-  /** {@link ModifyRoom 修改房间}({@link ModifyRoomRequest 请求参数}): {@link ModifyRoomResponse 返回参数} */
+  /** 修改房间 {@link ModifyRoomRequest} {@link ModifyRoomResponse} */
   ModifyRoom(data: ModifyRoomRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoomResponse>;
-  /** {@link RemoveRoomPlayer 踢出房间玩家}({@link RemoveRoomPlayerRequest 请求参数}): {@link RemoveRoomPlayerResponse 返回参数} */
+  /** 踢出房间玩家 {@link RemoveRoomPlayerRequest} {@link RemoveRoomPlayerResponse} */
   RemoveRoomPlayer(data: RemoveRoomPlayerRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveRoomPlayerResponse>;
-  /** {@link V20190929.DismissRoom 解散房间}({@link V20190929.DismissRoomRequest 请求参数}): {@link V20190929.DismissRoomResponse 返回参数} */
+  /** 解散房间 {@link V20190929.DismissRoomRequest} {@link V20190929.DismissRoomResponse} */
   DismissRoom(data: V20190929.DismissRoomRequest, config: AxiosRequestConfig & V20190929.VersionHeader): AxiosPromise<V20190929.DismissRoomResponse>;
 }
 

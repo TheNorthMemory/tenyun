@@ -154,7 +154,7 @@ declare interface DescribeBrandCommentCountRequest {
 declare interface DescribeBrandCommentCountResponse {
   /** 按天统计好评/差评数 */
   CommentSet?: Comment[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -172,7 +172,7 @@ declare interface DescribeBrandExposureResponse {
   TotalCount?: number;
   /** 按天计算的统计数据 */
   DateCountSet?: DateCount[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -190,7 +190,7 @@ declare interface DescribeBrandMediaReportResponse {
   TotalCount?: number;
   /** 按天计算的每天文章数 */
   DateCountSet?: DateCount[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -212,7 +212,7 @@ declare interface DescribeBrandNegCommentsResponse {
   BrandCommentSet?: CommentInfo[];
   /** 总的差评个数 */
   TotalComments?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -234,7 +234,7 @@ declare interface DescribeBrandPosCommentsResponse {
   BrandCommentSet?: CommentInfo[];
   /** 总的好评个数 */
   TotalComments?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -262,7 +262,7 @@ declare interface DescribeBrandSocialOpinionResponse {
   AdverseCount?: number;
   /** 文章列表详情 */
   ArticleSet?: BrandReportArticle[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -280,7 +280,7 @@ declare interface DescribeBrandSocialReportResponse {
   TotalCount?: number;
   /** 按天计算的统计数据 */
   DateCountSet?: DateCount[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -310,7 +310,7 @@ declare interface DescribeIndustryNewsResponse {
   NewsSet?: IndustryNews[];
   /** 按天统计的数量列表 */
   DateCountSet?: DateCount[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -330,29 +330,29 @@ declare interface DescribeUserPortraitResponse {
   Movie?: MoviePortraitInfo;
   /** 明星喜好画像 */
   Star?: StarPortraitInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface Tbm {
   (): Versions;
-  /** {@link DescribeBrandCommentCount 获取品牌好差评数}({@link DescribeBrandCommentCountRequest 请求参数}): {@link DescribeBrandCommentCountResponse 返回参数} */
+  /** 获取品牌好差评数 {@link DescribeBrandCommentCountRequest} {@link DescribeBrandCommentCountResponse} */
   DescribeBrandCommentCount(data: DescribeBrandCommentCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBrandCommentCountResponse>;
-  /** {@link DescribeBrandExposure 获取品牌总热度}({@link DescribeBrandExposureRequest 请求参数}): {@link DescribeBrandExposureResponse 返回参数} */
+  /** 获取品牌总热度 {@link DescribeBrandExposureRequest} {@link DescribeBrandExposureResponse} */
   DescribeBrandExposure(data: DescribeBrandExposureRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBrandExposureResponse>;
-  /** {@link DescribeBrandMediaReport 获取品牌媒体报道数}({@link DescribeBrandMediaReportRequest 请求参数}): {@link DescribeBrandMediaReportResponse 返回参数} */
+  /** 获取品牌媒体报道数 {@link DescribeBrandMediaReportRequest} {@link DescribeBrandMediaReportResponse} */
   DescribeBrandMediaReport(data: DescribeBrandMediaReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBrandMediaReportResponse>;
-  /** {@link DescribeBrandNegComments 获取品牌用户差评列表}({@link DescribeBrandNegCommentsRequest 请求参数}): {@link DescribeBrandNegCommentsResponse 返回参数} */
+  /** 获取品牌用户差评列表 {@link DescribeBrandNegCommentsRequest} {@link DescribeBrandNegCommentsResponse} */
   DescribeBrandNegComments(data: DescribeBrandNegCommentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBrandNegCommentsResponse>;
-  /** {@link DescribeBrandPosComments 获取品牌用户好评列表}({@link DescribeBrandPosCommentsRequest 请求参数}): {@link DescribeBrandPosCommentsResponse 返回参数} */
+  /** 获取品牌用户好评列表 {@link DescribeBrandPosCommentsRequest} {@link DescribeBrandPosCommentsResponse} */
   DescribeBrandPosComments(data: DescribeBrandPosCommentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBrandPosCommentsResponse>;
-  /** {@link DescribeBrandSocialOpinion 获取品牌社交渠道观点}({@link DescribeBrandSocialOpinionRequest 请求参数}): {@link DescribeBrandSocialOpinionResponse 返回参数} */
+  /** 获取品牌社交渠道观点 {@link DescribeBrandSocialOpinionRequest} {@link DescribeBrandSocialOpinionResponse} */
   DescribeBrandSocialOpinion(data: DescribeBrandSocialOpinionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBrandSocialOpinionResponse>;
-  /** {@link DescribeBrandSocialReport 获取品牌社交渠道提及数}({@link DescribeBrandSocialReportRequest 请求参数}): {@link DescribeBrandSocialReportResponse 返回参数} */
+  /** 获取品牌社交渠道提及数 {@link DescribeBrandSocialReportRequest} {@link DescribeBrandSocialReportResponse} */
   DescribeBrandSocialReport(data: DescribeBrandSocialReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBrandSocialReportResponse>;
-  /** {@link DescribeIndustryNews 获取定制任务媒体报道列表}({@link DescribeIndustryNewsRequest 请求参数}): {@link DescribeIndustryNewsResponse 返回参数} */
+  /** 获取定制任务媒体报道列表 {@link DescribeIndustryNewsRequest} {@link DescribeIndustryNewsResponse} */
   DescribeIndustryNews(data: DescribeIndustryNewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndustryNewsResponse>;
-  /** {@link DescribeUserPortrait 获取品牌画像结果}({@link DescribeUserPortraitRequest 请求参数}): {@link DescribeUserPortraitResponse 返回参数} */
+  /** 获取品牌画像结果 {@link DescribeUserPortraitRequest} {@link DescribeUserPortraitResponse} */
   DescribeUserPortrait(data: DescribeUserPortraitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserPortraitResponse>;
 }
 

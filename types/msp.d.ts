@@ -82,7 +82,7 @@ declare interface DeregisterMigrationTaskRequest {
 }
 
 declare interface DeregisterMigrationTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -94,7 +94,7 @@ declare interface DescribeMigrationTaskRequest {
 declare interface DescribeMigrationTaskResponse {
   /** 迁移详情列表 */
   TaskStatus?: TaskStatus[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -110,7 +110,7 @@ declare interface ListMigrationProjectResponse {
   Projects?: Project[];
   /** 项目总数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -128,7 +128,7 @@ declare interface ListMigrationTaskResponse {
   TotalCount?: number;
   /** 迁移任务列表 */
   Tasks?: Task[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -140,7 +140,7 @@ declare interface ModifyMigrationTaskBelongToProjectRequest {
 }
 
 declare interface ModifyMigrationTaskBelongToProjectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -152,7 +152,7 @@ declare interface ModifyMigrationTaskStatusRequest {
 }
 
 declare interface ModifyMigrationTaskStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -186,26 +186,26 @@ declare interface RegisterMigrationTaskRequest {
 declare interface RegisterMigrationTaskResponse {
   /** 任务ID */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Msp 迁移服务平台} */
 declare interface Msp {
   (): Versions;
-  /** {@link DeregisterMigrationTask 取消注册迁移任务}({@link DeregisterMigrationTaskRequest 请求参数}): {@link DeregisterMigrationTaskResponse 返回参数} */
+  /** 取消注册迁移任务 {@link DeregisterMigrationTaskRequest} {@link DeregisterMigrationTaskResponse} */
   DeregisterMigrationTask(data: DeregisterMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterMigrationTaskResponse>;
-  /** {@link DescribeMigrationTask 获取指定迁移任务详情}({@link DescribeMigrationTaskRequest 请求参数}): {@link DescribeMigrationTaskResponse 返回参数} */
+  /** 获取指定迁移任务详情 {@link DescribeMigrationTaskRequest} {@link DescribeMigrationTaskResponse} */
   DescribeMigrationTask(data: DescribeMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationTaskResponse>;
-  /** {@link ListMigrationProject 获取迁移项目名称列表}({@link ListMigrationProjectRequest 请求参数}): {@link ListMigrationProjectResponse 返回参数} */
+  /** 获取迁移项目名称列表 {@link ListMigrationProjectRequest} {@link ListMigrationProjectResponse} */
   ListMigrationProject(data?: ListMigrationProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ListMigrationProjectResponse>;
-  /** {@link ListMigrationTask 获取迁移任务列表}({@link ListMigrationTaskRequest 请求参数}): {@link ListMigrationTaskResponse 返回参数} */
+  /** 获取迁移任务列表 {@link ListMigrationTaskRequest} {@link ListMigrationTaskResponse} */
   ListMigrationTask(data?: ListMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ListMigrationTaskResponse>;
-  /** {@link ModifyMigrationTaskBelongToProject 更改迁移任务所属项目}({@link ModifyMigrationTaskBelongToProjectRequest 请求参数}): {@link ModifyMigrationTaskBelongToProjectResponse 返回参数} */
+  /** 更改迁移任务所属项目 {@link ModifyMigrationTaskBelongToProjectRequest} {@link ModifyMigrationTaskBelongToProjectResponse} */
   ModifyMigrationTaskBelongToProject(data: ModifyMigrationTaskBelongToProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrationTaskBelongToProjectResponse>;
-  /** {@link ModifyMigrationTaskStatus 更新迁移任务状态}({@link ModifyMigrationTaskStatusRequest 请求参数}): {@link ModifyMigrationTaskStatusResponse 返回参数} */
+  /** 更新迁移任务状态 {@link ModifyMigrationTaskStatusRequest} {@link ModifyMigrationTaskStatusResponse} */
   ModifyMigrationTaskStatus(data: ModifyMigrationTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrationTaskStatusResponse>;
-  /** {@link RegisterMigrationTask 注册迁移任务}({@link RegisterMigrationTaskRequest 请求参数}): {@link RegisterMigrationTaskResponse 返回参数} */
+  /** 注册迁移任务 {@link RegisterMigrationTaskRequest} {@link RegisterMigrationTaskResponse} */
   RegisterMigrationTask(data: RegisterMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterMigrationTaskResponse>;
 }
 

@@ -1154,7 +1154,7 @@ declare interface AddUsersForUserManagerResponse {
   SuccessUserList: string[] | null;
   /** 添加失败的用户列表 */
   FailedUserList: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1204,7 +1204,7 @@ declare interface CreateClusterRequest {
 declare interface CreateClusterResponse {
   /** 实例ID */
   InstanceId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1278,7 +1278,7 @@ declare interface CreateInstanceRequest {
 declare interface CreateInstanceResponse {
   /** 实例ID */
   InstanceId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1290,7 +1290,7 @@ declare interface DeleteUserManagerUserListRequest {
 }
 
 declare interface DeleteUserManagerUserListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1322,7 +1322,7 @@ declare interface DescribeClusterNodesResponse {
   TagKeys: string[] | null;
   /** 资源类型列表 */
   HardwareResourceTypeList: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1340,7 +1340,7 @@ declare interface DescribeCvmQuotaResponse {
   SpotPaidQuotaSet: QuotaEntity[] | null;
   /** eks配额 */
   EksQuotaSet: PodSaleSpec[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1380,7 +1380,7 @@ declare interface DescribeEmrApplicationStaticsResponse {
   Users: string[];
   /** 可选择的作业类型 */
   ApplicationTypes: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1396,7 +1396,7 @@ declare interface DescribeInstanceRenewNodesResponse {
   NodeList: RenewInstancesInfo[] | null;
   /** 用户所有的标签键列表 */
   MetaInfo: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1420,7 +1420,7 @@ declare interface DescribeInstancesListResponse {
   TotalCnt: number;
   /** 集群实例列表 */
   InstancesList: EmrListInstance[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1448,7 +1448,7 @@ declare interface DescribeInstancesResponse {
   ClusterList: ClusterInstancesInfo[] | null;
   /** 实例关联的标签键列表。 */
   TagKeys: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1462,7 +1462,7 @@ declare interface DescribeJobFlowResponse {
   State: string;
   /** 流程任务步骤结果。 */
   Details: JobResult[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1480,7 +1480,7 @@ declare interface DescribeResourceScheduleResponse {
   FSInfo: string;
   /** 容量调度器的信息 */
   CSInfo: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1502,7 +1502,7 @@ declare interface DescribeUsersForUserManagerResponse {
   TotalCnt: number;
   /** 用户信息列表 */
   UserManagerUserList: UserManagerUserBriefInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1530,7 +1530,7 @@ declare interface InquirePriceRenewEmrResponse {
   TimeUnit: string | null;
   /** 实例续费的时长。 */
   TimeSpan: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1580,7 +1580,7 @@ declare interface InquiryPriceCreateInstanceResponse {
   TimeUnit: string | null;
   /** 购买实例的时长。 */
   TimeSpan: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1610,7 +1610,7 @@ declare interface InquiryPriceRenewInstanceResponse {
   TimeUnit: string | null;
   /** 实例续费的时长。 */
   TimeSpan: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1646,7 +1646,7 @@ declare interface InquiryPriceScaleOutInstanceResponse {
   Unit: string | null;
   /** 询价的节点规格。 */
   PriceSpec: PriceResource | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1678,7 +1678,7 @@ declare interface InquiryPriceUpdateInstanceResponse {
   TimeSpan: number | null;
   /** 价格详情 */
   PriceDetail: PriceDetail[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1694,7 +1694,7 @@ declare interface ModifyResourcePoolsResponse {
   IsDraft: boolean;
   /** 扩展字段，暂时没用 */
   ErrorMsg: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1714,7 +1714,7 @@ declare interface ModifyResourceScheduleConfigResponse {
   ErrorMsg: string | null;
   /** 返回数据 */
   Data: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1728,7 +1728,7 @@ declare interface ModifyResourceSchedulerRequest {
 }
 
 declare interface ModifyResourceSchedulerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1766,7 +1766,7 @@ declare interface RunJobFlowRequest {
 declare interface RunJobFlowResponse {
   /** 作业流程ID。 */
   JobFlowId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1818,7 +1818,7 @@ declare interface ScaleOutClusterResponse {
   ClientToken: string | null;
   /** 扩容流程ID。 */
   FlowId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1888,7 +1888,7 @@ declare interface ScaleOutInstanceResponse {
   FlowId: number | null;
   /** 大订单号。 */
   BillId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1898,7 +1898,7 @@ declare interface SyncPodStateRequest {
 }
 
 declare interface SyncPodStateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1910,7 +1910,7 @@ declare interface TerminateInstanceRequest {
 }
 
 declare interface TerminateInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1922,66 +1922,66 @@ declare interface TerminateTasksRequest {
 }
 
 declare interface TerminateTasksResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Emr 弹性 MapReduce} */
 declare interface Emr {
   (): Versions;
-  /** {@link AddUsersForUserManager 新增用户列表}({@link AddUsersForUserManagerRequest 请求参数}): {@link AddUsersForUserManagerResponse 返回参数} */
+  /** 新增用户列表 {@link AddUsersForUserManagerRequest} {@link AddUsersForUserManagerResponse} */
   AddUsersForUserManager(data: AddUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<AddUsersForUserManagerResponse>;
-  /** {@link CreateCluster 创建EMR集群实例}({@link CreateClusterRequest 请求参数}): {@link CreateClusterResponse 返回参数} */
+  /** 创建EMR集群实例 {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
-  /** {@link CreateInstance 创建EMR实例}({@link CreateInstanceRequest 请求参数}): {@link CreateInstanceResponse 返回参数} */
+  /** 创建EMR实例 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
-  /** {@link DeleteUserManagerUserList 删除用户列表}({@link DeleteUserManagerUserListRequest 请求参数}): {@link DeleteUserManagerUserListResponse 返回参数} */
+  /** 删除用户列表 {@link DeleteUserManagerUserListRequest} {@link DeleteUserManagerUserListResponse} */
   DeleteUserManagerUserList(data: DeleteUserManagerUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserManagerUserListResponse>;
-  /** {@link DescribeClusterNodes 查询集群节点信息}({@link DescribeClusterNodesRequest 请求参数}): {@link DescribeClusterNodesResponse 返回参数} */
+  /** 查询集群节点信息 {@link DescribeClusterNodesRequest} {@link DescribeClusterNodesResponse} */
   DescribeClusterNodes(data: DescribeClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNodesResponse>;
-  /** {@link DescribeCvmQuota 查询账户的CVM配额}({@link DescribeCvmQuotaRequest 请求参数}): {@link DescribeCvmQuotaResponse 返回参数} */
+  /** 查询账户的CVM配额 {@link DescribeCvmQuotaRequest} {@link DescribeCvmQuotaResponse} */
   DescribeCvmQuota(data: DescribeCvmQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCvmQuotaResponse>;
-  /** {@link DescribeEmrApplicationStatics 查询YARN的任务统计信息}({@link DescribeEmrApplicationStaticsRequest 请求参数}): {@link DescribeEmrApplicationStaticsResponse 返回参数} */
+  /** 查询YARN的任务统计信息 {@link DescribeEmrApplicationStaticsRequest} {@link DescribeEmrApplicationStaticsResponse} */
   DescribeEmrApplicationStatics(data: DescribeEmrApplicationStaticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmrApplicationStaticsResponse>;
-  /** {@link DescribeInstanceRenewNodes 查询待续费节点信息}({@link DescribeInstanceRenewNodesRequest 请求参数}): {@link DescribeInstanceRenewNodesResponse 返回参数} */
+  /** 查询待续费节点信息 {@link DescribeInstanceRenewNodesRequest} {@link DescribeInstanceRenewNodesResponse} */
   DescribeInstanceRenewNodes(data: DescribeInstanceRenewNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceRenewNodesResponse>;
-  /** {@link DescribeInstances 查询集群实例信息}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
+  /** 查询集群实例信息 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** {@link DescribeInstancesList 查询集群列表}({@link DescribeInstancesListRequest 请求参数}): {@link DescribeInstancesListResponse 返回参数} */
+  /** 查询集群列表 {@link DescribeInstancesListRequest} {@link DescribeInstancesListResponse} */
   DescribeInstancesList(data: DescribeInstancesListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesListResponse>;
-  /** {@link DescribeJobFlow 查询流程作业状态}({@link DescribeJobFlowRequest 请求参数}): {@link DescribeJobFlowResponse 返回参数} */
+  /** 查询流程作业状态 {@link DescribeJobFlowRequest} {@link DescribeJobFlowResponse} */
   DescribeJobFlow(data: DescribeJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobFlowResponse>;
-  /** {@link DescribeResourceSchedule 查询YARN资源调度数据信息}({@link DescribeResourceScheduleRequest 请求参数}): {@link DescribeResourceScheduleResponse 返回参数} */
+  /** 查询YARN资源调度数据信息 {@link DescribeResourceScheduleRequest} {@link DescribeResourceScheduleResponse} */
   DescribeResourceSchedule(data: DescribeResourceScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceScheduleResponse>;
-  /** {@link DescribeUsersForUserManager 查询用户列表}({@link DescribeUsersForUserManagerRequest 请求参数}): {@link DescribeUsersForUserManagerResponse 返回参数} */
+  /** 查询用户列表 {@link DescribeUsersForUserManagerRequest} {@link DescribeUsersForUserManagerResponse} */
   DescribeUsersForUserManager(data: DescribeUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersForUserManagerResponse>;
-  /** {@link InquirePriceRenewEmr 集群续费询价}({@link InquirePriceRenewEmrRequest 请求参数}): {@link InquirePriceRenewEmrResponse 返回参数} */
+  /** 集群续费询价 {@link InquirePriceRenewEmrRequest} {@link InquirePriceRenewEmrResponse} */
   InquirePriceRenewEmr(data: InquirePriceRenewEmrRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewEmrResponse>;
-  /** {@link InquiryPriceCreateInstance 创建实例询价}({@link InquiryPriceCreateInstanceRequest 请求参数}): {@link InquiryPriceCreateInstanceResponse 返回参数} */
+  /** 创建实例询价 {@link InquiryPriceCreateInstanceRequest} {@link InquiryPriceCreateInstanceResponse} */
   InquiryPriceCreateInstance(data: InquiryPriceCreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateInstanceResponse>;
-  /** {@link InquiryPriceRenewInstance 续费询价}({@link InquiryPriceRenewInstanceRequest 请求参数}): {@link InquiryPriceRenewInstanceResponse 返回参数} */
+  /** 续费询价 {@link InquiryPriceRenewInstanceRequest} {@link InquiryPriceRenewInstanceResponse} */
   InquiryPriceRenewInstance(data: InquiryPriceRenewInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewInstanceResponse>;
-  /** {@link InquiryPriceScaleOutInstance 扩容询价}({@link InquiryPriceScaleOutInstanceRequest 请求参数}): {@link InquiryPriceScaleOutInstanceResponse 返回参数} */
+  /** 扩容询价 {@link InquiryPriceScaleOutInstanceRequest} {@link InquiryPriceScaleOutInstanceResponse} */
   InquiryPriceScaleOutInstance(data: InquiryPriceScaleOutInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceScaleOutInstanceResponse>;
-  /** {@link InquiryPriceUpdateInstance 变配询价}({@link InquiryPriceUpdateInstanceRequest 请求参数}): {@link InquiryPriceUpdateInstanceResponse 返回参数} */
+  /** 变配询价 {@link InquiryPriceUpdateInstanceRequest} {@link InquiryPriceUpdateInstanceResponse} */
   InquiryPriceUpdateInstance(data: InquiryPriceUpdateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceUpdateInstanceResponse>;
-  /** {@link ModifyResourcePools 刷新YARN的动态资源池}({@link ModifyResourcePoolsRequest 请求参数}): {@link ModifyResourcePoolsResponse 返回参数} */
+  /** 刷新YARN的动态资源池 {@link ModifyResourcePoolsRequest} {@link ModifyResourcePoolsResponse} */
   ModifyResourcePools(data: ModifyResourcePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePoolsResponse>;
-  /** {@link ModifyResourceScheduleConfig 修改YARN资源调度的资源配置}({@link ModifyResourceScheduleConfigRequest 请求参数}): {@link ModifyResourceScheduleConfigResponse 返回参数} */
+  /** 修改YARN资源调度的资源配置 {@link ModifyResourceScheduleConfigRequest} {@link ModifyResourceScheduleConfigResponse} */
   ModifyResourceScheduleConfig(data: ModifyResourceScheduleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceScheduleConfigResponse>;
-  /** {@link ModifyResourceScheduler 修改YARN的资源调度器}({@link ModifyResourceSchedulerRequest 请求参数}): {@link ModifyResourceSchedulerResponse 返回参数} */
+  /** 修改YARN的资源调度器 {@link ModifyResourceSchedulerRequest} {@link ModifyResourceSchedulerResponse} */
   ModifyResourceScheduler(data: ModifyResourceSchedulerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceSchedulerResponse>;
-  /** {@link RunJobFlow 创建流程作业}({@link RunJobFlowRequest 请求参数}): {@link RunJobFlowResponse 返回参数} */
+  /** 创建流程作业 {@link RunJobFlowRequest} {@link RunJobFlowResponse} */
   RunJobFlow(data: RunJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<RunJobFlowResponse>;
-  /** {@link ScaleOutCluster 扩容集群节点}({@link ScaleOutClusterRequest 请求参数}): {@link ScaleOutClusterResponse 返回参数} */
+  /** 扩容集群节点 {@link ScaleOutClusterRequest} {@link ScaleOutClusterResponse} */
   ScaleOutCluster(data: ScaleOutClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutClusterResponse>;
-  /** {@link ScaleOutInstance 实例扩容}({@link ScaleOutInstanceRequest 请求参数}): {@link ScaleOutInstanceResponse 返回参数} */
+  /** 实例扩容 {@link ScaleOutInstanceRequest} {@link ScaleOutInstanceResponse} */
   ScaleOutInstance(data: ScaleOutInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutInstanceResponse>;
-  /** {@link SyncPodState EMR同步POD状态}({@link SyncPodStateRequest 请求参数}): {@link SyncPodStateResponse 返回参数} */
+  /** EMR同步POD状态 {@link SyncPodStateRequest} {@link SyncPodStateResponse} */
   SyncPodState(data: SyncPodStateRequest, config?: AxiosRequestConfig): AxiosPromise<SyncPodStateResponse>;
-  /** {@link TerminateInstance 销毁EMR实例}({@link TerminateInstanceRequest 请求参数}): {@link TerminateInstanceResponse 返回参数} */
+  /** 销毁EMR实例 {@link TerminateInstanceRequest} {@link TerminateInstanceResponse} */
   TerminateInstance(data: TerminateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstanceResponse>;
-  /** {@link TerminateTasks 缩容Task节点}({@link TerminateTasksRequest 请求参数}): {@link TerminateTasksResponse 返回参数} */
+  /** 缩容Task节点 {@link TerminateTasksRequest} {@link TerminateTasksResponse} */
   TerminateTasks(data: TerminateTasksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateTasksResponse>;
 }
 

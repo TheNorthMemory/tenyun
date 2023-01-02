@@ -1442,7 +1442,7 @@ declare interface CreateBatchModelAccTasksRequest {
 declare interface CreateBatchModelAccTasksResponse {
   /** 模型优化任务ID列表 */
   ModelAccTaskIds: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1490,7 +1490,7 @@ declare interface CreateBatchTaskRequest {
 declare interface CreateBatchTaskResponse {
   /** 跑批任务ID */
   BatchTaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1522,7 +1522,7 @@ declare interface CreateDatasetRequest {
 declare interface CreateDatasetResponse {
   /** 数据集ID */
   DatasetId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1586,7 +1586,7 @@ declare interface CreateModelServiceRequest {
 declare interface CreateModelServiceResponse {
   /** 生成的模型服务 */
   Service?: Service | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1602,7 +1602,7 @@ declare interface CreateOptimizedModelResponse {
   ModelId: string | null;
   /** 模型版本ID */
   ModelVersionId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1664,7 +1664,7 @@ declare interface CreateTrainingModelResponse {
   Id: string;
   /** 模型版本ID */
   TrainingModelVersionId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1718,7 +1718,7 @@ declare interface CreateTrainingTaskRequest {
 declare interface CreateTrainingTaskResponse {
   /** 训练任务ID */
   Id: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1728,7 +1728,7 @@ declare interface DeleteBatchTaskRequest {
 }
 
 declare interface DeleteBatchTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1742,7 +1742,7 @@ declare interface DeleteDatasetRequest {
 declare interface DeleteDatasetResponse {
   /** 删除的datasetId */
   DatasetId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1752,7 +1752,7 @@ declare interface DeleteModelAccelerateTaskRequest {
 }
 
 declare interface DeleteModelAccelerateTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1762,7 +1762,7 @@ declare interface DeleteModelServiceGroupRequest {
 }
 
 declare interface DeleteModelServiceGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1772,7 +1772,7 @@ declare interface DeleteModelServiceRequest {
 }
 
 declare interface DeleteModelServiceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1786,7 +1786,7 @@ declare interface DeleteTrainingModelRequest {
 }
 
 declare interface DeleteTrainingModelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1798,7 +1798,7 @@ declare interface DeleteTrainingModelVersionRequest {
 }
 
 declare interface DeleteTrainingModelVersionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1808,7 +1808,7 @@ declare interface DeleteTrainingTaskRequest {
 }
 
 declare interface DeleteTrainingTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1830,7 +1830,7 @@ declare interface DescribeAPIConfigsResponse {
   TotalCount: number | null;
   /** 接口详情 */
   Details: APIConfigDetail[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1842,7 +1842,7 @@ declare interface DescribeBatchTaskInstancesRequest {
 declare interface DescribeBatchTaskInstancesResponse {
   /** 实例集 */
   BatchInstances: BatchTaskInstance[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1854,7 +1854,7 @@ declare interface DescribeBatchTaskRequest {
 declare interface DescribeBatchTaskResponse {
   /** 跑批任务详情 */
   BatchTaskDetail: BatchTaskDetail | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1878,7 +1878,7 @@ declare interface DescribeBatchTasksResponse {
   TotalCount: number;
   /** 任务集 */
   BatchTaskSet: BatchTaskSetItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1904,7 +1904,7 @@ declare interface DescribeBillingResourceGroupsResponse {
   TotalCount: number;
   /** 资源组详情 */
   ResourceGroupSet: ResourceGroup[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1916,7 +1916,7 @@ declare interface DescribeBillingSpecsPriceRequest {
 declare interface DescribeBillingSpecsPriceResponse {
   /** 计费项价格，支持批量返回 */
   SpecsPrice: SpecPrice[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1932,7 +1932,7 @@ declare interface DescribeBillingSpecsRequest {
 declare interface DescribeBillingSpecsResponse {
   /** 计费项列表 */
   Specs: Spec[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1954,7 +1954,7 @@ declare interface DescribeDatasetDetailStructuredResponse {
   RowItems: RowItem[] | null;
   /** 文本内容 */
   RowTexts: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1986,7 +1986,7 @@ declare interface DescribeDatasetDetailUnstructuredResponse {
   FilterLabelList: FilterLabelInfo[] | null;
   /** 数据文本行，默认返回前1000行 */
   RowTexts: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2014,7 +2014,7 @@ declare interface DescribeDatasetsResponse {
   DatasetGroups: DatasetGroup[] | null;
   /** 数据集ID总量 */
   DatasetIdNums: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2024,7 +2024,7 @@ declare interface DescribeInferTemplatesRequest {
 declare interface DescribeInferTemplatesResponse {
   /** 模板列表 */
   FrameworkTemplates: InferTemplateGroup[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2038,7 +2038,7 @@ declare interface DescribeLatestTrainingMetricsResponse {
   TaskId: string | null;
   /** 最近一次上报的训练指标.每个Metric中只有一个点的数据, 即len(Values) = len(Timestamps) = 1 */
   Metrics: TrainingMetric[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2068,7 +2068,7 @@ declare interface DescribeLogsResponse {
   Context: string | null;
   /** 日志数组 */
   Content: LogIdentity[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2078,7 +2078,7 @@ declare interface DescribeModelAccEngineVersionsRequest {
 declare interface DescribeModelAccEngineVersionsResponse {
   /** 模型加速版本列表 */
   ModelAccEngineVersions: ModelAccEngineVersion[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2096,7 +2096,7 @@ declare interface DescribeModelAccelerateTaskResponse {
   ModelAccStartTime: string | null;
   /** 模型加速任务结束时间 */
   ModelAccEndTime: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2120,7 +2120,7 @@ declare interface DescribeModelAccelerateTasksResponse {
   ModelAccelerateTasks: ModelAccelerateTask[] | null;
   /** 任务总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2134,7 +2134,7 @@ declare interface DescribeModelServiceCallInfoResponse {
   ServiceCallInfo: ServiceCallInfo | null;
   /** 升级网关调用信息 */
   InferGatewayCallInfo: InferGatewayCallInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2146,7 +2146,7 @@ declare interface DescribeModelServiceGroupRequest {
 declare interface DescribeModelServiceGroupResponse {
   /** 服务组信息 */
   ServiceGroup: ServiceGroup | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2170,7 +2170,7 @@ declare interface DescribeModelServiceGroupsResponse {
   TotalCount: number | null;
   /** 服务组信息 */
   ServiceGroups: ServiceGroup[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2184,7 +2184,7 @@ declare interface DescribeModelServiceHistoryResponse {
   TotalCount: number | null;
   /** 服务版本 */
   ServiceHistory: ServiceHistory[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2198,7 +2198,7 @@ declare interface DescribeModelServiceHotUpdatedRequest {
 }
 
 declare interface DescribeModelServiceHotUpdatedResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2210,7 +2210,7 @@ declare interface DescribeModelServiceRequest {
 declare interface DescribeModelServiceResponse {
   /** 服务信息 */
   Service: Service;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2234,7 +2234,7 @@ declare interface DescribeModelServicesResponse {
   TotalCount: number | null;
   /** 无 */
   Services: Service[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2244,7 +2244,7 @@ declare interface DescribeTrainingFrameworksRequest {
 declare interface DescribeTrainingFrameworksResponse {
   /** 框架信息列表 */
   FrameworkInfos: FrameworkInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2258,7 +2258,7 @@ declare interface DescribeTrainingMetricsResponse {
   TaskId: string | null;
   /** 训练指标数据 */
   Data: CustomTrainingData[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2270,7 +2270,7 @@ declare interface DescribeTrainingModelVersionRequest {
 declare interface DescribeTrainingModelVersionResponse {
   /** 模型版本 */
   TrainingModelVersion: TrainingModelVersionDTO;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2284,7 +2284,7 @@ declare interface DescribeTrainingModelVersionsRequest {
 declare interface DescribeTrainingModelVersionsResponse {
   /** 模型版本列表 */
   TrainingModelVersions: TrainingModelVersionDTO[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2308,7 +2308,7 @@ declare interface DescribeTrainingModelsResponse {
   TrainingModels: TrainingModelDTO[];
   /** 模型总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2322,7 +2322,7 @@ declare interface DescribeTrainingTaskPodsResponse {
   PodNames: string[];
   /** 数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2334,7 +2334,7 @@ declare interface DescribeTrainingTaskRequest {
 declare interface DescribeTrainingTaskResponse {
   /** 训练任务详情 */
   TrainingTaskDetail: TrainingTaskDetail;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2358,7 +2358,7 @@ declare interface DescribeTrainingTasksResponse {
   TrainingTaskSet: TrainingTaskSetItem[];
   /** 数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2374,7 +2374,7 @@ declare interface ModifyModelServicePartialConfigRequest {
 declare interface ModifyModelServicePartialConfigResponse {
   /** 被修改后的服务配置 */
   Service: Service;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2424,7 +2424,7 @@ declare interface ModifyModelServiceRequest {
 declare interface ModifyModelServiceResponse {
   /** 生成的模型服务 */
   Service: Service | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2438,7 +2438,7 @@ declare interface ModifyServiceGroupWeightsRequest {
 declare interface ModifyServiceGroupWeightsResponse {
   /** 更新权重后的服务组信息 */
   ServiceGroup: ServiceGroup | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2448,7 +2448,7 @@ declare interface PushTrainingMetricsRequest {
 }
 
 declare interface PushTrainingMetricsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2494,7 +2494,7 @@ declare interface RestartModelAccelerateTaskRequest {
 }
 
 declare interface RestartModelAccelerateTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2504,7 +2504,7 @@ declare interface StartTrainingTaskRequest {
 }
 
 declare interface StartTrainingTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2514,7 +2514,7 @@ declare interface StopBatchTaskRequest {
 }
 
 declare interface StopBatchTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2528,7 +2528,7 @@ declare interface StopModelAccelerateTaskResponse {
   ModelAccTaskId: string | null;
   /** 异步任务ID */
   AsyncTaskId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2538,7 +2538,7 @@ declare interface StopTrainingTaskRequest {
 }
 
 declare interface StopTrainingTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2789,7 +2789,7 @@ declare namespace V20191022 {
   interface CreateCodeRepositoryResponse {
     /** 存储库名称 */
     CodeRepositoryName?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2825,7 +2825,7 @@ declare namespace V20191022 {
   interface CreateNotebookInstanceResponse {
     /** Notebook实例名字 */
     NotebookInstanceName?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2841,7 +2841,7 @@ declare namespace V20191022 {
   interface CreateNotebookLifecycleScriptResponse {
     /** 生命周期脚本名称 */
     NotebookLifecycleScriptsName?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2855,7 +2855,7 @@ declare namespace V20191022 {
   interface CreatePresignedNotebookInstanceUrlResponse {
     /** 授权url */
     AuthorizedUrl?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2887,7 +2887,7 @@ declare namespace V20191022 {
   interface CreateTrainingJobResponse {
     /** 训练任务名称 */
     TrainingJobName?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2899,7 +2899,7 @@ declare namespace V20191022 {
   interface DeleteCodeRepositoryResponse {
     /** 存储库名称 */
     CodeRepositoryName?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2909,7 +2909,7 @@ declare namespace V20191022 {
   }
 
   interface DeleteNotebookInstanceResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2921,7 +2921,7 @@ declare namespace V20191022 {
   }
 
   interface DeleteNotebookLifecycleScriptResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2941,7 +2941,7 @@ declare namespace V20191022 {
     TotalCount?: number;
     /** 存储库列表 */
     CodeRepoSet?: CodeRepoSummary[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -2961,7 +2961,7 @@ declare namespace V20191022 {
     GitConfig?: GitConfig;
     /** 是否有Git凭证 */
     NoSecret?: boolean;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3013,7 +3013,7 @@ declare namespace V20191022 {
     StoppingCondition?: StoppingCondition | null;
     /** Cls配置 */
     ClsConfig?: ClsConfig | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3035,7 +3035,7 @@ declare namespace V20191022 {
     NotebookInstanceSet?: NotebookInstanceSummary[];
     /** Notebook实例总数目 */
     TotalCount?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3055,7 +3055,7 @@ declare namespace V20191022 {
     CreationTime?: string;
     /** 最后修改时间 */
     LastModifiedTime?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3075,7 +3075,7 @@ declare namespace V20191022 {
     NotebookLifecycleScriptsSet?: NotebookLifecycleScriptsSummary[];
     /** Notebook生命周期脚本总数量 */
     TotalCount?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3091,7 +3091,7 @@ declare namespace V20191022 {
     StorageOnlyBillingInstanceCnt?: number;
     /** 计算和存储都计费的实例总数 */
     ComputingBillingInstanceCnt?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3139,7 +3139,7 @@ declare namespace V20191022 {
     LogUrl?: string | null;
     /** 训练任务实例ID */
     InstanceId?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3165,7 +3165,7 @@ declare namespace V20191022 {
     TrainingJobSet?: TrainingJobSummary[];
     /** 训练任务总数目 */
     TotalCount?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3179,7 +3179,7 @@ declare namespace V20191022 {
   }
 
   interface StartNotebookInstanceResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3189,7 +3189,7 @@ declare namespace V20191022 {
   }
 
   interface StopNotebookInstanceResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3199,7 +3199,7 @@ declare namespace V20191022 {
   }
 
   interface StopTrainingJobResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3213,7 +3213,7 @@ declare namespace V20191022 {
   interface UpdateCodeRepositoryResponse {
     /** 存储库名称 */
     CodeRepositoryName?: string;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3251,7 +3251,7 @@ declare namespace V20191022 {
   }
 
   interface UpdateNotebookInstanceResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -3265,7 +3265,7 @@ declare namespace V20191022 {
   }
 
   interface UpdateNotebookLifecycleScriptResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -3273,161 +3273,161 @@ declare namespace V20191022 {
 /** {@link Tione 腾讯云 TI 平台 TI-ONE} */
 declare interface Tione {
   (): Versions;
-  /** {@link CreateBatchModelAccTasks 批量创建模型加速任务}({@link CreateBatchModelAccTasksRequest 请求参数}): {@link CreateBatchModelAccTasksResponse 返回参数} */
+  /** 批量创建模型加速任务 {@link CreateBatchModelAccTasksRequest} {@link CreateBatchModelAccTasksResponse} */
   CreateBatchModelAccTasks(data: CreateBatchModelAccTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchModelAccTasksResponse>;
-  /** {@link CreateBatchTask 创建跑批任务}({@link CreateBatchTaskRequest 请求参数}): {@link CreateBatchTaskResponse 返回参数} */
+  /** 创建跑批任务 {@link CreateBatchTaskRequest} {@link CreateBatchTaskResponse} */
   CreateBatchTask(data: CreateBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchTaskResponse>;
-  /** {@link CreateDataset 创建数据集}({@link CreateDatasetRequest 请求参数}): {@link CreateDatasetResponse 返回参数} */
+  /** 创建数据集 {@link CreateDatasetRequest} {@link CreateDatasetResponse} */
   CreateDataset(data: CreateDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatasetResponse>;
-  /** {@link CreateModelService 创建模型服务}({@link CreateModelServiceRequest 请求参数}): {@link CreateModelServiceResponse 返回参数} */
+  /** 创建模型服务 {@link CreateModelServiceRequest} {@link CreateModelServiceResponse} */
   CreateModelService(data: CreateModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelServiceResponse>;
-  /** {@link CreateOptimizedModel 保存优化模型}({@link CreateOptimizedModelRequest 请求参数}): {@link CreateOptimizedModelResponse 返回参数} */
+  /** 保存优化模型 {@link CreateOptimizedModelRequest} {@link CreateOptimizedModelResponse} */
   CreateOptimizedModel(data: CreateOptimizedModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOptimizedModelResponse>;
-  /** {@link CreateTrainingModel 导入模型}({@link CreateTrainingModelRequest 请求参数}): {@link CreateTrainingModelResponse 返回参数} */
+  /** 导入模型 {@link CreateTrainingModelRequest} {@link CreateTrainingModelResponse} */
   CreateTrainingModel(data: CreateTrainingModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingModelResponse>;
-  /** {@link CreateTrainingTask 创建模型训练任务}({@link CreateTrainingTaskRequest 请求参数}): {@link CreateTrainingTaskResponse 返回参数} */
+  /** 创建模型训练任务 {@link CreateTrainingTaskRequest} {@link CreateTrainingTaskResponse} */
   CreateTrainingTask(data: CreateTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingTaskResponse>;
-  /** {@link DeleteBatchTask 删除跑批任务}({@link DeleteBatchTaskRequest 请求参数}): {@link DeleteBatchTaskResponse 返回参数} */
+  /** 删除跑批任务 {@link DeleteBatchTaskRequest} {@link DeleteBatchTaskResponse} */
   DeleteBatchTask(data: DeleteBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBatchTaskResponse>;
-  /** {@link DeleteDataset 删除数据集}({@link DeleteDatasetRequest 请求参数}): {@link DeleteDatasetResponse 返回参数} */
+  /** 删除数据集 {@link DeleteDatasetRequest} {@link DeleteDatasetResponse} */
   DeleteDataset(data: DeleteDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatasetResponse>;
-  /** {@link DeleteModelAccelerateTask 删除模型加速任务}({@link DeleteModelAccelerateTaskRequest 请求参数}): {@link DeleteModelAccelerateTaskResponse 返回参数} */
+  /** 删除模型加速任务 {@link DeleteModelAccelerateTaskRequest} {@link DeleteModelAccelerateTaskResponse} */
   DeleteModelAccelerateTask(data: DeleteModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelAccelerateTaskResponse>;
-  /** {@link DeleteModelService 删除模型服务}({@link DeleteModelServiceRequest 请求参数}): {@link DeleteModelServiceResponse 返回参数} */
+  /** 删除模型服务 {@link DeleteModelServiceRequest} {@link DeleteModelServiceResponse} */
   DeleteModelService(data: DeleteModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelServiceResponse>;
-  /** {@link DeleteModelServiceGroup 删除模型服务组}({@link DeleteModelServiceGroupRequest 请求参数}): {@link DeleteModelServiceGroupResponse 返回参数} */
+  /** 删除模型服务组 {@link DeleteModelServiceGroupRequest} {@link DeleteModelServiceGroupResponse} */
   DeleteModelServiceGroup(data: DeleteModelServiceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelServiceGroupResponse>;
-  /** {@link DeleteTrainingModel 删除模型}({@link DeleteTrainingModelRequest 请求参数}): {@link DeleteTrainingModelResponse 返回参数} */
+  /** 删除模型 {@link DeleteTrainingModelRequest} {@link DeleteTrainingModelResponse} */
   DeleteTrainingModel(data: DeleteTrainingModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingModelResponse>;
-  /** {@link DeleteTrainingModelVersion 删除模型版本}({@link DeleteTrainingModelVersionRequest 请求参数}): {@link DeleteTrainingModelVersionResponse 返回参数} */
+  /** 删除模型版本 {@link DeleteTrainingModelVersionRequest} {@link DeleteTrainingModelVersionResponse} */
   DeleteTrainingModelVersion(data: DeleteTrainingModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingModelVersionResponse>;
-  /** {@link DeleteTrainingTask 删除训练任务}({@link DeleteTrainingTaskRequest 请求参数}): {@link DeleteTrainingTaskResponse 返回参数} */
+  /** 删除训练任务 {@link DeleteTrainingTaskRequest} {@link DeleteTrainingTaskResponse} */
   DeleteTrainingTask(data: DeleteTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingTaskResponse>;
-  /** {@link DescribeAPIConfigs 列举API}({@link DescribeAPIConfigsRequest 请求参数}): {@link DescribeAPIConfigsResponse 返回参数} */
+  /** 列举API {@link DescribeAPIConfigsRequest} {@link DescribeAPIConfigsResponse} */
   DescribeAPIConfigs(data?: DescribeAPIConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAPIConfigsResponse>;
-  /** {@link DescribeBatchTask 查询跑批任务}({@link DescribeBatchTaskRequest 请求参数}): {@link DescribeBatchTaskResponse 返回参数} */
+  /** 查询跑批任务 {@link DescribeBatchTaskRequest} {@link DescribeBatchTaskResponse} */
   DescribeBatchTask(data: DescribeBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskResponse>;
-  /** {@link DescribeBatchTaskInstances 跑批实例列表}({@link DescribeBatchTaskInstancesRequest 请求参数}): {@link DescribeBatchTaskInstancesResponse 返回参数} */
+  /** 跑批实例列表 {@link DescribeBatchTaskInstancesRequest} {@link DescribeBatchTaskInstancesResponse} */
   DescribeBatchTaskInstances(data: DescribeBatchTaskInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskInstancesResponse>;
-  /** {@link DescribeBatchTasks 跑批任务列表}({@link DescribeBatchTasksRequest 请求参数}): {@link DescribeBatchTasksResponse 返回参数} */
+  /** 跑批任务列表 {@link DescribeBatchTasksRequest} {@link DescribeBatchTasksResponse} */
   DescribeBatchTasks(data?: DescribeBatchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTasksResponse>;
-  /** {@link DescribeBillingResourceGroups 查询资源组详情}({@link DescribeBillingResourceGroupsRequest 请求参数}): {@link DescribeBillingResourceGroupsResponse 返回参数} */
+  /** 查询资源组详情 {@link DescribeBillingResourceGroupsRequest} {@link DescribeBillingResourceGroupsResponse} */
   DescribeBillingResourceGroups(data: DescribeBillingResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupsResponse>;
-  /** {@link DescribeBillingSpecs 查询计费项列表}({@link DescribeBillingSpecsRequest 请求参数}): {@link DescribeBillingSpecsResponse 返回参数} */
+  /** 查询计费项列表 {@link DescribeBillingSpecsRequest} {@link DescribeBillingSpecsResponse} */
   DescribeBillingSpecs(data: DescribeBillingSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingSpecsResponse>;
-  /** {@link DescribeBillingSpecsPrice 查询计费项价格}({@link DescribeBillingSpecsPriceRequest 请求参数}): {@link DescribeBillingSpecsPriceResponse 返回参数} */
+  /** 查询计费项价格 {@link DescribeBillingSpecsPriceRequest} {@link DescribeBillingSpecsPriceResponse} */
   DescribeBillingSpecsPrice(data: DescribeBillingSpecsPriceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingSpecsPriceResponse>;
-  /** {@link DescribeDatasetDetailStructured 查询结构化数据集详情}({@link DescribeDatasetDetailStructuredRequest 请求参数}): {@link DescribeDatasetDetailStructuredResponse 返回参数} */
+  /** 查询结构化数据集详情 {@link DescribeDatasetDetailStructuredRequest} {@link DescribeDatasetDetailStructuredResponse} */
   DescribeDatasetDetailStructured(data: DescribeDatasetDetailStructuredRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetDetailStructuredResponse>;
-  /** {@link DescribeDatasetDetailUnstructured 查询非结构化数据集详情}({@link DescribeDatasetDetailUnstructuredRequest 请求参数}): {@link DescribeDatasetDetailUnstructuredResponse 返回参数} */
+  /** 查询非结构化数据集详情 {@link DescribeDatasetDetailUnstructuredRequest} {@link DescribeDatasetDetailUnstructuredResponse} */
   DescribeDatasetDetailUnstructured(data?: DescribeDatasetDetailUnstructuredRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetDetailUnstructuredResponse>;
-  /** {@link DescribeDatasets 查询数据集列表}({@link DescribeDatasetsRequest 请求参数}): {@link DescribeDatasetsResponse 返回参数} */
+  /** 查询数据集列表 {@link DescribeDatasetsRequest} {@link DescribeDatasetsResponse} */
   DescribeDatasets(data?: DescribeDatasetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetsResponse>;
-  /** {@link DescribeInferTemplates 查询推理镜像模板}({@link DescribeInferTemplatesRequest 请求参数}): {@link DescribeInferTemplatesResponse 返回参数} */
+  /** 查询推理镜像模板 {@link DescribeInferTemplatesRequest} {@link DescribeInferTemplatesResponse} */
   DescribeInferTemplates(data?: DescribeInferTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferTemplatesResponse>;
-  /** {@link DescribeLatestTrainingMetrics 查询最近上报的训练自定义指标}({@link DescribeLatestTrainingMetricsRequest 请求参数}): {@link DescribeLatestTrainingMetricsResponse 返回参数} */
+  /** 查询最近上报的训练自定义指标 {@link DescribeLatestTrainingMetricsRequest} {@link DescribeLatestTrainingMetricsResponse} */
   DescribeLatestTrainingMetrics(data: DescribeLatestTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLatestTrainingMetricsResponse>;
-  /** {@link DescribeLogs 获取日志}({@link DescribeLogsRequest 请求参数}): {@link DescribeLogsResponse 返回参数} */
+  /** 获取日志 {@link DescribeLogsRequest} {@link DescribeLogsResponse} */
   DescribeLogs(data: DescribeLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsResponse>;
-  /** {@link DescribeModelAccEngineVersions 查询模型加速引擎版本列表}({@link DescribeModelAccEngineVersionsRequest 请求参数}): {@link DescribeModelAccEngineVersionsResponse 返回参数} */
+  /** 查询模型加速引擎版本列表 {@link DescribeModelAccEngineVersionsRequest} {@link DescribeModelAccEngineVersionsResponse} */
   DescribeModelAccEngineVersions(data?: DescribeModelAccEngineVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelAccEngineVersionsResponse>;
-  /** {@link DescribeModelAccelerateTask 查询模型优化任务详情}({@link DescribeModelAccelerateTaskRequest 请求参数}): {@link DescribeModelAccelerateTaskResponse 返回参数} */
+  /** 查询模型优化任务详情 {@link DescribeModelAccelerateTaskRequest} {@link DescribeModelAccelerateTaskResponse} */
   DescribeModelAccelerateTask(data: DescribeModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelAccelerateTaskResponse>;
-  /** {@link DescribeModelAccelerateTasks 查询模型加速任务列表}({@link DescribeModelAccelerateTasksRequest 请求参数}): {@link DescribeModelAccelerateTasksResponse 返回参数} */
+  /** 查询模型加速任务列表 {@link DescribeModelAccelerateTasksRequest} {@link DescribeModelAccelerateTasksResponse} */
   DescribeModelAccelerateTasks(data?: DescribeModelAccelerateTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelAccelerateTasksResponse>;
-  /** {@link DescribeModelService 查询单个服务}({@link DescribeModelServiceRequest 请求参数}): {@link DescribeModelServiceResponse 返回参数} */
+  /** 查询单个服务 {@link DescribeModelServiceRequest} {@link DescribeModelServiceResponse} */
   DescribeModelService(data: DescribeModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceResponse>;
-  /** {@link DescribeModelServiceCallInfo 展示服务的调用信息}({@link DescribeModelServiceCallInfoRequest 请求参数}): {@link DescribeModelServiceCallInfoResponse 返回参数} */
+  /** 展示服务的调用信息 {@link DescribeModelServiceCallInfoRequest} {@link DescribeModelServiceCallInfoResponse} */
   DescribeModelServiceCallInfo(data: DescribeModelServiceCallInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceCallInfoResponse>;
-  /** {@link DescribeModelServiceGroup 查询单个服务组}({@link DescribeModelServiceGroupRequest 请求参数}): {@link DescribeModelServiceGroupResponse 返回参数} */
+  /** 查询单个服务组 {@link DescribeModelServiceGroupRequest} {@link DescribeModelServiceGroupResponse} */
   DescribeModelServiceGroup(data: DescribeModelServiceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceGroupResponse>;
-  /** {@link DescribeModelServiceGroups 列举在线推理服务组}({@link DescribeModelServiceGroupsRequest 请求参数}): {@link DescribeModelServiceGroupsResponse 返回参数} */
+  /** 列举在线推理服务组 {@link DescribeModelServiceGroupsRequest} {@link DescribeModelServiceGroupsResponse} */
   DescribeModelServiceGroups(data?: DescribeModelServiceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceGroupsResponse>;
-  /** {@link DescribeModelServiceHistory 展示服务的历史版本}({@link DescribeModelServiceHistoryRequest 请求参数}): {@link DescribeModelServiceHistoryResponse 返回参数} */
+  /** 展示服务的历史版本 {@link DescribeModelServiceHistoryRequest} {@link DescribeModelServiceHistoryResponse} */
   DescribeModelServiceHistory(data: DescribeModelServiceHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceHistoryResponse>;
-  /** {@link DescribeModelServiceHotUpdated 查询模型服务能否开启热更新}({@link DescribeModelServiceHotUpdatedRequest 请求参数}): {@link DescribeModelServiceHotUpdatedResponse 返回参数} */
+  /** 查询模型服务能否开启热更新 {@link DescribeModelServiceHotUpdatedRequest} {@link DescribeModelServiceHotUpdatedResponse} */
   DescribeModelServiceHotUpdated(data: DescribeModelServiceHotUpdatedRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceHotUpdatedResponse>;
-  /** {@link DescribeModelServices 查询多个服务}({@link DescribeModelServicesRequest 请求参数}): {@link DescribeModelServicesResponse 返回参数} */
+  /** 查询多个服务 {@link DescribeModelServicesRequest} {@link DescribeModelServicesResponse} */
   DescribeModelServices(data?: DescribeModelServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServicesResponse>;
-  /** {@link DescribeTrainingFrameworks 训练框架列表}({@link DescribeTrainingFrameworksRequest 请求参数}): {@link DescribeTrainingFrameworksResponse 返回参数} */
+  /** 训练框架列表 {@link DescribeTrainingFrameworksRequest} {@link DescribeTrainingFrameworksResponse} */
   DescribeTrainingFrameworks(data?: DescribeTrainingFrameworksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingFrameworksResponse>;
-  /** {@link DescribeTrainingMetrics 查询训练自定义指标}({@link DescribeTrainingMetricsRequest 请求参数}): {@link DescribeTrainingMetricsResponse 返回参数} */
+  /** 查询训练自定义指标 {@link DescribeTrainingMetricsRequest} {@link DescribeTrainingMetricsResponse} */
   DescribeTrainingMetrics(data: DescribeTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingMetricsResponse>;
-  /** {@link DescribeTrainingModelVersion 查询模型版本}({@link DescribeTrainingModelVersionRequest 请求参数}): {@link DescribeTrainingModelVersionResponse 返回参数} */
+  /** 查询模型版本 {@link DescribeTrainingModelVersionRequest} {@link DescribeTrainingModelVersionResponse} */
   DescribeTrainingModelVersion(data: DescribeTrainingModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingModelVersionResponse>;
-  /** {@link DescribeTrainingModelVersions 模型版本列表}({@link DescribeTrainingModelVersionsRequest 请求参数}): {@link DescribeTrainingModelVersionsResponse 返回参数} */
+  /** 模型版本列表 {@link DescribeTrainingModelVersionsRequest} {@link DescribeTrainingModelVersionsResponse} */
   DescribeTrainingModelVersions(data: DescribeTrainingModelVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingModelVersionsResponse>;
-  /** {@link DescribeTrainingModels 模型列表}({@link DescribeTrainingModelsRequest 请求参数}): {@link DescribeTrainingModelsResponse 返回参数} */
+  /** 模型列表 {@link DescribeTrainingModelsRequest} {@link DescribeTrainingModelsResponse} */
   DescribeTrainingModels(data?: DescribeTrainingModelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingModelsResponse>;
-  /** {@link DescribeTrainingTask 训练任务详情}({@link DescribeTrainingTaskRequest 请求参数}): {@link DescribeTrainingTaskResponse 返回参数} */
+  /** 训练任务详情 {@link DescribeTrainingTaskRequest} {@link DescribeTrainingTaskResponse} */
   DescribeTrainingTask(data: DescribeTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTaskResponse>;
-  /** {@link DescribeTrainingTaskPods 训练任务pod列表}({@link DescribeTrainingTaskPodsRequest 请求参数}): {@link DescribeTrainingTaskPodsResponse 返回参数} */
+  /** 训练任务pod列表 {@link DescribeTrainingTaskPodsRequest} {@link DescribeTrainingTaskPodsResponse} */
   DescribeTrainingTaskPods(data: DescribeTrainingTaskPodsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTaskPodsResponse>;
-  /** {@link DescribeTrainingTasks 模型训练任务列表}({@link DescribeTrainingTasksRequest 请求参数}): {@link DescribeTrainingTasksResponse 返回参数} */
+  /** 模型训练任务列表 {@link DescribeTrainingTasksRequest} {@link DescribeTrainingTasksResponse} */
   DescribeTrainingTasks(data?: DescribeTrainingTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTasksResponse>;
-  /** {@link ModifyModelService 更新模型服务}({@link ModifyModelServiceRequest 请求参数}): {@link ModifyModelServiceResponse 返回参数} */
+  /** 更新模型服务 {@link ModifyModelServiceRequest} {@link ModifyModelServiceResponse} */
   ModifyModelService(data: ModifyModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServiceResponse>;
-  /** {@link ModifyModelServicePartialConfig 增量修改模型服务}({@link ModifyModelServicePartialConfigRequest 请求参数}): {@link ModifyModelServicePartialConfigResponse 返回参数} */
+  /** 增量修改模型服务 {@link ModifyModelServicePartialConfigRequest} {@link ModifyModelServicePartialConfigResponse} */
   ModifyModelServicePartialConfig(data: ModifyModelServicePartialConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServicePartialConfigResponse>;
-  /** {@link ModifyServiceGroupWeights 更新推理服务组流量分配}({@link ModifyServiceGroupWeightsRequest 请求参数}): {@link ModifyServiceGroupWeightsResponse 返回参数} */
+  /** 更新推理服务组流量分配 {@link ModifyServiceGroupWeightsRequest} {@link ModifyServiceGroupWeightsResponse} */
   ModifyServiceGroupWeights(data: ModifyServiceGroupWeightsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceGroupWeightsResponse>;
-  /** {@link PushTrainingMetrics 上报训练自定义指标}({@link PushTrainingMetricsRequest 请求参数}): {@link PushTrainingMetricsResponse 返回参数} */
+  /** 上报训练自定义指标 {@link PushTrainingMetricsRequest} {@link PushTrainingMetricsResponse} */
   PushTrainingMetrics(data?: PushTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<PushTrainingMetricsResponse>;
-  /** {@link RestartModelAccelerateTask 重启模型加速任务}({@link RestartModelAccelerateTaskRequest 请求参数}): {@link RestartModelAccelerateTaskResponse 返回参数} */
+  /** 重启模型加速任务 {@link RestartModelAccelerateTaskRequest} {@link RestartModelAccelerateTaskResponse} */
   RestartModelAccelerateTask(data: RestartModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RestartModelAccelerateTaskResponse>;
-  /** {@link StartTrainingTask 启动模型训练任务}({@link StartTrainingTaskRequest 请求参数}): {@link StartTrainingTaskResponse 返回参数} */
+  /** 启动模型训练任务 {@link StartTrainingTaskRequest} {@link StartTrainingTaskResponse} */
   StartTrainingTask(data: StartTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StartTrainingTaskResponse>;
-  /** {@link StopBatchTask 停止跑批任务}({@link StopBatchTaskRequest 请求参数}): {@link StopBatchTaskResponse 返回参数} */
+  /** 停止跑批任务 {@link StopBatchTaskRequest} {@link StopBatchTaskResponse} */
   StopBatchTask(data: StopBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopBatchTaskResponse>;
-  /** {@link StopModelAccelerateTask 停止模型加速任务}({@link StopModelAccelerateTaskRequest 请求参数}): {@link StopModelAccelerateTaskResponse 返回参数} */
+  /** 停止模型加速任务 {@link StopModelAccelerateTaskRequest} {@link StopModelAccelerateTaskResponse} */
   StopModelAccelerateTask(data: StopModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopModelAccelerateTaskResponse>;
-  /** {@link StopTrainingTask 停止模型训练任务}({@link StopTrainingTaskRequest 请求参数}): {@link StopTrainingTaskResponse 返回参数} */
+  /** 停止模型训练任务 {@link StopTrainingTaskRequest} {@link StopTrainingTaskResponse} */
   StopTrainingTask(data: StopTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopTrainingTaskResponse>;
-  /** {@link V20191022.CreateCodeRepository 创建存储库}({@link V20191022.CreateCodeRepositoryRequest 请求参数}): {@link V20191022.CreateCodeRepositoryResponse 返回参数} */
+  /** 创建存储库 {@link V20191022.CreateCodeRepositoryRequest} {@link V20191022.CreateCodeRepositoryResponse} */
   CreateCodeRepository(data: V20191022.CreateCodeRepositoryRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.CreateCodeRepositoryResponse>;
-  /** {@link V20191022.CreateNotebookInstance 创建Notebook实例}({@link V20191022.CreateNotebookInstanceRequest 请求参数}): {@link V20191022.CreateNotebookInstanceResponse 返回参数} */
+  /** 创建Notebook实例 {@link V20191022.CreateNotebookInstanceRequest} {@link V20191022.CreateNotebookInstanceResponse} */
   CreateNotebookInstance(data: V20191022.CreateNotebookInstanceRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.CreateNotebookInstanceResponse>;
-  /** {@link V20191022.CreateNotebookLifecycleScript 创建Notebook生命周期脚本}({@link V20191022.CreateNotebookLifecycleScriptRequest 请求参数}): {@link V20191022.CreateNotebookLifecycleScriptResponse 返回参数} */
+  /** 创建Notebook生命周期脚本 {@link V20191022.CreateNotebookLifecycleScriptRequest} {@link V20191022.CreateNotebookLifecycleScriptResponse} */
   CreateNotebookLifecycleScript(data: V20191022.CreateNotebookLifecycleScriptRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.CreateNotebookLifecycleScriptResponse>;
-  /** {@link V20191022.CreatePresignedNotebookInstanceUrl 创建Notebook授权Url}({@link V20191022.CreatePresignedNotebookInstanceUrlRequest 请求参数}): {@link V20191022.CreatePresignedNotebookInstanceUrlResponse 返回参数} */
+  /** 创建Notebook授权Url {@link V20191022.CreatePresignedNotebookInstanceUrlRequest} {@link V20191022.CreatePresignedNotebookInstanceUrlResponse} */
   CreatePresignedNotebookInstanceUrl(data: V20191022.CreatePresignedNotebookInstanceUrlRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.CreatePresignedNotebookInstanceUrlResponse>;
-  /** {@link V20191022.CreateTrainingJob 创建训练任务}({@link V20191022.CreateTrainingJobRequest 请求参数}): {@link V20191022.CreateTrainingJobResponse 返回参数} */
+  /** 创建训练任务 {@link V20191022.CreateTrainingJobRequest} {@link V20191022.CreateTrainingJobResponse} */
   CreateTrainingJob(data: V20191022.CreateTrainingJobRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.CreateTrainingJobResponse>;
-  /** {@link V20191022.DeleteCodeRepository 删除存储库}({@link V20191022.DeleteCodeRepositoryRequest 请求参数}): {@link V20191022.DeleteCodeRepositoryResponse 返回参数} */
+  /** 删除存储库 {@link V20191022.DeleteCodeRepositoryRequest} {@link V20191022.DeleteCodeRepositoryResponse} */
   DeleteCodeRepository(data: V20191022.DeleteCodeRepositoryRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DeleteCodeRepositoryResponse>;
-  /** {@link V20191022.DeleteNotebookInstance 删除Notebook实例}({@link V20191022.DeleteNotebookInstanceRequest 请求参数}): {@link V20191022.DeleteNotebookInstanceResponse 返回参数} */
+  /** 删除Notebook实例 {@link V20191022.DeleteNotebookInstanceRequest} {@link V20191022.DeleteNotebookInstanceResponse} */
   DeleteNotebookInstance(data: V20191022.DeleteNotebookInstanceRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DeleteNotebookInstanceResponse>;
-  /** {@link V20191022.DeleteNotebookLifecycleScript 删除Notebook生命周期脚本}({@link V20191022.DeleteNotebookLifecycleScriptRequest 请求参数}): {@link V20191022.DeleteNotebookLifecycleScriptResponse 返回参数} */
+  /** 删除Notebook生命周期脚本 {@link V20191022.DeleteNotebookLifecycleScriptRequest} {@link V20191022.DeleteNotebookLifecycleScriptResponse} */
   DeleteNotebookLifecycleScript(data: V20191022.DeleteNotebookLifecycleScriptRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DeleteNotebookLifecycleScriptResponse>;
-  /** {@link V20191022.DescribeCodeRepositories 查询存储库列表}({@link V20191022.DescribeCodeRepositoriesRequest 请求参数}): {@link V20191022.DescribeCodeRepositoriesResponse 返回参数} */
+  /** 查询存储库列表 {@link V20191022.DescribeCodeRepositoriesRequest} {@link V20191022.DescribeCodeRepositoriesResponse} */
   DescribeCodeRepositories(data: V20191022.DescribeCodeRepositoriesRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeCodeRepositoriesResponse>;
-  /** {@link V20191022.DescribeCodeRepository 查询存储库详情}({@link V20191022.DescribeCodeRepositoryRequest 请求参数}): {@link V20191022.DescribeCodeRepositoryResponse 返回参数} */
+  /** 查询存储库详情 {@link V20191022.DescribeCodeRepositoryRequest} {@link V20191022.DescribeCodeRepositoryResponse} */
   DescribeCodeRepository(data: V20191022.DescribeCodeRepositoryRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeCodeRepositoryResponse>;
-  /** {@link V20191022.DescribeNotebookInstance 查询Notebook实例}({@link V20191022.DescribeNotebookInstanceRequest 请求参数}): {@link V20191022.DescribeNotebookInstanceResponse 返回参数} */
+  /** 查询Notebook实例 {@link V20191022.DescribeNotebookInstanceRequest} {@link V20191022.DescribeNotebookInstanceResponse} */
   DescribeNotebookInstance(data: V20191022.DescribeNotebookInstanceRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeNotebookInstanceResponse>;
-  /** {@link V20191022.DescribeNotebookInstances 查询Notebook实例列表}({@link V20191022.DescribeNotebookInstancesRequest 请求参数}): {@link V20191022.DescribeNotebookInstancesResponse 返回参数} */
+  /** 查询Notebook实例列表 {@link V20191022.DescribeNotebookInstancesRequest} {@link V20191022.DescribeNotebookInstancesResponse} */
   DescribeNotebookInstances(data: V20191022.DescribeNotebookInstancesRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeNotebookInstancesResponse>;
-  /** {@link V20191022.DescribeNotebookLifecycleScript 查看notebook生命周期脚本详情}({@link V20191022.DescribeNotebookLifecycleScriptRequest 请求参数}): {@link V20191022.DescribeNotebookLifecycleScriptResponse 返回参数} */
+  /** 查看notebook生命周期脚本详情 {@link V20191022.DescribeNotebookLifecycleScriptRequest} {@link V20191022.DescribeNotebookLifecycleScriptResponse} */
   DescribeNotebookLifecycleScript(data: V20191022.DescribeNotebookLifecycleScriptRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeNotebookLifecycleScriptResponse>;
-  /** {@link V20191022.DescribeNotebookLifecycleScripts 查看notebook生命周期脚本列表}({@link V20191022.DescribeNotebookLifecycleScriptsRequest 请求参数}): {@link V20191022.DescribeNotebookLifecycleScriptsResponse 返回参数} */
+  /** 查看notebook生命周期脚本列表 {@link V20191022.DescribeNotebookLifecycleScriptsRequest} {@link V20191022.DescribeNotebookLifecycleScriptsResponse} */
   DescribeNotebookLifecycleScripts(data: V20191022.DescribeNotebookLifecycleScriptsRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeNotebookLifecycleScriptsResponse>;
-  /** {@link V20191022.DescribeNotebookSummary 查询Notebook概览}({@link V20191022.DescribeNotebookSummaryRequest 请求参数}): {@link V20191022.DescribeNotebookSummaryResponse 返回参数} */
+  /** 查询Notebook概览 {@link V20191022.DescribeNotebookSummaryRequest} {@link V20191022.DescribeNotebookSummaryResponse} */
   DescribeNotebookSummary(data: V20191022.DescribeNotebookSummaryRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeNotebookSummaryResponse>;
-  /** {@link V20191022.DescribeTrainingJob 查询训练任务}({@link V20191022.DescribeTrainingJobRequest 请求参数}): {@link V20191022.DescribeTrainingJobResponse 返回参数} */
+  /** 查询训练任务 {@link V20191022.DescribeTrainingJobRequest} {@link V20191022.DescribeTrainingJobResponse} */
   DescribeTrainingJob(data: V20191022.DescribeTrainingJobRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeTrainingJobResponse>;
-  /** {@link V20191022.DescribeTrainingJobs 查询训练任务列表}({@link V20191022.DescribeTrainingJobsRequest 请求参数}): {@link V20191022.DescribeTrainingJobsResponse 返回参数} */
+  /** 查询训练任务列表 {@link V20191022.DescribeTrainingJobsRequest} {@link V20191022.DescribeTrainingJobsResponse} */
   DescribeTrainingJobs(data: V20191022.DescribeTrainingJobsRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.DescribeTrainingJobsResponse>;
-  /** {@link V20191022.StartNotebookInstance 启动Notebook实例}({@link V20191022.StartNotebookInstanceRequest 请求参数}): {@link V20191022.StartNotebookInstanceResponse 返回参数} */
+  /** 启动Notebook实例 {@link V20191022.StartNotebookInstanceRequest} {@link V20191022.StartNotebookInstanceResponse} */
   StartNotebookInstance(data: V20191022.StartNotebookInstanceRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.StartNotebookInstanceResponse>;
-  /** {@link V20191022.StopNotebookInstance 停止Notebook实例}({@link V20191022.StopNotebookInstanceRequest 请求参数}): {@link V20191022.StopNotebookInstanceResponse 返回参数} */
+  /** 停止Notebook实例 {@link V20191022.StopNotebookInstanceRequest} {@link V20191022.StopNotebookInstanceResponse} */
   StopNotebookInstance(data: V20191022.StopNotebookInstanceRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.StopNotebookInstanceResponse>;
-  /** {@link V20191022.StopTrainingJob 停止训练任务}({@link V20191022.StopTrainingJobRequest 请求参数}): {@link V20191022.StopTrainingJobResponse 返回参数} */
+  /** 停止训练任务 {@link V20191022.StopTrainingJobRequest} {@link V20191022.StopTrainingJobResponse} */
   StopTrainingJob(data: V20191022.StopTrainingJobRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.StopTrainingJobResponse>;
-  /** {@link V20191022.UpdateCodeRepository 更新存储库}({@link V20191022.UpdateCodeRepositoryRequest 请求参数}): {@link V20191022.UpdateCodeRepositoryResponse 返回参数} */
+  /** 更新存储库 {@link V20191022.UpdateCodeRepositoryRequest} {@link V20191022.UpdateCodeRepositoryResponse} */
   UpdateCodeRepository(data: V20191022.UpdateCodeRepositoryRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.UpdateCodeRepositoryResponse>;
-  /** {@link V20191022.UpdateNotebookInstance 更新Notebook实例}({@link V20191022.UpdateNotebookInstanceRequest 请求参数}): {@link V20191022.UpdateNotebookInstanceResponse 返回参数} */
+  /** 更新Notebook实例 {@link V20191022.UpdateNotebookInstanceRequest} {@link V20191022.UpdateNotebookInstanceResponse} */
   UpdateNotebookInstance(data: V20191022.UpdateNotebookInstanceRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.UpdateNotebookInstanceResponse>;
-  /** {@link V20191022.UpdateNotebookLifecycleScript 更新notebook生命周期脚本}({@link V20191022.UpdateNotebookLifecycleScriptRequest 请求参数}): {@link V20191022.UpdateNotebookLifecycleScriptResponse 返回参数} */
+  /** 更新notebook生命周期脚本 {@link V20191022.UpdateNotebookLifecycleScriptRequest} {@link V20191022.UpdateNotebookLifecycleScriptResponse} */
   UpdateNotebookLifecycleScript(data: V20191022.UpdateNotebookLifecycleScriptRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.UpdateNotebookLifecycleScriptResponse>;
 }
 

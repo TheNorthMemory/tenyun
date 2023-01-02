@@ -84,14 +84,14 @@ declare interface QueryLoginProtectionResponse {
   RiskType?: number[];
   /** accountType 是 QQ 或微信开放账号时，用于标识 QQ 或微信用户登录后关联业务自身的账号 ID。 */
   RootId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Lp 登录保护} */
 declare interface Lp {
   (): Versions;
-  /** {@link QueryLoginProtection 登录保护}({@link QueryLoginProtectionRequest 请求参数}): {@link QueryLoginProtectionResponse 返回参数} */
+  /** 登录保护 {@link QueryLoginProtectionRequest} {@link QueryLoginProtectionResponse} */
   QueryLoginProtection(data: QueryLoginProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<QueryLoginProtectionResponse>;
 }
 

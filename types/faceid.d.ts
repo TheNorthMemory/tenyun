@@ -252,7 +252,7 @@ declare interface BankCard2EVerificationResponse {
   Result: string;
   /** 业务结果描述。 */
   Description: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -276,7 +276,7 @@ declare interface BankCard4EVerificationResponse {
   Result: string;
   /** 业务结果描述。 */
   Description: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -298,7 +298,7 @@ declare interface BankCardVerificationResponse {
   Result: string;
   /** 业务结果描述。 */
   Description: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -318,7 +318,7 @@ declare interface CheckBankCardInformationResponse {
   AccountBank: string;
   /** 卡性质：1. 借记卡；2. 贷记卡；3. 预付费卡；4. 准贷记卡 */
   AccountType: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -330,7 +330,7 @@ declare interface CheckEidTokenStatusRequest {
 declare interface CheckEidTokenStatusResponse {
   /** 枚举：init：token未验证doing: 验证中finished: 验证完成timeout: token已超时 */
   Status: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -372,7 +372,7 @@ declare interface CheckIdCardInformationResponse {
   Quality: number;
   /** 敏感数据加密信息。 */
   Encryption: Encryption | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -394,7 +394,7 @@ declare interface CheckIdNameDateResponse {
   Result: string;
   /** 业务结果描述。 */
   Description: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -412,7 +412,7 @@ declare interface CheckPhoneAndNameResponse {
   Result: string;
   /** 业务结果描述 */
   Description: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -446,7 +446,7 @@ declare interface DetectAuthResponse {
   Url: string;
   /** 一次核身流程的标识，有效时间为7,200秒；完成核身后，可用该标识获取验证结果信息。 */
   BizToken: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -468,7 +468,7 @@ declare interface EncryptedPhoneVerificationResponse {
   Description: string;
   /** 运营商名称。取值范围为["移动","联通","电信",""] */
   ISP: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -480,7 +480,7 @@ declare interface GetActionSequenceRequest {
 declare interface GetActionSequenceResponse {
   /** 动作顺序(2,1 or 1,2) 。1代表张嘴，2代表闭眼。 */
   ActionSequence?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -518,7 +518,7 @@ declare interface GetDetectInfoEnhancedResponse {
   IntentionVerifyData: IntentionVerifyData | null;
   /** 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。 */
   IntentionQuestionResult: IntentionQuestionResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -534,7 +534,7 @@ declare interface GetDetectInfoRequest {
 declare interface GetDetectInfoResponse {
   /** JSON字符串。{ // 文本类信息 "Text": { "ErrCode": null, // 本次核身最终结果。0为成功 "ErrMsg": null, // 本次核身最终结果信息描述。 "IdCard": "", // 本次核身最终获得的身份证号。 "Name": "", // 本次核身最终获得的姓名。 "OcrNation": null, // ocr阶段获取的民族 "OcrAddress": null, // ocr阶段获取的地址 "OcrBirth": null, // ocr阶段获取的出生信息 "OcrAuthority": null, // ocr阶段获取的证件签发机关 "OcrValidDate": null, // ocr阶段获取的证件有效期 "OcrName": null, // ocr阶段获取的姓名 "OcrIdCard": null, // ocr阶段获取的身份证号 "OcrGender": null, // ocr阶段获取的性别 "LiveStatus": null, // 活体检测阶段的错误码。0为成功 "LiveMsg": null, // 活体检测阶段的错误信息 "Comparestatus": null,// 一比一阶段的错误码。0为成功 "Comparemsg": null, // 一比一阶段的错误信息 "Sim": null, // 比对相似度 "Location": null, // 地理位置信息 "Extra": "", // DetectAuth结果传进来的Extra信息 "Detail": { // 活体一比一信息详情 "LivenessData": [ { ErrCode: null, // 活体比对验证错误码 ErrMsg: null, // 活体比对验证错误描述 ReqTime: null, // 活体验证时间戳 IdCard: null, // 验证身份证号 Name: null // 验证姓名 } ] } }, // 身份证正反面照片Base64 "IdCardData": { "OcrFront": null, "OcrBack": null }, // 视频最佳帧截图Base64 "BestFrame": { "BestFrame": null }, // 活体视频Base64 "VideoData": { "LivenessVideo": null }} */
   DetectInfo: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -560,7 +560,7 @@ declare interface GetEidResultResponse {
   IntentionVerifyData: IntentionVerifyData | null;
   /** 意愿核身问答模式相关信息。若未使用意愿核身问答模式功能，该字段返回值可以不处理。 */
   IntentionQuestionResult: IntentionQuestionResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -586,7 +586,7 @@ declare interface GetEidTokenResponse {
   EidToken: string;
   /** 发起核身流程的URL，用于H5场景核身。 */
   Url: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -620,7 +620,7 @@ declare interface GetFaceIdResultResponse {
   DeviceInfoTag: string | null;
   /** 行为风险标签，仅错误码返回1007（设备疑似被劫持）时返回风险标签。标签说明：02：攻击风险 */
   RiskInfoTag: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -646,7 +646,7 @@ declare interface GetFaceIdTokenRequest {
 declare interface GetFaceIdTokenResponse {
   /** 有效期 10分钟。只能完成1次核身。 */
   FaceIdToken: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -656,7 +656,7 @@ declare interface GetLiveCodeRequest {
 declare interface GetLiveCodeResponse {
   /** 数字验证码，如：1234 */
   LiveCode: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -668,7 +668,7 @@ declare interface GetRealNameAuthResultRequest {
 declare interface GetRealNameAuthResultResponse {
   /** 认证结果码，收费情况如下：收费码：0: 姓名和身份证号一致-1: 姓名和身份证号不一致-2: 姓名和微信实名姓名不一致不收费码：-3: 微信号未实名 */
   ResultType?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -686,7 +686,7 @@ declare interface GetRealNameAuthTokenResponse {
   AuthToken?: string;
   /** 实名认证授权地址，认证发起方需要重定向到这个地址获取认证用户的授权，仅能在微信环境下打开。 */
   RedirectURL?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -706,7 +706,7 @@ declare interface GetWeChatBillDetailsResponse {
   NextCursor: number;
   /** 数据 */
   WeChatBillDetails: WeChatBillDetail[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -740,7 +740,7 @@ declare interface IdCardOCRVerificationResponse {
   Birth: string | null;
   /** OCR得到的地址 */
   Address: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -758,7 +758,7 @@ declare interface IdCardVerificationResponse {
   Result: string;
   /** 业务结果描述。 */
   Description: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -782,7 +782,7 @@ declare interface ImageRecognitionResponse {
   Result: string;
   /** 业务结果描述。 */
   Description: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -814,7 +814,7 @@ declare interface LivenessCompareResponse {
   Description: string;
   /** 最佳截图列表，仅在配置了返回多张最佳截图时返回。 */
   BestFrameList: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -848,7 +848,7 @@ declare interface LivenessRecognitionResponse {
   Description: string;
   /** 最佳截图列表，仅在配置了返回多张最佳截图时返回。 */
   BestFrameList: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -872,7 +872,7 @@ declare interface LivenessResponse {
   Description?: string;
   /** 最佳最佳截图列表，仅在配置了返回多张最佳截图时有效。 */
   BestFrameList?: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -896,7 +896,7 @@ declare interface MinorsVerificationResponse {
   Description: string;
   /** 该字段的值为年龄区间。格式为[a,b)，[0,8)表示年龄小于8周岁区间，不包括8岁；[8,16)表示年龄8-16周岁区间，不包括16岁；[16,18)表示年龄16-18周岁区间，不包括18岁；[18,+)表示年龄大于18周岁。 */
   AgeRange: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -914,7 +914,7 @@ declare interface MobileNetworkTimeVerificationResponse {
   Description: string;
   /** 在网时长区间。格式为(a,b]，表示在网时长在a个月以上，b个月以下。若b为+时表示没有上限。 */
   Range: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -932,7 +932,7 @@ declare interface MobileStatusResponse {
   Description: string;
   /** 状态码：0：正常1：停机2：销号3：空号4：不在网99：未知状态 */
   StatusCode: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -982,7 +982,7 @@ declare interface ParseNfcDataResponse {
   ImageB: string | null;
   /** 对result code的结果描述 */
   ResultDescription: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1004,7 +1004,7 @@ declare interface PhoneVerificationCMCCResponse {
   Isp: string;
   /** 业务结果描述。 */
   Description: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1026,7 +1026,7 @@ declare interface PhoneVerificationCTCCResponse {
   Isp: string;
   /** 业务结果描述。 */
   Description: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1048,7 +1048,7 @@ declare interface PhoneVerificationCUCCResponse {
   Isp: string;
   /** 业务结果描述。 */
   Description: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1074,82 +1074,82 @@ declare interface PhoneVerificationResponse {
   Description: string;
   /** 运营商名称。取值范围为["","移动","电信","联通"] */
   Isp: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Faceid 人脸核身} */
 declare interface Faceid {
   (): Versions;
-  /** {@link BankCard2EVerification 银行卡二要素核验}({@link BankCard2EVerificationRequest 请求参数}): {@link BankCard2EVerificationResponse 返回参数} */
+  /** 银行卡二要素核验 {@link BankCard2EVerificationRequest} {@link BankCard2EVerificationResponse} */
   BankCard2EVerification(data: BankCard2EVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<BankCard2EVerificationResponse>;
-  /** {@link BankCard4EVerification 银行卡四要素核验}({@link BankCard4EVerificationRequest 请求参数}): {@link BankCard4EVerificationResponse 返回参数} */
+  /** 银行卡四要素核验 {@link BankCard4EVerificationRequest} {@link BankCard4EVerificationResponse} */
   BankCard4EVerification(data: BankCard4EVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<BankCard4EVerificationResponse>;
-  /** {@link BankCardVerification 银行卡三要素核验}({@link BankCardVerificationRequest 请求参数}): {@link BankCardVerificationResponse 返回参数} */
+  /** 银行卡三要素核验 {@link BankCardVerificationRequest} {@link BankCardVerificationResponse} */
   BankCardVerification(data: BankCardVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<BankCardVerificationResponse>;
-  /** {@link CheckBankCardInformation 银行卡基础信息查询}({@link CheckBankCardInformationRequest 请求参数}): {@link CheckBankCardInformationResponse 返回参数} */
+  /** 银行卡基础信息查询 {@link CheckBankCardInformationRequest} {@link CheckBankCardInformationResponse} */
   CheckBankCardInformation(data: CheckBankCardInformationRequest, config?: AxiosRequestConfig): AxiosPromise<CheckBankCardInformationResponse>;
-  /** {@link CheckEidTokenStatus 获取E证通Token状态}({@link CheckEidTokenStatusRequest 请求参数}): {@link CheckEidTokenStatusResponse 返回参数} */
+  /** 获取E证通Token状态 {@link CheckEidTokenStatusRequest} {@link CheckEidTokenStatusResponse} */
   CheckEidTokenStatus(data: CheckEidTokenStatusRequest, config?: AxiosRequestConfig): AxiosPromise<CheckEidTokenStatusResponse>;
-  /** {@link CheckIdCardInformation 身份证人像照片验真}({@link CheckIdCardInformationRequest 请求参数}): {@link CheckIdCardInformationResponse 返回参数} */
+  /** 身份证人像照片验真 {@link CheckIdCardInformationRequest} {@link CheckIdCardInformationResponse} */
   CheckIdCardInformation(data?: CheckIdCardInformationRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIdCardInformationResponse>;
-  /** {@link CheckIdNameDate 身份信息及有效期核验}({@link CheckIdNameDateRequest 请求参数}): {@link CheckIdNameDateResponse 返回参数} */
+  /** 身份信息及有效期核验 {@link CheckIdNameDateRequest} {@link CheckIdNameDateResponse} */
   CheckIdNameDate(data: CheckIdNameDateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIdNameDateResponse>;
-  /** {@link CheckPhoneAndName 手机号二要素核验}({@link CheckPhoneAndNameRequest 请求参数}): {@link CheckPhoneAndNameResponse 返回参数} */
+  /** 手机号二要素核验 {@link CheckPhoneAndNameRequest} {@link CheckPhoneAndNameResponse} */
   CheckPhoneAndName(data: CheckPhoneAndNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckPhoneAndNameResponse>;
-  /** {@link DetectAuth 实名核身鉴权}({@link DetectAuthRequest 请求参数}): {@link DetectAuthResponse 返回参数} */
+  /** 实名核身鉴权 {@link DetectAuthRequest} {@link DetectAuthResponse} */
   DetectAuth(data: DetectAuthRequest, config?: AxiosRequestConfig): AxiosPromise<DetectAuthResponse>;
-  /** {@link EncryptedPhoneVerification 运营商三要素核验（加密）}({@link EncryptedPhoneVerificationRequest 请求参数}): {@link EncryptedPhoneVerificationResponse 返回参数} */
+  /** 运营商三要素核验（加密） {@link EncryptedPhoneVerificationRequest} {@link EncryptedPhoneVerificationResponse} */
   EncryptedPhoneVerification(data: EncryptedPhoneVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<EncryptedPhoneVerificationResponse>;
-  /** {@link GetActionSequence 获取动作顺序}({@link GetActionSequenceRequest 请求参数}): {@link GetActionSequenceResponse 返回参数} */
+  /** 获取动作顺序 {@link GetActionSequenceRequest} {@link GetActionSequenceResponse} */
   GetActionSequence(data?: GetActionSequenceRequest, config?: AxiosRequestConfig): AxiosPromise<GetActionSequenceResponse>;
-  /** {@link GetDetectInfo 获取实名核身结果信息}({@link GetDetectInfoRequest 请求参数}): {@link GetDetectInfoResponse 返回参数} */
+  /** 获取实名核身结果信息 {@link GetDetectInfoRequest} {@link GetDetectInfoResponse} */
   GetDetectInfo(data: GetDetectInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetDetectInfoResponse>;
-  /** {@link GetDetectInfoEnhanced 获取实名核身结果信息增强版}({@link GetDetectInfoEnhancedRequest 请求参数}): {@link GetDetectInfoEnhancedResponse 返回参数} */
+  /** 获取实名核身结果信息增强版 {@link GetDetectInfoEnhancedRequest} {@link GetDetectInfoEnhancedResponse} */
   GetDetectInfoEnhanced(data: GetDetectInfoEnhancedRequest, config?: AxiosRequestConfig): AxiosPromise<GetDetectInfoEnhancedResponse>;
-  /** {@link GetEidResult 获取E证通结果信息}({@link GetEidResultRequest 请求参数}): {@link GetEidResultResponse 返回参数} */
+  /** 获取E证通结果信息 {@link GetEidResultRequest} {@link GetEidResultResponse} */
   GetEidResult(data: GetEidResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetEidResultResponse>;
-  /** {@link GetEidToken 获取E证通Token}({@link GetEidTokenRequest 请求参数}): {@link GetEidTokenResponse 返回参数} */
+  /** 获取E证通Token {@link GetEidTokenRequest} {@link GetEidTokenResponse} */
   GetEidToken(data: GetEidTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetEidTokenResponse>;
-  /** {@link GetFaceIdResult 获取SDK核验结果}({@link GetFaceIdResultRequest 请求参数}): {@link GetFaceIdResultResponse 返回参数} */
+  /** 获取SDK核验结果 {@link GetFaceIdResultRequest} {@link GetFaceIdResultResponse} */
   GetFaceIdResult(data: GetFaceIdResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetFaceIdResultResponse>;
-  /** {@link GetFaceIdToken 获取SDKToken}({@link GetFaceIdTokenRequest 请求参数}): {@link GetFaceIdTokenResponse 返回参数} */
+  /** 获取SDKToken {@link GetFaceIdTokenRequest} {@link GetFaceIdTokenResponse} */
   GetFaceIdToken(data: GetFaceIdTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetFaceIdTokenResponse>;
-  /** {@link GetLiveCode 获取数字验证码}({@link GetLiveCodeRequest 请求参数}): {@link GetLiveCodeResponse 返回参数} */
+  /** 获取数字验证码 {@link GetLiveCodeRequest} {@link GetLiveCodeResponse} */
   GetLiveCode(data?: GetLiveCodeRequest, config?: AxiosRequestConfig): AxiosPromise<GetLiveCodeResponse>;
-  /** {@link GetRealNameAuthResult 获取微信实名认证结果}({@link GetRealNameAuthResultRequest 请求参数}): {@link GetRealNameAuthResultResponse 返回参数} */
+  /** 获取微信实名认证结果 {@link GetRealNameAuthResultRequest} {@link GetRealNameAuthResultResponse} */
   GetRealNameAuthResult(data: GetRealNameAuthResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetRealNameAuthResultResponse>;
-  /** {@link GetRealNameAuthToken 微信实名认证授权}({@link GetRealNameAuthTokenRequest 请求参数}): {@link GetRealNameAuthTokenResponse 返回参数} */
+  /** 微信实名认证授权 {@link GetRealNameAuthTokenRequest} {@link GetRealNameAuthTokenResponse} */
   GetRealNameAuthToken(data: GetRealNameAuthTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetRealNameAuthTokenResponse>;
-  /** {@link GetWeChatBillDetails 查询账单明细（微信渠道）}({@link GetWeChatBillDetailsRequest 请求参数}): {@link GetWeChatBillDetailsResponse 返回参数} */
+  /** 查询账单明细（微信渠道） {@link GetWeChatBillDetailsRequest} {@link GetWeChatBillDetailsResponse} */
   GetWeChatBillDetails(data: GetWeChatBillDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<GetWeChatBillDetailsResponse>;
-  /** {@link IdCardOCRVerification 身份证识别及信息核验}({@link IdCardOCRVerificationRequest 请求参数}): {@link IdCardOCRVerificationResponse 返回参数} */
+  /** 身份证识别及信息核验 {@link IdCardOCRVerificationRequest} {@link IdCardOCRVerificationResponse} */
   IdCardOCRVerification(data?: IdCardOCRVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<IdCardOCRVerificationResponse>;
-  /** {@link IdCardVerification 身份信息认证}({@link IdCardVerificationRequest 请求参数}): {@link IdCardVerificationResponse 返回参数} */
+  /** 身份信息认证 {@link IdCardVerificationRequest} {@link IdCardVerificationResponse} */
   IdCardVerification(data: IdCardVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<IdCardVerificationResponse>;
-  /** {@link ImageRecognition 照片人脸核身}({@link ImageRecognitionRequest 请求参数}): {@link ImageRecognitionResponse 返回参数} */
+  /** 照片人脸核身 {@link ImageRecognitionRequest} {@link ImageRecognitionResponse} */
   ImageRecognition(data: ImageRecognitionRequest, config?: AxiosRequestConfig): AxiosPromise<ImageRecognitionResponse>;
-  /** {@link Liveness 活体检测}({@link LivenessRequest 请求参数}): {@link LivenessResponse 返回参数} */
+  /** 活体检测 {@link LivenessRequest} {@link LivenessResponse} */
   Liveness(data: LivenessRequest, config?: AxiosRequestConfig): AxiosPromise<LivenessResponse>;
-  /** {@link LivenessCompare 活体人脸比对}({@link LivenessCompareRequest 请求参数}): {@link LivenessCompareResponse 返回参数} */
+  /** 活体人脸比对 {@link LivenessCompareRequest} {@link LivenessCompareResponse} */
   LivenessCompare(data: LivenessCompareRequest, config?: AxiosRequestConfig): AxiosPromise<LivenessCompareResponse>;
-  /** {@link LivenessRecognition 活体人脸核身}({@link LivenessRecognitionRequest 请求参数}): {@link LivenessRecognitionResponse 返回参数} */
+  /** 活体人脸核身 {@link LivenessRecognitionRequest} {@link LivenessRecognitionResponse} */
   LivenessRecognition(data: LivenessRecognitionRequest, config?: AxiosRequestConfig): AxiosPromise<LivenessRecognitionResponse>;
-  /** {@link MinorsVerification 手机号实名查询}({@link MinorsVerificationRequest 请求参数}): {@link MinorsVerificationResponse 返回参数} */
+  /** 手机号实名查询 {@link MinorsVerificationRequest} {@link MinorsVerificationResponse} */
   MinorsVerification(data: MinorsVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<MinorsVerificationResponse>;
-  /** {@link MobileNetworkTimeVerification 手机号在网时长核验}({@link MobileNetworkTimeVerificationRequest 请求参数}): {@link MobileNetworkTimeVerificationResponse 返回参数} */
+  /** 手机号在网时长核验 {@link MobileNetworkTimeVerificationRequest} {@link MobileNetworkTimeVerificationResponse} */
   MobileNetworkTimeVerification(data: MobileNetworkTimeVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<MobileNetworkTimeVerificationResponse>;
-  /** {@link MobileStatus 手机号状态查询}({@link MobileStatusRequest 请求参数}): {@link MobileStatusResponse 返回参数} */
+  /** 手机号状态查询 {@link MobileStatusRequest} {@link MobileStatusResponse} */
   MobileStatus(data: MobileStatusRequest, config?: AxiosRequestConfig): AxiosPromise<MobileStatusResponse>;
-  /** {@link ParseNfcData 获取证件NFC结果}({@link ParseNfcDataRequest 请求参数}): {@link ParseNfcDataResponse 返回参数} */
+  /** 获取证件NFC结果 {@link ParseNfcDataRequest} {@link ParseNfcDataResponse} */
   ParseNfcData(data: ParseNfcDataRequest, config?: AxiosRequestConfig): AxiosPromise<ParseNfcDataResponse>;
-  /** {@link PhoneVerification 手机号三要素核验}({@link PhoneVerificationRequest 请求参数}): {@link PhoneVerificationResponse 返回参数} */
+  /** 手机号三要素核验 {@link PhoneVerificationRequest} {@link PhoneVerificationResponse} */
   PhoneVerification(data: PhoneVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<PhoneVerificationResponse>;
-  /** {@link PhoneVerificationCMCC 手机号三要素核验（移动）}({@link PhoneVerificationCMCCRequest 请求参数}): {@link PhoneVerificationCMCCResponse 返回参数} */
+  /** 手机号三要素核验（移动） {@link PhoneVerificationCMCCRequest} {@link PhoneVerificationCMCCResponse} */
   PhoneVerificationCMCC(data: PhoneVerificationCMCCRequest, config?: AxiosRequestConfig): AxiosPromise<PhoneVerificationCMCCResponse>;
-  /** {@link PhoneVerificationCTCC 手机号三要素核验（电信）}({@link PhoneVerificationCTCCRequest 请求参数}): {@link PhoneVerificationCTCCResponse 返回参数} */
+  /** 手机号三要素核验（电信） {@link PhoneVerificationCTCCRequest} {@link PhoneVerificationCTCCResponse} */
   PhoneVerificationCTCC(data: PhoneVerificationCTCCRequest, config?: AxiosRequestConfig): AxiosPromise<PhoneVerificationCTCCResponse>;
-  /** {@link PhoneVerificationCUCC 手机号三要素核验（联通）}({@link PhoneVerificationCUCCRequest 请求参数}): {@link PhoneVerificationCUCCResponse 返回参数} */
+  /** 手机号三要素核验（联通） {@link PhoneVerificationCUCCRequest} {@link PhoneVerificationCUCCResponse} */
   PhoneVerificationCUCC(data: PhoneVerificationCUCCRequest, config?: AxiosRequestConfig): AxiosPromise<PhoneVerificationCUCCResponse>;
 }
 

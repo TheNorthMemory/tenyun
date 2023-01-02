@@ -66,14 +66,14 @@ declare interface DescribeTransactionsRequest {
 declare interface DescribeTransactionsResponse {
   /** 主事务分页列表 */
   Result: PagedTransaction;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Dtf 分布式事务} */
 declare interface Dtf {
   (): Versions;
-  /** {@link DescribeTransactions 查询主事务列表}({@link DescribeTransactionsRequest 请求参数}): {@link DescribeTransactionsResponse 返回参数} */
+  /** 查询主事务列表 {@link DescribeTransactionsRequest} {@link DescribeTransactionsResponse} */
   DescribeTransactions(data: DescribeTransactionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTransactionsResponse>;
 }
 

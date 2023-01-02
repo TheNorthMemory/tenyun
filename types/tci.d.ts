@@ -740,7 +740,7 @@ declare interface AIAssistantResponse {
   ImageResults?: ImageTaskResult[];
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -752,7 +752,7 @@ declare interface CancelTaskRequest {
 declare interface CancelTaskResponse {
   /** 取消任务标志符。 */
   JobId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -766,7 +766,7 @@ declare interface CheckFacePhotoRequest {
 declare interface CheckFacePhotoResponse {
   /** 人脸检查结果，0：通过检查，1：图片模糊 */
   CheckResult?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -784,7 +784,7 @@ declare interface CreateFaceRequest {
 declare interface CreateFaceResponse {
   /** 人脸操作结果信息 */
   FaceInfoSet?: FaceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -800,7 +800,7 @@ declare interface CreateLibraryResponse {
   LibraryId?: string;
   /** 人员库名称 */
   LibraryName?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -836,7 +836,7 @@ declare interface CreatePersonResponse {
   PersonId?: string;
   /** 人员名称 */
   PersonName?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -846,7 +846,7 @@ declare interface CreateVocabLibRequest {
 }
 
 declare interface CreateVocabLibResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -858,7 +858,7 @@ declare interface CreateVocabRequest {
 }
 
 declare interface CreateVocabResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -874,7 +874,7 @@ declare interface DeleteFaceRequest {
 declare interface DeleteFaceResponse {
   /** 人脸操作结果 */
   FaceInfoSet?: FaceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -888,7 +888,7 @@ declare interface DeleteLibraryResponse {
   LibraryId?: string;
   /** 人员库名称 */
   LibraryName?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -908,7 +908,7 @@ declare interface DeletePersonResponse {
   PersonId?: string;
   /** 人员名称 */
   PersonName?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -918,7 +918,7 @@ declare interface DeleteVocabLibRequest {
 }
 
 declare interface DeleteVocabLibResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -930,7 +930,7 @@ declare interface DeleteVocabRequest {
 }
 
 declare interface DeleteVocabResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -954,7 +954,7 @@ declare interface DescribeAITaskResultResponse {
   Status?: string;
   /** 任务唯一id。在URL方式时提交请求后会返回一个jobid，后续查询该url的结果时使用这个jobid进行查询。 */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -974,7 +974,7 @@ declare interface DescribeAttendanceResultResponse {
   AbsenceSet?: string[];
   /** 请求处理进度 */
   Progress?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1006,7 +1006,7 @@ declare interface DescribeAudioTaskResponse {
   Progress?: number;
   /** 结果总数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1038,7 +1038,7 @@ declare interface DescribeConversationTaskResponse {
   Progress?: number;
   /** 结果总数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1054,7 +1054,7 @@ declare interface DescribeHighlightResultResponse {
   JobId?: number;
   /** 任务的进度百分比，100表示任务已完成。 */
   Progress?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1076,7 +1076,7 @@ declare interface DescribeImageTaskResponse {
   Progress?: number;
   /** 任务结果数目 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1090,7 +1090,7 @@ declare interface DescribeImageTaskStatisticResponse {
   Statistic?: ImageTaskStatistic;
   /** 图像任务唯一标识符 */
   JobId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1102,7 +1102,7 @@ declare interface DescribeLibrariesResponse {
   LibrarySet?: Library[];
   /** 人员库总数量 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1136,7 +1136,7 @@ declare interface DescribePersonResponse {
   StudentNumber?: string;
   /** 修改时间 */
   UpdateTime?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1154,7 +1154,7 @@ declare interface DescribePersonsResponse {
   PersonSet?: Person[];
   /** 人员总数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1164,7 +1164,7 @@ declare interface DescribeVocabLibRequest {
 declare interface DescribeVocabLibResponse {
   /** 返回该appid下的所有词汇库名 */
   VocabLibNameSet?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1176,7 +1176,7 @@ declare interface DescribeVocabRequest {
 declare interface DescribeVocabResponse {
   /** 词汇列表 */
   VocabNameSet?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1192,7 +1192,7 @@ declare interface ModifyLibraryResponse {
   LibraryId?: string;
   /** 人员库名称 */
   LibraryName?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1224,7 +1224,7 @@ declare interface ModifyPersonResponse {
   PersonId?: string;
   /** 人员名称 */
   PersonName?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1250,7 +1250,7 @@ declare interface SubmitAudioTaskRequest {
 declare interface SubmitAudioTaskResponse {
   /** 查询结果时指名的jobid。在URL方式时提交请求后会返回一个jobid，后续查询该url的结果时使用这个jobid进行查询。 */
   JobId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1280,7 +1280,7 @@ declare interface SubmitCheckAttendanceTaskPlusResponse {
   JobId?: number;
   /** 没有注册的人的ID列表 */
   NotRegisteredSet?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1310,7 +1310,7 @@ declare interface SubmitCheckAttendanceTaskResponse {
   JobId?: number;
   /** 没有注册的人的ID列表 */
   NotRegisteredSet?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1334,7 +1334,7 @@ declare interface SubmitConversationTaskRequest {
 declare interface SubmitConversationTaskResponse {
   /** 查询结果时指名的jobid。在URL方式时提交请求后会返回一个jobid，后续查询该url的结果时使用这个jobid进行查询。 */
   JobId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1362,7 +1362,7 @@ declare interface SubmitDoubleVideoHighlightsResponse {
   JobId?: number;
   /** 未注册的人员ID列表。若出现此项，代表评估出现了问题，输入的PersonId中有不在库中的人员ID。 */
   NotRegistered?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1390,7 +1390,7 @@ declare interface SubmitFullBodyClassTaskResponse {
   ImageResults?: ImageTaskResult[];
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1418,7 +1418,7 @@ declare interface SubmitHighlightsRequest {
 declare interface SubmitHighlightsResponse {
   /** 视频拆条任务ID，用来唯一标识视频拆条任务。 */
   JobId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1450,7 +1450,7 @@ declare interface SubmitImageTaskPlusResponse {
   Progress?: number;
   /** 结果总数目 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1484,7 +1484,7 @@ declare interface SubmitImageTaskResponse {
   Progress?: number;
   /** 结果总数目 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1512,7 +1512,7 @@ declare interface SubmitOneByOneClassTaskResponse {
   ImageResults?: ImageTaskResult[];
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1532,7 +1532,7 @@ declare interface SubmitOpenClassTaskResponse {
   ImageResults?: ImageTaskResult[];
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1560,7 +1560,7 @@ declare interface SubmitPartialBodyClassTaskResponse {
   ImageResults?: ImageTaskResult[];
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1580,7 +1580,7 @@ declare interface SubmitTraditionalClassTaskResponse {
   ImageResults?: ImageTaskResult[];
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1620,94 +1620,94 @@ declare interface TransmitAudioStreamResponse {
   AllTexts?: string;
   /** 临时保存的音频链接 */
   AudioUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tci 腾讯智学课堂分析} */
 declare interface Tci {
   (): Versions;
-  /** {@link AIAssistant AI 助教标准接口}({@link AIAssistantRequest 请求参数}): {@link AIAssistantResponse 返回参数} */
+  /** AI 助教标准接口 {@link AIAssistantRequest} {@link AIAssistantResponse} */
   AIAssistant(data: AIAssistantRequest, config?: AxiosRequestConfig): AxiosPromise<AIAssistantResponse>;
-  /** {@link CancelTask 取消任务执行}({@link CancelTaskRequest 请求参数}): {@link CancelTaskResponse 返回参数} */
+  /** 取消任务执行 {@link CancelTaskRequest} {@link CancelTaskResponse} */
   CancelTask(data?: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
-  /** {@link CheckFacePhoto 检查人脸图片}({@link CheckFacePhotoRequest 请求参数}): {@link CheckFacePhotoResponse 返回参数} */
+  /** 检查人脸图片 {@link CheckFacePhotoRequest} {@link CheckFacePhotoResponse} */
   CheckFacePhoto(data: CheckFacePhotoRequest, config?: AxiosRequestConfig): AxiosPromise<CheckFacePhotoResponse>;
-  /** {@link CreateFace 创建人脸}({@link CreateFaceRequest 请求参数}): {@link CreateFaceResponse 返回参数} */
+  /** 创建人脸 {@link CreateFaceRequest} {@link CreateFaceResponse} */
   CreateFace(data: CreateFaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFaceResponse>;
-  /** {@link CreateLibrary 创建人员库}({@link CreateLibraryRequest 请求参数}): {@link CreateLibraryResponse 返回参数} */
+  /** 创建人员库 {@link CreateLibraryRequest} {@link CreateLibraryResponse} */
   CreateLibrary(data: CreateLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLibraryResponse>;
-  /** {@link CreatePerson 创建人员}({@link CreatePersonRequest 请求参数}): {@link CreatePersonResponse 返回参数} */
+  /** 创建人员 {@link CreatePersonRequest} {@link CreatePersonResponse} */
   CreatePerson(data: CreatePersonRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonResponse>;
-  /** {@link CreateVocab 创建词汇}({@link CreateVocabRequest 请求参数}): {@link CreateVocabResponse 返回参数} */
+  /** 创建词汇 {@link CreateVocabRequest} {@link CreateVocabResponse} */
   CreateVocab(data: CreateVocabRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVocabResponse>;
-  /** {@link CreateVocabLib 建立词汇库}({@link CreateVocabLibRequest 请求参数}): {@link CreateVocabLibResponse 返回参数} */
+  /** 建立词汇库 {@link CreateVocabLibRequest} {@link CreateVocabLibResponse} */
   CreateVocabLib(data: CreateVocabLibRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVocabLibResponse>;
-  /** {@link DeleteFace 删除人脸}({@link DeleteFaceRequest 请求参数}): {@link DeleteFaceResponse 返回参数} */
+  /** 删除人脸 {@link DeleteFaceRequest} {@link DeleteFaceResponse} */
   DeleteFace(data: DeleteFaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFaceResponse>;
-  /** {@link DeleteLibrary 删除人员库}({@link DeleteLibraryRequest 请求参数}): {@link DeleteLibraryResponse 返回参数} */
+  /** 删除人员库 {@link DeleteLibraryRequest} {@link DeleteLibraryResponse} */
   DeleteLibrary(data: DeleteLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLibraryResponse>;
-  /** {@link DeletePerson 删除人员}({@link DeletePersonRequest 请求参数}): {@link DeletePersonResponse 返回参数} */
+  /** 删除人员 {@link DeletePersonRequest} {@link DeletePersonResponse} */
   DeletePerson(data: DeletePersonRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonResponse>;
-  /** {@link DeleteVocab 删除词汇}({@link DeleteVocabRequest 请求参数}): {@link DeleteVocabResponse 返回参数} */
+  /** 删除词汇 {@link DeleteVocabRequest} {@link DeleteVocabResponse} */
   DeleteVocab(data: DeleteVocabRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVocabResponse>;
-  /** {@link DeleteVocabLib 删除词汇库}({@link DeleteVocabLibRequest 请求参数}): {@link DeleteVocabLibResponse 返回参数} */
+  /** 删除词汇库 {@link DeleteVocabLibRequest} {@link DeleteVocabLibResponse} */
   DeleteVocabLib(data: DeleteVocabLibRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVocabLibResponse>;
-  /** {@link DescribeAITaskResult 获取标准化接口任务结果}({@link DescribeAITaskResultRequest 请求参数}): {@link DescribeAITaskResultResponse 返回参数} */
+  /** 获取标准化接口任务结果 {@link DescribeAITaskResultRequest} {@link DescribeAITaskResultResponse} */
   DescribeAITaskResult(data: DescribeAITaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAITaskResultResponse>;
-  /** {@link DescribeAttendanceResult 人脸考勤查询结果}({@link DescribeAttendanceResultRequest 请求参数}): {@link DescribeAttendanceResultResponse 返回参数} */
+  /** 人脸考勤查询结果 {@link DescribeAttendanceResultRequest} {@link DescribeAttendanceResultResponse} */
   DescribeAttendanceResult(data: DescribeAttendanceResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttendanceResultResponse>;
-  /** {@link DescribeAudioTask 音频分析结果查询}({@link DescribeAudioTaskRequest 请求参数}): {@link DescribeAudioTaskResponse 返回参数} */
+  /** 音频分析结果查询 {@link DescribeAudioTaskRequest} {@link DescribeAudioTaskResponse} */
   DescribeAudioTask(data: DescribeAudioTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAudioTaskResponse>;
-  /** {@link DescribeConversationTask 音频对话任务分析结果查询}({@link DescribeConversationTaskRequest 请求参数}): {@link DescribeConversationTaskResponse 返回参数} */
+  /** 音频对话任务分析结果查询 {@link DescribeConversationTaskRequest} {@link DescribeConversationTaskResponse} */
   DescribeConversationTask(data: DescribeConversationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConversationTaskResponse>;
-  /** {@link DescribeHighlightResult 视频精彩集锦结果查询接口}({@link DescribeHighlightResultRequest 请求参数}): {@link DescribeHighlightResultResponse 返回参数} */
+  /** 视频精彩集锦结果查询接口 {@link DescribeHighlightResultRequest} {@link DescribeHighlightResultResponse} */
   DescribeHighlightResult(data: DescribeHighlightResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHighlightResultResponse>;
-  /** {@link DescribeImageTask 拉取任务详情}({@link DescribeImageTaskRequest 请求参数}): {@link DescribeImageTaskResponse 返回参数} */
+  /** 拉取任务详情 {@link DescribeImageTaskRequest} {@link DescribeImageTaskResponse} */
   DescribeImageTask(data: DescribeImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageTaskResponse>;
-  /** {@link DescribeImageTaskStatistic 获取图像任务统计信息}({@link DescribeImageTaskStatisticRequest 请求参数}): {@link DescribeImageTaskStatisticResponse 返回参数} */
+  /** 获取图像任务统计信息 {@link DescribeImageTaskStatisticRequest} {@link DescribeImageTaskStatisticResponse} */
   DescribeImageTaskStatistic(data: DescribeImageTaskStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageTaskStatisticResponse>;
-  /** {@link DescribeLibraries 获取人员库列表}({@link DescribeLibrariesRequest 请求参数}): {@link DescribeLibrariesResponse 返回参数} */
+  /** 获取人员库列表 {@link DescribeLibrariesRequest} {@link DescribeLibrariesResponse} */
   DescribeLibraries(data?: DescribeLibrariesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibrariesResponse>;
-  /** {@link DescribePerson 获取人员详情}({@link DescribePersonRequest 请求参数}): {@link DescribePersonResponse 返回参数} */
+  /** 获取人员详情 {@link DescribePersonRequest} {@link DescribePersonResponse} */
   DescribePerson(data: DescribePersonRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonResponse>;
-  /** {@link DescribePersons 拉取人员列表}({@link DescribePersonsRequest 请求参数}): {@link DescribePersonsResponse 返回参数} */
+  /** 拉取人员列表 {@link DescribePersonsRequest} {@link DescribePersonsResponse} */
   DescribePersons(data: DescribePersonsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonsResponse>;
-  /** {@link DescribeVocab 查询词汇}({@link DescribeVocabRequest 请求参数}): {@link DescribeVocabResponse 返回参数} */
+  /** 查询词汇 {@link DescribeVocabRequest} {@link DescribeVocabResponse} */
   DescribeVocab(data: DescribeVocabRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVocabResponse>;
-  /** {@link DescribeVocabLib 查询词汇库}({@link DescribeVocabLibRequest 请求参数}): {@link DescribeVocabLibResponse 返回参数} */
+  /** 查询词汇库 {@link DescribeVocabLibRequest} {@link DescribeVocabLibResponse} */
   DescribeVocabLib(data?: DescribeVocabLibRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVocabLibResponse>;
-  /** {@link ModifyLibrary 修改人员库信息}({@link ModifyLibraryRequest 请求参数}): {@link ModifyLibraryResponse 返回参数} */
+  /** 修改人员库信息 {@link ModifyLibraryRequest} {@link ModifyLibraryResponse} */
   ModifyLibrary(data: ModifyLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLibraryResponse>;
-  /** {@link ModifyPerson 修改人员信息}({@link ModifyPersonRequest 请求参数}): {@link ModifyPersonResponse 返回参数} */
+  /** 修改人员信息 {@link ModifyPersonRequest} {@link ModifyPersonResponse} */
   ModifyPerson(data: ModifyPersonRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonResponse>;
-  /** {@link SubmitAudioTask 音频任务提交接口}({@link SubmitAudioTaskRequest 请求参数}): {@link SubmitAudioTaskResponse 返回参数} */
+  /** 音频任务提交接口 {@link SubmitAudioTaskRequest} {@link SubmitAudioTaskResponse} */
   SubmitAudioTask(data: SubmitAudioTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitAudioTaskResponse>;
-  /** {@link SubmitCheckAttendanceTask 提交人员考勤任务}({@link SubmitCheckAttendanceTaskRequest 请求参数}): {@link SubmitCheckAttendanceTaskResponse 返回参数} */
+  /** 提交人员考勤任务 {@link SubmitCheckAttendanceTaskRequest} {@link SubmitCheckAttendanceTaskResponse} */
   SubmitCheckAttendanceTask(data: SubmitCheckAttendanceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitCheckAttendanceTaskResponse>;
-  /** {@link SubmitCheckAttendanceTaskPlus 提交高级人员考勤任务}({@link SubmitCheckAttendanceTaskPlusRequest 请求参数}): {@link SubmitCheckAttendanceTaskPlusResponse 返回参数} */
+  /** 提交高级人员考勤任务 {@link SubmitCheckAttendanceTaskPlusRequest} {@link SubmitCheckAttendanceTaskPlusResponse} */
   SubmitCheckAttendanceTaskPlus(data: SubmitCheckAttendanceTaskPlusRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitCheckAttendanceTaskPlusResponse>;
-  /** {@link SubmitConversationTask 对话任务分析接口}({@link SubmitConversationTaskRequest 请求参数}): {@link SubmitConversationTaskResponse 返回参数} */
+  /** 对话任务分析接口 {@link SubmitConversationTaskRequest} {@link SubmitConversationTaskResponse} */
   SubmitConversationTask(data: SubmitConversationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitConversationTaskResponse>;
-  /** {@link SubmitDoubleVideoHighlights 发起双路视频生成精彩集锦接口}({@link SubmitDoubleVideoHighlightsRequest 请求参数}): {@link SubmitDoubleVideoHighlightsResponse 返回参数} */
+  /** 发起双路视频生成精彩集锦接口 {@link SubmitDoubleVideoHighlightsRequest} {@link SubmitDoubleVideoHighlightsResponse} */
   SubmitDoubleVideoHighlights(data: SubmitDoubleVideoHighlightsRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitDoubleVideoHighlightsResponse>;
-  /** {@link SubmitFullBodyClassTask 提交传统课堂授课任务}({@link SubmitFullBodyClassTaskRequest 请求参数}): {@link SubmitFullBodyClassTaskResponse 返回参数} */
+  /** 提交传统课堂授课任务 {@link SubmitFullBodyClassTaskRequest} {@link SubmitFullBodyClassTaskResponse} */
   SubmitFullBodyClassTask(data: SubmitFullBodyClassTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitFullBodyClassTaskResponse>;
-  /** {@link SubmitHighlights 发起视频生成精彩集锦接口}({@link SubmitHighlightsRequest 请求参数}): {@link SubmitHighlightsResponse 返回参数} */
+  /** 发起视频生成精彩集锦接口 {@link SubmitHighlightsRequest} {@link SubmitHighlightsResponse} */
   SubmitHighlights(data: SubmitHighlightsRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHighlightsResponse>;
-  /** {@link SubmitImageTask 提交图像分析任务}({@link SubmitImageTaskRequest 请求参数}): {@link SubmitImageTaskResponse 返回参数} */
+  /** 提交图像分析任务 {@link SubmitImageTaskRequest} {@link SubmitImageTaskResponse} */
   SubmitImageTask(data: SubmitImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitImageTaskResponse>;
-  /** {@link SubmitImageTaskPlus 提交高级图像分析任务}({@link SubmitImageTaskPlusRequest 请求参数}): {@link SubmitImageTaskPlusResponse 返回参数} */
+  /** 提交高级图像分析任务 {@link SubmitImageTaskPlusRequest} {@link SubmitImageTaskPlusResponse} */
   SubmitImageTaskPlus(data: SubmitImageTaskPlusRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitImageTaskPlusResponse>;
-  /** {@link SubmitOneByOneClassTask 提交在线1对1课堂任务}({@link SubmitOneByOneClassTaskRequest 请求参数}): {@link SubmitOneByOneClassTaskResponse 返回参数} */
+  /** 提交在线1对1课堂任务 {@link SubmitOneByOneClassTaskRequest} {@link SubmitOneByOneClassTaskResponse} */
   SubmitOneByOneClassTask(data: SubmitOneByOneClassTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitOneByOneClassTaskResponse>;
-  /** {@link SubmitOpenClassTask 提交线下小班（无课桌）课任务}({@link SubmitOpenClassTaskRequest 请求参数}): {@link SubmitOpenClassTaskResponse 返回参数} */
+  /** 提交线下小班（无课桌）课任务 {@link SubmitOpenClassTaskRequest} {@link SubmitOpenClassTaskResponse} */
   SubmitOpenClassTask(data: SubmitOpenClassTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitOpenClassTaskResponse>;
-  /** {@link SubmitPartialBodyClassTask 提交在线小班课授课任务}({@link SubmitPartialBodyClassTaskRequest 请求参数}): {@link SubmitPartialBodyClassTaskResponse 返回参数} */
+  /** 提交在线小班课授课任务 {@link SubmitPartialBodyClassTaskRequest} {@link SubmitPartialBodyClassTaskResponse} */
   SubmitPartialBodyClassTask(data: SubmitPartialBodyClassTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitPartialBodyClassTaskResponse>;
-  /** {@link SubmitTraditionalClassTask 提交传统面授大班课（含课桌）任务}({@link SubmitTraditionalClassTaskRequest 请求参数}): {@link SubmitTraditionalClassTaskResponse 返回参数} */
+  /** 提交传统面授大班课（含课桌）任务 {@link SubmitTraditionalClassTaskRequest} {@link SubmitTraditionalClassTaskResponse} */
   SubmitTraditionalClassTask(data: SubmitTraditionalClassTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTraditionalClassTaskResponse>;
-  /** {@link TransmitAudioStream 流式音频分析}({@link TransmitAudioStreamRequest 请求参数}): {@link TransmitAudioStreamResponse 返回参数} */
+  /** 流式音频分析 {@link TransmitAudioStreamRequest} {@link TransmitAudioStreamResponse} */
   TransmitAudioStream(data: TransmitAudioStreamRequest, config?: AxiosRequestConfig): AxiosPromise<TransmitAudioStreamResponse>;
 }
 

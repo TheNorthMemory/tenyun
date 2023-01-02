@@ -976,7 +976,7 @@ declare interface AttachInstancesRequest {
 }
 
 declare interface AttachInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -992,7 +992,7 @@ declare interface CreateComputeEnvRequest {
 declare interface CreateComputeEnvResponse {
   /** 计算环境ID */
   EnvId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1008,7 +1008,7 @@ declare interface CreateCpmComputeEnvRequest {
 declare interface CreateCpmComputeEnvResponse {
   /** 计算环境ID */
   EnvId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1026,7 +1026,7 @@ declare interface CreateTaskTemplateRequest {
 declare interface CreateTaskTemplateResponse {
   /** 任务模板ID */
   TaskTemplateId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1036,7 +1036,7 @@ declare interface DeleteComputeEnvRequest {
 }
 
 declare interface DeleteComputeEnvResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1046,7 +1046,7 @@ declare interface DeleteJobRequest {
 }
 
 declare interface DeleteJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1056,7 +1056,7 @@ declare interface DeleteTaskTemplatesRequest {
 }
 
 declare interface DeleteTaskTemplatesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1068,7 +1068,7 @@ declare interface DescribeAvailableCvmInstanceTypesRequest {
 declare interface DescribeAvailableCvmInstanceTypesResponse {
   /** 机型配置数组 */
   InstanceTypeConfigSet?: InstanceTypeConfig[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1088,7 +1088,7 @@ declare interface DescribeComputeEnvActivitiesResponse {
   ActivitySet: Activity[];
   /** 活动数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1120,7 +1120,7 @@ declare interface DescribeComputeEnvCreateInfoResponse {
   DesiredComputeNodeCount: number;
   /** 计算环境绑定的标签列表 */
   Tags: Tag[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1140,7 +1140,7 @@ declare interface DescribeComputeEnvCreateInfosResponse {
   TotalCount: number;
   /** 计算环境创建信息列表 */
   ComputeEnvCreateInfoSet: ComputeEnvCreateInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1174,7 +1174,7 @@ declare interface DescribeComputeEnvResponse {
   AttachedComputeNodeCount: number;
   /** 计算环境绑定的标签列表。 */
   Tags: Tag[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1194,7 +1194,7 @@ declare interface DescribeComputeEnvsResponse {
   ComputeEnvSet: ComputeEnvView[];
   /** 计算环境数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1206,7 +1206,7 @@ declare interface DescribeCpmOsInfoRequest {
 declare interface DescribeCpmOsInfoResponse {
   /** 操作系统信息列表。 */
   OsInfoSet: OsInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1218,7 +1218,7 @@ declare interface DescribeCvmZoneInstanceConfigInfosRequest {
 declare interface DescribeCvmZoneInstanceConfigInfosResponse {
   /** 可用区机型配置列表。 */
   InstanceTypeQuotaSet?: InstanceTypeQuotaItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1228,7 +1228,7 @@ declare interface DescribeInstanceCategoriesRequest {
 declare interface DescribeInstanceCategoriesResponse {
   /** CVM实例分类列表 */
   InstanceCategorySet?: InstanceCategoryItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1266,7 +1266,7 @@ declare interface DescribeJobResponse {
   Tags: Tag[] | null;
   /** 下一步动作 */
   NextAction: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1290,7 +1290,7 @@ declare interface DescribeJobSubmitInfoResponse {
   Dependences: Dependence[];
   /** 作业绑定的标签列表。 */
   Tags: Tag[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1310,7 +1310,7 @@ declare interface DescribeJobsResponse {
   JobSet: JobView[];
   /** 符合条件的作业数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1332,7 +1332,7 @@ declare interface DescribeTaskLogsResponse {
   TotalCount: number;
   /** 任务实例日志详情集合 */
   TaskInstanceLogSet: TaskInstanceLog[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1366,7 +1366,7 @@ declare interface DescribeTaskResponse {
   TaskInstanceSet: TaskInstanceView[];
   /** 任务实例统计指标 */
   TaskInstanceMetrics: TaskInstanceMetrics;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1386,7 +1386,7 @@ declare interface DescribeTaskTemplatesResponse {
   TaskTemplateSet: TaskTemplateView[];
   /** 任务模板数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1398,7 +1398,7 @@ declare interface DetachInstancesRequest {
 }
 
 declare interface DetachInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1423,7 +1423,7 @@ declare interface ModifyComputeEnvRequest {
 }
 
 declare interface ModifyComputeEnvResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1439,7 +1439,7 @@ declare interface ModifyTaskTemplateRequest {
 }
 
 declare interface ModifyTaskTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1449,7 +1449,7 @@ declare interface RetryJobsRequest {
 }
 
 declare interface RetryJobsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1465,7 +1465,7 @@ declare interface SubmitJobRequest {
 declare interface SubmitJobResponse {
   /** 当通过本接口来提交作业时会返回该参数，表示一个作业ID。返回作业ID列表并不代表作业解析/运行成功，可根据 DescribeJob 接口查询其状态。 */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1477,7 +1477,7 @@ declare interface TerminateComputeNodeRequest {
 }
 
 declare interface TerminateComputeNodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1489,7 +1489,7 @@ declare interface TerminateComputeNodesRequest {
 }
 
 declare interface TerminateComputeNodesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1499,7 +1499,7 @@ declare interface TerminateJobRequest {
 }
 
 declare interface TerminateJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1513,74 +1513,74 @@ declare interface TerminateTaskInstanceRequest {
 }
 
 declare interface TerminateTaskInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Batch 批量计算} */
 declare interface Batch {
   (): Versions;
-  /** {@link AttachInstances 添加实例到计算环境}({@link AttachInstancesRequest 请求参数}): {@link AttachInstancesResponse 返回参数} */
+  /** 添加实例到计算环境 {@link AttachInstancesRequest} {@link AttachInstancesResponse} */
   AttachInstances(data: AttachInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachInstancesResponse>;
-  /** {@link CreateComputeEnv 创建计算环境}({@link CreateComputeEnvRequest 请求参数}): {@link CreateComputeEnvResponse 返回参数} */
+  /** 创建计算环境 {@link CreateComputeEnvRequest} {@link CreateComputeEnvResponse} */
   CreateComputeEnv(data: CreateComputeEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreateComputeEnvResponse>;
-  /** {@link CreateCpmComputeEnv 创建黑石计算环境}({@link CreateCpmComputeEnvRequest 请求参数}): {@link CreateCpmComputeEnvResponse 返回参数} */
+  /** 创建黑石计算环境 {@link CreateCpmComputeEnvRequest} {@link CreateCpmComputeEnvResponse} */
   CreateCpmComputeEnv(data: CreateCpmComputeEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCpmComputeEnvResponse>;
-  /** {@link CreateTaskTemplate 创建任务模板}({@link CreateTaskTemplateRequest 请求参数}): {@link CreateTaskTemplateResponse 返回参数} */
+  /** 创建任务模板 {@link CreateTaskTemplateRequest} {@link CreateTaskTemplateResponse} */
   CreateTaskTemplate(data: CreateTaskTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskTemplateResponse>;
-  /** {@link DeleteComputeEnv 删除计算环境}({@link DeleteComputeEnvRequest 请求参数}): {@link DeleteComputeEnvResponse 返回参数} */
+  /** 删除计算环境 {@link DeleteComputeEnvRequest} {@link DeleteComputeEnvResponse} */
   DeleteComputeEnv(data: DeleteComputeEnvRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteComputeEnvResponse>;
-  /** {@link DeleteJob 删除作业}({@link DeleteJobRequest 请求参数}): {@link DeleteJobResponse 返回参数} */
+  /** 删除作业 {@link DeleteJobRequest} {@link DeleteJobResponse} */
   DeleteJob(data: DeleteJobRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJobResponse>;
-  /** {@link DeleteTaskTemplates 删除任务模板}({@link DeleteTaskTemplatesRequest 请求参数}): {@link DeleteTaskTemplatesResponse 返回参数} */
+  /** 删除任务模板 {@link DeleteTaskTemplatesRequest} {@link DeleteTaskTemplatesResponse} */
   DeleteTaskTemplates(data: DeleteTaskTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskTemplatesResponse>;
-  /** {@link DescribeAvailableCvmInstanceTypes 获取批量计算可用的CVM机型配置信息}({@link DescribeAvailableCvmInstanceTypesRequest 请求参数}): {@link DescribeAvailableCvmInstanceTypesResponse 返回参数} */
+  /** 获取批量计算可用的CVM机型配置信息 {@link DescribeAvailableCvmInstanceTypesRequest} {@link DescribeAvailableCvmInstanceTypesResponse} */
   DescribeAvailableCvmInstanceTypes(data?: DescribeAvailableCvmInstanceTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableCvmInstanceTypesResponse>;
-  /** {@link DescribeComputeEnv 获取计算环境详情}({@link DescribeComputeEnvRequest 请求参数}): {@link DescribeComputeEnvResponse 返回参数} */
+  /** 获取计算环境详情 {@link DescribeComputeEnvRequest} {@link DescribeComputeEnvResponse} */
   DescribeComputeEnv(data: DescribeComputeEnvRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvResponse>;
-  /** {@link DescribeComputeEnvActivities 查看计算环境活动信息}({@link DescribeComputeEnvActivitiesRequest 请求参数}): {@link DescribeComputeEnvActivitiesResponse 返回参数} */
+  /** 查看计算环境活动信息 {@link DescribeComputeEnvActivitiesRequest} {@link DescribeComputeEnvActivitiesResponse} */
   DescribeComputeEnvActivities(data: DescribeComputeEnvActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvActivitiesResponse>;
-  /** {@link DescribeComputeEnvCreateInfo 查看计算环境的创建信息}({@link DescribeComputeEnvCreateInfoRequest 请求参数}): {@link DescribeComputeEnvCreateInfoResponse 返回参数} */
+  /** 查看计算环境的创建信息 {@link DescribeComputeEnvCreateInfoRequest} {@link DescribeComputeEnvCreateInfoResponse} */
   DescribeComputeEnvCreateInfo(data: DescribeComputeEnvCreateInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvCreateInfoResponse>;
-  /** {@link DescribeComputeEnvCreateInfos 查看计算环境创建信息列表}({@link DescribeComputeEnvCreateInfosRequest 请求参数}): {@link DescribeComputeEnvCreateInfosResponse 返回参数} */
+  /** 查看计算环境创建信息列表 {@link DescribeComputeEnvCreateInfosRequest} {@link DescribeComputeEnvCreateInfosResponse} */
   DescribeComputeEnvCreateInfos(data?: DescribeComputeEnvCreateInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvCreateInfosResponse>;
-  /** {@link DescribeComputeEnvs 获取计算环境列表}({@link DescribeComputeEnvsRequest 请求参数}): {@link DescribeComputeEnvsResponse 返回参数} */
+  /** 获取计算环境列表 {@link DescribeComputeEnvsRequest} {@link DescribeComputeEnvsResponse} */
   DescribeComputeEnvs(data?: DescribeComputeEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvsResponse>;
-  /** {@link DescribeCpmOsInfo 查询批量计算黑石操作系统信息}({@link DescribeCpmOsInfoRequest 请求参数}): {@link DescribeCpmOsInfoResponse 返回参数} */
+  /** 查询批量计算黑石操作系统信息 {@link DescribeCpmOsInfoRequest} {@link DescribeCpmOsInfoResponse} */
   DescribeCpmOsInfo(data?: DescribeCpmOsInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCpmOsInfoResponse>;
-  /** {@link DescribeCvmZoneInstanceConfigInfos 获取批量计算可用区机型配置信息}({@link DescribeCvmZoneInstanceConfigInfosRequest 请求参数}): {@link DescribeCvmZoneInstanceConfigInfosResponse 返回参数} */
+  /** 获取批量计算可用区机型配置信息 {@link DescribeCvmZoneInstanceConfigInfosRequest} {@link DescribeCvmZoneInstanceConfigInfosResponse} */
   DescribeCvmZoneInstanceConfigInfos(data?: DescribeCvmZoneInstanceConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCvmZoneInstanceConfigInfosResponse>;
-  /** {@link DescribeInstanceCategories 查询实例分类信息}({@link DescribeInstanceCategoriesRequest 请求参数}): {@link DescribeInstanceCategoriesResponse 返回参数} */
+  /** 查询实例分类信息 {@link DescribeInstanceCategoriesRequest} {@link DescribeInstanceCategoriesResponse} */
   DescribeInstanceCategories(data?: DescribeInstanceCategoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceCategoriesResponse>;
-  /** {@link DescribeJob 查看作业详情}({@link DescribeJobRequest 请求参数}): {@link DescribeJobResponse 返回参数} */
+  /** 查看作业详情 {@link DescribeJobRequest} {@link DescribeJobResponse} */
   DescribeJob(data: DescribeJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobResponse>;
-  /** {@link DescribeJobSubmitInfo 获取作业的提交信息}({@link DescribeJobSubmitInfoRequest 请求参数}): {@link DescribeJobSubmitInfoResponse 返回参数} */
+  /** 获取作业的提交信息 {@link DescribeJobSubmitInfoRequest} {@link DescribeJobSubmitInfoResponse} */
   DescribeJobSubmitInfo(data: DescribeJobSubmitInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobSubmitInfoResponse>;
-  /** {@link DescribeJobs 查看作业列表}({@link DescribeJobsRequest 请求参数}): {@link DescribeJobsResponse 返回参数} */
+  /** 查看作业列表 {@link DescribeJobsRequest} {@link DescribeJobsResponse} */
   DescribeJobs(data?: DescribeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobsResponse>;
-  /** {@link DescribeTask 查询任务详情}({@link DescribeTaskRequest 请求参数}): {@link DescribeTaskResponse 返回参数} */
+  /** 查询任务详情 {@link DescribeTaskRequest} {@link DescribeTaskResponse} */
   DescribeTask(data: DescribeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResponse>;
-  /** {@link DescribeTaskLogs 获取任务日志详情}({@link DescribeTaskLogsRequest 请求参数}): {@link DescribeTaskLogsResponse 返回参数} */
+  /** 获取任务日志详情 {@link DescribeTaskLogsRequest} {@link DescribeTaskLogsResponse} */
   DescribeTaskLogs(data: DescribeTaskLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogsResponse>;
-  /** {@link DescribeTaskTemplates 获取任务模板}({@link DescribeTaskTemplatesRequest 请求参数}): {@link DescribeTaskTemplatesResponse 返回参数} */
+  /** 获取任务模板 {@link DescribeTaskTemplatesRequest} {@link DescribeTaskTemplatesResponse} */
   DescribeTaskTemplates(data?: DescribeTaskTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskTemplatesResponse>;
-  /** {@link DetachInstances 从计算环境移出实例}({@link DetachInstancesRequest 请求参数}): {@link DetachInstancesResponse 返回参数} */
+  /** 从计算环境移出实例 {@link DetachInstancesRequest} {@link DetachInstancesResponse} */
   DetachInstances(data: DetachInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachInstancesResponse>;
-  /** {@link ModifyComputeEnv 修改计算环境}({@link ModifyComputeEnvRequest 请求参数}): {@link ModifyComputeEnvResponse 返回参数} */
+  /** 修改计算环境 {@link ModifyComputeEnvRequest} {@link ModifyComputeEnvResponse} */
   ModifyComputeEnv(data: ModifyComputeEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyComputeEnvResponse>;
-  /** {@link ModifyTaskTemplate 修改任务模板}({@link ModifyTaskTemplateRequest 请求参数}): {@link ModifyTaskTemplateResponse 返回参数} */
+  /** 修改任务模板 {@link ModifyTaskTemplateRequest} {@link ModifyTaskTemplateResponse} */
   ModifyTaskTemplate(data: ModifyTaskTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskTemplateResponse>;
-  /** {@link RetryJobs 重试作业}({@link RetryJobsRequest 请求参数}): {@link RetryJobsResponse 返回参数} */
+  /** 重试作业 {@link RetryJobsRequest} {@link RetryJobsResponse} */
   RetryJobs(data: RetryJobsRequest, config?: AxiosRequestConfig): AxiosPromise<RetryJobsResponse>;
-  /** {@link SubmitJob 提交作业}({@link SubmitJobRequest 请求参数}): {@link SubmitJobResponse 返回参数} */
+  /** 提交作业 {@link SubmitJobRequest} {@link SubmitJobResponse} */
   SubmitJob(data: SubmitJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitJobResponse>;
-  /** {@link TerminateComputeNode 销毁计算节点}({@link TerminateComputeNodeRequest 请求参数}): {@link TerminateComputeNodeResponse 返回参数} */
+  /** 销毁计算节点 {@link TerminateComputeNodeRequest} {@link TerminateComputeNodeResponse} */
   TerminateComputeNode(data: TerminateComputeNodeRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateComputeNodeResponse>;
-  /** {@link TerminateComputeNodes 批量销毁计算节点}({@link TerminateComputeNodesRequest 请求参数}): {@link TerminateComputeNodesResponse 返回参数} */
+  /** 批量销毁计算节点 {@link TerminateComputeNodesRequest} {@link TerminateComputeNodesResponse} */
   TerminateComputeNodes(data: TerminateComputeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateComputeNodesResponse>;
-  /** {@link TerminateJob 终止作业}({@link TerminateJobRequest 请求参数}): {@link TerminateJobResponse 返回参数} */
+  /** 终止作业 {@link TerminateJobRequest} {@link TerminateJobResponse} */
   TerminateJob(data: TerminateJobRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateJobResponse>;
-  /** {@link TerminateTaskInstance 终止任务实例}({@link TerminateTaskInstanceRequest 请求参数}): {@link TerminateTaskInstanceResponse 返回参数} */
+  /** 终止任务实例 {@link TerminateTaskInstanceRequest} {@link TerminateTaskInstanceResponse} */
   TerminateTaskInstance(data: TerminateTaskInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateTaskInstanceResponse>;
 }
 

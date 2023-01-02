@@ -842,7 +842,7 @@ declare interface AbortCronJobsRequest {
 }
 
 declare interface AbortCronJobsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -858,7 +858,7 @@ declare interface AbortJobRequest {
 }
 
 declare interface AbortJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -870,7 +870,7 @@ declare interface AdjustJobSpeedRequest {
 }
 
 declare interface AdjustJobSpeedResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -884,7 +884,7 @@ declare interface CopyScenarioRequest {
 declare interface CopyScenarioResponse {
   /** 复制出的新场景 ID */
   ScenarioId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -898,7 +898,7 @@ declare interface CreateAlertChannelRequest {
 }
 
 declare interface CreateAlertChannelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -928,7 +928,7 @@ declare interface CreateCronJobRequest {
 declare interface CreateCronJobResponse {
   /** 定时任务ID */
   CronJobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -960,7 +960,7 @@ declare interface CreateFileRequest {
 }
 
 declare interface CreateFileResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -976,7 +976,7 @@ declare interface CreateProjectRequest {
 declare interface CreateProjectResponse {
   /** 项目ID */
   ProjectId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1022,7 +1022,7 @@ declare interface CreateScenarioRequest {
 declare interface CreateScenarioResponse {
   /** 场景ID */
   ScenarioId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1034,7 +1034,7 @@ declare interface DeleteAlertChannelRequest {
 }
 
 declare interface DeleteAlertChannelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1046,7 +1046,7 @@ declare interface DeleteCronJobsRequest {
 }
 
 declare interface DeleteCronJobsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1058,7 +1058,7 @@ declare interface DeleteFilesRequest {
 }
 
 declare interface DeleteFilesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1072,7 +1072,7 @@ declare interface DeleteJobsRequest {
 }
 
 declare interface DeleteJobsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1086,7 +1086,7 @@ declare interface DeleteProjectsRequest {
 }
 
 declare interface DeleteProjectsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1100,7 +1100,7 @@ declare interface DeleteScenariosRequest {
 }
 
 declare interface DeleteScenariosResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1124,7 +1124,7 @@ declare interface DescribeAlertChannelsResponse {
   AlertChannelSet: AlertChannelRecord[] | null;
   /** 告警通知接收组数目 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1152,7 +1152,7 @@ declare interface DescribeAlertRecordsResponse {
   AlertRecordSet: AlertRecord[] | null;
   /** 告警历史记录的总数 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1162,7 +1162,7 @@ declare interface DescribeAvailableMetricsRequest {
 declare interface DescribeAvailableMetricsResponse {
   /** 系统支持的所有指标 */
   MetricSet: MetricInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1178,7 +1178,7 @@ declare interface DescribeCheckSummaryRequest {
 declare interface DescribeCheckSummaryResponse {
   /** 检查点汇总信息 */
   CheckSummarySet: CheckSummary[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1206,7 +1206,7 @@ declare interface DescribeCronJobsResponse {
   Total: number;
   /** 定时任务信息 */
   CronJobSet: CronJob[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1230,7 +1230,7 @@ declare interface DescribeFilesResponse {
   FileSet: File[] | null;
   /** 文件总数 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1264,7 +1264,7 @@ declare interface DescribeJobsResponse {
   JobSet: Job[] | null;
   /** 任务数量 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1284,7 +1284,7 @@ declare interface DescribeLabelValuesRequest {
 declare interface DescribeLabelValuesResponse {
   /** 标签值数组 */
   LabelValueSet: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1300,7 +1300,7 @@ declare interface DescribeMetricLabelWithValuesRequest {
 declare interface DescribeMetricLabelWithValuesResponse {
   /** 指标所有的label和values数组 */
   MetricLabelWithValuesSet: MetricLabelWithValues[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1334,7 +1334,7 @@ declare interface DescribeNormalLogsResponse {
   Context: string | null;
   /** 日志数组 */
   NormalLogs: NormalLog[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1360,7 +1360,7 @@ declare interface DescribeProjectsResponse {
   ProjectSet: Project[] | null;
   /** 项目数量 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1370,7 +1370,7 @@ declare interface DescribeRegionsRequest {
 declare interface DescribeRegionsResponse {
   /** 地域数组 */
   RegionSet: RegionDetail[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1386,7 +1386,7 @@ declare interface DescribeRequestSummaryRequest {
 declare interface DescribeRequestSummaryResponse {
   /** 请求汇总信息 */
   RequestSummarySet: RequestSummary[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1404,7 +1404,7 @@ declare interface DescribeSampleBatchQueryRequest {
 declare interface DescribeSampleBatchQueryResponse {
   /** 返回指标内容 */
   MetricSampleSet: CustomSample[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1450,7 +1450,7 @@ declare interface DescribeSampleLogsResponse {
   Context: string | null;
   /** 采样日志数组 */
   SampleLogs: SampleLog[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1468,7 +1468,7 @@ declare interface DescribeSampleMatrixBatchQueryRequest {
 declare interface DescribeSampleMatrixBatchQueryResponse {
   /** 批量指标矩阵 */
   MetricSampleMatrixSet: CustomSampleMatrix[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1492,7 +1492,7 @@ declare interface DescribeSampleMatrixQueryRequest {
 declare interface DescribeSampleMatrixQueryResponse {
   /** 指标矩阵 */
   MetricSampleMatrix: CustomSampleMatrix | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1514,7 +1514,7 @@ declare interface DescribeSampleQueryRequest {
 declare interface DescribeSampleQueryResponse {
   /** 返回指标内容 */
   MetricSample: CustomSample | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1552,7 +1552,7 @@ declare interface DescribeScenarioWithJobsResponse {
   ScenarioWithJobsSet?: ScenarioWithJobs[] | null;
   /** 场景总数 */
   Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1582,7 +1582,7 @@ declare interface DescribeScenariosResponse {
   ScenarioSet: Scenario[] | null;
   /** 场景总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1600,7 +1600,7 @@ declare interface GenerateTmpKeyResponse {
   ExpiredTime: number;
   /** 临时访问凭证 */
   Credentials: Credentials;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1612,7 +1612,7 @@ declare interface RestartCronJobsRequest {
 }
 
 declare interface RestartCronJobsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1632,7 +1632,7 @@ declare interface StartJobRequest {
 declare interface StartJobResponse {
   /** 任务ID */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1662,7 +1662,7 @@ declare interface UpdateCronJobRequest {
 }
 
 declare interface UpdateCronJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1676,7 +1676,7 @@ declare interface UpdateFileScenarioRelationRequest {
 }
 
 declare interface UpdateFileScenarioRelationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1692,7 +1692,7 @@ declare interface UpdateJobRequest {
 }
 
 declare interface UpdateJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1710,7 +1710,7 @@ declare interface UpdateProjectRequest {
 }
 
 declare interface UpdateProjectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1760,98 +1760,98 @@ declare interface UpdateScenarioRequest {
 }
 
 declare interface UpdateScenarioResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Pts 云压测} */
 declare interface Pts {
   (): Versions;
-  /** {@link AbortCronJobs 停止定时任务}({@link AbortCronJobsRequest 请求参数}): {@link AbortCronJobsResponse 返回参数} */
+  /** 停止定时任务 {@link AbortCronJobsRequest} {@link AbortCronJobsResponse} */
   AbortCronJobs(data: AbortCronJobsRequest, config?: AxiosRequestConfig): AxiosPromise<AbortCronJobsResponse>;
-  /** {@link AbortJob 停止任务}({@link AbortJobRequest 请求参数}): {@link AbortJobResponse 返回参数} */
+  /** 停止任务 {@link AbortJobRequest} {@link AbortJobResponse} */
   AbortJob(data: AbortJobRequest, config?: AxiosRequestConfig): AxiosPromise<AbortJobResponse>;
-  /** {@link AdjustJobSpeed 调整任务目标RPS}({@link AdjustJobSpeedRequest 请求参数}): {@link AdjustJobSpeedResponse 返回参数} */
+  /** 调整任务目标RPS {@link AdjustJobSpeedRequest} {@link AdjustJobSpeedResponse} */
   AdjustJobSpeed(data: AdjustJobSpeedRequest, config?: AxiosRequestConfig): AxiosPromise<AdjustJobSpeedResponse>;
-  /** {@link CopyScenario 复制场景}({@link CopyScenarioRequest 请求参数}): {@link CopyScenarioResponse 返回参数} */
+  /** 复制场景 {@link CopyScenarioRequest} {@link CopyScenarioResponse} */
   CopyScenario(data: CopyScenarioRequest, config?: AxiosRequestConfig): AxiosPromise<CopyScenarioResponse>;
-  /** {@link CreateAlertChannel 创建告警通知接收组}({@link CreateAlertChannelRequest 请求参数}): {@link CreateAlertChannelResponse 返回参数} */
+  /** 创建告警通知接收组 {@link CreateAlertChannelRequest} {@link CreateAlertChannelResponse} */
   CreateAlertChannel(data: CreateAlertChannelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlertChannelResponse>;
-  /** {@link CreateCronJob 创建定时任务}({@link CreateCronJobRequest 请求参数}): {@link CreateCronJobResponse 返回参数} */
+  /** 创建定时任务 {@link CreateCronJobRequest} {@link CreateCronJobResponse} */
   CreateCronJob(data: CreateCronJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCronJobResponse>;
-  /** {@link CreateFile 创建文件}({@link CreateFileRequest 请求参数}): {@link CreateFileResponse 返回参数} */
+  /** 创建文件 {@link CreateFileRequest} {@link CreateFileResponse} */
   CreateFile(data: CreateFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileResponse>;
-  /** {@link CreateProject 创建项目}({@link CreateProjectRequest 请求参数}): {@link CreateProjectResponse 返回参数} */
+  /** 创建项目 {@link CreateProjectRequest} {@link CreateProjectResponse} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
-  /** {@link CreateScenario 创建场景}({@link CreateScenarioRequest 请求参数}): {@link CreateScenarioResponse 返回参数} */
+  /** 创建场景 {@link CreateScenarioRequest} {@link CreateScenarioResponse} */
   CreateScenario(data: CreateScenarioRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScenarioResponse>;
-  /** {@link DeleteAlertChannel 删除告警通知接收组}({@link DeleteAlertChannelRequest 请求参数}): {@link DeleteAlertChannelResponse 返回参数} */
+  /** 删除告警通知接收组 {@link DeleteAlertChannelRequest} {@link DeleteAlertChannelResponse} */
   DeleteAlertChannel(data: DeleteAlertChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlertChannelResponse>;
-  /** {@link DeleteCronJobs 删除定时任务}({@link DeleteCronJobsRequest 请求参数}): {@link DeleteCronJobsResponse 返回参数} */
+  /** 删除定时任务 {@link DeleteCronJobsRequest} {@link DeleteCronJobsResponse} */
   DeleteCronJobs(data: DeleteCronJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCronJobsResponse>;
-  /** {@link DeleteFiles 删除文件}({@link DeleteFilesRequest 请求参数}): {@link DeleteFilesResponse 返回参数} */
+  /** 删除文件 {@link DeleteFilesRequest} {@link DeleteFilesResponse} */
   DeleteFiles(data: DeleteFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFilesResponse>;
-  /** {@link DeleteJobs 删除任务}({@link DeleteJobsRequest 请求参数}): {@link DeleteJobsResponse 返回参数} */
+  /** 删除任务 {@link DeleteJobsRequest} {@link DeleteJobsResponse} */
   DeleteJobs(data: DeleteJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJobsResponse>;
-  /** {@link DeleteProjects 删除项目}({@link DeleteProjectsRequest 请求参数}): {@link DeleteProjectsResponse 返回参数} */
+  /** 删除项目 {@link DeleteProjectsRequest} {@link DeleteProjectsResponse} */
   DeleteProjects(data: DeleteProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectsResponse>;
-  /** {@link DeleteScenarios 删除场景}({@link DeleteScenariosRequest 请求参数}): {@link DeleteScenariosResponse 返回参数} */
+  /** 删除场景 {@link DeleteScenariosRequest} {@link DeleteScenariosResponse} */
   DeleteScenarios(data: DeleteScenariosRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScenariosResponse>;
-  /** {@link DescribeAlertChannels 查询告警通知接收组}({@link DescribeAlertChannelsRequest 请求参数}): {@link DescribeAlertChannelsResponse 返回参数} */
+  /** 查询告警通知接收组 {@link DescribeAlertChannelsRequest} {@link DescribeAlertChannelsResponse} */
   DescribeAlertChannels(data: DescribeAlertChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertChannelsResponse>;
-  /** {@link DescribeAlertRecords 查询告警历史}({@link DescribeAlertRecordsRequest 请求参数}): {@link DescribeAlertRecordsResponse 返回参数} */
+  /** 查询告警历史 {@link DescribeAlertRecordsRequest} {@link DescribeAlertRecordsResponse} */
   DescribeAlertRecords(data: DescribeAlertRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertRecordsResponse>;
-  /** {@link DescribeAvailableMetrics 查询系统支持的指标}({@link DescribeAvailableMetricsRequest 请求参数}): {@link DescribeAvailableMetricsResponse 返回参数} */
+  /** 查询系统支持的指标 {@link DescribeAvailableMetricsRequest} {@link DescribeAvailableMetricsResponse} */
   DescribeAvailableMetrics(data?: DescribeAvailableMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableMetricsResponse>;
-  /** {@link DescribeCheckSummary 查询检查点汇总信息}({@link DescribeCheckSummaryRequest 请求参数}): {@link DescribeCheckSummaryResponse 返回参数} */
+  /** 查询检查点汇总信息 {@link DescribeCheckSummaryRequest} {@link DescribeCheckSummaryResponse} */
   DescribeCheckSummary(data: DescribeCheckSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckSummaryResponse>;
-  /** {@link DescribeCronJobs 列出定时任务}({@link DescribeCronJobsRequest 请求参数}): {@link DescribeCronJobsResponse 返回参数} */
+  /** 列出定时任务 {@link DescribeCronJobsRequest} {@link DescribeCronJobsResponse} */
   DescribeCronJobs(data: DescribeCronJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCronJobsResponse>;
-  /** {@link DescribeFiles 查询文件列表}({@link DescribeFilesRequest 请求参数}): {@link DescribeFilesResponse 返回参数} */
+  /** 查询文件列表 {@link DescribeFilesRequest} {@link DescribeFilesResponse} */
   DescribeFiles(data: DescribeFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFilesResponse>;
-  /** {@link DescribeJobs 查询任务列表}({@link DescribeJobsRequest 请求参数}): {@link DescribeJobsResponse 返回参数} */
+  /** 查询任务列表 {@link DescribeJobsRequest} {@link DescribeJobsResponse} */
   DescribeJobs(data: DescribeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobsResponse>;
-  /** {@link DescribeLabelValues 查询标签值}({@link DescribeLabelValuesRequest 请求参数}): {@link DescribeLabelValuesResponse 返回参数} */
+  /** 查询标签值 {@link DescribeLabelValuesRequest} {@link DescribeLabelValuesResponse} */
   DescribeLabelValues(data: DescribeLabelValuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLabelValuesResponse>;
-  /** {@link DescribeMetricLabelWithValues 查询指标所有的label及values值}({@link DescribeMetricLabelWithValuesRequest 请求参数}): {@link DescribeMetricLabelWithValuesResponse 返回参数} */
+  /** 查询指标所有的label及values值 {@link DescribeMetricLabelWithValuesRequest} {@link DescribeMetricLabelWithValuesResponse} */
   DescribeMetricLabelWithValues(data: DescribeMetricLabelWithValuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricLabelWithValuesResponse>;
-  /** {@link DescribeNormalLogs 查询压测过程日志}({@link DescribeNormalLogsRequest 请求参数}): {@link DescribeNormalLogsResponse 返回参数} */
+  /** 查询压测过程日志 {@link DescribeNormalLogsRequest} {@link DescribeNormalLogsResponse} */
   DescribeNormalLogs(data: DescribeNormalLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNormalLogsResponse>;
-  /** {@link DescribeProjects 查询项目列表}({@link DescribeProjectsRequest 请求参数}): {@link DescribeProjectsResponse 返回参数} */
+  /** 查询项目列表 {@link DescribeProjectsRequest} {@link DescribeProjectsResponse} */
   DescribeProjects(data?: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
-  /** {@link DescribeRegions 查询地域列表}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
+  /** 查询地域列表 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** {@link DescribeRequestSummary 查询请求汇总信息}({@link DescribeRequestSummaryRequest 请求参数}): {@link DescribeRequestSummaryResponse 返回参数} */
+  /** 查询请求汇总信息 {@link DescribeRequestSummaryRequest} {@link DescribeRequestSummaryResponse} */
   DescribeRequestSummary(data: DescribeRequestSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRequestSummaryResponse>;
-  /** {@link DescribeSampleBatchQuery 批量查询指标}({@link DescribeSampleBatchQueryRequest 请求参数}): {@link DescribeSampleBatchQueryResponse 返回参数} */
+  /** 批量查询指标 {@link DescribeSampleBatchQueryRequest} {@link DescribeSampleBatchQueryResponse} */
   DescribeSampleBatchQuery(data: DescribeSampleBatchQueryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleBatchQueryResponse>;
-  /** {@link DescribeSampleLogs 查询采样日志}({@link DescribeSampleLogsRequest 请求参数}): {@link DescribeSampleLogsResponse 返回参数} */
+  /** 查询采样日志 {@link DescribeSampleLogsRequest} {@link DescribeSampleLogsResponse} */
   DescribeSampleLogs(data: DescribeSampleLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleLogsResponse>;
-  /** {@link DescribeSampleMatrixBatchQuery 批量查询指标矩阵}({@link DescribeSampleMatrixBatchQueryRequest 请求参数}): {@link DescribeSampleMatrixBatchQueryResponse 返回参数} */
+  /** 批量查询指标矩阵 {@link DescribeSampleMatrixBatchQueryRequest} {@link DescribeSampleMatrixBatchQueryResponse} */
   DescribeSampleMatrixBatchQuery(data: DescribeSampleMatrixBatchQueryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleMatrixBatchQueryResponse>;
-  /** {@link DescribeSampleMatrixQuery 查询指标矩阵}({@link DescribeSampleMatrixQueryRequest 请求参数}): {@link DescribeSampleMatrixQueryResponse 返回参数} */
+  /** 查询指标矩阵 {@link DescribeSampleMatrixQueryRequest} {@link DescribeSampleMatrixQueryResponse} */
   DescribeSampleMatrixQuery(data: DescribeSampleMatrixQueryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleMatrixQueryResponse>;
-  /** {@link DescribeSampleQuery 查询指标}({@link DescribeSampleQueryRequest 请求参数}): {@link DescribeSampleQueryResponse 返回参数} */
+  /** 查询指标 {@link DescribeSampleQueryRequest} {@link DescribeSampleQueryResponse} */
   DescribeSampleQuery(data: DescribeSampleQueryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleQueryResponse>;
-  /** {@link DescribeScenarioWithJobs 查询场景及对应的任务}({@link DescribeScenarioWithJobsRequest 请求参数}): {@link DescribeScenarioWithJobsResponse 返回参数} */
+  /** 查询场景及对应的任务 {@link DescribeScenarioWithJobsRequest} {@link DescribeScenarioWithJobsResponse} */
   DescribeScenarioWithJobs(data?: DescribeScenarioWithJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScenarioWithJobsResponse>;
-  /** {@link DescribeScenarios 查询场景列表}({@link DescribeScenariosRequest 请求参数}): {@link DescribeScenariosResponse 返回参数} */
+  /** 查询场景列表 {@link DescribeScenariosRequest} {@link DescribeScenariosResponse} */
   DescribeScenarios(data?: DescribeScenariosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScenariosResponse>;
-  /** {@link GenerateTmpKey 生成临时COS凭证}({@link GenerateTmpKeyRequest 请求参数}): {@link GenerateTmpKeyResponse 返回参数} */
+  /** 生成临时COS凭证 {@link GenerateTmpKeyRequest} {@link GenerateTmpKeyResponse} */
   GenerateTmpKey(data: GenerateTmpKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateTmpKeyResponse>;
-  /** {@link RestartCronJobs 重启定时任务}({@link RestartCronJobsRequest 请求参数}): {@link RestartCronJobsResponse 返回参数} */
+  /** 重启定时任务 {@link RestartCronJobsRequest} {@link RestartCronJobsResponse} */
   RestartCronJobs(data: RestartCronJobsRequest, config?: AxiosRequestConfig): AxiosPromise<RestartCronJobsResponse>;
-  /** {@link StartJob 创建并启动任务}({@link StartJobRequest 请求参数}): {@link StartJobResponse 返回参数} */
+  /** 创建并启动任务 {@link StartJobRequest} {@link StartJobResponse} */
   StartJob(data: StartJobRequest, config?: AxiosRequestConfig): AxiosPromise<StartJobResponse>;
-  /** {@link UpdateCronJob 更新定时任务}({@link UpdateCronJobRequest 请求参数}): {@link UpdateCronJobResponse 返回参数} */
+  /** 更新定时任务 {@link UpdateCronJobRequest} {@link UpdateCronJobResponse} */
   UpdateCronJob(data: UpdateCronJobRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCronJobResponse>;
-  /** {@link UpdateFileScenarioRelation 更新关联文件场景}({@link UpdateFileScenarioRelationRequest 请求参数}): {@link UpdateFileScenarioRelationResponse 返回参数} */
+  /** 更新关联文件场景 {@link UpdateFileScenarioRelationRequest} {@link UpdateFileScenarioRelationResponse} */
   UpdateFileScenarioRelation(data: UpdateFileScenarioRelationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFileScenarioRelationResponse>;
-  /** {@link UpdateJob 更新任务}({@link UpdateJobRequest 请求参数}): {@link UpdateJobResponse 返回参数} */
+  /** 更新任务 {@link UpdateJobRequest} {@link UpdateJobResponse} */
   UpdateJob(data: UpdateJobRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateJobResponse>;
-  /** {@link UpdateProject 更新项目}({@link UpdateProjectRequest 请求参数}): {@link UpdateProjectResponse 返回参数} */
+  /** 更新项目 {@link UpdateProjectRequest} {@link UpdateProjectResponse} */
   UpdateProject(data: UpdateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProjectResponse>;
-  /** {@link UpdateScenario 更新场景}({@link UpdateScenarioRequest 请求参数}): {@link UpdateScenarioResponse 返回参数} */
+  /** 更新场景 {@link UpdateScenarioRequest} {@link UpdateScenarioResponse} */
   UpdateScenario(data: UpdateScenarioRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateScenarioResponse>;
 }
 

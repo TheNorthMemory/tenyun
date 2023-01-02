@@ -638,7 +638,7 @@ declare interface CheckRecordSnapshotRollbackRequest {
 declare interface CheckRecordSnapshotRollbackResponse {
   /** 错误原因 */
   Reason?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -666,7 +666,7 @@ declare interface CheckSnapshotRollbackResponse {
   Failed?: number | null;
   /** 失败记录信息 */
   FailedRecordList?: SnapshotRecord[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -694,7 +694,7 @@ declare interface CreateDealResponse {
   BigDealId?: string;
   /** 子订单列表 */
   DealList?: Deals[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -710,7 +710,7 @@ declare interface CreateDomainAliasRequest {
 declare interface CreateDomainAliasResponse {
   /** 域名别名ID */
   DomainAliasId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -726,7 +726,7 @@ declare interface CreateDomainBatchResponse {
   DetailList?: CreateDomainBatchDetail[];
   /** 批量任务的ID */
   JobId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -738,7 +738,7 @@ declare interface CreateDomainGroupRequest {
 declare interface CreateDomainGroupResponse {
   /** 域名分组ID */
   GroupId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -754,7 +754,7 @@ declare interface CreateDomainRequest {
 declare interface CreateDomainResponse {
   /** 域名信息 */
   DomainInfo?: DomainCreateInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -770,7 +770,7 @@ declare interface CreateRecordBatchResponse {
   DetailList?: CreateRecordBatchDetail[];
   /** 批量任务的ID */
   JobId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -786,7 +786,7 @@ declare interface CreateRecordGroupRequest {
 declare interface CreateRecordGroupResponse {
   /** 新增的分组 ID */
   GroupId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -818,7 +818,7 @@ declare interface CreateRecordRequest {
 declare interface CreateRecordResponse {
   /** 记录ID */
   RecordId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -830,7 +830,7 @@ declare interface CreateSnapshotRequest {
 }
 
 declare interface CreateSnapshotResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -844,7 +844,7 @@ declare interface DeleteDomainAliasRequest {
 }
 
 declare interface DeleteDomainAliasResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -856,7 +856,7 @@ declare interface DeleteDomainRequest {
 }
 
 declare interface DeleteDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -870,7 +870,7 @@ declare interface DeleteRecordGroupRequest {
 }
 
 declare interface DeleteRecordGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -884,7 +884,7 @@ declare interface DeleteRecordRequest {
 }
 
 declare interface DeleteRecordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -898,7 +898,7 @@ declare interface DeleteShareDomainRequest {
 }
 
 declare interface DeleteShareDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -912,7 +912,7 @@ declare interface DeleteSnapshotRequest {
 }
 
 declare interface DeleteSnapshotResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -934,7 +934,7 @@ declare interface DescribeBatchTaskResponse {
   JobType?: string;
   /** 任务创建时间 */
   CreatedAt?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -948,7 +948,7 @@ declare interface DescribeDomainAliasListRequest {
 declare interface DescribeDomainAliasListResponse {
   /** 域名别名列表 */
   DomainAliasList?: DomainAliasInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -972,7 +972,7 @@ declare interface DescribeDomainAnalyticsResponse {
   Info?: DomainAnalyticsInfo;
   /** 域名别名解析量统计信息 */
   AliasData?: DomainAliasAnalyticsItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -982,7 +982,7 @@ declare interface DescribeDomainGroupListRequest {
 declare interface DescribeDomainGroupListResponse {
   /** 分组列表 */
   GroupList?: GroupInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1004,7 +1004,7 @@ declare interface DescribeDomainListResponse {
   DomainCountInfo?: DomainCountInfo;
   /** 域名列表 */
   DomainList?: DomainListItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1026,7 +1026,7 @@ declare interface DescribeDomainLogListResponse {
   PageSize?: number;
   /** 日志总条数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1040,7 +1040,7 @@ declare interface DescribeDomainPurviewRequest {
 declare interface DescribeDomainPurviewResponse {
   /** 域名权限列表 */
   PurviewList?: PurviewInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1054,7 +1054,7 @@ declare interface DescribeDomainRequest {
 declare interface DescribeDomainResponse {
   /** 域名信息 */
   DomainInfo?: DomainInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1070,7 +1070,7 @@ declare interface DescribeDomainShareInfoResponse {
   ShareList?: DomainShareInfo[];
   /** 域名拥有者账号 */
   Owner?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1088,7 +1088,7 @@ declare interface DescribeRecordGroupListRequest {
 declare interface DescribeRecordGroupListResponse {
   /** 分组列表 */
   GroupList?: RecordGroupInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1106,7 +1106,7 @@ declare interface DescribeRecordLineListResponse {
   LineList?: LineInfo[];
   /** 线路分组列表。 */
   LineGroupList?: LineGroupInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1142,7 +1142,7 @@ declare interface DescribeRecordListResponse {
   RecordCountInfo?: RecordCountInfo;
   /** 获取的记录列表 */
   RecordList?: RecordListItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1158,7 +1158,7 @@ declare interface DescribeRecordRequest {
 declare interface DescribeRecordResponse {
   /** 记录信息 */
   RecordInfo?: RecordInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1192,7 +1192,7 @@ declare interface DescribeRecordSnapshotRollbackResultResponse {
   Success?: number | null;
   /** 快照下载地址 */
   CosUrl?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1204,7 +1204,7 @@ declare interface DescribeRecordTypeRequest {
 declare interface DescribeRecordTypeResponse {
   /** 记录类型列表 */
   TypeList?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1218,7 +1218,7 @@ declare interface DescribeSnapshotConfigRequest {
 declare interface DescribeSnapshotConfigResponse {
   /** 解析快照配置 */
   SnapshotConfig?: SnapshotConfig;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1234,7 +1234,7 @@ declare interface DescribeSnapshotListResponse {
   Info?: SnapshotPageInfo;
   /** 快照列表 */
   SnapshotList?: SnapshotInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1270,7 +1270,7 @@ declare interface DescribeSnapshotRollbackResultResponse {
   FailedRecordList?: SnapshotRecord[] | null;
   /** 快照的下载地址 */
   CosUrl?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1294,7 +1294,7 @@ declare interface DescribeSnapshotRollbackTaskResponse {
   RecordCount?: number;
   /** 开始回滚时间 */
   CreatedOn?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1320,7 +1320,7 @@ declare interface DescribeSubdomainAnalyticsResponse {
   Info?: SubdomainAnalyticsInfo;
   /** 子域名别名解析量统计信息 */
   AliasData?: SubdomainAliasAnalyticsItem[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1330,7 +1330,7 @@ declare interface DescribeUserDetailRequest {
 declare interface DescribeUserDetailResponse {
   /** 帐户信息 */
   UserInfo: UserInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1346,7 +1346,7 @@ declare interface DownloadSnapshotRequest {
 declare interface DownloadSnapshotResponse {
   /** 快照下载链接 */
   CosUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1362,7 +1362,7 @@ declare interface ModifyDomainLockRequest {
 declare interface ModifyDomainLockResponse {
   /** 域名锁定信息 */
   LockInfo?: LockInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1376,7 +1376,7 @@ declare interface ModifyDomainOwnerRequest {
 }
 
 declare interface ModifyDomainOwnerResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1390,7 +1390,7 @@ declare interface ModifyDomainRemarkRequest {
 }
 
 declare interface ModifyDomainRemarkResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1404,7 +1404,7 @@ declare interface ModifyDomainStatusRequest {
 }
 
 declare interface ModifyDomainStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1418,7 +1418,7 @@ declare interface ModifyDomainUnlockRequest {
 }
 
 declare interface ModifyDomainUnlockResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1444,7 +1444,7 @@ declare interface ModifyDynamicDNSRequest {
 declare interface ModifyDynamicDNSResponse {
   /** 记录ID */
   RecordId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1456,7 +1456,7 @@ declare interface ModifyPackageAutoRenewRequest {
 }
 
 declare interface ModifyPackageAutoRenewResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1478,7 +1478,7 @@ declare interface ModifyRecordBatchResponse {
   JobId?: number;
   /** 见modifyRecordBatchDetail */
   DetailList?: ModifyRecordBatchDetail[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1496,7 +1496,7 @@ declare interface ModifyRecordFieldsRequest {
 declare interface ModifyRecordFieldsResponse {
   /** 记录ID */
   RecordId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1514,7 +1514,7 @@ declare interface ModifyRecordGroupRequest {
 declare interface ModifyRecordGroupResponse {
   /** 修改的分组 ID */
   GroupId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1530,7 +1530,7 @@ declare interface ModifyRecordRemarkRequest {
 }
 
 declare interface ModifyRecordRemarkResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1564,7 +1564,7 @@ declare interface ModifyRecordRequest {
 declare interface ModifyRecordResponse {
   /** 记录ID */
   RecordId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1582,7 +1582,7 @@ declare interface ModifyRecordStatusRequest {
 declare interface ModifyRecordStatusResponse {
   /** 记录ID。 */
   RecordId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1598,7 +1598,7 @@ declare interface ModifyRecordToGroupRequest {
 }
 
 declare interface ModifyRecordToGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1612,7 +1612,7 @@ declare interface ModifySnapshotConfigRequest {
 }
 
 declare interface ModifySnapshotConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1630,7 +1630,7 @@ declare interface ModifySubdomainStatusRequest {
 }
 
 declare interface ModifySubdomainStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1642,7 +1642,7 @@ declare interface ModifyVasAutoRenewStatusRequest {
 }
 
 declare interface ModifyVasAutoRenewStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1660,7 +1660,7 @@ declare interface PayOrderWithBalanceResponse {
   BigDealIdList?: string[];
   /** 此次操作支付成功的订单号数组 */
   DealNameList?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1680,7 +1680,7 @@ declare interface RollbackRecordSnapshotRequest {
 declare interface RollbackRecordSnapshotResponse {
   /** 回滚任务 ID */
   JobId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1696,130 +1696,130 @@ declare interface RollbackSnapshotRequest {
 declare interface RollbackSnapshotResponse {
   /** 回滚任务 ID，用来查询回滚状态 */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Dnspod DNSPod} */
 declare interface Dnspod {
   (): Versions;
-  /** {@link CheckRecordSnapshotRollback 回滚前检查单条记录}({@link CheckRecordSnapshotRollbackRequest 请求参数}): {@link CheckRecordSnapshotRollbackResponse 返回参数} */
+  /** 回滚前检查单条记录 {@link CheckRecordSnapshotRollbackRequest} {@link CheckRecordSnapshotRollbackResponse} */
   CheckRecordSnapshotRollback(data: CheckRecordSnapshotRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<CheckRecordSnapshotRollbackResponse>;
-  /** {@link CheckSnapshotRollback 快照回滚前检查}({@link CheckSnapshotRollbackRequest 请求参数}): {@link CheckSnapshotRollbackResponse 返回参数} */
+  /** 快照回滚前检查 {@link CheckSnapshotRollbackRequest} {@link CheckSnapshotRollbackResponse} */
   CheckSnapshotRollback(data: CheckSnapshotRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<CheckSnapshotRollbackResponse>;
-  /** {@link CreateDeal 商品下单}({@link CreateDealRequest 请求参数}): {@link CreateDealResponse 返回参数} */
+  /** 商品下单 {@link CreateDealRequest} {@link CreateDealResponse} */
   CreateDeal(data: CreateDealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDealResponse>;
-  /** {@link CreateDomain 添加域名}({@link CreateDomainRequest 请求参数}): {@link CreateDomainResponse 返回参数} */
+  /** 添加域名 {@link CreateDomainRequest} {@link CreateDomainResponse} */
   CreateDomain(data: CreateDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainResponse>;
-  /** {@link CreateDomainAlias 创建域名别名}({@link CreateDomainAliasRequest 请求参数}): {@link CreateDomainAliasResponse 返回参数} */
+  /** 创建域名别名 {@link CreateDomainAliasRequest} {@link CreateDomainAliasResponse} */
   CreateDomainAlias(data: CreateDomainAliasRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainAliasResponse>;
-  /** {@link CreateDomainBatch 批量添加域名}({@link CreateDomainBatchRequest 请求参数}): {@link CreateDomainBatchResponse 返回参数} */
+  /** 批量添加域名 {@link CreateDomainBatchRequest} {@link CreateDomainBatchResponse} */
   CreateDomainBatch(data: CreateDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainBatchResponse>;
-  /** {@link CreateDomainGroup 创建域名分组}({@link CreateDomainGroupRequest 请求参数}): {@link CreateDomainGroupResponse 返回参数} */
+  /** 创建域名分组 {@link CreateDomainGroupRequest} {@link CreateDomainGroupResponse} */
   CreateDomainGroup(data: CreateDomainGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainGroupResponse>;
-  /** {@link CreateRecord 添加记录}({@link CreateRecordRequest 请求参数}): {@link CreateRecordResponse 返回参数} */
+  /** 添加记录 {@link CreateRecordRequest} {@link CreateRecordResponse} */
   CreateRecord(data: CreateRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordResponse>;
-  /** {@link CreateRecordBatch 批量添加记录}({@link CreateRecordBatchRequest 请求参数}): {@link CreateRecordBatchResponse 返回参数} */
+  /** 批量添加记录 {@link CreateRecordBatchRequest} {@link CreateRecordBatchResponse} */
   CreateRecordBatch(data: CreateRecordBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordBatchResponse>;
-  /** {@link CreateRecordGroup 添加记录分组}({@link CreateRecordGroupRequest 请求参数}): {@link CreateRecordGroupResponse 返回参数} */
+  /** 添加记录分组 {@link CreateRecordGroupRequest} {@link CreateRecordGroupResponse} */
   CreateRecordGroup(data: CreateRecordGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordGroupResponse>;
-  /** {@link CreateSnapshot 创建快照}({@link CreateSnapshotRequest 请求参数}): {@link CreateSnapshotResponse 返回参数} */
+  /** 创建快照 {@link CreateSnapshotRequest} {@link CreateSnapshotResponse} */
   CreateSnapshot(data: CreateSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotResponse>;
-  /** {@link DeleteDomain 删除域名}({@link DeleteDomainRequest 请求参数}): {@link DeleteDomainResponse 返回参数} */
+  /** 删除域名 {@link DeleteDomainRequest} {@link DeleteDomainResponse} */
   DeleteDomain(data: DeleteDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainResponse>;
-  /** {@link DeleteDomainAlias 删除域名别名}({@link DeleteDomainAliasRequest 请求参数}): {@link DeleteDomainAliasResponse 返回参数} */
+  /** 删除域名别名 {@link DeleteDomainAliasRequest} {@link DeleteDomainAliasResponse} */
   DeleteDomainAlias(data: DeleteDomainAliasRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainAliasResponse>;
-  /** {@link DeleteRecord 删除记录}({@link DeleteRecordRequest 请求参数}): {@link DeleteRecordResponse 返回参数} */
+  /** 删除记录 {@link DeleteRecordRequest} {@link DeleteRecordResponse} */
   DeleteRecord(data: DeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordResponse>;
-  /** {@link DeleteRecordGroup 删除记录分组}({@link DeleteRecordGroupRequest 请求参数}): {@link DeleteRecordGroupResponse 返回参数} */
+  /** 删除记录分组 {@link DeleteRecordGroupRequest} {@link DeleteRecordGroupResponse} */
   DeleteRecordGroup(data: DeleteRecordGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordGroupResponse>;
-  /** {@link DeleteShareDomain 删除域名共享}({@link DeleteShareDomainRequest 请求参数}): {@link DeleteShareDomainResponse 返回参数} */
+  /** 删除域名共享 {@link DeleteShareDomainRequest} {@link DeleteShareDomainResponse} */
   DeleteShareDomain(data: DeleteShareDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShareDomainResponse>;
-  /** {@link DeleteSnapshot 删除快照}({@link DeleteSnapshotRequest 请求参数}): {@link DeleteSnapshotResponse 返回参数} */
+  /** 删除快照 {@link DeleteSnapshotRequest} {@link DeleteSnapshotResponse} */
   DeleteSnapshot(data: DeleteSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotResponse>;
-  /** {@link DescribeBatchTask 获取任务详情}({@link DescribeBatchTaskRequest 请求参数}): {@link DescribeBatchTaskResponse 返回参数} */
+  /** 获取任务详情 {@link DescribeBatchTaskRequest} {@link DescribeBatchTaskResponse} */
   DescribeBatchTask(data: DescribeBatchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskResponse>;
-  /** {@link DescribeDomain 获取域名信息}({@link DescribeDomainRequest 请求参数}): {@link DescribeDomainResponse 返回参数} */
+  /** 获取域名信息 {@link DescribeDomainRequest} {@link DescribeDomainResponse} */
   DescribeDomain(data: DescribeDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainResponse>;
-  /** {@link DescribeDomainAliasList 获取域名别名列表}({@link DescribeDomainAliasListRequest 请求参数}): {@link DescribeDomainAliasListResponse 返回参数} */
+  /** 获取域名别名列表 {@link DescribeDomainAliasListRequest} {@link DescribeDomainAliasListResponse} */
   DescribeDomainAliasList(data: DescribeDomainAliasListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAliasListResponse>;
-  /** {@link DescribeDomainAnalytics 域名解析量统计}({@link DescribeDomainAnalyticsRequest 请求参数}): {@link DescribeDomainAnalyticsResponse 返回参数} */
+  /** 域名解析量统计 {@link DescribeDomainAnalyticsRequest} {@link DescribeDomainAnalyticsResponse} */
   DescribeDomainAnalytics(data: DescribeDomainAnalyticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAnalyticsResponse>;
-  /** {@link DescribeDomainGroupList 获取域名分组列表}({@link DescribeDomainGroupListRequest 请求参数}): {@link DescribeDomainGroupListResponse 返回参数} */
+  /** 获取域名分组列表 {@link DescribeDomainGroupListRequest} {@link DescribeDomainGroupListResponse} */
   DescribeDomainGroupList(data?: DescribeDomainGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainGroupListResponse>;
-  /** {@link DescribeDomainList 获取域名列表}({@link DescribeDomainListRequest 请求参数}): {@link DescribeDomainListResponse 返回参数} */
+  /** 获取域名列表 {@link DescribeDomainListRequest} {@link DescribeDomainListResponse} */
   DescribeDomainList(data?: DescribeDomainListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainListResponse>;
-  /** {@link DescribeDomainLogList 获取域名日志}({@link DescribeDomainLogListRequest 请求参数}): {@link DescribeDomainLogListResponse 返回参数} */
+  /** 获取域名日志 {@link DescribeDomainLogListRequest} {@link DescribeDomainLogListResponse} */
   DescribeDomainLogList(data: DescribeDomainLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainLogListResponse>;
-  /** {@link DescribeDomainPurview 获取域名权限}({@link DescribeDomainPurviewRequest 请求参数}): {@link DescribeDomainPurviewResponse 返回参数} */
+  /** 获取域名权限 {@link DescribeDomainPurviewRequest} {@link DescribeDomainPurviewResponse} */
   DescribeDomainPurview(data: DescribeDomainPurviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainPurviewResponse>;
-  /** {@link DescribeDomainShareInfo 获取域名共享信息}({@link DescribeDomainShareInfoRequest 请求参数}): {@link DescribeDomainShareInfoResponse 返回参数} */
+  /** 获取域名共享信息 {@link DescribeDomainShareInfoRequest} {@link DescribeDomainShareInfoResponse} */
   DescribeDomainShareInfo(data: DescribeDomainShareInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainShareInfoResponse>;
-  /** {@link DescribeRecord 获取记录信息}({@link DescribeRecordRequest 请求参数}): {@link DescribeRecordResponse 返回参数} */
+  /** 获取记录信息 {@link DescribeRecordRequest} {@link DescribeRecordResponse} */
   DescribeRecord(data: DescribeRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordResponse>;
-  /** {@link DescribeRecordGroupList 查询解析记录分组列表}({@link DescribeRecordGroupListRequest 请求参数}): {@link DescribeRecordGroupListResponse 返回参数} */
+  /** 查询解析记录分组列表 {@link DescribeRecordGroupListRequest} {@link DescribeRecordGroupListResponse} */
   DescribeRecordGroupList(data: DescribeRecordGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordGroupListResponse>;
-  /** {@link DescribeRecordLineList 获取等级允许的线路}({@link DescribeRecordLineListRequest 请求参数}): {@link DescribeRecordLineListResponse 返回参数} */
+  /** 获取等级允许的线路 {@link DescribeRecordLineListRequest} {@link DescribeRecordLineListResponse} */
   DescribeRecordLineList(data: DescribeRecordLineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordLineListResponse>;
-  /** {@link DescribeRecordList 获取域名的解析记录列表}({@link DescribeRecordListRequest 请求参数}): {@link DescribeRecordListResponse 返回参数} */
+  /** 获取域名的解析记录列表 {@link DescribeRecordListRequest} {@link DescribeRecordListResponse} */
   DescribeRecordList(data: DescribeRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordListResponse>;
-  /** {@link DescribeRecordSnapshotRollbackResult 查询解析记录重新回滚的结果}({@link DescribeRecordSnapshotRollbackResultRequest 请求参数}): {@link DescribeRecordSnapshotRollbackResultResponse 返回参数} */
+  /** 查询解析记录重新回滚的结果 {@link DescribeRecordSnapshotRollbackResultRequest} {@link DescribeRecordSnapshotRollbackResultResponse} */
   DescribeRecordSnapshotRollbackResult(data: DescribeRecordSnapshotRollbackResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordSnapshotRollbackResultResponse>;
-  /** {@link DescribeRecordType 获取等级允许的记录类型}({@link DescribeRecordTypeRequest 请求参数}): {@link DescribeRecordTypeResponse 返回参数} */
+  /** 获取等级允许的记录类型 {@link DescribeRecordTypeRequest} {@link DescribeRecordTypeResponse} */
   DescribeRecordType(data: DescribeRecordTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordTypeResponse>;
-  /** {@link DescribeSnapshotConfig 查询解析快照配置}({@link DescribeSnapshotConfigRequest 请求参数}): {@link DescribeSnapshotConfigResponse 返回参数} */
+  /** 查询解析快照配置 {@link DescribeSnapshotConfigRequest} {@link DescribeSnapshotConfigResponse} */
   DescribeSnapshotConfig(data: DescribeSnapshotConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotConfigResponse>;
-  /** {@link DescribeSnapshotList 查询快照列表}({@link DescribeSnapshotListRequest 请求参数}): {@link DescribeSnapshotListResponse 返回参数} */
+  /** 查询快照列表 {@link DescribeSnapshotListRequest} {@link DescribeSnapshotListResponse} */
   DescribeSnapshotList(data: DescribeSnapshotListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotListResponse>;
-  /** {@link DescribeSnapshotRollbackResult 查询快照回滚结果}({@link DescribeSnapshotRollbackResultRequest 请求参数}): {@link DescribeSnapshotRollbackResultResponse 返回参数} */
+  /** 查询快照回滚结果 {@link DescribeSnapshotRollbackResultRequest} {@link DescribeSnapshotRollbackResultResponse} */
   DescribeSnapshotRollbackResult(data: DescribeSnapshotRollbackResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotRollbackResultResponse>;
-  /** {@link DescribeSnapshotRollbackTask 查询最近一次回滚}({@link DescribeSnapshotRollbackTaskRequest 请求参数}): {@link DescribeSnapshotRollbackTaskResponse 返回参数} */
+  /** 查询最近一次回滚 {@link DescribeSnapshotRollbackTaskRequest} {@link DescribeSnapshotRollbackTaskResponse} */
   DescribeSnapshotRollbackTask(data: DescribeSnapshotRollbackTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotRollbackTaskResponse>;
-  /** {@link DescribeSubdomainAnalytics 子域名解析量统计}({@link DescribeSubdomainAnalyticsRequest 请求参数}): {@link DescribeSubdomainAnalyticsResponse 返回参数} */
+  /** 子域名解析量统计 {@link DescribeSubdomainAnalyticsRequest} {@link DescribeSubdomainAnalyticsResponse} */
   DescribeSubdomainAnalytics(data: DescribeSubdomainAnalyticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubdomainAnalyticsResponse>;
-  /** {@link DescribeUserDetail 获取帐户信息}({@link DescribeUserDetailRequest 请求参数}): {@link DescribeUserDetailResponse 返回参数} */
+  /** 获取帐户信息 {@link DescribeUserDetailRequest} {@link DescribeUserDetailResponse} */
   DescribeUserDetail(data?: DescribeUserDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDetailResponse>;
-  /** {@link DownloadSnapshot 下载快照}({@link DownloadSnapshotRequest 请求参数}): {@link DownloadSnapshotResponse 返回参数} */
+  /** 下载快照 {@link DownloadSnapshotRequest} {@link DownloadSnapshotResponse} */
   DownloadSnapshot(data: DownloadSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadSnapshotResponse>;
-  /** {@link ModifyDomainLock 锁定域名}({@link ModifyDomainLockRequest 请求参数}): {@link ModifyDomainLockResponse 返回参数} */
+  /** 锁定域名 {@link ModifyDomainLockRequest} {@link ModifyDomainLockResponse} */
   ModifyDomainLock(data: ModifyDomainLockRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainLockResponse>;
-  /** {@link ModifyDomainOwner 域名过户}({@link ModifyDomainOwnerRequest 请求参数}): {@link ModifyDomainOwnerResponse 返回参数} */
+  /** 域名过户 {@link ModifyDomainOwnerRequest} {@link ModifyDomainOwnerResponse} */
   ModifyDomainOwner(data: ModifyDomainOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainOwnerResponse>;
-  /** {@link ModifyDomainRemark 设置域名备注}({@link ModifyDomainRemarkRequest 请求参数}): {@link ModifyDomainRemarkResponse 返回参数} */
+  /** 设置域名备注 {@link ModifyDomainRemarkRequest} {@link ModifyDomainRemarkResponse} */
   ModifyDomainRemark(data: ModifyDomainRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainRemarkResponse>;
-  /** {@link ModifyDomainStatus 修改域名状态}({@link ModifyDomainStatusRequest 请求参数}): {@link ModifyDomainStatusResponse 返回参数} */
+  /** 修改域名状态 {@link ModifyDomainStatusRequest} {@link ModifyDomainStatusResponse} */
   ModifyDomainStatus(data: ModifyDomainStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainStatusResponse>;
-  /** {@link ModifyDomainUnlock 域名锁定解锁}({@link ModifyDomainUnlockRequest 请求参数}): {@link ModifyDomainUnlockResponse 返回参数} */
+  /** 域名锁定解锁 {@link ModifyDomainUnlockRequest} {@link ModifyDomainUnlockResponse} */
   ModifyDomainUnlock(data: ModifyDomainUnlockRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainUnlockResponse>;
-  /** {@link ModifyDynamicDNS 更新动态 DNS 记录}({@link ModifyDynamicDNSRequest 请求参数}): {@link ModifyDynamicDNSResponse 返回参数} */
+  /** 更新动态 DNS 记录 {@link ModifyDynamicDNSRequest} {@link ModifyDynamicDNSResponse} */
   ModifyDynamicDNS(data: ModifyDynamicDNSRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDynamicDNSResponse>;
-  /** {@link ModifyPackageAutoRenew DNS 解析套餐自动续费设置}({@link ModifyPackageAutoRenewRequest 请求参数}): {@link ModifyPackageAutoRenewResponse 返回参数} */
+  /** DNS 解析套餐自动续费设置 {@link ModifyPackageAutoRenewRequest} {@link ModifyPackageAutoRenewResponse} */
   ModifyPackageAutoRenew(data: ModifyPackageAutoRenewRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPackageAutoRenewResponse>;
-  /** {@link ModifyRecord 修改记录}({@link ModifyRecordRequest 请求参数}): {@link ModifyRecordResponse 返回参数} */
+  /** 修改记录 {@link ModifyRecordRequest} {@link ModifyRecordResponse} */
   ModifyRecord(data: ModifyRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordResponse>;
-  /** {@link ModifyRecordBatch 批量修改记录}({@link ModifyRecordBatchRequest 请求参数}): {@link ModifyRecordBatchResponse 返回参数} */
+  /** 批量修改记录 {@link ModifyRecordBatchRequest} {@link ModifyRecordBatchResponse} */
   ModifyRecordBatch(data: ModifyRecordBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordBatchResponse>;
-  /** {@link ModifyRecordFields 修改记录可选字段}({@link ModifyRecordFieldsRequest 请求参数}): {@link ModifyRecordFieldsResponse 返回参数} */
+  /** 修改记录可选字段 {@link ModifyRecordFieldsRequest} {@link ModifyRecordFieldsResponse} */
   ModifyRecordFields(data: ModifyRecordFieldsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordFieldsResponse>;
-  /** {@link ModifyRecordGroup 修改记录分组}({@link ModifyRecordGroupRequest 请求参数}): {@link ModifyRecordGroupResponse 返回参数} */
+  /** 修改记录分组 {@link ModifyRecordGroupRequest} {@link ModifyRecordGroupResponse} */
   ModifyRecordGroup(data: ModifyRecordGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordGroupResponse>;
-  /** {@link ModifyRecordRemark 设置记录备注}({@link ModifyRecordRemarkRequest 请求参数}): {@link ModifyRecordRemarkResponse 返回参数} */
+  /** 设置记录备注 {@link ModifyRecordRemarkRequest} {@link ModifyRecordRemarkResponse} */
   ModifyRecordRemark(data: ModifyRecordRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordRemarkResponse>;
-  /** {@link ModifyRecordStatus 设置记录状态}({@link ModifyRecordStatusRequest 请求参数}): {@link ModifyRecordStatusResponse 返回参数} */
+  /** 设置记录状态 {@link ModifyRecordStatusRequest} {@link ModifyRecordStatusResponse} */
   ModifyRecordStatus(data: ModifyRecordStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordStatusResponse>;
-  /** {@link ModifyRecordToGroup 将记录添加到分组}({@link ModifyRecordToGroupRequest 请求参数}): {@link ModifyRecordToGroupResponse 返回参数} */
+  /** 将记录添加到分组 {@link ModifyRecordToGroupRequest} {@link ModifyRecordToGroupResponse} */
   ModifyRecordToGroup(data: ModifyRecordToGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordToGroupResponse>;
-  /** {@link ModifySnapshotConfig 修改快照配置}({@link ModifySnapshotConfigRequest 请求参数}): {@link ModifySnapshotConfigResponse 返回参数} */
+  /** 修改快照配置 {@link ModifySnapshotConfigRequest} {@link ModifySnapshotConfigResponse} */
   ModifySnapshotConfig(data: ModifySnapshotConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotConfigResponse>;
-  /** {@link ModifySubdomainStatus 暂停子域名的解析记录}({@link ModifySubdomainStatusRequest 请求参数}): {@link ModifySubdomainStatusResponse 返回参数} */
+  /** 暂停子域名的解析记录 {@link ModifySubdomainStatusRequest} {@link ModifySubdomainStatusResponse} */
   ModifySubdomainStatus(data: ModifySubdomainStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubdomainStatusResponse>;
-  /** {@link ModifyVasAutoRenewStatus 增值服务自动续费设置}({@link ModifyVasAutoRenewStatusRequest 请求参数}): {@link ModifyVasAutoRenewStatusResponse 返回参数} */
+  /** 增值服务自动续费设置 {@link ModifyVasAutoRenewStatusRequest} {@link ModifyVasAutoRenewStatusResponse} */
   ModifyVasAutoRenewStatus(data: ModifyVasAutoRenewStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVasAutoRenewStatusResponse>;
-  /** {@link PayOrderWithBalance DNSPod商品余额支付}({@link PayOrderWithBalanceRequest 请求参数}): {@link PayOrderWithBalanceResponse 返回参数} */
+  /** DNSPod商品余额支付 {@link PayOrderWithBalanceRequest} {@link PayOrderWithBalanceResponse} */
   PayOrderWithBalance(data: PayOrderWithBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<PayOrderWithBalanceResponse>;
-  /** {@link RollbackRecordSnapshot 重新回滚指定解析记录快照}({@link RollbackRecordSnapshotRequest 请求参数}): {@link RollbackRecordSnapshotResponse 返回参数} */
+  /** 重新回滚指定解析记录快照 {@link RollbackRecordSnapshotRequest} {@link RollbackRecordSnapshotResponse} */
   RollbackRecordSnapshot(data: RollbackRecordSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackRecordSnapshotResponse>;
-  /** {@link RollbackSnapshot 回滚快照}({@link RollbackSnapshotRequest 请求参数}): {@link RollbackSnapshotResponse 返回参数} */
+  /** 回滚快照 {@link RollbackSnapshotRequest} {@link RollbackSnapshotResponse} */
   RollbackSnapshot(data: RollbackSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackSnapshotResponse>;
 }
 

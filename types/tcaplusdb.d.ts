@@ -720,7 +720,7 @@ declare interface ClearTablesResponse {
   TotalCount?: number;
   /** 清除表结果列表 */
   TableResults?: TableResultNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -742,7 +742,7 @@ declare interface CompareIdlFilesResponse {
   TotalCount?: number;
   /** 读取IDL描述文件后,根据用户指示的所选中表格解析校验结果 */
   TableInfos?: ParsedTableInfoNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -760,7 +760,7 @@ declare interface CreateBackupResponse {
   TaskIds: string[] | null;
   /** 创建的备份申请ID列表 */
   ApplicationIds: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -792,7 +792,7 @@ declare interface CreateClusterRequest {
 declare interface CreateClusterResponse {
   /** 集群ID */
   ClusterId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -808,7 +808,7 @@ declare interface CreateSnapshotsResponse {
   TotalCount: number;
   /** 批量创建的快照结果列表 */
   TableResults: SnapshotResult[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -826,7 +826,7 @@ declare interface CreateTableGroupRequest {
 declare interface CreateTableGroupResponse {
   /** 创建成功的表格组ID */
   TableGroupId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -846,7 +846,7 @@ declare interface CreateTablesResponse {
   TotalCount?: number;
   /** 批量创建表格结果列表 */
   TableResults?: TableResultNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -858,7 +858,7 @@ declare interface DeleteClusterRequest {
 declare interface DeleteClusterResponse {
   /** 删除集群生成的任务ID */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -874,7 +874,7 @@ declare interface DeleteIdlFilesResponse {
   TotalCount?: number;
   /** 删除结果 */
   IdlFileInfos?: IdlFileInfoWithoutContent[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -890,7 +890,7 @@ declare interface DeleteSnapshotsResponse {
   TotalCount: number;
   /** 批量删除的快照结果 */
   TableResults: SnapshotResult[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -906,7 +906,7 @@ declare interface DeleteTableDataFlowResponse {
   TotalCount: number;
   /** 删除表格分布式索引结果列表 */
   TableResults: TableResultNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -920,7 +920,7 @@ declare interface DeleteTableGroupRequest {
 declare interface DeleteTableGroupResponse {
   /** 删除表格组所创建的任务ID */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -936,7 +936,7 @@ declare interface DeleteTableIndexResponse {
   TotalCount?: number;
   /** 删除表格分布式索引结果列表 */
   TableResults?: TableResultNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -952,7 +952,7 @@ declare interface DeleteTablesResponse {
   TotalCount?: number;
   /** 删除表结果详情列表 */
   TableResults?: TableResultNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -980,7 +980,7 @@ declare interface DescribeApplicationsResponse {
   Applications: Application[];
   /** 申请单个数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -994,7 +994,7 @@ declare interface DescribeClusterTagsResponse {
   Rows?: TagsInfoOfCluster[] | null;
   /** 返回结果个数 */
   TotalCount?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1016,7 +1016,7 @@ declare interface DescribeClustersResponse {
   TotalCount: number;
   /** 集群实例列表 */
   Clusters: ClusterInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1038,7 +1038,7 @@ declare interface DescribeIdlFileInfosResponse {
   TotalCount?: number;
   /** 文件详情列表 */
   IdlFileInfos?: IdlFileInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1050,7 +1050,7 @@ declare interface DescribeMachineRequest {
 declare interface DescribeMachineResponse {
   /** 独占机器资源列表 */
   PoolList?: PoolInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1062,7 +1062,7 @@ declare interface DescribeRegionsResponse {
   TotalCount?: number;
   /** 可用区详情结果列表 */
   RegionInfos?: RegionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1082,7 +1082,7 @@ declare interface DescribeSnapshotsResponse {
   TotalCount: number;
   /** 快照结果列表 */
   TableResults: SnapshotResult[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1098,7 +1098,7 @@ declare interface DescribeTableGroupTagsResponse {
   Rows?: TagsInfoOfTableGroup[] | null;
   /** 返回结果个数 */
   TotalCount?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1120,7 +1120,7 @@ declare interface DescribeTableGroupsResponse {
   TotalCount?: number;
   /** 表格组信息列表 */
   TableGroups?: TableGroupInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1136,7 +1136,7 @@ declare interface DescribeTableTagsResponse {
   TotalCount?: number;
   /** 表格标签信息列表 */
   Rows?: TagsInfoOfTable[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1158,7 +1158,7 @@ declare interface DescribeTablesInRecycleResponse {
   TotalCount?: number;
   /** 表格详情结果列表 */
   TableInfos?: TableInfoNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1182,7 +1182,7 @@ declare interface DescribeTablesResponse {
   TotalCount: number;
   /** 表格详情结果列表 */
   TableInfos: TableInfoNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1204,7 +1204,7 @@ declare interface DescribeTasksResponse {
   TotalCount?: number;
   /** 查询到的任务详情列表 */
   TaskInfos?: TaskInfoNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1214,7 +1214,7 @@ declare interface DescribeUinInWhitelistRequest {
 declare interface DescribeUinInWhitelistResponse {
   /** 查询结果：`FALSE` 否；`TRUE` 是 */
   Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1228,7 +1228,7 @@ declare interface DisableRestProxyResponse {
   RestProxyStatus?: number;
   /** TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1242,7 +1242,7 @@ declare interface EnableRestProxyResponse {
   RestProxyStatus?: number;
   /** TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1266,7 +1266,7 @@ declare interface ImportSnapshotsRequest {
 declare interface ImportSnapshotsResponse {
   /** TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务 */
   TaskId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1280,7 +1280,7 @@ declare interface MergeTablesDataRequest {
 declare interface MergeTablesDataResponse {
   /** 合服结果集 */
   Results: MergeTableResult[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1300,7 +1300,7 @@ declare interface ModifyCensorshipResponse {
   Uins: string[] | null;
   /** 集群是否开启审核 0-关闭 1-开启 */
   Censorship: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1318,7 +1318,7 @@ declare interface ModifyClusterMachineRequest {
 declare interface ModifyClusterMachineResponse {
   /** 集群id */
   ClusterId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1330,7 +1330,7 @@ declare interface ModifyClusterNameRequest {
 }
 
 declare interface ModifyClusterNameResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1348,7 +1348,7 @@ declare interface ModifyClusterPasswordRequest {
 }
 
 declare interface ModifyClusterPasswordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1364,7 +1364,7 @@ declare interface ModifyClusterTagsRequest {
 declare interface ModifyClusterTagsResponse {
   /** 任务ID */
   TaskId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1380,7 +1380,7 @@ declare interface ModifySnapshotsResponse {
   TotalCount: number;
   /** 批量修改的快照结果列表 */
   TableResults: SnapshotResult[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1394,7 +1394,7 @@ declare interface ModifyTableGroupNameRequest {
 }
 
 declare interface ModifyTableGroupNameResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1412,7 +1412,7 @@ declare interface ModifyTableGroupTagsRequest {
 declare interface ModifyTableGroupTagsResponse {
   /** 任务ID */
   TaskId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1428,7 +1428,7 @@ declare interface ModifyTableMemosResponse {
   TotalCount?: number;
   /** 表备注修改结果列表 */
   TableResults?: TableResultNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1444,7 +1444,7 @@ declare interface ModifyTableQuotasResponse {
   TotalCount?: number;
   /** 扩缩容结果列表 */
   TableResults?: TableResultNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1464,7 +1464,7 @@ declare interface ModifyTableTagsResponse {
   TotalCount?: number;
   /** 返回结果 */
   TableResults?: TableResultNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1482,7 +1482,7 @@ declare interface ModifyTablesResponse {
   TotalCount?: number;
   /** 修改表结果列表 */
   TableResults?: TableResultNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1498,7 +1498,7 @@ declare interface RecoverRecycleTablesResponse {
   TotalCount?: number;
   /** 恢复表信息列表 */
   TableResults?: TableResultNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1518,7 +1518,7 @@ declare interface RollbackTablesResponse {
   TotalCount?: number;
   /** 表格回档任务结果列表 */
   TableResults?: TableRollbackResultNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1534,7 +1534,7 @@ declare interface SetTableDataFlowResponse {
   TotalCount: number;
   /** 表格数据订阅创建结果列表 */
   TableResults: TableResultNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1550,7 +1550,7 @@ declare interface SetTableIndexResponse {
   TotalCount: number;
   /** 表格分布式索引创建结果列表 */
   TableResults: TableResultNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1564,7 +1564,7 @@ declare interface UpdateApplyResponse {
   ApplyResults: ApplyResult[] | null;
   /** 更新数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1586,112 +1586,112 @@ declare interface VerifyIdlFilesResponse {
   TotalCount?: number;
   /** 读取IDL描述文件后解析出的合法表列表，不包含已经创建的表 */
   TableInfos?: ParsedTableInfoNew[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tcaplusdb 游戏数据库 TcaplusDB} */
 declare interface Tcaplusdb {
   (): Versions;
-  /** {@link ClearTables 清除表数据}({@link ClearTablesRequest 请求参数}): {@link ClearTablesResponse 返回参数} */
+  /** 清除表数据 {@link ClearTablesRequest} {@link ClearTablesResponse} */
   ClearTables(data: ClearTablesRequest, config?: AxiosRequestConfig): AxiosPromise<ClearTablesResponse>;
-  /** {@link CompareIdlFiles 上传并校验改表文件}({@link CompareIdlFilesRequest 请求参数}): {@link CompareIdlFilesResponse 返回参数} */
+  /** 上传并校验改表文件 {@link CompareIdlFilesRequest} {@link CompareIdlFilesResponse} */
   CompareIdlFiles(data: CompareIdlFilesRequest, config?: AxiosRequestConfig): AxiosPromise<CompareIdlFilesResponse>;
-  /** {@link CreateBackup 创建备份}({@link CreateBackupRequest 请求参数}): {@link CreateBackupResponse 返回参数} */
+  /** 创建备份 {@link CreateBackupRequest} {@link CreateBackupResponse} */
   CreateBackup(data: CreateBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupResponse>;
-  /** {@link CreateCluster 创建集群}({@link CreateClusterRequest 请求参数}): {@link CreateClusterResponse 返回参数} */
+  /** 创建集群 {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
-  /** {@link CreateSnapshots 创建表格快照}({@link CreateSnapshotsRequest 请求参数}): {@link CreateSnapshotsResponse 返回参数} */
+  /** 创建表格快照 {@link CreateSnapshotsRequest} {@link CreateSnapshotsResponse} */
   CreateSnapshots(data: CreateSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotsResponse>;
-  /** {@link CreateTableGroup 新建表格组}({@link CreateTableGroupRequest 请求参数}): {@link CreateTableGroupResponse 返回参数} */
+  /** 新建表格组 {@link CreateTableGroupRequest} {@link CreateTableGroupResponse} */
   CreateTableGroup(data: CreateTableGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTableGroupResponse>;
-  /** {@link CreateTables 批量创建表}({@link CreateTablesRequest 请求参数}): {@link CreateTablesResponse 返回参数} */
+  /** 批量创建表 {@link CreateTablesRequest} {@link CreateTablesResponse} */
   CreateTables(data: CreateTablesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTablesResponse>;
-  /** {@link DeleteCluster 删除集群}({@link DeleteClusterRequest 请求参数}): {@link DeleteClusterResponse 返回参数} */
+  /** 删除集群 {@link DeleteClusterRequest} {@link DeleteClusterResponse} */
   DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
-  /** {@link DeleteIdlFiles 删除IDL描述文件}({@link DeleteIdlFilesRequest 请求参数}): {@link DeleteIdlFilesResponse 返回参数} */
+  /** 删除IDL描述文件 {@link DeleteIdlFilesRequest} {@link DeleteIdlFilesResponse} */
   DeleteIdlFiles(data: DeleteIdlFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIdlFilesResponse>;
-  /** {@link DeleteSnapshots 删除表格快照}({@link DeleteSnapshotsRequest 请求参数}): {@link DeleteSnapshotsResponse 返回参数} */
+  /** 删除表格快照 {@link DeleteSnapshotsRequest} {@link DeleteSnapshotsResponse} */
   DeleteSnapshots(data: DeleteSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotsResponse>;
-  /** {@link DeleteTableDataFlow 删除表格的数据订阅}({@link DeleteTableDataFlowRequest 请求参数}): {@link DeleteTableDataFlowResponse 返回参数} */
+  /** 删除表格的数据订阅 {@link DeleteTableDataFlowRequest} {@link DeleteTableDataFlowResponse} */
   DeleteTableDataFlow(data: DeleteTableDataFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableDataFlowResponse>;
-  /** {@link DeleteTableGroup 删除表格组}({@link DeleteTableGroupRequest 请求参数}): {@link DeleteTableGroupResponse 返回参数} */
+  /** 删除表格组 {@link DeleteTableGroupRequest} {@link DeleteTableGroupResponse} */
   DeleteTableGroup(data: DeleteTableGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableGroupResponse>;
-  /** {@link DeleteTableIndex 删除表格的分布式索引}({@link DeleteTableIndexRequest 请求参数}): {@link DeleteTableIndexResponse 返回参数} */
+  /** 删除表格的分布式索引 {@link DeleteTableIndexRequest} {@link DeleteTableIndexResponse} */
   DeleteTableIndex(data: DeleteTableIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableIndexResponse>;
-  /** {@link DeleteTables 删除表}({@link DeleteTablesRequest 请求参数}): {@link DeleteTablesResponse 返回参数} */
+  /** 删除表 {@link DeleteTablesRequest} {@link DeleteTablesResponse} */
   DeleteTables(data: DeleteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTablesResponse>;
-  /** {@link DescribeApplications 获取审批管理的申请单}({@link DescribeApplicationsRequest 请求参数}): {@link DescribeApplicationsResponse 返回参数} */
+  /** 获取审批管理的申请单 {@link DescribeApplicationsRequest} {@link DescribeApplicationsResponse} */
   DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
-  /** {@link DescribeClusterTags 获取集群关联的标签列表}({@link DescribeClusterTagsRequest 请求参数}): {@link DescribeClusterTagsResponse 返回参数} */
+  /** 获取集群关联的标签列表 {@link DescribeClusterTagsRequest} {@link DescribeClusterTagsResponse} */
   DescribeClusterTags(data: DescribeClusterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterTagsResponse>;
-  /** {@link DescribeClusters 查询集群信息列表}({@link DescribeClustersRequest 请求参数}): {@link DescribeClustersResponse 返回参数} */
+  /** 查询集群信息列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
-  /** {@link DescribeIdlFileInfos 查询表描述文件详情}({@link DescribeIdlFileInfosRequest 请求参数}): {@link DescribeIdlFileInfosResponse 返回参数} */
+  /** 查询表描述文件详情 {@link DescribeIdlFileInfosRequest} {@link DescribeIdlFileInfosResponse} */
   DescribeIdlFileInfos(data: DescribeIdlFileInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdlFileInfosResponse>;
-  /** {@link DescribeMachine 查询独占集群剩余机器}({@link DescribeMachineRequest 请求参数}): {@link DescribeMachineResponse 返回参数} */
+  /** 查询独占集群剩余机器 {@link DescribeMachineRequest} {@link DescribeMachineResponse} */
   DescribeMachine(data?: DescribeMachineRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineResponse>;
-  /** {@link DescribeRegions 查询地域列表}({@link DescribeRegionsRequest 请求参数}): {@link DescribeRegionsResponse 返回参数} */
+  /** 查询地域列表 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** {@link DescribeSnapshots 查询快照列表}({@link DescribeSnapshotsRequest 请求参数}): {@link DescribeSnapshotsResponse 返回参数} */
+  /** 查询快照列表 {@link DescribeSnapshotsRequest} {@link DescribeSnapshotsResponse} */
   DescribeSnapshots(data: DescribeSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsResponse>;
-  /** {@link DescribeTableGroupTags 获取表格组关联的标签列表}({@link DescribeTableGroupTagsRequest 请求参数}): {@link DescribeTableGroupTagsResponse 返回参数} */
+  /** 获取表格组关联的标签列表 {@link DescribeTableGroupTagsRequest} {@link DescribeTableGroupTagsResponse} */
   DescribeTableGroupTags(data: DescribeTableGroupTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableGroupTagsResponse>;
-  /** {@link DescribeTableGroups 查询表格组列表}({@link DescribeTableGroupsRequest 请求参数}): {@link DescribeTableGroupsResponse 返回参数} */
+  /** 查询表格组列表 {@link DescribeTableGroupsRequest} {@link DescribeTableGroupsResponse} */
   DescribeTableGroups(data: DescribeTableGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableGroupsResponse>;
-  /** {@link DescribeTableTags 获取表格标签}({@link DescribeTableTagsRequest 请求参数}): {@link DescribeTableTagsResponse 返回参数} */
+  /** 获取表格标签 {@link DescribeTableTagsRequest} {@link DescribeTableTagsResponse} */
   DescribeTableTags(data: DescribeTableTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableTagsResponse>;
-  /** {@link DescribeTables 查询表详情}({@link DescribeTablesRequest 请求参数}): {@link DescribeTablesResponse 返回参数} */
+  /** 查询表详情 {@link DescribeTablesRequest} {@link DescribeTablesResponse} */
   DescribeTables(data?: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
-  /** {@link DescribeTablesInRecycle 查询回收站中的表详情}({@link DescribeTablesInRecycleRequest 请求参数}): {@link DescribeTablesInRecycleResponse 返回参数} */
+  /** 查询回收站中的表详情 {@link DescribeTablesInRecycleRequest} {@link DescribeTablesInRecycleResponse} */
   DescribeTablesInRecycle(data?: DescribeTablesInRecycleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesInRecycleResponse>;
-  /** {@link DescribeTasks 查询任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
+  /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** {@link DescribeUinInWhitelist 查询本用户是否在白名单中}({@link DescribeUinInWhitelistRequest 请求参数}): {@link DescribeUinInWhitelistResponse 返回参数} */
+  /** 查询本用户是否在白名单中 {@link DescribeUinInWhitelistRequest} {@link DescribeUinInWhitelistResponse} */
   DescribeUinInWhitelist(data?: DescribeUinInWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUinInWhitelistResponse>;
-  /** {@link DisableRestProxy 关闭restful api}({@link DisableRestProxyRequest 请求参数}): {@link DisableRestProxyResponse 返回参数} */
+  /** 关闭restful api {@link DisableRestProxyRequest} {@link DisableRestProxyResponse} */
   DisableRestProxy(data: DisableRestProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DisableRestProxyResponse>;
-  /** {@link EnableRestProxy 开启restful api}({@link EnableRestProxyRequest 请求参数}): {@link EnableRestProxyResponse 返回参数} */
+  /** 开启restful api {@link EnableRestProxyRequest} {@link EnableRestProxyResponse} */
   EnableRestProxy(data: EnableRestProxyRequest, config?: AxiosRequestConfig): AxiosPromise<EnableRestProxyResponse>;
-  /** {@link ImportSnapshots 导入快照数据}({@link ImportSnapshotsRequest 请求参数}): {@link ImportSnapshotsResponse 返回参数} */
+  /** 导入快照数据 {@link ImportSnapshotsRequest} {@link ImportSnapshotsResponse} */
   ImportSnapshots(data: ImportSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportSnapshotsResponse>;
-  /** {@link MergeTablesData 合服}({@link MergeTablesDataRequest 请求参数}): {@link MergeTablesDataResponse 返回参数} */
+  /** 合服 {@link MergeTablesDataRequest} {@link MergeTablesDataResponse} */
   MergeTablesData(data: MergeTablesDataRequest, config?: AxiosRequestConfig): AxiosPromise<MergeTablesDataResponse>;
-  /** {@link ModifyCensorship 修改集群审批状态}({@link ModifyCensorshipRequest 请求参数}): {@link ModifyCensorshipResponse 返回参数} */
+  /** 修改集群审批状态 {@link ModifyCensorshipRequest} {@link ModifyCensorshipResponse} */
   ModifyCensorship(data: ModifyCensorshipRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCensorshipResponse>;
-  /** {@link ModifyClusterMachine 修改独占集群机器}({@link ModifyClusterMachineRequest 请求参数}): {@link ModifyClusterMachineResponse 返回参数} */
+  /** 修改独占集群机器 {@link ModifyClusterMachineRequest} {@link ModifyClusterMachineResponse} */
   ModifyClusterMachine(data: ModifyClusterMachineRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterMachineResponse>;
-  /** {@link ModifyClusterName 修改集群名称}({@link ModifyClusterNameRequest 请求参数}): {@link ModifyClusterNameResponse 返回参数} */
+  /** 修改集群名称 {@link ModifyClusterNameRequest} {@link ModifyClusterNameResponse} */
   ModifyClusterName(data: ModifyClusterNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterNameResponse>;
-  /** {@link ModifyClusterPassword 修改集群密码}({@link ModifyClusterPasswordRequest 请求参数}): {@link ModifyClusterPasswordResponse 返回参数} */
+  /** 修改集群密码 {@link ModifyClusterPasswordRequest} {@link ModifyClusterPasswordResponse} */
   ModifyClusterPassword(data: ModifyClusterPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterPasswordResponse>;
-  /** {@link ModifyClusterTags 修改集群标签}({@link ModifyClusterTagsRequest 请求参数}): {@link ModifyClusterTagsResponse 返回参数} */
+  /** 修改集群标签 {@link ModifyClusterTagsRequest} {@link ModifyClusterTagsResponse} */
   ModifyClusterTags(data: ModifyClusterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterTagsResponse>;
-  /** {@link ModifySnapshots 修改表格快照}({@link ModifySnapshotsRequest 请求参数}): {@link ModifySnapshotsResponse 返回参数} */
+  /** 修改表格快照 {@link ModifySnapshotsRequest} {@link ModifySnapshotsResponse} */
   ModifySnapshots(data: ModifySnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotsResponse>;
-  /** {@link ModifyTableGroupName 修改表格组名称}({@link ModifyTableGroupNameRequest 请求参数}): {@link ModifyTableGroupNameResponse 返回参数} */
+  /** 修改表格组名称 {@link ModifyTableGroupNameRequest} {@link ModifyTableGroupNameResponse} */
   ModifyTableGroupName(data: ModifyTableGroupNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTableGroupNameResponse>;
-  /** {@link ModifyTableGroupTags 修改表格组标签}({@link ModifyTableGroupTagsRequest 请求参数}): {@link ModifyTableGroupTagsResponse 返回参数} */
+  /** 修改表格组标签 {@link ModifyTableGroupTagsRequest} {@link ModifyTableGroupTagsResponse} */
   ModifyTableGroupTags(data: ModifyTableGroupTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTableGroupTagsResponse>;
-  /** {@link ModifyTableMemos 修改表备注信息}({@link ModifyTableMemosRequest 请求参数}): {@link ModifyTableMemosResponse 返回参数} */
+  /** 修改表备注信息 {@link ModifyTableMemosRequest} {@link ModifyTableMemosResponse} */
   ModifyTableMemos(data: ModifyTableMemosRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTableMemosResponse>;
-  /** {@link ModifyTableQuotas 表扩缩容}({@link ModifyTableQuotasRequest 请求参数}): {@link ModifyTableQuotasResponse 返回参数} */
+  /** 表扩缩容 {@link ModifyTableQuotasRequest} {@link ModifyTableQuotasResponse} */
   ModifyTableQuotas(data: ModifyTableQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTableQuotasResponse>;
-  /** {@link ModifyTableTags 修改表格标签}({@link ModifyTableTagsRequest 请求参数}): {@link ModifyTableTagsResponse 返回参数} */
+  /** 修改表格标签 {@link ModifyTableTagsRequest} {@link ModifyTableTagsResponse} */
   ModifyTableTags(data: ModifyTableTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTableTagsResponse>;
-  /** {@link ModifyTables 批量修改表结构}({@link ModifyTablesRequest 请求参数}): {@link ModifyTablesResponse 返回参数} */
+  /** 批量修改表结构 {@link ModifyTablesRequest} {@link ModifyTablesResponse} */
   ModifyTables(data: ModifyTablesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTablesResponse>;
-  /** {@link RecoverRecycleTables 恢复回收站中的表}({@link RecoverRecycleTablesRequest 请求参数}): {@link RecoverRecycleTablesResponse 返回参数} */
+  /** 恢复回收站中的表 {@link RecoverRecycleTablesRequest} {@link RecoverRecycleTablesResponse} */
   RecoverRecycleTables(data: RecoverRecycleTablesRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverRecycleTablesResponse>;
-  /** {@link RollbackTables 表格数据回档}({@link RollbackTablesRequest 请求参数}): {@link RollbackTablesResponse 返回参数} */
+  /** 表格数据回档 {@link RollbackTablesRequest} {@link RollbackTablesResponse} */
   RollbackTables(data: RollbackTablesRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackTablesResponse>;
-  /** {@link SetTableDataFlow 新增、修改表格数据订阅}({@link SetTableDataFlowRequest 请求参数}): {@link SetTableDataFlowResponse 返回参数} */
+  /** 新增、修改表格数据订阅 {@link SetTableDataFlowRequest} {@link SetTableDataFlowResponse} */
   SetTableDataFlow(data: SetTableDataFlowRequest, config?: AxiosRequestConfig): AxiosPromise<SetTableDataFlowResponse>;
-  /** {@link SetTableIndex 设置表格分布式索引}({@link SetTableIndexRequest 请求参数}): {@link SetTableIndexResponse 返回参数} */
+  /** 设置表格分布式索引 {@link SetTableIndexRequest} {@link SetTableIndexResponse} */
   SetTableIndex(data: SetTableIndexRequest, config?: AxiosRequestConfig): AxiosPromise<SetTableIndexResponse>;
-  /** {@link UpdateApply 更新申请单状态}({@link UpdateApplyRequest 请求参数}): {@link UpdateApplyResponse 返回参数} */
+  /** 更新申请单状态 {@link UpdateApplyRequest} {@link UpdateApplyResponse} */
   UpdateApply(data: UpdateApplyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApplyResponse>;
-  /** {@link VerifyIdlFiles 上传并校验创建表格文件}({@link VerifyIdlFilesRequest 请求参数}): {@link VerifyIdlFilesResponse 返回参数} */
+  /** 上传并校验创建表格文件 {@link VerifyIdlFilesRequest} {@link VerifyIdlFilesResponse} */
   VerifyIdlFiles(data: VerifyIdlFilesRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyIdlFilesResponse>;
 }
 

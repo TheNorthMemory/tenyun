@@ -138,7 +138,7 @@ declare interface CloseAsyncRecognitionTaskRequest {
 }
 
 declare interface CloseAsyncRecognitionTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -156,7 +156,7 @@ declare interface CreateAsrVocabRequest {
 declare interface CreateAsrVocabResponse {
   /** 词表ID，可用于获取词表信息 */
   VocabId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -188,7 +188,7 @@ declare interface CreateAsyncRecognitionTaskRequest {
 declare interface CreateAsyncRecognitionTaskResponse {
   /** 请求返回结果，包含本次的任务ID(TaskId) */
   Data: Task;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -206,7 +206,7 @@ declare interface CreateCustomizationRequest {
 declare interface CreateCustomizationResponse {
   /** 模型ID */
   ModelId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -256,7 +256,7 @@ declare interface CreateRecTaskRequest {
 declare interface CreateRecTaskResponse {
   /** 录音文件识别的请求返回结果，包含结果查询需要的TaskId */
   Data: Task;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -266,7 +266,7 @@ declare interface DeleteAsrVocabRequest {
 }
 
 declare interface DeleteAsrVocabResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -276,7 +276,7 @@ declare interface DeleteCustomizationRequest {
 }
 
 declare interface DeleteCustomizationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -286,7 +286,7 @@ declare interface DescribeAsyncRecognitionTasksRequest {
 declare interface DescribeAsyncRecognitionTasksResponse {
   /** 任务列表 */
   Data?: AsyncRecognitionTasks | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -298,7 +298,7 @@ declare interface DescribeTaskStatusRequest {
 declare interface DescribeTaskStatusResponse {
   /** 录音文件识别的请求返回结果。 */
   Data: TaskStatus;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -312,7 +312,7 @@ declare interface DownloadAsrVocabResponse {
   VocabId?: string;
   /** 词表权重文件形式的base64值。 */
   WordWeightStr?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -324,7 +324,7 @@ declare interface DownloadCustomizationRequest {
 declare interface DownloadCustomizationResponse {
   /** 下载地址 */
   DownloadUrl: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -342,7 +342,7 @@ declare interface GetAsrVocabListResponse {
   VocabList: Vocab[];
   /** 热词列表总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -366,7 +366,7 @@ declare interface GetAsrVocabResponse {
   UpdateTime?: string;
   /** 热词表状态，1为默认状态即在识别时默认加载该热词表进行识别，0为初始状态 */
   State?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -384,7 +384,7 @@ declare interface GetCustomizationListResponse {
   Data: Model[] | null;
   /** 自学习模型总量 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -400,7 +400,7 @@ declare interface ModifyCustomizationRequest {
 }
 
 declare interface ModifyCustomizationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -414,7 +414,7 @@ declare interface ModifyCustomizationStateRequest {
 declare interface ModifyCustomizationStateResponse {
   /** 自学习模型ID */
   ModelId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -464,7 +464,7 @@ declare interface SentenceRecognitionResponse {
   WordSize: number | null;
   /** 词时间戳列表 */
   WordList: SentenceWord[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -478,7 +478,7 @@ declare interface SetVocabStateRequest {
 declare interface SetVocabStateResponse {
   /** 热词表ID */
   VocabId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -498,50 +498,50 @@ declare interface UpdateAsrVocabRequest {
 declare interface UpdateAsrVocabResponse {
   /** 热词表ID */
   VocabId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Asr 语音识别} */
 declare interface Asr {
   (): Versions;
-  /** {@link CloseAsyncRecognitionTask 语音流异步识别任务关闭}({@link CloseAsyncRecognitionTaskRequest 请求参数}): {@link CloseAsyncRecognitionTaskResponse 返回参数} */
+  /** 语音流异步识别任务关闭 {@link CloseAsyncRecognitionTaskRequest} {@link CloseAsyncRecognitionTaskResponse} */
   CloseAsyncRecognitionTask(data: CloseAsyncRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAsyncRecognitionTaskResponse>;
-  /** {@link CreateAsrVocab 创建热词表}({@link CreateAsrVocabRequest 请求参数}): {@link CreateAsrVocabResponse 返回参数} */
+  /** 创建热词表 {@link CreateAsrVocabRequest} {@link CreateAsrVocabResponse} */
   CreateAsrVocab(data: CreateAsrVocabRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAsrVocabResponse>;
-  /** {@link CreateAsyncRecognitionTask 语音流异步识别任务创建}({@link CreateAsyncRecognitionTaskRequest 请求参数}): {@link CreateAsyncRecognitionTaskResponse 返回参数} */
+  /** 语音流异步识别任务创建 {@link CreateAsyncRecognitionTaskRequest} {@link CreateAsyncRecognitionTaskResponse} */
   CreateAsyncRecognitionTask(data: CreateAsyncRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAsyncRecognitionTaskResponse>;
-  /** {@link CreateCustomization 创建自学习模型}({@link CreateCustomizationRequest 请求参数}): {@link CreateCustomizationResponse 返回参数} */
+  /** 创建自学习模型 {@link CreateCustomizationRequest} {@link CreateCustomizationResponse} */
   CreateCustomization(data: CreateCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomizationResponse>;
-  /** {@link CreateRecTask 录音文件识别请求}({@link CreateRecTaskRequest 请求参数}): {@link CreateRecTaskResponse 返回参数} */
+  /** 录音文件识别请求 {@link CreateRecTaskRequest} {@link CreateRecTaskResponse} */
   CreateRecTask(data: CreateRecTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecTaskResponse>;
-  /** {@link DeleteAsrVocab 删除热词表}({@link DeleteAsrVocabRequest 请求参数}): {@link DeleteAsrVocabResponse 返回参数} */
+  /** 删除热词表 {@link DeleteAsrVocabRequest} {@link DeleteAsrVocabResponse} */
   DeleteAsrVocab(data: DeleteAsrVocabRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAsrVocabResponse>;
-  /** {@link DeleteCustomization 删除自学习模型}({@link DeleteCustomizationRequest 请求参数}): {@link DeleteCustomizationResponse 返回参数} */
+  /** 删除自学习模型 {@link DeleteCustomizationRequest} {@link DeleteCustomizationResponse} */
   DeleteCustomization(data: DeleteCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomizationResponse>;
-  /** {@link DescribeAsyncRecognitionTasks 语音流异步识别任务列表}({@link DescribeAsyncRecognitionTasksRequest 请求参数}): {@link DescribeAsyncRecognitionTasksResponse 返回参数} */
+  /** 语音流异步识别任务列表 {@link DescribeAsyncRecognitionTasksRequest} {@link DescribeAsyncRecognitionTasksResponse} */
   DescribeAsyncRecognitionTasks(data?: DescribeAsyncRecognitionTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsyncRecognitionTasksResponse>;
-  /** {@link DescribeTaskStatus 录音文件识别结果查询}({@link DescribeTaskStatusRequest 请求参数}): {@link DescribeTaskStatusResponse 返回参数} */
+  /** 录音文件识别结果查询 {@link DescribeTaskStatusRequest} {@link DescribeTaskStatusResponse} */
   DescribeTaskStatus(data: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
-  /** {@link DownloadAsrVocab 下载热词表}({@link DownloadAsrVocabRequest 请求参数}): {@link DownloadAsrVocabResponse 返回参数} */
+  /** 下载热词表 {@link DownloadAsrVocabRequest} {@link DownloadAsrVocabResponse} */
   DownloadAsrVocab(data: DownloadAsrVocabRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadAsrVocabResponse>;
-  /** {@link DownloadCustomization 下载自学习模型语料}({@link DownloadCustomizationRequest 请求参数}): {@link DownloadCustomizationResponse 返回参数} */
+  /** 下载自学习模型语料 {@link DownloadCustomizationRequest} {@link DownloadCustomizationResponse} */
   DownloadCustomization(data: DownloadCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadCustomizationResponse>;
-  /** {@link GetAsrVocab 获取热词表}({@link GetAsrVocabRequest 请求参数}): {@link GetAsrVocabResponse 返回参数} */
+  /** 获取热词表 {@link GetAsrVocabRequest} {@link GetAsrVocabResponse} */
   GetAsrVocab(data: GetAsrVocabRequest, config?: AxiosRequestConfig): AxiosPromise<GetAsrVocabResponse>;
-  /** {@link GetAsrVocabList 列举热词表}({@link GetAsrVocabListRequest 请求参数}): {@link GetAsrVocabListResponse 返回参数} */
+  /** 列举热词表 {@link GetAsrVocabListRequest} {@link GetAsrVocabListResponse} */
   GetAsrVocabList(data?: GetAsrVocabListRequest, config?: AxiosRequestConfig): AxiosPromise<GetAsrVocabListResponse>;
-  /** {@link GetCustomizationList 查询自学习模型列表}({@link GetCustomizationListRequest 请求参数}): {@link GetCustomizationListResponse 返回参数} */
+  /** 查询自学习模型列表 {@link GetCustomizationListRequest} {@link GetCustomizationListResponse} */
   GetCustomizationList(data?: GetCustomizationListRequest, config?: AxiosRequestConfig): AxiosPromise<GetCustomizationListResponse>;
-  /** {@link ModifyCustomization 更新自学习模型}({@link ModifyCustomizationRequest 请求参数}): {@link ModifyCustomizationResponse 返回参数} */
+  /** 更新自学习模型 {@link ModifyCustomizationRequest} {@link ModifyCustomizationResponse} */
   ModifyCustomization(data: ModifyCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizationResponse>;
-  /** {@link ModifyCustomizationState 修改自学习模型状态}({@link ModifyCustomizationStateRequest 请求参数}): {@link ModifyCustomizationStateResponse 返回参数} */
+  /** 修改自学习模型状态 {@link ModifyCustomizationStateRequest} {@link ModifyCustomizationStateResponse} */
   ModifyCustomizationState(data: ModifyCustomizationStateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizationStateResponse>;
-  /** {@link SentenceRecognition 一句话识别}({@link SentenceRecognitionRequest 请求参数}): {@link SentenceRecognitionResponse 返回参数} */
+  /** 一句话识别 {@link SentenceRecognitionRequest} {@link SentenceRecognitionResponse} */
   SentenceRecognition(data: SentenceRecognitionRequest, config?: AxiosRequestConfig): AxiosPromise<SentenceRecognitionResponse>;
-  /** {@link SetVocabState 设置热词表状态}({@link SetVocabStateRequest 请求参数}): {@link SetVocabStateResponse 返回参数} */
+  /** 设置热词表状态 {@link SetVocabStateRequest} {@link SetVocabStateResponse} */
   SetVocabState(data: SetVocabStateRequest, config?: AxiosRequestConfig): AxiosPromise<SetVocabStateResponse>;
-  /** {@link UpdateAsrVocab 更新热词表}({@link UpdateAsrVocabRequest 请求参数}): {@link UpdateAsrVocabResponse 返回参数} */
+  /** 更新热词表 {@link UpdateAsrVocabRequest} {@link UpdateAsrVocabResponse} */
   UpdateAsrVocab(data: UpdateAsrVocabRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAsrVocabResponse>;
 }
 

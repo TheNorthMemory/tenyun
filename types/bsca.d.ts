@@ -212,7 +212,7 @@ declare interface DescribeKBComponentRequest {
 declare interface DescribeKBComponentResponse {
   /** 匹配的组件信息 */
   Component: Component;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -224,7 +224,7 @@ declare interface DescribeKBComponentVulnerabilityRequest {
 declare interface DescribeKBComponentVulnerabilityResponse {
   /** 漏洞信息列表 */
   VulnerabilityList: ComponentVulnerabilityUnion[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -238,7 +238,7 @@ declare interface DescribeKBLicenseResponse {
   LicenseList: LicenseUnion[] | null;
   /** 用于匹配的License表达式 */
   NormalizedLicenseExpression: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -252,7 +252,7 @@ declare interface DescribeKBVulnerabilityRequest {
 declare interface DescribeKBVulnerabilityResponse {
   /** 漏洞详细信息列表 */
   VulnerabilityDetailList: VulnerabilityUnion[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -266,22 +266,22 @@ declare interface MatchKBPURLListResponse {
   PURLList: PURL[];
   /** 是否命中数据库。 */
   Hit: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Bsca 二进制软件成分分析} */
 declare interface Bsca {
   (): Versions;
-  /** {@link DescribeKBComponent 查询知识库组件信息}({@link DescribeKBComponentRequest 请求参数}): {@link DescribeKBComponentResponse 返回参数} */
+  /** 查询知识库组件信息 {@link DescribeKBComponentRequest} {@link DescribeKBComponentResponse} */
   DescribeKBComponent(data: DescribeKBComponentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBComponentResponse>;
-  /** {@link DescribeKBComponentVulnerability 查询知识库组件漏洞}({@link DescribeKBComponentVulnerabilityRequest 请求参数}): {@link DescribeKBComponentVulnerabilityResponse 返回参数} */
+  /** 查询知识库组件漏洞 {@link DescribeKBComponentVulnerabilityRequest} {@link DescribeKBComponentVulnerabilityResponse} */
   DescribeKBComponentVulnerability(data: DescribeKBComponentVulnerabilityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBComponentVulnerabilityResponse>;
-  /** {@link DescribeKBLicense 查询知识库许可证信息}({@link DescribeKBLicenseRequest 请求参数}): {@link DescribeKBLicenseResponse 返回参数} */
+  /** 查询知识库许可证信息 {@link DescribeKBLicenseRequest} {@link DescribeKBLicenseResponse} */
   DescribeKBLicense(data?: DescribeKBLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBLicenseResponse>;
-  /** {@link DescribeKBVulnerability 查询知识库漏洞详情列表}({@link DescribeKBVulnerabilityRequest 请求参数}): {@link DescribeKBVulnerabilityResponse 返回参数} */
+  /** 查询知识库漏洞详情列表 {@link DescribeKBVulnerabilityRequest} {@link DescribeKBVulnerabilityResponse} */
   DescribeKBVulnerability(data?: DescribeKBVulnerabilityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBVulnerabilityResponse>;
-  /** {@link MatchKBPURLList 匹配知识库组件列表}({@link MatchKBPURLListRequest 请求参数}): {@link MatchKBPURLListResponse 返回参数} */
+  /** 匹配知识库组件列表 {@link MatchKBPURLListRequest} {@link MatchKBPURLListResponse} */
   MatchKBPURLList(data?: MatchKBPURLListRequest, config?: AxiosRequestConfig): AxiosPromise<MatchKBPURLListResponse>;
 }
 

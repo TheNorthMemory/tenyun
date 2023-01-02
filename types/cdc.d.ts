@@ -338,7 +338,7 @@ declare interface CreateDedicatedClusterOrderRequest {
 declare interface CreateDedicatedClusterOrderResponse {
   /** 专用集群订单id */
   DedicatedClusterOrderId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -356,7 +356,7 @@ declare interface CreateDedicatedClusterRequest {
 declare interface CreateDedicatedClusterResponse {
   /** 创建的专用集群id */
   DedicatedClusterId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -412,7 +412,7 @@ declare interface CreateSiteRequest {
 declare interface CreateSiteResponse {
   /** 创建Site生成的id */
   SiteId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -422,7 +422,7 @@ declare interface DeleteDedicatedClustersRequest {
 }
 
 declare interface DeleteDedicatedClustersResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -432,7 +432,7 @@ declare interface DeleteSitesRequest {
 }
 
 declare interface DeleteSitesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -444,7 +444,7 @@ declare interface DescribeDedicatedClusterCosCapacityRequest {
 declare interface DescribeDedicatedClusterCosCapacityResponse {
   /** 本集群内cos容量信息，单位：‘GB’ */
   CosCapacity: CosCapacity;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -456,7 +456,7 @@ declare interface DescribeDedicatedClusterHostStatisticsRequest {
 declare interface DescribeDedicatedClusterHostStatisticsResponse {
   /** 该集群内宿主机的统计信息列表 */
   HostStatisticSet: HostStatistic[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -474,7 +474,7 @@ declare interface DescribeDedicatedClusterHostsResponse {
   HostInfoSet: HostInfo[] | null;
   /** 宿主机总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -486,7 +486,7 @@ declare interface DescribeDedicatedClusterInstanceTypesRequest {
 declare interface DescribeDedicatedClusterInstanceTypesResponse {
   /** 支持的实例规格列表 */
   DedicatedClusterInstanceTypeSet: DedicatedClusterInstanceType[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -510,7 +510,7 @@ declare interface DescribeDedicatedClusterOrdersResponse {
   DedicatedClusterOrderSet: DedicatedClusterOrder[];
   /** 符合条件的专用集群订单总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -524,7 +524,7 @@ declare interface DescribeDedicatedClusterOverviewResponse {
   CvmCount: number;
   /** 宿主机数量 */
   HostCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -546,7 +546,7 @@ declare interface DescribeDedicatedClusterTypesResponse {
   DedicatedClusterTypeSet: DedicatedClusterType[];
   /** 符合条件的个数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -572,7 +572,7 @@ declare interface DescribeDedicatedClustersResponse {
   DedicatedClusterSet: DedicatedCluster[];
   /** 符合条件的专用集群数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -584,7 +584,7 @@ declare interface DescribeDedicatedSupportedZonesRequest {
 declare interface DescribeDedicatedSupportedZonesResponse {
   /** 支持的可用区列表 */
   ZoneSet: RegionZoneInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -604,7 +604,7 @@ declare interface DescribeSitesDetailResponse {
   SiteDetailSet: SiteDetail[];
   /** 符合条件的站点总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -624,7 +624,7 @@ declare interface DescribeSitesResponse {
   SiteSet: Site[];
   /** 符合条件的站点数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -642,7 +642,7 @@ declare interface ModifyDedicatedClusterInfoRequest {
 }
 
 declare interface ModifyDedicatedClusterInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -656,7 +656,7 @@ declare interface ModifyOrderStatusRequest {
 }
 
 declare interface ModifyOrderStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -694,7 +694,7 @@ declare interface ModifySiteDeviceInfoRequest {
 }
 
 declare interface ModifySiteDeviceInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -720,52 +720,52 @@ declare interface ModifySiteInfoRequest {
 }
 
 declare interface ModifySiteInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cdc 本地专用集群} */
 declare interface Cdc {
   (): Versions;
-  /** {@link CreateDedicatedCluster 创建专用集群}({@link CreateDedicatedClusterRequest 请求参数}): {@link CreateDedicatedClusterResponse 返回参数} */
+  /** 创建专用集群 {@link CreateDedicatedClusterRequest} {@link CreateDedicatedClusterResponse} */
   CreateDedicatedCluster(data: CreateDedicatedClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDedicatedClusterResponse>;
-  /** {@link CreateDedicatedClusterOrder 创建专用集群订单}({@link CreateDedicatedClusterOrderRequest 请求参数}): {@link CreateDedicatedClusterOrderResponse 返回参数} */
+  /** 创建专用集群订单 {@link CreateDedicatedClusterOrderRequest} {@link CreateDedicatedClusterOrderResponse} */
   CreateDedicatedClusterOrder(data: CreateDedicatedClusterOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDedicatedClusterOrderResponse>;
-  /** {@link CreateSite 创建站点}({@link CreateSiteRequest 请求参数}): {@link CreateSiteResponse 返回参数} */
+  /** 创建站点 {@link CreateSiteRequest} {@link CreateSiteResponse} */
   CreateSite(data: CreateSiteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSiteResponse>;
-  /** {@link DeleteDedicatedClusters 删除专用集群}({@link DeleteDedicatedClustersRequest 请求参数}): {@link DeleteDedicatedClustersResponse 返回参数} */
+  /** 删除专用集群 {@link DeleteDedicatedClustersRequest} {@link DeleteDedicatedClustersResponse} */
   DeleteDedicatedClusters(data: DeleteDedicatedClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDedicatedClustersResponse>;
-  /** {@link DeleteSites 删除站点}({@link DeleteSitesRequest 请求参数}): {@link DeleteSitesResponse 返回参数} */
+  /** 删除站点 {@link DeleteSitesRequest} {@link DeleteSitesResponse} */
   DeleteSites(data: DeleteSitesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSitesResponse>;
-  /** {@link DescribeDedicatedClusterCosCapacity 查询专用集群内cos的容量信息}({@link DescribeDedicatedClusterCosCapacityRequest 请求参数}): {@link DescribeDedicatedClusterCosCapacityResponse 返回参数} */
+  /** 查询专用集群内cos的容量信息 {@link DescribeDedicatedClusterCosCapacityRequest} {@link DescribeDedicatedClusterCosCapacityResponse} */
   DescribeDedicatedClusterCosCapacity(data: DescribeDedicatedClusterCosCapacityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterCosCapacityResponse>;
-  /** {@link DescribeDedicatedClusterHostStatistics 查询专用集群内宿主机的统计信息}({@link DescribeDedicatedClusterHostStatisticsRequest 请求参数}): {@link DescribeDedicatedClusterHostStatisticsResponse 返回参数} */
+  /** 查询专用集群内宿主机的统计信息 {@link DescribeDedicatedClusterHostStatisticsRequest} {@link DescribeDedicatedClusterHostStatisticsResponse} */
   DescribeDedicatedClusterHostStatistics(data: DescribeDedicatedClusterHostStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterHostStatisticsResponse>;
-  /** {@link DescribeDedicatedClusterHosts 专用集群宿主机信息}({@link DescribeDedicatedClusterHostsRequest 请求参数}): {@link DescribeDedicatedClusterHostsResponse 返回参数} */
+  /** 专用集群宿主机信息 {@link DescribeDedicatedClusterHostsRequest} {@link DescribeDedicatedClusterHostsResponse} */
   DescribeDedicatedClusterHosts(data: DescribeDedicatedClusterHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterHostsResponse>;
-  /** {@link DescribeDedicatedClusterInstanceTypes 查询专用集群支持的实例规格列表}({@link DescribeDedicatedClusterInstanceTypesRequest 请求参数}): {@link DescribeDedicatedClusterInstanceTypesResponse 返回参数} */
+  /** 查询专用集群支持的实例规格列表 {@link DescribeDedicatedClusterInstanceTypesRequest} {@link DescribeDedicatedClusterInstanceTypesResponse} */
   DescribeDedicatedClusterInstanceTypes(data: DescribeDedicatedClusterInstanceTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterInstanceTypesResponse>;
-  /** {@link DescribeDedicatedClusterOrders 查询专用集群订单列表}({@link DescribeDedicatedClusterOrdersRequest 请求参数}): {@link DescribeDedicatedClusterOrdersResponse 返回参数} */
+  /** 查询专用集群订单列表 {@link DescribeDedicatedClusterOrdersRequest} {@link DescribeDedicatedClusterOrdersResponse} */
   DescribeDedicatedClusterOrders(data?: DescribeDedicatedClusterOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterOrdersResponse>;
-  /** {@link DescribeDedicatedClusterOverview 专用集群概览信息}({@link DescribeDedicatedClusterOverviewRequest 请求参数}): {@link DescribeDedicatedClusterOverviewResponse 返回参数} */
+  /** 专用集群概览信息 {@link DescribeDedicatedClusterOverviewRequest} {@link DescribeDedicatedClusterOverviewResponse} */
   DescribeDedicatedClusterOverview(data: DescribeDedicatedClusterOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterOverviewResponse>;
-  /** {@link DescribeDedicatedClusterTypes 查询专有集群配置列表}({@link DescribeDedicatedClusterTypesRequest 请求参数}): {@link DescribeDedicatedClusterTypesResponse 返回参数} */
+  /** 查询专有集群配置列表 {@link DescribeDedicatedClusterTypesRequest} {@link DescribeDedicatedClusterTypesResponse} */
   DescribeDedicatedClusterTypes(data?: DescribeDedicatedClusterTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterTypesResponse>;
-  /** {@link DescribeDedicatedClusters 查询专用集群列表}({@link DescribeDedicatedClustersRequest 请求参数}): {@link DescribeDedicatedClustersResponse 返回参数} */
+  /** 查询专用集群列表 {@link DescribeDedicatedClustersRequest} {@link DescribeDedicatedClustersResponse} */
   DescribeDedicatedClusters(data?: DescribeDedicatedClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClustersResponse>;
-  /** {@link DescribeDedicatedSupportedZones 查询专用集群支持的可用区列表}({@link DescribeDedicatedSupportedZonesRequest 请求参数}): {@link DescribeDedicatedSupportedZonesResponse 返回参数} */
+  /** 查询专用集群支持的可用区列表 {@link DescribeDedicatedSupportedZonesRequest} {@link DescribeDedicatedSupportedZonesResponse} */
   DescribeDedicatedSupportedZones(data?: DescribeDedicatedSupportedZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedSupportedZonesResponse>;
-  /** {@link DescribeSites 查询站点列表}({@link DescribeSitesRequest 请求参数}): {@link DescribeSitesResponse 返回参数} */
+  /** 查询站点列表 {@link DescribeSitesRequest} {@link DescribeSitesResponse} */
   DescribeSites(data?: DescribeSitesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSitesResponse>;
-  /** {@link DescribeSitesDetail 查询站点详情}({@link DescribeSitesDetailRequest 请求参数}): {@link DescribeSitesDetailResponse 返回参数} */
+  /** 查询站点详情 {@link DescribeSitesDetailRequest} {@link DescribeSitesDetailResponse} */
   DescribeSitesDetail(data?: DescribeSitesDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSitesDetailResponse>;
-  /** {@link ModifyDedicatedClusterInfo 修改本地专用集群信息}({@link ModifyDedicatedClusterInfoRequest 请求参数}): {@link ModifyDedicatedClusterInfoResponse 返回参数} */
+  /** 修改本地专用集群信息 {@link ModifyDedicatedClusterInfoRequest} {@link ModifyDedicatedClusterInfoResponse} */
   ModifyDedicatedClusterInfo(data: ModifyDedicatedClusterInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDedicatedClusterInfoResponse>;
-  /** {@link ModifyOrderStatus 修改订单状态}({@link ModifyOrderStatusRequest 请求参数}): {@link ModifyOrderStatusResponse 返回参数} */
+  /** 修改订单状态 {@link ModifyOrderStatusRequest} {@link ModifyOrderStatusResponse} */
   ModifyOrderStatus(data: ModifyOrderStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOrderStatusResponse>;
-  /** {@link ModifySiteDeviceInfo 修改机房设备信息}({@link ModifySiteDeviceInfoRequest 请求参数}): {@link ModifySiteDeviceInfoResponse 返回参数} */
+  /** 修改机房设备信息 {@link ModifySiteDeviceInfoRequest} {@link ModifySiteDeviceInfoResponse} */
   ModifySiteDeviceInfo(data: ModifySiteDeviceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySiteDeviceInfoResponse>;
-  /** {@link ModifySiteInfo 修改机房信息}({@link ModifySiteInfoRequest 请求参数}): {@link ModifySiteInfoResponse 返回参数} */
+  /** 修改机房信息 {@link ModifySiteInfoRequest} {@link ModifySiteInfoResponse} */
   ModifySiteInfo(data: ModifySiteInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySiteInfoResponse>;
 }
 

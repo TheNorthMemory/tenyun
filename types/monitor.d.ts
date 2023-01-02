@@ -1778,7 +1778,7 @@ declare interface BindPrometheusManagedGrafanaRequest {
 }
 
 declare interface BindPrometheusManagedGrafanaResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1796,7 +1796,7 @@ declare interface BindingPolicyObjectRequest {
 }
 
 declare interface BindingPolicyObjectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1818,7 +1818,7 @@ declare interface BindingPolicyTagRequest {
 }
 
 declare interface BindingPolicyTagResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1828,7 +1828,7 @@ declare interface CleanGrafanaInstanceRequest {
 }
 
 declare interface CleanGrafanaInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1854,7 +1854,7 @@ declare interface CreateAlarmNoticeRequest {
 declare interface CreateAlarmNoticeResponse {
   /** 告警通知模板ID */
   NoticeId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1902,7 +1902,7 @@ declare interface CreateAlarmPolicyResponse {
   PolicyId: string;
   /** 可用于实例、实例组的绑定和解绑接口（[BindingPolicyObject](https://cloud.tencent.com/document/product/248/40421)、[UnBindingAllPolicyObject](https://cloud.tencent.com/document/product/248/40568)、[UnBindingPolicyObject](https://cloud.tencent.com/document/product/248/40567)）的策略 ID */
   OriginId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1930,7 +1930,7 @@ declare interface CreateAlertRuleRequest {
 declare interface CreateAlertRuleResponse {
   /** 规则 ID */
   RuleId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1950,7 +1950,7 @@ declare interface CreateExporterIntegrationRequest {
 declare interface CreateExporterIntegrationResponse {
   /** 返回创建成功的集成名称列表 */
   Names: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1972,7 +1972,7 @@ declare interface CreateGrafanaInstanceRequest {
 declare interface CreateGrafanaInstanceResponse {
   /** 实例名 */
   InstanceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1988,7 +1988,7 @@ declare interface CreateGrafanaIntegrationRequest {
 declare interface CreateGrafanaIntegrationResponse {
   /** 集成 ID */
   IntegrationId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2010,7 +2010,7 @@ declare interface CreateGrafanaNotificationChannelRequest {
 declare interface CreateGrafanaNotificationChannelResponse {
   /** 通道 ID */
   ChannelId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2044,7 +2044,7 @@ declare interface CreatePolicyGroupRequest {
 declare interface CreatePolicyGroupResponse {
   /** 创建成功的策略组Id */
   GroupId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2058,7 +2058,7 @@ declare interface CreatePrometheusAgentRequest {
 declare interface CreatePrometheusAgentResponse {
   /** 创建成功的 Agent Id */
   AgentId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2082,7 +2082,7 @@ declare interface CreatePrometheusMultiTenantInstancePostPayModeRequest {
 declare interface CreatePrometheusMultiTenantInstancePostPayModeResponse {
   /** 实例 ID */
   InstanceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2098,7 +2098,7 @@ declare interface CreatePrometheusScrapeJobRequest {
 declare interface CreatePrometheusScrapeJobResponse {
   /** 成功创建抓取任务 Id */
   JobId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2116,7 +2116,7 @@ declare interface CreateRecordingRuleRequest {
 declare interface CreateRecordingRuleResponse {
   /** 规则 ID */
   RuleId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2134,7 +2134,7 @@ declare interface CreateSSOAccountRequest {
 declare interface CreateSSOAccountResponse {
   /** 已添加的用户 UIN */
   UserId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2154,7 +2154,7 @@ declare interface CreateServiceDiscoveryRequest {
 declare interface CreateServiceDiscoveryResponse {
   /** 创建成功之后，返回对应服务发现信息 */
   ServiceDiscovery?: ServiceDiscoveryItem;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2166,7 +2166,7 @@ declare interface DeleteAlarmNoticesRequest {
 }
 
 declare interface DeleteAlarmNoticesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2178,7 +2178,7 @@ declare interface DeleteAlarmPolicyRequest {
 }
 
 declare interface DeleteAlarmPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2190,7 +2190,7 @@ declare interface DeleteAlertRulesRequest {
 }
 
 declare interface DeleteAlertRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2208,7 +2208,7 @@ declare interface DeleteExporterIntegrationRequest {
 }
 
 declare interface DeleteExporterIntegrationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2218,7 +2218,7 @@ declare interface DeleteGrafanaInstanceRequest {
 }
 
 declare interface DeleteGrafanaInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2230,7 +2230,7 @@ declare interface DeleteGrafanaIntegrationRequest {
 }
 
 declare interface DeleteGrafanaIntegrationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2242,7 +2242,7 @@ declare interface DeleteGrafanaNotificationChannelRequest {
 }
 
 declare interface DeleteGrafanaNotificationChannelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2254,7 +2254,7 @@ declare interface DeletePolicyGroupRequest {
 }
 
 declare interface DeletePolicyGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2268,7 +2268,7 @@ declare interface DeletePrometheusScrapeJobsRequest {
 }
 
 declare interface DeletePrometheusScrapeJobsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2280,7 +2280,7 @@ declare interface DeleteRecordingRulesRequest {
 }
 
 declare interface DeleteRecordingRulesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2292,7 +2292,7 @@ declare interface DeleteSSOAccountRequest {
 }
 
 declare interface DeleteSSOAccountResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2310,7 +2310,7 @@ declare interface DeleteServiceDiscoveryRequest {
 }
 
 declare interface DeleteServiceDiscoveryResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2346,7 +2346,7 @@ declare interface DescribeAccidentEventListResponse {
   Alarms?: DescribeAccidentEventListAlarms[] | null;
   /** 平台事件的总数 */
   Total?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2362,7 +2362,7 @@ declare interface DescribeAlarmEventsRequest {
 declare interface DescribeAlarmEventsResponse {
   /** 告警事件列表 */
   Events: AlarmEvent[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2410,7 +2410,7 @@ declare interface DescribeAlarmHistoriesResponse {
   TotalCount: number;
   /** 告警历史列表 */
   Histories: AlarmHistory[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2426,7 +2426,7 @@ declare interface DescribeAlarmMetricsRequest {
 declare interface DescribeAlarmMetricsResponse {
   /** 告警指标列表 */
   Metrics?: Metric[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2438,7 +2438,7 @@ declare interface DescribeAlarmNoticeCallbacksRequest {
 declare interface DescribeAlarmNoticeCallbacksResponse {
   /** 告警回调通知 */
   URLNotices?: URLNotice[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2452,7 +2452,7 @@ declare interface DescribeAlarmNoticeRequest {
 declare interface DescribeAlarmNoticeResponse {
   /** 告警通知模板详细信息 */
   Notice: AlarmNotice;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2486,7 +2486,7 @@ declare interface DescribeAlarmNoticesResponse {
   TotalCount: number;
   /** 告警通知模板列表 */
   Notices: AlarmNotice[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2546,7 +2546,7 @@ declare interface DescribeAlarmPoliciesResponse {
   TotalCount: number;
   /** 策略数组 */
   Policies: AlarmPolicy[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2560,7 +2560,7 @@ declare interface DescribeAlarmPolicyRequest {
 declare interface DescribeAlarmPolicyResponse {
   /** 策略详情 */
   Policy: AlarmPolicy;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2586,7 +2586,7 @@ declare interface DescribeAlertRulesResponse {
   TotalCount: number;
   /** 报警规则详情 */
   AlertRuleSet: PrometheusRuleSet[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2612,7 +2612,7 @@ declare interface DescribeAllNamespacesResponse {
   CustomNamespacesNew: CommonNamespace[];
   /** 通用告警策略类型(包括：应用性能监控，前端性能监控，云拨测) */
   CommonNamespaces: CommonNamespaceNew[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2628,7 +2628,7 @@ declare interface DescribeBaseMetricsRequest {
 declare interface DescribeBaseMetricsResponse {
   /** 查询得到的指标描述列表 */
   MetricSet: MetricSet[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2666,7 +2666,7 @@ declare interface DescribeBasicAlarmListResponse {
   Total: number | null;
   /** 备注信息 */
   Warning: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2694,7 +2694,7 @@ declare interface DescribeBindingPolicyObjectListResponse {
   NoShieldedSum: number;
   /** 绑定的实例分组信息，没有绑定实例分组则为空 */
   InstanceGroup: DescribeBindingPolicyObjectListInstanceGroup | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2722,7 +2722,7 @@ declare interface DescribeConditionsTemplateListResponse {
   Total: number;
   /** 模板列表 */
   TemplateGroupList: TemplateGroup[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2734,7 +2734,7 @@ declare interface DescribeDNSConfigRequest {
 declare interface DescribeDNSConfigResponse {
   /** DNS 服务器数组 */
   NameServers: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2754,7 +2754,7 @@ declare interface DescribeExporterIntegrationsRequest {
 declare interface DescribeExporterIntegrationsResponse {
   /** 集成配置列表 */
   IntegrationSet: IntegrationConfiguration[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2776,7 +2776,7 @@ declare interface DescribeGrafanaChannelsRequest {
 declare interface DescribeGrafanaChannelsResponse {
   /** 告警通道数组 */
   NotificationChannelSet: GrafanaChannel[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2788,7 +2788,7 @@ declare interface DescribeGrafanaConfigRequest {
 declare interface DescribeGrafanaConfigResponse {
   /** JSON 编码后的字符串 */
   Config: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2800,7 +2800,7 @@ declare interface DescribeGrafanaEnvironmentsRequest {
 declare interface DescribeGrafanaEnvironmentsResponse {
   /** 环境变量字符串 */
   Envs: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2826,7 +2826,7 @@ declare interface DescribeGrafanaInstancesResponse {
   TotalCount: number;
   /** 实例列表 */
   Instances: GrafanaInstanceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2842,7 +2842,7 @@ declare interface DescribeGrafanaIntegrationsRequest {
 declare interface DescribeGrafanaIntegrationsResponse {
   /** 集成数组 */
   IntegrationSet: GrafanaIntegrationConfig[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2864,7 +2864,7 @@ declare interface DescribeGrafanaNotificationChannelsRequest {
 declare interface DescribeGrafanaNotificationChannelsResponse {
   /** 告警通道数组 */
   NotificationChannelSet: GrafanaNotificationChannel[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2876,7 +2876,7 @@ declare interface DescribeGrafanaWhiteListRequest {
 declare interface DescribeGrafanaWhiteListResponse {
   /** 数组 */
   WhiteList: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2890,7 +2890,7 @@ declare interface DescribeInstalledPluginsRequest {
 declare interface DescribeInstalledPluginsResponse {
   /** 插件列表 */
   PluginSet: GrafanaPlugin[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2904,7 +2904,7 @@ declare interface DescribeMonitorTypesResponse {
   MonitorTypes: string[];
   /** 监控类型详情 */
   MonitorTypeInfos: MonitorTypeInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2914,7 +2914,7 @@ declare interface DescribePluginOverviewsRequest {
 declare interface DescribePluginOverviewsResponse {
   /** 插件列表 */
   PluginSet: GrafanaPlugin[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2926,7 +2926,7 @@ declare interface DescribePolicyConditionListRequest {
 declare interface DescribePolicyConditionListResponse {
   /** 告警策略条件列表 */
   Conditions?: DescribePolicyConditionListCondition[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2972,7 +2972,7 @@ declare interface DescribePolicyGroupInfoResponse {
   CanSetDefault?: boolean;
   /** 是否且规则 */
   IsUnionRule?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3016,7 +3016,7 @@ declare interface DescribePolicyGroupListResponse {
   Total: number;
   /** 备注信息 */
   Warning: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3060,7 +3060,7 @@ declare interface DescribeProductEventListResponse {
   OverView: DescribeProductEventListOverView;
   /** 事件总数 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3080,7 +3080,7 @@ declare interface DescribeProductListResponse {
   ProductList: ProductSimple[] | null;
   /** 产品总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3102,7 +3102,7 @@ declare interface DescribePrometheusAgentsResponse {
   AgentSet: PrometheusAgent[] | null;
   /** Agent 总量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3118,7 +3118,7 @@ declare interface DescribePrometheusInstanceUsageRequest {
 declare interface DescribePrometheusInstanceUsageResponse {
   /** 用量列表 */
   UsageSet: PrometheusInstanceTenantUsage[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3148,7 +3148,7 @@ declare interface DescribePrometheusInstancesResponse {
   InstanceSet: PrometheusInstancesItem[] | null;
   /** 符合条件的实例数量。 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3172,7 +3172,7 @@ declare interface DescribePrometheusScrapeJobsResponse {
   ScrapeJobSet?: PrometheusScrapeJob[] | null;
   /** 任务总量 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3184,7 +3184,7 @@ declare interface DescribePrometheusZonesRequest {
 declare interface DescribePrometheusZonesResponse {
   /** 区域列表 */
   ZoneSet: PrometheusZoneItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3208,7 +3208,7 @@ declare interface DescribeRecordingRulesResponse {
   TotalCount: number;
   /** 规则组详情 */
   RecordingRuleSet: RecordingRuleSet[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3222,7 +3222,7 @@ declare interface DescribeSSOAccountRequest {
 declare interface DescribeSSOAccountResponse {
   /** 授权账号列表 */
   AccountSet: GrafanaAccountInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3238,7 +3238,7 @@ declare interface DescribeServiceDiscoveryRequest {
 declare interface DescribeServiceDiscoveryResponse {
   /** 返回服务发现列表信息 */
   ServiceDiscoverySet?: ServiceDiscoveryItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3270,7 +3270,7 @@ declare interface DescribeStatisticDataResponse {
   EndTime: string;
   /** 监控数据 */
   Data: MetricData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3280,7 +3280,7 @@ declare interface DestroyPrometheusInstanceRequest {
 }
 
 declare interface DestroyPrometheusInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3292,7 +3292,7 @@ declare interface EnableGrafanaInternetRequest {
 }
 
 declare interface EnableGrafanaInternetResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3304,7 +3304,7 @@ declare interface EnableGrafanaSSORequest {
 }
 
 declare interface EnableGrafanaSSOResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3316,7 +3316,7 @@ declare interface EnableSSOCamCheckRequest {
 }
 
 declare interface EnableSSOCamCheckResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3348,7 +3348,7 @@ declare interface GetMonitorDataResponse {
   EndTime: string;
   /** 返回信息 */
   Msg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3362,7 +3362,7 @@ declare interface GetPrometheusAgentManagementCommandRequest {
 declare interface GetPrometheusAgentManagementCommandResponse {
   /** Agent 管理命令 */
   Command?: ManagementCommand;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3376,7 +3376,7 @@ declare interface InstallPluginsRequest {
 declare interface InstallPluginsResponse {
   /** 已安装插件 ID */
   PluginIds: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3400,7 +3400,7 @@ declare interface ModifyAlarmNoticeRequest {
 }
 
 declare interface ModifyAlarmNoticeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3424,7 +3424,7 @@ declare interface ModifyAlarmPolicyConditionRequest {
 }
 
 declare interface ModifyAlarmPolicyConditionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3440,7 +3440,7 @@ declare interface ModifyAlarmPolicyInfoRequest {
 }
 
 declare interface ModifyAlarmPolicyInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3456,7 +3456,7 @@ declare interface ModifyAlarmPolicyNoticeRequest {
 }
 
 declare interface ModifyAlarmPolicyNoticeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3470,7 +3470,7 @@ declare interface ModifyAlarmPolicyStatusRequest {
 }
 
 declare interface ModifyAlarmPolicyStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3484,7 +3484,7 @@ declare interface ModifyAlarmPolicyTasksRequest {
 }
 
 declare interface ModifyAlarmPolicyTasksResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3498,7 +3498,7 @@ declare interface ModifyAlarmReceiversRequest {
 }
 
 declare interface ModifyAlarmReceiversResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3510,7 +3510,7 @@ declare interface ModifyGrafanaInstanceRequest {
 }
 
 declare interface ModifyGrafanaInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3536,7 +3536,7 @@ declare interface ModifyPolicyGroupRequest {
 declare interface ModifyPolicyGroupResponse {
   /** 策略组id */
   GroupId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3550,7 +3550,7 @@ declare interface ModifyPrometheusInstanceAttributesRequest {
 }
 
 declare interface ModifyPrometheusInstanceAttributesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3566,7 +3566,7 @@ declare interface PutMonitorDataRequest {
 }
 
 declare interface PutMonitorDataResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3576,7 +3576,7 @@ declare interface ResumeGrafanaInstanceRequest {
 }
 
 declare interface ResumeGrafanaInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3590,7 +3590,7 @@ declare interface SendCustomAlarmMsgRequest {
 }
 
 declare interface SendCustomAlarmMsgResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3602,7 +3602,7 @@ declare interface SetDefaultAlarmPolicyRequest {
 }
 
 declare interface SetDefaultAlarmPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3612,7 +3612,7 @@ declare interface TerminatePrometheusInstancesRequest {
 }
 
 declare interface TerminatePrometheusInstancesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3626,7 +3626,7 @@ declare interface UnBindingAllPolicyObjectRequest {
 }
 
 declare interface UnBindingAllPolicyObjectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3644,7 +3644,7 @@ declare interface UnBindingPolicyObjectRequest {
 }
 
 declare interface UnBindingPolicyObjectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3656,7 +3656,7 @@ declare interface UnbindPrometheusManagedGrafanaRequest {
 }
 
 declare interface UnbindPrometheusManagedGrafanaResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3668,7 +3668,7 @@ declare interface UninstallGrafanaDashboardRequest {
 }
 
 declare interface UninstallGrafanaDashboardResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3680,7 +3680,7 @@ declare interface UninstallGrafanaPluginsRequest {
 }
 
 declare interface UninstallGrafanaPluginsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3710,7 +3710,7 @@ declare interface UpdateAlertRuleRequest {
 declare interface UpdateAlertRuleResponse {
   /** 规则 ID */
   RuleId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3724,7 +3724,7 @@ declare interface UpdateAlertRuleStateRequest {
 }
 
 declare interface UpdateAlertRuleStateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3736,7 +3736,7 @@ declare interface UpdateDNSConfigRequest {
 }
 
 declare interface UpdateDNSConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3754,7 +3754,7 @@ declare interface UpdateExporterIntegrationRequest {
 }
 
 declare interface UpdateExporterIntegrationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3766,7 +3766,7 @@ declare interface UpdateGrafanaConfigRequest {
 }
 
 declare interface UpdateGrafanaConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3778,7 +3778,7 @@ declare interface UpdateGrafanaEnvironmentsRequest {
 }
 
 declare interface UpdateGrafanaEnvironmentsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3794,7 +3794,7 @@ declare interface UpdateGrafanaIntegrationRequest {
 }
 
 declare interface UpdateGrafanaIntegrationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3814,7 +3814,7 @@ declare interface UpdateGrafanaNotificationChannelRequest {
 }
 
 declare interface UpdateGrafanaNotificationChannelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3826,7 +3826,7 @@ declare interface UpdateGrafanaWhiteListRequest {
 }
 
 declare interface UpdateGrafanaWhiteListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3840,7 +3840,7 @@ declare interface UpdatePrometheusAgentStatusRequest {
 }
 
 declare interface UpdatePrometheusAgentStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3856,7 +3856,7 @@ declare interface UpdatePrometheusScrapeJobRequest {
 }
 
 declare interface UpdatePrometheusScrapeJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3876,7 +3876,7 @@ declare interface UpdateRecordingRuleRequest {
 declare interface UpdateRecordingRuleResponse {
   /** 规则 ID */
   RuleId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3892,7 +3892,7 @@ declare interface UpdateSSOAccountRequest {
 }
 
 declare interface UpdateSSOAccountResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3912,7 +3912,7 @@ declare interface UpdateServiceDiscoveryRequest {
 declare interface UpdateServiceDiscoveryResponse {
   /** 更新成功之后，返回对应服务发现的信息 */
   ServiceDiscovery?: ServiceDiscoveryItem;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3924,7 +3924,7 @@ declare interface UpgradeGrafanaDashboardRequest {
 }
 
 declare interface UpgradeGrafanaDashboardResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3936,240 +3936,240 @@ declare interface UpgradeGrafanaInstanceRequest {
 }
 
 declare interface UpgradeGrafanaInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Monitor 云监控} */
 declare interface Monitor {
   (): Versions;
-  /** {@link BindPrometheusManagedGrafana 绑定 Grafana 可视化服务实例}({@link BindPrometheusManagedGrafanaRequest 请求参数}): {@link BindPrometheusManagedGrafanaResponse 返回参数} */
+  /** 绑定 Grafana 可视化服务实例 {@link BindPrometheusManagedGrafanaRequest} {@link BindPrometheusManagedGrafanaResponse} */
   BindPrometheusManagedGrafana(data: BindPrometheusManagedGrafanaRequest, config?: AxiosRequestConfig): AxiosPromise<BindPrometheusManagedGrafanaResponse>;
-  /** {@link BindingPolicyObject 绑定策略对象}({@link BindingPolicyObjectRequest 请求参数}): {@link BindingPolicyObjectResponse 返回参数} */
+  /** 绑定策略对象 {@link BindingPolicyObjectRequest} {@link BindingPolicyObjectResponse} */
   BindingPolicyObject(data: BindingPolicyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<BindingPolicyObjectResponse>;
-  /** {@link BindingPolicyTag 策略绑定标签}({@link BindingPolicyTagRequest 请求参数}): {@link BindingPolicyTagResponse 返回参数} */
+  /** 策略绑定标签 {@link BindingPolicyTagRequest} {@link BindingPolicyTagResponse} */
   BindingPolicyTag(data: BindingPolicyTagRequest, config?: AxiosRequestConfig): AxiosPromise<BindingPolicyTagResponse>;
-  /** {@link CleanGrafanaInstance 强制销毁 Grafana 实例}({@link CleanGrafanaInstanceRequest 请求参数}): {@link CleanGrafanaInstanceResponse 返回参数} */
+  /** 强制销毁 Grafana 实例 {@link CleanGrafanaInstanceRequest} {@link CleanGrafanaInstanceResponse} */
   CleanGrafanaInstance(data: CleanGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CleanGrafanaInstanceResponse>;
-  /** {@link CreateAlarmNotice 创建通知模板}({@link CreateAlarmNoticeRequest 请求参数}): {@link CreateAlarmNoticeResponse 返回参数} */
+  /** 创建通知模板 {@link CreateAlarmNoticeRequest} {@link CreateAlarmNoticeResponse} */
   CreateAlarmNotice(data: CreateAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmNoticeResponse>;
-  /** {@link CreateAlarmPolicy 创建云监控告警策略}({@link CreateAlarmPolicyRequest 请求参数}): {@link CreateAlarmPolicyResponse 返回参数} */
+  /** 创建云监控告警策略 {@link CreateAlarmPolicyRequest} {@link CreateAlarmPolicyResponse} */
   CreateAlarmPolicy(data: CreateAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmPolicyResponse>;
-  /** {@link CreateAlertRule 创建告警规则}({@link CreateAlertRuleRequest 请求参数}): {@link CreateAlertRuleResponse 返回参数} */
+  /** 创建告警规则 {@link CreateAlertRuleRequest} {@link CreateAlertRuleResponse} */
   CreateAlertRule(data: CreateAlertRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlertRuleResponse>;
-  /** {@link CreateExporterIntegration 创建 exporter 集成}({@link CreateExporterIntegrationRequest 请求参数}): {@link CreateExporterIntegrationResponse 返回参数} */
+  /** 创建 exporter 集成 {@link CreateExporterIntegrationRequest} {@link CreateExporterIntegrationResponse} */
   CreateExporterIntegration(data: CreateExporterIntegrationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExporterIntegrationResponse>;
-  /** {@link CreateGrafanaInstance 创建 Grafana 实例}({@link CreateGrafanaInstanceRequest 请求参数}): {@link CreateGrafanaInstanceResponse 返回参数} */
+  /** 创建 Grafana 实例 {@link CreateGrafanaInstanceRequest} {@link CreateGrafanaInstanceResponse} */
   CreateGrafanaInstance(data: CreateGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGrafanaInstanceResponse>;
-  /** {@link CreateGrafanaIntegration 创建 Grafana 集成配置}({@link CreateGrafanaIntegrationRequest 请求参数}): {@link CreateGrafanaIntegrationResponse 返回参数} */
+  /** 创建 Grafana 集成配置 {@link CreateGrafanaIntegrationRequest} {@link CreateGrafanaIntegrationResponse} */
   CreateGrafanaIntegration(data: CreateGrafanaIntegrationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGrafanaIntegrationResponse>;
-  /** {@link CreateGrafanaNotificationChannel 创建 Grafana 告警通道}({@link CreateGrafanaNotificationChannelRequest 请求参数}): {@link CreateGrafanaNotificationChannelResponse 返回参数} */
+  /** 创建 Grafana 告警通道 {@link CreateGrafanaNotificationChannelRequest} {@link CreateGrafanaNotificationChannelResponse} */
   CreateGrafanaNotificationChannel(data: CreateGrafanaNotificationChannelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGrafanaNotificationChannelResponse>;
-  /** {@link CreatePolicyGroup 增加策略组}({@link CreatePolicyGroupRequest 请求参数}): {@link CreatePolicyGroupResponse 返回参数} */
+  /** 增加策略组 {@link CreatePolicyGroupRequest} {@link CreatePolicyGroupResponse} */
   CreatePolicyGroup(data: CreatePolicyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePolicyGroupResponse>;
-  /** {@link CreatePrometheusAgent 创建 Prometheus CVM Agent}({@link CreatePrometheusAgentRequest 请求参数}): {@link CreatePrometheusAgentResponse 返回参数} */
+  /** 创建 Prometheus CVM Agent {@link CreatePrometheusAgentRequest} {@link CreatePrometheusAgentResponse} */
   CreatePrometheusAgent(data: CreatePrometheusAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusAgentResponse>;
-  /** {@link CreatePrometheusMultiTenantInstancePostPayMode 创建按量 Prometheus 实例}({@link CreatePrometheusMultiTenantInstancePostPayModeRequest 请求参数}): {@link CreatePrometheusMultiTenantInstancePostPayModeResponse 返回参数} */
+  /** 创建按量 Prometheus 实例 {@link CreatePrometheusMultiTenantInstancePostPayModeRequest} {@link CreatePrometheusMultiTenantInstancePostPayModeResponse} */
   CreatePrometheusMultiTenantInstancePostPayMode(data: CreatePrometheusMultiTenantInstancePostPayModeRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusMultiTenantInstancePostPayModeResponse>;
-  /** {@link CreatePrometheusScrapeJob 创建 Prometheus 抓取任务}({@link CreatePrometheusScrapeJobRequest 请求参数}): {@link CreatePrometheusScrapeJobResponse 返回参数} */
+  /** 创建 Prometheus 抓取任务 {@link CreatePrometheusScrapeJobRequest} {@link CreatePrometheusScrapeJobResponse} */
   CreatePrometheusScrapeJob(data: CreatePrometheusScrapeJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusScrapeJobResponse>;
-  /** {@link CreateRecordingRule 创建预聚合规则}({@link CreateRecordingRuleRequest 请求参数}): {@link CreateRecordingRuleResponse 返回参数} */
+  /** 创建预聚合规则 {@link CreateRecordingRuleRequest} {@link CreateRecordingRuleResponse} */
   CreateRecordingRule(data: CreateRecordingRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordingRuleResponse>;
-  /** {@link CreateSSOAccount 授权腾讯云用户}({@link CreateSSOAccountRequest 请求参数}): {@link CreateSSOAccountResponse 返回参数} */
+  /** 授权腾讯云用户 {@link CreateSSOAccountRequest} {@link CreateSSOAccountResponse} */
   CreateSSOAccount(data: CreateSSOAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSSOAccountResponse>;
-  /** {@link CreateServiceDiscovery 创建服务发现}({@link CreateServiceDiscoveryRequest 请求参数}): {@link CreateServiceDiscoveryResponse 返回参数} */
+  /** 创建服务发现 {@link CreateServiceDiscoveryRequest} {@link CreateServiceDiscoveryResponse} */
   CreateServiceDiscovery(data: CreateServiceDiscoveryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceDiscoveryResponse>;
-  /** {@link DeleteAlarmNotices 删除告警通知模板（批量）}({@link DeleteAlarmNoticesRequest 请求参数}): {@link DeleteAlarmNoticesResponse 返回参数} */
+  /** 删除告警通知模板（批量） {@link DeleteAlarmNoticesRequest} {@link DeleteAlarmNoticesResponse} */
   DeleteAlarmNotices(data: DeleteAlarmNoticesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmNoticesResponse>;
-  /** {@link DeleteAlarmPolicy 删除告警策略}({@link DeleteAlarmPolicyRequest 请求参数}): {@link DeleteAlarmPolicyResponse 返回参数} */
+  /** 删除告警策略 {@link DeleteAlarmPolicyRequest} {@link DeleteAlarmPolicyResponse} */
   DeleteAlarmPolicy(data: DeleteAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmPolicyResponse>;
-  /** {@link DeleteAlertRules 删除报警规则}({@link DeleteAlertRulesRequest 请求参数}): {@link DeleteAlertRulesResponse 返回参数} */
+  /** 删除报警规则 {@link DeleteAlertRulesRequest} {@link DeleteAlertRulesResponse} */
   DeleteAlertRules(data: DeleteAlertRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlertRulesResponse>;
-  /** {@link DeleteExporterIntegration 删除 exporter 集成}({@link DeleteExporterIntegrationRequest 请求参数}): {@link DeleteExporterIntegrationResponse 返回参数} */
+  /** 删除 exporter 集成 {@link DeleteExporterIntegrationRequest} {@link DeleteExporterIntegrationResponse} */
   DeleteExporterIntegration(data: DeleteExporterIntegrationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteExporterIntegrationResponse>;
-  /** {@link DeleteGrafanaInstance 删除 Grafana 实例}({@link DeleteGrafanaInstanceRequest 请求参数}): {@link DeleteGrafanaInstanceResponse 返回参数} */
+  /** 删除 Grafana 实例 {@link DeleteGrafanaInstanceRequest} {@link DeleteGrafanaInstanceResponse} */
   DeleteGrafanaInstance(data: DeleteGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGrafanaInstanceResponse>;
-  /** {@link DeleteGrafanaIntegration 删除 Grafana 集成配置}({@link DeleteGrafanaIntegrationRequest 请求参数}): {@link DeleteGrafanaIntegrationResponse 返回参数} */
+  /** 删除 Grafana 集成配置 {@link DeleteGrafanaIntegrationRequest} {@link DeleteGrafanaIntegrationResponse} */
   DeleteGrafanaIntegration(data: DeleteGrafanaIntegrationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGrafanaIntegrationResponse>;
-  /** {@link DeleteGrafanaNotificationChannel 删除 Grafana 告警通道}({@link DeleteGrafanaNotificationChannelRequest 请求参数}): {@link DeleteGrafanaNotificationChannelResponse 返回参数} */
+  /** 删除 Grafana 告警通道 {@link DeleteGrafanaNotificationChannelRequest} {@link DeleteGrafanaNotificationChannelResponse} */
   DeleteGrafanaNotificationChannel(data: DeleteGrafanaNotificationChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGrafanaNotificationChannelResponse>;
-  /** {@link DeletePolicyGroup 删除告警策略组}({@link DeletePolicyGroupRequest 请求参数}): {@link DeletePolicyGroupResponse 返回参数} */
+  /** 删除告警策略组 {@link DeletePolicyGroupRequest} {@link DeletePolicyGroupResponse} */
   DeletePolicyGroup(data: DeletePolicyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePolicyGroupResponse>;
-  /** {@link DeletePrometheusScrapeJobs 删除 Prometheus 抓取任务}({@link DeletePrometheusScrapeJobsRequest 请求参数}): {@link DeletePrometheusScrapeJobsResponse 返回参数} */
+  /** 删除 Prometheus 抓取任务 {@link DeletePrometheusScrapeJobsRequest} {@link DeletePrometheusScrapeJobsResponse} */
   DeletePrometheusScrapeJobs(data: DeletePrometheusScrapeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusScrapeJobsResponse>;
-  /** {@link DeleteRecordingRules 删除预聚合规则}({@link DeleteRecordingRulesRequest 请求参数}): {@link DeleteRecordingRulesResponse 返回参数} */
+  /** 删除预聚合规则 {@link DeleteRecordingRulesRequest} {@link DeleteRecordingRulesResponse} */
   DeleteRecordingRules(data: DeleteRecordingRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordingRulesResponse>;
-  /** {@link DeleteSSOAccount 删除授权用户}({@link DeleteSSOAccountRequest 请求参数}): {@link DeleteSSOAccountResponse 返回参数} */
+  /** 删除授权用户 {@link DeleteSSOAccountRequest} {@link DeleteSSOAccountResponse} */
   DeleteSSOAccount(data: DeleteSSOAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSSOAccountResponse>;
-  /** {@link DeleteServiceDiscovery 删除服务发现}({@link DeleteServiceDiscoveryRequest 请求参数}): {@link DeleteServiceDiscoveryResponse 返回参数} */
+  /** 删除服务发现 {@link DeleteServiceDiscoveryRequest} {@link DeleteServiceDiscoveryResponse} */
   DeleteServiceDiscovery(data: DeleteServiceDiscoveryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceDiscoveryResponse>;
-  /** {@link DescribeAccidentEventList 获取平台事件列表}({@link DescribeAccidentEventListRequest 请求参数}): {@link DescribeAccidentEventListResponse 返回参数} */
+  /** 获取平台事件列表 {@link DescribeAccidentEventListRequest} {@link DescribeAccidentEventListResponse} */
   DescribeAccidentEventList(data: DescribeAccidentEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccidentEventListResponse>;
-  /** {@link DescribeAlarmEvents 查询告警事件列表}({@link DescribeAlarmEventsRequest 请求参数}): {@link DescribeAlarmEventsResponse 返回参数} */
+  /** 查询告警事件列表 {@link DescribeAlarmEventsRequest} {@link DescribeAlarmEventsResponse} */
   DescribeAlarmEvents(data: DescribeAlarmEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmEventsResponse>;
-  /** {@link DescribeAlarmHistories 查询告警历史}({@link DescribeAlarmHistoriesRequest 请求参数}): {@link DescribeAlarmHistoriesResponse 返回参数} */
+  /** 查询告警历史 {@link DescribeAlarmHistoriesRequest} {@link DescribeAlarmHistoriesResponse} */
   DescribeAlarmHistories(data: DescribeAlarmHistoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmHistoriesResponse>;
-  /** {@link DescribeAlarmMetrics 查询告警指标列表}({@link DescribeAlarmMetricsRequest 请求参数}): {@link DescribeAlarmMetricsResponse 返回参数} */
+  /** 查询告警指标列表 {@link DescribeAlarmMetricsRequest} {@link DescribeAlarmMetricsResponse} */
   DescribeAlarmMetrics(data: DescribeAlarmMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmMetricsResponse>;
-  /** {@link DescribeAlarmNotice 查询单个通知模板的详情}({@link DescribeAlarmNoticeRequest 请求参数}): {@link DescribeAlarmNoticeResponse 返回参数} */
+  /** 查询单个通知模板的详情 {@link DescribeAlarmNoticeRequest} {@link DescribeAlarmNoticeResponse} */
   DescribeAlarmNotice(data: DescribeAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNoticeResponse>;
-  /** {@link DescribeAlarmNoticeCallbacks 查询账号下所有回调URL列表}({@link DescribeAlarmNoticeCallbacksRequest 请求参数}): {@link DescribeAlarmNoticeCallbacksResponse 返回参数} */
+  /** 查询账号下所有回调URL列表 {@link DescribeAlarmNoticeCallbacksRequest} {@link DescribeAlarmNoticeCallbacksResponse} */
   DescribeAlarmNoticeCallbacks(data: DescribeAlarmNoticeCallbacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNoticeCallbacksResponse>;
-  /** {@link DescribeAlarmNotices 查询通知模板列表}({@link DescribeAlarmNoticesRequest 请求参数}): {@link DescribeAlarmNoticesResponse 返回参数} */
+  /** 查询通知模板列表 {@link DescribeAlarmNoticesRequest} {@link DescribeAlarmNoticesResponse} */
   DescribeAlarmNotices(data: DescribeAlarmNoticesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNoticesResponse>;
-  /** {@link DescribeAlarmPolicies 查询告警策略列表（支持按实例等条件筛选）}({@link DescribeAlarmPoliciesRequest 请求参数}): {@link DescribeAlarmPoliciesResponse 返回参数} */
+  /** 查询告警策略列表（支持按实例等条件筛选） {@link DescribeAlarmPoliciesRequest} {@link DescribeAlarmPoliciesResponse} */
   DescribeAlarmPolicies(data: DescribeAlarmPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmPoliciesResponse>;
-  /** {@link DescribeAlarmPolicy 获取单个告警策略详情}({@link DescribeAlarmPolicyRequest 请求参数}): {@link DescribeAlarmPolicyResponse 返回参数} */
+  /** 获取单个告警策略详情 {@link DescribeAlarmPolicyRequest} {@link DescribeAlarmPolicyResponse} */
   DescribeAlarmPolicy(data: DescribeAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmPolicyResponse>;
-  /** {@link DescribeAlertRules 报警规则查询}({@link DescribeAlertRulesRequest 请求参数}): {@link DescribeAlertRulesResponse 返回参数} */
+  /** 报警规则查询 {@link DescribeAlertRulesRequest} {@link DescribeAlertRulesResponse} */
   DescribeAlertRules(data: DescribeAlertRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertRulesResponse>;
-  /** {@link DescribeAllNamespaces 查询所有名字空间}({@link DescribeAllNamespacesRequest 请求参数}): {@link DescribeAllNamespacesResponse 返回参数} */
+  /** 查询所有名字空间 {@link DescribeAllNamespacesRequest} {@link DescribeAllNamespacesResponse} */
   DescribeAllNamespaces(data: DescribeAllNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllNamespacesResponse>;
-  /** {@link DescribeBaseMetrics 获取基础指标属性}({@link DescribeBaseMetricsRequest 请求参数}): {@link DescribeBaseMetricsResponse 返回参数} */
+  /** 获取基础指标属性 {@link DescribeBaseMetricsRequest} {@link DescribeBaseMetricsResponse} */
   DescribeBaseMetrics(data: DescribeBaseMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaseMetricsResponse>;
-  /** {@link DescribeBasicAlarmList 获取基础告警列表}({@link DescribeBasicAlarmListRequest 请求参数}): {@link DescribeBasicAlarmListResponse 返回参数} */
+  /** 获取基础告警列表 {@link DescribeBasicAlarmListRequest} {@link DescribeBasicAlarmListResponse} */
   DescribeBasicAlarmList(data: DescribeBasicAlarmListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicAlarmListResponse>;
-  /** {@link DescribeBindingPolicyObjectList 获取已绑定对象列表}({@link DescribeBindingPolicyObjectListRequest 请求参数}): {@link DescribeBindingPolicyObjectListResponse 返回参数} */
+  /** 获取已绑定对象列表 {@link DescribeBindingPolicyObjectListRequest} {@link DescribeBindingPolicyObjectListResponse} */
   DescribeBindingPolicyObjectList(data: DescribeBindingPolicyObjectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindingPolicyObjectListResponse>;
-  /** {@link DescribeConditionsTemplateList 获取条件模板列表}({@link DescribeConditionsTemplateListRequest 请求参数}): {@link DescribeConditionsTemplateListResponse 返回参数} */
+  /** 获取条件模板列表 {@link DescribeConditionsTemplateListRequest} {@link DescribeConditionsTemplateListResponse} */
   DescribeConditionsTemplateList(data: DescribeConditionsTemplateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConditionsTemplateListResponse>;
-  /** {@link DescribeDNSConfig 列出 Grafana DNS 配置}({@link DescribeDNSConfigRequest 请求参数}): {@link DescribeDNSConfigResponse 返回参数} */
+  /** 列出 Grafana DNS 配置 {@link DescribeDNSConfigRequest} {@link DescribeDNSConfigResponse} */
   DescribeDNSConfig(data: DescribeDNSConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDNSConfigResponse>;
-  /** {@link DescribeExporterIntegrations 查询 exporter 集成列表}({@link DescribeExporterIntegrationsRequest 请求参数}): {@link DescribeExporterIntegrationsResponse 返回参数} */
+  /** 查询 exporter 集成列表 {@link DescribeExporterIntegrationsRequest} {@link DescribeExporterIntegrationsResponse} */
   DescribeExporterIntegrations(data: DescribeExporterIntegrationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExporterIntegrationsResponse>;
-  /** {@link DescribeGrafanaChannels 列出 Grafana 所有告警通道}({@link DescribeGrafanaChannelsRequest 请求参数}): {@link DescribeGrafanaChannelsResponse 返回参数} */
+  /** 列出 Grafana 所有告警通道 {@link DescribeGrafanaChannelsRequest} {@link DescribeGrafanaChannelsResponse} */
   DescribeGrafanaChannels(data: DescribeGrafanaChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGrafanaChannelsResponse>;
-  /** {@link DescribeGrafanaConfig 列出 Grafana 的设置}({@link DescribeGrafanaConfigRequest 请求参数}): {@link DescribeGrafanaConfigResponse 返回参数} */
+  /** 列出 Grafana 的设置 {@link DescribeGrafanaConfigRequest} {@link DescribeGrafanaConfigResponse} */
   DescribeGrafanaConfig(data: DescribeGrafanaConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGrafanaConfigResponse>;
-  /** {@link DescribeGrafanaEnvironments 列出 Grafana 环境变量}({@link DescribeGrafanaEnvironmentsRequest 请求参数}): {@link DescribeGrafanaEnvironmentsResponse 返回参数} */
+  /** 列出 Grafana 环境变量 {@link DescribeGrafanaEnvironmentsRequest} {@link DescribeGrafanaEnvironmentsResponse} */
   DescribeGrafanaEnvironments(data: DescribeGrafanaEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGrafanaEnvironmentsResponse>;
-  /** {@link DescribeGrafanaInstances 列出用户所有的 Grafana 服务}({@link DescribeGrafanaInstancesRequest 请求参数}): {@link DescribeGrafanaInstancesResponse 返回参数} */
+  /** 列出用户所有的 Grafana 服务 {@link DescribeGrafanaInstancesRequest} {@link DescribeGrafanaInstancesResponse} */
   DescribeGrafanaInstances(data: DescribeGrafanaInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGrafanaInstancesResponse>;
-  /** {@link DescribeGrafanaIntegrations 列出 Grafana 已安装的集成}({@link DescribeGrafanaIntegrationsRequest 请求参数}): {@link DescribeGrafanaIntegrationsResponse 返回参数} */
+  /** 列出 Grafana 已安装的集成 {@link DescribeGrafanaIntegrationsRequest} {@link DescribeGrafanaIntegrationsResponse} */
   DescribeGrafanaIntegrations(data: DescribeGrafanaIntegrationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGrafanaIntegrationsResponse>;
-  /** {@link DescribeGrafanaNotificationChannels 列出 Grafana 告警通道}({@link DescribeGrafanaNotificationChannelsRequest 请求参数}): {@link DescribeGrafanaNotificationChannelsResponse 返回参数} */
+  /** 列出 Grafana 告警通道 {@link DescribeGrafanaNotificationChannelsRequest} {@link DescribeGrafanaNotificationChannelsResponse} */
   DescribeGrafanaNotificationChannels(data: DescribeGrafanaNotificationChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGrafanaNotificationChannelsResponse>;
-  /** {@link DescribeGrafanaWhiteList 列出 Grafana 白名单}({@link DescribeGrafanaWhiteListRequest 请求参数}): {@link DescribeGrafanaWhiteListResponse 返回参数} */
+  /** 列出 Grafana 白名单 {@link DescribeGrafanaWhiteListRequest} {@link DescribeGrafanaWhiteListResponse} */
   DescribeGrafanaWhiteList(data: DescribeGrafanaWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGrafanaWhiteListResponse>;
-  /** {@link DescribeInstalledPlugins 列出实例已安装的插件}({@link DescribeInstalledPluginsRequest 请求参数}): {@link DescribeInstalledPluginsResponse 返回参数} */
+  /** 列出实例已安装的插件 {@link DescribeInstalledPluginsRequest} {@link DescribeInstalledPluginsResponse} */
   DescribeInstalledPlugins(data: DescribeInstalledPluginsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstalledPluginsResponse>;
-  /** {@link DescribeMonitorTypes 查询监控类型}({@link DescribeMonitorTypesRequest 请求参数}): {@link DescribeMonitorTypesResponse 返回参数} */
+  /** 查询监控类型 {@link DescribeMonitorTypesRequest} {@link DescribeMonitorTypesResponse} */
   DescribeMonitorTypes(data: DescribeMonitorTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorTypesResponse>;
-  /** {@link DescribePluginOverviews 列出所有 Grafana 插件}({@link DescribePluginOverviewsRequest 请求参数}): {@link DescribePluginOverviewsResponse 返回参数} */
+  /** 列出所有 Grafana 插件 {@link DescribePluginOverviewsRequest} {@link DescribePluginOverviewsResponse} */
   DescribePluginOverviews(data?: DescribePluginOverviewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginOverviewsResponse>;
-  /** {@link DescribePolicyConditionList 获取基础告警策略条件}({@link DescribePolicyConditionListRequest 请求参数}): {@link DescribePolicyConditionListResponse 返回参数} */
+  /** 获取基础告警策略条件 {@link DescribePolicyConditionListRequest} {@link DescribePolicyConditionListResponse} */
   DescribePolicyConditionList(data: DescribePolicyConditionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyConditionListResponse>;
-  /** {@link DescribePolicyGroupInfo 获取基础策略组详情}({@link DescribePolicyGroupInfoRequest 请求参数}): {@link DescribePolicyGroupInfoResponse 返回参数} */
+  /** 获取基础策略组详情 {@link DescribePolicyGroupInfoRequest} {@link DescribePolicyGroupInfoResponse} */
   DescribePolicyGroupInfo(data: DescribePolicyGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyGroupInfoResponse>;
-  /** {@link DescribePolicyGroupList 获取基础策略告警组列表}({@link DescribePolicyGroupListRequest 请求参数}): {@link DescribePolicyGroupListResponse 返回参数} */
+  /** 获取基础策略告警组列表 {@link DescribePolicyGroupListRequest} {@link DescribePolicyGroupListResponse} */
   DescribePolicyGroupList(data: DescribePolicyGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyGroupListResponse>;
-  /** {@link DescribeProductEventList 获取产品事件列表}({@link DescribeProductEventListRequest 请求参数}): {@link DescribeProductEventListResponse 返回参数} */
+  /** 获取产品事件列表 {@link DescribeProductEventListRequest} {@link DescribeProductEventListResponse} */
   DescribeProductEventList(data: DescribeProductEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductEventListResponse>;
-  /** {@link DescribeProductList 查询云监控产品列表}({@link DescribeProductListRequest 请求参数}): {@link DescribeProductListResponse 返回参数} */
+  /** 查询云监控产品列表 {@link DescribeProductListRequest} {@link DescribeProductListResponse} */
   DescribeProductList(data: DescribeProductListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductListResponse>;
-  /** {@link DescribePrometheusAgents 列出 Prometheus CVM Agent}({@link DescribePrometheusAgentsRequest 请求参数}): {@link DescribePrometheusAgentsResponse 返回参数} */
+  /** 列出 Prometheus CVM Agent {@link DescribePrometheusAgentsRequest} {@link DescribePrometheusAgentsResponse} */
   DescribePrometheusAgents(data: DescribePrometheusAgentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAgentsResponse>;
-  /** {@link DescribePrometheusInstanceUsage 查询Prometheus按量实例用量}({@link DescribePrometheusInstanceUsageRequest 请求参数}): {@link DescribePrometheusInstanceUsageResponse 返回参数} */
+  /** 查询Prometheus按量实例用量 {@link DescribePrometheusInstanceUsageRequest} {@link DescribePrometheusInstanceUsageResponse} */
   DescribePrometheusInstanceUsage(data: DescribePrometheusInstanceUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstanceUsageResponse>;
-  /** {@link DescribePrometheusInstances 查看 Prometheus 实例列表}({@link DescribePrometheusInstancesRequest 请求参数}): {@link DescribePrometheusInstancesResponse 返回参数} */
+  /** 查看 Prometheus 实例列表 {@link DescribePrometheusInstancesRequest} {@link DescribePrometheusInstancesResponse} */
   DescribePrometheusInstances(data?: DescribePrometheusInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstancesResponse>;
-  /** {@link DescribePrometheusScrapeJobs 列出 Prometheus 抓取任务}({@link DescribePrometheusScrapeJobsRequest 请求参数}): {@link DescribePrometheusScrapeJobsResponse 返回参数} */
+  /** 列出 Prometheus 抓取任务 {@link DescribePrometheusScrapeJobsRequest} {@link DescribePrometheusScrapeJobsResponse} */
   DescribePrometheusScrapeJobs(data: DescribePrometheusScrapeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusScrapeJobsResponse>;
-  /** {@link DescribePrometheusZones 列出 Prometheus 服务可用区}({@link DescribePrometheusZonesRequest 请求参数}): {@link DescribePrometheusZonesResponse 返回参数} */
+  /** 列出 Prometheus 服务可用区 {@link DescribePrometheusZonesRequest} {@link DescribePrometheusZonesResponse} */
   DescribePrometheusZones(data: DescribePrometheusZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusZonesResponse>;
-  /** {@link DescribeRecordingRules 查询预聚合规则}({@link DescribeRecordingRulesRequest 请求参数}): {@link DescribeRecordingRulesResponse 返回参数} */
+  /** 查询预聚合规则 {@link DescribeRecordingRulesRequest} {@link DescribeRecordingRulesResponse} */
   DescribeRecordingRules(data: DescribeRecordingRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordingRulesResponse>;
-  /** {@link DescribeSSOAccount 列出授权账号}({@link DescribeSSOAccountRequest 请求参数}): {@link DescribeSSOAccountResponse 返回参数} */
+  /** 列出授权账号 {@link DescribeSSOAccountRequest} {@link DescribeSSOAccountResponse} */
   DescribeSSOAccount(data: DescribeSSOAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSSOAccountResponse>;
-  /** {@link DescribeServiceDiscovery 列出服务发现列表}({@link DescribeServiceDiscoveryRequest 请求参数}): {@link DescribeServiceDiscoveryResponse 返回参数} */
+  /** 列出服务发现列表 {@link DescribeServiceDiscoveryRequest} {@link DescribeServiceDiscoveryResponse} */
   DescribeServiceDiscovery(data: DescribeServiceDiscoveryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceDiscoveryResponse>;
-  /** {@link DescribeStatisticData 根据维度条件查询监控数据}({@link DescribeStatisticDataRequest 请求参数}): {@link DescribeStatisticDataResponse 返回参数} */
+  /** 根据维度条件查询监控数据 {@link DescribeStatisticDataRequest} {@link DescribeStatisticDataResponse} */
   DescribeStatisticData(data: DescribeStatisticDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStatisticDataResponse>;
-  /** {@link DestroyPrometheusInstance 强制释放 Prometheus 实例}({@link DestroyPrometheusInstanceRequest 请求参数}): {@link DestroyPrometheusInstanceResponse 返回参数} */
+  /** 强制释放 Prometheus 实例 {@link DestroyPrometheusInstanceRequest} {@link DestroyPrometheusInstanceResponse} */
   DestroyPrometheusInstance(data: DestroyPrometheusInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyPrometheusInstanceResponse>;
-  /** {@link EnableGrafanaInternet 设置 Grafana 公网访问}({@link EnableGrafanaInternetRequest 请求参数}): {@link EnableGrafanaInternetResponse 返回参数} */
+  /** 设置 Grafana 公网访问 {@link EnableGrafanaInternetRequest} {@link EnableGrafanaInternetResponse} */
   EnableGrafanaInternet(data: EnableGrafanaInternetRequest, config?: AxiosRequestConfig): AxiosPromise<EnableGrafanaInternetResponse>;
-  /** {@link EnableGrafanaSSO 设置 Grafana 单点登录}({@link EnableGrafanaSSORequest 请求参数}): {@link EnableGrafanaSSOResponse 返回参数} */
+  /** 设置 Grafana 单点登录 {@link EnableGrafanaSSORequest} {@link EnableGrafanaSSOResponse} */
   EnableGrafanaSSO(data: EnableGrafanaSSORequest, config?: AxiosRequestConfig): AxiosPromise<EnableGrafanaSSOResponse>;
-  /** {@link EnableSSOCamCheck 设置SSO登录是否鉴权}({@link EnableSSOCamCheckRequest 请求参数}): {@link EnableSSOCamCheckResponse 返回参数} */
+  /** 设置SSO登录是否鉴权 {@link EnableSSOCamCheckRequest} {@link EnableSSOCamCheckResponse} */
   EnableSSOCamCheck(data: EnableSSOCamCheckRequest, config?: AxiosRequestConfig): AxiosPromise<EnableSSOCamCheckResponse>;
-  /** {@link GetMonitorData 拉取指标监控数据}({@link GetMonitorDataRequest 请求参数}): {@link GetMonitorDataResponse 返回参数} */
+  /** 拉取指标监控数据 {@link GetMonitorDataRequest} {@link GetMonitorDataResponse} */
   GetMonitorData(data: GetMonitorDataRequest, config?: AxiosRequestConfig): AxiosPromise<GetMonitorDataResponse>;
-  /** {@link GetPrometheusAgentManagementCommand 获取 Prometheus Agent 管理相关的命令行}({@link GetPrometheusAgentManagementCommandRequest 请求参数}): {@link GetPrometheusAgentManagementCommandResponse 返回参数} */
+  /** 获取 Prometheus Agent 管理相关的命令行 {@link GetPrometheusAgentManagementCommandRequest} {@link GetPrometheusAgentManagementCommandResponse} */
   GetPrometheusAgentManagementCommand(data: GetPrometheusAgentManagementCommandRequest, config?: AxiosRequestConfig): AxiosPromise<GetPrometheusAgentManagementCommandResponse>;
-  /** {@link InstallPlugins 安装 Grafana Plugin}({@link InstallPluginsRequest 请求参数}): {@link InstallPluginsResponse 返回参数} */
+  /** 安装 Grafana Plugin {@link InstallPluginsRequest} {@link InstallPluginsResponse} */
   InstallPlugins(data: InstallPluginsRequest, config?: AxiosRequestConfig): AxiosPromise<InstallPluginsResponse>;
-  /** {@link ModifyAlarmNotice 修改通知模板}({@link ModifyAlarmNoticeRequest 请求参数}): {@link ModifyAlarmNoticeResponse 返回参数} */
+  /** 修改通知模板 {@link ModifyAlarmNoticeRequest} {@link ModifyAlarmNoticeResponse} */
   ModifyAlarmNotice(data: ModifyAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmNoticeResponse>;
-  /** {@link ModifyAlarmPolicyCondition 修改告警策略触发条件}({@link ModifyAlarmPolicyConditionRequest 请求参数}): {@link ModifyAlarmPolicyConditionResponse 返回参数} */
+  /** 修改告警策略触发条件 {@link ModifyAlarmPolicyConditionRequest} {@link ModifyAlarmPolicyConditionResponse} */
   ModifyAlarmPolicyCondition(data: ModifyAlarmPolicyConditionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmPolicyConditionResponse>;
-  /** {@link ModifyAlarmPolicyInfo 修改告警策略基本信息}({@link ModifyAlarmPolicyInfoRequest 请求参数}): {@link ModifyAlarmPolicyInfoResponse 返回参数} */
+  /** 修改告警策略基本信息 {@link ModifyAlarmPolicyInfoRequest} {@link ModifyAlarmPolicyInfoResponse} */
   ModifyAlarmPolicyInfo(data: ModifyAlarmPolicyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmPolicyInfoResponse>;
-  /** {@link ModifyAlarmPolicyNotice 修改告警策略绑定的告警通知模板}({@link ModifyAlarmPolicyNoticeRequest 请求参数}): {@link ModifyAlarmPolicyNoticeResponse 返回参数} */
+  /** 修改告警策略绑定的告警通知模板 {@link ModifyAlarmPolicyNoticeRequest} {@link ModifyAlarmPolicyNoticeResponse} */
   ModifyAlarmPolicyNotice(data: ModifyAlarmPolicyNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmPolicyNoticeResponse>;
-  /** {@link ModifyAlarmPolicyStatus 启停告警策略}({@link ModifyAlarmPolicyStatusRequest 请求参数}): {@link ModifyAlarmPolicyStatusResponse 返回参数} */
+  /** 启停告警策略 {@link ModifyAlarmPolicyStatusRequest} {@link ModifyAlarmPolicyStatusResponse} */
   ModifyAlarmPolicyStatus(data: ModifyAlarmPolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmPolicyStatusResponse>;
-  /** {@link ModifyAlarmPolicyTasks 修改告警策略的触发任务}({@link ModifyAlarmPolicyTasksRequest 请求参数}): {@link ModifyAlarmPolicyTasksResponse 返回参数} */
+  /** 修改告警策略的触发任务 {@link ModifyAlarmPolicyTasksRequest} {@link ModifyAlarmPolicyTasksResponse} */
   ModifyAlarmPolicyTasks(data: ModifyAlarmPolicyTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmPolicyTasksResponse>;
-  /** {@link ModifyAlarmReceivers 修改告警接收人}({@link ModifyAlarmReceiversRequest 请求参数}): {@link ModifyAlarmReceiversResponse 返回参数} */
+  /** 修改告警接收人 {@link ModifyAlarmReceiversRequest} {@link ModifyAlarmReceiversResponse} */
   ModifyAlarmReceivers(data: ModifyAlarmReceiversRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmReceiversResponse>;
-  /** {@link ModifyGrafanaInstance 修改 Grafana 实例属性}({@link ModifyGrafanaInstanceRequest 请求参数}): {@link ModifyGrafanaInstanceResponse 返回参数} */
+  /** 修改 Grafana 实例属性 {@link ModifyGrafanaInstanceRequest} {@link ModifyGrafanaInstanceResponse} */
   ModifyGrafanaInstance(data: ModifyGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGrafanaInstanceResponse>;
-  /** {@link ModifyPolicyGroup 更新策略组}({@link ModifyPolicyGroupRequest 请求参数}): {@link ModifyPolicyGroupResponse 返回参数} */
+  /** 更新策略组 {@link ModifyPolicyGroupRequest} {@link ModifyPolicyGroupResponse} */
   ModifyPolicyGroup(data: ModifyPolicyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPolicyGroupResponse>;
-  /** {@link ModifyPrometheusInstanceAttributes 修改 Prometheus 实例相关属性}({@link ModifyPrometheusInstanceAttributesRequest 请求参数}): {@link ModifyPrometheusInstanceAttributesResponse 返回参数} */
+  /** 修改 Prometheus 实例相关属性 {@link ModifyPrometheusInstanceAttributesRequest} {@link ModifyPrometheusInstanceAttributesResponse} */
   ModifyPrometheusInstanceAttributes(data: ModifyPrometheusInstanceAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusInstanceAttributesResponse>;
-  /** {@link PutMonitorData 自定义监控上报数据}({@link PutMonitorDataRequest 请求参数}): {@link PutMonitorDataResponse 返回参数} */
+  /** 自定义监控上报数据 {@link PutMonitorDataRequest} {@link PutMonitorDataResponse} */
   PutMonitorData(data: PutMonitorDataRequest, config?: AxiosRequestConfig): AxiosPromise<PutMonitorDataResponse>;
-  /** {@link ResumeGrafanaInstance 恢复 Grafana 实例}({@link ResumeGrafanaInstanceRequest 请求参数}): {@link ResumeGrafanaInstanceResponse 返回参数} */
+  /** 恢复 Grafana 实例 {@link ResumeGrafanaInstanceRequest} {@link ResumeGrafanaInstanceResponse} */
   ResumeGrafanaInstance(data: ResumeGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeGrafanaInstanceResponse>;
-  /** {@link SendCustomAlarmMsg 发送自定义消息告警}({@link SendCustomAlarmMsgRequest 请求参数}): {@link SendCustomAlarmMsgResponse 返回参数} */
+  /** 发送自定义消息告警 {@link SendCustomAlarmMsgRequest} {@link SendCustomAlarmMsgResponse} */
   SendCustomAlarmMsg(data: SendCustomAlarmMsgRequest, config?: AxiosRequestConfig): AxiosPromise<SendCustomAlarmMsgResponse>;
-  /** {@link SetDefaultAlarmPolicy 设为默认告警策略}({@link SetDefaultAlarmPolicyRequest 请求参数}): {@link SetDefaultAlarmPolicyResponse 返回参数} */
+  /** 设为默认告警策略 {@link SetDefaultAlarmPolicyRequest} {@link SetDefaultAlarmPolicyResponse} */
   SetDefaultAlarmPolicy(data: SetDefaultAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<SetDefaultAlarmPolicyResponse>;
-  /** {@link TerminatePrometheusInstances 销毁按量 Prometheus 实例}({@link TerminatePrometheusInstancesRequest 请求参数}): {@link TerminatePrometheusInstancesResponse 返回参数} */
+  /** 销毁按量 Prometheus 实例 {@link TerminatePrometheusInstancesRequest} {@link TerminatePrometheusInstancesResponse} */
   TerminatePrometheusInstances(data: TerminatePrometheusInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminatePrometheusInstancesResponse>;
-  /** {@link UnBindingAllPolicyObject 删除全部的关联对象}({@link UnBindingAllPolicyObjectRequest 请求参数}): {@link UnBindingAllPolicyObjectResponse 返回参数} */
+  /** 删除全部的关联对象 {@link UnBindingAllPolicyObjectRequest} {@link UnBindingAllPolicyObjectResponse} */
   UnBindingAllPolicyObject(data: UnBindingAllPolicyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindingAllPolicyObjectResponse>;
-  /** {@link UnBindingPolicyObject 删除策略的关联对象}({@link UnBindingPolicyObjectRequest 请求参数}): {@link UnBindingPolicyObjectResponse 返回参数} */
+  /** 删除策略的关联对象 {@link UnBindingPolicyObjectRequest} {@link UnBindingPolicyObjectResponse} */
   UnBindingPolicyObject(data: UnBindingPolicyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindingPolicyObjectResponse>;
-  /** {@link UnbindPrometheusManagedGrafana 解除实例绑定的 Grafana 可视化实例}({@link UnbindPrometheusManagedGrafanaRequest 请求参数}): {@link UnbindPrometheusManagedGrafanaResponse 返回参数} */
+  /** 解除实例绑定的 Grafana 可视化实例 {@link UnbindPrometheusManagedGrafanaRequest} {@link UnbindPrometheusManagedGrafanaResponse} */
   UnbindPrometheusManagedGrafana(data: UnbindPrometheusManagedGrafanaRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindPrometheusManagedGrafanaResponse>;
-  /** {@link UninstallGrafanaDashboard 删除 Grafana Dashboard}({@link UninstallGrafanaDashboardRequest 请求参数}): {@link UninstallGrafanaDashboardResponse 返回参数} */
+  /** 删除 Grafana Dashboard {@link UninstallGrafanaDashboardRequest} {@link UninstallGrafanaDashboardResponse} */
   UninstallGrafanaDashboard(data: UninstallGrafanaDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallGrafanaDashboardResponse>;
-  /** {@link UninstallGrafanaPlugins 删除已安装的插件}({@link UninstallGrafanaPluginsRequest 请求参数}): {@link UninstallGrafanaPluginsResponse 返回参数} */
+  /** 删除已安装的插件 {@link UninstallGrafanaPluginsRequest} {@link UninstallGrafanaPluginsResponse} */
   UninstallGrafanaPlugins(data: UninstallGrafanaPluginsRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallGrafanaPluginsResponse>;
-  /** {@link UpdateAlertRule 更新报警规则}({@link UpdateAlertRuleRequest 请求参数}): {@link UpdateAlertRuleResponse 返回参数} */
+  /** 更新报警规则 {@link UpdateAlertRuleRequest} {@link UpdateAlertRuleResponse} */
   UpdateAlertRule(data: UpdateAlertRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAlertRuleResponse>;
-  /** {@link UpdateAlertRuleState 更新报警策略状态}({@link UpdateAlertRuleStateRequest 请求参数}): {@link UpdateAlertRuleStateResponse 返回参数} */
+  /** 更新报警策略状态 {@link UpdateAlertRuleStateRequest} {@link UpdateAlertRuleStateResponse} */
   UpdateAlertRuleState(data: UpdateAlertRuleStateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAlertRuleStateResponse>;
-  /** {@link UpdateDNSConfig 更新 Grafana 的 DNS 配置}({@link UpdateDNSConfigRequest 请求参数}): {@link UpdateDNSConfigResponse 返回参数} */
+  /** 更新 Grafana 的 DNS 配置 {@link UpdateDNSConfigRequest} {@link UpdateDNSConfigResponse} */
   UpdateDNSConfig(data: UpdateDNSConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDNSConfigResponse>;
-  /** {@link UpdateExporterIntegration 更新 exporter 集成配置}({@link UpdateExporterIntegrationRequest 请求参数}): {@link UpdateExporterIntegrationResponse 返回参数} */
+  /** 更新 exporter 集成配置 {@link UpdateExporterIntegrationRequest} {@link UpdateExporterIntegrationResponse} */
   UpdateExporterIntegration(data: UpdateExporterIntegrationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateExporterIntegrationResponse>;
-  /** {@link UpdateGrafanaConfig 更新 Grafana 配置}({@link UpdateGrafanaConfigRequest 请求参数}): {@link UpdateGrafanaConfigResponse 返回参数} */
+  /** 更新 Grafana 配置 {@link UpdateGrafanaConfigRequest} {@link UpdateGrafanaConfigResponse} */
   UpdateGrafanaConfig(data: UpdateGrafanaConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGrafanaConfigResponse>;
-  /** {@link UpdateGrafanaEnvironments 更新 Grafana 环境变量}({@link UpdateGrafanaEnvironmentsRequest 请求参数}): {@link UpdateGrafanaEnvironmentsResponse 返回参数} */
+  /** 更新 Grafana 环境变量 {@link UpdateGrafanaEnvironmentsRequest} {@link UpdateGrafanaEnvironmentsResponse} */
   UpdateGrafanaEnvironments(data: UpdateGrafanaEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGrafanaEnvironmentsResponse>;
-  /** {@link UpdateGrafanaIntegration 更新 Grafana 集成配置}({@link UpdateGrafanaIntegrationRequest 请求参数}): {@link UpdateGrafanaIntegrationResponse 返回参数} */
+  /** 更新 Grafana 集成配置 {@link UpdateGrafanaIntegrationRequest} {@link UpdateGrafanaIntegrationResponse} */
   UpdateGrafanaIntegration(data: UpdateGrafanaIntegrationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGrafanaIntegrationResponse>;
-  /** {@link UpdateGrafanaNotificationChannel 更新 Grafana 告警通道}({@link UpdateGrafanaNotificationChannelRequest 请求参数}): {@link UpdateGrafanaNotificationChannelResponse 返回参数} */
+  /** 更新 Grafana 告警通道 {@link UpdateGrafanaNotificationChannelRequest} {@link UpdateGrafanaNotificationChannelResponse} */
   UpdateGrafanaNotificationChannel(data: UpdateGrafanaNotificationChannelRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGrafanaNotificationChannelResponse>;
-  /** {@link UpdateGrafanaWhiteList 更新 Grafana 白名单}({@link UpdateGrafanaWhiteListRequest 请求参数}): {@link UpdateGrafanaWhiteListResponse 返回参数} */
+  /** 更新 Grafana 白名单 {@link UpdateGrafanaWhiteListRequest} {@link UpdateGrafanaWhiteListResponse} */
   UpdateGrafanaWhiteList(data: UpdateGrafanaWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGrafanaWhiteListResponse>;
-  /** {@link UpdatePrometheusAgentStatus 更新 Prometheus CVM Agent 状态}({@link UpdatePrometheusAgentStatusRequest 请求参数}): {@link UpdatePrometheusAgentStatusResponse 返回参数} */
+  /** 更新 Prometheus CVM Agent 状态 {@link UpdatePrometheusAgentStatusRequest} {@link UpdatePrometheusAgentStatusResponse} */
   UpdatePrometheusAgentStatus(data: UpdatePrometheusAgentStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePrometheusAgentStatusResponse>;
-  /** {@link UpdatePrometheusScrapeJob 更新 Prometheus 抓取任务}({@link UpdatePrometheusScrapeJobRequest 请求参数}): {@link UpdatePrometheusScrapeJobResponse 返回参数} */
+  /** 更新 Prometheus 抓取任务 {@link UpdatePrometheusScrapeJobRequest} {@link UpdatePrometheusScrapeJobResponse} */
   UpdatePrometheusScrapeJob(data: UpdatePrometheusScrapeJobRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePrometheusScrapeJobResponse>;
-  /** {@link UpdateRecordingRule 更新预聚合规则}({@link UpdateRecordingRuleRequest 请求参数}): {@link UpdateRecordingRuleResponse 返回参数} */
+  /** 更新预聚合规则 {@link UpdateRecordingRuleRequest} {@link UpdateRecordingRuleResponse} */
   UpdateRecordingRule(data: UpdateRecordingRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRecordingRuleResponse>;
-  /** {@link UpdateSSOAccount 更新账号信息}({@link UpdateSSOAccountRequest 请求参数}): {@link UpdateSSOAccountResponse 返回参数} */
+  /** 更新账号信息 {@link UpdateSSOAccountRequest} {@link UpdateSSOAccountResponse} */
   UpdateSSOAccount(data: UpdateSSOAccountRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSSOAccountResponse>;
-  /** {@link UpdateServiceDiscovery 更新服务发现}({@link UpdateServiceDiscoveryRequest 请求参数}): {@link UpdateServiceDiscoveryResponse 返回参数} */
+  /** 更新服务发现 {@link UpdateServiceDiscoveryRequest} {@link UpdateServiceDiscoveryResponse} */
   UpdateServiceDiscovery(data: UpdateServiceDiscoveryRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateServiceDiscoveryResponse>;
-  /** {@link UpgradeGrafanaDashboard 升级 Grafana Dashboard}({@link UpgradeGrafanaDashboardRequest 请求参数}): {@link UpgradeGrafanaDashboardResponse 返回参数} */
+  /** 升级 Grafana Dashboard {@link UpgradeGrafanaDashboardRequest} {@link UpgradeGrafanaDashboardResponse} */
   UpgradeGrafanaDashboard(data: UpgradeGrafanaDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeGrafanaDashboardResponse>;
-  /** {@link UpgradeGrafanaInstance 升级 Grafana 实例}({@link UpgradeGrafanaInstanceRequest 请求参数}): {@link UpgradeGrafanaInstanceResponse 返回参数} */
+  /** 升级 Grafana 实例 {@link UpgradeGrafanaInstanceRequest} {@link UpgradeGrafanaInstanceResponse} */
   UpgradeGrafanaInstance(data: UpgradeGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeGrafanaInstanceResponse>;
 }
 

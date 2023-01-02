@@ -808,7 +808,7 @@ declare interface CreateCloudRecordingRequest {
 declare interface CreateCloudRecordingResponse {
   /** 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。任务 ID需要业务保存下来，作为下次针对这个录制任务操作的参数。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -832,7 +832,7 @@ declare interface CreatePictureRequest {
 declare interface CreatePictureResponse {
   /** 图片id */
   PictureId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -846,7 +846,7 @@ declare interface DeleteCloudRecordingRequest {
 declare interface DeleteCloudRecordingResponse {
   /** 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -858,7 +858,7 @@ declare interface DeletePictureRequest {
 }
 
 declare interface DeletePictureResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -888,7 +888,7 @@ declare interface DescribeCallDetailInfoResponse {
   UserList: UserInformation[] | null;
   /** 质量数据 */
   Data: QualityData[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -906,7 +906,7 @@ declare interface DescribeCloudRecordingResponse {
   Status: string;
   /** 录制文件信息。 */
   StorageFileList: StorageFile[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -926,7 +926,7 @@ declare interface DescribeExternalTrtcMeasureResponse {
   AnchorUsageMode: string;
   /** 观众的用量统计方式。取值"InRoomTime":在房间时长,"SubscribeTime":"订阅时长","Bandwidth":带宽,"MergeWithAnchor":"不区分麦上麦下" */
   AudienceUsageMode: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -944,7 +944,7 @@ declare interface DescribeMixTranscodingUsageResponse {
   UsageKey: string[];
   /** 各个时间点用量明细。 */
   UsageList: TrtcUsage[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -964,7 +964,7 @@ declare interface DescribePictureResponse {
   Total: number;
   /** 图片信息列表 */
   PictureInfo: PictureInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -980,7 +980,7 @@ declare interface DescribeRecordStatisticRequest {
 declare interface DescribeRecordStatisticResponse {
   /** 应用的用量信息数组。 */
   SdkAppIdUsages: SdkAppIdRecordUsage[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1000,7 +1000,7 @@ declare interface DescribeRecordingUsageResponse {
   UsageKey: string[];
   /** 各个时间点用量明细。 */
   UsageList: TrtcUsage[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1018,7 +1018,7 @@ declare interface DescribeRelayUsageResponse {
   UsageKey: string[];
   /** 各个时间点用量明细。 */
   UsageList: TrtcUsage[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1042,7 +1042,7 @@ declare interface DescribeRoomInfoResponse {
   Total: number;
   /** 房间信息列表 */
   RoomList: RoomState[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1060,7 +1060,7 @@ declare interface DescribeScaleInfoResponse {
   Total: number;
   /** 返回的数据 */
   ScaleList: ScaleInfomation[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1078,7 +1078,7 @@ declare interface DescribeTRTCMarketQualityMetricDataRequest {
 declare interface DescribeTRTCMarketQualityMetricDataResponse {
   /** TRTC监控数据出参 */
   Data: TRTCDataResp | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1096,7 +1096,7 @@ declare interface DescribeTRTCMarketScaleMetricDataRequest {
 declare interface DescribeTRTCMarketScaleMetricDataResponse {
   /** TRTC监控数据出参 */
   Data: TRTCDataResp | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1114,7 +1114,7 @@ declare interface DescribeTRTCRealTimeQualityMetricDataRequest {
 declare interface DescribeTRTCRealTimeQualityMetricDataResponse {
   /** TRTC监控数据出参 */
   Data: TRTCDataResp | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1132,7 +1132,7 @@ declare interface DescribeTRTCRealTimeScaleMetricDataRequest {
 declare interface DescribeTRTCRealTimeScaleMetricDataResponse {
   /** TRTC监控数据出参 */
   Data: TRTCDataResp | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1148,7 +1148,7 @@ declare interface DescribeTrtcMcuTranscodeTimeRequest {
 declare interface DescribeTrtcMcuTranscodeTimeResponse {
   /** 应用的用量信息数组。 */
   Usages: OneSdkAppIdTranscodeTimeUsagesInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1166,7 +1166,7 @@ declare interface DescribeTrtcUsageResponse {
   UsageKey: string[];
   /** 各个时间点用量明细。 */
   UsageList: TrtcUsage[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1186,7 +1186,7 @@ declare interface DescribeUnusualEventResponse {
   Total: number;
   /** 异常体验列表 */
   AbnormalExperienceList: AbnormalExperience[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1208,7 +1208,7 @@ declare interface DescribeUserEventRequest {
 declare interface DescribeUserEventResponse {
   /** 返回的事件列表，若没有数据，会返回空数组。 */
   Data: EventList[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1234,7 +1234,7 @@ declare interface DescribeUserInfoResponse {
   Total: number;
   /** 用户信息列表 */
   UserList: UserInformation[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1246,7 +1246,7 @@ declare interface DismissRoomByStrRoomIdRequest {
 }
 
 declare interface DismissRoomByStrRoomIdResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1258,7 +1258,7 @@ declare interface DismissRoomRequest {
 }
 
 declare interface DismissRoomResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1276,7 +1276,7 @@ declare interface ModifyCloudRecordingRequest {
 declare interface ModifyCloudRecordingResponse {
   /** 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1296,7 +1296,7 @@ declare interface ModifyPictureRequest {
 }
 
 declare interface ModifyPictureResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1310,7 +1310,7 @@ declare interface RemoveUserByStrRoomIdRequest {
 }
 
 declare interface RemoveUserByStrRoomIdResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1324,7 +1324,7 @@ declare interface RemoveUserRequest {
 }
 
 declare interface RemoveUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1344,7 +1344,7 @@ declare interface StartMCUMixTranscodeByStrRoomIdRequest {
 }
 
 declare interface StartMCUMixTranscodeByStrRoomIdResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1364,7 +1364,7 @@ declare interface StartMCUMixTranscodeRequest {
 }
 
 declare interface StartMCUMixTranscodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1396,7 +1396,7 @@ declare interface StartPublishCdnStreamRequest {
 declare interface StartPublishCdnStreamResponse {
   /** 用于唯一标识转推任务，由腾讯云服务端生成，后续更新和停止请求都需要携带TaskiD参数。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1408,7 +1408,7 @@ declare interface StopMCUMixTranscodeByStrRoomIdRequest {
 }
 
 declare interface StopMCUMixTranscodeByStrRoomIdResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1420,7 +1420,7 @@ declare interface StopMCUMixTranscodeRequest {
 }
 
 declare interface StopMCUMixTranscodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1434,7 +1434,7 @@ declare interface StopPublishCdnStreamRequest {
 declare interface StopPublishCdnStreamResponse {
   /** 转推任务唯一的String Id */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1464,84 +1464,84 @@ declare interface UpdatePublishCdnStreamRequest {
 declare interface UpdatePublishCdnStreamResponse {
   /** 转推任务唯一的String Id */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Trtc 实时音视频} */
 declare interface Trtc {
   (): Versions;
-  /** {@link CreateCloudRecording 开始云端录制}({@link CreateCloudRecordingRequest 请求参数}): {@link CreateCloudRecordingResponse 返回参数} */
+  /** 开始云端录制 {@link CreateCloudRecordingRequest} {@link CreateCloudRecordingResponse} */
   CreateCloudRecording(data: CreateCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudRecordingResponse>;
-  /** {@link CreatePicture 上传图片}({@link CreatePictureRequest 请求参数}): {@link CreatePictureResponse 返回参数} */
+  /** 上传图片 {@link CreatePictureRequest} {@link CreatePictureResponse} */
   CreatePicture(data: CreatePictureRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePictureResponse>;
-  /** {@link DeleteCloudRecording 停止云端录制任务}({@link DeleteCloudRecordingRequest 请求参数}): {@link DeleteCloudRecordingResponse 返回参数} */
+  /** 停止云端录制任务 {@link DeleteCloudRecordingRequest} {@link DeleteCloudRecordingResponse} */
   DeleteCloudRecording(data: DeleteCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudRecordingResponse>;
-  /** {@link DeletePicture 删除图片}({@link DeletePictureRequest 请求参数}): {@link DeletePictureResponse 返回参数} */
+  /** 删除图片 {@link DeletePictureRequest} {@link DeletePictureResponse} */
   DeletePicture(data: DeletePictureRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePictureResponse>;
-  /** {@link DescribeCallDetailInfo 查询历史用户列表与通话指标}({@link DescribeCallDetailInfoRequest 请求参数}): {@link DescribeCallDetailInfoResponse 返回参数} */
+  /** 查询历史用户列表与通话指标 {@link DescribeCallDetailInfoRequest} {@link DescribeCallDetailInfoResponse} */
   DescribeCallDetailInfo(data: DescribeCallDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallDetailInfoResponse>;
-  /** {@link DescribeCloudRecording 查询云端录制状态}({@link DescribeCloudRecordingRequest 请求参数}): {@link DescribeCloudRecordingResponse 返回参数} */
+  /** 查询云端录制状态 {@link DescribeCloudRecordingRequest} {@link DescribeCloudRecordingResponse} */
   DescribeCloudRecording(data: DescribeCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRecordingResponse>;
-  /** {@link DescribeExternalTrtcMeasure 查询音视频用量计费时长（旧）}({@link DescribeExternalTrtcMeasureRequest 请求参数}): {@link DescribeExternalTrtcMeasureResponse 返回参数} */
+  /** 查询音视频用量计费时长（旧） {@link DescribeExternalTrtcMeasureRequest} {@link DescribeExternalTrtcMeasureResponse} */
   DescribeExternalTrtcMeasure(data: DescribeExternalTrtcMeasureRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExternalTrtcMeasureResponse>;
-  /** {@link DescribeMixTranscodingUsage 查询TRTC混流转码用量}({@link DescribeMixTranscodingUsageRequest 请求参数}): {@link DescribeMixTranscodingUsageResponse 返回参数} */
+  /** 查询TRTC混流转码用量 {@link DescribeMixTranscodingUsageRequest} {@link DescribeMixTranscodingUsageResponse} */
   DescribeMixTranscodingUsage(data: DescribeMixTranscodingUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMixTranscodingUsageResponse>;
-  /** {@link DescribePicture 查询图片}({@link DescribePictureRequest 请求参数}): {@link DescribePictureResponse 返回参数} */
+  /** 查询图片 {@link DescribePictureRequest} {@link DescribePictureResponse} */
   DescribePicture(data: DescribePictureRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePictureResponse>;
-  /** {@link DescribeRecordStatistic 查询云端录制计费时长（旧）}({@link DescribeRecordStatisticRequest 请求参数}): {@link DescribeRecordStatisticResponse 返回参数} */
+  /** 查询云端录制计费时长（旧） {@link DescribeRecordStatisticRequest} {@link DescribeRecordStatisticResponse} */
   DescribeRecordStatistic(data: DescribeRecordStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordStatisticResponse>;
-  /** {@link DescribeRecordingUsage 查询TRTC录制用量}({@link DescribeRecordingUsageRequest 请求参数}): {@link DescribeRecordingUsageResponse 返回参数} */
+  /** 查询TRTC录制用量 {@link DescribeRecordingUsageRequest} {@link DescribeRecordingUsageResponse} */
   DescribeRecordingUsage(data: DescribeRecordingUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordingUsageResponse>;
-  /** {@link DescribeRelayUsage 查询TRTC旁路转推用量}({@link DescribeRelayUsageRequest 请求参数}): {@link DescribeRelayUsageResponse 返回参数} */
+  /** 查询TRTC旁路转推用量 {@link DescribeRelayUsageRequest} {@link DescribeRelayUsageResponse} */
   DescribeRelayUsage(data: DescribeRelayUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelayUsageResponse>;
-  /** {@link DescribeRoomInfo 查询历史房间列表}({@link DescribeRoomInfoRequest 请求参数}): {@link DescribeRoomInfoResponse 返回参数} */
+  /** 查询历史房间列表 {@link DescribeRoomInfoRequest} {@link DescribeRoomInfoResponse} */
   DescribeRoomInfo(data: DescribeRoomInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomInfoResponse>;
-  /** {@link DescribeScaleInfo 查询历史房间和用户数}({@link DescribeScaleInfoRequest 请求参数}): {@link DescribeScaleInfoResponse 返回参数} */
+  /** 查询历史房间和用户数 {@link DescribeScaleInfoRequest} {@link DescribeScaleInfoResponse} */
   DescribeScaleInfo(data: DescribeScaleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScaleInfoResponse>;
-  /** {@link DescribeTRTCMarketQualityMetricData 查询TRTC数据大盘质量指标}({@link DescribeTRTCMarketQualityMetricDataRequest 请求参数}): {@link DescribeTRTCMarketQualityMetricDataResponse 返回参数} */
+  /** 查询TRTC数据大盘质量指标 {@link DescribeTRTCMarketQualityMetricDataRequest} {@link DescribeTRTCMarketQualityMetricDataResponse} */
   DescribeTRTCMarketQualityMetricData(data: DescribeTRTCMarketQualityMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketQualityMetricDataResponse>;
-  /** {@link DescribeTRTCMarketScaleMetricData 查询TRTC数据大盘规模指标}({@link DescribeTRTCMarketScaleMetricDataRequest 请求参数}): {@link DescribeTRTCMarketScaleMetricDataResponse 返回参数} */
+  /** 查询TRTC数据大盘规模指标 {@link DescribeTRTCMarketScaleMetricDataRequest} {@link DescribeTRTCMarketScaleMetricDataResponse} */
   DescribeTRTCMarketScaleMetricData(data: DescribeTRTCMarketScaleMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketScaleMetricDataResponse>;
-  /** {@link DescribeTRTCRealTimeQualityMetricData 查询TRTC实时监控质量指标}({@link DescribeTRTCRealTimeQualityMetricDataRequest 请求参数}): {@link DescribeTRTCRealTimeQualityMetricDataResponse 返回参数} */
+  /** 查询TRTC实时监控质量指标 {@link DescribeTRTCRealTimeQualityMetricDataRequest} {@link DescribeTRTCRealTimeQualityMetricDataResponse} */
   DescribeTRTCRealTimeQualityMetricData(data: DescribeTRTCRealTimeQualityMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeQualityMetricDataResponse>;
-  /** {@link DescribeTRTCRealTimeScaleMetricData 查询TRTC实时监控规模指标}({@link DescribeTRTCRealTimeScaleMetricDataRequest 请求参数}): {@link DescribeTRTCRealTimeScaleMetricDataResponse 返回参数} */
+  /** 查询TRTC实时监控规模指标 {@link DescribeTRTCRealTimeScaleMetricDataRequest} {@link DescribeTRTCRealTimeScaleMetricDataResponse} */
   DescribeTRTCRealTimeScaleMetricData(data: DescribeTRTCRealTimeScaleMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeScaleMetricDataResponse>;
-  /** {@link DescribeTrtcMcuTranscodeTime 查询旁路转码计费时长(旧)}({@link DescribeTrtcMcuTranscodeTimeRequest 请求参数}): {@link DescribeTrtcMcuTranscodeTimeResponse 返回参数} */
+  /** 查询旁路转码计费时长(旧) {@link DescribeTrtcMcuTranscodeTimeRequest} {@link DescribeTrtcMcuTranscodeTimeResponse} */
   DescribeTrtcMcuTranscodeTime(data: DescribeTrtcMcuTranscodeTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrtcMcuTranscodeTimeResponse>;
-  /** {@link DescribeTrtcUsage 查询TRTC音视频用量}({@link DescribeTrtcUsageRequest 请求参数}): {@link DescribeTrtcUsageResponse 返回参数} */
+  /** 查询TRTC音视频用量 {@link DescribeTrtcUsageRequest} {@link DescribeTrtcUsageResponse} */
   DescribeTrtcUsage(data: DescribeTrtcUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrtcUsageResponse>;
-  /** {@link DescribeUnusualEvent 查询异常体验事件}({@link DescribeUnusualEventRequest 请求参数}): {@link DescribeUnusualEventResponse 返回参数} */
+  /** 查询异常体验事件 {@link DescribeUnusualEventRequest} {@link DescribeUnusualEventResponse} */
   DescribeUnusualEvent(data: DescribeUnusualEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnusualEventResponse>;
-  /** {@link DescribeUserEvent 查询详细事件}({@link DescribeUserEventRequest 请求参数}): {@link DescribeUserEventResponse 返回参数} */
+  /** 查询详细事件 {@link DescribeUserEventRequest} {@link DescribeUserEventResponse} */
   DescribeUserEvent(data: DescribeUserEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserEventResponse>;
-  /** {@link DescribeUserInfo 查询历史用户列表}({@link DescribeUserInfoRequest 请求参数}): {@link DescribeUserInfoResponse 返回参数} */
+  /** 查询历史用户列表 {@link DescribeUserInfoRequest} {@link DescribeUserInfoResponse} */
   DescribeUserInfo(data: DescribeUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInfoResponse>;
-  /** {@link DismissRoom 解散房间}({@link DismissRoomRequest 请求参数}): {@link DismissRoomResponse 返回参数} */
+  /** 解散房间 {@link DismissRoomRequest} {@link DismissRoomResponse} */
   DismissRoom(data: DismissRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DismissRoomResponse>;
-  /** {@link DismissRoomByStrRoomId 解散房间（字符串房间号）}({@link DismissRoomByStrRoomIdRequest 请求参数}): {@link DismissRoomByStrRoomIdResponse 返回参数} */
+  /** 解散房间（字符串房间号） {@link DismissRoomByStrRoomIdRequest} {@link DismissRoomByStrRoomIdResponse} */
   DismissRoomByStrRoomId(data: DismissRoomByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<DismissRoomByStrRoomIdResponse>;
-  /** {@link ModifyCloudRecording 更新云端录制任务}({@link ModifyCloudRecordingRequest 请求参数}): {@link ModifyCloudRecordingResponse 返回参数} */
+  /** 更新云端录制任务 {@link ModifyCloudRecordingRequest} {@link ModifyCloudRecordingResponse} */
   ModifyCloudRecording(data: ModifyCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudRecordingResponse>;
-  /** {@link ModifyPicture 修改图片}({@link ModifyPictureRequest 请求参数}): {@link ModifyPictureResponse 返回参数} */
+  /** 修改图片 {@link ModifyPictureRequest} {@link ModifyPictureResponse} */
   ModifyPicture(data: ModifyPictureRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPictureResponse>;
-  /** {@link RemoveUser 移出用户}({@link RemoveUserRequest 请求参数}): {@link RemoveUserResponse 返回参数} */
+  /** 移出用户 {@link RemoveUserRequest} {@link RemoveUserResponse} */
   RemoveUser(data: RemoveUserRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserResponse>;
-  /** {@link RemoveUserByStrRoomId 移出用户（字符串房间号）}({@link RemoveUserByStrRoomIdRequest 请求参数}): {@link RemoveUserByStrRoomIdResponse 返回参数} */
+  /** 移出用户（字符串房间号） {@link RemoveUserByStrRoomIdRequest} {@link RemoveUserByStrRoomIdResponse} */
   RemoveUserByStrRoomId(data: RemoveUserByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserByStrRoomIdResponse>;
-  /** {@link StartMCUMixTranscode 启动云端混流}({@link StartMCUMixTranscodeRequest 请求参数}): {@link StartMCUMixTranscodeResponse 返回参数} */
+  /** 启动云端混流 {@link StartMCUMixTranscodeRequest} {@link StartMCUMixTranscodeResponse} */
   StartMCUMixTranscode(data: StartMCUMixTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<StartMCUMixTranscodeResponse>;
-  /** {@link StartMCUMixTranscodeByStrRoomId 启动云端混流（字符串房间号）}({@link StartMCUMixTranscodeByStrRoomIdRequest 请求参数}): {@link StartMCUMixTranscodeByStrRoomIdResponse 返回参数} */
+  /** 启动云端混流（字符串房间号） {@link StartMCUMixTranscodeByStrRoomIdRequest} {@link StartMCUMixTranscodeByStrRoomIdResponse} */
   StartMCUMixTranscodeByStrRoomId(data: StartMCUMixTranscodeByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<StartMCUMixTranscodeByStrRoomIdResponse>;
-  /** {@link StartPublishCdnStream 启动转推任务}({@link StartPublishCdnStreamRequest 请求参数}): {@link StartPublishCdnStreamResponse 返回参数} */
+  /** 启动转推任务 {@link StartPublishCdnStreamRequest} {@link StartPublishCdnStreamResponse} */
   StartPublishCdnStream(data: StartPublishCdnStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StartPublishCdnStreamResponse>;
-  /** {@link StopMCUMixTranscode 结束云端混流}({@link StopMCUMixTranscodeRequest 请求参数}): {@link StopMCUMixTranscodeResponse 返回参数} */
+  /** 结束云端混流 {@link StopMCUMixTranscodeRequest} {@link StopMCUMixTranscodeResponse} */
   StopMCUMixTranscode(data: StopMCUMixTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<StopMCUMixTranscodeResponse>;
-  /** {@link StopMCUMixTranscodeByStrRoomId 结束云端混流（字符串房间号）}({@link StopMCUMixTranscodeByStrRoomIdRequest 请求参数}): {@link StopMCUMixTranscodeByStrRoomIdResponse 返回参数} */
+  /** 结束云端混流（字符串房间号） {@link StopMCUMixTranscodeByStrRoomIdRequest} {@link StopMCUMixTranscodeByStrRoomIdResponse} */
   StopMCUMixTranscodeByStrRoomId(data: StopMCUMixTranscodeByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<StopMCUMixTranscodeByStrRoomIdResponse>;
-  /** {@link StopPublishCdnStream 停止转推任务}({@link StopPublishCdnStreamRequest 请求参数}): {@link StopPublishCdnStreamResponse 返回参数} */
+  /** 停止转推任务 {@link StopPublishCdnStreamRequest} {@link StopPublishCdnStreamResponse} */
   StopPublishCdnStream(data: StopPublishCdnStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StopPublishCdnStreamResponse>;
-  /** {@link UpdatePublishCdnStream 更新转推任务}({@link UpdatePublishCdnStreamRequest 请求参数}): {@link UpdatePublishCdnStreamResponse 返回参数} */
+  /** 更新转推任务 {@link UpdatePublishCdnStreamRequest} {@link UpdatePublishCdnStreamResponse} */
   UpdatePublishCdnStream(data: UpdatePublishCdnStreamRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePublishCdnStreamResponse>;
 }
 

@@ -792,7 +792,7 @@ declare interface CreateIndexRequest {
 }
 
 declare interface CreateIndexResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -870,7 +870,7 @@ declare interface CreateInstanceResponse {
   InstanceId: string;
   /** 订单号 */
   DealName: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -916,7 +916,7 @@ declare interface CreateLogstashInstanceRequest {
 declare interface CreateLogstashInstanceResponse {
   /** 实例ID */
   InstanceId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -936,7 +936,7 @@ declare interface DeleteIndexRequest {
 }
 
 declare interface DeleteIndexResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -946,7 +946,7 @@ declare interface DeleteInstanceRequest {
 }
 
 declare interface DeleteInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -956,7 +956,7 @@ declare interface DeleteLogstashInstanceRequest {
 }
 
 declare interface DeleteLogstashInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -968,7 +968,7 @@ declare interface DeleteLogstashPipelinesRequest {
 }
 
 declare interface DeleteLogstashPipelinesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1000,7 +1000,7 @@ declare interface DescribeIndexListResponse {
   IndexMetaFields: IndexMetaField[] | null;
   /** 查询总数 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1020,7 +1020,7 @@ declare interface DescribeIndexMetaRequest {
 declare interface DescribeIndexMetaResponse {
   /** 索引元数据字段 */
   IndexMetaField: IndexMetaField | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1048,7 +1048,7 @@ declare interface DescribeInstanceLogsResponse {
   TotalCount?: number;
   /** 日志详细信息列表 */
   InstanceLogList?: InstanceLog[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1070,7 +1070,7 @@ declare interface DescribeInstanceOperationsResponse {
   TotalCount?: number;
   /** 操作记录 */
   Operations?: Operation[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1106,7 +1106,7 @@ declare interface DescribeInstancesResponse {
   TotalCount: number;
   /** 实例详细信息列表 */
   InstanceList: InstanceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1134,7 +1134,7 @@ declare interface DescribeLogstashInstanceLogsResponse {
   TotalCount: number;
   /** 日志详细信息列表 */
   InstanceLogList: InstanceLog[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1156,7 +1156,7 @@ declare interface DescribeLogstashInstanceOperationsResponse {
   TotalCount: number;
   /** 操作记录 */
   Operations: Operation[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1186,7 +1186,7 @@ declare interface DescribeLogstashInstancesResponse {
   TotalCount: number;
   /** 实例详细信息列表 */
   InstanceList: LogstashInstanceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1200,7 +1200,7 @@ declare interface DescribeLogstashPipelinesResponse {
   TotalCount: number;
   /** 管道列表 */
   LogstashPipelineList: LogstashPipelineInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1216,7 +1216,7 @@ declare interface DescribeViewsResponse {
   NodesView: NodeView[] | null;
   /** Kibana维度视图 */
   KibanasView: KibanaView[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1230,7 +1230,7 @@ declare interface DiagnoseInstanceRequest {
 }
 
 declare interface DiagnoseInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1242,7 +1242,7 @@ declare interface GetRequestTargetNodeTypesRequest {
 declare interface GetRequestTargetNodeTypesResponse {
   /** 接收请求的目标节点类型列表 */
   TargetNodeTypes?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1256,7 +1256,7 @@ declare interface RestartInstanceRequest {
 }
 
 declare interface RestartInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1266,7 +1266,7 @@ declare interface RestartKibanaRequest {
 }
 
 declare interface RestartKibanaResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1278,7 +1278,7 @@ declare interface RestartLogstashInstanceRequest {
 }
 
 declare interface RestartLogstashInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1296,7 +1296,7 @@ declare interface RestartNodesRequest {
 }
 
 declare interface RestartNodesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1310,7 +1310,7 @@ declare interface SaveAndDeployLogstashPipelineRequest {
 }
 
 declare interface SaveAndDeployLogstashPipelineResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1322,7 +1322,7 @@ declare interface StartLogstashPipelinesRequest {
 }
 
 declare interface StartLogstashPipelinesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1334,7 +1334,7 @@ declare interface StopLogstashPipelinesRequest {
 }
 
 declare interface StopLogstashPipelinesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1348,7 +1348,7 @@ declare interface UpdateDiagnoseSettingsRequest {
 }
 
 declare interface UpdateDiagnoseSettingsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1370,7 +1370,7 @@ declare interface UpdateDictionariesRequest {
 }
 
 declare interface UpdateDictionariesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1392,7 +1392,7 @@ declare interface UpdateIndexRequest {
 }
 
 declare interface UpdateIndexResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1466,7 +1466,7 @@ declare interface UpdateInstanceRequest {
 declare interface UpdateInstanceResponse {
   /** 订单号 */
   DealName: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1482,7 +1482,7 @@ declare interface UpdateJdkRequest {
 }
 
 declare interface UpdateJdkResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1508,7 +1508,7 @@ declare interface UpdateLogstashInstanceRequest {
 }
 
 declare interface UpdateLogstashInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1522,7 +1522,7 @@ declare interface UpdateLogstashPipelineDescRequest {
 }
 
 declare interface UpdateLogstashPipelineDescResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1542,7 +1542,7 @@ declare interface UpdatePluginsRequest {
 }
 
 declare interface UpdatePluginsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1554,7 +1554,7 @@ declare interface UpdateRequestTargetNodeTypesRequest {
 }
 
 declare interface UpdateRequestTargetNodeTypesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1578,7 +1578,7 @@ declare interface UpgradeInstanceRequest {
 }
 
 declare interface UpgradeInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1600,86 +1600,86 @@ declare interface UpgradeLicenseRequest {
 declare interface UpgradeLicenseResponse {
   /** 订单号 */
   DealName: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Es Elasticsearch Service} */
 declare interface Es {
   (): Versions;
-  /** {@link CreateIndex 创建索引}({@link CreateIndexRequest 请求参数}): {@link CreateIndexResponse 返回参数} */
+  /** 创建索引 {@link CreateIndexRequest} {@link CreateIndexResponse} */
   CreateIndex(data: CreateIndexRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIndexResponse>;
-  /** {@link CreateInstance 创建ES集群实例}({@link CreateInstanceRequest 请求参数}): {@link CreateInstanceResponse 返回参数} */
+  /** 创建ES集群实例 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
-  /** {@link CreateLogstashInstance 创建Logstash实例}({@link CreateLogstashInstanceRequest 请求参数}): {@link CreateLogstashInstanceResponse 返回参数} */
+  /** 创建Logstash实例 {@link CreateLogstashInstanceRequest} {@link CreateLogstashInstanceResponse} */
   CreateLogstashInstance(data: CreateLogstashInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogstashInstanceResponse>;
-  /** {@link DeleteIndex 删除索引}({@link DeleteIndexRequest 请求参数}): {@link DeleteIndexResponse 返回参数} */
+  /** 删除索引 {@link DeleteIndexRequest} {@link DeleteIndexResponse} */
   DeleteIndex(data: DeleteIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIndexResponse>;
-  /** {@link DeleteInstance 销毁ES集群实例}({@link DeleteInstanceRequest 请求参数}): {@link DeleteInstanceResponse 返回参数} */
+  /** 销毁ES集群实例 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
-  /** {@link DeleteLogstashInstance 删除Logstash实例}({@link DeleteLogstashInstanceRequest 请求参数}): {@link DeleteLogstashInstanceResponse 返回参数} */
+  /** 删除Logstash实例 {@link DeleteLogstashInstanceRequest} {@link DeleteLogstashInstanceResponse} */
   DeleteLogstashInstance(data: DeleteLogstashInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogstashInstanceResponse>;
-  /** {@link DeleteLogstashPipelines 删除Logstash管道}({@link DeleteLogstashPipelinesRequest 请求参数}): {@link DeleteLogstashPipelinesResponse 返回参数} */
+  /** 删除Logstash管道 {@link DeleteLogstashPipelinesRequest} {@link DeleteLogstashPipelinesResponse} */
   DeleteLogstashPipelines(data: DeleteLogstashPipelinesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogstashPipelinesResponse>;
-  /** {@link DescribeIndexList 获取索引列表}({@link DescribeIndexListRequest 请求参数}): {@link DescribeIndexListResponse 返回参数} */
+  /** 获取索引列表 {@link DescribeIndexListRequest} {@link DescribeIndexListResponse} */
   DescribeIndexList(data: DescribeIndexListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexListResponse>;
-  /** {@link DescribeIndexMeta 获取索引元数据}({@link DescribeIndexMetaRequest 请求参数}): {@link DescribeIndexMetaResponse 返回参数} */
+  /** 获取索引元数据 {@link DescribeIndexMetaRequest} {@link DescribeIndexMetaResponse} */
   DescribeIndexMeta(data: DescribeIndexMetaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexMetaResponse>;
-  /** {@link DescribeInstanceLogs 查询ES集群日志}({@link DescribeInstanceLogsRequest 请求参数}): {@link DescribeInstanceLogsResponse 返回参数} */
+  /** 查询ES集群日志 {@link DescribeInstanceLogsRequest} {@link DescribeInstanceLogsResponse} */
   DescribeInstanceLogs(data: DescribeInstanceLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLogsResponse>;
-  /** {@link DescribeInstanceOperations 查询实例操作记录}({@link DescribeInstanceOperationsRequest 请求参数}): {@link DescribeInstanceOperationsResponse 返回参数} */
+  /** 查询实例操作记录 {@link DescribeInstanceOperationsRequest} {@link DescribeInstanceOperationsResponse} */
   DescribeInstanceOperations(data: DescribeInstanceOperationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceOperationsResponse>;
-  /** {@link DescribeInstances 查询ES集群实例}({@link DescribeInstancesRequest 请求参数}): {@link DescribeInstancesResponse 返回参数} */
+  /** 查询ES集群实例 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** {@link DescribeLogstashInstanceLogs 查询Logstash实例日志}({@link DescribeLogstashInstanceLogsRequest 请求参数}): {@link DescribeLogstashInstanceLogsResponse 返回参数} */
+  /** 查询Logstash实例日志 {@link DescribeLogstashInstanceLogsRequest} {@link DescribeLogstashInstanceLogsResponse} */
   DescribeLogstashInstanceLogs(data: DescribeLogstashInstanceLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashInstanceLogsResponse>;
-  /** {@link DescribeLogstashInstanceOperations 查询Logstash实例操作记录}({@link DescribeLogstashInstanceOperationsRequest 请求参数}): {@link DescribeLogstashInstanceOperationsResponse 返回参数} */
+  /** 查询Logstash实例操作记录 {@link DescribeLogstashInstanceOperationsRequest} {@link DescribeLogstashInstanceOperationsResponse} */
   DescribeLogstashInstanceOperations(data: DescribeLogstashInstanceOperationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashInstanceOperationsResponse>;
-  /** {@link DescribeLogstashInstances 获取Logstash实例列表}({@link DescribeLogstashInstancesRequest 请求参数}): {@link DescribeLogstashInstancesResponse 返回参数} */
+  /** 获取Logstash实例列表 {@link DescribeLogstashInstancesRequest} {@link DescribeLogstashInstancesResponse} */
   DescribeLogstashInstances(data?: DescribeLogstashInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashInstancesResponse>;
-  /** {@link DescribeLogstashPipelines 获取Logstash实例管道列表}({@link DescribeLogstashPipelinesRequest 请求参数}): {@link DescribeLogstashPipelinesResponse 返回参数} */
+  /** 获取Logstash实例管道列表 {@link DescribeLogstashPipelinesRequest} {@link DescribeLogstashPipelinesResponse} */
   DescribeLogstashPipelines(data: DescribeLogstashPipelinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogstashPipelinesResponse>;
-  /** {@link DescribeViews 查询集群视图}({@link DescribeViewsRequest 请求参数}): {@link DescribeViewsResponse 返回参数} */
+  /** 查询集群视图 {@link DescribeViewsRequest} {@link DescribeViewsResponse} */
   DescribeViews(data: DescribeViewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeViewsResponse>;
-  /** {@link DiagnoseInstance 智能运维诊断集群}({@link DiagnoseInstanceRequest 请求参数}): {@link DiagnoseInstanceResponse 返回参数} */
+  /** 智能运维诊断集群 {@link DiagnoseInstanceRequest} {@link DiagnoseInstanceResponse} */
   DiagnoseInstance(data: DiagnoseInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DiagnoseInstanceResponse>;
-  /** {@link GetRequestTargetNodeTypes 获取接收客户端请求的节点类型}({@link GetRequestTargetNodeTypesRequest 请求参数}): {@link GetRequestTargetNodeTypesResponse 返回参数} */
+  /** 获取接收客户端请求的节点类型 {@link GetRequestTargetNodeTypesRequest} {@link GetRequestTargetNodeTypesResponse} */
   GetRequestTargetNodeTypes(data: GetRequestTargetNodeTypesRequest, config?: AxiosRequestConfig): AxiosPromise<GetRequestTargetNodeTypesResponse>;
-  /** {@link RestartInstance 重启ES集群实例}({@link RestartInstanceRequest 请求参数}): {@link RestartInstanceResponse 返回参数} */
+  /** 重启ES集群实例 {@link RestartInstanceRequest} {@link RestartInstanceResponse} */
   RestartInstance(data: RestartInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartInstanceResponse>;
-  /** {@link RestartKibana 重启Kibana}({@link RestartKibanaRequest 请求参数}): {@link RestartKibanaResponse 返回参数} */
+  /** 重启Kibana {@link RestartKibanaRequest} {@link RestartKibanaResponse} */
   RestartKibana(data: RestartKibanaRequest, config?: AxiosRequestConfig): AxiosPromise<RestartKibanaResponse>;
-  /** {@link RestartLogstashInstance 重启Logstash实例}({@link RestartLogstashInstanceRequest 请求参数}): {@link RestartLogstashInstanceResponse 返回参数} */
+  /** 重启Logstash实例 {@link RestartLogstashInstanceRequest} {@link RestartLogstashInstanceResponse} */
   RestartLogstashInstance(data: RestartLogstashInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartLogstashInstanceResponse>;
-  /** {@link RestartNodes 重启集群节点}({@link RestartNodesRequest 请求参数}): {@link RestartNodesResponse 返回参数} */
+  /** 重启集群节点 {@link RestartNodesRequest} {@link RestartNodesResponse} */
   RestartNodes(data: RestartNodesRequest, config?: AxiosRequestConfig): AxiosPromise<RestartNodesResponse>;
-  /** {@link SaveAndDeployLogstashPipeline 保存并部署管道}({@link SaveAndDeployLogstashPipelineRequest 请求参数}): {@link SaveAndDeployLogstashPipelineResponse 返回参数} */
+  /** 保存并部署管道 {@link SaveAndDeployLogstashPipelineRequest} {@link SaveAndDeployLogstashPipelineResponse} */
   SaveAndDeployLogstashPipeline(data: SaveAndDeployLogstashPipelineRequest, config?: AxiosRequestConfig): AxiosPromise<SaveAndDeployLogstashPipelineResponse>;
-  /** {@link StartLogstashPipelines 启动Logstash管道}({@link StartLogstashPipelinesRequest 请求参数}): {@link StartLogstashPipelinesResponse 返回参数} */
+  /** 启动Logstash管道 {@link StartLogstashPipelinesRequest} {@link StartLogstashPipelinesResponse} */
   StartLogstashPipelines(data: StartLogstashPipelinesRequest, config?: AxiosRequestConfig): AxiosPromise<StartLogstashPipelinesResponse>;
-  /** {@link StopLogstashPipelines 停止Logstash管道}({@link StopLogstashPipelinesRequest 请求参数}): {@link StopLogstashPipelinesResponse 返回参数} */
+  /** 停止Logstash管道 {@link StopLogstashPipelinesRequest} {@link StopLogstashPipelinesResponse} */
   StopLogstashPipelines(data: StopLogstashPipelinesRequest, config?: AxiosRequestConfig): AxiosPromise<StopLogstashPipelinesResponse>;
-  /** {@link UpdateDiagnoseSettings 更新智能运维配置}({@link UpdateDiagnoseSettingsRequest 请求参数}): {@link UpdateDiagnoseSettingsResponse 返回参数} */
+  /** 更新智能运维配置 {@link UpdateDiagnoseSettingsRequest} {@link UpdateDiagnoseSettingsResponse} */
   UpdateDiagnoseSettings(data: UpdateDiagnoseSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDiagnoseSettingsResponse>;
-  /** {@link UpdateDictionaries 更新ES集群词典}({@link UpdateDictionariesRequest 请求参数}): {@link UpdateDictionariesResponse 返回参数} */
+  /** 更新ES集群词典 {@link UpdateDictionariesRequest} {@link UpdateDictionariesResponse} */
   UpdateDictionaries(data: UpdateDictionariesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDictionariesResponse>;
-  /** {@link UpdateIndex 更新索引}({@link UpdateIndexRequest 请求参数}): {@link UpdateIndexResponse 返回参数} */
+  /** 更新索引 {@link UpdateIndexRequest} {@link UpdateIndexResponse} */
   UpdateIndex(data: UpdateIndexRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateIndexResponse>;
-  /** {@link UpdateInstance 更新ES集群实例}({@link UpdateInstanceRequest 请求参数}): {@link UpdateInstanceResponse 返回参数} */
+  /** 更新ES集群实例 {@link UpdateInstanceRequest} {@link UpdateInstanceResponse} */
   UpdateInstance(data: UpdateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateInstanceResponse>;
-  /** {@link UpdateJdk 更新实例Jdk配置}({@link UpdateJdkRequest 请求参数}): {@link UpdateJdkResponse 返回参数} */
+  /** 更新实例Jdk配置 {@link UpdateJdkRequest} {@link UpdateJdkResponse} */
   UpdateJdk(data: UpdateJdkRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateJdkResponse>;
-  /** {@link UpdateLogstashInstance 更新Logstash实例}({@link UpdateLogstashInstanceRequest 请求参数}): {@link UpdateLogstashInstanceResponse 返回参数} */
+  /** 更新Logstash实例 {@link UpdateLogstashInstanceRequest} {@link UpdateLogstashInstanceResponse} */
   UpdateLogstashInstance(data: UpdateLogstashInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateLogstashInstanceResponse>;
-  /** {@link UpdateLogstashPipelineDesc 更新管道描述}({@link UpdateLogstashPipelineDescRequest 请求参数}): {@link UpdateLogstashPipelineDescResponse 返回参数} */
+  /** 更新管道描述 {@link UpdateLogstashPipelineDescRequest} {@link UpdateLogstashPipelineDescResponse} */
   UpdateLogstashPipelineDesc(data: UpdateLogstashPipelineDescRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateLogstashPipelineDescResponse>;
-  /** {@link UpdatePlugins 变更插件列表}({@link UpdatePluginsRequest 请求参数}): {@link UpdatePluginsResponse 返回参数} */
+  /** 变更插件列表 {@link UpdatePluginsRequest} {@link UpdatePluginsResponse} */
   UpdatePlugins(data: UpdatePluginsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePluginsResponse>;
-  /** {@link UpdateRequestTargetNodeTypes 更新接收客户端请求的节点类型}({@link UpdateRequestTargetNodeTypesRequest 请求参数}): {@link UpdateRequestTargetNodeTypesResponse 返回参数} */
+  /** 更新接收客户端请求的节点类型 {@link UpdateRequestTargetNodeTypesRequest} {@link UpdateRequestTargetNodeTypesResponse} */
   UpdateRequestTargetNodeTypes(data: UpdateRequestTargetNodeTypesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRequestTargetNodeTypesResponse>;
-  /** {@link UpgradeInstance 升级ES集群版本}({@link UpgradeInstanceRequest 请求参数}): {@link UpgradeInstanceResponse 返回参数} */
+  /** 升级ES集群版本 {@link UpgradeInstanceRequest} {@link UpgradeInstanceResponse} */
   UpgradeInstance(data: UpgradeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceResponse>;
-  /** {@link UpgradeLicense 升级ES商业特性}({@link UpgradeLicenseRequest 请求参数}): {@link UpgradeLicenseResponse 返回参数} */
+  /** 升级ES商业特性 {@link UpgradeLicenseRequest} {@link UpgradeLicenseResponse} */
   UpgradeLicense(data: UpgradeLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeLicenseResponse>;
 }
 

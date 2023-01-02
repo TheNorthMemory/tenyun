@@ -114,7 +114,7 @@ declare interface DescribeMaterialListResponse {
   MaterialInfos?: PublicMaterialInfos[];
   /** 素材条数 */
   Count?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -138,7 +138,7 @@ declare interface FaceFusionLiteResponse {
   Image: string;
   /** 鉴政结果 */
   ReviewResultSet: FuseFaceReviewResult[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -164,7 +164,7 @@ declare interface FaceFusionResponse {
   Image: string;
   /** 不适宜内容识别结果 */
   ReviewResultSet: FuseFaceReviewResult[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -190,20 +190,20 @@ declare interface FuseFaceResponse {
   FusedImage: string;
   /** 不适宜内容识别结果。该数组的顺序和请求中mergeinfo的顺序一致，一一对应 */
   ReviewResultSet: FuseFaceReviewResult[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Facefusion 人脸融合} */
 declare interface Facefusion {
   (): Versions;
-  /** {@link DescribeMaterialList 查询素材列表}({@link DescribeMaterialListRequest 请求参数}): {@link DescribeMaterialListResponse 返回参数} */
+  /** 查询素材列表 {@link DescribeMaterialListRequest} {@link DescribeMaterialListResponse} */
   DescribeMaterialList(data: DescribeMaterialListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaterialListResponse>;
-  /** {@link FaceFusion 人脸融合}({@link FaceFusionRequest 请求参数}): {@link FaceFusionResponse 返回参数} */
+  /** 人脸融合 {@link FaceFusionRequest} {@link FaceFusionResponse} */
   FaceFusion(data: FaceFusionRequest, config?: AxiosRequestConfig): AxiosPromise<FaceFusionResponse>;
-  /** {@link FaceFusionLite 人脸融合活动专用版}({@link FaceFusionLiteRequest 请求参数}): {@link FaceFusionLiteResponse 返回参数} */
+  /** 人脸融合活动专用版 {@link FaceFusionLiteRequest} {@link FaceFusionLiteResponse} */
   FaceFusionLite(data: FaceFusionLiteRequest, config?: AxiosRequestConfig): AxiosPromise<FaceFusionLiteResponse>;
-  /** {@link FuseFace 选脸融合}({@link FuseFaceRequest 请求参数}): {@link FuseFaceResponse 返回参数} */
+  /** 选脸融合 {@link FuseFaceRequest} {@link FuseFaceResponse} */
   FuseFace(data: FuseFaceRequest, config?: AxiosRequestConfig): AxiosPromise<FuseFaceResponse>;
 }
 

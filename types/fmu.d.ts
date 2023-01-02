@@ -100,7 +100,7 @@ declare interface BeautifyPicResponse {
   ResultImage?: string;
   /** RspImgType 为 url 时，返回处理后的图片 url 数据。 */
   ResultUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -118,7 +118,7 @@ declare interface BeautifyVideoResponse {
   JobId?: string;
   /** 预估处理时间，粒度为秒 */
   EstimatedProcessTime?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -128,7 +128,7 @@ declare interface CancelBeautifyVideoJobRequest {
 }
 
 declare interface CancelBeautifyVideoJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -142,7 +142,7 @@ declare interface CreateModelRequest {
 declare interface CreateModelResponse {
   /** 唇色素材ID。 */
   ModelId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -152,7 +152,7 @@ declare interface DeleteModelRequest {
 }
 
 declare interface DeleteModelResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -168,7 +168,7 @@ declare interface GetModelListResponse {
   ModelIdNum?: number;
   /** 素材数据 */
   ModelInfos?: ModelInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -182,7 +182,7 @@ declare interface QueryBeautifyVideoJobResponse {
   JobStatus?: string;
   /** 视频美颜输出的结果信息 */
   BeautifyVideoOutput?: BeautifyVideoOutput | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -204,7 +204,7 @@ declare interface StyleImageProResponse {
   ResultImage?: string | null;
   /** RspImgType 为 url 时，返回处理后的图片 url 数据。 */
   ResultUrl?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -226,7 +226,7 @@ declare interface StyleImageResponse {
   ResultImage?: string | null;
   /** RspImgType 为 url 时，返回处理后的图片 url 数据。 */
   ResultUrl?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -246,32 +246,32 @@ declare interface TryLipstickPicResponse {
   ResultImage?: string;
   /** RspImgType 为 url 时，返回处理后的图片 url 数据。 */
   ResultUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Fmu 人脸试妆} */
 declare interface Fmu {
   (): Versions;
-  /** {@link BeautifyPic 人脸美颜}({@link BeautifyPicRequest 请求参数}): {@link BeautifyPicResponse 返回参数} */
+  /** 人脸美颜 {@link BeautifyPicRequest} {@link BeautifyPicResponse} */
   BeautifyPic(data?: BeautifyPicRequest, config?: AxiosRequestConfig): AxiosPromise<BeautifyPicResponse>;
-  /** {@link BeautifyVideo 视频美颜}({@link BeautifyVideoRequest 请求参数}): {@link BeautifyVideoResponse 返回参数} */
+  /** 视频美颜 {@link BeautifyVideoRequest} {@link BeautifyVideoResponse} */
   BeautifyVideo(data: BeautifyVideoRequest, config?: AxiosRequestConfig): AxiosPromise<BeautifyVideoResponse>;
-  /** {@link CancelBeautifyVideoJob 撤销视频美颜任务}({@link CancelBeautifyVideoJobRequest 请求参数}): {@link CancelBeautifyVideoJobResponse 返回参数} */
+  /** 撤销视频美颜任务 {@link CancelBeautifyVideoJobRequest} {@link CancelBeautifyVideoJobResponse} */
   CancelBeautifyVideoJob(data: CancelBeautifyVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<CancelBeautifyVideoJobResponse>;
-  /** {@link CreateModel 上传唇色素材}({@link CreateModelRequest 请求参数}): {@link CreateModelResponse 返回参数} */
+  /** 上传唇色素材 {@link CreateModelRequest} {@link CreateModelResponse} */
   CreateModel(data: CreateModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelResponse>;
-  /** {@link DeleteModel 删除唇色素材}({@link DeleteModelRequest 请求参数}): {@link DeleteModelResponse 返回参数} */
+  /** 删除唇色素材 {@link DeleteModelRequest} {@link DeleteModelResponse} */
   DeleteModel(data: DeleteModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelResponse>;
-  /** {@link GetModelList 查询唇色素材}({@link GetModelListRequest 请求参数}): {@link GetModelListResponse 返回参数} */
+  /** 查询唇色素材 {@link GetModelListRequest} {@link GetModelListResponse} */
   GetModelList(data?: GetModelListRequest, config?: AxiosRequestConfig): AxiosPromise<GetModelListResponse>;
-  /** {@link QueryBeautifyVideoJob 查询视频美颜任务}({@link QueryBeautifyVideoJobRequest 请求参数}): {@link QueryBeautifyVideoJobResponse 返回参数} */
+  /** 查询视频美颜任务 {@link QueryBeautifyVideoJobRequest} {@link QueryBeautifyVideoJobResponse} */
   QueryBeautifyVideoJob(data: QueryBeautifyVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBeautifyVideoJobResponse>;
-  /** {@link StyleImage 图片滤镜}({@link StyleImageRequest 请求参数}): {@link StyleImageResponse 返回参数} */
+  /** 图片滤镜 {@link StyleImageRequest} {@link StyleImageResponse} */
   StyleImage(data: StyleImageRequest, config?: AxiosRequestConfig): AxiosPromise<StyleImageResponse>;
-  /** {@link StyleImagePro 图片滤镜（高级版）}({@link StyleImageProRequest 请求参数}): {@link StyleImageProResponse 返回参数} */
+  /** 图片滤镜（高级版） {@link StyleImageProRequest} {@link StyleImageProResponse} */
   StyleImagePro(data: StyleImageProRequest, config?: AxiosRequestConfig): AxiosPromise<StyleImageProResponse>;
-  /** {@link TryLipstickPic 试唇色}({@link TryLipstickPicRequest 请求参数}): {@link TryLipstickPicResponse 返回参数} */
+  /** 试唇色 {@link TryLipstickPicRequest} {@link TryLipstickPicResponse} */
   TryLipstickPic(data: TryLipstickPicRequest, config?: AxiosRequestConfig): AxiosPromise<TryLipstickPicResponse>;
 }
 

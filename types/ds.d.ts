@@ -62,7 +62,7 @@ declare interface CheckVcodeRequest {
 }
 
 declare interface CheckVcodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -88,7 +88,7 @@ declare interface CreateContractByUploadRequest {
 declare interface CreateContractByUploadResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -120,7 +120,7 @@ declare interface CreateEnterpriseAccountRequest {
 declare interface CreateEnterpriseAccountResponse {
   /** 帐号ID */
   AccountResId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -142,7 +142,7 @@ declare interface CreatePersonalAccountRequest {
 declare interface CreatePersonalAccountResponse {
   /** 账号ID */
   AccountResId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -162,7 +162,7 @@ declare interface CreateSealRequest {
 declare interface CreateSealResponse {
   /** 签章ID */
   SealResId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -180,7 +180,7 @@ declare interface DeleteAccountResponse {
   DelSuccessList?: string[];
   /** 删除失败帐号ID列表 */
   DelFailedList?: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -198,7 +198,7 @@ declare interface DeleteSealRequest {
 declare interface DeleteSealResponse {
   /** 签章ID */
   SealResId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -216,7 +216,7 @@ declare interface DescribeTaskStatusResponse {
   TaskResult?: string;
   /** 任务类型，010代表合同上传结果，020代表合同下载结果 */
   TaskType?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -232,7 +232,7 @@ declare interface DownloadContractRequest {
 declare interface DownloadContractResponse {
   /** 任务ID */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -248,7 +248,7 @@ declare interface SendVcodeRequest {
 }
 
 declare interface SendVcodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -276,7 +276,7 @@ declare interface SignContractByCoordinateRequest {
 }
 
 declare interface SignContractByCoordinateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -304,36 +304,36 @@ declare interface SignContractByKeywordRequest {
 }
 
 declare interface SignContractByKeywordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ds 文档服务} */
 declare interface Ds {
   (): Versions;
-  /** {@link CheckVcode 检测验证码}({@link CheckVcodeRequest 请求参数}): {@link CheckVcodeResponse 返回参数} */
+  /** 检测验证码 {@link CheckVcodeRequest} {@link CheckVcodeResponse} */
   CheckVcode(data: CheckVcodeRequest, config?: AxiosRequestConfig): AxiosPromise<CheckVcodeResponse>;
-  /** {@link CreateContractByUpload 通过上传创建合同}({@link CreateContractByUploadRequest 请求参数}): {@link CreateContractByUploadResponse 返回参数} */
+  /** 通过上传创建合同 {@link CreateContractByUploadRequest} {@link CreateContractByUploadResponse} */
   CreateContractByUpload(data: CreateContractByUploadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContractByUploadResponse>;
-  /** {@link CreateEnterpriseAccount 企业开户}({@link CreateEnterpriseAccountRequest 请求参数}): {@link CreateEnterpriseAccountResponse 返回参数} */
+  /** 企业开户 {@link CreateEnterpriseAccountRequest} {@link CreateEnterpriseAccountResponse} */
   CreateEnterpriseAccount(data: CreateEnterpriseAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnterpriseAccountResponse>;
-  /** {@link CreatePersonalAccount 个人开户}({@link CreatePersonalAccountRequest 请求参数}): {@link CreatePersonalAccountResponse 返回参数} */
+  /** 个人开户 {@link CreatePersonalAccountRequest} {@link CreatePersonalAccountResponse} */
   CreatePersonalAccount(data: CreatePersonalAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonalAccountResponse>;
-  /** {@link CreateSeal 新增签章}({@link CreateSealRequest 请求参数}): {@link CreateSealResponse 返回参数} */
+  /** 新增签章 {@link CreateSealRequest} {@link CreateSealResponse} */
   CreateSeal(data: CreateSealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealResponse>;
-  /** {@link DeleteAccount 删除帐号}({@link DeleteAccountRequest 请求参数}): {@link DeleteAccountResponse 返回参数} */
+  /** 删除帐号 {@link DeleteAccountRequest} {@link DeleteAccountResponse} */
   DeleteAccount(data: DeleteAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountResponse>;
-  /** {@link DeleteSeal 删除签章}({@link DeleteSealRequest 请求参数}): {@link DeleteSealResponse 返回参数} */
+  /** 删除签章 {@link DeleteSealRequest} {@link DeleteSealResponse} */
   DeleteSeal(data: DeleteSealRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSealResponse>;
-  /** {@link DescribeTaskStatus 获取任务状态}({@link DescribeTaskStatusRequest 请求参数}): {@link DescribeTaskStatusResponse 返回参数} */
+  /** 获取任务状态 {@link DescribeTaskStatusRequest} {@link DescribeTaskStatusResponse} */
   DescribeTaskStatus(data: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
-  /** {@link DownloadContract 下载合同}({@link DownloadContractRequest 请求参数}): {@link DownloadContractResponse 返回参数} */
+  /** 下载合同 {@link DownloadContractRequest} {@link DownloadContractResponse} */
   DownloadContract(data: DownloadContractRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadContractResponse>;
-  /** {@link SendVcode 发送验证码}({@link SendVcodeRequest 请求参数}): {@link SendVcodeResponse 返回参数} */
+  /** 发送验证码 {@link SendVcodeRequest} {@link SendVcodeResponse} */
   SendVcode(data: SendVcodeRequest, config?: AxiosRequestConfig): AxiosPromise<SendVcodeResponse>;
-  /** {@link SignContractByCoordinate 按坐标签署合同}({@link SignContractByCoordinateRequest 请求参数}): {@link SignContractByCoordinateResponse 返回参数} */
+  /** 按坐标签署合同 {@link SignContractByCoordinateRequest} {@link SignContractByCoordinateResponse} */
   SignContractByCoordinate(data: SignContractByCoordinateRequest, config?: AxiosRequestConfig): AxiosPromise<SignContractByCoordinateResponse>;
-  /** {@link SignContractByKeyword 按关键字签署合同}({@link SignContractByKeywordRequest 请求参数}): {@link SignContractByKeywordResponse 返回参数} */
+  /** 按关键字签署合同 {@link SignContractByKeywordRequest} {@link SignContractByKeywordResponse} */
   SignContractByKeyword(data: SignContractByKeywordRequest, config?: AxiosRequestConfig): AxiosPromise<SignContractByKeywordResponse>;
 }
 

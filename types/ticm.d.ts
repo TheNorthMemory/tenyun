@@ -360,7 +360,7 @@ declare interface DescribeVideoTaskResponse {
   PornOcrResult?: VodPornOcrResult;
   /** 原始视频的元信息。 */
   MetaData?: VodMetaData;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -390,7 +390,7 @@ declare interface ImageModerationResponse {
   Extra?: string;
   /** 恶心内容识别结果。 */
   DisgustResult?: DisgustResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -408,18 +408,18 @@ declare interface VideoModerationRequest {
 declare interface VideoModerationResponse {
   /** 视频审核任务ID */
   VodTaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ticm 智能鉴黄} */
 declare interface Ticm {
   (): Versions;
-  /** {@link DescribeVideoTask 查询视频内容审核的结果}({@link DescribeVideoTaskRequest 请求参数}): {@link DescribeVideoTaskResponse 返回参数} */
+  /** 查询视频内容审核的结果 {@link DescribeVideoTaskRequest} {@link DescribeVideoTaskResponse} */
   DescribeVideoTask(data: DescribeVideoTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoTaskResponse>;
-  /** {@link ImageModeration 图像内容审核}({@link ImageModerationRequest 请求参数}): {@link ImageModerationResponse 返回参数} */
+  /** 图像内容审核 {@link ImageModerationRequest} {@link ImageModerationResponse} */
   ImageModeration(data: ImageModerationRequest, config?: AxiosRequestConfig): AxiosPromise<ImageModerationResponse>;
-  /** {@link VideoModeration 视频内容识别}({@link VideoModerationRequest 请求参数}): {@link VideoModerationResponse 返回参数} */
+  /** 视频内容识别 {@link VideoModerationRequest} {@link VideoModerationResponse} */
   VideoModeration(data: VideoModerationRequest, config?: AxiosRequestConfig): AxiosPromise<VideoModerationResponse>;
 }
 

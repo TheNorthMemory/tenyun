@@ -404,7 +404,7 @@ declare interface CreateTaskFromTemplateRequest {
 declare interface CreateTaskFromTemplateResponse {
   /** 创建成功的演练ID */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -414,7 +414,7 @@ declare interface DeleteTaskRequest {
 }
 
 declare interface DeleteTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -430,7 +430,7 @@ declare interface DescribeTaskExecuteLogsRequest {
 declare interface DescribeTaskExecuteLogsResponse {
   /** 日志数据 */
   LogMessage: string[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -458,7 +458,7 @@ declare interface DescribeTaskListResponse {
   TaskList: TaskListItem[];
   /** 列表数量 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -472,7 +472,7 @@ declare interface DescribeTaskResponse {
   Task: Task;
   /** 任务对应的演练报告信息，null表示未导出报告 */
   ReportInfo: TaskReportInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -496,7 +496,7 @@ declare interface DescribeTemplateListResponse {
   TemplateList: TemplateListItem[];
   /** 列表数量 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -508,7 +508,7 @@ declare interface DescribeTemplateRequest {
 declare interface DescribeTemplateResponse {
   /** 经验库详情 */
   Template: Template;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -528,7 +528,7 @@ declare interface ExecuteTaskInstanceRequest {
 }
 
 declare interface ExecuteTaskInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -538,7 +538,7 @@ declare interface ExecuteTaskRequest {
 }
 
 declare interface ExecuteTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -554,32 +554,32 @@ declare interface ModifyTaskRunStatusRequest {
 }
 
 declare interface ModifyTaskRunStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Cfg 混沌演练平台} */
 declare interface Cfg {
   (): Versions;
-  /** {@link CreateTaskFromTemplate 从经验库创建演练}({@link CreateTaskFromTemplateRequest 请求参数}): {@link CreateTaskFromTemplateResponse 返回参数} */
+  /** 从经验库创建演练 {@link CreateTaskFromTemplateRequest} {@link CreateTaskFromTemplateResponse} */
   CreateTaskFromTemplate(data: CreateTaskFromTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFromTemplateResponse>;
-  /** {@link DeleteTask 删除任务}({@link DeleteTaskRequest 请求参数}): {@link DeleteTaskResponse 返回参数} */
+  /** 删除任务 {@link DeleteTaskRequest} {@link DeleteTaskResponse} */
   DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;
-  /** {@link DescribeTask 查询任务}({@link DescribeTaskRequest 请求参数}): {@link DescribeTaskResponse 返回参数} */
+  /** 查询任务 {@link DescribeTaskRequest} {@link DescribeTaskResponse} */
   DescribeTask(data: DescribeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResponse>;
-  /** {@link DescribeTaskExecuteLogs 获取演练过程日志}({@link DescribeTaskExecuteLogsRequest 请求参数}): {@link DescribeTaskExecuteLogsResponse 返回参数} */
+  /** 获取演练过程日志 {@link DescribeTaskExecuteLogsRequest} {@link DescribeTaskExecuteLogsResponse} */
   DescribeTaskExecuteLogs(data: DescribeTaskExecuteLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskExecuteLogsResponse>;
-  /** {@link DescribeTaskList 查询任务列表}({@link DescribeTaskListRequest 请求参数}): {@link DescribeTaskListResponse 返回参数} */
+  /** 查询任务列表 {@link DescribeTaskListRequest} {@link DescribeTaskListResponse} */
   DescribeTaskList(data: DescribeTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskListResponse>;
-  /** {@link DescribeTemplate 查询经验库}({@link DescribeTemplateRequest 请求参数}): {@link DescribeTemplateResponse 返回参数} */
+  /** 查询经验库 {@link DescribeTemplateRequest} {@link DescribeTemplateResponse} */
   DescribeTemplate(data: DescribeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateResponse>;
-  /** {@link DescribeTemplateList 查询经验库列表}({@link DescribeTemplateListRequest 请求参数}): {@link DescribeTemplateListResponse 返回参数} */
+  /** 查询经验库列表 {@link DescribeTemplateListRequest} {@link DescribeTemplateListResponse} */
   DescribeTemplateList(data: DescribeTemplateListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateListResponse>;
-  /** {@link ExecuteTask 执行任务}({@link ExecuteTaskRequest 请求参数}): {@link ExecuteTaskResponse 返回参数} */
+  /** 执行任务 {@link ExecuteTaskRequest} {@link ExecuteTaskResponse} */
   ExecuteTask(data: ExecuteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskResponse>;
-  /** {@link ExecuteTaskInstance 执行任务动作实例}({@link ExecuteTaskInstanceRequest 请求参数}): {@link ExecuteTaskInstanceResponse 返回参数} */
+  /** 执行任务动作实例 {@link ExecuteTaskInstanceRequest} {@link ExecuteTaskInstanceResponse} */
   ExecuteTaskInstance(data: ExecuteTaskInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskInstanceResponse>;
-  /** {@link ModifyTaskRunStatus 修改任务运行状态}({@link ModifyTaskRunStatusRequest 请求参数}): {@link ModifyTaskRunStatusResponse 返回参数} */
+  /** 修改任务运行状态 {@link ModifyTaskRunStatusRequest} {@link ModifyTaskRunStatusResponse} */
   ModifyTaskRunStatus(data: ModifyTaskRunStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskRunStatusResponse>;
 }
 

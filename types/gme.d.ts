@@ -392,7 +392,7 @@ declare interface CreateAgeDetectTaskRequest {
 declare interface CreateAgeDetectTaskResponse {
   /** 本次任务提交后唯一id，用于获取任务运行结果 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -418,7 +418,7 @@ declare interface CreateAppRequest {
 declare interface CreateAppResponse {
   /** 创建应用返回数据 */
   Data: CreateAppResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -434,7 +434,7 @@ declare interface CreateCustomizationRequest {
 declare interface CreateCustomizationResponse {
   /** 模型ID */
   ModelId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -448,7 +448,7 @@ declare interface CreateScanUserRequest {
 declare interface CreateScanUserResponse {
   /** 返回结果码 */
   ErrorCode: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -462,7 +462,7 @@ declare interface DeleteCustomizationRequest {
 declare interface DeleteCustomizationResponse {
   /** 返回值。0为成功，非0为失败。 */
   ErrorCode: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -480,7 +480,7 @@ declare interface DeleteRoomMemberRequest {
 declare interface DeleteRoomMemberResponse {
   /** 剔除房间或成员的操作结果 */
   DeleteResult: DeleteResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -494,7 +494,7 @@ declare interface DeleteScanUserRequest {
 declare interface DeleteScanUserResponse {
   /** 返回结果码 */
   ErrorCode: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -510,7 +510,7 @@ declare interface DescribeAgeDetectTaskResponse {
   TaskId: string;
   /** 语音检测返回。Results 字段是 JSON 数组，每一个元素包含：DataId： 请求中对应的 DataId。Url ：该请求中对应的 Url。Status ：子任务状态，0:已创建，1:运行中，2:已完成，3:任务异常，4:任务超时。Age ：子任务完成后的结果，0:成年人，1:未成年人，100:未知结果。 */
   Results: AgeDetectTaskResult[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -528,7 +528,7 @@ declare interface DescribeAppStatisticsRequest {
 declare interface DescribeAppStatisticsResponse {
   /** 应用用量统计数据 */
   Data: DescribeAppStatisticsResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -544,7 +544,7 @@ declare interface DescribeApplicationDataRequest {
 declare interface DescribeApplicationDataResponse {
   /** 应用统计数据 */
   Data: ApplicationDataStatistics;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -568,7 +568,7 @@ declare interface DescribeApplicationListResponse {
   ApplicationList: ApplicationList[];
   /** 应用总数 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -592,7 +592,7 @@ declare interface DescribeRealtimeScanConfigResponse {
   UserIdString: string;
   /** 房间号字符串，逗号分隔，示例："0001,0002,0003" */
   RoomIdString: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -610,7 +610,7 @@ declare interface DescribeRoomInfoResponse {
   Result: number | null;
   /** 房间用户信息 */
   RoomUsers: RoomUser[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -626,7 +626,7 @@ declare interface DescribeScanResultListRequest {
 declare interface DescribeScanResultListResponse {
   /** 要查询的语音检测任务的结果 */
   Data?: DescribeScanResult[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -648,7 +648,7 @@ declare interface DescribeUserInAndOutTimeResponse {
   InOutList: InOutTimeInfo[];
   /** 用户在房间中总时长 */
   Duration: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -660,7 +660,7 @@ declare interface GetCustomizationListRequest {
 declare interface GetCustomizationListResponse {
   /** 语音消息转文本热句模型配置 */
   CustomizationConfigs: CustomizationConfigs[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -674,7 +674,7 @@ declare interface ModifyAppStatusRequest {
 declare interface ModifyAppStatusResponse {
   /** 修改应用开关状态返回数据 */
   Data: ModifyAppStatusResp;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -692,7 +692,7 @@ declare interface ModifyCustomizationResponse {
   ErrorCode: number;
   /** 模型ID */
   ModelId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -710,7 +710,7 @@ declare interface ModifyCustomizationStateResponse {
   ModelId: string;
   /** 返回值。0为成功，非0为失败。 */
   ErrorCode: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -728,7 +728,7 @@ declare interface ModifyUserMicStatusResponse {
   Result: number;
   /** 错误信息。 */
   ErrMsg: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -750,7 +750,7 @@ declare interface ScanVoiceRequest {
 declare interface ScanVoiceResponse {
   /** 语音检测返回。Data 字段是 JSON 数组，每一个元素包含：DataId： 请求中对应的 DataId。TaskID ：该检测任务的 ID，用于轮询语音检测结果。 */
   Data: ScanVoiceResult[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -766,7 +766,7 @@ declare interface UpdateScanRoomsRequest {
 declare interface UpdateScanRoomsResponse {
   /** 返回结果码 */
   ErrorCode: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -782,58 +782,58 @@ declare interface UpdateScanUsersRequest {
 declare interface UpdateScanUsersResponse {
   /** 返回结果码 */
   ErrorCode: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Gme 游戏多媒体引擎} */
 declare interface Gme {
   (): Versions;
-  /** {@link CreateAgeDetectTask 提交年龄语音识别任务}({@link CreateAgeDetectTaskRequest 请求参数}): {@link CreateAgeDetectTaskResponse 返回参数} */
+  /** 提交年龄语音识别任务 {@link CreateAgeDetectTaskRequest} {@link CreateAgeDetectTaskResponse} */
   CreateAgeDetectTask(data: CreateAgeDetectTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgeDetectTaskResponse>;
-  /** {@link CreateApp 创建GME应用}({@link CreateAppRequest 请求参数}): {@link CreateAppResponse 返回参数} */
+  /** 创建GME应用 {@link CreateAppRequest} {@link CreateAppResponse} */
   CreateApp(data: CreateAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppResponse>;
-  /** {@link CreateCustomization 创建语音消息转文本热句模型}({@link CreateCustomizationRequest 请求参数}): {@link CreateCustomizationResponse 返回参数} */
+  /** 创建语音消息转文本热句模型 {@link CreateCustomizationRequest} {@link CreateCustomizationResponse} */
   CreateCustomization(data: CreateCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomizationResponse>;
-  /** {@link CreateScanUser 新增自定义送检用户}({@link CreateScanUserRequest 请求参数}): {@link CreateScanUserResponse 返回参数} */
+  /** 新增自定义送检用户 {@link CreateScanUserRequest} {@link CreateScanUserResponse} */
   CreateScanUser(data: CreateScanUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScanUserResponse>;
-  /** {@link DeleteCustomization 删除语音消息转文本热句模型}({@link DeleteCustomizationRequest 请求参数}): {@link DeleteCustomizationResponse 返回参数} */
+  /** 删除语音消息转文本热句模型 {@link DeleteCustomizationRequest} {@link DeleteCustomizationResponse} */
   DeleteCustomization(data: DeleteCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomizationResponse>;
-  /** {@link DeleteRoomMember 剔除房间或房间成员}({@link DeleteRoomMemberRequest 请求参数}): {@link DeleteRoomMemberResponse 返回参数} */
+  /** 剔除房间或房间成员 {@link DeleteRoomMemberRequest} {@link DeleteRoomMemberResponse} */
   DeleteRoomMember(data: DeleteRoomMemberRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoomMemberResponse>;
-  /** {@link DeleteScanUser 删除自定义送检用户}({@link DeleteScanUserRequest 请求参数}): {@link DeleteScanUserResponse 返回参数} */
+  /** 删除自定义送检用户 {@link DeleteScanUserRequest} {@link DeleteScanUserResponse} */
   DeleteScanUser(data: DeleteScanUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScanUserResponse>;
-  /** {@link DescribeAgeDetectTask 查询年龄语音识别任务结果}({@link DescribeAgeDetectTaskRequest 请求参数}): {@link DescribeAgeDetectTaskResponse 返回参数} */
+  /** 查询年龄语音识别任务结果 {@link DescribeAgeDetectTaskRequest} {@link DescribeAgeDetectTaskResponse} */
   DescribeAgeDetectTask(data: DescribeAgeDetectTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgeDetectTaskResponse>;
-  /** {@link DescribeAppStatistics 获取应用用量统计数据}({@link DescribeAppStatisticsRequest 请求参数}): {@link DescribeAppStatisticsResponse 返回参数} */
+  /** 获取应用用量统计数据 {@link DescribeAppStatisticsRequest} {@link DescribeAppStatisticsResponse} */
   DescribeAppStatistics(data: DescribeAppStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppStatisticsResponse>;
-  /** {@link DescribeApplicationData 获取数据详情}({@link DescribeApplicationDataRequest 请求参数}): {@link DescribeApplicationDataResponse 返回参数} */
+  /** 获取数据详情 {@link DescribeApplicationDataRequest} {@link DescribeApplicationDataResponse} */
   DescribeApplicationData(data: DescribeApplicationDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationDataResponse>;
-  /** {@link DescribeApplicationList 查询某账号下的应用列表}({@link DescribeApplicationListRequest 请求参数}): {@link DescribeApplicationListResponse 返回参数} */
+  /** 查询某账号下的应用列表 {@link DescribeApplicationListRequest} {@link DescribeApplicationListResponse} */
   DescribeApplicationList(data: DescribeApplicationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationListResponse>;
-  /** {@link DescribeRealtimeScanConfig 获取用户自定义送检信息}({@link DescribeRealtimeScanConfigRequest 请求参数}): {@link DescribeRealtimeScanConfigResponse 返回参数} */
+  /** 获取用户自定义送检信息 {@link DescribeRealtimeScanConfigRequest} {@link DescribeRealtimeScanConfigResponse} */
   DescribeRealtimeScanConfig(data: DescribeRealtimeScanConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealtimeScanConfigResponse>;
-  /** {@link DescribeRoomInfo 获取房间内用户信息}({@link DescribeRoomInfoRequest 请求参数}): {@link DescribeRoomInfoResponse 返回参数} */
+  /** 获取房间内用户信息 {@link DescribeRoomInfoRequest} {@link DescribeRoomInfoResponse} */
   DescribeRoomInfo(data: DescribeRoomInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomInfoResponse>;
-  /** {@link DescribeScanResultList 查询语音检测结果}({@link DescribeScanResultListRequest 请求参数}): {@link DescribeScanResultListResponse 返回参数} */
+  /** 查询语音检测结果 {@link DescribeScanResultListRequest} {@link DescribeScanResultListResponse} */
   DescribeScanResultList(data: DescribeScanResultListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanResultListResponse>;
-  /** {@link DescribeUserInAndOutTime 拉取用户在房间得进出时间}({@link DescribeUserInAndOutTimeRequest 请求参数}): {@link DescribeUserInAndOutTimeResponse 返回参数} */
+  /** 拉取用户在房间得进出时间 {@link DescribeUserInAndOutTimeRequest} {@link DescribeUserInAndOutTimeResponse} */
   DescribeUserInAndOutTime(data: DescribeUserInAndOutTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInAndOutTimeResponse>;
-  /** {@link GetCustomizationList 查询语音消息转文本热句模型列表}({@link GetCustomizationListRequest 请求参数}): {@link GetCustomizationListResponse 返回参数} */
+  /** 查询语音消息转文本热句模型列表 {@link GetCustomizationListRequest} {@link GetCustomizationListResponse} */
   GetCustomizationList(data: GetCustomizationListRequest, config?: AxiosRequestConfig): AxiosPromise<GetCustomizationListResponse>;
-  /** {@link ModifyAppStatus 修改应用开关状态}({@link ModifyAppStatusRequest 请求参数}): {@link ModifyAppStatusResponse 返回参数} */
+  /** 修改应用开关状态 {@link ModifyAppStatusRequest} {@link ModifyAppStatusResponse} */
   ModifyAppStatus(data: ModifyAppStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppStatusResponse>;
-  /** {@link ModifyCustomization 更新语音消息转文本热句模型}({@link ModifyCustomizationRequest 请求参数}): {@link ModifyCustomizationResponse 返回参数} */
+  /** 更新语音消息转文本热句模型 {@link ModifyCustomizationRequest} {@link ModifyCustomizationResponse} */
   ModifyCustomization(data: ModifyCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizationResponse>;
-  /** {@link ModifyCustomizationState 修改语音消息转文本热句模型状态}({@link ModifyCustomizationStateRequest 请求参数}): {@link ModifyCustomizationStateResponse 返回参数} */
+  /** 修改语音消息转文本热句模型状态 {@link ModifyCustomizationStateRequest} {@link ModifyCustomizationStateResponse} */
   ModifyCustomizationState(data: ModifyCustomizationStateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizationStateResponse>;
-  /** {@link ModifyUserMicStatus 修改用户麦克风状态}({@link ModifyUserMicStatusRequest 请求参数}): {@link ModifyUserMicStatusResponse 返回参数} */
+  /** 修改用户麦克风状态 {@link ModifyUserMicStatusRequest} {@link ModifyUserMicStatusResponse} */
   ModifyUserMicStatus(data: ModifyUserMicStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserMicStatusResponse>;
-  /** {@link ScanVoice 提交语音检测任务}({@link ScanVoiceRequest 请求参数}): {@link ScanVoiceResponse 返回参数} */
+  /** 提交语音检测任务 {@link ScanVoiceRequest} {@link ScanVoiceResponse} */
   ScanVoice(data: ScanVoiceRequest, config?: AxiosRequestConfig): AxiosPromise<ScanVoiceResponse>;
-  /** {@link UpdateScanRooms 更新送检房间号}({@link UpdateScanRoomsRequest 请求参数}): {@link UpdateScanRoomsResponse 返回参数} */
+  /** 更新送检房间号 {@link UpdateScanRoomsRequest} {@link UpdateScanRoomsResponse} */
   UpdateScanRooms(data: UpdateScanRoomsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateScanRoomsResponse>;
-  /** {@link UpdateScanUsers 更新送检用户号}({@link UpdateScanUsersRequest 请求参数}): {@link UpdateScanUsersResponse 返回参数} */
+  /** 更新送检用户号 {@link UpdateScanUsersRequest} {@link UpdateScanUsersResponse} */
   UpdateScanUsers(data: UpdateScanUsersRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateScanUsersResponse>;
 }
 

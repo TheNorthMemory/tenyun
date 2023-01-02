@@ -1126,7 +1126,7 @@ declare interface CreateEditingTaskRequest {
 declare interface CreateEditingTaskResponse {
   /** 编辑任务 ID，可以通过该 ID 查询任务状态。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1144,7 +1144,7 @@ declare interface CreateMediaProcessTaskRequest {
 declare interface CreateMediaProcessTaskResponse {
   /** 编辑任务 ID，可以通过该 ID 查询任务状态和结果。 */
   TaskId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1164,7 +1164,7 @@ declare interface CreateMediaQualityRestorationTaskRequest {
 declare interface CreateMediaQualityRestorationTaskResponse {
   /** 画质重生任务ID，可以通过该ID查询任务状态。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1180,7 +1180,7 @@ declare interface CreateQualityControlTaskRequest {
 declare interface CreateQualityControlTaskResponse {
   /** 质检任务 ID */
   TaskId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1192,7 +1192,7 @@ declare interface DescribeEditingTaskResultRequest {
 declare interface DescribeEditingTaskResultResponse {
   /** 编辑任务结果信息。 */
   TaskResult: EditingTaskResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1204,7 +1204,7 @@ declare interface DescribeMediaProcessTaskResultRequest {
 declare interface DescribeMediaProcessTaskResultResponse {
   /** 任务处理结果。 */
   TaskResult: MediaProcessTaskResult | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1216,7 +1216,7 @@ declare interface DescribeMediaQualityRestorationTaskRusultRequest {
 declare interface DescribeMediaQualityRestorationTaskRusultResponse {
   /** 画质重生任务结果信息 */
   TaskResult?: MediaQualityRestorationTaskResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1228,7 +1228,7 @@ declare interface DescribeQualityControlTaskResultRequest {
 declare interface DescribeQualityControlTaskResultResponse {
   /** 质检任务结果信息 */
   TaskResult?: QualityControlInfoTaskResult;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1238,7 +1238,7 @@ declare interface StopMediaProcessTaskRequest {
 }
 
 declare interface StopMediaProcessTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1248,32 +1248,32 @@ declare interface StopMediaQualityRestorationTaskRequest {
 }
 
 declare interface StopMediaQualityRestorationTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ie 智能编辑} */
 declare interface Ie {
   (): Versions;
-  /** {@link CreateEditingTask 创建编辑理解任务}({@link CreateEditingTaskRequest 请求参数}): {@link CreateEditingTaskResponse 返回参数} */
+  /** 创建编辑理解任务 {@link CreateEditingTaskRequest} {@link CreateEditingTaskResponse} */
   CreateEditingTask(data: CreateEditingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEditingTaskResponse>;
-  /** {@link CreateMediaProcessTask 创建编辑处理任务}({@link CreateMediaProcessTaskRequest 请求参数}): {@link CreateMediaProcessTaskResponse 返回参数} */
+  /** 创建编辑处理任务 {@link CreateMediaProcessTaskRequest} {@link CreateMediaProcessTaskResponse} */
   CreateMediaProcessTask(data: CreateMediaProcessTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMediaProcessTaskResponse>;
-  /** {@link CreateMediaQualityRestorationTask 创建画质重生任务}({@link CreateMediaQualityRestorationTaskRequest 请求参数}): {@link CreateMediaQualityRestorationTaskResponse 返回参数} */
+  /** 创建画质重生任务 {@link CreateMediaQualityRestorationTaskRequest} {@link CreateMediaQualityRestorationTaskResponse} */
   CreateMediaQualityRestorationTask(data: CreateMediaQualityRestorationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMediaQualityRestorationTaskResponse>;
-  /** {@link CreateQualityControlTask 创建媒体质检任务}({@link CreateQualityControlTaskRequest 请求参数}): {@link CreateQualityControlTaskResponse 返回参数} */
+  /** 创建媒体质检任务 {@link CreateQualityControlTaskRequest} {@link CreateQualityControlTaskResponse} */
   CreateQualityControlTask(data: CreateQualityControlTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQualityControlTaskResponse>;
-  /** {@link DescribeEditingTaskResult 获取编辑理解任务结果}({@link DescribeEditingTaskResultRequest 请求参数}): {@link DescribeEditingTaskResultResponse 返回参数} */
+  /** 获取编辑理解任务结果 {@link DescribeEditingTaskResultRequest} {@link DescribeEditingTaskResultResponse} */
   DescribeEditingTaskResult(data: DescribeEditingTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEditingTaskResultResponse>;
-  /** {@link DescribeMediaProcessTaskResult 获取编辑处理任务结果}({@link DescribeMediaProcessTaskResultRequest 请求参数}): {@link DescribeMediaProcessTaskResultResponse 返回参数} */
+  /** 获取编辑处理任务结果 {@link DescribeMediaProcessTaskResultRequest} {@link DescribeMediaProcessTaskResultResponse} */
   DescribeMediaProcessTaskResult(data: DescribeMediaProcessTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaProcessTaskResultResponse>;
-  /** {@link DescribeMediaQualityRestorationTaskRusult 获取画质重生任务结果}({@link DescribeMediaQualityRestorationTaskRusultRequest 请求参数}): {@link DescribeMediaQualityRestorationTaskRusultResponse 返回参数} */
+  /** 获取画质重生任务结果 {@link DescribeMediaQualityRestorationTaskRusultRequest} {@link DescribeMediaQualityRestorationTaskRusultResponse} */
   DescribeMediaQualityRestorationTaskRusult(data: DescribeMediaQualityRestorationTaskRusultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaQualityRestorationTaskRusultResponse>;
-  /** {@link DescribeQualityControlTaskResult 获取媒体质检任务结果}({@link DescribeQualityControlTaskResultRequest 请求参数}): {@link DescribeQualityControlTaskResultResponse 返回参数} */
+  /** 获取媒体质检任务结果 {@link DescribeQualityControlTaskResultRequest} {@link DescribeQualityControlTaskResultResponse} */
   DescribeQualityControlTaskResult(data: DescribeQualityControlTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQualityControlTaskResultResponse>;
-  /** {@link StopMediaProcessTask 停止编辑处理任务}({@link StopMediaProcessTaskRequest 请求参数}): {@link StopMediaProcessTaskResponse 返回参数} */
+  /** 停止编辑处理任务 {@link StopMediaProcessTaskRequest} {@link StopMediaProcessTaskResponse} */
   StopMediaProcessTask(data: StopMediaProcessTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopMediaProcessTaskResponse>;
-  /** {@link StopMediaQualityRestorationTask 删除画质重生任务}({@link StopMediaQualityRestorationTaskRequest 请求参数}): {@link StopMediaQualityRestorationTaskResponse 返回参数} */
+  /** 删除画质重生任务 {@link StopMediaQualityRestorationTaskRequest} {@link StopMediaQualityRestorationTaskResponse} */
   StopMediaQualityRestorationTask(data: StopMediaQualityRestorationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopMediaQualityRestorationTaskResponse>;
 }
 

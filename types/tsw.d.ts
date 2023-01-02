@@ -6,7 +6,7 @@ declare interface DescribeComponentAlertObjectRequest {
 }
 
 declare interface DescribeComponentAlertObjectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -14,7 +14,7 @@ declare interface DescribeServiceAlertObjectRequest {
 }
 
 declare interface DescribeServiceAlertObjectResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -26,7 +26,7 @@ declare interface DescribeTokenRequest {
 declare interface DescribeTokenResponse {
   /** token */
   Result: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -59,7 +59,7 @@ declare namespace V20200924 {
   interface DescribeAgentShellResponse {
     /** 接入信息 */
     Result: AgentShell | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -67,13 +67,13 @@ declare namespace V20200924 {
 /** {@link Tsw 微服务观测平台 TSW} */
 declare interface Tsw {
   (): Versions;
-  /** {@link DescribeComponentAlertObject 获取告警对象-组件告警}({@link DescribeComponentAlertObjectRequest 请求参数}): {@link DescribeComponentAlertObjectResponse 返回参数} */
+  /** 获取告警对象-组件告警 {@link DescribeComponentAlertObjectRequest} {@link DescribeComponentAlertObjectResponse} */
   DescribeComponentAlertObject(data?: DescribeComponentAlertObjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComponentAlertObjectResponse>;
-  /** {@link DescribeServiceAlertObject 获取告警对象-服务告警表}({@link DescribeServiceAlertObjectRequest 请求参数}): {@link DescribeServiceAlertObjectResponse 返回参数} */
+  /** 获取告警对象-服务告警表 {@link DescribeServiceAlertObjectRequest} {@link DescribeServiceAlertObjectResponse} */
   DescribeServiceAlertObject(data?: DescribeServiceAlertObjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceAlertObjectResponse>;
-  /** {@link DescribeToken 查询token}({@link DescribeTokenRequest 请求参数}): {@link DescribeTokenResponse 返回参数} */
+  /** 查询token {@link DescribeTokenRequest} {@link DescribeTokenResponse} */
   DescribeToken(data: DescribeTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenResponse>;
-  /** {@link V20200924.DescribeAgentShell 获取服务接入信息}({@link V20200924.DescribeAgentShellRequest 请求参数}): {@link V20200924.DescribeAgentShellResponse 返回参数} */
+  /** 获取服务接入信息 {@link V20200924.DescribeAgentShellRequest} {@link V20200924.DescribeAgentShellResponse} */
   DescribeAgentShell(data: V20200924.DescribeAgentShellRequest, config: AxiosRequestConfig & V20200924.VersionHeader): AxiosPromise<V20200924.DescribeAgentShellResponse>;
 }
 

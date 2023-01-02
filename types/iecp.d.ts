@@ -1004,7 +1004,7 @@ declare interface ApplyMarketComponentRequest {
 }
 
 declare interface ApplyMarketComponentResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1028,7 +1028,7 @@ declare interface BuildMessageRouteRequest {
 }
 
 declare interface BuildMessageRouteResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1060,7 +1060,7 @@ declare interface CreateApplicationVisualizationRequest {
 declare interface CreateApplicationVisualizationResponse {
   /** 应用ID */
   ApplicationId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1076,7 +1076,7 @@ declare interface CreateConfigMapRequest {
 }
 
 declare interface CreateConfigMapResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1088,7 +1088,7 @@ declare interface CreateEdgeNodeBatchRequest {
 }
 
 declare interface CreateEdgeNodeBatchResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1106,7 +1106,7 @@ declare interface CreateEdgeNodeGroupRequest {
 }
 
 declare interface CreateEdgeNodeGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1118,7 +1118,7 @@ declare interface CreateEdgeNodeRequest {
 }
 
 declare interface CreateEdgeNodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1136,7 +1136,7 @@ declare interface CreateEdgeNodeUnitTemplateRequest {
 }
 
 declare interface CreateEdgeNodeUnitTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1172,7 +1172,7 @@ declare interface CreateEdgeUnitApplicationVisualizationRequest {
 declare interface CreateEdgeUnitApplicationVisualizationResponse {
   /** 应用ID */
   ApplicationId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1188,7 +1188,7 @@ declare interface CreateEdgeUnitApplicationYamlRequest {
 declare interface CreateEdgeUnitApplicationYamlResponse {
   /** 应用ID */
   ApplicationId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1214,7 +1214,7 @@ declare interface CreateEdgeUnitCloudResponse {
   ClusterId: string | null;
   /** IECP集群ID */
   EdgeUnitId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1228,7 +1228,7 @@ declare interface CreateEdgeUnitDevicesRequest {
 }
 
 declare interface CreateEdgeUnitDevicesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1244,7 +1244,7 @@ declare interface CreateIotDeviceRequest {
 }
 
 declare interface CreateIotDeviceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1258,7 +1258,7 @@ declare interface CreateMessageRouteRequest {
 declare interface CreateMessageRouteResponse {
   /** 路由id */
   RouteID: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1272,7 +1272,7 @@ declare interface CreateNamespaceRequest {
 }
 
 declare interface CreateNamespaceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1294,7 +1294,7 @@ declare interface CreateSecretRequest {
 }
 
 declare interface CreateSecretResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1314,7 +1314,7 @@ declare interface CreateUpdateNodeUnitRequest {
 }
 
 declare interface CreateUpdateNodeUnitResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1326,7 +1326,7 @@ declare interface CreateUserTokenRequest {
 declare interface CreateUserTokenResponse {
   /** 无 */
   Token: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1336,7 +1336,7 @@ declare interface DeleteApplicationsRequest {
 }
 
 declare interface DeleteApplicationsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1350,7 +1350,7 @@ declare interface DeleteConfigMapRequest {
 }
 
 declare interface DeleteConfigMapResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1364,7 +1364,7 @@ declare interface DeleteEdgeNodeGroupRequest {
 }
 
 declare interface DeleteEdgeNodeGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1376,7 +1376,7 @@ declare interface DeleteEdgeNodeUnitTemplatesRequest {
 }
 
 declare interface DeleteEdgeNodeUnitTemplatesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1388,7 +1388,7 @@ declare interface DeleteEdgeNodesRequest {
 }
 
 declare interface DeleteEdgeNodesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1400,7 +1400,7 @@ declare interface DeleteEdgeUnitApplicationsRequest {
 }
 
 declare interface DeleteEdgeUnitApplicationsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1410,7 +1410,7 @@ declare interface DeleteEdgeUnitCloudRequest {
 }
 
 declare interface DeleteEdgeUnitCloudResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1426,7 +1426,7 @@ declare interface DeleteEdgeUnitDeployGridItemRequest {
 }
 
 declare interface DeleteEdgeUnitDeployGridItemResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1438,7 +1438,7 @@ declare interface DeleteEdgeUnitDevicesRequest {
 }
 
 declare interface DeleteEdgeUnitDevicesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1452,7 +1452,7 @@ declare interface DeleteEdgeUnitPodRequest {
 }
 
 declare interface DeleteEdgeUnitPodResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1462,7 +1462,7 @@ declare interface DeleteIotDeviceBatchRequest {
 }
 
 declare interface DeleteIotDeviceBatchResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1472,7 +1472,7 @@ declare interface DeleteIotDeviceRequest {
 }
 
 declare interface DeleteIotDeviceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1482,7 +1482,7 @@ declare interface DeleteMessageRouteRequest {
 }
 
 declare interface DeleteMessageRouteResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1494,7 +1494,7 @@ declare interface DeleteNamespaceRequest {
 }
 
 declare interface DeleteNamespaceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1512,7 +1512,7 @@ declare interface DeleteNodeUnitRequest {
 }
 
 declare interface DeleteNodeUnitResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1526,7 +1526,7 @@ declare interface DeleteSecretRequest {
 }
 
 declare interface DeleteSecretResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1558,7 +1558,7 @@ declare interface DescribeApplicationVisualizationResponse {
   HorizontalPodAutoscaler: HorizontalPodAutoscaler | null;
   /** 镜像拉取Secret */
   ImagePullSecrets: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1574,7 +1574,7 @@ declare interface DescribeApplicationYamlErrorResponse {
   ErrType: number | null;
   /** 错误信息 */
   ErrInfo: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1586,7 +1586,7 @@ declare interface DescribeApplicationYamlRequest {
 declare interface DescribeApplicationYamlResponse {
   /** base64 后的yaml */
   Yaml: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1606,7 +1606,7 @@ declare interface DescribeApplicationsResponse {
   TotalCount: number | null;
   /** 详细列表 */
   ApplicationSet: ApplicationTemplate[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1630,7 +1630,7 @@ declare interface DescribeConfigMapResponse {
   Yaml: string | null;
   /** 配置项的json格式(base64编码) */
   Json: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1646,7 +1646,7 @@ declare interface DescribeConfigMapYamlErrorResponse {
   ErrType: number | null;
   /** 错误信息 */
   ErrInfo: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1668,7 +1668,7 @@ declare interface DescribeConfigMapsRequest {
 declare interface DescribeConfigMapsResponse {
   /** ConfigMap列表 */
   Items: ConfigMapBasicInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1680,7 +1680,7 @@ declare interface DescribeDracoEdgeNodeInstallerRequest {
 declare interface DescribeDracoEdgeNodeInstallerResponse {
   /** 在线安装命名 */
   OnlineInstallationCommand: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1694,7 +1694,7 @@ declare interface DescribeEdgeAgentNodeInstallerRequest {
 declare interface DescribeEdgeAgentNodeInstallerResponse {
   /** 节点在线安装信息 */
   Online: EdgeNodeInstallerOnline | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1710,7 +1710,7 @@ declare interface DescribeEdgeDefaultVpcResponse {
   SubnetId: string | null;
   /** 子网CIDR */
   SubnetCidrBlock: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1728,7 +1728,7 @@ declare interface DescribeEdgeNodePodContainersRequest {
 declare interface DescribeEdgeNodePodContainersResponse {
   /** Pod容器列表 */
   ContainerSet: EdgeNodePodContainerInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1746,7 +1746,7 @@ declare interface DescribeEdgeNodePodsRequest {
 declare interface DescribeEdgeNodePodsResponse {
   /** Pod列表 */
   PodSet: EdgeNodePodInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1758,7 +1758,7 @@ declare interface DescribeEdgeNodeRemarkListRequest {
 declare interface DescribeEdgeNodeRemarkListResponse {
   /** 边缘单元内的备注列表 */
   Remarks: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1788,7 +1788,7 @@ declare interface DescribeEdgeNodeResponse {
   Labels: EdgeNodeLabel[];
   /** 节点资源信息 */
   Resource: EdgeNodeResourceInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1814,7 +1814,7 @@ declare interface DescribeEdgeNodesResponse {
   TotalCount: number;
   /** 节点列表 */
   NodeSet: EdgeNodeInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1840,7 +1840,7 @@ declare interface DescribeEdgeOperationLogsResponse {
   TotalCount: number | null;
   /** 操作日志列表 */
   OperationLogSet: OperationLog[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1856,7 +1856,7 @@ declare interface DescribeEdgePodRequest {
 declare interface DescribeEdgePodResponse {
   /** Pod详情信息 */
   Pod: EdgeNodePodInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1880,7 +1880,7 @@ declare interface DescribeEdgeSnNodesResponse {
   TotalCount: number | null;
   /** 节点详情 */
   NodeSet: EdgeDracoNodeInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1894,7 +1894,7 @@ declare interface DescribeEdgeUnitApplicationEventsRequest {
 declare interface DescribeEdgeUnitApplicationEventsResponse {
   /** 事件列表 */
   EventSet: Event[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1914,7 +1914,7 @@ declare interface DescribeEdgeUnitApplicationLogsRequest {
 declare interface DescribeEdgeUnitApplicationLogsResponse {
   /** 日志列表 */
   LogSet: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1930,7 +1930,7 @@ declare interface DescribeEdgeUnitApplicationPodContainersRequest {
 declare interface DescribeEdgeUnitApplicationPodContainersResponse {
   /** 容器列表 */
   ContainerSet: ContainerStatus[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1944,7 +1944,7 @@ declare interface DescribeEdgeUnitApplicationPodsRequest {
 declare interface DescribeEdgeUnitApplicationPodsResponse {
   /** Pod列表 */
   PodSet: PodStatus[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1978,7 +1978,7 @@ declare interface DescribeEdgeUnitApplicationVisualizationResponse {
   HorizontalPodAutoscaler: HorizontalPodAutoscaler | null;
   /** 镜像拉取Secret */
   ImagePullSecrets: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1994,7 +1994,7 @@ declare interface DescribeEdgeUnitApplicationYamlErrorResponse {
   ErrType: number | null;
   /** 错误信息 */
   ErrInfo: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2008,7 +2008,7 @@ declare interface DescribeEdgeUnitApplicationYamlRequest {
 declare interface DescribeEdgeUnitApplicationYamlResponse {
   /** Yaml配置 */
   Yaml: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2032,7 +2032,7 @@ declare interface DescribeEdgeUnitApplicationsResponse {
   TotalCount: number | null;
   /** 应用列表 */
   ApplicationSet: ApplicationStatusInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2078,7 +2078,7 @@ declare interface DescribeEdgeUnitCloudResponse {
   Grid: EdgeUnitStatisticItem | null;
   /** 设备统计 */
   SubDevice: EdgeUnitStatisticItem | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2100,7 +2100,7 @@ declare interface DescribeEdgeUnitDeployGridItemResponse {
   TotalCount: number;
   /** Grid部署列表 */
   DeploySet: GridItemInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2120,7 +2120,7 @@ declare interface DescribeEdgeUnitDeployGridItemYamlResponse {
   Yaml: string;
   /** 对应类型的副本数 */
   Replicas: number[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2144,7 +2144,7 @@ declare interface DescribeEdgeUnitDeployGridResponse {
   TotalCount: number;
   /** Grid列表 */
   GridSet: GridInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2166,7 +2166,7 @@ declare interface DescribeEdgeUnitExtraResponse {
   APIServerExposeAddress: string;
   /** 是否开启监控 */
   IsCreatePrometheus: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2188,7 +2188,7 @@ declare interface DescribeEdgeUnitGridEventsRequest {
 declare interface DescribeEdgeUnitGridEventsResponse {
   /** 事件列表 */
   EventSet: GridEventInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2208,7 +2208,7 @@ declare interface DescribeEdgeUnitGridPodsRequest {
 declare interface DescribeEdgeUnitGridPodsResponse {
   /** Pod列表 */
   PodSet: GridPodInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2222,7 +2222,7 @@ declare interface DescribeEdgeUnitMonitorStatusResponse {
   MonitorStatus: string;
   /** 监控是否就绪 */
   IsAvailable: boolean;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2248,7 +2248,7 @@ declare interface DescribeEdgeUnitNodeGroupResponse {
   Total: number;
   /** NodeGroup数组 */
   NodeGroupInfo: NodeGroupInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2274,7 +2274,7 @@ declare interface DescribeEdgeUnitNodeUnitTemplatesResponse {
   Total: number;
   /** NodeUnit模板列表 */
   NodeUnitTemplates: NodeUnitTemplate[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2294,7 +2294,7 @@ declare interface DescribeEdgeUnitsCloudResponse {
   TotalCount: number | null;
   /** 集群详情 */
   EdgeUnitSet: EdgeCloudCluster[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2344,7 +2344,7 @@ declare interface DescribeIotDeviceResponse {
   UnitID: number;
   /** 无 */
   UnitName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2368,7 +2368,7 @@ declare interface DescribeIotDevicesResponse {
   TotalCount: number;
   /** 设备列表 */
   DeviceSet: IotDevicesInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2392,7 +2392,7 @@ declare interface DescribeMessageRouteListResponse {
   RouteList: RouteInfo[];
   /** 无 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2420,7 +2420,7 @@ declare interface DescribeMonitorMetricsRequest {
 declare interface DescribeMonitorMetricsResponse {
   /** 查询监控指标结果 */
   Metrics: MonitorMetricsColumn[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2441,7 +2441,7 @@ declare interface DescribeNamespaceResourcesRequest {
 declare interface DescribeNamespaceResourcesResponse {
   /** 资源列表 */
   Resources: NamespaceResource[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2458,7 +2458,7 @@ declare interface DescribeNamespaceResponse {
   Protected: boolean | null;
   /** Yaml文件格式 */
   Yaml: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2472,7 +2472,7 @@ declare interface DescribeNamespacesRequest {
 declare interface DescribeNamespacesResponse {
   /** 命名空间信息列表 */
   Items: NamespaceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2496,7 +2496,7 @@ declare interface DescribeNodeUnitResponse {
   TotalCount: number;
   /** NodeUnit信息数组 */
   NodeGridInfo: NodeUnitInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2522,7 +2522,7 @@ declare interface DescribeNodeUnitTemplateOnNodeGroupResponse {
   Total: number;
   /** NodeUnit模板 */
   NodeUnitTemplates: NodeGroupNodeUnitTemplateInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2546,7 +2546,7 @@ declare interface DescribeSecretResponse {
   Yaml: string | null;
   /** secret的json格式 */
   Json: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2562,7 +2562,7 @@ declare interface DescribeSecretYamlErrorResponse {
   ErrType: number | null;
   /** 错误信息 */
   ErrInfo: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2588,7 +2588,7 @@ declare interface DescribeSecretsResponse {
   TotalCount: number | null;
   /** Secret列表 */
   Items: SecretItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2606,7 +2606,7 @@ declare interface DescribeYeheResourceLimitResponse {
   EnablePermMonitor: boolean | null;
   /** 节点是否有admin的所有权限 */
   EnablePermAdminNode: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2626,7 +2626,7 @@ declare interface GetMarketComponentListResponse {
   ComponentList: MarketComponentInfo[];
   /** 组件总数 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2654,7 +2654,7 @@ declare interface GetMarketComponentResponse {
   Version: string;
   /** 组件可视化配置 */
   WorkloadVisualConfig: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2666,7 +2666,7 @@ declare interface ModifyApplicationBasicInfoRequest {
 }
 
 declare interface ModifyApplicationBasicInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2698,7 +2698,7 @@ declare interface ModifyApplicationVisualizationRequest {
 }
 
 declare interface ModifyApplicationVisualizationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2714,7 +2714,7 @@ declare interface ModifyConfigMapRequest {
 }
 
 declare interface ModifyConfigMapResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2730,7 +2730,7 @@ declare interface ModifyEdgeDracoNodeRequest {
 }
 
 declare interface ModifyEdgeDracoNodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2744,7 +2744,7 @@ declare interface ModifyEdgeNodeLabelsRequest {
 }
 
 declare interface ModifyEdgeNodeLabelsResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2758,7 +2758,7 @@ declare interface ModifyEdgeUnitApplicationBasicInfoRequest {
 }
 
 declare interface ModifyEdgeUnitApplicationBasicInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2790,7 +2790,7 @@ declare interface ModifyEdgeUnitApplicationVisualizationRequest {
 }
 
 declare interface ModifyEdgeUnitApplicationVisualizationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2804,7 +2804,7 @@ declare interface ModifyEdgeUnitApplicationYamlRequest {
 }
 
 declare interface ModifyEdgeUnitApplicationYamlResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2820,7 +2820,7 @@ declare interface ModifyEdgeUnitCloudApiRequest {
 }
 
 declare interface ModifyEdgeUnitCloudApiResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2838,7 +2838,7 @@ declare interface ModifyEdgeUnitDeployGridItemRequest {
 }
 
 declare interface ModifyEdgeUnitDeployGridItemResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2852,7 +2852,7 @@ declare interface ModifyEdgeUnitRequest {
 }
 
 declare interface ModifyEdgeUnitResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2870,7 +2870,7 @@ declare interface ModifyIotDeviceRequest {
 }
 
 declare interface ModifyIotDeviceResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2884,7 +2884,7 @@ declare interface ModifyNodeUnitTemplateRequest {
 }
 
 declare interface ModifyNodeUnitTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2900,7 +2900,7 @@ declare interface ModifySecretRequest {
 }
 
 declare interface ModifySecretResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2912,7 +2912,7 @@ declare interface RedeployEdgeUnitApplicationRequest {
 }
 
 declare interface RedeployEdgeUnitApplicationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2924,216 +2924,216 @@ declare interface SetRouteOnOffRequest {
 }
 
 declare interface SetRouteOnOffResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Iecp 物联网边缘计算平台} */
 declare interface Iecp {
   (): Versions;
-  /** {@link ApplyMarketComponent 使用组件市场中的组件}({@link ApplyMarketComponentRequest 请求参数}): {@link ApplyMarketComponentResponse 返回参数} */
+  /** 使用组件市场中的组件 {@link ApplyMarketComponentRequest} {@link ApplyMarketComponentResponse} */
   ApplyMarketComponent(data: ApplyMarketComponentRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyMarketComponentResponse>;
-  /** {@link BuildMessageRoute 建立消息路由}({@link BuildMessageRouteRequest 请求参数}): {@link BuildMessageRouteResponse 返回参数} */
+  /** 建立消息路由 {@link BuildMessageRouteRequest} {@link BuildMessageRouteResponse} */
   BuildMessageRoute(data: BuildMessageRouteRequest, config?: AxiosRequestConfig): AxiosPromise<BuildMessageRouteResponse>;
-  /** {@link CreateApplicationVisualization 创建可视化创建应用模板}({@link CreateApplicationVisualizationRequest 请求参数}): {@link CreateApplicationVisualizationResponse 返回参数} */
+  /** 创建可视化创建应用模板 {@link CreateApplicationVisualizationRequest} {@link CreateApplicationVisualizationResponse} */
   CreateApplicationVisualization(data: CreateApplicationVisualizationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationVisualizationResponse>;
-  /** {@link CreateConfigMap 创建ConfigMap}({@link CreateConfigMapRequest 请求参数}): {@link CreateConfigMapResponse 返回参数} */
+  /** 创建ConfigMap {@link CreateConfigMapRequest} {@link CreateConfigMapResponse} */
   CreateConfigMap(data: CreateConfigMapRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigMapResponse>;
-  /** {@link CreateEdgeNode 创建边缘节点}({@link CreateEdgeNodeRequest 请求参数}): {@link CreateEdgeNodeResponse 返回参数} */
+  /** 创建边缘节点 {@link CreateEdgeNodeRequest} {@link CreateEdgeNodeResponse} */
   CreateEdgeNode(data: CreateEdgeNodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeNodeResponse>;
-  /** {@link CreateEdgeNodeBatch 批量预注册节点}({@link CreateEdgeNodeBatchRequest 请求参数}): {@link CreateEdgeNodeBatchResponse 返回参数} */
+  /** 批量预注册节点 {@link CreateEdgeNodeBatchRequest} {@link CreateEdgeNodeBatchResponse} */
   CreateEdgeNodeBatch(data: CreateEdgeNodeBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeNodeBatchResponse>;
-  /** {@link CreateEdgeNodeGroup 创建边缘单元NodeGroup}({@link CreateEdgeNodeGroupRequest 请求参数}): {@link CreateEdgeNodeGroupResponse 返回参数} */
+  /** 创建边缘单元NodeGroup {@link CreateEdgeNodeGroupRequest} {@link CreateEdgeNodeGroupResponse} */
   CreateEdgeNodeGroup(data: CreateEdgeNodeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeNodeGroupResponse>;
-  /** {@link CreateEdgeNodeUnitTemplate 创建边缘单元NodeUnit模板}({@link CreateEdgeNodeUnitTemplateRequest 请求参数}): {@link CreateEdgeNodeUnitTemplateResponse 返回参数} */
+  /** 创建边缘单元NodeUnit模板 {@link CreateEdgeNodeUnitTemplateRequest} {@link CreateEdgeNodeUnitTemplateResponse} */
   CreateEdgeNodeUnitTemplate(data: CreateEdgeNodeUnitTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeNodeUnitTemplateResponse>;
-  /** {@link CreateEdgeUnitApplicationVisualization 可视化创建应用}({@link CreateEdgeUnitApplicationVisualizationRequest 请求参数}): {@link CreateEdgeUnitApplicationVisualizationResponse 返回参数} */
+  /** 可视化创建应用 {@link CreateEdgeUnitApplicationVisualizationRequest} {@link CreateEdgeUnitApplicationVisualizationResponse} */
   CreateEdgeUnitApplicationVisualization(data: CreateEdgeUnitApplicationVisualizationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeUnitApplicationVisualizationResponse>;
-  /** {@link CreateEdgeUnitApplicationYaml yaml方式创建应用}({@link CreateEdgeUnitApplicationYamlRequest 请求参数}): {@link CreateEdgeUnitApplicationYamlResponse 返回参数} */
+  /** yaml方式创建应用 {@link CreateEdgeUnitApplicationYamlRequest} {@link CreateEdgeUnitApplicationYamlResponse} */
   CreateEdgeUnitApplicationYaml(data: CreateEdgeUnitApplicationYamlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeUnitApplicationYamlResponse>;
-  /** {@link CreateEdgeUnitCloud 创建边缘单元}({@link CreateEdgeUnitCloudRequest 请求参数}): {@link CreateEdgeUnitCloudResponse 返回参数} */
+  /** 创建边缘单元 {@link CreateEdgeUnitCloudRequest} {@link CreateEdgeUnitCloudResponse} */
   CreateEdgeUnitCloud(data: CreateEdgeUnitCloudRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeUnitCloudResponse>;
-  /** {@link CreateEdgeUnitDevices 批量绑定设备到单元}({@link CreateEdgeUnitDevicesRequest 请求参数}): {@link CreateEdgeUnitDevicesResponse 返回参数} */
+  /** 批量绑定设备到单元 {@link CreateEdgeUnitDevicesRequest} {@link CreateEdgeUnitDevicesResponse} */
   CreateEdgeUnitDevices(data: CreateEdgeUnitDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeUnitDevicesResponse>;
-  /** {@link CreateIotDevice 创建子设备}({@link CreateIotDeviceRequest 请求参数}): {@link CreateIotDeviceResponse 返回参数} */
+  /** 创建子设备 {@link CreateIotDeviceRequest} {@link CreateIotDeviceResponse} */
   CreateIotDevice(data: CreateIotDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIotDeviceResponse>;
-  /** {@link CreateMessageRoute 创建消息路由}({@link CreateMessageRouteRequest 请求参数}): {@link CreateMessageRouteResponse 返回参数} */
+  /** 创建消息路由 {@link CreateMessageRouteRequest} {@link CreateMessageRouteResponse} */
   CreateMessageRoute(data: CreateMessageRouteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMessageRouteResponse>;
-  /** {@link CreateNamespace 创建命名空间}({@link CreateNamespaceRequest 请求参数}): {@link CreateNamespaceResponse 返回参数} */
+  /** 创建命名空间 {@link CreateNamespaceRequest} {@link CreateNamespaceResponse} */
   CreateNamespace(data: CreateNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNamespaceResponse>;
-  /** {@link CreateSecret 创建Secret}({@link CreateSecretRequest 请求参数}): {@link CreateSecretResponse 返回参数} */
+  /** 创建Secret {@link CreateSecretRequest} {@link CreateSecretResponse} */
   CreateSecret(data: CreateSecretRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecretResponse>;
-  /** {@link CreateUpdateNodeUnit 创建或更新边缘单元NodeUnit}({@link CreateUpdateNodeUnitRequest 请求参数}): {@link CreateUpdateNodeUnitResponse 返回参数} */
+  /** 创建或更新边缘单元NodeUnit {@link CreateUpdateNodeUnitRequest} {@link CreateUpdateNodeUnitResponse} */
   CreateUpdateNodeUnit(data: CreateUpdateNodeUnitRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUpdateNodeUnitResponse>;
-  /** {@link CreateUserToken 创建token}({@link CreateUserTokenRequest 请求参数}): {@link CreateUserTokenResponse 返回参数} */
+  /** 创建token {@link CreateUserTokenRequest} {@link CreateUserTokenResponse} */
   CreateUserToken(data?: CreateUserTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserTokenResponse>;
-  /** {@link DeleteApplications 删除应用模板}({@link DeleteApplicationsRequest 请求参数}): {@link DeleteApplicationsResponse 返回参数} */
+  /** 删除应用模板 {@link DeleteApplicationsRequest} {@link DeleteApplicationsResponse} */
   DeleteApplications(data: DeleteApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationsResponse>;
-  /** {@link DeleteConfigMap 删除ConfigMap}({@link DeleteConfigMapRequest 请求参数}): {@link DeleteConfigMapResponse 返回参数} */
+  /** 删除ConfigMap {@link DeleteConfigMapRequest} {@link DeleteConfigMapResponse} */
   DeleteConfigMap(data: DeleteConfigMapRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigMapResponse>;
-  /** {@link DeleteEdgeNodeGroup 删除边缘单元NodeGroup}({@link DeleteEdgeNodeGroupRequest 请求参数}): {@link DeleteEdgeNodeGroupResponse 返回参数} */
+  /** 删除边缘单元NodeGroup {@link DeleteEdgeNodeGroupRequest} {@link DeleteEdgeNodeGroupResponse} */
   DeleteEdgeNodeGroup(data: DeleteEdgeNodeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeNodeGroupResponse>;
-  /** {@link DeleteEdgeNodeUnitTemplates 删除边缘单元NodeUnit模板}({@link DeleteEdgeNodeUnitTemplatesRequest 请求参数}): {@link DeleteEdgeNodeUnitTemplatesResponse 返回参数} */
+  /** 删除边缘单元NodeUnit模板 {@link DeleteEdgeNodeUnitTemplatesRequest} {@link DeleteEdgeNodeUnitTemplatesResponse} */
   DeleteEdgeNodeUnitTemplates(data: DeleteEdgeNodeUnitTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeNodeUnitTemplatesResponse>;
-  /** {@link DeleteEdgeNodes 批量删除边缘节点}({@link DeleteEdgeNodesRequest 请求参数}): {@link DeleteEdgeNodesResponse 返回参数} */
+  /** 批量删除边缘节点 {@link DeleteEdgeNodesRequest} {@link DeleteEdgeNodesResponse} */
   DeleteEdgeNodes(data: DeleteEdgeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeNodesResponse>;
-  /** {@link DeleteEdgeUnitApplications 删除应用列表}({@link DeleteEdgeUnitApplicationsRequest 请求参数}): {@link DeleteEdgeUnitApplicationsResponse 返回参数} */
+  /** 删除应用列表 {@link DeleteEdgeUnitApplicationsRequest} {@link DeleteEdgeUnitApplicationsResponse} */
   DeleteEdgeUnitApplications(data: DeleteEdgeUnitApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeUnitApplicationsResponse>;
-  /** {@link DeleteEdgeUnitCloud 删除边缘单元}({@link DeleteEdgeUnitCloudRequest 请求参数}): {@link DeleteEdgeUnitCloudResponse 返回参数} */
+  /** 删除边缘单元 {@link DeleteEdgeUnitCloudRequest} {@link DeleteEdgeUnitCloudResponse} */
   DeleteEdgeUnitCloud(data: DeleteEdgeUnitCloudRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeUnitCloudResponse>;
-  /** {@link DeleteEdgeUnitDeployGridItem 重新部署边缘单元指定Grid下应用}({@link DeleteEdgeUnitDeployGridItemRequest 请求参数}): {@link DeleteEdgeUnitDeployGridItemResponse 返回参数} */
+  /** 重新部署边缘单元指定Grid下应用 {@link DeleteEdgeUnitDeployGridItemRequest} {@link DeleteEdgeUnitDeployGridItemResponse} */
   DeleteEdgeUnitDeployGridItem(data: DeleteEdgeUnitDeployGridItemRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeUnitDeployGridItemResponse>;
-  /** {@link DeleteEdgeUnitDevices 批量解绑单元设备}({@link DeleteEdgeUnitDevicesRequest 请求参数}): {@link DeleteEdgeUnitDevicesResponse 返回参数} */
+  /** 批量解绑单元设备 {@link DeleteEdgeUnitDevicesRequest} {@link DeleteEdgeUnitDevicesResponse} */
   DeleteEdgeUnitDevices(data: DeleteEdgeUnitDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeUnitDevicesResponse>;
-  /** {@link DeleteEdgeUnitPod 删除指定pod}({@link DeleteEdgeUnitPodRequest 请求参数}): {@link DeleteEdgeUnitPodResponse 返回参数} */
+  /** 删除指定pod {@link DeleteEdgeUnitPodRequest} {@link DeleteEdgeUnitPodResponse} */
   DeleteEdgeUnitPod(data: DeleteEdgeUnitPodRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeUnitPodResponse>;
-  /** {@link DeleteIotDevice 删除设备}({@link DeleteIotDeviceRequest 请求参数}): {@link DeleteIotDeviceResponse 返回参数} */
+  /** 删除设备 {@link DeleteIotDeviceRequest} {@link DeleteIotDeviceResponse} */
   DeleteIotDevice(data: DeleteIotDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIotDeviceResponse>;
-  /** {@link DeleteIotDeviceBatch 批量删除设备}({@link DeleteIotDeviceBatchRequest 请求参数}): {@link DeleteIotDeviceBatchResponse 返回参数} */
+  /** 批量删除设备 {@link DeleteIotDeviceBatchRequest} {@link DeleteIotDeviceBatchResponse} */
   DeleteIotDeviceBatch(data: DeleteIotDeviceBatchRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIotDeviceBatchResponse>;
-  /** {@link DeleteMessageRoute 删除消息路由}({@link DeleteMessageRouteRequest 请求参数}): {@link DeleteMessageRouteResponse 返回参数} */
+  /** 删除消息路由 {@link DeleteMessageRouteRequest} {@link DeleteMessageRouteResponse} */
   DeleteMessageRoute(data: DeleteMessageRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMessageRouteResponse>;
-  /** {@link DeleteNamespace 删除命名空间}({@link DeleteNamespaceRequest 请求参数}): {@link DeleteNamespaceResponse 返回参数} */
+  /** 删除命名空间 {@link DeleteNamespaceRequest} {@link DeleteNamespaceResponse} */
   DeleteNamespace(data: DeleteNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNamespaceResponse>;
-  /** {@link DeleteNodeUnit 删除边缘单元NodeUnit}({@link DeleteNodeUnitRequest 请求参数}): {@link DeleteNodeUnitResponse 返回参数} */
+  /** 删除边缘单元NodeUnit {@link DeleteNodeUnitRequest} {@link DeleteNodeUnitResponse} */
   DeleteNodeUnit(data: DeleteNodeUnitRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNodeUnitResponse>;
-  /** {@link DeleteSecret 删除Secret}({@link DeleteSecretRequest 请求参数}): {@link DeleteSecretResponse 返回参数} */
+  /** 删除Secret {@link DeleteSecretRequest} {@link DeleteSecretResponse} */
   DeleteSecret(data: DeleteSecretRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecretResponse>;
-  /** {@link DescribeApplicationVisualization 获取应用模板可视化配置信息}({@link DescribeApplicationVisualizationRequest 请求参数}): {@link DescribeApplicationVisualizationResponse 返回参数} */
+  /** 获取应用模板可视化配置信息 {@link DescribeApplicationVisualizationRequest} {@link DescribeApplicationVisualizationResponse} */
   DescribeApplicationVisualization(data: DescribeApplicationVisualizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationVisualizationResponse>;
-  /** {@link DescribeApplicationYaml 查询应用模板Yaml}({@link DescribeApplicationYamlRequest 请求参数}): {@link DescribeApplicationYamlResponse 返回参数} */
+  /** 查询应用模板Yaml {@link DescribeApplicationYamlRequest} {@link DescribeApplicationYamlResponse} */
   DescribeApplicationYaml(data: DescribeApplicationYamlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationYamlResponse>;
-  /** {@link DescribeApplicationYamlError 检查应用模板的Yaml配置}({@link DescribeApplicationYamlErrorRequest 请求参数}): {@link DescribeApplicationYamlErrorResponse 返回参数} */
+  /** 检查应用模板的Yaml配置 {@link DescribeApplicationYamlErrorRequest} {@link DescribeApplicationYamlErrorResponse} */
   DescribeApplicationYamlError(data: DescribeApplicationYamlErrorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationYamlErrorResponse>;
-  /** {@link DescribeApplications 获取应用模板列表}({@link DescribeApplicationsRequest 请求参数}): {@link DescribeApplicationsResponse 返回参数} */
+  /** 获取应用模板列表 {@link DescribeApplicationsRequest} {@link DescribeApplicationsResponse} */
   DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
-  /** {@link DescribeConfigMap 获取ConfigMap详情}({@link DescribeConfigMapRequest 请求参数}): {@link DescribeConfigMapResponse 返回参数} */
+  /** 获取ConfigMap详情 {@link DescribeConfigMapRequest} {@link DescribeConfigMapResponse} */
   DescribeConfigMap(data: DescribeConfigMapRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigMapResponse>;
-  /** {@link DescribeConfigMapYamlError 校验ConfigMap的Yaml语法}({@link DescribeConfigMapYamlErrorRequest 请求参数}): {@link DescribeConfigMapYamlErrorResponse 返回参数} */
+  /** 校验ConfigMap的Yaml语法 {@link DescribeConfigMapYamlErrorRequest} {@link DescribeConfigMapYamlErrorResponse} */
   DescribeConfigMapYamlError(data: DescribeConfigMapYamlErrorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigMapYamlErrorResponse>;
-  /** {@link DescribeConfigMaps 获取ConfigMap列表}({@link DescribeConfigMapsRequest 请求参数}): {@link DescribeConfigMapsResponse 返回参数} */
+  /** 获取ConfigMap列表 {@link DescribeConfigMapsRequest} {@link DescribeConfigMapsResponse} */
   DescribeConfigMaps(data: DescribeConfigMapsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigMapsResponse>;
-  /** {@link DescribeDracoEdgeNodeInstaller 自动获取Draco设备的安装包}({@link DescribeDracoEdgeNodeInstallerRequest 请求参数}): {@link DescribeDracoEdgeNodeInstallerResponse 返回参数} */
+  /** 自动获取Draco设备的安装包 {@link DescribeDracoEdgeNodeInstallerRequest} {@link DescribeDracoEdgeNodeInstallerResponse} */
   DescribeDracoEdgeNodeInstaller(data: DescribeDracoEdgeNodeInstallerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDracoEdgeNodeInstallerResponse>;
-  /** {@link DescribeEdgeAgentNodeInstaller 获取节点安装信息}({@link DescribeEdgeAgentNodeInstallerRequest 请求参数}): {@link DescribeEdgeAgentNodeInstallerResponse 返回参数} */
+  /** 获取节点安装信息 {@link DescribeEdgeAgentNodeInstallerRequest} {@link DescribeEdgeAgentNodeInstallerResponse} */
   DescribeEdgeAgentNodeInstaller(data: DescribeEdgeAgentNodeInstallerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeAgentNodeInstallerResponse>;
-  /** {@link DescribeEdgeDefaultVpc 获取边缘集群默认VPC信息}({@link DescribeEdgeDefaultVpcRequest 请求参数}): {@link DescribeEdgeDefaultVpcResponse 返回参数} */
+  /** 获取边缘集群默认VPC信息 {@link DescribeEdgeDefaultVpcRequest} {@link DescribeEdgeDefaultVpcResponse} */
   DescribeEdgeDefaultVpc(data?: DescribeEdgeDefaultVpcRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeDefaultVpcResponse>;
-  /** {@link DescribeEdgeNode 获取边缘节点信息}({@link DescribeEdgeNodeRequest 请求参数}): {@link DescribeEdgeNodeResponse 返回参数} */
+  /** 获取边缘节点信息 {@link DescribeEdgeNodeRequest} {@link DescribeEdgeNodeResponse} */
   DescribeEdgeNode(data: DescribeEdgeNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeNodeResponse>;
-  /** {@link DescribeEdgeNodePodContainers 查询节点Pod内的容器列表}({@link DescribeEdgeNodePodContainersRequest 请求参数}): {@link DescribeEdgeNodePodContainersResponse 返回参数} */
+  /** 查询节点Pod内的容器列表 {@link DescribeEdgeNodePodContainersRequest} {@link DescribeEdgeNodePodContainersResponse} */
   DescribeEdgeNodePodContainers(data: DescribeEdgeNodePodContainersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeNodePodContainersResponse>;
-  /** {@link DescribeEdgeNodePods 查询节点Pod列表}({@link DescribeEdgeNodePodsRequest 请求参数}): {@link DescribeEdgeNodePodsResponse 返回参数} */
+  /** 查询节点Pod列表 {@link DescribeEdgeNodePodsRequest} {@link DescribeEdgeNodePodsResponse} */
   DescribeEdgeNodePods(data: DescribeEdgeNodePodsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeNodePodsResponse>;
-  /** {@link DescribeEdgeNodeRemarkList 获取节点备注信息列表}({@link DescribeEdgeNodeRemarkListRequest 请求参数}): {@link DescribeEdgeNodeRemarkListResponse 返回参数} */
+  /** 获取节点备注信息列表 {@link DescribeEdgeNodeRemarkListRequest} {@link DescribeEdgeNodeRemarkListResponse} */
   DescribeEdgeNodeRemarkList(data: DescribeEdgeNodeRemarkListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeNodeRemarkListResponse>;
-  /** {@link DescribeEdgeNodes 查询边缘节点列表}({@link DescribeEdgeNodesRequest 请求参数}): {@link DescribeEdgeNodesResponse 返回参数} */
+  /** 查询边缘节点列表 {@link DescribeEdgeNodesRequest} {@link DescribeEdgeNodesResponse} */
   DescribeEdgeNodes(data: DescribeEdgeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeNodesResponse>;
-  /** {@link DescribeEdgeOperationLogs 查询边缘操作日志}({@link DescribeEdgeOperationLogsRequest 请求参数}): {@link DescribeEdgeOperationLogsResponse 返回参数} */
+  /** 查询边缘操作日志 {@link DescribeEdgeOperationLogsRequest} {@link DescribeEdgeOperationLogsResponse} */
   DescribeEdgeOperationLogs(data: DescribeEdgeOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeOperationLogsResponse>;
-  /** {@link DescribeEdgePod 查询边缘单元Pod}({@link DescribeEdgePodRequest 请求参数}): {@link DescribeEdgePodResponse 返回参数} */
+  /** 查询边缘单元Pod {@link DescribeEdgePodRequest} {@link DescribeEdgePodResponse} */
   DescribeEdgePod(data: DescribeEdgePodRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgePodResponse>;
-  /** {@link DescribeEdgeSnNodes 查询预注册节点列表}({@link DescribeEdgeSnNodesRequest 请求参数}): {@link DescribeEdgeSnNodesResponse 返回参数} */
+  /** 查询预注册节点列表 {@link DescribeEdgeSnNodesRequest} {@link DescribeEdgeSnNodesResponse} */
   DescribeEdgeSnNodes(data: DescribeEdgeSnNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeSnNodesResponse>;
-  /** {@link DescribeEdgeUnitApplicationEvents 获取应用事件列表}({@link DescribeEdgeUnitApplicationEventsRequest 请求参数}): {@link DescribeEdgeUnitApplicationEventsResponse 返回参数} */
+  /** 获取应用事件列表 {@link DescribeEdgeUnitApplicationEventsRequest} {@link DescribeEdgeUnitApplicationEventsResponse} */
   DescribeEdgeUnitApplicationEvents(data: DescribeEdgeUnitApplicationEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationEventsResponse>;
-  /** {@link DescribeEdgeUnitApplicationLogs 获取应用日志}({@link DescribeEdgeUnitApplicationLogsRequest 请求参数}): {@link DescribeEdgeUnitApplicationLogsResponse 返回参数} */
+  /** 获取应用日志 {@link DescribeEdgeUnitApplicationLogsRequest} {@link DescribeEdgeUnitApplicationLogsResponse} */
   DescribeEdgeUnitApplicationLogs(data: DescribeEdgeUnitApplicationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationLogsResponse>;
-  /** {@link DescribeEdgeUnitApplicationPodContainers 获取应用容器状态}({@link DescribeEdgeUnitApplicationPodContainersRequest 请求参数}): {@link DescribeEdgeUnitApplicationPodContainersResponse 返回参数} */
+  /** 获取应用容器状态 {@link DescribeEdgeUnitApplicationPodContainersRequest} {@link DescribeEdgeUnitApplicationPodContainersResponse} */
   DescribeEdgeUnitApplicationPodContainers(data: DescribeEdgeUnitApplicationPodContainersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationPodContainersResponse>;
-  /** {@link DescribeEdgeUnitApplicationPods 获取应用下Pod状态}({@link DescribeEdgeUnitApplicationPodsRequest 请求参数}): {@link DescribeEdgeUnitApplicationPodsResponse 返回参数} */
+  /** 获取应用下Pod状态 {@link DescribeEdgeUnitApplicationPodsRequest} {@link DescribeEdgeUnitApplicationPodsResponse} */
   DescribeEdgeUnitApplicationPods(data: DescribeEdgeUnitApplicationPodsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationPodsResponse>;
-  /** {@link DescribeEdgeUnitApplicationVisualization 获取单元可视化配置信息}({@link DescribeEdgeUnitApplicationVisualizationRequest 请求参数}): {@link DescribeEdgeUnitApplicationVisualizationResponse 返回参数} */
+  /** 获取单元可视化配置信息 {@link DescribeEdgeUnitApplicationVisualizationRequest} {@link DescribeEdgeUnitApplicationVisualizationResponse} */
   DescribeEdgeUnitApplicationVisualization(data: DescribeEdgeUnitApplicationVisualizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationVisualizationResponse>;
-  /** {@link DescribeEdgeUnitApplicationYaml 获取应用的Yaml配置}({@link DescribeEdgeUnitApplicationYamlRequest 请求参数}): {@link DescribeEdgeUnitApplicationYamlResponse 返回参数} */
+  /** 获取应用的Yaml配置 {@link DescribeEdgeUnitApplicationYamlRequest} {@link DescribeEdgeUnitApplicationYamlResponse} */
   DescribeEdgeUnitApplicationYaml(data: DescribeEdgeUnitApplicationYamlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationYamlResponse>;
-  /** {@link DescribeEdgeUnitApplicationYamlError 检查单元应用的Yaml配置}({@link DescribeEdgeUnitApplicationYamlErrorRequest 请求参数}): {@link DescribeEdgeUnitApplicationYamlErrorResponse 返回参数} */
+  /** 检查单元应用的Yaml配置 {@link DescribeEdgeUnitApplicationYamlErrorRequest} {@link DescribeEdgeUnitApplicationYamlErrorResponse} */
   DescribeEdgeUnitApplicationYamlError(data: DescribeEdgeUnitApplicationYamlErrorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationYamlErrorResponse>;
-  /** {@link DescribeEdgeUnitApplications 获取单元下应用列表}({@link DescribeEdgeUnitApplicationsRequest 请求参数}): {@link DescribeEdgeUnitApplicationsResponse 返回参数} */
+  /** 获取单元下应用列表 {@link DescribeEdgeUnitApplicationsRequest} {@link DescribeEdgeUnitApplicationsResponse} */
   DescribeEdgeUnitApplications(data: DescribeEdgeUnitApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitApplicationsResponse>;
-  /** {@link DescribeEdgeUnitCloud 查询边缘集群详情}({@link DescribeEdgeUnitCloudRequest 请求参数}): {@link DescribeEdgeUnitCloudResponse 返回参数} */
+  /** 查询边缘集群详情 {@link DescribeEdgeUnitCloudRequest} {@link DescribeEdgeUnitCloudResponse} */
   DescribeEdgeUnitCloud(data: DescribeEdgeUnitCloudRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitCloudResponse>;
-  /** {@link DescribeEdgeUnitDeployGrid 查询边缘单元Grid列表}({@link DescribeEdgeUnitDeployGridRequest 请求参数}): {@link DescribeEdgeUnitDeployGridResponse 返回参数} */
+  /** 查询边缘单元Grid列表 {@link DescribeEdgeUnitDeployGridRequest} {@link DescribeEdgeUnitDeployGridResponse} */
   DescribeEdgeUnitDeployGrid(data: DescribeEdgeUnitDeployGridRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitDeployGridResponse>;
-  /** {@link DescribeEdgeUnitDeployGridItem 查询边缘单元指定Grid下的部署应用列表}({@link DescribeEdgeUnitDeployGridItemRequest 请求参数}): {@link DescribeEdgeUnitDeployGridItemResponse 返回参数} */
+  /** 查询边缘单元指定Grid下的部署应用列表 {@link DescribeEdgeUnitDeployGridItemRequest} {@link DescribeEdgeUnitDeployGridItemResponse} */
   DescribeEdgeUnitDeployGridItem(data: DescribeEdgeUnitDeployGridItemRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitDeployGridItemResponse>;
-  /** {@link DescribeEdgeUnitDeployGridItemYaml 查询指定Grid下应用的Yaml}({@link DescribeEdgeUnitDeployGridItemYamlRequest 请求参数}): {@link DescribeEdgeUnitDeployGridItemYamlResponse 返回参数} */
+  /** 查询指定Grid下应用的Yaml {@link DescribeEdgeUnitDeployGridItemYamlRequest} {@link DescribeEdgeUnitDeployGridItemYamlResponse} */
   DescribeEdgeUnitDeployGridItemYaml(data: DescribeEdgeUnitDeployGridItemYamlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitDeployGridItemYamlResponse>;
-  /** {@link DescribeEdgeUnitExtra 查询边缘单元额外信息}({@link DescribeEdgeUnitExtraRequest 请求参数}): {@link DescribeEdgeUnitExtraResponse 返回参数} */
+  /** 查询边缘单元额外信息 {@link DescribeEdgeUnitExtraRequest} {@link DescribeEdgeUnitExtraResponse} */
   DescribeEdgeUnitExtra(data: DescribeEdgeUnitExtraRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitExtraResponse>;
-  /** {@link DescribeEdgeUnitGridEvents 查询边缘单元Grid事件列表}({@link DescribeEdgeUnitGridEventsRequest 请求参数}): {@link DescribeEdgeUnitGridEventsResponse 返回参数} */
+  /** 查询边缘单元Grid事件列表 {@link DescribeEdgeUnitGridEventsRequest} {@link DescribeEdgeUnitGridEventsResponse} */
   DescribeEdgeUnitGridEvents(data: DescribeEdgeUnitGridEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitGridEventsResponse>;
-  /** {@link DescribeEdgeUnitGridPods 查询边缘单元Grid的Pod列表}({@link DescribeEdgeUnitGridPodsRequest 请求参数}): {@link DescribeEdgeUnitGridPodsResponse 返回参数} */
+  /** 查询边缘单元Grid的Pod列表 {@link DescribeEdgeUnitGridPodsRequest} {@link DescribeEdgeUnitGridPodsResponse} */
   DescribeEdgeUnitGridPods(data: DescribeEdgeUnitGridPodsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitGridPodsResponse>;
-  /** {@link DescribeEdgeUnitMonitorStatus 查询边缘集群监控状态}({@link DescribeEdgeUnitMonitorStatusRequest 请求参数}): {@link DescribeEdgeUnitMonitorStatusResponse 返回参数} */
+  /** 查询边缘集群监控状态 {@link DescribeEdgeUnitMonitorStatusRequest} {@link DescribeEdgeUnitMonitorStatusResponse} */
   DescribeEdgeUnitMonitorStatus(data: DescribeEdgeUnitMonitorStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitMonitorStatusResponse>;
-  /** {@link DescribeEdgeUnitNodeGroup 查询边缘单元NodeGroup列表}({@link DescribeEdgeUnitNodeGroupRequest 请求参数}): {@link DescribeEdgeUnitNodeGroupResponse 返回参数} */
+  /** 查询边缘单元NodeGroup列表 {@link DescribeEdgeUnitNodeGroupRequest} {@link DescribeEdgeUnitNodeGroupResponse} */
   DescribeEdgeUnitNodeGroup(data: DescribeEdgeUnitNodeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitNodeGroupResponse>;
-  /** {@link DescribeEdgeUnitNodeUnitTemplates 查询边缘单元EdgeUnit模板列表}({@link DescribeEdgeUnitNodeUnitTemplatesRequest 请求参数}): {@link DescribeEdgeUnitNodeUnitTemplatesResponse 返回参数} */
+  /** 查询边缘单元EdgeUnit模板列表 {@link DescribeEdgeUnitNodeUnitTemplatesRequest} {@link DescribeEdgeUnitNodeUnitTemplatesResponse} */
   DescribeEdgeUnitNodeUnitTemplates(data: DescribeEdgeUnitNodeUnitTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitNodeUnitTemplatesResponse>;
-  /** {@link DescribeEdgeUnitsCloud 查询边缘单元列表}({@link DescribeEdgeUnitsCloudRequest 请求参数}): {@link DescribeEdgeUnitsCloudResponse 返回参数} */
+  /** 查询边缘单元列表 {@link DescribeEdgeUnitsCloudRequest} {@link DescribeEdgeUnitsCloudResponse} */
   DescribeEdgeUnitsCloud(data: DescribeEdgeUnitsCloudRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeUnitsCloudResponse>;
-  /** {@link DescribeIotDevice 获取设备信息}({@link DescribeIotDeviceRequest 请求参数}): {@link DescribeIotDeviceResponse 返回参数} */
+  /** 获取设备信息 {@link DescribeIotDeviceRequest} {@link DescribeIotDeviceResponse} */
   DescribeIotDevice(data?: DescribeIotDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIotDeviceResponse>;
-  /** {@link DescribeIotDevices 获取设备列表信息}({@link DescribeIotDevicesRequest 请求参数}): {@link DescribeIotDevicesResponse 返回参数} */
+  /** 获取设备列表信息 {@link DescribeIotDevicesRequest} {@link DescribeIotDevicesResponse} */
   DescribeIotDevices(data: DescribeIotDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIotDevicesResponse>;
-  /** {@link DescribeMessageRouteList 获取消息路由列表}({@link DescribeMessageRouteListRequest 请求参数}): {@link DescribeMessageRouteListResponse 返回参数} */
+  /** 获取消息路由列表 {@link DescribeMessageRouteListRequest} {@link DescribeMessageRouteListResponse} */
   DescribeMessageRouteList(data: DescribeMessageRouteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageRouteListResponse>;
-  /** {@link DescribeMonitorMetrics 查询边缘单元监控数据}({@link DescribeMonitorMetricsRequest 请求参数}): {@link DescribeMonitorMetricsResponse 返回参数} */
+  /** 查询边缘单元监控数据 {@link DescribeMonitorMetricsRequest} {@link DescribeMonitorMetricsResponse} */
   DescribeMonitorMetrics(data: DescribeMonitorMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorMetricsResponse>;
-  /** {@link DescribeNamespace 获取命名空间}({@link DescribeNamespaceRequest 请求参数}): {@link DescribeNamespaceResponse 返回参数} */
+  /** 获取命名空间 {@link DescribeNamespaceRequest} {@link DescribeNamespaceResponse} */
   DescribeNamespace(data: DescribeNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNamespaceResponse>;
-  /** {@link DescribeNamespaceResources 获取命名空间下的资源信息}({@link DescribeNamespaceResourcesRequest 请求参数}): {@link DescribeNamespaceResourcesResponse 返回参数} */
+  /** 获取命名空间下的资源信息 {@link DescribeNamespaceResourcesRequest} {@link DescribeNamespaceResourcesResponse} */
   DescribeNamespaceResources(data: DescribeNamespaceResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNamespaceResourcesResponse>;
-  /** {@link DescribeNamespaces 获取命名空间列表信息}({@link DescribeNamespacesRequest 请求参数}): {@link DescribeNamespacesResponse 返回参数} */
+  /** 获取命名空间列表信息 {@link DescribeNamespacesRequest} {@link DescribeNamespacesResponse} */
   DescribeNamespaces(data: DescribeNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNamespacesResponse>;
-  /** {@link DescribeNodeUnit 查询边缘单元NodeUnit列表}({@link DescribeNodeUnitRequest 请求参数}): {@link DescribeNodeUnitResponse 返回参数} */
+  /** 查询边缘单元NodeUnit列表 {@link DescribeNodeUnitRequest} {@link DescribeNodeUnitResponse} */
   DescribeNodeUnit(data: DescribeNodeUnitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeUnitResponse>;
-  /** {@link DescribeNodeUnitTemplateOnNodeGroup 查询指定NodeGroup下NodeUnit模板列表}({@link DescribeNodeUnitTemplateOnNodeGroupRequest 请求参数}): {@link DescribeNodeUnitTemplateOnNodeGroupResponse 返回参数} */
+  /** 查询指定NodeGroup下NodeUnit模板列表 {@link DescribeNodeUnitTemplateOnNodeGroupRequest} {@link DescribeNodeUnitTemplateOnNodeGroupResponse} */
   DescribeNodeUnitTemplateOnNodeGroup(data: DescribeNodeUnitTemplateOnNodeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeUnitTemplateOnNodeGroupResponse>;
-  /** {@link DescribeSecret 获取Secret详情}({@link DescribeSecretRequest 请求参数}): {@link DescribeSecretResponse 返回参数} */
+  /** 获取Secret详情 {@link DescribeSecretRequest} {@link DescribeSecretResponse} */
   DescribeSecret(data: DescribeSecretRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecretResponse>;
-  /** {@link DescribeSecretYamlError 校验Secret的Yaml语法}({@link DescribeSecretYamlErrorRequest 请求参数}): {@link DescribeSecretYamlErrorResponse 返回参数} */
+  /** 校验Secret的Yaml语法 {@link DescribeSecretYamlErrorRequest} {@link DescribeSecretYamlErrorResponse} */
   DescribeSecretYamlError(data: DescribeSecretYamlErrorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecretYamlErrorResponse>;
-  /** {@link DescribeSecrets 获取Secrets列表}({@link DescribeSecretsRequest 请求参数}): {@link DescribeSecretsResponse 返回参数} */
+  /** 获取Secrets列表 {@link DescribeSecretsRequest} {@link DescribeSecretsResponse} */
   DescribeSecrets(data: DescribeSecretsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecretsResponse>;
-  /** {@link DescribeYeheResourceLimit 查询用户的资源限制}({@link DescribeYeheResourceLimitRequest 请求参数}): {@link DescribeYeheResourceLimitResponse 返回参数} */
+  /** 查询用户的资源限制 {@link DescribeYeheResourceLimitRequest} {@link DescribeYeheResourceLimitResponse} */
   DescribeYeheResourceLimit(data?: DescribeYeheResourceLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeYeheResourceLimitResponse>;
-  /** {@link GetMarketComponent 获取组件市场的组件信息}({@link GetMarketComponentRequest 请求参数}): {@link GetMarketComponentResponse 返回参数} */
+  /** 获取组件市场的组件信息 {@link GetMarketComponentRequest} {@link GetMarketComponentResponse} */
   GetMarketComponent(data: GetMarketComponentRequest, config?: AxiosRequestConfig): AxiosPromise<GetMarketComponentResponse>;
-  /** {@link GetMarketComponentList 获取组件市场组件列表}({@link GetMarketComponentListRequest 请求参数}): {@link GetMarketComponentListResponse 返回参数} */
+  /** 获取组件市场组件列表 {@link GetMarketComponentListRequest} {@link GetMarketComponentListResponse} */
   GetMarketComponentList(data: GetMarketComponentListRequest, config?: AxiosRequestConfig): AxiosPromise<GetMarketComponentListResponse>;
-  /** {@link ModifyApplicationBasicInfo 修改应用模板基本信息}({@link ModifyApplicationBasicInfoRequest 请求参数}): {@link ModifyApplicationBasicInfoResponse 返回参数} */
+  /** 修改应用模板基本信息 {@link ModifyApplicationBasicInfoRequest} {@link ModifyApplicationBasicInfoResponse} */
   ModifyApplicationBasicInfo(data: ModifyApplicationBasicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationBasicInfoResponse>;
-  /** {@link ModifyApplicationVisualization 修改应用模板配置}({@link ModifyApplicationVisualizationRequest 请求参数}): {@link ModifyApplicationVisualizationResponse 返回参数} */
+  /** 修改应用模板配置 {@link ModifyApplicationVisualizationRequest} {@link ModifyApplicationVisualizationResponse} */
   ModifyApplicationVisualization(data: ModifyApplicationVisualizationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationVisualizationResponse>;
-  /** {@link ModifyConfigMap 修改ConfigMap}({@link ModifyConfigMapRequest 请求参数}): {@link ModifyConfigMapResponse 返回参数} */
+  /** 修改ConfigMap {@link ModifyConfigMapRequest} {@link ModifyConfigMapResponse} */
   ModifyConfigMap(data: ModifyConfigMapRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigMapResponse>;
-  /** {@link ModifyEdgeDracoNode 编辑draco设备信息}({@link ModifyEdgeDracoNodeRequest 请求参数}): {@link ModifyEdgeDracoNodeResponse 返回参数} */
+  /** 编辑draco设备信息 {@link ModifyEdgeDracoNodeRequest} {@link ModifyEdgeDracoNodeResponse} */
   ModifyEdgeDracoNode(data: ModifyEdgeDracoNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEdgeDracoNodeResponse>;
-  /** {@link ModifyEdgeNodeLabels 编辑边缘节点标签}({@link ModifyEdgeNodeLabelsRequest 请求参数}): {@link ModifyEdgeNodeLabelsResponse 返回参数} */
+  /** 编辑边缘节点标签 {@link ModifyEdgeNodeLabelsRequest} {@link ModifyEdgeNodeLabelsResponse} */
   ModifyEdgeNodeLabels(data: ModifyEdgeNodeLabelsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEdgeNodeLabelsResponse>;
-  /** {@link ModifyEdgeUnit 修改边缘集群}({@link ModifyEdgeUnitRequest 请求参数}): {@link ModifyEdgeUnitResponse 返回参数} */
+  /** 修改边缘集群 {@link ModifyEdgeUnitRequest} {@link ModifyEdgeUnitResponse} */
   ModifyEdgeUnit(data: ModifyEdgeUnitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEdgeUnitResponse>;
-  /** {@link ModifyEdgeUnitApplicationBasicInfo 修改单元应用基本信息}({@link ModifyEdgeUnitApplicationBasicInfoRequest 请求参数}): {@link ModifyEdgeUnitApplicationBasicInfoResponse 返回参数} */
+  /** 修改单元应用基本信息 {@link ModifyEdgeUnitApplicationBasicInfoRequest} {@link ModifyEdgeUnitApplicationBasicInfoResponse} */
   ModifyEdgeUnitApplicationBasicInfo(data: ModifyEdgeUnitApplicationBasicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEdgeUnitApplicationBasicInfoResponse>;
-  /** {@link ModifyEdgeUnitApplicationVisualization 可视化修改应用配置}({@link ModifyEdgeUnitApplicationVisualizationRequest 请求参数}): {@link ModifyEdgeUnitApplicationVisualizationResponse 返回参数} */
+  /** 可视化修改应用配置 {@link ModifyEdgeUnitApplicationVisualizationRequest} {@link ModifyEdgeUnitApplicationVisualizationResponse} */
   ModifyEdgeUnitApplicationVisualization(data: ModifyEdgeUnitApplicationVisualizationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEdgeUnitApplicationVisualizationResponse>;
-  /** {@link ModifyEdgeUnitApplicationYaml Yaml方式修改应用配置}({@link ModifyEdgeUnitApplicationYamlRequest 请求参数}): {@link ModifyEdgeUnitApplicationYamlResponse 返回参数} */
+  /** Yaml方式修改应用配置 {@link ModifyEdgeUnitApplicationYamlRequest} {@link ModifyEdgeUnitApplicationYamlResponse} */
   ModifyEdgeUnitApplicationYaml(data: ModifyEdgeUnitApplicationYamlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEdgeUnitApplicationYamlResponse>;
-  /** {@link ModifyEdgeUnitCloudApi 更新边缘单元信息}({@link ModifyEdgeUnitCloudApiRequest 请求参数}): {@link ModifyEdgeUnitCloudApiResponse 返回参数} */
+  /** 更新边缘单元信息 {@link ModifyEdgeUnitCloudApiRequest} {@link ModifyEdgeUnitCloudApiResponse} */
   ModifyEdgeUnitCloudApi(data: ModifyEdgeUnitCloudApiRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEdgeUnitCloudApiResponse>;
-  /** {@link ModifyEdgeUnitDeployGridItem 修改边缘单元Grid部署应用副本数}({@link ModifyEdgeUnitDeployGridItemRequest 请求参数}): {@link ModifyEdgeUnitDeployGridItemResponse 返回参数} */
+  /** 修改边缘单元Grid部署应用副本数 {@link ModifyEdgeUnitDeployGridItemRequest} {@link ModifyEdgeUnitDeployGridItemResponse} */
   ModifyEdgeUnitDeployGridItem(data: ModifyEdgeUnitDeployGridItemRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEdgeUnitDeployGridItemResponse>;
-  /** {@link ModifyIotDevice 修改设备信息}({@link ModifyIotDeviceRequest 请求参数}): {@link ModifyIotDeviceResponse 返回参数} */
+  /** 修改设备信息 {@link ModifyIotDeviceRequest} {@link ModifyIotDeviceResponse} */
   ModifyIotDevice(data: ModifyIotDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIotDeviceResponse>;
-  /** {@link ModifyNodeUnitTemplate 修改边缘单元NodeUnit模板}({@link ModifyNodeUnitTemplateRequest 请求参数}): {@link ModifyNodeUnitTemplateResponse 返回参数} */
+  /** 修改边缘单元NodeUnit模板 {@link ModifyNodeUnitTemplateRequest} {@link ModifyNodeUnitTemplateResponse} */
   ModifyNodeUnitTemplate(data: ModifyNodeUnitTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNodeUnitTemplateResponse>;
-  /** {@link ModifySecret 修改Secret}({@link ModifySecretRequest 请求参数}): {@link ModifySecretResponse 返回参数} */
+  /** 修改Secret {@link ModifySecretRequest} {@link ModifySecretResponse} */
   ModifySecret(data: ModifySecretRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecretResponse>;
-  /** {@link RedeployEdgeUnitApplication 单元应用重部署}({@link RedeployEdgeUnitApplicationRequest 请求参数}): {@link RedeployEdgeUnitApplicationResponse 返回参数} */
+  /** 单元应用重部署 {@link RedeployEdgeUnitApplicationRequest} {@link RedeployEdgeUnitApplicationResponse} */
   RedeployEdgeUnitApplication(data: RedeployEdgeUnitApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<RedeployEdgeUnitApplicationResponse>;
-  /** {@link SetRouteOnOff 开关消息路由}({@link SetRouteOnOffRequest 请求参数}): {@link SetRouteOnOffResponse 返回参数} */
+  /** 开关消息路由 {@link SetRouteOnOffRequest} {@link SetRouteOnOffResponse} */
   SetRouteOnOff(data: SetRouteOnOffRequest, config?: AxiosRequestConfig): AxiosPromise<SetRouteOnOffResponse>;
 }
 

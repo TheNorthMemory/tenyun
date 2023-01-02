@@ -328,7 +328,7 @@ declare interface CancelTaskRequest {
 }
 
 declare interface CancelTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -350,7 +350,7 @@ declare interface CreateVideoModerationTaskRequest {
 declare interface CreateVideoModerationTaskResponse {
   /** 任务创建结果 */
   Results: TaskResult[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -402,7 +402,7 @@ declare interface DescribeTaskDetailResponse {
   AudioText: string | null;
   /** 该字段用于返回音频文件识别出的对应文本内容。 */
   Asrs: RcbAsr[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -426,7 +426,7 @@ declare interface DescribeTasksResponse {
   Data: TaskData[] | null;
   /** 该字段用于返回翻页时使用的Token信息，由系统自动生成，并在翻页时向下一个生成的页面传递此参数，以方便快速翻页功能的实现。当到最后一页时，该字段为空。 */
   PageToken: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -745,7 +745,7 @@ declare namespace V20201229 {
   }
 
   interface CancelTaskResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -767,7 +767,7 @@ declare namespace V20201229 {
   interface CreateVideoModerationTaskResponse {
     /** 该字段用于返回任务创建的结果，具体输出内容请参见TaskResult数据结构的详细描述。 */
     Results: TaskResult[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -813,7 +813,7 @@ declare namespace V20201229 {
     ErrorDescription: string | null;
     /** 该字段用于返回检测结果所对应的标签。如果未命中恶意，返回Normal，如果命中恶意，则返回Labels中优先级最高的标签 */
     Label: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -837,7 +837,7 @@ declare namespace V20201229 {
     Data: TaskData[] | null;
     /** 该字段用于返回翻页时使用的Token信息，由系统自动生成，并在翻页时向下一个生成的页面传递此参数，以方便快速翻页功能的实现。当到最后一页时，该字段为空。 */
     PageToken: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -1175,7 +1175,7 @@ declare namespace V20200709 {
   }
 
   interface CancelTaskResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1191,7 +1191,7 @@ declare namespace V20200709 {
   }
 
   interface CreateBizConfigResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1213,7 +1213,7 @@ declare namespace V20200709 {
   interface CreateVideoModerationTaskResponse {
     /** 任务创建结果 */
     Results?: TaskResult[] | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1259,7 +1259,7 @@ declare namespace V20200709 {
     ErrorType?: string | null;
     /** 审核任务错误日志。当Error不为空时，会展示该字段 */
     ErrorDescription?: string | null;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -1277,7 +1277,7 @@ declare namespace V20200709 {
     TrendCount?: TrendCount[];
     /** 违规数据分布 */
     EvilCount?: EvilCount[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -1285,31 +1285,31 @@ declare namespace V20200709 {
 /** {@link Vm 视频内容安全} */
 declare interface Vm {
   (): Versions;
-  /** {@link CancelTask 取消任务}({@link CancelTaskRequest 请求参数}): {@link CancelTaskResponse 返回参数} */
+  /** 取消任务 {@link CancelTaskRequest} {@link CancelTaskResponse} */
   CancelTask(data: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
-  /** {@link CreateVideoModerationTask 创建视频审核任务}({@link CreateVideoModerationTaskRequest 请求参数}): {@link CreateVideoModerationTaskResponse 返回参数} */
+  /** 创建视频审核任务 {@link CreateVideoModerationTaskRequest} {@link CreateVideoModerationTaskResponse} */
   CreateVideoModerationTask(data: CreateVideoModerationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoModerationTaskResponse>;
-  /** {@link DescribeTaskDetail 查看任务详情}({@link DescribeTaskDetailRequest 请求参数}): {@link DescribeTaskDetailResponse 返回参数} */
+  /** 查看任务详情 {@link DescribeTaskDetailRequest} {@link DescribeTaskDetailResponse} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** {@link DescribeTasks 查看审核任务列表}({@link DescribeTasksRequest 请求参数}): {@link DescribeTasksResponse 返回参数} */
+  /** 查看审核任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
-  /** {@link V20201229.CancelTask 取消任务}({@link V20201229.CancelTaskRequest 请求参数}): {@link V20201229.CancelTaskResponse 返回参数} */
+  /** 取消任务 {@link V20201229.CancelTaskRequest} {@link V20201229.CancelTaskResponse} */
   CancelTask(data: V20201229.CancelTaskRequest, config: AxiosRequestConfig & V20201229.VersionHeader): AxiosPromise<V20201229.CancelTaskResponse>;
-  /** {@link V20201229.CreateVideoModerationTask 创建视频审核任务}({@link V20201229.CreateVideoModerationTaskRequest 请求参数}): {@link V20201229.CreateVideoModerationTaskResponse 返回参数} */
+  /** 创建视频审核任务 {@link V20201229.CreateVideoModerationTaskRequest} {@link V20201229.CreateVideoModerationTaskResponse} */
   CreateVideoModerationTask(data: V20201229.CreateVideoModerationTaskRequest, config: AxiosRequestConfig & V20201229.VersionHeader): AxiosPromise<V20201229.CreateVideoModerationTaskResponse>;
-  /** {@link V20201229.DescribeTaskDetail 查看任务详情}({@link V20201229.DescribeTaskDetailRequest 请求参数}): {@link V20201229.DescribeTaskDetailResponse 返回参数} */
+  /** 查看任务详情 {@link V20201229.DescribeTaskDetailRequest} {@link V20201229.DescribeTaskDetailResponse} */
   DescribeTaskDetail(data: V20201229.DescribeTaskDetailRequest, config: AxiosRequestConfig & V20201229.VersionHeader): AxiosPromise<V20201229.DescribeTaskDetailResponse>;
-  /** {@link V20201229.DescribeTasks 查看审核任务列表}({@link V20201229.DescribeTasksRequest 请求参数}): {@link V20201229.DescribeTasksResponse 返回参数} */
+  /** 查看审核任务列表 {@link V20201229.DescribeTasksRequest} {@link V20201229.DescribeTasksResponse} */
   DescribeTasks(data: V20201229.DescribeTasksRequest, config: AxiosRequestConfig & V20201229.VersionHeader): AxiosPromise<V20201229.DescribeTasksResponse>;
-  /** {@link V20200709.CancelTask 取消任务}({@link V20200709.CancelTaskRequest 请求参数}): {@link V20200709.CancelTaskResponse 返回参数} */
+  /** 取消任务 {@link V20200709.CancelTaskRequest} {@link V20200709.CancelTaskResponse} */
   CancelTask(data: V20200709.CancelTaskRequest, config: AxiosRequestConfig & V20200709.VersionHeader): AxiosPromise<V20200709.CancelTaskResponse>;
-  /** {@link V20200709.CreateBizConfig 创建业务配置}({@link V20200709.CreateBizConfigRequest 请求参数}): {@link V20200709.CreateBizConfigResponse 返回参数} */
+  /** 创建业务配置 {@link V20200709.CreateBizConfigRequest} {@link V20200709.CreateBizConfigResponse} */
   CreateBizConfig(data: V20200709.CreateBizConfigRequest, config: AxiosRequestConfig & V20200709.VersionHeader): AxiosPromise<V20200709.CreateBizConfigResponse>;
-  /** {@link V20200709.CreateVideoModerationTask 创建视频审核任务}({@link V20200709.CreateVideoModerationTaskRequest 请求参数}): {@link V20200709.CreateVideoModerationTaskResponse 返回参数} */
+  /** 创建视频审核任务 {@link V20200709.CreateVideoModerationTaskRequest} {@link V20200709.CreateVideoModerationTaskResponse} */
   CreateVideoModerationTask(data: V20200709.CreateVideoModerationTaskRequest, config: AxiosRequestConfig & V20200709.VersionHeader): AxiosPromise<V20200709.CreateVideoModerationTaskResponse>;
-  /** {@link V20200709.DescribeTaskDetail 查看任务详情}({@link V20200709.DescribeTaskDetailRequest 请求参数}): {@link V20200709.DescribeTaskDetailResponse 返回参数} */
+  /** 查看任务详情 {@link V20200709.DescribeTaskDetailRequest} {@link V20200709.DescribeTaskDetailResponse} */
   DescribeTaskDetail(data: V20200709.DescribeTaskDetailRequest, config: AxiosRequestConfig & V20200709.VersionHeader): AxiosPromise<V20200709.DescribeTaskDetailResponse>;
-  /** {@link V20200709.DescribeVideoStat 识别统计}({@link V20200709.DescribeVideoStatRequest 请求参数}): {@link V20200709.DescribeVideoStatResponse 返回参数} */
+  /** 识别统计 {@link V20200709.DescribeVideoStatRequest} {@link V20200709.DescribeVideoStatResponse} */
   DescribeVideoStat(data: V20200709.DescribeVideoStatRequest, config: AxiosRequestConfig & V20200709.VersionHeader): AxiosPromise<V20200709.DescribeVideoStatResponse>;
 }
 

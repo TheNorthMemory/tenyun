@@ -174,7 +174,7 @@ declare interface AddOrganizationNodeRequest {
 declare interface AddOrganizationNodeResponse {
   /** 节点ID。 */
   NodeId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -188,7 +188,7 @@ declare interface BindOrganizationMemberAuthAccountRequest {
 }
 
 declare interface BindOrganizationMemberAuthAccountResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -202,7 +202,7 @@ declare interface CancelOrganizationMemberAuthAccountRequest {
 }
 
 declare interface CancelOrganizationMemberAuthAccountResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -220,7 +220,7 @@ declare interface CreateOrganizationMemberPolicyRequest {
 declare interface CreateOrganizationMemberPolicyResponse {
   /** 策略ID。 */
   PolicyId: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -250,7 +250,7 @@ declare interface CreateOrganizationMemberRequest {
 declare interface CreateOrganizationMemberResponse {
   /** 成员Uin。 */
   Uin: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -260,7 +260,7 @@ declare interface DeleteOrganizationMembersRequest {
 }
 
 declare interface DeleteOrganizationMembersResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -270,7 +270,7 @@ declare interface DeleteOrganizationNodesRequest {
 }
 
 declare interface DeleteOrganizationNodesResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -286,7 +286,7 @@ declare interface DescribeOrganizationAuthNodeResponse {
   Total: number | null;
   /** 条目详情。 */
   Items: AuthNode[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -306,7 +306,7 @@ declare interface DescribeOrganizationMemberAuthAccountsResponse {
   Items: OrgMemberAuthAccount[] | null;
   /** 总数目 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -324,7 +324,7 @@ declare interface DescribeOrganizationMemberAuthIdentitiesResponse {
   Items: OrgMemberAuthIdentity[] | null;
   /** 总数目。 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -344,7 +344,7 @@ declare interface DescribeOrganizationMemberPoliciesResponse {
   Items: OrgMemberPolicy[] | null;
   /** 总数目。 */
   Total: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -368,7 +368,7 @@ declare interface DescribeOrganizationMembersResponse {
   Items: OrgMember[];
   /** 总数目。 */
   Total: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -384,7 +384,7 @@ declare interface DescribeOrganizationNodesResponse {
   Total: number | null;
   /** 列表详情。 */
   Items: OrgNode[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -428,7 +428,7 @@ declare interface DescribeOrganizationResponse {
   IsAssignManager: boolean | null;
   /** 是否实名主体管理员。是：true，否：false */
   IsAuthManager: boolean | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -448,7 +448,7 @@ declare interface ListOrganizationIdentityResponse {
   Total: number | null;
   /** 条目详情。 */
   Items: OrgIdentity[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -460,7 +460,7 @@ declare interface MoveOrganizationNodeMembersRequest {
 }
 
 declare interface MoveOrganizationNodeMembersResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -474,7 +474,7 @@ declare interface UpdateOrganizationNodeRequest {
 }
 
 declare interface UpdateOrganizationNodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -537,7 +537,7 @@ declare namespace V20181225 {
   }
 
   interface AcceptOrganizationInvitationResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -551,7 +551,7 @@ declare namespace V20181225 {
   interface AddOrganizationNodeResponse {
     /** 组织单元ID */
     NodeId?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -561,7 +561,7 @@ declare namespace V20181225 {
   }
 
   interface CancelOrganizationInvitationResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -579,7 +579,7 @@ declare namespace V20181225 {
     Mail?: string;
     /** 组织类型 */
     OrgType?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -591,7 +591,7 @@ declare namespace V20181225 {
   }
 
   interface DeleteOrganizationMemberFromNodeResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -601,7 +601,7 @@ declare namespace V20181225 {
   }
 
   interface DeleteOrganizationMembersResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -611,7 +611,7 @@ declare namespace V20181225 {
   }
 
   interface DeleteOrganizationNodesResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -619,7 +619,7 @@ declare namespace V20181225 {
   }
 
   interface DeleteOrganizationResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -629,7 +629,7 @@ declare namespace V20181225 {
   }
 
   interface DenyOrganizationInvitationResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -653,7 +653,7 @@ declare namespace V20181225 {
     NodeName?: string;
     /** 父组织单元ID */
     ParentNodeId?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -673,7 +673,7 @@ declare namespace V20181225 {
     OrgType?: number;
     /** 是否为空 */
     IsEmpty?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -691,7 +691,7 @@ declare namespace V20181225 {
     Invitations?: OrgInvitation[];
     /** 总数目 */
     TotalCount?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -707,7 +707,7 @@ declare namespace V20181225 {
     Members?: OrgMember[];
     /** 总数目 */
     TotalCount?: number;
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -725,7 +725,7 @@ declare namespace V20181225 {
     TotalCount?: number;
     /** 成员列表 */
     Members?: OrgMember[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -735,7 +735,7 @@ declare namespace V20181225 {
   interface ListOrganizationNodesResponse {
     /** 企业组织单元列表 */
     Nodes: OrgNode[];
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -747,7 +747,7 @@ declare namespace V20181225 {
   }
 
   interface MoveOrganizationMembersToNodeResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -757,7 +757,7 @@ declare namespace V20181225 {
   }
 
   interface QuitOrganizationResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -771,7 +771,7 @@ declare namespace V20181225 {
   }
 
   interface SendOrganizationInvitationResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -785,7 +785,7 @@ declare namespace V20181225 {
   }
 
   interface UpdateOrganizationMemberResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
@@ -799,7 +799,7 @@ declare namespace V20181225 {
   }
 
   interface UpdateOrganizationNodeResponse {
-    /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+    /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 }
@@ -807,79 +807,79 @@ declare namespace V20181225 {
 /** {@link Organization 集团账号管理} */
 declare interface Organization {
   (): Versions;
-  /** {@link AddOrganizationNode 添加企业组织节点}({@link AddOrganizationNodeRequest 请求参数}): {@link AddOrganizationNodeResponse 返回参数} */
+  /** 添加企业组织节点 {@link AddOrganizationNodeRequest} {@link AddOrganizationNodeResponse} */
   AddOrganizationNode(data: AddOrganizationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<AddOrganizationNodeResponse>;
-  /** {@link BindOrganizationMemberAuthAccount 绑定组织成员和组织管理员子账号的授权关系}({@link BindOrganizationMemberAuthAccountRequest 请求参数}): {@link BindOrganizationMemberAuthAccountResponse 返回参数} */
+  /** 绑定组织成员和组织管理员子账号的授权关系 {@link BindOrganizationMemberAuthAccountRequest} {@link BindOrganizationMemberAuthAccountResponse} */
   BindOrganizationMemberAuthAccount(data: BindOrganizationMemberAuthAccountRequest, config?: AxiosRequestConfig): AxiosPromise<BindOrganizationMemberAuthAccountResponse>;
-  /** {@link CancelOrganizationMemberAuthAccount 取消组织成员和组织管理员子账号的授权关系}({@link CancelOrganizationMemberAuthAccountRequest 请求参数}): {@link CancelOrganizationMemberAuthAccountResponse 返回参数} */
+  /** 取消组织成员和组织管理员子账号的授权关系 {@link CancelOrganizationMemberAuthAccountRequest} {@link CancelOrganizationMemberAuthAccountResponse} */
   CancelOrganizationMemberAuthAccount(data: CancelOrganizationMemberAuthAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CancelOrganizationMemberAuthAccountResponse>;
-  /** {@link CreateOrganizationMember 创建组织成员}({@link CreateOrganizationMemberRequest 请求参数}): {@link CreateOrganizationMemberResponse 返回参数} */
+  /** 创建组织成员 {@link CreateOrganizationMemberRequest} {@link CreateOrganizationMemberResponse} */
   CreateOrganizationMember(data: CreateOrganizationMemberRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationMemberResponse>;
-  /** {@link CreateOrganizationMemberPolicy 创建组织成员访问授权策略}({@link CreateOrganizationMemberPolicyRequest 请求参数}): {@link CreateOrganizationMemberPolicyResponse 返回参数} */
+  /** 创建组织成员访问授权策略 {@link CreateOrganizationMemberPolicyRequest} {@link CreateOrganizationMemberPolicyResponse} */
   CreateOrganizationMemberPolicy(data: CreateOrganizationMemberPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationMemberPolicyResponse>;
-  /** {@link DeleteOrganizationMembers 批量删除企业组织成员}({@link DeleteOrganizationMembersRequest 请求参数}): {@link DeleteOrganizationMembersResponse 返回参数} */
+  /** 批量删除企业组织成员 {@link DeleteOrganizationMembersRequest} {@link DeleteOrganizationMembersResponse} */
   DeleteOrganizationMembers(data: DeleteOrganizationMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationMembersResponse>;
-  /** {@link DeleteOrganizationNodes 批量删除企业组织节点}({@link DeleteOrganizationNodesRequest 请求参数}): {@link DeleteOrganizationNodesResponse 返回参数} */
+  /** 批量删除企业组织节点 {@link DeleteOrganizationNodesRequest} {@link DeleteOrganizationNodesResponse} */
   DeleteOrganizationNodes(data: DeleteOrganizationNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationNodesResponse>;
-  /** {@link DescribeOrganization 获取企业组织信息}({@link DescribeOrganizationRequest 请求参数}): {@link DescribeOrganizationResponse 返回参数} */
+  /** 获取企业组织信息 {@link DescribeOrganizationRequest} {@link DescribeOrganizationResponse} */
   DescribeOrganization(data?: DescribeOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationResponse>;
-  /** {@link DescribeOrganizationAuthNode 获取可创建组织成员的认证主体关系列表}({@link DescribeOrganizationAuthNodeRequest 请求参数}): {@link DescribeOrganizationAuthNodeResponse 返回参数} */
+  /** 获取可创建组织成员的认证主体关系列表 {@link DescribeOrganizationAuthNodeRequest} {@link DescribeOrganizationAuthNodeResponse} */
   DescribeOrganizationAuthNode(data: DescribeOrganizationAuthNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationAuthNodeResponse>;
-  /** {@link DescribeOrganizationMemberAuthAccounts 获取组织成员被绑定授权关系的子账号列表}({@link DescribeOrganizationMemberAuthAccountsRequest 请求参数}): {@link DescribeOrganizationMemberAuthAccountsResponse 返回参数} */
+  /** 获取组织成员被绑定授权关系的子账号列表 {@link DescribeOrganizationMemberAuthAccountsRequest} {@link DescribeOrganizationMemberAuthAccountsResponse} */
   DescribeOrganizationMemberAuthAccounts(data: DescribeOrganizationMemberAuthAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberAuthAccountsResponse>;
-  /** {@link DescribeOrganizationMemberAuthIdentities 获取组织成员可被管理的身份列表}({@link DescribeOrganizationMemberAuthIdentitiesRequest 请求参数}): {@link DescribeOrganizationMemberAuthIdentitiesResponse 返回参数} */
+  /** 获取组织成员可被管理的身份列表 {@link DescribeOrganizationMemberAuthIdentitiesRequest} {@link DescribeOrganizationMemberAuthIdentitiesResponse} */
   DescribeOrganizationMemberAuthIdentities(data: DescribeOrganizationMemberAuthIdentitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberAuthIdentitiesResponse>;
-  /** {@link DescribeOrganizationMemberPolicies 获取组织成员的授权策略列表}({@link DescribeOrganizationMemberPoliciesRequest 请求参数}): {@link DescribeOrganizationMemberPoliciesResponse 返回参数} */
+  /** 获取组织成员的授权策略列表 {@link DescribeOrganizationMemberPoliciesRequest} {@link DescribeOrganizationMemberPoliciesResponse} */
   DescribeOrganizationMemberPolicies(data: DescribeOrganizationMemberPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberPoliciesResponse>;
-  /** {@link DescribeOrganizationMembers 获取企业组织成员列表}({@link DescribeOrganizationMembersRequest 请求参数}): {@link DescribeOrganizationMembersResponse 返回参数} */
+  /** 获取企业组织成员列表 {@link DescribeOrganizationMembersRequest} {@link DescribeOrganizationMembersResponse} */
   DescribeOrganizationMembers(data: DescribeOrganizationMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMembersResponse>;
-  /** {@link DescribeOrganizationNodes 获取组织节点列表}({@link DescribeOrganizationNodesRequest 请求参数}): {@link DescribeOrganizationNodesResponse 返回参数} */
+  /** 获取组织节点列表 {@link DescribeOrganizationNodesRequest} {@link DescribeOrganizationNodesResponse} */
   DescribeOrganizationNodes(data: DescribeOrganizationNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationNodesResponse>;
-  /** {@link ListOrganizationIdentity 获取组织成员访问身份列表}({@link ListOrganizationIdentityRequest 请求参数}): {@link ListOrganizationIdentityResponse 返回参数} */
+  /** 获取组织成员访问身份列表 {@link ListOrganizationIdentityRequest} {@link ListOrganizationIdentityResponse} */
   ListOrganizationIdentity(data: ListOrganizationIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<ListOrganizationIdentityResponse>;
-  /** {@link MoveOrganizationNodeMembers 移动成员到指定企业组织节点}({@link MoveOrganizationNodeMembersRequest 请求参数}): {@link MoveOrganizationNodeMembersResponse 返回参数} */
+  /** 移动成员到指定企业组织节点 {@link MoveOrganizationNodeMembersRequest} {@link MoveOrganizationNodeMembersResponse} */
   MoveOrganizationNodeMembers(data: MoveOrganizationNodeMembersRequest, config?: AxiosRequestConfig): AxiosPromise<MoveOrganizationNodeMembersResponse>;
-  /** {@link UpdateOrganizationNode 更新企业组织节点}({@link UpdateOrganizationNodeRequest 请求参数}): {@link UpdateOrganizationNodeResponse 返回参数} */
+  /** 更新企业组织节点 {@link UpdateOrganizationNodeRequest} {@link UpdateOrganizationNodeResponse} */
   UpdateOrganizationNode(data: UpdateOrganizationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrganizationNodeResponse>;
-  /** {@link V20181225.AcceptOrganizationInvitation 接受加入企业组织邀请}({@link V20181225.AcceptOrganizationInvitationRequest 请求参数}): {@link V20181225.AcceptOrganizationInvitationResponse 返回参数} */
+  /** 接受加入企业组织邀请 {@link V20181225.AcceptOrganizationInvitationRequest} {@link V20181225.AcceptOrganizationInvitationResponse} */
   AcceptOrganizationInvitation(data: V20181225.AcceptOrganizationInvitationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.AcceptOrganizationInvitationResponse>;
-  /** {@link V20181225.AddOrganizationNode 添加企业组织单元}({@link V20181225.AddOrganizationNodeRequest 请求参数}): {@link V20181225.AddOrganizationNodeResponse 返回参数} */
+  /** 添加企业组织单元 {@link V20181225.AddOrganizationNodeRequest} {@link V20181225.AddOrganizationNodeResponse} */
   AddOrganizationNode(data: V20181225.AddOrganizationNodeRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.AddOrganizationNodeResponse>;
-  /** {@link V20181225.CancelOrganizationInvitation 取消企业组织邀请}({@link V20181225.CancelOrganizationInvitationRequest 请求参数}): {@link V20181225.CancelOrganizationInvitationResponse 返回参数} */
+  /** 取消企业组织邀请 {@link V20181225.CancelOrganizationInvitationRequest} {@link V20181225.CancelOrganizationInvitationResponse} */
   CancelOrganizationInvitation(data: V20181225.CancelOrganizationInvitationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.CancelOrganizationInvitationResponse>;
-  /** {@link V20181225.CreateOrganization 创建企业组织}({@link V20181225.CreateOrganizationRequest 请求参数}): {@link V20181225.CreateOrganizationResponse 返回参数} */
+  /** 创建企业组织 {@link V20181225.CreateOrganizationRequest} {@link V20181225.CreateOrganizationResponse} */
   CreateOrganization(data: V20181225.CreateOrganizationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.CreateOrganizationResponse>;
-  /** {@link V20181225.DeleteOrganization 删除企业组织}({@link V20181225.DeleteOrganizationRequest 请求参数}): {@link V20181225.DeleteOrganizationResponse 返回参数} */
+  /** 删除企业组织 {@link V20181225.DeleteOrganizationRequest} {@link V20181225.DeleteOrganizationResponse} */
   DeleteOrganization(data: V20181225.DeleteOrganizationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.DeleteOrganizationResponse>;
-  /** {@link V20181225.DeleteOrganizationMemberFromNode 删除企业组织成员}({@link V20181225.DeleteOrganizationMemberFromNodeRequest 请求参数}): {@link V20181225.DeleteOrganizationMemberFromNodeResponse 返回参数} */
+  /** 删除企业组织成员 {@link V20181225.DeleteOrganizationMemberFromNodeRequest} {@link V20181225.DeleteOrganizationMemberFromNodeResponse} */
   DeleteOrganizationMemberFromNode(data: V20181225.DeleteOrganizationMemberFromNodeRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.DeleteOrganizationMemberFromNodeResponse>;
-  /** {@link V20181225.DeleteOrganizationMembers 批量删除企业组织成员}({@link V20181225.DeleteOrganizationMembersRequest 请求参数}): {@link V20181225.DeleteOrganizationMembersResponse 返回参数} */
+  /** 批量删除企业组织成员 {@link V20181225.DeleteOrganizationMembersRequest} {@link V20181225.DeleteOrganizationMembersResponse} */
   DeleteOrganizationMembers(data: V20181225.DeleteOrganizationMembersRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.DeleteOrganizationMembersResponse>;
-  /** {@link V20181225.DeleteOrganizationNodes 批量删除企业组织单元}({@link V20181225.DeleteOrganizationNodesRequest 请求参数}): {@link V20181225.DeleteOrganizationNodesResponse 返回参数} */
+  /** 批量删除企业组织单元 {@link V20181225.DeleteOrganizationNodesRequest} {@link V20181225.DeleteOrganizationNodesResponse} */
   DeleteOrganizationNodes(data: V20181225.DeleteOrganizationNodesRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.DeleteOrganizationNodesResponse>;
-  /** {@link V20181225.DenyOrganizationInvitation 拒绝企业组织邀请}({@link V20181225.DenyOrganizationInvitationRequest 请求参数}): {@link V20181225.DenyOrganizationInvitationResponse 返回参数} */
+  /** 拒绝企业组织邀请 {@link V20181225.DenyOrganizationInvitationRequest} {@link V20181225.DenyOrganizationInvitationResponse} */
   DenyOrganizationInvitation(data: V20181225.DenyOrganizationInvitationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.DenyOrganizationInvitationResponse>;
-  /** {@link V20181225.GetOrganization 获取企业组织信息}({@link V20181225.GetOrganizationRequest 请求参数}): {@link V20181225.GetOrganizationResponse 返回参数} */
+  /** 获取企业组织信息 {@link V20181225.GetOrganizationRequest} {@link V20181225.GetOrganizationResponse} */
   GetOrganization(data: V20181225.GetOrganizationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.GetOrganizationResponse>;
-  /** {@link V20181225.GetOrganizationMember 获取企业组织成员}({@link V20181225.GetOrganizationMemberRequest 请求参数}): {@link V20181225.GetOrganizationMemberResponse 返回参数} */
+  /** 获取企业组织成员 {@link V20181225.GetOrganizationMemberRequest} {@link V20181225.GetOrganizationMemberResponse} */
   GetOrganizationMember(data: V20181225.GetOrganizationMemberRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.GetOrganizationMemberResponse>;
-  /** {@link V20181225.ListOrganizationInvitations 获取邀请信息列表}({@link V20181225.ListOrganizationInvitationsRequest 请求参数}): {@link V20181225.ListOrganizationInvitationsResponse 返回参数} */
+  /** 获取邀请信息列表 {@link V20181225.ListOrganizationInvitationsRequest} {@link V20181225.ListOrganizationInvitationsResponse} */
   ListOrganizationInvitations(data: V20181225.ListOrganizationInvitationsRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.ListOrganizationInvitationsResponse>;
-  /** {@link V20181225.ListOrganizationMembers 获取企业组织成员列表}({@link V20181225.ListOrganizationMembersRequest 请求参数}): {@link V20181225.ListOrganizationMembersResponse 返回参数} */
+  /** 获取企业组织成员列表 {@link V20181225.ListOrganizationMembersRequest} {@link V20181225.ListOrganizationMembersResponse} */
   ListOrganizationMembers(data: V20181225.ListOrganizationMembersRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.ListOrganizationMembersResponse>;
-  /** {@link V20181225.ListOrganizationNodeMembers 获取企业组织单元成员列表}({@link V20181225.ListOrganizationNodeMembersRequest 请求参数}): {@link V20181225.ListOrganizationNodeMembersResponse 返回参数} */
+  /** 获取企业组织单元成员列表 {@link V20181225.ListOrganizationNodeMembersRequest} {@link V20181225.ListOrganizationNodeMembersResponse} */
   ListOrganizationNodeMembers(data: V20181225.ListOrganizationNodeMembersRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.ListOrganizationNodeMembersResponse>;
-  /** {@link V20181225.ListOrganizationNodes 获取企业组织单元列表}({@link V20181225.ListOrganizationNodesRequest 请求参数}): {@link V20181225.ListOrganizationNodesResponse 返回参数} */
+  /** 获取企业组织单元列表 {@link V20181225.ListOrganizationNodesRequest} {@link V20181225.ListOrganizationNodesResponse} */
   ListOrganizationNodes(data: V20181225.ListOrganizationNodesRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.ListOrganizationNodesResponse>;
-  /** {@link V20181225.MoveOrganizationMembersToNode 移动成员到指定企业组织单元}({@link V20181225.MoveOrganizationMembersToNodeRequest 请求参数}): {@link V20181225.MoveOrganizationMembersToNodeResponse 返回参数} */
+  /** 移动成员到指定企业组织单元 {@link V20181225.MoveOrganizationMembersToNodeRequest} {@link V20181225.MoveOrganizationMembersToNodeResponse} */
   MoveOrganizationMembersToNode(data: V20181225.MoveOrganizationMembersToNodeRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.MoveOrganizationMembersToNodeResponse>;
-  /** {@link V20181225.QuitOrganization 退出企业组织}({@link V20181225.QuitOrganizationRequest 请求参数}): {@link V20181225.QuitOrganizationResponse 返回参数} */
+  /** 退出企业组织 {@link V20181225.QuitOrganizationRequest} {@link V20181225.QuitOrganizationResponse} */
   QuitOrganization(data: V20181225.QuitOrganizationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.QuitOrganizationResponse>;
-  /** {@link V20181225.SendOrganizationInvitation 发送企业组织邀请}({@link V20181225.SendOrganizationInvitationRequest 请求参数}): {@link V20181225.SendOrganizationInvitationResponse 返回参数} */
+  /** 发送企业组织邀请 {@link V20181225.SendOrganizationInvitationRequest} {@link V20181225.SendOrganizationInvitationResponse} */
   SendOrganizationInvitation(data: V20181225.SendOrganizationInvitationRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.SendOrganizationInvitationResponse>;
-  /** {@link V20181225.UpdateOrganizationMember 更新企业成员信息}({@link V20181225.UpdateOrganizationMemberRequest 请求参数}): {@link V20181225.UpdateOrganizationMemberResponse 返回参数} */
+  /** 更新企业成员信息 {@link V20181225.UpdateOrganizationMemberRequest} {@link V20181225.UpdateOrganizationMemberResponse} */
   UpdateOrganizationMember(data: V20181225.UpdateOrganizationMemberRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.UpdateOrganizationMemberResponse>;
-  /** {@link V20181225.UpdateOrganizationNode 更新企业组织单元}({@link V20181225.UpdateOrganizationNodeRequest 请求参数}): {@link V20181225.UpdateOrganizationNodeResponse 返回参数} */
+  /** 更新企业组织单元 {@link V20181225.UpdateOrganizationNodeRequest} {@link V20181225.UpdateOrganizationNodeResponse} */
   UpdateOrganizationNode(data: V20181225.UpdateOrganizationNodeRequest, config: AxiosRequestConfig & V20181225.VersionHeader): AxiosPromise<V20181225.UpdateOrganizationNodeResponse>;
 }
 

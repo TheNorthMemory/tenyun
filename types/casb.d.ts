@@ -26,14 +26,14 @@ declare interface CopyCryptoColumnPolicyRequest {
 }
 
 declare interface CopyCryptoColumnPolicyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Casb 云访问安全代理} */
 declare interface Casb {
   (): Versions;
-  /** {@link CopyCryptoColumnPolicy 复制字段策略}({@link CopyCryptoColumnPolicyRequest 请求参数}): {@link CopyCryptoColumnPolicyResponse 返回参数} */
+  /** 复制字段策略 {@link CopyCryptoColumnPolicyRequest} {@link CopyCryptoColumnPolicyResponse} */
   CopyCryptoColumnPolicy(data: CopyCryptoColumnPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CopyCryptoColumnPolicyResponse>;
 }
 

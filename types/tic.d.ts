@@ -70,7 +70,7 @@ declare interface ApplyStackRequest {
 declare interface ApplyStackResponse {
   /** 执行的事件ID */
   EventId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -90,7 +90,7 @@ declare interface CreateStackResponse {
   StackId?: string;
   /** 资源栈版本ID */
   VersionId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -108,7 +108,7 @@ declare interface CreateStackVersionRequest {
 declare interface CreateStackVersionResponse {
   /** 新创建的版本ID */
   VersionId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -118,7 +118,7 @@ declare interface DeleteStackRequest {
 }
 
 declare interface DeleteStackResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -128,7 +128,7 @@ declare interface DeleteStackVersionRequest {
 }
 
 declare interface DeleteStackVersionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -154,7 +154,7 @@ declare interface DescribeStackEventResponse {
   CreateTime?: string;
   /** 控制台输出文本 */
   ConsoleLog?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -174,7 +174,7 @@ declare interface DescribeStackEventsResponse {
   TotalCount?: number;
   /** 事件详细信息列表 */
   Events?: EventInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -194,7 +194,7 @@ declare interface DescribeStackVersionsResponse {
   TotalCount?: number;
   /** 版本详细信息列表 */
   Versions?: VersionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -212,7 +212,7 @@ declare interface DescribeStacksResponse {
   TotalCount?: number;
   /** 资源栈详细信息列表 */
   Stacks?: StackInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -226,7 +226,7 @@ declare interface DestroyStackRequest {
 declare interface DestroyStackResponse {
   /** 事件ID */
   EventId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -240,7 +240,7 @@ declare interface PlanStackRequest {
 declare interface PlanStackResponse {
   /** 执行的事件ID */
   EventId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -254,7 +254,7 @@ declare interface UpdateStackRequest {
 }
 
 declare interface UpdateStackResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -270,38 +270,38 @@ declare interface UpdateStackVersionRequest {
 }
 
 declare interface UpdateStackVersionResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Tic 资源编排 TIC} */
 declare interface Tic {
   (): Versions;
-  /** {@link ApplyStack 执行Apply事件}({@link ApplyStackRequest 请求参数}): {@link ApplyStackResponse 返回参数} */
+  /** 执行Apply事件 {@link ApplyStackRequest} {@link ApplyStackResponse} */
   ApplyStack(data: ApplyStackRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyStackResponse>;
-  /** {@link CreateStack 创建资源栈}({@link CreateStackRequest 请求参数}): {@link CreateStackResponse 返回参数} */
+  /** 创建资源栈 {@link CreateStackRequest} {@link CreateStackResponse} */
   CreateStack(data: CreateStackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStackResponse>;
-  /** {@link CreateStackVersion 给资源栈新增一个版本}({@link CreateStackVersionRequest 请求参数}): {@link CreateStackVersionResponse 返回参数} */
+  /** 给资源栈新增一个版本 {@link CreateStackVersionRequest} {@link CreateStackVersionResponse} */
   CreateStackVersion(data: CreateStackVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStackVersionResponse>;
-  /** {@link DeleteStack 删除资源栈}({@link DeleteStackRequest 请求参数}): {@link DeleteStackResponse 返回参数} */
+  /** 删除资源栈 {@link DeleteStackRequest} {@link DeleteStackResponse} */
   DeleteStack(data: DeleteStackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStackResponse>;
-  /** {@link DeleteStackVersion 删除一个版本}({@link DeleteStackVersionRequest 请求参数}): {@link DeleteStackVersionResponse 返回参数} */
+  /** 删除一个版本 {@link DeleteStackVersionRequest} {@link DeleteStackVersionResponse} */
   DeleteStackVersion(data: DeleteStackVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStackVersionResponse>;
-  /** {@link DescribeStackEvent 获取单个事件详情}({@link DescribeStackEventRequest 请求参数}): {@link DescribeStackEventResponse 返回参数} */
+  /** 获取单个事件详情 {@link DescribeStackEventRequest} {@link DescribeStackEventResponse} */
   DescribeStackEvent(data: DescribeStackEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStackEventResponse>;
-  /** {@link DescribeStackEvents 查询事件列表}({@link DescribeStackEventsRequest 请求参数}): {@link DescribeStackEventsResponse 返回参数} */
+  /** 查询事件列表 {@link DescribeStackEventsRequest} {@link DescribeStackEventsResponse} */
   DescribeStackEvents(data?: DescribeStackEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStackEventsResponse>;
-  /** {@link DescribeStackVersions 查询版本列表}({@link DescribeStackVersionsRequest 请求参数}): {@link DescribeStackVersionsResponse 返回参数} */
+  /** 查询版本列表 {@link DescribeStackVersionsRequest} {@link DescribeStackVersionsResponse} */
   DescribeStackVersions(data?: DescribeStackVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStackVersionsResponse>;
-  /** {@link DescribeStacks 查询资源栈列表}({@link DescribeStacksRequest 请求参数}): {@link DescribeStacksResponse 返回参数} */
+  /** 查询资源栈列表 {@link DescribeStacksRequest} {@link DescribeStacksResponse} */
   DescribeStacks(data?: DescribeStacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStacksResponse>;
-  /** {@link DestroyStack 执行Destroy事件}({@link DestroyStackRequest 请求参数}): {@link DestroyStackResponse 返回参数} */
+  /** 执行Destroy事件 {@link DestroyStackRequest} {@link DestroyStackResponse} */
   DestroyStack(data: DestroyStackRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyStackResponse>;
-  /** {@link PlanStack 执行Plan事件}({@link PlanStackRequest 请求参数}): {@link PlanStackResponse 返回参数} */
+  /** 执行Plan事件 {@link PlanStackRequest} {@link PlanStackResponse} */
   PlanStack(data: PlanStackRequest, config?: AxiosRequestConfig): AxiosPromise<PlanStackResponse>;
-  /** {@link UpdateStack 更新资源栈}({@link UpdateStackRequest 请求参数}): {@link UpdateStackResponse 返回参数} */
+  /** 更新资源栈 {@link UpdateStackRequest} {@link UpdateStackResponse} */
   UpdateStack(data: UpdateStackRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateStackResponse>;
-  /** {@link UpdateStackVersion 更新资源栈版本的内容}({@link UpdateStackVersionRequest 请求参数}): {@link UpdateStackVersionResponse 返回参数} */
+  /** 更新资源栈版本的内容 {@link UpdateStackVersionRequest} {@link UpdateStackVersionResponse} */
   UpdateStackVersion(data: UpdateStackVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateStackVersionResponse>;
 }
 

@@ -1144,7 +1144,7 @@ declare interface AddDelayLiveStreamRequest {
 }
 
 declare interface AddDelayLiveStreamResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1164,7 +1164,7 @@ declare interface AddLiveDomainRequest {
 }
 
 declare interface AddLiveDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1186,7 +1186,7 @@ declare interface AddLiveWatermarkRequest {
 declare interface AddLiveWatermarkResponse {
   /** 水印ID。 */
   WatermarkId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1204,7 +1204,7 @@ declare interface AuthenticateDomainOwnerResponse {
   Status: number;
   /** DomainName 对应的主域名。同一主域名下的所有域名只需成功验证一次，后续均无需再验证。 */
   MainDomain: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1214,7 +1214,7 @@ declare interface CancelCommonMixStreamRequest {
 }
 
 declare interface CancelCommonMixStreamResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1232,7 +1232,7 @@ declare interface CreateCommonMixStreamRequest {
 }
 
 declare interface CreateCommonMixStreamResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1246,7 +1246,7 @@ declare interface CreateLiveCallbackRuleRequest {
 }
 
 declare interface CreateLiveCallbackRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1276,7 +1276,7 @@ declare interface CreateLiveCallbackTemplateRequest {
 declare interface CreateLiveCallbackTemplateResponse {
   /** 模板ID。 */
   TemplateId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1326,7 +1326,7 @@ declare interface CreateLivePullStreamTaskRequest {
 declare interface CreateLivePullStreamTaskResponse {
   /** 任务 Id 。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1356,7 +1356,7 @@ declare interface CreateLiveRecordRequest {
 declare interface CreateLiveRecordResponse {
   /** 任务 ID，全局唯一标识录制任务。 */
   TaskId?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1372,7 +1372,7 @@ declare interface CreateLiveRecordRuleRequest {
 }
 
 declare interface CreateLiveRecordRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1404,7 +1404,7 @@ declare interface CreateLiveRecordTemplateRequest {
 declare interface CreateLiveRecordTemplateResponse {
   /** 模板Id。 */
   TemplateId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1420,7 +1420,7 @@ declare interface CreateLiveSnapshotRuleRequest {
 }
 
 declare interface CreateLiveSnapshotRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1452,7 +1452,7 @@ declare interface CreateLiveSnapshotTemplateRequest {
 declare interface CreateLiveSnapshotTemplateResponse {
   /** 模板Id。 */
   TemplateId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1468,7 +1468,7 @@ declare interface CreateLiveTranscodeRuleRequest {
 }
 
 declare interface CreateLiveTranscodeRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1522,7 +1522,7 @@ declare interface CreateLiveTranscodeTemplateRequest {
 declare interface CreateLiveTranscodeTemplateResponse {
   /** 模板Id。 */
   TemplateId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1538,7 +1538,7 @@ declare interface CreateLiveWatermarkRuleRequest {
 }
 
 declare interface CreateLiveWatermarkRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1560,7 +1560,7 @@ declare interface CreatePullStreamConfigRequest {
 declare interface CreatePullStreamConfigResponse {
   /** 配置成功后的 ID。 */
   ConfigId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1586,7 +1586,7 @@ declare interface CreateRecordTaskRequest {
 declare interface CreateRecordTaskResponse {
   /** 任务ID，全局唯一标识录制任务。返回TaskId字段说明录制任务创建成功。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1612,7 +1612,7 @@ declare interface CreateScreenshotTaskRequest {
 declare interface CreateScreenshotTaskResponse {
   /** 任务ID，全局唯一标识截图任务。返回TaskId字段说明截图任务创建成功。 */
   TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1624,7 +1624,7 @@ declare interface DeleteLiveCallbackRuleRequest {
 }
 
 declare interface DeleteLiveCallbackRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1634,7 +1634,7 @@ declare interface DeleteLiveCallbackTemplateRequest {
 }
 
 declare interface DeleteLiveCallbackTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1646,7 +1646,7 @@ declare interface DeleteLiveDomainRequest {
 }
 
 declare interface DeleteLiveDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1658,7 +1658,7 @@ declare interface DeleteLivePullStreamTaskRequest {
 }
 
 declare interface DeleteLivePullStreamTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1670,7 +1670,7 @@ declare interface DeleteLiveRecordRequest {
 }
 
 declare interface DeleteLiveRecordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1684,7 +1684,7 @@ declare interface DeleteLiveRecordRuleRequest {
 }
 
 declare interface DeleteLiveRecordRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1694,7 +1694,7 @@ declare interface DeleteLiveRecordTemplateRequest {
 }
 
 declare interface DeleteLiveRecordTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1708,7 +1708,7 @@ declare interface DeleteLiveSnapshotRuleRequest {
 }
 
 declare interface DeleteLiveSnapshotRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1718,7 +1718,7 @@ declare interface DeleteLiveSnapshotTemplateRequest {
 }
 
 declare interface DeleteLiveSnapshotTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1734,7 +1734,7 @@ declare interface DeleteLiveTranscodeRuleRequest {
 }
 
 declare interface DeleteLiveTranscodeRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1744,7 +1744,7 @@ declare interface DeleteLiveTranscodeTemplateRequest {
 }
 
 declare interface DeleteLiveTranscodeTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1754,7 +1754,7 @@ declare interface DeleteLiveWatermarkRequest {
 }
 
 declare interface DeleteLiveWatermarkResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1768,7 +1768,7 @@ declare interface DeleteLiveWatermarkRuleRequest {
 }
 
 declare interface DeleteLiveWatermarkRuleResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1778,7 +1778,7 @@ declare interface DeletePullStreamConfigRequest {
 }
 
 declare interface DeletePullStreamConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1788,7 +1788,7 @@ declare interface DeleteRecordTaskRequest {
 }
 
 declare interface DeleteRecordTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1798,7 +1798,7 @@ declare interface DeleteScreenshotTaskRequest {
 }
 
 declare interface DeleteScreenshotTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1814,7 +1814,7 @@ declare interface DescribeAllStreamPlayInfoListResponse {
   QueryTime: string;
   /** 数据信息列表。 */
   DataInfoList: MonitorStreamPlayInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1830,7 +1830,7 @@ declare interface DescribeAreaBillBandwidthAndFluxListRequest {
 declare interface DescribeAreaBillBandwidthAndFluxListResponse {
   /** 明细数据信息。 */
   DataInfoList: BillAreaInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1864,7 +1864,7 @@ declare interface DescribeBillBandwidthAndFluxListResponse {
   SumFlux: number;
   /** 明细数据信息。 */
   DataInfoList: BillDataInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1896,7 +1896,7 @@ declare interface DescribeCallbackRecordsListResponse {
   TotalNum: number;
   /** 总页数。 */
   TotalPage: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1916,7 +1916,7 @@ declare interface DescribeConcurrentRecordStreamNumRequest {
 declare interface DescribeConcurrentRecordStreamNumResponse {
   /** 统计信息列表。 */
   DataInfoList: ConcurrentRecordStreamNum[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1930,7 +1930,7 @@ declare interface DescribeDeliverBandwidthListRequest {
 declare interface DescribeDeliverBandwidthListResponse {
   /** 转推计费带宽数据 */
   DataInfoList: BandwidthInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1952,7 +1952,7 @@ declare interface DescribeGroupProIspPlayInfoListRequest {
 declare interface DescribeGroupProIspPlayInfoListResponse {
   /** 数据内容。 */
   DataInfoList: GroupProIspDataInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1968,7 +1968,7 @@ declare interface DescribeHttpStatusInfoListRequest {
 declare interface DescribeHttpStatusInfoListResponse {
   /** 播放状态码列表。 */
   DataInfoList: HttpStatusData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1978,7 +1978,7 @@ declare interface DescribeLiveCallbackRulesRequest {
 declare interface DescribeLiveCallbackRulesResponse {
   /** 规则信息列表。 */
   Rules?: CallBackRuleInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1990,7 +1990,7 @@ declare interface DescribeLiveCallbackTemplateRequest {
 declare interface DescribeLiveCallbackTemplateResponse {
   /** 回调模板信息。 */
   Template: CallBackTemplateInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2000,7 +2000,7 @@ declare interface DescribeLiveCallbackTemplatesRequest {
 declare interface DescribeLiveCallbackTemplatesResponse {
   /** 模板信息列表。 */
   Templates: CallBackTemplateInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2012,7 +2012,7 @@ declare interface DescribeLiveCertRequest {
 declare interface DescribeLiveCertResponse {
   /** 证书信息。 */
   CertInfo?: CertInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2022,7 +2022,7 @@ declare interface DescribeLiveCertsRequest {
 declare interface DescribeLiveCertsResponse {
   /** 证书信息列表。 */
   CertInfoSet?: CertInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2032,7 +2032,7 @@ declare interface DescribeLiveDelayInfoListRequest {
 declare interface DescribeLiveDelayInfoListResponse {
   /** 延播信息列表。 */
   DelayInfoList?: DelayInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2054,7 +2054,7 @@ declare interface DescribeLiveDomainCertBindingsResponse {
   LiveDomainCertBindings: LiveDomainCertBindings[];
   /** 总的记录行数，便于分页。 */
   TotalNum: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2066,7 +2066,7 @@ declare interface DescribeLiveDomainCertRequest {
 declare interface DescribeLiveDomainCertResponse {
   /** 证书信息。 */
   DomainCertInfo?: DomainCertInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2088,7 +2088,7 @@ declare interface DescribeLiveDomainPlayInfoListResponse {
   TotalOnline: number;
   /** 分域名的数据情况。 */
   DomainInfoList: DomainInfoList[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2100,7 +2100,7 @@ declare interface DescribeLiveDomainRefererRequest {
 declare interface DescribeLiveDomainRefererResponse {
   /** 域名 Referer 黑白名单配置。 */
   RefererAuthConfig: RefererAuthConfig;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2112,7 +2112,7 @@ declare interface DescribeLiveDomainRequest {
 declare interface DescribeLiveDomainResponse {
   /** 域名信息。 */
   DomainInfo?: DomainInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2142,7 +2142,7 @@ declare interface DescribeLiveDomainsResponse {
   CreateLimitCount: number | null;
   /** 启用的播放域名加速区域统计，数组元素分别为：中国大陆（境内），全球地区，国际/港澳台（境外）域名数量。 */
   PlayTypeCount: number[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2166,7 +2166,7 @@ declare interface DescribeLiveForbidStreamListResponse {
   PageSize: number;
   /** 禁推流列表。 */
   ForbidStreamList: ForbidStreamInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2196,7 +2196,7 @@ declare interface DescribeLivePackageInfoResponse {
   PageSize: number | null;
   /** 当请求参数 PackageType = 0 时生效，逗号分隔，从第一个到最后一个分别表示：标准直播，中国大陆（境内全地区）计费方式。标准直播，国际/港澳台（境外多地区）计费方式。快直播，中国大陆（境内全地区）计费方式。快直播，国际/港澳台（境外多地区）计费方式。 */
   FluxPackageBillMode: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2208,7 +2208,7 @@ declare interface DescribeLivePlayAuthKeyRequest {
 declare interface DescribeLivePlayAuthKeyResponse {
   /** 播放鉴权key信息。 */
   PlayAuthKeyInfo?: PlayAuthKeyInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2234,7 +2234,7 @@ declare interface DescribeLivePullStreamTasksResponse {
   TotalPage: number;
   /** 限制可创建的最大任务数。 */
   LimitTaskNum: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2246,7 +2246,7 @@ declare interface DescribeLivePushAuthKeyRequest {
 declare interface DescribeLivePushAuthKeyResponse {
   /** 推流鉴权key信息。 */
   PushAuthKeyInfo?: PushAuthKeyInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2256,7 +2256,7 @@ declare interface DescribeLiveRecordRulesRequest {
 declare interface DescribeLiveRecordRulesResponse {
   /** 规则列表。 */
   Rules: RuleInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2268,7 +2268,7 @@ declare interface DescribeLiveRecordTemplateRequest {
 declare interface DescribeLiveRecordTemplateResponse {
   /** 录制模板信息。 */
   Template: RecordTemplateInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2280,7 +2280,7 @@ declare interface DescribeLiveRecordTemplatesRequest {
 declare interface DescribeLiveRecordTemplatesResponse {
   /** 录制模板信息列表。 */
   Templates: RecordTemplateInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2290,7 +2290,7 @@ declare interface DescribeLiveSnapshotRulesRequest {
 declare interface DescribeLiveSnapshotRulesResponse {
   /** 规则列表。 */
   Rules: RuleInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2302,7 +2302,7 @@ declare interface DescribeLiveSnapshotTemplateRequest {
 declare interface DescribeLiveSnapshotTemplateResponse {
   /** 截图模板信息。 */
   Template?: SnapshotTemplateInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2312,7 +2312,7 @@ declare interface DescribeLiveSnapshotTemplatesRequest {
 declare interface DescribeLiveSnapshotTemplatesResponse {
   /** 截图模板列表。 */
   Templates: SnapshotTemplateInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2350,7 +2350,7 @@ declare interface DescribeLiveStreamEventListResponse {
   TotalNum: number;
   /** 总页数。 */
   TotalPage: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2378,7 +2378,7 @@ declare interface DescribeLiveStreamOnlineListResponse {
   PageSize: number;
   /** 正在推送流的信息列表。 */
   OnlineInfo: StreamOnlineInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2410,7 +2410,7 @@ declare interface DescribeLiveStreamPublishedListResponse {
   TotalNum?: number;
   /** 总页数。 */
   TotalPage?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2436,7 +2436,7 @@ declare interface DescribeLiveStreamPushInfoListResponse {
   PageNum: number;
   /** 每页的在线流的个数。 */
   PageSize: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2452,7 +2452,7 @@ declare interface DescribeLiveStreamStateRequest {
 declare interface DescribeLiveStreamStateResponse {
   /** 流状态，active：活跃，inactive：非活跃，forbid：禁播。 */
   StreamState: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2468,7 +2468,7 @@ declare interface DescribeLiveTimeShiftBillInfoListRequest {
 declare interface DescribeLiveTimeShiftBillInfoListResponse {
   /** 时移计费明细数据。 */
   DataInfoList: TimeShiftBillData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2500,7 +2500,7 @@ declare interface DescribeLiveTranscodeDetailInfoResponse {
   TotalNum: number;
   /** 总页数。 */
   TotalPage: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2514,7 +2514,7 @@ declare interface DescribeLiveTranscodeRulesRequest {
 declare interface DescribeLiveTranscodeRulesResponse {
   /** 转码规则列表。 */
   Rules: RuleInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2526,7 +2526,7 @@ declare interface DescribeLiveTranscodeTemplateRequest {
 declare interface DescribeLiveTranscodeTemplateResponse {
   /** 模板信息。 */
   Template: TemplateInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2536,7 +2536,7 @@ declare interface DescribeLiveTranscodeTemplatesRequest {
 declare interface DescribeLiveTranscodeTemplatesResponse {
   /** 转码模板列表。 */
   Templates: TemplateInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2554,7 +2554,7 @@ declare interface DescribeLiveTranscodeTotalInfoRequest {
 declare interface DescribeLiveTranscodeTotalInfoResponse {
   /** 统计数据列表。 */
   DataInfoList: TranscodeTotalInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2566,7 +2566,7 @@ declare interface DescribeLiveWatermarkRequest {
 declare interface DescribeLiveWatermarkResponse {
   /** 水印信息。 */
   Watermark: WatermarkInfo;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2576,7 +2576,7 @@ declare interface DescribeLiveWatermarkRulesRequest {
 declare interface DescribeLiveWatermarkRulesResponse {
   /** 水印规则列表。 */
   Rules: RuleInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2588,7 +2588,7 @@ declare interface DescribeLiveWatermarksResponse {
   TotalNum?: number;
   /** 水印信息列表。 */
   WatermarkList?: WatermarkInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2606,7 +2606,7 @@ declare interface DescribeLogDownloadListResponse {
   LogInfoList: LogInfo[];
   /** 总条数。 */
   TotalNum: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2630,7 +2630,7 @@ declare interface DescribePlayErrorCodeDetailInfoListResponse {
   HttpCodeList: HttpCodeInfo[];
   /** 统计类型。 */
   StatType: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2676,7 +2676,7 @@ declare interface DescribePlayErrorCodeSumInfoListResponse {
   TotalCode2xx: number;
   /** 状态码为3开头的总次数。 */
   TotalCode3xx: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2718,7 +2718,7 @@ declare interface DescribeProIspPlaySumInfoListResponse {
   DataInfoList: ProIspPlaySumInfo[];
   /** 下载速度，单位：MB/s，计算方式：总流量/总时长。 */
   AvgFluxPerSecond: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2748,7 +2748,7 @@ declare interface DescribeProvinceIspPlayInfoListResponse {
   DataInfoList: PlayStatInfo[];
   /** 统计的类型，和输入参数保持一致。 */
   StatType: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2760,7 +2760,7 @@ declare interface DescribePullStreamConfigsRequest {
 declare interface DescribePullStreamConfigsResponse {
   /** 拉流配置。 */
   PullStreamConfigs: PullStreamConfig[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2794,7 +2794,7 @@ declare interface DescribePushBandwidthAndFluxListResponse {
   SumFlux: number;
   /** 明细数据信息。 */
   DataInfoList: BillDataInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2818,7 +2818,7 @@ declare interface DescribeRecordTaskResponse {
   ScrollToken: string;
   /** 录制任务列表。当该字段为空，说明已返回所有数据。 */
   TaskList: RecordTask[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2838,7 +2838,7 @@ declare interface DescribeScreenShotSheetNumListRequest {
 declare interface DescribeScreenShotSheetNumListResponse {
   /** 数据信息列表。 */
   DataInfoList: TimeValue[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2862,7 +2862,7 @@ declare interface DescribeScreenshotTaskResponse {
   ScrollToken: string;
   /** 截图任务列表。当该字段为空，说明已返回所有数据。 */
   TaskList: ScreenshotTask[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2892,7 +2892,7 @@ declare interface DescribeStreamDayPlayInfoListResponse {
   PageNum: number;
   /** 每页个数。 */
   PageSize: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2914,7 +2914,7 @@ declare interface DescribeStreamPlayInfoListRequest {
 declare interface DescribeStreamPlayInfoListResponse {
   /** 统计信息列表，时间粒度是1分钟。 */
   DataInfoList: DayStreamPlayInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2934,7 +2934,7 @@ declare interface DescribeStreamPushInfoListRequest {
 declare interface DescribeStreamPushInfoListResponse {
   /** 返回的数据列表。 */
   DataInfoList: PushQualityData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2970,7 +2970,7 @@ declare interface DescribeTopClientIpSumInfoListResponse {
   TotalPage: number;
   /** 数据内容。 */
   DataInfoList: ClientIpPlaySumInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -2986,7 +2986,7 @@ declare interface DescribeTranscodeTaskNumRequest {
 declare interface DescribeTranscodeTaskNumResponse {
   /** 任务数列表。 */
   DataInfoList: TranscodeTaskNum[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3004,7 +3004,7 @@ declare interface DescribeUploadStreamNumsRequest {
 declare interface DescribeUploadStreamNumsResponse {
   /** 明细数据信息 */
   DataInfoList: ConcurrentRecordStreamNum[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3040,7 +3040,7 @@ declare interface DescribeVisitTopSumInfoListResponse {
   TotalPage: number;
   /** 数据内容。 */
   DataInfoList: PlaySumStatInfo[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3054,7 +3054,7 @@ declare interface DropLiveStreamRequest {
 }
 
 declare interface DropLiveStreamResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3064,7 +3064,7 @@ declare interface EnableLiveDomainRequest {
 }
 
 declare interface EnableLiveDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3074,7 +3074,7 @@ declare interface ForbidLiveDomainRequest {
 }
 
 declare interface ForbidLiveDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3092,7 +3092,7 @@ declare interface ForbidLiveStreamRequest {
 }
 
 declare interface ForbidLiveStreamResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3120,7 +3120,7 @@ declare interface ModifyLiveCallbackTemplateRequest {
 }
 
 declare interface ModifyLiveCallbackTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3142,7 +3142,7 @@ declare interface ModifyLiveDomainCertBindingsResponse {
   MismatchedDomainNames: string[];
   /** 操作失败的域名及错误码，错误信息，包括MismatchedDomainNames中的域名。 */
   Errors: BatchDomainOperateErrors[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3160,7 +3160,7 @@ declare interface ModifyLiveDomainRefererRequest {
 }
 
 declare interface ModifyLiveDomainRefererResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3178,7 +3178,7 @@ declare interface ModifyLivePlayAuthKeyRequest {
 }
 
 declare interface ModifyLivePlayAuthKeyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3190,7 +3190,7 @@ declare interface ModifyLivePlayDomainRequest {
 }
 
 declare interface ModifyLivePlayDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3232,7 +3232,7 @@ declare interface ModifyLivePullStreamTaskRequest {
 }
 
 declare interface ModifyLivePullStreamTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3250,7 +3250,7 @@ declare interface ModifyLivePushAuthKeyRequest {
 }
 
 declare interface ModifyLivePushAuthKeyResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3280,7 +3280,7 @@ declare interface ModifyLiveRecordTemplateRequest {
 }
 
 declare interface ModifyLiveRecordTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3312,7 +3312,7 @@ declare interface ModifyLiveSnapshotTemplateRequest {
 }
 
 declare interface ModifyLiveSnapshotTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3362,7 +3362,7 @@ declare interface ModifyLiveTranscodeTemplateRequest {
 }
 
 declare interface ModifyLiveTranscodeTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3384,7 +3384,7 @@ declare interface ModifyPullStreamConfigRequest {
 }
 
 declare interface ModifyPullStreamConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3396,7 +3396,7 @@ declare interface ModifyPullStreamStatusRequest {
 }
 
 declare interface ModifyPullStreamStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3410,7 +3410,7 @@ declare interface ResumeDelayLiveStreamRequest {
 }
 
 declare interface ResumeDelayLiveStreamResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3424,7 +3424,7 @@ declare interface ResumeLiveStreamRequest {
 }
 
 declare interface ResumeLiveStreamResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3436,7 +3436,7 @@ declare interface StopLiveRecordRequest {
 }
 
 declare interface StopLiveRecordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3446,7 +3446,7 @@ declare interface StopRecordTaskRequest {
 }
 
 declare interface StopRecordTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3456,7 +3456,7 @@ declare interface StopScreenshotTaskRequest {
 }
 
 declare interface StopScreenshotTaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3468,7 +3468,7 @@ declare interface UnBindLiveDomainCertRequest {
 }
 
 declare interface UnBindLiveDomainCertResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -3490,254 +3490,254 @@ declare interface UpdateLiveWatermarkRequest {
 }
 
 declare interface UpdateLiveWatermarkResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Live 云直播CSS} */
 declare interface Live {
   (): Versions;
-  /** {@link AddDelayLiveStream 设置延时直播}({@link AddDelayLiveStreamRequest 请求参数}): {@link AddDelayLiveStreamResponse 返回参数} */
+  /** 设置延时直播 {@link AddDelayLiveStreamRequest} {@link AddDelayLiveStreamResponse} */
   AddDelayLiveStream(data: AddDelayLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<AddDelayLiveStreamResponse>;
-  /** {@link AddLiveDomain 添加域名}({@link AddLiveDomainRequest 请求参数}): {@link AddLiveDomainResponse 返回参数} */
+  /** 添加域名 {@link AddLiveDomainRequest} {@link AddLiveDomainResponse} */
   AddLiveDomain(data: AddLiveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<AddLiveDomainResponse>;
-  /** {@link AddLiveWatermark 添加水印}({@link AddLiveWatermarkRequest 请求参数}): {@link AddLiveWatermarkResponse 返回参数} */
+  /** 添加水印 {@link AddLiveWatermarkRequest} {@link AddLiveWatermarkResponse} */
   AddLiveWatermark(data: AddLiveWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<AddLiveWatermarkResponse>;
-  /** {@link AuthenticateDomainOwner 验证直播域名所有权}({@link AuthenticateDomainOwnerRequest 请求参数}): {@link AuthenticateDomainOwnerResponse 返回参数} */
+  /** 验证直播域名所有权 {@link AuthenticateDomainOwnerRequest} {@link AuthenticateDomainOwnerResponse} */
   AuthenticateDomainOwner(data: AuthenticateDomainOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<AuthenticateDomainOwnerResponse>;
-  /** {@link CancelCommonMixStream 取消通用混流}({@link CancelCommonMixStreamRequest 请求参数}): {@link CancelCommonMixStreamResponse 返回参数} */
+  /** 取消通用混流 {@link CancelCommonMixStreamRequest} {@link CancelCommonMixStreamResponse} */
   CancelCommonMixStream(data: CancelCommonMixStreamRequest, config?: AxiosRequestConfig): AxiosPromise<CancelCommonMixStreamResponse>;
-  /** {@link CreateCommonMixStream 创建通用混流}({@link CreateCommonMixStreamRequest 请求参数}): {@link CreateCommonMixStreamResponse 返回参数} */
+  /** 创建通用混流 {@link CreateCommonMixStreamRequest} {@link CreateCommonMixStreamResponse} */
   CreateCommonMixStream(data: CreateCommonMixStreamRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCommonMixStreamResponse>;
-  /** {@link CreateLiveCallbackRule 创建回调规则}({@link CreateLiveCallbackRuleRequest 请求参数}): {@link CreateLiveCallbackRuleResponse 返回参数} */
+  /** 创建回调规则 {@link CreateLiveCallbackRuleRequest} {@link CreateLiveCallbackRuleResponse} */
   CreateLiveCallbackRule(data: CreateLiveCallbackRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveCallbackRuleResponse>;
-  /** {@link CreateLiveCallbackTemplate 创建回调模板}({@link CreateLiveCallbackTemplateRequest 请求参数}): {@link CreateLiveCallbackTemplateResponse 返回参数} */
+  /** 创建回调模板 {@link CreateLiveCallbackTemplateRequest} {@link CreateLiveCallbackTemplateResponse} */
   CreateLiveCallbackTemplate(data: CreateLiveCallbackTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveCallbackTemplateResponse>;
-  /** {@link CreateLivePullStreamTask 创建直播拉流任务}({@link CreateLivePullStreamTaskRequest 请求参数}): {@link CreateLivePullStreamTaskResponse 返回参数} */
+  /** 创建直播拉流任务 {@link CreateLivePullStreamTaskRequest} {@link CreateLivePullStreamTaskResponse} */
   CreateLivePullStreamTask(data: CreateLivePullStreamTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLivePullStreamTaskResponse>;
-  /** {@link CreateLiveRecord 创建录制任务(已废弃,请使用新接口)}({@link CreateLiveRecordRequest 请求参数}): {@link CreateLiveRecordResponse 返回参数} */
+  /** 创建录制任务(已废弃,请使用新接口) {@link CreateLiveRecordRequest} {@link CreateLiveRecordResponse} */
   CreateLiveRecord(data: CreateLiveRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveRecordResponse>;
-  /** {@link CreateLiveRecordRule 创建录制规则}({@link CreateLiveRecordRuleRequest 请求参数}): {@link CreateLiveRecordRuleResponse 返回参数} */
+  /** 创建录制规则 {@link CreateLiveRecordRuleRequest} {@link CreateLiveRecordRuleResponse} */
   CreateLiveRecordRule(data: CreateLiveRecordRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveRecordRuleResponse>;
-  /** {@link CreateLiveRecordTemplate 直播创建录制模板}({@link CreateLiveRecordTemplateRequest 请求参数}): {@link CreateLiveRecordTemplateResponse 返回参数} */
+  /** 直播创建录制模板 {@link CreateLiveRecordTemplateRequest} {@link CreateLiveRecordTemplateResponse} */
   CreateLiveRecordTemplate(data: CreateLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveRecordTemplateResponse>;
-  /** {@link CreateLiveSnapshotRule 创建截图规则}({@link CreateLiveSnapshotRuleRequest 请求参数}): {@link CreateLiveSnapshotRuleResponse 返回参数} */
+  /** 创建截图规则 {@link CreateLiveSnapshotRuleRequest} {@link CreateLiveSnapshotRuleResponse} */
   CreateLiveSnapshotRule(data: CreateLiveSnapshotRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveSnapshotRuleResponse>;
-  /** {@link CreateLiveSnapshotTemplate 创建截图模板}({@link CreateLiveSnapshotTemplateRequest 请求参数}): {@link CreateLiveSnapshotTemplateResponse 返回参数} */
+  /** 创建截图模板 {@link CreateLiveSnapshotTemplateRequest} {@link CreateLiveSnapshotTemplateResponse} */
   CreateLiveSnapshotTemplate(data: CreateLiveSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveSnapshotTemplateResponse>;
-  /** {@link CreateLiveTranscodeRule 创建转码规则}({@link CreateLiveTranscodeRuleRequest 请求参数}): {@link CreateLiveTranscodeRuleResponse 返回参数} */
+  /** 创建转码规则 {@link CreateLiveTranscodeRuleRequest} {@link CreateLiveTranscodeRuleResponse} */
   CreateLiveTranscodeRule(data: CreateLiveTranscodeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveTranscodeRuleResponse>;
-  /** {@link CreateLiveTranscodeTemplate 创建转码模板}({@link CreateLiveTranscodeTemplateRequest 请求参数}): {@link CreateLiveTranscodeTemplateResponse 返回参数} */
+  /** 创建转码模板 {@link CreateLiveTranscodeTemplateRequest} {@link CreateLiveTranscodeTemplateResponse} */
   CreateLiveTranscodeTemplate(data: CreateLiveTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveTranscodeTemplateResponse>;
-  /** {@link CreateLiveWatermarkRule 创建水印规则}({@link CreateLiveWatermarkRuleRequest 请求参数}): {@link CreateLiveWatermarkRuleResponse 返回参数} */
+  /** 创建水印规则 {@link CreateLiveWatermarkRuleRequest} {@link CreateLiveWatermarkRuleResponse} */
   CreateLiveWatermarkRule(data: CreateLiveWatermarkRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveWatermarkRuleResponse>;
-  /** {@link CreatePullStreamConfig 添加拉流配置(该接口已下线,请使用新接口 CreateLivePullStreamTask)}({@link CreatePullStreamConfigRequest 请求参数}): {@link CreatePullStreamConfigResponse 返回参数} */
+  /** 添加拉流配置(该接口已下线,请使用新接口 CreateLivePullStreamTask) {@link CreatePullStreamConfigRequest} {@link CreatePullStreamConfigResponse} */
   CreatePullStreamConfig(data: CreatePullStreamConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePullStreamConfigResponse>;
-  /** {@link CreateRecordTask 创建录制任务（新）}({@link CreateRecordTaskRequest 请求参数}): {@link CreateRecordTaskResponse 返回参数} */
+  /** 创建录制任务（新） {@link CreateRecordTaskRequest} {@link CreateRecordTaskResponse} */
   CreateRecordTask(data: CreateRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordTaskResponse>;
-  /** {@link CreateScreenshotTask 创建截图任务}({@link CreateScreenshotTaskRequest 请求参数}): {@link CreateScreenshotTaskResponse 返回参数} */
+  /** 创建截图任务 {@link CreateScreenshotTaskRequest} {@link CreateScreenshotTaskResponse} */
   CreateScreenshotTask(data: CreateScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScreenshotTaskResponse>;
-  /** {@link DeleteLiveCallbackRule 删除回调规则}({@link DeleteLiveCallbackRuleRequest 请求参数}): {@link DeleteLiveCallbackRuleResponse 返回参数} */
+  /** 删除回调规则 {@link DeleteLiveCallbackRuleRequest} {@link DeleteLiveCallbackRuleResponse} */
   DeleteLiveCallbackRule(data: DeleteLiveCallbackRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveCallbackRuleResponse>;
-  /** {@link DeleteLiveCallbackTemplate 删除回调模板}({@link DeleteLiveCallbackTemplateRequest 请求参数}): {@link DeleteLiveCallbackTemplateResponse 返回参数} */
+  /** 删除回调模板 {@link DeleteLiveCallbackTemplateRequest} {@link DeleteLiveCallbackTemplateResponse} */
   DeleteLiveCallbackTemplate(data: DeleteLiveCallbackTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveCallbackTemplateResponse>;
-  /** {@link DeleteLiveDomain 删除域名}({@link DeleteLiveDomainRequest 请求参数}): {@link DeleteLiveDomainResponse 返回参数} */
+  /** 删除域名 {@link DeleteLiveDomainRequest} {@link DeleteLiveDomainResponse} */
   DeleteLiveDomain(data: DeleteLiveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveDomainResponse>;
-  /** {@link DeleteLivePullStreamTask 删除直播拉流任务}({@link DeleteLivePullStreamTaskRequest 请求参数}): {@link DeleteLivePullStreamTaskResponse 返回参数} */
+  /** 删除直播拉流任务 {@link DeleteLivePullStreamTaskRequest} {@link DeleteLivePullStreamTaskResponse} */
   DeleteLivePullStreamTask(data: DeleteLivePullStreamTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLivePullStreamTaskResponse>;
-  /** {@link DeleteLiveRecord 删除录制任务(已废弃,请使用新接口)}({@link DeleteLiveRecordRequest 请求参数}): {@link DeleteLiveRecordResponse 返回参数} */
+  /** 删除录制任务(已废弃,请使用新接口) {@link DeleteLiveRecordRequest} {@link DeleteLiveRecordResponse} */
   DeleteLiveRecord(data: DeleteLiveRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveRecordResponse>;
-  /** {@link DeleteLiveRecordRule 删除录制规则}({@link DeleteLiveRecordRuleRequest 请求参数}): {@link DeleteLiveRecordRuleResponse 返回参数} */
+  /** 删除录制规则 {@link DeleteLiveRecordRuleRequest} {@link DeleteLiveRecordRuleResponse} */
   DeleteLiveRecordRule(data: DeleteLiveRecordRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveRecordRuleResponse>;
-  /** {@link DeleteLiveRecordTemplate 删除录制模板}({@link DeleteLiveRecordTemplateRequest 请求参数}): {@link DeleteLiveRecordTemplateResponse 返回参数} */
+  /** 删除录制模板 {@link DeleteLiveRecordTemplateRequest} {@link DeleteLiveRecordTemplateResponse} */
   DeleteLiveRecordTemplate(data: DeleteLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveRecordTemplateResponse>;
-  /** {@link DeleteLiveSnapshotRule 删除截图规则}({@link DeleteLiveSnapshotRuleRequest 请求参数}): {@link DeleteLiveSnapshotRuleResponse 返回参数} */
+  /** 删除截图规则 {@link DeleteLiveSnapshotRuleRequest} {@link DeleteLiveSnapshotRuleResponse} */
   DeleteLiveSnapshotRule(data: DeleteLiveSnapshotRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveSnapshotRuleResponse>;
-  /** {@link DeleteLiveSnapshotTemplate 删除截图模板}({@link DeleteLiveSnapshotTemplateRequest 请求参数}): {@link DeleteLiveSnapshotTemplateResponse 返回参数} */
+  /** 删除截图模板 {@link DeleteLiveSnapshotTemplateRequest} {@link DeleteLiveSnapshotTemplateResponse} */
   DeleteLiveSnapshotTemplate(data: DeleteLiveSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveSnapshotTemplateResponse>;
-  /** {@link DeleteLiveTranscodeRule 删除转码规则}({@link DeleteLiveTranscodeRuleRequest 请求参数}): {@link DeleteLiveTranscodeRuleResponse 返回参数} */
+  /** 删除转码规则 {@link DeleteLiveTranscodeRuleRequest} {@link DeleteLiveTranscodeRuleResponse} */
   DeleteLiveTranscodeRule(data: DeleteLiveTranscodeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveTranscodeRuleResponse>;
-  /** {@link DeleteLiveTranscodeTemplate 删除转码模板}({@link DeleteLiveTranscodeTemplateRequest 请求参数}): {@link DeleteLiveTranscodeTemplateResponse 返回参数} */
+  /** 删除转码模板 {@link DeleteLiveTranscodeTemplateRequest} {@link DeleteLiveTranscodeTemplateResponse} */
   DeleteLiveTranscodeTemplate(data: DeleteLiveTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveTranscodeTemplateResponse>;
-  /** {@link DeleteLiveWatermark 删除水印}({@link DeleteLiveWatermarkRequest 请求参数}): {@link DeleteLiveWatermarkResponse 返回参数} */
+  /** 删除水印 {@link DeleteLiveWatermarkRequest} {@link DeleteLiveWatermarkResponse} */
   DeleteLiveWatermark(data: DeleteLiveWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveWatermarkResponse>;
-  /** {@link DeleteLiveWatermarkRule 删除水印规则}({@link DeleteLiveWatermarkRuleRequest 请求参数}): {@link DeleteLiveWatermarkRuleResponse 返回参数} */
+  /** 删除水印规则 {@link DeleteLiveWatermarkRuleRequest} {@link DeleteLiveWatermarkRuleResponse} */
   DeleteLiveWatermarkRule(data: DeleteLiveWatermarkRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveWatermarkRuleResponse>;
-  /** {@link DeletePullStreamConfig 删除拉流配置(该接口已下线,请使用新接口 DeleteLivePullStreamTask)}({@link DeletePullStreamConfigRequest 请求参数}): {@link DeletePullStreamConfigResponse 返回参数} */
+  /** 删除拉流配置(该接口已下线,请使用新接口 DeleteLivePullStreamTask) {@link DeletePullStreamConfigRequest} {@link DeletePullStreamConfigResponse} */
   DeletePullStreamConfig(data: DeletePullStreamConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePullStreamConfigResponse>;
-  /** {@link DeleteRecordTask 删除录制任务（新）}({@link DeleteRecordTaskRequest 请求参数}): {@link DeleteRecordTaskResponse 返回参数} */
+  /** 删除录制任务（新） {@link DeleteRecordTaskRequest} {@link DeleteRecordTaskResponse} */
   DeleteRecordTask(data: DeleteRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordTaskResponse>;
-  /** {@link DeleteScreenshotTask 删除截图任务}({@link DeleteScreenshotTaskRequest 请求参数}): {@link DeleteScreenshotTaskResponse 返回参数} */
+  /** 删除截图任务 {@link DeleteScreenshotTaskRequest} {@link DeleteScreenshotTaskResponse} */
   DeleteScreenshotTask(data: DeleteScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScreenshotTaskResponse>;
-  /** {@link DescribeAllStreamPlayInfoList 查询某个时间点所有流的下行播放数据}({@link DescribeAllStreamPlayInfoListRequest 请求参数}): {@link DescribeAllStreamPlayInfoListResponse 返回参数} */
+  /** 查询某个时间点所有流的下行播放数据 {@link DescribeAllStreamPlayInfoListRequest} {@link DescribeAllStreamPlayInfoListResponse} */
   DescribeAllStreamPlayInfoList(data: DescribeAllStreamPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllStreamPlayInfoListResponse>;
-  /** {@link DescribeAreaBillBandwidthAndFluxList 海外分区直播播放带宽和流量数据查询}({@link DescribeAreaBillBandwidthAndFluxListRequest 请求参数}): {@link DescribeAreaBillBandwidthAndFluxListResponse 返回参数} */
+  /** 海外分区直播播放带宽和流量数据查询 {@link DescribeAreaBillBandwidthAndFluxListRequest} {@link DescribeAreaBillBandwidthAndFluxListResponse} */
   DescribeAreaBillBandwidthAndFluxList(data: DescribeAreaBillBandwidthAndFluxListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAreaBillBandwidthAndFluxListResponse>;
-  /** {@link DescribeBillBandwidthAndFluxList 直播播放带宽和流量数据查询}({@link DescribeBillBandwidthAndFluxListRequest 请求参数}): {@link DescribeBillBandwidthAndFluxListResponse 返回参数} */
+  /** 直播播放带宽和流量数据查询 {@link DescribeBillBandwidthAndFluxListRequest} {@link DescribeBillBandwidthAndFluxListResponse} */
   DescribeBillBandwidthAndFluxList(data: DescribeBillBandwidthAndFluxListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillBandwidthAndFluxListResponse>;
-  /** {@link DescribeCallbackRecordsList 回调事件查询}({@link DescribeCallbackRecordsListRequest 请求参数}): {@link DescribeCallbackRecordsListResponse 返回参数} */
+  /** 回调事件查询 {@link DescribeCallbackRecordsListRequest} {@link DescribeCallbackRecordsListResponse} */
   DescribeCallbackRecordsList(data: DescribeCallbackRecordsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallbackRecordsListResponse>;
-  /** {@link DescribeConcurrentRecordStreamNum 查询并发录制路数}({@link DescribeConcurrentRecordStreamNumRequest 请求参数}): {@link DescribeConcurrentRecordStreamNumResponse 返回参数} */
+  /** 查询并发录制路数 {@link DescribeConcurrentRecordStreamNumRequest} {@link DescribeConcurrentRecordStreamNumResponse} */
   DescribeConcurrentRecordStreamNum(data: DescribeConcurrentRecordStreamNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConcurrentRecordStreamNumResponse>;
-  /** {@link DescribeDeliverBandwidthList 查询直播转推计费带宽}({@link DescribeDeliverBandwidthListRequest 请求参数}): {@link DescribeDeliverBandwidthListResponse 返回参数} */
+  /** 查询直播转推计费带宽 {@link DescribeDeliverBandwidthListRequest} {@link DescribeDeliverBandwidthListResponse} */
   DescribeDeliverBandwidthList(data: DescribeDeliverBandwidthListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliverBandwidthListResponse>;
-  /** {@link DescribeGroupProIspPlayInfoList 查询按省份和运营商分组的播放数据}({@link DescribeGroupProIspPlayInfoListRequest 请求参数}): {@link DescribeGroupProIspPlayInfoListResponse 返回参数} */
+  /** 查询按省份和运营商分组的播放数据 {@link DescribeGroupProIspPlayInfoListRequest} {@link DescribeGroupProIspPlayInfoListResponse} */
   DescribeGroupProIspPlayInfoList(data: DescribeGroupProIspPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupProIspPlayInfoListResponse>;
-  /** {@link DescribeHttpStatusInfoList 查询播放http状态码明细数据}({@link DescribeHttpStatusInfoListRequest 请求参数}): {@link DescribeHttpStatusInfoListResponse 返回参数} */
+  /** 查询播放http状态码明细数据 {@link DescribeHttpStatusInfoListRequest} {@link DescribeHttpStatusInfoListResponse} */
   DescribeHttpStatusInfoList(data: DescribeHttpStatusInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHttpStatusInfoListResponse>;
-  /** {@link DescribeLiveCallbackRules 获取回调规则列表}({@link DescribeLiveCallbackRulesRequest 请求参数}): {@link DescribeLiveCallbackRulesResponse 返回参数} */
+  /** 获取回调规则列表 {@link DescribeLiveCallbackRulesRequest} {@link DescribeLiveCallbackRulesResponse} */
   DescribeLiveCallbackRules(data?: DescribeLiveCallbackRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCallbackRulesResponse>;
-  /** {@link DescribeLiveCallbackTemplate 获取单个回调模板}({@link DescribeLiveCallbackTemplateRequest 请求参数}): {@link DescribeLiveCallbackTemplateResponse 返回参数} */
+  /** 获取单个回调模板 {@link DescribeLiveCallbackTemplateRequest} {@link DescribeLiveCallbackTemplateResponse} */
   DescribeLiveCallbackTemplate(data: DescribeLiveCallbackTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCallbackTemplateResponse>;
-  /** {@link DescribeLiveCallbackTemplates 获取回调模板列表}({@link DescribeLiveCallbackTemplatesRequest 请求参数}): {@link DescribeLiveCallbackTemplatesResponse 返回参数} */
+  /** 获取回调模板列表 {@link DescribeLiveCallbackTemplatesRequest} {@link DescribeLiveCallbackTemplatesResponse} */
   DescribeLiveCallbackTemplates(data?: DescribeLiveCallbackTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCallbackTemplatesResponse>;
-  /** {@link DescribeLiveCert 获取证书信息}({@link DescribeLiveCertRequest 请求参数}): {@link DescribeLiveCertResponse 返回参数} */
+  /** 获取证书信息 {@link DescribeLiveCertRequest} {@link DescribeLiveCertResponse} */
   DescribeLiveCert(data: DescribeLiveCertRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCertResponse>;
-  /** {@link DescribeLiveCerts 获取证书信息列表}({@link DescribeLiveCertsRequest 请求参数}): {@link DescribeLiveCertsResponse 返回参数} */
+  /** 获取证书信息列表 {@link DescribeLiveCertsRequest} {@link DescribeLiveCertsResponse} */
   DescribeLiveCerts(data?: DescribeLiveCertsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCertsResponse>;
-  /** {@link DescribeLiveDelayInfoList 获取直播延播列表}({@link DescribeLiveDelayInfoListRequest 请求参数}): {@link DescribeLiveDelayInfoListResponse 返回参数} */
+  /** 获取直播延播列表 {@link DescribeLiveDelayInfoListRequest} {@link DescribeLiveDelayInfoListResponse} */
   DescribeLiveDelayInfoList(data?: DescribeLiveDelayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDelayInfoListResponse>;
-  /** {@link DescribeLiveDomain 查询域名信息}({@link DescribeLiveDomainRequest 请求参数}): {@link DescribeLiveDomainResponse 返回参数} */
+  /** 查询域名信息 {@link DescribeLiveDomainRequest} {@link DescribeLiveDomainResponse} */
   DescribeLiveDomain(data: DescribeLiveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainResponse>;
-  /** {@link DescribeLiveDomainCert 获取域名证书信息}({@link DescribeLiveDomainCertRequest 请求参数}): {@link DescribeLiveDomainCertResponse 返回参数} */
+  /** 获取域名证书信息 {@link DescribeLiveDomainCertRequest} {@link DescribeLiveDomainCertResponse} */
   DescribeLiveDomainCert(data: DescribeLiveDomainCertRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainCertResponse>;
-  /** {@link DescribeLiveDomainCertBindings 查询绑定证书的域名列表}({@link DescribeLiveDomainCertBindingsRequest 请求参数}): {@link DescribeLiveDomainCertBindingsResponse 返回参数} */
+  /** 查询绑定证书的域名列表 {@link DescribeLiveDomainCertBindingsRequest} {@link DescribeLiveDomainCertBindingsResponse} */
   DescribeLiveDomainCertBindings(data?: DescribeLiveDomainCertBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainCertBindingsResponse>;
-  /** {@link DescribeLiveDomainPlayInfoList 查询实时的域名维度下行播放数据}({@link DescribeLiveDomainPlayInfoListRequest 请求参数}): {@link DescribeLiveDomainPlayInfoListResponse 返回参数} */
+  /** 查询实时的域名维度下行播放数据 {@link DescribeLiveDomainPlayInfoListRequest} {@link DescribeLiveDomainPlayInfoListResponse} */
   DescribeLiveDomainPlayInfoList(data?: DescribeLiveDomainPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainPlayInfoListResponse>;
-  /** {@link DescribeLiveDomainReferer 查询直播域名 Referer 黑白名单配置}({@link DescribeLiveDomainRefererRequest 请求参数}): {@link DescribeLiveDomainRefererResponse 返回参数} */
+  /** 查询直播域名 Referer 黑白名单配置 {@link DescribeLiveDomainRefererRequest} {@link DescribeLiveDomainRefererResponse} */
   DescribeLiveDomainReferer(data: DescribeLiveDomainRefererRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainRefererResponse>;
-  /** {@link DescribeLiveDomains 查询域名列表}({@link DescribeLiveDomainsRequest 请求参数}): {@link DescribeLiveDomainsResponse 返回参数} */
+  /** 查询域名列表 {@link DescribeLiveDomainsRequest} {@link DescribeLiveDomainsResponse} */
   DescribeLiveDomains(data?: DescribeLiveDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainsResponse>;
-  /** {@link DescribeLiveForbidStreamList 获取禁推流列表}({@link DescribeLiveForbidStreamListRequest 请求参数}): {@link DescribeLiveForbidStreamListResponse 返回参数} */
+  /** 获取禁推流列表 {@link DescribeLiveForbidStreamListRequest} {@link DescribeLiveForbidStreamListResponse} */
   DescribeLiveForbidStreamList(data?: DescribeLiveForbidStreamListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveForbidStreamListResponse>;
-  /** {@link DescribeLivePackageInfo 查询直播套餐包信息}({@link DescribeLivePackageInfoRequest 请求参数}): {@link DescribeLivePackageInfoResponse 返回参数} */
+  /** 查询直播套餐包信息 {@link DescribeLivePackageInfoRequest} {@link DescribeLivePackageInfoResponse} */
   DescribeLivePackageInfo(data: DescribeLivePackageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePackageInfoResponse>;
-  /** {@link DescribeLivePlayAuthKey 查询播放鉴权key}({@link DescribeLivePlayAuthKeyRequest 请求参数}): {@link DescribeLivePlayAuthKeyResponse 返回参数} */
+  /** 查询播放鉴权key {@link DescribeLivePlayAuthKeyRequest} {@link DescribeLivePlayAuthKeyResponse} */
   DescribeLivePlayAuthKey(data: DescribeLivePlayAuthKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePlayAuthKeyResponse>;
-  /** {@link DescribeLivePullStreamTasks 查询直播拉流任务}({@link DescribeLivePullStreamTasksRequest 请求参数}): {@link DescribeLivePullStreamTasksResponse 返回参数} */
+  /** 查询直播拉流任务 {@link DescribeLivePullStreamTasksRequest} {@link DescribeLivePullStreamTasksResponse} */
   DescribeLivePullStreamTasks(data?: DescribeLivePullStreamTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePullStreamTasksResponse>;
-  /** {@link DescribeLivePushAuthKey 查询推流鉴权key}({@link DescribeLivePushAuthKeyRequest 请求参数}): {@link DescribeLivePushAuthKeyResponse 返回参数} */
+  /** 查询推流鉴权key {@link DescribeLivePushAuthKeyRequest} {@link DescribeLivePushAuthKeyResponse} */
   DescribeLivePushAuthKey(data: DescribeLivePushAuthKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePushAuthKeyResponse>;
-  /** {@link DescribeLiveRecordRules 获取录制规则列表}({@link DescribeLiveRecordRulesRequest 请求参数}): {@link DescribeLiveRecordRulesResponse 返回参数} */
+  /** 获取录制规则列表 {@link DescribeLiveRecordRulesRequest} {@link DescribeLiveRecordRulesResponse} */
   DescribeLiveRecordRules(data?: DescribeLiveRecordRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordRulesResponse>;
-  /** {@link DescribeLiveRecordTemplate 获取单个录制模板}({@link DescribeLiveRecordTemplateRequest 请求参数}): {@link DescribeLiveRecordTemplateResponse 返回参数} */
+  /** 获取单个录制模板 {@link DescribeLiveRecordTemplateRequest} {@link DescribeLiveRecordTemplateResponse} */
   DescribeLiveRecordTemplate(data: DescribeLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordTemplateResponse>;
-  /** {@link DescribeLiveRecordTemplates 获取录制模板列表}({@link DescribeLiveRecordTemplatesRequest 请求参数}): {@link DescribeLiveRecordTemplatesResponse 返回参数} */
+  /** 获取录制模板列表 {@link DescribeLiveRecordTemplatesRequest} {@link DescribeLiveRecordTemplatesResponse} */
   DescribeLiveRecordTemplates(data?: DescribeLiveRecordTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordTemplatesResponse>;
-  /** {@link DescribeLiveSnapshotRules 获取截图规则列表}({@link DescribeLiveSnapshotRulesRequest 请求参数}): {@link DescribeLiveSnapshotRulesResponse 返回参数} */
+  /** 获取截图规则列表 {@link DescribeLiveSnapshotRulesRequest} {@link DescribeLiveSnapshotRulesResponse} */
   DescribeLiveSnapshotRules(data?: DescribeLiveSnapshotRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveSnapshotRulesResponse>;
-  /** {@link DescribeLiveSnapshotTemplate 获取单个截图模板}({@link DescribeLiveSnapshotTemplateRequest 请求参数}): {@link DescribeLiveSnapshotTemplateResponse 返回参数} */
+  /** 获取单个截图模板 {@link DescribeLiveSnapshotTemplateRequest} {@link DescribeLiveSnapshotTemplateResponse} */
   DescribeLiveSnapshotTemplate(data: DescribeLiveSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveSnapshotTemplateResponse>;
-  /** {@link DescribeLiveSnapshotTemplates 获取截图模板列表}({@link DescribeLiveSnapshotTemplatesRequest 请求参数}): {@link DescribeLiveSnapshotTemplatesResponse 返回参数} */
+  /** 获取截图模板列表 {@link DescribeLiveSnapshotTemplatesRequest} {@link DescribeLiveSnapshotTemplatesResponse} */
   DescribeLiveSnapshotTemplates(data?: DescribeLiveSnapshotTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveSnapshotTemplatesResponse>;
-  /** {@link DescribeLiveStreamEventList 查询推断流事件}({@link DescribeLiveStreamEventListRequest 请求参数}): {@link DescribeLiveStreamEventListResponse 返回参数} */
+  /** 查询推断流事件 {@link DescribeLiveStreamEventListRequest} {@link DescribeLiveStreamEventListResponse} */
   DescribeLiveStreamEventList(data: DescribeLiveStreamEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamEventListResponse>;
-  /** {@link DescribeLiveStreamOnlineList 查询直播中的流}({@link DescribeLiveStreamOnlineListRequest 请求参数}): {@link DescribeLiveStreamOnlineListResponse 返回参数} */
+  /** 查询直播中的流 {@link DescribeLiveStreamOnlineListRequest} {@link DescribeLiveStreamOnlineListResponse} */
   DescribeLiveStreamOnlineList(data?: DescribeLiveStreamOnlineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamOnlineListResponse>;
-  /** {@link DescribeLiveStreamPublishedList 查询历史流列表}({@link DescribeLiveStreamPublishedListRequest 请求参数}): {@link DescribeLiveStreamPublishedListResponse 返回参数} */
+  /** 查询历史流列表 {@link DescribeLiveStreamPublishedListRequest} {@link DescribeLiveStreamPublishedListResponse} */
   DescribeLiveStreamPublishedList(data: DescribeLiveStreamPublishedListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamPublishedListResponse>;
-  /** {@link DescribeLiveStreamPushInfoList 获取在线流的推流数据}({@link DescribeLiveStreamPushInfoListRequest 请求参数}): {@link DescribeLiveStreamPushInfoListResponse 返回参数} */
+  /** 获取在线流的推流数据 {@link DescribeLiveStreamPushInfoListRequest} {@link DescribeLiveStreamPushInfoListResponse} */
   DescribeLiveStreamPushInfoList(data?: DescribeLiveStreamPushInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamPushInfoListResponse>;
-  /** {@link DescribeLiveStreamState 查询流状态}({@link DescribeLiveStreamStateRequest 请求参数}): {@link DescribeLiveStreamStateResponse 返回参数} */
+  /** 查询流状态 {@link DescribeLiveStreamStateRequest} {@link DescribeLiveStreamStateResponse} */
   DescribeLiveStreamState(data: DescribeLiveStreamStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamStateResponse>;
-  /** {@link DescribeLiveTimeShiftBillInfoList 直播时移计费信息查询}({@link DescribeLiveTimeShiftBillInfoListRequest 请求参数}): {@link DescribeLiveTimeShiftBillInfoListResponse 返回参数} */
+  /** 直播时移计费信息查询 {@link DescribeLiveTimeShiftBillInfoListRequest} {@link DescribeLiveTimeShiftBillInfoListResponse} */
   DescribeLiveTimeShiftBillInfoList(data: DescribeLiveTimeShiftBillInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTimeShiftBillInfoListResponse>;
-  /** {@link DescribeLiveTranscodeDetailInfo 查询直播转码统计信息}({@link DescribeLiveTranscodeDetailInfoRequest 请求参数}): {@link DescribeLiveTranscodeDetailInfoResponse 返回参数} */
+  /** 查询直播转码统计信息 {@link DescribeLiveTranscodeDetailInfoRequest} {@link DescribeLiveTranscodeDetailInfoResponse} */
   DescribeLiveTranscodeDetailInfo(data?: DescribeLiveTranscodeDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTranscodeDetailInfoResponse>;
-  /** {@link DescribeLiveTranscodeRules 获取转码规则列表}({@link DescribeLiveTranscodeRulesRequest 请求参数}): {@link DescribeLiveTranscodeRulesResponse 返回参数} */
+  /** 获取转码规则列表 {@link DescribeLiveTranscodeRulesRequest} {@link DescribeLiveTranscodeRulesResponse} */
   DescribeLiveTranscodeRules(data?: DescribeLiveTranscodeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTranscodeRulesResponse>;
-  /** {@link DescribeLiveTranscodeTemplate 获取单个转码模板}({@link DescribeLiveTranscodeTemplateRequest 请求参数}): {@link DescribeLiveTranscodeTemplateResponse 返回参数} */
+  /** 获取单个转码模板 {@link DescribeLiveTranscodeTemplateRequest} {@link DescribeLiveTranscodeTemplateResponse} */
   DescribeLiveTranscodeTemplate(data: DescribeLiveTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTranscodeTemplateResponse>;
-  /** {@link DescribeLiveTranscodeTemplates 获取转码模板列表}({@link DescribeLiveTranscodeTemplatesRequest 请求参数}): {@link DescribeLiveTranscodeTemplatesResponse 返回参数} */
+  /** 获取转码模板列表 {@link DescribeLiveTranscodeTemplatesRequest} {@link DescribeLiveTranscodeTemplatesResponse} */
   DescribeLiveTranscodeTemplates(data?: DescribeLiveTranscodeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTranscodeTemplatesResponse>;
-  /** {@link DescribeLiveTranscodeTotalInfo 查询转码总量数据}({@link DescribeLiveTranscodeTotalInfoRequest 请求参数}): {@link DescribeLiveTranscodeTotalInfoResponse 返回参数} */
+  /** 查询转码总量数据 {@link DescribeLiveTranscodeTotalInfoRequest} {@link DescribeLiveTranscodeTotalInfoResponse} */
   DescribeLiveTranscodeTotalInfo(data: DescribeLiveTranscodeTotalInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTranscodeTotalInfoResponse>;
-  /** {@link DescribeLiveWatermark 获取单个水印}({@link DescribeLiveWatermarkRequest 请求参数}): {@link DescribeLiveWatermarkResponse 返回参数} */
+  /** 获取单个水印 {@link DescribeLiveWatermarkRequest} {@link DescribeLiveWatermarkResponse} */
   DescribeLiveWatermark(data: DescribeLiveWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveWatermarkResponse>;
-  /** {@link DescribeLiveWatermarkRules 获取水印规则列表}({@link DescribeLiveWatermarkRulesRequest 请求参数}): {@link DescribeLiveWatermarkRulesResponse 返回参数} */
+  /** 获取水印规则列表 {@link DescribeLiveWatermarkRulesRequest} {@link DescribeLiveWatermarkRulesResponse} */
   DescribeLiveWatermarkRules(data?: DescribeLiveWatermarkRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveWatermarkRulesResponse>;
-  /** {@link DescribeLiveWatermarks 查询水印列表}({@link DescribeLiveWatermarksRequest 请求参数}): {@link DescribeLiveWatermarksResponse 返回参数} */
+  /** 查询水印列表 {@link DescribeLiveWatermarksRequest} {@link DescribeLiveWatermarksResponse} */
   DescribeLiveWatermarks(data?: DescribeLiveWatermarksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveWatermarksResponse>;
-  /** {@link DescribeLogDownloadList 批量获取日志URL}({@link DescribeLogDownloadListRequest 请求参数}): {@link DescribeLogDownloadListResponse 返回参数} */
+  /** 批量获取日志URL {@link DescribeLogDownloadListRequest} {@link DescribeLogDownloadListResponse} */
   DescribeLogDownloadList(data: DescribeLogDownloadListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogDownloadListResponse>;
-  /** {@link DescribePlayErrorCodeDetailInfoList 查询播放http错误码实时数据}({@link DescribePlayErrorCodeDetailInfoListRequest 请求参数}): {@link DescribePlayErrorCodeDetailInfoListResponse 返回参数} */
+  /** 查询播放http错误码实时数据 {@link DescribePlayErrorCodeDetailInfoListRequest} {@link DescribePlayErrorCodeDetailInfoListResponse} */
   DescribePlayErrorCodeDetailInfoList(data: DescribePlayErrorCodeDetailInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlayErrorCodeDetailInfoListResponse>;
-  /** {@link DescribePlayErrorCodeSumInfoList 查询播放http错误码汇总数据}({@link DescribePlayErrorCodeSumInfoListRequest 请求参数}): {@link DescribePlayErrorCodeSumInfoListResponse 返回参数} */
+  /** 查询播放http错误码汇总数据 {@link DescribePlayErrorCodeSumInfoListRequest} {@link DescribePlayErrorCodeSumInfoListResponse} */
   DescribePlayErrorCodeSumInfoList(data: DescribePlayErrorCodeSumInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlayErrorCodeSumInfoListResponse>;
-  /** {@link DescribeProIspPlaySumInfoList 查询分省份分运营商播放汇总数据}({@link DescribeProIspPlaySumInfoListRequest 请求参数}): {@link DescribeProIspPlaySumInfoListResponse 返回参数} */
+  /** 查询分省份分运营商播放汇总数据 {@link DescribeProIspPlaySumInfoListRequest} {@link DescribeProIspPlaySumInfoListResponse} */
   DescribeProIspPlaySumInfoList(data: DescribeProIspPlaySumInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProIspPlaySumInfoListResponse>;
-  /** {@link DescribeProvinceIspPlayInfoList 按省份运营商查询播放信息}({@link DescribeProvinceIspPlayInfoListRequest 请求参数}): {@link DescribeProvinceIspPlayInfoListResponse 返回参数} */
+  /** 按省份运营商查询播放信息 {@link DescribeProvinceIspPlayInfoListRequest} {@link DescribeProvinceIspPlayInfoListResponse} */
   DescribeProvinceIspPlayInfoList(data: DescribeProvinceIspPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProvinceIspPlayInfoListResponse>;
-  /** {@link DescribePullStreamConfigs 查询拉流配置(该接口已下线,请使用新接口 DescribeLivePullStreamTasks)}({@link DescribePullStreamConfigsRequest 请求参数}): {@link DescribePullStreamConfigsResponse 返回参数} */
+  /** 查询拉流配置(该接口已下线,请使用新接口 DescribeLivePullStreamTasks) {@link DescribePullStreamConfigsRequest} {@link DescribePullStreamConfigsResponse} */
   DescribePullStreamConfigs(data?: DescribePullStreamConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePullStreamConfigsResponse>;
-  /** {@link DescribePushBandwidthAndFluxList 直播推流带宽和流量数据查询}({@link DescribePushBandwidthAndFluxListRequest 请求参数}): {@link DescribePushBandwidthAndFluxListResponse 返回参数} */
+  /** 直播推流带宽和流量数据查询 {@link DescribePushBandwidthAndFluxListRequest} {@link DescribePushBandwidthAndFluxListResponse} */
   DescribePushBandwidthAndFluxList(data: DescribePushBandwidthAndFluxListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushBandwidthAndFluxListResponse>;
-  /** {@link DescribeRecordTask 查询录制任务列表（新）}({@link DescribeRecordTaskRequest 请求参数}): {@link DescribeRecordTaskResponse 返回参数} */
+  /** 查询录制任务列表（新） {@link DescribeRecordTaskRequest} {@link DescribeRecordTaskResponse} */
   DescribeRecordTask(data: DescribeRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordTaskResponse>;
-  /** {@link DescribeScreenShotSheetNumList 查询截图张数}({@link DescribeScreenShotSheetNumListRequest 请求参数}): {@link DescribeScreenShotSheetNumListResponse 返回参数} */
+  /** 查询截图张数 {@link DescribeScreenShotSheetNumListRequest} {@link DescribeScreenShotSheetNumListResponse} */
   DescribeScreenShotSheetNumList(data: DescribeScreenShotSheetNumListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScreenShotSheetNumListResponse>;
-  /** {@link DescribeScreenshotTask 查询截图任务列表}({@link DescribeScreenshotTaskRequest 请求参数}): {@link DescribeScreenshotTaskResponse 返回参数} */
+  /** 查询截图任务列表 {@link DescribeScreenshotTaskRequest} {@link DescribeScreenshotTaskResponse} */
   DescribeScreenshotTask(data: DescribeScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScreenshotTaskResponse>;
-  /** {@link DescribeStreamDayPlayInfoList 查询所有流的流量数据}({@link DescribeStreamDayPlayInfoListRequest 请求参数}): {@link DescribeStreamDayPlayInfoListResponse 返回参数} */
+  /** 查询所有流的流量数据 {@link DescribeStreamDayPlayInfoListRequest} {@link DescribeStreamDayPlayInfoListResponse} */
   DescribeStreamDayPlayInfoList(data: DescribeStreamDayPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamDayPlayInfoListResponse>;
-  /** {@link DescribeStreamPlayInfoList 查询流的播放信息列表}({@link DescribeStreamPlayInfoListRequest 请求参数}): {@link DescribeStreamPlayInfoListResponse 返回参数} */
+  /** 查询流的播放信息列表 {@link DescribeStreamPlayInfoListRequest} {@link DescribeStreamPlayInfoListResponse} */
   DescribeStreamPlayInfoList(data: DescribeStreamPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPlayInfoListResponse>;
-  /** {@link DescribeStreamPushInfoList 查询某条流上行推流质量数据}({@link DescribeStreamPushInfoListRequest 请求参数}): {@link DescribeStreamPushInfoListResponse 返回参数} */
+  /** 查询某条流上行推流质量数据 {@link DescribeStreamPushInfoListRequest} {@link DescribeStreamPushInfoListResponse} */
   DescribeStreamPushInfoList(data: DescribeStreamPushInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPushInfoListResponse>;
-  /** {@link DescribeTopClientIpSumInfoList 查询某段时间top n客户端ip汇总信息}({@link DescribeTopClientIpSumInfoListRequest 请求参数}): {@link DescribeTopClientIpSumInfoListResponse 返回参数} */
+  /** 查询某段时间top n客户端ip汇总信息 {@link DescribeTopClientIpSumInfoListRequest} {@link DescribeTopClientIpSumInfoListResponse} */
   DescribeTopClientIpSumInfoList(data: DescribeTopClientIpSumInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopClientIpSumInfoListResponse>;
-  /** {@link DescribeTranscodeTaskNum 查询转码任务数。}({@link DescribeTranscodeTaskNumRequest 请求参数}): {@link DescribeTranscodeTaskNumResponse 返回参数} */
+  /** 查询转码任务数。 {@link DescribeTranscodeTaskNumRequest} {@link DescribeTranscodeTaskNumResponse} */
   DescribeTranscodeTaskNum(data: DescribeTranscodeTaskNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeTaskNumResponse>;
-  /** {@link DescribeUploadStreamNums 直播上行路数查询}({@link DescribeUploadStreamNumsRequest 请求参数}): {@link DescribeUploadStreamNumsResponse 返回参数} */
+  /** 直播上行路数查询 {@link DescribeUploadStreamNumsRequest} {@link DescribeUploadStreamNumsResponse} */
   DescribeUploadStreamNums(data: DescribeUploadStreamNumsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUploadStreamNumsResponse>;
-  /** {@link DescribeVisitTopSumInfoList 查询某时间段top n的域名或流id信息}({@link DescribeVisitTopSumInfoListRequest 请求参数}): {@link DescribeVisitTopSumInfoListResponse 返回参数} */
+  /** 查询某时间段top n的域名或流id信息 {@link DescribeVisitTopSumInfoListRequest} {@link DescribeVisitTopSumInfoListResponse} */
   DescribeVisitTopSumInfoList(data: DescribeVisitTopSumInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVisitTopSumInfoListResponse>;
-  /** {@link DropLiveStream 断开直播推流}({@link DropLiveStreamRequest 请求参数}): {@link DropLiveStreamResponse 返回参数} */
+  /** 断开直播推流 {@link DropLiveStreamRequest} {@link DropLiveStreamResponse} */
   DropLiveStream(data: DropLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<DropLiveStreamResponse>;
-  /** {@link EnableLiveDomain 启用域名}({@link EnableLiveDomainRequest 请求参数}): {@link EnableLiveDomainResponse 返回参数} */
+  /** 启用域名 {@link EnableLiveDomainRequest} {@link EnableLiveDomainResponse} */
   EnableLiveDomain(data: EnableLiveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<EnableLiveDomainResponse>;
-  /** {@link ForbidLiveDomain 禁用域名}({@link ForbidLiveDomainRequest 请求参数}): {@link ForbidLiveDomainResponse 返回参数} */
+  /** 禁用域名 {@link ForbidLiveDomainRequest} {@link ForbidLiveDomainResponse} */
   ForbidLiveDomain(data: ForbidLiveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidLiveDomainResponse>;
-  /** {@link ForbidLiveStream 禁推直播流}({@link ForbidLiveStreamRequest 请求参数}): {@link ForbidLiveStreamResponse 返回参数} */
+  /** 禁推直播流 {@link ForbidLiveStreamRequest} {@link ForbidLiveStreamResponse} */
   ForbidLiveStream(data: ForbidLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidLiveStreamResponse>;
-  /** {@link ModifyLiveCallbackTemplate 修改回调模板}({@link ModifyLiveCallbackTemplateRequest 请求参数}): {@link ModifyLiveCallbackTemplateResponse 返回参数} */
+  /** 修改回调模板 {@link ModifyLiveCallbackTemplateRequest} {@link ModifyLiveCallbackTemplateResponse} */
   ModifyLiveCallbackTemplate(data: ModifyLiveCallbackTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveCallbackTemplateResponse>;
-  /** {@link ModifyLiveDomainCertBindings 批量绑定证书对应的播放域名}({@link ModifyLiveDomainCertBindingsRequest 请求参数}): {@link ModifyLiveDomainCertBindingsResponse 返回参数} */
+  /** 批量绑定证书对应的播放域名 {@link ModifyLiveDomainCertBindingsRequest} {@link ModifyLiveDomainCertBindingsResponse} */
   ModifyLiveDomainCertBindings(data: ModifyLiveDomainCertBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveDomainCertBindingsResponse>;
-  /** {@link ModifyLiveDomainReferer 设置直播域名 Referer 黑白名单}({@link ModifyLiveDomainRefererRequest 请求参数}): {@link ModifyLiveDomainRefererResponse 返回参数} */
+  /** 设置直播域名 Referer 黑白名单 {@link ModifyLiveDomainRefererRequest} {@link ModifyLiveDomainRefererResponse} */
   ModifyLiveDomainReferer(data: ModifyLiveDomainRefererRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveDomainRefererResponse>;
-  /** {@link ModifyLivePlayAuthKey 修改播放鉴权key}({@link ModifyLivePlayAuthKeyRequest 请求参数}): {@link ModifyLivePlayAuthKeyResponse 返回参数} */
+  /** 修改播放鉴权key {@link ModifyLivePlayAuthKeyRequest} {@link ModifyLivePlayAuthKeyResponse} */
   ModifyLivePlayAuthKey(data: ModifyLivePlayAuthKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLivePlayAuthKeyResponse>;
-  /** {@link ModifyLivePlayDomain 修改播放域名信息}({@link ModifyLivePlayDomainRequest 请求参数}): {@link ModifyLivePlayDomainResponse 返回参数} */
+  /** 修改播放域名信息 {@link ModifyLivePlayDomainRequest} {@link ModifyLivePlayDomainResponse} */
   ModifyLivePlayDomain(data: ModifyLivePlayDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLivePlayDomainResponse>;
-  /** {@link ModifyLivePullStreamTask 更新直播拉流任务}({@link ModifyLivePullStreamTaskRequest 请求参数}): {@link ModifyLivePullStreamTaskResponse 返回参数} */
+  /** 更新直播拉流任务 {@link ModifyLivePullStreamTaskRequest} {@link ModifyLivePullStreamTaskResponse} */
   ModifyLivePullStreamTask(data: ModifyLivePullStreamTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLivePullStreamTaskResponse>;
-  /** {@link ModifyLivePushAuthKey 修改推流鉴权key}({@link ModifyLivePushAuthKeyRequest 请求参数}): {@link ModifyLivePushAuthKeyResponse 返回参数} */
+  /** 修改推流鉴权key {@link ModifyLivePushAuthKeyRequest} {@link ModifyLivePushAuthKeyResponse} */
   ModifyLivePushAuthKey(data: ModifyLivePushAuthKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLivePushAuthKeyResponse>;
-  /** {@link ModifyLiveRecordTemplate 直播修改录制模板配置}({@link ModifyLiveRecordTemplateRequest 请求参数}): {@link ModifyLiveRecordTemplateResponse 返回参数} */
+  /** 直播修改录制模板配置 {@link ModifyLiveRecordTemplateRequest} {@link ModifyLiveRecordTemplateResponse} */
   ModifyLiveRecordTemplate(data: ModifyLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveRecordTemplateResponse>;
-  /** {@link ModifyLiveSnapshotTemplate 修改截图模板}({@link ModifyLiveSnapshotTemplateRequest 请求参数}): {@link ModifyLiveSnapshotTemplateResponse 返回参数} */
+  /** 修改截图模板 {@link ModifyLiveSnapshotTemplateRequest} {@link ModifyLiveSnapshotTemplateResponse} */
   ModifyLiveSnapshotTemplate(data: ModifyLiveSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveSnapshotTemplateResponse>;
-  /** {@link ModifyLiveTranscodeTemplate 修改转码模板配置}({@link ModifyLiveTranscodeTemplateRequest 请求参数}): {@link ModifyLiveTranscodeTemplateResponse 返回参数} */
+  /** 修改转码模板配置 {@link ModifyLiveTranscodeTemplateRequest} {@link ModifyLiveTranscodeTemplateResponse} */
   ModifyLiveTranscodeTemplate(data: ModifyLiveTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveTranscodeTemplateResponse>;
-  /** {@link ModifyPullStreamConfig 更新拉流配置(该接口已下线,请使用新接口 ModifyLivePullStreamTask)}({@link ModifyPullStreamConfigRequest 请求参数}): {@link ModifyPullStreamConfigResponse 返回参数} */
+  /** 更新拉流配置(该接口已下线,请使用新接口 ModifyLivePullStreamTask) {@link ModifyPullStreamConfigRequest} {@link ModifyPullStreamConfigResponse} */
   ModifyPullStreamConfig(data: ModifyPullStreamConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPullStreamConfigResponse>;
-  /** {@link ModifyPullStreamStatus 修改拉流配置状态(该接口已下线,请使用新接口 ModifyLivePullStreamTask)}({@link ModifyPullStreamStatusRequest 请求参数}): {@link ModifyPullStreamStatusResponse 返回参数} */
+  /** 修改拉流配置状态(该接口已下线,请使用新接口 ModifyLivePullStreamTask) {@link ModifyPullStreamStatusRequest} {@link ModifyPullStreamStatusResponse} */
   ModifyPullStreamStatus(data: ModifyPullStreamStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPullStreamStatusResponse>;
-  /** {@link ResumeDelayLiveStream 取消直播延时}({@link ResumeDelayLiveStreamRequest 请求参数}): {@link ResumeDelayLiveStreamResponse 返回参数} */
+  /** 取消直播延时 {@link ResumeDelayLiveStreamRequest} {@link ResumeDelayLiveStreamResponse} */
   ResumeDelayLiveStream(data: ResumeDelayLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeDelayLiveStreamResponse>;
-  /** {@link ResumeLiveStream 恢复直播推流}({@link ResumeLiveStreamRequest 请求参数}): {@link ResumeLiveStreamResponse 返回参数} */
+  /** 恢复直播推流 {@link ResumeLiveStreamRequest} {@link ResumeLiveStreamResponse} */
   ResumeLiveStream(data: ResumeLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeLiveStreamResponse>;
-  /** {@link StopLiveRecord 终止录制任务(已废弃,请使用新接口)}({@link StopLiveRecordRequest 请求参数}): {@link StopLiveRecordResponse 返回参数} */
+  /** 终止录制任务(已废弃,请使用新接口) {@link StopLiveRecordRequest} {@link StopLiveRecordResponse} */
   StopLiveRecord(data: StopLiveRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopLiveRecordResponse>;
-  /** {@link StopRecordTask 终止录制任务（新）}({@link StopRecordTaskRequest 请求参数}): {@link StopRecordTaskResponse 返回参数} */
+  /** 终止录制任务（新） {@link StopRecordTaskRequest} {@link StopRecordTaskResponse} */
   StopRecordTask(data: StopRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopRecordTaskResponse>;
-  /** {@link StopScreenshotTask 终止截图任务}({@link StopScreenshotTaskRequest 请求参数}): {@link StopScreenshotTaskResponse 返回参数} */
+  /** 终止截图任务 {@link StopScreenshotTaskRequest} {@link StopScreenshotTaskResponse} */
   StopScreenshotTask(data: StopScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopScreenshotTaskResponse>;
-  /** {@link UnBindLiveDomainCert 解绑域名证书}({@link UnBindLiveDomainCertRequest 请求参数}): {@link UnBindLiveDomainCertResponse 返回参数} */
+  /** 解绑域名证书 {@link UnBindLiveDomainCertRequest} {@link UnBindLiveDomainCertResponse} */
   UnBindLiveDomainCert(data: UnBindLiveDomainCertRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindLiveDomainCertResponse>;
-  /** {@link UpdateLiveWatermark 更新水印}({@link UpdateLiveWatermarkRequest 请求参数}): {@link UpdateLiveWatermarkResponse 返回参数} */
+  /** 更新水印 {@link UpdateLiveWatermarkRequest} {@link UpdateLiveWatermarkResponse} */
   UpdateLiveWatermark(data: UpdateLiveWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateLiveWatermarkResponse>;
 }
 

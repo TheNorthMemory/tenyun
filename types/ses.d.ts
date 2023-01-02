@@ -248,7 +248,7 @@ declare interface BatchSendEmailRequest {
 declare interface BatchSendEmailResponse {
   /** 发送任务ID */
   TaskId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -260,7 +260,7 @@ declare interface CreateEmailAddressRequest {
 }
 
 declare interface CreateEmailAddressResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -276,7 +276,7 @@ declare interface CreateEmailIdentityResponse {
   VerifiedForSendingStatus?: boolean;
   /** 需要配置的DNS信息 */
   Attributes?: DNSAttributes[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -290,7 +290,7 @@ declare interface CreateEmailTemplateRequest {
 declare interface CreateEmailTemplateResponse {
   /** 模板id */
   TemplateID: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -302,7 +302,7 @@ declare interface CreateReceiverDetailRequest {
 }
 
 declare interface CreateReceiverDetailResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -314,7 +314,7 @@ declare interface CreateReceiverDetailWithDataRequest {
 }
 
 declare interface CreateReceiverDetailWithDataResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -328,7 +328,7 @@ declare interface CreateReceiverRequest {
 declare interface CreateReceiverResponse {
   /** 收件人列表id，后续根据收件人列表id上传收件人地址 */
   ReceiverId: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -338,7 +338,7 @@ declare interface DeleteBlackListRequest {
 }
 
 declare interface DeleteBlackListResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -348,7 +348,7 @@ declare interface DeleteEmailAddressRequest {
 }
 
 declare interface DeleteEmailAddressResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -358,7 +358,7 @@ declare interface DeleteEmailIdentityRequest {
 }
 
 declare interface DeleteEmailIdentityResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -368,7 +368,7 @@ declare interface DeleteEmailTemplateRequest {
 }
 
 declare interface DeleteEmailTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -378,7 +378,7 @@ declare interface DeleteReceiverRequest {
 }
 
 declare interface DeleteReceiverResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -394,7 +394,7 @@ declare interface GetEmailIdentityResponse {
   VerifiedForSendingStatus?: boolean;
   /** DNS配置详情 */
   Attributes?: DNSAttributes[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -410,7 +410,7 @@ declare interface GetEmailTemplateResponse {
   TemplateStatus: number;
   /** 模板名称 */
   TemplateName: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -430,7 +430,7 @@ declare interface GetSendEmailStatusRequest {
 declare interface GetSendEmailStatusResponse {
   /** 邮件发送状态列表 */
   EmailStatusList: SendEmailStatus[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -450,7 +450,7 @@ declare interface GetStatisticsReportResponse {
   DailyVolumes: Volume[];
   /** 发信统计报告，总览 */
   OverallVolume: Volume;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -474,7 +474,7 @@ declare interface ListBlackEmailAddressResponse {
   BlackList?: BlackEmailAddress[];
   /** 黑名单总数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -484,7 +484,7 @@ declare interface ListEmailAddressRequest {
 declare interface ListEmailAddressResponse {
   /** 发信地址列表详情 */
   EmailSenders?: EmailSender[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -498,7 +498,7 @@ declare interface ListEmailIdentitiesResponse {
   MaxReputationLevel: number;
   /** 单域名最高日发送量 */
   MaxDailyQuota: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -514,7 +514,7 @@ declare interface ListEmailTemplatesResponse {
   TemplatesMetadata: TemplatesMetadata[];
   /** 模板总数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -534,7 +534,7 @@ declare interface ListReceiversResponse {
   TotalCount: number;
   /** 数据记录 */
   Data: ReceiverData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -556,7 +556,7 @@ declare interface ListSendTasksResponse {
   TotalCount: number;
   /** 数据记录 */
   Data: SendTaskData[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -584,7 +584,7 @@ declare interface SendEmailRequest {
 declare interface SendEmailResponse {
   /** 接受消息生成的唯一消息标识符。 */
   MessageId: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -600,7 +600,7 @@ declare interface UpdateEmailIdentityResponse {
   VerifiedForSendingStatus?: boolean;
   /** 需要配置的DNS信息 */
   Attributes?: DNSAttributes[];
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -612,7 +612,7 @@ declare interface UpdateEmailSmtpPassWordRequest {
 }
 
 declare interface UpdateEmailSmtpPassWordResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -626,64 +626,64 @@ declare interface UpdateEmailTemplateRequest {
 }
 
 declare interface UpdateEmailTemplateResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Ses 邮件推送} */
 declare interface Ses {
   (): Versions;
-  /** {@link BatchSendEmail 批量发送邮件}({@link BatchSendEmailRequest 请求参数}): {@link BatchSendEmailResponse 返回参数} */
+  /** 批量发送邮件 {@link BatchSendEmailRequest} {@link BatchSendEmailResponse} */
   BatchSendEmail(data: BatchSendEmailRequest, config?: AxiosRequestConfig): AxiosPromise<BatchSendEmailResponse>;
-  /** {@link CreateEmailAddress 新建发信地址}({@link CreateEmailAddressRequest 请求参数}): {@link CreateEmailAddressResponse 返回参数} */
+  /** 新建发信地址 {@link CreateEmailAddressRequest} {@link CreateEmailAddressResponse} */
   CreateEmailAddress(data: CreateEmailAddressRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmailAddressResponse>;
-  /** {@link CreateEmailIdentity 新建发信域名}({@link CreateEmailIdentityRequest 请求参数}): {@link CreateEmailIdentityResponse 返回参数} */
+  /** 新建发信域名 {@link CreateEmailIdentityRequest} {@link CreateEmailIdentityResponse} */
   CreateEmailIdentity(data: CreateEmailIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmailIdentityResponse>;
-  /** {@link CreateEmailTemplate 创建邮件模板}({@link CreateEmailTemplateRequest 请求参数}): {@link CreateEmailTemplateResponse 返回参数} */
+  /** 创建邮件模板 {@link CreateEmailTemplateRequest} {@link CreateEmailTemplateResponse} */
   CreateEmailTemplate(data: CreateEmailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmailTemplateResponse>;
-  /** {@link CreateReceiver 创建收件人列表}({@link CreateReceiverRequest 请求参数}): {@link CreateReceiverResponse 返回参数} */
+  /** 创建收件人列表 {@link CreateReceiverRequest} {@link CreateReceiverResponse} */
   CreateReceiver(data: CreateReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReceiverResponse>;
-  /** {@link CreateReceiverDetail 添加收件人地址}({@link CreateReceiverDetailRequest 请求参数}): {@link CreateReceiverDetailResponse 返回参数} */
+  /** 添加收件人地址 {@link CreateReceiverDetailRequest} {@link CreateReceiverDetailResponse} */
   CreateReceiverDetail(data: CreateReceiverDetailRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReceiverDetailResponse>;
-  /** {@link CreateReceiverDetailWithData 添加收件人地址附带模板参数}({@link CreateReceiverDetailWithDataRequest 请求参数}): {@link CreateReceiverDetailWithDataResponse 返回参数} */
+  /** 添加收件人地址附带模板参数 {@link CreateReceiverDetailWithDataRequest} {@link CreateReceiverDetailWithDataResponse} */
   CreateReceiverDetailWithData(data: CreateReceiverDetailWithDataRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReceiverDetailWithDataResponse>;
-  /** {@link DeleteBlackList 删除收件人黑名单}({@link DeleteBlackListRequest 请求参数}): {@link DeleteBlackListResponse 返回参数} */
+  /** 删除收件人黑名单 {@link DeleteBlackListRequest} {@link DeleteBlackListResponse} */
   DeleteBlackList(data: DeleteBlackListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlackListResponse>;
-  /** {@link DeleteEmailAddress 删除发信地址}({@link DeleteEmailAddressRequest 请求参数}): {@link DeleteEmailAddressResponse 返回参数} */
+  /** 删除发信地址 {@link DeleteEmailAddressRequest} {@link DeleteEmailAddressResponse} */
   DeleteEmailAddress(data: DeleteEmailAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEmailAddressResponse>;
-  /** {@link DeleteEmailIdentity 删除发信域名}({@link DeleteEmailIdentityRequest 请求参数}): {@link DeleteEmailIdentityResponse 返回参数} */
+  /** 删除发信域名 {@link DeleteEmailIdentityRequest} {@link DeleteEmailIdentityResponse} */
   DeleteEmailIdentity(data: DeleteEmailIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEmailIdentityResponse>;
-  /** {@link DeleteEmailTemplate 删除发信模板}({@link DeleteEmailTemplateRequest 请求参数}): {@link DeleteEmailTemplateResponse 返回参数} */
+  /** 删除发信模板 {@link DeleteEmailTemplateRequest} {@link DeleteEmailTemplateResponse} */
   DeleteEmailTemplate(data: DeleteEmailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEmailTemplateResponse>;
-  /** {@link DeleteReceiver 删除收件人列表}({@link DeleteReceiverRequest 请求参数}): {@link DeleteReceiverResponse 返回参数} */
+  /** 删除收件人列表 {@link DeleteReceiverRequest} {@link DeleteReceiverResponse} */
   DeleteReceiver(data: DeleteReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReceiverResponse>;
-  /** {@link GetEmailIdentity 获取域名配置详情}({@link GetEmailIdentityRequest 请求参数}): {@link GetEmailIdentityResponse 返回参数} */
+  /** 获取域名配置详情 {@link GetEmailIdentityRequest} {@link GetEmailIdentityResponse} */
   GetEmailIdentity(data: GetEmailIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmailIdentityResponse>;
-  /** {@link GetEmailTemplate 获取模板详情}({@link GetEmailTemplateRequest 请求参数}): {@link GetEmailTemplateResponse 返回参数} */
+  /** 获取模板详情 {@link GetEmailTemplateRequest} {@link GetEmailTemplateResponse} */
   GetEmailTemplate(data: GetEmailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmailTemplateResponse>;
-  /** {@link GetSendEmailStatus 获取邮件发送的状态（待废弃）}({@link GetSendEmailStatusRequest 请求参数}): {@link GetSendEmailStatusResponse 返回参数} */
+  /** 获取邮件发送的状态（待废弃） {@link GetSendEmailStatusRequest} {@link GetSendEmailStatusResponse} */
   GetSendEmailStatus(data: GetSendEmailStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetSendEmailStatusResponse>;
-  /** {@link GetStatisticsReport 获取发送统计数据}({@link GetStatisticsReportRequest 请求参数}): {@link GetStatisticsReportResponse 返回参数} */
+  /** 获取发送统计数据 {@link GetStatisticsReportRequest} {@link GetStatisticsReportResponse} */
   GetStatisticsReport(data: GetStatisticsReportRequest, config?: AxiosRequestConfig): AxiosPromise<GetStatisticsReportResponse>;
-  /** {@link ListBlackEmailAddress 获取黑名单邮箱地址}({@link ListBlackEmailAddressRequest 请求参数}): {@link ListBlackEmailAddressResponse 返回参数} */
+  /** 获取黑名单邮箱地址 {@link ListBlackEmailAddressRequest} {@link ListBlackEmailAddressResponse} */
   ListBlackEmailAddress(data: ListBlackEmailAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ListBlackEmailAddressResponse>;
-  /** {@link ListEmailAddress 获取发信地址列表}({@link ListEmailAddressRequest 请求参数}): {@link ListEmailAddressResponse 返回参数} */
+  /** 获取发信地址列表 {@link ListEmailAddressRequest} {@link ListEmailAddressResponse} */
   ListEmailAddress(data?: ListEmailAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ListEmailAddressResponse>;
-  /** {@link ListEmailIdentities 获取当前发信域名列表}({@link ListEmailIdentitiesRequest 请求参数}): {@link ListEmailIdentitiesResponse 返回参数} */
+  /** 获取当前发信域名列表 {@link ListEmailIdentitiesRequest} {@link ListEmailIdentitiesResponse} */
   ListEmailIdentities(data?: ListEmailIdentitiesRequest, config?: AxiosRequestConfig): AxiosPromise<ListEmailIdentitiesResponse>;
-  /** {@link ListEmailTemplates 获取当前邮件模板列表}({@link ListEmailTemplatesRequest 请求参数}): {@link ListEmailTemplatesResponse 返回参数} */
+  /** 获取当前邮件模板列表 {@link ListEmailTemplatesRequest} {@link ListEmailTemplatesResponse} */
   ListEmailTemplates(data: ListEmailTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<ListEmailTemplatesResponse>;
-  /** {@link ListReceivers 查询收件人列表}({@link ListReceiversRequest 请求参数}): {@link ListReceiversResponse 返回参数} */
+  /** 查询收件人列表 {@link ListReceiversRequest} {@link ListReceiversResponse} */
   ListReceivers(data: ListReceiversRequest, config?: AxiosRequestConfig): AxiosPromise<ListReceiversResponse>;
-  /** {@link ListSendTasks 查询发送任务}({@link ListSendTasksRequest 请求参数}): {@link ListSendTasksResponse 返回参数} */
+  /** 查询发送任务 {@link ListSendTasksRequest} {@link ListSendTasksResponse} */
   ListSendTasks(data: ListSendTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListSendTasksResponse>;
-  /** {@link SendEmail 发送邮件}({@link SendEmailRequest 请求参数}): {@link SendEmailResponse 返回参数} */
+  /** 发送邮件 {@link SendEmailRequest} {@link SendEmailResponse} */
   SendEmail(data: SendEmailRequest, config?: AxiosRequestConfig): AxiosPromise<SendEmailResponse>;
-  /** {@link UpdateEmailIdentity 请求验证}({@link UpdateEmailIdentityRequest 请求参数}): {@link UpdateEmailIdentityResponse 返回参数} */
+  /** 请求验证 {@link UpdateEmailIdentityRequest} {@link UpdateEmailIdentityResponse} */
   UpdateEmailIdentity(data: UpdateEmailIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEmailIdentityResponse>;
-  /** {@link UpdateEmailSmtpPassWord 设置邮箱的smtp密码}({@link UpdateEmailSmtpPassWordRequest 请求参数}): {@link UpdateEmailSmtpPassWordResponse 返回参数} */
+  /** 设置邮箱的smtp密码 {@link UpdateEmailSmtpPassWordRequest} {@link UpdateEmailSmtpPassWordResponse} */
   UpdateEmailSmtpPassWord(data: UpdateEmailSmtpPassWordRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEmailSmtpPassWordResponse>;
-  /** {@link UpdateEmailTemplate 更新邮件模板}({@link UpdateEmailTemplateRequest 请求参数}): {@link UpdateEmailTemplateResponse 返回参数} */
+  /** 更新邮件模板 {@link UpdateEmailTemplateRequest} {@link UpdateEmailTemplateResponse} */
   UpdateEmailTemplate(data: UpdateEmailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEmailTemplateResponse>;
 }
 

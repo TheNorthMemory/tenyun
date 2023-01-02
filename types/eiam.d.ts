@@ -322,7 +322,7 @@ declare interface AddAccountToAccountGroupRequest {
 }
 
 declare interface AddAccountToAccountGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -336,7 +336,7 @@ declare interface AddUserToUserGroupRequest {
 declare interface AddUserToUserGroupResponse {
   /** 未成功加入用户组的用户ID列表信息。 */
   FailedItems: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -352,7 +352,7 @@ declare interface CreateAccountGroupRequest {
 declare interface CreateAccountGroupResponse {
   /** 账号组ID。 */
   AccountGroupId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -370,7 +370,7 @@ declare interface CreateAppAccountRequest {
 declare interface CreateAppAccountResponse {
   /** 账号ID */
   AccountId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -388,7 +388,7 @@ declare interface CreateOrgNodeRequest {
 declare interface CreateOrgNodeResponse {
   /** 机构节点ID，是机构节点的全局唯一标识。 */
   OrgNodeId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -402,7 +402,7 @@ declare interface CreateUserGroupRequest {
 declare interface CreateUserGroupResponse {
   /** 用户组ID，是用户组的全局唯一标识。 */
   UserGroupId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -434,7 +434,7 @@ declare interface CreateUserRequest {
 declare interface CreateUserResponse {
   /** 返回的新创建的用户ID，是该用户的全局唯一标识。 */
   UserId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -444,7 +444,7 @@ declare interface DeleteAccountGroupRequest {
 }
 
 declare interface DeleteAccountGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -454,7 +454,7 @@ declare interface DeleteAppAccountRequest {
 }
 
 declare interface DeleteAppAccountResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -464,7 +464,7 @@ declare interface DeleteOrgNodeRequest {
 }
 
 declare interface DeleteOrgNodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -474,7 +474,7 @@ declare interface DeleteUserGroupRequest {
 }
 
 declare interface DeleteUserGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -486,7 +486,7 @@ declare interface DeleteUserRequest {
 }
 
 declare interface DeleteUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -500,7 +500,7 @@ declare interface DeleteUsersRequest {
 declare interface DeleteUsersResponse {
   /** 未被成功删除的用户信息。当业务参数为DeleteIdList时，本字段将返回未成功删除的用户ID列表。当业务参数为DeleteNameList时，本字段将返回未成功删除的用户名称列表。 */
   FailedItems: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -522,7 +522,7 @@ declare interface DescribeAccountGroupResponse {
   ApplicationId: string | null;
   /** 返回符合条件的数据列表。 */
   AccountGroupList: AccountGroupInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -544,7 +544,7 @@ declare interface DescribeAppAccountResponse {
   ApplicationId: string | null;
   /** 返回符合条件的数据列表。 */
   AppAccountList: AppAccountInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -586,7 +586,7 @@ declare interface DescribeApplicationResponse {
   AppStatus: boolean | null;
   /** 描述。 */
   Description: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -616,7 +616,7 @@ declare interface DescribeOrgNodeResponse {
   OrgNodeChildInfo: OrgNodeChildInfo[] | null;
   /** 机构节点描述。 */
   Description: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -640,7 +640,7 @@ declare interface DescribeOrgResourcesAuthorizationResponse {
   AuthorizationOrgResourceList: AuthorizationResourceEntityInfo[] | null;
   /** 资源数量 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -656,7 +656,7 @@ declare interface DescribePublicKeyResponse {
   KeyId: string | null;
   /** 应用ID，是应用的全局唯一标识。 */
   ApplicationId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -681,7 +681,7 @@ declare interface DescribeUserGroupResourcesAuthorizationResponse {
   UserGroupName: string | null;
   /** 资源列表 */
   AuthorizationUserGroupResourceList: AuthorizationResourceEntityInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -692,7 +692,7 @@ declare interface DescribeUserGroupResponse {
   Description: string | null;
   /** 用户组ID，是用户组的全局唯一标识。 */
   UserGroupId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -734,7 +734,7 @@ declare interface DescribeUserInfoResponse {
   SecondaryOrgNodeIdList: string[] | null;
   /** 是否管理员标志，0为否、1为是。 */
   AdminFlag: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -760,7 +760,7 @@ declare interface DescribeUserResourcesAuthorizationResponse {
   UserName: string | null;
   /** 返回的资源列表。 */
   AuthorizationUserResourceList: AuthorizationUserResouceInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -778,7 +778,7 @@ declare interface DescribeUserThirdPartyAccountInfoResponse {
   UserName: string;
   /** 三方账号的绑定情况。 */
   ThirdPartyAccounts: ThirdPartyAccountInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -800,7 +800,7 @@ declare interface ListAccountInAccountGroupResponse {
   TotalCount: number | null;
   /** 账号组ID。 */
   AccountGroupId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -822,7 +822,7 @@ declare interface ListApplicationAuthorizationsResponse {
   AuthorizationInfoList: AuthorizationInfo[] | null;
   /** 返回的应用信息总数。 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -844,7 +844,7 @@ declare interface ListApplicationsResponse {
   TotalCount: number | null;
   /** 返回的应用信息列表。 */
   ApplicationInfoList: ApplicationInformation[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -856,7 +856,7 @@ declare interface ListAuthorizedApplicationsToOrgNodeRequest {
 declare interface ListAuthorizedApplicationsToOrgNodeResponse {
   /** 机构节点拥有访问权限的应用 id 列表。 */
   ApplicationIds: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -868,7 +868,7 @@ declare interface ListAuthorizedApplicationsToUserGroupRequest {
 declare interface ListAuthorizedApplicationsToUserGroupResponse {
   /** 用户组拥有访问权限的应用 id 列表。 */
   ApplicationIds: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -882,7 +882,7 @@ declare interface ListAuthorizedApplicationsToUserRequest {
 declare interface ListAuthorizedApplicationsToUserResponse {
   /** 用户拥有访问权限的应用信息列表。 */
   ApplicationAuthorizationInfo: ApplicationAuthorizationInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -908,7 +908,7 @@ declare interface ListUserGroupsOfUserResponse {
   UserGroupInfoList: UserGroupInfo[] | null;
   /** 返回的用户组信息总数。 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -928,7 +928,7 @@ declare interface ListUserGroupsResponse {
   UserGroupList: UserGroupInformation[] | null;
   /** 返回的用户组信息总数。 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -960,7 +960,7 @@ declare interface ListUsersInOrgNodeResponse {
   OrgNodeIdPath: string | null;
   /** 组织机构名称路径。 */
   OrgNodeNamePath: string | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -984,7 +984,7 @@ declare interface ListUsersInUserGroupResponse {
   UserInfo: UserInfo[] | null;
   /** 返回的用户信息总数。 */
   TotalNum: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1008,7 +1008,7 @@ declare interface ListUsersResponse {
   UserList: UserInformation[] | null;
   /** 返回查询用户的总数量，仅当入参IncludeTotal等于true时返回。 */
   TotalCount: number | null;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1022,7 +1022,7 @@ declare interface ModifyAccountGroupRequest {
 }
 
 declare interface ModifyAccountGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1038,7 +1038,7 @@ declare interface ModifyAppAccountRequest {
 }
 
 declare interface ModifyAppAccountResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1058,7 +1058,7 @@ declare interface ModifyApplicationRequest {
 }
 
 declare interface ModifyApplicationResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1090,7 +1090,7 @@ declare interface ModifyUserInfoRequest {
 }
 
 declare interface ModifyUserInfoResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1102,7 +1102,7 @@ declare interface RemoveAccountFromAccountGroupRequest {
 }
 
 declare interface RemoveAccountFromAccountGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1114,7 +1114,7 @@ declare interface RemoveUserFromUserGroupRequest {
 }
 
 declare interface RemoveUserFromUserGroupResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -1130,96 +1130,96 @@ declare interface UpdateOrgNodeRequest {
 }
 
 declare interface UpdateOrgNodeResponse {
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Eiam 数字身份管控平台（员工版）} */
 declare interface Eiam {
   (): Versions;
-  /** {@link AddAccountToAccountGroup 账号组添加账号}({@link AddAccountToAccountGroupRequest 请求参数}): {@link AddAccountToAccountGroupResponse 返回参数} */
+  /** 账号组添加账号 {@link AddAccountToAccountGroupRequest} {@link AddAccountToAccountGroupResponse} */
   AddAccountToAccountGroup(data: AddAccountToAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddAccountToAccountGroupResponse>;
-  /** {@link AddUserToUserGroup 加入用户到用户组}({@link AddUserToUserGroupRequest 请求参数}): {@link AddUserToUserGroupResponse 返回参数} */
+  /** 加入用户到用户组 {@link AddUserToUserGroupRequest} {@link AddUserToUserGroupResponse} */
   AddUserToUserGroup(data: AddUserToUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserToUserGroupResponse>;
-  /** {@link CreateAccountGroup 创建账号组}({@link CreateAccountGroupRequest 请求参数}): {@link CreateAccountGroupResponse 返回参数} */
+  /** 创建账号组 {@link CreateAccountGroupRequest} {@link CreateAccountGroupResponse} */
   CreateAccountGroup(data: CreateAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountGroupResponse>;
-  /** {@link CreateAppAccount 创建应用账号}({@link CreateAppAccountRequest 请求参数}): {@link CreateAppAccountResponse 返回参数} */
+  /** 创建应用账号 {@link CreateAppAccountRequest} {@link CreateAppAccountResponse} */
   CreateAppAccount(data: CreateAppAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppAccountResponse>;
-  /** {@link CreateOrgNode 新建机构节点}({@link CreateOrgNodeRequest 请求参数}): {@link CreateOrgNodeResponse 返回参数} */
+  /** 新建机构节点 {@link CreateOrgNodeRequest} {@link CreateOrgNodeResponse} */
   CreateOrgNode(data: CreateOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrgNodeResponse>;
-  /** {@link CreateUser 新建用户}({@link CreateUserRequest 请求参数}): {@link CreateUserResponse 返回参数} */
+  /** 新建用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
-  /** {@link CreateUserGroup 新建用户组}({@link CreateUserGroupRequest 请求参数}): {@link CreateUserGroupResponse 返回参数} */
+  /** 新建用户组 {@link CreateUserGroupRequest} {@link CreateUserGroupResponse} */
   CreateUserGroup(data: CreateUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserGroupResponse>;
-  /** {@link DeleteAccountGroup 删除账号组}({@link DeleteAccountGroupRequest 请求参数}): {@link DeleteAccountGroupResponse 返回参数} */
+  /** 删除账号组 {@link DeleteAccountGroupRequest} {@link DeleteAccountGroupResponse} */
   DeleteAccountGroup(data: DeleteAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountGroupResponse>;
-  /** {@link DeleteAppAccount 删除应用账号}({@link DeleteAppAccountRequest 请求参数}): {@link DeleteAppAccountResponse 返回参数} */
+  /** 删除应用账号 {@link DeleteAppAccountRequest} {@link DeleteAppAccountResponse} */
   DeleteAppAccount(data: DeleteAppAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppAccountResponse>;
-  /** {@link DeleteOrgNode 删除机构节点}({@link DeleteOrgNodeRequest 请求参数}): {@link DeleteOrgNodeResponse 返回参数} */
+  /** 删除机构节点 {@link DeleteOrgNodeRequest} {@link DeleteOrgNodeResponse} */
   DeleteOrgNode(data: DeleteOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrgNodeResponse>;
-  /** {@link DeleteUser 删除用户}({@link DeleteUserRequest 请求参数}): {@link DeleteUserResponse 返回参数} */
+  /** 删除用户 {@link DeleteUserRequest} {@link DeleteUserResponse} */
   DeleteUser(data?: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
-  /** {@link DeleteUserGroup 删除用户组}({@link DeleteUserGroupRequest 请求参数}): {@link DeleteUserGroupResponse 返回参数} */
+  /** 删除用户组 {@link DeleteUserGroupRequest} {@link DeleteUserGroupResponse} */
   DeleteUserGroup(data: DeleteUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserGroupResponse>;
-  /** {@link DeleteUsers 批量删除用户}({@link DeleteUsersRequest 请求参数}): {@link DeleteUsersResponse 返回参数} */
+  /** 批量删除用户 {@link DeleteUsersRequest} {@link DeleteUsersResponse} */
   DeleteUsers(data?: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
-  /** {@link DescribeAccountGroup 查询账号组列表}({@link DescribeAccountGroupRequest 请求参数}): {@link DescribeAccountGroupResponse 返回参数} */
+  /** 查询账号组列表 {@link DescribeAccountGroupRequest} {@link DescribeAccountGroupResponse} */
   DescribeAccountGroup(data: DescribeAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountGroupResponse>;
-  /** {@link DescribeAppAccount 查询应用账号列表}({@link DescribeAppAccountRequest 请求参数}): {@link DescribeAppAccountResponse 返回参数} */
+  /** 查询应用账号列表 {@link DescribeAppAccountRequest} {@link DescribeAppAccountResponse} */
   DescribeAppAccount(data: DescribeAppAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppAccountResponse>;
-  /** {@link DescribeApplication 获取应用信息}({@link DescribeApplicationRequest 请求参数}): {@link DescribeApplicationResponse 返回参数} */
+  /** 获取应用信息 {@link DescribeApplicationRequest} {@link DescribeApplicationResponse} */
   DescribeApplication(data?: DescribeApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationResponse>;
-  /** {@link DescribeOrgNode 读取机构节点信息}({@link DescribeOrgNodeRequest 请求参数}): {@link DescribeOrgNodeResponse 返回参数} */
+  /** 读取机构节点信息 {@link DescribeOrgNodeRequest} {@link DescribeOrgNodeResponse} */
   DescribeOrgNode(data?: DescribeOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrgNodeResponse>;
-  /** {@link DescribeOrgResourcesAuthorization 查询指定机构下的资源授权列表}({@link DescribeOrgResourcesAuthorizationRequest 请求参数}): {@link DescribeOrgResourcesAuthorizationResponse 返回参数} */
+  /** 查询指定机构下的资源授权列表 {@link DescribeOrgResourcesAuthorizationRequest} {@link DescribeOrgResourcesAuthorizationResponse} */
   DescribeOrgResourcesAuthorization(data: DescribeOrgResourcesAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrgResourcesAuthorizationResponse>;
-  /** {@link DescribePublicKey 获取JWT公钥信息}({@link DescribePublicKeyRequest 请求参数}): {@link DescribePublicKeyResponse 返回参数} */
+  /** 获取JWT公钥信息 {@link DescribePublicKeyRequest} {@link DescribePublicKeyResponse} */
   DescribePublicKey(data: DescribePublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicKeyResponse>;
-  /** {@link DescribeUserGroup 获取用户组信息}({@link DescribeUserGroupRequest 请求参数}): {@link DescribeUserGroupResponse 返回参数} */
+  /** 获取用户组信息 {@link DescribeUserGroupRequest} {@link DescribeUserGroupResponse} */
   DescribeUserGroup(data: DescribeUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupResponse>;
-  /** {@link DescribeUserGroupResourcesAuthorization 查询指定用户组下的资源授权列表}({@link DescribeUserGroupResourcesAuthorizationRequest 请求参数}): {@link DescribeUserGroupResourcesAuthorizationResponse 返回参数} */
+  /** 查询指定用户组下的资源授权列表 {@link DescribeUserGroupResourcesAuthorizationRequest} {@link DescribeUserGroupResourcesAuthorizationResponse} */
   DescribeUserGroupResourcesAuthorization(data: DescribeUserGroupResourcesAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupResourcesAuthorizationResponse>;
-  /** {@link DescribeUserInfo 获取用户信息}({@link DescribeUserInfoRequest 请求参数}): {@link DescribeUserInfoResponse 返回参数} */
+  /** 获取用户信息 {@link DescribeUserInfoRequest} {@link DescribeUserInfoResponse} */
   DescribeUserInfo(data?: DescribeUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInfoResponse>;
-  /** {@link DescribeUserResourcesAuthorization 查询指定用户下的资源授权列表}({@link DescribeUserResourcesAuthorizationRequest 请求参数}): {@link DescribeUserResourcesAuthorizationResponse 返回参数} */
+  /** 查询指定用户下的资源授权列表 {@link DescribeUserResourcesAuthorizationRequest} {@link DescribeUserResourcesAuthorizationResponse} */
   DescribeUserResourcesAuthorization(data: DescribeUserResourcesAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResourcesAuthorizationResponse>;
-  /** {@link DescribeUserThirdPartyAccountInfo 获取用户的第三方账号绑定信息}({@link DescribeUserThirdPartyAccountInfoRequest 请求参数}): {@link DescribeUserThirdPartyAccountInfoResponse 返回参数} */
+  /** 获取用户的第三方账号绑定信息 {@link DescribeUserThirdPartyAccountInfoRequest} {@link DescribeUserThirdPartyAccountInfoResponse} */
   DescribeUserThirdPartyAccountInfo(data?: DescribeUserThirdPartyAccountInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserThirdPartyAccountInfoResponse>;
-  /** {@link ListAccountInAccountGroup 获取账号组中的账号列表}({@link ListAccountInAccountGroupRequest 请求参数}): {@link ListAccountInAccountGroupResponse 返回参数} */
+  /** 获取账号组中的账号列表 {@link ListAccountInAccountGroupRequest} {@link ListAccountInAccountGroupResponse} */
   ListAccountInAccountGroup(data: ListAccountInAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ListAccountInAccountGroupResponse>;
-  /** {@link ListApplicationAuthorizations 应用授权关系列表信息}({@link ListApplicationAuthorizationsRequest 请求参数}): {@link ListApplicationAuthorizationsResponse 返回参数} */
+  /** 应用授权关系列表信息 {@link ListApplicationAuthorizationsRequest} {@link ListApplicationAuthorizationsResponse} */
   ListApplicationAuthorizations(data: ListApplicationAuthorizationsRequest, config?: AxiosRequestConfig): AxiosPromise<ListApplicationAuthorizationsResponse>;
-  /** {@link ListApplications 获取应用列表信息}({@link ListApplicationsRequest 请求参数}): {@link ListApplicationsResponse 返回参数} */
+  /** 获取应用列表信息 {@link ListApplicationsRequest} {@link ListApplicationsResponse} */
   ListApplications(data?: ListApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<ListApplicationsResponse>;
-  /** {@link ListAuthorizedApplicationsToOrgNode 获取机构节点被授权访问的应用列表}({@link ListAuthorizedApplicationsToOrgNodeRequest 请求参数}): {@link ListAuthorizedApplicationsToOrgNodeResponse 返回参数} */
+  /** 获取机构节点被授权访问的应用列表 {@link ListAuthorizedApplicationsToOrgNodeRequest} {@link ListAuthorizedApplicationsToOrgNodeResponse} */
   ListAuthorizedApplicationsToOrgNode(data: ListAuthorizedApplicationsToOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ListAuthorizedApplicationsToOrgNodeResponse>;
-  /** {@link ListAuthorizedApplicationsToUser 获取用户被授权访问的应用列表}({@link ListAuthorizedApplicationsToUserRequest 请求参数}): {@link ListAuthorizedApplicationsToUserResponse 返回参数} */
+  /** 获取用户被授权访问的应用列表 {@link ListAuthorizedApplicationsToUserRequest} {@link ListAuthorizedApplicationsToUserResponse} */
   ListAuthorizedApplicationsToUser(data: ListAuthorizedApplicationsToUserRequest, config?: AxiosRequestConfig): AxiosPromise<ListAuthorizedApplicationsToUserResponse>;
-  /** {@link ListAuthorizedApplicationsToUserGroup 获取用户组被授权访问的应用列表}({@link ListAuthorizedApplicationsToUserGroupRequest 请求参数}): {@link ListAuthorizedApplicationsToUserGroupResponse 返回参数} */
+  /** 获取用户组被授权访问的应用列表 {@link ListAuthorizedApplicationsToUserGroupRequest} {@link ListAuthorizedApplicationsToUserGroupResponse} */
   ListAuthorizedApplicationsToUserGroup(data: ListAuthorizedApplicationsToUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ListAuthorizedApplicationsToUserGroupResponse>;
-  /** {@link ListUserGroups 获取用户组列表信息}({@link ListUserGroupsRequest 请求参数}): {@link ListUserGroupsResponse 返回参数} */
+  /** 获取用户组列表信息 {@link ListUserGroupsRequest} {@link ListUserGroupsResponse} */
   ListUserGroups(data?: ListUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListUserGroupsResponse>;
-  /** {@link ListUserGroupsOfUser 获取用户所在的用户组列表}({@link ListUserGroupsOfUserRequest 请求参数}): {@link ListUserGroupsOfUserResponse 返回参数} */
+  /** 获取用户所在的用户组列表 {@link ListUserGroupsOfUserRequest} {@link ListUserGroupsOfUserResponse} */
   ListUserGroupsOfUser(data: ListUserGroupsOfUserRequest, config?: AxiosRequestConfig): AxiosPromise<ListUserGroupsOfUserResponse>;
-  /** {@link ListUsers 获取用户列表信息}({@link ListUsersRequest 请求参数}): {@link ListUsersResponse 返回参数} */
+  /** 获取用户列表信息 {@link ListUsersRequest} {@link ListUsersResponse} */
   ListUsers(data?: ListUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsersResponse>;
-  /** {@link ListUsersInOrgNode 读取节点下用户}({@link ListUsersInOrgNodeRequest 请求参数}): {@link ListUsersInOrgNodeResponse 返回参数} */
+  /** 读取节点下用户 {@link ListUsersInOrgNodeRequest} {@link ListUsersInOrgNodeResponse} */
   ListUsersInOrgNode(data?: ListUsersInOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsersInOrgNodeResponse>;
-  /** {@link ListUsersInUserGroup 获取用户组中的用户列表}({@link ListUsersInUserGroupRequest 请求参数}): {@link ListUsersInUserGroupResponse 返回参数} */
+  /** 获取用户组中的用户列表 {@link ListUsersInUserGroupRequest} {@link ListUsersInUserGroupResponse} */
   ListUsersInUserGroup(data: ListUsersInUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsersInUserGroupResponse>;
-  /** {@link ModifyAccountGroup 修改账号组}({@link ModifyAccountGroupRequest 请求参数}): {@link ModifyAccountGroupResponse 返回参数} */
+  /** 修改账号组 {@link ModifyAccountGroupRequest} {@link ModifyAccountGroupResponse} */
   ModifyAccountGroup(data: ModifyAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountGroupResponse>;
-  /** {@link ModifyAppAccount 修改应用账号}({@link ModifyAppAccountRequest 请求参数}): {@link ModifyAppAccountResponse 返回参数} */
+  /** 修改应用账号 {@link ModifyAppAccountRequest} {@link ModifyAppAccountResponse} */
   ModifyAppAccount(data: ModifyAppAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppAccountResponse>;
-  /** {@link ModifyApplication 更新应用}({@link ModifyApplicationRequest 请求参数}): {@link ModifyApplicationResponse 返回参数} */
+  /** 更新应用 {@link ModifyApplicationRequest} {@link ModifyApplicationResponse} */
   ModifyApplication(data: ModifyApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationResponse>;
-  /** {@link ModifyUserInfo 修改用户}({@link ModifyUserInfoRequest 请求参数}): {@link ModifyUserInfoResponse 返回参数} */
+  /** 修改用户 {@link ModifyUserInfoRequest} {@link ModifyUserInfoResponse} */
   ModifyUserInfo(data?: ModifyUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserInfoResponse>;
-  /** {@link RemoveAccountFromAccountGroup 从账号组中移除账号}({@link RemoveAccountFromAccountGroupRequest 请求参数}): {@link RemoveAccountFromAccountGroupResponse 返回参数} */
+  /** 从账号组中移除账号 {@link RemoveAccountFromAccountGroupRequest} {@link RemoveAccountFromAccountGroupResponse} */
   RemoveAccountFromAccountGroup(data: RemoveAccountFromAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveAccountFromAccountGroupResponse>;
-  /** {@link RemoveUserFromUserGroup 从用户组中移除用户}({@link RemoveUserFromUserGroupRequest 请求参数}): {@link RemoveUserFromUserGroupResponse 返回参数} */
+  /** 从用户组中移除用户 {@link RemoveUserFromUserGroupRequest} {@link RemoveUserFromUserGroupResponse} */
   RemoveUserFromUserGroup(data: RemoveUserFromUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserFromUserGroupResponse>;
-  /** {@link UpdateOrgNode 更新机构节点}({@link UpdateOrgNodeRequest 请求参数}): {@link UpdateOrgNodeResponse 返回参数} */
+  /** 更新机构节点 {@link UpdateOrgNodeRequest} {@link UpdateOrgNodeResponse} */
   UpdateOrgNode(data: UpdateOrgNodeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrgNodeResponse>;
 }
 

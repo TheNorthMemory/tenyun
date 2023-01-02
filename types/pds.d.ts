@@ -34,7 +34,7 @@ declare interface DescribeNewUserAcquisitionRequest {
 declare interface DescribeNewUserAcquisitionResponse {
   /** 用户信誉分，1-5从低到高 */
   ServiceRsp: Score;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -46,16 +46,16 @@ declare interface DescribeStockEstimationRequest {
 declare interface DescribeStockEstimationResponse {
   /** 用户信誉分，1-5从低到高 */
   ServiceRsp: Score;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 /** {@link Pds 私域安全} */
 declare interface Pds {
   (): Versions;
-  /** {@link DescribeNewUserAcquisition 拉新判断服务}({@link DescribeNewUserAcquisitionRequest 请求参数}): {@link DescribeNewUserAcquisitionResponse 返回参数} */
+  /** 拉新判断服务 {@link DescribeNewUserAcquisitionRequest} {@link DescribeNewUserAcquisitionResponse} */
   DescribeNewUserAcquisition(data: DescribeNewUserAcquisitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNewUserAcquisitionResponse>;
-  /** {@link DescribeStockEstimation 存量判断服务}({@link DescribeStockEstimationRequest 请求参数}): {@link DescribeStockEstimationResponse 返回参数} */
+  /** 存量判断服务 {@link DescribeStockEstimationRequest} {@link DescribeStockEstimationResponse} */
   DescribeStockEstimation(data: DescribeStockEstimationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStockEstimationResponse>;
 }
 

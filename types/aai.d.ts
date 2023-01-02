@@ -14,7 +14,7 @@ declare interface ChatRequest {
 declare interface ChatResponse {
   /** 聊天输出文本 */
   Answer?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -42,7 +42,7 @@ declare interface SentenceRecognitionRequest {
 declare interface SentenceRecognitionResponse {
   /** 识别结果。 */
   Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -78,7 +78,7 @@ declare interface SimultaneousInterpretingResponse {
   AsrText?: string;
   /** 机器翻译的结果 */
   NmtText?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -110,19 +110,19 @@ declare interface TextToVoiceResponse {
   Audio?: string;
   /** 一次请求对应一个SessionId */
   SessionId?: string;
-  /** 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。 */
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface Aai {
   (): Versions;
-  /** {@link Chat 智能闲聊}({@link ChatRequest 请求参数}): {@link ChatResponse 返回参数} */
+  /** 智能闲聊 {@link ChatRequest} {@link ChatResponse} */
   Chat(data: ChatRequest, config?: AxiosRequestConfig): AxiosPromise<ChatResponse>;
-  /** {@link SentenceRecognition 一句话识别}({@link SentenceRecognitionRequest 请求参数}): {@link SentenceRecognitionResponse 返回参数} */
+  /** 一句话识别 {@link SentenceRecognitionRequest} {@link SentenceRecognitionResponse} */
   SentenceRecognition(data: SentenceRecognitionRequest, config?: AxiosRequestConfig): AxiosPromise<SentenceRecognitionResponse>;
-  /** {@link SimultaneousInterpreting 同传}({@link SimultaneousInterpretingRequest 请求参数}): {@link SimultaneousInterpretingResponse 返回参数} */
+  /** 同传 {@link SimultaneousInterpretingRequest} {@link SimultaneousInterpretingResponse} */
   SimultaneousInterpreting(data: SimultaneousInterpretingRequest, config?: AxiosRequestConfig): AxiosPromise<SimultaneousInterpretingResponse>;
-  /** {@link TextToVoice 语音合成}({@link TextToVoiceRequest 请求参数}): {@link TextToVoiceResponse 返回参数} */
+  /** 语音合成 {@link TextToVoiceRequest} {@link TextToVoiceResponse} */
   TextToVoice(data: TextToVoiceRequest, config?: AxiosRequestConfig): AxiosPromise<TextToVoiceResponse>;
 }
 
