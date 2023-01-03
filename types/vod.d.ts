@@ -1793,29 +1793,31 @@ declare interface EditMediaTEHDConfig {
 /** 编辑视频任务信息 */
 declare interface EditMediaTask {
   /** 任务 ID。 */
-  TaskId: string;
+  TaskId?: string;
   /** 任务流状态，取值：PROCESSING：处理中；FINISH：已完成。 */
-  Status: string;
+  Status?: string;
   /** 错误码，0 表示成功，其他值表示失败：40000：输入参数不合法，请检查输入参数；60000：源文件错误（如视频数据损坏），请确认源文件是否正常；70000：内部服务错误，建议重试。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
-  ErrCodeExt: string;
+  ErrCodeExt?: string;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 编辑视频任务进度，取值范围 [0-100] 。 */
-  Progress: number;
+  Progress?: number;
   /** 视频编辑任务的输入。 */
-  Input: EditMediaTaskInput | null;
+  Input?: EditMediaTaskInput | null;
   /** 视频编辑任务的输出。 */
-  Output: EditMediaTaskOutput | null;
+  Output?: EditMediaTaskOutput | null;
   /** 输出视频的元信息。 */
-  MetaData: MediaMetaData;
-  /** 若发起视频编辑任务时指定了视频处理流程，则该字段为流程任务 ID。 */
-  ProcedureTaskId: string;
+  MetaData?: MediaMetaData;
+  /** 任务类型为 Procedure 的任务 ID。若发起[编辑视频](https://cloud.tencent.com/document/api/266/34783)任务时指定了任务流模板(ProcedureName)，当该任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。 */
+  ProcedureTaskId?: string;
+  /** 任务类型为 ReviewAudioVideo 的任务 ID。若发起[编辑视频](https://cloud.tencent.com/document/api/266/34783)任务时指定了任务流模板(ProcedureName)，当该任务流模板指定了 ReviewAudioVideoTask 时，发起该任务。 */
+  ReviewAudioVideoTaskId?: string;
   /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
-  SessionId: string;
+  SessionId?: string;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
-  SessionContext: string;
+  SessionContext?: string;
 }
 
 /** 编辑视频任务的输入。 */
@@ -1999,13 +2001,15 @@ declare interface FileReviewInfo {
 /** 文件上传任务信息 */
 declare interface FileUploadTask {
   /** 文件唯一 ID。 */
-  FileId: string;
+  FileId?: string;
   /** 上传完成后生成的媒体文件基础信息。 */
-  MediaBasicInfo: MediaBasicInfo;
-  /** 若视频上传时指定了视频处理流程，则该字段为流程任务 ID。 */
-  ProcedureTaskId: string;
+  MediaBasicInfo?: MediaBasicInfo;
+  /** 任务类型为 Procedure 的任务 ID。若视频[上传时指定要执行的任务(procedure)](https://cloud.tencent.com/document/product/266/33475)，当该任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。 */
+  ProcedureTaskId?: string;
+  /** 任务类型为 ReviewAudioVideo 的任务 ID。若视频[上传时指定要执行的任务(procedure)](https://cloud.tencent.com/document/product/266/33475)，当该任务流模板指定了 ReviewAudioVideoTask 时，发起该任务。 */
+  ReviewAudioVideoTaskId?: string;
   /** 元信息。包括大小、时长、视频流信息、音频流信息等。 */
-  MetaData: MediaMetaData | null;
+  MetaData?: MediaMetaData | null;
 }
 
 /** 智能按帧标签任务控制参数 */
@@ -2977,17 +2981,17 @@ declare interface MediaTransitionItem {
 /** 点播文件视频流信息 */
 declare interface MediaVideoStreamItem {
   /** 视频流的码率，单位：bps。 */
-  Bitrate: number;
+  Bitrate?: number;
   /** 视频流的高度，单位：px。 */
-  Height: number;
+  Height?: number;
   /** 视频流的宽度，单位：px。 */
-  Width: number;
+  Width?: number;
   /** 视频流的编码格式，例如 h264。 */
-  Codec: string;
+  Codec?: string;
   /** 帧率，单位：hz。 */
-  Fps: number;
+  Fps?: number;
   /** 编码标签，仅当 Codec 为 hevc 时有效。 */
-  CodecTag: string;
+  CodecTag?: string;
 }
 
 /** 视频处理任务中的马赛克参数类型 */
@@ -3476,32 +3480,34 @@ declare interface ProhibitedOcrReviewTemplateInfoForUpdate {
   ReviewConfidence?: number;
 }
 
-/** 视频转拉任务信息 */
+/** 拉取上传任务信息 */
 declare interface PullUploadTask {
-  /** 转拉上传任务 ID。 */
-  TaskId: string;
+  /** 拉取上传任务 ID。 */
+  TaskId?: string;
   /** 任务流状态，取值：PROCESSING：处理中；FINISH：已完成。 */
-  Status: string;
+  Status?: string;
   /** 错误码，0 表示成功，其他值表示失败：40000：输入参数不合法，请检查输入参数；60000：源文件错误（如视频数据损坏），请确认源文件是否正常；70000：内部服务错误，建议重试。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
-  /** 转拉上传完成后生成的视频 ID。 */
-  FileId: string;
-  /** 转拉完成后生成的媒体文件基础信息。 */
-  MediaBasicInfo: MediaBasicInfo | null;
+  Message?: string;
+  /** 拉取上传完成后生成的视频 ID。 */
+  FileId?: string;
+  /** 拉取上传完成后生成的媒体文件基础信息。 */
+  MediaBasicInfo?: MediaBasicInfo | null;
   /** 输出视频的元信息。 */
-  MetaData: MediaMetaData;
-  /** 转拉上传完成后生成的播放地址。 */
-  FileUrl: string;
-  /** 若转拉上传时指定了视频处理流程，则该参数为流程任务 ID。 */
-  ProcedureTaskId: string;
-  /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
-  SessionContext: string;
+  MetaData?: MediaMetaData;
+  /** 拉取上传完成后生成的播放地址。 */
+  FileUrl?: string;
+  /** 任务类型为 Procedure 的任务 ID。若[拉取上传](https://cloud.tencent.com/document/api/266/35575)时指定了媒体后续任务操作(Procedure)，当该任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。 */
+  ProcedureTaskId?: string;
+  /** 任务类型为 ReviewAudioVideo 的任务 ID。若[拉取上传](https://cloud.tencent.com/document/api/266/35575)时指定了媒体后续任务操作(Procedure)，当该任务流模板指定了 ReviewAudioVideoTask 时，发起该任务。 */
+  ReviewAudioVideoTaskId?: string;
+  /** 来源上下文，用于透传用户请求信息，[URL 拉取视频上传完成](https://cloud.tencent.com/document/product/266/7831)将返回该字段值，最长 1000 个字符。 */
+  SessionContext?: string;
   /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
-  SessionId: string;
-  /** 转拉任务进度，取值范围 [0-100] 。 */
-  Progress: number;
+  SessionId?: string;
+  /** 拉取上传进度，取值范围 [0-100] 。 */
+  Progress?: number;
 }
 
 /** 降码率任务转自适应码流结果类型 */
@@ -3707,9 +3713,11 @@ declare interface ReviewAudioVideoTask {
 /** 音视频审核任务的输入。 */
 declare interface ReviewAudioVideoTaskInput {
   /** 媒体文件 ID。 */
-  FileId: string;
+  FileId?: string;
   /** 音视频审核模板 ID。 */
-  Definition: number;
+  Definition?: number;
+  /** 审核的内容，可选值：Media：原始音视频；Cover：封面。 */
+  ReviewContents?: string[];
 }
 
 /** 音视频审核任务的输出。 */
@@ -4003,11 +4011,13 @@ declare interface SplitMediaTaskInput {
 /** 视频拆条任务信息。 */
 declare interface SplitMediaTaskSegmentInfo {
   /** 视频拆条任务输入信息。 */
-  Input: SplitMediaTaskInput;
+  Input?: SplitMediaTaskInput;
   /** 视频拆条任务输出信息。 */
-  Output: TaskOutputMediaInfo | null;
-  /** 若发起视频拆条任务时指定了视频处理流程，则该字段为流程任务 ID。 */
-  ProcedureTaskId: string;
+  Output?: TaskOutputMediaInfo | null;
+  /** 任务类型为 Procedure 的任务 ID。若发起[视频拆条](https://cloud.tencent.com/document/api/266/51098)任务时，视频拆条任务信息列表指定了任务流模板(ProcedureName)，当该任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。 */
+  ProcedureTaskId?: string;
+  /** 任务类型为 ReviewAudioVideo 的任务 ID。若发起[视频拆条](https://cloud.tencent.com/document/api/266/51098)任务时，视频拆条任务信息列表指定了任务流模板(ProcedureName)，当该任务流模板指定了 ReviewAudioVideoTask 时，发起该任务。 */
+  ReviewAudioVideoTaskId?: string;
 }
 
 /** 统计数据 */
@@ -4965,7 +4975,7 @@ declare interface CreateContentReviewTemplateRequest {
 
 declare interface CreateContentReviewTemplateResponse {
   /** 音视频内容审核模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5105,7 +5115,7 @@ declare interface CreateReviewTemplateRequest {
 
 declare interface CreateReviewTemplateResponse {
   /** 审核模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5763,9 +5773,9 @@ declare interface DescribeContentReviewTemplatesRequest {
 
 declare interface DescribeContentReviewTemplatesResponse {
   /** 符合过滤条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 内容审核模板详情列表。 */
-  ContentReviewTemplateSet: ContentReviewTemplateItem[];
+  ContentReviewTemplateSet?: ContentReviewTemplateItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6147,9 +6157,9 @@ declare interface DescribeReviewTemplatesRequest {
 
 declare interface DescribeReviewTemplatesResponse {
   /** 符合过滤条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 审核模板详情列表。 */
-  ReviewTemplateSet: ReviewTemplate[];
+  ReviewTemplateSet?: ReviewTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7248,8 +7258,10 @@ declare interface ProcessMediaByProcedureRequest {
 }
 
 declare interface ProcessMediaByProcedureResponse {
-  /** 任务 ID。 */
-  TaskId: string;
+  /** 任务类型为 Procedure 的任务 ID，当入参 ProcedureName 对应的任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。 */
+  TaskId?: string;
+  /** 任务类型为 ReviewAudioVideo 的任务 ID，当入参 ProcedureName 对应的任务流模板指定了 ReviewAudioVideoTask 时，发起该任务。 */
+  ReviewAudioVideoTaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7291,7 +7303,7 @@ declare interface ProcessMediaRequest {
   SubAppId?: number;
   /** 视频处理类型任务参数。 */
   MediaProcessTask?: MediaProcessTaskInput;
-  /** 音视频内容审核类型任务参数。 */
+  /** 音视频内容审核类型任务参数 \*。\* 不建议使用，推荐使用 [音视频审核(ReviewAudioVideo)](https://cloud.tencent.com/document/api/266/80283) 或 [图片审核(ReviewImage)](https://cloud.tencent.com/document/api/266/73217)。 */
   AiContentReviewTask?: AiContentReviewTaskInput;
   /** 音视频内容分析类型任务参数。 */
   AiAnalysisTask?: AiAnalysisTaskInput;
@@ -7311,7 +7323,7 @@ declare interface ProcessMediaRequest {
 
 declare interface ProcessMediaResponse {
   /** 任务 ID */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7325,7 +7337,7 @@ declare interface PullEventsRequest {
 
 declare interface PullEventsResponse {
   /** 事件列表。 */
-  EventSet: EventContent[] | null;
+  EventSet?: EventContent[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

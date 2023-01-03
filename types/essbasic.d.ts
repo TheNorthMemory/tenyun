@@ -156,7 +156,7 @@ declare interface FlowApproverDetail {
   ApproveType: string | null;
 }
 
-/** 创建签署流程签署人入参。其中签署方FlowApproverInfo需要传递的参数非单C、单B、B2C合同，ApproverType、RecipientId（模板发起合同时）必传，建议都传。其他身份标识1-个人：Name、Mobile必传2-渠道子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；3-渠道合作企业不指定经办人：（暂不支持）4-非渠道合作企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。RecipientId参数：从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId */
+/** 创建签署流程签署人入参。其中签署方FlowApproverInfo需要传递的参数非单C、单B、B2C合同，ApproverType、RecipientId（模板发起合同时）必传，建议都传。其他身份标识1-个人：Name、Mobile必传2-渠道子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；3-渠道合作企业不指定经办人：OrgName必传、OrgOpenId必传；4-非渠道合作企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。RecipientId参数：从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId */
 declare interface FlowApproverInfo {
   /** 签署人姓名，最大长度50个字符 */
   Name?: string;

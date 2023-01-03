@@ -1308,6 +1308,14 @@ declare interface MonitorTypeNamespace {
   Namespace: string;
 }
 
+/** 通知模版与策略绑定关系 */
+declare interface NoticeBindPolicys {
+  /** 告警通知模板 ID */
+  NoticeId?: string;
+  /** 告警通知模板绑定的告警策略ID列表 */
+  PolicyIds?: string[];
+}
+
 /** 维度支持的操作符信息 */
 declare interface Operator {
   /** 运算符标识 */
@@ -1793,6 +1801,10 @@ declare interface BindingPolicyObjectRequest {
   InstanceGroupId?: number;
   /** 需要绑定的对象维度信息 */
   Dimensions?: BindingPolicyObjectDimension[];
+  /** 事件配置的告警 */
+  EbSubject?: string;
+  /** 是否配置了事件告警 */
+  EbEventFlag?: number;
 }
 
 declare interface BindingPolicyObjectResponse {
@@ -1895,6 +1907,8 @@ declare interface CreateAlarmPolicyRequest {
   HierarchicalNotices?: AlarmHierarchicalNotice[];
   /** 迁移策略专用字段，0-走鉴权逻辑，1-跳过鉴权逻辑 */
   MigrateFlag?: number;
+  /** 事件配置的告警 */
+  EbSubject?: string;
 }
 
 declare interface CreateAlarmPolicyResponse {
@@ -2163,6 +2177,8 @@ declare interface DeleteAlarmNoticesRequest {
   Module: string;
   /** 告警通知模板id列表 */
   NoticeIds: string[];
+  /** 通知模版与策略绑定关系 */
+  NoticeBindPolicys?: NoticeBindPolicys[];
 }
 
 declare interface DeleteAlarmNoticesResponse {
@@ -3397,6 +3413,8 @@ declare interface ModifyAlarmNoticeRequest {
   URLNotices?: URLNotice[];
   /** 告警通知推送到CLS服务 最多1个 */
   CLSNotices?: CLSNotice[];
+  /** 告警通知模板绑定的告警策略ID列表 */
+  PolicyIds?: string[];
 }
 
 declare interface ModifyAlarmNoticeResponse {
@@ -3421,6 +3439,14 @@ declare interface ModifyAlarmPolicyConditionRequest {
   GroupBy?: string[];
   /** 日志告警创建请求参数信息 */
   LogAlarmReqInfo?: LogAlarmReq;
+  /** 模版id，专供prom使用 */
+  NoticeIds?: string[];
+  /** 启停状态，0=停用，1=启用 */
+  Enable?: number;
+  /** 专供prom策略名称 */
+  PolicyName?: string;
+  /** 事件配置的告警 */
+  EbSubject?: string;
 }
 
 declare interface ModifyAlarmPolicyConditionResponse {
@@ -3623,6 +3649,10 @@ declare interface UnBindingAllPolicyObjectRequest {
   GroupId: number;
   /** 告警策略ID，使用此字段时 GroupId 会被忽略 */
   PolicyId?: string;
+  /** 事件配置的告警 */
+  EbSubject?: string;
+  /** 是否配置了事件告警 */
+  EbEventFlag?: number;
 }
 
 declare interface UnBindingAllPolicyObjectResponse {
@@ -3641,6 +3671,10 @@ declare interface UnBindingPolicyObjectRequest {
   InstanceGroupId?: number;
   /** 告警策略ID，使用此字段时 GroupId 会被忽略 */
   PolicyId?: string;
+  /** 事件配置的告警 */
+  EbSubject?: string;
+  /** 是否配置了事件告警 */
+  EbEventFlag?: number;
 }
 
 declare interface UnBindingPolicyObjectResponse {

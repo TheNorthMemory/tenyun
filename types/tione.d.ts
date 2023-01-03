@@ -692,6 +692,8 @@ declare interface ModelAccelerateTask {
   IsSaved: boolean | null;
   /** SAVED_MODEL保存时配置的签名 */
   ModelSignature: string | null;
+  /** 是否是QAT模型 */
+  QATModel: boolean | null;
 }
 
 /** 模型描述信息 */
@@ -1431,9 +1433,9 @@ declare interface CreateBatchModelAccTasksRequest {
   ModelOutputPath: CosPathInfo;
   /** 标签 */
   Tags?: Tag[];
-  /** 优化级别(NO_LOSS/FP16)，默认FP16 */
+  /** 优化级别(NO_LOSS/FP16/INT8)，默认FP16 */
   OptimizationLevel?: string;
-  /** GPU卡类型(T4/V100)，默认T4 */
+  /** GPU卡类型(T4/V100/A10)，默认T4 */
   GPUType?: string;
   /** 专业参数设置 */
   HyperParameter?: HyperParameter;
@@ -1657,6 +1659,8 @@ declare interface CreateTrainingModelRequest {
   MaxReservedModels?: number;
   /** 模型清理周期(默认值为1分钟，上限为1440，下限为1分钟，步长为1) */
   ModelCleanPeriod?: number;
+  /** 是否QAT模型 */
+  IsQAT?: boolean;
 }
 
 declare interface CreateTrainingModelResponse {
@@ -2469,7 +2473,7 @@ declare interface RestartModelAccelerateTaskRequest {
   ModelVersion?: string;
   /** 模型输入cos路径 */
   ModelInputPath?: CosPathInfo;
-  /** 优化级别（NO_LOSS/FP16），默认FP16 */
+  /** 优化级别（NO_LOSS/FP16/INT8），默认FP16 */
   OptimizationLevel?: string;
   /** input节点个数（废弃） */
   ModelInputNum?: number;
@@ -2481,7 +2485,7 @@ declare interface RestartModelAccelerateTaskRequest {
   ModelFormat?: string;
   /** 模型Tensor信息 */
   TensorInfos?: string[];
-  /** GPU类型（T4/V100），默认T4 */
+  /** GPU类型（T4/V100/A10），默认T4 */
   GPUType?: string;
   /** 模型专业参数 */
   HyperParameter?: HyperParameter;

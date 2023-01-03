@@ -124,6 +124,26 @@ declare interface AuditLogFilter {
   ThreadId?: string[];
 }
 
+/** 规则审计的过滤条件 */
+declare interface AuditRuleFilters {
+  /** 单条审计规则。 */
+  RuleFilters: RuleFilters[];
+}
+
+/** 审计规则模版的详情 */
+declare interface AuditRuleTemplateInfo {
+  /** 规则模版ID。 */
+  RuleTemplateId: string;
+  /** 规则模版名称。 */
+  RuleTemplateName: string;
+  /** 规则模版的过滤条件 */
+  RuleFilters: RuleFilters[];
+  /** 规则模版描述。 */
+  Description: string | null;
+  /** 规则模版创建时间。 */
+  CreateAt: string;
+}
+
 /** 备份文件信息 */
 declare interface BackupFileInfo {
   /** 快照文件ID，已废弃，请使用BackupId */
@@ -574,36 +594,48 @@ declare interface CynosdbInstanceDetail {
 
 /** 实例组信息 */
 declare interface CynosdbInstanceGrp {
-  /** appId */
-  AppId: number;
+  /** 用户appId */
+  AppId?: number;
   /** 集群ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 创建时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 删除时间 */
-  DeletedTime: string;
+  DeletedTime?: string;
   /** 实例组ID */
-  InstanceGrpId: string;
+  InstanceGrpId?: string;
   /** 状态 */
-  Status: string;
+  Status?: string;
   /** 实例组类型。ha-ha组；ro-只读组 */
-  Type: string;
+  Type?: string;
   /** 更新时间 */
-  UpdatedTime: string;
+  UpdatedTime?: string;
   /** 内网IP */
-  Vip: string;
+  Vip?: string;
   /** 内网端口 */
-  Vport: number;
+  Vport?: number;
   /** 外网域名 */
-  WanDomain: string;
+  WanDomain?: string;
   /** 外网ip */
-  WanIP: string;
+  WanIP?: string;
   /** 外网端口 */
-  WanPort: number;
+  WanPort?: number;
   /** 外网状态 */
-  WanStatus: string;
+  WanStatus?: string;
   /** 实例组包含实例信息 */
-  InstanceSet: CynosdbInstance[];
+  InstanceSet?: CynosdbInstance[];
+  /** VPC的ID */
+  UniqVpcId?: string | null;
+  /** 子网ID */
+  UniqSubnetId?: string | null;
+  /** 正在回收IP信息 */
+  OldAddrInfo?: OldAddrInfo | null;
+  /** 正在进行的任务 */
+  ProcessingTasks?: string[];
+  /** 任务列表 */
+  Tasks?: ObjectTask[];
+  /** biz_net_service表id */
+  NetServiceId: number;
 }
 
 /** 数据库权限列表 */
@@ -638,6 +670,16 @@ declare interface InputAccount {
   Host?: string;
 }
 
+/** 实例的审计规则详情，DescribeAuditRuleWithInstanceIds接口的出参。 */
+declare interface InstanceAuditRule {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 是否是规则审计。true-规则审计，false-全审计。 */
+  AuditRule: boolean | null;
+  /** 审计规则详情。仅当AuditRule=true时有效。 */
+  AuditRuleFilters: AuditRuleFilters[] | null;
+}
+
 /** 实例初始化配置信息 */
 declare interface InstanceInitInfo {
   /** 实例cpu */
@@ -670,6 +712,8 @@ declare interface InstanceSpec {
   MaxIoBandWidth: number;
   /** 地域库存信息 */
   ZoneStockInfos: ZoneStockInfo[] | null;
+  /** 库存数量 */
+  StockCount: number | null;
 }
 
 /** 参数是否可修改的详细信息 */
@@ -736,6 +780,16 @@ declare interface ObjectTask {
   ObjectId?: string | null;
   /** 任务类型 */
   ObjectType?: string | null;
+}
+
+/** 数据库地址 */
+declare interface OldAddrInfo {
+  /** IP */
+  Vip?: string | null;
+  /** 端口 */
+  Vport?: number | null;
+  /** 期望执行回收时间 */
+  ReturnTime?: string | null;
 }
 
 /** 参数信息 */
@@ -864,6 +918,16 @@ declare interface RollbackTimeRange {
   TimeRangeEnd: string;
 }
 
+/** 审计规则的规则过滤条件 */
+declare interface RuleFilters {
+  /** 审计规则过滤条件的参数名称。可选值：host – 客户端 IP；user – 数据库账户；dbName – 数据库名称；sqlType-SQL类型；sql-sql语句。 */
+  Type: string;
+  /** 审计规则过滤条件的匹配类型。可选值：INC – 包含；EXC – 不包含；EQS – 等于；NEQ – 不等于。 */
+  Compare: string;
+  /** 审计规则过滤条件的匹配值。 */
+  Value: string[];
+}
+
 /** 安全组详情 */
 declare interface SecurityGroup {
   /** 项目ID */
@@ -970,6 +1034,8 @@ declare interface ZoneStockInfo {
   Zone: string;
   /** 是否有库存 */
   HasStock: boolean;
+  /** 库存数量 */
+  StockCount: number;
 }
 
 declare interface ActivateInstanceRequest {
@@ -1060,6 +1126,16 @@ declare interface AssociateSecurityGroupsResponse {
   RequestId?: string;
 }
 
+declare interface CloseAuditServiceRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+}
+
+declare interface CloseAuditServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAccountsRequest {
   /** 集群id */
   ClusterId: string;
@@ -1090,6 +1166,22 @@ declare interface CreateAuditLogFileRequest {
 declare interface CreateAuditLogFileResponse {
   /** 审计日志文件名称。 */
   FileName: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAuditRuleTemplateRequest {
+  /** 审计规则。 */
+  RuleFilters: RuleFilters[];
+  /** 规则模版名称。 */
+  RuleTemplateName: string;
+  /** 规则模版描述。 */
+  Description?: string;
+}
+
+declare interface CreateAuditRuleTemplateResponse {
+  /** 生成的规则模版ID。 */
+  RuleTemplateId: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1226,6 +1318,16 @@ declare interface DeleteAuditLogFileResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAuditRuleTemplatesRequest {
+  /** 审计规则模版ID。 */
+  RuleTemplateIds: string[];
+}
+
+declare interface DeleteAuditRuleTemplatesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteBackupRequest {
   /** 集群ID */
   ClusterId: string;
@@ -1328,6 +1430,40 @@ declare interface DescribeAuditLogsResponse {
   TotalCount: number;
   /** 审计日志详情。 */
   Items: AuditLog[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditRuleTemplatesRequest {
+  /** 规则模版ID。 */
+  RuleTemplateIds?: string[];
+  /** 规则模版名称 */
+  RuleTemplateNames?: string[];
+  /** 单次请求返回的数量。默认值20。 */
+  Limit?: number;
+  /** 偏移量，默认值为 0。 */
+  Offset?: number;
+}
+
+declare interface DescribeAuditRuleTemplatesResponse {
+  /** 符合查询条件的实例总数。 */
+  TotalCount: number;
+  /** 规则模版详细信息列表。 */
+  Items: AuditRuleTemplateInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditRuleWithInstanceIdsRequest {
+  /** 实例ID。目前仅支持单个实例的查询。 */
+  InstanceIds: string[];
+}
+
+declare interface DescribeAuditRuleWithInstanceIdsResponse {
+  /** 无 */
+  TotalCount: number;
+  /** 实例审计规则信息。 */
+  Items: InstanceAuditRule[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1924,6 +2060,42 @@ declare interface ModifyAccountParamsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAuditRuleTemplatesRequest {
+  /** 审计规则模版ID。 */
+  RuleTemplateIds: string[];
+  /** 修改后的审计规则。 */
+  RuleFilters?: RuleFilters[];
+  /** 修改后的规则模版名称。 */
+  RuleTemplateName?: string;
+  /** 修改后的规则模版描述。 */
+  Description?: string;
+}
+
+declare interface ModifyAuditRuleTemplatesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAuditServiceRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 日志保留时长。 */
+  LogExpireDay?: number;
+  /** 高频日志保留时长。 */
+  HighLogExpireDay?: number;
+  /** 修改实例审计规则为全审计。 */
+  AuditAll?: boolean;
+  /** 规则审计。 */
+  AuditRuleFilters?: AuditRuleFilters[];
+  /** 规则模版ID。 */
+  RuleTemplateIds?: string[];
+}
+
+declare interface ModifyAuditServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyBackupConfigRequest {
   /** 集群ID */
   ClusterId: string;
@@ -2088,6 +2260,24 @@ declare interface OfflineInstanceRequest {
 declare interface OfflineInstanceResponse {
   /** 任务流ID */
   FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface OpenAuditServiceRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 日志保留时长。 */
+  LogExpireDay: number;
+  /** 高频日志保留时长。 */
+  HighLogExpireDay?: number;
+  /** 审计规则。同RuleTemplateIds都不填是全审计。 */
+  AuditRuleFilters?: AuditRuleFilters[];
+  /** 规则模版ID。同AuditRuleFilters都不填是全审计。 */
+  RuleTemplateIds?: string[];
+}
+
+declare interface OpenAuditServiceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2319,16 +2509,22 @@ declare interface Cynosdb {
   AddInstances(data: AddInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AddInstancesResponse>;
   /** 安全组批量绑定云资源 {@link AssociateSecurityGroupsRequest} {@link AssociateSecurityGroupsResponse} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
+  /** 实例关闭审计服务 {@link CloseAuditServiceRequest} {@link CloseAuditServiceResponse} */
+  CloseAuditService(data: CloseAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAuditServiceResponse>;
   /** 创建账号 {@link CreateAccountsRequest} {@link CreateAccountsResponse} */
   CreateAccounts(data: CreateAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountsResponse>;
   /** 创建审计日志文件 {@link CreateAuditLogFileRequest} {@link CreateAuditLogFileResponse} */
   CreateAuditLogFile(data: CreateAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditLogFileResponse>;
+  /** 创建审计规则模版 {@link CreateAuditRuleTemplateRequest} {@link CreateAuditRuleTemplateResponse} */
+  CreateAuditRuleTemplate(data: CreateAuditRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditRuleTemplateResponse>;
   /** 创建手动备份 {@link CreateBackupRequest} {@link CreateBackupResponse} */
   CreateBackup(data: CreateBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupResponse>;
   /** 创建集群 {@link CreateClustersRequest} {@link CreateClustersResponse} */
   CreateClusters(data: CreateClustersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClustersResponse>;
   /** 删除审计日志文件 {@link DeleteAuditLogFileRequest} {@link DeleteAuditLogFileResponse} */
   DeleteAuditLogFile(data: DeleteAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditLogFileResponse>;
+  /** 删除审计规则模版 {@link DeleteAuditRuleTemplatesRequest} {@link DeleteAuditRuleTemplatesResponse} */
+  DeleteAuditRuleTemplates(data: DeleteAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditRuleTemplatesResponse>;
   /** 删除手动备份 {@link DeleteBackupRequest} {@link DeleteBackupResponse} */
   DeleteBackup(data: DeleteBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupResponse>;
   /** 账号所有权限 {@link DescribeAccountAllGrantPrivilegesRequest} {@link DescribeAccountAllGrantPrivilegesResponse} */
@@ -2339,6 +2535,10 @@ declare interface Cynosdb {
   DescribeAuditLogFiles(data: DescribeAuditLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogFilesResponse>;
   /** 查询数据库审计日志 {@link DescribeAuditLogsRequest} {@link DescribeAuditLogsResponse} */
   DescribeAuditLogs(data: DescribeAuditLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogsResponse>;
+  /** 查询审计规则模版 {@link DescribeAuditRuleTemplatesRequest} {@link DescribeAuditRuleTemplatesResponse} */
+  DescribeAuditRuleTemplates(data?: DescribeAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditRuleTemplatesResponse>;
+  /** 获取实例的审计规则 {@link DescribeAuditRuleWithInstanceIdsRequest} {@link DescribeAuditRuleWithInstanceIdsResponse} */
+  DescribeAuditRuleWithInstanceIds(data: DescribeAuditRuleWithInstanceIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditRuleWithInstanceIdsResponse>;
   /** 查询备份配置信息 {@link DescribeBackupConfigRequest} {@link DescribeBackupConfigResponse} */
   DescribeBackupConfig(data: DescribeBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupConfigResponse>;
   /** 查询备份下载地址 {@link DescribeBackupDownloadUrlRequest} {@link DescribeBackupDownloadUrlResponse} */
@@ -2399,6 +2599,10 @@ declare interface Cynosdb {
   IsolateInstance(data: IsolateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateInstanceResponse>;
   /** 修改账号参数 {@link ModifyAccountParamsRequest} {@link ModifyAccountParamsResponse} */
   ModifyAccountParams(data: ModifyAccountParamsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountParamsResponse>;
+  /** 修改审计规则模版 {@link ModifyAuditRuleTemplatesRequest} {@link ModifyAuditRuleTemplatesResponse} */
+  ModifyAuditRuleTemplates(data: ModifyAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditRuleTemplatesResponse>;
+  /** 实例修改审计服务 {@link ModifyAuditServiceRequest} {@link ModifyAuditServiceResponse} */
+  ModifyAuditService(data: ModifyAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditServiceResponse>;
   /** 修改备份配置 {@link ModifyBackupConfigRequest} {@link ModifyBackupConfigResponse} */
   ModifyBackupConfig(data: ModifyBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupConfigResponse>;
   /** 修改备份文件备注名 {@link ModifyBackupNameRequest} {@link ModifyBackupNameResponse} */
@@ -2421,6 +2625,8 @@ declare interface Cynosdb {
   OfflineCluster(data: OfflineClusterRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineClusterResponse>;
   /** 下线实例 {@link OfflineInstanceRequest} {@link OfflineInstanceResponse} */
   OfflineInstance(data: OfflineInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineInstanceResponse>;
+  /** 实例开通审计服务 {@link OpenAuditServiceRequest} {@link OpenAuditServiceResponse} */
+  OpenAuditService(data: OpenAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAuditServiceResponse>;
   /** 暂停serverless集群 {@link PauseServerlessRequest} {@link PauseServerlessResponse} */
   PauseServerless(data: PauseServerlessRequest, config?: AxiosRequestConfig): AxiosPromise<PauseServerlessResponse>;
   /** 删除从可用区 {@link RemoveClusterSlaveZoneRequest} {@link RemoveClusterSlaveZoneResponse} */

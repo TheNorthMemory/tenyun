@@ -308,8 +308,11 @@ class TenYun {
         const client = this[CLIENT];
         Reflect.set(endpoint, action, {
           async [action](data = {}, config = {}) {
-            return client.post(`https://${endpoint.name}/`, data, {
+            return client.request({
+              url: `https://${endpoint.name}/`,
+              data,
               ...config,
+              method: 'POST',
               headers: {
                 [HOST]: endpoint.name,
                 [X_TC_VERSION]: endpoint().shift(),
