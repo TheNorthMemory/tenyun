@@ -908,6 +908,8 @@ declare interface DetailDomain {
   HwPrivateAccess: HwPrivateAccess | null;
   /** 七牛云对象存储回源鉴权 */
   QnPrivateAccess: QnPrivateAccess | null;
+  /** https 请求计费开关 */
+  HttpsBilling: HttpsBilling | null;
 }
 
 /** 诊断报告内容数据 */
@@ -1188,6 +1190,12 @@ declare interface Https {
   TlsVersion?: string[] | null;
 }
 
+/** 支持 https 请求开关，若关闭，下发配置拦截https请求 */
+declare interface HttpsBilling {
+  /** https请求计费开关 */
+  Switch: string;
+}
+
 /** 华为云对象存储回源鉴权 */
 declare interface HwPrivateAccess {
   /** 开关 on/off */
@@ -1222,7 +1230,7 @@ declare interface IpFilter {
   Filters?: string[] | null;
   /** IP 黑白名单分路径配置，白名单功能 */
   FilterRules?: IpFilterPathRule[] | null;
-  /** IP 黑白名单验证失败时返回的 HTTP Code合法值: 400~499 */
+  /** IP 黑白名单验证失败时返回的 code（即将下线） */
   ReturnCode?: number | null;
 }
 

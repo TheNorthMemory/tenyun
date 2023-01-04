@@ -116,9 +116,9 @@ declare interface CertInfo {
   CertId?: string;
   /** 上传证书的名称，如果没有 CertId，则此项必传。 */
   CertName?: string;
-  /** 上传证书的公钥，如果没有 CertId，则此项必传。 */
+  /** 上传证书的公钥；如果没有 CertId，则此项必传。 */
   CertContent?: string;
-  /** 上传服务端证书的私钥，如果没有 CertId，则此项必传。 */
+  /** 上传服务端证书的私钥；如果没有 CertId，则此项必传。 */
   CertKey?: string;
 }
 
@@ -560,6 +560,10 @@ declare interface Listener {
   AttrFlags: string[] | null;
   /** 绑定的目标组列表 */
   TargetGroupList: BasicTargetGroupInfo[] | null;
+  /** 监听器最大连接数，-1表示监听器维度不限速。 */
+  MaxConn: number | null;
+  /** 监听器最大新增连接数，-1表示监听器维度不限速。 */
+  MaxCps: number | null;
 }
 
 /** 监听器上绑定的后端服务的信息 */
@@ -1345,6 +1349,10 @@ declare interface CreateListenerRequest {
   DeregisterTargetRst?: boolean;
   /** 证书信息，支持同时传入不同算法类型的多本服务端证书；此参数仅适用于未开启SNI特性的HTTPS监听器。此参数和Certificate不能同时传入。 */
   MultiCertInfo?: MultiCertInfo;
+  /** 监听器最大连接数，只有TCP/UDP/TCP_SSL/QUIC监听器支持，不传或者传-1表示监听器维度不限速。 */
+  MaxConn?: number;
+  /** 监听器最大新增连接数，只有TCP/UDP/TCP_SSL/QUIC监听器支持，不传或者传-1表示监听器维度不限速。 */
+  MaxCps?: number;
 }
 
 declare interface CreateListenerResponse {
@@ -2281,6 +2289,10 @@ declare interface ModifyListenerRequest {
   SessionType?: string;
   /** 证书信息，支持同时传入不同算法类型的多本服务端证书；此参数仅适用于未开启SNI特性的HTTPS监听器。此参数和Certificate不能同时传入。 */
   MultiCertInfo?: MultiCertInfo;
+  /** 监听器最大连接数，只有TCP/UDP/TCP_SSL/QUIC监听器支持，不传或者传-1表示监听器维度不限速。 */
+  MaxConn?: number;
+  /** 监听器最大连接数，只有TCP/UDP/TCP_SSL/QUIC监听器支持，不传或者传-1表示监听器维度不限速。 */
+  MaxCps?: number;
 }
 
 declare interface ModifyListenerResponse {

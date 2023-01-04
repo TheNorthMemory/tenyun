@@ -108,6 +108,24 @@ declare interface DnsVpcSwitch {
   Status: number;
 }
 
+/** 防火墙网段信息 */
+declare interface FwCidrInfo {
+  /** 防火墙使用的网段类型，值VpcSelf/Assis/Custom分别代表自有网段优先/扩展网段优先/自定义 */
+  FwCidrType: string;
+  /** 为每个vpc指定防火墙的网段 */
+  FwCidrLst?: FwVpcCidr[];
+  /** 其他防火墙占用网段，一般是防火墙需要独占vpc时指定的网段 */
+  ComFwCidr?: string;
+}
+
+/** vpc的防火墙网段 */
+declare interface FwVpcCidr {
+  /** vpc的id */
+  VpcId: string;
+  /** 防火墙网段，最少/24的网段 */
+  FwCidr: string;
+}
+
 /** ip防护状态 */
 declare interface IPDefendStatus {
   /** ip地址 */
@@ -693,6 +711,8 @@ declare interface CreateNatFwInstanceRequest {
   ZoneBak?: string;
   /** 异地灾备 1：使用异地灾备；0：不使用异地灾备；为空则默认不使用异地灾备 */
   CrossAZone?: number;
+  /** 指定防火墙使用网段信息 */
+  FwCidrInfo?: FwCidrInfo;
 }
 
 declare interface CreateNatFwInstanceResponse {
@@ -723,6 +743,8 @@ declare interface CreateNatFwInstanceWithDomainRequest {
   IsCreateDomain?: number;
   /** 如果要创建域名则必填 */
   Domain?: string;
+  /** 指定防火墙使用网段信息 */
+  FwCidrInfo?: FwCidrInfo;
 }
 
 declare interface CreateNatFwInstanceWithDomainResponse {
@@ -1493,6 +1515,8 @@ declare interface ModifyNatFwReSelectRequest {
   NatGwList?: string[];
   /** 新增模式重新接入的vpc列表，其中NatGwList和NatgwList只能传递一个。 */
   VpcList?: string[];
+  /** 指定防火墙使用网段信息 */
+  FwCidrInfo?: FwCidrInfo;
 }
 
 declare interface ModifyNatFwReSelectResponse {

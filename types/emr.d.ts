@@ -370,6 +370,22 @@ declare interface EmrListInstance {
   IsMultiZoneCluster: boolean | null;
   /** 是否手戳集群 */
   IsHandsCluster: boolean | null;
+  /** 体外客户端组件信息 */
+  OutSideSoftInfo: SoftDependInfo[] | null;
+}
+
+/** Emr询价描述 */
+declare interface EmrPrice {
+  /** 刊例价格 */
+  OriginalCost: string | null;
+  /** 折扣价格 */
+  DiscountCost: string | null;
+  /** 单位 */
+  Unit: string | null;
+  /** 询价配置 */
+  PriceSpec: PriceResource | null;
+  /** 是否支持竞价实例 */
+  SupportSpotPaid: boolean | null;
 }
 
 /** EMR产品配置 */
@@ -570,108 +586,116 @@ declare interface NewResourceSpec {
   CommonCount?: number;
 }
 
+/** 用于创建集群价格清单 节点价格详情 */
+declare interface NodeDetailPriceResult {
+  /** 节点类型 master core task common router mysql */
+  NodeType: string | null;
+  /** 节点组成部分价格详情 */
+  PartDetailPrice: PartDetailPriceItem[];
+}
+
 /** 节点硬件信息 */
 declare interface NodeHardwareInfo {
   /** 用户APPID */
-  AppId: number | null;
+  AppId?: number | null;
   /** 序列号 */
-  SerialNo: string | null;
+  SerialNo?: string | null;
   /** 机器实例ID */
-  OrderNo: string | null;
+  OrderNo?: string | null;
   /** master节点绑定外网IP */
-  WanIp: string | null;
+  WanIp?: string | null;
   /** 节点类型。0:common节点；1:master节点；2:core节点；3:task节点 */
-  Flag: number | null;
+  Flag?: number | null;
   /** 节点规格 */
-  Spec: string | null;
+  Spec?: string | null;
   /** 节点核数 */
-  CpuNum: number | null;
+  CpuNum?: number | null;
   /** 节点内存 */
-  MemSize: number | null;
+  MemSize?: number | null;
   /** 节点内存描述 */
-  MemDesc: string | null;
+  MemDesc?: string | null;
   /** 节点所在region */
-  RegionId: number | null;
+  RegionId?: number | null;
   /** 节点所在Zone */
-  ZoneId: number | null;
+  ZoneId?: number | null;
   /** 申请时间 */
-  ApplyTime: string | null;
+  ApplyTime?: string | null;
   /** 释放时间 */
-  FreeTime: string | null;
+  FreeTime?: string | null;
   /** 硬盘大小 */
-  DiskSize: string | null;
+  DiskSize?: string | null;
   /** 节点描述 */
-  NameTag: string | null;
+  NameTag?: string | null;
   /** 节点部署服务 */
-  Services: string | null;
+  Services?: string | null;
   /** 磁盘类型 */
-  StorageType: number | null;
+  StorageType?: number | null;
   /** 系统盘大小 */
-  RootSize: number | null;
+  RootSize?: number | null;
   /** 付费类型 */
-  ChargeType: number | null;
+  ChargeType?: number | null;
   /** 数据库IP */
-  CdbIp: string | null;
+  CdbIp?: string | null;
   /** 数据库端口 */
-  CdbPort: number | null;
+  CdbPort?: number | null;
   /** 硬盘容量 */
-  HwDiskSize: number | null;
+  HwDiskSize?: number | null;
   /** 硬盘容量描述 */
-  HwDiskSizeDesc: string | null;
+  HwDiskSizeDesc?: string | null;
   /** 内存容量 */
-  HwMemSize: number | null;
+  HwMemSize?: number | null;
   /** 内存容量描述 */
-  HwMemSizeDesc: string | null;
+  HwMemSizeDesc?: string | null;
   /** 过期时间 */
-  ExpireTime: string | null;
+  ExpireTime?: string | null;
   /** 节点资源ID */
-  EmrResourceId: string | null;
+  EmrResourceId?: string | null;
   /** 续费标志 */
-  IsAutoRenew: number | null;
+  IsAutoRenew?: number | null;
   /** 设备标识 */
-  DeviceClass: string | null;
+  DeviceClass?: string | null;
   /** 支持变配 */
-  Mutable: number | null;
+  Mutable?: number | null;
   /** 多云盘 */
-  MCMultiDisk: MultiDiskMC[] | null;
+  MCMultiDisk?: MultiDiskMC[] | null;
   /** 数据库信息 */
-  CdbNodeInfo: CdbInfo | null;
+  CdbNodeInfo?: CdbInfo | null;
   /** 内网IP */
-  Ip: string | null;
+  Ip?: string | null;
   /** 此节点是否可销毁，1可销毁，0不可销毁 */
-  Destroyable: number | null;
+  Destroyable?: number | null;
   /** 节点绑定的标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 是否是自动扩缩容节点，0为普通节点，1为自动扩缩容节点。 */
-  AutoFlag: number | null;
+  AutoFlag?: number | null;
   /** 资源类型, host/pod */
-  HardwareResourceType: string | null;
+  HardwareResourceType?: string | null;
   /** 是否浮动规格，1是，0否 */
-  IsDynamicSpec: number | null;
+  IsDynamicSpec?: number | null;
   /** 浮动规格值json字符串 */
-  DynamicPodSpec: string | null;
+  DynamicPodSpec?: string | null;
   /** 是否支持变更计费类型 1是，0否 */
-  SupportModifyPayMode: number | null;
+  SupportModifyPayMode?: number | null;
   /** 系统盘类型 */
-  RootStorageType: number | null;
+  RootStorageType?: number | null;
   /** 可用区信息 */
-  Zone: string | null;
+  Zone?: string | null;
   /** 子网 */
-  SubnetInfo: SubnetInfo | null;
+  SubnetInfo?: SubnetInfo | null;
   /** 客户端 */
-  Clients: string | null;
+  Clients?: string | null;
   /** 系统当前时间 */
-  CurrentTime: string | null;
+  CurrentTime?: string | null;
   /** 是否用于联邦 ,1是，0否 */
-  IsFederation: number | null;
+  IsFederation?: number | null;
   /** 设备名称 */
-  DeviceName: string | null;
+  DeviceName?: string | null;
   /** 服务 */
-  ServiceClient: string | null;
+  ServiceClient?: string | null;
   /** 该实例是否开启实例保护，true为开启 false为关闭 */
-  DisableApiTermination: boolean | null;
+  DisableApiTermination?: boolean | null;
   /** 0表示老计费，1表示新计费 */
-  TradeVersion: number | null;
+  TradeVersion?: number | null;
 }
 
 /** 资源详情 */
@@ -708,6 +732,22 @@ declare interface OutterResource {
   DiskSize: number | null;
   /** 规格 */
   InstanceType: string | null;
+}
+
+/** 用于创建集群价格清单-节点组成部分价格 */
+declare interface PartDetailPriceItem {
+  /** 类型包括：节点->node、系统盘->rootDisk、云数据盘->dataDisk、metaDB */
+  InstanceType: string | null;
+  /** 单价（原价） */
+  Price: number | null;
+  /** 单价（折扣价） */
+  RealCost: number | null;
+  /** 总价（折扣价） */
+  RealTotalCost: number | null;
+  /** 折扣 */
+  Policy: number | null;
+  /** 数量 */
+  GoodsNum: number | null;
 }
 
 /** Pod PVC存储方式描述 */
@@ -1028,6 +1068,14 @@ declare interface ShortNodeInfo {
   NodeSize?: number | null;
 }
 
+/** 体外客户端组件依赖信息 */
+declare interface SoftDependInfo {
+  /** 组件名称 */
+  SoftName: string;
+  /** 是否必选 */
+  Required: boolean;
+}
+
 /** 执行步骤 */
 declare interface Step {
   /** 执行步骤名称。 */
@@ -1128,6 +1176,14 @@ declare interface VirtualPrivateCloud {
   VpcId: string;
   /** Subnet ID */
   SubnetId: string;
+}
+
+/** 用于创建集群价格清单 不同可用区下价格详情 */
+declare interface ZoneDetailPriceResult {
+  /** 可用区Id */
+  ZoneId: string | null;
+  /** 不同节点的价格详情 */
+  NodeDetailPrice: NodeDetailPriceResult[];
 }
 
 /** 可用区配置信息 */
@@ -1580,6 +1636,8 @@ declare interface InquiryPriceCreateInstanceResponse {
   TimeUnit: string | null;
   /** 购买实例的时长。 */
   TimeSpan: number | null;
+  /** 价格清单 */
+  PriceList: ZoneDetailPriceResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1646,6 +1704,8 @@ declare interface InquiryPriceScaleOutInstanceResponse {
   Unit: string | null;
   /** 询价的节点规格。 */
   PriceSpec: PriceResource | null;
+  /** 对应入参MultipleResources中多个规格的询价结果，其它出参返回的是第一个规格的询价结果 */
+  MultipleEmrPrice: EmrPrice[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

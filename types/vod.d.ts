@@ -3734,6 +3734,8 @@ declare interface ReviewAudioVideoTaskOutput {
   SegmentSetFileUrl: string;
   /** 涉及违规信息的嫌疑的视频片段列表文件 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   SegmentSetFileUrlExpireTime: string;
+  /** 封面审核结果。 */
+  CoverReviewResult: ReviewImageResult | null;
 }
 
 /** 图片审核结果。 */
@@ -7467,7 +7469,9 @@ declare interface ReviewAudioVideoRequest {
   FileId: string;
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: number;
-  /** 音视频审核模板 ID，默认值为 10。取值范围：10：预置模板，支持检测的违规标签包括色情（Porn）、暴恐（Terror）和不适宜的信息（Polity）。 */
+  /** 审核的内容，可选值有：Media：原始音视频；Cover：封面。不填或填空数组时，默认为审核 Media。 */
+  ReviewContents?: string[];
+  /** 审核模板 ID，默认值为 10。取值范围：10：预置模板，支持检测的违规标签包括色情（Porn）、暴恐（Terror）和不适宜的信息（Polity）。 */
   Definition?: number;
   /** 任务流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
   TasksPriority?: number;
@@ -7496,7 +7500,7 @@ declare interface ReviewImageRequest {
 }
 
 declare interface ReviewImageResponse {
-  /** 图片审核任务结果。注意：该字段已废弃，建议使用 ReviewResult。 */
+  /** 图片审核任务结果。注意：该字段已废弃，建议使用 MediaReviewResult。 */
   ReviewResultSet?: ContentReviewResult[];
   /** 图片审核任务结果。 */
   MediaReviewResult?: ReviewImageResult | null;

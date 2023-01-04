@@ -13,41 +13,43 @@ declare interface AccountStatistics {
 /** 资源管理进程基本信息 */
 declare interface AssetAppBaseInfo {
   /** 主机内网IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 主机名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 主机外网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
   /** 主机Uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 主机Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 主机业务组ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 主机标签 */
-  Tag: MachineTag[] | null;
+  Tag?: MachineTag[] | null;
   /** 应用名称 */
-  Name: string;
+  Name?: string;
   /** 应用类型	1: 运维2 : 数据库3 : 安全4 : 可疑应用5 : 系统架构6 : 系统应用7 : WEB服务99: 其他 */
-  Type: number;
+  Type?: number;
   /** 二进制路径 */
-  BinPath: string;
+  BinPath?: string;
   /** 操作系统信息 */
-  OsInfo: string;
+  OsInfo?: string;
   /** 关联进程数 */
-  ProcessCount: number;
+  ProcessCount?: number;
   /** 应用描述 */
-  Desc: string;
+  Desc?: string;
   /** 版本号 */
-  Version: string;
+  Version?: string;
   /** 配置文件路径 */
-  ConfigPath: string;
+  ConfigPath?: string;
   /** 首次采集时间 */
-  FirstTime: string;
+  FirstTime?: string;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 是否新增[0:否|1:是] */
-  IsNew: number | null;
+  IsNew?: number | null;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 软件应用关联进程信息 */
@@ -69,39 +71,41 @@ declare interface AssetAppProcessInfo {
 /** 资产管理内核模块列表 */
 declare interface AssetCoreModuleBaseInfo {
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 描述 */
-  Desc: string;
+  Desc?: string;
   /** 路径 */
-  Path: string;
+  Path?: string;
   /** 版本 */
-  Version: string;
+  Version?: string;
   /** 服务器IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 服务器名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 操作系统 */
-  OsInfo: string;
+  OsInfo?: string;
   /** 模块大小 */
-  Size: number;
+  Size?: number;
   /** 依赖进程数 */
-  ProcessCount: number;
+  ProcessCount?: number;
   /** 依赖模块数 */
-  ModuleCount: number;
+  ModuleCount?: number;
   /** 模块ID */
-  Id: string;
+  Id?: string;
   /** 主机Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 主机uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 首次采集时间 */
-  FirstTime: string;
+  FirstTime?: string;
   /** 是否新增[0:否|1:是] */
-  IsNew: number;
+  IsNew?: number;
   /** 服务器外网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 资产管理内核模块详情 */
@@ -137,57 +141,59 @@ declare interface AssetCoreModuleParam {
 /** 资源管理数据库列表信息 */
 declare interface AssetDatabaseBaseInfo {
   /** 主机内网IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 主机外网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
   /** 主机Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 主机Uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 操作系统信息 */
-  OsInfo: string;
+  OsInfo?: string;
   /** 主机业务组ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 主机标签 */
-  Tag: MachineTag[] | null;
+  Tag?: MachineTag[] | null;
   /** 数据库名 */
-  Name: string;
+  Name?: string;
   /** 版本 */
-  Version: string;
+  Version?: string;
   /** 监听端口 */
-  Port: string;
+  Port?: string;
   /** 协议 */
-  Proto: string;
+  Proto?: string;
   /** 运行用户 */
-  User: string;
+  User?: string;
   /** 绑定IP */
-  Ip: string;
+  Ip?: string;
   /** 配置文件路径 */
-  ConfigPath: string;
+  ConfigPath?: string;
   /** 日志文件路径 */
-  LogPath: string;
+  LogPath?: string;
   /** 数据路径 */
-  DataPath: string;
+  DataPath?: string;
   /** 运行权限 */
-  Permission: string;
+  Permission?: string;
   /** 错误日志路径 */
-  ErrorLogPath: string;
+  ErrorLogPath?: string;
   /** 插件路径 */
-  PlugInPath: string;
+  PlugInPath?: string;
   /** 二进制路径 */
-  BinPath: string;
+  BinPath?: string;
   /** 启动参数 */
-  Param: string;
+  Param?: string;
   /** 数据库ID */
-  Id: string;
+  Id?: string;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 首次采集时间 */
-  FirstTime: string;
+  FirstTime?: string;
   /** 是否新增[0:否|1:是] */
-  IsNew: number;
+  IsNew?: number;
   /** 主机名称 */
-  MachineName: string;
+  MachineName?: string;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 资源管理数据库列表信息 */
@@ -253,31 +259,33 @@ declare interface AssetDiskPartitionInfo {
 /** 资产管理环境变量列表 */
 declare interface AssetEnvBaseInfo {
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 类型：0:用户变量1:系统变量 */
-  Type: number;
+  Type?: number;
   /** 启动用户 */
-  User: string;
+  User?: string;
   /** 环境变量值 */
-  Value: string;
+  Value?: string;
   /** 服务器IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 服务器名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 操作系统 */
-  OsInfo: string;
+  OsInfo?: string;
   /** 主机Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 主机uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 首次采集时间 */
-  FirstTime: string;
+  FirstTime?: string;
   /** 是否新增[0:否|1:是] */
-  IsNew: number;
+  IsNew?: number;
   /** 服务器外网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 容器安全描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
@@ -293,69 +301,73 @@ declare interface AssetFilters {
 /** 资产管理启动服务列表 */
 declare interface AssetInitServiceBaseInfo {
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 类型：1:编码器2:IE插件3:网络提供者4:镜像劫持5:LSA提供者6:KnownDLLs7:启动执行8:WMI9:计划任务10:Winsock提供者11:打印监控器12:资源管理器13:驱动服务14:登录 */
-  Type: number;
+  Type?: number;
   /** 默认启用状态：0未启用，1启用 */
-  Status: number;
+  Status?: number;
   /** 启动用户 */
-  User: string;
+  User?: string;
   /** 路径 */
-  Path: string;
+  Path?: string;
   /** 服务器IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 服务器名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 操作系统 */
-  OsInfo: string;
+  OsInfo?: string;
   /** 主机Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 主机uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 数据更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 首次采集时间 */
-  FirstTime: string;
+  FirstTime?: string;
   /** 是否新增[0:否|1:是] */
-  IsNew: number;
+  IsNew?: number;
   /** 服务器外网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 资产管理jar包列表 */
 declare interface AssetJarBaseInfo {
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 类型：1应用程序，2系统类库，3Web服务自带库，8:其他， */
-  Type: number;
+  Type?: number;
   /** 是否可执行：0未知，1是，2否 */
-  Status: number;
+  Status?: number;
   /** 版本 */
-  Version: string;
+  Version?: string;
   /** 路径 */
-  Path: string;
+  Path?: string;
   /** 服务器IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 服务器名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 操作系统 */
-  OsInfo: string;
+  OsInfo?: string;
   /** Jar包ID */
-  Id: string;
+  Id?: string;
   /** Jar包Md5 */
-  Md5: string;
+  Md5?: string;
   /** 主机Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 主机uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 首次采集时间 */
-  FirstTime: string;
+  FirstTime?: string;
   /** 是否新增[0:否|1:是] */
-  IsNew: number;
+  IsNew?: number;
   /** 服务器外网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 资产管理jar包详情 */
@@ -399,117 +411,121 @@ declare interface AssetKeyVal {
 /** 资产指纹中服务器列表的基本信息 */
 declare interface AssetMachineBaseInfo {
   /** 服务器Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 服务器uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 服务器内网IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 服务器名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 操作系统名称 */
-  OsInfo: string;
+  OsInfo?: string;
   /** CPU信息 */
-  Cpu: string;
+  Cpu?: string;
   /** 内存容量：单位G */
-  MemSize: number;
+  MemSize?: number;
   /** 内存使用率百分比 */
-  MemLoad: string;
+  MemLoad?: string;
   /** 硬盘容量：单位G */
-  DiskSize: number;
+  DiskSize?: number;
   /** 硬盘使用率百分比 */
-  DiskLoad: string;
+  DiskLoad?: string;
   /** 分区数 */
-  PartitionCount: number;
+  PartitionCount?: number;
   /** 主机外网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
   /** 业务组ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** Cpu数量 */
-  CpuSize: number;
+  CpuSize?: number;
   /** Cpu使用率百分比 */
-  CpuLoad: string;
+  CpuLoad?: string;
   /** 标签 */
-  Tag: MachineTag[] | null;
+  Tag?: MachineTag[] | null;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 是否新增[0:否|1:是] */
-  IsNew: number;
+  IsNew?: number;
   /** 首次采集时间 */
-  FirstTime: string;
+  FirstTime?: string;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 资产指纹中服务器列表的基本信息 */
 declare interface AssetMachineDetail {
   /** 服务器Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 服务器uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 服务器内网IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 服务器名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 操作系统名称 */
-  OsInfo: string;
+  OsInfo?: string;
   /** CPU信息 */
-  Cpu: string;
+  Cpu?: string;
   /** 内存容量：单位G */
-  MemSize: number;
+  MemSize?: number;
   /** 内存使用率百分比 */
-  MemLoad: string;
+  MemLoad?: string;
   /** 硬盘容量：单位G */
-  DiskSize: number;
+  DiskSize?: number;
   /** 硬盘使用率百分比 */
-  DiskLoad: string;
+  DiskLoad?: string;
   /** 分区数 */
-  PartitionCount: number;
+  PartitionCount?: number;
   /** 主机外网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
   /** Cpu数量 */
-  CpuSize: number;
+  CpuSize?: number;
   /** Cpu使用率百分比 */
-  CpuLoad: string;
-  /** 防护级别：0基础版，1专业版 */
-  ProtectLevel: number;
+  CpuLoad?: string;
+  /** 防护级别：0基础版，1专业版，2旗舰版，3普惠版 */
+  ProtectLevel?: number;
   /** 风险状态：UNKNOW-未知，RISK-风险，SAFT-安全 */
-  RiskStatus: string;
+  RiskStatus?: string;
   /** 已防护天数 */
-  ProtectDays: number;
+  ProtectDays?: number;
   /** 专业版开通时间 */
-  BuyTime: string;
+  BuyTime?: string;
   /** 专业版到期时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 内核版本 */
-  CoreVersion: string;
+  CoreVersion?: string;
   /** linux/windows */
-  OsType: string;
+  OsType?: string;
   /** agent版本 */
-  AgentVersion: string;
+  AgentVersion?: string;
   /** 安装时间 */
-  InstallTime: string;
+  InstallTime?: string;
   /** 系统启动时间 */
-  BootTime: string;
+  BootTime?: string;
   /** 最后上线时间 */
-  LastLiveTime: string;
+  LastLiveTime?: string;
   /** 生产商 */
-  Producer: string;
+  Producer?: string;
   /** 序列号 */
-  SerialNumber: string;
+  SerialNumber?: string;
   /** 网卡 */
-  NetCards: AssetNetworkCardInfo[];
+  NetCards?: AssetNetworkCardInfo[];
   /** 分区 */
-  Disks: AssetDiskPartitionInfo[];
+  Disks?: AssetDiskPartitionInfo[];
   /** 0在线，1已离线 */
-  Status: number;
+  Status?: number;
   /** 业务组ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 设备型号 */
-  DeviceVersion: string;
+  DeviceVersion?: string;
   /** 离线时间 */
-  OfflineTime: string | null;
+  OfflineTime?: string | null;
   /** 主机ID */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
+  /** 主机二外信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 资产管理网卡信息 */
@@ -531,149 +547,155 @@ declare interface AssetNetworkCardInfo {
 /** 资产管理计划任务列表 */
 declare interface AssetPlanTask {
   /** 默认启用状态：1启用，2未启用 */
-  Status: number;
+  Status?: number;
   /** 执行周期 */
-  Cycle: string;
+  Cycle?: string;
   /** 执行命令或脚本 */
-  Command: string;
+  Command?: string;
   /** 启动用户 */
-  User: string;
+  User?: string;
   /** 配置文件路径 */
-  ConfigPath: string;
+  ConfigPath?: string;
   /** 服务器IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 服务器名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 操作系统 */
-  OsInfo: string;
+  OsInfo?: string;
   /** 主机Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 主机uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 首次采集时间 */
-  FirstTime: string;
+  FirstTime?: string;
   /** 是否新增[0:否|1:是] */
-  IsNew: number;
+  IsNew?: number;
   /** 服务器外网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 资源管理账号基本信息 */
 declare interface AssetPortBaseInfo {
   /** 主机内网IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 主机外网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
   /** 主机Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 主机Uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 操作系统信息 */
-  OsInfo: string;
+  OsInfo?: string;
   /** 主机业务组ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 主机标签 */
-  Tag: MachineTag[] | null;
+  Tag?: MachineTag[] | null;
   /** 进程名称 */
-  ProcessName: string;
+  ProcessName?: string;
   /** 进程版本 */
-  ProcessVersion: string;
+  ProcessVersion?: string;
   /** 进程路径 */
-  ProcessPath: string;
+  ProcessPath?: string;
   /** 进程ID */
-  Pid: string;
+  Pid?: string;
   /** 运行用户 */
-  User: string;
+  User?: string;
   /** 启动时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 启动参数 */
-  Param: string;
+  Param?: string;
   /** 进程TTY */
-  Teletype: string;
+  Teletype?: string;
   /** 端口 */
-  Port: string;
+  Port?: string;
   /** 所属用户组 */
-  GroupName: string;
+  GroupName?: string;
   /** 进程MD5 */
-  Md5: string;
+  Md5?: string;
   /** 父进程ID */
-  Ppid: string;
+  Ppid?: string;
   /** 父进程名称 */
-  ParentProcessName: string;
+  ParentProcessName?: string;
   /** 端口协议 */
-  Proto: string;
+  Proto?: string;
   /** 绑定IP */
-  BindIp: string;
+  BindIp?: string;
   /** 主机名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 首次采集时间 */
-  FirstTime: string;
+  FirstTime?: string;
   /** 是否新增[0:否|1:是] */
-  IsNew: number;
+  IsNew?: number;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 资源管理进程基本信息 */
 declare interface AssetProcessBaseInfo {
   /** 主机内网IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 主机外网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
   /** 主机Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 主机Uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 操作系统信息 */
-  OsInfo: string;
+  OsInfo?: string;
   /** 主机业务组ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 主机标签 */
-  Tag: MachineTag[] | null;
+  Tag?: MachineTag[] | null;
   /** 进程名称 */
-  Name: string;
+  Name?: string;
   /** 进程说明 */
-  Desc: string;
+  Desc?: string;
   /** 进程路径 */
-  Path: string;
+  Path?: string;
   /** 进程ID */
-  Pid: string;
+  Pid?: string;
   /** 运行用户 */
-  User: string;
+  User?: string;
   /** 启动时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 启动参数 */
-  Param: string;
+  Param?: string;
   /** 进程TTY */
-  Tty: string;
+  Tty?: string;
   /** 进程版本 */
-  Version: string;
+  Version?: string;
   /** 进程用户组 */
-  GroupName: string;
+  GroupName?: string;
   /** 进程MD5 */
-  Md5: string;
+  Md5?: string;
   /** 父进程ID */
-  Ppid: string;
+  Ppid?: string;
   /** 父进程名称 */
-  ParentProcessName: string;
+  ParentProcessName?: string;
   /** 进程状态 */
-  Status: string;
+  Status?: string;
   /** 数字签名:0无，1有， 999 空，仅windows */
-  HasSign: number;
+  HasSign?: number;
   /** 是否通过安装包安装：:0否，1是， 999 空，仅linux */
-  InstallByPackage: number;
+  InstallByPackage?: number;
   /** 软件包名 */
-  PackageName: string;
+  PackageName?: string;
   /** 主机名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 首次采集时间 */
-  FirstTime: string;
+  FirstTime?: string;
   /** 是否新增[0:否|1:是] */
-  IsNew: number;
+  IsNew?: number;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 资源管理系统安装包列表信息 */
@@ -705,61 +727,63 @@ declare interface AssetSystemPackageInfo {
 /** 资源管理账号基本信息 */
 declare interface AssetUserBaseInfo {
   /** 主机内网IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 主机外网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
   /** 主机名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 操作系统信息 */
-  OsInfo: string;
+  OsInfo?: string;
   /** 主机Uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 主机Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 账号UID */
-  Uid: string;
+  Uid?: string;
   /** 账号GID */
-  Gid: string;
+  Gid?: string;
   /** 账号状态：0-禁用；1-启用 */
-  Status: number;
+  Status?: number;
   /** 是否有root权限：0-否；1是，999为空: 仅linux */
-  IsRoot: number;
+  IsRoot?: number;
   /** 登录方式：0-不可登录；1-只允许key登录；2只允许密码登录；3-允许key和密码，999为空，仅linux */
-  LoginType: number;
+  LoginType?: number;
   /** 上次登录时间 */
-  LastLoginTime: string;
+  LastLoginTime?: string;
   /** 账号名称 */
-  Name: string;
+  Name?: string;
   /** 主机业务组ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 账号类型：0访客用户，1标准用户，2管理员用户 ,999为空,仅windows */
-  UserType: number;
+  UserType?: number;
   /** 是否域账号：0否， 1是，2否, 999为空 仅windows */
-  IsDomain: number;
+  IsDomain?: number;
   /** 是否有sudo权限，1是，0否, 999为空, 仅linux */
-  IsSudo: number;
+  IsSudo?: number;
   /** 是否允许ssh登录，1是，0否, 999为空, 仅linux */
-  IsSshLogin: number;
+  IsSshLogin?: number;
   /** Home目录 */
-  HomePath: string;
+  HomePath?: string;
   /** Shell路径 仅linux */
-  Shell: string;
+  Shell?: string;
   /** 是否shell登录性，0不是；1是 仅linux */
-  ShellLoginStatus: number;
+  ShellLoginStatus?: number;
   /** 密码修改时间 */
-  PasswordChangeTime: string;
+  PasswordChangeTime?: string;
   /** 密码过期时间 仅linux */
-  PasswordDueTime: string;
+  PasswordDueTime?: string;
   /** 密码锁定时间：单位天, -1为永不锁定 999为空，仅linux */
-  PasswordLockDays: number;
+  PasswordLockDays?: number;
   /** 密码状态：1正常 2即将过期 3已过期 4已锁定 999为空 仅linux */
-  PasswordStatus: number;
+  PasswordStatus?: number;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 首次采集时间 */
-  FirstTime: string;
+  FirstTime?: string;
   /** 是否新增[0:否|1:是] */
-  IsNew: number;
+  IsNew?: number;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 资源管理账号基本信息 */
@@ -837,45 +861,47 @@ declare interface AssetUserKeyInfo {
 /** 资源管理Web应用列表信息 */
 declare interface AssetWebAppBaseInfo {
   /** 主机内网IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 主机外网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
   /** 主机Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 主机Uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 操作系统信息 */
-  OsInfo: string;
+  OsInfo?: string;
   /** 主机业务组ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 主机标签 */
-  Tag: MachineTag[] | null;
+  Tag?: MachineTag[] | null;
   /** 应用名 */
-  Name: string;
+  Name?: string;
   /** 版本 */
-  Version: string;
+  Version?: string;
   /** 根路径 */
-  RootPath: string;
+  RootPath?: string;
   /** 服务类型 */
-  ServiceType: string;
+  ServiceType?: string;
   /** 站点域名 */
-  Domain: string;
+  Domain?: string;
   /** 虚拟路径 */
-  VirtualPath: string;
+  VirtualPath?: string;
   /** 插件数 */
-  PluginCount: number;
+  PluginCount?: number;
   /** 应用ID */
-  Id: string;
+  Id?: string;
   /** 应用描述 */
-  Desc: string;
+  Desc?: string;
   /** 主机名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 首次采集时间 */
-  FirstTime: string;
+  FirstTime?: string;
   /** 是否新增[0:否|1:是] */
-  IsNew: number;
+  IsNew?: number;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 资产管理Web应用插件详情 */
@@ -893,81 +919,85 @@ declare interface AssetWebAppPluginInfo {
 /** 资源管理Web应用列表信息 */
 declare interface AssetWebFrameBaseInfo {
   /** 主机内网IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 主机外网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
   /** 主机Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 主机Uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 操作系统信息 */
-  OsInfo: string;
+  OsInfo?: string;
   /** 主机业务组ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 主机标签 */
-  Tag: MachineTag[] | null;
+  Tag?: MachineTag[] | null;
   /** 数据库名 */
-  Name: string;
+  Name?: string;
   /** 版本 */
-  Version: string;
+  Version?: string;
   /** 语言 */
-  Lang: string;
+  Lang?: string;
   /** 服务类型 */
-  ServiceType: string;
+  ServiceType?: string;
   /** 主机名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 首次采集时间 */
-  FirstTime: string;
+  FirstTime?: string;
   /** 是否新增[0:否|1:是] */
-  IsNew: number;
+  IsNew?: number;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 资产管理Web站点列表信息 */
 declare interface AssetWebLocationBaseInfo {
   /** 主机Uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 主机Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 内网IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 外网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
   /** 主机名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 操作系统 */
-  OsInfo: string;
+  OsInfo?: string;
   /** 域名 */
-  Name: string;
+  Name?: string;
   /** 站点端口 */
-  Port: string;
+  Port?: string;
   /** 站点协议 */
-  Proto: string;
+  Proto?: string;
   /** 服务类型 */
-  ServiceType: string;
+  ServiceType?: string;
   /** 站点路经数 */
-  PathCount: number;
+  PathCount?: number;
   /** 运行用户 */
-  User: string;
+  User?: string;
   /** 主目录 */
-  MainPath: string;
+  MainPath?: string;
   /** 主目录所有者 */
-  MainPathOwner: string;
+  MainPathOwner?: string;
   /** 拥有者权限 */
-  Permission: string;
+  Permission?: string;
   /** 主机业务组ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 主机标签 */
-  Tag: MachineTag[];
+  Tag?: MachineTag[];
   /** Web站点Id */
-  Id: string;
+  Id?: string;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 首次采集时间 */
-  FirstTime: string;
+  FirstTime?: string;
   /** 是否新增[0:否|1:是] */
-  IsNew: number | null;
+  IsNew?: number | null;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 资产管理Web站点列表信息 */
@@ -997,45 +1027,47 @@ declare interface AssetWebLocationInfo {
 /** 资源管理Web服务列表信息 */
 declare interface AssetWebServiceBaseInfo {
   /** 主机内网IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 主机外网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
   /** 主机Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 主机Uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 操作系统信息 */
-  OsInfo: string;
+  OsInfo?: string;
   /** 主机业务组ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 主机标签 */
-  Tag: MachineTag[] | null;
+  Tag?: MachineTag[] | null;
   /** 数据库名 */
-  Name: string;
+  Name?: string;
   /** 版本 */
-  Version: string;
+  Version?: string;
   /** 二进制路径 */
-  BinPath: string;
+  BinPath?: string;
   /** 启动用户 */
-  User: string;
+  User?: string;
   /** 安装路径 */
-  InstallPath: string;
+  InstallPath?: string;
   /** 配置路径 */
-  ConfigPath: string;
+  ConfigPath?: string;
   /** 关联进程数 */
-  ProcessCount: number;
+  ProcessCount?: number;
   /** Web服务ID */
-  Id: string;
+  Id?: string;
   /** 主机名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 描述 */
-  Desc: string;
+  Desc?: string;
   /** 数据更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 首次采集时间 */
-  FirstTime: string;
+  FirstTime?: string;
   /** 是否新增[0:否|1:是] */
-  IsNew: number;
+  IsNew?: number;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 阻断白名单展示列表，包含了机器的信息 */
@@ -1133,27 +1165,29 @@ declare interface BaselineEventLevelInfo {
 /** 基线主机检测 */
 declare interface BaselineHostDetect {
   /** 主机Id */
-  HostId: string;
+  HostId?: string;
   /** 内网Ip */
-  HostIp: string;
+  HostIp?: string;
   /** 主机名称 */
-  HostName: string;
+  HostName?: string;
   /** 外网Ip */
-  WanIp: string;
+  WanIp?: string;
   /** 0:未通过 1:忽略 3:通过 5:检测中 */
-  DetectStatus: number;
+  DetectStatus?: number;
   /** 检测通过数 */
-  PassedItemCount: number;
+  PassedItemCount?: number;
   /** 关联检测项数 */
-  ItemCount: number;
+  ItemCount?: number;
   /** 检测未通过数 */
-  NotPassedItemCount: number;
+  NotPassedItemCount?: number;
   /** 首次检测时间 */
-  FirstTime: string;
+  FirstTime?: string;
   /** 最后检测时间 */
-  LastTime: string;
+  LastTime?: string;
   /** 主机安全UUID */
-  Uuid: string | null;
+  Uuid?: string | null;
+  /** 主机额外信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 基线影响服务器列表数据 */
@@ -1193,39 +1227,41 @@ declare interface BaselineInfo {
 /** 基线项 */
 declare interface BaselineItem {
   /** 项Id */
-  ItemId: number;
+  ItemId?: number;
   /** 项名称 */
-  ItemName: string;
+  ItemName?: string;
   /** 检测项分类 */
-  CategoryId: number;
+  CategoryId?: number;
   /** 项描述 */
-  ItemDesc: string;
+  ItemDesc?: string;
   /** 修复方法 */
-  FixMethod: string;
+  FixMethod?: string;
   /** 所属规则 */
-  RuleName: string;
+  RuleName?: string;
   /** 检测结果描述 */
-  DetectResultDesc: string | null;
+  DetectResultDesc?: string | null;
   /** 危险等级 */
-  Level: number | null;
+  Level?: number | null;
   /** 检测状态：0 未通过，1：忽略，3：通过，5：检测中 */
-  DetectStatus: number | null;
+  DetectStatus?: number | null;
   /** 主机ID */
-  HostId: string | null;
+  HostId?: string | null;
   /** 主机名 */
-  HostName: string | null;
+  HostName?: string | null;
   /** 主机IP */
-  HostIp: string | null;
+  HostIp?: string | null;
   /** 外网IP */
-  WanIp: string | null;
+  WanIp?: string | null;
   /** 第一次出现时间 */
-  FirstTime: string | null;
+  FirstTime?: string | null;
   /** 最近出现时间 */
-  LastTime: string | null;
+  LastTime?: string | null;
   /** 是否可以修复 */
-  CanBeFixed: number | null;
+  CanBeFixed?: number | null;
   /** 主机安全uuid */
-  Uuid: string | null;
+  Uuid?: string | null;
+  /** 主机额外信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 基线检测项 */
@@ -1405,47 +1441,49 @@ declare interface BashRule {
 /** 密码破解列表实体 */
 declare interface BruteAttackInfo {
   /** 唯一Id */
-  Id: number;
+  Id?: number;
   /** 云镜客户端唯一标识UUID */
-  Uuid: string | null;
+  Uuid?: string | null;
   /** 主机ip */
-  MachineIp: string | null;
+  MachineIp?: string | null;
   /** 主机名 */
-  MachineName: string | null;
+  MachineName?: string | null;
   /** 用户名 */
-  UserName: string | null;
+  UserName?: string | null;
   /** 来源ip */
-  SrcIp: string | null;
+  SrcIp?: string | null;
   /** SUCCESS：破解成功；FAILED：破解失败 */
-  Status: string | null;
+  Status?: string | null;
   /** 国家id */
-  Country: number | null;
+  Country?: number | null;
   /** 城市id */
-  City: number | null;
+  City?: number | null;
   /** 省份id */
-  Province: number | null;
+  Province?: number | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 阻断状态：1-阻断成功；非1-阻断失败 */
-  BanStatus: number | null;
+  BanStatus?: number | null;
   /** 事件类型：200-暴力破解事件，300-暴力破解成功事件（页面展示），400-暴力破解不存在的帐号事件 */
-  EventType: number | null;
+  EventType?: number | null;
   /** 发生次数 */
-  Count: number | null;
+  Count?: number | null;
   /** 机器UUID */
-  Quuid: string | null;
+  Quuid?: string | null;
   /** 是否为专业版（true/false） */
-  IsProVersion: boolean | null;
+  IsProVersion?: boolean | null;
   /** 被攻击的服务的用户名 */
-  Protocol: string | null;
+  Protocol?: string | null;
   /** 端口 */
-  Port: number | null;
+  Port?: number | null;
   /** 最近攻击时间 */
-  ModifyTime: string | null;
+  ModifyTime?: string | null;
   /** 实例ID */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 0：待处理，1：忽略，5：已处理，6：加入白名单 */
-  DataStatus: number | null;
+  DataStatus?: number | null;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 标准阻断模式规则 */
@@ -1487,57 +1525,63 @@ declare interface ComponentStatistics {
 /** 网络攻击日志 */
 declare interface DefendAttackLog {
   /** 日志ID */
-  Id: number;
+  Id?: number;
   /** 客户端ID */
-  Uuid: string;
+  Uuid?: string;
   /** 来源IP */
-  SrcIp: string;
+  SrcIp?: string;
   /** 来源端口 */
-  SrcPort: number;
+  SrcPort?: number;
   /** 攻击方式 */
-  HttpMethod: string;
+  HttpMethod?: string;
   /** 攻击描述 */
-  HttpCgi: string;
+  HttpCgi?: string;
   /** 攻击参数 */
-  HttpParam: string;
+  HttpParam?: string;
   /** 威胁类型 */
-  VulType: string;
+  VulType?: string;
   /** 攻击时间 */
-  CreatedAt: string;
+  CreatedAt?: string;
   /** 目标服务器IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 目标服务器名称 */
-  MachineName: string;
+  MachineName?: string;
   /** 目标IP */
-  DstIp: string;
+  DstIp?: string;
   /** 目标端口 */
-  DstPort: number;
+  DstPort?: number;
   /** 攻击内容 */
-  HttpContent: string;
+  HttpContent?: string;
+  /** 主机额外信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 批量导入机器信息. */
 declare interface EffectiveMachineInfo {
   /** 机器名称 */
-  MachineName: string | null;
+  MachineName?: string | null;
   /** 机器公网ip */
-  MachinePublicIp: string | null;
+  MachinePublicIp?: string | null;
   /** 机器内网ip */
-  MachinePrivateIp: string | null;
+  MachinePrivateIp?: string | null;
   /** 机器标签 */
-  MachineTag: MachineTag[] | null;
+  MachineTag?: MachineTag[] | null;
   /** 机器Quuid */
-  Quuid: string | null;
+  Quuid?: string | null;
   /** 云镜Uuid */
-  Uuid: string | null;
+  Uuid?: string | null;
   /** 内核版本号 */
-  KernelVersion: string | null;
+  KernelVersion?: string | null;
   /** 在线状态 OFFLINE，ONLINE */
-  MachineStatus: string | null;
+  MachineStatus?: string | null;
   /** 授权订单对象 */
-  LicenseOrder: LicenseOrder | null;
+  LicenseOrder?: LicenseOrder | null;
   /** 漏洞数量 */
-  VulNum: number | null;
+  VulNum?: number | null;
+  /** 云标签信息 */
+  CloudTags?: Tags[] | null;
+  /** 机器instance ID */
+  InstanceID?: string | null;
 }
 
 /** 专家服务-应急响应信息 */
@@ -1655,45 +1699,47 @@ declare interface HistoryAccount {
 /** 登录审计列表实体 */
 declare interface HostLoginList {
   /** 记录Id */
-  Id: number;
+  Id?: number;
   /** Uuid串 */
-  Uuid: string | null;
+  Uuid?: string | null;
   /** 主机ip */
-  MachineIp: string | null;
+  MachineIp?: string | null;
   /** 主机名 */
-  MachineName: string | null;
+  MachineName?: string | null;
   /** 用户名 */
-  UserName: string | null;
+  UserName?: string | null;
   /** 来源ip */
-  SrcIp: string | null;
+  SrcIp?: string | null;
   /** 1:正常登录；2异地登录； 5已加白； 14：已处理；15：已忽略。 */
-  Status: number;
+  Status?: number;
   /** 国家id */
-  Country: number | null;
+  Country?: number | null;
   /** 城市id */
-  City: number | null;
+  City?: number | null;
   /** 省份id */
-  Province: number | null;
+  Province?: number | null;
   /** 登录时间 */
-  LoginTime: string | null;
+  LoginTime?: string | null;
   /** 修改时间 */
-  ModifyTime: string | null;
+  ModifyTime?: string | null;
   /** 是否命中异地登录异常 1表示命中此类异常, 0表示未命中 */
-  IsRiskArea: number | null;
+  IsRiskArea?: number | null;
   /** 是否命中异常用户异常 1表示命中此类异常, 0表示未命中 */
-  IsRiskUser: number | null;
+  IsRiskUser?: number | null;
   /** 是否命中异常时间异常 1表示命中此类异常, 0表示未命中 */
-  IsRiskTime: number | null;
+  IsRiskTime?: number | null;
   /** 是否命中异常IP异常 1表示命中此类异常, 0表示未命中 */
-  IsRiskSrcIp: number | null;
+  IsRiskSrcIp?: number | null;
   /** 危险等级：0 高危1 可疑 */
-  RiskLevel: number | null;
+  RiskLevel?: number | null;
   /** 位置名称 */
-  Location: string | null;
+  Location?: string | null;
   /** 主机quuid */
-  Quuid: string | null;
+  Quuid?: string | null;
   /** 高危信息说明：ABROAD - 海外IP；XTI - 威胁情报 */
-  Desc: string | null;
+  Desc?: string | null;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 忽略的基线检测项信息 */
@@ -1731,45 +1777,49 @@ declare interface IgnoreRuleEffectHostInfo {
 /** java内存马事件信息 */
 declare interface JavaMemShellInfo {
   /** 事件ID */
-  Id: number;
+  Id?: number;
   /** 服务器名称 */
-  Alias: string | null;
+  Alias?: string | null;
   /** 服务器IP */
-  HostIp: string | null;
+  HostIp?: string | null;
   /** 内存马类型 0:Filter型 1:Listener型 2:Servlet型 3:Interceptors型 4:Agent型 5:其他 */
-  Type: number;
+  Type?: number;
   /** 说明 */
-  Description: string;
+  Description?: string;
   /** 首次发现时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最近检测时间 */
-  RecentFoundTime: string;
+  RecentFoundTime?: string;
   /** 处理状态 0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略 4 - 已手动处理 */
-  Status: number;
+  Status?: number;
   /** 服务器quuid */
-  Quuid: string;
+  Quuid?: string;
+  /** 主机额外信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 授权绑定详情信息 */
 declare interface LicenseBindDetail {
   /** 机器别名 */
-  MachineName: string;
+  MachineName?: string;
   /** 机器公网IP */
-  MachineWanIp: string;
+  MachineWanIp?: string;
   /** 机器内网IP */
-  MachineIp: string;
+  MachineIp?: string;
   /** 云服务器UUID */
-  Quuid: string;
+  Quuid?: string;
   /** 云镜客户端UUID */
-  Uuid: string;
+  Uuid?: string;
   /** 标签信息 */
-  Tags: string[];
+  Tags?: string[];
   /** 云镜客户端状态,OFFLINE 离线,ONLINE 在线,UNINSTALL 未安装 */
-  AgentStatus: string;
+  AgentStatus?: string;
   /** 是否允许解绑,false 不允许解绑 */
-  IsUnBind: boolean;
+  IsUnBind?: boolean;
   /** 是否允许换绑,false 不允许换绑 */
-  IsSwitchBind: boolean;
+  IsSwitchBind?: boolean;
+  /** 主机额外信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 授权绑定任务详情 */
@@ -1901,59 +1951,81 @@ declare interface LoginWhiteLists {
 /** 主机列表 */
 declare interface Machine {
   /** 主机名称。 */
-  MachineName: string;
+  MachineName?: string;
   /** 主机系统。 */
-  MachineOs: string;
+  MachineOs?: string;
   /** 主机状态。OFFLINE: 离线 ONLINE: 在线SHUTDOWN: 已关机UNINSTALLED: 未防护 */
-  MachineStatus: string;
+  MachineStatus?: string;
   /** 云镜客户端唯一Uuid，若客户端长时间不在线将返回空字符。 */
-  Uuid: string;
+  Uuid?: string;
   /** CVM或BM机器唯一Uuid。 */
-  Quuid: string;
+  Quuid?: string;
   /** 漏洞数。 */
-  VulNum: number;
+  VulNum?: number;
   /** 主机IP。 */
-  MachineIp: string;
+  MachineIp?: string;
   /** 是否是专业版。true： 是false：否 */
-  IsProVersion: boolean;
+  IsProVersion?: boolean;
   /** 主机外网IP。 */
-  MachineWanIp: string;
+  MachineWanIp?: string;
   /** 主机状态。POSTPAY: 表示后付费，即按量计费 PREPAY: 表示预付费，即包年包月 */
-  PayMode: string;
+  PayMode?: string;
   /** 木马数。 */
-  MalwareNum: number;
+  MalwareNum?: number;
   /** 标签信息 */
-  Tag: MachineTag[];
+  Tag?: MachineTag[];
   /** 基线风险数。 */
-  BaselineNum: number;
+  BaselineNum?: number;
   /** 网络风险数。 */
-  CyberAttackNum: number;
+  CyberAttackNum?: number;
   /** 风险状态。SAFE：安全RISK：风险UNKNOWN：未知 */
-  SecurityStatus: string;
+  SecurityStatus?: string;
   /** 入侵事件数 */
-  InvasionNum: number;
+  InvasionNum?: number;
   /** 地域信息 */
-  RegionInfo: RegionInfo;
+  RegionInfo?: RegionInfo;
   /** 实例状态 TERMINATED_PRO_VERSION 已销毁 */
-  InstanceState: string;
+  InstanceState?: string;
   /** 防篡改 授权状态 1 授权 0 未授权 */
-  LicenseStatus: number;
+  LicenseStatus?: number;
   /** 项目ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 是否有资产扫描接口，0无，1有 */
-  HasAssetScan: number;
+  HasAssetScan?: number;
   /** 机器所属专区类型 CVM 云服务器, BM 黑石, ECM 边缘计算, LH 轻量应用服务器 ,Other 混合云专区 */
-  MachineType: string;
+  MachineType?: string;
   /** 内核版本 */
-  KernelVersion: string;
+  KernelVersion?: string;
   /** 防护版本：BASIC_VERSION 基础版， PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 普惠版 */
-  ProtectType: string;
+  ProtectType?: string;
   /** 云标签信息 */
-  CloudTags: Tags[] | null;
+  CloudTags?: Tags[] | null;
   /** 是否15天内新增的主机 0：非15天内新增的主机，1：15天内增加的主机 */
-  IsAddedOnTheFifteen: number | null;
+  IsAddedOnTheFifteen?: number | null;
   /** 主机ip列表 */
-  IpList: string | null;
+  IpList?: string | null;
+  /** 所属网络 */
+  VpcId?: string | null;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
+  /** 实例ID */
+  InstanceId?: string;
+}
+
+/** 服务器基础信息 */
+declare interface MachineExtraInfo {
+  /** 公网IP */
+  WanIP?: string | null;
+  /** 内网IP */
+  PrivateIP?: string | null;
+  /** 网络类型，1:vpc网络 2:基础网络 3:非腾讯云网络 */
+  NetworkType?: number | null;
+  /** 网络名，vpc网络情况下会返回vpc_id */
+  NetworkName?: string | null;
+  /** 实例ID */
+  InstanceID?: string | null;
+  /** 主机名 */
+  HostName?: string | null;
 }
 
 /** 服务器标签信息 */
@@ -1969,41 +2041,43 @@ declare interface MachineTag {
 /** 木马列表集合 */
 declare interface MalWareList {
   /** 服务器ip */
-  HostIp: string;
+  HostIp?: string;
   /** 唯一UUID */
-  Uuid: string;
+  Uuid?: string;
   /** 路径 */
-  FilePath: string;
+  FilePath?: string;
   /** 描述 */
-  VirusName: string;
+  VirusName?: string;
   /** 状态；4-:待处理，5-已信任，6-已隔离，8-文件已删除, 14:已处理 */
-  Status: number;
+  Status?: number;
   /** 唯一ID */
-  Id: number | null;
+  Id?: number | null;
   /** 主机别名 */
-  Alias: string;
+  Alias?: string;
   /** 特性标签，已废弃字段，不会再返回标签，详情中才会返回标签信息 */
-  Tags: string[] | null;
+  Tags?: string[] | null;
   /** 首次运行时间 */
-  FileCreateTime: string | null;
+  FileCreateTime?: string | null;
   /** 最近运行时间 */
-  FileModifierTime: string | null;
+  FileModifierTime?: string | null;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最近扫描时间 */
-  LatestScanTime: string;
+  LatestScanTime?: string;
   /** 风险等级 0未知、1低、2中、3高、4严重 */
-  Level: number;
+  Level?: number;
   /** '木马检测平台用,分割 1云查杀引擎、2TAV、3binaryAi、4异常行为、5威胁情报 */
-  CheckPlatform: string;
+  CheckPlatform?: string;
   /** 木马进程是否存在 0:不存在，1:存在 */
-  ProcessExists: number;
+  ProcessExists?: number;
   /** 木马文件是否存在 0:不存在，1:存在 */
-  FileExists: number;
+  FileExists?: number;
   /** cvm quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 木马样本md5 */
-  MD5: string;
+  MD5?: string;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 恶意请求白名单列表信息 */
@@ -2023,63 +2097,65 @@ declare interface MaliciousRequestWhiteListInfo {
 /** 恶意文件详情 */
 declare interface MalwareInfo {
   /** 病毒名称 */
-  VirusName: string;
+  VirusName?: string;
   /** 文件大小 */
-  FileSize: number;
+  FileSize?: number;
   /** 文件MD5 */
-  MD5: string;
+  MD5?: string;
   /** 文件地址 */
-  FilePath: string;
+  FilePath?: string;
   /** 首次运行时间 */
-  FileCreateTime: string;
+  FileCreateTime?: string;
   /** 最近一次运行时间 */
-  FileModifierTime: string;
+  FileModifierTime?: string;
   /** 危害描述 */
-  HarmDescribe: string;
+  HarmDescribe?: string;
   /** 建议方案 */
-  SuggestScheme: string;
+  SuggestScheme?: string;
   /** 服务器名称 */
-  ServersName: string;
+  ServersName?: string;
   /** 服务器IP */
-  HostIp: string;
+  HostIp?: string;
   /** 进程名称 */
-  ProcessName: string;
+  ProcessName?: string;
   /** 进程ID */
-  ProcessID: string;
+  ProcessID?: string;
   /** 标签特性 */
-  Tags: string[];
+  Tags?: string[];
   /** 影响广度 // 暂时不提供 */
-  Breadth: string | null;
+  Breadth?: string | null;
   /** 查询热度 // 暂时不提供 */
-  Heat: string | null;
+  Heat?: string | null;
   /** 唯一ID */
-  Id: number;
+  Id?: number;
   /** 文件名称 */
-  FileName: string;
+  FileName?: string;
   /** 首次发现时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最近扫描时间 */
-  LatestScanTime: string;
+  LatestScanTime?: string;
   /** 参考链接 */
-  Reference: string;
+  Reference?: string;
   /** 外网ip */
-  MachineWanIp: string | null;
+  MachineWanIp?: string | null;
   /** 进程树 json pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源 */
-  PsTree: string | null;
+  PsTree?: string | null;
   /** 主机在线状态 OFFLINE ONLINE */
-  MachineStatus: string | null;
+  MachineStatus?: string | null;
   /** 状态；4-:待处理，5-已信任，6-已隔离 */
-  Status: number | null;
+  Status?: number | null;
   /** 风险等级 0提示、1低、2中、3高、4严重 */
-  Level: number | null;
+  Level?: number | null;
   /** 木马检测平台用,分割 1云查杀引擎、2TAV、3binaryAi、4异常行为、5威胁情报 */
-  CheckPlatform: string | null;
+  CheckPlatform?: string | null;
   /** 主机uuid */
-  Uuid: string | null;
+  Uuid?: string | null;
   /** 最近修改时间 */
-  ModifyTime: string | null;
+  ModifyTime?: string | null;
   /** 最近访问时间 */
-  StrFileAccessTime: string | null;
+  StrFileAccessTime?: string | null;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 恶意文件风险提示列表信息 */
@@ -2145,41 +2221,43 @@ declare interface Place {
 /** 本地提权数据 */
 declare interface PrivilegeEscalationProcess {
   /** 数据ID */
-  Id: number;
+  Id?: number;
   /** 云镜ID */
-  Uuid: string;
+  Uuid?: string;
   /** 主机ID */
-  Quuid: string;
+  Quuid?: string;
   /** 主机内网IP */
-  Hostip: string;
+  Hostip?: string;
   /** 进程名 */
-  ProcessName: string;
+  ProcessName?: string;
   /** 进程路径 */
-  FullPath: string;
+  FullPath?: string;
   /** 执行命令 */
-  CmdLine: string;
+  CmdLine?: string;
   /** 用户名 */
-  UserName: string;
+  UserName?: string;
   /** 用户组 */
-  UserGroup: string;
+  UserGroup?: string;
   /** 进程文件权限 */
-  ProcFilePrivilege: string;
+  ProcFilePrivilege?: string;
   /** 父进程名 */
-  ParentProcName: string;
+  ParentProcName?: string;
   /** 父进程用户名 */
-  ParentProcUser: string;
+  ParentProcUser?: string;
   /** 父进程用户组 */
-  ParentProcGroup: string;
+  ParentProcGroup?: string;
   /** 父进程路径 */
-  ParentProcPath: string;
+  ParentProcPath?: string;
   /** 进程树 */
-  ProcTree: string;
+  ProcTree?: string;
   /** 处理状态：0-待处理 2-白名单 3-已处理 4-已忽略 */
-  Status: number;
+  Status?: number;
   /** 发生时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 机器名 */
-  MachineName: string;
+  MachineName?: string;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 本地提权规则 */
@@ -2239,53 +2317,57 @@ declare interface ProtectDirInfo {
 /** 防护目录关联服务器列表信息 */
 declare interface ProtectDirRelatedServer {
   /** 唯一ID */
-  Id: string;
+  Id?: string;
   /** 服务器名称 */
-  HostName: string;
+  HostName?: string;
   /** 服务器IP */
-  HostIp: string;
+  HostIp?: string;
   /** 服务器系统 */
-  MachineOs: string;
+  MachineOs?: string;
   /** 关联目录数 */
-  RelateDirNum: number;
+  RelateDirNum?: number;
   /** 防护状态 */
-  ProtectStatus: number;
+  ProtectStatus?: number;
   /** 防护开关 */
-  ProtectSwitch: number;
+  ProtectSwitch?: number;
   /** 自动恢复开关 */
-  AutoRestoreSwitchStatus: number;
+  AutoRestoreSwitchStatus?: number;
   /** 服务器唯一ID */
-  Quuid: string;
+  Quuid?: string;
   /** 是否已经授权 */
-  Authorization: boolean;
+  Authorization?: boolean;
   /** 异常状态 */
-  Exception: number;
+  Exception?: number;
   /** 过渡进度 */
-  Progress: number;
+  Progress?: number;
   /** 异常信息 */
-  ExceptionMessage: string;
+  ExceptionMessage?: string;
+  /** 主机额外信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 防护事件列表信息 */
 declare interface ProtectEventLists {
   /** 服务器名称 */
-  HostName: string;
+  HostName?: string;
   /** 服务器ip */
-  HostIp: string;
+  HostIp?: string;
   /** 事件地址 */
-  EventDir: string;
+  EventDir?: string;
   /** 事件类型 0-内容被修改恢复；1-权限被修改恢复；2-归属被修改恢复；3-被删除恢复；4-新增删除 */
-  EventType: number;
+  EventType?: number;
   /** 事件状态 1 已恢复 0 未恢复 */
-  EventStatus: number;
+  EventStatus?: number;
   /** 发现时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 恢复时间 */
-  RestoreTime: string;
+  RestoreTime?: string;
   /** 唯一ID */
-  Id: number;
+  Id?: number;
   /** 文件类型 0-常规文件；1-目录；2-软链 */
-  FileType: number;
+  FileType?: number;
+  /** 主机额外信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 防护机器信息 */
@@ -2385,45 +2467,47 @@ declare interface RegionSet {
 /** 反弹Shell数据 */
 declare interface ReverseShell {
   /** ID 主键 */
-  Id: number;
+  Id?: number;
   /** 云镜UUID */
-  Uuid: string;
+  Uuid?: string;
   /** 主机ID */
-  Quuid: string;
+  Quuid?: string;
   /** 主机内网IP */
-  Hostip: string;
+  Hostip?: string;
   /** 目标IP */
-  DstIp: string;
+  DstIp?: string;
   /** 目标端口 */
-  DstPort: number;
+  DstPort?: number;
   /** 进程名 */
-  ProcessName: string;
+  ProcessName?: string;
   /** 进程路径 */
-  FullPath: string;
+  FullPath?: string;
   /** 命令详情 */
-  CmdLine: string;
+  CmdLine?: string;
   /** 执行用户 */
-  UserName: string;
+  UserName?: string;
   /** 执行用户组 */
-  UserGroup: string;
+  UserGroup?: string;
   /** 父进程名 */
-  ParentProcName: string;
+  ParentProcName?: string;
   /** 父进程用户 */
-  ParentProcUser: string;
+  ParentProcUser?: string;
   /** 父进程用户组 */
-  ParentProcGroup: string;
+  ParentProcGroup?: string;
   /** 父进程路径 */
-  ParentProcPath: string;
+  ParentProcPath?: string;
   /** 处理状态：0-待处理 2-白名单 3-已处理 4-已忽略 */
-  Status: number;
+  Status?: number;
   /** 产生时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 主机名 */
-  MachineName: string;
+  MachineName?: string;
   /** 进程树 */
-  ProcTree: string;
+  ProcTree?: string;
   /** 检测方法 */
-  DetectBy: number;
+  DetectBy?: number;
+  /** 主机额外信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 反弹Shell规则 */
@@ -2503,31 +2587,33 @@ declare interface RiskDnsList {
 /** 扫描任务详情列表信息 */
 declare interface ScanTaskDetails {
   /** 服务器IP */
-  HostIp: string;
+  HostIp?: string;
   /** 服务器名称 */
-  HostName: string;
+  HostName?: string;
   /** 操作系统 */
-  OsName: string;
+  OsName?: string;
   /** 风险数量 */
-  RiskNum: number;
+  RiskNum?: number;
   /** 扫描开始时间 */
-  ScanBeginTime: string;
+  ScanBeginTime?: string;
   /** 扫描结束时间 */
-  ScanEndTime: string;
+  ScanEndTime?: string;
   /** 唯一Uuid */
-  Uuid: string;
+  Uuid?: string;
   /** 唯一Quuid */
-  Quuid: string;
+  Quuid?: string;
   /** 状态码 */
-  Status: string;
+  Status?: string;
   /** 描述 */
-  Description: string;
+  Description?: string;
   /** id唯一 */
-  Id: number;
+  Id?: number;
   /** 失败详情 */
-  FailType: number;
+  FailType?: number;
   /** 外网ip */
-  MachineWanIp: string;
+  MachineWanIp?: string;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 快速搜索模板 */
@@ -2725,37 +2811,41 @@ declare interface VulDetailInfo {
 /** 漏洞影响主机列表 */
 declare interface VulEffectHostList {
   /** 事件id */
-  EventId: number | null;
+  EventId?: number | null;
   /** 状态：0: 待处理 1:忽略 3:已修复 5:检测中 6:修复中 7: 回滚中 8:修复失败 */
-  Status: number | null;
+  Status?: number | null;
   /** 最后检测时间 */
-  LastTime: string | null;
+  LastTime?: string | null;
   /** 危害等级：1-低危；2-中危；3-高危；4-严重 */
-  Level: number | null;
+  Level?: number | null;
   /** 主机Quuid */
-  Quuid: string | null;
+  Quuid?: string | null;
   /** 主机Uuid */
-  Uuid: string | null;
+  Uuid?: string | null;
   /** 主机HostIp */
-  HostIp: string | null;
+  HostIp?: string | null;
   /** 主机别名 */
-  AliasName: string | null;
+  AliasName?: string | null;
   /** 主机标签 */
-  Tags: string[] | null;
+  Tags?: string[] | null;
   /** 说明 */
-  Description: string | null;
+  Description?: string | null;
   /** 版本信息：0-基础版 1-专业版 2-旗舰版 3-普惠版 */
-  HostVersion: number | null;
+  HostVersion?: number | null;
   /** 是否能自动修复 0 :漏洞不可自动修复， 1：可自动修复， 2：客户端已离线， 3：主机不是旗舰版只能手动修复， 4：机型不允许 ，5：修复中 ，6：已修复， 7：检测中 9:修复失败，10:已忽略 11:漏洞只支持linux不支持Windows 12：漏洞只支持Windows不支持linux，13:修复失败但此时主机已离线，14:修复失败但此时主机不是旗舰版， 15:已手动修复 */
-  IsSupportAutoFix: number | null;
+  IsSupportAutoFix?: number | null;
   /** 失败原因 */
-  FixStatusMsg: string | null;
+  FixStatusMsg?: string | null;
   /** 首次发现时间 */
-  FirstDiscoveryTime: string | null;
+  FirstDiscoveryTime?: string | null;
   /** 实例状态："PENDING"-创建中 "LAUNCH_FAILED"-创建失败 "RUNNING"-运行中 "STOPPED"-关机 "STARTING"-表示开机中 "STOPPING"-表示关机中 "REBOOTING"-重启中 "SHUTDOWN"-表示停止待销毁 "TERMINATING"-表示销毁中 " */
-  InstanceState: string | null;
+  InstanceState?: string | null;
   /** 外网ip */
-  PublicIpAddresses: string | null;
+  PublicIpAddresses?: string | null;
+  /** 云标签信息 */
+  CloudTags?: Tags[] | null;
+  /** 主机额外信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
 }
 
 /** 服务器风险top5实体 */

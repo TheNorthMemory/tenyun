@@ -1358,6 +1358,16 @@ declare interface ModifyMigrationJobResponse {
   RequestId?: string;
 }
 
+declare interface PauseSyncJobRequest {
+  /** 同步任务id */
+  JobId: string;
+}
+
+declare interface PauseSyncJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RecoverMigrateJobRequest {
   /** 任务id */
   JobId: string;
@@ -2253,6 +2263,8 @@ declare interface Dts {
   ModifyMigrateName(data: ModifyMigrateNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrateNameResponse>;
   /** 配置迁移服务 {@link ModifyMigrationJobRequest} {@link ModifyMigrationJobResponse} */
   ModifyMigrationJob(data: ModifyMigrationJobRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrationJobResponse>;
+  /** 暂停同步任务 {@link PauseSyncJobRequest} {@link PauseSyncJobResponse} */
+  PauseSyncJob(data: PauseSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<PauseSyncJobResponse>;
   /** 解除隔离数据迁移任务 {@link RecoverMigrateJobRequest} {@link RecoverMigrateJobResponse} */
   RecoverMigrateJob(data: RecoverMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverMigrateJobResponse>;
   /** 解除隔离同步任务 {@link RecoverSyncJobRequest} {@link RecoverSyncJobResponse} */

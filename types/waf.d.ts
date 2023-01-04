@@ -220,6 +220,8 @@ declare interface DomainInfo {
   PostCLSStatus?: number;
   /** 是否开启投递CKafka功能 */
   PostCKafkaStatus?: number;
+  /** 应用型负载均衡类型: clb或者apisix，默认clb */
+  AlbType?: string | null;
 }
 
 /** clb-waf 域名扩展套餐 */
