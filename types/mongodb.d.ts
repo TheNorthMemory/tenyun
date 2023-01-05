@@ -1219,11 +1219,11 @@ declare interface ResetDBInstancePasswordResponse {
 }
 
 declare interface SetAccountUserPrivilegeRequest {
-  /** 实例ID */
+  /** 实例ID。 */
   InstanceId: string;
-  /** 账号名称 */
+  /** 账号名称。 */
   UserName: string;
-  /** 权限信息 */
+  /** 权限信息。 */
   AuthRole: Auth[];
 }
 

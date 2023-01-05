@@ -1544,6 +1544,32 @@ declare interface DescribeReleaseFilesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRumGroupLogRequest {
+  /** 排序方式 desc asc（必填） */
+  OrderBy: string;
+  /** 开始时间（必填） */
+  StartTime: string;
+  /** 单次查询返回的原始日志条数，最大值为100（必填） */
+  Limit: number;
+  /** 页数，第几页 */
+  Page: number;
+  /** 查询语句，参考控制台请求参数，语句长度最大为4096（必填） */
+  Query: string;
+  /** 结束时间（必填） */
+  EndTime: string;
+  /** 项目ID（必填） */
+  ID: number;
+  /** 聚合字段 */
+  GroupField: string;
+}
+
+declare interface DescribeRumGroupLogResponse {
+  /** 返回字符串 */
+  Result: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRumLogListRequest {
   /** 排序方式 desc asc（必填） */
   OrderBy: string;
@@ -1873,6 +1899,8 @@ declare interface Rum {
   DescribeReleaseFileSign(data?: DescribeReleaseFileSignRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseFileSignResponse>;
   /** 获取项目对应sourcemap文件列表 {@link DescribeReleaseFilesRequest} {@link DescribeReleaseFilesResponse} */
   DescribeReleaseFiles(data: DescribeReleaseFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseFilesResponse>;
+  /** 获取Rum日志聚合信息 {@link DescribeRumGroupLogRequest} {@link DescribeRumGroupLogResponse} */
+  DescribeRumGroupLog(data: DescribeRumGroupLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumGroupLogResponse>;
   /** 获取Rum日志列表 {@link DescribeRumLogListRequest} {@link DescribeRumLogListResponse} */
   DescribeRumLogList(data: DescribeRumLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogListResponse>;
   /** 获取Rum分钟级日志列表 {@link DescribeRumStatsLogListRequest} {@link DescribeRumStatsLogListResponse} */

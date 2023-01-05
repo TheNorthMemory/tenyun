@@ -672,24 +672,6 @@ declare interface GetRealNameAuthResultResponse {
   RequestId?: string;
 }
 
-declare interface GetRealNameAuthTokenRequest {
-  /** 姓名 */
-  Name: string;
-  /** 身份证号 */
-  IDCard: string;
-  /** 回调地址。实名认证完成后，将会重定向到这个地址通知认证发起方。仅支持http或https协议。 */
-  CallbackURL: string;
-}
-
-declare interface GetRealNameAuthTokenResponse {
-  /** 查询实名认证结果的唯一凭证 */
-  AuthToken?: string;
-  /** 实名认证授权地址，认证发起方需要重定向到这个地址获取认证用户的授权，仅能在微信环境下打开。 */
-  RedirectURL?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface GetWeChatBillDetailsRequest {
   /** 拉取的日期（YYYY-MM-DD）。最大可追溯到365天前。当天6点后才能拉取前一天的数据。 */
   Date: string;
@@ -1119,8 +1101,6 @@ declare interface Faceid {
   GetLiveCode(data?: GetLiveCodeRequest, config?: AxiosRequestConfig): AxiosPromise<GetLiveCodeResponse>;
   /** 获取微信实名认证结果 {@link GetRealNameAuthResultRequest} {@link GetRealNameAuthResultResponse} */
   GetRealNameAuthResult(data: GetRealNameAuthResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetRealNameAuthResultResponse>;
-  /** 微信实名认证授权 {@link GetRealNameAuthTokenRequest} {@link GetRealNameAuthTokenResponse} */
-  GetRealNameAuthToken(data: GetRealNameAuthTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetRealNameAuthTokenResponse>;
   /** 查询账单明细（微信渠道） {@link GetWeChatBillDetailsRequest} {@link GetWeChatBillDetailsResponse} */
   GetWeChatBillDetails(data: GetWeChatBillDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<GetWeChatBillDetailsResponse>;
   /** 身份证识别及信息核验 {@link IdCardOCRVerificationRequest} {@link IdCardOCRVerificationResponse} */

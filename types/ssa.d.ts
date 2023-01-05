@@ -908,6 +908,30 @@ declare interface VulList {
   Total: number;
 }
 
+declare interface DescribeAssetDetailListRequest {
+  /** 查询条件，可支持的查询字段：AssetUniqid,AssetName,AssetIpAll,AssetVpcid,Tag */
+  Filter?: AssetQueryFilter[];
+  /** 排序条件，可支持的排序字段：AssetCspmRiskNum,AssetVulNum,AssetEventNum,SsaAssetDiscoverTime */
+  Sorter?: QuerySort[];
+  /** 风险标签 */
+  RiskTags?: string[];
+  /** 标签 */
+  Tags?: string[];
+  /** 页 */
+  PageIndex?: number;
+  /** 页大小 */
+  PageSize?: number;
+}
+
+declare interface DescribeAssetDetailListResponse {
+  /** 业务数据 */
+  Data: AssetDetail[] | null;
+  /** 总数 */
+  Total: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAssetDetailRequest {
   /** 查询过滤参数 */
   Params: string;
@@ -1329,6 +1353,8 @@ declare interface Ssa {
   (): Versions;
   /** 资产安全页资产详情 {@link DescribeAssetDetailRequest} {@link DescribeAssetDetailResponse} */
   DescribeAssetDetail(data: DescribeAssetDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDetailResponse>;
+  /** 获取资产列表 {@link DescribeAssetDetailListRequest} {@link DescribeAssetDetailListResponse} */
+  DescribeAssetDetailList(data?: DescribeAssetDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDetailListResponse>;
   /** 资产安全资产列表 {@link DescribeAssetListRequest} {@link DescribeAssetListResponse} */
   DescribeAssetList(data: DescribeAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetListResponse>;
   /** 资产测绘-测绘列表 {@link DescribeAssetsMappingListRequest} {@link DescribeAssetsMappingListResponse} */

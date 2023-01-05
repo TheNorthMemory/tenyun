@@ -146,6 +146,14 @@ declare interface AssistantCidr {
   SubnetSet: Subnet[] | null;
 }
 
+/** 时间备份策略详情 */
+declare interface BackupPolicy {
+  /** 备份周期时间，取值为monday, tuesday, wednesday, thursday, friday, saturday, sunday。 */
+  BackupDay: string;
+  /** 备份时间点，格式：HH:mm:ss。 */
+  BackupTime: string;
+}
+
 /** 描述带宽包信息的结构 */
 declare interface BandwidthPackage {
   /** 带宽包唯一标识Id */
@@ -170,6 +178,18 @@ declare interface BandwidthPackage {
 declare interface BandwidthPackageBillBandwidth {
   /** 当前计费用量，单位为 Mbps */
   BandwidthUsage: number;
+}
+
+/** 批量修改快照策略信息 */
+declare interface BatchModifySnapshotPolicy {
+  /** 快照策略Id。 */
+  SnapshotPolicyId: string;
+  /** 快照策略名称。 */
+  SnapshotPolicyName?: string;
+  /** 备份策略。 */
+  BackupPolicies?: BackupPolicy[];
+  /** 快照保留时间，支持1～365天。 */
+  KeepTime?: number;
 }
 
 /** 云联网（CCN）对象 */
@@ -1598,6 +1618,58 @@ declare interface ServicesInfo {
   Description?: string | null;
 }
 
+/** 快照文件信息 */
+declare interface SnapshotFileInfo {
+  /** 快照策略Id。 */
+  SnapshotPolicyId: string;
+  /** 实例Id。 */
+  InstanceId: string;
+  /** 快照文件Id。 */
+  SnapshotFileId: string;
+  /** 备份时间。 */
+  BackupTime: string;
+  /** 操作者Uin。 */
+  Operator: string;
+}
+
+/** 快照策略关联实例信息 */
+declare interface SnapshotInstance {
+  /** 实例Id。 */
+  InstanceId: string;
+  /** 实例类型，目前支持安全组：securitygroup。 */
+  InstanceType: string;
+  /** 实例所在地域。 */
+  InstanceRegion: string;
+  /** 快照策略Id。 */
+  SnapshotPolicyId?: string;
+  /** 实例名称。 */
+  InstanceName?: string;
+}
+
+/** 快照策略 */
+declare interface SnapshotPolicy {
+  /** 快照策略名称。 */
+  SnapshotPolicyName: string;
+  /** 备份策略类型，operate-操作备份，time-定时备份。 */
+  BackupType: string;
+  /** 保留时间，支持1～365天。 */
+  KeepTime: number;
+  /** 是否创建新的cos桶，默认为False。 */
+  CreateNewCos: boolean | null;
+  /** cos桶所在地域。 */
+  CosRegion: string;
+  /** cos桶。 */
+  CosBucket: string;
+  /** 快照策略Id。 */
+  SnapshotPolicyId?: string;
+  /** 时间备份策略。 */
+  BackupPolicies?: BackupPolicy[] | null;
+  /** 启用状态，True-启用，False-停用，默认为True。 */
+  Enable?: boolean;
+  /** 创建时间。 */
+  CreateTime?: string | null;
+}
+
 /** NAT的SNAT规则 */
 declare interface SourceIpTranslationNatRule {
   /** 资源ID */
@@ -2326,6 +2398,18 @@ declare interface AttachNetworkInterfaceResponse {
   RequestId?: string;
 }
 
+declare interface AttachSnapshotInstancesRequest {
+  /** 快照策略Id。 */
+  SnapshotPolicyId: string;
+  /** 关联实例信息。 */
+  Instances: SnapshotInstance[];
+}
+
+declare interface AttachSnapshotInstancesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AuditCrossBorderComplianceRequest {
   /** 服务商, 可选值：`UNICOM`。 */
   ServiceProvider: string;
@@ -2964,6 +3048,18 @@ declare interface CreateServiceTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateSnapshotPoliciesRequest {
+  /** 快照策略详情。 */
+  SnapshotPolicies: SnapshotPolicy[];
+}
+
+declare interface CreateSnapshotPoliciesResponse {
+  /** 快照策略。 */
+  SnapshotPolicies: SnapshotPolicy[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSubnetRequest {
   /** 待操作的VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。 */
   VpcId: string;
@@ -3502,6 +3598,16 @@ declare interface DeleteServiceTemplateRequest {
 }
 
 declare interface DeleteServiceTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSnapshotPoliciesRequest {
+  /** 快照策略Id。 */
+  SnapshotPolicyIds: string[];
+}
+
+declare interface DeleteSnapshotPoliciesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4634,6 +4740,98 @@ declare interface DescribeServiceTemplatesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSgSnapshotFileContentRequest {
+  /** 快照策略Id。 */
+  SnapshotPolicyId: string;
+  /** 快照文件Id。 */
+  SnapshotFileId: string;
+  /** 安全组Id。 */
+  SecurityGroupId: string;
+}
+
+declare interface DescribeSgSnapshotFileContentResponse {
+  /** 实例Id，即安全组Id。 */
+  InstanceId: string;
+  /** 快照策略Id。 */
+  SnapshotPolicyId: string;
+  /** 快照文件Id。 */
+  SnapshotFileId: string;
+  /** 备份时间。 */
+  BackupTime: string;
+  /** 操作者。 */
+  Operator: string;
+  /** 原始数据。 */
+  OriginalData: SecurityGroupPolicy[];
+  /** 备份数据。 */
+  BackupData: SecurityGroupPolicy[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSnapshotAttachedInstancesRequest {
+  /** 快照策略Id。 */
+  SnapshotPolicyId: string;
+  /** 过滤条件。支持的过滤条件如下：instance-id：实例ID。instance-region：实例所在地域。 */
+  Filters?: Filter[];
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大为200。 */
+  Limit?: number;
+}
+
+declare interface DescribeSnapshotAttachedInstancesResponse {
+  /** 实例列表 */
+  InstanceSet: SnapshotInstance[];
+  /** 符合条件的对象数。 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSnapshotFilesRequest {
+  /** 业务类型，目前支持安全组：securitygroup。 */
+  BusinessType: string;
+  /** 实例Id。 */
+  InstanceId: string;
+  /** 开始日期，格式%Y-%m-%d %H:%M:%S。 */
+  StartDate: string;
+  /** 结束日期，格式%Y-%m-%d %H:%M:%S。 */
+  EndDate: string;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大为200。 */
+  Limit?: number;
+}
+
+declare interface DescribeSnapshotFilesResponse {
+  /** 快照文件集合。 */
+  SnapshotFileSet: SnapshotFileInfo[];
+  /** 符合条件的对象数。 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSnapshotPoliciesRequest {
+  /** 快照策略Id。 */
+  SnapshotPolicyIds?: string[];
+  /** 过滤条件，参数不支持同时指定SnapshotPolicyIds和Filters。snapshot-policy-id - String -（过滤条件）快照策略ID。snapshot-policy-name - String -（过滤条件）快照策略名称。 */
+  Filters?: Filter[];
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大为200。 */
+  Limit?: number;
+}
+
+declare interface DescribeSnapshotPoliciesResponse {
+  /** 快照策略。 */
+  SnapshotPolicySet: SnapshotPolicy[];
+  /** 符合条件的对象数。 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSubnetsRequest {
   /** 子网实例ID查询。形如：subnet-pxir56ns。每次请求的实例的上限为100。参数不支持同时指定SubnetIds和Filters。 */
   SubnetIds?: string[];
@@ -5032,6 +5230,18 @@ declare interface DetachNetworkInterfaceResponse {
   RequestId?: string;
 }
 
+declare interface DetachSnapshotInstancesRequest {
+  /** 快照策略Id。 */
+  SnapshotPolicyId: string;
+  /** 实例信息。 */
+  Instances: SnapshotInstance[];
+}
+
+declare interface DetachSnapshotInstancesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisableCcnRoutesRequest {
   /** CCN实例ID。形如：ccn-f49l6u0z。 */
   CcnId: string;
@@ -5074,6 +5284,16 @@ declare interface DisableRoutesRequest {
 }
 
 declare interface DisableRoutesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DisableSnapshotPoliciesRequest {
+  /** 快照策略Id。 */
+  SnapshotPolicyIds: string[];
+}
+
+declare interface DisableSnapshotPoliciesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5256,6 +5476,16 @@ declare interface EnableRoutesRequest {
 }
 
 declare interface EnableRoutesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnableSnapshotPoliciesRequest {
+  /** 快照策略Id。 */
+  SnapshotPolicyIds: string[];
+}
+
+declare interface EnableSnapshotPoliciesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5956,6 +6186,16 @@ declare interface ModifyServiceTemplateGroupAttributeResponse {
   RequestId?: string;
 }
 
+declare interface ModifySnapshotPoliciesRequest {
+  /** 快照策略修改信息。 */
+  SnapshotPoliciesInfo: BatchModifySnapshotPolicy[];
+}
+
+declare interface ModifySnapshotPoliciesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySubnetAttributeRequest {
   /** 子网实例ID。形如：subnet-pxir56ns。 */
   SubnetId: string;
@@ -6356,8 +6596,22 @@ declare interface ResetVpnGatewayInternetMaxBandwidthResponse {
   RequestId?: string;
 }
 
+declare interface ResumeSnapshotInstanceRequest {
+  /** 快照策略Id。 */
+  SnapshotPolicyId: string;
+  /** 快照文件Id。 */
+  SnapshotFileId: string;
+  /** 实例Id。 */
+  InstanceId: string;
+}
+
+declare interface ResumeSnapshotInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReturnNormalAddressesRequest {
-  /** 1 */
+  /** EIP 的 IP 地址,示例：101.35.139.183 */
   AddressIps?: string[];
 }
 
@@ -6525,6 +6779,8 @@ declare interface Vpc {
   AttachClassicLinkVpc(data: AttachClassicLinkVpcRequest, config?: AxiosRequestConfig): AxiosPromise<AttachClassicLinkVpcResponse>;
   /** 弹性网卡绑定云服务器 {@link AttachNetworkInterfaceRequest} {@link AttachNetworkInterfaceResponse} */
   AttachNetworkInterface(data: AttachNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<AttachNetworkInterfaceResponse>;
+  /** 快照策略关联实例 {@link AttachSnapshotInstancesRequest} {@link AttachSnapshotInstancesResponse} */
+  AttachSnapshotInstances(data: AttachSnapshotInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachSnapshotInstancesResponse>;
   /** 合规化审批 {@link AuditCrossBorderComplianceRequest} {@link AuditCrossBorderComplianceResponse} */
   AuditCrossBorderCompliance(data: AuditCrossBorderComplianceRequest, config?: AxiosRequestConfig): AxiosPromise<AuditCrossBorderComplianceResponse>;
   /** 检查辅助CIDR冲突 {@link CheckAssistantCidrRequest} {@link CheckAssistantCidrResponse} */
@@ -6595,6 +6851,8 @@ declare interface Vpc {
   CreateServiceTemplate(data: CreateServiceTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceTemplateResponse>;
   /** 创建协议端口模板集合 {@link CreateServiceTemplateGroupRequest} {@link CreateServiceTemplateGroupResponse} */
   CreateServiceTemplateGroup(data: CreateServiceTemplateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceTemplateGroupResponse>;
+  /** 创建快照策略 {@link CreateSnapshotPoliciesRequest} {@link CreateSnapshotPoliciesResponse} */
+  CreateSnapshotPolicies(data: CreateSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotPoliciesResponse>;
   /** 创建子网 {@link CreateSubnetRequest} {@link CreateSubnetResponse} */
   CreateSubnet(data: CreateSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubnetResponse>;
   /** 批量创建子网 {@link CreateSubnetsRequest} {@link CreateSubnetsResponse} */
@@ -6669,6 +6927,8 @@ declare interface Vpc {
   DeleteServiceTemplate(data: DeleteServiceTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceTemplateResponse>;
   /** 删除协议端口模板集合 {@link DeleteServiceTemplateGroupRequest} {@link DeleteServiceTemplateGroupResponse} */
   DeleteServiceTemplateGroup(data: DeleteServiceTemplateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceTemplateGroupResponse>;
+  /** 删除快照策略 {@link DeleteSnapshotPoliciesRequest} {@link DeleteSnapshotPoliciesResponse} */
+  DeleteSnapshotPolicies(data: DeleteSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotPoliciesResponse>;
   /** 删除子网 {@link DeleteSubnetRequest} {@link DeleteSubnetResponse} */
   DeleteSubnet(data: DeleteSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubnetResponse>;
   /** 删除模板对象成员 {@link DeleteTemplateMemberRequest} {@link DeleteTemplateMemberResponse} */
@@ -6799,6 +7059,14 @@ declare interface Vpc {
   DescribeServiceTemplateGroups(data?: DescribeServiceTemplateGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceTemplateGroupsResponse>;
   /** 查询协议端口模板 {@link DescribeServiceTemplatesRequest} {@link DescribeServiceTemplatesResponse} */
   DescribeServiceTemplates(data?: DescribeServiceTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceTemplatesResponse>;
+  /** 查询安全组快照文件内容 {@link DescribeSgSnapshotFileContentRequest} {@link DescribeSgSnapshotFileContentResponse} */
+  DescribeSgSnapshotFileContent(data: DescribeSgSnapshotFileContentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSgSnapshotFileContentResponse>;
+  /** 查询快照策略关联实例列表 {@link DescribeSnapshotAttachedInstancesRequest} {@link DescribeSnapshotAttachedInstancesResponse} */
+  DescribeSnapshotAttachedInstances(data: DescribeSnapshotAttachedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotAttachedInstancesResponse>;
+  /** 查询快照文件 {@link DescribeSnapshotFilesRequest} {@link DescribeSnapshotFilesResponse} */
+  DescribeSnapshotFiles(data: DescribeSnapshotFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotFilesResponse>;
+  /** 查询快照策略 {@link DescribeSnapshotPoliciesRequest} {@link DescribeSnapshotPoliciesResponse} */
+  DescribeSnapshotPolicies(data?: DescribeSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotPoliciesResponse>;
   /** 查询子网列表 {@link DescribeSubnetsRequest} {@link DescribeSubnetsResponse} */
   DescribeSubnets(data?: DescribeSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetsResponse>;
   /** 查询异步任务执行结果 {@link DescribeTaskResultRequest} {@link DescribeTaskResultResponse} */
@@ -6847,6 +7115,8 @@ declare interface Vpc {
   DetachClassicLinkVpc(data: DetachClassicLinkVpcRequest, config?: AxiosRequestConfig): AxiosPromise<DetachClassicLinkVpcResponse>;
   /** 弹性网卡解绑云服务器 {@link DetachNetworkInterfaceRequest} {@link DetachNetworkInterfaceResponse} */
   DetachNetworkInterface(data: DetachNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<DetachNetworkInterfaceResponse>;
+  /** 快照策略解关联实例 {@link DetachSnapshotInstancesRequest} {@link DetachSnapshotInstancesResponse} */
+  DetachSnapshotInstances(data: DetachSnapshotInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachSnapshotInstancesResponse>;
   /** 禁用云联网路由 {@link DisableCcnRoutesRequest} {@link DisableCcnRoutesResponse} */
   DisableCcnRoutes(data: DisableCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DisableCcnRoutesResponse>;
   /** 停止流日志 {@link DisableFlowLogsRequest} {@link DisableFlowLogsResponse} */
@@ -6855,6 +7125,8 @@ declare interface Vpc {
   DisableGatewayFlowMonitor(data: DisableGatewayFlowMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<DisableGatewayFlowMonitorResponse>;
   /** 禁用子网路由 {@link DisableRoutesRequest} {@link DisableRoutesResponse} */
   DisableRoutes(data: DisableRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DisableRoutesResponse>;
+  /** 停用快照策略 {@link DisableSnapshotPoliciesRequest} {@link DisableSnapshotPoliciesResponse} */
+  DisableSnapshotPolicies(data: DisableSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DisableSnapshotPoliciesResponse>;
   /** 禁用SSL-VPN-CLIENT 证书 {@link DisableVpnGatewaySslClientCertRequest} {@link DisableVpnGatewaySslClientCertResponse} */
   DisableVpnGatewaySslClientCert(data: DisableVpnGatewaySslClientCertRequest, config?: AxiosRequestConfig): AxiosPromise<DisableVpnGatewaySslClientCertResponse>;
   /** 解绑定弹性公网IP {@link DisassociateAddressRequest} {@link DisassociateAddressResponse} */
@@ -6883,6 +7155,8 @@ declare interface Vpc {
   EnableGatewayFlowMonitor(data: EnableGatewayFlowMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<EnableGatewayFlowMonitorResponse>;
   /** 启用子网路由 {@link EnableRoutesRequest} {@link EnableRoutesResponse} */
   EnableRoutes(data: EnableRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<EnableRoutesResponse>;
+  /** 启用快照策略 {@link EnableSnapshotPoliciesRequest} {@link EnableSnapshotPoliciesResponse} */
+  EnableSnapshotPolicies(data: EnableSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<EnableSnapshotPoliciesResponse>;
   /** 是否接受终端节点连接请求 {@link EnableVpcEndPointConnectRequest} {@link EnableVpcEndPointConnectResponse} */
   EnableVpcEndPointConnect(data: EnableVpcEndPointConnectRequest, config?: AxiosRequestConfig): AxiosPromise<EnableVpcEndPointConnectResponse>;
   /** 启用SSL-VPN-CLIENT 证书 {@link EnableVpnGatewaySslClientCertRequest} {@link EnableVpnGatewaySslClientCertResponse} */
@@ -6981,6 +7255,8 @@ declare interface Vpc {
   ModifyServiceTemplateAttribute(data: ModifyServiceTemplateAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceTemplateAttributeResponse>;
   /** 修改协议端口模板集合 {@link ModifyServiceTemplateGroupAttributeRequest} {@link ModifyServiceTemplateGroupAttributeResponse} */
   ModifyServiceTemplateGroupAttribute(data: ModifyServiceTemplateGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceTemplateGroupAttributeResponse>;
+  /** 修改快照策略 {@link ModifySnapshotPoliciesRequest} {@link ModifySnapshotPoliciesResponse} */
+  ModifySnapshotPolicies(data: ModifySnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotPoliciesResponse>;
   /** 修改子网属性 {@link ModifySubnetAttributeRequest} {@link ModifySubnetAttributeResponse} */
   ModifySubnetAttribute(data: ModifySubnetAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubnetAttributeResponse>;
   /** 修改模板对象成员 {@link ModifyTemplateMemberRequest} {@link ModifyTemplateMemberResponse} */
@@ -7037,6 +7313,8 @@ declare interface Vpc {
   ResetVpnConnection(data: ResetVpnConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<ResetVpnConnectionResponse>;
   /** 调整VPN网关带宽上限 {@link ResetVpnGatewayInternetMaxBandwidthRequest} {@link ResetVpnGatewayInternetMaxBandwidthResponse} */
   ResetVpnGatewayInternetMaxBandwidth(data: ResetVpnGatewayInternetMaxBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ResetVpnGatewayInternetMaxBandwidthResponse>;
+  /** 恢复安全组策略 {@link ResumeSnapshotInstanceRequest} {@link ResumeSnapshotInstanceResponse} */
+  ResumeSnapshotInstance(data: ResumeSnapshotInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeSnapshotInstanceResponse>;
   /** 解绑并释放普通公网IP {@link ReturnNormalAddressesRequest} {@link ReturnNormalAddressesResponse} */
   ReturnNormalAddresses(data?: ReturnNormalAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<ReturnNormalAddressesResponse>;
   /** 设置云联网各地域出带宽上限或地域间上限 {@link SetCcnRegionBandwidthLimitsRequest} {@link SetCcnRegionBandwidthLimitsResponse} */

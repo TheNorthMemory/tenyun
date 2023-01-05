@@ -908,7 +908,7 @@ declare interface DetailDomain {
   HwPrivateAccess: HwPrivateAccess | null;
   /** 七牛云对象存储回源鉴权 */
   QnPrivateAccess: QnPrivateAccess | null;
-  /** https 请求计费开关 */
+  /** HTTPS服务 */
   HttpsBilling: HttpsBilling | null;
 }
 
@@ -1192,7 +1192,7 @@ declare interface Https {
 
 /** 支持 https 请求开关，若关闭，下发配置拦截https请求 */
 declare interface HttpsBilling {
-  /** https请求计费开关 */
+  /** HTTPS服务 */
   Switch: string;
 }
 
@@ -2587,6 +2587,8 @@ declare interface AddCdnDomainRequest {
   HwPrivateAccess?: HwPrivateAccess;
   /** 七牛云对象存储回源鉴权 */
   QnPrivateAccess?: QnPrivateAccess;
+  /** HTTPS服务 */
+  HttpsBilling?: HttpsBilling;
 }
 
 declare interface AddCdnDomainResponse {
@@ -4199,6 +4201,8 @@ declare interface UpdateDomainConfigRequest {
   HwPrivateAccess?: HwPrivateAccess;
   /** 七牛云对象存储回源鉴权 */
   QnPrivateAccess?: QnPrivateAccess;
+  /** HTTPS服务 */
+  HttpsBilling?: HttpsBilling;
 }
 
 declare interface UpdateDomainConfigResponse {

@@ -32,6 +32,10 @@ declare interface CheckStepInfo {
 
 /** 一致性校验摘要信息 */
 declare interface CompareAbstractInfo {
+  /** 校验配置参数 */
+  Options: CompareOptions | null;
+  /** 一致性校验对比对象 */
+  Objects: CompareObject | null;
   /** 对比结论: same,different */
   Conclusion: string | null;
   /** 任务状态: success,failed */
@@ -44,8 +48,18 @@ declare interface CompareAbstractInfo {
   DifferentTables: number | null;
   /** 跳过校验的表数量 */
   SkippedTables: number | null;
+  /** 预估表总数 */
+  NearlyTableCount: number | null;
   /** 不一致的数据行数量 */
   DifferentRows: number | null;
+  /** 源库行数，当对比类型为**行数对比**时此项有意义 */
+  SrcSampleRows: number | null;
+  /** 目标库行数，当对比类型为**行数对比**时此项有意义 */
+  DstSampleRows: number | null;
+  /** 开始时间 */
+  StartedAt: string | null;
+  /** 结束时间 */
+  FinishedAt: string | null;
 }
 
 /** 一致性校验详细信息 */
@@ -58,19 +72,21 @@ declare interface CompareDetailInfo {
 
 /** 一致性对比对象配置 */
 declare interface CompareObject {
-  /** 迁移对象模式 all(所有迁移对象)，partial(部分对象迁移) */
+  /** 对象模式 整实例-all,部分对象-partial */
   ObjectMode: string | null;
-  /** 迁移对象库表配置 */
+  /** 对象列表 */
   ObjectItems?: CompareObjectItem[] | null;
+  /** 高级对象类型，如account(账号),index(索引),shardkey(片建，后面可能会调整),schema(库表结构) */
+  AdvancedObjects?: string[] | null;
 }
 
 /** 一致性校验库表对象 */
 declare interface CompareObjectItem {
-  /** 迁移的库 */
+  /** 数据库名 */
   DbName: string | null;
   /** 数据库选择模式: all 为当前对象下的所有对象,partial 为部分对象 */
   DbMode: string | null;
-  /** 迁移的 schema */
+  /** schema名称 */
   SchemaName?: string | null;
   /** 表选择模式: all 为当前对象下的所有表对象,partial 为部分表对象 */
   TableMode?: string | null;
@@ -80,6 +96,16 @@ declare interface CompareObjectItem {
   ViewMode?: string | null;
   /** 用于一致性校验的视图配置，当 ViewMode 为 partial 时， 需要填写 */
   Views?: CompareViewItem[] | null;
+}
+
+/** 一致性校验选项 */
+declare interface CompareOptions {
+  /** 对比类型：dataCheck(完整数据对比)、sampleDataCheck(抽样数据对比)、rowsCount(行数对比) */
+  Method?: string | null;
+  /** 抽样比例;范围0,100 */
+  SampleRate?: number | null;
+  /** 线程数，取值1-5，默认为1 */
+  ThreadCount?: number | null;
 }
 
 /** 用于一致性校验的表配置 */
@@ -98,7 +124,7 @@ declare interface CompareTaskInfo {
 
 /** 一致性校验对象信息 */
 declare interface CompareTaskItem {
-  /** 迁移任务id */
+  /** 任务id */
   JobId: string | null;
   /** 对比任务 Id */
   CompareTaskId: string | null;
@@ -120,6 +146,12 @@ declare interface CompareTaskItem {
   StartedAt: string | null;
   /** 对比结束时间 */
   FinishedAt: string | null;
+  /** 对比类型，dataCheck(完整数据对比)、sampleDataCheck(抽样数据对比)、rowsCount(行数对比) */
+  Method: string | null;
+  /** 对比配置信息 */
+  Options: CompareOptions | null;
+  /** 一致性校验提示信息 */
+  Message: string | null;
 }
 
 /** 用于一致性校验的视图配置 */
@@ -878,6 +910,26 @@ declare interface ConfigureSyncJobResponse {
   RequestId?: string;
 }
 
+declare interface ContinueMigrateJobRequest {
+  /** 数据迁移任务ID */
+  JobId: string;
+}
+
+declare interface ContinueMigrateJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ContinueSyncJobRequest {
+  /** 同步任务id */
+  JobId: string;
+}
+
+declare interface ContinueSyncJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCheckSyncJobRequest {
   /** 同步任务id */
   JobId: string;
@@ -889,7 +941,7 @@ declare interface CreateCheckSyncJobResponse {
 }
 
 declare interface CreateCompareTaskRequest {
-  /** 迁移任务 Id */
+  /** 任务 Id */
   JobId: string;
   /** 数据对比任务名称，若为空则默认给CompareTaskId相同值 */
   TaskName?: string;
@@ -897,6 +949,8 @@ declare interface CreateCompareTaskRequest {
   ObjectMode?: string;
   /** 一致性对比对象配置 */
   Objects?: CompareObject;
+  /** 一致性校验选项 */
+  Options?: CompareOptions;
 }
 
 declare interface CreateCompareTaskResponse {
@@ -1047,6 +1101,10 @@ declare interface DescribeCompareTasksRequest {
   Limit?: number;
   /** 分页偏移量 */
   Offset?: number;
+  /** 校验任务 ID */
+  CompareTaskId?: string;
+  /** 任务状态过滤，可能的值：created - 创建完成；readyRun - 等待运行；running - 运行中；success - 成功；stopping - 结束中；failed - 失败；canceled - 已终止 */
+  Status?: string[];
 }
 
 declare interface DescribeCompareTasksResponse {
@@ -1291,16 +1349,18 @@ declare interface ModifyCompareTaskNameResponse {
 }
 
 declare interface ModifyCompareTaskRequest {
-  /** 迁移任务 Id */
+  /** 任务 Id */
   JobId: string;
   /** 对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9 */
   CompareTaskId: string;
   /** 任务名称 */
   TaskName?: string;
-  /** 数据对比对象模式，sameAsMigrate(全部迁移对象， **默认为此项配置**)，custom(自定义模式) */
+  /** 数据对比对象模式，sameAsMigrate(全部迁移对象， 默认为此项配置)、custom(自定义)，注意自定义对比对象必须是迁移对象的子集 */
   ObjectMode?: string;
   /** 对比对象，若CompareObjectMode取值为custom，则此项必填 */
   Objects?: CompareObject;
+  /** 一致性校验选项 */
+  Options?: CompareOptions;
 }
 
 declare interface ModifyCompareTaskResponse {
@@ -1354,6 +1414,16 @@ declare interface ModifyMigrationJobRequest {
 }
 
 declare interface ModifyMigrationJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface PauseMigrateJobRequest {
+  /** 数据迁移任务ID */
+  JobId: string;
+}
+
+declare interface PauseMigrateJobResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2217,6 +2287,10 @@ declare interface Dts {
   CompleteMigrateJob(data: CompleteMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<CompleteMigrateJobResponse>;
   /** 配置同步任务 {@link ConfigureSyncJobRequest} {@link ConfigureSyncJobResponse} */
   ConfigureSyncJob(data: ConfigureSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<ConfigureSyncJobResponse>;
+  /** 恢复暂停中的迁移任务 {@link ContinueMigrateJobRequest} {@link ContinueMigrateJobResponse} */
+  ContinueMigrateJob(data: ContinueMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<ContinueMigrateJobResponse>;
+  /** 恢复被暂停的同步任务 {@link ContinueSyncJobRequest} {@link ContinueSyncJobResponse} */
+  ContinueSyncJob(data: ContinueSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<ContinueSyncJobResponse>;
   /** 校验同步任务 {@link CreateCheckSyncJobRequest} {@link CreateCheckSyncJobResponse} */
   CreateCheckSyncJob(data: CreateCheckSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCheckSyncJobResponse>;
   /** 创建一致性校验任务 {@link CreateCompareTaskRequest} {@link CreateCompareTaskResponse} */
@@ -2263,6 +2337,8 @@ declare interface Dts {
   ModifyMigrateName(data: ModifyMigrateNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrateNameResponse>;
   /** 配置迁移服务 {@link ModifyMigrationJobRequest} {@link ModifyMigrationJobResponse} */
   ModifyMigrationJob(data: ModifyMigrationJobRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMigrationJobResponse>;
+  /** 暂停迁移任务 {@link PauseMigrateJobRequest} {@link PauseMigrateJobResponse} */
+  PauseMigrateJob(data: PauseMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<PauseMigrateJobResponse>;
   /** 暂停同步任务 {@link PauseSyncJobRequest} {@link PauseSyncJobResponse} */
   PauseSyncJob(data: PauseSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<PauseSyncJobResponse>;
   /** 解除隔离数据迁移任务 {@link RecoverMigrateJobRequest} {@link RecoverMigrateJobResponse} */

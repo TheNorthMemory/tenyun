@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 223+ 款产品，8820+ 服务数</summary>
+<details><summary>共计 224+ 款产品，8858+ 服务数</summary>
 
 产品标识 | 产品说明 | 服务版本(数)
 --- | --- | ---
@@ -180,7 +180,7 @@ domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-0
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(9)
 ds | [文档服务](https://cloud.tencent.com/document/product/869) | 2018-05-23(12)
 dtf | [分布式事务](https://cloud.tencent.com/document/product/1224) | 2020-05-06(1)
-dts | [数据传输服务](https://cloud.tencent.com/document/product/571) | 2021-12-06(39)<br/>2018-03-30(23)
+dts | [数据传输服务](https://cloud.tencent.com/document/product/571) | 2021-12-06(42)<br/>2018-03-30(23)
 eb | [事件总线](https://cloud.tencent.com/document/product/1359) | 2021-04-16(26)
 ecc | [英文作文批改](https://cloud.tencent.com/document/product/1076) | 2018-12-13(4)
 ecdn | [全站加速网络](https://cloud.tencent.com/document/product/570) | 2019-10-12(16)
@@ -192,7 +192,7 @@ es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2
 ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(27)
 essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(31)<br/>2020-12-22(53)
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2018-12-01(4)
-faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(35)
+faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(34)
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(10)
 ft | [人像变换](https://cloud.tencent.com/document/product/1202) | 2020-03-04(6)
 gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(102)
@@ -201,6 +201,7 @@ gpm | [游戏玩家匹配](https://cloud.tencent.com/document/product/1294) | 20
 gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(8)
 gse | [游戏服务器伸缩](https://cloud.tencent.com/document/product/1165) | 2019-11-12(74)
 habo |  | 2018-12-03(2)
+hasim | [高可用物联网卡](https://cloud.tencent.com/document/product/1482) | 2021-07-16(22)
 hcm | [数学作业批改](https://cloud.tencent.com/document/product/1004) | 2018-11-06(1)
 iai | [人脸识别](https://cloud.tencent.com/document/product/867) | 2020-03-03(35)<br/>2018-03-01(33)
 ic | [物联网卡](https://cloud.tencent.com/document/product/636) | 2019-03-07(9)
@@ -252,7 +253,7 @@ redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 20
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3)
 rkp | [风险探针](https://cloud.tencent.com/document/product/1169) | 2019-12-09(3)
 rp | [注册保护](https://cloud.tencent.com/document/product/1191) | 2020-02-24(1)
-rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(57)
+rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(58)
 scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(44+7)
 ses | [邮件推送](https://cloud.tencent.com/document/product/1288) | 2020-10-02(26)
 smh | [智能媒资托管](https://cloud.tencent.com/document/product/1339) | 2021-07-12(10)
@@ -261,7 +262,7 @@ sms | [短信](https://cloud.tencent.com/document/product/382) | 2021-01-11(18)<
 soe | [智聆口语评测](https://cloud.tencent.com/document/product/884) | 2018-07-24(4)
 solar | 智汇零售 | 2018-10-11(17)
 sqlserver | [云数据库 SQL Server](https://cloud.tencent.com/document/product/238) | 2018-03-28(104)
-ssa | [安全运营中心](https://cloud.tencent.com/document/product/664) | 2018-06-08(21)
+ssa | [安全运营中心](https://cloud.tencent.com/document/product/664) | 2018-06-08(22)
 ssl | [SSL 证书](https://cloud.tencent.com/document/product/400) | 2019-12-05(29)
 sslpod | [SSL证书监控SSLPod](https://cloud.tencent.com/document/product/1084) | 2019-06-05(10)
 ssm | [凭据管理系统](https://cloud.tencent.com/document/product/1140) | 2019-09-23(24)
@@ -312,7 +313,7 @@ ump | [客流数字化平台](https://cloud.tencent.com/document/product/1320) |
 vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 2021-09-22(4)<br/>2020-12-29(4)<br/>2020-07-09(5)
 vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-02(2)
 vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(139)
-vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(287)
+vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(299)
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(36)
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(22)
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(195)
