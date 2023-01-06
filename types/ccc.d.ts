@@ -879,23 +879,23 @@ declare interface DescribeChatMessagesRequest {
   InstanceId?: number;
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId?: number;
-  /** 服务记录ID */
+  /** 服务记录ID（废弃） */
   CdrId?: string;
-  /** 返回记录条数 最大为100默认20 */
+  /** 返回记录条数，最大为100 默认20 */
   Limit?: number;
-  /** 返回记录偏移 默认为0 */
+  /** 返回记录偏移，默认为 0 */
   Offset?: number;
   /** 1为从早到晚，2为从晚到早，默认为2 */
   Order?: number;
-  /** 服务记录SessionID */
+  /** 服务记录 SessionID（必填） */
   SessionId?: string;
 }
 
 declare interface DescribeChatMessagesResponse {
   /** 总记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 消息列表 */
-  Messages: MessageBody[] | null;
+  Messages?: MessageBody[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -947,17 +947,17 @@ declare interface DescribeExtensionsResponse {
 }
 
 declare interface DescribeIMCdrsRequest {
-  /** 起始时间 */
+  /** 起始时间（必填），Unix 秒级时间戳 */
   StartTimestamp: number;
-  /** 结束时间 */
+  /** 结束时间（必填），Unix 秒级时间戳 */
   EndTimestamp: number;
   /** 实例 ID（废弃） */
   InstanceId?: number;
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId?: number;
-  /** 返回记录条数 最大为100默认20 */
+  /** 返回记录条数，最大为100默认20 */
   Limit?: number;
-  /** 返回记录偏移 默认为0 */
+  /** 返回记录偏移，默认为 0 */
   Offset?: number;
   /** 1为全媒体，2为文本客服，不填则查询全部 */
   Type?: number;
@@ -965,9 +965,9 @@ declare interface DescribeIMCdrsRequest {
 
 declare interface DescribeIMCdrsResponse {
   /** 总记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 服务记录列表 */
-  IMCdrs: IMCdrInfo[];
+  IMCdrs?: IMCdrInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

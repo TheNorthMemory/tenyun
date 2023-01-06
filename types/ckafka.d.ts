@@ -498,6 +498,16 @@ declare interface DateParam {
   TimeZone?: string | null;
 }
 
+/** topic链接信息 */
+declare interface DescribeConnectInfoResultDTO {
+  /** ip地址 */
+  IpAddr: string | null;
+  /** 连结时间 */
+  Time: string | null;
+  /** 是否支持的版本 */
+  IsUnSupportVersion: boolean | null;
+}
+
 /** 查询连接源具体数据的返参 */
 declare interface DescribeConnectResource {
   /** 连接源的Id */
@@ -3068,6 +3078,20 @@ declare interface DescribeTopicDetailResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTopicProduceConnectionRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** topic名称 */
+  TopicName: string;
+}
+
+declare interface DescribeTopicProduceConnectionResponse {
+  /** 链接信息返回结果集 */
+  Result: DescribeConnectInfoResultDTO[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTopicRequest {
   /** 实例 ID */
   InstanceId: string;
@@ -3755,6 +3779,8 @@ declare interface Ckafka {
   DescribeTopicAttributes(data: DescribeTopicAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicAttributesResponse>;
   /** 获取主题列表详情 {@link DescribeTopicDetailRequest} {@link DescribeTopicDetailResponse} */
   DescribeTopicDetail(data: DescribeTopicDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicDetailResponse>;
+  /** 查询topic生产端连接信息 {@link DescribeTopicProduceConnectionRequest} {@link DescribeTopicProduceConnectionResponse} */
+  DescribeTopicProduceConnection(data: DescribeTopicProduceConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicProduceConnectionResponse>;
   /** 查询订阅某主题消息分组信息 {@link DescribeTopicSubscribeGroupRequest} {@link DescribeTopicSubscribeGroupResponse} */
   DescribeTopicSubscribeGroup(data: DescribeTopicSubscribeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicSubscribeGroupResponse>;
   /** 获取Topic 同步副本信息 {@link DescribeTopicSyncReplicaRequest} {@link DescribeTopicSyncReplicaResponse} */

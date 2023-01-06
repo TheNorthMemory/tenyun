@@ -6543,6 +6543,8 @@ declare interface ExecuteFunctionResponse {
 declare interface ExtractTraceWatermarkRequest {
   /** 需要提取水印的媒体 URL。 */
   Url: string;
+  /** 媒体文件 ID。Url 对应的原始媒体文件 ID。注意：此字段必填。 */
+  FileId?: string;
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: number;
   /** 标识来源上下文，用于透传用户请求信息，在ExtractTraceWatermarkComplete回调和任务流状态变更回调将返回该字段值，最长 1000个字符。 */

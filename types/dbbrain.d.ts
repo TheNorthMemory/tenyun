@@ -1109,7 +1109,7 @@ declare interface DescribeNoPrimaryKeyTablesResponse {
 declare interface DescribeProxyProcessStatisticsRequest {
   /** 实例 ID 。 */
   InstanceId: string;
-  /** 当前实例下的 ProxyID。 */
+  /** 该实例下需要查询的某一个 ProxyID 。 */
   InstanceProxyId: string;
   /** 返回数量。 */
   Limit: number;
@@ -1125,7 +1125,7 @@ declare interface DescribeProxyProcessStatisticsRequest {
 
 declare interface DescribeProxyProcessStatisticsResponse {
   /** 实时会话统计详情。 */
-  ProcessStatistics: ProcessStatistic;
+  ProcessStatistics?: ProcessStatistic;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2633,7 +2633,7 @@ declare interface Dbbrain {
   DescribeMySqlProcessList(data: DescribeMySqlProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMySqlProcessListResponse>;
   /** 查询实例无主键表 {@link DescribeNoPrimaryKeyTablesRequest} {@link DescribeNoPrimaryKeyTablesResponse} */
   DescribeNoPrimaryKeyTables(data: DescribeNoPrimaryKeyTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNoPrimaryKeyTablesResponse>;
-  /** 获取实时会话统计详情 {@link DescribeProxyProcessStatisticsRequest} {@link DescribeProxyProcessStatisticsResponse} */
+  /** 获取单个proxy实时会话统计详情 {@link DescribeProxyProcessStatisticsRequest} {@link DescribeProxyProcessStatisticsResponse} */
   DescribeProxyProcessStatistics(data: DescribeProxyProcessStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyProcessStatisticsResponse>;
   /** 查询代理节点 kill 会话任务执行状态 {@link DescribeProxySessionKillTasksRequest} {@link DescribeProxySessionKillTasksResponse} */
   DescribeProxySessionKillTasks(data: DescribeProxySessionKillTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxySessionKillTasksResponse>;

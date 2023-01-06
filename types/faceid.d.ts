@@ -660,18 +660,6 @@ declare interface GetLiveCodeResponse {
   RequestId?: string;
 }
 
-declare interface GetRealNameAuthResultRequest {
-  /** 实名认证凭证 */
-  AuthToken: string;
-}
-
-declare interface GetRealNameAuthResultResponse {
-  /** 认证结果码，收费情况如下：收费码：0: 姓名和身份证号一致-1: 姓名和身份证号不一致-2: 姓名和微信实名姓名不一致不收费码：-3: 微信号未实名 */
-  ResultType?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface GetWeChatBillDetailsRequest {
   /** 拉取的日期（YYYY-MM-DD）。最大可追溯到365天前。当天6点后才能拉取前一天的数据。 */
   Date: string;
@@ -1099,8 +1087,6 @@ declare interface Faceid {
   GetFaceIdToken(data: GetFaceIdTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetFaceIdTokenResponse>;
   /** 获取数字验证码 {@link GetLiveCodeRequest} {@link GetLiveCodeResponse} */
   GetLiveCode(data?: GetLiveCodeRequest, config?: AxiosRequestConfig): AxiosPromise<GetLiveCodeResponse>;
-  /** 获取微信实名认证结果 {@link GetRealNameAuthResultRequest} {@link GetRealNameAuthResultResponse} */
-  GetRealNameAuthResult(data: GetRealNameAuthResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetRealNameAuthResultResponse>;
   /** 查询账单明细（微信渠道） {@link GetWeChatBillDetailsRequest} {@link GetWeChatBillDetailsResponse} */
   GetWeChatBillDetails(data: GetWeChatBillDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<GetWeChatBillDetailsResponse>;
   /** 身份证识别及信息核验 {@link IdCardOCRVerificationRequest} {@link IdCardOCRVerificationResponse} */

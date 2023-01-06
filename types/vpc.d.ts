@@ -158,7 +158,7 @@ declare interface BackupPolicy {
 declare interface BandwidthPackage {
   /** 带宽包唯一标识Id */
   BandwidthPackageId: string;
-  /** 带宽包类型，包括'BGP','SINGLEISP','ANYCAST' */
+  /** 带宽包类型，包括'BGP','SINGLEISP','ANYCAST','SINGLEISP_CMCC','SINGLEISP_CTCC','SINGLEISP_CUCC' */
   NetworkType: string;
   /** 带宽包计费类型，包括'TOP5_POSTPAID_BY_MONTH'和'PERCENT95_POSTPAID_BY_MONTH' */
   ChargeType: string;
@@ -3100,6 +3100,20 @@ declare interface CreateSubnetsResponse {
   RequestId?: string;
 }
 
+declare interface CreateTrafficPackagesRequest {
+  /** 流量包规格。可选值:10: 10GB流量，有效期一个月50: 50GB流量，有效期一个月512: 512GB流量，有效期一个月1024: 1TB流量，有效期一个月5120: 5TB流量，有效期一个月51200: 50TB流量，有效期一个月60: 60GB流量，有效期半年300: 300GB流量，有效期半年600: 600GB流量，有效期半年3072: 3TB流量，有效期半年6144: 6TB流量，有效期半年30720: 30TB流量，有效期半年61440: 60TB流量，有效期半年307200: 300TB流量，有效期半年 */
+  TrafficAmount: number;
+  /** 流量包数量，可选范围 1~20。 */
+  TrafficPackageCount?: number;
+}
+
+declare interface CreateTrafficPackagesResponse {
+  /** 创建的流量包ID列表。 */
+  TrafficPackageSet: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateVpcEndPointRequest {
   /** VPC实例ID。 */
   VpcId: string;
@@ -3877,9 +3891,9 @@ declare interface DescribeBandwidthPackagesRequest {
   BandwidthPackageIds?: string[];
   /** 每次请求的`Filters`的上限为10。参数不支持同时指定`BandwidthPackageIds`和`Filters`。详细的过滤条件如下： bandwidth-package_id - String - 是否必填：否 - （过滤条件）按照带宽包的唯一标识ID过滤。 bandwidth-package-name - String - 是否必填：否 - （过滤条件）按照 带宽包名称过滤。不支持模糊过滤。 network-type - String - 是否必填：否 - （过滤条件）按照带宽包的类型过滤。类型包括'HIGH_QUALITY_BGP','BGP','SINGLEISP'和'ANYCAST'。 charge-type - String - 是否必填：否 - （过滤条件）按照带宽包的计费类型过滤。计费类型包括'TOP5_POSTPAID_BY_MONTH'和'PERCENT95_POSTPAID_BY_MONTH'。 resource.resource-type - String - 是否必填：否 - （过滤条件）按照带宽包资源类型过滤。资源类型包括'Address'和'LoadBalance' resource.resource-id - String - 是否必填：否 - （过滤条件）按照带宽包资源Id过滤。资源Id形如'eip-xxxx','lb-xxxx' resource.address-ip - String - 是否必填：否 - （过滤条件）按照带宽包资源Ip过滤。 tag-key - String - 是否必填：否 - （过滤条件）按照标签键进行过滤。 tag-value - String - 是否必填：否 - （过滤条件）按照标签值进行过滤。 tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。tag-key使用具体的标签键进行替换。 */
   Filters?: Filter[];
-  /** 查询带宽包偏移量 */
+  /** 查询带宽包偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小结。 */
   Offset?: number;
-  /** 查询带宽包数量限制 */
+  /** 查询带宽包返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小结。 */
   Limit?: number;
 }
 
@@ -6654,6 +6668,10 @@ declare interface TransformAddressRequest {
 }
 
 declare interface TransformAddressResponse {
+  /** 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。 */
+  TaskId: number;
+  /** 转为弹性公网IP后的唯一ID */
+  AddressId: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6857,6 +6875,8 @@ declare interface Vpc {
   CreateSubnet(data: CreateSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubnetResponse>;
   /** 批量创建子网 {@link CreateSubnetsRequest} {@link CreateSubnetsResponse} */
   CreateSubnets(data: CreateSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubnetsResponse>;
+  /** 创建共享流量包 {@link CreateTrafficPackagesRequest} {@link CreateTrafficPackagesResponse} */
+  CreateTrafficPackages(data: CreateTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrafficPackagesResponse>;
   /** 创建VPC {@link CreateVpcRequest} {@link CreateVpcResponse} */
   CreateVpc(data: CreateVpcRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcResponse>;
   /** 创建终端节点 {@link CreateVpcEndPointRequest} {@link CreateVpcEndPointResponse} */
