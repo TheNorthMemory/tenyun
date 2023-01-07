@@ -306,7 +306,7 @@ class TenYun {
     return (endpoint, action) => {
       if (typeof action === 'symbol') { return endpoint[action]; }
       if (!Object.prototype.hasOwnProperty.call(endpoint, action)) {
-        const client = this[CLIENT];
+        const { client } = this;
         Reflect.set(endpoint, action, {
           async [action](data = {}, config = {}) {
             return client.request({
@@ -394,6 +394,9 @@ class TenYun {
     };
   }
 
+  /**
+   * @returns {import('axios').AxiosInstance}
+   */
   get client() { return this[CLIENT]; }
 }
 
