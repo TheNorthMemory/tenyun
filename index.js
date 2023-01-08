@@ -22,6 +22,17 @@ const X_TC_TIMESTAMP = 'X-TC-Timestamp';
 const X_TC_TOKEN = 'X-TC-Token';
 const X_TC_VERSION = 'X-TC-Version';
 
+/**
+ * @typedef {import('crypto').BinaryLike} BinaryLike
+ * @typedef {import('axios').AxiosPromise} AxiosPromise
+ * @typedef {import('axios').AxiosInstance} AxiosInstance
+ * @typedef {import('axios').AxiosRequestConfig} AxiosRequestConfig
+ * @typedef {import('axios').AxiosRequestHeaders} AxiosRequestHeaders
+ * @typedef {import('axios').AxiosResponseHeaders} AxiosResponseHeaders
+ * @typedef {() => string[]} ServiceEndpoint
+ * @typedef {(data?: object|Buffer, config?: AxiosRequestConfig) => AxiosPromise} ServiceActionRequest
+*/
+
 export const SERVICE_VERSIONS = {
   aa: ['2020-02-24'],
   aai: ['2018-05-22'],
@@ -261,10 +272,10 @@ const toUTCYMD = (...val) => (new Date(...val)).toJSON().substring(0, 10);
 
 class TenYun {
   /**
-   * @param {string} SecretId
-   * @param {import('crypto').BinaryLike} SecretKey
-   * @param {string} [Token]
-   * @param {string} [Region]
+   * @param {string} SecretId - The SecretId
+   * @param {BinaryLike} SecretKey - The SecretKey
+   * @param {string} [Token] - The Token
+   * @param {string} [Region] - The Region
    */
   constructor(SecretId, SecretKey, Token, Region) {
     this[SECRET_ID] = SecretId;
@@ -282,9 +293,9 @@ class TenYun {
 
   get [SERVICE]() {
     /**
-     * @param {this} instance
-     * @param {string} service
-     * @return {() => string[]}
+     * @param {this} instance - The instance
+     * @param {string} service - The service
+    * @return {ServiceEndpoint} - Mapping of the service version
      */
     return (instance, service) => {
       if (typeof service === 'symbol') { return instance[service]; }
@@ -299,9 +310,9 @@ class TenYun {
 
   get [ACTION]() {
     /**
-     * @param {() => string[]} endpoint
-     * @param {string} action
-     * @return {(data?: object|Buffer, config?: import('axios').AxiosRequestConfig) => import('axios').AxiosPromise}
+     * @param {ServiceEndpoint} endpoint - Mapping of the service version
+     * @param {string} action - Mapping of the service actions
+     * @return {ServiceActionRequest} - The network request
      */
     return (endpoint, action) => {
       if (typeof action === 'symbol') { return endpoint[action]; }
@@ -331,8 +342,9 @@ class TenYun {
 
   get signer() {
     /**
-     * @param {import('crypto').BinaryLike} data
-     * @param {import('axios').AxiosRequestHeaders} headers
+     * @param {BinaryLike} data - The input data
+     * @param {AxiosRequestHeaders} headers - The request headers
+     * @returns {BinaryLike} - The input data
      */
     return (data, headers = {}) => {
       Reflect.set(headers, X_TC_TIMESTAMP, headers[X_TC_TIMESTAMP] || timstamp());
@@ -374,8 +386,9 @@ class TenYun {
 
   get verifier() {
     /**
-     * @param {object|Buffer} data
-     * @param {import('axios').AxiosResponseHeaders} headers
+     * @param {object|Buffer} data - The response data
+     * @param {AxiosResponseHeaders} headers - The response header
+     * @returns {object|Buffer} - The response data, only contains `$.Response` paths
      */
     return (data, headers = {}) => {
       if (typeof data === 'object' && data !== null) {
@@ -395,7 +408,7 @@ class TenYun {
   }
 
   /**
-   * @returns {import('axios').AxiosInstance}
+   * @returns {AxiosInstance} - The Axios intance
    */
   get client() { return this[CLIENT]; }
 }
