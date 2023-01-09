@@ -633,7 +633,7 @@ declare interface CreateConvertTaskApiRequest {
   ResourceName: string;
   /** 资源Id，通过UploadFiles获取 */
   ResourceId: string;
-  /** 操作者信息 */
+  /** 调用方用户信息，userId 必填 */
   Operator?: UserInfo;
   /** 应用号信息 */
   Agent?: Agent;
@@ -1178,6 +1178,8 @@ declare interface VerifyPdfResponse {
   VerifyResult: number;
   /** 验签结果详情,内部状态1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域；5-文件签名格式错误 */
   PdfVerifyResults: PdfVerifyResult[];
+  /** 验签序列号 */
+  VerifySerialNo: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

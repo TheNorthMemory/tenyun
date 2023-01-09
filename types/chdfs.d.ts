@@ -122,7 +122,7 @@ declare interface Tag {
 declare interface Transition {
   /** 触发时间（单位天） */
   Days: number;
-  /** 转换类型（1：归档；2：删除；3：低频） */
+  /** 转换类型（1：归档；2：删除；3：低频；4：深度归档；5：智能分层） */
   Type: number;
 }
 
@@ -164,6 +164,8 @@ declare interface CreateAccessRulesRequest {
 }
 
 declare interface CreateAccessRulesResponse {
+  /** 权限规则列表 */
+  AccessRules: AccessRule[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -342,6 +344,10 @@ declare interface DescribeFileSystemResponse {
   StandardCapacityUsed: number | null;
   /** 已使用COS低频存储容量（byte） */
   DegradeCapacityUsed: number | null;
+  /** 已使用COS深度归档存储容量（byte） */
+  DeepArchiveCapacityUsed: number | null;
+  /** 已使用COS智能分层存储容量（byte） */
+  IntelligentCapacityUsed: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

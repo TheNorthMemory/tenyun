@@ -408,7 +408,7 @@ class TenYun {
   }
 
   /**
-   * @returns {AxiosInstance} - The Axios intance
+   * @returns {AxiosInstance} - The Axios instance
    */
   get client() { return this[CLIENT]; }
 }

@@ -395,7 +395,7 @@ declare interface TemplatePolicy {
 }
 
 declare interface CreateTaskFromTemplateRequest {
-  /** 从经验库中查询到的经验模版ID */
+  /** 从经验库中查询到的经验模板ID */
   TemplateId: number;
   /** 演练的配置参数 */
   TaskConfig: TaskConfig;
@@ -403,7 +403,7 @@ declare interface CreateTaskFromTemplateRequest {
 
 declare interface CreateTaskFromTemplateResponse {
   /** 创建成功的演练ID */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

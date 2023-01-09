@@ -686,6 +686,8 @@ declare interface LoadBalancer {
   SecureGroups: string[] | null;
   /** 后端机器是否放通来自ELB的流量。 */
   LoadBalancerPassToTarget: boolean | null;
+  /** 负载均衡实例的IPv6地址 */
+  AddressIPv6: string | null;
 }
 
 /** 负载均衡器健康状态 */
@@ -1871,11 +1873,15 @@ declare interface CreateLoadBalancerRequest {
   Tags?: TagInfo[];
   /** 安全组。 */
   SecurityGroups?: string[];
+  /** 仅适用于公网负载均衡。IP版本，可取值：IPV4、IPv6FullChain，默认值 IPV4。说明：取值为IPv6FullChain，表示为IPv6版本。 */
+  AddressIPVersion?: string;
+  /** 在购买IPV6负载均衡实例的情况下，必须指定子网 ID, 此参数必填。 */
+  SubnetId?: string;
 }
 
 declare interface CreateLoadBalancerResponse {
   /** 由负载均衡实例ID组成的数组 */
-  LoadBalancerIds?: string[] | null;
+  LoadBalancerIds: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

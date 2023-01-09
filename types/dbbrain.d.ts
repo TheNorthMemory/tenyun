@@ -278,6 +278,12 @@ declare interface MySqlProcess {
 
 /** 实时会话统计详情。 */
 declare interface ProcessStatistic {
+  /** 会话详情数组。 */
+  Items: SessionItem[];
+  /** 总连接数。 */
+  AllConnSum: number;
+  /** 总活跃连接数。 */
+  ActiveConnSum: number;
 }
 
 /** 用户配置的信息 */
@@ -430,6 +436,16 @@ declare interface SecLogExportTaskInfo {
   TotalSize: number | null;
   /** 风险等级列表。0 无风险；1 低风险；2 中风险；3 高风险。 */
   DangerLevels: number[] | null;
+}
+
+/** 实时会话访问来源详情。 */
+declare interface SessionItem {
+  /** 访问来源。 */
+  Ip: string;
+  /** 当前访问来源活跃连接数 */
+  ActiveConn: string;
+  /** 当前访问来源总连接数 */
+  AllConn: number;
 }
 
 /** 慢日志来源地址详情。 */

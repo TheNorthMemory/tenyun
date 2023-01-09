@@ -544,6 +544,8 @@ declare interface TelCdrInfo {
   CustomRecordURL?: string | null;
   /** 备注 */
   Remark?: string | null;
+  /** 排队技能组名称 */
+  QueuedSkillGroupName?: string | null;
 }
 
 /** 变量 */

@@ -908,7 +908,7 @@ declare interface DetailDomain {
   HwPrivateAccess: HwPrivateAccess | null;
   /** 七牛云对象存储回源鉴权 */
   QnPrivateAccess: QnPrivateAccess | null;
-  /** HTTPS服务 */
+  /** HTTPS服务，缺省时默认开启 */
   HttpsBilling: HttpsBilling | null;
 }
 
@@ -1190,9 +1190,9 @@ declare interface Https {
   TlsVersion?: string[] | null;
 }
 
-/** 支持 https 请求开关，若关闭，下发配置拦截https请求 */
+/** HTTPS服务，若关闭，下发配置拦截https请求，开启时会产生计费 */
 declare interface HttpsBilling {
-  /** HTTPS服务 */
+  /** HTTPS服务，缺省时默认开启【会产生计费】 */
   Switch: string;
 }
 

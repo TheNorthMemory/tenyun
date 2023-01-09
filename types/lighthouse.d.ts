@@ -1023,15 +1023,15 @@ declare interface DescribeBlueprintsRequest {
   Offset?: number;
   /** 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
   Limit?: number;
-  /** 过滤器列表。blueprint-id按照【镜像 ID】进行过滤。类型：String必选：否blueprint-type按照【镜像类型】进行过滤。取值：APP_OS（应用镜像 ）；PURE_OS（系统镜像）；PRIVATE（自定义镜像）；SHARED（共享镜像）。类型：String必选：否platform-type按照【镜像平台类型】进行过滤。取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）。类型：String必选：否blueprint-name按照【镜像名称】进行过滤。类型：String必选：否blueprint-state按照【镜像状态】进行过滤。类型：String必选：否scene-id按照【使用场景Id】进行过滤。类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 BlueprintIds 和 Filters 。 */
+  /** 过滤器列表。blueprint-id按照【镜像 ID】进行过滤。类型：String必选：否blueprint-type按照【镜像类型】进行过滤。取值：APP_OS（应用镜像 ）；PURE_OS（系统镜像）；DOCKER（Docker容器镜像）；PRIVATE（自定义镜像）；SHARED（共享镜像）。类型：String必选：否platform-type按照【镜像平台类型】进行过滤。取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）。类型：String必选：否blueprint-name按照【镜像名称】进行过滤。类型：String必选：否blueprint-state按照【镜像状态】进行过滤。类型：String必选：否scene-id按照【使用场景Id】进行过滤。类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 BlueprintIds 和 Filters 。 */
   Filters?: Filter[];
 }
 
 declare interface DescribeBlueprintsResponse {
   /** 符合条件的镜像数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 镜像详细信息列表。 */
-  BlueprintSet: Blueprint[];
+  BlueprintSet?: Blueprint[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

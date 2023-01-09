@@ -264,6 +264,28 @@ declare interface TimeRange {
   After?: string;
 }
 
+declare interface ApplyChorusRequest {
+  /** 应用名称。 */
+  AppName: string;
+  /** 用户标识。 */
+  UserId: string;
+  /** 房间号。 */
+  RoomId: string;
+  /** 歌曲 Id。 */
+  MusicId: string;
+  /** 最大合唱人数，默认值为 8，最大值为 20。 */
+  MaxChorusNum?: number;
+  /** 合唱用户标识列表。 */
+  ChorusUserIds?: string[];
+}
+
+declare interface ApplyChorusResponse {
+  /** 合唱 Token。 */
+  ChorusToken: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BatchDescribeKTVMusicDetailsRequest {
   /** 应用名称。 */
   AppName: string;
@@ -503,6 +525,8 @@ declare interface SyncKTVRobotCommandResponse {
 /** {@link Yinsuda 音速达直播音乐版权引擎} */
 declare interface Yinsuda {
   (): Versions;
+  /** 申请合唱 {@link ApplyChorusRequest} {@link ApplyChorusResponse} */
+  ApplyChorus(data: ApplyChorusRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyChorusResponse>;
   /** 批量获取歌曲详情 {@link BatchDescribeKTVMusicDetailsRequest} {@link BatchDescribeKTVMusicDetailsResponse} */
   BatchDescribeKTVMusicDetails(data: BatchDescribeKTVMusicDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDescribeKTVMusicDetailsResponse>;
   /** 创建机器人 {@link CreateKTVRobotRequest} {@link CreateKTVRobotResponse} */
