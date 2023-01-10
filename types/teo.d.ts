@@ -2182,6 +2182,32 @@ declare interface DescribeContentQuotaResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDDoSAttackDataRequest {
+  /** 开始时间。 */
+  StartTime: string;
+  /** 结束时间。 */
+  EndTime: string;
+  /** 统计指标列表，取值有：ddos_attackMaxBandwidth：攻击带宽峰值；ddos_attackMaxPackageRate：攻击包速率峰值 ；ddos_attackBandwidth：攻击带宽曲线；ddos_attackPackageRate：攻击包速率曲线。 */
+  MetricNames: string[];
+  /** 站点集合，不填默认选择全部站点。 */
+  ZoneIds?: string[];
+  /** DDoS策略组ID列表，不填默认选择全部策略ID。 */
+  PolicyIds?: number[];
+  /** 查询时间粒度，取值有：min：1分钟；5min：5分钟；hour：1小时；day：1天。不填将根据开始时间与结束时间的间隔自动推算粒度，具体为：1小时范围内以min粒度查询，2天范围内以5min粒度查询，7天范围内以hour粒度查询，超过7天以day粒度查询。 */
+  Interval?: string;
+  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
+  Area?: string;
+}
+
+declare interface DescribeDDoSAttackDataResponse {
+  /** 查询结果的总条数。 */
+  TotalCount: number;
+  /** DDoS攻击数据内容列表。 */
+  Data: SecEntry[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDDoSAttackTopDataRequest {
   /** 开始时间。 */
   StartTime: string;
@@ -7537,6 +7563,8 @@ declare interface Teo {
   DescribeClientRuleList(data: DescribeClientRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientRuleListResponse>;
   /** 查询内容管理接口配额 {@link DescribeContentQuotaRequest} {@link DescribeContentQuotaResponse} */
   DescribeContentQuota(data: DescribeContentQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentQuotaResponse>;
+  /** 查询DDoS攻击时序数据 {@link DescribeDDoSAttackDataRequest} {@link DescribeDDoSAttackDataResponse} */
+  DescribeDDoSAttackData(data: DescribeDDoSAttackDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackDataResponse>;
   /** 查询DDoS攻击Top数据 {@link DescribeDDoSAttackTopDataRequest} {@link DescribeDDoSAttackTopDataResponse} */
   DescribeDDoSAttackTopData(data: DescribeDDoSAttackTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackTopDataResponse>;
   /** 查询默认证书列表 {@link DescribeDefaultCertificatesRequest} {@link DescribeDefaultCertificatesResponse} */

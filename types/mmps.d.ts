@@ -22,6 +22,12 @@ declare interface AppInfoItem {
   BehaviorTitle: string | null;
   /** 诊断风险项数量 */
   HighRiskCount: number | null;
+  /** 隐私申明文件名称 */
+  PrivacyTextName?: string | null;
+  /** 软件MD5 */
+  SoftwareMD5?: string | null;
+  /** 隐私文本MD5 */
+  PrivacyTextMD5?: string | null;
 }
 
 /** 应用隐私合规诊断任务数据 */
@@ -42,6 +48,8 @@ declare interface AppTaskData {
   StartTime: string;
   /** 任务完成时间(更新时间) */
   EndTime: string;
+  /** 联系人信息 */
+  ContactName?: string | null;
 }
 
 /** 翼扬诊断小程序报告数据 */

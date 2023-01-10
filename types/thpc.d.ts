@@ -14,6 +14,18 @@ declare interface CFSOption {
   StorageType?: string;
 }
 
+/** CFS存储选项概览信息。 */
+declare interface CFSOptionOverview {
+  /** 文件系统本地挂载路径。 */
+  LocalPath: string;
+  /** 文件系统远程挂载ip及路径。 */
+  RemotePath: string;
+  /** 文件系统协议类型。NFS 3.0。NFS 4.0。TURBO。 */
+  Protocol: string;
+  /** 文件系统存储类型，默认值SD；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。 */
+  StorageType: string;
+}
+
 /** 符合条件的集群活动信息。 */
 declare interface ClusterActivity {
   /** 集群ID。 */
@@ -118,6 +130,16 @@ declare interface ExpansionNodeConfig {
 
 /** 描述GooseFS挂载信息 */
 declare interface GooseFSOption {
+  /** 文件系统本地挂载路径。 */
+  LocalPath: string;
+  /** 文件系统远程挂载路径。 */
+  RemotePath: string;
+  /** 文件系统master的ip和端口。 */
+  Masters: string[];
+}
+
+/** GooseFS存储选项概览信息。 */
+declare interface GooseFSOptionOverview {
   /** 文件系统本地挂载路径。 */
   LocalPath: string;
   /** 文件系统远程挂载路径。 */
@@ -244,6 +266,14 @@ declare interface StorageOption {
   CFSOptions?: CFSOption[];
   /** 集群挂在GooseFS文件系统选项 */
   GooseFSOptions?: GooseFSOption[];
+}
+
+/** 集群存储选项概览信息。 */
+declare interface StorageOptionOverview {
+  /** CFS存储选项概览信息列表。 */
+  CFSOptions: CFSOptionOverview[];
+  /** GooseFS存储选项概览信息列表。 */
+  GooseFSOptions: GooseFSOptionOverview[];
 }
 
 /** 描述了操作系统所在块设备即系统盘的信息 */
@@ -458,6 +488,8 @@ declare interface DescribeClusterStorageOptionRequest {
 }
 
 declare interface DescribeClusterStorageOptionResponse {
+  /** 集群存储选项信息概览。 */
+  StorageOption?: StorageOptionOverview;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

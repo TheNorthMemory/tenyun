@@ -99,11 +99,11 @@ declare interface CreateRoomRequest {
   SubType: string;
   /** 老师ID。通过[注册用户]接口获取的UserId。 */
   TeacherId?: string;
-  /** 进入房间时是否自动连麦。可以有以下取值：0 不自动连麦（默认值）1 自动连麦 */
+  /** 进入课堂时是否自动连麦。可以有以下取值：0 不自动连麦（需要手动申请上麦，默认值）1 自动连麦 */
   AutoMic?: number;
   /** 高音质模式。可以有以下取值：0 不开启高音质（默认值）1 开启高音质 */
   AudioQuality?: number;
-  /** 禁止录制。可以有以下取值：0 不禁止录制（默认值）1 禁止录制 */
+  /** 上课后是否禁止自动录制。可以有以下取值：0 不禁止录制（自动开启录制，默认值）1 禁止录制注：如果该配置取值为0，录制将从上课后开始，课堂结束后停止。 */
   DisableRecord?: number;
   /** 助教Id列表。通过[注册用户]接口获取的UserId。 */
   Assistants?: string[];
@@ -156,13 +156,13 @@ declare interface DescribeRoomResponse {
   Resolution?: number;
   /** 最大连麦人数（不包括老师）。取值范围[0, 16] */
   MaxMicNumber?: number;
-  /** 进入房间时是否自动连麦。可以有以下取值：0 不自动连麦（默认值）1 自动连麦 */
+  /** 进入课堂时是否自动连麦。可以有以下取值：0 不自动连麦（需要手动申请上麦，默认值）1 自动连麦 */
   AutoMic?: number;
   /** 高音质模式。可以有以下取值：0 不开启高音质（默认值）1 开启高音质 */
   AudioQuality?: number;
   /** 房间子类型，可以有以下取值：videodoc 文档+视频video 纯视频coteaching 双师 */
   SubType?: string;
-  /** 禁止录制。可以有以下取值：0 不禁止录制（默认值）1 禁止录制 */
+  /** 上课后是否禁止自动录制。可以有以下取值：0 不禁止录制（自动开启录制，默认值）1 禁止录制注：如果该配置取值为0，录制将从上课后开始，课堂结束后停止。 */
   DisableRecord?: number;
   /** 助教Id列表。 */
   Assistants?: string[] | null;
@@ -311,7 +311,7 @@ declare interface Lcic {
   CreateSupervisor(data?: CreateSupervisorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSupervisorResponse>;
   /** 删除房间 {@link DeleteRoomRequest} {@link DeleteRoomResponse} */
   DeleteRoom(data: DeleteRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoomResponse>;
-  /** 房间信息 {@link DescribeRoomRequest} {@link DescribeRoomResponse} */
+  /** 获取房间信息 {@link DescribeRoomRequest} {@link DescribeRoomResponse} */
   DescribeRoom(data: DescribeRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomResponse>;
   /** 获取房间统计信息 {@link DescribeRoomStatisticsRequest} {@link DescribeRoomStatisticsResponse} */
   DescribeRoomStatistics(data: DescribeRoomStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomStatisticsResponse>;

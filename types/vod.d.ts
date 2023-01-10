@@ -1748,6 +1748,14 @@ declare interface DrmStreamingsInfoForUpdate {
   FairPlayDefinition?: number;
 }
 
+/** 画面动态范围信息。 */
+declare interface DynamicRangeInfo {
+  /** 画面动态范围信息。可取值：SDR：Standard Dynamic Range 标准动态范围；HDR：High Dynamic Range 高动态范围。 */
+  Type?: string;
+  /** 高动态范围类型，当 Type 为 HDR 时有效。目前支持的可取值：hdr10：表示 hdr10 标准；hlg：表示 hlg 标准。 */
+  HDRType?: string;
+}
+
 /** 编辑点播视频文件信息 */
 declare interface EditMediaFileInfo {
   /** 视频的 ID。 */
@@ -2992,6 +3000,8 @@ declare interface MediaVideoStreamItem {
   Fps?: number;
   /** 编码标签，仅当 Codec 为 hevc 时有效。 */
   CodecTag?: string;
+  /** 画面动态范围信息。注意：在 2023-01-10T00:00:00Z 后处理的转码文件，此字段有效。 */
+  DynamicRangeInfo: DynamicRangeInfo;
 }
 
 /** 视频处理任务中的马赛克参数类型 */
@@ -3320,7 +3330,7 @@ declare interface PornOcrReviewTemplateInfoForUpdate {
 declare interface ProcedureReviewAudioVideoTaskInput {
   /** 审核模板。 */
   Definition: number;
-  /** 审核的内容，可选值：Media：原始音视频。不填或填空数组时，默认为审核 Media。 */
+  /** 审核的内容，可选值：Media：原始音视频；Cover：封面。不填或填空数组时，默认为审核 Media。 */
   ReviewContents?: string[];
 }
 

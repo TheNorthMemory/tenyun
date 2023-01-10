@@ -6033,11 +6033,13 @@ declare interface DescribeVersionStatisticsRequest {
 
 declare interface DescribeVersionStatisticsResponse {
   /** 基础版数量 */
-  BasicVersionNum: number;
+  BasicVersionNum?: number;
   /** 专业版数量 */
-  ProVersionNum: number;
+  ProVersionNum?: number;
   /** 旗舰版数量 */
-  UltimateVersionNum: number;
+  UltimateVersionNum?: number;
+  /** 普惠版数量 */
+  GeneralVersionNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

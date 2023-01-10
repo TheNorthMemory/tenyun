@@ -80,6 +80,8 @@ declare interface ApiDetailInfo {
   ApiType: string | null;
   /** Api描述信息 */
   Description: string | null;
+  /** API路径匹配类型。normal：普通API；wildcard：通配API。 */
+  ApiMatchType: string | null;
 }
 
 /** API分组信息 */
@@ -792,6 +794,18 @@ declare interface DeliveryConfigBindGroups {
   Content: DeliveryConfigBindGroup[] | null;
 }
 
+/** kafka投递的topic和path的信息 */
+declare interface DeliveryKafkaInfo {
+  /** 投递kafka的topic */
+  Topic?: string | null;
+  /** 采集日志的path */
+  Path?: string[] | null;
+  /** default，默认换行符分行time，按时间分行custom, 选了custom那么CustomRule就要填入具体的自定义值 */
+  LineRule?: string | null;
+  /** 自定义的分行值 */
+  CustomRule?: string | null;
+}
+
 /** 环境变量 */
 declare interface Env {
   /** 环境变量名称 */
@@ -1470,6 +1484,18 @@ declare interface KafkaDeliveryConfig {
   Topic: string | null;
   /** 换行规则 */
   LineRule: string | null;
+  /** 是否需要认证 */
+  EnableAuth: boolean | null;
+  /** 用户名 */
+  Username: string | null;
+  /** 密码 */
+  Password: string | null;
+  /** 投递的topic和path */
+  KafkaInfos: DeliveryKafkaInfo[] | null;
+  /** 是否应用单行规则 */
+  EnableGlobalLineRule: boolean | null;
+  /** 自定义分行规则 */
+  CustomRule: string | null;
 }
 
 /** 泳道部署组 */

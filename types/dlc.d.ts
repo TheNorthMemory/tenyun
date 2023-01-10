@@ -2070,6 +2070,20 @@ declare interface ReportHeartbeatMetaDataResponse {
   RequestId?: string;
 }
 
+declare interface SuspendResumeDataEngineRequest {
+  /** 虚拟集群名称 */
+  DataEngineName: string;
+  /** 操作类型 suspend/resume */
+  Operate: string;
+}
+
+declare interface SuspendResumeDataEngineResponse {
+  /** 虚拟集群详细信息 */
+  DataEngineName: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnbindWorkGroupsFromUserRequest {
   /** 解绑的工作组Id和用户Id的关联关系 */
   AddInfo: WorkGroupIdSetOfUserId;
@@ -2215,6 +2229,8 @@ declare interface Dlc {
   ModifyWorkGroup(data: ModifyWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkGroupResponse>;
   /** 上报元数据心跳 {@link ReportHeartbeatMetaDataRequest} {@link ReportHeartbeatMetaDataResponse} */
   ReportHeartbeatMetaData(data?: ReportHeartbeatMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<ReportHeartbeatMetaDataResponse>;
+  /** 暂停或恢复数据引擎 {@link SuspendResumeDataEngineRequest} {@link SuspendResumeDataEngineResponse} */
+  SuspendResumeDataEngine(data: SuspendResumeDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<SuspendResumeDataEngineResponse>;
   /** 解绑用户上的用户组 {@link UnbindWorkGroupsFromUserRequest} {@link UnbindWorkGroupsFromUserResponse} */
   UnbindWorkGroupsFromUser(data: UnbindWorkGroupsFromUserRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindWorkGroupsFromUserResponse>;
   /** 元数据解锁 {@link UnlockMetaDataRequest} {@link UnlockMetaDataResponse} */
