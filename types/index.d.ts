@@ -228,6 +228,8 @@ import Yunjing, { Versions as YunjingVersions } from "./yunjing";
 import Yunsou, { Versions as YunsouVersions } from "./yunsou";
 import Zj, { Versions as ZjVersions } from "./zj";
 
+export declare type LANGUAGES = ['zh-CN', 'en-US'];
+
 export declare type SERVICE_VERSIONS = {
   aa: AaVersions,
   aai: AaiVersions,
