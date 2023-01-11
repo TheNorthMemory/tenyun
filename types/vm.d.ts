@@ -431,7 +431,7 @@ declare interface DescribeTasksResponse {
 }
 
 declare namespace V20201229 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2020-12-29' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2020-12-29' } }
 
   /** 音频审核输出参数 */
   interface AudioResult {
@@ -843,7 +843,7 @@ declare namespace V20201229 {
 }
 
 declare namespace V20200709 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2020-07-09' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2020-07-09' } }
 
   /** 音频输出参数 */
   interface AudioResult {

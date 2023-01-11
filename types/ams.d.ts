@@ -421,7 +421,7 @@ declare interface DescribeTasksResponse {
 }
 
 declare namespace V20200608 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2020-06-08' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2020-06-08' } }
 
   /** 机器审核详情列表数据项 */
   interface AmsDetailInfo {

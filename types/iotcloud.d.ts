@@ -1695,7 +1695,7 @@ declare interface UploadFirmwareResponse {
 }
 
 declare namespace V20180614 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2018-06-14' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2018-06-14' } }
 
   /** 设备属性 */
   interface Attribute {

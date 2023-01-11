@@ -587,7 +587,7 @@ declare interface SetAutoScalingConfigurationResponse {
 }
 
 declare namespace V20211109 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2021-11-09' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2021-11-09' } }
 
   /** 描述CFS文件系统版本和挂载信息 */
   interface CFSOption {

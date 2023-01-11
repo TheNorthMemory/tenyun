@@ -31,7 +31,7 @@ declare interface DescribeTokenResponse {
 }
 
 declare namespace V20200924 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2020-09-24' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2020-09-24' } }
 
   /** agent安装脚本串 */
   interface AgentShell {

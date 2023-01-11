@@ -193,7 +193,7 @@ declare interface RemoveRoomPlayerResponse {
 }
 
 declare namespace V20190929 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2019-09-29' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2019-09-29' } }
 
   interface DismissRoomRequest {
     /** 表示游戏资源唯一 ID, 由后台自动分配, 无法修改。 */

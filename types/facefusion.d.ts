@@ -119,7 +119,7 @@ declare interface FuseFaceResponse {
 }
 
 declare namespace V20181201 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2018-12-01' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2018-12-01' } }
 
   /** 人脸信息 */
   interface FaceInfo {

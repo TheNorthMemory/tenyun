@@ -2241,7 +2241,7 @@ declare interface WakeUpDeviceResponse {
 }
 
 declare namespace V20201215 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2020-12-15' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2020-12-15' } }
 
   /** AI模型申请信息 */
   interface AIModelApplication {
@@ -4141,7 +4141,7 @@ declare namespace V20201215 {
 }
 
 declare namespace V20191126 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2019-11-26' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2019-11-26' } }
 
   /** 终端用户绑定的设备 */
   interface BindDevInfo {

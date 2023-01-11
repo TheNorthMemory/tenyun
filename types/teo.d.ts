@@ -3333,7 +3333,7 @@ declare interface UpdateOriginProtectionIPWhitelistResponse {
 }
 
 declare namespace V20220106 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2022-01-06' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2022-01-06' } }
 
   /** 精准防护条件 */
   interface ACLCondition {

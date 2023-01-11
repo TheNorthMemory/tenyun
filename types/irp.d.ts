@@ -233,7 +233,7 @@ declare interface ReportFeedUserResponse {
 }
 
 declare namespace V20220324 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2022-03-24' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2022-03-24' } }
 
   /** 作者信息 */
   interface AuthorInfo {

@@ -1147,7 +1147,7 @@ declare interface VerifyPersonResponse {
 }
 
 declare namespace V20180301 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2018-03-01' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2018-03-01' } }
 
   /** 人脸属性信息 */
   interface AttributeItem {

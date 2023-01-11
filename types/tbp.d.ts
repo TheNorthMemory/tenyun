@@ -99,7 +99,7 @@ declare interface TextResetResponse {
 }
 
 declare namespace V20190311 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2019-03-11' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2019-03-11' } }
 
   /** 槽位信息 */
   interface SlotInfo {

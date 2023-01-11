@@ -1581,7 +1581,7 @@ declare interface StopSyncJobResponse {
 }
 
 declare namespace V20180330 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2018-03-30' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2018-03-30' } }
 
   /** 抽样检验时的抽样参数 */
   interface ConsistencyParams {

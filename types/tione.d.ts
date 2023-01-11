@@ -2551,7 +2551,7 @@ declare interface StopTrainingTaskResponse {
 }
 
 declare namespace V20191022 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2019-10-22' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2019-10-22' } }
 
   /** 算法配置 */
   interface AlgorithmSpecification {

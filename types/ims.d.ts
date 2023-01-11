@@ -241,7 +241,7 @@ declare interface ImageModerationResponse {
 }
 
 declare namespace V20200713 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2020-07-13' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2020-07-13' } }
 
   /** Device结果 */
   interface Device {

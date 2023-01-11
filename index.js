@@ -21,6 +21,7 @@ const X_TC_REGION = 'X-TC-Region';
 const X_TC_TIMESTAMP = 'X-TC-Timestamp';
 const X_TC_TOKEN = 'X-TC-Token';
 const X_TC_VERSION = 'X-TC-Version';
+const X_TC_LANGUAGE = 'X-TC-Language';
 
 /**
  * @typedef {import('crypto').BinaryLike} BinaryLike
@@ -32,6 +33,8 @@ const X_TC_VERSION = 'X-TC-Version';
  * @typedef {() => string[]} ServiceEndpoint
  * @typedef {(data?: object|Buffer, config?: AxiosRequestConfig) => AxiosPromise} ServiceActionRequest
 */
+
+export const LANGUAGES = ['zh-CN', 'en-US'];
 
 export const SERVICE_VERSIONS = {
   aa: ['2020-02-24'],
@@ -284,7 +287,7 @@ class TenYun {
       value: axios.create({
         transformRequest: [].concat(axios.defaults.transformRequest, this.signer),
         transformResponse: [].concat(axios.defaults.transformResponse, this.verifier),
-        headers: { ...(Token ? { [X_TC_TOKEN]: Token } : 0), ...(Region ? { [X_TC_REGION]: Region } : 0) },
+        headers: { [X_TC_LANGUAGE]: LANGUAGES.slice().shift(), ...(Token ? { [X_TC_TOKEN]: Token } : 0), ...(Region ? { [X_TC_REGION]: Region } : 0) },
       }),
     });
 

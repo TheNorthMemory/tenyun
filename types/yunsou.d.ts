@@ -139,7 +139,7 @@ declare interface DataSearchResponse {
 }
 
 declare namespace V20180504 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2018-05-04' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2018-05-04' } }
 
   interface DataManipulationRequest {
     /** 操作类型，add或del */

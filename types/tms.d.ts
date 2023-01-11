@@ -129,7 +129,7 @@ declare interface TextModerationResponse {
 }
 
 declare namespace V20200713 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2020-07-13' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2020-07-13' } }
 
   /** 文本返回的详细结果 */
   interface DetailResults {

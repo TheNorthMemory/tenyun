@@ -479,7 +479,7 @@ declare interface UpdateOrganizationNodeResponse {
 }
 
 declare namespace V20181225 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2018-12-25' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2018-12-25' } }
 
   /** 企业组织邀请 */
   interface OrgInvitation {

@@ -497,7 +497,7 @@ declare interface UploadMedicalFileResponse {
 }
 
 declare namespace V20201210 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2020-12-10' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2020-12-10' } }
 
   /** 结构化对比指标（准确率/召回率）数据 */
   interface CompareMetricsData {

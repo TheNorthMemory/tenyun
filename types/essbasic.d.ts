@@ -1351,7 +1351,7 @@ declare interface UploadFilesResponse {
 }
 
 declare namespace V20201222 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2020-12-22' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2020-12-22' } }
 
   /** 此结构体 (Address) 用于描述住址或通讯地址。 */
   interface Address {

@@ -547,7 +547,7 @@ declare interface SmsPackagesStatisticsResponse {
 }
 
 declare namespace V20190711 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2019-07-11' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2019-07-11' } }
 
   /** 添加签名响应 */
   interface AddSignStatus {

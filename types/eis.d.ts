@@ -227,7 +227,7 @@ declare interface ListRuntimesMCResponse {
 }
 
 declare namespace V20200715 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2020-07-15' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2020-07-15' } }
 
   /** 连接器操作 */
   interface EisConnectionOperation {

@@ -1557,7 +1557,7 @@ declare interface VerifyUserAccountResponse {
 }
 
 declare namespace V20191016 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2019-10-16' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2019-10-16' } }
 
   /** 联系人contact描述。 */
   interface ContactItem {

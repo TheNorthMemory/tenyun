@@ -257,7 +257,7 @@ declare interface VerifyEvidenceHashResponse {
 }
 
 declare namespace V20210303 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2021-03-03' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2021-03-03' } }
 
   interface CreateAudioDepositRequest {
     /** 存证名称(长度最大30) */

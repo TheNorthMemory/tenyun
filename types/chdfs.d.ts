@@ -523,7 +523,7 @@ declare interface ModifyResourceTagsResponse {
 }
 
 declare namespace V20190718 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2019-07-18' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2019-07-18' } }
 
   /** 权限组 */
   interface AccessGroup {

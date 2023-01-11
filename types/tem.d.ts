@@ -2067,7 +2067,7 @@ declare interface StopApplicationResponse {
 }
 
 declare namespace V20201221 {
-  interface VersionHeader { headers: { 'X-TC-Version': '2020-12-21' } }
+  type VersionHeader = { headers: { 'X-TC-Version': '2020-12-21' } }
 
   /** Cos token */
   interface CosToken {
