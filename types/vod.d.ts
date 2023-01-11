@@ -4178,7 +4178,7 @@ declare interface TaskSimpleInfo {
   Status: string;
   /** 视频 ID。 */
   FileId: string;
-  /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务ReduceMediaBitrate：降码率任务WechatDistribute：微信发布任务。兼容 2017 版的任务类型：Transcode：视频转码任务；SnapshotByTimeOffset：视频截图任务；Concat：视频拼接任务；Clip：视频剪辑任务；ImageSprites：截取雪碧图任务。 */
+  /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；ReduceMediaBitrate：降码率任务；WechatDistribute：微信发布任务；ReviewAudioVideo：音视频审核任务。兼容 2017 版的任务类型：Transcode：视频转码任务；SnapshotByTimeOffset：视频截图任务；Concat：视频拼接任务；Clip：视频剪辑任务；ImageSprites：截取雪碧图任务。 */
   TaskType: string;
   /** 任务创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   CreateTime: string;
@@ -7525,15 +7525,15 @@ declare interface SearchMediaRequest {
   SubAppId?: number;
   /** 文件 ID 集合，匹配集合中的任意元素。数组长度限制：10。单个 ID 长度限制：40个字符。 */
   FileIds?: string[];
-  /** 文件名集合，模糊匹配媒体文件的文件名，匹配度越高，排序越优先。单个文件名长度限制：40个字符。数组长度限制：10。 */
+  /** 文件名集合，模糊匹配媒体文件的文件名，匹配度越高，排序越优先。单个文件名长度限制：100个字符。数组长度限制：10。 */
   Names?: string[];
-  /** 文件名前缀，前缀匹配媒体文件的文件名。单个文件名前缀长度限制：20个字符。数组长度限制：10。 */
+  /** 文件名前缀，前缀匹配媒体文件的文件名。单个文件名前缀长度限制：100个字符。数组长度限制：10。 */
   NamePrefixes?: string[];
   /** 文件描述集合，模糊匹配媒体文件的描述，匹配度越高，排序越优先。单个描述长度限制：100个字符。数组长度限制：10。 */
   Descriptions?: string[];
   /** 分类 ID 集合，匹配集合指定 ID 的分类及其所有子类。数组长度限制：10。 */
   ClassIds?: number[];
-  /** 标签集合，匹配集合中任意元素。单个标签长度限制：16个字符。数组长度限制：10。 */
+  /** 标签集合，匹配集合中任意元素。单个标签长度限制：32个字符。数组长度限制：16。 */
   Tags?: string[];
   /** 文件类型。匹配集合中的任意元素：Video: 视频文件Audio: 音频文件Image: 图片文件 */
   Categories?: string[];

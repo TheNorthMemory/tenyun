@@ -128,6 +128,28 @@ declare interface ExpansionNodeConfig {
   VirtualPrivateCloud?: VirtualPrivateCloud;
 }
 
+/** 扩容节点配置信息概览。 */
+declare interface ExpansionNodeConfigOverview {
+  /** 节点机型。 */
+  InstanceType?: string | null;
+  /** 扩容实例所在的位置。 */
+  Placement?: Placement | null;
+  /** 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。 */
+  InstanceChargeType?: string | null;
+  /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。 */
+  InstanceChargePrepaid?: InstanceChargePrepaid | null;
+  /** 私有网络相关信息配置。 */
+  VirtualPrivateCloud?: VirtualPrivateCloud | null;
+  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。 */
+  ImageId?: string | null;
+  /** 公网带宽相关信息设置。 */
+  InternetAccessible?: InternetAccessible | null;
+  /** 节点系统盘配置信息。 */
+  SystemDisk?: SystemDisk | null;
+  /** 节点数据盘配置信息。 */
+  DataDisks?: DataDisk[] | null;
+}
+
 /** 描述GooseFS挂载信息 */
 declare interface GooseFSOption {
   /** 文件系统本地挂载路径。 */
@@ -258,6 +280,22 @@ declare interface QueueConfig {
   InternetAccessible?: InternetAccessible;
   /** 扩容节点配置信息。 */
   ExpansionNodeConfigs?: ExpansionNodeConfig[];
+}
+
+/** 扩容队列配置概览。 */
+declare interface QueueConfigOverview {
+  /** 队列名称。 */
+  QueueName?: string;
+  /** 队列中弹性节点数量最小值。取值范围0～200。 */
+  MinSize?: number;
+  /** 队列中弹性节点数量最大值。取值范围0～200。 */
+  MaxSize?: number;
+  /** 是否开启自动扩容。 */
+  EnableAutoExpansion?: boolean;
+  /** 是否开启自动缩容。 */
+  EnableAutoShrink?: boolean;
+  /** 扩容节点配置信息。 */
+  ExpansionNodeConfigs?: ExpansionNodeConfigOverview[];
 }
 
 /** 描述集群文件系统选项 */
@@ -460,6 +498,24 @@ declare interface DeleteNodesRequest {
 }
 
 declare interface DeleteNodesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAutoScalingConfigurationRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+}
+
+declare interface DescribeAutoScalingConfigurationResponse {
+  /** 集群ID。 */
+  ClusterId?: string;
+  /** 任务连续等待时间，队列的任务处于连续等待的时间。单位秒。 */
+  ExpansionBusyTime?: number;
+  /** 节点连续空闲（未运行作业）时间，一个节点连续处于空闲状态时间。 */
+  ShrinkIdleTime?: number;
+  /** 扩容队列配置概览列表。 */
+  QueueConfigs?: QueueConfigOverview[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -841,6 +897,8 @@ declare interface Thpc {
   DeleteClusterStorageOption(data: DeleteClusterStorageOptionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterStorageOptionResponse>;
   /** 删除节点 {@link DeleteNodesRequest} {@link DeleteNodesResponse} */
   DeleteNodes(data: DeleteNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNodesResponse>;
+  /** 查询弹性伸缩配置信息 {@link DescribeAutoScalingConfigurationRequest} {@link DescribeAutoScalingConfigurationResponse} */
+  DescribeAutoScalingConfiguration(data: DescribeAutoScalingConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingConfigurationResponse>;
   /** 查询集群活动历史记录 {@link DescribeClusterActivitiesRequest} {@link DescribeClusterActivitiesResponse} */
   DescribeClusterActivities(data: DescribeClusterActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterActivitiesResponse>;
   /** 查询集群存储选项 {@link DescribeClusterStorageOptionRequest} {@link DescribeClusterStorageOptionResponse} */

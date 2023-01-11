@@ -164,6 +164,32 @@ declare interface CreateAppScanTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeChannelTaskReportUrlRequest {
+  /** 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android), 3:app漏洞扫描; */
+  Source: number;
+  /** 应用平台, 0:android, 1: iOS，2:小程序 */
+  Platform: number;
+  /** 任务id */
+  TaskID: string;
+  /** 任务类型, 0:基础版, 1:专家版, 2:本地化 */
+  TaskType: number;
+  /** 报告类型, 0:诊断报告, 1:堆栈报告, 2:视频证据(预留), 3:报告json结果 */
+  ReportType: number;
+  /** 子渠道APP MD5值 */
+  AppMD5: string;
+}
+
+declare interface DescribeChannelTaskReportUrlResponse {
+  /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
+  Result?: number;
+  /** 诊断报告/堆栈信息/报告json结果下载链接 */
+  ReportUrl?: string;
+  /** 诊断报告/堆栈/报告json结果的名称 */
+  ReportTitle?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFileTicketRequest {
   /** 任务来源, 0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android), 3:app漏洞扫描; */
   Source: number;
@@ -293,6 +319,8 @@ declare interface Acp {
   CreateAppScanTask(data: CreateAppScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppScanTaskResponse>;
   /** 应用合规隐私诊断重试任务 {@link CreateAppScanTaskRepeatRequest} {@link CreateAppScanTaskRepeatResponse} */
   CreateAppScanTaskRepeat(data: CreateAppScanTaskRepeatRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppScanTaskRepeatResponse>;
+  /** 获取子渠道应用合规隐私诊断任务报告url {@link DescribeChannelTaskReportUrlRequest} {@link DescribeChannelTaskReportUrlResponse} */
+  DescribeChannelTaskReportUrl(data: DescribeChannelTaskReportUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelTaskReportUrlResponse>;
   /** 获取应用合规文件上传凭证接口 {@link DescribeFileTicketRequest} {@link DescribeFileTicketResponse} */
   DescribeFileTicket(data: DescribeFileTicketRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileTicketResponse>;
   /** 查询应用合规资源使用情况 {@link DescribeResourceUsageInfoRequest} {@link DescribeResourceUsageInfoResponse} */

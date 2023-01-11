@@ -1075,6 +1075,8 @@ declare interface DescribeSnapshotsRequest {
   TableName?: string;
   /** 快照名称 */
   SnapshotName?: string;
+  /** 批量拉取快照的表格列表 */
+  SelectedTables?: SelectedTableInfoNew[];
 }
 
 declare interface DescribeSnapshotsResponse {
@@ -1239,9 +1241,9 @@ declare interface EnableRestProxyRequest {
 
 declare interface EnableRestProxyResponse {
   /** RestProxy的状态，0为关闭，1为开启中，2为开启，3为关闭中 */
-  RestProxyStatus?: number;
+  RestProxyStatus: number;
   /** TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务 */
-  TaskId?: string;
+  TaskId: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

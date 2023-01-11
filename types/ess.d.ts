@@ -787,6 +787,8 @@ declare interface CreateFlowRequest {
   CallbackUrl?: string;
   /** 应用相关信息 */
   Agent?: Agent;
+  /** 被抄送人的信息列表。注: 此功能为白名单功能，若有需要，请联系电子签客服开白使用。 */
+  CcInfos?: CcInfo[];
 }
 
 declare interface CreateFlowResponse {
