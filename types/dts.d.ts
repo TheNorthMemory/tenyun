@@ -1497,9 +1497,13 @@ declare interface SkipCheckItemRequest {
   JobId: string;
   /** 需要跳过校验项的步骤id，需要通过DescribeMigrationCheckJob接口返回StepInfo[i].StepId字段获取，例如：["OptimizeCheck"] */
   StepIds: string[];
+  /** 当出现外键依赖检查导致校验不通过时、可以通过该字段选择是否迁移外键依赖，当StepIds包含ConstraintCheck且该字段值为shield时表示不迁移外键依赖、当StepIds包含ConstraintCheck且值为migrate时表示迁移外键依赖 */
+  ForeignKeyFlag?: string;
 }
 
 declare interface SkipCheckItemResponse {
+  /** 跳过的提示信息 */
+  Message?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

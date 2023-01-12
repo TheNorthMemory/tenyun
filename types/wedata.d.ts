@@ -178,6 +178,8 @@ declare interface CompareResultItem {
 declare interface CompareRule {
   /** 比较条件列表 */
   Items?: CompareRuleItem[] | null;
+  /** 周期性模板默认周期，单位秒 */
+  CycleStep?: number | null;
 }
 
 /** 比较条件 */

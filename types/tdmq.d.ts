@@ -1311,7 +1311,7 @@ declare interface CreateRocketMQTopicRequest {
   Topic: string;
   /** 主题所在的命名空间，目前支持在单个命名空间下创建主题 */
   Namespaces: string[];
-  /** 主题类型，可选值为Normal, GlobalOrder, PartitionedOrder */
+  /** 主题类型，可选值为Normal, PartitionedOrder, Transaction, DelayScheduled。 */
   Type: string;
   /** 集群ID */
   ClusterId: string;

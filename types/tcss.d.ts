@@ -582,6 +582,8 @@ declare interface ComplianceAffectedAsset {
   ImageTag: string | null;
   /** 检查项验证信息 */
   VerifyInfo: string | null;
+  /** 主机实例id */
+  InstanceId: string | null;
 }
 
 /** 表示一项资产的详情。 */
@@ -638,6 +640,8 @@ declare interface ComplianceAssetInfo {
   LastCheckTime: string | null;
   /** 检测结果：RESULT_FAILED: 未通过。RESULT_PASSED: 通过。 */
   CheckResult: string | null;
+  /** 主机节点的实例id */
+  InstanceId: string | null;
 }
 
 /** 表示一条检测项的信息。 */

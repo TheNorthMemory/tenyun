@@ -184,7 +184,7 @@ declare interface Filter {
   Values?: string[];
 }
 
-/** 用户进出房间信息 */
+/** 房间内的事件 */
 declare interface InOutTimeInfo {
   /** 进入房间时间 */
   StartTime: number;
@@ -244,6 +244,8 @@ declare interface RoomUser {
   Uins: number[] | null;
   /** 字符串房间id */
   StrRoomId: string | null;
+  /** 房间里用户字符串uin列表 */
+  StrUins?: string[] | null;
 }
 
 /** 语音检测详情 */
@@ -645,9 +647,9 @@ declare interface DescribeUserInAndOutTimeRequest {
 
 declare interface DescribeUserInAndOutTimeResponse {
   /** 用户在房间得进出时间列表 */
-  InOutList: InOutTimeInfo[];
+  InOutList?: InOutTimeInfo[];
   /** 用户在房间中总时长 */
-  Duration: number;
+  Duration?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

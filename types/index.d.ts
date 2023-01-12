@@ -228,7 +228,7 @@ import Yunjing, { Versions as YunjingVersions } from "./yunjing";
 import Yunsou, { Versions as YunsouVersions } from "./yunsou";
 import Zj, { Versions as ZjVersions } from "./zj";
 
-export declare type LANGUAGES = ['zh-CN', 'en-US'];
+export declare type LANGUAGES = ["zh-CN", "en-US"];
 
 export declare type SERVICE_VERSIONS = {
   aa: AaVersions,
@@ -524,7 +524,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   billing: Billing,
   /** {@link Bizlive 商业直播} */
   bizlive: Bizlive,
-  /** {@link Bm 黑石物理服务器1.0} */
+  /** {@link Bm 黑石物理服务器CPM} */
   bm: Bm,
   /** {@link Bma 品牌经营管家} */
   bma: Bma,

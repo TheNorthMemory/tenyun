@@ -122,6 +122,20 @@ declare interface DownloadFlowInfo {
   FlowIdList: string[];
 }
 
+/** 企业扩展服务授权信息 */
+declare interface ExtentServiceAuthInfo {
+  /** 扩展服务类型 AUTO_SIGN 企业静默签（自动签署） OVERSEA_SIGN 企业与港澳台居民*签署合同 MOBILE_CHECK_APPROVER 使用手机号验证签署方身份 PAGING_SEAL 骑缝章 DOWNLOAD_FLOW 授权渠道下载合同 */
+  Type?: string;
+  /** 扩展服务名称 */
+  Name?: string;
+  /** 服务状态 ENABLE 开启 DISABLE 关闭 */
+  Status?: string;
+  /** 最近操作人openid（经办人openid） */
+  OperatorOpenId?: string | null;
+  /** 最近操作时间 */
+  OperateOn?: number | null;
+}
+
 /** 此结构体 (Filter) 用于描述查询过滤条件。 */
 declare interface Filter {
   /** 查询过滤条件的Key */
@@ -1114,6 +1128,18 @@ declare interface DescribeChannelFlowEvidenceReportResponse {
   RequestId?: string;
 }
 
+declare interface DescribeExtendedServiceAuthInfoRequest {
+  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填 */
+  Agent: Agent;
+}
+
+declare interface DescribeExtendedServiceAuthInfoResponse {
+  /** 企业扩展服务授权信息 */
+  AuthInfo?: ExtentServiceAuthInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFlowDetailInfoRequest {
   /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
@@ -1234,6 +1260,22 @@ declare interface GetDownloadFlowUrlRequest {
 declare interface GetDownloadFlowUrlResponse {
   /** 合同（流程）下载地址 */
   DownLoadUrl: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyExtendedServiceRequest {
+  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填 */
+  Agent: Agent;
+  /** 扩展服务类型 AUTO_SIGN 企业静默签（自动签署） OVERSEA_SIGN 企业与港澳台居民*签署合同 MOBILE_CHECK_APPROVER 使用手机号验证签署方身份 PAGING_SEAL 骑缝章 DOWNLOAD_FLOW 授权渠道下载合同 */
+  ServiceType: string;
+  /** 操作类型 OPEN:开通 CLOSE:关闭 */
+  Operate: string;
+}
+
+declare interface ModifyExtendedServiceResponse {
+  /** 操作跳转链接，有效期24小时仅当操作类型是 OPEN 且 扩展服务类型是 AUTO_SIGN 或 DOWNLOAD_FLOW 或者 OVERSEA_SIGN 时返回 ，此时需要经办人(操作人)点击链接完成服务开通操作。若开通操作时没有返回跳转链接，表示无需跳转操作，此时会直接开通服务操作类型是CLOSE时，不会返回此链接，会直接关闭企业该扩展服务 */
+  OperateUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2925,6 +2967,8 @@ declare interface Essbasic {
   CreateSignUrls(data: CreateSignUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignUrlsResponse>;
   /** 查询出证报告 {@link DescribeChannelFlowEvidenceReportRequest} {@link DescribeChannelFlowEvidenceReportResponse} */
   DescribeChannelFlowEvidenceReport(data: DescribeChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelFlowEvidenceReportResponse>;
+  /** 查询企业扩展服务授权信息 {@link DescribeExtendedServiceAuthInfoRequest} {@link DescribeExtendedServiceAuthInfoResponse} */
+  DescribeExtendedServiceAuthInfo(data: DescribeExtendedServiceAuthInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthInfoResponse>;
   /** 查询合同(签署流程)的详细信息 {@link DescribeFlowDetailInfoRequest} {@link DescribeFlowDetailInfoResponse} */
   DescribeFlowDetailInfo(data: DescribeFlowDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowDetailInfoResponse>;
   /** 根据签署流程信息批量获取资源下载链接 {@link DescribeResourceUrlsByFlowsRequest} {@link DescribeResourceUrlsByFlowsResponse} */
@@ -2935,6 +2979,8 @@ declare interface Essbasic {
   DescribeUsage(data: DescribeUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageResponse>;
   /** 获取合同（流程）批量下载链接 {@link GetDownloadFlowUrlRequest} {@link GetDownloadFlowUrlResponse} */
   GetDownloadFlowUrl(data: GetDownloadFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetDownloadFlowUrlResponse>;
+  /** 修改企业扩展服务 {@link ModifyExtendedServiceRequest} {@link ModifyExtendedServiceResponse} */
+  ModifyExtendedService(data: ModifyExtendedServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExtendedServiceResponse>;
   /** 操作渠道模板 {@link OperateChannelTemplateRequest} {@link OperateChannelTemplateResponse} */
   OperateChannelTemplate(data: OperateChannelTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<OperateChannelTemplateResponse>;
   /** 准备待发起文件 {@link PrepareFlowsRequest} {@link PrepareFlowsResponse} */

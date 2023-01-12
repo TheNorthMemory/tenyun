@@ -196,6 +196,8 @@ declare interface ScoreInfo {
   RecordNum: number;
   /** Duration */
   PageDuration: string;
+  /** 时间 */
+  CreateTime?: string | null;
 }
 
 /** 标签 */
@@ -1627,7 +1629,7 @@ declare interface DescribeScoresRequest {
 
 declare interface DescribeScoresResponse {
   /** 数组 */
-  ScoreSet: ScoreInfo[];
+  ScoreSet?: ScoreInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

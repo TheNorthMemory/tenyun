@@ -263,50 +263,6 @@ declare namespace V20200713 {
     IpType?: number;
   }
 
-  /** 违规数据分布 */
-  interface EvilCount {
-    /** ----非必选，该参数功能暂未对外开放 */
-    EvilType: string;
-    /** 分布类型总量 */
-    Count: number;
-  }
-
-  /** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等 */
-  interface Filter {
-    /** 过滤键的名称。 */
-    Name?: string;
-    /** 一个或者多个过滤值。 */
-    Values?: string[];
-  }
-
-  /** 图片过滤条件 */
-  interface Filters {
-    /** 查询字段：策略BizType子账号SubUin日期区间DateRange */
-    Name: string;
-    /** 查询值 */
-    Values: string[];
-  }
-
-  /** 机器审核详情列表数据项 */
-  interface ImsDetail {
-    /** 文本内容 */
-    Content: string;
-    /** 数据方式， 0：我审，1：人审 */
-    DataSource: number;
-    /** 最后更新时间 */
-    UpdateTime: string;
-    /** ----非必选，该参数暂未对外开放 */
-    EvilType: number;
-    /** 机器审核时间 */
-    ModerationTime: string;
-    /** 最后更新人 */
-    UpdateUser: string;
-    /** 内容RequestId */
-    ContentId: string;
-    /** 自主审核结果 */
-    OperEvilType: number;
-  }
-
   /** 分类模型命中子标签结果 */
   interface LabelDetailItem {
     /** 序号 */
@@ -393,6 +349,8 @@ declare namespace V20200713 {
     Score: number;
     /** 检测框坐标 */
     Location: Location;
+    /** 二级标签名称 */
+    SubLabel: string;
   }
 
   /** 实体检测结果详情：实体、广告台标、二维码 */
@@ -429,6 +387,8 @@ declare namespace V20200713 {
     Details: OcrTextDetail[];
     /** ocr识别出的文本结果 */
     Text: string;
+    /** 是否命中结果，0 未命中 1命中 */
+    HitFlag: number;
   }
 
   /** OCR文本结果详情 */
@@ -449,48 +409,8 @@ declare namespace V20200713 {
     Location: Location;
     /** OCR文本识别置信度 */
     Rate: number;
-  }
-
-  /** 识别结果统计 */
-  interface Overview {
-    /** 总调用量 */
-    TotalCount: number;
-    /** 总调用时长 */
-    TotalHour: number;
-    /** 通过量 */
-    PassCount: number;
-    /** 通过时长 */
-    PassHour: number;
-    /** 违规量 */
-    EvilCount: number;
-    /** 违规时长 */
-    EvilHour: number;
-    /** 疑似违规量 */
-    SuspectCount: number;
-    /** 疑似违规时长 */
-    SuspectHour: number;
-  }
-
-  /** 识别量统计 */
-  interface TrendCount {
-    /** 总调用量 */
-    TotalCount: number | null;
-    /** 总调用时长 */
-    TotalHour: number | null;
-    /** 通过量 */
-    PassCount: number | null;
-    /** 通过时长 */
-    PassHour: number | null;
-    /** 违规量 */
-    EvilCount: number | null;
-    /** 违规时长 */
-    EvilHour: number | null;
-    /** 疑似违规量 */
-    SuspectCount: number | null;
-    /** 疑似违规时长 */
-    SuspectHour: number | null;
-    /** 日期 */
-    Date: string | null;
+    /** OCR文本命中的二级标签 */
+    SubLabel: string;
   }
 
   /** User结果 */
@@ -513,42 +433,6 @@ declare namespace V20200713 {
     Desc?: string;
     /** 用户头像图片链接 */
     HeadUrl?: string;
-  }
-
-  interface DescribeImageStatRequest {
-    /** 审核类型 1: 机器审核; 2: 人工审核 */
-    AuditType: number;
-    /** 查询条件 */
-    Filters: Filters[];
-  }
-
-  interface DescribeImageStatResponse {
-    /** 识别结果统计 */
-    Overview?: Overview;
-    /** 识别量统计 */
-    TrendCount?: TrendCount[];
-    /** 违规数据分布 */
-    EvilCount?: EvilCount[] | null;
-    /** 唯一请求 ID，每次请求都会返回。 */
-    RequestId?: string;
-  }
-
-  interface DescribeImsListRequest {
-    /** 分页 页索引 */
-    PageIndex: number;
-    /** 分页条数 */
-    PageSize: number;
-    /** 过滤条件 */
-    Filters?: Filter[];
-  }
-
-  interface DescribeImsListResponse {
-    /** 返回列表数据----非必选，该参数暂未对外开放 */
-    ImsDetailSet?: ImsDetail[] | null;
-    /** 总条数 */
-    TotalCount?: number;
-    /** 唯一请求 ID，每次请求都会返回。 */
-    RequestId?: string;
   }
 
   interface ImageModerationRequest {
@@ -605,10 +489,6 @@ declare interface Ims {
   (): Versions;
   /** 图片内容检测 {@link ImageModerationRequest} {@link ImageModerationResponse} */
   ImageModeration(data?: ImageModerationRequest, config?: AxiosRequestConfig): AxiosPromise<ImageModerationResponse>;
-  /** 识别统计 {@link V20200713.DescribeImageStatRequest} {@link V20200713.DescribeImageStatResponse} */
-  DescribeImageStat(data: V20200713.DescribeImageStatRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.DescribeImageStatResponse>;
-  /** 获取图片审核明细数据 {@link V20200713.DescribeImsListRequest} {@link V20200713.DescribeImsListResponse} */
-  DescribeImsList(data: V20200713.DescribeImsListRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.DescribeImsListResponse>;
   /** 图片内容检测 {@link V20200713.ImageModerationRequest} {@link V20200713.ImageModerationResponse} */
   ImageModeration(data: V20200713.ImageModerationRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.ImageModerationResponse>;
 }

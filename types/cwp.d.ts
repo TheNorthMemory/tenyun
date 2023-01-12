@@ -1404,6 +1404,52 @@ declare interface BashEvent {
   RegexBashCmd: string | null;
 }
 
+/** 高危命令数据(新) */
+declare interface BashEventNew {
+  /** 数据ID */
+  Id?: number;
+  /** 云镜ID */
+  Uuid?: string;
+  /** 主机ID */
+  Quuid?: string;
+  /** 主机内网IP */
+  HostIp?: string;
+  /** 执行用户名 */
+  User?: string;
+  /** 平台类型 */
+  Platform?: number;
+  /** 执行命令 */
+  BashCmd?: string;
+  /** 规则ID */
+  RuleId?: number;
+  /** 规则名称 */
+  RuleName?: string;
+  /** 规则等级：1-高 2-中 3-低 */
+  RuleLevel?: number;
+  /** 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3 = 已忽略 */
+  Status?: number;
+  /** 发生时间 */
+  CreateTime?: string;
+  /** 主机名 */
+  MachineName?: string;
+  /** 0: bash日志 1: 实时监控(雷霆版) */
+  DetectBy?: number | null;
+  /** 进程id */
+  Pid?: string | null;
+  /** 进程名称 */
+  Exe?: string | null;
+  /** 处理时间 */
+  ModifyTime?: string | null;
+  /** 规则类别 0=系统规则，1=用户规则 */
+  RuleCategory?: number | null;
+  /** 自动生成的正则表达式 */
+  RegexBashCmd?: string | null;
+  /** 0:普通 1:专业版 2:旗舰版 */
+  MachineType?: number | null;
+  /** 机器额外信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
+}
+
 /** 高危命令规则 */
 declare interface BashRule {
   /** 规则ID */
@@ -4482,6 +4528,28 @@ declare interface DescribeBaselineTopResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBashEventsNewRequest {
+  /** 返回数量，默认为10，最大值为100。 */
+  Limit?: number;
+  /** 过滤条件。HostName - String - 是否必填：否 - 主机名Hostip - String - 是否必填：否 - 主机内网IPHostIp - String - 是否必填：否 - 主机内网IPRuleCategory - Int - 是否必填：否 - 策略类型,全部或者单选(0:系统 1:用户)RuleName - String - 是否必填：否 - 策略名称RuleLevel - Int - 是否必填：否 - 威胁等级,可以多选Status - Int - 是否必填：否 - 处理状态,可多选(0:待处理 1:已处理 2:已加白 3:已忽略 4:已删除 5:已拦截)DetectBy - Int - 是否必填：否 - 数据来源,可多选(0:bash日志 1:实时监控)StartTime - String - 是否必填：否 - 开始时间EndTime - String - 是否必填：否 - 结束时间 */
+  Filters?: Filter[];
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 排序方式：根据请求次数排序：asc-升序/desc-降序 */
+  Order?: string;
+  /** 排序字段：CreateTime-发生时间。ModifyTime-处理时间 */
+  By?: string;
+}
+
+declare interface DescribeBashEventsNewResponse {
+  /** 总条数 */
+  TotalCount: number;
+  /** 高危命令事件列表 */
+  List: BashEventNew[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBashEventsRequest {
   /** 返回数量，默认为10，最大值为100。 */
   Limit?: number;
@@ -7405,6 +7473,8 @@ declare interface Cwp {
   DescribeBaselineTop(data: DescribeBaselineTopRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineTopResponse>;
   /** 获取高危命令列表 {@link DescribeBashEventsRequest} {@link DescribeBashEventsResponse} */
   DescribeBashEvents(data?: DescribeBashEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashEventsResponse>;
+  /** 获取高危命令列表(新) {@link DescribeBashEventsNewRequest} {@link DescribeBashEventsNewResponse} */
+  DescribeBashEventsNew(data?: DescribeBashEventsNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashEventsNewResponse>;
   /** 获取高危命令规则列表 {@link DescribeBashRulesRequest} {@link DescribeBashRulesResponse} */
   DescribeBashRules(data: DescribeBashRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashRulesResponse>;
   /** 获取密码破解列表 {@link DescribeBruteAttackListRequest} {@link DescribeBruteAttackListResponse} */

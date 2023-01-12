@@ -799,7 +799,7 @@ declare interface InvokeBcosTransResponse {
 declare interface InvokeChainMakerContractRequest {
   /** 网络ID，可在区块链网络详情或列表中获取 */
   ClusterId: string;
-  /** 业务链编号，可在业务链列表中获取 */
+  /** 业务链ID，可在网络概览页获取 */
   ChainId: string;
   /** 合约名称，可在合约管理中获取 */
   ContractName: string;
@@ -813,7 +813,7 @@ declare interface InvokeChainMakerContractRequest {
 
 declare interface InvokeChainMakerContractResponse {
   /** 交易结果 */
-  Result: ChainMakerContractResult | null;
+  Result?: ChainMakerContractResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -821,7 +821,7 @@ declare interface InvokeChainMakerContractResponse {
 declare interface InvokeChainMakerDemoContractRequest {
   /** 网络ID，可在区块链网络详情或列表中获取 */
   ClusterId: string;
-  /** 业务链编号，可在业务链列表中获取 */
+  /** 业务链ID，可在网络概览页获取 */
   ChainId: string;
   /** 合约名称，可在合约管理中获取 */
   ContractName: string;
@@ -835,7 +835,7 @@ declare interface InvokeChainMakerDemoContractRequest {
 
 declare interface InvokeChainMakerDemoContractResponse {
   /** 交易结果 */
-  Result: ChainMakerContractResult | null;
+  Result?: ChainMakerContractResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -875,7 +875,7 @@ declare interface InvokeResponse {
 declare interface QueryChainMakerBlockTransactionRequest {
   /** 网络ID，可在区块链网络详情或列表中获取 */
   ClusterId: string;
-  /** 业务链编号，可在业务链列表中获取 */
+  /** 业务链ID，可在网络概览页获取 */
   ChainId: string;
   /** 区块高度 */
   BlockHeight: number;
@@ -883,13 +883,13 @@ declare interface QueryChainMakerBlockTransactionRequest {
 
 declare interface QueryChainMakerBlockTransactionResponse {
   /** 区块交易 */
-  Result: ChainMakerTransactionResult[] | null;
+  Result?: ChainMakerTransactionResult[] | null;
   /** 区块高度 */
-  BlockHeight: number;
+  BlockHeight?: number;
   /** 交易数量 */
-  TxCount: number | null;
+  TxCount?: number | null;
   /** 区块时间戳，单位是秒 */
-  BlockTimestamp: number;
+  BlockTimestamp?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -897,7 +897,7 @@ declare interface QueryChainMakerBlockTransactionResponse {
 declare interface QueryChainMakerContractRequest {
   /** 网络ID，可在区块链网络详情或列表中获取 */
   ClusterId: string;
-  /** 业务链编号，可在业务链列表中获取 */
+  /** 业务链ID，可在网络概览页获取 */
   ChainId: string;
   /** 合约名称，可在合约管理中获取 */
   ContractName: string;
@@ -909,7 +909,7 @@ declare interface QueryChainMakerContractRequest {
 
 declare interface QueryChainMakerContractResponse {
   /** 交易结果 */
-  Result: ChainMakerContractResult | null;
+  Result?: ChainMakerContractResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -917,7 +917,7 @@ declare interface QueryChainMakerContractResponse {
 declare interface QueryChainMakerDemoBlockTransactionRequest {
   /** 网络ID，可在区块链网络详情或列表中获取 */
   ClusterId: string;
-  /** 业务链编号，可在业务链列表中获取 */
+  /** 业务链ID，可在网络概览页获取 */
   ChainId: string;
   /** 区块高度 */
   BlockHeight: number;
@@ -925,13 +925,13 @@ declare interface QueryChainMakerDemoBlockTransactionRequest {
 
 declare interface QueryChainMakerDemoBlockTransactionResponse {
   /** 区块交易 */
-  Result: ChainMakerTransactionResult[] | null;
+  Result?: ChainMakerTransactionResult[] | null;
   /** 区块高度 */
-  BlockHeight: number;
+  BlockHeight?: number;
   /** 交易数量 */
-  TxCount: number | null;
+  TxCount?: number | null;
   /** 区块时间戳，单位是秒 */
-  BlockTimestamp: number;
+  BlockTimestamp?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -939,7 +939,7 @@ declare interface QueryChainMakerDemoBlockTransactionResponse {
 declare interface QueryChainMakerDemoContractRequest {
   /** 网络ID，可在区块链网络详情或列表中获取 */
   ClusterId: string;
-  /** 业务链编号，可在业务链列表中获取 */
+  /** 业务链ID，可在网络概览页获取 */
   ChainId: string;
   /** 合约名称，可在合约管理中获取 */
   ContractName: string;
@@ -951,7 +951,7 @@ declare interface QueryChainMakerDemoContractRequest {
 
 declare interface QueryChainMakerDemoContractResponse {
   /** 交易结果 */
-  Result: ChainMakerContractResult | null;
+  Result?: ChainMakerContractResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -959,7 +959,7 @@ declare interface QueryChainMakerDemoContractResponse {
 declare interface QueryChainMakerDemoTransactionRequest {
   /** 网络ID，可在区块链网络详情或列表中获取 */
   ClusterId: string;
-  /** 业务链编号，可在业务链列表中获取 */
+  /** 业务链ID，可在网络概览页获取 */
   ChainId: string;
   /** 交易ID，通过调用合约的返回值获取 */
   TxID: string;
@@ -967,7 +967,7 @@ declare interface QueryChainMakerDemoTransactionRequest {
 
 declare interface QueryChainMakerDemoTransactionResponse {
   /** 交易结果 */
-  Result: ChainMakerTransactionResult | null;
+  Result?: ChainMakerTransactionResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -975,7 +975,7 @@ declare interface QueryChainMakerDemoTransactionResponse {
 declare interface QueryChainMakerTransactionRequest {
   /** 网络ID，可在区块链网络详情或列表中获取 */
   ClusterId: string;
-  /** 业务链编号，可在业务链列表中获取 */
+  /** 业务链ID，可在网络概览页获取 */
   ChainId: string;
   /** 交易ID，通过调用合约的返回值获取 */
   TxID: string;
@@ -983,7 +983,7 @@ declare interface QueryChainMakerTransactionRequest {
 
 declare interface QueryChainMakerTransactionResponse {
   /** 交易结果 */
-  Result: ChainMakerTransactionResult | null;
+  Result?: ChainMakerTransactionResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

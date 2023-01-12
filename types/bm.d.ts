@@ -1630,7 +1630,7 @@ declare interface UnbindPsaTagResponse {
   RequestId?: string;
 }
 
-/** {@link Bm 黑石物理服务器1.0} */
+/** {@link Bm 黑石物理服务器CPM} */
 declare interface Bm {
   (): Versions;
   /** 服务器绑定CAM角色 {@link AttachCamRoleRequest} {@link AttachCamRoleResponse} */
