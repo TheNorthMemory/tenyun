@@ -973,9 +973,9 @@ declare interface CreateIndexRequest {
   Rule: RuleInfo;
   /** 是否生效，默认为true */
   Status?: boolean;
-  /** 全文索引系统预置字段标记，默认false。 false:不包含系统预置字段， true:包含系统预置字段 */
+  /** 内置保留字段（`__FILENAME__`，`__HOSTNAME__`及`__SOURCE__`）是否包含至全文索引，默认为false，推荐设置为true* false:不包含* true:包含 */
   IncludeInternalFields?: boolean;
-  /** 元数据相关标志位，默认为0。 0：全文索引包括开启键值索引的元数据字段， 1：全文索引包括所有元数据字段，2：全文索引不包括元数据字段。 */
+  /** 元数据字段（前缀为`__TAG__`的字段）是否包含至全文索引，默认为0，推荐设置为1* 0:仅包含开启键值索引的元数据字段* 1:包含所有元数据字段* 2:不包含任何元数据字段 */
   MetadataFlag?: number;
 }
 
@@ -1350,9 +1350,9 @@ declare interface DescribeIndexResponse {
   Rule: RuleInfo | null;
   /** 索引修改时间，初始值为索引创建时间。 */
   ModifyTime: string;
-  /** 全文索引系统预置字段标记，默认false。 false:不包含系统预置字段， true:包含系统预置字段 */
+  /** 内置保留字段（`__FILENAME__`，`__HOSTNAME__`及`__SOURCE__`）是否包含至全文索引* false:不包含* true:包含 */
   IncludeInternalFields: boolean | null;
-  /** 元数据相关标志位，默认为0。 0：全文索引包括开启键值索引的元数据字段， 1：全文索引包括所有元数据字段，2：全文索引不包括元数据字段。 */
+  /** 元数据字段（前缀为`__TAG__`的字段）是否包含至全文索引* 0:仅包含开启键值索引的元数据字段* 1:包含所有元数据字段* 2:不包含任何元数据字段 */
   MetadataFlag: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1385,14 +1385,14 @@ declare interface DescribeLogContextResponse {
 }
 
 declare interface DescribeLogHistogramRequest {
-  /** 要查询的日志主题ID */
-  TopicId: string;
   /** 要查询的日志的起始时间，Unix时间戳，单位ms */
   From: number;
   /** 要查询的日志的结束时间，Unix时间戳，单位ms */
   To: number;
   /** 查询语句 */
   Query: string;
+  /** 要查询的日志主题ID */
+  TopicId?: string;
   /** 时间间隔: 单位ms 限制性条件：(To-From) / interval <= 200 */
   Interval?: number;
 }
@@ -1737,9 +1737,9 @@ declare interface ModifyIndexRequest {
   Status?: boolean;
   /** 索引规则 */
   Rule?: RuleInfo;
-  /** 全文索引系统预置字段标记，默认false。 false:不包含系统预置字段， true:包含系统预置字段 */
+  /** 内置保留字段（`__FILENAME__`，`__HOSTNAME__`及`__SOURCE__`）是否包含至全文索引，默认为false，推荐设置为true* false:不包含* true:包含 */
   IncludeInternalFields?: boolean;
-  /** 元数据相关标志位，默认为0。 0：全文索引包括开启键值索引的元数据字段， 1：全文索引包括所有元数据字段，2：全文索引不包括元数据字段。 */
+  /** 元数据字段（前缀为`__TAG__`的字段）是否包含至全文索引，默认为0，推荐设置为1* 0:仅包含开启键值索引的元数据字段* 1:包含所有元数据字段* 2:不包含任何元数据字段 */
   MetadataFlag?: number;
 }
 
@@ -1867,14 +1867,14 @@ declare interface RetryShipperTaskResponse {
 }
 
 declare interface SearchLogRequest {
-  /** 要检索分析的日志主题ID */
-  TopicId: string;
   /** 要检索分析的日志的起始时间，Unix时间戳（毫秒） */
   From: number;
   /** 要检索分析的日志的结束时间，Unix时间戳（毫秒） */
   To: number;
-  /** 检索分析语句，最大长度为12KB语句由 [检索条件] | [SQL语句]构成，无需对日志进行统计分析时，可省略其中的管道符 | 及SQL语句 */
+  /** 检索分析语句，最大长度为12KB语句由 [检索条件] | [SQL语句]构成，无需对日志进行统计分析时，可省略其中的管道符 | 及SQL语句使用*或空字符串可查询所有日志 */
   Query: string;
+  /** 要检索分析的日志主题ID */
+  TopicId?: string;
   /** 表示单次查询返回的原始日志条数，最大值为1000，获取后续日志需使用Context参数注意：* 仅当检索分析语句(Query)不包含SQL时有效* SQL结果条数指定方式参考SQL LIMIT语法 */
   Limit?: number;
   /** 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时注意：* 透传该参数时，请勿修改除该参数外的其它参数* 仅当检索分析语句(Query)不包含SQL时有效* SQL获取后续结果参考SQL LIMIT语法 */

@@ -361,29 +361,33 @@ declare interface RunJobDescription {
 /** 描述Savepoint信息 */
 declare interface Savepoint {
   /** 主键 */
-  Id: number | null;
+  Id?: number | null;
   /** 版本号 */
-  VersionId: number | null;
+  VersionId?: number | null;
   /** 状态 1: Active; 2: Expired; 3: InProgress; 4: Failed; 5: Timeout */
-  Status: number | null;
+  Status?: number | null;
   /** 创建时间 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
   /** 更新时间 */
-  UpdateTime: number | null;
+  UpdateTime?: number | null;
   /** 路径 */
-  Path: string | null;
+  Path?: string | null;
   /** 大小 */
-  Size: number | null;
+  Size?: number | null;
   /** 快照类型 1: savepoint；2: checkpoint；3: cancelWithSavepoint */
-  RecordType: number | null;
+  RecordType?: number | null;
   /** 运行作业实例的顺序 ID */
-  JobRuntimeId: number | null;
+  JobRuntimeId?: number | null;
   /** 描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 固定超时时间 */
-  Timeout: number | null;
+  Timeout?: number | null;
   /** 快照 serialId */
-  SerialId: string | null;
+  SerialId?: string | null;
+  /** 耗时 */
+  TimeConsuming?: number | null;
+  /** 快照路径状态 1：可用；2：不可用； */
+  PathStatus?: number | null;
 }
 
 /** 停止作业的描述信息 */

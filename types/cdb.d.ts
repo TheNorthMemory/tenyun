@@ -2573,6 +2573,10 @@ declare interface DescribeDBInstancesRequest {
   UniqSubnetIds?: string[];
   /** 标签键值 */
   Tags?: Tag[];
+  /** 数据库代理 IP 。 */
+  ProxyVips?: string[];
+  /** 数据库代理 ID 。 */
+  ProxyIds?: string[];
 }
 
 declare interface DescribeDBInstancesResponse {

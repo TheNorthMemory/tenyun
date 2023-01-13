@@ -2447,6 +2447,8 @@ declare interface CreateClusterVirtualNodePoolRequest {
   Name: string;
   /** 子网ID列表 */
   SubnetIds?: string[];
+  /** 安全组ID列表 */
+  SecurityGroupIds?: string[];
   /** 虚拟节点label */
   Labels?: Label[];
   /** 虚拟节点taint */
@@ -2461,7 +2463,7 @@ declare interface CreateClusterVirtualNodePoolRequest {
 
 declare interface CreateClusterVirtualNodePoolResponse {
   /** 节点池ID */
-  NodePoolId: string;
+  NodePoolId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5357,6 +5359,8 @@ declare interface UpgradeClusterInstancesRequest {
   SkipPreCheck?: boolean;
   /** 最大可容忍的不可用Pod比例 */
   MaxNotReadyPercent?: number;
+  /** 是否升级节点运行时，默认false不升级 */
+  UpgradeRunTime?: boolean;
 }
 
 declare interface UpgradeClusterInstancesResponse {

@@ -954,6 +954,16 @@ declare interface EventCondition {
   RuleID: string;
 }
 
+/** 查询过滤参数 */
+declare interface Filter {
+  /** 过滤方式（=, !=, in） */
+  Type: string;
+  /** 过滤维度名 */
+  Key: string;
+  /** 过滤值，in过滤方式用逗号分割多个值 */
+  Value: string;
+}
+
 /** Grafana可视化服务 授权账户信息 */
 declare interface GrafanaAccountInfo {
   /** 用户账号ID */
@@ -1118,6 +1128,10 @@ declare interface IntegrationConfiguration {
   InstanceDesc: string;
   /** dashboard 的 URL */
   GrafanaDashboardURL: string;
+}
+
+/** k8s中标签，一般以数组的方式存在 */
+declare interface Label {
 }
 
 /** 日志告警请求信息 */
@@ -1444,6 +1458,64 @@ declare interface PrometheusAgent {
   Status: number;
 }
 
+/** 告警渠道使用自建alertmanager的配置 */
+declare interface PrometheusAlertManagerConfig {
+  /** alertmanager url */
+  Url: string;
+  /** alertmanager部署所在集群类型 */
+  ClusterType?: string | null;
+  /** alertmanager部署所在集群ID */
+  ClusterId?: string | null;
+}
+
+/** 托管prometheus告警策略实例 */
+declare interface PrometheusAlertPolicyItem {
+  /** 策略名称 */
+  Name: string;
+  /** 规则列表 */
+  Rules: PrometheusAlertRule[];
+  /** 告警策略 id */
+  Id?: string | null;
+  /** 如果该告警来自模板下发，则TemplateId为模板id */
+  TemplateId?: string | null;
+  /** 告警渠道，模板中使用可能返回null */
+  Notification?: PrometheusNotificationItem | null;
+  /** 最后修改时间 */
+  UpdatedAt?: string | null;
+  /** 如果告警策略来源于用户集群CRD资源定义，则ClusterId为所属集群ID */
+  ClusterId?: string | null;
+}
+
+/** Prometheus告警规则 */
+declare interface PrometheusAlertRule {
+  /** 规则名称 */
+  Name: string;
+  /** prometheus语句 */
+  Rule: string;
+  /** 额外标签 */
+  Labels: Label[];
+  /** 告警发送模板 */
+  Template: string;
+  /** 持续时间 */
+  For: string;
+  /** 该条规则的描述信息 */
+  Describe?: string | null;
+  /** 参考prometheus rule中的annotations */
+  Annotations?: Label[] | null;
+  /** 告警规则状态 */
+  RuleState?: number | null;
+}
+
+/** prometheus配置 */
+declare interface PrometheusConfigItem {
+  /** 名称 */
+  Name: string;
+  /** 配置内容 */
+  Config: string;
+  /** 用于出参，如果该配置来至模板，则为模板id */
+  TemplateId?: string | null;
+}
+
 /** 实例的授权信息 */
 declare interface PrometheusInstanceGrantInfo {
   /** 是否有计费操作权限(1=有，2=无) */
@@ -1538,6 +1610,86 @@ declare interface PrometheusInstancesItem {
   MigrationType: number | null;
 }
 
+/** 托管prometheusV2实例概览 */
+declare interface PrometheusInstancesOverview {
+  /** 实例ID */
+  InstanceId: string;
+  /** 实例名 */
+  InstanceName: string;
+  /** VPC ID */
+  VpcId: string;
+  /** 子网ID */
+  SubnetId: string;
+  /** 运行状态（1:正在创建；2:运行中；3:异常；4:重启中；5:销毁中； 6:已停机； 7: 已删除） */
+  InstanceStatus: number;
+  /** 计费状态（1:正常；2:过期; 3:销毁; 4:分配中; 5:分配失败） */
+  ChargeStatus: number | null;
+  /** 是否开启 Grafana（0:不开启，1:开启） */
+  EnableGrafana: number;
+  /** Grafana 面板 URL */
+  GrafanaURL: string | null;
+  /** 实例付费类型（1:试用版；2:预付费） */
+  InstanceChargeType: number;
+  /** 规格名称 */
+  SpecName: string | null;
+  /** 存储周期 */
+  DataRetentionTime: number | null;
+  /** 购买的实例过期时间 */
+  ExpireTime: string | null;
+  /** 自动续费标记(0:不自动续费；1:开启自动续费；2:禁止自动续费；-1:无效) */
+  AutoRenewFlag: number | null;
+  /** 绑定集群总数 */
+  BoundTotal: number;
+  /** 绑定集群正常状态总数 */
+  BoundNormal: number;
+}
+
+/** 告警通知渠道配置 */
+declare interface PrometheusNotificationItem {
+  /** 是否启用 */
+  Enabled: boolean;
+  /** 通道类型，默认为amp，支持以下ampwebhookalertmanager */
+  Type: string;
+  /** 如果Type为webhook, 则该字段为必填项 */
+  WebHook?: string | null;
+  /** 如果Type为alertmanager, 则该字段为必填项 */
+  AlertManager?: PrometheusAlertManagerConfig | null;
+  /** 收敛时间 */
+  RepeatInterval?: string;
+  /** 生效起始时间 */
+  TimeRangeStart?: string;
+  /** 生效结束时间 */
+  TimeRangeEnd?: string;
+  /** 告警通知方式。目前有SMS、EMAIL、CALL、WECHAT方式。 */
+  NotifyWay?: string[] | null;
+  /** 告警接收组（用户组） */
+  ReceiverGroups?: string[] | null;
+  /** 电话告警顺序。注：NotifyWay选择CALL，采用该参数。 */
+  PhoneNotifyOrder?: number[] | null;
+  /** 电话告警次数。注：NotifyWay选择CALL，采用该参数。 */
+  PhoneCircleTimes?: number | null;
+  /** 电话告警轮内间隔。单位：秒注：NotifyWay选择CALL，采用该参数。 */
+  PhoneInnerInterval?: number | null;
+  /** 电话告警轮外间隔。单位：秒注：NotifyWay选择CALL，采用该参数。 */
+  PhoneCircleInterval?: number | null;
+  /** 电话告警触达通知注：NotifyWay选择CALL，采用该参数。 */
+  PhoneArriveNotice?: boolean | null;
+}
+
+/** prometheus聚合规则实例详情，包含所属集群ID */
+declare interface PrometheusRecordRuleYamlItem {
+  /** 实例名称 */
+  Name: string;
+  /** 最近更新时间 */
+  UpdateTime: string;
+  /** Yaml内容 */
+  TemplateId: string;
+  /** 如果该聚合规则来至模板，则TemplateId为模板id */
+  Content: string | null;
+  /** 该聚合规则如果来源于用户集群crd资源定义，则ClusterId为所属集群ID */
+  ClusterId: string | null;
+}
+
 /** prometheus 报警规则 KV 参数 */
 declare interface PrometheusRuleKV {
   /** 键 */
@@ -1592,6 +1744,74 @@ declare interface PrometheusTag {
   Key: string;
   /** 标签对应的值 */
   Value: string | null;
+}
+
+/** 模板实例 */
+declare interface PrometheusTemp {
+  /** 模板名称 */
+  Name: string;
+  /** 模板维度，支持以下类型instance 实例级别cluster 集群级别 */
+  Level: string;
+  /** 模板描述 */
+  Describe?: string | null;
+  /** 当Level为instance时有效，模板中的聚合规则列表 */
+  RecordRules?: PrometheusConfigItem[] | null;
+  /** 当Level为cluster时有效，模板中的ServiceMonitor规则列表 */
+  ServiceMonitors?: PrometheusConfigItem[] | null;
+  /** 当Level为cluster时有效，模板中的PodMonitors规则列表 */
+  PodMonitors?: PrometheusConfigItem[] | null;
+  /** 当Level为cluster时有效，模板中的RawJobs规则列表 */
+  RawJobs?: PrometheusConfigItem[] | null;
+  /** 模板的ID, 用于出参 */
+  TemplateId?: string | null;
+  /** 最近更新时间，用于出参 */
+  UpdateTime?: string | null;
+  /** 当前版本，用于出参 */
+  Version?: string | null;
+  /** 是否系统提供的默认模板，用于出参 */
+  IsDefault?: boolean | null;
+  /** 当Level为instance时有效，模板中的告警配置列表 */
+  AlertDetailRules?: PrometheusAlertPolicyItem[] | null;
+  /** 关联实例数目 */
+  TargetsTotal?: number | null;
+}
+
+/** 云原生Prometheus模板可修改项 */
+declare interface PrometheusTempModify {
+  /** 修改名称 */
+  Name?: string;
+  /** 修改描述 */
+  Describe?: string | null;
+  /** 当Level为cluster时有效，模板中的ServiceMonitor规则列表 */
+  ServiceMonitors?: PrometheusConfigItem[] | null;
+  /** 当Level为cluster时有效，模板中的PodMonitors规则列表 */
+  PodMonitors?: PrometheusConfigItem[] | null;
+  /** 当Level为cluster时有效，模板中的RawJobs规则列表 */
+  RawJobs?: PrometheusConfigItem[] | null;
+  /** 当Level为instance时有效，模板中的聚合规则列表 */
+  RecordRules?: PrometheusConfigItem[] | null;
+  /** 修改内容，只有当模板类型是Alert时生效 */
+  AlertDetailRules?: PrometheusAlertPolicyItem[] | null;
+}
+
+/** 云原生Prometheus模板同步目标 */
+declare interface PrometheusTemplateSyncTarget {
+  /** 目标所在地域 */
+  Region: string;
+  /** 目标实例 */
+  InstanceId: string;
+  /** 集群id，只有当采集模板的Level为cluster的时候需要 */
+  ClusterId?: string | null;
+  /** 最后一次同步时间， 用于出参 */
+  SyncTime?: string | null;
+  /** 当前使用的模板版本，用于出参 */
+  Version?: string | null;
+  /** 集群类型，只有当采集模板的Level为cluster的时候需要 */
+  ClusterType?: string | null;
+  /** 用于出参，实例名称 */
+  InstanceName?: string | null;
+  /** 用于出参，集群名称 */
+  ClusterName?: string | null;
 }
 
 /** PrometheusZoneItem 响应结构体内的地域信息 */
@@ -1704,6 +1924,20 @@ declare interface TagInstance {
   BindingStatus: number | null;
   /** 标签状态，2：标签存在，1：标签不存在 */
   TagStatus: number | null;
+}
+
+/** 任务步骤信息 */
+declare interface TaskStepInfo {
+  /** 步骤名称 */
+  Step: string;
+  /** 生命周期pending : 步骤未开始running: 步骤执行中success: 步骤成功完成failed: 步骤失败 */
+  LifeState: string;
+  /** 步骤开始时间 */
+  StartAt: string | null;
+  /** 步骤结束时间 */
+  EndAt: string | null;
+  /** 若步骤生命周期为failed,则此字段显示错误信息 */
+  FailedMsg: string | null;
 }
 
 /** 模板列表 */
@@ -1830,6 +2064,14 @@ declare interface BindingPolicyTagRequest {
 }
 
 declare interface BindingPolicyTagResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckIsPrometheusNewUserRequest {
+}
+
+declare interface CheckIsPrometheusNewUserResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2100,6 +2342,18 @@ declare interface CreatePrometheusMultiTenantInstancePostPayModeResponse {
   RequestId?: string;
 }
 
+declare interface CreatePrometheusRecordRuleYamlRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** yaml的内容 */
+  Content: string;
+}
+
+declare interface CreatePrometheusRecordRuleYamlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePrometheusScrapeJobRequest {
   /** Prometheus 实例 ID，例如：prom-abcd1234 */
   InstanceId: string;
@@ -2112,6 +2366,18 @@ declare interface CreatePrometheusScrapeJobRequest {
 declare interface CreatePrometheusScrapeJobResponse {
   /** 成功创建抓取任务 Id */
   JobId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePrometheusTempRequest {
+  /** 模板设置 */
+  Template: PrometheusTemp;
+}
+
+declare interface CreatePrometheusTempResponse {
+  /** 模板Id */
+  TemplateId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2274,6 +2540,18 @@ declare interface DeletePolicyGroupResponse {
   RequestId?: string;
 }
 
+declare interface DeletePrometheusRecordRuleYamlRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 聚合规则列表 */
+  Names: string[];
+}
+
+declare interface DeletePrometheusRecordRuleYamlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeletePrometheusScrapeJobsRequest {
   /** 实例 ID */
   InstanceId: string;
@@ -2284,6 +2562,28 @@ declare interface DeletePrometheusScrapeJobsRequest {
 }
 
 declare interface DeletePrometheusScrapeJobsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePrometheusTempRequest {
+  /** 模板id */
+  TemplateId: string;
+}
+
+declare interface DeletePrometheusTempResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePrometheusTempSyncRequest {
+  /** 模板id */
+  TemplateId: string;
+  /** 取消同步的对象列表 */
+  Targets: PrometheusTemplateSyncTarget[];
+}
+
+declare interface DeletePrometheusTempSyncResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3100,6 +3400,18 @@ declare interface DescribeProductListResponse {
   RequestId?: string;
 }
 
+declare interface DescribePrometheusAgentInstancesRequest {
+  /** 集群id可以是tke, eks, edge的集群id */
+  ClusterId: string;
+}
+
+declare interface DescribePrometheusAgentInstancesResponse {
+  /** 关联该集群的实例列表 */
+  Instances?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePrometheusAgentsRequest {
   /** 实例 ID */
   InstanceId: string;
@@ -3122,6 +3434,92 @@ declare interface DescribePrometheusAgentsResponse {
   RequestId?: string;
 }
 
+declare interface DescribePrometheusAlertPolicyRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 分页 */
+  Offset?: number;
+  /** 分页 */
+  Limit?: number;
+  /** 过滤支持ID，Name */
+  Filters?: Filter[];
+}
+
+declare interface DescribePrometheusAlertPolicyResponse {
+  /** 告警详情 */
+  AlertRules?: PrometheusAlertPolicyItem[] | null;
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrometheusConfigRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 集群id */
+  ClusterId: string;
+  /** 集群类型 */
+  ClusterType: string;
+}
+
+declare interface DescribePrometheusConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrometheusInstanceDetailRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribePrometheusInstanceDetailResponse {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** VPC ID */
+  VpcId?: string;
+  /** 子网 ID */
+  SubnetId?: string;
+  /** 实例业务状态。取值范围：1：正在创建2：运行中3：异常4：重建中5：销毁中6：已停服8：欠费停服中9：欠费已停服 */
+  InstanceStatus?: number;
+  /** 计费状态1：正常2：过期3：销毁4：分配中5：分配失败 */
+  ChargeStatus?: number | null;
+  /** 是否开启 Grafana0：不开启1：开启 */
+  EnableGrafana?: number;
+  /** Grafana 面板 URL */
+  GrafanaURL?: string | null;
+  /** 实例计费模式。取值范围：2：包年包月3：按量 */
+  InstanceChargeType?: number;
+  /** 规格名称 */
+  SpecName?: string | null;
+  /** 存储周期 */
+  DataRetentionTime?: number | null;
+  /** 购买的实例过期时间 */
+  ExpireTime?: string | null;
+  /** 自动续费标记0：不自动续费1：开启自动续费2：禁止自动续费-1：无效 */
+  AutoRenewFlag?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrometheusInstanceInitStatusRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribePrometheusInstanceInitStatusResponse {
+  /** 实例初始化状态，取值：uninitialized 未初始化 initializing 初始化中running 初始化完成，运行中 */
+  Status?: string | null;
+  /** 初始化任务步骤 */
+  Steps?: TaskStepInfo[] | null;
+  /** 实例eks集群ID */
+  EksClusterId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePrometheusInstanceUsageRequest {
   /** 按照一个或者多个实例ID查询。实例ID形如：prom-xxxxxxxx。请求的实例的上限为100。 */
   InstanceIds: string[];
@@ -3134,6 +3532,24 @@ declare interface DescribePrometheusInstanceUsageRequest {
 declare interface DescribePrometheusInstanceUsageResponse {
   /** 用量列表 */
   UsageSet: PrometheusInstanceTenantUsage[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrometheusInstancesOverviewRequest {
+  /** 用于分页 */
+  Offset?: number;
+  /** 用于分页 */
+  Limit?: number;
+  /** 过滤实例，目前支持：ID: 通过实例ID来过滤 Name: 通过实例名称来过滤 */
+  Filters?: Filter[];
+}
+
+declare interface DescribePrometheusInstancesOverviewResponse {
+  /** 实例列表 */
+  Instances?: PrometheusInstancesOverview[];
+  /** 实例总数 */
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3168,6 +3584,42 @@ declare interface DescribePrometheusInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribePrometheusRecordRuleYamlRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 分页 */
+  Offset?: number;
+  /** 分页 */
+  Limit?: number;
+  /** 过滤，当前支持Name = NameValues = 目标名称列表 */
+  Filters?: Filter[];
+}
+
+declare interface DescribePrometheusRecordRuleYamlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrometheusRecordRulesRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 分页 */
+  Offset?: number;
+  /** 分页 */
+  Limit?: number;
+  /** 过滤 */
+  Filters?: Filter[];
+}
+
+declare interface DescribePrometheusRecordRulesResponse {
+  /** 聚合规则 */
+  Records?: PrometheusRecordRuleYamlItem[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePrometheusScrapeJobsRequest {
   /** 实例 ID */
   InstanceId: string;
@@ -3188,6 +3640,36 @@ declare interface DescribePrometheusScrapeJobsResponse {
   ScrapeJobSet?: PrometheusScrapeJob[] | null;
   /** 任务总量 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrometheusTempRequest {
+  /** 模糊过滤条件，支持Level 按模板级别过滤Name 按名称过滤Describe 按描述过滤ID 按templateId过滤 */
+  Filters?: Filter[];
+  /** 分页偏移 */
+  Offset?: number;
+  /** 总数限制 */
+  Limit?: number;
+}
+
+declare interface DescribePrometheusTempResponse {
+  /** 模板列表 */
+  Templates?: PrometheusTemp[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrometheusTempSyncRequest {
+  /** 模板ID */
+  TemplateId: string;
+}
+
+declare interface DescribePrometheusTempSyncResponse {
+  /** 同步目标详情 */
+  Targets?: PrometheusTemplateSyncTarget[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3580,6 +4062,32 @@ declare interface ModifyPrometheusInstanceAttributesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyPrometheusRecordRuleYamlRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 聚合实例名称 */
+  Name: string;
+  /** 新的内容 */
+  Content: string;
+}
+
+declare interface ModifyPrometheusRecordRuleYamlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyPrometheusTempRequest {
+  /** 模板ID */
+  TemplateId: string;
+  /** 修改内容 */
+  Template: PrometheusTempModify;
+}
+
+declare interface ModifyPrometheusTempResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PutMonitorDataRequest {
   /** 一组指标和数据 */
   Metrics: MetricDatum[];
@@ -3606,6 +4114,18 @@ declare interface ResumeGrafanaInstanceResponse {
   RequestId?: string;
 }
 
+declare interface RunPrometheusInstanceRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 子网ID，默认使用实例所用子网初始化，也可通过该参数传递新的子网ID初始化 */
+  SubnetId?: string;
+}
+
+declare interface RunPrometheusInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SendCustomAlarmMsgRequest {
   /** 接口模块名，当前取值monitor */
   Module: string;
@@ -3628,6 +4148,18 @@ declare interface SetDefaultAlarmPolicyRequest {
 }
 
 declare interface SetDefaultAlarmPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SyncPrometheusTempRequest {
+  /** 实例id */
+  TemplateId: string;
+  /** 同步目标 */
+  Targets: PrometheusTemplateSyncTarget[];
+}
+
+declare interface SyncPrometheusTempResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3983,6 +4515,8 @@ declare interface Monitor {
   BindingPolicyObject(data: BindingPolicyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<BindingPolicyObjectResponse>;
   /** 策略绑定标签 {@link BindingPolicyTagRequest} {@link BindingPolicyTagResponse} */
   BindingPolicyTag(data: BindingPolicyTagRequest, config?: AxiosRequestConfig): AxiosPromise<BindingPolicyTagResponse>;
+  /** 判断用户是否为云原生监控新用户 {@link CheckIsPrometheusNewUserRequest} {@link CheckIsPrometheusNewUserResponse} */
+  CheckIsPrometheusNewUser(data?: CheckIsPrometheusNewUserRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIsPrometheusNewUserResponse>;
   /** 强制销毁 Grafana 实例 {@link CleanGrafanaInstanceRequest} {@link CleanGrafanaInstanceResponse} */
   CleanGrafanaInstance(data: CleanGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CleanGrafanaInstanceResponse>;
   /** 创建通知模板 {@link CreateAlarmNoticeRequest} {@link CreateAlarmNoticeResponse} */
@@ -4005,8 +4539,12 @@ declare interface Monitor {
   CreatePrometheusAgent(data: CreatePrometheusAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusAgentResponse>;
   /** 创建按量 Prometheus 实例 {@link CreatePrometheusMultiTenantInstancePostPayModeRequest} {@link CreatePrometheusMultiTenantInstancePostPayModeResponse} */
   CreatePrometheusMultiTenantInstancePostPayMode(data: CreatePrometheusMultiTenantInstancePostPayModeRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusMultiTenantInstancePostPayModeResponse>;
+  /** 以Yaml的方式创建聚合规则 {@link CreatePrometheusRecordRuleYamlRequest} {@link CreatePrometheusRecordRuleYamlResponse} */
+  CreatePrometheusRecordRuleYaml(data: CreatePrometheusRecordRuleYamlRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusRecordRuleYamlResponse>;
   /** 创建 Prometheus 抓取任务 {@link CreatePrometheusScrapeJobRequest} {@link CreatePrometheusScrapeJobResponse} */
   CreatePrometheusScrapeJob(data: CreatePrometheusScrapeJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusScrapeJobResponse>;
+  /** 新建模板 {@link CreatePrometheusTempRequest} {@link CreatePrometheusTempResponse} */
+  CreatePrometheusTemp(data: CreatePrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusTempResponse>;
   /** 创建预聚合规则 {@link CreateRecordingRuleRequest} {@link CreateRecordingRuleResponse} */
   CreateRecordingRule(data: CreateRecordingRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordingRuleResponse>;
   /** 授权腾讯云用户 {@link CreateSSOAccountRequest} {@link CreateSSOAccountResponse} */
@@ -4029,8 +4567,14 @@ declare interface Monitor {
   DeleteGrafanaNotificationChannel(data: DeleteGrafanaNotificationChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGrafanaNotificationChannelResponse>;
   /** 删除告警策略组 {@link DeletePolicyGroupRequest} {@link DeletePolicyGroupResponse} */
   DeletePolicyGroup(data: DeletePolicyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePolicyGroupResponse>;
+  /** 删除聚合实例 {@link DeletePrometheusRecordRuleYamlRequest} {@link DeletePrometheusRecordRuleYamlResponse} */
+  DeletePrometheusRecordRuleYaml(data: DeletePrometheusRecordRuleYamlRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusRecordRuleYamlResponse>;
   /** 删除 Prometheus 抓取任务 {@link DeletePrometheusScrapeJobsRequest} {@link DeletePrometheusScrapeJobsResponse} */
   DeletePrometheusScrapeJobs(data: DeletePrometheusScrapeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusScrapeJobsResponse>;
+  /** 删除模板实例 {@link DeletePrometheusTempRequest} {@link DeletePrometheusTempResponse} */
+  DeletePrometheusTemp(data: DeletePrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusTempResponse>;
+  /** 解除模板同步 {@link DeletePrometheusTempSyncRequest} {@link DeletePrometheusTempSyncResponse} */
+  DeletePrometheusTempSync(data: DeletePrometheusTempSyncRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusTempSyncResponse>;
   /** 删除预聚合规则 {@link DeleteRecordingRulesRequest} {@link DeleteRecordingRulesResponse} */
   DeleteRecordingRules(data: DeleteRecordingRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordingRulesResponse>;
   /** 删除授权用户 {@link DeleteSSOAccountRequest} {@link DeleteSSOAccountResponse} */
@@ -4101,14 +4645,34 @@ declare interface Monitor {
   DescribeProductEventList(data: DescribeProductEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductEventListResponse>;
   /** 查询云监控产品列表 {@link DescribeProductListRequest} {@link DescribeProductListResponse} */
   DescribeProductList(data: DescribeProductListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductListResponse>;
+  /** 获取关联目标集群的实例列表 {@link DescribePrometheusAgentInstancesRequest} {@link DescribePrometheusAgentInstancesResponse} */
+  DescribePrometheusAgentInstances(data: DescribePrometheusAgentInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAgentInstancesResponse>;
   /** 列出 Prometheus CVM Agent {@link DescribePrometheusAgentsRequest} {@link DescribePrometheusAgentsResponse} */
   DescribePrometheusAgents(data: DescribePrometheusAgentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAgentsResponse>;
+  /** 获取2.0实例告警策略列表 {@link DescribePrometheusAlertPolicyRequest} {@link DescribePrometheusAlertPolicyResponse} */
+  DescribePrometheusAlertPolicy(data: DescribePrometheusAlertPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAlertPolicyResponse>;
+  /** 拉取Prometheus配置 {@link DescribePrometheusConfigRequest} {@link DescribePrometheusConfigResponse} */
+  DescribePrometheusConfig(data: DescribePrometheusConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusConfigResponse>;
+  /** 获取TMP实例详情 {@link DescribePrometheusInstanceDetailRequest} {@link DescribePrometheusInstanceDetailResponse} */
+  DescribePrometheusInstanceDetail(data: DescribePrometheusInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstanceDetailResponse>;
+  /** 获取2.0实例初始化任务状态 {@link DescribePrometheusInstanceInitStatusRequest} {@link DescribePrometheusInstanceInitStatusResponse} */
+  DescribePrometheusInstanceInitStatus(data: DescribePrometheusInstanceInitStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstanceInitStatusResponse>;
   /** 查询Prometheus按量实例用量 {@link DescribePrometheusInstanceUsageRequest} {@link DescribePrometheusInstanceUsageResponse} */
   DescribePrometheusInstanceUsage(data: DescribePrometheusInstanceUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstanceUsageResponse>;
   /** 查看 Prometheus 实例列表 {@link DescribePrometheusInstancesRequest} {@link DescribePrometheusInstancesResponse} */
   DescribePrometheusInstances(data?: DescribePrometheusInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstancesResponse>;
+  /** 获取2.0实例列表 {@link DescribePrometheusInstancesOverviewRequest} {@link DescribePrometheusInstancesOverviewResponse} */
+  DescribePrometheusInstancesOverview(data?: DescribePrometheusInstancesOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstancesOverviewResponse>;
+  /** 拉取Prometheus聚合规则yaml列表 {@link DescribePrometheusRecordRuleYamlRequest} {@link DescribePrometheusRecordRuleYamlResponse} */
+  DescribePrometheusRecordRuleYaml(data: DescribePrometheusRecordRuleYamlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusRecordRuleYamlResponse>;
+  /** 获取聚合规则列表，包含关联集群内的资源 {@link DescribePrometheusRecordRulesRequest} {@link DescribePrometheusRecordRulesResponse} */
+  DescribePrometheusRecordRules(data: DescribePrometheusRecordRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusRecordRulesResponse>;
   /** 列出 Prometheus 抓取任务 {@link DescribePrometheusScrapeJobsRequest} {@link DescribePrometheusScrapeJobsResponse} */
   DescribePrometheusScrapeJobs(data: DescribePrometheusScrapeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusScrapeJobsResponse>;
+  /** 拉取模板列表 {@link DescribePrometheusTempRequest} {@link DescribePrometheusTempResponse} */
+  DescribePrometheusTemp(data?: DescribePrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTempResponse>;
+  /** 获取模板关联实例信息 {@link DescribePrometheusTempSyncRequest} {@link DescribePrometheusTempSyncResponse} */
+  DescribePrometheusTempSync(data: DescribePrometheusTempSyncRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTempSyncResponse>;
   /** 列出 Prometheus 服务可用区 {@link DescribePrometheusZonesRequest} {@link DescribePrometheusZonesResponse} */
   DescribePrometheusZones(data: DescribePrometheusZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusZonesResponse>;
   /** 查询预聚合规则 {@link DescribeRecordingRulesRequest} {@link DescribeRecordingRulesResponse} */
@@ -4153,14 +4717,22 @@ declare interface Monitor {
   ModifyPolicyGroup(data: ModifyPolicyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPolicyGroupResponse>;
   /** 修改 Prometheus 实例相关属性 {@link ModifyPrometheusInstanceAttributesRequest} {@link ModifyPrometheusInstanceAttributesResponse} */
   ModifyPrometheusInstanceAttributes(data: ModifyPrometheusInstanceAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusInstanceAttributesResponse>;
+  /** 通过yaml的方式修改Prometheus聚合实例 {@link ModifyPrometheusRecordRuleYamlRequest} {@link ModifyPrometheusRecordRuleYamlResponse} */
+  ModifyPrometheusRecordRuleYaml(data: ModifyPrometheusRecordRuleYamlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusRecordRuleYamlResponse>;
+  /** 修改模板实例 {@link ModifyPrometheusTempRequest} {@link ModifyPrometheusTempResponse} */
+  ModifyPrometheusTemp(data: ModifyPrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusTempResponse>;
   /** 自定义监控上报数据 {@link PutMonitorDataRequest} {@link PutMonitorDataResponse} */
   PutMonitorData(data: PutMonitorDataRequest, config?: AxiosRequestConfig): AxiosPromise<PutMonitorDataResponse>;
   /** 恢复 Grafana 实例 {@link ResumeGrafanaInstanceRequest} {@link ResumeGrafanaInstanceResponse} */
   ResumeGrafanaInstance(data: ResumeGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeGrafanaInstanceResponse>;
+  /** 初始化TMP实例 {@link RunPrometheusInstanceRequest} {@link RunPrometheusInstanceResponse} */
+  RunPrometheusInstance(data: RunPrometheusInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RunPrometheusInstanceResponse>;
   /** 发送自定义消息告警 {@link SendCustomAlarmMsgRequest} {@link SendCustomAlarmMsgResponse} */
   SendCustomAlarmMsg(data: SendCustomAlarmMsgRequest, config?: AxiosRequestConfig): AxiosPromise<SendCustomAlarmMsgResponse>;
   /** 设为默认告警策略 {@link SetDefaultAlarmPolicyRequest} {@link SetDefaultAlarmPolicyResponse} */
   SetDefaultAlarmPolicy(data: SetDefaultAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<SetDefaultAlarmPolicyResponse>;
+  /** 同步模板 {@link SyncPrometheusTempRequest} {@link SyncPrometheusTempResponse} */
+  SyncPrometheusTemp(data: SyncPrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<SyncPrometheusTempResponse>;
   /** 销毁按量 Prometheus 实例 {@link TerminatePrometheusInstancesRequest} {@link TerminatePrometheusInstancesResponse} */
   TerminatePrometheusInstances(data: TerminatePrometheusInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminatePrometheusInstancesResponse>;
   /** 删除全部的关联对象 {@link UnBindingAllPolicyObjectRequest} {@link UnBindingAllPolicyObjectResponse} */

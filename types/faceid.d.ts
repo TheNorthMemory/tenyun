@@ -645,7 +645,7 @@ declare interface GetFaceIdTokenRequest {
 
 declare interface GetFaceIdTokenResponse {
   /** 有效期 10分钟。只能完成1次核身。 */
-  FaceIdToken: string;
+  FaceIdToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

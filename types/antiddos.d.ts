@@ -720,6 +720,8 @@ declare interface L7RuleHealth {
   FailedThreshold?: number;
   /** 被动探测判定正常状态码，1xx =1, 2xx=2, 3xx=4, 4xx=8,5xx=16，多个状态码值加和 */
   PassiveStatusCode?: number;
+  /** 被动探测配置状态，0： 正常，1：配置中，2：配置失败 */
+  PassiveStatus?: number;
 }
 
 /** 4层转发规则 */
@@ -2127,7 +2129,7 @@ declare interface DescribeListBGPInstancesRequest {
   FilterBoundStatus?: string;
   /** 实例id数组 */
   FilterInstanceIdList?: string[];
-  /** 企业版搜索 */
+  /** 企业版搜索, 1：包含重保护航套餐下的企业版列表, 2: 不包含重保护航套餐的企业版列表 */
   FilterEnterpriseFlag?: number;
   /** 轻量版搜索 */
   FilterLightFlag?: number;
@@ -2139,13 +2141,15 @@ declare interface DescribeListBGPInstancesRequest {
   FilterTrialFlag?: number;
   /** 重保护航搜索 */
   FilterConvoy?: number;
+  /** 默认false；接口传true，返回数据中不包含高级信息，高级信息包含：InstanceList[0].Usage。 */
+  ExcludeAdvancedInfo?: boolean;
 }
 
 declare interface DescribeListBGPInstancesResponse {
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 高防包资产实例列表 */
-  InstanceList: BGPInstance[];
+  InstanceList?: BGPInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

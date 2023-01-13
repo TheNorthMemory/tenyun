@@ -712,6 +712,22 @@ declare interface SearchImageResponse {
   RequestId?: string;
 }
 
+declare interface UpdateImageRequest {
+  /** 图库ID。 */
+  GroupId: string;
+  /** 物品ID，最多支持64个字符。 */
+  EntityId: string;
+  /** 图片名称，最多支持64个字符。 */
+  PicName?: string;
+  /** 新的自定义标签，最多不超过10个，格式为JSON。 */
+  Tags?: string;
+}
+
+declare interface UpdateImageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Tiia 图像分析} */
 declare interface Tiia {
   (): Versions;
@@ -759,6 +775,8 @@ declare interface Tiia {
   RecognizeCarPro(data?: RecognizeCarProRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeCarProResponse>;
   /** 检索图片 {@link SearchImageRequest} {@link SearchImageResponse} */
   SearchImage(data: SearchImageRequest, config?: AxiosRequestConfig): AxiosPromise<SearchImageResponse>;
+  /** 更新图片 {@link UpdateImageRequest} {@link UpdateImageResponse} */
+  UpdateImage(data: UpdateImageRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateImageResponse>;
 }
 
 export declare type Versions = ["2019-05-29"];

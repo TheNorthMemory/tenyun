@@ -136,6 +136,14 @@ declare interface DeleteRoomResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAppDetailRequest {
+}
+
+declare interface DescribeAppDetailResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRoomRequest {
   /** 房间Id。 */
   RoomId: number;
@@ -245,8 +253,10 @@ declare interface LoginUserResponse {
 declare interface ModifyAppRequest {
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId: number;
-  /** 回调地址。端口目前仅支持80、443 */
+  /** 回调地址。 */
   Callback?: string;
+  /** 回调key。 */
+  CallbackKey?: string;
 }
 
 declare interface ModifyAppResponse {
@@ -311,6 +321,8 @@ declare interface Lcic {
   CreateSupervisor(data?: CreateSupervisorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSupervisorResponse>;
   /** 删除房间 {@link DeleteRoomRequest} {@link DeleteRoomResponse} */
   DeleteRoom(data: DeleteRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoomResponse>;
+  /** 获取应用详情 {@link DescribeAppDetailRequest} {@link DescribeAppDetailResponse} */
+  DescribeAppDetail(data?: DescribeAppDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppDetailResponse>;
   /** 获取房间信息 {@link DescribeRoomRequest} {@link DescribeRoomResponse} */
   DescribeRoom(data: DescribeRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomResponse>;
   /** 获取房间统计信息 {@link DescribeRoomStatisticsRequest} {@link DescribeRoomStatisticsResponse} */

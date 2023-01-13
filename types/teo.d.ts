@@ -1024,7 +1024,7 @@ declare interface Resource {
   AutoRenewFlag: number;
   /** 套餐关联资源 ID。 */
   PlanId: string;
-  /** 地域，取值有：mainland：国内；overseas：海外。 */
+  /** 地域，取值有：mainland：国内；overseas：海外。global：全球。 */
   Area: string;
 }
 
