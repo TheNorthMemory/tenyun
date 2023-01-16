@@ -210,6 +210,18 @@ declare interface FlowApproverInfo {
   ApproverNeedSignReview?: boolean;
 }
 
+/** 签署人签署链接信息 */
+declare interface FlowApproverUrlInfo {
+  /** 签署链接，注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。 */
+  SignUrl: string;
+  /** 签署人手机号 */
+  Mobile: string;
+  /** 签署人姓名 */
+  Name: string;
+  /** 签署人类型 PERSON-个人 */
+  ApproverType: string;
+}
+
 /** 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息 */
 declare interface FlowDetailInfo {
   /** 合同(流程)的Id */
@@ -818,6 +830,26 @@ declare interface ChannelCreateFlowSignReviewRequest {
 }
 
 declare interface ChannelCreateFlowSignReviewResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChannelCreateFlowSignUrlRequest {
+  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填 */
+  Agent: Agent;
+  /** 流程编号 */
+  FlowId: string;
+  /** 流程签署人，其中Name和Mobile必传，其他可不传，ApproverType目前只支持PERSON类型的签署人，如果不传默认为该值。还需注意签署人只能有手写签名和时间类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。 */
+  FlowApproverInfos: FlowApproverInfo[];
+  /** 用户信息，暂未开放 */
+  Operator?: UserInfo;
+  /** 机构信息，暂未开放 */
+  Organization?: OrganizationInfo;
+}
+
+declare interface ChannelCreateFlowSignUrlResponse {
+  /** 签署人签署链接信息 */
+  FlowApproverUrlInfos: FlowApproverUrlInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2943,6 +2975,8 @@ declare interface Essbasic {
   ChannelCreateFlowGroupByFiles(data: ChannelCreateFlowGroupByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowGroupByFilesResponse>;
   /** 提交企业签署流程审批结果 {@link ChannelCreateFlowSignReviewRequest} {@link ChannelCreateFlowSignReviewResponse} */
   ChannelCreateFlowSignReview(data: ChannelCreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowSignReviewResponse>;
+  /** 渠道版创建签署链接 {@link ChannelCreateFlowSignUrlRequest} {@link ChannelCreateFlowSignUrlResponse} */
+  ChannelCreateFlowSignUrl(data: ChannelCreateFlowSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowSignUrlResponse>;
   /** 创建一码多扫签署流程二维码 {@link ChannelCreateMultiFlowSignQRCodeRequest} {@link ChannelCreateMultiFlowSignQRCodeResponse} */
   ChannelCreateMultiFlowSignQRCode(data: ChannelCreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateMultiFlowSignQRCodeResponse>;
   /** 发起解除协议 {@link ChannelCreateReleaseFlowRequest} {@link ChannelCreateReleaseFlowResponse} */

@@ -294,6 +294,10 @@ declare interface TraceCode {
   MerchantName: string;
   /** 产品名称 */
   ProductName: string;
+  /** 渠道商ID */
+  AgentId?: number;
+  /** 码层级 0: 最小级, 1: 一级, 2: 二级 */
+  Level?: number;
 }
 
 /** 溯源数据 */

@@ -2,6 +2,10 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 应用配置信息 */
+declare interface AppConfig {
+}
+
 /** 应用自定义内容 */
 declare interface AppCustomContent {
   /** 场景参数，一个应用下可以设置多个不同场景。 */
@@ -40,6 +44,10 @@ declare interface MemberRecord {
   LastQuitTimestamp: number;
   /** 奖励次数。 */
   Rewords: number;
+}
+
+/** 场景配置 */
+declare interface SceneItem {
 }
 
 declare interface BindDocumentToRoomRequest {
@@ -137,9 +145,19 @@ declare interface DeleteRoomResponse {
 }
 
 declare interface DescribeAppDetailRequest {
+  /** 应用ID */
+  ApplicationId: string;
+  /** 开发商ID */
+  DeveloperId: string;
 }
 
 declare interface DescribeAppDetailResponse {
+  /** SdkAppId */
+  SdkAppId?: string;
+  /** 应用配置 */
+  AppConfig?: AppConfig;
+  /** 场景配置 */
+  SceneConfig?: SceneItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -322,7 +340,7 @@ declare interface Lcic {
   /** 删除房间 {@link DeleteRoomRequest} {@link DeleteRoomResponse} */
   DeleteRoom(data: DeleteRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoomResponse>;
   /** 获取应用详情 {@link DescribeAppDetailRequest} {@link DescribeAppDetailResponse} */
-  DescribeAppDetail(data?: DescribeAppDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppDetailResponse>;
+  DescribeAppDetail(data: DescribeAppDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppDetailResponse>;
   /** 获取房间信息 {@link DescribeRoomRequest} {@link DescribeRoomResponse} */
   DescribeRoom(data: DescribeRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomResponse>;
   /** 获取房间统计信息 {@link DescribeRoomStatisticsRequest} {@link DescribeRoomStatisticsResponse} */

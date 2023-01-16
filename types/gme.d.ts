@@ -393,7 +393,7 @@ declare interface CreateAgeDetectTaskRequest {
 
 declare interface CreateAgeDetectTaskResponse {
   /** 本次任务提交后唯一id，用于获取任务运行结果 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -435,7 +435,7 @@ declare interface CreateCustomizationRequest {
 
 declare interface CreateCustomizationResponse {
   /** 模型ID */
-  ModelId: string;
+  ModelId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -449,7 +449,7 @@ declare interface CreateScanUserRequest {
 
 declare interface CreateScanUserResponse {
   /** 返回结果码 */
-  ErrorCode: number;
+  ErrorCode?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -463,7 +463,7 @@ declare interface DeleteCustomizationRequest {
 
 declare interface DeleteCustomizationResponse {
   /** 返回值。0为成功，非0为失败。 */
-  ErrorCode: number;
+  ErrorCode?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -495,7 +495,7 @@ declare interface DeleteScanUserRequest {
 
 declare interface DeleteScanUserResponse {
   /** 返回结果码 */
-  ErrorCode: number;
+  ErrorCode?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -503,15 +503,15 @@ declare interface DeleteScanUserResponse {
 declare interface DescribeAgeDetectTaskRequest {
   /** 应用id */
   BizId: number;
-  /** 创建年龄语音识别任务时返回的taskid */
+  /** [创建年龄语音识别任务](https://cloud.tencent.com/document/product/607/60620)时返回的taskid */
   TaskId: string;
 }
 
 declare interface DescribeAgeDetectTaskResponse {
   /** 任务ID */
-  TaskId: string;
+  TaskId?: string;
   /** 语音检测返回。Results 字段是 JSON 数组，每一个元素包含：DataId： 请求中对应的 DataId。Url ：该请求中对应的 Url。Status ：子任务状态，0:已创建，1:运行中，2:已完成，3:任务异常，4:任务超时。Age ：子任务完成后的结果，0:成年人，1:未成年人，100:未知结果。 */
-  Results: AgeDetectTaskResult[];
+  Results?: AgeDetectTaskResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -529,7 +529,7 @@ declare interface DescribeAppStatisticsRequest {
 
 declare interface DescribeAppStatisticsResponse {
   /** 应用用量统计数据 */
-  Data: DescribeAppStatisticsResp;
+  Data?: DescribeAppStatisticsResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -567,9 +567,9 @@ declare interface DescribeApplicationListRequest {
 
 declare interface DescribeApplicationListResponse {
   /** 获取应用列表返回 */
-  ApplicationList: ApplicationList[];
+  ApplicationList?: ApplicationList[];
   /** 应用总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -581,19 +581,19 @@ declare interface DescribeRealtimeScanConfigRequest {
 
 declare interface DescribeRealtimeScanConfigResponse {
   /** 返回结果码，0正常，非0失败 */
-  ErrorCode: number;
+  ErrorCode?: number;
   /** 应用ID */
-  BizId: number;
+  BizId?: number;
   /** 送检类型，0: 全量送审，1: 自定义送审 */
-  AuditType: number;
+  AuditType?: number;
   /** 用户号正则表达式 */
-  UserIdRegex: string[];
+  UserIdRegex?: string[];
   /** 房间号正则表达式 */
-  RoomIdRegex: string[];
+  RoomIdRegex?: string[];
   /** 用户号字符串，逗号分隔，示例："0001,0002,0003" */
-  UserIdString: string;
+  UserIdString?: string;
   /** 房间号字符串，逗号分隔，示例："0001,0002,0003" */
-  RoomIdString: string;
+  RoomIdString?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -661,7 +661,7 @@ declare interface GetCustomizationListRequest {
 
 declare interface GetCustomizationListResponse {
   /** 语音消息转文本热句模型配置 */
-  CustomizationConfigs: CustomizationConfigs[] | null;
+  CustomizationConfigs?: CustomizationConfigs[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -691,9 +691,9 @@ declare interface ModifyCustomizationRequest {
 
 declare interface ModifyCustomizationResponse {
   /** 返回值。0为成功，非0为失败。 */
-  ErrorCode: number;
+  ErrorCode?: number;
   /** 模型ID */
-  ModelId: string;
+  ModelId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -709,9 +709,9 @@ declare interface ModifyCustomizationStateRequest {
 
 declare interface ModifyCustomizationStateResponse {
   /** 模型ID */
-  ModelId: string;
+  ModelId?: string;
   /** 返回值。0为成功，非0为失败。 */
-  ErrorCode: number;
+  ErrorCode?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -767,7 +767,7 @@ declare interface UpdateScanRoomsRequest {
 
 declare interface UpdateScanRoomsResponse {
   /** 返回结果码 */
-  ErrorCode: number | null;
+  ErrorCode?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -783,7 +783,7 @@ declare interface UpdateScanUsersRequest {
 
 declare interface UpdateScanUsersResponse {
   /** 返回结果码 */
-  ErrorCode: number;
+  ErrorCode?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

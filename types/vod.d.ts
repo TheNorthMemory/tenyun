@@ -4809,7 +4809,7 @@ declare interface ComposeMediaRequest {
 
 declare interface ComposeMediaResponse {
   /** 制作媒体文件的任务 ID，可以通过该 ID 查询制作任务（任务类型为 MakeMedia）的状态。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

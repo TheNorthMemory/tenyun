@@ -2965,7 +2965,7 @@ declare interface DescribeInstanceAttributesResponse {
 declare interface DescribeInstancesDetailRequest {
   /** （过滤条件）按照实例ID过滤 */
   InstanceId?: string;
-  /** （过滤条件）按照实例名称过滤，支持模糊查询 */
+  /** （过滤条件）按照实例名,实例Id,可用区,私有网络id,子网id 过滤，支持模糊查询 */
   SearchWord?: string;
   /** （过滤条件）实例的状态。0：创建中，1：运行中，2：删除中，不填默认返回全部 */
   Status?: number[];
@@ -2985,7 +2985,7 @@ declare interface DescribeInstancesDetailRequest {
 
 declare interface DescribeInstancesDetailResponse {
   /** 返回的实例详情结果对象 */
-  Result: InstanceDetailResponse;
+  Result?: InstanceDetailResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
