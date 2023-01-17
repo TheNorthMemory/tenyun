@@ -102,6 +102,10 @@ declare interface Monitor {
   EvidenceNote: string;
   /** 侵权站点数量 */
   TortSiteNum: number;
+  /** 监测截止时间 */
+  MonitorEndTime?: string;
+  /** 是否自动续费 */
+  AutoRenew?: number;
 }
 
 /** 监测侵权信息详情 */
@@ -577,13 +581,15 @@ declare interface CreateCRWorkRequest {
   ApplierId?: string;
   /** 申请人姓名，用于存证和取证 */
   ApplierName?: string;
+  /** 是否自动续期 */
+  IsAutoRenew?: string;
 }
 
 declare interface CreateCRWorkResponse {
   /** 作品ID，一个作品对应唯一的workid */
-  WorkId: number;
+  WorkId?: number;
   /** 存证ID，忽略该字段 */
-  EvidenceId: number;
+  EvidenceId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -705,11 +711,11 @@ declare interface DescribeCRMonitorsRequest {
 
 declare interface DescribeCRMonitorsResponse {
   /** 监测结果 */
-  Monitors: Monitor[];
+  Monitors?: Monitor[];
   /** 记录总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 导出地址 */
-  ExportURL: string;
+  ExportURL?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

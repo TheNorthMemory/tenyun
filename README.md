@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 224+ 款产品，8859+ 服务数</summary>
+<details><summary>共计 224+ 款产品，8873+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -141,7 +141,7 @@ cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(4
 ccc | [云呼叫中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(36) |
 cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(135) |
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(20) |
-cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(78+3) |
+cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(79+3) |
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(6) |
 cdwch | [云数据仓库 ClickHouse](https://cloud.tencent.com/document/product/1299) | 2020-09-15(10) |
 cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(10) |
@@ -306,7 +306,7 @@ trdp | [流量风险决策平台](https://cloud.tencent.com/document/product/160
 trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(42) |
 trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(36) |
 tse | [微服务引擎 TSE](https://cloud.tencent.com/document/product/1364) | 2020-12-07(10) |
-tsf | [微服务平台 TSF](https://cloud.tencent.com/document/product/649) | 2018-03-26(191) |
+tsf | [微服务平台 TSF](https://cloud.tencent.com/document/product/649) | 2018-03-26(204) |
 tsw | [微服务观测平台 TSW](https://cloud.tencent.com/document/product/1311) | 2021-04-12(3) | 2020-09-24(1) |
 tts | [语音合成](https://cloud.tencent.com/document/product/1073) | 2019-08-23(3) |
 ump | [客流数字化平台](https://cloud.tencent.com/document/product/1320) | 2020-09-18(17) |

@@ -758,7 +758,7 @@ declare interface LoadBalancerDetail {
   PrepaidAttributes: LBChargePrepaid | null;
   /** 暂做保留，一般用户无需关注。 */
   ExtraInfo: ExtraInfo | null;
-  /** 负载均衡维度的个性化配置ID。 */
+  /** 负载均衡维度的个性化配置ID，多个配置用逗号隔开。 */
   ConfigId: string | null;
   /** 负载均衡实例的标签信息。 */
   Tags: TagInfo[] | null;

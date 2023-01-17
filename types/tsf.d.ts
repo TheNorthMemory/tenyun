@@ -394,6 +394,82 @@ declare interface Cluster {
   ClusterVersion: string | null;
 }
 
+/** 集群详情 */
+declare interface ClusterV2 {
+  /** 集群ID */
+  ClusterId: string | null;
+  /** 集群名称 */
+  ClusterName: string | null;
+  /** 集群描述 */
+  ClusterDesc: string | null;
+  /** 集群类型 */
+  ClusterType: string | null;
+  /** 集群所属私有网络ID */
+  VpcId: string | null;
+  /** 集群状态 */
+  ClusterStatus: string | null;
+  /** 集群CIDR */
+  ClusterCIDR: string | null;
+  /** 集群总CPU，单位: 核 */
+  ClusterTotalCpu: number | null;
+  /** 集群总内存，单位: G */
+  ClusterTotalMem: number | null;
+  /** 集群已使用CPU，单位: 核 */
+  ClusterUsedCpu: number | null;
+  /** 集群已使用内存，单位: G */
+  ClusterUsedMem: number | null;
+  /** 集群机器实例数量 */
+  InstanceCount: number | null;
+  /** 集群运行中的机器实例数量 */
+  RunInstanceCount: number | null;
+  /** 集群正常状态的机器实例数量 */
+  NormalInstanceCount: number | null;
+  /** 删除标记：true：可以删除；false：不可删除 */
+  DeleteFlag: boolean | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 更新时间 */
+  UpdateTime: string | null;
+  /** 集群所属TSF地域ID */
+  TsfRegionId: string | null;
+  /** 集群所属TSF地域名称 */
+  TsfRegionName: string | null;
+  /** 集群所属TSF可用区ID */
+  TsfZoneId: string | null;
+  /** 集群所属TSF可用区名称 */
+  TsfZoneName: string | null;
+  /** 集群不可删除的原因 */
+  DeleteFlagReason: string | null;
+  /** 集群所属私有网络子网ID */
+  SubnetId: string | null;
+  /** 集群剩余 cpu limit */
+  ClusterLimitCpu: string | null;
+  /** 集群剩余 memory limit */
+  ClusterLimitMem: string | null;
+  /** 运行服务实例数 */
+  RunServiceInstanceCount: number | null;
+  /** 给前端的按钮控制信息 */
+  OperationInfo: OperationInfo | null;
+  /** 容器集群版本 */
+  ClusterVersion: string | null;
+  /** 部署组总数 */
+  GroupCount: number | null;
+  /** 运行中部署组数 */
+  RunGroupCount: number | null;
+  /** 停止中部署组数 */
+  StopGroupCount: number | null;
+  /** 异常部署组数 */
+  AbnormalGroupCount: number | null;
+  /** 集群备注名 */
+  ClusterRemarkName: string | null;
+  /** api地址 */
+  KuberneteApiServer: string | null;
+  /** K : kubeconfig, S : service account */
+  KuberneteNativeType: string | null;
+  /** native secret */
+  KuberneteNativeSecret: string | null;
+}
+
 /** 配置项 */
 declare interface Config {
   /** 配置项ID */
@@ -488,6 +564,24 @@ declare interface ConfigReleaseLog {
   LastConfigVersion: string | null;
   /** 回滚标识 */
   RollbackFlag: boolean | null;
+}
+
+/** 配置模板对象 */
+declare interface ConfigTemplate {
+  /** 配置模板Id */
+  ConfigTemplateId?: string | null;
+  /** 配置模板名称 */
+  ConfigTemplateName?: string | null;
+  /** 配置模板描述 */
+  ConfigTemplateDesc?: string | null;
+  /** 配置模板对应的微服务框架 */
+  ConfigTemplateType?: string | null;
+  /** 配置模板数据 */
+  ConfigTemplateValue?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
 }
 
 /** 部署组列表（应用下钻界面的） */
@@ -2508,6 +2602,14 @@ declare interface TsfPageCluster {
   Content: Cluster[] | null;
 }
 
+/** Tsf分页集群对象 */
+declare interface TsfPageClusterV2 {
+  /** 集群总数目 */
+  TotalCount: number | null;
+  /** 集群列表 */
+  Content: ClusterV2[] | null;
+}
+
 /** TsfPage */
 declare interface TsfPageConfig {
   /** TsfPageConfig */
@@ -2554,6 +2656,14 @@ declare interface TsfPageFileConfig {
   TotalCount: number | null;
   /** 文件配置数组 */
   Content: FileConfig[] | null;
+}
+
+/** 文件配置项发布信息列表 */
+declare interface TsfPageFileConfigRelease {
+  /** 数量 */
+  TotalCount: number | null;
+  /** 列表 */
+  Content: FileConfigRelease[] | null;
 }
 
 /** GatewayDeployGroup 翻页对象 */
@@ -3227,6 +3337,26 @@ declare interface CreateConfigResponse {
   RequestId?: string;
 }
 
+declare interface CreateConfigTemplateRequest {
+  /** 配置模板名称 */
+  ConfigTemplateName: string;
+  /** 配置模板对应的微服务框架 */
+  ConfigTemplateType: string;
+  /** 配置模板数据 */
+  ConfigTemplateValue: string;
+  /** 配置模板描述 */
+  ConfigTemplateDesc?: string;
+  /** 无 */
+  ProgramIdList?: string[];
+}
+
+declare interface CreateConfigTemplateResponse {
+  /** true：创建成功；false：创建失败 */
+  Result: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateContainGroupRequest {
   /** 分组所属应用ID */
   ApplicationId: string;
@@ -3409,6 +3539,22 @@ declare interface CreateMicroserviceRequest {
 declare interface CreateMicroserviceResponse {
   /** 新增微服务是否成功。true：操作成功。false：操作失败。 */
   Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateMicroserviceWithDetailRespRequest {
+  /** 命名空间ID */
+  NamespaceId: string;
+  /** 微服务名称 */
+  MicroserviceName: string;
+  /** 微服务描述信息 */
+  MicroserviceDesc?: string;
+}
+
+declare interface CreateMicroserviceWithDetailRespResponse {
+  /** id */
+  Result: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3603,12 +3749,38 @@ declare interface DeleteApplicationResponse {
   RequestId?: string;
 }
 
+declare interface DeleteClusterRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 是否只解绑，不删除容器集群，默认不传则删除容器集群。 */
+  Unbind?: boolean;
+}
+
+declare interface DeleteClusterResponse {
+  /** 删除集群操作是否成功。true：操作成功。false：操作失败。 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteConfigRequest {
   /** 配置项ID */
   ConfigId: string;
 }
 
 declare interface DeleteConfigResponse {
+  /** true：删除成功；false：删除失败 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteConfigTemplateRequest {
+  /** 无 */
+  ConfigTemplateId: string;
+}
+
+declare interface DeleteConfigTemplateResponse {
   /** true：删除成功；false：删除失败 */
   Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -4173,6 +4345,30 @@ declare interface DescribeClusterInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClustersRequest {
+  /** 搜索词 */
+  SearchWord?: string;
+  /** 排序字段 */
+  OrderBy?: string;
+  /** 排序方式 */
+  OrderType?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 分页个数 */
+  Limit?: number;
+  /** 集群类型 */
+  ClusterType?: string;
+  /** idList */
+  ClusterIdList?: string[];
+}
+
+declare interface DescribeClustersResponse {
+  /** Cluster分页信息 */
+  Result: TsfPageClusterV2 | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeConfigReleaseLogsRequest {
   /** 部署组ID，不传入时查询全量 */
   GroupId?: string;
@@ -4257,6 +4453,18 @@ declare interface DescribeConfigSummaryRequest {
 declare interface DescribeConfigSummaryResponse {
   /** 配置项分页对象 */
   Result: TsfPageConfig;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConfigTemplateRequest {
+  /** 无 */
+  ConfigTemplateId: string;
+}
+
+declare interface DescribeConfigTemplateResponse {
+  /** Result */
+  Result?: ConfigTemplate | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4435,6 +4643,32 @@ declare interface DescribeEnabledUnitRuleRequest {
 declare interface DescribeEnabledUnitRuleResponse {
   /** 单元化规则对象 */
   Result?: UnitRule | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFileConfigReleasesRequest {
+  /** 配置项ID */
+  ConfigId?: string;
+  /** 配置项名称 */
+  ConfigName?: string;
+  /** 部署组ID */
+  GroupId?: string;
+  /** 命名空间ID */
+  NamespaceId?: string;
+  /** 集群ID */
+  ClusterId?: string;
+  /** 应用ID */
+  ApplicationId?: string;
+  /** 偏移量 */
+  Offset?: number;
+  /** 每页条数 */
+  Limit?: number;
+}
+
+declare interface DescribeFileConfigReleasesResponse {
+  /** 配置项发布信息列表 */
+  Result?: TsfPageFileConfigRelease | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5781,6 +6015,44 @@ declare interface ExpandGroupResponse {
   RequestId?: string;
 }
 
+declare interface ModifyApplicationRequest {
+  /** 应用ID */
+  ApplicationId: string;
+  /** 应用名称 */
+  ApplicationName?: string;
+  /** 应用备注 */
+  ApplicationDesc?: string;
+  /** 应用备注名 */
+  ApplicationRemarkName?: string;
+  /** 服务配置信息列表 */
+  ServiceConfigList?: ServiceConfig[];
+}
+
+declare interface ModifyApplicationResponse {
+  /** true/false */
+  Result: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyClusterRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 集群描述信息 */
+  ClusterDesc?: string;
+  /** 备注名 */
+  ClusterRemarkName?: string;
+}
+
+declare interface ModifyClusterResponse {
+  /** 更新集群详情操作是否成功。true： 操作成功。false：操作失败。 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyContainerGroupRequest {
   /** 部署组ID */
   GroupId?: string;
@@ -5815,6 +6087,24 @@ declare interface ModifyContainerReplicasRequest {
 declare interface ModifyContainerReplicasResponse {
   /** 结果true：成功；false：失败； */
   Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyGroupRequest {
+  /** 部署组ID */
+  GroupId: string;
+  /** 部署组名称 */
+  GroupName?: string;
+  /** 部署组描述 */
+  GroupDesc?: string;
+  /** 部署组备注 */
+  Alias?: string;
+}
+
+declare interface ModifyGroupResponse {
+  /** 更新部署组详情是否成功。true：操作成功。false：操作失败。 */
+  Result: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5869,6 +6159,22 @@ declare interface ModifyMicroserviceRequest {
 declare interface ModifyMicroserviceResponse {
   /** 修改微服务详情是否成功。true：操作成功。false：操作失败。 */
   Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyNamespaceRequest {
+  /** 命名空间ID */
+  NamespaceId: string;
+  /** 命名空间名称 */
+  NamespaceName?: string;
+  /** 命名空间备注 */
+  NamespaceDesc?: string;
+  /** 是否开启高可用 */
+  IsHaEnable?: string;
+}
+
+declare interface ModifyNamespaceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6138,6 +6444,18 @@ declare interface RevocationPublicConfigRequest {
 
 declare interface RevocationPublicConfigResponse {
   /** true：撤销成功；false：撤销失败 */
+  Result?: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RevokeFileConfigRequest {
+  /** 配置项发布ID */
+  ConfigReleaseId: string;
+}
+
+declare interface RevokeFileConfigResponse {
+  /** 撤回结果 */
   Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -6438,6 +6756,26 @@ declare interface UpdateApiTimeoutsResponse {
   RequestId?: string;
 }
 
+declare interface UpdateConfigTemplateRequest {
+  /** 配置模板id */
+  ConfigTemplateId: string;
+  /** 配置模板名称 */
+  ConfigTemplateName: string;
+  /** 配置模板对应的微服务框架 */
+  ConfigTemplateType: string;
+  /** 配置模板数据 */
+  ConfigTemplateValue: string;
+  /** 配置模板描述 */
+  ConfigTemplateDesc?: string;
+}
+
+declare interface UpdateConfigTemplateResponse {
+  /** 结果true：成功；false：失败； */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateGatewayApiRequest {
   /** API ID */
   ApiId: string;
@@ -6539,6 +6877,8 @@ declare interface Tsf {
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
   /** 创建配置项 {@link CreateConfigRequest} {@link CreateConfigResponse} */
   CreateConfig(data: CreateConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigResponse>;
+  /** 创建参数模板 {@link CreateConfigTemplateRequest} {@link CreateConfigTemplateResponse} */
+  CreateConfigTemplate(data: CreateConfigTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigTemplateResponse>;
   /** 创建容器部署组 {@link CreateContainGroupRequest} {@link CreateContainGroupResponse} */
   CreateContainGroup(data: CreateContainGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContainGroupResponse>;
   /** 创建文件配置项 {@link CreateFileConfigRequest} {@link CreateFileConfigResponse} */
@@ -6553,6 +6893,8 @@ declare interface Tsf {
   CreateLaneRule(data: CreateLaneRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLaneRuleResponse>;
   /** 新增微服务 {@link CreateMicroserviceRequest} {@link CreateMicroserviceResponse} */
   CreateMicroservice(data: CreateMicroserviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMicroserviceResponse>;
+  /** 新增微服务返回id {@link CreateMicroserviceWithDetailRespRequest} {@link CreateMicroserviceWithDetailRespResponse} */
+  CreateMicroserviceWithDetailResp(data: CreateMicroserviceWithDetailRespRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMicroserviceWithDetailRespResponse>;
   /** 创建命名空间 {@link CreateNamespaceRequest} {@link CreateNamespaceResponse} */
   CreateNamespace(data: CreateNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNamespaceResponse>;
   /** 创建路径重写 {@link CreatePathRewritesRequest} {@link CreatePathRewritesResponse} */
@@ -6571,8 +6913,12 @@ declare interface Tsf {
   DeleteApiGroup(data: DeleteApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiGroupResponse>;
   /** 删除应用 {@link DeleteApplicationRequest} {@link DeleteApplicationResponse} */
   DeleteApplication(data: DeleteApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationResponse>;
+  /** 删除集群 {@link DeleteClusterRequest} {@link DeleteClusterResponse} */
+  DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
   /** 删除配置项 {@link DeleteConfigRequest} {@link DeleteConfigResponse} */
   DeleteConfig(data: DeleteConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigResponse>;
+  /** 删除模板 {@link DeleteConfigTemplateRequest} {@link DeleteConfigTemplateResponse} */
+  DeleteConfigTemplate(data: DeleteConfigTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigTemplateResponse>;
   /** 删除容器部署组 {@link DeleteContainerGroupRequest} {@link DeleteContainerGroupResponse} */
   DeleteContainerGroup(data: DeleteContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteContainerGroupResponse>;
   /** 删除虚拟机部署组 {@link DeleteGroupRequest} {@link DeleteGroupResponse} */
@@ -6635,6 +6981,8 @@ declare interface Tsf {
   DescribeBusinessLogConfigs(data?: DescribeBusinessLogConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBusinessLogConfigsResponse>;
   /** 查询集群实例 {@link DescribeClusterInstancesRequest} {@link DescribeClusterInstancesResponse} */
   DescribeClusterInstances(data: DescribeClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstancesResponse>;
+  /** 获取集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
+  DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** 查询配置 {@link DescribeConfigRequest} {@link DescribeConfigResponse} */
   DescribeConfig(data: DescribeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigResponse>;
   /** 查询配置发布历史 {@link DescribeConfigReleaseLogsRequest} {@link DescribeConfigReleaseLogsResponse} */
@@ -6643,6 +6991,8 @@ declare interface Tsf {
   DescribeConfigReleases(data?: DescribeConfigReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigReleasesResponse>;
   /** 查询配置汇总列表 {@link DescribeConfigSummaryRequest} {@link DescribeConfigSummaryResponse} */
   DescribeConfigSummary(data?: DescribeConfigSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigSummaryResponse>;
+  /** 导入配置 {@link DescribeConfigTemplateRequest} {@link DescribeConfigTemplateResponse} */
+  DescribeConfigTemplate(data: DescribeConfigTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigTemplateResponse>;
   /** 查询配置项列表 {@link DescribeConfigsRequest} {@link DescribeConfigsResponse} */
   DescribeConfigs(data?: DescribeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigsResponse>;
   /** 获取容器事件列表 {@link DescribeContainerEventsRequest} {@link DescribeContainerEventsResponse} */
@@ -6665,6 +7015,8 @@ declare interface Tsf {
   DescribeDownloadInfo(data: DescribeDownloadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDownloadInfoResponse>;
   /** 查询生效的单元化规则 {@link DescribeEnabledUnitRuleRequest} {@link DescribeEnabledUnitRuleResponse} */
   DescribeEnabledUnitRule(data: DescribeEnabledUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnabledUnitRuleResponse>;
+  /** 查询文件配置项发布信息 {@link DescribeFileConfigReleasesRequest} {@link DescribeFileConfigReleasesResponse} */
+  DescribeFileConfigReleases(data?: DescribeFileConfigReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileConfigReleasesResponse>;
   /** 查询文件配置项列表 {@link DescribeFileConfigsRequest} {@link DescribeFileConfigsResponse} */
   DescribeFileConfigs(data?: DescribeFileConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileConfigsResponse>;
   /** 查询工作流最近一个批次的执行状态 {@link DescribeFlowLastBatchStateRequest} {@link DescribeFlowLastBatchStateResponse} */
@@ -6809,16 +7161,24 @@ declare interface Tsf {
   ExecuteTaskFlow(data?: ExecuteTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskFlowResponse>;
   /** 虚拟机部署组添加实例 {@link ExpandGroupRequest} {@link ExpandGroupResponse} */
   ExpandGroup(data: ExpandGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ExpandGroupResponse>;
+  /** 修改应用 {@link ModifyApplicationRequest} {@link ModifyApplicationResponse} */
+  ModifyApplication(data: ModifyApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationResponse>;
+  /** 修改集群信息 {@link ModifyClusterRequest} {@link ModifyClusterResponse} */
+  ModifyCluster(data: ModifyClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterResponse>;
   /** 修改容器部署组 {@link ModifyContainerGroupRequest} {@link ModifyContainerGroupResponse} */
   ModifyContainerGroup(data?: ModifyContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContainerGroupResponse>;
   /** 修改容器部署组实例数 {@link ModifyContainerReplicasRequest} {@link ModifyContainerReplicasResponse} */
   ModifyContainerReplicas(data: ModifyContainerReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContainerReplicasResponse>;
+  /** 更新分组信息 {@link ModifyGroupRequest} {@link ModifyGroupResponse} */
+  ModifyGroup(data: ModifyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGroupResponse>;
   /** 更新泳道信息 {@link ModifyLaneRequest} {@link ModifyLaneResponse} */
   ModifyLane(data: ModifyLaneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLaneResponse>;
   /** 更新泳道规则 {@link ModifyLaneRuleRequest} {@link ModifyLaneRuleResponse} */
   ModifyLaneRule(data: ModifyLaneRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLaneRuleResponse>;
   /** 修改微服务详情 {@link ModifyMicroserviceRequest} {@link ModifyMicroserviceResponse} */
   ModifyMicroservice(data: ModifyMicroserviceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMicroserviceResponse>;
+  /** 修改命名空间 {@link ModifyNamespaceRequest} {@link ModifyNamespaceResponse} */
+  ModifyNamespace(data: ModifyNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNamespaceResponse>;
   /** 修改路径重写 {@link ModifyPathRewriteRequest} {@link ModifyPathRewriteResponse} */
   ModifyPathRewrite(data: ModifyPathRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPathRewriteResponse>;
   /** 修改任务 {@link ModifyTaskRequest} {@link ModifyTaskResponse} */
@@ -6851,6 +7211,8 @@ declare interface Tsf {
   RevocationConfig(data: RevocationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<RevocationConfigResponse>;
   /** 撤回已发布的公共配置 {@link RevocationPublicConfigRequest} {@link RevocationPublicConfigResponse} */
   RevocationPublicConfig(data: RevocationPublicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<RevocationPublicConfigResponse>;
+  /** 撤回已发布的文件配置 {@link RevokeFileConfigRequest} {@link RevokeFileConfigResponse} */
+  RevokeFileConfig(data: RevokeFileConfigRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeFileConfigResponse>;
   /** 回滚配置 {@link RollbackConfigRequest} {@link RollbackConfigResponse} */
   RollbackConfig(data: RollbackConfigRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackConfigResponse>;
   /** 业务日志搜索 {@link SearchBusinessLogRequest} {@link SearchBusinessLogResponse} */
@@ -6885,6 +7247,8 @@ declare interface Tsf {
   UpdateApiRateLimitRules(data: UpdateApiRateLimitRulesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApiRateLimitRulesResponse>;
   /** 更新API超时 {@link UpdateApiTimeoutsRequest} {@link UpdateApiTimeoutsResponse} */
   UpdateApiTimeouts(data: UpdateApiTimeoutsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApiTimeoutsResponse>;
+  /** 更新参数模板 {@link UpdateConfigTemplateRequest} {@link UpdateConfigTemplateResponse} */
+  UpdateConfigTemplate(data: UpdateConfigTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateConfigTemplateResponse>;
   /** 更新API {@link UpdateGatewayApiRequest} {@link UpdateGatewayApiResponse} */
   UpdateGatewayApi(data: UpdateGatewayApiRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGatewayApiResponse>;
   /** 更新健康检查配置 {@link UpdateHealthCheckSettingsRequest} {@link UpdateHealthCheckSettingsResponse} */

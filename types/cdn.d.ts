@@ -1048,6 +1048,32 @@ declare interface DownstreamCapping {
   CappingRules?: CappingRule[] | null;
 }
 
+/** 动态打包任务过滤器 */
+declare interface EdgePackTaskFilter {
+  /** 过滤字段名apk: apk名称status: 母包处理进度 done, failed, processing */
+  Name: string;
+  /** 过滤字段值 */
+  Value: string[];
+  /** 是否启用模糊查询，仅支持过滤字段名为 apk。模糊查询时，Value长度最大为1。 */
+  Fuzzy: boolean;
+}
+
+/** 动态打包任务状态 */
+declare interface EdgePackTaskStatus {
+  /** APK 名称 */
+  Apk: string;
+  /** 输出目录 */
+  DstDir: string;
+  /** 上传时间 */
+  UploadTime: string;
+  /** 任务状态created: 创建成功processing: 处理中done: 处理完成failed: 处理失败 */
+  Status: string;
+  /** 上传目录 */
+  SrcDir: string[];
+  /** 失败任务状态详情 */
+  StatusDesc: string;
+}
+
 /** 状态码重定向配置，默认为关闭状态 */
 declare interface ErrorPage {
   /** 状态码重定向配置开关on：开启off：关闭 */
@@ -3064,6 +3090,28 @@ declare interface DescribeDomainsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEdgePackTaskStatusRequest {
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 分页查询限制数目，默认为 100，最大可设置为 1000 */
+  Limit?: number;
+  /** 分页查询偏移量，默认为 0 */
+  Offset?: number;
+  /** 查询条件过滤器 */
+  Filters?: EdgePackTaskFilter[];
+}
+
+declare interface DescribeEdgePackTaskStatusResponse {
+  /** 动态打包任务状态列表 */
+  EdgePackTaskStatusSet: EdgePackTaskStatus[];
+  /** 总数，用于分页查询 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEventLogDataRequest {
   /** 防护类型，映射如下： waf = "Web攻击" cc = "CC攻击" */
   Mode: string;
@@ -4327,6 +4375,8 @@ declare interface Cdn {
   DescribeDomains(data?: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
   /** 查询域名详细配置 {@link DescribeDomainsConfigRequest} {@link DescribeDomainsConfigResponse} */
   DescribeDomainsConfig(data?: DescribeDomainsConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsConfigResponse>;
+  /** 查询动态打包任务状态列表 {@link DescribeEdgePackTaskStatusRequest} {@link DescribeEdgePackTaskStatusResponse} */
+  DescribeEdgePackTaskStatus(data: DescribeEdgePackTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgePackTaskStatusResponse>;
   /** 查询事件日志统计曲线 {@link DescribeEventLogDataRequest} {@link DescribeEventLogDataResponse} */
   DescribeEventLogData(data: DescribeEventLogDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventLogDataResponse>;
   /** 获取图片优化的配置 {@link DescribeImageConfigRequest} {@link DescribeImageConfigResponse} */

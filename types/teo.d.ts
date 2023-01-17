@@ -26,6 +26,8 @@ declare interface AclConfig {
   Switch: string;
   /** 用户自定义规则。 */
   AclUserRules: AclUserRule[];
+  /** 托管定制规则 */
+  Customizes?: AclUserRule[] | null;
 }
 
 /** 用户自定义规则 */
@@ -552,6 +554,14 @@ declare interface Filter {
   Values: string[];
 }
 
+/** 慢速攻击的首段包配置。 */
+declare interface FirstPartConfig {
+  /** 开关，取值有：on：开启；off：关闭。 */
+  Switch: string | null;
+  /** 首段包的统计时长，单位是秒，即期望首段包的统计时长是多少，默认5秒。 */
+  StatTime?: number | null;
+}
+
 /** 缓存遵循源站配置 */
 declare interface FollowOrigin {
   /** 遵循源站配置开关，取值有：on：开启；off：关闭。 */
@@ -926,7 +936,7 @@ declare interface Quota {
   Type: string;
 }
 
-/** RateLimit配置 */
+/** 速率限制规则 */
 declare interface RateLimitConfig {
   /** 开关，取值有：on：开启；off：关闭。 */
   Switch: string;
@@ -936,6 +946,8 @@ declare interface RateLimitConfig {
   RateLimitTemplate?: RateLimitTemplate | null;
   /** 智能客户端过滤。如果为null，默认使用历史配置。 */
   RateLimitIntelligence?: RateLimitIntelligence | null;
+  /** 速率限制-托管定制规则。如果为null，默认使用历史配置。 */
+  RateLimitCustomizes?: RateLimitUserRule[] | null;
 }
 
 /** 智能客户端过滤 */
@@ -1278,6 +1290,8 @@ declare interface SecurityConfig {
   DropPageConfig?: DropPageConfig | null;
   /** 模板配置。此处仅出参数使用。 */
   TemplateConfig?: TemplateConfig | null;
+  /** 慢速攻击配置。如果为null，默认使用历史配置。 */
+  SlowPostConfig?: SlowPostConfig | null;
 }
 
 /** 安全类型配置项。 */
@@ -1334,6 +1348,30 @@ declare interface SkipCondition {
   MatchContentType?: string;
   /** 匹配Value的值。 */
   MatchContent?: string[] | null;
+}
+
+/** 慢速攻击配置。 */
+declare interface SlowPostConfig {
+  /** 开关，取值有：on：开启；off：关闭。 */
+  Switch: string;
+  /** 首包配置。 */
+  FirstPartConfig?: FirstPartConfig | null;
+  /** 基础配置。 */
+  SlowRateConfig?: SlowRateConfig | null;
+  /** 慢速攻击的处置动作，取值有：monitor：观察；drop：拦截。 */
+  Action?: string | null;
+  /** 本规则的Id。 */
+  RuleId?: number | null;
+}
+
+/** 慢速攻击的基础配置。 */
+declare interface SlowRateConfig {
+  /** 开关，取值有：on：开启；off：关闭。 */
+  Switch: string;
+  /** 统计的间隔，单位是秒，即在首段包传输结束后，将数据传输轴按照本参数切分，每个分片独立计算慢速攻击。 */
+  Interval?: number | null;
+  /** 统计时应用的速率阈值，单位是bps，即如果本分片中的传输速率没达到本参数的值，则判定为慢速攻击，应用慢速攻击的处置方式。 */
+  Threshold?: number | null;
 }
 
 /** 智能加速配置 */
