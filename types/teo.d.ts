@@ -2668,6 +2668,32 @@ declare interface DescribeTimingL7CacheDataResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTimingL7SourceDataRequest {
+  /** 开始时间。 */
+  StartTime: string;
+  /** 结束时间。 */
+  EndTime: string;
+  /** 指标列表，取值有:l7Flow_outFlux_hy: Edgeone请求流量；l7Flow_outBandwidth_hy: Edgeone请求带宽；l7Flow_inFlux_hy: 源站响应流量；l7Flow_inBandwidth_hy: 源站响应带宽；l7Flow_request_hy: 回源请求数； */
+  MetricNames: string[];
+  /** 站点集合，不填默认选择全部站点。 */
+  ZoneIds?: string[];
+  /** 查询时间粒度，取值有：min: 1分钟；5min: 5分钟；hour: 1小时；day: 1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。 */
+  Interval?: string;
+  /** 过滤条件，详细的过滤条件如下：domain 按照【回源Host】进行过滤。 类型：String 必选：否origin 按照【源站】进行过滤。 类型：String 必选：否originGroup 按照【源站组】进行过滤，源站组形如：origin-xxxxx。 类型：String 必选：否flowType 按照【源站响应类型】进行过滤，优先级高于 MetricNames.N 参数。 类型：String 必选：否 可选项： inFlow：源站响应流量，对应MetricNames中l7Flow_inFlux_hy、l7Flow_inBandwidth_hy、l7Flow_request_hy三个指标； outFlow：EdgeOne请求流量，对应MetricNames中l7Flow_outFlux_hy、l7Flow_outBandwidth_hy、l7Flow_request_hy三个指标。 */
+  Filters?: QueryCondition[];
+  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
+  Area?: string;
+}
+
+declare interface DescribeTimingL7SourceDataResponse {
+  /** 查询结果的总条数。 */
+  TotalCount: number;
+  /** 时序流量数据列表。 */
+  TimingDataRecords: TimingDataRecord[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTopL7AnalysisDataRequest {
   /** 开始时间。 */
   StartTime: string;
@@ -7645,6 +7671,8 @@ declare interface Teo {
   DescribeTimingL7AnalysisData(data: DescribeTimingL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL7AnalysisDataResponse>;
   /** 查询缓存分析时序数据 {@link DescribeTimingL7CacheDataRequest} {@link DescribeTimingL7CacheDataResponse} */
   DescribeTimingL7CacheData(data: DescribeTimingL7CacheDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL7CacheDataResponse>;
+  /** 查询回源分析时序数据 {@link DescribeTimingL7SourceDataRequest} {@link DescribeTimingL7SourceDataResponse} */
+  DescribeTimingL7SourceData(data: DescribeTimingL7SourceDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL7SourceDataResponse>;
   /** 查询流量分析Top数据 {@link DescribeTopL7AnalysisDataRequest} {@link DescribeTopL7AnalysisDataResponse} */
   DescribeTopL7AnalysisData(data: DescribeTopL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopL7AnalysisDataResponse>;
   /** 查询缓存分析Top数据 {@link DescribeTopL7CacheDataRequest} {@link DescribeTopL7CacheDataResponse} */

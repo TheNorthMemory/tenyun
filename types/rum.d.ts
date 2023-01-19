@@ -1883,7 +1883,7 @@ declare interface Rum {
   DescribeError(data: DescribeErrorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeErrorResponse>;
   /** 获取日志下载任务列表 {@link DescribeLogExportsRequest} {@link DescribeLogExportsResponse} */
   DescribeLogExports(data: DescribeLogExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogExportsResponse>;
-  /** 获取日志列表 {@link DescribeLogListRequest} {@link DescribeLogListResponse} */
+  /** 获取日志列表(已下线，请用DescribeRumLogList) {@link DescribeLogListRequest} {@link DescribeLogListResponse} */
   DescribeLogList(data: DescribeLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogListResponse>;
   /** 获取设置的离线日志监听配置 {@link DescribeOfflineLogConfigsRequest} {@link DescribeOfflineLogConfigsResponse} */
   DescribeOfflineLogConfigs(data: DescribeOfflineLogConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineLogConfigsResponse>;
