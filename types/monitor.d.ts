@@ -3109,13 +3109,13 @@ declare interface DescribeGrafanaConfigResponse {
 }
 
 declare interface DescribeGrafanaEnvironmentsRequest {
-  /** Grafana 实例 ID，例如：Grafana 实例 ID，例如：grafana-abcdefghGrafana 实例 ID，例如：grafana-abcdefgh */
+  /** Grafana 实例 ID，例如：grafana-abcdefgh */
   InstanceId: string;
 }
 
 declare interface DescribeGrafanaEnvironmentsResponse {
   /** 环境变量字符串 */
-  Envs: string;
+  Envs?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
