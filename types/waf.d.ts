@@ -595,17 +595,19 @@ declare interface AddCustomRuleRequest {
   ActionType: string;
   /** 如果动作是重定向，则表示重定向的地址；其他情况可以为空 */
   Redirect?: string;
-  /** "clb-waf"或者"sparta-waf" */
+  /** WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF */
   Edition?: string;
   /** 放行的详情 */
   Bypass?: string;
+  /** 添加规则的来源，默认为空 */
+  EventId?: string;
 }
 
 declare interface AddCustomRuleResponse {
   /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
-  Success: ResponseCode;
+  Success?: ResponseCode;
   /** 添加成功的规则ID */
-  RuleId: number | null;
+  RuleId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -842,12 +844,12 @@ declare interface DescribeAccessIndexRequest {
 }
 
 declare interface DescribeAccessIndexResponse {
-  /** 是否生效 */
-  Status: boolean;
+  /** 是否生效，true表示生效，false表示未生效 */
+  Status?: boolean;
   /** 索引配置信息 */
-  Rule: AccessRuleInfo | null;
+  Rule?: AccessRuleInfo | null;
   /** 索引修改时间，初始值为索引创建时间。 */
-  ModifyTime: string;
+  ModifyTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -937,9 +939,9 @@ declare interface DescribeDomainsRequest {
 
 declare interface DescribeDomainsResponse {
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** domain列表 */
-  Domains: DomainInfo[] | null;
+  Domains?: DomainInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1139,7 +1141,7 @@ declare interface ModifyCustomRuleStatusRequest {
 
 declare interface ModifyCustomRuleStatusResponse {
   /** 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败 */
-  Success: ResponseCode;
+  Success?: ResponseCode;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1269,7 +1271,7 @@ declare interface UpsertIpAccessControlRequest {
   Domain: string;
   /** ip 参数列表，json数组由ip，source，note，action，valid_ts组成。ip对应配置的ip地址，source固定为custom值，note为注释，action值42为黑名单，40为白名单，valid_ts为有效日期，值为秒级时间戳 */
   Items: string[];
-  /** clb-waf或者sparta-waf */
+  /** WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF */
   Edition?: string;
   /** 是否为多域名黑白名单 */
   SourceType?: string;
@@ -1277,9 +1279,9 @@ declare interface UpsertIpAccessControlRequest {
 
 declare interface UpsertIpAccessControlResponse {
   /** 添加或修改失败的条目 */
-  FailedItems: string | null;
+  FailedItems?: string | null;
   /** 添加或修改失败的数目 */
-  FailedCount: number | null;
+  FailedCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1287,7 +1289,7 @@ declare interface UpsertIpAccessControlResponse {
 /** {@link Waf Web 应用防火墙} */
 declare interface Waf {
   (): Versions;
-  /** 增加自定义策略 {@link AddCustomRuleRequest} {@link AddCustomRuleResponse} */
+  /** 增加访问控制（自定义策略） {@link AddCustomRuleRequest} {@link AddCustomRuleResponse} */
   AddCustomRule(data: AddCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomRuleResponse>;
   /** 增加域名规则白名单 {@link AddDomainWhiteRuleRequest} {@link AddDomainWhiteRuleResponse} */
   AddDomainWhiteRule(data: AddDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddDomainWhiteRuleResponse>;
@@ -1319,7 +1321,7 @@ declare interface Waf {
   DescribeDomainDetailsSaas(data: DescribeDomainDetailsSaasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainDetailsSaasResponse>;
   /** 获取域名的规则白名单 {@link DescribeDomainWhiteRulesRequest} {@link DescribeDomainWhiteRulesResponse} */
   DescribeDomainWhiteRules(data: DescribeDomainWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainWhiteRulesResponse>;
-  /** 查询用户所有域名的详细信息 {@link DescribeDomainsRequest} {@link DescribeDomainsResponse} */
+  /** 获取域名列表 {@link DescribeDomainsRequest} {@link DescribeDomainsResponse} */
   DescribeDomains(data: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
   /** 获取waf流量访问趋势 {@link DescribeFlowTrendRequest} {@link DescribeFlowTrendResponse} */
   DescribeFlowTrend(data: DescribeFlowTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTrendResponse>;
@@ -1343,7 +1345,7 @@ declare interface Waf {
   GetAttackDownloadRecords(data?: GetAttackDownloadRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackDownloadRecordsResponse>;
   /** 修改访问日志保存期限 {@link ModifyAccessPeriodRequest} {@link ModifyAccessPeriodResponse} */
   ModifyAccessPeriod(data: ModifyAccessPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessPeriodResponse>;
-  /** 开启或禁用自定义策略 {@link ModifyCustomRuleStatusRequest} {@link ModifyCustomRuleStatusResponse} */
+  /** 开启或禁用访问控制（自定义策略） {@link ModifyCustomRuleStatusRequest} {@link ModifyCustomRuleStatusResponse} */
   ModifyCustomRuleStatus(data: ModifyCustomRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomRuleStatusResponse>;
   /** 更改某一条规则 {@link ModifyDomainWhiteRuleRequest} {@link ModifyDomainWhiteRuleResponse} */
   ModifyDomainWhiteRule(data: ModifyDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainWhiteRuleResponse>;

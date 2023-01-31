@@ -287,9 +287,9 @@ declare interface CreateProjectRequest {
 
 declare interface CreateProjectResponse {
   /** 项目 id */
-  ID: number;
+  ID?: number;
   /** 项目唯一key */
-  Key: string;
+  Key?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -317,7 +317,7 @@ declare interface CreateStarProjectRequest {
 
 declare interface CreateStarProjectResponse {
   /** 接口返回信息 */
-  Msg: string;
+  Msg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -435,7 +435,7 @@ declare interface DeleteProjectRequest {
 
 declare interface DeleteProjectResponse {
   /** 操作信息 */
-  Msg: string;
+  Msg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -461,7 +461,7 @@ declare interface DeleteStarProjectRequest {
 
 declare interface DeleteStarProjectResponse {
   /** 返回消息 */
-  Msg: string | null;
+  Msg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1469,7 +1469,7 @@ declare interface DescribeProjectLimitsRequest {
 
 declare interface DescribeProjectLimitsResponse {
   /** 上报率数组列表 */
-  ProjectLimitSet: ProjectLimit[];
+  ProjectLimitSet?: ProjectLimit[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1487,9 +1487,9 @@ declare interface DescribeProjectsRequest {
 
 declare interface DescribeProjectsResponse {
   /** 列表总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 项目列表 */
-  ProjectSet: RumProject[];
+  ProjectSet?: RumProject[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1541,7 +1541,7 @@ declare interface DescribeReleaseFilesRequest {
 
 declare interface DescribeReleaseFilesResponse {
   /** 文件信息列表 */
-  Files: ReleaseFile[];
+  Files?: ReleaseFile[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1629,7 +1629,7 @@ declare interface DescribeScoresRequest {
 
 declare interface DescribeScoresResponse {
   /** 数组 */
-  ScoreSet?: ScoreInfo[];
+  ScoreSet: ScoreInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1679,9 +1679,9 @@ declare interface DescribeTawInstancesRequest {
 
 declare interface DescribeTawInstancesResponse {
   /** 实例列表 */
-  InstanceSet: RumInstanceInfo[];
+  InstanceSet?: RumInstanceInfo[];
   /** 实例总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1773,9 +1773,9 @@ declare interface ModifyProjectRequest {
 
 declare interface ModifyProjectResponse {
   /** 操作信息 */
-  Msg: string;
+  Msg?: string;
   /** 项目id */
-  ID: number;
+  ID?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1817,17 +1817,17 @@ declare interface Rum {
   CreateLogExport(data: CreateLogExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogExportResponse>;
   /** 创建离线日志监听 {@link CreateOfflineLogConfigRequest} {@link CreateOfflineLogConfigResponse} */
   CreateOfflineLogConfig(data: CreateOfflineLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOfflineLogConfigResponse>;
-  /** 创建项目 {@link CreateProjectRequest} {@link CreateProjectResponse} */
+  /** 创建 RUM 应用 {@link CreateProjectRequest} {@link CreateProjectResponse} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
   /** 创建发布文件记录 {@link CreateReleaseFileRequest} {@link CreateReleaseFileResponse} */
   CreateReleaseFile(data: CreateReleaseFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseFileResponse>;
-  /** 添加星标项目 {@link CreateStarProjectRequest} {@link CreateStarProjectResponse} */
+  /** 添加星标应用 {@link CreateStarProjectRequest} {@link CreateStarProjectResponse} */
   CreateStarProject(data: CreateStarProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStarProjectResponse>;
-  /** 创建Rum实例 {@link CreateTawInstanceRequest} {@link CreateTawInstanceResponse} */
+  /** 创建 RUM 业务系统 {@link CreateTawInstanceRequest} {@link CreateTawInstanceResponse} */
   CreateTawInstance(data: CreateTawInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTawInstanceResponse>;
   /** 创建白名单 {@link CreateWhitelistRequest} {@link CreateWhitelistResponse} */
   CreateWhitelist(data: CreateWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWhitelistResponse>;
-  /** 删除实例 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
+  /** 删除 RUM 业务系统 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
   /** 删除日志下载任务 {@link DeleteLogExportRequest} {@link DeleteLogExportResponse} */
   DeleteLogExport(data: DeleteLogExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogExportResponse>;
@@ -1835,11 +1835,11 @@ declare interface Rum {
   DeleteOfflineLogConfig(data: DeleteOfflineLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOfflineLogConfigResponse>;
   /** 删除离线日志记录 {@link DeleteOfflineLogRecordRequest} {@link DeleteOfflineLogRecordResponse} */
   DeleteOfflineLogRecord(data: DeleteOfflineLogRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOfflineLogRecordResponse>;
-  /** 删除 rum 项目 {@link DeleteProjectRequest} {@link DeleteProjectResponse} */
+  /** 删除 RUM 应用 {@link DeleteProjectRequest} {@link DeleteProjectResponse} */
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
   /** 删除发布文件 {@link DeleteReleaseFileRequest} {@link DeleteReleaseFileResponse} */
   DeleteReleaseFile(data: DeleteReleaseFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReleaseFileResponse>;
-  /** 删除星标项目 {@link DeleteStarProjectRequest} {@link DeleteStarProjectResponse} */
+  /** 删除星标应用 {@link DeleteStarProjectRequest} {@link DeleteStarProjectResponse} */
   DeleteStarProject(data: DeleteStarProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStarProjectResponse>;
   /** 删除白名单 {@link DeleteWhitelistRequest} {@link DeleteWhitelistResponse} */
   DeleteWhitelist(data: DeleteWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWhitelistResponse>;
@@ -1891,15 +1891,15 @@ declare interface Rum {
   DescribeOfflineLogRecords(data: DescribeOfflineLogRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineLogRecordsResponse>;
   /** 获取对应离线日志 {@link DescribeOfflineLogsRequest} {@link DescribeOfflineLogsResponse} */
   DescribeOfflineLogs(data: DescribeOfflineLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineLogsResponse>;
-  /** 获取项目上报率列表 {@link DescribeProjectLimitsRequest} {@link DescribeProjectLimitsResponse} */
+  /** 获取应用上报抽样信息 {@link DescribeProjectLimitsRequest} {@link DescribeProjectLimitsResponse} */
   DescribeProjectLimits(data: DescribeProjectLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectLimitsResponse>;
-  /** 获取项目列表 {@link DescribeProjectsRequest} {@link DescribeProjectsResponse} */
+  /** 获取 RUM 应用列表 {@link DescribeProjectsRequest} {@link DescribeProjectsResponse} */
   DescribeProjects(data: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
   /** 获取PV列表 {@link DescribePvListRequest} {@link DescribePvListResponse} */
   DescribePvList(data: DescribePvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePvListResponse>;
   /** 获取存储临时密钥 {@link DescribeReleaseFileSignRequest} {@link DescribeReleaseFileSignResponse} */
   DescribeReleaseFileSign(data?: DescribeReleaseFileSignRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseFileSignResponse>;
-  /** 获取项目对应sourcemap文件列表 {@link DescribeReleaseFilesRequest} {@link DescribeReleaseFilesResponse} */
+  /** 获取应用对应sourcemap文件列表 {@link DescribeReleaseFilesRequest} {@link DescribeReleaseFilesResponse} */
   DescribeReleaseFiles(data: DescribeReleaseFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseFilesResponse>;
   /** 获取Rum日志聚合信息 {@link DescribeRumGroupLogRequest} {@link DescribeRumGroupLogResponse} */
   DescribeRumGroupLog(data: DescribeRumGroupLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumGroupLogResponse>;
@@ -1911,23 +1911,23 @@ declare interface Rum {
   DescribeScores(data: DescribeScoresRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScoresResponse>;
   /** 查询片区信息 {@link DescribeTawAreasRequest} {@link DescribeTawAreasResponse} */
   DescribeTawAreas(data?: DescribeTawAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTawAreasResponse>;
-  /** 查询实例信息 {@link DescribeTawInstancesRequest} {@link DescribeTawInstancesResponse} */
+  /** 查询 RUM 业务系统信息 {@link DescribeTawInstancesRequest} {@link DescribeTawInstancesResponse} */
   DescribeTawInstances(data?: DescribeTawInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTawInstancesResponse>;
   /** 获取UV列表 {@link DescribeUvListRequest} {@link DescribeUvListResponse} */
   DescribeUvList(data: DescribeUvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUvListResponse>;
   /** 获取白名单列表 {@link DescribeWhitelistsRequest} {@link DescribeWhitelistsResponse} */
   DescribeWhitelists(data: DescribeWhitelistsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhitelistsResponse>;
-  /** 修改实例信息 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
+  /** 修改 RUM 业务系统 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
-  /** 修改项目 {@link ModifyProjectRequest} {@link ModifyProjectResponse} */
+  /** 修改 RUM 应用信息 {@link ModifyProjectRequest} {@link ModifyProjectResponse} */
   ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
   /** 新增修改限流 {@link ModifyProjectLimitRequest} {@link ModifyProjectLimitResponse} */
   ModifyProjectLimit(data: ModifyProjectLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectLimitResponse>;
-  /** 恢复实例 {@link ResumeInstanceRequest} {@link ResumeInstanceResponse} */
+  /** 恢复 RUM 业务系统 {@link ResumeInstanceRequest} {@link ResumeInstanceResponse} */
   ResumeInstance(data: ResumeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeInstanceResponse>;
-  /** 停止实例 {@link StopInstanceRequest} {@link StopInstanceResponse} */
+  /** 停止RUM业务系统 {@link StopInstanceRequest} {@link StopInstanceResponse} */
   StopInstance(data: StopInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstanceResponse>;
-  /** 停止项目上报 {@link StopProjectRequest} {@link StopProjectResponse} */
+  /** 停止应用上报 {@link StopProjectRequest} {@link StopProjectResponse} */
   StopProject(data: StopProjectRequest, config?: AxiosRequestConfig): AxiosPromise<StopProjectResponse>;
 }
 

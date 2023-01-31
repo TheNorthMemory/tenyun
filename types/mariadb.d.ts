@@ -928,6 +928,22 @@ declare interface DescribeBackupTimeResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBEncryptAttributesRequest {
+  /** 实例Id，形如：tdsql-ow728lmc。 */
+  InstanceId: string;
+}
+
+declare interface DescribeDBEncryptAttributesResponse {
+  /** 是否启用加密，1-已开启；0-未开启。 */
+  EncryptStatus: number;
+  /** DEK密钥 */
+  CipherText: string;
+  /** DEK密钥过期日期。 */
+  ExpireDate: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBInstanceSpecsRequest {
 }
 
@@ -1827,6 +1843,8 @@ declare interface Mariadb {
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
   /** 查询备份时间 {@link DescribeBackupTimeRequest} {@link DescribeBackupTimeResponse} */
   DescribeBackupTime(data: DescribeBackupTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupTimeResponse>;
+  /** 查询实例数据加密状态 {@link DescribeDBEncryptAttributesRequest} {@link DescribeDBEncryptAttributesResponse} */
+  DescribeDBEncryptAttributes(data: DescribeDBEncryptAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBEncryptAttributesResponse>;
   /** 查询云数据库可售卖规格 {@link DescribeDBInstanceSpecsRequest} {@link DescribeDBInstanceSpecsResponse} */
   DescribeDBInstanceSpecs(data?: DescribeDBInstanceSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceSpecsResponse>;
   /** 查询实例列表 {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */

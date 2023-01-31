@@ -270,6 +270,64 @@ declare interface Quota {
   Version?: string | null;
 }
 
+/** 扫码明细 */
+declare interface ScanLog {
+  /** 行ID */
+  LogId: number | null;
+  /** 微信openid */
+  Openid: string | null;
+  /** 微信昵称 */
+  Nickname: string | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 码 */
+  Code: string | null;
+  /** 企业ID */
+  CorpId: number | null;
+  /** 商户ID */
+  MerchantId: string | null;
+  /** 商品ID */
+  ProductId: string | null;
+  /** ip地址 */
+  Ip: string | null;
+  /** 国家 */
+  Country: string | null;
+  /** 省份 */
+  Province: string | null;
+  /** 城市 */
+  City: string | null;
+  /** 县/区 */
+  District: string | null;
+  /** 微信 unionid */
+  Unionid?: string | null;
+  /** 首次扫码 0:否, 1:是 */
+  First?: number | null;
+  /** 批次ID */
+  BatchId?: string | null;
+}
+
+/** 扫码统计 */
+declare interface ScanStat {
+  /** 安心码 */
+  Code?: string;
+  /** 企业ID */
+  CorpId?: number;
+  /** 商户ID */
+  MerchantId?: string;
+  /** 产品ID */
+  ProductId?: string;
+  /** 批次ID */
+  BatchId?: string;
+  /** 扫码次数 */
+  Pv?: number;
+  /** 扫码人数 */
+  Uv?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+}
+
 /** 溯源码 */
 declare interface TraceCode {
   /** 二维码 */
@@ -946,6 +1004,42 @@ declare interface DescribeProductsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeScanLogsRequest {
+  /** 码 */
+  Code: string;
+  /** 企业ID */
+  CorpId?: number;
+}
+
+declare interface DescribeScanLogsResponse {
+  /** 【弃用】 */
+  Products: ScanLog[] | null;
+  /** 条数 */
+  TotalCount: number;
+  /** 扫描记录 */
+  ScanLogs: ScanLog[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeScanStatsRequest {
+  /** 批次ID */
+  BatchId: string;
+  /** 企业ID */
+  CorpId?: number;
+  /** 分页数量 */
+  PageSize?: number;
+  /** 当前分页 */
+  PageNumber?: number;
+}
+
+declare interface DescribeScanStatsResponse {
+  /** 统计记录 */
+  ScanStats?: ScanStat[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTmpTokenRequest {
   /** 企业ID */
   CorpId?: number;
@@ -1285,6 +1379,10 @@ declare interface Trp {
   DescribeProductById(data: DescribeProductByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductByIdResponse>;
   /** 查询商品列表 {@link DescribeProductsRequest} {@link DescribeProductsResponse} */
   DescribeProducts(data?: DescribeProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductsResponse>;
+  /** 查询扫码日志明细 {@link DescribeScanLogsRequest} {@link DescribeScanLogsResponse} */
+  DescribeScanLogs(data: DescribeScanLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanLogsResponse>;
+  /** 查询扫码统计列表 {@link DescribeScanStatsRequest} {@link DescribeScanStatsResponse} */
+  DescribeScanStats(data: DescribeScanStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanStatsResponse>;
   /** 查询临时Token {@link DescribeTmpTokenRequest} {@link DescribeTmpTokenResponse} */
   DescribeTmpToken(data?: DescribeTmpTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTmpTokenResponse>;
   /** 查询二维码信息 {@link DescribeTraceCodeByIdRequest} {@link DescribeTraceCodeByIdResponse} */

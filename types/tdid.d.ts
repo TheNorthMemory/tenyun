@@ -1204,14 +1204,6 @@ declare interface VerifyCredentialResponse {
   RequestId?: string;
 }
 
-declare interface VerifyPurchaseRequest {
-}
-
-declare interface VerifyPurchaseResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 /** {@link Tdid 分布式身份} */
 declare interface Tdid {
   (): Versions;
@@ -1311,8 +1303,6 @@ declare interface Tdid {
   SetCredentialStatus(data: SetCredentialStatusRequest, config?: AxiosRequestConfig): AxiosPromise<SetCredentialStatusResponse>;
   /** 验证凭证 {@link VerifyCredentialRequest} {@link VerifyCredentialResponse} */
   VerifyCredential(data: VerifyCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyCredentialResponse>;
-  /** 验证购买 {@link VerifyPurchaseRequest} {@link VerifyPurchaseResponse} */
-  VerifyPurchase(data?: VerifyPurchaseRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyPurchaseResponse>;
 }
 
 export declare type Versions = ["2021-05-19"];

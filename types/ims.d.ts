@@ -170,6 +170,24 @@ declare interface OcrTextDetail {
   SubLabel: string;
 }
 
+/** 识别类型标签结果信息 */
+declare interface RecognitionResult {
+  /** 当前可能的取值：Scene（图片场景模型） */
+  Label?: string | null;
+  /** Label对应模型下的识别标签信息 */
+  Tags?: RecognitionTag[] | null;
+}
+
+/** 识别类型标签信息 */
+declare interface RecognitionTag {
+  /** 标签名称 */
+  Name?: string | null;
+  /** 置信分：0～100，数值越大表示置信度越高 */
+  Score?: number | null;
+  /** 标签位置信息，若模型无位置信息，则可能为零值 */
+  Location?: Location | null;
+}
+
 /** 用于表示业务用户的账号相关信息 */
 declare interface User {
   /** 该字段表示业务用户ID,填写后，系统可根据账号过往违规历史优化审核结果判定，有利于存在可疑违规风险时的辅助判断。备注：该字段可传入微信openid、QQopenid、字符串等账号信息，与账号类别参数（AccountType）配合使用可确定唯一账号。 */
@@ -213,29 +231,31 @@ declare interface ImageModerationRequest {
 
 declare interface ImageModerationResponse {
   /** 该字段用于返回Label标签下的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
-  Suggestion: string;
+  Suggestion?: string;
   /** 该字段用于返回检测结果（LabelResults）中所对应的**优先级最高的恶意标签**，表示模型推荐的审核结果，建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
-  Label: string;
+  Label?: string;
   /** 该字段用于返回检测结果所命中优先级最高的恶意标签下的子标签名称，如：*色情--性行为*；若未命中任何子标签则返回空字符串。 */
-  SubLabel: string;
+  SubLabel?: string;
   /** 该字段用于返回当前标签（Label）下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表图片越有可能属于当前返回的标签；如：*色情 99*，则表明该图片非常有可能属于色情内容；*色情 0*，则表明该图片不属于色情内容。 */
-  Score: number;
+  Score?: number;
   /** 该字段用于返回分类模型命中的恶意标签的详细识别结果，包括涉黄、广告等令人反感、不安全或不适宜的内容类型识别结果。 */
-  LabelResults: LabelResult[] | null;
+  LabelResults?: LabelResult[] | null;
   /** 该字段用于返回物体检测模型的详细检测结果；包括：实体、广告台标、二维码等内容命中的标签名称、标签分数、坐标信息、场景识别结果、建议操作等内容审核信息；详细返回值信息可参阅对应的数据结构（ObjectResults）描述。 */
-  ObjectResults: ObjectResult[] | null;
+  ObjectResults?: ObjectResult[] | null;
   /** 该字段用于返回OCR文本识别的详细检测结果；包括：文本坐标信息、文本识别结果、建议操作等内容审核信息；详细返回值信息可参阅对应的数据结构（OcrResults）描述。 */
-  OcrResults: OcrResult[] | null;
+  OcrResults?: OcrResult[] | null;
   /** 该字段用于返回基于图片风险库（风险黑库与正常白库）识别的结果,详细返回值信息可参阅对应的数据结构（LibResults）描述。备注：图片风险库目前**暂不支持自定义库**。 */
-  LibResults: LibResult[] | null;
+  LibResults?: LibResult[] | null;
   /** 该字段用于返回检测对象对应请求参数中的DataId。 */
-  DataId: string;
+  DataId?: string;
   /** 该字段用于返回检测对象对应请求参数中的BizType。 */
-  BizType: string;
+  BizType?: string;
   /** 该字段用于返回根据您的需求配置的额外附加信息（Extra），如未配置则默认返回值为空。备注：不同客户或Biztype下返回信息不同，如需配置该字段请提交工单咨询或联系售后专员处理。 */
-  Extra: string | null;
+  Extra?: string | null;
   /** 该字段用于返回检测对象对应的MD5校验值，以方便校验文件完整性。 */
-  FileMD5: string;
+  FileMD5?: string;
+  /** 该字段用于返回仅识别图片元素的模型结果；包括：场景模型命中的标签、置信度和位置信息 */
+  RecognitionResults?: RecognitionResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
