@@ -145,14 +145,14 @@ declare interface DeleteRoomResponse {
 }
 
 declare interface DescribeAppDetailRequest {
-  /** 应用ID */
+  /** 应用ID。低代码互动课堂的SdkAppId。 */
   ApplicationId: string;
   /** 开发商ID */
   DeveloperId: string;
 }
 
 declare interface DescribeAppDetailResponse {
-  /** SdkAppId */
+  /** SDK 对应的AppId */
   SdkAppId?: string;
   /** 应用配置 */
   AppConfig?: AppConfig;

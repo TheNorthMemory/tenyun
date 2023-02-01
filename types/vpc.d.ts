@@ -274,6 +274,16 @@ declare interface CcnBandwidthInfo {
   MarketId: string | null;
 }
 
+/** 云联网限速实例锁对象，该对象特用于运营端使用，用于封禁实例流量。 */
+declare interface CcnFlowLock {
+  /** 带宽所属的云联网ID。 */
+  CcnId: string | null;
+  /** 实例所属用户主账号ID。 */
+  UserAccountID: string | null;
+  /** 带宽实例的唯一ID。作为`UnlockCcnBandwidths`接口和`LockCcnBandwidths`接口的入参时，该字段必传。 */
+  RegionFlowControlId?: string | null;
+}
+
 /** 云联网（CCN）关联实例（Instance）对象。 */
 declare interface CcnInstance {
   /** 关联实例ID。 */
@@ -5637,6 +5647,8 @@ declare interface InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse {
 }
 
 declare interface LockCcnBandwidthsRequest {
+  /** 带宽实例的唯一ID数组。 */
+  Instances: CcnFlowLock[];
 }
 
 declare interface LockCcnBandwidthsResponse {
@@ -6727,6 +6739,8 @@ declare interface UnassignPrivateIpAddressesResponse {
 }
 
 declare interface UnlockCcnBandwidthsRequest {
+  /** 带宽实例对象数组。 */
+  Instances: CcnFlowLock[];
 }
 
 declare interface UnlockCcnBandwidthsResponse {
@@ -7196,7 +7210,7 @@ declare interface Vpc {
   /** 调整VPN网关带宽上限询价 {@link InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest} {@link InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse} */
   InquiryPriceResetVpnGatewayInternetMaxBandwidth(data: InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse>;
   /** 安全锁定云联网带宽 {@link LockCcnBandwidthsRequest} {@link LockCcnBandwidthsResponse} */
-  LockCcnBandwidths(data?: LockCcnBandwidthsRequest, config?: AxiosRequestConfig): AxiosPromise<LockCcnBandwidthsResponse>;
+  LockCcnBandwidths(data: LockCcnBandwidthsRequest, config?: AxiosRequestConfig): AxiosPromise<LockCcnBandwidthsResponse>;
   /** 安全锁定云联网实例 {@link LockCcnsRequest} {@link LockCcnsResponse} */
   LockCcns(data?: LockCcnsRequest, config?: AxiosRequestConfig): AxiosPromise<LockCcnsResponse>;
   /** 弹性网卡迁移 {@link MigrateNetworkInterfaceRequest} {@link MigrateNetworkInterfaceResponse} */
@@ -7352,7 +7366,7 @@ declare interface Vpc {
   /** 弹性网卡退还内网 IP {@link UnassignPrivateIpAddressesRequest} {@link UnassignPrivateIpAddressesResponse} */
   UnassignPrivateIpAddresses(data: UnassignPrivateIpAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<UnassignPrivateIpAddressesResponse>;
   /** 安全解锁云联网带宽 {@link UnlockCcnBandwidthsRequest} {@link UnlockCcnBandwidthsResponse} */
-  UnlockCcnBandwidths(data?: UnlockCcnBandwidthsRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockCcnBandwidthsResponse>;
+  UnlockCcnBandwidths(data: UnlockCcnBandwidthsRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockCcnBandwidthsResponse>;
   /** 安全解锁云联网实例 {@link UnlockCcnsRequest} {@link UnlockCcnsResponse} */
   UnlockCcns(data?: UnlockCcnsRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockCcnsResponse>;
   /** 从云联网撤销路由 {@link WithdrawNotifyRoutesRequest} {@link WithdrawNotifyRoutesResponse} */

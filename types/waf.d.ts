@@ -775,7 +775,7 @@ declare interface DeleteIpAccessControlRequest {
   Domain: string;
   /** 删除的ip数组 */
   Items: string[];
-  /** 删除对应的域名下的所有黑/白IP名额单 */
+  /** 是否删除对应的域名下的所有黑/白IP名单，true表示全部删除，false表示只删除指定ip名单 */
   DeleteAll?: boolean;
   /** 是否为多域名黑白名单 */
   SourceType?: string;
@@ -783,9 +783,9 @@ declare interface DeleteIpAccessControlRequest {
 
 declare interface DeleteIpAccessControlResponse {
   /** 删除失败的条目 */
-  FailedItems: string | null;
+  FailedItems?: string | null;
   /** 删除失败的条目数 */
-  FailedCount: number | null;
+  FailedCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -985,19 +985,19 @@ declare interface DescribeIpAccessControlRequest {
   Domain: string;
   /** 计数标识 */
   Count: number;
-  /** 动作 */
+  /** 动作，40表示查询白名单，42表示查询黑名单 */
   ActionType?: number;
-  /** 有效时间最小时间戳 */
+  /** 最小有效时间的时间戳 */
   VtsMin?: number;
-  /** 有效时间最大时间戳 */
+  /** 最大有效时间的时间戳 */
   VtsMax?: number;
-  /** 创建时间最小时间戳 */
+  /** 最小创建时间的时间戳 */
   CtsMin?: number;
-  /** 创建时间最大时间戳 */
+  /** 最大创建时间的时间戳 */
   CtsMax?: number;
-  /** 偏移 */
+  /** 分页开始条数 */
   OffSet?: number;
-  /** 限制 */
+  /** 每页的条数 */
   Limit?: number;
   /** 来源 */
   Source?: string;

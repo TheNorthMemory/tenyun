@@ -460,6 +460,16 @@ declare interface RelieveInfo {
   OtherDeals?: string;
 }
 
+/** 催办接口返回详细信息 */
+declare interface RemindFlowRecords {
+  /** 是否能够催办 */
+  CanRemind: boolean;
+  /** 合同id */
+  FlowId: string;
+  /** 催办详情 */
+  RemindMessage: string;
+}
+
 /** 资源链接信息 */
 declare interface ResourceUrlInfo {
   /** 资源链接地址，过期时间5分钟 */
@@ -816,6 +826,20 @@ declare interface ChannelCreateFlowGroupByFilesResponse {
   RequestId?: string;
 }
 
+declare interface ChannelCreateFlowRemindsRequest {
+  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  Agent: Agent;
+  /** 签署流程Id数组，最多100个，超过100不处理 */
+  FlowIds: string[];
+}
+
+declare interface ChannelCreateFlowRemindsResponse {
+  /** 合同催办详情信息 */
+  RemindFlowRecords: RemindFlowRecords[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ChannelCreateFlowSignReviewRequest {
   /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
@@ -1161,7 +1185,7 @@ declare interface DescribeChannelFlowEvidenceReportResponse {
 }
 
 declare interface DescribeExtendedServiceAuthInfoRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填 */
+  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填注: 此接口 参数Agent. ProxyOperator.OpenId 需要传递超管或者法人的OpenId */
   Agent: Agent;
 }
 
@@ -1297,7 +1321,7 @@ declare interface GetDownloadFlowUrlResponse {
 }
 
 declare interface ModifyExtendedServiceRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填 */
+  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。注: 此接口 参数Agent. ProxyOperator.OpenId 需要传递超管或者法人的OpenId */
   Agent: Agent;
   /** 扩展服务类型 AUTO_SIGN 企业静默签（自动签署） OVERSEA_SIGN 企业与港澳台居民*签署合同 MOBILE_CHECK_APPROVER 使用手机号验证签署方身份 PAGING_SEAL 骑缝章 DOWNLOAD_FLOW 授权渠道下载合同 */
   ServiceType: string;
@@ -1306,7 +1330,7 @@ declare interface ModifyExtendedServiceRequest {
 }
 
 declare interface ModifyExtendedServiceResponse {
-  /** 操作跳转链接，有效期24小时仅当操作类型是 OPEN 且 扩展服务类型是 AUTO_SIGN 或 DOWNLOAD_FLOW 或者 OVERSEA_SIGN 时返回 ，此时需要经办人(操作人)点击链接完成服务开通操作。若开通操作时没有返回跳转链接，表示无需跳转操作，此时会直接开通服务操作类型是CLOSE时，不会返回此链接，会直接关闭企业该扩展服务 */
+  /** 操作跳转链接，有效期24小时若操作时没有返回跳转链接，表示无需跳转操作，此时会直接开通/关闭服务。当操作类型是 OPEN 且 扩展服务类型是 AUTO_SIGN 或 DOWNLOAD_FLOW 或者 OVERSEA_SIGN 时返回操作链接，返回的链接需要平台方自行触达超管或法人，超管或法人点击链接完成服务开通操作。 */
   OperateUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2973,6 +2997,8 @@ declare interface Essbasic {
   ChannelCreateFlowByFiles(data?: ChannelCreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowByFilesResponse>;
   /** 通过多文件创建合同组签署流程 {@link ChannelCreateFlowGroupByFilesRequest} {@link ChannelCreateFlowGroupByFilesResponse} */
   ChannelCreateFlowGroupByFiles(data: ChannelCreateFlowGroupByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowGroupByFilesResponse>;
+  /** 电子签渠道版-合同催办接口 {@link ChannelCreateFlowRemindsRequest} {@link ChannelCreateFlowRemindsResponse} */
+  ChannelCreateFlowReminds(data: ChannelCreateFlowRemindsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowRemindsResponse>;
   /** 提交企业签署流程审批结果 {@link ChannelCreateFlowSignReviewRequest} {@link ChannelCreateFlowSignReviewResponse} */
   ChannelCreateFlowSignReview(data: ChannelCreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowSignReviewResponse>;
   /** 渠道版创建签署链接 {@link ChannelCreateFlowSignUrlRequest} {@link ChannelCreateFlowSignUrlResponse} */

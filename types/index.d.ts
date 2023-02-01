@@ -101,6 +101,7 @@ import Fmu, { Versions as FmuVersions } from "./fmu";
 import Ft, { Versions as FtVersions } from "./ft";
 import Gaap, { Versions as GaapVersions } from "./gaap";
 import Gme, { Versions as GmeVersions } from "./gme";
+import Goosefs, { Versions as GoosefsVersions } from "./goosefs";
 import Gpm, { Versions as GpmVersions } from "./gpm";
 import Gs, { Versions as GsVersions } from "./gs";
 import Gse, { Versions as GseVersions } from "./gse";
@@ -329,6 +330,7 @@ export declare type SERVICE_VERSIONS = {
   ft: FtVersions,
   gaap: GaapVersions,
   gme: GmeVersions,
+  goosefs: GoosefsVersions,
   gpm: GpmVersions,
   gs: GsVersions,
   gse: GseVersions,
@@ -670,6 +672,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   gaap: Gaap,
   /** {@link Gme 游戏多媒体引擎} */
   gme: Gme,
+  /** {@link Goosefs 数据加速器 GooseFS} */
+  goosefs: Goosefs,
   /** {@link Gpm 游戏玩家匹配} */
   gpm: Gpm,
   /** {@link Gs 云游戏} */
