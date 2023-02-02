@@ -377,10 +377,10 @@ class TenYun {
       Reflect.set(headers, AUTHORIZATION, [
         TC3_HMAC_SHA256,
         [
-          ['Credential', `${this[SECRET_ID]}/${CredentialScope}`],
-          ['SignedHeaders', SignedHeaders],
-          ['Signature', Signature],
-        ].map((x) => x.join('=')).join(','),
+          `Credential=${this[SECRET_ID]}/${CredentialScope}`,
+          `SignedHeaders=${SignedHeaders}`,
+          `Signature=${Signature}`,
+        ].join(','),
       ].join(' '));
       Reflect.deleteProperty(headers, HOST);
 
