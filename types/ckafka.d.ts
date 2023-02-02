@@ -3267,6 +3267,8 @@ declare interface GroupResponse {
   TotalCount: number | null;
   /** GroupList */
   GroupList: DescribeGroup[] | null;
+  /** 消费分组配额 */
+  GroupCountQuota?: number | null;
 }
 
 declare interface InquireCkafkaPriceRequest {

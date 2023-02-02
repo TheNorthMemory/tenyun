@@ -1458,6 +1458,30 @@ declare interface PrometheusAgent {
   Status: number;
 }
 
+/** 托管Prometheus agent信息 */
+declare interface PrometheusAgentInfo {
+}
+
+/** 托管prometheus agent概览 */
+declare interface PrometheusAgentOverview {
+  /** 集群类型 */
+  ClusterType: string;
+  /** 集群id */
+  ClusterId: string;
+  /** agent状态normal = 正常abnormal = 异常 */
+  Status: string;
+  /** 集群名称 */
+  ClusterName: string;
+  /** 额外labels本集群的所有指标都会带上这几个label */
+  ExternalLabels: Label[] | null;
+  /** 集群所在地域 */
+  Region: string | null;
+  /** 集群所在VPC ID */
+  VpcId: string | null;
+  /** 记录关联等操作的失败信息 */
+  FailedReason: string | null;
+}
+
 /** 告警渠道使用自建alertmanager的配置 */
 declare interface PrometheusAlertManagerConfig {
   /** alertmanager url */
@@ -1504,6 +1528,36 @@ declare interface PrometheusAlertRule {
   Annotations?: Label[] | null;
   /** 告警规则状态 */
   RuleState?: number | null;
+}
+
+/** 与云监控融合托管prometheus实例，关联集群基础信息 */
+declare interface PrometheusClusterAgentBasic {
+  /** 集群ID */
+  Region: string;
+  /** 集群类型 */
+  ClusterType: string;
+  /** 集群ID */
+  ClusterId: string;
+  /** 是否开启公网CLB */
+  EnableExternal: boolean;
+  /** 集群内部署组件的pod配置 */
+  InClusterPodConfig?: PrometheusClusterAgentPodConfig;
+  /** 该集群采集的所有指标都会带上这些labels */
+  ExternalLabels?: Label[];
+  /** 是否安装默认采集配置 */
+  NotInstallBasicScrape?: boolean;
+  /** 是否采集指标，true代表drop所有指标，false代表采集默认指标 */
+  NotScrape?: boolean;
+}
+
+/** 关联集群时在集群内部署组件的pod额外配置 */
+declare interface PrometheusClusterAgentPodConfig {
+  /** 是否使用HostNetWork */
+  HostNet?: boolean;
+  /** 指定pod运行节点 */
+  NodeSelector?: Label[];
+  /** 容忍污点 */
+  Tolerations?: Toleration[];
 }
 
 /** prometheus配置 */
@@ -1642,6 +1696,10 @@ declare interface PrometheusInstancesOverview {
   BoundTotal: number;
   /** 绑定集群正常状态总数 */
   BoundNormal: number;
+}
+
+/** prometheus一个job的targets */
+declare interface PrometheusJobTargets {
 }
 
 /** 告警通知渠道配置 */
@@ -1964,6 +2022,16 @@ declare interface TemplateGroup {
   ViewName: string;
   /** 是否为与关系 */
   IsUnionRule: number;
+}
+
+/** kubernetes Taint */
+declare interface Toleration {
+  /** 容忍应用到的 taint key */
+  Key?: string;
+  /** 键与值的关系 */
+  Operator?: string;
+  /** 要匹配的污点效果 */
+  Effect?: string;
 }
 
 /** 云监控告警通知模板 - 回调通知详情 */
@@ -2318,6 +2386,66 @@ declare interface CreatePrometheusAgentResponse {
   RequestId?: string;
 }
 
+declare interface CreatePrometheusAlertPolicyRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 告警配置 */
+  AlertRule: PrometheusAlertPolicyItem;
+}
+
+declare interface CreatePrometheusAlertPolicyResponse {
+  /** 告警id */
+  Id?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePrometheusClusterAgentRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** agent列表 */
+  Agents: PrometheusClusterAgentBasic[];
+}
+
+declare interface CreatePrometheusClusterAgentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePrometheusConfigRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 集群类型 */
+  ClusterType: string;
+  /** 集群id */
+  ClusterId: string;
+  /** ServiceMonitors配置 */
+  ServiceMonitors?: PrometheusConfigItem[];
+  /** PodMonitors配置 */
+  PodMonitors?: PrometheusConfigItem[];
+  /** prometheus原生Job配置 */
+  RawJobs?: PrometheusConfigItem[];
+}
+
+declare interface CreatePrometheusConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePrometheusGlobalNotificationRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 告警通知渠道 */
+  Notification: PrometheusNotificationItem;
+}
+
+declare interface CreatePrometheusGlobalNotificationResponse {
+  /** 全局告警通知渠道ID */
+  Id?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePrometheusMultiTenantInstancePostPayModeRequest {
   /** 实例名 */
   InstanceName: string;
@@ -2536,6 +2664,52 @@ declare interface DeletePolicyGroupRequest {
 }
 
 declare interface DeletePolicyGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePrometheusAlertPolicyRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 告警策略id列表 */
+  AlertIds: string[];
+  /** 告警策略名称 */
+  Names?: string[];
+}
+
+declare interface DeletePrometheusAlertPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePrometheusClusterAgentRequest {
+  /** agent列表 */
+  Agents: PrometheusAgentInfo[];
+  /** 实例id */
+  InstanceId: string;
+}
+
+declare interface DeletePrometheusClusterAgentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePrometheusConfigRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 集群类型 */
+  ClusterType: string;
+  /** 集群id */
+  ClusterId: string;
+  /** 要删除的ServiceMonitor名字列表 */
+  ServiceMonitors?: string[];
+  /** 要删除的PodMonitor名字列表 */
+  PodMonitors?: string[];
+  /** 要删除的RawJobs名字列表 */
+  RawJobs?: string[];
+}
+
+declare interface DeletePrometheusConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3454,6 +3628,24 @@ declare interface DescribePrometheusAlertPolicyResponse {
   RequestId?: string;
 }
 
+declare interface DescribePrometheusClusterAgentsRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 用于分页 */
+  Offset?: number;
+  /** 用于分页 */
+  Limit?: number;
+}
+
+declare interface DescribePrometheusClusterAgentsResponse {
+  /** 被关联集群信息 */
+  Agents?: PrometheusAgentOverview[];
+  /** 被关联集群总量 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePrometheusConfigRequest {
   /** 实例id */
   InstanceId: string;
@@ -3464,6 +3656,38 @@ declare interface DescribePrometheusConfigRequest {
 }
 
 declare interface DescribePrometheusConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrometheusGlobalConfigRequest {
+  /** 实例级别抓取配置 */
+  InstanceId: string;
+  /** 是否禁用统计 */
+  DisableStatistics?: boolean;
+}
+
+declare interface DescribePrometheusGlobalConfigResponse {
+  /** 配置内容 */
+  Config?: string;
+  /** ServiceMonitors列表以及对应targets信息 */
+  ServiceMonitors?: PrometheusConfigItem[] | null;
+  /** PodMonitors列表以及对应targets信息 */
+  PodMonitors?: PrometheusConfigItem[] | null;
+  /** RawJobs列表以及对应targets信息 */
+  RawJobs?: PrometheusConfigItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrometheusGlobalNotificationRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribePrometheusGlobalNotificationResponse {
+  /** 全局告警通知渠道 */
+  Notification?: PrometheusNotificationItem | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3640,6 +3864,24 @@ declare interface DescribePrometheusScrapeJobsResponse {
   ScrapeJobSet?: PrometheusScrapeJob[] | null;
   /** 任务总量 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrometheusTargetsTMPRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 集群类型 */
+  ClusterType: string;
+  /** 集群id */
+  ClusterId: string;
+  /** 过滤条件，当前支持Name=stateValue=up, down, unknown */
+  Filters?: Filter[];
+}
+
+declare interface DescribePrometheusTargetsTMPResponse {
+  /** 所有Job的targets信息 */
+  Jobs?: PrometheusJobTargets[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4044,6 +4286,64 @@ declare interface ModifyPolicyGroupRequest {
 declare interface ModifyPolicyGroupResponse {
   /** 策略组id */
   GroupId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyPrometheusAgentExternalLabelsRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 集群ID */
+  ClusterId: string;
+  /** 新的external_labels */
+  ExternalLabels: Label[];
+}
+
+declare interface ModifyPrometheusAgentExternalLabelsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyPrometheusAlertPolicyRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 告警配置 */
+  AlertRule: PrometheusAlertPolicyItem;
+}
+
+declare interface ModifyPrometheusAlertPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyPrometheusConfigRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 集群类型 */
+  ClusterType: string;
+  /** 集群id */
+  ClusterId: string;
+  /** ServiceMonitors配置 */
+  ServiceMonitors?: PrometheusConfigItem[];
+  /** PodMonitors配置 */
+  PodMonitors?: PrometheusConfigItem[];
+  /** prometheus原生Job配置 */
+  RawJobs?: PrometheusConfigItem[];
+}
+
+declare interface ModifyPrometheusConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyPrometheusGlobalNotificationRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 告警通知渠道 */
+  Notification: PrometheusNotificationItem;
+}
+
+declare interface ModifyPrometheusGlobalNotificationResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4537,6 +4837,14 @@ declare interface Monitor {
   CreatePolicyGroup(data: CreatePolicyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePolicyGroupResponse>;
   /** 创建 Prometheus CVM Agent {@link CreatePrometheusAgentRequest} {@link CreatePrometheusAgentResponse} */
   CreatePrometheusAgent(data: CreatePrometheusAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusAgentResponse>;
+  /** 创建告警策略 {@link CreatePrometheusAlertPolicyRequest} {@link CreatePrometheusAlertPolicyResponse} */
+  CreatePrometheusAlertPolicy(data: CreatePrometheusAlertPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusAlertPolicyResponse>;
+  /** 2.0实例关联集群 {@link CreatePrometheusClusterAgentRequest} {@link CreatePrometheusClusterAgentResponse} */
+  CreatePrometheusClusterAgent(data: CreatePrometheusClusterAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusClusterAgentResponse>;
+  /** 创建prometheus配置 {@link CreatePrometheusConfigRequest} {@link CreatePrometheusConfigResponse} */
+  CreatePrometheusConfig(data: CreatePrometheusConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusConfigResponse>;
+  /** 创建全局告警通知渠道 {@link CreatePrometheusGlobalNotificationRequest} {@link CreatePrometheusGlobalNotificationResponse} */
+  CreatePrometheusGlobalNotification(data: CreatePrometheusGlobalNotificationRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusGlobalNotificationResponse>;
   /** 创建按量 Prometheus 实例 {@link CreatePrometheusMultiTenantInstancePostPayModeRequest} {@link CreatePrometheusMultiTenantInstancePostPayModeResponse} */
   CreatePrometheusMultiTenantInstancePostPayMode(data: CreatePrometheusMultiTenantInstancePostPayModeRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusMultiTenantInstancePostPayModeResponse>;
   /** 以Yaml的方式创建聚合规则 {@link CreatePrometheusRecordRuleYamlRequest} {@link CreatePrometheusRecordRuleYamlResponse} */
@@ -4567,6 +4875,12 @@ declare interface Monitor {
   DeleteGrafanaNotificationChannel(data: DeleteGrafanaNotificationChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGrafanaNotificationChannelResponse>;
   /** 删除告警策略组 {@link DeletePolicyGroupRequest} {@link DeletePolicyGroupResponse} */
   DeletePolicyGroup(data: DeletePolicyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePolicyGroupResponse>;
+  /** 删除2.0实例告警策略 {@link DeletePrometheusAlertPolicyRequest} {@link DeletePrometheusAlertPolicyResponse} */
+  DeletePrometheusAlertPolicy(data: DeletePrometheusAlertPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusAlertPolicyResponse>;
+  /** 解除TMP实例的集群关联 {@link DeletePrometheusClusterAgentRequest} {@link DeletePrometheusClusterAgentResponse} */
+  DeletePrometheusClusterAgent(data: DeletePrometheusClusterAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusClusterAgentResponse>;
+  /** 删除Prometheus配置 {@link DeletePrometheusConfigRequest} {@link DeletePrometheusConfigResponse} */
+  DeletePrometheusConfig(data: DeletePrometheusConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusConfigResponse>;
   /** 删除聚合实例 {@link DeletePrometheusRecordRuleYamlRequest} {@link DeletePrometheusRecordRuleYamlResponse} */
   DeletePrometheusRecordRuleYaml(data: DeletePrometheusRecordRuleYamlRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrometheusRecordRuleYamlResponse>;
   /** 删除 Prometheus 抓取任务 {@link DeletePrometheusScrapeJobsRequest} {@link DeletePrometheusScrapeJobsResponse} */
@@ -4651,8 +4965,14 @@ declare interface Monitor {
   DescribePrometheusAgents(data: DescribePrometheusAgentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAgentsResponse>;
   /** 获取2.0实例告警策略列表 {@link DescribePrometheusAlertPolicyRequest} {@link DescribePrometheusAlertPolicyResponse} */
   DescribePrometheusAlertPolicy(data: DescribePrometheusAlertPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusAlertPolicyResponse>;
+  /** 获取TMP实例关联集群列表 {@link DescribePrometheusClusterAgentsRequest} {@link DescribePrometheusClusterAgentsResponse} */
+  DescribePrometheusClusterAgents(data: DescribePrometheusClusterAgentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusClusterAgentsResponse>;
   /** 拉取Prometheus配置 {@link DescribePrometheusConfigRequest} {@link DescribePrometheusConfigResponse} */
   DescribePrometheusConfig(data: DescribePrometheusConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusConfigResponse>;
+  /** 获得实例级别抓取配置 {@link DescribePrometheusGlobalConfigRequest} {@link DescribePrometheusGlobalConfigResponse} */
+  DescribePrometheusGlobalConfig(data: DescribePrometheusGlobalConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusGlobalConfigResponse>;
+  /** 查询全局告警通知渠道 {@link DescribePrometheusGlobalNotificationRequest} {@link DescribePrometheusGlobalNotificationResponse} */
+  DescribePrometheusGlobalNotification(data: DescribePrometheusGlobalNotificationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusGlobalNotificationResponse>;
   /** 获取TMP实例详情 {@link DescribePrometheusInstanceDetailRequest} {@link DescribePrometheusInstanceDetailResponse} */
   DescribePrometheusInstanceDetail(data: DescribePrometheusInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusInstanceDetailResponse>;
   /** 获取2.0实例初始化任务状态 {@link DescribePrometheusInstanceInitStatusRequest} {@link DescribePrometheusInstanceInitStatusResponse} */
@@ -4669,6 +4989,8 @@ declare interface Monitor {
   DescribePrometheusRecordRules(data: DescribePrometheusRecordRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusRecordRulesResponse>;
   /** 列出 Prometheus 抓取任务 {@link DescribePrometheusScrapeJobsRequest} {@link DescribePrometheusScrapeJobsResponse} */
   DescribePrometheusScrapeJobs(data: DescribePrometheusScrapeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusScrapeJobsResponse>;
+  /** 获取targets信息 {@link DescribePrometheusTargetsTMPRequest} {@link DescribePrometheusTargetsTMPResponse} */
+  DescribePrometheusTargetsTMP(data: DescribePrometheusTargetsTMPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTargetsTMPResponse>;
   /** 拉取模板列表 {@link DescribePrometheusTempRequest} {@link DescribePrometheusTempResponse} */
   DescribePrometheusTemp(data?: DescribePrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTempResponse>;
   /** 获取模板关联实例信息 {@link DescribePrometheusTempSyncRequest} {@link DescribePrometheusTempSyncResponse} */
@@ -4715,6 +5037,14 @@ declare interface Monitor {
   ModifyGrafanaInstance(data: ModifyGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGrafanaInstanceResponse>;
   /** 更新策略组 {@link ModifyPolicyGroupRequest} {@link ModifyPolicyGroupResponse} */
   ModifyPolicyGroup(data: ModifyPolicyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPolicyGroupResponse>;
+  /** 修改被关联集群的external labels {@link ModifyPrometheusAgentExternalLabelsRequest} {@link ModifyPrometheusAgentExternalLabelsResponse} */
+  ModifyPrometheusAgentExternalLabels(data: ModifyPrometheusAgentExternalLabelsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusAgentExternalLabelsResponse>;
+  /** 修改2.0实例告警策略 {@link ModifyPrometheusAlertPolicyRequest} {@link ModifyPrometheusAlertPolicyResponse} */
+  ModifyPrometheusAlertPolicy(data: ModifyPrometheusAlertPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusAlertPolicyResponse>;
+  /** 修改prometheus配置 {@link ModifyPrometheusConfigRequest} {@link ModifyPrometheusConfigResponse} */
+  ModifyPrometheusConfig(data: ModifyPrometheusConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusConfigResponse>;
+  /** 修改全局告警通知渠道 {@link ModifyPrometheusGlobalNotificationRequest} {@link ModifyPrometheusGlobalNotificationResponse} */
+  ModifyPrometheusGlobalNotification(data: ModifyPrometheusGlobalNotificationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusGlobalNotificationResponse>;
   /** 修改 Prometheus 实例相关属性 {@link ModifyPrometheusInstanceAttributesRequest} {@link ModifyPrometheusInstanceAttributesResponse} */
   ModifyPrometheusInstanceAttributes(data: ModifyPrometheusInstanceAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusInstanceAttributesResponse>;
   /** 通过yaml的方式修改Prometheus聚合实例 {@link ModifyPrometheusRecordRuleYamlRequest} {@link ModifyPrometheusRecordRuleYamlResponse} */

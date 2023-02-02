@@ -1173,9 +1173,9 @@ declare interface DescribeDisksRequest {
 
 declare interface DescribeDisksResponse {
   /** 云硬盘信息列表。 */
-  DiskSet: Disk[];
+  DiskSet?: Disk[];
   /** 符合条件的云硬盘信息数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

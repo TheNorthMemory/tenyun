@@ -2459,6 +2459,18 @@ declare interface ModifyTargetWeightResponse {
 }
 
 declare interface RegisterFunctionTargetsRequest {
+  /** 负载均衡实例 ID。 */
+  LoadBalancerId: string;
+  /** 负载均衡监听器 ID。 */
+  ListenerId: string;
+  /** 待绑定的云函数列表。 */
+  FunctionTargets: FunctionTarget[];
+  /** 目标转发规则的 ID，当将云函数绑定到七层转发规则时，必须输入此参数或 Domain+Url 参数。 */
+  LocationId?: string;
+  /** 目标转发规则的域名，若已经输入 LocationId 参数，则本参数不生效。 */
+  Domain?: string;
+  /** 目标转发规则的 URL，若已经输入 LocationId 参数，则本参数不生效。 */
+  Url?: string;
 }
 
 declare interface RegisterFunctionTargetsResponse {
@@ -2726,7 +2738,7 @@ declare interface Clb {
   /** 修改监听器绑定的后端机器的转发权重 {@link ModifyTargetWeightRequest} {@link ModifyTargetWeightResponse} */
   ModifyTargetWeight(data: ModifyTargetWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetWeightResponse>;
   /** 绑定云函数到转发规则上 {@link RegisterFunctionTargetsRequest} {@link RegisterFunctionTargetsResponse} */
-  RegisterFunctionTargets(data?: RegisterFunctionTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterFunctionTargetsResponse>;
+  RegisterFunctionTargets(data: RegisterFunctionTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterFunctionTargetsResponse>;
   /** 注册服务器到目标组 {@link RegisterTargetGroupInstancesRequest} {@link RegisterTargetGroupInstancesResponse} */
   RegisterTargetGroupInstances(data: RegisterTargetGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterTargetGroupInstancesResponse>;
   /** 绑定后端机器到监听器上 {@link RegisterTargetsRequest} {@link RegisterTargetsResponse} */

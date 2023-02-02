@@ -1807,65 +1807,71 @@ declare interface DescribeCloudBaseRunVersionRequest {
 
 declare interface DescribeCloudBaseRunVersionResponse {
   /** 版本名称 */
-  VersionName: string;
+  VersionName?: string;
   /** 备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** Dockefile的路径 */
-  DockerfilePath: string | null;
+  DockerfilePath?: string | null;
   /** DockerBuild的目录 */
-  BuildDir: string | null;
+  BuildDir?: string | null;
   /** 副本最小值 */
-  MinNum: number;
+  MinNum?: number;
   /** 副本最大值 */
-  MaxNum: number;
+  MaxNum?: number;
   /** 策略类型 */
-  PolicyType: string;
+  PolicyType?: string;
   /** 策略阈值 */
-  PolicyThreshold: number;
+  PolicyThreshold?: number;
   /** 环境变量 */
-  EnvParams: string | null;
+  EnvParams?: string | null;
   /** 创建时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 更新时间 */
-  UpdatedTime: string;
+  UpdatedTime?: string;
   /** 版本的IP */
-  VersionIP: string | null;
+  VersionIP?: string | null;
   /** 版本的端口号 */
-  VersionPort: number | null;
+  VersionPort?: number | null;
   /** 版本状态 */
-  Status: string | null;
+  Status?: string | null;
   /** 代码包的名字 */
-  PackageName: string | null;
+  PackageName?: string | null;
   /** 代码版本的名字 */
-  PackageVersion: string | null;
+  PackageVersion?: string | null;
   /** 枚举（package/repository/image) */
-  UploadType: string | null;
+  UploadType?: string | null;
   /** Repo的类型(coding/gitlab/github/coding) */
-  RepoType: string | null;
+  RepoType?: string | null;
   /** 地址 */
-  Repo: string | null;
+  Repo?: string | null;
   /** 分支 */
-  Branch: string | null;
+  Branch?: string | null;
   /** 服务名字 */
-  ServerName: string | null;
+  ServerName?: string | null;
   /** 是否对于外网开放 */
-  IsPublic: boolean | null;
+  IsPublic?: boolean | null;
   /** vpc id */
-  VpcId: string | null;
+  VpcId?: string | null;
   /** 子网实例id */
-  SubnetIds: string[] | null;
+  SubnetIds?: string[] | null;
   /** 日志采集路径 */
-  CustomLogs: string | null;
+  CustomLogs?: string | null;
   /** 监听端口 */
-  ContainerPort: number | null;
+  ContainerPort?: number | null;
   /** 延迟多长时间开始健康检查（单位s） */
-  InitialDelaySeconds: number | null;
+  InitialDelaySeconds?: number | null;
   /** 镜像地址 */
-  ImageUrl: string | null;
+  ImageUrl?: string | null;
   /** CPU 大小 */
-  CpuSize: number | null;
+  CpuSize?: number | null;
   /** MEM 大小 */
-  MemSize: number | null;
+  MemSize?: number | null;
+  /** 扩缩容策略详情 */
+  PolicyDetail?: HpaPolicy[] | null;
+  /** Cpu的Request值 */
+  Cpu?: number | null;
+  /** Mem的Request值 */
+  Mem?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2392,6 +2398,8 @@ declare interface EstablishCloudBaseRunServerRequest {
 }
 
 declare interface EstablishCloudBaseRunServerResponse {
+  /** 创建服务是否成功 */
+  Result?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

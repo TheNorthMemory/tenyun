@@ -567,29 +567,29 @@ declare interface Btoe {
   VerifyEvidenceBlockChainTxHash(data: VerifyEvidenceBlockChainTxHashRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyEvidenceBlockChainTxHashResponse>;
   /** 核验存证内容hash {@link VerifyEvidenceHashRequest} {@link VerifyEvidenceHashResponse} */
   VerifyEvidenceHash(data: VerifyEvidenceHashRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyEvidenceHashResponse>;
-  /** 音频文件存证 {@link V20210303.CreateAudioDepositRequest} {@link V20210303.CreateAudioDepositResponse} */
+  /** @deprecated 音频文件存证 {@link V20210303.CreateAudioDepositRequest} {@link V20210303.CreateAudioDepositResponse} */
   CreateAudioDeposit(data: V20210303.CreateAudioDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateAudioDepositResponse>;
-  /** 业务数据明文存证 {@link V20210303.CreateDataDepositRequest} {@link V20210303.CreateDataDepositResponse} */
+  /** @deprecated 业务数据明文存证 {@link V20210303.CreateDataDepositRequest} {@link V20210303.CreateDataDepositResponse} */
   CreateDataDeposit(data: V20210303.CreateDataDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateDataDepositResponse>;
-  /** 文档存证 {@link V20210303.CreateDocDepositRequest} {@link V20210303.CreateDocDepositResponse} */
+  /** @deprecated 文档存证 {@link V20210303.CreateDocDepositRequest} {@link V20210303.CreateDocDepositResponse} */
   CreateDocDeposit(data: V20210303.CreateDocDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateDocDepositResponse>;
-  /** 哈希上链存证 {@link V20210303.CreateHashDepositRequest} {@link V20210303.CreateHashDepositResponse} */
+  /** @deprecated 哈希上链存证 {@link V20210303.CreateHashDepositRequest} {@link V20210303.CreateHashDepositResponse} */
   CreateHashDeposit(data: V20210303.CreateHashDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateHashDepositResponse>;
-  /** 哈希上链存证(无证书) {@link V20210303.CreateHashDepositNoCertRequest} {@link V20210303.CreateHashDepositNoCertResponse} */
+  /** @deprecated 哈希上链存证(无证书) {@link V20210303.CreateHashDepositNoCertRequest} {@link V20210303.CreateHashDepositNoCertResponse} */
   CreateHashDepositNoCert(data: V20210303.CreateHashDepositNoCertRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateHashDepositNoCertResponse>;
-  /** 哈希上链存证(有证书，无签章) {@link V20210303.CreateHashDepositNoSealRequest} {@link V20210303.CreateHashDepositNoSealResponse} */
+  /** @deprecated 哈希上链存证(有证书，无签章) {@link V20210303.CreateHashDepositNoSealRequest} {@link V20210303.CreateHashDepositNoSealResponse} */
   CreateHashDepositNoSeal(data: V20210303.CreateHashDepositNoSealRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateHashDepositNoSealResponse>;
-  /** 图片文件存证 {@link V20210303.CreateImageDepositRequest} {@link V20210303.CreateImageDepositResponse} */
+  /** @deprecated 图片文件存证 {@link V20210303.CreateImageDepositRequest} {@link V20210303.CreateImageDepositResponse} */
   CreateImageDeposit(data: V20210303.CreateImageDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateImageDepositResponse>;
-  /** 视频文件存证 {@link V20210303.CreateVideoDepositRequest} {@link V20210303.CreateVideoDepositResponse} */
+  /** @deprecated 视频文件存证 {@link V20210303.CreateVideoDepositRequest} {@link V20210303.CreateVideoDepositResponse} */
   CreateVideoDeposit(data: V20210303.CreateVideoDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateVideoDepositResponse>;
-  /** 网页快照存证 {@link V20210303.CreateWebpageDepositRequest} {@link V20210303.CreateWebpageDepositResponse} */
+  /** @deprecated 网页快照存证 {@link V20210303.CreateWebpageDepositRequest} {@link V20210303.CreateWebpageDepositResponse} */
   CreateWebpageDeposit(data: V20210303.CreateWebpageDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateWebpageDepositResponse>;
-  /** BTOE存证电子凭证查询 {@link V20210303.GetDepositCertRequest} {@link V20210303.GetDepositCertResponse} */
+  /** @deprecated BTOE存证电子凭证查询 {@link V20210303.GetDepositCertRequest} {@link V20210303.GetDepositCertResponse} */
   GetDepositCert(data: V20210303.GetDepositCertRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.GetDepositCertResponse>;
-  /** 存证文件查询 {@link V20210303.GetDepositFileRequest} {@link V20210303.GetDepositFileResponse} */
+  /** @deprecated 存证文件查询 {@link V20210303.GetDepositFileRequest} {@link V20210303.GetDepositFileResponse} */
   GetDepositFile(data: V20210303.GetDepositFileRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.GetDepositFileResponse>;
-  /** 存证基本信息查询 {@link V20210303.GetDepositInfoRequest} {@link V20210303.GetDepositInfoResponse} */
+  /** @deprecated 存证基本信息查询 {@link V20210303.GetDepositInfoRequest} {@link V20210303.GetDepositInfoResponse} */
   GetDepositInfo(data: V20210303.GetDepositInfoRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.GetDepositInfoResponse>;
 }
 

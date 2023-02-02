@@ -20,6 +20,16 @@ declare interface AppCustomContent {
   CssUrl?: string;
 }
 
+/** 批量注册用户信息 */
+declare interface BatchUserInfo {
+  /** 低代码互动课堂的SdkAppId。 */
+  SdkAppId?: number;
+  /** 用户ID。 */
+  UserId?: string | null;
+  /** 用户在客户系统的Id。 若用户注册时该字段为空，则默认为 UserId 值一致。 */
+  OriginId?: string | null;
+}
+
 /** 成员记录信息。 */
 declare interface MemberRecord {
   /** 用户ID。 */
@@ -48,6 +58,29 @@ declare interface MemberRecord {
 
 /** 场景配置 */
 declare interface SceneItem {
+}
+
+declare interface BatchRegisterRequest {
+  /** 批量注册用户信息列表 */
+  Users: BatchUserRequest[];
+}
+
+declare interface BatchRegisterResponse {
+  /** 注册成功的用户列表 */
+  Users?: BatchUserInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchUserRequest {
+  /** 低代码互动课堂的SdkAppId。 */
+  SdkAppId: number | null;
+  /** 用户名称。 */
+  Name?: string | null;
+  /** 用户在客户系统的Id，需要在同一应用下唯一。 */
+  OriginId?: string | null;
+  /** 用户头像。 */
+  Avatar?: string | null;
 }
 
 declare interface BindDocumentToRoomRequest {
@@ -105,7 +138,7 @@ declare interface CreateRoomRequest {
   MaxMicNumber: number;
   /** 房间子类型，可以有以下取值：videodoc 文档+视频video 纯视频coteaching 双师 */
   SubType: string;
-  /** 老师ID。通过[注册用户]接口获取的UserId。 */
+  /** 老师ID。通过[注册用户]接口获取的UserId。指定后该用户在房间内拥有老师权限。 */
   TeacherId?: string;
   /** 进入课堂时是否自动连麦。可以有以下取值：0 不自动连麦（需要手动申请上麦，默认值）1 自动连麦 */
   AutoMic?: number;
@@ -113,7 +146,7 @@ declare interface CreateRoomRequest {
   AudioQuality?: number;
   /** 上课后是否禁止自动录制。可以有以下取值：0 不禁止录制（自动开启录制，默认值）1 禁止录制注：如果该配置取值为0，录制将从上课后开始，课堂结束后停止。 */
   DisableRecord?: number;
-  /** 助教Id列表。通过[注册用户]接口获取的UserId。 */
+  /** 助教Id列表。通过[注册用户]接口获取的UserId。指定后该用户在房间内拥有助教权限。 */
   Assistants?: string[];
   /** 录制布局。 */
   RecordLayout?: number;
@@ -174,7 +207,7 @@ declare interface DescribeRoomResponse {
   StartTime?: number;
   /** 预定的房间结束时间，unix时间戳。 */
   EndTime?: number;
-  /** 老师ID。 */
+  /** 老师的UserId。 */
   TeacherId?: string;
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId?: number;
@@ -190,7 +223,7 @@ declare interface DescribeRoomResponse {
   SubType?: string;
   /** 上课后是否禁止自动录制。可以有以下取值：0 不禁止录制（自动开启录制，默认值）1 禁止录制注：如果该配置取值为0，录制将从上课后开始，课堂结束后停止。 */
   DisableRecord?: number;
-  /** 助教Id列表。 */
+  /** 助教UserId列表。 */
   Assistants?: string[] | null;
   /** 录制地址。仅在房间结束后存在。 */
   RecordUrl?: string | null;
@@ -282,6 +315,40 @@ declare interface ModifyAppResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRoomRequest {
+  /** 房间ID。 */
+  RoomId: number;
+  /** 低代码互动课堂的SdkAppId */
+  SdkAppId: number;
+  /** 预定的房间开始时间，unix时间戳。直播开始后不允许修改。 */
+  StartTime?: number;
+  /** 预定的房间结束时间，unix时间戳。直播开始后不允许修改。 */
+  EndTime?: number;
+  /** 老师ID。直播开始后不允许修改。 */
+  TeacherId?: string;
+  /** 房间名称。 */
+  Name?: string;
+  /** 分辨率。可以有如下取值：1 标清2 高清3 全高清直播开始后不允许修改。 */
+  Resolution?: number;
+  /** 最大连麦人数（不包括老师）。取值范围[0, 17)直播开始后不允许修改。 */
+  MaxMicNumber?: number;
+  /** 进入房间时是否自动连麦。可以有以下取值：0 不自动连麦（默认值）1 自动连麦直播开始后不允许修改。 */
+  AutoMic?: number;
+  /** 高音质模式。可以有以下取值：0 不开启高音质（默认值）1 开启高音质直播开始后不允许修改。 */
+  AudioQuality?: number;
+  /** 房间子类型，可以有以下取值：videodoc 文档+视频video 纯视频coteaching 双师直播开始后不允许修改。 */
+  SubType?: string;
+  /** 禁止录制。可以有以下取值：0 不禁止录制（默认值）1 禁止录制直播开始后不允许修改。 */
+  DisableRecord?: number;
+  /** 助教Id列表。直播开始后不允许修改。 */
+  Assistants?: string[];
+}
+
+declare interface ModifyRoomResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RegisterUserRequest {
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId: number;
@@ -329,6 +396,8 @@ declare interface UnbindDocumentFromRoomResponse {
 /** {@link Lcic 低代码互动课堂} */
 declare interface Lcic {
   (): Versions;
+  /** 用户批量注册 {@link BatchRegisterRequest} {@link BatchRegisterResponse} */
+  BatchRegister(data: BatchRegisterRequest, config?: AxiosRequestConfig): AxiosPromise<BatchRegisterResponse>;
   /** 绑定文档到房间 {@link BindDocumentToRoomRequest} {@link BindDocumentToRoomResponse} */
   BindDocumentToRoom(data: BindDocumentToRoomRequest, config?: AxiosRequestConfig): AxiosPromise<BindDocumentToRoomResponse>;
   /** 创建文档 {@link CreateDocumentRequest} {@link CreateDocumentResponse} */
@@ -353,6 +422,8 @@ declare interface Lcic {
   LoginUser(data: LoginUserRequest, config?: AxiosRequestConfig): AxiosPromise<LoginUserResponse>;
   /** 修改应用 {@link ModifyAppRequest} {@link ModifyAppResponse} */
   ModifyApp(data: ModifyAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppResponse>;
+  /** 修改房间 {@link ModifyRoomRequest} {@link ModifyRoomResponse} */
+  ModifyRoom(data: ModifyRoomRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoomResponse>;
   /** 注册用户 {@link RegisterUserRequest} {@link RegisterUserResponse} */
   RegisterUser(data: RegisterUserRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterUserResponse>;
   /** 设置应用自定义内容 {@link SetAppCustomContentRequest} {@link SetAppCustomContentResponse} */

@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 225+ 款产品，8881+ 服务数</summary>
+<details><summary>共计 225+ 款产品，8899+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -166,7 +166,7 @@ cr | [金融联络机器人](https://cloud.tencent.com/document/product/656) | 2
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(92) |
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(232) |
 cws | 漏洞扫描服务 | 2018-03-12(19) |
-cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(75) |
+cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(76) |
 dasb | [T-Sec-堡垒机（BH）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(24) |
 dataintegration | [数据接入平台](https://cloud.tencent.com/document/product/1591) | 2022-06-13(1) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
@@ -220,7 +220,7 @@ iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.te
 irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 2022-08-05(4) | 2022-03-24(4) |
 ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2021-09-03(25) |
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(49) |
-lcic | [低代码互动课堂](https://cloud.tencent.com/document/product/1639) | 2022-08-17(15) |
+lcic | [低代码互动课堂](https://cloud.tencent.com/document/product/1639) | 2022-08-17(17) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(77) |
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(121) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(1) |
@@ -232,7 +232,7 @@ mgobe | [游戏联机对战引擎](https://cloud.tencent.com/document/product/10
 mmps | [小程序安全](https://cloud.tencent.com/document/product/1223) | 2020-07-10(15) |
 mna | [移动网络加速](https://cloud.tencent.com/document/product/1385) | 2021-01-19(12) |
 mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(35) | 2018-04-08(13) |
-monitor | [云监控](https://cloud.tencent.com/document/product/248) | 2018-07-24(134) |
+monitor | [云监控](https://cloud.tencent.com/document/product/248) | 2018-07-24(149) |
 mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(83) |
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(4) |
 ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(17) |

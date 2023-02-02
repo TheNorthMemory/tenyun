@@ -2326,6 +2326,18 @@ declare interface ResetAccountPasswordResponse {
   RequestId?: string;
 }
 
+declare interface RestartInstanceRequest {
+  /** 实例id */
+  InstanceId: string;
+}
+
+declare interface RestartInstanceResponse {
+  /** 异步任务id */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResumeServerlessRequest {
   /** 集群ID */
   ClusterId: string;
@@ -2633,6 +2645,8 @@ declare interface Cynosdb {
   RemoveClusterSlaveZone(data: RemoveClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveClusterSlaveZoneResponse>;
   /** 重置数据库账号密码 {@link ResetAccountPasswordRequest} {@link ResetAccountPasswordResponse} */
   ResetAccountPassword(data: ResetAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAccountPasswordResponse>;
+  /** 重启实例 {@link RestartInstanceRequest} {@link RestartInstanceResponse} */
+  RestartInstance(data: RestartInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartInstanceResponse>;
   /** 恢复serverless集群 {@link ResumeServerlessRequest} {@link ResumeServerlessResponse} */
   ResumeServerless(data: ResumeServerlessRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeServerlessResponse>;
   /** 批量回收账号权限 {@link RevokeAccountPrivilegesRequest} {@link RevokeAccountPrivilegesResponse} */

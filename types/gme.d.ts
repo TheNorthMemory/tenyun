@@ -350,10 +350,12 @@ declare interface Task {
 
 /** 用户麦克风状态 */
 declare interface UserMicStatus {
-  /** 客户端用于标识用户的Openid。 */
-  Uid: number;
   /** 开麦状态。1表示关闭麦克风，2表示打开麦克风。 */
   EnableMic: number;
+  /** 客户端用于标识用户的Openid。（Uid、StrUid必须填一个，优先处理StrUid。） */
+  Uid?: number;
+  /** 客户端用于标识字符串型用户的Openid。（Uid、StrUid必须填一个，优先处理StrUid。） */
+  StrUid?: string | null;
 }
 
 /** 语音过滤服务配置数据 */
@@ -471,17 +473,17 @@ declare interface DeleteCustomizationResponse {
 declare interface DeleteRoomMemberRequest {
   /** 要操作的房间id */
   RoomId: string;
-  /** 要剔除的用户列表 */
-  Uids: string[];
   /** 剔除类型 1-删除房间 2-剔除用户 */
   DeleteType: number;
   /** 应用id */
   BizId: number;
+  /** 要剔除的用户列表 */
+  Uids?: string[];
 }
 
 declare interface DeleteRoomMemberResponse {
   /** 剔除房间或成员的操作结果 */
-  DeleteResult: DeleteResult;
+  DeleteResult?: DeleteResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -609,9 +611,9 @@ declare interface DescribeRoomInfoRequest {
 
 declare interface DescribeRoomInfoResponse {
   /** 操作结果, 0成功, 非0失败 */
-  Result: number | null;
+  Result?: number | null;
   /** 房间用户信息 */
-  RoomUsers: RoomUser[] | null;
+  RoomUsers?: RoomUser[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -727,9 +729,9 @@ declare interface ModifyUserMicStatusRequest {
 
 declare interface ModifyUserMicStatusResponse {
   /** 返回结果：0为成功，非0为失败。 */
-  Result: number;
+  Result?: number;
   /** 错误信息。 */
-  ErrMsg: string;
+  ErrMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

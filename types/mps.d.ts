@@ -1422,6 +1422,10 @@ declare interface DescribeFlow {
   InputGroup: DescribeInput[];
   /** 输出组。 */
   OutputGroup: DescribeOutput[] | null;
+  /** 该Flow关联的媒体传输事件EventId。 */
+  EventId: string;
+  /** 媒体传输输入流所属的区域，取值和InputRegion相同。 */
+  Region: string;
 }
 
 /** 查询输入的HLS配置信息。 */
@@ -4174,7 +4178,9 @@ declare interface CreateStreamLinkFlowRequest {
   /** 最大带宽，单位bps，可选[10000000, 20000000, 50000000]。 */
   MaxBandwidth: number;
   /** 流的输入组。 */
-  InputGroup: CreateInput[];
+  InputGroup?: CreateInput[];
+  /** 该Flow关联的媒体传输事件ID，每个flow只能关联一个Event。 */
+  EventId?: string;
 }
 
 declare interface CreateStreamLinkFlowResponse {
