@@ -2063,153 +2063,153 @@ declare interface UpdateRuntimeConfigurationResponse {
 /** {@link Gse 游戏服务器伸缩} */
 declare interface Gse {
   (): Versions;
-  /** 关联云联网实例 {@link AttachCcnInstancesRequest} {@link AttachCcnInstancesResponse} */
+  /** @deprecated 关联云联网实例 {@link AttachCcnInstancesRequest} {@link AttachCcnInstancesResponse} */
   AttachCcnInstances(data?: AttachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachCcnInstancesResponse>;
-  /** 复制服务器舰队 {@link CopyFleetRequest} {@link CopyFleetResponse} */
+  /** @deprecated 复制服务器舰队 {@link CopyFleetRequest} {@link CopyFleetResponse} */
   CopyFleet(data: CopyFleetRequest, config?: AxiosRequestConfig): AxiosPromise<CopyFleetResponse>;
-  /** 创建别名 {@link CreateAliasRequest} {@link CreateAliasResponse} */
+  /** @deprecated 创建别名 {@link CreateAliasRequest} {@link CreateAliasResponse} */
   CreateAlias(data: CreateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAliasResponse>;
-  /** 创建生成包 {@link CreateAssetRequest} {@link CreateAssetResponse} */
+  /** @deprecated 创建生成包 {@link CreateAssetRequest} {@link CreateAssetResponse} */
   CreateAsset(data: CreateAssetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetResponse>;
-  /** 创建生成包镜像信息 {@link CreateAssetWithImageRequest} {@link CreateAssetWithImageResponse} */
+  /** @deprecated 创建生成包镜像信息 {@link CreateAssetWithImageRequest} {@link CreateAssetWithImageResponse} */
   CreateAssetWithImage(data: CreateAssetWithImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetWithImageResponse>;
-  /** 创建服务器舰队 {@link CreateFleetRequest} {@link CreateFleetResponse} */
+  /** @deprecated 创建服务器舰队 {@link CreateFleetRequest} {@link CreateFleetResponse} */
   CreateFleet(data?: CreateFleetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFleetResponse>;
-  /** 创建游戏服务器会话 {@link CreateGameServerSessionRequest} {@link CreateGameServerSessionResponse} */
+  /** @deprecated 创建游戏服务器会话 {@link CreateGameServerSessionRequest} {@link CreateGameServerSessionResponse} */
   CreateGameServerSession(data: CreateGameServerSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGameServerSessionResponse>;
-  /** 创建游戏服务器会话队列 {@link CreateGameServerSessionQueueRequest} {@link CreateGameServerSessionQueueResponse} */
+  /** @deprecated 创建游戏服务器会话队列 {@link CreateGameServerSessionQueueRequest} {@link CreateGameServerSessionQueueResponse} */
   CreateGameServerSessionQueue(data: CreateGameServerSessionQueueRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGameServerSessionQueueResponse>;
-  /** 删除别名 {@link DeleteAliasRequest} {@link DeleteAliasResponse} */
+  /** @deprecated 删除别名 {@link DeleteAliasRequest} {@link DeleteAliasResponse} */
   DeleteAlias(data: DeleteAliasRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAliasResponse>;
-  /** 删除生成包 {@link DeleteAssetRequest} {@link DeleteAssetResponse} */
+  /** @deprecated 删除生成包 {@link DeleteAssetRequest} {@link DeleteAssetResponse} */
   DeleteAsset(data: DeleteAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAssetResponse>;
-  /** 删除服务器舰队 {@link DeleteFleetRequest} {@link DeleteFleetResponse} */
+  /** @deprecated 删除服务器舰队 {@link DeleteFleetRequest} {@link DeleteFleetResponse} */
   DeleteFleet(data: DeleteFleetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFleetResponse>;
-  /** 删除游戏服务器会话队列 {@link DeleteGameServerSessionQueueRequest} {@link DeleteGameServerSessionQueueResponse} */
+  /** @deprecated 删除游戏服务器会话队列 {@link DeleteGameServerSessionQueueRequest} {@link DeleteGameServerSessionQueueResponse} */
   DeleteGameServerSessionQueue(data: DeleteGameServerSessionQueueRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGameServerSessionQueueResponse>;
-  /** 删除扩缩容配置 {@link DeleteScalingPolicyRequest} {@link DeleteScalingPolicyResponse} */
+  /** @deprecated 删除扩缩容配置 {@link DeleteScalingPolicyRequest} {@link DeleteScalingPolicyResponse} */
   DeleteScalingPolicy(data: DeleteScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScalingPolicyResponse>;
-  /** 删除定时器 {@link DeleteTimerScalingPolicyRequest} {@link DeleteTimerScalingPolicyResponse} */
+  /** @deprecated 删除定时器 {@link DeleteTimerScalingPolicyRequest} {@link DeleteTimerScalingPolicyResponse} */
   DeleteTimerScalingPolicy(data?: DeleteTimerScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTimerScalingPolicyResponse>;
-  /** 获取别名详情 {@link DescribeAliasRequest} {@link DescribeAliasResponse} */
+  /** @deprecated 获取别名详情 {@link DescribeAliasRequest} {@link DescribeAliasResponse} */
   DescribeAlias(data: DescribeAliasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAliasResponse>;
-  /** 获取生成包信息 {@link DescribeAssetRequest} {@link DescribeAssetResponse} */
+  /** @deprecated 获取生成包信息 {@link DescribeAssetRequest} {@link DescribeAssetResponse} */
   DescribeAsset(data: DescribeAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetResponse>;
-  /** 获取生成包支持的操作系统列表 {@link DescribeAssetSystemsRequest} {@link DescribeAssetSystemsResponse} */
+  /** @deprecated 获取生成包支持的操作系统列表 {@link DescribeAssetSystemsRequest} {@link DescribeAssetSystemsResponse} */
   DescribeAssetSystems(data?: DescribeAssetSystemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSystemsResponse>;
-  /** 拉取生成包列表 {@link DescribeAssetsRequest} {@link DescribeAssetsResponse} */
+  /** @deprecated 拉取生成包列表 {@link DescribeAssetsRequest} {@link DescribeAssetsResponse} */
   DescribeAssets(data: DescribeAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetsResponse>;
-  /** 查询云联网实例 {@link DescribeCcnInstancesRequest} {@link DescribeCcnInstancesResponse} */
+  /** @deprecated 查询云联网实例 {@link DescribeCcnInstancesRequest} {@link DescribeCcnInstancesResponse} */
   DescribeCcnInstances(data?: DescribeCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnInstancesResponse>;
-  /** 获取服务器舰队属性 {@link DescribeFleetAttributesRequest} {@link DescribeFleetAttributesResponse} */
+  /** @deprecated 获取服务器舰队属性 {@link DescribeFleetAttributesRequest} {@link DescribeFleetAttributesResponse} */
   DescribeFleetAttributes(data?: DescribeFleetAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetAttributesResponse>;
-  /** 查询游戏服务器舰队容量配置 {@link DescribeFleetCapacityRequest} {@link DescribeFleetCapacityResponse} */
+  /** @deprecated 查询游戏服务器舰队容量配置 {@link DescribeFleetCapacityRequest} {@link DescribeFleetCapacityResponse} */
   DescribeFleetCapacity(data: DescribeFleetCapacityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetCapacityResponse>;
-  /** 查询服务器舰队的事件列表 {@link DescribeFleetEventsRequest} {@link DescribeFleetEventsResponse} */
+  /** @deprecated 查询服务器舰队的事件列表 {@link DescribeFleetEventsRequest} {@link DescribeFleetEventsResponse} */
   DescribeFleetEvents(data: DescribeFleetEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetEventsResponse>;
-  /** 服务器舰队安全组信息查询 {@link DescribeFleetPortSettingsRequest} {@link DescribeFleetPortSettingsResponse} */
+  /** @deprecated 服务器舰队安全组信息查询 {@link DescribeFleetPortSettingsRequest} {@link DescribeFleetPortSettingsResponse} */
   DescribeFleetPortSettings(data: DescribeFleetPortSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetPortSettingsResponse>;
-  /** 获取与游戏服务器舰队关联的资源信息 {@link DescribeFleetRelatedResourcesRequest} {@link DescribeFleetRelatedResourcesResponse} */
+  /** @deprecated 获取与游戏服务器舰队关联的资源信息 {@link DescribeFleetRelatedResourcesRequest} {@link DescribeFleetRelatedResourcesResponse} */
   DescribeFleetRelatedResources(data: DescribeFleetRelatedResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetRelatedResourcesResponse>;
-  /** 查询服务部署统计详情 {@link DescribeFleetStatisticDetailsRequest} {@link DescribeFleetStatisticDetailsResponse} */
+  /** @deprecated 查询服务部署统计详情 {@link DescribeFleetStatisticDetailsRequest} {@link DescribeFleetStatisticDetailsResponse} */
   DescribeFleetStatisticDetails(data?: DescribeFleetStatisticDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetStatisticDetailsResponse>;
-  /** 查询服务部署统计用量 {@link DescribeFleetStatisticFlowsRequest} {@link DescribeFleetStatisticFlowsResponse} */
+  /** @deprecated 查询服务部署统计用量 {@link DescribeFleetStatisticFlowsRequest} {@link DescribeFleetStatisticFlowsResponse} */
   DescribeFleetStatisticFlows(data?: DescribeFleetStatisticFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetStatisticFlowsResponse>;
-  /** 查询服务部署统计汇总信息 {@link DescribeFleetStatisticSummaryRequest} {@link DescribeFleetStatisticSummaryResponse} */
+  /** @deprecated 查询服务部署统计汇总信息 {@link DescribeFleetStatisticSummaryRequest} {@link DescribeFleetStatisticSummaryResponse} */
   DescribeFleetStatisticSummary(data?: DescribeFleetStatisticSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetStatisticSummaryResponse>;
-  /** 查询服务器舰队的利用率信息 {@link DescribeFleetUtilizationRequest} {@link DescribeFleetUtilizationResponse} */
+  /** @deprecated 查询服务器舰队的利用率信息 {@link DescribeFleetUtilizationRequest} {@link DescribeFleetUtilizationResponse} */
   DescribeFleetUtilization(data: DescribeFleetUtilizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFleetUtilizationResponse>;
-  /** 查询游戏服务器会话详情列表 {@link DescribeGameServerSessionDetailsRequest} {@link DescribeGameServerSessionDetailsResponse} */
+  /** @deprecated 查询游戏服务器会话详情列表 {@link DescribeGameServerSessionDetailsRequest} {@link DescribeGameServerSessionDetailsResponse} */
   DescribeGameServerSessionDetails(data?: DescribeGameServerSessionDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGameServerSessionDetailsResponse>;
-  /** 查询游戏服务器会话的放置 {@link DescribeGameServerSessionPlacementRequest} {@link DescribeGameServerSessionPlacementResponse} */
+  /** @deprecated 查询游戏服务器会话的放置 {@link DescribeGameServerSessionPlacementRequest} {@link DescribeGameServerSessionPlacementResponse} */
   DescribeGameServerSessionPlacement(data: DescribeGameServerSessionPlacementRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGameServerSessionPlacementResponse>;
-  /** 查询游戏服务器会话队列 {@link DescribeGameServerSessionQueuesRequest} {@link DescribeGameServerSessionQueuesResponse} */
+  /** @deprecated 查询游戏服务器会话队列 {@link DescribeGameServerSessionQueuesRequest} {@link DescribeGameServerSessionQueuesResponse} */
   DescribeGameServerSessionQueues(data?: DescribeGameServerSessionQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGameServerSessionQueuesResponse>;
-  /** 查询游戏服务器会话列表 {@link DescribeGameServerSessionsRequest} {@link DescribeGameServerSessionsResponse} */
+  /** @deprecated 查询游戏服务器会话列表 {@link DescribeGameServerSessionsRequest} {@link DescribeGameServerSessionsResponse} */
   DescribeGameServerSessions(data?: DescribeGameServerSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGameServerSessionsResponse>;
-  /** 查询用户实例数限额 {@link DescribeInstanceLimitRequest} {@link DescribeInstanceLimitResponse} */
+  /** @deprecated 查询用户实例数限额 {@link DescribeInstanceLimitRequest} {@link DescribeInstanceLimitResponse} */
   DescribeInstanceLimit(data?: DescribeInstanceLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLimitResponse>;
-  /** 获取服务器实例类型列表 {@link DescribeInstanceTypesRequest} {@link DescribeInstanceTypesResponse} */
+  /** @deprecated 获取服务器实例类型列表 {@link DescribeInstanceTypesRequest} {@link DescribeInstanceTypesResponse} */
   DescribeInstanceTypes(data?: DescribeInstanceTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceTypesResponse>;
-  /** 查询服务器实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
+  /** @deprecated 查询服务器实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** 查询实例扩展信息列表 {@link DescribeInstancesExtendRequest} {@link DescribeInstancesExtendResponse} */
+  /** @deprecated 查询实例扩展信息列表 {@link DescribeInstancesExtendRequest} {@link DescribeInstancesExtendResponse} */
   DescribeInstancesExtend(data: DescribeInstancesExtendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesExtendResponse>;
-  /** 查询玩家会话列表 {@link DescribePlayerSessionsRequest} {@link DescribePlayerSessionsResponse} */
+  /** @deprecated 查询玩家会话列表 {@link DescribePlayerSessionsRequest} {@link DescribePlayerSessionsResponse} */
   DescribePlayerSessions(data?: DescribePlayerSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlayerSessionsResponse>;
-  /** 获取服务器舰队运行配置 {@link DescribeRuntimeConfigurationRequest} {@link DescribeRuntimeConfigurationResponse} */
+  /** @deprecated 获取服务器舰队运行配置 {@link DescribeRuntimeConfigurationRequest} {@link DescribeRuntimeConfigurationResponse} */
   DescribeRuntimeConfiguration(data: DescribeRuntimeConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuntimeConfigurationResponse>;
-  /** 查询扩缩容配置 {@link DescribeScalingPoliciesRequest} {@link DescribeScalingPoliciesResponse} */
+  /** @deprecated 查询扩缩容配置 {@link DescribeScalingPoliciesRequest} {@link DescribeScalingPoliciesResponse} */
   DescribeScalingPolicies(data?: DescribeScalingPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScalingPoliciesResponse>;
-  /** 查询定时器列表 {@link DescribeTimerScalingPoliciesRequest} {@link DescribeTimerScalingPoliciesResponse} */
+  /** @deprecated 查询定时器列表 {@link DescribeTimerScalingPoliciesRequest} {@link DescribeTimerScalingPoliciesResponse} */
   DescribeTimerScalingPolicies(data?: DescribeTimerScalingPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimerScalingPoliciesResponse>;
-  /** 获取用户单个模块配额 {@link DescribeUserQuotaRequest} {@link DescribeUserQuotaResponse} */
+  /** @deprecated 获取用户单个模块配额 {@link DescribeUserQuotaRequest} {@link DescribeUserQuotaResponse} */
   DescribeUserQuota(data?: DescribeUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotaResponse>;
-  /** 获取用户配额 {@link DescribeUserQuotasRequest} {@link DescribeUserQuotasResponse} */
+  /** @deprecated 获取用户配额 {@link DescribeUserQuotasRequest} {@link DescribeUserQuotasResponse} */
   DescribeUserQuotas(data?: DescribeUserQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotasResponse>;
-  /** 解关联云联网实例 {@link DetachCcnInstancesRequest} {@link DetachCcnInstancesResponse} */
+  /** @deprecated 解关联云联网实例 {@link DetachCcnInstancesRequest} {@link DetachCcnInstancesResponse} */
   DetachCcnInstances(data?: DetachCcnInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachCcnInstancesResponse>;
-  /** 终止游戏服务器会话和对应的进程 {@link EndGameServerSessionAndProcessRequest} {@link EndGameServerSessionAndProcessResponse} */
+  /** @deprecated 终止游戏服务器会话和对应的进程 {@link EndGameServerSessionAndProcessRequest} {@link EndGameServerSessionAndProcessResponse} */
   EndGameServerSessionAndProcess(data?: EndGameServerSessionAndProcessRequest, config?: AxiosRequestConfig): AxiosPromise<EndGameServerSessionAndProcessResponse>;
-  /** 获取游戏服务器实例的日志URL {@link GetGameServerInstanceLogUrlRequest} {@link GetGameServerInstanceLogUrlResponse} */
+  /** @deprecated 获取游戏服务器实例的日志URL {@link GetGameServerInstanceLogUrlRequest} {@link GetGameServerInstanceLogUrlResponse} */
   GetGameServerInstanceLogUrl(data: GetGameServerInstanceLogUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetGameServerInstanceLogUrlResponse>;
-  /** 获取游戏服务器会话的日志URL {@link GetGameServerSessionLogUrlRequest} {@link GetGameServerSessionLogUrlResponse} */
+  /** @deprecated 获取游戏服务器会话的日志URL {@link GetGameServerSessionLogUrlRequest} {@link GetGameServerSessionLogUrlResponse} */
   GetGameServerSessionLogUrl(data: GetGameServerSessionLogUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetGameServerSessionLogUrlResponse>;
-  /** 获取实例登录所需要的凭据 {@link GetInstanceAccessRequest} {@link GetInstanceAccessResponse} */
+  /** @deprecated 获取实例登录所需要的凭据 {@link GetInstanceAccessRequest} {@link GetInstanceAccessResponse} */
   GetInstanceAccess(data: GetInstanceAccessRequest, config?: AxiosRequestConfig): AxiosPromise<GetInstanceAccessResponse>;
-  /** 获取上传文件授权信息 {@link GetUploadCredentialsRequest} {@link GetUploadCredentialsResponse} */
+  /** @deprecated 获取上传文件授权信息 {@link GetUploadCredentialsRequest} {@link GetUploadCredentialsResponse} */
   GetUploadCredentials(data: GetUploadCredentialsRequest, config?: AxiosRequestConfig): AxiosPromise<GetUploadCredentialsResponse>;
-  /** 获取上传的临时密钥 {@link GetUploadFederationTokenRequest} {@link GetUploadFederationTokenResponse} */
+  /** @deprecated 获取上传的临时密钥 {@link GetUploadFederationTokenRequest} {@link GetUploadFederationTokenResponse} */
   GetUploadFederationToken(data?: GetUploadFederationTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetUploadFederationTokenResponse>;
-  /** 加入游戏服务器会话 {@link JoinGameServerSessionRequest} {@link JoinGameServerSessionResponse} */
+  /** @deprecated 加入游戏服务器会话 {@link JoinGameServerSessionRequest} {@link JoinGameServerSessionResponse} */
   JoinGameServerSession(data: JoinGameServerSessionRequest, config?: AxiosRequestConfig): AxiosPromise<JoinGameServerSessionResponse>;
-  /** 批量加入游戏服务器会话 {@link JoinGameServerSessionBatchRequest} {@link JoinGameServerSessionBatchResponse} */
+  /** @deprecated 批量加入游戏服务器会话 {@link JoinGameServerSessionBatchRequest} {@link JoinGameServerSessionBatchResponse} */
   JoinGameServerSessionBatch(data: JoinGameServerSessionBatchRequest, config?: AxiosRequestConfig): AxiosPromise<JoinGameServerSessionBatchResponse>;
-  /** 检索帐户下的所有别名 {@link ListAliasesRequest} {@link ListAliasesResponse} */
+  /** @deprecated 检索帐户下的所有别名 {@link ListAliasesRequest} {@link ListAliasesResponse} */
   ListAliases(data?: ListAliasesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAliasesResponse>;
-  /** 获取服务器舰队列表 {@link ListFleetsRequest} {@link ListFleetsResponse} */
+  /** @deprecated 获取服务器舰队列表 {@link ListFleetsRequest} {@link ListFleetsResponse} */
   ListFleets(data?: ListFleetsRequest, config?: AxiosRequestConfig): AxiosPromise<ListFleetsResponse>;
-  /** 设置扩缩容策略 {@link PutScalingPolicyRequest} {@link PutScalingPolicyResponse} */
+  /** @deprecated 设置扩缩容策略 {@link PutScalingPolicyRequest} {@link PutScalingPolicyResponse} */
   PutScalingPolicy(data: PutScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<PutScalingPolicyResponse>;
-  /** 创建或更新定时器 {@link PutTimerScalingPolicyRequest} {@link PutTimerScalingPolicyResponse} */
+  /** @deprecated 创建或更新定时器 {@link PutTimerScalingPolicyRequest} {@link PutTimerScalingPolicyResponse} */
   PutTimerScalingPolicy(data?: PutTimerScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<PutTimerScalingPolicyResponse>;
-  /** 获取别名当前指向的fleetId {@link ResolveAliasRequest} {@link ResolveAliasResponse} */
+  /** @deprecated 获取别名当前指向的fleetId {@link ResolveAliasRequest} {@link ResolveAliasResponse} */
   ResolveAlias(data: ResolveAliasRequest, config?: AxiosRequestConfig): AxiosPromise<ResolveAliasResponse>;
-  /** 搜索游戏服务器会话列表 {@link SearchGameServerSessionsRequest} {@link SearchGameServerSessionsResponse} */
+  /** @deprecated 搜索游戏服务器会话列表 {@link SearchGameServerSessionsRequest} {@link SearchGameServerSessionsResponse} */
   SearchGameServerSessions(data?: SearchGameServerSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<SearchGameServerSessionsResponse>;
-  /** 设置实例保留 {@link SetServerReservedRequest} {@link SetServerReservedResponse} */
+  /** @deprecated 设置实例保留 {@link SetServerReservedRequest} {@link SetServerReservedResponse} */
   SetServerReserved(data: SetServerReservedRequest, config?: AxiosRequestConfig): AxiosPromise<SetServerReservedResponse>;
-  /** 设置服务器权重 {@link SetServerWeightRequest} {@link SetServerWeightResponse} */
+  /** @deprecated 设置服务器权重 {@link SetServerWeightRequest} {@link SetServerWeightResponse} */
   SetServerWeight(data: SetServerWeightRequest, config?: AxiosRequestConfig): AxiosPromise<SetServerWeightResponse>;
-  /** 启用服务器舰队自动扩缩容 {@link StartFleetActionsRequest} {@link StartFleetActionsResponse} */
+  /** @deprecated 启用服务器舰队自动扩缩容 {@link StartFleetActionsRequest} {@link StartFleetActionsResponse} */
   StartFleetActions(data: StartFleetActionsRequest, config?: AxiosRequestConfig): AxiosPromise<StartFleetActionsResponse>;
-  /** 开始放置游戏服务器会话 {@link StartGameServerSessionPlacementRequest} {@link StartGameServerSessionPlacementResponse} */
+  /** @deprecated 开始放置游戏服务器会话 {@link StartGameServerSessionPlacementRequest} {@link StartGameServerSessionPlacementResponse} */
   StartGameServerSessionPlacement(data: StartGameServerSessionPlacementRequest, config?: AxiosRequestConfig): AxiosPromise<StartGameServerSessionPlacementResponse>;
-  /** 停止服务器舰队自动扩缩容 {@link StopFleetActionsRequest} {@link StopFleetActionsResponse} */
+  /** @deprecated 停止服务器舰队自动扩缩容 {@link StopFleetActionsRequest} {@link StopFleetActionsResponse} */
   StopFleetActions(data: StopFleetActionsRequest, config?: AxiosRequestConfig): AxiosPromise<StopFleetActionsResponse>;
-  /** 停止放置游戏服务器会话 {@link StopGameServerSessionPlacementRequest} {@link StopGameServerSessionPlacementResponse} */
+  /** @deprecated 停止放置游戏服务器会话 {@link StopGameServerSessionPlacementRequest} {@link StopGameServerSessionPlacementResponse} */
   StopGameServerSessionPlacement(data: StopGameServerSessionPlacementRequest, config?: AxiosRequestConfig): AxiosPromise<StopGameServerSessionPlacementResponse>;
-  /** 更新别名的属性 {@link UpdateAliasRequest} {@link UpdateAliasResponse} */
+  /** @deprecated 更新别名的属性 {@link UpdateAliasRequest} {@link UpdateAliasResponse} */
   UpdateAlias(data: UpdateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAliasResponse>;
-  /** 修改生成包信息 {@link UpdateAssetRequest} {@link UpdateAssetResponse} */
+  /** @deprecated 修改生成包信息 {@link UpdateAssetRequest} {@link UpdateAssetResponse} */
   UpdateAsset(data: UpdateAssetRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAssetResponse>;
-  /** cos设置全球加速 {@link UpdateBucketAccelerateOptRequest} {@link UpdateBucketAccelerateOptResponse} */
+  /** @deprecated cos设置全球加速 {@link UpdateBucketAccelerateOptRequest} {@link UpdateBucketAccelerateOptResponse} */
   UpdateBucketAccelerateOpt(data: UpdateBucketAccelerateOptRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateBucketAccelerateOptResponse>;
-  /** 设置cos跨域访问 {@link UpdateBucketCORSOptRequest} {@link UpdateBucketCORSOptResponse} */
+  /** @deprecated 设置cos跨域访问 {@link UpdateBucketCORSOptRequest} {@link UpdateBucketCORSOptResponse} */
   UpdateBucketCORSOpt(data: UpdateBucketCORSOptRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateBucketCORSOptResponse>;
-  /** 更新服务器舰队属性 {@link UpdateFleetAttributesRequest} {@link UpdateFleetAttributesResponse} */
+  /** @deprecated 更新服务器舰队属性 {@link UpdateFleetAttributesRequest} {@link UpdateFleetAttributesResponse} */
   UpdateFleetAttributes(data: UpdateFleetAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFleetAttributesResponse>;
-  /** 更新服务器舰队容量配置 {@link UpdateFleetCapacityRequest} {@link UpdateFleetCapacityResponse} */
+  /** @deprecated 更新服务器舰队容量配置 {@link UpdateFleetCapacityRequest} {@link UpdateFleetCapacityResponse} */
   UpdateFleetCapacity(data: UpdateFleetCapacityRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFleetCapacityResponse>;
-  /** 更新服务器舰队名称 {@link UpdateFleetNameRequest} {@link UpdateFleetNameResponse} */
+  /** @deprecated 更新服务器舰队名称 {@link UpdateFleetNameRequest} {@link UpdateFleetNameResponse} */
   UpdateFleetName(data: UpdateFleetNameRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFleetNameResponse>;
-  /** 更新服务器舰队安全组 {@link UpdateFleetPortSettingsRequest} {@link UpdateFleetPortSettingsResponse} */
+  /** @deprecated 更新服务器舰队安全组 {@link UpdateFleetPortSettingsRequest} {@link UpdateFleetPortSettingsResponse} */
   UpdateFleetPortSettings(data: UpdateFleetPortSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFleetPortSettingsResponse>;
-  /** 更新游戏服务器会话 {@link UpdateGameServerSessionRequest} {@link UpdateGameServerSessionResponse} */
+  /** @deprecated 更新游戏服务器会话 {@link UpdateGameServerSessionRequest} {@link UpdateGameServerSessionResponse} */
   UpdateGameServerSession(data: UpdateGameServerSessionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGameServerSessionResponse>;
-  /** 修改游戏服务器会话队列 {@link UpdateGameServerSessionQueueRequest} {@link UpdateGameServerSessionQueueResponse} */
+  /** @deprecated 修改游戏服务器会话队列 {@link UpdateGameServerSessionQueueRequest} {@link UpdateGameServerSessionQueueResponse} */
   UpdateGameServerSessionQueue(data: UpdateGameServerSessionQueueRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGameServerSessionQueueResponse>;
-  /** 更新服务器舰队配置 {@link UpdateRuntimeConfigurationRequest} {@link UpdateRuntimeConfigurationResponse} */
+  /** @deprecated 更新服务器舰队配置 {@link UpdateRuntimeConfigurationRequest} {@link UpdateRuntimeConfigurationResponse} */
   UpdateRuntimeConfiguration(data: UpdateRuntimeConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRuntimeConfigurationResponse>;
 }
 

@@ -211,19 +211,19 @@ declare namespace V20190929 {
 /** {@link Mgobe 游戏联机对战引擎} */
 declare interface Mgobe {
   (): Versions;
-  /** 修改房间玩家自定义属性 {@link ChangeRoomPlayerProfileRequest} {@link ChangeRoomPlayerProfileResponse} */
+  /** @deprecated 修改房间玩家自定义属性 {@link ChangeRoomPlayerProfileRequest} {@link ChangeRoomPlayerProfileResponse} */
   ChangeRoomPlayerProfile(data: ChangeRoomPlayerProfileRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeRoomPlayerProfileResponse>;
-  /** 修改玩家自定义状态 {@link ChangeRoomPlayerStatusRequest} {@link ChangeRoomPlayerStatusResponse} */
+  /** @deprecated 修改玩家自定义状态 {@link ChangeRoomPlayerStatusRequest} {@link ChangeRoomPlayerStatusResponse} */
   ChangeRoomPlayerStatus(data: ChangeRoomPlayerStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeRoomPlayerStatusResponse>;
-  /** 查询玩家信息 {@link DescribePlayerRequest} {@link DescribePlayerResponse} */
+  /** @deprecated 查询玩家信息 {@link DescribePlayerRequest} {@link DescribePlayerResponse} */
   DescribePlayer(data: DescribePlayerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlayerResponse>;
-  /** 查询房间信息 {@link DescribeRoomRequest} {@link DescribeRoomResponse} */
+  /** @deprecated 查询房间信息 {@link DescribeRoomRequest} {@link DescribeRoomResponse} */
   DescribeRoom(data: DescribeRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomResponse>;
-  /** 解散房间 {@link DismissRoomRequest} {@link DismissRoomResponse} */
+  /** @deprecated 解散房间 {@link DismissRoomRequest} {@link DismissRoomResponse} */
   DismissRoom(data: DismissRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DismissRoomResponse>;
-  /** 修改房间 {@link ModifyRoomRequest} {@link ModifyRoomResponse} */
+  /** @deprecated 修改房间 {@link ModifyRoomRequest} {@link ModifyRoomResponse} */
   ModifyRoom(data: ModifyRoomRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoomResponse>;
-  /** 踢出房间玩家 {@link RemoveRoomPlayerRequest} {@link RemoveRoomPlayerResponse} */
+  /** @deprecated 踢出房间玩家 {@link RemoveRoomPlayerRequest} {@link RemoveRoomPlayerResponse} */
   RemoveRoomPlayer(data: RemoveRoomPlayerRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveRoomPlayerResponse>;
   /** 解散房间 {@link V20190929.DismissRoomRequest} {@link V20190929.DismissRoomResponse} */
   DismissRoom(data: V20190929.DismissRoomRequest, config: AxiosRequestConfig & V20190929.VersionHeader): AxiosPromise<V20190929.DismissRoomResponse>;

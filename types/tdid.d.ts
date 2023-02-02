@@ -1235,7 +1235,7 @@ declare interface Tdid {
   DownCpt(data: DownCptRequest, config?: AxiosRequestConfig): AxiosPromise<DownCptResponse>;
   /** 启用合约 {@link EnableHashRequest} {@link EnableHashResponse} */
   EnableHash(data: EnableHashRequest, config?: AxiosRequestConfig): AxiosPromise<EnableHashResponse>;
-  /** 本机构DID详情 {@link GetAgencyTDidRequest} {@link GetAgencyTDidResponse} */
+  /** @deprecated 本机构DID详情 {@link GetAgencyTDidRequest} {@link GetAgencyTDidResponse} */
   GetAgencyTDid(data: GetAgencyTDidRequest, config?: AxiosRequestConfig): AxiosPromise<GetAgencyTDidResponse>;
   /** 权威机构列表 {@link GetAuthoritiesListRequest} {@link GetAuthoritiesListResponse} */
   GetAuthoritiesList(data: GetAuthoritiesListRequest, config?: AxiosRequestConfig): AxiosPromise<GetAuthoritiesListResponse>;

@@ -913,55 +913,55 @@ declare interface UpdateServiceResponse {
 /** {@link Tiems 腾讯云 TI 平台 TI-EMS} */
 declare interface Tiems {
   (): Versions;
-  /** 创建任务 {@link CreateJobRequest} {@link CreateJobResponse} */
+  /** @deprecated 创建任务 {@link CreateJobRequest} {@link CreateJobResponse} */
   CreateJob(data: CreateJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobResponse>;
-  /** 创建资源组的伸缩组 {@link CreateRsgAsGroupRequest} {@link CreateRsgAsGroupResponse} */
+  /** @deprecated 创建资源组的伸缩组 {@link CreateRsgAsGroupRequest} {@link CreateRsgAsGroupResponse} */
   CreateRsgAsGroup(data: CreateRsgAsGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRsgAsGroupResponse>;
-  /** 创建运行环境 {@link CreateRuntimeRequest} {@link CreateRuntimeResponse} */
+  /** @deprecated 创建运行环境 {@link CreateRuntimeRequest} {@link CreateRuntimeResponse} */
   CreateRuntime(data: CreateRuntimeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuntimeResponse>;
-  /** 创建服务 {@link CreateServiceRequest} {@link CreateServiceResponse} */
+  /** @deprecated 创建服务 {@link CreateServiceRequest} {@link CreateServiceResponse} */
   CreateService(data: CreateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceResponse>;
-  /** 创建服务配置 {@link CreateServiceConfigRequest} {@link CreateServiceConfigResponse} */
+  /** @deprecated 创建服务配置 {@link CreateServiceConfigRequest} {@link CreateServiceConfigResponse} */
   CreateServiceConfig(data: CreateServiceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceConfigResponse>;
-  /** 删除节点 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
+  /** @deprecated 删除节点 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
-  /** 删除任务 {@link DeleteJobRequest} {@link DeleteJobResponse} */
+  /** @deprecated 删除任务 {@link DeleteJobRequest} {@link DeleteJobResponse} */
   DeleteJob(data: DeleteJobRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJobResponse>;
-  /** 删除资源组 {@link DeleteResourceGroupRequest} {@link DeleteResourceGroupResponse} */
+  /** @deprecated 删除资源组 {@link DeleteResourceGroupRequest} {@link DeleteResourceGroupResponse} */
   DeleteResourceGroup(data: DeleteResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceGroupResponse>;
-  /** 删除资源组的伸缩组 {@link DeleteRsgAsGroupRequest} {@link DeleteRsgAsGroupResponse} */
+  /** @deprecated 删除资源组的伸缩组 {@link DeleteRsgAsGroupRequest} {@link DeleteRsgAsGroupResponse} */
   DeleteRsgAsGroup(data: DeleteRsgAsGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRsgAsGroupResponse>;
-  /** 删除运行环境 {@link DeleteRuntimeRequest} {@link DeleteRuntimeResponse} */
+  /** @deprecated 删除运行环境 {@link DeleteRuntimeRequest} {@link DeleteRuntimeResponse} */
   DeleteRuntime(data: DeleteRuntimeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuntimeResponse>;
-  /** 删除服务 {@link DeleteServiceRequest} {@link DeleteServiceResponse} */
+  /** @deprecated 删除服务 {@link DeleteServiceRequest} {@link DeleteServiceResponse} */
   DeleteService(data: DeleteServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceResponse>;
-  /** 删除服务配置 {@link DeleteServiceConfigRequest} {@link DeleteServiceConfigResponse} */
+  /** @deprecated 删除服务配置 {@link DeleteServiceConfigRequest} {@link DeleteServiceConfigResponse} */
   DeleteServiceConfig(data?: DeleteServiceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceConfigResponse>;
-  /** 获取节点列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
+  /** @deprecated 获取节点列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** 获取资源组列表 {@link DescribeResourceGroupsRequest} {@link DescribeResourceGroupsResponse} */
+  /** @deprecated 获取资源组列表 {@link DescribeResourceGroupsRequest} {@link DescribeResourceGroupsResponse} */
   DescribeResourceGroups(data?: DescribeResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGroupsResponse>;
-  /** 查询伸缩组活动 {@link DescribeRsgAsGroupActivitiesRequest} {@link DescribeRsgAsGroupActivitiesResponse} */
+  /** @deprecated 查询伸缩组活动 {@link DescribeRsgAsGroupActivitiesRequest} {@link DescribeRsgAsGroupActivitiesResponse} */
   DescribeRsgAsGroupActivities(data: DescribeRsgAsGroupActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRsgAsGroupActivitiesResponse>;
-  /** 查询资源组的伸缩组信息 {@link DescribeRsgAsGroupsRequest} {@link DescribeRsgAsGroupsResponse} */
+  /** @deprecated 查询资源组的伸缩组信息 {@link DescribeRsgAsGroupsRequest} {@link DescribeRsgAsGroupsResponse} */
   DescribeRsgAsGroups(data?: DescribeRsgAsGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRsgAsGroupsResponse>;
-  /** 描述服务运行环境 {@link DescribeRuntimesRequest} {@link DescribeRuntimesResponse} */
+  /** @deprecated 描述服务运行环境 {@link DescribeRuntimesRequest} {@link DescribeRuntimesResponse} */
   DescribeRuntimes(data?: DescribeRuntimesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuntimesResponse>;
-  /** 描述服务配置 {@link DescribeServiceConfigsRequest} {@link DescribeServiceConfigsResponse} */
+  /** @deprecated 描述服务配置 {@link DescribeServiceConfigsRequest} {@link DescribeServiceConfigsResponse} */
   DescribeServiceConfigs(data?: DescribeServiceConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceConfigsResponse>;
-  /** 描述服务 {@link DescribeServicesRequest} {@link DescribeServicesResponse} */
+  /** @deprecated 描述服务 {@link DescribeServicesRequest} {@link DescribeServicesResponse} */
   DescribeServices(data?: DescribeServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServicesResponse>;
-  /** 停用资源组的伸缩组 {@link DisableRsgAsGroupRequest} {@link DisableRsgAsGroupResponse} */
+  /** @deprecated 停用资源组的伸缩组 {@link DisableRsgAsGroupRequest} {@link DisableRsgAsGroupResponse} */
   DisableRsgAsGroup(data: DisableRsgAsGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DisableRsgAsGroupResponse>;
-  /** 启用资源组的伸缩组 {@link EnableRsgAsGroupRequest} {@link EnableRsgAsGroupResponse} */
+  /** @deprecated 启用资源组的伸缩组 {@link EnableRsgAsGroupRequest} {@link EnableRsgAsGroupResponse} */
   EnableRsgAsGroup(data: EnableRsgAsGroupRequest, config?: AxiosRequestConfig): AxiosPromise<EnableRsgAsGroupResponse>;
-  /** 暴露服务 {@link ExposeServiceRequest} {@link ExposeServiceResponse} */
+  /** @deprecated 暴露服务 {@link ExposeServiceRequest} {@link ExposeServiceResponse} */
   ExposeService(data: ExposeServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ExposeServiceResponse>;
-  /** 更新任务 {@link UpdateJobRequest} {@link UpdateJobResponse} */
+  /** @deprecated 更新任务 {@link UpdateJobRequest} {@link UpdateJobResponse} */
   UpdateJob(data: UpdateJobRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateJobResponse>;
-  /** 更新资源组的伸缩组 {@link UpdateRsgAsGroupRequest} {@link UpdateRsgAsGroupResponse} */
+  /** @deprecated 更新资源组的伸缩组 {@link UpdateRsgAsGroupRequest} {@link UpdateRsgAsGroupResponse} */
   UpdateRsgAsGroup(data: UpdateRsgAsGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRsgAsGroupResponse>;
-  /** 更新服务 {@link UpdateServiceRequest} {@link UpdateServiceResponse} */
+  /** @deprecated 更新服务 {@link UpdateServiceRequest} {@link UpdateServiceResponse} */
   UpdateService(data: UpdateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateServiceResponse>;
 }
 
