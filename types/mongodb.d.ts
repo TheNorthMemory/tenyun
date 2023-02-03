@@ -1019,7 +1019,7 @@ declare interface InquirePriceCreateDBInstancesRequest {
   Memory: number;
   /** 实例硬盘大小。单位：GB。取值范围：请通过接口DescribeSpecInfo查询，其返回的数据结构SpecItems中的参数MinStorage与MaxStorage分别对应其最小磁盘规格与最大磁盘规格。 */
   Volume: number;
-  /** 实例版本信息。具体支持的版本，请通过接口DescribeSpecInfo查询，其返回的数据结构SpecItems中的参数MongoVersionCode为实例所支持的版本信息。版本信息与版本号对应关系如下：MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本。MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本。MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本。MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。 */
+  /** 实例版本信息。具体支持的版本，请通过接口DescribeSpecInfo查询，其返回的数据结构SpecItems中的参数MongoVersionCode为实例所支持的版本信息。版本信息与版本号对应关系如下：MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本。MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本。MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本。MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。 */
   MongoVersion: string;
   /** 机器类型。HIO：高IO型。HIO10G：高IO万兆型。 */
   MachineCode: string;

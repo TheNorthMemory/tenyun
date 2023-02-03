@@ -2117,7 +2117,9 @@ declare interface DescribeEnvsRequest {
 
 declare interface DescribeEnvsResponse {
   /** 环境信息列表 */
-  EnvList: EnvInfo[];
+  EnvList?: EnvInfo[];
+  /** 环境个数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

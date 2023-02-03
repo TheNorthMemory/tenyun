@@ -163,7 +163,7 @@ declare interface CreateAsrVocabResponse {
 declare interface CreateAsyncRecognitionTaskRequest {
   /** 引擎模型类型。• 16k_zh：16k 中文普通话通用；• 16k_zh_video：16k 音视频领域；• 16k_en：16k 英语；• 16k_ca：16k 粤语； */
   EngineType: string;
-  /** 语音流地址，支持rtmp、rtsp等流媒体协议，以及各类基于http协议的直播流(不支持hls) */
+  /** 语音流地址，支持rtmp、rtsp等流媒体协议，以及各类基于http协议的直播流(不支持hls, m3u8) */
   Url: string;
   /** 支持HTTP和HTTPS协议，用于接收识别结果，您需要自行搭建公网可调用的服务。回调格式&内容详见：[语音流异步识别回调说明](https://cloud.tencent.com/document/product/1093/52633) */
   CallbackUrl: string;
@@ -187,7 +187,7 @@ declare interface CreateAsyncRecognitionTaskRequest {
 
 declare interface CreateAsyncRecognitionTaskResponse {
   /** 请求返回结果，包含本次的任务ID(TaskId) */
-  Data: Task;
+  Data?: Task;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

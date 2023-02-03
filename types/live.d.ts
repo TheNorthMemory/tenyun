@@ -1054,6 +1054,38 @@ declare interface TimeShiftBillData {
   TotalDuration: number;
 }
 
+/** 时移录制段。 */
+declare interface TimeShiftRecord {
+  /** 时移录制会话标识。 */
+  Sid?: string;
+  /** 录制会话开始时间，Unix 时间戳。 */
+  StartTime?: number;
+  /** 录制会话结束时间，Unix 时间戳。 */
+  EndTime?: number;
+}
+
+/** 时移流。 */
+declare interface TimeShiftStreamInfo {
+  /** 推流域名所属组。 */
+  DomainGroup?: string | null;
+  /** 推流域名。 */
+  Domain?: string;
+  /** 推流路径。 */
+  AppName?: string;
+  /** 流名称。 */
+  StreamName?: string;
+  /** 流起始时间，Unix 时间戳。 */
+  StartTime?: number;
+  /** 截止查询时流结束时间，Unix 时间戳。 */
+  EndTime?: number;
+  /** 转码模板ID。 */
+  TransCodeId?: number | null;
+  /** 流类型，取值0为原始流，1为水印流，2为转码流。 */
+  StreamType?: number;
+  /** 时移数据存储时长，单位秒。 */
+  Duration?: number | null;
+}
+
 /** 某个时间点的指标的数值是多少。 */
 declare interface TimeValue {
   /** UTC 时间，时间格式：yyyy-mm-ddTHH:MM:SSZ。 */
@@ -2938,6 +2970,56 @@ declare interface DescribeStreamPushInfoListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTimeShiftRecordDetailRequest {
+  /** 推流域名。 */
+  Domain: string;
+  /** 推流路径。 */
+  AppName: string;
+  /** 流名称。 */
+  StreamName: string;
+  /** 查询范围起始时间，Unix 时间戳。 */
+  StartTime: number;
+  /** 查询范围终止时间，Unix 时间戳。 */
+  EndTime: number;
+  /** 推流域名所属组，没有域名组或者域名组为空字符串可不填。 */
+  DomainGroup?: string;
+  /** 转码模板ID，转码模板ID为0可不填。 */
+  TransCodeId?: number;
+}
+
+declare interface DescribeTimeShiftRecordDetailResponse {
+  /** 时移录制会话数组。 */
+  RecordList?: TimeShiftRecord[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTimeShiftStreamListRequest {
+  /** 查询范围起始时间，Unix 时间戳。 */
+  StartTime: number;
+  /** 查询范围结束时间，Unix 时间戳。 */
+  EndTime: number;
+  /** 流名称。 */
+  StreamName?: string;
+  /** 推流域名。 */
+  Domain?: string;
+  /** 推流域名所属域名组。 */
+  DomainGroup?: string;
+  /** 用户指定要返回的最大结果数，取值范围[0,100]，不指定或者指定为0时，API 默认值为100。指定超过100时，API 强制使用100。指定值为负数时，接口返回错误。 */
+  PageSize?: number;
+  /** 指定拉取的页码，不传时默认为1。 */
+  PageNum?: number;
+}
+
+declare interface DescribeTimeShiftStreamListResponse {
+  /** 时间段内所有的数据量。 */
+  TotalSize?: number;
+  /** 流列表。 */
+  StreamList?: TimeShiftStreamInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTopClientIpSumInfoListRequest {
   /** 起始时间点，格式为yyyy-mm-dd HH:MM:SS。 */
   StartTime: string;
@@ -3685,6 +3767,10 @@ declare interface Live {
   DescribeStreamPlayInfoList(data: DescribeStreamPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPlayInfoListResponse>;
   /** 查询某条流上行推流质量数据 {@link DescribeStreamPushInfoListRequest} {@link DescribeStreamPushInfoListResponse} */
   DescribeStreamPushInfoList(data: DescribeStreamPushInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPushInfoListResponse>;
+  /** 查询时移流录制详情 {@link DescribeTimeShiftRecordDetailRequest} {@link DescribeTimeShiftRecordDetailResponse} */
+  DescribeTimeShiftRecordDetail(data: DescribeTimeShiftRecordDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimeShiftRecordDetailResponse>;
+  /** 查询时移流列表 {@link DescribeTimeShiftStreamListRequest} {@link DescribeTimeShiftStreamListResponse} */
+  DescribeTimeShiftStreamList(data: DescribeTimeShiftStreamListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimeShiftStreamListResponse>;
   /** 查询某段时间top n客户端ip汇总信息 {@link DescribeTopClientIpSumInfoListRequest} {@link DescribeTopClientIpSumInfoListResponse} */
   DescribeTopClientIpSumInfoList(data: DescribeTopClientIpSumInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopClientIpSumInfoListResponse>;
   /** 查询转码任务数。 {@link DescribeTranscodeTaskNumRequest} {@link DescribeTranscodeTaskNumResponse} */

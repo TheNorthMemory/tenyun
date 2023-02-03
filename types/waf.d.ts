@@ -591,7 +591,7 @@ declare interface AddCustomRuleRequest {
   Strategies: Strategy[];
   /** 需要添加策略的域名 */
   Domain: string;
-  /** 动作类型 */
+  /** 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向 */
   ActionType: string;
   /** 如果动作是重定向，则表示重定向的地址；其他情况可以为空 */
   Redirect?: string;
@@ -913,7 +913,7 @@ declare interface DescribeDomainWhiteRulesRequest {
   Page?: number;
   /** 每页展示的条数 */
   Count?: number;
-  /** 排序方式 */
+  /** 排序方式,desc表示降序，asc表示升序 */
   Sort?: string;
   /** 规则ID */
   RuleId?: string;
@@ -921,9 +921,9 @@ declare interface DescribeDomainWhiteRulesRequest {
 
 declare interface DescribeDomainWhiteRulesResponse {
   /** 规则列表 */
-  RuleList: RuleList[];
+  RuleList?: RuleList[];
   /** 规则的数量 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1169,11 +1169,11 @@ declare interface ModifyDomainWhiteRuleResponse {
 declare interface ModifyWafAutoDenyRulesRequest {
   /** 域名 */
   Domain: string;
-  /** 攻击次数阈值 */
+  /** 触发IP封禁的攻击次数阈值，范围为2~100次 */
   AttackThreshold: number;
-  /** 攻击时间阈值 */
+  /** IP封禁统计时间，范围为1-60分钟 */
   TimeThreshold: number;
-  /** 自动封禁时间 */
+  /** 触发IP封禁后的封禁时间，范围为5~360分钟 */
   DenyTimeThreshold: number;
   /** 自动封禁状态 */
   DefenseStatus: number;
@@ -1181,7 +1181,7 @@ declare interface ModifyWafAutoDenyRulesRequest {
 
 declare interface ModifyWafAutoDenyRulesResponse {
   /** 成功的状态码，需要JSON解码后再使用，返回的格式是{"域名":"状态"}，成功的状态码为Success，其它的为失败的状态码（yunapi定义的错误码） */
-  Success: ResponseCode;
+  Success?: ResponseCode;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1251,17 +1251,17 @@ declare interface SearchAccessLogRequest {
 
 declare interface SearchAccessLogResponse {
   /** 加载后续内容的Context */
-  Context: string;
-  /** 日志查询结果是否全部返回 */
-  ListOver: boolean;
-  /** 返回的是否为分析结果 */
-  Analysis: boolean;
+  Context?: string;
+  /** 日志查询结果是否全部返回，其中，“true”表示结果返回，“false”表示结果为返回 */
+  ListOver?: boolean;
+  /** 返回的是否为分析结果，其中，“true”表示返回分析结果，“false”表示未返回分析结果 */
+  Analysis?: boolean;
   /** 如果Analysis为True，则返回分析结果的列名，否则为空 */
-  ColNames: string[] | null;
+  ColNames?: string[] | null;
   /** 日志查询结果；当Analysis为True时，可能返回为null注意：此字段可能返回 null，表示取不到有效值 */
-  Results: AccessLogInfo[] | null;
+  Results?: AccessLogInfo[] | null;
   /** 日志分析结果；当Analysis为False时，可能返回为null注意：此字段可能返回 null，表示取不到有效值 */
-  AnalysisResults: AccessLogItems[] | null;
+  AnalysisResults?: AccessLogItems[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
