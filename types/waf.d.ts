@@ -92,6 +92,18 @@ declare interface AccessValueInfo {
   ContainZH: boolean | null;
 }
 
+/** 攻击日志详情 */
+declare interface AttackLogInfo {
+  /** 攻击日志的详情内容 */
+  Content: string;
+  /** CLS返回内容 */
+  FileName: string;
+  /** CLS返回内容 */
+  Source: string;
+  /** CLS返回内容 */
+  TimeStamp: string;
+}
+
 /** Waf 攻击自动封禁详情 */
 declare interface AutoDenyDetail {
   /** 攻击封禁类型标签 */
@@ -1128,6 +1140,18 @@ declare interface ModifyAccessPeriodResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAreaBanStatusRequest {
+  /** 修要修改的域名 */
+  Domain: string;
+  /** 状态值，0表示关闭，1表示开启 */
+  Status: number;
+}
+
+declare interface ModifyAreaBanStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCustomRuleStatusRequest {
   /** 域名 */
   Domain: string;
@@ -1266,6 +1290,54 @@ declare interface SearchAccessLogResponse {
   RequestId?: string;
 }
 
+declare interface SearchAttackLogRequest {
+  /** 查询的域名，所有域名使用all */
+  Domain: string;
+  /** 查询起始时间 */
+  StartTime: string;
+  /** 查询结束时间 */
+  EndTime: string;
+  /** 查询的游标。第一次请求使用空字符串即可，后续请求使用上一次请求返回的最后一条记录的context的值即可。 */
+  Context: string;
+  /** Lucene语法 */
+  QueryString: string;
+  /** 查询的数量，默认10条，最多100条 */
+  Count?: number;
+  /** 默认为desc，可以取值desc和asc */
+  Sort?: string;
+}
+
+declare interface SearchAttackLogResponse {
+  /** 当前返回的攻击日志条数 */
+  Count?: number;
+  /** 翻页游标，如果没有下一页了，这个参数为空"" */
+  Context?: string;
+  /** 攻击日志数组条目内容 */
+  Data?: AttackLogInfo[];
+  /** CLS接口返回内容 */
+  ListOver?: boolean;
+  /** CLS接口返回内容，标志是否启动新版本索引 */
+  SqlFlag?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SwitchDomainRulesRequest {
+  /** 域名 */
+  Domain: string;
+  /** 规则列表 */
+  Ids: number[];
+  /** 开关状态 */
+  Status: number;
+  /** 设置为观察模式原因 */
+  Reason?: number;
+}
+
+declare interface SwitchDomainRulesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpsertIpAccessControlRequest {
   /** 域名 */
   Domain: string;
@@ -1345,6 +1417,8 @@ declare interface Waf {
   GetAttackDownloadRecords(data?: GetAttackDownloadRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackDownloadRecordsResponse>;
   /** 修改访问日志保存期限 {@link ModifyAccessPeriodRequest} {@link ModifyAccessPeriodResponse} */
   ModifyAccessPeriod(data: ModifyAccessPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessPeriodResponse>;
+  /** 修改地域封禁状态 {@link ModifyAreaBanStatusRequest} {@link ModifyAreaBanStatusResponse} */
+  ModifyAreaBanStatus(data: ModifyAreaBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAreaBanStatusResponse>;
   /** 开启或禁用访问控制（自定义策略） {@link ModifyCustomRuleStatusRequest} {@link ModifyCustomRuleStatusResponse} */
   ModifyCustomRuleStatus(data: ModifyCustomRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomRuleStatusResponse>;
   /** 更改某一条规则 {@link ModifyDomainWhiteRuleRequest} {@link ModifyDomainWhiteRuleResponse} */
@@ -1359,6 +1433,10 @@ declare interface Waf {
   PostAttackDownloadTask(data: PostAttackDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<PostAttackDownloadTaskResponse>;
   /** 搜索访问日志 {@link SearchAccessLogRequest} {@link SearchAccessLogResponse} */
   SearchAccessLog(data: SearchAccessLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchAccessLogResponse>;
+  /** 搜索CLS新版本攻击日志 {@link SearchAttackLogRequest} {@link SearchAttackLogResponse} */
+  SearchAttackLog(data: SearchAttackLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchAttackLogResponse>;
+  /** 切换域名的规则开关 {@link SwitchDomainRulesRequest} {@link SwitchDomainRulesResponse} */
+  SwitchDomainRules(data: SwitchDomainRulesRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDomainRulesResponse>;
   /** Waf IP黑白名单Upsert接口 {@link UpsertIpAccessControlRequest} {@link UpsertIpAccessControlResponse} */
   UpsertIpAccessControl(data: UpsertIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertIpAccessControlResponse>;
 }

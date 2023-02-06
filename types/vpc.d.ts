@@ -2088,6 +2088,8 @@ declare interface VpngwCcnRoutes {
   RouteId: string;
   /** 路由信息是否启用ENABLE：启用该路由DISABLE：不启用该路由 */
   Status?: string;
+  /** 路由CIDR */
+  DestinationCidrBlock?: string;
 }
 
 declare interface AcceptAttachCcnInstancesRequest {

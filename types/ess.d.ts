@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 企业超管信息 */
+declare interface Admin {
+  /** 超管名 */
+  Name?: string | null;
+  /** 超管手机号 */
+  Mobile?: string | null;
+}
+
 /** 应用相关信息 */
 declare interface Agent {
 }
@@ -344,6 +352,44 @@ declare interface FormField {
   ComponentId?: string;
   /** 控件名字，最大长度不超过30字符，和ComponentId选择一项传入即可 */
   ComponentName?: string;
+}
+
+/** 成员企业信息 */
+declare interface GroupOrganization {
+  /** 成员企业名 */
+  Name?: string | null;
+  /** 成员企业别名 */
+  Alias?: string | null;
+  /** 成员企业id */
+  OrganizationId?: string | null;
+  /** 更新时间 */
+  UpdateTime?: number | null;
+  /** 成员企业状态 */
+  Status?: number | null;
+  /** 是否为集团主企业 */
+  IsMainOrganization?: boolean | null;
+  /** 企业社会信用代码 */
+  IdCardNumber?: string | null;
+  /** 企业超管信息 */
+  AdminInfo?: Admin | null;
+  /** 企业许可证 */
+  License?: string | null;
+  /** 企业许可证过期时间 */
+  LicenseExpireTime?: number | null;
+  /** 成员企业加入集团时间 */
+  JoinTime?: number | null;
+  /** 是否可以使用审批流引擎 */
+  FlowEngineEnable?: boolean | null;
+}
+
+/** 主企业员工账号信息 */
+declare interface IntegrationMainOrganizationUser {
+  /** 主企业id */
+  MainOrganizationId?: string | null;
+  /** 主企业员工UserId */
+  MainUserId?: string | null;
+  /** 主企业员工名 */
+  UserName?: string | null;
 }
 
 /** 持有的电子印章信息 */
@@ -783,7 +829,7 @@ declare interface CreateFlowEvidenceReportResponse {
 declare interface CreateFlowRemindsRequest {
   /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
-  /** 需要执行撤回的签署流程id数组，最多100个 */
+  /** 需要执行催办的签署流程id数组，最多100个 */
   FlowIds: string[];
 }
 
@@ -1055,11 +1101,13 @@ declare interface DescribeFlowInfoRequest {
   FlowIds: string[];
   /** 调用方用户信息 */
   Operator?: UserInfo;
+  /** 应用信息 */
+  Agent?: Agent;
 }
 
 declare interface DescribeFlowInfoResponse {
   /** 签署流程信息 */
-  FlowDetailInfos: FlowDetailInfo[];
+  FlowDetailInfos?: FlowDetailInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1116,6 +1164,50 @@ declare interface DescribeIntegrationEmployeesResponse {
   Limit: number;
   /** 符合条件的员工数量 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeIntegrationMainOrganizationUserRequest {
+  /** 操作人信息，userId必填 */
+  Operator: UserInfo;
+}
+
+declare interface DescribeIntegrationMainOrganizationUserResponse {
+  /** 主企业员工账号信息 */
+  IntegrationMainOrganizationUser?: IntegrationMainOrganizationUser | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOrganizationGroupOrganizationsRequest {
+  /** 操作人信息，userId必填 */
+  Operator: UserInfo;
+  /** 单次查询成员企业最大返回数量 */
+  Limit: number;
+  /** 页面偏移量 */
+  Offset: number;
+  /** 查询成员企业的企业名，模糊匹配 */
+  Name?: string;
+  /** 成员企业加入集团的当前状态:1-待授权;2-已授权待激活;3-拒绝授权;4-已解除;5-已加入 */
+  Status?: number;
+  /** 是否到处当前成员企业数据 */
+  Export?: boolean;
+  /** 成员企业id */
+  Id?: string;
+}
+
+declare interface DescribeOrganizationGroupOrganizationsResponse {
+  /** 查询到的符合条件的成员企业总数量 */
+  Total?: number | null;
+  /** 已授权待激活的企业数量 */
+  JoinedTotal?: number | null;
+  /** 已加入的企业数量 */
+  ActivedTotal?: number | null;
+  /** 导出文件的url */
+  ExportUrl?: string | null;
+  /** 成员企业信息列表 */
+  List?: GroupOrganization[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1289,6 +1381,10 @@ declare interface Ess {
   DescribeFlowTemplates(data: DescribeFlowTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTemplatesResponse>;
   /** 查询员工信息 {@link DescribeIntegrationEmployeesRequest} {@link DescribeIntegrationEmployeesResponse} */
   DescribeIntegrationEmployees(data: DescribeIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationEmployeesResponse>;
+  /** 查询集成版主企业员工账号 {@link DescribeIntegrationMainOrganizationUserRequest} {@link DescribeIntegrationMainOrganizationUserResponse} */
+  DescribeIntegrationMainOrganizationUser(data: DescribeIntegrationMainOrganizationUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationMainOrganizationUserResponse>;
+  /** 查询集团企业列表 {@link DescribeOrganizationGroupOrganizationsRequest} {@link DescribeOrganizationGroupOrganizationsResponse} */
+  DescribeOrganizationGroupOrganizations(data: DescribeOrganizationGroupOrganizationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationGroupOrganizationsResponse>;
   /** 查询企业电子印章 {@link DescribeOrganizationSealsRequest} {@link DescribeOrganizationSealsResponse} */
   DescribeOrganizationSeals(data: DescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationSealsResponse>;
   /** 通过AuthCode查询用户是否实名 {@link DescribeThirdPartyAuthCodeRequest} {@link DescribeThirdPartyAuthCodeResponse} */

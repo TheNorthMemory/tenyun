@@ -324,6 +324,50 @@ declare interface LockComponentInfo {
   IsDynamicPartitionWrite?: boolean;
 }
 
+/** Notebook Session详细信息。 */
+declare interface NotebookSessionInfo {
+  /** Session名称 */
+  Name: string;
+  /** 类型，当前支持：spark、pyspark、sparkr、sql */
+  Kind: string;
+  /** DLC Spark作业引擎名称 */
+  DataEngineName: string;
+  /** Session相关配置，当前支持：eni、roleArn以及用户指定的配置 */
+  Arguments: KVPair[] | null;
+  /** 运行程序地址，当前支持：cosn://和lakefs://两种路径 */
+  ProgramDependentFiles: string[] | null;
+  /** 依赖的jar程序地址，当前支持：cosn://和lakefs://两种路径 */
+  ProgramDependentJars: string[] | null;
+  /** 依赖的python程序地址，当前支持：cosn://和lakefs://两种路径 */
+  ProgramDependentPython: string[] | null;
+  /** 依赖的pyspark虚拟环境地址，当前支持：cosn://和lakefs://两种路径 */
+  ProgramArchives: string[] | null;
+  /** 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu） */
+  DriverSize: string | null;
+  /** 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu） */
+  ExecutorSize: string | null;
+  /** 指定的Executor数量，默认为1 */
+  ExecutorNumbers: number | null;
+  /** 代理用户，默认为root */
+  ProxyUser: string | null;
+  /** 指定的Session超时时间，单位秒，默认3600秒 */
+  TimeoutInSecond: number | null;
+  /** Spark任务返回的AppId */
+  SparkAppId: string | null;
+  /** Session唯一标识 */
+  SessionId: string;
+  /** Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止） */
+  State: string;
+  /** Session创建时间 */
+  CreateTime: string;
+  /** 其它信息 */
+  AppInfo: KVPair[] | null;
+  /** Spark ui地址 */
+  SparkUiUrl: string | null;
+  /** 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers */
+  ExecutorMaxNumbers?: number | null;
+}
+
 /** 数据格式其它类型。 */
 declare interface Other {
   /** 枚举类型，默认值为Json，可选值为[Json, Parquet, ORC, AVRD]之一。 */
@@ -1104,6 +1148,48 @@ declare interface CreateImportTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateNotebookSessionRequest {
+  /** Session名称 */
+  Name: string;
+  /** 类型，当前支持：spark、pyspark、sparkr、sql */
+  Kind: string;
+  /** DLC Spark作业引擎名称 */
+  DataEngineName: string;
+  /** session文件地址，当前支持：cosn://和lakefs://两种路径 */
+  ProgramDependentFiles?: string[];
+  /** 依赖的jar程序地址，当前支持：cosn://和lakefs://两种路径 */
+  ProgramDependentJars?: string[];
+  /** 依赖的python程序地址，当前支持：cosn://和lakefs://两种路径 */
+  ProgramDependentPython?: string[];
+  /** 依赖的pyspark虚拟环境地址，当前支持：cosn://和lakefs://两种路径 */
+  ProgramArchives?: string[];
+  /** 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu） */
+  DriverSize?: string;
+  /** 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu） */
+  ExecutorSize?: string;
+  /** 指定的Executor数量，默认为1 */
+  ExecutorNumbers?: number;
+  /** Session相关配置，当前支持：dlc.eni、dlc.role.arn、dlc.sql.set.config以及用户指定的配置，注：roleArn必填； */
+  Arguments?: KVPair[];
+  /** 代理用户，默认为root */
+  ProxyUser?: string;
+  /** 指定的Session超时时间，单位秒，默认3600秒 */
+  TimeoutInSecond?: number;
+  /** 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers */
+  ExecutorMaxNumbers?: number;
+}
+
+declare interface CreateNotebookSessionResponse {
+  /** Session唯一标识 */
+  SessionId?: string;
+  /** Spark任务返回的AppId */
+  SparkAppId?: string | null;
+  /** Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止） */
+  State?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateResultDownloadRequest {
   /** 查询结果任务Id */
   TaskId: string;
@@ -1548,6 +1634,18 @@ declare interface DescribeDatabasesResponse {
   DatabaseList: DatabaseResponseInfo[];
   /** 实例总数。 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNotebookSessionRequest {
+  /** Session唯一标识 */
+  SessionId: string;
+}
+
+declare interface DescribeNotebookSessionResponse {
+  /** Session详情信息 */
+  Session?: NotebookSessionInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2139,6 +2237,8 @@ declare interface Dlc {
   CreateExportTask(data: CreateExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportTaskResponse>;
   /** 创建导入任务 {@link CreateImportTaskRequest} {@link CreateImportTaskResponse} */
   CreateImportTask(data: CreateImportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImportTaskResponse>;
+  /** 创建notebook livy session {@link CreateNotebookSessionRequest} {@link CreateNotebookSessionResponse} */
+  CreateNotebookSession(data: CreateNotebookSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotebookSessionResponse>;
   /** 创建查询结果下载任务 {@link CreateResultDownloadRequest} {@link CreateResultDownloadResponse} */
   CreateResultDownload(data: CreateResultDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResultDownloadResponse>;
   /** 创建sql脚本 {@link CreateScriptRequest} {@link CreateScriptResponse} */
@@ -2181,6 +2281,8 @@ declare interface Dlc {
   DescribeDMSTables(data?: DescribeDMSTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDMSTablesResponse>;
   /** 查询数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
   DescribeDatabases(data?: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
+  /** 获取notebook livy session详情信息 {@link DescribeNotebookSessionRequest} {@link DescribeNotebookSessionResponse} */
+  DescribeNotebookSession(data: DescribeNotebookSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionResponse>;
   /** 查询结果下载任务 {@link DescribeResultDownloadRequest} {@link DescribeResultDownloadResponse} */
   DescribeResultDownload(data: DescribeResultDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResultDownloadResponse>;
   /** 查询script列表 {@link DescribeScriptsRequest} {@link DescribeScriptsResponse} */

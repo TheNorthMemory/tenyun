@@ -1821,7 +1821,7 @@ declare interface CreateKeyPairRequest {
 
 declare interface CreateKeyPairResponse {
   /** 密钥对信息。 */
-  KeyPair: KeyPair;
+  KeyPair?: KeyPair;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
