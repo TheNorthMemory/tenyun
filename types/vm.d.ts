@@ -691,6 +691,8 @@ declare namespace V20201229 {
     CreatedAt: string;
     /** 该字段用于返回被查询任务最后更新时间，格式采用 ISO 8601标准。 */
     UpdatedAt: string | null;
+    /** 该字段用于返回审核服务的媒体内容信息，主要包括传入文件类型和访问地址 */
+    InputInfo: InputInfo | null;
   }
 
   /** 任务筛选器 */

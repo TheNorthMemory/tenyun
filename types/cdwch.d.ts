@@ -38,6 +38,22 @@ declare interface CkUserAlterInfo {
   Describe?: string;
 }
 
+/** 用于返回XML格式的配置文件和内容以及其他配置文件有关的信息 */
+declare interface ClusterConfigsInfoFromEMR {
+  /** 配置文件名称 */
+  FileName: string;
+  /** 配置文件对应的相关属性信息 */
+  FileConf: string;
+  /** 配置文件对应的其他属性信息 */
+  KeyConf: string;
+  /** 配置文件的内容，base64编码 */
+  OriParam: string;
+  /** 用于表示当前配置文件是不是有过修改后没有重启，提醒用户需要重启 */
+  NeedRestart: number;
+  /** 保存配置文件的路径 */
+  FilePath: string | null;
+}
+
 /** 配置文件修改信息 */
 declare interface ConfigSubmitContext {
   /** 配置文件名称 */
@@ -62,6 +78,40 @@ declare interface DiskSpec {
   MaxDiskSize: number;
   /** 磁盘数目 */
   DiskCount: number;
+}
+
+/** 集群配置信息 */
+declare interface InstanceConfigInfo {
+  /** 配置项名称 */
+  ConfKey: string;
+  /** 配置项内容 */
+  ConfValue: string;
+  /** 默认值 */
+  DefaultValue?: string;
+  /** 是否需要重启 */
+  NeedRestart?: boolean;
+  /** 是否可编辑 */
+  Editable?: boolean;
+  /** 配置项解释 */
+  ConfDesc?: string;
+  /** 文件名称 */
+  FileName?: string;
+  /** 规则名称类型 */
+  ModifyRuleType?: string;
+  /** 规则名称内容 */
+  ModifyRuleValue?: string;
+  /** 修改人的uin */
+  Uin?: string;
+  /** 修改时间 */
+  ModifyTime?: string;
+}
+
+/** KV配置 */
+declare interface InstanceConfigItem {
+  /** key */
+  ConfKey: string;
+  /** value */
+  ConfValue: string;
 }
 
 /** 实例描述信息 */
@@ -128,6 +178,14 @@ declare interface InstanceInfo {
   CosMoveFactor: number | null;
 }
 
+/** kv配置，多层级item */
+declare interface MapConfigItem {
+  /** key */
+  ConfKey: string;
+  /** 列表 */
+  Items: InstanceConfigInfo[];
+}
+
 /** 创建集群时的规格 */
 declare interface NodeSpec {
   /** 规格名称 */
@@ -180,6 +238,20 @@ declare interface ResourceSpec {
   DisplayName: string | null;
   /** 库存数 */
   InstanceQuota: number | null;
+}
+
+/** 策略详情 */
+declare interface ScheduleStrategy {
+  /** 备份桶列表 */
+  CosBucketName: string | null;
+  /** 备份保留天数 */
+  RetainDays: number;
+  /** 备份的天 */
+  WeekDays: string;
+  /** 备份小时 */
+  ExecuteHour: number;
+  /** 策略id */
+  ScheduleId: number;
 }
 
 /** 标签描述 */
@@ -262,6 +334,26 @@ declare interface CreateInstanceNewResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBackUpScheduleRequest {
+  /** 集群id */
+  InstanceId: string;
+}
+
+declare interface DescribeBackUpScheduleResponse {
+  /** 备份是否开启 */
+  BackUpOpened: boolean;
+  /** 元数据备份策略 */
+  MetaStrategy: ScheduleStrategy | null;
+  /** 表数据备份策略 */
+  DataStrategy: ScheduleStrategy | null;
+  /** 备份表列表 */
+  BackUpContents: BackupTableContent[] | null;
+  /** 备份的状态 */
+  BackUpStatus: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCkSqlApisRequest {
   /** 实例id */
   InstanceId: string;
@@ -276,6 +368,38 @@ declare interface DescribeCkSqlApisRequest {
 declare interface DescribeCkSqlApisResponse {
   /** 返回的查询数据，大部分情况是list，也可能是bool */
   ReturnData: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterConfigsRequest {
+  /** 集群实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeClusterConfigsResponse {
+  /** 返回实例的配置文件相关的信息 */
+  ClusterConfList: ClusterConfigsInfoFromEMR[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceKeyValConfigsRequest {
+  /** 集群实例ID */
+  InstanceId: string;
+  /** 搜索的配置项名称 */
+  SearchConfigName?: string;
+}
+
+declare interface DescribeInstanceKeyValConfigsResponse {
+  /** 参数列表 */
+  ConfigItems: InstanceConfigInfo[];
+  /** 未配置的参数列表 */
+  UnConfigItems: InstanceConfigInfo[] | null;
+  /** 配置的多层级参数列表 */
+  MapConfigItems: MapConfigItem[] | null;
+  /** 错误信息 */
+  ErrorMsg: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -342,6 +466,30 @@ declare interface ModifyClusterConfigsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceKeyValConfigsRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 新增配置列表 */
+  AddItems?: InstanceConfigItem[];
+  /** 更新配置列表 */
+  UpdateItems?: InstanceConfigItem[];
+  /** 删除配置列表 */
+  DeleteItems?: InstanceConfigItem;
+  /** 删除配置列表 */
+  DelItems?: InstanceConfigItem[];
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface ModifyInstanceKeyValConfigsResponse {
+  /** 错误信息 */
+  ErrorMsg: string | null;
+  /** ID */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyUserNewPrivilegeRequest {
 }
 
@@ -364,6 +512,74 @@ declare interface OpenBackUpResponse {
   RequestId?: string;
 }
 
+declare interface ResizeDiskRequest {
+  /** 实例唯一ID */
+  InstanceId: string;
+  /** 节点类型，DATA：clickhouse节点，COMMON：为zookeeper节点 */
+  Type: string;
+  /** 磁盘扩容后容量，不能小于原有用量。clickhouse最小200，且为100的整数倍。 zk最小100，且为10的整数倍； */
+  DiskSize: number;
+}
+
+declare interface ResizeDiskResponse {
+  /** 流程ID */
+  FlowId: string | null;
+  /** 实例ID */
+  InstanceId: string | null;
+  /** 错误信息 */
+  ErrorMsg: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ScaleOutInstanceRequest {
+  /** 实例唯一ID */
+  InstanceId: string;
+  /** 节点类型，DATA：clickhouse节点，COMMON：为zookeeper节点 */
+  Type: string;
+  /** 调整clickhouse节点数量 */
+  NodeCount: number;
+  /** v_cluster分组，	新增扩容节点将加入到已选择的v_cluster分组中，提交同步VIP生效. */
+  ScaleOutCluster?: string;
+  /** 子网剩余ip数量，用于判断当前实例子网剩余ip数是否能扩容。需要根据实际填写 */
+  UserSubnetIPNum?: number;
+  /** 节点同步ip */
+  ScaleOutNodeIp?: string;
+}
+
+declare interface ScaleOutInstanceResponse {
+  /** 流程ID */
+  FlowId?: string | null;
+  /** 实例ID */
+  InstanceId?: string | null;
+  /** 错误信息 */
+  ErrorMsg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ScaleUpInstanceRequest {
+  /** 实例唯一ID */
+  InstanceId: string;
+  /** 节点类型，DATA：clickhouse节点，COMMON：为zookeeper节点 */
+  Type: string;
+  /** clickhouse节点规格。 */
+  SpecName: string;
+  /** 是否滚动重启，false为不滚动重启，true为滚动重启 */
+  ScaleUpEnableRolling: boolean;
+}
+
+declare interface ScaleUpInstanceResponse {
+  /** 流程ID */
+  FlowId: string | null;
+  /** 实例ID */
+  InstanceId: string | null;
+  /** 错误信息 */
+  ErrorMsg: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Cdwch 云数据仓库 ClickHouse} */
 declare interface Cdwch {
   (): Versions;
@@ -373,20 +589,34 @@ declare interface Cdwch {
   CreateBackUpSchedule(data?: CreateBackUpScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackUpScheduleResponse>;
   /** 创建集群openApi {@link CreateInstanceNewRequest} {@link CreateInstanceNewResponse} */
   CreateInstanceNew(data: CreateInstanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceNewResponse>;
+  /** 查询备份策略信息 {@link DescribeBackUpScheduleRequest} {@link DescribeBackUpScheduleResponse} */
+  DescribeBackUpSchedule(data: DescribeBackUpScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackUpScheduleResponse>;
   /** 查询集群用户相关信息 {@link DescribeCkSqlApisRequest} {@link DescribeCkSqlApisResponse} */
   DescribeCkSqlApis(data: DescribeCkSqlApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCkSqlApisResponse>;
+  /** 获取集群配置文件内容 {@link DescribeClusterConfigsRequest} {@link DescribeClusterConfigsResponse} */
+  DescribeClusterConfigs(data: DescribeClusterConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterConfigsResponse>;
   /** 描述实例信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
+  /** 获取参数列表 {@link DescribeInstanceKeyValConfigsRequest} {@link DescribeInstanceKeyValConfigsResponse} */
+  DescribeInstanceKeyValConfigs(data: DescribeInstanceKeyValConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceKeyValConfigsResponse>;
   /** 获取实例shard信息列表 {@link DescribeInstanceShardsRequest} {@link DescribeInstanceShardsResponse} */
   DescribeInstanceShards(data: DescribeInstanceShardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceShardsResponse>;
   /** 获取集群规格 {@link DescribeSpecRequest} {@link DescribeSpecResponse} */
   DescribeSpec(data: DescribeSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecResponse>;
   /** 修改集群配置文件接口 {@link ModifyClusterConfigsRequest} {@link ModifyClusterConfigsResponse} */
   ModifyClusterConfigs(data: ModifyClusterConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterConfigsResponse>;
+  /** KV模式修改配置接口 {@link ModifyInstanceKeyValConfigsRequest} {@link ModifyInstanceKeyValConfigsResponse} */
+  ModifyInstanceKeyValConfigs(data: ModifyInstanceKeyValConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceKeyValConfigsResponse>;
   /** 新增、修改ck账号cluster权限（新版） {@link ModifyUserNewPrivilegeRequest} {@link ModifyUserNewPrivilegeResponse} */
   ModifyUserNewPrivilege(data?: ModifyUserNewPrivilegeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserNewPrivilegeResponse>;
   /** 开启或者关闭策略 {@link OpenBackUpRequest} {@link OpenBackUpResponse} */
   OpenBackUp(data: OpenBackUpRequest, config?: AxiosRequestConfig): AxiosPromise<OpenBackUpResponse>;
+  /** 扩容磁盘容量 {@link ResizeDiskRequest} {@link ResizeDiskResponse} */
+  ResizeDisk(data: ResizeDiskRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeDiskResponse>;
+  /** 水平调整实例节点 {@link ScaleOutInstanceRequest} {@link ScaleOutInstanceResponse} */
+  ScaleOutInstance(data: ScaleOutInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutInstanceResponse>;
+  /** 垂直扩缩容节点规格 {@link ScaleUpInstanceRequest} {@link ScaleUpInstanceResponse} */
+  ScaleUpInstance(data: ScaleUpInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleUpInstanceResponse>;
 }
 
 export declare type Versions = ["2020-09-15"];

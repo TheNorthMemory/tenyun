@@ -3814,6 +3814,30 @@ declare interface ReviewTemplate {
   UpdateTime: string;
 }
 
+/** 轮播任务信息 */
+declare interface RoundPlayInfo {
+  /** 轮播播单标识。 */
+  RoundPlayId: string;
+  /** 启播时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  StartTime: string;
+  /** 轮播列表。 */
+  RoundPlaylist: RoundPlayListItemInfo[];
+  /** 轮播播单名称，长度限制：64 个字符。 */
+  Name: string;
+  /** 轮播播单描述信息，长度限制：256 个字符。 */
+  Desc: string;
+}
+
+/** 加权轮播媒体文件信息 */
+declare interface RoundPlayListItemInfo {
+  /** 媒体文件标识。 */
+  FileId: string;
+  /** 播放的音视频类型，可选值：Transcode：转码输出；转码输出会有多个模版，必须指定 Definition 字段Original：原始音视频。Type 对应的格式必须为 HLS 格式。 */
+  AudioVideoType: string;
+  /** 指定播放的转码模版，当 AudioVideoType 为 Transcode 时必须指定。 */
+  Definition?: number;
+}
+
 /** 华曦达（SDMC）相关的 DRM 密钥提供商信息。 */
 declare interface SDMCDrmKeyProviderInfo {
   /** 华曦达分配的用户 ID。最大长度为128个字符。 */
@@ -5132,6 +5156,28 @@ declare interface CreateReviewTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateRoundPlayRequest {
+  /** 启播时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  StartTime: string;
+  /** 轮播列表。数组长度限制：100。 */
+  RoundPlaylist: RoundPlayListItemInfo[];
+  /** 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 轮播播单名称，长度限制：64 个字符。 */
+  Name?: string;
+  /** 轮播播单描述信息，长度限制：256 个字符。 */
+  Desc?: string;
+}
+
+declare interface CreateRoundPlayResponse {
+  /** 轮播播单唯一标识。 */
+  RoundPlayId?: string;
+  /** 轮播播放地址。 */
+  Url?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSampleSnapshotTemplateRequest {
   /** 采样截图类型，取值：Percent：按百分比。Time：按时间间隔。 */
   SampleType: string;
@@ -5490,6 +5536,18 @@ declare interface DeleteReviewTemplateRequest {
 }
 
 declare interface DeleteReviewTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRoundPlayRequest {
+  /** 轮播播单唯一标识。 */
+  RoundPlayId: string;
+  /** 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+}
+
+declare interface DeleteRoundPlayResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6172,6 +6230,26 @@ declare interface DescribeReviewTemplatesResponse {
   TotalCount?: number;
   /** 审核模板详情列表。 */
   ReviewTemplateSet?: ReviewTemplate[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRoundPlaysRequest {
+  /** 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 轮播播单标识过滤条件，数组长度限制：100。 */
+  RoundPlayIds?: string[];
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认值：10，最大值：100。 */
+  Limit?: number;
+}
+
+declare interface DescribeRoundPlaysResponse {
+  /** 符合过滤条件的轮播播单总数。 */
+  TotalCount?: number;
+  /** 轮播播单详情列表。 */
+  RoundPlaySet?: RoundPlayInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6998,6 +7076,26 @@ declare interface ModifyReviewTemplateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRoundPlayRequest {
+  /** 轮播播单唯一标识。 */
+  RoundPlayId: string;
+  /** 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 启播时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  StartTime?: string;
+  /** 轮播列表。数组长度限制：100。 */
+  RoundPlaylist?: RoundPlayListItemInfo[];
+  /** 轮播播单名称，长度限制：64 个字符。 */
+  Name?: string;
+  /** 轮播播单描述信息，长度限制：256 个字符。 */
+  Desc?: string;
+}
+
+declare interface ModifyRoundPlayResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySampleSnapshotTemplateRequest {
   /** 采样截图模板唯一标识。 */
   Definition: number;
@@ -7709,6 +7807,8 @@ declare interface Vod {
   CreateProcedureTemplate(data: CreateProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProcedureTemplateResponse>;
   /** 创建审核模板 {@link CreateReviewTemplateRequest} {@link CreateReviewTemplateResponse} */
   CreateReviewTemplate(data: CreateReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReviewTemplateResponse>;
+  /** 创建轮播播单 {@link CreateRoundPlayRequest} {@link CreateRoundPlayResponse} */
+  CreateRoundPlay(data: CreateRoundPlayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoundPlayResponse>;
   /** 创建采样截图模板 {@link CreateSampleSnapshotTemplateRequest} {@link CreateSampleSnapshotTemplateResponse} */
   CreateSampleSnapshotTemplate(data: CreateSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSampleSnapshotTemplateResponse>;
   /** 创建指定时间点截图模板 {@link CreateSnapshotByTimeOffsetTemplateRequest} {@link CreateSnapshotByTimeOffsetTemplateResponse} */
@@ -7753,6 +7853,8 @@ declare interface Vod {
   DeleteProcedureTemplate(data: DeleteProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProcedureTemplateResponse>;
   /** 删除审核模板 {@link DeleteReviewTemplateRequest} {@link DeleteReviewTemplateResponse} */
   DeleteReviewTemplate(data: DeleteReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReviewTemplateResponse>;
+  /** 删除轮播播单 {@link DeleteRoundPlayRequest} {@link DeleteRoundPlayResponse} */
+  DeleteRoundPlay(data: DeleteRoundPlayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoundPlayResponse>;
   /** 删除采样截图模板 {@link DeleteSampleSnapshotTemplateRequest} {@link DeleteSampleSnapshotTemplateResponse} */
   DeleteSampleSnapshotTemplate(data: DeleteSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSampleSnapshotTemplateResponse>;
   /** 删除指定时间点截图模板 {@link DeleteSnapshotByTimeOffsetTemplateRequest} {@link DeleteSnapshotByTimeOffsetTemplateResponse} */
@@ -7829,6 +7931,8 @@ declare interface Vod {
   DescribeReviewDetails(data: DescribeReviewDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReviewDetailsResponse>;
   /** 获取审核模板列表 {@link DescribeReviewTemplatesRequest} {@link DescribeReviewTemplatesResponse} */
   DescribeReviewTemplates(data?: DescribeReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReviewTemplatesResponse>;
+  /** 获取轮播播单列表 {@link DescribeRoundPlaysRequest} {@link DescribeRoundPlaysResponse} */
+  DescribeRoundPlays(data?: DescribeRoundPlaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoundPlaysResponse>;
   /** 获取采样截图模板列表 {@link DescribeSampleSnapshotTemplatesRequest} {@link DescribeSampleSnapshotTemplatesResponse} */
   DescribeSampleSnapshotTemplates(data?: DescribeSampleSnapshotTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleSnapshotTemplatesResponse>;
   /** 获取指定时间点截图模板列表 {@link DescribeSnapshotByTimeOffsetTemplatesRequest} {@link DescribeSnapshotByTimeOffsetTemplatesResponse} */
@@ -7895,6 +7999,8 @@ declare interface Vod {
   ModifyPersonSample(data: ModifyPersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonSampleResponse>;
   /** 修改审核模板 {@link ModifyReviewTemplateRequest} {@link ModifyReviewTemplateResponse} */
   ModifyReviewTemplate(data: ModifyReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReviewTemplateResponse>;
+  /** 修改轮播播单 {@link ModifyRoundPlayRequest} {@link ModifyRoundPlayResponse} */
+  ModifyRoundPlay(data: ModifyRoundPlayRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoundPlayResponse>;
   /** 修改采样截图模板 {@link ModifySampleSnapshotTemplateRequest} {@link ModifySampleSnapshotTemplateResponse} */
   ModifySampleSnapshotTemplate(data: ModifySampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySampleSnapshotTemplateResponse>;
   /** 修改指定时间点截图模板 {@link ModifySnapshotByTimeOffsetTemplateRequest} {@link ModifySnapshotByTimeOffsetTemplateResponse} */

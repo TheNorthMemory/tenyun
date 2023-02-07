@@ -114,6 +114,14 @@ declare interface Device {
   Department: Department | null;
 }
 
+/** 描述键值对过滤器，用于条件过滤查询 */
+declare interface Filter {
+  /** 需要过滤的字段。 */
+  Name: string;
+  /** 字段的过滤值。若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
+  Values: string[];
+}
+
 /** 组信息，用于用户组、主机组 */
 declare interface Group {
   /** 组ID */
@@ -122,6 +130,8 @@ declare interface Group {
   Name: string;
   /** 所属部门信息 */
   Department: Department | null;
+  /** 个数 */
+  Count: number | null;
 }
 
 /** 堡垒机服务信息 */
@@ -555,6 +565,8 @@ declare interface DescribeDevicesRequest {
   DepartmentId?: string;
   /** 过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系 */
   TagFilters?: TagFilter[];
+  /** 过滤数组。支持的Name：BindingStatus 绑定状态 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeDevicesResponse {

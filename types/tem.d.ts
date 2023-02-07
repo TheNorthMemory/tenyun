@@ -1145,12 +1145,12 @@ declare interface CreateCosTokenResponse {
 declare interface CreateEnvironmentRequest {
   /** 环境名称 */
   EnvironmentName: string;
-  /** 私有网络名称 */
-  Vpc: string;
-  /** 子网列表 */
-  SubnetIds: string[];
   /** 环境描述 */
   Description?: string;
+  /** 私有网络名称 */
+  Vpc?: string;
+  /** 子网列表 */
+  SubnetIds?: string[];
   /** K8s version */
   K8sVersion?: string;
   /** 来源渠道 */
@@ -1163,11 +1163,19 @@ declare interface CreateEnvironmentRequest {
   EnvType?: string;
   /** 创建环境的region */
   CreateRegion?: string;
+  /** 是否创建私有网络 */
+  SetupVpc?: boolean;
+  /** 是否创建 Prometheus 实例 */
+  SetupPrometheus?: boolean;
+  /** prometheus 实例 id */
+  PrometheusId?: string;
+  /** apm id */
+  ApmId?: string;
 }
 
 declare interface CreateEnvironmentResponse {
   /** 成功时为环境ID，失败为null */
-  Result: string | null;
+  Result?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1210,7 +1218,7 @@ declare interface CreateResourceRequest {
   /** 资源类型，目前支持文件系统：CFS；日志服务：CLS；注册中心：TSE_SRE */
   ResourceType: string;
   /** 资源 Id */
-  ResourceId: string;
+  ResourceId?: string;
   /** 来源渠道 */
   SourceChannel?: number;
   /** 资源来源，目前支持：existing，已有资源；creating，自动创建 */
@@ -1221,7 +1229,7 @@ declare interface CreateResourceRequest {
 
 declare interface CreateResourceResponse {
   /** 成功与否 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

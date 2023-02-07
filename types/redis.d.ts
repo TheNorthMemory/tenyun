@@ -402,7 +402,7 @@ declare interface InstanceSet {
   RemainBandwidthDuration: string | null;
   /** Redis实例请忽略该参数。 */
   DiskSize: number | null;
-  /** 监控版本。1m：分钟粒度监控。5s：5秒粒度监控。 */
+  /** 监控版本。1m：1分钟粒度监控。5s：5秒粒度监控。 */
   MonitorVersion: string | null;
   /** 客户端最大连接数可设置的最小值。 */
   ClientLimitMin: number | null;

@@ -1086,6 +1086,26 @@ declare interface TimeShiftStreamInfo {
   Duration?: number | null;
 }
 
+/** 直播时移模板配置 */
+declare interface TimeShiftTemplate {
+  /** 模板名称。 */
+  TemplateName: string;
+  /** 时移时长。单位：秒。 */
+  Duration: number;
+  /** 分片时长。可取3-10。单位：s。默认值：5。 */
+  ItemDuration: number;
+  /** 模板id。 */
+  TemplateId?: number;
+  /** 模板描述。 */
+  Description?: string;
+  /** 地域：Mainland：中国大陆；Overseas：海外及港澳台地区；默认值：Mainland。 */
+  Area?: string;
+  /** 是否去除水印。为true则将录制原始流。默认值：false。 */
+  RemoveWatermark?: boolean;
+  /** 转码流id列表。此参数仅在 RemoveWatermark为false时生效。 */
+  TranscodeTemplateIds?: number[];
+}
+
 /** 某个时间点的指标的数值是多少。 */
 declare interface TimeValue {
   /** UTC 时间，时间格式：yyyy-mm-ddTHH:MM:SSZ。 */
@@ -1488,6 +1508,46 @@ declare interface CreateLiveSnapshotTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateLiveTimeShiftRuleRequest {
+  /** 推流域名。 */
+  DomainName: string;
+  /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。 */
+  AppName: string;
+  /** 流名称。注：如果本参数设置为非空字符串，规则将只对此推流起作用。 */
+  StreamName: string;
+  /** 模板 ID。 */
+  TemplateId: number;
+}
+
+declare interface CreateLiveTimeShiftRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateLiveTimeShiftTemplateRequest {
+  /** 模板名称。长度上限：255字节。仅支持中文、英文、数字、_、-。 */
+  TemplateName: string;
+  /** 时移时长。单位：s。 */
+  Duration: number;
+  /** 描述信息。仅支持中文、英文、数字、_、-。 */
+  Description?: string;
+  /** 地域。Mainland：中国大陆。Overseas：海外及港澳台地区。默认值：Mainland。 */
+  Area?: string;
+  /** 分片时长。可取3-10。单位：s。默认值：5。 */
+  ItemDuration?: number;
+  /** 是否去除水印。传true则将录制原始流。默认值：false。 */
+  RemoveWatermark?: boolean;
+  /** 转码流id列表。此参数仅在 RemoveWatermark为false时生效。 */
+  TranscodeTemplateIds?: number[];
+}
+
+declare interface CreateLiveTimeShiftTemplateResponse {
+  /** 模板Id。 */
+  TemplateId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateLiveTranscodeRuleRequest {
   /** 播放域名。 */
   DomainName: string;
@@ -1750,6 +1810,30 @@ declare interface DeleteLiveSnapshotTemplateRequest {
 }
 
 declare interface DeleteLiveSnapshotTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLiveTimeShiftRuleRequest {
+  /** 推流域名。域名+AppName+StreamName唯一标识单个时移规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。 */
+  DomainName: string;
+  /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。域名+AppName+StreamName唯一标识单个时移规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。 */
+  AppName: string;
+  /** 流名称。域名+AppName+StreamName唯一标识单个时移规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。 */
+  StreamName: string;
+}
+
+declare interface DeleteLiveTimeShiftRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLiveTimeShiftTemplateRequest {
+  /** 模板 ID。 */
+  TemplateId: number;
+}
+
+declare interface DeleteLiveTimeShiftTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2500,6 +2584,26 @@ declare interface DescribeLiveTimeShiftBillInfoListRequest {
 declare interface DescribeLiveTimeShiftBillInfoListResponse {
   /** 时移计费明细数据。 */
   DataInfoList: TimeShiftBillData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLiveTimeShiftRulesRequest {
+}
+
+declare interface DescribeLiveTimeShiftRulesResponse {
+  /** 规则信息列表。 */
+  Rules: RuleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLiveTimeShiftTemplatesRequest {
+}
+
+declare interface DescribeLiveTimeShiftTemplatesResponse {
+  /** 直播时移模板信息。 */
+  Templates: TimeShiftTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3398,6 +3502,30 @@ declare interface ModifyLiveSnapshotTemplateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLiveTimeShiftTemplateRequest {
+  /** 时移模板id。 */
+  TemplateId: number;
+  /** 模板名称。仅支持中文、英文、数字、_、-。 */
+  TemplateName?: string;
+  /** 描述信息。长度上限：1024字节。仅支持中文、英文、数字、_、-。 */
+  Description?: string;
+  /** 时移时长。单位：s。 */
+  Duration?: number;
+  /** 分片时长。可取3-10。单位：s。默认值：5。 */
+  ItemDuration?: number;
+  /** 是否去除水印。传true则将录制原始流。默认值：false。 */
+  RemoveWatermark?: boolean;
+  /** 转码流id列表。此参数仅在 RemoveWatermark为false时生效。 */
+  TranscodeTemplateIds?: number[];
+  /** 地域。Mainland：中国大陆。Overseas：海外及港澳台地区。默认值：Mainland。 */
+  Area?: string;
+}
+
+declare interface ModifyLiveTimeShiftTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyLiveTranscodeTemplateRequest {
   /** 模板 Id。 */
   TemplateId: number;
@@ -3607,6 +3735,10 @@ declare interface Live {
   CreateLiveSnapshotRule(data: CreateLiveSnapshotRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveSnapshotRuleResponse>;
   /** 创建截图模板 {@link CreateLiveSnapshotTemplateRequest} {@link CreateLiveSnapshotTemplateResponse} */
   CreateLiveSnapshotTemplate(data: CreateLiveSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveSnapshotTemplateResponse>;
+  /** 创建直播时移规则 {@link CreateLiveTimeShiftRuleRequest} {@link CreateLiveTimeShiftRuleResponse} */
+  CreateLiveTimeShiftRule(data: CreateLiveTimeShiftRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveTimeShiftRuleResponse>;
+  /** 创建直播时移模板 {@link CreateLiveTimeShiftTemplateRequest} {@link CreateLiveTimeShiftTemplateResponse} */
+  CreateLiveTimeShiftTemplate(data: CreateLiveTimeShiftTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveTimeShiftTemplateResponse>;
   /** 创建转码规则 {@link CreateLiveTranscodeRuleRequest} {@link CreateLiveTranscodeRuleResponse} */
   CreateLiveTranscodeRule(data: CreateLiveTranscodeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveTranscodeRuleResponse>;
   /** 创建转码模板 {@link CreateLiveTranscodeTemplateRequest} {@link CreateLiveTranscodeTemplateResponse} */
@@ -3637,6 +3769,10 @@ declare interface Live {
   DeleteLiveSnapshotRule(data: DeleteLiveSnapshotRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveSnapshotRuleResponse>;
   /** 删除截图模板 {@link DeleteLiveSnapshotTemplateRequest} {@link DeleteLiveSnapshotTemplateResponse} */
   DeleteLiveSnapshotTemplate(data: DeleteLiveSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveSnapshotTemplateResponse>;
+  /** 删除直播时移规则 {@link DeleteLiveTimeShiftRuleRequest} {@link DeleteLiveTimeShiftRuleResponse} */
+  DeleteLiveTimeShiftRule(data: DeleteLiveTimeShiftRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveTimeShiftRuleResponse>;
+  /** 删除直播时移模板 {@link DeleteLiveTimeShiftTemplateRequest} {@link DeleteLiveTimeShiftTemplateResponse} */
+  DeleteLiveTimeShiftTemplate(data: DeleteLiveTimeShiftTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveTimeShiftTemplateResponse>;
   /** 删除转码规则 {@link DeleteLiveTranscodeRuleRequest} {@link DeleteLiveTranscodeRuleResponse} */
   DeleteLiveTranscodeRule(data: DeleteLiveTranscodeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveTranscodeRuleResponse>;
   /** 删除转码模板 {@link DeleteLiveTranscodeTemplateRequest} {@link DeleteLiveTranscodeTemplateResponse} */
@@ -3725,6 +3861,10 @@ declare interface Live {
   DescribeLiveStreamState(data: DescribeLiveStreamStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamStateResponse>;
   /** 直播时移计费信息查询 {@link DescribeLiveTimeShiftBillInfoListRequest} {@link DescribeLiveTimeShiftBillInfoListResponse} */
   DescribeLiveTimeShiftBillInfoList(data: DescribeLiveTimeShiftBillInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTimeShiftBillInfoListResponse>;
+  /** 获取直播时移规则列表 {@link DescribeLiveTimeShiftRulesRequest} {@link DescribeLiveTimeShiftRulesResponse} */
+  DescribeLiveTimeShiftRules(data?: DescribeLiveTimeShiftRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTimeShiftRulesResponse>;
+  /** 获取直播时移模板 {@link DescribeLiveTimeShiftTemplatesRequest} {@link DescribeLiveTimeShiftTemplatesResponse} */
+  DescribeLiveTimeShiftTemplates(data?: DescribeLiveTimeShiftTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTimeShiftTemplatesResponse>;
   /** 查询直播转码统计信息 {@link DescribeLiveTranscodeDetailInfoRequest} {@link DescribeLiveTranscodeDetailInfoResponse} */
   DescribeLiveTranscodeDetailInfo(data?: DescribeLiveTranscodeDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveTranscodeDetailInfoResponse>;
   /** 获取转码规则列表 {@link DescribeLiveTranscodeRulesRequest} {@link DescribeLiveTranscodeRulesResponse} */
@@ -3805,6 +3945,8 @@ declare interface Live {
   ModifyLiveRecordTemplate(data: ModifyLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveRecordTemplateResponse>;
   /** 修改截图模板 {@link ModifyLiveSnapshotTemplateRequest} {@link ModifyLiveSnapshotTemplateResponse} */
   ModifyLiveSnapshotTemplate(data: ModifyLiveSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveSnapshotTemplateResponse>;
+  /** 修改直播时移模板 {@link ModifyLiveTimeShiftTemplateRequest} {@link ModifyLiveTimeShiftTemplateResponse} */
+  ModifyLiveTimeShiftTemplate(data: ModifyLiveTimeShiftTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveTimeShiftTemplateResponse>;
   /** 修改转码模板配置 {@link ModifyLiveTranscodeTemplateRequest} {@link ModifyLiveTranscodeTemplateResponse} */
   ModifyLiveTranscodeTemplate(data: ModifyLiveTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveTranscodeTemplateResponse>;
   /** 更新拉流配置(该接口已下线,请使用新接口 ModifyLivePullStreamTask) {@link ModifyPullStreamConfigRequest} {@link ModifyPullStreamConfigResponse} */

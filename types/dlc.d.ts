@@ -458,7 +458,7 @@ declare interface Script {
   UpdateTime: number | null;
 }
 
-/** spark作业详情 */
+/** spark作业详情。 */
 declare interface SparkJobInfo {
   /** spark作业ID */
   JobId: string;
@@ -520,12 +520,16 @@ declare interface SparkJobInfo {
   IsLocalArchives: string | null;
   /** archives：依赖资源 */
   JobArchives: string | null;
+  /** Spark Image 版本 */
+  SparkImage: string | null;
   /** pyspark：python依赖, 除py文件外，还支持zip/egg等归档格式，多文件以逗号分隔 */
   JobPythonFiles: string | null;
   /** 当前job正在运行或准备运行的任务个数 */
   TaskNum: number | null;
   /** 引擎状态：-100（默认：未知状态），-2~11：引擎正常状态； */
   DataEngineStatus: number | null;
+  /** 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于JobExecutorNums */
+  JobExecutorMaxNumbers?: number | null;
 }
 
 /** spark流任务统计信息 */
@@ -1269,9 +1273,17 @@ declare interface CreateSparkAppRequest {
   IsLocalArchives?: string;
   /** archives：依赖资源 */
   AppArchives?: string;
+  /** Spark Image 版本 */
+  SparkImage?: string;
+  /** Spark Image 版本名称 */
+  SparkImageVersion?: string;
+  /** 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于AppExecutorNums */
+  AppExecutorMaxNumbers?: number;
 }
 
 declare interface CreateSparkAppResponse {
+  /** App唯一标识 */
+  SparkAppId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1703,9 +1715,9 @@ declare interface DescribeSparkAppJobRequest {
 
 declare interface DescribeSparkAppJobResponse {
   /** spark作业详情 */
-  Job: SparkJobInfo | null;
+  Job?: SparkJobInfo | null;
   /** 查询的spark作业是否存在 */
-  IsExists: boolean;
+  IsExists?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1729,9 +1741,9 @@ declare interface DescribeSparkAppJobsRequest {
 
 declare interface DescribeSparkAppJobsResponse {
   /** spark作业列表详情 */
-  SparkAppJobs: SparkJobInfo[];
+  SparkAppJobs?: SparkJobInfo[];
   /** spark作业总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2074,6 +2086,14 @@ declare interface LockMetaDataResponse {
   RequestId?: string;
 }
 
+declare interface ModifyGovernEventRuleRequest {
+}
+
+declare interface ModifyGovernEventRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySparkAppRequest {
   /** spark应用名 */
   AppName: string;
@@ -2123,6 +2143,12 @@ declare interface ModifySparkAppRequest {
   IsLocalArchives?: string;
   /** archives：依赖资源 */
   AppArchives?: string;
+  /** Spark Image 版本 */
+  SparkImage?: string;
+  /** Spark Image 版本名称 */
+  SparkImageVersion?: string;
+  /** 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于AppExecutorNums */
+  AppExecutorMaxNumbers?: number;
 }
 
 declare interface ModifySparkAppResponse {
@@ -2323,6 +2349,8 @@ declare interface Dlc {
   ListTaskJobLogDetail(data: ListTaskJobLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskJobLogDetailResponse>;
   /** 元数据锁 {@link LockMetaDataRequest} {@link LockMetaDataResponse} */
   LockMetaData(data: LockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<LockMetaDataResponse>;
+  /** 修改数据治理事件阈值 {@link ModifyGovernEventRuleRequest} {@link ModifyGovernEventRuleResponse} */
+  ModifyGovernEventRule(data?: ModifyGovernEventRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGovernEventRuleResponse>;
   /** 更新spark应用 {@link ModifySparkAppRequest} {@link ModifySparkAppResponse} */
   ModifySparkApp(data: ModifySparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySparkAppResponse>;
   /** 修改用户信息 {@link ModifyUserRequest} {@link ModifyUserResponse} */

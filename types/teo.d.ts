@@ -62,7 +62,7 @@ declare interface AclUserRule {
 
 /** 规则引擎功能项操作，对于一种功能只对应下面三种类型的其中一种，RuleAction 数组中的每一项只能是其中一个类型，更多功能项的填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。 */
 declare interface Action {
-  /** 常规功能操作，选择该类型的功能项有： 访问URL 重写（AccessUrlRedirect）； 回源 URL 重写 （UpstreamUrlRedirect）； QUIC（QUIC）； WebSocket （WebSocket）； 视频拖拽（VideoSeek）； Token 鉴权（Authentication）； 自定义CacheKey（CacheKey）； 节点缓存 TTL （Cache）； 浏览器缓存 TTL（MaxAge）； 离线缓存（OfflineCache）； 智能加速（SmartRouting）； 分片回源（RangeOriginPull）； HTTP/2 回源（UpstreamHttp2）； Host Header 重写（HostHeader）； 强制 HTTPS（ForceRedirect）； 回源 HTTPS（OriginPullProtocol）； 缓存预刷新（CachePrefresh）； 智能压缩（Compression）； Hsts； ClientIpHeader； TlsVersion； OcspStapling； HTTP/2 访问（Http2）； 回源跟随重定向(UpstreamFollowRedirect)。 */
+  /** 常规功能操作，选择该类型的功能项有： 访问URL 重写（AccessUrlRedirect）； 回源 URL 重写 （UpstreamUrlRedirect）； QUIC（QUIC）； WebSocket （WebSocket）； 视频拖拽（VideoSeek）； Token 鉴权（Authentication）； 自定义CacheKey（CacheKey）； 节点缓存 TTL （Cache）； 浏览器缓存 TTL（MaxAge）； 离线缓存（OfflineCache）； 智能加速（SmartRouting）； 分片回源（RangeOriginPull）； HTTP/2 回源（UpstreamHttp2）； Host Header 重写（HostHeader）； 强制 HTTPS（ForceRedirect）； 回源 HTTPS（OriginPullProtocol）； 缓存预刷新（CachePrefresh）； 智能压缩（Compression）； Hsts； ClientIpHeader； TlsVersion； OcspStapling； HTTP/2 访问（Http2）； 回源跟随重定向(UpstreamFollowRedirect)； 修改源站(Origin)。 */
   NormalAction?: NormalAction | null;
   /** 带有请求头/响应头的功能操作，选择该类型的功能项有： 修改 HTTP 请求头（RequestHeader）； 修改HTTP响应头（ResponseHeader）。 */
   RewriteAction?: RewriteAction | null;
@@ -795,23 +795,23 @@ declare interface Origin {
 /** 源站组信息 */
 declare interface OriginGroup {
   /** 站点ID。 */
-  ZoneId: string;
+  ZoneId?: string;
   /** 站点名称。 */
-  ZoneName: string;
+  ZoneName?: string;
   /** 源站组ID。 */
-  OriginGroupId: string;
+  OriginGroupId?: string;
   /** 源站类型，取值有：self：自有源站；third_party：第三方源站；cos：腾讯云COS源站。 */
-  OriginType: string;
+  OriginType?: string;
   /** 源站组名称。 */
-  OriginGroupName: string;
+  OriginGroupName?: string;
   /** 源站配置类型，当OriginType=self时，取值有：area：按区域配置；weight： 按权重配置。proto： 按HTTP协议配置。当OriginType=third_party/cos时放空。 */
-  ConfigurationType: string;
+  ConfigurationType?: string;
   /** 源站记录信息。 */
-  OriginRecords: OriginRecord[];
+  OriginRecords?: OriginRecord[];
   /** 源站组更新时间。 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 当OriginType=self时，表示回源Host。 */
-  HostHeader: string | null;
+  HostHeader?: string | null;
 }
 
 /** 源站防护信息 */

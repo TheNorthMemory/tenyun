@@ -1690,6 +1690,18 @@ declare interface DescribeDBSecurityGroupsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFlowRequest {
+  /** 任务流ID */
+  FlowId: number;
+}
+
+declare interface DescribeFlowResponse {
+  /** 任务流状态。0-成功，1-失败，2-处理中 */
+  Status: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceDetailRequest {
   /** 实例ID */
   InstanceId: string;
@@ -2575,6 +2587,8 @@ declare interface Cynosdb {
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** 查询实例安全组信息 {@link DescribeDBSecurityGroupsRequest} {@link DescribeDBSecurityGroupsResponse} */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
+  /** 查询任务流信息 {@link DescribeFlowRequest} {@link DescribeFlowResponse} */
+  DescribeFlow(data: DescribeFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowResponse>;
   /** 查询实例详情 {@link DescribeInstanceDetailRequest} {@link DescribeInstanceDetailResponse} */
   DescribeInstanceDetail(data: DescribeInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDetailResponse>;
   /** 查询实例慢查询日志 {@link DescribeInstanceSlowQueriesRequest} {@link DescribeInstanceSlowQueriesResponse} */
