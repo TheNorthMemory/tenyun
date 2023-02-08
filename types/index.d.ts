@@ -123,6 +123,7 @@ import Iotvideo, { Versions as IotvideoVersions } from "./iotvideo";
 import Iotvideoindustry, { Versions as IotvideoindustryVersions } from "./iotvideoindustry";
 import Irp, { Versions as IrpVersions } from "./irp";
 import Ivld, { Versions as IvldVersions } from "./ivld";
+import Keewidb, { Versions as KeewidbVersions } from "./keewidb";
 import Kms, { Versions as KmsVersions } from "./kms";
 import Lcic, { Versions as LcicVersions } from "./lcic";
 import Lighthouse, { Versions as LighthouseVersions } from "./lighthouse";
@@ -352,6 +353,7 @@ export declare type SERVICE_VERSIONS = {
   iotvideoindustry: IotvideoindustryVersions,
   irp: IrpVersions,
   ivld: IvldVersions,
+  keewidb: KeewidbVersions,
   kms: KmsVersions,
   lcic: LcicVersions,
   lighthouse: LighthouseVersions,
@@ -715,6 +717,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   irp: Irp,
   /** {@link Ivld 媒体智能标签} */
   ivld: Ivld,
+  /** {@link Keewidb 云数据库 KeeWiDB} */
+  keewidb: Keewidb,
   /** {@link Kms 密钥管理系统} */
   kms: Kms,
   /** {@link Lcic 低代码互动课堂} */

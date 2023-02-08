@@ -355,12 +355,12 @@ declare interface AddNodesRequest {
   Placement: Placement;
   /** 集群ID。 */
   ClusterId: string;
-  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜。 */
-  ImageId: string;
   /** 私有网络相关信息配置。 */
   VirtualPrivateCloud: VirtualPrivateCloud;
   /** 添加节点数量。 */
   Count: number;
+  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜像和特定自定义镜像。 */
+  ImageId?: string;
   /** 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费SPOTPAID：竞价付费默认值：POSTPAID_BY_HOUR。 */
   InstanceChargeType?: string;
   /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。 */
@@ -381,7 +381,7 @@ declare interface AddNodesRequest {
   SecurityGroupIds?: string[];
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
-  /** 队列名称。 */
+  /** 队列名称。不指定则为默认队列。SLURM默认队列为：compute。SGE默认队列为：all.q。 */
   QueueName?: string;
   /** 添加节点类型。默认值：ComputeCompute：计算节点。Login：登录节点。 */
   NodeRole?: string;

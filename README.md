@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 225+ 款产品，8929+ 服务数</summary>
+<details><summary>共计 226+ 款产品，8971+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -143,7 +143,7 @@ cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 201
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(20) |
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(79+3) |
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(6) |
-cdwch | [云数据仓库 ClickHouse](https://cloud.tencent.com/document/product/1299) | 2020-09-15(17) |
+cdwch | [云数据仓库 ClickHouse](https://cloud.tencent.com/document/product/1299) | 2020-09-15(18) |
 cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(10) |
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(35) |
 cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(62) |
@@ -174,7 +174,7 @@ dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/pro
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(21) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(63) |
-dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(66) |
+dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(67) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(59) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(26) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(9) |
@@ -189,8 +189,8 @@ eiam | [数字身份管控平台（员工版）](https://cloud.tencent.com/docum
 eis | [数据连接器](https://cloud.tencent.com/document/product/1270) | 2021-06-01(5) | 2020-07-15(3) |
 emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(27) |
 es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2018-04-16(37) |
-ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(31) |
-essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(35) | 2020-12-22(53) |
+ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(33) |
+essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(37) | 2020-12-22(53) |
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2022-09-27(2) | 2018-12-01(4) |
 faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(33) |
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(10) |
@@ -219,6 +219,7 @@ iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/prod
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
 irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 2022-08-05(4) | 2022-03-24(4) |
 ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2021-09-03(25) |
+keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520) | 2022-03-08(36) |
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(49) |
 lcic | [低代码互动课堂](https://cloud.tencent.com/document/product/1639) | 2022-08-17(17) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(77) |

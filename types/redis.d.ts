@@ -292,15 +292,15 @@ declare interface InstanceParamHistory {
 
 /** 代理慢查询详情 */
 declare interface InstanceProxySlowlogDetail {
-  /** 慢查询耗时 */
+  /** 慢查询耗时（单位：毫秒）。 */
   Duration: number;
-  /** 客户端地址 */
+  /** 客户端地址。 */
   Client: string;
-  /** 命令 */
+  /** 命令。 */
   Command: string;
-  /** 详细命令行信息 */
+  /** 详细命令行信息。 */
   CommandLine: string;
-  /** 执行时间 */
+  /** 执行时间。 */
   ExecuteTime: string;
 }
 

@@ -157,6 +157,7 @@ export const SERVICE_VERSIONS = {
   iotvideoindustry: ['2020-12-01'],
   irp: ['2022-08-05', '2022-03-24'],
   ivld: ['2021-09-03'],
+  keewidb: ['2022-03-08'],
   kms: ['2019-01-18'],
   lcic: ['2022-08-17'],
   lighthouse: ['2020-03-24'],

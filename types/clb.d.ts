@@ -1010,6 +1010,8 @@ declare interface RuleTargets {
   Url: string;
   /** 后端服务的信息 */
   Targets: Backend[] | null;
+  /** 后端云函数的信息 */
+  FunctionTargets: FunctionTarget[] | null;
 }
 
 /** 七层规则对象 */

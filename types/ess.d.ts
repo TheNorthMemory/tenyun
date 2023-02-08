@@ -1016,6 +1016,30 @@ declare interface CreateSchemeUrlResponse {
   RequestId?: string;
 }
 
+declare interface CreateSealPolicyRequest {
+  /** 授权发起人在平台信息，具体参考UserInfo结构体 */
+  Operator: UserInfo;
+  /** 用户在电子文件签署平台标识信息，具体参考UserInfo结构体。可跟下面的UserIds可叠加起作用 */
+  Users: UserInfo[];
+  /** 印章ID */
+  SealId: string;
+  /** 授权有效期。时间戳秒级 */
+  Expired: number;
+  /** 印章授权内容 */
+  Policy?: string;
+  /** 应用相关 */
+  Agent?: Agent;
+  /** 需要授权的用户UserId集合。跟上面的SealId参数配合使用。选填，跟上面的Users同时起作用 */
+  UserIds?: string[];
+}
+
+declare interface CreateSealPolicyResponse {
+  /** 最终授权成功的。其他的跳过的是已经授权了的 */
+  UserIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteIntegrationEmployeesRequest {
   /** 操作人信息，userId必填 */
   Operator: UserInfo;
@@ -1026,6 +1050,24 @@ declare interface DeleteIntegrationEmployeesRequest {
 declare interface DeleteIntegrationEmployeesResponse {
   /** 员工删除数据 */
   DeleteEmployeeResult: DeleteStaffsResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSealPoliciesRequest {
+  /** 操作撤销的用户信息 */
+  Operator: UserInfo;
+  /** 印章授权编码数组。这个参数跟下面的SealId其中一个必填，另外一个可选填 */
+  PolicyIds?: string[];
+  /** 应用相关 */
+  Agent?: Agent;
+  /** 印章ID。这个参数跟上面的PolicyIds其中一个必填，另外一个可选填 */
+  SealId?: string;
+  /** 待授权的员工ID */
+  UserIds?: string[];
+}
+
+declare interface DeleteSealPoliciesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1367,8 +1409,12 @@ declare interface Ess {
   CreatePrepareFlow(data: CreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrepareFlowResponse>;
   /** 获取小程序跳转链接 {@link CreateSchemeUrlRequest} {@link CreateSchemeUrlResponse} */
   CreateSchemeUrl(data: CreateSchemeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchemeUrlResponse>;
+  /** 印章授权 {@link CreateSealPolicyRequest} {@link CreateSealPolicyResponse} */
+  CreateSealPolicy(data: CreateSealPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealPolicyResponse>;
   /** 移除员工 {@link DeleteIntegrationEmployeesRequest} {@link DeleteIntegrationEmployeesResponse} */
   DeleteIntegrationEmployees(data: DeleteIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationEmployeesResponse>;
+  /** 撤销员工的印章权限 {@link DeleteSealPoliciesRequest} {@link DeleteSealPoliciesResponse} */
+  DeleteSealPolicies(data: DeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSealPoliciesResponse>;
   /** 查询文件下载URL {@link DescribeFileUrlsRequest} {@link DescribeFileUrlsResponse} */
   DescribeFileUrls(data: DescribeFileUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileUrlsResponse>;
   /** 查询流程摘要 {@link DescribeFlowBriefsRequest} {@link DescribeFlowBriefsResponse} */

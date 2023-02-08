@@ -1029,93 +1029,93 @@ declare interface GetFunctionRequest {
 
 declare interface GetFunctionResponse {
   /** 函数的最后修改时间 */
-  ModTime: string;
+  ModTime?: string;
   /** 函数的代码 */
-  CodeInfo: string;
+  CodeInfo?: string;
   /** 函数的描述信息 */
-  Description: string;
+  Description?: string;
   /** 函数的触发器列表 */
-  Triggers: Trigger[];
+  Triggers?: Trigger[];
   /** 函数的入口 */
-  Handler: string;
+  Handler?: string;
   /** 函数代码大小 */
-  CodeSize: number;
+  CodeSize?: number;
   /** 函数的超时时间 */
-  Timeout: number;
+  Timeout?: number;
   /** 函数的版本 */
-  FunctionVersion: string;
+  FunctionVersion?: string;
   /** 函数的最大可用内存 */
-  MemorySize: number;
+  MemorySize?: number;
   /** 函数的运行环境 */
-  Runtime: string;
+  Runtime?: string;
   /** 函数的名称 */
-  FunctionName: string;
+  FunctionName?: string;
   /** 函数的私有网络 */
-  VpcConfig: VpcConfig;
+  VpcConfig?: VpcConfig;
   /** 是否使用GPU */
-  UseGpu: string;
+  UseGpu?: string;
   /** 函数的环境变量 */
-  Environment: Environment;
+  Environment?: Environment;
   /** 代码是否正确 */
-  CodeResult: string;
+  CodeResult?: string;
   /** 代码错误信息 */
-  CodeError: string;
+  CodeError?: string;
   /** 代码错误码 */
-  ErrNo: number;
+  ErrNo?: number;
   /** 函数的命名空间 */
-  Namespace: string;
+  Namespace?: string;
   /** 函数绑定的角色 */
-  Role: string;
+  Role?: string;
   /** 是否自动安装依赖 */
-  InstallDependency: string;
+  InstallDependency?: string;
   /** 函数状态，状态值及流转[参考说明](https://cloud.tencent.com/document/product/583/47175) */
-  Status: string;
+  Status?: string;
   /** 状态描述 */
-  StatusDesc: string;
+  StatusDesc?: string;
   /** 日志投递到的Cls日志集 */
-  ClsLogsetId: string;
+  ClsLogsetId?: string;
   /** 日志投递到的Cls Topic */
-  ClsTopicId: string;
+  ClsTopicId?: string;
   /** 函数ID */
-  FunctionId: string;
+  FunctionId?: string;
   /** 函数的标签列表 */
-  Tags: Tag[];
+  Tags?: Tag[];
   /** EipConfig配置 */
-  EipConfig: EipOutConfig;
+  EipConfig?: EipOutConfig;
   /** 域名信息 */
-  AccessInfo: AccessInfo;
+  AccessInfo?: AccessInfo;
   /** 函数类型，取值为HTTP或者Event */
-  Type: string;
+  Type?: string;
   /** 是否启用L5 */
-  L5Enable: string;
+  L5Enable?: string;
   /** 函数关联的Layer版本信息 */
-  Layers: LayerVersionInfo[];
+  Layers?: LayerVersionInfo[];
   /** 函数关联的死信队列信息 */
-  DeadLetterConfig: DeadLetterConfig;
+  DeadLetterConfig?: DeadLetterConfig;
   /** 函数创建回见 */
-  AddTime: string;
+  AddTime?: string;
   /** 公网访问配置 */
-  PublicNetConfig: PublicNetConfigOut | null;
+  PublicNetConfig?: PublicNetConfigOut | null;
   /** 是否启用Ons */
-  OnsEnable: string | null;
+  OnsEnable?: string | null;
   /** 文件系统配置参数，用于云函数挂载文件系统 */
-  CfsConfig: CfsConfig | null;
+  CfsConfig?: CfsConfig | null;
   /** 函数的计费状态，状态值[参考此处](https://cloud.tencent.com/document/product/583/47175) */
-  AvailableStatus: string | null;
+  AvailableStatus?: string | null;
   /** 函数版本 */
-  Qualifier: string | null;
+  Qualifier?: string | null;
   /** 函数初始化超时时间 */
-  InitTimeout: number;
+  InitTimeout?: number;
   /** 函数状态失败原因 */
-  StatusReasons: StatusReason[] | null;
+  StatusReasons?: StatusReason[] | null;
   /** 是否开启异步属性 */
-  AsyncRunEnable: string | null;
+  AsyncRunEnable?: string | null;
   /** 是否开启事件追踪 */
-  TraceEnable: string | null;
+  TraceEnable?: string | null;
   /** HTTP函数支持的访问协议。当前支持WebSockets协议。 */
-  ProtocolType: string | null;
+  ProtocolType?: string | null;
   /** HTTP函数配置ProtocolType访问协议，当前协议配置的参数 */
-  ProtocolParams: ProtocolParams | null;
+  ProtocolParams?: ProtocolParams | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

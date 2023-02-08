@@ -1909,7 +1909,7 @@ declare interface DescribeCloudBaseRunVersionSnapshotResponse {
 declare interface DescribeCurveDataRequest {
   /** 环境ID */
   EnvId: string;
-  /** 指标名: StorageRead: 存储读请求次数 StorageWrite: 存储写请求次数 StorageCdnOriginFlux: CDN回源流量, 单位字节 CDNFlux: CDN回源流量, 单位字节 FunctionInvocation: 云函数调用次数 FunctionGBs: 云函数资源使用量, 单位Mb*Ms FunctionFlux: 云函数流量, 单位千字节(KB) FunctionError: 云函数调用错误次数 FunctionDuration: 云函数运行时间, 单位毫秒 DbRead: 数据库读请求数 DbWrite: 数据库写请求数 DbCostTime10ms: 数据库耗时在10ms~50ms请求数 DbCostTime50ms: 数据库耗时在50ms~100ms请求数 DbCostTime100ms: 数据库耗时在100ms以上请求数 TkeCpuRatio: 容器CPU占用率 TkeMemRatio: 容器内存占用率 TkeCpuUsed: 容器CPU使用量 TkeMemUsed: 容器内存使用量 TkeInvokeNum: 调用量 */
+  /** 指标名: StorageRead: 存储读请求次数 StorageWrite: 存储写请求次数 StorageCdnOriginFlux: CDN回源流量, 单位字节 CDNFlux: CDN回源流量, 单位字节 FunctionInvocation: 云函数调用次数 FunctionGBs: 云函数资源使用量, 单位Mb*Ms FunctionFlux: 云函数流量, 单位千字节(KB) FunctionError: 云函数调用错误次数 FunctionDuration: 云函数运行时间, 单位毫秒 DbRead: 数据库读请求数 DbWrite: 数据库写请求数 DbCostTime10ms: 数据库耗时在10ms~50ms请求数 DbCostTime50ms: 数据库耗时在50ms~100ms请求数 DbCostTime100ms: 数据库耗时在100ms以上请求数 TkeCpuRatio: 容器CPU占用率 TkeMemRatio: 容器内存占用率 TkeCpuUsed: 容器CPU使用量 TkeMemUsed: 容器内存使用量 TkeInvokeNum: 调用量 FunctionConcurrentExecutions: 云函数并发执行个数 FunctionIdleProvisioned: 云函数预置并发闲置量 FunctionConcurrencyMemoryMB: 云函数并发执行内存量 FunctionThrottle: 云函数受限次数 FunctionProvisionedConcurrency: 云函数预置并发 */
   MetricName: string;
   /** 开始时间，如2018-08-24 10:50:00, 开始时间需要早于结束时间至少五分钟(原因是因为目前统计粒度最小是5分钟). */
   StartTime: string;
@@ -1921,17 +1921,19 @@ declare interface DescribeCurveDataRequest {
 
 declare interface DescribeCurveDataResponse {
   /** 开始时间, 会根据数据的统计周期进行取整. */
-  StartTime: string;
+  StartTime?: string;
   /** 结束时间, 会根据数据的统计周期进行取整. */
-  EndTime: string;
+  EndTime?: string;
   /** 指标名. */
-  MetricName: string;
+  MetricName?: string;
   /** 统计周期(单位秒), 当时间区间为1天内, 统计周期为5分钟; 当时间区间选择为1天以上, 15天以下, 统计周期为1小时; 当时间区间选择为15天以上, 180天以下, 统计周期为1天. */
-  Period: number;
+  Period?: number;
   /** 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到. */
-  Values: number[];
+  Values?: number[];
   /** 时间数据, 标识监控数据Values中的点是哪个时间段上报的. */
-  Time: number[];
+  Time?: number[];
+  /** 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到. */
+  NewValues?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

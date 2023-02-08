@@ -578,6 +578,16 @@ declare interface Publisher {
 declare interface RabbitMQPrivateNode {
   /** 节点名字 */
   NodeName: string | null;
+  /** 节点状态 */
+  NodeStatus?: string | null;
+  /** CPU使用率 */
+  CPUUsage?: string | null;
+  /** 内存使用情况，单位MB */
+  Memory?: number | null;
+  /** 磁盘使用率 */
+  DiskUsage?: string | null;
+  /** Rabbitmq的Erlang进程数 */
+  ProcessNumber?: number | null;
 }
 
 /** RabbitMQ专享实例信息 */
@@ -610,6 +620,8 @@ declare interface RabbitMQVipInstance {
   Remark: string | null;
   /** 实例配置ID */
   SpecName: string;
+  /** 集群异常。 */
+  ExceptionInformation?: string | null;
 }
 
 /** 消息保留策略 */
@@ -2173,13 +2185,21 @@ declare interface DescribeRabbitMQNodeListRequest {
   Offset?: number;
   /** 一页限制 */
   Limit?: number;
+  /** 模糊搜索节点名字 */
+  NodeName?: string;
+  /** 过滤参数的名字和数值现在只有一个nodeStatusrunning/down数组类型，兼容后续添加过滤参数 */
+  Filters?: Filter[];
+  /** 按指定元素排序，现在只有2个cpuUsage/diskUsage */
+  SortElement?: string;
+  /** 升序/降序ascend/descend */
+  SortOrder?: string;
 }
 
 declare interface DescribeRabbitMQNodeListResponse {
   /** 集群列表数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 集群列表 */
-  NodeList: RabbitMQPrivateNode[] | null;
+  NodeList?: RabbitMQPrivateNode[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

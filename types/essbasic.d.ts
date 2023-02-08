@@ -934,6 +934,44 @@ declare interface ChannelCreateReleaseFlowResponse {
   RequestId?: string;
 }
 
+declare interface ChannelCreateSealPolicyRequest {
+  /** 用户渠道信息 */
+  Agent: Agent;
+  /** 指定印章 */
+  SealId: string;
+  /** 指定待授权的用户ID数组 */
+  UserIds: string[];
+  /** 企业机构信息 */
+  Organization?: OrganizationInfo;
+  /** 操作人（用户）信息 */
+  Operator?: UserInfo;
+}
+
+declare interface ChannelCreateSealPolicyResponse {
+  /** 最终授权成功的用户ID数组。其他的跳过的是已经授权了的 */
+  UserIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChannelDeleteSealPoliciesRequest {
+  /** 渠道信息 */
+  Agent: Agent;
+  /** 指定印章ID */
+  SealId: string;
+  /** 指定用户ID数组 */
+  UserIds: string[];
+  /** 操作人（用户）信息 */
+  Operator?: UserInfo;
+  /** 组织机构信息 */
+  Organization?: OrganizationInfo;
+}
+
+declare interface ChannelDeleteSealPoliciesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ChannelDescribeEmployeesRequest {
   /** 返回最大数量，最大为20 */
   Limit: number;
@@ -3007,6 +3045,10 @@ declare interface Essbasic {
   ChannelCreateMultiFlowSignQRCode(data: ChannelCreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateMultiFlowSignQRCodeResponse>;
   /** 发起解除协议 {@link ChannelCreateReleaseFlowRequest} {@link ChannelCreateReleaseFlowResponse} */
   ChannelCreateReleaseFlow(data: ChannelCreateReleaseFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateReleaseFlowResponse>;
+  /** 创建印章授权 {@link ChannelCreateSealPolicyRequest} {@link ChannelCreateSealPolicyResponse} */
+  ChannelCreateSealPolicy(data: ChannelCreateSealPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateSealPolicyResponse>;
+  /** 删除印章授权 {@link ChannelDeleteSealPoliciesRequest} {@link ChannelDeleteSealPoliciesResponse} */
+  ChannelDeleteSealPolicies(data: ChannelDeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDeleteSealPoliciesResponse>;
   /** 查询企业员工 {@link ChannelDescribeEmployeesRequest} {@link ChannelDescribeEmployeesResponse} */
   ChannelDescribeEmployees(data: ChannelDescribeEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeEmployeesResponse>;
   /** 查询渠道子客企业电子印章 {@link ChannelDescribeOrganizationSealsRequest} {@link ChannelDescribeOrganizationSealsResponse} */

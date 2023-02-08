@@ -1946,6 +1946,14 @@ declare interface VpcPrivateIpAddress {
   CreatedTime: string;
 }
 
+/** Vpc任务结果详细信息。 */
+declare interface VpcTaskResultDetailInfo {
+  /** 资源ID。 */
+  ResourceId: string | null;
+  /** 状态。 */
+  Status: string | null;
+}
+
 /** VPN通道对象。 */
 declare interface VpnConnection {
   /** 通道实例ID。 */
@@ -5076,6 +5084,8 @@ declare interface DescribeVpcTaskResultResponse {
   Status: string;
   /** 异步任务执行输出。 */
   Output: string;
+  /** 异步任务详细结果。只用于特殊场景，如批量删除弹性网卡时查询成功的网卡列表和失败的列表。 */
+  Result: VpcTaskResultDetailInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

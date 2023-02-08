@@ -2139,7 +2139,7 @@ declare interface InquiryPriceResizeInstanceDisksRequest {
 
 declare interface InquiryPriceResizeInstanceDisksResponse {
   /** 该参数表示磁盘扩容成对应配置的价格。 */
-  Price: Price;
+  Price?: Price;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

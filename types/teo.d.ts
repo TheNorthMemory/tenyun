@@ -1676,24 +1676,28 @@ declare interface WafRule {
 declare interface WebLogs {
   /** 请求（事件）ID。 */
   EventId: string;
-  /** 攻击源（客户端）Ip。 */
-  AttackIp: string;
-  /** 受攻击子域名。 */
-  Domain: string;
   /** http 日志内容。 */
   HttpLog: string;
+  /** 受攻击子域名。 */
+  Domain: string;
+  /** 攻击源（客户端）Ip。 */
+  AttackIp: string;
   /** IP所在国家iso-3166中alpha-2编码，编码信息请参考[ISO-3166](https://git.woa.com/edgeone/iso-3166/blob/master/all/all.json) */
   SipCountryCode: string;
+  /** 真实客户端Ip。 */
+  RealClientIp?: string;
+  /** 真实客户端Ip所在国家iso-3166中alpha-2编码。 */
+  RealClientIpCountryCode?: string;
   /** 攻击时间，采用unix秒级时间戳。 */
   AttackTime: number;
   /** 请求地址。 */
   RequestUri: string;
-  /** 攻击内容。 */
-  AttackContent: string | null;
-  /** 规则相关信息列表。 */
-  RuleDetailList: SecRuleRelatedInfo[] | null;
   /** 请求类型。 */
   ReqMethod: string | null;
+  /** 规则相关信息列表。 */
+  RuleDetailList: SecRuleRelatedInfo[] | null;
+  /** 攻击内容。 */
+  AttackContent: string | null;
   /** 日志所属区域。 */
   Area: string | null;
 }
@@ -2003,7 +2007,7 @@ declare interface CreateRuleRequest {
 
 declare interface CreateRuleResponse {
   /** 规则 ID。 */
-  RuleId: string;
+  RuleId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2821,7 +2825,7 @@ declare interface DescribeWebManagedRulesLogRequest {
   Limit?: number;
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
-  /** 筛选条件，key可选的值有：attackType：攻击类型；riskLevel：风险等级；action：执行动作（处置方式）；ruleId：规则id；sipCountryCode：ip所在国家；attackIp：攻击ip；oriDomain：被攻击的子域名；eventId：事件id；ua：用户代理；requestMethod：请求方法；uri：统一资源标识符。 */
+  /** 筛选条件，key可选的值有：attackType：攻击类型；riskLevel：风险等级；action：执行动作（处置方式）；ruleId：规则id；sipCountryCode：ip所在国家；attackIp：攻击ip；realClientIp：真实客户端ip；oriDomain：被攻击的子域名；eventId：事件id；ua：用户代理；requestMethod：请求方法；uri：统一资源标识符。 */
   QueryCondition?: QueryCondition[];
   /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据。不填将根据用户所在地智能选择地区。 */
   Area?: string;
@@ -3243,7 +3247,7 @@ declare interface ModifyRuleRequest {
 
 declare interface ModifyRuleResponse {
   /** 规则 ID。 */
-  RuleId: string;
+  RuleId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

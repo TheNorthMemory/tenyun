@@ -448,6 +448,22 @@ declare interface DescribeSpecResponse {
   RequestId?: string;
 }
 
+declare interface DestroyInstanceRequest {
+  /** 集群id */
+  InstanceId: string;
+}
+
+declare interface DestroyInstanceResponse {
+  /** 作业id */
+  FlowID?: string | null;
+  /** 集群id */
+  InstanceID?: string;
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyClusterConfigsRequest {
   /** 集群ID，例如cdwch-xxxx */
   InstanceId: string;
@@ -543,8 +559,10 @@ declare interface ScaleOutInstanceRequest {
   ScaleOutCluster?: string;
   /** 子网剩余ip数量，用于判断当前实例子网剩余ip数是否能扩容。需要根据实际填写 */
   UserSubnetIPNum?: number;
-  /** 节点同步ip */
+  /** 同步元数据节点IP （uip） */
   ScaleOutNodeIp?: string;
+  /** 缩容节点shard的节点IP （uip），其中ha集群需要主副节点ip都传入以逗号分隔 */
+  ReduceShardInfo?: string[];
 }
 
 declare interface ScaleOutInstanceResponse {
@@ -603,6 +621,8 @@ declare interface Cdwch {
   DescribeInstanceShards(data: DescribeInstanceShardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceShardsResponse>;
   /** 获取集群规格 {@link DescribeSpecRequest} {@link DescribeSpecResponse} */
   DescribeSpec(data: DescribeSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecResponse>;
+  /** 销毁集群api {@link DestroyInstanceRequest} {@link DestroyInstanceResponse} */
+  DestroyInstance(data: DestroyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyInstanceResponse>;
   /** 修改集群配置文件接口 {@link ModifyClusterConfigsRequest} {@link ModifyClusterConfigsResponse} */
   ModifyClusterConfigs(data: ModifyClusterConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterConfigsResponse>;
   /** KV模式修改配置接口 {@link ModifyInstanceKeyValConfigsRequest} {@link ModifyInstanceKeyValConfigsResponse} */
