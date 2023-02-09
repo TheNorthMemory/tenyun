@@ -214,6 +214,14 @@ declare interface MessageBody {
   Messages: Message[];
 }
 
+/** 号码信息 */
+declare interface NumberInfo {
+  /** 号码 */
+  Number?: string;
+  /** 绑定的外呼技能组 */
+  CallOutSkillGroupIds?: number[];
+}
+
 /** PSTN 会话类型。 */
 declare interface PSTNSession {
   /** 会话 ID */
@@ -546,6 +554,8 @@ declare interface TelCdrInfo {
   Remark?: string | null;
   /** 排队技能组名称 */
   QueuedSkillGroupName?: string | null;
+  /** 通话中语音留言录音URL */
+  VoicemailRecordURL?: string[] | null;
 }
 
 /** 变量 */
@@ -554,6 +564,20 @@ declare interface Variable {
   Key: string;
   /** 变量值 */
   Value: string;
+}
+
+declare interface BindNumberCallOutSkillGroupRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 待绑定的号码 */
+  Number: string;
+  /** 待绑定的技能组Id列表 */
+  SkillGroupIds: number[];
+}
+
+declare interface BindNumberCallOutSkillGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface BindStaffSkillGroupListRequest {
@@ -974,6 +998,24 @@ declare interface DescribeIMCdrsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNumbersRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 页数，从0开始 */
+  PageNumber?: number;
+  /** 分页大小，默认20 */
+  PageSize?: number;
+}
+
+declare interface DescribeNumbersResponse {
+  /** 总数量 */
+  TotalCount?: number;
+  /** 号码列表 */
+  Numbers?: NumberInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePSTNActiveSessionListRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -1236,6 +1278,20 @@ declare interface StopAutoCalloutTaskResponse {
   RequestId?: string;
 }
 
+declare interface UnbindNumberCallOutSkillGroupRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 待解绑的号码 */
+  Number: string;
+  /** 待解绑的技能组Id列表 */
+  SkillGroupIds: number[];
+}
+
+declare interface UnbindNumberCallOutSkillGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnbindStaffSkillGroupListRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -1253,6 +1309,8 @@ declare interface UnbindStaffSkillGroupListResponse {
 /** {@link Ccc 云呼叫中心} */
 declare interface Ccc {
   (): Versions;
+  /** 绑定号码外呼技能组 {@link BindNumberCallOutSkillGroupRequest} {@link BindNumberCallOutSkillGroupResponse} */
+  BindNumberCallOutSkillGroup(data: BindNumberCallOutSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<BindNumberCallOutSkillGroupResponse>;
   /** 绑定坐席所属技能组 {@link BindStaffSkillGroupListRequest} {@link BindStaffSkillGroupListResponse} */
   BindStaffSkillGroupList(data: BindStaffSkillGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<BindStaffSkillGroupListResponse>;
   /** 创建自动外呼任务 {@link CreateAutoCalloutTaskRequest} {@link CreateAutoCalloutTaskResponse} */
@@ -1295,6 +1353,8 @@ declare interface Ccc {
   DescribeExtensions(data: DescribeExtensionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtensionsResponse>;
   /** 查询在线客服记录 {@link DescribeIMCdrsRequest} {@link DescribeIMCdrsResponse} */
   DescribeIMCdrs(data: DescribeIMCdrsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIMCdrsResponse>;
+  /** 查询号码列表 {@link DescribeNumbersRequest} {@link DescribeNumbersResponse} */
+  DescribeNumbers(data: DescribeNumbersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNumbersResponse>;
   /** 获取 PSTN 活动会话列表 {@link DescribePSTNActiveSessionListRequest} {@link DescribePSTNActiveSessionListResponse} */
   DescribePSTNActiveSessionList(data: DescribePSTNActiveSessionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePSTNActiveSessionListResponse>;
   /** 获取主被叫受保护的电话服务记录与录音 {@link DescribeProtectedTelCdrRequest} {@link DescribeProtectedTelCdrResponse} */
@@ -1323,6 +1383,8 @@ declare interface Ccc {
   ResetExtensionPassword(data: ResetExtensionPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetExtensionPasswordResponse>;
   /** 停止自动外呼任务 {@link StopAutoCalloutTaskRequest} {@link StopAutoCalloutTaskResponse} */
   StopAutoCalloutTask(data: StopAutoCalloutTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopAutoCalloutTaskResponse>;
+  /** 解绑号码外呼技能组 {@link UnbindNumberCallOutSkillGroupRequest} {@link UnbindNumberCallOutSkillGroupResponse} */
+  UnbindNumberCallOutSkillGroup(data: UnbindNumberCallOutSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindNumberCallOutSkillGroupResponse>;
   /** 解绑坐席所属技能组 {@link UnbindStaffSkillGroupListRequest} {@link UnbindStaffSkillGroupListResponse} */
   UnbindStaffSkillGroupList(data: UnbindStaffSkillGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindStaffSkillGroupListResponse>;
 }

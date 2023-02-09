@@ -950,10 +950,10 @@ declare interface ThirdPartyPublishInfo {
 
 /** 时间范围 */
 declare interface TimeRange {
-  /** 开始时间，使用 ISO 日期格式。 */
-  StartTime: string;
-  /** 结束时间，使用 ISO 日期格式。 */
-  EndTime: string;
+  /** 开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  StartTime: string | null;
+  /** 结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  EndTime: string | null;
 }
 
 /** 云点播导出信息。 */

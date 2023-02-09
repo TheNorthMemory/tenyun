@@ -12,10 +12,12 @@ declare interface AccountCreateInfo {
   DBPrivileges?: DBPrivilege[];
   /** 账号备注信息 */
   Remark?: string;
-  /** 是否为管理员账户，默认为否 */
+  /** 是否为管理员账户，当值为true 等价于基础版AccountType=L0，高可用AccountType=L1，当值为false，等价于AccountType=L3 */
   IsAdmin?: boolean;
   /** win-windows鉴权,sql-sqlserver鉴权，不填默认值为sql-sqlserver鉴权 */
   Authentication?: string;
+  /** 账号类型，IsAdmin的扩展字段。 L0-超级权限(基础版独有),L1-高级权限,L2-特殊权限,L3-普通权限，默认L3 */
+  AccountType?: string;
 }
 
 /** 账户信息详情 */
@@ -42,6 +44,8 @@ declare interface AccountDetail {
   Authentication: string;
   /** win-windows鉴权账户需要host */
   Host: string;
+  /** 账号类型。L0-超级权限(基础版独有),L1-高级权限,L2-特殊权限,L3-普通权限 */
+  AccountType: string;
 }
 
 /** 实例账号密码信息 */
@@ -56,8 +60,10 @@ declare interface AccountPassword {
 declare interface AccountPrivilege {
   /** 数据库用户名 */
   UserName: string;
-  /** 数据库权限。ReadWrite表示可读写，ReadOnly表示只读 */
+  /** 数据库权限。ReadWrite表示可读写，ReadOnly表示只读,Delete表示删除DB对该账户的权限，DBOwner所有者 */
   Privilege: string;
+  /** 账户名称，L0-超级权限(基础版独有),L1-高级权限,L2-特殊权限,L3-普通权限 */
+  AccountType?: string;
 }
 
 /** 数据库账号权限变更信息 */
@@ -66,8 +72,10 @@ declare interface AccountPrivilegeModifyInfo {
   UserName: string;
   /** 账号权限变更信息 */
   DBPrivileges: DBPrivilegeModifyInfo[];
-  /** 是否为管理员账户 */
+  /** 是否为管理员账户,当值为true 等价于基础版AccountType=L0，高可用AccountType=L1，当值为false时，表示删除管理员权限，默认false */
   IsAdmin?: boolean;
+  /** 账号类型，IsAdmin字段的扩展字段。 L0-超级权限(基础版独有),L1-高级权限,L2-特殊权限,L3-普通权限，默认L3 */
+  AccountType?: string;
 }
 
 /** 账户备注信息 */
@@ -334,7 +342,7 @@ declare interface DBInstance {
 declare interface DBPrivilege {
   /** 数据库名 */
   DBName: string;
-  /** 数据库权限，ReadWrite表示可读写，ReadOnly表示只读 */
+  /** 数据库权限，ReadWrite表示可读写，ReadOnly表示只读，DBOwner所有者 */
   Privilege: string;
 }
 
@@ -342,7 +350,7 @@ declare interface DBPrivilege {
 declare interface DBPrivilegeModifyInfo {
   /** 数据库名 */
   DBName: string;
-  /** 权限变更信息。ReadWrite表示可读写，ReadOnly表示只读，Delete表示删除账号对该DB的权限 */
+  /** 权限变更信息。ReadWrite表示可读写，ReadOnly表示只读，Delete表示删除账号对该DB的权限，DBOwner所有者 */
   Privilege: string;
 }
 
@@ -352,6 +360,14 @@ declare interface DBRemark {
   Name: string;
   /** 备注信息 */
   Remark: string;
+}
+
+/** 数据库重命名返回参数 */
+declare interface DBRenameRes {
+  /** 新数据库名称 */
+  NewName: string;
+  /** 老数据库名称 */
+  OldName: string;
 }
 
 /** 该数据结构表示具有发布订阅关系的两个数据库。 */
@@ -412,6 +428,8 @@ declare interface DbNormalDetail {
   StateDesc: string;
   /** 用户类型 */
   UserAccessDesc: string;
+  /** 数据库创建时间 */
+  CreateTime?: string;
 }
 
 /** 数据库可回档时间范围信息 */
@@ -610,6 +628,8 @@ declare interface Migration {
   Action: MigrationAction;
   /** 是否是最终恢复，全量导入任务该字段为空 */
   IsRecovery: string | null;
+  /** 重命名的数据库名称集合 */
+  DBRename: DBRenameRes[] | null;
 }
 
 /** 冷备导入任务允许的操作 */
@@ -818,7 +838,7 @@ declare interface RegionInfo {
   RegionState: string;
 }
 
-/** 用于RestoreInstance，RollbackInstance，CreateMigration、CloneDB 等接口；对恢复的库进行重命名，且支持选择要恢复的库。 */
+/** 用于RestoreInstance，RollbackInstance，CreateMigration、CloneDB、ModifyBackupMigration 等接口；对恢复的库进行重命名，且支持选择要恢复的库。 */
 declare interface RenameRestoreDatabase {
   /** 库的名字，如果oldName不存在则返回失败。在用于离线迁移任务时可不填。 */
   OldName?: string;
@@ -1797,9 +1817,9 @@ declare interface DescribeDBsNormalRequest {
 
 declare interface DescribeDBsNormalResponse {
   /** 表示当前实例下的数据库总个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 返回数据库的详细配置信息，例如：数据库是否开启CDC、CT等 */
-  DBList: DbNormalDetail[];
+  DBList?: DbNormalDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2395,6 +2415,8 @@ declare interface ModifyBackupMigrationRequest {
   UploadType?: string;
   /** UploadType是COS_URL时这里时URL，COS_UPLOAD这里填备份文件的名字；只支持1个备份文件，但1个备份文件内可包含多个库 */
   BackupFiles?: string[];
+  /** 需要重命名的数据库名称集合 */
+  DBRename?: RenameRestoreDatabase[];
 }
 
 declare interface ModifyBackupMigrationResponse {

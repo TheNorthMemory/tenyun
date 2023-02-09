@@ -20,6 +20,12 @@ declare interface AppCustomContent {
   CssUrl?: string;
 }
 
+/** 背景图片配置 */
+declare interface BackgroundPictureConfig {
+  /** 背景图片的url */
+  Url: string | null;
+}
+
 /** 批量注册用户信息 */
 declare interface BatchUserInfo {
   /** 低代码互动课堂的SdkAppId。 */
@@ -28,6 +34,38 @@ declare interface BatchUserInfo {
   UserId?: string | null;
   /** 用户在客户系统的Id。 若用户注册时该字段为空，则默认为 UserId 值一致。 */
   OriginId?: string | null;
+}
+
+/** 文档信息 */
+declare interface DocumentInfo {
+  /** 文档Id */
+  DocumentId?: string | null;
+  /** 文档原址url */
+  DocumentUrl?: string | null;
+  /** 文档名称 */
+  DocumentName?: string | null;
+  /** 文档所有者UserId */
+  Owner?: string | null;
+  /** 应用Id */
+  SdkAppId?: number | null;
+  /** 文档权限，0：私有课件 1：公共课件 */
+  Permission?: number | null;
+  /** 转码结果，无需转码为空，转码成功为结果url，转码失败为错误码 */
+  TranscodeResult?: string | null;
+  /** 转码类型 */
+  TranscodeType?: number | null;
+  /** 转码进度， 0 - 100 表示（0% - 100%） */
+  TranscodeProgress?: number | null;
+  /** 转码状态，0为无需转码，1为正在转码，2为转码失败，3为转码成功 */
+  TranscodeState?: number | null;
+  /** 转码失败后的错误信息 */
+  TranscodeInfo?: string | null;
+  /** 文档类型 */
+  DocumentType?: string | null;
+  /** 文档大小，单位：字节 */
+  DocumentSize?: number | null;
+  /** 更新的UNIX时间戳 */
+  UpdateTime?: number | null;
 }
 
 /** 成员记录信息。 */
@@ -56,8 +94,104 @@ declare interface MemberRecord {
   Rewords: number;
 }
 
+/** 批量创建房间的房间信息 */
+declare interface RoomInfo {
+  /** 房间名称。 */
+  Name: string | null;
+  /** 预定的房间开始时间，unix时间戳。 */
+  StartTime: number | null;
+  /** 预定的房间结束时间，unix时间戳。 */
+  EndTime: number | null;
+  /** 分辨率。可以有如下取值： 1 标清 2 高清 3 全高清 */
+  Resolution: number | null;
+  /** 最大连麦人数（不包括老师）。取值范围[0, 16] */
+  MaxMicNumber: number | null;
+  /** 房间子类型，可以有以下取值： videodoc 文档+视频 video 纯视频 coteaching 双师 */
+  SubType: string | null;
+  /** 老师ID。通过[注册用户]接口获取的UserId。 */
+  TeacherId?: string | null;
+  /** 进入课堂时是否自动连麦。可以有以下取值： 0 不自动连麦（需要手动申请上麦，默认值） 1 自动连麦 */
+  AutoMic?: number | null;
+  /** 释放音视频权限后是否自动取消连麦。可以有以下取值： 0 自动取消连麦（默认值） 1 保持连麦状态 */
+  TurnOffMic?: number | null;
+  /** 高音质模式。可以有以下取值： 0 不开启高音质（默认值） 1 开启高音质 */
+  AudioQuality?: number | null;
+  /** 上课后是否禁止自动录制。可以有以下取值： 0 不禁止录制（自动开启录制，默认值） 1 禁止录制 注：如果该配置取值为0，录制将从上课后开始，课堂结束后停止。 */
+  DisableRecord?: number | null;
+  /** 助教Id列表。通过[注册用户]接口获取的UserId。 */
+  Assistants?: string[] | null;
+  /** rtc人数。 */
+  RTCAudienceNumber?: number | null;
+  /** 观看类型。 */
+  AudienceType?: number | null;
+  /** 录制布局。 */
+  RecordLayout?: number | null;
+}
+
 /** 场景配置 */
 declare interface SceneItem {
+}
+
+/** 文字水印配置 */
+declare interface TextMarkConfig {
+  /** 文字水印内容 */
+  Text?: string | null;
+  /** 文字水印颜色 */
+  Color?: string | null;
+}
+
+/** 用户信息结构体 */
+declare interface UserInfo {
+  /** 应用Id。 */
+  SdkAppId?: number | null;
+  /** 用户Id。 */
+  UserId?: string | null;
+  /** 用户昵称。 */
+  Name?: string | null;
+  /** 用户头像Url。 */
+  Avatar?: string | null;
+}
+
+/** 水印配置 */
+declare interface WatermarkConfig {
+  /** 水印图片的url */
+  Url?: string | null;
+  /** 水印宽。为比例值 */
+  Width?: number | null;
+  /** 水印高。为比例值 */
+  Height?: number | null;
+  /** 水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间。 */
+  LocationX?: number | null;
+  /** 水印Y偏移, 取值:0-100, 表示区域Y方向的百分比。比如50，则表示位于Y轴中间。 */
+  LocationY?: number | null;
+}
+
+declare interface BatchCreateRoomRequest {
+  /** 低代码平台的SdkAppId。 */
+  SdkAppId: number;
+  /** 创建房间ID列表 */
+  RoomInfos: RoomInfo[];
+}
+
+declare interface BatchCreateRoomResponse {
+  /** 创建成功课堂ID，与传入课堂信息顺序一致 */
+  RoomIds?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchDeleteRecordRequest {
+  /** 房间ID列表 */
+  RoomIds: number[];
+  /** 低代码互动课堂的SdkAppId。 */
+  SdkAppId: number;
+}
+
+declare interface BatchDeleteRecordResponse {
+  /** 本次操作删除成功的房间ID列表。如果入参列表中某个房间ID的录制文件已经删除，则出参列表中无对应的房间ID。 */
+  RoomIds?: number[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface BatchRegisterRequest {
@@ -167,6 +301,28 @@ declare interface CreateSupervisorResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDocumentRequest {
+  /** 文档ID。 */
+  DocumentId: string;
+}
+
+declare interface DeleteDocumentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRecordRequest {
+  /** 房间Id。 */
+  RoomId: number;
+  /** 低代码互动课堂的SdkAppId。 */
+  SdkAppId: number;
+}
+
+declare interface DeleteRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteRoomRequest {
   /** 房间ID。 */
   RoomId: number;
@@ -191,6 +347,68 @@ declare interface DescribeAppDetailResponse {
   AppConfig?: AppConfig;
   /** 场景配置 */
   SceneConfig?: SceneItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDocumentRequest {
+  /** 文档Id（唯一id） */
+  DocumentId: string;
+}
+
+declare interface DescribeDocumentResponse {
+  /** 文档Id */
+  DocumentId: string;
+  /** 文档原址url */
+  DocumentUrl: string;
+  /** 文档名称 */
+  DocumentName: string;
+  /** 文档所有者UserId */
+  Owner: string;
+  /** 应用Id */
+  SdkAppId: number;
+  /** 文档权限 */
+  Permission: number;
+  /** 转码结果，无需转码为空，转码成功为结果url，转码失败为错误码 */
+  TranscodeResult: string;
+  /** 转码类型 */
+  TranscodeType: number;
+  /** 转码进度， 0 - 100 表示（0% - 100%） */
+  TranscodeProgress: number;
+  /** 转码状态，0为无需转码，1为正在转码，2为转码失败，3为转码成功 */
+  TranscodeState: number;
+  /** 转码失败后的错误信息 */
+  TranscodeInfo: string;
+  /** 文档类型 */
+  DocumentType: string;
+  /** 文档大小，单位：字节 */
+  DocumentSize: number;
+  /** 更新的UNIX时间戳 */
+  UpdateTime: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDocumentsByRoomRequest {
+  /** 房间ID。 */
+  RoomId: number;
+  /** 低代码互动课堂的SdkAppId */
+  SdkAppId: number;
+  /** 分页查询当前页数，从1开始递增，默认值为1 */
+  Page?: number;
+  /** 每页数据量，最大1000，默认值为100 */
+  Limit?: number;
+  /** 课件权限。[0]：获取owner的私有课件；[1]：获取owner的公开课件;[0,1]：则获取owner的私有课件和公开课件；[2]：获取owner的私有课件和所有人(包括owner)的公开课件。默认值为[2] */
+  Permission?: number[];
+  /** 文档所有者的user_id，不填默认获取SdkAppId下所有课件 */
+  Owner?: string;
+}
+
+declare interface DescribeDocumentsByRoomResponse {
+  /** 文档信息列表 */
+  Documents?: DocumentInfo[] | null;
+  /** 符合查询条件文档总数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -253,6 +471,24 @@ declare interface DescribeRoomStatisticsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSdkAppIdUsersRequest {
+  /** 应用ID */
+  SdkAppId: number;
+  /** 分页，默认值为1 */
+  Page?: number;
+  /** 分页数据限制，默认值为20 */
+  Limit?: number;
+}
+
+declare interface DescribeSdkAppIdUsersResponse {
+  /** 用户总数 */
+  Total?: number;
+  /** 当前获取用户信息数组列表 */
+  Users?: UserInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserRequest {
   /** 用户Id。 */
   UserId: string;
@@ -267,6 +503,24 @@ declare interface DescribeUserResponse {
   Name: string;
   /** 用户头像Url。 */
   Avatar: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetWatermarkRequest {
+  /** 低代码互动课堂的SdkAppId。 */
+  SdkAppId: number;
+}
+
+declare interface GetWatermarkResponse {
+  /** 老师视频区域的水印参数配置 */
+  TeacherLogo?: WatermarkConfig | null;
+  /** 白板区域的水印参数配置 */
+  BoardLogo?: WatermarkConfig | null;
+  /** 背景图片配置 */
+  BackgroundPicture?: BackgroundPictureConfig | null;
+  /** 文字水印配置 */
+  Text?: TextMarkConfig | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -349,6 +603,20 @@ declare interface ModifyRoomResponse {
   RequestId?: string;
 }
 
+declare interface ModifyUserProfileRequest {
+  /** 待修改用户ID */
+  UserId: string;
+  /** 待修改的用户名 */
+  Nickname?: string;
+  /** 待修改头像url */
+  Avatar?: string;
+}
+
+declare interface ModifyUserProfileResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RegisterUserRequest {
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId: number;
@@ -381,6 +649,42 @@ declare interface SetAppCustomContentResponse {
   RequestId?: string;
 }
 
+declare interface SetWatermarkRequest {
+  /** 低代码互动课堂的SdkAppId。 */
+  SdkAppId: number;
+  /** 老师视频区域的水印参数地址，设置为空字符串表示删除 */
+  TeacherUrl?: string;
+  /** 白板视频区域的水印参数地址，设置为空字符串表示删除 */
+  BoardUrl?: string;
+  /** 视频默认图片（在没有视频流的时候显示），设置为空字符串表示删除 */
+  VideoUrl?: string;
+  /** 白板区域水印的宽度，取值:0-100，默认为0，表示区域X方向的百分比 */
+  BoardW?: number;
+  /** 白板区域水印的高度，取值:0-100，默认为0, 表示区域Y方向的百分比 */
+  BoardH?: number;
+  /** 白板区域水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间 */
+  BoardX?: number;
+  /** 白板区域水印Y偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间 */
+  BoardY?: number;
+  /** 老师视频区域水印的宽度，取值:0-100，默认为0，表示区域X方向的百分比 */
+  TeacherW?: number;
+  /** 老师视频区域水印的高度，取值:0-100，默认为0, 表示区域Y方向的百分比 */
+  TeacherH?: number;
+  /** 老师视频区域水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间 */
+  TeacherX?: number;
+  /** 老师视频区域水印Y偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间 */
+  TeacherY?: number;
+  /** 文字水印内容，设置为空字符串表示删除 */
+  Text?: string;
+  /** 文字水印颜色 */
+  TextColor?: string;
+}
+
+declare interface SetWatermarkResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnbindDocumentFromRoomRequest {
   /** 房间ID。 */
   RoomId: number;
@@ -396,6 +700,10 @@ declare interface UnbindDocumentFromRoomResponse {
 /** {@link Lcic 低代码互动课堂} */
 declare interface Lcic {
   (): Versions;
+  /** 批量创建房间 {@link BatchCreateRoomRequest} {@link BatchCreateRoomResponse} */
+  BatchCreateRoom(data: BatchCreateRoomRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateRoomResponse>;
+  /** 批量删除多个房间的录制文件 {@link BatchDeleteRecordRequest} {@link BatchDeleteRecordResponse} */
+  BatchDeleteRecord(data: BatchDeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteRecordResponse>;
   /** 用户批量注册 {@link BatchRegisterRequest} {@link BatchRegisterResponse} */
   BatchRegister(data: BatchRegisterRequest, config?: AxiosRequestConfig): AxiosPromise<BatchRegisterResponse>;
   /** 绑定文档到房间 {@link BindDocumentToRoomRequest} {@link BindDocumentToRoomResponse} */
@@ -406,16 +714,28 @@ declare interface Lcic {
   CreateRoom(data: CreateRoomRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoomResponse>;
   /** 创建巡课 {@link CreateSupervisorRequest} {@link CreateSupervisorResponse} */
   CreateSupervisor(data?: CreateSupervisorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSupervisorResponse>;
+  /** 删除文档 {@link DeleteDocumentRequest} {@link DeleteDocumentResponse} */
+  DeleteDocument(data: DeleteDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDocumentResponse>;
+  /** 删除指定房间的录制文件 {@link DeleteRecordRequest} {@link DeleteRecordResponse} */
+  DeleteRecord(data: DeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordResponse>;
   /** 删除房间 {@link DeleteRoomRequest} {@link DeleteRoomResponse} */
   DeleteRoom(data: DeleteRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoomResponse>;
   /** 获取应用详情 {@link DescribeAppDetailRequest} {@link DescribeAppDetailResponse} */
   DescribeAppDetail(data: DescribeAppDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppDetailResponse>;
+  /** 获取文档信息 {@link DescribeDocumentRequest} {@link DescribeDocumentResponse} */
+  DescribeDocument(data: DescribeDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocumentResponse>;
+  /** 获取指定房间下文档 {@link DescribeDocumentsByRoomRequest} {@link DescribeDocumentsByRoomResponse} */
+  DescribeDocumentsByRoom(data: DescribeDocumentsByRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocumentsByRoomResponse>;
   /** 获取房间信息 {@link DescribeRoomRequest} {@link DescribeRoomResponse} */
   DescribeRoom(data: DescribeRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomResponse>;
   /** 获取房间统计信息 {@link DescribeRoomStatisticsRequest} {@link DescribeRoomStatisticsResponse} */
   DescribeRoomStatistics(data: DescribeRoomStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomStatisticsResponse>;
+  /** 获取应用ID下用户列表 {@link DescribeSdkAppIdUsersRequest} {@link DescribeSdkAppIdUsersResponse} */
+  DescribeSdkAppIdUsers(data: DescribeSdkAppIdUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSdkAppIdUsersResponse>;
   /** 获取用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
   DescribeUser(data: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
+  /** 获取水印设置 {@link GetWatermarkRequest} {@link GetWatermarkResponse} */
+  GetWatermark(data: GetWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<GetWatermarkResponse>;
   /** 源账号登录 {@link LoginOriginIdRequest} {@link LoginOriginIdResponse} */
   LoginOriginId(data: LoginOriginIdRequest, config?: AxiosRequestConfig): AxiosPromise<LoginOriginIdResponse>;
   /** 登录 {@link LoginUserRequest} {@link LoginUserResponse} */
@@ -424,10 +744,14 @@ declare interface Lcic {
   ModifyApp(data: ModifyAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppResponse>;
   /** 修改房间 {@link ModifyRoomRequest} {@link ModifyRoomResponse} */
   ModifyRoom(data: ModifyRoomRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoomResponse>;
+  /** 修改用户配置 {@link ModifyUserProfileRequest} {@link ModifyUserProfileResponse} */
+  ModifyUserProfile(data: ModifyUserProfileRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserProfileResponse>;
   /** 注册用户 {@link RegisterUserRequest} {@link RegisterUserResponse} */
   RegisterUser(data: RegisterUserRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterUserResponse>;
   /** 设置应用自定义内容 {@link SetAppCustomContentRequest} {@link SetAppCustomContentResponse} */
   SetAppCustomContent(data: SetAppCustomContentRequest, config?: AxiosRequestConfig): AxiosPromise<SetAppCustomContentResponse>;
+  /** 设置水印 {@link SetWatermarkRequest} {@link SetWatermarkResponse} */
+  SetWatermark(data: SetWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<SetWatermarkResponse>;
   /** 文档从房间解绑 {@link UnbindDocumentFromRoomRequest} {@link UnbindDocumentFromRoomResponse} */
   UnbindDocumentFromRoom(data: UnbindDocumentFromRoomRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDocumentFromRoomResponse>;
 }

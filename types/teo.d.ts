@@ -8,6 +8,24 @@ declare interface AccelerateType {
   Switch: string;
 }
 
+/** 加速域名 */
+declare interface AccelerationDomain {
+  /** 源站信息。 */
+  OriginDetail?: OriginDetail | null;
+  /** 创建时间。 */
+  CreatedOn?: string;
+  /** 加速域名名称。 */
+  DomainName?: string;
+  /** 修改时间。 */
+  ModifiedOn?: string;
+  /** 站点 ID。 */
+  ZoneId?: string;
+  /** 加速域名状态，取值有：online：已生效；process：部署中；offline：已停用；forbidden：已封禁；init：未生效，待激活站点； */
+  DomainStatus?: string;
+  /** CNAME 地址。 */
+  Cname?: string;
+}
+
 /** 精准防护条件 */
 declare interface AclCondition {
   /** 匹配字段，取值有：host：请求域名；sip：客户端IP；ua：User-Agent；cookie：会话 Cookie；cgi：CGI 脚本；xff：XFF 扩展头部；url：请求 URL；accept：请求内容类型；method：请求方式；header：请求头部；app_proto：应用层协议；sip_proto：网络层协议。 */
@@ -792,6 +810,24 @@ declare interface Origin {
   CosPrivateAccess?: string | null;
 }
 
+/** 加速域名源站信息。 */
+declare interface OriginDetail {
+  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6或域名类型源站；COS：COS源。ORIGIN_GROUP：源站组类型源站。AWS_S3：AWS S3对象存储源站。 */
+  OriginType?: string;
+  /** 源站地址，当OriginType参数指定为ORIGIN_GROUP时，该参数填写源站组ID，其他情况下填写源站地址。 */
+  Origin?: string;
+  /** 备用源站组ID，该参数在OriginType参数指定为ORIGIN_GROUP时生效，为空表示不使用备用源站。 */
+  BackupOrigin?: string;
+  /** 主源源站组名称，当OriginType参数指定为ORIGIN_GROUP时该参数生效。 */
+  OriginGroupName?: string;
+  /** 备用源站源站组名称，当OriginType参数指定为ORIGIN_GROUP，且用户指定了被用源站时该参数生效。 */
+  BackOriginGroupName?: string;
+  /** 指定是否允许访问私有对象存储源站。当源站类型OriginType=COS或AWS_S3时有效 取值有：on：使用私有鉴权；off：不使用私有鉴权。不填写，默认值为off。 */
+  PrivateAccess?: string;
+  /** 私有鉴权使用参数，当源站类型PrivateAccess=on时有效。 */
+  PrivateParameters?: PrivateParameter[] | null;
+}
+
 /** 源站组信息 */
 declare interface OriginGroup {
   /** 站点ID。 */
@@ -812,6 +848,20 @@ declare interface OriginGroup {
   UpdateTime?: string;
   /** 当OriginType=self时，表示回源Host。 */
   HostHeader?: string | null;
+}
+
+/** 加速域名源站信息。 */
+declare interface OriginInfo {
+  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6或域名类型源站；COS：COS源。ORIGIN_GROUP：源站组类型源站。AWS_S3：AWS S3对象存储源站。 */
+  OriginType: string | null;
+  /** 源站地址，当OriginType参数指定为ORIGIN_GROUP时，该参数填写源站组ID，其他情况下填写源站地址。 */
+  Origin: string | null;
+  /** 备用源站组ID，该参数在OriginType参数指定为ORIGIN_GROUP时生效，为空表示不使用备用源站。 */
+  BackupOrigin?: string | null;
+  /** 指定是否允许访问私有对象存储源站，当源站类型OriginType=COS或AWS_S3时有效，取值有：on：使用私有鉴权；off：不使用私有鉴权。不填写，默认值为：off。 */
+  PrivateAccess?: string | null;
+  /** 私有鉴权使用参数，当源站类型PrivateAccess=on时有效。 */
+  PrivateParameters?: PrivateParameter[] | null;
 }
 
 /** 源站防护信息 */
@@ -1818,6 +1868,20 @@ declare interface CheckCertificateResponse {
   RequestId?: string;
 }
 
+declare interface CreateAccelerationDomainRequest {
+  /** 加速域名所属站点ID。 */
+  ZoneId: string;
+  /** 加速域名名称。 */
+  DomainName: string;
+  /** 源站信息。 */
+  OriginInfo: OriginInfo;
+}
+
+declare interface CreateAccelerationDomainResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAliasDomainRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -2046,6 +2110,20 @@ declare interface CreateZoneResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAccelerationDomainsRequest {
+  /** 加速域名所属站点ID。 */
+  ZoneId: string;
+  /** 需要删除的加速域名ID列表。 */
+  DomainNames: string[];
+  /** 是否强制删除。当域名存在关联资源（如马甲域名、流量调度功能）时，是否强制删除该域名，取值有： true：删除该域名及所有关联资源； false：当该加速域名存在关联资源时，不允许删除。不填写，默认值为：false。 */
+  Force?: boolean;
+}
+
+declare interface DeleteAccelerationDomainsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAliasDomainRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -2114,6 +2192,32 @@ declare interface DeleteZoneRequest {
 }
 
 declare interface DeleteZoneResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccelerationDomainsRequest {
+  /** 加速域名所属站点ID。不填写该参数默认返回所有站点下的加速域名。 */
+  ZoneId: string;
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：domain-name 按照【加速域名名称】进行过滤。 类型：String 必选：否origin-type 按照【源站类型】进行过滤。 类型：String 必选：否origin 按照【主源站地址】进行过滤。 类型：String 必选：否backup-origin 按照【备用源站地址】进行过滤。 类型：String 必选：否 */
+  Filters?: AdvancedFilter[];
+  /** 列表排序方式，取值有：asc：升序排列；desc：降序排列。默认值为asc。 */
+  Direction?: string;
+  /** 匹配方式，取值有：all：返回匹配所有查询条件的加速域名；any：返回匹配任意一个查询条件的加速域名。默认值为all。 */
+  Match?: string;
+  /** 分页查询限制数目，默认值：20，上限：200。 */
+  Limit?: number;
+  /** 分页查询偏移量，默认为 0。 */
+  Offset?: number;
+  /** 排序依据，取值有：created_on：加速域名创建时间；domain-name：加速域名名称；默认根据domain-name属性排序。 */
+  Order?: string;
+}
+
+declare interface DescribeAccelerationDomainsResponse {
+  /** 加速域名总数。 */
+  TotalCount: number;
+  /** 加速域名列表。 */
+  AccelerationDomains: AccelerationDomain[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3052,6 +3156,36 @@ declare interface IdentifyZoneResponse {
   Ascription: AscriptionInfo;
   /** 站点归属权校验：文件校验信息。 */
   FileAscription: FileAscriptionInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAccelerationDomainRequest {
+  /** 加速域名所属站点ID。 */
+  ZoneId: string;
+  /** 加速域名名称。 */
+  DomainName: string;
+  /** 源站信息。 */
+  OriginInfo: OriginInfo;
+}
+
+declare interface ModifyAccelerationDomainResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAccelerationDomainStatusesRequest {
+  /** 加速域名所属站点ID。 */
+  ZoneId: string;
+  /** 要执行状态变更的加速域名列表。 */
+  DomainNames: string[];
+  /** 加速域名状态，取值有：online：启用；offline：停用。 */
+  Status: string;
+  /** 是否强制停用。当域名存在关联资源（如马甲域名、流量调度功能）时，是否强制停用该域名，取值有： true：停用该域名及所有关联资源； false：当该加速域名存在关联资源时，不允许停用。不填写，默认值为：false。 */
+  Force?: boolean;
+}
+
+declare interface ModifyAccelerationDomainStatusesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7583,6 +7717,8 @@ declare interface Teo {
   BindZoneToPlan(data: BindZoneToPlanRequest, config?: AxiosRequestConfig): AxiosPromise<BindZoneToPlanResponse>;
   /** 校验证书 {@link CheckCertificateRequest} {@link CheckCertificateResponse} */
   CheckCertificate(data: CheckCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCertificateResponse>;
+  /** 创建加速域名 {@link CreateAccelerationDomainRequest} {@link CreateAccelerationDomainResponse} */
+  CreateAccelerationDomain(data: CreateAccelerationDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccelerationDomainResponse>;
   /** 创建别称域名 {@link CreateAliasDomainRequest} {@link CreateAliasDomainResponse} */
   CreateAliasDomain(data: CreateAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAliasDomainResponse>;
   /** 创建应用代理 {@link CreateApplicationProxyRequest} {@link CreateApplicationProxyResponse} */
@@ -7607,6 +7743,8 @@ declare interface Teo {
   CreateSpeedTesting(data: CreateSpeedTestingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSpeedTestingResponse>;
   /** 创建站点 {@link CreateZoneRequest} {@link CreateZoneResponse} */
   CreateZone(data: CreateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreateZoneResponse>;
+  /** 批量删除加速域名 {@link DeleteAccelerationDomainsRequest} {@link DeleteAccelerationDomainsResponse} */
+  DeleteAccelerationDomains(data: DeleteAccelerationDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccelerationDomainsResponse>;
   /** 删除别称域名 {@link DeleteAliasDomainRequest} {@link DeleteAliasDomainResponse} */
   DeleteAliasDomain(data: DeleteAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAliasDomainResponse>;
   /** 删除应用代理 {@link DeleteApplicationProxyRequest} {@link DeleteApplicationProxyResponse} */
@@ -7619,6 +7757,8 @@ declare interface Teo {
   DeleteRules(data: DeleteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRulesResponse>;
   /** 删除站点 {@link DeleteZoneRequest} {@link DeleteZoneResponse} */
   DeleteZone(data: DeleteZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteZoneResponse>;
+  /** 查询加速域名列表 {@link DescribeAccelerationDomainsRequest} {@link DescribeAccelerationDomainsResponse} */
+  DescribeAccelerationDomains(data: DescribeAccelerationDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccelerationDomainsResponse>;
   /** 查询剩余可添加的日志推送实体列表 {@link DescribeAddableEntityListRequest} {@link DescribeAddableEntityListResponse} */
   DescribeAddableEntityList(data: DescribeAddableEntityListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddableEntityListResponse>;
   /** 查询别称域名信息列表 {@link DescribeAliasDomainsRequest} {@link DescribeAliasDomainsResponse} */
@@ -7705,6 +7845,10 @@ declare interface Teo {
   DownloadL7Logs(data: DownloadL7LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL7LogsResponse>;
   /** 认证站点 {@link IdentifyZoneRequest} {@link IdentifyZoneResponse} */
   IdentifyZone(data: IdentifyZoneRequest, config?: AxiosRequestConfig): AxiosPromise<IdentifyZoneResponse>;
+  /** 修改加速域名信息 {@link ModifyAccelerationDomainRequest} {@link ModifyAccelerationDomainResponse} */
+  ModifyAccelerationDomain(data: ModifyAccelerationDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccelerationDomainResponse>;
+  /** 批量修改加速域名状态 {@link ModifyAccelerationDomainStatusesRequest} {@link ModifyAccelerationDomainStatusesResponse} */
+  ModifyAccelerationDomainStatuses(data: ModifyAccelerationDomainStatusesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccelerationDomainStatusesResponse>;
   /** 修改别称域名 {@link ModifyAliasDomainRequest} {@link ModifyAliasDomainResponse} */
   ModifyAliasDomain(data: ModifyAliasDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAliasDomainResponse>;
   /** 修改别称域名状态 {@link ModifyAliasDomainStatusRequest} {@link ModifyAliasDomainStatusResponse} */

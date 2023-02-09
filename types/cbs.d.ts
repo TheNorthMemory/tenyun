@@ -154,6 +154,8 @@ declare interface Disk {
   CreateTime?: string;
   /** 销毁云盘时删除关联的非永久保留快照。0 表示非永久快照不随云盘销毁而销毁，1表示非永久快照随云盘销毁而销毁，默认取0。快照是否永久保留可以通过DescribeSnapshots接口返回的快照详情的IsPermanent字段来判断，true表示永久快照，false表示非永久快照。 */
   DeleteSnapshot: number;
+  /** 云硬盘备份点配额。表示最大可以保留的备份点数量。 */
+  DiskBackupQuota: number;
   /** 云硬盘备份点已使用的数量。 */
   DiskBackupCount: number;
   /** 云硬盘挂载实例的类型。取值范围：CVMEKS */
