@@ -5873,7 +5873,7 @@ declare interface DescribeDailyMostPlayedStatRequest {
   Date: string;
   /** 域名。查询该域名播放 Top100 的媒体文件的统计数据。默认查询所有域名的播放统计数据。 */
   DomainName?: string;
-  /** Top 数据的统计指标，取值有：Traffic：播放流量，按播放流量统计 Top100 的数据。PlayTimes：播放次数，按播放次数统计播放 Top100 的数据。 */
+  /** Top 数据的统计指标，取值有：Traffic：播放流量，按播放流量统计 Top100 的数据。PlayTimes：播放次数，按播放次数统计播放 Top100 的数据。默认值为Traffic。 */
   Metric?: string;
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: number;
@@ -5881,7 +5881,7 @@ declare interface DescribeDailyMostPlayedStatRequest {
 
 declare interface DescribeDailyMostPlayedStatResponse {
   /** 媒体文件播放统计信息。 */
-  DailyPlayStatInfoSet: DailyPlayStatInfo[];
+  DailyPlayStatInfoSet?: DailyPlayStatInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

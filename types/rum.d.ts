@@ -1572,6 +1572,44 @@ declare interface DescribeRumGroupLogResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRumLogExportRequest {
+  /** 导出标识name */
+  Name: string;
+  /** 开始时间（必填） */
+  StartTime: string;
+  /** 查询语句，参考控制台请求参数，语句长度最大为4096（必填） */
+  Query: string;
+  /** 结束时间（必填） */
+  EndTime: string;
+  /** 项目ID（必填） */
+  ID: number;
+  /** field条件 */
+  Fields?: string[];
+}
+
+declare interface DescribeRumLogExportResponse {
+  /** 返回字符串 */
+  Result: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRumLogExportsRequest {
+  /** 页面大小 */
+  PageSize: number;
+  /** 页数，第几页 */
+  PageNum: number;
+  /** 项目ID（必填） */
+  ID: number;
+}
+
+declare interface DescribeRumLogExportsResponse {
+  /** 返回字符串 */
+  Result: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRumLogListRequest {
   /** 排序方式 desc asc（必填） */
   OrderBy: string;
@@ -1790,6 +1828,16 @@ declare interface ResumeInstanceResponse {
   RequestId?: string;
 }
 
+declare interface ResumeProjectRequest {
+  /** 项目 id */
+  ProjectId: number;
+}
+
+declare interface ResumeProjectResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopInstanceRequest {
   /** 需要停止的实例id */
   InstanceId: string;
@@ -1903,6 +1951,10 @@ declare interface Rum {
   DescribeReleaseFiles(data: DescribeReleaseFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseFilesResponse>;
   /** 获取Rum日志聚合信息 {@link DescribeRumGroupLogRequest} {@link DescribeRumGroupLogResponse} */
   DescribeRumGroupLog(data: DescribeRumGroupLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumGroupLogResponse>;
+  /** 导出Rum日志列表 {@link DescribeRumLogExportRequest} {@link DescribeRumLogExportResponse} */
+  DescribeRumLogExport(data: DescribeRumLogExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogExportResponse>;
+  /** 获取Rum日志导出列表 {@link DescribeRumLogExportsRequest} {@link DescribeRumLogExportsResponse} */
+  DescribeRumLogExports(data: DescribeRumLogExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogExportsResponse>;
   /** 获取Rum日志列表 {@link DescribeRumLogListRequest} {@link DescribeRumLogListResponse} */
   DescribeRumLogList(data: DescribeRumLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogListResponse>;
   /** 获取Rum分钟级日志列表 {@link DescribeRumStatsLogListRequest} {@link DescribeRumStatsLogListResponse} */
@@ -1925,6 +1977,8 @@ declare interface Rum {
   ModifyProjectLimit(data: ModifyProjectLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectLimitResponse>;
   /** 恢复 RUM 业务系统 {@link ResumeInstanceRequest} {@link ResumeInstanceResponse} */
   ResumeInstance(data: ResumeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeInstanceResponse>;
+  /** 恢复 RUM 应用 {@link ResumeProjectRequest} {@link ResumeProjectResponse} */
+  ResumeProject(data: ResumeProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeProjectResponse>;
   /** 停止RUM业务系统 {@link StopInstanceRequest} {@link StopInstanceResponse} */
   StopInstance(data: StopInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstanceResponse>;
   /** 停止应用上报 {@link StopProjectRequest} {@link StopProjectResponse} */

@@ -6,7 +6,7 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 declare interface ApolloEnvParam {
   /** 环境名称 */
   Name: string;
-  /** 环境内引擎的节点规格 ID */
+  /** 环境内引擎的节点规格 ID-1C2G-2C4G兼容原spec-xxxxxx形式的规格ID */
   EngineResourceSpec: string;
   /** 环境内引擎的节点数量 */
   EngineNodeNum: number;
@@ -16,6 +16,8 @@ declare interface ApolloEnvParam {
   VpcId: string;
   /** 子网 ID。在 VPC 的子网内分配一个 IP 作为 ConfigServer 的访问地址 */
   SubnetId: string;
+  /** 环境描述 */
+  EnvDesc?: string;
 }
 
 /** 服务治理引擎绑定的kubernetes信息 */
@@ -78,6 +80,8 @@ declare interface EnvAddressInfo {
   ConfigInternetServiceIp: string;
   /** config内网访问地址 */
   ConfigIntranetAddress: string | null;
+  /** 是否开启config内网clb */
+  EnableConfigIntranet?: boolean | null;
 }
 
 /** 环境具体信息 */
@@ -287,13 +291,13 @@ declare interface CreateEngineRequest {
   EngineType: string;
   /** 引擎的开源版本。每种引擎支持的开源版本不同，请参考产品文档或者控制台购买页 */
   EngineVersion: string;
-  /** 引擎的产品版本。参考值：- STANDARD： 标准版引擎各版本及可选择的规格、节点数说明：apollo - STANDARD版本规格列表：spec-qcr53kf1t（1C2G）,spec-qdr53kf2w（2C4G）节点数：1，2，3，4，5eureka - STANDARD版本规格列表：spec-qvj6k7t4q（1C2G）,spec-qcr53kfjt（2C4G）,spec-qvj6k7t4m（4G8G）,spec-qcr54kfjt（8C16G）,spec-qcr55kfjt（16C32G）节点数：3，4，5 */
+  /** 引擎的产品版本。参考值：- STANDARD： 标准版引擎各版本及可选择的规格、节点数说明：apollo - STANDARD版本规格列表：1C2G、2C4G、4C8G、8C16G、16C32G节点数：1，2，3，4，5eureka - STANDARD版本规格列表：1C2G、2C4G、4C8G、8C16G、16C32G节点数：3，4，5polarismesh - STANDARD版本规格列表：NUM50、NUM100、NUM200、NUM500、NUM1000、NUM5000、NUM10000、NUM50000兼容原spec-xxxxxx形式的规格ID */
   EngineProductVersion: string;
   /** 引擎所在地域。参考值说明：中国区 参考值：- ap-guangzhou：广州- ap-beijing：北京- ap-chengdu：成都- ap-chongqing：重庆- ap-nanjing：南京- ap-shanghai：上海- ap-hongkong：香港- ap-taipei：台北亚太区 参考值：- ap-jakarta：雅加达- ap-singapore：新加坡北美区 参考值- na-toronto：多伦多金融专区 参考值- ap-beijing-fsi：北京金融- ap-shanghai-fsi：上海金融- ap-shenzhen-fsi：深圳金融 */
   EngineRegion: string;
   /** 引擎名称。参考值：- eurek-test */
   EngineName: string;
-  /** 付费类型。参考值：- 0：后付费- 1：预付费 */
+  /** 付费类型。参考值：- 0：后付费- 1：预付费（接口暂不支持创建预付费实例） */
   TradeType: number;
   /** 引擎的节点规格 ID。参见EngineProductVersion字段说明 */
   EngineResourceSpec?: string;
@@ -317,7 +321,7 @@ declare interface CreateEngineRequest {
 
 declare interface CreateEngineResponse {
   /** 引擎实例 ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -210,16 +210,18 @@ declare interface CCN {
   QosLevel?: string;
   /** 付费类型，PREPAID为预付费，POSTPAID为后付费。 */
   InstanceChargeType?: string | null;
-  /** 限速类型，INTER_REGION_LIMIT为地域间限速；OUTER_REGION_LIMIT为地域出口限速。 */
+  /** 限速类型，`INTER_REGION_LIMIT` 为地域间限速；`OUTER_REGION_LIMIT` 为地域出口限速。 */
   BandwidthLimitType?: string | null;
   /** 标签键值对。 */
   TagSet?: Tag[];
-  /** 是否支持云联网路由优先级的功能。False：不支持，True：支持。 */
+  /** 是否支持云联网路由优先级的功能。`False`：不支持，`True`：支持。 */
   RoutePriorityFlag?: boolean;
   /** 实例关联的路由表个数。 */
   RouteTableCount?: number | null;
-  /** 是否开启云联网多路由表特性。False：未开启，True：开启。 */
+  /** 是否开启云联网多路由表特性。`False`：未开启，`True`：开启。 */
   RouteTableFlag?: boolean | null;
+  /** `true`：实例已被封禁，流量不通，`false`:解封禁。 */
+  IsSecurityLock?: boolean | null;
   /** 是否开启云联网路由传播策略。`False` 未开启，`True` 开启。 */
   RouteBroadcastPolicyFlag?: boolean | null;
 }
@@ -426,13 +428,13 @@ declare interface CrossBorderCompliance {
 
 /** 跨境带宽监控数据 */
 declare interface CrossBorderFlowMonitorData {
-  /** 入带宽 */
+  /** 入带宽，单位：`bps`。 */
   InBandwidth: number[];
-  /** 出带宽 */
+  /** 出带宽，单位：`bps`。 */
   OutBandwidth: number[];
-  /** 入包 */
+  /** 入包，单位：`pps`。 */
   InPkg: number[];
-  /** 出包 */
+  /** 出包，单位：`pps`。 */
   OutPkg: number[];
 }
 
@@ -2621,11 +2623,11 @@ declare interface CreateCcnRequest {
   CcnName: string;
   /** CCN描述信息，最大长度不能超过100个字节。 */
   CcnDescription?: string;
-  /** CCN服务质量，'PT'：白金，'AU'：金，'AG'：银，默认为‘AU’。 */
+  /** CCN服务质量，`PT`：白金，`AU`：金，`AG`：银，默认为`AU`。 */
   QosLevel?: string;
-  /** 计费模式，PREPAID：表示预付费，即包年包月，POSTPAID：表示后付费，即按量计费。默认：POSTPAID。 */
+  /** 计费模式，`PREPAID`：表示预付费，即包年包月，`POSTPAID`：表示后付费，即按量计费。默认：`POSTPAID`。 */
   InstanceChargeType?: string;
-  /** 限速类型，OUTER_REGION_LIMIT表示地域出口限速，INTER_REGION_LIMIT为地域间限速，默认为OUTER_REGION_LIMIT。预付费模式仅支持地域间限速，后付费模式支持地域间限速和地域出口限速。 */
+  /** 限速类型，`OUTER_REGION_LIMIT`表示地域出口限速，`INTER_REGION_LIMIT`为地域间限速，默认为`OUTER_REGION_LIMIT`。预付费模式仅支持地域间限速，后付费模式支持地域间限速和地域出口限速。 */
   BandwidthLimitType?: string;
   /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}] */
   Tags?: Tag[];
@@ -2633,7 +2635,7 @@ declare interface CreateCcnRequest {
 
 declare interface CreateCcnResponse {
   /** 云联网（CCN）对象。 */
-  Ccn: CCN;
+  Ccn?: CCN;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3963,9 +3965,9 @@ declare interface DescribeCcnRegionBandwidthLimitsResponse {
 }
 
 declare interface DescribeCcnRoutesRequest {
-  /** CCN实例ID，形如：ccn-gree226l。 */
+  /** CCN实例ID，形如：`ccn-gree226l`。 */
   CcnId: string;
-  /** CCN路由策略唯一ID。形如：ccnr-f49l6u0z。 */
+  /** CCN路由策略唯一ID，形如：`ccnr-f49l6u0z`。 */
   RouteIds?: string[];
   /** 过滤条件，参数不支持同时指定RouteIds和Filters。route-id - String -（过滤条件）路由策略ID。cidr-block - String -（过滤条件）目的端。instance-type - String -（过滤条件）下一跳类型。instance-region - String -（过滤条件）下一跳所属地域。instance-id - String -（过滤条件）下一跳实例ID。route-table-id - String -（过滤条件）路由表ID列表，形如ccntr-1234edfr，可以根据路由表ID 过滤。 */
   Filters?: Filter[];
@@ -3977,9 +3979,9 @@ declare interface DescribeCcnRoutesRequest {
 
 declare interface DescribeCcnRoutesResponse {
   /** 符合条件的对象数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** CCN路由策略对象。 */
-  RouteSet: CcnRoute[];
+  RouteSet?: CcnRoute[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3987,7 +3989,7 @@ declare interface DescribeCcnRoutesResponse {
 declare interface DescribeCcnsRequest {
   /** CCN实例ID。形如：ccn-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定CcnIds和Filters。 */
   CcnIds?: string[];
-  /** 过滤条件，参数不支持同时指定CcnIds和Filters。ccn-id - String - （过滤条件）CCN唯一ID，形如：vpc-f49l6u0z。ccn-name - String - （过滤条件）CCN名称。ccn-description - String - （过滤条件）CCN描述。state - String - （过滤条件）实例状态， 'ISOLATED': 隔离中（欠费停服），'AVAILABLE'：运行中。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例：查询绑定了标签的CCN列表。 */
+  /** 过滤条件，参数不支持同时指定CcnIds和Filters。ccn-id - String - （过滤条件）CCN唯一ID，形如：`ccn-f49l6u0z`。ccn-name - String - （过滤条件）CCN名称。ccn-description - String - （过滤条件）CCN描述。state - String - （过滤条件）实例状态， 'ISOLATED': 隔离中（欠费停服），'AVAILABLE'：运行中。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例：查询绑定了标签的CCN列表。 */
   Filters?: Filter[];
   /** 偏移量 */
   Offset?: number;
@@ -4001,9 +4003,9 @@ declare interface DescribeCcnsRequest {
 
 declare interface DescribeCcnsResponse {
   /** 符合条件的对象数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** CCN对象。 */
-  CcnSet: CCN[];
+  CcnSet?: CCN[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -2299,9 +2299,9 @@ declare interface Iai {
   GetPersonList(data: GetPersonListRequest, config?: AxiosRequestConfig): AxiosPromise<GetPersonListResponse>;
   /** 获取人员列表长度 {@link GetPersonListNumRequest} {@link GetPersonListNumResponse} */
   GetPersonListNum(data: GetPersonListNumRequest, config?: AxiosRequestConfig): AxiosPromise<GetPersonListNumResponse>;
-  /** 获取人员库升级任务列表 {@link GetUpgradeGroupFaceModelVersionJobListRequest} {@link GetUpgradeGroupFaceModelVersionJobListResponse} */
+  /** @deprecated 获取人员库升级任务列表 {@link GetUpgradeGroupFaceModelVersionJobListRequest} {@link GetUpgradeGroupFaceModelVersionJobListResponse} */
   GetUpgradeGroupFaceModelVersionJobList(data?: GetUpgradeGroupFaceModelVersionJobListRequest, config?: AxiosRequestConfig): AxiosPromise<GetUpgradeGroupFaceModelVersionJobListResponse>;
-  /** 人员库升级结果查询 {@link GetUpgradeGroupFaceModelVersionResultRequest} {@link GetUpgradeGroupFaceModelVersionResultResponse} */
+  /** @deprecated 人员库升级结果查询 {@link GetUpgradeGroupFaceModelVersionResultRequest} {@link GetUpgradeGroupFaceModelVersionResultResponse} */
   GetUpgradeGroupFaceModelVersionResult(data: GetUpgradeGroupFaceModelVersionResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetUpgradeGroupFaceModelVersionResultResponse>;
   /** 修改人员库 {@link ModifyGroupRequest} {@link ModifyGroupResponse} */
   ModifyGroup(data: ModifyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGroupResponse>;
@@ -2309,7 +2309,7 @@ declare interface Iai {
   ModifyPersonBaseInfo(data: ModifyPersonBaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonBaseInfoResponse>;
   /** 修改人员描述信息 {@link ModifyPersonGroupInfoRequest} {@link ModifyPersonGroupInfoResponse} */
   ModifyPersonGroupInfo(data: ModifyPersonGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonGroupInfoResponse>;
-  /** 人员库版本回滚 {@link RevertGroupFaceModelVersionRequest} {@link RevertGroupFaceModelVersionResponse} */
+  /** @deprecated 人员库版本回滚 {@link RevertGroupFaceModelVersionRequest} {@link RevertGroupFaceModelVersionResponse} */
   RevertGroupFaceModelVersion(data: RevertGroupFaceModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<RevertGroupFaceModelVersionResponse>;
   /** 人脸搜索 {@link SearchFacesRequest} {@link SearchFacesResponse} */
   SearchFaces(data: SearchFacesRequest, config?: AxiosRequestConfig): AxiosPromise<SearchFacesResponse>;
@@ -2319,7 +2319,7 @@ declare interface Iai {
   SearchPersons(data: SearchPersonsRequest, config?: AxiosRequestConfig): AxiosPromise<SearchPersonsResponse>;
   /** 人员搜索按库返回 {@link SearchPersonsReturnsByGroupRequest} {@link SearchPersonsReturnsByGroupResponse} */
   SearchPersonsReturnsByGroup(data: SearchPersonsReturnsByGroupRequest, config?: AxiosRequestConfig): AxiosPromise<SearchPersonsReturnsByGroupResponse>;
-  /** 人员库升级 {@link UpgradeGroupFaceModelVersionRequest} {@link UpgradeGroupFaceModelVersionResponse} */
+  /** @deprecated 人员库升级 {@link UpgradeGroupFaceModelVersionRequest} {@link UpgradeGroupFaceModelVersionResponse} */
   UpgradeGroupFaceModelVersion(data: UpgradeGroupFaceModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeGroupFaceModelVersionResponse>;
   /** 人脸验证 {@link VerifyFaceRequest} {@link VerifyFaceResponse} */
   VerifyFace(data: VerifyFaceRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyFaceResponse>;
@@ -2365,9 +2365,9 @@ declare interface Iai {
   GetPersonList(data: V20180301.GetPersonListRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetPersonListResponse>;
   /** 获取人员列表长度 {@link V20180301.GetPersonListNumRequest} {@link V20180301.GetPersonListNumResponse} */
   GetPersonListNum(data: V20180301.GetPersonListNumRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetPersonListNumResponse>;
-  /** 获取人员库升级任务列表 {@link V20180301.GetUpgradeGroupFaceModelVersionJobListRequest} {@link V20180301.GetUpgradeGroupFaceModelVersionJobListResponse} */
+  /** @deprecated 获取人员库升级任务列表 {@link V20180301.GetUpgradeGroupFaceModelVersionJobListRequest} {@link V20180301.GetUpgradeGroupFaceModelVersionJobListResponse} */
   GetUpgradeGroupFaceModelVersionJobList(data: V20180301.GetUpgradeGroupFaceModelVersionJobListRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetUpgradeGroupFaceModelVersionJobListResponse>;
-  /** 人员库升级结果查询 {@link V20180301.GetUpgradeGroupFaceModelVersionResultRequest} {@link V20180301.GetUpgradeGroupFaceModelVersionResultResponse} */
+  /** @deprecated 人员库升级结果查询 {@link V20180301.GetUpgradeGroupFaceModelVersionResultRequest} {@link V20180301.GetUpgradeGroupFaceModelVersionResultResponse} */
   GetUpgradeGroupFaceModelVersionResult(data: V20180301.GetUpgradeGroupFaceModelVersionResultRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetUpgradeGroupFaceModelVersionResultResponse>;
   /** 修改人员库 {@link V20180301.ModifyGroupRequest} {@link V20180301.ModifyGroupResponse} */
   ModifyGroup(data: V20180301.ModifyGroupRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.ModifyGroupResponse>;
@@ -2375,7 +2375,7 @@ declare interface Iai {
   ModifyPersonBaseInfo(data: V20180301.ModifyPersonBaseInfoRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.ModifyPersonBaseInfoResponse>;
   /** 修改人员描述信息 {@link V20180301.ModifyPersonGroupInfoRequest} {@link V20180301.ModifyPersonGroupInfoResponse} */
   ModifyPersonGroupInfo(data: V20180301.ModifyPersonGroupInfoRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.ModifyPersonGroupInfoResponse>;
-  /** 人员库版本回滚 {@link V20180301.RevertGroupFaceModelVersionRequest} {@link V20180301.RevertGroupFaceModelVersionResponse} */
+  /** @deprecated 人员库版本回滚 {@link V20180301.RevertGroupFaceModelVersionRequest} {@link V20180301.RevertGroupFaceModelVersionResponse} */
   RevertGroupFaceModelVersion(data: V20180301.RevertGroupFaceModelVersionRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.RevertGroupFaceModelVersionResponse>;
   /** 人脸搜索 {@link V20180301.SearchFacesRequest} {@link V20180301.SearchFacesResponse} */
   SearchFaces(data: V20180301.SearchFacesRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.SearchFacesResponse>;
@@ -2385,7 +2385,7 @@ declare interface Iai {
   SearchPersons(data: V20180301.SearchPersonsRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.SearchPersonsResponse>;
   /** 人员搜索按库返回 {@link V20180301.SearchPersonsReturnsByGroupRequest} {@link V20180301.SearchPersonsReturnsByGroupResponse} */
   SearchPersonsReturnsByGroup(data: V20180301.SearchPersonsReturnsByGroupRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.SearchPersonsReturnsByGroupResponse>;
-  /** 人员库升级 {@link V20180301.UpgradeGroupFaceModelVersionRequest} {@link V20180301.UpgradeGroupFaceModelVersionResponse} */
+  /** @deprecated 人员库升级 {@link V20180301.UpgradeGroupFaceModelVersionRequest} {@link V20180301.UpgradeGroupFaceModelVersionResponse} */
   UpgradeGroupFaceModelVersion(data: V20180301.UpgradeGroupFaceModelVersionRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.UpgradeGroupFaceModelVersionResponse>;
   /** 人脸验证 {@link V20180301.VerifyFaceRequest} {@link V20180301.VerifyFaceResponse} */
   VerifyFace(data: V20180301.VerifyFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.VerifyFaceResponse>;

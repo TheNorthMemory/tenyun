@@ -1327,7 +1327,7 @@ declare interface CreateListenerRequest {
   LoadBalancerId: string;
   /** 要将监听器创建到哪些端口，每个端口对应一个新的监听器。 */
   Ports: number[];
-  /** 监听器协议： TCP | UDP | HTTP | HTTPS | TCP_SSL（TCP_SSL 正在内测中，如需使用请通过工单申请）。 */
+  /** 监听器协议： TCP | UDP | HTTP | HTTPS | TCP_SSL | QUIC。 */
   Protocol: string;
   /** 要创建的监听器名称列表，名称与Ports数组按序一一对应，如不需立即命名，则无需提供此参数。 */
   ListenerNames?: string[];
@@ -1361,7 +1361,7 @@ declare interface CreateListenerRequest {
 
 declare interface CreateListenerResponse {
   /** 创建的监听器的唯一标识数组。 */
-  ListenerIds: string[];
+  ListenerIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

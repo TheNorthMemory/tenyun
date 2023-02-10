@@ -470,7 +470,7 @@ declare interface BriefDomain {
   Domain?: string;
   /** 域名对应的 CNAME 地址 */
   Cname?: string;
-  /** 加速服务状态rejected：域名审核未通过，域名备案过期/被注销导致processing：部署中online：已启动offline：已关闭 */
+  /** 加速服务状态rejected：域名审核未通过，域名备案过期/被注销导致processing：部署中closing：关闭中online：已启动offline：已关闭 */
   Status?: string;
   /** 项目 ID，可前往腾讯云项目管理页面查看 */
   ProjectId?: number;
@@ -788,7 +788,7 @@ declare interface DetailDomain {
   Domain: string;
   /** 域名对应的 CNAME 地址 */
   Cname: string | null;
-  /** 加速服务状态rejected：域名审核未通过，域名备案过期/被注销导致processing：部署中online：已启动offline：已关闭 */
+  /** 加速服务状态rejected：域名审核未通过，域名备案过期/被注销导致processing：部署中closing：关闭中online：已启动offline：已关闭 */
   Status: string;
   /** 项目 ID，可前往腾讯云项目管理页面查看 */
   ProjectId: number;

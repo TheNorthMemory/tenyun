@@ -835,7 +835,7 @@ declare interface CreateFlowRemindsRequest {
 
 declare interface CreateFlowRemindsResponse {
   /** 签署连接过期时间字符串：年月日-时分秒 */
-  RemindFlowRecords: RemindFlowRecords[];
+  RemindFlowRecords?: RemindFlowRecords[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1395,7 +1395,7 @@ declare interface Ess {
   CreateFlowByFiles(data: CreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowByFilesResponse>;
   /** 创建并返回出证报告 {@link CreateFlowEvidenceReportRequest} {@link CreateFlowEvidenceReportResponse} */
   CreateFlowEvidenceReport(data: CreateFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowEvidenceReportResponse>;
-  /** 电子签企业版-合同催办接口 {@link CreateFlowRemindsRequest} {@link CreateFlowRemindsResponse} */
+  /** 合同催办 {@link CreateFlowRemindsRequest} {@link CreateFlowRemindsResponse} */
   CreateFlowReminds(data: CreateFlowRemindsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowRemindsResponse>;
   /** 提交企业签署流程审批结果 {@link CreateFlowSignReviewRequest} {@link CreateFlowSignReviewResponse} */
   CreateFlowSignReview(data: CreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignReviewResponse>;

@@ -804,6 +804,14 @@ declare interface ContainerGroupDetail {
   MaxUnavailable: string | null;
   /** 部署组健康检查设置 */
   HealthCheckSettings: HealthCheckSettings | null;
+  /** 允许PlainYamlDeploy */
+  AllowPlainYamlDeploy?: boolean | null;
+  /** 是否不等于ServiceConfig */
+  IsNotEqualServiceConfig?: boolean | null;
+  /** 仓库名 */
+  RepoName?: string | null;
+  /** 别名 */
+  Alias?: string | null;
 }
 
 /** cos临时帐号信息 */
@@ -3795,6 +3803,18 @@ declare interface DeleteContainerGroupRequest {
 declare interface DeleteContainerGroupResponse {
   /** 删除操作是否成功：true：成功false：失败 */
   Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteFileConfigRequest {
+  /** 文件配置项ID */
+  ConfigId: string;
+}
+
+declare interface DeleteFileConfigResponse {
+  /** 删除结果 */
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6921,6 +6941,8 @@ declare interface Tsf {
   DeleteConfigTemplate(data: DeleteConfigTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigTemplateResponse>;
   /** 删除容器部署组 {@link DeleteContainerGroupRequest} {@link DeleteContainerGroupResponse} */
   DeleteContainerGroup(data: DeleteContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteContainerGroupResponse>;
+  /** 删除文件配置项 {@link DeleteFileConfigRequest} {@link DeleteFileConfigResponse} */
+  DeleteFileConfig(data: DeleteFileConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFileConfigResponse>;
   /** 删除虚拟机部署组 {@link DeleteGroupRequest} {@link DeleteGroupResponse} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
   /** 批量删除镜像版本 {@link DeleteImageTagsRequest} {@link DeleteImageTagsResponse} */

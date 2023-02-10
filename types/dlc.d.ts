@@ -2497,9 +2497,19 @@ declare interface DropDMSTableResponse {
 }
 
 declare interface GenerateCreateMangedTableSqlRequest {
+  /** 表基本信息 */
+  TableBaseInfo: TableBaseInfo;
+  /** 表字段信息 */
+  Columns: TColumn[];
+  /** 表分区信息 */
+  Partitions?: TPartition[];
+  /** 表属性信息 */
+  Properties?: Property[];
 }
 
 declare interface GenerateCreateMangedTableSqlResponse {
+  /** 创建托管存储内表sql语句描述 */
+  Execution: Execution;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2838,7 +2848,7 @@ declare interface Dlc {
   /** DMS元数据删除表 {@link DropDMSTableRequest} {@link DropDMSTableResponse} */
   DropDMSTable(data?: DropDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<DropDMSTableResponse>;
   /** 生成创建托管表语句 {@link GenerateCreateMangedTableSqlRequest} {@link GenerateCreateMangedTableSqlResponse} */
-  GenerateCreateMangedTableSql(data?: GenerateCreateMangedTableSqlRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateCreateMangedTableSqlResponse>;
+  GenerateCreateMangedTableSql(data: GenerateCreateMangedTableSqlRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateCreateMangedTableSqlResponse>;
   /** 日志列表 {@link ListTaskJobLogDetailRequest} {@link ListTaskJobLogDetailResponse} */
   ListTaskJobLogDetail(data: ListTaskJobLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskJobLogDetailResponse>;
   /** 元数据锁 {@link LockMetaDataRequest} {@link LockMetaDataResponse} */

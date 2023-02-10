@@ -28,7 +28,7 @@ declare interface AccountQuotaOverview {
 declare interface ActionTimer {
   /** 定时器名称，目前仅支持销毁一个值：TerminateInstances。 */
   TimerAction?: string;
-  /** 执行时间，格式形如：2018-5-29 11:26:40,执行时间必须大于当前时间5分钟。 */
+  /** 执行时间，按照ISO8601标准表示，并且使用UTC时间。格式为 YYYY-MM-DDThh:mm:ssZ。例如 2018-05-29T11:26:40Z，执行时间必须大于当前时间5分钟。 */
   ActionTime?: string;
   /** 扩展数据 */
   Externals?: Externals;
@@ -2662,7 +2662,7 @@ declare interface RunInstancesRequest {
 
 declare interface RunInstancesResponse {
   /** 当通过本接口来创建实例时会返回该参数，表示一个或多个实例`ID`。返回实例`ID`列表并不代表实例创建成功，可根据 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口查询返回的InstancesSet中对应实例的`ID`的状态来判断创建是否完成；如果实例状态由“PENDING(创建中)”变为“RUNNING(运行中)”，则为创建成功。 */
-  InstanceIdSet: string[];
+  InstanceIdSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

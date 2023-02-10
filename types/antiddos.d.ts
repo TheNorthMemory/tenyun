@@ -752,6 +752,10 @@ declare interface Layer7Rule {
   InstanceDetails: InstanceRelation[];
   /** 规则所属的资源实例 */
   InstanceDetailRule?: RuleInstanceRelation[];
+  /** 协议 */
+  Protocol?: string;
+  /** 端口号 */
+  Vport?: number;
 }
 
 /** 域名与协议纬度的CC防护阈值 */
@@ -1050,6 +1054,8 @@ declare interface SourceServer {
   RsType: number;
   /** 源站的回源权重，取值1~100 */
   Weight: number;
+  /** 端口号：0~65535 */
+  Port?: number;
 }
 
 /** 限速值类型，例如：包速率pps、带宽bps */

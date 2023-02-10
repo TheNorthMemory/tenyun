@@ -520,6 +520,8 @@ declare interface InternalTenant {
   MaxPublishRateInBytes: number | null;
   /** 消息最大保留空间，MB为单位 */
   MaxRetentionSizeInMB: number | null;
+  /** public Access Enabled */
+  PublicAccessEnabled: boolean | null;
 }
 
 /** 分区topic */
@@ -635,23 +637,25 @@ declare interface RetentionPolicy {
 /** RocketMQ集群配置 */
 declare interface RocketMQClusterConfig {
   /** 单命名空间TPS上线 */
-  MaxTpsPerNamespace: number;
+  MaxTpsPerNamespace?: number;
   /** 最大命名空间数量 */
-  MaxNamespaceNum: number;
+  MaxNamespaceNum?: number;
   /** 已使用命名空间数量 */
-  UsedNamespaceNum: number;
+  UsedNamespaceNum?: number;
   /** 最大Topic数量 */
-  MaxTopicNum: number;
+  MaxTopicNum?: number;
   /** 已使用Topic数量 */
-  UsedTopicNum: number;
+  UsedTopicNum?: number;
   /** 最大Group数量 */
-  MaxGroupNum: number;
+  MaxGroupNum?: number;
   /** 已使用Group数量 */
-  UsedGroupNum: number;
+  UsedGroupNum?: number;
   /** 消息最大保留时间，以毫秒为单位 */
-  MaxRetentionTime: number;
+  MaxRetentionTime?: number;
   /** 消息最长延时，以毫秒为单位 */
-  MaxLatencyTime: number;
+  MaxLatencyTime?: number;
+  /** 单个主题最大队列数 */
+  MaxQueuesPerTopic?: number | null;
 }
 
 /** 租户RocketMQ集群详细信息 */
@@ -786,7 +790,7 @@ declare interface RocketMQVipInstance {
   InstanceName: string;
   /** 实例版本 */
   InstanceVersion: string | null;
-  /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常 */
+  /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败 */
   Status: number;
   /** 节点数量 */
   NodeCount: number;
