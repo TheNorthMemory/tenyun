@@ -82,6 +82,14 @@ declare interface ApiDetailInfo {
   Description: string | null;
   /** API路径匹配类型。normal：普通API；wildcard：通配API。 */
   ApiMatchType: string | null;
+  /** RPC 额外信息 */
+  RpcExt?: string | null;
+  /** 部署组id */
+  GatewayDeployGroupId?: string | null;
+  /** md5 */
+  Md5?: string | null;
+  /** RPC 类型 */
+  RpcType?: string | null;
 }
 
 /** API分组信息 */

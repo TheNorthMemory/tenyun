@@ -3194,7 +3194,9 @@ declare interface CreateSearchTemplateResponse {
 
 declare interface DeleteAttackLogsRequest {
   /** 日志ID数组，最大100条。 */
-  Ids: number[];
+  Ids?: number[];
+  /** 是否全部删除 */
+  IsAll?: boolean;
 }
 
 declare interface DeleteAttackLogsResponse {
@@ -7322,7 +7324,7 @@ declare interface Cwp {
   /** 添加检索模板 {@link CreateSearchTemplateRequest} {@link CreateSearchTemplateResponse} */
   CreateSearchTemplate(data: CreateSearchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSearchTemplateResponse>;
   /** 删除网络攻击日志 {@link DeleteAttackLogsRequest} {@link DeleteAttackLogsResponse} */
-  DeleteAttackLogs(data: DeleteAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackLogsResponse>;
+  DeleteAttackLogs(data?: DeleteAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackLogsResponse>;
   /** 删除基线策略配置 {@link DeleteBaselinePolicyRequest} {@link DeleteBaselinePolicyResponse} */
   DeleteBaselinePolicy(data: DeleteBaselinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBaselinePolicyResponse>;
   /** 删除基线策略 {@link DeleteBaselineStrategyRequest} {@link DeleteBaselineStrategyResponse} */

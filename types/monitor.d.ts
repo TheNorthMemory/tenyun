@@ -3917,13 +3917,15 @@ declare interface DescribePrometheusTempSyncResponse {
 }
 
 declare interface DescribePrometheusZonesRequest {
-  /** 地域 ID */
-  RegionId: number;
+  /** 地域 ID（RegionId 和 RegionName 只需要填一个） */
+  RegionId?: number;
+  /** 地域名（RegionId 和 RegionName 只需要填一个） */
+  RegionName?: string;
 }
 
 declare interface DescribePrometheusZonesResponse {
   /** 区域列表 */
-  ZoneSet: PrometheusZoneItem[] | null;
+  ZoneSet?: PrometheusZoneItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4996,7 +4998,7 @@ declare interface Monitor {
   /** 获取模板关联实例信息 {@link DescribePrometheusTempSyncRequest} {@link DescribePrometheusTempSyncResponse} */
   DescribePrometheusTempSync(data: DescribePrometheusTempSyncRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusTempSyncResponse>;
   /** 列出 Prometheus 服务可用区 {@link DescribePrometheusZonesRequest} {@link DescribePrometheusZonesResponse} */
-  DescribePrometheusZones(data: DescribePrometheusZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusZonesResponse>;
+  DescribePrometheusZones(data?: DescribePrometheusZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusZonesResponse>;
   /** 查询预聚合规则 {@link DescribeRecordingRulesRequest} {@link DescribeRecordingRulesResponse} */
   DescribeRecordingRules(data: DescribeRecordingRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordingRulesResponse>;
   /** 列出授权账号 {@link DescribeSSOAccountRequest} {@link DescribeSSOAccountResponse} */

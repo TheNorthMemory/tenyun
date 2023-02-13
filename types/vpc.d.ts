@@ -300,6 +300,10 @@ declare interface CcnInstance {
   RouteTableId?: string | null;
 }
 
+/** 云联网实例对象，该对象特用于运营端使用，不建议给租户的接口中提供该复杂类型。 */
+declare interface CcnInstanceInfo {
+}
+
 /** 云联网（CCN）地域出带宽上限 */
 declare interface CcnRegionBandwidthLimit {
   /** 地域，例如：ap-guangzhou */
@@ -3953,7 +3957,7 @@ declare interface DescribeCcnAttachedInstancesResponse {
 }
 
 declare interface DescribeCcnRegionBandwidthLimitsRequest {
-  /** CCN实例ID。形如：ccn-f49l6u0z。 */
+  /** CCN实例ID，形如：ccn-f49l6u0z。 */
   CcnId: string;
 }
 
@@ -4085,25 +4089,25 @@ declare interface DescribeCrossBorderComplianceResponse {
 }
 
 declare interface DescribeCrossBorderFlowMonitorRequest {
-  /** 源地域 */
+  /** 源地域。 */
   SourceRegion: string;
-  /** 目的地域 */
+  /** 目的地域。 */
   DestinationRegion: string;
-  /** 云联网Id */
+  /** 云联网ID。 */
   CcnId: string;
-  /** 云联网所属账号 */
+  /** 云联网所属账号。 */
   CcnUin: string;
-  /** 时间粒度 */
+  /** 时间粒度。 */
   Period: number;
-  /** 开始时间 */
+  /** 开始时间。 */
   StartTime: string;
-  /** 结束时间 */
+  /** 结束时间。 */
   EndTime: string;
 }
 
 declare interface DescribeCrossBorderFlowMonitorResponse {
   /** 云联网跨境带宽监控数据 */
-  CrossBorderFlowMonitorData: CrossBorderFlowMonitorData[] | null;
+  CrossBorderFlowMonitorData?: CrossBorderFlowMonitorData[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4915,9 +4919,19 @@ declare interface DescribeTemplateLimitsResponse {
 }
 
 declare interface DescribeTenantCcnsRequest {
+  /** 过滤条件，目前`value`值个数只支持一个，允许可支持的字段有：`ccn-ids` 云联网ID数组，值形如：`["ccn-12345678"]` `user-account-id` 用户账号ID，值形如：`["12345678"]``is-security-lock` 是否锁定，值形如：`["true"]` */
+  Filters?: Filter[];
+  /** 偏移量，默认0。 */
+  Offset?: number;
+  /** 单页返回数据量，可选值0到100之间的整数，默认20。 */
+  Limit?: number;
 }
 
 declare interface DescribeTenantCcnsResponse {
+  /** 云联网（CCN）对象。 */
+  CcnSet?: CcnInstanceInfo[] | null;
+  /** 符合条件的对象总数。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6661,7 +6675,7 @@ declare interface ReturnNormalAddressesResponse {
 }
 
 declare interface SetCcnRegionBandwidthLimitsRequest {
-  /** CCN实例ID。形如：ccn-f49l6u0z。 */
+  /** CCN实例ID，形如：ccn-f49l6u0z。 */
   CcnId: string;
   /** 云联网（CCN）各地域出带宽上限。 */
   CcnRegionBandwidthLimits: CcnRegionBandwidthLimit[];

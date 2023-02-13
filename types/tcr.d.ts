@@ -38,6 +38,12 @@ declare interface AutoDelStrategyInfoResp {
   StrategyInfo: AutoDelStrategyInfo[] | null;
 }
 
+/** 命名空间漏洞白名单列表 */
+declare interface CVEWhitelistItem {
+  /** 漏洞白名单 ID */
+  CVEID?: string | null;
+}
+
 /** 自定义域名信息 */
 declare interface CustomizedDomainInfo {
   /** 实例ID */
@@ -630,6 +636,14 @@ declare interface TcrNamespaceInfo {
   TagSpecification: TagSpecification | null;
   /** 命名空间元数据 */
   Metadata: KeyValueString[] | null;
+  /** 漏洞白名单列表 */
+  CVEWhitelistItems?: CVEWhitelistItem[];
+  /** 扫描级别，true为自动，false为手动 */
+  AutoScan?: boolean;
+  /** 安全阻断级别，true为开启，false为关闭 */
+  PreventVUL?: boolean;
+  /** 阻断漏洞等级，目前仅支持low、medium、high, 为""时表示没有设置 */
+  Severity?: string;
 }
 
 /** Tcr镜像仓库信息 */
@@ -1033,6 +1047,14 @@ declare interface CreateNamespaceRequest {
   IsPublic: boolean;
   /** 云标签描述 */
   TagSpecification?: TagSpecification;
+  /** 自动扫描级别，true为自动，false为手动 */
+  IsAutoScan?: boolean;
+  /** 安全阻断级别，true为自动，false为手动 */
+  IsPreventVUL?: boolean;
+  /** 阻断漏洞等级，目前仅支持low、medium、high */
+  Severity?: string;
+  /** 漏洞白名单列表 */
+  CVEWhitelistItems?: CVEWhitelistItem[];
 }
 
 declare interface CreateNamespaceResponse {
@@ -1881,9 +1903,9 @@ declare interface DescribeNamespacesRequest {
 
 declare interface DescribeNamespacesResponse {
   /** 命名空间列表信息 */
-  NamespaceList: TcrNamespaceInfo[];
+  NamespaceList?: TcrNamespaceInfo[];
   /** 总个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2354,7 +2376,15 @@ declare interface ModifyNamespaceRequest {
   /** 命名空间名称 */
   NamespaceName: string;
   /** 访问级别，True为公开，False为私有 */
-  IsPublic: boolean;
+  IsPublic?: boolean;
+  /** 扫描级别，True为自动，False为手动 */
+  IsAutoScan?: boolean;
+  /** 阻断开关，True为开放，False为关闭 */
+  IsPreventVUL?: boolean;
+  /** 阻断漏洞等级，目前仅支持 low、medium、high */
+  Severity?: string;
+  /** 漏洞白名单列表 */
+  CVEWhitelistItems?: CVEWhitelistItem[];
 }
 
 declare interface ModifyNamespaceResponse {
