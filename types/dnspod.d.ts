@@ -512,6 +512,8 @@ declare interface RecordListItem {
   TTL: number;
   /** MX值，只有MX记录有 */
   MX: number | null;
+  /** 是否是默认的ns记录 */
+  DefaultNS?: boolean;
 }
 
 /** 域名解析快照配置 */

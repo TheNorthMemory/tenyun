@@ -386,6 +386,8 @@ declare interface EngineVersion {
   Version: string | null;
   /** 运行镜像 */
   Image: string | null;
+  /** 是否支持int8量化 */
+  IsSupportIntEightQuantization: boolean | null;
 }
 
 /** 环境变量 */

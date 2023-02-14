@@ -445,6 +445,8 @@ declare interface DescribeRoomResponse {
   Assistants?: string[] | null;
   /** 录制地址。仅在房间结束后存在。 */
   RecordUrl?: string | null;
+  /** 课堂状态。0为未开始，1为正在上课，2为已结束，3为已过期。 */
+  Status?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -460,13 +462,17 @@ declare interface DescribeRoomStatisticsRequest {
 
 declare interface DescribeRoomStatisticsResponse {
   /** 峰值在线成员人数。 */
-  PeakMemberNumber: number;
+  PeakMemberNumber?: number;
   /** 累计在线人数。 */
-  MemberNumber: number;
+  MemberNumber?: number;
   /** 记录总数。包含进入房间或者应到未到的。 */
-  Total: number;
+  Total?: number;
   /** 成员记录列表。 */
-  MemberRecords: MemberRecord[];
+  MemberRecords?: MemberRecord[];
+  /** 秒级unix时间戳，实际房间开始时间。 */
+  RealStartTime?: number | null;
+  /** 秒级unix时间戳，实际房间结束时间。 */
+  RealEndTime?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

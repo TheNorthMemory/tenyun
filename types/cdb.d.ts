@@ -2224,6 +2224,18 @@ declare interface DescribeBackupDownloadRestrictionResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBackupEncryptionStatusRequest {
+  /** 实例ID，格式如：cdb-XXXX。与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+}
+
+declare interface DescribeBackupEncryptionStatusResponse {
+  /** 实例是否开启了物理备份加密。可能的值有 on, off 。 */
+  EncryptionStatus: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBackupOverviewRequest {
   /** 需要查询的云数据库产品类型，目前仅支持 "mysql"。 */
   Product: string;
@@ -3512,6 +3524,18 @@ declare interface ModifyBackupDownloadRestrictionResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBackupEncryptionStatusRequest {
+  /** 实例ID，格式如：cdb-XXXX。与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+  /** 设置实例新增的自动物理备份文件默认加密状态。可选值为 on或者off。 */
+  EncryptionStatus: string;
+}
+
+declare interface ModifyBackupEncryptionStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCDBProxyConnectionPoolRequest {
   /** 数据库代理ID */
   ProxyGroupId: string;
@@ -4203,6 +4227,8 @@ declare interface Cdb {
   DescribeBackupDatabases(data: DescribeBackupDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDatabasesResponse>;
   /** 查询备份文件下载源限制 {@link DescribeBackupDownloadRestrictionRequest} {@link DescribeBackupDownloadRestrictionResponse} */
   DescribeBackupDownloadRestriction(data?: DescribeBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadRestrictionResponse>;
+  /** 查询实例默认备份加密状态 {@link DescribeBackupEncryptionStatusRequest} {@link DescribeBackupEncryptionStatusResponse} */
+  DescribeBackupEncryptionStatus(data: DescribeBackupEncryptionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupEncryptionStatusResponse>;
   /** 查询备份概览 {@link DescribeBackupOverviewRequest} {@link DescribeBackupOverviewResponse} */
   DescribeBackupOverview(data: DescribeBackupOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupOverviewResponse>;
   /** 查询备份实时统计 {@link DescribeBackupSummariesRequest} {@link DescribeBackupSummariesResponse} */
@@ -4325,6 +4351,8 @@ declare interface Cdb {
   ModifyBackupConfig(data: ModifyBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupConfigResponse>;
   /** 修改备份文件的限制下载来源 {@link ModifyBackupDownloadRestrictionRequest} {@link ModifyBackupDownloadRestrictionResponse} */
   ModifyBackupDownloadRestriction(data: ModifyBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupDownloadRestrictionResponse>;
+  /** 设置实例备份文件是否加密 {@link ModifyBackupEncryptionStatusRequest} {@link ModifyBackupEncryptionStatusResponse} */
+  ModifyBackupEncryptionStatus(data: ModifyBackupEncryptionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupEncryptionStatusResponse>;
   /** 配置数据库代理连接池 {@link ModifyCDBProxyConnectionPoolRequest} {@link ModifyCDBProxyConnectionPoolResponse} */
   ModifyCDBProxyConnectionPool(data: ModifyCDBProxyConnectionPoolRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCDBProxyConnectionPoolResponse>;
   /** 修改数据库代理描述 {@link ModifyCDBProxyDescRequest} {@link ModifyCDBProxyDescResponse} */
@@ -4395,7 +4423,7 @@ declare interface Cdb {
   SwitchDrInstanceToMaster(data: SwitchDrInstanceToMasterRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDrInstanceToMasterResponse>;
   /** 切换访问新实例 {@link SwitchForUpgradeRequest} {@link SwitchForUpgradeResponse} */
   SwitchForUpgrade(data: SwitchForUpgradeRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchForUpgradeResponse>;
-  /** 升级数据库代理配置（接口已经废弃，请使用AdjustCdbProxy进行数据库代理的配置） {@link UpgradeCDBProxyRequest} {@link UpgradeCDBProxyResponse} */
+  /** @deprecated 升级数据库代理配置（接口已经废弃，请使用AdjustCdbProxy进行数据库代理的配置） {@link UpgradeCDBProxyRequest} {@link UpgradeCDBProxyResponse} */
   UpgradeCDBProxy(data: UpgradeCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeCDBProxyResponse>;
   /** 升级数据库代理版本 {@link UpgradeCDBProxyVersionRequest} {@link UpgradeCDBProxyVersionResponse} */
   UpgradeCDBProxyVersion(data: UpgradeCDBProxyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeCDBProxyVersionResponse>;

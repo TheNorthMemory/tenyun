@@ -192,6 +192,8 @@ declare interface ClusterInstancesInfo {
   TopologyInfoList: TopologyInfo[] | null;
   /** 是否是跨AZ集群 */
   IsMultiZoneCluster: boolean | null;
+  /** 是否开通异常节点自动补偿 */
+  IsCvmReplace: boolean | null;
 }
 
 /** 集群配置。 */

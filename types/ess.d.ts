@@ -10,8 +10,16 @@ declare interface Admin {
   Mobile?: string | null;
 }
 
-/** 应用相关信息 */
+/** 主企业代子企业操作 或 渠道子客应用相关信息 */
 declare interface Agent {
+  /** 应用编号,32位字符串 */
+  AppId?: string;
+  /** 主组织的应用号 */
+  ProxyAppId?: string | null;
+  /** 主组织在平台的机构编号 */
+  ProxyOrganizationId?: string | null;
+  /** 主组织的操作人 */
+  ProxyOperator?: string | null;
 }
 
 /** 参与者信息 */
@@ -1099,9 +1107,9 @@ declare interface DescribeFileUrlsRequest {
 
 declare interface DescribeFileUrlsResponse {
   /** URL信息 */
-  FileUrls: FileUrl[];
+  FileUrls?: FileUrl[];
   /** URL数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1267,6 +1275,8 @@ declare interface DescribeOrganizationSealsRequest {
   SealId?: string;
   /** 印章类型列表（都是组织机构印章）。为空时查询所有类型的印章。目前支持以下类型：OFFICIAL：企业公章；CONTRACT：合同专用章；ORGANIZATION_SEAL：企业印章(图片上传创建)；LEGAL_PERSON_SEAL：法定代表人章 */
   SealTypes?: string[];
+  /** 主企业代子企业操作 或 渠道子客应用相关信息 */
+  Agent?: Agent;
 }
 
 declare interface DescribeOrganizationSealsResponse {

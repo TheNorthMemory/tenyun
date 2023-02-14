@@ -1318,6 +1318,8 @@ declare interface ImageRepository {
   ApplicationName: ScalableRule | null;
   /** ApplicationName值 */
   ApplicationNameReal: string | null;
+  /** 是否公共,1:公有,0:私有 */
+  Public?: number | null;
 }
 
 /** 镜像仓库列表 */
@@ -1606,6 +1608,8 @@ declare interface KafkaDeliveryConfig {
   EnableGlobalLineRule: boolean | null;
   /** 自定义分行规则 */
   CustomRule: string | null;
+  /** KafkaAddress */
+  KafkaAddress?: string | null;
 }
 
 /** 泳道部署组 */
@@ -2219,19 +2223,23 @@ declare interface ResourceFieldRef {
 /** ScalableRule值 */
 declare interface ScalableRule {
   /** RuleId值 */
-  RuleId: string | null;
+  RuleId?: string | null;
   /** Name值 */
-  Name: string | null;
+  Name?: string | null;
   /** ExpandVmCountLimit值 */
-  ExpandVmCountLimit: number | null;
+  ExpandVmCountLimit?: number | null;
   /** ShrinkVmCountLimit值 */
-  ShrinkVmCountLimit: number | null;
+  ShrinkVmCountLimit?: number | null;
   /** GroupCount值 */
-  GroupCount: number | null;
+  GroupCount?: number | null;
   /** 备注 */
-  Desc: string | null;
+  Desc?: string | null;
   /** 备注 */
-  Description: string | null;
+  Description?: string | null;
+  /** 是否关闭指标伸缩, 默认0, 0:打开指标伸缩 1:关闭指标伸缩 */
+  DisableMetricAS?: number | null;
+  /** 开启定时伸缩规则, 默认0, 0:关闭定时伸缩 1:开启定时伸缩 */
+  EnableCronAS?: number | null;
 }
 
 /** tsf 容器集群节点调度策略 */
@@ -2790,6 +2798,12 @@ declare interface UnitNamespace {
   NamespaceName: string;
   /** 单元化命名空间ID */
   Id?: string | null;
+  /** 网关实体ID */
+  GatewayInstanceId?: string | null;
+  /** 创建时间 */
+  CreatedTime?: string | null;
+  /** 更新时间 */
+  UpdatedTime?: string | null;
 }
 
 /** 微服务网关单元化规则 */
