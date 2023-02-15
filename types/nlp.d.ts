@@ -489,9 +489,9 @@ declare interface WordEmbeddingRequest {
 
 declare interface WordEmbeddingResponse {
   /** 词向量数组 */
-  Vector?: number[];
+  Vector: number[];
   /** 词向量的维度 */
-  Dimension?: number;
+  Dimension: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

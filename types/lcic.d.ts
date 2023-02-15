@@ -351,6 +351,24 @@ declare interface DescribeAppDetailResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCurrentMemberListRequest {
+  /** 房间Id。 */
+  RoomId: number;
+  /** 分页查询当前页数，从1开始递增。 */
+  Page: number;
+  /** 每页数据量，最大1000。 */
+  Limit: number;
+}
+
+declare interface DescribeCurrentMemberListResponse {
+  /** 记录总数。当前房间的总人数。 */
+  Total?: number;
+  /** 成员记录列表。 */
+  MemberRecords?: MemberRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDocumentRequest {
   /** 文档Id（唯一id） */
   DocumentId: string;
@@ -728,6 +746,8 @@ declare interface Lcic {
   DeleteRoom(data: DeleteRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoomResponse>;
   /** 获取应用详情 {@link DescribeAppDetailRequest} {@link DescribeAppDetailResponse} */
   DescribeAppDetail(data: DescribeAppDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppDetailResponse>;
+  /** 获取当前房间的成员列表 {@link DescribeCurrentMemberListRequest} {@link DescribeCurrentMemberListResponse} */
+  DescribeCurrentMemberList(data: DescribeCurrentMemberListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCurrentMemberListResponse>;
   /** 获取文档信息 {@link DescribeDocumentRequest} {@link DescribeDocumentResponse} */
   DescribeDocument(data: DescribeDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocumentResponse>;
   /** 获取指定房间下文档 {@link DescribeDocumentsByRoomRequest} {@link DescribeDocumentsByRoomResponse} */

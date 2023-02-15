@@ -320,6 +320,12 @@ declare interface DatasetGroup {
   AnnotationFormat: string | null;
   /** 数据集范围 */
   DatasetScope: string | null;
+  /** 数据集OCR子场景 */
+  OcrScene: string | null;
+  /** 数据集字典修改状态 */
+  AnnotationKeyStatus: string | null;
+  /** 文本数据集导入方式 */
+  ContentType?: string | null;
 }
 
 /** 数据集详情 */
@@ -368,6 +374,10 @@ declare interface DatasetInfo {
   AnnotationFormat: string | null;
   /** 数据集范围 */
   DatasetScope: string | null;
+  /** 数据集OCR子场景 */
+  OcrScene: string | null;
+  /** 数据集字典修改状态 */
+  AnnotationKeyStatus: string | null;
 }
 
 /** 图像检测参数信息 */
@@ -1058,6 +1068,8 @@ declare interface SpecPrice {
   TotalCost: number;
   /** 优惠后的价格，单位：分 */
   RealTotalCost: number;
+  /** 计费项数量 */
+  SpecCount?: number;
 }
 
 /** 计费项询价单元 */
@@ -1925,7 +1937,7 @@ declare interface DescribeBillingSpecsPriceRequest {
 
 declare interface DescribeBillingSpecsPriceResponse {
   /** 计费项价格，支持批量返回 */
-  SpecsPrice: SpecPrice[];
+  SpecsPrice?: SpecPrice[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

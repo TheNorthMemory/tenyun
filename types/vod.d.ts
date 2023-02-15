@@ -3682,7 +3682,7 @@ declare interface ReviewAudioVideoSegmentItem {
   Confidence: number;
   /** 嫌疑片段鉴别涉及违规信息的结果建议，取值范围：review：疑似违规，建议复审；block：确认违规，建议封禁。 */
   Suggestion: string;
-  /** 嫌疑片段最可能的违规的标签，取值范围：Porn：色情；Terror：暴恐；Polity：不适宜的信息；Ad：广告；Illegal：违法；Religion：宗教；Abuse：谩骂；Moan：娇喘。 */
+  /** 嫌疑片段最可能的违规的标签，取值范围：Porn：色情；Terror：暴力；Polity：不适宜的信息；Ad：广告；Illegal：违法；Abuse：谩骂；Moan：娇喘。 */
   Label: string;
   /** 违规子标签。 */
   SubLabel: string;
@@ -3734,7 +3734,7 @@ declare interface ReviewAudioVideoTaskInput {
 declare interface ReviewAudioVideoTaskOutput {
   /** 音视频内容审核的结果建议，取值范围：pass：建议通过；review：建议复审；block：建议封禁。 */
   Suggestion: string;
-  /** 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违规的标签，取值范围：Porn：色情；Terror：暴恐；Polity：不适宜的信息；Ad：广告；Illegal：违法；Religion：宗教；Abuse：谩骂；Moan：娇喘。 */
+  /** 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违规的标签，取值范围：Porn：色情；Terror：暴力；Polity：不适宜的信息；Ad：广告；Illegal：违法；Abuse：谩骂；Moan：娇喘。 */
   Label: string;
   /** 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违禁的形式，取值范围：Image：画面上的人物或图标；OCR：画面上的文字；ASR：语音中的文字；Voice：声音。 */
   Form: string;
@@ -3752,7 +3752,7 @@ declare interface ReviewAudioVideoTaskOutput {
 declare interface ReviewImageResult {
   /** 图片审核的结果建议，取值范围：pass：建议通过；review：建议复审；block：建议封禁。 */
   Suggestion?: string;
-  /** 当 Suggestion 为 review 或 block 时有效，表示最可能的违规的标签，取值范围：Porn：色情；Terror：暴恐；Polity：不适宜的信息；Ad：广告；Illegal：违法；Religion：宗教；Abuse：谩骂。 */
+  /** 当 Suggestion 为 review 或 block 时有效，表示最可能的违规的标签，取值范围：Porn：色情；Terror：暴力；Polity：不适宜的信息；Ad：广告；Illegal：违法；Abuse：谩骂。 */
   Label?: string;
   /** 当 Suggestion 为 review 或 block 时有效，表示最可能的违禁的形式，取值范围：Image：画面上的人物或图标；OCR：画面上的文字。 */
   Form?: string;
@@ -3770,7 +3770,7 @@ declare interface ReviewImageSegmentItem {
   Confidence?: number;
   /** 嫌疑片段鉴别涉及违规信息的结果建议，取值范围：review：疑似违规，建议复审；block：确认违规，建议封禁。 */
   Suggestion?: string;
-  /** 嫌疑片段最可能的违规的标签，取值范围：Porn：色情；Terror：暴恐；Polity：不适宜的信息；Ad：广告；Illegal：违法；Religion：宗教；Abuse：谩骂。 */
+  /** 嫌疑片段最可能的违规的标签，取值范围：Porn：色情；Terror：暴力；Polity：不适宜的信息；Ad：广告；Illegal：违法；Abuse：谩骂。 */
   Label?: string;
   /** 违规子标签。 */
   SubLabel?: string;
@@ -3790,7 +3790,7 @@ declare interface ReviewInfo {
   Definition?: number;
   /** 审核的结果建议，取值范围：pass：建议通过；review：建议复审；block：建议封禁。 */
   Suggestion?: string;
-  /** 审核类型，当 Suggestion 为 review 或 block 时有效，格式为：Form.Label。Form 表示违禁的形式，取值范围：Image：画面上的人物或图标；OCR：画面上的文字；ASR：语音中的文字；Voice：声音。Label 表示违禁的标签，取值范围：Porn：色情；Terror：暴恐；Polity：不适宜的信息；Ad：广告；Illegal：违法；Religion：宗教；Abuse：谩骂；Moan：娇喘。 */
+  /** 审核类型，当 Suggestion 为 review 或 block 时有效，格式为：Form.Label。Form 表示违禁的形式，取值范围：Image：画面上的人物或图标；OCR：画面上的文字；ASR：语音中的文字；Voice：声音。Label 表示违禁的标签，取值范围：Porn：色情；Terror：暴力；Polity：不适宜的信息；Ad：广告；Illegal：违法；Abuse：谩骂；Moan：娇喘。 */
   TypeSet?: string[];
   /** 审核时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   ReviewTime?: string;
@@ -5139,7 +5139,7 @@ declare interface CreateProcedureTemplateResponse {
 }
 
 declare interface CreateReviewTemplateRequest {
-  /** 需要返回的违规标签列表，可选值为：Porn：色情；Terror：暴恐；Polity：不适宜的信息；Illegal：违法；Religion：宗教；Abuse：谩骂；Ad：广告；Moan：娇喘。 */
+  /** 需要返回的违规标签列表，可选值为：Porn：色情；Terror：暴力；Polity：不适宜的信息；Illegal：违法；Abuse：谩骂；Ad：广告；Moan：娇喘。 */
   Labels: string[];
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: string;
@@ -7067,7 +7067,7 @@ declare interface ModifyReviewTemplateRequest {
   Name?: string;
   /** 审核模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
-  /** 需要返回的违规标签列表，可选值为：Porn：色情；Terror：暴恐；Polity：不适宜的信息；Illegal：违法；Religion：宗教；Abuse：谩骂；Ad：广告；Moan：娇喘。注意：不填表示不更新。 */
+  /** 需要返回的违规标签列表，可选值为：Porn：色情；Terror：暴力；Polity：不适宜的信息；Illegal：违法；Abuse：谩骂；Ad：广告；Moan：娇喘。注意：不填表示不更新。 */
   Labels?: string[];
 }
 
@@ -7581,7 +7581,7 @@ declare interface ReviewAudioVideoRequest {
   SubAppId?: number;
   /** 审核的内容，可选值有：Media：原始音视频；Cover：封面。不填或填空数组时，默认为审核 Media。 */
   ReviewContents?: string[];
-  /** 审核模板 ID，默认值为 10。取值范围：10：预置模板，支持检测的违规标签包括色情（Porn）、暴恐（Terror）和不适宜的信息（Polity）。 */
+  /** 审核模板 ID，默认值为 10。取值范围：10：预置模板，支持检测的违规标签包括色情（Porn）、暴力（Terror）和不适宜的信息（Polity）。 */
   Definition?: number;
   /** 任务流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
   TasksPriority?: number;
@@ -7595,7 +7595,7 @@ declare interface ReviewAudioVideoRequest {
 
 declare interface ReviewAudioVideoResponse {
   /** 任务 ID */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7603,7 +7603,7 @@ declare interface ReviewAudioVideoResponse {
 declare interface ReviewImageRequest {
   /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符。本接口要求媒体文件必须是图片格式。 */
   FileId: string;
-  /** 图片审核模板 ID，取值范围：10：预置模板，支持检测的违规标签包括色情（Porn）、暴恐（Terror）和不适宜的信息（Polity）。 */
+  /** 图片审核模板 ID，取值范围：10：预置模板，支持检测的违规标签包括色情（Porn）、暴力（Terror）和不适宜的信息（Polity）。 */
   Definition: number;
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: number;

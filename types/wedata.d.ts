@@ -1050,6 +1050,16 @@ declare interface ParamInfo {
   ParamValue: string;
 }
 
+/** 分区参数 */
+declare interface Partition {
+  /** 分区转换策略 */
+  Transform?: string;
+  /** 分区字段名 */
+  Name?: string;
+  /** 策略参数 */
+  TransformArgs?: string[];
+}
+
 /** 数据质量生产调度任务业务实体 */
 declare interface ProdSchedulerTask {
   /** 生产调度任务工作流ID */
@@ -1058,6 +1068,14 @@ declare interface ProdSchedulerTask {
   TaskId?: string | null;
   /** 生产调度任务名称 */
   TaskName?: string | null;
+}
+
+/** dlc建表属性 */
+declare interface Property {
+  /** key值 */
+  Key: string;
+  /** value值 */
+  Value: string;
 }
 
 /** 质量评分 */
@@ -5305,6 +5323,26 @@ declare interface GenHiveTableDDLSqlRequest {
   SchemaName?: string;
   /** 上游节点的字段信息 */
   SourceFieldInfoList?: SourceFieldInfo[];
+  /** 分区字段 */
+  Partitions?: Partition[];
+  /** 建表属性 */
+  Properties?: Property[];
+  /** 建表模式，0:向导模式，1:ddl */
+  TableMode?: number;
+  /** DLC表版本，v1/v2 */
+  TableVersion?: string;
+  /** 是否upsert写入 */
+  UpsertFlag?: boolean;
+  /** 表描述信息 */
+  TableComment?: string;
+  /** 增加的文件数量阈值, 超过值将触发小文件合并 */
+  AddDataFiles?: number;
+  /** 增加的Equality delete数量阈值, 超过值将触发小文件合并 */
+  AddEqualityDeletes?: number;
+  /** 增加的Position delete数量阈值, 超过值将触发小文件合并 */
+  AddPositionDeletes?: number;
+  /** 增加的delete file数量阈值 */
+  AddDeleteFiles?: number;
 }
 
 declare interface GenHiveTableDDLSqlResponse {

@@ -1048,7 +1048,7 @@ declare interface CreateShipperRequest {
 }
 
 declare interface CreateShipperResponse {
-  /** 投递规则ID */
+  /** 投递任务ID */
   ShipperId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1517,9 +1517,9 @@ declare interface DescribeShippersRequest {
 
 declare interface DescribeShippersResponse {
   /** 投递规则列表 */
-  Shippers: ShipperInfo[] | null;
+  Shippers?: ShipperInfo[] | null;
   /** 本次查询获取到的总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1967,7 +1967,7 @@ declare interface Cls {
   CreateLogset(data: CreateLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogsetResponse>;
   /** 创建机器组 {@link CreateMachineGroupRequest} {@link CreateMachineGroupResponse} */
   CreateMachineGroup(data: CreateMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMachineGroupResponse>;
-  /** 创建投递规则 {@link CreateShipperRequest} {@link CreateShipperResponse} */
+  /** 新建投递到COS的任务 {@link CreateShipperRequest} {@link CreateShipperResponse} */
   CreateShipper(data: CreateShipperRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShipperResponse>;
   /** 创建日志主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
@@ -2029,7 +2029,7 @@ declare interface Cls {
   DescribePartitions(data: DescribePartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePartitionsResponse>;
   /** 获取投递任务列表 {@link DescribeShipperTasksRequest} {@link DescribeShipperTasksResponse} */
   DescribeShipperTasks(data: DescribeShipperTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShipperTasksResponse>;
-  /** 获取投递规则 {@link DescribeShippersRequest} {@link DescribeShippersResponse} */
+  /** 获取投递到COS的任务配置信息 {@link DescribeShippersRequest} {@link DescribeShippersResponse} */
   DescribeShippers(data?: DescribeShippersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShippersResponse>;
   /** 获取日志主题列表 {@link DescribeTopicsRequest} {@link DescribeTopicsResponse} */
   DescribeTopics(data?: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;

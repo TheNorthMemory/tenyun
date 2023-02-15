@@ -1803,7 +1803,7 @@ declare interface DescribeSlowLogRequest {
   BeginTime: string;
   /** 结束时间。 */
   EndTime: string;
-  /** 慢查询平均执行时间阈值（单位：微秒）。 */
+  /** 慢查询平均执行时间阈值（单位：毫秒）。 */
   MinQueryTime?: number;
   /** 每个页面展示的慢查询条数，默认值为20。 */
   Limit?: number;
@@ -1815,9 +1815,9 @@ declare interface DescribeSlowLogRequest {
 
 declare interface DescribeSlowLogResponse {
   /** 慢查询总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 慢查询详情。 */
-  InstanceSlowlogDetail: InstanceSlowlogDetail[];
+  InstanceSlowlogDetail?: InstanceSlowlogDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

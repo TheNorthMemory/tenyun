@@ -96,6 +96,8 @@ declare interface BonusInfo {
   ExpireTime: number;
   /** 资源包创建时间 */
   CreateTime: number;
+  /** 资源包状态 0.未使用 1.使用中 2.已退款 3.已过期 */
+  Status?: number | null;
 }
 
 /** 云存事件 */

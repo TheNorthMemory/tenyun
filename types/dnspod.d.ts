@@ -146,6 +146,20 @@ declare interface Deals {
   DealName: string;
 }
 
+/** 批量删除域名详情 */
+declare interface DeleteDomainBatchDetail {
+  /** 域名 ID */
+  DomainId?: number;
+  /** 域名 */
+  Domain?: string;
+  /** 错误信息 */
+  Error?: string | null;
+  /** 删除状态 */
+  Status?: string;
+  /** 操作 */
+  Operation?: string;
+}
+
 /** 查看任务详情返回结构 */
 declare interface DescribeBatchTaskDetail {
   /** 见BatchRecordInfo */
@@ -424,6 +438,58 @@ declare interface ModifyRecordBatchDetail {
   DomainId: number | null;
 }
 
+/** 套餐配置明细 */
+declare interface PackageDetailItem {
+  /** 套餐原价 */
+  RealPrice: number;
+  /** 可更换域名次数 */
+  ChangedTimes: number;
+  /** 允许设置的最小 TTL 值 */
+  MinTtl: number;
+  /** 负载均衡数量 */
+  RecordRoll: number;
+  /** 子域名级数 */
+  SubDomainLevel: number;
+  /** 泛解析级数 */
+  MaxWildcard: number;
+  /** DNS 服务集群个数 */
+  DnsServerRegion: string;
+  /** 套餐名称 */
+  DomainGradeCn: string;
+  /** 套餐代号 */
+  GradeLevel: number;
+  /** 套餐对应的 NS */
+  Ns: string[];
+  /** 套餐代码 */
+  DomainGrade: string;
+}
+
+/** 域名概览明细 */
+declare interface PreviewDetail {
+  /** 域名 */
+  Name: string;
+  /** 域名套餐代码 */
+  Grade: string;
+  /** 域名套餐名称 */
+  GradeTitle: string;
+  /** 域名记录数 */
+  Records: number;
+  /** 域名停靠状态。0 未开启 1 已开启 2 已暂停 */
+  DomainParkingStatus: number;
+  /** 自定义线路数量 */
+  LineCount: number;
+  /** 自定义线路分组数量 */
+  LineGroupCount: number;
+  /** 域名别名数量 */
+  AliasCount: number;
+  /** 允许添加的最大域名别名数量 */
+  MaxAliasCount: number;
+  /** 昨天的解析量 */
+  ResolveCount: number;
+  /** 增值服务数量 */
+  VASCount: number;
+}
+
 /** 域名权限项 */
 declare interface PurviewInfo {
   /** 权限名称 */
@@ -624,6 +690,82 @@ declare interface UserInfo {
   Uin: number;
   /** 所属 DNS 服务器 */
   FreeNs: string[];
+}
+
+/** 域名增值服务用量 */
+declare interface VASStatisticItem {
+  /** 增值服务名称 */
+  Name?: string;
+  /** 增值服务标识 */
+  Key?: string;
+  /** 增值服务最大用量 */
+  LimitCount?: number;
+  /** 增值服务已使用的用量 */
+  UseCount?: number;
+}
+
+/** Whois联系信息 */
+declare interface WhoisContact {
+  /** 无 */
+  Admin: WhoisContactAddress | null;
+  /** 无 */
+  Billing: WhoisContactAddress | null;
+  /** 无 */
+  Registrant: WhoisContactAddress | null;
+  /** 无 */
+  Tech: WhoisContactAddress | null;
+}
+
+/** Whois联系信息地址 */
+declare interface WhoisContactAddress {
+  /** 无 */
+  City: string | null;
+  /** 无 */
+  Country: string | null;
+  /** 无 */
+  Email: string | null;
+  /** 无 */
+  Fax: string | null;
+  /** 无 */
+  FaxExt: string | null;
+  /** 无 */
+  Handle: string | null;
+  /** 无 */
+  Name: string | null;
+  /** 无 */
+  Organization: string | null;
+  /** 无 */
+  Phone: string | null;
+  /** 无 */
+  PostalCode: string | null;
+  /** 无 */
+  State: string | null;
+  /** 无 */
+  Street: string | null;
+}
+
+/** Whois信息 */
+declare interface WhoisInfo {
+  /** 联系信息 */
+  Contacts: WhoisContact | null;
+  /** 域名注册时间 */
+  CreationDate: string | null;
+  /** 域名到期时间 */
+  ExpirationDate: string | null;
+  /** 是否是在腾讯云注册的域名 */
+  IsQcloud: boolean | null;
+  /** 是否当前操作帐号注册的域名 */
+  IsQcloudOwner: boolean | null;
+  /** 域名配置的NS */
+  NameServers: string[] | null;
+  /** Whois原始信息 */
+  Raw: string[] | null;
+  /** 域名注册商 */
+  Registrar: string[] | null;
+  /** 状态 */
+  Status: string[] | null;
+  /** 更新日期 */
+  UpdatedDate: string | null;
 }
 
 declare interface CheckRecordSnapshotRollbackRequest {
@@ -850,6 +992,20 @@ declare interface DeleteDomainAliasResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDomainBatchRequest {
+  /** 域名数组 */
+  DomainList: string[];
+}
+
+declare interface DeleteDomainBatchResponse {
+  /** 任务 ID */
+  JobId?: number;
+  /** 任务详情数组 */
+  DetailList?: DeleteDomainBatchDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDomainRequest {
   /** 域名 */
   Domain: string;
@@ -1032,6 +1188,20 @@ declare interface DescribeDomainLogListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDomainPreviewRequest {
+  /** 域名 */
+  Domain: string;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId */
+  DomainId?: number;
+}
+
+declare interface DescribeDomainPreviewResponse {
+  /** 域名概览信息 */
+  Domain?: PreviewDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDomainPurviewRequest {
   /** 域名 */
   Domain: string;
@@ -1072,6 +1242,44 @@ declare interface DescribeDomainShareInfoResponse {
   ShareList?: DomainShareInfo[];
   /** 域名拥有者账号 */
   Owner?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDomainWhoisRequest {
+  /** 域名 */
+  Domain: string;
+}
+
+declare interface DescribeDomainWhoisResponse {
+  /** 域名Whois信息 */
+  Info?: WhoisInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePackageDetailRequest {
+}
+
+declare interface DescribePackageDetailResponse {
+  /** 套餐配置详情 */
+  Info: PackageDetailItem[];
+  /** 套餐代码列表 */
+  LevelMap: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRecordExistExceptDefaultNSRequest {
+  /** 域名 */
+  Domain: string;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId */
+  DomainId?: number;
+}
+
+declare interface DescribeRecordExistExceptDefaultNSResponse {
+  /** true 是 false 否 */
+  Exist: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1332,6 +1540,18 @@ declare interface DescribeUserDetailRequest {
 declare interface DescribeUserDetailResponse {
   /** 帐户信息 */
   UserInfo: UserInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVASStatisticRequest {
+  /** 域名ID */
+  DomainId: number;
+}
+
+declare interface DescribeVASStatisticResponse {
+  /** 增值服务用量列表 */
+  VASList: VASStatisticItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1731,6 +1951,8 @@ declare interface Dnspod {
   DeleteDomain(data: DeleteDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainResponse>;
   /** 删除域名别名 {@link DeleteDomainAliasRequest} {@link DeleteDomainAliasResponse} */
   DeleteDomainAlias(data: DeleteDomainAliasRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainAliasResponse>;
+  /** 批量删除域名 {@link DeleteDomainBatchRequest} {@link DeleteDomainBatchResponse} */
+  DeleteDomainBatch(data: DeleteDomainBatchRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainBatchResponse>;
   /** 删除记录 {@link DeleteRecordRequest} {@link DeleteRecordResponse} */
   DeleteRecord(data: DeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordResponse>;
   /** 删除记录分组 {@link DeleteRecordGroupRequest} {@link DeleteRecordGroupResponse} */
@@ -1753,12 +1975,20 @@ declare interface Dnspod {
   DescribeDomainList(data?: DescribeDomainListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainListResponse>;
   /** 获取域名日志 {@link DescribeDomainLogListRequest} {@link DescribeDomainLogListResponse} */
   DescribeDomainLogList(data: DescribeDomainLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainLogListResponse>;
+  /** 获取域名概览信息 {@link DescribeDomainPreviewRequest} {@link DescribeDomainPreviewResponse} */
+  DescribeDomainPreview(data: DescribeDomainPreviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainPreviewResponse>;
   /** 获取域名权限 {@link DescribeDomainPurviewRequest} {@link DescribeDomainPurviewResponse} */
   DescribeDomainPurview(data: DescribeDomainPurviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainPurviewResponse>;
   /** 获取域名共享信息 {@link DescribeDomainShareInfoRequest} {@link DescribeDomainShareInfoResponse} */
   DescribeDomainShareInfo(data: DescribeDomainShareInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainShareInfoResponse>;
+  /** 获取域名Whois信息 {@link DescribeDomainWhoisRequest} {@link DescribeDomainWhoisResponse} */
+  DescribeDomainWhois(data: DescribeDomainWhoisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainWhoisResponse>;
+  /** 获取各套餐配置详情 {@link DescribePackageDetailRequest} {@link DescribePackageDetailResponse} */
+  DescribePackageDetail(data?: DescribePackageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackageDetailResponse>;
   /** 获取记录信息 {@link DescribeRecordRequest} {@link DescribeRecordResponse} */
   DescribeRecord(data: DescribeRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordResponse>;
+  /** 判断是否有除系统默认的@-NS记录之外的记录存在 {@link DescribeRecordExistExceptDefaultNSRequest} {@link DescribeRecordExistExceptDefaultNSResponse} */
+  DescribeRecordExistExceptDefaultNS(data: DescribeRecordExistExceptDefaultNSRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordExistExceptDefaultNSResponse>;
   /** 查询解析记录分组列表 {@link DescribeRecordGroupListRequest} {@link DescribeRecordGroupListResponse} */
   DescribeRecordGroupList(data: DescribeRecordGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordGroupListResponse>;
   /** 获取等级允许的线路 {@link DescribeRecordLineListRequest} {@link DescribeRecordLineListResponse} */
@@ -1781,6 +2011,8 @@ declare interface Dnspod {
   DescribeSubdomainAnalytics(data: DescribeSubdomainAnalyticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubdomainAnalyticsResponse>;
   /** 获取帐户信息 {@link DescribeUserDetailRequest} {@link DescribeUserDetailResponse} */
   DescribeUserDetail(data?: DescribeUserDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDetailResponse>;
+  /** 获取域名增值服务用量 {@link DescribeVASStatisticRequest} {@link DescribeVASStatisticResponse} */
+  DescribeVASStatistic(data: DescribeVASStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVASStatisticResponse>;
   /** 下载快照 {@link DownloadSnapshotRequest} {@link DownloadSnapshotResponse} */
   DownloadSnapshot(data: DownloadSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadSnapshotResponse>;
   /** 锁定域名 {@link ModifyDomainLockRequest} {@link ModifyDomainLockResponse} */

@@ -126,7 +126,7 @@ declare interface DomainList {
   DomainId: string;
   /** 域名名称。 */
   DomainName: string;
-  /** 是否已设置自动续费 。0：未设置 1：已设置 */
+  /** 是否已设置自动续费 。0：未设置 1：已设置2：设置后，关闭 */
   AutoRenew: number;
   /** 注册时间。 */
   CreationDate: string;

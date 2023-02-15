@@ -730,6 +730,14 @@ declare interface ModifyParamItem {
   OldValue?: string | null;
 }
 
+/** 系统支持的模块 */
+declare interface Module {
+  /** 是否支持，可选值:yes,no */
+  IsDisable: string;
+  /** 模块名 */
+  ModuleName: string;
+}
+
 /** 网络信息 */
 declare interface NetAddr {
   /** 内网ip */
@@ -926,6 +934,42 @@ declare interface RuleFilters {
   Compare: string;
   /** 审计规则过滤条件的匹配值。 */
   Value: string[];
+}
+
+/** 售卖地域信息 */
+declare interface SaleRegion {
+  /** 地域英文名 */
+  Region: string;
+  /** 地域数字ID */
+  RegionId: number;
+  /** 地域中文名 */
+  RegionZh: string;
+  /** 可售卖可用区列表 */
+  ZoneSet: SaleZone[];
+  /** 引擎类型 */
+  DbType: string;
+  /** 地域模块支持情况 */
+  Modules: Module[];
+}
+
+/** 售卖可用区信息 */
+declare interface SaleZone {
+  /** 可用区英文名 */
+  Zone: string;
+  /** 可用区数字ID */
+  ZoneId: number;
+  /** 可用区中文名 */
+  ZoneZh: string;
+  /** 是否支持serverless集群0:不支持1:支持 */
+  IsSupportServerless: number;
+  /** 是否支持普通集群0:不支持1:支持 */
+  IsSupportNormal: number;
+  /** 物理区 */
+  PhysicalZone: string;
+  /** 用户是否有可用区权限 */
+  HasPermission?: boolean | null;
+  /** 是否为全链路RDMA可用区 */
+  IsWholeRdmaZone?: string;
 }
 
 /** 安全组详情 */
@@ -1910,6 +1954,20 @@ declare interface DescribeRollbackTimeValidityResponse {
   RequestId?: string;
 }
 
+declare interface DescribeZonesRequest {
+  /** 是否包含虚拟区 */
+  IncludeVirtualZones?: boolean;
+  /** 是否展示地域下所有可用区，并显示用户每个可用区权限 */
+  ShowPermission?: boolean;
+}
+
+declare interface DescribeZonesResponse {
+  /** 地域信息 */
+  RegionSet?: SaleRegion[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisassociateSecurityGroupsRequest {
   /** 实例组ID数组 */
   InstanceIds: string[];
@@ -2609,6 +2667,8 @@ declare interface Cynosdb {
   DescribeRollbackTimeRange(data: DescribeRollbackTimeRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeRangeResponse>;
   /** 查询指定时间是否可回滚 {@link DescribeRollbackTimeValidityRequest} {@link DescribeRollbackTimeValidityResponse} */
   DescribeRollbackTimeValidity(data: DescribeRollbackTimeValidityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeValidityResponse>;
+  /** 查询可售卖地域可用区信息。 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
+  DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
   /** 安全组批量解绑云资源 {@link DisassociateSecurityGroupsRequest} {@link DisassociateSecurityGroupsResponse} */
   DisassociateSecurityGroups(data: DisassociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupsResponse>;
   /** 导出实例慢日志 {@link ExportInstanceSlowQueriesRequest} {@link ExportInstanceSlowQueriesResponse} */

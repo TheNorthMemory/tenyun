@@ -33,7 +33,7 @@ declare interface CreateSessionRequest {
 
 declare interface CreateSessionResponse {
   /** 服务端session信息，返回给SDK */
-  ServerSession: string;
+  ServerSession?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

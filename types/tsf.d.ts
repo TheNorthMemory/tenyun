@@ -2968,6 +2968,8 @@ declare interface VmGroupOther {
   GroupStatus: string | null;
   /** 服务配置信息是否匹配 */
   IsNotEqualServiceConfig: boolean | null;
+  /** HealthCheckSettings */
+  HealthCheckSettings?: HealthCheckSettings | null;
 }
 
 /** 虚拟机部署组列表简要字段 */
@@ -6217,6 +6219,8 @@ declare interface ModifyNamespaceRequest {
 }
 
 declare interface ModifyNamespaceResponse {
+  /** Result */
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

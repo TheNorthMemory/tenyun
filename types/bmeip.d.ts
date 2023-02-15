@@ -173,13 +173,13 @@ declare interface CreateEipAclRequest {
 
 declare interface CreateEipAclResponse {
   /** ACL 实例 ID */
-  AclId: string;
+  AclId?: string;
   /** ACL 实例状态 */
-  Status: number;
+  Status?: number;
   /** ACL 实例名称 */
-  AclName: string;
+  AclName?: string;
   /** ACL 实例创建时间 */
-  CreatedAt: string;
+  CreatedAt?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -445,7 +445,7 @@ declare interface UnbindVpcIpRequest {
 
 declare interface UnbindVpcIpResponse {
   /** 绑定黑石物理机异步任务ID，可以通过查询EIP任务状态查询任务状态 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -459,11 +459,11 @@ declare interface Bmeip {
   BindHosted(data: BindHostedRequest, config?: AxiosRequestConfig): AxiosPromise<BindHostedResponse>;
   /** 绑定黑石EIP {@link BindRsRequest} {@link BindRsResponse} */
   BindRs(data: BindRsRequest, config?: AxiosRequestConfig): AxiosPromise<BindRsResponse>;
-  /** 黑石EIP绑定VPCIP {@link BindVpcIpRequest} {@link BindVpcIpResponse} */
+  /** 黑石EIP绑定VPC IP {@link BindVpcIpRequest} {@link BindVpcIpResponse} */
   BindVpcIp(data: BindVpcIpRequest, config?: AxiosRequestConfig): AxiosPromise<BindVpcIpResponse>;
   /** 创建黑石EIP {@link CreateEipRequest} {@link CreateEipResponse} */
   CreateEip(data?: CreateEipRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEipResponse>;
-  /** 创建黑石弹性公网 EIPACL {@link CreateEipAclRequest} {@link CreateEipAclResponse} */
+  /** 创建黑石弹性公网 EIP ACL {@link CreateEipAclRequest} {@link CreateEipAclResponse} */
   CreateEipAcl(data: CreateEipAclRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEipAclResponse>;
   /** 释放黑石弹性公网IP {@link DeleteEipRequest} {@link DeleteEipResponse} */
   DeleteEip(data: DeleteEipRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEipResponse>;
@@ -491,7 +491,7 @@ declare interface Bmeip {
   UnbindRs(data: UnbindRsRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindRsResponse>;
   /** 批量解绑物理机弹性公网IP {@link UnbindRsListRequest} {@link UnbindRsListResponse} */
   UnbindRsList(data: UnbindRsListRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindRsListResponse>;
-  /** 黑石EIP解绑VPCIP {@link UnbindVpcIpRequest} {@link UnbindVpcIpResponse} */
+  /** 黑石EIP解绑VPC IP {@link UnbindVpcIpRequest} {@link UnbindVpcIpResponse} */
   UnbindVpcIp(data: UnbindVpcIpRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindVpcIpResponse>;
 }
 

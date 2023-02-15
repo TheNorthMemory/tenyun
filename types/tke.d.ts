@@ -2703,7 +2703,7 @@ declare interface CreatePrometheusAlertRuleRequest {
 
 declare interface CreatePrometheusAlertRuleResponse {
   /** 告警id */
-  Id: string;
+  Id?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4025,9 +4025,9 @@ declare interface DescribePrometheusAlertHistoryRequest {
 
 declare interface DescribePrometheusAlertHistoryResponse {
   /** 告警历史 */
-  Items: PrometheusAlertHistoryItem[];
+  Items?: PrometheusAlertHistoryItem[];
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4065,9 +4065,9 @@ declare interface DescribePrometheusAlertRuleRequest {
 
 declare interface DescribePrometheusAlertRuleResponse {
   /** 告警详情 */
-  AlertRules: PrometheusAlertRuleDetail[];
+  AlertRules?: PrometheusAlertRuleDetail[];
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4167,21 +4167,21 @@ declare interface DescribePrometheusInstanceRequest {
 
 declare interface DescribePrometheusInstanceResponse {
   /** 实例id */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称 */
-  Name: string;
+  Name?: string;
   /** 私有网络id */
-  VpcId: string;
+  VpcId?: string;
   /** 子网id */
-  SubnetId: string;
+  SubnetId?: string;
   /** cos桶名称 */
-  COSBucket: string;
+  COSBucket?: string;
   /** 数据查询地址 */
-  QueryAddress: string;
+  QueryAddress?: string;
   /** 实例中grafana相关的信息 */
-  Grafana: PrometheusGrafanaInfo | null;
+  Grafana?: PrometheusGrafanaInfo | null;
   /** 用户自定义alertmanager */
-  AlertManagerUrl: string | null;
+  AlertManagerUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
