@@ -1267,13 +1267,17 @@ declare interface CreateWxCloudBaseRunEnvRequest {
   SubNetIds?: string[];
   /** 是否打开云调用 */
   IsOpenCloudInvoke?: boolean;
+  /** 创建来源：wechat | cloud */
+  Source?: string;
+  /** 渠道：wechat | cloud */
+  Channel?: string;
 }
 
 declare interface CreateWxCloudBaseRunEnvResponse {
   /** 环境Id */
-  EnvId: string;
+  EnvId?: string;
   /** 后付费订单号 */
-  TranId: string;
+  TranId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1531,9 +1535,9 @@ declare interface DescribeCloudBaseRunConfForGateWayRequest {
 
 declare interface DescribeCloudBaseRunConfForGateWayResponse {
   /** 最近更新时间 */
-  LastUpTime: string | null;
+  LastUpTime?: string | null;
   /** 配置信息 */
-  Data: CloudBaseRunForGatewayConf[] | null;
+  Data?: CloudBaseRunForGatewayConf[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2029,13 +2033,13 @@ declare interface DescribeEnvDealRegionRequest {
 
 declare interface DescribeEnvDealRegionResponse {
   /** 下单region */
-  Region: string;
+  Region?: string;
   /** 下单zone */
-  Zone: string;
+  Zone?: string;
   /** 下单regionId */
-  RegionId: number;
+  RegionId?: number;
   /** 下单zoneId */
-  ZoneId: number;
+  ZoneId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2307,7 +2311,7 @@ declare interface DescribeWxCloudBaseRunEnvsRequest {
 
 declare interface DescribeWxCloudBaseRunEnvsResponse {
   /** env列表 */
-  EnvList: EnvInfo[];
+  EnvList?: EnvInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2321,7 +2325,7 @@ declare interface DescribeWxCloudBaseRunSubNetsRequest {
 
 declare interface DescribeWxCloudBaseRunSubNetsResponse {
   /** 子网Id列表 */
-  SubNetIds: string[];
+  SubNetIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

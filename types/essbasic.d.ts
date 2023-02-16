@@ -1048,6 +1048,24 @@ declare interface ChannelGetTaskResultApiResponse {
   RequestId?: string;
 }
 
+declare interface ChannelUpdateSealStatusRequest {
+  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  Agent: Agent;
+  /** 操作的印章状态，DISABLE-停用印章 */
+  Status: string;
+  /** 印章ID */
+  SealId: string;
+  /** 操作者的信息 */
+  Operator?: UserInfo;
+  /** 更新印章状态原因说明 */
+  Reason?: string;
+}
+
+declare interface ChannelUpdateSealStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ChannelVerifyPdfRequest {
   /** 合同Id，流程Id */
   FlowId: string;
@@ -3057,6 +3075,8 @@ declare interface Essbasic {
   ChannelDescribeOrganizationSeals(data: ChannelDescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeOrganizationSealsResponse>;
   /** 渠道版查询转换任务状态 {@link ChannelGetTaskResultApiRequest} {@link ChannelGetTaskResultApiResponse} */
   ChannelGetTaskResultApi(data: ChannelGetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelGetTaskResultApiResponse>;
+  /** 渠道版更新印章状态 {@link ChannelUpdateSealStatusRequest} {@link ChannelUpdateSealStatusResponse} */
+  ChannelUpdateSealStatus(data: ChannelUpdateSealStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelUpdateSealStatusResponse>;
   /** 合同文件验签 {@link ChannelVerifyPdfRequest} {@link ChannelVerifyPdfResponse} */
   ChannelVerifyPdf(data: ChannelVerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelVerifyPdfResponse>;
   /** 创建并返回出证报告 {@link CreateChannelFlowEvidenceReportRequest} {@link CreateChannelFlowEvidenceReportResponse} */

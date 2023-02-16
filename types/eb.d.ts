@@ -311,11 +311,13 @@ declare interface CreateEventBusRequest {
   EventBusName: string;
   /** 事件集描述，不限字符类型，200字符描述以内 */
   Description?: string;
+  /** EB存储时长 */
+  SaveDays?: number;
 }
 
 declare interface CreateEventBusResponse {
   /** 事件集ID */
-  EventBusId: string;
+  EventBusId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -647,6 +649,10 @@ declare interface UpdateEventBusRequest {
   Description?: string;
   /** 事件集名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符 */
   EventBusName?: string;
+  /** EB日志存储时长 */
+  SaveDays?: number;
+  /** EB日志主题ID */
+  LogTopicId?: string;
 }
 
 declare interface UpdateEventBusResponse {

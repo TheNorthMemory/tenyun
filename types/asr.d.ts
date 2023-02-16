@@ -461,13 +461,13 @@ declare interface SentenceRecognitionRequest {
 
 declare interface SentenceRecognitionResponse {
   /** 识别结果。 */
-  Result: string;
+  Result?: string;
   /** 请求的音频时长，单位为ms */
-  AudioDuration: number;
+  AudioDuration?: number;
   /** 词时间戳列表的长度 */
-  WordSize: number | null;
+  WordSize?: number | null;
   /** 词时间戳列表 */
-  WordList: SentenceWord[] | null;
+  WordList?: SentenceWord[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

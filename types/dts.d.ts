@@ -442,6 +442,8 @@ declare interface Endpoint {
   TmpToken?: string | null;
   /** 是否走加密传输、UnEncrypted表示不走加密传输，Encrypted表示走加密传输，默认UnEncrypted */
   EncryptConn?: string | null;
+  /** 数据库所属网络环境，AccessType为云联网(ccn)时必填， UserIDC表示用户IDC、TencentVPC表示腾讯云VPC； */
+  DatabaseNetEnv?: string | null;
 }
 
 /** 任务错误信息 */
@@ -722,6 +724,8 @@ declare interface SyncDetailInfo {
   Message: string | null;
   /** 详细步骤信息 */
   StepInfos: StepInfo[] | null;
+  /** 不能发起一致性校验的原因 */
+  CauseOfCompareDisable?: string | null;
 }
 
 /** 同步任务信息 */
@@ -887,9 +891,9 @@ declare interface CompleteMigrateJobResponse {
 declare interface ConfigureSyncJobRequest {
   /** 同步实例id（即标识一个同步作业），形如sync-werwfs23 */
   JobId: string;
-  /** 源端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)、noProxy,注意具体可选值依赖当前链路 */
+  /** 源端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云),注意具体可选值依赖当前链路 */
   SrcAccessType: string;
-  /** 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)、noProxy,注意具体可选值依赖当前链路 */
+  /** 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)、ckafka(CKafka实例),注意具体可选值依赖当前链路 */
   DstAccessType: string;
   /** 同步任务选项 */
   Options: Options;
@@ -903,7 +907,7 @@ declare interface ConfigureSyncJobRequest {
   RunMode?: string;
   /** 期待启动时间，当RunMode取值为Timed时，此值必填，形如："2006-01-02 15:04:05" */
   ExpectRunTime?: string;
-  /** 源端信息，单节点数据库使用 */
+  /** 源端信息，单节点数据库使用，且SrcNodeType传single */
   SrcInfo?: Endpoint;
   /** 目标端信息，单节点数据库使用 */
   DstInfo?: Endpoint;
@@ -1293,9 +1297,9 @@ declare interface DescribeSyncJobsRequest {
 
 declare interface DescribeSyncJobsResponse {
   /** 任务数目 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 任务详情数组 */
-  JobList: SyncJobInfo[] | null;
+  JobList?: SyncJobInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

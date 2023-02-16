@@ -2,8 +2,218 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 品牌响应数据 */
+declare interface BrandData {
+  /** 品牌Id */
+  CompanyId?: number;
+  /** 企业名称 */
+  CompanyName?: string;
+  /** 品牌名称 */
+  BrandName?: string;
+  /** 联系电话 */
+  Phone?: string;
+  /** 营业执照 */
+  License?: string;
+  /** 营业执照审核状态 */
+  LicenseStatus?: number;
+  /** 营业执照审核状态说明 */
+  LicenseNote?: string;
+  /** 授权书 */
+  Authorization?: string;
+  /** 授权书审核状态 */
+  AuthorizationStatus?: number;
+  /** 授权书审核状态说明 */
+  AuthorizationNote?: string;
+  /** 商标信息 */
+  Trademarks?: TrademarkData[];
+  /** 新增时间 */
+  InsertTime?: string;
+  /** 服务信息 */
+  Services?: ServiceData;
+}
+
+/** 仿冒应用数据 */
+declare interface FakeAPPData {
+  /** 仿冒应用id */
+  FakeAPPId?: number | null;
+  /** 品牌名称 */
+  BrandName?: string | null;
+  /** 仿冒来源：0-系统检测 1-人工举报 */
+  Origin?: number | null;
+  /** 仿冒应用名称 */
+  FakeAPPName?: string | null;
+  /** 仿冒应用包名 */
+  FakeAPPPackageName?: string | null;
+  /** 仿冒应用证书 */
+  FakeAPPCert?: string | null;
+  /** 仿冒应用大小 */
+  FakeAPPSize?: string | null;
+  /** 热度 */
+  Heat?: number | null;
+  /** 协助处置状态：0-未处置 1-处置中 2-处置成功 3-处置失败 */
+  BlockStatus?: number | null;
+  /** 协助处置状态说明 */
+  BlockNote?: string | null;
+  /** 关停状态：0-未关停 1-关停中 2-关停成功 3-关停失败 4-重复上架 */
+  OfflineStatus?: number | null;
+  /** 关停状态说明 */
+  OfflineNote?: string | null;
+  /** app来源 */
+  DownloadWay?: string | null;
+  /** 新增时间 */
+  InsertTime?: string | null;
+  /** App下载链接 */
+  DownloadCosURL?: string | null;
+  /** 资质证明状态:0-不可用 1-可用 */
+  CertificationStatus?: number | null;
+}
+
+/** 仿冒网址数据 */
+declare interface FakeURLData {
+  /** 仿冒网址id */
+  FakeURLId?: number | null;
+  /** 品牌名称 */
+  BrandName?: string | null;
+  /** 仿冒来源：0-系统检测 1-人工举报 */
+  Origin?: number | null;
+  /** 仿冒网址 */
+  FakeURL?: string | null;
+  /** 热度 */
+  Heat?: number | null;
+  /** 协助处置状态：0-未处置 1-处置中 2-处置成功 3-处置失败 */
+  BlockStatus?: number | null;
+  /** 协助处置状态说明 */
+  BlockNote?: string | null;
+  /** 关停状态：0-未关停 1-关停中 2-关停成功 3-关停失败 4-重复上架 */
+  OfflineStatus?: number | null;
+  /** 关停状态说明 */
+  OfflineNote?: string | null;
+  /** ip地址 */
+  IP?: string | null;
+  /** ip地理位置 */
+  IPLocation?: string | null;
+  /** 网站所属单位 */
+  WebCompany?: string | null;
+  /** 网站性质 */
+  WebAttribute?: string | null;
+  /** 网站名称 */
+  WebName?: string | null;
+  /** 备案号 */
+  WebICP?: string | null;
+  /** 网站创建时间 */
+  WebCreateTime?: string | null;
+  /** 网站过期时间 */
+  WebExpireTime?: string | null;
+  /** 新增时间 */
+  InsertTime?: string | null;
+  /** 资质证明状态：0-不可用 1-可用 */
+  CertificationStatus?: number | null;
+}
+
+/** 过滤参数 */
+declare interface Filter {
+  /** 过滤参数键 */
+  Name: string | null;
+  /** 过滤参数值 */
+  Value: string | null;
+}
+
+/** 服务响应数据 */
+declare interface ServiceData {
+  /** 网站保护关联资产数 */
+  ProtectURLCount?: number;
+  /** 网站保护服务到期时间 */
+  ProtectURLExpireTime?: string;
+  /** 应用保护关联资产数 */
+  ProtectAPPCount?: number;
+  /** 应用保护服务到期时间 */
+  ProtectAPPExpireTime?: string;
+  /** 公众号保护关联资产数 */
+  ProtectOfficialAccountCount?: number;
+  /** 公众号保护服务到期时间 */
+  ProtectOfficialAccountExpireTime?: string;
+  /** 小程序保护关联资产数 */
+  ProtectMiniProgramCount?: number;
+  /** 小程序保护服务到期时间 */
+  ProtectMiniProgramExpireTime?: string;
+  /** 关停下架使用次数 */
+  OfflineCount?: number;
+}
+
+/** 商标响应数据 */
+declare interface TrademarkData {
+  /** 商标证明 */
+  Trademark?: string;
+  /** 商标审核状态 */
+  TrademarkStatus?: number;
+  /** 商标审核状态说明 */
+  TrademarkNote?: string;
+  /** 商标id */
+  TrademarkId?: number;
+  /** 商标转让书 */
+  Transfer?: string;
+  /** 商标转让书审核状态 */
+  TransferStatus?: number;
+  /** 商标转让书审核状态说明 */
+  TransferNote?: string;
+  /** 商标名称 */
+  TrademarkName?: string;
+}
+
+/** 白名单数据 */
+declare interface WhiteListData {
+  /** 白名单id */
+  WhiteListId?: number | null;
+  /** 企业id */
+  CompanyId?: number | null;
+  /** 品牌名称 */
+  BrandName?: string | null;
+  /** 资产类型：0-网站 1-app 2-公众号 3-小程序 */
+  AssetsType?: number | null;
+  /** 白名单 */
+  WhiteList?: string | null;
+  /** 新增时间 */
+  InsertTime?: string | null;
+}
+
+declare interface CreateBPBrandRequest {
+  /** 品牌名称 */
+  BrandName: string;
+  /** 企业名称 */
+  CompanyName?: string;
+  /** 联系电话 */
+  Phone?: string;
+  /** 营业执照 */
+  License?: string;
+  /** 授权书 */
+  Authorization?: string;
+  /** 商标名称 */
+  TrademarkNames?: string[];
+  /** 商标证明 */
+  Trademarks?: string[];
+  /** 是否涉及转让: 0-不转让 1-转让 */
+  IsTransfers?: string[];
+  /** 转让证明 */
+  Transfers?: string[];
+  /** 保护网址 */
+  ProtectURLs?: string[];
+  /** 保护应用 */
+  ProtectAPPs?: string[];
+  /** 保护公众号 */
+  ProtectOfficialAccounts?: string[];
+  /** 保护小程序 */
+  ProtectMiniPrograms?: string[];
+}
+
+declare interface CreateBPBrandResponse {
+  /** 企业id */
+  CompanyId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateBPFakeAPPListRequest {
-  /** 仿冒应用下载链接。请严格按照模版进行填写：https://bma-privacy-detection-1251316161.cosgz.myqcloud.com/20221206/f8c7521fbd84f4c4e7c2a25ac233857e/批量仿冒应用举报模板.xlsx */
+  /** 批量模版 */
   FakeAPPs: string;
 }
 
@@ -53,11 +263,101 @@ declare interface CreateBPFakeURLResponse {
 }
 
 declare interface CreateBPFakeURLsRequest {
-  /** 仿冒网址下载链接：请严格按照模版要求填写，https://bma-privacy-detection-1251316161.cosgz.myqcloud.com/20221124/ff3273b24104d03fa3a8d0629a7f71a9/批量仿冒网址举报模板.xlsx */
+  /** 批量模版 */
   FakeURLs: string;
 }
 
 declare interface CreateBPFakeURLsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBPWhiteListRequest {
+  /** 企业Id */
+  CompanyId: number;
+  /** 白名单类型：0-网站 1-应用 2-公众号 3-小程 */
+  WhiteListType: number;
+  /** 白名单名称 */
+  WhiteLists: string[];
+}
+
+declare interface CreateBPWhiteListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteBPWhiteListRequest {
+  /** 白名单id */
+  WhiteListId: number;
+}
+
+declare interface DeleteBPWhiteListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBPBrandsRequest {
+}
+
+declare interface DescribeBPBrandsResponse {
+  /** 品牌信息 */
+  Brands?: BrandData[];
+  /** 品牌审核通知栏状态：0 不显示 1 显示 */
+  NoticeStatus?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBPFakeAPPListRequest {
+  /** 过滤参数 */
+  Filters?: Filter[];
+  /** 页数 */
+  PageSize?: number;
+  /** 页码 */
+  PageNumber?: number;
+}
+
+declare interface DescribeBPFakeAPPListResponse {
+  /** 仿冒应用列表 */
+  FakeAPPList?: FakeAPPData[];
+  /** 仿冒应用总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBPFakeURLsRequest {
+  /** 过滤参数 */
+  Filters?: Filter[];
+  /** 页数 */
+  PageSize?: number;
+  /** 页码 */
+  PageNumber?: number;
+}
+
+declare interface DescribeBPFakeURLsResponse {
+  /** 仿冒网址列表 */
+  FakeURLs?: FakeURLData[];
+  /** 仿冒网址总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBPWhiteListsRequest {
+  /** 过滤参数 */
+  Filters?: Filter[];
+  /** 页数 */
+  PageSize?: number;
+  /** 页码 */
+  PageNumber?: number;
+}
+
+declare interface DescribeBPWhiteListsResponse {
+  /** 白名单列表 */
+  WhiteLists?: WhiteListData[];
+  /** 白名单总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -997,6 +1297,8 @@ declare namespace V20210624 {
 /** {@link Bma 品牌经营管家} */
 declare interface Bma {
   (): Versions;
+  /** 添加品牌 {@link CreateBPBrandRequest} {@link CreateBPBrandResponse} */
+  CreateBPBrand(data: CreateBPBrandRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPBrandResponse>;
   /** 仿冒应用举报 {@link CreateBPFakeAPPRequest} {@link CreateBPFakeAPPResponse} */
   CreateBPFakeAPP(data: CreateBPFakeAPPRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPFakeAPPResponse>;
   /** 批量仿冒应用举报 {@link CreateBPFakeAPPListRequest} {@link CreateBPFakeAPPListResponse} */
@@ -1005,6 +1307,18 @@ declare interface Bma {
   CreateBPFakeURL(data: CreateBPFakeURLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPFakeURLResponse>;
   /** 批量仿冒网址举报 {@link CreateBPFakeURLsRequest} {@link CreateBPFakeURLsResponse} */
   CreateBPFakeURLs(data: CreateBPFakeURLsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPFakeURLsResponse>;
+  /** 添加白名单 {@link CreateBPWhiteListRequest} {@link CreateBPWhiteListResponse} */
+  CreateBPWhiteList(data: CreateBPWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBPWhiteListResponse>;
+  /** 删除白名单 {@link DeleteBPWhiteListRequest} {@link DeleteBPWhiteListResponse} */
+  DeleteBPWhiteList(data: DeleteBPWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBPWhiteListResponse>;
+  /** 查询品牌列表 {@link DescribeBPBrandsRequest} {@link DescribeBPBrandsResponse} */
+  DescribeBPBrands(data?: DescribeBPBrandsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPBrandsResponse>;
+  /** 查询仿冒应用列表 {@link DescribeBPFakeAPPListRequest} {@link DescribeBPFakeAPPListResponse} */
+  DescribeBPFakeAPPList(data?: DescribeBPFakeAPPListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPFakeAPPListResponse>;
+  /** 查询仿冒网址列表 {@link DescribeBPFakeURLsRequest} {@link DescribeBPFakeURLsResponse} */
+  DescribeBPFakeURLs(data?: DescribeBPFakeURLsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPFakeURLsResponse>;
+  /** 查询白名单列表 {@link DescribeBPWhiteListsRequest} {@link DescribeBPWhiteListsResponse} */
+  DescribeBPWhiteLists(data?: DescribeBPWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBPWhiteListsResponse>;
   /** 添加仿冒链接（举报） {@link V20210624.CreateBPFakeURLRequest} {@link V20210624.CreateBPFakeURLResponse} */
   CreateBPFakeURL(data: V20210624.CreateBPFakeURLRequest, config: AxiosRequestConfig & V20210624.VersionHeader): AxiosPromise<V20210624.CreateBPFakeURLResponse>;
   /** 添加误报工单 {@link V20210624.CreateBPFalseTicketRequest} {@link V20210624.CreateBPFalseTicketResponse} */

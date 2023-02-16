@@ -2266,6 +2266,26 @@ declare interface ModifyDomainResponse {
   RequestId?: string;
 }
 
+declare interface ModifyFunctionTargetsRequest {
+  /** 负载均衡实例ID。 */
+  LoadBalancerId: string;
+  /** 负载均衡监听器ID。 */
+  ListenerId: string;
+  /** 要修改的后端云函数服务列表。 */
+  FunctionTargets: FunctionTarget[];
+  /** 转发规则的ID，当绑定机器到七层转发规则时，必须提供此参数或Domain+Url两者之一。 */
+  LocationId?: string;
+  /** 目标规则的域名，提供LocationId参数时本参数不生效。 */
+  Domain?: string;
+  /** 目标规则的URL，提供LocationId参数时本参数不生效。 */
+  Url?: string;
+}
+
+declare interface ModifyFunctionTargetsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyListenerRequest {
   /** 负载均衡实例ID。 */
   LoadBalancerId: string;
@@ -2719,6 +2739,8 @@ declare interface Clb {
   ModifyDomain(data: ModifyDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainResponse>;
   /** 修改负载均衡七层监听器转发规则的域名级别属性 {@link ModifyDomainAttributesRequest} {@link ModifyDomainAttributesResponse} */
   ModifyDomainAttributes(data: ModifyDomainAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainAttributesResponse>;
+  /** 修改转发规则绑定的云函数 {@link ModifyFunctionTargetsRequest} {@link ModifyFunctionTargetsResponse} */
+  ModifyFunctionTargets(data: ModifyFunctionTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFunctionTargetsResponse>;
   /** 修改负载均衡监听器属性 {@link ModifyListenerRequest} {@link ModifyListenerResponse} */
   ModifyListener(data: ModifyListenerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyListenerResponse>;
   /** 修改负载均衡实例的属性 {@link ModifyLoadBalancerAttributesRequest} {@link ModifyLoadBalancerAttributesResponse} */

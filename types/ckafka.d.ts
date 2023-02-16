@@ -318,6 +318,8 @@ declare interface ConsumerRecord {
   Value: string | null;
   /** 消息时间戳 */
   Timestamp: number | null;
+  /** 消息headers */
+  Headers: string | null;
 }
 
 /** Cos Datahub 任务接入参数 */

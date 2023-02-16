@@ -290,6 +290,14 @@ declare interface DataEngineInfo {
   NetworkConnectionSet?: NetworkConnection[] | null;
   /** ui的跳转地址 */
   UiURL?: string | null;
+  /** 引擎的资源类型 */
+  ResourceType?: string | null;
+  /** 集群镜像版本ID */
+  ImageVersionId?: string | null;
+  /** 集群镜像小版本ID */
+  ChildImageVersionId?: string | null;
+  /** 集群镜像版本名字 */
+  ImageVersionName?: string | null;
 }
 
 /** 数据表数据格式。 */
@@ -1977,9 +1985,9 @@ declare interface DescribeDataEnginesRequest {
 
 declare interface DescribeDataEnginesResponse {
   /** 数据引擎列表 */
-  DataEngines: DataEngineInfo[] | null;
+  DataEngines?: DataEngineInfo[] | null;
   /** 总条数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

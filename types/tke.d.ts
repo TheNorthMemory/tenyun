@@ -4557,6 +4557,8 @@ declare interface EnableClusterAuditRequest {
   LogsetId?: string;
   /** CLS日志主题ID */
   TopicId?: string;
+  /** topic所在region，默认为集群当前region */
+  TopicRegion?: string;
 }
 
 declare interface EnableClusterAuditResponse {
@@ -4581,6 +4583,8 @@ declare interface EnableEventPersistenceRequest {
   LogsetId?: string;
   /** cls服务的topicID */
   TopicId?: string;
+  /** topic所在地域，默认为集群所在地域 */
+  TopicRegion?: string;
 }
 
 declare interface EnableEventPersistenceResponse {

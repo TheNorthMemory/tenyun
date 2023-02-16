@@ -2333,7 +2333,7 @@ declare interface CreateGrafanaNotificationChannelRequest {
 
 declare interface CreateGrafanaNotificationChannelResponse {
   /** 通道 ID */
-  ChannelId: string | null;
+  ChannelId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3223,7 +3223,7 @@ declare interface DescribeDNSConfigRequest {
 
 declare interface DescribeDNSConfigResponse {
   /** DNS 服务器数组 */
-  NameServers: string[];
+  NameServers?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3353,7 +3353,7 @@ declare interface DescribeGrafanaNotificationChannelsRequest {
 
 declare interface DescribeGrafanaNotificationChannelsResponse {
   /** 告警通道数组 */
-  NotificationChannelSet: GrafanaNotificationChannel[];
+  NotificationChannelSet?: GrafanaNotificationChannel[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3365,7 +3365,7 @@ declare interface DescribeGrafanaWhiteListRequest {
 
 declare interface DescribeGrafanaWhiteListResponse {
   /** 数组 */
-  WhiteList: string[];
+  WhiteList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

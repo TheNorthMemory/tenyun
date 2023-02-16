@@ -2056,6 +2056,8 @@ declare interface Machine {
   MachineExtraInfo?: MachineExtraInfo | null;
   /** 实例ID */
   InstanceId?: string;
+  /** 备注信息 */
+  Remark: string | null;
 }
 
 /** 服务器基础信息 */
@@ -6938,6 +6940,18 @@ declare interface ModifyLicenseUnBindsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyMachineRemarkRequest {
+  /** 主机Quuid */
+  Quuid: string;
+  /** 备注信息 */
+  Remark?: string;
+}
+
+declare interface ModifyMachineRemarkResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyMalwareTimingScanSettingsRequest {
   /** 检测模式 0 全盘检测 1快速检测 */
   CheckPattern: number;
@@ -7727,6 +7741,8 @@ declare interface Cwp {
   ModifyLicenseBinds(data: ModifyLicenseBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLicenseBindsResponse>;
   /** 授权批量解绑 {@link ModifyLicenseUnBindsRequest} {@link ModifyLicenseUnBindsResponse} */
   ModifyLicenseUnBinds(data: ModifyLicenseUnBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLicenseUnBindsResponse>;
+  /** 修改主机备注信息 {@link ModifyMachineRemarkRequest} {@link ModifyMachineRemarkResponse} */
+  ModifyMachineRemark(data: ModifyMachineRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMachineRemarkResponse>;
   /** 定时扫描设置 {@link ModifyMalwareTimingScanSettingsRequest} {@link ModifyMalwareTimingScanSettingsResponse} */
   ModifyMalwareTimingScanSettings(data: ModifyMalwareTimingScanSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMalwareTimingScanSettingsResponse>;
   /** 编辑订单属性 {@link ModifyOrderAttributeRequest} {@link ModifyOrderAttributeResponse} */

@@ -376,6 +376,10 @@ declare interface LogConfigExtractRule {
   UnMatchUpload?: string | null;
   /** 解析失败日志的键名称 */
   UnMatchedKey?: string | null;
+  /** tracking */
+  Backtracking?: string | null;
+  /** 分隔符 */
+  Delimiter?: string | null;
 }
 
 /** LogConfig 列表结果 */
@@ -644,6 +648,8 @@ declare interface ServiceVersionBrief {
   WorkloadInfo: WorkloadInfo | null;
   /** 创建日期 */
   CreateDate: string | null;
+  /** 地域id */
+  RegionId?: string | null;
 }
 
 /** 查询过滤器 */
@@ -718,6 +724,8 @@ declare interface TemEnvironmentStartingStatus {
   ApplicationNumNeedToStart?: number | null;
   /** 已经启动的应用数量 */
   StartedApplicationNum?: number | null;
+  /** 启动失败的应用数量 */
+  StartFailedApplicationNum?: number | null;
 }
 
 /** 环境停止进程（只统计由环境停止操作触发的应用数量） */
@@ -726,6 +734,8 @@ declare interface TemEnvironmentStoppingStatus {
   ApplicationNumNeedToStop?: number | null;
   /** 已经停止的应用数量 */
   StoppedApplicationNum?: number | null;
+  /** 停止失败的应用数量 */
+  StopFailedApplicationNum?: number | null;
 }
 
 /** 命名空间对象 */
@@ -996,6 +1006,10 @@ declare interface TemServiceVersionInfo {
   ConfEdited?: boolean | null;
   /** 标签 */
   Tags?: Tag[] | null;
+  /** 是否编码 */
+  PreStopEncoded?: string | null;
+  /** 是否编码 */
+  PostStartEncoded?: string | null;
 }
 
 /** 创建应用，创建仓库参数 */
