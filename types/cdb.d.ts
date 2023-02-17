@@ -2821,9 +2821,9 @@ declare interface DescribeDeviceMonitorInfoResponse {
 declare interface DescribeErrorLogDataRequest {
   /** 实例 ID 。 */
   InstanceId: string;
-  /** 开始时间戳。 */
+  /** 开始时间戳。例如 1585142640 。 */
   StartTime: number;
-  /** 结束时间戳。 */
+  /** 结束时间戳。例如 1585142640 。 */
   EndTime: number;
   /** 要匹配的关键字列表，最多支持15个关键字。 */
   KeyWords?: string[];
@@ -3071,9 +3071,9 @@ declare interface DescribeRollbackTaskDetailResponse {
 declare interface DescribeSlowLogDataRequest {
   /** 实例 ID。 */
   InstanceId: string;
-  /** 开始时间戳。 */
+  /** 开始时间戳。例如 1585142640 。 */
   StartTime: number;
-  /** 结束时间戳。 */
+  /** 结束时间戳。例如 1585142640 。 */
   EndTime: number;
   /** 客户端 Host 列表。 */
   UserHosts?: string[];
@@ -4046,30 +4046,6 @@ declare interface SwitchForUpgradeResponse {
   RequestId?: string;
 }
 
-declare interface UpgradeCDBProxyRequest {
-  /** 实例ID */
-  InstanceId: string;
-  /** 数据库代理ID */
-  ProxyGroupId: string;
-  /** 代理节点个数 */
-  ProxyCount: number;
-  /** 代理节点核数 */
-  Cpu: number;
-  /** 代理节点内存大小 */
-  Mem: number;
-  /** 重新负载均衡：auto（自动），manual（手动） */
-  ReloadBalance: string;
-  /** 升级时间 nowTime（升级完成时）timeWindow（实例维护时间） */
-  UpgradeTime: string;
-}
-
-declare interface UpgradeCDBProxyResponse {
-  /** 异步处理ID */
-  AsyncRequestId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface UpgradeCDBProxyVersionRequest {
   /** 实例ID */
   InstanceId: string;
@@ -4439,8 +4415,6 @@ declare interface Cdb {
   SwitchDrInstanceToMaster(data: SwitchDrInstanceToMasterRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDrInstanceToMasterResponse>;
   /** 切换访问新实例 {@link SwitchForUpgradeRequest} {@link SwitchForUpgradeResponse} */
   SwitchForUpgrade(data: SwitchForUpgradeRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchForUpgradeResponse>;
-  /** @deprecated 升级数据库代理配置（接口已经废弃，请使用AdjustCdbProxy进行数据库代理的配置） {@link UpgradeCDBProxyRequest} {@link UpgradeCDBProxyResponse} */
-  UpgradeCDBProxy(data: UpgradeCDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeCDBProxyResponse>;
   /** 升级数据库代理版本 {@link UpgradeCDBProxyVersionRequest} {@link UpgradeCDBProxyVersionResponse} */
   UpgradeCDBProxyVersion(data: UpgradeCDBProxyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeCDBProxyVersionResponse>;
   /** 调整云数据库实例的配置 {@link UpgradeDBInstanceRequest} {@link UpgradeDBInstanceResponse} */

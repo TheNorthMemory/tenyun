@@ -2,12 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** 认证主体主要信息 */
+/** 互信主体主要信息 */
 declare interface AuthNode {
-  /** 主体关系ID */
+  /** 互信主体关系ID */
   RelationId: number | null;
-  /** 主体名称 */
+  /** 互信主体名称 */
   AuthName: string | null;
+  /** 主体管理员 */
+  Manager: MemberMainInfo | null;
 }
 
 /** 组织身份策略 */
@@ -24,6 +26,14 @@ declare interface MemberIdentity {
   IdentityId: number | null;
   /** 身份名称。 */
   IdentityAliasName: string | null;
+}
+
+/** 成员主要信息 */
+declare interface MemberMainInfo {
+  /** 成员uin */
+  MemberUin: number | null;
+  /** 成员名称j */
+  MemberName: string | null;
 }
 
 /** 组织身份 */
@@ -279,13 +289,15 @@ declare interface DescribeOrganizationAuthNodeRequest {
   Offset: number;
   /** 限制数目。最大50 */
   Limit: number;
+  /** 互信主体名称。 */
+  AuthName?: string;
 }
 
 declare interface DescribeOrganizationAuthNodeResponse {
   /** 总数。 */
-  Total: number | null;
+  Total?: number | null;
   /** 条目详情。 */
-  Items: AuthNode[] | null;
+  Items?: AuthNode[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -823,7 +835,7 @@ declare interface Organization {
   DeleteOrganizationNodes(data: DeleteOrganizationNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationNodesResponse>;
   /** 获取企业组织信息 {@link DescribeOrganizationRequest} {@link DescribeOrganizationResponse} */
   DescribeOrganization(data?: DescribeOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationResponse>;
-  /** 获取可创建组织成员的认证主体关系列表 {@link DescribeOrganizationAuthNodeRequest} {@link DescribeOrganizationAuthNodeResponse} */
+  /** 获取已设置管理员的互信主体关系列表 {@link DescribeOrganizationAuthNodeRequest} {@link DescribeOrganizationAuthNodeResponse} */
   DescribeOrganizationAuthNode(data: DescribeOrganizationAuthNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationAuthNodeResponse>;
   /** 获取组织成员被绑定授权关系的子账号列表 {@link DescribeOrganizationMemberAuthAccountsRequest} {@link DescribeOrganizationMemberAuthAccountsResponse} */
   DescribeOrganizationMemberAuthAccounts(data: DescribeOrganizationMemberAuthAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberAuthAccountsResponse>;

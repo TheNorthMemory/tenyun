@@ -52,6 +52,8 @@ declare interface Blueprint {
   GuideUrl: string;
   /** 镜像关联使用场景Id列表。 */
   SceneIdSet: string[] | null;
+  /** Docker版本号。 */
+  DockerVersion?: string | null;
 }
 
 /** 描述镜像实例信息。 */

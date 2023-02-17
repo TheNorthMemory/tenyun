@@ -1613,7 +1613,7 @@ declare interface DescribeRumLogExportsResponse {
 declare interface DescribeRumLogListRequest {
   /** 排序方式 desc asc（必填） */
   OrderBy: string;
-  /** 开始时间（必填） */
+  /** 开始时间（必填）格式为时间戳 毫秒 */
   StartTime: string;
   /** 单次查询返回的原始日志条数，最大值为100（必填） */
   Limit: number;
@@ -1621,7 +1621,7 @@ declare interface DescribeRumLogListRequest {
   Page: number;
   /** 查询语句，参考控制台请求参数，语句长度最大为4096（必填） */
   Query: string;
-  /** 结束时间（必填） */
+  /** 结束时间（必填）格式为时间戳 毫秒 */
   EndTime: string;
   /** 项目ID（必填） */
   ID: number;
@@ -1629,7 +1629,7 @@ declare interface DescribeRumLogListRequest {
 
 declare interface DescribeRumLogListResponse {
   /** 返回字符串 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

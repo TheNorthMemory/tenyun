@@ -1364,11 +1364,11 @@ declare interface AudioDenoiseInfo {
 
 /** 音频流配置参数 */
 declare interface AudioTemplateInfo {
-  /** 音频流的编码格式。当外层参数 Container 为 mp3 时，可选值为：libmp3lame。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：libfdk_aac；libmp3lame；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：libfdk_aac：更适合 mp4；libmp3lame：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：libfdk_aac。当外层参数 Format 为 HLS 或 MPEG-DASH 时，可选值为：libfdk_aac。 */
+  /** 音频流的编码格式。当外层参数 Container 为 mp3 时，可选值为：libmp3lame。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：libfdk_aac；libmp3lame；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：libfdk_aac：更适合 mp4；libmp3lame：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：libfdk_aac。当外层参数 Format 为 HLS 或 MPEG-DASH 时，可选值为：libfdk_aac。当外层参数 Container 为 wav 时，可选值为：pcm16。 */
   Codec: string;
   /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。当取值为 0，表示音频码率和原始音频保持一致。 */
   Bitrate: number;
-  /** 音频流的采样率，可选值：320004410048000单位：Hz。 */
+  /** 音频流的采样率，可选值：16000，仅当 Codec 为 pcm16 时可选。320004410048000单位：Hz。 */
   SampleRate: number;
   /** 音频通道方式，可选值：1：单通道2：双通道6：立体声当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为立体声。默认值：2。 */
   AudioChannel?: number;
@@ -1376,11 +1376,11 @@ declare interface AudioTemplateInfo {
 
 /** 音频流配置参数 */
 declare interface AudioTemplateInfoForUpdate {
-  /** 音频流的编码格式。当外层参数 Container 为 mp3 时，可选值为：libmp3lame。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：libfdk_aac；libmp3lame；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：libfdk_aac：更适合 mp4；libmp3lame：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：libfdk_aac。当外层参数 Format 为 HLS 或 MPEG-DASH 时，可选值为：libfdk_aac。 */
+  /** 音频流的编码格式。当外层参数 Container 为 mp3 时，可选值为：libmp3lame。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：libfdk_aac；libmp3lame；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：libfdk_aac：更适合 mp4；libmp3lame：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：libfdk_aac。当外层参数 Format 为 HLS 或 MPEG-DASH 时，可选值为：libfdk_aac。当外层参数 Container 为 wav 时，可选值为：pcm16。 */
   Codec?: string;
   /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。 当取值为 0，表示音频码率和原始音频保持一致。 */
   Bitrate?: number;
-  /** 音频流的采样率，可选值：320004410048000单位：Hz。 */
+  /** 音频流的采样率，可选值：16000，仅当 Codec 为 pcm16 时可选。320004410048000单位：Hz。 */
   SampleRate?: number;
   /** 音频通道方式，可选值：1：单通道2：双通道6：立体声当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为立体声。 */
   AudioChannel?: number;
@@ -5527,7 +5527,7 @@ declare interface CreateSuperPlayerConfigResponse {
 }
 
 declare interface CreateTranscodeTemplateRequest {
-  /** 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。 */
+  /** 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。 */
   Container: string;
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: number;
@@ -5551,7 +5551,7 @@ declare interface CreateTranscodeTemplateRequest {
 
 declare interface CreateTranscodeTemplateResponse {
   /** 转码模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6640,50 +6640,52 @@ declare interface DescribeTaskDetailRequest {
 }
 
 declare interface DescribeTaskDetailResponse {
-  /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务； ReviewAudioVideo：音视频审核任务。 */
-  TaskType: string;
+  /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务；ReviewAudioVideo：音视频审核任务。 */
+  TaskType?: string;
   /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成。 */
-  Status: string;
+  Status?: string;
   /** 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  BeginProcessTime: string;
+  BeginProcessTime?: string;
   /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  FinishTime: string;
+  FinishTime?: string;
   /** 视频处理任务信息，仅当 TaskType 为 Procedure，该字段有值。 */
-  ProcedureTask: ProcedureTask | null;
+  ProcedureTask?: ProcedureTask | null;
   /** 视频编辑任务信息，仅当 TaskType 为 EditMedia，该字段有值。 */
-  EditMediaTask: EditMediaTask | null;
+  EditMediaTask?: EditMediaTask | null;
   /** 微信发布任务信息，仅当 TaskType 为 WechatPublish，该字段有值。 */
-  WechatPublishTask: WechatPublishTask | null;
+  WechatPublishTask?: WechatPublishTask | null;
   /** 制作媒体文件任务信息，仅当 TaskType 为 ComposeMedia，该字段有值。 */
-  ComposeMediaTask: ComposeMediaTask | null;
+  ComposeMediaTask?: ComposeMediaTask | null;
   /** 视频拆条任务信息，仅当 TaskType 为 SplitMedia，该字段有值。 */
-  SplitMediaTask: SplitMediaTask | null;
+  SplitMediaTask?: SplitMediaTask | null;
   /** 微信小程序发布任务信息，仅当 TaskType 为 WechatMiniProgramPublish，该字段有值。 */
-  WechatMiniProgramPublishTask: WechatMiniProgramPublishTask | null;
+  WechatMiniProgramPublishTask?: WechatMiniProgramPublishTask | null;
   /** 拉取上传媒体文件任务信息，仅当 TaskType 为 PullUpload，该字段有值。 */
-  PullUploadTask: PullUploadTask | null;
+  PullUploadTask?: PullUploadTask | null;
   /** 视频转码任务信息，仅当 TaskType 为 Transcode，该字段有值。 */
-  TranscodeTask: TranscodeTask2017 | null;
+  TranscodeTask?: TranscodeTask2017 | null;
   /** 视频拼接任务信息，仅当 TaskType 为 Concat，该字段有值。 */
-  ConcatTask: ConcatTask2017 | null;
+  ConcatTask?: ConcatTask2017 | null;
   /** 视频剪辑任务信息，仅当 TaskType 为 Clip，该字段有值。 */
-  ClipTask: ClipTask2017 | null;
+  ClipTask?: ClipTask2017 | null;
   /** 截取雪碧图任务信息，仅当 TaskType 为 ImageSprite，该字段有值。 */
-  CreateImageSpriteTask: CreateImageSpriteTask2017 | null;
+  CreateImageSpriteTask?: CreateImageSpriteTask2017 | null;
   /** 视频指定时间点截图任务信息，仅当 TaskType 为 SnapshotByTimeOffset，该字段有值。 */
-  SnapshotByTimeOffsetTask: SnapshotByTimeOffsetTask2017 | null;
+  SnapshotByTimeOffsetTask?: SnapshotByTimeOffsetTask2017 | null;
   /** 智能去除水印任务信息，仅当 TaskType 为 RemoveWatermark，该字段有值。 */
-  RemoveWatermarkTask: RemoveWatermarkTask | null;
+  RemoveWatermarkTask?: RemoveWatermarkTask | null;
+  /** 音画质重生任务信息，仅当 TaskType 为 RebuildMedia，该字段有值。 */
+  RebuildMediaTask?: RebuildMediaTask | null;
   /** 提取溯源水印任务信息，仅当 TaskType 为 ExtractTraceWatermark，该字段有值。 */
-  ExtractTraceWatermarkTask: ExtractTraceWatermarkTask | null;
+  ExtractTraceWatermarkTask?: ExtractTraceWatermarkTask | null;
   /** 音视频审核任务信息，仅当 TaskType 为 ReviewAudioVideo，该字段有值。 */
-  ReviewAudioVideoTask: ReviewAudioVideoTask | null;
+  ReviewAudioVideoTask?: ReviewAudioVideoTask | null;
   /** 该字段已无效。 */
-  ReduceMediaBitrateTask: ReduceMediaBitrateTask | null;
+  ReduceMediaBitrateTask?: ReduceMediaBitrateTask | null;
   /** 获取文件属性任务信息，仅当 TaskType 为 DescribeFileAttributes，该字段有值。 */
-  DescribeFileAttributesTask: DescribeFileAttributesTask | null;
+  DescribeFileAttributesTask?: DescribeFileAttributesTask | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7449,7 +7451,7 @@ declare interface ModifyTranscodeTemplateRequest {
   Definition: number;
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: number;
-  /** 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。 */
+  /** 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。 */
   Container?: string;
   /** 转码模板名称，长度限制：64 个字符。 */
   Name?: string;
@@ -7730,6 +7732,58 @@ declare interface PushUrlCacheRequest {
 }
 
 declare interface PushUrlCacheResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RebuildMediaRequest {
+  /** 媒体文件 ID。 */
+  FileId: string;
+  /** 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 起始偏移时间，单位：秒，不填表示从视频开始截取。 */
+  StartTimeOffset?: number;
+  /** 结束偏移时间，单位：秒，不填表示截取到视频末尾。 */
+  EndTimeOffset?: number;
+  /** 画质修复控制参数。 */
+  RepairInfo?: RepairInfo;
+  /** 智能插帧控制参数。 */
+  VideoFrameInterpolationInfo?: VideoFrameInterpolationInfo;
+  /** 画面超分控制参数。 */
+  SuperResolutionInfo?: SuperResolutionInfo;
+  /** 高动态范围类型控制参数。 */
+  HDRInfo?: HDRInfo;
+  /** 视频降噪控制参数。 */
+  VideoDenoiseInfo?: VideoDenoiseInfo;
+  /** 音频降噪控制参数。 */
+  AudioDenoiseInfo?: AudioDenoiseInfo;
+  /** 色彩增强控制参数。 */
+  ColorInfo?: ColorEnhanceInfo;
+  /** 细节增强控制参数。 */
+  SharpInfo?: SharpEnhanceInfo;
+  /** 人脸增强控制参数。 */
+  FaceInfo?: FaceEnhanceInfo;
+  /** 低光照控制参数。 */
+  LowLightInfo?: LowLightEnhanceInfo;
+  /** 去划痕控制参数。 */
+  ScratchRepairInfo?: ScratchRepairInfo;
+  /** 去伪影（毛刺）控制参数。 */
+  ArtifactRepairInfo?: ArtifactRepairInfo;
+  /** 音画质重生输出目标参数。 */
+  TargetInfo?: RebuildMediaTargetInfo;
+  /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+  SessionId?: string;
+  /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+  SessionContext?: string;
+  /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
+  TasksPriority?: number;
+  /** 保留字段，特殊用途时使用。 */
+  ExtInfo?: string;
+}
+
+declare interface RebuildMediaResponse {
+  /** 音画质重生的任务 ID，可以通过该 ID 查询音画质重生任务的状态。 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8271,6 +8325,8 @@ declare interface Vod {
   PullUpload(data: PullUploadRequest, config?: AxiosRequestConfig): AxiosPromise<PullUploadResponse>;
   /** 预热URL {@link PushUrlCacheRequest} {@link PushUrlCacheResponse} */
   PushUrlCache(data: PushUrlCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PushUrlCacheResponse>;
+  /** 发起音画质重生 {@link RebuildMediaRequest} {@link RebuildMediaResponse} */
+  RebuildMedia(data: RebuildMediaRequest, config?: AxiosRequestConfig): AxiosPromise<RebuildMediaResponse>;
   /** 刷新URL {@link RefreshUrlCacheRequest} {@link RefreshUrlCacheResponse} */
   RefreshUrlCache(data: RefreshUrlCacheRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshUrlCacheResponse>;
   /** 智能去除水印 {@link RemoveWatermarkRequest} {@link RemoveWatermarkResponse} */

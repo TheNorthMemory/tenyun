@@ -1377,7 +1377,7 @@ declare interface DescribeInstanceMonitorBigKeyRequest {
 
 declare interface DescribeInstanceMonitorBigKeyResponse {
   /** 大Key详细信息 */
-  Data?: BigKeyInfo[];
+  Data: BigKeyInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1405,7 +1405,7 @@ declare interface DescribeInstanceMonitorBigKeyTypeDistRequest {
 
 declare interface DescribeInstanceMonitorBigKeyTypeDistResponse {
   /** 大Key类型分布详细信息 */
-  Data?: BigKeyTypeInfo[];
+  Data: BigKeyTypeInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

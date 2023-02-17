@@ -1155,7 +1155,7 @@ declare interface Cbs {
   DescribeDiskBackups(data?: DescribeDiskBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskBackupsResponse>;
   /** 查询云硬盘配额 {@link DescribeDiskConfigQuotaRequest} {@link DescribeDiskConfigQuotaResponse} */
   DescribeDiskConfigQuota(data: DescribeDiskConfigQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskConfigQuotaResponse>;
-  /** 查询云盘操作日志列表 {@link DescribeDiskOperationLogsRequest} {@link DescribeDiskOperationLogsResponse} */
+  /** @deprecated 查询云盘操作日志列表 {@link DescribeDiskOperationLogsRequest} {@link DescribeDiskOperationLogsResponse} */
   DescribeDiskOperationLogs(data: DescribeDiskOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskOperationLogsResponse>;
   /** 查询云硬盘独享集群列表 {@link DescribeDiskStoragePoolRequest} {@link DescribeDiskStoragePoolResponse} */
   DescribeDiskStoragePool(data?: DescribeDiskStoragePoolRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskStoragePoolResponse>;
@@ -1163,7 +1163,7 @@ declare interface Cbs {
   DescribeDisks(data?: DescribeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksResponse>;
   /** 查询实例关联的云硬盘数量 {@link DescribeInstancesDiskNumRequest} {@link DescribeInstancesDiskNumResponse} */
   DescribeInstancesDiskNum(data: DescribeInstancesDiskNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDiskNumResponse>;
-  /** 查询快照操作日志列表 {@link DescribeSnapshotOperationLogsRequest} {@link DescribeSnapshotOperationLogsResponse} */
+  /** @deprecated 查询快照操作日志列表 {@link DescribeSnapshotOperationLogsRequest} {@link DescribeSnapshotOperationLogsResponse} */
   DescribeSnapshotOperationLogs(data: DescribeSnapshotOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotOperationLogsResponse>;
   /** 查看快照分享信息 {@link DescribeSnapshotSharePermissionRequest} {@link DescribeSnapshotSharePermissionResponse} */
   DescribeSnapshotSharePermission(data: DescribeSnapshotSharePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotSharePermissionResponse>;

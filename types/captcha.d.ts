@@ -516,6 +516,14 @@ declare interface DescribeCaptchaUserAllAppIdResponse {
   RequestId?: string;
 }
 
+declare interface GetRequestStatisticsRequest {
+}
+
+declare interface GetRequestStatisticsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetTicketStatisticsRequest {
   /** 验证码AppId */
   CaptchaAppId: string;
@@ -534,6 +542,14 @@ declare interface GetTicketStatisticsResponse {
   CaptchaCode: number;
   /** 验证码返回信息 */
   CaptchaMsg: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetTotalRequestStatisticsRequest {
+}
+
+declare interface GetTotalRequestStatisticsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -623,8 +639,12 @@ declare interface Captcha {
   DescribeCaptchaTicketData(data: DescribeCaptchaTicketDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaTicketDataResponse>;
   /** 安全验证码获取用户注册所有APPId和应用名称 {@link DescribeCaptchaUserAllAppIdRequest} {@link DescribeCaptchaUserAllAppIdResponse} */
   DescribeCaptchaUserAllAppId(data?: DescribeCaptchaUserAllAppIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaUserAllAppIdResponse>;
+  /** 查询单个CaptchaAppID验证数据 {@link GetRequestStatisticsRequest} {@link GetRequestStatisticsResponse} */
+  GetRequestStatistics(data?: GetRequestStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRequestStatisticsResponse>;
   /** 查询单个CaptchaAppID票据校验数据 {@link GetTicketStatisticsRequest} {@link GetTicketStatisticsResponse} */
   GetTicketStatistics(data: GetTicketStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<GetTicketStatisticsResponse>;
+  /** 查询全部验证统计数据 {@link GetTotalRequestStatisticsRequest} {@link GetTotalRequestStatisticsResponse} */
+  GetTotalRequestStatistics(data?: GetTotalRequestStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<GetTotalRequestStatisticsResponse>;
   /** 查询全部票据校验统计数据 {@link GetTotalTicketStatisticsRequest} {@link GetTotalTicketStatisticsResponse} */
   GetTotalTicketStatistics(data: GetTotalTicketStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<GetTotalTicketStatisticsResponse>;
   /** 更新验证码应用APPId信息 {@link UpdateCaptchaAppIdInfoRequest} {@link UpdateCaptchaAppIdInfoResponse} */

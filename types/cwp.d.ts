@@ -2628,7 +2628,7 @@ declare interface RiskDnsList {
   Tags: string[];
   /** 外网ip */
   MachineWanIp: string | null;
-  /** 主机在线状态 OFFLINE ONLINE */
+  /** 主机在线状态[OFFLINE:离线|ONLINE:在线|UNKNOWN:未知] */
   MachineStatus: string | null;
 }
 

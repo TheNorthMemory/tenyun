@@ -322,6 +322,26 @@ declare interface AgentTransferMoneyResponse {
   RequestId?: string;
 }
 
+declare interface AssignClientsToSalesRequest {
+  /** 代客/申请中代客uin列表，最大50条 */
+  ClientUins: string[];
+  /** 业务员uin */
+  SalesUin: string;
+  /** 代客类型:normal-代客 apply-申请中代客 */
+  AssignClientStatus: string;
+  /** 操作类型:assign-执行分派 cancel-取消分派 */
+  AssignActionType: string;
+}
+
+declare interface AssignClientsToSalesResponse {
+  /** 处理成功的代客uin列表 */
+  SucceedUins?: string[] | null;
+  /** 处理失败的代客uin列表 */
+  FailedUins?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AuditApplyClientRequest {
   /** 待审核客户账号ID */
   ClientUin: string;
@@ -519,9 +539,9 @@ declare interface DescribeAgentDealsCacheRequest {
 
 declare interface DescribeAgentDealsCacheResponse {
   /** 订单数组 */
-  AgentDealSet: AgentDealElem[];
+  AgentDealSet?: AgentDealElem[];
   /** 符合条件的订单总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -547,9 +567,9 @@ declare interface DescribeAgentPayDealsRequest {
 
 declare interface DescribeAgentPayDealsResponse {
   /** 订单数组 */
-  AgentPayDealSet: AgentDealElem[];
+  AgentPayDealSet?: AgentDealElem[];
   /** 符合条件的订单总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -605,9 +625,9 @@ declare interface DescribeAgentSelfPayDealsRequest {
 
 declare interface DescribeAgentSelfPayDealsResponse {
   /** 订单数组 */
-  AgentPayDealSet: AgentDealElem[];
+  AgentPayDealSet?: AgentDealElem[];
   /** 符合条件的订单总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -699,9 +719,9 @@ declare interface DescribeRebateInfosRequest {
 
 declare interface DescribeRebateInfosResponse {
   /** 返佣信息列表 */
-  RebateInfoSet: RebateInfoElem[];
+  RebateInfoSet?: RebateInfoElem[];
   /** 符合查询条件返佣信息数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -783,6 +803,8 @@ declare interface Partners {
   AgentPayDeals(data: AgentPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<AgentPayDealsResponse>;
   /** 给客户转账 {@link AgentTransferMoneyRequest} {@link AgentTransferMoneyResponse} */
   AgentTransferMoney(data: AgentTransferMoneyRequest, config?: AxiosRequestConfig): AxiosPromise<AgentTransferMoneyResponse>;
+  /** 为代客/申请中代客分派业务员 {@link AssignClientsToSalesRequest} {@link AssignClientsToSalesResponse} */
+  AssignClientsToSales(data: AssignClientsToSalesRequest, config?: AxiosRequestConfig): AxiosPromise<AssignClientsToSalesResponse>;
   /** 审核客户 {@link AuditApplyClientRequest} {@link AuditApplyClientResponse} */
   AuditApplyClient(data: AuditApplyClientRequest, config?: AxiosRequestConfig): AxiosPromise<AuditApplyClientResponse>;
   /** 合作伙伴为客户创建强代付关系 {@link CreatePayRelationForClientRequest} {@link CreatePayRelationForClientResponse} */
@@ -797,13 +819,13 @@ declare interface Partners {
   DescribeAgentClients(data?: DescribeAgentClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentClientsResponse>;
   /** 代理商缓存订单查询接口（预付费） {@link DescribeAgentDealsByCacheRequest} {@link DescribeAgentDealsByCacheResponse} */
   DescribeAgentDealsByCache(data: DescribeAgentDealsByCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsByCacheResponse>;
-  /** 代理商缓存订单查询接口（禁止接入） {@link DescribeAgentDealsCacheRequest} {@link DescribeAgentDealsCacheResponse} */
+  /** 【已切换至DescribeAgentDealsByCache】代理商缓存订单查询接口 {@link DescribeAgentDealsCacheRequest} {@link DescribeAgentDealsCacheResponse} */
   DescribeAgentDealsCache(data: DescribeAgentDealsCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsCacheResponse>;
-  /** 代理商代付订单查询接口（禁止接入） {@link DescribeAgentPayDealsRequest} {@link DescribeAgentPayDealsResponse} */
+  /** 【已切换至DescribeAgentPayDealsV2】代理商代付订单查询接口 {@link DescribeAgentPayDealsRequest} {@link DescribeAgentPayDealsResponse} */
   DescribeAgentPayDeals(data: DescribeAgentPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentPayDealsResponse>;
   /** 代理商代付订单查询接口（预付费） {@link DescribeAgentPayDealsV2Request} {@link DescribeAgentPayDealsV2Response} */
   DescribeAgentPayDealsV2(data: DescribeAgentPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentPayDealsV2Response>;
-  /** 代理商自付订单查询接口（禁止接入） {@link DescribeAgentSelfPayDealsRequest} {@link DescribeAgentSelfPayDealsResponse} */
+  /** 【已切换至DescribeAgentSelfPayDealsV2】代理商自付订单查询接口 {@link DescribeAgentSelfPayDealsRequest} {@link DescribeAgentSelfPayDealsResponse} */
   DescribeAgentSelfPayDeals(data: DescribeAgentSelfPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsResponse>;
   /** 代理商自付订单查询接口（预付费） {@link DescribeAgentSelfPayDealsV2Request} {@link DescribeAgentSelfPayDealsV2Response} */
   DescribeAgentSelfPayDealsV2(data: DescribeAgentSelfPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsV2Response>;
@@ -811,7 +833,7 @@ declare interface Partners {
   DescribeClientBalance(data: DescribeClientBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientBalanceResponse>;
   /** 查询客户余额（新） {@link DescribeClientBalanceNewRequest} {@link DescribeClientBalanceNewResponse} */
   DescribeClientBalanceNew(data: DescribeClientBalanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientBalanceNewResponse>;
-  /** 查询代理商返佣信息（禁止接入） {@link DescribeRebateInfosRequest} {@link DescribeRebateInfosResponse} */
+  /** 【已切换至DescribeRebateInfosNew】查询代理商返佣信息 {@link DescribeRebateInfosRequest} {@link DescribeRebateInfosResponse} */
   DescribeRebateInfos(data?: DescribeRebateInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebateInfosResponse>;
   /** 查询代理商返佣信息V2 {@link DescribeRebateInfosNewRequest} {@link DescribeRebateInfosNewResponse} */
   DescribeRebateInfosNew(data?: DescribeRebateInfosNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebateInfosNewResponse>;

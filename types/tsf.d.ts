@@ -258,6 +258,8 @@ declare interface ApplicationForPage {
   ApplicationRemarkName: string | null;
   /** 服务配置信息列表 */
   ServiceConfigList: ServiceConfig[] | null;
+  /** IgnoreCreateImageRepository */
+  IgnoreCreateImageRepository?: boolean | null;
 }
 
 /** 业务日志配置关联部署组信息 */
@@ -626,6 +628,8 @@ declare interface ContainGroup {
   Alias: string | null;
   /** KubeInjectEnable值 */
   KubeInjectEnable: boolean | null;
+  /** 更新时间 */
+  UpdatedTime?: string | null;
 }
 
 /** 部署组列表（应用下钻） */
@@ -894,6 +898,28 @@ declare interface DeliveryConfigBindGroup {
   Groups: GroupInfo[] | null;
   /** 创建时间 */
   CreateTime: string | null;
+  /** KafkaVIp */
+  KafkaVIp?: string | null;
+  /** KafkaAddress */
+  KafkaAddress?: string | null;
+  /** KafkaVPort */
+  KafkaVPort?: string | null;
+  /** Topic */
+  Topic?: string | null;
+  /** LineRule */
+  LineRule?: string | null;
+  /** CustomRule */
+  CustomRule?: string | null;
+  /** EnableGlobalLineRule */
+  EnableGlobalLineRule?: boolean | null;
+  /** EnableAuth */
+  EnableAuth?: boolean | null;
+  /** Username */
+  Username?: string | null;
+  /** Password */
+  Password?: string | null;
+  /** KafkaInfos */
+  KafkaInfos?: DeliveryKafkaInfo[] | null;
 }
 
 /** 描述配置项绑定的部署组 */
@@ -2820,6 +2846,10 @@ declare interface UnitRule {
   Status?: string | null;
   /** 规则项列表 */
   UnitRuleItemList?: UnitRuleItem[] | null;
+  /** CreatedTime */
+  CreatedTime?: string | null;
+  /** UpdatedTime */
+  UpdatedTime?: string | null;
 }
 
 /** 微服务网关单元化规则项 */

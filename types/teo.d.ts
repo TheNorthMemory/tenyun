@@ -1798,6 +1798,8 @@ declare interface Zone {
   ActiveStatus: string;
   /** 站点别名。数字、英文、-和_组合，限制20个字符。 */
   AliasZoneName: string | null;
+  /** 是否伪站点，取值有： 0：非伪站点； 1：伪站点。 */
+  IsFake: number | null;
 }
 
 /** 站点配置。 */

@@ -2510,6 +2510,24 @@ declare interface SetRenewFlagResponse {
   RequestId?: string;
 }
 
+declare interface SwitchClusterVpcRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 字符串vpc id */
+  UniqVpcId: string;
+  /** 字符串子网id */
+  UniqSubnetId: string;
+  /** 旧地址回收时间 */
+  OldIpReserveHours: number;
+}
+
+declare interface SwitchClusterVpcResponse {
+  /** 异步任务id。 */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SwitchClusterZoneRequest {
   /** 集群Id */
   ClusterId: string;
@@ -2733,6 +2751,8 @@ declare interface Cynosdb {
   SearchClusterTables(data: SearchClusterTablesRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClusterTablesResponse>;
   /** 设置自动续费 {@link SetRenewFlagRequest} {@link SetRenewFlagResponse} */
   SetRenewFlag(data: SetRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetRenewFlagResponse>;
+  /** 更换集群vpc {@link SwitchClusterVpcRequest} {@link SwitchClusterVpcResponse} */
+  SwitchClusterVpc(data: SwitchClusterVpcRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchClusterVpcResponse>;
   /** 切换到从可用区 {@link SwitchClusterZoneRequest} {@link SwitchClusterZoneResponse} */
   SwitchClusterZone(data: SwitchClusterZoneRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchClusterZoneResponse>;
   /** 更换数据库代理vpc {@link SwitchProxyVpcRequest} {@link SwitchProxyVpcResponse} */

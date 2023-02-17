@@ -68,6 +68,28 @@ declare interface DocumentInfo {
   UpdateTime?: number | null;
 }
 
+/** 批量创建群组基础信息 */
+declare interface GroupBaseInfo {
+  /** 待创建群组名 */
+  GroupName: string | null;
+  /** 群组主讲人ID */
+  TeacherId?: string | null;
+}
+
+/** 获取群组列表返回的群组信息 */
+declare interface GroupInfo {
+  /** 群组ID */
+  GroupId?: string | null;
+  /** 群组名称 */
+  GroupName?: string | null;
+  /** 群组主讲人ID */
+  TeacherId?: string | null;
+  /** 群组类型 0-基础群组 1-组合群组，若为1时会返回子群组ID列表 */
+  GroupType?: number | null;
+  /** 子群组ID列表，如有。 */
+  SubGroupIds?: string | null;
+}
+
 /** 成员记录信息。 */
 declare interface MemberRecord {
   /** 用户ID。 */
@@ -132,6 +154,8 @@ declare interface RoomInfo {
   AudienceType?: number | null;
   /** 录制布局。 */
   RecordLayout?: number | null;
+  /** 房间绑定的群组ID */
+  GroupId?: string | null;
 }
 
 /** 场景配置 */
@@ -172,6 +196,50 @@ declare interface WatermarkConfig {
   LocationY?: number | null;
 }
 
+declare interface AddGroupMemberRequest {
+  /** 群组ID */
+  GroupId: string;
+  /** 低代码平台应用ID */
+  SdkAppId: number;
+  /** 成员列表，最大值200 */
+  MemberIds: string[];
+}
+
+declare interface AddGroupMemberResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchAddGroupMemberRequest {
+  /** 待添加群组ID列表，最大值100 */
+  GroupIds: string[];
+  /** 低代码平台应用ID */
+  SdkAppId: number;
+  /** 待添加成员列表，最大值200 */
+  MemberIds: string[];
+}
+
+declare interface BatchAddGroupMemberResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchCreateGroupWithMembersRequest {
+  /** 低代码平台应用ID */
+  SdkAppId: number;
+  /** 批量创建群组基础信息，最大长度限制256 */
+  GroupBaseInfos: GroupBaseInfo[];
+  /** 群组绑定的成员列表，一次性最多200个 */
+  MemberIds?: string[];
+}
+
+declare interface BatchCreateGroupWithMembersResponse {
+  /** 新创建群组ID列表，与输入创建参数顺序一致 */
+  GroupIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BatchCreateRoomRequest {
   /** 低代码平台的SdkAppId。 */
   SdkAppId: number;
@@ -182,6 +250,20 @@ declare interface BatchCreateRoomRequest {
 declare interface BatchCreateRoomResponse {
   /** 创建成功课堂ID，与传入课堂信息顺序一致 */
   RoomIds?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchDeleteGroupMemberRequest {
+  /** 待添加群组ID列表，最大值100 */
+  GroupIds: string[];
+  /** 低代码平台应用ID */
+  SdkAppId: number;
+  /** 待添加成员列表，最大值256 */
+  MemberIds: string[];
+}
+
+declare interface BatchDeleteGroupMemberResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -263,6 +345,42 @@ declare interface CreateDocumentResponse {
   RequestId?: string;
 }
 
+declare interface CreateGroupWithMembersRequest {
+  /** 待创建群组名称 */
+  GroupName: string;
+  /** 低代码平台应用ID */
+  SdkAppId: number;
+  /** 默认绑定主讲老师ID */
+  TeacherId?: string;
+  /** 群组成员列表,一次性最多200个 */
+  MemberIds?: string[];
+}
+
+declare interface CreateGroupWithMembersResponse {
+  /** 创建成功群组ID */
+  GroupId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateGroupWithSubGroupRequest {
+  /** 待创建的新群组名 */
+  GroupName: string;
+  /** 低代码平台应用ID */
+  SdkAppId: number;
+  /** 子群组ID列表，子群组ID不能重复，最多40个 */
+  SubGroupIds: string[];
+  /** 群组默认主讲老师ID */
+  TeacherId?: string;
+}
+
+declare interface CreateGroupWithSubGroupResponse {
+  /** 新创建群组ID */
+  GroupId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRoomRequest {
   /** 房间名称。 */
   Name: string;
@@ -290,6 +408,8 @@ declare interface CreateRoomRequest {
   Assistants?: string[];
   /** 录制布局。 */
   RecordLayout?: number;
+  /** 房间绑定的群组ID,非空时限制组成员进入 */
+  GroupId?: string;
 }
 
 declare interface CreateRoomResponse {
@@ -313,6 +433,32 @@ declare interface DeleteDocumentRequest {
 }
 
 declare interface DeleteDocumentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGroupMemberRequest {
+  /** 群组ID，联合群组无法删除群组成员 */
+  GroupId: string;
+  /** 低代码平台应用ID */
+  SdkAppId: number;
+  /** 成员列表，最大值200 */
+  MemberIds: string[];
+}
+
+declare interface DeleteGroupMemberResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGroupRequest {
+  /** 待删除群组ID列表 */
+  GroupIds: string[];
+  /** 低代码平台应用ID */
+  SdkAppId: number;
+}
+
+declare interface DeleteGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -437,6 +583,70 @@ declare interface DescribeDocumentsByRoomResponse {
   RequestId?: string;
 }
 
+declare interface DescribeGroupListRequest {
+  /** 低代码平台应用ID */
+  SdkAppId: number;
+  /** 分页查询当前页数，默认从1开始递增。 */
+  Page?: number;
+  /** 每页数据量，默认20，最大1000。 */
+  Limit?: number;
+  /** 主讲人ID筛选群组，与MemberId有且只有一个,都传时以此字段获取 */
+  TeacherId?: string;
+  /** 成员ID刷选群组，与TeacherId有且只有一个 */
+  MemberId?: string;
+}
+
+declare interface DescribeGroupListResponse {
+  /** 记录总数。当前匹配群组总数。 */
+  Total?: number;
+  /** 群组信息列表。 */
+  GroupInfos?: GroupInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGroupMemberListRequest {
+  /** 群组ID */
+  GroupId: string;
+  /** 低代码平台应用ID */
+  SdkAppId: number;
+  /** 分页值，默认1 */
+  Page?: number;
+  /** 每页数据量，默认20，最大1000 */
+  Limit?: number;
+}
+
+declare interface DescribeGroupMemberListResponse {
+  /** 符合查询条件总条数 */
+  Total?: number;
+  /** 查询成员列表 */
+  MemberIds?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGroupRequest {
+  /** 群组ID */
+  GroupId: string;
+  /** 低代码平台应用ID */
+  SdkAppId: number;
+}
+
+declare interface DescribeGroupResponse {
+  /** 群组ID */
+  GroupId?: string;
+  /** 群组名称 */
+  GroupName?: string;
+  /** 群主主讲人ID */
+  TeacherId?: string | null;
+  /** 群组类型0-基础群组1-组合群组，若为1时会返回子群组ID */
+  GroupType?: number;
+  /** 子群组ID列表 */
+  SubGroupIds?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRoomRequest {
   /** 房间Id。 */
   RoomId: number;
@@ -469,8 +679,10 @@ declare interface DescribeRoomResponse {
   Assistants?: string[] | null;
   /** 录制地址。仅在房间结束后存在。 */
   RecordUrl?: string | null;
-  /** 课堂状态。0为未开始，1为正在上课，2为已结束，3为已过期。 */
+  /** 课堂状态。0为未开始，1为已开始，2为已结束，3为已过期。 */
   Status?: number | null;
+  /** 房间绑定的群组ID */
+  GroupId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -599,6 +811,22 @@ declare interface ModifyAppResponse {
   RequestId?: string;
 }
 
+declare interface ModifyGroupRequest {
+  /** 需要修改的群组ID */
+  GroupId: string;
+  /** 低代码平台应用ID */
+  SdkAppId: number;
+  /** 默认绑定主讲老师ID */
+  TeacherId?: string;
+  /** 待修改的群组名称 */
+  GroupName?: string;
+}
+
+declare interface ModifyGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRoomRequest {
   /** 房间ID。 */
   RoomId: number;
@@ -626,6 +854,8 @@ declare interface ModifyRoomRequest {
   DisableRecord?: number;
   /** 助教Id列表。直播开始后不允许修改。 */
   Assistants?: string[];
+  /** 房间绑定的群组ID */
+  GroupId?: string;
 }
 
 declare interface ModifyRoomResponse {
@@ -730,8 +960,16 @@ declare interface UnbindDocumentFromRoomResponse {
 /** {@link Lcic 低代码互动课堂} */
 declare interface Lcic {
   (): Versions;
+  /** 新增成员到群组 {@link AddGroupMemberRequest} {@link AddGroupMemberResponse} */
+  AddGroupMember(data: AddGroupMemberRequest, config?: AxiosRequestConfig): AxiosPromise<AddGroupMemberResponse>;
+  /** 批量新增成员到群组 {@link BatchAddGroupMemberRequest} {@link BatchAddGroupMemberResponse} */
+  BatchAddGroupMember(data: BatchAddGroupMemberRequest, config?: AxiosRequestConfig): AxiosPromise<BatchAddGroupMemberResponse>;
+  /** 批量创建群组 {@link BatchCreateGroupWithMembersRequest} {@link BatchCreateGroupWithMembersResponse} */
+  BatchCreateGroupWithMembers(data: BatchCreateGroupWithMembersRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateGroupWithMembersResponse>;
   /** 批量创建房间 {@link BatchCreateRoomRequest} {@link BatchCreateRoomResponse} */
   BatchCreateRoom(data: BatchCreateRoomRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateRoomResponse>;
+  /** 批量删除群组成员 {@link BatchDeleteGroupMemberRequest} {@link BatchDeleteGroupMemberResponse} */
+  BatchDeleteGroupMember(data: BatchDeleteGroupMemberRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteGroupMemberResponse>;
   /** 批量删除多个房间的录制文件 {@link BatchDeleteRecordRequest} {@link BatchDeleteRecordResponse} */
   BatchDeleteRecord(data: BatchDeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteRecordResponse>;
   /** 用户批量注册 {@link BatchRegisterRequest} {@link BatchRegisterResponse} */
@@ -740,12 +978,20 @@ declare interface Lcic {
   BindDocumentToRoom(data: BindDocumentToRoomRequest, config?: AxiosRequestConfig): AxiosPromise<BindDocumentToRoomResponse>;
   /** 创建文档 {@link CreateDocumentRequest} {@link CreateDocumentResponse} */
   CreateDocument(data: CreateDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocumentResponse>;
+  /** 创建群组 {@link CreateGroupWithMembersRequest} {@link CreateGroupWithMembersResponse} */
+  CreateGroupWithMembers(data: CreateGroupWithMembersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupWithMembersResponse>;
+  /** 创建联合群组 {@link CreateGroupWithSubGroupRequest} {@link CreateGroupWithSubGroupResponse} */
+  CreateGroupWithSubGroup(data: CreateGroupWithSubGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupWithSubGroupResponse>;
   /** 创建房间 {@link CreateRoomRequest} {@link CreateRoomResponse} */
   CreateRoom(data: CreateRoomRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoomResponse>;
   /** 创建巡课 {@link CreateSupervisorRequest} {@link CreateSupervisorResponse} */
   CreateSupervisor(data?: CreateSupervisorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSupervisorResponse>;
   /** 删除文档 {@link DeleteDocumentRequest} {@link DeleteDocumentResponse} */
   DeleteDocument(data: DeleteDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDocumentResponse>;
+  /** 删除群组 {@link DeleteGroupRequest} {@link DeleteGroupResponse} */
+  DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
+  /** 删除群组成员 {@link DeleteGroupMemberRequest} {@link DeleteGroupMemberResponse} */
+  DeleteGroupMember(data: DeleteGroupMemberRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupMemberResponse>;
   /** 删除指定房间的录制文件 {@link DeleteRecordRequest} {@link DeleteRecordResponse} */
   DeleteRecord(data: DeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordResponse>;
   /** 删除房间 {@link DeleteRoomRequest} {@link DeleteRoomResponse} */
@@ -758,6 +1004,12 @@ declare interface Lcic {
   DescribeDocument(data: DescribeDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocumentResponse>;
   /** 获取指定房间下文档 {@link DescribeDocumentsByRoomRequest} {@link DescribeDocumentsByRoomResponse} */
   DescribeDocumentsByRoom(data: DescribeDocumentsByRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocumentsByRoomResponse>;
+  /** 获取群组详情 {@link DescribeGroupRequest} {@link DescribeGroupResponse} */
+  DescribeGroup(data: DescribeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupResponse>;
+  /** 获取群组列表 {@link DescribeGroupListRequest} {@link DescribeGroupListResponse} */
+  DescribeGroupList(data: DescribeGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupListResponse>;
+  /** 获取群组成员列表 {@link DescribeGroupMemberListRequest} {@link DescribeGroupMemberListResponse} */
+  DescribeGroupMemberList(data: DescribeGroupMemberListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupMemberListResponse>;
   /** 获取房间信息 {@link DescribeRoomRequest} {@link DescribeRoomResponse} */
   DescribeRoom(data: DescribeRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomResponse>;
   /** 获取房间统计信息 {@link DescribeRoomStatisticsRequest} {@link DescribeRoomStatisticsResponse} */
@@ -774,6 +1026,8 @@ declare interface Lcic {
   LoginUser(data: LoginUserRequest, config?: AxiosRequestConfig): AxiosPromise<LoginUserResponse>;
   /** 修改应用 {@link ModifyAppRequest} {@link ModifyAppResponse} */
   ModifyApp(data: ModifyAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppResponse>;
+  /** 修改群组 {@link ModifyGroupRequest} {@link ModifyGroupResponse} */
+  ModifyGroup(data: ModifyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGroupResponse>;
   /** 修改房间 {@link ModifyRoomRequest} {@link ModifyRoomResponse} */
   ModifyRoom(data: ModifyRoomRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoomResponse>;
   /** 修改用户配置 {@link ModifyUserProfileRequest} {@link ModifyUserProfileResponse} */
