@@ -452,8 +452,10 @@ declare interface SetPlaylistCommandInput {
   Index?: number;
   /** 当 Type 取 Move 时，必填，表示移动歌曲的目标位置。 */
   ChangedIndex?: number;
-  /** 歌曲 ID 列表，当 Type 取 Add 时，必填。 */
+  /** 歌曲 ID 列表，当 Type 取 Add 时，与MusicURLs必填其中一项。 */
   MusicIds?: string[];
+  /** 歌曲 URL 列表，当 Type 取 Add 时，与MusicIds必填其中一项。注：URL必须以.mp3结尾且必须是mp3编码文件。 */
+  MusicURLs?: string[];
 }
 
 /** 设置音量。 */
@@ -516,6 +518,10 @@ declare interface TRTCJoinRoomInput {
   SdkAppId: string;
   /** 用户唯一标识。 */
   UserId: string;
+  /** 进房钥匙，若需要权限控制请携带该参数。 [privateMapKey 权限设置](/document/product/647/32240) */
+  PrivateMapKey?: string;
+  /** 用户角色，目前支持两种角色：anchor：主播audience：观众 */
+  Role?: string;
 }
 
 /** 下架歌曲复合结构 */

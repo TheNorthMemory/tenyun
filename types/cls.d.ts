@@ -1561,21 +1561,21 @@ declare interface GetAlarmLogRequest {
 
 declare interface GetAlarmLogResponse {
   /** 加载后续内容的Context */
-  Context: string;
+  Context?: string;
   /** 日志查询结果是否全部返回 */
-  ListOver: boolean;
+  ListOver?: boolean;
   /** 返回的是否为分析结果 */
-  Analysis: boolean;
+  Analysis?: boolean;
   /** 如果Analysis为True，则返回分析结果的列名，否则为空 */
-  ColNames: string[] | null;
+  ColNames?: string[] | null;
   /** 日志查询结果；当Analysis为True时，可能返回为null */
-  Results: LogInfo[] | null;
+  Results?: LogInfo[] | null;
   /** 日志分析结果；当Analysis为False时，可能返回为null */
-  AnalysisResults: LogItems[] | null;
+  AnalysisResults?: LogItems[] | null;
   /** 新的日志分析结果; UseNewAnalysis为true有效 */
-  AnalysisRecords: string[] | null;
+  AnalysisRecords?: string[] | null;
   /** 日志分析的列属性; UseNewAnalysis为true有效 */
-  Columns: Column[] | null;
+  Columns?: Column[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

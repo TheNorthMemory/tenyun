@@ -288,33 +288,33 @@ declare interface Database {
   DbName?: string | null;
   /** 迁移或同步后的库名，默认与源库相同 */
   NewDbName?: string | null;
-  /** DB选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当Mode为Partial时，此项必填。注意，高级对象的同步不依赖此值。 */
+  /** DB选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当Mode为Partial时，此项必填。注意，高级对象的同步不依赖此值，如果整库同步此处应该为All。 */
   DbMode?: string | null;
   /** 迁移或同步的 schema */
   SchemaName?: string | null;
   /** 迁移或同步后的 schema name */
   NewSchemaName?: string | null;
-  /** 表选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当DBMode为Partial时此项必填 */
+  /** 表选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当DBMode为Partial时此项必填，如果整库同步此处应该为All。 */
   TableMode?: string | null;
   /** 表图对象集合，当 TableMode 为 Partial 时，此项需要填写 */
   Tables?: Table[] | null;
-  /** 视图选择模式: All 为当前对象下的所有视图对象,Partial 为部分视图对象 */
+  /** 视图选择模式: All 为当前对象下的所有视图对象,Partial 为部分视图对象，如果整库同步此处应该为All。 */
   ViewMode?: string | null;
   /** 视图对象集合，当 ViewMode 为 Partial 时， 此项需要填写 */
   Views?: View[] | null;
-  /** 选择要同步的模式，Partial为部分，all为整选 */
+  /** 选择要同步的模式，Partial为部分，All为整选，如果整库同步此处应该为All。 */
   FunctionMode?: string | null;
   /** FunctionMode取值为Partial时需要填写 */
   Functions?: string[] | null;
-  /** 选择要同步的模式，Partial为部分，All为整选 */
+  /** 选择要同步的模式，Partial为部分，All为整选，如果整库同步此处应该为All。 */
   ProcedureMode?: string | null;
   /** ProcedureMode取值为Partial时需要填写 */
   Procedures?: string[] | null;
-  /** 触发器迁移模式，all(为当前对象下的所有对象)，partial(部分对象) */
+  /** 触发器迁移模式，All(为当前对象下的所有对象)，partial(部分对象)，如果整库同步此处应该为All。 */
   TriggerMode?: string | null;
   /** 当TriggerMode为partial，指定要迁移的触发器名称 */
   Triggers?: string[] | null;
-  /** 事件迁移模式，all(为当前对象下的所有对象)，partial(部分对象) */
+  /** 事件迁移模式，All(为当前对象下的所有对象)，partial(部分对象)，如果整库同步此处应该为All。 */
   EventMode?: string | null;
   /** 当EventMode为partial，指定要迁移的事件名称 */
   Events?: string[] | null;

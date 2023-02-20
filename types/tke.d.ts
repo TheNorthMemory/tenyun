@@ -2891,11 +2891,11 @@ declare interface DeleteClusterInstancesRequest {
 
 declare interface DeleteClusterInstancesResponse {
   /** 删除成功的实例ID列表 */
-  SuccInstanceIds: string[] | null;
+  SuccInstanceIds?: string[] | null;
   /** 删除失败的实例ID列表 */
-  FailedInstanceIds: string[] | null;
+  FailedInstanceIds?: string[] | null;
   /** 未匹配到的实例ID列表 */
-  NotFoundInstanceIds: string[] | null;
+  NotFoundInstanceIds?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3243,11 +3243,11 @@ declare interface DescribeClusterAuthenticationOptionsRequest {
 
 declare interface DescribeClusterAuthenticationOptionsResponse {
   /** ServiceAccount认证配置 */
-  ServiceAccounts: ServiceAccountAuthenticationOptions | null;
+  ServiceAccounts?: ServiceAccountAuthenticationOptions | null;
   /** 最近一次修改操作结果，返回值可能为：Updating，Success，Failed，TimeOut */
-  LatestOperationState: string | null;
+  LatestOperationState?: string | null;
   /** OIDC认证配置 */
-  OIDCConfig: OIDCConfigAuthenticationOptions | null;
+  OIDCConfig?: OIDCConfigAuthenticationOptions | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3275,7 +3275,7 @@ declare interface DescribeClusterControllersRequest {
 
 declare interface DescribeClusterControllersResponse {
   /** 描述集群中各个控制器的状态 */
-  ControllerStatusSet: ControllerStatus[];
+  ControllerStatusSet?: ControllerStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3289,9 +3289,9 @@ declare interface DescribeClusterEndpointStatusRequest {
 
 declare interface DescribeClusterEndpointStatusResponse {
   /** 查询集群访问端口状态（Created 开启成功，Creating 开启中，NotFound 未开启） */
-  Status: string | null;
+  Status?: string | null;
   /** 开启访问入口失败信息 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3969,9 +3969,9 @@ declare interface DescribeImagesRequest {
 
 declare interface DescribeImagesResponse {
   /** 镜像数量 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 镜像信息列表 */
-  ImageInstanceSet: ImageInstance[] | null;
+  ImageInstanceSet?: ImageInstance[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4697,7 +4697,7 @@ declare interface GetTkeAppChartListRequest {
 
 declare interface GetTkeAppChartListResponse {
   /** 所支持的chart列表 */
-  AppCharts: AppChart[] | null;
+  AppCharts?: AppChart[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

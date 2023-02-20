@@ -710,9 +710,9 @@ declare interface FlowLog {
   Enable: boolean;
   /** 消费端类型：cls、ckafka。 */
   StorageType: string | null;
-  /** 消费端信息，当消费端类型为ckafka时返回 */
+  /** 消费端信息，当消费端类型为ckafka时返回。 */
   FlowLogStorage: FlowLogStorage | null;
-  /** 流日志存储ID对应的地域信息 */
+  /** 流日志存储ID对应的地域信息。 */
   CloudLogRegion: string | null;
 }
 
@@ -1562,7 +1562,7 @@ declare interface SecurityGroupPolicy {
   Ipv6CidrBlock?: string;
   /** 安全组实例ID，例如：sg-ohuuioma。 */
   SecurityGroupId?: string;
-  /** IP地址ID或者ID地址组ID。 */
+  /** IP地址ID或者IP地址组ID。 */
   AddressTemplate?: AddressTemplateSpecification;
   /** ACCEPT 或 DROP。 */
   Action?: string;
@@ -4219,41 +4219,41 @@ declare interface DescribeFlowLogResponse {
 }
 
 declare interface DescribeFlowLogsRequest {
-  /** 私用网络ID或者统一ID，建议使用统一ID */
+  /** 私用网络ID或者统一ID，建议使用统一ID。 */
   VpcId?: string;
-  /** 流日志唯一ID */
+  /** 流日志唯一ID。 */
   FlowLogId?: string;
-  /** 流日志实例名字 */
+  /** 流日志实例名字。 */
   FlowLogName?: string;
-  /** 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE */
+  /** 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE。 */
   ResourceType?: string;
-  /** 资源唯一ID */
+  /** 资源唯一ID。 */
   ResourceId?: string;
-  /** 流日志采集类型，ACCEPT|REJECT|ALL */
+  /** 流日志采集类型，ACCEPT|REJECT|ALL。 */
   TrafficType?: string;
-  /** 流日志存储ID */
+  /** 流日志存储ID。 */
   CloudLogId?: string;
-  /** 流日志存储ID状态 */
+  /** 流日志存储ID状态。 */
   CloudLogState?: string;
-  /** 按某个字段排序,支持字段：flowLogName,createTime，默认按createTime */
+  /** 按某个字段排序,支持字段：flowLogName,createTime，默认按createTime。 */
   OrderField?: string;
-  /** 升序（asc）还是降序（desc）,默认：desc */
+  /** 升序（asc）还是降序（desc）,默认：desc。 */
   OrderDirection?: string;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 每页行数，默认为10 */
+  /** 每页行数，默认为10。 */
   Limit?: number;
   /** 过滤条件，参数不支持同时指定FlowLogIds和Filters。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。 */
   Filters?: Filter;
-  /** 流日志存储ID对应的地域信息 */
+  /** 流日志存储ID对应的地域信息。 */
   CloudLogRegion?: string;
 }
 
 declare interface DescribeFlowLogsResponse {
-  /** 流日志实例集合 */
-  FlowLog: FlowLog[];
-  /** 流日志总数目 */
-  TotalNum: number;
+  /** 流日志实例集合。 */
+  FlowLog?: FlowLog[];
+  /** 流日志总数目。 */
+  TotalNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4623,7 +4623,7 @@ declare interface DescribeNetworkInterfaceLimitResponse {
 declare interface DescribeNetworkInterfacesRequest {
   /** 弹性网卡实例ID查询。形如：eni-pxir56ns。每次请求的实例的上限为100。参数不支持同时指定NetworkInterfaceIds和Filters。 */
   NetworkInterfaceIds?: string[];
-  /** 过滤条件，参数不支持同时指定NetworkInterfaceIds和Filters。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。subnet-id - String - （过滤条件）所属子网实例ID，形如：subnet-f49l6u0z。network-interface-id - String - （过滤条件）弹性网卡实例ID，形如：eni-5k56k7k7。attachment.instance-id - String - （过滤条件）绑定的云服务器实例ID，形如：ins-3nqpdn3i。groups.security-group-id - String - （过滤条件）绑定的安全组实例ID，例如：sg-f9ekbxeq。network-interface-name - String - （过滤条件）网卡实例名称。network-interface-description - String - （过滤条件）网卡实例描述。address-ip - String - （过滤条件）内网IPv4地址，单IP后缀模糊匹配，多IP精确匹配。可以与`ip-exact-match`配合做单IP的精确匹配查询。ip-exact-match - Boolean - （过滤条件）内网IPv4精确匹配查询，存在多值情况，只取第一个。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。使用请参考示例2tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。is-primary - Boolean - 是否必填：否 - （过滤条件）按照是否主网卡进行过滤。值为true时，仅过滤主网卡；值为false时，仅过滤辅助网卡；此过滤参数未提供时，同时过滤主网卡和辅助网卡。eni-type - String -是否必填：否- （过滤条件）按照网卡类型进行过滤。“0”-辅助网卡，“1”-主网卡，“2”：中继网卡eni-qos - String -是否必填：否- （过滤条件）按照网卡服务质量进行过滤。“AG”-服务质量云铜，“AU”-服务质量为银address-ipv6 - String - 是否必填：否 -（过滤条件）内网IPv6地址过滤，支持多ipv6地址查询，如果和address-ip一起使用取交集。 */
+  /** 过滤条件，参数不支持同时指定NetworkInterfaceIds和Filters。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。subnet-id - String - （过滤条件）所属子网实例ID，形如：subnet-f49l6u0z。network-interface-id - String - （过滤条件）弹性网卡实例ID，形如：eni-5k56k7k7。attachment.instance-id - String - （过滤条件）绑定的云服务器实例ID，形如：ins-3nqpdn3i。groups.security-group-id - String - （过滤条件）绑定的安全组实例ID，例如：sg-f9ekbxeq。network-interface-name - String - （过滤条件）网卡实例名称。network-interface-description - String - （过滤条件）网卡实例描述。address-ip - String - （过滤条件）内网IPv4地址，单IP后缀模糊匹配，多IP精确匹配。可以与`ip-exact-match`配合做单IP的精确匹配查询。ip-exact-match - Boolean - （过滤条件）内网IPv4精确匹配查询，存在多值情况，只取第一个。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。使用请参考示例2tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。is-primary - Boolean - 是否必填：否 - （过滤条件）按照是否主网卡进行过滤。值为true时，仅过滤主网卡；值为false时，仅过滤辅助网卡；此过滤参数未提供时，同时过滤主网卡和辅助网卡。eni-type - String -是否必填：否- （过滤条件）按照网卡类型进行过滤。“0”-辅助网卡，“1”-主网卡，“2”：中继网卡。eni-qos - String -是否必填：否- （过滤条件）按照网卡服务质量进行过滤。“AG”-服务质量为云铜，“AU”-服务质量为云银。address-ipv6 - String - 是否必填：否 -（过滤条件）内网IPv6地址过滤，支持多ipv6地址查询，如果和address-ip一起使用取交集。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -4633,9 +4633,9 @@ declare interface DescribeNetworkInterfacesRequest {
 
 declare interface DescribeNetworkInterfacesResponse {
   /** 实例详细信息列表。 */
-  NetworkInterfaceSet: NetworkInterface[];
+  NetworkInterfaceSet?: NetworkInterface[];
   /** 符合条件的实例数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4669,7 +4669,7 @@ declare interface DescribeRouteConflictsResponse {
 }
 
 declare interface DescribeRouteTablesRequest {
-  /** 过滤条件，参数不支持同时指定RouteTableIds和Filters。route-table-id - String - （过滤条件）路由表实例ID。route-table-name - String - （过滤条件）路由表名称。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。association.main - String - （过滤条件）是否主路由表。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。 */
+  /** 过滤条件，参数不支持同时指定RouteTableIds和Filters。route-table-id - String - （过滤条件）路由表实例ID。route-table-name - String - （过滤条件）路由表名称。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。association.main - String - （过滤条件）是否主路由表。tag-key - String -是否必填：否 - （过滤条件）按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。next-hop-type - String - 是否必填：否 - （过滤条件）按下一跳类型进行过滤。使用next-hop-type进行过滤时，必须同时携带route-table-id与vpc-id。目前我们支持的类型有：LOCAL: 本地路由CVM：公网网关类型的云服务器；VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；HAVIP：高可用虚拟IP；NAT：NAT网关; NORMAL_CVM：普通云服务器；EIP：云服务器的公网IP；CCN：云联网；LOCAL_GATEWAY：本地网关。 */
   Filters?: Filter[];
   /** 路由表实例ID，例如：rtb-azd4dt1c。 */
   RouteTableIds?: string[];
@@ -4887,7 +4887,7 @@ declare interface DescribeSnapshotPoliciesResponse {
 declare interface DescribeSubnetsRequest {
   /** 子网实例ID查询。形如：subnet-pxir56ns。每次请求的实例的上限为100。参数不支持同时指定SubnetIds和Filters。 */
   SubnetIds?: string[];
-  /** 过滤条件，参数不支持同时指定SubnetIds和Filters。subnet-id - String - （过滤条件）Subnet实例名称。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。cidr-block - String - （过滤条件）子网网段，形如: 192.168.1.0 。is-default - Boolean - （过滤条件）是否是默认子网。is-remote-vpc-snat - Boolean - （过滤条件）是否为VPC SNAT地址池子网。subnet-name - String - （过滤条件）子网名称。zone - String - （过滤条件）可用区。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。cdc-id - String - 是否必填：否 - （过滤条件）按照cdc信息进行过滤。过滤出来制定cdc下的子网。is-cdc-subnet - String - 是否必填：否 - （过滤条件）按照是否是cdc子网进行过滤。取值：“0”-非cdc子网，“1”--cdc子网 */
+  /** 过滤条件，参数不支持同时指定SubnetIds和Filters。subnet-id - String - （过滤条件）Subnet实例名称。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。cidr-block - String - （过滤条件）子网网段，形如: 192.168.1.0 。is-default - Boolean - （过滤条件）是否是默认子网。is-remote-vpc-snat - Boolean - （过滤条件）是否为VPC SNAT地址池子网。subnet-name - String - （过滤条件）子网名称。zone - String - （过滤条件）可用区。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。cdc-id - String - 是否必填：否 - （过滤条件）按照cdc信息进行过滤。过滤出来制定cdc下的子网。is-cdc-subnet - String - 是否必填：否 - （过滤条件）按照是否是cdc子网进行过滤。取值：“0”-非cdc子网，“1”--cdc子网ipv6-cidr-block - String - （过滤条件）IPv6子网网段，形如: 2402:4e00:1717:8700::/64 。isp-type - String - （过滤条件）运营商类型，形如: BGP 。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: string;
@@ -4897,9 +4897,9 @@ declare interface DescribeSubnetsRequest {
 
 declare interface DescribeSubnetsResponse {
   /** 符合条件的实例数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 子网对象。 */
-  SubnetSet: Subnet[];
+  SubnetSet?: Subnet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4981,15 +4981,15 @@ declare interface DescribeVpcEndPointRequest {
 
 declare interface DescribeVpcEndPointResponse {
   /** 终端节点对象。 */
-  EndPointSet: EndPoint[];
+  EndPointSet?: EndPoint[];
   /** 符合查询条件的终端节点个数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeVpcEndPointServiceRequest {
-  /** 过滤条件。 service-id- String - （过滤条件）终端节点服务唯一ID。service-name - String - （过滤条件）终端节点实例名称。service-instance-id - String - （过滤条件）后端服务的唯一ID，比如lb-xxx。 */
+  /** 过滤条件。 service-id - String - （过滤条件）终端节点服务唯一ID。service-name - String - （过滤条件）终端节点实例名称。service-instance-id - String - （过滤条件）后端服务的唯一ID，比如lb-xxx。service-type - String - （过滤条件）后端PAAS服务类型，CLB,CDB,CRS，不填默认查询类型为CLB。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -5001,9 +5001,9 @@ declare interface DescribeVpcEndPointServiceRequest {
 
 declare interface DescribeVpcEndPointServiceResponse {
   /** 终端节点服务对象数组。 */
-  EndPointServiceSet: EndPointService[];
+  EndPointServiceSet?: EndPointService[];
   /** 符合查询条件的个数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5123,7 +5123,7 @@ declare interface DescribeVpcTaskResultResponse {
 declare interface DescribeVpcsRequest {
   /** VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。 */
   VpcIds?: string[];
-  /** 过滤条件，不支持同时指定VpcIds和Filters参数。支持的过滤条件如下：vpc-name：VPC实例名称，支持模糊查询。is-default ：是否默认VPC。vpc-id ：VPC实例ID，例如：vpc-f49l6u0z。cidr-block：VPC的CIDR。tag-key ：按照标签键进行过滤，非必填参数。tag:tag-key：按照标签键值对进行过滤，非必填参数。 其中 tag-key 请使用具体的标签键进行替换，可参考示例2。 **说明：**若同一个过滤条件（Filter）存在多个Values，则同一Filter下Values间的关系为逻辑或（OR）关系；若存在多个过滤条件（Filter），Filter之间的关系为逻辑与（AND）关系。 */
+  /** 过滤条件，不支持同时指定VpcIds和Filters参数。支持的过滤条件如下：vpc-name：VPC实例名称，支持模糊查询。is-default ：是否默认VPC。vpc-id ：VPC实例ID，例如：vpc-f49l6u0z。cidr-block：VPC的CIDR。tag-key ：按照标签键进行过滤，非必填参数。tag:tag-key：按照标签键值对进行过滤，非必填参数。 其中 tag-key 请使用具体的标签键进行替换，可参考示例2。 **说明：**若同一个过滤条件（Filter）存在多个Values，则同一Filter下Values间的关系为逻辑或（OR）关系；若存在多个过滤条件（Filter），Filter之间的关系为逻辑与（AND）关系。ipv6-cidr-block - String - （过滤条件）IPv6子网网段，形如: 2402:4e00:1717:8700::/64 。isp-type - String - （过滤条件）运营商类型，形如: BGP 取值范围：'BGP'-默认, 'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: string;
@@ -5133,9 +5133,9 @@ declare interface DescribeVpcsRequest {
 
 declare interface DescribeVpcsResponse {
   /** 符合条件的对象数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** VPC对象。 */
-  VpcSet: VpcInfo[];
+  VpcSet?: VpcInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7121,7 +7121,7 @@ declare interface Vpc {
   DescribeProductQuota(data: DescribeProductQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductQuotaResponse>;
   /** 查询路由策略冲突列表 {@link DescribeRouteConflictsRequest} {@link DescribeRouteConflictsResponse} */
   DescribeRouteConflicts(data: DescribeRouteConflictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteConflictsResponse>;
-  /** 查询路由列表 {@link DescribeRouteTablesRequest} {@link DescribeRouteTablesResponse} */
+  /** 查询路由表 {@link DescribeRouteTablesRequest} {@link DescribeRouteTablesResponse} */
   DescribeRouteTables(data?: DescribeRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTablesResponse>;
   /** 查询安全组关联实例统计 {@link DescribeSecurityGroupAssociationStatisticsRequest} {@link DescribeSecurityGroupAssociationStatisticsResponse} */
   DescribeSecurityGroupAssociationStatistics(data: DescribeSecurityGroupAssociationStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupAssociationStatisticsResponse>;

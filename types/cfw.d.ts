@@ -54,6 +54,40 @@ declare interface AssociatedInstanceInfo {
   SecurityGroupCount: number | null;
 }
 
+/** 入侵防御放通封禁规则 */
+declare interface BlockIgnoreRule {
+  /** 域名 */
+  Domain: string | null;
+  /** 规则ip */
+  Ioc: string | null;
+  /** 危险等级 */
+  Level: string | null;
+  /** 来源事件名称 */
+  EventName: string | null;
+  /** 方向：1入站，0出站 */
+  Direction: number | null;
+  /** 协议 */
+  Protocol: string | null;
+  /** 地理位置 */
+  Address: string | null;
+  /** 规则类型：1封禁，2放通 */
+  Action: number | null;
+  /** 规则生效开始时间 */
+  StartTime: string | null;
+  /** 规则生效结束时间 */
+  EndTime: string | null;
+  /** 忽略原因 */
+  IgnoreReason: string | null;
+  /** 安全事件来源 */
+  Source: string | null;
+  /** 规则id */
+  UniqueId: string | null;
+  /** 规则命中次数 */
+  MatchTimes: number | null;
+  /** 国家 */
+  Country: string | null;
+}
+
 /** NAT防火墙Dnat规则 */
 declare interface CfwNatDnatRule {
   /** 网络协议，可选值：TCP、UDP。 */
@@ -948,6 +982,36 @@ declare interface DescribeBlockByIpTimesListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBlockIgnoreListRequest {
+  /** 单页数量 */
+  Limit: number;
+  /** 页偏移量 */
+  Offset: number;
+  /** 方向：1互联网入站，0互联网出站，3内网，空 全部方向 */
+  Direction: string;
+  /** 规则类型：1封禁，2放通 */
+  RuleType: number;
+  /** 排序列：EndTime结束时间，StartTime开始时间，MatchTimes命中次数 */
+  Order: string;
+  /** 排序类型：desc降序，asc正序 */
+  By: string;
+  /** 搜索参数，json格式字符串，空则传"{}"，域名：domain，危险等级：level，放通原因：ignore_reason，安全事件来源：rule_source，地理位置：address，模糊搜索：common */
+  SearchValue?: string;
+}
+
+declare interface DescribeBlockIgnoreListResponse {
+  /** 列表数据 */
+  Data: BlockIgnoreRule[];
+  /** 查询结果总数，用于分页 */
+  Total: number;
+  /** 状态值，0：查询成功，非0：查询失败 */
+  ReturnCode: number;
+  /** 状态信息，success：查询成功，fail：查询失败 */
+  ReturnMsg: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBlockStaticListRequest {
   /** 开始时间 */
   StartTime: string;
@@ -1797,6 +1861,8 @@ declare interface Cfw {
   DescribeAssociatedInstanceList(data: DescribeAssociatedInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssociatedInstanceListResponse>;
   /** 告警中心阻断IP折线图 {@link DescribeBlockByIpTimesListRequest} {@link DescribeBlockByIpTimesListResponse} */
   DescribeBlockByIpTimesList(data: DescribeBlockByIpTimesListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockByIpTimesListResponse>;
+  /** 查询入侵防御放通封禁列表 {@link DescribeBlockIgnoreListRequest} {@link DescribeBlockIgnoreListResponse} */
+  DescribeBlockIgnoreList(data: DescribeBlockIgnoreListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockIgnoreListResponse>;
   /** 告警中心柱形图 {@link DescribeBlockStaticListRequest} {@link DescribeBlockStaticListResponse} */
   DescribeBlockStaticList(data: DescribeBlockStaticListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockStaticListResponse>;
   /** 查询防火墙弹性公网IP {@link DescribeCfwEipsRequest} {@link DescribeCfwEipsResponse} */

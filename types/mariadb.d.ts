@@ -1540,6 +1540,18 @@ declare interface ModifyBackupTimeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBEncryptAttributesRequest {
+  /** 实例Id，形如：tdsql-ow728lmc。 */
+  InstanceId: string;
+  /** 是否启用数据加密，开启后暂不支持关闭。本接口的可选值为：1-开启数据加密。 */
+  EncryptEnabled: number;
+}
+
+declare interface ModifyDBEncryptAttributesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBInstanceNameRequest {
   /** 待修改的实例 ID。形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。 */
   InstanceId: string;
@@ -1911,6 +1923,8 @@ declare interface Mariadb {
   ModifyAccountPrivileges(data: ModifyAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountPrivilegesResponse>;
   /** 修改备份时间 {@link ModifyBackupTimeRequest} {@link ModifyBackupTimeResponse} */
   ModifyBackupTime(data: ModifyBackupTimeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupTimeResponse>;
+  /** 修改实例数据加密属性 {@link ModifyDBEncryptAttributesRequest} {@link ModifyDBEncryptAttributesResponse} */
+  ModifyDBEncryptAttributes(data: ModifyDBEncryptAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBEncryptAttributesResponse>;
   /** 修改实例名称 {@link ModifyDBInstanceNameRequest} {@link ModifyDBInstanceNameResponse} */
   ModifyDBInstanceName(data: ModifyDBInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNameResponse>;
   /** 修改云数据库安全组 {@link ModifyDBInstanceSecurityGroupsRequest} {@link ModifyDBInstanceSecurityGroupsResponse} */

@@ -1739,9 +1739,9 @@ declare interface DescribeBizTrendRequest {
 
 declare interface DescribeBizTrendResponse {
   /** 曲线图各个时间点的值 */
-  DataList: number[];
+  DataList?: number[];
   /** 统计纬度 */
-  MetricName: string;
+  MetricName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2943,7 +2943,7 @@ declare interface Antiddos {
   DescribeBgpBizTrend(data: DescribeBgpBizTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBgpBizTrendResponse>;
   /** 获取业务流量状态码统计列表 {@link DescribeBizHttpStatusRequest} {@link DescribeBizHttpStatusResponse} */
   DescribeBizHttpStatus(data: DescribeBizHttpStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBizHttpStatusResponse>;
-  /** 获取业务流量曲线 {@link DescribeBizTrendRequest} {@link DescribeBizTrendResponse} */
+  /** 获取高防IP业务流量曲线 {@link DescribeBizTrendRequest} {@link DescribeBizTrendResponse} */
   DescribeBizTrend(data: DescribeBizTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBizTrendResponse>;
   /** 获取DDoS防护的IP黑白名单 {@link DescribeBlackWhiteIpListRequest} {@link DescribeBlackWhiteIpListResponse} */
   DescribeBlackWhiteIpList(data: DescribeBlackWhiteIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlackWhiteIpListResponse>;

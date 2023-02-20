@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 226+ 款产品，9048+ 服务数</summary>
+<details><summary>共计 226+ 款产品，9050+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -146,7 +146,7 @@ cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/pro
 cdwch | [云数据仓库 ClickHouse](https://cloud.tencent.com/document/product/1299) | 2020-09-15(18) |
 cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(10) |
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(35) |
-cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(62) |
+cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(63) |
 chdfs | [云 HDFS](https://cloud.tencent.com/document/product/1105) | 2020-11-12(29) | 2019-07-18(26) |
 ciam | [账号风控平台](https://cloud.tencent.com/document/product/1441) | 2022-03-31(15) |
 cii | [智能保险助手](https://cloud.tencent.com/document/product/1368) | 2021-04-08(13) | 2020-12-10(3) |
@@ -226,7 +226,7 @@ lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(130) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(1) |
 lp | [登录保护](https://cloud.tencent.com/document/product/1190) | 2020-02-24(1) |
-mariadb | [云数据库 MariaDB](https://cloud.tencent.com/document/product/237) | 2017-03-12(67) |
+mariadb | [云数据库 MariaDB](https://cloud.tencent.com/document/product/237) | 2017-03-12(68) |
 market | [云市场](https://cloud.tencent.com/document/product/306) | 2019-10-10(2) |
 memcached | [云数据库Memcached](https://cloud.tencent.com/document/product/241) | 2019-03-18(1) |
 mgobe | [游戏联机对战引擎](https://cloud.tencent.com/document/product/1038) | 2020-10-14(7) | 2019-09-29(1) |

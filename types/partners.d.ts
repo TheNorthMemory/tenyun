@@ -803,7 +803,7 @@ declare interface Partners {
   AgentPayDeals(data: AgentPayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<AgentPayDealsResponse>;
   /** 给客户转账 {@link AgentTransferMoneyRequest} {@link AgentTransferMoneyResponse} */
   AgentTransferMoney(data: AgentTransferMoneyRequest, config?: AxiosRequestConfig): AxiosPromise<AgentTransferMoneyResponse>;
-  /** 为代客/申请中代客分派业务员 {@link AssignClientsToSalesRequest} {@link AssignClientsToSalesResponse} */
+  /** 为代客（or申请中代客）分派业务员 {@link AssignClientsToSalesRequest} {@link AssignClientsToSalesResponse} */
   AssignClientsToSales(data: AssignClientsToSalesRequest, config?: AxiosRequestConfig): AxiosPromise<AssignClientsToSalesResponse>;
   /** 审核客户 {@link AuditApplyClientRequest} {@link AuditApplyClientResponse} */
   AuditApplyClient(data: AuditApplyClientRequest, config?: AxiosRequestConfig): AxiosPromise<AuditApplyClientResponse>;

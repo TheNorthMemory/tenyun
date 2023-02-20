@@ -14,6 +14,8 @@ declare interface AutomationAgentInfo {
   AgentStatus: string;
   /** Agent运行环境，取值范围： Linux：Linux实例 Windows：Windows实例 */
   Environment: string;
+  /** Agent 支持的功能列表。 */
+  SupportFeatures?: string[];
 }
 
 /** 命令详情。 */
@@ -66,6 +68,10 @@ declare interface CommandDocument {
   WorkingDirectory: string;
   /** 执行用户。 */
   Username: string;
+  /** 保存输出的 COS Bucket 链接。 */
+  OutputCOSBucketUrl?: string;
+  /** 保存输出的文件名称前缀。 */
+  OutputCOSKeyPrefix?: string;
 }
 
 /** >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。>> 以[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口的`Filter`为例。若我们需要查询可用区（`zone`）为广州一区 ***并且*** 实例计费模式（`instance-charge-type`）为包年包月 ***或者*** 按量计费的实例时，可如下实现：```Filters.0.Name=zone&Filters.0.Values.0=ap-guangzhou-1&Filters.1.Name=instance-charge-type&Filters.1.Values.0=PREPAID&Filters.1.Values.1=POSTPAID_BY_HOUR``` */

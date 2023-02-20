@@ -300,7 +300,7 @@ class TenYun {
     /**
      * @param {this} instance - The instance
      * @param {string} service - The service
-    * @return {ServiceEndpoint} - Mapping of the service version
+     * @return {ServiceEndpoint} - Mapping of the service version
      */
     return (instance, service) => {
       if (typeof service === 'symbol') { return instance[service]; }
