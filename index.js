@@ -32,7 +32,7 @@ const X_TC_LANGUAGE = 'X-TC-Language';
  * @typedef {import('axios').AxiosResponseHeaders} AxiosResponseHeaders
  * @typedef {() => string[]} ServiceEndpoint
  * @typedef {(data?: object|Buffer, config?: AxiosRequestConfig) => AxiosPromise} ServiceActionRequest
-*/
+ */
 
 export const LANGUAGES = ['zh-CN', 'en-US'];
 

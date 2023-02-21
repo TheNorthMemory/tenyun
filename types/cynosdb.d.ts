@@ -2308,6 +2308,28 @@ declare interface ModifyMaintainPeriodConfigResponse {
   RequestId?: string;
 }
 
+declare interface ModifyVipVportRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 实例组id */
+  InstanceGrpId: string;
+  /** 需要修改的目的ip */
+  Vip?: string;
+  /** 需要修改的目的端口 */
+  Vport?: number;
+  /** 数据库类型，取值范围: MYSQL */
+  DbType?: string;
+  /** 旧ip回收前的保留时间，单位小时，0表示立即回收 */
+  OldIpReserveHours?: number;
+}
+
+declare interface ModifyVipVportResponse {
+  /** 异步任务id */
+  FlowId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OfflineClusterRequest {
   /** 集群ID */
   ClusterId: string;
@@ -2725,6 +2747,8 @@ declare interface Cynosdb {
   ModifyInstanceName(data: ModifyInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNameResponse>;
   /** 修改维护时间配置 {@link ModifyMaintainPeriodConfigRequest} {@link ModifyMaintainPeriodConfigResponse} */
   ModifyMaintainPeriodConfig(data: ModifyMaintainPeriodConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintainPeriodConfigResponse>;
+  /** 修改实例组ip，端口 {@link ModifyVipVportRequest} {@link ModifyVipVportResponse} */
+  ModifyVipVport(data: ModifyVipVportRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVipVportResponse>;
   /** 下线集群 {@link OfflineClusterRequest} {@link OfflineClusterResponse} */
   OfflineCluster(data: OfflineClusterRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineClusterResponse>;
   /** 下线实例 {@link OfflineInstanceRequest} {@link OfflineInstanceResponse} */

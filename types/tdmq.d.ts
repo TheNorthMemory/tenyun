@@ -476,6 +476,16 @@ declare interface FilterSubscription {
   SubscriptionNames?: string[];
 }
 
+/** 实例节点分布信息 */
+declare interface InstanceNodeDistribution {
+  /** 可用区 */
+  ZoneName: string;
+  /** 可用区id */
+  ZoneId: string;
+  /** 节点数 */
+  NodeCount: number;
+}
+
 /** 面向运营端的虚拟集群信息 */
 declare interface InternalTenant {
   /** 虚拟集群ID */
@@ -748,6 +758,32 @@ declare interface RocketMQGroup {
   RetryMaxTimes?: number | null;
 }
 
+/** RocketMQ专享集群实例配置 */
+declare interface RocketMQInstanceConfig {
+  /** 单命名空间TPS上线 */
+  MaxTpsPerNamespace: number;
+  /** 最大命名空间数量 */
+  MaxNamespaceNum: number;
+  /** 已使用命名空间数量 */
+  UsedNamespaceNum: number;
+  /** 最大Topic数量 */
+  MaxTopicNum: number;
+  /** 已使用Topic数量 */
+  UsedTopicNum: number;
+  /** 最大Group数量 */
+  MaxGroupNum: number;
+  /** 已使用Group数量 */
+  UsedGroupNum: number;
+  /** 集群类型 */
+  ConfigDisplay: string;
+  /** 集群节点数 */
+  NodeCount: number;
+  /** 节点分布情况 */
+  NodeDistribution: InstanceNodeDistribution[];
+  /** topic分布情况 */
+  TopicDistribution: RocketMQTopicDistribution[];
+}
+
 /** RocketMQ命名空间信息 */
 declare interface RocketMQNamespace {
   /** 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_” */
@@ -780,6 +816,14 @@ declare interface RocketMQTopic {
   CreateTime: number;
   /** 创建时间，以毫秒为单位 */
   UpdateTime: number;
+}
+
+/** RocketMQtopic分布情况 */
+declare interface RocketMQTopicDistribution {
+  /** topic类型 */
+  TopicType: string;
+  /** topic数量 */
+  Count: number;
 }
 
 /** RocketMQ专享实例信息 */
@@ -2344,6 +2388,20 @@ declare interface DescribeRocketMQTopicsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRocketMQVipInstanceDetailRequest {
+  /** 集群ID */
+  ClusterId: string;
+}
+
+declare interface DescribeRocketMQVipInstanceDetailResponse {
+  /** 集群信息 */
+  ClusterInfo: RocketMQClusterInfo;
+  /** 集群配置 */
+  InstanceConfig: RocketMQInstanceConfig;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRocketMQVipInstancesRequest {
   /** 查询条件过滤器 */
   Filters?: Filter[];
@@ -3103,6 +3161,8 @@ declare interface Tdmq {
   DescribeRocketMQNamespaces(data: DescribeRocketMQNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQNamespacesResponse>;
   /** 获取RocketMQ主题列表 {@link DescribeRocketMQTopicsRequest} {@link DescribeRocketMQTopicsResponse} */
   DescribeRocketMQTopics(data: DescribeRocketMQTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopicsResponse>;
+  /** 获取单个RocketMQ专享集群信息 {@link DescribeRocketMQVipInstanceDetailRequest} {@link DescribeRocketMQVipInstanceDetailResponse} */
+  DescribeRocketMQVipInstanceDetail(data: DescribeRocketMQVipInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQVipInstanceDetailResponse>;
   /** 查询RocketMQ专享实例列表 {@link DescribeRocketMQVipInstancesRequest} {@link DescribeRocketMQVipInstancesResponse} */
   DescribeRocketMQVipInstances(data?: DescribeRocketMQVipInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQVipInstancesResponse>;
   /** 获取角色列表 {@link DescribeRolesRequest} {@link DescribeRolesResponse} */

@@ -871,11 +871,11 @@ declare interface DescribeSafeAuthFlagCollRequest {
 
 declare interface DescribeSafeAuthFlagCollResponse {
   /** 登录保护设置 */
-  LoginFlag: LoginActionFlag;
+  LoginFlag?: LoginActionFlag;
   /** 敏感操作保护设置 */
-  ActionFlag: LoginActionFlag;
+  ActionFlag?: LoginActionFlag;
   /** 异地登录保护设置 */
-  OffsiteFlag: OffsiteFlag;
+  OffsiteFlag?: OffsiteFlag;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1867,7 +1867,7 @@ declare interface Cam {
   DescribeRoleList(data: DescribeRoleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoleListResponse>;
   /** 查询用户安全设置 {@link DescribeSafeAuthFlagRequest} {@link DescribeSafeAuthFlagResponse} */
   DescribeSafeAuthFlag(data?: DescribeSafeAuthFlagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSafeAuthFlagResponse>;
-  /** 查询安全设置 {@link DescribeSafeAuthFlagCollRequest} {@link DescribeSafeAuthFlagCollResponse} */
+  /** 获取子账号安全设置 {@link DescribeSafeAuthFlagCollRequest} {@link DescribeSafeAuthFlagCollResponse} */
   DescribeSafeAuthFlagColl(data: DescribeSafeAuthFlagCollRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSafeAuthFlagCollResponse>;
   /** 查询安全设置(国际站) {@link DescribeSafeAuthFlagIntlRequest} {@link DescribeSafeAuthFlagIntlResponse} */
   DescribeSafeAuthFlagIntl(data?: DescribeSafeAuthFlagIntlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSafeAuthFlagIntlResponse>;

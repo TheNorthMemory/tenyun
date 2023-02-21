@@ -102,6 +102,22 @@ declare interface CopyJobItem {
 declare interface CopyJobResult {
 }
 
+/** 树状结构资源列表对象 */
+declare interface DescribeTreeResourcesRsp {
+  /** 父节点ID */
+  ParentId?: string;
+  /** 文件夹ID */
+  Id?: string;
+  /** 文件夹名称 */
+  Name?: string;
+  /** 文件夹下资源数字 */
+  Items?: TreeResourceItem[] | null;
+  /** 子节点 */
+  Children?: DescribeTreeResourcesRsp[] | null;
+  /** 资源总数 */
+  TotalCount?: number | null;
+}
+
 /** 查询作业列表时的过滤器 */
 declare interface Filter {
   /** 要过滤的字段 */
@@ -420,6 +436,22 @@ declare interface Tag {
   TagKey?: string | null;
   /** 标签值 */
   TagValue?: string | null;
+}
+
+/** 树状结构资源对象 */
+declare interface TreeResourceItem {
+  /** 资源ID */
+  ResourceId: string;
+  /** 资源名称 */
+  Name: string | null;
+  /** 资源类型 */
+  ResourceType: number;
+  /** 备注 */
+  Remark: string | null;
+  /** 文件名 */
+  FileName: string | null;
+  /** 目录ID */
+  FolderId: string | null;
 }
 
 /** 空间和集群绑定关系 */
@@ -884,6 +916,18 @@ declare interface DescribeTreeResourcesRequest {
 }
 
 declare interface DescribeTreeResourcesResponse {
+  /** 父节点ID */
+  ParentId?: string | null;
+  /** 文件夹ID */
+  Id?: string | null;
+  /** 文件夹名 */
+  Name?: string | null;
+  /** 文件列表 */
+  Items?: TreeResourceItem[] | null;
+  /** 子目录列表 */
+  Children?: DescribeTreeResourcesRsp[] | null;
+  /** 资源总数 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -2229,6 +2229,8 @@ declare interface DescribeAddableEntityListRequest {
   ZoneId: string;
   /** 推送数据类型，取值有:domain：七层加速日志；application：四层加速日志；web-rateLiming：速率限制日志；web-attack：web攻击防护日志；web-rule：自定义规则日志；web-bot：Bot管理日志。 */
   EntityType: string;
+  /** 服务区域，取值有：mainland：中国大陆境内；overseas：全球（不含中国大陆）。若为国内站账号，则默认取值为mainland；若为国际站账号，则默认取值为overseas。 */
+  Area?: string;
 }
 
 declare interface DescribeAddableEntityListResponse {

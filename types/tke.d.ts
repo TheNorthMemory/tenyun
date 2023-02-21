@@ -1024,6 +1024,14 @@ declare interface Instance {
 
 /** 描述了k8s集群相关配置与信息。 */
 declare interface InstanceAdvancedSettings {
+  /** 该节点属于podCIDR大小自定义模式时，可指定节点上运行的pod数量上限 */
+  DesiredPodNumber: number | null;
+  /** GPU驱动相关参数 */
+  GPUArgs: GPUArgs | null;
+  /** base64 编码的用户脚本，在初始化节点之前执行，目前只对添加已有节点生效 */
+  PreStartUserScript: string | null;
+  /** 节点污点 */
+  Taints: Taint[] | null;
   /** 数据盘挂载点, 默认不挂载数据盘. 已格式化的 ext3，ext4，xfs 文件系统的数据盘将直接挂载，其他文件系统或未格式化的数据盘将自动格式化为ext4 (tlinux系统格式化成xfs)并挂载，请注意备份数据! 无数据盘或有多块数据盘的云主机此设置不生效。注意，注意，多盘场景请使用下方的DataDisks数据结构，设置对应的云盘类型、云盘大小、挂载路径、是否格式化等信息。 */
   MountTarget?: string | null;
   /** dockerd --graph 指定值, 默认为 /var/lib/docker */
@@ -1038,14 +1046,6 @@ declare interface InstanceAdvancedSettings {
   DataDisks?: DataDisk[] | null;
   /** 节点相关的自定义参数信息 */
   ExtraArgs?: InstanceExtraArgs | null;
-  /** 该节点属于podCIDR大小自定义模式时，可指定节点上运行的pod数量上限 */
-  DesiredPodNumber: number | null;
-  /** GPU驱动相关参数 */
-  GPUArgs: GPUArgs | null;
-  /** base64 编码的用户脚本，在初始化节点之前执行，目前只对添加已有节点生效 */
-  PreStartUserScript: string | null;
-  /** 节点污点 */
-  Taints: Taint[] | null;
 }
 
 /** CVM实例数据盘挂载配置 */
@@ -2022,6 +2022,14 @@ declare interface Toleration {
   Effect?: string;
 }
 
+/** 不可用原因 */
+declare interface UnavailableReason {
+  /** 实例ID */
+  InstanceId: string | null;
+  /** 原因 */
+  Reason: string | null;
+}
+
 /** 可升级节点信息 */
 declare interface UpgradeAbleInstancesItem {
   /** 节点Id */
@@ -2030,6 +2038,10 @@ declare interface UpgradeAbleInstancesItem {
   Version: string;
   /** 当前版本的最新小版本 */
   LatestVersion: string | null;
+  /** RuntimeVersion */
+  RuntimeVersion?: string;
+  /** RuntimeLatestVersion */
+  RuntimeLatestVersion?: string;
 }
 
 /** 节点升级重装参数 */
@@ -2254,6 +2266,8 @@ declare interface CheckInstancesUpgradeAbleResponse {
   UpgradeAbleInstances?: UpgradeAbleInstancesItem[] | null;
   /** 总数 */
   Total?: number | null;
+  /** 不可升级原因 */
+  UnavailableVersionReason?: UnavailableReason[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3403,9 +3417,9 @@ declare interface DescribeClusterLevelChangeRecordsRequest {
 
 declare interface DescribeClusterLevelChangeRecordsResponse {
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 集群规模 */
-  Items: ClusterLevelChangeRecord[];
+  Items?: ClusterLevelChangeRecord[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4325,9 +4339,9 @@ declare interface DescribeRegionsRequest {
 
 declare interface DescribeRegionsResponse {
   /** 地域的数量 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 地域列表 */
-  RegionInstanceSet: RegionInstance[] | null;
+  RegionInstanceSet?: RegionInstance[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

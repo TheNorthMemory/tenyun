@@ -618,13 +618,13 @@ declare interface Filter {
 
 /** DataSaEventPub */
 declare interface ListDataSaEventPub {
-  /** 受影响资产 */
+  /** 时间 */
   Time: string;
-  /** 安全事件名称 */
-  EventType1: number;
   /** 安全事件1级分类 */
-  EventType2: number;
+  EventType1: number;
   /** 安全事件2级分类 */
+  EventType2: number;
+  /** 安全事件名称 */
   EventName: string;
   /** 风险等级 */
   Level: number;

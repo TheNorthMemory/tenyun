@@ -725,7 +725,7 @@ declare interface CreateConvertTaskApiResponse {
 }
 
 declare interface CreateDocumentRequest {
-  /** 调用方用户信息，userId 必填 */
+  /** 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。 */
   Operator: UserInfo;
   /** 签署流程编号,由CreateFlow接口返回 */
   FlowId: string;
@@ -769,7 +769,7 @@ declare interface CreateFlowApproversResponse {
 }
 
 declare interface CreateFlowByFilesRequest {
-  /** 调用方用户信息，userId 必填 */
+  /** 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId 代发合同 */
   Operator: UserInfo;
   /** 签署流程名称,最大长度200个字符 */
   FlowName: string;
@@ -849,7 +849,7 @@ declare interface CreateFlowRemindsResponse {
 }
 
 declare interface CreateFlowRequest {
-  /** 调用方用户信息，userId 必填 */
+  /** 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。 */
   Operator: UserInfo;
   /** 签署流程名称,最大长度200个字符 */
   FlowName: string;
@@ -1325,7 +1325,7 @@ declare interface GetTaskResultApiResponse {
 }
 
 declare interface StartFlowRequest {
-  /** 调用方用户信息，userId 必填 */
+  /** 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。 */
   Operator: UserInfo;
   /** 签署流程编号，由CreateFlow接口返回 */
   FlowId: string;

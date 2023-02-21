@@ -552,6 +552,8 @@ declare interface TriggerCount {
   Cm: number;
   /** Vod触发器数量 */
   Vod: number;
+  /** Eb触发器数量 */
+  Eb: number | null;
 }
 
 /** 触发器信息 */

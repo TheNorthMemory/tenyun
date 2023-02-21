@@ -418,6 +418,10 @@ declare interface SingleInvoiceInfo {
   Row: number;
 }
 
+/** 智慧表单上传文件信息 */
+declare interface SmartFormFileUrl {
+}
+
 /** 智能结构化识别 */
 declare interface StructuralItem {
   /** 识别出的字段名称(关键字)。 */
@@ -456,6 +460,26 @@ declare interface TableCell {
   Contents: CellContent[];
 }
 
+/** 单元格数据 */
+declare interface TableCellInfo {
+  /** 单元格左上角的列索引 */
+  ColTl: number;
+  /** 单元格左上角的行索引 */
+  RowTl: number;
+  /** 单元格右下角的列索引 */
+  ColBr: number;
+  /** 单元格右下角的行索引 */
+  RowBr: number;
+  /** 单元格内识别出的字符串文本，若文本存在多行，以换行符"\n"隔开 */
+  Text: string;
+  /** 单元格类型 */
+  Type: string;
+  /** 单元格置信度 */
+  Confidence: number;
+  /** 单元格在图像中的四点坐标 */
+  Polygon: Coord[];
+}
+
 /** 表格内容检测 */
 declare interface TableDetectInfo {
   /** 单元格内容 */
@@ -463,6 +487,16 @@ declare interface TableDetectInfo {
   /** 表格标题 */
   Titles: TableTitle[] | null;
   /** 图像中的文本块类型，0 为非表格文本，1 为有线表格，2 为无线表格（接口暂不支持日文无线表格识别，若传入日文无线表格，返回0） */
+  Type: number | null;
+  /** 表格主体四个顶点坐标（依次为左上角，右上角，右下角，左下角） */
+  TableCoordPoint: Coord[] | null;
+}
+
+/** 表格内容检测 */
+declare interface TableInfo {
+  /** 单元格内容 */
+  Cells: TableCellInfo[] | null;
+  /** 图像中的文本块类型，0 为非表格文本，1 为有线表格，2 为无线表格 */
   Type: number | null;
   /** 表格主体四个顶点坐标（依次为左上角，右上角，右下角，左下角） */
   TableCoordPoint: Coord[] | null;
@@ -1134,6 +1168,24 @@ declare interface ClassifyDetectOCRResponse {
   RequestId?: string;
 }
 
+declare interface CreateAIFormTaskRequest {
+  /** 多个文件的URL列表 */
+  FileList: SmartFormFileUrl[];
+  /** 备注信息1 */
+  FirstNotes?: string;
+  /** 备注信息2 */
+  SecondNotes?: string;
+}
+
+declare interface CreateAIFormTaskResponse {
+  /** 本次识别任务的唯一身份ID */
+  TaskId?: string | null;
+  /** 本次识别任务的操作URL，有效期自生成之时起共24小时 */
+  OperateUrl?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DriverLicenseOCRRequest {
   /** 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -1470,6 +1522,18 @@ declare interface GeneralHandwritingOCRResponse {
   TextDetections: TextGeneralHandwriting[];
   /** 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看如何纠正倾斜文本 */
   Angel: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetTaskStateRequest {
+  /** 智慧表单任务唯一身份ID */
+  TaskId: string;
+}
+
+declare interface GetTaskStateResponse {
+  /** 1:任务识别完成，还未提交2:任务已手动关闭3:任务已提交4:任务识别中5:超时：任务超过了可操作的24H时限6:任务识别失败 */
+  TaskState?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2234,6 +2298,28 @@ declare interface RecognizePhilippinesVoteIDOCRResponse {
   RequestId?: string;
 }
 
+declare interface RecognizeTableAccurateOCRRequest {
+  /** 图片/PDF的 Base64 值。要求图片/PDF经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 图片/PDF的 Url 地址。要求图片/PDF经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  ImageUrl?: string;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
+}
+
+declare interface RecognizeTableAccurateOCRResponse {
+  /** 检测到的文本信息，具体内容请点击左侧链接。 */
+  TableDetections?: TableInfo[] | null;
+  /** Base64 编码后的 Excel 数据。 */
+  Data?: string;
+  /** 图片为PDF时，返回PDF的总页数，默认为0 */
+  PdfPageSize?: number | null;
+  /** 图片旋转角度（角度制），文本的水平方向为0°，统一以逆时针方向旋转，逆时针为负，角度范围为-360°至0°。 */
+  Angle?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RecognizeTableOCRRequest {
   /** 图片/PDF的 Base64 值。要求图片/PDF经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -2265,6 +2351,8 @@ declare interface RecognizeThaiIDCardOCRRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。 */
   ImageUrl?: string;
+  /** 图片开关。默认为false，不返回泰国身份证头像照片的base64编码。设置为true时，返回旋转矫正后的泰国身份证头像照片的base64编码 */
+  CropPortrait?: boolean;
 }
 
 declare interface RecognizeThaiIDCardOCRResponse {
@@ -2284,6 +2372,8 @@ declare interface RecognizeThaiIDCardOCRResponse {
   ExpirationDate?: string;
   /** 英文姓名 */
   EnLastName?: string;
+  /** 证件人像照片抠取 */
+  PortraitImage?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3041,6 +3131,8 @@ declare interface Ocr {
   CarInvoiceOCR(data?: CarInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<CarInvoiceOCRResponse>;
   /** 智能卡证分类 {@link ClassifyDetectOCRRequest} {@link ClassifyDetectOCRResponse} */
   ClassifyDetectOCR(data?: ClassifyDetectOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyDetectOCRResponse>;
+  /** 创建智慧表单文件识别任务 {@link CreateAIFormTaskRequest} {@link CreateAIFormTaskResponse} */
+  CreateAIFormTask(data: CreateAIFormTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIFormTaskResponse>;
   /** 驾驶证识别 {@link DriverLicenseOCRRequest} {@link DriverLicenseOCRResponse} */
   DriverLicenseOCR(data?: DriverLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<DriverLicenseOCRResponse>;
   /** 完税证明识别 {@link DutyPaidProofOCRRequest} {@link DutyPaidProofOCRResponse} */
@@ -3071,6 +3163,8 @@ declare interface Ocr {
   GeneralFastOCR(data?: GeneralFastOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralFastOCRResponse>;
   /** 通用手写体识别 {@link GeneralHandwritingOCRRequest} {@link GeneralHandwritingOCRResponse} */
   GeneralHandwritingOCR(data?: GeneralHandwritingOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralHandwritingOCRResponse>;
+  /** 查询智慧表单任务状态 {@link GetTaskStateRequest} {@link GetTaskStateResponse} */
+  GetTaskState(data: GetTaskStateRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskStateResponse>;
   /** 中国香港身份证识别 {@link HKIDCardOCRRequest} {@link HKIDCardOCRResponse} */
   HKIDCardOCR(data: HKIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<HKIDCardOCRResponse>;
   /** 港澳台居住证识别 {@link HmtResidentPermitOCRRequest} {@link HmtResidentPermitOCRResponse} */
@@ -3125,6 +3219,8 @@ declare interface Ocr {
   RecognizePhilippinesDrivingLicenseOCR(data?: RecognizePhilippinesDrivingLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesDrivingLicenseOCRResponse>;
   /** 菲律宾VoteID识别 {@link RecognizePhilippinesVoteIDOCRRequest} {@link RecognizePhilippinesVoteIDOCRResponse} */
   RecognizePhilippinesVoteIDOCR(data: RecognizePhilippinesVoteIDOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizePhilippinesVoteIDOCRResponse>;
+  /** 表格识别（高精度版) {@link RecognizeTableAccurateOCRRequest} {@link RecognizeTableAccurateOCRResponse} */
+  RecognizeTableAccurateOCR(data?: RecognizeTableAccurateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTableAccurateOCRResponse>;
   /** 表格识别（V2) {@link RecognizeTableOCRRequest} {@link RecognizeTableOCRResponse} */
   RecognizeTableOCR(data?: RecognizeTableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTableOCRResponse>;
   /** 泰国身份证识别 {@link RecognizeThaiIDCardOCRRequest} {@link RecognizeThaiIDCardOCRResponse} */
