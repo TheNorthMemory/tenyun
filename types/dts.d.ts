@@ -192,6 +192,8 @@ declare interface DBEndpointInfo {
   Supplier?: string | null;
   /** MongoDB可定义如下的参数: ['AuthDatabase':'admin', 'AuthFlag': "1",	'AuthMechanism':"SCRAM-SHA-1"] */
   ExtraAttr?: KeyValuePairOption[] | null;
+  /** 数据库所属网络环境，AccessType为云联网(ccn)时必填， UserIDC表示用户IDC、TencentVPC表示腾讯云VPC； */
+  DatabaseNetEnv?: string | null;
 }
 
 /** 数据库信息 */
@@ -564,7 +566,7 @@ declare interface MigrateOption {
 
 /** 同步的数据库对对象描述 */
 declare interface Objects {
-  /** 迁移对象类型 Partial(部分对象) */
+  /** 迁移对象类型 Partial(部分对象)，默认为Partial */
   Mode?: string | null;
   /** 同步对象，当 Mode 为 Partial 时，不为空 */
   Databases?: Database[] | null;

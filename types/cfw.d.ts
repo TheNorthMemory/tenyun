@@ -284,6 +284,10 @@ declare interface NatInstanceInfo {
   ZoneZh: string | null;
   /** 实例所在可用区 */
   ZoneZhBak: string | null;
+  /** 已使用规则数 */
+  RuleUsed?: number | null;
+  /** 实例的规则限制最大规格数 */
+  RuleMax?: number | null;
 }
 
 /** 新增模式传递参数 */
@@ -1728,6 +1732,14 @@ declare interface ModifySequenceRulesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyStorageSettingRequest {
+}
+
+declare interface ModifyStorageSettingResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyTableStatusRequest {
   /** EdgeId值两个vpc间的边id */
   EdgeId?: string;
@@ -1941,6 +1953,8 @@ declare interface Cfw {
   ModifySecurityGroupSequenceRules(data: ModifySecurityGroupSequenceRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityGroupSequenceRulesResponse>;
   /** 修改规则执行顺序 {@link ModifySequenceRulesRequest} {@link ModifySequenceRulesResponse} */
   ModifySequenceRules(data?: ModifySequenceRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySequenceRulesResponse>;
+  /** 日志存储设置 {@link ModifyStorageSettingRequest} {@link ModifyStorageSettingResponse} */
+  ModifyStorageSetting(data?: ModifyStorageSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStorageSettingResponse>;
   /** 修改规则表状态 {@link ModifyTableStatusRequest} {@link ModifyTableStatusResponse} */
   ModifyTableStatus(data?: ModifyTableStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTableStatusResponse>;
   /** 删除互联网边界规则 {@link RemoveAcRuleRequest} {@link RemoveAcRuleResponse} */

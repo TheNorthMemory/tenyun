@@ -220,6 +220,8 @@ declare interface HostInfo {
   RunTime: string;
   /** 到期时间 */
   ExpireTime: string;
+  /** 宿主机id */
+  HostId: string | null;
 }
 
 /** CDC集群内宿主机的统计信息 */

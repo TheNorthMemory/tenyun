@@ -1106,6 +1106,14 @@ declare interface RealTimeTaskInstanceNodeInfo {
   InstanceNodeInfoList: InstanceNodeInfo[] | null;
 }
 
+/** 实时任务同步速度趋势 */
+declare interface RealTimeTaskSpeed {
+  /** 同步速度条/s列表 */
+  RecordsSpeedList: RecordsSpeed[];
+  /** 同步速度字节/s列表 */
+  BytesSpeedList: BytesSpeed[];
+}
+
 /** 通用记录字段 */
 declare interface RecordField {
   /** 字段名称 */
@@ -4230,6 +4238,8 @@ declare interface DescribeOfflineTaskTokenRequest {
 declare interface DescribeOfflineTaskTokenResponse {
   /** 长连接临时token */
   Token: string;
+  /** 长连接临时token。与Token相同含义，优先取Data，Data为空时，取Token。 */
+  Data: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4390,6 +4400,8 @@ declare interface DescribeRealTimeTaskSpeedResponse {
   RecordsSpeedList: RecordsSpeed[];
   /** 同步速度字节/s列表 */
   BytesSpeedList: BytesSpeed[];
+  /** 同步速度，包括了RecordsSpeedList和BytesSpeedList */
+  Data: RealTimeTaskSpeed;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5017,7 +5029,9 @@ declare interface DescribeTaskInstanceRequest {
 
 declare interface DescribeTaskInstanceResponse {
   /** 任务实例详情 */
-  TaskInstanceDetail: TaskInstanceDetail;
+  TaskInstanceDetail?: TaskInstanceDetail;
+  /** 任务实例详情。与TaskInstanceDetail相同含义，优先取Data，Data为空时，取TaskInstanceDetail */
+  Data?: TaskInstanceDetail | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5348,6 +5362,8 @@ declare interface GenHiveTableDDLSqlRequest {
 declare interface GenHiveTableDDLSqlResponse {
   /** 生成的ddl语句 */
   DDLSql: string;
+  /** 生成的ddl语句。与DDLSql相同含义，优先取Data，如果Data为空，则取DDLSql。 */
+  Data: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

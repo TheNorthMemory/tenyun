@@ -116,6 +116,8 @@ declare interface BatchTaskDetail {
   FailureReason: string | null;
   /** 计费金额信息，eg：2.00元/小时 (for后付费) */
   BillingInfo: string | null;
+  /** 运行中的Pod的名字 */
+  PodList?: string[] | null;
 }
 
 /** 批处理任务实例 */
@@ -182,6 +184,32 @@ declare interface CFSConfig {
   Path: string;
 }
 
+/** 容器信息 */
+declare interface Container {
+  /** 名字 */
+  Name?: string | null;
+  /** id */
+  ContainerId?: string | null;
+  /** 镜像地址 */
+  Image?: string | null;
+  /** 容器状态 */
+  Status?: ContainerStatus | null;
+}
+
+/** 容器状态 */
+declare interface ContainerStatus {
+  /** 重启次数 */
+  RestartCount?: number | null;
+  /** 状态 */
+  State?: string | null;
+  /** 是否就绪 */
+  Ready?: boolean | null;
+  /** 状态原因 */
+  Reason?: string | null;
+  /** 容器的错误信息 */
+  Message?: string | null;
+}
+
 /** cos的路径信息 */
 declare interface CosPathInfo {
   /** 存储桶 */
@@ -245,17 +273,17 @@ declare interface CustomTrainingPoint {
 /** 数据配置 */
 declare interface DataConfig {
   /** 映射路径 */
-  MappingPath: string;
+  MappingPath?: string;
   /** DATASET、COS、CFS、HDFS、WEDATA_HDFS */
-  DataSourceType: string | null;
+  DataSourceType?: string | null;
   /** 来自数据集的数据 */
-  DataSetSource: DataSetConfig | null;
+  DataSetSource?: DataSetConfig | null;
   /** 来自cos的数据 */
-  COSSource: CosPathInfo | null;
+  COSSource?: CosPathInfo | null;
   /** 来自CFS的数据 */
-  CFSSource: CFSConfig | null;
+  CFSSource?: CFSConfig | null;
   /** 来自HDFS的数据 */
-  HDFSSource: HDFSConfig | null;
+  HDFSSource?: HDFSConfig | null;
 }
 
 /** 数据点 */
@@ -378,6 +406,12 @@ declare interface DatasetInfo {
   OcrScene: string | null;
   /** 数据集字典修改状态 */
   AnnotationKeyStatus: string | null;
+}
+
+/** 默认Nginx网关结构 */
+declare interface DefaultNginxGatewayCallInfo {
+  /** host */
+  Host?: string | null;
 }
 
 /** 图像检测参数信息 */
@@ -762,6 +796,24 @@ declare interface Option {
   Value: number;
 }
 
+/** Pod信息展示 */
+declare interface Pod {
+  /** pod名 */
+  Name?: string | null;
+  /** pod的唯一id */
+  Uid?: string | null;
+  /** 服务付费模式 */
+  ChargeType?: string | null;
+  /** pod的状态 */
+  Phase?: string | null;
+  /** pod的IP */
+  IP?: string | null;
+  /** pod的创建时间 */
+  CreateTime?: string | null;
+  /** 容器列表 */
+  Containers?: Container | null;
+}
+
 /** 点信息描述 */
 declare interface PointInfo {
   /** X坐标值 */
@@ -1036,6 +1088,8 @@ declare interface ServiceInfo {
   OldHybridBillingPrepaidReplicas: number | null;
   /** 是否开启模型的热更新。默认不开启 */
   ModelHotUpdateEnable: boolean | null;
+  /** Pod列表信息 */
+  Pods?: Pod | null;
 }
 
 /** 服务的限流限速等配置 */
@@ -1270,6 +1324,16 @@ declare interface TrainingModelVersionDTO {
   MaxReservedModels: number | null;
   /** 模型热更新目录 */
   ModelHotUpdatePath: CosPathInfo | null;
+  /** 推理环境id */
+  ReasoningEnvironmentId?: string | null;
+  /** 训练任务版本 */
+  TrainingJobVersion?: string | null;
+  /** 训练偏好 */
+  TrainingPreference?: string | null;
+  /** 自动学习任务id */
+  AutoMLTaskId?: string | null;
+  /** 是否QAT模型 */
+  IsQAT?: boolean | null;
 }
 
 /** 训练任务详情 */
@@ -1875,7 +1939,7 @@ declare interface DescribeBatchTaskRequest {
 
 declare interface DescribeBatchTaskResponse {
   /** 跑批任务详情 */
-  BatchTaskDetail: BatchTaskDetail | null;
+  BatchTaskDetail?: BatchTaskDetail | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2153,9 +2217,11 @@ declare interface DescribeModelServiceCallInfoRequest {
 
 declare interface DescribeModelServiceCallInfoResponse {
   /** 服务调用信息 */
-  ServiceCallInfo: ServiceCallInfo | null;
+  ServiceCallInfo?: ServiceCallInfo | null;
   /** 升级网关调用信息 */
-  InferGatewayCallInfo: InferGatewayCallInfo | null;
+  InferGatewayCallInfo?: InferGatewayCallInfo | null;
+  /** 默认nginx网关的调用信息 */
+  DefaultNginxGatewayCallInfo?: DefaultNginxGatewayCallInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

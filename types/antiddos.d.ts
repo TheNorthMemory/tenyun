@@ -162,6 +162,8 @@ declare interface BGPInstance {
   Line: number | null;
   /** 弹性业务带宽开关 */
   ElasticServiceBandwidth: number;
+  /** 赠送的业务带宽 */
+  GiftServiceBandWidth?: number;
 }
 
 /** 高防包资产实例的规格信息 */

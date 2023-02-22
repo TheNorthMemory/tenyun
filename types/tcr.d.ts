@@ -2661,7 +2661,7 @@ declare interface Tcr {
   DescribeImages(data: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
   /** 列出镜像不可变规则 {@link DescribeImmutableTagRulesRequest} {@link DescribeImmutableTagRulesResponse} */
   DescribeImmutableTagRules(data: DescribeImmutableTagRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImmutableTagRulesResponse>;
-  /** 查询全部实例信息 {@link DescribeInstanceAllRequest} {@link DescribeInstanceAllResponse} */
+  /** @deprecated 查询全部实例信息 {@link DescribeInstanceAllRequest} {@link DescribeInstanceAllResponse} */
   DescribeInstanceAll(data?: DescribeInstanceAllRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAllResponse>;
   /** 查询所有实例命名空间 {@link DescribeInstanceAllNamespacesRequest} {@link DescribeInstanceAllNamespacesResponse} */
   DescribeInstanceAllNamespaces(data?: DescribeInstanceAllNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAllNamespacesResponse>;

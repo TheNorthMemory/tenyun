@@ -1483,9 +1483,9 @@ declare interface DescribeChcHostsRequest {
 
 declare interface DescribeChcHostsResponse {
   /** 符合条件的实例数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 返回的实例列表 */
-  ChcHostSet: ChcHost[];
+  ChcHostSet?: ChcHost[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

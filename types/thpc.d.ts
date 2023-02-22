@@ -383,10 +383,12 @@ declare interface AddNodesRequest {
   ClientToken?: string;
   /** 队列名称。不指定则为默认队列。SLURM默认队列为：compute。SGE默认队列为：all.q。 */
   QueueName?: string;
-  /** 添加节点类型。默认值：ComputeCompute：计算节点。Login：登录节点。 */
+  /** 添加节点角色。默认值：ComputeCompute：计算节点。Login：登录节点。 */
   NodeRole?: string;
   /** 是否只预检此次请求。true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId.false（默认）：发送正常请求，通过检查后直接创建实例 */
   DryRun?: boolean;
+  /** 添加节点类型。默认取值：STATIC。STATIC：静态节点，不会参与弹性伸缩流程。DYNAMIC：弹性节点，会被弹性缩容的节点。管控节点和登录节点不支持此参数。 */
+  NodeType?: string;
 }
 
 declare interface AddNodesResponse {

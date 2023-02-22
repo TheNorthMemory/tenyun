@@ -319,6 +319,12 @@ declare interface CreateDomainBatchRequest {
   UpdateProhibition?: number;
   /** 是否开启转移锁：0=默认不开启，1=开启 */
   TransferProhibition?: number;
+  /** 渠道来源，pc/miniprogram/h5等 */
+  ChannelFrom?: string;
+  /** 订单来源，common正常/dianshi_active点石活动等 */
+  OrderFrom?: string;
+  /** 活动id */
+  ActivityId?: string;
 }
 
 declare interface CreateDomainBatchResponse {
@@ -563,10 +569,18 @@ declare interface RenewDomainBatchRequest {
   Period: number;
   /** 批量续费的域名。 */
   Domains: string[];
-  /** 付费模式 0手动在线付费，1使用余额付费。 */
+  /** 付费模式 0手动在线付费，1使用余额付费，2使用特惠包。 */
   PayMode: number;
   /** 自动续费开关。有三个可选值：0 表示关闭，不自动续费1 表示开启，将自动续费2 表示不处理，保留域名原有状态（默认值） */
   AutoRenewFlag?: number;
+  /** 特惠包ID */
+  PackageResourceId?: string;
+  /** 渠道来源，pc/miniprogram/h5等 */
+  ChannelFrom?: string;
+  /** 订单来源，common正常/dianshi_active点石活动等 */
+  OrderFrom?: string;
+  /** 活动id */
+  ActivityId?: string;
 }
 
 declare interface RenewDomainBatchResponse {
@@ -617,6 +631,12 @@ declare interface TransferInDomainBatchRequest {
   UpdateProhibition?: number;
   /** 是否开启转移锁：0=默认不开启，1=开启 */
   TransferProhibition?: number;
+  /** 渠道来源，pc/miniprogram/h5等 */
+  ChannelFrom?: string;
+  /** 订单来源，common正常/dianshi_active点石活动等 */
+  OrderFrom?: string;
+  /** 活动id */
+  ActivityId?: string;
 }
 
 declare interface TransferInDomainBatchResponse {
