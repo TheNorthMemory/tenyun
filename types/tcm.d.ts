@@ -310,6 +310,8 @@ declare interface LoadBalancerStatus {
   LoadBalancerName: string;
   /** 负载均衡实例 VIP */
   LoadBalancerVip: string;
+  /** 负载均衡实例 Hostname */
+  LoadBalancerHostname?: string | null;
 }
 
 /** Mesh信息 */

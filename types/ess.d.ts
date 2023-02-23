@@ -953,6 +953,8 @@ declare interface CreateMultiFlowSignQRCodeRequest {
   QrEffectiveDay?: number;
   /** 限制二维码用户条件 */
   Restrictions?: ApproverRestriction[];
+  /** 用户自定义字段，回调的时候会进行透传，长度需要小于20480 */
+  UserData?: string;
   /** 回调地址,最大长度1000字符串回调时机：用户通过签署二维码发起签署流程时，企业额度不足导致失败 */
   CallbackUrl?: string;
   /** 应用信息 */
@@ -963,9 +965,9 @@ declare interface CreateMultiFlowSignQRCodeRequest {
 
 declare interface CreateMultiFlowSignQRCodeResponse {
   /** 签署二维码对象 */
-  QrCode: SignQrCode;
+  QrCode?: SignQrCode;
   /** 签署链接对象 */
-  SignUrls: SignUrl;
+  SignUrls?: SignUrl;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1242,6 +1242,10 @@ declare interface KafkaParam {
   MsgMultiple?: number | null;
 }
 
+/** 小写字符解析 */
+declare interface LowercaseParam {
+}
+
 /** Map参数 */
 declare interface MapParam {
   /** key值 */
@@ -2070,6 +2074,8 @@ declare interface ValueParam {
   JsonPathReplace?: JsonPathReplaceParam | null;
   /** Url解析 */
   UrlDecode?: UrlDecodeParam | null;
+  /** 小写字符解析 */
+  Lowercase?: LowercaseParam | null;
 }
 
 /** 虚拟IP实体 */

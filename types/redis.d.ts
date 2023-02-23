@@ -30,6 +30,14 @@ declare interface BackupDownloadInfo {
   InnerDownloadUrl: string;
 }
 
+/** 自定义的备份文件下载地址的 VPC 信息。 */
+declare interface BackupLimitVpcItem {
+  /** 自定义下载备份文件的VPC 所属地域。 */
+  Region: string;
+  /** 自定义下载备份文件的 VPC 列表。 */
+  VpcList: string[];
+}
+
 /** 大Key详情 */
 declare interface BigKeyInfo {
   /** 所属的database */
@@ -608,24 +616,36 @@ declare interface ProxyNodes {
 
 /** 实例的备份数组 */
 declare interface RedisBackupSet {
-  /** 开始备份的时间 */
+  /** 备份开始时间。 */
   StartTime: string;
-  /** 备份ID */
+  /** 备份ID。 */
   BackupId: string;
-  /** 备份类型。1：用户发起的手动备份； 0：凌晨系统发起的备份 */
+  /** 备份类型。- 1：用户发起的手动备份。- 0：凌晨系统发起的备份。 */
   BackupType: string;
-  /** 备份状态。 1:"备份被其它流程锁定"; 2:"备份正常，没有被任何流程锁定"; -1:"备份已过期"； 3:"备份正在被导出"; 4:"备份导出成功" */
+  /** 备份状态。 - 1：备份被其它流程锁定。- 2：备份正常，没有被任何流程锁定。- -1：备份已过期。- 3：备份正在被导出。- 4：备份导出成功。 */
   Status: number;
-  /** 备份的备注信息 */
+  /** 备份的备注信息。 */
   Remark: string;
-  /** 备份是否被锁定，0：未被锁定；1：已被锁定 */
+  /** 备份是否被锁定。- 0：未被锁定。- 1：已被锁定。 */
   Locked: number;
-  /** 内部字段，用户可忽略 */
+  /** 内部字段，用户可忽略。 */
   BackupSize: number | null;
-  /** 内部字段，用户可忽略 */
+  /** 内部字段，用户可忽略。 */
   FullBackup: number | null;
-  /** 内部字段，用户可忽略 */
+  /** 内部字段，用户可忽略。 */
   InstanceType: number | null;
+  /** 实例 ID。 */
+  InstanceId: string;
+  /** 实例名称。 */
+  InstanceName: string;
+  /** 本地备份所在地域。 */
+  Region: string;
+  /** 备份结束时间。 */
+  EndTime: string;
+  /** 备份文件类型。 */
+  FileType: string;
+  /** 备份文件过期时间。 */
+  ExpireTime: string;
 }
 
 /** 单个实例信息 */
@@ -1213,19 +1233,29 @@ declare interface DescribeAutoBackupConfigResponse {
 declare interface DescribeBackupUrlRequest {
   /** 实例 ID。 */
   InstanceId: string;
-  /** 备份 ID，可通过DescribeInstanceBackups接口返回的参数 BackupSet 获取。 */
+  /** 备份 ID，可通过 [DescribeInstanceBackups ](https://cloud.tencent.com/document/product/239/20011)接口返回的参数 RedisBackupSet 获取。 */
   BackupId: string;
+  /** 下载备份文件的网络限制类型，如果不配置该参数，则使用用户自定义的配置。- NoLimit：不限制，腾讯云内外网均可以下载备份文件。- LimitOnlyIntranet：仅腾讯云自动分配的内网地址可下载备份文件。- Customize：指用户自定义的私有网络可下载备份文件。 */
+  LimitType?: string;
+  /** 该参数仅支持输入 In，表示自定义的**LimitVpc**可以下载备份文件。 */
+  VpcComparisonSymbol?: string;
+  /** 标识自定义的 LimitIp 地址是否可下载备份文件。- In: 自定义的 IP 地址可以下载。默认为 In。- NotIn: 自定义的 IP 不可以下载。 */
+  IpComparisonSymbol?: string;
+  /** 自定义的可下载备份文件的 VPC ID。当参数**LimitType**为**Customize **时，需配置该参数。 */
+  LimitVpc?: BackupLimitVpcItem[];
+  /** 自定义的可下载备份文件的 VPC IP 地址。当参数**LimitType**为**Customize **时，需配置该参数。 */
+  LimitIp?: string[];
 }
 
 declare interface DescribeBackupUrlResponse {
   /** 外网下载地址（6小时内链接有效），该字段正在逐步废弃中。 */
-  DownloadUrl: string[];
+  DownloadUrl?: string[];
   /** 内网下载地址（6小时内链接有效），该字段正在逐步废弃中。 */
-  InnerDownloadUrl: string[];
+  InnerDownloadUrl?: string[];
   /** 文件名称，该字段正在逐步废弃中。 */
-  Filenames: string[] | null;
+  Filenames?: string[] | null;
   /** 备份文件信息列表。 */
-  BackupInfos: BackupDownloadInfo[] | null;
+  BackupInfos?: BackupDownloadInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1305,25 +1335,27 @@ declare interface DescribeInstanceAccountResponse {
 }
 
 declare interface DescribeInstanceBackupsRequest {
-  /** 待操作的实例ID，可通过 DescribeInstance 接口返回值中的 InstanceId 获取。 */
-  InstanceId: string;
-  /** 实例列表大小，默认大小20 */
+  /** 每页输出的备份列表大小。默认大小为20，最大值为 100。 */
   Limit?: number;
-  /** 偏移量，取Limit整数倍 */
+  /** 分页偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。 */
   Offset?: number;
+  /** 待操作的实例ID，可通过 DescribeInstance 接口返回值中的 InstanceId 获取。 */
+  InstanceId?: string;
   /** 开始时间，格式如：2017-02-08 16:46:34。查询实例在 [beginTime, endTime] 时间段内开始备份的备份列表。 */
   BeginTime?: string;
   /** 结束时间，格式如：2017-02-08 19:09:26。查询实例在 [beginTime, endTime] 时间段内开始备份的备份列表。 */
   EndTime?: string;
-  /** 1：备份在流程中，2：备份正常，3：备份转RDB文件处理中，4：已完成RDB转换，-1：备份已过期，-2：备份已删除。 */
+  /** 备份任务的状态：1：备份在流程中。2：备份正常。3：备份转RDB文件处理中。4：已完成RDB转换。-1：备份已过期。-2：备份已删除。 */
   Status?: number[];
+  /** 实例名称，支持根据实例名称模糊搜索。 */
+  InstanceName?: string;
 }
 
 declare interface DescribeInstanceBackupsResponse {
-  /** 备份总数 */
-  TotalCount: number;
-  /** 实例的备份数组 */
-  BackupSet: RedisBackupSet[];
+  /** 备份总数。 */
+  TotalCount?: number;
+  /** 实例的备份数组。 */
+  BackupSet?: RedisBackupSet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2229,29 +2261,33 @@ declare interface ModifyMaintenanceWindowResponse {
 }
 
 declare interface ModifyNetworkConfigRequest {
-  /** 实例ID */
+  /** 实例 ID。 */
   InstanceId: string;
-  /** 操作类型：changeVip——修改实例VIP；changeVpc——修改实例子网；changeBaseToVpc——基础网络转VPC网络 */
+  /** 指预修改网络的类别，包括：- changeVip：指切换私有网络，包含其内网IPv4地址及端口。- changeVpc：指切换私有网络所属子网。- changeBaseToVpc：指基础网络切换为私有网络。- changeVPort：指仅修改实例网络端口。 */
   Operation: string;
-  /** VIP地址，changeVip的时候填写，不填则默认分配 */
+  /** 指实例私有网络内网 IPv4 地址。当**Operation**为**changeVip**时，需配置该参数。 */
   Vip?: string;
-  /** 私有网络ID，changeVpc、changeBaseToVpc的时候需要提供 */
+  /** 指修改后的私有网络 ID，当**Operation**为**changeVpc**或**changeBaseToVpc**时，需配置该参数。 */
   VpcId?: string;
-  /** 子网ID，changeVpc、changeBaseToVpc的时候需要提供 */
+  /** 指修改后的私有网络所属子网 ID，当**Operation**为**changeVpc**或**changeBaseToVpc**时，需配置该参数。 */
   SubnetId?: string;
-  /** 原VIP保留时间，单位：天，注：需要最新版SDK，否则原VIP立即释放，查看SDK版本，详见 [SDK中心](https://cloud.tencent.com/document/sdk) */
+  /** 原内网 IPv4 地址保留时长。- 单位：天。- 取值范围：0、1、2、3、7、15。**说明**：设置原地址保留时长需最新版SDK，否则原地址将立即释放，查看SDK版本，请参见 [SDK中心](https://cloud.tencent.com/document/sdk)。 */
   Recycle?: number;
+  /** 指修改后的网络端口。当**Operation**为**changeVPort**或**changeVip**时，需配置该参数。取值范围为[1024,65535]。 */
+  VPort?: number;
 }
 
 declare interface ModifyNetworkConfigResponse {
-  /** 执行状态：true|false */
-  Status: boolean;
-  /** 子网ID */
-  SubnetId: string;
-  /** 私有网络ID */
-  VpcId: string;
-  /** VIP地址 */
-  Vip: string;
+  /** 执行状态，请忽略该参数。 */
+  Status?: boolean;
+  /** 指实例新私有网络所属子网 ID。 */
+  SubnetId?: string;
+  /** 指实例新的私有网络ID。 */
+  VpcId?: string;
+  /** 指实例新的内网 IPv4 地址。 */
+  Vip?: string;
+  /** 任务 ID。可获取**taskId**，通过接口 **DescribeTaskInfo **查询任务执行状态。 */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2524,7 +2560,7 @@ declare interface Redis {
   /** 查看实例子账号信息 {@link DescribeInstanceAccountRequest} {@link DescribeInstanceAccountResponse} */
   DescribeInstanceAccount(data: DescribeInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAccountResponse>;
   /** 查询Redis实例备份列表 {@link DescribeInstanceBackupsRequest} {@link DescribeInstanceBackupsResponse} */
-  DescribeInstanceBackups(data: DescribeInstanceBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceBackupsResponse>;
+  DescribeInstanceBackups(data?: DescribeInstanceBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceBackupsResponse>;
   /** 查询实例DTS信息 {@link DescribeInstanceDTSInfoRequest} {@link DescribeInstanceDTSInfoResponse} */
   DescribeInstanceDTSInfo(data: DescribeInstanceDTSInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDTSInfoResponse>;
   /** 查询订单信息 {@link DescribeInstanceDealDetailRequest} {@link DescribeInstanceDealDetailResponse} */

@@ -216,8 +216,10 @@ declare interface KTVRobotInfo {
   RTCSystem: string;
   /** 播放模式，PlayMode取值有：RepeatPlaylist：列表循环Order：顺序播放RepeatSingle：单曲循环Shuffle：随机播放 */
   SetPlayModeInput: SetPlayModeCommandInput;
-  /** 音量，范围 0~100，默认为 50。 */
+  /** 音量，范围 0~100，默认为 50。（已废弃，请采用 SetRealVolumeInput ） */
   SetVolumeInput: SetVolumeCommandInput;
+  /** 真实音量，范围 0~100，默认为 50。 */
+  SetRealVolumeInput: SetRealVolumeCommandInput;
 }
 
 /** KTV 歌手基础信息 */
@@ -458,6 +460,12 @@ declare interface SetPlaylistCommandInput {
   MusicURLs?: string[];
 }
 
+/** 设置真实音量。 */
+declare interface SetRealVolumeCommandInput {
+  /** 真实音量大小，取值范围为 0~100，默认值为 50。 */
+  RealVolume: number;
+}
+
 /** 设置音量。 */
 declare interface SetVolumeCommandInput {
   /** 音量大小，取值范围为 0~100，默认值为 50。 */
@@ -488,7 +496,7 @@ declare interface Station {
 
 /** KTV 机器人初始化参数，在创建后自动完成相关初始化工作。 */
 declare interface SyncRobotCommand {
-  /** 可同时传入多个指令，顺序执行。取值有：Play：播放Pause：暂停SwitchPrevious：上一首SwitchNext：下一首SetPlayMode：设置播放模式Seek：调整播放进度SetPlaylist：歌单变更SetAudioParam：音频参数变更SendMessage：发送自定义消息SetDestroyMode：设置销毁模式SetVolume：设置音量 */
+  /** 可同时传入多个指令，顺序执行。取值有：Play：播放Pause：暂停SwitchPrevious：上一首SwitchNext：下一首SetPlayMode：设置播放模式Seek：调整播放进度SetPlaylist：歌单变更SetAudioParam：音频参数变更SendMessage：发送自定义消息SetDestroyMode：设置销毁模式SetVolume：设置音量（已废弃，请采用 SetRealVolume）SetRealVolume：设置真实音量 */
   Command: string;
   /** 播放参数。 */
   PlayCommandInput?: PlayCommandInput;
@@ -504,8 +512,10 @@ declare interface SyncRobotCommand {
   SetPlayModeCommandInput?: SetPlayModeCommandInput;
   /** 销毁模式，当Command取SetDestroyMode时，必填。 */
   SetDestroyModeCommandInput?: SetDestroyModeCommandInput;
-  /** 音量，当Command取SetVolume时，必填。 */
+  /** 音量，当Command取SetVolume时，必填。（已废弃，请采用 SetRealVolumeCommandInput） */
   SetVolumeCommandInput?: SetVolumeCommandInput;
+  /** 真实音量，当Command取SetRealVolume时，必填。 */
+  SetRealVolumeCommandInput?: SetRealVolumeCommandInput;
 }
 
 /** TRTC推流进房信息 */
@@ -1035,7 +1045,7 @@ declare interface SearchKTVMusicsResponse {
 declare interface SyncKTVRobotCommandRequest {
   /** 机器人Id。 */
   RobotId: string;
-  /** 指令，取值有：Play：播放Pause：暂停SwitchPrevious：上一首SwitchNext：下一首SetPlayMode：设置播放模式Seek：调整播放进度SetPlaylist：歌单变更SetAudioParam：音频参数变更SendMessage：发送自定义消息SetDestroyMode：设置销毁模式SetVolume：设置音量 */
+  /** 指令，取值有：Play：播放Pause：暂停SwitchPrevious：上一首SwitchNext：下一首SetPlayMode：设置播放模式Seek：调整播放进度SetPlaylist：歌单变更SetAudioParam：音频参数变更SendMessage：发送自定义消息SetDestroyMode：设置销毁模式SetVolume：设置音量（已废弃，请采用 SetRealVolume）SetRealVolume：设置真实音量 */
   Command: string;
   /** 播放参数。 */
   PlayCommandInput?: PlayCommandInput;
@@ -1051,8 +1061,10 @@ declare interface SyncKTVRobotCommandRequest {
   SetPlayModeCommandInput?: SetPlayModeCommandInput;
   /** 销毁模式，当Command取SetDestroyMode时，必填。 */
   SetDestroyModeCommandInput?: SetDestroyModeCommandInput;
-  /** 音量，当Command取SetVolume时，必填。 */
+  /** 音量，当Command取SetVolume时，必填。（已废弃，请采用 SetRealVolumeCommandInput ） */
   SetVolumeCommandInput?: SetVolumeCommandInput;
+  /** 真实音量，当Command取SetRealVolume时，必填。 */
+  SetRealVolumeCommandInput?: SetRealVolumeCommandInput;
 }
 
 declare interface SyncKTVRobotCommandResponse {

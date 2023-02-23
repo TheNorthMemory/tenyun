@@ -3474,7 +3474,7 @@ declare interface CreateContainGroupRequest {
 
 declare interface CreateContainGroupResponse {
   /** 返回创建成功的部署组ID，返回null表示失败 */
-  Result?: string;
+  Result: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5150,7 +5150,7 @@ declare interface DescribeInvocationMetricDataDimensionRequest {
 
 declare interface DescribeInvocationMetricDataDimensionResponse {
   /** 维度 */
-  Result: TsfPageDimension;
+  Result?: TsfPageDimension;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

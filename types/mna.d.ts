@@ -46,6 +46,12 @@ declare interface DeviceDetails {
   DeviceBaseInfo: DeviceBaseInfo;
   /** 设备网络信息 */
   DeviceNetInfo: DeviceNetInfo[] | null;
+  /** 聚合服务器地址 */
+  GatewaySite?: string | null;
+  /** 业务下行速率 */
+  BusinessDownRate?: number | null;
+  /** 业务上行速率 */
+  BusinessUpRate?: number | null;
 }
 
 /** 设备信息结构体 */
@@ -88,6 +94,10 @@ declare interface DeviceNetInfo {
   Rat: number | null;
   /** 网卡名 */
   NetInfoName: string | null;
+  /** 下行实时速率（浮点数类型代替上一版本DataRx的整型） */
+  DownRate?: number | null;
+  /** 上行实时速率（浮点数类型代替上一版本TxRate的整型） */
+  UpRate?: number | null;
 }
 
 /** 用户期望门限 */
@@ -102,10 +112,10 @@ declare interface ExpectedThreshold {
 
 /** 网络详细信息 */
 declare interface NetDetails {
-  /** 时间点，单位：s */
-  Time: string;
   /** 流量值（bit） */
   Current: number;
+  /** 时间点，单位：s */
+  Time: string;
 }
 
 /** 测速数据 */
@@ -259,7 +269,7 @@ declare interface GetDeviceRequest {
 
 declare interface GetDeviceResponse {
   /** 设备详细信息 */
-  DeviceDetails: DeviceDetails;
+  DeviceDetails?: DeviceDetails;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -285,7 +295,7 @@ declare interface GetDevicesResponse {
 }
 
 declare interface GetFlowStatisticRequest {
-  /** 设备ID，ID="-1"时默认查找所有设备 */
+  /** 设备ID */
   DeviceId: string;
   /** 开始查找时间 */
   BeginTime: number;
@@ -299,13 +309,13 @@ declare interface GetFlowStatisticRequest {
 
 declare interface GetFlowStatisticResponse {
   /** 流量详细信息 */
-  NetDetails: NetDetails[];
+  NetDetails?: NetDetails[];
   /** 查找时间段流量使用最大值（单位：bit） */
-  MaxValue: number;
+  MaxValue?: number;
   /** 查找时间段流量使用平均值（单位：bit） */
-  AvgValue: number;
+  AvgValue?: number;
   /** 查找时间段流量使用总量（单位：bit） */
-  TotalValue: number;
+  TotalValue?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -321,7 +331,7 @@ declare interface GetPublicKeyResponse {
 }
 
 declare interface GetStatisticDataRequest {
-  /** 设备ID，设备ID="-1"获取所有设备流量统计 */
+  /** 设备ID */
   DeviceId: string;
   /** 统计开始时间，单位：s */
   BeginTime: number;
@@ -333,7 +343,7 @@ declare interface GetStatisticDataRequest {
 
 declare interface GetStatisticDataResponse {
   /** 文件地址url */
-  FilePath: string;
+  FilePath?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

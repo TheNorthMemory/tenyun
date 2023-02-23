@@ -1103,21 +1103,21 @@ declare interface DescribeNoPrimaryKeyTablesRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
+  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL，默认为"mysql"。 */
   Product?: string;
 }
 
 declare interface DescribeNoPrimaryKeyTablesResponse {
   /** 无主键表总数。 */
-  NoPrimaryKeyTableCount: number;
+  NoPrimaryKeyTableCount?: number;
   /** 与昨日扫描无主键表的差值，正数为增加，负数为减少，0为无变化。 */
-  NoPrimaryKeyTableCountDiff: number;
+  NoPrimaryKeyTableCountDiff?: number;
   /** 记录的无主键表总数（不超过无主键表总数），可用于分页查询。 */
-  NoPrimaryKeyTableRecordCount: number;
+  NoPrimaryKeyTableRecordCount?: number;
   /** 无主键表列表。 */
-  NoPrimaryKeyTables: Table[];
+  NoPrimaryKeyTables?: Table[];
   /** 采集时间戳（秒）。 */
-  Timestamp: number;
+  Timestamp?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
