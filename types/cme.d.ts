@@ -1313,7 +1313,7 @@ declare interface CreateTeamRequest {
 
 declare interface CreateTeamResponse {
   /** 创建的团队 ID。 */
-  TeamId?: string;
+  TeamId: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

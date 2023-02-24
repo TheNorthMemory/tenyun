@@ -110,6 +110,20 @@ declare interface ExpectedThreshold {
   Jitter: number;
 }
 
+/** 设备流量信息 */
+declare interface FlowDetails {
+  /** 流量数据点 */
+  NetDetails?: NetDetails[] | null;
+  /** 设备ID */
+  DeviceId?: string | null;
+  /** 流量最大值（单位：bytes） */
+  MaxValue?: number | null;
+  /** 流量平均值（单位：bytes） */
+  AvgValue?: number | null;
+  /** 流量总值（单位：bytes） */
+  TotalValue?: number | null;
+}
+
 /** 网络详细信息 */
 declare interface NetDetails {
   /** 流量值（bit） */
@@ -320,6 +334,26 @@ declare interface GetFlowStatisticResponse {
   RequestId?: string;
 }
 
+declare interface GetMultiFlowStatisticRequest {
+  /** 设备id列表，单次最多请求10个设备 */
+  DeviceIds: string[];
+  /** 1659514436 */
+  BeginTime: number;
+  /** 1659515000 */
+  EndTime: number;
+  /** 统计流量类型（1：上行流量，2：下行流量） */
+  Type: number;
+  /** 统计时间粒度（1：按小时统计，2：按天统计） */
+  TimeGranularity: number;
+}
+
+declare interface GetMultiFlowStatisticResponse {
+  /** 批量设备流量信息 */
+  FlowDetails?: FlowDetails[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetPublicKeyRequest {
 }
 
@@ -385,6 +419,8 @@ declare interface Mna {
   GetDevices(data: GetDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<GetDevicesResponse>;
   /** 获取数据流量统计数据 {@link GetFlowStatisticRequest} {@link GetFlowStatisticResponse} */
   GetFlowStatistic(data: GetFlowStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticResponse>;
+  /** 批量获取设备流量统计 {@link GetMultiFlowStatisticRequest} {@link GetMultiFlowStatisticResponse} */
+  GetMultiFlowStatistic(data: GetMultiFlowStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<GetMultiFlowStatisticResponse>;
   /** 获取公钥 {@link GetPublicKeyRequest} {@link GetPublicKeyResponse} */
   GetPublicKey(data?: GetPublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GetPublicKeyResponse>;
   /** 下载用量统计数据 {@link GetStatisticDataRequest} {@link GetStatisticDataResponse} */

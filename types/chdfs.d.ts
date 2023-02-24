@@ -151,7 +151,7 @@ declare interface CreateAccessGroupRequest {
 
 declare interface CreateAccessGroupResponse {
   /** 权限组 */
-  AccessGroup: AccessGroup;
+  AccessGroup?: AccessGroup;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -195,7 +195,7 @@ declare interface CreateFileSystemRequest {
 
 declare interface CreateFileSystemResponse {
   /** 文件系统 */
-  FileSystem: FileSystem;
+  FileSystem?: FileSystem;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

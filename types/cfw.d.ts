@@ -104,6 +104,44 @@ declare interface CfwNatDnatRule {
   Description: string;
 }
 
+/** 通用的列表检索过滤选项 */
+declare interface CommonFilter {
+  /** 检索的键值 */
+  Name: string;
+  /** 检索的值 */
+  Values: string[];
+  /** 枚举类型，代表name与values之间的匹配关系enum FilterOperatorType { //INVALID FILTER_OPERATOR_TYPE_INVALID = 0; //等于 FILTER_OPERATOR_TYPE_EQUAL = 1; //大于 FILTER_OPERATOR_TYPE_GREATER = 2; //小于 FILTER_OPERATOR_TYPE_LESS = 3; //大于等于 FILTER_OPERATOR_TYPE_GREATER_EQ = 4; //小于等于 FILTER_OPERATOR_TYPE_LESS_EQ = 5; //不等于 FILTER_OPERATOR_TYPE_NO_EQ = 6; //in，数组中包含 FILTER_OPERATOR_TYPE_IN = 7; //not in FILTER_OPERATOR_TYPE_NOT_IN = 8; //模糊匹配 FILTER_OPERATOR_TYPE_FUZZINESS = 9; //存在 FILTER_OPERATOR_TYPE_EXIST = 10; //不存在 FILTER_OPERATOR_TYPE_NOT_EXIST = 11; //正则 FILTER_OPERATOR_TYPE_REGULAR = 12;} */
+  OperatorType: number;
+}
+
+/** 创建NAT ACL规则参数结构 */
+declare interface CreateNatRuleItem {
+  /** 访问源示例： net：IP/CIDR(192.168.0.2) */
+  SourceContent: string | null;
+  /** 访问源类型：入向规则时类型可以为 ip,net,template,location；出向规则时可以为 ip,net,template,instance,group,tag */
+  SourceType: string | null;
+  /** 访问目的示例： net：IP/CIDR(192.168.0.2) domain：域名规则，例如*.qq.com */
+  TargetContent: string | null;
+  /** 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为 ip,net,domain,template,location */
+  TargetType: string | null;
+  /** 协议，可选的值： TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS */
+  Protocol: string | null;
+  /** 访问控制策略中设置的流量通过云防火墙的方式。取值： accept：放行 drop：拒绝 log：观察 */
+  RuleAction: string | null;
+  /** 访问控制策略的端口。取值： -1/-1：全部端口 80：80端口 */
+  Port: string | null;
+  /** 规则方向：1，入站；0，出站 */
+  Direction: number | null;
+  /** 规则序号 */
+  OrderIndex: number | null;
+  /** 规则状态，true表示启用，false表示禁用 */
+  Enable: string | null;
+  /** 规则对应的唯一id，创建规则时无需填写 */
+  Uuid?: number | null;
+  /** 描述 */
+  Description?: string | null;
+}
+
 /** 数据库白名单规则数据 */
 declare interface DatabaseWhiteListRuleData {
   /** 访问源 */
@@ -132,6 +170,58 @@ declare interface DatabaseWhiteListRuleData {
   SecondLevelRegionName?: string;
   /** 云厂商码 */
   CloudCode?: string;
+}
+
+/** 访问控制列表对象 */
+declare interface DescAcItem {
+  /** 访问源 */
+  SourceContent: string | null;
+  /** 访问目的 */
+  TargetContent: string | null;
+  /** 协议 */
+  Protocol: string | null;
+  /** 端口 */
+  Port: string | null;
+  /** 访问控制策略中设置的流量通过云防火墙的方式。取值： accept：放行 drop：拒绝 log：观察 */
+  RuleAction: string | null;
+  /** 描述 */
+  Description: string | null;
+  /** 命中次数 */
+  Count: number;
+  /** 执行顺序 */
+  OrderIndex: number;
+  /** 访问源类型：入向规则时类型可以为 ip,net,template,location；出向规则时可以为 ip,net,template,instance,group,tag */
+  SourceType: string | null;
+  /** 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为 ip,net,domain,template,location */
+  TargetType: string | null;
+  /** 规则对应的唯一id */
+  Uuid: number | null;
+  /** 规则有效性 */
+  Invalid: number | null;
+  /** 0为正常规则,1为地域规则 */
+  IsRegion: number | null;
+  /** 国家id */
+  CountryCode: number | null;
+  /** 城市id */
+  CityCode: number | null;
+  /** 国家名称 */
+  CountryName: string | null;
+  /** 省名称 */
+  CityName: string | null;
+  /** 云厂商code */
+  CloudCode: string | null;
+  /** 0为正常规则,1为云厂商规则 */
+  IsCloud: number | null;
+  /** 规则状态，true表示启用，false表示禁用 */
+  Enable: string | null;
+  /** 规则方向：1，入向；0，出向 */
+  Direction?: number | null;
+  /** 实例名称 */
+  InstanceName?: string | null;
+  /** 内部使用的uuid，一般情况下不会使用到该字段 */
+  InternalUuid?: number | null;
+  /** 规则状态，查询规则命中详情时该字段有效，0：新增，1: 已删除, 2: 编辑删除 */
+  Status?: number | null;
 }
 
 /** 设置nat防火墙的vpc dns 接入开关 */
@@ -680,6 +770,20 @@ declare interface AddEnterpriseSecurityGroupRulesResponse {
   RequestId?: string;
 }
 
+declare interface AddNatAcRuleRequest {
+  /** 需要添加的nat访问控制规则列表 */
+  Rules: CreateNatRuleItem[];
+  /** 添加规则的来源，一般不需要使用，值insert_rule 表示插入指定位置的规则；值batch_import 表示批量导入规则；为空时表示添加规则 */
+  From?: string;
+}
+
+declare interface AddNatAcRuleResponse {
+  /** 创建成功后返回新策略ID列表 */
+  RuleUuid?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAcRulesRequest {
   /** 创建规则数据 */
   Data: RuleInfoData[];
@@ -1136,6 +1240,36 @@ declare interface DescribeIPStatusListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNatAcRuleRequest {
+  /** 每页条数 */
+  Limit: number;
+  /** 偏移值 */
+  Offset: number;
+  /** 需要查询的索引，特定场景使用，可不填 */
+  Index?: string;
+  /** 过滤条件组合 */
+  Filters?: CommonFilter[];
+  /** 检索的起始时间，可不传 */
+  StartTime?: string;
+  /** 检索的截止时间，可不传 */
+  EndTime?: string;
+  /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值 */
+  Order?: string;
+  /** 排序所用到的字段 */
+  By?: string;
+}
+
+declare interface DescribeNatAcRuleResponse {
+  /** 总条数 */
+  Total?: number;
+  /** nat访问控制列表数据 */
+  Data?: DescAcItem[] | null;
+  /** 未过滤的总条数 */
+  AllTotal?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNatFwInfoCountRequest {
 }
 
@@ -1574,6 +1708,18 @@ declare interface ModifyBlockTopResponse {
   RequestId?: string;
 }
 
+declare interface ModifyNatAcRuleRequest {
+  /** 需要编辑的规则数组 */
+  Rules: CreateNatRuleItem[];
+}
+
+declare interface ModifyNatAcRuleResponse {
+  /** 编辑成功后返回新策略ID列表 */
+  RuleUuid?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyNatFwReSelectRequest {
   /** 模式 1：接入模式；0：新增模式 */
   Mode: number;
@@ -1790,6 +1936,20 @@ declare interface RemoveEnterpriseSecurityGroupRuleResponse {
   RequestId?: string;
 }
 
+declare interface RemoveNatAcRuleRequest {
+  /** 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则 */
+  RuleUuid: number[];
+  /** 规则方向：1，入站；0，出站 */
+  Direction?: number;
+}
+
+declare interface RemoveNatAcRuleResponse {
+  /** 删除成功后返回被删除策略的uuid列表 */
+  RuleUuid?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetNatFwDnatRuleRequest {
   /** 0：cfw新增模式，1：cfw接入模式。 */
   Mode: number;
@@ -1843,6 +2003,8 @@ declare interface Cfw {
   AddAcRule(data: AddAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddAcRuleResponse>;
   /** 创建新企业安全组规则 {@link AddEnterpriseSecurityGroupRulesRequest} {@link AddEnterpriseSecurityGroupRulesResponse} */
   AddEnterpriseSecurityGroupRules(data: AddEnterpriseSecurityGroupRulesRequest, config?: AxiosRequestConfig): AxiosPromise<AddEnterpriseSecurityGroupRulesResponse>;
+  /** 添加nat访问控制规则 {@link AddNatAcRuleRequest} {@link AddNatAcRuleResponse} */
+  AddNatAcRule(data: AddNatAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddNatAcRuleResponse>;
   /** 创建访问控制规则 {@link CreateAcRulesRequest} {@link CreateAcRulesResponse} */
   CreateAcRules(data: CreateAcRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAcRulesResponse>;
   /** 创建、选择vpc {@link CreateChooseVpcsRequest} {@link CreateChooseVpcsResponse} */
@@ -1887,6 +2049,8 @@ declare interface Cfw {
   DescribeGuideScanInfo(data?: DescribeGuideScanInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGuideScanInfoResponse>;
   /** ip防护状态查询 {@link DescribeIPStatusListRequest} {@link DescribeIPStatusListResponse} */
   DescribeIPStatusList(data: DescribeIPStatusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStatusListResponse>;
+  /** 查询NAT访问控制列表 {@link DescribeNatAcRuleRequest} {@link DescribeNatAcRuleResponse} */
+  DescribeNatAcRule(data: DescribeNatAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatAcRuleResponse>;
   /** 获取当前用户接入nat防火墙的所有子网数及natfw实例个数 {@link DescribeNatFwInfoCountRequest} {@link DescribeNatFwInfoCountResponse} */
   DescribeNatFwInfoCount(data?: DescribeNatFwInfoCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwInfoCountResponse>;
   /** 获取租户所有NAT实例 {@link DescribeNatFwInstanceRequest} {@link DescribeNatFwInstanceResponse} */
@@ -1933,6 +2097,8 @@ declare interface Cfw {
   ModifyBlockIgnoreList(data: ModifyBlockIgnoreListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockIgnoreListResponse>;
   /** 取消阻断记录置顶接口 {@link ModifyBlockTopRequest} {@link ModifyBlockTopResponse} */
   ModifyBlockTop(data: ModifyBlockTopRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockTopResponse>;
+  /** 修改NAT访问控制规则 {@link ModifyNatAcRuleRequest} {@link ModifyNatAcRuleResponse} */
+  ModifyNatAcRule(data: ModifyNatAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatAcRuleResponse>;
   /** 防火墙实例重新选择vpc或nat {@link ModifyNatFwReSelectRequest} {@link ModifyNatFwReSelectResponse} */
   ModifyNatFwReSelect(data: ModifyNatFwReSelectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatFwReSelectResponse>;
   /** 修改NAT防火墙开关 {@link ModifyNatFwSwitchRequest} {@link ModifyNatFwSwitchResponse} */
@@ -1961,6 +2127,8 @@ declare interface Cfw {
   RemoveAcRule(data: RemoveAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveAcRuleResponse>;
   /** 删除新企业安全组规则 {@link RemoveEnterpriseSecurityGroupRuleRequest} {@link RemoveEnterpriseSecurityGroupRuleResponse} */
   RemoveEnterpriseSecurityGroupRule(data: RemoveEnterpriseSecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveEnterpriseSecurityGroupRuleResponse>;
+  /** 删除NAT访问控制规则 {@link RemoveNatAcRuleRequest} {@link RemoveNatAcRuleResponse} */
+  RemoveNatAcRule(data: RemoveNatAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveNatAcRuleResponse>;
   /** 配置防火墙Dnat规则 {@link SetNatFwDnatRuleRequest} {@link SetNatFwDnatRuleResponse} */
   SetNatFwDnatRule(data: SetNatFwDnatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SetNatFwDnatRuleResponse>;
   /** 设置防火墙实例弹性公网ip {@link SetNatFwEipRequest} {@link SetNatFwEipResponse} */

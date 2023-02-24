@@ -490,6 +490,24 @@ declare interface DatahubTaskInfo {
   StepList: string[] | null;
 }
 
+/** Datahub主题 */
+declare interface DatahubTopicDTO {
+  /** 名称 */
+  Name: string;
+  /** Topic名称 */
+  TopicName: string;
+  /** Topic Id */
+  TopicId: string;
+  /** 分区数 */
+  PartitionNum: number;
+  /** 过期时间 */
+  RetentionMs: number;
+  /** 备注 */
+  Note: string;
+  /** 状态，1使用中，2删除中 */
+  Status: number;
+}
+
 /** 数据处理——Value处理参数——转换时间格式参数 */
 declare interface DateParam {
   /** 时间格式 */
@@ -642,6 +660,38 @@ declare interface DescribeDatahubTasksRes {
   TotalCount: number;
   /** Datahub任务信息列表 */
   TaskList: DatahubTaskInfo[] | null;
+}
+
+/** Datahub Topic详情 */
+declare interface DescribeDatahubTopicResp {
+  /** 名称 */
+  Name: string;
+  /** Topic名称 */
+  TopicName: string;
+  /** Topic Id */
+  TopicId: string;
+  /** 分区数 */
+  PartitionNum: number;
+  /** 过期时间 */
+  RetentionMs: number;
+  /** 备注 */
+  Note: string | null;
+  /** 用户名 */
+  UserName: string;
+  /** 密码 */
+  Password: string;
+  /** 状态，1使用中，2删除中 */
+  Status: number;
+  /** 服务路由地址 */
+  Address: string | null;
+}
+
+/** Datahub主题列表 */
+declare interface DescribeDatahubTopicsResp {
+  /** 总数 */
+  TotalCount: number;
+  /** Topic列表 */
+  TopicList: DatahubTopicDTO[] | null;
 }
 
 /** DescribeGroup返回实体 */
@@ -2904,6 +2954,34 @@ declare interface DescribeDatahubTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDatahubTopicRequest {
+  /** 名称 */
+  Name: string;
+}
+
+declare interface DescribeDatahubTopicResponse {
+  /** 返回的结果对象 */
+  Result: DescribeDatahubTopicResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDatahubTopicsRequest {
+  /** 查询值 */
+  SearchWord?: string;
+  /** 本次查询的偏移位置，默认为0 */
+  Offset?: number;
+  /** 本次返回结果的最大个数，默认为50，最大值为50 */
+  Limit?: number;
+}
+
+declare interface DescribeDatahubTopicsResponse {
+  /** 主题列表 */
+  Result: DescribeDatahubTopicsResp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeGroupInfoRequest {
   /** （过滤条件）按照实例 ID 过滤。 */
   InstanceId: string;
@@ -2989,6 +3067,8 @@ declare interface DescribeInstancesDetailRequest {
   InstanceIds?: string;
   /** 按照实例ID过滤 */
   InstanceIdList?: string[];
+  /** 根据标签列表过滤实例（取交集） */
+  TagList?: Tag[];
 }
 
 declare interface DescribeInstancesDetailResponse {
@@ -3767,6 +3847,10 @@ declare interface Ckafka {
   DescribeDatahubTask(data: DescribeDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTaskResponse>;
   /** 查询Datahub任务列表 {@link DescribeDatahubTasksRequest} {@link DescribeDatahubTasksResponse} */
   DescribeDatahubTasks(data?: DescribeDatahubTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTasksResponse>;
+  /** 获取Datahub主题属性 {@link DescribeDatahubTopicRequest} {@link DescribeDatahubTopicResponse} */
+  DescribeDatahubTopic(data: DescribeDatahubTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTopicResponse>;
+  /** 查询DIP主题列表 {@link DescribeDatahubTopicsRequest} {@link DescribeDatahubTopicsResponse} */
+  DescribeDatahubTopics(data?: DescribeDatahubTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTopicsResponse>;
   /** 枚举消费分组(精简版) {@link DescribeGroupRequest} {@link DescribeGroupResponse} */
   DescribeGroup(data: DescribeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupResponse>;
   /** 获取消费分组信息 {@link DescribeGroupInfoRequest} {@link DescribeGroupInfoResponse} */

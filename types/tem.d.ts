@@ -196,6 +196,8 @@ declare interface EksService {
   ApplicationId?: string | null;
   /** 所有服务IP是否已经ready */
   AllIpDone?: boolean | null;
+  /** clb 域名 */
+  ExternalDomain?: string | null;
 }
 
 /** 开启prometheus监控配置 */
@@ -282,6 +284,8 @@ declare interface IngressInfo {
   Mixed?: boolean;
   /** 重定向模式，可选值：- AUTO（自动重定向http到https）- NONE（不使用重定向） */
   RewriteType?: string | null;
+  /** clb 域名 */
+  Domain?: string | null;
 }
 
 /** ingress rule 配置 */
@@ -594,6 +598,8 @@ declare interface ServicePortMapping {
   Ports?: number[] | null;
   /** 端口映射数组 */
   PortMappingItemList?: ServicePortMappingItem[] | null;
+  /** clb domain */
+  ExternalDomain?: string | null;
 }
 
 /** 服务端口映射条目 */

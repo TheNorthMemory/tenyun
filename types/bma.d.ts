@@ -78,6 +78,8 @@ declare interface FakeURLData {
   Origin?: number | null;
   /** 仿冒网址 */
   FakeURL?: string | null;
+  /** 仿冒域名 */
+  FakeDomain?: string | null;
   /** 热度 */
   Heat?: number | null;
   /** 协助处置状态：0-未处置 1-处置中 2-处置成功 3-处置失败 */

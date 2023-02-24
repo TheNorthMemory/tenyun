@@ -238,6 +238,34 @@ declare interface HostStatistic {
   Count: number;
 }
 
+/** 入带宽数据 */
+declare interface InBandwidth {
+  /** 时间戳 */
+  Timestamps: number[] | null;
+  /** 时间对应的值 */
+  Values: number[] | null;
+}
+
+/** 本地网络信息 */
+declare interface LocalNetInfo {
+  /** 协议 */
+  Protocol: string | null;
+  /** 网络id */
+  VpcId: string | null;
+  /** 路由信息 */
+  BGPRoute: string | null;
+  /** 本地IP */
+  LocalIp: string | null;
+}
+
+/** 出带宽数据。 */
+declare interface OutBandwidth {
+  /** 时间戳 */
+  Timestamps: number[] | null;
+  /** 对应时间的值 */
+  Values: number[] | null;
+}
+
 /** RegionZoneInfo信息 */
 declare interface RegionZoneInfo {
   /** Region id */
@@ -308,6 +336,14 @@ declare interface SiteDetail {
   City: string;
   /** 站点所在地区的邮编 */
   PostalCode: number;
+}
+
+/** VPN网关的流量监控数据。 */
+declare interface VpngwBandwidthData {
+  /** 出带宽流量 */
+  OutBandwidth: OutBandwidth | null;
+  /** 入带宽流量 */
+  InBandwidth: InBandwidth;
 }
 
 /** 可用区信息 */
@@ -526,6 +562,14 @@ declare interface DescribeDedicatedClusterOverviewResponse {
   CvmCount: number;
   /** 宿主机数量 */
   HostCount: number;
+  /** vpn通道状态 */
+  VpnConnectionState: string | null;
+  /** vpn网关监控数据 */
+  VpngwBandwidthData: VpngwBandwidthData | null;
+  /** 本地网关信息 */
+  LocalNetInfo: LocalNetInfo | null;
+  /** vpn网关通道监控数据 */
+  VpnConnectionBandwidthData: VpngwBandwidthData[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

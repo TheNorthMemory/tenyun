@@ -21,7 +21,7 @@ declare interface Blueprint {
   /** 镜像对外展示版本。 */
   DisplayVersion: string;
   /** 镜像描述信息。 */
-  Description: string;
+  Description: string | null;
   /** 操作系统名称。 */
   OsName: string;
   /** 操作系统平台。 */
@@ -221,7 +221,7 @@ declare interface Disk {
   /** 上一次请求ID */
   LatestOperationRequestId: string;
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
-  CreatedTime: string;
+  CreatedTime: string | null;
   /** 到期时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
   ExpiredTime: string | null;
   /** 隔离时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
@@ -677,7 +677,7 @@ declare interface Snapshot {
   /** 快照最新操作的唯一请求 ID，只有创建、回滚快照时记录。 */
   LatestOperationRequestId: string | null;
   /** 快照的创建时间。 */
-  CreatedTime: string;
+  CreatedTime: string | null;
 }
 
 /** 快照操作限制列表。 */

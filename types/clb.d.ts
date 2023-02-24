@@ -1317,7 +1317,7 @@ declare interface CreateClsLogSetRequest {
 
 declare interface CreateClsLogSetResponse {
   /** 日志集的 ID。 */
-  LogsetId: string;
+  LogsetId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1489,7 +1489,7 @@ declare interface CreateTopicRequest {
 
 declare interface CreateTopicResponse {
   /** 日志主题的 ID。 */
-  TopicId: string;
+  TopicId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1801,9 +1801,9 @@ declare interface DescribeCustomizedConfigAssociateListRequest {
 
 declare interface DescribeCustomizedConfigAssociateListResponse {
   /** 绑定关系列表 */
-  BindList: BindDetailItem[];
+  BindList?: BindDetailItem[];
   /** 绑定关系总数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2033,9 +2033,9 @@ declare interface DescribeResourcesRequest {
 
 declare interface DescribeResourcesResponse {
   /** 可用区支持的资源列表。 */
-  ZoneResourceSet: ZoneResource[];
+  ZoneResourceSet?: ZoneResource[];
   /** 可用区资源列表数目。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2137,11 +2137,13 @@ declare interface DescribeTargetsRequest {
   Protocol?: string;
   /** 监听器端口。 */
   Port?: number;
+  /** 查询负载均衡绑定的后端服务列表，过滤条件如下： location-id - String - 是否必填：否 - （过滤条件）按照 规则ID 过滤，如："loc-12345678"。 private-ip-address - String - 是否必填：否 - （过滤条件）按照 后端服务内网IP 过滤，如："172.16.1.1"。 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeTargetsResponse {
   /** 监听器后端绑定的机器信息。 */
-  Listeners: ListenerBackend[] | null;
+  Listeners?: ListenerBackend[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2155,9 +2157,9 @@ declare interface DescribeTaskStatusRequest {
 
 declare interface DescribeTaskStatusResponse {
   /** 任务的当前状态。 0：成功，1：失败，2：进行中。 */
-  Status: number;
+  Status?: number;
   /** 由负载均衡实例唯一 ID 组成的数组。 */
-  LoadBalancerIds: string[] | null;
+  LoadBalancerIds?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2329,13 +2331,13 @@ declare interface ModifyLoadBalancerAttributesRequest {
   LoadBalancerId: string;
   /** 负载均衡实例名称 */
   LoadBalancerName?: string;
-  /** 负载均衡绑定的后端服务的地域信息 */
+  /** 设置负载均衡跨地域绑定1.0的后端服务信息 */
   TargetRegionInfo?: TargetRegionInfo;
   /** 网络计费相关参数 */
   InternetChargeInfo?: InternetAccessible;
   /** Target是否放通来自CLB的流量。开启放通（true）：只验证CLB上的安全组；不开启放通（false）：需同时验证CLB和后端实例上的安全组。 */
   LoadBalancerPassToTarget?: boolean;
-  /** 是否开启SnatPro */
+  /** 是否开启跨地域绑定2.0功能 */
   SnatPro?: boolean;
   /** 是否开启删除保护 */
   DeleteProtect?: boolean;

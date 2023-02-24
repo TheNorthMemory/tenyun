@@ -82,6 +82,8 @@ declare interface EnvAddressInfo {
   ConfigIntranetAddress: string | null;
   /** 是否开启config内网clb */
   EnableConfigIntranet?: boolean | null;
+  /** 客户端公网带宽 */
+  InternetBandWidth?: number | null;
 }
 
 /** 环境具体信息 */
@@ -154,6 +156,8 @@ declare interface NacosReplica {
   Zone: string | null;
   /** 可用区ID */
   ZoneId: string | null;
+  /** VPC ID */
+  VpcId?: string | null;
 }
 
 /** nacos服务端接口列表，用于云监控 */
@@ -230,6 +234,12 @@ declare interface SREInstance {
   IsolateTime: string | null;
   /** 实例地域相关的描述信息 */
   RegionInfos: DescribeInstanceRegionInfo[] | null;
+  /** 所在EKS环境，分为common和yunti */
+  EKSType: string | null;
+  /** 引擎的产品版本 */
+  FeatureVersion?: string | null;
+  /** 引擎实例是否开启客户端内网访问地址 */
+  EnableClientIntranet?: boolean | null;
 }
 
 /** 服务治理相关的信息 */
@@ -278,6 +288,8 @@ declare interface ZookeeperReplica {
   ZoneId: string | null;
   /** 别名 */
   AliasName: string | null;
+  /** VPC ID */
+  VpcId?: string | null;
 }
 
 /** Zookeeper服务端接口列表，用于云监控 */

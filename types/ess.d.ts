@@ -10,15 +10,15 @@ declare interface Admin {
   Mobile?: string | null;
 }
 
-/** 主企业代子企业操作 或 渠道子客应用相关信息 */
+/** 代理相关应用信息，如集团主企业代子企业操作 */
 declare interface Agent {
-  /** 应用编号,32位字符串 */
+  /** 代理机构的应用编号,32位字符串，一般不用传 */
   AppId?: string;
-  /** 主组织的应用号 */
+  /** 被代理机构的应用号，一般不用传 */
   ProxyAppId?: string | null;
-  /** 主组织在平台的机构编号 */
+  /** 被代理机构在电子签平台的机构编号，集团代理下场景必传 */
   ProxyOrganizationId?: string | null;
-  /** 主组织的操作人 */
+  /** 被代理机构的经办人，一般不用传 */
   ProxyOperator?: string | null;
 }
 
@@ -739,7 +739,7 @@ declare interface CreateDocumentRequest {
   NeedPreview?: boolean;
   /** 预览链接类型 默认:0-文件流, 1- H5链接 注意:此参数在NeedPreview 为true 时有效, */
   PreviewType?: number;
-  /** 应用相关信息 */
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
   /** 客户端Token，保持接口幂等性,最大长度64个字符 */
   ClientToken?: string;
@@ -747,9 +747,9 @@ declare interface CreateDocumentRequest {
 
 declare interface CreateDocumentResponse {
   /** 签署流程电子文档ID */
-  DocumentId: string;
+  DocumentId?: string;
   /** 签署流程文件的预览地址, 5分钟内有效。仅当NeedPreview为true 时返回 */
-  PreviewFileUrl: string | null;
+  PreviewFileUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -797,21 +797,21 @@ declare interface CreateFlowByFilesRequest {
   NeedSignReview?: boolean;
   /** 用户自定义字段，回调的时候会进行透传，长度需要小于20480 */
   UserData?: string;
-  /** 应用号信息 */
-  Agent?: Agent;
   /** 签署人校验方式VerifyCheck: 人脸识别（默认）MobileCheck：手机号验证参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。 */
   ApproverVerifyType?: string;
   /** 签署流程描述,最大长度1000个字符 */
   FlowDescription?: string;
   /** 标识是否允许发起后添加控件。0为不允许1为允许。如果为1，创建的时候不能有签署控件，只能创建后添加。注意发起后添加控件功能不支持添加骑缝章和签批控件 */
   SignBeanTag?: number;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
 }
 
 declare interface CreateFlowByFilesResponse {
   /** 签署流程编号。注：如入参 是否需要预览 NeedPreview 设置为 true，不会正式发起合同，此处不会有值返回；如入参 是否需要预览 NeedPreview 设置为 false，此处会正常返回签署流程编号 FlowId。 */
-  FlowId: string;
+  FlowId?: string;
   /** 合同预览链接。注：如入参 是否需要预览 NeedPreview 设置为 true，会开启“预览模式”，此处会返回预览链接；如入参 是否需要预览 NeedPreview 设置为 false，此处不会有值返回。 */
-  PreviewUrl: string | null;
+  PreviewUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -875,7 +875,7 @@ declare interface CreateFlowRequest {
   NeedSignReview?: boolean;
   /** 暂未开放 */
   CallbackUrl?: string;
-  /** 应用相关信息 */
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
   /** 被抄送人的信息列表。注: 此功能为白名单功能，若有需要，请联系电子签客服开白使用。 */
   CcInfos?: CcInfo[];
@@ -883,7 +883,7 @@ declare interface CreateFlowRequest {
 
 declare interface CreateFlowResponse {
   /** 签署流程编号 */
-  FlowId: string;
+  FlowId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1015,13 +1015,13 @@ declare interface CreateSchemeUrlRequest {
   PathType?: number;
   /** 是否自动回跳 true：是， false：否。该参数只针对"APP" 类型的签署链接有效 */
   AutoJumpBack?: boolean;
-  /** 应用相关信息 */
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
 }
 
 declare interface CreateSchemeUrlResponse {
   /** 小程序链接地址 */
-  SchemeUrl: string;
+  SchemeUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1153,7 +1153,7 @@ declare interface DescribeFlowInfoRequest {
   FlowIds: string[];
   /** 调用方用户信息 */
   Operator?: UserInfo;
-  /** 应用信息 */
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
 }
 
@@ -1167,9 +1167,9 @@ declare interface DescribeFlowInfoResponse {
 declare interface DescribeFlowTemplatesRequest {
   /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
-  /** 企业组织相关信息 */
+  /** 企业组织相关信息，一般不用填 */
   Organization?: OrganizationInfo;
-  /** 应用相关信息 */
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
   /** 查询偏移位置，默认0 */
   Offset?: number;
@@ -1189,9 +1189,9 @@ declare interface DescribeFlowTemplatesRequest {
 
 declare interface DescribeFlowTemplatesResponse {
   /** 模板详情列表 */
-  Templates: TemplateInfo[];
+  Templates?: TemplateInfo[];
   /** 查询到的总个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1277,7 +1277,7 @@ declare interface DescribeOrganizationSealsRequest {
   SealId?: string;
   /** 印章类型列表（都是组织机构印章）。为空时查询所有类型的印章。目前支持以下类型：OFFICIAL：企业公章；CONTRACT：合同专用章；ORGANIZATION_SEAL：企业印章(图片上传创建)；LEGAL_PERSON_SEAL：法定代表人章 */
   SealTypes?: string[];
-  /** 主企业代子企业操作 或 渠道子客应用相关信息 */
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
 }
 
@@ -1341,13 +1341,13 @@ declare interface StartFlowRequest {
   FlowId: string;
   /** 客户端Token，保持接口幂等性,最大长度64个字符 */
   ClientToken?: string;
-  /** 应用相关信息 */
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
 }
 
 declare interface StartFlowResponse {
   /** 返回描述，START-发起成功， REVIEW-提交审核成功，EXECUTING-已提交发起任务 */
-  Status: string;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
