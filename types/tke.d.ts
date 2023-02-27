@@ -3491,7 +3491,7 @@ declare interface DescribeClusterReleaseDetailsRequest {
 
 declare interface DescribeClusterReleaseDetailsResponse {
   /** 应用详情 */
-  Release: ReleaseDetails | null;
+  Release?: ReleaseDetails | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

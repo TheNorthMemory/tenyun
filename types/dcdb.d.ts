@@ -1646,6 +1646,18 @@ declare interface ModifyAccountPrivilegesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBEncryptAttributesRequest {
+  /** 实例Id，形如：tdsqlshard-ow728lmc。 */
+  InstanceId: string;
+  /** 是否启用数据加密，开启后暂不支持关闭。本接口的可选值为：1-开启数据加密。 */
+  EncryptEnabled: number;
+}
+
+declare interface ModifyDBEncryptAttributesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBInstanceNameRequest {
   /** 实例ID，形如tdsql-hdaprz0v */
   InstanceId: string;
@@ -2003,6 +2015,8 @@ declare interface Dcdb {
   ModifyAccountDescription(data: ModifyAccountDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountDescriptionResponse>;
   /** 修改云数据库实例账号的权限信息 {@link ModifyAccountPrivilegesRequest} {@link ModifyAccountPrivilegesResponse} */
   ModifyAccountPrivileges(data: ModifyAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountPrivilegesResponse>;
+  /** 修改实例数据加密属性 {@link ModifyDBEncryptAttributesRequest} {@link ModifyDBEncryptAttributesResponse} */
+  ModifyDBEncryptAttributes(data: ModifyDBEncryptAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBEncryptAttributesResponse>;
   /** 修改实例名字 {@link ModifyDBInstanceNameRequest} {@link ModifyDBInstanceNameResponse} */
   ModifyDBInstanceName(data: ModifyDBInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNameResponse>;
   /** 修改云数据库安全组 {@link ModifyDBInstanceSecurityGroupsRequest} {@link ModifyDBInstanceSecurityGroupsResponse} */

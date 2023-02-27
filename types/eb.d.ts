@@ -653,6 +653,8 @@ declare interface UpdateEventBusRequest {
   SaveDays?: number;
   /** EB日志主题ID */
   LogTopicId?: string;
+  /** 是否开启存储 */
+  EnableStore?: boolean;
 }
 
 declare interface UpdateEventBusResponse {

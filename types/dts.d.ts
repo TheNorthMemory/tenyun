@@ -312,11 +312,11 @@ declare interface Database {
   ProcedureMode?: string | null;
   /** ProcedureMode取值为Partial时需要填写 */
   Procedures?: string[] | null;
-  /** 触发器迁移模式，All(为当前对象下的所有对象)，partial(部分对象)，如果整库同步此处应该为All。 */
+  /** 触发器迁移模式，All(为当前对象下的所有对象)，Partial(部分对象)，如果整库同步此处应该为All。数据同步暂不支持此高级对象。 */
   TriggerMode?: string | null;
   /** 当TriggerMode为partial，指定要迁移的触发器名称 */
   Triggers?: string[] | null;
-  /** 事件迁移模式，All(为当前对象下的所有对象)，partial(部分对象)，如果整库同步此处应该为All。 */
+  /** 事件迁移模式，All(为当前对象下的所有对象)，Partial(部分对象)，如果整库同步此处应该为All。数据同步暂不支持此高级对象。 */
   EventMode?: string | null;
   /** 当EventMode为partial，指定要迁移的事件名称 */
   Events?: string[] | null;
@@ -897,8 +897,6 @@ declare interface ConfigureSyncJobRequest {
   SrcAccessType: string;
   /** 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)、ckafka(CKafka实例),注意具体可选值依赖当前链路 */
   DstAccessType: string;
-  /** 同步任务选项 */
-  Options: Options;
   /** 同步库表对象信息 */
   Objects: Objects;
   /** 同步任务名称 */
@@ -913,6 +911,8 @@ declare interface ConfigureSyncJobRequest {
   SrcInfo?: Endpoint;
   /** 目标端信息，单节点数据库使用 */
   DstInfo?: Endpoint;
+  /** 同步任务选项 */
+  Options?: Options;
   /** 自动重试的时间段、可设置5至720分钟、0表示不重试 */
   AutoRetryTimeRangeMinutes?: number;
 }

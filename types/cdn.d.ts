@@ -4319,7 +4319,7 @@ declare interface VerifyDomainRecordRequest {
 
 declare interface VerifyDomainRecordResponse {
   /** 是否验证成功 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

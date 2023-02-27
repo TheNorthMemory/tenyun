@@ -215,7 +215,7 @@ declare interface CreateBPBrandResponse {
 }
 
 declare interface CreateBPFakeAPPListRequest {
-  /** 批量模版 */
+  /** 批量模板 */
   FakeAPPs: string;
 }
 
@@ -265,7 +265,7 @@ declare interface CreateBPFakeURLResponse {
 }
 
 declare interface CreateBPFakeURLsRequest {
-  /** 批量模版 */
+  /** 批量模板 */
   FakeURLs: string;
 }
 

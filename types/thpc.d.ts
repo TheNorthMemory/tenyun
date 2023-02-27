@@ -150,6 +150,14 @@ declare interface ExpansionNodeConfigOverview {
   DataDisks?: DataDisk[] | null;
 }
 
+/** >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。 */
+declare interface Filter {
+  /** 需要过滤的字段。 */
+  Name: string | null;
+  /** 字段的过滤值。 */
+  Values: string[] | null;
+}
+
 /** 描述GooseFS挂载信息 */
 declare interface GooseFSOption {
   /** 文件系统本地挂载路径。 */
@@ -252,6 +260,24 @@ declare interface NodeActivity {
   NodeActivityStatusReason: string | null;
 }
 
+/** 节点概览信息。 */
+declare interface NodeOverview {
+  /** 节点实例ID。 */
+  InstanceId?: string | null;
+  /** 节点所在可用区信息。 */
+  Zone?: string | null;
+  /** 节点状态。SUBMITTED：已完成提交。CREATING：创建中。CREATED：完成创建。INITING：初始化中。INIT_FAILED：初始化失败。RUNNING：运行中。DELETING：销毁中。 */
+  NodeState?: string | null;
+  /** 镜像ID。 */
+  ImageId?: string | null;
+  /** 节点所属队列名称。 */
+  QueueName?: string | null;
+  /** 节点角色。Manager：管控节点。Compute：计算节点。Login：登录节点。ManagerBackup：备用管控节点。 */
+  NodeRole?: string | null;
+  /** 节点类型。STATIC：静态节点。DYNAMIC：弹性节点。 */
+  NodeType?: string | null;
+}
+
 /** 描述了实例的抽象位置 */
 declare interface Placement {
   /** 实例所属的可用区名称。该参数可以通过调用 [DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。 */
@@ -296,6 +322,12 @@ declare interface QueueConfigOverview {
   EnableAutoShrink?: boolean;
   /** 扩容节点配置信息。 */
   ExpansionNodeConfigs?: ExpansionNodeConfigOverview[];
+}
+
+/** 队列信息概览。 */
+declare interface QueueOverview {
+  /** 队列名称。 */
+  QueueName?: string | null;
 }
 
 /** 描述集群文件系统选项 */
@@ -392,6 +424,18 @@ declare interface AddNodesRequest {
 }
 
 declare interface AddNodesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddQueueRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+  /** 队列名称。最多支持32个字符。 */
+  QueueName: string;
+}
+
+declare interface AddQueueResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -504,6 +548,18 @@ declare interface DeleteNodesResponse {
   RequestId?: string;
 }
 
+declare interface DeleteQueueRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+  /** 队列名称。最多支持32个字符。 */
+  QueueName: string;
+}
+
+declare interface DeleteQueueResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAutoScalingConfigurationRequest {
   /** 集群ID。 */
   ClusterId: string;
@@ -566,6 +622,44 @@ declare interface DescribeClustersResponse {
   ClusterSet: ClusterOverview[];
   /** 集群数量。 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNodesRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+  /** queue-name 按照【队列名称】进行过滤。队列名称形如：compute。类型：String必选：否node-role 按照【节点角色】进行过滤。节点角色形如：Manager。（Manager：管控节点。Compute：计算节点。Login：登录节点。ManagerBackup：备用管控节点。）类型：String必选：否node-type 按照【节点类型】进行过滤。节点类型形如：STATIC。(STATIC：静态节点。DYNAMIC：弹性节点。)类型：String必选：否每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。 */
+  Filters?: Filter[];
+  /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  Limit?: number;
+}
+
+declare interface DescribeNodesResponse {
+  /** 节点概览信息列表。 */
+  NodeSet?: NodeOverview[];
+  /** 符合条件的节点数量。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeQueuesRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+  /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  Limit?: number;
+}
+
+declare interface DescribeQueuesResponse {
+  /** 队列概览信息列表。 */
+  QueueSet?: QueueOverview[];
+  /** 符合条件的节点数量。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -889,6 +983,8 @@ declare interface Thpc {
   AddClusterStorageOption(data: AddClusterStorageOptionRequest, config?: AxiosRequestConfig): AxiosPromise<AddClusterStorageOptionResponse>;
   /** 添加节点 {@link AddNodesRequest} {@link AddNodesResponse} */
   AddNodes(data: AddNodesRequest, config?: AxiosRequestConfig): AxiosPromise<AddNodesResponse>;
+  /** 添加队列 {@link AddQueueRequest} {@link AddQueueResponse} */
+  AddQueue(data: AddQueueRequest, config?: AxiosRequestConfig): AxiosPromise<AddQueueResponse>;
   /** 绑定弹性伸缩组 {@link BindAutoScalingGroupRequest} {@link BindAutoScalingGroupResponse} */
   BindAutoScalingGroup(data: BindAutoScalingGroupRequest, config?: AxiosRequestConfig): AxiosPromise<BindAutoScalingGroupResponse>;
   /** 创建集群 {@link CreateClusterRequest} {@link CreateClusterResponse} */
@@ -899,6 +995,8 @@ declare interface Thpc {
   DeleteClusterStorageOption(data: DeleteClusterStorageOptionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterStorageOptionResponse>;
   /** 删除节点 {@link DeleteNodesRequest} {@link DeleteNodesResponse} */
   DeleteNodes(data: DeleteNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNodesResponse>;
+  /** 删除队列 {@link DeleteQueueRequest} {@link DeleteQueueResponse} */
+  DeleteQueue(data: DeleteQueueRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQueueResponse>;
   /** 查询弹性伸缩配置信息 {@link DescribeAutoScalingConfigurationRequest} {@link DescribeAutoScalingConfigurationResponse} */
   DescribeAutoScalingConfiguration(data: DescribeAutoScalingConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingConfigurationResponse>;
   /** 查询集群活动历史记录 {@link DescribeClusterActivitiesRequest} {@link DescribeClusterActivitiesResponse} */
@@ -907,6 +1005,10 @@ declare interface Thpc {
   DescribeClusterStorageOption(data: DescribeClusterStorageOptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterStorageOptionResponse>;
   /** 查询集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
+  /** 查询指定集群节点列表 {@link DescribeNodesRequest} {@link DescribeNodesResponse} */
+  DescribeNodes(data: DescribeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodesResponse>;
+  /** 查询队列列表 {@link DescribeQueuesRequest} {@link DescribeQueuesResponse} */
+  DescribeQueues(data: DescribeQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQueuesResponse>;
   /** 设置弹性伸缩配置信息 {@link SetAutoScalingConfigurationRequest} {@link SetAutoScalingConfigurationResponse} */
   SetAutoScalingConfiguration(data: SetAutoScalingConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<SetAutoScalingConfigurationResponse>;
   /** 绑定弹性伸缩组 {@link V20211109.BindAutoScalingGroupRequest} {@link V20211109.BindAutoScalingGroupResponse} */

@@ -68,6 +68,10 @@ declare interface AutoSnapshotPolicy {
   RetentionAmount: number | null;
   /** 定期快照高级保留策略。 */
   AdvancedRetentionPolicy: AdvancedRetentionPolicy | null;
+  /** 该复制快照策略的源端账户ID */
+  CopyFromAccountUin?: string | null;
+  /** 标签。 */
+  Tags?: Tag[] | null;
 }
 
 /** 描述独享集群的详细信息。 */
@@ -88,6 +92,10 @@ declare interface Cdc {
   DiskType: string;
   /** 独享集群到期时间。 */
   ExpiredTime: string;
+  /** 存储池创建时间。 */
+  CreatedTime: string;
+  /** 当前集群中已创建的云盘数量。 */
+  DiskNumber: number;
 }
 
 /** 显示独享集群的大小 */
@@ -96,6 +104,32 @@ declare interface CdcSize {
   DiskAavilable: number;
   /** 独享集群的总容量大小，单位GiB */
   DiskTotal: number;
+}
+
+/** 描述购买云盘时的费用明细。 */
+declare interface DetailPrice {
+  /** 描述计费项目名称。 */
+  PriceTitle: string | null;
+  /** 描述计费项目显示名称，用户控制台展示。 */
+  PriceName: string;
+  /** 预付费云盘预支费用的原价，单位：元。 */
+  OriginalPrice: number | null;
+  /** 预付费云盘预支费用的折扣价，单位：元。 */
+  DiscountPrice: number | null;
+  /** 后付费云盘原单价，单位：元。 */
+  UnitPrice: number | null;
+  /** 后付费云盘折扣单价，单位：元。 */
+  UnitPriceDiscount: number | null;
+  /** 后付费云盘的计价单元，取值范围：HOUR：表示后付费云盘的计价单元是按小时计算。 */
+  ChargeUnit: string | null;
+  /** 高精度预付费云盘预支费用的原价，单位：元。 */
+  OriginalPriceHigh?: string | null;
+  /** 高精度预付费云盘预支费用的折扣价，单位：元。 */
+  DiscountPriceHigh?: string | null;
+  /** 高精度后付费云盘原单价，单位：元。 */
+  UnitPriceHigh?: string | null;
+  /** 高精度后付费云盘折扣单价，单位：元。 */
+  UnitPriceDiscountHigh?: string | null;
 }
 
 /** 描述了云硬盘的详细信息 */
@@ -178,6 +212,10 @@ declare interface Disk {
   DiskBackupCount: number;
   /** 云硬盘挂载实例的类型。取值范围：CVMEKS */
   InstanceType: string;
+  /** 云硬盘最后一次挂载的实例ID */
+  LastAttachInsId?: string | null;
+  /** 云硬盘最后一次操作错误提示 */
+  ErrorPrompt?: string | null;
 }
 
 /** 云硬盘备份点。 */
@@ -236,6 +274,8 @@ declare interface DiskConfig {
   MinDiskSize?: number;
   /** 最大可配置云盘大小，单位GB。 */
   MaxDiskSize?: number;
+  /** 描述预付费或后付费云盘的价格。 */
+  Price?: Price | null;
 }
 
 /** 云盘操作日志。 */
@@ -278,6 +318,8 @@ declare interface Placement {
   CageId?: string | null;
   /** 实例所属项目ID。该参数可以通过调用 [DescribeProject](/document/api/378/4400) 的返回值中的 projectId 字段来获取。不填为默认项目。 */
   ProjectId?: number;
+  /** 实例所属项目名称。 */
+  ProjectName?: string | null;
   /** 独享集群名字。作为入参时，忽略。作为出参时，表示云硬盘所属的独享集群名，可为空。 */
   CdcName?: string | null;
   /** 实例所属的独享集群ID。作为入参时，表示对指定的CdcId独享集群的资源进行操作，可为空。 作为出参时，表示资源所属的独享集群的ID，可为空。 */
@@ -318,6 +360,8 @@ declare interface PrepayPrice {
   DiscountPriceHigh: string | null;
   /** 后付费云盘原单价，单位：元。 */
   UnitPrice: number | null;
+  /** 计费项目明细列表。 */
+  DetailPrices?: DetailPrice[] | null;
 }
 
 /** 描述预付费或后付费云盘的价格。 */
@@ -391,7 +435,7 @@ declare interface Snapshot {
   /** 快照开始共享的时间。 */
   TimeStartShare: string;
   /** 快照绑定的标签列表。 */
-  Tags: Tag[];
+  Tags?: Tag[];
 }
 
 /** 描述快照跨地域复制的结果。 */
@@ -597,7 +641,7 @@ declare interface CreateSnapshotRequest {
 
 declare interface CreateSnapshotResponse {
   /** 新创建的快照ID。 */
-  SnapshotId: string;
+  SnapshotId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -751,9 +795,11 @@ declare interface DescribeDiskStoragePoolRequest {
 
 declare interface DescribeDiskStoragePoolResponse {
   /** 符合条件的独享集群的数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 独享集群的详细信息列表 */
-  DiskStoragePoolSet: Cdc[];
+  CdcSet?: Cdc[];
+  /** 独享集群的详细信息列表 */
+  DiskStoragePoolSet?: Cdc[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -901,10 +947,10 @@ declare interface InquirePriceModifyDiskBackupQuotaResponse {
 }
 
 declare interface InquirePriceModifyDiskExtraPerformanceRequest {
-  /** 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。 */
-  DiskId: string;
   /** 额外购买的云硬盘性能值，单位MB/s。 */
   ThroughputPerformance: number;
+  /** 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。 */
+  DiskId: string;
 }
 
 declare interface InquirePriceModifyDiskExtraPerformanceResponse {
@@ -959,10 +1005,10 @@ declare interface InquiryPriceRenewDisksResponse {
 }
 
 declare interface InquiryPriceResizeDiskRequest {
-  /** 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。 */
-  DiskId: string;
   /** 云硬盘扩容后的大小，单位为GB，不得小于当前云硬盘大小。云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。 */
   DiskSize: number;
+  /** 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。 */
+  DiskId: string;
   /** 云盘所属项目ID。 如传入则仅用于鉴权。 */
   ProjectId?: number;
 }

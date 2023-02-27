@@ -1337,15 +1337,15 @@ declare interface CreateClustersRequest {
 
 declare interface CreateClustersResponse {
   /** 冻结流水ID */
-  TranId: string | null;
+  TranId?: string | null;
   /** 订单号 */
-  DealNames: string[] | null;
+  DealNames?: string[] | null;
   /** 资源ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取资源ID） */
-  ResourceIds: string[] | null;
+  ResourceIds?: string[] | null;
   /** 集群ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取集群ID） */
-  ClusterIds: string[] | null;
+  ClusterIds?: string[] | null;
   /** 大订单号 */
-  BigDealIds: string[] | null;
+  BigDealIds?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
