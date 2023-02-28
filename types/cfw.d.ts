@@ -390,6 +390,14 @@ declare interface NewModeItems {
   AddCount?: number;
 }
 
+/** 规则顺序变更项，由原始id值变为新的id值。 */
+declare interface RuleChangeItem {
+  /** 原始sequence 值 */
+  OrderIndex: number;
+  /** 新的sequence 值 */
+  NewOrderIndex: number;
+}
+
 /** 规则输入对象 */
 declare interface RuleInfoData {
   /** 执行顺序 */
@@ -1708,6 +1716,38 @@ declare interface ModifyBlockTopResponse {
   RequestId?: string;
 }
 
+declare interface ModifyEnterpriseSecurityDispatchStatusRequest {
+  /** 状态，0：立即下发，1：停止下发 */
+  Status: number;
+}
+
+declare interface ModifyEnterpriseSecurityDispatchStatusResponse {
+  /** 0: 修改成功, 其他: 修改失败 */
+  Status: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyEnterpriseSecurityGroupRuleRequest {
+  /** 规则的uuid，可通过查询规则列表获取 */
+  RuleUuid: number;
+  /** 修改类型，0：修改规则内容；1：修改单条规则开关状态；2：修改所有规则开关状态 */
+  ModifyType: number;
+  /** 编辑后的企业安全组规则数据；修改规则状态不用填该字段 */
+  Data?: SecurityGroupRule;
+  /** 0是关闭,1是开启 */
+  Enable?: number;
+}
+
+declare interface ModifyEnterpriseSecurityGroupRuleResponse {
+  /** 状态值，0：编辑成功，非0：编辑失败 */
+  Status: number;
+  /** 编辑后新生成规则的Id */
+  NewRuleUuid: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyNatAcRuleRequest {
   /** 需要编辑的规则数组 */
   Rules: CreateNatRuleItem[];
@@ -1764,6 +1804,18 @@ declare interface ModifyNatFwVpcDnsSwitchRequest {
 declare interface ModifyNatFwVpcDnsSwitchResponse {
   /** 修改成功 */
   ReturnMsg: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyNatSequenceRulesRequest {
+  /** 规则快速排序：OrderIndex，原始序号；NewOrderIndex：新序号 */
+  RuleChangeItems: RuleChangeItem[];
+  /** 规则方向：1，入站；0，出站 */
+  Direction: number;
+}
+
+declare interface ModifyNatSequenceRulesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2097,6 +2149,10 @@ declare interface Cfw {
   ModifyBlockIgnoreList(data: ModifyBlockIgnoreListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockIgnoreListResponse>;
   /** 取消阻断记录置顶接口 {@link ModifyBlockTopRequest} {@link ModifyBlockTopResponse} */
   ModifyBlockTop(data: ModifyBlockTopRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockTopResponse>;
+  /** 修改企业安全组下发状态 {@link ModifyEnterpriseSecurityDispatchStatusRequest} {@link ModifyEnterpriseSecurityDispatchStatusResponse} */
+  ModifyEnterpriseSecurityDispatchStatus(data: ModifyEnterpriseSecurityDispatchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnterpriseSecurityDispatchStatusResponse>;
+  /** 编辑新企业安全组规则 {@link ModifyEnterpriseSecurityGroupRuleRequest} {@link ModifyEnterpriseSecurityGroupRuleResponse} */
+  ModifyEnterpriseSecurityGroupRule(data: ModifyEnterpriseSecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnterpriseSecurityGroupRuleResponse>;
   /** 修改NAT访问控制规则 {@link ModifyNatAcRuleRequest} {@link ModifyNatAcRuleResponse} */
   ModifyNatAcRule(data: ModifyNatAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatAcRuleResponse>;
   /** 防火墙实例重新选择vpc或nat {@link ModifyNatFwReSelectRequest} {@link ModifyNatFwReSelectResponse} */
@@ -2105,6 +2161,8 @@ declare interface Cfw {
   ModifyNatFwSwitch(data: ModifyNatFwSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatFwSwitchResponse>;
   /** nat 防火墙VPC DNS 开关切换 {@link ModifyNatFwVpcDnsSwitchRequest} {@link ModifyNatFwVpcDnsSwitchResponse} */
   ModifyNatFwVpcDnsSwitch(data: ModifyNatFwVpcDnsSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatFwVpcDnsSwitchResponse>;
+  /** NAT防火墙规则快速排序 {@link ModifyNatSequenceRulesRequest} {@link ModifyNatSequenceRulesResponse} */
+  ModifyNatSequenceRules(data: ModifyNatSequenceRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatSequenceRulesResponse>;
   /** 单个修改互联网边界防火墙开关 {@link ModifyPublicIPSwitchStatusRequest} {@link ModifyPublicIPSwitchStatusResponse} */
   ModifyPublicIPSwitchStatus(data: ModifyPublicIPSwitchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPublicIPSwitchStatusResponse>;
   /** 资产中心资产组信息修改 {@link ModifyResourceGroupRequest} {@link ModifyResourceGroupResponse} */

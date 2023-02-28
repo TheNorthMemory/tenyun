@@ -2551,7 +2551,7 @@ declare interface DescribeOverviewL7DataRequest {
   Protocol?: string;
   /** 查询时间粒度，取值有：min：1分钟；5min：5分钟；hour：1小时；day：1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：1小时范围内以min粒度查询，2天范围内以5min粒度查询，7天范围内以hour粒度查询，超过7天以day粒度查询。 */
   Interval?: string;
-  /** 过滤条件，详细的过滤条件Key值如下：tagKey 按照【标签Key】进行过滤。tagValue 按照【标签Value】进行过滤。 */
+  /** 过滤条件，详细的过滤条件Key值如下：socket 按照【HTTP协议类型】进行过滤。 对应的Value可选项如下： HTTP：HTTP 协议； HTTPS：HTTPS协议； QUIC：QUIC协议。tagKey 按照【标签Key】进行过滤。tagValue 按照【标签Value】进行过滤。 */
   Filters?: QueryCondition[];
   /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
   Area?: string;
@@ -2647,7 +2647,7 @@ declare interface DescribeSingleL7AnalysisDataRequest {
   MetricNames: string[];
   /** 站点集合。若不填写，默认选择全部站点，且最多只能查询近30天的数据；若填写，则可查询站点绑定套餐支持的数据分析最大查询范围。 */
   ZoneIds?: string[];
-  /** 过滤条件，详细的过滤条件Key值如下：country 按照【国家/地区】进行过滤，国家/地区遵循ISO 3166规范。domain 按照【子域名】进行过滤，子域名形如： test.example.com。protocol 按照【HTTP协议】进行过滤。 对应的Value可选项如下： HTTP/1.0：HTTP 1.0； HTTP/1.1：HTTP 1.1； HTTP/2.0：HTTP 2.0； HTTP/3.0：HTTP 3.0； WebSocket：WebSocket。tagKey 按照【标签Key】进行过滤。tagValue 按照【标签Value】进行过滤。 */
+  /** 过滤条件，详细的过滤条件Key值如下：country 按照【国家/地区】进行过滤，国家/地区遵循ISO 3166规范。domain 按照【子域名】进行过滤，子域名形如： test.example.com。protocol 按照【HTTP协议版本】进行过滤。 对应的Value可选项如下： HTTP/1.0：HTTP 1.0； HTTP/1.1：HTTP 1.1； HTTP/2.0：HTTP 2.0； HTTP/3.0：HTTP 3.0； WebSocket：WebSocket。socket 按照【HTTP协议类型】进行过滤。 对应的Value可选项如下： HTTP：HTTP 协议； HTTPS：HTTPS协议； QUIC：QUIC协议。tagKey 按照【标签Key】进行过滤。tagValue 按照【标签Value】进行过滤。 */
   Filters?: QueryCondition[];
   /** 查询时间粒度，取值有：min：1分钟；5min：5分钟；hour：1小时；day：1天;。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：1小时范围内以min粒度查询，2天范围内以5min粒度查询，7天范围内以hour粒度查询，超过7天以day粒度查询。 */
   Interval?: string;

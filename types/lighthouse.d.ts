@@ -773,7 +773,7 @@ declare interface ZoneInfo {
 declare interface ApplyDiskBackupRequest {
   /** 云硬盘ID，可通过[DescribeDisks](https://cloud.tencent.com/document/api/1207/66093)接口查询。 */
   DiskId: string;
-  /** 云硬盘备份点ID，可通过 DescribeDiskBackups 接口查询。 */
+  /** 云硬盘备份点ID，可通过[DescribeDiskBackups](https://cloud.tencent.com/document/api/1207/84379)接口查询。 */
   DiskBackupId: string;
 }
 
@@ -943,7 +943,7 @@ declare interface DeleteBlueprintsResponse {
 }
 
 declare interface DeleteDiskBackupsRequest {
-  /** 云硬盘备份点ID列表，可通过 DescribeDiskBackups接口查询。 */
+  /** 云硬盘备份点ID列表，可通过 [DescribeDiskBackups](https://cloud.tencent.com/document/api/1207/84379)接口查询。 */
   DiskBackupIds: string[];
 }
 
@@ -1099,7 +1099,7 @@ declare interface DescribeDiskBackupsDeniedActionsResponse {
 declare interface DescribeDiskBackupsRequest {
   /** 要查询云硬盘备份点的ID列表。参数不支持同时指定 DiskBackupIds 和 Filters。 */
   DiskBackupIds?: string[];
-  /** 过滤器列表。disk-backup-id按照【云硬盘备份点 ID】进行过滤。类型：String必选：否disk-id按照【云硬盘 ID】进行过滤。类型：String必选：否disk-backup-state按照【云硬盘备份点状态】进行过滤。类型：String必选：否取值：参考数据结构DiskBackup下的DiskBackupState取值。disk-usage按照【云硬盘类型】进行过滤。类型：String必选：否取值：SYSTEM_DISK或DATA_DISK每次请求的 Filters 的上限为 10，Filter.Values 的上限为5。参数不支持同时指定DiskBackupIds 和 Filters。 */
+  /** 过滤器列表。disk-backup-id按照【云硬盘备份点 ID】进行过滤。类型：String必选：否disk-id按照【云硬盘 ID】进行过滤。类型：String必选：否disk-backup-state按照【云硬盘备份点状态】进行过滤。类型：String必选：否取值：参考数据结构[DiskBackup](https://cloud.tencent.com/document/product/1207/47576)下的DiskBackupState取值。disk-usage按照【云硬盘类型】进行过滤。类型：String必选：否取值：SYSTEM_DISK或DATA_DISK每次请求的 Filters 的上限为 10，Filter.Values 的上限为5。参数不支持同时指定DiskBackupIds 和 Filters。 */
   Filters?: Filter[];
   /** 偏移量，默认为 0。 */
   Offset?: number;
@@ -1109,9 +1109,9 @@ declare interface DescribeDiskBackupsRequest {
 
 declare interface DescribeDiskBackupsResponse {
   /** 云硬盘备份点的数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 云硬盘备份点信息列表。 */
-  DiskBackupSet: DiskBackup[];
+  DiskBackupSet?: DiskBackup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

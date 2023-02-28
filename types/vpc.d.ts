@@ -112,10 +112,14 @@ declare interface AddressTemplateGroup {
 
 /** 地址信息 */
 declare interface AddressTemplateItem {
-  /** 起始地址。 */
-  From: string;
-  /** 结束地址。 */
-  To: string;
+  /** ipm-xxxxxxxx */
+  AddressTemplateId?: string;
+  /** IP模板名称 */
+  AddressTemplateName?: string;
+  /** 废弃字段 */
+  From?: string;
+  /** 废弃字段 */
+  To?: string;
 }
 
 /** IP地址模板 */
@@ -4387,9 +4391,9 @@ declare interface DescribeIpGeolocationDatabaseUrlRequest {
 
 declare interface DescribeIpGeolocationDatabaseUrlResponse {
   /** IP地理位置库下载链接地址。 */
-  DownLoadUrl: string;
+  DownLoadUrl?: string;
   /** 链接到期时间。按照`ISO8601`标准表示，并且使用`UTC`时间。 */
-  ExpiredAt: string;
+  ExpiredAt?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4403,9 +4407,9 @@ declare interface DescribeIpGeolocationInfosRequest {
 
 declare interface DescribeIpGeolocationInfosResponse {
   /** IP地址信息列表。 */
-  AddressInfo: IpGeolocationInfo[];
+  AddressInfo?: IpGeolocationInfo[];
   /** IP地址信息个数。 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

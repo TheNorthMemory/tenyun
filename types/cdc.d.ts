@@ -375,7 +375,7 @@ declare interface CreateDedicatedClusterOrderRequest {
 
 declare interface CreateDedicatedClusterOrderResponse {
   /** 专用集群订单id */
-  DedicatedClusterOrderId: string | null;
+  DedicatedClusterOrderId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -393,7 +393,7 @@ declare interface CreateDedicatedClusterRequest {
 
 declare interface CreateDedicatedClusterResponse {
   /** 创建的专用集群id */
-  DedicatedClusterId: string;
+  DedicatedClusterId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -449,7 +449,7 @@ declare interface CreateSiteRequest {
 
 declare interface CreateSiteResponse {
   /** 创建Site生成的id */
-  SiteId: string;
+  SiteId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -481,7 +481,7 @@ declare interface DescribeDedicatedClusterCosCapacityRequest {
 
 declare interface DescribeDedicatedClusterCosCapacityResponse {
   /** 本集群内cos容量信息，单位：‘GB’ */
-  CosCapacity: CosCapacity;
+  CosCapacity?: CosCapacity;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -493,7 +493,7 @@ declare interface DescribeDedicatedClusterHostStatisticsRequest {
 
 declare interface DescribeDedicatedClusterHostStatisticsResponse {
   /** 该集群内宿主机的统计信息列表 */
-  HostStatisticSet: HostStatistic[];
+  HostStatisticSet?: HostStatistic[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -523,7 +523,7 @@ declare interface DescribeDedicatedClusterInstanceTypesRequest {
 
 declare interface DescribeDedicatedClusterInstanceTypesResponse {
   /** 支持的实例规格列表 */
-  DedicatedClusterInstanceTypeSet: DedicatedClusterInstanceType[];
+  DedicatedClusterInstanceTypeSet?: DedicatedClusterInstanceType[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -545,9 +545,9 @@ declare interface DescribeDedicatedClusterOrdersRequest {
 
 declare interface DescribeDedicatedClusterOrdersResponse {
   /** 专用集群订单列表 */
-  DedicatedClusterOrderSet: DedicatedClusterOrder[];
+  DedicatedClusterOrderSet?: DedicatedClusterOrder[];
   /** 符合条件的专用集群订单总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -615,9 +615,9 @@ declare interface DescribeDedicatedClustersRequest {
 
 declare interface DescribeDedicatedClustersResponse {
   /** 符合查询条件的专用集群列表 */
-  DedicatedClusterSet: DedicatedCluster[];
+  DedicatedClusterSet?: DedicatedCluster[];
   /** 符合条件的专用集群数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -647,9 +647,9 @@ declare interface DescribeSitesDetailRequest {
 
 declare interface DescribeSitesDetailResponse {
   /** 站点详情 */
-  SiteDetailSet: SiteDetail[];
+  SiteDetailSet?: SiteDetail[];
   /** 符合条件的站点总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -667,9 +667,9 @@ declare interface DescribeSitesRequest {
 
 declare interface DescribeSitesResponse {
   /** 符合查询条件的站点列表 */
-  SiteSet: Site[];
+  SiteSet?: Site[];
   /** 符合条件的站点数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

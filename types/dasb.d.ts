@@ -60,6 +60,16 @@ declare interface Acl {
   Department: Department | null;
 }
 
+/** 资产同步状态 */
+declare interface AssetSyncStatus {
+  /** 上一次同步完成的时间 */
+  LastTime: string;
+  /** 上一次同步的结果。 0 - 从未进行, 1 - 成功， 2 - 失败 */
+  LastStatus: number;
+  /** 同步任务是否正在进行中 */
+  InProcess: boolean;
+}
+
 /** 高危命令模板 */
 declare interface CmdTemplate {
   /** 高危命令模板ID */
@@ -112,6 +122,34 @@ declare interface Device {
   Resource: Resource | null;
   /** 资产所属部门 */
   Department: Department | null;
+}
+
+/** 主机账号 */
+declare interface DeviceAccount {
+  /** 账号ID */
+  Id: number;
+  /** 主机ID */
+  DeviceId: number;
+  /** 账号名 */
+  Account: string;
+  /** true-已托管密码，false-未托管密码 */
+  BoundPassword: boolean;
+  /** true-已托管私钥，false-未托管私钥 */
+  BoundPrivateKey: boolean;
+}
+
+/** 主机参数，导入外部主机时使用 */
+declare interface ExternalDevice {
+  /** 操作系统名称，只能是Linux、Windows或MySQL */
+  OsName: string;
+  /** IP地址 */
+  Ip: string;
+  /** 管理端口 */
+  Port: number;
+  /** 主机名，可为空 */
+  Name?: string;
+  /** 资产所属的部门ID */
+  DepartmentId?: string;
 }
 
 /** 描述键值对过滤器，用于条件过滤查询 */
@@ -254,6 +292,32 @@ declare interface AddUserGroupMembersResponse {
   RequestId?: string;
 }
 
+declare interface BindDeviceAccountPasswordRequest {
+  /** 主机账号ID */
+  Id: number;
+  /** 主机账号密码 */
+  Password: string;
+}
+
+declare interface BindDeviceAccountPasswordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BindDeviceAccountPrivateKeyRequest {
+  /** 主机账号ID */
+  Id: number;
+  /** 主机账号私钥，最新长度128字节，最大长度8192字节 */
+  PrivateKey: string;
+  /** 主机账号私钥口令，最大长度256字节 */
+  PrivateKeyPassword?: string;
+}
+
+declare interface BindDeviceAccountPrivateKeyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BindDeviceResourceRequest {
   /** 资产ID集合 */
   DeviceIdSet: number[];
@@ -321,6 +385,44 @@ declare interface CreateAclRequest {
 
 declare interface CreateAclResponse {
   /** 新建成功的访问权限ID */
+  Id: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAssetSyncJobRequest {
+  /** 同步资产类别，1 - 主机资产, 2 - 数据库资产 */
+  Category: number;
+}
+
+declare interface CreateAssetSyncJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCmdTemplateRequest {
+  /** 模板名，最大长度32字符，不能包含空白字符 */
+  Name: string;
+  /** 命令列表，\n分隔，最大长度32768字节 */
+  CmdList: string;
+}
+
+declare interface CreateCmdTemplateResponse {
+  /** 新建成功后返回的记录ID */
+  Id: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDeviceAccountRequest {
+  /** 主机记录ID */
+  DeviceId: number;
+  /** 账号名 */
+  Account: string;
+}
+
+declare interface CreateDeviceAccountResponse {
+  /** 新建成功后返回的记录ID */
   Id: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -394,6 +496,26 @@ declare interface DeleteAclsResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCmdTemplatesRequest {
+  /** 待删除的ID集合 */
+  IdSet: number[];
+}
+
+declare interface DeleteCmdTemplatesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDeviceAccountsRequest {
+  /** 待删除的ID集合 */
+  IdSet: number[];
+}
+
+declare interface DeleteDeviceAccountsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDeviceGroupMembersRequest {
   /** 资产组ID */
   Id: number;
@@ -412,6 +534,16 @@ declare interface DeleteDeviceGroupsRequest {
 }
 
 declare interface DeleteDeviceGroupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDevicesRequest {
+  /** 待删除的ID集合 */
+  IdSet: number[];
+}
+
+declare interface DeleteDevicesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -448,6 +580,32 @@ declare interface DeleteUsersResponse {
   RequestId?: string;
 }
 
+declare interface DeployResourceRequest {
+  /** 需要开通服务的资源ID */
+  ResourceId: string;
+  /** 需要开通服务的地域 */
+  ApCode: string;
+  /** 子网所在可用区 */
+  Zone: string;
+  /** 需要开通服务的VPC */
+  VpcId: string;
+  /** 需要开通服务的子网ID */
+  SubnetId: string;
+  /** 需要开通服务的子网网段 */
+  CidrBlock: string;
+  /** 需要开通服务的VPC名称 */
+  VpcName?: string;
+  /** 需要开通服务的VPC对应的网段 */
+  VpcCidrBlock?: string;
+  /** 需要开通服务的子网名称 */
+  SubnetName?: string;
+}
+
+declare interface DeployResourceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAclsRequest {
   /** 访问权限ID集合 */
   IdSet?: number[];
@@ -478,6 +636,38 @@ declare interface DescribeAclsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAssetSyncStatusRequest {
+  /** 查询的资产同步类型。1 -主机资产， 2 - 数据库资产 */
+  Category: number;
+}
+
+declare interface DescribeAssetSyncStatusResponse {
+  /** 资产同步结果 */
+  Status: AssetSyncStatus;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCmdTemplatesRequest {
+  /** 命令模板ID集合，非必需 */
+  IdSet?: number[];
+  /** 命令模板名，模糊查询，最大长度64字符 */
+  Name?: string;
+  /** 分页偏移位置，默认值为0 */
+  Offset?: number;
+  /** 每页条目数量，默认20 */
+  Limit?: number;
+}
+
+declare interface DescribeCmdTemplatesResponse {
+  /** 命令模板列表 */
+  CmdTemplateSet: CmdTemplate[];
+  /** 总记录数 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDasbImageIdsRequest {
 }
 
@@ -486,6 +676,28 @@ declare interface DescribeDasbImageIdsResponse {
   BaseImageId?: string;
   /** AI镜像ID */
   AiImageId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeviceAccountsRequest {
+  /** 主机账号ID集合，非必需，如果使用IdSet则忽略其他过滤参数 */
+  IdSet?: number[];
+  /** 主机账号名，模糊查询，不能单独出现，必须于DeviceId一起提交 */
+  Account?: string;
+  /** 主机ID，未使用IdSet时必须携带 */
+  DeviceId?: number;
+  /** 分页偏移位置，默认值为0 */
+  Offset?: number;
+  /** 每页条目数量，默认20 */
+  Limit?: number;
+}
+
+declare interface DescribeDeviceAccountsResponse {
+  /** 记录总数 */
+  TotalCount: number;
+  /** 账号信息列表 */
+  DeviceAccountSet: DeviceAccount[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -670,6 +882,16 @@ declare interface DescribeUsersResponse {
   RequestId?: string;
 }
 
+declare interface ImportExternalDeviceRequest {
+  /** 资产参数列表 */
+  DeviceSet: ExternalDevice[];
+}
+
+declare interface ImportExternalDeviceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAclRequest {
   /** 访问权限名称，最大32字符，不能包含空白字符 */
   Name: string;
@@ -730,6 +952,36 @@ declare interface ModifyAclResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDeviceGroupRequest {
+  /** 资产组名，最大长度32字符，不能为空 */
+  Name: string;
+  /** 资产组ID */
+  Id: number;
+  /** 资产组所属部门ID，如：1.2.3 */
+  DepartmentId?: string;
+}
+
+declare interface ModifyDeviceGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDeviceRequest {
+  /** 资产记录ID */
+  Id: number;
+  /** 管理端口 */
+  Port?: number;
+  /** 资产所属组ID集合 */
+  GroupIdSet?: number[];
+  /** 资产所属部门ID */
+  DepartmentId?: string;
+}
+
+declare interface ModifyDeviceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyUserRequest {
   /** 用户ID */
   Id: number;
@@ -758,6 +1010,36 @@ declare interface ModifyUserResponse {
   RequestId?: string;
 }
 
+declare interface ResetDeviceAccountPasswordRequest {
+  /** ID集合 */
+  IdSet: number[];
+}
+
+declare interface ResetDeviceAccountPasswordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResetDeviceAccountPrivateKeyRequest {
+  /** ID集合 */
+  IdSet: number[];
+}
+
+declare interface ResetDeviceAccountPrivateKeyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResetUserRequest {
+  /** 用户ID集合 */
+  IdSet: number[];
+}
+
+declare interface ResetUserResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Dasb T-Sec-堡垒机（BH）} */
 declare interface Dasb {
   (): Versions;
@@ -765,10 +1047,20 @@ declare interface Dasb {
   AddDeviceGroupMembers(data: AddDeviceGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<AddDeviceGroupMembersResponse>;
   /** 添加用户组成员 {@link AddUserGroupMembersRequest} {@link AddUserGroupMembersResponse} */
   AddUserGroupMembers(data: AddUserGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserGroupMembersResponse>;
+  /** 绑定主机账号密码 {@link BindDeviceAccountPasswordRequest} {@link BindDeviceAccountPasswordResponse} */
+  BindDeviceAccountPassword(data: BindDeviceAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<BindDeviceAccountPasswordResponse>;
+  /** 绑定主机账号私钥 {@link BindDeviceAccountPrivateKeyRequest} {@link BindDeviceAccountPrivateKeyResponse} */
+  BindDeviceAccountPrivateKey(data: BindDeviceAccountPrivateKeyRequest, config?: AxiosRequestConfig): AxiosPromise<BindDeviceAccountPrivateKeyResponse>;
   /** 修改资产绑定的堡垒机服务 {@link BindDeviceResourceRequest} {@link BindDeviceResourceResponse} */
   BindDeviceResource(data: BindDeviceResourceRequest, config?: AxiosRequestConfig): AxiosPromise<BindDeviceResourceResponse>;
   /** 新建访问权限 {@link CreateAclRequest} {@link CreateAclResponse} */
   CreateAcl(data: CreateAclRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAclResponse>;
+  /** 创建手工资产同步任务 {@link CreateAssetSyncJobRequest} {@link CreateAssetSyncJobResponse} */
+  CreateAssetSyncJob(data: CreateAssetSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetSyncJobResponse>;
+  /** 新建高危命令模板 {@link CreateCmdTemplateRequest} {@link CreateCmdTemplateResponse} */
+  CreateCmdTemplate(data: CreateCmdTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCmdTemplateResponse>;
+  /** 新建主机账号 {@link CreateDeviceAccountRequest} {@link CreateDeviceAccountResponse} */
+  CreateDeviceAccount(data: CreateDeviceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceAccountResponse>;
   /** 新建资产组 {@link CreateDeviceGroupRequest} {@link CreateDeviceGroupResponse} */
   CreateDeviceGroup(data: CreateDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceGroupResponse>;
   /** 新建用户 {@link CreateUserRequest} {@link CreateUserResponse} */
@@ -777,20 +1069,34 @@ declare interface Dasb {
   CreateUserGroup(data: CreateUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserGroupResponse>;
   /** 删除访问权限 {@link DeleteAclsRequest} {@link DeleteAclsResponse} */
   DeleteAcls(data: DeleteAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAclsResponse>;
+  /** 删除高危命令模板 {@link DeleteCmdTemplatesRequest} {@link DeleteCmdTemplatesResponse} */
+  DeleteCmdTemplates(data: DeleteCmdTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCmdTemplatesResponse>;
+  /** 删除主机账号 {@link DeleteDeviceAccountsRequest} {@link DeleteDeviceAccountsResponse} */
+  DeleteDeviceAccounts(data: DeleteDeviceAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceAccountsResponse>;
   /** 删除资产组成员 {@link DeleteDeviceGroupMembersRequest} {@link DeleteDeviceGroupMembersResponse} */
   DeleteDeviceGroupMembers(data: DeleteDeviceGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceGroupMembersResponse>;
   /** 删除资产组 {@link DeleteDeviceGroupsRequest} {@link DeleteDeviceGroupsResponse} */
   DeleteDeviceGroups(data: DeleteDeviceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceGroupsResponse>;
+  /** 删除主机 {@link DeleteDevicesRequest} {@link DeleteDevicesResponse} */
+  DeleteDevices(data: DeleteDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDevicesResponse>;
   /** 删除用户组成员 {@link DeleteUserGroupMembersRequest} {@link DeleteUserGroupMembersResponse} */
   DeleteUserGroupMembers(data: DeleteUserGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserGroupMembersResponse>;
   /** 删除用户组 {@link DeleteUserGroupsRequest} {@link DeleteUserGroupsResponse} */
   DeleteUserGroups(data: DeleteUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserGroupsResponse>;
   /** 删除用户 {@link DeleteUsersRequest} {@link DeleteUsersResponse} */
   DeleteUsers(data: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
+  /** 开通服务 {@link DeployResourceRequest} {@link DeployResourceResponse} */
+  DeployResource(data: DeployResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeployResourceResponse>;
   /** 查询访问权限列表 {@link DescribeAclsRequest} {@link DescribeAclsResponse} */
   DescribeAcls(data?: DescribeAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAclsResponse>;
+  /** 查询资产同步状态 {@link DescribeAssetSyncStatusRequest} {@link DescribeAssetSyncStatusResponse} */
+  DescribeAssetSyncStatus(data: DescribeAssetSyncStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSyncStatusResponse>;
+  /** 查询命令模板列表 {@link DescribeCmdTemplatesRequest} {@link DescribeCmdTemplatesResponse} */
+  DescribeCmdTemplates(data?: DescribeCmdTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmdTemplatesResponse>;
   /** 数盾-DASB-获取镜像列表 {@link DescribeDasbImageIdsRequest} {@link DescribeDasbImageIdsResponse} */
   DescribeDasbImageIds(data?: DescribeDasbImageIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDasbImageIdsResponse>;
+  /** 查询主机账号列表 {@link DescribeDeviceAccountsRequest} {@link DescribeDeviceAccountsResponse} */
+  DescribeDeviceAccounts(data?: DescribeDeviceAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceAccountsResponse>;
   /** 查询资产组成员列表 {@link DescribeDeviceGroupMembersRequest} {@link DescribeDeviceGroupMembersResponse} */
   DescribeDeviceGroupMembers(data: DescribeDeviceGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceGroupMembersResponse>;
   /** 查询资产组列表 {@link DescribeDeviceGroupsRequest} {@link DescribeDeviceGroupsResponse} */
@@ -805,10 +1111,22 @@ declare interface Dasb {
   DescribeUserGroups(data?: DescribeUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupsResponse>;
   /** 查询用户列表 {@link DescribeUsersRequest} {@link DescribeUsersResponse} */
   DescribeUsers(data?: DescribeUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersResponse>;
+  /** 导入外部资产信息 {@link ImportExternalDeviceRequest} {@link ImportExternalDeviceResponse} */
+  ImportExternalDevice(data: ImportExternalDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ImportExternalDeviceResponse>;
   /** 修改访问权限 {@link ModifyAclRequest} {@link ModifyAclResponse} */
   ModifyAcl(data: ModifyAclRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAclResponse>;
+  /** 修改资产信息 {@link ModifyDeviceRequest} {@link ModifyDeviceResponse} */
+  ModifyDevice(data: ModifyDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceResponse>;
+  /** 修改资产组 {@link ModifyDeviceGroupRequest} {@link ModifyDeviceGroupResponse} */
+  ModifyDeviceGroup(data: ModifyDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceGroupResponse>;
   /** 修改用户信息 {@link ModifyUserRequest} {@link ModifyUserResponse} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
+  /** 清除设备账号绑定密码 {@link ResetDeviceAccountPasswordRequest} {@link ResetDeviceAccountPasswordResponse} */
+  ResetDeviceAccountPassword(data: ResetDeviceAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDeviceAccountPasswordResponse>;
+  /** 清除设备账号绑定的密钥 {@link ResetDeviceAccountPrivateKeyRequest} {@link ResetDeviceAccountPrivateKeyResponse} */
+  ResetDeviceAccountPrivateKey(data: ResetDeviceAccountPrivateKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDeviceAccountPrivateKeyResponse>;
+  /** 重置用户 {@link ResetUserRequest} {@link ResetUserResponse} */
+  ResetUser(data: ResetUserRequest, config?: AxiosRequestConfig): AxiosPromise<ResetUserResponse>;
 }
 
 export declare type Versions = ["2019-10-18"];

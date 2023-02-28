@@ -58,6 +58,14 @@ declare interface Connection {
   Type: string;
 }
 
+/** 连接器基础信息 */
+declare interface ConnectionBrief {
+  /** 连接器类型 */
+  Type?: string | null;
+  /** 连接器状态 */
+  Status?: string | null;
+}
+
 /** ConnectionDescription描述 */
 declare interface ConnectionDescription {
   /** 资源qcs六段式，更多参考 [资源六段式](https://cloud.tencent.com/document/product/598/10606) */
@@ -66,6 +74,12 @@ declare interface ConnectionDescription {
   APIGWParams?: APIGWParams | null;
   /** ckafka参数 */
   CkafkaParams?: CkafkaParams | null;
+  /** data transfer service (DTS)参数 */
+  DTSParams?: DTSParams | null;
+}
+
+/** Data Transfer Service参数 */
+declare interface DTSParams {
 }
 
 /** rule对应的dlq配置 */
@@ -126,6 +140,12 @@ declare interface EventBus {
   EventBusId: string;
   /** 事件集类型 */
   Type: string;
+  /** 计费模式 */
+  PayMode?: string | null;
+  /** 连接器基础信息 */
+  ConnectionBriefs?: ConnectionBrief[] | null;
+  /** 目标简要信息 */
+  TargetBriefs?: TargetBrief[] | null;
 }
 
 /** 描述如何提取数据 */
@@ -313,6 +333,8 @@ declare interface CreateEventBusRequest {
   Description?: string;
   /** EB存储时长 */
   SaveDays?: number;
+  /** EB是否开启存储 */
+  EnableStore?: boolean;
 }
 
 declare interface CreateEventBusResponse {
@@ -445,21 +467,31 @@ declare interface GetEventBusRequest {
 
 declare interface GetEventBusResponse {
   /** 更新时间 */
-  ModTime: string;
+  ModTime?: string;
   /** 事件集描述 */
-  Description: string;
+  Description?: string;
   /** 日志主题ID */
-  ClsTopicId: string;
+  ClsTopicId?: string;
   /** 创建时间 */
-  AddTime: string;
+  AddTime?: string;
   /** 日志集ID */
-  ClsLogsetId: string;
+  ClsLogsetId?: string;
   /** 事件集名称 */
-  EventBusName: string;
+  EventBusName?: string;
   /** 事件集ID */
-  EventBusId: string;
+  EventBusId?: string;
   /** （已废弃）事件集类型 */
-  Type: string;
+  Type?: string;
+  /** 计费模式 */
+  PayMode?: string;
+  /** EB日志存储时长 */
+  SaveDays?: number | null;
+  /** EB日志主题ID */
+  LogTopicId?: string | null;
+  /** 是否开启存储 */
+  EnableStore?: boolean | null;
+  /** 消息序列，是否有序 */
+  LinkMode?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -473,23 +505,23 @@ declare interface GetRuleRequest {
 
 declare interface GetRuleResponse {
   /** 事件集id */
-  EventBusId: string;
+  EventBusId?: string;
   /** 事件规则id */
-  RuleId: string;
+  RuleId?: string;
   /** 事件规则名称 */
-  RuleName: string;
+  RuleName?: string;
   /** 事件规则状态 */
-  Status: string;
+  Status?: string;
   /** 使能开关 */
-  Enable: boolean;
+  Enable?: boolean;
   /** 事件规则描述 */
-  Description: string;
+  Description?: string;
   /** 事件模式 */
-  EventPattern: string;
+  EventPattern?: string;
   /** 创建时间 */
-  AddTime: string;
+  AddTime?: string;
   /** 更新时间 */
-  ModTime: string;
+  ModTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -547,9 +579,9 @@ declare interface ListEventBusesRequest {
 
 declare interface ListEventBusesResponse {
   /** 事件集信息 */
-  EventBuses: EventBus[];
+  EventBuses?: EventBus[];
   /** 事件集总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

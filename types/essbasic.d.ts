@@ -929,7 +929,7 @@ declare interface ChannelCreateReleaseFlowRequest {
 
 declare interface ChannelCreateReleaseFlowResponse {
   /** 解除协议流程编号 */
-  FlowId: string;
+  FlowId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

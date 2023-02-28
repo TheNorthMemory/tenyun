@@ -1222,6 +1222,46 @@ declare interface HttpsBilling {
   Switch: string;
 }
 
+/** CDN HTTPS请求包。 */
+declare interface HttpsPackage {
+  /** HTTPS请求包 Id */
+  Id: number;
+  /** HTTPS请求包类型 */
+  Type: string;
+  /** HTTPS请求包大小（单位为：次） */
+  Size: number;
+  /** 已消耗HTTPS请求包（单位为：次） */
+  SizeUsed: number;
+  /** HTTPS请求包状态enabled：已启用expired：已过期disabled：未启用 */
+  Status: string;
+  /** HTTPS请求包发放时间 */
+  CreateTime: string;
+  /** HTTPS请求包生效时间 */
+  EnableTime: string;
+  /** HTTPS请求包过期时间 */
+  ExpireTime: string;
+  /** HTTPS请求包来源 */
+  Channel: string;
+  /** HTTPS请求包生命周期月数 */
+  LifeTimeMonth: number;
+  /** HTTPS请求包是否支持退费 */
+  RefundAvailable: boolean;
+  /** HTTPS请求包类型id */
+  ConfigId: number;
+  /** HTTPS请求包实际生效时间 */
+  TrueEnableTime: string;
+  /** HTTPS请求包实际过期时间 */
+  TrueExpireTime: string;
+  /** HTTPS请求包生效区域 global：全球 */
+  Area: string;
+  /** HTTPS请求包是否续订 */
+  ContractExtension: boolean;
+  /** HTTPS请求包是否支持续订 */
+  ExtensionAvailable: boolean;
+  /** HTTPS请求包当前续订模式0：未续订1：到期续订2：用完续订3：到期或用完续订 */
+  ExtensionMode: number;
+}
+
 /** 华为云对象存储回源鉴权 */
 declare interface HwPrivateAccess {
   /** 开关 on/off */
@@ -3138,6 +3178,28 @@ declare interface DescribeEventLogDataResponse {
   RequestId?: string;
 }
 
+declare interface DescribeHttpsPackagesRequest {
+  /** 分页查询起始地址，默认 0 */
+  Offset?: number;
+  /** 分页查询记录个数，默认100，最大1000 */
+  Limit?: number;
+}
+
+declare interface DescribeHttpsPackagesResponse {
+  /** HTTPS请求包总个数 */
+  TotalCount: number;
+  /** HTTPS请求包详情 */
+  HttpsPackages: HttpsPackage[];
+  /** 即将过期的HTTPS请求包个数（7天内） */
+  ExpiringCount: number;
+  /** 有效HTTPS请求包个数 */
+  EnabledCount: number;
+  /** 付费HTTPS请求包个数 */
+  PaidCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeImageConfigRequest {
   /** 域名 */
   Domain: string;
@@ -3817,7 +3879,7 @@ declare interface ListScdnTopBotDataRequest {
 
 declare interface ListScdnTopBotDataResponse {
   /** 域名BOT次数列表 */
-  Data: BotStatisticsCount[];
+  Data?: BotStatisticsCount[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4379,6 +4441,8 @@ declare interface Cdn {
   DescribeEdgePackTaskStatus(data: DescribeEdgePackTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgePackTaskStatusResponse>;
   /** 查询事件日志统计曲线 {@link DescribeEventLogDataRequest} {@link DescribeEventLogDataResponse} */
   DescribeEventLogData(data: DescribeEventLogDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventLogDataResponse>;
+  /** HTTPS请求包查询 {@link DescribeHttpsPackagesRequest} {@link DescribeHttpsPackagesResponse} */
+  DescribeHttpsPackages(data?: DescribeHttpsPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHttpsPackagesResponse>;
   /** 获取图片优化的配置 {@link DescribeImageConfigRequest} {@link DescribeImageConfigResponse} */
   DescribeImageConfig(data: DescribeImageConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageConfigResponse>;
   /** 查询域名节点状态 {@link DescribeIpStatusRequest} {@link DescribeIpStatusResponse} */

@@ -120,6 +120,32 @@ declare interface MemberRecord {
   Location?: string;
   /** 用户设备平台信息。0:unknown 1:windows 2:mac 3:android 4:ios 5:web 6:h5 7:miniprogram （小程序） */
   Device?: number;
+  /** 每个成员上麦次数。 */
+  PerMemberMicCount?: number;
+  /** 每个成员发送消息数量。 */
+  PerMemberMessageCount?: number;
+}
+
+/** 单条消息体内容 */
+declare interface MessageItem {
+  /** 消息类型。0表示文本消息，1表示图片消息 */
+  MessageType?: number | null;
+  /** 文本消息内容。message type为0时有效。 */
+  TextMessage?: string | null;
+  /** 图片消息URL。 message type为1时有效。 */
+  ImageMessage?: string | null;
+}
+
+/** 历史消息列表 */
+declare interface MessageList {
+  /** 消息时间戳 */
+  Timestamp?: number | null;
+  /** 消息发送者 */
+  FromAccount?: string | null;
+  /** 消息序列号，当前课堂内唯一且单调递增 */
+  Seq?: number | null;
+  /** 历史消息列表 */
+  MessageBody?: MessageItem[] | null;
 }
 
 /** 批量创建房间的房间信息 */
@@ -709,6 +735,10 @@ declare interface DescribeRoomStatisticsResponse {
   RealStartTime?: number | null;
   /** 秒级unix时间戳，实际房间结束时间。 */
   RealEndTime?: number | null;
+  /** 房间消息总数。 */
+  MessageCount?: number;
+  /** 房间连麦总数。 */
+  MicCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -745,6 +775,24 @@ declare interface DescribeUserResponse {
   Name: string;
   /** 用户头像Url。 */
   Avatar: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetRoomMessageRequest {
+  /** 低代码互动课堂的SdkAppId。 */
+  SdkAppId: number;
+  /** 房间Id。 */
+  RoomId: number;
+  /** 消息序列。获取该序列以前前的消息(不包含该seq消息) */
+  Seq?: number;
+  /** 消息拉取的条数。最大数量不能超过套餐包限制。 */
+  Limit?: number;
+}
+
+declare interface GetRoomMessageResponse {
+  /** 消息列表 */
+  Messages?: MessageList[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1018,6 +1066,8 @@ declare interface Lcic {
   DescribeSdkAppIdUsers(data: DescribeSdkAppIdUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSdkAppIdUsersResponse>;
   /** 获取用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
   DescribeUser(data: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
+  /** 获取房间历史消息 {@link GetRoomMessageRequest} {@link GetRoomMessageResponse} */
+  GetRoomMessage(data: GetRoomMessageRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoomMessageResponse>;
   /** 获取水印设置 {@link GetWatermarkRequest} {@link GetWatermarkResponse} */
   GetWatermark(data: GetWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<GetWatermarkResponse>;
   /** 源账号登录 {@link LoginOriginIdRequest} {@link LoginOriginIdResponse} */

@@ -32,7 +32,7 @@ declare interface ClusterActivity {
   ClusterId: string;
   /** 集群活动ID。 */
   ActivityId: string;
-  /** 集群活动类型。 */
+  /** 集群活动类型。取值范围：CreateAndAddNodes：创建实例并添加进集群RemoveNodesFromCluster：从集群移除实例TerminateNodes：销毁实例MountStorageOption：增加挂载选项并进行挂载UmountStorageOption：删除集群挂载存储选项并解挂载 */
   ActivityType: string;
   /** 集群活动状态。取值范围：PENDING：等待运行RUNNING：运行中SUCCESSFUL：活动成功PARTIALLY_SUCCESSFUL：活动部分成功FAILED：活动失败 */
   ActivityStatus: string;
