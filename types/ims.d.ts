@@ -210,6 +210,34 @@ declare interface User {
   HeadUrl?: string;
 }
 
+declare interface CreateImageModerationAsyncTaskRequest {
+  /** 接收审核信息回调地址，审核过程中产生的所有结果发送至此地址。 */
+  CallbackUrl: string;
+  /** 该字段表示策略的具体编号，用于接口调度，在内容安全控制台中可配置。若不传入Biztype参数（留空），则代表采用默认的识别策略；传入则会在审核时根据业务场景采取不同的审核策略。备注：Biztype仅为数字、字母与下划线的组合，长度为3-32个字符；不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype。 */
+  BizType?: string;
+  /** 该字段表示您为待检测对象分配的数据ID，传入后可方便您对文件进行标识和管理。取值：由英文字母（大小写均可）、数字及四个特殊符号（_，-，@，#）组成，**长度不超过64个字符**。 */
+  DataId?: string;
+  /** 该字段表示待检测图片文件内容的Base64编码，图片**大小不超过5MB**，建议**分辨率不低于256x256**，否则可能会影响识别效果。备注： **该字段与FileUrl必须选择输入其中一个**。 */
+  FileContent?: string;
+  /** 该字段表示待检测图片文件的访问链接，图片支持PNG、JPG、JPEG、BMP、GIF、WEBP格式，**大小不超过5MB**，建议**分辨率不低于256x256**；图片下载时间限制为3秒，超过则会返回下载超时；由于网络安全策略，**送审带重定向的链接，可能引起下载失败**，请尽量避免，比如Http返回302状态码的链接，可能导致接口返回ResourceUnavailable.ImageDownloadError。备注：**该字段与FileContent必须选择输入其中一个**。 */
+  FileUrl?: string;
+  /** **GIF/长图检测专用**，用于表示GIF截帧频率（每隔多少张图片抽取一帧进行检测），长图则按照长边：短边取整计算要切割的总图数；默认值为0，此时只会检测GIF的第一帧或对长图不进行切分处理。备注：Interval与MaxFrames参数需要组合使用。例如，Interval=3, MaxFrames=400，则代表在检测GIF/长图时，将每间隔2帧检测一次且最多检测400帧。 */
+  Interval?: number;
+  /** **GIF/长图检测专用**，用于标识最大截帧数量；默认值为1，此时只会检测输入GIF的第一帧或对长图不进行切分处理（可能会造成处理超时）。备注：Interval与MaxFrames参数需要组合使用。例如，Interval=3, MaxFrames=400，则代表在检测GIF/长图时，将每间隔2帧检测一次且最多检测400帧。 */
+  MaxFrames?: number;
+  /** 该字段表示待检测对象对应的用户相关信息，若填入则可甄别相应违规风险用户。 */
+  User?: User;
+  /** 该字段表示待检测对象对应的设备相关信息，若填入则可甄别相应违规风险设备。 */
+  Device?: Device;
+}
+
+declare interface CreateImageModerationAsyncTaskResponse {
+  /** 该字段用于返回检测对象对应请求参数中的DataId。 */
+  DataId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ImageModerationRequest {
   /** 该字段表示策略的具体编号，用于接口调度，在内容安全控制台中可配置。若不传入Biztype参数（留空），则代表采用默认的识别策略；传入则会在审核时根据业务场景采取不同的审核策略。备注：Biztype仅为数字、字母与下划线的组合，长度为3-32个字符；不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype。 */
   BizType?: string;
@@ -462,7 +490,7 @@ declare namespace V20200713 {
     DataId?: string;
     /** 数据Base64编码，图片检测接口为图片文件内容，大小不能超过5M */
     FileContent?: string;
-    /** 图片资源访问链接，__与FileContent参数必须二选一输入__ */
+    /** 图片资源访问链接，__与FileContent参数必须二选一输入__ 。由于网络安全策略，送审带重定向的链接，可能引起下载失败，请尽量避免，比如Http返回302状态码的链接，可能导致接口返回ResourceUnavailable.ImageDownloadError */
     FileUrl?: string;
     /** 截帧频率，GIF图/长图检测专用，默认值为0，表示只会检测GIF图/长图的第一帧 */
     Interval?: number;
@@ -476,29 +504,29 @@ declare namespace V20200713 {
 
   interface ImageModerationResponse {
     /** 数据是否属于恶意类型。0：正常，1：可疑； */
-    HitFlag: number;
+    HitFlag?: number;
     /** 建议您拿到判断结果后的执行操作。建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过 */
-    Suggestion: string;
+    Suggestion?: string;
     /** 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义图片。以及令人反感、不安全或不适宜的内容类型。 */
-    Label: string;
+    Label?: string;
     /** 子标签名称，如色情--性行为；当未命中子标签时，返回空字符串； */
-    SubLabel: string;
+    SubLabel?: string;
     /** 机器判断当前分类的置信度，取值范围：0.00~100.00。分数越高，表示越有可能属于当前分类。（如：色情 99.99，则该样本属于色情的置信度非常高。） */
-    Score: number;
+    Score?: number;
     /** 智能模型的识别结果，包括涉黄、广告等令人反感、不安全或不适宜的内容类型识别结果。 */
-    LabelResults: LabelResult[] | null;
+    LabelResults?: LabelResult[] | null;
     /** 物体检测模型的审核结果，包括实体、广告台标/二维码等物体坐标信息与内容审核信息。 */
-    ObjectResults: ObjectResult[] | null;
+    ObjectResults?: ObjectResult[] | null;
     /** OCR识别后的文本识别结果，包括文本所处图片的OCR坐标信息以及图片文本的识别结果。 */
-    OcrResults: OcrResult[] | null;
+    OcrResults?: OcrResult[] | null;
     /** 基于图片风险库识别的结果。风险库包括不安全黑库与正常白库的结果。 */
-    LibResults: LibResult[] | null;
+    LibResults?: LibResult[] | null;
     /** 请求参数中的DataId。 */
-    DataId: string;
+    DataId?: string;
     /** 您在入参时所填入的Biztype参数。 -- 该字段暂未开放。 */
-    BizType: string;
+    BizType?: string;
     /** 扩展字段，用于特定信息返回，不同客户/Biztype下返回信息不同。 */
-    Extra: string | null;
+    Extra?: string | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -507,9 +535,11 @@ declare namespace V20200713 {
 /** {@link Ims 图片内容安全} */
 declare interface Ims {
   (): Versions;
-  /** 图片内容检测 {@link ImageModerationRequest} {@link ImageModerationResponse} */
+  /** 图片异步检测 {@link CreateImageModerationAsyncTaskRequest} {@link CreateImageModerationAsyncTaskResponse} */
+  CreateImageModerationAsyncTask(data: CreateImageModerationAsyncTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageModerationAsyncTaskResponse>;
+  /** 图片同步检测 {@link ImageModerationRequest} {@link ImageModerationResponse} */
   ImageModeration(data?: ImageModerationRequest, config?: AxiosRequestConfig): AxiosPromise<ImageModerationResponse>;
-  /** 图片内容检测 {@link V20200713.ImageModerationRequest} {@link V20200713.ImageModerationResponse} */
+  /** 图片同步检测 {@link V20200713.ImageModerationRequest} {@link V20200713.ImageModerationResponse} */
   ImageModeration(data: V20200713.ImageModerationRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.ImageModerationResponse>;
 }
 

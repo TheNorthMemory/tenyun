@@ -634,6 +634,10 @@ declare interface EdgeCluster {
   ClusterAdvancedSettings?: EdgeClusterAdvancedSettings | null;
   /** 边缘容器集群级别 */
   Level?: string | null;
+  /** 是否支持自动提升集群配置 */
+  AutoUpgradeClusterLevel?: boolean | null;
+  /** 集群付费模式，支持POSTPAID_BY_HOUR或者PREPAID */
+  ChargeType?: string | null;
 }
 
 /** 边缘容器集群高级配置 */
@@ -3865,7 +3869,7 @@ declare interface DescribeEdgeLogSwitchesRequest {
 
 declare interface DescribeEdgeLogSwitchesResponse {
   /** 集群日志开关集合 */
-  SwitchSet: string[] | null;
+  SwitchSet?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4387,21 +4391,21 @@ declare interface DescribeTKEEdgeClusterCredentialRequest {
 
 declare interface DescribeTKEEdgeClusterCredentialResponse {
   /** 集群的接入地址信息 */
-  Addresses: IPAddress[] | null;
+  Addresses?: IPAddress[] | null;
   /** 集群的认证信息 */
-  Credential: ClusterCredential;
+  Credential?: ClusterCredential;
   /** 集群的公网访问信息 */
-  PublicLB: EdgeClusterPublicLB;
+  PublicLB?: EdgeClusterPublicLB;
   /** 集群的内网访问信息 */
-  InternalLB: EdgeClusterInternalLB;
+  InternalLB?: EdgeClusterInternalLB;
   /** 集群的CoreDns部署信息 */
-  CoreDns: string;
+  CoreDns?: string;
   /** 集群的健康检查多地域部署信息 */
-  HealthRegion: string;
+  HealthRegion?: string;
   /** 集群的健康检查部署信息 */
-  Health: string;
+  Health?: string;
   /** 是否部署GridDaemon以支持headless service */
-  GridDaemon: string;
+  GridDaemon?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

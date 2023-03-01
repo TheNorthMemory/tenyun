@@ -4395,7 +4395,7 @@ declare interface Cdn {
   AddCdnDomain(data: AddCdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<AddCdnDomainResponse>;
   /** 创建日志主题 {@link CreateClsLogTopicRequest} {@link CreateClsLogTopicResponse} */
   CreateClsLogTopic(data: CreateClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClsLogTopicResponse>;
-  /** 添加诊断URL {@link CreateDiagnoseUrlRequest} {@link CreateDiagnoseUrlResponse} */
+  /** 添加诊断URL(即将下线) {@link CreateDiagnoseUrlRequest} {@link CreateDiagnoseUrlResponse} */
   CreateDiagnoseUrl(data: CreateDiagnoseUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDiagnoseUrlResponse>;
   /** 动态打包任务提交 {@link CreateEdgePackTaskRequest} {@link CreateEdgePackTaskResponse} */
   CreateEdgePackTask(data: CreateEdgePackTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgePackTaskResponse>;
@@ -4429,7 +4429,7 @@ declare interface Cdn {
   DescribeCertDomains(data?: DescribeCertDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertDomainsResponse>;
   /** DDoS统计数据查询 {@link DescribeDDoSDataRequest} {@link DescribeDDoSDataResponse} */
   DescribeDDoSData(data: DescribeDDoSDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSDataResponse>;
-  /** 获取诊断报告 {@link DescribeDiagnoseReportRequest} {@link DescribeDiagnoseReportResponse} */
+  /** 获取诊断报告(即将下线) {@link DescribeDiagnoseReportRequest} {@link DescribeDiagnoseReportResponse} */
   DescribeDiagnoseReport(data: DescribeDiagnoseReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiagnoseReportResponse>;
   /** 地区运营商明细查询 {@link DescribeDistrictIspDataRequest} {@link DescribeDistrictIspDataResponse} */
   DescribeDistrictIspData(data: DescribeDistrictIspDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDistrictIspDataResponse>;
@@ -4499,7 +4499,7 @@ declare interface Cdn {
   ListClsLogTopics(data?: ListClsLogTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClsLogTopicsResponse>;
   /** 获取日志主题下绑定的域名 {@link ListClsTopicDomainsRequest} {@link ListClsTopicDomainsResponse} */
   ListClsTopicDomains(data: ListClsTopicDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClsTopicDomainsResponse>;
-  /** 获取诊断任务列表 {@link ListDiagnoseReportRequest} {@link ListDiagnoseReportResponse} */
+  /** 获取诊断任务列表(即将下线) {@link ListDiagnoseReportRequest} {@link ListDiagnoseReportResponse} */
   ListDiagnoseReport(data?: ListDiagnoseReportRequest, config?: AxiosRequestConfig): AxiosPromise<ListDiagnoseReportResponse>;
   /** 查询SCDN域名列表 {@link ListScdnDomainsRequest} {@link ListScdnDomainsResponse} */
   ListScdnDomains(data?: ListScdnDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnDomainsResponse>;

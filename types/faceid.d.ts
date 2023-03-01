@@ -92,22 +92,24 @@ declare interface DetectInfoText {
   IdCard: string | null;
   /** 本次验证使用的姓名。 */
   Name: string | null;
-  /** Ocr识别结果。民族。 */
+  /** 身份校验环节识别结果：民族。 */
   OcrNation: string | null;
-  /** Ocr识别结果。家庭住址。 */
+  /** 身份校验环节识别结果：家庭住址。 */
   OcrAddress: string | null;
-  /** Ocr识别结果。生日。 */
+  /** 身份校验环节识别结果：生日。格式为：YYYY/M/D */
   OcrBirth: string | null;
-  /** Ocr识别结果。签发机关。 */
+  /** 身份校验环节识别结果：签发机关。 */
   OcrAuthority: string | null;
-  /** Ocr识别结果。有效日期。 */
+  /** 身份校验环节识别结果：有效日期。格式为：YYYY.MM.DD-YYYY.MM.DD */
   OcrValidDate: string | null;
-  /** Ocr识别结果。姓名。 */
+  /** 身份校验环节识别结果：姓名。 */
   OcrName: string | null;
-  /** Ocr识别结果。身份证号。 */
+  /** 身份校验环节识别结果：身份证号。 */
   OcrIdCard: string | null;
-  /** Ocr识别结果。性别。 */
+  /** 身份校验环节识别结果：性别。 */
   OcrGender: string | null;
+  /** 身份校验环节采用的信息上传方式。取值有"NFC"、"OCR"、"手动输入"、"其他" */
+  IdInfoFrom?: string | null;
   /** 本次流程最终活体结果。0为成功 */
   LiveStatus: number | null;
   /** 本次流程最终活体结果描述。（仅描述用，文案更新时不会通知。） */

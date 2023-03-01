@@ -849,9 +849,9 @@ declare interface RenameRestoreDatabase {
 /** 实例绑定的标签信息 */
 declare interface ResourceTag {
   /** 标签key */
-  TagKey: string;
+  TagKey?: string;
   /** 标签value */
-  TagValue: string;
+  TagValue?: string;
 }
 
 /** 安全组 */

@@ -1231,21 +1231,25 @@ declare interface GetUserRequest {
 
 declare interface GetUserResponse {
   /** 子用户用户 UIN */
-  Uin: number;
+  Uin?: number;
   /** 子用户用户名 */
-  Name: string;
+  Name?: string;
   /** 子用户 UID */
-  Uid: number;
+  Uid?: number;
   /** 子用户备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 子用户能否登录控制台 0-无法登录控制台，1-可以登录控制台 */
-  ConsoleLogin: number;
+  ConsoleLogin?: number;
   /** 手机号 */
-  PhoneNum: string;
+  PhoneNum?: string;
   /** 区号 */
-  CountryCode: string;
+  CountryCode?: string;
   /** 邮箱 */
-  Email: string;
+  Email?: string;
+  /** 最近一次登录ip */
+  RecentlyLoginIP?: string | null;
+  /** 最近一次登录时间 */
+  RecentlyLoginTime?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
