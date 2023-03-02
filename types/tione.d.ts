@@ -3358,7 +3358,7 @@ declare namespace V20191022 {
   }
 }
 
-/** {@link Tione 腾讯云 TI 平台 TI-ONE} */
+/** {@link Tione TI-ONE 训练平台} */
 declare interface Tione {
   (): Versions;
   /** 批量创建模型加速任务 {@link CreateBatchModelAccTasksRequest} {@link CreateBatchModelAccTasksResponse} */

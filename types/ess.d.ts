@@ -761,6 +761,8 @@ declare interface CreateFlowApproversRequest {
   FlowId: string;
   /** 补充签署人信息 */
   Approvers: FillApproverInfo[];
+  /** 企微消息中的发起人 */
+  Initiator?: string;
 }
 
 declare interface CreateFlowApproversResponse {

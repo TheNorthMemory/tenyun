@@ -400,6 +400,10 @@ declare interface Job {
   NetworkSendRate?: number | null;
   /** 任务状态描述 */
   Message?: string | null;
+  /** test-project */
+  ProjectName?: string | null;
+  /** test-scenario */
+  ScenarioName?: string | null;
 }
 
 /** 包含labelName 和labelValue */
@@ -728,6 +732,8 @@ declare interface Scenario {
   NotificationHooks?: NotificationHook[] | null;
   /** 创建人员 */
   Owner?: string | null;
+  /** 场景所在的项目的名字 */
+  ProjectName?: string | null;
 }
 
 /** 查询与特定scenario关联的job的参数 */

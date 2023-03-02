@@ -655,7 +655,7 @@ declare interface UserInfo {
 }
 
 declare interface ChannelBatchCancelFlowsRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 签署流程Id数组，最多100个，超过100不处理 */
   FlowIds: string[];
@@ -663,13 +663,13 @@ declare interface ChannelBatchCancelFlowsRequest {
   CancelMessage?: string;
   /** 撤销理由自定义格式；选项：0 默认格式1 只保留身份信息：展示为【发起方】2 保留身份信息+企业名称：展示为【发起方xxx公司】3 保留身份信息+企业名称+经办人名称：展示为【发起方xxxx公司-经办人姓名】 */
   CancelMessageFormat?: number;
-  /** 操作人信息 */
+  /** 暂未开放 */
   Operator?: UserInfo;
 }
 
 declare interface ChannelBatchCancelFlowsResponse {
   /** 签署流程批量撤销失败原因，错误信息与流程Id一一对应，成功为“”,失败则对应失败消息 */
-  FailMessages: string[];
+  FailMessages?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -677,14 +677,14 @@ declare interface ChannelBatchCancelFlowsResponse {
 declare interface ChannelCancelFlowRequest {
   /** 签署流程编号 */
   FlowId: string;
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent?: Agent;
   /** 撤回原因，最大不超过200字符 */
   CancelMessage?: string;
-  /** 操作者的信息 */
-  Operator?: UserInfo;
   /** 撤销理由自定义格式；选项：0 默认格式1 只保留身份信息：展示为【发起方】2 保留身份信息+企业名称：展示为【发起方xxx公司】3 保留身份信息+企业名称+经办人名称：展示为【发起方xxxx公司-经办人姓名】 */
   CancelMessageFormat?: number;
+  /** 暂未开放 */
+  Operator?: UserInfo;
 }
 
 declare interface ChannelCancelFlowResponse {
@@ -693,11 +693,11 @@ declare interface ChannelCancelFlowResponse {
 }
 
 declare interface ChannelCancelMultiFlowSignQRCodeRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 二维码id */
   QrCodeId: string;
-  /** 用户信息 */
+  /** 暂未开放 */
   Operator?: UserInfo;
 }
 
@@ -707,21 +707,21 @@ declare interface ChannelCancelMultiFlowSignQRCodeResponse {
 }
 
 declare interface ChannelCreateBatchCancelFlowUrlRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 签署流程Id数组 */
   FlowIds: string[];
-  /** 操作人信息 */
+  /** 暂未开放 */
   Operator?: UserInfo;
 }
 
 declare interface ChannelCreateBatchCancelFlowUrlResponse {
   /** 批量撤销url */
-  BatchCancelFlowUrl: string;
+  BatchCancelFlowUrl?: string;
   /** 签署流程批量撤销失败原因 */
-  FailMessages: string[];
+  FailMessages?: string[];
   /** 签署撤销url过期时间-年月日-时分秒 */
-  UrlExpireOn: string;
+  UrlExpireOn?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -741,7 +741,7 @@ declare interface ChannelCreateBoundFlowsResponse {
 }
 
 declare interface ChannelCreateConvertTaskApiRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 资源类型 取值范围doc,docx,html,xls,xlsx之一 */
   ResourceType: string;
@@ -749,7 +749,7 @@ declare interface ChannelCreateConvertTaskApiRequest {
   ResourceName: string;
   /** 资源Id，通过UploadFiles获取 */
   ResourceId: string;
-  /** 调用方用户信息，userId 必填 */
+  /** 调用方用户信息，不用传 */
   Operator?: UserInfo;
   /** 暂未开放 */
   Organization?: OrganizationInfo;
@@ -757,13 +757,13 @@ declare interface ChannelCreateConvertTaskApiRequest {
 
 declare interface ChannelCreateConvertTaskApiResponse {
   /** 任务id */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface ChannelCreateFlowByFilesRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent?: Agent;
   /** 签署流程名称，长度不超过200个字符 */
   FlowName?: string;
@@ -789,17 +789,17 @@ declare interface ChannelCreateFlowByFilesRequest {
   CustomerData?: string;
   /** 发起方企业的签署人进行签署操作是否需要企业内部审批。 若设置为true,审核结果需通过接口 ChannelCreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。 注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。 */
   NeedSignReview?: boolean;
-  /** 操作者的信息 */
-  Operator?: UserInfo;
   /** 签署人校验方式VerifyCheck: 人脸识别（默认）MobileCheck：手机号验证参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。 */
   ApproverVerifyType?: string;
   /** 标识是否允许发起后添加控件。0为不允许1为允许。如果为1，创建的时候不能有签署控件，只能创建后添加。注意发起后添加控件功能不支持添加骑缝章和签批控件 */
   SignBeanTag?: number;
+  /** 操作者的信息，不用传 */
+  Operator?: UserInfo;
 }
 
 declare interface ChannelCreateFlowByFilesResponse {
   /** 合同签署流程ID */
-  FlowId: string | null;
+  FlowId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -809,25 +809,25 @@ declare interface ChannelCreateFlowGroupByFilesRequest {
   FlowFileInfos: FlowFileInfo[];
   /** 合同组名称，长度不超过200个字符 */
   FlowGroupName: string;
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent?: Agent;
   /** 签署人校验方式VerifyCheck: 人脸识别（默认）MobileCheck：手机号验证参数说明：若选择后者，未实名的个人签署方查看合同时，无需进行人脸识别实名认证（但签署合同时仍然需要人脸实名），该能力仅适用于个人签署方。 */
   ApproverVerifyType?: string;
-  /** 操作者的信息 */
+  /** 操作者的信息，此参数不用传 */
   Operator?: UserInfo;
 }
 
 declare interface ChannelCreateFlowGroupByFilesResponse {
   /** 合同组ID */
-  FlowGroupId: string | null;
+  FlowGroupId?: string | null;
   /** 子合同ID列表 */
-  FlowIds: string[] | null;
+  FlowIds?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface ChannelCreateFlowRemindsRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 签署流程Id数组，最多100个，超过100不处理 */
   FlowIds: string[];
@@ -841,7 +841,7 @@ declare interface ChannelCreateFlowRemindsResponse {
 }
 
 declare interface ChannelCreateFlowSignReviewRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 签署流程编号 */
   FlowId: string;
@@ -859,7 +859,7 @@ declare interface ChannelCreateFlowSignReviewResponse {
 }
 
 declare interface ChannelCreateFlowSignUrlRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填 */
   Agent: Agent;
   /** 流程编号 */
   FlowId: string;
@@ -873,13 +873,13 @@ declare interface ChannelCreateFlowSignUrlRequest {
 
 declare interface ChannelCreateFlowSignUrlResponse {
   /** 签署人签署链接信息 */
-  FlowApproverUrlInfos: FlowApproverUrlInfo[];
+  FlowApproverUrlInfos?: FlowApproverUrlInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface ChannelCreateMultiFlowSignQRCodeRequest {
-  /** 渠道应用相关信息。此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。 */
+  /** 应用相关信息。此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。 */
   Agent: Agent;
   /** 模版ID */
   TemplateId: string;
@@ -895,23 +895,23 @@ declare interface ChannelCreateMultiFlowSignQRCodeRequest {
   Restrictions?: ApproverRestriction[];
   /** 回调地址，最大长度1000个字符不传默认使用渠道应用号配置的回调地址回调时机:用户通过签署二维码发起合同时，企业额度不足导致失败 */
   CallbackUrl?: string;
-  /** 用户信息 */
-  Operator?: UserInfo;
   /** 限制二维码用户条件（已弃用） */
   ApproverRestrictions?: ApproverRestriction;
+  /** 暂未开放 */
+  Operator?: UserInfo;
 }
 
 declare interface ChannelCreateMultiFlowSignQRCodeResponse {
   /** 签署二维码对象 */
-  QrCode: SignQrCode;
+  QrCode?: SignQrCode;
   /** 签署链接对象 */
-  SignUrls: SignUrl;
+  SignUrls?: SignUrl;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface ChannelCreateReleaseFlowRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 待解除的流程编号（即原流程的编号） */
   NeedRelievedFlowId: string;
@@ -921,9 +921,9 @@ declare interface ChannelCreateReleaseFlowRequest {
   ReleasedApprovers?: ReleasedApprover[];
   /** 签署完回调url，最大长度1000个字符 */
   CallbackUrl?: string;
-  /** 机构信息 */
+  /** 暂未开放 */
   Organization?: OrganizationInfo;
-  /** 用户信息 */
+  /** 暂未开放 */
   Operator?: UserInfo;
 }
 
@@ -935,15 +935,15 @@ declare interface ChannelCreateReleaseFlowResponse {
 }
 
 declare interface ChannelCreateSealPolicyRequest {
-  /** 用户渠道信息 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
-  /** 指定印章 */
+  /** 指定印章ID */
   SealId: string;
   /** 指定待授权的用户ID数组 */
   UserIds: string[];
-  /** 企业机构信息 */
+  /** 企业机构信息，不用传 */
   Organization?: OrganizationInfo;
-  /** 操作人（用户）信息 */
+  /** 操作人（用户）信息，不用传 */
   Operator?: UserInfo;
 }
 
@@ -955,16 +955,16 @@ declare interface ChannelCreateSealPolicyResponse {
 }
 
 declare interface ChannelDeleteSealPoliciesRequest {
-  /** 渠道信息 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 指定印章ID */
   SealId: string;
   /** 指定用户ID数组 */
   UserIds: string[];
-  /** 操作人（用户）信息 */
-  Operator?: UserInfo;
-  /** 组织机构信息 */
+  /** 组织机构信息，不用传 */
   Organization?: OrganizationInfo;
+  /** 操作人（用户）信息，不用传 */
+  Operator?: UserInfo;
 }
 
 declare interface ChannelDeleteSealPoliciesResponse {
@@ -975,31 +975,31 @@ declare interface ChannelDeleteSealPoliciesResponse {
 declare interface ChannelDescribeEmployeesRequest {
   /** 返回最大数量，最大为20 */
   Limit: number;
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent?: Agent;
   /** 查询过滤实名用户，Key为Status，Values为["IsVerified"]根据第三方系统openId过滤查询员工时,Key为StaffOpenId,Values为["OpenId","OpenId",...]查询离职员工时，Key为Status，Values为["QuiteJob"] */
   Filters?: Filter[];
   /** 偏移量，默认为0，最大为20000 */
   Offset?: number;
-  /** 操作者的信息 */
+  /** 暂未开放 */
   Operator?: UserInfo;
 }
 
 declare interface ChannelDescribeEmployeesResponse {
   /** 员工数据列表 */
-  Employees: Staff[] | null;
+  Employees?: Staff[] | null;
   /** 偏移量，默认为0，最大为20000 */
-  Offset: number | null;
+  Offset?: number | null;
   /** 返回最大数量，最大为20 */
-  Limit: number;
+  Limit?: number;
   /** 符合条件的员工数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface ChannelDescribeOrganizationSealsRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 返回最大数量，最大为100 */
   Limit: number;
@@ -1023,11 +1023,11 @@ declare interface ChannelDescribeOrganizationSealsResponse {
 }
 
 declare interface ChannelGetTaskResultApiRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 任务Id，通过ChannelCreateConvertTaskApi接口获得 */
   TaskId: string;
-  /** 操作者的信息 */
+  /** 操作者的信息，不用传 */
   Operator?: UserInfo;
   /** 暂未开放 */
   Organization?: OrganizationInfo;
@@ -1035,21 +1035,21 @@ declare interface ChannelGetTaskResultApiRequest {
 
 declare interface ChannelGetTaskResultApiResponse {
   /** 任务Id */
-  TaskId: string;
+  TaskId?: string;
   /** 任务状态，需要关注的状态0 :NeedTranform - 任务已提交4 :Processing - 文档转换中8 :TaskEnd - 任务处理完成-2 :DownloadFailed - 下载失败-6 :ProcessFailed - 转换失败-13:ProcessTimeout - 转换文件超时 */
-  TaskStatus: number;
+  TaskStatus?: number;
   /** 状态描述，需要关注的状态NeedTranform - 任务已提交Processing - 文档转换中TaskEnd - 任务处理完成DownloadFailed - 下载失败ProcessFailed - 转换失败ProcessTimeout - 转换文件超时 */
-  TaskMessage: string;
+  TaskMessage?: string;
   /** 资源Id，也是FileId，用于文件发起使用 */
-  ResourceId: string;
+  ResourceId?: string;
   /** 预览文件Url，有效期30分钟 */
-  PreviewUrl: string | null;
+  PreviewUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface ChannelUpdateSealStatusRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 操作的印章状态，DISABLE-停用印章 */
   Status: string;
@@ -1069,37 +1069,37 @@ declare interface ChannelUpdateSealStatusResponse {
 declare interface ChannelVerifyPdfRequest {
   /** 合同Id，流程Id */
   FlowId: string;
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent?: Agent;
-  /** 操作者的信息 */
+  /** 暂未开放 */
   Operator?: UserInfo;
 }
 
 declare interface ChannelVerifyPdfResponse {
   /** 验签结果，1-文件未被篡改，全部签名在腾讯电子签完成； 2-文件未被篡改，部分签名在腾讯电子签完成；3-文件被篡改；4-异常：文件内没有签名域；5-异常：文件签名格式错误 */
-  VerifyResult: number;
+  VerifyResult?: number;
   /** 验签结果详情,内部状态1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域；5-文件签名格式错误 */
-  PdfVerifyResults: PdfVerifyResult[];
+  PdfVerifyResults?: PdfVerifyResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface CreateChannelFlowEvidenceReportRequest {
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填 */
+  Agent: Agent;
   /** 签署流程编号 */
   FlowId: string;
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填 */
-  Agent: Agent;
-  /** 操作者的信息 */
+  /** 暂未开放 */
   Operator?: UserInfo;
 }
 
 declare interface CreateChannelFlowEvidenceReportResponse {
   /** 出证报告 ID，用于查询出证报告接口DescribeChannelFlowEvidenceReport时用到 */
-  ReportId: string | null;
+  ReportId?: string | null;
   /** 执行中：EvidenceStatusExecuting成功：EvidenceStatusSuccess失败：EvidenceStatusFailed */
-  Status: string;
+  Status?: string;
   /** 废除，字段无效 */
-  ReportUrl: string | null;
+  ReportUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1123,25 +1123,25 @@ declare interface CreateConsoleLoginUrlRequest {
   Endpoint?: string;
   /** 触发自动跳转事件，仅对App类型有效，"VERIFIED":企业认证完成/员工认证完成后跳回原App/小程序 */
   AutoJumpBackEvent?: string;
-  /** 操作者的信息 */
-  Operator?: UserInfo;
   /** 支持的授权方式,授权方式: "1" - 上传授权书认证 "2" - 法定代表人认证 */
   AuthorizationTypes?: number[];
+  /** 暂未开放 */
+  Operator?: UserInfo;
 }
 
 declare interface CreateConsoleLoginUrlResponse {
   /** 子客Web控制台url注意事项：1. 所有类型的链接在企业未认证/员工未认证完成时，只要在有效期内（一年）都可以访问2. 若企业认证完成且员工认证完成后，重新获取pc端的链接5分钟之内有效，且只能访问一次3. 若企业认证完成且员工认证完成后，重新获取H5/APP的链接只要在有效期内（一年）都可以访问4. 此链接仅单次有效，使用后需要再次创建新的链接（部分聊天软件，如企业微信默认会对链接进行解析，此时需要使用类似“代码片段”的方式或者放到txt文件里发送链接）5. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义 */
-  ConsoleUrl: string;
+  ConsoleUrl?: string;
   /** 渠道子客企业是否已开通腾讯电子签 */
-  IsActivated: boolean;
+  IsActivated?: boolean;
   /** 当前经办人是否已认证（false:未认证 true:已认证） */
-  ProxyOperatorIsVerified: boolean;
+  ProxyOperatorIsVerified?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface CreateFlowsByTemplatesRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 多个合同（签署流程）信息，最多支持20个 */
   FlowInfos: FlowInfo[];
@@ -1149,27 +1149,27 @@ declare interface CreateFlowsByTemplatesRequest {
   NeedPreview?: boolean;
   /** 预览链接类型 默认:0-文件流, 1- H5链接 注意:此参数在NeedPreview 为true 时有效, */
   PreviewType?: number;
-  /** 操作者的信息 */
+  /** 操作者的信息，不用传 */
   Operator?: UserInfo;
 }
 
 declare interface CreateFlowsByTemplatesResponse {
   /** 多个合同ID */
-  FlowIds: string[];
+  FlowIds?: string[];
   /** 渠道的业务信息，限制1024字符 */
-  CustomerData: string[];
+  CustomerData?: string[];
   /** 创建消息，对应多个合同ID，成功为“”,创建失败则对应失败消息 */
-  ErrorMessages: string[];
+  ErrorMessages?: string[];
   /** 预览模式下返回的预览文件url数组 */
-  PreviewUrls: string[];
+  PreviewUrls?: string[];
   /** 复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情； */
-  TaskInfos: TaskInfo[];
+  TaskInfos?: TaskInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface CreateSealByImageRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 印章名称，最大长度不超过50字符 */
   SealName: string;
@@ -1181,13 +1181,13 @@ declare interface CreateSealByImageRequest {
 
 declare interface CreateSealByImageResponse {
   /** 印章id */
-  SealId: string;
+  SealId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface CreateSignUrlsRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 签署流程编号数组，最多支持100个。(备注：该参数和合同组编号必须二选一) */
   FlowIds?: string[];
@@ -1205,45 +1205,45 @@ declare interface CreateSignUrlsRequest {
   Mobile?: string;
   /** 渠道合作企业的企业Id，GenerateType为"CHANNEL"时必填 */
   OrganizationOpenId?: string;
-  /** 渠道合作企业参与人OpenId，GenerateType为"CHANNEL"时可用，指定到具体参与人 */
+  /** 渠道合作企业参与人OpenId，GenerateType为"CHANNEL"时可用，指定到具体参与人, 仅展示已经实名的经办人信息 */
   OpenId?: string;
   /** Endpoint为"APP" 类型的签署链接，可以设置此值；支持调用方小程序打开签署链接，在电子签小程序完成签署后自动回跳至调用方小程序 */
   AutoJumpBack?: boolean;
   /** 签署完之后的H5页面的跳转链接，针对Endpoint为CHANNEL时有效，最大长度1000个字符。 */
   JumpUrl?: string;
-  /** 操作者的信息 */
+  /** 暂未开放 */
   Operator?: UserInfo;
 }
 
 declare interface CreateSignUrlsResponse {
   /** 签署参与者签署H5链接信息数组 */
-  SignUrlInfos: SignUrlInfo[];
+  SignUrlInfos?: SignUrlInfo[];
   /** 生成失败时的错误信息，成功返回”“，顺序和出参SignUrlInfos保持一致 */
-  ErrorMessages: string[];
+  ErrorMessages?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeChannelFlowEvidenceReportRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填 */
   Agent: Agent;
   /** 出证报告编号 */
   ReportId: string;
-  /** 操作者的信息 */
+  /** 暂未开放 */
   Operator?: UserInfo;
 }
 
 declare interface DescribeChannelFlowEvidenceReportResponse {
   /** 出证报告 URL */
-  ReportUrl: string | null;
+  ReportUrl?: string | null;
   /** 执行中：EvidenceStatusExecuting成功：EvidenceStatusSuccess失败：EvidenceStatusFailed */
-  Status: string;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeExtendedServiceAuthInfoRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填注: 此接口 参数Agent. ProxyOperator.OpenId 需要传递超管或者法人的OpenId */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填注: 此接口 参数Agent. ProxyOperator.OpenId 需要传递超管或者法人的OpenId */
   Agent: Agent;
 }
 
@@ -1255,51 +1255,51 @@ declare interface DescribeExtendedServiceAuthInfoResponse {
 }
 
 declare interface DescribeFlowDetailInfoRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 合同(流程)编号数组，最多支持100个。（备注：该参数和合同组编号必须二选一） */
   FlowIds?: string[];
-  /** 操作者的信息 */
-  Operator?: UserInfo;
   /** 合同组编号（备注：该参数和合同(流程)编号数组必须二选一） */
   FlowGroupId?: string;
+  /** 暂未开放 */
+  Operator?: UserInfo;
 }
 
 declare interface DescribeFlowDetailInfoResponse {
   /** 渠道侧应用号Id */
-  ApplicationId: string;
+  ApplicationId?: string;
   /** 渠道侧企业第三方Id */
-  ProxyOrganizationOpenId: string;
+  ProxyOrganizationOpenId?: string;
   /** 合同(签署流程)的具体详细描述信息 */
-  FlowInfo: FlowDetailInfo[] | null;
+  FlowInfo?: FlowDetailInfo[] | null;
   /** 合同组编号 */
-  FlowGroupId: string | null;
+  FlowGroupId?: string | null;
   /** 合同组名称 */
-  FlowGroupName: string | null;
+  FlowGroupName?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeResourceUrlsByFlowsRequest {
-  /** 渠道应用相关信息。此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 查询资源所对应的签署流程Id，最多支持50个 */
   FlowIds?: string[];
-  /** 操作者的信息 */
+  /** 操作者的信息，不用传 */
   Operator?: UserInfo;
 }
 
 declare interface DescribeResourceUrlsByFlowsResponse {
   /** 签署流程资源对应链接信息 */
-  FlowResourceUrlInfos: FlowResourceUrlInfo[];
+  FlowResourceUrlInfos?: FlowResourceUrlInfo[];
   /** 创建消息，对应多个合同ID，成功为“”,创建失败则对应失败消息 */
-  ErrorMessages: string[];
+  ErrorMessages?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeTemplatesRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 模板唯一标识，查询单个模板时使用 */
   TemplateId?: string;
@@ -1325,13 +1325,13 @@ declare interface DescribeTemplatesRequest {
 
 declare interface DescribeTemplatesResponse {
   /** 模板详情 */
-  Templates: TemplateInfo[];
+  Templates?: TemplateInfo[];
   /** 查询总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 查询数量 */
-  Limit: number;
+  Limit?: number;
   /** 查询起始偏移 */
-  Offset: number;
+  Offset?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1349,37 +1349,37 @@ declare interface DescribeUsageRequest {
   Limit?: number;
   /** 偏移量，默认是0。 */
   Offset?: number;
-  /** 操作者的信息 */
+  /** 暂未开放 */
   Operator?: UserInfo;
 }
 
 declare interface DescribeUsageResponse {
   /** 用量明细条数 */
-  Total: number;
+  Total?: number;
   /** 用量明细 */
-  Details: UsageDetail[] | null;
+  Details?: UsageDetail[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface GetDownloadFlowUrlRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 文件夹数组，签署流程总数不能超过50个，一个文件夹下，不能超过20个签署流程 */
   DownLoadFlows?: DownloadFlowInfo[];
-  /** 操作者的信息 */
+  /** 操作者的信息，不用传 */
   Operator?: UserInfo;
 }
 
 declare interface GetDownloadFlowUrlResponse {
   /** 合同（流程）下载地址 */
-  DownLoadUrl: string;
+  DownLoadUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface ModifyExtendedServiceRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。注: 此接口 参数Agent. ProxyOperator.OpenId 需要传递超管或者法人的OpenId */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。注: 此接口 参数Agent. ProxyOperator.OpenId 需要传递超管或者法人的OpenId */
   Agent: Agent;
   /** 扩展服务类型 AUTO_SIGN 企业静默签（自动签署） OVERSEA_SIGN 企业与港澳台居民*签署合同 MOBILE_CHECK_APPROVER 使用手机号验证签署方身份 PAGING_SEAL 骑缝章 DOWNLOAD_FLOW 授权渠道下载合同 */
   ServiceType: string;
@@ -1395,7 +1395,7 @@ declare interface ModifyExtendedServiceResponse {
 }
 
 declare interface OperateChannelTemplateRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 操作类型，查询:"SELECT"，删除:"DELETE"，更新:"UPDATE" */
   OperateType: string;
@@ -1405,61 +1405,61 @@ declare interface OperateChannelTemplateRequest {
   ProxyOrganizationOpenIds?: string;
   /** 模板可见性, 全部可见-"all", 部分可见-"part" */
   AuthTag?: string;
-  /** 操作者的信息 */
+  /** 暂未开放 */
   Operator?: UserInfo;
 }
 
 declare interface OperateChannelTemplateResponse {
   /** 腾讯电子签颁发给渠道的应用ID */
-  AppId: string | null;
+  AppId?: string | null;
   /** 渠道方模板库模板唯一标识 */
-  TemplateId: string | null;
+  TemplateId?: string | null;
   /** 全部成功-"all-success",部分成功-"part-success", 全部失败-"fail"失败的会在FailMessageList中展示 */
-  OperateResult: string | null;
+  OperateResult?: string | null;
   /** 模板可见性, 全部可见-"all", 部分可见-"part" */
-  AuthTag: string | null;
+  AuthTag?: string | null;
   /** 合作企业方第三方机构唯一标识数据 */
-  ProxyOrganizationOpenIds: string[] | null;
+  ProxyOrganizationOpenIds?: string[] | null;
   /** 操作失败信息数组 */
-  FailMessageList: AuthFailMessage[] | null;
+  FailMessageList?: AuthFailMessage[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface PrepareFlowsRequest {
-  /** 渠道应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
   /** 多个合同（签署流程）信息，最大支持20个签署流程。 */
   FlowInfos: FlowInfo[];
   /** 操作完成后的跳转地址，最大长度200 */
   JumpUrl: string;
-  /** 操作者的信息 */
+  /** 暂未开放 */
   Operator?: UserInfo;
 }
 
 declare interface PrepareFlowsResponse {
   /** 待发起文件确认页 */
-  ConfirmUrl: string;
+  ConfirmUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface SyncProxyOrganizationOperatorsRequest {
-  /** 渠道应用相关信息。 此接口Agent.AppId 和 Agent.ProxyOrganizationOpenId必填。 */
+  /** 应用相关信息。 此接口Agent.AppId 和 Agent.ProxyOrganizationOpenId必填。 */
   Agent: Agent;
   /** 操作类型，新增:"CREATE"，修改:"UPDATE"，离职:"RESIGN" */
   OperatorType: string;
   /** 经办人信息列表，最大长度200 */
   ProxyOrganizationOperators: ProxyOrganizationOperator[];
-  /** 操作者的信息 */
+  /** 暂未开放 */
   Operator?: UserInfo;
 }
 
 declare interface SyncProxyOrganizationOperatorsResponse {
   /** Status 同步状态,全部同步失败接口会直接报错1-成功 2-部分成功 */
-  Status: number | null;
+  Status?: number | null;
   /** 同步失败经办人及其失败原因 */
-  FailedList: SyncFailReason[] | null;
+  FailedList?: SyncFailReason[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1475,7 +1475,7 @@ declare interface SyncProxyOrganizationRequest {
   UniformSocialCreditCode?: string;
   /** 渠道侧合作企业法人/负责人姓名 */
   ProxyLegalName?: string;
-  /** 操作者的信息 */
+  /** 暂未开放 */
   Operator?: UserInfo;
 }
 
@@ -3039,19 +3039,19 @@ declare namespace V20201222 {
 /** {@link Essbasic 腾讯电子签（基础版）} */
 declare interface Essbasic {
   (): Versions;
-  /** 电子签渠道版-根据签署流程id批量撤销合同 {@link ChannelBatchCancelFlowsRequest} {@link ChannelBatchCancelFlowsResponse} */
+  /** 根据签署流程id批量撤销合同 {@link ChannelBatchCancelFlowsRequest} {@link ChannelBatchCancelFlowsResponse} */
   ChannelBatchCancelFlows(data: ChannelBatchCancelFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelBatchCancelFlowsResponse>;
-  /** 渠道版撤销签署流程 {@link ChannelCancelFlowRequest} {@link ChannelCancelFlowResponse} */
+  /** 撤销签署流程 {@link ChannelCancelFlowRequest} {@link ChannelCancelFlowResponse} */
   ChannelCancelFlow(data: ChannelCancelFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelFlowResponse>;
   /** 取消一码多扫二维码 {@link ChannelCancelMultiFlowSignQRCodeRequest} {@link ChannelCancelMultiFlowSignQRCodeResponse} */
   ChannelCancelMultiFlowSignQRCode(data: ChannelCancelMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCancelMultiFlowSignQRCodeResponse>;
-  /** 电子签渠道版-根据签署流程id创建批量撤销url {@link ChannelCreateBatchCancelFlowUrlRequest} {@link ChannelCreateBatchCancelFlowUrlResponse} */
+  /** 根据签署流程id创建批量撤销url {@link ChannelCreateBatchCancelFlowUrlRequest} {@link ChannelCreateBatchCancelFlowUrlResponse} */
   ChannelCreateBatchCancelFlowUrl(data: ChannelCreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBatchCancelFlowUrlResponse>;
-  /** 渠道版领取合同 {@link ChannelCreateBoundFlowsRequest} {@link ChannelCreateBoundFlowsResponse} */
+  /** 领取未归属的合同 {@link ChannelCreateBoundFlowsRequest} {@link ChannelCreateBoundFlowsResponse} */
   ChannelCreateBoundFlows(data: ChannelCreateBoundFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBoundFlowsResponse>;
-  /** 渠道创建文件转换任务 {@link ChannelCreateConvertTaskApiRequest} {@link ChannelCreateConvertTaskApiResponse} */
+  /** 创建文件转换任务 {@link ChannelCreateConvertTaskApiRequest} {@link ChannelCreateConvertTaskApiResponse} */
   ChannelCreateConvertTaskApi(data: ChannelCreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateConvertTaskApiResponse>;
-  /** 渠道版通过文件创建签署流程 {@link ChannelCreateFlowByFilesRequest} {@link ChannelCreateFlowByFilesResponse} */
+  /** 通过文件创建签署流程 {@link ChannelCreateFlowByFilesRequest} {@link ChannelCreateFlowByFilesResponse} */
   ChannelCreateFlowByFiles(data?: ChannelCreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowByFilesResponse>;
   /** 通过多文件创建合同组签署流程 {@link ChannelCreateFlowGroupByFilesRequest} {@link ChannelCreateFlowGroupByFilesResponse} */
   ChannelCreateFlowGroupByFiles(data: ChannelCreateFlowGroupByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowGroupByFilesResponse>;
@@ -3059,7 +3059,7 @@ declare interface Essbasic {
   ChannelCreateFlowReminds(data: ChannelCreateFlowRemindsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowRemindsResponse>;
   /** 提交企业签署流程审批结果 {@link ChannelCreateFlowSignReviewRequest} {@link ChannelCreateFlowSignReviewResponse} */
   ChannelCreateFlowSignReview(data: ChannelCreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowSignReviewResponse>;
-  /** 渠道版创建签署链接 {@link ChannelCreateFlowSignUrlRequest} {@link ChannelCreateFlowSignUrlResponse} */
+  /** 创建签署链接 {@link ChannelCreateFlowSignUrlRequest} {@link ChannelCreateFlowSignUrlResponse} */
   ChannelCreateFlowSignUrl(data: ChannelCreateFlowSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowSignUrlResponse>;
   /** 创建一码多扫签署流程二维码 {@link ChannelCreateMultiFlowSignQRCodeRequest} {@link ChannelCreateMultiFlowSignQRCodeResponse} */
   ChannelCreateMultiFlowSignQRCode(data: ChannelCreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateMultiFlowSignQRCodeResponse>;
@@ -3071,11 +3071,11 @@ declare interface Essbasic {
   ChannelDeleteSealPolicies(data: ChannelDeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDeleteSealPoliciesResponse>;
   /** 查询企业员工 {@link ChannelDescribeEmployeesRequest} {@link ChannelDescribeEmployeesResponse} */
   ChannelDescribeEmployees(data: ChannelDescribeEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeEmployeesResponse>;
-  /** 查询渠道子客企业电子印章 {@link ChannelDescribeOrganizationSealsRequest} {@link ChannelDescribeOrganizationSealsResponse} */
+  /** 查询子客企业电子印章 {@link ChannelDescribeOrganizationSealsRequest} {@link ChannelDescribeOrganizationSealsResponse} */
   ChannelDescribeOrganizationSeals(data: ChannelDescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeOrganizationSealsResponse>;
-  /** 渠道版查询转换任务状态 {@link ChannelGetTaskResultApiRequest} {@link ChannelGetTaskResultApiResponse} */
+  /** 查询转换任务状态 {@link ChannelGetTaskResultApiRequest} {@link ChannelGetTaskResultApiResponse} */
   ChannelGetTaskResultApi(data: ChannelGetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelGetTaskResultApiResponse>;
-  /** 渠道版更新印章状态 {@link ChannelUpdateSealStatusRequest} {@link ChannelUpdateSealStatusResponse} */
+  /** 更新印章状态 {@link ChannelUpdateSealStatusRequest} {@link ChannelUpdateSealStatusResponse} */
   ChannelUpdateSealStatus(data: ChannelUpdateSealStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelUpdateSealStatusResponse>;
   /** 合同文件验签 {@link ChannelVerifyPdfRequest} {@link ChannelVerifyPdfResponse} */
   ChannelVerifyPdf(data: ChannelVerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelVerifyPdfResponse>;
@@ -3099,13 +3099,13 @@ declare interface Essbasic {
   DescribeResourceUrlsByFlows(data: DescribeResourceUrlsByFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceUrlsByFlowsResponse>;
   /** 查询模板信息列表 {@link DescribeTemplatesRequest} {@link DescribeTemplatesResponse} */
   DescribeTemplates(data: DescribeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplatesResponse>;
-  /** 渠道用量查询 {@link DescribeUsageRequest} {@link DescribeUsageResponse} */
+  /** 渠道合同用量查询 {@link DescribeUsageRequest} {@link DescribeUsageResponse} */
   DescribeUsage(data: DescribeUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageResponse>;
   /** 获取合同（流程）批量下载链接 {@link GetDownloadFlowUrlRequest} {@link GetDownloadFlowUrlResponse} */
   GetDownloadFlowUrl(data: GetDownloadFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetDownloadFlowUrlResponse>;
   /** 修改企业扩展服务 {@link ModifyExtendedServiceRequest} {@link ModifyExtendedServiceResponse} */
   ModifyExtendedService(data: ModifyExtendedServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExtendedServiceResponse>;
-  /** 操作渠道模板 {@link OperateChannelTemplateRequest} {@link OperateChannelTemplateResponse} */
+  /** 操作渠道企业模板 {@link OperateChannelTemplateRequest} {@link OperateChannelTemplateResponse} */
   OperateChannelTemplate(data: OperateChannelTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<OperateChannelTemplateResponse>;
   /** 准备待发起文件 {@link PrepareFlowsRequest} {@link PrepareFlowsResponse} */
   PrepareFlows(data: PrepareFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<PrepareFlowsResponse>;

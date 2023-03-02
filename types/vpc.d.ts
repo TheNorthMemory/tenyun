@@ -498,10 +498,16 @@ declare interface CvmInstance {
 
 /** 默认VPC和子网 */
 declare interface DefaultVpcSubnet {
-  /** 默认VpcId */
+  /** 默认VpcId。 */
   VpcId: string;
-  /** 默认SubnetId */
+  /** 默认SubnetId。 */
   SubnetId: string;
+  /** 默认Vpc名字。 */
+  VpcName?: string;
+  /** 默认Subnet名字。 */
+  SubnetName?: string;
+  /** 默认子网网段。 */
+  CidrBlock?: string;
 }
 
 /** NAT网关的端口转发规则 */
@@ -1100,9 +1106,9 @@ declare interface NetDetect {
   DetectDestinationIp: string[];
   /** 系统自动分配的探测源IPv4数组。长度为2。 */
   DetectSourceIp: string[];
-  /** 下一跳类型，目前我们支持的类型有：VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；NAT：NAT网关；NORMAL_CVM：普通云服务器；CCN：云联网网关； */
+  /** 下一跳类型，目前我们支持的类型有：VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；NAT：NAT网关；NORMAL_CVM：普通云服务器；CCN：云联网网关；NONEXTHOP：无下一跳； */
   NextHopType: string;
-  /** 下一跳目的网关，取值与“下一跳类型”相关：下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；下一跳类型为NAT，取值Nat网关，形如：nat-12345678；下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；下一跳类型为CCN，取值云联网网关，形如：ccn-12345678； */
+  /** 下一跳目的网关，取值与“下一跳类型”相关：下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；下一跳类型为NAT，取值Nat网关，形如：nat-12345678；下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；下一跳类型为CCN，取值云云联网ID，形如：ccn-12345678；下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测； */
   NextHopDestination: string;
   /** 下一跳网关名称。 */
   NextHopName: string | null;
@@ -2686,7 +2692,7 @@ declare interface CreateDefaultVpcRequest {
 }
 
 declare interface CreateDefaultVpcResponse {
-  /** 默认VPC和子网ID */
+  /** 默认VPC和子网ID。 */
   Vpc?: DefaultVpcSubnet;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2889,7 +2895,7 @@ declare interface CreateNatGatewaySourceIpTranslationNatRuleResponse {
 }
 
 declare interface CreateNetDetectRequest {
-  /** `VPC`实例`ID`。形如：`vpc-12345678` */
+  /** `VPC`实例`ID`。形如：`vpc-12345678`。 */
   VpcId: string;
   /** 子网实例ID。形如：subnet-12345678。 */
   SubnetId: string;
@@ -2897,9 +2903,9 @@ declare interface CreateNetDetectRequest {
   NetDetectName: string;
   /** 探测目的IPv4地址数组。最多两个。 */
   DetectDestinationIp: string[];
-  /** 下一跳类型，目前我们支持的类型有：VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；NAT：NAT网关；NORMAL_CVM：普通云服务器；CCN：云联网网关； */
+  /** 下一跳类型，目前我们支持的类型有：VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；NAT：NAT网关；NORMAL_CVM：普通云服务器；CCN：云联网网关；NONEXTHOP：无下一跳； */
   NextHopType?: string;
-  /** 下一跳目的网关，取值与“下一跳类型”相关：下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；下一跳类型为NAT，取值Nat网关，形如：nat-12345678；下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；下一跳类型为CCN，取值云联网ID，形如：ccn-12345678； */
+  /** 下一跳目的网关，取值与“下一跳类型”相关：下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；下一跳类型为NAT，取值Nat网关，形如：nat-12345678；下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；下一跳类型为CCN，取值云云联网ID，形如：ccn-12345678；下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测； */
   NextHopDestination?: string;
   /** 网络探测描述。 */
   NetDetectDescription?: string;
@@ -2907,7 +2913,7 @@ declare interface CreateNetDetectRequest {
 
 declare interface CreateNetDetectResponse {
   /** 网络探测（NetDetect）对象。 */
-  NetDetect: NetDetect;
+  NetDetect?: NetDetect;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3021,13 +3027,13 @@ declare interface CreateSecurityGroupRequest {
   GroupDescription: string;
   /** 项目ID，默认0。可在qcloud控制台项目管理页面查询到。 */
   ProjectId?: string;
-  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}] */
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
   Tags?: Tag[];
 }
 
 declare interface CreateSecurityGroupResponse {
   /** 安全组对象。 */
-  SecurityGroup: SecurityGroup;
+  SecurityGroup?: SecurityGroup;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3541,7 +3547,7 @@ declare interface DeleteNatGatewaySourceIpTranslationNatRuleResponse {
 }
 
 declare interface DeleteNetDetectRequest {
-  /** 网络探测实例`ID`。形如：`netd-12345678` */
+  /** 网络探测实例`ID`。形如：`netd-12345678`。 */
   NetDetectId: string;
 }
 
@@ -4513,9 +4519,9 @@ declare interface DescribeNatGatewaysResponse {
 }
 
 declare interface DescribeNetDetectStatesRequest {
-  /** 网络探测实例`ID`数组。形如：[`netd-12345678`] */
+  /** 网络探测实例`ID`数组。形如：[`netd-12345678`]。 */
   NetDetectIds?: string[];
-  /** 过滤条件，参数不支持同时指定NetDetectIds和Filters。net-detect-id - String - （过滤条件）网络探测实例ID，形如：netd-12345678 */
+  /** 过滤条件，参数不支持同时指定NetDetectIds和Filters。net-detect-id - String - （过滤条件）网络探测实例ID，形如：netd-12345678。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -4525,15 +4531,15 @@ declare interface DescribeNetDetectStatesRequest {
 
 declare interface DescribeNetDetectStatesResponse {
   /** 符合条件的网络探测验证结果对象数组。 */
-  NetDetectStateSet: NetDetectState[] | null;
+  NetDetectStateSet?: NetDetectState[] | null;
   /** 符合条件的网络探测验证结果对象数量。 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeNetDetectsRequest {
-  /** 网络探测实例`ID`数组。形如：[`netd-12345678`] */
+  /** 网络探测实例`ID`数组。形如：[`netd-12345678`]。 */
   NetDetectIds?: string[];
   /** 过滤条件，参数不支持同时指定NetDetectIds和Filters。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-12345678net-detect-id - String - （过滤条件）网络探测实例ID，形如：netd-12345678subnet-id - String - （过滤条件）子网实例ID，形如：subnet-12345678net-detect-name - String - （过滤条件）网络探测名称 */
   Filters?: Filter[];
@@ -6093,9 +6099,9 @@ declare interface ModifyNetDetectRequest {
   NetDetectName?: string;
   /** 探测目的IPv4地址数组，最多两个。 */
   DetectDestinationIp?: string[];
-  /** 下一跳类型，目前我们支持的类型有：VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；NAT：NAT网关；NORMAL_CVM：普通云服务器；CCN：云联网网关； */
+  /** 下一跳类型，目前我们支持的类型有：VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；NAT：NAT网关；NORMAL_CVM：普通云服务器；CCN：云联网网关；NONEXTHOP：无下一跳； */
   NextHopType?: string;
-  /** 下一跳目的网关，取值与“下一跳类型”相关：下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；下一跳类型为NAT，取值Nat网关，形如：nat-12345678；下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；下一跳类型为CCN，取值云联网ID，形如：ccn-44csczop； */
+  /** 下一跳目的网关，取值与“下一跳类型”相关：下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；下一跳类型为NAT，取值Nat网关，形如：nat-12345678；下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；下一跳类型为CCN，取值云云联网ID，形如：ccn-12345678；下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测； */
   NextHopDestination?: string;
   /** 网络探测描述。 */
   NetDetectDescription?: string;

@@ -328,7 +328,7 @@ declare interface MixLayout {
   MediaId?: number;
   /** 该画布的图层顺序, 这个值越小表示图层越靠后。默认值为0。 */
   ImageLayer?: number;
-  /** 下载的url地址， 只支持jpg， png，大小限制不超过5M，宽高比不一致的处理方案同 RenderMode。 */
+  /** 图片的url地址， 只支持jpg， png，大小限制不超过5M，宽高比不一致的处理方案同 RenderMode。 */
   SubBackgroundImage?: string;
 }
 
@@ -344,7 +344,7 @@ declare interface MixLayoutParams {
   MaxResolutionUserId?: string;
   /** 主辅路标识，0：主流（默认）；1：辅流（屏幕分享）；这个位置的MediaId代表的是对应MaxResolutionUserId的主辅路，MixLayoutList内代表的是自定义用户的主辅路。 */
   MediaId?: number;
-  /** 下载的url地址， 只支持jpg， png，大小限制不超过5M。 */
+  /** 图片的url地址， 只支持jpg， png，大小限制不超过5M，url不可包含中文。 */
   BackgroundImageUrl?: string;
   /** 设置为1时代表启用占位图功能，0时代表不启用占位图功能，默认为0。启用占位图功能时，在预设位置的用户没有上行视频时可显示对应的占位图。 */
   PlaceHolderMode?: number;

@@ -689,7 +689,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   hcm: Hcm,
   /** {@link Iai 人脸识别} */
   iai: Iai,
-  /** {@link Ic 物联网卡} */
+  /** {@link Ic 图片瘦身} */
   ic: Ic,
   /** {@link Icr 对话机器人} */
   icr: Icr,
@@ -811,7 +811,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   ssa: Ssa,
   /** {@link Ssl SSL 证书} */
   ssl: Ssl,
-  /** {@link Sslpod SSL证书监控SSLPod} */
+  /** {@link Sslpod 证书监控 SSLPod} */
   sslpod: Sslpod,
   /** {@link Ssm 凭据管理系统} */
   ssm: Ssm,
@@ -856,7 +856,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   tdmq: Tdmq,
   /** {@link Tds 设备安全} */
   tds: Tds,
-  /** {@link Tem 弹性微服务 TEM} */
+  /** {@link Tem 弹性微服务} */
   tem: Tem,
   /** {@link Teo 边缘安全加速平台} */
   teo: Teo,
@@ -874,7 +874,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   tiems: Tiems,
   /** {@link Tiia 图像分析} */
   tiia: Tiia,
-  /** {@link Tione 腾讯云 TI 平台 TI-ONE} */
+  /** {@link Tione TI-ONE 训练平台} */
   tione: Tione,
   /** {@link Tiw 互动白板} */
   tiw: Tiw,

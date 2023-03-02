@@ -262,7 +262,7 @@ declare interface Instance {
   LaunchConfigurationId: string;
   /** 启动配置名称 */
   LaunchConfigurationName: string;
-  /** 生命周期状态，取值如下：IN_SERVICE：运行中CREATING：创建中CREATION_FAILED：创建失败TERMINATING：中止中TERMINATION_FAILED：中止失败ATTACHING：绑定中DETACHING：解绑中ATTACHING_LB：绑定LB中DETACHING_LB：解绑LB中STARTING：开机中START_FAILED：开机失败STOPPING：关机中STOP_FAILED：关机失败STOPPED：已关机 */
+  /** 生命周期状态，取值如下：IN_SERVICE：运行中CREATING：创建中CREATION_FAILED：创建失败TERMINATING：中止中TERMINATION_FAILED：中止失败ATTACHING：绑定中ATTACH_FAILED：绑定失败DETACHING：解绑中DETACH_FAILED：解绑失败ATTACHING_LB：绑定LB中DETACHING_LB：解绑LB中MODIFYING_LB：修改LB中STARTING：开机中START_FAILED：开机失败STOPPING：关机中STOP_FAILED：关机失败STOPPED：已关机IN_LAUNCHING_HOOK：扩容生命周期挂钩中IN_TERMINATING_HOOK：缩容生命周期挂钩中 */
   LifeCycleState: string;
   /** 健康状态，取值包括HEALTHY和UNHEALTHY */
   HealthStatus: string;

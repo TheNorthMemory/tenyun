@@ -316,6 +316,22 @@ declare interface WorkspaceTemplateInfo {
   AuthorAvatar: string | null;
 }
 
+/** 创建临时工作空间凭证 DTO */
+declare interface WorkspaceTokenDTO {
+  /** 工作空间 SpaceKey */
+  SpaceKey?: string | null;
+  /** token过期时间，单位是秒，默认 3600 */
+  TokenExpiredLimitSec?: number | null;
+}
+
+/** 获取工作空间临时访问 token 出参 */
+declare interface WorkspaceTokenInfoV0 {
+  /** 访问工作空间临时凭证 */
+  Token: string;
+  /** token 过期时间 */
+  ExpiredTime: string | null;
+}
+
 declare interface CreateCustomizeTemplatesRequest {
   /** 用户所属组 */
   CloudStudioSessionTeam: string;
@@ -368,6 +384,18 @@ declare interface CreateWorkspaceByVersionControlRequest {
 declare interface CreateWorkspaceByVersionControlResponse {
   /** 无 */
   Data: WorkspaceInfoDTO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateWorkspaceTemporaryTokenRequest {
+  /** 创建工作空间凭证 DTO */
+  WorkspaceTokenDTO: WorkspaceTokenDTO;
+}
+
+declare interface CreateWorkspaceTemporaryTokenResponse {
+  /** 工作空间临时访问 token 信息 */
+  Data?: WorkspaceTokenInfoV0;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -609,6 +637,8 @@ declare interface Cloudstudio {
   CreateWorkspaceByTemplate(data: CreateWorkspaceByTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspaceByTemplateResponse>;
   /** 根据模板创建工作空间 {@link CreateWorkspaceByVersionControlRequest} {@link CreateWorkspaceByVersionControlResponse} */
   CreateWorkspaceByVersionControl(data: CreateWorkspaceByVersionControlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspaceByVersionControlResponse>;
+  /** 为工作空间创建临时访问凭证 {@link CreateWorkspaceTemporaryTokenRequest} {@link CreateWorkspaceTemporaryTokenResponse} */
+  CreateWorkspaceTemporaryToken(data: CreateWorkspaceTemporaryTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspaceTemporaryTokenResponse>;
   /** 删除自定义模板 {@link DeleteCustomizeTemplatesByIdRequest} {@link DeleteCustomizeTemplatesByIdResponse} */
   DeleteCustomizeTemplatesById(data: DeleteCustomizeTemplatesByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomizeTemplatesByIdResponse>;
   /** 获取所有模板列表 {@link DescribeCustomizeTemplatesRequest} {@link DescribeCustomizeTemplatesResponse} */

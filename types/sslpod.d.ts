@@ -264,7 +264,7 @@ declare interface ResolveDomainResponse {
   RequestId?: string;
 }
 
-/** {@link Sslpod SSL证书监控SSLPod} */
+/** {@link Sslpod 证书监控 SSLPod} */
 declare interface Sslpod {
   (): Versions;
   /** 添加域名 {@link CreateDomainRequest} {@link CreateDomainResponse} */

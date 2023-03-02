@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 226+ 款产品，9093+ 服务数</summary>
+<details><summary>共计 226+ 款产品，9094+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -156,7 +156,7 @@ ckafka | [消息队列 CKafka](https://cloud.tencent.com/document/product/597) |
 clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-17(79) |
 cloudaudit | [云审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(11) |
-cloudstudio | [Cloud Studio（云端 IDE）](https://cloud.tencent.com/document/product/1039) | 2021-05-24(20) |
+cloudstudio | [Cloud Studio（云端 IDE）](https://cloud.tencent.com/document/product/1039) | 2021-05-24(21) |
 cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(62) |
 cme | [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) | 2019-10-29(49) |
 cmq | [消息队列 CMQ](https://cloud.tencent.com/document/product/406) | 2019-03-04(17) |
@@ -205,7 +205,7 @@ habo |  | 2018-12-03(2) |
 hasim | [高可用物联网卡](https://cloud.tencent.com/document/product/1482) | 2021-07-16(22) |
 hcm | [数学作业批改](https://cloud.tencent.com/document/product/1004) | 2018-11-06(1) |
 iai | [人脸识别](https://cloud.tencent.com/document/product/867) | 2020-03-03(35) | 2018-03-01(33) |
-ic | [物联网卡](https://cloud.tencent.com/document/product/636) | 2019-03-07(9) |
+ic | [图片瘦身](https://cloud.tencent.com/document/product/636) | 2019-03-07(9) |
 icr | [对话机器人](https://cloud.tencent.com/document/product/1268) | 2021-10-14(1) |
 ie | [智能编辑](https://cloud.tencent.com/document/product/1186) | 2020-03-04(10) |
 iecp | [物联网边缘计算平台](https://cloud.tencent.com/document/product/1118) | 2021-09-14(102) |
@@ -266,7 +266,7 @@ solar | 智汇零售 | 2018-10-11(17) |
 sqlserver | [云数据库 SQL Server](https://cloud.tencent.com/document/product/238) | 2018-03-28(104) |
 ssa | [安全运营中心](https://cloud.tencent.com/document/product/664) | 2018-06-08(23) |
 ssl | [SSL 证书](https://cloud.tencent.com/document/product/400) | 2019-12-05(29) |
-sslpod | [SSL证书监控SSLPod](https://cloud.tencent.com/document/product/1084) | 2019-06-05(10) |
+sslpod | [证书监控 SSLPod](https://cloud.tencent.com/document/product/1084) | 2019-06-05(10) |
 ssm | [凭据管理系统](https://cloud.tencent.com/document/product/1140) | 2019-09-23(24) |
 sts | [安全凭证服务](https://cloud.tencent.com/document/product/1312) | 2018-08-13(6) |
 taf | [流量反欺诈](https://cloud.tencent.com/document/product/1031) | 2020-02-10(3) |
@@ -289,7 +289,7 @@ tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556
 tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(48) |
 tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(102) |
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(4) |
-tem | [弹性微服务 TEM](https://cloud.tencent.com/document/product/1371) | 2021-07-01(50) | 2020-12-21(17) |
+tem | [弹性微服务](https://cloud.tencent.com/document/product/1371) | 2021-07-01(50) | 2020-12-21(17) |
 teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(87) | 2022-01-06(96) |
 thpc | [高性能计算平台](https://cloud.tencent.com/document/product/1527) | 2022-04-01(16) | 2021-11-09(4) |
 tia | [智能钛机器学习](https://cloud.tencent.com/document/product/851) | 2018-02-26(10) |
@@ -298,7 +298,7 @@ ticm | [智能鉴黄](https://cloud.tencent.com/document/product/864) | 2018-11-
 tics | [威胁情报云查服务](https://cloud.tencent.com/document/product/1013) | 2018-11-15(4) |
 tiems | [腾讯云 TI 平台 TI-EMS](https://cloud.tencent.com/document/product/1120) | 2019-04-16(25) |
 tiia | [图像分析](https://cloud.tencent.com/document/product/865) | 2019-05-29(23) |
-tione | [腾讯云 TI 平台 TI-ONE](https://cloud.tencent.com/document/product/851) | 2021-11-11(55) | 2019-10-22(23) |
+tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(55) | 2019-10-22(23) |
 tiw | [互动白板](https://cloud.tencent.com/document/product/1137) | 2019-09-19(29) |
 tke | [容器服务](https://cloud.tencent.com/document/product/457) | 2018-05-25(188) |
 tkgdq | 腾讯知识图谱数据查询 | 2019-04-11(3) |

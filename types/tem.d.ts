@@ -2802,7 +2802,7 @@ declare namespace V20201221 {
   }
 }
 
-/** {@link Tem 弹性微服务 TEM} */
+/** {@link Tem 弹性微服务} */
 declare interface Tem {
   (): Versions;
   /** 创建应用 {@link CreateApplicationRequest} {@link CreateApplicationResponse} */
