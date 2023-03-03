@@ -1230,6 +1230,24 @@ declare interface DescribeAutoBackupConfigResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBackupDownloadRestrictionRequest {
+}
+
+declare interface DescribeBackupDownloadRestrictionResponse {
+  /** 下载备份文件的网络限制类型：- NoLimit：不限制，腾讯云内外网均可以下载备份文件。- LimitOnlyIntranet：仅腾讯云自动分配的内网地址可下载备份文件。- Customize：指用户自定义的私有网络可下载备份文件。 */
+  LimitType?: string;
+  /** 该参数仅支持输入 In，表示自定义的**LimitVpc**可以下载备份文件。 */
+  VpcComparisonSymbol?: string;
+  /** 标识自定义的 LimitIp 地址是否可下载备份文件。- In: 自定义的 IP 地址可以下载。- NotIn: 自定义的 IP 不可以下载。 */
+  IpComparisonSymbol?: string;
+  /** 自定义的可下载备份文件的 VPC ID。当参数**LimitType**为**Customize **时，显示该参数。 */
+  LimitVpc?: BackupLimitVpcItem[];
+  /** 自定义的可下载备份文件的 VPC ID。当参数**LimitType**为**Customize **时，显示该参数。 */
+  LimitIp?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBackupUrlRequest {
   /** 实例 ID。 */
   InstanceId: string;
@@ -2136,6 +2154,24 @@ declare interface ModifyAutoBackupConfigResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBackupDownloadRestrictionRequest {
+  /** 下载备份文件的网络限制类型：- NoLimit：不限制，腾讯云内外网均可以下载备份文件。- LimitOnlyIntranet：仅腾讯云自动分配的内网地址可下载备份文件。- Customize：指用户自定义的私有网络可下载备份文件。 */
+  LimitType: string;
+  /** 该参数仅支持输入 In，表示自定义的**LimitVpc**可以下载备份文件。 */
+  VpcComparisonSymbol?: string;
+  /** 标识自定义的 LimitIp 地址是否可下载备份文件。- In: 自定义的 IP 地址可以下载。- NotIn: 自定义的 IP 不可以下载。 */
+  IpComparisonSymbol?: string;
+  /** 自定义的可下载备份文件的 VPC ID。当参数**LimitType**为**Customize **时，需配置该参数。 */
+  LimitVpc?: BackupLimitVpcItem[];
+  /** 自定义的可下载备份文件的 VPC IP 地址。当参数**LimitType**为**Customize **时，需配置该参数。 */
+  LimitIp?: string[];
+}
+
+declare interface ModifyBackupDownloadRestrictionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyConnectionConfigRequest {
   /** 实例的ID，长度在12-36之间。 */
   InstanceId: string;
@@ -2551,6 +2587,8 @@ declare interface Redis {
   DeleteReplicationInstance(data: DeleteReplicationInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReplicationInstanceResponse>;
   /** 获取自动备份配置 {@link DescribeAutoBackupConfigRequest} {@link DescribeAutoBackupConfigResponse} */
   DescribeAutoBackupConfig(data: DescribeAutoBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoBackupConfigResponse>;
+  /** 查询备份文件的下载来源限制 {@link DescribeBackupDownloadRestrictionRequest} {@link DescribeBackupDownloadRestrictionResponse} */
+  DescribeBackupDownloadRestriction(data?: DescribeBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadRestrictionResponse>;
   /** 查询备份Rdb下载地址 {@link DescribeBackupUrlRequest} {@link DescribeBackupUrlResponse} */
   DescribeBackupUrl(data: DescribeBackupUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupUrlResponse>;
   /** 查询Redis实例列表信息 {@link DescribeCommonDBInstancesRequest} {@link DescribeCommonDBInstancesResponse} */
@@ -2643,6 +2681,8 @@ declare interface Redis {
   ModfiyInstancePassword(data: ModfiyInstancePasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModfiyInstancePasswordResponse>;
   /** 设置自动备份配置 {@link ModifyAutoBackupConfigRequest} {@link ModifyAutoBackupConfigResponse} */
   ModifyAutoBackupConfig(data: ModifyAutoBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoBackupConfigResponse>;
+  /** 修改备份文件的下载来源限制 {@link ModifyBackupDownloadRestrictionRequest} {@link ModifyBackupDownloadRestrictionResponse} */
+  ModifyBackupDownloadRestriction(data: ModifyBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupDownloadRestrictionResponse>;
   /** 修改实例连接配置 {@link ModifyConnectionConfigRequest} {@link ModifyConnectionConfigResponse} */
   ModifyConnectionConfig(data: ModifyConnectionConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConnectionConfigResponse>;
   /** 修改云数据库安全组 {@link ModifyDBInstanceSecurityGroupsRequest} {@link ModifyDBInstanceSecurityGroupsResponse} */

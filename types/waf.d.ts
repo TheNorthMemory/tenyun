@@ -866,6 +866,24 @@ declare interface DescribeAccessIndexResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAttackOverviewRequest {
+}
+
+declare interface DescribeAttackOverviewResponse {
+  /** 访问请求总数 */
+  AccessCount: number;
+  /** Web攻击总数 */
+  AttackCount: number;
+  /** 访问控制总数 */
+  ACLCount: number;
+  /** CC攻击总数 */
+  CCCount: number;
+  /** Bot攻击总数 */
+  BotCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAutoDenyIPRequest {
   /** 域名 */
   Domain: string;
@@ -1387,6 +1405,8 @@ declare interface Waf {
   DescribeAccessFastAnalysis(data: DescribeAccessFastAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessFastAnalysisResponse>;
   /** 获取访问日志索引配置信息 {@link DescribeAccessIndexRequest} {@link DescribeAccessIndexResponse} */
   DescribeAccessIndex(data?: DescribeAccessIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessIndexResponse>;
+  /** 攻击总览 {@link DescribeAttackOverviewRequest} {@link DescribeAttackOverviewResponse} */
+  DescribeAttackOverview(data?: DescribeAttackOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackOverviewResponse>;
   /** 描述WAF自动封禁IP详情 {@link DescribeAutoDenyIPRequest} {@link DescribeAutoDenyIPResponse} */
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
   /** 查询单个saas域名详情 {@link DescribeDomainDetailsSaasRequest} {@link DescribeDomainDetailsSaasResponse} */

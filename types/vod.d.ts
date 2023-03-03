@@ -72,7 +72,7 @@ declare interface AccelerateAreaInfo {
 declare interface AdaptiveDynamicStreamingInfoItem {
   /** 转自适应码流规格。 */
   Definition: number;
-  /** 打包格式，只能为 HLS。 */
+  /** 打包格式，取值范围：HLS；DASH。 */
   Package: string;
   /** 加密类型。 */
   DrmType: string;
@@ -82,6 +82,8 @@ declare interface AdaptiveDynamicStreamingInfoItem {
   Size?: number;
   /** 数字水印类型。可选值：Trace 表示经过溯源水印处理；None 表示没有经过数字水印处理。 */
   DigitalWatermarkType?: string;
+  /** 子流信息列表。 */
+  SubStreamSet?: MediaSubStreamInfoItem[];
 }
 
 /** 对视频转自适应码流的输入参数类型 */
@@ -2934,6 +2936,18 @@ declare interface MediaSourceData {
   SourceContext: string;
   /** TRTC 伴生录制信息。 */
   TrtcRecordInfo: TrtcRecordInfo | null;
+}
+
+/** 转自适应码流子流信息。 */
+declare interface MediaSubStreamInfoItem {
+  /** 子流类型，取值范围：audio：纯音频；video：视频（可能包含音频流）。 */
+  Type?: string;
+  /** 当子流为视频流时，视频画面宽度，单位：px。 */
+  Width?: number;
+  /** 当子流为视频流时，视频画面高度，单位：px。 */
+  Height?: number;
+  /** 子流媒体文件大小，单位：Byte。注意：在 2023-02-09T16:00:00Z 前处理生成的自适应码流文件此字段为0。 */
+  Size?: number;
 }
 
 /** 字幕信息。 */
@@ -6323,9 +6337,9 @@ declare interface DescribeMediaInfosRequest {
 
 declare interface DescribeMediaInfosResponse {
   /** 媒体文件信息列表。 */
-  MediaInfoSet: MediaInfo[];
+  MediaInfoSet?: MediaInfo[];
   /** 不存在的文件 ID 列表。 */
-  NotExistFileIdSet: string[];
+  NotExistFileIdSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6640,7 +6654,7 @@ declare interface DescribeTaskDetailRequest {
 }
 
 declare interface DescribeTaskDetailResponse {
-  /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务；ReviewAudioVideo：音视频审核任务。 */
+  /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务。 */
   TaskType?: string;
   /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成。 */
   Status?: string;

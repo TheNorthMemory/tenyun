@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 226+ 款产品，9094+ 服务数</summary>
+<details><summary>共计 226+ 款产品，9096+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -233,7 +233,7 @@ mgobe | [游戏联机对战引擎](https://cloud.tencent.com/document/product/10
 mmps | [小程序安全](https://cloud.tencent.com/document/product/1223) | 2020-07-10(15) |
 mna | [移动网络加速](https://cloud.tencent.com/document/product/1385) | 2021-01-19(13) |
 mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(35) | 2018-04-08(13) |
-monitor | [云监控](https://cloud.tencent.com/document/product/248) | 2018-07-24(149) |
+monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2018-07-24(149) |
 mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(83) |
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(4) |
 ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(17) |
@@ -251,7 +251,7 @@ postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/
 privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(21) |
 pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(43) |
 rce | [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) | 2020-11-03(3) |
-redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(86) |
+redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(88) |
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3) |
 rkp | [风险探针](https://cloud.tencent.com/document/product/1169) | 2019-12-09(3) |
 rp | [注册保护](https://cloud.tencent.com/document/product/1191) | 2020-02-24(1) |
@@ -283,7 +283,7 @@ tcbr | [云托管 CloudBase Run](https://cloud.tencent.com/document/product/1243
 tcex | [腾讯云释义](https://cloud.tencent.com/document/product/1266) | 2020-07-27(2) |
 tci | 腾讯智学课堂分析 | 2019-03-18(41) |
 tcm | [服务网格](https://cloud.tencent.com/document/product/1261) | 2021-04-13(12) |
-tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 2019-09-24(107) |
+tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 2019-09-24(106) |
 tcss | [容器安全服务](https://cloud.tencent.com/document/product/1285) | 2020-11-01(330) |
 tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) | 2021-11-18(25) |
 tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(48) |
@@ -316,7 +316,7 @@ vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 202
 vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-02(2) |
 vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(144) |
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(301) |
-waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(39) |
+waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(40) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(22) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(195) |
 wss | SSL证书管理服务 | 2018-04-26(3) |

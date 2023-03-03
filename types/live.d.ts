@@ -950,7 +950,7 @@ declare interface StreamEventInfo {
   StopReason: string;
   /** 推流持续时长，单位：秒。 */
   Duration: number;
-  /** 主播 IP。 */
+  /** 主播 IP。当客户端为内网推流时，展示为: - 。 */
   ClientIp: string;
   /** 分辨率。 */
   Resolution: string;

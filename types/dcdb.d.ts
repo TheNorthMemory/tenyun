@@ -829,7 +829,7 @@ declare interface CreateDCDBInstanceRequest {
   VpcId?: string;
   /** 虚拟私有网络子网 ID，VpcId不为空时必填 */
   SubnetId?: string;
-  /** 数据库引擎版本，当前可选：8.0.18，10.1.9，5.7.17。8.0.18 - MySQL 8.0.18；10.1.9 - Mariadb 10.1.9；5.7.17 - Percona 5.7.17。如果不填的话，默认为5.7.17，表示Percona 5.7.17。 */
+  /** 数据库引擎版本，当前可选：8.0，5.7，10.1，10.0。 */
   DbVersionId?: string;
   /** 是否自动使用代金券进行支付，默认不使用。 */
   AutoVoucher?: boolean;
@@ -857,9 +857,9 @@ declare interface CreateDCDBInstanceRequest {
 
 declare interface CreateDCDBInstanceResponse {
   /** 长订单号。可以据此调用 DescribeOrders 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。 */
-  DealName: string;
+  DealName?: string;
   /** 订单对应的实例 ID 列表，如果此处没有返回实例 ID，可以通过订单查询接口获取。还可通过实例查询接口查询实例是否创建完成。 */
-  InstanceIds: string[] | null;
+  InstanceIds?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -883,7 +883,7 @@ declare interface CreateHourDCDBInstanceRequest {
   SubnetId?: string;
   /** 分片cpu大小，单位：核，可以通过 DescribeShardSpec 查询实例规格获得。 */
   ShardCpu?: number;
-  /** 数据库引擎版本，当前可选：10.0.10，10.1.9，5.7.17。10.0.10 - Mariadb 10.0.10；10.1.9 - Mariadb 10.1.9；5.7.17 - Percona 5.7.17。如果不填的话，默认为10.1.9，表示Mariadb 10.1.9。 */
+  /** 数据库引擎版本，当前可选：8.0，5.7，10.1，10.0。 */
   DbVersionId?: string;
   /** 分片节点可用区分布，最多可填两个可用区。当分片规格为一主两从时，其中两个节点在第一个可用区。 */
   Zones?: string[];
@@ -911,11 +911,11 @@ declare interface CreateHourDCDBInstanceRequest {
 
 declare interface CreateHourDCDBInstanceResponse {
   /** 订单对应的实例 ID 列表，如果此处没有返回实例 ID，可以通过订单查询接口获取。还可通过实例查询接口查询实例是否创建完成。 */
-  InstanceIds: string[];
+  InstanceIds?: string[];
   /** 流程id，可以根据流程id查询创建进度 */
-  FlowId: number;
+  FlowId?: number;
   /** 订单号。可以据此调用 DescribeOrders 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。 */
-  DealName: string;
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

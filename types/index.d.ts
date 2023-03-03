@@ -745,7 +745,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   mna: Mna,
   /** {@link Mongodb 云数据库 MongoDB} */
   mongodb: Mongodb,
-  /** {@link Monitor 云监控} */
+  /** {@link Monitor 腾讯云可观测平台} */
   monitor: Monitor,
   /** {@link Mps 媒体处理} */
   mps: Mps,

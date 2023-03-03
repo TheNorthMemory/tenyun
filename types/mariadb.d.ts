@@ -701,7 +701,7 @@ declare interface CreateDBInstanceRequest {
   SubnetId?: string;
   /** 项目 ID，可以通过查看项目列表获取，不传则关联到默认项目 */
   ProjectId?: number;
-  /** 数据库引擎版本，当前可选：8.0.18，10.1.9，5.7.17。如果不传的话，默认为 Percona 5.7.17。 */
+  /** 数据库引擎版本，当前可选：8.0，5.7，10.1，10.0。 */
   DbVersionId?: string;
   /** 实例名称， 可以通过该字段自主的设置实例的名字 */
   InstanceName?: string;
@@ -723,9 +723,9 @@ declare interface CreateDBInstanceRequest {
 
 declare interface CreateDBInstanceResponse {
   /** 长订单号。可以据此调用 DescribeOrders 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。 */
-  DealName: string;
+  DealName?: string;
   /** 订单对应的实例 ID 列表，如果此处没有返回实例 ID，可以通过订单查询接口获取。还可通过实例查询接口查询实例是否创建完成。 */
-  InstanceIds: string[] | null;
+  InstanceIds?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -809,7 +809,7 @@ declare interface CreateHourDBInstanceRequest {
   VpcId?: string;
   /** 统一子网ID，VpcId有值时需填写 */
   SubnetId?: string;
-  /** 数据库引擎版本，当前可选：10.0.10，10.1.9，5.7.17。如果不填的话，默认为10.1.9，表示Mariadb 10.1.9。 */
+  /** 数据库引擎版本，当前可选：8.0，5.7，10.1，10.0。 */
   DbVersionId?: string;
   /** 自定义实例名称 */
   InstanceName?: string;
@@ -833,11 +833,11 @@ declare interface CreateHourDBInstanceRequest {
 
 declare interface CreateHourDBInstanceResponse {
   /** 订单号。可以据此调用 DescribeOrders 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。 */
-  DealName: string;
+  DealName?: string;
   /** 订单对应的实例 ID 列表，如果此处没有返回实例 ID，可以通过订单查询接口获取。还可通过实例查询接口查询实例是否创建完成。 */
-  InstanceIds: string[] | null;
+  InstanceIds?: string[] | null;
   /** 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/237/16177)。 */
-  FlowId: number | null;
+  FlowId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

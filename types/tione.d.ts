@@ -2331,7 +2331,7 @@ declare interface DescribeTrainingFrameworksRequest {
 
 declare interface DescribeTrainingFrameworksResponse {
   /** 框架信息列表 */
-  FrameworkInfos: FrameworkInfo[];
+  FrameworkInfos?: FrameworkInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

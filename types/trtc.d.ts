@@ -236,6 +236,10 @@ declare interface McuLayoutVolume {
   AppData?: string;
   /** SEI消息的payload_type，默认值100，取值范围100-254（244除外，244为我们内部自定义的时间戳SEI） */
   PayloadType?: number;
+  /** SEI发送间隔，单位毫秒，默认值为1000。 */
+  Interval?: number | null;
+  /** 取值范围[0,1]，填1：发送关键帧时会确保带SEI；填0：发送关键帧时不确保带SEI。默认值为0。 */
+  FollowIdr?: number | null;
 }
 
 /** 自定义透传SEI */
@@ -246,6 +250,10 @@ declare interface McuPassThrough {
   PayloadType: number;
   /** PayloadType为5，PayloadUuid必须填写。PayloadType不是5时，不需要填写，填写会被后台忽略。该值必须是32长度的十六进制。 */
   PayloadUuid?: string;
+  /** SEI发送间隔，单位毫秒，默认值为1000。 */
+  Interval?: number | null;
+  /** 取值范围[0,1]，填1：发送关键帧时会确保带SEI；填0：发送关键帧时不确保带SEI。默认值为0。 */
+  FollowIdr?: number | null;
 }
 
 /** 转推参数。 */

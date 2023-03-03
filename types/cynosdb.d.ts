@@ -518,6 +518,10 @@ declare interface CynosdbInstance {
   IsFreeze: string | null;
   /** 资源标签 */
   ResourceTags: Tag[] | null;
+  /** 主可用区 */
+  MasterZone?: string | null;
+  /** 备可用区 */
+  SlaveZones?: string[] | null;
 }
 
 /** 实例详情 */
@@ -1799,7 +1803,7 @@ declare interface DescribeInstanceSpecsRequest {
 
 declare interface DescribeInstanceSpecsResponse {
   /** 规格信息 */
-  InstanceSpecSet: InstanceSpec[];
+  InstanceSpecSet?: InstanceSpec[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

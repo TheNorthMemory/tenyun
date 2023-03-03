@@ -1750,28 +1750,6 @@ declare interface DescribeInstanceAllNamespacesResponse {
   RequestId?: string;
 }
 
-declare interface DescribeInstanceAllRequest {
-  /** 实例ID列表(为空时，表示获取账号下所有实例) */
-  Registryids?: string[];
-  /** 偏移量,默认0 */
-  Offset?: number;
-  /** 最大输出条数，默认20，最大为100 */
-  Limit?: number;
-  /** 过滤条件 */
-  Filters?: Filter[];
-  /** 获取所有地域的实例，默认为False */
-  AllRegion?: boolean;
-}
-
-declare interface DescribeInstanceAllResponse {
-  /** 总实例个数 */
-  TotalCount: number;
-  /** 实例信息列表 */
-  Registries: Registry[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeInstanceCustomizedDomainRequest {
   /** 主实例iD */
   RegistryId: string;
@@ -2661,8 +2639,6 @@ declare interface Tcr {
   DescribeImages(data: DescribeImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesResponse>;
   /** 列出镜像不可变规则 {@link DescribeImmutableTagRulesRequest} {@link DescribeImmutableTagRulesResponse} */
   DescribeImmutableTagRules(data: DescribeImmutableTagRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImmutableTagRulesResponse>;
-  /** @deprecated 查询全部实例信息 {@link DescribeInstanceAllRequest} {@link DescribeInstanceAllResponse} */
-  DescribeInstanceAll(data?: DescribeInstanceAllRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAllResponse>;
   /** 查询所有实例命名空间 {@link DescribeInstanceAllNamespacesRequest} {@link DescribeInstanceAllNamespacesResponse} */
   DescribeInstanceAllNamespaces(data?: DescribeInstanceAllNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAllNamespacesResponse>;
   /** 查询实例自定义域名列表 {@link DescribeInstanceCustomizedDomainRequest} {@link DescribeInstanceCustomizedDomainResponse} */

@@ -619,21 +619,23 @@ declare interface GetServiceStatusRequest {
 
 declare interface GetServiceStatusResponse {
   /** KMS服务是否开通， true 表示已开通 */
-  ServiceEnabled: boolean;
+  ServiceEnabled?: boolean;
   /** 服务不可用类型： 0-未购买，1-正常， 2-欠费停服， 3-资源释放 */
-  InvalidType: number | null;
+  InvalidType?: number | null;
   /** 0-普通版，1-旗舰版 */
-  UserLevel: number;
+  UserLevel?: number;
   /** 旗舰版到期时间（Epoch Unix Timestamp）。 */
-  ProExpireTime: number | null;
+  ProExpireTime?: number | null;
   /** 旗舰版是否自动续费：0-不自动续费，1-自动续费 */
-  ProRenewFlag: number | null;
+  ProRenewFlag?: number | null;
   /** 旗舰版购买记录的唯一性标识。如果为开通旗舰版，则返回值为空 */
-  ProResourceId: string | null;
+  ProResourceId?: string | null;
   /** 是否开通 KMS 托管版 */
-  ExclusiveVSMEnabled: boolean | null;
+  ExclusiveVSMEnabled?: boolean | null;
   /** 是否开通 KMS 独享版 */
-  ExclusiveHSMEnabled: boolean | null;
+  ExclusiveHSMEnabled?: boolean | null;
+  /** KMS 订阅信息。 */
+  SubscriptionInfo?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

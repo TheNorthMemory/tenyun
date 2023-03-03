@@ -12,7 +12,7 @@ declare interface AlarmEvent {
   Namespace: string;
 }
 
-/** 通知模版ID及通知等级列表，["Remind","Serious"]表示该通知模板仅接收提醒和严重类别的告警 */
+/** 通知模板ID及通知等级列表，["Remind","Serious"]表示该通知模板仅接收提醒和严重类别的告警 */
 declare interface AlarmHierarchicalNotice {
   /** 通知模板ID */
   NoticeId?: string | null;
@@ -122,7 +122,7 @@ declare interface AlarmNotice {
   AMPConsumerId: string | null;
   /** 推送cls渠道 */
   CLSNotices: CLSNotice[] | null;
-  /** 通知模版绑定的标签 */
+  /** 通知模板绑定的标签 */
   Tags: Tag[] | null;
 }
 
@@ -202,10 +202,12 @@ declare interface AlarmPolicy {
 
 /** 告警策略指标触发条件 */
 declare interface AlarmPolicyCondition {
-  /** 指标触发与或条件，0=或，1=与 */
+  /** 告警触发条件的判断方式. 0: 任意; 1: 全部; 2: 复合. 当取值为2的时候为复合告警，与参数 ComplexExpression 配合使用. */
   IsUnionRule: number | null;
   /** 告警触发条件列表 */
   Rules: AlarmPolicyRule[] | null;
+  /** 复合告警触发条件的判断表达式，当 IsUnionRule 取值为2的时候有效. 其作用是描述多个触发条件需要满足表达式求值为True时才算是满足告警条件. */
+  ComplexExpression?: string | null;
 }
 
 /** 告警策略事件触发条件 */
@@ -380,7 +382,7 @@ declare interface CreatePolicyGroupCondition {
   CalcPeriod?: number;
   /** 持续几个检测周期触发规则会告警 */
   ContinuePeriod?: number;
-  /** 如果通过模版创建，需要传入模版中该指标的对应RuleId */
+  /** 如果通过模板创建，需要传入模板中该指标的对应RuleId */
   RuleId?: number;
 }
 
@@ -392,7 +394,7 @@ declare interface CreatePolicyGroupEventCondition {
   AlarmNotifyType: number;
   /** 告警发送周期单位秒。0 每隔triggerTime秒触发一次 */
   AlarmNotifyPeriod: number;
-  /** 如果通过模版创建，需要传入模版中该指标的对应RuleId */
+  /** 如果通过模板创建，需要传入模板中该指标的对应RuleId */
   RuleId?: number;
 }
 
@@ -536,6 +538,8 @@ declare interface DescribePolicyConditionListCondition {
   SupportDefault: boolean;
   /** 支持该策略类型的地域列表 */
   SupportRegions: string[] | null;
+  /** 弃用信息 */
+  DeprecatingInfo?: DescribePolicyConditionListResponseDeprecatingInfo | null;
 }
 
 /** DescribePolicyConditionList.ConfigManual */
@@ -648,6 +652,16 @@ declare interface DescribePolicyConditionListMetric {
   MetricShowName: string;
   /** 指标单位 */
   MetricUnit: string;
+}
+
+/** DescribePolicyConditionListResponseDeprecatingInfo */
+declare interface DescribePolicyConditionListResponseDeprecatingInfo {
+  /** 是否隐藏 */
+  Hidden?: boolean | null;
+  /** 新视图名称 */
+  NewViewNames?: string[] | null;
+  /** 描述 */
+  Description?: string | null;
 }
 
 /** 查询策略输出的用户回调信息 */
@@ -1322,7 +1336,7 @@ declare interface MonitorTypeNamespace {
   Namespace: string;
 }
 
-/** 通知模版与策略绑定关系 */
+/** 通知模板与策略绑定关系 */
 declare interface NoticeBindPolicys {
   /** 告警通知模板 ID */
   NoticeId?: string;
@@ -2169,7 +2183,7 @@ declare interface CreateAlarmNoticeRequest {
   URLNotices?: URLNotice[];
   /** 推送CLS日志服务的操作 最多1个 */
   CLSNotices?: CLSNotice[];
-  /** 模版绑定的标签 */
+  /** 模板绑定的标签 */
   Tags?: Tag[];
 }
 
@@ -2209,7 +2223,7 @@ declare interface CreateAlarmPolicyRequest {
   Filter?: AlarmPolicyFilter;
   /** 聚合维度列表，指定按哪些维度 key 来做 group by */
   GroupBy?: string[];
-  /** 模版绑定的标签 */
+  /** 模板绑定的标签 */
   Tags?: Tag[];
   /** 日志告警信息 */
   LogAlarmReqInfo?: LogAlarmReq;
@@ -2343,11 +2357,11 @@ declare interface CreatePolicyGroupRequest {
   GroupName: string;
   /** 固定值，为"monitor" */
   Module: string;
-  /** 策略组所属视图的名称，若通过模版创建，可不传入 */
+  /** 策略组所属视图的名称，若通过模板创建，可不传入 */
   ViewName?: string;
   /** 策略组所属项目Id，会进行鉴权操作 */
   ProjectId?: number;
-  /** 模版策略组Id, 通过模版创建时才需要传 */
+  /** 模板策略组Id, 通过模板创建时才需要传 */
   ConditionTempGroupId?: number;
   /** 是否屏蔽策略组，0表示不屏蔽，1表示屏蔽。不填默认为0 */
   IsShielded?: number;
@@ -2359,7 +2373,7 @@ declare interface CreatePolicyGroupRequest {
   Conditions?: CreatePolicyGroupCondition[];
   /** 策略组中的事件告警规则 */
   EventConditions?: CreatePolicyGroupEventCondition[];
-  /** 是否为后端调用。当且仅当值为1时，后台拉取策略模版中的规则填充入Conditions以及EventConditions字段 */
+  /** 是否为后端调用。当且仅当值为1时，后台拉取策略模板中的规则填充入Conditions以及EventConditions字段 */
   BackEndCall?: number;
   /** 指标告警规则的且或关系，0表示或规则(满足任意规则就告警)，1表示且规则(满足所有规则才告警) */
   IsUnionRule?: number;
@@ -2367,7 +2381,7 @@ declare interface CreatePolicyGroupRequest {
 
 declare interface CreatePolicyGroupResponse {
   /** 创建成功的策略组Id */
-  GroupId?: number;
+  GroupId: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2967,7 +2981,7 @@ declare interface DescribeAlarmNoticesRequest {
   GroupIds?: number[];
   /** 根据通知模板 id 过滤，空数组/不传则不过滤 */
   NoticeIds?: string[];
-  /** 模版根据标签过滤 */
+  /** 模板根据标签过滤 */
   Tags?: Tag[];
 }
 
@@ -3513,15 +3527,15 @@ declare interface DescribePolicyGroupListResponse {
 declare interface DescribeProductEventListRequest {
   /** 接口模块名，固定值"monitor" */
   Module: string;
-  /** 产品类型过滤，比如"cvm"表示云服务器 */
+  /** 产品类型过滤，例如"cvm"表示云服务器 */
   ProductName?: string[];
-  /** 事件名称过滤，比如"guest_reboot"表示机器重启 */
+  /** 事件名称过滤，例如"guest_reboot"表示机器重启 */
   EventName?: string[];
-  /** 影响对象，比如"ins-19708ino" */
+  /** 影响对象，例如"ins-19708ino" */
   InstanceId?: string[];
-  /** 维度过滤，比如外网IP:10.0.0.1 */
+  /** 维度过滤，例如外网IP:10.0.0.1 */
   Dimensions?: DescribeProductEventListDimensions[];
-  /** 产品事件地域过滤参数，比如gz，各地域缩写可参见[地域列表](https://cloud.tencent.com/document/product/248/50863) */
+  /** 产品事件地域过滤参数，例如gz，各地域缩写可参见[地域列表](https://cloud.tencent.com/document/product/248/50863) */
   RegionList?: string[];
   /** 事件类型过滤，取值范围["status_change","abnormal"]，分别表示状态变更、异常事件 */
   Type?: string[];
@@ -3656,6 +3670,14 @@ declare interface DescribePrometheusConfigRequest {
 }
 
 declare interface DescribePrometheusConfigResponse {
+  /** 全局配置 */
+  Config?: string;
+  /** ServiceMonitor配置 */
+  ServiceMonitors?: PrometheusConfigItem[];
+  /** PodMonitor配置 */
+  PodMonitors?: PrometheusConfigItem[];
+  /** 原生Job */
+  RawJobs?: PrometheusConfigItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4808,7 +4830,7 @@ declare interface UpgradeGrafanaInstanceResponse {
   RequestId?: string;
 }
 
-/** {@link Monitor 云监控} */
+/** {@link Monitor 腾讯云可观测平台} */
 declare interface Monitor {
   (): Versions;
   /** 绑定 Grafana 可视化服务实例 {@link BindPrometheusManagedGrafanaRequest} {@link BindPrometheusManagedGrafanaResponse} */

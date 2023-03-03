@@ -822,6 +822,8 @@ declare interface LoadBalancerTraffic {
   Vip: string;
   /** 最大出带宽，单位：Mbps */
   OutBandwidth: number;
+  /** CLB域名 */
+  Domain: string | null;
 }
 
 /** CLB监听器或规则绑定的多证书信息 */
@@ -1935,7 +1937,7 @@ declare interface DescribeLoadBalancerTrafficRequest {
 
 declare interface DescribeLoadBalancerTrafficResponse {
   /** 按出带宽从高到低排序后的负载均衡信息。 */
-  LoadBalancerTraffic: LoadBalancerTraffic[] | null;
+  LoadBalancerTraffic?: LoadBalancerTraffic[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

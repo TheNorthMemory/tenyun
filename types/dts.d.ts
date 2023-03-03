@@ -682,15 +682,15 @@ declare interface StepInfo {
   StepName?: string | null;
   /** 步骤标号 */
   StepId?: string | null;
-  /** 当前状态，是否完成 */
+  /** 当前步骤状态,可能返回有 notStarted(未开始)、running(校验中)、failed(校验任务失败)、finished(完成)、skipped(跳过)、paused(暂停) */
   Status?: string | null;
-  /** 步骤开始时间 */
+  /** 步骤开始时间，可能为空 */
   StartTime?: string | null;
   /** 错误信息 */
   Errors?: StepTip[] | null;
   /** 警告信息 */
   Warnings?: StepTip[] | null;
-  /** 当前步骤进度 */
+  /** 当前步骤进度，范围为[0-100] */
   Progress?: number | null;
 }
 
@@ -1055,21 +1055,21 @@ declare interface DeleteCompareTaskResponse {
 }
 
 declare interface DescribeCheckSyncJobResultRequest {
-  /** 同步任务id */
+  /** 同步实例id（即标识一个同步作业），形如sync-werwfs23，此值必填 */
   JobId?: string;
 }
 
 declare interface DescribeCheckSyncJobResultResponse {
-  /** 校验结果 */
-  Status: string | null;
+  /** 校验任务执行状态，如：notStarted(未开始)、running(校验中)、failed(校验任务失败)、success(任务成功) */
+  Status?: string | null;
   /** 步骤总数 */
-  StepCount: number | null;
+  StepCount?: number | null;
   /** 当前所在步骤 */
-  StepCur: number | null;
-  /** 总体进度 */
-  Progress: number | null;
+  StepCur?: number | null;
+  /** 总体进度，范围为[0,100] */
+  Progress?: number | null;
   /** 步骤信息 */
-  StepInfos: StepInfo[] | null;
+  StepInfos?: StepInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
