@@ -6,11 +6,11 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 declare interface Agent {
   /** 应用的唯一标识。不同的业务系统可以采用不同的AppId，不同AppId下的数据是隔离的。可以由控制台开发者中心-应用集成自主生成。 */
   AppId: string;
-  /** 渠道平台自定义，对于渠道子客企业的唯一标识。一个渠道子客企业主体与子客企业ProxyOrganizationOpenId是一一对应的，不可更改，不可重复使用。（例如，可以使用企业名称的hash值，或者社会统一信用代码的hash值，或者随机hash值，需要渠道平台保存），最大64位字符串 */
+  /** 第三方应用平台自定义，对应第三方平台子客企业的唯一标识。一个第三方平台子客企业主体与子客企业ProxyOrganizationOpenId是一一对应的，不可更改，不可重复使用。（例如，可以使用企业名称的hash值，或者社会统一信用代码的hash值，或者随机hash值，需要第三方应用平台保存），最大64位字符串 */
   ProxyOrganizationOpenId?: string;
-  /** 渠道子客企业中的员工/经办人，通过渠道平台进入电子签完成实名、且被赋予相关权限后，可以参与到企业资源的管理或签署流程中。 */
+  /** 第三方平台子客企业中的员工/经办人，通过第三方应用平台进入电子签完成实名、且被赋予相关权限后，可以参与到企业资源的管理或签署流程中。 */
   ProxyOperator?: UserInfo;
-  /** 在子客企业开通电子签后，会生成唯一的子客应用Id（ProxyAppId）用于代理调用时的鉴权，在子客开通的回调中获取。 */
+  /** 在第三方平台子客企业开通电子签后，会生成唯一的子客应用Id（ProxyAppId）用于代理调用时的鉴权，在子客开通的回调中获取。 */
   ProxyAppId?: string;
   /** 内部参数，暂未开放使用 */
   ProxyOrganizationId?: string;
@@ -94,7 +94,7 @@ declare interface Component {
   OffsetX?: number;
   /** 指定关键字时纵坐标偏移量，单位pt */
   OffsetY?: number;
-  /** 渠道控件ID。如果不为空，属于渠道预设控件； */
+  /** 平台企业控件ID。如果不为空，属于平台企业预设控件； */
   ChannelComponentId?: string;
   /** 指定关键字排序规则，Positive-正序，Reverse-倒序。传入Positive时会根据关键字在PDF文件内的顺序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的第一个关键字。传入Reverse时会根据关键字在PDF文件内的反序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的最后一个关键字。 */
   KeywordOrder?: string;
@@ -106,7 +106,7 @@ declare interface Component {
   KeywordIndexes?: number[];
 }
 
-/** 渠道版员工部门信息 */
+/** 第三方应用集成员工部门信息 */
 declare interface Department {
   /** 部门id */
   DepartmentId: string | null;
@@ -148,11 +148,11 @@ declare interface Filter {
 declare interface FlowApproverDetail {
   /** 模板配置时候的签署人id,与控件绑定 */
   ReceiptId: string;
-  /** 渠道侧企业的第三方id */
+  /** 平台企业的第三方id */
   ProxyOrganizationOpenId: string | null;
-  /** 渠道侧企业操作人的第三方id */
+  /** 平台企业操作人的第三方id */
   ProxyOperatorOpenId: string;
-  /** 渠道侧企业名称 */
+  /** 平台企业名称 */
   ProxyOrganizationName: string;
   /** 签署人手机号 */
   Mobile: string;
@@ -170,7 +170,7 @@ declare interface FlowApproverDetail {
   ApproveType: string | null;
 }
 
-/** 创建签署流程签署人入参。其中签署方FlowApproverInfo需要传递的参数非单C、单B、B2C合同，ApproverType、RecipientId（模板发起合同时）必传，建议都传。其他身份标识1-个人：Name、Mobile必传2-渠道子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；3-渠道合作企业不指定经办人：OrgName必传、OrgOpenId必传；4-非渠道合作企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。RecipientId参数：从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId */
+/** 创建签署流程签署人入参。其中签署方FlowApproverInfo需要传递的参数非单C、单B、B2C合同，ApproverType、RecipientId（模板发起合同时）必传，建议都传。其他身份标识1-个人：Name、Mobile必传2-第三方平台子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；3-第三方平台子客企业不指定经办人：OrgName必传、OrgOpenId必传；4-非第三方平台子客企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。RecipientId参数：从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId */
 declare interface FlowApproverInfo {
   /** 签署人姓名，最大长度50个字符 */
   Name?: string;
@@ -182,11 +182,11 @@ declare interface FlowApproverInfo {
   Mobile?: string;
   /** 企业签署方工商营业执照上的企业名称，签署方为非发起方企业场景下必传，最大长度64个字符； */
   OrganizationName?: string;
-  /** 指定签署人非渠道企业下员工，在ApproverType为ORGANIZATION时指定。默认为false，即签署人位于同一个渠道应用号下； */
+  /** 指定签署人非第三方平台子客企业下员工，在ApproverType为ORGANIZATION时指定。默认为false，即签署人位于同一个第三方平台应用号下；默认为false，即签署人位于同一个第三方应用号下； */
   NotChannelOrganization?: boolean;
-  /** 用户侧第三方id，最大长度64个字符当签署方为同一渠道下的员工时，该字段若不指定，则发起【待领取】的流程 */
+  /** 用户侧第三方id，最大长度64个字符当签署方为同一第三方平台下的员工时，该字段若不指定，则发起【待领取】的流程 */
   OpenId?: string;
-  /** 企业签署方在同一渠道下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符； */
+  /** 企业签署方在同一第三方平台应用下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符； */
   OrganizationOpenId?: string;
   /** 签署人类型PERSON-个人/自然人；PERSON_AUTO_SIGN-个人自动签（定制化场景下使用）；ORGANIZATION-企业（企业签署方或模板发起时的企业静默签）；ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。 */
   ApproverType?: string;
@@ -260,7 +260,7 @@ declare interface FlowFileInfo {
   FlowType?: string;
   /** 签署流程回调地址，长度不超过255个字符 */
   CallbackUrl?: string;
-  /** 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN */
+  /** 第三方应用的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN */
   CustomerData?: string;
   /** 合同签署顺序类型(无序签,顺序签)，默认为false，即有序签署 */
   Unordered?: boolean;
@@ -270,7 +270,7 @@ declare interface FlowFileInfo {
   NeedSignReview?: boolean;
 }
 
-/** 此结构体 (FlowInfo) 用于描述签署流程信息。【数据表格传参说明】当模板的 ComponentType='DYNAMIC_TABLE'时（渠道版或集成版），FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）输入示例1：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例2（表格表头宽度比例配置）：```{ "headers":[ { "content":"head1", "widthPercent": 30 }, { "content":"head2", "widthPercent": 30 }, { "content":"head3", "widthPercent": 40 } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 |表格参数headers说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || widthPercent | Integer | 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35 || content | String | 表头单元格内容，字数不超过100 | */
+/** 此结构体 (FlowInfo) 用于描述签署流程信息。【数据表格传参说明】当模板的 ComponentType='DYNAMIC_TABLE'时（ 第三方应用集成或集成版），FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）输入示例1：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例2（表格表头宽度比例配置）：```{ "headers":[ { "content":"head1", "widthPercent": 30 }, { "content":"head2", "widthPercent": 30 }, { "content":"head3", "widthPercent": 40 } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 |表格参数headers说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || widthPercent | Integer | 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35 || content | String | 表头单元格内容，字数不超过100 | */
 declare interface FlowInfo {
   /** 合同名字，最大长度200个字符 */
   FlowName: string;
@@ -288,7 +288,7 @@ declare interface FlowInfo {
   FlowType?: string;
   /** 合同描述，最大长度1000个字符 */
   FlowDescription?: string;
-  /** 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN */
+  /** 第三方应用平台的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN */
   CustomerData?: string;
   /** 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始 */
   CustomShowMap?: string;
@@ -390,7 +390,7 @@ declare interface PdfVerifyResult {
 
 /** 合作企业经办人列表信息 */
 declare interface ProxyOrganizationOperator {
-  /** 对应Agent-ProxyOperator-OpenId。渠道平台自定义，对渠道子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（例如，可以使用经办人企业名+员工身份证的hash值，需要渠道平台保存），最大64位字符串 */
+  /** 对应Agent-ProxyOperator-OpenId。第三方应用平台自定义，对子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（例如，可以使用经办人企业名+员工身份证的hash值，需要第三方应用平台保存），最大64位字符串 */
   Id: string;
   /** 经办人姓名，最大长度50个字符 */
   Name?: string;
@@ -400,6 +400,8 @@ declare interface ProxyOrganizationOperator {
   IdCardNumber?: string;
   /** 经办人手机号，大陆手机号输入11位，暂不支持海外手机号。 */
   Mobile?: string;
+  /** 默认角色，值为以下三个对应的英文：业务管理员：admin经办人：channel-normal-operator业务员：channel-sales-man */
+  DefaultRole?: string | null;
 }
 
 /** 签署参与者信息 */
@@ -556,7 +558,7 @@ declare interface Staff {
   QuiteJob: number;
 }
 
-/** 渠道版员工角色信息 */
+/** 第三方应用集成员工角色信息 */
 declare interface StaffRole {
   /** 角色id */
   RoleId: string | null;
@@ -604,13 +606,13 @@ declare interface TemplateInfo {
   CreatedOn: number;
   /** 模板的H5预览链接,可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。 */
   PreviewUrl: string | null;
-  /** 渠道版-模板PDF文件链接 */
+  /** 第三方应用集成-模板PDF文件链接 */
   PdfUrl: string | null;
-  /** 关联的渠道模板ID */
+  /** 关联的平台企业模板ID */
   ChannelTemplateId: string;
-  /** 关联的渠道模板名称 */
+  /** 关联的平台企业模板名称 */
   ChannelTemplateName: string | null;
-  /** 0-需要渠道子客手动领取渠道的模板(默认); 1-渠道自动设置子客模板 */
+  /** 0-需要子客企业手动领取平台企业的模板(默认); 1-平台自动设置子客模板 */
   ChannelAutoSave: number | null;
   /** 模板版本，全数字字符。默认为空，初始版本为yyyyMMdd001。 */
   TemplateVersion: string | null;
@@ -626,9 +628,9 @@ declare interface UploadFile {
 
 /** 用量明细 */
 declare interface UsageDetail {
-  /** 渠道侧合作企业唯一标识 */
+  /** 子客企业唯一标识 */
   ProxyOrganizationOpenId: string;
-  /** 渠道侧合作企业名 */
+  /** 子客企业名 */
   ProxyOrganizationName: string | null;
   /** 日期，当需要汇总数据时日期为空 */
   Date: string | null;
@@ -642,7 +644,7 @@ declare interface UsageDetail {
 
 /** 接口调用者信息 */
 declare interface UserInfo {
-  /** 渠道平台自定义，对渠道子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（例如，可以使用经办人企业名+员工身份证的hash值，需要渠道平台保存），最大64位字符串 */
+  /** 第三方应用平台自定义，对应第三方平台子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（例如，可以使用经办人企业名+员工身份证的hash值，需要第三方应用平台保存），最大64位字符串 */
   OpenId?: string;
   /** 内部参数，暂未开放使用 */
   Channel?: string;
@@ -785,7 +787,7 @@ declare interface ChannelCreateFlowByFilesRequest {
   FlowDescription?: string;
   /** 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始 */
   CustomShowMap?: string;
-  /** 渠道的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN */
+  /** 业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN */
   CustomerData?: string;
   /** 发起方企业的签署人进行签署操作是否需要企业内部审批。 若设置为true,审核结果需通过接口 ChannelCreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。 注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。 */
   NeedSignReview?: boolean;
@@ -893,7 +895,7 @@ declare interface ChannelCreateMultiFlowSignQRCodeRequest {
   QrEffectiveDay?: number;
   /** 限制二维码用户条件 */
   Restrictions?: ApproverRestriction[];
-  /** 回调地址，最大长度1000个字符不传默认使用渠道应用号配置的回调地址回调时机:用户通过签署二维码发起合同时，企业额度不足导致失败 */
+  /** 回调地址，最大长度1000个字符不传默认使用第三方应用号配置的回调地址回调时机:用户通过签署二维码发起合同时，企业额度不足导致失败 */
   CallbackUrl?: string;
   /** 限制二维码用户条件（已弃用） */
   ApproverRestrictions?: ApproverRestriction;
@@ -1156,7 +1158,7 @@ declare interface CreateFlowsByTemplatesRequest {
 declare interface CreateFlowsByTemplatesResponse {
   /** 多个合同ID */
   FlowIds?: string[];
-  /** 渠道的业务信息，限制1024字符 */
+  /** 业务信息，限制1024字符 */
   CustomerData?: string[];
   /** 创建消息，对应多个合同ID，成功为“”,创建失败则对应失败消息 */
   ErrorMessages?: string[];
@@ -1195,17 +1197,17 @@ declare interface CreateSignUrlsRequest {
   FlowGroupId?: string;
   /** 签署链接类型：“WEIXINAPP”-短链直接跳小程序；“CHANNEL”-跳转H5页面；“APP”-第三方APP或小程序跳转电子签小程序；"LONGURL2WEIXINAPP"-长链接跳转小程序；默认“WEIXINAPP”类型，即跳转至小程序； */
   Endpoint?: string;
-  /** 签署链接生成类型，默认是 "ALL"；"ALL"：全部签署方签署链接，此时不会给自动签署的签署方创建签署链接；"CHANNEL"：渠道合作企业；"NOT_CHANNEL"：非渠道合作企业；"PERSON"：个人；"FOLLOWER"：关注方，目前是合同抄送方； */
+  /** 签署链接生成类型，默认是 "ALL"；"ALL"：全部签署方签署链接，此时不会给自动签署的签署方创建签署链接；"CHANNEL"：第三方平台子客企业企业；"NOT_CHANNEL"：非第三方平台子客企业企业；"PERSON"：个人；"FOLLOWER"：关注方，目前是合同抄送方； */
   GenerateType?: string;
-  /** 非渠道合作企业参与方的企业名称，GenerateType为"NOT_CHANNEL"时必填 */
+  /** 非第三方平台子客企业参与方的企业名称，GenerateType为"NOT_CHANNEL"时必填 */
   OrganizationName?: string;
   /** 参与人姓名，GenerateType为"PERSON"时必填 */
   Name?: string;
   /** 参与人手机号；GenerateType为"PERSON"或"FOLLOWER"时必填 */
   Mobile?: string;
-  /** 渠道合作企业的企业Id，GenerateType为"CHANNEL"时必填 */
+  /** 第三方平台子客企业的企业OpenId，GenerateType为"CHANNEL"时必填 */
   OrganizationOpenId?: string;
-  /** 渠道合作企业参与人OpenId，GenerateType为"CHANNEL"时可用，指定到具体参与人, 仅展示已经实名的经办人信息 */
+  /** 第三方平台子客企业参与人OpenId，GenerateType为"CHANNEL"时可用，指定到具体参与人, 仅展示已经实名的经办人信息 */
   OpenId?: string;
   /** Endpoint为"APP" 类型的签署链接，可以设置此值；支持调用方小程序打开签署链接，在电子签小程序完成签署后自动回跳至调用方小程序 */
   AutoJumpBack?: boolean;
@@ -1266,9 +1268,9 @@ declare interface DescribeFlowDetailInfoRequest {
 }
 
 declare interface DescribeFlowDetailInfoResponse {
-  /** 渠道侧应用号Id */
+  /** 第三方平台应用号Id */
   ApplicationId?: string;
-  /** 渠道侧企业第三方Id */
+  /** 第三方平台子客企业OpenId */
   ProxyOrganizationOpenId?: string;
   /** 合同(签署流程)的具体详细描述信息 */
   FlowInfo?: FlowDetailInfo[] | null;
@@ -1317,9 +1319,9 @@ declare interface DescribeTemplatesRequest {
   Operator?: UserInfo;
   /** 是否获取模板预览链接 */
   WithPreviewUrl?: boolean;
-  /** 是否获取模板的PDF文件链接-渠道版需要开启白名单时才能使用。 */
+  /** 是否获取模板的PDF文件链接- 第三方应用集成需要开启白名单时才能使用。 */
   WithPdfUrl?: boolean;
-  /** 渠道模板ID */
+  /** 模板ID */
   ChannelTemplateId?: string;
 }
 
@@ -1343,7 +1345,7 @@ declare interface DescribeUsageRequest {
   StartDate: string;
   /** 结束时间，例如：2021-06-21；开始时间到结束时间的区间长度小于等于90天。 */
   EndDate: string;
-  /** 是否汇总数据，默认不汇总。不汇总：返回在统计区间内渠道下所有企业的每日明细，即每个企业N条数据，N为统计天数；汇总：返回在统计区间内渠道下所有企业的汇总后数据，即每个企业一条数据； */
+  /** 是否汇总数据，默认不汇总。不汇总：返回在统计区间内第三方平台下所有企业的每日明细，即每个企业N条数据，N为统计天数；汇总：返回在统计区间内第三方平台下所有企业的汇总后数据，即每个企业一条数据； */
   NeedAggregate?: boolean;
   /** 单次返回的最多条目数量。默认为1000，且不能超过1000。 */
   Limit?: number;
@@ -1399,7 +1401,7 @@ declare interface OperateChannelTemplateRequest {
   Agent: Agent;
   /** 操作类型，查询:"SELECT"，删除:"DELETE"，更新:"UPDATE" */
   OperateType: string;
-  /** 渠道方模板库模板唯一标识 */
+  /** 第三方应用平台模板库模板唯一标识 */
   TemplateId: string;
   /** 合作企业方第三方机构唯一标识数据，支持多个， 用","进行分隔 */
   ProxyOrganizationOpenIds?: string;
@@ -1410,9 +1412,9 @@ declare interface OperateChannelTemplateRequest {
 }
 
 declare interface OperateChannelTemplateResponse {
-  /** 腾讯电子签颁发给渠道的应用ID */
+  /** 腾讯电子签颁发给第三方应用平台的应用ID */
   AppId?: string | null;
-  /** 渠道方模板库模板唯一标识 */
+  /** 第三方应用平台模板库模板唯一标识 */
   TemplateId?: string | null;
   /** 全部成功-"all-success",部分成功-"part-success", 全部失败-"fail"失败的会在FailMessageList中展示 */
   OperateResult?: string | null;
@@ -1467,13 +1469,13 @@ declare interface SyncProxyOrganizationOperatorsResponse {
 declare interface SyncProxyOrganizationRequest {
   /** 应用信息此接口Agent.AppId、Agent.ProxyOrganizationOpenId必填 */
   Agent: Agent;
-  /** 渠道侧合作企业名称，最大长度64个字符 */
+  /** 第三方平台子客企业名称，最大长度64个字符 */
   ProxyOrganizationName: string;
   /** 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M */
   BusinessLicense?: string;
-  /** 渠道侧合作企业统一社会信用代码，最大长度200个字符 */
+  /** 第三方平台子客企业统一社会信用代码，最大长度200个字符 */
   UniformSocialCreditCode?: string;
-  /** 渠道侧合作企业法人/负责人姓名 */
+  /** 第三方平台子客企业法人/负责人姓名 */
   ProxyLegalName?: string;
   /** 暂未开放 */
   Operator?: UserInfo;
@@ -1485,7 +1487,7 @@ declare interface SyncProxyOrganizationResponse {
 }
 
 declare interface UploadFilesRequest {
-  /** 应用相关信息，若是渠道版调用 appid 和proxyappid 必填 */
+  /** 应用相关信息，若是第三方应用集成调用 appid 和proxyappid 必填 */
   Agent: Agent;
   /** 文件对应业务类型1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html */
   BusinessType: string;
@@ -1497,11 +1499,11 @@ declare interface UploadFilesRequest {
 
 declare interface UploadFilesResponse {
   /** 文件id数组，有效期一个小时；有效期内此文件id可以反复使用 */
-  FileIds: string[];
+  FileIds?: string[];
   /** 上传成功文件数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 文件Url */
-  FileUrls: string[];
+  FileUrls?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3085,7 +3087,7 @@ declare interface Essbasic {
   CreateConsoleLoginUrl(data: CreateConsoleLoginUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleLoginUrlResponse>;
   /** 使用多个模板批量创建签署流程 {@link CreateFlowsByTemplatesRequest} {@link CreateFlowsByTemplatesResponse} */
   CreateFlowsByTemplates(data: CreateFlowsByTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowsByTemplatesResponse>;
-  /** 渠道通过图片为子客代创建印章 {@link CreateSealByImageRequest} {@link CreateSealByImageResponse} */
+  /** 通过图片为子客企业代创建印章 {@link CreateSealByImageRequest} {@link CreateSealByImageResponse} */
   CreateSealByImage(data: CreateSealByImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealByImageResponse>;
   /** 获取跳转小程序查看或签署链接 {@link CreateSignUrlsRequest} {@link CreateSignUrlsResponse} */
   CreateSignUrls(data: CreateSignUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSignUrlsResponse>;
@@ -3099,13 +3101,13 @@ declare interface Essbasic {
   DescribeResourceUrlsByFlows(data: DescribeResourceUrlsByFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceUrlsByFlowsResponse>;
   /** 查询模板信息列表 {@link DescribeTemplatesRequest} {@link DescribeTemplatesResponse} */
   DescribeTemplates(data: DescribeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplatesResponse>;
-  /** 渠道合同用量查询 {@link DescribeUsageRequest} {@link DescribeUsageResponse} */
+  /** 合同用量查询 {@link DescribeUsageRequest} {@link DescribeUsageResponse} */
   DescribeUsage(data: DescribeUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageResponse>;
   /** 获取合同（流程）批量下载链接 {@link GetDownloadFlowUrlRequest} {@link GetDownloadFlowUrlResponse} */
   GetDownloadFlowUrl(data: GetDownloadFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetDownloadFlowUrlResponse>;
   /** 修改企业扩展服务 {@link ModifyExtendedServiceRequest} {@link ModifyExtendedServiceResponse} */
   ModifyExtendedService(data: ModifyExtendedServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExtendedServiceResponse>;
-  /** 操作渠道企业模板 {@link OperateChannelTemplateRequest} {@link OperateChannelTemplateResponse} */
+  /** 操作第三方应用平台企业模板 {@link OperateChannelTemplateRequest} {@link OperateChannelTemplateResponse} */
   OperateChannelTemplate(data: OperateChannelTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<OperateChannelTemplateResponse>;
   /** 准备待发起文件 {@link PrepareFlowsRequest} {@link PrepareFlowsResponse} */
   PrepareFlows(data: PrepareFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<PrepareFlowsResponse>;

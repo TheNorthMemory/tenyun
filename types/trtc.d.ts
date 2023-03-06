@@ -1495,7 +1495,7 @@ declare interface Trtc {
   DescribeCallDetailInfo(data: DescribeCallDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallDetailInfoResponse>;
   /** 查询云端录制状态 {@link DescribeCloudRecordingRequest} {@link DescribeCloudRecordingResponse} */
   DescribeCloudRecording(data: DescribeCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRecordingResponse>;
-  /** 查询音视频用量计费时长（旧） {@link DescribeExternalTrtcMeasureRequest} {@link DescribeExternalTrtcMeasureResponse} */
+  /** @deprecated 查询音视频用量计费时长（旧） {@link DescribeExternalTrtcMeasureRequest} {@link DescribeExternalTrtcMeasureResponse} */
   DescribeExternalTrtcMeasure(data: DescribeExternalTrtcMeasureRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExternalTrtcMeasureResponse>;
   /** 查询TRTC混流转码用量 {@link DescribeMixTranscodingUsageRequest} {@link DescribeMixTranscodingUsageResponse} */
   DescribeMixTranscodingUsage(data: DescribeMixTranscodingUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMixTranscodingUsageResponse>;

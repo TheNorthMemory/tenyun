@@ -82,6 +82,22 @@ declare interface AuthorizedUser {
   UserId: string;
 }
 
+/** 自动签开启、签署相关配置 */
+declare interface AutoSignConfig {
+  /** 自动签开通个人用户的三要素 */
+  UserInfo: UserThreeFactor | null;
+  /** 回调链接 */
+  CallbackUrl: string | null;
+  /** 是否回调证书信息 */
+  CertInfoCallback?: boolean | null;
+  /** 是否支持用户自定义签名印章 */
+  UserDefineSeal?: boolean | null;
+  /** 是否需要回调的时候返回印章(签名) 图片的 base64 */
+  SealImgCallback?: boolean | null;
+  /** 开通时候的验证方式，取值：WEIXINAPP（微信人脸识别），INSIGHT（慧眼人脸认别），TELECOM（运营商三要素验证）。如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。如果是 H5 开通链接，支持传 INSIGHT / TELECOM。默认值 WEIXINAPP / INSIGHT。 */
+  VerifyChannels?: string[] | null;
+}
+
 /** 此结构体 (Caller) 用于描述调用方属性。 */
 declare interface Caller {
   /** 应用号 */
@@ -654,6 +670,16 @@ declare interface UserInfo {
   ProxyIp?: string;
 }
 
+/** 用户的三要素：姓名，证件号，证件类型 */
+declare interface UserThreeFactor {
+  /** 姓名 */
+  Name: string | null;
+  /** 证件类型: ID_CARD 身份证HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证) */
+  IdCardType: string | null;
+  /** 证件号，如果有 X 请大写 */
+  IdCardNumber: string | null;
+}
+
 declare interface CancelFlowRequest {
   /** 调用方用户信息，userId 必填 */
   Operator: UserInfo;
@@ -1052,6 +1078,34 @@ declare interface CreateSealPolicyResponse {
   RequestId?: string;
 }
 
+declare interface CreateUserAutoSignEnableUrlRequest {
+  /** 操作人信息 */
+  Operator: UserInfo;
+  /** 自动签场景:E_PRESCRIPTION_AUTO_SIGN 电子处方 */
+  SceneKey: string;
+  /** 自动签开通，签署相关配置 */
+  AutoSignConfig: AutoSignConfig;
+  /** 链接类型，空-默认小程序端链接，H5SIGN-h5端链接 */
+  UrlType?: string;
+}
+
+declare interface CreateUserAutoSignEnableUrlResponse {
+  /** 跳转短链 */
+  Url?: string;
+  /** 小程序AppId */
+  AppId?: string;
+  /** 小程序 原始 Id */
+  AppOriginalId?: string;
+  /** 跳转路径 */
+  Path?: string;
+  /** base64格式跳转二维码 */
+  QrCode?: string;
+  /** 链接类型，空-默认小程序端链接，H5SIGN-h5端链接 */
+  UrlType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteIntegrationEmployeesRequest {
   /** 操作人信息，userId必填 */
   Operator: UserInfo;
@@ -1304,6 +1358,36 @@ declare interface DescribeThirdPartyAuthCodeResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserAutoSignStatusRequest {
+  /** 操作人信息 */
+  Operator: UserInfo;
+  /** 自动签场景:E_PRESCRIPTION_AUTO_SIGN 电子处方 */
+  SceneKey: string;
+  /** 查询开启状态的用户信息 */
+  UserInfo: UserThreeFactor;
+}
+
+declare interface DescribeUserAutoSignStatusResponse {
+  /** 是否开通 */
+  IsOpen?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DisableUserAutoSignRequest {
+  /** 操作人信息 */
+  Operator: UserInfo;
+  /** 自动签场景:E_PRESCRIPTION_AUTO_SIGN 电子处方 */
+  SceneKey: string;
+  /** 关闭自动签的个人的三要素 */
+  UserInfo: UserThreeFactor;
+}
+
+declare interface DisableUserAutoSignResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetTaskResultApiRequest {
   /** 任务Id，通过CreateConvertTaskApi得到 */
   TaskId: string;
@@ -1435,6 +1519,8 @@ declare interface Ess {
   CreateSchemeUrl(data: CreateSchemeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchemeUrlResponse>;
   /** 印章授权 {@link CreateSealPolicyRequest} {@link CreateSealPolicyResponse} */
   CreateSealPolicy(data: CreateSealPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealPolicyResponse>;
+  /** 获取个人用户自动签开启链接 {@link CreateUserAutoSignEnableUrlRequest} {@link CreateUserAutoSignEnableUrlResponse} */
+  CreateUserAutoSignEnableUrl(data: CreateUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserAutoSignEnableUrlResponse>;
   /** 移除员工 {@link DeleteIntegrationEmployeesRequest} {@link DeleteIntegrationEmployeesResponse} */
   DeleteIntegrationEmployees(data: DeleteIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationEmployeesResponse>;
   /** 撤销员工的印章权限 {@link DeleteSealPoliciesRequest} {@link DeleteSealPoliciesResponse} */
@@ -1459,6 +1545,10 @@ declare interface Ess {
   DescribeOrganizationSeals(data: DescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationSealsResponse>;
   /** 通过AuthCode查询用户是否实名 {@link DescribeThirdPartyAuthCodeRequest} {@link DescribeThirdPartyAuthCodeResponse} */
   DescribeThirdPartyAuthCode(data: DescribeThirdPartyAuthCodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThirdPartyAuthCodeResponse>;
+  /** 查询个人用户开通自动签状态 {@link DescribeUserAutoSignStatusRequest} {@link DescribeUserAutoSignStatusResponse} */
+  DescribeUserAutoSignStatus(data: DescribeUserAutoSignStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserAutoSignStatusResponse>;
+  /** 关闭个人自动签功能 {@link DisableUserAutoSignRequest} {@link DisableUserAutoSignResponse} */
+  DisableUserAutoSign(data: DisableUserAutoSignRequest, config?: AxiosRequestConfig): AxiosPromise<DisableUserAutoSignResponse>;
   /** 查询转换任务状态 {@link GetTaskResultApiRequest} {@link GetTaskResultApiResponse} */
   GetTaskResultApi(data: GetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskResultApiResponse>;
   /** 修改应用callbackinfo {@link ModifyApplicationCallbackInfoRequest} {@link ModifyApplicationCallbackInfoResponse} */

@@ -236,6 +236,18 @@ declare interface RealtimeTextStatisticsItem {
   Data: number | null;
 }
 
+/** 房间内录制信息信息 */
+declare interface RecordInfo {
+  /** 用户ID（当混流模式时，取值为0）。 */
+  UserId: string;
+  /** 录制文件名。 */
+  FileName: string;
+  /** 录制开始时间（unix时间戳如：1234567868）。 */
+  RecordBeginTime: number;
+  /** 录制状态：2代表正在录制 10代表等待转码 11代表正在转码 12正在上传 13代表上传完成 14代表通知用户完成。 */
+  RecordStatus: number;
+}
+
 /** 房间内用户信息 */
 declare interface RoomUser {
   /** 房间id */
@@ -326,6 +338,14 @@ declare interface StatusInfo {
 declare interface StreamTextStatisticsItem {
   /** 统计值，单位：秒 */
   Data: number | null;
+}
+
+/** 指定订阅流白名单或者黑名单。 */
+declare interface SubscribeRecordUserIds {
+  /** 订阅音频流黑名单，指定不订阅哪几个UserId的音频流，例如["1", "2", "3"], 代表不订阅UserId 1，2，3的音频流。默认不填订阅房间内所有音频流，订阅列表用户数不超过20。注意：只能同时设置UnSubscribeAudioUserIds、SubscribeAudioUserIds 其中1个参数 */
+  UnSubscribeUserIds?: string[];
+  /** 订阅音频流白名单，指定订阅哪几个UserId的音频流，例如["1", "2", "3"], 代表订阅UserId 1，2，3的音频流。默认不填订阅房间内所有音频流，订阅列表用户数不超过20。注意：只能同时设置UnSubscribeAudioUserIds、SubscribeAudioUserIds 其中1个参数。 */
+  SubscribeUserIds?: string[];
 }
 
 /** 标签列表 */
@@ -600,6 +620,24 @@ declare interface DescribeRealtimeScanConfigResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRecordInfoRequest {
+  /** 进行中的任务taskid（StartRecord接口返回）。 */
+  TaskId: number;
+  /** 应用ID。 */
+  BizId: number;
+}
+
+declare interface DescribeRecordInfoResponse {
+  /** 录制信息。 */
+  RecordInfo: RecordInfo[] | null;
+  /** 录制类型：1代表单流 2代表混流 3代表单流和混流。 */
+  RecordMode: number;
+  /** 房间ID。 */
+  RoomId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRoomInfoRequest {
   /** 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID */
   SdkAppId: number;
@@ -630,6 +668,24 @@ declare interface DescribeScanResultListRequest {
 declare interface DescribeScanResultListResponse {
   /** 要查询的语音检测任务的结果 */
   Data?: DescribeScanResult[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTaskInfoRequest {
+  /** 应用ID。 */
+  BizId: number;
+  /** 房间ID。 */
+  RoomId: string;
+}
+
+declare interface DescribeTaskInfoResponse {
+  /** 进行中的任务taskid（StartRecord接口返回）。 */
+  TaskId: number | null;
+  /** 录制类型：1代表单流 2代表混流 3代表单流和混流。 */
+  RecordMode: number | null;
+  /** 指定订阅流白名单或者黑名单。 */
+  SubscribeRecordUserIds: SubscribeRecordUserIds | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -718,6 +774,22 @@ declare interface ModifyCustomizationStateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRecordInfoRequest {
+  /** 进行中的任务taskid（StartRecord接口返回）。 */
+  TaskId: number;
+  /** 录制类型：1代表单流 2代表混流 3代表单流和混流。 */
+  RecordMode: number;
+  /** 应用ID。 */
+  BizId: number;
+  /** 指定订阅流白名单或者黑名单。 */
+  SubscribeRecordUserIds?: SubscribeRecordUserIds;
+}
+
+declare interface ModifyRecordInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyUserMicStatusRequest {
   /** 来自 [腾讯云控制台](https://console.cloud.tencent.com/gamegme) 的 GME 服务提供的 AppID，获取请参考 [语音服务开通指引](https://cloud.tencent.com/document/product/607/10782)。 */
   BizId: number;
@@ -754,6 +826,36 @@ declare interface ScanVoiceRequest {
 declare interface ScanVoiceResponse {
   /** 语音检测返回。Data 字段是 JSON 数组，每一个元素包含：DataId： 请求中对应的 DataId。TaskID ：该检测任务的 ID，用于轮询语音检测结果。 */
   Data: ScanVoiceResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StartRecordRequest {
+  /** 应用ID。 */
+  BizId: number;
+  /** 房间ID。 */
+  RoomId: string;
+  /** 录制类型：1代表单流 2代表混流 3代表单流和混流。 */
+  RecordMode: number;
+  /** 指定订阅流白名单或者黑名单（不传默认订阅房间内所有音频流）。 */
+  SubscribeRecordUserIds?: SubscribeRecordUserIds;
+}
+
+declare interface StartRecordResponse {
+  /** 任务taskid。 */
+  TaskId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopRecordRequest {
+  /** 任务ID。 */
+  TaskId: number;
+  /** 应用ID。 */
+  BizId: number;
+}
+
+declare interface StopRecordResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -817,10 +919,14 @@ declare interface Gme {
   DescribeApplicationList(data: DescribeApplicationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationListResponse>;
   /** 获取用户自定义送检信息 {@link DescribeRealtimeScanConfigRequest} {@link DescribeRealtimeScanConfigResponse} */
   DescribeRealtimeScanConfig(data: DescribeRealtimeScanConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealtimeScanConfigResponse>;
+  /** 查询录制任务信息 {@link DescribeRecordInfoRequest} {@link DescribeRecordInfoResponse} */
+  DescribeRecordInfo(data: DescribeRecordInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordInfoResponse>;
   /** 获取房间内用户信息 {@link DescribeRoomInfoRequest} {@link DescribeRoomInfoResponse} */
   DescribeRoomInfo(data: DescribeRoomInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomInfoResponse>;
   /** 查询语音检测结果 {@link DescribeScanResultListRequest} {@link DescribeScanResultListResponse} */
   DescribeScanResultList(data: DescribeScanResultListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanResultListResponse>;
+  /** 查询房间录制信息 {@link DescribeTaskInfoRequest} {@link DescribeTaskInfoResponse} */
+  DescribeTaskInfo(data: DescribeTaskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskInfoResponse>;
   /** 拉取用户在房间得进出时间 {@link DescribeUserInAndOutTimeRequest} {@link DescribeUserInAndOutTimeResponse} */
   DescribeUserInAndOutTime(data: DescribeUserInAndOutTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInAndOutTimeResponse>;
   /** 查询语音消息转文本热句模型列表 {@link GetCustomizationListRequest} {@link GetCustomizationListResponse} */
@@ -831,10 +937,16 @@ declare interface Gme {
   ModifyCustomization(data: ModifyCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizationResponse>;
   /** 修改语音消息转文本热句模型状态 {@link ModifyCustomizationStateRequest} {@link ModifyCustomizationStateResponse} */
   ModifyCustomizationState(data: ModifyCustomizationStateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizationStateResponse>;
+  /** 更新录制信息 {@link ModifyRecordInfoRequest} {@link ModifyRecordInfoResponse} */
+  ModifyRecordInfo(data: ModifyRecordInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordInfoResponse>;
   /** 修改用户麦克风状态 {@link ModifyUserMicStatusRequest} {@link ModifyUserMicStatusResponse} */
   ModifyUserMicStatus(data: ModifyUserMicStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserMicStatusResponse>;
   /** 提交语音检测任务 {@link ScanVoiceRequest} {@link ScanVoiceResponse} */
   ScanVoice(data: ScanVoiceRequest, config?: AxiosRequestConfig): AxiosPromise<ScanVoiceResponse>;
+  /** 开始录制 {@link StartRecordRequest} {@link StartRecordResponse} */
+  StartRecord(data: StartRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StartRecordResponse>;
+  /** 停止录制 {@link StopRecordRequest} {@link StopRecordResponse} */
+  StopRecord(data: StopRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopRecordResponse>;
   /** 更新送检房间号 {@link UpdateScanRoomsRequest} {@link UpdateScanRoomsResponse} */
   UpdateScanRooms(data: UpdateScanRoomsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateScanRoomsResponse>;
   /** 更新送检用户号 {@link UpdateScanUsersRequest} {@link UpdateScanUsersResponse} */

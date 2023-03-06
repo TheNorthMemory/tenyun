@@ -110,6 +110,8 @@ declare interface FakeURLData {
   InsertTime?: string | null;
   /** 资质证明状态：0-不可用 1-可用 */
   CertificationStatus?: number | null;
+  /** 网址截图 */
+  Snapshot?: string | null;
 }
 
 /** 过滤参数 */
