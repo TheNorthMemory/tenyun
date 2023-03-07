@@ -426,7 +426,7 @@ declare interface Recipient {
   IsPromoter?: boolean;
 }
 
-/** 解除协议的签署人，如不指定，默认使用待解除流程（即原流程）中的签署人。注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该签署人。如果需要指定B端（机构身份类型）签署人，其中ReleasedApprover需要传递的参数如下：ApproverNumber, OrganizationName, ApproverType必传。对于其他身份标识- 渠道子客企业指定经办人：OpenId必传，OrganizationOpenId必传；- 非渠道合作企业：Name、Mobile必传。 */
+/** 解除协议的签署人，如不指定，默认使用待解除流程（即原流程）中的签署人。注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该签署人。如果需要指定B端（机构身份类型）签署人，其中ReleasedApprover需要传递的参数如下：ApproverNumber, OrganizationName, ApproverType必传。对于其他身份标识- 子客企业指定经办人：OpenId必传，OrganizationOpenId必传；- 非子客企业：Name、Mobile必传。 */
 declare interface ReleasedApprover {
   /** 企业签署方工商营业执照上的企业名称，签署方为非发起方企业场景下必传，最大长度64个字符 */
   OrganizationName: string;
@@ -442,9 +442,9 @@ declare interface ReleasedApprover {
   IdCardNumber?: string;
   /** 签署人手机号，脱敏显示。大陆手机号为11位，暂不支持海外手机号 */
   Mobile?: string;
-  /** 企业签署方在同一渠道下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符 */
+  /** 企业签署方在同一第三方应用下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符 */
   OrganizationOpenId?: string;
-  /** 用户侧第三方id，最大长度64个字符当签署方为同一渠道下的员工时，该字必传 */
+  /** 用户侧第三方id，最大长度64个字符当签署方为同一第三方应用下的员工时，该字必传 */
   OpenId?: string;
 }
 

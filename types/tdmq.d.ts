@@ -761,27 +761,29 @@ declare interface RocketMQGroup {
 /** RocketMQ专享集群实例配置 */
 declare interface RocketMQInstanceConfig {
   /** 单命名空间TPS上线 */
-  MaxTpsPerNamespace: number;
+  MaxTpsPerNamespace?: number;
   /** 最大命名空间数量 */
-  MaxNamespaceNum: number;
+  MaxNamespaceNum?: number;
   /** 已使用命名空间数量 */
-  UsedNamespaceNum: number;
+  UsedNamespaceNum?: number;
   /** 最大Topic数量 */
-  MaxTopicNum: number;
+  MaxTopicNum?: number;
   /** 已使用Topic数量 */
-  UsedTopicNum: number;
+  UsedTopicNum?: number;
   /** 最大Group数量 */
-  MaxGroupNum: number;
+  MaxGroupNum?: number;
   /** 已使用Group数量 */
-  UsedGroupNum: number;
+  UsedGroupNum?: number;
   /** 集群类型 */
-  ConfigDisplay: string;
+  ConfigDisplay?: string;
   /** 集群节点数 */
-  NodeCount: number;
+  NodeCount?: number;
   /** 节点分布情况 */
-  NodeDistribution: InstanceNodeDistribution[];
+  NodeDistribution?: InstanceNodeDistribution[];
   /** topic分布情况 */
-  TopicDistribution: RocketMQTopicDistribution[];
+  TopicDistribution?: RocketMQTopicDistribution[];
+  /** 每个主题最大队列数 */
+  MaxQueuesPerTopic?: number | null;
 }
 
 /** RocketMQ命名空间信息 */
@@ -834,7 +836,7 @@ declare interface RocketMQVipInstance {
   InstanceName: string;
   /** 实例版本 */
   InstanceVersion: string | null;
-  /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败 */
+  /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败，6 - 变配中，7 - 变配失败 */
   Status: number;
   /** 节点数量 */
   NodeCount: number;
@@ -2403,7 +2405,7 @@ declare interface DescribeRocketMQVipInstanceDetailResponse {
 }
 
 declare interface DescribeRocketMQVipInstancesRequest {
-  /** 查询条件过滤器 */
+  /** 查询条件过滤器，支持的查询条件如下：instanceIds - 实例IDinstanceName - 实例名称 */
   Filters?: Filter[];
   /** 查询数目上限，默认20 */
   Limit?: number;
@@ -2413,9 +2415,9 @@ declare interface DescribeRocketMQVipInstancesRequest {
 
 declare interface DescribeRocketMQVipInstancesResponse {
   /** 未分页的总数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例信息列表 */
-  Instances: RocketMQVipInstance[];
+  Instances?: RocketMQVipInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

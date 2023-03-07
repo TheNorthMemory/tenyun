@@ -224,6 +224,10 @@ declare interface DMSTableInfo {
   Asset: Asset | null;
 }
 
+/** 引擎配置 */
+declare interface DataEngineConfigPair {
+}
+
 /** DataEngine详细信息 */
 declare interface DataEngineInfo {
   /** DataEngine名称 */
@@ -298,6 +302,8 @@ declare interface DataEngineInfo {
   ChildImageVersionId?: string | null;
   /** 集群镜像版本名字 */
   ImageVersionName?: string | null;
+  /** 是否开启备集群 */
+  StartStandbyCluster?: boolean | null;
 }
 
 /** 数据表数据格式。 */
@@ -610,6 +616,8 @@ declare interface Policy {
   SourceId?: number | null;
   /** 权限所属工作组的名称，只有当该权限的来源为工作组时才会有值。即仅当Source字段的值为WORKGROUP时该字段才有值。 */
   SourceName?: string | null;
+  /** 策略ID */
+  Id?: number | null;
 }
 
 /** 数据库和数据表属性信息 */
@@ -1372,6 +1380,70 @@ declare interface CreateDMSTableResponse {
   RequestId?: string;
 }
 
+declare interface CreateDataEngineRequest {
+  /** 引擎类型spark/presto */
+  EngineType: string;
+  /** 虚拟集群名称 */
+  DataEngineName: string;
+  /** 集群类型 spark_private/presto_private/presto_cu/spark_cu */
+  ClusterType: string;
+  /** 计费模式 0=共享模式 1=按量计费 2=包年包月 */
+  Mode: number;
+  /** 是否自动启动集群 */
+  AutoResume: boolean;
+  /** 最小资源 */
+  MinClusters?: number;
+  /** 最大资源 */
+  MaxClusters?: number;
+  /** 是否为默虚拟集群 */
+  DefaultDataEngine?: boolean;
+  /** VPC网段 */
+  CidrBlock?: string;
+  /** 描述信息 */
+  Message?: string;
+  /** 集群规模 */
+  Size?: number;
+  /** 计费类型，后付费：0，预付费：1。当前只支持后付费，不填默认为后付费。 */
+  PayMode?: number;
+  /** 资源使用时长，后付费：固定填3600，预付费：最少填1，代表购买资源一个月，最长不超过120。默认3600 */
+  TimeSpan?: number;
+  /** 资源使用时长的单位，后付费：s，预付费：m。默认为s */
+  TimeUnit?: string;
+  /** 资源的自动续费标志。后付费无需续费，固定填0；预付费下：0表示手动续费、1代表自动续费、2代表不续费，在0下如果是大客户，会自动帮大客户续费。默认为0 */
+  AutoRenew?: number;
+  /** 创建资源的时候需要绑定的标签信息 */
+  Tags?: TagInfo[];
+  /** 是否自定挂起集群：false（默认）：不自动挂起、true：自动挂起 */
+  AutoSuspend?: boolean;
+  /** 定时启停集群策略：0（默认）：关闭定时策略、1：开启定时策略（注：定时启停策略与自动挂起策略互斥） */
+  CrontabResumeSuspend?: number;
+  /** 定时启停策略，复杂类型：包含启停时间、挂起集群策略 */
+  CrontabResumeSuspendStrategy?: CrontabResumeSuspendStrategy;
+  /** 引擎执行任务类型，默认为SQL */
+  EngineExecType?: string;
+  /** 单个集群最大并发任务数，默认5 */
+  MaxConcurrency?: number;
+  /** 可容忍的排队时间，默认0。当任务排队的时间超过可容忍的时间时可能会触发扩容。如果该参数为0，则表示一旦有任务排队就可能立即触发扩容。 */
+  TolerableQueueTime?: number;
+  /** 集群自动挂起时间，默认10分钟 */
+  AutoSuspendTime?: number;
+  /** 资源类型。Standard_CU：标准型；Memory_CU：内存型 */
+  ResourceType?: string;
+  /** 集群高级配置 */
+  DataEngineConfigPairs?: DataEngineConfigPair[];
+  /** 集群镜像版本名字。如SuperSQL-P 1.1;SuperSQL-S 3.2等,不传，默认创建最新镜像版本的集群 */
+  ImageVersionName?: string;
+  /** 主集群名称 */
+  MainClusterName?: string;
+}
+
+declare interface CreateDataEngineResponse {
+  /** 虚拟引擎id */
+  DataEngineId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDatabaseRequest {
   /** 数据库基础信息 */
   DatabaseInfo: DatabaseInfo;
@@ -2012,6 +2084,38 @@ declare interface DescribeDatabasesResponse {
   DatabaseList: DatabaseResponseInfo[];
   /** 实例总数。 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEngineUsageInfoRequest {
+  /** House Id */
+  DataEngineId: string;
+}
+
+declare interface DescribeEngineUsageInfoResponse {
+  /** 集群总规格 */
+  Total: number;
+  /** 已占用集群规格 */
+  Used: number;
+  /** 剩余集群规格 */
+  Available: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLakeFsDirSummaryRequest {
+}
+
+declare interface DescribeLakeFsDirSummaryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLakeFsInfoRequest {
+}
+
+declare interface DescribeLakeFsInfoResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2694,6 +2798,18 @@ declare interface SuspendResumeDataEngineResponse {
   RequestId?: string;
 }
 
+declare interface SwitchDataEngineRequest {
+  /** 主集群名称 */
+  DataEngineName: string;
+  /** 是否开启备集群 */
+  StartStandbyCluster: boolean;
+}
+
+declare interface SwitchDataEngineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnbindWorkGroupsFromUserRequest {
   /** 解绑的工作组Id和用户Id的关联关系 */
   AddInfo: WorkGroupIdSetOfUserId;
@@ -2712,6 +2828,18 @@ declare interface UnlockMetaDataRequest {
 }
 
 declare interface UnlockMetaDataResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateRowFilterRequest {
+  /** 行过滤策略的id，此值可以通过DescribeUserInfo或者DescribeWorkGroupInfo接口获取 */
+  PolicyId: number;
+  /** 新的过滤策略。 */
+  Policy: Policy;
+}
+
+declare interface UpdateRowFilterResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2747,6 +2875,8 @@ declare interface Dlc {
   CreateDMSDatabase(data?: CreateDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDMSDatabaseResponse>;
   /** DMS元数据创建表 {@link CreateDMSTableRequest} {@link CreateDMSTableResponse} */
   CreateDMSTable(data?: CreateDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDMSTableResponse>;
+  /** 数据引擎创建 {@link CreateDataEngineRequest} {@link CreateDataEngineResponse} */
+  CreateDataEngine(data: CreateDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataEngineResponse>;
   /** 生成建库SQL语句 {@link CreateDatabaseRequest} {@link CreateDatabaseResponse} */
   CreateDatabase(data: CreateDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatabaseResponse>;
   /** 创建导出任务 {@link CreateExportTaskRequest} {@link CreateExportTaskResponse} */
@@ -2807,6 +2937,12 @@ declare interface Dlc {
   DescribeDataEngines(data?: DescribeDataEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEnginesResponse>;
   /** 查询数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
   DescribeDatabases(data?: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
+  /** 获取数据引擎资源使用情况 {@link DescribeEngineUsageInfoRequest} {@link DescribeEngineUsageInfoResponse} */
+  DescribeEngineUsageInfo(data: DescribeEngineUsageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEngineUsageInfoResponse>;
+  /** 查询托管存储指定目录的Summary {@link DescribeLakeFsDirSummaryRequest} {@link DescribeLakeFsDirSummaryResponse} */
+  DescribeLakeFsDirSummary(data?: DescribeLakeFsDirSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLakeFsDirSummaryResponse>;
+  /** 查询用户的托管存储信息 {@link DescribeLakeFsInfoRequest} {@link DescribeLakeFsInfoResponse} */
+  DescribeLakeFsInfo(data?: DescribeLakeFsInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLakeFsInfoResponse>;
   /** 获取notebook livy session详情信息 {@link DescribeNotebookSessionRequest} {@link DescribeNotebookSessionResponse} */
   DescribeNotebookSession(data: DescribeNotebookSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionResponse>;
   /** 获取notebook livy session日志 {@link DescribeNotebookSessionLogRequest} {@link DescribeNotebookSessionLogResponse} */
@@ -2873,10 +3009,14 @@ declare interface Dlc {
   ReportHeartbeatMetaData(data?: ReportHeartbeatMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<ReportHeartbeatMetaDataResponse>;
   /** 暂停或恢复数据引擎 {@link SuspendResumeDataEngineRequest} {@link SuspendResumeDataEngineResponse} */
   SuspendResumeDataEngine(data: SuspendResumeDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<SuspendResumeDataEngineResponse>;
+  /** 切换主备集群 {@link SwitchDataEngineRequest} {@link SwitchDataEngineResponse} */
+  SwitchDataEngine(data: SwitchDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDataEngineResponse>;
   /** 解绑用户上的用户组 {@link UnbindWorkGroupsFromUserRequest} {@link UnbindWorkGroupsFromUserResponse} */
   UnbindWorkGroupsFromUser(data: UnbindWorkGroupsFromUserRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindWorkGroupsFromUserResponse>;
   /** 元数据解锁 {@link UnlockMetaDataRequest} {@link UnlockMetaDataResponse} */
   UnlockMetaData(data: UnlockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockMetaDataResponse>;
+  /** 更新行过滤规则 {@link UpdateRowFilterRequest} {@link UpdateRowFilterResponse} */
+  UpdateRowFilter(data: UpdateRowFilterRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRowFilterResponse>;
 }
 
 export declare type Versions = ["2021-01-25"];

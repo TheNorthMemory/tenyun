@@ -70,6 +70,16 @@ declare interface EngineAdmin {
   Token?: string;
 }
 
+/** 引擎地域配置详情 */
+declare interface EngineRegionInfo {
+  /** 引擎节点所在地域 */
+  EngineRegion: string | null;
+  /** 此地域节点分配数量 */
+  Replica: number | null;
+  /** 集群网络信息 */
+  VpcInfos: VpcInfo[] | null;
+}
+
 /** 多环境网络信息 */
 declare interface EnvAddressInfo {
   /** 环境名 */
@@ -329,6 +339,8 @@ declare interface CreateEngineRequest {
   PrepaidPeriod?: number;
   /** 自动续费标记，仅预付费使用。参考值：- 0：不自动续费- 1：自动续费 */
   PrepaidRenewFlag?: number;
+  /** 跨地域部署的引擎地域配置详情 */
+  EngineRegionInfos?: EngineRegionInfo[];
 }
 
 declare interface CreateEngineResponse {
