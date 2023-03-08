@@ -1146,6 +1146,10 @@ declare interface IntegrationConfiguration {
 
 /** k8s中标签，一般以数组的方式存在 */
 declare interface Label {
+  /** map表中的Name */
+  Name: string;
+  /** map表中的Value */
+  Value: string;
 }
 
 /** 日志告警请求信息 */
@@ -1474,6 +1478,12 @@ declare interface PrometheusAgent {
 
 /** 托管Prometheus agent信息 */
 declare interface PrometheusAgentInfo {
+  /** 集群类型 */
+  ClusterType: string;
+  /** 集群id */
+  ClusterId: string;
+  /** 备注 */
+  Describe?: string;
 }
 
 /** 托管prometheus agent概览 */

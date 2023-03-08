@@ -622,7 +622,7 @@ declare interface LoadBalancer {
   LoadBalancerType?: string;
   /** 负载均衡类型标识，1：负载均衡，0：传统型负载均衡。 */
   Forward?: number;
-  /** 负载均衡实例的域名，仅公网传统型负载均衡实例才提供该字段 */
+  /** 负载均衡实例的域名，仅公网传统型负载均衡实例才提供该字段。逐步下线中，建议用LoadBalancerDomain替代。 */
   Domain?: string | null;
   /** 负载均衡实例的 VIP 列表。 */
   LoadBalancerVips?: string[] | null;
@@ -720,6 +720,8 @@ declare interface LoadBalancer {
   ClusterIds?: string[] | null;
   /** 负载均衡的属性 */
   AttributeFlags?: string[] | null;
+  /** 负载均衡实例的域名。 */
+  LoadBalancerDomain?: string | null;
 }
 
 /** 负载均衡详细信息 */
@@ -798,6 +800,8 @@ declare interface LoadBalancerDetail {
   Zones: string[] | null;
   /** 是否开启SNI特性（本参数仅对于HTTPS监听器有意义）。 */
   SniSwitch: number | null;
+  /** 负载均衡实例的域名。 */
+  LoadBalancerDomain?: string | null;
 }
 
 /** 负载均衡实例的健康检查状态 */

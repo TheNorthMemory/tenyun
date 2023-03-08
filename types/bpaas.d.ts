@@ -100,6 +100,8 @@ declare interface StatusNode {
   CKafkaRegion: string | null;
   /** 外部审批Url */
   ExternalUrl: string | null;
+  /** 并行节点 3-4 */
+  ParallelNodes?: string | null;
 }
 
 declare interface GetBpaasApproveDetailRequest {

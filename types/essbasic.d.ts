@@ -48,10 +48,68 @@ declare interface AuthorizedUser {
   OpenId: string;
 }
 
+/** 基础流程信息 */
+declare interface BaseFlowInfo {
+  /** 合同流程名称 */
+  FlowName: string | null;
+  /** 合同流程类型 */
+  FlowType: string | null;
+  /** 合同流程描述信息 */
+  FlowDescription: string | null;
+  /** 合同流程截止时间，unix时间戳 */
+  Deadline: number | null;
+  /** 是否顺序签署(true:无序签,false:顺序签) */
+  Unordered?: boolean | null;
+  /** 打开智能添加填写区(默认开启，打开:"OPEN" 关闭："CLOSE") */
+  IntelligentStatus?: string | null;
+  /** 填写控件内容 */
+  FormFields?: FormField[] | null;
+  /** 本企业(发起方企业)是否需要签署审批，true：开启本企业签署审批 */
+  NeedSignReview?: boolean | null;
+}
+
 /** 抄送信息 */
 declare interface CcInfo {
   /** 被抄送人手机号，大陆11位手机号 */
   Mobile?: string;
+}
+
+/** 签署人配置信息 */
+declare interface CommonApproverOption {
+  /** 是否允许修改签署人信息 */
+  CanEditApprover?: boolean | null;
+}
+
+/** 通用签署人信息 */
+declare interface CommonFlowApprover {
+  /** 指定当前签署人为第三方应用集成子客，默认false：当前签署人为第三方应用集成子客，true：当前签署人为saas企业用户 */
+  NotChannelOrganization: boolean | null;
+  /** 签署人类型,目前支持：0-企业签署人，1-个人签署人，3-企业静默签署人 */
+  ApproverType?: number | null;
+  /** 企业id */
+  OrganizationId?: string | null;
+  /** 企业OpenId，第三方应用集成非静默签子客企业签署人发起合同毕传 */
+  OrganizationOpenId?: string | null;
+  /** 企业名称，第三方应用集成非静默签子客企业签署人必传，saas企业签署人必传 */
+  OrganizationName?: string | null;
+  /** 用户id */
+  UserId?: string | null;
+  /** 用户openId，第三方应用集成非静默签子客企业签署人必传 */
+  OpenId?: string | null;
+  /** 签署人名称，saas企业签署人，个人签署人必传 */
+  ApproverName?: string | null;
+  /** 签署人手机号，saas企业签署人，个人签署人必传 */
+  ApproverMobile?: string | null;
+  /** 签署人Id，使用模版发起是，对应模版配置中的签署人RecipientId */
+  RecipientId?: string | null;
+  /** 签署前置条件：阅读时长限制，不传默认10s,最大300s，最小3s */
+  PreReadTime?: number | null;
+  /** 签署前置条件：阅读全文限制 */
+  IsFullText?: boolean | null;
+  /** 通知类型：SMS（短信） NONE（不做通知）, 不传 默认SMS */
+  NotifyType?: string | null;
+  /** 签署人配置 */
+  ApproverOption?: CommonApproverOption | null;
 }
 
 /** 此结构体 (Component) 用于描述控件属性。在通过文件发起合同时，对应的component有三种定位方式1. 绝对定位方式2. 表单域(FIELD)定位方式3. 关键字(KEYWORD)定位方式可以参考官网说明https://cloud.tencent.com/document/product/1323/78346 */
@@ -104,6 +162,12 @@ declare interface Component {
   RelativeLocation?: string;
   /** 关键字索引，可选参数，如果一个关键字在PDF文件中存在多个，可以通过关键字索引指定使用第几个关键字作为最后的结果，可指定多个索引。示例[0,2]，说明使用PDF文件内第1个和第3个关键字位置。 */
   KeywordIndexes?: number[];
+}
+
+/** 创建合同配置信息 */
+declare interface CreateFlowOption {
+  /** 是否允许修改合同信息 */
+  CanEditFlow?: boolean | null;
 }
 
 /** 第三方应用集成员工部门信息 */
@@ -908,6 +972,38 @@ declare interface ChannelCreateMultiFlowSignQRCodeResponse {
   QrCode?: SignQrCode;
   /** 签署链接对象 */
   SignUrls?: SignUrl;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChannelCreatePrepareFlowRequest {
+  /** 资源id，与ResourceType对应 */
+  ResourceId: string;
+  /** 资源类型，1：模版，目前仅支持模版，与ResourceId对应 */
+  ResourceType: number;
+  /** 合同流程基础信息 */
+  FlowInfo: BaseFlowInfo;
+  /** 合同签署人信息 */
+  FlowApproverList: CommonFlowApprover[];
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填 */
+  Agent?: Agent;
+  /** 合同流程配置信息 */
+  FlowOption?: CreateFlowOption;
+  /** 该参数不可用，请通过获取 web 可嵌入接口获取合同流程预览 URL */
+  FlowId?: string;
+  /** 该参数不可用，请通过获取 web 可嵌入接口获取合同流程预览 URL */
+  NeedPreview?: boolean;
+  /** 企业机构信息，不用传 */
+  Organization?: OrganizationInfo;
+  /** 操作人（用户）信息，不用传 */
+  Operator?: UserInfo;
+}
+
+declare interface ChannelCreatePrepareFlowResponse {
+  /** 预发起的合同链接 */
+  PrepareFlowUrl?: string;
+  /** 合同发起后预览链接 */
+  PreviewFlowUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3065,6 +3161,8 @@ declare interface Essbasic {
   ChannelCreateFlowSignUrl(data: ChannelCreateFlowSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateFlowSignUrlResponse>;
   /** 创建一码多扫签署流程二维码 {@link ChannelCreateMultiFlowSignQRCodeRequest} {@link ChannelCreateMultiFlowSignQRCodeResponse} */
   ChannelCreateMultiFlowSignQRCode(data: ChannelCreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateMultiFlowSignQRCodeResponse>;
+  /** 创建预发起合同 {@link ChannelCreatePrepareFlowRequest} {@link ChannelCreatePrepareFlowResponse} */
+  ChannelCreatePrepareFlow(data: ChannelCreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreatePrepareFlowResponse>;
   /** 发起解除协议 {@link ChannelCreateReleaseFlowRequest} {@link ChannelCreateReleaseFlowResponse} */
   ChannelCreateReleaseFlow(data: ChannelCreateReleaseFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateReleaseFlowResponse>;
   /** 创建印章授权 {@link ChannelCreateSealPolicyRequest} {@link ChannelCreateSealPolicyResponse} */

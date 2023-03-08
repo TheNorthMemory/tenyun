@@ -1187,12 +1187,12 @@ declare interface DescribeTelSessionResponse {
 }
 
 declare interface DisableCCCPhoneNumberRequest {
-  /** TCCC 实例应用 ID */
-  SdkAppId: number;
   /** 号码列表，0086开头 */
   PhoneNumbers: string[];
   /** 停用开关，0启用 1停用 */
   Disabled: number;
+  /** TCCC 实例应用 ID */
+  SdkAppId?: number;
 }
 
 declare interface DisableCCCPhoneNumberResponse {

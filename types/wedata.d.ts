@@ -14,14 +14,14 @@ declare interface AlarmEventInfo {
   RegularName: string;
   /** 告警级别,0表示普通，1表示重要，2表示紧急 */
   AlarmLevel: number;
-  /** 告警指标,0表示任务失败，1表示任务运行超时，2表示任务停止，3表示任务暂停 */
-  AlarmIndicator: number;
   /** 告警方式,多个用逗号隔开（1:邮件，2:短信，3:微信，4:语音，5:代表企业微信，6:http） */
   AlarmWay: number;
   /** 告警接收人Id，多个用逗号隔开 */
   AlarmRecipientId: string;
   /** 项目ID */
   ProjectId: string;
+  /** 告警指标,0表示任务失败，1表示任务运行超时，2表示任务停止，3表示任务暂停 */
+  AlarmIndicator?: number;
   /** 告警指标描述 */
   AlarmIndicatorDesc?: string | null;
   /** 指标阈值，1表示离线任务第一次运行失败，2表示离线任务所有重试完成后失败 */
@@ -37,6 +37,22 @@ declare interface AlarmEventInfo {
   /** 消息ID */
   MessageId?: string | null;
   /** 阈值计算算子，1 : 大于 2 ：小于 */
+  Operator?: number | null;
+}
+
+/** 告警指标 */
+declare interface AlarmIndicatorInfo {
+  /** 指标id */
+  Id?: string | null;
+  /** 告警指标,0表示任务失败，1表示任务运行超时，2表示任务停止，3表示任务暂停 */
+  AlarmIndicator?: number | null;
+  /** 告警指标描述 */
+  AlarmIndicatorDesc?: string | null;
+  /** 指标阈值，1表示离线任务第一次运行失败，2表示离线任务所有重试完成后失败 */
+  TriggerType?: number | null;
+  /** 预计的超时时间，分钟级别 */
+  EstimatedTime?: number | null;
+  /** 实时任务告警需要的参数 */
   Operator?: number | null;
 }
 
@@ -82,6 +98,8 @@ declare interface AlarmReceiverInfo {
   Wecom: number;
   /** http，0：未设置，1：成功，2：失败 */
   Http: number;
+  /** 企业微信群，0：未设置，1：成功，2：失败 */
+  WecomGroup?: number | null;
 }
 
 /** 批量操作的结果返回 */
@@ -858,6 +876,10 @@ declare interface IntegrationTaskInfo {
   InLongStreamId?: string | null;
   /** version */
   InLongManagerVersion?: string | null;
+  /** dataproxy url */
+  DataProxyUrl?: string[] | null;
+  /** 任务版本是否已提交运维 */
+  Submit?: boolean | null;
 }
 
 /** 标签类型 */
@@ -1892,6 +1914,10 @@ declare interface TableInfo {
   TableId: string | null;
   /** 表名称 */
   TableName: string | null;
+  /** 表databaseName */
+  OriginDatabaseName: string | null;
+  /** 表schemaName */
+  OriginSchemaName: string | null;
 }
 
 /** 表质量详情 */
@@ -1944,28 +1970,28 @@ declare interface TaskAlarmInfo {
   RegularStatus: number;
   /** 告警级别(0表示普通，1表示重要，2表示紧急) */
   AlarmLevel: number;
-  /** 告警指标,0表示任务失败，1表示任务运行超时，2表示任务停止，3表示任务暂停，4写入速度，5读取速度，6读取吞吐，7写入吞吐, 8脏数据字节数，9脏数据条数 */
-  AlarmIndicator: number;
   /** 告警方式,多个用逗号隔开（1:邮件，2:短信，3:微信，4:语音，5:代表企业微信，6:http） */
   AlarmWay: string;
-  /** 告警接收人ID，多个用逗号隔开 */
-  AlarmRecipientId: string;
   /** 任务类型(201表示实时，202表示离线) */
   TaskType: number;
-  /** 告警接收人昵称，多个用逗号隔开 */
-  AlarmRecipientName: string | null;
   /** 主键ID */
   Id?: string | null;
   /** 规则ID */
   RegularId?: string;
+  /** 告警指标,0表示任务失败，1表示任务运行超时，2表示任务停止，3表示任务暂停，4写入速度，5读取速度，6读取吞吐，7写入吞吐, 8脏数据字节数，9脏数据条数 */
+  AlarmIndicator?: number;
   /** 指标阈值(1表示离线任务第一次运行失败，2表示离线任务所有重试完成后失败) */
   TriggerType?: number | null;
   /** 预计的超时时间(分钟级别) */
   EstimatedTime?: number | null;
+  /** 告警接收人ID，多个用逗号隔开 */
+  AlarmRecipientId?: string;
   /** 项目ID */
   ProjectId?: string | null;
   /** 创建人 */
   Creater?: string | null;
+  /** 告警接收人昵称，多个用逗号隔开 */
+  AlarmRecipientName?: string | null;
   /** 告警指标描述 */
   AlarmIndicatorDesc?: string | null;
   /** 实时任务告警需要的参数，1是大于2是小于 */
@@ -1974,6 +2000,12 @@ declare interface TaskAlarmInfo {
   NodeId?: string | null;
   /** 节点名称，多个逗号分隔 */
   NodeName?: string | null;
+  /** 指标列表 */
+  AlarmIndicatorInfos?: AlarmIndicatorInfo[] | null;
+  /** 告警接收人类型，0指定人员；1任务责任人 */
+  AlarmRecipientType?: number | null;
+  /** 企业微信群Hook地址，多个hook地址使用,隔开 */
+  WeComHook?: string | null;
 }
 
 /** 任务信息 */

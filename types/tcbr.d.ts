@@ -363,13 +363,15 @@ declare interface CreateCloudRunEnvRequest {
   Source?: string;
   /** 渠道：wechat | cloud */
   Channel?: string;
+  /** 环境ID */
+  EnvId?: string;
 }
 
 declare interface CreateCloudRunEnvResponse {
   /** 环境Id */
-  EnvId: string;
+  EnvId?: string;
   /** 后付费订单号 */
-  TranId: string;
+  TranId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
