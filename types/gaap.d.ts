@@ -1145,7 +1145,7 @@ declare interface CreateGlobalDomainRequest {
 
 declare interface CreateGlobalDomainResponse {
   /** 域名ID */
-  DomainId: string;
+  DomainId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

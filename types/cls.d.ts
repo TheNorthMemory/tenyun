@@ -742,6 +742,8 @@ declare interface TopicInfo {
   SubAssumerName: string | null;
   /** 日志主题描述 */
   Describes: string | null;
+  /** 开启日志沉降，热存储的生命周期， hotPeriod < Period。热存储为 hotPeriod, 冷存储则为 Period-hotPeriod。 */
+  HotPeriod: number | null;
 }
 
 /** 需要开启键值索引的字段的索引描述信息 */

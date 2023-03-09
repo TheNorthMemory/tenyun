@@ -1162,6 +1162,36 @@ declare interface AudioTemplateInfoForUpdate {
   StreamSelects?: number[];
 }
 
+/** AWS S3 文件是上传触发器。 */
+declare interface AwsS3FileUploadTrigger {
+  /** 工作流绑定的 AWS S3 存储桶。 */
+  S3Bucket: string;
+  /** 工作流绑定的桶所在 AWS 区域。 */
+  S3Region: string;
+  /** 工作流绑定的输入路径目录，必须为绝对路径，即以 `/` 开头和结尾。如`/movie/201907/`，不填代表根目录`/`。 */
+  Dir?: string;
+  /** 工作流允许触发的文件格式列表，如 ["mp4", "flv", "mov"]。不填代表所有格式的文件都可以触发工作流。 */
+  Formats?: string[];
+  /** 工作流绑定的 AWS S3 存储桶的秘钥ID。 */
+  S3SecretId?: string | null;
+  /** 工作流绑定的 AWS S3 存储桶的秘钥Key。 */
+  S3SecretKey?: string | null;
+  /** 工作流绑定的 AWS S3 存储桶对应的 SQS事件队列。注意：队列和桶需要在同一区域。 */
+  AwsSQS?: AwsSQS | null;
+}
+
+/** Aws SQS 队列信息 */
+declare interface AwsSQS {
+  /** SQS 队列区域。 */
+  SQSRegion: string;
+  /** SQS 队列名称。 */
+  SQSQueueName: string;
+  /** 读写SQS的秘钥id。 */
+  S3SecretId?: string;
+  /** 读写SQS的秘钥key。 */
+  S3SecretKey?: string;
+}
+
 /** 智能分类任务控制参数 */
 declare interface ClassificationConfigureInfo {
   /** 智能分类任务开关，可选值：ON：开启智能分类任务；OFF：关闭智能分类任务。 */
@@ -2510,12 +2540,14 @@ declare interface MediaImageSpriteItem {
 
 /** 媒体处理的输入对象信息。 */
 declare interface MediaInputInfo {
-  /** 输入来源对象的类型，支持 COS、URL 两种。 */
+  /** 输入来源对象的类型，支持： COS：COS源 URL：URL源 AWS-S3：AWS 源，目前只支持转码任务 */
   Type: string;
   /** 当 Type 为 COS 时有效，则该项为必填，表示媒体处理 COS 对象信息。 */
   CosInputInfo?: CosInputInfo;
   /** 当 Type 为 URL 时有效，则该项为必填，表示媒体处理 URL 对象信息。 */
   UrlInputInfo?: UrlInputInfo | null;
+  /** 当 Type 为 AWS-S3 时有效，则该项为必填，表示媒体处理 AWS S3 对象信息。 */
+  S3InputInfo?: S3InputInfo | null;
 }
 
 /** 点播媒体文件元信息 */
@@ -3210,6 +3242,32 @@ declare interface ResilientStreamConf {
   BufferTime?: number | null;
 }
 
+/** AWS S3存储输入 */
+declare interface S3InputInfo {
+  /** S3 bucket。 */
+  S3Bucket: string;
+  /** S3 bucket 对应的区域。 */
+  S3Region: string;
+  /** S3 bucket 中的媒体资源路径。 */
+  S3Object: string;
+  /** AWS 内网访问 媒体资源的秘钥id。 */
+  S3SecretId?: string;
+  /** AWS 内网访问 媒体资源的秘钥key。 */
+  S3SecretKey?: string;
+}
+
+/** AWS S3 输出位置 */
+declare interface S3OutputStorage {
+  /** S3 bucket。 */
+  S3Bucket: string;
+  /** S3 bucket 对应的区域。 */
+  S3Region: string;
+  /** AWS 内网上传 媒体资源的秘钥id。 */
+  S3SecretId?: string;
+  /** AWS 内网上传 媒体资源的秘钥key。 */
+  S3SecretKey?: string;
+}
+
 /** 转推的目标地址信息。 */
 declare interface SRTAddressDestination {
   /** 目标地址的IP。 */
@@ -3488,18 +3546,22 @@ declare interface TaskNotifyConfig {
   QueueName?: string;
   /** 工作流通知的模式，可取值有 Finish 和 Change，不填代表 Finish。 */
   NotifyMode?: string;
-  /** 通知类型，可选值：CMQ：已下线，建议切换到TDMQ-CMQTDMQ-CMQ：消息队列URL：指定URL时HTTP回调推送到 NotifyUrl 指定的地址，回调协议http+json，包体内容同解析事件通知接口的输出参数 SCF：不推荐使用，需要在控制台额外配置SCF 注：不填或为空时默认 CMQ，如需采用其他类型需填写对应类型值。 */
+  /** 通知类型，可选值：CMQ：已下线，建议切换到TDMQ-CMQTDMQ-CMQ：消息队列URL：指定URL时HTTP回调推送到 NotifyUrl 指定的地址，回调协议http+json，包体内容同解析事件通知接口的输出参数 SCF：不推荐使用，需要在控制台额外配置SCFAWS-SQS：AWS 队列，只适用于 AWS 任务，且要求同区域 注：不填或为空时默认 CMQ，如需采用其他类型需填写对应类型值。 */
   NotifyType?: string;
   /** HTTP回调地址，NotifyType为URL时必填。 */
   NotifyUrl?: string;
+  /** AWS SQS 回调，NotifyType为 AWS-SQS 时必填。 */
+  AwsSQS?: AwsSQS | null;
 }
 
 /** 媒体处理输出对象信息。 */
 declare interface TaskOutputStorage {
-  /** 媒体处理输出对象存储位置的类型，现在仅支持 COS。 */
+  /** 媒体处理输出对象存储位置的类型，支持：COS：COS存储AWS-S3：AWS 存储，只适用于AWS任务，且要求同区域 */
   Type: string;
   /** 当 Type 为 COS 时有效，则该项为必填，表示媒体处理 COS 输出位置。 */
   CosOutputStorage?: CosOutputStorage | null;
+  /** 当 Type 为 AWS-S3 时有效，则该项为必填，表示媒体处理 AWS S3 输出位置。 */
+  S3OutputStorage?: S3OutputStorage | null;
 }
 
 /** 任务概要信息 */
@@ -3942,10 +4004,12 @@ declare interface WorkflowTask {
 
 /** 输入规则，当上传视频命中该规则时，即触发工作流。 */
 declare interface WorkflowTrigger {
-  /** 触发器的类型，目前仅支持 CosFileUpload。 */
+  /** 触发器的类型，可选值：CosFileUpload：COS触发AwsS3FileUpload：AWS触发，目前只支持转码任务。只有编排支持，工作流不支持。 */
   Type: string;
   /** 当 Type 为 CosFileUpload 时必填且有效，为 COS 触发规则。 */
   CosFileUploadTrigger?: CosFileUploadTrigger | null;
+  /** 当 Type 为 AwsS3FileUpload 时必填且有效，为 AWS S3 触发规则。注意：目前AWS的S3、对应触发队列SQS、回调队列SQS的秘钥需要一致。 */
+  AwsS3FileUploadTrigger?: AwsS3FileUploadTrigger | null;
 }
 
 declare interface CreateAIAnalysisTemplateRequest {
@@ -5558,6 +5622,22 @@ declare interface StopStreamLinkFlowResponse {
   RequestId?: string;
 }
 
+declare interface WithdrawsWatermarkRequest {
+  /** 输入媒体文件存储信息。 */
+  InputInfo: MediaInputInfo;
+  /** 任务的事件通知信息，不填代表不获取事件通知。 */
+  TaskNotifyConfig?: TaskNotifyConfig;
+  /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+  SessionContext?: string;
+}
+
+declare interface WithdrawsWatermarkResponse {
+  /** 任务 ID，可以通过该 ID 查询任务状态和结果。 */
+  TaskId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Mps 媒体处理} */
 declare interface Mps {
   (): Versions;
@@ -5727,6 +5807,8 @@ declare interface Mps {
   StartStreamLinkFlow(data: StartStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StartStreamLinkFlowResponse>;
   /** 停止媒体传输流 {@link StopStreamLinkFlowRequest} {@link StopStreamLinkFlowResponse} */
   StopStreamLinkFlow(data: StopStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StopStreamLinkFlowResponse>;
+  /** 提取盲水印 {@link WithdrawsWatermarkRequest} {@link WithdrawsWatermarkResponse} */
+  WithdrawsWatermark(data: WithdrawsWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<WithdrawsWatermarkResponse>;
 }
 
 export declare type Versions = ["2019-06-12"];

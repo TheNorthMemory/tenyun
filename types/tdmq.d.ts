@@ -3027,15 +3027,15 @@ declare interface Tdmq {
   ClearCmqQueue(data: ClearCmqQueueRequest, config?: AxiosRequestConfig): AxiosPromise<ClearCmqQueueResponse>;
   /** 清空cmq订阅者消息标签 {@link ClearCmqSubscriptionFilterTagsRequest} {@link ClearCmqSubscriptionFilterTagsResponse} */
   ClearCmqSubscriptionFilterTags(data: ClearCmqSubscriptionFilterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ClearCmqSubscriptionFilterTagsResponse>;
-  /** 创建AMQP集群 {@link CreateAMQPClusterRequest} {@link CreateAMQPClusterResponse} */
+  /** @deprecated 创建AMQP集群 {@link CreateAMQPClusterRequest} {@link CreateAMQPClusterResponse} */
   CreateAMQPCluster(data: CreateAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPClusterResponse>;
-  /** 创建AMQP Exchange {@link CreateAMQPExchangeRequest} {@link CreateAMQPExchangeResponse} */
+  /** @deprecated 创建AMQP Exchange {@link CreateAMQPExchangeRequest} {@link CreateAMQPExchangeResponse} */
   CreateAMQPExchange(data: CreateAMQPExchangeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPExchangeResponse>;
-  /** 创建AMQP队列 {@link CreateAMQPQueueRequest} {@link CreateAMQPQueueResponse} */
+  /** @deprecated 创建AMQP队列 {@link CreateAMQPQueueRequest} {@link CreateAMQPQueueResponse} */
   CreateAMQPQueue(data: CreateAMQPQueueRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPQueueResponse>;
-  /** 创建AMQP路由关系 {@link CreateAMQPRouteRelationRequest} {@link CreateAMQPRouteRelationResponse} */
+  /** @deprecated 创建AMQP路由关系 {@link CreateAMQPRouteRelationRequest} {@link CreateAMQPRouteRelationResponse} */
   CreateAMQPRouteRelation(data: CreateAMQPRouteRelationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPRouteRelationResponse>;
-  /** 创建Amqp Vhost {@link CreateAMQPVHostRequest} {@link CreateAMQPVHostResponse} */
+  /** @deprecated 创建Amqp Vhost {@link CreateAMQPVHostRequest} {@link CreateAMQPVHostResponse} */
   CreateAMQPVHost(data: CreateAMQPVHostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAMQPVHostResponse>;
   /** 创建集群 {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
@@ -3063,15 +3063,15 @@ declare interface Tdmq {
   CreateSubscription(data: CreateSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubscriptionResponse>;
   /** 新增主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
-  /** 删除AMQP集群 {@link DeleteAMQPClusterRequest} {@link DeleteAMQPClusterResponse} */
+  /** @deprecated 删除AMQP集群 {@link DeleteAMQPClusterRequest} {@link DeleteAMQPClusterResponse} */
   DeleteAMQPCluster(data: DeleteAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPClusterResponse>;
-  /** 删除Amqp交换机 {@link DeleteAMQPExchangeRequest} {@link DeleteAMQPExchangeResponse} */
+  /** @deprecated 删除Amqp交换机 {@link DeleteAMQPExchangeRequest} {@link DeleteAMQPExchangeResponse} */
   DeleteAMQPExchange(data: DeleteAMQPExchangeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPExchangeResponse>;
-  /** 删除Amqp队列 {@link DeleteAMQPQueueRequest} {@link DeleteAMQPQueueResponse} */
+  /** @deprecated 删除Amqp队列 {@link DeleteAMQPQueueRequest} {@link DeleteAMQPQueueResponse} */
   DeleteAMQPQueue(data: DeleteAMQPQueueRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPQueueResponse>;
-  /** 删除Amqp路由关系 {@link DeleteAMQPRouteRelationRequest} {@link DeleteAMQPRouteRelationResponse} */
+  /** @deprecated 删除Amqp路由关系 {@link DeleteAMQPRouteRelationRequest} {@link DeleteAMQPRouteRelationResponse} */
   DeleteAMQPRouteRelation(data: DeleteAMQPRouteRelationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPRouteRelationResponse>;
-  /** 删除Vhost {@link DeleteAMQPVHostRequest} {@link DeleteAMQPVHostResponse} */
+  /** @deprecated 删除Vhost {@link DeleteAMQPVHostRequest} {@link DeleteAMQPVHostResponse} */
   DeleteAMQPVHost(data: DeleteAMQPVHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAMQPVHostResponse>;
   /** 删除集群 {@link DeleteClusterRequest} {@link DeleteClusterResponse} */
   DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
@@ -3099,19 +3099,19 @@ declare interface Tdmq {
   DeleteSubscriptions(data: DeleteSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubscriptionsResponse>;
   /** 删除主题 {@link DeleteTopicsRequest} {@link DeleteTopicsResponse} */
   DeleteTopics(data: DeleteTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicsResponse>;
-  /** 获取单个Amqp集群信息 {@link DescribeAMQPClusterRequest} {@link DescribeAMQPClusterResponse} */
+  /** @deprecated 获取单个Amqp集群信息 {@link DescribeAMQPClusterRequest} {@link DescribeAMQPClusterResponse} */
   DescribeAMQPCluster(data: DescribeAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPClusterResponse>;
   /** 获取amqp集群列表 {@link DescribeAMQPClustersRequest} {@link DescribeAMQPClustersResponse} */
   DescribeAMQPClusters(data: DescribeAMQPClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPClustersResponse>;
-  /** 获取用户配额 {@link DescribeAMQPCreateQuotaRequest} {@link DescribeAMQPCreateQuotaResponse} */
+  /** @deprecated 获取用户配额 {@link DescribeAMQPCreateQuotaRequest} {@link DescribeAMQPCreateQuotaResponse} */
   DescribeAMQPCreateQuota(data?: DescribeAMQPCreateQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPCreateQuotaResponse>;
-  /** 获取AMQP Exchange列表 {@link DescribeAMQPExchangesRequest} {@link DescribeAMQPExchangesResponse} */
+  /** @deprecated 获取AMQP Exchange列表 {@link DescribeAMQPExchangesRequest} {@link DescribeAMQPExchangesResponse} */
   DescribeAMQPExchanges(data: DescribeAMQPExchangesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPExchangesResponse>;
-  /** 获取Amqp队列列表 {@link DescribeAMQPQueuesRequest} {@link DescribeAMQPQueuesResponse} */
+  /** @deprecated 获取Amqp队列列表 {@link DescribeAMQPQueuesRequest} {@link DescribeAMQPQueuesResponse} */
   DescribeAMQPQueues(data: DescribeAMQPQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPQueuesResponse>;
-  /** 获取Amqp路由关系列表 {@link DescribeAMQPRouteRelationsRequest} {@link DescribeAMQPRouteRelationsResponse} */
+  /** @deprecated 获取Amqp路由关系列表 {@link DescribeAMQPRouteRelationsRequest} {@link DescribeAMQPRouteRelationsResponse} */
   DescribeAMQPRouteRelations(data: DescribeAMQPRouteRelationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPRouteRelationsResponse>;
-  /** 获取Amqp Vhost列表 {@link DescribeAMQPVHostsRequest} {@link DescribeAMQPVHostsResponse} */
+  /** @deprecated 获取Amqp Vhost列表 {@link DescribeAMQPVHostsRequest} {@link DescribeAMQPVHostsResponse} */
   DescribeAMQPVHosts(data: DescribeAMQPVHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPVHostsResponse>;
   /** 获取某个租户的虚拟集群列表 {@link DescribeAllTenantsRequest} {@link DescribeAllTenantsResponse} */
   DescribeAllTenants(data: DescribeAllTenantsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllTenantsResponse>;
@@ -3175,11 +3175,11 @@ declare interface Tdmq {
   DescribeTopics(data: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
   /** 更新Amqp集群信息 {@link ModifyAMQPClusterRequest} {@link ModifyAMQPClusterResponse} */
   ModifyAMQPCluster(data: ModifyAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPClusterResponse>;
-  /** 更新Amqp交换机 {@link ModifyAMQPExchangeRequest} {@link ModifyAMQPExchangeResponse} */
+  /** @deprecated 更新Amqp交换机 {@link ModifyAMQPExchangeRequest} {@link ModifyAMQPExchangeResponse} */
   ModifyAMQPExchange(data: ModifyAMQPExchangeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPExchangeResponse>;
-  /** 更新Amqp队列 {@link ModifyAMQPQueueRequest} {@link ModifyAMQPQueueResponse} */
+  /** @deprecated 更新Amqp队列 {@link ModifyAMQPQueueRequest} {@link ModifyAMQPQueueResponse} */
   ModifyAMQPQueue(data: ModifyAMQPQueueRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPQueueResponse>;
-  /** 更新Vhost {@link ModifyAMQPVHostRequest} {@link ModifyAMQPVHostResponse} */
+  /** @deprecated 更新Vhost {@link ModifyAMQPVHostRequest} {@link ModifyAMQPVHostResponse} */
   ModifyAMQPVHost(data: ModifyAMQPVHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPVHostResponse>;
   /** 更新集群信息 {@link ModifyClusterRequest} {@link ModifyClusterResponse} */
   ModifyCluster(data: ModifyClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterResponse>;

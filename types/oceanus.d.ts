@@ -246,6 +246,14 @@ declare interface Property {
   Value: string;
 }
 
+/** 依赖作业分状态计数信息 */
+declare interface RefJobStatusCountItem {
+  /** 作业状态 */
+  JobStatus?: number | null;
+  /** 作业数量 */
+  Count?: number | null;
+}
+
 /** 描述资源配置的返回参数 */
 declare interface ResourceConfigItem {
   /** 资源ID */
@@ -272,38 +280,48 @@ declare interface ResourceConfigItem {
   Status: number | null;
   /** 关联作业个数 */
   RefJobCount: number | null;
+  /** 分状态统计关联作业数 */
+  RefJobStatusCountSet?: RefJobStatusCountItem[] | null;
 }
 
 /** 资源详细描述 */
 declare interface ResourceItem {
   /** 资源ID */
-  ResourceId: string;
+  ResourceId?: string;
   /** 资源名称 */
-  Name: string;
+  Name?: string;
   /** 资源类型 */
-  ResourceType: number;
+  ResourceType?: number;
   /** 资源位置 */
-  ResourceLoc: ResourceLoc;
+  ResourceLoc?: ResourceLoc;
   /** 资源地域 */
-  Region: string;
+  Region?: string;
   /** 应用ID */
-  AppId: number;
+  AppId?: number;
   /** 主账号Uin */
-  OwnerUin: string;
+  OwnerUin?: string;
   /** 子账号Uin */
-  CreatorUin: string;
+  CreatorUin?: string;
   /** 资源创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 资源最后更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 资源的资源版本ID */
-  LatestResourceConfigVersion: number;
+  LatestResourceConfigVersion?: number;
   /** 资源备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 版本个数 */
-  VersionCount: number | null;
+  VersionCount?: number | null;
   /** 关联作业数 */
-  RefJobCount: number | null;
+  RefJobCount?: number | null;
+  /** 作业运行状态 */
+  IsJobRun?: number | null;
+  /** 文件名 */
+  FileName?: string | null;
+  /** 工作空间ID */
+  WorkSpaceId?: number | null;
+  /** 分状态统计关联作业数 */
+  RefJobStatusCountSet?: RefJobStatusCountItem[] | null;
 }
 
 /** 资源位置描述 */
@@ -364,7 +382,7 @@ declare interface RunJobDescription {
   JobId: string;
   /** 运行类型，1：启动，2：恢复 */
   RunType: number;
-  /** 已废弃。旧版 SQL 类型作业启动参数：指定数据源消费起始时间点 */
+  /** 兼容旧版 SQL 类型作业启动参数：指定数据源消费起始时间点（例:T1557394288000） */
   StartMode?: string;
   /** 当前作业的某个版本 */
   JobConfigVersion?: number;
@@ -372,6 +390,8 @@ declare interface RunJobDescription {
   SavepointPath?: string;
   /** Savepoint的Id */
   SavepointId?: string;
+  /** 使用历史版本系统依赖 */
+  UseOldSystemConnector?: boolean | null;
 }
 
 /** 描述Savepoint信息 */

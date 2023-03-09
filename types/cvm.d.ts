@@ -814,6 +814,58 @@ declare interface RegionInfo {
   RegionState: string;
 }
 
+/** 描述维修任务的相关信息 */
+declare interface RepairTaskInfo {
+  /** 维修任务ID */
+  TaskId: string;
+  /** 实例ID */
+  InstanceId: string;
+  /** 实例名称 */
+  Alias: string | null;
+  /** 任务类型ID，与任务类型中文名的对应关系如下：- `101`：实例运行隐患- `102`：实例运行异常- `103`：实例硬盘异常- `104`：实例网络连接异常- `105`：实例运行预警- `106`：实例硬盘预警- `107`：实例维护升级各任务类型的具体含义，可参考 [维修任务分类](https://cloud.tencent.com/document/product/213/67789)。 */
+  TaskTypeId: number;
+  /** 任务类型中文名 */
+  TaskTypeName?: string;
+  /** 任务状态ID，与任务状态中文名的对应关系如下：- `1`：待授权- `2`：处理中- `3`：已结束- `4`：已预约- `5`：已取消- `6`：已避免各任务状态的具体含义，可参考 [任务状态](https://cloud.tencent.com/document/product/213/67789)。 */
+  TaskStatus: number;
+  /** 设备状态ID，与设备状态中文名的对应关系如下：- `1`：故障中- `2`：处理中- `3`：正常- `4`：已预约- `5`：已取消- `6`：已避免 */
+  DeviceStatus?: number;
+  /** 操作状态ID，与操作状态中文名的对应关系如下：- `1`：未授权- `2`：已授权- `3`：已处理- `4`：已预约- `5`：已取消- `6`：已避免 */
+  OperateStatus?: number;
+  /** 任务创建时间 */
+  CreateTime: string;
+  /** 任务授权时间 */
+  AuthTime: string | null;
+  /** 任务结束时间 */
+  EndTime: string | null;
+  /** 任务详情 */
+  TaskDetail: string | null;
+  /** 可用区 */
+  Zone: string | null;
+  /** 地域 */
+  Region: string | null;
+  /** 所在私有网络ID */
+  VpcId?: string | null;
+  /** 所在私有网络名称 */
+  VpcName?: string | null;
+  /** 所在子网ID */
+  SubnetId?: string | null;
+  /** 所在子网名称 */
+  SubnetName?: string | null;
+  /** 实例公网IP */
+  WanIp?: string | null;
+  /** 实例内网IP */
+  LanIp?: string | null;
+  /** 产品类型，支持取值：- `CVM`：云服务器- `CDH`：专用宿主机- `CPM2.0`：裸金属云服务器 */
+  Product?: string | null;
+  /** 任务子类型 */
+  TaskSubType?: string | null;
+  /** 任务授权类型 */
+  AuthType?: number;
+  /** 授权渠道，支持取值：- `Waiting_auth`：待授权- `Customer_auth`：客户操作授权- `System_mandatory_auth`：系统默认授权- `Pre_policy_auth`：预置策略授权 */
+  AuthSource?: string;
+}
+
 /** 预留实例静态配置信息。预留实例当前只针对国际站白名单用户开放。 */
 declare interface ReservedInstanceConfigInfoItem {
   /** 实例规格。 */
@@ -1882,6 +1934,42 @@ declare interface DescribeReservedInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTaskInfoRequest {
+  /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  Limit: number;
+  /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  Offset: number;
+  /** 按照指定的产品类型查询，支持取值：- `CVM`：云服务器- `CDH`：专用宿主机- `CPM2.0`：裸金属云服务器未传入或为空时，默认查询全部产品类型。 */
+  Product?: string;
+  /** 按照一个或多个任务状态ID进行过滤。`TaskStatus`（任务状态ID）与任务状态中文名的对应关系如下：- `1`：待授权- `2`：处理中- `3`：已结束- `4`：已预约- `5`：已取消- `6`：已避免各任务状态的具体含义，可参考 [任务状态](https://cloud.tencent.com/document/product/213/67789)。 */
+  TaskStatus?: number[];
+  /** 按照一个或多个任务类型ID进行过滤。`TaskTypeId`（任务类型ID）与任务类型中文名的对应关系如下：- `101`：实例运行隐患- `102`：实例运行异常- `103`：实例硬盘异常- `104`：实例网络连接异常- `105`：实例运行预警- `106`：实例硬盘预警- `107`：实例维护升级各任务类型的具体含义，可参考 [维修任务分类](https://cloud.tencent.com/document/product/213/67789)。 */
+  TaskTypeIds?: number[];
+  /** 按照一个或者多个任务ID查询。任务ID形如：`rep-xxxxxxxx`。 */
+  TaskIds?: string[];
+  /** 按照一个或者多个实例ID查询。实例ID形如：`ins-xxxxxxxx`。 */
+  InstanceIds?: string[];
+  /** 按照一个或者多个实例名称查询。 */
+  Aliases?: string[];
+  /** 时间查询区间的起始位置，会根据`OrderField`中指定的字段进行过滤。未传入时默认为当天`00:00:00`。 */
+  StartDate?: string;
+  /** 时间查询区间的终止位置，会根据`OrderField`中指定的字段进行过滤。未传入时默认为当前时刻。 */
+  EndDate?: string;
+  /** 指定返回维修任务列表的排序字段，目前支持：- `CreateTime`：任务创建时间- `AuthTime`：任务授权时间- `EndTime`：任务结束时间未传入时或为空时，默认按`CreateTime`字段进行排序。 */
+  OrderField?: string;
+  /** 排序方式，目前支持：- `0`：升序（默认）- `1`：降序未传入或为空时，默认按升序排序。 */
+  Order?: number;
+}
+
+declare interface DescribeTaskInfoResponse {
+  /** 查询返回的维修任务总数量。 */
+  TotalCount?: number;
+  /** 查询返回的维修任务列表。 */
+  RepairTaskInfoSet?: RepairTaskInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeZoneInstanceConfigInfosRequest {
   /** zone按照【可用区】进行过滤。可用区形如：ap-guangzhou-1。类型：String必选：否可选项：可用区列表instance-family按照【实例机型系列】进行过滤。实例机型系列形如：S1、I1、M1等。类型：String必选：否instance-type按照【实例机型】进行过滤。不同实例机型指定了不同的资源规格，具体取值可通过调用接口 [DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/product/213/15749) 来获得最新的规格表或参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则默认机型为S1.SMALL1。类型：String必选：否instance-charge-type按照【实例计费模式】进行过滤。(PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费 )类型：String必选：否sort-keys按关键字进行排序,格式为排序字段加排序方式，中间用冒号分隔。 例如： 按cpu数逆序排序 "cpu:desc", 按mem大小顺序排序 "mem:asc"类型：String必选：否每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。 */
   Filters?: Filter[];
@@ -1979,6 +2067,8 @@ declare interface ImportImageRequest {
   TagSpecification?: TagSpecification[];
   /** 导入镜像后，激活操作系统采用的许可证类型。可选项：TencentCloud: 腾讯云官方许可BYOL: 自带许可（Bring Your Own License） */
   LicenseType?: string;
+  /** 启动模式 */
+  BootMode?: string;
 }
 
 declare interface ImportImageResponse {
@@ -2814,6 +2904,8 @@ declare interface Cvm {
   DescribeReservedInstancesConfigInfos(data?: DescribeReservedInstancesConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesConfigInfosResponse>;
   /** 列出可购买的预留实例配置 {@link DescribeReservedInstancesOfferingsRequest} {@link DescribeReservedInstancesOfferingsResponse} */
   DescribeReservedInstancesOfferings(data?: DescribeReservedInstancesOfferingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReservedInstancesOfferingsResponse>;
+  /** 查询维修任务列表 {@link DescribeTaskInfoRequest} {@link DescribeTaskInfoResponse} */
+  DescribeTaskInfo(data: DescribeTaskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskInfoResponse>;
   /** 获取可用区机型配置信息 {@link DescribeZoneInstanceConfigInfosRequest} {@link DescribeZoneInstanceConfigInfosResponse} */
   DescribeZoneInstanceConfigInfos(data?: DescribeZoneInstanceConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneInstanceConfigInfosResponse>;
   /** 查询可用区列表 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
