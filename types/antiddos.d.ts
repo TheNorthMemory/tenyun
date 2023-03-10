@@ -188,6 +188,8 @@ declare interface BGPInstanceSpecification {
   EnterpriseFlag: number | null;
   /** 高防包企业版弹性阈值，0表示未开启；大于0为弹性防护阈值 */
   ElasticLimit: number | null;
+  /** 降配后的防护能力，单位Gbps */
+  DownGradeProtect?: number | null;
 }
 
 /** 高防包资产实例的使用信息统计 */

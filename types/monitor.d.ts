@@ -2595,7 +2595,7 @@ declare interface DeleteAlarmNoticesRequest {
   Module: string;
   /** 告警通知模板id列表 */
   NoticeIds: string[];
-  /** 通知模版与策略绑定关系 */
+  /** 通知模板与策略绑定关系 */
   NoticeBindPolicys?: NoticeBindPolicys[];
 }
 
@@ -4111,17 +4111,17 @@ declare interface GetMonitorDataRequest {
 
 declare interface GetMonitorDataResponse {
   /** 统计周期 */
-  Period: number;
+  Period?: number;
   /** 指标名 */
-  MetricName: string;
+  MetricName?: string;
   /** 数据点数组 */
-  DataPoints: DataPoint[];
+  DataPoints?: DataPoint[];
   /** 开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 返回信息 */
-  Msg: string;
+  Msg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

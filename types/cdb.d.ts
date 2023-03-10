@@ -404,6 +404,10 @@ declare interface CloneItem {
   EndTime: string;
   /** 任务状态，包括以下状态：initial,running,wait_complete,success,failed */
   TaskStatus: string;
+  /** 克隆实例所在地域Id */
+  NewRegionId: number;
+  /** 源实例所在地域Id */
+  SrcRegionId: number;
 }
 
 /** 列权限信息 */
@@ -2415,9 +2419,9 @@ declare interface DescribeCloneListRequest {
 
 declare interface DescribeCloneListResponse {
   /** 满足条件的条目数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 克隆任务列表。 */
-  Items: CloneItem[];
+  Items?: CloneItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

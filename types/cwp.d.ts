@@ -2050,6 +2050,8 @@ declare interface JavaMemShellInfo {
   Quuid?: string;
   /** 主机额外信息 */
   MachineExtraInfo?: MachineExtraInfo | null;
+  /** 服务器uuid */
+  Uuid?: string | null;
 }
 
 /** 授权绑定详情信息 */

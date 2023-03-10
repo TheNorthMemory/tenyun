@@ -154,6 +154,120 @@ declare interface FeedUserInfo {
   Extension?: string;
 }
 
+/** 电商行为 */
+declare interface GoodsBehaviorInfo {
+  /** 用户唯一ID，客户自定义用户ID，作为一个用户的唯一标识 */
+  UserId: string;
+  /** 商品唯一ID，skuId或spuId，客户根据需求自行决定商品主键粒度 */
+  GoodsId: string;
+  /** 行为类型： ● expose - 曝光，必须 ● click - 点击，必须 ● stay - 详情页停留时长，强烈建议 ● videoover - 视频播放时长，强烈建议 ● like - 点赞&喜欢，正效果 ● collect - 收藏，正效果 ● share - 转发&分享，正效果 ● reward - 打赏，正效果 ● unlike - 踩&不喜欢，负效果 ● comment - 评论 ● order - 下单 ● buy - 购买成功 ● addcart - 加入购物车 不支持的行为类型，可以映射到未被使用的其他行为类型。如实际业务数据中有私信行为，没有收藏行为，可以将私信行为映射到收藏行为 */
+  BehaviorType: string;
+  /** 行为类型对应的行为值： ● expose - 曝光，固定填1 ● click - 点击，固定填1 ● stay - 详情页停留时长，填停留秒数，取值[1-86400] ● videoover - 视频播放时长，填播放结束的秒数，取值[1-86400] ● like - 点赞&喜欢，固定填1 ● collect - 收藏，固定填1 ● share - 转发&分享，固定填1 ● reward - 打赏，填打赏金额，没有则填1 ● unlike - 踩&不喜欢，填不喜欢的原因，没有则填1 ● comment - 评论，填评论内容，如“上海加油” ● order - 下单，固定填1 ● buy - 购买成功，固定填1 ● addcart - 加入购物车，固定填1 */
+  BehaviorValue: string;
+  /** 行为发生的时间戳： 秒级时间戳，尽量实时上报，最长不超过半小时否则会影响推荐结果的准确性 */
+  BehaviorTimestamp: number;
+  /** 行为发生的场景ID，在控制台创建场景后获取 */
+  SceneId: string;
+  /** 算法来源： ● business 业务自己的算法对照组 ● tencent 腾讯算法 ● other 其他算法默认为tencent，区分行为来源于哪个算法，用于Poc阶段的效果对比验证 */
+  Source: string;
+  /** 标识行为发生在app内哪个页面，取值客户自定，可以是明文或id，建议传明文便于理解、分析，如首页，发现页，用户中心等用作上下文特征，刻画不同场景用户行为分布的差异 */
+  Page?: string;
+  /** 标识行为发生在页面的哪一区块，取值客户自定，可以是明文或id，建议传明文便于理解、分析，如横幅、广告位、猜你喜欢等用作上下文特征，刻画不同模块用户行为分布的差异 */
+  Module?: string;
+  /** 推荐追踪ID，使用推荐结果中返回的GoodsTraceId填入。 注意：如果和推荐结果中的GoodsTraceId不同，会影响行为特征归因，影响推荐算法效果。强烈建议 */
+  GoodsTraceId?: string;
+  /** 相关推荐场景点击进入详情页的内容id，该字段用来注明行为发生于哪个内容的详情页推荐中，相关推荐场景强烈建议 */
+  ReferrerGoodsId?: string;
+  /** 订单商品购买个数，当behaviorType=order，buy或addcart时有值，用作特征 */
+  OrderGoodsCnt?: number;
+  /** 订单总金额，当behaviorType=order或buy时有值（单位：元，统一货币体系，如统一为RMB，美元等），用作特征 */
+  OrderAmount?: number;
+  /** 用户设备ID数组，可传入用户的多个类型ID，详见UserIdInfo结构体，建议补齐，用于构建用户画像信息 */
+  UserIdList?: StrUserIdInfo[];
+  /** 行为发生时用户基础特征信息，用作特征 */
+  UserPortraitInfo?: UserPortraitInfo;
+  /** 标识行为发生在模块内的具体位置，如1、2、...用作上下文特征，刻画不同位置用户行为分布的差异 */
+  Position?: number;
+  /** json字符串，用于行为数据的扩展 */
+  Extension?: string;
+}
+
+/** 电商物料内容 */
+declare interface GoodsInfo {
+  /** 商品唯一ID，skuId或spuId，客户根据需求自行决定商品主键粒度。建议限制在128字符以内 */
+  GoodsId: string;
+  /** 商品物料展示类型：● article -图文● text -纯文本● video -视频● short_video -时长15秒以内的视频● mini_video -竖屏视频● image -纯图片（如当前类型不满足，请提单沟通解决方案） */
+  GoodsType: string;
+  /** 商品状态：● 1 - 上架 ● 2 - 下架 Status=2的内容不会在推荐结果中出现 需要下架内容时，把Status的值修改为2即可 */
+  Status: number;
+  /** 商品生成时间，秒级时间戳（1639624786），需大于0，用作特征和物料管理 */
+  PublishTimestamp: number;
+  /** 商品过期时间，秒级时间戳（1639624786），如未填，则默认PublishTimestamp往后延一年，用作特征，过期则不会被推荐，强烈建议 */
+  ExpireTimestamp?: number;
+  /** spu((Standard Product Unit))维度id，商品聚合信息的最小单位，强烈建议 */
+  SpuId?: string;
+  /** 类目层级数，例如3级类目，则填3，和CategoryPath字段的类数据匹配，强烈建议 */
+  CategoryLevel?: number;
+  /** 类目路径，一级二级三级等依次用英文冒号联接，和CategoryLevel字段值匹配，如体育：“女装:裙子:半身裙”。用于物料池管理，强烈建议 */
+  CategoryPath?: string;
+  /** 商品标题，主要用于语义分析，强烈建议 */
+  Title?: string;
+  /** 商品标签，多个标签用英文冒号联接，用作特征，强烈建议 */
+  Tags?: string;
+  /** 商品对应的品牌，取值用户自定义，可以是品牌id或品牌明文，用作特征以及打散/过滤规则，强烈建议 */
+  Brand?: string;
+  /** 商品所属店铺ID，取值客户自定义，用作特征，强烈建议 */
+  ShopId?: string;
+  /** 商品原始价格（单位：元，统一货币体系，如统一为RMB或美元等），用作特征，强烈建议 */
+  OrgPrice?: number;
+  /** 商品当前价格（单位：元，统一货币体系，如统一为RMB或美元等），用作特征，强烈建议 */
+  CurPrice?: number;
+  /** 商品来源类型，客户自定义，用于物料池管理 */
+  SourceId?: string;
+  /** 商品正文关键片段，建议控制在500字符以内，主要用于语义分析 */
+  Content?: string;
+  /** 商品正文详情，主要用于语义分析，当内容过大时建议用ContentUrl传递，与Content可二选一 */
+  ContentUrl?: string;
+  /** 商品封面url，不超过10个，用作特征 */
+  PicUrlList?: string[];
+  /** 卖家所在国家，ISO 3166-1 alpha-2编码，参考ISO 3166-1 alpha-2，中国：“CN”，用作特征 */
+  Country?: string;
+  /** 卖家所在省份，ISO 3166-2行政区编码，如中国参考ISO_3166-2:CN，广东省：“CN-GD”，用作特征 */
+  Province?: string;
+  /** 卖家所在城市地区，统一用国家最新标准地区行政编码，如：2020年行政区编码，其他国家统一用国际公认城市简称或者城市编码，用作特征 */
+  City?: string;
+  /** 商品是否包邮；1:包邮；2:不包邮；3:满足条件包邮，用作特征 */
+  FreeShipping?: number;
+  /** 商品邮费（单位：元，统一货币体系，如统一为RMB或美元等），用作特征 */
+  ShippingPrice?: number;
+  /** 商品累计好评次数，用作特征 */
+  PraiseCnt?: number;
+  /** 商品累计评论次数，用作特征 */
+  CommentCnt?: number;
+  /** 商品累计分享次数，用作特征 */
+  ShareCnt?: number;
+  /** 商品累计收藏次数，用作特征 */
+  CollectCnt?: number;
+  /** 商品累积成交次数，用作特征 */
+  OrderCnt?: number;
+  /** 商品平均客户评分，取值范围用户自定，用作特征 */
+  Score?: number;
+  /** json字符串，用于物料池管理的自定义扩展 */
+  Extension?: string;
+}
+
+/** 推荐返回的内容信息 */
+declare interface RecGoodsData {
+  /** 推荐返回的商品ID */
+  GoodsId: string;
+  /** 推荐结果分，取值范围[0,1000000] */
+  Score: number | null;
+  /** 推荐追踪id，本次推荐内容产生的后续行为上报均要用该GoodsTraceId上报。每次接口调用返回的GoodsTraceId不同 */
+  GoodsTraceId: string | null;
+  /** 商品所在位置 */
+  Position: number | null;
+}
+
 /** 推荐返回的内容信息 */
 declare interface RecItemData {
   /** 推荐的内容ID */
@@ -166,12 +280,48 @@ declare interface RecItemData {
   Score: number | null;
 }
 
+/** 用户信息 */
+declare interface StrUserIdInfo {
+}
+
 /** 用户ID信息 */
 declare interface UserIdInfo {
   /** 用户ID类型： ● qq: qq号码 ● qq_md5：qq的md5值 ● imei：设备imei ● imei_md5：imei的md5值 ● idfa: Apple 向用户设备随机分配的设备标识符 ● idfa_md5：idfa的md5值 ● oaid：安卓10之后一种非永久性设备标识符 ● oaid_md5：md5后的oaid ● wx_openid：微信openid ● qq_openid：QQ的openid ● phone：电话号码 ● phone_md5：md5后的电话号码 ● phone_sha256：SHA256加密的手机号 ● phone_sm3：国密SM3加密的手机号 （如当前类型不满足，请提单沟通解决方案） */
   Type: string;
   /** 用户ID值 */
   Value: string;
+}
+
+/** 用户基础画像 */
+declare interface UserPortraitInfo {
+}
+
+declare interface DescribeGoodsRecommendRequest {
+  /** 实例ID，在控制台获取 */
+  InstanceId: string;
+  /** 场景ID，在控制台创建场景后获取 */
+  SceneId: string;
+  /** 用户唯一ID，客户自定义用户ID，作为一个用户的唯一标识，需和行为数据上报接口中的UserId一致，否则影响特征关联 */
+  UserId: string;
+  /** 用户设备ID数组，可传入用户的多个类型ID，用于关联画像信息 */
+  UserIdList?: StrUserIdInfo[];
+  /** 推荐返回数量，默认10个，最多支持50个的内容返回。如果有更多数量要求，提单沟通解决 */
+  GoodsCnt?: number;
+  /** 当场景是相关推荐时该值必填，场景是非相关推荐时该值无效 */
+  CurrentGoodsId?: string;
+  /** 用户的实时特征信息，用作特征 */
+  UserPortraitInfo?: UserPortraitInfo;
+  /** 本次请求针对该用户需要过滤的物品列表(不超过100个) */
+  BlackGoodsList?: string[];
+  /** json字符串，扩展字段 */
+  Extension?: string;
+}
+
+declare interface DescribeGoodsRecommendResponse {
+  /** 推荐返回的商品信息列表 */
+  DataList?: RecGoodsData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface FeedRecommendRequest {
@@ -228,6 +378,30 @@ declare interface ReportFeedUserRequest {
 }
 
 declare interface ReportFeedUserResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ReportGoodsBehaviorRequest {
+  /** 实例ID，在控制台获取 */
+  InstanceId: string;
+  /** 上报的商品对应的用户行为数据数组，数量不超过50 */
+  GoodsBehaviorList: GoodsBehaviorInfo[];
+}
+
+declare interface ReportGoodsBehaviorResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ReportGoodsInfoRequest {
+  /** 实例ID，在控制台获取 */
+  InstanceId: string;
+  /** 上报的商品数组，一次数量不超过50 */
+  GoodsList: GoodsInfo[];
+}
+
+declare interface ReportGoodsInfoResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -535,6 +709,8 @@ declare namespace V20220324 {
 /** {@link Irp 智能推荐平台} */
 declare interface Irp {
   (): Versions;
+  /** 获取电商类推荐结果 {@link DescribeGoodsRecommendRequest} {@link DescribeGoodsRecommendResponse} */
+  DescribeGoodsRecommend(data: DescribeGoodsRecommendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGoodsRecommendResponse>;
   /** 获取信息流推荐结果 {@link FeedRecommendRequest} {@link FeedRecommendResponse} */
   FeedRecommend(data: FeedRecommendRequest, config?: AxiosRequestConfig): AxiosPromise<FeedRecommendResponse>;
   /** 上报信息流行为数据 {@link ReportFeedBehaviorRequest} {@link ReportFeedBehaviorResponse} */
@@ -543,6 +719,10 @@ declare interface Irp {
   ReportFeedItem(data: ReportFeedItemRequest, config?: AxiosRequestConfig): AxiosPromise<ReportFeedItemResponse>;
   /** 上报信息流用户信息 {@link ReportFeedUserRequest} {@link ReportFeedUserResponse} */
   ReportFeedUser(data: ReportFeedUserRequest, config?: AxiosRequestConfig): AxiosPromise<ReportFeedUserResponse>;
+  /** 上报电商类行为数据 {@link ReportGoodsBehaviorRequest} {@link ReportGoodsBehaviorResponse} */
+  ReportGoodsBehavior(data: ReportGoodsBehaviorRequest, config?: AxiosRequestConfig): AxiosPromise<ReportGoodsBehaviorResponse>;
+  /** 上报电商类商品信息 {@link ReportGoodsInfoRequest} {@link ReportGoodsInfoResponse} */
+  ReportGoodsInfo(data: ReportGoodsInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ReportGoodsInfoResponse>;
   /** 获取推荐结果 {@link V20220324.RecommendContentRequest} {@link V20220324.RecommendContentResponse} */
   RecommendContent(data: V20220324.RecommendContentRequest, config: AxiosRequestConfig & V20220324.VersionHeader): AxiosPromise<V20220324.RecommendContentResponse>;
   /** 上报行为 {@link V20220324.ReportActionRequest} {@link V20220324.ReportActionResponse} */

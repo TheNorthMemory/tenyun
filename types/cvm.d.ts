@@ -1951,9 +1951,9 @@ declare interface DescribeTaskInfoRequest {
   InstanceIds?: string[];
   /** 按照一个或者多个实例名称查询。 */
   Aliases?: string[];
-  /** 时间查询区间的起始位置，会根据`OrderField`中指定的字段进行过滤。未传入时默认为当天`00:00:00`。 */
+  /** 时间查询区间的起始位置，会根据任务创建时间`CreateTime`进行过滤。未传入时默认为当天`00:00:00`。 */
   StartDate?: string;
-  /** 时间查询区间的终止位置，会根据`OrderField`中指定的字段进行过滤。未传入时默认为当前时刻。 */
+  /** 时间查询区间的终止位置，会根据任务创建时间`CreateTime`进行过滤。未传入时默认为当前时刻。 */
   EndDate?: string;
   /** 指定返回维修任务列表的排序字段，目前支持：- `CreateTime`：任务创建时间- `AuthTime`：任务授权时间- `EndTime`：任务结束时间未传入时或为空时，默认按`CreateTime`字段进行排序。 */
   OrderField?: string;
@@ -2605,6 +2605,28 @@ declare interface RenewInstancesResponse {
   RequestId?: string;
 }
 
+declare interface RepairTaskControlRequest {
+  /** 待授权任务实例对应的产品类型，支持取值：- `CVM`：云服务器- `CDH`：专用宿主机- `CPM2.0`：裸金属云服务器 */
+  Product: string;
+  /** 指定待操作的实例ID列表，仅允许对列表中的实例ID相关的维修任务发起授权。 */
+  InstanceIds: string[];
+  /** 维修任务ID。 */
+  TaskId: string;
+  /** 操作类型，当前只支持传入`AuthorizeRepair`。 */
+  Operate: string;
+  /** 预约授权时间，形如`2023-01-01 12:00:00`。预约时间需晚于当前时间至少5分钟，且在48小时之内。 */
+  OrderAuthTime?: string;
+  /** 附加的授权处理策略。 */
+  TaskSubMethod?: string;
+}
+
+declare interface RepairTaskControlResponse {
+  /** 已完成授权的维修任务ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResetInstanceRequest {
   /** 实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。 */
   InstanceId: string;
@@ -2806,6 +2828,8 @@ declare interface SyncImagesResponse {
 declare interface TerminateInstancesRequest {
   /** 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
   InstanceIds: string[];
+  /** 释放实例挂载的包年包月数据盘。 */
+  ReleasePrepaidDataDisks?: boolean;
 }
 
 declare interface TerminateInstancesResponse {
@@ -2982,6 +3006,8 @@ declare interface Cvm {
   RenewHosts(data: RenewHostsRequest, config?: AxiosRequestConfig): AxiosPromise<RenewHostsResponse>;
   /** 续费实例 {@link RenewInstancesRequest} {@link RenewInstancesResponse} */
   RenewInstances(data: RenewInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RenewInstancesResponse>;
+  /** 管理维修任务 {@link RepairTaskControlRequest} {@link RepairTaskControlResponse} */
+  RepairTaskControl(data: RepairTaskControlRequest, config?: AxiosRequestConfig): AxiosPromise<RepairTaskControlResponse>;
   /** 重装实例 {@link ResetInstanceRequest} {@link ResetInstanceResponse} */
   ResetInstance(data: ResetInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstanceResponse>;
   /** 调整实例带宽上限 {@link ResetInstancesInternetMaxBandwidthRequest} {@link ResetInstancesInternetMaxBandwidthResponse} */

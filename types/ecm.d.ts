@@ -3621,7 +3621,7 @@ declare interface RunInstancesRequest {
 
 declare interface RunInstancesResponse {
   /** 创建中的实例ID列表 */
-  InstanceIdSet: string[] | null;
+  InstanceIdSet?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

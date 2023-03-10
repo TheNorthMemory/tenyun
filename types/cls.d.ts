@@ -288,6 +288,40 @@ declare interface ContentInfo {
   Parquet?: ParquetInfo | null;
 }
 
+/** cos导入配置信息 */
+declare interface CosRechargeInfo {
+  /** COS导入配置ID */
+  Id: string | null;
+  /** 日志主题ID */
+  TopicId: string | null;
+  /** 日志集ID */
+  LogsetId: string | null;
+  /** cos导入任务名称 */
+  Name: string | null;
+  /** cos存储桶 */
+  Bucket: string | null;
+  /** cos存储桶地域 */
+  BucketRegion: string | null;
+  /** cos存储桶前缀地址 */
+  Prefix: string | null;
+  /** 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志；默认为minimalist_log */
+  LogType: string | null;
+  /** 状态 status 0: 已创建, 1: 运行中, 2: 已停止, 3: 已完成, 4: 运行失败。 */
+  Status: number | null;
+  /** 是否启用: 0： 未启用 ， 1：启用 */
+  Enable: number | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 更新时间 */
+  UpdateTime: string | null;
+  /** 进度条百分值 */
+  Progress: number | null;
+  /** supported: "", "gzip", "lzop", "snappy”; 默认空 */
+  Compress: string | null;
+  /** 见： ExtractRuleInfo 结构描述 */
+  ExtractRuleInfo: ExtractRuleInfo | null;
+}
+
 /** csv内容描述 */
 declare interface CsvInfo {
   /** csv首行是否打印key */
@@ -705,9 +739,9 @@ declare interface ShipperTaskInfo {
 /** 创建资源实例时同时绑定的标签对说明 */
 declare interface Tag {
   /** 标签键 */
-  Key: string;
+  Key: string | null;
   /** 标签值 */
-  Value: string;
+  Value: string | null;
 }
 
 /** 日志主题信息 */
@@ -944,6 +978,32 @@ declare interface CreateConsumerResponse {
   RequestId?: string;
 }
 
+declare interface CreateCosRechargeRequest {
+  /** 日志主题 ID */
+  TopicId: string;
+  /** 日志集ID */
+  LogsetId: string;
+  /** 投递任务名称 */
+  Name: string;
+  /** COS存储桶 */
+  Bucket: string;
+  /** COS存储桶所在地域 */
+  BucketRegion: string;
+  /** COS文件所在文件夹的前缀 */
+  Prefix: string;
+  /** 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文；默认为minimalist_log */
+  LogType: string;
+  /** supported: "", "gzip", "lzop", "snappy”; 默认空 */
+  Compress?: string;
+  /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
+  ExtractRuleInfo?: ExtractRuleInfo;
+}
+
+declare interface CreateCosRechargeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateExportRequest {
   /** 日志主题ID */
   TopicId: string;
@@ -995,7 +1055,7 @@ declare interface CreateLogsetRequest {
 
 declare interface CreateLogsetResponse {
   /** 日志集ID */
-  LogsetId: string;
+  LogsetId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1316,6 +1376,22 @@ declare interface DescribeConsumerResponse {
   Ckafka: Ckafka;
   /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4] */
   Compression: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosRechargesRequest {
+  /** 日志主题 ID */
+  TopicId: string;
+  /** 状态 status 0: 已创建, 1: 运行中, 2: 已停止, 3: 已完成, 4: 运行失败。 */
+  Status?: number;
+  /** 是否启用: 0： 未启用 ， 1：启用 */
+  Enable?: number;
+}
+
+declare interface DescribeCosRechargesResponse {
+  /** 见: CosRechargeInfo 结构描述 */
+  Data?: CosRechargeInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1732,6 +1808,22 @@ declare interface ModifyConsumerResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCosRechargeRequest {
+  /** COS导入配置ID */
+  Id: string;
+  /** 日志主题Id */
+  TopicId: string;
+  /** COS导入任务名称 */
+  Name?: string;
+  /** 是否启用: 0： 未启用 ， 1：启用 */
+  Enable?: number;
+}
+
+declare interface ModifyCosRechargeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyIndexRequest {
   /** 日志主题ID */
   TopicId: string;
@@ -1851,7 +1943,7 @@ declare interface OpenKafkaConsumerRequest {
 
 declare interface OpenKafkaConsumerResponse {
   /** 待消费TopicId */
-  TopicID: string;
+  TopicID?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1961,6 +2053,8 @@ declare interface Cls {
   CreateConfigExtra(data: CreateConfigExtraRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigExtraResponse>;
   /** 创建投递任务 {@link CreateConsumerRequest} {@link CreateConsumerResponse} */
   CreateConsumer(data: CreateConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerResponse>;
+  /** 创建cos导入任务 {@link CreateCosRechargeRequest} {@link CreateCosRechargeResponse} */
+  CreateCosRecharge(data: CreateCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosRechargeResponse>;
   /** 创建日志下载任务 {@link CreateExportRequest} {@link CreateExportResponse} */
   CreateExport(data: CreateExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportResponse>;
   /** 创建索引 {@link CreateIndexRequest} {@link CreateIndexResponse} */
@@ -2011,6 +2105,8 @@ declare interface Cls {
   DescribeConfigs(data?: DescribeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigsResponse>;
   /** 获取投递配置 {@link DescribeConsumerRequest} {@link DescribeConsumerResponse} */
   DescribeConsumer(data: DescribeConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerResponse>;
+  /** 获取cos导入配置 {@link DescribeCosRechargesRequest} {@link DescribeCosRechargesResponse} */
+  DescribeCosRecharges(data: DescribeCosRechargesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosRechargesResponse>;
   /** 获取日志下载任务列表 {@link DescribeExportsRequest} {@link DescribeExportsResponse} */
   DescribeExports(data: DescribeExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportsResponse>;
   /** 获取索引配置信息 {@link DescribeIndexRequest} {@link DescribeIndexResponse} */
@@ -2049,6 +2145,8 @@ declare interface Cls {
   ModifyConfigExtra(data: ModifyConfigExtraRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigExtraResponse>;
   /** 修改投递任务 {@link ModifyConsumerRequest} {@link ModifyConsumerResponse} */
   ModifyConsumer(data: ModifyConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerResponse>;
+  /** 修改cos导入任务 {@link ModifyCosRechargeRequest} {@link ModifyCosRechargeResponse} */
+  ModifyCosRecharge(data: ModifyCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosRechargeResponse>;
   /** 修改索引 {@link ModifyIndexRequest} {@link ModifyIndexResponse} */
   ModifyIndex(data: ModifyIndexRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIndexResponse>;
   /** 修改日志集 {@link ModifyLogsetRequest} {@link ModifyLogsetResponse} */

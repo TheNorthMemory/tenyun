@@ -114,6 +114,12 @@ declare interface Caller {
 declare interface CcInfo {
   /** 被抄送人手机号 */
   Mobile?: string;
+  /** 被抄送人姓名 */
+  Name?: string | null;
+  /** 被抄送人类型,0--个人1--员工 */
+  CcType?: number | null;
+  /** 被抄送人权限0--可查看1--可查看也可下载 */
+  CcPermission?: number | null;
 }
 
 /** 模板控件信息 */
@@ -524,6 +530,30 @@ declare interface RegisterInfo {
   Uscc: string;
 }
 
+/** 解除协议的签署人，如不指定，默认使用待解除流程（即原流程）中的签署人。注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该C端签署人。 */
+declare interface ReleasedApprover {
+  /** 签署人姓名，最大长度50个字符 */
+  Name: string | null;
+  /** 签署人手机号 */
+  Mobile: string | null;
+  /** 要替换的参与人在原合同参与人列表中的签署人编号,通过DescribeFlowInfo 接口获取（即FlowDetailInfos. FlowApproverInfos 结构中的ReceiptId ） */
+  RelievedApproverReceiptId: string | null;
+}
+
+/** 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。 */
+declare interface RelieveInfo {
+  /** 解除理由，最大支持200个字 */
+  Reason: string | null;
+  /** 解除后仍然有效的条款，保留条款，最大支持200个字 */
+  RemainInForceItem?: string | null;
+  /** 原合同事项处理-费用结算，最大支持200个字 */
+  OriginalExpenseSettlement?: string | null;
+  /** 原合同事项处理-其他事项，最大支持200个字 */
+  OriginalOtherSettlement?: string | null;
+  /** 其他约定，最大支持200个字 */
+  OtherDeals?: string | null;
+}
+
 /** 催办接口返回详细信息 */
 declare interface RemindFlowRecords {
   /** 是否能够催办 */
@@ -833,6 +863,8 @@ declare interface CreateFlowByFilesRequest {
   SignBeanTag?: number;
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
+  /** 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知 */
+  CcNotifyType?: number;
 }
 
 declare interface CreateFlowByFilesResponse {
@@ -1022,6 +1054,24 @@ declare interface CreatePrepareFlowRequest {
 declare interface CreatePrepareFlowResponse {
   /** 快速发起预览链接 */
   Url: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateReleaseFlowRequest {
+  /** 调用方用户信息，userId 必填 */
+  Operator: UserInfo;
+  /** 待解除的签署流程编号（即原签署流程的编号） */
+  NeedRelievedFlowId: string;
+  /** 解除协议内容 */
+  ReliveInfo: RelieveInfo;
+  /** 非必须，解除协议的本企业签署人列表，默认使用原流程的签署人列表,当解除协议的签署人与原流程的签署人不能相同时（例如原流程签署人离职了），需要指定本企业其他已实名员工来替换原流程中的原签署人，注意需要指明原签署人的编号(ReceiptId,通过DescribeFlowInfo接口获取)来代表需要替换哪一个签署人解除协议的签署人数量不能多于原流程的签署人数量 */
+  ReleasedApprovers?: ReleasedApprover[];
+}
+
+declare interface CreateReleaseFlowResponse {
+  /** 解除协议流程编号 */
+  FlowId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1429,6 +1479,8 @@ declare interface StartFlowRequest {
   ClientToken?: string;
   /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
   Agent?: Agent;
+  /** 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知 */
+  CcNotifyType?: number;
 }
 
 declare interface StartFlowResponse {
@@ -1515,6 +1567,8 @@ declare interface Ess {
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
   /** 创建快速发起流程 {@link CreatePrepareFlowRequest} {@link CreatePrepareFlowResponse} */
   CreatePrepareFlow(data: CreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrepareFlowResponse>;
+  /** 发起解除协议 {@link CreateReleaseFlowRequest} {@link CreateReleaseFlowResponse} */
+  CreateReleaseFlow(data: CreateReleaseFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseFlowResponse>;
   /** 获取小程序跳转链接 {@link CreateSchemeUrlRequest} {@link CreateSchemeUrlResponse} */
   CreateSchemeUrl(data: CreateSchemeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchemeUrlResponse>;
   /** 印章授权 {@link CreateSealPolicyRequest} {@link CreateSealPolicyResponse} */

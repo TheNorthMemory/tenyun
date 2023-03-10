@@ -98,9 +98,9 @@ declare interface ClusterInfo {
   OldPasswordExpireTime: string | null;
   /** TcaplusDB SDK连接参数，接入ipv6地址 */
   ApiAccessIpv6: string | null;
-  /** 集群类型 */
+  /** 集群类型，0,1:共享集群; 2:独立集群 */
   ClusterType: number | null;
-  /** 集群状态 */
+  /** 集群状态, 0：表示正常运行中，1：表示冻结隔离一般欠费进入此状态，2：表示待回收，一般用户主动触发删除进入这个状态，3：待释放，进入这个状态，表示可以释放此表占用的资源了，4：变更中 */
   ClusterStatus: number | null;
   /** 读CU */
   ReadCapacityUnit: number | null;
@@ -126,6 +126,8 @@ declare interface ClusterInfo {
   UlogBackupExpireDay: number | null;
   /** 集群Ulog备份文件过期策略是否为只读， 0： UlogBackupExpire是只读，不可修改， 1： UlogBackupExpire可以修改（当前业务存在Svrid第二段等于clusterid的机器） */
   IsReadOnlyUlogBackupExpireDay: number | null;
+  /** restproxy状态 */
+  RestProxyStatus: number | null;
 }
 
 /** 比较表格的Meta信息 */
@@ -332,6 +334,8 @@ declare interface ProxyDetailInfo {
   AverageProcessDelay: number;
   /** 慢处理包速度 */
   SlowProcessSpeed: number;
+  /** 版本 */
+  Version: string | null;
 }
 
 /** proxy机器信息 */
@@ -422,6 +426,8 @@ declare interface ServerDetailInfo {
   ReadNum: number;
   /** 写次数 */
   WriteNum: number;
+  /** 版本 */
+  Version: string | null;
 }
 
 /** svr的机器列表ServerList */
@@ -528,6 +534,14 @@ declare interface TableGroupInfo {
   TableCount: number;
   /** 表格组包含的表格存储总量（MB） */
   TotalSize: number;
+  /** 表格Txh备份文件多少天后过期删除 */
+  TxhBackupExpireDay: number | null;
+  /** 是否开启mysql负载均衡,0未开启 1开启中 2已开启 */
+  EnableMysql: number;
+  /** mysql负载均衡vip */
+  MysqlConnIp: string | null;
+  /** mysql负载均衡vport */
+  MysqlConnPort: number | null;
 }
 
 /** 表格详情信息 */

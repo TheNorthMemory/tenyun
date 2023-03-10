@@ -58,6 +58,38 @@ declare interface ActionConfigInfo {
   Switch: string;
 }
 
+/** 编排原子任务 */
+declare interface Activity {
+  /** 原子任务类型：input: 起始节点output：终止节点action-trans：转码action-samplesnapshot：采样截图action-AIAnalysis: 分析action-AIRecognition：识别action-aiReview：审核action-animated-graphics：转动图action-image-sprite：雪碧图action-snapshotByTimeOffset: 时间点截图action-adaptive-substream：自适应码流 */
+  ActivityType: string;
+  /** 后驱节点索引数组 */
+  ReardriveIndex?: number[];
+  /** 原子任务参数 */
+  ActivityPara?: ActivityPara;
+}
+
+/** 编排原子任务 */
+declare interface ActivityPara {
+  /** 视频转码任务 */
+  TranscodeTask?: TranscodeTaskInput;
+  /** 视频转动图任务 */
+  AnimatedGraphicTask?: AnimatedGraphicTaskInput;
+  /** 视频按时间点截图任务 */
+  SnapshotByTimeOffsetTask?: SnapshotByTimeOffsetTaskInput;
+  /** 视频采样截图任务 */
+  SampleSnapshotTask?: SampleSnapshotTaskInput;
+  /** 视频截雪碧图任务 */
+  ImageSpriteTask?: ImageSpriteTaskInput;
+  /** 转自适应码流任务 */
+  AdaptiveDynamicStreamingTask?: AdaptiveDynamicStreamingTaskInput;
+  /** 视频内容审核类型任务 */
+  AiContentReviewTask?: AiContentReviewTaskInput;
+  /** 视频内容分析类型任务 */
+  AiAnalysisTask?: AiAnalysisTaskInput;
+  /** 视频内容识别类型任务 */
+  AiRecognitionTask?: AiRecognitionTaskInput;
+}
+
 /** 编排子任务输出 */
 declare interface ActivityResItem {
   /** 转码任务输出 */
@@ -3398,6 +3430,30 @@ declare interface ScheduleTask {
   ActivityResultSet: ActivityResult[] | null;
 }
 
+/** 编排详情。 */
+declare interface SchedulesInfo {
+  /** 编排唯一标识。 */
+  ScheduleId: number;
+  /** 编排名称。 */
+  ScheduleName: string | null;
+  /** 编排状态，取值范围：Enabled：已启用，Disabled：已禁用。 */
+  Status: string[] | null;
+  /** 编排绑定的触发规则。 */
+  Trigger: WorkflowTrigger | null;
+  /** 编排任务列表。 */
+  Activities: Activity[] | null;
+  /** 媒体处理的文件输出存储位置。 */
+  OutputStorage: TaskOutputStorage | null;
+  /** 媒体处理生成的文件输出的目标目录。 */
+  OutputDir: string | null;
+  /** 任务的事件通知配置。 */
+  TaskNotifyConfig: TaskNotifyConfig | null;
+  /** 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  CreateTime: string | null;
+  /** 最后编辑时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  UpdateTime: string | null;
+}
+
 /** 去划痕配置 */
 declare interface ScratchRepairConfig {
   /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
@@ -4212,6 +4268,28 @@ declare interface CreateSampleSnapshotTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateScheduleRequest {
+  /** 编排名称，最多128字符。同一个用户该名称唯一。 */
+  ScheduleName: string;
+  /** 编排绑定的触发规则，当上传视频命中该规则到该对象时即触发工作流。 */
+  Trigger: WorkflowTrigger;
+  /** 编排任务列表。 */
+  Activities: Activity[];
+  /** 媒体处理的文件输出存储位置。不填则继承 Trigger 中的存储位置。 */
+  OutputStorage?: TaskOutputStorage;
+  /** 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与触发文件所在的目录一致。 */
+  OutputDir?: string;
+  /** 任务的事件通知配置，不填代表不获取事件通知。 */
+  TaskNotifyConfig?: TaskNotifyConfig;
+}
+
+declare interface CreateScheduleResponse {
+  /** 编排 ID。 */
+  ScheduleId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSnapshotByTimeOffsetTemplateRequest {
   /** 指定时间点截图模板名称，长度限制：64 个字符。 */
   Name?: string;
@@ -4444,6 +4522,16 @@ declare interface DeleteSampleSnapshotTemplateRequest {
 }
 
 declare interface DeleteSampleSnapshotTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteScheduleRequest {
+  /** 编排唯一标识。 */
+  ScheduleId: number;
+}
+
+declare interface DeleteScheduleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4692,6 +4780,26 @@ declare interface DescribeSampleSnapshotTemplatesResponse {
   TotalCount: number;
   /** 采样截图模板详情列表。 */
   SampleSnapshotTemplateSet: SampleSnapshotTemplate[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSchedulesRequest {
+  /** 编排 ID 过滤条件，数组长度限制：100。 */
+  ScheduleIds?: number[];
+  /** 状态，取值范围：Enabled：已启用，Disabled：已禁用。不填此参数，则不区分工作流状态。 */
+  Status?: string;
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认值：10，最大值：100。 */
+  Limit?: number;
+}
+
+declare interface DescribeSchedulesResponse {
+  /** 符合过滤条件的记录总数。 */
+  TotalCount: number;
+  /** 编排信息数组。 */
+  ScheduleInfoSet: SchedulesInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5040,6 +5148,16 @@ declare interface DescribeWorkflowsResponse {
   RequestId?: string;
 }
 
+declare interface DisableScheduleRequest {
+  /** 编排唯一表示。 */
+  ScheduleId: number;
+}
+
+declare interface DisableScheduleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisableWorkflowRequest {
   /** 工作流 ID。 */
   WorkflowId: number;
@@ -5072,6 +5190,16 @@ declare interface EditMediaRequest {
 declare interface EditMediaResponse {
   /** 编辑视频的任务 ID，可以通过该 ID 查询编辑任务的状态。 */
   TaskId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnableScheduleRequest {
+  /** 编排唯一标识。 */
+  ScheduleId: number;
+}
+
+declare interface EnableScheduleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5310,6 +5438,28 @@ declare interface ModifySampleSnapshotTemplateRequest {
 }
 
 declare interface ModifySampleSnapshotTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyScheduleRequest {
+  /** 编排唯一标识。 */
+  ScheduleId: number;
+  /** 编排名称。 */
+  ScheduleName?: string;
+  /** 编排绑定的触发规则。 */
+  Trigger?: WorkflowTrigger;
+  /** 编排任务列表。注意：内部不允许部分更新，如果需要更新需全量提交编排任务列表。 */
+  Activities?: Activity[];
+  /** 媒体处理的文件输出存储位置。 */
+  OutputStorage?: TaskOutputStorage;
+  /** 媒体处理生成的文件输出的目标目录。注意：如果设置为空，则表示取消老配置的OutputDir值。 */
+  OutputDir?: string;
+  /** 任务的事件通知配置。 */
+  TaskNotifyConfig?: TaskNotifyConfig;
+}
+
+declare interface ModifyScheduleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5657,6 +5807,8 @@ declare interface Mps {
   CreatePersonSample(data: CreatePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonSampleResponse>;
   /** 创建采样截图模板 {@link CreateSampleSnapshotTemplateRequest} {@link CreateSampleSnapshotTemplateResponse} */
   CreateSampleSnapshotTemplate(data: CreateSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSampleSnapshotTemplateResponse>;
+  /** 创建编排 {@link CreateScheduleRequest} {@link CreateScheduleResponse} */
+  CreateSchedule(data: CreateScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduleResponse>;
   /** 创建指定时间点截图模板 {@link CreateSnapshotByTimeOffsetTemplateRequest} {@link CreateSnapshotByTimeOffsetTemplateResponse} */
   CreateSnapshotByTimeOffsetTemplate(data?: CreateSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotByTimeOffsetTemplateResponse>;
   /** 创建媒体传输流 {@link CreateStreamLinkFlowRequest} {@link CreateStreamLinkFlowResponse} */
@@ -5687,6 +5839,8 @@ declare interface Mps {
   DeletePersonSample(data: DeletePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonSampleResponse>;
   /** 删除采样截图模板 {@link DeleteSampleSnapshotTemplateRequest} {@link DeleteSampleSnapshotTemplateResponse} */
   DeleteSampleSnapshotTemplate(data: DeleteSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSampleSnapshotTemplateResponse>;
+  /** 删除编排 {@link DeleteScheduleRequest} {@link DeleteScheduleResponse} */
+  DeleteSchedule(data: DeleteScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduleResponse>;
   /** 删除指定时间点截图模板 {@link DeleteSnapshotByTimeOffsetTemplateRequest} {@link DeleteSnapshotByTimeOffsetTemplateResponse} */
   DeleteSnapshotByTimeOffsetTemplate(data: DeleteSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotByTimeOffsetTemplateResponse>;
   /** 删除媒体传输流 {@link DeleteStreamLinkFlowRequest} {@link DeleteStreamLinkFlowResponse} */
@@ -5719,6 +5873,8 @@ declare interface Mps {
   DescribePersonSamples(data?: DescribePersonSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonSamplesResponse>;
   /** 获取采样截图模板列表 {@link DescribeSampleSnapshotTemplatesRequest} {@link DescribeSampleSnapshotTemplatesResponse} */
   DescribeSampleSnapshotTemplates(data?: DescribeSampleSnapshotTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleSnapshotTemplatesResponse>;
+  /** 查询编排 {@link DescribeSchedulesRequest} {@link DescribeSchedulesResponse} */
+  DescribeSchedules(data?: DescribeSchedulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSchedulesResponse>;
   /** 获取指定时间点截图模板列表 {@link DescribeSnapshotByTimeOffsetTemplatesRequest} {@link DescribeSnapshotByTimeOffsetTemplatesResponse} */
   DescribeSnapshotByTimeOffsetTemplates(data?: DescribeSnapshotByTimeOffsetTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotByTimeOffsetTemplatesResponse>;
   /** 查询媒体传输开通状态 {@link DescribeStreamLinkActivateStateRequest} {@link DescribeStreamLinkActivateStateResponse} */
@@ -5751,10 +5907,14 @@ declare interface Mps {
   DescribeWordSamples(data?: DescribeWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWordSamplesResponse>;
   /** 获取工作流列表 {@link DescribeWorkflowsRequest} {@link DescribeWorkflowsResponse} */
   DescribeWorkflows(data?: DescribeWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowsResponse>;
+  /** 禁用编排 {@link DisableScheduleRequest} {@link DisableScheduleResponse} */
+  DisableSchedule(data: DisableScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DisableScheduleResponse>;
   /** 禁用工作流 {@link DisableWorkflowRequest} {@link DisableWorkflowResponse} */
   DisableWorkflow(data: DisableWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<DisableWorkflowResponse>;
   /** 编辑视频 {@link EditMediaRequest} {@link EditMediaResponse} */
   EditMedia(data: EditMediaRequest, config?: AxiosRequestConfig): AxiosPromise<EditMediaResponse>;
+  /** 启用编排 {@link EnableScheduleRequest} {@link EnableScheduleResponse} */
+  EnableSchedule(data: EnableScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<EnableScheduleResponse>;
   /** 启用工作流 {@link EnableWorkflowRequest} {@link EnableWorkflowResponse} */
   EnableWorkflow(data: EnableWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<EnableWorkflowResponse>;
   /** 执行定制 API {@link ExecuteFunctionRequest} {@link ExecuteFunctionResponse} */
@@ -5777,6 +5937,8 @@ declare interface Mps {
   ModifyPersonSample(data: ModifyPersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonSampleResponse>;
   /** 修改采样截图模板 {@link ModifySampleSnapshotTemplateRequest} {@link ModifySampleSnapshotTemplateResponse} */
   ModifySampleSnapshotTemplate(data: ModifySampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySampleSnapshotTemplateResponse>;
+  /** 修改编排 {@link ModifyScheduleRequest} {@link ModifyScheduleResponse} */
+  ModifySchedule(data: ModifyScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduleResponse>;
   /** 修改指定时间点截图模板 {@link ModifySnapshotByTimeOffsetTemplateRequest} {@link ModifySnapshotByTimeOffsetTemplateResponse} */
   ModifySnapshotByTimeOffsetTemplate(data: ModifySnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotByTimeOffsetTemplateResponse>;
   /** 修改媒体传输流 {@link ModifyStreamLinkFlowRequest} {@link ModifyStreamLinkFlowResponse} */

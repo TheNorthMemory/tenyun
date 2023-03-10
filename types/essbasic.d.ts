@@ -72,6 +72,12 @@ declare interface BaseFlowInfo {
 declare interface CcInfo {
   /** 被抄送人手机号，大陆11位手机号 */
   Mobile?: string;
+  /** 被抄送人姓名 */
+  Name?: string | null;
+  /** 被抄送人类型0--个人. 1--员工 */
+  CcType?: number | null;
+  /** 被抄送人权限0--可查看1--可查看也可下载 */
+  CcPermission?: number | null;
 }
 
 /** 签署人配置信息 */
@@ -360,6 +366,8 @@ declare interface FlowInfo {
   CcInfos?: CcInfo[];
   /** 发起方企业的签署人进行签署操作是否需要企业内部审批。若设置为true,审核结果需通过接口 ChannelCreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。 */
   NeedSignReview?: boolean;
+  /** 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知 */
+  CcNotifyType?: number;
 }
 
 /** 流程对应资源链接信息 */
@@ -853,7 +861,7 @@ declare interface ChannelCreateFlowByFilesRequest {
   Agent?: Agent;
   /** 签署流程名称，长度不超过200个字符 */
   FlowName?: string;
-  /** 签署流程签约方列表，最多不超过5个参与方 */
+  /** 签署流程签约方列表，最多不超过50个参与方 */
   FlowApprovers?: FlowApproverInfo[];
   /** 签署文件资源Id列表，目前仅支持单个文件 */
   FileIds?: string[];
@@ -881,6 +889,10 @@ declare interface ChannelCreateFlowByFilesRequest {
   SignBeanTag?: number;
   /** 操作者的信息，不用传 */
   Operator?: UserInfo;
+  /** 被抄送人信息列表 */
+  CcInfos?: CcInfo[];
+  /** 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知 */
+  CcNotifyType?: number;
 }
 
 declare interface ChannelCreateFlowByFilesResponse {

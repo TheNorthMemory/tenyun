@@ -2,6 +2,22 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 告警策略 */
+declare interface AlarmPolicy {
+  /** 用户账号 */
+  Uin?: string;
+  /** 告警事件 */
+  Event?: string;
+  /** 告警阈值 */
+  Limit?: number;
+  /** 告警策略是否生效，0：停用，1：启用 */
+  Status?: number;
+  /** 在这个时间后才允许发送告警 */
+  BeginTime?: string;
+  /** 在这个时间前才允许发送告警 */
+  EndTime?: string;
+}
+
 /** 设备厂商信息 */
 declare interface DeviceInfo {
   /** 厂商名称 */
@@ -16,6 +32,8 @@ declare interface HsmInfo {
   Model: string;
   /** 此类型的加密机所支持的VSM类型列表 */
   VsmTypes: VsmInfo[];
+  /** 加密机母机类型：virtualization、GHSM、EHSM、SHSM */
+  HsmType?: string;
 }
 
 /** 资源信息 */
@@ -64,6 +82,8 @@ declare interface ResourceInfo {
   Tags: Tag[] | null;
   /** 厂商 */
   Manufacturer: string | null;
+  /** 告警状态，0：停用，1：启用 */
+  AlarmStatus?: number | null;
 }
 
 /** 安全组基础信息 */
@@ -364,6 +384,30 @@ declare interface DescribeVsmsResponse {
   RequestId?: string;
 }
 
+declare interface GetAlarmEventRequest {
+}
+
+declare interface GetAlarmEventResponse {
+  /** 用户所有的告警策略 */
+  AlarmConfig?: AlarmPolicy[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetVsmMonitorInfoRequest {
+  /** 资源Id */
+  ResourceId: string;
+  /** 资源名称 */
+  ResourceName?: string;
+}
+
+declare interface GetVsmMonitorInfoResponse {
+  /** VSM监控信息 */
+  MonitorInfo?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface InquiryPriceBuyVsmRequest {
   /** 需购买实例的数量 */
   GoodsNum: number;
@@ -396,6 +440,24 @@ declare interface InquiryPriceBuyVsmResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAlarmEventRequest {
+  /** 告警事件，支持CPU、MEM、TCP */
+  Event: string;
+  /** 告警阈值 */
+  Limit: number;
+  /** 告警状态，0表示停用，1表示启动 */
+  Status: number;
+  /** 告警开始时间，只有在这个时间后才会发送告警，当跟EndTime同时为空时表示全天告警 */
+  BeginTime?: string;
+  /** 告警结束时间，只有在这个时间前才会发送告警，当跟BeginTime同时为空时表示全天告警 */
+  EndTime?: string;
+}
+
+declare interface ModifyAlarmEventResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyVsmAttributesRequest {
   /** 资源Id */
   ResourceId: string;
@@ -409,6 +471,8 @@ declare interface ModifyVsmAttributesRequest {
   VpcId?: string;
   /** 子网Id */
   SubnetId?: string;
+  /** 告警开关，0表示关闭告警，1表示启用告警 */
+  AlarmStatus?: number;
 }
 
 declare interface ModifyVsmAttributesResponse {
@@ -437,8 +501,14 @@ declare interface Cloudhsm {
   DescribeVsmAttributes(data: DescribeVsmAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVsmAttributesResponse>;
   /** 获取用户VSM列表 {@link DescribeVsmsRequest} {@link DescribeVsmsResponse} */
   DescribeVsms(data: DescribeVsmsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVsmsResponse>;
+  /** 获取告警事件 {@link GetAlarmEventRequest} {@link GetAlarmEventResponse} */
+  GetAlarmEvent(data?: GetAlarmEventRequest, config?: AxiosRequestConfig): AxiosPromise<GetAlarmEventResponse>;
+  /** 获取VSM监控信息 {@link GetVsmMonitorInfoRequest} {@link GetVsmMonitorInfoResponse} */
+  GetVsmMonitorInfo(data: GetVsmMonitorInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetVsmMonitorInfoResponse>;
   /** 询价 {@link InquiryPriceBuyVsmRequest} {@link InquiryPriceBuyVsmResponse} */
   InquiryPriceBuyVsm(data: InquiryPriceBuyVsmRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceBuyVsmResponse>;
+  /** 修改告警事件 {@link ModifyAlarmEventRequest} {@link ModifyAlarmEventResponse} */
+  ModifyAlarmEvent(data: ModifyAlarmEventRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmEventResponse>;
   /** 修改VSM属性 {@link ModifyVsmAttributesRequest} {@link ModifyVsmAttributesResponse} */
   ModifyVsmAttributes(data: ModifyVsmAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVsmAttributesResponse>;
 }

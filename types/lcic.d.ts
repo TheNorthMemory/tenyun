@@ -703,7 +703,7 @@ declare interface DescribeRoomResponse {
   DisableRecord?: number;
   /** 助教UserId列表。 */
   Assistants?: string[] | null;
-  /** 录制地址。仅在房间结束后存在。 */
+  /** 录制地址（协议为https)。仅在房间结束后存在。 */
   RecordUrl?: string | null;
   /** 课堂状态。0为未开始，1为已开始，2为已结束，3为已过期。 */
   Status?: number | null;
