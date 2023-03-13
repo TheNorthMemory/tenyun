@@ -453,6 +453,18 @@ declare interface CreateSupervisorResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAppCustomContentRequest {
+  /** 应用ID。 */
+  SdkAppId: number;
+  /** 指定需要删除的已设置的scene场景自定义元素，如果为空则删除应用下已设置的所有自定义元素。 */
+  Scenes?: string[];
+}
+
+declare interface DeleteAppCustomContentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDocumentRequest {
   /** 文档ID。 */
   DocumentId: string;
@@ -1034,6 +1046,8 @@ declare interface Lcic {
   CreateRoom(data: CreateRoomRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoomResponse>;
   /** 创建巡课 {@link CreateSupervisorRequest} {@link CreateSupervisorResponse} */
   CreateSupervisor(data?: CreateSupervisorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSupervisorResponse>;
+  /** 删除应用自定义内容 {@link DeleteAppCustomContentRequest} {@link DeleteAppCustomContentResponse} */
+  DeleteAppCustomContent(data: DeleteAppCustomContentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppCustomContentResponse>;
   /** 删除文档 {@link DeleteDocumentRequest} {@link DeleteDocumentResponse} */
   DeleteDocument(data: DeleteDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDocumentResponse>;
   /** 删除群组 {@link DeleteGroupRequest} {@link DeleteGroupResponse} */

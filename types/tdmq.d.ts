@@ -1312,6 +1312,38 @@ declare interface CreateEnvironmentRoleResponse {
   RequestId?: string;
 }
 
+declare interface CreateRabbitMQVipInstanceRequest {
+  /** 可用区 */
+  ZoneIds: number[];
+  /** 私有网络VpcId */
+  VpcId: string;
+  /** 私有网络SubnetId */
+  SubnetId: string;
+  /** 集群名称 */
+  ClusterName: string;
+  /** 节点规格,基础型rabbit-vip-basic-1,标准型rabbit-vip-basic-2,高阶1型rabbit-vip-basic-3,高阶2型rabbit-vip-basic-4。不传默认为基础型 */
+  NodeSpec?: string;
+  /** 节点数量,多可用区最少为3节点。不传默认单可用区为1,多可用区为3 */
+  NodeNum?: number;
+  /** 单节点存储规格,不传默认为200G */
+  StorageSize?: number;
+  /** 镜像队列,不传默认为false */
+  EnableCreateDefaultHaMirrorQueue?: boolean;
+  /** 自动续费,不传默认为true */
+  AutoRenewFlag?: boolean;
+  /** 购买时长,不传默认为1(月) */
+  TimeSpan?: number;
+}
+
+declare interface CreateRabbitMQVipInstanceResponse {
+  /** 订单号Id */
+  TranId?: string | null;
+  /** 实例Id */
+  InstanceId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRocketMQClusterRequest {
   /** 集群名称，3-64个字符，只能包含字母、数字、“-”及“_” */
   Name: string;
@@ -3049,6 +3081,8 @@ declare interface Tdmq {
   CreateEnvironment(data: CreateEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentResponse>;
   /** 创建环境角色授权 {@link CreateEnvironmentRoleRequest} {@link CreateEnvironmentRoleResponse} */
   CreateEnvironmentRole(data: CreateEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentRoleResponse>;
+  /** 创建RabbitMQ专享版实例 {@link CreateRabbitMQVipInstanceRequest} {@link CreateRabbitMQVipInstanceResponse} */
+  CreateRabbitMQVipInstance(data: CreateRabbitMQVipInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRabbitMQVipInstanceResponse>;
   /** 创建RocketMQ集群 {@link CreateRocketMQClusterRequest} {@link CreateRocketMQClusterResponse} */
   CreateRocketMQCluster(data: CreateRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQClusterResponse>;
   /** 创建RocketMQ消费组 {@link CreateRocketMQGroupRequest} {@link CreateRocketMQGroupResponse} */

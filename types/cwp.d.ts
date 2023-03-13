@@ -4593,9 +4593,9 @@ declare interface DescribeBaselineDownloadListRequest {
 
 declare interface DescribeBaselineDownloadListResponse {
   /** 无 */
-  List: BaselineDownload[];
+  List?: BaselineDownload[];
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4639,9 +4639,9 @@ declare interface DescribeBaselineFixListRequest {
 
 declare interface DescribeBaselineFixListResponse {
   /** 无 */
-  List: BaselineFix[];
+  List?: BaselineFix[];
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4751,9 +4751,9 @@ declare interface DescribeBaselineItemIgnoreListRequest {
 
 declare interface DescribeBaselineItemIgnoreListResponse {
   /** 无 */
-  List: BaselineItemInfo[];
+  List?: BaselineItemInfo[];
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -7955,7 +7955,7 @@ declare interface Teo {
   DescribeDDosAttackSourceEvent(data: V20220106.DescribeDDosAttackSourceEventRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDDosAttackSourceEventResponse>;
   /** 查询DDos攻击Top数据 {@link V20220106.DescribeDDosAttackTopDataRequest} {@link V20220106.DescribeDDosAttackTopDataResponse} */
   DescribeDDosAttackTopData(data: V20220106.DescribeDDosAttackTopDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDDosAttackTopDataResponse>;
-  /** 查询DDos主攻击事件 {@link V20220106.DescribeDDosMajorAttackEventRequest} {@link V20220106.DescribeDDosMajorAttackEventResponse} */
+  /** @deprecated 查询DDos主攻击事件 {@link V20220106.DescribeDDosMajorAttackEventRequest} {@link V20220106.DescribeDDosMajorAttackEventResponse} */
   DescribeDDosMajorAttackEvent(data: V20220106.DescribeDDosMajorAttackEventRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDDosMajorAttackEventResponse>;
   /** 查询默认证书列表 {@link V20220106.DescribeDefaultCertificatesRequest} {@link V20220106.DescribeDefaultCertificatesResponse} */
   DescribeDefaultCertificates(data: V20220106.DescribeDefaultCertificatesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeDefaultCertificatesResponse>;
@@ -7979,7 +7979,7 @@ declare interface Teo {
   DescribeOriginGroup(data: V20220106.DescribeOriginGroupRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeOriginGroupResponse>;
   /** 获取源站组详细信息 {@link V20220106.DescribeOriginGroupDetailRequest} {@link V20220106.DescribeOriginGroupDetailResponse} */
   DescribeOriginGroupDetail(data: V20220106.DescribeOriginGroupDetailRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeOriginGroupDetailResponse>;
-  /** 查询七层监控类时序流量数据 {@link V20220106.DescribeOverviewL7DataRequest} {@link V20220106.DescribeOverviewL7DataResponse} */
+  /** @deprecated 查询七层监控类时序流量数据 {@link V20220106.DescribeOverviewL7DataRequest} {@link V20220106.DescribeOverviewL7DataResponse} */
   DescribeOverviewL7Data(data: V20220106.DescribeOverviewL7DataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeOverviewL7DataResponse>;
   /** 查询预热任务状态 {@link V20220106.DescribePrefetchTasksRequest} {@link V20220106.DescribePrefetchTasksResponse} */
   DescribePrefetchTasks(data: V20220106.DescribePrefetchTasksRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribePrefetchTasksResponse>;
@@ -8001,7 +8001,7 @@ declare interface Teo {
   DescribeSecurityPolicyRegions(data: V20220106.DescribeSecurityPolicyRegionsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeSecurityPolicyRegionsResponse>;
   /** 查询Bot用户画像规则 {@link V20220106.DescribeSecurityPortraitRulesRequest} {@link V20220106.DescribeSecurityPortraitRulesResponse} */
   DescribeSecurityPortraitRules(data: V20220106.DescribeSecurityPortraitRulesRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeSecurityPortraitRulesResponse>;
-  /** 四层时序流量数据查询接口 {@link V20220106.DescribeTimingL4DataRequest} {@link V20220106.DescribeTimingL4DataResponse} */
+  /** @deprecated 四层时序流量数据查询接口 {@link V20220106.DescribeTimingL4DataRequest} {@link V20220106.DescribeTimingL4DataResponse} */
   DescribeTimingL4Data(data: V20220106.DescribeTimingL4DataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeTimingL4DataResponse>;
   /** 查询七层数据分析类时序流量数据 {@link V20220106.DescribeTimingL7AnalysisDataRequest} {@link V20220106.DescribeTimingL7AnalysisDataResponse} */
   DescribeTimingL7AnalysisData(data: V20220106.DescribeTimingL7AnalysisDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeTimingL7AnalysisDataResponse>;
@@ -8017,7 +8017,7 @@ declare interface Teo {
   DescribeWebManagedRulesData(data: V20220106.DescribeWebManagedRulesDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebManagedRulesDataResponse>;
   /** 查询waf攻击日志 {@link V20220106.DescribeWebManagedRulesLogRequest} {@link V20220106.DescribeWebManagedRulesLogResponse} */
   DescribeWebManagedRulesLog(data: V20220106.DescribeWebManagedRulesLogRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebManagedRulesLogResponse>;
-  /** 查询waf攻击top数据 {@link V20220106.DescribeWebManagedRulesTopDataRequest} {@link V20220106.DescribeWebManagedRulesTopDataResponse} */
+  /** @deprecated 查询waf攻击top数据 {@link V20220106.DescribeWebManagedRulesTopDataRequest} {@link V20220106.DescribeWebManagedRulesTopDataResponse} */
   DescribeWebManagedRulesTopData(data: V20220106.DescribeWebManagedRulesTopDataRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebManagedRulesTopDataResponse>;
   /** 查询web防护攻击事件 {@link V20220106.DescribeWebProtectionAttackEventsRequest} {@link V20220106.DescribeWebProtectionAttackEventsResponse} */
   DescribeWebProtectionAttackEvents(data: V20220106.DescribeWebProtectionAttackEventsRequest, config: AxiosRequestConfig & V20220106.VersionHeader): AxiosPromise<V20220106.DescribeWebProtectionAttackEventsResponse>;

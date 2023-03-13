@@ -52,6 +52,8 @@ declare interface BatchRecordInfo {
   Enabled: number | null;
   /** 记录的MX权重 */
   MX: number | null;
+  /** 记录权重 */
+  Weight?: number | null;
 }
 
 /** 批量添加域名返回结构 */

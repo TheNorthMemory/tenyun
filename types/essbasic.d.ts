@@ -106,7 +106,7 @@ declare interface CommonFlowApprover {
   ApproverName?: string | null;
   /** 签署人手机号，saas企业签署人，个人签署人必传 */
   ApproverMobile?: string | null;
-  /** 签署人Id，使用模版发起是，对应模版配置中的签署人RecipientId */
+  /** 签署人Id，使用模版发起是，对应模版配置中的签署人RecipientId注意：模版发起时该字段必填 */
   RecipientId?: string | null;
   /** 签署前置条件：阅读时长限制，不传默认10s,最大300s，最小3s */
   PreReadTime?: number | null;

@@ -979,7 +979,7 @@ declare interface CreateFlowSignUrlRequest {
 
 declare interface CreateFlowSignUrlResponse {
   /** 签署人签署链接信息 */
-  FlowApproverUrlInfos: FlowApproverUrlInfo[];
+  FlowApproverUrlInfos?: FlowApproverUrlInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1509,9 +1509,9 @@ declare interface UploadFilesRequest {
 
 declare interface UploadFilesResponse {
   /** 文件id数组 */
-  FileIds: string[];
+  FileIds?: string[];
   /** 上传成功文件数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

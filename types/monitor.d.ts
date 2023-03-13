@@ -1504,6 +1504,8 @@ declare interface PrometheusAgentOverview {
   VpcId: string | null;
   /** 记录关联等操作的失败信息 */
   FailedReason: string | null;
+  /** agent名称 */
+  Name?: string | null;
 }
 
 /** 告警渠道使用自建alertmanager的配置 */
@@ -3688,6 +3690,8 @@ declare interface DescribePrometheusConfigResponse {
   PodMonitors?: PrometheusConfigItem[];
   /** 原生Job */
   RawJobs?: PrometheusConfigItem[];
+  /** Probes */
+  Probes?: PrometheusConfigItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

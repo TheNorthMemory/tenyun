@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 228+ 款产品，9174+ 服务数</summary>
+<details><summary>共计 228+ 款产品，9176+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -223,7 +223,7 @@ irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 20
 ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2021-09-03(25) |
 keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520) | 2022-03-08(36) |
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(49) |
-lcic | [低代码互动课堂](https://cloud.tencent.com/document/product/1639) | 2022-08-17(41) |
+lcic | [低代码互动课堂](https://cloud.tencent.com/document/product/1639) | 2022-08-17(42) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(77) |
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(130) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(1) |
@@ -289,7 +289,7 @@ tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 20
 tcss | [容器安全服务](https://cloud.tencent.com/document/product/1285) | 2020-11-01(330) |
 tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) | 2021-11-18(25) |
 tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(48) |
-tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(102) |
+tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(103) |
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(4) |
 tem | [弹性微服务](https://cloud.tencent.com/document/product/1371) | 2021-07-01(50) | 2020-12-21(17) |
 teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(87) | 2022-01-06(96) |

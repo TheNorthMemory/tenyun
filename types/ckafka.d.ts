@@ -1944,6 +1944,8 @@ declare interface TopicDetail {
   RetentionTimeConfig: TopicRetentionTimeConfigRsp | null;
   /** 0:正常，1：已删除，2：删除中 */
   Status: number | null;
+  /** 标签列表 */
+  Tags: Tag[] | null;
 }
 
 /** topic副本及详细信息 */
@@ -3721,6 +3723,8 @@ declare interface TopicAttributesResponse {
   AclRuleList: AclRule[] | null;
   /** topic 限流策略 */
   QuotaConfig: InstanceQuotaConfigResp | null;
+  /** 副本数 */
+  ReplicaNum: number | null;
 }
 
 declare interface TopicDetailResponse {
