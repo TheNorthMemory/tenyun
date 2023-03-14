@@ -273,7 +273,7 @@ const hmac = { [SHA256]: (thing, key) => createHmac(SHA256, key).update(thing).d
 
 const ksort = (things = {}) => Object.entries(things).map(([k, v]) => [k, v].map((x) => `${x}`.trim().toLowerCase())).sort(([a], [b]) => (a === b ? 0 : (a > b ? 1 : -1)));
 
-const timstamp = () => Date.now() / 1e3 | 0;
+const timestamp = () => Date.now() / 1e3 | 0;
 
 const toUTCYMD = (...val) => (new Date(...val)).toJSON().substring(0, 10);
 
@@ -354,7 +354,7 @@ class TenYun {
      * @returns {BinaryLike} - The input data
      */
     return (data, headers = {}) => {
-      Reflect.set(headers, X_TC_TIMESTAMP, headers[X_TC_TIMESTAMP] || timstamp());
+      Reflect.set(headers, X_TC_TIMESTAMP, headers[X_TC_TIMESTAMP] || timestamp());
       const def = ksort({
         [CONTENT_TYPE]: headers[CONTENT_TYPE],
         [HOST]: headers[HOST],
