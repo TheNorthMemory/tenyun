@@ -182,6 +182,30 @@ declare interface CdcRegion {
   Clusters: CdcCluster[] | null;
 }
 
+/** DescribeCustomRules接口回包中的复杂类型 */
+declare interface DescribeCustomRulesRspRuleListItem {
+  /** 动作类型 */
+  ActionType: string;
+  /** 跳过的策略 */
+  Bypass: string;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 过期时间 */
+  ExpireTime: string;
+  /** 策略名称 */
+  Name: string;
+  /** 重定向地址 */
+  Redirect: string;
+  /** 策略ID */
+  RuleId: string;
+  /** 优先级 */
+  SortId: string;
+  /** 状态 */
+  Status: string;
+  /** 策略详情 */
+  Strategies: Strategy[];
+}
+
 /** 域名的详细信息 */
 declare interface DomainInfo {
   /** 域名 */
@@ -582,6 +606,36 @@ declare interface Strategy {
   Arg: string;
 }
 
+/** waf模块的规格 */
+declare interface WafRuleLimit {
+  /** 自定义CC的规格 */
+  CC: number;
+  /** 自定义策略的规格 */
+  CustomRule: number;
+  /** 黑白名单的规格 */
+  IPControl: number;
+  /** 信息防泄漏的规格 */
+  AntiLeak: number;
+  /** 防篡改的规格 */
+  AntiTamper: number;
+  /** 紧急CC的规格 */
+  AutoCC: number;
+  /** 地域封禁的规格 */
+  AreaBan: number;
+  /** 自定义CC中配置session */
+  CCSession: number;
+  /** AI的规格 */
+  AI: number;
+  /** 精准白名单的规格 */
+  CustomWhite: number;
+  /** api安全的规格 */
+  ApiSecurity: number;
+  /** 客户端流量标记的规格 */
+  ClientMsg: number;
+  /** 流量标记的规格 */
+  TrafficMarking: number;
+}
+
 /** Waf 威胁情报封禁模块配置详情 */
 declare interface WafThreatenIntelligenceDetails {
   /** 封禁模组启用状态 */
@@ -918,6 +972,30 @@ declare interface DescribeAutoDenyIPResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCustomWhiteRuleRequest {
+  /** 域名 */
+  Domain: string;
+  /** 偏移 */
+  Offset: number;
+  /** 容量 */
+  Limit: number;
+  /** 过滤数组,name可以是如下的值： RuleID,RuleName,Match */
+  Filters?: FiltersItemNew[];
+  /** asc或者desc */
+  Order?: string;
+  /** exp_ts或者mod_ts */
+  By?: string;
+}
+
+declare interface DescribeCustomWhiteRuleResponse {
+  /** 规则详情 */
+  RuleList: DescribeCustomRulesRspRuleListItem[];
+  /** 规则条数 */
+  TotalCount: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDomainDetailsSaasRequest {
   /** 域名 */
   Domain: string;
@@ -1074,6 +1152,34 @@ declare interface DescribeIpHitItemsRequest {
 declare interface DescribeIpHitItemsResponse {
   /** 结果 */
   Data?: IpHitItemsData | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePolicyStatusRequest {
+  /** 域名 */
+  Domain: string;
+  /** clb-waf或者saas-waf */
+  Edition: string;
+}
+
+declare interface DescribePolicyStatusResponse {
+  /** 实例ID */
+  InstanceId: string;
+  /** 防护状态 */
+  Status: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRuleLimitRequest {
+  /** 域名 */
+  Domain: string;
+}
+
+declare interface DescribeRuleLimitResponse {
+  /** waf模块的规格 */
+  Res: WafRuleLimit;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1409,6 +1515,8 @@ declare interface Waf {
   DescribeAttackOverview(data?: DescribeAttackOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackOverviewResponse>;
   /** 描述WAF自动封禁IP详情 {@link DescribeAutoDenyIPRequest} {@link DescribeAutoDenyIPResponse} */
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
+  /** 查询精准白名单规则 {@link DescribeCustomWhiteRuleRequest} {@link DescribeCustomWhiteRuleResponse} */
+  DescribeCustomWhiteRule(data: DescribeCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomWhiteRuleResponse>;
   /** 查询单个saas域名详情 {@link DescribeDomainDetailsSaasRequest} {@link DescribeDomainDetailsSaasResponse} */
   DescribeDomainDetailsSaas(data: DescribeDomainDetailsSaasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainDetailsSaasResponse>;
   /** 获取域名的规则白名单 {@link DescribeDomainWhiteRulesRequest} {@link DescribeDomainWhiteRulesResponse} */
@@ -1423,6 +1531,10 @@ declare interface Waf {
   DescribeIpAccessControl(data: DescribeIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpAccessControlResponse>;
   /** Waf IP封堵状态查询 {@link DescribeIpHitItemsRequest} {@link DescribeIpHitItemsResponse} */
   DescribeIpHitItems(data: DescribeIpHitItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpHitItemsResponse>;
+  /** 获取防护状态以及生效的实例id {@link DescribePolicyStatusRequest} {@link DescribePolicyStatusResponse} */
+  DescribePolicyStatus(data: DescribePolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyStatusResponse>;
+  /** 获取规格限制 {@link DescribeRuleLimitRequest} {@link DescribeRuleLimitResponse} */
+  DescribeRuleLimit(data: DescribeRuleLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleLimitResponse>;
   /** 获取CDC场景下对客户已经开放的负载均衡型WAF(cdc-clb-waf)的地域 {@link DescribeUserCdcClbWafRegionsRequest} {@link DescribeUserCdcClbWafRegionsResponse} */
   DescribeUserCdcClbWafRegions(data?: DescribeUserCdcClbWafRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCdcClbWafRegionsResponse>;
   /** 获取对客户已经开放的负载均衡型WAF(clb-waf)的地域 {@link DescribeUserClbWafRegionsRequest} {@link DescribeUserClbWafRegionsResponse} */

@@ -446,6 +446,10 @@ declare interface CreateRoomResponse {
 }
 
 declare interface CreateSupervisorRequest {
+  /** 应用ID。 */
+  SdkAppId: number;
+  /** 用户ID列表。 */
+  Users: string[];
 }
 
 declare interface CreateSupervisorResponse {
@@ -1045,7 +1049,7 @@ declare interface Lcic {
   /** 创建房间 {@link CreateRoomRequest} {@link CreateRoomResponse} */
   CreateRoom(data: CreateRoomRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoomResponse>;
   /** 创建巡课 {@link CreateSupervisorRequest} {@link CreateSupervisorResponse} */
-  CreateSupervisor(data?: CreateSupervisorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSupervisorResponse>;
+  CreateSupervisor(data: CreateSupervisorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSupervisorResponse>;
   /** 删除应用自定义内容 {@link DeleteAppCustomContentRequest} {@link DeleteAppCustomContentResponse} */
   DeleteAppCustomContent(data: DeleteAppCustomContentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppCustomContentResponse>;
   /** 删除文档 {@link DeleteDocumentRequest} {@link DeleteDocumentResponse} */

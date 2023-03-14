@@ -619,7 +619,7 @@ declare interface CreateAutoCalloutTaskRequest {
 
 declare interface CreateAutoCalloutTaskResponse {
   /** 任务Id */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

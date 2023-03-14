@@ -500,6 +500,18 @@ declare interface JobItem {
   AutoRetryTimeRangeMinutes: number | null;
 }
 
+/** 目标端为kakfa时添加的同步选项字段 */
+declare interface KafkaOption {
+  /** 投递到kafka的数据类型，如Avro,Json */
+  DataType?: string;
+  /** 同步topic策略，如Single（集中投递到单topic）,Multi (自定义topic名称) */
+  TopicType?: string;
+  /** 用于存储ddl的topic */
+  DDLTopicName?: string;
+  /** 单topic和自定义topic的描述 */
+  TopicRules?: TopicRule[];
+}
+
 /** 存放配置时的额外信息 */
 declare interface KeyValuePairOption {
   /** 选项key */
@@ -598,6 +610,8 @@ declare interface Options {
   ConflictHandleOption?: ConflictHandleOption | null;
   /** DDL同步选项，具体描述要同步那些DDL */
   DdlOptions?: DdlOption[] | null;
+  /** kafka同步选项 */
+  KafkaOption?: KafkaOption | null;
 }
 
 /** 任务步骤信息 */
@@ -706,6 +720,18 @@ declare interface StepTip {
   HelpDoc?: string | null;
   /** 当前步骤跳过信息 */
   SkipInfo?: string | null;
+}
+
+/** 数据同步配置多节点数据库的节点信息。多节点数据库，如tdsqlmysql使用该结构；单节点数据库，如mysql使用Endpoint。 */
+declare interface SyncDBEndpointInfos {
+  /** 数据库所在地域 */
+  Region: string | null;
+  /** 实例网络接入类型，如：extranet(外网)、ipv6(公网ipv6)、cvm(云主机自建)、dcg(专线接入)、vpncloud(vpn接入的实例)、cdb(云数据库)、ccn(云联网)、intranet(自研上云)、vpc(私有网络)等，注意具体可选值依赖当前链路 */
+  AccessType: string | null;
+  /** 实例数据库类型，如：mysql,redis,mongodb,postgresql,mariadb,percona 等 */
+  DatabaseType: string | null;
+  /** 数据库信息 */
+  Info: Endpoint[] | null;
 }
 
 /** 同步任务的步骤信息 */
@@ -836,6 +862,22 @@ declare interface TagItem {
   TagValue?: string | null;
 }
 
+/** 单topic和自定义topic的描述 */
+declare interface TopicRule {
+  /** topic名 */
+  TopicName?: string;
+  /** topic分区策略，如 自定义topic：Random（随机投递），集中投递到单Topic：AllInPartitionZero（全部投递至partition0）、PartitionByTable(按表名分区)、PartitionByTableAndKey(按表名加主键分区) */
+  PartitionType?: string;
+  /** 库名匹配规则，仅“自定义topic”生效，如Regular（正则匹配）, Default(不符合匹配规则的剩余库)，数组中必须有一项为‘Default’ */
+  DbMatchMode?: string;
+  /** 库名，仅“自定义topic”时，DbMatchMode=Regular生效 */
+  DbName?: string;
+  /** 表名匹配规则，仅“自定义topic”生效，如Regular（正则匹配）, Default(不符合匹配规则的剩余表)，数组中必须有一项为‘Default’ */
+  TableMatchMode?: string;
+  /** 表名，仅“自定义topic”时，TableMatchMode=Regular生效 */
+  TableName?: string;
+}
+
 /** 计费状态信息 */
 declare interface TradeInfo {
   /** 交易订单号 */
@@ -909,8 +951,16 @@ declare interface ConfigureSyncJobRequest {
   ExpectRunTime?: string;
   /** 源端信息，单节点数据库使用，且SrcNodeType传single */
   SrcInfo?: Endpoint;
+  /** 源端信息，多节点数据库使用，且SrcNodeType传cluster */
+  SrcInfos?: SyncDBEndpointInfos;
+  /** 枚举值：cluster、single。源库为单节点数据库使用single，多节点使用cluster */
+  SrcNodeType?: string;
   /** 目标端信息，单节点数据库使用 */
   DstInfo?: Endpoint;
+  /** 目标端信息，多节点数据库使用，且DstNodeType传cluster */
+  DstInfos?: SyncDBEndpointInfos;
+  /** 枚举值：cluster、single。目标库为单节点数据库使用single，多节点使用cluster */
+  DstNodeType?: string;
   /** 同步任务选项 */
   Options?: Options;
   /** 自动重试的时间段、可设置5至720分钟、0表示不重试 */
@@ -1015,7 +1065,7 @@ declare interface CreateSyncJobRequest {
   SrcDatabaseType: string;
   /** 源端数据库所在地域,如ap-guangzhou */
   SrcRegion: string;
-  /** 目标端数据库类型,如mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等 */
+  /** 目标端数据库类型,如mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql,kafka等 */
   DstDatabaseType: string;
   /** 目标端数据库所在地域,如ap-guangzhou */
   DstRegion: string;
@@ -1037,7 +1087,7 @@ declare interface CreateSyncJobRequest {
 
 declare interface CreateSyncJobResponse {
   /** 同步任务ids */
-  JobIds: string[];
+  JobIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

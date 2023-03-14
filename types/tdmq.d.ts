@@ -2734,6 +2734,22 @@ declare interface ModifyEnvironmentRoleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRabbitMQVipInstanceRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface ModifyRabbitMQVipInstanceResponse {
+  /** 实例id */
+  InstanceId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRocketMQClusterRequest {
   /** RocketMQ集群ID */
   ClusterId: string;
@@ -3227,6 +3243,8 @@ declare interface Tdmq {
   ModifyEnvironmentAttributes(data: ModifyEnvironmentAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvironmentAttributesResponse>;
   /** 修改环境角色授权 {@link ModifyEnvironmentRoleRequest} {@link ModifyEnvironmentRoleResponse} */
   ModifyEnvironmentRole(data: ModifyEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvironmentRoleResponse>;
+  /** 修改RabbitMQ专享版实例 {@link ModifyRabbitMQVipInstanceRequest} {@link ModifyRabbitMQVipInstanceResponse} */
+  ModifyRabbitMQVipInstance(data: ModifyRabbitMQVipInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRabbitMQVipInstanceResponse>;
   /** 更新RocketMQ集群信息 {@link ModifyRocketMQClusterRequest} {@link ModifyRocketMQClusterResponse} */
   ModifyRocketMQCluster(data: ModifyRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQClusterResponse>;
   /** 更新RocketMQ消费组信息 {@link ModifyRocketMQGroupRequest} {@link ModifyRocketMQGroupResponse} */

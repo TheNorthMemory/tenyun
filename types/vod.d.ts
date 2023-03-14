@@ -6241,9 +6241,9 @@ declare interface DescribeHeadTailTemplatesRequest {
 
 declare interface DescribeHeadTailTemplatesResponse {
   /** 符合过滤条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 片头片尾模板详情列表。 */
-  HeadTailTemplateSet: HeadTailTemplate[];
+  HeadTailTemplateSet?: HeadTailTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

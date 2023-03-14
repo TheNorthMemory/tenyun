@@ -6596,6 +6596,20 @@ declare interface ReplaceRoutesResponse {
   RequestId?: string;
 }
 
+declare interface ReplaceSecurityGroupPoliciesRequest {
+  /** 安全组实例ID，例如sg-33ocnj9n，可通过DescribeSecurityGroups获取。 */
+  SecurityGroupId: string;
+  /** 安全组规则集合对象。 */
+  SecurityGroupPolicySet: SecurityGroupPolicySet;
+  /** 旧的安全组规则集合对象，可选，日志记录用。 */
+  OriginalSecurityGroupPolicySet?: SecurityGroupPolicySet;
+}
+
+declare interface ReplaceSecurityGroupPoliciesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReplaceSecurityGroupPolicyRequest {
   /** 安全组实例ID，例如sg-33ocnj9n，可通过DescribeSecurityGroups获取。 */
   SecurityGroupId: string;
@@ -7389,6 +7403,8 @@ declare interface Vpc {
   ReplaceRouteTableAssociation(data: ReplaceRouteTableAssociationRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceRouteTableAssociationResponse>;
   /** 替换路由策略 {@link ReplaceRoutesRequest} {@link ReplaceRoutesResponse} */
   ReplaceRoutes(data: ReplaceRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceRoutesResponse>;
+  /** 批量修改安全组规则 {@link ReplaceSecurityGroupPoliciesRequest} {@link ReplaceSecurityGroupPoliciesResponse} */
+  ReplaceSecurityGroupPolicies(data: ReplaceSecurityGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceSecurityGroupPoliciesResponse>;
   /** 替换单条安全组规则 {@link ReplaceSecurityGroupPolicyRequest} {@link ReplaceSecurityGroupPolicyResponse} */
   ReplaceSecurityGroupPolicy(data: ReplaceSecurityGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceSecurityGroupPolicyResponse>;
   /** 重新申请关联实例 {@link ResetAttachCcnInstancesRequest} {@link ResetAttachCcnInstancesResponse} */
