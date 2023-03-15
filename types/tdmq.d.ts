@@ -456,6 +456,14 @@ declare interface EnvironmentRole {
   UpdateTime: string;
 }
 
+/** exchange使用配额信息 */
+declare interface ExchangeQuota {
+  /** 可创建最大exchange数 */
+  MaxExchange?: number;
+  /** 已创建exchange数 */
+  UsedExchange?: number | null;
+}
+
 /** 过滤参数 */
 declare interface Filter {
   /** 过滤参数的名字 */
@@ -564,6 +572,18 @@ declare interface PartitionsTopic {
   TopicType: number | null;
 }
 
+/** rabbitmq Prometheus信息 */
+declare interface PrometheusEndpointInfo {
+  /** Prometheus开关的状态。 */
+  PrometheusEndpointStatus?: string | null;
+  /** prometheus信息 */
+  VpcPrometheusEndpoint?: string[] | null;
+  /** 节点信息 */
+  NodePrometheusAddress?: string[] | null;
+  /** vpc信息 */
+  VpcEndpointInfo?: VpcEndpointInfo | null;
+}
+
 /** 生产者信息 */
 declare interface Publisher {
   /** 生产者id */
@@ -584,6 +604,110 @@ declare interface Publisher {
   ConnectedSince: string | null;
   /** 生产者连接的主题分区号 */
   Partition: number | null;
+}
+
+/** queue使用配额信息 */
+declare interface QueueQuota {
+  /** 可创建最大Queue数 */
+  MaxQueue?: number;
+  /** 已创建Queue数 */
+  UsedQueue?: number | null;
+}
+
+/** RabbitMQ集群访问信息 */
+declare interface RabbitMQClusterAccessInfo {
+  /** 集群公网接入地址 */
+  PublicAccessEndpoint: string | null;
+  /** 集群控制台访问地址 */
+  WebConsoleEndpoint: string;
+  /** 集群控制台登录用户名 */
+  WebConsoleUsername: string;
+  /** 集群控制台登录密码 */
+  WebConsolePassword: string;
+  /** 已废弃 */
+  PublicAccessEndpointStatus: boolean;
+  /** 已废弃 */
+  PublicControlConsoleSwitchStatus: boolean;
+  /** 已废弃 */
+  VpcControlConsoleSwitchStatus: boolean;
+  /** Vpc管控台访问地址，示例值，http://1.1.1.1:15672 */
+  VpcWebConsoleEndpoint: string;
+  /** 公网管控台开关状态，示例值，OFF/ON/CREATING/DELETING */
+  PublicWebConsoleSwitchStatus?: string | null;
+  /** Vpc管控台开关状态，示例值，OFF/ON/CREATING/DELETING */
+  VpcWebConsoleSwitchStatus?: string | null;
+  /** 公网管控台开关状态，示例值，OFF/ON/CREATING/DELETING */
+  PublicDataStreamStatus?: string | null;
+  /** Prometheus信息 */
+  PrometheusEndpointInfo?: PrometheusEndpointInfo | null;
+}
+
+/** RabbiteMQ集群基本信息 */
+declare interface RabbitMQClusterInfo {
+  /** 集群ID */
+  ClusterId: string;
+  /** 集群名称 */
+  ClusterName: string;
+  /** 地域信息 */
+  Region: string;
+  /** 创建时间，毫秒为单位 */
+  CreateTime: number;
+  /** 集群说明信息 */
+  Remark: string | null;
+  /** VPC及网络信息 */
+  Vpcs: VpcEndpointInfo[];
+  /** 虚拟主机数量 */
+  VirtualHostNumber: number;
+  /** 队列数量 */
+  QueueNumber: number;
+  /** 每秒生产消息数 单位：条/秒 */
+  MessagePublishRate: number;
+  /** 堆积消息数 单位：条 */
+  MessageStackNumber: number;
+  /** 过期时间 */
+  ExpireTime: number;
+  /** Channel数量 */
+  ChannelNumber: number;
+  /** Connection数量 */
+  ConnectionNumber: number;
+  /** Consumer数量 */
+  ConsumerNumber: number;
+  /** Exchang数量 */
+  ExchangeNumber: number;
+  /** 集群异常。 */
+  ExceptionInformation?: string | null;
+  /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败 */
+  ClusterStatus?: number | null;
+}
+
+/** RabbitMQ集群规格信息 */
+declare interface RabbitMQClusterSpecInfo {
+  /** 集群规格名称 */
+  SpecName: string;
+  /** 节点数量 */
+  NodeCount: number;
+  /** 峰值tps */
+  MaxTps: number;
+  /** 峰值带宽。单位：mbps */
+  MaxBandWidth: number;
+  /** 存储容量。单位：GB */
+  MaxStorage: number;
+  /** 公网带宽tps。单位：Mbps */
+  PublicNetworkTps: number;
+}
+
+/** RabbiteMQ集群白名单信息 */
+declare interface RabbitMQClusterWhiteListInfo {
+  /** 废弃 */
+  WhiteList: string | null;
+  /** 公网管控台白名单 */
+  PublicControlConsoleWhiteList: string | null;
+  /** 公网数据流白名单 */
+  PublicDataStreamWhiteList: string | null;
+  /** 公网管控台白名单状态 */
+  PublicControlConsoleWhiteListStatus?: string | null;
+  /** 公网数据流白名单状态 */
+  PublicDataStreamWhiteListStatus?: string | null;
 }
 
 /** RabbitMQ节点信息 */
@@ -1000,6 +1124,14 @@ declare interface TopicRecord {
   TopicName: string;
 }
 
+/** vhost使用配额信息 */
+declare interface VirtualHostQuota {
+  /** 允许创建最大vhost数 */
+  MaxVirtualHost?: number;
+  /** 已创建vhost数 */
+  UsedVirtualHost?: number | null;
+}
+
 /** vcp绑定记录 */
 declare interface VpcBindRecord {
   /** 租户Vpc Id */
@@ -1022,6 +1154,18 @@ declare interface VpcConfig {
   VpcId: string;
   /** 子网id */
   SubnetId: string;
+}
+
+/** VPC接入点信息 */
+declare interface VpcEndpointInfo {
+  /** vpc的id */
+  VpcId: string;
+  /** 子网id */
+  SubnetId: string;
+  /** vpc接入点信息 */
+  VpcEndpoint: string;
+  /** vpc接入点状态OFF/ON/CREATING/DELETING */
+  VpcDataStreamEndpointStatus?: string | null;
 }
 
 declare interface AcknowledgeMessageRequest {
@@ -2286,6 +2430,30 @@ declare interface DescribeRabbitMQNodeListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRabbitMQVipInstanceRequest {
+  /** 集群ID */
+  ClusterId: string;
+}
+
+declare interface DescribeRabbitMQVipInstanceResponse {
+  /** 集群信息 */
+  ClusterInfo: RabbitMQClusterInfo;
+  /** 集群规格信息 */
+  ClusterSpecInfo: RabbitMQClusterSpecInfo;
+  /** 集群访问 */
+  ClusterNetInfo: RabbitMQClusterAccessInfo | null;
+  /** 集群白名单 */
+  ClusterWhiteListInfo: RabbitMQClusterWhiteListInfo | null;
+  /** vhost配额信息 */
+  VirtualHostQuota: VirtualHostQuota;
+  /** exchange配额信息 */
+  ExchangeQuota: ExchangeQuota;
+  /** queue配额信息 */
+  QueueQuota: QueueQuota;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRabbitMQVipInstancesRequest {
   /** 查询条件过滤器 */
   Filters?: Filter[];
@@ -3201,6 +3369,8 @@ declare interface Tdmq {
   DescribePublishers(data: DescribePublishersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublishersResponse>;
   /** RabbitMQ专享版查询节点列表 {@link DescribeRabbitMQNodeListRequest} {@link DescribeRabbitMQNodeListResponse} */
   DescribeRabbitMQNodeList(data: DescribeRabbitMQNodeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQNodeListResponse>;
+  /** 获取单个RabbitMQ专享实例信息 {@link DescribeRabbitMQVipInstanceRequest} {@link DescribeRabbitMQVipInstanceResponse} */
+  DescribeRabbitMQVipInstance(data: DescribeRabbitMQVipInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVipInstanceResponse>;
   /** 查询RabbitMQ专享实例列表 {@link DescribeRabbitMQVipInstancesRequest} {@link DescribeRabbitMQVipInstancesResponse} */
   DescribeRabbitMQVipInstances(data?: DescribeRabbitMQVipInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVipInstancesResponse>;
   /** 获取单个RocketMQ集群信息 {@link DescribeRocketMQClusterRequest} {@link DescribeRocketMQClusterResponse} */

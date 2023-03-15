@@ -30,7 +30,7 @@ declare interface AccelerationDomain {
 
 /** 精准防护条件 */
 declare interface AclCondition {
-  /** 匹配字段，取值有：host：请求域名；sip：客户端IP；ua：User-Agent；cookie：会话 Cookie；cgi：CGI 脚本；xff：XFF 扩展头部；url：请求 URL；accept：请求内容类型；method：请求方式；header：请求头部；app_proto：应用层协议；sip_proto：网络层协议。 */
+  /** 匹配字段，取值有：host：请求域名；sip：客户端IP；ua：User-Agent；cookie：会话 Cookie；cgi：CGI 脚本；xff：XFF 扩展头部；url：请求 URL；accept：请求内容类型；method：请求方式；header：请求头部；app_proto：应用层协议；sip_proto：网络层协议；uabot：UA 特征规则，仅bot自定义规则可用；idcid：IDC 规则，仅bot自定义规则可用；sipbot：搜索引擎规则，仅bot自定义规则可用；portrait：画像分析，仅bot自定义规则可用；header_seq：请求头顺序，仅bot自定义规则可用。 */
   MatchFrom: string;
   /** 匹配字符串。当 MatchFrom 为 header 时，可以填入 header 的 key 作为参数。 */
   MatchParam: string;
@@ -204,6 +204,18 @@ declare interface BotConfig {
   BotPortraitRule?: BotPortraitRule;
   /** Bot智能分析。如果为null，默认使用历史配置。 */
   IntelligenceRule?: IntelligenceRule | null;
+  /** Bot自定义规则。如果为null，默认使用历史配置。 */
+  BotUserRules?: BotUserRule[];
+  /** Bot托管定制策略，入参可不填，仅出参使用。 */
+  Customizes?: BotUserRule[] | null;
+}
+
+/** Bot扩展处置方式，多处置动作组合。 */
+declare interface BotExtendAction {
+  /** 处置动作，取值有：monitor：观察；trans：放行；alg：JavaScript挑战；captcha：托管挑战；random：随机，按照ExtendActions分配处置动作和比例；silence：静默；shortdelay：短时响应；longdelay：长时响应。 */
+  Action: string;
+  /** 处置方式的触发概率，范围0-100。 */
+  Percent?: number | null;
 }
 
 /** Bot 规则，下列规则ID可参考接口 DescribeBotManagedRules返回的ID信息 */
@@ -238,6 +250,30 @@ declare interface BotPortraitRule {
   MonManagedIds?: number[] | null;
   /** 拦截的规则ID。默认所有规则不配置拦截。 */
   DropManagedIds?: number[] | null;
+}
+
+/** Bot自定义规则 */
+declare interface BotUserRule {
+  /** 规则名，只能以英文字符，数字，下划线组合，且不能以下划线开头。 */
+  RuleName: string;
+  /** 处置动作，取值有：drop：拦截；monitor：观察；trans：放行；alg：JavaScript挑战；captcha：托管挑战；silence：静默；shortdelay：短时响应；longdelay：长时响应。 */
+  Action: string;
+  /** 规则状态，取值有：on：生效；off：不生效。默认on生效。 */
+  RuleStatus: string;
+  /** 规则详情。 */
+  AclConditions: AclCondition[];
+  /** 规则权重，取值范围0-100。 */
+  RulePriority: number;
+  /** 规则id。仅出参使用。 */
+  RuleID?: number | null;
+  /** 随机处置的处置方式及占比，非随机处置可不填暂不支持。 */
+  ExtendActions?: BotExtendAction[];
+  /** 过滤词，取值有：sip：客户端ip。 */
+  FreqFields?: string[] | null;
+  /** 更新时间。 */
+  UpdateTime?: string | null;
+  /** 统计范围，字段为null时，代表source_to_eo。取值有：source_to_eo：（响应）源站到EdgeOne。client_to_eo：（请求）客户端到EdgeOne； */
+  FreqScope?: string[] | null;
 }
 
 /** cc配置项。 */

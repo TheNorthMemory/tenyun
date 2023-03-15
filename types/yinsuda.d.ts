@@ -293,13 +293,15 @@ declare interface BatchDescribeKTVMusicDetailsRequest {
   UserId: string;
   /** 歌曲 Id 列表。 */
   MusicIds: string[];
+  /** 播放场景。默认为ChatLive：直播Chat：语聊 */
+  PlayScene?: string;
 }
 
 declare interface BatchDescribeKTVMusicDetailsResponse {
   /** 歌曲详细信息列表。 */
-  KTVMusicDetailInfoSet: KTVMusicDetailInfo[];
+  KTVMusicDetailInfoSet?: KTVMusicDetailInfo[];
   /** 不存在歌曲Id列表。 */
-  NotExistMusicIdSet: string[];
+  NotExistMusicIdSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

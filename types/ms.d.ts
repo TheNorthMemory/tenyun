@@ -775,7 +775,7 @@ declare interface Ms {
   CreateCosSecKeyInstance(data?: CreateCosSecKeyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosSecKeyInstanceResponse>;
   /** 创建资源 {@link CreateResourceInstancesRequest} {@link CreateResourceInstancesResponse} */
   CreateResourceInstances(data: CreateResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceInstancesResponse>;
-  /** 批量提交安全扫描 {@link CreateScanInstancesRequest} {@link CreateScanInstancesResponse} */
+  /** @deprecated 批量提交安全扫描 {@link CreateScanInstancesRequest} {@link CreateScanInstancesResponse} */
   CreateScanInstances(data: CreateScanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScanInstancesResponse>;
   /** 提交加固基础数据 {@link CreateShieldInstanceRequest} {@link CreateShieldInstanceResponse} */
   CreateShieldInstance(data: CreateShieldInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShieldInstanceResponse>;
@@ -789,9 +789,9 @@ declare interface Ms {
   DescribeApkDetectionResult(data: DescribeApkDetectionResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApkDetectionResultResponse>;
   /** 获取用户的所有资源信息 {@link DescribeResourceInstancesRequest} {@link DescribeResourceInstancesResponse} */
   DescribeResourceInstances(data?: DescribeResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceInstancesResponse>;
-  /** 查询扫描列表 {@link DescribeScanInstancesRequest} {@link DescribeScanInstancesResponse} */
+  /** @deprecated 查询扫描列表 {@link DescribeScanInstancesRequest} {@link DescribeScanInstancesResponse} */
   DescribeScanInstances(data?: DescribeScanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanInstancesResponse>;
-  /** 批量查询扫描结果 {@link DescribeScanResultsRequest} {@link DescribeScanResultsResponse} */
+  /** @deprecated 批量查询扫描结果 {@link DescribeScanResultsRequest} {@link DescribeScanResultsResponse} */
   DescribeScanResults(data: DescribeScanResultsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanResultsResponse>;
   /** 用户查询提交过的app列表 {@link DescribeShieldInstancesRequest} {@link DescribeShieldInstancesResponse} */
   DescribeShieldInstances(data?: DescribeShieldInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShieldInstancesResponse>;

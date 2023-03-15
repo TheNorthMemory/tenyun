@@ -468,6 +468,34 @@ declare interface TendisSlowLogDetail {
   Node: string;
 }
 
+/** 订单交易信息 */
+declare interface TradeDealDetail {
+  /** 订单号ID，调用云API时使用此ID */
+  DealId?: string;
+  /** 长订单ID，反馈订单问题给官方客服使用此ID */
+  DealName?: string;
+  /** 可用区id */
+  ZoneId?: number;
+  /** 订单关联的实例数 */
+  GoodsNum?: number;
+  /** 创建用户uin */
+  Creater?: string;
+  /** 订单创建时间 */
+  CreatTime?: string;
+  /** 订单超时时间 */
+  OverdueTime?: string;
+  /** 订单完成时间 */
+  EndTime?: string;
+  /** 订单状态 1：未支付 2:已支付，未发货 3:发货中 4:发货成功 5:发货失败 6:已退款 7:已关闭订单 8:订单过期 9:订单已失效 10:产品已失效 11:代付拒绝 12:支付中 */
+  Status?: number;
+  /** 订单状态描述 */
+  Description?: string;
+  /** 订单实际总价，单位：分 */
+  Price?: number;
+  /** 实例ID */
+  InstanceIds?: string[];
+}
+
 /** 可用区内产品售卖信息 */
 declare interface ZoneCapacityConf {
   /** 可用区ID */
@@ -692,6 +720,18 @@ declare interface DescribeInstanceBinlogsResponse {
   TotalCount: number;
   /** 实例的备份信息数组 */
   BackupSet: BinlogInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceDealDetailRequest {
+  /** 订单交易ID数组，即 [CreateInstances](https://cloud.tencent.com/document/api/1520/86207) 的输出参数DealId。 */
+  DealIds: string[];
+}
+
+declare interface DescribeInstanceDealDetailResponse {
+  /** 订单详细信息 */
+  DealDetails?: TradeDealDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1229,6 +1269,8 @@ declare interface Keewidb {
   DescribeInstanceBackups(data: DescribeInstanceBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceBackupsResponse>;
   /** 查询增量备份列表 {@link DescribeInstanceBinlogsRequest} {@link DescribeInstanceBinlogsResponse} */
   DescribeInstanceBinlogs(data: DescribeInstanceBinlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceBinlogsResponse>;
+  /** 查询订单信息 {@link DescribeInstanceDealDetailRequest} {@link DescribeInstanceDealDetailResponse} */
+  DescribeInstanceDealDetail(data: DescribeInstanceDealDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDealDetailResponse>;
   /** 查询实例节点信息 {@link DescribeInstanceNodeInfoRequest} {@link DescribeInstanceNodeInfoResponse} */
   DescribeInstanceNodeInfo(data: DescribeInstanceNodeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodeInfoResponse>;
   /** 查询参数修改历史列表 {@link DescribeInstanceParamRecordsRequest} {@link DescribeInstanceParamRecordsResponse} */

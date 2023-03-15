@@ -522,6 +522,8 @@ declare interface CynosdbInstance {
   MasterZone?: string | null;
   /** 备可用区 */
   SlaveZones?: string[] | null;
+  /** 实例网络信息 */
+  InstanceNetInfo?: InstanceNetInfo[] | null;
 }
 
 /** 实例详情 */
@@ -694,6 +696,32 @@ declare interface InstanceInitInfo {
   InstanceType: string;
   /** 实例个数,范围[1,15] */
   InstanceCount: number;
+}
+
+/** 实例网络信息 */
+declare interface InstanceNetInfo {
+  /** 网络类型 */
+  InstanceGroupType?: string | null;
+  /** 接入组ID */
+  InstanceGroupId?: string | null;
+  /** 私有网络ID */
+  VpcId?: string | null;
+  /** 子网ID */
+  SubnetId?: string | null;
+  /** 网络类型, 0-基础网络, 1-vpc网络, 2-黑石网络 */
+  NetType?: number | null;
+  /** 私有网络IP */
+  Vip?: string | null;
+  /** 私有网络端口 */
+  Vport?: number | null;
+  /** 外网域名 */
+  WanDomain?: string | null;
+  /** 外网Ip */
+  WanIP?: string | null;
+  /** 外网端口 */
+  WanPort?: number | null;
+  /** 外网开启状态 */
+  WanStatus?: string | null;
 }
 
 /** 实例可售卖规格详细信息，创建实例时Cpu/Memory确定实例规格，存储可选大小为[MinStorageSize,MaxStorageSize] */
@@ -1829,9 +1857,9 @@ declare interface DescribeInstancesRequest {
 
 declare interface DescribeInstancesResponse {
   /** 实例个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例列表 */
-  InstanceSet: CynosdbInstance[];
+  InstanceSet?: CynosdbInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -4023,7 +4023,7 @@ declare interface DescribeServiceDiscoveryResponse {
 declare interface DescribeStatisticDataRequest {
   /** 所属模块，固定值，为monitor */
   Module: string;
-  /** 命名空间，目前只支持QCE/TKE */
+  /** 命名空间，目前只支持QCE/TKE2 */
   Namespace: string;
   /** 指标名列表 */
   MetricNames: string[];
@@ -4041,13 +4041,13 @@ declare interface DescribeStatisticDataRequest {
 
 declare interface DescribeStatisticDataResponse {
   /** 统计周期 */
-  Period: number;
+  Period?: number;
   /** 开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 监控数据 */
-  Data: MetricData[];
+  Data?: MetricData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

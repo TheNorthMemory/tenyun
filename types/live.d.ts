@@ -1613,7 +1613,7 @@ declare interface CreateLiveTranscodeTemplateRequest {
 
 declare interface CreateLiveTranscodeTemplateResponse {
   /** 模板Id。 */
-  TemplateId: number;
+  TemplateId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

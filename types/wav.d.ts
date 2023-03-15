@@ -98,6 +98,14 @@ declare interface ChannelCodeInnerDetail {
   AppId: string;
 }
 
+/** 客户渠道标签 */
+declare interface ChannelTag {
+  /** 该客户档案当前已成功关联的渠道标签名称 */
+  TagName?: string | null;
+  /** 该客户档案当前已成功关联的渠道标签的id */
+  TagId?: string | null;
+}
+
 /** 会话存档数据详情 */
 declare interface ChatArchivingDetail {
   /** 消息id */
@@ -162,6 +170,30 @@ declare interface ClueInfoDetail {
   TagList: string[];
   /** 客户姓名 */
   UserName: string | null;
+  /** 线索属性，0：个人，1：企业 */
+  LeadUserType?: number;
+  /** 线索来源类型，1：线上，2：线下 */
+  LeadType?: number;
+  /** 线索渠道对应ID */
+  ChannelId?: number;
+  /** 线索渠道类型，与线索来源对应的渠道名称 */
+  ChannelName?: string;
+  /** 线索渠道名称 */
+  SourceChannelName?: string | null;
+  /** 0：未知，1：男，2：女 */
+  Gender?: number;
+  /** 线索创建时间戳，单位：秒 */
+  CreateTime?: string;
+  /** 线索所处状态，101-待分配 201-待建档 301-已建档 401-已邀约 501-跟进中 601-已下订单 701-已成交 801-战败申请中 901-已战败 1001-未知状态 1101-转移申请中 1201-已完成 */
+  LeadStatus?: number;
+  /** 线索意向等级 */
+  LevelCode?: string;
+  /** 线索成功导入的时间戳，单位：秒 */
+  ImportAtTime?: number | null;
+  /** 完成线索分配的时间戳，单位：秒 */
+  DistributeTime?: number | null;
+  /** 获取线索的时间戳，单位：秒 */
+  CreateAtTime?: number;
 }
 
 /** 企业成员信息 */
@@ -228,12 +260,110 @@ declare interface CustomerActionEventDetail {
   EventTime: number;
 }
 
+/** 潜客客户档案信息 */
+declare interface CustomerProfile {
+  /** 客户档案id，客户唯一识别编码 */
+  CustomerId?: number;
+  /** 所属经销商id */
+  DealerCode?: string;
+  /** 客户在微信生态中唯一识别码 */
+  UnionId?: string;
+  /** 档案创建时间戳，单位：秒 */
+  CreateTime?: string;
+  /** 客户姓名 */
+  UserName?: string;
+  /** 0未知，1：男，2：女 */
+  Gender?: number;
+  /** 客户联系手机号 */
+  Phone?: string;
+  /** 客户年龄段名称 */
+  AgeRangeName?: string;
+  /** 客户行业类型名称信息，如教师、医生 */
+  JobTypeName?: string;
+  /** 客户居住地址 */
+  Address?: string;
+  /** 客户所处状态 0:已分配 1:未分配 1 待建档, 2 已建档， 3 已到店 4 已经试驾 5 战败申请中 6 已战败 7 已成交 */
+  LeadsProcessStatus?: number;
+  /** 客户来源类型，1：线上，2：线下 */
+  LeadType?: number;
+  /** 与客户来源类型对应的渠道名称 */
+  SourceName?: string;
+  /** 客户购车的意向等级 */
+  LeadsLevelCode?: string;
+  /** 客户意向品牌编号 */
+  VehicleBrandCode?: string;
+  /** 客户意向车系编号 */
+  VehicleSeriesCode?: string;
+  /** 客户意向车型编号 */
+  VehicleTypeCode?: string;
+  /** 购车用途信息 */
+  VehiclePurpose?: VehiclePurpose;
+  /** 购车关注点信息 */
+  PurchaseConcern?: PurchaseConcern[];
+  /** 客户所属顾问姓名 */
+  SalesName?: string;
+  /** 客户所属顾问手机号 */
+  SalesPhone?: string;
+  /** 客户实际到店时间戳，单位：秒 */
+  RealArrivalTime?: number | null;
+  /** 客户到店完成试乘试驾时间戳，单位：秒 */
+  CompleteTestDriveTime?: string | null;
+  /** 客户完成下订的时间戳，单位：秒 */
+  OrderTime?: number | null;
+  /** 客户成交的时间戳，单位：秒 */
+  DeliveryTime?: number | null;
+  /** 开票时间戳 */
+  InvoiceTime?: number | null;
+  /** 完成对此客户战败审批的时间戳，单位：秒 */
+  LoseTime?: number | null;
+  /** 线索成功获取的时间戳，单位：秒 */
+  CreatedAtTime?: number;
+  /** 线索成功导入的时间戳，单位：秒 */
+  ImportAtTime?: number | null;
+  /** 完成线索分配的时间戳，单位：秒 */
+  DistributeTime?: number | null;
+  /** 线索成功创建的时间戳，单位：秒 */
+  LeadCreateTime?: number;
+  /** 线索关联微信昵称 */
+  Nickname?: string;
+  /** 线索归属部门节点 */
+  OrgIdList?: string[];
+  /** 客户的介绍人姓名 */
+  Introducer?: string | null;
+  /** 客户的介绍人手机号码 */
+  IntroducerPhone?: string | null;
+  /** 最近一次完成跟进的时间戳，单位：秒 */
+  FollowTime?: number;
+  /** 最近一次计划跟进的时间戳，单位：秒 */
+  NextFollowTime?: number;
+  /** 已为该客户添加的企业标签信息 */
+  EnterpriseTags?: EnterpriseTag[] | null;
+  /** 已为该客户添加的渠道标签信息 */
+  ChannelTags?: ChannelTag[] | null;
+}
+
 /** 经销商信息 */
 declare interface DealerInfo {
   /** 企微SaaS平台经销商id */
   DealerId: number;
   /** 经销商名称 */
   DealerName: string;
+  /** 所属省份编号 */
+  ProvinceCode?: string | null;
+  /** 所属城市编号列表 */
+  CityCodeList?: string[] | null;
+  /** 业务覆盖品牌id列表 */
+  BrandIdList?: string[] | null;
+}
+
+/** 客户企业标签 */
+declare interface EnterpriseTag {
+  /** 该客户档案当前已成功关联的企业标签分组名称 */
+  GroupName?: string | null;
+  /** 该客户档案当前已成功关联的企业标签名称 */
+  TagName?: string | null;
+  /** 该客户档案当前已成功关联的企业标签的id */
+  TagId?: string | null;
 }
 
 /** 客户信息 */
@@ -250,6 +380,14 @@ declare interface ExternalContact {
   UnionId: string | null;
   /** 外部联系人联系电话 */
   Phone: string | null;
+}
+
+/** 具备更多信息的外部联系人详细信息 */
+declare interface ExternalContactDetailPro {
+  /** 客户信息 */
+  Customer?: ExternalContact | null;
+  /** 添加了此外部联系人的企业成员信息 */
+  FollowUser?: FollowUserPro[] | null;
 }
 
 /** 外部联系人简短信息 */
@@ -312,6 +450,28 @@ declare interface FollowUser {
   OperUserId: string;
   /** 该成员添加此外部联系人所打标签信息 */
   Tags: ExternalContactTag[] | null;
+}
+
+/** 具备更多信息的添加了此外部联系人的企业成员信息 */
+declare interface FollowUserPro {
+  /** 添加了此外部联系人的企业成员userid */
+  UserId: string;
+  /** 该成员对此外部联系人的备注 */
+  Remark: string | null;
+  /** 该成员对此外部联系人的描述 */
+  Description: string | null;
+  /** 该成员添加此外部联系人的时间戳，单位为秒 */
+  CreateTime: number;
+  /** 该成员添加此客户的来源，具体含义详见来源定义 */
+  AddWay: number;
+  /** 发起添加的userid，如果成员主动添加，为成员的userid；如果是客户主动添加，则为客户的外部联系人userid；如果是内部成员共享/管理员分配，则为对应的成员/管理员userid */
+  OperUserId: string;
+  /** 该成员添加此外部联系人所打标签信息 */
+  Tags: ExternalContactTag[] | null;
+  /** 添加了此外部联系人的企业成员的姓名 */
+  SalesName?: string | null;
+  /** 企业成员的归属部门id列表 */
+  DepartmentIdList?: number[];
 }
 
 /** license相关信息 */
@@ -386,6 +546,14 @@ declare interface MiniAppCodeInfo {
   UpdateTime: number;
 }
 
+/** 购车关注点 */
+declare interface PurchaseConcern {
+  /** 购车关注点code */
+  Code?: string;
+  /** 购车关注点描述 */
+  Description?: string;
+}
+
 /** 企业成员SaaS使用明细数据 */
 declare interface SalesActionEventDetail {
   /** 事件码 */
@@ -456,6 +624,14 @@ declare interface VehicleInfo {
   ModelId: number;
   /** 车型名称 */
   ModelName: string;
+}
+
+/** 购车用途详细信息 */
+declare interface VehiclePurpose {
+  /** 购车用途code */
+  VehiclePurposeCode?: string;
+  /** 购车用途名称 */
+  VehiclePurposeName?: string;
 }
 
 /** 企微个人标签信息,渠道活码使用 */
@@ -653,15 +829,19 @@ declare interface QueryClueInfoListRequest {
   Cursor?: string;
   /** 返回的最大记录数，整型，最大值100，默认值50，超过最大值时取最大值 */
   Limit?: number;
+  /** 查询开始时间， 单位秒 */
+  BeginTime?: number;
+  /** 查询结束时间， 单位秒 */
+  EndTime?: number;
 }
 
 declare interface QueryClueInfoListResponse {
   /** 线索信息列表 */
-  PageData: ClueInfoDetail[] | null;
+  PageData?: ClueInfoDetail[] | null;
   /** 分页游标，下次调用带上该值，则从当前的位置继续往后拉，以实现增量拉取。 */
-  NextCursor: string | null;
+  NextCursor?: string | null;
   /** 是否还有更多数据。0-否；1-是。 */
-  HasMore: number | null;
+  HasMore?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -710,6 +890,26 @@ declare interface QueryCustomerEventDetailStatisticsResponse {
   RequestId?: string;
 }
 
+declare interface QueryCustomerProfileListRequest {
+  /** 分页，预期请求的数据量，取值范围 1 ~ 1000 */
+  Limit: number;
+  /** 查询开始时间， 单位秒 */
+  BeginTime: number;
+  /** 查询结束时间， 单位秒 */
+  EndTime: number;
+  /** 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填 */
+  Cursor?: string;
+}
+
+declare interface QueryCustomerProfileListResponse {
+  /** 分页游标，下次调用带上该值，则从当前的位置继续往后拉，以实现增量拉取。 */
+  NextCursor?: string | null;
+  /** 潜客客户存档信息 */
+  PageData?: CustomerProfile[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryDealerInfoListRequest {
   /** 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填 */
   Cursor?: string;
@@ -719,11 +919,31 @@ declare interface QueryDealerInfoListRequest {
 
 declare interface QueryDealerInfoListResponse {
   /** 经销商信息列表 */
-  PageData: DealerInfo[] | null;
+  PageData?: DealerInfo[] | null;
   /** 分页游标，下次调用带上该值，则从当前的位置继续往后拉取新增的数据，以实现增量拉取。 */
-  NextCursor: string | null;
+  NextCursor?: string | null;
   /** 是否还有更多数据。0-否；1-是。 */
-  HasMore: number | null;
+  HasMore?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface QueryExternalContactDetailByDateRequest {
+  /** 查询结束时间， 单位秒 */
+  BeginTime: number;
+  /** 查询结束时间， 单位秒 */
+  EndTime: number;
+  /** 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填 */
+  Cursor?: string;
+  /** 返回的最大记录数，整型，最大值100，默认值50，超过最大值时取最大值 */
+  Limit?: number;
+}
+
+declare interface QueryExternalContactDetailByDateResponse {
+  /** 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空 */
+  NextCursor?: string | null;
+  /** 外部联系人详细信息 */
+  PageData?: ExternalContactDetailPro[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -921,10 +1141,14 @@ declare interface Wav {
   QueryCrmStatistics(data: QueryCrmStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCrmStatisticsResponse>;
   /** 查询外部联系人SaaS使用明细数据接口 {@link QueryCustomerEventDetailStatisticsRequest} {@link QueryCustomerEventDetailStatisticsResponse} */
   QueryCustomerEventDetailStatistics(data: QueryCustomerEventDetailStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCustomerEventDetailStatisticsResponse>;
+  /** 查询潜客客户档案列表接口 {@link QueryCustomerProfileListRequest} {@link QueryCustomerProfileListResponse} */
+  QueryCustomerProfileList(data: QueryCustomerProfileListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCustomerProfileListResponse>;
   /** 查询经销商信息列表接口 {@link QueryDealerInfoListRequest} {@link QueryDealerInfoListResponse} */
   QueryDealerInfoList(data?: QueryDealerInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryDealerInfoListResponse>;
   /** 查询外部联系人详情接口 {@link QueryExternalContactDetailRequest} {@link QueryExternalContactDetailResponse} */
   QueryExternalContactDetail(data: QueryExternalContactDetailRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExternalContactDetailResponse>;
+  /** 通过时间段查询外部联系人详情列表 {@link QueryExternalContactDetailByDateRequest} {@link QueryExternalContactDetailByDateResponse} */
+  QueryExternalContactDetailByDate(data: QueryExternalContactDetailByDateRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExternalContactDetailByDateResponse>;
   /** 查询外部联系人列表接口 {@link QueryExternalContactListRequest} {@link QueryExternalContactListResponse} */
   QueryExternalContactList(data?: QueryExternalContactListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryExternalContactListResponse>;
   /** 查询外部联系人事件明细列表接口 {@link QueryExternalUserEventListRequest} {@link QueryExternalUserEventListResponse} */

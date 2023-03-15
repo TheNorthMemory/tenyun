@@ -54,6 +54,14 @@ declare interface ClusterConfigsInfoFromEMR {
   FilePath: string | null;
 }
 
+/** clickhouse vcluster信息 */
+declare interface ClusterInfo {
+  /** vcluster名字 */
+  ClusterName: string | null;
+  /** 当前cluster的IP列表 */
+  NodeIps: string[] | null;
+}
+
 /** 配置文件修改信息 */
 declare interface ConfigSubmitContext {
   /** 配置文件名称 */
@@ -384,6 +392,18 @@ declare interface DescribeClusterConfigsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceClustersRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeInstanceClustersResponse {
+  /** cluster列表 */
+  Clusters: ClusterInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceKeyValConfigsRequest {
   /** 集群实例ID */
   InstanceId: string;
@@ -559,9 +579,9 @@ declare interface ScaleOutInstanceRequest {
   ScaleOutCluster?: string;
   /** 子网剩余ip数量，用于判断当前实例子网剩余ip数是否能扩容。需要根据实际填写 */
   UserSubnetIPNum?: number;
-  /** 同步元数据节点IP （uip） */
+  /** 同步元数据节点IP （uip），扩容的时候必填 */
   ScaleOutNodeIp?: string;
-  /** 缩容节点shard的节点IP （uip），其中ha集群需要主副节点ip都传入以逗号分隔 */
+  /** 缩容节点shard的节点IP （uip），其中ha集群需要主副节点ip都传入以逗号分隔，缩容的时候必填 */
   ReduceShardInfo?: string[];
 }
 
@@ -615,6 +635,8 @@ declare interface Cdwch {
   DescribeClusterConfigs(data: DescribeClusterConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterConfigsResponse>;
   /** 描述实例信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
+  /** vcluster列表 {@link DescribeInstanceClustersRequest} {@link DescribeInstanceClustersResponse} */
+  DescribeInstanceClusters(data: DescribeInstanceClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceClustersResponse>;
   /** 获取参数列表 {@link DescribeInstanceKeyValConfigsRequest} {@link DescribeInstanceKeyValConfigsResponse} */
   DescribeInstanceKeyValConfigs(data: DescribeInstanceKeyValConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceKeyValConfigsResponse>;
   /** 获取实例shard信息列表 {@link DescribeInstanceShardsRequest} {@link DescribeInstanceShardsResponse} */

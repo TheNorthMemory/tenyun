@@ -1296,7 +1296,7 @@ declare interface IpFilter {
   Filters?: string[] | null;
   /** IP 黑白名单分路径配置，白名单功能 */
   FilterRules?: IpFilterPathRule[] | null;
-  /** IP 黑白名单验证失败时返回的 code（即将下线） */
+  /** IP 黑白名单验证失败时返回的 code 已下线，参数失效，不支持自定义状态码，固定返回514 */
   ReturnCode?: number | null;
 }
 

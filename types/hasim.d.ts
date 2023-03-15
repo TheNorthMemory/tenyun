@@ -491,6 +491,10 @@ declare interface DescribeLinksRequest {
   LinkedState?: number;
   /** 标签ID 集合 */
   TagIDs?: number[];
+  /** 翻页大小, 默认翻页大小为10，最大数量为500 */
+  Limit?: number;
+  /** 翻页起始 */
+  Offset?: number;
 }
 
 declare interface DescribeLinksResponse {

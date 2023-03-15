@@ -48,9 +48,9 @@ declare interface AudioEncode {
 
 /** 录制音频转码参数。 */
 declare interface AudioParams {
-  /** 音频采样率:1：48000Hz（默认）;2：44100Hz3：16000Hz。 */
+  /** 音频采样率枚举值:(注意1 代表48000HZ, 2 代表44100HZ, 3 代表16000HZ)1：48000Hz（默认）;2：44100Hz3：16000Hz。 */
   SampleRate: number;
-  /** 声道数:1：单声道;2：双声道（默认）。 */
+  /** 声道数枚举值:1：单声道;2：双声道（默认）。 */
   Channel: number;
   /** 音频码率: 取值范围[32000, 128000] ，单位bps，默认64000bps。 */
   BitRate: number;
@@ -778,10 +778,34 @@ declare interface VideoParams {
 
 /** 水印布局参数 */
 declare interface WaterMark {
-  /** 水印类型，0为图片（默认），1为文字（暂不支持）。 */
+  /** 水印类型，0为图片（默认），1为文字，2为时间戳。 */
   WaterMarkType?: number;
   /** 水印为图片时的参数列表，水印为图片时校验必填。 */
   WaterMarkImage?: WaterMarkImage;
+  /** 水印为文字时的参数列表，水印为文字时校验必填。 */
+  WaterMarkChar?: WaterMarkChar | null;
+  /** 水印为时间戳时的参数列表，水印为时间戳时校验必填。 */
+  WaterMarkTimestamp?: WaterMarkTimestamp | null;
+}
+
+/** 自定义文字水印数据结构 */
+declare interface WaterMarkChar {
+  /** 文字水印的起始坐标Y值，从左上角开始 */
+  Top: number | null;
+  /** 文字水印的起始坐标X值，从左上角开始 */
+  Left: number | null;
+  /** 文字水印的宽度，单位像素值 */
+  Width: number | null;
+  /** 文字水印的高度，单位像素值 */
+  Height: number | null;
+  /** 水印文字的内容 */
+  Chars: string | null;
+  /** 水印文字的大小，单位像素，默认14 */
+  FontSize?: number | null;
+  /** 水印文字的颜色，默认白色 */
+  FontColor?: string | null;
+  /** 水印文字的背景色，为空代表背景透明，默认为空 */
+  BackGroundColor?: string | null;
 }
 
 /** 水印类型为图片的参数列表 */
@@ -812,6 +836,14 @@ declare interface WaterMarkParams {
   LocationY: number;
   /** 混流-水印图片URL地址，支持png、jpg、jpeg、bmp格式，暂不支持透明通道。URL链接长度限制为512字节。WaterMarkUrl和WaterMarkId参数都填时，以WaterMarkUrl为准。图片大小限制不超过2MB。 */
   WaterMarkUrl?: string;
+}
+
+/** 时间戳水印数据结构 */
+declare interface WaterMarkTimestamp {
+  /** 时间戳的位置，取值范围0-6，分别代表上左，上右，下左，下右，上居中，下居中，居中 */
+  Pos: number | null;
+  /** 显示时间戳的时区，默认东八区 */
+  TimeZone?: number | null;
 }
 
 declare interface CreateCloudRecordingRequest {

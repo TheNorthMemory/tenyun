@@ -132,6 +132,10 @@ declare interface DetectInfoText {
   CompareLibType: string | null;
   /** 本次流程最终活体类型。包括：0：未知1：数字活体2：动作活体3：静默活体4：一闪活体（动作+光线） */
   LivenessMode: number | null;
+  /** nfc重复计费requestId列表 */
+  NFCRequestIds?: string[] | null;
+  /** nfc重复计费计数 */
+  NFCBillingCounts?: number | null;
 }
 
 /** 核身视频信息 */

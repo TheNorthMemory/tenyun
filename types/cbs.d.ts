@@ -761,7 +761,7 @@ declare interface DescribeDiskConfigQuotaRequest {
 
 declare interface DescribeDiskConfigQuotaResponse {
   /** 云盘配置列表。 */
-  DiskConfigSet: DiskConfig[];
+  DiskConfigSet?: DiskConfig[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

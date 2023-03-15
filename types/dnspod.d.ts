@@ -1265,9 +1265,9 @@ declare interface DescribePackageDetailRequest {
 
 declare interface DescribePackageDetailResponse {
   /** 套餐配置详情 */
-  Info: PackageDetailItem[];
+  Info?: PackageDetailItem[];
   /** 套餐代码列表 */
-  LevelMap: string[];
+  LevelMap?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1281,7 +1281,7 @@ declare interface DescribeRecordExistExceptDefaultNSRequest {
 
 declare interface DescribeRecordExistExceptDefaultNSResponse {
   /** true 是 false 否 */
-  Exist: boolean;
+  Exist?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1553,7 +1553,7 @@ declare interface DescribeVASStatisticRequest {
 
 declare interface DescribeVASStatisticResponse {
   /** 增值服务用量列表 */
-  VASList: VASStatisticItem[];
+  VASList?: VASStatisticItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

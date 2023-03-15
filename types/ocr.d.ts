@@ -1789,29 +1789,33 @@ declare interface MLIDPassportOCRRequest {
 
 declare interface MLIDPassportOCRResponse {
   /** 护照ID */
-  ID: string;
+  ID?: string;
   /** 姓名 */
-  Name: string;
+  Name?: string;
   /** 出生日期 */
-  DateOfBirth: string;
+  DateOfBirth?: string;
   /** 性别（F女，M男） */
-  Sex: string;
+  Sex?: string;
   /** 有效期 */
-  DateOfExpiration: string;
+  DateOfExpiration?: string;
   /** 发行国 */
-  IssuingCountry: string;
+  IssuingCountry?: string;
   /** 国家地区代码 */
-  Nationality: string;
+  Nationality?: string;
   /** 告警码-9103	证照翻拍告警-9102	证照复印件告警（包括黑白复印件、彩色复印件）-9106 证件遮挡告警 */
-  Warn: number[];
+  Warn?: number[];
   /** 证件图片 */
-  Image: string;
+  Image?: string;
   /** 扩展字段:{ ID:{ Confidence:0.9999 }, Name:{ Confidence:0.9996 }} */
-  AdvancedInfo: string;
+  AdvancedInfo?: string;
   /** 最下方第一行 MRZ Code 序列 */
-  CodeSet: string;
+  CodeSet?: string;
   /** 最下方第二行 MRZ Code 序列 */
-  CodeCrc: string;
+  CodeCrc?: string;
+  /** 姓 */
+  Surname?: string | null;
+  /** 名 */
+  GivenName?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
