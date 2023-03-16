@@ -2,6 +2,18 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 集群内节点的规格磁盘规格描述 */
+declare interface AttachCBSSpec {
+  /** 节点磁盘类型，例如“CLOUD_SSD”\"CLOUD_PREMIUM" */
+  DiskType?: string;
+  /** 磁盘容量，单位G */
+  DiskSize?: number;
+  /** 磁盘总数 */
+  DiskCount?: number;
+  /** 描述 */
+  DiskDesc?: string;
+}
+
 /** 备份表信息 */
 declare interface BackupTableContent {
   /** 数据库 */
@@ -184,6 +196,50 @@ declare interface InstanceInfo {
   Eip: string | null;
   /** 冷热分层系数 */
   CosMoveFactor: number | null;
+  /** external/local/yunti */
+  Kind: string | null;
+  /** 是否弹性ck */
+  IsElastic: boolean | null;
+  /** 集群详细状态 */
+  InstanceStateInfo: InstanceStateInfo | null;
+  /** ZK高可用 */
+  HAZk: boolean | null;
+  /** 挂载盘,默认0:没有类型；1:裸盘;2:lvm */
+  MountDiskType?: number | null;
+  /** 无 */
+  CHProxyVip?: string | null;
+  /** cos buket的名字 */
+  CosBucketName?: string | null;
+  /** 是否可以挂载云盘 */
+  CanAttachCbs?: boolean | null;
+  /** 是否可以挂载云盘阵列 */
+  CanAttachCbsLvm?: boolean | null;
+  /** 是否可以挂载cos */
+  CanAttachCos?: boolean | null;
+  /** 服务信息 */
+  Components?: ServiceInfo[] | null;
+  /** 可升级的内核版本 */
+  UpgradeVersions?: string | null;
+}
+
+/** 集群状态抽象后的结构体 */
+declare interface InstanceStateInfo {
+  /** 集群状态，例如：Serving */
+  InstanceState: string | null;
+  /** 集群操作创建时间 */
+  FlowCreateTime: string | null;
+  /** 集群操作名称 */
+  FlowName: string | null;
+  /** 集群操作进度 */
+  FlowProgress: number | null;
+  /** 集群状态描述，例如：运行中 */
+  InstanceStateDesc: string | null;
+  /** 集群流程错误信息，例如：“创建失败，资源不足” */
+  FlowMsg: string | null;
+  /** 当前步骤的名称，例如：”购买资源中“ */
+  ProcessName: string | null;
+  /** 请求id */
+  RequestId?: string | null;
 }
 
 /** kv配置，多层级item */
@@ -220,6 +276,20 @@ declare interface NodesSummary {
   DiskType: string;
   /** 磁盘描述 */
   DiskDesc: string;
+  /** 挂载云盘信息 */
+  AttachCBSSpec: AttachCBSSpec | null;
+  /** 子产品类型 */
+  SubProductType?: string | null;
+  /** 规格对应的核数 */
+  SpecCore?: number | null;
+  /** 规格对应的内存大小 */
+  SpecMemory?: number | null;
+  /** 磁盘的数量 */
+  DiskCount?: number | null;
+  /** 磁盘的最大大小 */
+  MaxDiskSize?: number | null;
+  /** 是否为加密云盘 */
+  Encrypt?: number | null;
 }
 
 /** 资源规格描述信息 */
@@ -260,6 +330,14 @@ declare interface ScheduleStrategy {
   ExecuteHour: number;
   /** 策略id */
   ScheduleId: number;
+}
+
+/** 服务详细信息描述。 */
+declare interface ServiceInfo {
+  /** 服务名称 */
+  Name?: string | null;
+  /** 服务的版本 */
+  Version?: string | null;
 }
 
 /** 标签描述 */

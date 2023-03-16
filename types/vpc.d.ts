@@ -2573,13 +2573,13 @@ declare interface CreateAndAttachNetworkInterfaceRequest {
   InstanceId: string;
   /** 指定的内网IP信息，单次最多指定10个。 */
   PrivateIpAddresses?: PrivateIpAddressSpecification[];
-  /** 新申请的内网IP地址个数，内网IP地址个数总和不能超过配数。 */
+  /** 新申请的内网IP地址个数，内网IP地址个数总和不能超过配额数。 */
   SecondaryPrivateIpAddressCount?: number;
   /** 指定绑定的安全组，例如：['sg-1dd51d']。 */
   SecurityGroupIds?: string[];
   /** 弹性网卡描述，可任意命名，但不得超过60个字符。 */
   NetworkInterfaceDescription?: string;
-  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}] */
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
   Tags?: Tag[];
   /** 绑定类型：0 标准型 1 扩展型。 */
   AttachType?: number;
@@ -2587,7 +2587,7 @@ declare interface CreateAndAttachNetworkInterfaceRequest {
 
 declare interface CreateAndAttachNetworkInterfaceResponse {
   /** 弹性网卡实例。 */
-  NetworkInterface: NetworkInterface;
+  NetworkInterface?: NetworkInterface;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2793,6 +2793,8 @@ declare interface CreateHaVipRequest {
   HaVipName: string;
   /** 指定虚拟IP地址，必须在`VPC`网段内且未被占用。不指定则自动分配。 */
   Vip?: string;
+  /** `HAVIP`所在弹性网卡`ID`。 */
+  NetworkInterfaceId?: string;
 }
 
 declare interface CreateHaVipResponse {
@@ -2957,7 +2959,7 @@ declare interface CreateNetworkInterfaceRequest {
   SubnetId: string;
   /** 弹性网卡描述，可任意命名，但不得超过60个字符。 */
   NetworkInterfaceDescription?: string;
-  /** 新申请的内网IP地址个数，内网IP地址个数总和不能超过配数。 */
+  /** 新申请的内网IP地址个数，内网IP地址个数总和不能超过配额数。 */
   SecondaryPrivateIpAddressCount?: number;
   /** 指定绑定的安全组，例如：['sg-1dd51d']。 */
   SecurityGroupIds?: string[];
@@ -2971,7 +2973,7 @@ declare interface CreateNetworkInterfaceRequest {
 
 declare interface CreateNetworkInterfaceResponse {
   /** 弹性网卡实例。 */
-  NetworkInterface: NetworkInterface;
+  NetworkInterface?: NetworkInterface;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

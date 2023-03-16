@@ -589,9 +589,9 @@ declare interface DescribeClusterActivitiesRequest {
 
 declare interface DescribeClusterActivitiesResponse {
   /** 集群活动历史记录列表。 */
-  ClusterActivitySet: ClusterActivity[];
+  ClusterActivitySet?: ClusterActivity[];
   /** 集群活动历史记录数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -619,9 +619,9 @@ declare interface DescribeClustersRequest {
 
 declare interface DescribeClustersResponse {
   /** 集群概览信息列表。 */
-  ClusterSet: ClusterOverview[];
+  ClusterSet?: ClusterOverview[];
   /** 集群数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

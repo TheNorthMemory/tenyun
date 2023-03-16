@@ -1846,6 +1846,26 @@ declare interface DescribeReplicationGroupResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSSLStatusRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeSSLStatusResponse {
+  /** 证书下载地址 */
+  CertDownloadUrl: string;
+  /** 证书下载链接到期时间 */
+  UrlExpiredTime: string;
+  /** 实例SSL配置状态， true：开启 false：关闭 */
+  SSLConfig: boolean;
+  /** 实例SSL特性支持， true：支持 false：不支持（小版本升级后才能支持SSL特性） */
+  FeatureSupport: boolean;
+  /** SSL配置状态，1: 配置中 2：配置成功 */
+  Status: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSlowLogRequest {
   /** 实例Id。 */
   InstanceId: string;
@@ -2649,6 +2669,8 @@ declare interface Redis {
   DescribeProxySlowLog(data: DescribeProxySlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxySlowLogResponse>;
   /** 查询复制组 {@link DescribeReplicationGroupRequest} {@link DescribeReplicationGroupResponse} */
   DescribeReplicationGroup(data: DescribeReplicationGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationGroupResponse>;
+  /** 查询SSL状态 {@link DescribeSSLStatusRequest} {@link DescribeSSLStatusResponse} */
+  DescribeSSLStatus(data: DescribeSSLStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSSLStatusResponse>;
   /** 查询实例慢查询记录 {@link DescribeSlowLogRequest} {@link DescribeSlowLogResponse} */
   DescribeSlowLog(data: DescribeSlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogResponse>;
   /** Redis查询任务结果 {@link DescribeTaskInfoRequest} {@link DescribeTaskInfoResponse} */

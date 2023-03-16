@@ -156,6 +156,34 @@ declare interface KTVTagInfo {
   Name: string;
 }
 
+/** 充值直播会员流水信息 */
+declare interface LiveVipTradeInfo {
+  /** 交易流水号。 */
+  TradeSerialNo?: string;
+  /** 应用名称。 */
+  AppName?: string;
+  /** 用户标识。 */
+  UserId?: string;
+  /** 房间标识。 */
+  RoomId?: string;
+  /** 充值会员天数。取值有： 31 93186 372 */
+  VipDays?: number;
+  /** 订单状态。 取值有： Success：成功Fail：失败Processing：订单处理中 */
+  Status?: string;
+  /** 创建时间。 */
+  CreateTime?: string;
+}
+
+/** 直播会员用户信息 */
+declare interface LiveVipUserInfo {
+  /** 房间标识。 */
+  RoomId?: string;
+  /** 直播会员结束时间。 */
+  LiveVipEndTime?: string;
+  /** 会员生效状态Valid：生效Invalid：无效 */
+  LiveVipStatus?: string;
+}
+
 /** 歌曲专辑封面信息。 */
 declare interface MusicAlbumCoverInfo {
   /** 尺寸规格，取值有：Mini：150 x 150 尺寸；Small：240 x 240 尺寸；Medium：480 x 480 尺寸。 */
@@ -262,6 +290,18 @@ declare interface TimeRange {
   Before?: string;
   /** 小于此时间（结束时间）。格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。 */
   After?: string;
+}
+
+/** 用户信息 */
+declare interface UserInfo {
+  /** 应用名称。 */
+  AppName?: string;
+  /** 用户标识。 */
+  UserId?: string;
+  /** 直播会员详细信息。 */
+  LiveVipUserInfo?: LiveVipUserInfo | null;
+  /** 用户类型Normal：普通用户LiveVip：直播会员用户 */
+  UserType?: string;
 }
 
 declare interface ApplyChorusRequest {
@@ -470,6 +510,46 @@ declare interface DescribeKTVTagsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLiveVipTradeInfosRequest {
+  /** 应用名称。 */
+  AppName: string;
+  /** 直播会员充值下单起始时间，格式为 ISO。默认为当前时间前一天。 */
+  StartTime?: string;
+  /** 直播会员充值下单截止时间，格式为 ISO。默认为当前时间。 EndTime不能小于StartTime */
+  EndTime?: string;
+  /** 交易流水号集合，匹配集合指定所有流水号 。数组长度限制：10。 */
+  TradeSerialNos?: string[];
+  /** 用户标识集合，匹配集合指定所有用户标识 。数组长度限制：10。 */
+  UserIds?: string[];
+  /** 分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条。 */
+  Offset?: number;
+  /** 分页返回的记录条数，默认值：20，最大值：50。 */
+  Limit?: number;
+}
+
+declare interface DescribeLiveVipTradeInfosResponse {
+  /** 直播会员充值流水信息列表 */
+  LiveVipTradeInfoSet?: LiveVipTradeInfo[];
+  /** 直播会员充值流水总数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserInfoRequest {
+  /** 应用名称。 */
+  AppName: string;
+  /** 用户标识。 */
+  UserId: string;
+}
+
+declare interface DescribeUserInfoResponse {
+  /** 用户信息。 */
+  UserInfo?: UserInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DestroyKTVRobotRequest {
   /** 应用名称。 */
   AppName: string;
@@ -480,6 +560,26 @@ declare interface DestroyKTVRobotRequest {
 }
 
 declare interface DestroyKTVRobotResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RechargeLiveVipRequest {
+  /** 应用名称。 */
+  AppName: string;
+  /** 用户标识。 */
+  UserId: string;
+  /** 交易流水号，用于标记此次充值记录，多次充值记录传入相同的 TradeSerialNo 会判断为失败，可用于防止重提提交造成重复计费。 */
+  TradeSerialNo: string;
+  /** 房间标识。 */
+  RoomId: string;
+  /** 充值会员天数。取值有：3193186372 */
+  VipDays: number;
+}
+
+declare interface RechargeLiveVipResponse {
+  /** 直播会员信息。 */
+  LiveVipUserInfo?: LiveVipUserInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -547,8 +647,14 @@ declare interface Yinsuda {
   DescribeKTVSuggestions(data: DescribeKTVSuggestionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVSuggestionsResponse>;
   /** 获取标签列表 {@link DescribeKTVTagsRequest} {@link DescribeKTVTagsResponse} */
   DescribeKTVTags(data: DescribeKTVTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKTVTagsResponse>;
+  /** 获取直播会员充值记录信息列表 {@link DescribeLiveVipTradeInfosRequest} {@link DescribeLiveVipTradeInfosResponse} */
+  DescribeLiveVipTradeInfos(data: DescribeLiveVipTradeInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveVipTradeInfosResponse>;
+  /** 获取用户信息 {@link DescribeUserInfoRequest} {@link DescribeUserInfoResponse} */
+  DescribeUserInfo(data: DescribeUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInfoResponse>;
   /** 销毁机器人 {@link DestroyKTVRobotRequest} {@link DestroyKTVRobotResponse} */
   DestroyKTVRobot(data: DestroyKTVRobotRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyKTVRobotResponse>;
+  /** 充值直播会员 {@link RechargeLiveVipRequest} {@link RechargeLiveVipResponse} */
+  RechargeLiveVip(data: RechargeLiveVipRequest, config?: AxiosRequestConfig): AxiosPromise<RechargeLiveVipResponse>;
   /** 搜索歌曲 {@link SearchKTVMusicsRequest} {@link SearchKTVMusicsResponse} */
   SearchKTVMusics(data: SearchKTVMusicsRequest, config?: AxiosRequestConfig): AxiosPromise<SearchKTVMusicsResponse>;
   /** 同步机器人指令 {@link SyncKTVRobotCommandRequest} {@link SyncKTVRobotCommandResponse} */

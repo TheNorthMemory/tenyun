@@ -941,7 +941,7 @@ declare interface GetAsyncEventStatusRequest {
 
 declare interface GetAsyncEventStatusResponse {
   /** 异步事件状态 */
-  Result: AsyncEventStatus;
+  Result?: AsyncEventStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1009,11 +1009,11 @@ declare interface GetFunctionLogsRequest {
 
 declare interface GetFunctionLogsResponse {
   /** 函数日志的总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 函数日志信息 */
-  Data: FunctionLog[];
+  Data?: FunctionLog[];
   /** 该字段已下线 */
-  SearchContext: LogSearchContext;
+  SearchContext?: LogSearchContext;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1146,7 +1146,7 @@ declare interface GetLayerVersionResponse {
   LayerVersion?: number;
   /** 层名称 */
   LayerName?: string;
-  /** 层的具体版本当前状态，可能取值：Active 正常Publishing 发布中PublishFailed 发布失败Deleted 已删除 */
+  /** 层的具体版本当前状态，状态值[参考此处](https://cloud.tencent.com/document/product/583/47175) */
   Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1365,9 +1365,9 @@ declare interface ListLayersRequest {
 
 declare interface ListLayersResponse {
   /** 层列表 */
-  Layers: LayerVersionInfo[];
+  Layers?: LayerVersionInfo[];
   /** 层总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1387,9 +1387,9 @@ declare interface ListNamespacesRequest {
 
 declare interface ListNamespacesResponse {
   /** namespace详情 */
-  Namespaces: Namespace[];
+  Namespaces?: Namespace[];
   /** 返回的namespace数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1461,7 +1461,7 @@ declare interface PublishLayerVersionRequest {
 
 declare interface PublishLayerVersionResponse {
   /** 本次创建的层的版本号 */
-  LayerVersion: number;
+  LayerVersion?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

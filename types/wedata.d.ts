@@ -1256,6 +1256,18 @@ declare interface Rule {
   MultiSourceFlag?: boolean | null;
   /** 是否where参数 */
   WhereFlag?: boolean | null;
+  /** 模版原始SQL */
+  TemplateSql?: string | null;
+  /** 模版子维度：0.父维度类型,1.一致性: 枚举范围一致性,2.一致性：数值范围一致性,3.一致性：字段数据相关性 */
+  SubQualityDim?: number | null;
+  /** 规则适用的目标数据对象类型（1：常量，2：离线表级，3：离线字段级别） */
+  TargetObjectType?: number | null;
+  /** 规则适用的目标数据对象类型（1：数值，2：字符串） */
+  TargetObjectDataType?: number | null;
+  /** 目标字段详细类型，INT、STRING */
+  TargetObjectDataTypeName?: string | null;
+  /** 目标字段名称 */
+  TargetObjectValue?: string | null;
 }
 
 /** 规则配置 */
