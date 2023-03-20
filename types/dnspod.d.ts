@@ -1541,7 +1541,7 @@ declare interface DescribeUserDetailRequest {
 
 declare interface DescribeUserDetailResponse {
   /** 帐户信息 */
-  UserInfo: UserInfo;
+  UserInfo?: UserInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

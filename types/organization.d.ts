@@ -116,16 +116,18 @@ declare interface OrgMemberAuthAccount {
 declare interface OrgMemberAuthIdentity {
   /** 身份ID。 */
   IdentityId: number | null;
-  /** 身份角色名。 */
+  /** 身份的角色名。 */
   IdentityRoleName: string | null;
-  /** 身份角色别名。 */
+  /** 身份的角色别名。 */
   IdentityRoleAliasName: string | null;
-  /** 描述 */
+  /** 描述。 */
   Description: string | null;
   /** 创建时间。 */
   CreateTime: string | null;
   /** 更新时间。 */
   UpdateTime: string | null;
+  /** 身份类型。取值： 1-预设 2-自定义 */
+  IdentityType?: number | null;
 }
 
 /** 组织成员被授权的策略 */
@@ -323,19 +325,19 @@ declare interface DescribeOrganizationMemberAuthAccountsResponse {
 }
 
 declare interface DescribeOrganizationMemberAuthIdentitiesRequest {
-  /** 偏移量。 */
+  /** 偏移量。取值是limit的整数倍，默认值 : 0 */
   Offset: number;
-  /** 限制数目。最大50 */
+  /** 限制数目。取值范围：1~50，默认值：10 */
   Limit: number;
   /** 组织成员Uin。 */
   MemberUin: number;
 }
 
 declare interface DescribeOrganizationMemberAuthIdentitiesResponse {
-  /** 列表。 */
-  Items: OrgMemberAuthIdentity[] | null;
+  /** 授权身份列表。 */
+  Items?: OrgMemberAuthIdentity[] | null;
   /** 总数目。 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -361,9 +363,9 @@ declare interface DescribeOrganizationMemberPoliciesResponse {
 }
 
 declare interface DescribeOrganizationMembersRequest {
-  /** 偏移量。 */
+  /** 偏移量。取值是limit的整数倍，默认值 : 0 */
   Offset: number;
-  /** 限制数目。最大50 */
+  /** 限制数目。取值范围：1~50，默认值：10 */
   Limit: number;
   /** 国际站：en，国内站：zh */
   Lang?: string;
@@ -377,9 +379,9 @@ declare interface DescribeOrganizationMembersRequest {
 
 declare interface DescribeOrganizationMembersResponse {
   /** 成员列表。 */
-  Items: OrgMember[];
+  Items?: OrgMember[];
   /** 总数目。 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

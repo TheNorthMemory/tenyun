@@ -2311,17 +2311,17 @@ declare interface CreateGrafanaInstanceRequest {
   VpcId: string;
   /** 子网 ID 数组 */
   SubnetIds: string[];
-  /** Grafana 初始密码 */
-  GrafanaInitPassword: string;
   /** 是否启用外网 */
   EnableInternet: boolean;
+  /** Grafana 初始密码 */
+  GrafanaInitPassword?: string;
   /** 标签 */
   TagSpecification?: PrometheusTag[];
 }
 
 declare interface CreateGrafanaInstanceResponse {
   /** 实例名 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2501,6 +2501,8 @@ declare interface CreatePrometheusRecordRuleYamlRequest {
   InstanceId: string;
   /** yaml的内容 */
   Content: string;
+  /** 规则名称 */
+  Name?: string;
 }
 
 declare interface CreatePrometheusRecordRuleYamlResponse {

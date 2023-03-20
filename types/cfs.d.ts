@@ -154,6 +154,10 @@ declare interface FileSystemInfo {
   Capacity: number;
   /** 文件系统标签列表 */
   Tags: TagInfo[];
+  /** 文件系统声明周期管理状态 */
+  TieringState: string;
+  /** 分层存储详情 */
+  TieringDetail: TieringDetailInfo | null;
 }
 
 /** 条件过滤 */
@@ -288,6 +292,10 @@ declare interface TagInfo {
   TagKey: string;
   /** 标签值 */
   TagValue: string;
+}
+
+/** 分层存储详细信息 */
+declare interface TieringDetailInfo {
 }
 
 /** 文件系统配额信息 */

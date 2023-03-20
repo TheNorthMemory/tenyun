@@ -1151,11 +1151,11 @@ declare interface AddInstancesRequest {
   Memory: number;
   /** 新增只读实例数，取值范围为[0,4] */
   ReadOnlyCount: number;
-  /** 实例组ID，在已有RO组中新增实例时使用，不传则新增RO组。当前版本不建议传输该值。 */
+  /** 实例组ID，在已有RO组中新增实例时使用，不传则新增RO组。当前版本不建议传输该值。当前版本已废弃。 */
   InstanceGrpId?: string;
-  /** 所属VPC网络ID，该参数已废弃 */
+  /** 所属VPC网络ID。 */
   VpcId?: string;
-  /** 所属子网ID，如果设置了VpcId，则SubnetId必填。该参数已废弃。 */
+  /** 所属子网ID，如果设置了VpcId，则SubnetId必填。 */
   SubnetId?: string;
   /** 新增RO组时使用的Port，取值范围为[0,65535) */
   Port?: number;
@@ -1173,17 +1173,19 @@ declare interface AddInstancesRequest {
   ParamTemplateId?: number;
   /** 参数列表，ParamTemplateId 传入时InstanceParams才有效 */
   InstanceParams?: ModifyParamItem[];
+  /** 安全组ID，新建只读实例时可以指定安全组。 */
+  SecurityGroupIds?: string[];
 }
 
 declare interface AddInstancesResponse {
   /** 冻结流水，一次开通一个冻结流水。 */
-  TranId: string | null;
+  TranId?: string | null;
   /** 后付费订单号。 */
-  DealNames: string[] | null;
+  DealNames?: string[] | null;
   /** 发货资源id列表。 */
-  ResourceIds: string[] | null;
+  ResourceIds?: string[] | null;
   /** 大订单号 */
-  BigDealIds: string[] | null;
+  BigDealIds?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

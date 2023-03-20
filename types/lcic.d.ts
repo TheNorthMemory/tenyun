@@ -68,6 +68,24 @@ declare interface DocumentInfo {
   UpdateTime?: number | null;
 }
 
+/** 房间事件对应的信息。 */
+declare interface EventDataInfo {
+  /** 事件发生的房间号。 */
+  RoomId?: number | null;
+  /** 事件发生的用户。 */
+  UserId?: string | null;
+}
+
+/** 房间事件信息。 */
+declare interface EventInfo {
+  /** 事件发生的秒级unix时间戳。 */
+  Timestamp?: number;
+  /** 事件类型,有以下值:RoomStart:房间开始 RoomEnd:房间结束 MemberJoin:成员加入 MemberQuit:成员退出 RecordFinish:录制结束 */
+  EventType?: string;
+  /** 事件详细内容，包含房间号,成员类型事件包含用户Id。 */
+  EventData?: EventDataInfo | null;
+}
+
 /** 批量创建群组基础信息 */
 declare interface GroupBaseInfo {
   /** 待创建群组名 */
@@ -795,6 +813,28 @@ declare interface DescribeUserResponse {
   RequestId?: string;
 }
 
+declare interface GetRoomEventRequest {
+  /** 房间Id。 */
+  RoomId: number;
+  /** 应用Id。 */
+  SdkAppId: number;
+  /** 起始页，1开始。keyword为空时有效。 */
+  Page: number;
+  /** 每页个数。keyword为空时有效。一次性最多200条。 */
+  Limit: number;
+  /** 搜索事件类型。有以下事件类型:RoomStart:房间开始RoomEnd:房间结束MemberJoin:成员加入MemberQuit:成员退出RecordFinish:录制结束 */
+  Keyword?: string;
+}
+
+declare interface GetRoomEventResponse {
+  /** 该房间的事件总数，keyword搜索不影响该值。 */
+  Total?: number;
+  /** 详细事件内容。包含相应的类型、发生的时间戳。 */
+  Events?: EventInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetRoomMessageRequest {
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId: number;
@@ -1084,6 +1124,8 @@ declare interface Lcic {
   DescribeSdkAppIdUsers(data: DescribeSdkAppIdUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSdkAppIdUsersResponse>;
   /** 获取用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
   DescribeUser(data: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
+  /** 获取房间事件 {@link GetRoomEventRequest} {@link GetRoomEventResponse} */
+  GetRoomEvent(data: GetRoomEventRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoomEventResponse>;
   /** 获取房间历史消息 {@link GetRoomMessageRequest} {@link GetRoomMessageResponse} */
   GetRoomMessage(data: GetRoomMessageRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoomMessageResponse>;
   /** 获取水印设置 {@link GetWatermarkRequest} {@link GetWatermarkResponse} */

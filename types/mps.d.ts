@@ -2962,6 +2962,8 @@ declare interface OverrideTranscodeParameter {
   TEHDConfig?: TEHDConfigForUpdate;
   /** 字幕流配置参数。 */
   SubtitleTemplate?: SubtitleTemplate;
+  /** 外挂音轨参数。 */
+  AddonAudioStream?: MediaInputInfo[] | null;
 }
 
 /** 语音涉敏任务控制参数 */

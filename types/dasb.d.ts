@@ -230,6 +230,8 @@ declare interface Resource {
   PackageBandwidth: number;
   /** 授权点数扩展包个数(50点) */
   PackageNode: number;
+  /** 日志投递规格信息 */
+  LogDeliveryArgs?: string | null;
 }
 
 /** 资产标签 */

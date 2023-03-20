@@ -963,6 +963,8 @@ declare interface CreateInstanceRequest {
   RegistryChargePrepaid?: RegistryChargePrepaid;
   /** 是否同步TCR云标签至生成的COS Bucket */
   SyncTag?: boolean;
+  /** 是否开启Cos桶多AZ特性 */
+  EnableCosMAZ?: boolean;
 }
 
 declare interface CreateInstanceResponse {

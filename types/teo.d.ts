@@ -82,7 +82,7 @@ declare interface AclUserRule {
 
 /** 规则引擎功能项操作，对于一种功能只对应下面三种类型的其中一种，RuleAction 数组中的每一项只能是其中一个类型，更多功能项的填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。 */
 declare interface Action {
-  /** 常规功能操作，选择该类型的功能项有： 访问URL 重写（AccessUrlRedirect）； 回源 URL 重写 （UpstreamUrlRedirect）； QUIC（QUIC）； WebSocket （WebSocket）； 视频拖拽（VideoSeek）； Token 鉴权（Authentication）； 自定义CacheKey（CacheKey）； 节点缓存 TTL （Cache）； 浏览器缓存 TTL（MaxAge）； 离线缓存（OfflineCache）； 智能加速（SmartRouting）； 分片回源（RangeOriginPull）； HTTP/2 回源（UpstreamHttp2）； Host Header 重写（HostHeader）； 强制 HTTPS（ForceRedirect）； 回源 HTTPS（OriginPullProtocol）； 缓存预刷新（CachePrefresh）； 智能压缩（Compression）； Hsts； ClientIpHeader； TlsVersion； OcspStapling； HTTP/2 访问（Http2）； 回源跟随重定向(UpstreamFollowRedirect)； 修改源站(Origin)。 */
+  /** 常规功能操作，选择该类型的功能项有： 访问URL 重写（AccessUrlRedirect）； 回源 URL 重写 （UpstreamUrlRedirect）； QUIC（QUIC）； WebSocket （WebSocket）； 视频拖拽（VideoSeek）； Token 鉴权（Authentication）； 自定义CacheKey（CacheKey）； 节点缓存 TTL （Cache）； 浏览器缓存 TTL（MaxAge）； 离线缓存（OfflineCache）； 智能加速（SmartRouting）； 分片回源（RangeOriginPull）； HTTP/2 回源（UpstreamHttp2）； Host Header 重写（HostHeader）； 强制 HTTPS（ForceRedirect）； 回源 HTTPS（OriginPullProtocol）； 缓存预刷新（CachePrefresh）； 智能压缩（Compression）； Hsts； ClientIpHeader； SslTlsSecureConf； OcspStapling； HTTP/2 访问（Http2）； 回源跟随重定向(UpstreamFollowRedirect)； 修改源站(Origin)。 */
   NormalAction?: NormalAction | null;
   /** 带有请求头/响应头的功能操作，选择该类型的功能项有： 修改 HTTP 请求头（RequestHeader）； 修改HTTP响应头（ResponseHeader）。 */
   RewriteAction?: RewriteAction | null;
@@ -704,6 +704,12 @@ declare interface Identification {
   OriginalNameServers: string[] | null;
   /** 站点归属权校验：文件校验信息。 */
   FileAscription: FileAscriptionInfo;
+}
+
+/** 图片优化配置。 */
+declare interface ImageOptimize {
+  /** 开关，取值有：on：开启；off：关闭。 */
+  Switch: string;
 }
 
 /** 智能分析规则 */
@@ -1886,6 +1892,8 @@ declare interface ZoneSetting {
   ClientIpCountry: ClientIpCountry | null;
   /** Grpc协议支持配置。 */
   Grpc: Grpc | null;
+  /** 图片优化相关配置。 */
+  ImageOptimize: ImageOptimize | null;
 }
 
 declare interface BindZoneToPlanRequest {
@@ -2243,7 +2251,7 @@ declare interface DeleteZoneResponse {
 declare interface DescribeAccelerationDomainsRequest {
   /** 加速域名所属站点ID。不填写该参数默认返回所有站点下的加速域名。 */
   ZoneId: string;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：domain-name 按照【加速域名名称】进行过滤。 类型：String 必选：否origin-type 按照【源站类型】进行过滤。 类型：String 必选：否origin 按照【主源站地址】进行过滤。 类型：String 必选：否backup-origin 按照【备用源站地址】进行过滤。 类型：String 必选：否 */
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：domain-name 按照【加速域名名称】进行过滤。 类型：String 必选：否origin-type 按照【源站类型】进行过滤。 类型：String 必选：否origin 按照【主源站地址】进行过滤。 类型：String 必选：否backup-origin 按照【备用源站地址】进行过滤。 类型：String 必选：否domain-cname 按照【加速CNAME名】进行过滤。 类型：String 必选：否share-cname 按照【共享CNAME名】进行过滤。 类型：String 必选：否 */
   Filters?: AdvancedFilter[];
   /** 列表排序方式，取值有：asc：升序排列；desc：降序排列。默认值为asc。 */
   Direction?: string;
@@ -2259,9 +2267,9 @@ declare interface DescribeAccelerationDomainsRequest {
 
 declare interface DescribeAccelerationDomainsResponse {
   /** 加速域名总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 加速域名列表。 */
-  AccelerationDomains: AccelerationDomain[];
+  AccelerationDomains?: AccelerationDomain[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1049,11 +1049,15 @@ declare interface UploadCertificateRequest {
   ProjectId?: number;
   /** 证书用途/证书来源。“CLB，CDN，WAF，LIVE，DDOS” */
   CertificateUse?: string;
+  /** 相同的证书是否允许重复上传 */
+  Repeatable?: boolean;
 }
 
 declare interface UploadCertificateResponse {
   /** 证书 ID。 */
-  CertificateId: string;
+  CertificateId?: string;
+  /** 重复证书的ID */
+  RepeatCertId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

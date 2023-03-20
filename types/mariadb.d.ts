@@ -306,6 +306,32 @@ declare interface FunctionPrivilege {
   Privileges: string[];
 }
 
+/** 实例备份文件信息 */
+declare interface InstanceBackupFileItem {
+  /** 实例ID */
+  InstanceId: string;
+  /** 实例名称 */
+  InstanceName: string;
+  /** 实例状态 */
+  InstanceStatus: number;
+  /** 分片ID */
+  ShardId: string | null;
+  /** 文件路径 */
+  FilePath: string;
+  /** 文件名 */
+  FileName: string;
+  /** 文件大小 */
+  FileSize: number;
+  /** 备份类型，Data:数据备份，Binlog:Binlog备份，Errlog:错误日志，Slowlog:慢日志 */
+  BackupType: string;
+  /** 手动备份，0:否，1:是 */
+  ManualBackup: number;
+  /** 备份开始时间 */
+  StartTime: string;
+  /** 备份结束时间 */
+  EndTime: string;
+}
+
 /** 按机型归类的实例可售卖规格信息 */
 declare interface InstanceSpec {
   /** 设备型号 */
@@ -910,6 +936,34 @@ declare interface DescribeAccountsResponse {
   InstanceId: string;
   /** 实例用户列表。 */
   Users: DBAccount[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackupFilesRequest {
+  /** 按实例ID查询 */
+  InstanceId?: string;
+  /** 备份类型，Data:数据备份，Binlog:Binlog备份，Errlog:错误日志，Slowlog:慢日志 */
+  BackupType?: string;
+  /** 按开始时间查询 */
+  StartTime?: string;
+  /** 按结束时间查询 */
+  EndTime?: string;
+  /** 分页参数 */
+  Limit?: number;
+  /** 分页参数 */
+  Offset?: number;
+  /** 排序参数，可选值：Time,Size */
+  OrderBy?: string;
+  /** 排序参数, 可选值：DESC,ASC */
+  OrderType?: string;
+}
+
+declare interface DescribeBackupFilesResponse {
+  /** 备份文件列表 */
+  Files: InstanceBackupFileItem[];
+  /** 总条目数 */
+  TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1853,6 +1907,8 @@ declare interface Mariadb {
   DescribeAccountPrivileges(data: DescribeAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountPrivilegesResponse>;
   /** 查询账号列表 {@link DescribeAccountsRequest} {@link DescribeAccountsResponse} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
+  /** 查看备份文件列表 {@link DescribeBackupFilesRequest} {@link DescribeBackupFilesResponse} */
+  DescribeBackupFiles(data?: DescribeBackupFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupFilesResponse>;
   /** 查询备份时间 {@link DescribeBackupTimeRequest} {@link DescribeBackupTimeResponse} */
   DescribeBackupTime(data: DescribeBackupTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupTimeResponse>;
   /** 查询实例数据加密状态 {@link DescribeDBEncryptAttributesRequest} {@link DescribeDBEncryptAttributesResponse} */

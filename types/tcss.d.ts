@@ -3981,11 +3981,13 @@ declare interface CreateVirusScanTaskRequest {
   ScanIds?: string[];
   /** 自选排除或扫描的地址 */
   ScanPath?: string[];
+  /** 扫描路径模式：SCAN_PATH_ALL：全部路径SCAN_PATH_DEFAULT：默认路径SCAN_PATH_USER_DEFINE：用户自定义路径 */
+  ScanPathMode?: string;
 }
 
 declare interface CreateVirusScanTaskResponse {
   /** 任务id */
-  TaskID: string;
+  TaskID?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7799,99 +7801,103 @@ declare interface DescribeVirusDetailRequest {
 
 declare interface DescribeVirusDetailResponse {
   /** 镜像ID */
-  ImageId: string | null;
+  ImageId?: string | null;
   /** 镜像名称 */
-  ImageName: string | null;
+  ImageName?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 木马文件大小 */
-  Size: number | null;
+  Size?: number | null;
   /** 木马文件路径 */
-  FilePath: string | null;
+  FilePath?: string | null;
   /** 最近生成时间 */
-  ModifyTime: string | null;
+  ModifyTime?: string | null;
   /** 病毒名称 */
-  VirusName: string | null;
+  VirusName?: string | null;
   /** 风险等级 RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM, RISK_LOW, RISK_NOTICE。 */
-  RiskLevel: string | null;
+  RiskLevel?: string | null;
   /** 容器名称 */
-  ContainerName: string | null;
+  ContainerName?: string | null;
   /** 容器id */
-  ContainerId: string | null;
+  ContainerId?: string | null;
   /** 主机名称 */
-  HostName: string | null;
+  HostName?: string | null;
   /** 主机id */
-  HostId: string | null;
+  HostId?: string | null;
   /** 进程名称 */
-  ProcessName: string | null;
+  ProcessName?: string | null;
   /** 进程路径 */
-  ProcessPath: string | null;
+  ProcessPath?: string | null;
   /** 进程md5 */
-  ProcessMd5: string | null;
+  ProcessMd5?: string | null;
   /** 进程id */
-  ProcessId: number | null;
+  ProcessId?: number | null;
   /** 进程参数 */
-  ProcessArgv: string | null;
+  ProcessArgv?: string | null;
   /** 进程链 */
-  ProcessChan: string | null;
+  ProcessChan?: string | null;
   /** 进程组 */
-  ProcessAccountGroup: string | null;
+  ProcessAccountGroup?: string | null;
   /** 进程启动用户 */
-  ProcessStartAccount: string | null;
+  ProcessStartAccount?: string | null;
   /** 进程文件权限 */
-  ProcessFileAuthority: string | null;
+  ProcessFileAuthority?: string | null;
   /** 来源：0：一键扫描， 1：定时扫描 2：实时监控 */
-  SourceType: number | null;
+  SourceType?: number | null;
   /** 集群名称 */
-  PodName: string | null;
+  PodName?: string | null;
   /** 标签 */
-  Tags: string[] | null;
+  Tags?: string[] | null;
   /** 事件描述 */
-  HarmDescribe: string | null;
+  HarmDescribe?: string | null;
   /** 建议方案 */
-  SuggestScheme: string | null;
+  SuggestScheme?: string | null;
   /** 备注 */
-  Mark: string | null;
+  Mark?: string | null;
   /** 风险文件名称 */
-  FileName: string | null;
+  FileName?: string | null;
   /** 文件MD5 */
-  FileMd5: string | null;
+  FileMd5?: string | null;
   /** 事件类型 */
-  EventType: string | null;
+  EventType?: string | null;
   /** DEAL_NONE:文件待处理DEAL_IGNORE:已经忽略DEAL_ADD_WHITELIST:加白DEAL_DEL:文件已经删除DEAL_ISOLATE:已经隔离DEAL_ISOLATING:隔离中DEAL_ISOLATE_FAILED:隔离失败DEAL_RECOVERING:恢复中DEAL_RECOVER_FAILED: 恢复失败 */
-  Status: string | null;
+  Status?: string | null;
   /** 失败子状态:FILE_NOT_FOUND:文件不存在FILE_ABNORMAL:文件异常FILE_ABNORMAL_DEAL_RECOVER:恢复文件时，文件异常BACKUP_FILE_NOT_FOUND:备份文件不存在CONTAINER_NOT_FOUND_DEAL_ISOLATE:隔离时，容器不存在CONTAINER_NOT_FOUND_DEAL_RECOVER:恢复时，容器不存在 */
-  SubStatus: string | null;
+  SubStatus?: string | null;
   /** 内网ip */
-  HostIP: string | null;
+  HostIP?: string | null;
   /** 外网ip */
-  ClientIP: string | null;
+  ClientIP?: string | null;
   /** 父进程启动用户 */
-  PProcessStartUser: string | null;
+  PProcessStartUser?: string | null;
   /** 父进程用户组 */
-  PProcessUserGroup: string | null;
+  PProcessUserGroup?: string | null;
   /** 父进程路径 */
-  PProcessPath: string | null;
+  PProcessPath?: string | null;
   /** 父进程命令行参数 */
-  PProcessParam: string | null;
+  PProcessParam?: string | null;
   /** 祖先进程启动用户 */
-  AncestorProcessStartUser: string | null;
+  AncestorProcessStartUser?: string | null;
   /** 祖先进程用户组 */
-  AncestorProcessUserGroup: string | null;
+  AncestorProcessUserGroup?: string | null;
   /** 祖先进程路径 */
-  AncestorProcessPath: string | null;
+  AncestorProcessPath?: string | null;
   /** 祖先进程命令行参数 */
-  AncestorProcessParam: string | null;
+  AncestorProcessParam?: string | null;
   /** 事件最后一次处理的时间 */
-  OperationTime: string | null;
+  OperationTime?: string | null;
   /** 容器隔离状态 */
-  ContainerNetStatus: string | null;
+  ContainerNetStatus?: string | null;
   /** 容器隔离子状态 */
-  ContainerNetSubStatus: string | null;
+  ContainerNetSubStatus?: string | null;
   /** 容器隔离操作来源 */
-  ContainerIsolateOperationSrc: string | null;
+  ContainerIsolateOperationSrc?: string | null;
   /** 检测平台1: 云查杀引擎2: tav3: binaryAi4: 异常行为5: 威胁情报 */
-  CheckPlatform: string[] | null;
+  CheckPlatform?: string[] | null;
+  /** 文件访问时间 */
+  FileAccessTime?: string | null;
+  /** 文件修改时间 */
+  FileModifyTime?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7953,13 +7959,15 @@ declare interface DescribeVirusMonitorSettingRequest {
 
 declare interface DescribeVirusMonitorSettingResponse {
   /** 是否开启实时监控 */
-  EnableScan: boolean;
+  EnableScan?: boolean;
   /** 扫描全部路径 */
-  ScanPathAll: boolean | null;
+  ScanPathAll?: boolean | null;
   /** 当ScanPathAll为true 生效 0扫描以下路径 1、扫描除以下路径 */
-  ScanPathType: number | null;
+  ScanPathType?: number | null;
   /** 自选排除或扫描的地址 */
-  ScanPath: string[] | null;
+  ScanPath?: string[] | null;
+  /** 扫描路径模式：SCAN_PATH_ALL：全部路径SCAN_PATH_DEFAULT：默认路径SCAN_PATH_USER_DEFINE：用户自定义路径 */
+  ScanPathMode?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7981,27 +7989,29 @@ declare interface DescribeVirusScanSettingRequest {
 
 declare interface DescribeVirusScanSettingResponse {
   /** 是否开启定期扫描 */
-  EnableScan: boolean;
+  EnableScan?: boolean;
   /** 检测周期每隔多少天 */
-  Cycle: number;
+  Cycle?: number;
   /** 扫描开始时间 */
-  BeginScanAt: string;
+  BeginScanAt?: string;
   /** 扫描全部路径 */
-  ScanPathAll: boolean;
+  ScanPathAll?: boolean;
   /** 当ScanPathAll为true 生效 0扫描以下路径 1、扫描除以下路径 */
-  ScanPathType: number;
+  ScanPathType?: number;
   /** 超时时长，单位小时 */
-  Timeout: number;
+  Timeout?: number;
   /** 扫描范围0容器1主机节点 */
-  ScanRangeType: number;
+  ScanRangeType?: number;
   /** true 全选，false 自选 */
-  ScanRangeAll: boolean;
+  ScanRangeAll?: boolean;
   /** 自选扫描范围的容器id或者主机id 根据ScanRangeType决定 */
-  ScanIds: string[];
+  ScanIds?: string[];
   /** 自选排除或扫描的地址 */
-  ScanPath: string[];
+  ScanPath?: string[];
   /** 一键检测的超时设置 */
-  ClickTimeout: number | null;
+  ClickTimeout?: number | null;
+  /** 扫描路径模式：SCAN_PATH_ALL：全部路径SCAN_PATH_DEFAULT：默认路径SCAN_PATH_USER_DEFINE：用户自定义路径 */
+  ScanPathMode?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8975,6 +8985,8 @@ declare interface ModifyVirusMonitorSettingRequest {
   ScanPathType: number;
   /** 自选排除或扫描的地址 */
   ScanPath?: string[];
+  /** 扫描路径模式：SCAN_PATH_ALL：全部路径SCAN_PATH_DEFAULT：默认路径SCAN_PATH_USER_DEFINE：用户自定义路径 */
+  ScanPathMode?: string;
 }
 
 declare interface ModifyVirusMonitorSettingResponse {
@@ -9003,6 +9015,8 @@ declare interface ModifyVirusScanSettingRequest {
   ScanIds?: string[];
   /** 扫描路径 */
   ScanPath?: string[];
+  /** 扫描路径模式：SCAN_PATH_ALL：全部路径SCAN_PATH_DEFAULT：默认路径SCAN_PATH_USER_DEFINE：用户自定义路径 */
+  ScanPathMode?: string;
 }
 
 declare interface ModifyVirusScanSettingResponse {
