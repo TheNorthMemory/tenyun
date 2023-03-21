@@ -165,6 +165,7 @@ import Rum, { Versions as RumVersions } from "./rum";
 import Scf, { Versions as ScfVersions } from "./scf";
 import Ses, { Versions as SesVersions } from "./ses";
 import Smh, { Versions as SmhVersions } from "./smh";
+import Smop, { Versions as SmopVersions } from "./smop";
 import Smpn, { Versions as SmpnVersions } from "./smpn";
 import Sms, { Versions as SmsVersions } from "./sms";
 import Soe, { Versions as SoeVersions } from "./soe";
@@ -397,6 +398,7 @@ export declare type SERVICE_VERSIONS = {
   scf: ScfVersions,
   ses: SesVersions,
   smh: SmhVersions,
+  smop: SmopVersions,
   smpn: SmpnVersions,
   sms: SmsVersions,
   soe: SoeVersions,
@@ -805,6 +807,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   ses: Ses,
   /** {@link Smh 智能媒资托管} */
   smh: Smh,
+  /** {@link Smop 腾讯安心用户运营平台} */
+  smop: Smop,
   /** {@link Smpn 营销号码安全} */
   smpn: Smpn,
   /** {@link Sms 短信} */

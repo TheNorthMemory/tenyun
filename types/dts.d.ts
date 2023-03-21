@@ -476,7 +476,7 @@ declare interface JobItem {
   EndTime: string | null;
   /** 迁移任务错误信息 */
   BriefMsg: string | null;
-  /** 任务状态，取值为：creating(创建中)、created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(中止中)、completing(完成中) */
+  /** 任务状态，取值为：creating(创建中)、created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(中止中)、completing(完成中)、pausing(暂停中)、manualPaused(已暂停) */
   Status: string | null;
   /** 任务运行模式，值包括：immediate(立即运行)，timed(定时运行) */
   RunMode: string | null;
@@ -1235,45 +1235,45 @@ declare interface DescribeMigrationDetailRequest {
 
 declare interface DescribeMigrationDetailResponse {
   /** 数据迁移任务ID */
-  JobId: string | null;
+  JobId?: string | null;
   /** 数据迁移任务名称 */
-  JobName: string | null;
+  JobName?: string | null;
   /** 任务创建(提交)时间，格式为 yyyy-mm-dd hh:mm:ss */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 任务更新时间，格式为 yyyy-mm-dd hh:mm:ss */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 任务开始执行时间，格式为 yyyy-mm-dd hh:mm:ss */
-  StartTime: string | null;
+  StartTime?: string | null;
   /** 任务执行结束时间，格式为 yyyy-mm-dd hh:mm:ss */
-  EndTime: string | null;
+  EndTime?: string | null;
   /** 迁移任务简要错误信息 */
-  BriefMsg: string | null;
-  /** 任务状态，取值为：created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行中)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(中止中)、completing(完成中) */
-  Status: string | null;
+  BriefMsg?: string | null;
+  /** 任务状态，取值为：created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行中)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(中止中)、completing(完成中)、pausing(暂停中)、manualPaused(已暂停) */
+  Status?: string | null;
   /** 任务操作信息 */
-  Action: MigrateAction | null;
+  Action?: MigrateAction | null;
   /** 迁移执行过程信息，在校验阶段显示校验过程步骤信息，在迁移阶段会显示迁移步骤信息 */
-  StepInfo: MigrateDetailInfo | null;
+  StepInfo?: MigrateDetailInfo | null;
   /** 源实例信息 */
-  SrcInfo: DBEndpointInfo | null;
+  SrcInfo?: DBEndpointInfo | null;
   /** 目标端信息 */
-  DstInfo: DBEndpointInfo | null;
+  DstInfo?: DBEndpointInfo | null;
   /** 数据一致性校验结果 */
-  CompareTask: CompareTaskInfo | null;
+  CompareTask?: CompareTaskInfo | null;
   /** 标签信息 */
-  Tags: TagItem[] | null;
+  Tags?: TagItem[] | null;
   /** 运行模式，取值如：immediate(表示立即运行)、timed(表示定时运行) */
-  RunMode: string | null;
+  RunMode?: string | null;
   /** 期待启动时间，当RunMode取值为timed时，此值必填，形如："2006-01-02 15:04:05" */
-  ExpectRunTime: string | null;
+  ExpectRunTime?: string | null;
   /** 迁移选项，描述任务如何执行迁移等一系列配置信息 */
-  MigrateOption: MigrateOption | null;
+  MigrateOption?: MigrateOption | null;
   /** 校验任务运行详情 */
-  CheckStepInfo: CheckStepInfo | null;
+  CheckStepInfo?: CheckStepInfo | null;
   /** 描述计费相关的信息 */
-  TradeInfo: TradeInfo | null;
+  TradeInfo?: TradeInfo | null;
   /** 任务错误信息 */
-  ErrorInfo: ErrorInfoItem[] | null;
+  ErrorInfo?: ErrorInfoItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

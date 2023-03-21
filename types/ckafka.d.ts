@@ -508,6 +508,12 @@ declare interface DatahubTopicDTO {
   Status: number;
 }
 
+/** Datahub Topic 响应 */
+declare interface DatahubTopicResp {
+  /** Topic名称 */
+  TopicName: string;
+}
+
 /** 数据处理——Value处理参数——转换时间格式参数 */
 declare interface DateParam {
   /** 时间格式 */
@@ -568,6 +574,8 @@ declare interface DescribeConnectResource {
   CtsdbConnectParam: CtsdbConnectParam | null;
   /** Doris 配置，Type 为 DORIS 时返回 */
   DorisConnectParam: DorisConnectParam | null;
+  /** Kafka配置，Type 为 KAFKA 时返回 */
+  KafkaConnectParam?: KafkaConnectParam | null;
 }
 
 /** 查询连接源具体数据的返参 */
@@ -610,6 +618,8 @@ declare interface DescribeConnectResourceResp {
   CtsdbConnectParam: CtsdbConnectParam | null;
   /** Doris 配置，Type 为 DORIS 时返回 */
   DorisConnectParam: DorisConnectParam | null;
+  /** Kafka配置，Type 为 KAFKA 时返回 */
+  KafkaConnectParam?: KafkaConnectParam | null;
 }
 
 /** 查询连接源列表的返参 */
@@ -1254,6 +1264,20 @@ declare interface KVParam {
   Regex: string;
   /** 保留源Key，默认为false不保留 */
   KeepOriginalKey?: string | null;
+}
+
+/** Kafka连接源参数 */
+declare interface KafkaConnectParam {
+  /** Kafka连接源的实例资源, 非自建时必填 */
+  Resource?: string | null;
+  /** 是否为自建集群 */
+  SelfBuilt?: boolean | null;
+  /** 是否更新到关联的Dip任务 */
+  IsUpdate?: boolean | null;
+  /** Kafka连接的broker地址, 自建时必填 */
+  BrokerAddress?: string | null;
+  /** CKafka连接源的实例资源地域, 跨地域时必填 */
+  Region?: string | null;
 }
 
 /** Ckafka配置 */
@@ -2369,11 +2393,13 @@ declare interface CreateConnectResourceRequest {
   SQLServerConnectParam?: SQLServerConnectParam;
   /** Doris 配置，Type为 DORIS 时必填 */
   DorisConnectParam?: DorisConnectParam;
+  /** Kafka配置，Type为 KAFKA 时必填 */
+  KafkaConnectParam?: KafkaConnectParam;
 }
 
 declare interface CreateConnectResourceResponse {
   /** 连接源的Id */
-  Result: ConnectResourceResourceIdResp;
+  Result?: ConnectResourceResourceIdResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2422,6 +2448,26 @@ declare interface CreateDatahubTaskRequest {
 declare interface CreateDatahubTaskResponse {
   /** 任务id */
   Result: CreateDatahubTaskRes;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDatahubTopicRequest {
+  /** 名称，是一个不超过 128 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
+  Name: string;
+  /** Partition个数，大于0 */
+  PartitionNum: number;
+  /** 消息保留时间，单位ms，当前最小值为60000ms */
+  RetentionMs: number;
+  /** 主题备注，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
+  Note?: string;
+  /** 标签列表 */
+  Tags?: Tag[];
+}
+
+declare interface CreateDatahubTopicResponse {
+  /** 返回创建结果 */
+  Result: DatahubTopicResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3793,6 +3839,8 @@ declare interface Ckafka {
   CreateConsumer(data: CreateConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerResponse>;
   /** 创建DIP转储任务 {@link CreateDatahubTaskRequest} {@link CreateDatahubTaskResponse} */
   CreateDatahubTask(data: CreateDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatahubTaskResponse>;
+  /** 创建Datahub主题 {@link CreateDatahubTopicRequest} {@link CreateDatahubTopicResponse} */
+  CreateDatahubTopic(data: CreateDatahubTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatahubTopicResponse>;
   /** 创建按量计费实例 {@link CreateInstancePostRequest} {@link CreateInstancePostResponse} */
   CreateInstancePost(data: CreateInstancePostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancePostResponse>;
   /** 创建实例(预付费包年包月) {@link CreateInstancePreRequest} {@link CreateInstancePreResponse} */

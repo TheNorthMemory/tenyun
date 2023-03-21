@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 228+ 款产品，9192+ 服务数</summary>
+<details><summary>共计 229+ 款产品，9208+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -114,7 +114,7 @@ apcas | [汽车精准获客服务](https://cloud.tencent.com/document/product/12
 ape | [正版图库直通车](https://cloud.tencent.com/document/product/1181) | 2020-05-13(8) |
 api | [云 API](https://cloud.tencent.com/document/product/1278) | 2020-11-06(3) |
 apigateway | [API 网关](https://cloud.tencent.com/document/product/628) | 2018-08-08(97) |
-apm | [应用性能观测](https://cloud.tencent.com/document/product/1463) | 2021-06-22(6) |
+apm | [应用性能观测](https://cloud.tencent.com/document/product/1463) | 2021-06-22(8) |
 asr | [语音识别](https://cloud.tencent.com/document/product/1093) | 2019-06-14(19) |
 asw | [应用与服务编排工作流](https://cloud.tencent.com/document/product/1272) | 2020-07-22(9) |
 as | [弹性伸缩](https://cloud.tencent.com/document/product/377) | 2018-04-19(50) |
@@ -153,7 +153,7 @@ ciam | [账号风控平台](https://cloud.tencent.com/document/product/1441) | 2
 cii | [智能保险助手](https://cloud.tencent.com/document/product/1368) | 2021-04-08(13) | 2020-12-10(3) |
 cim |  | 2019-03-18(1) |
 cis |  | 2018-04-08(7) |
-ckafka | [消息队列 CKafka](https://cloud.tencent.com/document/product/597) | 2019-08-19(70) |
+ckafka | [消息队列 CKafka](https://cloud.tencent.com/document/product/597) | 2019-08-19(71) |
 clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-17(79) |
 cloudaudit | [云审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(14) |
@@ -249,7 +249,7 @@ open | 腾讯云 OAuth | 2018-12-25(2) |
 organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(17) | 2018-12-25(20) |
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(23) |
 pds | [私域安全](https://cloud.tencent.com/document/product/1473) | 2021-07-01(2) |
-postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(71) |
+postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(83) |
 privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(21) |
 pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(43) |
 rce | [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) | 2020-11-03(3) |
@@ -261,6 +261,7 @@ rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 20
 scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(44+7) |
 ses | [邮件推送](https://cloud.tencent.com/document/product/1288) | 2020-10-02(26) |
 smh | [智能媒资托管](https://cloud.tencent.com/document/product/1339) | 2021-07-12(10) |
+smop | [腾讯安心用户运营平台](https://cloud.tencent.com/document/product/1310) | 2020-12-03(1) |
 smpn | [营销号码安全](https://cloud.tencent.com/document/product/1127) | 2019-08-22(5) |
 sms | [短信](https://cloud.tencent.com/document/product/382) | 2021-01-11(18) | 2019-07-11(16) |
 soe | [智聆口语评测](https://cloud.tencent.com/document/product/884) | 2018-07-24(4) |

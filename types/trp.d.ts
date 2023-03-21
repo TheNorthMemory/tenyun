@@ -326,6 +326,10 @@ declare interface ScanStat {
   CreateTime?: string;
   /** 更新时间 */
   UpdateTime?: string;
+  /** 商户名称 */
+  MerchantName?: string;
+  /** 产品名称 */
+  ProductName?: string;
 }
 
 /** 溯源码 */
@@ -1023,14 +1027,18 @@ declare interface DescribeScanLogsResponse {
 }
 
 declare interface DescribeScanStatsRequest {
-  /** 批次ID */
-  BatchId: string;
   /** 企业ID */
   CorpId?: number;
   /** 分页数量 */
   PageSize?: number;
   /** 当前分页 */
   PageNumber?: number;
+  /** 商户ID */
+  MerchantId?: string;
+  /** 产品ID */
+  ProductId?: string;
+  /** 批次ID */
+  BatchId?: string;
 }
 
 declare interface DescribeScanStatsResponse {
@@ -1382,7 +1390,7 @@ declare interface Trp {
   /** 查询扫码日志明细 {@link DescribeScanLogsRequest} {@link DescribeScanLogsResponse} */
   DescribeScanLogs(data: DescribeScanLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanLogsResponse>;
   /** 查询扫码统计列表 {@link DescribeScanStatsRequest} {@link DescribeScanStatsResponse} */
-  DescribeScanStats(data: DescribeScanStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanStatsResponse>;
+  DescribeScanStats(data?: DescribeScanStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanStatsResponse>;
   /** 查询临时Token {@link DescribeTmpTokenRequest} {@link DescribeTmpTokenResponse} */
   DescribeTmpToken(data?: DescribeTmpTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTmpTokenResponse>;
   /** 查询二维码信息 {@link DescribeTraceCodeByIdRequest} {@link DescribeTraceCodeByIdResponse} */

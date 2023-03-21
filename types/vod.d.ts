@@ -6725,9 +6725,9 @@ declare interface DescribeTasksRequest {
 
 declare interface DescribeTasksResponse {
   /** 任务概要列表。 */
-  TaskSet: TaskSimpleInfo[];
+  TaskSet?: TaskSimpleInfo[];
   /** 翻页标识，当请求未返回所有数据，该字段表示下一条记录的 ID。当该字段为空，说明已无更多数据。 */
-  ScrollToken: string;
+  ScrollToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

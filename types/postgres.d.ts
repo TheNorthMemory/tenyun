@@ -60,6 +60,68 @@ declare interface BackupPlan {
   MaxBackupStartTime: string;
 }
 
+/** 实例备份统计项 */
+declare interface BackupSummary {
+  /** 实例ID。 */
+  DBInstanceId: string;
+  /** 实例日志备份数量。 */
+  LogBackupCount: number;
+  /** 实例日志备份大小。 */
+  LogBackupSize: number;
+  /** 手动创建的实例基础备份数量。 */
+  ManualBaseBackupCount: number;
+  /** 手动创建的实例基础备份大小。 */
+  ManualBaseBackupSize: number;
+  /** 自动创建的实例基础备份数量。 */
+  AutoBaseBackupCount: number;
+  /** 自动创建的实例基础备份大小。 */
+  AutoBaseBackupSize: number;
+  /** 总备份数量 */
+  TotalBackupCount: number;
+  /** 总备份大小 */
+  TotalBackupSize: number;
+}
+
+/** 数据库基础备份信息 */
+declare interface BaseBackup {
+  /** 实例ID。 */
+  DBInstanceId: string;
+  /** 备份文件唯一标识。 */
+  Id: string;
+  /** 备份文件名称。 */
+  Name: string;
+  /** 备份方式：物理备份、逻辑备份。 */
+  BackupMethod: string;
+  /** 备份模式：自动备份、手动备份。 */
+  BackupMode: string;
+  /** 备份任务状态。 */
+  State: string;
+  /** 备份集大小，单位bytes。 */
+  Size: number;
+  /** 备份的开始时间。 */
+  StartTime: string;
+  /** 备份的结束时间。 */
+  FinishTime: string;
+  /** 备份的过期时间。 */
+  ExpireTime: string;
+}
+
+/** 数据库实例规格 */
+declare interface ClassInfo {
+  /** 规格ID */
+  SpecCode: string;
+  /** CPU核数 */
+  CPU: number;
+  /** 内存大小，单位：MB */
+  Memory: number;
+  /** 该规格所支持最大存储容量，单位：GB */
+  MaxStorage: number;
+  /** 该规格所支持最小存储容量，单位：GB */
+  MinStorage: number;
+  /** 该规格的预估QPS */
+  QPS: number;
+}
+
 /** 数据库备份信息 */
 declare interface DBBackup {
   /** 备份文件唯一标识 */
@@ -280,6 +342,30 @@ declare interface Filter {
   Name?: string;
   /** 一个或者多个过滤值。 */
   Values?: string[];
+}
+
+/** 数据库日志备份信息 */
+declare interface LogBackup {
+  /** 实例ID。 */
+  DBInstanceId: string;
+  /** 备份文件唯一标识。 */
+  Id: string;
+  /** 备份文件名称。 */
+  Name: string;
+  /** 备份方式：物理备份、逻辑备份。 */
+  BackupMethod: string;
+  /** 备份模式：自动备份、手动备份。 */
+  BackupMode: string;
+  /** 备份任务状态。 */
+  State: string;
+  /** 备份集大小，单位bytes。 */
+  Size: number;
+  /** 备份的开始时间。 */
+  StartTime: string;
+  /** 备份的结束时间。 */
+  FinishTime: string;
+  /** 备份的过期时间。 */
+  ExpireTime: string;
 }
 
 /** 网络相关信息。（该数据结构已废弃，网络相关信息使用DBInstanceNetInfo） */
@@ -678,6 +764,24 @@ declare interface Tag {
   TagValue: string;
 }
 
+/** 数据库版本号信息 */
+declare interface Version {
+  /** 数据库引擎，支持：1、postgresql（云数据库PostgreSQL）；2、mssql_compatible（MSSQL兼容-云数据库PostgreSQL）； */
+  DBEngine: string;
+  /** 数据库版本，例如：12.4 */
+  DBVersion: string;
+  /** 数据库主要版本，例如：12 */
+  DBMajorVersion: string;
+  /** 数据库内核版本，例如：v12.4_r1.3 */
+  DBKernelVersion: string;
+  /** 数据库内核支持的特性列表。例如，TDE：支持数据加密。 */
+  SupportedFeatureNames: string[];
+  /** 数据库版本状态，包括：AVAILABLE：可用；DEPRECATED：已弃用。 */
+  Status: string;
+  /** 该数据库版本（DBKernelVersion）可以升级到的版本号列表。 */
+  AvailableUpgradeTarget: string[];
+}
+
 /** 数据库Xlog信息 */
 declare interface Xlog {
   /** 备份文件唯一标识 */
@@ -796,6 +900,16 @@ declare interface CloseServerlessDBExtranetAccessRequest {
 }
 
 declare interface CloseServerlessDBExtranetAccessResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBaseBackupRequest {
+  /** 实例ID。 */
+  DBInstanceId: string;
+}
+
+declare interface CreateBaseBackupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1098,6 +1212,18 @@ declare interface CreateServerlessDBInstanceResponse {
   RequestId?: string;
 }
 
+declare interface DeleteBaseBackupRequest {
+  /** 实例ID。 */
+  DBInstanceId: string;
+  /** 基础备份ID。 */
+  BaseBackupId: string;
+}
+
+declare interface DeleteBaseBackupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDBInstanceNetworkAccessRequest {
   /** 实例ID，形如：postgres-6bwgamo3。 */
   DBInstanceId: string;
@@ -1112,6 +1238,18 @@ declare interface DeleteDBInstanceNetworkAccessRequest {
 declare interface DeleteDBInstanceNetworkAccessResponse {
   /** 流程ID。 */
   FlowId: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLogBackupRequest {
+  /** 实例ID。 */
+  DBInstanceId: string;
+  /** 日志备份ID。 */
+  LogBackupId: string;
+}
+
+declare interface DeleteLogBackupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1204,6 +1342,50 @@ declare interface DescribeAvailableRecoveryTimeResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBackupDownloadURLRequest {
+  /** 实例ID。 */
+  DBInstanceId: string;
+  /** 备份类型，目前支持：LogBackup，BaseBackup。 */
+  BackupType: string;
+  /** 备份的唯一ID。 */
+  BackupId: string;
+  /** 链接的有效时间，默认为12小时。 */
+  URLExpireTime?: number;
+}
+
+declare interface DescribeBackupDownloadURLResponse {
+  /** 备份的下载地址。 */
+  BackupDownloadURL: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackupOverviewRequest {
+}
+
+declare interface DescribeBackupOverviewResponse {
+  /** 总免费空间大小，单位byte。 */
+  TotalFreeSize: number;
+  /** 已使用免费空间大小，单位byte。 */
+  UsedFreeSize: number;
+  /** 已使用收费空间大小，单位byte。 */
+  UsedBillingSize: number;
+  /** 日志备份数量。 */
+  LogBackupCount: number;
+  /** 日志备份大小，单位byte。 */
+  LogBackupSize: number;
+  /** 手动创建的基础备份数量。 */
+  ManualBaseBackupCount: number;
+  /** 手动创建的基础备份大小，单位byte。 */
+  ManualBaseBackupSize: number;
+  /** 自动创建的基础备份数量。 */
+  AutoBaseBackupCount: number;
+  /** 自动创建的基础备份大小，单位byte。 */
+  AutoBaseBackupSize: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBackupPlansRequest {
   /** 实例ID */
   DBInstanceId: string;
@@ -1212,6 +1394,70 @@ declare interface DescribeBackupPlansRequest {
 declare interface DescribeBackupPlansResponse {
   /** 实例的备份计划集 */
   Plans: BackupPlan[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackupSummariesRequest {
+  /** 每页显示数量，取值范围为1-100，默认为返回10条。 */
+  Limit?: number;
+  /** 数据偏移量，从0开始。 */
+  Offset?: number;
+  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：db-instance-id：按照实例ID过滤，类型为string。db-instance-name：按照实例名过滤，类型为string。db-instance-ip：按照实例私有网络IP地址过滤，类型为string。 */
+  Filters?: Filter[];
+  /** 排序字段，支持TotalBackupSize,LogBackupSize,ManualBaseBackupSize,AutoBaseBackupSize。 */
+  OrderBy?: string;
+  /** 排序方式，包括升序：asc，降序：desc。 */
+  OrderByType?: string;
+}
+
+declare interface DescribeBackupSummariesResponse {
+  /** 备份统计信息列表。 */
+  BackupSummarySet: BackupSummary[];
+  /** 查询到的所有备份信息数量。 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBaseBackupsRequest {
+  /** 备份的最小结束时间，形如2018-01-01 00:00:00。默认为7天前。 */
+  MinFinishTime?: string;
+  /** 备份的最大结束时间，形如2018-01-01 00:00:00。默认为当前时间。 */
+  MaxFinishTime?: string;
+  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：db-instance-id：按照实例ID过滤，类型为string。db-instance-name：按照实例名过滤，类型为string。db-instance-ip：按照实例私有网络IP地址过滤，类型为string。 */
+  Filters?: Filter[];
+  /** 每页显示数量，取值范围为1-100，默认为返回10条。 */
+  Limit?: number;
+  /** 数据偏移量，从0开始。 */
+  Offset?: number;
+  /** 排序字段，支持StartTime,FinishTime,Size。 */
+  OrderBy?: string;
+  /** 排序方式，包括升序：asc，降序：desc。 */
+  OrderByType?: string;
+}
+
+declare interface DescribeBaseBackupsResponse {
+  /** 查询到的基础备份数量。 */
+  TotalCount: number;
+  /** 基础备份详细信息列表。 */
+  BaseBackupSet: BaseBackup[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClassesRequest {
+  /** 可用区ID。可以通过接口DescribeZones获取。 */
+  Zone: string;
+  /** 数据库引擎，支持：1、postgresql（云数据库PostgreSQL）；2、mssql_compatible（MSSQL兼容-云数据库PostgreSQL）； */
+  DBEngine: string;
+  /** 数据库主版本号。例如12，13，可以通过接口DescribeDBVersions获取。 */
+  DBMajorVersion: string;
+}
+
+declare interface DescribeClassesResponse {
+  /** 数据库规格列表 */
+  ClassInfoSet?: ClassInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1376,6 +1622,16 @@ declare interface DescribeDBSlowlogsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBVersionsRequest {
+}
+
+declare interface DescribeDBVersionsResponse {
+  /** 数据库版本号信息列表 */
+  VersionSet?: Version[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBXlogsRequest {
   /** 实例ID，形如postgres-4wdeb0zv。 */
   DBInstanceId: string;
@@ -1434,6 +1690,32 @@ declare interface DescribeEncryptionKeysRequest {
 declare interface DescribeEncryptionKeysResponse {
   /** 实例密钥信息列表。 */
   EncryptionKeys: EncryptionKey[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLogBackupsRequest {
+  /** 备份的最小结束时间，形如2018-01-01 00:00:00。默认为7天前。 */
+  MinFinishTime?: string;
+  /** 备份的最大结束时间，形如2018-01-01 00:00:00。默认为当前时间。 */
+  MaxFinishTime?: string;
+  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：db-instance-id：按照实例ID过滤，类型为string。db-instance-name：按照实例名过滤，类型为string。db-instance-ip：按照实例私有网络IP地址过滤，类型为string。 */
+  Filters?: Filter[];
+  /** 每页显示数量，取值范围为1-100，默认为返回10条。 */
+  Limit?: number;
+  /** 数据偏移量，从0开始。 */
+  Offset?: number;
+  /** 排序字段，支持StartTime,FinishTime,Size。 */
+  OrderBy?: string;
+  /** 排序方式，包括升序：asc，降序：desc。 */
+  OrderByType?: string;
+}
+
+declare interface DescribeLogBackupsResponse {
+  /** 查询到的日志备份数量。 */
+  TotalCount: number;
+  /** 日志备份详细信息列表。 */
+  LogBackupSet: LogBackup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1808,6 +2090,20 @@ declare interface ModifyBackupPlanResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBaseBackupExpireTimeRequest {
+  /** 实例ID。 */
+  DBInstanceId: string;
+  /** 基础备份ID。 */
+  BaseBackupId: string;
+  /** 新过期时间。 */
+  NewExpireTime: string;
+}
+
+declare interface ModifyBaseBackupExpireTimeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBInstanceDeploymentRequest {
   /** 实例ID。 */
   DBInstanceId: string;
@@ -2086,6 +2382,26 @@ declare interface SetAutoRenewFlagResponse {
   RequestId?: string;
 }
 
+declare interface UpgradeDBInstanceKernelVersionRequest {
+  /** 实例ID */
+  DBInstanceId: string;
+  /** 升级的目标内核版本号。可以通过接口DescribeDBVersions的返回字段AvailableUpgradeTarget获取。 */
+  TargetDBKernelVersion: string;
+  /** 指定实例升级内核版本号完成后的切换时间。可选值，0：立即切换（默认值）。1：指定时间切换。2：维护时间窗口内切换。 */
+  SwitchTag?: number;
+  /** 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。当SwitchTag为0或2时，该参数失效。 */
+  SwitchStartTime?: string;
+  /** 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。SwitchStartTime和SwitchEndTime时间窗口不能小于30分钟。 */
+  SwitchEndTime?: string;
+  /** 是否对本次升级实例内核版本号操作执行预检查。可选值，true：执行预检查操作，不升级内核版本号。检查项目包含请求参数、内核版本号兼容性、实例参数等。false：发送正常请求（默认值），通过检查后直接升级内核版本号。 */
+  DryRun?: boolean;
+}
+
+declare interface UpgradeDBInstanceKernelVersionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpgradeDBInstanceRequest {
   /** 升级后的实例内存大小，单位GB */
   Memory: number;
@@ -2127,6 +2443,8 @@ declare interface Postgres {
   CloseDBExtranetAccess(data: CloseDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseDBExtranetAccessResponse>;
   /** 关闭serverlessDB实例外网 {@link CloseServerlessDBExtranetAccessRequest} {@link CloseServerlessDBExtranetAccessResponse} */
   CloseServerlessDBExtranetAccess(data?: CloseServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseServerlessDBExtranetAccessResponse>;
+  /** 创建实例基础备份 {@link CreateBaseBackupRequest} {@link CreateBaseBackupResponse} */
+  CreateBaseBackup(data: CreateBaseBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBaseBackupResponse>;
   /** 添加实例网络 {@link CreateDBInstanceNetworkAccessRequest} {@link CreateDBInstanceNetworkAccessResponse} */
   CreateDBInstanceNetworkAccess(data: CreateDBInstanceNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceNetworkAccessResponse>;
   /** 创建实例(旧) {@link CreateDBInstancesRequest} {@link CreateDBInstancesResponse} */
@@ -2143,8 +2461,12 @@ declare interface Postgres {
   CreateReadOnlyGroupNetworkAccess(data: CreateReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyGroupNetworkAccessResponse>;
   /** 创建ServerlessDB实例 {@link CreateServerlessDBInstanceRequest} {@link CreateServerlessDBInstanceResponse} */
   CreateServerlessDBInstance(data: CreateServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServerlessDBInstanceResponse>;
+  /** 删除实例基础备份 {@link DeleteBaseBackupRequest} {@link DeleteBaseBackupResponse} */
+  DeleteBaseBackup(data: DeleteBaseBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBaseBackupResponse>;
   /** 删除实例网络 {@link DeleteDBInstanceNetworkAccessRequest} {@link DeleteDBInstanceNetworkAccessResponse} */
   DeleteDBInstanceNetworkAccess(data: DeleteDBInstanceNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBInstanceNetworkAccessResponse>;
+  /** 删除实例日志备份 {@link DeleteLogBackupRequest} {@link DeleteLogBackupResponse} */
+  DeleteLogBackup(data: DeleteLogBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogBackupResponse>;
   /** 删除参数模板 {@link DeleteParameterTemplateRequest} {@link DeleteParameterTemplateResponse} */
   DeleteParameterTemplate(data: DeleteParameterTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteParameterTemplateResponse>;
   /** 删除只读组 {@link DeleteReadOnlyGroupRequest} {@link DeleteReadOnlyGroupResponse} */
@@ -2157,8 +2479,18 @@ declare interface Postgres {
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
   /** 查询实例可恢复的时间范围 {@link DescribeAvailableRecoveryTimeRequest} {@link DescribeAvailableRecoveryTimeResponse} */
   DescribeAvailableRecoveryTime(data: DescribeAvailableRecoveryTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableRecoveryTimeResponse>;
+  /** 获取备份下载链接 {@link DescribeBackupDownloadURLRequest} {@link DescribeBackupDownloadURLResponse} */
+  DescribeBackupDownloadURL(data: DescribeBackupDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadURLResponse>;
+  /** 查询备份概览 {@link DescribeBackupOverviewRequest} {@link DescribeBackupOverviewResponse} */
+  DescribeBackupOverview(data?: DescribeBackupOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupOverviewResponse>;
   /** 查询备份计划 {@link DescribeBackupPlansRequest} {@link DescribeBackupPlansResponse} */
   DescribeBackupPlans(data: DescribeBackupPlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupPlansResponse>;
+  /** 查询备份统计信息 {@link DescribeBackupSummariesRequest} {@link DescribeBackupSummariesResponse} */
+  DescribeBackupSummaries(data?: DescribeBackupSummariesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupSummariesResponse>;
+  /** 查询基础备份列表 {@link DescribeBaseBackupsRequest} {@link DescribeBaseBackupsResponse} */
+  DescribeBaseBackups(data?: DescribeBaseBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaseBackupsResponse>;
+  /** 查询售卖规格 {@link DescribeClassesRequest} {@link DescribeClassesResponse} */
+  DescribeClasses(data: DescribeClassesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassesResponse>;
   /** 查询克隆实例购买规格 {@link DescribeCloneDBInstanceSpecRequest} {@link DescribeCloneDBInstanceSpecResponse} */
   DescribeCloneDBInstanceSpec(data: DescribeCloneDBInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloneDBInstanceSpecResponse>;
   /** 查询实例备份列表 {@link DescribeDBBackupsRequest} {@link DescribeDBBackupsResponse} */
@@ -2175,6 +2507,8 @@ declare interface Postgres {
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
   /** 获取慢查询日志 （废弃） {@link DescribeDBSlowlogsRequest} {@link DescribeDBSlowlogsResponse} */
   DescribeDBSlowlogs(data: DescribeDBSlowlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSlowlogsResponse>;
+  /** 查询支持的数据库版本号列表 {@link DescribeDBVersionsRequest} {@link DescribeDBVersionsResponse} */
+  DescribeDBVersions(data?: DescribeDBVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBVersionsResponse>;
   /** 获取实例Xlog列表 {@link DescribeDBXlogsRequest} {@link DescribeDBXlogsResponse} */
   DescribeDBXlogs(data: DescribeDBXlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBXlogsResponse>;
   /** 拉取数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
@@ -2183,6 +2517,8 @@ declare interface Postgres {
   DescribeDefaultParameters(data: DescribeDefaultParametersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultParametersResponse>;
   /** 实例密钥信息列表 {@link DescribeEncryptionKeysRequest} {@link DescribeEncryptionKeysResponse} */
   DescribeEncryptionKeys(data: DescribeEncryptionKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEncryptionKeysResponse>;
+  /** 查询日志备份列表 {@link DescribeLogBackupsRequest} {@link DescribeLogBackupsResponse} */
+  DescribeLogBackups(data?: DescribeLogBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogBackupsResponse>;
   /** 获取订单信息 {@link DescribeOrdersRequest} {@link DescribeOrdersResponse} */
   DescribeOrders(data: DescribeOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrdersResponse>;
   /** 查询参数模板详情 {@link DescribeParameterTemplateAttributesRequest} {@link DescribeParameterTemplateAttributesResponse} */
@@ -2223,6 +2559,8 @@ declare interface Postgres {
   ModifyAccountRemark(data: ModifyAccountRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountRemarkResponse>;
   /** 修改备份计划 {@link ModifyBackupPlanRequest} {@link ModifyBackupPlanResponse} */
   ModifyBackupPlan(data: ModifyBackupPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupPlanResponse>;
+  /** 修改基础备份过期时间 {@link ModifyBaseBackupExpireTimeRequest} {@link ModifyBaseBackupExpireTimeResponse} */
+  ModifyBaseBackupExpireTime(data: ModifyBaseBackupExpireTimeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBaseBackupExpireTimeResponse>;
   /** 修改实例部署方式 {@link ModifyDBInstanceDeploymentRequest} {@link ModifyDBInstanceDeploymentResponse} */
   ModifyDBInstanceDeployment(data: ModifyDBInstanceDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceDeploymentResponse>;
   /** 修改实例名字 {@link ModifyDBInstanceNameRequest} {@link ModifyDBInstanceNameResponse} */
@@ -2261,6 +2599,8 @@ declare interface Postgres {
   SetAutoRenewFlag(data: SetAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetAutoRenewFlagResponse>;
   /** 升级实例配置（废弃） {@link UpgradeDBInstanceRequest} {@link UpgradeDBInstanceResponse} */
   UpgradeDBInstance(data: UpgradeDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceResponse>;
+  /** 升级实例内核版本号 {@link UpgradeDBInstanceKernelVersionRequest} {@link UpgradeDBInstanceKernelVersionResponse} */
+  UpgradeDBInstanceKernelVersion(data: UpgradeDBInstanceKernelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceKernelVersionResponse>;
 }
 
 export declare type Versions = ["2017-03-12"];

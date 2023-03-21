@@ -320,6 +320,56 @@ declare interface DescribeServiceOverviewResponse {
   RequestId?: string;
 }
 
+declare interface ModifyApmInstanceRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 实例名 */
+  Name: string;
+  /** 标签列表 */
+  Tags?: ApmTag[];
+  /** 实例详情 */
+  Description?: string;
+  /** Trace数据保存时长 */
+  TraceDuration?: number;
+  /** 是否开启计费 */
+  OpenBilling?: boolean;
+  /** 实例上报额度 */
+  SpanDailyCounters?: number;
+  /** 错误率阈值 */
+  ErrRateThreshold?: number;
+  /** 采样率 */
+  SampleRate?: number;
+  /** 是否开启错误采样 0 关 1 开 */
+  ErrorSample?: number;
+  /** 慢请求阈值 */
+  SlowRequestSavedThreshold?: number;
+  /** 是否开启日志功能 0 关 1 开 */
+  IsRelatedLog?: number;
+  /** 日志地域 */
+  LogRegion?: string;
+  /** CLS日志主题ID | ES 索引名 */
+  LogTopicID?: string;
+  /** CLS日志集 | ES集群ID */
+  LogSet?: string;
+  /** CLS | ES */
+  LogSource?: string;
+}
+
+declare interface ModifyApmInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface TerminateApmInstanceRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface TerminateApmInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Apm 应用性能观测} */
 declare interface Apm {
   (): Versions;
@@ -335,6 +385,10 @@ declare interface Apm {
   DescribeMetricRecords(data: DescribeMetricRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricRecordsResponse>;
   /** 获取服务概览数据 {@link DescribeServiceOverviewRequest} {@link DescribeServiceOverviewResponse} */
   DescribeServiceOverview(data: DescribeServiceOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceOverviewResponse>;
+  /** 修改Apm实例 {@link ModifyApmInstanceRequest} {@link ModifyApmInstanceResponse} */
+  ModifyApmInstance(data: ModifyApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmInstanceResponse>;
+  /** 销毁实例 {@link TerminateApmInstanceRequest} {@link TerminateApmInstanceResponse} */
+  TerminateApmInstance(data: TerminateApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateApmInstanceResponse>;
 }
 
 export declare type Versions = ["2021-06-22"];

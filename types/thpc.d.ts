@@ -332,9 +332,9 @@ declare interface QueueOverview {
 
 /** 描述集群文件系统选项 */
 declare interface StorageOption {
-  /** 集群挂载CFS文件系统选项 */
+  /** 集群挂载CFS文件系统选项。 */
   CFSOptions?: CFSOption[];
-  /** 集群挂在GooseFS文件系统选项 */
+  /** 集群挂载GooseFS文件系统选项。 */
   GooseFSOptions?: GooseFSOption[];
 }
 

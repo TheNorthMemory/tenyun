@@ -702,7 +702,7 @@ declare interface InstanceInitInfo {
 declare interface InstanceNetInfo {
   /** 网络类型 */
   InstanceGroupType?: string | null;
-  /** 接入组ID */
+  /** 实例组ID */
   InstanceGroupId?: string | null;
   /** 私有网络ID */
   VpcId?: string | null;
