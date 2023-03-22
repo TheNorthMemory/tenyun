@@ -2156,6 +2156,40 @@ declare interface DescribeExtraPkgBillingInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeGatewayCurveDataRequest {
+  /** 环境id */
+  EnvId: string;
+  /** 网关id */
+  GatewayId: string;
+  /** 监控类型 GWQps GWBandwidth GwHttpError GwHttp404 GwHttp502 */
+  MetricName: string;
+  /** 监控起始时间 */
+  StartTime: string;
+  /** 监控结束时间 */
+  EndTime: string;
+  /** 网关版本 */
+  GatewayVersion?: string;
+  /** 网关路由名称 */
+  GatewayRoute?: string;
+}
+
+declare interface DescribeGatewayCurveDataResponse {
+  /** 监控类型 */
+  MetricName: string;
+  /** 监控起始时间 */
+  StartTime: string;
+  /** 监控结束时间 */
+  EndTime: string;
+  /** 监控数据间隔 */
+  Period: number;
+  /** 监控值 */
+  Values: number[];
+  /** 监控时间 */
+  Time: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHostingDomainTaskRequest {
   /** 环境ID */
   EnvId: string;
@@ -2839,6 +2873,8 @@ declare interface Tcb {
   DescribeExtensionUploadInfo(data: DescribeExtensionUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtensionUploadInfoResponse>;
   /** 获取增值包计费相关信息 {@link DescribeExtraPkgBillingInfoRequest} {@link DescribeExtraPkgBillingInfoResponse} */
   DescribeExtraPkgBillingInfo(data?: DescribeExtraPkgBillingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtraPkgBillingInfoResponse>;
+  /** 查询网关监控数据 {@link DescribeGatewayCurveDataRequest} {@link DescribeGatewayCurveDataResponse} */
+  DescribeGatewayCurveData(data: DescribeGatewayCurveDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayCurveDataResponse>;
   /** 查询静态托管域名任务状态 {@link DescribeHostingDomainTaskRequest} {@link DescribeHostingDomainTaskResponse} */
   DescribeHostingDomainTask(data: DescribeHostingDomainTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostingDomainTaskResponse>;
   /** 查询后付费资源免费量 {@link DescribePostpayFreeQuotasRequest} {@link DescribePostpayFreeQuotasResponse} */

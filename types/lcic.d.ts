@@ -581,6 +581,14 @@ declare interface DescribeCurrentMemberListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDeveloperRequest {
+}
+
+declare interface DescribeDeveloperResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDocumentRequest {
   /** 文档Id（唯一id） */
   DocumentId: string;
@@ -1106,6 +1114,8 @@ declare interface Lcic {
   DescribeAppDetail(data: DescribeAppDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppDetailResponse>;
   /** 获取当前房间的成员列表 {@link DescribeCurrentMemberListRequest} {@link DescribeCurrentMemberListResponse} */
   DescribeCurrentMemberList(data: DescribeCurrentMemberListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCurrentMemberListResponse>;
+  /** 服务商信息获取 {@link DescribeDeveloperRequest} {@link DescribeDeveloperResponse} */
+  DescribeDeveloper(data?: DescribeDeveloperRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeveloperResponse>;
   /** 获取文档信息 {@link DescribeDocumentRequest} {@link DescribeDocumentResponse} */
   DescribeDocument(data: DescribeDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocumentResponse>;
   /** 获取指定房间下文档 {@link DescribeDocumentsByRoomRequest} {@link DescribeDocumentsByRoomResponse} */

@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 229+ 款产品，9208+ 服务数</summary>
+<details><summary>共计 230+ 款产品，9218+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -140,7 +140,7 @@ casb | [云访问安全代理](https://cloud.tencent.com/document/product/1303) 
 cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(11) |
 cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(43) |
 ccc | [云呼叫中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(39) |
-cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(138) |
+cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(139) |
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(20) |
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(80+3) |
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(6) |
@@ -217,13 +217,13 @@ iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 
 iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(72) | 2018-06-14(69) |
 iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(90) |
 iottid | [物联网设备身份认证](https://cloud.tencent.com/document/product/1086) | 2019-04-11(9) |
-iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(94) | 2020-12-15(79)<br/>2019-11-26(66) |
+iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(95) | 2020-12-15(79)<br/>2019-11-26(66) |
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
 irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 2022-08-05(7) | 2022-03-24(4) |
 ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2021-09-03(25) |
 keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520) | 2022-03-08(37) |
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(49) |
-lcic | [低代码互动课堂](https://cloud.tencent.com/document/product/1639) | 2022-08-17(43) |
+lcic | [低代码互动课堂](https://cloud.tencent.com/document/product/1639) | 2022-08-17(44) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(77) |
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(130) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(1) |
@@ -245,6 +245,7 @@ nlp | [自然语言处理](https://cloud.tencent.com/document/product/271) | 201
 npp | 号码保护 | 2019-08-23(8) |
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(25) |
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(80) |
+omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(6) |
 open | 腾讯云 OAuth | 2018-12-25(2) |
 organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(17) | 2018-12-25(20) |
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(23) |
@@ -281,7 +282,7 @@ tbaas | [腾讯云区块链服务平台 TBaaS](https://cloud.tencent.com/documen
 tbm |  | 2018-01-29(9) |
 tbp | [腾讯智能对话平台](https://cloud.tencent.com/document/product/1060) | 2019-06-27(2) | 2019-03-11(4) |
 tcaplusdb | [游戏数据库 TcaplusDB](https://cloud.tencent.com/document/product/596) | 2019-08-23(50) |
-tcb | [云开发 CloudBase](https://cloud.tencent.com/document/product/876) | 2018-06-08(80+189) |
+tcb | [云开发 CloudBase](https://cloud.tencent.com/document/product/876) | 2018-06-08(81+189) |
 tcbr | [云托管 CloudBase Run](https://cloud.tencent.com/document/product/1243) | 2022-02-17(10+4) |
 tcex | [腾讯云释义](https://cloud.tencent.com/document/product/1266) | 2020-07-27(2) |
 tci | 腾讯智学课堂分析 | 2019-03-18(41) |

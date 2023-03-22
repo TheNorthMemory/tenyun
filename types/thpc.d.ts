@@ -479,7 +479,7 @@ declare interface CreateClusterRequest {
   ComputeNodeCount?: number;
   /** 调度器类型。默认取值：SLURM。SGE：SGE调度器。SLURM：SLURM调度器。 */
   SchedulerType?: string;
-  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜像。 */
+  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前支持部分公有镜像和自定义镜像。 */
   ImageId?: string;
   /** 私有网络相关信息配置。 */
   VirtualPrivateCloud?: VirtualPrivateCloud;
@@ -509,7 +509,7 @@ declare interface CreateClusterRequest {
 
 declare interface CreateClusterResponse {
   /** 集群ID。 */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

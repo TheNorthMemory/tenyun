@@ -296,15 +296,15 @@ declare interface CosRechargeInfo {
   TopicId: string | null;
   /** 日志集ID */
   LogsetId: string | null;
-  /** cos导入任务名称 */
+  /** COS导入任务名称 */
   Name: string | null;
-  /** cos存储桶 */
+  /** COS存储桶 */
   Bucket: string | null;
-  /** cos存储桶地域 */
+  /** COS存储桶所在地域 */
   BucketRegion: string | null;
-  /** cos存储桶前缀地址 */
+  /** COS文件所在文件夹的前缀 */
   Prefix: string | null;
-  /** 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志；默认为minimalist_log */
+  /** 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文；默认为minimalist_log */
   LogType: string | null;
   /** 状态 status 0: 已创建, 1: 运行中, 2: 已停止, 3: 已完成, 4: 运行失败。 */
   Status: number | null;

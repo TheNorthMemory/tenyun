@@ -42,6 +42,16 @@ declare interface Address {
   Desc: string | null;
 }
 
+/** 审计日志聚合条件 */
+declare interface AggregationCondition {
+  /** 聚合字段。目前仅支持host-源IP、user-用户名、dbName-数据库名、sqlType-sql类型。 */
+  AggregationField: string;
+  /** 偏移量。 */
+  Offset?: number | null;
+  /** 该聚合字段下要返回聚合桶的数量，最大100。 */
+  Limit?: number | null;
+}
+
 /** 审计规则过滤条件 */
 declare interface AuditFilter {
   /** 过滤条件参数名称。目前支持：SrcIp – 客户端 IP；User – 数据库账户；DB – 数据库名称； */
@@ -50,6 +60,14 @@ declare interface AuditFilter {
   Compare: string;
   /** 过滤条件匹配值。 */
   Value: string;
+}
+
+/** 审计日志分析结果 */
+declare interface AuditLogAggregationResult {
+  /** 聚合维度 */
+  AggregationField: string | null;
+  /** 聚合桶的结果集 */
+  Buckets: Bucket[] | null;
 }
 
 /** 审计日志文件 */
@@ -92,6 +110,18 @@ declare interface AuditLogFilter {
   SqlTypes?: string[];
   /** SQL 语句。支持传递多个sql语句。 */
   Sqls?: string[];
+  /** 影响行数，格式为M-N，例如：10-200 */
+  AffectRowsSection?: string;
+  /** 返回行数，格式为M-N，例如：10-200 */
+  SentRowsSection?: string;
+  /** 执行时间，格式为M-N，例如：10-200 */
+  ExecTimeSection?: string;
+  /** 锁等待时间，格式为M-N，例如：10-200 */
+  LockWaitTimeSection?: string;
+  /** IO等待时间，格式为M-N，例如：10-200 */
+  IoWaitTimeSection?: string;
+  /** 事务持续时间，格式为M-N，例如：10-200 */
+  TransactionLivingTimeSection?: string;
 }
 
 /** 审计策略 */
@@ -278,6 +308,14 @@ declare interface BinlogInfo {
   CosStorageType: number;
   /** 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
+}
+
+/** 聚合桶的信息 */
+declare interface Bucket {
+  /** 无 */
+  Key: string | null;
+  /** ip等于10.0.0.8访问了26次实例，即桶内文档数量。 */
+  Count: number;
 }
 
 /** 地域售卖配置 */
@@ -1444,6 +1482,28 @@ declare interface AddTimeWindowRequest {
 }
 
 declare interface AddTimeWindowResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AnalyzeAuditLogsRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 要分析的日志开始时间，格式为："2023-02-16 00:00:20"。 */
+  StartTime: string;
+  /** 要分析的日志结束时间，格式为："2023-02-16 00:10:20"。 */
+  EndTime: string;
+  /** 聚合维度的排序条件。 */
+  AggregationConditions: AggregationCondition[];
+  /** 该过滤条件下的审计日志结果集作为分析日志。 */
+  AuditLogFilter?: AuditLogFilter;
+}
+
+declare interface AnalyzeAuditLogsResponse {
+  /** 返回的聚合桶信息集 */
+  Items?: AuditLogAggregationResult[] | null;
+  /** 扫描的日志条数 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4153,6 +4213,8 @@ declare interface Cdb {
   (): Versions;
   /** 添加维护时间窗口 {@link AddTimeWindowRequest} {@link AddTimeWindowResponse} */
   AddTimeWindow(data: AddTimeWindowRequest, config?: AxiosRequestConfig): AxiosPromise<AddTimeWindowResponse>;
+  /** 分析审计日志 {@link AnalyzeAuditLogsRequest} {@link AnalyzeAuditLogsResponse} */
+  AnalyzeAuditLogs(data: AnalyzeAuditLogsRequest, config?: AxiosRequestConfig): AxiosPromise<AnalyzeAuditLogsResponse>;
   /** 安全组批量绑定云资源 {@link AssociateSecurityGroupsRequest} {@link AssociateSecurityGroupsResponse} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
   /** 均衡RO组内实例的负载 {@link BalanceRoGroupLoadRequest} {@link BalanceRoGroupLoadResponse} */
@@ -4319,7 +4381,7 @@ declare interface Cdb {
   DescribeUploadedFiles(data: DescribeUploadedFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUploadedFilesResponse>;
   /** 安全组批量解绑云资源 {@link DisassociateSecurityGroupsRequest} {@link DisassociateSecurityGroupsResponse} */
   DisassociateSecurityGroups(data: DisassociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupsResponse>;
-  /** 初始化新实例（该接口已经不再维护，不建议使用） {@link InitDBInstancesRequest} {@link InitDBInstancesResponse} */
+  /** @deprecated 初始化新实例（该接口已经不再维护，不建议使用） {@link InitDBInstancesRequest} {@link InitDBInstancesResponse} */
   InitDBInstances(data: InitDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InitDBInstancesResponse>;
   /** 查询数据库升级价格 {@link InquiryPriceUpgradeInstancesRequest} {@link InquiryPriceUpgradeInstancesResponse} */
   InquiryPriceUpgradeInstances(data: InquiryPriceUpgradeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceUpgradeInstancesResponse>;

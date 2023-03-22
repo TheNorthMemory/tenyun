@@ -386,6 +386,20 @@ declare interface StatusStatistic {
   Total: number | null;
 }
 
+/** TRTC调用参数 */
+declare interface TRTCParams {
+  /** 应用id，供TRTC SDK使用 */
+  SDKAppId?: number | null;
+  /** 用户id，供TRTC SDK使用 */
+  UserId?: string | null;
+  /** 用户id签名，供TRTC SDK使用 */
+  UserSig?: string | null;
+  /** 房间id，供TRTC SDK使用 */
+  StrRoomId?: string | null;
+  /** 权限票据，供TRTC SDK使用 */
+  PrivateMapKey?: string | null;
+}
+
 /** 批次元数据 */
 declare interface VideoBatch {
   /** 批次ID */
@@ -534,6 +548,20 @@ declare interface CallDeviceActionSyncResponse {
   OutputParams: string | null;
   /** 返回状态，当设备不在线等部分情况，会通过该 Status 返回。 */
   Status: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CallTRTCDeviceRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+}
+
+declare interface CallTRTCDeviceResponse {
+  /** TRTC SDK房间参数 */
+  TRTCParams?: TRTCParams;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5573,6 +5601,8 @@ declare interface Iotvideo {
   CallDeviceActionAsync(data: CallDeviceActionAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionAsyncResponse>;
   /** 同步调用设备行为 {@link CallDeviceActionSyncRequest} {@link CallDeviceActionSyncResponse} */
   CallDeviceActionSync(data: CallDeviceActionSyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionSyncResponse>;
+  /** 呼叫TRTC设备 {@link CallTRTCDeviceRequest} {@link CallTRTCDeviceResponse} */
+  CallTRTCDevice(data: CallTRTCDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<CallTRTCDeviceResponse>;
   /** 取消AI模型申请 {@link CancelAIModelApplicationRequest} {@link CancelAIModelApplicationResponse} */
   CancelAIModelApplication(data: CancelAIModelApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAIModelApplicationResponse>;
   /** 取消设备升级任务 {@link CancelDeviceFirmwareTaskRequest} {@link CancelDeviceFirmwareTaskResponse} */

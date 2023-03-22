@@ -457,17 +457,17 @@ declare interface AddUserRequest {
 
 declare interface AddUserResponse {
   /** 子用户 UIN */
-  Uin: number;
+  Uin?: number;
   /** 子用户用户名 */
-  Name: string;
+  Name?: string;
   /** 如果输入参数组合为自动生成随机密码，则返回生成的密码 */
-  Password: string;
+  Password?: string;
   /** 子用户密钥 ID */
-  SecretId: string;
+  SecretId?: string;
   /** 子用户密钥 Key */
-  SecretKey: string;
+  SecretKey?: string;
   /** 子用户 UID */
-  Uid: number;
+  Uid?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -553,7 +553,7 @@ declare interface CreateGroupRequest {
 
 declare interface CreateGroupResponse {
   /** 用户组 ID */
-  GroupId: number;
+  GroupId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -577,7 +577,7 @@ declare interface CreateOIDCConfigResponse {
 }
 
 declare interface CreatePolicyRequest {
-  /** 策略名 */
+  /** 策略名称。长度为1~128个字符，可包含英文字母、数字和+=,.@-_。 */
   PolicyName: string;
   /** 策略文档，示例：{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}，principal用于指定角色的授权对象。获取该参数可参阅 获取角色详情（https://cloud.tencent.com/document/product/598/36221） 输出参数RoleInfo */
   PolicyDocument: string;
@@ -609,7 +609,7 @@ declare interface CreatePolicyVersionResponse {
 }
 
 declare interface CreateRoleRequest {
-  /** 角色名称 */
+  /** 角色名称。长度为1~128个字符，可包含英文字母、数字和+=,.@-_。 */
   RoleName: string;
   /** 策略文档，示例：{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}，principal用于指定角色的授权对象。获取该参数可参阅 获取角色详情（https://cloud.tencent.com/document/product/598/36221） 输出参数RoleInfo */
   PolicyDocument: string;
@@ -625,7 +625,7 @@ declare interface CreateRoleRequest {
 
 declare interface CreateRoleResponse {
   /** 角色ID */
-  RoleId: string | null;
+  RoleId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

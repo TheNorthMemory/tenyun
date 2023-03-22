@@ -291,9 +291,9 @@ declare interface DescribeAuditTracksRequest {
 
 declare interface DescribeAuditTracksResponse {
   /** 跟踪集列表 */
-  Tracks: Tracks[];
+  Tracks?: Tracks[];
   /** 总数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

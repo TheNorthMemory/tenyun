@@ -5503,7 +5503,7 @@ declare interface CreateSubAppIdRequest {
 
 declare interface CreateSubAppIdResponse {
   /** 新创建的子应用 ID。 */
-  SubAppId?: number;
+  SubAppId: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6617,9 +6617,9 @@ declare interface DescribeSubAppIdsRequest {
 
 declare interface DescribeSubAppIdsResponse {
   /** 子应用信息集合。 */
-  SubAppIdInfoSet: SubAppIdInfo[];
+  SubAppIdInfoSet?: SubAppIdInfo[];
   /** 子应用总数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

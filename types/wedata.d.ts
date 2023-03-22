@@ -3134,8 +3134,10 @@ declare interface CreateOfflineTaskRequest {
 }
 
 declare interface CreateOfflineTaskResponse {
+  /** 任务ID */
+  TaskId?: string | null;
   /** 结果 */
-  Data: string;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
