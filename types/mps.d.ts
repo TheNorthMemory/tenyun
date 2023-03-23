@@ -1404,6 +1404,8 @@ declare interface CreateOutputInfo {
   RTPSettings?: CreateOutputInfoRTPSettings;
   /** IP白名单列表，格式为CIDR，如0.0.0.0/0。当Protocol为RTMP_PULL有效，为空代表不限制客户端IP。 */
   AllowIpList?: string[];
+  /** 最大拉流并发数，最大4，默认4。 */
+  MaxConcurrent?: number | null;
 }
 
 /** 创建媒体传输流的输出的RTP配置。 */
@@ -1616,6 +1618,8 @@ declare interface DescribeOutput {
   RTSPPullSettings: DescribeOutputRTSPPullSettings | null;
   /** 输出的HLS拉流配置信息。 */
   HLSPullSettings: DescribeOutputHLSPullSettings | null;
+  /** 最大拉流并发数，最大为4，默认4。 */
+  MaxConcurrent?: number;
 }
 
 /** 查询输出的HLS拉流URL信息。 */
@@ -2872,6 +2876,8 @@ declare interface ModifyOutputInfo {
   RTMPSettings?: CreateOutputRTMPSettings;
   /** IP白名单列表，格式为CIDR，如0.0.0.0/0。当Protocol为RTMP_PULL有效，为空代表不限制客户端IP。 */
   AllowIpList?: string[];
+  /** 最大拉流并发数，最大4，默认4。 */
+  MaxConcurrent?: number | null;
 }
 
 /** 媒体处理任务中的马赛克参数类型 */

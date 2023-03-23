@@ -1218,6 +1218,14 @@ declare interface DescribeTrtcMcuTranscodeTimeResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTrtcRoomUsageRequest {
+}
+
+declare interface DescribeTrtcRoomUsageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTrtcUsageRequest {
   /** 查询开始时间，格式为YYYY-MM-DD。 */
   StartTime: string;
@@ -1575,6 +1583,8 @@ declare interface Trtc {
   DescribeTRTCRealTimeScaleMetricData(data: DescribeTRTCRealTimeScaleMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeScaleMetricDataResponse>;
   /** 查询旁路转码计费时长(旧) {@link DescribeTrtcMcuTranscodeTimeRequest} {@link DescribeTrtcMcuTranscodeTimeResponse} */
   DescribeTrtcMcuTranscodeTime(data: DescribeTrtcMcuTranscodeTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrtcMcuTranscodeTimeResponse>;
+  /** 查询TRTC音视频房间维度用量 {@link DescribeTrtcRoomUsageRequest} {@link DescribeTrtcRoomUsageResponse} */
+  DescribeTrtcRoomUsage(data?: DescribeTrtcRoomUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrtcRoomUsageResponse>;
   /** 查询TRTC音视频用量 {@link DescribeTrtcUsageRequest} {@link DescribeTrtcUsageResponse} */
   DescribeTrtcUsage(data: DescribeTrtcUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrtcUsageResponse>;
   /** 查询异常体验事件 {@link DescribeUnusualEventRequest} {@link DescribeUnusualEventResponse} */

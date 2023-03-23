@@ -2787,17 +2787,17 @@ declare interface CreateVerifyRecordRequest {
 
 declare interface CreateVerifyRecordResponse {
   /** 子解析 */
-  SubDomain: string;
+  SubDomain?: string;
   /** 解析值 */
-  Record: string;
+  Record?: string;
   /** 解析类型 */
-  RecordType: string;
+  RecordType?: string;
   /** 文件验证 URL 指引 */
-  FileVerifyUrl: string | null;
+  FileVerifyUrl?: string | null;
   /** 文件校验域名列表 */
-  FileVerifyDomains: string[] | null;
+  FileVerifyDomains?: string[] | null;
   /** 文件校验文件名 */
-  FileVerifyName: string | null;
+  FileVerifyName?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

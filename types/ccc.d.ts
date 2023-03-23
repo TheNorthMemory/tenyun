@@ -486,6 +486,10 @@ declare interface StaffStatusMetrics {
   UseMobileAccept: number;
   /** 手机外呼开关 */
   UseMobileCallOut: boolean;
+  /** 最近一次上线时间戳 */
+  LastOnlineTimestamp?: number | null;
+  /** 最近一次状态时间戳 */
+  LastStatusTimestamp?: number | null;
 }
 
 /** 电话话单信息 */

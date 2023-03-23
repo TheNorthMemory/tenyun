@@ -12,7 +12,7 @@ declare interface AutoSnapshotPolicyInfo {
   CreationTime: string;
   /** 关联的文件系统个数 */
   FileSystemNums: number;
-  /** 快照定期备份在一星期哪一天 */
+  /** 快照定期备份在一星期哪一天，该参数与DayOfMonth,IntervalDays互斥 */
   DayOfWeek: string;
   /** 快照定期备份在一天的哪一小时 */
   Hour: string;
@@ -30,6 +30,10 @@ declare interface AutoSnapshotPolicyInfo {
   RegionName: string;
   /** 文件系统信息 */
   FileSystems: FileSystemByPolicy[];
+  /** 快照定期备份在一个月的某个时间；该参数与DayOfWeek,IntervalDays互斥 */
+  DayOfMonth?: string | null;
+  /** 快照定期间隔天数，1-365 天；该参数与DayOfMonth,DayOfWeek互斥 */
+  IntervalDays?: number | null;
 }
 
 /** 版本控制-协议详情 */
@@ -325,25 +329,29 @@ declare interface BindAutoSnapshotPolicyRequest {
 
 declare interface BindAutoSnapshotPolicyResponse {
   /** 快照策略ID */
-  AutoSnapshotPolicyId: string;
+  AutoSnapshotPolicyId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface CreateAutoSnapshotPolicyRequest {
-  /** 快照重复日期，星期一到星期日 */
-  DayOfWeek: string;
   /** 快照重复时间点 */
   Hour: string;
   /** 策略名称 */
   PolicyName?: string;
+  /** 快照重复日期，星期一到星期日 */
+  DayOfWeek?: string;
   /** 快照保留时长 */
   AliveDays?: number;
+  /** 快照按月重复，每月1-31号，选择一天，每月这一天打快照。 */
+  DayOfMonth?: string;
+  /** 间隔天数 */
+  IntervalDays?: number;
 }
 
 declare interface CreateAutoSnapshotPolicyResponse {
   /** 快照策略ID */
-  AutoSnapshotPolicyId: string;
+  AutoSnapshotPolicyId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -801,11 +809,15 @@ declare interface UpdateAutoSnapshotPolicyRequest {
   AliveDays?: number;
   /** 是否激活定期快照功能 */
   IsActivated?: number;
+  /** 定期快照在月的某几天天，该参数与DayOfWeek互斥 */
+  DayOfMonth?: string;
+  /** 间隔天数定期执行快照，该参数与DayOfWeek,DayOfMonth 互斥 */
+  IntervalDays?: number;
 }
 
 declare interface UpdateAutoSnapshotPolicyResponse {
   /** 快照策略ID */
-  AutoSnapshotPolicyId: string;
+  AutoSnapshotPolicyId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

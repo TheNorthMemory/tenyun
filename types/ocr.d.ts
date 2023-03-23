@@ -3209,7 +3209,7 @@ declare interface Ocr {
   PropOwnerCertOCR(data?: PropOwnerCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PropOwnerCertOCRResponse>;
   /** 二维码和条形码识别 {@link QrcodeOCRRequest} {@link QrcodeOCRResponse} */
   QrcodeOCR(data?: QrcodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QrcodeOCRResponse>;
-  /** 条码信息查询 {@link QueryBarCodeRequest} {@link QueryBarCodeResponse} */
+  /** @deprecated 条码信息查询 {@link QueryBarCodeRequest} {@link QueryBarCodeResponse} */
   QueryBarCode(data: QueryBarCodeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBarCodeResponse>;
   /** 定额发票识别 {@link QuotaInvoiceOCRRequest} {@link QuotaInvoiceOCRResponse} */
   QuotaInvoiceOCR(data?: QuotaInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QuotaInvoiceOCRResponse>;
@@ -3269,11 +3269,11 @@ declare interface Ocr {
   VehicleLicenseOCR(data?: VehicleLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VehicleLicenseOCRResponse>;
   /** 机动车登记证书识别 {@link VehicleRegCertOCRRequest} {@link VehicleRegCertOCRResponse} */
   VehicleRegCertOCR(data?: VehicleRegCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VehicleRegCertOCRResponse>;
-  /** 营业执照识别及核验（基础版） {@link VerifyBasicBizLicenseRequest} {@link VerifyBasicBizLicenseResponse} */
+  /** @deprecated 营业执照识别及核验（基础版） {@link VerifyBasicBizLicenseRequest} {@link VerifyBasicBizLicenseResponse} */
   VerifyBasicBizLicense(data?: VerifyBasicBizLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyBasicBizLicenseResponse>;
-  /** 营业执照识别及核验（详细版） {@link VerifyBizLicenseRequest} {@link VerifyBizLicenseResponse} */
+  /** @deprecated 营业执照识别及核验（详细版） {@link VerifyBizLicenseRequest} {@link VerifyBizLicenseResponse} */
   VerifyBizLicense(data?: VerifyBizLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyBizLicenseResponse>;
-  /** 企业四要素核验 {@link VerifyEnterpriseFourFactorsRequest} {@link VerifyEnterpriseFourFactorsResponse} */
+  /** @deprecated 企业四要素核验 {@link VerifyEnterpriseFourFactorsRequest} {@link VerifyEnterpriseFourFactorsResponse} */
   VerifyEnterpriseFourFactors(data: VerifyEnterpriseFourFactorsRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyEnterpriseFourFactorsResponse>;
   /** OFD发票识别 {@link VerifyOfdVatInvoiceOCRRequest} {@link VerifyOfdVatInvoiceOCRResponse} */
   VerifyOfdVatInvoiceOCR(data?: VerifyOfdVatInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyOfdVatInvoiceOCRResponse>;
