@@ -60,6 +60,14 @@ declare interface AclRuleInfo {
   Principal: string;
 }
 
+/** AclRule列表接口返回结果 */
+declare interface AclRuleResp {
+  /** 总数据条数 */
+  TotalCount: number;
+  /** AclRule列表 */
+  AclRuleList: AclRule[] | null;
+}
+
 /** 数据处理-解析参数 */
 declare interface AnalyseParam {
   /** 解析格式，JSON，DELIMITER分隔符，REGULAR正则提取，SOURCE处理上层所有结果 */
@@ -550,10 +558,14 @@ declare interface DescribeConnectResource {
   CreateTime: string | null;
   /** 连接源的异常信息 */
   ErrorMessage: string | null;
-  /** 连接源的当前所处步骤 */
-  CurrentStep: string | null;
   /** 该连接源关联的Datahub任务数 */
   DatahubTaskCount: number | null;
+  /** 连接源的当前所处步骤 */
+  CurrentStep: string | null;
+  /** 创建进度百分比 */
+  TaskProgress?: number | null;
+  /** 步骤列表 */
+  StepList?: string[] | null;
   /** Dts配置，Type为DTS时返回 */
   DtsConnectParam: DtsConnectParam | null;
   /** MongoDB配置，Type为MONGODB时返回 */
@@ -2346,6 +2358,32 @@ declare interface CreateAclResponse {
   RequestId?: string;
 }
 
+declare interface CreateAclRuleRequest {
+  /** 实例id信息 */
+  InstanceId: string;
+  /** Acl资源类型,目前只支持Topic,枚举值列表：Topic */
+  ResourceType: string;
+  /** 匹配类型，目前支持前缀匹配与预设策略，枚举值列表：PREFIXED/PRESET */
+  PatternType: string;
+  /** 规则名称 */
+  RuleName: string;
+  /** 设置的ACL规则列表 */
+  RuleList: AclRuleInfo[];
+  /** 表示前缀匹配的前缀的值 */
+  Pattern?: string;
+  /** 预设ACL规则是否应用到新增的topic中 */
+  IsApplied?: number;
+  /** ACL规则的备注 */
+  Comment?: string;
+}
+
+declare interface CreateAclRuleResponse {
+  /** 规则的唯一表示Key */
+  Result: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCdcClusterRequest {
   /** cdc的id */
   CdcId: string;
@@ -2870,6 +2908,24 @@ declare interface DescribeACLRequest {
 declare interface DescribeACLResponse {
   /** 返回的ACL结果集对象 */
   Result: AclResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAclRuleRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** ACL规则名 */
+  RuleName?: string;
+  /** ACL规则匹配类型 */
+  PatternType?: string;
+  /** 是否读取简略的ACL规则 */
+  IsSimplified?: boolean;
+}
+
+declare interface DescribeAclRuleResponse {
+  /** 返回的AclRule结果集对象 */
+  Result: AclRuleResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3543,6 +3599,22 @@ declare interface JgwOperateResponse {
   Data: OperateResponseData | null;
 }
 
+declare interface ModifyAclRuleRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** ACL策略名 */
+  RuleName: string;
+  /** 是否应用到新增的Topic */
+  IsApplied: number;
+}
+
+declare interface ModifyAclRuleResponse {
+  /** 规则的唯一表示Key */
+  Result: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyConnectResourceRequest {
   /** 连接源的Id */
   ResourceId: string;
@@ -3835,6 +3907,8 @@ declare interface Ckafka {
   CheckCdcCluster(data: CheckCdcClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCdcClusterResponse>;
   /** 添加 ACL 策略 {@link CreateAclRequest} {@link CreateAclResponse} */
   CreateAcl(data: CreateAclRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAclResponse>;
+  /** 添加 ACL 规则 {@link CreateAclRuleRequest} {@link CreateAclRuleResponse} */
+  CreateAclRule(data: CreateAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAclRuleResponse>;
   /** 创建cdc-ckafka集群 {@link CreateCdcClusterRequest} {@link CreateCdcClusterResponse} */
   CreateCdcCluster(data: CreateCdcClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCdcClusterResponse>;
   /** 创建Datahub连接源 {@link CreateConnectResourceRequest} {@link CreateConnectResourceResponse} */
@@ -3887,6 +3961,8 @@ declare interface Ckafka {
   DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
   /** 枚举ACL {@link DescribeACLRequest} {@link DescribeACLResponse} */
   DescribeACL(data: DescribeACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeACLResponse>;
+  /** 查询ACL规则列表 {@link DescribeAclRuleRequest} {@link DescribeAclRuleResponse} */
+  DescribeAclRule(data: DescribeAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAclRuleResponse>;
   /** 查询用户列表 {@link DescribeAppInfoRequest} {@link DescribeAppInfoResponse} */
   DescribeAppInfo(data?: DescribeAppInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppInfoResponse>;
   /** 查看可用区列表 {@link DescribeCkafkaZoneRequest} {@link DescribeCkafkaZoneResponse} */
@@ -3947,6 +4023,8 @@ declare interface Ckafka {
   FetchMessageListByOffset(data: FetchMessageListByOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<FetchMessageListByOffsetResponse>;
   /** Ckafka询价 {@link InquireCkafkaPriceRequest} {@link InquireCkafkaPriceResponse} */
   InquireCkafkaPrice(data: InquireCkafkaPriceRequest, config?: AxiosRequestConfig): AxiosPromise<InquireCkafkaPriceResponse>;
+  /** 修改Acl策略 {@link ModifyAclRuleRequest} {@link ModifyAclRuleResponse} */
+  ModifyAclRule(data: ModifyAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAclRuleResponse>;
   /** 编辑Datahub连接源 {@link ModifyConnectResourceRequest} {@link ModifyConnectResourceResponse} */
   ModifyConnectResource(data: ModifyConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConnectResourceResponse>;
   /** 修改Datahub任务 {@link ModifyDatahubTaskRequest} {@link ModifyDatahubTaskResponse} */

@@ -1410,8 +1410,8 @@ declare interface DescribeInstanceDealDetailRequest {
 }
 
 declare interface DescribeInstanceDealDetailResponse {
-  /** 订单详细信息 */
-  DealDetails: TradeDealDetail[];
+  /** 订单详细信息。 */
+  DealDetails?: TradeDealDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1847,21 +1847,21 @@ declare interface DescribeReplicationGroupResponse {
 }
 
 declare interface DescribeSSLStatusRequest {
-  /** 实例ID */
+  /** 实例 ID。 */
   InstanceId: string;
 }
 
 declare interface DescribeSSLStatusResponse {
-  /** 证书下载地址 */
-  CertDownloadUrl: string;
-  /** 证书下载链接到期时间 */
-  UrlExpiredTime: string;
-  /** 实例SSL配置状态， true：开启 false：关闭 */
-  SSLConfig: boolean;
-  /** 实例SSL特性支持， true：支持 false：不支持（小版本升级后才能支持SSL特性） */
-  FeatureSupport: boolean;
-  /** SSL配置状态，1: 配置中 2：配置成功 */
-  Status: number;
+  /** SSL 证书下载地址。 */
+  CertDownloadUrl?: string;
+  /** 证书下载链接到期时间。 */
+  UrlExpiredTime?: string;
+  /** 标识实例开启 SSL 功能。- true：开启 。- false：关闭。 */
+  SSLConfig?: boolean;
+  /** 标识实例是否支持 SSL特性。- true：支持。- false：不支持。 */
+  FeatureSupport?: boolean;
+  /** 说明配置 SSL 的状态。- 1: 配置中。- 2：配置成功。 */
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2135,17 +2135,17 @@ declare interface ManualBackupInstanceResponse {
 }
 
 declare interface ModfiyInstancePasswordRequest {
-  /** 实例ID */
+  /** 实例 ID。 */
   InstanceId: string;
-  /** 实例旧密码 */
+  /** 实例旧密码。 */
   OldPassword: string;
-  /** 实例新密码 */
+  /** 实例新密码。密码复杂度要求如下：- 长度8 - 30位, 推荐使用12位以上的密码。- 不能以"/"开头。- 至少包含小写字母a - z、大写字母A - Z、数字0 - 9、特殊字符 ()~!@#$%^&*-+=_|{}[]:;<>,.?/中的两项。 */
   Password: string;
 }
 
 declare interface ModfiyInstancePasswordResponse {
-  /** 任务ID */
-  TaskId: number;
+  /** 任务 ID。 */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

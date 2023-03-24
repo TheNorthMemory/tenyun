@@ -166,6 +166,30 @@ declare interface Filter {
   Name: string;
 }
 
+/** 日志查询相关接口filter参数定义 */
+declare interface LogFilter {
+  /** 过滤字段名称 */
+  Key?: string | null;
+  /** 运算符，全等 eq，不等 neq，相似 like，排除相似 not like, 小于 lt，小于且等于 lte，大于 gt，大于且等于 gte，在范围内 range，不在范围内 norange */
+  Operator?: string | null;
+  /** 过滤值,范围运算需要同时输入两个值，以英文逗号分隔 */
+  Value?: string | null;
+  /** 该层级filters逻辑关系，取值 "AND" 或 "OR" */
+  Type?: string | null;
+  /** LogFilters数组 */
+  Filters?: LogFilters[] | null;
+}
+
+/** 日志存储过滤条件 */
+declare interface LogFilters {
+  /** 过滤字段名称 */
+  Key: string | null;
+  /** 运算符, 全等 eq，不等 neq，相似 like，排除相似 not like, 小于 lt，小于且等于 lte，大于 gt，大于且等于 gte，在范围内 range，不在范围内 norange */
+  Operator: string | null;
+  /** 过滤值，范围运算需要同时输入两个值，以英文逗号分隔 */
+  Value: string | null;
+}
+
 /** Transform输出参数 */
 declare interface OutputStructParam {
   /** 对应输出json中的key */
@@ -216,6 +240,26 @@ declare interface SCFParams {
   BatchEventCount?: number;
   /** 开启批量投递使能 */
   EnableBatchDelivery?: boolean;
+}
+
+/** 日志检索详情 */
+declare interface SearchLogResult {
+  /** 单条日志上报时间 */
+  Timestamp?: string | null;
+  /** 日志内容详情 */
+  Message?: string | null;
+  /** 事件来源 */
+  Source?: string | null;
+  /** 事件类型 */
+  Type?: string | null;
+  /** 事件匹配规则 */
+  RuleIds?: string | null;
+  /** 实例ID */
+  Subject?: string | null;
+  /** 地域 */
+  Region?: string | null;
+  /** 事件状态 */
+  Status?: string | null;
 }
 
 /** Target信息 */
@@ -460,6 +504,30 @@ declare interface DeleteTransformationResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLogTagValueRequest {
+  /** 起始时间 */
+  StartTime: number;
+  /** 结束时间 */
+  EndTime: number;
+  /** 事件集ID */
+  EventBusId: string;
+  /** 聚合字段 */
+  GroupField: string;
+  /** 页数 */
+  Page: number;
+  /** 每页数据大小 */
+  Limit: number;
+  /** 筛选条件 */
+  Filter?: LogFilter[];
+}
+
+declare interface DescribeLogTagValueResponse {
+  /** 索引检索维度值 */
+  Results?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetEventBusRequest {
   /** 事件集ID */
   EventBusId: string;
@@ -656,6 +724,38 @@ declare interface PutEventsResponse {
   RequestId?: string;
 }
 
+declare interface SearchLogRequest {
+  /** 起始时间unix 毫秒时间戳 */
+  StartTime: number;
+  /** 结束时间unix 毫秒时间戳 */
+  EndTime: number;
+  /** 事件集ID */
+  EventBusId: string;
+  /** 页码 */
+  Page: number;
+  /** 每页数据大小 */
+  Limit: number;
+  /** 筛选条件 */
+  Filter?: LogFilter[];
+  /** 排序数组 */
+  OrderFields?: string[];
+  /** 排序方式，asc 从旧到新，desc 从新到旧 */
+  OrderBy?: string;
+}
+
+declare interface SearchLogResponse {
+  /** 日志总数 */
+  Total?: number | null;
+  /** 每页日志条数 */
+  Limit?: number | null;
+  /** 页码 */
+  Page?: number | null;
+  /** 日志检索结果 */
+  Results?: SearchLogResult[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateConnectionRequest {
   /** 连接器ID */
   ConnectionId: string;
@@ -777,6 +877,8 @@ declare interface Eb {
   DeleteTarget(data: DeleteTargetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTargetResponse>;
   /** 删除转换器 {@link DeleteTransformationRequest} {@link DeleteTransformationResponse} */
   DeleteTransformation(data: DeleteTransformationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTransformationResponse>;
+  /** 查询日志索引维度值 {@link DescribeLogTagValueRequest} {@link DescribeLogTagValueResponse} */
+  DescribeLogTagValue(data: DescribeLogTagValueRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogTagValueResponse>;
   /** 获取事件集详情 {@link GetEventBusRequest} {@link GetEventBusResponse} */
   GetEventBus(data: GetEventBusRequest, config?: AxiosRequestConfig): AxiosPromise<GetEventBusResponse>;
   /** 获取事件规则详情 {@link GetRuleRequest} {@link GetRuleResponse} */
@@ -795,6 +897,8 @@ declare interface Eb {
   PublishEvent(data: PublishEventRequest, config?: AxiosRequestConfig): AxiosPromise<PublishEventResponse>;
   /** 事件投递 {@link PutEventsRequest} {@link PutEventsResponse} */
   PutEvents(data: PutEventsRequest, config?: AxiosRequestConfig): AxiosPromise<PutEventsResponse>;
+  /** 日志检索 {@link SearchLogRequest} {@link SearchLogResponse} */
+  SearchLog(data: SearchLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchLogResponse>;
   /** 更新事件连接器 {@link UpdateConnectionRequest} {@link UpdateConnectionResponse} */
   UpdateConnection(data: UpdateConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateConnectionResponse>;
   /** 更新事件集 {@link UpdateEventBusRequest} {@link UpdateEventBusResponse} */

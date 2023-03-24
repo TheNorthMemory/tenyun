@@ -210,7 +210,7 @@ declare interface McuLayout {
   ZOrder?: number;
   /** 子画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底。不填默认为0。 */
   RenderMode?: number;
-  /** 子画面的背景颜色，常用的颜色有：红色：0xcc0033。黄色：0xcc9900。绿色：0xcccc33。蓝色：0x99CCFF。黑色：0x000000。白色：0xFFFFFF。灰色：0x999999。 */
+  /** 【此参数配置无效，暂不支持】子画面的背景颜色，常用的颜色有：红色：0xcc0033。黄色：0xcc9900。绿色：0xcccc33。蓝色：0x99CCFF。黑色：0x000000。白色：0xFFFFFF。灰色：0x999999。 */
   BackGroundColor?: string;
   /** 子画面的背景图url，填写该参数，当用户关闭摄像头或未进入TRTC房间时，会在布局位置填充为指定图片。若指定图片与布局位置尺寸比例不一致，则会对图片进行拉伸处理，优先级高于BackGroundColor。 */
   BackgroundImageUrl?: string;

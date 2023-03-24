@@ -264,6 +264,8 @@ declare interface ImageConfig {
   Args?: string | null;
   /** 镜像加速开关，默认False */
   ContainerImageAccelerate?: boolean | null;
+  /** 镜像函数端口设置-1: 无端口镜像函数0: 默认端口，当前默认端口是9000其他: 特殊端口 */
+  ImagePort?: number | null;
 }
 
 /** 多并发执行配置描述 */

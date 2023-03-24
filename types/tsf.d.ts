@@ -2246,6 +2246,12 @@ declare interface ResourceFieldRef {
   Resource?: string | null;
 }
 
+/** 资源任务转态结果 */
+declare interface ResourceTaskStatusResult {
+  /** 任务的执行状态 */
+  TaskStatus: number | null;
+}
+
 /** ScalableRule值 */
 declare interface ScalableRule {
   /** RuleId值 */
@@ -3301,6 +3307,22 @@ declare interface CreateApiRateLimitRuleResponse {
   RequestId?: string;
 }
 
+declare interface CreateApiRateLimitRuleWithDetailRespRequest {
+  /** Api Id */
+  ApiId: string;
+  /** qps值 */
+  MaxQps: number;
+  /** 开启/禁用，enabled/disabled, 不传默认开启 */
+  UsableStatus?: string;
+}
+
+declare interface CreateApiRateLimitRuleWithDetailRespResponse {
+  /** 创建的规则 ID */
+  Result?: ApiRateLimitRule | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateApplicationRequest {
   /** 应用名称 */
   ApplicationName: string;
@@ -3417,6 +3439,26 @@ declare interface CreateConfigTemplateRequest {
 declare interface CreateConfigTemplateResponse {
   /** true：创建成功；false：创建失败 */
   Result: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateConfigTemplateWithDetailRespRequest {
+  /** 配置模板名称 */
+  ConfigTemplateName: string;
+  /** 配置模板对应的微服务框架 */
+  ConfigTemplateType: string;
+  /** 配置模板数据 */
+  ConfigTemplateValue: string;
+  /** 配置模板描述 */
+  ConfigTemplateDesc?: string;
+  /** 无 */
+  ProgramIdList?: string[];
+}
+
+declare interface CreateConfigTemplateWithDetailRespResponse {
+  /** 创建成功，返回 ID */
+  Result?: ConfigTemplate | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3663,6 +3705,18 @@ declare interface CreatePathRewritesResponse {
   RequestId?: string;
 }
 
+declare interface CreatePathRewritesWithDetailRespRequest {
+  /** 路径重写列表 */
+  PathRewrites: PathRewriteCreateObject[];
+}
+
+declare interface CreatePathRewritesWithDetailRespResponse {
+  /** 返回路径重写规则 ID */
+  Result?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePublicConfigRequest {
   /** 配置项名称 */
   ConfigName: string;
@@ -3683,6 +3737,30 @@ declare interface CreatePublicConfigRequest {
 declare interface CreatePublicConfigResponse {
   /** true：创建成功；false：创建失败 */
   Result: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePublicConfigWithDetailRespRequest {
+  /** 配置项名称 */
+  ConfigName: string;
+  /** 配置项版本 */
+  ConfigVersion: string;
+  /** 配置项值，总是接收yaml格式的内容 */
+  ConfigValue: string;
+  /** 配置项版本描述 */
+  ConfigVersionDesc?: string;
+  /** 配置项类型 */
+  ConfigType?: string;
+  /** Base64编码的配置项 */
+  EncodeWithBase64?: boolean;
+  /** 无 */
+  ProgramIdList?: string[];
+}
+
+declare interface CreatePublicConfigWithDetailRespResponse {
+  /** 公共配置项 ID */
+  Result?: Config | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3789,6 +3867,24 @@ declare interface CreateUnitRuleResponse {
   RequestId?: string;
 }
 
+declare interface CreateUnitRuleWithDetailRespRequest {
+  /** 网关实体ID */
+  GatewayInstanceId: string;
+  /** 规则名称 */
+  Name: string;
+  /** 规则描述 */
+  Description?: string;
+  /** 规则项列表 */
+  UnitRuleItemList?: UnitRuleItem[];
+}
+
+declare interface CreateUnitRuleWithDetailRespResponse {
+  /** 单元化规则 ID */
+  Result?: UnitRule | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteApiGroupRequest {
   /** API 分组ID */
   GroupId: string;
@@ -3796,6 +3892,18 @@ declare interface DeleteApiGroupRequest {
 
 declare interface DeleteApiGroupResponse {
   /** 成功失败 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteApiRateLimitRuleRequest {
+  /** 限流规则ID */
+  RuleId: string;
+}
+
+declare interface DeleteApiRateLimitRuleResponse {
+  /** 是否成功 */
   Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -5599,6 +5707,18 @@ declare interface DescribeRepositoryResponse {
   RequestId?: string;
 }
 
+declare interface DescribeResourceTaskStatusRequest {
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface DescribeResourceTaskStatusResponse {
+  /** 资源任务执行状态结果 */
+  Result?: ResourceTaskStatusResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSimpleApplicationsRequest {
   /** 应用ID列表 */
   ApplicationIdList?: string[];
@@ -6457,6 +6577,22 @@ declare interface ReleaseConfigResponse {
   RequestId?: string;
 }
 
+declare interface ReleaseConfigWithDetailRespRequest {
+  /** 配置ID */
+  ConfigId: string;
+  /** 部署组ID */
+  GroupId: string;
+  /** 发布描述 */
+  ReleaseDesc?: string;
+}
+
+declare interface ReleaseConfigWithDetailRespResponse {
+  /** 配置项发布 ID */
+  Result?: ConfigRelease | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReleaseFileConfigRequest {
   /** 配置ID */
   ConfigId: string;
@@ -6949,6 +7085,8 @@ declare interface Tsf {
   CreateApiGroup(data: CreateApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiGroupResponse>;
   /** 创建API限流规则 {@link CreateApiRateLimitRuleRequest} {@link CreateApiRateLimitRuleResponse} */
   CreateApiRateLimitRule(data: CreateApiRateLimitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiRateLimitRuleResponse>;
+  /** 创建API限流规则返回详细信息 {@link CreateApiRateLimitRuleWithDetailRespRequest} {@link CreateApiRateLimitRuleWithDetailRespResponse} */
+  CreateApiRateLimitRuleWithDetailResp(data: CreateApiRateLimitRuleWithDetailRespRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiRateLimitRuleWithDetailRespResponse>;
   /** 创建应用 {@link CreateApplicationRequest} {@link CreateApplicationResponse} */
   CreateApplication(data: CreateApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationResponse>;
   /** 创建集群 {@link CreateClusterRequest} {@link CreateClusterResponse} */
@@ -6957,6 +7095,8 @@ declare interface Tsf {
   CreateConfig(data: CreateConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigResponse>;
   /** 创建参数模板 {@link CreateConfigTemplateRequest} {@link CreateConfigTemplateResponse} */
   CreateConfigTemplate(data: CreateConfigTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigTemplateResponse>;
+  /** 创建参数模板返回详细信息 {@link CreateConfigTemplateWithDetailRespRequest} {@link CreateConfigTemplateWithDetailRespResponse} */
+  CreateConfigTemplateWithDetailResp(data: CreateConfigTemplateWithDetailRespRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigTemplateWithDetailRespResponse>;
   /** 创建容器部署组 {@link CreateContainGroupRequest} {@link CreateContainGroupResponse} */
   CreateContainGroup(data: CreateContainGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContainGroupResponse>;
   /** 创建文件配置项 {@link CreateFileConfigRequest} {@link CreateFileConfigResponse} */
@@ -6977,8 +7117,12 @@ declare interface Tsf {
   CreateNamespace(data: CreateNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNamespaceResponse>;
   /** 创建路径重写 {@link CreatePathRewritesRequest} {@link CreatePathRewritesResponse} */
   CreatePathRewrites(data: CreatePathRewritesRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePathRewritesResponse>;
+  /** 创建路径重写返回详细信息 {@link CreatePathRewritesWithDetailRespRequest} {@link CreatePathRewritesWithDetailRespResponse} */
+  CreatePathRewritesWithDetailResp(data: CreatePathRewritesWithDetailRespRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePathRewritesWithDetailRespResponse>;
   /** 创建公共配置项 {@link CreatePublicConfigRequest} {@link CreatePublicConfigResponse} */
   CreatePublicConfig(data: CreatePublicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePublicConfigResponse>;
+  /** 创建公共配置项返回详细信息 {@link CreatePublicConfigWithDetailRespRequest} {@link CreatePublicConfigWithDetailRespResponse} */
+  CreatePublicConfigWithDetailResp(data: CreatePublicConfigWithDetailRespRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePublicConfigWithDetailRespResponse>;
   /** 创建仓库 {@link CreateRepositoryRequest} {@link CreateRepositoryResponse} */
   CreateRepository(data: CreateRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRepositoryResponse>;
   /** 创建任务 {@link CreateTaskRequest} {@link CreateTaskResponse} */
@@ -6987,8 +7131,12 @@ declare interface Tsf {
   CreateTaskFlow(data: CreateTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFlowResponse>;
   /** 创建单元化规则 {@link CreateUnitRuleRequest} {@link CreateUnitRuleResponse} */
   CreateUnitRule(data: CreateUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUnitRuleResponse>;
+  /** 创建单元化规则返回详细信息 {@link CreateUnitRuleWithDetailRespRequest} {@link CreateUnitRuleWithDetailRespResponse} */
+  CreateUnitRuleWithDetailResp(data: CreateUnitRuleWithDetailRespRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUnitRuleWithDetailRespResponse>;
   /** 删除Api分组 {@link DeleteApiGroupRequest} {@link DeleteApiGroupResponse} */
   DeleteApiGroup(data: DeleteApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiGroupResponse>;
+  /** 删除API限流规则 {@link DeleteApiRateLimitRuleRequest} {@link DeleteApiRateLimitRuleResponse} */
+  DeleteApiRateLimitRule(data: DeleteApiRateLimitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiRateLimitRuleResponse>;
   /** 删除应用 {@link DeleteApplicationRequest} {@link DeleteApplicationResponse} */
   DeleteApplication(data: DeleteApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationResponse>;
   /** 删除集群 {@link DeleteClusterRequest} {@link DeleteClusterResponse} */
@@ -7185,6 +7333,8 @@ declare interface Tsf {
   DescribeRepositories(data?: DescribeRepositoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoriesResponse>;
   /** 查询仓库信息 {@link DescribeRepositoryRequest} {@link DescribeRepositoryResponse} */
   DescribeRepository(data: DescribeRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryResponse>;
+  /** 资源任务的执行状态描述 {@link DescribeResourceTaskStatusRequest} {@link DescribeResourceTaskStatusResponse} */
+  DescribeResourceTaskStatus(data: DescribeResourceTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTaskStatusResponse>;
   /** 查询简单应用列表 {@link DescribeSimpleApplicationsRequest} {@link DescribeSimpleApplicationsResponse} */
   DescribeSimpleApplications(data?: DescribeSimpleApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleApplicationsResponse>;
   /** 查询简单集群列表 {@link DescribeSimpleClustersRequest} {@link DescribeSimpleClustersResponse} */
@@ -7281,6 +7431,8 @@ declare interface Tsf {
   ReleaseApiGroup(data: ReleaseApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseApiGroupResponse>;
   /** 发布配置 {@link ReleaseConfigRequest} {@link ReleaseConfigResponse} */
   ReleaseConfig(data: ReleaseConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseConfigResponse>;
+  /** 发布配置返回详细信息 {@link ReleaseConfigWithDetailRespRequest} {@link ReleaseConfigWithDetailRespResponse} */
+  ReleaseConfigWithDetailResp(data: ReleaseConfigWithDetailRespRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseConfigWithDetailRespResponse>;
   /** 发布文件配置 {@link ReleaseFileConfigRequest} {@link ReleaseFileConfigResponse} */
   ReleaseFileConfig(data: ReleaseFileConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseFileConfigResponse>;
   /** 发布公共配置 {@link ReleasePublicConfigRequest} {@link ReleasePublicConfigResponse} */

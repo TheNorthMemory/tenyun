@@ -1574,6 +1574,8 @@ declare interface PrometheusClusterAgentBasic {
   NotInstallBasicScrape?: boolean;
   /** 是否采集指标，true代表drop所有指标，false代表采集默认指标 */
   NotScrape?: boolean;
+  /** 是否开启默认预聚合规则 */
+  OpenDefaultRecord?: boolean | null;
 }
 
 /** 关联集群时在集群内部署组件的pod额外配置 */

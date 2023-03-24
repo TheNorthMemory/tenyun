@@ -335,9 +335,11 @@ declare interface SdkAppIdBuyInfo {
 /** 坐席用户信息 */
 declare interface SeatUserInfo {
   /** 坐席名称 */
-  Name?: string;
+  Name: string;
   /** 坐席邮箱 */
-  Mail?: string;
+  Mail: string;
+  /** 工号 */
+  StaffNumber: string | null;
   /** 坐席电话号码（带0086前缀） */
   Phone?: string;
   /** 坐席昵称 */
@@ -346,8 +348,6 @@ declare interface SeatUserInfo {
   UserId?: string;
   /** 坐席关联的技能组列表 */
   SkillGroupNameList?: string[] | null;
-  /** 工号 */
-  StaffNumber?: string | null;
 }
 
 /** 参与者信息 */

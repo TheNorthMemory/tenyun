@@ -282,6 +282,8 @@ declare interface Instance {
   AutoScalingGroupName: string;
   /** 预热状态，取值如下：WAITING_ENTER_WARMUP：等待进入预热NO_NEED_WARMUP：无需预热IN_WARMUP：预热中AFTER_WARMUP：完成预热 */
   WarmupStatus: string;
+  /** 置放群组id，仅支持指定一个。 */
+  DisasterRecoverGroupIds?: string[] | null;
 }
 
 /** 描述了实例的计费模式 */
@@ -667,6 +669,8 @@ declare interface ClearLaunchConfigurationAttributesRequest {
   ClearHostNameSettings?: boolean;
   /** 是否清空云服务器实例名相关设置信息，非必填，默认为 false。填 true 代表清空主机名设置信息，清空后基于此新创建的云主机将按照“as-{{ 伸缩组AutoScalingGroupName }}”进行设置。 */
   ClearInstanceNameSettings?: boolean;
+  /** 是否清空置放群组信息，非必填，默认为 false。填 true 代表清空置放群组信息，清空后基于此新创建的云主机将不指定任何置放群组。 */
+  ClearDisasterRecoverGroupIds?: boolean;
 }
 
 declare interface ClearLaunchConfigurationAttributesResponse {
@@ -819,11 +823,13 @@ declare interface CreateLaunchConfigurationRequest {
   HpcClusterId?: string;
   /** IPv6公网带宽相关信息设置。若新建实例包含IPv6地址，该参数可为新建实例的IPv6地址分配公网带宽。关联启动配置的伸缩组Ipv6AddressCount参数为0时，该参数不会生效。 */
   IPv6InternetAccessible?: IPv6InternetAccessible;
+  /** 置放群组id，仅支持指定一个。 */
+  DisasterRecoverGroupIds?: string[];
 }
 
 declare interface CreateLaunchConfigurationResponse {
   /** 当通过本接口来创建启动配置时会返回该参数，表示启动配置ID。 */
-  LaunchConfigurationId: string;
+  LaunchConfigurationId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1384,6 +1390,8 @@ declare interface ModifyLaunchConfigurationAttributesRequest {
   HpcClusterId?: string;
   /** IPv6公网带宽相关信息设置。若新建实例包含IPv6地址，该参数可为新建实例的IPv6地址分配公网带宽。关联启动配置的伸缩组Ipv6AddressCount参数为0时，该参数不会生效。 */
   IPv6InternetAccessible?: IPv6InternetAccessible;
+  /** 置放群组id，仅支持指定一个。 */
+  DisasterRecoverGroupIds?: string[];
 }
 
 declare interface ModifyLaunchConfigurationAttributesResponse {

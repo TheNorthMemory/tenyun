@@ -1404,9 +1404,9 @@ declare interface DetachInstancesResponse {
 
 declare interface InstanceMarketOptionsRequest {
   /** 竞价相关选项 */
-  SpotOptions: SpotMarketOptions;
+  SpotOptions: SpotMarketOptions | null;
   /** 市场选项类型，当前只支持取值：spot */
-  MarketType?: string;
+  MarketType?: string | null;
 }
 
 declare interface ModifyComputeEnvRequest {

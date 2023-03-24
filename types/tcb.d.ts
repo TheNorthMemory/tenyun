@@ -2161,7 +2161,7 @@ declare interface DescribeGatewayCurveDataRequest {
   EnvId: string;
   /** 网关id */
   GatewayId: string;
-  /** 监控类型 GWQps GWBandwidth GwHttpError GwHttp404 GwHttp502 */
+  /** 监控类型 GWQps GWBandwidth GwHttpError GwHttp404 GwHttp502 GwConnect GwCircuit */
   MetricName: string;
   /** 监控起始时间 */
   StartTime: string;
@@ -2175,17 +2175,17 @@ declare interface DescribeGatewayCurveDataRequest {
 
 declare interface DescribeGatewayCurveDataResponse {
   /** 监控类型 */
-  MetricName: string;
+  MetricName?: string;
   /** 监控起始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 监控结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 监控数据间隔 */
-  Period: number;
+  Period?: number;
   /** 监控值 */
-  Values: number[];
+  Values?: number[];
   /** 监控时间 */
-  Time: number[];
+  Time?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
