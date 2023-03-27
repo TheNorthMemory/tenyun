@@ -356,6 +356,14 @@ declare interface LogFileInfo {
   FileName: string;
 }
 
+/** 描述DB节点信息 */
+declare interface NodeInfo {
+  /** DB节点ID */
+  NodeId: string;
+  /** DB节点角色，取值为master或者slave */
+  Role: string;
+}
+
 /** 参数约束 */
 declare interface ParamConstraint {
   /** 约束类型,如枚举enum，区间section */
@@ -470,6 +478,40 @@ declare interface SecurityGroupBound {
   PortRange: string;
   /** 网络协议，支持 UDP、TCP 等 */
   IpProtocol: string;
+}
+
+/** DCDB分片信息 */
+declare interface ShardBriefInfo {
+  /** 分片SerialId */
+  ShardSerialId: string;
+  /** 分片ID，形如shard-7vg1o339 */
+  ShardInstanceId: string;
+  /** 分片运行状态 */
+  Status: number;
+  /** 分片运行状态描述 */
+  StatusDesc: string;
+  /** 分片创建时间 */
+  CreateTime: string;
+  /** 分片内存大小，单位GB */
+  Memory: number;
+  /** 分片磁盘大小，单位GB */
+  Storage: number;
+  /** 分片日志磁盘空间大小，单位GB */
+  LogDisk: number;
+  /** 分片节点个数 */
+  NodeCount: number;
+  /** 分片磁盘空间使用率 */
+  StorageUsage: number;
+  /** 分片Proxy版本信息 */
+  ProxyVersion: string;
+  /** 分片主DB可用区 */
+  ShardMasterZone: string;
+  /** 分片从DB可用区 */
+  ShardSlaveZones: string[];
+  /** 分片Cpu核数 */
+  Cpu: number;
+  /** DB节点信息 */
+  NodesInfo: NodeInfo[] | null;
 }
 
 /** 分片信息 */
@@ -1088,6 +1130,114 @@ declare interface DescribeDBSyncModeResponse {
   IsModifying: number;
   /** 当前复制方式，0 异步，1 同步 */
   CurrentSyncMode: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDCDBInstanceDetailRequest {
+  /** 实例ID，形如dcdbt-7oaxtcb7 */
+  InstanceId: string;
+}
+
+declare interface DescribeDCDBInstanceDetailResponse {
+  /** 实例ID，形如dcdbt-7oaxtcb7 */
+  InstanceId: string;
+  /** 实例名称 */
+  InstanceName: string;
+  /** 实例状态。0-实例创建中；1-异步任务处理中；2-运行中；3-实例未初始化；-1-实例已隔离 */
+  Status: number;
+  /** 实例目前运行状态描述 */
+  StatusDesc: string;
+  /** 实例内网IP地址 */
+  Vip: string;
+  /** 实例内网端口 */
+  Vport: number;
+  /** 实例节点数。值为2时表示一主一从，值为3时表示一主二从 */
+  NodeCount: number;
+  /** 实例所在地域名称，形如ap-guangzhou */
+  Region: string;
+  /** 实例私有网络ID，形如vpc-r9jr0de3 */
+  VpcId: string;
+  /** 实例私有网络子网ID，形如subnet-6rqs61o2 */
+  SubnetId: string;
+  /** 外网状态，0-未开通；1-已开通；2-关闭；3-开通中；4-关闭中 */
+  WanStatus: number;
+  /** 外网访问的域名，公网可解析 */
+  WanDomain: string;
+  /** 外网IP地址，公网可访问 */
+  WanVip: string;
+  /** 外网访问端口 */
+  WanPort: number;
+  /** 实例所属项目ID */
+  ProjectId: number;
+  /** 实例自动续费标志。0-正常续费；1-自动续费；2-到期不续费 */
+  AutoRenewFlag: number;
+  /** 独享集群ID */
+  ExclusterId: string;
+  /** 付费模式。prepaid-预付费；postpaid-按量计费 */
+  PayMode: string;
+  /** 实例创建时间，格式为 2006-01-02 15:04:05 */
+  CreateTime: string;
+  /** 实例到期时间，格式为 2006-01-02 15:04:05 */
+  PeriodEndTime: string;
+  /** 数据库版本信息 */
+  DbVersion: string;
+  /** 实例是否支持审计。0-不支持；1-支持 */
+  IsAuditSupported: number;
+  /** 实例是否支持数据加密。0-不支持；1-支持 */
+  IsEncryptSupported: number;
+  /** 实例母机机器型号 */
+  Machine: string;
+  /** 实例内存大小，单位 GB，各个分片的内存大小的和 */
+  Memory: number;
+  /** 实例磁盘存储大小，单位 GB，各个分片的磁盘大小的和 */
+  Storage: number;
+  /** 实例存储空间使用率，计算方式为：各个分片已经使用的磁盘大小的和/各个分片的磁盘大小的和。 */
+  StorageUsage: number;
+  /** 日志存储空间大小，单位GB */
+  LogStorage: number;
+  /** 产品类型ID */
+  Pid: number;
+  /** 主DB可用区 */
+  MasterZone: string;
+  /** 从DB可用区 */
+  SlaveZones: string[];
+  /** 分片信息 */
+  Shards: ShardBriefInfo[];
+  /** 内网IPv6 */
+  Vip6: string | null;
+  /** 实例Cpu核数 */
+  Cpu: number | null;
+  /** 实例QPS */
+  Qps: number | null;
+  /** DB引擎 */
+  DbEngine: string | null;
+  /** 是否支持IPv6 */
+  Ipv6Flag: number | null;
+  /** 外网IPv6地址，公网可访问 */
+  WanVipv6: string | null;
+  /** 外网状态，0-未开通；1-已开通；2-关闭；3-开通中；4-关闭中 */
+  WanStatusIpv6: number | null;
+  /** 外网IPv6端口 */
+  WanPortIpv6: number | null;
+  /** 标签信息 */
+  ResourceTags: ResourceTag[];
+  /** DCN标志，0-无，1-主实例，2-灾备实例 */
+  DcnFlag: number | null;
+  /** DCN状态，0-无，1-创建中，2-同步中，3-已断开 */
+  DcnStatus: number | null;
+  /** DCN灾备实例数 */
+  DcnDstNum: number | null;
+  /** 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型） */
+  InstanceType: number | null;
+  /** 实例是否支持设置用户连接数限制，内核为10.1暂不支持。 */
+  IsMaxUserConnectionsSupported: boolean | null;
+  /** 对外显示的数据库版本 */
+  DbVersionId: string | null;
+  /** 加密状态, 0-未开启，1-已开启 */
+  EncryptStatus: number | null;
+  /** 独享集群类型，0:公有云, 1:金融围笼, 2:CDC集群 */
+  ExclusterType: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1955,6 +2105,8 @@ declare interface Dcdb {
   DescribeDBSlowLogs(data: DescribeDBSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSlowLogsResponse>;
   /** 查询同步模式 {@link DescribeDBSyncModeRequest} {@link DescribeDBSyncModeResponse} */
   DescribeDBSyncMode(data: DescribeDBSyncModeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSyncModeResponse>;
+  /** 获取DCDB实例详情 {@link DescribeDCDBInstanceDetailRequest} {@link DescribeDCDBInstanceDetailResponse} */
+  DescribeDCDBInstanceDetail(data: DescribeDCDBInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDCDBInstanceDetailResponse>;
   /** 获取实例节点信息 {@link DescribeDCDBInstanceNodeInfoRequest} {@link DescribeDCDBInstanceNodeInfoResponse} */
   DescribeDCDBInstanceNodeInfo(data: DescribeDCDBInstanceNodeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDCDBInstanceNodeInfoResponse>;
   /** 查询实例列表 {@link DescribeDCDBInstancesRequest} {@link DescribeDCDBInstancesResponse} */

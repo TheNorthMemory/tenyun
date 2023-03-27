@@ -2231,7 +2231,7 @@ declare interface RecognizeOnlineTaxiItineraryOCRRequest {
 
 declare interface RecognizeOnlineTaxiItineraryOCRResponse {
   /** 网约车行程单识别结果，具体内容请点击左侧链接。 */
-  OnlineTaxiItineraryInfos: OnlineTaxiItineraryInfo[];
+  OnlineTaxiItineraryInfos?: OnlineTaxiItineraryInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2865,7 +2865,7 @@ declare interface VehicleRegCertOCRRequest {
 
 declare interface VehicleRegCertOCRResponse {
   /** 机动车登记证书识别结果，具体内容请点击左侧链接。 */
-  VehicleRegCertInfos: VehicleRegCertInfo[];
+  VehicleRegCertInfos?: VehicleRegCertInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

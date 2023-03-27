@@ -374,6 +374,8 @@ declare interface EmrListInstance {
   IsHandsCluster: boolean | null;
   /** 体外客户端组件信息 */
   OutSideSoftInfo: SoftDependInfo[] | null;
+  /** 当前集群的应用场景是否支持体外客户端 */
+  IsSupportOutsideCluster?: boolean | null;
 }
 
 /** Emr询价描述 */

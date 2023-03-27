@@ -80,6 +80,16 @@ declare interface CcInfo {
   CcPermission?: number | null;
 }
 
+/** 渠道角色信息 */
+declare interface ChannelRole {
+  /** 角色id */
+  RoleId?: string | null;
+  /** 角色名 */
+  RoleName?: string | null;
+  /** 角色状态：1-启用；2-禁用 */
+  RoleStatus?: number | null;
+}
+
 /** 签署人配置信息 */
 declare interface CommonApproverOption {
   /** 是否允许修改签署人信息 */
@@ -204,6 +214,14 @@ declare interface ExtentServiceAuthInfo {
   OperatorOpenId?: string | null;
   /** 最近操作时间 */
   OperateOn?: number | null;
+}
+
+/** 绑定失败的用户角色信息 */
+declare interface FailedCreateRoleData {
+  /** 用户userId */
+  UserId?: string | null;
+  /** 角色RoleId列表 */
+  RoleIds?: string[] | null;
 }
 
 /** 此结构体 (Filter) 用于描述查询过滤条件。 */
@@ -1090,6 +1108,42 @@ declare interface ChannelCreateSealPolicyResponse {
   RequestId?: string;
 }
 
+declare interface ChannelCreateUserRolesRequest {
+  /** 操作者信息 */
+  Operator: UserInfo;
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。 */
+  Agent: Agent;
+  /** 绑定角色的员工id列表 */
+  UserIds: string[];
+  /** 绑定角色的角色id列表 */
+  RoleIds: string[];
+}
+
+declare interface ChannelCreateUserRolesResponse {
+  /** 绑定失败的用户角色列表 */
+  FailedCreateRoleData?: FailedCreateRoleData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChannelDeleteRoleUsersRequest {
+  /** 操作人信息 */
+  Operator: UserInfo;
+  /** 角色Id */
+  RoleId: string;
+  /** 用户列表 */
+  UserIds: string[];
+  /** 代理信息 */
+  Agent: Agent;
+}
+
+declare interface ChannelDeleteRoleUsersResponse {
+  /** 角色id */
+  RoleId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ChannelDeleteSealPoliciesRequest {
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
@@ -1158,6 +1212,32 @@ declare interface ChannelDescribeOrganizationSealsResponse {
   RequestId?: string;
 }
 
+declare interface ChannelDescribeRolesRequest {
+  /** 操作人信息 */
+  Operator: UserInfo;
+  /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。 */
+  Agent: Agent;
+  /** 查询起始偏移，最大2000 */
+  Offset: number;
+  /** 查询数量，最大200 */
+  Limit: string;
+  /** 查询的关键字段:Key:"RoleType",Vales:["1"]查询系统角色，Values:["2]查询自定义角色Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色 */
+  Filters?: Filter[];
+}
+
+declare interface ChannelDescribeRolesResponse {
+  /** 页面偏移量，最大2000 */
+  Offset?: number;
+  /** 查询数量，最大200 */
+  Limit?: number;
+  /** 查询角色的总数量 */
+  TotalCount?: number;
+  /** 角色信息 */
+  ChannelRoles?: ChannelRole[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ChannelGetTaskResultApiRequest {
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent: Agent;
@@ -1203,7 +1283,7 @@ declare interface ChannelUpdateSealStatusResponse {
 }
 
 declare interface ChannelVerifyPdfRequest {
-  /** 合同Id，流程Id */
+  /** 流程ID */
   FlowId: string;
   /** 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。 */
   Agent?: Agent;
@@ -3207,12 +3287,18 @@ declare interface Essbasic {
   ChannelCreateReleaseFlow(data: ChannelCreateReleaseFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateReleaseFlowResponse>;
   /** 创建印章授权 {@link ChannelCreateSealPolicyRequest} {@link ChannelCreateSealPolicyResponse} */
   ChannelCreateSealPolicy(data: ChannelCreateSealPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateSealPolicyResponse>;
+  /** 渠道版绑定员工角色 {@link ChannelCreateUserRolesRequest} {@link ChannelCreateUserRolesResponse} */
+  ChannelCreateUserRoles(data: ChannelCreateUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateUserRolesResponse>;
+  /** 渠道版删除员工绑定角色 {@link ChannelDeleteRoleUsersRequest} {@link ChannelDeleteRoleUsersResponse} */
+  ChannelDeleteRoleUsers(data: ChannelDeleteRoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDeleteRoleUsersResponse>;
   /** 删除印章授权 {@link ChannelDeleteSealPoliciesRequest} {@link ChannelDeleteSealPoliciesResponse} */
   ChannelDeleteSealPolicies(data: ChannelDeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDeleteSealPoliciesResponse>;
   /** 查询企业员工 {@link ChannelDescribeEmployeesRequest} {@link ChannelDescribeEmployeesResponse} */
   ChannelDescribeEmployees(data: ChannelDescribeEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeEmployeesResponse>;
   /** 查询子客企业电子印章 {@link ChannelDescribeOrganizationSealsRequest} {@link ChannelDescribeOrganizationSealsResponse} */
   ChannelDescribeOrganizationSeals(data: ChannelDescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeOrganizationSealsResponse>;
+  /** 渠道办查询用户角色 {@link ChannelDescribeRolesRequest} {@link ChannelDescribeRolesResponse} */
+  ChannelDescribeRoles(data: ChannelDescribeRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeRolesResponse>;
   /** 查询转换任务状态 {@link ChannelGetTaskResultApiRequest} {@link ChannelGetTaskResultApiResponse} */
   ChannelGetTaskResultApi(data: ChannelGetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelGetTaskResultApiResponse>;
   /** 更新印章状态 {@link ChannelUpdateSealStatusRequest} {@link ChannelUpdateSealStatusResponse} */

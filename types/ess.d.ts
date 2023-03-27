@@ -128,7 +128,7 @@ declare interface CcInfo {
 
 /** 模板控件信息 */
 declare interface Component {
-  /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件，输入文本字符串；MULTI_LINE_TEXT - 多行文本控件，输入文本字符串；CHECK_BOX - 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串；FILL_IMAGE - 图片控件，ComponentValue 填写图片的资源 ID；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件,ComponentValue 填写福建图片的资源 ID列表，以逗号分割；SELECTOR - 选择器控件，ComponentValue填写选择的字符串内容；DATE - 日期控件；默认是格式化为xxxx年xx月xx日字符串；DISTRICT - 省市区行政区划控件，ComponentValue填写省市区行政区划字符串内容；如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeightSIGN_OPINION - 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认；SIGN_LEGAL_PERSON_SEAL - 企业法定代表人控件。表单域的控件不能作为印章和签名控件 */
+  /** 如果是Component控件类型，则可选的字段为：TEXT - 普通文本控件，输入文本字符串；MULTI_LINE_TEXT - 多行文本控件，输入文本字符串；CHECK_BOX - 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串；FILL_IMAGE - 图片控件，ComponentValue 填写图片的资源 ID；DYNAMIC_TABLE - 动态表格控件；ATTACHMENT - 附件控件,ComponentValue 填写附件图片的资源 ID列表，以逗号分割；SELECTOR - 选择器控件，ComponentValue填写选择的字符串内容；DATE - 日期控件；默认是格式化为xxxx年xx月xx日字符串；DISTRICT - 省市区行政区划控件，ComponentValue填写省市区行政区划字符串内容；如果是SignComponent控件类型，则可选的字段为SIGN_SEAL - 签署印章控件；SIGN_DATE - 签署日期控件；SIGN_SIGNATURE - 用户签名控件；SIGN_PERSONAL_SEAL - 个人签署印章控件（使用文件发起暂不支持此类型）；SIGN_PAGING_SEAL - 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeightSIGN_OPINION - 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认；SIGN_LEGAL_PERSON_SEAL - 企业法定代表人控件。表单域的控件不能作为印章和签名控件 */
   ComponentType: string;
   /** 控件所属文件的序号（模板中的resourceId排列序号，取值为：0-N） */
   FileIndex: number;
@@ -598,7 +598,7 @@ declare interface Staff {
   Mobile?: string;
   /** 用户邮箱 */
   Email?: string | null;
-  /** 用户在第三方平台id */
+  /** 用户在第三方平台id，如需在此接口提醒员工实名，该参数不传 */
   OpenId?: string | null;
   /** 员工角色 */
   Roles?: StaffRole[] | null;
@@ -612,6 +612,10 @@ declare interface Staff {
   VerifiedOn?: number | null;
   /** 员工是否离职：0-未离职，1-离职 */
   QuiteJob?: number | null;
+  /** 员工离职交接人用户id */
+  ReceiveUserId?: string;
+  /** 员工离职交接人用户OpenId */
+  ReceiveOpenId?: string;
 }
 
 /** 集成版企业角色信息 */
@@ -630,6 +634,8 @@ declare interface SuccessCreateStaffData {
   Mobile: string;
   /** 员工在电子签平台的id */
   UserId: string;
+  /** 提示，当创建已存在未实名用户时，改字段有值 */
+  Note?: string | null;
 }
 
 /** 删除员工的成功数据 */
@@ -993,11 +999,13 @@ declare interface CreateIntegrationEmployeesRequest {
   Operator: UserInfo;
   /** 待创建员工的信息，Mobile和DisplayName必填 */
   Employees: Staff[];
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
 }
 
 declare interface CreateIntegrationEmployeesResponse {
   /** 创建员工的结果 */
-  CreateEmployeeResult: CreateStaffResult;
+  CreateEmployeeResult?: CreateStaffResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1058,6 +1066,32 @@ declare interface CreatePrepareFlowRequest {
 declare interface CreatePrepareFlowResponse {
   /** 快速发起预览链接 */
   Url: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePreparedPersonalEsignRequest {
+  /** 个人用户名称 */
+  UserName: string;
+  /** 身份证件号码 */
+  IdCardNumber: string;
+  /** 印章图片的base64 */
+  SealImage: string;
+  /** 印章名称 */
+  SealName: string;
+  /** 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。 */
+  Operator?: UserInfo;
+  /** 身份证件类型:ID_CARD 身份证PASSPORT 护照HONGKONG_AND_MACAO 香港身份FOREIGN_ID_CARD 国外身份HONGKONG_MACAO_AND_TAIWAN 港台身份 */
+  IdCardType?: string;
+  /** 手机号码 */
+  Mobile?: string;
+  /** 是否需开通自动签 */
+  EnableAutoSign?: boolean;
+}
+
+declare interface CreatePreparedPersonalEsignResponse {
+  /** 导入生成的印章ID */
+  SealId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1165,11 +1199,13 @@ declare interface DeleteIntegrationEmployeesRequest {
   Operator: UserInfo;
   /** 待移除员工的信息，userId和openId二选一，必填一个 */
   Employees: Staff[];
+  /** 代理信息 */
+  Agent?: Agent;
 }
 
 declare interface DeleteIntegrationEmployeesResponse {
   /** 员工删除数据 */
-  DeleteEmployeeResult: DeleteStaffsResult;
+  DeleteEmployeeResult?: DeleteStaffsResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1521,7 +1557,7 @@ declare interface UploadFilesResponse {
 }
 
 declare interface VerifyPdfRequest {
-  /** 合同Id，流程Id */
+  /** 流程ID */
   FlowId: string;
   /** 调用方用户信息，userId 必填 */
   Operator?: UserInfo;
@@ -1529,11 +1565,11 @@ declare interface VerifyPdfRequest {
 
 declare interface VerifyPdfResponse {
   /** 验签结果，1-文件未被篡改，全部签名在腾讯电子签完成； 2-文件未被篡改，部分签名在腾讯电子签完成；3-文件被篡改；4-异常：文件内没有签名域；5-异常：文件签名格式错误 */
-  VerifyResult: number;
+  VerifyResult?: number;
   /** 验签结果详情,内部状态1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域；5-文件签名格式错误 */
-  PdfVerifyResults: PdfVerifyResult[];
+  PdfVerifyResults?: PdfVerifyResult[];
   /** 验签序列号 */
-  VerifySerialNo: string;
+  VerifySerialNo?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1571,6 +1607,8 @@ declare interface Ess {
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
   /** 创建快速发起流程 {@link CreatePrepareFlowRequest} {@link CreatePrepareFlowResponse} */
   CreatePrepareFlow(data: CreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrepareFlowResponse>;
+  /** 创建导入个人印章 {@link CreatePreparedPersonalEsignRequest} {@link CreatePreparedPersonalEsignResponse} */
+  CreatePreparedPersonalEsign(data: CreatePreparedPersonalEsignRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePreparedPersonalEsignResponse>;
   /** 发起解除协议 {@link CreateReleaseFlowRequest} {@link CreateReleaseFlowResponse} */
   CreateReleaseFlow(data: CreateReleaseFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseFlowResponse>;
   /** 获取小程序跳转链接 {@link CreateSchemeUrlRequest} {@link CreateSchemeUrlResponse} */

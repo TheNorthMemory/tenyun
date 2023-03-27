@@ -1207,19 +1207,19 @@ declare interface VerifyCredentialResponse {
 /** {@link Tdid 分布式身份} */
 declare interface Tdid {
   (): Versions;
-  /** DID添加标签 {@link AddLabelRequest} {@link AddLabelResponse} */
+  /** @deprecated DID添加标签 {@link AddLabelRequest} {@link AddLabelResponse} */
   AddLabel(data: AddLabelRequest, config?: AxiosRequestConfig): AxiosPromise<AddLabelResponse>;
-  /** 撤消权威机构认证 {@link CancelAuthorityIssuerRequest} {@link CancelAuthorityIssuerResponse} */
+  /** @deprecated 撤消权威机构认证 {@link CancelAuthorityIssuerRequest} {@link CancelAuthorityIssuerResponse} */
   CancelAuthorityIssuer(data: CancelAuthorityIssuerRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAuthorityIssuerResponse>;
   /** 检查区块链信息 {@link CheckChainRequest} {@link CheckChainResponse} */
   CheckChain(data: CheckChainRequest, config?: AxiosRequestConfig): AxiosPromise<CheckChainResponse>;
-  /** 检查部署情况 {@link CheckDidDeployRequest} {@link CheckDidDeployResponse} */
+  /** @deprecated 检查部署情况 {@link CheckDidDeployRequest} {@link CheckDidDeployResponse} */
   CheckDidDeploy(data: CheckDidDeployRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDidDeployResponse>;
   /** 创建凭证 {@link CreateCredentialRequest} {@link CreateCredentialResponse} */
   CreateCredential(data: CreateCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCredentialResponse>;
-  /** 创建DID服务 {@link CreateDidServiceRequest} {@link CreateDidServiceResponse} */
+  /** @deprecated 创建DID服务 {@link CreateDidServiceRequest} {@link CreateDidServiceResponse} */
   CreateDidService(data: CreateDidServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDidServiceResponse>;
-  /** 新建标签 {@link CreateLabelRequest} {@link CreateLabelResponse} */
+  /** @deprecated 新建标签 {@link CreateLabelRequest} {@link CreateLabelResponse} */
   CreateLabel(data: CreateLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLabelResponse>;
   /** 创建选择性批露凭证 {@link CreateSelectiveCredentialRequest} {@link CreateSelectiveCredentialResponse} */
   CreateSelectiveCredential(data: CreateSelectiveCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSelectiveCredentialResponse>;
@@ -1229,75 +1229,75 @@ declare interface Tdid {
   CreateTDidByPrivateKey(data: CreateTDidByPrivateKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTDidByPrivateKeyResponse>;
   /** 新建DID根据公钥生成Tdid {@link CreateTDidByPublicKeyRequest} {@link CreateTDidByPublicKeyResponse} */
   CreateTDidByPublicKey(data: CreateTDidByPublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTDidByPublicKeyResponse>;
-  /** 通过Name部署TDID合约 {@link DeployByNameRequest} {@link DeployByNameResponse} */
+  /** @deprecated 通过Name部署TDID合约 {@link DeployByNameRequest} {@link DeployByNameResponse} */
   DeployByName(data: DeployByNameRequest, config?: AxiosRequestConfig): AxiosPromise<DeployByNameResponse>;
-  /** 凭证模版下载 {@link DownCptRequest} {@link DownCptResponse} */
+  /** @deprecated 凭证模版下载 {@link DownCptRequest} {@link DownCptResponse} */
   DownCpt(data: DownCptRequest, config?: AxiosRequestConfig): AxiosPromise<DownCptResponse>;
-  /** 启用合约 {@link EnableHashRequest} {@link EnableHashResponse} */
+  /** @deprecated 启用合约 {@link EnableHashRequest} {@link EnableHashResponse} */
   EnableHash(data: EnableHashRequest, config?: AxiosRequestConfig): AxiosPromise<EnableHashResponse>;
   /** @deprecated 本机构DID详情 {@link GetAgencyTDidRequest} {@link GetAgencyTDidResponse} */
   GetAgencyTDid(data: GetAgencyTDidRequest, config?: AxiosRequestConfig): AxiosPromise<GetAgencyTDidResponse>;
-  /** 权威机构列表 {@link GetAuthoritiesListRequest} {@link GetAuthoritiesListResponse} */
+  /** @deprecated 权威机构列表 {@link GetAuthoritiesListRequest} {@link GetAuthoritiesListResponse} */
   GetAuthoritiesList(data: GetAuthoritiesListRequest, config?: AxiosRequestConfig): AxiosPromise<GetAuthoritiesListResponse>;
   /** 获取权威机构信息 {@link GetAuthorityIssuerRequest} {@link GetAuthorityIssuerResponse} */
   GetAuthorityIssuer(data: GetAuthorityIssuerRequest, config?: AxiosRequestConfig): AxiosPromise<GetAuthorityIssuerResponse>;
-  /** 获取联盟bcos网络列表 {@link GetConsortiumClusterListRequest} {@link GetConsortiumClusterListResponse} */
+  /** @deprecated 获取联盟bcos网络列表 {@link GetConsortiumClusterListRequest} {@link GetConsortiumClusterListResponse} */
   GetConsortiumClusterList(data: GetConsortiumClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<GetConsortiumClusterListResponse>;
-  /** 获取联盟列表 {@link GetConsortiumListRequest} {@link GetConsortiumListResponse} */
+  /** @deprecated 获取联盟列表 {@link GetConsortiumListRequest} {@link GetConsortiumListResponse} */
   GetConsortiumList(data?: GetConsortiumListRequest, config?: AxiosRequestConfig): AxiosPromise<GetConsortiumListResponse>;
   /** 凭证模版详情 {@link GetCptInfoRequest} {@link GetCptInfoResponse} */
   GetCptInfo(data: GetCptInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetCptInfoResponse>;
-  /** 凭证模版列表 {@link GetCptListRequest} {@link GetCptListResponse} */
+  /** @deprecated 凭证模版列表 {@link GetCptListRequest} {@link GetCptListResponse} */
   GetCptList(data: GetCptListRequest, config?: AxiosRequestConfig): AxiosPromise<GetCptListResponse>;
-  /** 凭证颁发模板排行 {@link GetCredentialCptRankRequest} {@link GetCredentialCptRankResponse} */
+  /** @deprecated 凭证颁发模板排行 {@link GetCredentialCptRankRequest} {@link GetCredentialCptRankResponse} */
   GetCredentialCptRank(data: GetCredentialCptRankRequest, config?: AxiosRequestConfig): AxiosPromise<GetCredentialCptRankResponse>;
-  /** 凭证颁发机构排行 {@link GetCredentialIssueRankRequest} {@link GetCredentialIssueRankResponse} */
+  /** @deprecated 凭证颁发机构排行 {@link GetCredentialIssueRankRequest} {@link GetCredentialIssueRankResponse} */
   GetCredentialIssueRank(data: GetCredentialIssueRankRequest, config?: AxiosRequestConfig): AxiosPromise<GetCredentialIssueRankResponse>;
-  /** 凭证颁发趋势 {@link GetCredentialIssueTrendRequest} {@link GetCredentialIssueTrendResponse} */
+  /** @deprecated 凭证颁发趋势 {@link GetCredentialIssueTrendRequest} {@link GetCredentialIssueTrendResponse} */
   GetCredentialIssueTrend(data: GetCredentialIssueTrendRequest, config?: AxiosRequestConfig): AxiosPromise<GetCredentialIssueTrendResponse>;
   /** 获取凭证链上状态 {@link GetCredentialStatusRequest} {@link GetCredentialStatusResponse} */
   GetCredentialStatus(data: GetCredentialStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetCredentialStatusResponse>;
-  /** 概览 {@link GetDataPanelRequest} {@link GetDataPanelResponse} */
+  /** @deprecated 概览 {@link GetDataPanelRequest} {@link GetDataPanelResponse} */
   GetDataPanel(data?: GetDataPanelRequest, config?: AxiosRequestConfig): AxiosPromise<GetDataPanelResponse>;
-  /** 合约部署详情 {@link GetDeployInfoRequest} {@link GetDeployInfoResponse} */
+  /** @deprecated 合约部署详情 {@link GetDeployInfoRequest} {@link GetDeployInfoResponse} */
   GetDeployInfo(data: GetDeployInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeployInfoResponse>;
-  /** 合约部署列表 {@link GetDeployListRequest} {@link GetDeployListResponse} */
+  /** @deprecated 合约部署列表 {@link GetDeployListRequest} {@link GetDeployListResponse} */
   GetDeployList(data: GetDeployListRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeployListResponse>;
-  /** 获取DID网络详情 {@link GetDidClusterDetailRequest} {@link GetDidClusterDetailResponse} */
+  /** @deprecated 获取DID网络详情 {@link GetDidClusterDetailRequest} {@link GetDidClusterDetailResponse} */
   GetDidClusterDetail(data: GetDidClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<GetDidClusterDetailResponse>;
-  /** 获取DID网络列表 {@link GetDidClusterListRequest} {@link GetDidClusterListResponse} */
+  /** @deprecated 获取DID网络列表 {@link GetDidClusterListRequest} {@link GetDidClusterListResponse} */
   GetDidClusterList(data?: GetDidClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<GetDidClusterListResponse>;
-  /** DID详情 {@link GetDidDetailRequest} {@link GetDidDetailResponse} */
+  /** @deprecated DID详情 {@link GetDidDetailRequest} {@link GetDidDetailResponse} */
   GetDidDetail(data: GetDidDetailRequest, config?: AxiosRequestConfig): AxiosPromise<GetDidDetailResponse>;
   /** 查看DID文档 {@link GetDidDocumentRequest} {@link GetDidDocumentResponse} */
   GetDidDocument(data: GetDidDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<GetDidDocumentResponse>;
-  /** DID列表 {@link GetDidListRequest} {@link GetDidListResponse} */
+  /** @deprecated DID列表 {@link GetDidListRequest} {@link GetDidListResponse} */
   GetDidList(data: GetDidListRequest, config?: AxiosRequestConfig): AxiosPromise<GetDidListResponse>;
-  /** DID注册趋势 {@link GetDidRegisterTrendRequest} {@link GetDidRegisterTrendResponse} */
+  /** @deprecated DID注册趋势 {@link GetDidRegisterTrendRequest} {@link GetDidRegisterTrendResponse} */
   GetDidRegisterTrend(data: GetDidRegisterTrendRequest, config?: AxiosRequestConfig): AxiosPromise<GetDidRegisterTrendResponse>;
-  /** 获取DID服务详情 {@link GetDidServiceDetailRequest} {@link GetDidServiceDetailResponse} */
+  /** @deprecated 获取DID服务详情 {@link GetDidServiceDetailRequest} {@link GetDidServiceDetailResponse} */
   GetDidServiceDetail(data: GetDidServiceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<GetDidServiceDetailResponse>;
-  /** 获取DID服务列表 {@link GetDidServiceListRequest} {@link GetDidServiceListResponse} */
+  /** @deprecated 获取DID服务列表 {@link GetDidServiceListRequest} {@link GetDidServiceListResponse} */
   GetDidServiceList(data: GetDidServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetDidServiceListResponse>;
-  /** 主群组配置列表 {@link GetGroupListRequest} {@link GetGroupListResponse} */
+  /** @deprecated 主群组配置列表 {@link GetGroupListRequest} {@link GetGroupListResponse} */
   GetGroupList(data: GetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupListResponse>;
-  /** 标签列表 {@link GetLabelListRequest} {@link GetLabelListResponse} */
+  /** @deprecated 标签列表 {@link GetLabelListRequest} {@link GetLabelListResponse} */
   GetLabelList(data: GetLabelListRequest, config?: AxiosRequestConfig): AxiosPromise<GetLabelListResponse>;
-  /** 披露策略Policy管理列表 {@link GetPolicyListRequest} {@link GetPolicyListResponse} */
+  /** @deprecated 披露策略Policy管理列表 {@link GetPolicyListRequest} {@link GetPolicyListResponse} */
   GetPolicyList(data: GetPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<GetPolicyListResponse>;
-  /** 查看公钥 {@link GetPublicKeyRequest} {@link GetPublicKeyResponse} */
+  /** @deprecated 查看公钥 {@link GetPublicKeyRequest} {@link GetPublicKeyResponse} */
   GetPublicKey(data: GetPublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GetPublicKeyResponse>;
-  /** 披露策略Policy查看 {@link QueryPolicyRequest} {@link QueryPolicyResponse} */
+  /** @deprecated 披露策略Policy查看 {@link QueryPolicyRequest} {@link QueryPolicyResponse} */
   QueryPolicy(data: QueryPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<QueryPolicyResponse>;
-  /** 认证权威机构 {@link RecognizeAuthorityIssuerRequest} {@link RecognizeAuthorityIssuerResponse} */
+  /** @deprecated 认证权威机构 {@link RecognizeAuthorityIssuerRequest} {@link RecognizeAuthorityIssuerResponse} */
   RecognizeAuthorityIssuer(data: RecognizeAuthorityIssuerRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeAuthorityIssuerResponse>;
-  /** 披露策略Policy注册 {@link RegisterClaimPolicyRequest} {@link RegisterClaimPolicyResponse} */
+  /** @deprecated 披露策略Policy注册 {@link RegisterClaimPolicyRequest} {@link RegisterClaimPolicyResponse} */
   RegisterClaimPolicy(data: RegisterClaimPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterClaimPolicyResponse>;
   /** 凭证模版新建 {@link RegisterCptRequest} {@link RegisterCptResponse} */
   RegisterCpt(data: RegisterCptRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterCptResponse>;
-  /** 注册为权威机构 {@link RegisterIssuerRequest} {@link RegisterIssuerResponse} */
+  /** @deprecated 注册为权威机构 {@link RegisterIssuerRequest} {@link RegisterIssuerResponse} */
   RegisterIssuer(data: RegisterIssuerRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterIssuerResponse>;
-  /** 删除合约 {@link RemoveHashRequest} {@link RemoveHashResponse} */
+  /** @deprecated 删除合约 {@link RemoveHashRequest} {@link RemoveHashResponse} */
   RemoveHash(data: RemoveHashRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveHashResponse>;
   /** 设置凭证链上状态 {@link SetCredentialStatusRequest} {@link SetCredentialStatusResponse} */
   SetCredentialStatus(data: SetCredentialStatusRequest, config?: AxiosRequestConfig): AxiosPromise<SetCredentialStatusResponse>;

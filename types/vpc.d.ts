@@ -2753,23 +2753,23 @@ declare interface CreateDirectConnectGatewayResponse {
 }
 
 declare interface CreateFlowLogRequest {
-  /** 流日志实例名字 */
+  /** 流日志实例名字。 */
   FlowLogName: string;
-  /** 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE|CCN|NAT|DCG */
+  /** 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE|CCN|NAT|DCG。 */
   ResourceType: string;
-  /** 资源唯一ID */
+  /** 资源唯一ID。 */
   ResourceId: string;
-  /** 流日志采集类型，ACCEPT|REJECT|ALL */
+  /** 流日志采集类型，ACCEPT|REJECT|ALL。 */
   TrafficType: string;
   /** 私用网络ID或者统一ID，建议使用统一ID，当ResourceType为CCN时不填，其他类型必填。 */
   VpcId?: string;
-  /** 流日志实例描述 */
+  /** 流日志实例描述。 */
   FlowLogDescription?: string;
-  /** 流日志存储ID */
+  /** 流日志存储ID。 */
   CloudLogId?: string;
-  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}] */
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
   Tags?: Tag[];
-  /** 消费端类型：cls、ckafka */
+  /** 消费端类型：cls、ckafka。默认值cls。 */
   StorageType?: string;
   /** 流日志消费端信息，当消费端类型为ckafka时，必填。 */
   FlowLogStorage?: FlowLogStorage;
@@ -2778,8 +2778,8 @@ declare interface CreateFlowLogRequest {
 }
 
 declare interface CreateFlowLogResponse {
-  /** 创建的流日志信息 */
-  FlowLog: FlowLog[];
+  /** 创建的流日志信息。 */
+  FlowLog?: FlowLog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2937,7 +2937,7 @@ declare interface CreateNetworkAclRequest {
   VpcId: string;
   /** 网络ACL名称，最大长度不能超过60个字节。 */
   NetworkAclName: string;
-  /** 网络ACL类型，三元组(TRIPLE)或五元组(QUINTUPLE)。 */
+  /** 网络ACL类型，三元组(TRIPLE)或五元组(QUINTUPLE)。默认值三元组(TRIPLE)。 */
   NetworkAclType?: string;
   /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
   Tags?: Tag[];
@@ -4285,9 +4285,9 @@ declare interface DescribeGatewayFlowMonitorDetailRequest {
   Offset?: number;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
-  /** 排序字段。支持 `InPkg` `OutPkg` `InTraffic` `OutTraffic`。 */
+  /** 排序字段。支持 `InPkg` `OutPkg` `InTraffic` `OutTraffic`。默认值`OutTraffic`。 */
   OrderField?: string;
-  /** 排序方法。顺序：`ASC`，倒序：`DESC`。 */
+  /** 排序方法。顺序：`ASC`，倒序：`DESC`。默认值`DESC`。 */
   OrderDirection?: string;
 }
 
@@ -5573,7 +5573,7 @@ declare interface EnableVpcEndPointConnectRequest {
   EndPointServiceId: string;
   /** 终端节点ID。 */
   EndPointId: string[];
-  /** 是否接受终端节点连接请求。 */
+  /** 是否接受终端节点连接请求。 true：自动接受。 false：不自动接受。 */
   AcceptFlag: boolean;
 }
 

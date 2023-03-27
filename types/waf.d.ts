@@ -921,19 +921,31 @@ declare interface DescribeAccessIndexResponse {
 }
 
 declare interface DescribeAttackOverviewRequest {
+  /** 查询开始时间 */
+  FromTime: string;
+  /** 查询结束时间 */
+  ToTime: string;
+  /** 客户的Appid */
+  Appid?: number;
+  /** 被查询的域名 */
+  Domain?: string;
+  /** 只有两个值有效，sparta-waf，clb-waf，不传则不过滤 */
+  Edition?: string;
+  /** WAF实例ID，不传则不过滤 */
+  InstanceID?: string;
 }
 
 declare interface DescribeAttackOverviewResponse {
   /** 访问请求总数 */
-  AccessCount: number;
+  AccessCount?: number;
   /** Web攻击总数 */
-  AttackCount: number;
+  AttackCount?: number;
   /** 访问控制总数 */
-  ACLCount: number;
+  ACLCount?: number;
   /** CC攻击总数 */
-  CCCount: number;
+  CCCount?: number;
   /** Bot攻击总数 */
-  BotCount: number;
+  BotCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1512,7 +1524,7 @@ declare interface Waf {
   /** 获取访问日志索引配置信息 {@link DescribeAccessIndexRequest} {@link DescribeAccessIndexResponse} */
   DescribeAccessIndex(data?: DescribeAccessIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessIndexResponse>;
   /** 攻击总览 {@link DescribeAttackOverviewRequest} {@link DescribeAttackOverviewResponse} */
-  DescribeAttackOverview(data?: DescribeAttackOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackOverviewResponse>;
+  DescribeAttackOverview(data: DescribeAttackOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackOverviewResponse>;
   /** 描述WAF自动封禁IP详情 {@link DescribeAutoDenyIPRequest} {@link DescribeAutoDenyIPResponse} */
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
   /** 查询精准白名单规则 {@link DescribeCustomWhiteRuleRequest} {@link DescribeCustomWhiteRuleResponse} */

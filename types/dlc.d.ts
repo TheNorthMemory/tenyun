@@ -724,6 +724,8 @@ declare interface SparkJobInfo {
   DataEngineStatus: number | null;
   /** 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于JobExecutorNums */
   JobExecutorMaxNumbers?: number | null;
+  /** 镜像版本 */
+  SparkImageVersion?: string | null;
 }
 
 /** notebook session statement输出信息。 */

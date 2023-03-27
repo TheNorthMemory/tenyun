@@ -851,9 +851,9 @@ declare interface DescribeBillDetailResponse {
 }
 
 declare interface DescribeBillListRequest {
-  /** 查询范围的起始时间（包含） */
+  /** 查询范围的起始时间（包含）时间格式 yyyy-MM-dd HH:mm:ss 开始时间和结束时间差值小于等于六个月 */
   StartTime: string;
-  /** 查询范围的结束时间（包含） */
+  /** 查询范围的结束时间（包含）时间格式 yyyy-MM-dd HH:mm:ss ，开始时间和结束时间差值小于等于六个月 */
   EndTime: string;
   /** 翻页偏移量，初始值为0 */
   Offset: number;
@@ -869,29 +869,29 @@ declare interface DescribeBillListRequest {
 
 declare interface DescribeBillListResponse {
   /** 收支明细列表 */
-  TransactionList: BillTransactionInfo[];
+  TransactionList?: BillTransactionInfo[];
   /** 总条数 */
-  Total: number;
+  Total?: number;
   /** 退费总额，单位（分） */
-  ReturnAmount: number;
+  ReturnAmount?: number;
   /** 充值总额，单位（分） */
-  RechargeAmount: number;
+  RechargeAmount?: number;
   /** 冻结总额，单位（分） */
-  BlockAmount: number;
+  BlockAmount?: number;
   /** 解冻总额，单位（分） */
-  UnblockAmount: number;
+  UnblockAmount?: number;
   /** 扣费总额，单位（分） */
-  DeductAmount: number;
+  DeductAmount?: number;
   /** 资金转入总额，单位（分） */
-  AgentInAmount: number;
+  AgentInAmount?: number;
   /** 垫付充值总额，单位（分） */
-  AdvanceRechargeAmount: number;
+  AdvanceRechargeAmount?: number;
   /** 提现扣减总额，单位（分） */
-  WithdrawAmount: number;
+  WithdrawAmount?: number;
   /** 资金转出总额，单位（分） */
-  AgentOutAmount: number;
+  AgentOutAmount?: number;
   /** 还垫付总额，单位（分） */
-  AdvancePayAmount: number;
+  AdvancePayAmount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1294,18 +1294,18 @@ declare interface DescribeVoucherUsageDetailsRequest {
   /** 第多少页，默认是1 */
   Offset: number;
   /** 代金券id */
-  VoucherId?: string;
+  VoucherId: string;
   /** 操作人，默认就是用户uin */
   Operator?: string;
 }
 
 declare interface DescribeVoucherUsageDetailsResponse {
   /** 券总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 总已用金额（微分） */
-  TotalUsedAmount: number;
+  TotalUsedAmount?: number;
   /** 代金券使用记录细节 */
-  UsageRecords: UsageRecords[] | null;
+  UsageRecords?: UsageRecords[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

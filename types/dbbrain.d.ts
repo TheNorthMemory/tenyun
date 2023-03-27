@@ -134,6 +134,8 @@ declare interface InstanceConfs {
   DailyInspection?: string;
   /** 实例概览开关，Yes/No。 */
   OverviewDisplay?: string;
+  /** redis大key分析的自定义分割符，仅redis使用 */
+  KeyDelimiters?: string[] | null;
 }
 
 /** 查询实例列表，返回实例的相关信息的对象。 */
@@ -194,6 +196,12 @@ declare interface InstanceInfo {
   AuditPolicyStatus: string;
   /** 实例审计日志运行状态：normal： 运行中； paused： 欠费暂停。 */
   AuditRunningStatus: string;
+  /** 内网vip */
+  InternalVip?: string | null;
+  /** 内网port */
+  InternalVport?: number | null;
+  /** 创建时间 */
+  CreateTime?: string;
 }
 
 /** 指标信息。 */

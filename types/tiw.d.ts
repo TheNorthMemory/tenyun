@@ -2,6 +2,18 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 白板应用 */
+declare interface ApplicationItem {
+  /** 应用SdkAppId */
+  SdkAppId: number;
+  /** 应用名 */
+  AppName: string;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 标签列表 */
+  TagList: Tag[];
+}
+
 /** 鉴权参数 */
 declare interface AuthParam {
   /** 应用SdkAppId */
@@ -34,6 +46,26 @@ declare interface CustomLayout {
   Canvas: Canvas;
   /** 流布局参数，每路流的布局不能超出画布区域 */
   InputStreamList: StreamLayout[];
+}
+
+/** 画图数据，Time/Value/Details */
+declare interface DataItem {
+  /** 时间按月格式yyyy-mm按天格式yyyy-mm-dd按分钟格式 yyyy-mm-dd HH:MM:SS */
+  Time: string;
+  /** 画图所需要的值 */
+  Value: number;
+  /** 各个具体指标的详情 */
+  Details: Detail[];
+}
+
+/** 计费用量数据里，带不同指标Tag的详情 */
+declare interface Detail {
+  /** 用量指标 */
+  TagName: string;
+  /** 用量权重 */
+  Weight: number;
+  /** 用量的值 */
+  Value: number;
 }
 
 /** 实时录制中出现的用户视频流断流次数统计 */
@@ -94,6 +126,18 @@ declare interface RecordControl {
   PullSmallVideo?: boolean;
   /** 针对具体流指定控制参数，如果列表为空，则所有流采用全局配置的控制参数进行录制。列表不为空，则列表中指定的流将优先按此列表指定的控制参数进行录制。 */
   StreamControls?: StreamControl[];
+}
+
+/** 日志查询里返回的白板房间数据 */
+declare interface RoomListItem {
+  /** 房间ID */
+  RoomId: string;
+  /** 房间在查询时间段内最早出现的时间，Unix时间戳，单位毫秒 */
+  StartTime: number;
+  /** 房间在查询时间段内最晚出现的时间，Unix时间戳，单位毫秒 */
+  EndTime: number;
+  /** 房间里成员数 */
+  UserNumber: number;
 }
 
 /** 互动白板房间用量信息 */
@@ -170,12 +214,60 @@ declare interface StreamLayout {
   FillMode?: number;
 }
 
+/** 标签 */
+declare interface Tag {
+  /** 标签键 */
+  TagKey: string;
+  /** 标签值 */
+  TagValue: string;
+}
+
 /** 查询指标返回的时间序列 */
 declare interface TimeValue {
   /** Unix时间戳，单位秒 */
   Time: number;
   /** 查询指标对应当前时间的值 */
   Value: number;
+}
+
+/** 转码任务结果 */
+declare interface TranscodeTaskResult {
+  /** 转码结果地址 */
+  ResultUrl: string;
+  /** 分辨率 */
+  Resolution: string;
+  /** 标题（一般为文件名） */
+  Title: string;
+  /** 转码页数 */
+  Pages: number;
+  /** 缩略图URL前缀，比如，该URL前缀为http://example.com/g0jb42ps49vtebjshilb/，那么动态PPT第1页的缩略图URL为http://example.com/g0jb42ps49vtebjshilb/1.jpg，其它页以此类推如果发起文档转码请求参数中带了ThumbnailResolution参数，并且转码类型为动态转码，该参数不为空，其余情况该参数为空字符串 */
+  ThumbnailUrl: string;
+  /** 动态转码缩略图生成分辨率 */
+  ThumbnailResolution: string;
+  /** 转码压缩文件下载的URL，如果发起文档转码请求参数中CompressFileType为空或者不是支持的压缩格式，该参数为空字符串 */
+  CompressFileUrl: string;
+  /** 任务失败错误码 */
+  ErrorCode: number;
+  /** 任务失败错误信息 */
+  ErrorMsg: string;
+}
+
+/** 转码任务搜索结果 */
+declare interface TranscodeTaskSearchResult {
+  /** 任务创建时间 */
+  CreateTime: string;
+  /** 任务唯一ID */
+  TaskId: string;
+  /** 任务的当前状态- QUEUED: 正在排队等待转换- PROCESSING: 转换中- FINISHED: 转换完成 */
+  Status: string;
+  /** 转码文件原始名称 */
+  OriginalFilename: string;
+  /** 用户应用SdkAppId */
+  SdkAppId: number;
+  /** 转码任务结果 */
+  Result: TranscodeTaskResult;
+  /** 是否静态转码 */
+  IsStatic: boolean;
 }
 
 /** 互动白板用量信息 */
@@ -188,6 +280,16 @@ declare interface UsageDataItem {
   SubProduct: string;
   /** 用量值- 静态转码、动态转码单位为页- 白板时长、实时录制时长单位为分钟 */
   Value: number;
+}
+
+/** 日志查询里返回的白板用户数据 */
+declare interface UserListItem {
+  /** 房间内的用户ID */
+  UserId: string;
+  /** 用户在查询时间段内最早出现的时间，Unix时间戳，单位毫秒 */
+  StartTime: number;
+  /** 用户在查询时间段内最晚出现的时间，Unix时间戳，单位毫秒 */
+  EndTime: number;
 }
 
 /** 视频信息 */
@@ -224,12 +326,126 @@ declare interface Whiteboard {
   InitParam?: string;
 }
 
+/** 白板应用配置，包括资源存储桶，域名，回调地址，回调密钥等 */
+declare interface WhiteboardApplicationConfig {
+  /** 任务类型recording: 实时录制transcode: 文档转码 */
+  TaskType: string;
+  /** 存储桶名字 */
+  BucketName: string;
+  /** 存储桶地域 */
+  BucketLocation: string;
+  /** 资源在存储桶中的前缀 */
+  BucketPrefix: string;
+  /** 目标CDN域名 */
+  ResultDomain: string;
+  /** 回调地址 */
+  Callback: string;
+  /** 回调鉴权密钥 */
+  CallbackKey: string;
+  /** 配置的应用SdkAppId */
+  SdkAppId?: number;
+  /** IM管理员UserId */
+  AdminUserId?: string;
+  /** IM管理员UserSig */
+  AdminUserSig?: string;
+}
+
 /** 白板推流备份相关请求参数 */
 declare interface WhiteboardPushBackupParam {
   /** 用于白板推流服务进房的用户ID，该ID必须是一个单独的未在SDK中使用的ID，白板推流服务将使用这个用户ID进入房间进行白板推流，若该ID和SDK中使用的ID重复，会导致SDK和录制服务互踢，影响正常推流。 */
   PushUserId: string;
   /** 与PushUserId对应的签名 */
   PushUserSig: string;
+}
+
+/** 白板推流任务结果 */
+declare interface WhiteboardPushResult {
+  /** AUTO - 自动停止推流， USER_CALL - 用户主动调用停止推流 */
+  FinishReason: string;
+  /** 异常数 */
+  ExceptionCnt: number;
+  /** 房间号 */
+  RoomId: number;
+  /** IM群组ID */
+  GroupId: string;
+  /** 推流真实开始时间 */
+  PushStartTime: number;
+  /** 推流结束时间 */
+  PushStopTime: number;
+  /** 白板推流首帧对应的IM时间戳，可用于录制回放时IM聊天消息与白板推流视频进行同步对时。 */
+  IMSyncTime: number;
+  /** 任务失败错误码 */
+  ErrorCode: number;
+  /** 错误信息 */
+  ErrorMsg: string;
+}
+
+/** 实时录制任务搜索结果 */
+declare interface WhiteboardPushTaskSearchResult {
+  /** 任务唯一ID */
+  TaskId: string;
+  /** 白板推流任务状态- PREPARED: 推流在准备阶段- PUSHING: 正在推流- STOPPED：推流已停止 */
+  Status: string;
+  /** 白板推流房间号 */
+  RoomId: number;
+  /** 任务创建时间 */
+  CreateTime: string;
+  /** 用户应用SdkAppId */
+  SdkAppId: number;
+  /** 白板推流结果 */
+  Result: WhiteboardPushResult;
+  /** 白板推流用户ID */
+  PushUserId: string;
+}
+
+declare interface ApplyTiwTrialRequest {
+}
+
+declare interface ApplyTiwTrialResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateApplicationRequest {
+  /** 应用SdkAppId */
+  SdkAppId: number;
+  /** App名字 */
+  AppName?: string;
+  /** 创建IM应用需要的SKey */
+  SKey?: string;
+  /** 创建IM应用需要的TinyId */
+  TinyId?: string;
+  /** 需要绑定的标签列表 */
+  TagList?: Tag[];
+}
+
+declare interface CreateApplicationResponse {
+  /** 客户的AppId */
+  AppId?: number;
+  /** App名字 */
+  AppName?: string;
+  /** 应用SdkAppId */
+  SdkAppId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateOfflineRecordRequest {
+  /** 客户的SdkAppId */
+  SdkAppId: number;
+  /** 录制任务对应的房间号 */
+  RoomId: number;
+  /** 录制任务对应的群组Id */
+  GroupId?: string;
+  /** 混流参数配置目前课后录制暂未支持自定义混流布局Custom参数 */
+  MixStream?: MixStream;
+  /** 白板参数配置 */
+  Whiteboard?: Whiteboard;
+}
+
+declare interface CreateOfflineRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface CreateSnapshotTaskRequest {
@@ -308,6 +524,116 @@ declare interface CreateVideoGenerationTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAPIServiceRequest {
+  /** 目前支持的Service为cos:GetService，cdn:DescribeDomainsConfig */
+  Service: string;
+  /** JSON格式的请求参数 */
+  Data?: string;
+}
+
+declare interface DescribeAPIServiceResponse {
+  /** Json格式的响应数据 */
+  ResponseData?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApplicationInfosRequest {
+}
+
+declare interface DescribeApplicationInfosResponse {
+  /** 应用列表 */
+  ApplicationInfos: ApplicationItem[];
+  /** 是否包含所有的应用，0-不包含，1-包含 */
+  AllOption: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApplicationUsageRequest {
+  /** 用量开始时间（包括该时间点） */
+  BeginTime: string;
+  /** 用量结束时间（不包括该时间点） */
+  EndTime: string;
+  /** 白板子产品名 */
+  SubProduct: string;
+  /** 时间跨度单位- MONTHLY：月- DAILY：天- MINUTELY：分钟 */
+  TimeLevel: string;
+  /** 白板应用的SdkAppId */
+  SdkAppId?: number;
+  /** true: 返回加权求和后的用量数据false: 返回原始用量数据 */
+  IsWeighted?: boolean;
+}
+
+declare interface DescribeApplicationUsageResponse {
+  /** 画图所需的用量数据 */
+  Data: DataItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBoardSDKLogRequest {
+  /** 白板应用的SdkAppId */
+  SdkAppId: number;
+  /** 需要查询日志的白板房间号 */
+  RoomId: string;
+  /** 需要查询日志的用户ID */
+  UserId: string;
+  /** 查询时间段，Unix时间戳，单位毫秒，第一个值为开始时间戳，第二个值为结束时间 */
+  TimeRange: number[];
+  /** 聚合日志条数查询的桶的时间范围，如5m, 1h, 4h等 */
+  AggregationInterval: string;
+  /** 额外的查询条件 */
+  Query?: string;
+  /** 是否按时间升序排列 */
+  Ascending?: boolean;
+  /** 用于递归拉取的上下文Key，在上一次请求中返回 */
+  Context?: string;
+}
+
+declare interface DescribeBoardSDKLogResponse {
+  /** 总共能查到日志条数 */
+  Total: number;
+  /** 日志详细内容 */
+  Sources: string[];
+  /** 按时间段聚合后每个时间段的日志条数 */
+  Buckets: string[];
+  /** 用于递归拉取的上下文Key，下一次请求的时候带上 */
+  Context: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeIMApplicationsRequest {
+}
+
+declare interface DescribeIMApplicationsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOfflineRecordCallbackRequest {
+  /** 应用的SdkAppId */
+  SdkAppId: number;
+}
+
+declare interface DescribeOfflineRecordCallbackResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOfflineRecordRequest {
+  /** 客户的SdkAppId */
+  SdkAppId: number;
+  /** 课后录制任务的Id */
+  TaskId: string;
+}
+
+declare interface DescribeOfflineRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeOnlineRecordCallbackRequest {
   /** 应用的SdkAppId */
   SdkAppId: number;
@@ -362,6 +688,18 @@ declare interface DescribeOnlineRecordResponse {
   RequestId?: string;
 }
 
+declare interface DescribePostpaidUsageRequest {
+  /** 开始时间 */
+  BeginTime: string;
+  /** 结束时间 */
+  EndTime: string;
+}
+
+declare interface DescribePostpaidUsageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeQualityMetricsRequest {
   /** 白板应用的SdkAppId */
   SdkAppId: number;
@@ -380,6 +718,24 @@ declare interface DescribeQualityMetricsResponse {
   Metric: string;
   /** 时间序列 */
   Content: TimeValue[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRoomListRequest {
+  /** 白板应用的SdkAppId */
+  SdkAppId: number;
+  /** 查询时间段，Unix时间戳，单位毫秒，第一个值为开始时间戳，第二个值为结束时间 */
+  TimeRange: number[];
+  /** 额外的查询条件 */
+  Query?: string;
+  /** 返回最大的数据条数，默认1000 */
+  MaxSize?: number;
+}
+
+declare interface DescribeRoomListResponse {
+  /** 白板房间列表 */
+  RoomList: RoomListItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -500,6 +856,80 @@ declare interface DescribeTranscodeResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTranscodeSearchRequest {
+}
+
+declare interface DescribeTranscodeSearchResponse {
+  /** 转码任务搜索结果集合 */
+  TranscodeTaskSet: TranscodeTaskSearchResult[];
+  /** 转码总任务数 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUsageSummaryRequest {
+  /** 统计时间段的开始时间 */
+  BeginTime: string;
+  /** 统计时间段的结束时间 */
+  EndTime: string;
+  /** 需要获取用量的子产品列表 */
+  SubProducts: string[];
+  /** true: 返回加权后的数据false: 返回原始数据 */
+  IsWeighted?: boolean;
+}
+
+declare interface DescribeUsageSummaryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserListRequest {
+  /** 白板应用的SdkAppId */
+  SdkAppId: number;
+  /** 需要查询用户列表的白板房间号 */
+  RoomId: string;
+  /** 查询时间段，Unix时间戳，单位毫秒，第一个值为开始时间戳，第二个值为结束时间 */
+  TimeRange: number[];
+  /** 额外的查询条件 */
+  Query?: string;
+  /** 返回最大的数据条数，默认1000 */
+  MaxSize?: number;
+}
+
+declare interface DescribeUserListResponse {
+  /** 房间内的用户列表 */
+  UserList: UserListItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserResourcesRequest {
+}
+
+declare interface DescribeUserResourcesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserStatusRequest {
+}
+
+declare interface DescribeUserStatusResponse {
+  /** 客户的AppId */
+  AppId?: number;
+  /** 是否开通过白板（试用或正式）0: 从未开通过白板服务1: 已经开通过白板服务 */
+  IsTiwUser?: number;
+  /** 是否开通过互动课堂（试用或正式） */
+  IsSaaSUser?: number;
+  /** 是否使用白板的课后录制 */
+  IsTiwOfflineRecordUser?: number;
+  /** 用户是否实名认证 */
+  IsAuthenticated?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVideoGenerationTaskCallbackRequest {
   /** 应用的SdkAppId */
   SdkAppId: number;
@@ -538,6 +968,36 @@ declare interface DescribeVideoGenerationTaskResponse {
   VideoInfos?: VideoInfo;
   /** 录制视频生成视频列表 */
   VideoInfoList?: VideoInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWhiteboardApplicationConfigRequest {
+  /** 客户的SdkAppId */
+  SdkAppId: number;
+  /** 需要查询的任务类型recording: 实时录制transcode: 文档转码 */
+  TaskTypes: string[];
+  /** 需要查询配置的SdkAppId列表 */
+  SdkAppIds?: number[];
+}
+
+declare interface DescribeWhiteboardApplicationConfigResponse {
+  /** 客户的SdkAppId */
+  SdkAppId: number;
+  /** 白板应用任务相关配置 */
+  Configs: WhiteboardApplicationConfig[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWhiteboardBucketConfigRequest {
+  /** 客户的SdkAppId */
+  SdkAppId: number;
+  /** 需要查询的任务类型recording: 实时录制transcode: 文档转码 */
+  TaskType: string;
+}
+
+declare interface DescribeWhiteboardBucketConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -590,6 +1050,76 @@ declare interface DescribeWhiteboardPushResponse {
   RequestId?: string;
 }
 
+declare interface DescribeWhiteboardPushSearchRequest {
+}
+
+declare interface DescribeWhiteboardPushSearchResponse {
+  /** 推流任务搜索结果集合 */
+  WhiteboardPushTaskSet: WhiteboardPushTaskSearchResult[];
+  /** 推流总任务数 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyApplicationRequest {
+  /** 应用SdkAppId */
+  SdkAppId: number;
+  /** App名字 */
+  AppName: string;
+}
+
+declare interface ModifyApplicationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAutoRenewFlagRequest {
+  /** 资源Id，从DescribeUserResources接口中获取Level=1的正式月功能费的SubProduct，一般为sp_tiw_package */
+  SubProduct: string;
+  /** 资源Id，从DescribeUserResources接口中获取Level=1的正式月功能费资源Id */
+  ResourceId: string;
+  /** 自动续费标记，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)，若业务无续费概念或无需自动续 费，需要设置为0 */
+  AutoRenewFlag: number;
+}
+
+declare interface ModifyAutoRenewFlagResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyWhiteboardApplicationConfigRequest {
+  /** 客户的SdkAppId */
+  SdkAppId: number;
+  /** 白板应用任务相关配置 */
+  Configs: WhiteboardApplicationConfig[];
+}
+
+declare interface ModifyWhiteboardApplicationConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyWhiteboardBucketConfigRequest {
+  /** 客户的SdkAppId */
+  SdkAppId: number;
+  /** 需要查询的任务类型recording: 实时录制transcode: 文档转码 */
+  TaskType: string;
+  /** COS存储桶名字 */
+  BucketName: string;
+  /** COS存储桶地域 */
+  BucketLocation: string;
+  /** 存储桶里资源前缀 */
+  BucketPrefix: string;
+  /** 返回Url域名 */
+  ResultDomain: string;
+}
+
+declare interface ModifyWhiteboardBucketConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PauseOnlineRecordRequest {
   /** 客户的SdkAppId */
   SdkAppId: number;
@@ -610,6 +1140,18 @@ declare interface ResumeOnlineRecordRequest {
 }
 
 declare interface ResumeOnlineRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SetOfflineRecordCallbackRequest {
+  /** 客户的SdkAppId */
+  SdkAppId: number;
+  /** 课后录制任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头 */
+  Callback: string;
+}
+
+declare interface SetOfflineRecordCallbackResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -833,18 +1375,42 @@ declare interface StopWhiteboardPushResponse {
 /** {@link Tiw 互动白板} */
 declare interface Tiw {
   (): Versions;
+  /** 申请互动白板试用 {@link ApplyTiwTrialRequest} {@link ApplyTiwTrialResponse} */
+  ApplyTiwTrial(data?: ApplyTiwTrialRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyTiwTrialResponse>;
+  /** 创建白板应用 {@link CreateApplicationRequest} {@link CreateApplicationResponse} */
+  CreateApplication(data: CreateApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationResponse>;
+  /** 创建课后录制任务 {@link CreateOfflineRecordRequest} {@link CreateOfflineRecordResponse} */
+  CreateOfflineRecord(data: CreateOfflineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOfflineRecordResponse>;
   /** 创建白板板书生成任务 {@link CreateSnapshotTaskRequest} {@link CreateSnapshotTaskResponse} */
   CreateSnapshotTask(data: CreateSnapshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotTaskResponse>;
   /** 创建文档转码任务 {@link CreateTranscodeRequest} {@link CreateTranscodeResponse} */
   CreateTranscode(data: CreateTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTranscodeResponse>;
   /** 创建录制视频生成任务 {@link CreateVideoGenerationTaskRequest} {@link CreateVideoGenerationTaskResponse} */
   CreateVideoGenerationTask(data: CreateVideoGenerationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoGenerationTaskResponse>;
+  /** 获取其他云产品信息 {@link DescribeAPIServiceRequest} {@link DescribeAPIServiceResponse} */
+  DescribeAPIService(data: DescribeAPIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAPIServiceResponse>;
+  /** 查询白板应用详情 {@link DescribeApplicationInfosRequest} {@link DescribeApplicationInfosResponse} */
+  DescribeApplicationInfos(data?: DescribeApplicationInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationInfosResponse>;
+  /** 查询互动白板各个子产品用量 {@link DescribeApplicationUsageRequest} {@link DescribeApplicationUsageResponse} */
+  DescribeApplicationUsage(data: DescribeApplicationUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationUsageResponse>;
+  /** 查询白板日志 {@link DescribeBoardSDKLogRequest} {@link DescribeBoardSDKLogResponse} */
+  DescribeBoardSDKLog(data: DescribeBoardSDKLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBoardSDKLogResponse>;
+  /** 查询可用的IM应用列表 {@link DescribeIMApplicationsRequest} {@link DescribeIMApplicationsResponse} */
+  DescribeIMApplications(data?: DescribeIMApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIMApplicationsResponse>;
+  /** 查询课后录制任务 {@link DescribeOfflineRecordRequest} {@link DescribeOfflineRecordResponse} */
+  DescribeOfflineRecord(data: DescribeOfflineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineRecordResponse>;
+  /** 查询回调地址 {@link DescribeOfflineRecordCallbackRequest} {@link DescribeOfflineRecordCallbackResponse} */
+  DescribeOfflineRecordCallback(data: DescribeOfflineRecordCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineRecordCallbackResponse>;
   /** 查询实时录制任务 {@link DescribeOnlineRecordRequest} {@link DescribeOnlineRecordResponse} */
   DescribeOnlineRecord(data: DescribeOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOnlineRecordResponse>;
   /** 查询实时录制回调地址 {@link DescribeOnlineRecordCallbackRequest} {@link DescribeOnlineRecordCallbackResponse} */
   DescribeOnlineRecordCallback(data: DescribeOnlineRecordCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOnlineRecordCallbackResponse>;
+  /** 查询用户后付费用量 {@link DescribePostpaidUsageRequest} {@link DescribePostpaidUsageResponse} */
+  DescribePostpaidUsage(data: DescribePostpaidUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostpaidUsageResponse>;
   /** 查询质量数据 {@link DescribeQualityMetricsRequest} {@link DescribeQualityMetricsResponse} */
   DescribeQualityMetrics(data: DescribeQualityMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQualityMetricsResponse>;
+  /** 查询白板房间列表 {@link DescribeRoomListRequest} {@link DescribeRoomListResponse} */
+  DescribeRoomList(data: DescribeRoomListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomListResponse>;
   /** 获取白板板书生成任务信息 {@link DescribeSnapshotTaskRequest} {@link DescribeSnapshotTaskResponse} */
   DescribeSnapshotTask(data: DescribeSnapshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotTaskResponse>;
   /** 查询天维度计费用量 {@link DescribeTIWDailyUsageRequest} {@link DescribeTIWDailyUsageResponse} */
@@ -855,18 +1421,44 @@ declare interface Tiw {
   DescribeTranscode(data: DescribeTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeResponse>;
   /** 查询文档转码回调地址 {@link DescribeTranscodeCallbackRequest} {@link DescribeTranscodeCallbackResponse} */
   DescribeTranscodeCallback(data: DescribeTranscodeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeCallbackResponse>;
+  /** 搜索转码任务 {@link DescribeTranscodeSearchRequest} {@link DescribeTranscodeSearchResponse} */
+  DescribeTranscodeSearch(data?: DescribeTranscodeSearchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeSearchResponse>;
+  /** 查询子产品用量统计 {@link DescribeUsageSummaryRequest} {@link DescribeUsageSummaryResponse} */
+  DescribeUsageSummary(data: DescribeUsageSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageSummaryResponse>;
+  /** 查询白板用户列表 {@link DescribeUserListRequest} {@link DescribeUserListResponse} */
+  DescribeUserList(data: DescribeUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserListResponse>;
+  /** 查询客户资源列表 {@link DescribeUserResourcesRequest} {@link DescribeUserResourcesResponse} */
+  DescribeUserResources(data?: DescribeUserResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResourcesResponse>;
+  /** 查询互动白板用户详情 {@link DescribeUserStatusRequest} {@link DescribeUserStatusResponse} */
+  DescribeUserStatus(data?: DescribeUserStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserStatusResponse>;
   /** 查询录制视频生成任务 {@link DescribeVideoGenerationTaskRequest} {@link DescribeVideoGenerationTaskResponse} */
   DescribeVideoGenerationTask(data: DescribeVideoGenerationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoGenerationTaskResponse>;
   /** 查询录制视频生成回调地址 {@link DescribeVideoGenerationTaskCallbackRequest} {@link DescribeVideoGenerationTaskCallbackResponse} */
   DescribeVideoGenerationTaskCallback(data: DescribeVideoGenerationTaskCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoGenerationTaskCallbackResponse>;
+  /** 查询白板应用任务相关配置 {@link DescribeWhiteboardApplicationConfigRequest} {@link DescribeWhiteboardApplicationConfigResponse} */
+  DescribeWhiteboardApplicationConfig(data: DescribeWhiteboardApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteboardApplicationConfigResponse>;
+  /** 查询应用资源配置 {@link DescribeWhiteboardBucketConfigRequest} {@link DescribeWhiteboardBucketConfigResponse} */
+  DescribeWhiteboardBucketConfig(data: DescribeWhiteboardBucketConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteboardBucketConfigResponse>;
   /** 查询白板推流任务 {@link DescribeWhiteboardPushRequest} {@link DescribeWhiteboardPushResponse} */
   DescribeWhiteboardPush(data: DescribeWhiteboardPushRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteboardPushResponse>;
   /** 查询白板推流回调地址 {@link DescribeWhiteboardPushCallbackRequest} {@link DescribeWhiteboardPushCallbackResponse} */
   DescribeWhiteboardPushCallback(data: DescribeWhiteboardPushCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteboardPushCallbackResponse>;
+  /** 搜索白板推流任务 {@link DescribeWhiteboardPushSearchRequest} {@link DescribeWhiteboardPushSearchResponse} */
+  DescribeWhiteboardPushSearch(data?: DescribeWhiteboardPushSearchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteboardPushSearchResponse>;
+  /** 修改白板应用 {@link ModifyApplicationRequest} {@link ModifyApplicationResponse} */
+  ModifyApplication(data: ModifyApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationResponse>;
+  /** 设置自动续费 {@link ModifyAutoRenewFlagRequest} {@link ModifyAutoRenewFlagResponse} */
+  ModifyAutoRenewFlag(data: ModifyAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoRenewFlagResponse>;
+  /** 修改白板应用任务相关配置 {@link ModifyWhiteboardApplicationConfigRequest} {@link ModifyWhiteboardApplicationConfigResponse} */
+  ModifyWhiteboardApplicationConfig(data: ModifyWhiteboardApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWhiteboardApplicationConfigResponse>;
+  /** 设置应用资源存储桶配置 {@link ModifyWhiteboardBucketConfigRequest} {@link ModifyWhiteboardBucketConfigResponse} */
+  ModifyWhiteboardBucketConfig(data: ModifyWhiteboardBucketConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWhiteboardBucketConfigResponse>;
   /** 暂停实时录制 {@link PauseOnlineRecordRequest} {@link PauseOnlineRecordResponse} */
   PauseOnlineRecord(data: PauseOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<PauseOnlineRecordResponse>;
   /** 恢复实时录制 {@link ResumeOnlineRecordRequest} {@link ResumeOnlineRecordResponse} */
   ResumeOnlineRecord(data: ResumeOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeOnlineRecordResponse>;
+  /** 设置回调地址 {@link SetOfflineRecordCallbackRequest} {@link SetOfflineRecordCallbackResponse} */
+  SetOfflineRecordCallback(data: SetOfflineRecordCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetOfflineRecordCallbackResponse>;
   /** 设置实时录制回调地址 {@link SetOnlineRecordCallbackRequest} {@link SetOnlineRecordCallbackResponse} */
   SetOnlineRecordCallback(data: SetOnlineRecordCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetOnlineRecordCallbackResponse>;
   /** 设置实时录制回调密钥 {@link SetOnlineRecordCallbackKeyRequest} {@link SetOnlineRecordCallbackKeyResponse} */

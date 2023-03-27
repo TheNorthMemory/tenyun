@@ -1038,6 +1038,56 @@ declare interface ClearInstanceResponse {
   RequestId?: string;
 }
 
+declare interface CloneInstancesRequest {
+  /** 当前实例ID。 */
+  InstanceId: string;
+  /** 单次克隆实例的数量。包年包月每次购买最大数量为100。按量计费每次购买最大数量为30，每个地域购买数量取值范围为[1,100]。 */
+  GoodsNum: number;
+  /** 克隆实例所属的可用区ID。当前所支持的可用区 ID，请参见[地域和可用区](https://cloud.tencent.com/document/product/239/4106) 。 */
+  ZoneId: number;
+  /** 付费方式。0：按量计费。1：包年包月。 */
+  BillingMode: number;
+  /** 购买实例时长。单位：月。付费方式选择包年包月计费时，取值范围为[1,2,3,4,5,6,7,8,9,10,11,12,24,36,48,60]。付费方式选择按量计费时，设置为1。 */
+  Period: number;
+  /** 安全组ID。请登录控制台，在安全组页面获取安全组 ID 信息。 */
+  SecurityGroupIdList: string[];
+  /** 克隆实例使用的备份ID。请通过接口[DescribeInstanceBackups](https://cloud.tencent.com/document/product/239/20011)获取备份ID。 */
+  BackupId: string;
+  /** 配置克隆实例是否支持免密访问。开启 SSL 与外网均不支持免密访问。true：免密实例，false：非免密实例。默认为非免密实例。 */
+  NoAuth?: boolean;
+  /** 私有网络ID。如果未配置该参数，默认选择基础网络。 */
+  VpcId?: string;
+  /** 私有网络所属子网。基础网络时该参数无需配置。 */
+  SubnetId?: string;
+  /** 克隆实例的名称。仅支持长度小于60的中文、英文或者数字，短划线"-"、下划线"_"。 */
+  InstanceName?: string;
+  /** 克隆实例的访问密码。当输入参数NoAuth为true时，可不设置该参数。当实例为Redis2.8、4.0和5.0时，其密码格式为：8-30个字符，至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的2种，不能以"/"开头；当实例为CKV 3.2时，其密码格式为：8-30个字符，必须包含字母和数字，且不包含其他字符。 */
+  Password?: string;
+  /** 自动续费标识。0：默认状态（手动续费）。1：自动续费。2：不自动续费，到期自动隔离。 */
+  AutoRenew?: number;
+  /** 用户自定义的端口，默认为6379，取值范围[1024,65535]。 */
+  VPort?: number;
+  /** 实例的节点信息。目前支持配置节点的类型（主节点或者副本节点），及其节点的可用区信息。具体信息，请参见[RedisNodeInfo](https://cloud.tencent.com/document/product/239/20022)。单可用区部署可不配置该参数。 */
+  NodeSet?: RedisNodeInfo[];
+  /** 项目 ID。登录控制台，可在右上角的账号中心 > 项目管理中查找项目ID。 */
+  ProjectId?: number;
+  /** 克隆实例需绑定的标签。 */
+  ResourceTags?: ResourceTag[];
+  /** 克隆实例需要应用的参数模板ID,请登录 Redis 控制台，在参数模板页面获取。若不配置该参数，则应用默认的参数模板。 */
+  TemplateId?: string;
+  /** 指定克隆实例的告警策略 ID。请登录控制台，在云监控 > 告警配置 > 告警策略页面获取策略 ID 信息。 */
+  AlarmPolicyList?: string[];
+}
+
+declare interface CloneInstancesResponse {
+  /** 请求任务 ID。 */
+  DealId: string;
+  /** 克隆实例的 ID。 */
+  InstanceIds: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CloseSSLRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -2589,6 +2639,8 @@ declare interface Redis {
   CleanUpInstance(data: CleanUpInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CleanUpInstanceResponse>;
   /** 清空Redis实例 {@link ClearInstanceRequest} {@link ClearInstanceResponse} */
   ClearInstance(data: ClearInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ClearInstanceResponse>;
+  /** 克隆实例 {@link CloneInstancesRequest} {@link CloneInstancesResponse} */
+  CloneInstances(data: CloneInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CloneInstancesResponse>;
   /** 关闭SSL {@link CloseSSLRequest} {@link CloseSSLResponse} */
   CloseSSL(data: CloseSSLRequest, config?: AxiosRequestConfig): AxiosPromise<CloseSSLResponse>;
   /** 创建实例子账号 {@link CreateInstanceAccountRequest} {@link CreateInstanceAccountResponse} */

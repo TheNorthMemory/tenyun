@@ -2831,13 +2831,15 @@ declare interface DescribeDefaultParamsRequest {
   EngineVersion: string;
   /** 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板。 */
   TemplateType?: string;
+  /** 参数模板引擎，默认值：InnoDB */
+  EngineType?: string;
 }
 
 declare interface DescribeDefaultParamsResponse {
   /** 参数个数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 参数详情。 */
-  Items: ParameterDetail[];
+  Items?: ParameterDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
