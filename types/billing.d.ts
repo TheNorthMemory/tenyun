@@ -1261,9 +1261,9 @@ declare interface DescribeVoucherInfoRequest {
   ActivityId?: string;
   /** 代金券名称 */
   VoucherName?: string;
-  /** 发放开始时间 */
+  /** 发放开始时间,例：2021-01-01 */
   TimeFrom?: string;
-  /** 发放结束时间 */
+  /** 发放结束时间，例：2021-01-01 */
   TimeTo?: string;
   /** 指定排序字段：BeginTime开始时间、EndTime到期时间、CreateTime创建时间 */
   SortField?: string;
@@ -1279,11 +1279,11 @@ declare interface DescribeVoucherInfoRequest {
 
 declare interface DescribeVoucherInfoResponse {
   /** 券总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 总余额（微分） */
-  TotalBalance: number;
+  TotalBalance?: number;
   /** 代金券相关信息 */
-  VoucherInfos: VoucherInfos[] | null;
+  VoucherInfos?: VoucherInfos[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -160,13 +160,13 @@ declare interface Component {
   GenerateMode?: string;
   /** 日期签署控件的字号，默认为 12 */
   ComponentDateFontSize?: number;
-  /** 渠道版控件 id 标识 */
+  /** 平台模板控件 id 标识 */
   ChannelComponentId?: string;
   /** 指定关键字时横坐标偏移量，单位pt */
   OffsetX?: number;
   /** 指定关键字时纵坐标偏移量，单位pt */
   OffsetY?: number;
-  /** //渠道子客控件来源。0-渠道指定；1-用户自定义 */
+  /** //子客控件来源。0-平台指定；1-用户自定义 */
   ChannelComponentSource?: number;
   /** 指定关键字排序规则，Positive-正序，Reverse-倒序。传入Positive时会根据关键字在PDF文件内的顺序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的第一个关键字。传入Reverse时会根据关键字在PDF文件内的反序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的最后一个关键字。 */
   KeywordOrder?: string;
@@ -202,6 +202,14 @@ declare interface Department {
   DepartmentName: string;
 }
 
+/** 绑定角色失败信息 */
+declare interface FailedCreateRoleData {
+  /** 用户userId */
+  UserId?: string | null;
+  /** 角色id列表 */
+  RoleIds?: string[] | null;
+}
+
 /** 创建员工的失败数据 */
 declare interface FailedCreateStaffData {
   /** 员工名 */
@@ -220,6 +228,20 @@ declare interface FailedDeleteStaffData {
   OpenId: string | null;
   /** 失败原因 */
   Reason: string;
+}
+
+/** 更新员工信息失败返回的数据信息 */
+declare interface FailedUpdateStaffData {
+  /** 用户传入的名称 */
+  DisplayName?: string;
+  /** 用户传入的手机号 */
+  Mobile?: string;
+  /** 失败原因 */
+  Reason?: string;
+  /** 用户Id */
+  UserId?: string;
+  /** 用户OpenId */
+  OpenId?: string;
 }
 
 /** 二期接口返回的模板中文件的信息结构 */
@@ -378,7 +400,7 @@ declare interface FlowDetailInfo {
   FlowApproverInfos: FlowApproverDetail[];
 }
 
-/** 电子文档的控件填充信息。按照控件类型进行相应的填充。【数据表格传参说明】当模板的 ComponentType='DYNAMIC_TABLE'时（渠道版或集成版），FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）输入示例1：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例2（表格表头宽度比例配置）：```{ "headers":[ { "content":"head1", "widthPercent": 30 }, { "content":"head2", "widthPercent": 30 }, { "content":"head3", "widthPercent": 40 } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 |表格参数headers说明widthPercent Integer 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35content String 表头单元格内容，字数不超过100 */
+/** 电子文档的控件填充信息。按照控件类型进行相应的填充。【数据表格传参说明】当模板的 ComponentType='DYNAMIC_TABLE'时，FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）输入示例1：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例2（表格表头宽度比例配置）：```{ "headers":[ { "content":"head1", "widthPercent": 30 }, { "content":"head2", "widthPercent": 30 }, { "content":"head3", "widthPercent": 40 } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 |表格参数headers说明widthPercent Integer 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35content String 表头单元格内容，字数不超过100 */
 declare interface FormField {
   /** 控件填充vaule，ComponentType和传入值类型对应关系：TEXT - 文本内容MULTI_LINE_TEXT - 文本内容CHECK_BOX - true/falseFILL_IMAGE、ATTACHMENT - 附件的FileId，需要通过UploadFiles接口上传获取SELECTOR - 选项值DYNAMIC_TABLE - 传入json格式的表格内容，具体见数据结构FlowInfo：https://cloud.tencent.com/document/api/1420/61525 */
   ComponentValue: string;
@@ -414,6 +436,20 @@ declare interface GroupOrganization {
   JoinTime?: number | null;
   /** 是否可以使用审批流引擎 */
   FlowEngineEnable?: boolean | null;
+}
+
+/** 企业角色数据信息 */
+declare interface IntegrateRole {
+  /** 角色id */
+  RoleId?: string | null;
+  /** 角色名 */
+  RoleName?: string | null;
+  /** 角色类型：1-系统角色，2-自定义角色 */
+  RoleStatus?: number | null;
+  /** 是否是集团角色 */
+  IsGroupRole?: boolean | null;
+  /** 管辖的子企业列表 */
+  SubOrgIdList?: string[] | null;
 }
 
 /** 主企业员工账号信息 */
@@ -646,6 +682,16 @@ declare interface SuccessDeleteStaffData {
   Mobile: string;
   /** 员工在电子签平台的id */
   UserId: string;
+}
+
+/** 更新员工信息成功返回的数据信息 */
+declare interface SuccessUpdateStaffData {
+  /** 传入的用户名称 */
+  DisplayName?: string;
+  /** 传入的手机号 */
+  Mobile?: string;
+  /** 用户Id */
+  UserId?: string;
 }
 
 /** 二期接口返回的模板的信息结构 */
@@ -1010,6 +1056,24 @@ declare interface CreateIntegrationEmployeesResponse {
   RequestId?: string;
 }
 
+declare interface CreateIntegrationUserRolesRequest {
+  /** 操作人信息 */
+  Operator: UserInfo;
+  /** 绑定角色的用户id列表 */
+  UserIds: string[];
+  /** 绑定角色的角色id列表 */
+  RoleIds: string[];
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
+}
+
+declare interface CreateIntegrationUserRolesResponse {
+  /** 绑定角色失败列表信息 */
+  FailedCreateRoleData?: FailedCreateRoleData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateMultiFlowSignQRCodeRequest {
   /** 用户信息 */
   Operator: UserInfo;
@@ -1210,6 +1274,24 @@ declare interface DeleteIntegrationEmployeesResponse {
   RequestId?: string;
 }
 
+declare interface DeleteIntegrationRoleUsersRequest {
+  /** 操作人 */
+  Operator: UserInfo;
+  /** 角色id */
+  RoleId: string;
+  /** 用户信息 */
+  Users: UserInfo[];
+  /** 代理信息 */
+  Agent?: Agent;
+}
+
+declare interface DeleteIntegrationRoleUsersResponse {
+  /** 角色id */
+  RoleId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteSealPoliciesRequest {
   /** 操作撤销的用户信息 */
   Operator: UserInfo;
@@ -1323,9 +1405,9 @@ declare interface DescribeFlowTemplatesRequest {
   Limit?: number;
   /** 搜索条件，具体参考Filter结构体。本接口取值：template-id：按照【 **模板唯一标识** 】进行过滤 */
   Filters?: Filter[];
-  /** 这个参数跟下面的IsChannel参数配合使用。IsChannel=false时，ApplicationId参数不起任何作用。IsChannel=true时，ApplicationId为空，查询所有渠道模板列表；ApplicationId不为空，查询指定渠道下的模板列表ApplicationId为空，查询渠道模板列表 */
+  /** 这个参数跟下面的IsChannel参数配合使用。IsChannel=false时，ApplicationId参数不起任何作用。IsChannel=true时，ApplicationId为空，查询所有第三方应用集成平台企业模板列表；ApplicationId不为空，查询指定应用下的模板列表ApplicationId为空，查询所有应用下的模板列表 */
   ApplicationId?: string;
-  /** 默认为false，查询SaaS模板库列表；为true，查询渠道模板库管理列表 */
+  /** 默认为false，查询SaaS模板库列表；为true，查询第三方应用集成平台企业模板库管理列表 */
   IsChannel?: boolean;
   /** 暂未开放 */
   GenerateSource?: number;
@@ -1374,6 +1456,32 @@ declare interface DescribeIntegrationMainOrganizationUserRequest {
 declare interface DescribeIntegrationMainOrganizationUserResponse {
   /** 主企业员工账号信息 */
   IntegrationMainOrganizationUser?: IntegrationMainOrganizationUser | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeIntegrationRolesRequest {
+  /** 操作人信息 */
+  Operator: UserInfo;
+  /** 返回最大数量，最大为200 */
+  Limit: number;
+  /** 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填 */
+  Agent?: Agent;
+  /** 查询的关键字段:Key:"RoleType",Vales:["1"]查询系统角色，Values:["2]查询自定义角色Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色Key:"IsGroupRole"，Values:["0"],查询非集团角色，Values:["1"]表示查询集团角色 */
+  Filters?: Filter[];
+  /** 偏移量，默认为0，最大为2000 */
+  Offset?: number;
+}
+
+declare interface DescribeIntegrationRolesResponse {
+  /** 偏移量，默认为0，最大为2000 */
+  Offset?: number;
+  /** 返回最大数量，最大为200 */
+  Limit?: number;
+  /** 符合查询条件的总的角色数 */
+  TotalCount?: number;
+  /** 企业角色信息列表 */
+  IntegrateRoles?: IntegrateRole[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1530,6 +1638,24 @@ declare interface StartFlowResponse {
   RequestId?: string;
 }
 
+declare interface UpdateIntegrationEmployeesRequest {
+  /** 操作人信息 */
+  Operator: UserInfo;
+  /** 代理信息 */
+  Agent: Agent;
+  /** 员工信息 */
+  Employees: Staff[];
+}
+
+declare interface UpdateIntegrationEmployeesResponse {
+  /** 更新成功的用户列表 */
+  SuccessEmployeeData?: SuccessUpdateStaffData[];
+  /** 更新失败的用户列表 */
+  FailedEmployeeData?: FailedUpdateStaffData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UploadFilesRequest {
   /** 文件对应业务类型1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html3. SEAL - 印章； 文件类型：.jpg/.jpeg/.png */
   BusinessType: string;
@@ -1603,6 +1729,8 @@ declare interface Ess {
   CreateFlowSignUrl(data: CreateFlowSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignUrlResponse>;
   /** 创建员工 {@link CreateIntegrationEmployeesRequest} {@link CreateIntegrationEmployeesResponse} */
   CreateIntegrationEmployees(data: CreateIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationEmployeesResponse>;
+  /** 集成版绑定员工角色 {@link CreateIntegrationUserRolesRequest} {@link CreateIntegrationUserRolesResponse} */
+  CreateIntegrationUserRoles(data: CreateIntegrationUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationUserRolesResponse>;
   /** 创建一码多扫流程签署二维码 {@link CreateMultiFlowSignQRCodeRequest} {@link CreateMultiFlowSignQRCodeResponse} */
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
   /** 创建快速发起流程 {@link CreatePrepareFlowRequest} {@link CreatePrepareFlowResponse} */
@@ -1619,6 +1747,8 @@ declare interface Ess {
   CreateUserAutoSignEnableUrl(data: CreateUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserAutoSignEnableUrlResponse>;
   /** 移除员工 {@link DeleteIntegrationEmployeesRequest} {@link DeleteIntegrationEmployeesResponse} */
   DeleteIntegrationEmployees(data: DeleteIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationEmployeesResponse>;
+  /** 集成版解绑用户角色 {@link DeleteIntegrationRoleUsersRequest} {@link DeleteIntegrationRoleUsersResponse} */
+  DeleteIntegrationRoleUsers(data: DeleteIntegrationRoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationRoleUsersResponse>;
   /** 撤销员工的印章权限 {@link DeleteSealPoliciesRequest} {@link DeleteSealPoliciesResponse} */
   DeleteSealPolicies(data: DeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSealPoliciesResponse>;
   /** 查询文件下载URL {@link DescribeFileUrlsRequest} {@link DescribeFileUrlsResponse} */
@@ -1635,6 +1765,8 @@ declare interface Ess {
   DescribeIntegrationEmployees(data: DescribeIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationEmployeesResponse>;
   /** 查询集成版主企业员工账号 {@link DescribeIntegrationMainOrganizationUserRequest} {@link DescribeIntegrationMainOrganizationUserResponse} */
   DescribeIntegrationMainOrganizationUser(data: DescribeIntegrationMainOrganizationUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationMainOrganizationUserResponse>;
+  /** 查询集成版角色 {@link DescribeIntegrationRolesRequest} {@link DescribeIntegrationRolesResponse} */
+  DescribeIntegrationRoles(data: DescribeIntegrationRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationRolesResponse>;
   /** 查询集团企业列表 {@link DescribeOrganizationGroupOrganizationsRequest} {@link DescribeOrganizationGroupOrganizationsResponse} */
   DescribeOrganizationGroupOrganizations(data: DescribeOrganizationGroupOrganizationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationGroupOrganizationsResponse>;
   /** 查询企业电子印章 {@link DescribeOrganizationSealsRequest} {@link DescribeOrganizationSealsResponse} */
@@ -1651,6 +1783,8 @@ declare interface Ess {
   ModifyApplicationCallbackInfo(data?: ModifyApplicationCallbackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationCallbackInfoResponse>;
   /** 发起流程 {@link StartFlowRequest} {@link StartFlowResponse} */
   StartFlow(data: StartFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StartFlowResponse>;
+  /** 更新集成版员工信息 {@link UpdateIntegrationEmployeesRequest} {@link UpdateIntegrationEmployeesResponse} */
+  UpdateIntegrationEmployees(data: UpdateIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateIntegrationEmployeesResponse>;
   /** 多文件上传 {@link UploadFilesRequest} {@link UploadFilesResponse} */
   UploadFiles(data: UploadFilesRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFilesResponse>;
   /** 合同文件验签 {@link VerifyPdfRequest} {@link VerifyPdfResponse} */

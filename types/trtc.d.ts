@@ -228,6 +228,8 @@ declare interface McuLayoutParams {
   MixLayoutList?: McuLayout[];
   /** 指定动态布局中悬浮布局和屏幕分享布局的大画面信息，只在悬浮布局和屏幕分享布局有效。 */
   MaxVideoUser?: MaxVideoUser;
+  /** 屏幕分享模板、悬浮模板、九宫格模版有效，画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底 */
+  RenderMode?: number;
 }
 
 /** 音量布局SEI参数，可以自定义AppData和PayloadType类型。该参数内容可以为空，表示携带默认的音量布局SEI。 */
@@ -1219,6 +1221,12 @@ declare interface DescribeTrtcMcuTranscodeTimeResponse {
 }
 
 declare interface DescribeTrtcRoomUsageRequest {
+  /** TRTC的SdkAppId，和房间所对应的SdkAppId相同。 */
+  SdkAppid: number;
+  /** 查询开始时间，格式为YYYY-MM-DD HH:MM，精确到分钟级。 */
+  StartTime: string;
+  /** 查询结束时间，格式为YYYY-MM-DD HH:MM，单次查询不超过24h。 */
+  EndTime: string;
 }
 
 declare interface DescribeTrtcRoomUsageResponse {
@@ -1451,25 +1459,25 @@ declare interface StartPublishCdnStreamRequest {
   RoomIdType: number;
   /** 转推服务加入TRTC房间的机器人参数。 */
   AgentParams: AgentParams;
-  /** 是否转码，0表示无需转码，1表示需要转码。 */
+  /** 是否转码，0表示无需转码，1表示需要转码。是否收取转码费是由WithTranscoding参数决定的，WithTranscoding为0，表示旁路转推，不会收取转码费用，WithTranscoding为1，表示混流转推，会收取转吗费用。 */
   WithTranscoding: number;
-  /** 转推流的音频编码参数。 */
+  /** 转推流的音频编码参数。由于音频是必转码的（不会收取转码费用），所以启动任务的时候，必须填写。 */
   AudioParams?: McuAudioParams;
   /** 转推流的视频编码参数，不填表示纯音频转推。 */
   VideoParams?: McuVideoParams;
   /** 需要单流旁路转推的用户上行参数，单流旁路转推时，WithTranscoding需要设置为0。 */
   SingleSubscribeParams?: SingleSubscribeParams;
-  /** 转推的CDN参数。 */
+  /** 转推的CDN参数。和回推房间参数必须要有一个。 */
   PublishCdnParams?: McuPublishCdnParam[];
   /** 混流SEI参数 */
   SeiParams?: McuSeiParams;
-  /** 回推房间信息 */
+  /** 回推房间信息，和转推CDN参数必须要有一个。 */
   FeedBackRoomParams?: McuFeedBackRoomParams[];
 }
 
 declare interface StartPublishCdnStreamResponse {
   /** 用于唯一标识转推任务，由腾讯云服务端生成，后续更新和停止请求都需要携带TaskiD参数。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1537,7 +1545,7 @@ declare interface UpdatePublishCdnStreamRequest {
 
 declare interface UpdatePublishCdnStreamResponse {
   /** 转推任务唯一的String Id */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1584,7 +1592,7 @@ declare interface Trtc {
   /** 查询旁路转码计费时长(旧) {@link DescribeTrtcMcuTranscodeTimeRequest} {@link DescribeTrtcMcuTranscodeTimeResponse} */
   DescribeTrtcMcuTranscodeTime(data: DescribeTrtcMcuTranscodeTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrtcMcuTranscodeTimeResponse>;
   /** 查询TRTC音视频房间维度用量 {@link DescribeTrtcRoomUsageRequest} {@link DescribeTrtcRoomUsageResponse} */
-  DescribeTrtcRoomUsage(data?: DescribeTrtcRoomUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrtcRoomUsageResponse>;
+  DescribeTrtcRoomUsage(data: DescribeTrtcRoomUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrtcRoomUsageResponse>;
   /** 查询TRTC音视频用量 {@link DescribeTrtcUsageRequest} {@link DescribeTrtcUsageResponse} */
   DescribeTrtcUsage(data: DescribeTrtcUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrtcUsageResponse>;
   /** 查询异常体验事件 {@link DescribeUnusualEventRequest} {@link DescribeUnusualEventResponse} */

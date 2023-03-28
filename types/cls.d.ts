@@ -494,6 +494,10 @@ declare interface LogContextInfo {
   BTime: number;
   /** 日志来源主机名称 */
   HostName: string | null;
+  /** 原始日志(仅在日志创建索引异常时有值) */
+  RawLog?: string | null;
+  /** 日志创建索引异常原因(仅在日志创建索引异常时有值) */
+  IndexStatus?: string | null;
 }
 
 /** 日志结果信息 */
@@ -516,6 +520,10 @@ declare interface LogInfo {
   LogJson: string | null;
   /** 日志来源主机名称 */
   HostName: string | null;
+  /** 原始日志(仅在日志创建索引异常时有值) */
+  RawLog?: string | null;
+  /** 日志创建索引异常原因(仅在日志创建索引异常时有值) */
+  IndexStatus?: string | null;
 }
 
 /** 日志中的KV对 */
@@ -1979,25 +1987,27 @@ declare interface SearchLogRequest {
   UseNewAnalysis?: boolean;
   /** 执行统计分析（Query中包含SQL）时，是否对原始日志先进行采样，再进行统计分析。0：自动采样;0～1：按指定采样率采样，例如0.02;1：不采样，即精确分析默认值为1 */
   SamplingRate?: number;
+  /** 检索语法规则，默认值为0。0：Lucene语法，1：CQL语法。详细说明参见https://cloud.tencent.com/document/product/614/47044 */
+  SyntaxRule?: number;
 }
 
 declare interface SearchLogResponse {
   /** 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时 */
-  Context: string;
+  Context?: string;
   /** 符合检索条件的日志是否已全部返回，如未全部返回可使用Context参数获取后续更多日志注意：仅当检索分析语句(Query)不包含SQL时有效 */
-  ListOver: boolean;
+  ListOver?: boolean;
   /** 返回的是否为统计分析（即SQL）结果 */
-  Analysis: boolean;
+  Analysis?: boolean;
   /** 匹配检索条件的原始日志 */
-  Results: LogInfo[] | null;
+  Results?: LogInfo[] | null;
   /** 日志统计分析结果的列名当UseNewAnalysis为false时生效 */
-  ColNames: string[] | null;
+  ColNames?: string[] | null;
   /** 日志统计分析结果当UseNewAnalysis为false时生效 */
-  AnalysisResults: LogItems[] | null;
+  AnalysisResults?: LogItems[] | null;
   /** 日志统计分析结果当UseNewAnalysis为true时生效 */
-  AnalysisRecords: string[] | null;
+  AnalysisRecords?: string[] | null;
   /** 日志统计分析结果的列属性当UseNewAnalysis为true时生效 */
-  Columns: Column[] | null;
+  Columns?: Column[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

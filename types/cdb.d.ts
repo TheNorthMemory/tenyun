@@ -774,6 +774,8 @@ declare interface InstanceInfo {
   EngineType: string | null;
   /** 最大延迟阈值 */
   MaxDelayTime: number | null;
+  /** 实例磁盘类型，仅云盘版实例才返回该值。可能的值为 CLOUD_SSD：SSD云硬盘， CLOUD_HSSD：增强型SSD云硬盘 */
+  DiskType: string;
 }
 
 /** 实例预期重启时间 */
@@ -2687,13 +2689,15 @@ declare interface DescribeDBInstancesRequest {
   ProxyVips?: string[];
   /** 数据库代理 ID 。 */
   ProxyIds?: string[];
+  /** 数据库引擎类型。 */
+  EngineTypes?: string[];
 }
 
 declare interface DescribeDBInstancesResponse {
   /** 符合查询条件的实例总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例详细信息列表。 */
-  Items: InstanceInfo[];
+  Items?: InstanceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3267,9 +3271,9 @@ declare interface DescribeTasksRequest {
 
 declare interface DescribeTasksResponse {
   /** 符合查询条件的实例总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 返回的实例任务信息。 */
-  Items: TaskDetail[];
+  Items?: TaskDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -3071,7 +3071,7 @@ declare interface DescribeDistrictIspDataRequest {
   StartTime: string;
   /** 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间结束时间与起始时间区间最大为 3 小时 */
   EndTime: string;
-  /** 指定查询指标，支持:bandwidth：带宽，单位为 bpsrequest：请求数，单位为 次 */
+  /** 指定查询指标，支持:bandwidth：带宽，单位为 bpsflux：流量，单位为 byterequest：请求数，单位为 次statusCode：状态码，返回 0、2xx、3xx、4xx、5xx 汇总数据，单位为 次2xx：返回 2xx 状态码汇总及各 2 开头状态码数据，单位为 次3xx：返回 3xx 状态码汇总及各 3 开头状态码数据，单位为 次4xx：返回 4xx 状态码汇总及各 4 开头状态码数据，单位为 次5xx：返回 5xx 状态码汇总及各 5 开头状态码数据，单位为 次支持指定具体状态码查询，若未产生过，则返回为空 */
   Metric: string;
   /** 指定省份查询，不填充表示查询所有省份省份、国家/地区编码可以查看 [省份编码映射](https://cloud.tencent.com/document/product/228/6316) */
   Districts?: number[];
@@ -3087,7 +3087,7 @@ declare interface DescribeDistrictIspDataRequest {
 
 declare interface DescribeDistrictIspDataResponse {
   /** 地区运营商数据明细 */
-  Data: DistrictIspInfo[] | null;
+  Data?: DistrictIspInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

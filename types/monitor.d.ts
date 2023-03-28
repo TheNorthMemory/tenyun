@@ -3672,6 +3672,8 @@ declare interface DescribePrometheusClusterAgentsResponse {
   Agents?: PrometheusAgentOverview[];
   /** 被关联集群总量 */
   Total?: number;
+  /** 是否为首次绑定，需要安装预聚合规则 */
+  IsFirstBind?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
