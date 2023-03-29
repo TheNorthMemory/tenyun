@@ -124,7 +124,7 @@ declare interface FileSystemInfo {
   CreationToken: string;
   /** 文件系统 ID */
   FileSystemId: string;
-  /** 文件系统状态 */
+  /** 文件系统状态。取值范围：- creating:创建中- mounting:挂载中- create_failed:创建失败- available:可使用- unserviced:停服中- upgrading:升级中 */
   LifeCycleState: string;
   /** 文件系统已使用容量 */
   SizeByte: number;
@@ -158,7 +158,7 @@ declare interface FileSystemInfo {
   Capacity: number;
   /** 文件系统标签列表 */
   Tags: TagInfo[];
-  /** 文件系统声明周期管理状态 */
+  /** 文件系统生命周期管理状态 */
   TieringState: string;
   /** 分层存储详情 */
   TieringDetail: TieringDetailInfo | null;

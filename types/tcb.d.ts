@@ -1163,11 +1163,11 @@ declare interface CreateCloudBaseRunServerVersionRequest {
 
 declare interface CreateCloudBaseRunServerVersionResponse {
   /** 状态(creating/succ) */
-  Result: string | null;
+  Result?: string | null;
   /** 版本名称（只有Result为succ的时候，才会返回VersionName) */
-  VersionName: string | null;
+  VersionName?: string | null;
   /** 操作记录id */
-  RunId: string | null;
+  RunId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1205,13 +1205,17 @@ declare interface CreatePostpayPackageRequest {
   ExtensionId?: string;
   /** 订单标记。建议使用方统一转大小写之后再判断。QuickStart：快速启动来源Activity：活动来源 */
   Flag?: string;
+  /** 环境别名，无字符类型限制 */
+  EnvAlias?: string;
+  /** 附加字段，用于透传额外的自定义信息 */
+  Extra?: string;
 }
 
 declare interface CreatePostpayPackageResponse {
   /** 后付费订单号 */
-  TranId: string;
+  TranId?: string;
   /** 环境ID */
-  EnvId: string | null;
+  EnvId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1719,83 +1723,83 @@ declare interface DescribeCloudBaseRunServerVersionRequest {
 
 declare interface DescribeCloudBaseRunServerVersionResponse {
   /** 版本名称 */
-  VersionName: string;
+  VersionName?: string;
   /** 备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** Dockefile的路径 */
-  DockerfilePath: string | null;
+  DockerfilePath?: string | null;
   /** DockerBuild的目录 */
-  BuildDir: string | null;
+  BuildDir?: string | null;
   /** 请使用CPUSize */
-  Cpu: number;
+  Cpu?: number;
   /** 请使用MemSize */
-  Mem: number;
+  Mem?: number;
   /** 副本最小值 */
-  MinNum: number;
+  MinNum?: number;
   /** 副本最大值 */
-  MaxNum: number;
+  MaxNum?: number;
   /** 策略类型 */
-  PolicyType: string;
+  PolicyType?: string;
   /** 策略阈值 */
-  PolicyThreshold: number;
+  PolicyThreshold?: number;
   /** 环境变量 */
-  EnvParams: string | null;
+  EnvParams?: string | null;
   /** 创建时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 更新时间 */
-  UpdatedTime: string;
+  UpdatedTime?: string;
   /** 版本的IP */
-  VersionIP: string | null;
+  VersionIP?: string | null;
   /** 版本的端口号 */
-  VersionPort: number | null;
+  VersionPort?: number | null;
   /** 版本状态 */
-  Status: string | null;
+  Status?: string | null;
   /** 代码包的名字 */
-  PackageName: string | null;
+  PackageName?: string | null;
   /** 代码版本的名字 */
-  PackageVersion: string | null;
+  PackageVersion?: string | null;
   /** 枚举（package/repository/image) */
-  UploadType: string | null;
+  UploadType?: string | null;
   /** Repo的类型(gitlab/github/coding) */
-  RepoType: string | null;
+  RepoType?: string | null;
   /** 地址 */
-  Repo: string | null;
+  Repo?: string | null;
   /** 分支 */
-  Branch: string | null;
+  Branch?: string | null;
   /** 服务名字 */
-  ServerName: string | null;
+  ServerName?: string | null;
   /** 是否对于外网开放 */
-  IsPublic: boolean | null;
+  IsPublic?: boolean | null;
   /** vpc id */
-  VpcId: string | null;
+  VpcId?: string | null;
   /** 子网实例id */
-  SubnetIds: string[] | null;
+  SubnetIds?: string[] | null;
   /** 日志采集路径 */
-  CustomLogs: string | null;
+  CustomLogs?: string | null;
   /** 监听端口 */
-  ContainerPort: number | null;
+  ContainerPort?: number | null;
   /** 延迟多长时间开始健康检查（单位s） */
-  InitialDelaySeconds: number | null;
+  InitialDelaySeconds?: number | null;
   /** 镜像地址 */
-  ImageUrl: string | null;
+  ImageUrl?: string | null;
   /** CPU 大小 */
-  CpuSize: number | null;
+  CpuSize?: number | null;
   /** MEM 大小 */
-  MemSize: number | null;
+  MemSize?: number | null;
   /** 是否有Dockerfile：0-default has, 1-has, 2-has not */
-  HasDockerfile: number | null;
+  HasDockerfile?: number | null;
   /** 基础镜像 */
-  BaseImage: string | null;
+  BaseImage?: string | null;
   /** 容器启动入口命令 */
-  EntryPoint: string | null;
+  EntryPoint?: string | null;
   /** 仓库语言 */
-  RepoLanguage: string | null;
+  RepoLanguage?: string | null;
   /** 自动扩缩容策略组 */
-  PolicyDetail: HpaPolicy[] | null;
+  PolicyDetail?: HpaPolicy[] | null;
   /** Tke集群信息 */
-  TkeClusterInfo: TkeClusterInfo | null;
+  TkeClusterInfo?: TkeClusterInfo | null;
   /** 版本工作负载类型；deployment/deamonset */
-  TkeWorkloadType: string | null;
+  TkeWorkloadType?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2687,11 +2691,11 @@ declare interface RollUpdateCloudBaseRunServerVersionRequest {
 
 declare interface RollUpdateCloudBaseRunServerVersionResponse {
   /** succ为成功 */
-  Result: string;
+  Result?: string;
   /** 滚动更新的VersionName */
-  VersionName: string | null;
+  VersionName?: string | null;
   /** 操作记录id */
-  RunId: string | null;
+  RunId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

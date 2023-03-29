@@ -34,6 +34,8 @@ declare interface Subtitle {
   BeginIndex: number;
   /** 该字在整句中的结束位置，从0开始。 */
   EndIndex: number;
+  /** 该字的音素 */
+  Phoneme?: string | null;
 }
 
 declare interface CreateTtsTaskRequest {

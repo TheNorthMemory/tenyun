@@ -5304,8 +5304,8 @@ declare interface DescribeExportMachinesRequest {
 }
 
 declare interface DescribeExportMachinesResponse {
-  /** 任务id */
-  TaskId: string;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6350,10 +6350,10 @@ declare interface DescribeSearchExportListRequest {
 }
 
 declare interface DescribeSearchExportListResponse {
-  /** 导出的任务号 */
-  TaskId: number;
-  /** 下载地址 */
-  DownloadUrl: string;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
+  TaskId?: number;
+  /** 该参数作废 */
+  DownloadUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7023,9 +7023,9 @@ declare interface ExportAttackLogsRequest {
 
 declare interface ExportAttackLogsResponse {
   /** 已废弃 */
-  DownloadUrl: string;
-  /** 导出任务ID 可通过ExportTasks接口下载 */
-  TaskId: string;
+  DownloadUrl?: string;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7044,10 +7044,10 @@ declare interface ExportBaselineEffectHostListRequest {
 }
 
 declare interface ExportBaselineEffectHostListResponse {
-  /** 下载地址 */
-  DownloadUrl: string | null;
-  /** 导出任务id 可通过 ExportTasks接口下载 */
-  TaskId: string;
+  /** 该参数已废弃 */
+  DownloadUrl?: string | null;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7109,9 +7109,9 @@ declare interface ExportBaselineListRequest {
 
 declare interface ExportBaselineListResponse {
   /** 导出文件下载地址（已弃用） */
-  DownloadUrl: string | null;
-  /** 导出文件Id 可通过ExportTasks接口下载 */
-  TaskId: string;
+  DownloadUrl?: string | null;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7147,9 +7147,9 @@ declare interface ExportBashEventsRequest {
 
 declare interface ExportBashEventsResponse {
   /** 导出文件下载链接地址。 */
-  DownloadUrl: string;
-  /** 导出任务ID */
-  TaskId: string;
+  DownloadUrl?: string;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7160,10 +7160,10 @@ declare interface ExportBruteAttacksRequest {
 }
 
 declare interface ExportBruteAttacksResponse {
-  /** 导出文件下载链接地址。 */
-  DownloadUrl: string;
-  /** 导出任务ID */
-  TaskId: string;
+  /** 该参数已废弃 */
+  DownloadUrl?: string;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7174,10 +7174,10 @@ declare interface ExportIgnoreBaselineRuleRequest {
 }
 
 declare interface ExportIgnoreBaselineRuleResponse {
-  /** 文件下载地址 */
-  DownloadUrl: string;
-  /** 导出任务Id , 可通过ExportTasks 接口下载 */
-  TaskId: string;
+  /** 该参数已废弃 */
+  DownloadUrl?: string;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7190,10 +7190,10 @@ declare interface ExportIgnoreRuleEffectHostListRequest {
 }
 
 declare interface ExportIgnoreRuleEffectHostListResponse {
-  /** 导出文件下载地址 */
-  DownloadUrl: string;
-  /** 导出任务Id , 可通过ExportTasks 接口下载 */
-  TaskId: string;
+  /** 该参数已废弃 */
+  DownloadUrl?: string;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7211,9 +7211,9 @@ declare interface ExportLicenseDetailRequest {
 
 declare interface ExportLicenseDetailResponse {
   /** 下载地址,该字段废弃 */
-  DownloadUrl: string;
-  /** 任务ID,可通过任务ID去查下载任务 */
-  TaskId: number;
+  DownloadUrl?: string;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7224,10 +7224,10 @@ declare interface ExportMaliciousRequestsRequest {
 }
 
 declare interface ExportMaliciousRequestsResponse {
-  /** 导出文件下载链接地址。 */
-  DownloadUrl: string;
-  /** 导出任务Id , 可通过ExportTasks 接口下载 */
-  TaskId: string;
+  /** 该参数已废弃 */
+  DownloadUrl?: string;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7246,10 +7246,10 @@ declare interface ExportMalwaresRequest {
 }
 
 declare interface ExportMalwaresResponse {
-  /** 导出文件下载链接地址。 */
-  DownloadUrl: string;
-  /** 任务id */
-  TaskId: string;
+  /** 该参数已废弃 */
+  DownloadUrl?: string;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7260,10 +7260,10 @@ declare interface ExportNonlocalLoginPlacesRequest {
 }
 
 declare interface ExportNonlocalLoginPlacesResponse {
-  /** 导出文件下载链接地址。 */
-  DownloadUrl: string;
-  /** 导出任务ID */
-  TaskId: string;
+  /** 该参数已废弃 */
+  DownloadUrl?: string;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7274,10 +7274,10 @@ declare interface ExportPrivilegeEventsRequest {
 }
 
 declare interface ExportPrivilegeEventsResponse {
-  /** 导出文件下载链接地址。 */
-  DownloadUrl: string;
-  /** 导出任务ID */
-  TaskId: string;
+  /** 该参数已废弃 */
+  DownloadUrl?: string;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7292,8 +7292,8 @@ declare interface ExportProtectDirListRequest {
 }
 
 declare interface ExportProtectDirListResponse {
-  /** 任务ID */
-  TaskId: string;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7304,10 +7304,10 @@ declare interface ExportReverseShellEventsRequest {
 }
 
 declare interface ExportReverseShellEventsResponse {
-  /** 导出文件下载链接地址。 */
-  DownloadUrl: string;
-  /** 任务id */
-  TaskId: string;
+  /** 该参数已废弃 */
+  DownloadUrl?: string;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7322,8 +7322,8 @@ declare interface ExportScanTaskDetailsRequest {
 }
 
 declare interface ExportScanTaskDetailsResponse {
-  /** 导出本次检测Excel的任务Id（不同于入参的本次检测任务id） */
-  TaskId: string;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址(不同于入参的本次检测任务id) */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7362,10 +7362,10 @@ declare interface ExportVulDetectionExcelRequest {
 }
 
 declare interface ExportVulDetectionExcelResponse {
-  /** 导出文件下载链接地址 */
-  DownloadUrl: string;
-  /** 导出本次漏洞检测Excel的任务Id（不同于入参的本次漏洞检测任务id） */
-  TaskId: string;
+  /** 该参数已废弃 */
+  DownloadUrl?: string;
+  /** 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址（不同于入参的本次漏洞检测任务id） */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7987,12 +7987,12 @@ declare interface UpdateBaselineStrategyResponse {
 declare interface UpdateMachineTagsRequest {
   /** 机器 Quuid */
   Quuid: string;
-  /** 服务器地区 如: ap-guangzhou */
-  MachineRegion: string;
-  /** 服务器类型(CVM|BM|ECM|LH|Other) */
-  MachineArea: string;
   /** 标签ID，该操作会覆盖原有的标签列表 */
   TagIds?: number[];
+  /** 服务器地区 如: ap-guangzhou */
+  MachineRegion?: string;
+  /** 服务器类型(CVM|BM|ECM|LH|Other) */
+  MachineArea?: string;
 }
 
 declare interface UpdateMachineTagsResponse {

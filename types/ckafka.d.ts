@@ -3646,11 +3646,13 @@ declare interface ModifyConnectResourceRequest {
   CtsdbConnectParam?: CtsdbModifyConnectParam;
   /** Doris配置，Type为DORIS */
   DorisConnectParam?: DorisModifyConnectParam;
+  /** Kafka配置，Type为 KAFKA 时必填 */
+  KafkaConnectParam?: KafkaConnectParam;
 }
 
 declare interface ModifyConnectResourceResponse {
   /** 连接源的Id */
-  Result: ConnectResourceResourceIdResp;
+  Result?: ConnectResourceResourceIdResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3665,6 +3667,24 @@ declare interface ModifyDatahubTaskRequest {
 declare interface ModifyDatahubTaskResponse {
   /** 任务id */
   Result: DatahubTaskIdRes | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDatahubTopicRequest {
+  /** 名称 */
+  Name: string;
+  /** 消息保留时间，单位：ms，当前最小值为60000ms。 */
+  RetentionMs: number;
+  /** 主题备注，是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线-。 */
+  Note?: string;
+  /** 标签列表 */
+  Tags?: Tag[];
+}
+
+declare interface ModifyDatahubTopicResponse {
+  /** 返回结果集 */
+  Result: JgwOperateResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4031,6 +4051,8 @@ declare interface Ckafka {
   ModifyConnectResource(data: ModifyConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConnectResourceResponse>;
   /** 修改Datahub任务 {@link ModifyDatahubTaskRequest} {@link ModifyDatahubTaskResponse} */
   ModifyDatahubTask(data: ModifyDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatahubTaskResponse>;
+  /** 修改Datahub主题属性 {@link ModifyDatahubTopicRequest} {@link ModifyDatahubTopicResponse} */
+  ModifyDatahubTopic(data: ModifyDatahubTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatahubTopicResponse>;
   /** 设置Groups 消费分组offset {@link ModifyGroupOffsetsRequest} {@link ModifyGroupOffsetsResponse} */
   ModifyGroupOffsets(data: ModifyGroupOffsetsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGroupOffsetsResponse>;
   /** 设置实例属性 {@link ModifyInstanceAttributesRequest} {@link ModifyInstanceAttributesResponse} */

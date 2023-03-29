@@ -3503,17 +3503,17 @@ declare interface DescribeScdnConfigRequest {
 
 declare interface DescribeScdnConfigResponse {
   /** 自定义防护策略配置 */
-  Acl: ScdnAclConfig;
+  Acl?: ScdnAclConfig;
   /** Web 攻击防护（WAF）配置 */
-  Waf: ScdnWafConfig;
+  Waf?: ScdnWafConfig;
   /** CC 防护配置 */
-  CC: ScdnConfig;
+  CC?: ScdnConfig;
   /** DDOS 防护配置 */
-  Ddos: ScdnDdosConfig;
+  Ddos?: ScdnDdosConfig;
   /** BOT 防护配置 */
-  Bot: ScdnBotConfig;
+  Bot?: ScdnBotConfig;
   /** 当前状态，取值online | offline */
-  Status: string | null;
+  Status?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4367,7 +4367,7 @@ declare interface UpdateScdnDomainRequest {
 
 declare interface UpdateScdnDomainResponse {
   /** 提交结果，Success表示成功 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

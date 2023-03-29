@@ -1007,7 +1007,7 @@ declare interface DescribeBillSummaryByTagRequest {
   BeginTime: string;
   /** 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。 */
   EndTime: string;
-  /** 分账标签键 */
+  /** 分账标签键，用户自定义 */
   TagKey: string;
   /** 查询账单数据的用户UIN */
   PayerUin?: string;
@@ -1017,11 +1017,11 @@ declare interface DescribeBillSummaryByTagRequest {
 
 declare interface DescribeBillSummaryByTagResponse {
   /** 数据是否准备好，0未准备好，1准备好 */
-  Ready: number;
+  Ready?: number;
   /** 各标签值花费分布详情 */
-  SummaryOverview: TagSummaryOverviewItem[] | null;
+  SummaryOverview?: TagSummaryOverviewItem[] | null;
   /** 总数 */
-  SummaryTotal: SummaryTotal | null;
+  SummaryTotal?: SummaryTotal | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

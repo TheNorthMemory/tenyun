@@ -128,6 +128,50 @@ declare interface RecordControl {
   StreamControls?: StreamControl[];
 }
 
+/** 实时录制结果 */
+declare interface RecordTaskResult {
+  /** AUTO - 自动停止录制， USER_CALL - 用户主动调用停止录制 */
+  FinishReason: string;
+  /** 异常数 */
+  ExceptionCnt: number;
+  /** 房间号 */
+  RoomId: number;
+  /** 分组 */
+  GroupId: string;
+  /** 录制真实开始时间 */
+  RecordStartTime: number;
+  /** 录制结束时间 */
+  RecordStopTime: number;
+  /** 录制总时长 */
+  TotalTime: number;
+  /** 视频信息列表 */
+  VideoInfos: VideoInfo[];
+  /** 被忽略的视频时间段 */
+  OmittedDurations: OmittedDuration[];
+  /** 详情 */
+  Details: string;
+  /** 任务失败错误码 */
+  ErrorCode: number;
+  /** 错误信息 */
+  ErrorMsg: string;
+}
+
+/** 实时录制任务搜索结果 */
+declare interface RecordTaskSearchResult {
+  /** 任务唯一ID */
+  TaskId: string;
+  /** 实时录制任务状态- PAUSED: 录制已暂停- PREPARED: 录制在准备阶段- RECORDING: 正在录制- STOPPED：录制已停止- FINISHED: 录制已结束 */
+  Status: string;
+  /** 实时录制房间号 */
+  RoomId: number;
+  /** 任务创建时间 */
+  CreateTime: string;
+  /** 用户应用SdkAppId */
+  SdkAppId: number;
+  /** 实时录制结果 */
+  Result: RecordTaskResult;
+}
+
 /** 日志查询里返回的白板房间数据 */
 declare interface RoomListItem {
   /** 房间ID */
@@ -718,6 +762,18 @@ declare interface DescribeQualityMetricsResponse {
   Metric: string;
   /** 时间序列 */
   Content: TimeValue[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRecordSearchRequest {
+}
+
+declare interface DescribeRecordSearchResponse {
+  /** 录制任务搜索结果集合 */
+  RecordTaskSet: RecordTaskSearchResult[];
+  /** 录制总任务数 */
+  TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1409,6 +1465,8 @@ declare interface Tiw {
   DescribePostpaidUsage(data: DescribePostpaidUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostpaidUsageResponse>;
   /** 查询质量数据 {@link DescribeQualityMetricsRequest} {@link DescribeQualityMetricsResponse} */
   DescribeQualityMetrics(data: DescribeQualityMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQualityMetricsResponse>;
+  /** 搜索实时录制任务 {@link DescribeRecordSearchRequest} {@link DescribeRecordSearchResponse} */
+  DescribeRecordSearch(data?: DescribeRecordSearchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordSearchResponse>;
   /** 查询白板房间列表 {@link DescribeRoomListRequest} {@link DescribeRoomListResponse} */
   DescribeRoomList(data: DescribeRoomListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomListResponse>;
   /** 获取白板板书生成任务信息 {@link DescribeSnapshotTaskRequest} {@link DescribeSnapshotTaskResponse} */

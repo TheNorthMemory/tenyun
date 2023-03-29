@@ -5097,7 +5097,7 @@ declare interface Monitor {
   ModifyPrometheusRecordRuleYaml(data: ModifyPrometheusRecordRuleYamlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusRecordRuleYamlResponse>;
   /** 修改模板实例 {@link ModifyPrometheusTempRequest} {@link ModifyPrometheusTempResponse} */
   ModifyPrometheusTemp(data: ModifyPrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusTempResponse>;
-  /** 自定义监控上报数据 {@link PutMonitorDataRequest} {@link PutMonitorDataResponse} */
+  /** @deprecated 自定义监控上报数据 {@link PutMonitorDataRequest} {@link PutMonitorDataResponse} */
   PutMonitorData(data: PutMonitorDataRequest, config?: AxiosRequestConfig): AxiosPromise<PutMonitorDataResponse>;
   /** 恢复 Grafana 实例 {@link ResumeGrafanaInstanceRequest} {@link ResumeGrafanaInstanceResponse} */
   ResumeGrafanaInstance(data: ResumeGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeGrafanaInstanceResponse>;

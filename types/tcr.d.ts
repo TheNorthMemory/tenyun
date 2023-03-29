@@ -2531,7 +2531,7 @@ declare interface Tcr {
   CreateApplicationTriggerPersonal(data: CreateApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationTriggerPersonalResponse>;
   /** 创建镜像加速服务 {@link CreateImageAccelerationServiceRequest} {@link CreateImageAccelerationServiceResponse} */
   CreateImageAccelerationService(data: CreateImageAccelerationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageAccelerationServiceResponse>;
-  /** 创建个人版镜像版本清理策略 {@link CreateImageLifecyclePersonalRequest} {@link CreateImageLifecyclePersonalResponse} */
+  /** @deprecated 创建个人版镜像版本清理策略 {@link CreateImageLifecyclePersonalRequest} {@link CreateImageLifecyclePersonalResponse} */
   CreateImageLifecyclePersonal(data: CreateImageLifecyclePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageLifecyclePersonalResponse>;
   /** 创建镜像不可变规则 {@link CreateImmutableTagRulesRequest} {@link CreateImmutableTagRulesResponse} */
   CreateImmutableTagRules(data: CreateImmutableTagRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImmutableTagRulesResponse>;
@@ -2577,7 +2577,7 @@ declare interface Tcr {
   DeleteImageAccelerateService(data: DeleteImageAccelerateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageAccelerateServiceResponse>;
   /** 删除个人版全局镜像版本自动清理策略 {@link DeleteImageLifecycleGlobalPersonalRequest} {@link DeleteImageLifecycleGlobalPersonalResponse} */
   DeleteImageLifecycleGlobalPersonal(data?: DeleteImageLifecycleGlobalPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageLifecycleGlobalPersonalResponse>;
-  /** 删除个人版镜像仓库Tag自动清理策略 {@link DeleteImageLifecyclePersonalRequest} {@link DeleteImageLifecyclePersonalResponse} */
+  /** @deprecated 删除个人版镜像仓库Tag自动清理策略 {@link DeleteImageLifecyclePersonalRequest} {@link DeleteImageLifecyclePersonalResponse} */
   DeleteImageLifecyclePersonal(data: DeleteImageLifecyclePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageLifecyclePersonalResponse>;
   /** 删除个人版仓库tag {@link DeleteImagePersonalRequest} {@link DeleteImagePersonalResponse} */
   DeleteImagePersonal(data: DeleteImagePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImagePersonalResponse>;

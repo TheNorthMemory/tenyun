@@ -2567,7 +2567,7 @@ declare interface DescribeLiveStreamStateRequest {
 
 declare interface DescribeLiveStreamStateResponse {
   /** 流状态，active：活跃，inactive：非活跃，forbid：禁播。 */
-  StreamState: string;
+  StreamState?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -102,6 +102,14 @@ declare interface AutoSignConfig {
   VerifyChannels?: string[] | null;
 }
 
+/** 应用回调信息 */
+declare interface CallbackInfo {
+  /** 回调url */
+  CallbackUrl: string;
+  /** 回调加密token */
+  Token: string;
+}
+
 /** 此结构体 (Caller) 用于描述调用方属性。 */
 declare interface Caller {
   /** 应用号 */
@@ -1611,6 +1619,12 @@ declare interface GetTaskResultApiResponse {
 }
 
 declare interface ModifyApplicationCallbackInfoRequest {
+  /** 调用方用户信息，userId 必填 */
+  Operator: UserInfo;
+  /** 操作类型：1-新增，2-删除 */
+  OperateType: number;
+  /** 回调信息 */
+  CallbackInfo: CallbackInfo;
 }
 
 declare interface ModifyApplicationCallbackInfoResponse {
@@ -1780,7 +1794,7 @@ declare interface Ess {
   /** 查询转换任务状态 {@link GetTaskResultApiRequest} {@link GetTaskResultApiResponse} */
   GetTaskResultApi(data: GetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskResultApiResponse>;
   /** 修改应用callbackinfo {@link ModifyApplicationCallbackInfoRequest} {@link ModifyApplicationCallbackInfoResponse} */
-  ModifyApplicationCallbackInfo(data?: ModifyApplicationCallbackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationCallbackInfoResponse>;
+  ModifyApplicationCallbackInfo(data: ModifyApplicationCallbackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationCallbackInfoResponse>;
   /** 发起流程 {@link StartFlowRequest} {@link StartFlowResponse} */
   StartFlow(data: StartFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StartFlowResponse>;
   /** 更新集成版员工信息 {@link UpdateIntegrationEmployeesRequest} {@link UpdateIntegrationEmployeesResponse} */

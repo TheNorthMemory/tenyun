@@ -437,11 +437,11 @@ declare interface CheckCertificateChainRequest {
 
 declare interface CheckCertificateChainResponse {
   /** true为通过检查，false为未通过检查。 */
-  IsValid?: boolean;
+  IsValid: boolean;
   /** true为可信CA，false为不可信CA。 */
-  IsTrustedCA?: boolean;
+  IsTrustedCA: boolean;
   /** 包含证书链中每一段证书的通用名称。 */
-  Chains?: string[];
+  Chains: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -521,85 +521,85 @@ declare interface DescribeCertificateDetailRequest {
 
 declare interface DescribeCertificateDetailResponse {
   /** 用户 UIN。 */
-  OwnerUin: string | null;
+  OwnerUin?: string | null;
   /** 项目 ID。 */
-  ProjectId: string | null;
+  ProjectId?: string | null;
   /** 证书来源：trustasia = 亚洲诚信，upload = 用户上传。 */
-  From: string | null;
+  From?: string | null;
   /** 证书类型：CA = 客户端证书，SVR = 服务器证书。 */
-  CertificateType: string | null;
-  /** 证书套餐类型：1 = GeoTrust DV SSL CA - G3， 2 = TrustAsia TLS RSA CA， 3 = SecureSite 增强型企业版（EV Pro）， 4 = SecureSite 增强型（EV）， 5 = SecureSite 企业型专业版（OV Pro）， 6 = SecureSite 企业型（OV）， 7 = SecureSite 企业型（OV）通配符， 8 = Geotrust 增强型（EV）， 9 = Geotrust 企业型（OV）， 10 = Geotrust 企业型（OV）通配符， 11 = TrustAsia 域名型多域名 SSL 证书， 12 = TrustAsia 域名型（DV）通配符， 13 = TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14 = TrustAsia 企业型（OV）SSL 证书（D3）， 15 = TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16 = TrustAsia 增强型 （EV）SSL 证书（D3）， 17 = TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18 = GlobalSign 企业型（OV）SSL 证书， 19 = GlobalSign 企业型通配符 （OV）SSL 证书， 20 = GlobalSign 增强型 （EV）SSL 证书， 21 = TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22 = GlobalSign 企业型多域名（OV）SSL 证书， 23 = GlobalSign 企业型通配符多域名（OV）SSL 证书， 24 = GlobalSign 增强型多域名（EV）SSL 证书，25 = Wotrus 域名型证书，26 = Wotrus 域名型多域名证书，27 = Wotrus 域名型通配符证书，28 = Wotrus 企业型证书，29 = Wotrus 企业型多域名证书，30 = Wotrus 企业型通配符证书，31 = Wotrus 增强型证书，32 = Wotrus 增强型多域名证书，33 = DNSPod 国密域名型证书，34 = DNSPod 国密域名型多域名证书，35 = DNSPod 国密域名型通配符证书，37 = DNSPod 国密企业型证书，38 = DNSPod 国密企业型多域名证书，39 = DNSPod 国密企业型通配符证书，40 = DNSPod 国密增强型证书，41 = DNSPod 国密增强型多域名证书，42 = TrustAsia 域名型通配符多域名证书。 */
-  PackageType: string | null;
+  CertificateType?: string | null;
+  /** 证书套餐类型：null = 用户上传证书（没有套餐类型），1 = GeoTrust DV SSL CA - G3， 2 = TrustAsia TLS RSA CA， 3 = SecureSite 增强型企业版（EV Pro）， 4 = SecureSite 增强型（EV）， 5 = SecureSite 企业型专业版（OV Pro）， 6 = SecureSite 企业型（OV）， 7 = SecureSite 企业型（OV）通配符， 8 = Geotrust 增强型（EV）， 9 = Geotrust 企业型（OV）， 10 = Geotrust 企业型（OV）通配符， 11 = TrustAsia 域名型多域名 SSL 证书， 12 = TrustAsia 域名型（DV）通配符， 13 = TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14 = TrustAsia 企业型（OV）SSL 证书（D3）， 15 = TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16 = TrustAsia 增强型 （EV）SSL 证书（D3）， 17 = TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18 = GlobalSign 企业型（OV）SSL 证书， 19 = GlobalSign 企业型通配符 （OV）SSL 证书， 20 = GlobalSign 增强型 （EV）SSL 证书， 21 = TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22 = GlobalSign 企业型多域名（OV）SSL 证书， 23 = GlobalSign 企业型通配符多域名（OV）SSL 证书， 24 = GlobalSign 增强型多域名（EV）SSL 证书，25 = Wotrus 域名型证书，26 = Wotrus 域名型多域名证书，27 = Wotrus 域名型通配符证书，28 = Wotrus 企业型证书，29 = Wotrus 企业型多域名证书，30 = Wotrus 企业型通配符证书，31 = Wotrus 增强型证书，32 = Wotrus 增强型多域名证书，33 = DNSPod 国密域名型证书，34 = DNSPod 国密域名型多域名证书，35 = DNSPod 国密域名型通配符证书，37 = DNSPod 国密企业型证书，38 = DNSPod 国密企业型多域名证书，39 = DNSPod 国密企业型通配符证书，40 = DNSPod 国密增强型证书，41 = DNSPod 国密增强型多域名证书，42 = TrustAsia 域名型通配符多域名证书。 */
+  PackageType?: string | null;
   /** 颁发者。 */
-  ProductZhName: string | null;
+  ProductZhName?: string | null;
   /** 域名。 */
-  Domain: string | null;
+  Domain?: string | null;
   /** 备注名称。 */
-  Alias: string | null;
+  Alias?: string | null;
   /** 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函，13 = 免费证书待提交资料。 */
-  Status: number | null;
+  Status?: number | null;
   /** 状态信息。 */
-  StatusMsg: string | null;
+  StatusMsg?: string | null;
   /** 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，EMAIL = 邮件验证。 */
-  VerifyType: string | null;
+  VerifyType?: string | null;
   /** 漏洞扫描状态。 */
-  VulnerabilityStatus: string | null;
+  VulnerabilityStatus?: string | null;
   /** 证书生效时间。 */
-  CertBeginTime: string | null;
+  CertBeginTime?: string | null;
   /** 证书失效时间。 */
-  CertEndTime: string | null;
+  CertEndTime?: string | null;
   /** 证书有效期：单位（月）。 */
-  ValidityPeriod: string | null;
+  ValidityPeriod?: string | null;
   /** 申请时间。 */
-  InsertTime: string | null;
+  InsertTime?: string | null;
   /** 订单 ID。 */
-  OrderId: string | null;
+  OrderId?: string | null;
   /** 证书扩展信息。 */
-  CertificateExtra: CertificateExtra | null;
+  CertificateExtra?: CertificateExtra | null;
   /** 证书私钥 */
-  CertificatePrivateKey: string | null;
+  CertificatePrivateKey?: string | null;
   /** 证书公钥（即证书内容） */
-  CertificatePublicKey: string | null;
+  CertificatePublicKey?: string | null;
   /** DV 认证信息。 */
-  DvAuthDetail: DvAuthDetail | null;
+  DvAuthDetail?: DvAuthDetail | null;
   /** 漏洞扫描评估报告。 */
-  VulnerabilityReport: string | null;
+  VulnerabilityReport?: string | null;
   /** 证书 ID。 */
-  CertificateId: string | null;
+  CertificateId?: string | null;
   /** 证书类型名称。 */
-  TypeName: string | null;
+  TypeName?: string | null;
   /** 状态描述。 */
-  StatusName: string | null;
+  StatusName?: string | null;
   /** 证书包含的多个域名（不包含主域名，主域名使用Domain字段） */
-  SubjectAltName: string[] | null;
+  SubjectAltName?: string[] | null;
   /** 是否为付费证书。 */
-  IsVip: boolean | null;
+  IsVip?: boolean | null;
   /** 是否为泛域名证书。 */
-  IsWildcard: boolean | null;
+  IsWildcard?: boolean | null;
   /** 是否为 DV 版证书。 */
-  IsDv: boolean | null;
+  IsDv?: boolean | null;
   /** 是否启用了漏洞扫描功能。 */
-  IsVulnerability: boolean | null;
+  IsVulnerability?: boolean | null;
   /** 提交的资料信息。 */
-  SubmittedData: SubmittedData | null;
+  SubmittedData?: SubmittedData | null;
   /** 是否可续费。 */
-  RenewAble: boolean | null;
+  RenewAble?: boolean | null;
   /** 是否可部署。 */
-  Deployable: boolean | null;
+  Deployable?: boolean | null;
   /** 关联标签列表。 */
-  Tags: Tags[] | null;
+  Tags?: Tags[] | null;
   /** 根证书。 */
-  RootCert: RootCertificates | null;
+  RootCert?: RootCertificates | null;
   /** 国密加密证书 */
-  EncryptCert: string | null;
+  EncryptCert?: string | null;
   /** 国密加密私钥 */
-  EncryptPrivateKey: string | null;
+  EncryptPrivateKey?: string | null;
   /** 签名证书 SHA1指纹 */
-  CertFingerprint: string | null;
+  CertFingerprint?: string | null;
   /** 加密证书 SHA1指纹 （国密证书特有） */
-  EncryptCertFingerprint: string | null;
+  EncryptCertFingerprint?: string | null;
   /** 证书算法 */
-  EncryptAlgorithm: string | null;
+  EncryptAlgorithm?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -747,7 +747,7 @@ declare interface DescribeDeployedResourcesRequest {
 
 declare interface DescribeDeployedResourcesResponse {
   /** 资源详情 */
-  DeployedResources: DeployedResources[];
+  DeployedResources?: DeployedResources[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -798,6 +798,8 @@ declare interface DescribeManagerDetailResponse {
   CompanyId: number;
   /** 管理人ID */
   ManagerId: number;
+  /** 审核状态详细信息 */
+  StatusInfo: ManagerStatusInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -809,13 +811,13 @@ declare interface DescribeManagersRequest {
   Offset?: number;
   /** 分页每页数量 */
   Limit?: number;
-  /** 管理人姓名 */
+  /** 管理人姓名（将废弃），请使用SearchKey */
   ManagerName?: string;
-  /** 模糊查询管理人邮箱 */
+  /** 模糊查询管理人邮箱（将废弃），请使用SearchKey */
   ManagerMail?: string;
   /** 根据管理人状态进行筛选，取值有'none' 未提交审核'audit', 亚信审核中'CAaudit' CA审核中'ok' 已审核'invalid' 审核失败'expiring' 即将过期'expired' 已过期 */
   Status?: string;
-  /** 管理人姓名/邮箱/部门精准匹配 */
+  /** 管理人姓/管理人名/邮箱/部门精准匹配 */
   SearchKey?: string;
 }
 
@@ -923,7 +925,7 @@ declare interface ModifyCertificatesExpiringNotificationSwitchRequest {
 
 declare interface ModifyCertificatesExpiringNotificationSwitchResponse {
   /** 证书ID列表 */
-  CertificateIds: string[];
+  CertificateIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1043,7 +1045,7 @@ declare interface UploadCertificateRequest {
   CertificatePublicKey: string;
   /** 私钥内容，证书类型为 SVR 时必填，为 CA 时可不填。 */
   CertificatePrivateKey?: string;
-  /** 证书类型，默认 SVR。CA = 客户端证书，SVR = 服务器证书。 */
+  /** 证书类型，默认 SVR。CA = CA证书，SVR = 服务器证书。 */
   CertificateType?: string;
   /** 备注名称。 */
   Alias?: string;
