@@ -1615,7 +1615,7 @@ declare interface Trtc {
   RemoveUserByStrRoomId(data: RemoveUserByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserByStrRoomIdResponse>;
   /** 启动云端混流（旧） {@link StartMCUMixTranscodeRequest} {@link StartMCUMixTranscodeResponse} */
   StartMCUMixTranscode(data: StartMCUMixTranscodeRequest, config?: AxiosRequestConfig): AxiosPromise<StartMCUMixTranscodeResponse>;
-  /** 启动云端混流（字符串房间号） {@link StartMCUMixTranscodeByStrRoomIdRequest} {@link StartMCUMixTranscodeByStrRoomIdResponse} */
+  /** 启动云端混流（字符串房间号）（旧） {@link StartMCUMixTranscodeByStrRoomIdRequest} {@link StartMCUMixTranscodeByStrRoomIdResponse} */
   StartMCUMixTranscodeByStrRoomId(data: StartMCUMixTranscodeByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<StartMCUMixTranscodeByStrRoomIdResponse>;
   /** 启动转推任务 {@link StartPublishCdnStreamRequest} {@link StartPublishCdnStreamResponse} */
   StartPublishCdnStream(data: StartPublishCdnStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StartPublishCdnStreamResponse>;

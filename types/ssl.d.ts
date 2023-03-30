@@ -437,11 +437,11 @@ declare interface CheckCertificateChainRequest {
 
 declare interface CheckCertificateChainResponse {
   /** true为通过检查，false为未通过检查。 */
-  IsValid: boolean;
+  IsValid?: boolean;
   /** true为可信CA，false为不可信CA。 */
-  IsTrustedCA: boolean;
+  IsTrustedCA?: boolean;
   /** 包含证书链中每一段证书的通用名称。 */
-  Chains: string[];
+  Chains?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

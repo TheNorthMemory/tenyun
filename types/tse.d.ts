@@ -36,6 +36,16 @@ declare interface CloudNativeAPIGatewayNode {
   NodeId: string;
   /** 节点 ip */
   NodeIp: string;
+  /** Zone id */
+  ZoneId?: string | null;
+  /** Zone */
+  Zone?: string | null;
+  /** 分组ID */
+  GroupId?: string | null;
+  /** 分组名 */
+  GroupName?: string | null;
+  /** 状态 */
+  Status?: string | null;
 }
 
 /** 获取网关节点信息 */

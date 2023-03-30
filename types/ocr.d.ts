@@ -422,6 +422,10 @@ declare interface SingleInvoiceInfo {
 
 /** 智慧表单上传文件信息 */
 declare interface SmartFormFileUrl {
+  /** 文件url地址 */
+  FileUrl: string;
+  /** 文件的顺序，顺序从1开始 */
+  FileOrderNumber: number;
 }
 
 /** 智能结构化识别 */

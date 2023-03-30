@@ -30,6 +30,8 @@ declare interface BrandData {
   InsertTime?: string;
   /** 服务信息 */
   Services?: ServiceData;
+  /** 账号id */
+  Uin?: string;
 }
 
 /** 仿冒应用数据 */

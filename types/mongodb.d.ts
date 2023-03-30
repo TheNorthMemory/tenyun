@@ -997,15 +997,15 @@ declare interface DescribeSlowLogsRequest {
   Offset?: number;
   /** 分页大小，最小值为1，最大值为100，默认值为20。 */
   Limit?: number;
-  /** 慢日志返回格式，可设置为json，不传默认返回原生慢日志格式。 */
+  /** 慢日志返回格式。默认返回原生慢日志格式，4.4及以上版本可设置为json。 */
   Format?: string;
 }
 
 declare interface DescribeSlowLogsResponse {
   /** 慢日志总数 */
-  Count: number;
+  Count?: number;
   /** 慢日志详情 */
-  SlowLogs: string[] | null;
+  SlowLogs?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1077,21 +1077,21 @@ declare interface InquirePriceCreateDBInstancesResponse {
 }
 
 declare interface InquirePriceModifyDBInstanceSpecRequest {
-  /** 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。 */
+  /** 实例 ID，格式如：cmgo-p8vn****。与云数据库控制台页面中显示的实例ID相同。 */
   InstanceId: string;
   /** 变更配置后实例内存大小，单位：GB。 */
   Memory: number;
   /** 变更配置后实例磁盘大小，单位：GB。 */
   Volume: number;
-  /** 实例变更后的节点数，取值范围具体参照查询云数据库的售卖规格返回参数。默认为不变更节点数 */
+  /** 实例节点数。默认为不变更节点数，暂不支持变更。 */
   NodeNum?: number;
-  /** 实例变更后的分片数，取值范围具体参照查询云数据库的售卖规格返回参数。只能增加不能减少，默认为不变更分片数 */
+  /** 实例分片数。默认为不变更分片数，暂不支持变更。 */
   ReplicateSetNum?: number;
 }
 
 declare interface InquirePriceModifyDBInstanceSpecResponse {
   /** 价格。 */
-  Price: DBInstancePrice;
+  Price?: DBInstancePrice;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

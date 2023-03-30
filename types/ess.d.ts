@@ -1153,7 +1153,7 @@ declare interface CreatePreparedPersonalEsignRequest {
   SealName: string;
   /** 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。 */
   Operator?: UserInfo;
-  /** 身份证件类型:ID_CARD 身份证PASSPORT 护照HONGKONG_AND_MACAO 香港身份FOREIGN_ID_CARD 国外身份HONGKONG_MACAO_AND_TAIWAN 港台身份 */
+  /** 身份证件类型:ID_CARD 身份证PASSPORT 护照HONGKONG_AND_MACAO 中国香港FOREIGN_ID_CARD 境外身份HONGKONG_MACAO_AND_TAIWAN 中国台湾 */
   IdCardType?: string;
   /** 手机号码 */
   Mobile?: string;

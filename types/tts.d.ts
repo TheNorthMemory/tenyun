@@ -89,7 +89,7 @@ declare interface TextToVoiceRequest {
   SessionId: string;
   /** 音量大小，范围：[0，10]，分别对应11个等级的音量，默认为0，代表正常音量。没有静音选项。 */
   Volume?: number;
-  /** 语速，范围：[-2，2]，分别对应不同语速：-2代表0.6倍-1代表0.8倍0代表1.0倍（默认）1代表1.2倍2代表1.5倍如果需要更细化的语速，可以保留小数点后一位，例如0.5 1.1 1.8等。 */
+  /** 语速，范围：[-2，6]，分别对应不同语速：-2代表0.6倍-1代表0.8倍0代表1.0倍（默认）1代表1.2倍2代表1.5倍6代表2.5倍如果需要更细化的语速，可以保留小数点后一位，例如0.5 1.1 1.8等。 */
   Speed?: number;
   /** 项目id，用户自定义，默认为0。 */
   ProjectId?: number;
@@ -111,11 +111,11 @@ declare interface TextToVoiceRequest {
 
 declare interface TextToVoiceResponse {
   /** base64编码的wav/mp3音频数据 */
-  Audio: string;
+  Audio?: string;
   /** 一次请求对应一个SessionId */
-  SessionId: string;
+  SessionId?: string;
   /** 时间戳信息，若未开启时间戳，则返回空数组。 */
-  Subtitles: Subtitle[];
+  Subtitles?: Subtitle[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

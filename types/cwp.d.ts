@@ -2794,6 +2794,60 @@ declare interface ReverseShellRule {
   Hostip: string;
 }
 
+/** 恶意请求事件 */
+declare interface RiskDnsEvent {
+  /** 事件Id */
+  Id?: number;
+  /** 策略ID */
+  PolicyId?: number;
+  /** 命中策略类型[-1:未知|0系统|1:用户] */
+  PolicyType?: number;
+  /** 命中策略名称 */
+  PolicyName?: string;
+  /** 保护级别[0:基础版|1:专业版|2:旗舰版] */
+  ProtectLevel?: number;
+  /** 主机ID */
+  HostId?: string;
+  /** 主机名称 */
+  HostName?: string;
+  /** 主机IP */
+  HostIp?: string;
+  /** 外网IP */
+  WanIp?: string;
+  /** 客户端ID */
+  AgentId?: string;
+  /** 访问域名 */
+  Domain?: string;
+  /** 标签特性 */
+  Tags?: string[];
+  /** 访问次数 */
+  AccessCount?: number;
+  /** 威胁描述 */
+  ThreatDesc?: string;
+  /** 修复方案 */
+  SuggestSolution?: string;
+  /** 参考链接 */
+  ReferenceLink?: string;
+  /** 处理状态；[0:待处理|2:已加白|3:非信任状态|4:已处理|5:已忽略] */
+  HandleStatus?: number;
+  /** 进程ID */
+  Pid?: number;
+  /** 进程名 */
+  ProcessName?: string;
+  /** 进程MD5 */
+  ProcessMd5?: string;
+  /** 命令行 */
+  CmdLine?: string;
+  /** 首次访问时间 */
+  FirstTime?: string;
+  /** 最近访问时间 */
+  LastTime?: string;
+  /** 主机在线状态[OFFLINE:离线|ONLINE:在线|UNKNOWN:未知] */
+  HostStatus?: string;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
+}
+
 /** 恶意请求列表 */
 declare interface RiskDnsList {
   /** 对外访问域名 */
@@ -6168,6 +6222,28 @@ declare interface DescribeReverseShellRulesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRiskDnsEventListRequest {
+  /** IpOrName - String - 是否必填：否 - 主机Ip或别名筛选HostId - String - 是否必填：否 - 主机IdAgentId - String - 是否必填：否 - 客户端IdPolicyType - String - 是否必填：否 - 策略类型,0:系统策略1:用户自定义策略Domain - String - 是否必填：否 - 域名(先对域名做urlencode,再base64)HandleStatus - String - 是否必填：否 - 状态筛选0:待处理；2:信任；3:不信任BeginTime - String - 是否必填：否 - 最近访问开始时间EndTime - String - 是否必填：否 - 最近访问结束时间 */
+  Filters?: Filter[];
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 排序方式：根据请求次数排序：[asc:升序|desc:降序] */
+  Order?: string;
+  /** 排序字段：[AccessCount:请求次数|LastTime:最近请求时间] */
+  By?: string;
+}
+
+declare interface DescribeRiskDnsEventListResponse {
+  /** 恶意请求事件列表 */
+  List: RiskDnsEvent[] | null;
+  /** 总数 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRiskDnsListRequest {
   /** 需要返回的数量，默认为10，最大值为100 */
   Limit?: number;
@@ -8315,6 +8391,8 @@ declare interface Cwp {
   DescribeReverseShellEvents(data?: DescribeReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsResponse>;
   /** 获取反弹Shell规则列表 {@link DescribeReverseShellRulesRequest} {@link DescribeReverseShellRulesResponse} */
   DescribeReverseShellRules(data?: DescribeReverseShellRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellRulesResponse>;
+  /** 获取恶意请求事件列表 {@link DescribeRiskDnsEventListRequest} {@link DescribeRiskDnsEventListResponse} */
+  DescribeRiskDnsEventList(data?: DescribeRiskDnsEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskDnsEventListResponse>;
   /** 获取恶意请求列表 {@link DescribeRiskDnsListRequest} {@link DescribeRiskDnsListResponse} */
   DescribeRiskDnsList(data?: DescribeRiskDnsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskDnsListResponse>;
   /** 更新用户告警设置 {@link DescribeSaveOrUpdateWarningsRequest} {@link DescribeSaveOrUpdateWarningsResponse} */

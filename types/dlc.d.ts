@@ -2949,7 +2949,7 @@ declare interface Dlc {
   DescribeDatabases(data?: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
   /** 获取数据引擎资源使用情况 {@link DescribeEngineUsageInfoRequest} {@link DescribeEngineUsageInfoResponse} */
   DescribeEngineUsageInfo(data: DescribeEngineUsageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEngineUsageInfoResponse>;
-  /** 获取被禁用的表属性列表 {@link DescribeForbiddenTableProRequest} {@link DescribeForbiddenTableProResponse} */
+  /** 获取被禁用的表属性列表（新） {@link DescribeForbiddenTableProRequest} {@link DescribeForbiddenTableProResponse} */
   DescribeForbiddenTablePro(data?: DescribeForbiddenTableProRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeForbiddenTableProResponse>;
   /** 查询托管存储指定目录的Summary {@link DescribeLakeFsDirSummaryRequest} {@link DescribeLakeFsDirSummaryResponse} */
   DescribeLakeFsDirSummary(data?: DescribeLakeFsDirSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLakeFsDirSummaryResponse>;
