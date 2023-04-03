@@ -3672,6 +3672,8 @@ declare interface RebuildMediaTaskInput {
   StartTimeOffset: number;
   /** 结束偏移时间，单位：秒，不填表示截取到视频末尾。 */
   EndTimeOffset: number;
+  /** 音画质重生模版号。 */
+  Definition?: number;
   /** 画质修复控制参数。 */
   RepairInfo: RepairInfo;
   /** 智能插帧控制参数。 */

@@ -889,9 +889,9 @@ declare interface CreateInstanceSnapshotResponse {
 }
 
 declare interface CreateInstancesRequest {
-  /** 套餐ID。 */
+  /** 套餐ID。可以通过调用 [查询套餐](https://cloud.tencent.com/document/api/1207/47575) 接口获取。 */
   BundleId: string;
-  /** 镜像ID。 */
+  /** 镜像ID。可以通过调用 [查询镜像信息](https://cloud.tencent.com/document/api/1207/47689) 接口获取。 */
   BlueprintId: string;
   /** 当前实例仅支持预付费模式，即包年包月相关参数设置，单位（月）。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。该参数必传。 */
   InstanceChargePrepaid: InstanceChargePrepaid;
@@ -915,7 +915,7 @@ declare interface CreateInstancesRequest {
 
 declare interface CreateInstancesResponse {
   /** 当通过本接口来创建实例时会返回该参数，表示一个或多个实例ID。返回实例ID列表并不代表实例创建成功。可根据 DescribeInstances 接口查询返回的InstancesSet中对应实例的ID的状态来判断创建是否完成；如果实例状态由“启动中”变为“运行中”，则为创建成功。 */
-  InstanceIdSet: string[];
+  InstanceIdSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

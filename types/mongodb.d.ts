@@ -887,40 +887,40 @@ declare interface DescribeDBInstanceNodePropertyResponse {
 }
 
 declare interface DescribeDBInstancesRequest {
-  /** 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
+  /** 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。 */
   InstanceIds?: string[];
-  /** 实例类型，取值范围：0-所有实例,1-正式实例，2-临时实例, 3-只读实例，-1-正式实例+只读+灾备实例 */
+  /** 实例类型。取值范围如下：0：所有实例。1：正式实例。2：临时实例。3：只读实例。-1：正式实例、只读、灾备实例。 */
   InstanceType?: number;
-  /** 集群类型，取值范围：0-副本集实例，1-分片实例，-1-所有实例 */
+  /** 集群类型，取值范围如下：0：副本集实例。1：分片实例。-1：所有实例。 */
   ClusterType?: number;
-  /** 实例状态，取值范围：0-待初始化，1-流程执行中，2-实例有效，-2-已隔离（包年包月实例），-3-已隔离（按量计费实例） */
+  /** 实例状态，取值范围如下所示：0：待初始化。1：流程执行中。2：实例有效。-2：已隔离（包年包月实例）。-3：已隔离（按量计费实例）。 */
   Status?: number[];
-  /** 私有网络的ID，基础网络则不传该参数 */
+  /** 私有网络的ID，基础网络则不传该参数。 */
   VpcId?: string;
-  /** 私有网络的子网ID，基础网络则不传该参数。入参设置该参数的同时，必须设置相应的VpcId */
+  /** 私有网络的子网ID，基础网络则不传该参数。入参设置该参数的同时，必须设置相应的VpcId。 */
   SubnetId?: string;
-  /** 付费类型，取值范围：0-按量计费，1-包年包月，-1-按量计费+包年包月 */
+  /** 付费类型，取值范围如下：0：查询按量计费实例。1：查询包年包月实例。-1：查询按量计费与包年包月实例。 */
   PayMode?: number;
-  /** 单次请求返回的数量，最小值为1，最大值为100，默认值为20 */
+  /** 单次请求返回的数量。默认值为20，取值范围为[1,100]。 */
   Limit?: number;
-  /** 偏移量，默认值为0 */
+  /** 偏移量，默认值为0。 */
   Offset?: number;
-  /** 返回结果集排序的字段，目前支持："ProjectId", "InstanceName", "CreateTime"，默认为升序排序 */
+  /** 返回结果集排序的字段，目前支持："ProjectId"、"InstanceName"、"CreateTime"，默认为升序排序。 */
   OrderBy?: string;
-  /** 返回结果集排序方式，目前支持："ASC"或者"DESC" */
+  /** 返回结果集排序方式，目前支持："ASC"或者"DESC"。 */
   OrderByType?: string;
-  /** 项目 ID */
+  /** 项目 ID。 */
   ProjectIds?: number[];
-  /** 搜索关键词，支持实例ID、实例名称、完整IP */
+  /** 搜索关键词，支持实例ID、实例名称、完整IP。 */
   SearchKey?: string;
-  /** Tag信息 */
-  Tags?: TagInfo;
+  /** Tag信息。 */
+  Tags?: TagInfo[];
 }
 
 declare interface DescribeDBInstancesResponse {
-  /** 符合查询条件的实例总数 */
+  /** 符合查询条件的实例总数。 */
   TotalCount: number;
-  /** 实例详细信息列表 */
+  /** 实例详细信息列表。 */
   InstanceDetails: InstanceDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

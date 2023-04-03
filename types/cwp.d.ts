@@ -1634,6 +1634,64 @@ declare interface BashEventNew {
   MachineExtraInfo?: MachineExtraInfo | null;
 }
 
+/** 高危命令数据详情(新) */
+declare interface BashEventsInfoNew {
+  /** 数据ID */
+  Id: number;
+  /** 云镜ID */
+  Uuid: string;
+  /** 主机ID */
+  Quuid: string;
+  /** 主机内网IP */
+  HostIp: string;
+  /** 平台类型 */
+  Platform: number;
+  /** 执行命令 */
+  BashCmd: string;
+  /** 规则ID,等于0表示已规则已被删除或生效范围已修改 */
+  RuleId: number;
+  /** 规则名称 */
+  RuleName: string;
+  /** 规则等级：1-高 2-中 3-低 */
+  RuleLevel: number;
+  /** 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3= 已忽略 */
+  Status: number;
+  /** 发生时间 */
+  CreateTime: string;
+  /** 主机名 */
+  MachineName: string;
+  /** 进程名称 */
+  Exe: string | null;
+  /** 处理时间 */
+  ModifyTime: string | null;
+  /** 规则类别 0=系统规则，1=用户规则 */
+  RuleCategory: number | null;
+  /** 自动生成的正则表达式 */
+  RegexBashCmd: string | null;
+  /** 进程树 json pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源 */
+  PsTree: string | null;
+  /** 建议方案 */
+  SuggestScheme: string | null;
+  /** 描述 */
+  HarmDescribe: string | null;
+  /** 标签 */
+  Tags: string[] | null;
+  /** 参考链接 */
+  References: string[] | null;
+  /** 主机外网ip */
+  MachineWanIp: string | null;
+  /** 主机在线状态 OFFLINE ONLINE */
+  MachineStatus: string | null;
+  /** 登录用户 */
+  User: string | null;
+  /** 进程号 */
+  Pid: string | null;
+  /** 0:普通 1:专业版 2:旗舰版 */
+  MachineType: number | null;
+  /** 检测来源 0:bash日志 1:实时监控 */
+  DetectBy: number | null;
+}
+
 /** 高危命令规则 */
 declare interface BashRule {
   /** 规则ID */
@@ -5108,6 +5166,18 @@ declare interface DescribeBaselineWeakPasswordListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBashEventsInfoNewRequest {
+  /** 事件id */
+  Id: number;
+}
+
+declare interface DescribeBashEventsInfoNewResponse {
+  /** 事件详情 */
+  BashEventsInfo: BashEventsInfoNew | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBashEventsNewRequest {
   /** 返回数量，默认为10，最大值为100。 */
   Limit?: number;
@@ -8285,6 +8355,8 @@ declare interface Cwp {
   DescribeBaselineWeakPasswordList(data?: DescribeBaselineWeakPasswordListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineWeakPasswordListResponse>;
   /** 获取高危命令列表 {@link DescribeBashEventsRequest} {@link DescribeBashEventsResponse} */
   DescribeBashEvents(data?: DescribeBashEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashEventsResponse>;
+  /** 高危命令详情(新) {@link DescribeBashEventsInfoNewRequest} {@link DescribeBashEventsInfoNewResponse} */
+  DescribeBashEventsInfoNew(data: DescribeBashEventsInfoNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashEventsInfoNewResponse>;
   /** 获取高危命令列表(新) {@link DescribeBashEventsNewRequest} {@link DescribeBashEventsNewResponse} */
   DescribeBashEventsNew(data?: DescribeBashEventsNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBashEventsNewResponse>;
   /** 获取高危命令规则列表 {@link DescribeBashRulesRequest} {@link DescribeBashRulesResponse} */

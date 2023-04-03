@@ -505,11 +505,13 @@ declare interface DescribeInstanceKeyValConfigsResponse {
 declare interface DescribeInstanceRequest {
   /** 集群实例ID */
   InstanceId: string;
+  /** 是否是open api查询 */
+  IsOpenApi?: boolean;
 }
 
 declare interface DescribeInstanceResponse {
   /** 实例描述信息 */
-  InstanceInfo: InstanceInfo;
+  InstanceInfo?: InstanceInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -522,6 +524,28 @@ declare interface DescribeInstanceShardsRequest {
 declare interface DescribeInstanceShardsResponse {
   /** 实例shard信息 */
   InstanceShardsList: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceStateRequest {
+  /** 集群实例名称 */
+  InstanceId: string;
+}
+
+declare interface DescribeInstanceStateResponse {
+  /** 集群状态，例如：Serving */
+  InstanceState?: string;
+  /** 集群操作创建时间 */
+  FlowCreateTime?: string | null;
+  /** 集群操作名称 */
+  FlowName?: string | null;
+  /** 集群操作进度 */
+  FlowProgress?: number | null;
+  /** 集群状态描述，例如：运行中 */
+  InstanceStateDesc?: string | null;
+  /** 集群流程错误信息，例如：“创建失败，资源不足” */
+  FlowMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -719,6 +743,8 @@ declare interface Cdwch {
   DescribeInstanceKeyValConfigs(data: DescribeInstanceKeyValConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceKeyValConfigsResponse>;
   /** 获取实例shard信息列表 {@link DescribeInstanceShardsRequest} {@link DescribeInstanceShardsResponse} */
   DescribeInstanceShards(data: DescribeInstanceShardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceShardsResponse>;
+  /** 获取集群实例状态 {@link DescribeInstanceStateRequest} {@link DescribeInstanceStateResponse} */
+  DescribeInstanceState(data: DescribeInstanceStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceStateResponse>;
   /** 获取集群规格 {@link DescribeSpecRequest} {@link DescribeSpecResponse} */
   DescribeSpec(data: DescribeSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecResponse>;
   /** 销毁集群api {@link DestroyInstanceRequest} {@link DestroyInstanceResponse} */

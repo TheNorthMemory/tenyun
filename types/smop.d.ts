@@ -18,7 +18,7 @@ declare interface TaskEventData {
   TaskCoinNumber?: number | null;
   /** 任务类型后台代码 */
   TaskType?: number | null;
-  /** 当前积分/成长值 */
+  /** 当前积分 */
   TotalCoin?: number | null;
   /** 用户透传的代码块 */
   Attach?: string | null;
@@ -28,6 +28,8 @@ declare interface TaskEventData {
   TotalTimes?: number | null;
   /** 任务名称 */
   TaskName?: string | null;
+  /** 当前成长值 */
+  GrowScore?: number | null;
 }
 
 declare interface SubmitTaskEventRequest {
@@ -39,7 +41,7 @@ declare interface SubmitTaskEventRequest {
   OrderId: string;
   /** 任务事件Code */
   Code: string;
-  /** 同步异步方式 */
+  /** 同步异步方式：0为同步、1位异步 */
   Async: number;
   /** 产品ID */
   ProductId: number;

@@ -621,7 +621,7 @@ declare interface CreateDisksRequest {
 
 declare interface CreateDisksResponse {
   /** 创建的云硬盘ID列表。 */
-  DiskIdSet: string[];
+  DiskIdSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

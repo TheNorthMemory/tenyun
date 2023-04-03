@@ -2,6 +2,28 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 房间问答问题详情 */
+declare interface AnswerInfo {
+  /** 用户名 */
+  Name?: string;
+  /** 答案（按照位表示是否选择，如0x1表示选择A，0x11表示选择AB） */
+  Answer?: number;
+  /** 答题用时 */
+  CostTime?: number;
+  /** 用户ID */
+  UserId?: string;
+  /** 答案是否正确（1正确0错误） */
+  IsCorrect?: number;
+}
+
+/** 每个选项答题人数统计 */
+declare interface AnswerStat {
+  /** 选项（按照位表示是否选择，如0x1表示选择A，0x11表示选择AB） */
+  Answer?: number;
+  /** 答题人数 */
+  Count?: number;
+}
+
 /** 应用配置信息 */
 declare interface AppConfig {
 }
@@ -164,6 +186,20 @@ declare interface MessageList {
   Seq?: number | null;
   /** 历史消息列表 */
   MessageBody?: MessageItem[] | null;
+}
+
+/** 房间问答答案详情 */
+declare interface QuestionInfo {
+  /** 问题ID */
+  QuestionId?: string;
+  /** 问题内容 */
+  QuestionContent?: string;
+  /** 倒计时答题设置的秒数（0 表示不计时） */
+  Duration?: number;
+  /** 正确答案（按照位表示是否选择，如0x1表示选择A，0x11表示选择AB） */
+  CorrectAnswer?: number;
+  /** 每个选项答题人数统计 */
+  AnswerStats?: AnswerStat[] | null;
 }
 
 /** 批量创建房间的房间信息 */
@@ -545,6 +581,24 @@ declare interface DeleteRoomResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAnswerListRequest {
+  /** 问题ID */
+  QuestionId: string;
+  /** 1 */
+  Page?: number;
+  /** 100 */
+  Limit?: number;
+}
+
+declare interface DescribeAnswerListResponse {
+  /** 符合查询条件的房间答案总数 */
+  Total?: number;
+  /** 房间提问答案列表 */
+  AnswerInfo?: AnswerInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAppDetailRequest {
   /** 应用ID。低代码互动课堂的SdkAppId。 */
   ApplicationId: string;
@@ -585,6 +639,8 @@ declare interface DescribeDeveloperRequest {
 }
 
 declare interface DescribeDeveloperResponse {
+  /** 服务商ID */
+  DeveloperId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -715,6 +771,24 @@ declare interface DescribeGroupResponse {
   RequestId?: string;
 }
 
+declare interface DescribeQuestionListRequest {
+  /** 房间ID */
+  RoomId: number;
+  /** 分页查询当前页数，从1开始递增，默认值为1 */
+  Page?: number;
+  /** 分页查询当前页数，从1开始递增，默认值为1 */
+  Limit?: number;
+}
+
+declare interface DescribeQuestionListResponse {
+  /** 符合查询条件的房间问答问题总数 */
+  Total?: number;
+  /** 房间问答问题列表 */
+  QuestionInfo?: QuestionInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRoomRequest {
   /** 房间Id。 */
   RoomId: number;
@@ -799,6 +873,28 @@ declare interface DescribeSdkAppIdUsersResponse {
   Total?: number;
   /** 当前获取用户信息数组列表 */
   Users?: UserInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSupervisorsRequest {
+  /** 低代码互动课堂的SdkAppId。 */
+  SdkAppId: number;
+  /** 每页数据量，最大100。 不填默认20. */
+  Limit?: number;
+  /** 分页查询当前页数，从1开始递增，不填默认为1。 */
+  Page?: number;
+}
+
+declare interface DescribeSupervisorsResponse {
+  /** 数据总量 */
+  Total?: number;
+  /** 分页查询当前页数 */
+  Page?: number;
+  /** 当前页数据量 */
+  Limit?: number;
+  /** 巡课列表 */
+  UserIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1110,6 +1206,8 @@ declare interface Lcic {
   DeleteRecord(data: DeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordResponse>;
   /** 删除房间 {@link DeleteRoomRequest} {@link DeleteRoomResponse} */
   DeleteRoom(data: DeleteRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoomResponse>;
+  /** 获取房间答题详情 {@link DescribeAnswerListRequest} {@link DescribeAnswerListResponse} */
+  DescribeAnswerList(data: DescribeAnswerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnswerListResponse>;
   /** 获取应用详情 {@link DescribeAppDetailRequest} {@link DescribeAppDetailResponse} */
   DescribeAppDetail(data: DescribeAppDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppDetailResponse>;
   /** 获取当前房间的成员列表 {@link DescribeCurrentMemberListRequest} {@link DescribeCurrentMemberListResponse} */
@@ -1126,12 +1224,16 @@ declare interface Lcic {
   DescribeGroupList(data: DescribeGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupListResponse>;
   /** 获取群组成员列表 {@link DescribeGroupMemberListRequest} {@link DescribeGroupMemberListResponse} */
   DescribeGroupMemberList(data: DescribeGroupMemberListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupMemberListResponse>;
+  /** 获取课堂提问列表 {@link DescribeQuestionListRequest} {@link DescribeQuestionListResponse} */
+  DescribeQuestionList(data: DescribeQuestionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuestionListResponse>;
   /** 获取房间信息 {@link DescribeRoomRequest} {@link DescribeRoomResponse} */
   DescribeRoom(data: DescribeRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomResponse>;
   /** 获取房间统计信息 {@link DescribeRoomStatisticsRequest} {@link DescribeRoomStatisticsResponse} */
   DescribeRoomStatistics(data: DescribeRoomStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomStatisticsResponse>;
   /** 获取应用ID下用户列表 {@link DescribeSdkAppIdUsersRequest} {@link DescribeSdkAppIdUsersResponse} */
   DescribeSdkAppIdUsers(data: DescribeSdkAppIdUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSdkAppIdUsersResponse>;
+  /** 获取巡课列表 {@link DescribeSupervisorsRequest} {@link DescribeSupervisorsResponse} */
+  DescribeSupervisors(data: DescribeSupervisorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupervisorsResponse>;
   /** 获取用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
   DescribeUser(data: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
   /** 获取房间事件 {@link GetRoomEventRequest} {@link GetRoomEventResponse} */

@@ -910,6 +910,8 @@ declare interface DetailDomain {
   QnPrivateAccess: QnPrivateAccess | null;
   /** HTTPS服务，缺省时默认开启 */
   HttpsBilling: HttpsBilling | null;
+  /** 其他厂商对象存储回源鉴权 */
+  OthersPrivateAccess?: OthersPrivateAccess | null;
 }
 
 /** 诊断报告内容数据 */
@@ -1575,6 +1577,20 @@ declare interface OssPrivateAccess {
   /** 地域 */
   Region?: string | null;
   /** Bucketname */
+  Bucket?: string | null;
+}
+
+/** 其他厂商对象存储回源鉴权 */
+declare interface OthersPrivateAccess {
+  /** 开关， on/off。 */
+  Switch: string;
+  /** 访问ID。 */
+  AccessKey?: string | null;
+  /** 密钥。 */
+  SecretKey?: string | null;
+  /** 地域。 */
+  Region?: string | null;
+  /** 存储桶名称。 */
   Bucket?: string | null;
 }
 
@@ -2653,7 +2669,9 @@ declare interface AddCdnDomainRequest {
   HwPrivateAccess?: HwPrivateAccess;
   /** 七牛云对象存储回源鉴权 */
   QnPrivateAccess?: QnPrivateAccess;
-  /** HTTPS服务 */
+  /** 其他厂商对象存储回源鉴权 */
+  OthersPrivateAccess?: OthersPrivateAccess;
+  /** HTTPS服务，默认开启（收费服务，详见计费说明和产品文档） */
   HttpsBilling?: HttpsBilling;
 }
 
@@ -4311,7 +4329,9 @@ declare interface UpdateDomainConfigRequest {
   HwPrivateAccess?: HwPrivateAccess;
   /** 七牛云对象存储回源鉴权 */
   QnPrivateAccess?: QnPrivateAccess;
-  /** HTTPS服务 */
+  /** 其他厂商对象存储回源鉴权 */
+  OthersPrivateAccess?: OthersPrivateAccess;
+  /** HTTPS服务（收费服务，详见计费说明和产品文档） */
   HttpsBilling?: HttpsBilling;
 }
 

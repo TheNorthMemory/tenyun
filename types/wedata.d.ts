@@ -574,6 +574,8 @@ declare interface InLongAgentDetail {
   CvmAgentStatusList: CvmAgentStatus[] | null;
   /** agent数量 */
   AgentTotal: number | null;
+  /** 生命周期 */
+  LifeDays?: number | null;
 }
 
 /** 采集器关联的集成任务 */
@@ -3853,15 +3855,15 @@ declare interface DescribeInLongAgentListRequest {
 
 declare interface DescribeInLongAgentListResponse {
   /** 采集器信息列表 */
-  Items: InLongAgentDetail[];
+  Items?: InLongAgentDetail[];
   /** 页码 */
-  PageIndex: number;
+  PageIndex?: number;
   /** 每页记录数 */
-  PageSize: number;
+  PageSize?: number;
   /** 总记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 总页数 */
-  TotalPage: number;
+  TotalPage?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

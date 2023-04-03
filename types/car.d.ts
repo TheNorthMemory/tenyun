@@ -48,6 +48,26 @@ declare interface DestroySessionResponse {
   RequestId?: string;
 }
 
+declare interface StartPublishStreamRequest {
+  /** 唯一用户身份标识，由业务方自定义，平台不予理解。（UserId将作为StreamId进行推流，比如绑定推流域名为abc.livepush.myqcloud.com，那么推流地址为rtmp://abc.livepush.myqcloud.com/live/UserId?txSecret=xxx&txTime=xxx） */
+  UserId: string;
+}
+
+declare interface StartPublishStreamResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopPublishStreamRequest {
+  /** 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变） */
+  UserId: string;
+}
+
+declare interface StopPublishStreamResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Car 应用云渲染} */
 declare interface Car {
   (): Versions;
@@ -57,6 +77,10 @@ declare interface Car {
   CreateSession(data: CreateSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSessionResponse>;
   /** 销毁会话 {@link DestroySessionRequest} {@link DestroySessionResponse} */
   DestroySession(data: DestroySessionRequest, config?: AxiosRequestConfig): AxiosPromise<DestroySessionResponse>;
+  /** 开始云端推流 {@link StartPublishStreamRequest} {@link StartPublishStreamResponse} */
+  StartPublishStream(data: StartPublishStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StartPublishStreamResponse>;
+  /** 停止云端推流 {@link StopPublishStreamRequest} {@link StopPublishStreamResponse} */
+  StopPublishStream(data: StopPublishStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StopPublishStreamResponse>;
 }
 
 export declare type Versions = ["2022-01-10"];
