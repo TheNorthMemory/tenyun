@@ -606,6 +606,14 @@ declare interface Strategy {
   Arg: string;
 }
 
+/** Vip信息 */
+declare interface VipInfo {
+  /** Virtual IP */
+  Vip?: string | null;
+  /** waf实例id */
+  InstanceId?: string | null;
+}
+
 /** waf模块的规格 */
 declare interface WafRuleLimit {
   /** 自定义CC的规格 */
@@ -1216,6 +1224,18 @@ declare interface DescribeUserClbWafRegionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVipInfoRequest {
+  /** waf实例id列表 */
+  InstanceIds: string[];
+}
+
+declare interface DescribeVipInfoResponse {
+  /** VIP信息 */
+  VipInfo?: VipInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeWafAutoDenyRulesRequest {
   /** 域名 */
   Domain: string;
@@ -1551,6 +1571,8 @@ declare interface Waf {
   DescribeUserCdcClbWafRegions(data?: DescribeUserCdcClbWafRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCdcClbWafRegionsResponse>;
   /** 获取对客户已经开放的负载均衡型WAF(clb-waf)的地域 {@link DescribeUserClbWafRegionsRequest} {@link DescribeUserClbWafRegionsResponse} */
   DescribeUserClbWafRegions(data?: DescribeUserClbWafRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserClbWafRegionsResponse>;
+  /** 查询VIP信息 {@link DescribeVipInfoRequest} {@link DescribeVipInfoResponse} */
+  DescribeVipInfo(data: DescribeVipInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVipInfoResponse>;
   /** 查询ip惩罚规则 {@link DescribeWafAutoDenyRulesRequest} {@link DescribeWafAutoDenyRulesResponse} */
   DescribeWafAutoDenyRules(data: DescribeWafAutoDenyRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafAutoDenyRulesResponse>;
   /** 描述WAF自动封禁模块详情 {@link DescribeWafAutoDenyStatusRequest} {@link DescribeWafAutoDenyStatusResponse} */

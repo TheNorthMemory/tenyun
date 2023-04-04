@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 230+ 款产品，9295+ 服务数</summary>
+<details><summary>共计 230+ 款产品，9303+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -174,7 +174,7 @@ dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-
 dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(44) | 2019-10-16(27) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(21) |
-dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(65) |
+dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(66) |
 dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(86) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(65) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(26) |
@@ -259,7 +259,7 @@ region | [地域管理系统](https://cloud.tencent.com/document/product/1596) |
 rkp | [风险探针](https://cloud.tencent.com/document/product/1169) | 2019-12-09(3) |
 rp | [注册保护](https://cloud.tencent.com/document/product/1191) | 2020-02-24(1) |
 rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(61) |
-scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(44+7) |
+scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(45+7) |
 ses | [邮件推送](https://cloud.tencent.com/document/product/1288) | 2020-10-02(26) |
 smh | [智能媒资托管](https://cloud.tencent.com/document/product/1339) | 2021-07-12(10) |
 smop | [腾讯安心用户运营平台](https://cloud.tencent.com/document/product/1310) | 2020-12-03(1) |
@@ -318,9 +318,9 @@ tts | [语音合成](https://cloud.tencent.com/document/product/1073) | 2019-08-
 ump | [客流数字化平台](https://cloud.tencent.com/document/product/1320) | 2020-09-18(17) |
 vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 2021-09-22(4) | 2020-12-29(4)<br/>2020-07-09(5) |
 vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-02(2) |
-vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(144) |
+vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(149) |
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(302) |
-waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(43) |
+waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(44) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(24) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(195) |
 wss | SSL证书管理服务 | 2018-04-26(3) |

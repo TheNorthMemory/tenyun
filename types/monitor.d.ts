@@ -971,11 +971,15 @@ declare interface EventCondition {
 /** 查询过滤参数 */
 declare interface Filter {
   /** 过滤方式（=, !=, in） */
-  Type: string;
+  Type?: string;
   /** 过滤维度名 */
-  Key: string;
+  Key?: string;
   /** 过滤值，in过滤方式用逗号分割多个值 */
-  Value: string;
+  Value?: string;
+  /** 过滤条件名称 */
+  Name?: string | null;
+  /** 过滤条件取值范围 */
+  Values?: string[] | null;
 }
 
 /** Grafana可视化服务 授权账户信息 */
@@ -1724,6 +1728,10 @@ declare interface PrometheusInstancesOverview {
   BoundTotal: number;
   /** 绑定集群正常状态总数 */
   BoundNormal: number;
+  /** 资源包状态，0-无可用资源包，1-有可用资源包 */
+  ResourcePackageStatus?: number | null;
+  /** 资源包规格名称 */
+  ResourcePackageSpecName?: string | null;
 }
 
 /** prometheus一个job的targets */

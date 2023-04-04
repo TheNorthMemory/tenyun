@@ -1694,6 +1694,28 @@ declare interface UpdateNamespaceResponse {
   RequestId?: string;
 }
 
+declare interface UpdateTriggerStatusRequest {
+  /** 触发器的初始是能状态OPEN表示开启 CLOSE表示关闭 */
+  Enable: string;
+  /** 函数名称 */
+  FunctionName: string;
+  /** 触发器名称 */
+  TriggerName: string;
+  /** 触发器类型 */
+  Type: string;
+  /** 函数的版本，默认为 $LATEST，建议填写 [$DEFAULT](https://cloud.tencent.com/document/product/583/36149)方便后续进行版本的灰度发布。 */
+  Qualifier?: string;
+  /** 函数的命名空间 */
+  Namespace?: string;
+  /** 如果更新的触发器类型为 COS 触发器，该字段为必填值，存放 JSON 格式的数据 {"event":"cos:ObjectCreated:*"}，数据内容和 SetTrigger 接口中该字段的格式相同；如果更新的触发器类型为定时触发器或 CMQ 触发器，可以不指定该字段 */
+  TriggerDesc?: string;
+}
+
+declare interface UpdateTriggerStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Scf 云函数} */
 declare interface Scf {
   (): Versions;
@@ -1785,6 +1807,8 @@ declare interface Scf {
   UpdateFunctionEventInvokeConfig(data: UpdateFunctionEventInvokeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFunctionEventInvokeConfigResponse>;
   /** 更新命名空间 {@link UpdateNamespaceRequest} {@link UpdateNamespaceResponse} */
   UpdateNamespace(data: UpdateNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateNamespaceResponse>;
+  /** 更新触发器状态 {@link UpdateTriggerStatusRequest} {@link UpdateTriggerStatusResponse} */
+  UpdateTriggerStatus(data: UpdateTriggerStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTriggerStatusResponse>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   BatchCreateTrigger(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.3](https://www.npmjs.com/package/@wxcloud/cloudapi) */

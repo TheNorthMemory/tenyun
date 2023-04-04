@@ -614,7 +614,7 @@ declare interface ExceptUserRuleCondition {
 declare interface ExceptUserRuleScope {
   /** 例外规则类型。其中complete模式代表全量数据进行例外，partial模式代表可选择指定模块指定字段进行例外，该字段取值有：complete：完全跳过模式；partial：部分跳过模式。 */
   Type?: string;
-  /** 生效的模块，该字段取值有：waf：托管规则；cc：速率限制规则；bot：Bot防护。 */
+  /** 生效的模块，该字段取值有：waf：托管规则；rate：速率限制；acl：自定义规则；cc：cc攻击防护；bot：Bot防护。 */
   Modules?: string[] | null;
   /** 跳过部分规则ID的例外规则详情。如果为null，默认使用历史配置。 */
   PartialModules?: PartialModule[] | null;
@@ -2813,7 +2813,7 @@ declare interface DescribeSpeedTestingQuotaRequest {
 
 declare interface DescribeSpeedTestingQuotaResponse {
   /** 配额数据。 */
-  SpeedTestingQuota: SpeedTestingQuota;
+  SpeedTestingQuota?: SpeedTestingQuota;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

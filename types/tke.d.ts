@@ -1948,6 +1948,8 @@ declare interface SecurityContext {
 
 /** ServiceAccount认证相关配置 */
 declare interface ServiceAccountAuthenticationOptions {
+  /** 使用TKE默认issuer和jwksuri */
+  UseTKEDefault?: boolean | null;
   /** service-account-issuer */
   Issuer?: string | null;
   /** service-account-jwks-uri */

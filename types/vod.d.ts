@@ -3584,6 +3584,22 @@ declare interface PullUploadTask {
   Progress?: number;
 }
 
+/** 音画质重生音频控制控制信息。 */
+declare interface RebuildAudioInfo {
+  /** 音频降噪控制参数。 */
+  AudioDenoiseInfo?: AudioDenoiseInfo | null;
+}
+
+/** 音画质重生结果文件输出。 */
+declare interface RebuildMediaOutputConfig {
+  /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。 */
+  MediaName?: string;
+  /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
+  ClassId?: number;
+  /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+  ExpireTime?: string;
+}
+
 /** 画质重生输出的音频信息 */
 declare interface RebuildMediaTargetAudioStream {
   /** 音频流的编码格式。当外层参数 Container 为 mp3 时，可选值为：libmp3lame。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：libfdk_aac；libmp3lame；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：libfdk_aac：更适合 mp4；libmp3lame：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：libfdk_aac。 */
@@ -3716,6 +3732,62 @@ declare interface RebuildMediaTaskOutput {
   ClassId: number;
   /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
   ExpireTime: string;
+}
+
+/** 音画质重生模版详情。 */
+declare interface RebuildMediaTemplate {
+  /** 音画质重生模版号。 */
+  Definition?: number;
+  /** 模板类型，可选值：Preset：系统预置模板；Custom：用户自定义模板。 */
+  Type?: string;
+  /** 音画质重生模版名称。 */
+  Name?: string;
+  /** 音画质重生模版描述。 */
+  Comment?: string;
+  /** 音画质重生视频控制信息。 */
+  RebuildVideoInfo?: RebuildVideoInfo | null;
+  /** 音画质重生音频控制信息。 */
+  RebuildAudioInfo?: RebuildAudioInfo | null;
+  /** 输出视频控制信息。 */
+  TargetVideoInfo?: RebuildMediaTargetVideoStream | null;
+  /** 输出音频控制信息。 */
+  TargetAudioInfo?: RebuildMediaTargetAudioStream | null;
+  /** 封装格式。可选值：mp4、hls。默认是 mp4。 */
+  Container?: string;
+  /** 是否去除视频数据，可选值：0：保留1：去除默认值 0。 */
+  RemoveVideo?: number;
+  /** 是否去除音频数据，可选值：0：保留1：去除默认值 0。 */
+  RemoveAudio?: number;
+  /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  CreateTime?: string;
+  /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  UpdateTime?: string;
+}
+
+/** 音画质重生视频控制控制信息。 */
+declare interface RebuildVideoInfo {
+  /** 画质修复控制参数。 */
+  RepairInfo?: RepairInfo | null;
+  /** 智能插帧控制参数。 */
+  VideoFrameInterpolationInfo?: VideoFrameInterpolationInfo | null;
+  /** 画面超分控制参数。 */
+  SuperResolutionInfo?: SuperResolutionInfo | null;
+  /** 高动态范围类型控制参数。 */
+  HDRInfo?: HDRInfo | null;
+  /** 视频降噪控制参数。 */
+  VideoDenoiseInfo?: VideoDenoiseInfo | null;
+  /** 色彩增强控制参数。 */
+  ColorInfo?: ColorEnhanceInfo | null;
+  /** 细节增强控制参数。 */
+  SharpInfo?: SharpEnhanceInfo | null;
+  /** 人脸增强控制参数。 */
+  FaceInfo?: FaceEnhanceInfo | null;
+  /** 低光照控制参数。 */
+  LowLightInfo?: LowLightEnhanceInfo | null;
+  /** 去划痕控制参数。 */
+  ScratchRepairInfo?: ScratchRepairInfo | null;
+  /** 去伪影控制参数。 */
+  ArtifactRepairInfo?: ArtifactRepairInfo | null;
 }
 
 /** 降码率任务转自适应码流结果类型 */
@@ -5388,6 +5460,36 @@ declare interface CreateProcedureTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateRebuildMediaTemplateRequest {
+  /** 输出文件封装格式，可选值：mp4、flv、hls。 */
+  Container: string;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 音画质重生模版名称。 */
+  Name?: string;
+  /** 模版描述。 */
+  Comment?: string;
+  /** 音画质重生视频控制控制信息。 */
+  RebuildVideoInfo?: RebuildVideoInfo;
+  /** 音画质重生音频控制控制信息。 */
+  RebuildAudioInfo?: RebuildAudioInfo;
+  /** 输出目标视频控制信息。 */
+  TargetVideoInfo?: RebuildMediaTargetVideoStream;
+  /** 输出目标音频控制信息。 */
+  TargetAudioInfo?: RebuildMediaTargetAudioStream;
+  /** 是否去除视频数据，可选值：0：保留1：去除默认值 0。 */
+  RemoveVideo?: number;
+  /** 是否去除音频数据，可选值：0：保留1：去除默认值 0。 */
+  RemoveAudio?: string;
+}
+
+declare interface CreateRebuildMediaTemplateResponse {
+  /** 音画质重生模版 ID。 */
+  Definition?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateReviewTemplateRequest {
   /** 需要返回的违规标签列表，可选值为：Porn：色情；Terror：暴力；Polity：不适宜的信息；Illegal：违法；Abuse：谩骂；Ad：广告；Moan：娇喘。 */
   Labels: string[];
@@ -5774,6 +5876,18 @@ declare interface DeleteProcedureTemplateRequest {
 }
 
 declare interface DeleteProcedureTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRebuildMediaTemplateRequest {
+  /** 音画质重生模版号。 */
+  Definition: number;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+}
+
+declare interface DeleteRebuildMediaTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6438,6 +6552,28 @@ declare interface DescribeProcedureTemplatesResponse {
   TotalCount?: number;
   /** 任务流模板详情列表。 */
   ProcedureTemplateSet?: ProcedureTemplate[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRebuildMediaTemplatesRequest {
+  /** 音画质重生模版列表。 */
+  Definitions?: number[];
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: number;
+  /** 模板类型过滤条件，可选值：Preset：系统预置模板；Custom：用户自定义模板。 */
+  Type?: string;
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认值：10，最大值：100。 */
+  Limit?: number;
+}
+
+declare interface DescribeRebuildMediaTemplatesResponse {
+  /** 符合过滤条件的记录总数。 */
+  TotalCount?: number;
+  /** 音画质重生模板详情列表。 */
+  RebuildMediaTemplateSet?: RebuildMediaTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7310,6 +7446,36 @@ declare interface ModifyPersonSampleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRebuildMediaTemplateRequest {
+  /** 音画质重生模版号。 */
+  Definition: number;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: string;
+  /** 音画质重生模版名称。 */
+  Name?: string;
+  /** 音画质重生模版描述。 */
+  Comment?: string;
+  /** 音画质重生视频控制信息。 */
+  RebuildVideoInfo?: RebuildVideoInfo;
+  /** 音画质重生音频控制信息。 */
+  RebuildAudioInfo?: RebuildAudioInfo;
+  /** 输出目标视频控制信息。 */
+  TargetVideoInfo?: RebuildMediaTargetVideoStream;
+  /** 输出目标音频控制信息。 */
+  TargetAudioInfo?: RebuildMediaTargetAudioStream;
+  /** 输出文件封装格式，可选值：mp4、flv、hls。 */
+  Container?: string;
+  /** 是否去除视频数据，可选值：0：保留1：去除 */
+  RemoveVideo?: number;
+  /** 是否去除音频数据，可选值：0：保留1：去除 */
+  RemoveAudio?: number;
+}
+
+declare interface ModifyRebuildMediaTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyReviewTemplateRequest {
   /** 审核模板唯一标识。 */
   Definition: number;
@@ -7709,6 +7875,8 @@ declare interface PullEventsResponse {
 declare interface PullUploadRequest {
   /** 要拉取的媒体 URL，暂不支持拉取 Dash 格式（可以支持 HLS）。支持的扩展名详见[媒体类型](https://cloud.tencent.com/document/product/266/9760)。请确保媒体 URL 可以访问。 */
   MediaUrl: string;
+  /** 媒体文件类型（扩展名），支持的类型详见[媒体类型](https://cloud.tencent.com/document/product/266/9760)。如果 MediaType 不填或取值为空字符串，将根据 MediaUrl 自动获取文件类型。 */
+  MediaType?: string;
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: number;
   /** 媒体名称。 */
@@ -7735,7 +7903,7 @@ declare interface PullUploadRequest {
 
 declare interface PullUploadResponse {
   /** 拉取上传视频的任务 ID，可以通过该 ID 查询拉取上传任务的状态。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7748,6 +7916,36 @@ declare interface PushUrlCacheRequest {
 }
 
 declare interface PushUrlCacheResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RebuildMediaByTemplateRequest {
+  /** 媒体文件 ID。 */
+  FileId: string;
+  /** 音画质重生模版 ID。 */
+  Definition: number;
+  /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
+  SubAppId?: string;
+  /** 起始偏移时间，单位：秒，不填表示从视频开始截取。 */
+  StartTimeOffset?: number;
+  /** 结束偏移时间，单位：秒，不填表示截取到视频末尾。 */
+  EndTimeOffset?: number;
+  /** 音画质重生后的文件配置。 */
+  OutputConfig?: RebuildMediaOutputConfig;
+  /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+  SessionId?: string;
+  /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+  SessionContext?: string;
+  /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
+  TasksPriority?: number;
+  /** 保留字段，特殊用途时使用。 */
+  ExtInfo?: string;
+}
+
+declare interface RebuildMediaByTemplateResponse {
+  /** 音画质重生的任务 ID，可以通过该 ID 查询音画质重生任务的状态。 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8115,6 +8313,8 @@ declare interface Vod {
   CreatePersonSample(data: CreatePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonSampleResponse>;
   /** 创建任务流模板 {@link CreateProcedureTemplateRequest} {@link CreateProcedureTemplateResponse} */
   CreateProcedureTemplate(data: CreateProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProcedureTemplateResponse>;
+  /** 创建音画质重生模版 {@link CreateRebuildMediaTemplateRequest} {@link CreateRebuildMediaTemplateResponse} */
+  CreateRebuildMediaTemplate(data: CreateRebuildMediaTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRebuildMediaTemplateResponse>;
   /** 创建审核模板 {@link CreateReviewTemplateRequest} {@link CreateReviewTemplateResponse} */
   CreateReviewTemplate(data: CreateReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReviewTemplateResponse>;
   /** 创建轮播播单 {@link CreateRoundPlayRequest} {@link CreateRoundPlayResponse} */
@@ -8161,6 +8361,8 @@ declare interface Vod {
   DeletePersonSample(data: DeletePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonSampleResponse>;
   /** 删除任务流模板 {@link DeleteProcedureTemplateRequest} {@link DeleteProcedureTemplateResponse} */
   DeleteProcedureTemplate(data: DeleteProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProcedureTemplateResponse>;
+  /** 删除音画质重生模版 {@link DeleteRebuildMediaTemplateRequest} {@link DeleteRebuildMediaTemplateResponse} */
+  DeleteRebuildMediaTemplate(data: DeleteRebuildMediaTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRebuildMediaTemplateResponse>;
   /** 删除审核模板 {@link DeleteReviewTemplateRequest} {@link DeleteReviewTemplateResponse} */
   DeleteReviewTemplate(data: DeleteReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReviewTemplateResponse>;
   /** 删除轮播播单 {@link DeleteRoundPlayRequest} {@link DeleteRoundPlayResponse} */
@@ -8237,6 +8439,8 @@ declare interface Vod {
   DescribePrepaidProducts(data?: DescribePrepaidProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrepaidProductsResponse>;
   /** 获取任务流模板列表 {@link DescribeProcedureTemplatesRequest} {@link DescribeProcedureTemplatesResponse} */
   DescribeProcedureTemplates(data?: DescribeProcedureTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcedureTemplatesResponse>;
+  /** 获取音画质重生模版列表 {@link DescribeRebuildMediaTemplatesRequest} {@link DescribeRebuildMediaTemplatesResponse} */
+  DescribeRebuildMediaTemplates(data?: DescribeRebuildMediaTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebuildMediaTemplatesResponse>;
   /** 查询内容智能识别详情 {@link DescribeReviewDetailsRequest} {@link DescribeReviewDetailsResponse} */
   DescribeReviewDetails(data: DescribeReviewDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReviewDetailsResponse>;
   /** 获取审核模板列表 {@link DescribeReviewTemplatesRequest} {@link DescribeReviewTemplatesResponse} */
@@ -8307,6 +8511,8 @@ declare interface Vod {
   ModifyMediaStorageClass(data: ModifyMediaStorageClassRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMediaStorageClassResponse>;
   /** 修改素材样本 {@link ModifyPersonSampleRequest} {@link ModifyPersonSampleResponse} */
   ModifyPersonSample(data: ModifyPersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonSampleResponse>;
+  /** 修改音画质重生模版 {@link ModifyRebuildMediaTemplateRequest} {@link ModifyRebuildMediaTemplateResponse} */
+  ModifyRebuildMediaTemplate(data: ModifyRebuildMediaTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRebuildMediaTemplateResponse>;
   /** 修改审核模板 {@link ModifyReviewTemplateRequest} {@link ModifyReviewTemplateResponse} */
   ModifyReviewTemplate(data: ModifyReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReviewTemplateResponse>;
   /** 修改轮播播单 {@link ModifyRoundPlayRequest} {@link ModifyRoundPlayResponse} */
@@ -8349,6 +8555,8 @@ declare interface Vod {
   PushUrlCache(data: PushUrlCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PushUrlCacheResponse>;
   /** 发起音画质重生 {@link RebuildMediaRequest} {@link RebuildMediaResponse} */
   RebuildMedia(data: RebuildMediaRequest, config?: AxiosRequestConfig): AxiosPromise<RebuildMediaResponse>;
+  /** 使用模版发起音画质重生 {@link RebuildMediaByTemplateRequest} {@link RebuildMediaByTemplateResponse} */
+  RebuildMediaByTemplate(data: RebuildMediaByTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<RebuildMediaByTemplateResponse>;
   /** 刷新URL {@link RefreshUrlCacheRequest} {@link RefreshUrlCacheResponse} */
   RefreshUrlCache(data: RefreshUrlCacheRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshUrlCacheResponse>;
   /** 智能去除水印 {@link RemoveWatermarkRequest} {@link RemoveWatermarkResponse} */
