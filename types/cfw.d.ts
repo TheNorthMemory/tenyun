@@ -54,6 +54,16 @@ declare interface AssociatedInstanceInfo {
   SecurityGroupCount: number | null;
 }
 
+/** 规则关联的beta任务 */
+declare interface BetaInfoByACL {
+  /** 任务id */
+  TaskId?: number | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 上次执行时间 */
+  LastTime?: string | null;
+}
+
 /** 入侵防御放通封禁规则 */
 declare interface BlockIgnoreRule {
   /** 域名 */
@@ -222,6 +232,8 @@ declare interface DescAcItem {
   InternalUuid?: number | null;
   /** 规则状态，查询规则命中详情时该字段有效，0：新增，1: 已删除, 2: 编辑删除 */
   Status?: number | null;
+  /** 关联任务详情 */
+  BetaList?: BetaInfoByACL[] | null;
 }
 
 /** 设置nat防火墙的vpc dns 接入开关 */
@@ -1512,7 +1524,7 @@ declare interface DescribeTLogInfoRequest {
 }
 
 declare interface DescribeTLogInfoResponse {
-  /** 无 */
+  /** "NetworkNum":网络扫描探测 "HandleNum": 待处理事件"BanNum": "VulNum": 漏洞利用 "OutNum": 失陷主机"BruteForceNum": 0 */
   Data: TLogInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

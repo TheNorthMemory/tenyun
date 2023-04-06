@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 230+ 款产品，9303+ 服务数</summary>
+<details><summary>共计 231+ 款产品，9329+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -157,7 +157,7 @@ ckafka | [消息队列 CKafka](https://cloud.tencent.com/document/product/597) |
 clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-17(79) |
 cloudaudit | [云审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(14) |
-cloudstudio | [Cloud Studio（云端 IDE）](https://cloud.tencent.com/document/product/1039) | 2021-05-24(21) |
+cloudstudio | [Cloud Studio（云端 IDE）](https://cloud.tencent.com/document/product/1039) | 2021-05-24(22) |
 cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(65) |
 cme | [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) | 2019-10-29(50) |
 cmq | [消息队列 CMQ](https://cloud.tencent.com/document/product/406) | 2019-03-04(17) |
@@ -252,7 +252,7 @@ partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) 
 pds | [私域安全](https://cloud.tencent.com/document/product/1473) | 2021-07-01(2) |
 postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(83) |
 privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(21) |
-pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(43) |
+pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(44) |
 rce | [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) | 2020-11-03(3) |
 redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(90) |
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3) |
@@ -310,6 +310,7 @@ tms | [文本内容安全](https://cloud.tencent.com/document/product/1124) | 20
 tmt | [机器翻译](https://cloud.tencent.com/document/product/551) | 2018-03-21(7) |
 trdp | [流量风险决策平台](https://cloud.tencent.com/document/product/1604) | 2022-07-26(1) |
 trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(44) |
+trro | [远程实时操控](https://cloud.tencent.com/document/product/1584) | 2022-03-25(23) |
 trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(37) |
 tse | [微服务引擎 TSE](https://cloud.tencent.com/document/product/1364) | 2020-12-07(10) |
 tsf | [微服务平台 TSF](https://cloud.tencent.com/document/product/649) | 2018-03-26(213) |
@@ -320,7 +321,7 @@ vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 202
 vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-02(2) |
 vod | [云点播](https://cloud.tencent.com/document/product/266) | 2018-07-17(149) |
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(302) |
-waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(44) |
+waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(45) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(24) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(195) |
 wss | SSL证书管理服务 | 2018-04-26(3) |

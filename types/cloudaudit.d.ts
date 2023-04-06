@@ -307,7 +307,7 @@ declare interface DescribeEventsRequest {
   NextToken?: number;
   /** 返回日志的最大条数（最大 50 条） */
   MaxResults?: number;
-  /** 检索条件（目前支持 RequestId：请求 ID、EventName：事件名称、ActionType：操作类型（Write：写；Read：读）、PrincipalId：子账号、ResourceType：资源类型、ResourceName：资源名称、AccessKeyId：密钥 ID、SensitiveAction：是否敏感操作、ApiErrorCode：API 错误码、CamErrorCode：CAM 错误码、Tags：标签（AttributeValue格式：[{"key":"*","value":"*"}]）） */
+  /** 检索条件（目前支持 RequestId：请求 ID、EventName：事件名称、ActionType：操作类型（Write：写；Read：读）、PrincipalId：子账号、ResourceType：资源类型、ResourceName：资源名称、AccessKeyId：密钥 ID、SensitiveAction：是否敏感操作、ApiErrorCode：API 错误码、CamErrorCode：CAM 错误码、Tags：标签（AttributeValue格式：[{"key":"*","value":"*"}]）备注:检索的各个条件间是与的关系,EventName传多个值内部是或的关系） */
   LookupAttributes?: LookupAttribute[];
   /** 是否返回 IP 归属地（1 返回，0 不返回） */
   IsReturnLocation?: number;
@@ -315,13 +315,13 @@ declare interface DescribeEventsRequest {
 
 declare interface DescribeEventsResponse {
   /** 日志集合是否结束。true表示结束，无需进行翻页。 */
-  ListOver: boolean;
+  ListOver?: boolean;
   /** 查看更多日志的凭证 */
-  NextToken: number;
+  NextToken?: number;
   /** 日志集合 */
-  Events: Event[] | null;
+  Events?: Event[] | null;
   /** 此字段已经废弃。翻页请使用ListOver配合NextToken，在ListOver为false进行下一页数据读取。 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

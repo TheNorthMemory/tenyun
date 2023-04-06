@@ -464,6 +464,18 @@ declare interface DescribeWorkspaceEnvListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeWorkspaceIsReadyRequest {
+  /** 工作空间 spaceKey */
+  SpaceKey: string;
+}
+
+declare interface DescribeWorkspaceIsReadyResponse {
+  /** 工作空间是否就绪 */
+  Data?: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeWorkspaceNameExistRequest {
   /** 用户所属组 */
   CloudStudioSessionTeam: string;
@@ -474,6 +486,8 @@ declare interface DescribeWorkspaceNameExistRequest {
 }
 
 declare interface DescribeWorkspaceNameExistResponse {
+  /** 工作空间信息 */
+  Data?: WorkspaceInfoDTO | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -649,6 +663,8 @@ declare interface Cloudstudio {
   DescribeCustomizeTemplatesPresets(data: DescribeCustomizeTemplatesPresetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomizeTemplatesPresetsResponse>;
   /** 环境列表接口 {@link DescribeWorkspaceEnvListRequest} {@link DescribeWorkspaceEnvListResponse} */
   DescribeWorkspaceEnvList(data: DescribeWorkspaceEnvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceEnvListResponse>;
+  /** 获取工作空间是否已经启动就绪 {@link DescribeWorkspaceIsReadyRequest} {@link DescribeWorkspaceIsReadyResponse} */
+  DescribeWorkspaceIsReady(data: DescribeWorkspaceIsReadyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceIsReadyResponse>;
   /** 检查工作空间是否存在 {@link DescribeWorkspaceNameExistRequest} {@link DescribeWorkspaceNameExistResponse} */
   DescribeWorkspaceNameExist(data: DescribeWorkspaceNameExistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceNameExistResponse>;
   /** 获取工作空间元信息 {@link DescribeWorkspaceStatusRequest} {@link DescribeWorkspaceStatusResponse} */

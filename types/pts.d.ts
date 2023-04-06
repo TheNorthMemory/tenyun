@@ -120,6 +120,8 @@ declare interface Concurrency {
   MaxRequestsPerSecond?: number | null;
   /** 优雅终止任务的等待时间 */
   GracefulStopSeconds?: number | null;
+  /** 资源数 */
+  Resources?: number | null;
 }
 
 /** COS临时凭证 */
@@ -214,6 +216,22 @@ declare interface DomainNameConfig {
   HostAliases?: HostAlias[] | null;
   /** DNS 配置 */
   DNSConfig?: DNSConfig | null;
+}
+
+/** 错误信息汇总 */
+declare interface ErrorSummary {
+  /** 状态码 */
+  Status?: string | null;
+  /** 结果码 */
+  Result?: string | null;
+  /** 错误出现次数 */
+  Count?: number | null;
+  /** 错误率 */
+  Rate?: number | null;
+  /** 错误信息 */
+  Message?: string | null;
+  /** 请求协议类型 */
+  Proto?: string | null;
 }
 
 /** 文件列表 */
@@ -1216,6 +1234,24 @@ declare interface DescribeCronJobsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeErrorSummaryRequest {
+  /** 任务ID */
+  JobId: string;
+  /** 场景ID */
+  ScenarioId: string;
+  /** 项目ID */
+  ProjectId: string;
+  /** 过滤参数 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeErrorSummaryResponse {
+  /** 错误汇总信息 */
+  ErrorSummarySet?: ErrorSummary[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFilesRequest {
   /** 项目 ID 数组 */
   ProjectIds: string[];
@@ -1813,6 +1849,8 @@ declare interface Pts {
   DescribeCheckSummary(data: DescribeCheckSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckSummaryResponse>;
   /** 列出定时任务 {@link DescribeCronJobsRequest} {@link DescribeCronJobsResponse} */
   DescribeCronJobs(data: DescribeCronJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCronJobsResponse>;
+  /** 查询错误详情汇总信息 {@link DescribeErrorSummaryRequest} {@link DescribeErrorSummaryResponse} */
+  DescribeErrorSummary(data: DescribeErrorSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeErrorSummaryResponse>;
   /** 查询文件列表 {@link DescribeFilesRequest} {@link DescribeFilesResponse} */
   DescribeFiles(data: DescribeFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFilesResponse>;
   /** 查询任务列表 {@link DescribeJobsRequest} {@link DescribeJobsResponse} */

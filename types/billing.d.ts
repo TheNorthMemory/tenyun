@@ -1175,9 +1175,9 @@ declare interface DescribeCostSummaryByResourceResponse {
 }
 
 declare interface DescribeDealsByCondRequest {
-  /** 开始时间 */
+  /** 开始时间 2016-01-01 00:00:00 */
   StartTime: string;
-  /** 结束时间 */
+  /** 结束时间 2016-02-01 00:00:00 建议跨度不超过3个月 */
   EndTime: string;
   /** 一页多少条数据，默认是20条，最大不超过1000 */
   Limit: number;
@@ -1195,9 +1195,9 @@ declare interface DescribeDealsByCondRequest {
 
 declare interface DescribeDealsByCondResponse {
   /** 订单列表 */
-  Deals: Deal[];
+  Deals?: Deal[];
   /** 订单总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

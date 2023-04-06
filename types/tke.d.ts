@@ -3531,6 +3531,8 @@ declare interface DescribeClusterReleasesRequest {
   Limit?: number;
   /** 页偏移量 */
   Offset?: number;
+  /** 集群类型, 目前支持传入 tke, eks, tkeedge, external */
+  ClusterType?: string;
   /** helm Release 安装的namespace */
   Namespace?: string;
   /** helm Release 的名字 */
@@ -3541,13 +3543,13 @@ declare interface DescribeClusterReleasesRequest {
 
 declare interface DescribeClusterReleasesResponse {
   /** 数量限制 */
-  Limit: number | null;
+  Limit?: number | null;
   /** 偏移量 */
-  Offset: number | null;
+  Offset?: number | null;
   /** 已安装应用列表 */
-  ReleaseSet: Release[] | null;
+  ReleaseSet?: Release[] | null;
   /** 已安装应用总数量 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

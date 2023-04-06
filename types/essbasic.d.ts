@@ -250,7 +250,7 @@ declare interface FlowApproverDetail {
   SignOrder: number;
   /** 签署人姓名 */
   ApproveName: string | null;
-  /** 当前签署人的状态 */
+  /** 当前签署人的状态, 状态如下PENDING 流程等待中 FILLPENDING 待填写状态FILLACCEPT 参与人已经填写FILLREJECT 参与人解决填写WAITPICKUP 待签收ACCEPT 签收 REJECT 拒签 DEADLINE 过期没有处理 CANCEL 取消FORWARD 已经转他人处理STOP 流程因为其他原因终止RELIEVED 已经解除 */
   ApproveStatus: string | null;
   /** 签署人信息 */
   ApproveMessage: string | null;
@@ -324,7 +324,7 @@ declare interface FlowDetailInfo {
   FlowName: string;
   /** 合同(流程)的类型 */
   FlowType: string;
-  /** 合同(流程)的状态 */
+  /** 合同(流程)的状态, 状态如下INIT 还没发起PART 部分签署REJECT 拒签ALL 全部签署DEADLINE 流签CANCEL 取消RELIEVED 解除 */
   FlowStatus: string;
   /** 合同(流程)的信息 */
   FlowMessage: string;

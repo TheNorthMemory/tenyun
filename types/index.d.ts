@@ -214,6 +214,7 @@ import Tms, { Versions as TmsVersions } from "./tms";
 import Tmt, { Versions as TmtVersions } from "./tmt";
 import Trdp, { Versions as TrdpVersions } from "./trdp";
 import Trp, { Versions as TrpVersions } from "./trp";
+import Trro, { Versions as TrroVersions } from "./trro";
 import Trtc, { Versions as TrtcVersions } from "./trtc";
 import Tse, { Versions as TseVersions } from "./tse";
 import Tsf, { Versions as TsfVersions } from "./tsf";
@@ -448,6 +449,7 @@ export declare type SERVICE_VERSIONS = {
   tmt: TmtVersions,
   trdp: TrdpVersions,
   trp: TrpVersions,
+  trro: TrroVersions,
   trtc: TrtcVersions,
   tse: TseVersions,
   tsf: TsfVersions,
@@ -906,6 +908,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   trdp: Trdp,
   /** {@link Trp T-Sec-安心平台(RP)} */
   trp: Trp,
+  /** {@link Trro 远程实时操控} */
+  trro: Trro,
   /** {@link Trtc 实时音视频} */
   trtc: Trtc,
   /** {@link Tse 微服务引擎 TSE} */

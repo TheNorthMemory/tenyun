@@ -99,13 +99,13 @@ declare interface AlarmTargetInfo {
 /** 多维分析的分析维度 */
 declare interface AnalysisDimensional {
   /** 分析名称 */
-  Name: string;
+  Name: string | null;
   /** 分析类型：query，field ，original */
-  Type: string;
+  Type: string | null;
   /** 分析内容 */
-  Content: string;
+  Content: string | null;
   /** 配置 */
-  ConfigInfo?: AlarmAnalysisConfig[];
+  ConfigInfo?: AlarmAnalysisConfig[] | null;
 }
 
 /** 回调配置 */
@@ -895,7 +895,7 @@ declare interface CreateAlarmRequest {
 
 declare interface CreateAlarmResponse {
   /** 告警策略ID。 */
-  AlarmId: string;
+  AlarmId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1087,7 +1087,7 @@ declare interface CreateMachineGroupRequest {
 
 declare interface CreateMachineGroupResponse {
   /** 机器组ID */
-  GroupId: string;
+  GroupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1145,7 +1145,7 @@ declare interface CreateTopicRequest {
 
 declare interface CreateTopicResponse {
   /** 日志主题ID */
-  TopicId: string;
+  TopicId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1313,9 +1313,9 @@ declare interface DescribeAlarmsRequest {
 
 declare interface DescribeAlarmsResponse {
   /** 告警策略列表。 */
-  Alarms: AlarmInfo[];
+  Alarms?: AlarmInfo[];
   /** 符合查询条件的告警策略数目。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

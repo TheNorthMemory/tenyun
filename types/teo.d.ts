@@ -106,6 +106,66 @@ declare interface AiRule {
   Mode: string;
 }
 
+/** Bot主动特征识别客户端行为校验。 */
+declare interface AlgDetectJS {
+  /** 操作名称。 */
+  Name?: string;
+  /** 工作量证明 (proof_Of-Work)校验强度，默认low，取值有：low：低；middle：中；high：高。 */
+  WorkLevel?: string;
+  /** 执行方式，js延迟执行的时间。单位为ms，默认500，取值：0～1000。 */
+  ExecuteMode?: number;
+  /** 客户端末启用JS（末完成检测）统计周期。单位为秒，默认10，取值：5～3600。 */
+  InvalidStatTime?: number;
+  /** 客户端末启用JS（末完成检测）触发阈值。单位为次，默认300，取值：1～100000000。 */
+  InvalidThreshold?: number;
+  /** Bot主动特征识别客户端行为校验结果。 */
+  AlgDetectResults?: AlgDetectResult[];
+}
+
+/** Bot主动特征识别校验结果。 */
+declare interface AlgDetectResult {
+  /** 校验结果，取值有：invalid：不合法Cookie；cookie_empty：末携带Cookie或Cookie己过期；js_empty：客户端末启用JS（末完成检测）；low：会话速率和周期特征校验低风险；middle：会话速率和周期特征校验中风险；high：会话速率和周期特征校验高风险；timeout：检测超时时长；not_browser：不合法浏览器；is_bot：Bot客户端。 */
+  Result?: string;
+  /** 处罚动作，取值有：drop：拦截；monitor：观察；silence：静默；shortdelay：（短时间）等待后响应；longdelay：（长时间）等待后响应。 */
+  Action?: string;
+}
+
+/** Bot主动特征识别规则。 */
+declare interface AlgDetectRule {
+  /** 规则id。 */
+  RuleID?: number;
+  /** 规则名。 */
+  RuleName?: string;
+  /** 规则开关。 */
+  Switch?: string;
+  /** 自定义规则。 */
+  AlgConditions?: AclCondition[];
+  /** Cookie校验和会话行为分析。 */
+  AlgDetectSession?: AlgDetectSession | null;
+  /** 客户端行为校验。 */
+  AlgDetectJS?: AlgDetectJS[];
+  /** 更新时间。仅出参使用。 */
+  UpdateTime?: string;
+}
+
+/** Cookie校验与会话跟踪。 */
+declare interface AlgDetectSession {
+  /** 操作名称。 */
+  Name?: string;
+  /** 校验方式，默认update_detect，取值有：detect：仅校验；update_detect：更新Cookie并校验。 */
+  DetectMode?: string;
+  /** 会话速率和周期特征校验开关，默认off，取值有：off：关闭；on：打开。 */
+  SessionAnalyzeSwitch?: string;
+  /** 校验结果为未携带Cookie或Cookie已过期的统计周期。单位为秒，默认10，取值：5～3600。 */
+  InvalidStatTime?: number;
+  /** 校验结果为未携带Cookie或Cookie已过期的触发阈值。单位为次，默认300，取值：1～100000000。 */
+  InvalidThreshold?: number;
+  /** Cookie校验校验结果。 */
+  AlgDetectResults?: AlgDetectResult[];
+  /** 会话速率和周期特征校验结果。 */
+  SessionBehaviors?: AlgDetectResult[];
+}
+
 /** 别称域名信息。 */
 declare interface AliasDomain {
   /** 别称域名名称。 */
@@ -206,6 +266,8 @@ declare interface BotConfig {
   IntelligenceRule?: IntelligenceRule | null;
   /** Bot自定义规则。如果为null，默认使用历史配置。 */
   BotUserRules?: BotUserRule[];
+  /** Bot主动特征识别规则。 */
+  AlgDetectRule?: AlgDetectRule[];
   /** Bot托管定制策略，入参可不填，仅出参使用。 */
   Customizes?: BotUserRule[] | null;
 }
