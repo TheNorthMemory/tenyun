@@ -50,6 +50,8 @@ declare interface BatchModelAccTask {
   ModelName?: string;
   /** SavedModel保存时配置的签名 */
   ModelSignature?: string;
+  /** 加速引擎对应的框架版本 */
+  FrameworkVersion?: string | null;
 }
 
 /** 跑批任务详情 */
@@ -432,6 +434,8 @@ declare interface EngineVersion {
   Image: string | null;
   /** 是否支持int8量化 */
   IsSupportIntEightQuantization: boolean | null;
+  /** 框架版本 */
+  FrameworkVersion: string | null;
 }
 
 /** 环境变量 */
@@ -740,6 +744,8 @@ declare interface ModelAccelerateTask {
   ModelSignature: string | null;
   /** 是否是QAT模型 */
   QATModel: boolean | null;
+  /** 加速引擎对应的框架版本 */
+  FrameworkVersion?: string | null;
 }
 
 /** 模型描述信息 */
@@ -812,6 +818,8 @@ declare interface Pod {
   CreateTime?: string | null;
   /** 容器列表 */
   Containers?: Container | null;
+  /** 容器列表 */
+  ContainerInfos?: Container[] | null;
 }
 
 /** 点信息描述 */
@@ -1090,6 +1098,8 @@ declare interface ServiceInfo {
   ModelHotUpdateEnable: boolean | null;
   /** Pod列表信息 */
   Pods?: Pod | null;
+  /** Pod列表信息 */
+  PodInfos?: Pod[] | null;
 }
 
 /** 服务的限流限速等配置 */
@@ -1268,6 +1278,8 @@ declare interface TrainingModelDTO {
   Tags: Tag[] | null;
   /** 模型创建时间 */
   CreateTime: string | null;
+  /** 模型版本列表。默认不返回，仅在指定请求参数开启时返回。 */
+  TrainingModelVersions?: TrainingModelVersionDTO[] | null;
 }
 
 /** 模型版本列表 */
@@ -2377,7 +2389,7 @@ declare interface DescribeTrainingModelVersionsResponse {
 }
 
 declare interface DescribeTrainingModelsRequest {
-  /** 过滤器Filter.Name: 枚举值: keyword (模型名称) TrainingModelId (模型ID) ModelVersionType (模型版本类型) 其值Filter.Values支持: NORMAL(通用) ACCELERATE (加速) TrainingModelSource (模型来源) 其值Filter.Values支持： JOB/COS ModelFormat（模型格式）其值Filter.Values支持：PYTORCH/TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/PMML/MMDETECTION/ONNX/HUGGING_FACEFilter.Values: 当长度为1时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为10，Filter.Values的上限为100Filter.Fuzzy取值：true/false，是否支持模糊匹配 */
+  /** 过滤器Filter.Name: 枚举值:keyword (模型名称)TrainingModelId (模型ID)ModelVersionType (模型版本类型) 其值Filter.Values支持: NORMAL(通用) ACCELERATE (加速)TrainingModelSource (模型来源) 其值Filter.Values支持： JOB/COSModelFormat（模型格式）其值Filter.Values支持：PYTORCH/TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/PMML/MMDETECTION/ONNX/HUGGING_FACEFilter.Values: 当长度为1时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为10，Filter.Values的上限为100Filter.Fuzzy取值：true/false，是否支持模糊匹配 */
   Filters?: Filter[];
   /** 排序字段，默认CreateTime */
   OrderField?: string;
@@ -2389,13 +2401,15 @@ declare interface DescribeTrainingModelsRequest {
   Limit?: number;
   /** 标签过滤 */
   TagFilters?: TagFilter[];
+  /** 是否同时返回模型版本列表 */
+  WithModelVersions?: boolean;
 }
 
 declare interface DescribeTrainingModelsResponse {
   /** 模型列表 */
-  TrainingModels: TrainingModelDTO[];
+  TrainingModels?: TrainingModelDTO[];
   /** 模型总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2579,6 +2593,8 @@ declare interface RestartModelAccelerateTaskRequest {
   Tags?: Tag[];
   /** SavedModel保存时配置的签名 */
   ModelSignature?: string;
+  /** 加速引擎对应的框架版本 */
+  FrameworkVersion?: string;
 }
 
 declare interface RestartModelAccelerateTaskResponse {

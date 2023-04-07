@@ -3205,15 +3205,15 @@ declare interface DescribeHttpsPackagesRequest {
 
 declare interface DescribeHttpsPackagesResponse {
   /** HTTPS请求包总个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** HTTPS请求包详情 */
-  HttpsPackages: HttpsPackage[];
+  HttpsPackages?: HttpsPackage[];
   /** 即将过期的HTTPS请求包个数（7天内） */
-  ExpiringCount: number;
+  ExpiringCount?: number;
   /** 有效HTTPS请求包个数 */
-  EnabledCount: number;
+  EnabledCount?: number;
   /** 付费HTTPS请求包个数 */
-  PaidCount: number;
+  PaidCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

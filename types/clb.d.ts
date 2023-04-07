@@ -464,6 +464,8 @@ declare interface IdleLoadBalancer {
   Status: number;
   /** 负载均衡类型标识，1：负载均衡，0：传统型负载均衡。 */
   Forward: number;
+  /** 负载均衡域名 */
+  Domain: string | null;
 }
 
 /** 网络计费模式，最大出带宽 */

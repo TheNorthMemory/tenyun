@@ -61,11 +61,11 @@ declare interface ActionConfigInfo {
 /** 编排原子任务 */
 declare interface Activity {
   /** 原子任务类型：input: 起始节点output：终止节点action-trans：转码action-samplesnapshot：采样截图action-AIAnalysis: 分析action-AIRecognition：识别action-aiReview：审核action-animated-graphics：转动图action-image-sprite：雪碧图action-snapshotByTimeOffset: 时间点截图action-adaptive-substream：自适应码流 */
-  ActivityType: string;
+  ActivityType: string | null;
   /** 后驱节点索引数组 */
-  ReardriveIndex?: number[];
+  ReardriveIndex?: number[] | null;
   /** 原子任务参数 */
-  ActivityPara?: ActivityPara;
+  ActivityPara?: ActivityPara | null;
 }
 
 /** 编排原子任务 */
@@ -196,6 +196,8 @@ declare interface AiAnalysisResult {
   TagTask: AiAnalysisTaskTagResult | null;
   /** 视频内容分析智能按帧标签任务的查询结果，当任务类型为 FrameTag 时有效。 */
   FrameTagTask: AiAnalysisTaskFrameTagResult | null;
+  /** 视频内容分析集锦任务的查询结果，当任务类型为 Highlight时有效。 */
+  HighlightTask: AiAnalysisTaskHighlightResult | null;
 }
 
 /** 智能分类任务输入类型 */
@@ -284,6 +286,34 @@ declare interface AiAnalysisTaskFrameTagResult {
   Output: AiAnalysisTaskFrameTagOutput | null;
 }
 
+/** 智能精彩片段任务输入类型 */
+declare interface AiAnalysisTaskHighlightInput {
+  /** 视频智能精彩片段模板 ID。 */
+  Definition: number;
+}
+
+/** 智能精彩片段结果信息 */
+declare interface AiAnalysisTaskHighlightOutput {
+  /** 视频智能精彩片段列表。 */
+  HighlightSet: MediaAiAnalysisHighlightItem[];
+  /** 精彩片段的存储位置。 */
+  OutputStorage: TaskOutputStorage;
+}
+
+/** 智能精彩片段结果类型 */
+declare interface AiAnalysisTaskHighlightResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status: string;
+  /** 错误码，0：成功，其他值：失败。 */
+  ErrCode: number;
+  /** 错误信息。 */
+  Message: string;
+  /** 智能精彩片段任务输入。 */
+  Input: AiAnalysisTaskHighlightInput;
+  /** 智能精彩片段任务输出。 */
+  Output: AiAnalysisTaskHighlightOutput | null;
+}
+
 /** AI 视频智能分析输入参数类型 */
 declare interface AiAnalysisTaskInput {
   /** 视频内容分析模板 ID。 */
@@ -354,6 +384,14 @@ declare interface AiContentReviewResult {
 declare interface AiContentReviewTaskInput {
   /** 视频内容审核模板 ID。 */
   Definition: number;
+}
+
+/** 视频质检输入参数类型 */
+declare interface AiQualityControlTaskInput {
+  /** 视频质检模板 ID 。 */
+  Definition?: number | null;
+  /** 渠道扩展参数json序列化字符串。 */
+  ChannelExtPara?: string | null;
 }
 
 /** 智能识别结果。 */
@@ -1196,19 +1234,19 @@ declare interface AudioTemplateInfoForUpdate {
 
 /** AWS S3 文件是上传触发器。 */
 declare interface AwsS3FileUploadTrigger {
-  /** 工作流绑定的 AWS S3 存储桶。 */
+  /** 绑定的 AWS S3 存储桶。 */
   S3Bucket: string;
-  /** 工作流绑定的桶所在 AWS 区域。 */
+  /** 绑定的桶所在 AWS 区域。 */
   S3Region: string;
-  /** 工作流绑定的输入路径目录，必须为绝对路径，即以 `/` 开头和结尾。如`/movie/201907/`，不填代表根目录`/`。 */
+  /** 绑定的输入路径目录，必须为绝对路径，即以 `/` 开头和结尾。如`/movie/201907/`，不填代表根目录`/`。 */
   Dir?: string;
-  /** 工作流允许触发的文件格式列表，如 ["mp4", "flv", "mov"]。不填代表所有格式的文件都可以触发工作流。 */
+  /** 允许触发的文件格式列表，如 ["mp4", "flv", "mov"]。不填代表所有格式的文件都可以触发工作流。 */
   Formats?: string[];
-  /** 工作流绑定的 AWS S3 存储桶的秘钥ID。 */
+  /** 绑定的 AWS S3 存储桶的秘钥ID。 */
   S3SecretId?: string | null;
-  /** 工作流绑定的 AWS S3 存储桶的秘钥Key。 */
+  /** 绑定的 AWS S3 存储桶的秘钥Key。 */
   S3SecretKey?: string | null;
-  /** 工作流绑定的 AWS S3 存储桶对应的 SQS事件队列。注意：队列和桶需要在同一区域。 */
+  /** 绑定的 AWS S3 存储桶对应的 SQS事件队列。注意：队列和桶需要在同一区域。 */
   AwsSQS?: AwsSQS | null;
 }
 
@@ -2054,6 +2092,16 @@ declare interface HeadTailParameter {
   TailSet?: MediaInputInfo[];
 }
 
+/** 智能精彩集锦片段列表。 */
+declare interface HighlightSegmentItem {
+  /** 置信度。 */
+  Confidence: number;
+  /** 片段起始时间偏移。 */
+  StartTimeOffset: number;
+  /** 片段结束时间偏移。 */
+  EndTimeOffset: number;
+}
+
 /** 综合增强配置 */
 declare interface ImageQualityEnhanceConfig {
   /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
@@ -2434,6 +2482,20 @@ declare interface MediaAiAnalysisFrameTagSegmentItem {
   EndTimeOffset: number;
   /** 时间片段内的标签列表。 */
   TagSet: MediaAiAnalysisFrameTagItem[];
+}
+
+/** 智能精彩片段信息 */
+declare interface MediaAiAnalysisHighlightItem {
+  /** 智能精彩集锦地址。 */
+  HighlightPath: string;
+  /** 智能精彩集锦封面地址。 */
+  CovImgPath: string;
+  /** 智能精彩集锦的可信度，取值范围是 0 到 100。 */
+  Confidence: number;
+  /** 智能精彩集锦持续时间。 */
+  Duration: number;
+  /** 智能精彩集锦子片段列表。 */
+  SegmentSet: HighlightSegmentItem[];
 }
 
 /** 智能标签结果信息 */
@@ -3196,6 +3258,38 @@ declare interface ProhibitedOcrReviewTemplateInfoForUpdate {
   ReviewConfidence?: number;
 }
 
+/** 质检结果输出。 */
+declare interface QualityControlData {
+  /** 为true时表示视频无音频轨。 */
+  NoAudio: boolean | null;
+  /** 为true时表示视频无视频轨。 */
+  NoVideo: boolean | null;
+  /** 视频无参考质量打分，百分制。 */
+  QualityEvaluationScore: number | null;
+  /** 质检检出异常项。 */
+  QualityControlResultSet: QualityControlResult[] | null;
+}
+
+/** 质检结果项 */
+declare interface QualityControlItem {
+  /** 置信度，取值范围是 0 到 100。 */
+  Confidence: number | null;
+  /** 出现的起始时间戳，秒。 */
+  StartTimeOffset: number;
+  /** 出现的结束时间戳，秒。 */
+  EndTimeOffset: number;
+  /** 区域坐标(px)，即左上角坐标、右下角坐标。 */
+  AreaCoordSet: number[] | null;
+}
+
+/** 质检异常项。 */
+declare interface QualityControlResult {
+  /** 异常类型，取值范围：Jitter：抖动，Blur：模糊，LowLighting：低光照，HighLighting：过曝，CrashScreen：花屏，BlackWhiteEdge：黑白边，SolidColorScreen：纯色屏，Noise：噪点，Mosaic：马赛克，QRCode：二维码，AppletCode：小程序码，BarCode：条形码，LowVoice：低音，HighVoice：爆音，NoVoice：静音，LowEvaluation：无参考打分低于阈值。 */
+  Type: string;
+  /** 质检结果项。 */
+  QualityControlItems: QualityControlItem[];
+}
+
 /** RTMP转推的目标地址信息。 */
 declare interface RTMPAddressDestination {
   /** 转推RTMP的目标Url，格式如'rtmp://domain/live'。 */
@@ -3392,6 +3486,22 @@ declare interface ScheduleAnalysisTaskResult {
   Output: AiAnalysisResult[] | null;
 }
 
+/** 质检任务结果类型 */
+declare interface ScheduleQualityControlTaskResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status: string;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  ErrCodeExt: string;
+  /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
+  ErrCode: number;
+  /** 错误信息。 */
+  Message: string;
+  /** 质检任务的输入。 */
+  Input: AiQualityControlTaskInput;
+  /** 质检任务的输出。 */
+  Output: QualityControlData | null;
+}
+
 /** 编排视频识别任务结果类型 */
 declare interface ScheduleRecognitionTaskResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
@@ -3430,6 +3540,10 @@ declare interface ScheduleTask {
   TaskId: string;
   /** 任务流状态，取值：PROCESSING：处理中；FINISH：已完成。 */
   Status: string;
+  /** 源异常时返回非0错误码，返回0 时请使用各个具体任务的 ErrCode。 */
+  ErrCode?: number;
+  /** 源异常时返回对应异常Message，否则请使用各个具体任务的 Message。 */
+  Message?: string;
   /** 媒体处理的目标文件信息。 */
   InputInfo: MediaInputInfo | null;
   /** 原始视频的元信息。 */
@@ -4064,6 +4178,8 @@ declare interface WorkflowTask {
   AiAnalysisResultSet: AiAnalysisResult[];
   /** 视频内容识别任务的执行状态与结果。 */
   AiRecognitionResultSet: AiRecognitionResult[];
+  /** 视频质检任务的执行状态与结果。 */
+  AiQualityControlTaskResult: ScheduleQualityControlTaskResult | null;
 }
 
 /** 输入规则，当上传视频命中该规则时，即触发工作流。 */
@@ -4279,13 +4395,13 @@ declare interface CreateSampleSnapshotTemplateResponse {
 declare interface CreateScheduleRequest {
   /** 编排名称，最多128字符。同一个用户该名称唯一。 */
   ScheduleName: string;
-  /** 编排绑定的触发规则，当上传视频命中该规则到该对象时即触发工作流。 */
+  /** 编排绑定的触发规则，当上传视频命中该规则到该对象时即触发编排。 */
   Trigger: WorkflowTrigger;
   /** 编排任务列表。 */
   Activities: Activity[];
   /** 媒体处理的文件输出存储位置。不填则继承 Trigger 中的存储位置。 */
   OutputStorage?: TaskOutputStorage;
-  /** 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与触发文件所在的目录一致。 */
+  /** 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。如果不填，表示与触发文件所在的目录一致。 */
   OutputDir?: string;
   /** 任务的事件通知配置，不填代表不获取事件通知。 */
   TaskNotifyConfig?: TaskNotifyConfig;
@@ -4293,7 +4409,7 @@ declare interface CreateScheduleRequest {
 
 declare interface CreateScheduleResponse {
   /** 编排 ID。 */
-  ScheduleId: number;
+  ScheduleId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4431,7 +4547,7 @@ declare interface CreateWorkflowRequest {
   Trigger: WorkflowTrigger;
   /** 媒体处理的文件输出存储位置。不填则继承 Trigger 中的存储位置。 */
   OutputStorage?: TaskOutputStorage;
-  /** 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与触发文件所在的目录一致。 */
+  /** 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。如果不填，表示与触发文件所在的目录一致。 */
   OutputDir?: string;
   /** 媒体处理类型任务参数。 */
   MediaProcessTask?: MediaProcessTaskInput;
@@ -4449,7 +4565,7 @@ declare interface CreateWorkflowRequest {
 
 declare interface CreateWorkflowResponse {
   /** 工作流 ID。 */
-  WorkflowId: number;
+  WorkflowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4795,7 +4911,9 @@ declare interface DescribeSampleSnapshotTemplatesResponse {
 declare interface DescribeSchedulesRequest {
   /** 编排 ID 过滤条件，数组长度限制：100。 */
   ScheduleIds?: number[];
-  /** 状态，取值范围：Enabled：已启用，Disabled：已禁用。不填此参数，则不区分工作流状态。 */
+  /** 编排触发类型，可选值：CosFileUpload： 腾讯云 COS 文件上传触发AwsS3FileUpload：Aws S3 文件上传触发。不填或者为空表示全部。 */
+  TriggerType?: string;
+  /** 状态，取值范围：Enabled：已启用，Disabled：已禁用。不填此参数，则不区编排状态。 */
   Status?: string;
   /** 分页偏移量，默认值：0。 */
   Offset?: number;
@@ -4805,9 +4923,9 @@ declare interface DescribeSchedulesRequest {
 
 declare interface DescribeSchedulesResponse {
   /** 符合过滤条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 编排信息数组。 */
-  ScheduleInfoSet: SchedulesInfo[];
+  ScheduleInfoSet?: SchedulesInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5461,7 +5579,7 @@ declare interface ModifyScheduleRequest {
   Activities?: Activity[];
   /** 媒体处理的文件输出存储位置。 */
   OutputStorage?: TaskOutputStorage;
-  /** 媒体处理生成的文件输出的目标目录。注意：如果设置为空，则表示取消老配置的OutputDir值。 */
+  /** 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾。注意：如果设置为空，则表示取消老配置的OutputDir值。 */
   OutputDir?: string;
   /** 任务的事件通知配置。 */
   TaskNotifyConfig?: TaskNotifyConfig;
@@ -5683,8 +5801,10 @@ declare interface ProcessMediaRequest {
   InputInfo: MediaInputInfo;
   /** 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。 */
   OutputStorage?: TaskOutputStorage;
-  /** 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与 InputInfo 中文件所在的目录一致。 */
+  /** 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。如果不填，表示与 InputInfo 中文件所在的目录一致。 */
   OutputDir?: string;
+  /** 编排ID。注意1：对于OutputStorage、OutputDir参数：当服务编排中子任务节点配置了OutputStorage、OutputDir时，该子任务节点中配置的输出作为子任务的输出。当服务编排中子任务节点没有配置OutputStorage、OutputDir时，若创建任务接口（ProcessMedia）有输出，将覆盖原有编排的默认输出。注意2：对于TaskNotifyConfig参数，若创建任务接口（ProcessMedia）有设置，将覆盖原有编排的默认回调。注意3：编排的 Trigger 只是用来自动化触发场景，在手动发起的请求中已经配置的 Trigger 无意义。 */
+  ScheduleId?: number;
   /** 媒体处理类型任务参数。 */
   MediaProcessTask?: MediaProcessTaskInput;
   /** 视频内容审核类型任务参数。 */
@@ -5693,6 +5813,8 @@ declare interface ProcessMediaRequest {
   AiAnalysisTask?: AiAnalysisTaskInput;
   /** 视频内容识别类型任务参数。 */
   AiRecognitionTask?: AiRecognitionTaskInput;
+  /** 视频质检类型任务参数。 */
+  AiQualityControlTask?: AiQualityControlTaskInput;
   /** 任务的事件通知信息，不填代表不获取事件通知。 */
   TaskNotifyConfig?: TaskNotifyConfig;
   /** 任务流的优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。 */
@@ -5701,15 +5823,13 @@ declare interface ProcessMediaRequest {
   SessionId?: string;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
   SessionContext?: string;
-  /** 编排ID。注意1：对于OutputStorage、OutputDir参数：当服务编排中子任务节点配置了OutputStorage、OutputDir时，该子任务节点中配置的输出作为子任务的输出。当服务编排中子任务节点没有配置OutputStorage、OutputDir时，若创建任务接口（ProcessMedia）有输出，将覆盖原有编排的默认输出。注意2：对于TaskNotifyConfig参数，若创建任务接口（ProcessMedia）有设置，将覆盖原有编排的默认回调。注意3：编排的 Trigger 只是用来自动化触发场景，在手动发起的请求中已经配置的 Trigger 无意义。 */
-  ScheduleId?: number;
   /** 任务类型，默认Online Online：实时任务 Offline：闲时任务，不保证实效性，默认3天内处理完 */
   TaskType?: string;
 }
 
 declare interface ProcessMediaResponse {
   /** 任务 ID。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

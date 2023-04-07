@@ -10,6 +10,14 @@ declare interface AccountStatistics {
   MachineNum: number;
 }
 
+/** 节点关联的告警信息 */
+declare interface AlarmInfo {
+  /** 该节点关联的告警，告警的table_name+id（t1:id1,t2:id2,...) */
+  AlarmId: string;
+  /** 告警事件表状态，当该节点为告警点时生效 */
+  Status: number;
+}
+
 /** 资源管理进程基本信息 */
 declare interface AssetAppBaseInfo {
   /** 主机内网IP */
@@ -1772,6 +1780,8 @@ declare interface BruteAttackInfo {
   DataStatus?: number | null;
   /** 附加信息 */
   MachineExtraInfo?: MachineExtraInfo | null;
+  /** 地理位置中文名 */
+  Location?: string | null;
 }
 
 /** 标准阻断模式规则 */
@@ -2028,6 +2038,8 @@ declare interface HostLoginList {
   Desc?: string | null;
   /** 附加信息 */
   MachineExtraInfo?: MachineExtraInfo | null;
+  /** 请求目的端口 */
+  Port?: number | null;
 }
 
 /** 主机风险计数 */
@@ -2076,6 +2088,18 @@ declare interface IgnoreRuleEffectHostInfo {
   EventId: number | null;
   /** 主机quuid */
   Quuid: string | null;
+}
+
+/** 事件点信息 */
+declare interface IncidentVertexInfo {
+  /** 事件id */
+  IncidentId?: string | null;
+  /** 事件所在表名 */
+  TableName?: string | null;
+  /** 节点信息列表，数组项中包含节点详细信息 */
+  Vertex?: VertexInfo[] | null;
+  /** 节点总个数 */
+  VertexCount?: number | null;
 }
 
 /** 项 */
@@ -2574,6 +2598,64 @@ declare interface PrivilegeEscalationProcess {
   MachineName?: string;
   /** 附加信息 */
   MachineExtraInfo?: MachineExtraInfo | null;
+  /** 进程id */
+  Pid?: number | null;
+}
+
+/** 本地提权数据 */
+declare interface PrivilegeEventInfo {
+  /** 数据ID */
+  Id: number;
+  /** 云镜ID */
+  Uuid: string;
+  /** 主机ID */
+  Quuid: string;
+  /** 主机内网IP */
+  HostIp: string;
+  /** 进程名 */
+  ProcessName: string;
+  /** 进程路径 */
+  FullPath: string;
+  /** 执行命令 */
+  CmdLine: string;
+  /** 用户名 */
+  UserName: string;
+  /** 用户组 */
+  UserGroup: string;
+  /** 进程文件权限 */
+  ProcFilePrivilege: string;
+  /** 父进程名 */
+  ParentProcName: string;
+  /** 父进程用户名 */
+  ParentProcUser: string;
+  /** 父进程用户组 */
+  ParentProcGroup: string;
+  /** 父进程路径 */
+  ParentProcPath: string;
+  /** 进程树 json pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源 */
+  PsTree: string;
+  /** 处理状态：0-待处理 2-白名单 3-已处理 4-已忽略 */
+  Status: number;
+  /** 发生时间 */
+  CreateTime: string;
+  /** 机器名 */
+  MachineName: string;
+  /** 建议方案 */
+  SuggestScheme: string;
+  /** 危害描述信息 */
+  HarmDescribe: string;
+  /** 标签 */
+  Tags: string[];
+  /** 参考链接 */
+  References: string[];
+  /** 主机外网ip */
+  MachineWanIp: string;
+  /** 权限列表|隔开 */
+  NewCaps: string;
+  /** 主机在线状态 OFFLINE ONLINE */
+  MachineStatus: string;
+  /** 处理时间 */
+  ModifyTime: string;
 }
 
 /** 本地提权规则 */
@@ -2824,6 +2906,66 @@ declare interface ReverseShell {
   DetectBy?: number;
   /** 主机额外信息 */
   MachineExtraInfo?: MachineExtraInfo | null;
+  /** 进程id */
+  Pid?: number | null;
+}
+
+/** 反弹Shell数据详情 */
+declare interface ReverseShellEventInfo {
+  /** ID 主键 */
+  Id: number;
+  /** 云镜UUID */
+  Uuid: string;
+  /** 主机ID */
+  Quuid: string;
+  /** 主机内网IP */
+  HostIp: string;
+  /** 目标IP */
+  DstIp: string;
+  /** 目标端口 */
+  DstPort: number;
+  /** 进程名 */
+  ProcessName: string;
+  /** 进程路径 */
+  FullPath: string;
+  /** 命令详情 */
+  CmdLine: string;
+  /** 执行用户 */
+  UserName: string;
+  /** 执行用户组 */
+  UserGroup: string;
+  /** 父进程名 */
+  ParentProcName: string;
+  /** 父进程用户 */
+  ParentProcUser: string;
+  /** 父进程用户组 */
+  ParentProcGroup: string;
+  /** 父进程路径 */
+  ParentProcPath: string;
+  /** 处理状态：0-待处理 2-白名单 3-已处理 4-已忽略 */
+  Status: number;
+  /** 产生时间 */
+  CreateTime: string;
+  /** 主机名 */
+  MachineName: string;
+  /** 检测方法 */
+  DetectBy: number;
+  /** 进程树 json pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源 */
+  PsTree: string | null;
+  /** 建议方案 */
+  SuggestScheme: string;
+  /** 描述 */
+  HarmDescribe: string;
+  /** 标签 */
+  Tags: string[];
+  /** 参考链接 */
+  References: string[];
+  /** 主机外网ip */
+  MachineWanIp: string;
+  /** 主机在线状态 OFFLINE ONLINE */
+  MachineStatus: string;
+  /** 处理时间 */
+  ModifyTime: string;
 }
 
 /** 反弹Shell规则 */
@@ -3150,6 +3292,80 @@ declare interface UsualPlace {
   ProvinceId: number;
   /** 城市 ID。 */
   CityId: number;
+}
+
+/** 点详细信息 */
+declare interface VertexDetail {
+  /** 该节点类型，进程:1；网络:2；文件:3；ssh:4 */
+  Type?: number | null;
+  /** 各节点类型用到的时间，2022-11-29 00:00:00 格式 */
+  Time?: string | null;
+  /** 告警信息 */
+  AlarmInfo?: AlarmInfo[] | null;
+  /** 进程名，当该节点为进程时生效 */
+  ProcName?: string | null;
+  /** 命令行，当该节点为进程时生效 */
+  CmdLine?: string | null;
+  /** 进程id，当该节点为进程时生效 */
+  Pid?: string | null;
+  /** 文件md5，当该节点为文件时生效 */
+  FileMd5?: string | null;
+  /** 文件写入内容，当该节点为文件时生效 */
+  FileContent?: string | null;
+  /** 文件路径，当该节点为文件时生效 */
+  FilePath?: string | null;
+  /** 文件创建时间，当该节点为文件时生效 */
+  FileCreateTime?: string | null;
+  /** 请求目的地址，当该节点为网络时生效 */
+  Address?: string | null;
+  /** 目标端口，当该节点为网络时生效 */
+  DstPort?: number | null;
+  /** 登录源ip，当该节点为ssh时生效 */
+  SrcIP?: string | null;
+  /** 登录用户名用户组，当该节点为ssh时生效 */
+  User?: string | null;
+  /** 漏洞名称，当该节点为漏洞时生效 */
+  VulName?: string | null;
+  /** 漏洞利用时间，当该节点为漏洞时生效 */
+  VulTime?: string | null;
+  /** http请求内容，当该节点为漏洞时生效 */
+  HttpContent?: string | null;
+  /** 漏洞利用者来源ip，当该节点为漏洞时生效 */
+  VulSrcIP?: string | null;
+  /** 点id */
+  VertexId?: string | null;
+}
+
+/** 攻击溯源节点信息 */
+declare interface VertexInfo {
+  /** 该结点类型，进程:1；网络:2；文件:3；ssh:4； */
+  Type: number;
+  /** 该节点包含的vid */
+  Vid: string;
+  /** 该节点的父节点vid */
+  ParentVid: string;
+  /** 是否叶子 */
+  IsLeaf: boolean;
+  /** 进程名，当Type=1时使用 */
+  ProcNamePrefix: string | null;
+  /** 进程名md5，当Type=1时使用 */
+  ProcNameMd5: string | null;
+  /** 命令行，当Type=1时使用 */
+  CmdLinePrefix: string | null;
+  /** 命令行md5，当Type=1时使用 */
+  CmdLineMd5: string | null;
+  /** 文件路径，当Type=3时使用 */
+  FilePathPrefix: string | null;
+  /** 请求目的地址，当Type=2时使用 */
+  AddressPrefix: string | null;
+  /** 是否漏洞节点 */
+  IsWeDetect: boolean;
+  /** 是否告警节点 */
+  IsAlarm: boolean;
+  /** 文件路径md5，当Type=3时使用 */
+  FilePathMd5: string | null;
+  /** 请求目的地址md5，当Type=2时使用 */
+  AddressMd5: string | null;
 }
 
 /** 漏洞详细信息 */
@@ -3812,6 +4028,38 @@ declare interface DescribeAccountStatisticsResponse {
   TotalCount: number;
   /** 帐号统计列表。 */
   AccountStatistics: AccountStatistics[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAlarmIncidentNodesRequest {
+  /** 机器uuid */
+  Uuid: string;
+  /** 告警vid */
+  AlarmVid: string;
+  /** 告警时间 */
+  AlarmTime: number;
+}
+
+declare interface DescribeAlarmIncidentNodesResponse {
+  /** 告警点所在事件的所有节点信息,可能包含多事件 */
+  IncidentNodes?: IncidentVertexInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAlarmVertexIdRequest {
+  /** 机器uuid */
+  Uuid: string;
+  /** 开始时间戳 */
+  StartTime: number;
+  /** 结束时间戳 */
+  EndTime: number;
+}
+
+declare interface DescribeAlarmVertexIdResponse {
+  /** 告警点id列表 */
+  AlarmVertexIds?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5372,6 +5620,22 @@ declare interface DescribeEmergencyVulListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEventByTableRequest {
+  /** 事件表名 */
+  TableName: string;
+  /** 事件表id号 */
+  Ids: number[];
+}
+
+declare interface DescribeEventByTableResponse {
+  /** 告警类型，爆破bruteattack，高危命令bash，恶意文件malware，恶意请求risk_dns，本地提权privilege_escalation，反弹shell reverse_shell，内存马java_shell */
+  Type?: string;
+  /** 事件内容的json编码字符串，字段结构对齐事件表 */
+  Value?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeExpertServiceListRequest {
   /** 过滤条件。Keyword- String - 是否必填：否 - 关键词过滤，Uuids - String - 是否必填：否 - 主机id过滤 */
   Filters?: Filters[];
@@ -6100,6 +6364,18 @@ declare interface DescribeOverviewStatisticsResponse {
   RequestId?: string;
 }
 
+declare interface DescribePrivilegeEventInfoRequest {
+  /** 事件id */
+  Id: number;
+}
+
+declare interface DescribePrivilegeEventInfoResponse {
+  /** 本地提权详情 */
+  PrivilegeEventInfo: PrivilegeEventInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePrivilegeEventsRequest {
   /** 返回数量，最大值为100。 */
   Limit?: number;
@@ -6252,6 +6528,18 @@ declare interface DescribeProtectNetListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeReverseShellEventInfoRequest {
+  /** 事件id */
+  Id: number;
+}
+
+declare interface DescribeReverseShellEventInfoResponse {
+  /** 反弹shell详情信息 */
+  ReverseShellEventInfo: ReverseShellEventInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeReverseShellEventsRequest {
   /** 返回数量，最大值为100。 */
   Limit?: number;
@@ -6288,6 +6576,18 @@ declare interface DescribeReverseShellRulesResponse {
   List: ReverseShellRule[];
   /** 总条数 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRiskDnsEventInfoRequest {
+  /** 恶意请求事件Id */
+  Id: number;
+}
+
+declare interface DescribeRiskDnsEventInfoResponse {
+  /** 恶意请求事件详情 */
+  Info: RiskDnsEvent | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6796,6 +7096,22 @@ declare interface DescribeVersionStatisticsResponse {
   UltimateVersionNum?: number;
   /** 普惠版数量 */
   GeneralVersionNum?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVertexDetailRequest {
+  /** 点id列表 */
+  VertexIds: string[];
+  /** 事件id */
+  IncidentId: string;
+  /** 事件所在表名 */
+  TableName: string;
+}
+
+declare interface DescribeVertexDetailResponse {
+  /** 指定点列表的属性信息 */
+  VertexDetails?: VertexDetail[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8223,6 +8539,10 @@ declare interface Cwp {
   DeleteWebPageEventLog(data?: DeleteWebPageEventLogRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWebPageEventLogResponse>;
   /** 获取帐号统计列表数据 {@link DescribeAccountStatisticsRequest} {@link DescribeAccountStatisticsResponse} */
   DescribeAccountStatistics(data?: DescribeAccountStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountStatisticsResponse>;
+  /** 获取告警点所在事件的所有节点信息 {@link DescribeAlarmIncidentNodesRequest} {@link DescribeAlarmIncidentNodesResponse} */
+  DescribeAlarmIncidentNodes(data: DescribeAlarmIncidentNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmIncidentNodesResponse>;
+  /** 查询告警点id列表 {@link DescribeAlarmVertexIdRequest} {@link DescribeAlarmVertexIdResponse} */
+  DescribeAlarmVertexId(data: DescribeAlarmVertexIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmVertexIdResponse>;
   /** 查询应用列表 {@link DescribeAssetAppListRequest} {@link DescribeAssetAppListResponse} */
   DescribeAssetAppList(data?: DescribeAssetAppListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetAppListResponse>;
   /** 获取软件关联进程列表 {@link DescribeAssetAppProcessListRequest} {@link DescribeAssetAppProcessListResponse} */
@@ -8375,6 +8695,8 @@ declare interface Cwp {
   DescribeEmergencyResponseList(data?: DescribeEmergencyResponseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmergencyResponseListResponse>;
   /** 应急漏洞列表 {@link DescribeEmergencyVulListRequest} {@link DescribeEmergencyVulListResponse} */
   DescribeEmergencyVulList(data?: DescribeEmergencyVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmergencyVulListResponse>;
+  /** 根据事件表名和id查询告警事件详情 {@link DescribeEventByTableRequest} {@link DescribeEventByTableResponse} */
+  DescribeEventByTable(data: DescribeEventByTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventByTableResponse>;
   /** 安全管家列表 {@link DescribeExpertServiceListRequest} {@link DescribeExpertServiceListResponse} */
   DescribeExpertServiceList(data?: DescribeExpertServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExpertServiceListResponse>;
   /** 专家服务订单列表 {@link DescribeExpertServiceOrderListRequest} {@link DescribeExpertServiceOrderListResponse} */
@@ -8443,6 +8765,8 @@ declare interface Cwp {
   DescribeOpenPortStatistics(data?: DescribeOpenPortStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOpenPortStatisticsResponse>;
   /** 获取概览统计数据 {@link DescribeOverviewStatisticsRequest} {@link DescribeOverviewStatisticsResponse} */
   DescribeOverviewStatistics(data?: DescribeOverviewStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewStatisticsResponse>;
+  /** 查询本地提权详情 {@link DescribePrivilegeEventInfoRequest} {@link DescribePrivilegeEventInfoResponse} */
+  DescribePrivilegeEventInfo(data: DescribePrivilegeEventInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivilegeEventInfoResponse>;
   /** 获取本地提权事件列表 {@link DescribePrivilegeEventsRequest} {@link DescribePrivilegeEventsResponse} */
   DescribePrivilegeEvents(data?: DescribePrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivilegeEventsResponse>;
   /** 获取本地提权规则列表 {@link DescribePrivilegeRulesRequest} {@link DescribePrivilegeRulesResponse} */
@@ -8459,10 +8783,14 @@ declare interface Cwp {
   DescribeProtectDirRelatedServer(data: DescribeProtectDirRelatedServerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectDirRelatedServerResponse>;
   /** 旗舰重保列表 {@link DescribeProtectNetListRequest} {@link DescribeProtectNetListResponse} */
   DescribeProtectNetList(data?: DescribeProtectNetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectNetListResponse>;
+  /** 查询反弹shell详情 {@link DescribeReverseShellEventInfoRequest} {@link DescribeReverseShellEventInfoResponse} */
+  DescribeReverseShellEventInfo(data: DescribeReverseShellEventInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventInfoResponse>;
   /** 获取反弹Shell列表 {@link DescribeReverseShellEventsRequest} {@link DescribeReverseShellEventsResponse} */
   DescribeReverseShellEvents(data?: DescribeReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsResponse>;
   /** 获取反弹Shell规则列表 {@link DescribeReverseShellRulesRequest} {@link DescribeReverseShellRulesResponse} */
   DescribeReverseShellRules(data?: DescribeReverseShellRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellRulesResponse>;
+  /** 查询恶意请求事件详情 {@link DescribeRiskDnsEventInfoRequest} {@link DescribeRiskDnsEventInfoResponse} */
+  DescribeRiskDnsEventInfo(data: DescribeRiskDnsEventInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskDnsEventInfoResponse>;
   /** 获取恶意请求事件列表 {@link DescribeRiskDnsEventListRequest} {@link DescribeRiskDnsEventListResponse} */
   DescribeRiskDnsEventList(data?: DescribeRiskDnsEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskDnsEventListResponse>;
   /** 获取恶意请求列表 {@link DescribeRiskDnsListRequest} {@link DescribeRiskDnsListResponse} */
@@ -8511,6 +8839,8 @@ declare interface Cwp {
   DescribeUsualLoginPlaces(data: DescribeUsualLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsualLoginPlacesResponse>;
   /** 获取专业版和基础版机器数 {@link DescribeVersionStatisticsRequest} {@link DescribeVersionStatisticsResponse} */
   DescribeVersionStatistics(data?: DescribeVersionStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVersionStatisticsResponse>;
+  /** 获取指定点属性信息 {@link DescribeVertexDetailRequest} {@link DescribeVertexDetailResponse} */
+  DescribeVertexDetail(data: DescribeVertexDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVertexDetailResponse>;
   /** 获取近日指定类型的漏洞数量和主机数量 {@link DescribeVulCountByDatesRequest} {@link DescribeVulCountByDatesResponse} */
   DescribeVulCountByDates(data?: DescribeVulCountByDatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulCountByDatesResponse>;
   /** 漏洞影响主机列表 {@link DescribeVulEffectHostListRequest} {@link DescribeVulEffectHostListResponse} */

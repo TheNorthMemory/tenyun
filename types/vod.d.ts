@@ -2136,6 +2136,16 @@ declare interface HighlightsConfigureInfoForUpdate {
   Switch?: string;
 }
 
+/** 图片模糊处理。 */
+declare interface ImageBlur {
+  /** 图片模糊的操作类型。可选模式有：Gaussian : 高斯模糊。 */
+  Type: string;
+  /** 模糊半径，取值范围为1 - 50。当 Type 取值为 Gaussian 时此字段有效。 */
+  Radius?: number;
+  /** 正态分布的标准差，必须大于0。当 Type 取值为 Gaussian 时此字段有效。 */
+  Sigma?: number;
+}
+
 /** 图片中心裁剪处理。 */
 declare interface ImageCenterCut {
   /** 图片的裁剪模式，可选 Circle 和 Rectangle。Circle ： 内切圆裁剪，输出图片半径为 Radius。Rectangle ： 矩形裁剪，输出图片宽为 Width ， 高为 Height。 */
@@ -2162,6 +2172,8 @@ declare interface ImageOperation {
   Scale?: ImageScale;
   /** 图片裁剪处理，仅当 Type 为 CenterCut 时有效。 */
   CenterCut?: ImageCenterCut;
+  /** 图片模糊处理，仅当 Type 为 Blur 时有效。 */
+  Blur?: ImageBlur;
 }
 
 /** 图片处理模板， 最多支持三次操作。例如：裁剪-缩略-裁剪。 */
@@ -3734,15 +3746,15 @@ declare interface RebuildMediaTaskOutput {
   ExpireTime: string;
 }
 
-/** 音画质重生模版详情。 */
+/** 音画质重生模板详情。 */
 declare interface RebuildMediaTemplate {
-  /** 音画质重生模版号。 */
+  /** 音画质重生模板号。 */
   Definition?: number;
   /** 模板类型，可选值：Preset：系统预置模板；Custom：用户自定义模板。 */
   Type?: string;
-  /** 音画质重生模版名称。 */
+  /** 音画质重生模板名称。 */
   Name?: string;
-  /** 音画质重生模版描述。 */
+  /** 音画质重生模板描述。 */
   Comment?: string;
   /** 音画质重生视频控制信息。 */
   RebuildVideoInfo?: RebuildVideoInfo | null;
@@ -5361,7 +5373,7 @@ declare interface CreateHeadTailTemplateResponse {
 }
 
 declare interface CreateImageProcessingTemplateRequest {
-  /** 图片处理操作数组，操作将以其在数组中的顺序执行。长度限制：3。 */
+  /** 图片处理操作数组，操作将以其在数组中的顺序执行。长度限制：10。 */
   Operations: ImageOperation[];
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: number;
@@ -5465,9 +5477,9 @@ declare interface CreateRebuildMediaTemplateRequest {
   Container: string;
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: number;
-  /** 音画质重生模版名称。 */
+  /** 音画质重生模板名称。 */
   Name?: string;
-  /** 模版描述。 */
+  /** 模板描述。 */
   Comment?: string;
   /** 音画质重生视频控制控制信息。 */
   RebuildVideoInfo?: RebuildVideoInfo;
@@ -5484,7 +5496,7 @@ declare interface CreateRebuildMediaTemplateRequest {
 }
 
 declare interface CreateRebuildMediaTemplateResponse {
-  /** 音画质重生模版 ID。 */
+  /** 音画质重生模板 ID。 */
   Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -5881,7 +5893,7 @@ declare interface DeleteProcedureTemplateResponse {
 }
 
 declare interface DeleteRebuildMediaTemplateRequest {
-  /** 音画质重生模版号。 */
+  /** 音画质重生模板号。 */
   Definition: number;
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: number;
@@ -6557,7 +6569,7 @@ declare interface DescribeProcedureTemplatesResponse {
 }
 
 declare interface DescribeRebuildMediaTemplatesRequest {
-  /** 音画质重生模版列表。 */
+  /** 音画质重生模板列表。 */
   Definitions?: number[];
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: number;
@@ -7447,13 +7459,13 @@ declare interface ModifyPersonSampleResponse {
 }
 
 declare interface ModifyRebuildMediaTemplateRequest {
-  /** 音画质重生模版号。 */
+  /** 音画质重生模板号。 */
   Definition: number;
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: string;
-  /** 音画质重生模版名称。 */
+  /** 音画质重生模板名称。 */
   Name?: string;
-  /** 音画质重生模版描述。 */
+  /** 音画质重生模板描述。 */
   Comment?: string;
   /** 音画质重生视频控制信息。 */
   RebuildVideoInfo?: RebuildVideoInfo;
@@ -7923,7 +7935,7 @@ declare interface PushUrlCacheResponse {
 declare interface RebuildMediaByTemplateRequest {
   /** 媒体文件 ID。 */
   FileId: string;
-  /** 音画质重生模版 ID。 */
+  /** 音画质重生模板 ID。 */
   Definition: number;
   /** 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。 */
   SubAppId?: string;
@@ -8313,7 +8325,7 @@ declare interface Vod {
   CreatePersonSample(data: CreatePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonSampleResponse>;
   /** 创建任务流模板 {@link CreateProcedureTemplateRequest} {@link CreateProcedureTemplateResponse} */
   CreateProcedureTemplate(data: CreateProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProcedureTemplateResponse>;
-  /** 创建音画质重生模版 {@link CreateRebuildMediaTemplateRequest} {@link CreateRebuildMediaTemplateResponse} */
+  /** 创建音画质重生模板 {@link CreateRebuildMediaTemplateRequest} {@link CreateRebuildMediaTemplateResponse} */
   CreateRebuildMediaTemplate(data: CreateRebuildMediaTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRebuildMediaTemplateResponse>;
   /** 创建审核模板 {@link CreateReviewTemplateRequest} {@link CreateReviewTemplateResponse} */
   CreateReviewTemplate(data: CreateReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReviewTemplateResponse>;
@@ -8361,7 +8373,7 @@ declare interface Vod {
   DeletePersonSample(data: DeletePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonSampleResponse>;
   /** 删除任务流模板 {@link DeleteProcedureTemplateRequest} {@link DeleteProcedureTemplateResponse} */
   DeleteProcedureTemplate(data: DeleteProcedureTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProcedureTemplateResponse>;
-  /** 删除音画质重生模版 {@link DeleteRebuildMediaTemplateRequest} {@link DeleteRebuildMediaTemplateResponse} */
+  /** 删除音画质重生模板 {@link DeleteRebuildMediaTemplateRequest} {@link DeleteRebuildMediaTemplateResponse} */
   DeleteRebuildMediaTemplate(data: DeleteRebuildMediaTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRebuildMediaTemplateResponse>;
   /** 删除审核模板 {@link DeleteReviewTemplateRequest} {@link DeleteReviewTemplateResponse} */
   DeleteReviewTemplate(data: DeleteReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReviewTemplateResponse>;
@@ -8439,7 +8451,7 @@ declare interface Vod {
   DescribePrepaidProducts(data?: DescribePrepaidProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrepaidProductsResponse>;
   /** 获取任务流模板列表 {@link DescribeProcedureTemplatesRequest} {@link DescribeProcedureTemplatesResponse} */
   DescribeProcedureTemplates(data?: DescribeProcedureTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcedureTemplatesResponse>;
-  /** 获取音画质重生模版列表 {@link DescribeRebuildMediaTemplatesRequest} {@link DescribeRebuildMediaTemplatesResponse} */
+  /** 获取音画质重生模板列表 {@link DescribeRebuildMediaTemplatesRequest} {@link DescribeRebuildMediaTemplatesResponse} */
   DescribeRebuildMediaTemplates(data?: DescribeRebuildMediaTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebuildMediaTemplatesResponse>;
   /** 查询内容智能识别详情 {@link DescribeReviewDetailsRequest} {@link DescribeReviewDetailsResponse} */
   DescribeReviewDetails(data: DescribeReviewDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReviewDetailsResponse>;
@@ -8511,7 +8523,7 @@ declare interface Vod {
   ModifyMediaStorageClass(data: ModifyMediaStorageClassRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMediaStorageClassResponse>;
   /** 修改素材样本 {@link ModifyPersonSampleRequest} {@link ModifyPersonSampleResponse} */
   ModifyPersonSample(data: ModifyPersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonSampleResponse>;
-  /** 修改音画质重生模版 {@link ModifyRebuildMediaTemplateRequest} {@link ModifyRebuildMediaTemplateResponse} */
+  /** 修改音画质重生模板 {@link ModifyRebuildMediaTemplateRequest} {@link ModifyRebuildMediaTemplateResponse} */
   ModifyRebuildMediaTemplate(data: ModifyRebuildMediaTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRebuildMediaTemplateResponse>;
   /** 修改审核模板 {@link ModifyReviewTemplateRequest} {@link ModifyReviewTemplateResponse} */
   ModifyReviewTemplate(data: ModifyReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReviewTemplateResponse>;
@@ -8555,7 +8567,7 @@ declare interface Vod {
   PushUrlCache(data: PushUrlCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PushUrlCacheResponse>;
   /** 发起音画质重生 {@link RebuildMediaRequest} {@link RebuildMediaResponse} */
   RebuildMedia(data: RebuildMediaRequest, config?: AxiosRequestConfig): AxiosPromise<RebuildMediaResponse>;
-  /** 使用模版发起音画质重生 {@link RebuildMediaByTemplateRequest} {@link RebuildMediaByTemplateResponse} */
+  /** 使用模板发起音画质重生 {@link RebuildMediaByTemplateRequest} {@link RebuildMediaByTemplateResponse} */
   RebuildMediaByTemplate(data: RebuildMediaByTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<RebuildMediaByTemplateResponse>;
   /** 刷新URL {@link RefreshUrlCacheRequest} {@link RefreshUrlCacheResponse} */
   RefreshUrlCache(data: RefreshUrlCacheRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshUrlCacheResponse>;
