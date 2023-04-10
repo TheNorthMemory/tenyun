@@ -841,7 +841,7 @@ declare interface CreateConvertTaskApiRequest {
 
 declare interface CreateConvertTaskApiResponse {
   /** 转换任务Id */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

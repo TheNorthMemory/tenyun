@@ -1956,6 +1956,84 @@ declare interface ExpertServiceOrderInfo {
   Status: number;
 }
 
+/** 核心文件监控事件 */
+declare interface FileTamperEvent {
+  /** 机器名称 */
+  HostName?: string;
+  /** 机器IP */
+  HostIp?: string;
+  /** 发生时间 */
+  CreateTime?: string;
+  /** 最近发生时间 */
+  ModifyTime?: string;
+  /** 事件id */
+  Id?: number;
+  /** 主机uuid */
+  Uuid?: string;
+  /** cvm id */
+  Quuid?: string;
+  /** 事件类型/动作 0 -- 告警 */
+  Type?: number;
+  /** 进程路径 */
+  ProcessExe?: string;
+  /** 进程参数 */
+  ProcessArgv?: string;
+  /** 目标文件路径 */
+  Target?: string;
+  /** 处理状态 0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略 4-已手动处理 */
+  Status?: number;
+  /** 事件产生次数 */
+  EventCount?: number;
+  /** 规则id */
+  RuleId?: number;
+  /** 规则名称 */
+  RuleName?: string;
+  /** 事件详情: json格式 */
+  Pstree?: string;
+  /** 规则类型 0系统规则 1自定义规则 */
+  RuleCategory?: number;
+  /** 主机在线信息 ONLINE、OFFLINE */
+  MachineStatus?: string;
+  /** 危害描述 */
+  Description?: string;
+  /** 修护建议 */
+  Suggestion?: string;
+  /** 内网ip */
+  PrivateIp?: string;
+  /** 进程权限 */
+  ExePermission?: string;
+  /** 用户名 */
+  UserName?: string;
+  /** 用户组 */
+  UserGroup?: string;
+  /** 进程名 */
+  ExeMd5?: string;
+  /** 进程文件大小 */
+  ExeSize?: number;
+  /** 进程执行时长 */
+  ExeTime?: number;
+  /** 目标文件大小 */
+  TargetSize?: number;
+  /** 目标文件权限 */
+  TargetPermission?: string;
+  /** 目标文件更新时间 */
+  TargetModifyTime?: string | null;
+  /** 目标文件创建时间 */
+  TargetCreatTime?: string | null;
+  /** 进程pid */
+  ExePid?: number;
+  /** 文件名称 */
+  TargetName?: string;
+  /** 参考链接 */
+  Reference?: string;
+  /** 风险等级 0：无， 1: 高危， 2:中危， 3: 低危 */
+  Level?: number;
+  /** 进程名称 */
+  ExeName?: string | null;
+  /** 主机额外信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
+}
+
 /** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。* 最多只能有5个Filter* 同一个Filter存在多个Values，Values值数量最多不能超过5个。 */
 declare interface Filter {
   /** 过滤键的名称。 */
@@ -5698,6 +5776,28 @@ declare interface DescribeExportMachinesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFileTamperEventsRequest {
+  /** 过滤条件。Status - String - 是否必填：否 - 处理状态 0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略ModifyTime - String - 是否必填：否 - 最近发生时间Uuid- String - 是否必填：否 - 主机uuid查询RuleCategory- string - 是否必填：否 - 规则类别 0 系统规则 1 自定义规则 */
+  Filters?: Filters[];
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 排序方式 ASC,DESC */
+  Order?: string;
+  /** 排序字段 CreateTime、ModifyTime */
+  By?: string;
+}
+
+declare interface DescribeFileTamperEventsResponse {
+  /** 核心文件事件列表 */
+  List: FileTamperEvent[] | null;
+  /** 数据总条数 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeGeneralStatRequest {
   /** 云主机类型。CVM：表示腾讯云服务器BM: 表示黑石物理机ECM: 表示边缘计算服务器LH: 表示轻量应用服务器Other: 表示混合云机器 */
   MachineType?: string;
@@ -8703,6 +8803,8 @@ declare interface Cwp {
   DescribeExpertServiceOrderList(data?: DescribeExpertServiceOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExpertServiceOrderListResponse>;
   /** 导出区域主机列表 {@link DescribeExportMachinesRequest} {@link DescribeExportMachinesResponse} */
   DescribeExportMachines(data: DescribeExportMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportMachinesResponse>;
+  /** 核心文件监控事件列表 {@link DescribeFileTamperEventsRequest} {@link DescribeFileTamperEventsResponse} */
+  DescribeFileTamperEvents(data?: DescribeFileTamperEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileTamperEventsResponse>;
   /** 获取主机相关统计 {@link DescribeGeneralStatRequest} {@link DescribeGeneralStatResponse} */
   DescribeGeneralStat(data?: DescribeGeneralStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralStatResponse>;
   /** 获取帐号变更历史列表 {@link DescribeHistoryAccountsRequest} {@link DescribeHistoryAccountsResponse} */

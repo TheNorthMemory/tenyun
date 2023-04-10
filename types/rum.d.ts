@@ -1515,19 +1515,21 @@ declare interface DescribePvListResponse {
 declare interface DescribeReleaseFileSignRequest {
   /** 超时时间，不填默认是 5 分钟 */
   Timeout?: number;
+  /** bucket类型，不填默认web，2:app */
+  FileType?: number;
 }
 
 declare interface DescribeReleaseFileSignResponse {
   /** 临时密钥key */
-  SecretKey: string;
+  SecretKey?: string;
   /** 临时密钥 id */
-  SecretID: string;
+  SecretID?: string;
   /** 临时密钥临时 token */
-  SessionToken: string;
+  SessionToken?: string;
   /** 开始时间戳 */
-  StartTime: number;
+  StartTime?: number;
   /** 过期时间戳 */
-  ExpiredTime: number;
+  ExpiredTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

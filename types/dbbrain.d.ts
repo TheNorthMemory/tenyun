@@ -814,6 +814,22 @@ declare interface CreateSqlFilterResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDBDiagReportTasksRequest {
+  /** 需要删除的任务id列表 */
+  AsyncRequestIds: number[];
+  /** 实例ID */
+  InstanceId: string;
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL， "mongodb" - 云数据库 CynosDB for MySQL，默认值为"mysql"。 */
+  Product: string;
+}
+
+declare interface DeleteDBDiagReportTasksResponse {
+  /** 任务删除状态, 0-删除成功 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteSecurityAuditLogExportTasksRequest {
   /** 安全审计组Id。 */
   SecAuditGroupId: string;
@@ -1299,9 +1315,9 @@ declare interface DescribeSlowLogTopSqlsRequest {
 
 declare interface DescribeSlowLogTopSqlsResponse {
   /** 符合条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 慢日志 top sql 列表 */
-  Rows: SlowLogTopSqlItem[];
+  Rows?: SlowLogTopSqlItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2629,6 +2645,8 @@ declare interface Dbbrain {
   CreateSecurityAuditLogExportTask(data: CreateSecurityAuditLogExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityAuditLogExportTaskResponse>;
   /** 创建实例SQL限流任务 {@link CreateSqlFilterRequest} {@link CreateSqlFilterResponse} */
   CreateSqlFilter(data: CreateSqlFilterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSqlFilterResponse>;
+  /** 删除健康报告生成任务 {@link DeleteDBDiagReportTasksRequest} {@link DeleteDBDiagReportTasksResponse} */
+  DeleteDBDiagReportTasks(data: DeleteDBDiagReportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBDiagReportTasksResponse>;
   /** 删除安全审计日志导出任务 {@link DeleteSecurityAuditLogExportTasksRequest} {@link DeleteSecurityAuditLogExportTasksResponse} */
   DeleteSecurityAuditLogExportTasks(data: DeleteSecurityAuditLogExportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityAuditLogExportTasksResponse>;
   /** 删除实例SQL限流任务 {@link DeleteSqlFiltersRequest} {@link DeleteSqlFiltersResponse} */
@@ -2671,7 +2689,7 @@ declare interface Dbbrain {
   DescribeSecurityAuditLogExportTasks(data: DescribeSecurityAuditLogExportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityAuditLogExportTasksResponse>;
   /** 获取慢日志统计柱状图 {@link DescribeSlowLogTimeSeriesStatsRequest} {@link DescribeSlowLogTimeSeriesStatsResponse} */
   DescribeSlowLogTimeSeriesStats(data: DescribeSlowLogTimeSeriesStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogTimeSeriesStatsResponse>;
-  /** 按照Sql模板查询指定时间段内的慢日志统计结果 {@link DescribeSlowLogTopSqlsRequest} {@link DescribeSlowLogTopSqlsResponse} */
+  /** 获取慢SQL模版列表 {@link DescribeSlowLogTopSqlsRequest} {@link DescribeSlowLogTopSqlsResponse} */
   DescribeSlowLogTopSqls(data: DescribeSlowLogTopSqlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogTopSqlsResponse>;
   /** 获取慢日志来源地址统计分布图 {@link DescribeSlowLogUserHostStatsRequest} {@link DescribeSlowLogUserHostStatsResponse} */
   DescribeSlowLogUserHostStats(data: DescribeSlowLogUserHostStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogUserHostStatsResponse>;

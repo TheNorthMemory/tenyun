@@ -2173,19 +2173,19 @@ declare interface AddExistedInstancesRequest {
   SkipValidateOptions?: string[];
   /** 参数InstanceAdvancedSettingsOverride数组用于定制化地配置各台instance，与InstanceIds顺序对应。当传入InstanceAdvancedSettingsOverrides数组时，将覆盖默认参数InstanceAdvancedSettings；当没有传入参数InstanceAdvancedSettingsOverrides时，InstanceAdvancedSettings参数对每台instance生效。参数InstanceAdvancedSettingsOverride数组的长度应与InstanceIds数组一致；当长度大于InstanceIds数组长度时将报错；当长度小于InstanceIds数组时，没有对应配置的instace将使用默认配置。 */
   InstanceAdvancedSettingsOverrides?: InstanceAdvancedSettings[];
-  /** 节点镜像（节点选项时，该参数是必传参数） */
+  /** 节点镜像 */
   ImageId?: string;
 }
 
 declare interface AddExistedInstancesResponse {
   /** 失败的节点ID */
-  FailedInstanceIds: string[] | null;
+  FailedInstanceIds?: string[] | null;
   /** 成功的节点ID */
-  SuccInstanceIds: string[] | null;
+  SuccInstanceIds?: string[] | null;
   /** 超时未返回出来节点的ID(可能失败，也可能成功) */
-  TimeoutInstanceIds: string[] | null;
+  TimeoutInstanceIds?: string[] | null;
   /** 失败的节点的失败原因 */
-  FailedReasons: string[] | null;
+  FailedReasons?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

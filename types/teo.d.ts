@@ -2721,7 +2721,7 @@ declare interface DescribeOverviewL7DataRequest {
   StartTime: string;
   /** 结束时间。 */
   EndTime: string;
-  /** 查询的指标，取值有：l7Flow_outFlux: 访问流量；l7Flow_request: 访问请求数；l7Flow_outBandwidth: 访问带宽；l7Flow_hit_outFlux: 缓存命中流量。 */
+  /** 查询的指标，取值有：l7Flow_outFlux: Edegone响应流量；l7Flow_inFlux: Edgeone请求流量；l7Flow_outBandwidth: Edegone响应带宽；l7Flow_inBandwidth: Edegone请求带宽；l7Flow_hit_outFlux: 缓存命中流量；l7Flow_request: 访问请求数；l7Flow_flux: 访问请求上行+下行流量；l7Flow_bandwidth：访问请求上行+下行带宽。 */
   MetricNames: string[];
   /** 站点集合。若不填写，默认选择全部站点，且最多只能查询近30天的数据；若填写，则可查询站点绑定套餐支持的数据分析最大查询范围。 */
   ZoneIds?: string[];
@@ -2739,9 +2739,9 @@ declare interface DescribeOverviewL7DataRequest {
 
 declare interface DescribeOverviewL7DataResponse {
   /** 查询结果的总条数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 七层监控类时序流量数据列表。 */
-  Data: TimingDataRecord[] | null;
+  Data?: TimingDataRecord[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2913,7 +2913,7 @@ declare interface DescribeTimingL7AnalysisDataRequest {
   StartTime: string;
   /** 结束时间。 */
   EndTime: string;
-  /** 指标列表，取值有:l7Flow_outFlux: 访问流量；l7Flow_request: 访问请求数；l7Flow_outBandwidth: 访问带宽。 */
+  /** 指标列表，取值有:l7Flow_outFlux: Edgeone响应流量；l7Flow_inFlux: Edgeone请求流量；l7Flow_outBandwidth: Edgeone响应带宽；l7Flow_inBandwidth：Edgeone请求带宽；l7Flow_request: 访问请求数；l7Flow_flux: 访问请求上行+下行流量；l7Flow_bandwidth：访问请求上行+下行带宽。 */
   MetricNames: string[];
   /** 站点集合。若不填写，默认选择全部站点，且最多只能查询近30天的数据；若填写，则可查询站点绑定套餐支持的数据分析最大查询范围。 */
   ZoneIds?: string[];
@@ -2927,9 +2927,9 @@ declare interface DescribeTimingL7AnalysisDataRequest {
 
 declare interface DescribeTimingL7AnalysisDataResponse {
   /** 查询结果的总条数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 时序流量数据列表。 */
-  Data: TimingDataRecord[] | null;
+  Data?: TimingDataRecord[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3023,7 +3023,7 @@ declare interface DescribeTopL7CacheDataRequest {
   MetricName: string;
   /** 站点id集合，不填默认选择全部站点。 */
   ZoneIds?: string[];
-  /** 查询前多少个数据，不填默认默认为10， 表示查询前top 10的数据。 */
+  /** 查询前多少个数据，最大值为1000，不填默认默认为10， 表示查询前top 10的数据。 */
   Limit?: number;
   /** 过滤条件，详细的过滤条件如下：domain 按照【子域名】进行过滤，子域名形如： test.example.com。 类型：String 必选：否url 按照【URL】进行过滤，此参数只支持30天的时间范围，URL形如：/content。 类型：String 必选：否resourceType 按照【资源类型】进行过滤，此参数只支持30天的时间范围，资源类型形如：jpg，png。 类型：String 必选：否cacheType 按照【缓存类型】进行过滤。 类型：String 必选：否 可选项： hit：命中缓存； dynamic：资源不可缓存； miss：未命中缓存。statusCode 按照【状态码】进行过滤，此参数只支持30天的时间范围。 类型：String 必选：否 可选项： 1XX：1xx类型的状态码； 100：100状态码； 101：101状态码； 102：102状态码； 2XX：2xx类型的状态码； 200：200状态码； 201：201状态码； 202：202状态码； 203：203状态码； 204：204状态码； 100：100状态码； 206：206状态码； 207：207状态码； 3XX：3xx类型的状态码； 300：300状态码； 301：301状态码； 302：302状态码； 303：303状态码； 304：304状态码； 305：305状态码； 307：307状态码； 4XX：4xx类型的状态码； 400：400状态码； 401：401状态码； 402：402状态码； 403：403状态码； 404：404状态码； 405：405状态码； 406：406状态码； 407：407状态码； 408：408状态码； 409：409状态码； 410：410状态码； 411：411状态码； 412：412状态码； 412：413状态码； 414：414状态码； 415：415状态码； 416：416状态码； 417：417状态码； 422：422状态码； 423：423状态码； 424：424状态码； 426：426状态码； 451：451状态码； 5XX：5xx类型的状态码； 500：500状态码； 501：501状态码； 502：502状态码； 503：503状态码； 504：504状态码； 505：505状态码； 506：506状态码； 507：507状态码； 510：510状态码； 514：514状态码； 544：544状态码。tagKey 按照【标签Key】进行过滤。 类型：String 必选：否tagValue 按照【标签Value】进行过滤。 类型：String 必选：否 */
   Filters?: QueryCondition[];

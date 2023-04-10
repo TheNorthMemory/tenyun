@@ -1512,7 +1512,7 @@ declare interface DeleteListenersResponse {
 
 declare interface DeleteProxyGroupRequest {
   /** 需要删除的通道组ID。 */
-  GroupId?: string;
+  GroupId: string;
   /** 强制删除标识。其中：0，不强制删除，1，强制删除。默认为0，当通道组中存在通道或通道组中存在监听器/规则绑定了源站时，且Force为0时，该操作会返回失败。 */
   Force?: number;
 }
@@ -2838,7 +2838,7 @@ declare interface Gaap {
   /** 删除通道监听器 {@link DeleteListenersRequest} {@link DeleteListenersResponse} */
   DeleteListeners(data: DeleteListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteListenersResponse>;
   /** 删除通道组 {@link DeleteProxyGroupRequest} {@link DeleteProxyGroupResponse} */
-  DeleteProxyGroup(data?: DeleteProxyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProxyGroupResponse>;
+  DeleteProxyGroup(data: DeleteProxyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProxyGroupResponse>;
   /** 删除7层监听器转发规则 {@link DeleteRuleRequest} {@link DeleteRuleResponse} */
   DeleteRule(data: DeleteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleResponse>;
   /** 删除安全策略 {@link DeleteSecurityPolicyRequest} {@link DeleteSecurityPolicyResponse} */

@@ -238,6 +238,32 @@ declare interface RoomInfo {
   GroupId?: string | null;
 }
 
+/** 房间列表 */
+declare interface RoomItem {
+  /** 名称 */
+  Name?: string | null;
+  /** 房间ID */
+  RoomId?: number | null;
+  /** 房间状态。0 未开始 ；1进行中 ；2 已结束 */
+  Status?: number | null;
+  /** 开始时间 */
+  StartTime?: number | null;
+  /** 结束时间 */
+  EndTime?: number | null;
+  /** 实际开始时间 */
+  RealStartTime?: number | null;
+  /** 实际结束时间 */
+  RealEndTime?: number | null;
+  /** 分辨率。1 标清2 高清3 全高清 */
+  Resolution?: number | null;
+  /** 最大允许连麦人数 */
+  MaxRTCMember?: number | null;
+  /** 房间录制地址。已废弃，使用新字段 RecordUrl */
+  ReplayUrl?: string | null;
+  /** 录制地址（协议为https)。仅在房间结束后存在。 */
+  RecordUrl?: string | null;
+}
+
 /** 场景配置 */
 declare interface SceneItem {
 }
@@ -957,6 +983,28 @@ declare interface GetRoomMessageResponse {
   RequestId?: string;
 }
 
+declare interface GetRoomsRequest {
+  /** 低代码平台的SdkAppId。 */
+  SdkAppId: number;
+  /** 开始时间。默认以当前时间减去半小时作为开始时间。 */
+  StartTime?: number;
+  /** 结束时间。默认以当前时间加上半小时作为结束时间。 */
+  EndTime?: number;
+  /** 分页查询当前页数，从1开始递增 */
+  Page?: number;
+  /** 默认是10条 */
+  Limit?: number;
+}
+
+declare interface GetRoomsResponse {
+  /** 总数 */
+  Total?: number;
+  /** 房间列表 */
+  Rooms?: RoomItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetWatermarkRequest {
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId: number;
@@ -1240,6 +1288,8 @@ declare interface Lcic {
   GetRoomEvent(data: GetRoomEventRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoomEventResponse>;
   /** 获取房间历史消息 {@link GetRoomMessageRequest} {@link GetRoomMessageResponse} */
   GetRoomMessage(data: GetRoomMessageRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoomMessageResponse>;
+  /** 获取房间列表 {@link GetRoomsRequest} {@link GetRoomsResponse} */
+  GetRooms(data: GetRoomsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoomsResponse>;
   /** 获取水印设置 {@link GetWatermarkRequest} {@link GetWatermarkResponse} */
   GetWatermark(data: GetWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<GetWatermarkResponse>;
   /** 源账号登录 {@link LoginOriginIdRequest} {@link LoginOriginIdResponse} */

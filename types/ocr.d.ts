@@ -164,6 +164,12 @@ declare interface FlightInvoiceInfo {
   Row: number;
 }
 
+/** 组在图中的序号 */
+declare interface GroupInfo {
+  /** 每一行的元素 */
+  Groups?: LineInfo[];
+}
+
 /** 保险单据信息 */
 declare interface InsuranceBillInfo {
   /** 识别出的字段名称(关键字)，支持以下字段：【病案首页】姓名、性别、出生日期、出院诊断、疾病编码、入院病情等。【费用清单】医疗参保人员类别、身份证号、入院方式、结账日期、项目、金额等。【结算单】名称、单价、数量、金额、医保内、医保外等。【医疗发票】姓名、性别、住院时间、收费项目、金额、合计等。 */
@@ -206,6 +212,20 @@ declare interface ItemCoord {
   Height: number;
 }
 
+/** 智能结构化元素组 */
+declare interface ItemInfo {
+  /** key信息组 */
+  Key?: Key | null;
+  /** Value信息组 */
+  Value?: Value | null;
+}
+
+/** key信息组 */
+declare interface Key {
+  /** 自动识别的字段名称 */
+  AutoName?: string;
+}
+
 /** 全部车牌信息 */
 declare interface LicensePlateInfo {
   /** 识别出的车牌号码。 */
@@ -216,6 +236,12 @@ declare interface LicensePlateInfo {
   Rect: Rect;
   /** 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”。 */
   Color: string;
+}
+
+/** 按行输出，行序号 */
+declare interface LineInfo {
+  /** 每行的一个元素 */
+  Lines?: ItemInfo[];
 }
 
 /** 医疗发票识别结果 */
@@ -768,6 +794,14 @@ declare interface UsedVehicleInvoiceInfo {
   MarketBankAccount: string;
   /** 二手车市场电话 */
   MarketTel: string;
+}
+
+/** value信息组 */
+declare interface Value {
+  /** 自动识别的字段内容 */
+  AutoContent?: string;
+  /** 四点坐标 */
+  Coord?: Polygon | null;
 }
 
 /** 增值税发票信息 */
@@ -2596,6 +2630,28 @@ declare interface SmartStructuralOCRResponse {
   RequestId?: string;
 }
 
+declare interface SmartStructuralOCRV2Request {
+  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  ImageUrl?: string;
+  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
+  /** 自定义结构化功能需返回的字段名称，例：若客户只想返回姓名、性别两个字段的识别结果，则输入ItemNames=["姓名","性别"] */
+  ItemNames?: string[];
+}
+
+declare interface SmartStructuralOCRV2Response {
+  /** 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负 */
+  Angle?: number;
+  /** 配置结构化文本信息 */
+  StructuralList?: GroupInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TableOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -3255,6 +3311,8 @@ declare interface Ocr {
   ShipInvoiceOCR(data?: ShipInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ShipInvoiceOCRResponse>;
   /** 智能结构化识别 {@link SmartStructuralOCRRequest} {@link SmartStructuralOCRResponse} */
   SmartStructuralOCR(data?: SmartStructuralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralOCRResponse>;
+  /** 智能结构化识别V2 {@link SmartStructuralOCRV2Request} {@link SmartStructuralOCRV2Response} */
+  SmartStructuralOCRV2(data?: SmartStructuralOCRV2Request, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralOCRV2Response>;
   /** 表格识别（V1) {@link TableOCRRequest} {@link TableOCRResponse} */
   TableOCR(data?: TableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TableOCRResponse>;
   /** 出租车发票识别 {@link TaxiInvoiceOCRRequest} {@link TaxiInvoiceOCRResponse} */

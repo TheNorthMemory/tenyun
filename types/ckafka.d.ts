@@ -520,6 +520,8 @@ declare interface DatahubTopicDTO {
 declare interface DatahubTopicResp {
   /** Topic名称 */
   TopicName: string;
+  /** TopicId */
+  TopicId?: string | null;
 }
 
 /** 数据处理——Value处理参数——转换时间格式参数 */

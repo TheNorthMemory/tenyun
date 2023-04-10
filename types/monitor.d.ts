@@ -1600,6 +1600,8 @@ declare interface PrometheusConfigItem {
   Config: string;
   /** 用于出参，如果该配置来至模板，则为模板id */
   TemplateId?: string | null;
+  /** 目标数 */
+  Targets?: Targets | null;
 }
 
 /** 实例的授权信息 */
@@ -1782,6 +1784,12 @@ declare interface PrometheusRecordRuleYamlItem {
   Content: string | null;
   /** 该聚合规则如果来源于用户集群crd资源定义，则ClusterId为所属集群ID */
   ClusterId: string | null;
+  /** 状态 */
+  Status?: number | null;
+  /** id */
+  Id?: string | null;
+  /** 规则数量 */
+  Count?: number | null;
 }
 
 /** prometheus 报警规则 KV 参数 */
@@ -2018,6 +2026,18 @@ declare interface TagInstance {
   BindingStatus: number | null;
   /** 标签状态，2：标签存在，1：标签不存在 */
   TagStatus: number | null;
+}
+
+/** 抓取目标数 */
+declare interface Targets {
+  /** 总数 */
+  Total?: number | null;
+  /** 在线数 */
+  Up?: number | null;
+  /** 不在线数 */
+  Down?: number | null;
+  /** 未知状态数 */
+  Unknown?: number | null;
 }
 
 /** 任务步骤信息 */
@@ -3726,6 +3746,8 @@ declare interface DescribePrometheusGlobalConfigResponse {
   PodMonitors?: PrometheusConfigItem[] | null;
   /** RawJobs列表以及对应targets信息 */
   RawJobs?: PrometheusConfigItem[] | null;
+  /** Probes列表以及对应targets信息 */
+  Probes?: PrometheusConfigItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

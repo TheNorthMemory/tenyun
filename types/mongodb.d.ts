@@ -531,7 +531,7 @@ declare interface AssignProjectResponse {
 }
 
 declare interface CreateAccountUserRequest {
-  /** 实例 ID。 */
+  /** 实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 新账号名称。其格式要求如下：字符范围[1,32]。可输入[A,Z]、[a,z]、[1,9]范围的字符以及下划线“_”与短划线“-”。 */
   UserName: string;
@@ -547,7 +547,7 @@ declare interface CreateAccountUserRequest {
 
 declare interface CreateAccountUserResponse {
   /** 创建任务ID。 */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -719,13 +719,13 @@ declare interface CreateDBInstanceResponse {
 }
 
 declare interface DescribeAccountUsersRequest {
-  /** 实例ID。 */
+  /** 指定待获取账号的实例ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
 declare interface DescribeAccountUsersResponse {
   /** 实例账号列表。 */
-  Users: UserInfo[];
+  Users?: UserInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -773,19 +773,19 @@ declare interface DescribeBackupDownloadTaskResponse {
 }
 
 declare interface DescribeClientConnectionsRequest {
-  /** 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
+  /** 指定待查询的实例ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 单次请求返回的数量，最小值为1，最大值为1000，默认值为1000。 */
+  /** 单次请求返回的数量。最小值为1，最大值为1000，默认值为1000。 */
   Limit?: number;
-  /** 偏移量，默认值为0。 */
+  /** 偏移量，默认值为0。Offset=Limit*(页码-1)。 */
   Offset?: number;
 }
 
 declare interface DescribeClientConnectionsResponse {
-  /** 客户端连接信息，包括客户端IP和对应IP的连接数量。 */
-  Clients: ClientConnection[];
+  /** 客户端连接信息，包括客户端 IP 和对应 IP 的连接数量。 */
+  Clients?: ClientConnection[];
   /** 满足条件的记录总条数，可用于分页查询。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -887,7 +887,7 @@ declare interface DescribeDBInstanceNodePropertyResponse {
 }
 
 declare interface DescribeDBInstancesRequest {
-  /** 实例ID列表。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
+  /** 实例 ID 列表。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceIds?: string[];
   /** 实例类型。取值范围如下：0：所有实例。1：正式实例。2：临时实例。3：只读实例。-1：正式实例、只读、灾备实例。 */
   InstanceType?: number;

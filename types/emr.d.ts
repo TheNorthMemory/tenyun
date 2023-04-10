@@ -228,6 +228,14 @@ declare interface ClusterSetting {
   RemoteTcpDefaultPort?: boolean;
 }
 
+/** 操作的进程范围 */
+declare interface ComponentBasicRestartInfo {
+  /** 进程名，必填，如NameNode */
+  ComponentName?: string | null;
+  /** 操作的IP列表 */
+  IpList?: string[] | null;
+}
+
 /** 自定义配置参数 */
 declare interface Configuration {
   /** 配置文件名，支持SPARK、HIVE、HDFS、YARN的部分配置文件自定义。 */
@@ -716,6 +724,12 @@ declare interface NodeResourceSpec {
   LocalDataDisk?: DiskSpecInfo[] | null;
 }
 
+/** 操作范围 */
+declare interface OpScope {
+  /** 操作范围，要操作的服务信息 */
+  ServiceInfoList?: ServiceBasicRestartInfo[] | null;
+}
+
 /** 资源详情 */
 declare interface OutterResource {
   /** 规格 */
@@ -1062,6 +1076,14 @@ declare interface SearchItem {
   SearchType: string;
   /** 支持搜索的值 */
   SearchValue: string;
+}
+
+/** 操作的服务范围 */
+declare interface ServiceBasicRestartInfo {
+  /** 服务名，必填，如HDFS */
+  ServiceName?: string;
+  /** 如果没传，则表示所有进程 */
+  ComponentInfoList?: ComponentBasicRestartInfo[];
 }
 
 /** 节点信息 */
@@ -1956,12 +1978,46 @@ declare interface ScaleOutInstanceResponse {
   RequestId?: string;
 }
 
+declare interface StartStopServiceOrMonitorRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 操作类型，当前支持StartService：启动服务StopService：停止服务StartMonitor：退出维护StopMonitor：进入维护 */
+  OpType: string;
+  /** 操作范围 */
+  OpScope: OpScope;
+}
+
+declare interface StartStopServiceOrMonitorResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SyncPodStateRequest {
   /** EmrService中pod状态信息 */
   Message: PodState;
 }
 
 declare interface SyncPodStateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface TerminateClusterNodesRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 销毁资源列表 */
+  CvmInstanceIds: string[];
+  /** 销毁节点类型取值范围： MASTER TASK CORE ROUTER */
+  NodeFlag: string;
+  /** 优雅缩容开关 true:开启 false:不开启 */
+  GraceDownFlag?: boolean;
+  /** 优雅缩容等待时间,时间范围60到1800 单位秒 */
+  GraceDownTime?: number;
+}
+
+declare interface TerminateClusterNodesResponse {
+  /** 缩容流程ID。 */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2041,8 +2097,12 @@ declare interface Emr {
   ScaleOutCluster(data: ScaleOutClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutClusterResponse>;
   /** 实例扩容 {@link ScaleOutInstanceRequest} {@link ScaleOutInstanceResponse} */
   ScaleOutInstance(data: ScaleOutInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutInstanceResponse>;
+  /** 启动或停止监控或服务 {@link StartStopServiceOrMonitorRequest} {@link StartStopServiceOrMonitorResponse} */
+  StartStopServiceOrMonitor(data: StartStopServiceOrMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<StartStopServiceOrMonitorResponse>;
   /** EMR同步POD状态 {@link SyncPodStateRequest} {@link SyncPodStateResponse} */
   SyncPodState(data: SyncPodStateRequest, config?: AxiosRequestConfig): AxiosPromise<SyncPodStateResponse>;
+  /** 销毁集群节点 {@link TerminateClusterNodesRequest} {@link TerminateClusterNodesResponse} */
+  TerminateClusterNodes(data: TerminateClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateClusterNodesResponse>;
   /** 销毁EMR实例 {@link TerminateInstanceRequest} {@link TerminateInstanceResponse} */
   TerminateInstance(data: TerminateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstanceResponse>;
   /** 缩容Task节点 {@link TerminateTasksRequest} {@link TerminateTasksResponse} */
