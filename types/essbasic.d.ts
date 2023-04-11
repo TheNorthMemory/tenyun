@@ -3305,7 +3305,7 @@ declare interface Essbasic {
   ChannelGetTaskResultApi(data: ChannelGetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelGetTaskResultApiResponse>;
   /** 更新印章状态 {@link ChannelUpdateSealStatusRequest} {@link ChannelUpdateSealStatusResponse} */
   ChannelUpdateSealStatus(data: ChannelUpdateSealStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelUpdateSealStatusResponse>;
-  /** 合同文件验签 {@link ChannelVerifyPdfRequest} {@link ChannelVerifyPdfResponse} */
+  /** 流程文件验签 {@link ChannelVerifyPdfRequest} {@link ChannelVerifyPdfResponse} */
   ChannelVerifyPdf(data: ChannelVerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelVerifyPdfResponse>;
   /** 创建并返回出证报告 {@link CreateChannelFlowEvidenceReportRequest} {@link CreateChannelFlowEvidenceReportResponse} */
   CreateChannelFlowEvidenceReport(data: CreateChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelFlowEvidenceReportResponse>;

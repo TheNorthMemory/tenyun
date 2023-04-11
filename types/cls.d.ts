@@ -336,6 +336,12 @@ declare interface CsvInfo {
   NonExistingField: string;
 }
 
+/** 动态更新索引配置 */
+declare interface DynamicIndex {
+  /** 动态索引配置开关 */
+  Status?: boolean | null;
+}
+
 /** 黑名单path信息 */
 declare interface ExcludePathInfo {
   /** 类型，选填File或Path */
@@ -672,6 +678,8 @@ declare interface RuleInfo {
   KeyValue?: RuleKeyValueInfo | null;
   /** 元字段索引配置，如果为空时代表未开启元字段索引 */
   Tag?: RuleTagInfo | null;
+  /** 动态索引配置，如果为空时代表未开启动态段索引 */
+  DynamicIndex?: DynamicIndex | null;
 }
 
 /** 键值索引配置 */
@@ -1995,7 +2003,7 @@ declare interface SearchLogRequest {
   UseNewAnalysis?: boolean;
   /** 执行统计分析（Query中包含SQL）时，是否对原始日志先进行采样，再进行统计分析。0：自动采样;0～1：按指定采样率采样，例如0.02;1：不采样，即精确分析默认值为1 */
   SamplingRate?: number;
-  /** 检索语法规则，默认值为0。0：Lucene语法，1：CQL语法。详细说明参见https://cloud.tencent.com/document/product/614/47044 */
+  /** 检索语法规则，默认值为0。0：Lucene语法，1：CQL语法。详细说明参见检索条件语法规则 */
   SyntaxRule?: number;
 }
 
@@ -2016,6 +2024,8 @@ declare interface SearchLogResponse {
   AnalysisRecords?: string[] | null;
   /** 日志统计分析结果的列属性当UseNewAnalysis为true时生效 */
   Columns?: Column[] | null;
+  /** 本次统计分析使用的采样率 */
+  SamplingRate?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

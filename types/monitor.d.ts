@@ -1450,7 +1450,7 @@ declare interface PolicyTag {
   Value: string;
 }
 
-/** 云监控支持的产品简要信息 */
+/** 云产品监控支持的产品简要信息 */
 declare interface ProductSimple {
   /** 命名空间 */
   Namespace: string;
@@ -1560,7 +1560,7 @@ declare interface PrometheusAlertRule {
   RuleState?: number | null;
 }
 
-/** 与云监控融合托管prometheus实例，关联集群基础信息 */
+/** 与腾讯云可观测平台融合托管 Prometheus 实例，关联集群基础信息 */
 declare interface PrometheusClusterAgentBasic {
   /** 集群ID */
   Region: string;
@@ -2090,7 +2090,7 @@ declare interface Toleration {
   Effect?: string;
 }
 
-/** 云监控告警通知模板 - 回调通知详情 */
+/** 告警通知模板 - 回调通知详情 */
 declare interface URLNotice {
   /** 回调 url（限长256字符） */
   URL: string | null;
@@ -2106,7 +2106,7 @@ declare interface URLNotice {
   Weekday?: number[] | null;
 }
 
-/** 云监控告警通知模板 - 用户通知详情 */
+/** 告警通知模板 - 用户通知详情 */
 declare interface UserNotice {
   /** 接收者类型 USER=用户 GROUP=用户组 */
   ReceiverType: string | null;

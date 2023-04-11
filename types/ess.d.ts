@@ -1609,13 +1609,13 @@ declare interface GetTaskResultApiRequest {
 
 declare interface GetTaskResultApiResponse {
   /** 任务Id */
-  TaskId: string;
+  TaskId?: string;
   /** 任务状态，需要关注的状态0 :NeedTranform - 任务已提交4 :Processing - 文档转换中8 :TaskEnd - 任务处理完成-2 :DownloadFailed - 下载失败-6 :ProcessFailed - 转换失败-13:ProcessTimeout - 转换文件超时 */
-  TaskStatus: number;
+  TaskStatus?: number;
   /** 状态描述，需要关注的状态NeedTranform - 任务已提交Processing - 文档转换中TaskEnd - 任务处理完成DownloadFailed - 下载失败ProcessFailed - 转换失败ProcessTimeout - 转换文件超时 */
-  TaskMessage: string;
+  TaskMessage?: string;
   /** 资源Id，也是FileId，用于文件发起使用 */
-  ResourceId: string;
+  ResourceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1803,7 +1803,7 @@ declare interface Ess {
   UpdateIntegrationEmployees(data: UpdateIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateIntegrationEmployeesResponse>;
   /** 多文件上传 {@link UploadFilesRequest} {@link UploadFilesResponse} */
   UploadFiles(data: UploadFilesRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFilesResponse>;
-  /** 合同文件验签 {@link VerifyPdfRequest} {@link VerifyPdfResponse} */
+  /** 流程文件验签 {@link VerifyPdfRequest} {@link VerifyPdfResponse} */
   VerifyPdf(data: VerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyPdfResponse>;
 }
 

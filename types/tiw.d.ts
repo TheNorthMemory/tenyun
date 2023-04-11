@@ -114,6 +114,24 @@ declare interface OmittedDuration {
   ResumeTime: number;
 }
 
+/** PPT错误元素 */
+declare interface PPTErr {
+  /** 元素名称 */
+  Name?: string | null;
+  /** 0: 不支持的墨迹类型，1: 不支持自动翻页，2: 存在已损坏音视频，3: 存在不可访问资源，4: 只读文件 */
+  Type?: number | null;
+  /** 错误详情 */
+  Detail?: string | null;
+}
+
+/** PPT错误页面列表 */
+declare interface PPTErrSlide {
+  /** 异常元素存在的页面，由页面类型+页码组成，页码类型包括：幻灯片、幻灯片母版、幻灯片布局等 */
+  Page?: string | null;
+  /** 错误元素列表 */
+  Errs?: PPTErr[] | null;
+}
+
 /** 录制控制参数， 用于指定全局录制控制及具体流录制控制参数，比如设置需要对哪些流进行录制，是否只录制小画面等 */
 declare interface RecordControl {
   /** 设置是否开启录制控制参数，只有设置为true的时候，录制控制参数才生效。 */
@@ -196,6 +214,28 @@ declare interface RoomUsageDataItem {
   Value: number;
   /** 互动白板房间号 */
   RoomID: number;
+}
+
+/** 正在运行的任务列表项 */
+declare interface RunningTaskItem {
+  /** 应用SdkAppID */
+  SdkAppID?: number;
+  /** 任务ID */
+  TaskID?: string;
+  /** 任务类型- TranscodeH5: 动态转码任务，文档转HTML5页面- TranscodeJPG: 静态转码任务，文档转图片- WhiteboardPush: 白板推流任务- OnlineRecord: 实时录制任务 */
+  TaskType?: string;
+  /** 任务创建时间 */
+  CreateTime?: string;
+  /** 任务取消时间 */
+  CancelTime?: string | null;
+  /** 任务状态- QUEUED: 任务正在排队等待执行中- PROCESSING: 任务正在执行中 - FINISHED: 任务已完成 */
+  Status?: string;
+  /** 任务当前进度 */
+  Progress?: number;
+  /** 转码任务中转码文件的原始URL此参数只有任务类型为TranscodeH5、TranscodeJPG类型时才会有有效值。其他任务类型为空字符串。 */
+  FileURL?: string | null;
+  /** 房间号当任务类型为TranscodeH5、TranscodeJPG时，房间号为0。 */
+  RoomID?: number | null;
 }
 
 /** 板书文件存储cos参数 */
@@ -492,6 +532,22 @@ declare interface CreateOfflineRecordResponse {
   RequestId?: string;
 }
 
+declare interface CreatePPTCheckTaskRequest {
+  /** 客户的SdkAppId */
+  SdkAppId: number;
+  /** 经过URL编码后的PPT文件地址。URL 编码会将字符转换为可通过因特网传输的格式，比如文档地址为http://example.com/测试.pptx，经过URL编码之后为http://example.com/%E6%B5%8B%E8%AF%95.pptx。为了提高URL解析的成功率，请对URL进行编码。 */
+  Url: string;
+  /** 是否对不支持元素开启自动处理的功能。默认不开启。在开启自动处理的情况下，会自动进行如下处理：1. 墨迹：移除不支持的墨迹（比如使用WPS画的）2. 自动翻页：移除PPT上所有的自动翻页设置，并设置为单击鼠标翻页3. 已损坏音视频：移除PPT上对损坏音视频的引用 */
+  AutoHandleUnsupportedElement?: boolean;
+}
+
+declare interface CreatePPTCheckTaskResponse {
+  /** 检测任务的唯一标识Id，用于查询该任务的进度以及检测结果 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSnapshotTaskRequest {
   /** 白板相关参数 */
   Whiteboard: SnapshotWhiteboard;
@@ -732,6 +788,44 @@ declare interface DescribeOnlineRecordResponse {
   RequestId?: string;
 }
 
+declare interface DescribePPTCheckCallbackRequest {
+  /** 应用的SdkAppId */
+  SdkAppId: number;
+}
+
+declare interface DescribePPTCheckCallbackResponse {
+  /** 回调地址 */
+  Callback?: string;
+  /** 回调鉴权密钥 */
+  CallbackKey?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePPTCheckRequest {
+  /** 客户的SdkAppId */
+  SdkAppId: number;
+  /** 任务的唯一标识Id */
+  TaskId: string;
+}
+
+declare interface DescribePPTCheckResponse {
+  /** 任务的唯一标识Id */
+  TaskId?: string;
+  /** PPT文件是否正常 */
+  IsOK?: boolean;
+  /** 修复后的PPT URL，只有创建任务时参数AutoHandleUnsupportedElement=true，才返回此参数 */
+  ResultUrl?: string | null;
+  /** 错误PPT页面列表 */
+  Slides?: PPTErrSlide[] | null;
+  /** 任务的当前状态 - QUEUED: 正在排队等待 - PROCESSING: 执行中 - FINISHED: 执行完成 */
+  Status?: string;
+  /** 当前进度,取值范围为0~100 */
+  Progress?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePostpaidUsageRequest {
   /** 开始时间 */
   BeginTime: string;
@@ -792,6 +886,26 @@ declare interface DescribeRoomListRequest {
 declare interface DescribeRoomListResponse {
   /** 白板房间列表 */
   RoomList: RoomListItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRunningTasksRequest {
+  /** 应用的SdkAppID */
+  SdkAppID: number;
+  /** 指定需要获取的任务类型。有效取值如下：- TranscodeH5: 动态转码任务，文档转HTML5页面- TranscodeJPG: 静态转码任务，文档转图片- WhiteboardPush: 白板推流任务- OnlineRecord: 实时录制任务 */
+  TaskType: string;
+  /** 分页获取时的任务偏移量，默认为0。 */
+  Offset?: number;
+  /** 每次获取任务列表时最大获取任务数，默认值为100。有效取值范围：[1, 500] */
+  Limit?: number;
+}
+
+declare interface DescribeRunningTasksResponse {
+  /** 当前正在执行中的任务总数 */
+  Total?: number;
+  /** 任务信息列表 */
+  Tasks?: RunningTaskItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1028,6 +1142,20 @@ declare interface DescribeVideoGenerationTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeWarningCallbackRequest {
+  /** 应用的SdkAppId */
+  SdkAppId: number;
+}
+
+declare interface DescribeWarningCallbackResponse {
+  /** 告警事件回调地址，如果未设置回调地址，该字段为空字符串 */
+  Callback?: string;
+  /** 告警回调鉴权密钥 */
+  CallbackKey?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeWhiteboardApplicationConfigRequest {
   /** 客户的SdkAppId */
   SdkAppId: number;
@@ -1236,6 +1364,30 @@ declare interface SetOnlineRecordCallbackResponse {
   RequestId?: string;
 }
 
+declare interface SetPPTCheckCallbackKeyRequest {
+  /** 应用的SdkAppId */
+  SdkAppId: number;
+  /** 设置回调鉴权密钥，最长64字符，如果传入空字符串，那么删除现有的鉴权回调密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257 */
+  CallbackKey: string;
+}
+
+declare interface SetPPTCheckCallbackKeyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SetPPTCheckCallbackRequest {
+  /** 客户的SdkAppId */
+  SdkAppId: number;
+  /** 进度回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持http或https协议，即回调地址以http://或https://开头。 回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40260 */
+  Callback: string;
+}
+
+declare interface SetPPTCheckCallbackResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetTranscodeCallbackKeyRequest {
   /** 应用的SdkAppId */
   SdkAppId: number;
@@ -1280,6 +1432,20 @@ declare interface SetVideoGenerationTaskCallbackRequest {
 }
 
 declare interface SetVideoGenerationTaskCallbackResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SetWarningCallbackRequest {
+  /** 客户的SdkAppId */
+  SdkAppId: number;
+  /** 告警回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持http或https协议，即回调地址以http://或https://开头。回调数据格式请参考文档： */
+  Callback: string;
+  /** 设置告警回调鉴权密钥，最长64字符，如果传入空字符串，那么删除现有的鉴权回调密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257 */
+  CallbackKey: string;
+}
+
+declare interface SetWarningCallbackResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1437,6 +1603,8 @@ declare interface Tiw {
   CreateApplication(data: CreateApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationResponse>;
   /** 创建课后录制任务 {@link CreateOfflineRecordRequest} {@link CreateOfflineRecordResponse} */
   CreateOfflineRecord(data: CreateOfflineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOfflineRecordResponse>;
+  /** 创建PPT检测任务 {@link CreatePPTCheckTaskRequest} {@link CreatePPTCheckTaskResponse} */
+  CreatePPTCheckTask(data: CreatePPTCheckTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePPTCheckTaskResponse>;
   /** 创建白板板书生成任务 {@link CreateSnapshotTaskRequest} {@link CreateSnapshotTaskResponse} */
   CreateSnapshotTask(data: CreateSnapshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotTaskResponse>;
   /** 创建文档转码任务 {@link CreateTranscodeRequest} {@link CreateTranscodeResponse} */
@@ -1461,6 +1629,10 @@ declare interface Tiw {
   DescribeOnlineRecord(data: DescribeOnlineRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOnlineRecordResponse>;
   /** 查询实时录制回调地址 {@link DescribeOnlineRecordCallbackRequest} {@link DescribeOnlineRecordCallbackResponse} */
   DescribeOnlineRecordCallback(data: DescribeOnlineRecordCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOnlineRecordCallbackResponse>;
+  /** 查询PPT检测任务状态 {@link DescribePPTCheckRequest} {@link DescribePPTCheckResponse} */
+  DescribePPTCheck(data: DescribePPTCheckRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePPTCheckResponse>;
+  /** 查询PPT检测任务回调地址 {@link DescribePPTCheckCallbackRequest} {@link DescribePPTCheckCallbackResponse} */
+  DescribePPTCheckCallback(data: DescribePPTCheckCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePPTCheckCallbackResponse>;
   /** 查询用户后付费用量 {@link DescribePostpaidUsageRequest} {@link DescribePostpaidUsageResponse} */
   DescribePostpaidUsage(data: DescribePostpaidUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostpaidUsageResponse>;
   /** 查询质量数据 {@link DescribeQualityMetricsRequest} {@link DescribeQualityMetricsResponse} */
@@ -1469,6 +1641,8 @@ declare interface Tiw {
   DescribeRecordSearch(data?: DescribeRecordSearchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordSearchResponse>;
   /** 查询白板房间列表 {@link DescribeRoomListRequest} {@link DescribeRoomListResponse} */
   DescribeRoomList(data: DescribeRoomListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomListResponse>;
+  /** 查询当前执行中的任务列表 {@link DescribeRunningTasksRequest} {@link DescribeRunningTasksResponse} */
+  DescribeRunningTasks(data: DescribeRunningTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRunningTasksResponse>;
   /** 获取白板板书生成任务信息 {@link DescribeSnapshotTaskRequest} {@link DescribeSnapshotTaskResponse} */
   DescribeSnapshotTask(data: DescribeSnapshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotTaskResponse>;
   /** 查询天维度计费用量 {@link DescribeTIWDailyUsageRequest} {@link DescribeTIWDailyUsageResponse} */
@@ -1493,6 +1667,8 @@ declare interface Tiw {
   DescribeVideoGenerationTask(data: DescribeVideoGenerationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoGenerationTaskResponse>;
   /** 查询录制视频生成回调地址 {@link DescribeVideoGenerationTaskCallbackRequest} {@link DescribeVideoGenerationTaskCallbackResponse} */
   DescribeVideoGenerationTaskCallback(data: DescribeVideoGenerationTaskCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoGenerationTaskCallbackResponse>;
+  /** 查询告警回调地址 {@link DescribeWarningCallbackRequest} {@link DescribeWarningCallbackResponse} */
+  DescribeWarningCallback(data: DescribeWarningCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWarningCallbackResponse>;
   /** 查询白板应用任务相关配置 {@link DescribeWhiteboardApplicationConfigRequest} {@link DescribeWhiteboardApplicationConfigResponse} */
   DescribeWhiteboardApplicationConfig(data: DescribeWhiteboardApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteboardApplicationConfigResponse>;
   /** 查询应用资源配置 {@link DescribeWhiteboardBucketConfigRequest} {@link DescribeWhiteboardBucketConfigResponse} */
@@ -1521,6 +1697,10 @@ declare interface Tiw {
   SetOnlineRecordCallback(data: SetOnlineRecordCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetOnlineRecordCallbackResponse>;
   /** 设置实时录制回调密钥 {@link SetOnlineRecordCallbackKeyRequest} {@link SetOnlineRecordCallbackKeyResponse} */
   SetOnlineRecordCallbackKey(data: SetOnlineRecordCallbackKeyRequest, config?: AxiosRequestConfig): AxiosPromise<SetOnlineRecordCallbackKeyResponse>;
+  /** 设置PPT检测任务回调地址 {@link SetPPTCheckCallbackRequest} {@link SetPPTCheckCallbackResponse} */
+  SetPPTCheckCallback(data: SetPPTCheckCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetPPTCheckCallbackResponse>;
+  /** 设置PPT检测任务回调密钥 {@link SetPPTCheckCallbackKeyRequest} {@link SetPPTCheckCallbackKeyResponse} */
+  SetPPTCheckCallbackKey(data: SetPPTCheckCallbackKeyRequest, config?: AxiosRequestConfig): AxiosPromise<SetPPTCheckCallbackKeyResponse>;
   /** 设置文档转码回调地址 {@link SetTranscodeCallbackRequest} {@link SetTranscodeCallbackResponse} */
   SetTranscodeCallback(data: SetTranscodeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetTranscodeCallbackResponse>;
   /** 设置文档转码回调密钥 {@link SetTranscodeCallbackKeyRequest} {@link SetTranscodeCallbackKeyResponse} */
@@ -1529,6 +1709,8 @@ declare interface Tiw {
   SetVideoGenerationTaskCallback(data: SetVideoGenerationTaskCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetVideoGenerationTaskCallbackResponse>;
   /** 设置录制视频生成回调密钥 {@link SetVideoGenerationTaskCallbackKeyRequest} {@link SetVideoGenerationTaskCallbackKeyResponse} */
   SetVideoGenerationTaskCallbackKey(data: SetVideoGenerationTaskCallbackKeyRequest, config?: AxiosRequestConfig): AxiosPromise<SetVideoGenerationTaskCallbackKeyResponse>;
+  /** 设置告警回调地址 {@link SetWarningCallbackRequest} {@link SetWarningCallbackResponse} */
+  SetWarningCallback(data: SetWarningCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetWarningCallbackResponse>;
   /** 设置白板推流回调地址 {@link SetWhiteboardPushCallbackRequest} {@link SetWhiteboardPushCallbackResponse} */
   SetWhiteboardPushCallback(data: SetWhiteboardPushCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<SetWhiteboardPushCallbackResponse>;
   /** 设置白板推流回调密钥 {@link SetWhiteboardPushCallbackKeyRequest} {@link SetWhiteboardPushCallbackKeyResponse} */

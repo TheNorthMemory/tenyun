@@ -138,6 +138,8 @@ declare interface CreateRecordBatchRecord {
   Id: number;
   /** 记录的MX权重 */
   MX: number | null;
+  /** 记录的权重 */
+  Weight?: number | null;
 }
 
 /** 子订单号列表 */

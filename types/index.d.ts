@@ -226,6 +226,7 @@ import Vm, { Versions as VmVersions } from "./vm";
 import Vms, { Versions as VmsVersions } from "./vms";
 import Vod, { Versions as VodVersions } from "./vod";
 import Vpc, { Versions as VpcVersions } from "./vpc";
+import Vrs, { Versions as VrsVersions } from "./vrs";
 import Waf, { Versions as WafVersions } from "./waf";
 import Wav, { Versions as WavVersions } from "./wav";
 import Wedata, { Versions as WedataVersions } from "./wedata";
@@ -462,6 +463,7 @@ export declare type SERVICE_VERSIONS = {
   vms: VmsVersions,
   vod: VodVersions,
   vpc: VpcVersions,
+  vrs: VrsVersions,
   waf: WafVersions,
   wav: WavVersions,
   wedata: WedataVersions,
@@ -934,6 +936,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   vod: Vod,
   /** {@link Vpc 私有网络} */
   vpc: Vpc,
+  /** {@link Vrs 声音复刻} */
+  vrs: Vrs,
   /** {@link Waf Web 应用防火墙} */
   waf: Waf,
   /** {@link Wav 企业微信汽车行业版} */

@@ -294,7 +294,7 @@ declare interface Image {
   Architecture: string;
   /** 镜像状态:CREATING-创建中NORMAL-正常CREATEFAILED-创建失败USING-使用中SYNCING-同步中IMPORTING-导入中IMPORTFAILED-导入失败 */
   ImageState: string;
-  /** 镜像来源平台 */
+  /** 镜像来源平台，包括如TencentOS、 CentOS、 Windows、 Ubuntu、 Debian、Fedora等。 */
   Platform?: string;
   /** 镜像创建者 */
   ImageCreator?: string;
@@ -1092,7 +1092,7 @@ declare interface SystemDisk {
   CdcId?: string;
 }
 
-/** 标签键值对 */
+/** 标签键值对，可以通过调用 [DescribeTags](https://cloud.tencent.com/document/api/651/35316) 返回值中的 Tags 字段来获取。 */
 declare interface Tag {
   /** 标签键 */
   Key: string;

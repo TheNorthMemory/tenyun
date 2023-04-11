@@ -82,6 +82,8 @@ declare interface BillDetail {
   RegionId: string | null;
   /** 项目ID:资源所属项目ID */
   ProjectId: number;
+  /** 价格属性 */
+  PriceInfo?: string[] | null;
 }
 
 /** 账单明细组件对象 */
@@ -843,9 +845,9 @@ declare interface DescribeBillDetailRequest {
 
 declare interface DescribeBillDetailResponse {
   /** 详情列表 */
-  DetailSet: BillDetail[];
+  DetailSet?: BillDetail[];
   /** 总记录数 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -919,9 +921,9 @@ declare interface DescribeBillResourceSummaryRequest {
 
 declare interface DescribeBillResourceSummaryResponse {
   /** 资源汇总列表 */
-  ResourceSummarySet: BillResourceSummary[];
+  ResourceSummarySet?: BillResourceSummary[];
   /** 资源汇总列表总数 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

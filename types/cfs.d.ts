@@ -343,7 +343,7 @@ declare interface CreateAutoSnapshotPolicyRequest {
   DayOfWeek?: string;
   /** 快照保留时长 */
   AliveDays?: number;
-  /** 快照按月重复，每月1-31号，选择一天，每月这一天打快照。 */
+  /** 快照按月重复，每月1-31号，选择一天，每月将在这一天自动创建快照。 */
   DayOfMonth?: string;
   /** 间隔天数 */
   IntervalDays?: number;
@@ -809,7 +809,7 @@ declare interface UpdateAutoSnapshotPolicyRequest {
   AliveDays?: number;
   /** 是否激活定期快照功能 */
   IsActivated?: number;
-  /** 定期快照在月的某几天天，该参数与DayOfWeek互斥 */
+  /** 定期快照在每月的第几天创建快照，该参数与DayOfWeek互斥 */
   DayOfMonth?: string;
   /** 间隔天数定期执行快照，该参数与DayOfWeek,DayOfMonth 互斥 */
   IntervalDays?: number;

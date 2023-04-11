@@ -466,6 +466,28 @@ declare interface SlowLogHost {
   Count: number;
 }
 
+/** 慢日志详细信息 */
+declare interface SlowLogInfoItem {
+  /** 慢日志开始时间 */
+  Timestamp?: string;
+  /** sql语句 */
+  SqlText?: string;
+  /** 数据库 */
+  Database?: string;
+  /** User来源 */
+  UserName?: string | null;
+  /** IP来源 */
+  UserHost?: string | null;
+  /** 执行时间,单位秒 */
+  QueryTime?: number;
+  /** 锁时间,单位秒 */
+  LockTime?: number | null;
+  /** 扫描行数 */
+  RowsExamined?: number | null;
+  /** 返回行数 */
+  RowsSent?: number | null;
+}
+
 /** 慢日志TopSql */
 declare interface SlowLogTopSqlItem {
   /** sql总锁等待时间，单位秒 */
@@ -1340,6 +1362,42 @@ declare interface DescribeSlowLogUserHostStatsResponse {
   TotalCount: number;
   /** 各来源地址的慢日志占比详情列表。 */
   Items: SlowLogHost[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSlowLogsRequest {
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，默认为"mysql"。 */
+  Product: string;
+  /** 实例id。 */
+  InstanceId: string;
+  /** sql模版的md5值 */
+  Md5: string;
+  /** 开始时间，如“2019-09-10 12:13:14”。 */
+  StartTime: string;
+  /** 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。 */
+  EndTime: string;
+  /** 分页参数 */
+  Offset: number;
+  /** 分页参数 */
+  Limit: number;
+  /** 数据库列表 */
+  DB?: string[];
+  /** 关键字 */
+  Key?: string[];
+  /** 用户 */
+  User?: string[];
+  /** ip */
+  Ip?: string[];
+  /** 耗时区间,耗时区间的左右边界分别对应数组的第0个元素和第一个元素 */
+  Time?: number[];
+}
+
+declare interface DescribeSlowLogsResponse {
+  /** 符合条件的记录总数。 */
+  TotalCount?: number;
+  /** 慢日志明细 */
+  Rows?: SlowLogInfoItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2693,6 +2751,8 @@ declare interface Dbbrain {
   DescribeSlowLogTopSqls(data: DescribeSlowLogTopSqlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogTopSqlsResponse>;
   /** 获取慢日志来源地址统计分布图 {@link DescribeSlowLogUserHostStatsRequest} {@link DescribeSlowLogUserHostStatsResponse} */
   DescribeSlowLogUserHostStats(data: DescribeSlowLogUserHostStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogUserHostStatsResponse>;
+  /** 获取SQL模板在指定时间段内的详细信息 {@link DescribeSlowLogsRequest} {@link DescribeSlowLogsResponse} */
+  DescribeSlowLogs(data: DescribeSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogsResponse>;
   /** 查询实例SQL限流任务列表 {@link DescribeSqlFiltersRequest} {@link DescribeSqlFiltersResponse} */
   DescribeSqlFilters(data: DescribeSqlFiltersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSqlFiltersResponse>;
   /** 查询SQL模板 {@link DescribeSqlTemplateRequest} {@link DescribeSqlTemplateResponse} */

@@ -1341,7 +1341,7 @@ declare interface Bma {
   CreateCRCompanyVerify(data: V20210624.CreateCRCompanyVerifyRequest, config: AxiosRequestConfig & V20210624.VersionHeader): AxiosPromise<V20210624.CreateCRCompanyVerifyResponse>;
   /** 新建过程取证码 {@link V20210624.CreateCRDesktopCodeRequest} {@link V20210624.CreateCRDesktopCodeResponse} */
   CreateCRDesktopCode(data: V20210624.CreateCRDesktopCodeRequest, config: AxiosRequestConfig & V20210624.VersionHeader): AxiosPromise<V20210624.CreateCRDesktopCodeResponse>;
-  /** 新建取证 {@link V20210624.CreateCRObtainRequest} {@link V20210624.CreateCRObtainResponse} */
+  /** @deprecated 新建取证 {@link V20210624.CreateCRObtainRequest} {@link V20210624.CreateCRObtainResponse} */
   CreateCRObtain(data: V20210624.CreateCRObtainRequest, config: AxiosRequestConfig & V20210624.VersionHeader): AxiosPromise<V20210624.CreateCRObtainResponse>;
   /** 新建发函 {@link V20210624.CreateCRRightRequest} {@link V20210624.CreateCRRightResponse} */
   CreateCRRight(data: V20210624.CreateCRRightRequest, config: AxiosRequestConfig & V20210624.VersionHeader): AxiosPromise<V20210624.CreateCRRightResponse>;
