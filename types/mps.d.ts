@@ -1406,7 +1406,7 @@ declare interface CreateInputRTSPPullSettings {
 declare interface CreateInputSRTSettings {
   /** SRT模式，可选[LISTENER|CALLER]，默认为LISTENER。 */
   Mode?: string;
-  /** 流Id，可选大小写字母、数字和特殊字符（.#!:&,=_-），长度为0~512。 */
+  /** 流Id，可选大小写字母、数字和特殊字符（.#!:&,=_-），长度为0~512。具体格式可以参考：https://github.com/Haivision/srt/blob/master/docs/features/access-control.md#standard-keys。 */
   StreamId?: string;
   /** 延迟，默认0，单位ms，范围为[0, 3000]。 */
   Latency?: number;
@@ -4451,7 +4451,7 @@ declare interface CreateStreamLinkFlowRequest {
 
 declare interface CreateStreamLinkFlowResponse {
   /** 创建的Flow信息。 */
-  Info: DescribeFlow;
+  Info?: DescribeFlow;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

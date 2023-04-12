@@ -734,6 +734,8 @@ declare interface TemplateInfo {
   CreatedOn?: number;
   /** 发起人角色信息 */
   Promoter?: Recipient;
+  /** 模板可用状态，取值：0未知，但默认会被转成启用；1启用（默认），2停用 */
+  Available?: number;
   /** 模板创建组织id */
   OrganizationId?: string;
   /** 模板预览链接 */

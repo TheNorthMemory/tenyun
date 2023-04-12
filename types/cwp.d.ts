@@ -2224,11 +2224,11 @@ declare interface LicenseBindDetail {
   MachineIp?: string;
   /** 云服务器UUID */
   Quuid?: string;
-  /** 云镜客户端UUID */
+  /** 主机安全客户端UUID */
   Uuid?: string;
   /** 标签信息 */
   Tags?: string[];
-  /** 云镜客户端状态,OFFLINE 离线,ONLINE 在线,UNINSTALL 未安装 */
+  /** 主机安全客户端状态,OFFLINE 离线,ONLINE 在线,UNINSTALL 未安装 */
   AgentStatus?: string;
   /** 是否允许解绑,false 不允许解绑 */
   IsUnBind?: boolean;
@@ -2640,7 +2640,7 @@ declare interface Place {
 declare interface PrivilegeEscalationProcess {
   /** 数据ID */
   Id?: number;
-  /** 云镜ID */
+  /** 主机安全ID */
   Uuid?: string;
   /** 主机ID */
   Quuid?: string;
@@ -2944,7 +2944,7 @@ declare interface RegionSet {
 declare interface ReverseShell {
   /** ID 主键 */
   Id?: number;
-  /** 云镜UUID */
+  /** 主机安全UUID */
   Uuid?: string;
   /** 主机ID */
   Quuid?: string;
@@ -3252,7 +3252,7 @@ declare interface SecurityButlerInfo {
 
 /** 安全事件消息数据。 */
 declare interface SecurityDynamic {
-  /** 云镜客户端UUID。 */
+  /** 主机安全客户端UUID。 */
   Uuid: string;
   /** 安全事件发生时间。 */
   EventTime: string;
@@ -3362,7 +3362,7 @@ declare interface TaskStatus {
 declare interface UsualPlace {
   /** ID。 */
   Id: number;
-  /** 云镜客户端唯一标识UUID。 */
+  /** 主机安全客户端唯一标识UUID。 */
   Uuid: string;
   /** 国家 ID。 */
   CountryId: number;
@@ -5529,10 +5529,10 @@ declare interface DescribeBashEventsNewResponse {
 declare interface DescribeBashEventsRequest {
   /** 返回数量，默认为10，最大值为100。 */
   Limit?: number;
+  /** 过滤条件。HostName - String - 是否必填：否 - 主机名Hostip - String - 是否必填：否 - 主机内网IPRuleCategory - Int - 是否必填：否 - 策略类型,全部或者单选(0:系统 1:用户)RuleName - String - 是否必填：否 - 策略名称RuleLevel - Int - 是否必填：否 - 威胁等级,可以多选Status - Int - 是否必填：否 - 处理状态,可多选(0:待处理 1:已处理 2:已加白 3:已忽略 4:已删除 5:已拦截)DetectBy - Int - 是否必填：否 - 数据来源,可多选(0:bash日志 1:实时监控)StartTime - String - 是否必填：否 - 开始时间EndTime - String - 是否必填：否 - 结束时间 */
+  Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤条件。Keywords - String - 是否必填：否 - 关键词(主机内网IP) */
-  Filters?: Filter[];
   /** 排序方式：根据请求次数排序：asc-升序/desc-降序 */
   Order?: string;
   /** 排序字段：CreateTime-发生时间。ModifyTime-处理时间 */
@@ -5573,7 +5573,7 @@ declare interface DescribeBruteAttackListRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选Uuid - String - 是否必填：否 - 云镜唯一UuidQuuid - String - 是否必填：否 - 云服务器uuidStatus - String - 是否必填：否 - 状态筛选：失败：FAILED 成功：SUCCESSUserName - String - 是否必填：否 - UserName筛选SrcIp - String - 是否必填：否 - 来源ip筛选CreateBeginTime - String - 是否必填：否 - 首次攻击时间筛选，开始时间CreateEndTime - String - 是否必填：否 - 首次攻击时间筛选，结束时间ModifyBeginTime - String - 是否必填：否 - 最近攻击时间筛选，开始时间ModifyEndTime - String - 是否必填：否 - 最近攻击时间筛选，结束时间Banned - String - 是否必填：否 - 阻断状态筛选，多个用","分割：0-未阻断（全局ZK开关关闭），82-未阻断(非专业版)，83-未阻断(已加白名单)，1-已阻断，2-未阻断-程序异常，3-未阻断-内网攻击暂不支持阻断，4-未阻断-安平暂不支持阻断 */
+  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选Uuid - String - 是否必填：否 - 主机安全唯一UuidQuuid - String - 是否必填：否 - 云服务器uuidStatus - String - 是否必填：否 - 状态筛选：失败：FAILED 成功：SUCCESSUserName - String - 是否必填：否 - UserName筛选SrcIp - String - 是否必填：否 - 来源ip筛选CreateBeginTime - String - 是否必填：否 - 首次攻击时间筛选，开始时间CreateEndTime - String - 是否必填：否 - 首次攻击时间筛选，结束时间ModifyBeginTime - String - 是否必填：否 - 最近攻击时间筛选，开始时间ModifyEndTime - String - 是否必填：否 - 最近攻击时间筛选，结束时间Banned - String - 是否必填：否 - 阻断状态筛选，多个用","分割：0-未阻断（全局ZK开关关闭），82-未阻断(非专业版)，83-未阻断(已加白名单)，1-已阻断，2-未阻断-程序异常，3-未阻断-内网攻击暂不支持阻断，4-未阻断-安平暂不支持阻断 */
   Filters?: Filter[];
   /** 排序方式：根据请求次数排序：asc-升序/desc-降序 */
   Order?: string;
@@ -5583,9 +5583,9 @@ declare interface DescribeBruteAttackListRequest {
 
 declare interface DescribeBruteAttackListResponse {
   /** 总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 密码破解列表 */
-  BruteAttackList: BruteAttackInfo[] | null;
+  BruteAttackList?: BruteAttackInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5885,7 +5885,7 @@ declare interface DescribeHostLoginListRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选Uuid - String - 是否必填：否 - 云镜唯一UuidQuuid - String - 是否必填：否 - 云服务器uuidUserName - String - 是否必填：否 - 用户名筛选LoginTimeBegin - String - 是否必填：否 - 按照修改时间段筛选，开始时间LoginTimeEnd - String - 是否必填：否 - 按照修改时间段筛选，结束时间SrcIp - String - 是否必填：否 - 来源ip筛选Status - int - 是否必填：否 - 状态筛选1:正常登录；5：已加白,14:已处理，15：已忽略RiskLevel - int - 是否必填：否 - 状态筛选0:高危；1：可疑 */
+  /** 过滤条件。IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选Uuid - String - 是否必填：否 - 主机安全唯一UuidQuuid - String - 是否必填：否 - 云服务器uuidUserName - String - 是否必填：否 - 用户名筛选LoginTimeBegin - String - 是否必填：否 - 按照修改时间段筛选，开始时间LoginTimeEnd - String - 是否必填：否 - 按照修改时间段筛选，结束时间SrcIp - String - 是否必填：否 - 来源ip筛选Status - int - 是否必填：否 - 状态筛选1:正常登录；5：已加白,14:已处理，15：已忽略RiskLevel - int - 是否必填：否 - 状态筛选0:高危；1：可疑 */
   Filters?: Filter[];
   /** 排序方式：根据请求次数排序：asc-升序/desc-降序 */
   Order?: string;
@@ -5895,9 +5895,9 @@ declare interface DescribeHostLoginListRequest {
 
 declare interface DescribeHostLoginListResponse {
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 登录审计列表 */
-  HostLoginList: HostLoginList[] | null;
+  HostLoginList?: HostLoginList[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6531,7 +6531,7 @@ declare interface DescribeProVersionInfoResponse {
 }
 
 declare interface DescribeProVersionStatusRequest {
-  /** 云镜客户端UUID、填写"all"表示所有主机。 */
+  /** 主机安全客户端UUID、填写"all"表示所有主机。 */
   Uuid: string;
 }
 

@@ -714,6 +714,8 @@ declare interface TemplateInfo {
   ChannelAutoSave: number | null;
   /** 模板版本，全数字字符。默认为空，初始版本为yyyyMMdd001。 */
   TemplateVersion: string | null;
+  /** 模板可用状态，取值：1启用（默认），2停用 */
+  Available?: number | null;
 }
 
 /** 此结构体 (UploadFile) 用于描述多文件上传的文件信息。 */

@@ -1377,9 +1377,9 @@ declare interface DescribeSlowLogsRequest {
   StartTime: string;
   /** 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。 */
   EndTime: string;
-  /** 分页参数 */
+  /** 偏移量，默认为0。 */
   Offset: number;
-  /** 分页参数 */
+  /** 查询数目，默认为20，最大为100。 */
   Limit: number;
   /** 数据库列表 */
   DB?: string[];

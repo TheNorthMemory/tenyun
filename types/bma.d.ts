@@ -743,36 +743,6 @@ declare namespace V20210624 {
     RequestId?: string;
   }
 
-  interface CreateCRObtainRequest {
-    /** 已存证的作品ID */
-    WorkId: number;
-    /** 侵权链接 */
-    TortUrl: string;
-    /** 取证类型 1-网页取证 2-过程取证 */
-    ObtainType: number;
-    /** 侵权标题 */
-    WorkTitle?: string;
-    /** 侵权平台 */
-    TortPlat?: string;
-    /** 过程取证的取证时长 6-300分钟 */
-    ObtainDuration?: number;
-    /** 取证回调地址 */
-    ObtainUrl?: string;
-    /** xxx */
-    WorkCategory?: string;
-    /** xxx */
-    WorkType?: string;
-  }
-
-  interface CreateCRObtainResponse {
-    /** 侵权ID */
-    TortId: number;
-    /** xxx */
-    TortNum: string;
-    /** 唯一请求 ID，每次请求都会返回。 */
-    RequestId?: string;
-  }
-
   interface CreateCRRightFileRequest {
     /** 作品ID */
     WorkId: number;
@@ -1341,8 +1311,6 @@ declare interface Bma {
   CreateCRCompanyVerify(data: V20210624.CreateCRCompanyVerifyRequest, config: AxiosRequestConfig & V20210624.VersionHeader): AxiosPromise<V20210624.CreateCRCompanyVerifyResponse>;
   /** 新建过程取证码 {@link V20210624.CreateCRDesktopCodeRequest} {@link V20210624.CreateCRDesktopCodeResponse} */
   CreateCRDesktopCode(data: V20210624.CreateCRDesktopCodeRequest, config: AxiosRequestConfig & V20210624.VersionHeader): AxiosPromise<V20210624.CreateCRDesktopCodeResponse>;
-  /** @deprecated 新建取证 {@link V20210624.CreateCRObtainRequest} {@link V20210624.CreateCRObtainResponse} */
-  CreateCRObtain(data: V20210624.CreateCRObtainRequest, config: AxiosRequestConfig & V20210624.VersionHeader): AxiosPromise<V20210624.CreateCRObtainResponse>;
   /** 新建发函 {@link V20210624.CreateCRRightRequest} {@link V20210624.CreateCRRightResponse} */
   CreateCRRight(data: V20210624.CreateCRRightRequest, config: AxiosRequestConfig & V20210624.VersionHeader): AxiosPromise<V20210624.CreateCRRightResponse>;
   /** 权属文件添加 {@link V20210624.CreateCRRightFileRequest} {@link V20210624.CreateCRRightFileResponse} */

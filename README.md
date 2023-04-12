@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 233+ 款产品，9366+ 服务数</summary>
+<details><summary>共计 233+ 款产品，9367+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -125,7 +125,7 @@ bi | [商业智能分析 BI](https://cloud.tencent.com/document/product/590) | 2
 billing | [费用中心](https://cloud.tencent.com/document/product/555) | 2018-07-09(20) |
 bizlive | 商业直播 | 2019-03-13(6) |
 bm | [黑石物理服务器CPM](https://cloud.tencent.com/document/product/386) | 2018-04-23(53) |
-bma | [品牌经营管家](https://cloud.tencent.com/document/product/1296) | 2022-11-15(11) | 2021-06-24(29) |
+bma | [品牌经营管家](https://cloud.tencent.com/document/product/1296) | 2022-11-15(11) | 2021-06-24(28) |
 bmeip | [黑石弹性公网IP](https://cloud.tencent.com/document/product/1028) | 2018-06-25(20) |
 bmlb | [黑石负载均衡](https://cloud.tencent.com/document/product/1027) | 2018-06-25(49) |
 bmvpc | [黑石私有网络](https://cloud.tencent.com/document/product/1024) | 2018-06-25(61) |
@@ -254,7 +254,7 @@ postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/
 privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(21) |
 pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(44) |
 rce | [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) | 2020-11-03(3) |
-redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(90) |
+redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(92) |
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3) |
 rkp | [风险探针](https://cloud.tencent.com/document/product/1169) | 2019-12-09(3) |
 rp | [注册保护](https://cloud.tencent.com/document/product/1191) | 2020-02-24(1) |
