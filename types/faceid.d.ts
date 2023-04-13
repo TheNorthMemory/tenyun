@@ -136,6 +136,10 @@ declare interface DetectInfoText {
   NFCRequestIds?: string[] | null;
   /** nfc重复计费计数 */
   NFCBillingCounts?: number | null;
+  /** 港澳台居住证通行证号码 */
+  PassNo?: string | null;
+  /** 港澳台居住证签发次数 */
+  VisaNum?: string | null;
 }
 
 /** 核身视频信息 */

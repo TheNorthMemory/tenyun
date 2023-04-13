@@ -817,11 +817,11 @@ declare interface CreateBatchCancelFlowUrlRequest {
 
 declare interface CreateBatchCancelFlowUrlResponse {
   /** 批量撤回签署流程链接 */
-  BatchCancelFlowUrl: string;
+  BatchCancelFlowUrl?: string;
   /** 签署流程撤回失败信息 */
-  FailMessages: string[];
+  FailMessages?: string[];
   /** 签署连接过期时间字符串：年月日-时分秒 */
-  UrlExpireOn: string;
+  UrlExpireOn?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1141,7 +1141,7 @@ declare interface CreatePrepareFlowRequest {
 
 declare interface CreatePrepareFlowResponse {
   /** 快速发起预览链接 */
-  Url: string;
+  Url?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1449,13 +1449,13 @@ declare interface DescribeIntegrationEmployeesRequest {
 
 declare interface DescribeIntegrationEmployeesResponse {
   /** 员工数据列表 */
-  Employees: Staff[] | null;
+  Employees?: Staff[] | null;
   /** 偏移量，默认为0，最大为20000 */
-  Offset: number | null;
+  Offset?: number | null;
   /** 返回最大数量，最大为20 */
-  Limit: number;
+  Limit?: number;
   /** 符合条件的员工数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1721,17 +1721,17 @@ declare interface VerifyPdfResponse {
 /** {@link Ess 腾讯电子签企业版} */
 declare interface Ess {
   (): Versions;
-  /** 撤销签署流程 {@link CancelFlowRequest} {@link CancelFlowResponse} */
+  /** 撤销单个签署流程 {@link CancelFlowRequest} {@link CancelFlowResponse} */
   CancelFlow(data: CancelFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CancelFlowResponse>;
   /** 取消一码多扫二维码 {@link CancelMultiFlowSignQRCodeRequest} {@link CancelMultiFlowSignQRCodeResponse} */
   CancelMultiFlowSignQRCode(data: CancelMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CancelMultiFlowSignQRCodeResponse>;
-  /** 获取批量撤销签署流程链接 {@link CreateBatchCancelFlowUrlRequest} {@link CreateBatchCancelFlowUrlResponse} */
+  /** 批量撤销签署流程 {@link CreateBatchCancelFlowUrlRequest} {@link CreateBatchCancelFlowUrlResponse} */
   CreateBatchCancelFlowUrl(data: CreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchCancelFlowUrlResponse>;
   /** 创建文件转换任务 {@link CreateConvertTaskApiRequest} {@link CreateConvertTaskApiResponse} */
   CreateConvertTaskApi(data: CreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConvertTaskApiResponse>;
-  /** 创建电子文档 {@link CreateDocumentRequest} {@link CreateDocumentResponse} */
+  /** 模板发起合同-创建电子文档 {@link CreateDocumentRequest} {@link CreateDocumentResponse} */
   CreateDocument(data: CreateDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocumentResponse>;
-  /** 创建签署流程 {@link CreateFlowRequest} {@link CreateFlowResponse} */
+  /** 模板发起合同-创建签署流程 {@link CreateFlowRequest} {@link CreateFlowResponse} */
   CreateFlow(data: CreateFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowResponse>;
   /** 补充签署流程本企业签署人信息 {@link CreateFlowApproversRequest} {@link CreateFlowApproversResponse} */
   CreateFlowApprovers(data: CreateFlowApproversRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowApproversResponse>;
@@ -1743,31 +1743,31 @@ declare interface Ess {
   CreateFlowReminds(data: CreateFlowRemindsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowRemindsResponse>;
   /** 提交企业签署流程审批结果 {@link CreateFlowSignReviewRequest} {@link CreateFlowSignReviewResponse} */
   CreateFlowSignReview(data: CreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignReviewResponse>;
-  /** 创建签署链接 {@link CreateFlowSignUrlRequest} {@link CreateFlowSignUrlResponse} */
+  /** 获取集成页面签署链接 {@link CreateFlowSignUrlRequest} {@link CreateFlowSignUrlResponse} */
   CreateFlowSignUrl(data: CreateFlowSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignUrlResponse>;
-  /** 创建员工 {@link CreateIntegrationEmployeesRequest} {@link CreateIntegrationEmployeesResponse} */
+  /** 创建企业员工 {@link CreateIntegrationEmployeesRequest} {@link CreateIntegrationEmployeesResponse} */
   CreateIntegrationEmployees(data: CreateIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationEmployeesResponse>;
-  /** 集成版绑定员工角色 {@link CreateIntegrationUserRolesRequest} {@link CreateIntegrationUserRolesResponse} */
+  /** 绑定员工角色 {@link CreateIntegrationUserRolesRequest} {@link CreateIntegrationUserRolesResponse} */
   CreateIntegrationUserRoles(data: CreateIntegrationUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationUserRolesResponse>;
   /** 创建一码多扫流程签署二维码 {@link CreateMultiFlowSignQRCodeRequest} {@link CreateMultiFlowSignQRCodeResponse} */
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
-  /** 创建快速发起流程 {@link CreatePrepareFlowRequest} {@link CreatePrepareFlowResponse} */
+  /** 通过页面快速发起签署流程 {@link CreatePrepareFlowRequest} {@link CreatePrepareFlowResponse} */
   CreatePrepareFlow(data: CreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrepareFlowResponse>;
   /** 创建导入个人印章 {@link CreatePreparedPersonalEsignRequest} {@link CreatePreparedPersonalEsignResponse} */
   CreatePreparedPersonalEsign(data: CreatePreparedPersonalEsignRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePreparedPersonalEsignResponse>;
   /** 发起解除协议 {@link CreateReleaseFlowRequest} {@link CreateReleaseFlowResponse} */
   CreateReleaseFlow(data: CreateReleaseFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseFlowResponse>;
-  /** 获取小程序跳转链接 {@link CreateSchemeUrlRequest} {@link CreateSchemeUrlResponse} */
+  /** 获取小程序签署链接 {@link CreateSchemeUrlRequest} {@link CreateSchemeUrlResponse} */
   CreateSchemeUrl(data: CreateSchemeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchemeUrlResponse>;
-  /** 印章授权 {@link CreateSealPolicyRequest} {@link CreateSealPolicyResponse} */
+  /** 创建印章授权 {@link CreateSealPolicyRequest} {@link CreateSealPolicyResponse} */
   CreateSealPolicy(data: CreateSealPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealPolicyResponse>;
   /** 获取个人用户自动签开启链接 {@link CreateUserAutoSignEnableUrlRequest} {@link CreateUserAutoSignEnableUrlResponse} */
   CreateUserAutoSignEnableUrl(data: CreateUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserAutoSignEnableUrlResponse>;
-  /** 移除员工 {@link DeleteIntegrationEmployeesRequest} {@link DeleteIntegrationEmployeesResponse} */
+  /** 移除企业员工 {@link DeleteIntegrationEmployeesRequest} {@link DeleteIntegrationEmployeesResponse} */
   DeleteIntegrationEmployees(data: DeleteIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationEmployeesResponse>;
-  /** 集成版解绑用户角色 {@link DeleteIntegrationRoleUsersRequest} {@link DeleteIntegrationRoleUsersResponse} */
+  /** 解绑员工角色 {@link DeleteIntegrationRoleUsersRequest} {@link DeleteIntegrationRoleUsersResponse} */
   DeleteIntegrationRoleUsers(data: DeleteIntegrationRoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationRoleUsersResponse>;
-  /** 撤销员工的印章权限 {@link DeleteSealPoliciesRequest} {@link DeleteSealPoliciesResponse} */
+  /** 撤销印章授权 {@link DeleteSealPoliciesRequest} {@link DeleteSealPoliciesResponse} */
   DeleteSealPolicies(data: DeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSealPoliciesResponse>;
   /** 查询文件下载URL {@link DescribeFileUrlsRequest} {@link DescribeFileUrlsResponse} */
   DescribeFileUrls(data: DescribeFileUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileUrlsResponse>;
@@ -1779,11 +1779,11 @@ declare interface Ess {
   DescribeFlowInfo(data: DescribeFlowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowInfoResponse>;
   /** 查询模板 {@link DescribeFlowTemplatesRequest} {@link DescribeFlowTemplatesResponse} */
   DescribeFlowTemplates(data: DescribeFlowTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTemplatesResponse>;
-  /** 查询员工信息 {@link DescribeIntegrationEmployeesRequest} {@link DescribeIntegrationEmployeesResponse} */
+  /** 查询企业员工列表 {@link DescribeIntegrationEmployeesRequest} {@link DescribeIntegrationEmployeesResponse} */
   DescribeIntegrationEmployees(data: DescribeIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationEmployeesResponse>;
-  /** 查询集成版主企业员工账号 {@link DescribeIntegrationMainOrganizationUserRequest} {@link DescribeIntegrationMainOrganizationUserResponse} */
+  /** 查询集团主企业员工账号 {@link DescribeIntegrationMainOrganizationUserRequest} {@link DescribeIntegrationMainOrganizationUserResponse} */
   DescribeIntegrationMainOrganizationUser(data: DescribeIntegrationMainOrganizationUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationMainOrganizationUserResponse>;
-  /** 查询集成版角色 {@link DescribeIntegrationRolesRequest} {@link DescribeIntegrationRolesResponse} */
+  /** 查询企业角色列表 {@link DescribeIntegrationRolesRequest} {@link DescribeIntegrationRolesResponse} */
   DescribeIntegrationRoles(data: DescribeIntegrationRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationRolesResponse>;
   /** 查询集团企业列表 {@link DescribeOrganizationGroupOrganizationsRequest} {@link DescribeOrganizationGroupOrganizationsResponse} */
   DescribeOrganizationGroupOrganizations(data: DescribeOrganizationGroupOrganizationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationGroupOrganizationsResponse>;
@@ -1797,11 +1797,11 @@ declare interface Ess {
   DisableUserAutoSign(data: DisableUserAutoSignRequest, config?: AxiosRequestConfig): AxiosPromise<DisableUserAutoSignResponse>;
   /** 查询转换任务状态 {@link GetTaskResultApiRequest} {@link GetTaskResultApiResponse} */
   GetTaskResultApi(data: GetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskResultApiResponse>;
-  /** 修改应用callbackinfo {@link ModifyApplicationCallbackInfoRequest} {@link ModifyApplicationCallbackInfoResponse} */
+  /** 修改企业回调配置 {@link ModifyApplicationCallbackInfoRequest} {@link ModifyApplicationCallbackInfoResponse} */
   ModifyApplicationCallbackInfo(data: ModifyApplicationCallbackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationCallbackInfoResponse>;
-  /** 发起流程 {@link StartFlowRequest} {@link StartFlowResponse} */
+  /** 模板发起合同-发起签署流程 {@link StartFlowRequest} {@link StartFlowResponse} */
   StartFlow(data: StartFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StartFlowResponse>;
-  /** 更新集成版员工信息 {@link UpdateIntegrationEmployeesRequest} {@link UpdateIntegrationEmployeesResponse} */
+  /** 更新企业员工信息 {@link UpdateIntegrationEmployeesRequest} {@link UpdateIntegrationEmployeesResponse} */
   UpdateIntegrationEmployees(data: UpdateIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateIntegrationEmployeesResponse>;
   /** 多文件上传 {@link UploadFilesRequest} {@link UploadFilesResponse} */
   UploadFiles(data: UploadFilesRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFilesResponse>;

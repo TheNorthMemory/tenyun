@@ -535,7 +535,7 @@ declare interface CreateOfflineRecordResponse {
 declare interface CreatePPTCheckTaskRequest {
   /** 客户的SdkAppId */
   SdkAppId: number;
-  /** 经过URL编码后的PPT文件地址。URL 编码会将字符转换为可通过因特网传输的格式，比如文档地址为http://example.com/测试.pptx，经过URL编码之后为http://example.com/%E6%B5%8B%E8%AF%95.pptx。为了提高URL解析的成功率，请对URL进行编码。 */
+  /** 经过URL编码后的PPT文件地址。URL 编码会将字符转换为可通过因特网传输的格式，例如文档地址为http://example.com/测试.pptx，经过URL编码之后为http://example.com/%E6%B5%8B%E8%AF%95.pptx。为了提高URL解析的成功率，请对URL进行编码。 */
   Url: string;
   /** 是否对不支持元素开启自动处理的功能。默认不开启。在开启自动处理的情况下，会自动进行如下处理：1. 墨迹：移除不支持的墨迹（比如使用WPS画的）2. 自动翻页：移除PPT上所有的自动翻页设置，并设置为单击鼠标翻页3. 已损坏音视频：移除PPT上对损坏音视频的引用 */
   AutoHandleUnsupportedElement?: boolean;

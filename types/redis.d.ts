@@ -30,11 +30,11 @@ declare interface BackupDownloadInfo {
   InnerDownloadUrl: string;
 }
 
-/** 自定义的备份文件下载地址的 VPC 信息。 */
+/** 已配置的备份文件下载地址对应的 VPC 信息。 */
 declare interface BackupLimitVpcItem {
-  /** 自定义下载备份文件的VPC 所属地域。 */
+  /** 备份文件的下载地址对应VPC 所属的地域。 */
   Region: string;
-  /** 自定义下载备份文件的 VPC 列表。 */
+  /** 备份文件下载地址的 VPC 列表。 */
   VpcList: string[];
 }
 
@@ -104,11 +104,11 @@ declare interface DescribeInstanceDTSInstanceInfo {
 
 /** 复制组信息 */
 declare interface Groups {
-  /** 用户AppID */
+  /** 用户 APPID。APPID是与账号ID有唯一对应关系的应用 ID，部分腾讯云产品会使用此 APPID。 */
   AppId: number;
   /** 地域ID 。- 1：广州 - 4：上海 - 5：中国香港 - 6：多伦多 - 7：上海金融 - 8：北京 - 9：新加坡- 11：深圳金融- 15：美西（硅谷）- 16：成都 - 17：德国 - 18：韩国 - 19：重庆 - 21：印度 - 22：美东（弗吉尼亚）- 23：泰国 - 24：俄罗斯 - 25：日本 */
   RegionId: number;
-  /** 复制组 ID。 */
+  /** 复制组 ID。格式如：crs-rpl-deind****。 */
   GroupId: string;
   /** 复制组名称。 */
   GroupName: string | null;
@@ -286,27 +286,27 @@ declare interface InstanceParam {
 
 /** 实例参数修改历史 */
 declare interface InstanceParamHistory {
-  /** 参数名称 */
+  /** 参数名称。 */
   ParamName: string;
-  /** 修改前值 */
+  /** 参数修改之前的值。 */
   PreValue: string;
-  /** 修改后值 */
+  /** 参数修改之后的值。 */
   NewValue: string;
-  /** 状态：1-参数配置修改中；2-参数配置修改成功；3-参数配置修改失败 */
+  /** 参数配置状态。- 1：参数配置修改中。- 2：参数配置修改成功。- 3：参数配置修改失败。 */
   Status: number;
-  /** 修改时间 */
+  /** 修改时间。 */
   ModifyTime: string;
 }
 
 /** 代理慢查询详情 */
 declare interface InstanceProxySlowlogDetail {
-  /** 慢查询耗时（单位：毫秒）。 */
+  /** 慢查询耗时时长。单位：毫秒。 */
   Duration: number;
   /** 客户端地址。 */
   Client: string;
-  /** 命令。 */
+  /** 慢查询的命令。 */
   Command: string;
-  /** 详细命令行信息。 */
+  /** 慢查询详细命令行信息。 */
   CommandLine: string;
   /** 执行时间。 */
   ExecuteTime: string;
@@ -350,7 +350,7 @@ declare interface InstanceSet {
   Size: number;
   /** 该字段已废弃。请使用腾讯云可观测平台API 接口 [GetMonitorData](https://cloud.tencent.com/document/product/248/31014) 获取实例已使用的内存容量。 */
   SizeUsed: number;
-  /** 实例类型：1：Redis2.8内存版（集群架构）。2：Redis2.8内存版（标准架构）。3：CKV 3.2内存版(标准架构)。4：CKV 3.2内存版(集群架构)。5：Redis2.8内存版（单机）。6：Redis4.0内存版（标准架构）。7：Redis4.0内存版（集群架构）。8：Redis5.0内存版（标准架构）。9：Redis5.0内存版（集群架构）。 */
+  /** 实例类型。- 2：Redis 2.8内存版（标准架构）。- 3：CKV 3.2内存版（标准架构）。- 4：CKV 3.2内存版（集群架构）。- 5：Redis 2.8内存版（单机）。- 6：Redis 4.0内存版（标准架构）。- 7：Redis 4.0内存版（集群架构）。- 8：Redis 5.0内存版（标准架构）。- 9：Redis 5.0内存版（集群架构）。- 15：Redis 6.2内存版（标准架构）。- 16：Redis 6.2内存版（集群架构）。 */
   Type: number;
   /** 实例是否设置自动续费标识。1：设置自动续费。0：未设置自动续费。 */
   AutoRenewFlag: number;
@@ -480,7 +480,7 @@ declare interface InstanceTextParam {
 
 /** 复制组实例 */
 declare interface Instances {
-  /** 用户AppID。 */
+  /** 用户APPID。APPID是与账号ID有唯一对应关系的应用 ID，部分腾讯云产品会使用此 APPID。 */
   AppId: number;
   /** 实例 ID。 */
   InstanceId: string;
@@ -514,7 +514,7 @@ declare interface Instances {
   Status: number;
   /** 仓库ID。 */
   GrocerySysId: number;
-  /** 实例类型。1：Redis 2.8 内存版（集群架构）。2：Redis 2.8 内存版（标准架构）。3：CKV 3.2 内存版（标准架构）。4：CKV 3.2 内存版（集群架构）。5：Redis 2.8 单机版。6：Redis 4.0 内存版（标准架构）。7：Redis 4.0 内存版（集群架构）。8：Redis 5.0 内存版（标准架构）。9：Redis 5.0 内存版（集群架构）。 */
+  /** 实例类型。- 2：Redis 2.8内存版（标准架构）。- 3：CKV 3.2内存版（标准架构）。- 4：CKV 3.2内存版（集群架构）。- 5：Redis 2.8内存版（单机）。- 6：Redis 4.0内存版（标准架构）。- 7：Redis 4.0内存版（集群架构）。- 8：Redis 5.0内存版（标准架构）。- 9：Redis 5.0内存版（集群架构）。- 15：Redis 6.2内存版（标准架构）。- 16：Redis 6.2内存版（集群架构）。 */
   ProductType: number;
   /** 实例加入复制组的时间。 */
   CreateTime: string;
@@ -544,35 +544,35 @@ declare interface Outbound {
 
 /** 参数模板信息 */
 declare interface ParamTemplateInfo {
-  /** 参数模板ID */
+  /** 参数模板 ID。 */
   TemplateId: string;
-  /** 参数模板名称 */
+  /** 参数模板名称。 */
   Name: string;
-  /** 参数模板描述 */
+  /** 参数模板描述。 */
   Description: string;
-  /** 产品类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构） */
+  /** 实例类型。- 2：Redis 2.8内存版（标准架构）。- 3：CKV 3.2内存版（标准架构）。- 4：CKV 3.2内存版（集群架构）。- 5：Redis 2.8内存版（单机）。- 6：Redis 4.0内存版（标准架构）。- 7：Redis 4.0内存版（集群架构）。- 8：Redis 5.0内存版（标准架构）。- 9：Redis 5.0内存版（集群架构）。 */
   ProductType: number;
 }
 
 /** Redis参数模板参数详情 */
 declare interface ParameterDetail {
-  /** 参数名称 */
+  /** 参数名称。 */
   Name: string;
-  /** 参数类型 */
+  /** 参数类型。 */
   ParamType: string;
-  /** 参数默认值 */
+  /** 参数默认值。 */
   Default: string;
-  /** 参数描述 */
+  /** 参数描述。 */
   Description: string;
-  /** 参数当前值 */
+  /** 参数当前值。 */
   CurrentValue: string;
-  /** 修改参数后，是否需要重启数据库以使参数生效。可能的值包括：0-不需要重启；1-需要重启 */
+  /** 修改参数后，是否需要重启数据库以使参数生效。- 0：不需要重启。- 1：需要重启。 */
   NeedReboot: number;
-  /** 参数允许的最大值 */
+  /** 参数允许的最大值。 */
   Max: string | null;
-  /** 参数允许的最小值 */
+  /** 参数允许的最小值。 */
   Min: string | null;
-  /** 参数的可选枚举值。如果为非枚举参数，则为空 */
+  /** 参数可选枚举值。如果为非枚举参数，则为空。 */
   EnumValue: string[] | null;
 }
 
@@ -650,33 +650,33 @@ declare interface RedisBackupSet {
 
 /** 单个实例信息 */
 declare interface RedisCommonInstanceList {
-  /** 实例名称 */
+  /** 实例名称。 */
   InstanceName: string;
-  /** 实例id */
+  /** 实例 ID。 */
   InstanceId: string;
-  /** 用户id */
+  /** 用户APPID。APPID是与账号ID有唯一对应关系的应用 ID，部分腾讯云产品会使用此 APPID。 */
   AppId: number;
-  /** 实例所属项目id */
+  /** 实例所属项目 ID。 */
   ProjectId: number;
-  /** 实例接入区域 */
+  /** 实例接入区域。 */
   Region: string;
-  /** 实例接入zone */
+  /** 实例接入可用区。 */
   Zone: string;
-  /** 实例网络id */
+  /** 实例私有网络 ID。 */
   VpcId: string;
-  /** 子网id */
+  /** 私有网络所属子网 ID。 */
   SubnetId: string;
-  /** 实例状态信息，1-流程中 ,2-运行中, -2-实例已隔离 ,-3-实例待回收, -4-实例已删除 */
+  /** 实例状态信息。- 1-流程中。- 2-运行中。- -2-实例已隔离。- -3-实例待回收。- -4-实例已删除。 */
   Status: string;
-  /** 实例网络ip */
+  /** 实例私有网络 IP 地址。 */
   Vips: string[];
-  /** 实例网络端口 */
+  /** 实例网络端口。 */
   Vport: number;
-  /** 实例创建时间 */
+  /** 实例创建时间。 */
   Createtime: string;
-  /** 计费类型，0-按量计费，1-包年包月 */
+  /** 计费类型。- 0：按量计费。- 1：包年包月。 */
   PayMode: number;
-  /** 网络类型，0-基础网络，1-VPC网络 */
+  /** 网络类型。- 0：基础网络。- 1：VPC 网络。 */
   NetType: number;
 }
 
@@ -748,9 +748,9 @@ declare interface ReplicaGroup {
 
 /** API购买实例绑定标签 */
 declare interface ResourceTag {
-  /** 标签key */
+  /** 标签Key。 */
   TagKey: string;
-  /** 标签value */
+  /** 标签 Key 对应的 Value。 */
   TagValue: string;
 }
 
@@ -1785,23 +1785,23 @@ declare interface DescribeMaintenanceWindowResponse {
 }
 
 declare interface DescribeParamTemplateInfoRequest {
-  /** 参数模板 ID。 */
+  /** 指定查询的参数模板 ID。请通过接口[DescribeParamTemplates](https://cloud.tencent.com/document/product/239/58750)获取参数模板列表信息。 */
   TemplateId: string;
 }
 
 declare interface DescribeParamTemplateInfoResponse {
-  /** 实例参数个数 */
-  TotalCount: number;
+  /** 参数模板的参数数量。 */
+  TotalCount?: number;
   /** 参数模板 ID。 */
-  TemplateId: string;
+  TemplateId?: string;
   /** 参数模板名称。 */
-  Name: string;
-  /** 产品类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构） */
-  ProductType: number;
-  /** 参数模板描述 */
-  Description: string;
-  /** 参数详情 */
-  Items: ParameterDetail[];
+  Name?: string;
+  /** 产品类型。- 2：Redis 2.8内存版（标准架构）。- 3：CKV 3.2内存版（标准架构）。- 4：CKV 3.2内存版（集群架构）。- 5：Redis 2.8内存版（单机）。- 6：Redis 4.0内存版（标准架构）。- 7：Redis 4.0内存版（集群架构）。- 8：Redis 5.0内存版（标准架构）。- 9：Redis 5.0内存版（集群架构）。- 15：Redis 6.2内存版（标准架构）。- 16：Redis 6.2内存版（集群架构）。 */
+  ProductType?: number;
+  /** 参数模板描述。 */
+  Description?: string;
+  /** 参数详情。包含：参数的名称，当前运行值，默认值，最大值、最小值、枚举值等信息。 */
+  Items?: ParameterDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

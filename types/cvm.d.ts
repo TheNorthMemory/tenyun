@@ -54,7 +54,7 @@ declare interface ChcHost {
   InstanceName: string;
   /** 服务器序列号。 */
   SerialNumber: string;
-  /** CHC的状态REGISTERED: 设备已录入。还未配置带外和部署网络VPC_READY: 已配置带外和部署网络PREPARED: 可分配云主机ONLINE: 已分配云主机 */
+  /** CHC的状态INIT: 设备已录入。还未配置带外和部署网络READY: 已配置带外和部署网络PREPARED: 可分配云主机ONLINE: 已分配云主机OPERATING: 设备操作中，如正在配置带外网络等。CLEAR_NETWORK_FAILED: 清理带外和部署网络失败 */
   InstanceState: string;
   /** 设备类型。 */
   DeviceType?: string | null;
@@ -1785,9 +1785,9 @@ declare interface DescribeInstancesStatusRequest {
 
 declare interface DescribeInstancesStatusResponse {
   /** 符合条件的实例状态数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** [实例状态](https://cloud.tencent.com/document/api/213/15753) 列表。 */
-  InstanceStatusSet: InstanceStatus[];
+  InstanceStatusSet?: InstanceStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -66,6 +66,44 @@ declare interface ApplyStatus {
   ClusterId: string;
 }
 
+/** 备份保留策略详情集群策略： ClueterId=集群Id， TableGroupId=-1, TableName="-1"集群+表格组策略： ClueterId=集群Id， TableGroupId=表格组Id, TableName="-1"集群+表格组+表格策略： ClueterId=集群Id， TableGroupId=表格组Id, TableName="表格名"FileTag=0 txh引擎文件， =1 ulog流水文件， 当要设置为=1时， 这两项不可变 TableGroupId=-1和TableName="-1"ExpireDay为大于等于1，小于999的整形数字OperType=0 代表动作为新增， =1 代表动作为删除， =2 代表动作为修改， 其中0和2可以混用，后端实现兼容 */
+declare interface BackupExpireRuleInfo {
+  /** 所属表格组ID */
+  TableGroupId: string;
+  /** 表名称 */
+  TableName: string;
+  /** 文件标签，见上面描述 */
+  FileTag: number;
+  /** 淘汰天数，见上面描述 */
+  ExpireDay: number;
+  /** 操作类型，见上面描述 */
+  OperType: number;
+}
+
+/** 备份记录作为出参时，每个字段都会填充作为入参时， 原封不动将每个字段填回结构体， 注意只有FIleTag=OSDATA才可以调用此接口 */
+declare interface BackupRecords {
+  /** 表格组ID */
+  ZoneId: number;
+  /** 表名称 */
+  TableName: string;
+  /** 备份源 */
+  BackupType: string;
+  /** 文件标签：TCAPLUS_FULL或OSDATA */
+  FileTag: string;
+  /** 分片数量 */
+  ShardCount: number;
+  /** 备份批次日期 */
+  BackupBatchTime: string;
+  /** 备份文件汇总大小 */
+  BackupFileSize: number;
+  /** 备份成功率 */
+  BackupSuccRate: string;
+  /** 备份文件过期时间 */
+  BackupExpireTime: string;
+  /** 业务ID */
+  AppId: number;
+}
+
 /** 集群详细信息 */
 declare interface ClusterInfo {
   /** 集群名称 */
@@ -864,6 +902,20 @@ declare interface CreateTablesResponse {
   RequestId?: string;
 }
 
+declare interface DeleteBackupRecordsRequest {
+  /** 待删除备份记录的所在集群ID */
+  ClusterId: string;
+  /** 待删除备份记录的详情 */
+  BackupRecords: BackupRecords[];
+}
+
+declare interface DeleteBackupRecordsResponse {
+  /** TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务 */
+  TaskId: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteClusterRequest {
   /** 待删除的集群ID */
   ClusterId: string;
@@ -993,6 +1045,28 @@ declare interface DescribeApplicationsResponse {
   /** 申请单列表 */
   Applications: Application[];
   /** 申请单个数 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackupRecordsRequest {
+  /** 集群ID，用于获取指定集群的单据 */
+  ClusterId?: string;
+  /** 分页 */
+  Limit?: number;
+  /** 分页 */
+  Offset?: number;
+  /** 表格组id，用于过滤 */
+  TableGroupId?: string;
+  /** 表格名，用于过滤 */
+  TableName?: string;
+}
+
+declare interface DescribeBackupRecordsResponse {
+  /** 备份记录详情 */
+  BackupRecords: BackupRecords[];
+  /** 返回记录条数 */
   TotalCount: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1538,6 +1612,20 @@ declare interface RollbackTablesResponse {
   RequestId?: string;
 }
 
+declare interface SetBackupExpireRuleRequest {
+  /** 表所属集群实例ID */
+  ClusterId: string;
+  /** 淘汰策略数组 */
+  BackupExpireRules: BackupExpireRuleInfo[];
+}
+
+declare interface SetBackupExpireRuleResponse {
+  /** TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务 */
+  TaskId: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetTableDataFlowRequest {
   /** 表所属集群实例ID */
   ClusterId: string;
@@ -1623,6 +1711,8 @@ declare interface Tcaplusdb {
   CreateTableGroup(data: CreateTableGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTableGroupResponse>;
   /** 批量创建表 {@link CreateTablesRequest} {@link CreateTablesResponse} */
   CreateTables(data: CreateTablesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTablesResponse>;
+  /** 删除手工备份 {@link DeleteBackupRecordsRequest} {@link DeleteBackupRecordsResponse} */
+  DeleteBackupRecords(data: DeleteBackupRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupRecordsResponse>;
   /** 删除集群 {@link DeleteClusterRequest} {@link DeleteClusterResponse} */
   DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
   /** 删除IDL描述文件 {@link DeleteIdlFilesRequest} {@link DeleteIdlFilesResponse} */
@@ -1639,6 +1729,8 @@ declare interface Tcaplusdb {
   DeleteTables(data: DeleteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTablesResponse>;
   /** 获取审批管理的申请单 {@link DescribeApplicationsRequest} {@link DescribeApplicationsResponse} */
   DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
+  /** 查询备份记录 {@link DescribeBackupRecordsRequest} {@link DescribeBackupRecordsResponse} */
+  DescribeBackupRecords(data?: DescribeBackupRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupRecordsResponse>;
   /** 获取集群关联的标签列表 {@link DescribeClusterTagsRequest} {@link DescribeClusterTagsResponse} */
   DescribeClusterTags(data: DescribeClusterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterTagsResponse>;
   /** 查询集群信息列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
@@ -1701,6 +1793,8 @@ declare interface Tcaplusdb {
   RecoverRecycleTables(data: RecoverRecycleTablesRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverRecycleTablesResponse>;
   /** 表格数据回档 {@link RollbackTablesRequest} {@link RollbackTablesResponse} */
   RollbackTables(data: RollbackTablesRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackTablesResponse>;
+  /** 新增、删除、修改备份过期策略 {@link SetBackupExpireRuleRequest} {@link SetBackupExpireRuleResponse} */
+  SetBackupExpireRule(data: SetBackupExpireRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SetBackupExpireRuleResponse>;
   /** 新增、修改表格数据订阅 {@link SetTableDataFlowRequest} {@link SetTableDataFlowResponse} */
   SetTableDataFlow(data: SetTableDataFlowRequest, config?: AxiosRequestConfig): AxiosPromise<SetTableDataFlowResponse>;
   /** 设置表格分布式索引 {@link SetTableIndexRequest} {@link SetTableIndexResponse} */
