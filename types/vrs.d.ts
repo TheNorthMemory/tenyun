@@ -48,13 +48,13 @@ declare interface TrainingTexts {
   TrainingTextList?: TrainingText[] | null;
 }
 
-/** Words */
+/** 音频检测提示信息：1.检测字是否存在多读、 少读、 错读等2.检测准确度和流畅度 */
 declare interface Words {
-  /** 准确度 */
+  /** 准确度 (<75则认为不合格) */
   PronAccuracy?: number | null;
-  /** 流畅度 */
+  /** 流畅度 (<0.95则认为不合格) */
   PronFluency?: number | null;
-  /** tag: 0: match, 1: insert, 2: delete, 3: replace, 4: oov, 5: unknown */
+  /** tag: 0: match 匹配1: insert 多读2: delete 少读3: replace 错读4: oov 待评估字不在发音评估的词库5: unknown 未知错误 */
   Tag?: number | null;
   /** 字 */
   Word?: string | null;

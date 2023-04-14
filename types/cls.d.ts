@@ -1153,6 +1153,8 @@ declare interface CreateTopicRequest {
   Describes?: string;
   /** 0：关闭日志沉降。非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效 */
   HotPeriod?: number;
+  /** webtracking开关； false: 关闭 true： 开启 */
+  IsWebTracking?: boolean;
 }
 
 declare interface CreateTopicResponse {
@@ -1951,6 +1953,8 @@ declare interface ModifyTopicRequest {
   Describes?: string;
   /** 0：关闭日志沉降。非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效 */
   HotPeriod?: number;
+  /** webtracking开关； false: 关闭 true: 开启 */
+  IsWebTracking?: boolean;
 }
 
 declare interface ModifyTopicResponse {
