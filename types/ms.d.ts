@@ -781,7 +781,7 @@ declare interface Ms {
   CreateShieldInstance(data: CreateShieldInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShieldInstanceResponse>;
   /** 新增加固策略 {@link CreateShieldPlanInstanceRequest} {@link CreateShieldPlanInstanceResponse} */
   CreateShieldPlanInstance(data: CreateShieldPlanInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShieldPlanInstanceResponse>;
-  /** 批量删除提交过的app扫描信息 {@link DeleteScanInstancesRequest} {@link DeleteScanInstancesResponse} */
+  /** @deprecated 批量删除提交过的app扫描信息 {@link DeleteScanInstancesRequest} {@link DeleteScanInstancesResponse} */
   DeleteScanInstances(data: DeleteScanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScanInstancesResponse>;
   /** 批量删除提交过的app信息 {@link DeleteShieldInstancesRequest} {@link DeleteShieldInstancesResponse} */
   DeleteShieldInstances(data: DeleteShieldInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShieldInstancesResponse>;

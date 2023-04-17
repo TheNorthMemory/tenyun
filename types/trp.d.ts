@@ -1098,6 +1098,20 @@ declare interface DescribeTraceCodesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTraceDataByIdRequest {
+  /** 溯源ID */
+  Id: string;
+  /** 企业ID */
+  CorpId?: number;
+}
+
+declare interface DescribeTraceDataByIdResponse {
+  /** 无 */
+  TraceData: TraceData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTraceDataListRequest {
   /** 企业ID */
   CorpId?: number;
@@ -1399,6 +1413,8 @@ declare interface Trp {
   DescribeTraceCodeById(data?: DescribeTraceCodeByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceCodeByIdResponse>;
   /** 查询二维码列表 {@link DescribeTraceCodesRequest} {@link DescribeTraceCodesResponse} */
   DescribeTraceCodes(data?: DescribeTraceCodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceCodesResponse>;
+  /** 根据溯源ID查溯源信息 {@link DescribeTraceDataByIdRequest} {@link DescribeTraceDataByIdResponse} */
+  DescribeTraceDataById(data: DescribeTraceDataByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceDataByIdResponse>;
   /** 查询溯源信息 {@link DescribeTraceDataListRequest} {@link DescribeTraceDataListResponse} */
   DescribeTraceDataList(data?: DescribeTraceDataListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceDataListResponse>;
   /** 修改批次 {@link ModifyCodeBatchRequest} {@link ModifyCodeBatchResponse} */

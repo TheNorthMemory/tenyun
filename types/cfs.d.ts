@@ -82,6 +82,14 @@ declare interface AvailableZone {
   ZoneName: string;
 }
 
+/** 对象存储桶 */
+declare interface BucketInfo {
+  /** 桶名称 */
+  Name: string;
+  /** 桶所在地域 */
+  Region: string | null;
+}
+
 /** 绑定快照策略的文件系统信息 */
 declare interface FileSystemByPolicy {
   /** 文件系统名称 */
@@ -170,6 +178,60 @@ declare interface Filter {
   Values: string[];
   /** 名称 */
   Name: string;
+}
+
+/** CFS数据迁移任务信息 */
+declare interface MigrationTaskInfo {
+  /** 迁移任务名称 */
+  TaskName: string;
+  /** 迁移任务id */
+  TaskId: string;
+  /** 迁移方式标志位，默认为0。0: 桶迁移；1: 清单迁移 */
+  MigrationType: number;
+  /** 迁移模式，默认为0。0: 全量迁移 */
+  MigrationMode: number;
+  /** 数据源桶名称 */
+  BucketName: string | null;
+  /** 数据源桶地域 */
+  BucketRegion: string | null;
+  /** 数据源桶地址 */
+  BucketAddress: string | null;
+  /** 清单地址 */
+  ListAddress: string | null;
+  /** 文件系统实例名称 */
+  FsName: string | null;
+  /** 文件系统实例Id */
+  FileSystemId: string;
+  /** 文件系统路径 */
+  FsPath: string;
+  /** 同名文件迁移时覆盖策略，默认为0。0: 最后修改时间优先；1: 全覆盖；2: 不覆盖 */
+  CoverType: number;
+  /** 创建时间 */
+  CreateTime: number;
+  /** 完成/终止时间 */
+  EndTime: number | null;
+  /** 迁移状态。0: 已完成；1: 进行中；2: 已终止 */
+  Status: number;
+  /** 文件数量 */
+  FileTotalCount: number | null;
+  /** 已迁移文件数量 */
+  FileMigratedCount: number | null;
+  /** 迁移失败文件数量 */
+  FileFailedCount: number | null;
+  /** 文件容量，单位Byte */
+  FileTotalSize: number | null;
+  /** 已迁移文件容量，单位Byte */
+  FileMigratedSize: number | null;
+  /** 迁移失败文件容量，单位Byte */
+  FileFailedSize: number | null;
+  /** 全部清单 */
+  FileTotalList: string | null;
+  /** 已完成文件清单 */
+  FileCompletedList: string | null;
+  /** 失败文件清单 */
+  FileFailedList: string | null;
+  /** 源桶路径 */
+  BucketPath: string | null;
 }
 
 /** 挂载点信息 */
@@ -476,6 +538,46 @@ declare interface CreateCfsSnapshotResponse {
   RequestId?: string;
 }
 
+declare interface CreateMigrationTaskRequest {
+  /** 迁移任务名称 */
+  TaskName: string;
+  /** 迁移方式标志位，默认为0。0: 桶迁移；1: 清单迁移 */
+  MigrationType: number;
+  /** 迁移模式，默认为0。0: 全量迁移 */
+  MigrationMode: number;
+  /** 数据源账号的SecretId */
+  SrcSecretId: string;
+  /** 数据源账号的SecretKey */
+  SrcSecretKey: string;
+  /** 文件系统实例Id */
+  FileSystemId: string;
+  /** 文件系统路径 */
+  FsPath: string;
+  /** 同名文件迁移时覆盖策略，默认为0。0: 最后修改时间优先；1: 全覆盖；2: 不覆盖 */
+  CoverType: number;
+  /** 数据源服务商。COS: 腾讯云COS，OSS: 阿里云OSS，OBS:华为云OBS */
+  SrcService: string;
+  /** 数据源桶名称，名称和地址至少有一个 */
+  BucketName?: string;
+  /** 数据源桶地域 */
+  BucketRegion?: string;
+  /** 数据源桶地址，名称和地址至少有一个 */
+  BucketAddress?: string;
+  /** 清单地址，迁移方式为清单迁移时必填 */
+  ListAddress?: string;
+  /** 目标文件系统名称 */
+  FsName?: string;
+  /** 源桶路径，默认为/ */
+  BucketPath?: string;
+}
+
+declare interface CreateMigrationTaskResponse {
+  /** 迁移任务Id */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAutoSnapshotPolicyRequest {
   /** 快照策略ID */
   AutoSnapshotPolicyId: string;
@@ -542,6 +644,16 @@ declare interface DeleteCfsSnapshotResponse {
   RequestId?: string;
 }
 
+declare interface DeleteMigrationTaskRequest {
+  /** 迁移任务ID */
+  TaskId: string;
+}
+
+declare interface DeleteMigrationTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteMountTargetRequest {
   /** 文件系统 ID */
   FileSystemId: string;
@@ -598,6 +710,24 @@ declare interface DescribeAvailableZoneInfoRequest {
 declare interface DescribeAvailableZoneInfoResponse {
   /** 各可用区的资源售卖情况以及支持的存储类型、存储协议等信息 */
   RegionZones: AvailableRegion[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBucketListRequest {
+  /** 数据源服务商。COS: 腾讯云COS，OSS: 阿里云OSS，OBS:华为云OBS */
+  SrcService: string;
+  /** 数据源账号的SecretId */
+  SrcSecretId: string;
+  /** 数据源账号的SecretKey */
+  SrcSecretKey: string;
+}
+
+declare interface DescribeBucketListResponse {
+  /** 桶的数量 */
+  TotalCount?: number;
+  /** 桶列表 */
+  BucketList?: BucketInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -702,6 +832,24 @@ declare interface DescribeCfsSnapshotsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMigrationTasksRequest {
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+  /** taskId按照【迁移任务id】进行过滤。类型：String必选：否 taskName按照【迁移任务名字】进行模糊搜索过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeMigrationTasksResponse {
+  /** 迁移任务的数量 */
+  TotalCount?: number;
+  /** 迁移任务详情 */
+  MigrationTasks?: MigrationTaskInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMountTargetsRequest {
   /** 文件系统 ID */
   FileSystemId: string;
@@ -778,6 +926,20 @@ declare interface SignUpCfsServiceRequest {
 declare interface SignUpCfsServiceResponse {
   /** 该用户当前 CFS 服务的状态，creating 是开通中，created 是已开通 */
   CfsServiceStatus: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopMigrationTaskRequest {
+  /** 迁移任务名称 */
+  TaskId: string;
+}
+
+declare interface StopMigrationTaskResponse {
+  /** 迁移任务Id */
+  TaskId?: string;
+  /** 迁移状态。0: 已完成；1: 进行中；2: 已终止 */
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -951,6 +1113,8 @@ declare interface Cfs {
   CreateCfsRule(data: CreateCfsRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCfsRuleResponse>;
   /** 创建文件系统快照 {@link CreateCfsSnapshotRequest} {@link CreateCfsSnapshotResponse} */
   CreateCfsSnapshot(data: CreateCfsSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCfsSnapshotResponse>;
+  /** 创建迁移任务 {@link CreateMigrationTaskRequest} {@link CreateMigrationTaskResponse} */
+  CreateMigrationTask(data: CreateMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMigrationTaskResponse>;
   /** 删除快照策略 {@link DeleteAutoSnapshotPolicyRequest} {@link DeleteAutoSnapshotPolicyResponse} */
   DeleteAutoSnapshotPolicy(data: DeleteAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoSnapshotPolicyResponse>;
   /** 删除文件系统 {@link DeleteCfsFileSystemRequest} {@link DeleteCfsFileSystemResponse} */
@@ -961,6 +1125,8 @@ declare interface Cfs {
   DeleteCfsRule(data: DeleteCfsRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCfsRuleResponse>;
   /** 删除文件系统快照 {@link DeleteCfsSnapshotRequest} {@link DeleteCfsSnapshotResponse} */
   DeleteCfsSnapshot(data?: DeleteCfsSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCfsSnapshotResponse>;
+  /** 删除迁移任务 {@link DeleteMigrationTaskRequest} {@link DeleteMigrationTaskResponse} */
+  DeleteMigrationTask(data: DeleteMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMigrationTaskResponse>;
   /** 删除挂载点 {@link DeleteMountTargetRequest} {@link DeleteMountTargetResponse} */
   DeleteMountTarget(data: DeleteMountTargetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMountTargetResponse>;
   /** 删除文件系统配额 {@link DeleteUserQuotaRequest} {@link DeleteUserQuotaResponse} */
@@ -969,6 +1135,8 @@ declare interface Cfs {
   DescribeAutoSnapshotPolicies(data?: DescribeAutoSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoSnapshotPoliciesResponse>;
   /** 查询区域可用情况 {@link DescribeAvailableZoneInfoRequest} {@link DescribeAvailableZoneInfoResponse} */
   DescribeAvailableZoneInfo(data?: DescribeAvailableZoneInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableZoneInfoResponse>;
+  /** 获取对象存储桶列表 {@link DescribeBucketListRequest} {@link DescribeBucketListResponse} */
+  DescribeBucketList(data: DescribeBucketListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBucketListResponse>;
   /** 查询文件系统客户端 {@link DescribeCfsFileSystemClientsRequest} {@link DescribeCfsFileSystemClientsResponse} */
   DescribeCfsFileSystemClients(data: DescribeCfsFileSystemClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsFileSystemClientsResponse>;
   /** 查询文件系统 {@link DescribeCfsFileSystemsRequest} {@link DescribeCfsFileSystemsResponse} */
@@ -983,6 +1151,8 @@ declare interface Cfs {
   DescribeCfsSnapshotOverview(data?: DescribeCfsSnapshotOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsSnapshotOverviewResponse>;
   /** 查询快照列表 {@link DescribeCfsSnapshotsRequest} {@link DescribeCfsSnapshotsResponse} */
   DescribeCfsSnapshots(data?: DescribeCfsSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsSnapshotsResponse>;
+  /** 获取迁移任务列表 {@link DescribeMigrationTasksRequest} {@link DescribeMigrationTasksResponse} */
+  DescribeMigrationTasks(data?: DescribeMigrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationTasksResponse>;
   /** 查询文件系统挂载点 {@link DescribeMountTargetsRequest} {@link DescribeMountTargetsResponse} */
   DescribeMountTargets(data: DescribeMountTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMountTargetsResponse>;
   /** 查询快照操作日志 {@link DescribeSnapshotOperationLogsRequest} {@link DescribeSnapshotOperationLogsResponse} */
@@ -993,6 +1163,8 @@ declare interface Cfs {
   SetUserQuota(data: SetUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<SetUserQuotaResponse>;
   /** 开通CFS服务 {@link SignUpCfsServiceRequest} {@link SignUpCfsServiceResponse} */
   SignUpCfsService(data?: SignUpCfsServiceRequest, config?: AxiosRequestConfig): AxiosPromise<SignUpCfsServiceResponse>;
+  /** 终止迁移任务 {@link StopMigrationTaskRequest} {@link StopMigrationTaskResponse} */
+  StopMigrationTask(data: StopMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopMigrationTaskResponse>;
   /** 解绑快照策略 {@link UnbindAutoSnapshotPolicyRequest} {@link UnbindAutoSnapshotPolicyResponse} */
   UnbindAutoSnapshotPolicy(data: UnbindAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindAutoSnapshotPolicyResponse>;
   /** 更新定期快照策略 {@link UpdateAutoSnapshotPolicyRequest} {@link UpdateAutoSnapshotPolicyResponse} */
